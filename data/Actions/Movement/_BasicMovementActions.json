@@ -1,0 +1,85 @@
+[
+	{
+		"ActionKey": "MoveForward",
+		"@@COMMENT@@": "Snippet and Description are loaded for Translator",
+		"DisplayName": "Move Forward",
+		"SnippetDesc": "Move Forward one spot",
+		"Description": "Move Forward one spot",
+		"SmallSprite": "MoveForward.png",
+		"LargeSprite": "MoveForward.png",
+		"Tags": ["Move"],
+		"PreviewMoveOffset": [0,-1,0,0],
+		"SubActions":{
+			"11": {
+				"SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_Move.gd",
+				"MovementType": "Walk",
+				"RelativeMovement": [0,-1,0,0]
+			}
+		}
+	},
+	{
+		"ActionKey": "MoveBack",
+		"@@COMMENT@@": "Snippet and Description are loaded for Translator",
+		"DisplayName": "Move Back",
+		"SnippetDesc": "Move Back one spot",
+		"Description": "Move Back one spot",
+		"SmallSprite": "MoveBack.png",
+		"LargeSprite": "MoveBack.png",
+		"Tags": ["Move"],
+		"PreviewMoveOffset": [0,1,0,0],
+		"SubActions":{
+			"11": {
+				"SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_Move.gd",
+				"MovementType": "Walk",
+				"RelativeMovement": [0,1,0,0]
+			}
+		}
+	},
+	{
+		"ActionKey": "TurnLeft",
+		"@@COMMENT@@": "Snippet and Description are loaded for Translator",
+		"DisplayName": "Turn Left",
+		"SnippetDesc": "Turn Left",
+		"Description": "Turn Left",
+		"SmallSprite": "TurnLeft.png",
+		"LargeSprite": "TurnLeft.png",
+		"Tags": ["Move"],
+		"PreviewMoveOffset": [0,0,0,-1],
+		"SubActions":{
+			"11": {
+				"SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_Move.gd",
+				"MovementType": "Walk",
+				"RelativeMovement": [0,0,0,-1]
+			}
+		}
+	},
+	{
+		"ActionKey": "TurnRight",
+		"@@COMMENT@@": "Snippet and Description are loaded for Translator",
+		"DisplayName": "Turn Right",
+		"SnippetDesc": "Turn Right",
+		"Description": "Turn Right",
+		"SmallSprite": "TurnRight.png",
+		"LargeSprite": "TurnRight.png",
+		"Tags": ["Move"],
+		"PreviewMoveOffset": [0,0,0,1],
+		"SubActions":{
+			"11": {
+				"SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_Move.gd",
+				"MovementType": "Walk",
+				"RelativeMovement": [0,0,0,1]
+			}
+		}
+	},
+	{
+		"ActionKey": "Wait",
+		"@@COMMENT@@": "Snippet and Description are loaded for Translator",
+		"DisplayName": "Wait",
+		"SnippetDesc": "Do nothing",
+		"Description": "Do nothing for a turn.",
+		"SmallSprite": "Wait.png",
+		"LargeSprite": "Wait.png",
+		"Tags": [],
+		"SubActions":{}
+	}
+]

@@ -1,0 +1,422 @@
+[gd_scene load_steps=16 format=3 uid="uid://dt4fmhgownxmm"]
+
+[ext_resource type="Script" path="res://assets/Scripts/Ui/DisplayNodes/character_sheet_control.gd" id="1_jd73v"]
+[ext_resource type="Texture2D" uid="uid://io35wpu802fp" path="res://assets/Sprites/UI/background_64x64_12.png" id="2_5rjht"]
+[ext_resource type="Texture2D" uid="uid://cdxe2v7hg5tuw" path="res://assets/Sprites/UI/CharacterEdit/HeadSlot.png" id="3_mk888"]
+[ext_resource type="Texture2D" uid="uid://bg625rwa6bewf" path="res://data/Actors/TestActorSprite.png" id="3_rsy60"]
+[ext_resource type="Texture2D" uid="uid://di2sns34ee4ju" path="res://assets/Sprites/UI/CharacterEdit/BodySlot.png" id="4_jhg4d"]
+[ext_resource type="Texture2D" uid="uid://djwy03i8oyrfm" path="res://assets/Sprites/UI/CharacterEdit/BootSlot.png" id="5_ah28x"]
+[ext_resource type="Texture2D" uid="uid://wu75tejgoo7m" path="res://assets/Sprites/UI/CharacterEdit/BookSlot.png" id="6_s5jc7"]
+[ext_resource type="Texture2D" uid="uid://co33b1qq2uef7" path="res://assets/Sprites/UI/CharacterEdit/BagSlot.png" id="7_esltj"]
+[ext_resource type="Texture2D" uid="uid://puhp53n8k1h8" path="res://assets/Sprites/UI/CharacterEdit/TrinketSlot.png" id="8_0ysgr"]
+[ext_resource type="Texture2D" uid="uid://jwg5aqbw71la" path="res://assets/Sprites/UI/CharacterEdit/MainHandSlot.png" id="9_0mhb2"]
+[ext_resource type="Texture2D" uid="uid://dwliocipx40sq" path="res://assets/Sprites/UI/CharacterEdit/OffHandSlot.png" id="10_ehfow"]
+[ext_resource type="Texture2D" uid="uid://5sc84oyivah" path="res://assets/Sprites/UI/backpatch.png" id="11_lja57"]
+[ext_resource type="Texture2D" uid="uid://doqrusihjt3h3" path="res://data/Actions/Movement/MoveForward.png" id="12_fos5n"]
+[ext_resource type="Script" path="res://assets/Scripts/Ui/DisplayNodes/CharacterSheet/page_desc_control.gd" id="14_xddya"]
+[ext_resource type="Texture2D" uid="uid://2588dhoroy1b" path="res://assets/Sprites/UI/small_bordered_patch.png" id="15_sumfc"]
+
+[node name="CharacterEditControler" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_jd73v")
+
+[node name="Background" type="NinePatchRect" parent="."]
+layout_mode = 0
+offset_left = 320.0
+offset_top = 64.0
+offset_right = 832.0
+offset_bottom = 576.0
+texture = ExtResource("2_5rjht")
+region_rect = Rect2(0, 0, 64, 64)
+patch_margin_left = 12
+patch_margin_top = 12
+patch_margin_right = 12
+patch_margin_bottom = 12
+
+[node name="CharacterPortraitRect" type="NinePatchRect" parent="Background"]
+layout_mode = 0
+offset_left = 88.0
+offset_top = 16.0
+offset_right = 216.0
+offset_bottom = 208.0
+texture = ExtResource("2_5rjht")
+region_rect = Rect2(0, 0, 64, 64)
+patch_margin_left = 12
+patch_margin_top = 12
+patch_margin_right = 12
+patch_margin_bottom = 12
+
+[node name="TextureRect" type="TextureRect" parent="Background/CharacterPortraitRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -43.0
+offset_bottom = -64.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("3_rsy60")
+stretch_mode = 3
+
+[node name="EquipmentSlots" type="Control" parent="Background"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="EquiptmenSlot1" type="NinePatchRect" parent="Background/EquipmentSlots"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 80.0
+offset_bottom = 80.0
+texture = ExtResource("2_5rjht")
+region_rect = Rect2(0, 0, 64, 64)
+patch_margin_left = 12
+patch_margin_top = 12
+patch_margin_right = 12
+patch_margin_bottom = 12
+
+[node name="TextureRect" type="TextureRect" parent="Background/EquipmentSlots/EquiptmenSlot1"]
+layout_mode = 0
+offset_right = 64.0
+offset_bottom = 64.0
+texture = ExtResource("3_mk888")
+
+[node name="EquiptmenSlot2" type="NinePatchRect" parent="Background/EquipmentSlots"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 80.0
+offset_right = 80.0
+offset_bottom = 144.0
+texture = ExtResource("2_5rjht")
+region_rect = Rect2(0, 0, 64, 64)
+patch_margin_left = 12
+patch_margin_top = 12
+patch_margin_right = 12
+patch_margin_bottom = 12
+
+[node name="TextureRect" type="TextureRect" parent="Background/EquipmentSlots/EquiptmenSlot2"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("4_jhg4d")
+
+[node name="EquiptmenSlot3" type="NinePatchRect" parent="Background/EquipmentSlots"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 144.0
+offset_right = 80.0
+offset_bottom = 208.0
+texture = ExtResource("2_5rjht")
+region_rect = Rect2(0, 0, 64, 64)
+patch_margin_left = 12
+patch_margin_top = 12
+patch_margin_right = 12
+patch_margin_bottom = 12
+
+[node name="TextureRect" type="TextureRect" parent="Background/EquipmentSlots/EquiptmenSlot3"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("5_ah28x")
+
+[node name="EquiptmenSlot4" type="NinePatchRect" parent="Background/EquipmentSlots"]
+layout_mode = 0
+offset_left = 224.0
+offset_top = 16.0
+offset_right = 288.0
+offset_bottom = 80.0
+texture = ExtResource("2_5rjht")
+region_rect = Rect2(0, 0, 64, 64)
+patch_margin_left = 12
+patch_margin_top = 12
+patch_margin_right = 12
+patch_margin_bottom = 12
+
+[node name="TextureRect" type="TextureRect" parent="Background/EquipmentSlots/EquiptmenSlot4"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("6_s5jc7")
+
+[node name="EquiptmenSlot5" type="NinePatchRect" parent="Background/EquipmentSlots"]
+layout_mode = 0
+offset_left = 224.0
+offset_top = 80.0
+offset_right = 288.0
+offset_bottom = 144.0
+texture = ExtResource("2_5rjht")
+region_rect = Rect2(0, 0, 64, 64)
+patch_margin_left = 12
+patch_margin_top = 12
+patch_margin_right = 12
+patch_margin_bottom = 12
+
+[node name="TextureRect" type="TextureRect" parent="Background/EquipmentSlots/EquiptmenSlot5"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("7_esltj")
+
+[node name="EquiptmenSlot6" type="NinePatchRect" parent="Background/EquipmentSlots"]
+layout_mode = 0
+offset_left = 224.0
+offset_top = 144.0
+offset_right = 288.0
+offset_bottom = 208.0
+texture = ExtResource("2_5rjht")
+region_rect = Rect2(0, 0, 64, 64)
+patch_margin_left = 12
+patch_margin_top = 12
+patch_margin_right = 12
+patch_margin_bottom = 12
+
+[node name="TextureRect" type="TextureRect" parent="Background/EquipmentSlots/EquiptmenSlot6"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("8_0ysgr")
+
+[node name="EquiptmenSlot7" type="NinePatchRect" parent="Background/EquipmentSlots"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 208.0
+offset_right = 80.0
+offset_bottom = 272.0
+texture = ExtResource("2_5rjht")
+region_rect = Rect2(0, 0, 64, 64)
+patch_margin_left = 12
+patch_margin_top = 12
+patch_margin_right = 12
+patch_margin_bottom = 12
+
+[node name="TextureRect" type="TextureRect" parent="Background/EquipmentSlots/EquiptmenSlot7"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("9_0mhb2")
+
+[node name="EquiptmenSlot8" type="NinePatchRect" parent="Background/EquipmentSlots"]
+layout_mode = 0
+offset_left = 224.0
+offset_top = 208.0
+offset_right = 288.0
+offset_bottom = 272.0
+texture = ExtResource("2_5rjht")
+region_rect = Rect2(0, 0, 64, 64)
+patch_margin_left = 12
+patch_margin_top = 12
+patch_margin_right = 12
+patch_margin_bottom = 12
+
+[node name="TextureRect" type="TextureRect" parent="Background/EquipmentSlots/EquiptmenSlot8"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("10_ehfow")
+
+[node name="NameLabelBox" type="NinePatchRect" parent="Background"]
+layout_mode = 0
+offset_left = 296.0
+offset_top = 16.0
+offset_right = 496.0
+offset_bottom = 56.0
+texture = ExtResource("2_5rjht")
+region_rect = Rect2(0, 0, 64, 64)
+patch_margin_left = 12
+patch_margin_top = 12
+patch_margin_right = 12
+patch_margin_bottom = 12
+
+[node name="NameLabel" type="Label" parent="Background/NameLabelBox"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 144.0
+offset_bottom = 31.0
+text = "Character Name"
+
+[node name="LevelLabel" type="Label" parent="Background/NameLabelBox"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -56.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = 32.0
+grow_horizontal = 0
+text = "Lv 12"
+horizontal_alignment = 2
+
+[node name="StatBox" type="NinePatchRect" parent="Background"]
+layout_mode = 0
+offset_left = 296.0
+offset_top = 64.0
+offset_right = 496.0
+offset_bottom = 272.0
+texture = ExtResource("2_5rjht")
+region_rect = Rect2(0, 0, 64, 64)
+patch_margin_left = 12
+patch_margin_top = 12
+patch_margin_right = 12
+patch_margin_bottom = 12
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Background/StatBox"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 192.0
+offset_bottom = 200.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Background/StatBox/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="StatDescrBox" type="HBoxContainer" parent="Background/StatBox/ScrollContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+
+[node name="NameLabel" type="Label" parent="Background/StatBox/ScrollContainer/VBoxContainer/StatDescrBox"]
+layout_mode = 2
+text = "Max HP"
+
+[node name="Seperator" type="Label" parent="Background/StatBox/ScrollContainer/VBoxContainer/StatDescrBox"]
+layout_mode = 2
+text = ":"
+
+[node name="ValueLabel" type="Label" parent="Background/StatBox/ScrollContainer/VBoxContainer/StatDescrBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "100"
+horizontal_alignment = 2
+
+[node name="HSeparator" type="HSeparator" parent="Background/StatBox/ScrollContainer/VBoxContainer"]
+visible = false
+modulate = Color(0.712129, 0.712129, 0.712129, 1)
+layout_mode = 2
+
+[node name="PagesBox" type="NinePatchRect" parent="Background"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 280.0
+offset_right = 496.0
+offset_bottom = 328.0
+texture = ExtResource("2_5rjht")
+region_rect = Rect2(0, 0, 64, 64)
+patch_margin_left = 12
+patch_margin_top = 12
+patch_margin_right = 12
+patch_margin_bottom = 12
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Background/PagesBox"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="PageSlot" type="TextureButton" parent="Background/PagesBox/HBoxContainer"]
+self_modulate = Color(0.521141, 0.521141, 0.521141, 1)
+layout_mode = 2
+texture_normal = ExtResource("15_sumfc")
+stretch_mode = 3
+
+[node name="TextureRect" type="TextureRect" parent="Background/PagesBox/HBoxContainer/PageSlot"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 16.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("12_fos5n")
+
+[node name="PageDescBox" type="NinePatchRect" parent="Background"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 336.0
+offset_right = 496.0
+offset_bottom = 496.0
+texture = ExtResource("2_5rjht")
+region_rect = Rect2(0, 0, 64, 64)
+patch_margin_left = 12
+patch_margin_top = 12
+patch_margin_right = 12
+patch_margin_bottom = 12
+script = ExtResource("14_xddya")
+
+[node name="PageImageBack" type="NinePatchRect" parent="Background/PageDescBox"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 40.0
+offset_bottom = 40.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("11_lja57")
+region_rect = Rect2(0, 0, 64, 64)
+patch_margin_left = 12
+patch_margin_top = 12
+patch_margin_right = 12
+patch_margin_bottom = 12
+
+[node name="TextureRect" type="TextureRect" parent="Background/PageDescBox/PageImageBack"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("12_fos5n")
+
+[node name="NameLabel" type="Label" parent="Background/PageDescBox"]
+layout_mode = 0
+offset_left = 80.0
+offset_top = 8.0
+offset_right = 120.0
+offset_bottom = 31.0
+theme_override_font_sizes/font_size = 24
+text = "Page Name"
+
+[node name="TagsLabel" type="Label" parent="Background/PageDescBox"]
+layout_mode = 0
+offset_left = 80.0
+offset_top = 48.0
+offset_right = 332.0
+offset_bottom = 71.0
+text = "Tags: Movement, Attack, Healing"
+
+[node name="CharacterPortraitRect2" type="NinePatchRect" parent="Background/PageDescBox"]
+self_modulate = Color(0.509286, 0.509286, 0.509286, 1)
+layout_mode = 0
+offset_left = 8.0
+offset_top = 80.0
+offset_right = 472.0
+offset_bottom = 152.0
+texture = ExtResource("15_sumfc")
+region_rect = Rect2(0, 0, 32, 32)
+patch_margin_left = 12
+patch_margin_top = 12
+patch_margin_right = 12
+patch_margin_bottom = 12
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Background/PageDescBox/CharacterPortraitRect2"]
+layout_mode = 0
+offset_left = 8.0
+offset_right = 456.0
+offset_bottom = 72.0
+text = "Some example text... what's that latin stuff everyone always uses?"

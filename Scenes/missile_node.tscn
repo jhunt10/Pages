@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://dvjfvxtimn18q"]
+
+[ext_resource type="Script" path="res://assets/Scripts/Missiles/missile_node.gd" id="1_xf7o2"]
+[ext_resource type="Texture2D" uid="uid://dipdyu02t6y7x" path="res://data/Actions/Attack/ProjectileTest.png" id="2_k0h50"]
+
+[node name="MissileNode" type="Node2D"]
+script = ExtResource("1_xf7o2")
+
+[node name="MissileSprie" type="Sprite2D" parent="."]
+texture = ExtResource("2_k0h50")

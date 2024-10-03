@@ -1,0 +1,52 @@
+[gd_scene load_steps=6 format=3 uid="uid://uo60871y6t54"]
+
+[ext_resource type="Script" path="res://assets/Scripts/Actors/actor_node.gd" id="1_wfbib"]
+[ext_resource type="Texture2D" uid="uid://w7l55pq1yi4w" path="res://assets/Sprites/Actors/test_player.png" id="2_jipkl"]
+
+[sub_resource type="Animation" id="Animation_cuq8k"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_2ouwt"]
+resource_name = "shake_effect"
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3, 0.5, 0.65, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(3, 0), Vector2(-3, 0), Vector2(1.5, 0), Vector2(-1.5, 0), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qlihv"]
+_data = {
+"RESET": SubResource("Animation_cuq8k"),
+"shake_effect": SubResource("Animation_2ouwt")
+}
+
+[node name="ActorNode" type="Node2D"]
+script = ExtResource("1_wfbib")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_jipkl")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_qlihv")
+}

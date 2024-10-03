@@ -1,0 +1,19 @@
+{
+	"ActorKey": "ExampleActor",
+	"@@COMMENT@@": "Snippet and Description are loaded for Translator",
+	"DisplayName": "Example Actor",
+	"SnippetDesc": "An actor made for example.",
+	"Description": "Move forward one space, fire a missile at target in range, then heal an adjacent ally.",
+	"Tags": ["Test"],
+	"Stats":{
+		"MaxHealth":100,
+		"Mass":100,
+		"Speed":100,
+		"@@COMMENT@@": "All base stats are kept as ints, so floats need to be multiplyed by 100",
+		"FireRes": 150
+	},
+	"QueData":{
+		"MaxSize": 5,
+		"ActionList": ["MoveForward","TurnLeft","TurnRight","TestDamage"]
+	}
+}

@@ -1,0 +1,66 @@
+[
+	{
+		"ActorKey": "TestActor",
+		"DisplayName": "Test Actor",
+		"SnippetDesc": "An actor made for testing.",
+		"Description": "Description.",
+		"Tags": ["Test"],
+		"Sprite": "TestActorSprite.png",
+		"MaxItemSlots": 5,
+		"Items": ["TestHealingPotion","TestHealingPotion","TestHealingPotion"],
+		"Stats":{
+			"MaxHealth":100,
+			"Mass":15,
+			"Speed":10,
+			"Level":69,
+			"Stregth": 200,
+			"Armor": 80
+		},
+		"QueData":{
+			"MaxSize": 12,
+			"ActionList": ["MoveForward","TurnLeft","TurnRight","MoveBack","Wait","TestSlash","TestItem","TestMissile","TestZone"]
+		}
+	},
+	
+	
+	{
+		"ActorKey": "TestTarget",
+		"DisplayName": "Test Target",
+		"SnippetDesc": "An actor made for testing targeting.",
+		"Description": "Description.",
+		"Tags": ["Test"],
+		"Sprite": "TestTargetSprite.png",
+		"CorpseSprite": "TargetCorpse.png",
+		"Stats":{
+			"MaxHealth":100,
+			"Mass":100,
+			"Speed":0,
+			"Stregth": 50,
+			"Armor": 0
+		},
+		"QueData":{
+			"MaxSize": 0,
+			"ActionList": []
+		}
+	},
+	{
+		"ActorKey": "TestOtherTarget",
+		"DisplayName": "Test Target",
+		"SnippetDesc": "An actor made for testing targeting.",
+		"Description": "Description.",
+		"Tags": ["Test"],
+		"Sprite": "TargetCorpse.png",
+		"CorpseSprite": "TargetCorpse.png",
+		"Stats":{
+			"MaxHealth":100,
+			"Mass":100,
+			"Speed":0,
+			"Stregth": 50,
+			"Armor": 10
+		},
+		"QueData":{
+			"MaxSize": 0,
+			"ActionList": []
+		}
+	}
+]

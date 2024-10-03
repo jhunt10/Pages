@@ -1,0 +1,57 @@
+[gd_scene load_steps=6 format=3 uid="uid://bar7wpmpbim2q"]
+
+[ext_resource type="Script" path="res://assets/Scripts/Ui/Effects/damage_effect_node.gd" id="2_a63xo"]
+[ext_resource type="Texture2D" uid="uid://d21s0she4imo3" path="res://assets/Sprites/VEffects/SlamEffect.png" id="2_rra7j"]
+
+[sub_resource type="Animation" id="Animation_5gixu"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_7vqgf"]
+resource_name = "slash_effect"
+length = 0.4
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bcbtv"]
+_data = {
+"RESET": SubResource("Animation_5gixu"),
+"slash_effect": SubResource("Animation_7vqgf")
+}
+
+[node name="DamageEffectNode" type="Node2D"]
+script = ExtResource("2_a63xo")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0.960784, 1)
+texture = ExtResource("2_rra7j")
+hframes = 2
+vframes = 3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite"]
+libraries = {
+"": SubResource("AnimationLibrary_bcbtv")
+}
+autoplay = "slash_effect"

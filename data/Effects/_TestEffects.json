@@ -1,0 +1,52 @@
+[
+	{
+		"EffectKey": "TestPoison",
+		"EffectScript": "res://assets/Scripts/Effects/Effect_DanageOn.gd",
+		"DisplayName": "Test Target",
+		"SnippetDesc": "Test Targeting",
+		"Description": "Test Target Test Target Test Target Test Target",
+		"IconSprite": "TestPoison.png",
+		"Tags": ["Attack"],
+		"Triggers": ["OnTurnEnd"],
+		"TurnDuration": 3,
+		"AttackPower": 25,
+		"DamageType": "Test"
+	},
+	{
+		"EffectKey": "TestPoisonOnMove",
+		"EffectScript": "res://assets/Scripts/Effects/Effect_DanageOn.gd",
+		"DisplayName": "Test Target",
+		"SnippetDesc": "Test Targeting",
+		"Description": "Test Target Test Target Test Target Test Target",
+		"IconSprite": "TestPoisonOnMove.png",
+		"Tags": ["Attack"],
+		"Triggers": ["OnMove"],
+		"TurnDuration": 5,
+		"AttackPower": 25,
+		"DamageType": "Test"
+	},
+	{
+		"EffectKey": "TestZonePoison",
+		"EffectScript": "res://assets/Scripts/Effects/Effect_DanageOn.gd",
+		"DisplayName": "Test Target",
+		"SnippetDesc": "Test Targeting",
+		"Description": "Test Target Test Target Test Target Test Target",
+		"IconSprite": "TestPoison.png",
+		"Tags": ["Attack"],
+		"Triggers": ["OnTurnEnd"],
+		"AttackPower": 25,
+		"DamageType": "Test"
+	},
+	{
+		"EffectKey": "TestHealPotion",
+		"EffectScript": "res://assets/Scripts/Effects/Effect_DanageOn.gd",
+		"DisplayName": "Test Heal Potion",
+		"SnippetDesc": "Test Heal Potion",
+		"Description": "Test Heal Potion",
+		"IconSprite": "TestPoison.png",
+		"Tags": ["Healing"],
+		"Triggers": "Instant",
+		"AttackPower": -25,
+		"DamageType": "HEal"
+	}
+]

@@ -1,0 +1,87 @@
+[gd_scene load_steps=4 format=3 uid="uid://c31cwcs4hgmpa"]
+
+[ext_resource type="Texture2D" uid="uid://ccv4ridl8evo8" path="res://assets/Sprites/UI/MenuButtonBackground.png" id="1_gojdr"]
+[ext_resource type="Script" path="res://assets/Scripts/Scenes/main_menu_scene.gd" id="1_ytar2"]
+[ext_resource type="Texture2D" uid="uid://brpsb4iq3cd3k" path="res://assets/Sprites/UI/MenuButtonBackground_Pressed.png" id="3_78x4c"]
+
+[node name="MainMenuRootControl" type="VBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+script = ExtResource("1_ytar2")
+
+[node name="StartContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+alignment = 1
+
+[node name="StartButton" type="TextureButton" parent="StartContainer"]
+layout_mode = 2
+texture_normal = ExtResource("1_gojdr")
+texture_pressed = ExtResource("3_78x4c")
+texture_disabled = ExtResource("3_78x4c")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="StartContainer/StartButton"]
+modulate = Color(0.462291, 0.462291, 0.462291, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 32
+text = "Start"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CharacterContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+alignment = 1
+
+[node name="CharacterButton" type="TextureButton" parent="CharacterContainer"]
+layout_mode = 2
+texture_normal = ExtResource("1_gojdr")
+texture_pressed = ExtResource("3_78x4c")
+texture_disabled = ExtResource("3_78x4c")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="CharacterContainer/CharacterButton"]
+modulate = Color(0.462291, 0.462291, 0.462291, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 32
+text = "Character"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PagesContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+alignment = 1
+
+[node name="PagesButton" type="TextureButton" parent="PagesContainer"]
+layout_mode = 2
+disabled = true
+texture_normal = ExtResource("1_gojdr")
+texture_pressed = ExtResource("3_78x4c")
+texture_disabled = ExtResource("3_78x4c")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="PagesContainer/PagesButton"]
+modulate = Color(0.462291, 0.462291, 0.462291, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 32
+text = "Pages"
+horizontal_alignment = 1
+vertical_alignment = 1
