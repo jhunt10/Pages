@@ -1,0 +1,65 @@
+[gd_scene load_steps=8 format=3 uid="uid://2ij8q0r7uy4y"]
+
+[ext_resource type="Script" path="res://assets/Scripts/Ui/DisplayNodes/que_display_control.gd" id="1_qogk3"]
+[ext_resource type="Texture2D" uid="uid://io35wpu802fp" path="res://assets/Sprites/UI/background_64x64_12.png" id="2_y0k3q"]
+[ext_resource type="Texture2D" uid="uid://cu00gc8hhk0h3" path="res://assets/Sprites/UI/QueInputDisplay/page_slot.png" id="3_g4vab"]
+[ext_resource type="Texture2D" uid="uid://bdn528i15d122" path="res://data/Actions/Attack/TestSword.png" id="4_hjtw8"]
+[ext_resource type="Script" path="res://assets/Scripts/Ui/DisplayNodes/que_display_control_slot.gd" id="4_m80jh"]
+[ext_resource type="Texture2D" uid="uid://dgfxtmtdjfgey" path="res://assets/Sprites/UI/QuePathArrow.png" id="5_1shq4"]
+[ext_resource type="Texture2D" uid="uid://by451vuljblvx" path="res://assets/Sprites/UI/QueInputDisplay/page_slot_highlight.png" id="5_awnhx"]
+
+[node name="QueDisplayControl" type="Control"]
+custom_minimum_size = Vector2(56, 56)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 56.0
+offset_bottom = 56.0
+script = ExtResource("1_qogk3")
+
+[node name="Background" type="NinePatchRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_y0k3q")
+patch_margin_left = 12
+patch_margin_top = 12
+patch_margin_right = 12
+patch_margin_bottom = 12
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 108.0
+offset_bottom = 40.0
+
+[node name="PageSlotButtonPrefab" type="TextureButton" parent="HBoxContainer"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture_normal = ExtResource("3_g4vab")
+stretch_mode = 3
+script = ExtResource("4_m80jh")
+
+[node name="Icon" type="TextureRect" parent="HBoxContainer/PageSlotButtonPrefab"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_hjtw8")
+stretch_mode = 3
+
+[node name="SlotHighlight" type="TextureRect" parent="HBoxContainer/PageSlotButtonPrefab"]
+visible = false
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("5_awnhx")
+
+[node name="QuePathArrow" type="Sprite2D" parent="."]
+texture = ExtResource("5_1shq4")

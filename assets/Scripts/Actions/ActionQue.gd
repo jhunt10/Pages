@@ -19,6 +19,9 @@ func _init(act) -> void:
 	que_size = que_data['MaxSize']
 	actor = act
 	QueExecData = QueExecutionData.new(self)
+	
+func list_qued_actions():
+	return real_que
 
 func get_action_for_turn(turn_index : int):
 	if turn_index < 0:
@@ -27,9 +30,11 @@ func get_action_for_turn(turn_index : int):
 		return null
 	return real_que[turn_index]
 	
-func que_action(action, data:Dictionary={}):
+func que_action(action:BaseAction, data:Dictionary={}):
 	if real_que.size() < que_size:
 		real_que.append(action)
+		if action.CostData.size() > 0:
+			data["CostData"] = action.CostData
 		QueExecData.que_data(data)
 		action_que_changed.emit()
 		

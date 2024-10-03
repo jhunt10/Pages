@@ -4,8 +4,8 @@ extends Control
 @onready var QueController:QueControllerNode = $QueController
 @onready var MapController:MapControllerNode = $MapControlerNode
 
-@onready var ActionInput = $ActionInputNode
-@onready var QueDisplay = $QueDisplayNode
+@onready var QueInput = $CombatUiControl/QueInputControl
+@onready var QueDisplay = $CombatUiControl/QueDisplayControl
 @onready var GridCursor:GridCursorNode = $MapControlerNode/GridCursor
 @onready var  StatDisplay:StatPanelControl = $CombatUiControl/StatPanelControl
 
@@ -30,8 +30,8 @@ func _ready() -> void:
 		if actor_key == player_actor_key:
 			StatDisplay.set_actor(new_actor)
 			QueController.add_action_que(new_actor.Que)
-			ActionInput.set_actor(new_actor)
-			QueDisplay.set_action_que(new_actor.Que)
+			QueInput.set_actor(new_actor)
+			QueDisplay.set_actor(new_actor)
 	actor_creation_que.clear()
 	
 	ui_controller.set_ui_state(UiStateController.UiStates.ActionInput)

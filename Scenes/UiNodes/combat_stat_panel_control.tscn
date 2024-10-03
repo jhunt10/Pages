@@ -1,0 +1,169 @@
+[gd_scene load_steps=10 format=3 uid="uid://cyakkk5i1nreg"]
+
+[ext_resource type="Script" path="res://assets/Scripts/Ui/DisplayNodes/stat_panel_control.gd" id="1_mnhn6"]
+[ext_resource type="Texture2D" uid="uid://5sc84oyivah" path="res://assets/Sprites/UI/backpatch.png" id="2_4hrfb"]
+[ext_resource type="Texture2D" uid="uid://bg625rwa6bewf" path="res://data/Actors/TestActorSprite.png" id="3_f6mh4"]
+[ext_resource type="Script" path="res://assets/Scripts/Ui/DisplayNodes/stat_bar_control.gd" id="3_tsv3q"]
+[ext_resource type="Texture2D" uid="uid://ccygr5mnjfwq1" path="res://assets/Sprites/UI/StatPanel/full_bar_background.png" id="5_3nnr1"]
+[ext_resource type="Texture2D" uid="uid://bxdvfksha7bq5" path="res://assets/Sprites/UI/StatPanel/value_bar_texture.png" id="6_0uxhs"]
+
+[sub_resource type="Animation" id="Animation_ssb6h"]
+resource_name = "blink_preview"
+length = 1.5
+loop_mode = 1
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BarHolder/DisplayValueRect:modulate")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.75, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_i51fe"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BarHolder/DisplayValueRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_h2lfx"]
+_data = {
+"RESET": SubResource("Animation_i51fe"),
+"blink_preview": SubResource("Animation_ssb6h")
+}
+
+[node name="StatPanelControl" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 180.0
+offset_bottom = 59.0
+script = ExtResource("1_mnhn6")
+
+[node name="Background" type="NinePatchRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_4hrfb")
+region_rect = Rect2(0, 0, 64, 64)
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 172.0
+offset_bottom = 48.0
+theme_override_constants/separation = 8
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("3_f6mh4")
+stretch_mode = 2
+
+[node name="StatBarContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+
+[node name="HealthStatBar" type="Control" parent="VBoxContainer/HBoxContainer/StatBarContainer"]
+custom_minimum_size = Vector2(128, 16)
+layout_mode = 2
+script = ExtResource("3_tsv3q")
+
+[node name="FullBarRect" type="NinePatchRect" parent="VBoxContainer/HBoxContainer/StatBarContainer/HealthStatBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_3nnr1")
+region_rect = Rect2(0, 0, 32, 32)
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+
+[node name="BarHolder" type="Control" parent="VBoxContainer/HBoxContainer/StatBarContainer/HealthStatBar"]
+modulate = Color(1, 0, 0, 1)
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="RealValueRect" type="NinePatchRect" parent="VBoxContainer/HBoxContainer/StatBarContainer/HealthStatBar/BarHolder"]
+modulate = Color(0.310617, 0.310617, 0.310617, 1)
+layout_mode = 0
+offset_right = 90.0
+offset_bottom = 16.0
+texture = ExtResource("6_0uxhs")
+region_rect = Rect2(0, 0, 32, 32)
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+
+[node name="PreviewValueRect" type="NinePatchRect" parent="VBoxContainer/HBoxContainer/StatBarContainer/HealthStatBar/BarHolder"]
+layout_mode = 0
+offset_right = 42.0
+offset_bottom = 16.0
+texture = ExtResource("6_0uxhs")
+region_rect = Rect2(0, 0, 32, 32)
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+
+[node name="DisplayValueRect" type="NinePatchRect" parent="VBoxContainer/HBoxContainer/StatBarContainer/HealthStatBar/BarHolder"]
+layout_mode = 0
+offset_right = 73.0
+offset_bottom = 16.0
+texture = ExtResource("6_0uxhs")
+region_rect = Rect2(0, 0, 32, 32)
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/StatBarContainer/HealthStatBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -3.5
+offset_bottom = 3.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 14
+text = "CUR / MAX"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="VBoxContainer/HBoxContainer/StatBarContainer/HealthStatBar"]
+libraries = {
+"": SubResource("AnimationLibrary_h2lfx")
+}
+
+[node name="IconBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2

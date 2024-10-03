@@ -8,12 +8,12 @@ func _init(controler:UiStateController, args:Dictionary) -> void:
 
 func start_state():
 	print("Start UiState: Action Input")
-	CombatRootControl.Instance.ActionInput.disenable_buttons(true)
+	CombatRootControl.Instance.QueInput.allow_input(true)
 	pass
 
 func update(_delta:float):
 	pass
 
 func end_state():
-	CombatRootControl.Instance.ActionInput.disenable_buttons(false)
+	CombatRootControl.Instance.QueInput.allow_input(false)
 	pass

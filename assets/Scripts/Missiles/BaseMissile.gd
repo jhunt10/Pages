@@ -51,18 +51,9 @@ func on_reach_target():
 	var actor_on_spots = CombatRootControl.Instance.GameState.MapState.get_actors_at_pos(TargetSpot)
 	if actor_on_spots.size() == 0:
 		return
-		
-	var attack_power:int = _missle_data['AttackPower']
-	var damage_type:String = _missle_data['DamageType']
-	
 	#TODO: Multiple Actors
 	var actor_on_spot:BaseActor = actor_on_spots[0]
-	
-	var damage = SourceActor.stats.calculate_damage(attack_power, damage_type, actor_on_spot)
-	actor_on_spot.stats.apply_damage(damage, damage_type, SourceActor)
-	var damage_effect = _missle_data.get("DamageEffect", null)
-	if damage_effect:
-		CombatRootControl.Instance.create_damage_effect(actor_on_spot, damage_effect, damage)
+	DamageHelper.handle_damage(SourceActor, actor_on_spot, _missle_data['DamageData'])
 		
 		
 func get_position_for_frame(frame:int):

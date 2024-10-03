@@ -13,6 +13,10 @@ var Tags:Array = []
 var TargetParams:Dictionary = {}
 var SubActionData:Array = []
 var ActionData:Dictionary = {}
+var CostData:Dictionary:
+		get: return ActionData.get('CostData', {})
+var DamageDatas:Dictionary:
+		get: return ActionData.get('DamageDatas', {})
 
 var PreviewTargetKey:String
 var PreviewMoveOffset:MapPos
@@ -64,3 +68,5 @@ func  get_small_sprite()->Texture2D:
 func  get_large_sprite()->Texture2D:
 	return load(LoadPath + "/" +SmallSprite)
 	
+func get_damage_data(subaction_data:Dictionary):
+	return DamageDatas.get(subaction_data.get("DamageKey", ""), subaction_data.get("DamageData", null))

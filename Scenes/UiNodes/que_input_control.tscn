@@ -1,0 +1,72 @@
+[gd_scene load_steps=6 format=3 uid="uid://6dlh0wlnsedb"]
+
+[ext_resource type="Script" path="res://assets/Scripts/Ui/DisplayNodes/que_input_control.gd" id="1_bqb47"]
+[ext_resource type="Texture2D" uid="uid://io35wpu802fp" path="res://assets/Sprites/UI/background_64x64_12.png" id="2_p5j4l"]
+[ext_resource type="Texture2D" uid="uid://cwsvq3qu6228n" path="res://assets/Sprites/UI/QueInputDisplay/page_button.png" id="3_dtm50"]
+[ext_resource type="Texture2D" uid="uid://bdn528i15d122" path="res://data/Actions/Attack/TestSword.png" id="4_l8485"]
+[ext_resource type="Texture2D" uid="uid://01rf6dbmahgb" path="res://assets/Sprites/UI/QueInputDisplay/start_button.png" id="5_tlwb0"]
+
+[node name="QueInputControl" type="Control"]
+custom_minimum_size = Vector2(124, 56)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 124.0
+offset_bottom = 56.0
+script = ExtResource("1_bqb47")
+
+[node name="Background" type="NinePatchRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_p5j4l")
+patch_margin_left = 12
+patch_margin_top = 12
+patch_margin_right = 12
+patch_margin_bottom = 12
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 108.0
+offset_bottom = 40.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="PageButtonPrefab" type="TextureButton" parent="HBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture_normal = ExtResource("3_dtm50")
+stretch_mode = 3
+
+[node name="Icon" type="TextureRect" parent="HBoxContainer/HBoxContainer/PageButtonPrefab"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_l8485")
+stretch_mode = 3
+
+[node name="StartButton" type="TextureButton" parent="HBoxContainer"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+texture_normal = ExtResource("5_tlwb0")
+texture_pressed = ExtResource("5_tlwb0")
+stretch_mode = 3
+
+[node name="Label" type="Label" parent="HBoxContainer/StartButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Start"
+horizontal_alignment = 1
+vertical_alignment = 1

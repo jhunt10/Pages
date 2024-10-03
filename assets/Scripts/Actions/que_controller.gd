@@ -123,6 +123,7 @@ func _process(delta: float) -> void:
 			# Emit starting signals
 			if sub_action_index == 0:
 				start_of_turn.emit()
+				_pay_turn_costs()
 			start_of_frame.emit()
 			label.text = str(action_index) + ":" + str(sub_action_index)
 			
@@ -226,3 +227,13 @@ func _get_step_from_turn(que:ActionQue, turn_index:int)->int:
 	if mapping.has(turn_index):
 		return mapping[turn_index]
 	return -1
+
+func _pay_turn_costs():
+	for que:ActionQue in action_ques.values():
+		var actor = que.actor
+		var turn_data = que.QueExecData.get_current_turn_data()
+		for stat_name in turn_data.costs.keys():
+			if not actor.stats.reduce_bar_stat_value(stat_name, turn_data.costs[stat_name], false):
+				#TODO: Can't Pay
+				return
+				

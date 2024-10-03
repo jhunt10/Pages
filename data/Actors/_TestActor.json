@@ -9,7 +9,9 @@
 		"MaxItemSlots": 5,
 		"Items": ["TestHealingPotion","TestHealingPotion","TestHealingPotion"],
 		"Stats":{
-			"MaxHealth":100,
+			"Max:Health":100,
+			"Max:Stamina":100,
+			"Max:Mana":100,
 			"Mass":15,
 			"Speed":10,
 			"Level":69,
@@ -18,7 +20,7 @@
 		},
 		"QueData":{
 			"MaxSize": 12,
-			"ActionList": ["MoveForward","TurnLeft","TurnRight","MoveBack","Wait","TestSlash","TestItem","TestMissile","TestZone"]
+			"ActionList": ["MoveForward","TurnLeft","TurnRight","MoveBack","Wait","TestPoisonSelf", "TestBullets","TestSlash","TestItem","TestMissile","TestZone"]
 		}
 	},
 	
@@ -32,11 +34,11 @@
 		"Sprite": "TestTargetSprite.png",
 		"CorpseSprite": "TargetCorpse.png",
 		"Stats":{
-			"MaxHealth":100,
+			"Max:Health":100,
 			"Mass":100,
 			"Speed":0,
 			"Stregth": 50,
-			"Armor": 0
+			"Armor": 200
 		},
 		"QueData":{
 			"MaxSize": 0,
@@ -52,7 +54,7 @@
 		"Sprite": "TargetCorpse.png",
 		"CorpseSprite": "TargetCorpse.png",
 		"Stats":{
-			"MaxHealth":100,
+			"Max:Health":100,
 			"Mass":100,
 			"Speed":0,
 			"Stregth": 50,
