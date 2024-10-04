@@ -24,6 +24,9 @@ var system_triggers:Array = []
 var _actor:BaseActor
 var _icon_sprite:String
 
+var stat_mod_data:Dictionary:
+	get: return EffectData.get("StatMods", {})
+
 # Instant effects are triggered and dispoded of immediately
 var is_instant:bool = false
 var _turn_duration:int = -1
@@ -36,6 +39,7 @@ func _init(actor:BaseActor, args:Dictionary) -> void:
 	LoadPath = args['LoadPath']
 	EffectKey = args['EffectKey']
 	EffectData = args
+	print("Init Effect: %s | %s" % [EffectKey, args['Triggers']])
 	
 	#TODO: Translations
 	DisplayName = args['DisplayName']
@@ -98,6 +102,9 @@ func _on_round_end():
 	#pass
 
 func _on_move(_old_pos:MapPos, _new_pos:MapPos, _move_type:String, _moved_by:BaseActor):
+	pass
+
+func on_delete():
 	pass
 
 func get_sprite():

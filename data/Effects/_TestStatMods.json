@@ -1,0 +1,43 @@
+[
+	{
+		"EffectKey": "ManaRegenOnTurn",
+		"EffectScript": "res://assets/Scripts/Effects/Effect_RegenStat.gd",
+		"DisplayName": "Test Heal Potion",
+		"SnippetDesc": "Test Heal Potion",
+		"Description": "Test Heal Potion",
+		"IconSprite": "ManaRegen.png",
+		"Tags": ["OnRoundEnd"],
+		"Triggers": ["OnRoundEnd"],
+		"StatName": "Mana",
+		"Amount": 100
+	},
+	{
+		"EffectKey": "StaminaRegenOnTurn",
+		"EffectScript": "res://assets/Scripts/Effects/Effect_RegenStat.gd",
+		"DisplayName": "Test Heal Potion",
+		"SnippetDesc": "Test Heal Potion",
+		"Description": "Test Heal Potion",
+		"IconSprite": "StaminaRegen.png",
+		"Tags": ["OnTurnEnd"],
+		"Triggers": ["OnTurnEnd"],
+		"StatName": "Stamina",
+		"Amount": 100
+	},
+	{
+		"EffectKey": "TestHealthBuff",
+		"EffectScript": "res://assets/Scripts/Effects/Effect_DanageOn.gd",
+		"DisplayName": "Test Health Buff",
+		"SnippetDesc": "Test Health Buff",
+		"Description": "Test Target Test Target Test Target Test Target",
+		"IconSprite": "TestHeart.png",
+		"Tags": ["Attack"],
+		"StatMods":{
+			"Stregth": {"ModType":"Fixed", "Value":500}
+		},
+		"Triggers": [],
+		"TurnDuration": 3,
+		"AttackPower": 0,
+		"DamageType": "Test"
+	},
+	
+]

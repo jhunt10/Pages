@@ -72,6 +72,33 @@
 		}
 	},
 	{
+		"ActionKey": "TestHealthBuff",
+		"@@COMMENT@@": "Snippet and Description are loaded for Translator",
+		"DisplayName": "Test Target",
+		"SnippetDesc": "Test Targeting",
+		"Description": "Test Target Test Target Test Target Test Target",
+		"SmallSprite": "TestHeart.png",
+		"LargeSprite": "TestHeart.png",
+		"Tags": ["Attack"],
+		"PreviewTargetKey":"Preview",
+		"TargetParams":[
+			{
+				"TargetKey":"Preview",
+				"##COMMENT##": "Self targeting doesn't need params, but this is for preview",
+				"TargetType":"Self",
+				"TargetArea": [[0,0]],
+				"LineOfSight": true
+			}
+		],
+		"SubActions":{
+			"11":{
+				"SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_ApplyEffect.gd",
+				"TargetKey": "Self",
+				"EffectKey": "TestHealthBuff"
+			}
+		}
+	},
+	{
 		"ActionKey": "TestPoisonSelf",
 		"@@COMMENT@@": "Snippet and Description are loaded for Translator",
 		"DisplayName": "Test Target",

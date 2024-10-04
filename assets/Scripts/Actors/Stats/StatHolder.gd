@@ -1,14 +1,14 @@
 class_name StatHolder
 
 const HealthKey:String = "Health"
+const LOGGING = true
 
 var _actor:BaseActor
 var _base_stats:Dictionary = {}
 var _cached_stats:Dictionary = {}
 # Stats which frequently change in battle (Health, Mana, ...)
 var _bar_stats:Dictionary = {}
-#var _active_mods:Dictionary = {}
-
+var _stats_dirty = true
 var current_health:int:
 	get: return _bar_stats.get(HealthKey,1)
 var max_health:int: 
@@ -19,7 +19,6 @@ var level:int:
 
 func _init(actor:BaseActor, data:Dictionary) -> void:
 	_actor = actor
-	
 	# Parse Stat Data
 	for key:String in data.keys():
 		if key.begins_with("Max:"):
@@ -32,9 +31,16 @@ func _init(actor:BaseActor, data:Dictionary) -> void:
 	_calc_cache_stats()
 	current_health = max_health
 
+func dirty_stats():
+	if LOGGING: print("Stats Dirty")
+	_stats_dirty = true
+	
+
 func get_stat(stat_name:String, default:int=0):
 	if _bar_stats.has(stat_name):
 		return _bar_stats[stat_name]
+	if _stats_dirty:
+		_calc_cache_stats()
 	return _cached_stats.get(stat_name, default)
 	
 func list_bar_stats():
@@ -58,12 +64,54 @@ func get_max_stat(stat_name):
 	return get_stat("Max:"+stat_name)
 
 func _calc_cache_stats():
-	# TODO: Stat calc
-	for key in _base_stats.keys():
-		_cached_stats[key] = _base_stats[key]
+	if !_actor.effects:
+		for stat_name in _base_stats.keys():
+			_cached_stats[stat_name] = _base_stats[stat_name]
+		return
+	if LOGGING: print("#Caching Stats for: %s" % _actor.ActorKey)
+	
+	# Aggregate all the mods together by stat_name, then type
+	var agg_mods = {}
+	for effect:BaseEffect in _actor.effects.list_effects():
+		if effect.stat_mod_data.size() != 0:
+			for mod:BaseStatMod in _build_mods_from_effect(effect):
+				if LOGGING: print("- Adding Mod from Effect '%s': Type:%s | Val:%s" % [effect.EffectKey, mod.mod_type, mod.value])
+				if not agg_mods.keys().has(mod.stat_name):
+					agg_mods[mod.stat_name] = {}
+				if not agg_mods[mod.stat_name].keys().has(mod.mod_type):
+					agg_mods[mod.stat_name][mod.mod_type] = []
+				agg_mods[mod.stat_name][mod.mod_type].append(mod.value)
+		elif LOGGING: print("- Effect: %s has no stat mods" % effect.EffectKey)
+		
+		
+	if LOGGING: print("- Found: %s modded stats" % agg_mods.size())
+	
+	
+	for stat_name in _base_stats.keys():
+		if not agg_mods.keys().has(stat_name):
+			_cached_stats[stat_name] = _base_stats[stat_name]
+			continue
+			
+		var agg_stat:Dictionary = agg_mods[stat_name]
+		var temp_val = float(_base_stats[stat_name])
+		if agg_stat.keys().has(BaseStatMod.ModTypes.Fixed):
+			for val in agg_stat[BaseStatMod.ModTypes.Fixed]:
+				temp_val += val
+		if agg_stat.keys().has(BaseStatMod.ModTypes.Scale):
+			for val in agg_stat[BaseStatMod.ModTypes.Scale]:
+				temp_val = temp_val * val
+		_cached_stats[stat_name] = temp_val
+	if LOGGING: print("--- Done Caching Stats")
+	_stats_dirty = false
+		
 	
 func apply_damage(value:int, _damage_type:String, _source):
 	_bar_stats[HealthKey] = _bar_stats[HealthKey] - value
 	if current_health <= 0:
 		CombatRootControl.Instance.kill_actor(_actor)
 	
+static func _build_mods_from_effect(effect:BaseEffect)->Array:
+	var outarr = []
+	for stat_name in effect.stat_mod_data.keys():
+		outarr.append(BaseStatMod.new(effect.Id, stat_name, effect.stat_mod_data[stat_name]))
+	return outarr

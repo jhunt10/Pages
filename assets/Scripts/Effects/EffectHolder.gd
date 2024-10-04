@@ -1,5 +1,8 @@
 class_name EffectHolder
 
+#signal lost_effect(effect_id:String)
+#signal gained_effect(effect:BaseEffect)
+
 var _actor:BaseActor
 var _effects:Dictionary = {}
 var _triggers_to_ids:Dictionary = {}
@@ -32,8 +35,14 @@ func add_effect(effect_key:String, effect_data:Dictionary)->BaseEffect:
 		_triggers_to_ids[trigger].append(effect.Id)
 	for trigger in effect.system_triggers:
 		_system_triggers_to_ids[trigger].append(effect.Id)
+	if effect.stat_mod_data.size() > 0:
+		_actor.stats.dirty_stats()
+	#gained_effect.emit(effect)
 	return effect
 		
+func list_effects()->Array:
+	return _effects.values()
+	
 func get_effect(effect_id:String)->BaseEffect:
 	if _effects.keys().has(effect_id):
 		return _effects[effect_id]
@@ -41,14 +50,19 @@ func get_effect(effect_id:String)->BaseEffect:
 		
 func remove_effect(effect:BaseEffect):
 	print("Remove Effect: " + effect.EffectKey + " from " + _actor.ActorKey)
-	if !_effects.has(effect.Id):
-		printerr("Unknown effect: " + effect.Id)
+	var effect_id = effect.Id
+	if !_effects.has(effect_id):
+		printerr("Unknown effect: " + effect_id)
 		return
-	_effects.erase(effect.Id)
+	_effects.erase(effect_id)
 	for trigger in effect.Triggers:
-		_triggers_to_ids[trigger].erase(effect.Id)
+		_triggers_to_ids[trigger].erase(effect_id)
 	for trigger in effect.system_triggers:
-		_system_triggers_to_ids[trigger].erase(effect.Id)
+		_system_triggers_to_ids[trigger].erase(effect_id)
+	if effect.stat_mod_data.size() > 0:
+		_actor.stats.dirty_stats()
+	#lost_effect.emit(effect_id)
+	effect.on_delete()
 
 func _on_turn_start():
 	for id in _system_triggers_to_ids[BaseEffect.EffectTriggers.OnTurnStart]:

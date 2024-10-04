@@ -35,9 +35,11 @@ func start_combat():
 	current_scene = combat_scene
 	self.add_child(current_scene)
 
-func open_character_sheet():
-	var actor_data = MainRootNode.actor_libary.get_actor_data("TestActor")
-	var actor = BaseActor.new(actor_data)
+func open_character_sheet(_actor:BaseActor=null):
+	var actor = _actor
+	if not actor:
+		var actor_data = MainRootNode.actor_libary.get_actor_data("TestActor")
+		actor = BaseActor.new(actor_data)
 	var charsheet = load("res://Scenes/character_edit_control.tscn").instantiate()
 	self.add_child(charsheet)
 	charsheet.set_actor(actor)

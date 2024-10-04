@@ -29,6 +29,10 @@ func _process(delta: float) -> void:
 	page_prefab.visible = false
 	pass
 
+func _input(event: InputEvent) -> void:
+	if event is InputEventKey and (event as InputEventKey).keycode == KEY_ESCAPE:
+		self.queue_free()
+
 func set_actor(actor:BaseActor):
 	character_portrait_rect.texture = actor.get_default_sprite()
 	character_name_label.text = actor.DisplayName
