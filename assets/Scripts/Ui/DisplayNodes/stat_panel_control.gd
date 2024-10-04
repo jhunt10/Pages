@@ -25,6 +25,8 @@ func set_actor(act:BaseActor):
 		return
 	actor = act
 	_stat_bars[StatHolder.HealthKey] = health_bar
+	health_bar.set_actor(actor, StatHolder.HealthKey)
+	actor.Que.action_que_changed.connect(sync)
 	CombatRootControl.Instance.QueController.start_of_round.connect(_on_start_round)
 	CombatRootControl.Instance.QueController.end_of_frame.connect(sync)
 	CombatRootControl.Instance.QueController.end_of_turn.connect(sync)
@@ -38,30 +40,34 @@ func _process(delta: float) -> void:
 							bars_container.size.y + (2*BoxPadding))
 		main_container.position = Vector2i(BoxPadding, BoxPadding)
 		_resize = false
-	sync()
+		sync(false)
 	
-func sync():
+func sync(_double_sync = true):
 	_sync_values()
 	_sync_icons()
-	_resize = true
+	_resize = _double_sync
 
 func _sync_values():
 	if !actor:
 		printerr("No actor found for stat bar")
 		return
-		
-	var predicted_costs:Dictionary = {}
-	if CombatRootControl.Instance.QueController.execution_state == QueControllerNode.ActionStates.Waiting:
-		for turn_data:TurnExecutionData in actor.Que.QueExecData.TurnDataList:
-			for stat_name in turn_data.costs.keys():
-				predicted_costs[stat_name] = predicted_costs.get(stat_name, 0) + turn_data.costs[stat_name]
-			
-	for stat_name in _stat_bars.keys():
-		var max_val = actor.stats.get_max_stat(stat_name)
-		var cur_val = actor.stats.get_stat(stat_name)
-		var predicted_value = max(0,cur_val - predicted_costs.get(stat_name, 0))
-		_stat_bars[stat_name].set_values(cur_val, max_val, predicted_value)
-		
+	var is_queing_state = CombatRootControl.Instance.QueController.execution_state == QueControllerNode.ActionStates.Waiting
+	for bar:StatBarControl in _stat_bars.values():
+		bar._preview_mode = is_queing_state
+		bar._sync()
+		#
+	#var predicted_costs:Dictionary = {}
+	#if CombatRootControl.Instance.QueController.execution_state == QueControllerNode.ActionStates.Waiting:
+		#for turn_data:TurnExecutionData in actor.Que.QueExecData.TurnDataList:
+			#for stat_name in turn_data.costs.keys():
+				#predicted_costs[stat_name] = predicted_costs.get(stat_name, 0) + turn_data.costs[stat_name]
+			#
+	#for stat_name in _stat_bars.keys():
+		#var max_val = actor.stats.get_max_stat(stat_name)
+		#var cur_val = actor.stats.get_stat(stat_name)
+		#var predicted_value = max(0,cur_val - predicted_costs.get(stat_name, 0))
+		#_stat_bars[stat_name].set_values(cur_val, max_val, predicted_value)
+		#
 	pass
 
 func _sync_icons():
@@ -96,26 +102,21 @@ func _create_stat_bar(stat_name):
 	if _stat_bars.has(stat_name):
 		return
 	var new_bar:StatBarControl = health_bar.duplicate()
+	new_bar.set_actor(actor, stat_name)
 	bars_container.add_child(new_bar)
-	var max_val = actor.stats.get_stat("Max:"+stat_name)
-	var cur_val = actor.stats.get_stat(stat_name)
-	new_bar.set_values(cur_val, max_val)
 	if StatBarColors.keys().has(stat_name):
 		new_bar.set_color(StatBarColors[stat_name])
 	_stat_bars[stat_name] = new_bar
 	
 func _on_start_round():
-	for stat_name in _stat_bars.keys():
-		var stat_val = actor.stats.get_stat(stat_name)
-		var max_val = actor.stats.get_max_stat(stat_name)
-		_stat_bars[stat_name].set_values(stat_val, max_val)
+	pass
 	
 
 func preview_stat_cost(cost_data:Dictionary):
 	for stat_name in cost_data.keys():
 		if _stat_bars.keys().has(stat_name):
-			var bar:StatBarControl = _stat_bars[stat_name]
-			bar.play_preview_animation(cost_data[stat_name])
+			_stat_bars[stat_name].play_preview_blink(cost_data[stat_name])
+		
 			
 func stop_preview_stat_cost():
 	for bar:StatBarControl in _stat_bars.values():

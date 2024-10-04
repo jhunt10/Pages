@@ -48,5 +48,29 @@
 		"Triggers": "Instant",
 		"AttackPower": -25,
 		"DamageType": "HEal"
+	},
+	{
+		"EffectKey": "ManaRegenOnTurn",
+		"EffectScript": "res://assets/Scripts/Effects/Effect_RegenStat.gd",
+		"DisplayName": "Test Heal Potion",
+		"SnippetDesc": "Test Heal Potion",
+		"Description": "Test Heal Potion",
+		"IconSprite": "ManaRegen.png",
+		"Tags": ["OnRoundEnd"],
+		"Triggers": ["OnRoundEnd"],
+		"StatName": "Mana",
+		"Amount": 10
+	},
+	{
+		"EffectKey": "StaminaRegenOnTurn",
+		"EffectScript": "res://assets/Scripts/Effects/Effect_RegenStat.gd",
+		"DisplayName": "Test Heal Potion",
+		"SnippetDesc": "Test Heal Potion",
+		"Description": "Test Heal Potion",
+		"IconSprite": "StaminaRegen.png",
+		"Tags": ["OnRoundEnd"],
+		"Triggers": ["OnRoundEnd"],
+		"StatName": "Stamina",
+		"Amount": 10
 	}
 ]

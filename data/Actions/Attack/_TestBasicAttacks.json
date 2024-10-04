@@ -1,0 +1,143 @@
+[
+	{
+		"ActionKey": "TestSlash",
+		"@@COMMENT@@": "Snippet and Description are loaded for Translator",
+		"DisplayName": "Test Slash",
+		"SnippetDesc": "Test Targeting",
+		"Description": "Test Target Test Target Test Target Test Target",
+		"SmallSprite": "TestSword.png",
+		"LargeSprite": "TestSword.png",
+		"Tags": ["Attack"],
+		"PreviewTargetKey":"Target1",
+		"CostData": {},
+		"TargetParams":[
+			{
+				"TargetKey":"Target1",
+				"TargetType":"Actor",
+				"TargetArea": [[-1,1],[0,1],[1,1],[-1,2],[0,2],[1,2],[-1,3],[0,3],[1,3],[0,4],
+				[-1,4],[1,4]],
+				"LineOfSight": true
+			}
+		],
+		"SubActions":{
+			"10": {
+				"SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_GetTarget.gd",
+				"TargetKey": "Target1"
+			},
+			"11":{
+				"SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_ApplyDamage.gd",
+				"TargetKey": "Target1",
+				"DamageData": {
+					"DamageEffect":"Slash",
+					"DamageType": "Test",
+					"BaseDamage": 25,
+					"AtkStat": "Stregth",
+					"DefStat": "Stregth"
+				}
+			}
+		}
+	},
+	{
+		"ActionKey": "TestSlam",
+		"@@COMMENT@@": "Snippet and Description are loaded for Translator",
+		"DisplayName": "Test Slam",
+		"SnippetDesc": "Test Targeting",
+		"Description": "Test Target Test Target Test Target Test Target",
+		"SmallSprite": "TestHammer.png",
+		"LargeSprite": "TestHammer.png",
+		"Tags": ["Attack"],
+		"PreviewTargetKey":"Target1",
+		"CostData": {
+			"Stamina": 30,
+			},
+		"TargetParams":[
+			{
+				"TargetKey":"Target1",
+				"TargetType":"Actor",
+				"TargetArea": [[-1,1],[0,1],[1,1],[-1,2],[0,2],[1,2],[-1,3],[0,3],[1,3],[0,4],
+				[-1,4],[1,4]],
+				"LineOfSight": true
+			}
+		],
+		"SubActions":{
+			"10": {
+				"SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_GetTarget.gd",
+				"TargetKey": "Target1"
+			},
+			"11":{
+				"SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_ApplyDamage.gd",
+				"TargetKey": "Target1",
+				"DamageData": {
+					"DamageEffect":"Slam",
+					"DamageType": "Test",
+					"BaseDamage": 50,
+					"AtkStat": "Stregth",
+					"DefStat": "Stregth"
+				}
+			}
+		}
+	},
+	{
+		"ActionKey": "TestBullets",
+		"@@COMMENT@@": "Snippet and Description are loaded for Translator",
+		"DisplayName": "Test Bullets",
+		"SnippetDesc": "Test Bullets",
+		"Description": "Test Target Test Target Test Target Test Target",
+		"SmallSprite": "TestBullets.png",
+		"LargeSprite": "TestBullets.png",
+		"Tags": ["Attack"],
+		"PreviewTargetKey":"Target1",
+		"CostData": {
+			"Mana": 20,
+			},
+		"DamageDatas": {
+			"Damage1":{
+				"DamageEffect":"Shot",
+				"DamageType": "Test",
+				"BaseDamage": 5,
+				"AtkStat": "Stregth",
+				"DefStat": "Stregth"
+			}
+		},
+		"TargetParams":[
+			{
+				"TargetKey":"Target1",
+				"TargetType":"Actor",
+				"TargetArea": [[-1,1],[0,1],[1,1],[-1,2],[0,2],[1,2],[-1,3],[0,3],[1,3],[0,4],
+				[-1,4],[1,4]],
+				"LineOfSight": true
+			}
+		],
+		"SubActions":{
+			"0": {
+				"SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_GetTarget.gd",
+				"TargetKey": "Target1"
+			},
+			"4":{
+				"SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_ApplyDamage.gd",
+				"TargetKey": "Target1",
+				"DamageKey": "Damage1"
+			},
+			"8":{
+				"SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_ApplyDamage.gd",
+				"TargetKey": "Target1",
+				"DamageKey": "Damage1"
+			},
+			"12":{
+				"SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_ApplyDamage.gd",
+				"TargetKey": "Target1",
+				"DamageKey": "Damage1"
+			},
+			"16":{
+				"SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_ApplyDamage.gd",
+				"TargetKey": "Target1",
+				"DamageKey": "Damage1"
+			},
+			"20":{
+				"SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_ApplyDamage.gd",
+				"TargetKey": "Target1",
+				"DamageKey": "Damage1"
+			},
+		}
+	},
+]

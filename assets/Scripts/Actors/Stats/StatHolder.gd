@@ -48,6 +48,11 @@ func reduce_bar_stat_value(stat_name:String, val:int, allow_partial:bool=true) -
 		_bar_stats[stat_name] = max(0, _bar_stats[stat_name]  - val)
 		return true
 	return false
+	
+func add_to_bar_stat(stat_name:String, val:int):
+	if _bar_stats.has(stat_name):
+		_bar_stats[stat_name] = min(_bar_stats[stat_name] + val, get_max_stat(stat_name))
+	
 
 func get_max_stat(stat_name):
 	return get_stat("Max:"+stat_name)

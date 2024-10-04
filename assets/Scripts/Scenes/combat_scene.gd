@@ -27,6 +27,8 @@ func _ready() -> void:
 	for actor_key in actor_creation_que.keys():
 		var actor_data = MainRootNode.actor_libary.get_actor_data(actor_key)
 		var new_actor = create_new_actor(actor_data, actor_creation_que[actor_key])
+		new_actor.effects.add_effect("ManaRegenOnTurn", {})
+		new_actor.effects.add_effect("StaminaRegenOnTurn", {})
 		if actor_key == player_actor_key:
 			StatDisplay.set_actor(new_actor)
 			QueController.add_action_que(new_actor.Que)

@@ -177,6 +177,9 @@ func _clear_ques():
 
 func _execute_turn_frames(game_state:GameStateData, que:ActionQue, turn_index:int, subaction_index:int):
 	if DEEP_LOGGING: print("\tChecking Que: " + que.Id)
+	var turn_data = que.QueExecData.TurnDataList[turn_index]
+	if turn_data.turn_failed:
+		return
 	# Get the action for this turn
 	var action:BaseAction = que.get_action_for_turn(turn_index)
 	# If no action, skip. Ussually caused by smaller ques.
@@ -234,6 +237,8 @@ func _pay_turn_costs():
 		var turn_data = que.QueExecData.get_current_turn_data()
 		for stat_name in turn_data.costs.keys():
 			if not actor.stats.reduce_bar_stat_value(stat_name, turn_data.costs[stat_name], false):
+				CombatRootControl.Instance.create_flash_text(actor, "-"+stat_name, Color.ORANGE)
+				turn_data.turn_failed = true
 				#TODO: Can't Pay
 				return
 				

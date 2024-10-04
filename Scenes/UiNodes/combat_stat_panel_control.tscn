@@ -7,43 +7,106 @@
 [ext_resource type="Texture2D" uid="uid://ccygr5mnjfwq1" path="res://assets/Sprites/UI/StatPanel/full_bar_background.png" id="5_3nnr1"]
 [ext_resource type="Texture2D" uid="uid://bxdvfksha7bq5" path="res://assets/Sprites/UI/StatPanel/value_bar_texture.png" id="6_0uxhs"]
 
-[sub_resource type="Animation" id="Animation_ssb6h"]
-resource_name = "blink_preview"
-length = 1.5
-loop_mode = 1
-step = 0.25
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("BarHolder/DisplayValueRect:modulate")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.75, 1.5),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_i51fe"]
+[sub_resource type="Animation" id="Animation_euxtp"]
 length = 0.001
-tracks/0/type = "value"
+tracks/0/type = "bezier"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("BarHolder/DisplayValueRect:modulate")
+tracks/0/path = NodePath("BlinkValueRect:modulate:r")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BlinkValueRect:modulate:g")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("BlinkValueRect:modulate:b")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("BlinkValueRect:modulate:a")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_h2lfx"]
+[sub_resource type="Animation" id="Animation_xgc6q"]
+resource_name = "blink_preview"
+loop_mode = 1
+step = 0.25
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BlinkValueRect:modulate:r")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.5, 1)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BlinkValueRect:modulate:g")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.5, 1)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("BlinkValueRect:modulate:b")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.5, 1)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("BlinkValueRect:modulate:a")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.5, 1)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_o32q1"]
 _data = {
-"RESET": SubResource("Animation_i51fe"),
-"blink_preview": SubResource("Animation_ssb6h")
+"RESET": SubResource("Animation_euxtp"),
+"blink_preview": SubResource("Animation_xgc6q")
 }
 
 [node name="StatPanelControl" type="Control"]
@@ -92,6 +155,12 @@ custom_minimum_size = Vector2(128, 16)
 layout_mode = 2
 script = ExtResource("3_tsv3q")
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="VBoxContainer/HBoxContainer/StatBarContainer/HealthStatBar"]
+root_node = NodePath("../BarHolder")
+libraries = {
+"": SubResource("AnimationLibrary_o32q1")
+}
+
 [node name="FullBarRect" type="NinePatchRect" parent="VBoxContainer/HBoxContainer/StatBarContainer/HealthStatBar"]
 layout_mode = 1
 anchors_preset = 15
@@ -112,7 +181,7 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="RealValueRect" type="NinePatchRect" parent="VBoxContainer/HBoxContainer/StatBarContainer/HealthStatBar/BarHolder"]
+[node name="BackValueRect" type="NinePatchRect" parent="VBoxContainer/HBoxContainer/StatBarContainer/HealthStatBar/BarHolder"]
 modulate = Color(0.310617, 0.310617, 0.310617, 1)
 layout_mode = 0
 offset_right = 90.0
@@ -124,7 +193,7 @@ patch_margin_top = 8
 patch_margin_right = 8
 patch_margin_bottom = 8
 
-[node name="PreviewValueRect" type="NinePatchRect" parent="VBoxContainer/HBoxContainer/StatBarContainer/HealthStatBar/BarHolder"]
+[node name="ColorValueRect" type="NinePatchRect" parent="VBoxContainer/HBoxContainer/StatBarContainer/HealthStatBar/BarHolder"]
 layout_mode = 0
 offset_right = 42.0
 offset_bottom = 16.0
@@ -135,7 +204,8 @@ patch_margin_top = 8
 patch_margin_right = 8
 patch_margin_bottom = 8
 
-[node name="DisplayValueRect" type="NinePatchRect" parent="VBoxContainer/HBoxContainer/StatBarContainer/HealthStatBar/BarHolder"]
+[node name="BlinkValueRect" type="NinePatchRect" parent="VBoxContainer/HBoxContainer/StatBarContainer/HealthStatBar/BarHolder"]
+modulate = Color(1, 1, 1, 0)
 layout_mode = 0
 offset_right = 73.0
 offset_bottom = 16.0
@@ -159,11 +229,6 @@ theme_override_font_sizes/font_size = 14
 text = "CUR / MAX"
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="VBoxContainer/HBoxContainer/StatBarContainer/HealthStatBar"]
-libraries = {
-"": SubResource("AnimationLibrary_h2lfx")
-}
 
 [node name="IconBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
