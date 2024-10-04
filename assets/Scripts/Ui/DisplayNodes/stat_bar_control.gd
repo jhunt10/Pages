@@ -1,7 +1,7 @@
 class_name StatBarControl
 extends Control
 
-const BAR_SPEED:float = 10.0
+const BAR_SPEED:float = 100
 
 @onready var full_bar:NinePatchRect = $FullBarRect
 @onready var bar_holder:Control = $BarHolder
@@ -42,57 +42,57 @@ var _cached_stat_value:int = 1
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	blink_value_bar.visible = false
+	_sync(true)
 	pass # Replace with function body.
 	
 func set_actor(actor:BaseActor, stat_name:String):
 	_actor = actor
 	_stat_name = stat_name
+	if full_bar:
+		_sync(true)
 	
 func _process(delta: float) -> void:
 	var target_display_width = maxi(min_bar_size, full_bar.size.x * _cached_stat_value / _max_value)
-	var current_size = floori(colored_value_bar.size.x)
-	if current_size != target_display_width:
-		colored_value_bar.visible = true
-		var change = target_display_width - current_size 
-		if abs(change) < BAR_SPEED:
-			colored_value_bar.size.x = target_display_width
-		else:
-			colored_value_bar.size.x += ceili(float(change) * delta * BAR_SPEED)
-	if current_size == target_display_width or (
-		target_display_width < min_bar_size and colored_value_bar.size.x == min_bar_size):
-		colored_value_bar.visible = _cached_stat_value > 0
-
-#func set_values(max_val:int, display_val:int, preview_value:int=-1, preview_cost:int=-1, animate_change:bool=false):
-	#print("Max: %s | Dis: %s | Pre: %s | Cost: %s" % [max_val, display_val, preview_value, preview_cost])
-	#_max_value = max_val
-	#_animate_change = animate_change
-	#if preview_value >= 0:
-		#_background_value = display_val
-		#if preview_cost > 0:
-			#_blink_value = preview_value
-			#_display_value = preview_value - preview_cost
-		#else:
-			#_display_value = preview_value
-	#else:
-		#print("---------No Prev")
-		#_display_value = display_val
-		#_background_value = display_val
-	#_sync()
+	var current_size = colored_value_bar.size.x
+	var diff = target_display_width - current_size
+	var speed = BAR_SPEED * delta
 	
-func _sync():
+	#if _stat_name == "Stamina":
+		#print("Targ: %s | Curt: %s | Sped: %s | Diff: %s" % [target_display_width, current_size, speed, diff])
+	
+	# Will reach target this frame
+	if abs(diff) < speed:
+		colored_value_bar.size.x = target_display_width
+		colored_value_bar.visible = _cached_stat_value > 0
+	else:
+		colored_value_bar.visible = true
+		if target_display_width < current_size:
+			colored_value_bar.size.x -= speed
+		else:
+			colored_value_bar.size.x += speed
+
+func set_previewing_mode(preview_mode:bool):
+	_preview_mode = preview_mode
+	_sync(true)
+
+func _sync(snap_sync:bool = false):
 	var max = _max_value
 	var stat_val = _stat_value
 	if _preview_mode:
 		var predicted_value = _get_predicted_value()
 		_set_bar_size(dark_value_bar, stat_val, max)
-		#_set_bar_size(colored_value_bar, predicted_value-_preview_cost, max)
-		_cached_stat_value = predicted_value-_preview_cost
+		if snap_sync:
+			_set_bar_size(colored_value_bar, predicted_value-_preview_cost, max)
+		else:
+			_cached_stat_value = predicted_value-_preview_cost
 		_set_bar_size(blink_value_bar, predicted_value, max)
 		label.text = str(predicted_value) + " / " + str(max)
 	else:
 		_set_bar_size(dark_value_bar, stat_val, max)
-		#_set_bar_size(colored_value_bar, stat_val, max)
-		_cached_stat_value = stat_val
+		if snap_sync:
+			_set_bar_size(colored_value_bar, stat_val, max)
+		else:
+			_cached_stat_value = stat_val
 		_set_bar_size(blink_value_bar, 0, max)
 		label.text = str(stat_val) + " / " + str(max)
 	# No preview

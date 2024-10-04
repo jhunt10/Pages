@@ -30,7 +30,7 @@ func set_actor(act:BaseActor):
 	CombatRootControl.Instance.QueController.start_of_round.connect(_on_start_round)
 	CombatRootControl.Instance.QueController.end_of_frame.connect(sync)
 	CombatRootControl.Instance.QueController.end_of_turn.connect(sync)
-	CombatRootControl.Instance.QueController.end_of_round.connect(sync)
+	CombatRootControl.Instance.QueController.end_of_round.connect(_on_end_round)
 	_build_stat_bars()
 	_sync_values()
 	
@@ -51,9 +51,7 @@ func _sync_values():
 	if !actor:
 		printerr("No actor found for stat bar")
 		return
-	var is_queing_state = CombatRootControl.Instance.QueController.execution_state == QueControllerNode.ActionStates.Waiting
 	for bar:StatBarControl in _stat_bars.values():
-		bar._preview_mode = is_queing_state
 		bar._sync()
 		#
 	#var predicted_costs:Dictionary = {}
@@ -109,8 +107,12 @@ func _create_stat_bar(stat_name):
 	_stat_bars[stat_name] = new_bar
 	
 func _on_start_round():
-	pass
+	for bar:StatBarControl in _stat_bars.values():
+		bar.set_previewing_mode(false)
 	
+func _on_end_round():
+	for bar:StatBarControl in _stat_bars.values():
+		bar.set_previewing_mode(true)
 
 func preview_stat_cost(cost_data:Dictionary):
 	for stat_name in cost_data.keys():

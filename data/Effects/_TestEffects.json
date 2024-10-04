@@ -59,7 +59,7 @@
 		"Tags": ["OnRoundEnd"],
 		"Triggers": ["OnRoundEnd"],
 		"StatName": "Mana",
-		"Amount": 10
+		"Amount": 100
 	},
 	{
 		"EffectKey": "StaminaRegenOnTurn",
@@ -68,9 +68,9 @@
 		"SnippetDesc": "Test Heal Potion",
 		"Description": "Test Heal Potion",
 		"IconSprite": "StaminaRegen.png",
-		"Tags": ["OnRoundEnd"],
-		"Triggers": ["OnRoundEnd"],
+		"Tags": ["OnTurnEnd"],
+		"Triggers": ["OnTurnEnd"],
 		"StatName": "Stamina",
-		"Amount": 10
+		"Amount": 100
 	}
 ]
