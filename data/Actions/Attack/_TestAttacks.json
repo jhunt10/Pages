@@ -12,9 +12,11 @@
 		"TargetParams":[
 			{
 				"TargetKey":"MissleTarget",
-				"TargetType":"Spot",
-				"TargetArea": [[-1,1],[0,1],[1,1],[-1,2],[0,2],[1,2],[-1,3],[0,3],[1,3],[0,4],
-				[-1,4],[1,4]],
+				"TargetType":"Actor",
+				"TargetArea": [[1,0],[1,-1],[0,-1],[-1,-1],[-1,0],[-1,1],[0,1],[1,1],[2,1],[2,0],
+				[2,-1],[2,-2],[1,-2],[0,-2],[-1,-2],[-2,-2],[-2,-1],[-2,0],[-2,1],[-2,2],[-1,2],
+				[0,2],[1,2],[2,2],[1,-3],[0,-3],[-1,-3],[-3,-1],[-3,0],[-3,1],[3,-1],[3,0],[3,1],
+				[-1,3],[0,2],[0,3],[1,3]],
 				"EffectArea": [[-1,0],[1,0],[0,0],[0,1],[0,-1]],
 				"LineOfSight": true
 			}
@@ -27,7 +29,7 @@
 			"11":{
 				"SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_SpawnMissile.gd",
 				"TargetKey": "MissleTarget",
-				"FramesPerTime": 3,
+				"FramesPerTile": 3,
 				"DamageData": {
 					"DamageEffect":"Shot",
 					"DamageType": "Test",

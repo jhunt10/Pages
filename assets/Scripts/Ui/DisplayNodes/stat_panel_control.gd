@@ -53,20 +53,6 @@ func _sync_values():
 		return
 	for bar:StatBarControl in _stat_bars.values():
 		bar._sync()
-		#
-	#var predicted_costs:Dictionary = {}
-	#if CombatRootControl.Instance.QueController.execution_state == QueControllerNode.ActionStates.Waiting:
-		#for turn_data:TurnExecutionData in actor.Que.QueExecData.TurnDataList:
-			#for stat_name in turn_data.costs.keys():
-				#predicted_costs[stat_name] = predicted_costs.get(stat_name, 0) + turn_data.costs[stat_name]
-			#
-	#for stat_name in _stat_bars.keys():
-		#var max_val = actor.stats.get_max_stat(stat_name)
-		#var cur_val = actor.stats.get_stat(stat_name)
-		#var predicted_value = max(0,cur_val - predicted_costs.get(stat_name, 0))
-		#_stat_bars[stat_name].set_values(cur_val, max_val, predicted_value)
-		#
-	pass
 
 func _sync_icons():
 	for id in actor.effects._effects.keys():

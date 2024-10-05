@@ -6,7 +6,7 @@ extends Node2D
 
 # End round early if no more actions are qued (for testing)
 const SHORTCUT_QUE = true
-const DEEP_LOGGING = false
+const DEEP_LOGGING = true
 const FRAMES_PER_ACTION = 24
 const SUB_ACTION_FRAME_TIME = 0.05
 
@@ -57,6 +57,12 @@ func _start_round():
 	sub_action_index = 0
 	que_index = 0
 	sub_action_timer = 0
+	
+	for actor:BaseActor in CombatRootControl.Instance.GameState.Actors.values():
+		if CombatRootControl.Instance.player_actor_key == actor.ActorKey:
+			continue
+		actor.auto_build_que()
+	
 	execution_state = ActionStates.Running
 	start_of_round.emit()
 	execution_active.emit()
@@ -91,8 +97,8 @@ func get_paused_on_que()->ActionQue:
 func get_current_turn_for_que(que_id:String)->int:
 	var current_turn = action_index
 	var que_order_index = que_order.find(que_id)
-	if que_order_index > que_index:
-		return current_turn -1
+	#if que_order_index > que_index:
+		#return current_turn -1
 	return current_turn
 
 # Add an action que to the controller
@@ -177,16 +183,17 @@ func _clear_ques():
 
 func _execute_turn_frames(game_state:GameStateData, que:ActionQue, turn_index:int, subaction_index:int):
 	if DEEP_LOGGING: print("\tChecking Que: " + que.Id)
-	var turn_data = que.QueExecData.TurnDataList[turn_index]
-	if turn_data.turn_failed:
-		return
+	
 	# Get the action for this turn
 	var action:BaseAction = que.get_action_for_turn(turn_index)
 	# If no action, skip. Ussually caused by smaller ques.
 	if !action:
 		if DEEP_LOGGING: print("\t\tNo action")
 		return
-		
+	
+	var turn_data = que.QueExecData.TurnDataList[turn_index]
+	if turn_data.turn_failed:
+		return
 	# Get subaction for this frame
 	var subaction_data = action.SubActionData[subaction_index]
 	if !subaction_data:
@@ -239,6 +246,5 @@ func _pay_turn_costs():
 			if not actor.stats.reduce_bar_stat_value(stat_name, turn_data.costs[stat_name], false):
 				CombatRootControl.Instance.create_flash_text(actor, "-"+stat_name, Color.ORANGE)
 				turn_data.turn_failed = true
-				#TODO: Can't Pay
 				return
 				

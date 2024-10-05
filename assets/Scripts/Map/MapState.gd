@@ -18,7 +18,7 @@ func _init(game_state:GameStateData, map_data:Dictionary) -> void:
 			
 func get_map_spot(pos)->MapSpot:
 	if pos.x < 0 or pos.x >= max_width or pos.y < 0 or pos.y >= max_hight:
-		printerr("Invalid Position: " + str(pos))
+		#printerr("MapState.get_map_spot Invalid Position: " + str(pos))
 		return null
 	return _position_data[pos.x + (pos.y * max_width)]
 
@@ -37,7 +37,7 @@ func get_actor_pos(actor:BaseActor)->MapPos:
 func set_actor_pos(actor:BaseActor, pos:MapPos):
 	print("Set Actor Pos")
 	if pos.x < 0 or pos.x >= max_width or pos.y < 0 or pos.y >= max_hight:
-		printerr("Invalid Actor Position: " + str(pos))
+		printerr("MapState.set_actor_pos: Invalid Actor Position: " + str(pos))
 		return
 	
 	var old_pos = null

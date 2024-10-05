@@ -1,6 +1,15 @@
 class_name TargetParameters
 
-enum TargetTypes {Self, Actor, Spot}
+enum TargetTypes {Self, Spot, OpenSpot, Actor, Ally, Enemy}
+
+static func is_spot_target(parms:TargetParameters)->bool:
+	return (parms.target_type == TargetTypes.Spot or 
+			parms.target_type == TargetTypes.OpenSpot)
+			
+static func is_actor_target(parms:TargetParameters)->bool:
+	return (parms.target_type == TargetTypes.Actor or 
+			parms.target_type == TargetTypes.Ally or 
+			parms.target_type == TargetTypes.Enemy)
 
 var target_key:String
 var target_type:TargetTypes
@@ -39,5 +48,9 @@ func _init(args:Dictionary) -> void:
 func is_point_in_area(center:MapPos, point:Vector2i)->bool:
 	return target_area.to_map_spots(center).has(point)
 	
-func is_valid_target(actor:BaseActor):
+func is_valid_target(actor:BaseActor, target:BaseActor):
+	if target_type == TargetTypes.Enemy:
+		return actor.FactionIndex != target.FactionIndex
+	if target_type == TargetTypes.Ally:
+		return actor.FactionIndex == target.FactionIndex
 	return true

@@ -21,8 +21,8 @@ func do_thing(parent_action:BaseAction, subaction_data:Dictionary, metadata:QueE
 	# Get Targeting Params
 	var actor_pos = game_state.MapState.get_actor_pos(actor)
 	
-	if target_parms.target_type == TargetParameters.TargetTypes.Actor:
-		var potentials = _get_potential_targets(game_state, actor, target_parms)
+	if TargetParameters.is_actor_target(target_parms):
+		var potentials = _get_potential_actor_targets(game_state, actor, target_parms)
 		if potentials.size() == 0:
 			print("No valid Targets")
 			return
@@ -42,13 +42,13 @@ func do_thing(parent_action:BaseAction, subaction_data:Dictionary, metadata:QueE
 	})
 	pass
 
-func _get_potential_targets(game_state:GameStateData, actor:BaseActor, targeting:TargetParameters):
+func _get_potential_actor_targets(game_state:GameStateData, actor:BaseActor, targeting:TargetParameters):
 	var actor_pos = game_state.MapState.get_actor_pos(actor)
 	var target_area = targeting.target_area.to_map_spots(actor_pos)
 	var potential_targets = []
 	for spot in target_area:
 		for target in game_state.MapState.get_actors_at_pos(spot):
-			if targeting.is_valid_target(target):
+			if targeting.is_valid_target(actor, target):
 				potential_targets.append(target)
 	return potential_targets
 	

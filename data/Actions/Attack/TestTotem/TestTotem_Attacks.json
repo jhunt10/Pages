@@ -1,0 +1,75 @@
+[
+	{
+	"ActionKey": "SpawnTotem",
+	"DisplayName": "Spawn Totem",
+	"SnippetDesc": "Spawn a totem",
+	"Description": "Spawn a totem which shoots 3 missiles per round",
+	"SmallSprite": "TestTotem.png",
+	"LargeSprite": "TestTotem.png",
+	"Tags": ["Attack"],
+	"PreviewTargetKey":"SpawnSpot",
+	"TargetParams":[
+		{
+			"TargetKey":"SpawnSpot",
+			"TargetType":"Spot",
+			"TargetArea": [[0,1],[-1,1],[-1,0],[-1,-1],[0,-1],[1,-1],[1,0],[1,1],[1,2],[0,2],
+						[-1,2],[-2,2],[-2,1],[-2,0],[-2,-1],[-2,-2],[-1,-2],[0,-2],[1,-2],[2,-2],
+						[2,-1],[2,0],[2,1],[2,2],[-1,3],[0,3],[1,3],[3,1],[3,0],[3,-1],[1,-3],
+						[0,-3],[-1,-3],[-3,-1],[-3,0],[-3,1]],
+			"EffectArea": [[-1,0],[1,0],[0,0],[0,1],[0,-1]],
+			"LineOfSight": true
+		}
+	],
+	"SubActions":{
+		"10": {
+			"SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_GetTarget.gd",
+			"TargetKey": "SpawnSpot"
+		},
+		"11":{
+			"SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_SpawnActor.gd",
+			"TargetKey": "SpawnSpot",
+			"ActorKey": "TestTotem"
+		}
+	}
+},
+{
+	"ActionKey": "TotemMissile",
+	"DisplayName": "Test Target",
+	"SnippetDesc": "Test Targeting",
+	"Description": "Test Target Test Target Test Target Test Target",
+	"SmallSprite": "TotemMissle.png",
+	"LargeSprite": "TotemMissle.png",
+	"Tags": ["Attack"],
+	"PreviewTargetKey":"MissleTarget",
+	"TargetParams":[
+		{
+			"TargetKey":"MissleTarget",
+			"TargetType":"Enemy",
+			"TargetArea": [[0,1],[-1,1],[-1,0],[-1,-1],[0,-1],[1,-1],[1,0],[1,1],[1,2],[0,2],
+						[-1,2],[-2,2],[-2,1],[-2,0],[-2,-1],[-2,-2],[-1,-2],[0,-2],[1,-2],[2,-2],
+						[2,-1],[2,0],[2,1],[2,2],[-1,3],[0,3],[1,3],[3,1],[3,0],[3,-1],[1,-3],
+						[0,-3],[-1,-3],[-3,-1],[-3,0],[-3,1]],
+			"EffectArea": [[-1,0],[1,0],[0,0],[0,1],[0,-1]],
+			"LineOfSight": true
+		}
+	],
+	"SubActions":{
+		"10": {
+			"SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_GetTarget.gd",
+			"TargetKey": "MissleTarget"
+		},
+		"11":{
+			"SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_SpawnMissile.gd",
+			"TargetKey": "MissleTarget",
+			"FramesPerTile": 3,
+			"DamageData": {
+				"DamageEffect":"Shot",
+				"DamageType": "Test",
+				"BaseDamage": 8,
+				"AtkStat": "Stregth",
+				"DefStat": "Stregth"
+			}
+		}
+	}
+},
+]

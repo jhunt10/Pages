@@ -1,0 +1,18 @@
+{
+	"ActorKey": "TestTotem",
+	"DisplayName": "Test Totem",
+	"SnippetDesc": "An totem made for testing.",
+	"Description": "Description.",
+	"Tags": ["Test"],
+	"Sprite": "TestTotem.png",
+	"MaxItemSlots": 5,
+	"Stats":{
+		"Max:Health":100,
+		"Stregth": 100,
+		"Armor": 80
+	},
+	"QueData":{
+		"MaxSize": 3,
+		"ActionList": ["TotemMissile"]
+	}
+}

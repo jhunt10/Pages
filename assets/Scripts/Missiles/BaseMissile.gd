@@ -43,7 +43,13 @@ func _init(actor:BaseActor, action:BaseAction, frames_per_tile:int, target_key:S
 	
 	var meta_data:QueExecutionData = actor.Que.QueExecData
 	var turn_data = meta_data.get_current_turn_data()
-	TargetSpot = turn_data.targets[target_key]
+	var target_val = turn_data.targets[target_key]
+	if target_val is Vector2i:
+		TargetSpot = target_val
+	if target_val is String:
+		var target_actor = CombatRootControl.Instance.GameState.Actors[target_val]
+		var spot = CombatRootControl.Instance.GameState.MapState.get_actor_pos(target_actor)
+		TargetSpot = Vector2i(spot.x, spot.y)
 	
 	_calc_positions()
 		

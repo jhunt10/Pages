@@ -41,6 +41,7 @@ func handle_input(event):
 		select_target(spot)
 
 func select_target(coord:Vector2i):
+	print("Setting Target: " + str(coord))
 	var turndata = que_metadata.get_current_turn_data()
 	turndata.targets[target_params.target_key] = coord
 	CombatRootControl.Instance.ui_controller.set_ui_state(UiStateController.UiStates.ExecRound)

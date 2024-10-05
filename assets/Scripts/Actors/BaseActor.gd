@@ -10,6 +10,7 @@ var effects:EffectHolder
 var items:ItemHolder
 
 var Id : String = str(ResourceUID.create_id())
+var FactionIndex : int
 var LoadPath:String
 var ActorData:Dictionary
 var ActorKey:String 
@@ -20,10 +21,11 @@ var Tags:Array = []
 
 var _default_sprite:String
 
-func _init(args:Dictionary) -> void:
+func _init(args:Dictionary, faction_index:int) -> void:
 	LoadPath = args['LoadPath']
 	ActorKey = args['ActorKey']
 	ActorData = args
+	FactionIndex = faction_index
 	
 	#TODO: Translations
 	DisplayName = args['DisplayName']
@@ -50,3 +52,13 @@ func get_coprse_texture()->Texture2D:
 	if ActorData.has("CorpseSprite"):
 		return load(LoadPath + "/" +ActorData['CorpseSprite'])
 	return MainRootNode.actor_libary.get_default_corpse_texture()
+
+func auto_build_que():
+	print("Auto Que for : " + ActorKey)
+	if Que:
+		if Que.available_action_list.size() > 0:
+			var action = MainRootNode.action_libary.get_action(Que.available_action_list[0])
+			for n in range(Que.que_size):
+				print("AutoQue: " + action.ActionKey)
+				Que.que_action(action)
+			

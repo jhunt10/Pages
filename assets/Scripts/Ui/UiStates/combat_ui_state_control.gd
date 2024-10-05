@@ -54,8 +54,9 @@ func back_to_last_state():
 	last_state = null
 	current_ui_state.start_state()
 
-func _input(_event: InputEvent) -> void:
-	pass
+func _input(event: InputEvent) -> void:
+	if event is InputEventKey and (event as InputEventKey).keycode == KEY_ESCAPE and (event as InputEventKey).pressed:
+		pause_menu.visible = not pause_menu.visible
 
 func _unhandled_input(event: InputEvent) -> void:
 	if current_ui_state:

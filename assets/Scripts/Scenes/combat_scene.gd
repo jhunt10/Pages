@@ -26,12 +26,12 @@ func _ready() -> void:
 		return
 	for actor_key in actor_creation_que.keys():
 		var actor_data = MainRootNode.actor_libary.get_actor_data(actor_key)
-		var new_actor = create_new_actor(actor_data, actor_creation_que[actor_key])
+		var new_actor = create_new_actor(actor_data, 1, actor_creation_que[actor_key])
 		new_actor.effects.add_effect("ManaRegenOnTurn", {})
 		new_actor.effects.add_effect("StaminaRegenOnTurn", {})
 		if actor_key == player_actor_key:
+			new_actor.FactionIndex = 0
 			StatDisplay.set_actor(new_actor)
-			QueController.add_action_que(new_actor.Que)
 			QueInput.set_actor(new_actor)
 			QueDisplay.set_actor(new_actor)
 	actor_creation_que.clear()
@@ -53,15 +53,16 @@ func set_init_state(map_data:Dictionary, player_actor:String, actors_pos:Diction
 func kill_actor(actor:BaseActor):
 	GameState.kill_actor(actor)
 	
-func create_new_actor(data:Dictionary, pos:MapPos):
+func create_new_actor(data:Dictionary, faction_index:int, pos:MapPos):
 	#var file = FileAccess.open(path, FileAccess.READ)
 	#var text:String = file.get_as_text()
 	#var data = JSON.parse_string(text)
-	var new_actor = BaseActor.new(data)
+	var new_actor = BaseActor.new(data, faction_index)
 	
 	# Add actor to GameState and set position
 	GameState.Actors[new_actor.Id] = new_actor
 	GameState.MapState.set_actor_pos(new_actor, pos)
+	QueController.add_action_que(new_actor.Que)
 	
 	# Register new node with MapController and sync  pos
 	var new_node = load("res://Scenes/actor_node.tscn").instantiate()

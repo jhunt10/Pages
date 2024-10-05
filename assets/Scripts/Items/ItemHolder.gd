@@ -19,7 +19,7 @@ func _init(actor:BaseActor) -> void:
 		_slots.append(null)
 	# TODO: Items shouldn't be static
 	var index = 0
-	for itemKey in actor.ActorData['Items']:
+	for itemKey in actor.ActorData.get('Items', []):
 		var item = MainRootNode.item_libary.create_new_item(itemKey, {})
 		_slots[index] = item.Id
 		_items[item.Id] = item

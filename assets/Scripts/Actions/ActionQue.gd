@@ -17,6 +17,7 @@ func _init(act) -> void:
 	act.Que = self
 	var que_data = act.ActorData['QueData']
 	que_size = que_data['MaxSize']
+	available_action_list = que_data.get('ActionList', [])
 	actor = act
 	QueExecData = QueExecutionData.new(self)
 	

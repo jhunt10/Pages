@@ -8,9 +8,9 @@ func do_thing(parent_action:BaseAction, subaction_data:Dictionary, metadata:QueE
 	var target_key = subaction_data['TargetKey']
 	var turndata = metadata.get_current_turn_data()
 	if !turndata.targets.has(target_key):
-		print("No target found for : ", turndata.targets[target_key])
+		print("No target found for : ", target_key)
 		return
-	var frames_per_time = subaction_data['FramesPerTime']
+	var frames_per_time = subaction_data['FramesPerTile']
 	
 	var missile = BaseMissile.new(actor, parent_action, frames_per_time, target_key, subaction_data)
 	CombatRootControl.Instance.create_new_missile_node(missile)

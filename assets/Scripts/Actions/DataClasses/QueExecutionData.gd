@@ -23,6 +23,9 @@ func que_data(data:Dictionary):
 
 func get_current_turn_data()->TurnExecutionData:
 	var current_turn = CombatRootControl.Instance.QueController.get_current_turn_for_que(_que.Id)
+	if current_turn < 0:
+		printerr("Faked Turn Data")
+		return TurnExecutionData.new({})
 	# If TurnDataList doesn't exist for this turn, back fill the list with new empty records
 	if TurnDataList.size() < current_turn+1:
 		for n in range(TurnDataList.size(), current_turn+2):
