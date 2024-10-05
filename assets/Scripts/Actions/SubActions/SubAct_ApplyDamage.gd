@@ -1,6 +1,12 @@
 class_name SubAct_ApplyDamage
 extends BaseSubAction
 
+func get_required_props()->Dictionary:
+	return {
+		"TargetKey": BaseSubAction.SubActionPropType.TargetKey,
+		"DamageKey": BaseSubAction.SubActionPropType.DamageKey
+	}
+
 func do_thing(parent_action:BaseAction, subaction_data:Dictionary, que_exe_data:QueExecutionData,
 				game_state:GameStateData, actor:BaseActor):
 	print("Apply Damage SubAction")

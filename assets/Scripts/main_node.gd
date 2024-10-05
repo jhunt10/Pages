@@ -45,6 +45,11 @@ func open_character_sheet(_actor:BaseActor=null):
 	charsheet.set_actor(actor)
 	pass
 	
+func open_page_editor():
+	var page_editor = load("res://Scenes/UiNodes/page_editor_control.tscn").instantiate()
+	self.add_child(page_editor)
+	
+	
 func go_to_main_menu():
 	current_scene.queue_free()
 	current_scene = load("res://Scenes/main_menu_root_control.tscn").instantiate()

@@ -1,92 +1,90 @@
+class_name RangeMakerControl
 extends Control
 
-@onready var grid_window:NinePatchRect = $VBoxContainer/GridWindow
-@onready var grid_tile_layer:TileMapLayer = $VBoxContainer/GridWindow/SubViewportContainer/SubViewport/Node2D/TileMapLayer
-@onready var center_sprite:Sprite2D = $VBoxContainer/GridWindow/SubViewportContainer/SubViewport/Node2D/TileMapLayer/Sprite2D
-@onready var output:TextEdit = $VBoxContainer/TextOutput
-@onready var load_button:Button = $VBoxContainer/HBoxContainer/LoadButton
-@onready var copy_button:Button = $VBoxContainer/HBoxContainer/CopyButton
-@onready var label:Label = $VBoxContainer/HBoxContainer/Label
+@onready var drop_options:OptionButton = $VBoxContainer/HBoxContainer2/OptionButton
+@onready var add_button:Button = $VBoxContainer/HBoxContainer2/AddButton
 
-var selected_spots:Array = []
-var mouse_pressed = false
-var adding = true
-var last_pressed_spot
-var label_timer_delay:int = 3
-var label_timer = 0
+@onready var range_viewer:TargetRangeViewEditControl = $VBoxContainer/TargetRangeViewEditControl
 
-var _center_spot = Vector2i(0,0)
+@onready var key_input:LineEdit = $VBoxContainer/TargetKeyContainer/LineEdit
+@onready var target_type_input:OptionButton = $VBoxContainer/TargetTypeContainer/TargetTypeInput
+
+var target_datas:Dictionary = {}
+var editing_key:String = ''
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	load_button.pressed.connect(on_load)
-	copy_button.pressed.connect(on_copy)
+	#data_panel.visible = false
+	key_input.focus_exited.connect(_save_current_values)
+	target_type_input.focus_exited.connect(_save_current_values)
+	drop_options.focus_entered.connect(_save_current_values)
+	add_button.pressed.connect(_add_new_data)
+	drop_options.item_selected.connect(on_item_selected)
+	for targ_type in TargetParameters.TargetTypes:
+		target_type_input.add_item(str(targ_type))
 	pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if label_timer > 0:
-		label_timer = max(label_timer - delta, 0)
-		if label_timer == 0:
-			label.text = ""
-	if mouse_pressed:
-		var cur_spot = grid_tile_layer.local_to_map(grid_tile_layer.get_local_mouse_position())
-		if cur_spot != last_pressed_spot:
-			_flip_spot(cur_spot)
 	pass
 	
-func _set_text(val:String):
-	label.text = val
-	label_timer = label_timer_delay
+func _add_new_data():
+	_save_current_values()
+	editing_key = ''
+	key_input.clear()
+	target_type_input.select(0)
+	range_viewer.set_selected_spots([])
 
-func _input(event: InputEvent) -> void:
-	if event is InputEventMouseButton and (event as InputEventMouseButton).pressed:
-		var m_event = event as InputEventMouseButton
-		var grid_window_rect: Rect2 = Rect2(grid_window.global_position, grid_window.size)
-		if grid_window_rect.has_point(m_event.global_position):
-			var spot = grid_tile_layer.local_to_map(grid_tile_layer.get_local_mouse_position())
-			print("Clicked Spot: " + str(spot) + " Index: " + str(m_event.button_index))
-			if m_event.button_index == 1:
-				mouse_pressed = true
-				adding = not selected_spots.has(spot)
-				_flip_spot(spot)
-			if m_event.button_index == 2:
-				print("Click 2")
-				_center_spot = spot
-				_sync_tiles()
-		else:
-			print("Click '%s' outside area: %s" % [m_event.global_position, grid_window_rect])
-			
-	if event is InputEventMouseButton and not (event as InputEventMouseButton).pressed:
-		mouse_pressed = false
+func _save_current_values(base_damage_value:float = -1):
+	var target_key = key_input.text
+	if target_key == '':
+		return
+		
+	if editing_key != target_key and target_datas.has(editing_key):
+		target_datas.erase(editing_key)
+	
+	if !target_datas.has(target_key):
+		target_datas[target_key] = {}
+	target_datas[target_key]['TargetType'] = target_type_input.get_item_text(target_type_input.selected)
+	target_datas[target_key]['TargetArea'] = range_viewer.get_selected_spots()
+	
+	drop_options.clear()
+	drop_options.add_item("None", 0)
+	drop_options.set_item_disabled(0, true)
+	for data_key in target_datas.keys():
+		drop_options.add_item(data_key)
+	for n in range(drop_options.item_count):
+		if drop_options.get_item_text(n) == target_key:
+			drop_options.select(n)
+			break
+	editing_key = target_key
+	
+func on_item_selected(index:int):
+	if index >= 0:
+		var val = drop_options.get_item_text(index)
+		load_values(val)
 
-func _flip_spot(cur_spot):
-	print("Flip Spot: " + str(cur_spot))
-	if adding: 
-		selected_spots.append(cur_spot)
+func load_values(target_key:String):
+	if not target_datas.has(target_key):
+		return
+	editing_key = target_key
+	key_input.text = target_key
+	for index in range(target_type_input.item_count):
+		if target_type_input.get_item_text(index) == target_datas[target_key]['TargetType']:
+			target_type_input.select(index)
+			break
+	range_viewer.set_selected_spots(target_datas[target_key]['TargetArea'])
+	
+
+func load_page_data(data:Dictionary):
+	target_datas = data.get("TargetParams", {})
+	drop_options.clear()
+	for key in target_datas.keys():
+		drop_options.add_item(key)
+	if target_datas.size() > 0:
+		on_item_selected(0)
 	else:
-		selected_spots.erase(cur_spot)
-	last_pressed_spot = cur_spot
-	_sync_tiles()
-
-func _sync_tiles():
-	center_sprite.position = grid_tile_layer.map_to_local(_center_spot)
-	grid_tile_layer.clear()
-	grid_tile_layer.set_cells_terrain_connect(selected_spots, 0, 0)
-	var list = []
-	for spot in selected_spots:
-		list.append([spot.x, spot.y])
-	output.text = JSON.stringify(list)
-
-func on_copy():
-	_set_text("Copied")
-	DisplayServer.clipboard_set(output.text)
-	pass
-
-func on_load():
-	var arr = JSON.parse_string(output.text)
-	selected_spots.clear()
-	for sub in arr:
-		selected_spots.append(Vector2i(sub[0], sub[1]))
-	_sync_tiles()
+		range_viewer.clear()
+		target_type_input.select(-1)
+		key_input.clear()

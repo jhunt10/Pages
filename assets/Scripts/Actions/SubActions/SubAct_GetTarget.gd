@@ -2,6 +2,11 @@ class_name SubAct_GetTarget
 extends BaseSubAction
 
 
+func get_required_props()->Dictionary:
+	return {
+		"TargetKey": BaseSubAction.SubActionPropType.TargetKey
+	}
+
 func do_thing(parent_action:BaseAction, subaction_data:Dictionary, metadata:QueExecutionData,
 				game_state:GameStateData, actor:BaseActor):
 	print("Get Target SubAction")

@@ -1,6 +1,13 @@
 class_name SubAct_SpawnMissile
 extends BaseSubAction
 
+func get_required_props()->Dictionary:
+	return {
+		"TargetKey": BaseSubAction.SubActionPropType.TargetKey,
+		"DamageKey": BaseSubAction.SubActionPropType.DamageKey
+	}
+
+
 func do_thing(parent_action:BaseAction, subaction_data:Dictionary, metadata:QueExecutionData,
 				game_state:GameStateData, actor:BaseActor):
 	var actor_pos:MapPos = game_state.MapState.get_actor_pos(actor)

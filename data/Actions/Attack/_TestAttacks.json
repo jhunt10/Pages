@@ -7,11 +7,10 @@
 		"Description": "Test Target Test Target Test Target Test Target",
 		"SmallSprite": "ProjectileTest.png",
 		"LargeSprite": "ProjectileTest.png",
-		"Tags": ["Attack"],
+		"Tags": ["Attack", "Ranged", "Missile"],
 		"PreviewTargetKey":"MissleTarget",
-		"TargetParams":[
-			{
-				"TargetKey":"MissleTarget",
+		"TargetParams":{
+			"MissleTarget": {
 				"TargetType":"Actor",
 				"TargetArea": [[1,0],[1,-1],[0,-1],[-1,-1],[-1,0],[-1,1],[0,1],[1,1],[2,1],[2,0],
 				[2,-1],[2,-2],[1,-2],[0,-2],[-1,-2],[-2,-2],[-2,-1],[-2,0],[-2,1],[-2,2],[-1,2],
@@ -20,7 +19,16 @@
 				"EffectArea": [[-1,0],[1,0],[0,0],[0,1],[0,-1]],
 				"LineOfSight": true
 			}
-		],
+		},
+		"DamageDatas": {
+			"Damage1":{
+				"DamageEffect":"Shot",
+				"DamageType": "Test",
+				"BaseDamage": 20,
+				"AtkStat": "Stregth",
+				"DefStat": "Stregth"
+			}
+		},
 		"SubActions":{
 			"10": {
 				"SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_GetTarget.gd",
@@ -29,14 +37,9 @@
 			"11":{
 				"SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_SpawnMissile.gd",
 				"TargetKey": "MissleTarget",
+				"DamageKey": "Damage1",
 				"FramesPerTile": 3,
-				"DamageData": {
-					"DamageEffect":"Shot",
-					"DamageType": "Test",
-					"BaseDamage": 25,
-					"AtkStat": "Stregth",
-					"DefStat": "Stregth"
-				}
+				
 			}
 		}
 	},
@@ -50,15 +53,14 @@
 		"LargeSprite": "TestTarget.png",
 		"Tags": ["Attack"],
 		"PreviewTargetKey":"Preview",
-		"TargetParams":[
-			{
-				"TargetKey":"Preview",
+		"TargetParams":{
+			"Preview": {
 				"##COMMENT##": "Self targeting doesn't need params, but this is for preview",
 				"TargetType":"Self",
 				"TargetArea": [[0,0]],
 				"LineOfSight": true
 			}
-		],
+		},
 		"SubActions":{
 			"11":{
 				"SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_ApplyDamage.gd",
@@ -83,15 +85,14 @@
 		"LargeSprite": "TestHeart.png",
 		"Tags": ["Attack"],
 		"PreviewTargetKey":"Preview",
-		"TargetParams":[
-			{
-				"TargetKey":"Preview",
+		"TargetParams":{
+			"Preview": {
 				"##COMMENT##": "Self targeting doesn't need params, but this is for preview",
 				"TargetType":"Self",
 				"TargetArea": [[0,0]],
 				"LineOfSight": true
 			}
-		],
+		},
 		"SubActions":{
 			"11":{
 				"SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_ApplyEffect.gd",
@@ -110,15 +111,14 @@
 		"LargeSprite": "TestPoison.png",
 		"Tags": ["Attack"],
 		"PreviewTargetKey":"Preview",
-		"TargetParams":[
-			{
-				"TargetKey":"Preview",
+		"TargetParams":{
+			"Preview": {
 				"##COMMENT##": "Self targeting doesn't need params, but this is for preview",
 				"TargetType":"Self",
 				"TargetArea": [[0,0]],
 				"LineOfSight": true
 			}
-		],
+		},
 		"SubActions":{
 			"11":{
 				"SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_ApplyEffect.gd",
@@ -137,16 +137,15 @@
 		"LargeSprite": "TestPoison.png",
 		"Tags": ["Attack"],
 		"PreviewTargetKey":"Target1",
-		"TargetParams":[
-			{
-				"TargetKey":"Target1",
+		"TargetParams":{
+			"Target1": {
 				"TargetType":"Actor",
 				"TargetArea": [[-1,1],[0,1],[1,1],[-1,2],[0,2],[1,2],[-1,3],[0,3],[1,3],[0,4],
 				[-1,4],[1,4]],
 				"EffectArea": [[-1,0],[1,0],[0,0],[0,1],[0,-1]],
 				"LineOfSight": true
 			}
-		],
+		},
 		"SubActions":{
 			"10": {
 				"SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_GetTarget.gd",
