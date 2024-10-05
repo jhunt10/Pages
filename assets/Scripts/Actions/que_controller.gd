@@ -37,6 +37,7 @@ enum ActionStates {
 var execution_state:ActionStates = ActionStates.Waiting
 var sub_action_timer = 0
 var sub_action_index = 0
+var sub_sub_action_index = 0
 var que_index = 0
 var action_index = 0
 var max_que_size = 0
@@ -55,6 +56,7 @@ func _start_round():
 	print("QueController: Start Round")
 	action_index = 0
 	sub_action_index = 0
+	sub_sub_action_index = 0
 	que_index = 0
 	sub_action_timer = 0
 	
@@ -192,27 +194,40 @@ func _execute_turn_frames(game_state:GameStateData, que:ActionQue, turn_index:in
 		return
 	
 	var turn_data = que.QueExecData.TurnDataList[turn_index]
-	if turn_data.turn_failed:
-		return
+	
+	
 	# Get subaction for this frame
-	var subaction_data = action.SubActionData[subaction_index]
-	if !subaction_data:
+	var sub_action_list = action.SubActionData[subaction_index]
+	if !sub_action_list:
 		return
 		
-	var script_key = subaction_data['SubActionScript']
-	var subaction = _get_subaction(script_key)
-	if !subaction:
-		printerr("No script found for subaction " + script_key)
-		return
-	
-	# Finnaly do subaction
-	subaction.do_thing(
-		action, # Parent Action
-		subaction_data, # SubAction configuration
-		que.QueExecData, # Metadata for action execution
-		game_state, # GameState
-		que.actor # Actor
-	)
+	while sub_sub_action_index < sub_action_list.size():
+		if turn_data.turn_failed:
+			return
+		var sub_action_data = sub_action_list[sub_sub_action_index]
+			
+		var script_key = sub_action_data['SubActionScript']
+		var subaction = _get_subaction(script_key)
+		if !subaction:
+			printerr("No script found for subaction " + script_key)
+			return
+		
+		# Finnaly do subaction
+		subaction.do_thing(
+			action, # Parent Action
+			sub_action_data, # SubAction configuration
+			que.QueExecData, # Metadata for action execution
+			game_state, # GameState
+			que.actor # Actor
+		)
+		
+		# Check if the last sub action stopped execution
+		if execution_state != ActionStates.Running:
+			return
+		sub_sub_action_index += 1
+		
+	# All sub actions completed
+	sub_sub_action_index = 0
 
 # Get script either load script or retreave from cache 
 func _get_subaction(script_key:String)->BaseSubAction:

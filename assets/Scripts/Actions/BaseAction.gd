@@ -50,11 +50,16 @@ func _init(load_path:String, args:Dictionary) -> void:
 	# The ActionQueController will create the subaction on demand
 	SubActionData = []	
 	for index in range(SUB_ACTIONS_PER_ACTION):
-		var subData:Dictionary = args['SubActions'].get(str(index), {})
-		if subData.has('SubActionScript'):
+		var subData = args['SubActions'].get(str(index), null)
+		if not subData:
+			SubActionData.append(null)
+		elif subData is Dictionary:
+			if subData.has('SubActionScript'):
+				SubActionData.append([subData])
+		elif subData is Array:
 			SubActionData.append(subData)
 		else:
-			SubActionData.append(null)
+			printerr("Uknown SubActionType: " + str(subData))
 	
 	if args.has("PreviewTargetKey"):
 		PreviewTargetKey = args["PreviewTargetKey"]

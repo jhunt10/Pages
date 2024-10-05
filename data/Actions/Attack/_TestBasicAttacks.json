@@ -24,17 +24,30 @@
 				"SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_GetTarget.gd",
 				"TargetKey": "Target1"
 			},
-			"11":{
-				"SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_ApplyDamage.gd",
-				"TargetKey": "Target1",
-				"DamageData": {
-					"DamageEffect":"Slash",
-					"DamageType": "Test",
-					"BaseDamage": 25,
-					"AtkStat": "Stregth",
-					"DefStat": "Stregth"
+			"11":[
+				{
+					"SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_ApplyDamage.gd",
+					"TargetKey": "Target1",
+					"DamageData": {
+						"DamageEffect":"Slash",
+						"DamageType": "Test",
+						"BaseDamage": 25,
+						"AtkStat": "Stregth",
+						"DefStat": "Stregth"
+					},
+				},
+				{
+					"SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_ApplyDamage.gd",
+					"TargetKey": "Target1",
+					"DamageData": {
+						"DamageEffect":"Slam",
+						"DamageType": "Test",
+						"BaseDamage": 25,
+						"AtkStat": "Stregth",
+						"DefStat": "Stregth"
+					},
 				}
-			}
+			]
 		}
 	},
 	{
