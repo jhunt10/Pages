@@ -15,6 +15,9 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
+	
+func delete_tag_node(tag):
+	tags_inputs.erase(tag)
 
 func _create_new_tag(tag:String = '', grab_focus=false):
 	var new_tag:TagInputContainer = premade_tag_input.duplicate()
@@ -32,3 +35,10 @@ func set_tags(tags:Array):
 	tags_inputs.clear()
 	for tag in tags:
 		_create_new_tag(tag)
+
+func output_tags()->Array:
+	var list = []
+	for tag_i:TagInputContainer in tags_inputs:
+		list.append(tag_i.text_input.text)
+	return list
+		

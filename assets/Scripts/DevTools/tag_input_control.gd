@@ -12,13 +12,17 @@ var need_resize = true
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	container.resized.connect(_resize)
-	delete_button.pressed.connect(queue_free)
+	delete_button.pressed.connect(on_delete)
 	pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
+
+func on_delete():
+	get_parent().delete_tag_node(self)
+	self.queue_free()
 
 func _resize():
 	self.custom_minimum_size = Vector2i(container.size.x + (2 * PADDING), container.size.y + (2 * PADDING))

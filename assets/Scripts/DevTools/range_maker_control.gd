@@ -88,3 +88,6 @@ func load_page_data(data:Dictionary):
 		range_viewer.clear()
 		target_type_input.select(-1)
 		key_input.clear()
+
+func save_page_data()->Dictionary:
+	return target_datas

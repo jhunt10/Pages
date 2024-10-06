@@ -105,3 +105,6 @@ func load_page_data(data:Dictionary):
 		damage_type_input.clear()
 		attack_stat_input.clear()
 		defense_stat_input.clear()
+
+func save_page_data()->Dictionary:
+	return damage_datas

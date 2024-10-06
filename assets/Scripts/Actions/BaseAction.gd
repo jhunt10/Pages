@@ -4,7 +4,9 @@ class_name BaseAction
 
 const SUB_ACTIONS_PER_ACTION = 24
 
-var LoadPath:String
+var _loaded_from_file:String
+var LoadPath:String:
+	get: return _loaded_from_file.get_base_dir()
 var ActionKey:String 
 var DisplayName:String
 var SnippetDesc:String
@@ -25,8 +27,8 @@ var OnQueUiState:String
 var SmallSprite:String 
 var LargeSprite:String 
 
-func _init(load_path:String, args:Dictionary) -> void:
-	LoadPath = load_path
+func _init(file_load_path:String, args:Dictionary) -> void:
+	_loaded_from_file = file_load_path
 	ActionKey = args['ActionKey']
 	ActionData = args
 	
@@ -53,7 +55,7 @@ func _init(load_path:String, args:Dictionary) -> void:
 	# The ActionQueController will create the subaction on demand
 	SubActionData = []	
 	for index in range(SUB_ACTIONS_PER_ACTION):
-		var subData = args['SubActions'].get(str(index), null)
+		var subData = args.get('SubActions', {}).get(str(index), null)
 		if not subData:
 			SubActionData.append(null)
 		elif subData is Dictionary:

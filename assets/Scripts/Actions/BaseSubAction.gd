@@ -3,7 +3,7 @@ extends GDScript
 
 ### SubActions do not get global properties
 
-enum SubActionPropType {TargetKey, DamageKey, StringVal, IntVal}
+enum SubActionPropType {TargetKey, DamageKey, MoveValue, StringVal, IntVal}
 
 # Returns a Dictionary of {Property Name, Property Type} for what properties this subaction
 # 	exspects to find in it's _subaction_data (Mostly for Page Editor)

@@ -3,7 +3,7 @@ class_name ActionLibary
 const TILE_WIDTH = 64
 const TILE_HIGHT = 56
 
-const ActionDir = "res://data/Actions/"
+const ActionDir = "res://data/Actions"
 
 var _action_list:Dictionary = {}
 
@@ -16,11 +16,14 @@ func _init() -> void:
 func load_pages():
 	if loaded:
 		return
-	print("Loading Actions")
-	var files = []
-	_search_for_actions(ActionDir, files)
-	for file in files:
-		_load_action_file(file)
+	print("### Loading Actions")
+	for file in search_for_action_files():
+		print('# Checking File: ' + file)
+		var actions_dicts = parse_actions_from_file(file)
+		for act_key in actions_dicts.keys():
+			_action_list[act_key] = actions_dicts[act_key]
+			print("# -Loaded Action: " + act_key)
+	print("### Done Loading Actions")
 	loaded = true
 	
 # Get a static instance of the action
@@ -31,35 +34,51 @@ func get_action(key:String)->BaseAction:
 		return _action_list[key]
 	return null
 	
-func _search_for_actions(path:String, list:Array):
+static func search_for_action_files()->Array:
+	var list = []
+	_rec_search_for_actions(ActionDir, list)
+	return list
+	
+static func _rec_search_for_actions(path:String, list:Array, limit:int=1000):
 	var dir = DirAccess.open(path)
+	if limit == 0:
+		printerr("ActionLibary._rec_search_for_actions: Search limit reached!")
+		return
 	if dir:
 		dir.list_dir_begin()
 		var file_name:String = dir.get_next()
 		while file_name != "":
 			var full_path = path+"/"+file_name
 			if dir.current_is_dir():
-				_search_for_actions(full_path, list)
+				_rec_search_for_actions(full_path, list, limit-1)
 			elif file_name.ends_with(".json"):
 				list.append(full_path)
 			file_name = dir.get_next()
 	else:
 		print("An error occurred when trying to access the path.")
 
-func _load_action_file(path:String):
+static func parse_actions_from_file(path:String)->Dictionary:
+	var datas = parse_action_datas_from_file(path)
+	var dict = {}
+	for data in datas.values():
+		var action = BaseAction.new(path, data)
+		dict[action.ActionKey] = action
+	return dict
+	
+
+static func parse_action_datas_from_file(path:String)->Dictionary:
 	var file = FileAccess.open(path, FileAccess.READ)
 	var text:String = file.get_as_text()
 	
 	# Wrap in brackets to support multiple actions in same file
 	if !text.begins_with("["):
 		text = "[" + text + "]" 
-		
+	var dict = {}
 	var action_datas = JSON.parse_string(text)
 	for action_data in action_datas:
-		var newAction = BaseAction.new(path.get_base_dir(), action_data)
-		if !_action_list.has(newAction.ActionKey):
-			_action_list[newAction.ActionKey] = newAction
-			print("Loaded Action: " + newAction.ActionKey)
+		if !dict.has(action_data['ActionKey']):
+			dict[action_data['ActionKey']] = action_data
+	return dict
 
 #func create_page(keyName : String) -> PageAction:
 	#var script = action_scripts[keyName]

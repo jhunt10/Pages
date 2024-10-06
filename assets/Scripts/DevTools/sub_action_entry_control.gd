@@ -3,10 +3,12 @@ extends Control
 
 static var SUB_ACTIONS_PATH = "res://assets/Scripts/Actions/SubActions/"
 
+signal index_changed
+
 @onready var index_input:SpinBox = $VBoxContainer/ScriptInput/FrameInput
 @onready var script_drop_options:OptionButton = $VBoxContainer/ScriptInput/ScriptButton
 @onready var props_container:VBoxContainer = $VBoxContainer/PropsContainer
-@onready var premade_option_prop_input:HBoxContainer = $VBoxContainer/PropsContainer/SubActionEntryOptionInput
+@onready var premade_option_prop_input:SubActionPropInputControl = $VBoxContainer/PropsContainer/SubActionPropertyControl
 
 var prop_inputs:Dictionary = {}
 var real_script:String = ''
@@ -19,23 +21,45 @@ func _ready() -> void:
 	for script in sub_scripts:
 		script_drop_options.add_item(script)
 	premade_option_prop_input.visible = false
+	index_input.get_line_edit().focus_exited.connect(on_index_lose_focus)
 
+func on_index_lose_focus():
+	index_changed.emit()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
 	
+func lose_focus_if_has():
+	if index_input.has_focus():
+		index_input.release_focus()
+	var line_edit = index_input.get_line_edit()
+	if line_edit.has_focus():
+		index_input.apply()
+		line_edit.release_focus()
+	for prop in prop_inputs.values():
+		prop.lose_focus_if_has()
+	
 func load_subaction_data(frame:int, data:Dictionary):
 	subaction_data = data
 	index_input.set_value_no_signal(frame)
-	index_input.size = Vector2i(30, index_input.size.y)
-	real_script = subaction_data['SubActionScript']
-	var short_script = real_script.trim_prefix(SUB_ACTIONS_PATH).trim_prefix("SubAct_").trim_suffix(".gd")
-	for n in range(script_drop_options.item_count):
-		if script_drop_options.get_item_text(n) == short_script:
-			script_drop_options.select(n)
-	_build_props_for_script(real_script)
-	
+	if data.keys().has("SubActionScript"):
+		real_script = subaction_data['SubActionScript']
+		var short_script = real_script.trim_prefix(SUB_ACTIONS_PATH).trim_prefix("SubAct_").trim_suffix(".gd")
+		for n in range(script_drop_options.item_count):
+			if script_drop_options.get_item_text(n) == short_script:
+				script_drop_options.select(n)
+		_build_props_for_script(real_script)
+
+func save_page_data():
+	var dict = {}
+	dict['SubActionScript'] = real_script
+	for prop_i:SubActionPropInputControl in prop_inputs.values():
+		var val = prop_i.get_prop_value()
+		if val:
+			dict[prop_i.get_prop_name()] = val
+	return dict
+
 func script_selected(index:int):
 	var script_name = script_drop_options.get_item_text(index)
 	_build_props_for_script(SUB_ACTIONS_PATH + "SubAct_" + script_name + ".gd")
@@ -44,32 +68,26 @@ func _build_props_for_script(script_name):
 	real_script = script_name
 	var script:BaseSubAction = load(real_script).new()
 	var required_props =  script.get_required_props()
-	for child in props_container.get_children():
+	for child in prop_inputs.values():
 		child.queue_free()
 	prop_inputs.clear()
 	for prop_name in required_props.keys():
 		create_prop_input(prop_name, required_props[prop_name])
+	for extr_prop_key in subaction_data.keys():
+		if required_props.has(extr_prop_key):
+			continue
+		if extr_prop_key == "SubActionScript":
+			continue
+		create_prop_input(extr_prop_key, BaseSubAction.SubActionPropType.StringVal, true)
+		
 
-func create_prop_input(prop_name:String, prop_type):
-	var new_prop = null
-	if prop_type == BaseSubAction.SubActionPropType.TargetKey:
-		new_prop = premade_option_prop_input.duplicate()
-		new_prop.get_child(0).text = prop_name+":"
-		new_prop.get_child(1).focus_entered.connect(_target_input_focused.bind(prop_name))
-		if subaction_data.has(prop_name):
-			prop_inputs[prop_name] = new_prop
-			_target_input_focused(prop_name, subaction_data[prop_name])
-	if prop_type == BaseSubAction.SubActionPropType.DamageKey:
-		new_prop = premade_option_prop_input.duplicate()
-		new_prop.get_child(0).text = prop_name+":"
-		new_prop.get_child(1).focus_entered.connect(_damage_input_focused.bind(prop_name))
-		if subaction_data.has(prop_name):
-			prop_inputs[prop_name] = new_prop
-			_damage_input_focused(prop_name, subaction_data[prop_name])
-	if new_prop:
-		props_container.add_child(new_prop)
-		new_prop.visible = true
-		prop_inputs[prop_name] = new_prop
+func create_prop_input(prop_name:String, prop_type, is_unknown:bool=false):
+	var new_prop:SubActionPropInputControl = premade_option_prop_input.duplicate()
+	props_container.add_child(new_prop)
+	new_prop.visible = true
+	prop_inputs[prop_name] = new_prop
+	var prop_value = subaction_data.get(prop_name, null)
+	new_prop.set_prop(prop_name, prop_type, prop_value, is_unknown)
 	
 func _damage_input_focused(prop_name, force_option:String=''):
 	var prop_input = prop_inputs.get(prop_name, null)
