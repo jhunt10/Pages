@@ -90,4 +90,5 @@ func load_page_data(data:Dictionary):
 		key_input.clear()
 
 func save_page_data()->Dictionary:
+	_save_current_values()
 	return target_datas

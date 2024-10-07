@@ -36,6 +36,42 @@
 		}
 	},
 	{
+		"ActionKey": "MoveLeft",
+		"@@COMMENT@@": "Snippet and Description are loaded for Translator",
+		"DisplayName": "Move Back",
+		"SnippetDesc": "Move Back one spot",
+		"Description": "Move Back one spot",
+		"SmallSprite": "MoveLeft.png",
+		"LargeSprite": "MoveLeft.png",
+		"Tags": ["Move"],
+		"PreviewMoveOffset": [-1,0,0,0],
+		"SubActions":{
+			"11": {
+				"SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_Move.gd",
+				"MovementType": "Walk",
+				"RelativePos": [-1,0,0,0]
+			}
+		}
+	},
+	{
+		"ActionKey": "MoveRight",
+		"@@COMMENT@@": "Snippet and Description are loaded for Translator",
+		"DisplayName": "Move Back",
+		"SnippetDesc": "Move Back one spot",
+		"Description": "Move Back one spot",
+		"SmallSprite": "MoveRight.png",
+		"LargeSprite": "MoveRight.png",
+		"Tags": ["Move"],
+		"PreviewMoveOffset": [1,0,0,0],
+		"SubActions":{
+			"11": {
+				"SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_Move.gd",
+				"MovementType": "Walk",
+				"RelativePos": [1,0,0,0]
+			}
+		}
+	},
+	{
 		"ActionKey": "TurnLeft",
 		"@@COMMENT@@": "Snippet and Description are loaded for Translator",
 		"DisplayName": "Turn Left",

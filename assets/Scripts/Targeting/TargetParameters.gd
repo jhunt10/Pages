@@ -1,6 +1,7 @@
 class_name TargetParameters
 
 enum TargetTypes {Self, Spot, OpenSpot, Actor, Ally, Enemy}
+enum LOS_VALUE {Blocked, Cover, Open}
 
 static func is_spot_target(parms:TargetParameters)->bool:
 	return (parms.target_type == TargetTypes.Spot or 
@@ -54,67 +55,152 @@ func is_valid_target(actor:BaseActor, target:BaseActor):
 		return actor.FactionIndex == target.FactionIndex
 	return true
 	
-func get_valid_target_area(center:MapPos, line_of_sight:bool)->Array:
+func get_valid_target_area(center:MapPos, line_of_sight:bool)->Dictionary:
 	var spots =  target_area.to_map_spots(center)
 	if not line_of_sight:
 		return spots
 	var los_dict = {}
 	for check in spots:
 		get_line_of_sight_for_spots(center, check, CombatRootControl.Instance.GameState.MapState, los_dict)
-	var valid_list = []
-	for vec in los_dict.keys():
-		if los_dict[vec]:
-			valid_list.append(vec)
-	return valid_list
+	#var valid_list = []
+	#for vec in los_dict.keys():
+		#if los_dict[vec]:
+			#valid_list.append(vec)
+	return los_dict
+	
+static func trace_los(from_point, to_point, map_state):
+	var los_dict = {}
+	var line = safe_calc_line(from_point, to_point,  false, false, true)
+	for point in line:
+		los_dict[point] = LOS_VALUE.Open
+	return los_dict
+	
 
-static func get_line_of_sight_for_spots(from_point, to_point, map:MapStateData, check_cache:Dictionary = {}):
-	var m:float = float(to_point.y - from_point.y) / float(to_point.x - from_point.x)
-	var b:int = from_point.y - int(m * float(from_point.x)) 
-	# to save on checking, we'll check the whole line and return what is/isn't valid
-	# when checking area, we can use the previous cached results
-	var line_is_unbroken = true
-	
-	# Vertical line case (m = inf)
-	if from_point.x == to_point.x:
-		var step = 1
-		if from_point.y > to_point.y:
-			step = -1
-		for y in range(from_point.y, to_point.y + step, step):
-			var check_vec = Vector2i(from_point.x, y)
-			if line_is_unbroken and _spot_blocks_los(check_vec, check_cache, map):
-				line_is_unbroken = false
-			check_cache[check_vec] = line_is_unbroken
-		return line_is_unbroken
-	
-	# Get y that will start counting from
-	var last_y = from_point.y
-	var step_x = 1
-	if from_point.x > to_point.x: step_x = -1
-	for check_x in range(from_point.x, to_point.x+step_x, step_x):
-		var check_y = 0
-		if m >= 0: 
-			check_y = floori(m * float(check_x)) + b
-		if m < 0: 
-			check_y = ceili(m * float(check_x)) + b
+static func get_line_of_sight_for_spots(from_point, to_point, map:MapStateData, check_cache:Dictionary = {}, log=false)->LOS_VALUE:
+	var in_line_is_unbroken = true
+	var out_line_is_unbroken = true
+	if log: print("#### LOS CHECK")
+	if log: print("# From: %s | To: %s" % [from_point, to_point])
 		
-		# If skipped a bunch of ys, back fill
-		if abs(last_y - check_y) > 1:
-			var step = 1
-			if last_y > check_y: step = -1
-			for back_y in range(last_y + step, check_y, step):
-				var check_vec = Vector2i(check_x - step_x, back_y)
-				if line_is_unbroken and _spot_blocks_los(check_vec, check_cache, map):
-					line_is_unbroken = false
-				check_cache[check_vec] = line_is_unbroken
-				
-		var check_vec = Vector2i(check_x, check_y)
-		if line_is_unbroken and _spot_blocks_los(check_vec, check_cache, map):
-			line_is_unbroken = false
-		check_cache[check_vec] = line_is_unbroken
-		last_y = check_y
-	return line_is_unbroken
+	var path = safe_calc_line(from_point, to_point, false, true, false)
+	if log: print("# Path: %s" % [path])
+	for p in path:
+		if in_line_is_unbroken and _spot_blocks_los(p, check_cache, map):
+			in_line_is_unbroken = false
+	
+	path = safe_calc_line(from_point, to_point, true, false, true)
+	if log: print("# Path: %s" % [path])
+	for p in path:
+		if out_line_is_unbroken and _spot_blocks_los(p, check_cache, map):
+			out_line_is_unbroken = false
+	
+	if in_line_is_unbroken:
+		check_cache[to_point] = LOS_VALUE.Open
+	elif out_line_is_unbroken:
+		check_cache[to_point] = LOS_VALUE.Cover
+	else:
+		check_cache[to_point] = LOS_VALUE.Blocked
+	#if log: print("# OutLine %s: %s" % [p, out_line_is_unbroken])
+	return check_cache[to_point]
+	
 
 static func _spot_blocks_los(spot:Vector2i, check_cache:Dictionary, map:MapStateData):
-	#if check_cache.keys().has(spot):
-		#return check_cache[spot]
 	return map.spot_blocks_los(MapPos.Vector2i(spot))
+	
+# Calculate path as if m is positive and < 1. Then rotate and mirror as needed
+# Rounding down will give a more generious results "leaning out" on corners
+static func safe_calc_line(start, end, round_down=false, fill_back:bool=false, fill_down:bool=false)->Array:
+	var out_line = []
+	
+	# Vertical line case (m = inf)
+	if start.x == end.x:
+		for y in range(min(start.y, end.y), max(start.y, end.y) + 1):
+			var check_vec = Vector2i(start.x, y)
+			out_line.append(check_vec)
+		return out_line
+	
+	var x_change = abs(start.x - end.x)
+	var y_change = abs(start.y - end.y)
+	
+	var min_point = Vector2i(0, 0)
+	var max_point = Vector2i(max(x_change, y_change), min(x_change, y_change))
+	
+	# Is line being mirrored over Y Axis
+	var is_x_mirrored = start.x > end.x
+	# Is line being mirrored over Y Axis
+	var is_y_mirrored = start.y > end.y
+	# Is line being flipped over itself
+	var is_inverted = x_change < y_change
+	if is_inverted:
+		is_y_mirrored = start.x > end.x
+		is_x_mirrored = start.y > end.y
+		#var temp_fill = fill_back
+		#fill_back = fill_down
+		#fill_down = temp_fill
+		
+	
+	var check_line = []
+	var last_x = min_point.x
+	var last_y = min_point.y
+	var m:float = float(max_point.y - min_point.y) / float(max_point.x - min_point.x)
+	for check_x in range(min_point.x, max_point.x+1):
+		var res_x = 0
+		var res_y = 0
+		var check_y = 0
+		if round_down: check_y = floori(m * float(check_x))
+		else: check_y = round(m * float(check_x))
+		if check_y != last_y:
+			if fill_back:
+				check_line.append(Vector2i(check_x-1, check_y))
+			if fill_down:
+				check_line.append(Vector2i(check_x, check_y-1))
+		check_line.append(Vector2i(check_x, check_y))
+		last_y = check_y
+		
+	for check_point in check_line:
+		var base_x = start.x
+		var base_y = start.y
+		if is_inverted:
+			base_x = start.y
+			base_y = start.x
+		var res_x = 0
+		var res_y = 0
+		if is_x_mirrored: 
+			res_x = base_x - check_point.x
+		else: 
+			res_x = base_x + check_point.x
+		if is_y_mirrored: 
+			res_y = base_y - check_point.y
+		else: 
+			res_y = base_y + check_point.y
+		if is_inverted:
+			out_line.append(Vector2i(res_y, res_x))
+		else:
+			out_line.append(Vector2i(res_x, res_y))
+	print("Inverted: %s | Xmirror: %s | YMirror: %s" % [is_inverted, is_y_mirrored, is_x_mirrored])
+	
+	return out_line
+	
+static func round(val:float)->int:
+	var floor:int = floori(val)
+	if val - float(floor) > 0.5:
+		return floor + 1
+	return floor
+	
+#static func _safe_calc_y(m:float, x:int, b:int)->int:
+	#var is_neg = m < 0
+	#var res:int = 0
+	#if m > 1:
+		#var y = floori(absf(m) * float(x))
+		#if is_neg: 
+			#res= b-y
+		#else: 
+			#res = y + b
+	#else:
+		#var y = floori(absf(m) * float(x)) 
+		#if is_neg: 
+			#res = b-y
+		#else: 
+			#res = y + b
+	#print("# %s : %s" % [x, res])
+	#return res

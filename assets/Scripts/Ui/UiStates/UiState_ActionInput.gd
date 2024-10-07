@@ -9,11 +9,37 @@ func _init(controler:UiStateController, args:Dictionary) -> void:
 func start_state():
 	print("Start UiState: Action Input")
 	CombatRootControl.Instance.QueInput.allow_input(true)
-	pass
-
-func update(_delta:float):
+	
+	
+	#var action:BaseAction = MainRootNode.action_libary.get_action('SpawnTotem')
+	#var targ = action.TargetParams['SpawnSpot']
+	#CombatRootControl.Instance.MapController.target_area_display \
+		#.set_target_parameters(MapPos.new(5,5), targ)
+	
 	pass
 
 func end_state():
 	CombatRootControl.Instance.QueInput.allow_input(false)
 	pass
+
+
+
+
+#var last_spot
+#var last_last_spot
+#var target_display_key
+#func handle_input(event):
+	#if event is InputEventMouseMotion:
+		#last_spot = CombatRootControl.Instance.GridCursor.current_spot
+#
+#func update(_delta:float):
+	#if last_spot != last_last_spot:
+		#if target_display_key:
+			#CombatRootControl.Instance.MapController.target_area_display.clear_display(target_display_key)
+		##var action:BaseAction = MainRootNode.action_libary.get_action('SpawnTotem')
+		##var targ = action.TargetParams['SpawnSpot']
+		#var pos =CombatRootControl.Instance.QueDisplay._actor.Que.get_movement_preview_pos()
+		#var data = TargetParameters.trace_los(pos, last_spot, CombatRootControl.Instance.GameState.MapState)
+		#target_display_key = CombatRootControl.Instance.MapController.target_area_display.set_target_area(data)
+		#last_last_spot = last_spot
+	#pass
