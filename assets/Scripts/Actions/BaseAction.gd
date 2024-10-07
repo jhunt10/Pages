@@ -47,9 +47,10 @@ func _init(file_load_path:String, args:Dictionary) -> void:
 	if args.has('TargetParams'):
 		if args['TargetParams'] is Array:
 			for tparm in args['TargetParams']:
-				TargetParams[tparm['TargetKey']] = TargetParameters.new(tparm)
+				TargetParams[tparm['TargetKey']] = TargetParameters.new(tparm['TargetKey'], tparm)
 		if args['TargetParams'] is Dictionary:
-			TargetParams = args['TargetParams'] 
+			for tparm_key in args['TargetParams'].keys():
+				TargetParams[tparm_key] = TargetParameters.new(tparm_key, args['TargetParams'][tparm_key])
 		
 	# Load SubAction Data, missing indexes are left null
 	# The ActionQueController will create the subaction on demand

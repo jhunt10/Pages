@@ -18,9 +18,14 @@ func set_target_parameters(pos:MapPos, target_params:TargetParameters)->String:
 	if current_view_key != '':
 		printerr("New TargetArea given to display before clearing")
 	_target_params = target_params
+	var target_area = _target_params.get_valid_target_area(pos, true)
+	return set_target_area(target_area)
+	
+func set_target_area(target_area:Array):
+	if current_view_key != '':
+		printerr("New TargetArea given to display before clearing")
 	target_area_tile_map.clear()
 	self.visible = true
-	var target_area = _target_params.target_area.to_map_spots(pos)
 	target_area_tile_map.set_cells_terrain_connect(target_area,0,0)
 	current_view_key = str(ResourceUID.create_id())
 	return current_view_key

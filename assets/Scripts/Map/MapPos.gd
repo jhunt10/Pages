@@ -1,5 +1,8 @@
 class_name MapPos
 
+static func Vector2i(vec:Vector2i)->MapPos:
+	return MapPos.new(vec.x, vec.y, 0, 0)
+	
 static func Vector3i(vec:Vector3i)->MapPos:
 	return MapPos.new(vec.x, vec.y, vec.z, 0)
 	
@@ -18,7 +21,7 @@ var y:int
 var z:int
 var dir:int
 
-func _init(x:int, y:int, z:int, dir:int=0) -> void:
+func _init(x:int, y:int, z:int=0, dir:int=0) -> void:
 	self.x = x
 	self.y = y
 	self.z = z

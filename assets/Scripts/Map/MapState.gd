@@ -93,3 +93,9 @@ func add_zone(zone:BaseZone):
 		var spot = get_map_spot(p)
 		spot.add_zone(zone)
 	zone.on_create(self)
+
+func spot_blocks_los(pos:MapPos)->bool:
+	var spot = get_map_spot(pos)
+	if not spot:
+		return false
+	return spot.terrain_index > 0
