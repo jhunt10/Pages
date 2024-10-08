@@ -54,7 +54,8 @@ func save_page_data()->Dictionary:
 		for sub:SubActionEntryControl in subaction_entries:
 			if sub.index_input.value == index:
 				list.append(sub.save_page_data())
-		dict[str(index)] = list
+		if list.size() > 0:
+			dict[str(index)] = list
 	return dict
 	
 func order_sub_actions():

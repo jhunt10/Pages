@@ -4,11 +4,12 @@ extends Control
 static var Instance:PageEditControl 
 
 @onready var file_edit_control:PageFileEditControl = $VBoxContainer/TopBarContainer/PageFileEditControl
-@onready var sprite_edit_control:PageSpriteEditControl =$VBoxContainer/HBoxContainer/MiddleVBoxContainer/PageSpriteEditControl 
+@onready var sprite_edit_control:PageSpriteEditControl = $VBoxContainer/HBoxContainer/RightBoxContainer/PageSpriteEditControl
 @onready var texts_input_control:PageTextsInputControl = $VBoxContainer/HBoxContainer/LeftVBoxContainer/PageTextsInputsControl
-@onready var damage_data_control:DamageEditControl = $VBoxContainer/HBoxContainer/RightBoxContainer/DamageEditControl
-@onready var range_edit_control:RangeMakerControl = $VBoxContainer/HBoxContainer/RightBoxContainer/RangeMaker
+@onready var damage_data_control:DamageEditControl = $VBoxContainer/HBoxContainer/RightBoxContainer/TabContainer/Damage
+@onready var range_edit_control:RangeMakerControl = $VBoxContainer/HBoxContainer/RightBoxContainer/TabContainer/Targeting
 @onready var subaction_edit_control:SubActionsEditControl = $VBoxContainer/HBoxContainer/MiddleVBoxContainer/SubActionsEditControl
+@onready var cost_edit_control:CostEditControl = $VBoxContainer/HBoxContainer/MiddleVBoxContainer/CostEditControl
 
 @onready var popup_message_box:PopUpWarningControl = $PopupWarningControl
 @onready var file_option_button:LoadedOptionButton = $VBoxContainer/TopBarContainer/PageEditSelectionControl/VBoxContainer/HBoxContainer/FileOptionButton
@@ -26,6 +27,7 @@ func _ready() -> void:
 		self.queue_free()
 		return
 	Instance = self
+	file_edit_control.parent_edit_control = self
 	file_option_button.get_options_func = get_file_options
 	page_option_button.get_options_func = get_page_options
 	file_option_button.item_selected.connect(on_file_option_selected)
@@ -43,8 +45,13 @@ func _input(event: InputEvent) -> void:
 		file_edit_control.lose_focus_if_has()
 		subaction_edit_control.lose_focus_if_has()
 	if event is InputEventKey and (event as InputEventKey).keycode == KEY_ESCAPE:
+		exit_menu()
+		
+func exit_menu():
 		Instance = null
 		self.queue_free()
+		MainRootNode.action_libary.reload_pages()
+	
 
 func get_damage_datas()->Dictionary:
 	return damage_data_control.damage_datas
@@ -59,6 +66,7 @@ func load_page(action_data:Dictionary):
 	texts_input_control.load_page_data(action_data)
 	subaction_edit_control.load_page_data(action_data)
 	sprite_edit_control.load_page_data(action_data)
+	cost_edit_control.load_page_data(action_data)
 
 func load_action_options_from_file(file_path):
 	if selected_file == file_path:
@@ -100,6 +108,7 @@ func save_page_data(force_overide:bool=false):
 	new_page_data['DamageDatas'] = damage_data_control.save_page_data()
 	new_page_data['TargetParams'] = range_edit_control.save_page_data()
 	new_page_data['SubActions'] = subaction_edit_control.save_page_data()
+	new_page_data['CostData'] = cost_edit_control.save_page_data()
 	
 	var existing_data = {}
 	var file_exists = false

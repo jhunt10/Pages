@@ -26,6 +26,12 @@ func load_pages():
 	print("### Done Loading Actions")
 	loaded = true
 	
+func reload_pages():
+	_action_list.clear()
+	loaded_sprites.clear()
+	loaded = false
+	load_pages()
+	
 # Get a static instance of the action
 func get_action(key:String)->BaseAction:
 	if !loaded:

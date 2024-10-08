@@ -9,6 +9,7 @@ signal file_changed
 
 var _last_file_name:String
 var _last_file_path:String
+var parent_edit_control
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -63,4 +64,5 @@ func on_load():
 		var actions = ActionLibary.parse_actions_from_file(full_file_path)
 		
 func on_save():
-	PageEditControl.Instance.save_page_data()
+	if parent_edit_control:
+		parent_edit_control.save_page_data()

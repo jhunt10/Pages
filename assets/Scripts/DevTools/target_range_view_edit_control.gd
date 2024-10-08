@@ -29,9 +29,12 @@ func _process(delta: float) -> void:
 	pass
 
 func _input(event: InputEvent) -> void:
+	if not self.is_visible_in_tree():
+		return
 	if event is InputEventMouseButton and (event as InputEventMouseButton).pressed:
 		var m_event = event as InputEventMouseButton
 		var grid_window_rect: Rect2 = Rect2(self.global_position, self.size)
+		#print("Event: Rect: %s | spot: %s" % [grid_window_rect, m_event.global_position])
 		if grid_window_rect.has_point(m_event.global_position):
 			var spot = grid_tile_layer.local_to_map(grid_tile_layer.get_local_mouse_position())
 			#print("Clicked Spot: " + str(spot) + " Index: " + str(m_event.button_index))
@@ -50,7 +53,7 @@ func _input(event: InputEvent) -> void:
 		mouse_pressed = false
 
 func _flip_spot(cur_spot):
-	#print("Flip Spot: " + str(cur_spot))
+	printerr("Flip Spot: " + str(cur_spot))
 	if adding: 
 		selected_spots.append(cur_spot)
 	else:

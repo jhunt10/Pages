@@ -4,7 +4,7 @@ extends Control
 @onready var label:Label = $VBoxContainer/Label
 @onready var option_button:LoadedOptionButton = $VBoxContainer/LoadedOptionButton
 @onready var line_edit:LineEdit = $VBoxContainer/LineEdit
-@onready var move_value_container = $VBoxContainer/MoveValueContainer
+@onready var move_value_container:MoveInputContainer = $VBoxContainer/MoveInputContainer
 
 var _prop_type:BaseSubAction.SubActionPropType
 
@@ -31,11 +31,7 @@ func get_prop_value():
 	elif _prop_type == BaseSubAction.SubActionPropType.DamageKey:
 		return option_button.get_current_option_text()
 	elif _prop_type == BaseSubAction.SubActionPropType.MoveValue:
-		move_value_container.visible = true
-		var arr = []
-		for n in range(4):
-			arr.append((move_value_container.get_child(n) as SpinBox).value)
-		return arr
+		return move_value_container.get_val()
 	elif _prop_type == BaseSubAction.SubActionPropType.StringVal:
 		return line_edit.text
 	return null
@@ -43,13 +39,7 @@ func get_prop_value():
 	
 func lose_focus_if_has():
 	if move_value_container.visible:
-		for child:SpinBox in move_value_container.get_children():
-			if child.has_focus():
-				child.release_focus()
-			var line_edit = child.get_line_edit()
-			if line_edit.has_focus():
-				child.apply()
-				line_edit.release_focus()
+		move_value_container.lose_focus_if_has()
 	
 func set_prop(prop_name:String, prop_type:BaseSubAction.SubActionPropType, prop_value, is_unknown:bool):
 	option_button.visible = false
@@ -63,8 +53,12 @@ func set_prop(prop_name:String, prop_type:BaseSubAction.SubActionPropType, prop_
 	if prop_type == BaseSubAction.SubActionPropType.TargetKey:
 		option_button.visible = true
 		option_button.get_options_func = get_target_options
+		option_button.no_option_text = "Self"
+		option_button.allways_show_none = true
 		if prop_value is String and prop_value != '':
 			option_button.load_options(prop_value)
+		else:
+			option_button.load_options()
 	elif prop_type == BaseSubAction.SubActionPropType.DamageKey:
 		option_button.visible = true
 		option_button.get_options_func = get_damage_options
@@ -72,14 +66,7 @@ func set_prop(prop_name:String, prop_type:BaseSubAction.SubActionPropType, prop_
 			option_button.load_options(prop_value)
 	elif prop_type == BaseSubAction.SubActionPropType.MoveValue:
 		move_value_container.visible = true
-		if prop_value is Array and prop_value.size() >= 1:
-			(move_value_container.get_child(0) as SpinBox).set_value_no_signal(prop_value[0])
-		if prop_value is Array and prop_value.size() >= 2:
-			(move_value_container.get_child(1) as SpinBox).set_value_no_signal(prop_value[1])
-		if prop_value is Array and prop_value.size() >= 3:
-			(move_value_container.get_child(2) as SpinBox).set_value_no_signal(prop_value[2])
-		if prop_value is Array and prop_value.size() >= 4:
-			(move_value_container.get_child(3) as SpinBox).set_value_no_signal(prop_value[3])
+		move_value_container.set_value(prop_value)
 	elif prop_type == BaseSubAction.SubActionPropType.StringVal:
 		line_edit.visible = true
 		if prop_value:

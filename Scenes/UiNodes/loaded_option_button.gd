@@ -28,21 +28,22 @@ func load_options(force_option:String=''):
 	self.clear()
 	var selected_index = -1
 	
+			
 	if not get_options_func:
 		self.add_item("No Load Func")
 		self.select(0)
+		self.disabled = true
 		return
 		
+	if allways_show_none:
+		self.add_item(no_option_text)
+		selected_index = 0
+		
 	var options = get_options_func.call()
-	if options.size() != 0:
-		if allways_show_none:
-			self.add_item(no_option_text)
+	if options.size() > 0:
 		for option in options:
 			self.add_item(option)
 			if option == current_option:
 				selected_index = self.item_count - 1
-	else:
-		self.add_item(no_option_text)
-		selected_index = 0
 	self.select(selected_index)
 	

@@ -70,7 +70,11 @@ func _init(file_load_path:String, args:Dictionary) -> void:
 	if args.has("PreviewTargetKey"):
 		PreviewTargetKey = args["PreviewTargetKey"]
 	if args.has("PreviewMoveOffset"):
-		var pre_move_arr = args["PreviewMoveOffset"]
+		var pre_move_arr = []
+		if args['PreviewMoveOffset'] is Array:
+			pre_move_arr = args["PreviewMoveOffset"]
+		if args['PreviewMoveOffset'] is String:
+			pre_move_arr = JSON.parse_string(args['PreviewMoveOffset'])
 		PreviewMoveOffset = MapPos.new(pre_move_arr[0],pre_move_arr[1],pre_move_arr[2],pre_move_arr[3])
 			
 func  get_small_sprite()->Texture2D:

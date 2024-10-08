@@ -1,11 +1,11 @@
-[gd_scene load_steps=28 format=4 uid="uid://ilbr2axm1jit"]
+[gd_scene load_steps=31 format=4 uid="uid://ilbr2axm1jit"]
 
-[ext_resource type="Script" path="res://assets/Scripts/DevTools/page_editor_control.gd" id="1_rhemy"]
+[ext_resource type="Script" path="res://assets/Scripts/DevTools/PageEditor/page_editor_control.gd" id="1_rhemy"]
 [ext_resource type="Texture2D" uid="uid://io35wpu802fp" path="res://assets/Sprites/UI/background_64x64_12.png" id="2_igq78"]
-[ext_resource type="Script" path="res://assets/Scripts/DevTools/page_texts_input_container.gd" id="3_1uett"]
-[ext_resource type="Script" path="res://assets/Scripts/DevTools/PageFileEditControl.gd" id="3_mep14"]
+[ext_resource type="Script" path="res://assets/Scripts/DevTools/PageEditor/page_texts_input_container.gd" id="3_1uett"]
+[ext_resource type="Script" path="res://assets/Scripts/DevTools/PageEditor/PageFileEditControl.gd" id="3_mep14"]
 [ext_resource type="Script" path="res://assets/Scripts/DevTools/tags_list_container.gd" id="4_37jfj"]
-[ext_resource type="Script" path="res://assets/Scripts/DevTools/page_sprite_edit_control.gd" id="4_sl04l"]
+[ext_resource type="Script" path="res://assets/Scripts/DevTools/PageEditor/page_sprite_edit_control.gd" id="4_sl04l"]
 [ext_resource type="Texture2D" uid="uid://cu00gc8hhk0h3" path="res://assets/Sprites/UI/QueInputDisplay/page_slot.png" id="5_vv348"]
 [ext_resource type="Texture2D" uid="uid://dpld1weadi4rr" path="res://assets/Sprites/UI/DevTools/AddTagButton.png" id="5_y8bp0"]
 [ext_resource type="Texture2D" uid="uid://cwsvq3qu6228n" path="res://assets/Sprites/UI/QueInputDisplay/page_button.png" id="6_65i0v"]
@@ -14,16 +14,19 @@
 [ext_resource type="Script" path="res://Scenes/UiNodes/loaded_option_button.gd" id="7_gwuq7"]
 [ext_resource type="Texture2D" uid="uid://bkps664mkkmfn" path="res://assets/Sprites/UI/DevTools/small_x.png" id="8_y0kqo"]
 [ext_resource type="Script" path="res://assets/Scripts/DevTools/self_scale_line_edit.gd" id="9_pwlyo"]
-[ext_resource type="Script" path="res://assets/Scripts/DevTools/damage_data_edit_control.gd" id="10_7ihxm"]
-[ext_resource type="Script" path="res://assets/Scripts/DevTools/sub_actions_edit_control.gd" id="11_kmwhd"]
-[ext_resource type="Script" path="res://assets/Scripts/DevTools/sub_action_entry_control.gd" id="12_5vmw0"]
+[ext_resource type="Script" path="res://assets/Scripts/DevTools/PageEditor/damage_data_edit_control.gd" id="10_7ihxm"]
+[ext_resource type="Script" path="res://assets/Scripts/DevTools/PageEditor/sub_actions_edit_control.gd" id="11_kmwhd"]
+[ext_resource type="Script" path="res://assets/Scripts/DevTools/PageEditor/sub_action_entry_control.gd" id="12_5vmw0"]
+[ext_resource type="Script" path="res://assets/Scripts/DevTools/PageEditor/cost_edit_control.gd" id="12_hv1sg"]
+[ext_resource type="Script" path="res://assets/Scripts/DevTools/PageEditor/cost_edit_entry_control.gd" id="13_4al26"]
 [ext_resource type="Script" path="res://assets/Scripts/DevTools/range_maker_control.gd" id="13_5sl0v"]
 [ext_resource type="Script" path="res://assets/Scripts/DevTools/target_range_view_edit_control.gd" id="14_27p5v"]
 [ext_resource type="Texture2D" uid="uid://b5hwdm5jyjhqo" path="res://assets/Sprites/UI/DevTools/SmallAreaTiles.png" id="15_6s6hh"]
 [ext_resource type="Texture2D" uid="uid://dgfxtmtdjfgey" path="res://assets/Sprites/UI/QuePathArrow.png" id="16_uq258"]
 [ext_resource type="Theme" uid="uid://c1ayl4757lx1v" path="res://assets/Themes/small_spinner.tres" id="18_byx1h"]
-[ext_resource type="Script" path="res://assets/Scripts/DevTools/sub_action_property_control.gd" id="18_v63g5"]
-[ext_resource type="Script" path="res://assets/Scripts/DevTools/popup_warning_control.gd" id="22_4x6ki"]
+[ext_resource type="Script" path="res://assets/Scripts/DevTools/PageEditor/move_input_container.gd" id="18_rwend"]
+[ext_resource type="Script" path="res://assets/Scripts/DevTools/PageEditor/sub_action_property_control.gd" id="18_v63g5"]
+[ext_resource type="Script" path="res://assets/Scripts/DevTools/PageEditor/popup_warning_control.gd" id="22_4x6ki"]
 [ext_resource type="Texture2D" uid="uid://cbmrq53kary3x" path="res://assets/Sprites/UI/DevTools/PopUpButton.png" id="23_tjqsl"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_sin7f"]
@@ -534,6 +537,7 @@ text = "Save"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 3
 theme_override_constants/separation = 8
 
 [node name="LeftVBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
@@ -588,18 +592,6 @@ layout_mode = 2
 size_flags_horizontal = 3
 placeholder_text = "Display Name"
 
-[node name="SnippetContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/LeftVBoxContainer/PageTextsInputsControl/TextsInputContainer"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/LeftVBoxContainer/PageTextsInputsControl/TextsInputContainer/SnippetContainer"]
-layout_mode = 2
-text = "Snippet:"
-
-[node name="LineEdit" type="LineEdit" parent="VBoxContainer/HBoxContainer/LeftVBoxContainer/PageTextsInputsControl/TextsInputContainer/SnippetContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-placeholder_text = "Short Description"
-
 [node name="PreviewTargetContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/LeftVBoxContainer/PageTextsInputsControl/TextsInputContainer"]
 layout_mode = 2
 
@@ -611,9 +603,70 @@ text = "Preview Target:"
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 size_flags_horizontal = 3
+disabled = true
 fit_to_longest_item = false
 script = ExtResource("7_gwuq7")
 allways_show_none = true
+
+[node name="PrevTargetCheckBox" type="CheckBox" parent="VBoxContainer/HBoxContainer/LeftVBoxContainer/PageTextsInputsControl/TextsInputContainer/PreviewTargetContainer"]
+layout_mode = 2
+
+[node name="PreviewMoveContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/LeftVBoxContainer/PageTextsInputsControl/TextsInputContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/LeftVBoxContainer/PageTextsInputsControl/TextsInputContainer/PreviewMoveContainer"]
+layout_mode = 2
+text = "Preview Move:"
+
+[node name="MoveInputContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/LeftVBoxContainer/PageTextsInputsControl/TextsInputContainer/PreviewMoveContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 2
+script = ExtResource("18_rwend")
+start_disabled = true
+
+[node name="XInput" type="SpinBox" parent="VBoxContainer/HBoxContainer/LeftVBoxContainer/PageTextsInputsControl/TextsInputContainer/PreviewMoveContainer/MoveInputContainer"]
+layout_mode = 2
+theme = ExtResource("18_byx1h")
+min_value = -100.0
+editable = false
+
+[node name="YInput" type="SpinBox" parent="VBoxContainer/HBoxContainer/LeftVBoxContainer/PageTextsInputsControl/TextsInputContainer/PreviewMoveContainer/MoveInputContainer"]
+layout_mode = 2
+theme = ExtResource("18_byx1h")
+min_value = -100.0
+editable = false
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/LeftVBoxContainer/PageTextsInputsControl/TextsInputContainer/PreviewMoveContainer/MoveInputContainer"]
+layout_mode = 2
+text = "R:"
+
+[node name="RotInput" type="OptionButton" parent="VBoxContainer/HBoxContainer/LeftVBoxContainer/PageTextsInputsControl/TextsInputContainer/PreviewMoveContainer/MoveInputContainer"]
+layout_mode = 2
+disabled = true
+item_count = 4
+popup/item_0/text = "None"
+popup/item_1/text = "Right"
+popup/item_1/id = 1
+popup/item_2/text = "180°"
+popup/item_2/id = 2
+popup/item_3/text = "Left"
+popup/item_3/id = 3
+
+[node name="PrevMoveCheckBox" type="CheckBox" parent="VBoxContainer/HBoxContainer/LeftVBoxContainer/PageTextsInputsControl/TextsInputContainer/PreviewMoveContainer"]
+layout_mode = 2
+
+[node name="SnippetContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/LeftVBoxContainer/PageTextsInputsControl/TextsInputContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/LeftVBoxContainer/PageTextsInputsControl/TextsInputContainer/SnippetContainer"]
+layout_mode = 2
+text = "Snippet:"
+
+[node name="LineEdit" type="LineEdit" parent="VBoxContainer/HBoxContainer/LeftVBoxContainer/PageTextsInputsControl/TextsInputContainer/SnippetContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Short Description"
 
 [node name="DescriptionContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/LeftVBoxContainer/PageTextsInputsControl/TextsInputContainer"]
 layout_mode = 2
@@ -689,13 +742,13 @@ scroll_fit_content_height = true
 custom_minimum_size = Vector2(360, 0)
 layout_mode = 2
 
-[node name="PageSpriteEditControl" type="Control" parent="VBoxContainer/HBoxContainer/MiddleVBoxContainer"]
-custom_minimum_size = Vector2(360, 84)
+[node name="CostEditControl" type="Control" parent="VBoxContainer/HBoxContainer/MiddleVBoxContainer"]
+custom_minimum_size = Vector2(0, 88)
 layout_mode = 2
-script = ExtResource("4_sl04l")
+script = ExtResource("12_hv1sg")
 
-[node name="Background" type="NinePatchRect" parent="VBoxContainer/HBoxContainer/MiddleVBoxContainer/PageSpriteEditControl"]
-self_modulate = Color(0.796078, 0.796078, 0.796078, 1)
+[node name="Background" type="NinePatchRect" parent="VBoxContainer/HBoxContainer/MiddleVBoxContainer/CostEditControl"]
+self_modulate = Color(0.796243, 0.796243, 0.796243, 1)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -708,7 +761,7 @@ patch_margin_top = 12
 patch_margin_right = 12
 patch_margin_bottom = 12
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/MiddleVBoxContainer/PageSpriteEditControl"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/MiddleVBoxContainer/CostEditControl"]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -719,78 +772,49 @@ offset_right = -8.0
 offset_bottom = -8.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/MiddleVBoxContainer/CostEditControl/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/MiddleVBoxContainer/CostEditControl/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 22
+text = "Cost:"
+
+[node name="Button" type="Button" parent="VBoxContainer/HBoxContainer/MiddleVBoxContainer/CostEditControl/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Add"
+
+[node name="CostEditEntryControl" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/MiddleVBoxContainer/CostEditControl/VBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(160, 32)
+layout_mode = 2
+size_flags_horizontal = 0
+script = ExtResource("13_4al26")
+
+[node name="Button" type="Button" parent="VBoxContainer/HBoxContainer/MiddleVBoxContainer/CostEditControl/VBoxContainer/CostEditEntryControl"]
+layout_mode = 2
+text = "X"
+
+[node name="LineEdit" type="LineEdit" parent="VBoxContainer/HBoxContainer/MiddleVBoxContainer/CostEditControl/VBoxContainer/CostEditEntryControl"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SpinBox" type="SpinBox" parent="VBoxContainer/HBoxContainer/MiddleVBoxContainer/CostEditControl/VBoxContainer/CostEditEntryControl"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+theme = ExtResource("18_byx1h")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/HBoxContainer/MiddleVBoxContainer/CostEditControl/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="FlowContainer" type="FlowContainer" parent="VBoxContainer/HBoxContainer/MiddleVBoxContainer/CostEditControl/VBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
 alignment = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/MiddleVBoxContainer/PageSpriteEditControl/HBoxContainer"]
-layout_mode = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/MiddleVBoxContainer/PageSpriteEditControl/HBoxContainer/HBoxContainer"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/MiddleVBoxContainer/PageSpriteEditControl/HBoxContainer/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-text = "Icon:"
-
-[node name="SmallSpriteBackground" type="TextureRect" parent="VBoxContainer/HBoxContainer/MiddleVBoxContainer/PageSpriteEditControl/HBoxContainer/HBoxContainer/VBoxContainer"]
-custom_minimum_size = Vector2(32, 32)
-layout_mode = 2
-texture = ExtResource("5_vv348")
-stretch_mode = 3
-
-[node name="SmallSpriteDisplay" type="TextureRect" parent="VBoxContainer/HBoxContainer/MiddleVBoxContainer/PageSpriteEditControl/HBoxContainer/HBoxContainer/VBoxContainer/SmallSpriteBackground"]
-custom_minimum_size = Vector2(32, 32)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-stretch_mode = 3
-
-[node name="LargeSpriteBackground" type="TextureRect" parent="VBoxContainer/HBoxContainer/MiddleVBoxContainer/PageSpriteEditControl/HBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 2
-texture = ExtResource("6_65i0v")
-stretch_mode = 5
-
-[node name="LargeSpriteDisplay" type="TextureRect" parent="VBoxContainer/HBoxContainer/MiddleVBoxContainer/PageSpriteEditControl/HBoxContainer/HBoxContainer/LargeSpriteBackground"]
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/MiddleVBoxContainer/PageSpriteEditControl/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/MiddleVBoxContainer/PageSpriteEditControl/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/MiddleVBoxContainer/PageSpriteEditControl/HBoxContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-text = "Large:"
-
-[node name="LoadedOptionButton" type="OptionButton" parent="VBoxContainer/HBoxContainer/MiddleVBoxContainer/PageSpriteEditControl/HBoxContainer/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(0, 32)
-layout_mode = 2
-size_flags_horizontal = 3
-script = ExtResource("7_gwuq7")
-
-[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/MiddleVBoxContainer/PageSpriteEditControl/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/MiddleVBoxContainer/PageSpriteEditControl/HBoxContainer/VBoxContainer/HBoxContainer2"]
-layout_mode = 2
-text = "Small:"
-
-[node name="LoadedOptionButton" type="OptionButton" parent="VBoxContainer/HBoxContainer/MiddleVBoxContainer/PageSpriteEditControl/HBoxContainer/VBoxContainer/HBoxContainer2"]
-custom_minimum_size = Vector2(0, 32)
-layout_mode = 2
-size_flags_horizontal = 3
-script = ExtResource("7_gwuq7")
 
 [node name="SubActionsEditControl" type="Control" parent="VBoxContainer/HBoxContainer/MiddleVBoxContainer"]
 custom_minimum_size = Vector2(360, 360)
@@ -933,39 +957,48 @@ custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="MoveValueContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/MiddleVBoxContainer/SubActionsEditControl/VBoxContainer/ScrollContainer/VBoxContainer/SubActionEntry/VBoxContainer/PropsContainer/SubActionPropertyControl/VBoxContainer"]
+[node name="MoveInputContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/MiddleVBoxContainer/SubActionsEditControl/VBoxContainer/ScrollContainer/VBoxContainer/SubActionEntry/VBoxContainer/PropsContainer/SubActionPropertyControl/VBoxContainer"]
 visible = false
 layout_mode = 2
+size_flags_horizontal = 3
+alignment = 2
+script = ExtResource("18_rwend")
 
-[node name="SpinBox" type="SpinBox" parent="VBoxContainer/HBoxContainer/MiddleVBoxContainer/SubActionsEditControl/VBoxContainer/ScrollContainer/VBoxContainer/SubActionEntry/VBoxContainer/PropsContainer/SubActionPropertyControl/VBoxContainer/MoveValueContainer"]
+[node name="XInput" type="SpinBox" parent="VBoxContainer/HBoxContainer/MiddleVBoxContainer/SubActionsEditControl/VBoxContainer/ScrollContainer/VBoxContainer/SubActionEntry/VBoxContainer/PropsContainer/SubActionPropertyControl/VBoxContainer/MoveInputContainer"]
 layout_mode = 2
 theme = ExtResource("18_byx1h")
 min_value = -100.0
 
-[node name="SpinBox2" type="SpinBox" parent="VBoxContainer/HBoxContainer/MiddleVBoxContainer/SubActionsEditControl/VBoxContainer/ScrollContainer/VBoxContainer/SubActionEntry/VBoxContainer/PropsContainer/SubActionPropertyControl/VBoxContainer/MoveValueContainer"]
+[node name="YInput" type="SpinBox" parent="VBoxContainer/HBoxContainer/MiddleVBoxContainer/SubActionsEditControl/VBoxContainer/ScrollContainer/VBoxContainer/SubActionEntry/VBoxContainer/PropsContainer/SubActionPropertyControl/VBoxContainer/MoveInputContainer"]
 layout_mode = 2
 theme = ExtResource("18_byx1h")
 min_value = -100.0
 
-[node name="SpinBox3" type="SpinBox" parent="VBoxContainer/HBoxContainer/MiddleVBoxContainer/SubActionsEditControl/VBoxContainer/ScrollContainer/VBoxContainer/SubActionEntry/VBoxContainer/PropsContainer/SubActionPropertyControl/VBoxContainer/MoveValueContainer"]
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/MiddleVBoxContainer/SubActionsEditControl/VBoxContainer/ScrollContainer/VBoxContainer/SubActionEntry/VBoxContainer/PropsContainer/SubActionPropertyControl/VBoxContainer/MoveInputContainer"]
 layout_mode = 2
-theme = ExtResource("18_byx1h")
-min_value = -100.0
+text = "R:"
 
-[node name="SpinBox4" type="SpinBox" parent="VBoxContainer/HBoxContainer/MiddleVBoxContainer/SubActionsEditControl/VBoxContainer/ScrollContainer/VBoxContainer/SubActionEntry/VBoxContainer/PropsContainer/SubActionPropertyControl/VBoxContainer/MoveValueContainer"]
+[node name="RotInput" type="OptionButton" parent="VBoxContainer/HBoxContainer/MiddleVBoxContainer/SubActionsEditControl/VBoxContainer/ScrollContainer/VBoxContainer/SubActionEntry/VBoxContainer/PropsContainer/SubActionPropertyControl/VBoxContainer/MoveInputContainer"]
 layout_mode = 2
-theme = ExtResource("18_byx1h")
-min_value = -100.0
+item_count = 4
+popup/item_0/text = "None"
+popup/item_1/text = "Right"
+popup/item_1/id = 1
+popup/item_2/text = "180°"
+popup/item_2/id = 2
+popup/item_3/text = "Left"
+popup/item_3/id = 3
 
 [node name="RightBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
 
-[node name="DamageEditControl" type="Control" parent="VBoxContainer/HBoxContainer/RightBoxContainer"]
-custom_minimum_size = Vector2(360, 168)
+[node name="PageSpriteEditControl" type="Control" parent="VBoxContainer/HBoxContainer/RightBoxContainer"]
+custom_minimum_size = Vector2(360, 84)
 layout_mode = 2
-script = ExtResource("10_7ihxm")
+script = ExtResource("4_sl04l")
 
-[node name="Background" type="NinePatchRect" parent="VBoxContainer/HBoxContainer/RightBoxContainer/DamageEditControl"]
+[node name="Background" type="NinePatchRect" parent="VBoxContainer/HBoxContainer/RightBoxContainer/PageSpriteEditControl"]
 self_modulate = Color(0.796078, 0.796078, 0.796078, 1)
 layout_mode = 1
 anchors_preset = 15
@@ -979,7 +1012,7 @@ patch_margin_top = 12
 patch_margin_right = 12
 patch_margin_bottom = 12
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/RightBoxContainer/DamageEditControl"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/RightBoxContainer/PageSpriteEditControl"]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -990,108 +1023,93 @@ offset_right = -8.0
 offset_bottom = -8.0
 grow_horizontal = 2
 grow_vertical = 2
+alignment = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/RightBoxContainer/DamageEditControl/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/RightBoxContainer/PageSpriteEditControl/HBoxContainer"]
 layout_mode = 2
 
-[node name="DamageDataTitle" type="Label" parent="VBoxContainer/HBoxContainer/RightBoxContainer/DamageEditControl/VBoxContainer/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/RightBoxContainer/PageSpriteEditControl/HBoxContainer/HBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 20
-text = "Damage"
 
-[node name="AddButton" type="Button" parent="VBoxContainer/HBoxContainer/RightBoxContainer/DamageEditControl/VBoxContainer/HBoxContainer"]
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/RightBoxContainer/PageSpriteEditControl/HBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
-text = "New"
+text = "Icon:"
 
-[node name="OptionButton" type="OptionButton" parent="VBoxContainer/HBoxContainer/RightBoxContainer/DamageEditControl/VBoxContainer/HBoxContainer"]
+[node name="SmallSpriteBackground" type="TextureRect" parent="VBoxContainer/HBoxContainer/RightBoxContainer/PageSpriteEditControl/HBoxContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
-size_flags_horizontal = 3
-selected = 0
-item_count = 1
-popup/item_0/text = "None"
-popup/item_0/disabled = true
+texture = ExtResource("5_vv348")
+stretch_mode = 3
 
-[node name="Background2" type="NinePatchRect" parent="VBoxContainer/HBoxContainer/RightBoxContainer/DamageEditControl/VBoxContainer"]
-custom_minimum_size = Vector2(0, 117)
-layout_mode = 2
-texture = ExtResource("2_igq78")
-patch_margin_left = 12
-patch_margin_top = 12
-patch_margin_right = 12
-patch_margin_bottom = 12
-
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/RightBoxContainer/DamageEditControl/VBoxContainer/Background2"]
+[node name="SmallSpriteDisplay" type="TextureRect" parent="VBoxContainer/HBoxContainer/RightBoxContainer/PageSpriteEditControl/HBoxContainer/HBoxContainer/VBoxContainer/SmallSpriteBackground"]
+custom_minimum_size = Vector2(32, 32)
 layout_mode = 1
-anchors_preset = -1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 8.0
-offset_top = 8.0
-offset_right = -8.0
-offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 3
+
+[node name="LargeSpriteBackground" type="TextureRect" parent="VBoxContainer/HBoxContainer/RightBoxContainer/PageSpriteEditControl/HBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("6_65i0v")
+stretch_mode = 5
+
+[node name="LargeSpriteDisplay" type="TextureRect" parent="VBoxContainer/HBoxContainer/RightBoxContainer/PageSpriteEditControl/HBoxContainer/HBoxContainer/LargeSpriteBackground"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="DamageKeyInputContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/RightBoxContainer/DamageEditControl/VBoxContainer/Background2/VBoxContainer"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/RightBoxContainer/DamageEditControl/VBoxContainer/Background2/VBoxContainer/DamageKeyInputContainer"]
-layout_mode = 2
-text = "DamageKey: "
-
-[node name="DamageKeyInput" type="LineEdit" parent="VBoxContainer/HBoxContainer/RightBoxContainer/DamageEditControl/VBoxContainer/Background2/VBoxContainer/DamageKeyInputContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/RightBoxContainer/PageSpriteEditControl/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-placeholder_text = "Unique Key"
 
-[node name="DamageKeyInputContainer2" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/RightBoxContainer/DamageEditControl/VBoxContainer/Background2/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/RightBoxContainer/PageSpriteEditControl/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/RightBoxContainer/DamageEditControl/VBoxContainer/Background2/VBoxContainer/DamageKeyInputContainer2"]
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/RightBoxContainer/PageSpriteEditControl/HBoxContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
-text = "Base: "
+text = "Large:"
 
-[node name="SpinBox" type="SpinBox" parent="VBoxContainer/HBoxContainer/RightBoxContainer/DamageEditControl/VBoxContainer/Background2/VBoxContainer/DamageKeyInputContainer2"]
-layout_mode = 2
-update_on_text_changed = true
-
-[node name="Label2" type="Label" parent="VBoxContainer/HBoxContainer/RightBoxContainer/DamageEditControl/VBoxContainer/Background2/VBoxContainer/DamageKeyInputContainer2"]
-layout_mode = 2
-text = "Type:"
-
-[node name="DamageTypeEdit" type="LineEdit" parent="VBoxContainer/HBoxContainer/RightBoxContainer/DamageEditControl/VBoxContainer/Background2/VBoxContainer/DamageKeyInputContainer2"]
+[node name="LoadedOptionButton" type="OptionButton" parent="VBoxContainer/HBoxContainer/RightBoxContainer/PageSpriteEditControl/HBoxContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 size_flags_horizontal = 3
-placeholder_text = "Damage Type"
+script = ExtResource("7_gwuq7")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/RightBoxContainer/DamageEditControl/VBoxContainer/Background2/VBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/RightBoxContainer/PageSpriteEditControl/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/RightBoxContainer/DamageEditControl/VBoxContainer/Background2/VBoxContainer/HBoxContainer"]
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/RightBoxContainer/PageSpriteEditControl/HBoxContainer/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
-text = "Atk:"
+text = "Small:"
 
-[node name="AttackStatEdit" type="LineEdit" parent="VBoxContainer/HBoxContainer/RightBoxContainer/DamageEditControl/VBoxContainer/Background2/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-placeholder_text = "Attack Stat"
-
-[node name="Label2" type="Label" parent="VBoxContainer/HBoxContainer/RightBoxContainer/DamageEditControl/VBoxContainer/Background2/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-text = "Def:"
-
-[node name="DefenseStatEdit" type="LineEdit" parent="VBoxContainer/HBoxContainer/RightBoxContainer/DamageEditControl/VBoxContainer/Background2/VBoxContainer/HBoxContainer"]
+[node name="LoadedOptionButton" type="OptionButton" parent="VBoxContainer/HBoxContainer/RightBoxContainer/PageSpriteEditControl/HBoxContainer/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 size_flags_horizontal = 3
-placeholder_text = "Defense Stat"
+script = ExtResource("7_gwuq7")
 
-[node name="RangeMaker" type="Control" parent="VBoxContainer/HBoxContainer/RightBoxContainer"]
-custom_minimum_size = Vector2(272, 374)
+[node name="TabContainer" type="TabContainer" parent="VBoxContainer/HBoxContainer/RightBoxContainer"]
 layout_mode = 2
-size_flags_vertical = 0
-script = ExtResource("13_5sl0v")
+size_flags_vertical = 3
+current_tab = 1
 
-[node name="NinePatchRect" type="NinePatchRect" parent="VBoxContainer/HBoxContainer/RightBoxContainer/RangeMaker"]
+[node name="Damage" type="Control" parent="VBoxContainer/HBoxContainer/RightBoxContainer/TabContainer"]
+visible = false
+custom_minimum_size = Vector2(360, 168)
+layout_mode = 2
+script = ExtResource("10_7ihxm")
+metadata/_tab_index = 0
+
+[node name="Background" type="NinePatchRect" parent="VBoxContainer/HBoxContainer/RightBoxContainer/TabContainer/Damage"]
+self_modulate = Color(0.796078, 0.796078, 0.796078, 1)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1104,7 +1122,134 @@ patch_margin_top = 12
 patch_margin_right = 12
 patch_margin_bottom = 12
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/RightBoxContainer/RangeMaker"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/RightBoxContainer/TabContainer/Damage"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/RightBoxContainer/TabContainer/Damage/VBoxContainer"]
+layout_mode = 2
+
+[node name="DamageDataTitle" type="Label" parent="VBoxContainer/HBoxContainer/RightBoxContainer/TabContainer/Damage/VBoxContainer/HBoxContainer"]
+visible = false
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Damage"
+
+[node name="OptionButton" type="OptionButton" parent="VBoxContainer/HBoxContainer/RightBoxContainer/TabContainer/Damage/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+selected = 0
+item_count = 1
+popup/item_0/text = "None"
+popup/item_0/disabled = true
+
+[node name="AddButton" type="Button" parent="VBoxContainer/HBoxContainer/RightBoxContainer/TabContainer/Damage/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "New"
+
+[node name="Background2" type="NinePatchRect" parent="VBoxContainer/HBoxContainer/RightBoxContainer/TabContainer/Damage/VBoxContainer"]
+custom_minimum_size = Vector2(0, 117)
+layout_mode = 2
+texture = ExtResource("2_igq78")
+patch_margin_left = 12
+patch_margin_top = 12
+patch_margin_right = 12
+patch_margin_bottom = 12
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/RightBoxContainer/TabContainer/Damage/VBoxContainer/Background2"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="DamageKeyInputContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/RightBoxContainer/TabContainer/Damage/VBoxContainer/Background2/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/RightBoxContainer/TabContainer/Damage/VBoxContainer/Background2/VBoxContainer/DamageKeyInputContainer"]
+layout_mode = 2
+text = "DamageKey: "
+
+[node name="DamageKeyInput" type="LineEdit" parent="VBoxContainer/HBoxContainer/RightBoxContainer/TabContainer/Damage/VBoxContainer/Background2/VBoxContainer/DamageKeyInputContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Unique Key"
+
+[node name="DamageKeyInputContainer2" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/RightBoxContainer/TabContainer/Damage/VBoxContainer/Background2/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/RightBoxContainer/TabContainer/Damage/VBoxContainer/Background2/VBoxContainer/DamageKeyInputContainer2"]
+layout_mode = 2
+text = "Base: "
+
+[node name="SpinBox" type="SpinBox" parent="VBoxContainer/HBoxContainer/RightBoxContainer/TabContainer/Damage/VBoxContainer/Background2/VBoxContainer/DamageKeyInputContainer2"]
+layout_mode = 2
+update_on_text_changed = true
+
+[node name="Label2" type="Label" parent="VBoxContainer/HBoxContainer/RightBoxContainer/TabContainer/Damage/VBoxContainer/Background2/VBoxContainer/DamageKeyInputContainer2"]
+layout_mode = 2
+text = "Type:"
+
+[node name="DamageTypeEdit" type="LineEdit" parent="VBoxContainer/HBoxContainer/RightBoxContainer/TabContainer/Damage/VBoxContainer/Background2/VBoxContainer/DamageKeyInputContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Damage Type"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/RightBoxContainer/TabContainer/Damage/VBoxContainer/Background2/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/RightBoxContainer/TabContainer/Damage/VBoxContainer/Background2/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Atk:"
+
+[node name="AttackStatEdit" type="LineEdit" parent="VBoxContainer/HBoxContainer/RightBoxContainer/TabContainer/Damage/VBoxContainer/Background2/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Attack Stat"
+
+[node name="Label2" type="Label" parent="VBoxContainer/HBoxContainer/RightBoxContainer/TabContainer/Damage/VBoxContainer/Background2/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Def:"
+
+[node name="DefenseStatEdit" type="LineEdit" parent="VBoxContainer/HBoxContainer/RightBoxContainer/TabContainer/Damage/VBoxContainer/Background2/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Defense Stat"
+
+[node name="Targeting" type="Control" parent="VBoxContainer/HBoxContainer/RightBoxContainer/TabContainer"]
+custom_minimum_size = Vector2(272, 374)
+layout_mode = 2
+size_flags_vertical = 0
+script = ExtResource("13_5sl0v")
+metadata/_tab_index = 1
+
+[node name="NinePatchRect" type="NinePatchRect" parent="VBoxContainer/HBoxContainer/RightBoxContainer/TabContainer/Targeting"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_igq78")
+patch_margin_left = 12
+patch_margin_top = 12
+patch_margin_right = 12
+patch_margin_bottom = 12
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/RightBoxContainer/TabContainer/Targeting"]
 custom_minimum_size = Vector2(240, 0)
 layout_mode = 1
 anchors_preset = -1
@@ -1117,18 +1262,18 @@ offset_bottom = 11.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/RightBoxContainer/RangeMaker/VBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/RightBoxContainer/TabContainer/Targeting/VBoxContainer"]
 layout_mode = 2
 
-[node name="TargetingTitle" type="Label" parent="VBoxContainer/HBoxContainer/RightBoxContainer/RangeMaker/VBoxContainer/HBoxContainer2"]
+[node name="TargetingTitle" type="Label" parent="VBoxContainer/HBoxContainer/RightBoxContainer/TabContainer/Targeting/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
 text = "Target"
 
-[node name="AddButton" type="Button" parent="VBoxContainer/HBoxContainer/RightBoxContainer/RangeMaker/VBoxContainer/HBoxContainer2"]
+[node name="AddButton" type="Button" parent="VBoxContainer/HBoxContainer/RightBoxContainer/TabContainer/Targeting/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
 text = "New"
 
-[node name="OptionButton" type="OptionButton" parent="VBoxContainer/HBoxContainer/RightBoxContainer/RangeMaker/VBoxContainer/HBoxContainer2"]
+[node name="OptionButton" type="OptionButton" parent="VBoxContainer/HBoxContainer/RightBoxContainer/TabContainer/Targeting/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
 clip_text = true
@@ -1137,12 +1282,12 @@ fit_to_longest_item = false
 item_count = 1
 popup/item_0/text = "None"
 
-[node name="TargetRangeViewEditControl" type="Control" parent="VBoxContainer/HBoxContainer/RightBoxContainer/RangeMaker/VBoxContainer"]
+[node name="TargetRangeViewEditControl" type="Control" parent="VBoxContainer/HBoxContainer/RightBoxContainer/TabContainer/Targeting/VBoxContainer"]
 custom_minimum_size = Vector2(240, 240)
 layout_mode = 2
 script = ExtResource("14_27p5v")
 
-[node name="CenterContainer" type="CenterContainer" parent="VBoxContainer/HBoxContainer/RightBoxContainer/RangeMaker/VBoxContainer/TargetRangeViewEditControl"]
+[node name="CenterContainer" type="CenterContainer" parent="VBoxContainer/HBoxContainer/RightBoxContainer/TabContainer/Targeting/VBoxContainer/TargetRangeViewEditControl"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1150,75 +1295,75 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="VBoxContainer/HBoxContainer/RightBoxContainer/RangeMaker/VBoxContainer/TargetRangeViewEditControl/CenterContainer"]
+[node name="SubViewportContainer" type="SubViewportContainer" parent="VBoxContainer/HBoxContainer/RightBoxContainer/TabContainer/Targeting/VBoxContainer/TargetRangeViewEditControl/CenterContainer"]
 custom_minimum_size = Vector2(240, 240)
 layout_mode = 2
 
-[node name="SubViewport" type="SubViewport" parent="VBoxContainer/HBoxContainer/RightBoxContainer/RangeMaker/VBoxContainer/TargetRangeViewEditControl/CenterContainer/SubViewportContainer"]
+[node name="SubViewport" type="SubViewport" parent="VBoxContainer/HBoxContainer/RightBoxContainer/TabContainer/Targeting/VBoxContainer/TargetRangeViewEditControl/CenterContainer/SubViewportContainer"]
 handle_input_locally = false
 size = Vector2i(240, 240)
 render_target_update_mode = 4
 
-[node name="Node2D" type="Node2D" parent="VBoxContainer/HBoxContainer/RightBoxContainer/RangeMaker/VBoxContainer/TargetRangeViewEditControl/CenterContainer/SubViewportContainer/SubViewport"]
+[node name="Node2D" type="Node2D" parent="VBoxContainer/HBoxContainer/RightBoxContainer/TabContainer/Targeting/VBoxContainer/TargetRangeViewEditControl/CenterContainer/SubViewportContainer/SubViewport"]
 position = Vector2(112, 112)
 
-[node name="BackgroundLayer" type="TileMapLayer" parent="VBoxContainer/HBoxContainer/RightBoxContainer/RangeMaker/VBoxContainer/TargetRangeViewEditControl/CenterContainer/SubViewportContainer/SubViewport/Node2D"]
+[node name="BackgroundLayer" type="TileMapLayer" parent="VBoxContainer/HBoxContainer/RightBoxContainer/TabContainer/Targeting/VBoxContainer/TargetRangeViewEditControl/CenterContainer/SubViewportContainer/SubViewport/Node2D"]
 tile_map_data = PackedByteArray("AAD2//b/AAAKAAEAAAD2//f/AAAKAAEAAAD2//j/AAAKAAEAAAD2//n/AAAKAAEAAAD2//r/AAAKAAEAAAD2//v/AAAKAAEAAAD2//z/AAAKAAEAAAD2//3/AAAKAAEAAAD2//7/AAAKAAEAAAD2////AAAKAAEAAAD2/wAAAAAKAAEAAAD2/wEAAAAKAAEAAAD2/wIAAAAKAAEAAAD2/wMAAAAKAAEAAAD2/wQAAAAKAAEAAAD2/wUAAAAKAAEAAAD2/wYAAAAKAAEAAAD2/wcAAAAKAAEAAAD2/wgAAAAKAAEAAAD2/wkAAAAKAAEAAAD2/woAAAAKAAEAAAD2/wsAAAAKAAEAAAD3//b/AAAKAAEAAAD3//f/AAAKAAEAAAD3//j/AAAKAAEAAAD3//n/AAAKAAEAAAD3//r/AAAKAAEAAAD3//v/AAAKAAEAAAD3//z/AAAKAAEAAAD3//3/AAAKAAEAAAD3//7/AAAKAAEAAAD3////AAAKAAEAAAD3/wAAAAAKAAEAAAD3/wEAAAAKAAEAAAD3/wIAAAAKAAEAAAD3/wMAAAAKAAEAAAD3/wQAAAAKAAEAAAD3/wUAAAAKAAEAAAD3/wYAAAAKAAEAAAD3/wcAAAAKAAEAAAD3/wgAAAAKAAEAAAD3/wkAAAAKAAEAAAD3/woAAAAKAAEAAAD3/wsAAAAKAAEAAAD4//b/AAAKAAEAAAD4//f/AAAKAAEAAAD4//j/AAAKAAEAAAD4//n/AAAKAAEAAAD4//r/AAAKAAEAAAD4//v/AAAKAAEAAAD4//z/AAAKAAEAAAD4//3/AAAKAAEAAAD4//7/AAAKAAEAAAD4////AAAKAAEAAAD4/wAAAAAKAAEAAAD4/wEAAAAKAAEAAAD4/wIAAAAKAAEAAAD4/wMAAAAKAAEAAAD4/wQAAAAKAAEAAAD4/wUAAAAKAAEAAAD4/wYAAAAKAAEAAAD4/wcAAAAKAAEAAAD4/wgAAAAKAAEAAAD4/wkAAAAKAAEAAAD4/woAAAAKAAEAAAD4/wsAAAAKAAEAAAD5//b/AAAKAAEAAAD5//f/AAAKAAEAAAD5//j/AAAKAAEAAAD5//n/AAAKAAEAAAD5//r/AAAKAAEAAAD5//v/AAAKAAEAAAD5//z/AAAKAAEAAAD5//3/AAAKAAEAAAD5//7/AAAKAAEAAAD5////AAAKAAEAAAD5/wAAAAAKAAEAAAD5/wEAAAAKAAEAAAD5/wIAAAAKAAEAAAD5/wMAAAAKAAEAAAD5/wQAAAAKAAEAAAD5/wUAAAAKAAEAAAD5/wYAAAAKAAEAAAD5/wcAAAAKAAEAAAD5/wgAAAAKAAEAAAD5/wkAAAAKAAEAAAD5/woAAAAKAAEAAAD5/wsAAAAKAAEAAAD6//b/AAAKAAEAAAD6//f/AAAKAAEAAAD6//j/AAAKAAEAAAD6//n/AAAKAAEAAAD6//r/AAAKAAEAAAD6//v/AAAKAAEAAAD6//z/AAAKAAEAAAD6//3/AAAKAAEAAAD6//7/AAAKAAEAAAD6////AAAKAAEAAAD6/wAAAAAKAAEAAAD6/wEAAAAKAAEAAAD6/wIAAAAKAAEAAAD6/wMAAAAKAAEAAAD6/wQAAAAKAAEAAAD6/wUAAAAKAAEAAAD6/wYAAAAKAAEAAAD6/wcAAAAKAAEAAAD6/wgAAAAKAAEAAAD6/wkAAAAKAAEAAAD6/woAAAAKAAEAAAD6/wsAAAAKAAEAAAD7//b/AAAKAAEAAAD7//f/AAAKAAEAAAD7//j/AAAKAAEAAAD7//n/AAAKAAEAAAD7//r/AAAKAAEAAAD7//v/AAAKAAEAAAD7//z/AAAKAAEAAAD7//3/AAAKAAEAAAD7//7/AAAKAAEAAAD7////AAAKAAEAAAD7/wAAAAAKAAEAAAD7/wEAAAAKAAEAAAD7/wIAAAAKAAEAAAD7/wMAAAAKAAEAAAD7/wQAAAAKAAEAAAD7/wUAAAAKAAEAAAD7/wYAAAAKAAEAAAD7/wcAAAAKAAEAAAD7/wgAAAAKAAEAAAD7/wkAAAAKAAEAAAD7/woAAAAKAAEAAAD7/wsAAAAKAAEAAAD8//b/AAAKAAEAAAD8//f/AAAKAAEAAAD8//j/AAAKAAEAAAD8//n/AAAKAAEAAAD8//r/AAAKAAEAAAD8//v/AAAKAAEAAAD8//z/AAAKAAEAAAD8//3/AAAKAAEAAAD8//7/AAAKAAEAAAD8////AAAKAAEAAAD8/wAAAAAKAAEAAAD8/wEAAAAKAAEAAAD8/wIAAAAKAAEAAAD8/wMAAAAKAAEAAAD8/wQAAAAKAAEAAAD8/wUAAAAKAAEAAAD8/wYAAAAKAAEAAAD8/wcAAAAKAAEAAAD8/wgAAAAKAAEAAAD8/wkAAAAKAAEAAAD8/woAAAAKAAEAAAD8/wsAAAAKAAEAAAD9//b/AAAKAAEAAAD9//f/AAAKAAEAAAD9//j/AAAKAAEAAAD9//n/AAAKAAEAAAD9//r/AAAKAAEAAAD9//v/AAAKAAEAAAD9//z/AAAKAAEAAAD9//3/AAAKAAEAAAD9//7/AAAKAAEAAAD9////AAAKAAEAAAD9/wAAAAAKAAEAAAD9/wEAAAAKAAEAAAD9/wIAAAAKAAEAAAD9/wMAAAAKAAEAAAD9/wQAAAAKAAEAAAD9/wUAAAAKAAEAAAD9/wYAAAAKAAEAAAD9/wcAAAAKAAEAAAD9/wgAAAAKAAEAAAD9/wkAAAAKAAEAAAD9/woAAAAKAAEAAAD9/wsAAAAKAAEAAAD+//b/AAAKAAEAAAD+//f/AAAKAAEAAAD+//j/AAAKAAEAAAD+//n/AAAKAAEAAAD+//r/AAAKAAEAAAD+//v/AAAKAAEAAAD+//z/AAAKAAEAAAD+//3/AAAKAAEAAAD+//7/AAAKAAEAAAD+////AAAKAAEAAAD+/wAAAAAKAAEAAAD+/wEAAAAKAAEAAAD+/wIAAAAKAAEAAAD+/wMAAAAKAAEAAAD+/wQAAAAKAAEAAAD+/wUAAAAKAAEAAAD+/wYAAAAKAAEAAAD+/wcAAAAKAAEAAAD+/wgAAAAKAAEAAAD+/wkAAAAKAAEAAAD+/woAAAAKAAEAAAD+/wsAAAAKAAEAAAD///b/AAAKAAEAAAD///f/AAAKAAEAAAD///j/AAAKAAEAAAD///n/AAAKAAEAAAD///r/AAAKAAEAAAD///v/AAAKAAEAAAD///z/AAAKAAEAAAD///3/AAAKAAEAAAD///7/AAAKAAEAAAD/////AAAKAAEAAAD//wAAAAAKAAEAAAD//wEAAAAKAAEAAAD//wIAAAAKAAEAAAD//wMAAAAKAAEAAAD//wQAAAAKAAEAAAD//wUAAAAKAAEAAAD//wYAAAAKAAEAAAD//wcAAAAKAAEAAAD//wgAAAAKAAEAAAD//wkAAAAKAAEAAAD//woAAAAKAAEAAAD//wsAAAAKAAEAAAAAAPb/AAAKAAEAAAAAAPf/AAAKAAEAAAAAAPj/AAAKAAEAAAAAAPn/AAAKAAEAAAAAAPr/AAAKAAEAAAAAAPv/AAAKAAEAAAAAAPz/AAAKAAEAAAAAAP3/AAAKAAEAAAAAAP7/AAAKAAEAAAAAAP//AAAKAAEAAAAAAAAAAAAAAAMAAAAAAAEAAAAKAAEAAAAAAAIAAAAKAAEAAAAAAAMAAAAKAAEAAAAAAAQAAAAKAAEAAAAAAAUAAAAKAAEAAAAAAAYAAAAKAAEAAAAAAAcAAAAKAAEAAAAAAAgAAAAKAAEAAAAAAAkAAAAKAAEAAAAAAAoAAAAKAAEAAAAAAAsAAAAKAAEAAAABAPb/AAAKAAEAAAABAPf/AAAKAAEAAAABAPj/AAAKAAEAAAABAPn/AAAKAAEAAAABAPr/AAAKAAEAAAABAPv/AAAKAAEAAAABAPz/AAAKAAEAAAABAP3/AAAKAAEAAAABAP7/AAAKAAEAAAABAP//AAAKAAEAAAABAAAAAAAKAAEAAAABAAEAAAAKAAEAAAABAAIAAAAKAAEAAAABAAMAAAAKAAEAAAABAAQAAAAKAAEAAAABAAUAAAAKAAEAAAABAAYAAAAKAAEAAAABAAcAAAAKAAEAAAABAAgAAAAKAAEAAAABAAkAAAAKAAEAAAABAAoAAAAKAAEAAAABAAsAAAAKAAEAAAACAPb/AAAKAAEAAAACAPf/AAAKAAEAAAACAPj/AAAKAAEAAAACAPn/AAAKAAEAAAACAPr/AAAKAAEAAAACAPv/AAAKAAEAAAACAPz/AAAKAAEAAAACAP3/AAAKAAEAAAACAP7/AAAKAAEAAAACAP//AAAKAAEAAAACAAAAAAAKAAEAAAACAAEAAAAKAAEAAAACAAIAAAAKAAEAAAACAAMAAAAKAAEAAAACAAQAAAAKAAEAAAACAAUAAAAKAAEAAAACAAYAAAAKAAEAAAACAAcAAAAKAAEAAAACAAgAAAAKAAEAAAACAAkAAAAKAAEAAAACAAoAAAAKAAEAAAACAAsAAAAKAAEAAAADAPb/AAAKAAEAAAADAPf/AAAKAAEAAAADAPj/AAAKAAEAAAADAPn/AAAKAAEAAAADAPr/AAAKAAEAAAADAPv/AAAKAAEAAAADAPz/AAAKAAEAAAADAP3/AAAKAAEAAAADAP7/AAAKAAEAAAADAP//AAAKAAEAAAADAAAAAAAKAAEAAAADAAEAAAAKAAEAAAADAAIAAAAKAAEAAAADAAMAAAAKAAEAAAADAAQAAAAKAAEAAAADAAUAAAAKAAEAAAADAAYAAAAKAAEAAAADAAcAAAAKAAEAAAADAAgAAAAKAAEAAAADAAkAAAAKAAEAAAADAAoAAAAKAAEAAAADAAsAAAAKAAEAAAAEAPb/AAAKAAEAAAAEAPf/AAAKAAEAAAAEAPj/AAAKAAEAAAAEAPn/AAAKAAEAAAAEAPr/AAAKAAEAAAAEAPv/AAAKAAEAAAAEAPz/AAAKAAEAAAAEAP3/AAAKAAEAAAAEAP7/AAAKAAEAAAAEAP//AAAKAAEAAAAEAAAAAAAKAAEAAAAEAAEAAAAKAAEAAAAEAAIAAAAKAAEAAAAEAAMAAAAKAAEAAAAEAAQAAAAKAAEAAAAEAAUAAAAKAAEAAAAEAAYAAAAKAAEAAAAEAAcAAAAKAAEAAAAEAAgAAAAKAAEAAAAEAAkAAAAKAAEAAAAEAAoAAAAKAAEAAAAEAAsAAAAKAAEAAAAFAPb/AAAKAAEAAAAFAPf/AAAKAAEAAAAFAPj/AAAKAAEAAAAFAPn/AAAKAAEAAAAFAPr/AAAKAAEAAAAFAPv/AAAKAAEAAAAFAPz/AAAKAAEAAAAFAP3/AAAKAAEAAAAFAP7/AAAKAAEAAAAFAP//AAAKAAEAAAAFAAAAAAAKAAEAAAAFAAEAAAAKAAEAAAAFAAIAAAAKAAEAAAAFAAMAAAAKAAEAAAAFAAQAAAAKAAEAAAAFAAUAAAAKAAEAAAAFAAYAAAAKAAEAAAAFAAcAAAAKAAEAAAAFAAgAAAAKAAEAAAAFAAkAAAAKAAEAAAAFAAoAAAAKAAEAAAAFAAsAAAAKAAEAAAAGAPb/AAAKAAEAAAAGAPf/AAAKAAEAAAAGAPj/AAAKAAEAAAAGAPn/AAAKAAEAAAAGAPr/AAAKAAEAAAAGAPv/AAAKAAEAAAAGAPz/AAAKAAEAAAAGAP3/AAAKAAEAAAAGAP7/AAAKAAEAAAAGAP//AAAKAAEAAAAGAAAAAAAKAAEAAAAGAAEAAAAKAAEAAAAGAAIAAAAKAAEAAAAGAAMAAAAKAAEAAAAGAAQAAAAKAAEAAAAGAAUAAAAKAAEAAAAGAAYAAAAKAAEAAAAGAAcAAAAKAAEAAAAGAAgAAAAKAAEAAAAGAAkAAAAKAAEAAAAGAAoAAAAKAAEAAAAGAAsAAAAKAAEAAAAHAPb/AAAKAAEAAAAHAPf/AAAKAAEAAAAHAPj/AAAKAAEAAAAHAPn/AAAKAAEAAAAHAPr/AAAKAAEAAAAHAPv/AAAKAAEAAAAHAPz/AAAKAAEAAAAHAP3/AAAKAAEAAAAHAP7/AAAKAAEAAAAHAP//AAAKAAEAAAAHAAAAAAAKAAEAAAAHAAEAAAAKAAEAAAAHAAIAAAAKAAEAAAAHAAMAAAAKAAEAAAAHAAQAAAAKAAEAAAAHAAUAAAAKAAEAAAAHAAYAAAAKAAEAAAAHAAcAAAAKAAEAAAAHAAgAAAAKAAEAAAAHAAkAAAAKAAEAAAAHAAoAAAAKAAEAAAAHAAsAAAAKAAEAAAAIAPb/AAAKAAEAAAAIAPf/AAAKAAEAAAAIAPj/AAAKAAEAAAAIAPn/AAAKAAEAAAAIAPr/AAAKAAEAAAAIAPv/AAAKAAEAAAAIAPz/AAAKAAEAAAAIAP3/AAAKAAEAAAAIAP7/AAAKAAEAAAAIAP//AAAKAAEAAAAIAAAAAAAKAAEAAAAIAAEAAAAKAAEAAAAIAAIAAAAKAAEAAAAIAAMAAAAKAAEAAAAIAAQAAAAKAAEAAAAIAAUAAAAKAAEAAAAIAAYAAAAKAAEAAAAIAAcAAAAKAAEAAAAIAAgAAAAKAAEAAAAIAAkAAAAKAAEAAAAIAAoAAAAKAAEAAAAIAAsAAAAKAAEAAAAJAPb/AAAKAAEAAAAJAPf/AAAKAAEAAAAJAPj/AAAKAAEAAAAJAPn/AAAKAAEAAAAJAPr/AAAKAAEAAAAJAPv/AAAKAAEAAAAJAPz/AAAKAAEAAAAJAP3/AAAKAAEAAAAJAP7/AAAKAAEAAAAJAP//AAAKAAEAAAAJAAAAAAAKAAEAAAAJAAEAAAAKAAEAAAAJAAIAAAAKAAEAAAAJAAMAAAAKAAEAAAAJAAQAAAAKAAEAAAAJAAUAAAAKAAEAAAAJAAYAAAAKAAEAAAAJAAcAAAAKAAEAAAAJAAgAAAAKAAEAAAAJAAkAAAAKAAEAAAAJAAoAAAAKAAEAAAAJAAsAAAAKAAEAAAAKAPb/AAAKAAEAAAAKAPf/AAAKAAEAAAAKAPj/AAAKAAEAAAAKAPn/AAAKAAEAAAAKAPr/AAAKAAEAAAAKAPv/AAAKAAEAAAAKAPz/AAAKAAEAAAAKAP3/AAAKAAEAAAAKAP7/AAAKAAEAAAAKAP//AAAKAAEAAAAKAAAAAAAKAAEAAAAKAAEAAAAKAAEAAAAKAAIAAAAKAAEAAAAKAAMAAAAKAAEAAAAKAAQAAAAKAAEAAAAKAAUAAAAKAAEAAAAKAAYAAAAKAAEAAAAKAAcAAAAKAAEAAAAKAAgAAAAKAAEAAAAKAAkAAAAKAAEAAAAKAAoAAAAKAAEAAAAKAAsAAAAKAAEAAAALAPb/AAAKAAEAAAALAPf/AAAKAAEAAAALAPj/AAAKAAEAAAALAPn/AAAKAAEAAAALAPr/AAAKAAEAAAALAPv/AAAKAAEAAAALAPz/AAAKAAEAAAALAP3/AAAKAAEAAAALAP7/AAAKAAEAAAALAP//AAAKAAEAAAALAAAAAAAKAAEAAAALAAEAAAAKAAEAAAALAAIAAAAKAAEAAAALAAMAAAAKAAEAAAALAAQAAAAKAAEAAAALAAUAAAAKAAEAAAALAAYAAAAKAAEAAAALAAcAAAAKAAEAAAALAAgAAAAKAAEAAAALAAkAAAAKAAEAAAALAAoAAAAKAAEAAAALAAsAAAAKAAEAAAA=")
 tile_set = SubResource("TileSet_w5n2p")
 
-[node name="TileMapLayer" type="TileMapLayer" parent="VBoxContainer/HBoxContainer/RightBoxContainer/RangeMaker/VBoxContainer/TargetRangeViewEditControl/CenterContainer/SubViewportContainer/SubViewport/Node2D"]
+[node name="TileMapLayer" type="TileMapLayer" parent="VBoxContainer/HBoxContainer/RightBoxContainer/TabContainer/Targeting/VBoxContainer/TargetRangeViewEditControl/CenterContainer/SubViewportContainer/SubViewport/Node2D"]
 self_modulate = Color(0, 0, 1, 1)
 tile_set = SubResource("TileSet_w5n2p")
 
-[node name="Sprite2D" type="Sprite2D" parent="VBoxContainer/HBoxContainer/RightBoxContainer/RangeMaker/VBoxContainer/TargetRangeViewEditControl/CenterContainer/SubViewportContainer/SubViewport/Node2D/TileMapLayer"]
+[node name="Sprite2D" type="Sprite2D" parent="VBoxContainer/HBoxContainer/RightBoxContainer/TabContainer/Targeting/VBoxContainer/TargetRangeViewEditControl/CenterContainer/SubViewportContainer/SubViewport/Node2D/TileMapLayer"]
 modulate = Color(0, 0, 0, 1)
 position = Vector2(8, 8)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("16_uq258")
 
-[node name="CopyLoadContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/RightBoxContainer/RangeMaker/VBoxContainer"]
+[node name="CopyLoadContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/RightBoxContainer/TabContainer/Targeting/VBoxContainer"]
 visible = false
 layout_mode = 2
 alignment = 2
 
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/RightBoxContainer/RangeMaker/VBoxContainer/CopyLoadContainer"]
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/RightBoxContainer/TabContainer/Targeting/VBoxContainer/CopyLoadContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="LoadButton" type="Button" parent="VBoxContainer/HBoxContainer/RightBoxContainer/RangeMaker/VBoxContainer/CopyLoadContainer"]
+[node name="LoadButton" type="Button" parent="VBoxContainer/HBoxContainer/RightBoxContainer/TabContainer/Targeting/VBoxContainer/CopyLoadContainer"]
 layout_mode = 2
 text = "Load"
 
-[node name="CopyButton" type="Button" parent="VBoxContainer/HBoxContainer/RightBoxContainer/RangeMaker/VBoxContainer/CopyLoadContainer"]
+[node name="CopyButton" type="Button" parent="VBoxContainer/HBoxContainer/RightBoxContainer/TabContainer/Targeting/VBoxContainer/CopyLoadContainer"]
 layout_mode = 2
 text = "Copy"
 
-[node name="TextOutput" type="TextEdit" parent="VBoxContainer/HBoxContainer/RightBoxContainer/RangeMaker/VBoxContainer"]
+[node name="TextOutput" type="TextEdit" parent="VBoxContainer/HBoxContainer/RightBoxContainer/TabContainer/Targeting/VBoxContainer"]
 visible = false
 custom_minimum_size = Vector2(240, 63)
 layout_mode = 2
 text = "[Output]"
 wrap_mode = 1
 
-[node name="TargetKeyContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/RightBoxContainer/RangeMaker/VBoxContainer"]
+[node name="TargetKeyContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/RightBoxContainer/TabContainer/Targeting/VBoxContainer"]
 layout_mode = 2
 
-[node name="TargetTypeLabel" type="Label" parent="VBoxContainer/HBoxContainer/RightBoxContainer/RangeMaker/VBoxContainer/TargetKeyContainer"]
+[node name="TargetTypeLabel" type="Label" parent="VBoxContainer/HBoxContainer/RightBoxContainer/TabContainer/Targeting/VBoxContainer/TargetKeyContainer"]
 layout_mode = 2
 text = "Target Key:"
 
-[node name="LineEdit" type="LineEdit" parent="VBoxContainer/HBoxContainer/RightBoxContainer/RangeMaker/VBoxContainer/TargetKeyContainer"]
+[node name="LineEdit" type="LineEdit" parent="VBoxContainer/HBoxContainer/RightBoxContainer/TabContainer/Targeting/VBoxContainer/TargetKeyContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="TargetTypeContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/RightBoxContainer/RangeMaker/VBoxContainer"]
+[node name="TargetTypeContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/RightBoxContainer/TabContainer/Targeting/VBoxContainer"]
 layout_mode = 2
 
-[node name="TargetTypeLabel" type="Label" parent="VBoxContainer/HBoxContainer/RightBoxContainer/RangeMaker/VBoxContainer/TargetTypeContainer"]
+[node name="TargetTypeLabel" type="Label" parent="VBoxContainer/HBoxContainer/RightBoxContainer/TabContainer/Targeting/VBoxContainer/TargetTypeContainer"]
 layout_mode = 2
 text = "Target Type:"
 
-[node name="TargetTypeInput" type="OptionButton" parent="VBoxContainer/HBoxContainer/RightBoxContainer/RangeMaker/VBoxContainer/TargetTypeContainer"]
+[node name="TargetTypeInput" type="OptionButton" parent="VBoxContainer/HBoxContainer/RightBoxContainer/TabContainer/Targeting/VBoxContainer/TargetTypeContainer"]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 size_flags_horizontal = 3
