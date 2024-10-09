@@ -48,12 +48,21 @@ func _init(target_key:String, args:Dictionary) -> void:
 func is_point_in_area(center:MapPos, point:Vector2i)->bool:
 	return target_area.to_map_spots(center).has(point)
 	
-func is_valid_target(actor:BaseActor, target:BaseActor):
-	if target_type == TargetTypes.Enemy:
-		return actor.FactionIndex != target.FactionIndex
-	if target_type == TargetTypes.Ally:
-		return actor.FactionIndex == target.FactionIndex
-	return true
+func is_valid_target(actor:BaseActor, target, game_state:GameStateData):
+	if target is BaseActor:
+		if target_type == TargetTypes.Actor:
+			return true
+		if target_type == TargetTypes.Enemy:
+			return actor.FactionIndex != target.FactionIndex
+		if target_type == TargetTypes.Ally:
+			return actor.FactionIndex == target.FactionIndex
+	if target is Vector2i or target is MapPos:
+		if target_type == TargetTypes.Spot:
+			return true
+		if target_type == TargetTypes.OpenSpot:
+			return (game_state.MapState.get_actors_at_pos(target).size() == 0 and 
+				not game_state.MapState.spot_blocks_los(target))
+	return false
 	
 func get_valid_target_area(center:MapPos, line_of_sight:bool)->Dictionary:
 	var spots =  target_area.to_map_spots(center)

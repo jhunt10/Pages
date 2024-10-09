@@ -53,7 +53,7 @@ func _get_potential_actor_targets(game_state:GameStateData, actor:BaseActor, tar
 	var potential_targets = []
 	for spot in target_area:
 		for target in game_state.MapState.get_actors_at_pos(spot):
-			if targeting.is_valid_target(actor, target):
+			if targeting.is_valid_target(actor, target, game_state):
 				potential_targets.append(target)
 	return potential_targets
 	

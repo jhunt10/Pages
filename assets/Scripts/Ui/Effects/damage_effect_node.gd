@@ -6,19 +6,27 @@ const MAX_OFFSET = 12
 static var veffects_sprites:Dictionary = {
 	"Slash": {
 		"Sprite":"res://assets/Sprites/VEffects/SlashEffect.png",
-		"MaxOffset": 0
+		"MaxOffset": 0,
+		"Animation":"slash_effect",
+		"AnimationSpeed": 1
 		},
 	"Shot": {
 		"Sprite":"res://assets/Sprites/VEffects/ShotEffect.png",
-		"MaxOffset": 12
+		"MaxOffset": 12,
+		"Animation":"slash_effect",
+		"AnimationSpeed": 1
 		},
 	"Slam": {
 		"Sprite":"res://assets/Sprites/VEffects/SlamEffect.png",
-		"MaxOffset": 0
+		"MaxOffset": 0,
+		"Animation":"slash_effect",
+		"AnimationSpeed": 1
 		},
 	"Fire": {
 		"Sprite":"res://assets/Sprites/VEffects/FireEffect.png",
-		"MaxOffset": 0
+		"MaxOffset": 0,
+		"Animation":"six_sprite_effect",
+		"AnimationSpeed": 2
 		},
 }
 
@@ -38,6 +46,8 @@ func _ready() -> void:
 			var x = MAX_OFFSET - (randi() % (effect_data["MaxOffset"] * 2))
 			var y = MAX_OFFSET - (randi() % (effect_data["MaxOffset"] * 2))
 			sprite.position = Vector2i(x, y)
+		animation.play(effect_data['Animation'])
+		animation.speed_scale = effect_data['AnimationSpeed']
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
