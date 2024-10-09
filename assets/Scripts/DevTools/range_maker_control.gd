@@ -47,7 +47,7 @@ func _save_current_values(base_damage_value:float = -1):
 	if !target_datas.has(target_key):
 		target_datas[target_key] = {}
 	target_datas[target_key]['TargetType'] = target_type_input.get_item_text(target_type_input.selected)
-	target_datas[target_key]['TargetArea'] = range_viewer.get_selected_spots()
+	target_datas[target_key]['TargetArea'] = str(range_viewer.get_selected_spots()).replace(" ", "")
 	
 	drop_options.clear()
 	drop_options.add_item("None", 0)
@@ -74,6 +74,9 @@ func load_values(target_key:String):
 		if target_type_input.get_item_text(index) == target_datas[target_key]['TargetType']:
 			target_type_input.select(index)
 			break
+	var area = target_datas[target_key]['TargetArea']
+	if area is String:
+		area = JSON.parse_string(area)
 	range_viewer.set_selected_spots(target_datas[target_key]['TargetArea'])
 	
 

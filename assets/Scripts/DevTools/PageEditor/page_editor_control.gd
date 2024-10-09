@@ -7,6 +7,7 @@ static var Instance:PageEditControl
 @onready var sprite_edit_control:PageSpriteEditControl = $VBoxContainer/HBoxContainer/RightBoxContainer/PageSpriteEditControl
 @onready var texts_input_control:PageTextsInputControl = $VBoxContainer/HBoxContainer/LeftVBoxContainer/PageTextsInputsControl
 @onready var damage_data_control:DamageEditControl = $VBoxContainer/HBoxContainer/RightBoxContainer/TabContainer/Damage
+@onready var missile_data_control:MissileEditControl = $VBoxContainer/HBoxContainer/RightBoxContainer/TabContainer/Missiles
 @onready var range_edit_control:RangeMakerControl = $VBoxContainer/HBoxContainer/RightBoxContainer/TabContainer/Targeting
 @onready var subaction_edit_control:SubActionsEditControl = $VBoxContainer/HBoxContainer/MiddleVBoxContainer/SubActionsEditControl
 @onready var cost_edit_control:CostEditControl = $VBoxContainer/HBoxContainer/MiddleVBoxContainer/CostEditControl
@@ -52,6 +53,8 @@ func exit_menu():
 		self.queue_free()
 		MainRootNode.action_libary.reload_pages()
 	
+func get_missile_datas()->Dictionary:
+	return missile_data_control.missile_datas
 
 func get_damage_datas()->Dictionary:
 	return damage_data_control.damage_datas
@@ -62,6 +65,7 @@ func get_target_params()->Dictionary:
 func load_page(action_data:Dictionary):
 	file_edit_control.set_load_path(file_option_button.get_current_option_text())
 	damage_data_control.load_page_data(action_data)
+	missile_data_control.load_page_data(action_data)
 	range_edit_control.load_page_data(action_data)
 	texts_input_control.load_page_data(action_data)
 	subaction_edit_control.load_page_data(action_data)
@@ -106,6 +110,7 @@ func save_page_data(force_overide:bool=false):
 	new_page_data['LargeSprite'] = sprite_edit_control.large_sprite_option.get_current_option_text()
 	new_page_data['SmallSprite'] = sprite_edit_control.small_sprite_option.get_current_option_text()
 	new_page_data['DamageDatas'] = damage_data_control.save_page_data()
+	new_page_data['MissileDatas'] = missile_data_control.save_page_data()
 	new_page_data['TargetParams'] = range_edit_control.save_page_data()
 	new_page_data['SubActions'] = subaction_edit_control.save_page_data()
 	new_page_data['CostData'] = cost_edit_control.save_page_data()

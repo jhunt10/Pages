@@ -48,5 +48,28 @@
 		"Triggers": "Instant",
 		"AttackPower": -25,
 		"DamageType": "HEal"
+	},
+	{
+		"EffectKey": "WardingBond",
+		"EffectScript": "res://assets/Scripts/Effects/Scripts/Effect_DanageOn.gd",
+		"DisplayName": "Warding Bond",
+		"SnippetDesc": "Split damage taken by ally",
+		"Description": "Split damage taken by ally",
+		"IconSprite": "TestHeart.png",
+		"Tags": ["Warding"],
+		"DamageMods":{
+			"DamageMod1": { 
+				"OnTakingDamage": true,
+				"OnDealingDamage": false,
+				"Conditions": {
+					"LimitDamageTags": ["Attack"],
+					"ExcludeDamageTags": [],
+					"LimitSourceTags": ["Enemy", "Page"],
+					"ExcludeSourceTags": []
+				},
+				"ModType":"Scale", 
+				"Value":0.5 
+			}
+		},
 	}
 ]

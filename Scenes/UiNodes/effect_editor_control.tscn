@@ -1,9 +1,10 @@
-[gd_scene load_steps=18 format=3 uid="uid://bg1r8lro4v7h1"]
+[gd_scene load_steps=19 format=3 uid="uid://bg1r8lro4v7h1"]
 
 [ext_resource type="Script" path="res://assets/Scripts/DevTools/EffectEditor/effect_editor_control.gd" id="1_r261r"]
 [ext_resource type="Texture2D" uid="uid://io35wpu802fp" path="res://assets/Sprites/UI/background_64x64_12.png" id="2_5w21o"]
 [ext_resource type="Script" path="res://Scenes/UiNodes/loaded_option_button.gd" id="3_bmymb"]
 [ext_resource type="Script" path="res://assets/Scripts/DevTools/PageEditor/PageFileEditControl.gd" id="4_6m0hx"]
+[ext_resource type="Script" path="res://assets/Scripts/DevTools/EffectEditor/effect_texts_inputs_control.gd" id="5_hwwrh"]
 [ext_resource type="Theme" uid="uid://c1ayl4757lx1v" path="res://assets/Themes/small_spinner.tres" id="5_vlb7c"]
 [ext_resource type="Script" path="res://assets/Scripts/DevTools/tags_list_container.gd" id="6_2ku6v"]
 [ext_resource type="Texture2D" uid="uid://dpld1weadi4rr" path="res://assets/Sprites/UI/DevTools/AddTagButton.png" id="7_fyqfl"]
@@ -196,6 +197,7 @@ layout_mode = 2
 custom_minimum_size = Vector2(360, 400)
 layout_mode = 2
 size_flags_vertical = 3
+script = ExtResource("5_hwwrh")
 
 [node name="Background" type="NinePatchRect" parent="MainContainer/PanelsContainer/LeftVBoxContainer/EffectTextsInputsControl"]
 self_modulate = Color(0.796078, 0.796078, 0.796078, 1)
@@ -223,7 +225,7 @@ offset_bottom = -8.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="PageKeyInput" type="LineEdit" parent="MainContainer/PanelsContainer/LeftVBoxContainer/EffectTextsInputsControl/TextsInputContainer"]
+[node name="EffectKeyInput" type="LineEdit" parent="MainContainer/PanelsContainer/LeftVBoxContainer/EffectTextsInputsControl/TextsInputContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 placeholder_text = "Unique Key"
@@ -398,7 +400,12 @@ layout_mode = 2
 size_flags_horizontal = 3
 script = ExtResource("3_bmymb")
 
+[node name="CodeEdit" type="CodeEdit" parent="MainContainer/PanelsContainer/MiddleVBoxContainer/EffectScriptEditControl/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
 [node name="ScrollContainer" type="ScrollContainer" parent="MainContainer/PanelsContainer/MiddleVBoxContainer/EffectScriptEditControl/VBoxContainer"]
+visible = false
 self_modulate = Color(0, 0.73371, 0.736977, 1)
 layout_mode = 2
 size_flags_vertical = 3

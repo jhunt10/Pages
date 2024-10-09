@@ -19,6 +19,8 @@ var CostData:Dictionary:
 		get: return ActionData.get('CostData', {})
 var DamageDatas:Dictionary:
 		get: return ActionData.get('DamageDatas', {})
+var MissileDatas:Dictionary:
+		get: return ActionData.get('MissileDatas', {})
 
 var PreviewTargetKey:String
 var PreviewMoveOffset:MapPos

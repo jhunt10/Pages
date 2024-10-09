@@ -3,7 +3,9 @@ class_name AreaMatrix
 # List of Vec2i points relative to center
 var relative_points:Array = []
 
-func _init(points : Array):
+func _init(points):
+	if points is String:
+		points = JSON.parse_string(points)
 	for p in points:
 		relative_points.append(Vector2i(p[0], -p[1]))
 

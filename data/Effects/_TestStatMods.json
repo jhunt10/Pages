@@ -32,7 +32,26 @@
 		"IconSprite": "TestHeart.png",
 		"Tags": ["Attack"],
 		"StatMods":{
-			"Stregth": {"ModType":"Fixed", "Value":500}
+			"StatMod1": { 
+				"StatName": "Stregth",
+				"Display Name": "Name to showup in stats tool tip",
+				"ModType":"Fixed", 
+				"Value":500 
+			}
+		},
+		"DamageMods":{
+			"DamageMod1": { 
+				"OnTakingDamage": true,
+				"OnDealingDamage": true,
+				"Conditions": {
+					"LimitDamageTags": ["AOE", "Fire"],
+					"ExcludeDamageTags": [],
+					"LimitSourceTags": ["Page", "Allie"],
+					"ExcludeSourceTags": []
+				},
+				"ModType":"Fixed", 
+				"Value":500 
+			}
 		},
 		"Triggers": [],
 		"TurnDuration": 3,

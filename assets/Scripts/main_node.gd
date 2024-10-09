@@ -50,6 +50,11 @@ func open_page_editor():
 	self.add_child(page_editor)
 	
 	
+func open_effect_editor():
+	var page_editor = load("res://Scenes/UiNodes/effect_editor_control.tscn").instantiate()
+	self.add_child(page_editor)
+	
+	
 func go_to_main_menu():
 	current_scene.queue_free()
 	current_scene = load("res://Scenes/main_menu_root_control.tscn").instantiate()

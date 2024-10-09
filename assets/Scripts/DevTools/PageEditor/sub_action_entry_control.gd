@@ -7,12 +7,14 @@ signal index_changed
 
 @onready var index_input:SpinBox = $VBoxContainer/ScriptInput/FrameInput
 @onready var script_drop_options:OptionButton = $VBoxContainer/ScriptInput/ScriptButton
+@onready var main_container:VBoxContainer = $VBoxContainer
 @onready var props_container:VBoxContainer = $VBoxContainer/PropsContainer
 @onready var premade_option_prop_input:SubActionPropInputControl = $VBoxContainer/PropsContainer/SubActionPropertyControl
 
 var prop_inputs:Dictionary = {}
 var real_script:String = ''
 var subaction_data:Dictionary = {}
+var resize:bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -28,7 +30,11 @@ func on_index_lose_focus():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	if resize:
+		var new_size = Vector2i(self.size.x, main_container.size.y + 16) 
+		#printerr("Setting Script Edit Entry Size: %s | %s" % [self.size, new_size])
+		self.set_size(new_size)
+		resize = false
 	
 func lose_focus_if_has():
 	if index_input.has_focus():
@@ -79,6 +85,7 @@ func _build_props_for_script(script_name):
 		if extr_prop_key == "SubActionScript":
 			continue
 		create_prop_input(extr_prop_key, BaseSubAction.SubActionPropType.StringVal, true)
+	resize = true
 		
 
 func create_prop_input(prop_name:String, prop_type, is_unknown:bool=false):

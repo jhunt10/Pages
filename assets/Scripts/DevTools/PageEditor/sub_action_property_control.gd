@@ -4,6 +4,7 @@ extends Control
 @onready var label:Label = $VBoxContainer/Label
 @onready var option_button:LoadedOptionButton = $VBoxContainer/LoadedOptionButton
 @onready var line_edit:LineEdit = $VBoxContainer/LineEdit
+@onready var spin_box:SpinBox = $VBoxContainer/SpinBox
 @onready var move_value_container:MoveInputContainer = $VBoxContainer/MoveInputContainer
 
 var _prop_type:BaseSubAction.SubActionPropType
@@ -28,12 +29,18 @@ func get_prop_name():
 func get_prop_value():
 	if _prop_type == BaseSubAction.SubActionPropType.TargetKey:
 		return option_button.get_current_option_text()
+	elif _prop_type == BaseSubAction.SubActionPropType.EffectKey:
+		return option_button.get_current_option_text()
 	elif _prop_type == BaseSubAction.SubActionPropType.DamageKey:
+		return option_button.get_current_option_text()
+	elif _prop_type == BaseSubAction.SubActionPropType.MissileKey:
 		return option_button.get_current_option_text()
 	elif _prop_type == BaseSubAction.SubActionPropType.MoveValue:
 		return move_value_container.get_val()
 	elif _prop_type == BaseSubAction.SubActionPropType.StringVal:
 		return line_edit.text
+	elif _prop_type == BaseSubAction.SubActionPropType.IntVal:
+		return spin_box.value
 	return null
 	
 	
@@ -59,9 +66,19 @@ func set_prop(prop_name:String, prop_type:BaseSubAction.SubActionPropType, prop_
 			option_button.load_options(prop_value)
 		else:
 			option_button.load_options()
+	elif _prop_type == BaseSubAction.SubActionPropType.EffectKey:
+		option_button.visible = true
+		option_button.get_options_func = get_effect_options
+		if prop_value is String and prop_value != '':
+			option_button.load_options(prop_value)
 	elif prop_type == BaseSubAction.SubActionPropType.DamageKey:
 		option_button.visible = true
 		option_button.get_options_func = get_damage_options
+		if prop_value is String and prop_value != '':
+			option_button.load_options(prop_value)
+	elif prop_type == BaseSubAction.SubActionPropType.MissileKey:
+		option_button.visible = true
+		option_button.get_options_func = get_missile_options
 		if prop_value is String and prop_value != '':
 			option_button.load_options(prop_value)
 	elif prop_type == BaseSubAction.SubActionPropType.MoveValue:
@@ -71,6 +88,10 @@ func set_prop(prop_name:String, prop_type:BaseSubAction.SubActionPropType, prop_
 		line_edit.visible = true
 		if prop_value:
 			line_edit.text = str(prop_value)
+	elif prop_type == BaseSubAction.SubActionPropType.IntVal:
+		spin_box.visible = true
+		if prop_value:
+			spin_box.set_value_no_signal(int(prop_value))
 	else:
 		line_edit.visible = true
 		line_edit.text = "Unknown Prop Type: " + str(prop_type)
@@ -80,3 +101,9 @@ func get_target_options():
 	
 func get_damage_options():
 	return PageEditControl.Instance.get_damage_datas().keys()
+	
+func get_effect_options():
+	return MainRootNode.Instance.effect_libary._effects_data.keys()
+	
+func get_missile_options():
+	return PageEditControl.Instance.get_missile_datas().keys()

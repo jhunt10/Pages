@@ -3,7 +3,7 @@ extends Node2D
 
 const MAX_OFFSET = 12
 
-const veffects_sprites:Dictionary = {
+static var veffects_sprites:Dictionary = {
 	"Slash": {
 		"Sprite":"res://assets/Sprites/VEffects/SlashEffect.png",
 		"MaxOffset": 0
@@ -14,6 +14,10 @@ const veffects_sprites:Dictionary = {
 		},
 	"Slam": {
 		"Sprite":"res://assets/Sprites/VEffects/SlamEffect.png",
+		"MaxOffset": 0
+		},
+	"Fire": {
+		"Sprite":"res://assets/Sprites/VEffects/FireEffect.png",
 		"MaxOffset": 0
 		},
 }

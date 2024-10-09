@@ -1,12 +1,14 @@
 class_name BaseEffect
 # An "Effect" is any Buff, Debuff, or modifier on an actor. 
 
+enum SubActionPropType {TargetKey, DamageData, SubTriggers, SubDuration, SubEffectKey, StringVal, IntVal}
+
 enum EffectTriggers { 
-	OnTurnStart, OnTurnEnd, 
+	OnCreate, OnTurnStart, OnTurnEnd, 
 	OnRoundStart, OnRoundEnd,
-	OnTakeDamage, OnDealDamage,
+	OnDamageTaken, OnDamagDealt,
+	OnCalcDamageTaken, OnCalcDamageDealt,
 	OnMove, OnPushed, OnPushing,
-	 
 	}
 
 var Id : String = str(ResourceUID.create_id())
@@ -23,9 +25,6 @@ var system_triggers:Array = []
 
 var _actor:BaseActor
 var _icon_sprite:String
-
-var stat_mod_data:Dictionary:
-	get: return EffectData.get("StatMods", {})
 
 # Instant effects are triggered and dispoded of immediately
 var is_instant:bool = false
@@ -95,11 +94,11 @@ func _on_round_start():
 func _on_round_end():
 	pass
 
-#func _on_deal_damage(value:int, damage_type:String, target:BaseActor):
-	#pass
-#
-#func _on_take_damage(value:int, damage_type:String, source):
-	#pass
+func _on_deal_damage(value:int, damage_type:String, target:BaseActor):
+	pass
+
+func _on_take_damage(value:int, damage_type:String, source):
+	pass
 
 func _on_move(_old_pos:MapPos, _new_pos:MapPos, _move_type:String, _moved_by:BaseActor):
 	pass

@@ -10,6 +10,7 @@ extends Control
 @onready var damage_type_input:LineEdit = $VBoxContainer/Background2/VBoxContainer/DamageKeyInputContainer2/DamageTypeEdit
 @onready var attack_stat_input:LineEdit = $VBoxContainer/Background2/VBoxContainer/HBoxContainer/AttackStatEdit
 @onready var defense_stat_input:LineEdit = $VBoxContainer/Background2/VBoxContainer/HBoxContainer/DefenseStatEdit
+@onready var damage_effect_options:LoadedOptionButton = $VBoxContainer/Background2/VBoxContainer/HBoxContainer2/LoadedOptionButton
 
 var damage_datas:Dictionary = {}
 var editing_key:String = ''
@@ -25,6 +26,7 @@ func _ready() -> void:
 	defense_stat_input.focus_exited.connect(_save_current_values)
 	add_button.pressed.connect(_add_new_data)
 	drop_options.item_selected.connect(on_item_selected)
+	damage_effect_options.get_options_func = get_damage_effect_options
 	pass # Replace with function body.
 
 
@@ -43,6 +45,10 @@ func _add_new_data():
 	damage_type_input.clear()
 	attack_stat_input.clear()
 	defense_stat_input.clear()
+	damage_effect_options.load_options()
+
+func get_damage_effect_options():
+	return DamageEffectNode.veffects_sprites.keys()
 
 func _save_current_values(base_damage_value:float = -1):
 	var damage_key = key_input.text
@@ -62,6 +68,8 @@ func _save_current_values(base_damage_value:float = -1):
 	damage_datas[damage_key]['DamageType'] = damage_type_input.text
 	damage_datas[damage_key]['AtkStat'] = attack_stat_input.text
 	damage_datas[damage_key]['DefStat'] = defense_stat_input.text
+	if damage_effect_options.get_current_option_text() != '':
+		damage_datas[damage_key]['DamageEffect'] = damage_effect_options.get_current_option_text()
 	
 	drop_options.clear()
 	drop_options.add_item("None", 0)
@@ -88,6 +96,8 @@ func load_values(damage_key:String):
 	attack_stat_input.text = damage_datas[damage_key]['AtkStat'] 
 	defense_stat_input.text = damage_datas[damage_key]['DefStat']
 	base_power_input.set_value_no_signal(damage_datas[damage_key]['BaseDamage'])
+	if damage_datas[damage_key].has("DamageEffect"):
+		damage_effect_options.load_options(damage_datas[damage_key]['DamageEffect'])
 
 func load_page_data(data:Dictionary):
 	damage_datas = data.get('DamageDatas', {})
@@ -107,4 +117,5 @@ func load_page_data(data:Dictionary):
 		defense_stat_input.clear()
 
 func save_page_data()->Dictionary:
+	_save_current_values()
 	return damage_datas

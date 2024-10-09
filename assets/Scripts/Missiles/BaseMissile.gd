@@ -5,7 +5,7 @@ var node:MissileNode
 
 var _source_actor_id:String
 var _source_action_key:String
-var _target_key:String
+#var _target_key:String
 var _missle_data:Dictionary
 
 var SourceActor:BaseActor:
@@ -25,13 +25,13 @@ var _start_frame:int
 var _end_frame:int
 var _position_per_frame:Array=[]
 
-func _init(actor:BaseActor, action:BaseAction, frames_per_tile:int, target_key:String, data:Dictionary, start_pos=null) -> void:
+func _init(actor:BaseActor, action:BaseAction, missile_data:Dictionary, target, start_pos=null) -> void:
 	_source_actor_id = actor.Id
 	_source_action_key = action.ActionKey
-	_frames_per_tile = frames_per_tile
-	_target_key = target_key
+	_missle_data = missile_data
+	
+	_frames_per_tile = missile_data['FramesPerTile']
 	_start_frame = CombatRootControl.Instance.QueController.sub_action_index
-	_missle_data = data
 	# Use potition if given, otherwise start at actor position
 	if start_pos and start_pos is Vector3i:
 		StartSpot = Vector2i(start_pos.x, start_pos.y)
@@ -43,11 +43,10 @@ func _init(actor:BaseActor, action:BaseAction, frames_per_tile:int, target_key:S
 	
 	var meta_data:QueExecutionData = actor.Que.QueExecData
 	var turn_data = meta_data.get_current_turn_data()
-	var target_val = turn_data.targets[target_key]
-	if target_val is Vector2i:
-		TargetSpot = target_val
-	if target_val is String:
-		var target_actor = CombatRootControl.Instance.GameState.Actors[target_val]
+	if target is Vector2i:
+		TargetSpot = target
+	if target is String:
+		var target_actor = CombatRootControl.Instance.GameState.Actors[target]
 		var spot = CombatRootControl.Instance.GameState.MapState.get_actor_pos(target_actor)
 		TargetSpot = Vector2i(spot.x, spot.y)
 	

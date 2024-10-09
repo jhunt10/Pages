@@ -35,8 +35,8 @@ func add_effect(effect_key:String, effect_data:Dictionary)->BaseEffect:
 		_triggers_to_ids[trigger].append(effect.Id)
 	for trigger in effect.system_triggers:
 		_system_triggers_to_ids[trigger].append(effect.Id)
-	if effect.stat_mod_data.size() > 0:
-		_actor.stats.dirty_stats()
+	#if effect.stat_mod_data.size() > 0:
+		#_actor.stats.dirty_stats()
 	#gained_effect.emit(effect)
 	return effect
 		

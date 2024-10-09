@@ -1,15 +1,17 @@
 class_name EffectScriptEditControl
 extends Control
 
-static var EFFECT_SCRIPTS_PATH = "res://assets/Scripts/Effects/"
+static var EFFECT_SCRIPTS_PATH = "res://assets/Scripts/Effects/Scripts/"
 
 
 @onready var script_option_button:LoadedOptionButton = $VBoxContainer/HBoxContainer/LoadedOptionButton
+@onready var script_box:CodeEdit = $VBoxContainer/CodeEdit
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	script_option_button.get_options_func = get_effect_scripts
 	script_option_button.load_options()
+	script_option_button.item_selected.connect(on_script_selected)
 	pass # Replace with function body.
 
 
@@ -19,9 +21,16 @@ func _process(delta: float) -> void:
 
 func get_effect_scripts()->Array:
 	return get_sub_actions_scripts()
+	
+func on_script_selected(index):
+	var script = script_option_button.get_item_text(index)
+	var full_script_path = rebuild_effect_script_path(script)
+	var file = FileAccess.open(full_script_path, FileAccess.READ)
+	var text:String = file.get_as_text()
+	script_box.text = text
 
 static func rebuild_effect_script_path(name):
-	return "Effect_" + name + ".gd"
+	return EFFECT_SCRIPTS_PATH.path_join("Effect_" + name + ".gd")
 
 static func get_sub_actions_scripts():
 	var list = []

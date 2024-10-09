@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=4 uid="uid://ilbr2axm1jit"]
+[gd_scene load_steps=32 format=4 uid="uid://ilbr2axm1jit"]
 
 [ext_resource type="Script" path="res://assets/Scripts/DevTools/PageEditor/page_editor_control.gd" id="1_rhemy"]
 [ext_resource type="Texture2D" uid="uid://io35wpu802fp" path="res://assets/Sprites/UI/background_64x64_12.png" id="2_igq78"]
@@ -27,6 +27,7 @@
 [ext_resource type="Script" path="res://assets/Scripts/DevTools/PageEditor/move_input_container.gd" id="18_rwend"]
 [ext_resource type="Script" path="res://assets/Scripts/DevTools/PageEditor/sub_action_property_control.gd" id="18_v63g5"]
 [ext_resource type="Script" path="res://assets/Scripts/DevTools/PageEditor/popup_warning_control.gd" id="22_4x6ki"]
+[ext_resource type="Script" path="res://assets/Scripts/DevTools/PageEditor/missile_data_edit_control.gd" id="23_q3042"]
 [ext_resource type="Texture2D" uid="uid://cbmrq53kary3x" path="res://assets/Sprites/UI/DevTools/PopUpButton.png" id="23_tjqsl"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_sin7f"]
@@ -945,7 +946,6 @@ layout_mode = 2
 text = "PropName:"
 
 [node name="LoadedOptionButton" type="OptionButton" parent="VBoxContainer/HBoxContainer/MiddleVBoxContainer/SubActionsEditControl/VBoxContainer/ScrollContainer/VBoxContainer/SubActionEntry/VBoxContainer/PropsContainer/SubActionPropertyControl/VBoxContainer"]
-visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 fit_to_longest_item = false
@@ -988,6 +988,12 @@ popup/item_2/text = "180°"
 popup/item_2/id = 2
 popup/item_3/text = "Left"
 popup/item_3/id = 3
+
+[node name="SpinBox" type="SpinBox" parent="VBoxContainer/HBoxContainer/MiddleVBoxContainer/SubActionsEditControl/VBoxContainer/ScrollContainer/VBoxContainer/SubActionEntry/VBoxContainer/PropsContainer/SubActionPropertyControl/VBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 2
 
 [node name="RightBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
@@ -1156,7 +1162,7 @@ layout_mode = 2
 text = "New"
 
 [node name="Background2" type="NinePatchRect" parent="VBoxContainer/HBoxContainer/RightBoxContainer/TabContainer/Damage/VBoxContainer"]
-custom_minimum_size = Vector2(0, 117)
+custom_minimum_size = Vector2(0, 153)
 layout_mode = 2
 texture = ExtResource("2_igq78")
 patch_margin_left = 12
@@ -1229,12 +1235,148 @@ layout_mode = 2
 size_flags_horizontal = 3
 placeholder_text = "Defense Stat"
 
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/RightBoxContainer/TabContainer/Damage/VBoxContainer/Background2/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/RightBoxContainer/TabContainer/Damage/VBoxContainer/Background2/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "Damage Effect: "
+
+[node name="LoadedOptionButton" type="OptionButton" parent="VBoxContainer/HBoxContainer/RightBoxContainer/TabContainer/Damage/VBoxContainer/Background2/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("7_gwuq7")
+
+[node name="Missiles" type="Control" parent="VBoxContainer/HBoxContainer/RightBoxContainer/TabContainer"]
+custom_minimum_size = Vector2(360, 168)
+layout_mode = 2
+script = ExtResource("23_q3042")
+metadata/_tab_index = 1
+
+[node name="Background" type="NinePatchRect" parent="VBoxContainer/HBoxContainer/RightBoxContainer/TabContainer/Missiles"]
+self_modulate = Color(0.796078, 0.796078, 0.796078, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_igq78")
+patch_margin_left = 12
+patch_margin_top = 12
+patch_margin_right = 12
+patch_margin_bottom = 12
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/RightBoxContainer/TabContainer/Missiles"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/RightBoxContainer/TabContainer/Missiles/VBoxContainer"]
+layout_mode = 2
+
+[node name="MissleDataTitle" type="Label" parent="VBoxContainer/HBoxContainer/RightBoxContainer/TabContainer/Missiles/VBoxContainer/HBoxContainer"]
+visible = false
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Damage"
+
+[node name="OptionButton" type="OptionButton" parent="VBoxContainer/HBoxContainer/RightBoxContainer/TabContainer/Missiles/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+selected = 0
+item_count = 1
+popup/item_0/text = "None"
+popup/item_0/disabled = true
+
+[node name="AddButton" type="Button" parent="VBoxContainer/HBoxContainer/RightBoxContainer/TabContainer/Missiles/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "New"
+
+[node name="Background2" type="NinePatchRect" parent="VBoxContainer/HBoxContainer/RightBoxContainer/TabContainer/Missiles/VBoxContainer"]
+custom_minimum_size = Vector2(0, 153)
+layout_mode = 2
+texture = ExtResource("2_igq78")
+patch_margin_left = 12
+patch_margin_top = 12
+patch_margin_right = 12
+patch_margin_bottom = 12
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/RightBoxContainer/TabContainer/Missiles/VBoxContainer/Background2"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="KeyInputContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/RightBoxContainer/TabContainer/Missiles/VBoxContainer/Background2/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/RightBoxContainer/TabContainer/Missiles/VBoxContainer/Background2/VBoxContainer/KeyInputContainer"]
+layout_mode = 2
+text = "MissileKey: "
+
+[node name="KeyInput" type="LineEdit" parent="VBoxContainer/HBoxContainer/RightBoxContainer/TabContainer/Missiles/VBoxContainer/Background2/VBoxContainer/KeyInputContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Unique Key"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/RightBoxContainer/TabContainer/Missiles/VBoxContainer/Background2/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/RightBoxContainer/TabContainer/Missiles/VBoxContainer/Background2/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+text = "Frames Per Tile:"
+
+[node name="SpinBox" type="SpinBox" parent="VBoxContainer/HBoxContainer/RightBoxContainer/TabContainer/Missiles/VBoxContainer/Background2/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/RightBoxContainer/TabContainer/Missiles/VBoxContainer/Background2/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/RightBoxContainer/TabContainer/Missiles/VBoxContainer/Background2/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Sprite: "
+
+[node name="LoadedOptionButton" type="OptionButton" parent="VBoxContainer/HBoxContainer/RightBoxContainer/TabContainer/Missiles/VBoxContainer/Background2/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("7_gwuq7")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/RightBoxContainer/TabContainer/Missiles/VBoxContainer/Background2/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/RightBoxContainer/TabContainer/Missiles/VBoxContainer/Background2/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "Damage Data: "
+
+[node name="LoadedOptionButton" type="OptionButton" parent="VBoxContainer/HBoxContainer/RightBoxContainer/TabContainer/Missiles/VBoxContainer/Background2/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("7_gwuq7")
+
 [node name="Targeting" type="Control" parent="VBoxContainer/HBoxContainer/RightBoxContainer/TabContainer"]
+visible = false
 custom_minimum_size = Vector2(272, 374)
 layout_mode = 2
 size_flags_vertical = 0
 script = ExtResource("13_5sl0v")
-metadata/_tab_index = 1
+metadata/_tab_index = 2
 
 [node name="NinePatchRect" type="NinePatchRect" parent="VBoxContainer/HBoxContainer/RightBoxContainer/TabContainer/Targeting"]
 layout_mode = 1
@@ -1302,7 +1444,7 @@ layout_mode = 2
 [node name="SubViewport" type="SubViewport" parent="VBoxContainer/HBoxContainer/RightBoxContainer/TabContainer/Targeting/VBoxContainer/TargetRangeViewEditControl/CenterContainer/SubViewportContainer"]
 handle_input_locally = false
 size = Vector2i(240, 240)
-render_target_update_mode = 4
+render_target_update_mode = 0
 
 [node name="Node2D" type="Node2D" parent="VBoxContainer/HBoxContainer/RightBoxContainer/TabContainer/Targeting/VBoxContainer/TargetRangeViewEditControl/CenterContainer/SubViewportContainer/SubViewport"]
 position = Vector2(112, 112)
