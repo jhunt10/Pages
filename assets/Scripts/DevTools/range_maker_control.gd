@@ -77,7 +77,7 @@ func load_values(target_key:String):
 	var area = target_datas[target_key]['TargetArea']
 	if area is String:
 		area = JSON.parse_string(area)
-	range_viewer.set_selected_spots(target_datas[target_key]['TargetArea'])
+	range_viewer.set_selected_spots(area)
 	
 
 func load_page_data(data:Dictionary):

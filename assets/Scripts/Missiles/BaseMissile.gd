@@ -7,6 +7,7 @@ var _source_actor_id:String
 var _source_action_key:String
 #var _target_key:String
 var _missle_data:Dictionary
+var _missle_animation_data:AnimatedSpriteData
 
 var SourceActor:BaseActor:
 	get:
@@ -29,6 +30,8 @@ func _init(actor:BaseActor, action:BaseAction, missile_data:Dictionary, target, 
 	_source_actor_id = actor.Id
 	_source_action_key = action.ActionKey
 	_missle_data = missile_data
+	if _missle_data.has("AnimationData"):
+		_missle_animation_data = AnimatedSpriteData.new(_missle_data['AnimationData'], action.LoadPath)
 	
 	_frames_per_tile = missile_data['FramesPerTile']
 	_start_frame = CombatRootControl.Instance.QueController.sub_action_index
@@ -51,7 +54,10 @@ func _init(actor:BaseActor, action:BaseAction, missile_data:Dictionary, target, 
 		TargetSpot = Vector2i(spot.x, spot.y)
 	
 	_calc_positions()
-		
+
+func get_missile_animation_data()->AnimatedSpriteData:
+	return _missle_animation_data
+
 func on_reach_target():
 	var actor_on_spots = CombatRootControl.Instance.GameState.MapState.get_actors_at_pos(TargetSpot)
 	if actor_on_spots.size() == 0:

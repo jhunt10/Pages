@@ -1,1 +1,377 @@
-[{"ActionKey":"TestMissile","CostData":{},"DamageDatas":{"Damage1":{"AtkStat":"Stregth","BaseDamage":20,"DamageDataKey":"Damage1","DamageEffect":"Fire","DamageType":"Test","DefStat":"Stregth"}},"Description":"Test Target Test Target Test Target Test Target","DisplayName":"Test Target","LargeSprite":"ProjectileTest.png","MissileDatas":{"Missile1":{"DamageDataKey":"Damage1","FramesPerTile":3,"MissileDataKey":"Missile1","MissileSprite":"ProjectileTest.png"}},"PreviewTargetKey":"MissleTarget","SmallSprite":"ProjectileTest.png","SnippetDesc":"Test Targeting","SubActions":{"10":[{"SubActionScript":"res://assets/Scripts/Actions/SubActions/SubAct_GetTarget.gd","TargetKey":"MissleTarget"}],"11":[{"DamageKey":"Damage1","MissileKey":"Missile1","SubActionScript":"res://assets/Scripts/Actions/SubActions/SubAct_SpawnMissile.gd","TargetKey":"MissleTarget"}]},"Tags":["Attack","Ranged","Missile"],"TargetParams":{"MissleTarget":{"EffectArea":[[-1,0],[1,0],[0,0],[0,1],[0,-1]],"LineOfSight":true,"TargetArea":"[[1, 0], [1, -1], [0, -1], [-1, -1], [-1, 0], [-1, 1], [0, 1], [1, 1], [2, 1], [2, 0], [2, -1], [2, -2], [1, -2], [0, -2], [-1, -2], [-2, -2], [-2, -1], [-2, 0], [-2, 1], [-2, 2], [-1, 2], [0, 2], [1, 2], [2, 2], [1, -3], [0, -3], [-1, -3], [-3, -1], [-3, 0], [-3, 1], [3, -1], [3, 0], [3, 1], [-1, 3], [0, 2], [0, 3], [1, 3]]","TargetType":"Actor"}}},{"@@COMMENT@@":"Snippet and Description are loaded for Translator","ActionKey":"TestDamage","Description":"Test Target Test Target Test Target Test Target","DisplayName":"Test Target","LargeSprite":"TestTarget.png","PreviewTargetKey":"Preview","SmallSprite":"TestTarget.png","SnippetDesc":"Test Targeting","SubActions":{"11":{"DamageData":{"AtkStat":"Stregth","BaseDamage":25,"DamageEffect":"Slam","DamageType":"Test","DefStat":"Stregth"},"SubActionScript":"res://assets/Scripts/Actions/SubActions/SubAct_ApplyDamage.gd","TargetKey":"Self"}},"Tags":["Attack"],"TargetParams":{"Preview":{"##COMMENT##":"Self targeting doesn't need params, but this is for preview","LineOfSight":true,"TargetArea":[[0,0]],"TargetType":"Self"}}},{"ActionKey":"TestHealthBuff","CostData":{"Mana":20},"DamageDatas":{},"Description":"Apply TestHealthBuff effect","DisplayName":"Test Health Buff","LargeSprite":"TestHeart.png","PreviewTargetKey":"Preview","SmallSprite":"TestHeart.png","SnippetDesc":"Apply TestHealthBuff effect","SubActions":{"11":[{"EffectKey":"TestHealthBuff","SubActionScript":"res://assets/Scripts/Actions/SubActions/SubAct_ApplyEffect.gd","TargetKey":"Self"}]},"Tags":["Buff"],"TargetParams":{"Preview":{"##COMMENT##":"Self targeting doesn't need params, but this is for preview","LineOfSight":true,"TargetArea":[[0,0]],"TargetType":"Self"}}},{"@@COMMENT@@":"Snippet and Description are loaded for Translator","ActionKey":"TestPoisonSelf","Description":"Test Target Test Target Test Target Test Target","DisplayName":"Test Target","LargeSprite":"TestPoison.png","PreviewTargetKey":"Preview","SmallSprite":"TestPoison.png","SnippetDesc":"Test Targeting","SubActions":{"11":{"EffectKey":"TestPoisonOnMove","SubActionScript":"res://assets/Scripts/Actions/SubActions/SubAct_ApplyEffect.gd","TargetKey":"Self"}},"Tags":["Attack"],"TargetParams":{"Preview":{"##COMMENT##":"Self targeting doesn't need params, but this is for preview","LineOfSight":true,"TargetArea":[[0,0]],"TargetType":"Self"}}},{"@@COMMENT@@":"Snippet and Description are loaded for Translator","ActionKey":"TestPoisonTarget","Description":"Test Target Test Target Test Target Test Target","DisplayName":"Test Target","LargeSprite":"TestPoison.png","PreviewTargetKey":"Target1","SmallSprite":"TestPoison.png","SnippetDesc":"Test Targeting","SubActions":{"10":{"SubActionScript":"res://assets/Scripts/Actions/SubActions/SubAct_GetTarget.gd","TargetKey":"Target1"},"11":{"EffectKey":"TestPoison","SubActionScript":"res://assets/Scripts/Actions/SubActions/SubAct_ApplyEffect.gd","TargetKey":"Target1"}},"Tags":["Attack"],"TargetParams":{"Target1":{"EffectArea":[[-1,0],[1,0],[0,0],[0,1],[0,-1]],"LineOfSight":true,"TargetArea":[[-1,1],[0,1],[1,1],[-1,2],[0,2],[1,2],[-1,3],[0,3],[1,3],[0,4],[-1,4],[1,4]],"TargetType":"Actor"}}},{"@@COMMENT@@":"Snippet and Description are loaded for Translator","ActionKey":"TestZone","Description":"Test Target Test Target Test Target Test Target","DisplayName":"Test Target","LargeSprite":"TestZone.png","SmallSprite":"TestZone.png","SnippetDesc":"Test Targeting","SubActions":{"10":{"SubActionScript":"res://assets/Scripts/Actions/SubActions/SubAct_CreateZone.gd","ZoneData":{"ApplyToSelf":false,"EffectKey":"TestZonePoison","ZoneArea":[[0,0],[1,0],[1,1],[1,-1],[0,1],[0,-1],[-1,-1],[-1,0],[-1,1]],"ZoneKey":"TestZone","ZoneType":"Aura"}}},"Tags":["Attack"]},{"@@COMMENT@@":"Snippet and Description are loaded for Translator","ActionKey":"TestItem","Description":"Test Item Test Item Test Item Test Item","DisplayName":"Test Item","LargeSprite":"TestItem.png","OnQueUiState":"res://assets/Scripts/Ui/UiStates/UiState_ItemSelection.gd","SmallSprite":"TestItem.png","SnippetDesc":"Test Item","SubActions":{"10":{"SubActionScript":"res://assets/Scripts/Actions/SubActions/SubAct_UseItem.gd"}},"Tags":["Item"]}]
+[
+	{
+		"ActionKey": "TestMissile",
+		"CostData": {},
+		"DamageDatas": {
+			"Damage1": {
+				"AtkStat": "Stregth",
+				"BaseDamage": 20,
+				"DamageDataKey": "Damage1",
+				"DamageEffect": "Fire",
+				"DamageType": "Test",
+				"DefStat": "Stregth"
+			}
+		},
+		"Description": "Test Target Test Target Test Target Test Target",
+		"DisplayName": "Test Target",
+		"LargeSprite": "ProjectileTest.png",
+		"MissileDatas": {
+			"Missile1": {
+				"DamageDataKey": "Damage1",
+				"FramesPerTile": 6,
+				"MissileDataKey": "Missile1",
+				"AnimationData": {
+					"SpriteName": "FireProjectile.png",
+					"AnimationName": "4_frame_animation",
+					"AnimationSpeed": 2,
+					"TileSheetWidth": 2,
+					"TileSheetHight": 2
+				}
+			}
+		},
+		"PreviewTargetKey": "MissleTarget",
+		"SmallSprite": "ProjectileTest.png",
+		"SnippetDesc": "Test Targeting",
+		"SubActions": {
+			"10": [
+				{
+					"SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_GetTarget.gd",
+					"TargetKey": "MissleTarget"
+				}
+			],
+			"11": [
+				{
+					"DamageKey": "Damage1",
+					"MissileKey": "Missile1",
+					"SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_SpawnMissile.gd",
+					"TargetKey": "MissleTarget"
+				}
+			]
+		},
+		"Tags": [
+			"Attack",
+			"Ranged",
+			"Missile"
+		],
+		"TargetParams": {
+			"MissleTarget": {
+				"EffectArea": [
+					[
+						-1,
+						0
+					],
+					[
+						1,
+						0
+					],
+					[
+						0,
+						0
+					],
+					[
+						0,
+						1
+					],
+					[
+						0,
+						-1
+					]
+				],
+				"LineOfSight": true,
+				"TargetArea": "[[1, 0], [1, -1], [0, -1], [-1, -1], [-1, 0], [-1, 1], [0, 1], [1, 1], [2, 1], [2, 0], [2, -1], [2, -2], [1, -2], [0, -2], [-1, -2], [-2, -2], [-2, -1], [-2, 0], [-2, 1], [-2, 2], [-1, 2], [0, 2], [1, 2], [2, 2], [1, -3], [0, -3], [-1, -3], [-3, -1], [-3, 0], [-3, 1], [3, -1], [3, 0], [3, 1], [-1, 3], [0, 2], [0, 3], [1, 3]]",
+				"TargetType": "Actor"
+			}
+		}
+	},
+	{
+		"@@COMMENT@@": "Snippet and Description are loaded for Translator",
+		"ActionKey": "TestDamage",
+		"Description": "Test Target Test Target Test Target Test Target",
+		"DisplayName": "Test Target",
+		"LargeSprite": "TestTarget.png",
+		"PreviewTargetKey": "Preview",
+		"SmallSprite": "TestTarget.png",
+		"SnippetDesc": "Test Targeting",
+		"SubActions": {
+			"11": {
+				"DamageData": {
+					"AtkStat": "Stregth",
+					"BaseDamage": 25,
+					"DamageEffect": "Slam",
+					"DamageType": "Test",
+					"DefStat": "Stregth"
+				},
+				"SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_ApplyDamage.gd",
+				"TargetKey": "Self"
+			}
+		},
+		"Tags": [
+			"Attack"
+		],
+		"TargetParams": {
+			"Preview": {
+				"##COMMENT##": "Self targeting doesn't need params, but this is for preview",
+				"LineOfSight": true,
+				"TargetArea": [
+					[
+						0,
+						0
+					]
+				],
+				"TargetType": "Self"
+			}
+		}
+	},
+	{
+		"ActionKey": "TestHealthBuff",
+		"CostData": {
+			"Mana": 20
+		},
+		"DamageDatas": {},
+		"Description": "Apply TestHealthBuff effect",
+		"DisplayName": "Test Health Buff",
+		"LargeSprite": "TestHeart.png",
+		"PreviewTargetKey": "Preview",
+		"SmallSprite": "TestHeart.png",
+		"SnippetDesc": "Apply TestHealthBuff effect",
+		"SubActions": {
+			"11": [
+				{
+					"EffectKey": "TestHealthBuff",
+					"SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_ApplyEffect.gd",
+					"TargetKey": "Self"
+				}
+			]
+		},
+		"Tags": [
+			"Buff"
+		],
+		"TargetParams": {
+			"Preview": {
+				"##COMMENT##": "Self targeting doesn't need params, but this is for preview",
+				"LineOfSight": true,
+				"TargetArea": [
+					[
+						0,
+						0
+					]
+				],
+				"TargetType": "Self"
+			}
+		}
+	},
+	{
+		"@@COMMENT@@": "Snippet and Description are loaded for Translator",
+		"ActionKey": "TestPoisonSelf",
+		"Description": "Test Target Test Target Test Target Test Target",
+		"DisplayName": "Test Target",
+		"LargeSprite": "TestPoison.png",
+		"PreviewTargetKey": "Preview",
+		"SmallSprite": "TestPoison.png",
+		"SnippetDesc": "Test Targeting",
+		"SubActions": {
+			"11": {
+				"EffectKey": "TestPoisonOnMove",
+				"SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_ApplyEffect.gd",
+				"TargetKey": "Self"
+			}
+		},
+		"Tags": [
+			"Attack"
+		],
+		"TargetParams": {
+			"Preview": {
+				"##COMMENT##": "Self targeting doesn't need params, but this is for preview",
+				"LineOfSight": true,
+				"TargetArea": [
+					[
+						0,
+						0
+					]
+				],
+				"TargetType": "Self"
+			}
+		}
+	},
+	{
+		"@@COMMENT@@": "Snippet and Description are loaded for Translator",
+		"ActionKey": "TestPoisonTarget",
+		"Description": "Test Target Test Target Test Target Test Target",
+		"DisplayName": "Test Target",
+		"LargeSprite": "TestPoison.png",
+		"PreviewTargetKey": "Target1",
+		"SmallSprite": "TestPoison.png",
+		"SnippetDesc": "Test Targeting",
+		"SubActions": {
+			"10": {
+				"SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_GetTarget.gd",
+				"TargetKey": "Target1"
+			},
+			"11": {
+				"EffectKey": "TestPoison",
+				"SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_ApplyEffect.gd",
+				"TargetKey": "Target1"
+			}
+		},
+		"Tags": [
+			"Attack"
+		],
+		"TargetParams": {
+			"Target1": {
+				"EffectArea": [
+					[
+						-1,
+						0
+					],
+					[
+						1,
+						0
+					],
+					[
+						0,
+						0
+					],
+					[
+						0,
+						1
+					],
+					[
+						0,
+						-1
+					]
+				],
+				"LineOfSight": true,
+				"TargetArea": [
+					[
+						-1,
+						1
+					],
+					[
+						0,
+						1
+					],
+					[
+						1,
+						1
+					],
+					[
+						-1,
+						2
+					],
+					[
+						0,
+						2
+					],
+					[
+						1,
+						2
+					],
+					[
+						-1,
+						3
+					],
+					[
+						0,
+						3
+					],
+					[
+						1,
+						3
+					],
+					[
+						0,
+						4
+					],
+					[
+						-1,
+						4
+					],
+					[
+						1,
+						4
+					]
+				],
+				"TargetType": "Actor"
+			}
+		}
+	},
+	{
+		"@@COMMENT@@": "Snippet and Description are loaded for Translator",
+		"ActionKey": "TestZone",
+		"Description": "Test Target Test Target Test Target Test Target",
+		"DisplayName": "Test Target",
+		"LargeSprite": "TestZone.png",
+		"SmallSprite": "TestZone.png",
+		"SnippetDesc": "Test Targeting",
+		"SubActions": {
+			"10": {
+				"SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_CreateZone.gd",
+				"ZoneData": {
+					"ApplyToSelf": false,
+					"EffectKey": "TestZonePoison",
+					"ZoneArea": [
+						[
+							0,
+							0
+						],
+						[
+							1,
+							0
+						],
+						[
+							1,
+							1
+						],
+						[
+							1,
+							-1
+						],
+						[
+							0,
+							1
+						],
+						[
+							0,
+							-1
+						],
+						[
+							-1,
+							-1
+						],
+						[
+							-1,
+							0
+						],
+						[
+							-1,
+							1
+						]
+					],
+					"ZoneKey": "TestZone",
+					"ZoneType": "Aura"
+				}
+			}
+		},
+		"Tags": [
+			"Attack"
+		]
+	},
+	{
+		"@@COMMENT@@": "Snippet and Description are loaded for Translator",
+		"ActionKey": "TestItem",
+		"Description": "Test Item Test Item Test Item Test Item",
+		"DisplayName": "Test Item",
+		"LargeSprite": "TestItem.png",
+		"OnQueUiState": "res://assets/Scripts/Ui/UiStates/UiState_ItemSelection.gd",
+		"SmallSprite": "TestItem.png",
+		"SnippetDesc": "Test Item",
+		"SubActions": {
+			"10": {
+				"SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_UseItem.gd"
+			}
+		},
+		"Tags": [
+			"Item"
+		]
+	}
+]

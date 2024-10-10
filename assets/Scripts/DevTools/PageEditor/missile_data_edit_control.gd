@@ -6,9 +6,10 @@ extends Control
 @onready var data_panel:NinePatchRect = $VBoxContainer/Background2
 
 @onready var key_input:LineEdit = $VBoxContainer/Background2/VBoxContainer/KeyInputContainer/KeyInput
-@onready var sprite_options:LoadedOptionButton = $VBoxContainer/Background2/VBoxContainer/HBoxContainer/LoadedOptionButton
 @onready var damage_data_options:LoadedOptionButton = $VBoxContainer/Background2/VBoxContainer/HBoxContainer2/LoadedOptionButton
 @onready var speed_input:SpinBox = $VBoxContainer/Background2/VBoxContainer/HBoxContainer3/SpinBox
+
+@onready var animated_sprite_input:AnimatedSpriteInputControl = $VBoxContainer/Background2/VBoxContainer/AnimatedSpriteInputControl
 
 var missile_datas:Dictionary = {}
 var editing_key:String = ''
@@ -17,7 +18,6 @@ var editing_key:String = ''
 func _ready() -> void:
 	data_panel.visible = false
 	key_input.focus_exited.connect(_save_current_values)
-	sprite_options.get_options_func = get_sprite_options
 	damage_data_options.get_options_func = get_damage_options
 	
 	add_button.pressed.connect(_add_new_data)
@@ -38,7 +38,7 @@ func _add_new_data():
 	speed_input.set_value_no_signal(0)
 	key_input.clear()
 	damage_data_options.load_options()
-	sprite_options.load_options()
+	animated_sprite_input.clear()
 
 func get_sprite_options():
 	var list = []
@@ -71,8 +71,8 @@ func _save_current_values():
 	missile_datas[missile_key]['MissileDataKey'] = key_input.text
 	speed_input.apply()
 	missile_datas[missile_key]['FramesPerTile'] = speed_input.value
-	missile_datas[missile_key]['MissileSprite'] = sprite_options.get_current_option_text()
 	missile_datas[missile_key]['DamageDataKey'] = damage_data_options.get_current_option_text()
+	missile_datas[missile_key]['AnimationData'] = animated_sprite_input.save_data()
 	
 	drop_options.clear()
 	drop_options.add_item("None", 0)
@@ -96,8 +96,10 @@ func load_values(missile_key:String):
 	editing_key = missile_key
 	key_input.text = missile_key
 	speed_input.set_value_no_signal(missile_datas[missile_key]['FramesPerTile'])
-	sprite_options.load_options(missile_datas[missile_key]['MissileSprite'])
 	damage_data_options.load_options(missile_datas[missile_key]['DamageDataKey'])
+	animated_sprite_input.load_options(PageEditControl.Instance.selected_file.get_base_dir(),
+									 missile_datas[missile_key]['AnimationData'],
+									[])
 
 func load_page_data(data:Dictionary):
 	missile_datas = data.get('MissileDatas', {})
@@ -112,7 +114,6 @@ func load_page_data(data:Dictionary):
 		editing_key = ''
 		key_input.clear()
 		speed_input.set_value_no_signal(0)
-		sprite_options.load_options()
 		damage_data_options.load_options()
 
 func save_page_data()->Dictionary:
