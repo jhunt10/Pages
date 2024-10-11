@@ -53,10 +53,15 @@
 				"Value":500 
 			}
 		},
-		"Triggers": [],
-		"TurnDuration": 3,
-		"AttackPower": 0,
-		"DamageType": "Test"
+		"SubEffects": {
+			"ApplyWardToSelf": {
+				"SubEffectScript": "res://assets/Scripts/Effects/SubEffects/SubEffect_ApplyDamageMod.gd",
+				"DamageModKey": "DamageMod1"
+			},
+			"ApplyWardToSelf": {
+				"SubEffectScript": "res://assets/Scripts/Effects/SubEffects/SubEffect_ApplyDamageMod.gd",
+				"DamageModKey": "DamageMod1"
+			}
+		}
 	},
-	
 ]

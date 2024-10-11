@@ -28,8 +28,8 @@ func set_actor(act:BaseActor):
 	health_bar.set_actor(actor, StatHolder.HealthKey)
 	actor.Que.action_que_changed.connect(sync)
 	CombatRootControl.Instance.QueController.start_of_round.connect(_on_start_round)
-	CombatRootControl.Instance.QueController.end_of_frame.connect(sync)
-	CombatRootControl.Instance.QueController.end_of_turn.connect(sync)
+	CombatRootControl.Instance.QueController.end_of_frame.connect(_on_frame_or_turn_end)
+	CombatRootControl.Instance.QueController.end_of_turn.connect(_on_frame_or_turn_end)
 	CombatRootControl.Instance.QueController.end_of_round.connect(_on_end_round)
 	_build_stat_bars()
 	_sync_values()
@@ -95,6 +95,9 @@ func _create_stat_bar(stat_name):
 func _on_start_round():
 	for bar:StatBarControl in _stat_bars.values():
 		bar.set_previewing_mode(false)
+
+func _on_frame_or_turn_end():
+	sync()
 	
 func _on_end_round():
 	for bar:StatBarControl in _stat_bars.values():

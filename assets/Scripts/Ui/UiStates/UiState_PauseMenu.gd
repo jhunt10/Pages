@@ -15,9 +15,6 @@ func start_state():
 	CombatRootControl.Instance.ui_controller.pause_menu.visible = true
 	pass
 
-func update(delta:float):
-	pass
-
 func end_state():
 	CombatRootControl.Instance.ui_controller.pause_menu.visible = false
 	pass

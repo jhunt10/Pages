@@ -72,16 +72,13 @@ func _calc_cache_stats():
 	
 	# Aggregate all the mods together by stat_name, then type
 	var agg_mods = {}
-	#for effect:BaseEffect in _actor.effects.list_effects():
-		#if effect.stat_mod_data.size() != 0:
-			#for mod:BaseStatMod in _build_mods_from_effect(effect):
-				#if LOGGING: print("- Adding Mod from Effect '%s': Type:%s | Val:%s" % [effect.EffectKey, mod.mod_type, mod.value])
-				#if not agg_mods.keys().has(mod.stat_name):
-					#agg_mods[mod.stat_name] = {}
-				#if not agg_mods[mod.stat_name].keys().has(mod.mod_type):
-					#agg_mods[mod.stat_name][mod.mod_type] = []
-				#agg_mods[mod.stat_name][mod.mod_type].append(mod.value)
-		#elif LOGGING: print("- Effect: %s has no stat mods" % effect.EffectKey)
+	for mod:BaseStatMod in _actor.effects.get_stat_mods():
+		if LOGGING: print("# Found Mod '", mod.display_name, " for: %s" % _actor.ActorKey)
+		if not agg_mods.keys().has(mod.stat_name):
+			agg_mods[mod.stat_name] = {}
+		if not agg_mods[mod.stat_name].keys().has(mod.mod_type):
+			agg_mods[mod.stat_name][mod.mod_type] = []
+		agg_mods[mod.stat_name][mod.mod_type].append(mod.value)
 		
 		
 	if LOGGING: print("- Found: %s modded stats" % agg_mods.size())
@@ -109,9 +106,3 @@ func apply_damage(value:int, _damage_type:String, _source):
 	_bar_stats[HealthKey] = _bar_stats[HealthKey] - value
 	if current_health <= 0:
 		CombatRootControl.Instance.kill_actor(_actor)
-	
-static func _build_mods_from_effect(effect:BaseEffect)->Array:
-	var outarr = []
-	for stat_name in effect.stat_mod_data.keys():
-		outarr.append(BaseStatMod.new(effect.Id, stat_name, effect.stat_mod_data[stat_name]))
-	return outarr

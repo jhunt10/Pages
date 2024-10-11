@@ -5,39 +5,29 @@ class_name EffectHolder
 
 var _actor:BaseActor
 var _effects:Dictionary = {}
-var _triggers_to_ids:Dictionary = {}
-var _system_triggers_to_ids:Dictionary = {}
+var _triggers_to_effect_ids:Dictionary = {}
 
 func _init(actor:BaseActor) -> void:
 	_actor = actor
 	
 	for t in BaseEffect.EffectTriggers.values():
-		_triggers_to_ids[t] = []
-		_system_triggers_to_ids[t] = []
+		_triggers_to_effect_ids[t] = []
 	
 	# Connect signals
 	if CombatRootControl.Instance:
-		CombatRootControl.Instance.QueController.start_of_turn.connect(_on_turn_start)
-		CombatRootControl.Instance.QueController.end_of_turn.connect(_on_turn_end)
-		CombatRootControl.Instance.QueController.start_of_round.connect(_on_round_start)
-		CombatRootControl.Instance.QueController.end_of_round.connect(_on_round_end)
+		CombatRootControl.Instance.QueController.start_of_turn_with_state.connect(_on_turn_start)
+		CombatRootControl.Instance.QueController.end_of_turn_with_state.connect(_on_turn_end)
+		CombatRootControl.Instance.QueController.start_of_round_with_state.connect(_on_round_start)
+		CombatRootControl.Instance.QueController.end_of_round_with_state.connect(_on_round_end)
 		actor.on_move.connect(_on_actor_moved)
 	
 func add_effect(effect_key:String, effect_data:Dictionary)->BaseEffect:
 	var effect = MainRootNode.effect_libary.create_new_effect(effect_key, _actor, effect_data)
 	
-	if effect.is_instant:
-		effect.do_effect()
-		return effect
-	
 	_effects[effect.Id] = effect
 	for trigger in effect.Triggers:
-		_triggers_to_ids[trigger].append(effect.Id)
-	for trigger in effect.system_triggers:
-		_system_triggers_to_ids[trigger].append(effect.Id)
-	#if effect.stat_mod_data.size() > 0:
-		#_actor.stats.dirty_stats()
-	#gained_effect.emit(effect)
+		_triggers_to_effect_ids[trigger].append(effect.Id)
+	effect.on_created(CombatRootControl.Instance.GameState)
 	return effect
 		
 func list_effects()->Array:
@@ -54,41 +44,52 @@ func remove_effect(effect:BaseEffect):
 	if !_effects.has(effect_id):
 		printerr("Unknown effect: " + effect_id)
 		return
-	_effects.erase(effect_id)
-	for trigger in effect.Triggers:
-		_triggers_to_ids[trigger].erase(effect_id)
-	for trigger in effect.system_triggers:
-		_system_triggers_to_ids[trigger].erase(effect_id)
-	if effect.stat_mod_data.size() > 0:
-		_actor.stats.dirty_stats()
-	#lost_effect.emit(effect_id)
 	effect.on_delete()
+	_effects.erase(effect_id)
+	for trigger in BaseEffect.EffectTriggers:
+		_triggers_to_effect_ids[trigger].erase(effect_id)
+	_actor.stats.dirty_stats()
+	
+func get_damage_mods():
+	var out_list = []
+	for effect:BaseEffect in _effects.values():
+		for mod in effect.get_active_damage_mods():
+			out_list.append(mod)
+	return out_list
+	
+func get_stat_mods():
+	var out_list = []
+	for effect:BaseEffect in _effects.values():
+		for mod in effect.get_active_stat_mods():
+			out_list.append(mod)
+	return out_list
+	
+func _trigger_effects(trigger:BaseEffect.EffectTriggers, game_state:GameStateData):
+	printerr("Triggering Effects: " + str(trigger))
+	for id in _triggers_to_effect_ids[trigger]:
+		var effect:BaseEffect = _effects.get(id, null)
+		if not effect:
+			printerr("Missing effect with id: '%s'." % [id])
+			_effects.erase(id)
+			_triggers_to_effect_ids.erase(id)
+		else:
+			printerr("Trigger effect with id: '%s'." % [id])
+			effect.trigger_effect(trigger, game_state)
+	pass
 
-func _on_turn_start():
-	for id in _system_triggers_to_ids[BaseEffect.EffectTriggers.OnTurnStart]:
-		_effects[id]._system_on_turn_start()
-	for id in _triggers_to_ids[BaseEffect.EffectTriggers.OnTurnStart]:
-		_effects[id]._on_turn_start()
+func _on_turn_start(game_state:GameStateData):
+	_trigger_effects(BaseEffect.EffectTriggers.OnTurnStart, game_state)
 
-func _on_turn_end():
-	for id in _triggers_to_ids[BaseEffect.EffectTriggers.OnTurnEnd]:
-		_effects[id]._on_turn_end()
-	for id in _system_triggers_to_ids[BaseEffect.EffectTriggers.OnTurnEnd]:
-		_effects[id]._system_on_turn_end()
+func _on_turn_end(game_state:GameStateData):
+	_trigger_effects(BaseEffect.EffectTriggers.OnTurnEnd, game_state)
 
-func _on_round_start():
-	for id in _system_triggers_to_ids[BaseEffect.EffectTriggers.OnRoundStart]:
-		_effects[id]._system_on_round_start()
-	for id in _triggers_to_ids[BaseEffect.EffectTriggers.OnRoundStart]:
-		_effects[id]._on_round_start()
+func _on_round_start(game_state:GameStateData):
+	_trigger_effects(BaseEffect.EffectTriggers.OnRoundStart, game_state)
 
-func _on_round_end():
-	for id in _triggers_to_ids[BaseEffect.EffectTriggers.OnRoundEnd]:
-		_effects[id]._on_round_end()
-	for id in _system_triggers_to_ids[BaseEffect.EffectTriggers.OnRoundEnd]:
-		_effects[id]._system_on_round_end()
+func _on_round_end(game_state:GameStateData):
+	_trigger_effects(BaseEffect.EffectTriggers.OnRoundEnd, game_state)
 		
 func _on_actor_moved(old_pos:MapPos, new_pos:MapPos, move_type:String, moved_by:BaseActor):
-	for id in _triggers_to_ids[BaseEffect.EffectTriggers.OnMove]:
-		_effects[id]._on_move(old_pos, new_pos, move_type, moved_by)
+	for id in _triggers_to_effect_ids[BaseEffect.EffectTriggers.OnMove]:
+		_effects[id].trigger_on_move(old_pos, new_pos, move_type, moved_by)
 	

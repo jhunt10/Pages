@@ -59,7 +59,7 @@ func _process(delta: float) -> void:
 			CombatRootControl.Instance.create_flash_text(actor_node.Actor, "-"+str(flash_number), Color.RED)
 	pass
 
-func set_props(veffect_key:String, actor:ActorNode, flash_number:int = -1, max_offset=MAX_OFFSET):
+func set_props(veffect_key:String, actor:ActorNode, flash_number:int = -1, _max_offset=MAX_OFFSET):
 	self.flash_number = flash_number
 	self.actor_node = actor
 	self.veffect_key = veffect_key

@@ -1,15 +1,16 @@
 class_name BaseEffect
 # An "Effect" is any Buff, Debuff, or modifier on an actor. 
 
-enum SubActionPropType {TargetKey, DamageData, SubTriggers, SubDuration, SubEffectKey, StringVal, IntVal}
-
 enum EffectTriggers { 
-	OnCreate, OnTurnStart, OnTurnEnd, 
+	OnCreate, OnDurationEnds,
+	OnTurnStart, OnTurnEnd, 
 	OnRoundStart, OnRoundEnd,
-	OnDamageTaken, OnDamagDealt,
-	OnCalcDamageTaken, OnCalcDamageDealt,
-	OnMove, OnPushed, OnPushing,
+	OnMove, OnDamageTaken, OnDamagDealt,
+	OnDeath, OnKill
 	}
+
+## Triggers which require additional information have thier own methods and do not use trigger_effect()
+const TRIGGERS_WITH_ADDITIONAL_DATA = [EffectTriggers.OnMove, EffectTriggers.OnDamagDealt, EffectTriggers.OnDamageTaken, EffectTriggers.OnKill ]
 
 var Id : String = str(ResourceUID.create_id())
 var LoadPath:String
@@ -19,113 +20,101 @@ var DisplayName:String
 var SnippetDesc:String
 var Description:String
 var Tags:Array = []
-var Triggers:Array = []
 # Triggers added by the system an not config, like OnTurnEnds for TurnDuration
 var system_triggers:Array = []
 
 var _actor:BaseActor
 var _icon_sprite:String
 
-# Instant effects are triggered and dispoded of immediately
-var is_instant:bool = false
-var _turn_duration:int = -1
-var _turn_timer:int = 0
-var _round_duration:int = -1
-var _round_timer:int = 0
+var Triggers:Array:
+	get: return _triggers_to_sub_effects.keys()
+var StatModDatas:Dictionary:
+	get: return EffectData.get("StatMods", {})
+var DamageModDatas:Dictionary:
+	get: return EffectData.get("DamageMods", {})
+var SubEffectDatas:Dictionary:
+	get: return EffectData.get("SubEffects", {})
 
-func _init(actor:BaseActor, args:Dictionary) -> void:
+var _enabled:bool = true
+var _deleted:bool = false
+var _sub_effects:Dictionary={}
+var _triggers_to_sub_effects:Dictionary={}
+var _duration_counter:int = -1
+
+func _init(actor:BaseActor, data:Dictionary) -> void:
 	_actor = actor
-	LoadPath = args['LoadPath']
-	EffectKey = args['EffectKey']
-	EffectData = args
-	print("Init Effect: %s | %s" % [EffectKey, args['Triggers']])
+	LoadPath = data['LoadPath']
+	EffectKey = data['EffectKey']
+	EffectData = data.duplicate()
 	
 	#TODO: Translations
-	DisplayName = args['DisplayName']
-	SnippetDesc = args['SnippetDesc']
-	Description = args['Description']
-	Tags = args['Tags']
-	_icon_sprite = args['IconSprite']
+	DisplayName = EffectData['DisplayName']
+	SnippetDesc = EffectData['SnippetDesc']
+	Description = EffectData['Description']
+	Tags = EffectData['Tags']
+	_icon_sprite = EffectData['IconSprite']
 	
-	# Instand effects ignore all logic bellow
-	if args['Triggers'] is String and args['Triggers'] == "Instant":
-		is_instant = true
-		return
-	
-	for t in args['Triggers']:
-		var temp_type = EffectTriggers.get(t)
-		if temp_type:
-			Triggers.append(temp_type)
-		else: 
-			printerr("Unknown Effect Trigger: " + t)
-			
-	# Get Turn and round duration for effect
-	# Start and End is handeled  by automatically by the _system funcs
-	if args.has("TurnDuration"):
-		# Subtract 1 since the turn it's being created on wasn't counted
-		_turn_duration = args['TurnDuration'] - 1
-		if !system_triggers.has(EffectTriggers.OnTurnStart):
-			system_triggers.append(EffectTriggers.OnTurnStart)
-		if !system_triggers.has(EffectTriggers.OnTurnEnd):
-			system_triggers.append(EffectTriggers.OnTurnEnd)
-	if args.has("RoundDuration"):
-		# Subtract 1 since the round it's being created on wasn't counted
-		_round_duration = args['RoundDuration'] - 1
-		if !system_triggers.has(EffectTriggers.OnRoundStart):
-			system_triggers.append(EffectTriggers.OnRoundStart)
-		if !system_triggers.has(EffectTriggers.OnRoundEnd):
-			system_triggers.append(EffectTriggers.OnRoundEnd)
-
-func do_effect():
-	pass
-
-func _on_duration_end():
-	pass
-
-func _on_turn_start():
-	pass
-
-func _on_turn_end():
-	pass
-
-func _on_round_start():
-	pass
-
-func _on_round_end():
-	pass
-
-func _on_deal_damage(value:int, damage_type:String, target:BaseActor):
-	pass
-
-func _on_take_damage(value:int, damage_type:String, source):
-	pass
-
-func _on_move(_old_pos:MapPos, _new_pos:MapPos, _move_type:String, _moved_by:BaseActor):
-	pass
-
-func on_delete():
-	pass
+	_sub_effects = EffectLibary.create_sub_effects(self)
+	_cache_triggers()
 
 func get_sprite():
 	return load(LoadPath + "/" +_icon_sprite)
+
+func get_active_stat_mods():
+	var out_list = []
+	for sub_effect:BaseSubEffect in _sub_effects.values():
+		for mod in sub_effect.get_active_stat_mods():
+			out_list.append(mod)
+	return out_list
 	
-# System triggers for controlling effects outside of thier config
-func _system_on_turn_start():
-	_turn_timer += 1
+func get_active_damage_mods():
+	var out_list = []
+	for sub_effect:BaseSubEffect in _sub_effects.values():
+		for mod in sub_effect.get_active_damage_mods():
+			out_list.append(mod)
+	return out_list
+
+func _cache_triggers():
+	_triggers_to_sub_effects.clear()
+	for sub_key in _sub_effects.keys():
+		var sub_effect:BaseSubEffect  = _sub_effects[sub_key]
+		for trig:EffectTriggers in sub_effect.get_required_triggers():
+			if not _triggers_to_sub_effects.keys().has(trig):
+				_triggers_to_sub_effects[trig] = []
+			if not _triggers_to_sub_effects[trig].has(sub_key):
+				_triggers_to_sub_effects[trig].append(sub_key)
+
+func _get_effects_triggered_by(trigger:EffectTriggers)->Array:
+	var list = []
+	if _triggers_to_sub_effects.keys().has(trigger):
+		for key in _triggers_to_sub_effects[trigger]:
+			list.append(_sub_effects[key])
+	return list
+
+func on_created(game_state:GameStateData):
+	for sub_effect:BaseSubEffect in _get_effects_triggered_by(EffectTriggers.OnCreate):
+		sub_effect.on_effect_trigger(EffectTriggers.OnCreate, game_state)
 	pass
 
-func _system_on_turn_end():
-	if _turn_duration > 0 && _turn_timer >= _turn_duration:
-		_on_duration_end()
+func on_delete():
+	if _deleted:
+		return
+	for sub_effect:BaseSubEffect in _sub_effects.values():
+		sub_effect.on_delete()
+	_deleted = true
+	_actor.effects.remove_effect(self)
+
+func trigger_effect(trigger:EffectTriggers, game_state:GameStateData):
+	if TRIGGERS_WITH_ADDITIONAL_DATA.has(trigger):
+		printerr("BaseEffect.trigger_effect: Called with trigger '%s' which requirers it's own method." % [trigger])
+		return
+	for sub_effect:BaseSubEffect in _get_effects_triggered_by(trigger):
+		sub_effect.on_effect_trigger(trigger, game_state)
+	if _enabled and _duration_counter == 0 and trigger != EffectTriggers.OnDurationEnds:
+		trigger_effect(EffectTriggers.OnDurationEnds, game_state)
+		_enabled = false
 		_actor.effects.remove_effect(self)
-	pass
 
-func _system_on_round_start():
-	_round_timer += 1
-	pass
-
-func _system_on_round_end():
-	if _round_duration > 0 && _round_timer >= _round_duration:
-		_on_duration_end()
-		_actor.effects.remove_effect(self)
-	pass
+func trigger_on_move(game_state:GameStateData, old_pos:MapPos, new_pos:MapPos, move_type:String, moved_by_actor:BaseActor):
+	for sub_effect:BaseSubEffect in _get_effects_triggered_by(EffectTriggers.OnMove):
+		sub_effect.on_move(game_state, old_pos, new_pos, move_type, moved_by_actor)

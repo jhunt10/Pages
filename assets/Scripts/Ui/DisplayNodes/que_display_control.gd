@@ -21,7 +21,7 @@ func _ready():
 	que_controller.end_of_turn.connect(_hide_action_highlight)
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if _resize:
 		self.size = Vector2i(main_container.size.x + (2 * PADDING),
 							main_container.size.y + (2 * PADDING))

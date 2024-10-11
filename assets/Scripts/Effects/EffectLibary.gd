@@ -54,6 +54,18 @@ func create_new_effect(key:String, actor:BaseActor, data:Dictionary)->BaseEffect
 	var new_effect:BaseEffect = script.new(actor, merged_data)
 	return new_effect
 	
+static func create_sub_effects(effect:BaseEffect)->Dictionary:
+	var dict = {}
+	for sub_key in effect.SubEffectDatas.keys():
+		var sub_data = effect.SubEffectDatas[sub_key]
+		var script = load(sub_data['SubEffectScript'])
+		if !script:
+			printerr("EffectLibary.create_sub_effects: Failed to find effect script: " + sub_key)
+			continue
+		var inst = script.new(effect, effect.SubEffectDatas[sub_key])
+		dict[sub_key] = inst
+	return dict
+	
 static func search_for_effect_files()->Array:
 	var list = []
 	_rec_search_for_effects(EffectDir, list)

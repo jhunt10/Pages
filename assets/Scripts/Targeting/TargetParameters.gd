@@ -77,7 +77,7 @@ func get_valid_target_area(center:MapPos, line_of_sight:bool)->Dictionary:
 			#valid_list.append(vec)
 	return los_dict
 	
-static func trace_los(from_point, to_point, map_state):
+static func trace_los(from_point, to_point, _map_state):
 	var los_dict = {}
 	var line = safe_calc_line(from_point, to_point,  false, false, true)
 	for point in line:
@@ -153,8 +153,6 @@ static func safe_calc_line(start, end, round_down=false, fill_back:bool=false, f
 	var last_y = min_point.y
 	var m:float = float(max_point.y - min_point.y) / float(max_point.x - min_point.x)
 	for check_x in range(min_point.x, max_point.x+1):
-		var res_x = 0
-		var res_y = 0
 		var check_y = 0
 		if round_down: check_y = floori(m * float(check_x))
 		else: check_y = round(m * float(check_x))
@@ -186,7 +184,7 @@ static func safe_calc_line(start, end, round_down=false, fill_back:bool=false, f
 			out_line.append(Vector2i(res_y, res_x))
 		else:
 			out_line.append(Vector2i(res_x, res_y))
-	print("Inverted: %s | Xmirror: %s | YMirror: %s" % [is_inverted, is_y_mirrored, is_x_mirrored])
+	#print("Inverted: %s | Xmirror: %s | YMirror: %s" % [is_inverted, is_y_mirrored, is_x_mirrored])
 	
 	return out_line
 	

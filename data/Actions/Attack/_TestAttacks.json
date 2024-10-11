@@ -253,15 +253,15 @@
 		}
 	},
 	{
-		"ActionKey": "TestHealthBuff",
+		"ActionKey": "TestEffect",
 		"CostData": {
 			"Mana": 20
 		},
 		"DamageDatas": {
 
 		},
-		"Description": "Apply TestHealthBuff effect",
-		"DisplayName": "Test Health Buff",
+		"Description": "Apply test effect",
+		"DisplayName": "Test test Buff",
 		"LargeSprite": "TestHeart.png",
 		"PreviewTargetKey": "Preview",
 		"SmallSprite": "TestHeart.png",
@@ -269,7 +269,7 @@
 		"SubActions": {
 			"11": [
 				{
-					"EffectKey": "TestHealthBuff",
+					"EffectKey": "WardingBond",
 					"SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_ApplyEffect.gd",
 					"TargetKey": "Self"
 				}

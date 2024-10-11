@@ -22,7 +22,7 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if _resize:
 		self.size = Vector2i(main_container.size.x + (2 * PADDING),
 							main_container.size.y + (2 * PADDING))
@@ -48,11 +48,11 @@ func set_actor(actor:BaseActor):
 		index += 1
 	_resize = true
 
-func allow_input(allow:bool):
+func allow_input(_allow:bool):
 	pass
 
 
-func _mouse_entered_page_button(index, key_name):
+func _mouse_entered_page_button(_index, key_name):
 	if CombatRootControl.Instance.QueController.execution_state != QueControllerNode.ActionStates.Waiting:
 		return
 	var action:BaseAction = MainRootNode.action_libary.get_action(key_name)

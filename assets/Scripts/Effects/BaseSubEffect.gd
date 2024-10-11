@@ -1,24 +1,50 @@
 class_name BaseSubEffect
 
-static func get_required_tags()->Array:
+enum SubEffectPropTypes {Triggers, StatModKey, DamageModKey, SubEffectKey, StringVal, IntVal}
+
+# Returns a Dictionary of {Property Name, Property Type} for what properties this subeffect
+# 	exspects to find in it's subeffect_data (Mostly for Effect Editor)
+func get_required_props()->Dictionary:
+	return {}
+
+var parent_effect:BaseEffect
+var data:Dictionary
+
+func _init(effect:BaseEffect, subeffect_data:Dictionary) -> void:
+	parent_effect = effect
+	data = subeffect_data.duplicate()
+
+func get_required_triggers()->Array:
 	return []
 
-static func get_optional_triggers(effect:BaseEffect, sub_effect_data:Dictionary)->Array:
+func get_optional_triggers()->Array:
 	var list = []
-	if sub_effect_data.has("OptionalTriggers"):
-		for trig_str in sub_effect_data['OptionalTriggers']:
+	if data.has("OptionalTriggers"):
+		for trig_str in data['OptionalTriggers']:
 			if BaseEffect.EffectTriggers.has(trig_str):
 				list.append(BaseEffect.EffectTriggers.get(trig_str))
 	return list
 
-static func do_effect(trigger:BaseEffect.EffectTriggers, effect:BaseEffect, sub_effect_data:Dictionary, game_state:GameStateData):
+func get_active_stat_mods()->Array:
+	return []
+	
+func get_active_damage_mods()->Array:
+	return []
+
+func on_delete():
 	pass
 
-func on_deal_damage(value:int, damage_type:String, target:BaseActor):
+func on_effect_trigger(_trigger:BaseEffect.EffectTriggers, _game_state:GameStateData):
 	pass
 
-func on_take_damage(value:int, damage_type:String, source):
+func on_deal_damage(_game_state:GameStateData, _value:int, _damage_type:String, _target:BaseActor):
 	pass
 
-func on_move(_old_pos:MapPos, _new_pos:MapPos, _move_type:String, _moved_by:BaseActor):
+func on_take_damage(_game_state:GameStateData, _value:int, _damage_type:String, _source):
+	pass
+
+func on_move(_game_state:GameStateData, _old_pos:MapPos, _new_pos:MapPos, _move_type:String, _moved_by:BaseActor):
+	pass
+
+func on_use_item(_game_state:GameStateData, _item, _target):
 	pass

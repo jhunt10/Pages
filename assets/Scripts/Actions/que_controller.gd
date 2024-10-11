@@ -6,22 +6,28 @@ extends Node2D
 
 # End round early if no more actions are qued (for testing)
 const SHORTCUT_QUE = true
-const DEEP_LOGGING = true
+const DEEP_LOGGING = false
 const FRAMES_PER_ACTION = 24
 const SUB_ACTION_FRAME_TIME = 0.05
 
 # Start of new Round
-signal start_of_round
+signal start_of_round()
+signal start_of_round_with_state(game_state:GameStateData)
 # Start of new Turn
-signal start_of_turn
+signal start_of_turn()
+signal start_of_turn_with_state(game_state:GameStateData)
 # Start of new Frame
-signal start_of_frame
+signal start_of_frame()
+signal start_of_frame_with_state(game_state:GameStateData)
 # End of current Frame
-signal end_of_frame
+signal end_of_frame()
+signal end_of_frame_with_state(game_state:GameStateData)
 # End of current Turn
-signal end_of_turn
+signal end_of_turn()
+signal end_of_turn_with_state(game_state:GameStateData)
 # End of current Round
-signal end_of_round
+signal end_of_round()
+signal end_of_round_with_state(game_state:GameStateData)
 
 # Emitted any time the que switches to excuting action
 signal execution_active
@@ -67,6 +73,7 @@ func _start_round():
 	
 	execution_state = ActionStates.Running
 	start_of_round.emit()
+	start_of_round_with_state.emit(CombatRootControl.Instance.GameState)
 	execution_active.emit()
 
 func _end_round():
@@ -78,6 +85,7 @@ func _end_round():
 	sub_action_timer = 0
 	execution_state = ActionStates.Waiting
 	end_of_round.emit()
+	end_of_round_with_state.emit(CombatRootControl.Instance.GameState)
 	execution_suspended.emit()
 	_clear_ques()
 	
@@ -131,8 +139,12 @@ func _process(delta: float) -> void:
 			# Emit starting signals
 			if sub_action_index == 0:
 				start_of_turn.emit()
+				start_of_turn_with_state.emit(game_state)
 				_pay_turn_costs()
+			
+			# Start Frame
 			start_of_frame.emit()
+			start_of_frame_with_state.emit(game_state)
 			label.text = str(action_index) + ":" + str(sub_action_index)
 			
 			# Do all actions for frame
@@ -143,6 +155,7 @@ func _process(delta: float) -> void:
 				# Check if the last action stopped execution
 				if execution_state != ActionStates.Running:
 					end_of_frame.emit()
+					end_of_frame_with_state.emit(game_state)
 					return
 					
 			# Resolve all missiles that have reached thier target
@@ -152,12 +165,14 @@ func _process(delta: float) -> void:
 					game_state.delete_missile(missile)
 			
 			end_of_frame.emit()
+			end_of_frame_with_state.emit(game_state)
 			que_index = 0
 			sub_action_index += 1
 			
 			# All subactions for turn have finished
 			if sub_action_index >= BaseAction.SUB_ACTIONS_PER_ACTION:
 				end_of_turn.emit()
+				end_of_turn_with_state.emit(game_state)
 				sub_action_index = 0
 				que_index = 0
 				action_index += 1
@@ -169,12 +184,14 @@ func _process(delta: float) -> void:
 							any_left = true
 					if not any_left:
 						end_of_round.emit()
+						end_of_round_with_state.emit(game_state)
 						_end_round()
 						return
 				
 			# All actions for que have finished
 			if action_index >= max_que_size:
 				end_of_round.emit()
+				end_of_round_with_state.emit(game_state)
 				_end_round()
 
 func _clear_ques():

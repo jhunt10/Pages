@@ -36,7 +36,7 @@ func set_ui_state_from_path(path, args):
 	if current_ui_state:
 		current_ui_state.end_state()
 		last_state = current_ui_state
-		print("Last UiState set to: " + last_state._get_debug_name())
+		#print("Last UiState set to: " + last_state._get_debug_name())
 		current_ui_state = null
 	var script = load(path)
 	current_ui_state = script.new(self, args)
@@ -46,7 +46,7 @@ func back_to_last_state():
 	if !last_state:
 		printerr("Last UiState Lost")
 		return
-	print("Returning to state: " + last_state._get_debug_name())
+	#print("Returning to state: " + last_state._get_debug_name())
 	if current_ui_state:
 		current_ui_state.end_state()
 		current_ui_state = null
@@ -60,8 +60,6 @@ func _input(event: InputEvent) -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if current_ui_state:
-		if event is InputEventMouseButton:
-			print("Input for UiState: " + current_ui_state._get_debug_name())
 		current_ui_state.handle_input(event)
 		
 func _on_menu_pressed():

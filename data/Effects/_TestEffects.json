@@ -1,57 +1,7 @@
 [
 	{
-		"EffectKey": "TestPoison",
-		"EffectScript": "res://assets/Scripts/Effects/Scripts/Effect_DanageOn.gd",
-		"DisplayName": "Test Target",
-		"SnippetDesc": "Test Targeting",
-		"Description": "Test Target Test Target Test Target Test Target",
-		"IconSprite": "TestPoison.png",
-		"Tags": ["Attack"],
-		"Triggers": ["OnTurnEnd"],
-		"TurnDuration": 3,
-		"AttackPower": 25,
-		"DamageType": "Test"
-	},
-	{
-		"EffectKey": "TestPoisonOnMove",
-		"EffectScript": "res://assets/Scripts/Effects/Scripts/Effect_DanageOn.gd",
-		"DisplayName": "Test Target",
-		"SnippetDesc": "Test Targeting",
-		"Description": "Test Target Test Target Test Target Test Target",
-		"IconSprite": "TestPoisonOnMove.png",
-		"Tags": ["Attack"],
-		"Triggers": ["OnMove"],
-		"TurnDuration": 5,
-		"AttackPower": 25,
-		"DamageType": "Test"
-	},
-	{
-		"EffectKey": "TestZonePoison",
-		"EffectScript": "res://assets/Scripts/Effects/Scripts/Effect_DanageOn.gd",
-		"DisplayName": "Test Target",
-		"SnippetDesc": "Test Targeting",
-		"Description": "Test Target Test Target Test Target Test Target",
-		"IconSprite": "TestPoison.png",
-		"Tags": ["Attack"],
-		"Triggers": ["OnTurnEnd"],
-		"AttackPower": 25,
-		"DamageType": "Test"
-	},
-	{
-		"EffectKey": "TestHealPotion",
-		"EffectScript": "res://assets/Scripts/Effects/Scripts/Effect_DanageOn.gd",
-		"DisplayName": "Test Heal Potion",
-		"SnippetDesc": "Test Heal Potion",
-		"Description": "Test Heal Potion",
-		"IconSprite": "TestPoison.png",
-		"Tags": ["Healing"],
-		"Triggers": "Instant",
-		"AttackPower": -25,
-		"DamageType": "HEal"
-	},
-	{
 		"EffectKey": "WardingBond",
-		"EffectScript": "res://assets/Scripts/Effects/Scripts/Effect_DanageOn.gd",
+		"EffectScript": "res://assets/Scripts/Effects/BaseEffect.gd",
 		"DisplayName": "Warding Bond",
 		"SnippetDesc": "Split damage taken by ally",
 		"Description": "Split damage taken by ally",
@@ -71,5 +21,19 @@
 				"Value":0.5 
 			}
 		},
+		"StatMods":{
+			"StatMod1": { 
+				"StatName": "Stregth",
+				"DisplayName": "Name to showup in stats tool tip",
+				"ModType":"Fixed", 
+				"Value":500 
+			}
+		},
+		"SubEffects": {
+			"ApplyWardToSelf": {
+				"SubEffectScript": "res://assets/Scripts/Effects/SubEffects/SubEffect_ApplyStatMod.gd",
+				"StatModKey": "StatMod1"
+			}
+		}
 	}
 ]
