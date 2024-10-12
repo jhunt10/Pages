@@ -5,6 +5,8 @@ const EffectDir = "res://data/Effects/"
 # Dictionary of effect's base data config
 var _effects_data:Dictionary = {}
 
+static var _cached_subeffects:Dictionary = {}
+
 var loaded = false
 var loaded_sprites : Dictionary = {}
 
@@ -24,7 +26,7 @@ func load_effects_data():
 	print("### Done Loading Effects")
 	loaded = true
 	
-func reload_pages():
+func reload_effects():
 	_effects_data.clear()
 	loaded_sprites.clear()
 	loaded = false
@@ -54,17 +56,16 @@ func create_new_effect(key:String, actor:BaseActor, data:Dictionary)->BaseEffect
 	var new_effect:BaseEffect = script.new(actor, merged_data)
 	return new_effect
 	
-static func create_sub_effects(effect:BaseEffect)->Dictionary:
-	var dict = {}
-	for sub_key in effect.SubEffectDatas.keys():
-		var sub_data = effect.SubEffectDatas[sub_key]
-		var script = load(sub_data['SubEffectScript'])
-		if !script:
-			printerr("EffectLibary.create_sub_effects: Failed to find effect script: " + sub_key)
-			continue
-		var inst = script.new(effect, effect.SubEffectDatas[sub_key])
-		dict[sub_key] = inst
-	return dict
+static func get_sub_effect_script(script_path)->BaseSubEffect:
+	if _cached_subeffects.keys().has(script_path):
+		return _cached_subeffects[script_path]
+	var script = load(script_path)
+	if not script:
+		printerr("EffectLibrary.get_sub_effect_script: No script found with name '%s'." % [script_path])
+	var subeffect = script.new()
+	_cached_subeffects[script_path] = subeffect
+	return subeffect
+	
 	
 static func search_for_effect_files()->Array:
 	var list = []

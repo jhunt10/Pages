@@ -91,8 +91,8 @@ func _calc_cache_stats():
 			
 		var agg_stat:Dictionary = agg_mods[stat_name]
 		var temp_val = float(_base_stats[stat_name])
-		if agg_stat.keys().has(BaseStatMod.ModTypes.Fixed):
-			for val in agg_stat[BaseStatMod.ModTypes.Fixed]:
+		if agg_stat.keys().has(BaseStatMod.ModTypes.Add):
+			for val in agg_stat[BaseStatMod.ModTypes.Add]:
 				temp_val += val
 		if agg_stat.keys().has(BaseStatMod.ModTypes.Scale):
 			for val in agg_stat[BaseStatMod.ModTypes.Scale]:

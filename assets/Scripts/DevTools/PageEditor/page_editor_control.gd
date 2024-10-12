@@ -103,7 +103,7 @@ func get_file_options()->Array:
 func get_page_options()->Array:
 	return action_datas.keys()
 	
-func save_page_data(force_overide:bool=false):
+func save_data(force_overide:bool=false):
 	var file_name = file_edit_control.get_full_fill_path()
 	
 	var new_page_data:Dictionary = texts_input_control.save_page_data()
@@ -122,7 +122,7 @@ func save_page_data(force_overide:bool=false):
 		existing_data = ActionLibary.parse_action_datas_from_file(file_name)
 	var page_exists = existing_data.keys().has(new_page_data['ActionKey'])
 	if not force_overide and file_exists:
-		popup_message_box.show_pop_up("File exists. Override?", save_page_data.bind(true))
+		popup_message_box.show_pop_up("File exists. Override?", save_data.bind(true))
 		return
 	existing_data[new_page_data['ActionKey']] = new_page_data
 	var file = FileAccess.open(file_name, FileAccess.WRITE)

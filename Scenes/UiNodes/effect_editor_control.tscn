@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://bg1r8lro4v7h1"]
+[gd_scene load_steps=23 format=3 uid="uid://bg1r8lro4v7h1"]
 
 [ext_resource type="Script" path="res://assets/Scripts/DevTools/EffectEditor/effect_editor_control.gd" id="1_r261r"]
 [ext_resource type="Texture2D" uid="uid://io35wpu802fp" path="res://assets/Sprites/UI/background_64x64_12.png" id="2_5w21o"]
@@ -12,12 +12,16 @@
 [ext_resource type="Texture2D" uid="uid://s8s7rktavc7e" path="res://assets/Sprites/UI/DevTools/Patch_32_8.png" id="9_pxbu8"]
 [ext_resource type="Texture2D" uid="uid://bkps664mkkmfn" path="res://assets/Sprites/UI/DevTools/small_x.png" id="10_fah7q"]
 [ext_resource type="Script" path="res://assets/Scripts/DevTools/self_scale_line_edit.gd" id="11_wlxyn"]
-[ext_resource type="Script" path="res://assets/Scripts/DevTools/EffectEditor/effect_script_edit_control.gd" id="12_oi3b1"]
-[ext_resource type="Script" path="res://assets/Scripts/DevTools/PageEditor/page_sprite_edit_control.gd" id="13_tsnd3"]
+[ext_resource type="Script" path="res://assets/Scripts/DevTools/EffectEditor/subeffect_edit_control.gd" id="12_oi3b1"]
+[ext_resource type="Script" path="res://assets/Scripts/DevTools/EffectEditor/sub_effect_entry_control.gd" id="14_2efle"]
 [ext_resource type="Texture2D" uid="uid://cu00gc8hhk0h3" path="res://assets/Sprites/UI/QueInputDisplay/page_slot.png" id="14_4v7tq"]
 [ext_resource type="Texture2D" uid="uid://cwsvq3qu6228n" path="res://assets/Sprites/UI/QueInputDisplay/page_button.png" id="15_16tst"]
+[ext_resource type="Script" path="res://assets/Scripts/DevTools/EffectEditor/sub_effect_property_control.gd" id="15_rq5p1"]
 [ext_resource type="Script" path="res://assets/Scripts/DevTools/PageEditor/popup_warning_control.gd" id="16_8nxnc"]
+[ext_resource type="Script" path="res://assets/Scripts/DevTools/EffectEditor/effect_sprite_edit_control.gd" id="16_x10wm"]
 [ext_resource type="Texture2D" uid="uid://cbmrq53kary3x" path="res://assets/Sprites/UI/DevTools/PopUpButton.png" id="17_ign7r"]
+[ext_resource type="Script" path="res://assets/Scripts/DevTools/EffectEditor/stat_mods_edit_control.gd" id="19_kgrmm"]
+[ext_resource type="Script" path="res://assets/Scripts/DevTools/EffectEditor/damage_mods_edit_control.gd" id="20_ihyhl"]
 
 [node name="EffectEditorControl" type="Control"]
 layout_mode = 3
@@ -356,13 +360,13 @@ scroll_fit_content_height = true
 custom_minimum_size = Vector2(360, 0)
 layout_mode = 2
 
-[node name="EffectScriptEditControl" type="Control" parent="MainContainer/PanelsContainer/MiddleVBoxContainer"]
+[node name="SubEffectEditControl" type="Control" parent="MainContainer/PanelsContainer/MiddleVBoxContainer"]
 custom_minimum_size = Vector2(360, 360)
 layout_mode = 2
 size_flags_vertical = 3
 script = ExtResource("12_oi3b1")
 
-[node name="Background" type="NinePatchRect" parent="MainContainer/PanelsContainer/MiddleVBoxContainer/EffectScriptEditControl"]
+[node name="Background" type="NinePatchRect" parent="MainContainer/PanelsContainer/MiddleVBoxContainer/SubEffectEditControl"]
 self_modulate = Color(0.796243, 0.796243, 0.796243, 1)
 layout_mode = 1
 anchors_preset = 15
@@ -376,7 +380,7 @@ patch_margin_top = 12
 patch_margin_right = 12
 patch_margin_bottom = 12
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MainContainer/PanelsContainer/MiddleVBoxContainer/EffectScriptEditControl"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MainContainer/PanelsContainer/MiddleVBoxContainer/SubEffectEditControl"]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -386,40 +390,26 @@ offset_top = 8.0
 offset_right = -8.0
 offset_bottom = -8.0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MainContainer/PanelsContainer/MiddleVBoxContainer/EffectScriptEditControl/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MainContainer/PanelsContainer/MiddleVBoxContainer/SubEffectEditControl/VBoxContainer"]
 layout_mode = 2
 alignment = 2
 
-[node name="Label" type="Label" parent="MainContainer/PanelsContainer/MiddleVBoxContainer/EffectScriptEditControl/VBoxContainer/HBoxContainer"]
+[node name="Label" type="Label" parent="MainContainer/PanelsContainer/MiddleVBoxContainer/SubEffectEditControl/VBoxContainer/HBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 20
 text = "Effect Script:"
 
-[node name="LoadedOptionButton" type="OptionButton" parent="MainContainer/PanelsContainer/MiddleVBoxContainer/EffectScriptEditControl/VBoxContainer/HBoxContainer"]
+[node name="Button" type="Button" parent="MainContainer/PanelsContainer/MiddleVBoxContainer/SubEffectEditControl/VBoxContainer/HBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 3
-script = ExtResource("3_bmymb")
+text = "Add"
 
-[node name="CodeEdit" type="CodeEdit" parent="MainContainer/PanelsContainer/MiddleVBoxContainer/EffectScriptEditControl/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="ScrollContainer" type="ScrollContainer" parent="MainContainer/PanelsContainer/MiddleVBoxContainer/EffectScriptEditControl/VBoxContainer"]
-visible = false
-self_modulate = Color(0, 0.73371, 0.736977, 1)
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MainContainer/PanelsContainer/MiddleVBoxContainer/EffectScriptEditControl/VBoxContainer/ScrollContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="SubActionEntry" type="Control" parent="MainContainer/PanelsContainer/MiddleVBoxContainer/EffectScriptEditControl/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="SubEffectEntryControl" type="Control" parent="MainContainer/PanelsContainer/MiddleVBoxContainer/SubEffectEditControl/VBoxContainer"]
 custom_minimum_size = Vector2(0, 128)
 layout_mode = 2
+script = ExtResource("14_2efle")
 
-[node name="Background2" type="NinePatchRect" parent="MainContainer/PanelsContainer/MiddleVBoxContainer/EffectScriptEditControl/VBoxContainer/ScrollContainer/VBoxContainer/SubActionEntry"]
+[node name="Background2" type="NinePatchRect" parent="MainContainer/PanelsContainer/MiddleVBoxContainer/SubEffectEditControl/VBoxContainer/SubEffectEntryControl"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -432,7 +422,7 @@ patch_margin_top = 12
 patch_margin_right = 12
 patch_margin_bottom = 12
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MainContainer/PanelsContainer/MiddleVBoxContainer/EffectScriptEditControl/VBoxContainer/ScrollContainer/VBoxContainer/SubActionEntry"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MainContainer/PanelsContainer/MiddleVBoxContainer/SubEffectEditControl/VBoxContainer/SubEffectEntryControl"]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -444,38 +434,39 @@ offset_bottom = -8.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ScriptInput" type="HBoxContainer" parent="MainContainer/PanelsContainer/MiddleVBoxContainer/EffectScriptEditControl/VBoxContainer/ScrollContainer/VBoxContainer/SubActionEntry/VBoxContainer"]
+[node name="ScriptInput" type="HBoxContainer" parent="MainContainer/PanelsContainer/MiddleVBoxContainer/SubEffectEditControl/VBoxContainer/SubEffectEntryControl/VBoxContainer"]
 layout_mode = 2
 
-[node name="FrameInput" type="SpinBox" parent="MainContainer/PanelsContainer/MiddleVBoxContainer/EffectScriptEditControl/VBoxContainer/ScrollContainer/VBoxContainer/SubActionEntry/VBoxContainer/ScriptInput"]
-custom_minimum_size = Vector2(24, 0)
-layout_mode = 2
-size_flags_horizontal = 0
-theme = ExtResource("5_vlb7c")
-max_value = 23.0
-rounded = true
-alignment = 2
-select_all_on_focus = true
-
-[node name="Label" type="Label" parent="MainContainer/PanelsContainer/MiddleVBoxContainer/EffectScriptEditControl/VBoxContainer/ScrollContainer/VBoxContainer/SubActionEntry/VBoxContainer/ScriptInput"]
+[node name="Label" type="Label" parent="MainContainer/PanelsContainer/MiddleVBoxContainer/SubEffectEditControl/VBoxContainer/SubEffectEntryControl/VBoxContainer/ScriptInput"]
 layout_mode = 2
 text = "Script:"
 
-[node name="ScriptButton" type="OptionButton" parent="MainContainer/PanelsContainer/MiddleVBoxContainer/EffectScriptEditControl/VBoxContainer/ScrollContainer/VBoxContainer/SubActionEntry/VBoxContainer/ScriptInput"]
+[node name="ScriptButton" type="OptionButton" parent="MainContainer/PanelsContainer/MiddleVBoxContainer/SubEffectEditControl/VBoxContainer/SubEffectEntryControl/VBoxContainer/ScriptInput"]
 layout_mode = 2
 size_flags_horizontal = 3
 selected = 0
-item_count = 1
-popup/item_0/text = "Test Script"
 
-[node name="PropsContainer" type="VBoxContainer" parent="MainContainer/PanelsContainer/MiddleVBoxContainer/EffectScriptEditControl/VBoxContainer/ScrollContainer/VBoxContainer/SubActionEntry/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MainContainer/PanelsContainer/MiddleVBoxContainer/SubEffectEditControl/VBoxContainer/SubEffectEntryControl/VBoxContainer"]
 layout_mode = 2
 
-[node name="SubActionPropertyControl" type="Control" parent="MainContainer/PanelsContainer/MiddleVBoxContainer/EffectScriptEditControl/VBoxContainer/ScrollContainer/VBoxContainer/SubActionEntry/VBoxContainer/PropsContainer"]
+[node name="Label" type="Label" parent="MainContainer/PanelsContainer/MiddleVBoxContainer/SubEffectEditControl/VBoxContainer/SubEffectEntryControl/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "SubEffectKey:"
+
+[node name="KeyLineEdit" type="LineEdit" parent="MainContainer/PanelsContainer/MiddleVBoxContainer/SubEffectEditControl/VBoxContainer/SubEffectEntryControl/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PropsContainer" type="VBoxContainer" parent="MainContainer/PanelsContainer/MiddleVBoxContainer/SubEffectEditControl/VBoxContainer/SubEffectEntryControl/VBoxContainer"]
+layout_mode = 2
+
+[node name="SubEffectPropertyControl" type="Control" parent="MainContainer/PanelsContainer/MiddleVBoxContainer/SubEffectEditControl/VBoxContainer/SubEffectEntryControl/VBoxContainer/PropsContainer"]
+visible = false
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
+script = ExtResource("15_rq5p1")
 
-[node name="VBoxContainer" type="HBoxContainer" parent="MainContainer/PanelsContainer/MiddleVBoxContainer/EffectScriptEditControl/VBoxContainer/ScrollContainer/VBoxContainer/SubActionEntry/VBoxContainer/PropsContainer/SubActionPropertyControl"]
+[node name="VBoxContainer" type="HBoxContainer" parent="MainContainer/PanelsContainer/MiddleVBoxContainer/SubEffectEditControl/VBoxContainer/SubEffectEntryControl/VBoxContainer/PropsContainer/SubEffectPropertyControl"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -483,22 +474,33 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Label" type="Label" parent="MainContainer/PanelsContainer/MiddleVBoxContainer/EffectScriptEditControl/VBoxContainer/ScrollContainer/VBoxContainer/SubActionEntry/VBoxContainer/PropsContainer/SubActionPropertyControl/VBoxContainer"]
+[node name="Label" type="Label" parent="MainContainer/PanelsContainer/MiddleVBoxContainer/SubEffectEditControl/VBoxContainer/SubEffectEntryControl/VBoxContainer/PropsContainer/SubEffectPropertyControl/VBoxContainer"]
 layout_mode = 2
 text = "PropName:"
 
-[node name="LoadedOptionButton" type="OptionButton" parent="MainContainer/PanelsContainer/MiddleVBoxContainer/EffectScriptEditControl/VBoxContainer/ScrollContainer/VBoxContainer/SubActionEntry/VBoxContainer/PropsContainer/SubActionPropertyControl/VBoxContainer"]
-visible = false
+[node name="LoadedOptionButton" type="OptionButton" parent="MainContainer/PanelsContainer/MiddleVBoxContainer/SubEffectEditControl/VBoxContainer/SubEffectEntryControl/VBoxContainer/PropsContainer/SubEffectPropertyControl/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 fit_to_longest_item = false
 script = ExtResource("3_bmymb")
 
-[node name="LineEdit" type="LineEdit" parent="MainContainer/PanelsContainer/MiddleVBoxContainer/EffectScriptEditControl/VBoxContainer/ScrollContainer/VBoxContainer/SubActionEntry/VBoxContainer/PropsContainer/SubActionPropertyControl/VBoxContainer"]
-visible = false
+[node name="LineEdit" type="LineEdit" parent="MainContainer/PanelsContainer/MiddleVBoxContainer/SubEffectEditControl/VBoxContainer/SubEffectEntryControl/VBoxContainer/PropsContainer/SubEffectPropertyControl/VBoxContainer"]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 size_flags_horizontal = 3
+
+[node name="SpinBox" type="SpinBox" parent="MainContainer/PanelsContainer/MiddleVBoxContainer/SubEffectEditControl/VBoxContainer/SubEffectEntryControl/VBoxContainer/PropsContainer/SubEffectPropertyControl/VBoxContainer"]
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MainContainer/PanelsContainer/MiddleVBoxContainer/SubEffectEditControl/VBoxContainer"]
+self_modulate = Color(0, 0.73371, 0.736977, 1)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainContainer/PanelsContainer/MiddleVBoxContainer/SubEffectEditControl/VBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
 [node name="RightBoxContainer" type="VBoxContainer" parent="MainContainer/PanelsContainer"]
 layout_mode = 2
@@ -507,7 +509,7 @@ size_flags_horizontal = 3
 [node name="SpriteEditControl" type="Control" parent="MainContainer/PanelsContainer/RightBoxContainer"]
 custom_minimum_size = Vector2(360, 84)
 layout_mode = 2
-script = ExtResource("13_tsnd3")
+script = ExtResource("16_x10wm")
 
 [node name="Background" type="NinePatchRect" parent="MainContainer/PanelsContainer/RightBoxContainer/SpriteEditControl"]
 self_modulate = Color(0.796078, 0.796078, 0.796078, 1)
@@ -606,6 +608,290 @@ custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 size_flags_horizontal = 3
 script = ExtResource("3_bmymb")
+
+[node name="TabContainer" type="TabContainer" parent="MainContainer/PanelsContainer/RightBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+current_tab = 1
+
+[node name="Stat Mods" type="Control" parent="MainContainer/PanelsContainer/RightBoxContainer/TabContainer"]
+visible = false
+custom_minimum_size = Vector2(360, 168)
+layout_mode = 2
+script = ExtResource("19_kgrmm")
+metadata/_tab_index = 0
+
+[node name="Background" type="NinePatchRect" parent="MainContainer/PanelsContainer/RightBoxContainer/TabContainer/Stat Mods"]
+self_modulate = Color(0.796078, 0.796078, 0.796078, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_5w21o")
+patch_margin_left = 12
+patch_margin_top = 12
+patch_margin_right = 12
+patch_margin_bottom = 12
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainContainer/PanelsContainer/RightBoxContainer/TabContainer/Stat Mods"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MainContainer/PanelsContainer/RightBoxContainer/TabContainer/Stat Mods/VBoxContainer"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="MainContainer/PanelsContainer/RightBoxContainer/TabContainer/Stat Mods/VBoxContainer/HBoxContainer"]
+visible = false
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Damage"
+
+[node name="OptionButton" type="OptionButton" parent="MainContainer/PanelsContainer/RightBoxContainer/TabContainer/Stat Mods/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+selected = 0
+item_count = 1
+popup/item_0/text = "None"
+popup/item_0/disabled = true
+
+[node name="AddButton" type="Button" parent="MainContainer/PanelsContainer/RightBoxContainer/TabContainer/Stat Mods/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "New"
+
+[node name="DataPanelBackground" type="NinePatchRect" parent="MainContainer/PanelsContainer/RightBoxContainer/TabContainer/Stat Mods/VBoxContainer"]
+custom_minimum_size = Vector2(0, 153)
+layout_mode = 2
+texture = ExtResource("2_5w21o")
+patch_margin_left = 12
+patch_margin_top = 12
+patch_margin_right = 12
+patch_margin_bottom = 12
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainContainer/PanelsContainer/RightBoxContainer/TabContainer/Stat Mods/VBoxContainer/DataPanelBackground"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="KeyInputContainer" type="HBoxContainer" parent="MainContainer/PanelsContainer/RightBoxContainer/TabContainer/Stat Mods/VBoxContainer/DataPanelBackground/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MainContainer/PanelsContainer/RightBoxContainer/TabContainer/Stat Mods/VBoxContainer/DataPanelBackground/VBoxContainer/KeyInputContainer"]
+layout_mode = 2
+text = "StatModKey: "
+
+[node name="KeyLineEdit" type="LineEdit" parent="MainContainer/PanelsContainer/RightBoxContainer/TabContainer/Stat Mods/VBoxContainer/DataPanelBackground/VBoxContainer/KeyInputContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Unique Key"
+
+[node name="DisplayNameContainer" type="HBoxContainer" parent="MainContainer/PanelsContainer/RightBoxContainer/TabContainer/Stat Mods/VBoxContainer/DataPanelBackground/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MainContainer/PanelsContainer/RightBoxContainer/TabContainer/Stat Mods/VBoxContainer/DataPanelBackground/VBoxContainer/DisplayNameContainer"]
+layout_mode = 2
+text = "Display Name:"
+
+[node name="DisplayNameLineEdit" type="LineEdit" parent="MainContainer/PanelsContainer/RightBoxContainer/TabContainer/Stat Mods/VBoxContainer/DataPanelBackground/VBoxContainer/DisplayNameContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="StatNameContainer" type="HBoxContainer" parent="MainContainer/PanelsContainer/RightBoxContainer/TabContainer/Stat Mods/VBoxContainer/DataPanelBackground/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MainContainer/PanelsContainer/RightBoxContainer/TabContainer/Stat Mods/VBoxContainer/DataPanelBackground/VBoxContainer/StatNameContainer"]
+layout_mode = 2
+text = "StatName:"
+
+[node name="StatNameLineEdit" type="LineEdit" parent="MainContainer/PanelsContainer/RightBoxContainer/TabContainer/Stat Mods/VBoxContainer/DataPanelBackground/VBoxContainer/StatNameContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MainContainer/PanelsContainer/RightBoxContainer/TabContainer/Stat Mods/VBoxContainer/DataPanelBackground/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MainContainer/PanelsContainer/RightBoxContainer/TabContainer/Stat Mods/VBoxContainer/DataPanelBackground/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "ModType:"
+
+[node name="LoadedOptionButton" type="OptionButton" parent="MainContainer/PanelsContainer/RightBoxContainer/TabContainer/Stat Mods/VBoxContainer/DataPanelBackground/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(87, 0)
+layout_mode = 2
+item_count = 1
+popup/item_0/text = "Nonew"
+script = ExtResource("3_bmymb")
+
+[node name="Label2" type="Label" parent="MainContainer/PanelsContainer/RightBoxContainer/TabContainer/Stat Mods/VBoxContainer/DataPanelBackground/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Value:"
+horizontal_alignment = 2
+
+[node name="IntSpinBox" type="SpinBox" parent="MainContainer/PanelsContainer/RightBoxContainer/TabContainer/Stat Mods/VBoxContainer/DataPanelBackground/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+min_value = -100.0
+
+[node name="FloatSpinBox" type="SpinBox" parent="MainContainer/PanelsContainer/RightBoxContainer/TabContainer/Stat Mods/VBoxContainer/DataPanelBackground/VBoxContainer/HBoxContainer"]
+visible = false
+layout_mode = 2
+min_value = -100.0
+suffix = "%"
+
+[node name="Damage Mods" type="Control" parent="MainContainer/PanelsContainer/RightBoxContainer/TabContainer"]
+custom_minimum_size = Vector2(360, 168)
+layout_mode = 2
+script = ExtResource("20_ihyhl")
+metadata/_tab_index = 1
+
+[node name="Background" type="NinePatchRect" parent="MainContainer/PanelsContainer/RightBoxContainer/TabContainer/Damage Mods"]
+self_modulate = Color(0.796078, 0.796078, 0.796078, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_5w21o")
+patch_margin_left = 12
+patch_margin_top = 12
+patch_margin_right = 12
+patch_margin_bottom = 12
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainContainer/PanelsContainer/RightBoxContainer/TabContainer/Damage Mods"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MainContainer/PanelsContainer/RightBoxContainer/TabContainer/Damage Mods/VBoxContainer"]
+layout_mode = 2
+
+[node name="OptionButton" type="OptionButton" parent="MainContainer/PanelsContainer/RightBoxContainer/TabContainer/Damage Mods/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+selected = 0
+item_count = 1
+popup/item_0/text = "None"
+popup/item_0/disabled = true
+
+[node name="AddButton" type="Button" parent="MainContainer/PanelsContainer/RightBoxContainer/TabContainer/Damage Mods/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "New"
+
+[node name="DataPanelBackground" type="NinePatchRect" parent="MainContainer/PanelsContainer/RightBoxContainer/TabContainer/Damage Mods/VBoxContainer"]
+custom_minimum_size = Vector2(0, 153)
+layout_mode = 2
+texture = ExtResource("2_5w21o")
+patch_margin_left = 12
+patch_margin_top = 12
+patch_margin_right = 12
+patch_margin_bottom = 12
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainContainer/PanelsContainer/RightBoxContainer/TabContainer/Damage Mods/VBoxContainer/DataPanelBackground"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="KeyInputContainer" type="HBoxContainer" parent="MainContainer/PanelsContainer/RightBoxContainer/TabContainer/Damage Mods/VBoxContainer/DataPanelBackground/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MainContainer/PanelsContainer/RightBoxContainer/TabContainer/Damage Mods/VBoxContainer/DataPanelBackground/VBoxContainer/KeyInputContainer"]
+layout_mode = 2
+text = "DamageModKey: "
+
+[node name="KeyLineEdit" type="LineEdit" parent="MainContainer/PanelsContainer/RightBoxContainer/TabContainer/Damage Mods/VBoxContainer/DataPanelBackground/VBoxContainer/KeyInputContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Unique Key"
+
+[node name="DisplayNameContainer" type="HBoxContainer" parent="MainContainer/PanelsContainer/RightBoxContainer/TabContainer/Damage Mods/VBoxContainer/DataPanelBackground/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MainContainer/PanelsContainer/RightBoxContainer/TabContainer/Damage Mods/VBoxContainer/DataPanelBackground/VBoxContainer/DisplayNameContainer"]
+layout_mode = 2
+text = "Display Name:"
+
+[node name="DisplayNameLineEdit" type="LineEdit" parent="MainContainer/PanelsContainer/RightBoxContainer/TabContainer/Damage Mods/VBoxContainer/DataPanelBackground/VBoxContainer/DisplayNameContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="GiveTakeContainer" type="HBoxContainer" parent="MainContainer/PanelsContainer/RightBoxContainer/TabContainer/Damage Mods/VBoxContainer/DataPanelBackground/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MainContainer/PanelsContainer/RightBoxContainer/TabContainer/Damage Mods/VBoxContainer/DataPanelBackground/VBoxContainer/GiveTakeContainer"]
+layout_mode = 2
+text = "On Take Damage:"
+
+[node name="TakeCheckBox" type="CheckBox" parent="MainContainer/PanelsContainer/RightBoxContainer/TabContainer/Damage Mods/VBoxContainer/DataPanelBackground/VBoxContainer/GiveTakeContainer"]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="MainContainer/PanelsContainer/RightBoxContainer/TabContainer/Damage Mods/VBoxContainer/DataPanelBackground/VBoxContainer/GiveTakeContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "On Deal Damage:"
+horizontal_alignment = 2
+
+[node name="GiveCheckBox" type="CheckBox" parent="MainContainer/PanelsContainer/RightBoxContainer/TabContainer/Damage Mods/VBoxContainer/DataPanelBackground/VBoxContainer/GiveTakeContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MainContainer/PanelsContainer/RightBoxContainer/TabContainer/Damage Mods/VBoxContainer/DataPanelBackground/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MainContainer/PanelsContainer/RightBoxContainer/TabContainer/Damage Mods/VBoxContainer/DataPanelBackground/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "ModType:"
+
+[node name="LoadedOptionButton" type="OptionButton" parent="MainContainer/PanelsContainer/RightBoxContainer/TabContainer/Damage Mods/VBoxContainer/DataPanelBackground/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(87, 0)
+layout_mode = 2
+item_count = 1
+popup/item_0/text = "Nonew"
+script = ExtResource("3_bmymb")
+
+[node name="Label2" type="Label" parent="MainContainer/PanelsContainer/RightBoxContainer/TabContainer/Damage Mods/VBoxContainer/DataPanelBackground/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Value:"
+horizontal_alignment = 2
+
+[node name="IntSpinBox" type="SpinBox" parent="MainContainer/PanelsContainer/RightBoxContainer/TabContainer/Damage Mods/VBoxContainer/DataPanelBackground/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+min_value = -100.0
+
+[node name="FloatSpinBox" type="SpinBox" parent="MainContainer/PanelsContainer/RightBoxContainer/TabContainer/Damage Mods/VBoxContainer/DataPanelBackground/VBoxContainer/HBoxContainer"]
+visible = false
+layout_mode = 2
+min_value = -100.0
+suffix = "%"
 
 [node name="PopupWarningControl" type="Control" parent="."]
 visible = false

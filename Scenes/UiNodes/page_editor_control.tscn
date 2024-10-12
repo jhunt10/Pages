@@ -32,7 +32,7 @@
 [ext_resource type="Script" path="res://assets/Scripts/DevTools/animated_sprite_input_control.gd" id="24_vx067"]
 [ext_resource type="Theme" uid="uid://ca5ybnyqqvajp" path="res://Scenes/Themes/single_digit_spin_box.tres" id="25_stnci"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_sin7f"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8jqah"]
 texture = ExtResource("15_6s6hh")
 1:0/0 = 0
 1:0/0/terrain_set = 0
@@ -370,7 +370,7 @@ texture = ExtResource("15_6s6hh")
 terrain_set_0/mode = 0
 terrain_set_0/terrain_0/name = "Terrain 0"
 terrain_set_0/terrain_0/color = Color(0.224135, 0.184226, 1, 1)
-sources/0 = SubResource("TileSetAtlasSource_sin7f")
+sources/0 = SubResource("TileSetAtlasSource_8jqah")
 
 [node name="PageEditorControl" type="Control"]
 layout_mode = 3
@@ -1107,10 +1107,9 @@ script = ExtResource("7_gwuq7")
 [node name="TabContainer" type="TabContainer" parent="VBoxContainer/HBoxContainer/RightBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-current_tab = 1
+current_tab = 0
 
 [node name="Damage" type="Control" parent="VBoxContainer/HBoxContainer/RightBoxContainer/TabContainer"]
-visible = false
 custom_minimum_size = Vector2(360, 168)
 layout_mode = 2
 script = ExtResource("10_7ihxm")
@@ -1251,6 +1250,7 @@ size_flags_horizontal = 3
 script = ExtResource("7_gwuq7")
 
 [node name="Missiles" type="Control" parent="VBoxContainer/HBoxContainer/RightBoxContainer/TabContainer"]
+visible = false
 custom_minimum_size = Vector2(360, 168)
 layout_mode = 2
 script = ExtResource("23_q3042")

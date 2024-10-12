@@ -7,8 +7,9 @@ var mod_type:ModTypes
 var value
 
 enum ModTypes {
-	Fixed, # Add to stat 	| x = x + val
-	Scale, # Multiply stat 	| x = x * val 
+	Add, # Add to stat 		| x = x + val
+	Scale, # Multiply stat 		| x = x * val 
+	Replc, # Replaces the stat 	| x = val
 }
 
 func _init(effect_id:String, data:Dictionary) -> void:
@@ -21,5 +22,5 @@ func _init(effect_id:String, data:Dictionary) -> void:
 		self.mod_type = type
 	else:
 		printerr("Unknown Stat Mod Type: %s" % [type_key])
-		self.mod_type = ModTypes.Fixed
+		self.mod_type = ModTypes.Add
 	self.value = data["Value"]

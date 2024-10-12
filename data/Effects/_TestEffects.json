@@ -9,8 +9,8 @@
 		"Tags": ["Warding"],
 		"DamageMods":{
 			"DamageMod1": { 
-				"OnTakingDamage": true,
-				"OnDealingDamage": false,
+				"OnTakeDamage": true,
+				"OnDealDamage": false,
 				"Conditions": {
 					"LimitDamageTags": ["Attack"],
 					"ExcludeDamageTags": [],

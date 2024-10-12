@@ -65,4 +65,4 @@ func on_load():
 		
 func on_save():
 	if parent_edit_control:
-		parent_edit_control.save_page_data()
+		parent_edit_control.save_data()

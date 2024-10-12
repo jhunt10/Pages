@@ -27,7 +27,7 @@ var _actor:BaseActor
 var _icon_sprite:String
 
 var Triggers:Array:
-	get: return _triggers_to_sub_effects.keys()
+	get: return _triggers_to_sub_effect_keys.keys()
 var StatModDatas:Dictionary:
 	get: return EffectData.get("StatMods", {})
 var DamageModDatas:Dictionary:
@@ -37,8 +37,8 @@ var SubEffectDatas:Dictionary:
 
 var _enabled:bool = true
 var _deleted:bool = false
-var _sub_effects:Dictionary={}
-var _triggers_to_sub_effects:Dictionary={}
+var _sub_effects_data:Dictionary={}
+var _triggers_to_sub_effect_keys:Dictionary={}
 var _duration_counter:int = -1
 
 func _init(actor:BaseActor, data:Dictionary) -> void:
@@ -53,8 +53,6 @@ func _init(actor:BaseActor, data:Dictionary) -> void:
 	Description = EffectData['Description']
 	Tags = EffectData['Tags']
 	_icon_sprite = EffectData['IconSprite']
-	
-	_sub_effects = EffectLibary.create_sub_effects(self)
 	_cache_triggers()
 
 func get_sprite():
@@ -62,45 +60,48 @@ func get_sprite():
 
 func get_active_stat_mods():
 	var out_list = []
-	for sub_effect:BaseSubEffect in _sub_effects.values():
-		for mod in sub_effect.get_active_stat_mods():
+	for sub_effect_key in SubEffectDatas.keys():
+		var sub_effect_data = SubEffectDatas[sub_effect_key]
+		var sub_effect = _get_sub_effect_script(sub_effect_key)
+		for mod in sub_effect.get_active_stat_mods(self, sub_effect_data):
 			out_list.append(mod)
 	return out_list
 	
 func get_active_damage_mods():
 	var out_list = []
-	for sub_effect:BaseSubEffect in _sub_effects.values():
-		for mod in sub_effect.get_active_damage_mods():
+	for sub_effect_key in SubEffectDatas.keys():
+		var sub_effect_data = SubEffectDatas[sub_effect_key]
+		var sub_effect = _get_sub_effect_script(sub_effect_key)
+		for mod in sub_effect.get_active_damage_mods(self, sub_effect_data):
 			out_list.append(mod)
 	return out_list
 
-func _cache_triggers():
-	_triggers_to_sub_effects.clear()
-	for sub_key in _sub_effects.keys():
-		var sub_effect:BaseSubEffect  = _sub_effects[sub_key]
-		for trig:EffectTriggers in sub_effect.get_required_triggers():
-			if not _triggers_to_sub_effects.keys().has(trig):
-				_triggers_to_sub_effects[trig] = []
-			if not _triggers_to_sub_effects[trig].has(sub_key):
-				_triggers_to_sub_effects[trig].append(sub_key)
+func _get_sub_effect_script(sub_effect_key:String)->BaseSubEffect:
+	return EffectLibary.get_sub_effect_script(SubEffectDatas[sub_effect_key]['SubEffectScript'])
+	
 
-func _get_effects_triggered_by(trigger:EffectTriggers)->Array:
-	var list = []
-	if _triggers_to_sub_effects.keys().has(trigger):
-		for key in _triggers_to_sub_effects[trigger]:
-			list.append(_sub_effects[key])
-	return list
+func _cache_triggers():
+	_triggers_to_sub_effect_keys.clear()
+	for sub_effect_key in SubEffectDatas.keys():
+		var sub_effect_data = SubEffectDatas[sub_effect_key]
+		var sub_effect = _get_sub_effect_script(sub_effect_key)
+		for trig:EffectTriggers in sub_effect.get_required_triggers(self, sub_effect_data):
+			if not _triggers_to_sub_effect_keys.keys().has(trig):
+				_triggers_to_sub_effect_keys[trig] = []
+			if not _triggers_to_sub_effect_keys[trig].has(sub_effect_key):
+				_triggers_to_sub_effect_keys[trig].append(sub_effect_key)
 
 func on_created(game_state:GameStateData):
-	for sub_effect:BaseSubEffect in _get_effects_triggered_by(EffectTriggers.OnCreate):
-		sub_effect.on_effect_trigger(EffectTriggers.OnCreate, game_state)
+	trigger_effect(EffectTriggers.OnCreate, game_state)
 	pass
 
 func on_delete():
 	if _deleted:
 		return
-	for sub_effect:BaseSubEffect in _sub_effects.values():
-		sub_effect.on_delete()
+	for sub_effect_key in SubEffectDatas.keys():
+		var sub_effect_data = SubEffectDatas[sub_effect_key]
+		var sub_effect = _get_sub_effect_script(sub_effect_key)
+		sub_effect.on_delete(self, sub_effect_data)
 	_deleted = true
 	_actor.effects.remove_effect(self)
 
@@ -108,13 +109,17 @@ func trigger_effect(trigger:EffectTriggers, game_state:GameStateData):
 	if TRIGGERS_WITH_ADDITIONAL_DATA.has(trigger):
 		printerr("BaseEffect.trigger_effect: Called with trigger '%s' which requirers it's own method." % [trigger])
 		return
-	for sub_effect:BaseSubEffect in _get_effects_triggered_by(trigger):
-		sub_effect.on_effect_trigger(trigger, game_state)
+	for sub_effect_key in _triggers_to_sub_effect_keys.get(trigger, []):
+		var sub_effect_data = SubEffectDatas[sub_effect_key]
+		var sub_effect = _get_sub_effect_script(sub_effect_key)
+		sub_effect.on_effect_trigger(self, sub_effect_data, trigger, game_state)
 	if _enabled and _duration_counter == 0 and trigger != EffectTriggers.OnDurationEnds:
 		trigger_effect(EffectTriggers.OnDurationEnds, game_state)
 		_enabled = false
 		_actor.effects.remove_effect(self)
 
 func trigger_on_move(game_state:GameStateData, old_pos:MapPos, new_pos:MapPos, move_type:String, moved_by_actor:BaseActor):
-	for sub_effect:BaseSubEffect in _get_effects_triggered_by(EffectTriggers.OnMove):
-		sub_effect.on_move(game_state, old_pos, new_pos, move_type, moved_by_actor)
+	for sub_effect_key in _triggers_to_sub_effect_keys.get(EffectTriggers.OnMove, []):
+		var sub_effect_data = SubEffectDatas[sub_effect_key]
+		var sub_effect = _get_sub_effect_script(sub_effect_key)
+		sub_effect.on_move(self, sub_effect_data, game_state, old_pos, new_pos, move_type, moved_by_actor)
