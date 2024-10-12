@@ -434,18 +434,6 @@ offset_bottom = -8.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ScriptInput" type="HBoxContainer" parent="MainContainer/PanelsContainer/MiddleVBoxContainer/SubEffectEditControl/VBoxContainer/SubEffectEntryControl/VBoxContainer"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="MainContainer/PanelsContainer/MiddleVBoxContainer/SubEffectEditControl/VBoxContainer/SubEffectEntryControl/VBoxContainer/ScriptInput"]
-layout_mode = 2
-text = "Script:"
-
-[node name="ScriptButton" type="OptionButton" parent="MainContainer/PanelsContainer/MiddleVBoxContainer/SubEffectEditControl/VBoxContainer/SubEffectEntryControl/VBoxContainer/ScriptInput"]
-layout_mode = 2
-size_flags_horizontal = 3
-selected = 0
-
 [node name="HBoxContainer" type="HBoxContainer" parent="MainContainer/PanelsContainer/MiddleVBoxContainer/SubEffectEditControl/VBoxContainer/SubEffectEntryControl/VBoxContainer"]
 layout_mode = 2
 
@@ -457,16 +445,26 @@ text = "SubEffectKey:"
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="PropsContainer" type="VBoxContainer" parent="MainContainer/PanelsContainer/MiddleVBoxContainer/SubEffectEditControl/VBoxContainer/SubEffectEntryControl/VBoxContainer"]
+[node name="ScriptInput" type="HBoxContainer" parent="MainContainer/PanelsContainer/MiddleVBoxContainer/SubEffectEditControl/VBoxContainer/SubEffectEntryControl/VBoxContainer"]
 layout_mode = 2
 
-[node name="SubEffectPropertyControl" type="Control" parent="MainContainer/PanelsContainer/MiddleVBoxContainer/SubEffectEditControl/VBoxContainer/SubEffectEntryControl/VBoxContainer/PropsContainer"]
+[node name="Label" type="Label" parent="MainContainer/PanelsContainer/MiddleVBoxContainer/SubEffectEditControl/VBoxContainer/SubEffectEntryControl/VBoxContainer/ScriptInput"]
+layout_mode = 2
+text = "Script:"
+
+[node name="LoadedOptionButton" type="OptionButton" parent="MainContainer/PanelsContainer/MiddleVBoxContainer/SubEffectEditControl/VBoxContainer/SubEffectEntryControl/VBoxContainer/ScriptInput"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("3_bmymb")
+
+[node name="SubEffectPropertyControl" type="Control" parent="MainContainer/PanelsContainer/MiddleVBoxContainer/SubEffectEditControl/VBoxContainer/SubEffectEntryControl/VBoxContainer"]
 visible = false
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 script = ExtResource("15_rq5p1")
 
-[node name="VBoxContainer" type="HBoxContainer" parent="MainContainer/PanelsContainer/MiddleVBoxContainer/SubEffectEditControl/VBoxContainer/SubEffectEntryControl/VBoxContainer/PropsContainer/SubEffectPropertyControl"]
+[node name="VBoxContainer" type="HBoxContainer" parent="MainContainer/PanelsContainer/MiddleVBoxContainer/SubEffectEditControl/VBoxContainer/SubEffectEntryControl/VBoxContainer/SubEffectPropertyControl"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -474,22 +472,25 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Label" type="Label" parent="MainContainer/PanelsContainer/MiddleVBoxContainer/SubEffectEditControl/VBoxContainer/SubEffectEntryControl/VBoxContainer/PropsContainer/SubEffectPropertyControl/VBoxContainer"]
+[node name="Label" type="Label" parent="MainContainer/PanelsContainer/MiddleVBoxContainer/SubEffectEditControl/VBoxContainer/SubEffectEntryControl/VBoxContainer/SubEffectPropertyControl/VBoxContainer"]
 layout_mode = 2
 text = "PropName:"
 
-[node name="LoadedOptionButton" type="OptionButton" parent="MainContainer/PanelsContainer/MiddleVBoxContainer/SubEffectEditControl/VBoxContainer/SubEffectEntryControl/VBoxContainer/PropsContainer/SubEffectPropertyControl/VBoxContainer"]
+[node name="LoadedOptionButton" type="OptionButton" parent="MainContainer/PanelsContainer/MiddleVBoxContainer/SubEffectEditControl/VBoxContainer/SubEffectEntryControl/VBoxContainer/SubEffectPropertyControl/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 fit_to_longest_item = false
 script = ExtResource("3_bmymb")
 
-[node name="LineEdit" type="LineEdit" parent="MainContainer/PanelsContainer/MiddleVBoxContainer/SubEffectEditControl/VBoxContainer/SubEffectEntryControl/VBoxContainer/PropsContainer/SubEffectPropertyControl/VBoxContainer"]
+[node name="LineEdit" type="LineEdit" parent="MainContainer/PanelsContainer/MiddleVBoxContainer/SubEffectEditControl/VBoxContainer/SubEffectEntryControl/VBoxContainer/SubEffectPropertyControl/VBoxContainer"]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="SpinBox" type="SpinBox" parent="MainContainer/PanelsContainer/MiddleVBoxContainer/SubEffectEditControl/VBoxContainer/SubEffectEntryControl/VBoxContainer/PropsContainer/SubEffectPropertyControl/VBoxContainer"]
+[node name="SpinBox" type="SpinBox" parent="MainContainer/PanelsContainer/MiddleVBoxContainer/SubEffectEditControl/VBoxContainer/SubEffectEntryControl/VBoxContainer/SubEffectPropertyControl/VBoxContainer"]
+layout_mode = 2
+
+[node name="PropsContainer" type="VBoxContainer" parent="MainContainer/PanelsContainer/MiddleVBoxContainer/SubEffectEditControl/VBoxContainer/SubEffectEntryControl/VBoxContainer"]
 layout_mode = 2
 
 [node name="ScrollContainer" type="ScrollContainer" parent="MainContainer/PanelsContainer/MiddleVBoxContainer/SubEffectEditControl/VBoxContainer"]

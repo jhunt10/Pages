@@ -39,7 +39,6 @@ func get_effect(effect_id:String)->BaseEffect:
 	return null
 		
 func remove_effect(effect:BaseEffect):
-	print("Remove Effect: " + effect.EffectKey + " from " + _actor.ActorKey)
 	var effect_id = effect.Id
 	if !_effects.has(effect_id):
 		printerr("Unknown effect: " + effect_id)
@@ -47,7 +46,8 @@ func remove_effect(effect:BaseEffect):
 	effect.on_delete()
 	_effects.erase(effect_id)
 	for trigger in BaseEffect.EffectTriggers:
-		_triggers_to_effect_ids[trigger].erase(effect_id)
+		if _triggers_to_effect_ids.get(trigger, []).has(effect_id):
+			_triggers_to_effect_ids[trigger].erase(effect_id)
 	_actor.stats.dirty_stats()
 	
 func get_damage_mods():
@@ -65,7 +65,7 @@ func get_stat_mods():
 	return out_list
 	
 func _trigger_effects(trigger:BaseEffect.EffectTriggers, game_state:GameStateData):
-	printerr("Triggering Effects: " + str(trigger))
+	#printerr("Triggering Effect Trigger: " + BaseEffect.EffectTriggers.keys()[trigger])
 	for id in _triggers_to_effect_ids[trigger]:
 		var effect:BaseEffect = _effects.get(id, null)
 		if not effect:

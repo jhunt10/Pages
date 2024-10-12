@@ -27,7 +27,7 @@ func _init(target_key:String, args:Dictionary) -> void:
 		target_type = args['TargetType']
 	elif args['TargetType'] is String:
 		var temp_type = TargetTypes.get(args['TargetType'])
-		if temp_type:
+		if temp_type >= 0:
 			target_type = temp_type
 		else: 
 			printerr("Unknown Target Type: " + args['TargetType'])

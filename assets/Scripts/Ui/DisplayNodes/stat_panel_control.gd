@@ -13,11 +13,15 @@ const BoxPadding:int = 4
 @onready var health_bar:StatBarControl = $VBoxContainer/HBoxContainer/StatBarContainer/HealthStatBar
 @onready var bars_container:VBoxContainer = $VBoxContainer/HBoxContainer/StatBarContainer
 @onready var effect_icon_box:HBoxContainer = $VBoxContainer/IconBoxContainer
+@onready var premade_effect_icon:TextureRect = $VBoxContainer/EffectIcon
 
 var actor:BaseActor
 var effect_icons:Dictionary
 var _stat_bars:Dictionary = {}
 var _resize:bool = true
+
+func _ready() -> void:
+	premade_effect_icon.visible = false
 
 func set_actor(act:BaseActor):
 	if actor:
@@ -55,18 +59,26 @@ func _sync_values():
 		bar._sync()
 
 func _sync_icons():
-	for id in actor.effects._effects.keys():
-		if effect_icons.has(id):
+	for effect:BaseEffect in actor.effects.list_effects():
+		if effect_icons.has(effect.Id):
+			if true or effect._duration_counter >= 0:
+				_set_duration_text(effect.Id, effect.RemainingDuration)
 			continue
-		var new_icon = TextureRect.new()
-		new_icon.texture = actor.effects.get_effect(id).get_sprite()
+		var new_icon = premade_effect_icon.duplicate()
+		new_icon.texture = effect.get_sprite()
 		new_icon.visible = true
+		if true or effect._duration_counter >= 0:
+			_set_duration_text(effect.Id, effect.RemainingDuration)
 		effect_icon_box.add_child(new_icon)
-		effect_icons[id] = new_icon
+		effect_icons[effect.Id] = new_icon
 	for id in effect_icons.keys():
 		if !actor.effects._effects.has(id):
 			effect_icons[id].queue_free()
 			effect_icons.erase(id)
+
+func _set_duration_text(effect_id:String, val:int):
+	if effect_icons.keys().has(effect_id):
+		effect_icons[effect_id].get_child(0).text = str(val)
 
 func _build_stat_bars():
 	for stat_name in _stat_bars.keys():

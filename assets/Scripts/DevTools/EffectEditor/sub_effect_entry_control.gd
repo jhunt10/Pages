@@ -5,11 +5,11 @@ static var SUB_ACTIONS_PATH = "res://assets/Scripts/Effects/SubEffects/"
 
 signal index_changed
 
-@onready var script_drop_options:OptionButton = $VBoxContainer/ScriptInput/ScriptButton
+@onready var script_drop_options:LoadedOptionButton = $VBoxContainer/ScriptInput/LoadedOptionButton
 @onready var key_line_edit:LineEdit = $VBoxContainer/HBoxContainer/KeyLineEdit
 @onready var main_container:VBoxContainer = $VBoxContainer
 @onready var props_container:VBoxContainer = $VBoxContainer/PropsContainer
-@onready var premade_option_prop_input:SubEffectPropInputControl = $VBoxContainer/PropsContainer/SubEffectPropertyControl
+@onready var premade_option_prop_input:SubEffectPropInputControl = $VBoxContainer/SubEffectPropertyControl
 
 var prop_inputs:Dictionary = {}
 var real_script:String = ''
@@ -19,10 +19,7 @@ var resize:bool = false
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	script_drop_options.item_selected.connect(script_selected)
-	script_drop_options.clear()
-	var sub_scripts = get_sub_effects_scripts()
-	for script in sub_scripts:
-		script_drop_options.add_item(script)
+	script_drop_options.get_options_func = get_sub_effects_scripts
 	premade_option_prop_input.visible = false
 
 func on_index_lose_focus():
@@ -33,7 +30,8 @@ func _process(delta: float) -> void:
 	if resize:
 		var new_size = Vector2i(self.size.x, main_container.size.y + 16) 
 		#printerr("Setting Script Edit Entry Size: %s | %s" % [self.size, new_size])
-		self.set_size(new_size)
+		self.custom_minimum_size = new_size
+		self.update_minimum_size()
 		resize = false
 	
 func lose_focus_if_has():
@@ -47,10 +45,8 @@ func load_subeffect_data(key:String, data:Dictionary):
 	key_line_edit.text = key
 	if data.keys().has("SubEffectScript"):
 		real_script = subeffect_data['SubEffectScript']
-		var short_script = real_script.trim_prefix(SUB_ACTIONS_PATH).trim_prefix("SubAct_").trim_suffix(".gd")
-		for n in range(script_drop_options.item_count):
-			if script_drop_options.get_item_text(n) == short_script:
-				script_drop_options.select(n)
+		var short_script = real_script.trim_prefix(SUB_ACTIONS_PATH).trim_prefix("SubEffect_").trim_suffix(".gd")
+		script_drop_options.load_options(short_script)
 		_build_props_for_script(real_script)
 
 func save_effect_data():

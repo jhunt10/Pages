@@ -1,39 +1,54 @@
 [
 	{
-		"EffectKey": "WardingBond",
-		"EffectScript": "res://assets/Scripts/Effects/BaseEffect.gd",
-		"DisplayName": "Warding Bond",
-		"SnippetDesc": "Split damage taken by ally",
-		"Description": "Split damage taken by ally",
-		"IconSprite": "TestHeart.png",
-		"Tags": ["Warding"],
-		"DamageMods":{
-			"DamageMod1": { 
-				"OnTakeDamage": true,
-				"OnDealDamage": false,
+		"DamageMods": {
+			"DamageMod1": {
 				"Conditions": {
-					"LimitDamageTags": ["Attack"],
 					"ExcludeDamageTags": [],
-					"LimitSourceTags": ["Enemy", "Page"],
-					"ExcludeSourceTags": []
+					"ExcludeSourceTags": [],
+					"LimitDamageTags": [
+						"Attack"
+					],
+					"LimitSourceTags": [
+						"Enemy",
+						"Page"
+					]
 				},
-				"ModType":"Scale", 
-				"Value":0.5 
+				"DamageModKey": "DamageMod1",
+				"DisplayName": "",
+				"ModType": "Scale",
+				"OnDealDamage": false,
+				"OnTakeDamage": true,
+				"Value": 0.5
 			}
 		},
-		"StatMods":{
-			"StatMod1": { 
-				"StatName": "Stregth",
+		"Description": "Split damage taken by ally",
+		"DisplayName": "Warding Bond",
+		"EffectKey": "WardingBond",
+		"LargeSprite": "TestHeart.png",
+		"SmallSprite": "TestHeart.png",
+		"SnippetDesc": "Split damage taken by ally",
+		"StatMods": {
+			"StatMod1": {
 				"DisplayName": "Name to showup in stats tool tip",
-				"ModType":"Fixed", 
-				"Value":500 
+				"ModType": "Add",
+				"StatModKey": "StatMod1",
+				"StatName": "Stregth",
+				"Value": 100
 			}
 		},
 		"SubEffects": {
+			"3TurnDuration": {
+				"DurationType": "Turn",
+				"DurationValue": 3,
+				"SubEffectScript": "res://assets/Scripts/Effects/SubEffects/SubEffect_Duration.gd"
+			},
 			"ApplyWardToSelf": {
-				"SubEffectScript": "res://assets/Scripts/Effects/SubEffects/SubEffect_ApplyStatMod.gd",
-				"StatModKey": "StatMod1"
+				"StatModKey": "StatMod1",
+				"SubEffectScript": "res://assets/Scripts/Effects/SubEffects/SubEffect_ApplyStatMod.gd"
 			}
-		}
+		},
+		"Tags": [
+			"Warding"
+		]
 	}
 ]

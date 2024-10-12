@@ -34,6 +34,8 @@ var DamageModDatas:Dictionary:
 	get: return EffectData.get("DamageMods", {})
 var SubEffectDatas:Dictionary:
 	get: return EffectData.get("SubEffects", {})
+var RemainingDuration:int:
+	get: return _duration_counter
 
 var _enabled:bool = true
 var _deleted:bool = false
@@ -52,7 +54,7 @@ func _init(actor:BaseActor, data:Dictionary) -> void:
 	SnippetDesc = EffectData['SnippetDesc']
 	Description = EffectData['Description']
 	Tags = EffectData['Tags']
-	_icon_sprite = EffectData['IconSprite']
+	_icon_sprite = EffectData['SmallSprite']
 	_cache_triggers()
 
 func get_sprite():
@@ -85,7 +87,9 @@ func _cache_triggers():
 	for sub_effect_key in SubEffectDatas.keys():
 		var sub_effect_data = SubEffectDatas[sub_effect_key]
 		var sub_effect = _get_sub_effect_script(sub_effect_key)
-		for trig:EffectTriggers in sub_effect.get_required_triggers(self, sub_effect_data):
+		var trigger_list = sub_effect.get_required_triggers(self, sub_effect_data)
+		trigger_list.append_array(sub_effect.get_optional_triggers(self, sub_effect_data))
+		for trig:EffectTriggers in trigger_list:
 			if not _triggers_to_sub_effect_keys.keys().has(trig):
 				_triggers_to_sub_effect_keys[trig] = []
 			if not _triggers_to_sub_effect_keys[trig].has(sub_effect_key):

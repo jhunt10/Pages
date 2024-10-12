@@ -42,18 +42,13 @@ func create_new_effect(key:String, actor:BaseActor, data:Dictionary)->BaseEffect
 	if !loaded:
 		printerr("Attepted to get Effect before loading: " + key)
 	var effect_data = _effects_data[key]
-	var script = load(effect_data['EffectScript'])
-	if !script:
-		printerr("Failed to find effect script: " + effect_data['EffectScript'])
-		return null
-		
 	var merged_data = {}
 	for k in effect_data.keys():
 		merged_data[k] = effect_data[k]
 	for k in data.keys():
 		merged_data[k] = data[k]
 		
-	var new_effect:BaseEffect = script.new(actor, merged_data)
+	var new_effect:BaseEffect = BaseEffect.new(actor, merged_data)
 	return new_effect
 	
 static func get_sub_effect_script(script_path)->BaseSubEffect:

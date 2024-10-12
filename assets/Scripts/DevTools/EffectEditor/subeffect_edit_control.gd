@@ -35,7 +35,7 @@ func create_new_entry(key:String="", data:Dictionary={}):
 	_sub_effect_entries[key] = new_entry
 
 func load_effect_data(data:Dictionary={}):
-	for entry in _sub_effect_entries:
+	for entry in _sub_effect_entries.values():
 		entry.queue_free()
 	_sub_effect_entries.clear()
 	if data.keys().has("SubEffects"):

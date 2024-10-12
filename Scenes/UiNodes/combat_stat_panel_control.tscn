@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cyakkk5i1nreg"]
+[gd_scene load_steps=11 format=3 uid="uid://cyakkk5i1nreg"]
 
 [ext_resource type="Script" path="res://assets/Scripts/Ui/DisplayNodes/stat_panel_control.gd" id="1_mnhn6"]
 [ext_resource type="Texture2D" uid="uid://5sc84oyivah" path="res://assets/Sprites/UI/backpatch.png" id="2_4hrfb"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://assets/Scripts/Ui/DisplayNodes/stat_bar_control.gd" id="3_tsv3q"]
 [ext_resource type="Texture2D" uid="uid://ccygr5mnjfwq1" path="res://assets/Sprites/UI/StatPanel/full_bar_background.png" id="5_3nnr1"]
 [ext_resource type="Texture2D" uid="uid://bxdvfksha7bq5" path="res://assets/Sprites/UI/StatPanel/value_bar_texture.png" id="6_0uxhs"]
+[ext_resource type="Texture2D" uid="uid://b3v2ga86mbxn8" path="res://data/Actions/Attack/TestHeart.png" id="7_k56th"]
 
 [sub_resource type="Animation" id="Animation_euxtp"]
 length = 0.001
@@ -229,6 +230,24 @@ theme_override_font_sizes/font_size = 14
 text = "CUR / MAX"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="EffectIcon" type="TextureRect" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource("7_k56th")
+stretch_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/EffectIcon"]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 2
+vertical_alignment = 2
 
 [node name="IconBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
