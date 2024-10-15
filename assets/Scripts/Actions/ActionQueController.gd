@@ -4,9 +4,9 @@ signal que_ordering_changed
 
 # End round early if no more actions are qued (for testing)
 const SHORTCUT_QUE = true
-const DEEP_LOGGING = true
+const DEEP_LOGGING = false
 const FRAMES_PER_ACTION = 24
-const SUB_ACTION_FRAME_TIME = 0.2
+const SUB_ACTION_FRAME_TIME = 0.05
 
 # Start of new Round
 signal start_of_round()
@@ -61,7 +61,7 @@ func _start_round():
 	for actor:BaseActor in CombatRootControl.Instance.GameState.Actors.values():
 		if CombatRootControl.Instance.player_actor_key == actor.ActorKey:
 			continue
-		actor.auto_build_que()
+		actor.auto_build_que(0)
 	
 	execution_state = ActionStates.Running
 	start_of_round.emit()
@@ -188,7 +188,10 @@ func _clear_ques():
 
 func _execute_turn_frames(game_state:GameStateData, que:ActionQue, turn_index:int, subaction_index:int):
 	if DEEP_LOGGING: print("\tChecking Que: " + que.Id)
-	
+	if que.is_turn_gap(turn_index):
+		if DEEP_LOGGING: print("\t\tGap action")
+		return
+		
 	# Get the action for this turn
 	var action:BaseAction = que.get_action_for_turn(turn_index)
 	# If no action, skip. Ussually caused by smaller ques.
@@ -338,7 +341,7 @@ func _calc_turn_padding():
 				else:
 					ques_to_slots[key].append(false)
 	
-	printerr("Que Padding Results")
+	if DEEP_LOGGING: printerr("Que Padding Results")
 	
 	var shift_forward = true
 	for que_id in que_order:
@@ -351,7 +354,7 @@ func _calc_turn_padding():
 		if shift_forward and slots[0] == false:
 			slots.remove_at(0)
 			slots.append(false)
-		printerr("Key: %s | Sec: %s | Shift: %s | %s" % [que_id, que_section_sizes[que_id], shift_forward, slots])
+		if DEEP_LOGGING: printerr("Key: %s | Sec: %s | Shift: %s | %s" % [que_id, que_section_sizes[que_id], shift_forward, slots])
 			
 		que._set_turn_mapping(slots)
 	que_ordering_changed.emit()

@@ -20,6 +20,7 @@ var Description:String
 var Tags:Array = []
 
 var _default_sprite:String
+var _allow_auto_que:bool = false
 
 func _init(args:Dictionary, faction_index:int) -> void:
 	LoadPath = args['LoadPath']
@@ -34,6 +35,7 @@ func _init(args:Dictionary, faction_index:int) -> void:
 	Tags = args['Tags']
 	
 	_default_sprite = args['Sprite']
+	_allow_auto_que = args.get('AutoQueing', false)
 	
 	Que = ActionQue.new(self)
 	
@@ -56,7 +58,9 @@ func get_coprse_texture()->Texture2D:
 		return load(LoadPath + "/" +ActorData['CorpseSprite'])
 	return MainRootNode.actor_libary.get_default_corpse_texture()
 
-func auto_build_que():
+func auto_build_que(current_turn:int):
+	if !_allow_auto_que:
+		return
 	print("Auto Que for : " + ActorKey)
 	if Que:
 		if Que.available_action_list.size() > 0:

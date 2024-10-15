@@ -23,11 +23,17 @@ var actor_creation_que:Dictionary = {}
 var player_actor_key:String
 
 func _enter_tree() -> void:
-	if !Instance: Instance = self
+	if !Instance: 
+		Instance = self
+	if !QueController:
+		QueController = ActionQueController.new()
 	elif Instance != self: 
 		printerr("Multiple CombatRootControls found")
 		queue_free()
 		return
+
+func _exit_tree() -> void:
+	QueController = null
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -85,7 +91,12 @@ func create_new_actor(data:Dictionary, faction_index:int, pos:MapPos):
 	MapController.add_actor_node(new_actor, new_node)
 	MapController._sync_actor_positions()
 	new_node.visible = true
+	
+	if new_actor._allow_auto_que:
+		new_actor.auto_build_que(QueController.action_index)
+	
 	actor_spawned.emit(new_actor)
+		
 	return new_actor
 
 func create_new_missile_node(missile:BaseMissile):

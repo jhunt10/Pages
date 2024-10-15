@@ -97,7 +97,9 @@ func load_values(missile_key:String):
 	key_input.text = missile_key
 	speed_input.set_value_no_signal(missile_datas[missile_key]['FramesPerTile'])
 	damage_data_options.load_options(missile_datas[missile_key]['DamageDataKey'])
-	animated_sprite_input.load_options(PageEditControl.Instance.selected_file.get_base_dir(),
+	var sprite_dir = PageEditControl.Instance.selected_file.get_base_dir()
+	printerr("Set Missile Sprite options to : " + sprite_dir)
+	animated_sprite_input.load_options(sprite_dir,
 									 missile_datas[missile_key]['AnimationData'],
 									[])
 
