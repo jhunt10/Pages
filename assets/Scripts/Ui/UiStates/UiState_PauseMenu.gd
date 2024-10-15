@@ -9,8 +9,8 @@ func _init(controler:UiStateController, args:Dictionary) -> void:
 	pass
 	
 func start_state():
-	print("Start UiState: PauseMenu")
-	if CombatRootControl.Instance.QueController.execution_state == QueControllerNode.ActionStates.Running:
+	if _logging: print("Start UiState: PauseMenu")
+	if CombatRootControl.Instance.QueController.execution_state == ActionQueController.ActionStates.Running:
 		CombatRootControl.Instance.QueController.pause_execution()
 	CombatRootControl.Instance.ui_controller.pause_menu.visible = true
 	pass

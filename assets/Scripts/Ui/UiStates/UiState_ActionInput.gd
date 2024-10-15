@@ -7,7 +7,7 @@ func _init(controler:UiStateController, args:Dictionary) -> void:
 	
 
 func start_state():
-	print("Start UiState: Action Input")
+	if _logging: print("Start UiState: Action Input")
 	CombatRootControl.Instance.QueInput.allow_input(true)
 	
 	

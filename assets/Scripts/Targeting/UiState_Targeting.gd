@@ -20,7 +20,7 @@ func _init(controler:UiStateController, args:Dictionary) -> void:
 	pass
 	
 func start_state():
-	print("Start UiState: Targeting")
+	if _logging: print("Start UiState: Targeting")
 	target_display_key = target_area_dislay_node.set_target_parameters(actor_pos, target_params)
 	CombatRootControl.Instance.GridCursor.set_cursor(GridCursorNode.Cursors.Targeting)
 	pass
@@ -43,7 +43,7 @@ func handle_input(event):
 		select_target(spot)
 
 func select_target(coord:Vector2i):
-	print("Setting Target: " + str(coord))
+	if _logging: print("Setting Target: " + str(coord))
 	var turndata = que_metadata.get_current_turn_data()
 	turndata.targets[target_params.target_key] = coord
 	CombatRootControl.Instance.ui_controller.set_ui_state(UiStateController.UiStates.ExecRound)

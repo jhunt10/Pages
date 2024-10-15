@@ -2,6 +2,7 @@ class_name BaseUiState
 extends GDScript
 
 var ui_controller:UiStateController
+var _logging:bool = false
 
 func _get_debug_name()->String: 
 	return "Unset"

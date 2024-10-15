@@ -1,14 +1,12 @@
-class_name QueControllerNode
-extends Node2D
+class_name ActionQueController
 
-@onready var map_controller:MapControllerNode = $"../MapControlerNode"
-@onready var label:Label = $Label
+signal que_ordering_changed
 
 # End round early if no more actions are qued (for testing)
 const SHORTCUT_QUE = true
-const DEEP_LOGGING = false
+const DEEP_LOGGING = true
 const FRAMES_PER_ACTION = 24
-const SUB_ACTION_FRAME_TIME = 0.05
+const SUB_ACTION_FRAME_TIME = 0.2
 
 # Start of new Round
 signal start_of_round()
@@ -50,13 +48,7 @@ var max_que_size = 0
 
 var action_ques:Dictionary = {}
 var que_order:Array = []
-var que_turn_to_step_mapping:Dictionary = {}
 var subaction_script_cache:Dictionary = {}
-
-
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
 
 func _start_round():
 	print("QueController: Start Round")
@@ -78,7 +70,7 @@ func _start_round():
 
 func _end_round():
 	print("QueController: End Round")
-	label.text = "Waiting"
+	#label.text = "Waiting"
 	action_index = 0
 	sub_action_index = 0
 	que_index = 0
@@ -105,28 +97,20 @@ func get_paused_on_que()->ActionQue:
 	return action_ques[que_order[que_index]]
 	
 func get_current_turn_for_que(que_id:String)->int:
-	var current_turn = action_index
-	var que_order_index = que_order.find(que_id)
-	#if que_order_index > que_index:
-		#return current_turn -1
-	return current_turn
+	var que:ActionQue = action_ques[que_id]
+	return que.turn_to_que_index(action_index)
 
 # Add an action que to the controller
 func add_action_que(new_que:ActionQue):
 	if action_ques.has(new_que.Id):
 		return
 	action_ques[new_que.Id] = new_que
-	#TODO: Que padding
-	var arr = {}
-	if new_que.que_size > max_que_size:
-		max_que_size = new_que.que_size
-	for n in range(new_que.que_size):
-		arr[n] = n
-	que_turn_to_step_mapping[new_que.Id] = arr
+	# TODO: Que Speed Ordering
 	que_order.append(new_que.Id)
+	_calc_turn_padding()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func update(delta: float) -> void:
 	if execution_state == ActionStates.Running:
 		sub_action_timer += delta
 		if sub_action_timer > SUB_ACTION_FRAME_TIME:
@@ -145,7 +129,7 @@ func _process(delta: float) -> void:
 			# Start Frame
 			start_of_frame.emit()
 			start_of_frame_with_state.emit(game_state)
-			label.text = str(action_index) + ":" + str(sub_action_index)
+			#label.text = str(action_index) + ":" + str(sub_action_index)
 			
 			# Do all actions for frame
 			for q_index in range(que_index, action_ques.size()):
@@ -177,12 +161,13 @@ func _process(delta: float) -> void:
 				que_index = 0
 				action_index += 1
 				
-				if SHORTCUT_QUE:
+				if SHORTCUT_QUE and action_index < max_que_size:
 					var any_left = false
 					for q:ActionQue in action_ques.values():
 						if q.get_action_for_turn(action_index):
 							any_left = true
 					if not any_left:
+						if DEEP_LOGGING: print("\tShort Cutting Que")
 						end_of_round.emit()
 						end_of_round_with_state.emit(game_state)
 						_end_round()
@@ -190,6 +175,7 @@ func _process(delta: float) -> void:
 				
 			# All actions for que have finished
 			if action_index >= max_que_size:
+				if DEEP_LOGGING: print("\taction_index reach max_que_size")
 				end_of_round.emit()
 				end_of_round_with_state.emit(game_state)
 				_end_round()
@@ -210,16 +196,18 @@ func _execute_turn_frames(game_state:GameStateData, que:ActionQue, turn_index:in
 		if DEEP_LOGGING: print("\t\tNo action")
 		return
 	
-	var turn_data = que.QueExecData.TurnDataList[turn_index]
+	var turn_data = que.QueExecData.TurnDataList[que.turn_to_que_index(turn_index)]
 	
 	
 	# Get subaction for this frame
 	var sub_action_list = action.SubActionData[subaction_index]
 	if !sub_action_list:
+		if DEEP_LOGGING: print("\t\tNo SubAction List on action: %s" % [action.ActionKey])
 		return
 		
 	while sub_sub_action_index < sub_action_list.size():
 		if turn_data.turn_failed:
+			if DEEP_LOGGING: print("\t\tTurn Failed")
 			return
 		var sub_action_data = sub_action_list[sub_sub_action_index]
 			
@@ -240,6 +228,7 @@ func _execute_turn_frames(game_state:GameStateData, que:ActionQue, turn_index:in
 		
 		# Check if the last sub action stopped execution
 		if execution_state != ActionStates.Running:
+			if DEEP_LOGGING: print("\t\tExecution no loger running")
 			return
 		sub_sub_action_index += 1
 		
@@ -259,16 +248,16 @@ func _get_subaction(script_key:String)->BaseSubAction:
 			printerr("Failed to find subaction script: " + script_key)
 	return subaction
 
-## Get local action index for a que. This accounts for miss matched que sizes 
-##	and inserts gaps for smaller ques.
-func _get_step_from_turn(que:ActionQue, turn_index:int)->int:
-	var mapping = que_turn_to_step_mapping.get(que.Id, null)
-	if !mapping:
-		printerr("No turn mapping found for que: "+que.Id)
-		return -1
-	if mapping.has(turn_index):
-		return mapping[turn_index]
-	return -1
+### Get local action index for a que. This accounts for miss matched que sizes 
+###	and inserts gaps for smaller ques.
+#func _get_step_from_turn(que:ActionQue, turn_index:int)->int:
+	#var mapping = que_turn_to_step_mapping.get(que.Id, null)
+	#if !mapping:
+		#printerr("No turn mapping found for que: "+que.Id)
+		#return -1
+	#if mapping.has(turn_index):
+		#return mapping[turn_index]
+	#return -1
 
 func _pay_turn_costs():
 	for que:ActionQue in action_ques.values():
@@ -280,3 +269,89 @@ func _pay_turn_costs():
 				turn_data.turn_failed = true
 				return
 				
+func _sort_ques_by_speed():
+	var speeds = []
+	var speed_to_ques = {}
+	for que:ActionQue in action_ques.values():
+		var actor:BaseActor = que.actor
+		var speed = actor.stats.get_stat("Speed", 0)
+		if not speeds.has(speed):
+			speed_to_ques[speed] = []
+			speeds.append(speed)
+		speed_to_ques[speed].append(que.Id)
+	speeds.sort()
+	speeds.reverse()
+	que_order.clear()
+	for spd in speeds:
+		var spd_ques = speed_to_ques[spd]
+		for que_id in spd_ques:
+			que_order.append(que_id)
+	
+
+## Add padding to make shorter ques match the longest
+# To solve this, think of each que as a bar cut into sections
+# A sider moves across all the bars and adds a action slot every time it reaches a new section
+# when it reaches a new section in the longest que a gap is added to all other ques
+func _calc_turn_padding():
+	_sort_ques_by_speed()
+	var que_section_sizes = {}
+	var que_section_indexes = {}
+	var ques_to_slots = {}
+	max_que_size = -1
+	var max_que_last_key = ''
+	for que_id in que_order:
+		var que:ActionQue = action_ques[que_id]
+		if que.que_size >= max_que_size:	
+			max_que_size = que.que_size
+			max_que_last_key = que_id
+		ques_to_slots[que_id] = []
+		que_section_indexes[que_id] = 0
+		que_section_sizes[que_id] = floori(120 / maxi(que.que_size, 1))
+	
+	# Add slots up front, or only as thier section is passed
+	# changes behavior in way I can't exomplain right now
+	var pre_offset = 0.5 # 0
+	
+	var natural_index = 0
+	var had_increase = false
+	var increased_cache = []
+	# 120 is a common multiple of most numbers
+	for index in range(121):
+		increased_cache.clear()
+		had_increase = false
+		# Check if any ques entered new section
+		for key in que_section_sizes.keys():
+			var section_size = que_section_sizes[key]
+			var section_index = que_section_indexes[key]
+			var next_section = (section_index + pre_offset) * section_size
+			# Has entered new section
+			if index >= next_section:
+				had_increase = true
+				increased_cache.append(key)
+		
+		# If we had an increase on the max que, go through all the ques and record gap or not
+		if had_increase and increased_cache.has(max_que_last_key):
+			for key in que_section_sizes.keys():
+				if increased_cache.has(key):
+					que_section_indexes[key] += 1
+					ques_to_slots[key].append(true)
+				else:
+					ques_to_slots[key].append(false)
+	
+	printerr("Que Padding Results")
+	
+	var shift_forward = true
+	for que_id in que_order:
+		
+		var que:ActionQue = action_ques[que_id]
+		if que.Id == max_que_last_key:
+			shift_forward = false
+			
+		var slots:Array = ques_to_slots[que_id]
+		if shift_forward and slots[0] == false:
+			slots.remove_at(0)
+			slots.append(false)
+		printerr("Key: %s | Sec: %s | Shift: %s | %s" % [que_id, que_section_sizes[que_id], shift_forward, slots])
+			
+		que._set_turn_mapping(slots)
+	que_ordering_changed.emit()

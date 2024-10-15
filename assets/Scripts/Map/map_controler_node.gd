@@ -1,7 +1,6 @@
 class_name MapControllerNode
 extends Node2D
 
-@onready var que_controler:QueControllerNode = $"../QueController"
 @onready var actor_tile_map:TileMapLayer = $ActorTileMap
 @onready var target_area_display:TargetAreaDisplayNode = $TargetAreaDisplayNode
 
@@ -15,7 +14,7 @@ var zone_nodes = {}
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	que_controler.end_of_frame.connect(_sync_positions)
+	CombatRootControl.QueController.end_of_frame.connect(_sync_positions)
 	pass # Replace with function body.
 
 func add_actor_node(actor:BaseActor, node:ActorNode):

@@ -49,7 +49,7 @@ func load_page_data(data:Dictionary):
 			
 func save_page_data()->Dictionary:
 	var dict = {}
-	for index in range(QueControllerNode.FRAMES_PER_ACTION):
+	for index in range(ActionQueController.FRAMES_PER_ACTION):
 		var list = []
 		for sub:SubActionEntryControl in subaction_entries:
 			if sub.index_input.value == index:
@@ -61,7 +61,7 @@ func save_page_data()->Dictionary:
 func order_sub_actions():
 	for entry in subaction_entries:
 		subactions_container.remove_child(entry)
-	for index in range(QueControllerNode.FRAMES_PER_ACTION):
+	for index in range(ActionQueController.FRAMES_PER_ACTION):
 		for entry:SubActionEntryControl in subaction_entries:
 			if entry.index_input.value == index:
 				subactions_container.add_child(entry)

@@ -3,7 +3,6 @@ extends Control
 
 const PADDING = 8
 
-@onready var que_controller = $"../../QueController"
 @onready var main_container:HBoxContainer = $HBoxContainer
 @onready var page_button_prefab:TextureButton = $HBoxContainer/HBoxContainer/PageButtonPrefab
 @onready var start_button = $HBoxContainer/StartButton
@@ -16,7 +15,7 @@ var _target_display_key
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	que_controller.end_of_round.connect(_round_ends)
+	CombatRootControl.QueController.end_of_round.connect(_round_ends)
 	start_button.pressed.connect(_start_button_pressed)
 	pass # Replace with function body.
 
@@ -53,7 +52,7 @@ func allow_input(_allow:bool):
 
 
 func _mouse_entered_page_button(_index, key_name):
-	if CombatRootControl.Instance.QueController.execution_state != QueControllerNode.ActionStates.Waiting:
+	if CombatRootControl.Instance.QueController.execution_state != ActionQueController.ActionStates.Waiting:
 		return
 	var action:BaseAction = MainRootNode.action_libary.get_action(key_name)
 	if action.PreviewTargetKey:

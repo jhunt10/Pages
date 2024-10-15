@@ -1,29 +1,44 @@
 class_name CombatRootControl
 extends Control
 
-@onready var QueController:QueControllerNode = $QueController
+signal actor_spawned(actor:BaseActor)
+
 @onready var MapController:MapControllerNode = $MapControlerNode
 
 @onready var QueInput = $CombatUiControl/QueInputControl
 @onready var QueDisplay = $CombatUiControl/QueDisplayControl
 @onready var GridCursor:GridCursorNode = $MapControlerNode/GridCursor
 @onready var  StatDisplay:StatPanelControl = $CombatUiControl/StatPanelControl
-
 @onready var ui_controller:UiStateController = $CombatUiControl
+
 static var Instance:CombatRootControl 
+static var QueController:ActionQueController = ActionQueController.new()
+	
 var GameState:GameStateData
+
+var _que_controler:ActionQueController
 
 # Actors to create on ready {ActorKey,Position}
 var actor_creation_que:Dictionary = {}
 var player_actor_key:String
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
+func _enter_tree() -> void:
 	if !Instance: Instance = self
-	else: 
+	elif Instance != self: 
 		printerr("Multiple CombatRootControls found")
 		queue_free()
 		return
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	if !Instance: Instance = self
+	elif Instance != self: 
+		printerr("Multiple CombatRootControls found")
+		queue_free()
+		return
+	
+	_que_controler = ActionQueController.new()
+	
 	for actor_key in actor_creation_que.keys():
 		var actor_data = MainRootNode.actor_libary.get_actor_data(actor_key)
 		var new_actor = create_new_actor(actor_data, 1, actor_creation_que[actor_key])
@@ -38,6 +53,8 @@ func _ready() -> void:
 	MapController._build_terrain()
 	pass # Replace with function body.
 
+func _process(delta: float) -> void:
+	QueController.update(delta)
 
 func set_init_state(map_data:Dictionary, player_actor:String, actors_pos:Dictionary):
 	if GameState:
@@ -68,7 +85,7 @@ func create_new_actor(data:Dictionary, faction_index:int, pos:MapPos):
 	MapController.add_actor_node(new_actor, new_node)
 	MapController._sync_actor_positions()
 	new_node.visible = true
-	
+	actor_spawned.emit(new_actor)
 	return new_actor
 
 func create_new_missile_node(missile:BaseMissile):

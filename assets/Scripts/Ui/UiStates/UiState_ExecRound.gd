@@ -8,9 +8,9 @@ func _init(controler:UiStateController, args:Dictionary) -> void:
 	super(controler, args)
 
 func start_state():
-	print("Start UiState: Exec Round")
-	CombatRootControl.Instance.QueController.start_or_resume_execution()
-	CombatRootControl.Instance.QueController.end_of_round.connect(_on_round_end)
+	if _logging: print("Start UiState: Exec Round")
+	CombatRootControl.QueController.start_or_resume_execution()
+	CombatRootControl.QueController.end_of_round.connect(_on_round_end)
 	pass
 
 func update(_delta:float):

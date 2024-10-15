@@ -13,14 +13,14 @@
 			"Max:Stamina":100,
 			"Max:Mana":100,
 			"Mass":15,
-			"Speed":10,
+			"Speed":0,
 			"Level":69,
 			"Stregth": 100,
 			"Armor": 80
 		},
 		"QueData":{
-			"MaxSize": 12,
-			"ActionList": ["MoveForward", "MoveLeft", "MoveRight","MoveBack", "TurnAround","TurnLeft","TurnRight","Wait","TestEffect", "TestBullets","TestSlash","TestSlam","TestItem","TestMissile","TestZone"]
+			"MaxSize": 4,
+			"ActionList": ["MoveForward", "MoveLeft", "MoveRight","MoveBack", "TurnAround","TurnLeft","TurnRight","Wait","SpawnTotem", "TestBullets","TestSlash","TestSlam","TestItem","TestMissile","TestZone"]
 		}
 	},
 	
@@ -36,12 +36,12 @@
 		"Stats":{
 			"Max:Health":100,
 			"Mass":100,
-			"Speed":0,
+			"Speed":5,
 			"Stregth": 50,
 			"Armor": 200
 		},
 		"QueData":{
-			"MaxSize": 0,
+			"MaxSize": 6,
 			"_ActionList": ["TestMissile"]
 		}
 	},
@@ -56,12 +56,12 @@
 		"Stats":{
 			"Max:Health":100,
 			"Mass":100,
-			"Speed":0,
+			"Speed":15,
 			"Stregth": 50,
 			"Armor": 10
 		},
 		"QueData":{
-			"MaxSize": 0,
+			"MaxSize": 6,
 			"ActionList": []
 		}
 	}

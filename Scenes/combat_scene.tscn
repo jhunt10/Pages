@@ -1,7 +1,6 @@
-[gd_scene load_steps=28 format=4 uid="uid://dfeilp6hbiuqs"]
+[gd_scene load_steps=31 format=4 uid="uid://dfeilp6hbiuqs"]
 
 [ext_resource type="Script" path="res://assets/Scripts/Scenes/combat_scene.gd" id="1_crigy"]
-[ext_resource type="Script" path="res://assets/Scripts/Actions/que_controller.gd" id="2_hyovq"]
 [ext_resource type="Script" path="res://assets/Scripts/Map/map_controler_node.gd" id="3_vohw8"]
 [ext_resource type="Texture2D" uid="uid://baxsyc20mlvx0" path="res://assets/Sprites/TileSets/TestMapTileSheet.png" id="4_w5k6o"]
 [ext_resource type="Script" path="res://assets/Scripts/Ui/DisplayNodes/target_area_display_node.gd" id="5_17esk"]
@@ -9,19 +8,23 @@
 [ext_resource type="Texture2D" uid="uid://b232xm2ly0peh" path="res://assets/Sprites/UI/GridCursors/GridCursor_Default.png" id="7_7lt4y"]
 [ext_resource type="Script" path="res://assets/Scripts/Ui/DisplayNodes/grid_cursor_node.gd" id="8_wf3xb"]
 [ext_resource type="Texture2D" uid="uid://5sc84oyivah" path="res://assets/Sprites/UI/backpatch.png" id="10_8c137"]
-[ext_resource type="Texture2D" uid="uid://cbfnhlc4v84nh" path="res://assets/Sprites/UI/ActionQueSlot.png" id="11_qolrq"]
-[ext_resource type="Script" path="res://assets/Scripts/Ui/DisplayNodes/que_display_node.gd" id="12_nk8b6"]
 [ext_resource type="PackedScene" uid="uid://6dlh0wlnsedb" path="res://Scenes/UiNodes/que_input_control.tscn" id="14_atc5n"]
-[ext_resource type="Texture2D" uid="uid://blke0inw08b4j" path="res://assets/Sprites/UI/ActionQueHighlight.png" id="14_tbvrb"]
 [ext_resource type="Script" path="res://assets/Scripts/Ui/UiStates/combat_ui_state_control.gd" id="15_fjvvi"]
 [ext_resource type="PackedScene" uid="uid://cyakkk5i1nreg" path="res://Scenes/UiNodes/combat_stat_panel_control.tscn" id="16_jsy0k"]
 [ext_resource type="Script" path="res://assets/Scripts/Ui/DisplayNodes/pause_menu_control.gd" id="18_acqto"]
+[ext_resource type="Script" path="res://assets/Scripts/Ui/DisplayNodes/Combat/que_collection_control.gd" id="19_hqu25"]
 [ext_resource type="Script" path="res://assets/Scripts/Ui/DisplayNodes/item_select_menu_control.gd" id="19_p0l6r"]
 [ext_resource type="Texture2D" uid="uid://ccv4ridl8evo8" path="res://assets/Sprites/UI/MenuButtonBackground.png" id="19_u4d2a"]
+[ext_resource type="Script" path="res://assets/Scripts/DevTools/dev_combat_data_control.gd" id="19_yc3tw"]
+[ext_resource type="Texture2D" uid="uid://s8s7rktavc7e" path="res://assets/Sprites/UI/DevTools/Patch_32_8.png" id="20_6lcyn"]
 [ext_resource type="Texture2D" uid="uid://brpsb4iq3cd3k" path="res://assets/Sprites/UI/MenuButtonBackground_Pressed.png" id="20_jcfy7"]
 [ext_resource type="Texture2D" uid="uid://b71e02wpy7dij" path="res://assets/Sprites/UI/GearButton.png" id="21_s2qa8"]
+[ext_resource type="Script" path="res://assets/Scripts/DevTools/que_cal_control.gd" id="22_4rk3c"]
 [ext_resource type="Texture2D" uid="uid://cen5h0gfhguhg" path="res://assets/Sprites/UI/GearButtonPressed.png" id="22_eoo3l"]
 [ext_resource type="PackedScene" uid="uid://2ij8q0r7uy4y" path="res://Scenes/UiNodes/que_display_control.tscn" id="22_i32rr"]
+[ext_resource type="Texture2D" uid="uid://cu00gc8hhk0h3" path="res://assets/Sprites/UI/QueInputAndDisplay/page_slot.png" id="23_o55pl"]
+[ext_resource type="Script" path="res://assets/Scripts/DevTools/que_cal_bar_control.gd" id="23_tcvpd"]
+[ext_resource type="Texture2D" uid="uid://cwsvq3qu6228n" path="res://assets/Sprites/UI/QueInputAndDisplay/page_button.png" id="24_5fn7e"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_iaggc"]
 texture = ExtResource("4_w5k6o")
@@ -1052,17 +1055,6 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_crigy")
 
-[node name="QueController" type="Node2D" parent="."]
-position = Vector2(8, 8)
-script = ExtResource("2_hyovq")
-
-[node name="Label" type="Label" parent="QueController"]
-offset_left = 1044.0
-offset_top = 1.0
-offset_right = 1134.0
-offset_bottom = 24.0
-text = "Turn:Frame"
-
 [node name="MapControlerNode" type="Node2D" parent="."]
 position = Vector2(414, 88)
 script = ExtResource("3_vohw8")
@@ -1083,28 +1075,6 @@ tile_set = SubResource("TileSet_lvs5x")
 [node name="GridCursor" type="Sprite2D" parent="MapControlerNode"]
 texture = ExtResource("7_7lt4y")
 script = ExtResource("8_wf3xb")
-
-[node name="QueDisplayNode" type="Node2D" parent="."]
-visible = false
-position = Vector2(22, 444)
-script = ExtResource("12_nk8b6")
-
-[node name="NinePatchRect" type="NinePatchRect" parent="QueDisplayNode"]
-offset_right = 48.0
-offset_bottom = 48.0
-texture = ExtResource("10_8c137")
-region_rect = Rect2(8, 8, 48, 48)
-
-[node name="ActionSlotPrefab" type="Sprite2D" parent="QueDisplayNode"]
-position = Vector2(8, 8)
-texture = ExtResource("11_qolrq")
-centered = false
-
-[node name="ActionHighlight" type="Sprite2D" parent="QueDisplayNode"]
-visible = false
-position = Vector2(8, 8)
-texture = ExtResource("14_tbvrb")
-centered = false
 
 [node name="CombatUiControl" type="Control" parent="."]
 layout_mode = 1
@@ -1320,7 +1290,131 @@ offset_right = 169.0
 offset_bottom = 618.0
 
 [node name="QueDisplayControl" parent="CombatUiControl" instance=ExtResource("22_i32rr")]
-offset_left = 40.0
-offset_top = 492.0
-offset_right = 96.0
-offset_bottom = 548.0
+layout_mode = 2
+offset_left = 48.0
+offset_top = 503.0
+offset_right = 148.0
+offset_bottom = 559.0
+show_preview_movement = true
+show_gaps = false
+
+[node name="QueCollectionControl" type="Control" parent="CombatUiControl"]
+layout_mode = 1
+anchors_preset = 0
+offset_left = 4.0
+offset_top = 133.0
+offset_right = 204.0
+offset_bottom = 173.0
+script = ExtResource("19_hqu25")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CombatUiControl/QueCollectionControl"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="DevDataControl" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -100.0
+offset_bottom = 53.0
+grow_horizontal = 0
+script = ExtResource("19_yc3tw")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="DevDataControl"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("20_6lcyn")
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="DevDataControl"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TimerContainer" type="HBoxContainer" parent="DevDataControl/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="DevDataControl/VBoxContainer/TimerContainer"]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "8:24"
+horizontal_alignment = 2
+
+[node name="QueCalControl" type="Control" parent="DevDataControl"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -254.0
+offset_top = 87.0
+offset_right = -98.0
+offset_bottom = 158.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("22_4rk3c")
+
+[node name="NinePatchRect2" type="NinePatchRect" parent="DevDataControl/QueCalControl"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("20_6lcyn")
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="DevDataControl/QueCalControl"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="QueSlotsContainer" type="HBoxContainer" parent="DevDataControl/QueCalControl/VBoxContainer"]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 0
+script = ExtResource("23_tcvpd")
+
+[node name="QueSlotRect" type="NinePatchRect" parent="DevDataControl/QueCalControl/VBoxContainer/QueSlotsContainer"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+texture = ExtResource("23_o55pl")
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+
+[node name="RedBar" type="TextureRect" parent="DevDataControl/QueCalControl"]
+modulate = Color(1, 0, 0, 1)
+custom_minimum_size = Vector2(1, 124)
+layout_mode = 0
+offset_right = 2.0
+offset_bottom = 120.0
+texture = ExtResource("24_5fn7e")
+expand_mode = 4

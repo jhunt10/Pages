@@ -47,6 +47,9 @@ func on_death():
 	
 func  get_default_sprite()->Texture2D:
 	return load(LoadPath + "/" +_default_sprite)
+	
+func get_portrait_sprite()->Texture2D:
+	return load(LoadPath + "/" +_default_sprite)
 
 func get_coprse_texture()->Texture2D:
 	if ActorData.has("CorpseSprite"):

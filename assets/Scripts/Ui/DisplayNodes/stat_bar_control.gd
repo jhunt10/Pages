@@ -23,9 +23,7 @@ var _stat_value:int:
 		
 func _get_predicted_value()->int:
 	if _actor: 
-		var cost = 0
-		for turn:TurnExecutionData in _actor.Que.QueExecData.TurnDataList:
-			cost += turn.costs.get(_stat_name, 0)
+		var cost = _actor.Que.get_total_preview_costs().get(_stat_name, 0)
 		return max(0, _stat_value - cost)
 	else: return 1
 		
