@@ -9,6 +9,7 @@ var _triggers_to_effect_ids:Dictionary = {}
 
 func _init(actor:BaseActor) -> void:
 	_actor = actor
+	actor.on_death.connect(_on_actor_death)
 	
 	for t in BaseEffect.EffectTriggers.values():
 		_triggers_to_effect_ids[t] = []
@@ -93,3 +94,9 @@ func _on_actor_moved(old_pos:MapPos, new_pos:MapPos, move_type:String, moved_by:
 	for id in _triggers_to_effect_ids[BaseEffect.EffectTriggers.OnMove]:
 		_effects[id].trigger_on_move(old_pos, new_pos, move_type, moved_by)
 	
+func _on_actor_death():
+	var game_state = CombatRootControl.Instance.GameState
+	_trigger_effects(BaseEffect.EffectTriggers.OnDeath, game_state)
+	# Delete all active effects
+	for effect:BaseEffect in _effects.values():
+		effect.on_delete()

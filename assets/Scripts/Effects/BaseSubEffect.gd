@@ -16,9 +16,12 @@ func get_required_triggers(_effect:BaseEffect, _subeffect_data:Dictionary)->Arra
 func get_optional_triggers(_effect:BaseEffect, subeffect_data:Dictionary)->Array:
 	var list = []
 	if subeffect_data.has("OptionalTriggers"):
-		for trig_str in subeffect_data['OptionalTriggers']:
-			if BaseEffect.EffectTriggers.has(trig_str):
-				list.append(BaseEffect.EffectTriggers.get(trig_str))
+		for trig_val in subeffect_data['OptionalTriggers']:
+			if trig_val is String:
+				if BaseEffect.EffectTriggers.has(trig_val):
+					list.append(BaseEffect.EffectTriggers.get(trig_val))
+			else:
+				list.append(trig_val)
 	return list
 
 func get_active_stat_mods(_effect:BaseEffect, _subeffect_data:Dictionary)->Array:

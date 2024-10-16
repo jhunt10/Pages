@@ -4,11 +4,13 @@ extends TextureButton
 @onready var gap_texture:TextureRect = $GapTextureRect
 @onready var icon:TextureRect = $Icon
 @onready var highlight:TextureRect = $SlotHighlight
+@onready var dead_icon:TextureRect = $DeadSlotIcon
 
 var is_gap:bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	dead_icon.visible = false
 	pass # Replace with function body.
 
 

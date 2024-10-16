@@ -1,5 +1,11 @@
 class_name MapStateData
 
+const LOGGING = true
+
+const DEFAULT_ACTOR_LAYER = MapLayers.Default
+
+enum MapLayers {Default, Corpse, Totem}
+
 var _game_state:GameStateData
 var _actor_pos_cache:Dictionary = {}
 var _position_data:Array = []
@@ -25,17 +31,35 @@ func get_map_spot(pos)->MapSpot:
 func list_map_spots()->Array:
 	return _position_data
 	
-func get_actors_at_pos(pos:Vector2i)->Array:
+func get_actors_at_pos(pos:Vector2i, layer=null, include_dead:bool=false)->Array:
 	var spot:MapSpot = get_map_spot(pos)
 	if spot:
-		return spot.get_actors()
+		return spot.get_actors(layer, include_dead)
 	return []
 		
 func get_actor_pos(actor:BaseActor)->MapPos:
 	return _actor_pos_cache.get(actor.Id, null)
-		
-func set_actor_pos(actor:BaseActor, pos:MapPos):
-	print("Set Actor Pos")
+
+func get_actor_layer(actor:BaseActor)->MapLayers:
+	var pos = get_actor_pos(actor)
+	if not pos:
+		printerr("MapStateData.get_actor_layer: Failed to MapPos for actor '%s'." % [actor.Id])
+		return MapLayers.Default
+	var spot = get_map_spot(pos)
+	if not pos:
+		printerr("MapStateData.get_actor_layer: Failed to MapSpot for pos %s." % [pos])
+		return MapLayers.Default
+	return spot.get_actor_layer(actor)
+	
+func set_actor_layer(actor:BaseActor, layer:MapLayers):
+	var current_pos = get_actor_pos(actor)
+	if not current_pos:
+		printerr("MapStateData.set_actor_layer: Failed to MapPos for actor '%s'." % [actor.Id])
+		return
+	set_actor_pos(actor, current_pos, layer)
+
+func set_actor_pos(actor:BaseActor, pos:MapPos, layer=DEFAULT_ACTOR_LAYER):
+	if LOGGING: print("Set Actor Pos")
 	if pos.x < 0 or pos.x >= max_width or pos.y < 0 or pos.y >= max_hight:
 		printerr("MapState.set_actor_pos: Invalid Actor Position: " + str(pos))
 		return
@@ -45,7 +69,9 @@ func set_actor_pos(actor:BaseActor, pos:MapPos):
 	if _actor_pos_cache.has(actor.Id):
 		# Bail if no change
 		if _actor_pos_cache[actor.Id] == pos:
-			return
+			var cur_layer = get_actor_layer(actor)
+			if cur_layer == layer:
+				return
 		# Delete old position data and cached position
 		old_pos = _actor_pos_cache[actor.Id]
 		var old_spot = get_map_spot(old_pos)
@@ -54,10 +80,10 @@ func set_actor_pos(actor:BaseActor, pos:MapPos):
 		
 	# Set new position (Actor.DisplayPos is updated after frame)
 	var new_spot = get_map_spot(pos)
-	new_spot.add_actor(actor)
+	new_spot.add_actor(actor, layer)
 	_actor_pos_cache[actor.Id] = pos
 	if old_pos:
-		print("Emit Move: " + str(old_pos) + " | " + str(pos))
+		if LOGGING: print("Emit Move: " + str(old_pos) + " | " + str(pos))
 		actor.on_move.emit(old_pos, pos, "TEST", null)
 		_handle_enter_exit_zone(actor, old_pos, pos)
 
@@ -80,13 +106,14 @@ func _handle_enter_exit_zone(actor:BaseActor, old_pos:MapPos, new_pos:MapPos):
 	
 
 func delete_actor(actor:BaseActor):
-	# Check if already has position
-	if _actor_pos_cache.has(actor.Id):
-		# Delete old position data and cached position
-		var old_pos = _actor_pos_cache[actor.Id]
-		var old_spot = get_map_spot(old_pos)
-		old_spot.things.erase(actor.Id)
-		_actor_pos_cache.erase(actor.Id)
+	var pos = get_actor_pos(actor)
+	if not pos:
+		return
+	var spot:MapSpot = get_map_spot(pos)
+	if not spot:
+		return
+	spot.remove_actor(actor)
+	_actor_pos_cache.erase(actor.Id)
 
 func add_zone(zone:BaseZone):
 	for p in zone.get_area():

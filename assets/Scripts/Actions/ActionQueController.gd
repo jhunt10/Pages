@@ -1,10 +1,11 @@
 class_name ActionQueController
 
 signal que_ordering_changed
+signal que_marked_as_dead(que_id:String)
 
 # End round early if no more actions are qued (for testing)
 const SHORTCUT_QUE = true
-const DEEP_LOGGING = true
+const DEEP_LOGGING = false
 const FRAMES_PER_ACTION = 24
 const SUB_ACTION_FRAME_TIME = 0.05
 
@@ -46,9 +47,13 @@ var que_index = 0
 var action_index = 0
 var max_que_size = 0
 
-var action_ques:Dictionary = {}
+var _action_ques:Dictionary = {}
 var que_order:Array = []
 var subaction_script_cache:Dictionary = {}
+
+# Ques that have been removed durring execution
+# They will be deleted once the round finishes
+var _dead_ques:Array = []
 
 func _start_round():
 	print("QueController: Start Round")
@@ -58,7 +63,7 @@ func _start_round():
 	que_index = 0
 	sub_action_timer = 0
 	
-	for actor:BaseActor in CombatRootControl.Instance.GameState.Actors.values():
+	for actor:BaseActor in CombatRootControl.Instance.GameState.list_actors():
 		if CombatRootControl.Instance.player_actor_key == actor.ActorKey:
 			continue
 		actor.auto_build_que(0)
@@ -76,6 +81,7 @@ func _end_round():
 	que_index = 0
 	sub_action_timer = 0
 	execution_state = ActionStates.Waiting
+	_cleanup_dead_ques()
 	end_of_round.emit()
 	end_of_round_with_state.emit(CombatRootControl.Instance.GameState)
 	execution_suspended.emit()
@@ -94,20 +100,32 @@ func pause_execution():
 	execution_suspended.emit()
 	
 func get_paused_on_que()->ActionQue:
-	return action_ques[que_order[que_index]]
+	return _action_ques[que_order[que_index]]
 	
 func get_current_turn_for_que(que_id:String)->int:
-	var que:ActionQue = action_ques[que_id]
+	var que:ActionQue = _action_ques[que_id]
 	return que.turn_to_que_index(action_index)
+
+func get_active_action_ques()->Array:
+	var out_list = []
+	for que in _action_ques.values():
+		if not _dead_ques.has(que.Id):
+			out_list.append(que)
+	return out_list
 
 # Add an action que to the controller
 func add_action_que(new_que:ActionQue):
-	if action_ques.has(new_que.Id):
+	if _action_ques.has(new_que.Id):
 		return
-	action_ques[new_que.Id] = new_que
+	_action_ques[new_que.Id] = new_que
 	# TODO: Que Speed Ordering
 	que_order.append(new_que.Id)
 	_calc_turn_padding()
+
+func remove_action_que(que:ActionQue):
+	if not _dead_ques.has(que.Id):
+		_dead_ques.append(que.Id)
+		que_marked_as_dead.emit(que.Id)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func update(delta: float) -> void:
@@ -135,8 +153,8 @@ func update(delta: float) -> void:
 			#label.text = str(action_index) + ":" + str(sub_action_index)
 			
 			# Do all actions for frame
-			for q_index in range(que_index, action_ques.size()):
-				var que = action_ques[que_order[q_index]]
+			for q_index in range(que_index, _action_ques.size()):
+				var que = _action_ques[que_order[q_index]]
 				_execute_turn_frames(game_state, que, action_index, sub_action_index)
 				
 				# Check if the last action stopped execution
@@ -166,7 +184,7 @@ func update(delta: float) -> void:
 				
 				if SHORTCUT_QUE and action_index < max_que_size:
 					var any_left = false
-					for q:ActionQue in action_ques.values():
+					for q:ActionQue in get_active_action_ques():
 						if q.get_action_for_turn(action_index):
 							any_left = true
 					if not any_left:
@@ -184,10 +202,17 @@ func update(delta: float) -> void:
 				_end_round()
 
 func _clear_ques():
-	for que:ActionQue in action_ques.values():
+	for que:ActionQue in _action_ques.values():
 		que.clear_que()
 		que.QueExecData.clear()
-	
+
+func _cleanup_dead_ques():
+	if _dead_ques.size() == 0:
+		return
+	for dead_que_id in _dead_ques:
+		_action_ques.erase(dead_que_id)
+	_dead_ques.clear()
+	_calc_turn_padding()
 
 func _execute_turn_frames(game_state:GameStateData, que:ActionQue, turn_index:int, subaction_index:int):
 	if DEEP_LOGGING: print("\tChecking Que: %s(%s)" %[que.actor.ActorKey, que.Id])
@@ -195,9 +220,9 @@ func _execute_turn_frames(game_state:GameStateData, que:ActionQue, turn_index:in
 		if DEEP_LOGGING: print("\t\tGap action")
 		return
 		
-	# Check if Actor is dead
-	if que.actor.is_dead:
-		if DEEP_LOGGING: print("\t\tActor is dead")
+	# Check if Que is dead
+	if _dead_ques.has(que.Id):
+		if DEEP_LOGGING: print("\t\tQue is dead")
 		return
 		
 	# Get the action for this turn
@@ -273,7 +298,7 @@ func _get_subaction(script_key:String)->BaseSubAction:
 	#return -1
 
 func _pay_turn_costs():
-	for que:ActionQue in action_ques.values():
+	for que:ActionQue in get_active_action_ques():
 		var actor = que.actor
 		var turn_data = que.QueExecData.get_current_turn_data()
 		for stat_name in turn_data.costs.keys():
@@ -285,7 +310,7 @@ func _pay_turn_costs():
 func _sort_ques_by_speed():
 	var speeds = []
 	var speed_to_ques = {}
-	for que:ActionQue in action_ques.values():
+	for que:ActionQue in _action_ques.values():
 		var actor:BaseActor = que.actor
 		var speed = actor.stats.get_stat("Speed", 0)
 		if not speeds.has(speed):
@@ -313,7 +338,7 @@ func _calc_turn_padding():
 	max_que_size = -1
 	var max_que_last_key = ''
 	for que_id in que_order:
-		var que:ActionQue = action_ques[que_id]
+		var que:ActionQue = _action_ques[que_id]
 		if que.que_size >= max_que_size:	
 			max_que_size = que.que_size
 			max_que_last_key = que_id
@@ -338,7 +363,7 @@ func _calc_turn_padding():
 			var section_index = que_section_indexes[key]
 			var next_section = (section_index + pre_offset) * section_size
 			# Has entered new section
-			if index >= next_section and action_ques[key].que_size > 0:
+			if index >= next_section and _action_ques[key].que_size > 0:
 				had_increase = true
 				increased_cache.append(key)
 		
@@ -356,7 +381,7 @@ func _calc_turn_padding():
 	var shift_forward = true
 	for que_id in que_order:
 		
-		var que:ActionQue = action_ques[que_id]
+		var que:ActionQue = _action_ques[que_id]
 		if que.Id == max_que_last_key:
 			shift_forward = false
 			

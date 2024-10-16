@@ -7,10 +7,10 @@ static func is_spot_target(parms:TargetParameters)->bool:
 	return (parms.target_type == TargetTypes.Spot or 
 			parms.target_type == TargetTypes.OpenSpot)
 			
-static func is_actor_target(parms:TargetParameters)->bool:
-	return (parms.target_type == TargetTypes.Actor or 
-			parms.target_type == TargetTypes.Ally or 
-			parms.target_type == TargetTypes.Enemy)
+static func is_actor_target_type(target_type:TargetTypes)->bool:
+	return (target_type == TargetTypes.Actor or 
+			target_type == TargetTypes.Ally or 
+			target_type == TargetTypes.Enemy)
 
 var target_key:String
 var target_type:TargetTypes

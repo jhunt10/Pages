@@ -33,6 +33,8 @@
 		"Tags": ["Test"],
 		"Sprite": "TestTargetSprite.png",
 		"CorpseSprite": "TargetCorpse.png",
+		"AutoQueing": true,
+		"LeavesCorpse": false,
 		"Stats":{
 			"Max:Health":100,
 			"Mass":100,
@@ -41,8 +43,8 @@
 			"Armor": 200
 		},
 		"QueData":{
-			"MaxSize": 0,
-			"_ActionList": ["TestMissile"]
+			"MaxSize": 4,
+			"ActionList": ["TotemMissile"]
 		}
 	},
 	{

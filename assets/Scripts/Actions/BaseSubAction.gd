@@ -25,8 +25,12 @@ func find_target_actor(target_key:String, metadata:QueExecutionData,
 		return null
 	var target = turn_data.targets[target_key]
 	if target is Vector2i:
+		var actors = game_state.MapState.get_actors_at_pos(target)
+		if actors.size() == 1:
+			return actors[0]
+		printerr("0 or 2+ actors found by target")
 		return game_state.MapState.get_actor_at_pos(target)
 	if target is String:
-		return game_state.Actors[target]
+		return game_state.get_actor(target, true)
 	printerr("Unknown target type: " + str(target))
 	return null

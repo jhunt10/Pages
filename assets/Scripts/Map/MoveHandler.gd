@@ -1,5 +1,7 @@
 class_name MoveHandler
 
+const LOGGING:bool = true
+
 # Incase of diagninal movement
 static var MOVE_MOD:int = 4
 static var PushableMovement:Array = ['Walk']
@@ -30,30 +32,51 @@ static func handle_movement(game_state:GameStateData, moving_actor:BaseActor,
 	if (new_pos.x < 0 or new_pos.x >= game_state.MapState.max_width 
 		or new_pos.y < 0 or new_pos.y >= game_state.MapState.max_hight):
 			return false
-			
+	if LOGGING:
+		print("------------------------------")
+		print("Handing Move '%s' to %s" % [moving_actor.ActorKey, new_pos])
+	
+	# Skip pushing logic if we aren't changing spots
+	if new_pos.x == actor_pos.x and new_pos.y == actor_pos.y:
+		game_state.MapState.set_actor_pos(moving_actor, new_pos)
+		if LOGGING:
+			print("------------------------------")
+		return true
+	
+	# Check if spot is valid
+	if not spot_is_valid_and_open(game_state, new_pos):
+		if LOGGING: 
+			print("\tSpot is not valid" )
+			print("------------------------------")
+		return false
+	
 	# Get actor in same z layer as where we are going
 	var occupying_actors:Array = game_state.MapState.get_actors_at_pos(Vector2i(new_pos.x, new_pos.y))
 	var blocking_actor = null
+	if LOGGING: print("\t%s occupying_actors found" % [occupying_actors.size()])
 	for b_act:BaseActor in occupying_actors:
 		var b_act_pos = game_state.MapState.get_actor_pos(b_act)
 		if b_act_pos.z == new_pos.z:
 			blocking_actor = b_act
 			
 	if blocking_actor:
+		if LOGGING: print("\tFound blocking actor: " + blocking_actor.ActorKey)
 		if not PushableMovement.has(move_type):
-			print("Push NotAllowed")
+			if LOGGING: print("\t\tPush NotAllowed")
 			return false
 		var push_res = _try_push(game_state, moving_actor, blocking_actor, relative_movement)
 		if push_res:
-			print("Push success")
+			if LOGGING: print("\t\tPush success")
 			game_state.MapState.set_actor_pos(blocking_actor, push_res)
 		else:
-			print("Push Failed")
+			if LOGGING: print("\t\tPush Failed")
 			return false
-		
-	game_state.MapState.set_actor_pos(moving_actor, new_pos)
-	return true
 	
+	game_state.MapState.set_actor_pos(moving_actor, new_pos)
+	if LOGGING:
+		print("------------------------------")
+	return true
+
 # Returns new pos for pushed_actor if the pushed_actor can be pushed
 static func _try_push(game_state:GameStateData, moveing_actor:BaseActor, pushed_actor:BaseActor, relativeMovemnt:MapPos)->MapPos:
 	#TODO: mass check

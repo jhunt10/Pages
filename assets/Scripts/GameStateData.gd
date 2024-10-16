@@ -3,7 +3,7 @@ class_name GameStateData
 # actors, effects, and thier statues.
 
 # Dictionary of Actor.Id to Actor
-var Actors:Dictionary = {}
+var _actors:Dictionary = {}
 var Missiles:Dictionary = {}
 var Zones:Dictionary = {}
 
@@ -11,11 +11,24 @@ var Zones:Dictionary = {}
 var MapState:MapStateData
 
 func add_actor(actor:BaseActor):
-	Actors[actor.Id] = actor
+	_actors[actor.Id] = actor
 
-func kill_actor(actor:BaseActor):
-	actor.on_death()
-	#Actors.erase(actor.Id)
+func get_actor(actor_id:String, allow_dead:bool=false):
+	var actor = _actors.get(actor_id, null)
+	if !actor:
+		printerr("GameStateData.get_actor: Failed to Actor with Id '%s'." % [actor_id])
+		return null
+	if !allow_dead and actor.is_dead:
+		printerr("GameStateData.get_actor: Found dead Actor with Id '%s'." % [actor_id])
+		return null
+	return actor
+
+func list_actors(include_dead:bool=false):
+	var out_list = []
+	for actor:BaseActor in _actors.values():
+		if include_dead or not actor.is_dead:
+			out_list.append(actor)
+	return out_list
 	
 func add_missile(missile:BaseMissile):
 	Missiles[missile.Id] = missile

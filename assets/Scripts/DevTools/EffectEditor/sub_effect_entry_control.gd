@@ -6,6 +6,7 @@ static var SUB_ACTIONS_PATH = "res://assets/Scripts/Effects/SubEffects/"
 signal index_changed
 
 @onready var script_drop_options:LoadedOptionButton = $VBoxContainer/ScriptInput/LoadedOptionButton
+@onready var delete_button:Button = $VBoxContainer/HBoxContainer/DeleteButton
 @onready var key_line_edit:LineEdit = $VBoxContainer/HBoxContainer/KeyLineEdit
 @onready var main_container:VBoxContainer = $VBoxContainer
 @onready var props_container:VBoxContainer = $VBoxContainer/PropsContainer
@@ -18,6 +19,7 @@ var resize:bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	delete_button.pressed.connect(_on_delete_button)
 	script_drop_options.item_selected.connect(script_selected)
 	script_drop_options.get_options_func = get_sub_effects_scripts
 	premade_option_prop_input.visible = false
@@ -93,6 +95,9 @@ func create_prop_input(prop_name:String, prop_type, is_unknown:bool=false):
 		enum_options = options_dict.get(prop_name, [])
 		var t = true
 	new_prop.set_prop(prop_name, prop_type, prop_value, is_unknown, enum_options)
+
+func _on_delete_button():
+	self.queue_free()
 
 static func get_sub_effects_scripts():
 	var list = []

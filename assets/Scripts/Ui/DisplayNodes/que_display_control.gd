@@ -65,7 +65,11 @@ func set_actor(actor:BaseActor):
 		_sync_que()
 	else:
 		_delayed_init = true
-	
+
+func mark_as_dead():
+	for slot:QueDisplaySlot in _slot_buttons:
+		slot.dead_icon.visible = true
+
 func _build_slots():
 	if not _actor:
 		return

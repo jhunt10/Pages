@@ -19,6 +19,13 @@ func _ready() -> void:
 
 func add_actor_node(actor:BaseActor, node:ActorNode):
 	actor_nodes[actor.Id] = node
+
+func delete_actor(actor:BaseActor):
+	var node:ActorNode = actor_nodes.get(actor.Id, null)
+	if !node:
+		return
+	node.queue_free()
+	actor_nodes.erase(actor.Id)
 	
 func _build_terrain():
 	var map_state = game_state.MapState
@@ -69,8 +76,8 @@ func _sync_positions():
 	_sync_missile_positions()
 
 func _sync_actor_positions():
-	for actor in game_state.Actors.values():
-		var node = actor_nodes.get(actor.Id, null)
+	for node:ActorNode in actor_nodes.values():
+		var actor = game_state.get_actor(node.Actor.Id, true)
 		if !node:
 			printerr("Failed to find node for actor: ", actor.Id)
 			continue

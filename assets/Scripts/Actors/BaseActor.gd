@@ -2,6 +2,7 @@ class_name BaseActor
 
 # Actor holds no references to the current map state so this method is called by MapState.set_actor_pos()
 signal on_move(old_pos:MapPos, new_pos:MapPos, move_type:String, moved_by:BaseActor)
+signal on_death()
 
 var Que:ActionQue
 var node:ActorNode
@@ -19,6 +20,9 @@ var SnippetDesc:String
 var Description:String
 var Tags:Array = []
 
+var spawn_map_layer
+var leaves_corpse:bool = true
+
 var _default_sprite:String
 var _allow_auto_que:bool = false
 
@@ -29,6 +33,12 @@ func _init(args:Dictionary, faction_index:int) -> void:
 	ActorKey = args['ActorKey']
 	ActorData = args
 	FactionIndex = faction_index
+	
+	leaves_corpse = args.get("LeavesCorpse", true)
+	spawn_map_layer = args.get('SpawnOnMapLayer', MapStateData.DEFAULT_ACTOR_LAYER)
+	if spawn_map_layer is String:
+		spawn_map_layer = MapStateData.MapLayers.get(spawn_map_layer)
+	
 	
 	#TODO: Translations
 	DisplayName = args['DisplayName']
@@ -46,8 +56,9 @@ func _init(args:Dictionary, faction_index:int) -> void:
 	effects = EffectHolder.new(self)
 	items = ItemHolder.new(self)
 	
-func on_death():
+func die():
 	is_dead = true
+	on_death.emit()
 	node.sprite.texture = get_coprse_texture()
 	
 func  get_default_sprite()->Texture2D:

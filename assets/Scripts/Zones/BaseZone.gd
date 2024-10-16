@@ -50,7 +50,7 @@ func _on_area_moved(new_pos:MapPos):
 	# Remove actors no longer in area
 	for old_act_id in _actors_to_effects.keys():
 		if !actors_in_new.keys().has(old_act_id):
-			var old_actor = CombatRootControl.Instance.GameState.Actors[old_act_id]
+			var old_actor = CombatRootControl.Instance.GameState.get_actor(old_act_id)
 			on_actor_exit(old_actor)
 	# Add new actors
 	for new_act_id in actors_in_new.keys():

@@ -437,6 +437,10 @@ grow_vertical = 2
 [node name="HBoxContainer" type="HBoxContainer" parent="MainContainer/PanelsContainer/MiddleVBoxContainer/SubEffectEditControl/VBoxContainer/SubEffectEntryControl/VBoxContainer"]
 layout_mode = 2
 
+[node name="DeleteButton" type="Button" parent="MainContainer/PanelsContainer/MiddleVBoxContainer/SubEffectEditControl/VBoxContainer/SubEffectEntryControl/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "X"
+
 [node name="Label" type="Label" parent="MainContainer/PanelsContainer/MiddleVBoxContainer/SubEffectEditControl/VBoxContainer/SubEffectEntryControl/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 text = "SubEffectKey:"
@@ -459,12 +463,12 @@ size_flags_horizontal = 3
 script = ExtResource("3_bmymb")
 
 [node name="SubEffectPropertyControl" type="Control" parent="MainContainer/PanelsContainer/MiddleVBoxContainer/SubEffectEditControl/VBoxContainer/SubEffectEntryControl/VBoxContainer"]
-visible = false
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 script = ExtResource("15_rq5p1")
 
-[node name="VBoxContainer" type="HBoxContainer" parent="MainContainer/PanelsContainer/MiddleVBoxContainer/SubEffectEditControl/VBoxContainer/SubEffectEntryControl/VBoxContainer/SubEffectPropertyControl"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MainContainer/PanelsContainer/MiddleVBoxContainer/SubEffectEditControl/VBoxContainer/SubEffectEntryControl/VBoxContainer/SubEffectPropertyControl"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -472,22 +476,46 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Label" type="Label" parent="MainContainer/PanelsContainer/MiddleVBoxContainer/SubEffectEditControl/VBoxContainer/SubEffectEntryControl/VBoxContainer/SubEffectPropertyControl/VBoxContainer"]
+[node name="Label" type="Label" parent="MainContainer/PanelsContainer/MiddleVBoxContainer/SubEffectEditControl/VBoxContainer/SubEffectEntryControl/VBoxContainer/SubEffectPropertyControl/HBoxContainer"]
 layout_mode = 2
 text = "PropName:"
 
-[node name="LoadedOptionButton" type="OptionButton" parent="MainContainer/PanelsContainer/MiddleVBoxContainer/SubEffectEditControl/VBoxContainer/SubEffectEntryControl/VBoxContainer/SubEffectPropertyControl/VBoxContainer"]
+[node name="LoadedOptionButton" type="OptionButton" parent="MainContainer/PanelsContainer/MiddleVBoxContainer/SubEffectEditControl/VBoxContainer/SubEffectEntryControl/VBoxContainer/SubEffectPropertyControl/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 fit_to_longest_item = false
 script = ExtResource("3_bmymb")
 
-[node name="LineEdit" type="LineEdit" parent="MainContainer/PanelsContainer/MiddleVBoxContainer/SubEffectEditControl/VBoxContainer/SubEffectEntryControl/VBoxContainer/SubEffectPropertyControl/VBoxContainer"]
+[node name="LineEdit" type="LineEdit" parent="MainContainer/PanelsContainer/MiddleVBoxContainer/SubEffectEditControl/VBoxContainer/SubEffectEntryControl/VBoxContainer/SubEffectPropertyControl/HBoxContainer"]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="SpinBox" type="SpinBox" parent="MainContainer/PanelsContainer/MiddleVBoxContainer/SubEffectEditControl/VBoxContainer/SubEffectEntryControl/VBoxContainer/SubEffectPropertyControl/VBoxContainer"]
+[node name="SpinBox" type="SpinBox" parent="MainContainer/PanelsContainer/MiddleVBoxContainer/SubEffectEditControl/VBoxContainer/SubEffectEntryControl/VBoxContainer/SubEffectPropertyControl/HBoxContainer"]
+layout_mode = 2
+
+[node name="TriggersInputContainer" type="VBoxContainer" parent="MainContainer/PanelsContainer/MiddleVBoxContainer/SubEffectEditControl/VBoxContainer/SubEffectEntryControl/VBoxContainer/SubEffectPropertyControl"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MainContainer/PanelsContainer/MiddleVBoxContainer/SubEffectEditControl/VBoxContainer/SubEffectEntryControl/VBoxContainer/SubEffectPropertyControl/TriggersInputContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MainContainer/PanelsContainer/MiddleVBoxContainer/SubEffectEditControl/VBoxContainer/SubEffectEntryControl/VBoxContainer/SubEffectPropertyControl/TriggersInputContainer/HBoxContainer"]
+layout_mode = 2
+text = "Triggers"
+
+[node name="LoadedOptionButton" type="OptionButton" parent="MainContainer/PanelsContainer/MiddleVBoxContainer/SubEffectEditControl/VBoxContainer/SubEffectEntryControl/VBoxContainer/SubEffectPropertyControl/TriggersInputContainer/HBoxContainer"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("3_bmymb")
+
+[node name="FlowContainer" type="FlowContainer" parent="MainContainer/PanelsContainer/MiddleVBoxContainer/SubEffectEditControl/VBoxContainer/SubEffectEntryControl/VBoxContainer/SubEffectPropertyControl/TriggersInputContainer"]
 layout_mode = 2
 
 [node name="PropsContainer" type="VBoxContainer" parent="MainContainer/PanelsContainer/MiddleVBoxContainer/SubEffectEditControl/VBoxContainer/SubEffectEntryControl/VBoxContainer"]

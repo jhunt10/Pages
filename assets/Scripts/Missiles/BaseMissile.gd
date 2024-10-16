@@ -11,7 +11,7 @@ var _missle_animation_data:AnimatedSpriteData
 
 var SourceActor:BaseActor:
 	get:
-		return CombatRootControl.Instance.GameState.Actors[_source_actor_id]
+		return CombatRootControl.Instance.GameState.get_actor(_source_actor_id, true)
 var SourceAction:BaseAction:
 	get:
 		return MainRootNode.action_libary.get_action(_source_action_key)
@@ -49,7 +49,7 @@ func _init(actor:BaseActor, action:BaseAction, missile_data:Dictionary, target, 
 	if target is Vector2i:
 		TargetSpot = target
 	if target is String:
-		var target_actor = CombatRootControl.Instance.GameState.Actors[target]
+		var target_actor = CombatRootControl.Instance.GameState.get_actor(target, true)
 		var spot = CombatRootControl.Instance.GameState.MapState.get_actor_pos(target_actor)
 		TargetSpot = Vector2i(spot.x, spot.y)
 	

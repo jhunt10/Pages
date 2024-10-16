@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://2ij8q0r7uy4y"]
+[gd_scene load_steps=10 format=3 uid="uid://2ij8q0r7uy4y"]
 
 [ext_resource type="Script" path="res://assets/Scripts/Ui/DisplayNodes/que_display_control.gd" id="1_qogk3"]
 [ext_resource type="Texture2D" uid="uid://io35wpu802fp" path="res://assets/Sprites/UI/background_64x64_12.png" id="2_y0k3q"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://dgfxtmtdjfgey" path="res://assets/Sprites/UI/QuePathArrow.png" id="5_1shq4"]
 [ext_resource type="Texture2D" uid="uid://by451vuljblvx" path="res://assets/Sprites/UI/QueInputAndDisplay/page_slot_highlight.png" id="5_awnhx"]
 [ext_resource type="Texture2D" uid="uid://mglbobw62vc1" path="res://assets/Sprites/UI/QueInputAndDisplay/page_gap_slot.png" id="7_xxjie"]
+[ext_resource type="Texture2D" uid="uid://clnubp7dsthut" path="res://assets/Sprites/UI/QueInputAndDisplay/dead_page_slot.png" id="8_2n88r"]
 
 [node name="QueDisplayControl" type="Control"]
 custom_minimum_size = Vector2(100, 56)
@@ -75,6 +76,12 @@ layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("5_awnhx")
+
+[node name="DeadSlotIcon" type="TextureRect" parent="HBoxContainer/PageSlotButtonPrefab"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("8_2n88r")
 
 [node name="SlotsContainer" type="HBoxContainer" parent="HBoxContainer"]
 layout_mode = 2

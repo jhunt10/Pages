@@ -49,6 +49,7 @@ func _ready() -> void:
 			StatDisplay.set_actor(new_actor)
 			QueInput.set_actor(new_actor)
 			QueDisplay.set_actor(new_actor)
+			new_actor.effects.add_effect("FlashText", {})
 	actor_creation_que.clear()
 	
 	ui_controller.set_ui_state(UiStateController.UiStates.ActionInput)
@@ -68,7 +69,19 @@ func set_init_state(map_data:Dictionary, player_actor:String, actors_pos:Diction
 	actor_creation_que = actors_pos
 	
 func kill_actor(actor:BaseActor):
-	GameState.kill_actor(actor)
+	printerr("Actor '%s' died!" % [actor.Id])
+	actor.die()
+	QueController.remove_action_que(actor.Que)
+	if actor.leaves_corpse:
+		GameState.MapState.set_actor_layer(actor, MapStateData.MapLayers.Corpse)
+	else:
+		delete_actor(actor)
+
+
+func delete_actor(actor:BaseActor):
+	GameState.MapState.delete_actor(actor)
+	MapController.delete_actor(actor)
+	#GameState.Actors.erase(actor.Id)
 	
 func create_new_actor(data:Dictionary, faction_index:int, pos:MapPos):
 	#var file = FileAccess.open(path, FileAccess.READ)
@@ -77,8 +90,8 @@ func create_new_actor(data:Dictionary, faction_index:int, pos:MapPos):
 	var new_actor = BaseActor.new(data, faction_index)
 	
 	# Add actor to GameState and set position
-	GameState.Actors[new_actor.Id] = new_actor
-	GameState.MapState.set_actor_pos(new_actor, pos)
+	GameState.add_actor(new_actor)
+	GameState.MapState.set_actor_pos(new_actor, pos, new_actor.spawn_map_layer)
 	QueController.add_action_que(new_actor.Que)
 	
 	# Register new node with MapController and sync  pos
@@ -102,7 +115,10 @@ func create_new_missile_node(missile:BaseMissile):
 	
 func create_damage_effect(actor:BaseActor, veffect_key:String, flash_number:int):
 	var new_node:DamageEffectNode  = load("res://Scenes/Effects/damage_effect_node.tscn").instantiate()
-	var actor_node:ActorNode = MapController.actor_nodes[actor.Id]
+	var actor_node:ActorNode = MapController.actor_nodes.get(actor.Id, null)
+	if !actor_node:
+		printerr("Failed to find actor node for: %s" % [actor.Id])
+		return
 	new_node.set_props(veffect_key, actor_node, flash_number)
 	actor_node.add_child(new_node)
 	actor_node.play_shake()

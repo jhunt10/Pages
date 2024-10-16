@@ -18,6 +18,8 @@ func set_actor(actor:BaseActor):
 func set_display_pos(pos:MapPos):
 	if !sprite:
 		sprite = $Sprite
+	if !pos:
+		return
 	var rot = pos.dir
 	if rot == 0: sprite.set_rotation_degrees(0) 
 	if rot == 1: sprite.set_rotation_degrees(90) 

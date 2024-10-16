@@ -5,7 +5,9 @@ var X:int = 0
 var Y:int = 0
 var terrain_index:int = 0
 
-var _actor_ids:Array=[]
+var _layer_to_actor_ids:Dictionary = {}
+
+#var _actor_ids:Array=[]
 var _zone_ids:Array = []
 
 func _init(x:int, y:int, terrain_index:int, parent:MapStateData) -> void:
@@ -14,21 +16,41 @@ func _init(x:int, y:int, terrain_index:int, parent:MapStateData) -> void:
 	Y = y
 	self.terrain_index = terrain_index
 	
-func add_actor(actor:BaseActor):
-	if _actor_ids.has(actor.Id):
+func add_actor(actor:BaseActor, layer=MapStateData.DEFAULT_ACTOR_LAYER):
+	print("Adding actor '%s' (%s, %s) %s" % [actor.ActorKey, X, Y, layer])
+	if not _layer_to_actor_ids.keys().has(layer):
+		_layer_to_actor_ids[layer] = []
+	if _layer_to_actor_ids[layer].has(actor.Id):
 		printerr("Actor " + actor.Id + " is already set for spot (" + str(X) + "," + str(Y) + ")")
 	else:
-		_actor_ids.append(actor.Id)
+		_layer_to_actor_ids[layer].append(actor.Id)
 
 func remove_actor(actor:BaseActor):
-	if _actor_ids.has(actor.Id):
-		_actor_ids.erase(actor.Id)
+	for layer in _layer_to_actor_ids.keys():
+		if _layer_to_actor_ids[layer].has(actor.Id):
+			_layer_to_actor_ids[layer].erase(actor.Id)
 		
-func get_actors()->Array:
-	var out = []
-	for id in _actor_ids:
-		out.append(parent_map._game_state.Actors[id])
-	return out
+func get_actors(layer=null, include_dead:bool=false)->Array:
+	var out_list = []
+	if layer:
+		for id in _layer_to_actor_ids.get(layer, []):
+			var actor:BaseActor = parent_map._game_state.get_actor(id)
+			if include_dead or not actor.is_dead:
+				out_list.append(actor)
+	else:
+		for l in _layer_to_actor_ids.keys():
+			for id in _layer_to_actor_ids.get(l, []):
+				var actor:BaseActor = parent_map._game_state.get_actor(id)
+				if include_dead or not actor.is_dead:
+					out_list.append(actor)
+	return out_list
+
+func get_actor_layer(actor:BaseActor)->MapStateData.MapLayers:
+	for layer in _layer_to_actor_ids.keys():
+		if _layer_to_actor_ids[layer].has(actor.Id):
+			return layer
+	printerr("MapSpot.get_actor_layer: Failed to find actor '%s'." % [actor.Id])
+	return MapStateData.DEFAULT_ACTOR_LAYER
 
 func add_zone(zone:BaseZone):
 	if _zone_ids.has(zone.Id):
