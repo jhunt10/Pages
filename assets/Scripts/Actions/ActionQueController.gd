@@ -4,7 +4,7 @@ signal que_ordering_changed
 
 # End round early if no more actions are qued (for testing)
 const SHORTCUT_QUE = true
-const DEEP_LOGGING = false
+const DEEP_LOGGING = true
 const FRAMES_PER_ACTION = 24
 const SUB_ACTION_FRAME_TIME = 0.05
 
@@ -114,7 +114,10 @@ func update(delta: float) -> void:
 	if execution_state == ActionStates.Running:
 		sub_action_timer += delta
 		if sub_action_timer > SUB_ACTION_FRAME_TIME:
-			if DEEP_LOGGING: print("Doing Action: " + str(action_index) + ":" + str(sub_action_index))# + " | delta: " + str(delta))
+			if DEEP_LOGGING: 
+				print("") 
+				print("")
+				print("Doing Action: " + str(action_index) + ":" + str(sub_action_index))# + " | delta: " + str(delta))
 			sub_action_timer = 0
 			
 			#TODO: GameState
@@ -187,9 +190,14 @@ func _clear_ques():
 	
 
 func _execute_turn_frames(game_state:GameStateData, que:ActionQue, turn_index:int, subaction_index:int):
-	if DEEP_LOGGING: print("\tChecking Que: " + que.Id)
+	if DEEP_LOGGING: print("\tChecking Que: %s(%s)" %[que.actor.ActorKey, que.Id])
 	if que.is_turn_gap(turn_index):
 		if DEEP_LOGGING: print("\t\tGap action")
+		return
+		
+	# Check if Actor is dead
+	if que.actor.is_dead:
+		if DEEP_LOGGING: print("\t\tActor is dead")
 		return
 		
 	# Get the action for this turn
@@ -208,6 +216,7 @@ func _execute_turn_frames(game_state:GameStateData, que:ActionQue, turn_index:in
 		if DEEP_LOGGING: print("\t\tNo SubAction List on action: %s" % [action.ActionKey])
 		return
 		
+		
 	while sub_sub_action_index < sub_action_list.size():
 		if turn_data.turn_failed:
 			if DEEP_LOGGING: print("\t\tTurn Failed")
@@ -220,6 +229,7 @@ func _execute_turn_frames(game_state:GameStateData, que:ActionQue, turn_index:in
 			printerr("No script found for subaction " + script_key)
 			return
 		
+		if DEEP_LOGGING: print("\t\tExecuting SubAction: " + script_key)
 		# Finnaly do subaction
 		subaction.do_thing(
 			action, # Parent Action
@@ -328,7 +338,7 @@ func _calc_turn_padding():
 			var section_index = que_section_indexes[key]
 			var next_section = (section_index + pre_offset) * section_size
 			# Has entered new section
-			if index >= next_section:
+			if index >= next_section and action_ques[key].que_size > 0:
 				had_increase = true
 				increased_cache.append(key)
 		

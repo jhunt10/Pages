@@ -863,22 +863,12 @@ text = "Sub Actions"
 layout_mode = 2
 text = "Add"
 
-[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/HBoxContainer/MiddleVBoxContainer/SubActionsEditControl/VBoxContainer"]
-self_modulate = Color(0, 0.73371, 0.736977, 1)
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/MiddleVBoxContainer/SubActionsEditControl/VBoxContainer/ScrollContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="SubActionEntry" type="Control" parent="VBoxContainer/HBoxContainer/MiddleVBoxContainer/SubActionsEditControl/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="SubActionEntry" type="Control" parent="VBoxContainer/HBoxContainer/MiddleVBoxContainer/SubActionsEditControl/VBoxContainer"]
 custom_minimum_size = Vector2(0, 128)
 layout_mode = 2
 script = ExtResource("12_5vmw0")
 
-[node name="Background2" type="NinePatchRect" parent="VBoxContainer/HBoxContainer/MiddleVBoxContainer/SubActionsEditControl/VBoxContainer/ScrollContainer/VBoxContainer/SubActionEntry"]
+[node name="Background2" type="NinePatchRect" parent="VBoxContainer/HBoxContainer/MiddleVBoxContainer/SubActionsEditControl/VBoxContainer/SubActionEntry"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -891,7 +881,7 @@ patch_margin_top = 12
 patch_margin_right = 12
 patch_margin_bottom = 12
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/MiddleVBoxContainer/SubActionsEditControl/VBoxContainer/ScrollContainer/VBoxContainer/SubActionEntry"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/MiddleVBoxContainer/SubActionsEditControl/VBoxContainer/SubActionEntry"]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -903,10 +893,10 @@ offset_bottom = -8.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ScriptInput" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/MiddleVBoxContainer/SubActionsEditControl/VBoxContainer/ScrollContainer/VBoxContainer/SubActionEntry/VBoxContainer"]
+[node name="ScriptInput" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/MiddleVBoxContainer/SubActionsEditControl/VBoxContainer/SubActionEntry/VBoxContainer"]
 layout_mode = 2
 
-[node name="FrameInput" type="SpinBox" parent="VBoxContainer/HBoxContainer/MiddleVBoxContainer/SubActionsEditControl/VBoxContainer/ScrollContainer/VBoxContainer/SubActionEntry/VBoxContainer/ScriptInput"]
+[node name="FrameInput" type="SpinBox" parent="VBoxContainer/HBoxContainer/MiddleVBoxContainer/SubActionsEditControl/VBoxContainer/SubActionEntry/VBoxContainer/ScriptInput"]
 custom_minimum_size = Vector2(24, 0)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -916,26 +906,30 @@ rounded = true
 alignment = 2
 select_all_on_focus = true
 
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/MiddleVBoxContainer/SubActionsEditControl/VBoxContainer/ScrollContainer/VBoxContainer/SubActionEntry/VBoxContainer/ScriptInput"]
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/MiddleVBoxContainer/SubActionsEditControl/VBoxContainer/SubActionEntry/VBoxContainer/ScriptInput"]
 layout_mode = 2
 text = "Script:"
 
-[node name="ScriptButton" type="OptionButton" parent="VBoxContainer/HBoxContainer/MiddleVBoxContainer/SubActionsEditControl/VBoxContainer/ScrollContainer/VBoxContainer/SubActionEntry/VBoxContainer/ScriptInput"]
+[node name="ScriptButton" type="OptionButton" parent="VBoxContainer/HBoxContainer/MiddleVBoxContainer/SubActionsEditControl/VBoxContainer/SubActionEntry/VBoxContainer/ScriptInput"]
 layout_mode = 2
 size_flags_horizontal = 3
 selected = 0
 item_count = 1
 popup/item_0/text = "Test Script"
 
-[node name="PropsContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/MiddleVBoxContainer/SubActionsEditControl/VBoxContainer/ScrollContainer/VBoxContainer/SubActionEntry/VBoxContainer"]
+[node name="DeleteButton" type="Button" parent="VBoxContainer/HBoxContainer/MiddleVBoxContainer/SubActionsEditControl/VBoxContainer/SubActionEntry/VBoxContainer/ScriptInput"]
+layout_mode = 2
+text = "X"
+
+[node name="PropsContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/MiddleVBoxContainer/SubActionsEditControl/VBoxContainer/SubActionEntry/VBoxContainer"]
 layout_mode = 2
 
-[node name="SubActionPropertyControl" type="Control" parent="VBoxContainer/HBoxContainer/MiddleVBoxContainer/SubActionsEditControl/VBoxContainer/ScrollContainer/VBoxContainer/SubActionEntry/VBoxContainer/PropsContainer"]
+[node name="SubActionPropertyControl" type="Control" parent="VBoxContainer/HBoxContainer/MiddleVBoxContainer/SubActionsEditControl/VBoxContainer/SubActionEntry/VBoxContainer/PropsContainer"]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 script = ExtResource("18_v63g5")
 
-[node name="VBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/MiddleVBoxContainer/SubActionsEditControl/VBoxContainer/ScrollContainer/VBoxContainer/SubActionEntry/VBoxContainer/PropsContainer/SubActionPropertyControl"]
+[node name="VBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/MiddleVBoxContainer/SubActionsEditControl/VBoxContainer/SubActionEntry/VBoxContainer/PropsContainer/SubActionPropertyControl"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -943,44 +937,44 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/MiddleVBoxContainer/SubActionsEditControl/VBoxContainer/ScrollContainer/VBoxContainer/SubActionEntry/VBoxContainer/PropsContainer/SubActionPropertyControl/VBoxContainer"]
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/MiddleVBoxContainer/SubActionsEditControl/VBoxContainer/SubActionEntry/VBoxContainer/PropsContainer/SubActionPropertyControl/VBoxContainer"]
 layout_mode = 2
 text = "PropName:"
 
-[node name="LoadedOptionButton" type="OptionButton" parent="VBoxContainer/HBoxContainer/MiddleVBoxContainer/SubActionsEditControl/VBoxContainer/ScrollContainer/VBoxContainer/SubActionEntry/VBoxContainer/PropsContainer/SubActionPropertyControl/VBoxContainer"]
+[node name="LoadedOptionButton" type="OptionButton" parent="VBoxContainer/HBoxContainer/MiddleVBoxContainer/SubActionsEditControl/VBoxContainer/SubActionEntry/VBoxContainer/PropsContainer/SubActionPropertyControl/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 fit_to_longest_item = false
 script = ExtResource("7_gwuq7")
 
-[node name="LineEdit" type="LineEdit" parent="VBoxContainer/HBoxContainer/MiddleVBoxContainer/SubActionsEditControl/VBoxContainer/ScrollContainer/VBoxContainer/SubActionEntry/VBoxContainer/PropsContainer/SubActionPropertyControl/VBoxContainer"]
+[node name="LineEdit" type="LineEdit" parent="VBoxContainer/HBoxContainer/MiddleVBoxContainer/SubActionsEditControl/VBoxContainer/SubActionEntry/VBoxContainer/PropsContainer/SubActionPropertyControl/VBoxContainer"]
 visible = false
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="MoveInputContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/MiddleVBoxContainer/SubActionsEditControl/VBoxContainer/ScrollContainer/VBoxContainer/SubActionEntry/VBoxContainer/PropsContainer/SubActionPropertyControl/VBoxContainer"]
+[node name="MoveInputContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/MiddleVBoxContainer/SubActionsEditControl/VBoxContainer/SubActionEntry/VBoxContainer/PropsContainer/SubActionPropertyControl/VBoxContainer"]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 alignment = 2
 script = ExtResource("18_rwend")
 
-[node name="XInput" type="SpinBox" parent="VBoxContainer/HBoxContainer/MiddleVBoxContainer/SubActionsEditControl/VBoxContainer/ScrollContainer/VBoxContainer/SubActionEntry/VBoxContainer/PropsContainer/SubActionPropertyControl/VBoxContainer/MoveInputContainer"]
+[node name="XInput" type="SpinBox" parent="VBoxContainer/HBoxContainer/MiddleVBoxContainer/SubActionsEditControl/VBoxContainer/SubActionEntry/VBoxContainer/PropsContainer/SubActionPropertyControl/VBoxContainer/MoveInputContainer"]
 layout_mode = 2
 theme = ExtResource("18_byx1h")
 min_value = -100.0
 
-[node name="YInput" type="SpinBox" parent="VBoxContainer/HBoxContainer/MiddleVBoxContainer/SubActionsEditControl/VBoxContainer/ScrollContainer/VBoxContainer/SubActionEntry/VBoxContainer/PropsContainer/SubActionPropertyControl/VBoxContainer/MoveInputContainer"]
+[node name="YInput" type="SpinBox" parent="VBoxContainer/HBoxContainer/MiddleVBoxContainer/SubActionsEditControl/VBoxContainer/SubActionEntry/VBoxContainer/PropsContainer/SubActionPropertyControl/VBoxContainer/MoveInputContainer"]
 layout_mode = 2
 theme = ExtResource("18_byx1h")
 min_value = -100.0
 
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/MiddleVBoxContainer/SubActionsEditControl/VBoxContainer/ScrollContainer/VBoxContainer/SubActionEntry/VBoxContainer/PropsContainer/SubActionPropertyControl/VBoxContainer/MoveInputContainer"]
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/MiddleVBoxContainer/SubActionsEditControl/VBoxContainer/SubActionEntry/VBoxContainer/PropsContainer/SubActionPropertyControl/VBoxContainer/MoveInputContainer"]
 layout_mode = 2
 text = "R:"
 
-[node name="RotInput" type="OptionButton" parent="VBoxContainer/HBoxContainer/MiddleVBoxContainer/SubActionsEditControl/VBoxContainer/ScrollContainer/VBoxContainer/SubActionEntry/VBoxContainer/PropsContainer/SubActionPropertyControl/VBoxContainer/MoveInputContainer"]
+[node name="RotInput" type="OptionButton" parent="VBoxContainer/HBoxContainer/MiddleVBoxContainer/SubActionsEditControl/VBoxContainer/SubActionEntry/VBoxContainer/PropsContainer/SubActionPropertyControl/VBoxContainer/MoveInputContainer"]
 layout_mode = 2
 item_count = 4
 popup/item_0/text = "None"
@@ -991,11 +985,21 @@ popup/item_2/id = 2
 popup/item_3/text = "Left"
 popup/item_3/id = 3
 
-[node name="SpinBox" type="SpinBox" parent="VBoxContainer/HBoxContainer/MiddleVBoxContainer/SubActionsEditControl/VBoxContainer/ScrollContainer/VBoxContainer/SubActionEntry/VBoxContainer/PropsContainer/SubActionPropertyControl/VBoxContainer"]
+[node name="SpinBox" type="SpinBox" parent="VBoxContainer/HBoxContainer/MiddleVBoxContainer/SubActionsEditControl/VBoxContainer/SubActionEntry/VBoxContainer/PropsContainer/SubActionPropertyControl/VBoxContainer"]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 alignment = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/HBoxContainer/MiddleVBoxContainer/SubActionsEditControl/VBoxContainer"]
+self_modulate = Color(0, 0.73371, 0.736977, 1)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/MiddleVBoxContainer/SubActionsEditControl/VBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
 [node name="RightBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2

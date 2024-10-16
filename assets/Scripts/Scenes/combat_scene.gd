@@ -16,8 +16,6 @@ static var QueController:ActionQueController = ActionQueController.new()
 	
 var GameState:GameStateData
 
-var _que_controler:ActionQueController
-
 # Actors to create on ready {ActorKey,Position}
 var actor_creation_que:Dictionary = {}
 var player_actor_key:String
@@ -42,8 +40,6 @@ func _ready() -> void:
 		printerr("Multiple CombatRootControls found")
 		queue_free()
 		return
-	
-	_que_controler = ActionQueController.new()
 	
 	for actor_key in actor_creation_que.keys():
 		var actor_data = MainRootNode.actor_libary.get_actor_data(actor_key)

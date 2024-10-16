@@ -11,7 +11,7 @@ func _process(delta: float) -> void:
 	pass
 
 func build_slots(que:ActionQue):
-	var section_size = 120 / que.que_size
+	var section_size = 120 / max(que.que_size,1)
 	var box_prefab:NinePatchRect = self.get_child(0)
 	for n in range(que.que_size):
 		var new_box:NinePatchRect = box_prefab.duplicate()

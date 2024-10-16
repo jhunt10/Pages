@@ -10,6 +10,7 @@ signal index_changed
 @onready var main_container:VBoxContainer = $VBoxContainer
 @onready var props_container:VBoxContainer = $VBoxContainer/PropsContainer
 @onready var premade_option_prop_input:SubActionPropInputControl = $VBoxContainer/PropsContainer/SubActionPropertyControl
+@onready var delete_button:Button = $VBoxContainer/ScriptInput/DeleteButton
 
 var prop_inputs:Dictionary = {}
 var real_script:String = ''
@@ -24,8 +25,10 @@ func _ready() -> void:
 		script_drop_options.add_item(script)
 	premade_option_prop_input.visible = false
 	index_input.get_line_edit().focus_exited.connect(on_index_lose_focus)
+	delete_button.pressed.connect(_on_delete_button)
 
 func on_index_lose_focus():
+	index_input.apply()
 	index_changed.emit()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -33,14 +36,18 @@ func _process(delta: float) -> void:
 	if resize:
 		var new_size = Vector2i(self.size.x, main_container.size.y + 16) 
 		#printerr("Setting Script Edit Entry Size: %s | %s" % [self.size, new_size])
-		self.set_size(new_size)
+		self.custom_minimum_size = new_size
 		resize = false
-	
+
+func _on_delete_button():
+	self.queue_free()
+
 func lose_focus_if_has():
 	if index_input.has_focus():
 		index_input.release_focus()
 	var line_edit = index_input.get_line_edit()
 	if line_edit.has_focus():
+		printerr("Line Edit Value: " + line_edit.text)
 		index_input.apply()
 		line_edit.release_focus()
 	for prop in prop_inputs.values():
@@ -95,7 +102,7 @@ func create_prop_input(prop_name:String, prop_type, is_unknown:bool=false):
 	prop_inputs[prop_name] = new_prop
 	var prop_value = subaction_data.get(prop_name, null)
 	new_prop.set_prop(prop_name, prop_type, prop_value, is_unknown)
-	
+
 func _damage_input_focused(prop_name, force_option:String=''):
 	var prop_input = prop_inputs.get(prop_name, null)
 	var option_button:OptionButton = prop_input.get_child(1)

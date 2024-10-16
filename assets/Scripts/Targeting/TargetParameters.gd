@@ -50,6 +50,8 @@ func is_point_in_area(center:MapPos, point:Vector2i)->bool:
 	
 func is_valid_target(actor:BaseActor, target, game_state:GameStateData):
 	if target is BaseActor:
+		if target.is_dead:
+			return false
 		if target_type == TargetTypes.Actor:
 			return true
 		if target_type == TargetTypes.Enemy:

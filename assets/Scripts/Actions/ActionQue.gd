@@ -4,7 +4,7 @@ var Id : String :
 	get: return actor.Id
 var QueExecData:QueExecutionData
 
-var actor
+var actor:BaseActor
 var real_que : Array = []
 var que_size : int = 0
 var available_action_list:Array = []

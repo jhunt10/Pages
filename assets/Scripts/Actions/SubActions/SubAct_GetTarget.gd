@@ -30,6 +30,7 @@ func do_thing(parent_action:BaseAction, subaction_data:Dictionary, metadata:QueE
 		var potentials = _get_potential_actor_targets(game_state, actor, target_parms)
 		if potentials.size() == 0:
 			print("No valid Targets")
+			CombatRootControl.Instance.create_flash_text(actor, "No Target", Color.RED)
 			return
 			
 		if potentials.size() == 1:

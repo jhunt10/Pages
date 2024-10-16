@@ -37,7 +37,7 @@ func on_actor_spawn(actor):
 	que_bars[actor.Id] = add_que(actor.Que)
 
 func add_que(que:ActionQue):
-	var section_size = 120 / que.que_size
+	var section_size = 120 / max(que.que_size,1)
 	if que.que_size > max_que_size:
 		max_que_size = que.que_size
 	var new_que:QueCalcBarControl = que_bar_prefab.duplicate()

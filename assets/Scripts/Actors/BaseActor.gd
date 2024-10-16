@@ -22,6 +22,8 @@ var Tags:Array = []
 var _default_sprite:String
 var _allow_auto_que:bool = false
 
+var is_dead:bool = false
+
 func _init(args:Dictionary, faction_index:int) -> void:
 	LoadPath = args['LoadPath']
 	ActorKey = args['ActorKey']
@@ -45,6 +47,7 @@ func _init(args:Dictionary, faction_index:int) -> void:
 	items = ItemHolder.new(self)
 	
 func on_death():
+	is_dead = true
 	node.sprite.texture = get_coprse_texture()
 	
 func  get_default_sprite()->Texture2D:

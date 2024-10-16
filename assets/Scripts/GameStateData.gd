@@ -15,6 +15,7 @@ func add_actor(actor:BaseActor):
 
 func kill_actor(actor:BaseActor):
 	actor.on_death()
+	#Actors.erase(actor.Id)
 	
 func add_missile(missile:BaseMissile):
 	Missiles[missile.Id] = missile
