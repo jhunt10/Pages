@@ -40,7 +40,7 @@ func get_actors(layer=null, include_dead:bool=false)->Array:
 	else:
 		for l in _layer_to_actor_ids.keys():
 			for id in _layer_to_actor_ids.get(l, []):
-				var actor:BaseActor = parent_map._game_state.get_actor(id)
+				var actor:BaseActor = parent_map._game_state.get_actor(id, true)
 				if include_dead or not actor.is_dead:
 					out_list.append(actor)
 	return out_list

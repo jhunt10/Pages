@@ -36,8 +36,8 @@ patch_margin_bottom = 12
 layout_mode = 0
 offset_left = 8.0
 offset_top = 8.0
-offset_right = 108.0
-offset_bottom = 40.0
+offset_right = 52.0
+offset_bottom = 48.0
 
 [node name="PortraitTextureRect" type="TextureRect" parent="HBoxContainer"]
 custom_minimum_size = Vector2(40, 40)
@@ -78,6 +78,7 @@ offset_bottom = 40.0
 texture = ExtResource("5_awnhx")
 
 [node name="DeadSlotIcon" type="TextureRect" parent="HBoxContainer/PageSlotButtonPrefab"]
+visible = false
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0

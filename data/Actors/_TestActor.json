@@ -34,7 +34,7 @@
 		"Sprite": "TestTargetSprite.png",
 		"CorpseSprite": "TargetCorpse.png",
 		"AutoQueing": true,
-		"LeavesCorpse": false,
+		"LeavesCorpse": true,
 		"Stats":{
 			"Max:Health":100,
 			"Mass":100,
@@ -43,7 +43,7 @@
 			"Armor": 200
 		},
 		"QueData":{
-			"MaxSize": 4,
+			"MaxSize": 2,
 			"ActionList": ["TotemMissile"]
 		}
 	},

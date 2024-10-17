@@ -80,7 +80,6 @@ func get_active_damage_mods():
 
 func _get_sub_effect_script(sub_effect_key:String)->BaseSubEffect:
 	return EffectLibary.get_sub_effect_script(SubEffectDatas[sub_effect_key]['SubEffectScript'])
-	
 
 func _cache_triggers():
 	_triggers_to_sub_effect_keys.clear()

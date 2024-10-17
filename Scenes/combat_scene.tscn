@@ -12,8 +12,8 @@
 [ext_resource type="Script" path="res://assets/Scripts/Ui/UiStates/combat_ui_state_control.gd" id="15_fjvvi"]
 [ext_resource type="PackedScene" uid="uid://cyakkk5i1nreg" path="res://Scenes/UiNodes/combat_stat_panel_control.tscn" id="16_jsy0k"]
 [ext_resource type="Script" path="res://assets/Scripts/Ui/DisplayNodes/pause_menu_control.gd" id="18_acqto"]
-[ext_resource type="Script" path="res://assets/Scripts/Ui/DisplayNodes/Combat/que_collection_control.gd" id="19_hqu25"]
 [ext_resource type="Script" path="res://assets/Scripts/Ui/DisplayNodes/item_select_menu_control.gd" id="19_p0l6r"]
+[ext_resource type="PackedScene" uid="uid://bti610xcgtmrs" path="res://Scenes/UiNodes/que_collection_display_control.tscn" id="19_t74bn"]
 [ext_resource type="Texture2D" uid="uid://ccv4ridl8evo8" path="res://assets/Sprites/UI/MenuButtonBackground.png" id="19_u4d2a"]
 [ext_resource type="Script" path="res://assets/Scripts/DevTools/dev_combat_data_control.gd" id="19_yc3tw"]
 [ext_resource type="Texture2D" uid="uid://s8s7rktavc7e" path="res://assets/Sprites/UI/DevTools/Patch_32_8.png" id="20_6lcyn"]
@@ -1298,19 +1298,11 @@ offset_bottom = 559.0
 show_preview_movement = true
 show_gaps = false
 
-[node name="QueCollectionControl" type="Control" parent="CombatUiControl"]
-layout_mode = 1
-anchors_preset = 0
-offset_left = 4.0
-offset_top = 133.0
-offset_right = 204.0
-offset_bottom = 173.0
-script = ExtResource("19_hqu25")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="CombatUiControl/QueCollectionControl"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="QueCollectionDisplayControl" parent="CombatUiControl" instance=ExtResource("19_t74bn")]
+offset_left = 16.0
+offset_top = 183.0
+offset_right = 56.0
+offset_bottom = 223.0
 
 [node name="DevDataControl" type="Control" parent="."]
 layout_mode = 1
@@ -1358,6 +1350,7 @@ text = "8:24"
 horizontal_alignment = 2
 
 [node name="QueCalControl" type="Control" parent="DevDataControl"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

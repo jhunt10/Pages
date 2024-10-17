@@ -95,6 +95,7 @@ func _on_actor_moved(old_pos:MapPos, new_pos:MapPos, move_type:String, moved_by:
 		_effects[id].trigger_on_move(old_pos, new_pos, move_type, moved_by)
 	
 func _on_actor_death():
+	printerr("EffectHolder: Actor Death")
 	var game_state = CombatRootControl.Instance.GameState
 	_trigger_effects(BaseEffect.EffectTriggers.OnDeath, game_state)
 	# Delete all active effects

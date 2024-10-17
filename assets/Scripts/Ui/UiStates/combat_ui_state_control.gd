@@ -6,13 +6,14 @@ extends Control
 @onready var pause_menu:Control = $PauseMenuControl
 @onready var item_select_menu:ItemSelectMenuControl = $ItemSelectMenuControl
 
-enum UiStates {ActionInput, ExecRound, PauseMenu, SelectItem}
+enum UiStates {ActionInput, ExecRound, PauseMenu, SelectItem, CharacterSheet}
 
 var _state_scripts = {
 	UiStates.ActionInput: "res://assets/Scripts/Ui/UiStates/UiState_ActionInput.gd",
 	UiStates.ExecRound: "res://assets/Scripts/Ui/UiStates/UiState_ExecRound.gd",
 	UiStates.PauseMenu: "res://assets/Scripts/Ui/UiStates/UiState_PauseMenu.gd",
 	UiStates.SelectItem: "res://assets/Scripts/Ui/UiStates/UiState_ItemSelection.gd",
+	UiStates.CharacterSheet: "res://assets/Scripts/Ui/UiStates/UiState_CharacterSheet.gd",
 }
 
 var current_ui_state:BaseUiState
@@ -27,9 +28,9 @@ func _process(delta):
 		current_ui_state.update(delta)
 	pass
 
-func set_ui_state(state:UiStates):
+func set_ui_state(state:UiStates, args:Dictionary={}):
+	print("Setting UI State: %s" %[state])
 	var path = _state_scripts[state]
-	var args = {}
 	set_ui_state_from_path(path, args)
 
 func set_ui_state_from_path(path, args):
@@ -55,8 +56,13 @@ func back_to_last_state():
 	current_ui_state.start_state()
 
 func _input(event: InputEvent) -> void:
+	# Escape Key Pressed
 	if event is InputEventKey and (event as InputEventKey).keycode == KEY_ESCAPE and (event as InputEventKey).pressed:
-		pause_menu.visible = not pause_menu.visible
+		if not pause_menu.visible:
+			if current_ui_state and current_ui_state.allow_pause_menu():
+				pause_menu.visible = true
+		else:
+			pause_menu.visible = false
 
 func _unhandled_input(event: InputEvent) -> void:
 	if current_ui_state:

@@ -49,7 +49,7 @@ func _ready() -> void:
 			StatDisplay.set_actor(new_actor)
 			QueInput.set_actor(new_actor)
 			QueDisplay.set_actor(new_actor)
-			new_actor.effects.add_effect("FlashText", {})
+		new_actor.effects.add_effect("FlashText", {})
 	actor_creation_que.clear()
 	
 	ui_controller.set_ui_state(UiStateController.UiStates.ActionInput)

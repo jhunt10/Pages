@@ -17,6 +17,7 @@ var _target_display_key
 func _ready() -> void:
 	CombatRootControl.QueController.end_of_round.connect(_round_ends)
 	start_button.pressed.connect(_start_button_pressed)
+	page_button_prefab.visible = false
 	pass # Replace with function body.
 
 
