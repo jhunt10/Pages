@@ -16,6 +16,8 @@ var movement_preview_pos:MapPos
 var _delayed_init = false
 
 func _ready():
+	if Engine.is_editor_hint():
+		return
 	color_bar.visible = false
 	slot_button_prefab.visible = false
 	CombatRootControl.QueController.que_ordering_changed.connect(_build_slots)
@@ -59,7 +61,7 @@ func mark_as_dead():
 		slot.mark_as_dead()
 
 func _build_slots():
-	print("Build Slots")
+	#print("Build Slots")
 	if not _actor:
 		return
 	for child in _slots:
@@ -74,7 +76,7 @@ func _build_slots():
 		_slots.append(new_button)
 
 func _sync_icons():
-	print("Sync Icons for " + _actor.ActorKey)
+	#print("Sync Icons for " + _actor.ActorKey)
 	var index = 0
 	for action:BaseAction in _actor.Que.list_qued_actions():
 		var slot:QueMiniSlotIcon = _slots[index]
@@ -82,12 +84,12 @@ func _sync_icons():
 			index += 1
 			slot = _slots[index]
 		slot.set_action(action)
-		print("Set SLot Page: %s | %s " % [index, action.ActionKey])
+		#print("Set SLot Page: %s | %s " % [index, action.ActionKey])
 		index += 1
 		
 	for n in range(index, _slots.size()+1):
 		if n < _slots.size():
-			print("Set SLot Page: %s | NULL " % [index])
+			#print("Set SLot Page: %s | NULL " % [index])
 			var slot:QueMiniSlotIcon = _slots[n]
 			slot.set_action(null)
 

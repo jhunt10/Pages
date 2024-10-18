@@ -93,7 +93,6 @@ func create_prop_input(prop_name:String, prop_type, is_unknown:bool=false):
 		var sub_effect:BaseSubEffect = EffectLibary.get_sub_effect_script(real_script)
 		var options_dict = sub_effect.get_enum_option_values()
 		enum_options = options_dict.get(prop_name, [])
-		var t = true
 	new_prop.set_prop(prop_name, prop_type, prop_value, is_unknown, enum_options)
 
 func _on_delete_button():

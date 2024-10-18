@@ -21,6 +21,17 @@ func lose_focus_if_has():
 	for sub in subactions_container.get_children():
 		sub.lose_focus_if_has()
 
+func get_sub_action_tags()->Array:
+	var out_list = []
+	for sub:SubActionEntryControl in subactions_container.get_children():
+		var sub_action:BaseSubAction = ActionLibary.get_sub_action_script(sub.real_script)
+		var subact_data = sub.save_page_data()
+		var tags = sub_action.get_action_tags(subact_data)
+		for tag in tags:
+			if not out_list.has(tag):
+				out_list.append(tag)
+	return out_list
+
 func on_add_button():
 	create_new_entry(0)
 

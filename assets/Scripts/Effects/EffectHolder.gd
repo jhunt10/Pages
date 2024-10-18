@@ -51,13 +51,22 @@ func remove_effect(effect:BaseEffect):
 			_triggers_to_effect_ids[trigger].erase(effect_id)
 	_actor.stats.dirty_stats()
 	
-func get_damage_mods():
+func get_on_deal_damage_mods():
 	var out_list = []
 	for effect:BaseEffect in _effects.values():
-		for mod in effect.get_active_damage_mods():
-			out_list.append(mod)
+		for mod:BaseDamageMod in effect.get_active_damage_mods():
+			if mod.on_deal_damage:
+				out_list.append(mod)
 	return out_list
 	
+func get_on_take_damage_mods():
+	var out_list = []
+	for effect:BaseEffect in _effects.values():
+		for mod:BaseDamageMod in effect.get_active_damage_mods():
+			if mod.on_take_damage:
+				out_list.append(mod)
+	return out_list
+
 func get_stat_mods():
 	var out_list = []
 	for effect:BaseEffect in _effects.values():

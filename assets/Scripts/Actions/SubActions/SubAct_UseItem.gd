@@ -1,5 +1,8 @@
 class_name SubAct_UseItem
 extends BaseSubAction
+## Returns Tags that are automatically added to the parent Action's Tags
+func get_action_tags(_subaction_data:Dictionary)->Array:
+	return ["UseItem"]
 
 func do_thing(parent_action:BaseAction, subaction_data:Dictionary, que_exe_data:QueExecutionData,
 				game_state:GameStateData, actor:BaseActor):

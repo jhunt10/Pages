@@ -4,12 +4,14 @@ var effect_id:String
 var stat_name:String
 var display_name:String
 var mod_type:ModTypes
+var on_deal_damage:bool
+var on_take_damage:bool
 var value
 
 enum ModTypes {
 	Add, # Add to stat 		| x = x + val
 	Scale, # Multiply stat 		| x = x * val 
-	Replc, # Replaces the stat 	| x = val
+	#Replc, # Replaces the stat 	| x = val
 }
 
 func _init(effect_id:String, data:Dictionary) -> void:
@@ -23,4 +25,6 @@ func _init(effect_id:String, data:Dictionary) -> void:
 	else:
 		printerr("Unknown Stat Mod Type: %s" % [type_key])
 		self.mod_type = ModTypes.Add
+	self.on_deal_damage = data.get("OnDealDamage", false)
+	self.on_take_damage = data.get("OnTakeDamage", false)
 	self.value = data["Value"]

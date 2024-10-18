@@ -4,6 +4,9 @@ class_name BaseAction
 
 const SUB_ACTIONS_PER_ACTION = 24
 
+func get_tagable_id(): return ActionKey
+func get_tags(): return Tags
+
 var _loaded_from_file:String
 var LoadPath:String:
 	get: return _loaded_from_file.get_base_dir()
@@ -11,7 +14,8 @@ var ActionKey:String
 var DisplayName:String
 var SnippetDesc:String
 var Description:String
-var Tags:Array = []
+var Tags:Array = ActionData.get("Tags", [])
+
 var TargetParams:Dictionary = {}
 var SubActionData:Array = []
 var ActionData:Dictionary = {}

@@ -6,6 +6,8 @@ signal file_changed
 @onready var file_path_input:LineEdit = $VBoxContainer/HBoxContainer/FilePathLineEdit
 @onready var file_name_input:LineEdit = $VBoxContainer/HBoxContainer2/FileNameLineEdit
 @onready var save_button:Button = $VBoxContainer/HBoxContainer2/SaveButton
+@onready var file_button:Button = $VBoxContainer/HBoxContainer/FileButton
+@onready var file_dialog:FileDialog = $FileDialog
 
 var _last_file_name:String
 var _last_file_path:String
@@ -15,7 +17,11 @@ var parent_edit_control
 func _ready() -> void:
 	file_name_input.focus_exited.connect(on_focus_leave_file_name)
 	file_path_input.focus_exited.connect(on_focus_leave_file_path)
+	file_button.pressed.connect(on_file_button)
 	save_button.pressed.connect(on_save)
+	file_dialog.title = "Select Action File"
+	#file_dialog.filters = PackedStringArray([".json"])
+	file_dialog.file_selected.connect(set_load_path)
 	pass # Replace with function body.
 
 
@@ -23,6 +29,12 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 
+
+func on_file_button():
+	file_dialog.popup_centered_ratio()
+
+func on_file_selected(arr:PackedStringArray):
+	set_load_path(arr[0])
 
 func lose_focus_if_has():
 	if file_path_input.has_focus():

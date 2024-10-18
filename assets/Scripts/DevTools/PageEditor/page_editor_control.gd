@@ -44,6 +44,7 @@ func _process(delta: float) -> void:
 func _input(event: InputEvent) -> void:
 	if event is InputEventKey and (event as InputEventKey).keycode == KEY_ENTER:
 		file_edit_control.lose_focus_if_has()
+		texts_input_control.lose_focus_if_has()
 		subaction_edit_control.lose_focus_if_has()
 	if event is InputEventKey and (event as InputEventKey).keycode == KEY_ESCAPE:
 		exit_menu()
@@ -62,13 +63,16 @@ func get_damage_datas()->Dictionary:
 func get_target_params()->Dictionary:
 	return range_edit_control.target_datas
 
+func get_sub_action_tags():
+	return subaction_edit_control.get_sub_action_tags()
+
 func load_page(action_data:Dictionary):
 	file_edit_control.set_load_path(file_option_button.get_current_option_text())
 	damage_data_control.load_page_data(action_data)
 	missile_data_control.load_page_data(action_data)
 	range_edit_control.load_page_data(action_data)
-	texts_input_control.load_page_data(action_data)
 	subaction_edit_control.load_page_data(action_data)
+	texts_input_control.load_page_data(action_data)
 	sprite_edit_control.load_page_data(action_data)
 	cost_edit_control.load_page_data(action_data)
 

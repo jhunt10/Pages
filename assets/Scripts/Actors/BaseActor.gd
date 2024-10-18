@@ -11,6 +11,9 @@ var effects:EffectHolder
 var items:ItemHolder
 
 var Id : String = str(ResourceUID.create_id())
+func get_tagable_id(): return Id
+func get_tags(): return Tags
+
 var FactionIndex : int
 var LoadPath:String
 var ActorData:Dictionary

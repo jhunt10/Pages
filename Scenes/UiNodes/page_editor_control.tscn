@@ -1,19 +1,14 @@
-[gd_scene load_steps=34 format=4 uid="uid://ilbr2axm1jit"]
+[gd_scene load_steps=29 format=4 uid="uid://ilbr2axm1jit"]
 
 [ext_resource type="Script" path="res://assets/Scripts/DevTools/PageEditor/page_editor_control.gd" id="1_rhemy"]
-[ext_resource type="Texture2D" uid="uid://io35wpu802fp" path="res://assets/Sprites/UI/background_64x64_12.png" id="2_igq78"]
+[ext_resource type="Texture2D" uid="uid://io35wpu802fp" path="res://assets/Sprites/UI/BackPatches/Patch_64_12.png" id="2_igq78"]
 [ext_resource type="Script" path="res://assets/Scripts/DevTools/PageEditor/page_texts_input_container.gd" id="3_1uett"]
 [ext_resource type="Script" path="res://assets/Scripts/DevTools/PageEditor/PageFileEditControl.gd" id="3_mep14"]
-[ext_resource type="Script" path="res://assets/Scripts/DevTools/tags_list_container.gd" id="4_37jfj"]
 [ext_resource type="Script" path="res://assets/Scripts/DevTools/PageEditor/page_sprite_edit_control.gd" id="4_sl04l"]
 [ext_resource type="Texture2D" uid="uid://cu00gc8hhk0h3" path="res://assets/Sprites/UI/QueInputAndDisplay/page_slot.png" id="5_vv348"]
-[ext_resource type="Texture2D" uid="uid://dpld1weadi4rr" path="res://assets/Sprites/UI/DevTools/AddTagButton.png" id="5_y8bp0"]
 [ext_resource type="Texture2D" uid="uid://cwsvq3qu6228n" path="res://assets/Sprites/UI/QueInputAndDisplay/page_button.png" id="6_65i0v"]
-[ext_resource type="Script" path="res://assets/Scripts/DevTools/tag_input_control.gd" id="6_pbmh3"]
-[ext_resource type="Texture2D" uid="uid://s8s7rktavc7e" path="res://assets/Sprites/UI/DevTools/Patch_32_8.png" id="7_gusmg"]
 [ext_resource type="Script" path="res://Scenes/UiNodes/loaded_option_button.gd" id="7_gwuq7"]
-[ext_resource type="Texture2D" uid="uid://bkps664mkkmfn" path="res://assets/Sprites/UI/DevTools/small_x.png" id="8_y0kqo"]
-[ext_resource type="Script" path="res://assets/Scripts/DevTools/self_scale_line_edit.gd" id="9_pwlyo"]
+[ext_resource type="PackedScene" uid="uid://cp8kja0sx5u7a" path="res://Scenes/UiNodes/tags_edit_container.tscn" id="8_vyvur"]
 [ext_resource type="Script" path="res://assets/Scripts/DevTools/PageEditor/damage_data_edit_control.gd" id="10_7ihxm"]
 [ext_resource type="Script" path="res://assets/Scripts/DevTools/PageEditor/sub_actions_edit_control.gd" id="11_kmwhd"]
 [ext_resource type="Script" path="res://assets/Scripts/DevTools/PageEditor/sub_action_entry_control.gd" id="12_5vmw0"]
@@ -518,6 +513,10 @@ layout_mode = 2
 size_flags_horizontal = 3
 alignment = 2
 
+[node name="FileButton" type="Button" parent="VBoxContainer/TopBarContainer/PageFileEditControl/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Search"
+
 [node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer/TopBarContainer/PageFileEditControl/VBoxContainer"]
 layout_mode = 2
 
@@ -537,6 +536,13 @@ text = "Load"
 [node name="SaveButton" type="Button" parent="VBoxContainer/TopBarContainer/PageFileEditControl/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
 text = "Save"
+
+[node name="FileDialog" type="FileDialog" parent="VBoxContainer/TopBarContainer/PageFileEditControl"]
+title = "Open a File"
+size = Vector2i(303, 180)
+ok_button_text = "Open"
+file_mode = 0
+filters = PackedStringArray("*.json")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
@@ -683,63 +689,11 @@ custom_minimum_size = Vector2(0, 128)
 layout_mode = 2
 wrap_mode = 1
 
-[node name="TagsListContainer" type="FlowContainer" parent="VBoxContainer/HBoxContainer/LeftVBoxContainer/PageTextsInputsControl/TextsInputContainer"]
+[node name="TagEditContainer" parent="VBoxContainer/HBoxContainer/LeftVBoxContainer/PageTextsInputsControl/TextsInputContainer" instance=ExtResource("8_vyvur")]
+custom_minimum_size = Vector2(352, 104)
 layout_mode = 2
-script = ExtResource("4_37jfj")
-
-[node name="AddTagButton" type="TextureButton" parent="VBoxContainer/HBoxContainer/LeftVBoxContainer/PageTextsInputsControl/TextsInputContainer/TagsListContainer"]
-layout_mode = 2
-texture_normal = ExtResource("5_y8bp0")
-
-[node name="TagInputControl" type="Control" parent="VBoxContainer/HBoxContainer/LeftVBoxContainer/PageTextsInputsControl/TextsInputContainer/TagsListContainer"]
-custom_minimum_size = Vector2(87, 36)
-layout_mode = 2
-size_flags_vertical = 4
-script = ExtResource("6_pbmh3")
-
-[node name="NinePatchRect" type="NinePatchRect" parent="VBoxContainer/HBoxContainer/LeftVBoxContainer/PageTextsInputsControl/TextsInputContainer/TagsListContainer/TagInputControl"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("7_gusmg")
-patch_margin_left = 8
-patch_margin_top = 8
-patch_margin_right = 8
-patch_margin_bottom = 8
-
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/LeftVBoxContainer/PageTextsInputsControl/TextsInputContainer/TagsListContainer/TagInputControl"]
-custom_minimum_size = Vector2(64, 0)
-layout_mode = 0
-offset_left = 4.0
-offset_top = 4.0
-offset_right = 68.0
-offset_bottom = 32.0
-
-[node name="XButton" type="TextureButton" parent="VBoxContainer/HBoxContainer/LeftVBoxContainer/PageTextsInputsControl/TextsInputContainer/TagsListContainer/TagInputControl/HBoxContainer"]
-layout_mode = 2
-texture_normal = ExtResource("8_y0kqo")
-stretch_mode = 3
-
-[node name="LineEdit" type="LineEdit" parent="VBoxContainer/HBoxContainer/LeftVBoxContainer/PageTextsInputsControl/TextsInputContainer/TagsListContainer/TagInputControl/HBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 4
-theme_override_constants/outline_size = 0
-theme_override_font_sizes/font_size = 14
-placeholder_text = "-Tag"
-script = ExtResource("9_pwlyo")
-
-[node name="TextEdit" type="TextEdit" parent="VBoxContainer/HBoxContainer/LeftVBoxContainer/PageTextsInputsControl/TextsInputContainer/TagsListContainer/TagInputControl/HBoxContainer/LineEdit"]
-visible = false
-custom_minimum_size = Vector2(64, 40)
-layout_mode = 2
-offset_right = 64.0
-offset_bottom = 40.0
-theme_override_colors/background_color = Color(1, 1, 1, 0)
-placeholder_text = "Tag"
-scroll_fit_content_height = true
+fill_x = true
+fill_y = false
 
 [node name="MiddleVBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(360, 0)

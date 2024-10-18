@@ -1,8 +1,10 @@
 class_name BaseMissile
 
 var Id : String = str(ResourceUID.create_id())
-var node:MissileNode
+func get_tagable_id(): return Id
+func get_tags(): return _missle_data.get('Tags', [])
 
+var node:MissileNode
 var _source_actor_id:String
 var _source_action_key:String
 #var _target_key:String
@@ -64,7 +66,8 @@ func on_reach_target():
 		return
 	#TODO: Multiple Actors
 	var actor_on_spot:BaseActor = actor_on_spots[0]
-	DamageHelper.handle_damage(SourceActor, actor_on_spot, _missle_data['DamageData'])
+	var tag_chain = SourceTagChain.new()
+	DamageHelper.handle_damage(SourceActor, actor_on_spot, _missle_data['DamageData'], tag_chain)
 		
 		
 func get_position_for_frame(frame:int):

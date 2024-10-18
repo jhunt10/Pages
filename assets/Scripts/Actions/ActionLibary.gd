@@ -6,6 +6,7 @@ const TILE_HIGHT = 56
 const ActionDir = "res://data/Actions"
 
 var _action_list:Dictionary = {}
+static var _cached_subaction_scripts:Dictionary = {}
 
 var loaded = false
 var loaded_sprites : Dictionary = {}
@@ -31,7 +32,17 @@ func reload_pages():
 	loaded_sprites.clear()
 	loaded = false
 	load_pages()
-	
+
+static func get_sub_action_script(script_path)->BaseSubAction:
+	if _cached_subaction_scripts.keys().has(script_path):
+		return _cached_subaction_scripts[script_path]
+	var script = load(script_path)
+	if not script:
+		printerr("ActionLibrary.get_sub_action_script: No script found with name '%s'." % [script_path])
+	var sub_action = script.new()
+	_cached_subaction_scripts[script_path] = sub_action
+	return sub_action
+
 # Get a static instance of the action
 func get_action(key:String)->BaseAction:
 	if !loaded:

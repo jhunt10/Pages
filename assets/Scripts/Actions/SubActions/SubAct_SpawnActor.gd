@@ -6,7 +6,10 @@ func get_required_props()->Dictionary:
 		"TargetKey": BaseSubAction.SubActionPropType.TargetKey,
 		"ActorKey": BaseSubAction.SubActionPropType.StringVal
 	}
-	
+## Returns Tags that are automatically added to the parent Action's Tags
+func get_action_tags(_subaction_data:Dictionary)->Array:
+	return ["SpawnActor"]
+
 func do_thing(parent_action:BaseAction, subaction_data:Dictionary, que_exe_data:QueExecutionData,
 				game_state:GameStateData, actor:BaseActor):
 	var turn_data = que_exe_data.get_current_turn_data()

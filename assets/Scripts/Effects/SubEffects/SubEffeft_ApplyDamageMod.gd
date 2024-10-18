@@ -12,7 +12,7 @@ func get_required_triggers(_effect:BaseEffect, _subeffect_data:Dictionary)->Arra
 func get_active_stat_mods(effect:BaseEffect, subeffect_data:Dictionary)->Array:
 	var damage_mod_key = subeffect_data['DamageModKey']
 	var mod = effect.DamageModDatas.get(damage_mod_key, null)
-	return [BaseDamageMod.new(effect.Id, effect.DamageModDatas[stat_mod_key])]
+	return []#[BaseDamageMod.new(effect.Id, effect.DamageModDatas[stat_mod_key])]
 
 func on_effect_trigger(effect:BaseEffect, _subeffect_data:Dictionary, trigger:BaseEffect.EffectTriggers, _game_state:GameStateData):
 	if trigger == BaseEffect.EffectTriggers.OnCreate:

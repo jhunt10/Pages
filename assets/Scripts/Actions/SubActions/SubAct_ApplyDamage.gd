@@ -6,6 +6,9 @@ func get_required_props()->Dictionary:
 		"TargetKey": BaseSubAction.SubActionPropType.TargetKey,
 		"DamageKey": BaseSubAction.SubActionPropType.DamageKey
 	}
+## Returns Tags that are automatically added to the parent Action's Tags
+func get_action_tags(_subaction_data:Dictionary)->Array:
+	return ["Attack"]
 
 func do_thing(parent_action:BaseAction, subaction_data:Dictionary, que_exe_data:QueExecutionData,
 				game_state:GameStateData, actor:BaseActor):
@@ -15,8 +18,13 @@ func do_thing(parent_action:BaseAction, subaction_data:Dictionary, que_exe_data:
 	var target_key = subaction_data['TargetKey']
 	var target:BaseActor = find_target_actor(target_key, que_exe_data, game_state, actor)
 	var damage_data = parent_action.get_damage_data(subaction_data)
+	
+	var tag_chain = SourceTagChain.new()\
+			.append_source(SourceTagChain.SourceTypes.Actor, actor)\
+			.append_source(SourceTagChain.SourceTypes.Action, parent_action)
+	
 	if target:
-		DamageHelper.handle_damage(actor, target, damage_data)
+		DamageHelper.handle_damage(actor, target, damage_data, tag_chain)
 	
 
 	

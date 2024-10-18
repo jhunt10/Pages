@@ -13,6 +13,9 @@ enum EffectTriggers {
 const TRIGGERS_WITH_ADDITIONAL_DATA = [EffectTriggers.OnMove, EffectTriggers.OnDamagDealt, EffectTriggers.OnDamageTaken, EffectTriggers.OnKill ]
 
 var Id : String = str(ResourceUID.create_id())
+func get_tagable_id(): return Id
+func get_tags(): return Tags
+
 var LoadPath:String
 var EffectData:Dictionary
 var EffectKey:String 

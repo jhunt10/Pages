@@ -8,6 +8,9 @@ func get_required_props()->Dictionary:
 		RELATIVE_POS_KEY: BaseSubAction.SubActionPropType.MoveValue,
 		"MovementType": BaseSubAction.SubActionPropType.StringVal
 	}
+## Returns Tags that are automatically added to the parent Action's Tags
+func get_action_tags(_subaction_data:Dictionary)->Array:
+	return ["Move"]
 
 func do_thing(parent_action:BaseAction, subaction_data:Dictionary, metadata:QueExecutionData,
 				game_state:GameStateData, actor:BaseActor):

@@ -10,6 +10,10 @@ enum SubActionPropType {TargetKey, DamageKey, EffectKey, MissileKey, MoveValue, 
 func get_required_props()->Dictionary:
 	return {}
 
+## Returns Tags that are automatically added to the parent Action's Tags
+func get_action_tags(_subaction_data:Dictionary)->Array:
+	return []
+
 func do_thing(_parent_action:BaseAction, _subaction_data:Dictionary, _metadata:QueExecutionData,
 				_game_state:GameStateData, _actor:BaseActor):
 	print("BaseSubAction")

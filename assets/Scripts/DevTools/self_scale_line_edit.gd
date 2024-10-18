@@ -1,32 +1,42 @@
+@tool
 class_name SelfScalingLineEdit
 extends LineEdit
 
-@onready var hidden_text_edit:TextEdit = $TextEdit
+@export var resize:bool = false
+@export var hidden_text_edit:TextEdit
 
-var _padding: int = 0
+var _padding: int = 8
 var _parent_width_diff:int = 0
 var _orig_min_size:Vector2i
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	print("SSLE Ready")
 	pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	if resize:
+		resize = false
+		_sync_size()
 	pass
 
 func _input(event: InputEvent) -> void:
-	var key_input = event as InputEventKey
-	if not self.has_focus() or not key_input:
-		return
-	_sync_size()
-	
-	
-	
+	if self.has_focus() and event is InputEventKey:
+		_sync_size()
+
+func set_sized_text(val:String):
+	self.text = val
+	self._sync_size()
 
 func _sync_size():
+	print("SSLE Resize")
+	if !hidden_text_edit:
+		printerr("SelfScalingLineEdit '%s' No Hidden TextEdit found." % [self.name])
+		return
+	
 	hidden_text_edit.text = self.text
 	var new_size = Vector2i(max(self._orig_min_size.x, hidden_text_edit.get_line_width(0) + (2 * _padding)),
 							max(self._orig_min_size.y, self.size.y))
