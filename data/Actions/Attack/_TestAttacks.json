@@ -4,11 +4,11 @@
 		"ActionKey": "Old_TestMissile",
 		"DamageDatas": {
 			"Damage1": {
-				"AtkStat": "Stregth",
+				"AtkStat": "Strength",
 				"BaseDamage": 20,
 				"DamageEffect": "Shot",
 				"DamageType": "Test",
-				"DefStat": "Stregth"
+				"DefStat": "Strength"
 			}
 		},
 		"Description": "Test Target Test Target Test Target Test Target",
@@ -225,11 +225,11 @@
 		"SubActions": {
 			"11": {
 				"DamageData": {
-					"AtkStat": "Stregth",
+					"AtkStat": "Strength",
 					"BaseDamage": 25,
 					"DamageEffect": "Slam",
 					"DamageType": "Test",
-					"DefStat": "Stregth"
+					"DefStat": "Strength"
 				},
 				"SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_ApplyDamage.gd",
 				"TargetKey": "Self"

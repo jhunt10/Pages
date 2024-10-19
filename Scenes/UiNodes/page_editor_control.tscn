@@ -1156,44 +1156,53 @@ placeholder_text = "Unique Key"
 [node name="DamageKeyInputContainer2" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/RightBoxContainer/TabContainer/Damage/VBoxContainer/Background2/VBoxContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/RightBoxContainer/TabContainer/Damage/VBoxContainer/Background2/VBoxContainer/DamageKeyInputContainer2"]
-layout_mode = 2
-text = "Base: "
-
-[node name="SpinBox" type="SpinBox" parent="VBoxContainer/HBoxContainer/RightBoxContainer/TabContainer/Damage/VBoxContainer/Background2/VBoxContainer/DamageKeyInputContainer2"]
-layout_mode = 2
-max_value = 1000.0
-update_on_text_changed = true
-
-[node name="Label2" type="Label" parent="VBoxContainer/HBoxContainer/RightBoxContainer/TabContainer/Damage/VBoxContainer/Background2/VBoxContainer/DamageKeyInputContainer2"]
+[node name="DamageTypeLabel" type="Label" parent="VBoxContainer/HBoxContainer/RightBoxContainer/TabContainer/Damage/VBoxContainer/Background2/VBoxContainer/DamageKeyInputContainer2"]
 layout_mode = 2
 text = "Type:"
 
-[node name="DamageTypeEdit" type="LineEdit" parent="VBoxContainer/HBoxContainer/RightBoxContainer/TabContainer/Damage/VBoxContainer/Background2/VBoxContainer/DamageKeyInputContainer2"]
+[node name="DamageTypeOptionButton" type="OptionButton" parent="VBoxContainer/HBoxContainer/RightBoxContainer/TabContainer/Damage/VBoxContainer/Background2/VBoxContainer/DamageKeyInputContainer2"]
+custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 size_flags_horizontal = 3
-placeholder_text = "Damage Type"
+text_overrun_behavior = 3
+fit_to_longest_item = false
+script = ExtResource("7_gwuq7")
+
+[node name="DefTypeLabel" type="Label" parent="VBoxContainer/HBoxContainer/RightBoxContainer/TabContainer/Damage/VBoxContainer/Background2/VBoxContainer/DamageKeyInputContainer2"]
+layout_mode = 2
+text = "DefType:"
+
+[node name="DefTypeOptionButton" type="OptionButton" parent="VBoxContainer/HBoxContainer/RightBoxContainer/TabContainer/Damage/VBoxContainer/Background2/VBoxContainer/DamageKeyInputContainer2"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+size_flags_horizontal = 3
+text_overrun_behavior = 3
+fit_to_longest_item = false
+script = ExtResource("7_gwuq7")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/RightBoxContainer/TabContainer/Damage/VBoxContainer/Background2/VBoxContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/RightBoxContainer/TabContainer/Damage/VBoxContainer/Background2/VBoxContainer/HBoxContainer"]
+[node name="BaseDamageLabel" type="Label" parent="VBoxContainer/HBoxContainer/RightBoxContainer/TabContainer/Damage/VBoxContainer/Background2/VBoxContainer/HBoxContainer"]
 layout_mode = 2
-text = "Atk:"
+text = "Base: "
 
-[node name="AttackStatEdit" type="LineEdit" parent="VBoxContainer/HBoxContainer/RightBoxContainer/TabContainer/Damage/VBoxContainer/Background2/VBoxContainer/HBoxContainer"]
+[node name="BaseDamageSpinBox" type="SpinBox" parent="VBoxContainer/HBoxContainer/RightBoxContainer/TabContainer/Damage/VBoxContainer/Background2/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+max_value = 1000.0
+update_on_text_changed = true
+
+[node name="AttackStatLabel" type="Label" parent="VBoxContainer/HBoxContainer/RightBoxContainer/TabContainer/Damage/VBoxContainer/Background2/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Attack Stat:"
+
+[node name="AtackStatOptionButton" type="OptionButton" parent="VBoxContainer/HBoxContainer/RightBoxContainer/TabContainer/Damage/VBoxContainer/Background2/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 size_flags_horizontal = 3
-placeholder_text = "Attack Stat"
-
-[node name="Label2" type="Label" parent="VBoxContainer/HBoxContainer/RightBoxContainer/TabContainer/Damage/VBoxContainer/Background2/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-text = "Def:"
-
-[node name="DefenseStatEdit" type="LineEdit" parent="VBoxContainer/HBoxContainer/RightBoxContainer/TabContainer/Damage/VBoxContainer/Background2/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-placeholder_text = "Defense Stat"
+text_overrun_behavior = 3
+fit_to_longest_item = false
+script = ExtResource("7_gwuq7")
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/RightBoxContainer/TabContainer/Damage/VBoxContainer/Background2/VBoxContainer"]
 layout_mode = 2

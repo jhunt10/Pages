@@ -6,10 +6,10 @@ extends Control
 @onready var data_panel:NinePatchRect = $VBoxContainer/Background2
 
 @onready var key_input:LineEdit = $VBoxContainer/Background2/VBoxContainer/DamageKeyInputContainer/DamageKeyInput
-@onready var base_power_input:SpinBox = $VBoxContainer/Background2/VBoxContainer/DamageKeyInputContainer2/SpinBox
-@onready var damage_type_input:LineEdit = $VBoxContainer/Background2/VBoxContainer/DamageKeyInputContainer2/DamageTypeEdit
-@onready var attack_stat_input:LineEdit = $VBoxContainer/Background2/VBoxContainer/HBoxContainer/AttackStatEdit
-@onready var defense_stat_input:LineEdit = $VBoxContainer/Background2/VBoxContainer/HBoxContainer/DefenseStatEdit
+@onready var damage_type_options:LoadedOptionButton = $VBoxContainer/Background2/VBoxContainer/DamageKeyInputContainer2/DamageTypeOptionButton
+@onready var defense_type_options:LoadedOptionButton = $VBoxContainer/Background2/VBoxContainer/DamageKeyInputContainer2/DefTypeOptionButton
+@onready var base_power_input:SpinBox = $VBoxContainer/Background2/VBoxContainer/HBoxContainer/BaseDamageSpinBox
+@onready var attack_stat_options:LoadedOptionButton = $VBoxContainer/Background2/VBoxContainer/HBoxContainer/AtackStatOptionButton
 @onready var damage_effect_options:LoadedOptionButton = $VBoxContainer/Background2/VBoxContainer/HBoxContainer2/LoadedOptionButton
 
 var damage_datas:Dictionary = {}
@@ -20,15 +20,24 @@ func _ready() -> void:
 	data_panel.visible = false
 	key_input.focus_exited.connect(_save_current_values)
 	base_power_input.focus_exited.connect(_save_current_values)
-	base_power_input.value_changed.connect(_save_current_values)
-	damage_type_input.focus_exited.connect(_save_current_values)
-	attack_stat_input.focus_exited.connect(_save_current_values)
-	defense_stat_input.focus_exited.connect(_save_current_values)
+	
+	damage_type_options.get_options_func = get_damage_types
+	attack_stat_options.get_options_func = get_attack_stats
+	defense_type_options.get_options_func = get_defense_types
+	
 	add_button.pressed.connect(_add_new_data)
 	drop_options.item_selected.connect(on_item_selected)
 	damage_effect_options.get_options_func = get_damage_effect_options
 	pass # Replace with function body.
 
+func get_damage_types()->Array:
+	return DamageEvent.DamageTypes.keys()
+	
+func get_attack_stats()->Array:
+	return StatHelper.CoreStats.keys()
+	
+func get_defense_types()->Array:
+	return DamageEvent.DefenseType.keys()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -42,15 +51,16 @@ func _add_new_data():
 	editing_key = ''
 	base_power_input.set_value_no_signal(0)
 	key_input.clear()
-	damage_type_input.clear()
-	attack_stat_input.clear()
-	defense_stat_input.clear()
+	damage_type_options.load_options()
+	attack_stat_options.load_options()
+	defense_type_options.load_options()
 	damage_effect_options.load_options()
 
 func get_damage_effect_options():
 	return DamageEffectNode.veffects_sprites.keys()
 
 func _save_current_values(base_damage_value:float = -1):
+	printerr("Saving Damage Data")
 	var damage_key = key_input.text
 	if damage_key == '':
 		return
@@ -65,9 +75,9 @@ func _save_current_values(base_damage_value:float = -1):
 		damage_datas[damage_key]['BaseDamage'] = base_power_input.value
 	else:
 		damage_datas[damage_key]['BaseDamage'] = int(base_damage_value)
-	damage_datas[damage_key]['DamageType'] = damage_type_input.text
-	damage_datas[damage_key]['AtkStat'] = attack_stat_input.text
-	damage_datas[damage_key]['DefStat'] = defense_stat_input.text
+	damage_datas[damage_key]['DamageType'] = damage_type_options.get_current_option_text()
+	damage_datas[damage_key]['AtkStat'] = attack_stat_options.get_current_option_text()
+	damage_datas[damage_key]['DefenseType'] = defense_type_options.get_current_option_text()
 	if damage_effect_options.get_current_option_text() != '':
 		damage_datas[damage_key]['DamageEffect'] = damage_effect_options.get_current_option_text()
 	
@@ -92,9 +102,9 @@ func load_values(damage_key:String):
 		return
 	editing_key = damage_key
 	key_input.text = damage_key
-	damage_type_input.text = damage_datas[damage_key]['DamageType']
-	attack_stat_input.text = damage_datas[damage_key]['AtkStat'] 
-	defense_stat_input.text = damage_datas[damage_key]['DefStat']
+	damage_type_options.load_options(damage_datas[damage_key].get("DamageType", ""))
+	attack_stat_options.load_options(damage_datas[damage_key].get("AtkStat", ""))
+	defense_type_options.load_options(damage_datas[damage_key].get("DefenseType", ""))
 	base_power_input.set_value_no_signal(damage_datas[damage_key]['BaseDamage'])
 	if damage_datas[damage_key].has("DamageEffect"):
 		damage_effect_options.load_options(damage_datas[damage_key]['DamageEffect'])
@@ -112,9 +122,9 @@ func load_page_data(data:Dictionary):
 		editing_key = ''
 		base_power_input.set_value_no_signal(0)
 		key_input.clear()
-		damage_type_input.clear()
-		attack_stat_input.clear()
-		defense_stat_input.clear()
+		damage_type_options.load_options()
+		attack_stat_options.load_options()
+		defense_type_options.load_options()
 
 func save_page_data()->Dictionary:
 	_save_current_values()

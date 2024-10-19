@@ -2,7 +2,7 @@ class_name LoadedOptionButton
 extends OptionButton
 
 @export var allways_show_none:bool = false
-@export var no_option_text:String = 'None'
+@export var no_option_text:String = '-None-'
 var get_options_func:Callable
 
 # Called when the node enters the scene tree for the first time.
@@ -22,7 +22,7 @@ func get_current_option_text():
 
 func load_options(force_option:String=''):
 	var current_option = force_option
-	if current_option == '' and self.selected >= 0:
+	if force_option != '' and current_option == '' and self.selected >= 0:
 		current_option = self.get_item_text(self.selected)
 	# Reload and rebuild options
 	self.clear()
