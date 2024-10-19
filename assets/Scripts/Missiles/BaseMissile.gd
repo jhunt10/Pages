@@ -67,7 +67,7 @@ func on_reach_target():
 	#TODO: Multiple Actors
 	var actor_on_spot:BaseActor = actor_on_spots[0]
 	var tag_chain = SourceTagChain.new()
-	DamageHelper.handle_damage(SourceActor, actor_on_spot, _missle_data['DamageData'], tag_chain)
+	DamageHelper.handle_damage(SourceActor, actor_on_spot, _missle_data['DamageData'], tag_chain, CombatRootControl.Instance.GameState)
 		
 		
 func get_position_for_frame(frame:int):

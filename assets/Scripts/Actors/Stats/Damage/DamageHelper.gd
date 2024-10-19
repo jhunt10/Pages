@@ -21,7 +21,7 @@ static func handle_damage(attacker:BaseActor, defender:BaseActor, damage_data:Di
 		printerr("DamageHelper.handle_damage: No 'DamageType' found.")
 		return
 		
-	var defense_type = damage_data.get("DefenseType", null)
+	var defense_type = damage_data.get("DefenseType", DamageEvent.DefenseType.None)
 	if defense_type == null:
 		printerr("DamageHelper.handle_damage: No 'DefenseType' found.")
 		return
@@ -29,7 +29,8 @@ static func handle_damage(attacker:BaseActor, defender:BaseActor, damage_data:Di
 	var damage_event = DamageEvent.new(attacker, defender,source_tag_chain, game_state, 
 									base_damage, attack_stat, damage_type, defense_type)
 	
-	var damage = DamageHelper.calc_damage(attacker, defender, damage_data, source_tag_chain, game_state)
+	var damage = DamageHelper._calc_damage_for_event(damage_event)
+	# TODO: Acccuracy and chance to apply effects
 	defender.stats.apply_damage(damage, damage_type, attacker)
 	
 	var damage_effect = damage_data.get("DamageEffect", null)
@@ -37,7 +38,7 @@ static func handle_damage(attacker:BaseActor, defender:BaseActor, damage_data:Di
 		CombatRootControl.Instance.create_damage_effect(defender, damage_effect, damage)
 	
 
-static func calc_damage(event:DamageEvent):
+static func _calc_damage_for_event(event:DamageEvent):
 	var attacker = event.attacker
 	var defender = event.defender
 	
@@ -65,18 +66,18 @@ static func calc_damage(event:DamageEvent):
 	var attacker_damage_mods = attacker.effects.get_on_deal_damage_mods()
 	attacker_damage_mods = _order_damage_mods(attacker_damage_mods)
 	for mod:BaseDamageMod in attacker_damage_mods:
-		if mod.is_valid_in_case(false, attack_tags, defend_tags, DamageEvent):
-			attack_damage_value = mod.apply_mod(false, event.damage_after_attack_mods, event)
+		if mod.is_valid_in_case(false, attack_tags, defend_tags, event):
+			event.damage_after_attack_mods = mod.apply_mod(event.damage_after_attack_mods, event)
 	
-	var defend_damage_value = attack_damage_value
+	event.damage_after_defend_mods = event.damage_after_attack_mods
 	var defender_damage_mods = defender.effects.get_on_take_damage_mods()
 	defender_damage_mods = _order_damage_mods(defender_damage_mods)
 	for mod:BaseDamageMod in defender_damage_mods:
-		if mod.is_valid_in_case(true, attacker, defender, defend_damage_value, damage_type, game_state, attack_tags, defend_tags):
-			defend_damage_value = mod.apply_mod(true, attacker, defender, defend_damage_value, damage_type, game_state, attack_tags, defend_tags)
+		if mod.is_valid_in_case(true, attack_tags, defend_tags, event):
+			event.damage_after_defend_mods = mod.apply_mod(event.damage_after_defend_mods, event)
 	
-	var final_damage = ceili(defend_damage_value)
-	return final_damage
+	event.final_damage = event.damage_after_defend_mods
+	return event.final_damage
 
 static func _order_damage_mods(mods:Array):
 	var add_list = []

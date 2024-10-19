@@ -29,7 +29,7 @@ func do_thing(parent_action:BaseAction, subaction_data:Dictionary, metadata:QueE
 	# Get Targeting Params
 	var actor_pos = game_state.MapState.get_actor_pos(actor)
 	
-	if TargetParameters.is_actor_target_type(target_parms.target_type):
+	if target_parms.is_actor_target_type():
 		var potentials = _get_potential_actor_targets(game_state, actor, target_parms)
 		if potentials.size() == 0:
 			print("No valid Targets")
@@ -57,7 +57,7 @@ func _get_potential_actor_targets(game_state:GameStateData, actor:BaseActor, tar
 	var potential_targets = []
 	for spot in target_area:
 		for target in game_state.MapState.get_actors_at_pos(spot):
-			if targeting.is_valid_target(actor, target, game_state):
+			if targeting.is_valid_target_actor(actor, target, game_state):
 				potential_targets.append(target)
 	return potential_targets
 	

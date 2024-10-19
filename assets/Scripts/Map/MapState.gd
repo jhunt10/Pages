@@ -31,7 +31,7 @@ func get_map_spot(pos)->MapSpot:
 func list_map_spots()->Array:
 	return _position_data
 	
-func get_actors_at_pos(pos:Vector2i, layer=null, include_dead:bool=false)->Array:
+func get_actors_at_pos(pos, layer=null, include_dead:bool=false)->Array:
 	var spot:MapSpot = get_map_spot(pos)
 	if spot:
 		return spot.get_actors(layer, include_dead)

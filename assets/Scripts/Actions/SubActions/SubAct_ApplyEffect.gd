@@ -15,7 +15,7 @@ func do_thing(parent_action:BaseAction, subaction_data:Dictionary, que_exe_data:
 	print("Apply Effect SubAction")
 	
 	var target_key = subaction_data['TargetKey']
-	var target:BaseActor = find_target_actor(target_key, que_exe_data, game_state, actor)
+	var target:BaseActor = find_targeted_actors(parent_action, target_key, que_exe_data, game_state, actor)
 	
 	if !target:
 		return
