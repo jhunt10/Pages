@@ -45,5 +45,14 @@ func handle_input(event):
 func select_target(coord:Vector2i):
 	if _logging: print("Setting Target: " + str(coord))
 	var turndata = que_metadata.get_current_turn_data()
-	turndata.targets[target_params.target_key] = coord
+	if target_params.is_spot_target_type():
+		turndata.targets[target_params.target_key] = coord
+	elif target_params.is_actor_target_type():
+		var actors = CombatRootControl.Instance.GameState.MapState.get_actors_at_pos(coord)
+		if actors.size() > 1:
+			printerr("Multiple Actors on targeted spot not supported")
+			return
+		if actors.size() == 0:
+			return
+		turndata.targets[target_params.target_key] = actors[0].Id
 	CombatRootControl.Instance.ui_controller.set_ui_state(UiStateController.UiStates.ExecRound)

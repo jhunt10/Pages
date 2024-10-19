@@ -56,7 +56,7 @@ func find_targeted_actors(parent_action:BaseAction, target_key:String, metadata:
 			printerr("BaseSubAction.find_targeted_actors: Invalid target '%s' provided to Spot Target Type for action '%s'." % [target, parent_action])
 		center_spot = MapPos.Vector2i(target)
 		for target_actor in game_state.MapState.get_actors_at_pos(center_spot):
-			if target_params.is_valid_target_actor(actor, target_actor, game_state):
+			if target_params.is_valid_target_actor(actor, target_actor, game_state) and not out_list.has(target_actor):
 				out_list.append(target_actor)
 	
 	# Area of effect
@@ -65,6 +65,6 @@ func find_targeted_actors(parent_action:BaseAction, target_key:String, metadata:
 		var area = target_params.get_area_of_effect(center_spot)
 		for spot in area:
 			for target_actor in game_state.MapState.get_actors_at_pos(spot):
-				if target_params.is_valid_target_actor(actor, target_actor, game_state):
+				if target_params.is_valid_target_actor(actor, target_actor, game_state) and not out_list.has(target_actor):
 					out_list.append(target_actor)
 	return out_list

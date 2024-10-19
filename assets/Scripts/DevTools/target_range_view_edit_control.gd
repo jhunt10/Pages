@@ -70,6 +70,13 @@ func _sync_tiles():
 		list.append([spot.x, spot.y])
 	#output.text = JSON.stringify(list)
 
+func set_selected_spots(arr:Array):
+	selected_spots.clear()
+	for sub in arr:
+		# Flip spots to oriant north
+		selected_spots.append(Vector2i(-sub[0], -sub[1]))
+	_sync_tiles()
+	
 func get_selected_spots()->Array:
 	var list = []
 	for spot in selected_spots:
@@ -77,25 +84,6 @@ func get_selected_spots()->Array:
 		list.append([-spot.x, -spot.y])
 	return list
 
-func set_selected_spots(arr:Array):
-	selected_spots.clear()
-	for sub in arr:
-		# Flip spots to oriant north
-		selected_spots.append(Vector2i(-sub[0], -sub[1]))
-	_sync_tiles()
-
 func clear():
 	selected_spots.clear()
 	_sync_tiles()
-
-#func on_copy():
-	#_set_notification_text("Copied")
-	#DisplayServer.clipboard_set(output.text)
-	#pass
-#
-#func on_load():
-	#var arr = JSON.parse_string(output.text)
-	#selected_spots.clear()
-	#for sub in arr:
-		#selected_spots.append(Vector2i(sub[0], sub[1]))
-	#_sync_tiles()

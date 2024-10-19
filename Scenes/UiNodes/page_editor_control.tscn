@@ -1065,9 +1065,10 @@ script = ExtResource("7_gwuq7")
 [node name="TabContainer" type="TabContainer" parent="VBoxContainer/HBoxContainer/RightBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-current_tab = 0
+current_tab = 2
 
 [node name="Damage" type="Control" parent="VBoxContainer/HBoxContainer/RightBoxContainer/TabContainer"]
+visible = false
 custom_minimum_size = Vector2(360, 168)
 layout_mode = 2
 script = ExtResource("10_7ihxm")
@@ -1464,7 +1465,6 @@ size_flags_horizontal = 3
 theme = ExtResource("25_stnci")
 
 [node name="Targeting" type="Control" parent="VBoxContainer/HBoxContainer/RightBoxContainer/TabContainer"]
-visible = false
 custom_minimum_size = Vector2(272, 374)
 layout_mode = 2
 size_flags_vertical = 0
@@ -1537,7 +1537,7 @@ layout_mode = 2
 [node name="SubViewport" type="SubViewport" parent="VBoxContainer/HBoxContainer/RightBoxContainer/TabContainer/Targeting/VBoxContainer/TargetRangeViewEditControl/CenterContainer/SubViewportContainer"]
 handle_input_locally = false
 size = Vector2i(240, 240)
-render_target_update_mode = 0
+render_target_update_mode = 4
 
 [node name="Node2D" type="Node2D" parent="VBoxContainer/HBoxContainer/RightBoxContainer/TabContainer/Targeting/VBoxContainer/TargetRangeViewEditControl/CenterContainer/SubViewportContainer/SubViewport"]
 position = Vector2(112, 112)
@@ -1556,22 +1556,20 @@ position = Vector2(8, 8)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("16_uq258")
 
-[node name="CopyLoadContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/RightBoxContainer/TabContainer/Targeting/VBoxContainer"]
-visible = false
+[node name="TargetOrEffectContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/RightBoxContainer/TabContainer/Targeting/VBoxContainer"]
 layout_mode = 2
 alignment = 2
 
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/RightBoxContainer/TabContainer/Targeting/VBoxContainer/CopyLoadContainer"]
+[node name="TargetAreaButton" type="Button" parent="VBoxContainer/HBoxContainer/RightBoxContainer/TabContainer/Targeting/VBoxContainer/TargetOrEffectContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+disabled = true
+text = "Edit Target Area"
 
-[node name="LoadButton" type="Button" parent="VBoxContainer/HBoxContainer/RightBoxContainer/TabContainer/Targeting/VBoxContainer/CopyLoadContainer"]
+[node name="EffectAreaButton" type="Button" parent="VBoxContainer/HBoxContainer/RightBoxContainer/TabContainer/Targeting/VBoxContainer/TargetOrEffectContainer"]
 layout_mode = 2
-text = "Load"
-
-[node name="CopyButton" type="Button" parent="VBoxContainer/HBoxContainer/RightBoxContainer/TabContainer/Targeting/VBoxContainer/CopyLoadContainer"]
-layout_mode = 2
-text = "Copy"
+size_flags_horizontal = 3
+text = "Edit Effect Area"
 
 [node name="TextOutput" type="TextEdit" parent="VBoxContainer/HBoxContainer/RightBoxContainer/TabContainer/Targeting/VBoxContainer"]
 visible = false
