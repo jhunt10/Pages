@@ -54,3 +54,10 @@ func get_all_tags()->Array:
 	for id in _source_order:
 		out_list.append_array(_source_tags[id])
 	return out_list
+
+## Returns true if any String value in check_for appears in the tag list.
+static func tags_include_any_in_array(check_for:Array, tags:Array)->bool:
+	for check in check_for:
+		if tags.has(check):
+			return true
+	return false
