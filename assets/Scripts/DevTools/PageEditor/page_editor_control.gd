@@ -52,7 +52,7 @@ func _input(event: InputEvent) -> void:
 func exit_menu():
 		Instance = null
 		self.queue_free()
-		MainRootNode.action_libary.reload_pages()
+		MainRootNode.action_library.reload_pages()
 	
 func get_missile_datas()->Dictionary:
 	return missile_data_control.missile_datas
@@ -80,7 +80,7 @@ func load_action_options_from_file(file_path):
 	if selected_file == file_path:
 		return
 	selected_file = file_path
-	action_datas = ActionLibary.parse_action_datas_from_file(file_path)
+	action_datas = ActionLibrary.parse_action_datas_from_file(file_path)
 	page_option_button.load_options()
 
 func on_file_option_selected(index:int):
@@ -101,7 +101,7 @@ func on_page_option_selected(index:int):
 	load_page(page_data)
 
 func get_file_options()->Array:
-	var files = ActionLibary.search_for_action_files()
+	var files = ActionLibrary.search_for_action_files()
 	known_files = files
 	return files
 func get_page_options()->Array:
@@ -123,7 +123,7 @@ func save_data(force_overide:bool=false):
 	var file_exists = false
 	if FileAccess.file_exists(file_name):
 		file_exists = true
-		existing_data = ActionLibary.parse_action_datas_from_file(file_name)
+		existing_data = ActionLibrary.parse_action_datas_from_file(file_name)
 	var page_exists = existing_data.keys().has(new_page_data['ActionKey'])
 	if not force_overide and file_exists:
 		popup_message_box.show_pop_up("File exists. Override?", save_data.bind(true))

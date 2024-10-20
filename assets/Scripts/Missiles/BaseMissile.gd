@@ -6,18 +6,10 @@ func get_tags(): return _missle_data.get('Tags', [])
 
 var node:MissileNode
 var _source_actor_id:String
-var _source_action_key:String
-#var _target_key:String
+var _source_target_chain:SourceTagChain
+var _target_params:TargetParameters
 var _missle_data:Dictionary
-var _missle_animation_data:AnimatedSpriteData
-
-var SourceActor:BaseActor:
-	get:
-		return CombatRootControl.Instance.GameState.get_actor(_source_actor_id, true)
-var SourceAction:BaseAction:
-	get:
-		return MainRootNode.action_libary.get_action(_source_action_key)
-
+var _missile_vfx_key:String
 var StartSpot:Vector2i
 var TargetSpot:Vector2i
 
@@ -28,48 +20,24 @@ var _start_frame:int
 var _end_frame:int
 var _position_per_frame:Array=[]
 
-func _init(actor:BaseActor, action:BaseAction, missile_data:Dictionary, target, start_pos=null) -> void:
-	_source_actor_id = actor.Id
-	_source_action_key = action.ActionKey
+func _init(source_actor:BaseActor, missile_data:Dictionary, source_tag_chain:SourceTagChain, 
+			target_params:TargetParameters, start_pos:MapPos, target_pos:MapPos, load_path:String) -> void:
+	_source_actor_id = source_actor.Id
 	_missle_data = missile_data
-	if _missle_data.has("AnimationData"):
-		_missle_animation_data = AnimatedSpriteData.new(_missle_data['AnimationData'], action.LoadPath)
+	_target_params = target_params
+	_missile_vfx_key = missile_data['MissileVfxKey']
 	
 	_frames_per_tile = missile_data['FramesPerTile']
 	_start_frame = CombatRootControl.Instance.QueController.sub_action_index
 	# Use potition if given, otherwise start at actor position
-	if start_pos and start_pos is Vector3i:
-		StartSpot = Vector2i(start_pos.x, start_pos.y)
-	if start_pos and start_pos is Vector2i:
-		StartSpot = Vector2i(start_pos.x, start_pos.y)
-	else:
-		var actor_pos = CombatRootControl.Instance.GameState.MapState.get_actor_pos(actor)
-		StartSpot = Vector2i(actor_pos.x, actor_pos.y)
-	
-	var meta_data:QueExecutionData = actor.Que.QueExecData
-	var turn_data = meta_data.get_current_turn_data()
-	if target is Vector2i:
-		TargetSpot = target
-	if target is String:
-		var target_actor = CombatRootControl.Instance.GameState.get_actor(target, true)
-		var spot = CombatRootControl.Instance.GameState.MapState.get_actor_pos(target_actor)
-		TargetSpot = Vector2i(spot.x, spot.y)
-	
+	StartSpot = start_pos.to_vector2i()
+	TargetSpot = target_pos.to_vector2i()
 	_calc_positions()
+	_source_target_chain = source_tag_chain.append_source(SourceTagChain.SourceTypes.Missile, self)
 
-func get_missile_animation_data()->AnimatedSpriteData:
-	return _missle_animation_data
+func get_missile_vfx_data()->VfxData:
+	return MainRootNode.vfx_libray.get_vfx_data(_missile_vfx_key)
 
-func on_reach_target():
-	var actor_on_spots = CombatRootControl.Instance.GameState.MapState.get_actors_at_pos(TargetSpot)
-	if actor_on_spots.size() == 0:
-		return
-	#TODO: Multiple Actors
-	var actor_on_spot:BaseActor = actor_on_spots[0]
-	var tag_chain = SourceTagChain.new()
-	DamageHelper.handle_damage(SourceActor, actor_on_spot, _missle_data['DamageData'], tag_chain, CombatRootControl.Instance.GameState)
-		
-		
 func get_position_for_frame(frame:int):
 	var index = frame - _start_frame
 	if index < 0 or index >= _position_per_frame.size():
@@ -80,10 +48,31 @@ func has_reached_target()->bool:
 	return _end_frame == CombatRootControl.Instance.QueController.sub_action_index
 	
 
-func do_thing(_game_state:GameStateData):
+func do_thing(game_state:GameStateData):
 	print('Missile ' + str(Id) + " has done thing.")
-	
+	var source_actor = game_state.get_actor(_source_actor_id)
+	if not source_actor:
+		printerr("BaseMissile.do_thing: No Source Actor found with id '%s'." % [_source_actor_id])
+		return
+	var effected_actors = _get_actors_in_effect_area(game_state)
+	print("Found %s effected actors" % [effected_actors.size()])
+	for target_actor in effected_actors:
+		#if _target_params.is_valid_target_actor(source_actor, target_actor, game_state):
+		DamageHelper.handle_damage(source_actor, target_actor, _missle_data['DamageData'], 
+								_source_target_chain, CombatRootControl.Instance.GameState)
 	node.on_missile_reach_target()
+
+func _get_actors_in_effect_area(game_state:GameStateData)->Array:
+	var effect_area = [TargetSpot]
+	if _target_params.has_area_of_effect():
+		effect_area = _target_params.get_area_of_effect(MapPos.Vector2i(TargetSpot))
+	
+	var targets = []
+	for spot in effect_area:
+		for target_actor in game_state.MapState.get_actors_at_pos(spot):
+			if !targets.has(target_actor):
+				targets.append(target_actor)
+	return targets
 
 func _calc_positions():
 	# Get distance in pixels between start and end point
@@ -104,7 +93,7 @@ func _calc_positions():
 	# Check if the missile will take more frames to reach the target then there are frames left in turn
 	# If so, log an error and clap the end frame.
 	if  _end_frame > BaseAction.SUB_ACTIONS_PER_ACTION:
-		printerr("Missile " + str(Id) + " created by " + SourceAction.ActionKey + " would not reach target before end of turn.")
+		printerr("Missile '%s' created by '%s' would not reach target before end of turn." % [Id, _source_actor_id])
 		_end_frame = BaseAction.SUB_ACTIONS_PER_ACTION - 1
 		
 	# Calculate position per frame upfront

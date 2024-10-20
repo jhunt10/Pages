@@ -35,7 +35,7 @@ func set_actor(actor:BaseActor):
 			but.queue_free()
 	var index = 0
 	for action_key in actor.ActorData['QueData']['ActionList']:
-		var action = MainRootNode.action_libary.get_action(action_key)
+		var action = MainRootNode.action_library.get_action(action_key)
 		var new_button:TextureButton = page_button_prefab.duplicate()
 		page_button_prefab.get_parent().add_child(new_button)
 		new_button.get_child(0).texture = action.get_large_sprite()
@@ -55,7 +55,7 @@ func allow_input(_allow:bool):
 func _mouse_entered_page_button(_index, key_name):
 	if CombatRootControl.Instance.QueController.execution_state != ActionQueController.ActionStates.Waiting:
 		return
-	var action:BaseAction = MainRootNode.action_libary.get_action(key_name)
+	var action:BaseAction = MainRootNode.action_library.get_action(key_name)
 	if action.PreviewTargetKey:
 		var target_parms = action.TargetParams[action.PreviewTargetKey]
 		var preview_pos = _actor.Que.get_movement_preview_pos()
@@ -74,7 +74,7 @@ func _mouse_exited_action_button(_index, _key_name):
 	pass
 
 func _page_button_pressed(_index, key_name):
-	var action:BaseAction = MainRootNode.action_libary.get_action(key_name)
+	var action:BaseAction = MainRootNode.action_library.get_action(key_name)
 	if action.OnQueUiState:
 		CombatRootControl.Instance.ui_controller.set_ui_state_from_path(
 			action.OnQueUiState,

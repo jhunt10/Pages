@@ -60,7 +60,7 @@ func resize_self_around_child():
 	outer_size.x = base_size.x + total_x_margins
 	outer_size.y = base_size.y + total_y_margins
 	
-	print("BaseSize: %s | OuterSize: %s" %[base_size, outer_size] )
+	#print("BaseSize: %s | OuterSize: %s" %[base_size, outer_size] )
 	self.custom_minimum_size = outer_size
 	background.custom_minimum_size = outer_size
 	background.set_size(outer_size)

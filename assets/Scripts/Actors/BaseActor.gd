@@ -81,7 +81,7 @@ func auto_build_que(current_turn:int):
 	print("Auto Que for : " + ActorKey)
 	if Que:
 		if Que.available_action_list.size() > 0:
-			var action = MainRootNode.action_libary.get_action(Que.available_action_list[0])
+			var action = MainRootNode.action_library.get_action(Que.available_action_list[0])
 			for n in range(Que.que_size):
 				print("AutoQue: " + action.ActionKey)
 				Que.que_action(action)

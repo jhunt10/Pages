@@ -29,7 +29,7 @@ func end_state():
 
 func on_item_selected(item_id:String):
 	print("SELECTED ITEM: " + item_id)
-	var action = MainRootNode.action_libary.get_action(_action_key)
+	var action = MainRootNode.action_library.get_action(_action_key)
 	_current_actor.Que.que_action(action, {"ItemId": item_id})
 	CombatRootControl.Instance.ui_controller.back_to_last_state()
 

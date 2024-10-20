@@ -24,7 +24,7 @@ func lose_focus_if_has():
 func get_sub_action_tags()->Array:
 	var out_list = []
 	for sub:SubActionEntryControl in subactions_container.get_children():
-		var sub_action:BaseSubAction = ActionLibary.get_sub_action_script(sub.real_script)
+		var sub_action:BaseSubAction = ActionLibrary.get_sub_action_script(sub.real_script)
 		var subact_data = sub.save_page_data()
 		var tags = sub_action.get_action_tags(subact_data)
 		for tag in tags:

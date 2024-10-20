@@ -57,7 +57,7 @@ func _build_stat_box(actor:BaseActor):
 func _build_page_list(actor:BaseActor):
 	var que_data = actor.ActorData['QueData']
 	for page_key in que_data['ActionList']:
-		var page = MainRootNode.action_libary.get_action(page_key)
+		var page = MainRootNode.action_library.get_action(page_key)
 		var page_slot:TextureButton = page_prefab.duplicate()
 		var page_image:TextureRect = page_slot.get_child(0)
 		page_slot.mouse_entered.connect(page_description_control.set_page.bind(page))

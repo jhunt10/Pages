@@ -147,7 +147,7 @@ func _target_input_focused(prop_name, force_option:String=''):
 
 static func get_sub_actions_scripts():
 	var list = []
-	if MainRootNode.action_libary.loaded:
+	if MainRootNode.action_library.loaded:
 		_search_for_actions(SUB_ACTIONS_PATH, list)
 	else:
 		printerr("SubActionEntryControl.get_sub_actions_scripts: Actions not loaded")

@@ -49,3 +49,6 @@ func _init(x:int, y:int, z:int=0, dir:int=0) -> void:
 
 func _to_string() -> String:
 	return "("+str(x)+","+str(y)+","+str(z)+":"+str(dir)+")"
+
+func to_vector2i()->Vector2i:
+	return Vector2i(x, y)

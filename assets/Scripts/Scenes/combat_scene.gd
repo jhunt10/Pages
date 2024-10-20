@@ -108,33 +108,41 @@ func create_new_actor(data:Dictionary, faction_index:int, pos:MapPos):
 		
 	return new_actor
 
-func create_new_missile_node(missile:BaseMissile):
+func create_new_missile_node(missile):
 	var new_node:MissileNode  = load("res://Scenes/missile_node.tscn").instantiate()
 	new_node.set_missile_data(missile)
 	MapController.add_missile_node(missile, new_node)
 	
-func create_damage_effect(actor:BaseActor, veffect_key:String, flash_number:int):
-	var new_node:DamageEffectNode  = load("res://Scenes/Effects/damage_effect_node.tscn").instantiate()
+func create_damage_effect(actor:BaseActor, vfx_key:String, flash_number:int):
 	var actor_node:ActorNode = MapController.actor_nodes.get(actor.Id, null)
 	if !actor_node:
 		printerr("Failed to find actor node for: %s" % [actor.Id])
 		return
-	new_node.set_props(veffect_key, actor_node, flash_number)
-	actor_node.add_child(new_node)
+	var vfx_node = MainRootNode.vfx_libray.create_vfx_node_from_key(vfx_key)
+	if !vfx_node:
+		printerr("Failed to create VFX node from key '%s'." % [vfx_key])
+		return
+	actor_node.add_child(vfx_node)
 	actor_node.play_shake()
+	vfx_node.add_flash_text(str(-flash_number), Color.RED)
+	vfx_node.start_vfx()
+
+
+func create_flash_text_on_actor(actor:BaseActor, value:String, color:Color):
+	var actor_node:ActorNode = MapController.actor_nodes[actor.Id]
+	create_flash_text(actor_node, value, color)
 	
-	
-func create_flash_text(actor:BaseActor, value:String, color:Color):
+
+func create_flash_text(parent_node:Node, value:String, color:Color):
 	var new_node:FlashTextControl  = load("res://Scenes/Effects/flash_text_control.tscn").instantiate()
 	new_node.set_values(value, color)
-	var actor_node:ActorNode = MapController.actor_nodes[actor.Id]
-	actor_node.add_child(new_node)
+	parent_node.add_child(new_node)
 
 func create_damage_number(actor:BaseActor, damage:int):
 	if damage < 0:
-		create_flash_text(actor, "+"+str(abs(damage)), Color.DARK_GREEN)
+		create_flash_text_on_actor(actor, "+"+str(abs(damage)), Color.DARK_GREEN)
 	else:
-		create_flash_text(actor, "-"+str(damage), Color.DARK_RED)
+		create_flash_text_on_actor(actor, "-"+str(damage), Color.DARK_RED)
 		
 	
 func add_zone(zone:BaseZone):

@@ -73,7 +73,7 @@ func get_full_fill_path():
 func on_load():
 	var full_file_path = file_path_input.text.path_join(file_name_input.text)
 	if FileAccess.file_exists(full_file_path):
-		var actions = ActionLibary.parse_actions_from_file(full_file_path)
+		var actions = ActionLibrary.parse_actions_from_file(full_file_path)
 		
 func on_save():
 	if parent_edit_control:

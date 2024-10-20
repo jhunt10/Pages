@@ -33,7 +33,8 @@ func do_thing(parent_action:BaseAction, subaction_data:Dictionary, metadata:QueE
 		var potentials = _get_potential_actor_targets(game_state, actor, target_parms)
 		if potentials.size() == 0:
 			print("No valid Targets")
-			CombatRootControl.Instance.create_flash_text(actor, "No Target", Color.RED)
+			CombatRootControl.Instance.create_flash_text_on_actor(actor, "No Target", Color.ORANGE_RED)
+			turndata.turn_failed = true
 			return
 			
 		if potentials.size() == 1:
@@ -42,7 +43,7 @@ func do_thing(parent_action:BaseAction, subaction_data:Dictionary, metadata:QueE
 	
 	CombatRootControl.Instance.QueController.pause_execution()
 	CombatRootControl.Instance.ui_controller.set_ui_state_from_path(
-		"res://assets/Scripts/Targeting/UiState_Targeting.gd",
+		"res://assets/Scripts/Actions/Targeting/UiState_Targeting.gd",
 	{
 		"Position": actor_pos,
 		"TargetParameters": target_parms,

@@ -3,10 +3,11 @@ extends Control
 
 var current_scene
 
-static var action_libary = ActionLibary.new()
+static var action_library = ActionLibrary.new()
 static var actor_libary = ActorLibary.new()
 static var effect_libary = EffectLibary.new()
 static var item_libary = ItemLibary.new()
+static var vfx_libray = VfxLibrary.new()
 static var Instance:MainRootNode
 
 func _ready() -> void:
@@ -28,7 +29,7 @@ func start_combat():
 	var combat_scene:CombatRootControl = load("res://Scenes/combat_scene.tscn").instantiate()
 	var actors = {}
 	actors['TestTarget'] = MapPos.new(5,2,0,0)
-	actors['TestOtherTarget'] = MapPos.new(6,2,0,0)
+	#actors['TestOtherTarget'] = MapPos.new(6,2,0,0)
 	#actors['TestOtherTarget'] = MapPos.new(5,2,1,0)
 	actors['TestActor'] = MapPos.new(5,5,0,0)
 	var map_data = _load_test_map()

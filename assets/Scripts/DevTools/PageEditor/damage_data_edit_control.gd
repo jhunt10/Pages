@@ -57,7 +57,7 @@ func _add_new_data():
 	damage_effect_options.load_options()
 
 func get_damage_effect_options():
-	return DamageEffectNode.veffects_sprites.keys()
+	return MainRootNode.vfx_libray._vfx_datas.keys()
 
 func _save_current_values(base_damage_value:float = -1):
 	printerr("Saving Damage Data")

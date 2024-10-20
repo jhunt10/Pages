@@ -1,7 +1,75 @@
-[gd_scene load_steps=7 format=3 uid="uid://bar7wpmpbim2q"]
+[gd_scene load_steps=7 format=3 uid="uid://dyv8ple8yeqpn"]
 
-[ext_resource type="Script" path="res://assets/Scripts/Ui/Effects/damage_effect_node.gd" id="2_a63xo"]
-[ext_resource type="Texture2D" uid="uid://brylatkso6htd" path="res://assets/Sprites/VEffects/FireEffect.png" id="2_ysy2r"]
+[ext_resource type="Texture2D" uid="uid://brylatkso6htd" path="res://data/VFXs/DamageVFXs/FireEffect.png" id="2_ysy2r"]
+
+[sub_resource type="GDScript" id="GDScript_wgelc"]
+script/source = "class_name DamageEffectNode
+extends Node2D
+
+const MAX_OFFSET = 12
+
+static var veffects_sprites:Dictionary = {
+	\"Slash\": {
+		\"Sprite\":\"res://assets/Sprites/VEffects/SlashEffect.png\",
+		\"MaxOffset\": 0,
+		\"Animation\":\"slash_effect\",
+		\"AnimationSpeed\": 1
+		},
+	\"Shot\": {
+		\"Sprite\":\"res://assets/Sprites/VEffects/ShotEffect.png\",
+		\"MaxOffset\": 12,
+		\"Animation\":\"slash_effect\",
+		\"AnimationSpeed\": 1
+		},
+	\"Slam\": {
+		\"Sprite\":\"res://assets/Sprites/VEffects/SlamEffect.png\",
+		\"MaxOffset\": 0,
+		\"Animation\":\"slash_effect\",
+		\"AnimationSpeed\": 1
+		},
+	\"Fire\": {
+		\"Sprite\":\"res://assets/Sprites/VEffects/FireEffect.png\",
+		\"MaxOffset\": 0,
+		\"Animation\":\"six_sprite_effect\",
+		\"AnimationSpeed\": 2
+		},
+}
+
+@onready var sprite:Sprite2D = $Sprite
+@onready var animation:AnimationPlayer = $Sprite/AnimationPlayer
+
+var flash_number:int = -1
+var actor_node:ActorNode
+var veffect_key:String
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	var effect_data = veffects_sprites.get(veffect_key, null)
+	if effect_data:
+		sprite.texture = load(effect_data[\"Sprite\"])
+		if effect_data[\"MaxOffset\"] > 0:
+			var x = MAX_OFFSET - (randi() % (effect_data[\"MaxOffset\"] * 2))
+			var y = MAX_OFFSET - (randi() % (effect_data[\"MaxOffset\"] * 2))
+			sprite.position = Vector2i(x, y)
+		animation.play(effect_data['Animation'])
+		animation.speed_scale = effect_data['AnimationSpeed']
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	if not animation.is_playing():
+		self.queue_free()
+		#actor_node.play_shake()
+		if self.flash_number > -1:
+			CombatRootControl.Instance.create_flash_text(actor_node, \"-\"+str(flash_number), Color.RED)
+	pass
+
+func set_props(veffect_key:String, actor:ActorNode, flash_number:int = -1, _max_offset=MAX_OFFSET):
+	self.flash_number = flash_number
+	self.actor_node = actor
+	self.veffect_key = veffect_key
+	
+"
 
 [sub_resource type="Animation" id="Animation_5gixu"]
 length = 0.001
@@ -16,23 +84,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [0]
-}
-
-[sub_resource type="Animation" id="Animation_7vqgf"]
-resource_name = "slash_effect"
-length = 0.4
-step = 0.25
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 4, 5]
 }
 
 [sub_resource type="Animation" id="Animation_ukxe6"]
@@ -52,6 +103,23 @@ tracks/0/keys = {
 "values": [0, 1, 2, 3, 4, 5]
 }
 
+[sub_resource type="Animation" id="Animation_7vqgf"]
+resource_name = "slash_effect"
+length = 0.4
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_bcbtv"]
 _data = {
 "RESET": SubResource("Animation_5gixu"),
@@ -60,7 +128,7 @@ _data = {
 }
 
 [node name="DamageEffectNode" type="Node2D"]
-script = ExtResource("2_a63xo")
+script = SubResource("GDScript_wgelc")
 
 [node name="Sprite" type="Sprite2D" parent="."]
 modulate = Color(0.953651, 0.901323, 0, 1)

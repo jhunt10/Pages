@@ -303,7 +303,7 @@ func _pay_turn_costs():
 		var turn_data = que.QueExecData.get_current_turn_data()
 		for stat_name in turn_data.costs.keys():
 			if not actor.stats.reduce_bar_stat_value(stat_name, turn_data.costs[stat_name], false):
-				CombatRootControl.Instance.create_flash_text(actor, "-"+stat_name, Color.ORANGE)
+				CombatRootControl.Instance.create_flash_text_on_actor(actor, "-"+stat_name, Color.ORANGE)
 				turn_data.turn_failed = true
 				return
 				

@@ -21,7 +21,7 @@ func _init(controler:UiStateController, args:Dictionary) -> void:
 	
 func start_state():
 	if _logging: print("Start UiState: Targeting")
-	target_display_key = target_area_dislay_node.set_target_parameters(actor_pos, target_params)
+	target_display_key = target_area_dislay_node.set_target_parameters(actor_pos, target_params, true)
 	CombatRootControl.Instance.GridCursor.set_cursor(GridCursorNode.Cursors.Targeting)
 	pass
 	
@@ -33,8 +33,10 @@ func handle_input(event):
 		var spot = CombatRootControl.Instance.GridCursor.current_spot
 		if target_params.is_point_in_area(actor_pos, spot):
 			CombatRootControl.Instance.GridCursor.set_cursor(GridCursorNode.Cursors.Targeting)
+			target_area_dislay_node.show_area_effect(target_display_key)
 		else:
 			CombatRootControl.Instance.GridCursor.set_cursor(GridCursorNode.Cursors.Default)
+			target_area_dislay_node.hide_area_effect(target_display_key)
 		
 		
 	# Mouse in viewport coordinates.

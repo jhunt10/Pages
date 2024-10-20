@@ -1,4 +1,4 @@
-class_name ActionLibary
+class_name ActionLibrary
 
 const TILE_WIDTH = 64
 const TILE_HIGHT = 56
@@ -59,7 +59,7 @@ static func search_for_action_files()->Array:
 static func _rec_search_for_actions(path:String, list:Array, limit:int=1000):
 	var dir = DirAccess.open(path)
 	if limit == 0:
-		printerr("ActionLibary._rec_search_for_actions: Search limit reached!")
+		printerr("ActionLibrary._rec_search_for_actions: Search limit reached!")
 		return
 	if dir:
 		dir.list_dir_begin()
