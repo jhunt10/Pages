@@ -12,7 +12,6 @@ var _orig_min_size:Vector2i
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	print("SSLE Ready")
 	pass # Replace with function body.
 
 
@@ -32,7 +31,6 @@ func set_sized_text(val:String):
 	self._sync_size()
 
 func _sync_size():
-	print("SSLE Resize")
 	if !hidden_text_edit:
 		printerr("SelfScalingLineEdit '%s' No Hidden TextEdit found." % [self.name])
 		return

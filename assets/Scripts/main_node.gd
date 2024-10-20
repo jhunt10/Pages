@@ -29,7 +29,7 @@ func start_combat():
 	var combat_scene:CombatRootControl = load("res://Scenes/combat_scene.tscn").instantiate()
 	var actors = {}
 	actors['TestTarget'] = MapPos.new(5,2,0,0)
-	#actors['TestOtherTarget'] = MapPos.new(6,2,0,0)
+	actors['TestOtherTarget'] = MapPos.new(6,2,0,0)
 	#actors['TestOtherTarget'] = MapPos.new(5,2,1,0)
 	actors['TestActor'] = MapPos.new(5,5,0,0)
 	var map_data = _load_test_map()

@@ -6,7 +6,6 @@ func get_action_tags(_subaction_data:Dictionary)->Array:
 
 func do_thing(parent_action:BaseAction, subaction_data:Dictionary, que_exe_data:QueExecutionData,
 				game_state:GameStateData, actor:BaseActor):
-	print("Use Item SubAction")
 	
 	var turn_data:TurnExecutionData = que_exe_data.get_current_turn_data()
 	var item_id = turn_data.on_que_data['ItemId']

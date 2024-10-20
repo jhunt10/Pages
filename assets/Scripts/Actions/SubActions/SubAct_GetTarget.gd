@@ -12,13 +12,11 @@ func get_action_tags(_subaction_data:Dictionary)->Array:
 
 func do_thing(parent_action:BaseAction, subaction_data:Dictionary, metadata:QueExecutionData,
 				game_state:GameStateData, actor:BaseActor):
-	print("Get Target SubAction")
-	
 	# Check if Target is already set
 	var target_key = subaction_data['TargetKey']
 	var turndata = metadata.get_current_turn_data()
 	if turndata.targets.has(target_key):
-		print("Has Target: ", turndata.targets[target_key])
+		#print("Has Target: ", turndata.targets[target_key])
 		return
 	
 	var target_parms:TargetParameters = parent_action.TargetParams[target_key]

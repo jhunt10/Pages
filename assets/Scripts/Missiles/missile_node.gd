@@ -6,6 +6,7 @@ extends Node2D
 
 var missile:BaseMissile
 var missile_effect_node:VfxNode
+var impact_effect_node:VfxNode
 
 func _ready() -> void:
 	missile_effect_node.start_vfx()
@@ -22,6 +23,10 @@ func set_missile_data(missle):
 	self.add_child(missile_effect_node)
 
 func sync_pos():
+	if missile.has_reached_target():
+		self.position = missile.get_final_position()
+		return
+		
 	var current_frame = CombatRootControl.Instance.QueController.sub_action_index
 	var pos = missile.get_position_for_frame(current_frame)
 	if pos:
@@ -33,4 +38,12 @@ func sync_pos():
 	missile_effect_node.rotation = angle
 
 func on_missile_reach_target():
-	self.queue_free()
+	if missile.has_impact_vfx():
+		self.position = missile.get_final_position()
+		impact_effect_node = MainRootNode.vfx_libray.create_vfx_node(missile.get_impact_vfx_data())
+		impact_effect_node.tree_exited.connect(self.queue_free)
+		self.add_child(impact_effect_node)
+		impact_effect_node.start_vfx()
+		missile_effect_node.visible = false
+	else:
+		self.queue_free()

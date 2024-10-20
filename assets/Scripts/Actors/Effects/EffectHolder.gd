@@ -1,5 +1,7 @@
 class_name EffectHolder
 
+const LOGGING = false
+
 #signal lost_effect(effect_id:String)
 #signal gained_effect(effect:BaseEffect)
 
@@ -75,7 +77,7 @@ func get_stat_mods():
 	return out_list
 	
 func _trigger_effects(trigger:BaseEffect.EffectTriggers, game_state:GameStateData):
-	#printerr("Triggering Effect Trigger: " + BaseEffect.EffectTriggers.keys()[trigger])
+	if LOGGING: print("Triggering Effect Trigger: " + BaseEffect.EffectTriggers.keys()[trigger])
 	for id in _triggers_to_effect_ids[trigger]:
 		var effect:BaseEffect = _effects.get(id, null)
 		if not effect:
@@ -83,7 +85,7 @@ func _trigger_effects(trigger:BaseEffect.EffectTriggers, game_state:GameStateDat
 			_effects.erase(id)
 			_triggers_to_effect_ids.erase(id)
 		else:
-			printerr("Trigger effect with id: '%s'." % [id])
+			if LOGGING: print("Trigger effect with id: '%s'." % [id])
 			effect.trigger_effect(trigger, game_state)
 	pass
 
@@ -104,7 +106,7 @@ func _on_actor_moved(old_pos:MapPos, new_pos:MapPos, move_type:String, moved_by:
 		_effects[id].trigger_on_move(old_pos, new_pos, move_type, moved_by)
 	
 func _on_actor_death():
-	printerr("EffectHolder: Actor Death")
+	if LOGGING: print("EffectHolder: Actor Death")
 	var game_state = CombatRootControl.Instance.GameState
 	_trigger_effects(BaseEffect.EffectTriggers.OnDeath, game_state)
 	# Delete all active effects

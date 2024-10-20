@@ -20,6 +20,12 @@ func get_current_option_text():
 		return self.get_item_text(self.selected)
 	return ''
 
+func get_index_of_option(val:String):
+	for index in range(self.item_count):
+		if val == self.get_item_text(index):
+			return index
+	return -1
+
 func load_options(force_option:String=''):
 	var current_option = force_option
 	if force_option != '' and current_option == '' and self.selected >= 0:

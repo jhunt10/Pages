@@ -29,7 +29,7 @@ func _process(delta):
 	pass
 
 func set_ui_state(state:UiStates, args:Dictionary={}):
-	print("Setting UI State: %s" %[state])
+	#print("Setting UI State: %s" %[state])
 	var path = _state_scripts[state]
 	set_ui_state_from_path(path, args)
 

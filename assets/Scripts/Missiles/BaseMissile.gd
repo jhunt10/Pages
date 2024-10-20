@@ -1,15 +1,18 @@
 class_name BaseMissile
 
+const LOGGING = false
+
 var Id : String = str(ResourceUID.create_id())
 func get_tagable_id(): return Id
 func get_tags(): return _missle_data.get('Tags', [])
 
-var node:MissileNode
+var node#:MissileNode
 var _source_actor_id:String
 var _source_target_chain:SourceTagChain
 var _target_params:TargetParameters
 var _missle_data:Dictionary
 var _missile_vfx_key:String
+var _impact_vfx_key:String
 var StartSpot:Vector2i
 var TargetSpot:Vector2i
 
@@ -26,6 +29,7 @@ func _init(source_actor:BaseActor, missile_data:Dictionary, source_tag_chain:Sou
 	_missle_data = missile_data
 	_target_params = target_params
 	_missile_vfx_key = missile_data['MissileVfxKey']
+	_impact_vfx_key = missile_data.get('ImpactVfxKey', '')
 	
 	_frames_per_tile = missile_data['FramesPerTile']
 	_start_frame = CombatRootControl.Instance.QueController.sub_action_index
@@ -44,18 +48,26 @@ func get_position_for_frame(frame:int):
 		return null
 	return _position_per_frame[index]
 
+func get_final_position():
+	return _position_per_frame[_position_per_frame.size()-1]
+
 func has_reached_target()->bool:
 	return _end_frame == CombatRootControl.Instance.QueController.sub_action_index
-	
+
+func has_impact_vfx()->bool:
+	return _impact_vfx_key != ''
+
+func get_impact_vfx_data()->VfxData:
+	return MainRootNode.vfx_libray.get_vfx_data(_impact_vfx_key)
 
 func do_thing(game_state:GameStateData):
-	print('Missile ' + str(Id) + " has done thing.")
+	if LOGGING: print('Missile ' + str(Id) + " has done thing.")
 	var source_actor = game_state.get_actor(_source_actor_id)
 	if not source_actor:
 		printerr("BaseMissile.do_thing: No Source Actor found with id '%s'." % [_source_actor_id])
 		return
 	var effected_actors = _get_actors_in_effect_area(game_state)
-	print("Found %s effected actors" % [effected_actors.size()])
+	if LOGGING: print("Found %s effected actors" % [effected_actors.size()])
 	for target_actor in effected_actors:
 		#if _target_params.is_valid_target_actor(source_actor, target_actor, game_state):
 		DamageHelper.handle_damage(source_actor, target_actor, _missle_data['DamageData'], 
@@ -93,7 +105,7 @@ func _calc_positions():
 	# Check if the missile will take more frames to reach the target then there are frames left in turn
 	# If so, log an error and clap the end frame.
 	if  _end_frame > BaseAction.SUB_ACTIONS_PER_ACTION:
-		printerr("Missile '%s' created by '%s' would not reach target before end of turn." % [Id, _source_actor_id])
+		if LOGGING: printerr("Missile '%s' created by '%s' would not reach target before end of turn." % [Id, _source_actor_id])
 		_end_frame = BaseAction.SUB_ACTIONS_PER_ACTION - 1
 		
 	# Calculate position per frame upfront

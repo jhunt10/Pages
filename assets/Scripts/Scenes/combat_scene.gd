@@ -69,7 +69,6 @@ func set_init_state(map_data:Dictionary, player_actor:String, actors_pos:Diction
 	actor_creation_que = actors_pos
 	
 func kill_actor(actor:BaseActor):
-	printerr("Actor '%s' died!" % [actor.Id])
 	actor.die()
 	QueController.remove_action_que(actor.Que)
 	if actor.leaves_corpse:

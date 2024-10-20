@@ -1,5 +1,7 @@
 class_name MapSpot
 
+const LOGGING=false
+
 var parent_map:MapStateData = null
 var X:int = 0
 var Y:int = 0
@@ -17,7 +19,7 @@ func _init(x:int, y:int, terrain_index:int, parent:MapStateData) -> void:
 	self.terrain_index = terrain_index
 	
 func add_actor(actor:BaseActor, layer=MapStateData.DEFAULT_ACTOR_LAYER):
-	print("Adding actor '%s' (%s, %s) %s" % [actor.ActorKey, X, Y, layer])
+	if LOGGING: print("Adding actor '%s' (%s, %s) %s" % [actor.ActorKey, X, Y, layer])
 	if not _layer_to_actor_ids.keys().has(layer):
 		_layer_to_actor_ids[layer] = []
 	if _layer_to_actor_ids[layer].has(actor.Id):

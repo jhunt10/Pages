@@ -16,7 +16,7 @@ func get_action_tags(_subaction_data:Dictionary)->Array:
 
 func do_thing(_parent_action:BaseAction, _subaction_data:Dictionary, _metadata:QueExecutionData,
 				_game_state:GameStateData, _actor:BaseActor):
-	print("BaseSubAction")
+	printerr("BaseSubAction.do_thing: No Override.")
 	pass
 
 func find_targeted_actors(parent_action:BaseAction, target_key:String, metadata:QueExecutionData,

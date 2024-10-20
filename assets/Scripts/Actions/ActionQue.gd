@@ -101,4 +101,3 @@ func _set_turn_mapping(gap_or_nots:Array):
 			last_index += 1
 		else:
 			_turn_mapping.append(-last_index)
-	printerr("Turn Mapping Set: %s" % [_turn_mapping])

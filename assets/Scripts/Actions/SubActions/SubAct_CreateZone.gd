@@ -3,7 +3,6 @@ extends BaseSubAction
 
 func do_thing(parent_action:BaseAction, subaction_data:Dictionary, _que_exe_data:QueExecutionData,
 				game_state:GameStateData, actor:BaseActor):
-	print("Create Zone SubAction")
 	var zone_data = subaction_data['ZoneData']
 	var zone:BaseZone
 	var center

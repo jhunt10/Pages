@@ -1,7 +1,7 @@
 class_name StatHolder
 
 const HealthKey:String = "Health"
-const LOGGING = true
+const LOGGING = false
 
 var _actor:BaseActor
 var _base_stats:Dictionary = {}

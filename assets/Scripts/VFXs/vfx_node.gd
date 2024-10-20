@@ -19,7 +19,6 @@ var _flash_text_color:Color
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	print("VFX Node Ready ----------------------------")
 	_readyed = true
 	if _delayed_start:
 		start_vfx()
@@ -29,12 +28,10 @@ func start_vfx():
 	if !_readyed:
 		_delayed_start = true
 		return
-	print("VFX Node Start ----------------------------")
 	if _data.random_offset_range != Vector2.ZERO:
 		var sprite_size = sprite.get_rect().size
 		var offset_x = randf_range(-_data.random_offset_range.x, _data.random_offset_range.x) * sprite_size.x
 		var offset_y = randf_range(-_data.random_offset_range.y, _data.random_offset_range.y) * sprite_size.y
-		print("Offsets: Size:%s OffX: %s OffY: %s" % [sprite_size, offset_x, offset_y])
 		sprite.position = Vector2(offset_x, offset_y)
 	if _data.animation_name != '':
 		_has_animation = true
@@ -53,7 +50,6 @@ func _process(delta: float) -> void:
 			_flash_text_shown = true
 
 func set_vfx_data(data:VfxData, extra_data:Dictionary):
-	print("VFX Node SetData ----------------------------")
 	_data = data
 	if _data.sprite_name != '':
 		var sprite_path = _data.load_path.path_join(data.sprite_name)

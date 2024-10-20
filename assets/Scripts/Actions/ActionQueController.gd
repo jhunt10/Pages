@@ -56,7 +56,7 @@ var subaction_script_cache:Dictionary = {}
 var _dead_ques:Array = []
 
 func _start_round():
-	print("QueController: Start Round")
+	if DEEP_LOGGING: print("QueController: Start Round")
 	action_index = 0
 	sub_action_index = 0
 	sub_sub_action_index = 0
@@ -74,7 +74,7 @@ func _start_round():
 	execution_active.emit()
 
 func _end_round():
-	print("QueController: End Round")
+	if DEEP_LOGGING: print("QueController: End Round")
 	#label.text = "Waiting"
 	action_index = 0
 	sub_action_index = 0

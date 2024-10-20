@@ -60,7 +60,6 @@ func get_damage_effect_options():
 	return MainRootNode.vfx_libray._vfx_datas.keys()
 
 func _save_current_values(base_damage_value:float = -1):
-	printerr("Saving Damage Data")
 	var damage_key = key_input.text
 	if damage_key == '':
 		return

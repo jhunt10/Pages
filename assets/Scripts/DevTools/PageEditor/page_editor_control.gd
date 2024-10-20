@@ -82,6 +82,8 @@ func load_action_options_from_file(file_path):
 	selected_file = file_path
 	action_datas = ActionLibrary.parse_action_datas_from_file(file_path)
 	page_option_button.load_options()
+	#print("Loaded %s Page Options from: %s" % [page_option_button.item_count, file_path])
+	
 
 func on_file_option_selected(index:int):
 	var file = known_files[index]
@@ -111,6 +113,7 @@ func save_data(force_overide:bool=false):
 	var file_name = file_edit_control.get_full_fill_path()
 	
 	var new_page_data:Dictionary = texts_input_control.save_page_data()
+	var current_page = new_page_data['ActionKey']
 	new_page_data['LargeSprite'] = sprite_edit_control.large_sprite_option.get_current_option_text()
 	new_page_data['SmallSprite'] = sprite_edit_control.small_sprite_option.get_current_option_text()
 	new_page_data['DamageDatas'] = damage_data_control.save_page_data()
@@ -132,4 +135,8 @@ func save_data(force_overide:bool=false):
 	var file = FileAccess.open(file_name, FileAccess.WRITE)
 	file.store_string(JSON.stringify(existing_data.values()))
 	file.close()
+	selected_file = ""
 	load_action_options_from_file(file_name)
+	var index = page_option_button.get_index_of_option(current_page)
+	if index >= 0:
+		page_option_button.select(index)

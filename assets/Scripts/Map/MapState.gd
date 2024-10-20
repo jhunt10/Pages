@@ -1,6 +1,6 @@
 class_name MapStateData
 
-const LOGGING = true
+const LOGGING = false
 
 const DEFAULT_ACTOR_LAYER = MapLayers.Default
 
@@ -82,8 +82,9 @@ func set_actor_pos(actor:BaseActor, pos:MapPos, layer=DEFAULT_ACTOR_LAYER):
 	var new_spot = get_map_spot(pos)
 	new_spot.add_actor(actor, layer)
 	_actor_pos_cache[actor.Id] = pos
-	if old_pos:
-		if LOGGING: print("Emit Move: " + str(old_pos) + " | " + str(pos))
+	
+	if old_pos != null and old_pos != pos:
+		if LOGGING: printerr("Emit Move: " + str(old_pos) + " | " + str(pos))
 		actor.on_move.emit(old_pos, pos, "TEST", null)
 		_handle_enter_exit_zone(actor, old_pos, pos)
 

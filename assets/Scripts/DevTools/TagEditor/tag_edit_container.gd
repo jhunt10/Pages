@@ -19,7 +19,7 @@ func load_optional_tags(tags:Array):
 	_build_tags_list(tags)
 	
 func _build_tags_list(optional_tags:Array):
-	print("Tag Edit Load List; %s" % [optional_tags])
+	#print("Tag Edit Load List; %s" % [optional_tags])
 	for child in tags_container.get_children():
 		child.queue_free()
 	if get_required_tags:
