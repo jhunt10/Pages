@@ -40,7 +40,7 @@ func do_thing(parent_action:BaseAction, subaction_data:Dictionary, metadata:QueE
 			return
 	
 	CombatRootControl.Instance.QueController.pause_execution()
-	CombatRootControl.Instance.ui_controller.set_ui_state_from_path(
+	CombatUiControl.ui_state_controller.set_ui_state_from_path(
 		"res://assets/Scripts/Actions/Targeting/UiState_Targeting.gd",
 	{
 		"Position": actor_pos,

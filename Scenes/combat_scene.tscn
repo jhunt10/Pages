@@ -6,10 +6,10 @@
 [ext_resource type="Script" path="res://assets/Scripts/Ui/DisplayNodes/target_area_display_node.gd" id="5_17esk"]
 [ext_resource type="Texture2D" uid="uid://b03yygahg1o8b" path="res://assets/Sprites/UI/Targeting/TargetAreaTiles.png" id="6_evsty"]
 [ext_resource type="Texture2D" uid="uid://b232xm2ly0peh" path="res://assets/Sprites/UI/GridCursors/GridCursor_Default.png" id="7_7lt4y"]
+[ext_resource type="Script" path="res://assets/Scripts/Ui/DisplayNodes/Combat/combat_ui_control.gd" id="8_8l3el"]
 [ext_resource type="Script" path="res://assets/Scripts/Ui/DisplayNodes/grid_cursor_node.gd" id="8_wf3xb"]
 [ext_resource type="Texture2D" uid="uid://5sc84oyivah" path="res://assets/Sprites/UI/backpatch.png" id="10_8c137"]
 [ext_resource type="PackedScene" uid="uid://6dlh0wlnsedb" path="res://Scenes/UiNodes/que_input_control.tscn" id="14_atc5n"]
-[ext_resource type="Script" path="res://assets/Scripts/Ui/UiStates/combat_ui_state_control.gd" id="15_fjvvi"]
 [ext_resource type="PackedScene" uid="uid://cyakkk5i1nreg" path="res://Scenes/UiNodes/combat_stat_panel_control.tscn" id="16_jsy0k"]
 [ext_resource type="Script" path="res://assets/Scripts/Ui/DisplayNodes/pause_menu_control.gd" id="18_acqto"]
 [ext_resource type="Script" path="res://assets/Scripts/Ui/DisplayNodes/item_select_menu_control.gd" id="19_p0l6r"]
@@ -1379,7 +1379,7 @@ sources/1 = SubResource("TileSetAtlasSource_2ibvb")
 
 [sub_resource type="TileSet" id="TileSet_lvs5x"]
 
-[node name="CombatRootControl" type="Control"]
+[node name="CombatRootControl" type="Control" node_paths=PackedStringArray("ui_control")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -1388,6 +1388,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_crigy")
+ui_control = NodePath("CombatUiControl")
 
 [node name="MapControlerNode" type="Node2D" parent="."]
 position = Vector2(414, 88)
@@ -1410,7 +1411,7 @@ tile_set = SubResource("TileSet_lvs5x")
 texture = ExtResource("7_7lt4y")
 script = ExtResource("8_wf3xb")
 
-[node name="CombatUiControl" type="Control" parent="."]
+[node name="CombatUiControl" type="Control" parent="." node_paths=PackedStringArray("menu_button", "pause_menu", "stat_panel_control", "que_input", "que_display", "que_collection_display")]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1418,7 +1419,13 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-script = ExtResource("15_fjvvi")
+script = ExtResource("8_8l3el")
+menu_button = NodePath("MenuButton")
+pause_menu = NodePath("PauseMenuControl")
+stat_panel_control = NodePath("StatPanelControl")
+que_input = NodePath("QueInputControl")
+que_display = NodePath("QueDisplayControl")
+que_collection_display = NodePath("QueCollectionDisplayControl")
 
 [node name="StatPanelControl" parent="CombatUiControl" instance=ExtResource("16_jsy0k")]
 
@@ -1567,6 +1574,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="ItemSelectMenuControl" type="Control" parent="CombatUiControl"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

@@ -1,10 +1,4 @@
 class_name UiStateController
-extends Control
-
-
-@onready var menu_button:TextureButton = $MenuButton
-@onready var pause_menu:Control = $PauseMenuControl
-@onready var item_select_menu:ItemSelectMenuControl = $ItemSelectMenuControl
 
 enum UiStates {ActionInput, ExecRound, PauseMenu, SelectItem, CharacterSheet}
 
@@ -19,14 +13,14 @@ var _state_scripts = {
 var current_ui_state:BaseUiState
 var last_state:BaseUiState
 
-func _ready():
-	menu_button.pressed.connect(_on_menu_pressed)
-	pass
-
-func _process(delta):
+func update(delta):
 	if current_ui_state:
 		current_ui_state.update(delta)
 	pass
+
+func handle_input(event:InputEvent):
+	if current_ui_state:
+		current_ui_state.handle_input(event)
 
 func set_ui_state(state:UiStates, args:Dictionary={}):
 	#print("Setting UI State: %s" %[state])
@@ -54,20 +48,3 @@ func back_to_last_state():
 	current_ui_state = last_state
 	last_state = null
 	current_ui_state.start_state()
-
-func _input(event: InputEvent) -> void:
-	# Escape Key Pressed
-	if event is InputEventKey and (event as InputEventKey).keycode == KEY_ESCAPE and (event as InputEventKey).pressed:
-		if not pause_menu.visible:
-			if current_ui_state and current_ui_state.allow_pause_menu():
-				pause_menu.visible = true
-		else:
-			pause_menu.visible = false
-
-func _unhandled_input(event: InputEvent) -> void:
-	if current_ui_state:
-		current_ui_state.handle_input(event)
-		
-func _on_menu_pressed():
-	set_ui_state(UiStates.PauseMenu)
-	pass

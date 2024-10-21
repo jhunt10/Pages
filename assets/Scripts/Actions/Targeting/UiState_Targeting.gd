@@ -57,4 +57,4 @@ func select_target(coord:Vector2i):
 		if actors.size() == 0:
 			return
 		turndata.targets[target_params.target_key] = actors[0].Id
-	CombatRootControl.Instance.ui_controller.set_ui_state(UiStateController.UiStates.ExecRound)
+	CombatUiControl.ui_state_controller.set_ui_state(UiStateController.UiStates.ExecRound)

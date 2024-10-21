@@ -6,10 +6,10 @@ const NO_ICON_SPRITE = "res://assets/Sprites/BadSprite.png"
 const ActionDir = "res://data/Actions"
 
 var _action_list:Dictionary = {}
+static var _cached_icon_sprites : Dictionary = {}
 static var _cached_subaction_scripts:Dictionary = {}
 
 var loaded = false
-var loaded_sprites : Dictionary = {}
 
 func _init() -> void:
 	self.load_pages()
@@ -18,6 +18,7 @@ func load_pages():
 	if loaded:
 		return
 	print("### Loading Actions")
+	_cached_icon_sprites[NO_ICON_SPRITE] = get_action_icon(NO_ICON_SPRITE)
 	for file in search_for_action_files():
 		print('# Checking File: ' + file)
 		var actions_dicts = parse_actions_from_file(file)
@@ -29,9 +30,18 @@ func load_pages():
 	
 func reload_pages():
 	_action_list.clear()
-	loaded_sprites.clear()
+	_cached_icon_sprites.clear()
 	loaded = false
 	load_pages()
+
+static func get_action_icon(file_path:String):
+	if _cached_icon_sprites.keys().has(file_path):
+		return _cached_icon_sprites[file_path]
+	if FileAccess.file_exists(file_path):
+		var sprite = load(file_path)
+		_cached_icon_sprites[file_path] = sprite
+		return sprite
+	return _cached_icon_sprites[NO_ICON_SPRITE]
 
 static func get_sub_action_script(script_path)->BaseSubAction:
 	if _cached_subaction_scripts.keys().has(script_path):

@@ -12,10 +12,10 @@ func start_state():
 	if _logging: print("Start UiState: PauseMenu")
 	if CombatRootControl.Instance.QueController.execution_state == ActionQueController.ActionStates.Running:
 		CombatRootControl.Instance.QueController.pause_execution()
-	CombatRootControl.Instance.ui_controller.pause_menu.visible = true
+	CombatUiControl.Instance.pause_menu.visible = true
 	pass
 
 func end_state():
-	CombatRootControl.Instance.ui_controller.pause_menu.visible = false
+	CombatUiControl.Instance.pause_menu.visible = false
 	pass
 	

@@ -1,3 +1,4 @@
+class_name PageOptionsMenu
 extends Control
 
 @export var inner_container:VBoxContainer
@@ -19,4 +20,4 @@ func load_options(action_key:int, options:Array, on_option_func:Callable):
 		button.text = option
 		inner_container.add_child(button)
 		button.pressed.connect(on_option_func.bind(option))
-	var action_que_display = CombatRootControl.Instance.ui_controller.qu
+	#var action_que_display = CombatRootControl.Instance.ui_controller.qu

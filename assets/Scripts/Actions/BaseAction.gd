@@ -84,10 +84,12 @@ func _init(file_load_path:String, args:Dictionary) -> void:
 		PreviewMoveOffset = MapPos.new(pre_move_arr[0],pre_move_arr[1],pre_move_arr[2],pre_move_arr[3])
 			
 func  get_small_sprite()->Texture2D:
-	return load(LoadPath + "/" +SmallSprite)
+	var path = LoadPath.path_join(LargeSprite)
+	return ActionLibrary.get_action_icon(path)
 	
 func  get_large_sprite()->Texture2D:
-	return load(LoadPath + "/" +SmallSprite)
+	var path = LoadPath.path_join(SmallSprite)
+	return ActionLibrary.get_action_icon(path)
 	
 func get_damage_data(subaction_data:Dictionary):
 	return DamageDatas.get(subaction_data.get("DamageKey", ""), subaction_data.get("DamageData", null))

@@ -1,3 +1,4 @@
+class_name PauseMenuControl
 extends Control
 
 @onready var main_menu_button:TextureButton = $HBoxContainer/VBoxContainer/ButtonContainer/MainMenuButton
@@ -18,8 +19,8 @@ func _on_quit_pressed():
 	get_tree().quit()
 
 func _on_close_menu():
-	CombatRootControl.Instance.ui_controller.back_to_last_state()
+	CombatUiControl.ui_state_controller.back_to_last_state()
 
 func _on_character():
-	MainRootNode.Instance.open_character_sheet(CombatRootControl.Instance.StatDisplay.actor)
+	MainRootNode.Instance.open_character_sheet(CombatUiControl.Instance.stat_panel_control.actor)
 	

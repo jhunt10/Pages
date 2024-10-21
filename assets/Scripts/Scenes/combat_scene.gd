@@ -3,13 +3,11 @@ extends Control
 
 signal actor_spawned(actor:BaseActor)
 
+@export var ui_control:CombatUiControl
+
 @onready var MapController:MapControllerNode = $MapControlerNode
 
-@onready var QueInput = $CombatUiControl/QueInputControl
-@onready var QueDisplay = $CombatUiControl/QueDisplayControl
 @onready var GridCursor:GridCursorNode = $MapControlerNode/GridCursor
-@onready var  StatDisplay:StatPanelControl = $CombatUiControl/StatPanelControl
-@onready var ui_controller:UiStateController = $CombatUiControl
 
 static var Instance:CombatRootControl 
 static var QueController:ActionQueController = ActionQueController.new()
@@ -47,12 +45,11 @@ func _ready() -> void:
 		var new_actor = create_new_actor(actor_data, 1, actor_pos)
 		if actor_info.get('IsPlayer', false):
 			new_actor.FactionIndex = 0
-			StatDisplay.set_actor(new_actor)
-			QueInput.set_actor(new_actor)
-			QueDisplay.set_actor(new_actor)
+			ui_control.set_player_actor(new_actor)
 	actor_creation_que.clear()
 	
-	ui_controller.set_ui_state(UiStateController.UiStates.ActionInput)
+	ui_control.ui_state_controller.set_ui_state(UiStateController.UiStates.ActionInput)
+	
 	MapController._build_terrain()
 	pass # Replace with function body.
 

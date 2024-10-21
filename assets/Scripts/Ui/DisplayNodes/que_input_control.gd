@@ -66,21 +66,21 @@ func _mouse_entered_page_button(_index, key_name):
 		_target_display_key = CombatRootControl.Instance.MapController.target_area_display \
 			.set_target_parameters(preview_pos, target_parms)
 	if action.CostData.size() > 0:
-		CombatRootControl.Instance.StatDisplay.preview_stat_cost(action.CostData)
+		CombatUiControl.Instance.stat_panel_control.preview_stat_cost(action.CostData)
 	#ui_controler.mouse_entered_action_button(key_name)
 	pass
 	
 func _mouse_exited_action_button(_index, _key_name):
 	if _target_display_key:
 		CombatRootControl.Instance.MapController.target_area_display.clear_display(_target_display_key, false)
-	CombatRootControl.Instance.StatDisplay.stop_preview_stat_cost()
+	CombatUiControl.Instance.stat_panel_control.stop_preview_stat_cost()
 	#ui_controler.mouse_exited_action_button(key_name)
 	pass
 
 func _page_button_pressed(_index, key_name):
 	var action:BaseAction = MainRootNode.action_library.get_action(key_name)
 	if action.OnQueUiState:
-		CombatRootControl.Instance.ui_controller.set_ui_state_from_path(
+		CombatUiControl.ui_state_controller.set_ui_state_from_path(
 			action.OnQueUiState,
 			{
 				"Actor": _actor,
@@ -91,7 +91,7 @@ func _page_button_pressed(_index, key_name):
 		_actor.Que.que_action(action)
 
 func _start_button_pressed():
-	CombatRootControl.Instance.ui_controller.set_ui_state(UiStateController.UiStates.ExecRound)
+	CombatUiControl.ui_state_controller.set_ui_state(UiStateController.UiStates.ExecRound)
 	start_button.disabled = true
 	start_button.get_child(0).text = " XXX"
 
