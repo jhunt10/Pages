@@ -1,18 +1,21 @@
-[gd_scene load_steps=6 format=3 uid="uid://6dlh0wlnsedb"]
+[gd_scene load_steps=8 format=3 uid="uid://6dlh0wlnsedb"]
 
 [ext_resource type="Script" path="res://assets/Scripts/Ui/DisplayNodes/que_input_control.gd" id="1_bqb47"]
 [ext_resource type="Texture2D" uid="uid://io35wpu802fp" path="res://assets/Sprites/UI/BackPatches/Patch_64_12.png" id="2_p5j4l"]
 [ext_resource type="Texture2D" uid="uid://cwsvq3qu6228n" path="res://assets/Sprites/UI/QueInputAndDisplay/page_button.png" id="3_dtm50"]
 [ext_resource type="Texture2D" uid="uid://bdn528i15d122" path="res://data/Actions/Attack/TestSword.png" id="4_l8485"]
 [ext_resource type="Texture2D" uid="uid://01rf6dbmahgb" path="res://assets/Sprites/UI/QueInputAndDisplay/start_button.png" id="5_tlwb0"]
+[ext_resource type="Script" path="res://assets/Scripts/Ui/DisplayNodes/Combat/on_que_option_menu_control.gd" id="6_ci2p0"]
+[ext_resource type="Texture2D" uid="uid://c6kesqll0wvk6" path="res://assets/Sprites/UI/QueInputAndDisplay/on_que_options_backpatch_32_4.png" id="7_5asbx"]
 
-[node name="QueInputControl" type="Control"]
+[node name="QueInputControl" type="Control" node_paths=PackedStringArray("on_que_options_menu")]
 custom_minimum_size = Vector2(124, 56)
 layout_mode = 3
 anchors_preset = 0
 offset_right = 124.0
 offset_bottom = 56.0
 script = ExtResource("1_bqb47")
+on_que_options_menu = NodePath("OnQueOptionsMenuControl")
 
 [node name="Background" type="NinePatchRect" parent="."]
 layout_mode = 1
@@ -71,3 +74,36 @@ grow_vertical = 2
 text = "Start"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="OnQueOptionsMenuControl" type="Container" parent="." node_paths=PackedStringArray("options_container", "title_lable", "parent_que_input", "background", "inner_container")]
+custom_minimum_size = Vector2(133, 35)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("6_ci2p0")
+options_container = NodePath("InnerContainer/OptionsContainer")
+title_lable = NodePath("InnerContainer/TitleLabel")
+parent_que_input = NodePath("..")
+background = NodePath("Background")
+inner_container = NodePath("InnerContainer")
+
+[node name="Background" type="NinePatchRect" parent="OnQueOptionsMenuControl"]
+custom_minimum_size = Vector2(133, 35)
+layout_mode = 2
+texture = ExtResource("7_5asbx")
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+
+[node name="InnerContainer" type="VBoxContainer" parent="OnQueOptionsMenuControl"]
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="OnQueOptionsMenuControl/InnerContainer"]
+clip_contents = true
+layout_mode = 2
+text = "Select an option"
+
+[node name="OptionsContainer" type="VBoxContainer" parent="OnQueOptionsMenuControl/InnerContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0

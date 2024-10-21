@@ -3,6 +3,8 @@ extends Control
 
 const PADDING = 8
 
+@export var on_que_options_menu:OnQueOptionsMenu
+
 @onready var main_container:HBoxContainer = $HBoxContainer
 @onready var page_button_prefab:TextureButton = $HBoxContainer/HBoxContainer/PageButtonPrefab
 @onready var start_button = $HBoxContainer/StartButton
@@ -18,6 +20,7 @@ func _ready() -> void:
 	CombatRootControl.QueController.end_of_round.connect(_round_ends)
 	start_button.pressed.connect(_start_button_pressed)
 	page_button_prefab.visible = false
+	on_que_options_menu.visible = false
 	pass # Replace with function body.
 
 
@@ -77,18 +80,21 @@ func _mouse_exited_action_button(_index, _key_name):
 	#ui_controler.mouse_exited_action_button(key_name)
 	pass
 
-func _page_button_pressed(_index, key_name):
+func _page_button_pressed(index, key_name):
 	var action:BaseAction = MainRootNode.action_library.get_action(key_name)
-	if action.OnQueUiState:
-		CombatUiControl.ui_state_controller.set_ui_state_from_path(
-			action.OnQueUiState,
-			{
-				"Actor": _actor,
-				"ActionKey": action.ActionKey,
-				
-			})
+	var on_que_options = action.get_on_que_options(_actor, CombatRootControl.Instance.GameState)
+	if on_que_options.size() > 0:
+		on_que_options_menu.visible = true
+		on_que_options_menu.position = get_local_mouse_position()# _buttons[index].position + Vector2(_buttons[index].size.x,0)
+		for opt:OnQueOptionsData in on_que_options:
+			on_que_options_menu.load_options(key_name, on_que_options, _on_all_que_options_selected)
 	else:
 		_actor.Que.que_action(action)
+
+func _on_all_que_options_selected(action_key:String, options_data:Dictionary):
+	var action:BaseAction = MainRootNode.action_library.get_action(action_key)
+	_actor.Que.que_action(action, options_data)
+	on_que_options_menu.visible = false
 
 func _start_button_pressed():
 	CombatUiControl.ui_state_controller.set_ui_state(UiStateController.UiStates.ExecRound)

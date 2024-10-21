@@ -14,6 +14,11 @@ func get_required_props()->Dictionary:
 func get_action_tags(_subaction_data:Dictionary)->Array:
 	return []
 
+## Return a of OnQueOptionsData to select the parent action is qued. 
+func get_on_que_options(parent_action:BaseAction, _subaction_data:Dictionary, _actor:BaseActor, _game_state:GameStateData)->Array:
+	#var example = OnQueOptionsData.new("SelectedItemId", "Select Item to use:", _actor.items._items.keys())
+	return []
+
 func do_thing(_parent_action:BaseAction, _subaction_data:Dictionary, _metadata:QueExecutionData,
 				_game_state:GameStateData, _actor:BaseActor):
 	printerr("BaseSubAction.do_thing: No Override.")

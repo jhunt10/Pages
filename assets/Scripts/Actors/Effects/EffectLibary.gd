@@ -3,8 +3,7 @@ class_name EffectLibary
 const EffectDir = "res://data/Effects/"
 
 # Dictionary of effect's base data config
-var _effects_data:Dictionary = {}
-
+static var _effects_data:Dictionary = {}
 static var _cached_subeffects:Dictionary = {}
 
 var loaded = false

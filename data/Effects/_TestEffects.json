@@ -1,1 +1,106 @@
-[{"DamageMods":{"DamageMod1":{"Conditions":{"ExcludeDamageTags":[],"ExcludeSourceTags":[],"LimitDamageTags":["Attack"],"LimitSourceTags":["Enemy","Page"]},"DamageModKey":"DamageMod1","DisplayName":"","ModType":"Scale","OnDealDamage":false,"OnTakeDamage":true,"Value":0.5}},"Description":"Split damage taken by ally","DisplayName":"Warding Bond","EffectKey":"WardingBond","LargeSprite":"TestHeart.png","LoadPath":"res://data/Effects","SmallSprite":"TestHeart.png","SnippetDesc":"Split damage taken by ally","StatMods":{"StatMod1":{"DisplayName":"Name to showup in stats tool tip","ModType":"Add","StatModKey":"StatMod1","StatName":"Strength","Value":100}},"SubEffects":{"3TurnDuration":{"DurationType":"Turn","DurationValue":3,"SubEffectScript":"res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_Duration.gd"},"ApplyWardToSelf":{"StatModKey":"StatMod1","SubEffectScript":"res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_ApplyStatMod.gd"}},"Tags":["Warding"]},{"DamageMods":{"DamageMod1":{"Conditions":{"ExcludeDamageTags":[],"ExcludeSourceTags":[],"LimitDamageTags":["Attack"],"LimitSourceTags":["Enemy","Page"]},"DamageModKey":"DamageMod1","DisplayName":"","ModType":"Scale","OnDealDamage":false,"OnTakeDamage":true,"Value":0.5}},"Description":"Split damage taken by ally","DisplayName":"Flash Text","EffectKey":"FlashText","LargeSprite":"ManaRegen.png","SmallSprite":"ManaRegen.png","SnippetDesc":"Split damage taken by ally","StatMods":{"StatMod1":{"DisplayName":"Name to showup in stats tool tip","ModType":"Add","StatModKey":"StatMod1","StatName":"Strength","Value":0}},"SubEffects":{"Flash Text":{"OptionalTriggers":["OnCreate","OnDeath"],"StatModKey":"StatMod1","SubEffectScript":"res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_FlashText.gd"}},"Tags":["Warding"]}]
+[
+    {
+        "DamageMods": {
+            "DamageMod1": {
+                "Conditions": {
+                    "ExcludeDamageTags": [],
+                    "ExcludeSourceTags": [],
+                    "LimitDamageTags": [
+                        "Attack"
+                    ],
+                    "LimitSourceTags": [
+                        "Enemy",
+                        "Page"
+                    ]
+                },
+                "DamageModKey": "DamageMod1",
+                "DisplayName": "",
+                "ModType": "Scale",
+                "OnDealDamage": false,
+                "OnTakeDamage": true,
+                "Value": 0.5
+            }
+        },
+        "Description": "Split damage taken by ally",
+        "DisplayName": "Warding Bond",
+        "EffectKey": "WardingBond",
+        "LargeSprite": "TestHeart.png",
+        "LoadPath": "res://data/Effects",
+        "SmallSprite": "TestHeart.png",
+        "SnippetDesc": "Split damage taken by ally",
+        "StatMods": {
+            "StatMod1": {
+                "DisplayName": "Name to showup in stats tool tip",
+                "ModType": "Add",
+                "StatModKey": "StatMod1",
+                "StatName": "Strength",
+                "Value": 100
+            }
+        },
+        "SubEffects": {
+            "3TurnDuration": {
+                "DurationType": "Turn",
+                "DurationValue": 3,
+                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_Duration.gd"
+            },
+            "ApplyWardToSelf": {
+                "StatModKey": "StatMod1",
+                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_ApplyStatMod.gd"
+            }
+        },
+        "Tags": [
+            "Warding"
+        ]
+    },
+    {
+        "DamageMods": {
+            "DamageMod1": {
+                "Conditions": {
+                    "ExcludeDamageTags": [],
+                    "ExcludeSourceTags": [],
+                    "LimitDamageTags": [
+                        "Attack"
+                    ],
+                    "LimitSourceTags": [
+                        "Enemy",
+                        "Page"
+                    ]
+                },
+                "DamageModKey": "DamageMod1",
+                "DisplayName": "",
+                "ModType": "Scale",
+                "OnDealDamage": false,
+                "OnTakeDamage": true,
+                "Value": 0.5
+            }
+        },
+        "Description": "Split damage taken by ally",
+        "DisplayName": "Flash Text",
+        "EffectKey": "FlashText",
+        "LargeSprite": "ManaRegen.png",
+        "SmallSprite": "ManaRegen.png",
+        "SnippetDesc": "Split damage taken by ally",
+        "StatMods": {
+            "StatMod1": {
+                "DisplayName": "Name to showup in stats tool tip",
+                "ModType": "Add",
+                "StatModKey": "StatMod1",
+                "StatName": "Strength",
+                "Value": 0
+            }
+        },
+        "SubEffects": {
+            "Flash Text": {
+                "Triggers": [
+                    "OnCreate",
+                    "OnDeath"
+                ],
+                "StatModKey": "StatMod1",
+                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_FlashText.gd"
+            }
+        },
+        "Tags": [
+            "Warding"
+        ]
+    }
+]

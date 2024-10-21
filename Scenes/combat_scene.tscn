@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=4 uid="uid://dfeilp6hbiuqs"]
+[gd_scene load_steps=31 format=4 uid="uid://dfeilp6hbiuqs"]
 
 [ext_resource type="Script" path="res://assets/Scripts/Scenes/combat_scene.gd" id="1_crigy"]
 [ext_resource type="Script" path="res://assets/Scripts/Map/map_controler_node.gd" id="3_vohw8"]
@@ -17,7 +17,6 @@
 [ext_resource type="Texture2D" uid="uid://ccv4ridl8evo8" path="res://assets/Sprites/UI/MenuButtonBackground.png" id="19_u4d2a"]
 [ext_resource type="Script" path="res://assets/Scripts/DevTools/dev_combat_data_control.gd" id="19_yc3tw"]
 [ext_resource type="Texture2D" uid="uid://s8s7rktavc7e" path="res://assets/Sprites/UI/BackPatches/Patch_32_8.png" id="20_6lcyn"]
-[ext_resource type="Script" path="res://assets/Scripts/Ui/DisplayNodes/Combat/page_option_menu_control.gd" id="20_dghsj"]
 [ext_resource type="Texture2D" uid="uid://brpsb4iq3cd3k" path="res://assets/Sprites/UI/MenuButtonBackground_Pressed.png" id="20_jcfy7"]
 [ext_resource type="Texture2D" uid="uid://b71e02wpy7dij" path="res://assets/Sprites/UI/GearButton.png" id="21_s2qa8"]
 [ext_resource type="Script" path="res://assets/Scripts/DevTools/que_cal_control.gd" id="22_4rk3c"]
@@ -1644,31 +1643,6 @@ offset_left = 16.0
 offset_top = 183.0
 offset_right = 56.0
 offset_bottom = 223.0
-
-[node name="PageOptionMenuControl" type="Control" parent="CombatUiControl"]
-anchors_preset = 0
-offset_left = 228.0
-offset_top = 261.0
-offset_right = 268.0
-offset_bottom = 301.0
-script = ExtResource("20_dghsj")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="CombatUiControl/PageOptionMenuControl"]
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_top = -40.0
-offset_right = 40.0
-grow_vertical = 0
-
-[node name="Button" type="Button" parent="CombatUiControl/PageOptionMenuControl/VBoxContainer"]
-layout_mode = 2
-text = "Option 1"
-
-[node name="Button2" type="Button" parent="CombatUiControl/PageOptionMenuControl/VBoxContainer"]
-layout_mode = 2
-text = "Option 1"
 
 [node name="DevDataControl" type="Control" parent="."]
 layout_mode = 1
