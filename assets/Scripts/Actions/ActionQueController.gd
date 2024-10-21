@@ -64,9 +64,8 @@ func _start_round():
 	sub_action_timer = 0
 	
 	for actor:BaseActor in CombatRootControl.Instance.GameState.list_actors():
-		if CombatRootControl.Instance.player_actor_key == actor.ActorKey:
-			continue
-		actor.auto_build_que(0)
+		if actor._allow_auto_que:
+			actor.auto_build_que(0)
 	
 	execution_state = ActionStates.Running
 	start_of_round.emit()

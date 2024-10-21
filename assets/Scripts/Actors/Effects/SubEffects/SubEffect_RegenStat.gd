@@ -1,10 +1,13 @@
-class_name SubEffect_FlashText
+class_name SubEffect_RegenStat
 extends BaseSubEffect
+
+enum RegenTypes {Turn, Round, Trigger}
 
 func get_required_props()->Dictionary:
 	return {
-		"PreFix": BaseSubEffect.SubEffectPropTypes.StringVal,
-		"Triggers": BaseSubEffect.SubEffectPropTypes.Triggers
+		"Triggers": BaseSubEffect.SubEffectPropTypes.Triggers,
+		"StatName": BaseSubEffect.SubEffectPropTypes.StringVal,
+		"Value": BaseSubEffect.SubEffectPropTypes.IntVal
 	}
 
 func get_triggers(effect:BaseEffect, subeffect_data:Dictionary)->Array:
@@ -15,5 +18,7 @@ func get_triggers(effect:BaseEffect, subeffect_data:Dictionary)->Array:
 	return list
 
 func on_effect_trigger(effect:BaseEffect, subeffect_data:Dictionary, trigger:BaseEffect.EffectTriggers, _game_state:GameStateData):
-	var trig_text = BaseEffect.EffectTriggers.keys()[trigger]
-	CombatRootControl.Instance.create_flash_text_on_actor(effect._actor, trig_text, Color.BLUE)
+	var actor:BaseActor = effect.get_effected_actor()
+	var stat_name = subeffect_data['StatName']
+	var val = subeffect_data['Value']
+	actor.stats.add_to_bar_stat(stat_name, val)

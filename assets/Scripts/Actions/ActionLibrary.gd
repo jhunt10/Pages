@@ -2,7 +2,7 @@ class_name ActionLibrary
 
 const TILE_WIDTH = 64
 const TILE_HIGHT = 56
-
+const NO_ICON_SPRITE = "res://assets/Sprites/BadSprite.png"
 const ActionDir = "res://data/Actions"
 
 var _action_list:Dictionary = {}

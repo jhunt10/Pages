@@ -10,18 +10,9 @@ func get_enum_option_values()->Dictionary: return {}
 func _init() -> void:
 	pass
 
-func get_required_triggers(_effect:BaseEffect, _subeffect_data:Dictionary)->Array:
-	return []
-
-func get_optional_triggers(_effect:BaseEffect, subeffect_data:Dictionary)->Array:
+## Returns an array of EffectTriggers on which to call this SubEffect
+func get_triggers(_effect:BaseEffect, subeffect_data:Dictionary)->Array:
 	var list = []
-	if subeffect_data.has("OptionalTriggers"):
-		for trig_val in subeffect_data['OptionalTriggers']:
-			if trig_val is String:
-				if BaseEffect.EffectTriggers.has(trig_val):
-					list.append(BaseEffect.EffectTriggers.get(trig_val))
-			else:
-				list.append(trig_val)
 	return list
 
 func get_active_stat_mods(_effect:BaseEffect, _subeffect_data:Dictionary)->Array:
@@ -52,3 +43,16 @@ func on_move(_effect:BaseEffect, _subeffect_data:Dictionary,
 func on_use_item(_effect:BaseEffect, _subeffect_data:Dictionary,
 				_game_state:GameStateData, _item, _target):
 	pass
+
+## Convert an array of String or int to an array of EffectTriggers 
+func _array_to_trigger_list(arr:Array)->Array:
+	var out_list = []
+	for trig_val in arr:
+		if trig_val is String:
+			if BaseEffect.EffectTriggers.has(trig_val):
+				out_list.append(BaseEffect.EffectTriggers.get(trig_val))
+		elif trig_val is int:
+			out_list.append(trig_val)
+		else:
+			printerr("BaseSubEffect._array_to_trigger_list: Unknown EffectTrigger value '%s'." % [trig_val])
+	return out_list

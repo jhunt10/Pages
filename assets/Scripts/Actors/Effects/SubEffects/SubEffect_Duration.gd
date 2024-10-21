@@ -12,11 +12,12 @@ func get_enum_option_values()->Dictionary: return {
 	"DurationType": DurationTypes.keys()
 }
 
-func get_required_triggers(_effect:BaseEffect, _subeffect_data:Dictionary)->Array:
-	return [BaseEffect.EffectTriggers.OnCreate]
-
-func get_optional_triggers(effect:BaseEffect, subeffect_data:Dictionary)->Array:
+func get_triggers(effect:BaseEffect, subeffect_data:Dictionary)->Array:
 	var list = super(effect, subeffect_data)
+	
+	if !list.has(BaseEffect.EffectTriggers.OnCreate):
+		list.append(BaseEffect.EffectTriggers.OnCreate)
+	
 	var duration_type = DurationTypes.get(subeffect_data['DurationType'])
 	if duration_type == DurationTypes.Turn:
 		list.append(BaseEffect.EffectTriggers.OnTurnEnd)

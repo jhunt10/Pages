@@ -9,8 +9,13 @@ enum EffectTriggers {
 	OnDeath, OnKill
 	}
 
-## Triggers which require additional information have thier own methods and do not use trigger_effect()
-const TRIGGERS_WITH_ADDITIONAL_DATA = [EffectTriggers.OnMove, EffectTriggers.OnDamagDealt, EffectTriggers.OnDamageTaken, EffectTriggers.OnKill ]
+## Triggers which require additional information. They have thier own methods and can not be called from trigger_effect()
+const TRIGGERS_WITH_ADDITIONAL_DATA = [
+	EffectTriggers.OnMove, 
+	EffectTriggers.OnDamagDealt, 
+	EffectTriggers.OnDamageTaken, 
+	EffectTriggers.OnKill 
+]
 
 var Id : String = str(ResourceUID.create_id())
 func get_tagable_id(): return Id
@@ -60,6 +65,9 @@ func _init(actor:BaseActor, data:Dictionary) -> void:
 	_icon_sprite = EffectData['SmallSprite']
 	_cache_triggers()
 
+func get_effected_actor()->BaseActor:
+	return _actor
+
 func get_sprite():
 	return load(LoadPath + "/" +_icon_sprite)
 
@@ -89,8 +97,7 @@ func _cache_triggers():
 	for sub_effect_key in SubEffectDatas.keys():
 		var sub_effect_data = SubEffectDatas[sub_effect_key]
 		var sub_effect = _get_sub_effect_script(sub_effect_key)
-		var trigger_list = sub_effect.get_required_triggers(self, sub_effect_data)
-		trigger_list.append_array(sub_effect.get_optional_triggers(self, sub_effect_data))
+		var trigger_list = sub_effect.get_triggers(self, sub_effect_data)
 		for trig:EffectTriggers in trigger_list:
 			if not _triggers_to_sub_effect_keys.keys().has(trig):
 				_triggers_to_sub_effect_keys[trig] = []

@@ -17,8 +17,7 @@ static var QueController:ActionQueController = ActionQueController.new()
 var GameState:GameStateData
 
 # Actors to create on ready {ActorKey,Position}
-var actor_creation_que:Dictionary = {}
-var player_actor_key:String
+var actor_creation_que:Array
 
 func _enter_tree() -> void:
 	if !Instance: 
@@ -41,15 +40,16 @@ func _ready() -> void:
 		queue_free()
 		return
 	
-	for actor_key in actor_creation_que.keys():
+	for actor_info in actor_creation_que:
+		var actor_key = actor_info['ActorKey']
+		var actor_pos = actor_info['Pos']
 		var actor_data = MainRootNode.actor_libary.get_actor_data(actor_key)
-		var new_actor = create_new_actor(actor_data, 1, actor_creation_que[actor_key])
-		if actor_key == player_actor_key:
+		var new_actor = create_new_actor(actor_data, 1, actor_pos)
+		if actor_info.get('IsPlayer', false):
 			new_actor.FactionIndex = 0
 			StatDisplay.set_actor(new_actor)
 			QueInput.set_actor(new_actor)
 			QueDisplay.set_actor(new_actor)
-		new_actor.effects.add_effect("FlashText", {})
 	actor_creation_que.clear()
 	
 	ui_controller.set_ui_state(UiStateController.UiStates.ActionInput)
@@ -59,14 +59,13 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	QueController.update(delta)
 
-func set_init_state(map_data:Dictionary, player_actor:String, actors_pos:Dictionary):
+func set_init_state(map_data:Dictionary, actor_creation_que:Array):
 	if GameState:
 		printerr("Combate Scene already init")
 		return
 	GameState = GameStateData.new()
 	GameState.MapState = MapStateData.new(GameState, map_data)
-	player_actor_key = player_actor
-	actor_creation_que = actors_pos
+	self.actor_creation_que = actor_creation_que
 	
 func kill_actor(actor:BaseActor):
 	actor.die()

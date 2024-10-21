@@ -27,13 +27,22 @@ func _load_test_map():
 func start_combat():
 	current_scene.queue_free()
 	var combat_scene:CombatRootControl = load("res://Scenes/combat_scene.tscn").instantiate()
-	var actors = {}
-	actors['TestTarget'] = MapPos.new(5,2,0,0)
-	actors['TestOtherTarget'] = MapPos.new(6,2,0,0)
-	#actors['TestOtherTarget'] = MapPos.new(5,2,1,0)
-	actors['TestActor'] = MapPos.new(5,5,0,0)
+	var actors = []
+	actors.append({
+		'ActorKey': 'TestActor',
+		'Pos': MapPos.new(5,5,0,0),
+		'IsPlayer': true
+	})
+	actors.append({
+		'ActorKey': 'TestTarget',
+		'Pos': MapPos.new(5,2,0,0),
+	})
+	actors.append({
+		'ActorKey': 'TestTarget',
+		'Pos': MapPos.new(6,2,0,0),
+	})
 	var map_data = _load_test_map()
-	combat_scene.set_init_state(map_data, "TestActor", actors)
+	combat_scene.set_init_state(map_data, actors)
 	current_scene = combat_scene
 	self.add_child(current_scene)
 
