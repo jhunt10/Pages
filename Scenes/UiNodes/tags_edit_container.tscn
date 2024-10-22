@@ -7,19 +7,17 @@
 [ext_resource type="Script" path="res://assets/Scripts/DevTools/self_scale_line_edit.gd" id="4_g2cgw"]
 
 [node name="TagEditContainer" type="Container" node_paths=PackedStringArray("tag_entry_container", "tags_container", "background", "inner_container")]
-custom_minimum_size = Vector2(117, 104)
-offset_right = 129.0
-offset_bottom = 110.0
+custom_minimum_size = Vector2(105, 84)
+offset_right = 105.0
+offset_bottom = 84.0
 script = ExtResource("1_8i8wl")
 tag_entry_container = NodePath("InnerContainer/TagEditContainer")
 tags_container = NodePath("InnerContainer/FlowContainer")
 background = NodePath("Background")
 inner_container = NodePath("InnerContainer")
-fill_x = null
-fill_y = null
+margin_override = 6
 
 [node name="Background" type="NinePatchRect" parent="."]
-custom_minimum_size = Vector2(117, 104)
 layout_mode = 2
 texture = ExtResource("2_7corr")
 patch_margin_left = 12
@@ -44,16 +42,14 @@ layout_mode = 2
 text = "Add"
 
 [node name="TagEditContainer" type="Container" parent="InnerContainer" node_paths=PackedStringArray("background", "inner_container")]
-custom_minimum_size = Vector2(85, 41)
+custom_minimum_size = Vector2(77, 33)
 layout_mode = 2
 script = ExtResource("3_uu4md")
 background = NodePath("Background")
 inner_container = NodePath("InnerContainer")
-fill_x = null
-fill_y = null
+margin_override = 4
 
 [node name="Background" type="NinePatchRect" parent="InnerContainer/TagEditContainer"]
-custom_minimum_size = Vector2(85, 41)
 layout_mode = 2
 texture = ExtResource("3_bns26")
 patch_margin_left = 8
