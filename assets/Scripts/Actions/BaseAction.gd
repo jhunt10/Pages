@@ -45,7 +45,7 @@ func _init(file_load_path:String, args:Dictionary) -> void:
 	Tags = args['Tags']
 	
 	SmallSprite = args['SmallSprite']
-	LargeSprite = args['LargeSprite']
+	LargeSprite = args.get('LargeSprite', '')
 	if args.keys().has("OnQueUiState"):
 		OnQueUiState = args['OnQueUiState']
 	

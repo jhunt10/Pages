@@ -1,0 +1,378 @@
+[gd_scene load_steps=11 format=3 uid="uid://dijjpvdc64bvf"]
+
+[ext_resource type="Script" path="res://assets/Scripts/Ui/DisplayNodes/back_patch_container.gd" id="1_0ya28"]
+[ext_resource type="Script" path="res://assets/Scripts/DevTools/EditorHelpers/root_editor_control.gd" id="1_5ssfy"]
+[ext_resource type="Texture2D" uid="uid://io35wpu802fp" path="res://assets/Sprites/UI/BackPatches/Patch_64_12.png" id="2_8og6d"]
+[ext_resource type="Texture2D" uid="uid://s8s7rktavc7e" path="res://assets/Sprites/UI/BackPatches/Patch_32_8.png" id="3_ja5af"]
+[ext_resource type="Script" path="res://Scenes/UiNodes/loaded_option_button.gd" id="4_052n5"]
+[ext_resource type="Texture2D" uid="uid://dul8y1l1gw420" path="res://assets/Sprites/UI/BackPatches/Patch_32_8_Dark.png" id="4_yq68e"]
+[ext_resource type="PackedScene" uid="uid://cp8kja0sx5u7a" path="res://Scenes/UiNodes/tags_edit_container.tscn" id="5_uoqiy"]
+[ext_resource type="Script" path="res://assets/Scripts/DevTools/EditorHelpers/details_editor_container.gd" id="6_efdfj"]
+[ext_resource type="Texture2D" uid="uid://dqdbifqrtc5py" path="res://assets/Sprites/UI/DevTools/small_icon_box.png" id="7_1axny"]
+[ext_resource type="Texture2D" uid="uid://cl0vvm446vnhg" path="res://assets/Sprites/UI/DevTools/large_icon_box.png" id="8_rdpqf"]
+
+[node name="RootEditorControl" type="Container" node_paths=PackedStringArray("exit_button", "file_path_line_edit", "file_name_line_edit", "open_file_button", "save_file_button", "load_file_button", "quick_load_option_button", "edit_selection_option_button", "details_editor_control", "background", "inner_container")]
+custom_minimum_size = Vector2(1148, 544)
+offset_right = 1148.0
+offset_bottom = 544.0
+script = ExtResource("1_5ssfy")
+exit_button = NodePath("InnerContainer/TopBarContainer/ExitButton")
+file_path_line_edit = NodePath("InnerContainer/TopBarContainer/FileSelectionContainer/FileSelectionInnerContainer/FilePathContainer/FilePathLineEdit")
+file_name_line_edit = NodePath("InnerContainer/TopBarContainer/FileSelectionContainer/FileSelectionInnerContainer/FileNameContainer/FileNameLineEdit")
+open_file_button = NodePath("InnerContainer/TopBarContainer/FileSelectionContainer/FileSelectionInnerContainer/FilePathContainer/OpenButton")
+save_file_button = NodePath("InnerContainer/TopBarContainer/FileSelectionContainer/FileSelectionInnerContainer/FileNameContainer/SaveButton")
+load_file_button = NodePath("InnerContainer/TopBarContainer/FileSelectionContainer/FileSelectionInnerContainer/FileNameContainer/LoadButton")
+quick_load_option_button = NodePath("InnerContainer/TopBarContainer/EditSelectionContainer/InnerContainer/QuickLoadContainer/QuickLoadOptionButton")
+edit_selection_option_button = NodePath("InnerContainer/TopBarContainer/EditSelectionContainer/InnerContainer/EditSelectorContainer/EditSelectorOptionButton")
+details_editor_control = NodePath("InnerContainer/MainContainer/LeftContainer/DetailsEditorContainer")
+background = NodePath("Background")
+inner_container = NodePath("InnerContainer")
+margin_override = 6
+force_fill_x = true
+force_fill_y = true
+
+[node name="Background" type="NinePatchRect" parent="."]
+layout_mode = 2
+texture = ExtResource("2_8og6d")
+patch_margin_left = 12
+patch_margin_top = 12
+patch_margin_right = 12
+patch_margin_bottom = 12
+
+[node name="InnerContainer" type="BoxContainer" parent="."]
+layout_mode = 2
+vertical = true
+
+[node name="TopBarContainer" type="HBoxContainer" parent="InnerContainer"]
+layout_mode = 2
+
+[node name="FileSelectionContainer" type="Container" parent="InnerContainer/TopBarContainer" node_paths=PackedStringArray("background", "inner_container")]
+custom_minimum_size = Vector2(16, 82)
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("1_0ya28")
+background = NodePath("Background")
+inner_container = NodePath("FileSelectionInnerContainer")
+
+[node name="Background" type="NinePatchRect" parent="InnerContainer/TopBarContainer/FileSelectionContainer"]
+layout_mode = 2
+texture = ExtResource("4_yq68e")
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+
+[node name="FileSelectionInnerContainer" type="BoxContainer" parent="InnerContainer/TopBarContainer/FileSelectionContainer"]
+custom_minimum_size = Vector2(360, 0)
+layout_mode = 2
+vertical = true
+
+[node name="FilePathContainer" type="HBoxContainer" parent="InnerContainer/TopBarContainer/FileSelectionContainer/FileSelectionInnerContainer"]
+layout_mode = 2
+
+[node name="FilePathLabel" type="Label" parent="InnerContainer/TopBarContainer/FileSelectionContainer/FileSelectionInnerContainer/FilePathContainer"]
+layout_mode = 2
+text = "File Path:"
+
+[node name="FilePathLineEdit" type="LineEdit" parent="InnerContainer/TopBarContainer/FileSelectionContainer/FileSelectionInnerContainer/FilePathContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="OpenButton" type="Button" parent="InnerContainer/TopBarContainer/FileSelectionContainer/FileSelectionInnerContainer/FilePathContainer"]
+layout_mode = 2
+text = "Open"
+
+[node name="FileNameContainer" type="HBoxContainer" parent="InnerContainer/TopBarContainer/FileSelectionContainer/FileSelectionInnerContainer"]
+layout_mode = 2
+
+[node name="FileNameLabel" type="Label" parent="InnerContainer/TopBarContainer/FileSelectionContainer/FileSelectionInnerContainer/FileNameContainer"]
+layout_mode = 2
+text = "File Path:"
+
+[node name="FileNameLineEdit" type="LineEdit" parent="InnerContainer/TopBarContainer/FileSelectionContainer/FileSelectionInnerContainer/FileNameContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SaveButton" type="Button" parent="InnerContainer/TopBarContainer/FileSelectionContainer/FileSelectionInnerContainer/FileNameContainer"]
+layout_mode = 2
+text = "Save"
+
+[node name="LoadButton" type="Button" parent="InnerContainer/TopBarContainer/FileSelectionContainer/FileSelectionInnerContainer/FileNameContainer"]
+layout_mode = 2
+text = "Load
+"
+
+[node name="FileDialog" type="FileDialog" parent="InnerContainer/TopBarContainer/FileSelectionContainer"]
+
+[node name="EditSelectionContainer" type="Container" parent="InnerContainer/TopBarContainer" node_paths=PackedStringArray("background", "inner_container")]
+custom_minimum_size = Vector2(16, 84)
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("1_0ya28")
+background = NodePath("Background")
+inner_container = NodePath("InnerContainer")
+
+[node name="Background" type="NinePatchRect" parent="InnerContainer/TopBarContainer/EditSelectionContainer"]
+layout_mode = 2
+texture = ExtResource("4_yq68e")
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+
+[node name="InnerContainer" type="BoxContainer" parent="InnerContainer/TopBarContainer/EditSelectionContainer"]
+custom_minimum_size = Vector2(360, 0)
+layout_mode = 2
+vertical = true
+
+[node name="QuickLoadContainer" type="HBoxContainer" parent="InnerContainer/TopBarContainer/EditSelectionContainer/InnerContainer"]
+layout_mode = 2
+
+[node name="QuickLoadLabel" type="Label" parent="InnerContainer/TopBarContainer/EditSelectionContainer/InnerContainer/QuickLoadContainer"]
+layout_mode = 2
+text = "Quick Load:"
+
+[node name="QuickLoadOptionButton" type="OptionButton" parent="InnerContainer/TopBarContainer/EditSelectionContainer/InnerContainer/QuickLoadContainer"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+size_flags_horizontal = 3
+fit_to_longest_item = false
+script = ExtResource("4_052n5")
+allways_show_none = true
+no_option_text = "-New-"
+
+[node name="EditSelectorContainer" type="HBoxContainer" parent="InnerContainer/TopBarContainer/EditSelectionContainer/InnerContainer"]
+layout_mode = 2
+
+[node name="EditSelectorLabel" type="Label" parent="InnerContainer/TopBarContainer/EditSelectionContainer/InnerContainer/EditSelectorContainer"]
+layout_mode = 2
+text = "Select To Edit:"
+
+[node name="EditSelectorOptionButton" type="OptionButton" parent="InnerContainer/TopBarContainer/EditSelectionContainer/InnerContainer/EditSelectorContainer"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+size_flags_horizontal = 3
+fit_to_longest_item = false
+script = ExtResource("4_052n5")
+
+[node name="ExitButton" type="Button" parent="InnerContainer/TopBarContainer"]
+layout_mode = 2
+text = " X "
+
+[node name="MainContainer" type="HBoxContainer" parent="InnerContainer"]
+layout_mode = 2
+
+[node name="LeftContainer" type="VBoxContainer" parent="InnerContainer/MainContainer"]
+layout_mode = 2
+
+[node name="DetailsEditorContainer" type="Container" parent="InnerContainer/MainContainer/LeftContainer" node_paths=PackedStringArray("object_key_line_edit", "display_name_line_edit", "snippet_line_edit", "description_text_edit", "tags_edit_container", "small_icon_texture_rect", "large_icon_texture_rect", "small_icon_option_button", "large_icon_option_button", "root_editor_control", "background", "inner_container")]
+custom_minimum_size = Vector2(376, 444)
+layout_mode = 2
+script = ExtResource("6_efdfj")
+object_key_line_edit = NodePath("InnerContainer/ObjectKeyContainer/ObjectKeyLineEdit")
+display_name_line_edit = NodePath("InnerContainer/DisplayNameContainer/DisplayNameLineEdit")
+snippet_line_edit = NodePath("InnerContainer/SnippetContainer/SnippetLineEdit")
+description_text_edit = NodePath("InnerContainer/DescriptionContainer/DescriptionTextEdit")
+tags_edit_container = NodePath("InnerContainer/TagEditContainer")
+small_icon_texture_rect = NodePath("InnerContainer/IconsContainer/InnerContainer/LabelContainer/SmallIconBackground/SmallIconRect")
+large_icon_texture_rect = NodePath("InnerContainer/IconsContainer/InnerContainer/LargeIconBackground/LargeIconRect")
+small_icon_option_button = NodePath("InnerContainer/IconsContainer/InnerContainer/VBoxContainer/SmallOptionContainer/SmallOptionButton")
+large_icon_option_button = NodePath("InnerContainer/IconsContainer/InnerContainer/VBoxContainer/LargeOptionContainer/LargeOptionButton")
+root_editor_control = NodePath("../../../..")
+background = NodePath("Background")
+inner_container = NodePath("InnerContainer")
+
+[node name="Background" type="NinePatchRect" parent="InnerContainer/MainContainer/LeftContainer/DetailsEditorContainer"]
+custom_minimum_size = Vector2(376, 16)
+layout_mode = 2
+texture = ExtResource("4_yq68e")
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+
+[node name="InnerContainer" type="BoxContainer" parent="InnerContainer/MainContainer/LeftContainer/DetailsEditorContainer"]
+custom_minimum_size = Vector2(360, 0)
+layout_mode = 2
+vertical = true
+
+[node name="ObjectKeyContainer" type="HBoxContainer" parent="InnerContainer/MainContainer/LeftContainer/DetailsEditorContainer/InnerContainer"]
+layout_mode = 2
+
+[node name="ObjectKeyLabel" type="Label" parent="InnerContainer/MainContainer/LeftContainer/DetailsEditorContainer/InnerContainer/ObjectKeyContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Object Key:"
+
+[node name="ObjectKeyLineEdit" type="LineEdit" parent="InnerContainer/MainContainer/LeftContainer/DetailsEditorContainer/InnerContainer/ObjectKeyContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="IconsContainer" type="Container" parent="InnerContainer/MainContainer/LeftContainer/DetailsEditorContainer/InnerContainer" node_paths=PackedStringArray("background", "inner_container")]
+custom_minimum_size = Vector2(16, 84)
+layout_mode = 2
+script = ExtResource("1_0ya28")
+background = NodePath("Background")
+inner_container = NodePath("InnerContainer")
+force_fill_x = true
+
+[node name="Background" type="NinePatchRect" parent="InnerContainer/MainContainer/LeftContainer/DetailsEditorContainer/InnerContainer/IconsContainer"]
+layout_mode = 2
+texture = ExtResource("3_ja5af")
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+
+[node name="InnerContainer" type="BoxContainer" parent="InnerContainer/MainContainer/LeftContainer/DetailsEditorContainer/InnerContainer/IconsContainer"]
+layout_mode = 2
+
+[node name="LabelContainer" type="VBoxContainer" parent="InnerContainer/MainContainer/LeftContainer/DetailsEditorContainer/InnerContainer/IconsContainer/InnerContainer"]
+layout_mode = 2
+alignment = 2
+
+[node name="Label" type="Label" parent="InnerContainer/MainContainer/LeftContainer/DetailsEditorContainer/InnerContainer/IconsContainer/InnerContainer/LabelContainer"]
+layout_mode = 2
+size_flags_vertical = 2
+theme_override_font_sizes/font_size = 19
+text = "Icons"
+
+[node name="SmallIconBackground" type="TextureRect" parent="InnerContainer/MainContainer/LeftContainer/DetailsEditorContainer/InnerContainer/IconsContainer/InnerContainer/LabelContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+texture = ExtResource("7_1axny")
+stretch_mode = 3
+
+[node name="SmallIconRect" type="TextureRect" parent="InnerContainer/MainContainer/LeftContainer/DetailsEditorContainer/InnerContainer/IconsContainer/InnerContainer/LabelContainer/SmallIconBackground"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LargeIconBackground" type="TextureRect" parent="InnerContainer/MainContainer/LeftContainer/DetailsEditorContainer/InnerContainer/IconsContainer/InnerContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("8_rdpqf")
+
+[node name="LargeIconRect" type="TextureRect" parent="InnerContainer/MainContainer/LeftContainer/DetailsEditorContainer/InnerContainer/IconsContainer/InnerContainer/LargeIconBackground"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="InnerContainer/MainContainer/LeftContainer/DetailsEditorContainer/InnerContainer/IconsContainer/InnerContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SmallOptionContainer" type="HBoxContainer" parent="InnerContainer/MainContainer/LeftContainer/DetailsEditorContainer/InnerContainer/IconsContainer/InnerContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="SmallOptionLabel" type="Label" parent="InnerContainer/MainContainer/LeftContainer/DetailsEditorContainer/InnerContainer/IconsContainer/InnerContainer/VBoxContainer/SmallOptionContainer"]
+layout_mode = 2
+text = "Small:"
+
+[node name="SmallOptionButton" type="OptionButton" parent="InnerContainer/MainContainer/LeftContainer/DetailsEditorContainer/InnerContainer/IconsContainer/InnerContainer/VBoxContainer/SmallOptionContainer"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+size_flags_horizontal = 3
+fit_to_longest_item = false
+script = ExtResource("4_052n5")
+
+[node name="LargeOptionContainer" type="HBoxContainer" parent="InnerContainer/MainContainer/LeftContainer/DetailsEditorContainer/InnerContainer/IconsContainer/InnerContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="LargeOptionLabel" type="Label" parent="InnerContainer/MainContainer/LeftContainer/DetailsEditorContainer/InnerContainer/IconsContainer/InnerContainer/VBoxContainer/LargeOptionContainer"]
+layout_mode = 2
+text = "Large:"
+
+[node name="LargeOptionButton" type="OptionButton" parent="InnerContainer/MainContainer/LeftContainer/DetailsEditorContainer/InnerContainer/IconsContainer/InnerContainer/VBoxContainer/LargeOptionContainer"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+size_flags_horizontal = 3
+fit_to_longest_item = false
+script = ExtResource("4_052n5")
+
+[node name="DisplayNameContainer" type="HBoxContainer" parent="InnerContainer/MainContainer/LeftContainer/DetailsEditorContainer/InnerContainer"]
+layout_mode = 2
+
+[node name="DisplayNameLabel" type="Label" parent="InnerContainer/MainContainer/LeftContainer/DetailsEditorContainer/InnerContainer/DisplayNameContainer"]
+layout_mode = 2
+text = "Display Name:"
+
+[node name="DisplayNameLineEdit" type="LineEdit" parent="InnerContainer/MainContainer/LeftContainer/DetailsEditorContainer/InnerContainer/DisplayNameContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SnippetContainer" type="HBoxContainer" parent="InnerContainer/MainContainer/LeftContainer/DetailsEditorContainer/InnerContainer"]
+layout_mode = 2
+
+[node name="SnippetLabel" type="Label" parent="InnerContainer/MainContainer/LeftContainer/DetailsEditorContainer/InnerContainer/SnippetContainer"]
+layout_mode = 2
+text = "Snippet:"
+
+[node name="SnippetLineEdit" type="LineEdit" parent="InnerContainer/MainContainer/LeftContainer/DetailsEditorContainer/InnerContainer/SnippetContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="DescriptionContainer" type="VBoxContainer" parent="InnerContainer/MainContainer/LeftContainer/DetailsEditorContainer/InnerContainer"]
+layout_mode = 2
+
+[node name="DescriptionLabel" type="Label" parent="InnerContainer/MainContainer/LeftContainer/DetailsEditorContainer/InnerContainer/DescriptionContainer"]
+layout_mode = 2
+text = "Description:"
+
+[node name="DescriptionTextEdit" type="TextEdit" parent="InnerContainer/MainContainer/LeftContainer/DetailsEditorContainer/InnerContainer/DescriptionContainer"]
+custom_minimum_size = Vector2(0, 120)
+layout_mode = 2
+wrap_mode = 1
+
+[node name="TagEditContainer" parent="InnerContainer/MainContainer/LeftContainer/DetailsEditorContainer/InnerContainer" instance=ExtResource("5_uoqiy")]
+custom_minimum_size = Vector2(12, 84)
+layout_mode = 2
+force_fill_x = true
+
+[node name="MiddleContainer" type="Container" parent="InnerContainer/MainContainer" node_paths=PackedStringArray("background", "inner_container")]
+custom_minimum_size = Vector2(376, 16)
+layout_mode = 2
+script = ExtResource("1_0ya28")
+background = NodePath("Background")
+inner_container = NodePath("InnerContainer")
+
+[node name="Background" type="NinePatchRect" parent="InnerContainer/MainContainer/MiddleContainer"]
+custom_minimum_size = Vector2(376, 16)
+layout_mode = 2
+texture = ExtResource("3_ja5af")
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+
+[node name="InnerContainer" type="BoxContainer" parent="InnerContainer/MainContainer/MiddleContainer"]
+custom_minimum_size = Vector2(360, 0)
+layout_mode = 2
+vertical = true
+
+[node name="RightContainer" type="Container" parent="InnerContainer/MainContainer" node_paths=PackedStringArray("background", "inner_container")]
+custom_minimum_size = Vector2(376, 16)
+layout_mode = 2
+script = ExtResource("1_0ya28")
+background = NodePath("Background")
+inner_container = NodePath("InnerContainer")
+
+[node name="Background" type="NinePatchRect" parent="InnerContainer/MainContainer/RightContainer"]
+custom_minimum_size = Vector2(376, 16)
+layout_mode = 2
+texture = ExtResource("3_ja5af")
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+
+[node name="InnerContainer" type="BoxContainer" parent="InnerContainer/MainContainer/RightContainer"]
+custom_minimum_size = Vector2(360, 0)
+layout_mode = 2
+vertical = true

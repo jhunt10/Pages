@@ -5,7 +5,7 @@ extends LineEdit
 @export var resize:bool = false
 @export var hidden_text_edit:TextEdit
 
-var _padding: int = 8
+@export var _padding: int = 8
 var _parent_width_diff:int = 0
 var _orig_min_size:Vector2i
 

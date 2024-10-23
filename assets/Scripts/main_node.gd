@@ -16,7 +16,7 @@ func _ready() -> void:
 		self.queue_free()
 		return
 	Instance = self
-	current_scene = load("res://Scenes/main_menu_root_control.tscn").instantiate()
+	current_scene = load("res://Scenes/Editors/PageEditor/page_editor_control_scene.tscn").instantiate()
 	self.add_child(current_scene)
 
 func _load_test_map():

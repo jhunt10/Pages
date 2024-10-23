@@ -35,6 +35,8 @@ func set_disabled(val:bool):
 		turn_input.disabled = false
 
 func set_value(val):
+	if val == null:
+		return
 	if val is String:
 		val = JSON.parse_string(val)
 	if val is Array:
@@ -47,7 +49,7 @@ func set_value(val):
 		if val.size() == 4:
 			turn_input.select(int(val[3]+4)%4)
 	
-func get_val():
+func get_val()->String:
 	return str([x_input.value, y_input.value, 0, turn_input.selected])
 	
 func lose_focus_if_has():

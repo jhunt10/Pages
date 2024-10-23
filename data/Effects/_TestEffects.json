@@ -1,5 +1,14 @@
 [
     {
+        "EffectKey": "WardingBond",
+        "Details":
+        {
+            "Description": "Split damage taken by ally",
+            "DisplayName": "Warding Bond",
+            "SnippetDesc": "Split damage taken by ally",
+            "SmallIcon": "TestHeart.png",
+            "LargeIcon": "TestHeart.png"
+        },
         "DamageMods": {
             "DamageMod1": {
                 "Conditions": {
@@ -21,13 +30,7 @@
                 "Value": 0.5
             }
         },
-        "Description": "Split damage taken by ally",
-        "DisplayName": "Warding Bond",
-        "EffectKey": "WardingBond",
-        "LargeSprite": "TestHeart.png",
-        "LoadPath": "res://data/Effects",
-        "SmallSprite": "TestHeart.png",
-        "SnippetDesc": "Split damage taken by ally",
+        
         "StatMods": {
             "StatMod1": {
                 "DisplayName": "Name to showup in stats tool tip",

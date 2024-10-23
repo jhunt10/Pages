@@ -4,7 +4,7 @@ extends Container
 
 static var global_refresh_list:Array = []
 
-const LOGGING = false
+const LOGGING = true
 
 @export var global_refresh:bool = false
 @export var refresh:bool = false
@@ -17,6 +17,7 @@ const LOGGING = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	if Engine.is_editor_hint(): return
 	pass # Replace with function body.
 
 
