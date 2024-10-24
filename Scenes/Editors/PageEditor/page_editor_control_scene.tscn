@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://bhfn0tyxcesh3"]
+[gd_scene load_steps=26 format=3 uid="uid://bhfn0tyxcesh3"]
 
 [ext_resource type="Script" path="res://Scenes/Editors/PageEditor/Scripts/page_editor_control.gd" id="1_j87ob"]
 [ext_resource type="Texture2D" uid="uid://io35wpu802fp" path="res://assets/Sprites/UI/BackPatches/Patch_64_12.png" id="2_57tad"]
@@ -22,8 +22,11 @@
 [ext_resource type="Script" path="res://Scenes/Editors/PageEditor/Scripts/SubEditors/cost_edit_entry_container.gd" id="15_2nobb"]
 [ext_resource type="Script" path="res://Scenes/Editors/PageEditor/Scripts/SubEditors/damage_subeditor_container.gd" id="20_j2ru7"]
 [ext_resource type="Script" path="res://Scenes/Editors/PageEditor/Scripts/SubEditors/damage_edit_entry_container.gd" id="21_re071"]
+[ext_resource type="Script" path="res://Scenes/Editors/SharedSubEditors/subeditors_tabs_control.gd" id="21_yq8bh"]
+[ext_resource type="Script" path="res://Scenes/Editors/PageEditor/Scripts/SubEditors/missile_subeditor_container.gd" id="23_2sg21"]
+[ext_resource type="Script" path="res://Scenes/Editors/PageEditor/Scripts/SubEditors/missile_edit_entry_container.gd" id="23_8euos"]
 
-[node name="PageEditorControl" type="Container" node_paths=PackedStringArray("preview_subedit_container", "cost_subedit_container", "subactions_subedit_container", "damage_subedit_container", "exit_button", "details_editor_control", "file_subeitor_container", "background", "inner_container")]
+[node name="PageEditorControl" type="Container" node_paths=PackedStringArray("preview_subedit_container", "cost_subedit_container", "subactions_subedit_container", "damage_subedit_container", "missile_subedit_container", "exit_button", "details_editor_control", "file_subeitor_container", "background", "inner_container")]
 custom_minimum_size = Vector2(1148, 648)
 offset_right = 1148.0
 offset_bottom = 648.0
@@ -33,7 +36,8 @@ script = ExtResource("1_j87ob")
 preview_subedit_container = NodePath("InnerContainer/MainContainer/MiddleContainer/PreviewEditorContainer")
 cost_subedit_container = NodePath("InnerContainer/MainContainer/RightContainer/CostSubEditorContainer")
 subactions_subedit_container = NodePath("InnerContainer/MainContainer/MiddleContainer/SubActionSubEditorContainer")
-damage_subedit_container = NodePath("InnerContainer/MainContainer/RightContainer/DamageDataSubEditorContainer")
+damage_subedit_container = NodePath("InnerContainer/MainContainer/RightContainer/Damage")
+missile_subedit_container = NodePath("InnerContainer/MainContainer/RightContainer/Missiles")
 exit_button = NodePath("InnerContainer/TopBarContainer/ExitButton")
 details_editor_control = NodePath("InnerContainer/MainContainer/LeftContainer/DetailsEditorContainer")
 file_subeitor_container = NodePath("InnerContainer/TopBarContainer/FileSubEditorContainer")
@@ -642,14 +646,174 @@ size_flags_vertical = 3
 [node name="RightContainer" type="VBoxContainer" parent="InnerContainer/MainContainer"]
 layout_mode = 2
 
-[node name="CostSubEditorContainer" type="Container" parent="InnerContainer/MainContainer/RightContainer" node_paths=PackedStringArray("add_button", "premade_cost_entry", "entry_container", "title_label", "root_editor_control", "background", "inner_container")]
-custom_minimum_size = Vector2(376, 77)
+[node name="TabBar" type="TabBar" parent="InnerContainer/MainContainer/RightContainer" node_paths=PackedStringArray("damage_tab", "costs_tab", "missiles_tab")]
+custom_minimum_size = Vector2(376, 0)
 layout_mode = 2
+current_tab = 0
+tab_count = 4
+tab_0/title = "Damage"
+tab_1/title = "Costs"
+tab_2/title = "Missiles"
+tab_3/title = "Targets"
+script = ExtResource("21_yq8bh")
+damage_tab = NodePath("../Damage")
+costs_tab = NodePath("../CostSubEditorContainer")
+missiles_tab = NodePath("../Missiles")
+
+[node name="Damage" type="Container" parent="InnerContainer/MainContainer/RightContainer" node_paths=PackedStringArray("add_button", "premade_edit_entry", "entries_container", "title_label", "root_editor_control", "background", "inner_container")]
+visible = false
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+size_flags_vertical = 3
+script = ExtResource("20_j2ru7")
+add_button = NodePath("InnerContainer/TitleContainer/Button")
+premade_edit_entry = NodePath("InnerContainer/DamageEditEntryContainer")
+entries_container = NodePath("InnerContainer/ScrollContainer/EntriesContainer")
+title_label = NodePath("InnerContainer/TitleContainer/TitleLabel")
+root_editor_control = NodePath("../../../..")
+background = NodePath("Background")
+inner_container = NodePath("InnerContainer")
+force_fill_x = true
+force_fill_y = true
+
+[node name="Background" type="NinePatchRect" parent="InnerContainer/MainContainer/RightContainer/Damage"]
+custom_minimum_size = Vector2(376, 0)
+layout_mode = 2
+texture = ExtResource("4_s5hjt")
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+
+[node name="InnerContainer" type="VBoxContainer" parent="InnerContainer/MainContainer/RightContainer/Damage"]
+layout_mode = 2
+
+[node name="TitleContainer" type="HBoxContainer" parent="InnerContainer/MainContainer/RightContainer/Damage/InnerContainer"]
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="InnerContainer/MainContainer/RightContainer/Damage/InnerContainer/TitleContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 18
+text = "Damage Datas"
+
+[node name="Button" type="Button" parent="InnerContainer/MainContainer/RightContainer/Damage/InnerContainer/TitleContainer"]
+layout_mode = 2
+text = "Add"
+
+[node name="DamageEditEntryContainer" type="Container" parent="InnerContainer/MainContainer/RightContainer/Damage/InnerContainer" node_paths=PackedStringArray("background", "inner_container")]
+custom_minimum_size = Vector2(16, 154)
+layout_mode = 2
+script = ExtResource("21_re071")
+background = NodePath("Background")
+inner_container = NodePath("InnerContainer")
+force_fill_x = true
+
+[node name="Background" type="NinePatchRect" parent="InnerContainer/MainContainer/RightContainer/Damage/InnerContainer/DamageEditEntryContainer"]
+layout_mode = 2
+texture = ExtResource("7_hxhw1")
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+
+[node name="InnerContainer" type="VBoxContainer" parent="InnerContainer/MainContainer/RightContainer/Damage/InnerContainer/DamageEditEntryContainer"]
+layout_mode = 2
+
+[node name="DamageDataKeyContainer" type="HBoxContainer" parent="InnerContainer/MainContainer/RightContainer/Damage/InnerContainer/DamageEditEntryContainer/InnerContainer"]
+layout_mode = 2
+
+[node name="DamageDataKeyLabel" type="Label" parent="InnerContainer/MainContainer/RightContainer/Damage/InnerContainer/DamageEditEntryContainer/InnerContainer/DamageDataKeyContainer"]
+layout_mode = 2
+text = "DataKey:"
+
+[node name="DamageDataKeyLineEdit" type="LineEdit" parent="InnerContainer/MainContainer/RightContainer/Damage/InnerContainer/DamageEditEntryContainer/InnerContainer/DamageDataKeyContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="DeleteButton" type="Button" parent="InnerContainer/MainContainer/RightContainer/Damage/InnerContainer/DamageEditEntryContainer/InnerContainer/DamageDataKeyContainer"]
+layout_mode = 2
+text = "X"
+
+[node name="PowerStatContainer" type="HBoxContainer" parent="InnerContainer/MainContainer/RightContainer/Damage/InnerContainer/DamageEditEntryContainer/InnerContainer"]
+layout_mode = 2
+
+[node name="PowerLabel" type="Label" parent="InnerContainer/MainContainer/RightContainer/Damage/InnerContainer/DamageEditEntryContainer/InnerContainer/PowerStatContainer"]
+layout_mode = 2
+text = "Power:"
+
+[node name="PowerSpinBox" type="SpinBox" parent="InnerContainer/MainContainer/RightContainer/Damage/InnerContainer/DamageEditEntryContainer/InnerContainer/PowerStatContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+max_value = 1e+06
+alignment = 2
+
+[node name="StatLabel" type="Label" parent="InnerContainer/MainContainer/RightContainer/Damage/InnerContainer/DamageEditEntryContainer/InnerContainer/PowerStatContainer"]
+layout_mode = 2
+text = "Stat:"
+
+[node name="StatOptionButton" type="OptionButton" parent="InnerContainer/MainContainer/RightContainer/Damage/InnerContainer/DamageEditEntryContainer/InnerContainer/PowerStatContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+fit_to_longest_item = false
+script = ExtResource("5_xop6x")
+
+[node name="TypeSDefenseContainer" type="HBoxContainer" parent="InnerContainer/MainContainer/RightContainer/Damage/InnerContainer/DamageEditEntryContainer/InnerContainer"]
+layout_mode = 2
+
+[node name="TypeLabel" type="Label" parent="InnerContainer/MainContainer/RightContainer/Damage/InnerContainer/DamageEditEntryContainer/InnerContainer/TypeSDefenseContainer"]
+layout_mode = 2
+text = "Type:"
+
+[node name="TypeOptionButton" type="OptionButton" parent="InnerContainer/MainContainer/RightContainer/Damage/InnerContainer/DamageEditEntryContainer/InnerContainer/TypeSDefenseContainer"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+size_flags_horizontal = 3
+fit_to_longest_item = false
+script = ExtResource("5_xop6x")
+
+[node name="DefenseLabel" type="Label" parent="InnerContainer/MainContainer/RightContainer/Damage/InnerContainer/DamageEditEntryContainer/InnerContainer/TypeSDefenseContainer"]
+layout_mode = 2
+text = "Defense:"
+
+[node name="DefenseOptionButton" type="OptionButton" parent="InnerContainer/MainContainer/RightContainer/Damage/InnerContainer/DamageEditEntryContainer/InnerContainer/TypeSDefenseContainer"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+size_flags_horizontal = 3
+fit_to_longest_item = false
+script = ExtResource("5_xop6x")
+
+[node name="VFXContainer" type="HBoxContainer" parent="InnerContainer/MainContainer/RightContainer/Damage/InnerContainer/DamageEditEntryContainer/InnerContainer"]
+layout_mode = 2
+
+[node name="VFXLabel" type="Label" parent="InnerContainer/MainContainer/RightContainer/Damage/InnerContainer/DamageEditEntryContainer/InnerContainer/VFXContainer"]
+layout_mode = 2
+text = "Damage VFX: "
+
+[node name="VFXOptionButton" type="OptionButton" parent="InnerContainer/MainContainer/RightContainer/Damage/InnerContainer/DamageEditEntryContainer/InnerContainer/VFXContainer"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("5_xop6x")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="InnerContainer/MainContainer/RightContainer/Damage/InnerContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="EntriesContainer" type="VBoxContainer" parent="InnerContainer/MainContainer/RightContainer/Damage/InnerContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="CostSubEditorContainer" type="Container" parent="InnerContainer/MainContainer/RightContainer" node_paths=PackedStringArray("add_button", "premade_cost_entry", "entry_container", "title_label", "root_editor_control", "background", "inner_container")]
+custom_minimum_size = Vector2(376, 16)
+layout_mode = 2
+size_flags_vertical = 3
 script = ExtResource("14_258ts")
-add_button = NodePath("InnerContainer/HBoxContainer/VBoxContainer/Button")
-premade_cost_entry = NodePath("InnerContainer/HBoxContainer/CostEditEntryContainer")
-entry_container = NodePath("InnerContainer/HBoxContainer/ScrollContainer/FlowContainer")
-title_label = NodePath("InnerContainer/HBoxContainer/VBoxContainer/TitleLabel")
+add_button = NodePath("InnerContainer/TitleContainer/Button")
+premade_cost_entry = NodePath("InnerContainer/CostEditEntryContainer")
+entry_container = NodePath("InnerContainer/ScrollContainer/EntriesContainer")
+title_label = NodePath("InnerContainer/TitleContainer/TitleLabel")
 root_editor_control = NodePath("../../../..")
 background = NodePath("Background")
 inner_container = NodePath("InnerContainer")
@@ -668,31 +832,28 @@ custom_minimum_size = Vector2(360, 0)
 layout_mode = 2
 vertical = true
 
-[node name="HBoxContainer" type="HBoxContainer" parent="InnerContainer/MainContainer/RightContainer/CostSubEditorContainer/InnerContainer"]
+[node name="TitleContainer" type="HBoxContainer" parent="InnerContainer/MainContainer/RightContainer/CostSubEditorContainer/InnerContainer"]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="InnerContainer/MainContainer/RightContainer/CostSubEditorContainer/InnerContainer/HBoxContainer"]
+[node name="TitleLabel" type="Label" parent="InnerContainer/MainContainer/RightContainer/CostSubEditorContainer/InnerContainer/TitleContainer"]
 layout_mode = 2
-
-[node name="TitleLabel" type="Label" parent="InnerContainer/MainContainer/RightContainer/CostSubEditorContainer/InnerContainer/HBoxContainer/VBoxContainer"]
-layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 1
 theme_override_font_sizes/font_size = 18
 text = "Costs:"
 
-[node name="Button" type="Button" parent="InnerContainer/MainContainer/RightContainer/CostSubEditorContainer/InnerContainer/HBoxContainer/VBoxContainer"]
+[node name="Button" type="Button" parent="InnerContainer/MainContainer/RightContainer/CostSubEditorContainer/InnerContainer/TitleContainer"]
 layout_mode = 2
 text = "Add"
 
-[node name="CostEditEntryContainer" type="Container" parent="InnerContainer/MainContainer/RightContainer/CostSubEditorContainer/InnerContainer/HBoxContainer" node_paths=PackedStringArray("background", "inner_container")]
-custom_minimum_size = Vector2(146, 39)
+[node name="CostEditEntryContainer" type="Container" parent="InnerContainer/MainContainer/RightContainer/CostSubEditorContainer/InnerContainer" node_paths=PackedStringArray("background", "inner_container")]
+custom_minimum_size = Vector2(162, 47)
 layout_mode = 2
 script = ExtResource("15_2nobb")
 background = NodePath("Background")
 inner_container = NodePath("InnerContainer")
-margin_override = 4
 
-[node name="Background" type="NinePatchRect" parent="InnerContainer/MainContainer/RightContainer/CostSubEditorContainer/InnerContainer/HBoxContainer/CostEditEntryContainer"]
+[node name="Background" type="NinePatchRect" parent="InnerContainer/MainContainer/RightContainer/CostSubEditorContainer/InnerContainer/CostEditEntryContainer"]
 layout_mode = 2
 texture = ExtResource("7_hxhw1")
 patch_margin_left = 8
@@ -700,11 +861,10 @@ patch_margin_top = 8
 patch_margin_right = 8
 patch_margin_bottom = 8
 
-[node name="InnerContainer" type="HBoxContainer" parent="InnerContainer/MainContainer/RightContainer/CostSubEditorContainer/InnerContainer/HBoxContainer/CostEditEntryContainer"]
+[node name="InnerContainer" type="HBoxContainer" parent="InnerContainer/MainContainer/RightContainer/CostSubEditorContainer/InnerContainer/CostEditEntryContainer"]
 layout_mode = 2
-theme_override_constants/separation = 0
 
-[node name="SelfScalingLineEdit" type="LineEdit" parent="InnerContainer/MainContainer/RightContainer/CostSubEditorContainer/InnerContainer/HBoxContainer/CostEditEntryContainer/InnerContainer" node_paths=PackedStringArray("hidden_text_edit")]
+[node name="SelfScalingLineEdit" type="LineEdit" parent="InnerContainer/MainContainer/RightContainer/CostSubEditorContainer/InnerContainer/CostEditEntryContainer/InnerContainer" node_paths=PackedStringArray("hidden_text_edit")]
 custom_minimum_size = Vector2(52, 31)
 layout_mode = 2
 text = "Mana"
@@ -712,39 +872,37 @@ script = ExtResource("13_wcuop")
 hidden_text_edit = NodePath("TextEdit")
 _padding = 4
 
-[node name="TextEdit" type="TextEdit" parent="InnerContainer/MainContainer/RightContainer/CostSubEditorContainer/InnerContainer/HBoxContainer/CostEditEntryContainer/InnerContainer/SelfScalingLineEdit"]
+[node name="TextEdit" type="TextEdit" parent="InnerContainer/MainContainer/RightContainer/CostSubEditorContainer/InnerContainer/CostEditEntryContainer/InnerContainer/SelfScalingLineEdit"]
 visible = false
 layout_mode = 0
 offset_right = 8.0
 offset_bottom = 8.0
 text = "Mana"
 
-[node name="SpinBox" type="SpinBox" parent="InnerContainer/MainContainer/RightContainer/CostSubEditorContainer/InnerContainer/HBoxContainer/CostEditEntryContainer/InnerContainer"]
+[node name="SpinBox" type="SpinBox" parent="InnerContainer/MainContainer/RightContainer/CostSubEditorContainer/InnerContainer/CostEditEntryContainer/InnerContainer"]
 layout_mode = 2
 theme = ExtResource("12_i1k1i")
 
-[node name="Button" type="Button" parent="InnerContainer/MainContainer/RightContainer/CostSubEditorContainer/InnerContainer/HBoxContainer/CostEditEntryContainer/InnerContainer"]
+[node name="Button" type="Button" parent="InnerContainer/MainContainer/RightContainer/CostSubEditorContainer/InnerContainer/CostEditEntryContainer/InnerContainer"]
 layout_mode = 2
 text = "X"
 
-[node name="ScrollContainer" type="ScrollContainer" parent="InnerContainer/MainContainer/RightContainer/CostSubEditorContainer/InnerContainer/HBoxContainer"]
-custom_minimum_size = Vector2(0, 50)
+[node name="ScrollContainer" type="ScrollContainer" parent="InnerContainer/MainContainer/RightContainer/CostSubEditorContainer/InnerContainer"]
 layout_mode = 2
-size_flags_horizontal = 3
+size_flags_vertical = 3
 
-[node name="FlowContainer" type="FlowContainer" parent="InnerContainer/MainContainer/RightContainer/CostSubEditorContainer/InnerContainer/HBoxContainer/ScrollContainer"]
+[node name="EntriesContainer" type="VBoxContainer" parent="InnerContainer/MainContainer/RightContainer/CostSubEditorContainer/InnerContainer/ScrollContainer"]
 layout_mode = 2
-size_flags_horizontal = 3
-alignment = 2
 
-[node name="DamageDataSubEditorContainer" type="Container" parent="InnerContainer/MainContainer/RightContainer" node_paths=PackedStringArray("add_button", "premade_edit_entry", "entries_container", "title_label", "root_editor_control", "background", "inner_container")]
+[node name="Missiles" type="Container" parent="InnerContainer/MainContainer/RightContainer" node_paths=PackedStringArray("add_button", "premade_edit_entry", "entries_container", "title_label", "root_editor_control", "background", "inner_container")]
+visible = false
 custom_minimum_size = Vector2(16, 16)
 layout_mode = 2
 size_flags_vertical = 3
-script = ExtResource("20_j2ru7")
+script = ExtResource("23_2sg21")
 add_button = NodePath("InnerContainer/TitleContainer/Button")
-premade_edit_entry = NodePath("InnerContainer/DamageEditEntryContainer")
-entries_container = NodePath("InnerContainer/ScrollContainer/DamageEntriesContainer")
+premade_edit_entry = NodePath("InnerContainer/MissileEditEntryContainer")
+entries_container = NodePath("InnerContainer/ScrollContainer/EntriesContainer")
 title_label = NodePath("InnerContainer/TitleContainer/TitleLabel")
 root_editor_control = NodePath("../../../..")
 background = NodePath("Background")
@@ -752,7 +910,7 @@ inner_container = NodePath("InnerContainer")
 force_fill_x = true
 force_fill_y = true
 
-[node name="Background" type="NinePatchRect" parent="InnerContainer/MainContainer/RightContainer/DamageDataSubEditorContainer"]
+[node name="Background" type="NinePatchRect" parent="InnerContainer/MainContainer/RightContainer/Missiles"]
 custom_minimum_size = Vector2(376, 16)
 layout_mode = 2
 texture = ExtResource("4_s5hjt")
@@ -761,31 +919,31 @@ patch_margin_top = 8
 patch_margin_right = 8
 patch_margin_bottom = 8
 
-[node name="InnerContainer" type="VBoxContainer" parent="InnerContainer/MainContainer/RightContainer/DamageDataSubEditorContainer"]
+[node name="InnerContainer" type="VBoxContainer" parent="InnerContainer/MainContainer/RightContainer/Missiles"]
 layout_mode = 2
 
-[node name="TitleContainer" type="HBoxContainer" parent="InnerContainer/MainContainer/RightContainer/DamageDataSubEditorContainer/InnerContainer"]
+[node name="TitleContainer" type="HBoxContainer" parent="InnerContainer/MainContainer/RightContainer/Missiles/InnerContainer"]
 layout_mode = 2
 
-[node name="TitleLabel" type="Label" parent="InnerContainer/MainContainer/RightContainer/DamageDataSubEditorContainer/InnerContainer/TitleContainer"]
+[node name="TitleLabel" type="Label" parent="InnerContainer/MainContainer/RightContainer/Missiles/InnerContainer/TitleContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 18
-text = "Damage Datas"
+text = "Missile Datas"
 
-[node name="Button" type="Button" parent="InnerContainer/MainContainer/RightContainer/DamageDataSubEditorContainer/InnerContainer/TitleContainer"]
+[node name="Button" type="Button" parent="InnerContainer/MainContainer/RightContainer/Missiles/InnerContainer/TitleContainer"]
 layout_mode = 2
 text = "Add"
 
-[node name="DamageEditEntryContainer" type="Container" parent="InnerContainer/MainContainer/RightContainer/DamageDataSubEditorContainer/InnerContainer" node_paths=PackedStringArray("background", "inner_container")]
-custom_minimum_size = Vector2(16, 154)
+[node name="MissileEditEntryContainer" type="Container" parent="InnerContainer/MainContainer/RightContainer/Missiles/InnerContainer" node_paths=PackedStringArray("title_label", "background", "inner_container")]
+custom_minimum_size = Vector2(215, 154)
 layout_mode = 2
-script = ExtResource("21_re071")
+script = ExtResource("23_8euos")
+title_label = NodePath("InnerContainer/KeyContainer/KeyLabel")
 background = NodePath("Background")
 inner_container = NodePath("InnerContainer")
-force_fill_x = true
 
-[node name="Background" type="NinePatchRect" parent="InnerContainer/MainContainer/RightContainer/DamageDataSubEditorContainer/InnerContainer/DamageEditEntryContainer"]
+[node name="Background" type="NinePatchRect" parent="InnerContainer/MainContainer/RightContainer/Missiles/InnerContainer/MissileEditEntryContainer"]
 layout_mode = 2
 texture = ExtResource("7_hxhw1")
 patch_margin_left = 8
@@ -793,90 +951,84 @@ patch_margin_top = 8
 patch_margin_right = 8
 patch_margin_bottom = 8
 
-[node name="InnerContainer" type="VBoxContainer" parent="InnerContainer/MainContainer/RightContainer/DamageDataSubEditorContainer/InnerContainer/DamageEditEntryContainer"]
+[node name="InnerContainer" type="VBoxContainer" parent="InnerContainer/MainContainer/RightContainer/Missiles/InnerContainer/MissileEditEntryContainer"]
 layout_mode = 2
 
-[node name="DamageDataKeyContainer" type="HBoxContainer" parent="InnerContainer/MainContainer/RightContainer/DamageDataSubEditorContainer/InnerContainer/DamageEditEntryContainer/InnerContainer"]
+[node name="KeyContainer" type="HBoxContainer" parent="InnerContainer/MainContainer/RightContainer/Missiles/InnerContainer/MissileEditEntryContainer/InnerContainer"]
 layout_mode = 2
 
-[node name="DamageDataKeyLabel" type="Label" parent="InnerContainer/MainContainer/RightContainer/DamageDataSubEditorContainer/InnerContainer/DamageEditEntryContainer/InnerContainer/DamageDataKeyContainer"]
+[node name="KeyLabel" type="Label" parent="InnerContainer/MainContainer/RightContainer/Missiles/InnerContainer/MissileEditEntryContainer/InnerContainer/KeyContainer"]
 layout_mode = 2
 text = "DataKey:"
 
-[node name="DamageDataKeyLineEdit" type="LineEdit" parent="InnerContainer/MainContainer/RightContainer/DamageDataSubEditorContainer/InnerContainer/DamageEditEntryContainer/InnerContainer/DamageDataKeyContainer"]
+[node name="KeyLineEdit" type="LineEdit" parent="InnerContainer/MainContainer/RightContainer/Missiles/InnerContainer/MissileEditEntryContainer/InnerContainer/KeyContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="DeleteButton" type="Button" parent="InnerContainer/MainContainer/RightContainer/DamageDataSubEditorContainer/InnerContainer/DamageEditEntryContainer/InnerContainer/DamageDataKeyContainer"]
+[node name="DeleteButton" type="Button" parent="InnerContainer/MainContainer/RightContainer/Missiles/InnerContainer/MissileEditEntryContainer/InnerContainer/KeyContainer"]
 layout_mode = 2
 text = "X"
 
-[node name="PowerStatContainer" type="HBoxContainer" parent="InnerContainer/MainContainer/RightContainer/DamageDataSubEditorContainer/InnerContainer/DamageEditEntryContainer/InnerContainer"]
+[node name="DamageSpeedContainer" type="HBoxContainer" parent="InnerContainer/MainContainer/RightContainer/Missiles/InnerContainer/MissileEditEntryContainer/InnerContainer"]
 layout_mode = 2
 
-[node name="PowerLabel" type="Label" parent="InnerContainer/MainContainer/RightContainer/DamageDataSubEditorContainer/InnerContainer/DamageEditEntryContainer/InnerContainer/PowerStatContainer"]
+[node name="DamageLabel" type="Label" parent="InnerContainer/MainContainer/RightContainer/Missiles/InnerContainer/MissileEditEntryContainer/InnerContainer/DamageSpeedContainer"]
 layout_mode = 2
-text = "Power:"
+text = "Damage:"
 
-[node name="PowerSpinBox" type="SpinBox" parent="InnerContainer/MainContainer/RightContainer/DamageDataSubEditorContainer/InnerContainer/DamageEditEntryContainer/InnerContainer/PowerStatContainer"]
-custom_minimum_size = Vector2(100, 0)
+[node name="DamageOptionButton" type="OptionButton" parent="InnerContainer/MainContainer/RightContainer/Missiles/InnerContainer/MissileEditEntryContainer/InnerContainer/DamageSpeedContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
+fit_to_longest_item = false
+script = ExtResource("5_xop6x")
+
+[node name="FramesPerTileContainer" type="HBoxContainer" parent="InnerContainer/MainContainer/RightContainer/Missiles/InnerContainer/MissileEditEntryContainer/InnerContainer/DamageSpeedContainer"]
+layout_mode = 2
+tooltip_text = "Frames Per Tile: Number of frames for the missile to travel 1 tile."
+
+[node name="SpeedLabel" type="Label" parent="InnerContainer/MainContainer/RightContainer/Missiles/InnerContainer/MissileEditEntryContainer/InnerContainer/DamageSpeedContainer/FramesPerTileContainer"]
+layout_mode = 2
+text = " F/T:"
+
+[node name="SpeedSpinBox" type="SpinBox" parent="InnerContainer/MainContainer/RightContainer/Missiles/InnerContainer/MissileEditEntryContainer/InnerContainer/DamageSpeedContainer/FramesPerTileContainer"]
+layout_mode = 2
+theme = ExtResource("12_i1k1i")
 max_value = 1e+06
 alignment = 2
 
-[node name="StatLabel" type="Label" parent="InnerContainer/MainContainer/RightContainer/DamageDataSubEditorContainer/InnerContainer/DamageEditEntryContainer/InnerContainer/PowerStatContainer"]
-layout_mode = 2
-text = "Stat:"
-
-[node name="StatOptionButton" type="OptionButton" parent="InnerContainer/MainContainer/RightContainer/DamageDataSubEditorContainer/InnerContainer/DamageEditEntryContainer/InnerContainer/PowerStatContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-fit_to_longest_item = false
-script = ExtResource("5_xop6x")
-
-[node name="TypeSDefenseContainer" type="HBoxContainer" parent="InnerContainer/MainContainer/RightContainer/DamageDataSubEditorContainer/InnerContainer/DamageEditEntryContainer/InnerContainer"]
+[node name="MissileVfxContainer" type="HBoxContainer" parent="InnerContainer/MainContainer/RightContainer/Missiles/InnerContainer/MissileEditEntryContainer/InnerContainer"]
 layout_mode = 2
 
-[node name="TypeLabel" type="Label" parent="InnerContainer/MainContainer/RightContainer/DamageDataSubEditorContainer/InnerContainer/DamageEditEntryContainer/InnerContainer/TypeSDefenseContainer"]
+[node name="MissileVfxLabel" type="Label" parent="InnerContainer/MainContainer/RightContainer/Missiles/InnerContainer/MissileEditEntryContainer/InnerContainer/MissileVfxContainer"]
+custom_minimum_size = Vector2(95, 0)
 layout_mode = 2
-text = "Type:"
+text = "Missile VFX:"
 
-[node name="TypeOptionButton" type="OptionButton" parent="InnerContainer/MainContainer/RightContainer/DamageDataSubEditorContainer/InnerContainer/DamageEditEntryContainer/InnerContainer/TypeSDefenseContainer"]
+[node name="MissileVfxOptionButton" type="OptionButton" parent="InnerContainer/MainContainer/RightContainer/Missiles/InnerContainer/MissileEditEntryContainer/InnerContainer/MissileVfxContainer"]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 size_flags_horizontal = 3
 fit_to_longest_item = false
 script = ExtResource("5_xop6x")
 
-[node name="DefenseLabel" type="Label" parent="InnerContainer/MainContainer/RightContainer/DamageDataSubEditorContainer/InnerContainer/DamageEditEntryContainer/InnerContainer/TypeSDefenseContainer"]
-layout_mode = 2
-text = "Defense:"
-
-[node name="DefenseOptionButton" type="OptionButton" parent="InnerContainer/MainContainer/RightContainer/DamageDataSubEditorContainer/InnerContainer/DamageEditEntryContainer/InnerContainer/TypeSDefenseContainer"]
-custom_minimum_size = Vector2(0, 32)
-layout_mode = 2
-size_flags_horizontal = 3
-fit_to_longest_item = false
-script = ExtResource("5_xop6x")
-
-[node name="VFXContainer" type="HBoxContainer" parent="InnerContainer/MainContainer/RightContainer/DamageDataSubEditorContainer/InnerContainer/DamageEditEntryContainer/InnerContainer"]
+[node name="ImpactVfxContainer" type="HBoxContainer" parent="InnerContainer/MainContainer/RightContainer/Missiles/InnerContainer/MissileEditEntryContainer/InnerContainer"]
 layout_mode = 2
 
-[node name="VFXLabel" type="Label" parent="InnerContainer/MainContainer/RightContainer/DamageDataSubEditorContainer/InnerContainer/DamageEditEntryContainer/InnerContainer/VFXContainer"]
+[node name="ImpactVfxLabel" type="Label" parent="InnerContainer/MainContainer/RightContainer/Missiles/InnerContainer/MissileEditEntryContainer/InnerContainer/ImpactVfxContainer"]
 layout_mode = 2
-text = "Damage VFX: "
+text = "Impact VFX: "
 
-[node name="VFXOptionButton" type="OptionButton" parent="InnerContainer/MainContainer/RightContainer/DamageDataSubEditorContainer/InnerContainer/DamageEditEntryContainer/InnerContainer/VFXContainer"]
+[node name="ImpactVfxOptionButton" type="OptionButton" parent="InnerContainer/MainContainer/RightContainer/Missiles/InnerContainer/MissileEditEntryContainer/InnerContainer/ImpactVfxContainer"]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 size_flags_horizontal = 3
 script = ExtResource("5_xop6x")
 
-[node name="ScrollContainer" type="ScrollContainer" parent="InnerContainer/MainContainer/RightContainer/DamageDataSubEditorContainer/InnerContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="InnerContainer/MainContainer/RightContainer/Missiles/InnerContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="DamageEntriesContainer" type="VBoxContainer" parent="InnerContainer/MainContainer/RightContainer/DamageDataSubEditorContainer/InnerContainer/ScrollContainer"]
+[node name="EntriesContainer" type="VBoxContainer" parent="InnerContainer/MainContainer/RightContainer/Missiles/InnerContainer/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3

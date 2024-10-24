@@ -4,7 +4,7 @@ extends BaseSubEditorContainer
 
 @export var add_button:Button
 @export var premade_cost_entry:CostEditEntryContainer
-@export var entry_container:FlowContainer
+@export var entry_container:VBoxContainer
 
 
 func _ready() -> void:
