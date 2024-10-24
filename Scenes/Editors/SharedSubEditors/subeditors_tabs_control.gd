@@ -5,12 +5,14 @@ extends TabBar
 @export var damage_tab:DamageSubEditorContainer
 @export var costs_tab:CostSubEditorContainer
 @export var missiles_tab:MissileSubEditorContainer
+@export var targets_tab:TargetSubEditorContainer
 
 func get_subeditor_tabs()->Dictionary:
 	return {
 		"Damage": damage_tab,
 		"Costs": costs_tab,
 		"Missiles": missiles_tab,
+		"Targets": targets_tab
 	}
 
 # Called when the node enters the scene tree for the first time.

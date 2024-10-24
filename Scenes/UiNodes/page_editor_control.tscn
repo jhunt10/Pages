@@ -30,7 +30,7 @@
 [ext_resource type="Texture2D" uid="uid://d2x6kqs3xin73" path="res://assets/Sprites/UI/DevTools/AreaEditor/CenterArrowButton.png" id="26_xxafr"]
 [ext_resource type="Texture2D" uid="uid://nkcstxtdmv1p" path="res://assets/Sprites/UI/DevTools/AreaEditor/DownArrowButton.png" id="27_5wp7d"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8jqah"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8uc4p"]
 texture = ExtResource("15_6s6hh")
 1:0/0 = 0
 1:0/0/terrain_set = 0
@@ -368,7 +368,7 @@ texture = ExtResource("15_6s6hh")
 terrain_set_0/mode = 0
 terrain_set_0/terrain_0/name = "Terrain 0"
 terrain_set_0/terrain_0/color = Color(0.224135, 0.184226, 1, 1)
-sources/0 = SubResource("TileSetAtlasSource_8jqah")
+sources/0 = SubResource("TileSetAtlasSource_8uc4p")
 
 [node name="PageEditorControl" type="Control"]
 layout_mode = 3
@@ -1065,9 +1065,10 @@ script = ExtResource("7_gwuq7")
 [node name="TabContainer" type="TabContainer" parent="VBoxContainer/HBoxContainer/RightBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-current_tab = 0
+current_tab = 2
 
 [node name="Damage" type="Control" parent="VBoxContainer/HBoxContainer/RightBoxContainer/TabContainer"]
+visible = false
 custom_minimum_size = Vector2(360, 168)
 layout_mode = 2
 script = ExtResource("10_7ihxm")
@@ -1494,7 +1495,6 @@ script = ExtResource("7_gwuq7")
 allways_show_none = true
 
 [node name="Targeting" type="Control" parent="VBoxContainer/HBoxContainer/RightBoxContainer/TabContainer"]
-visible = false
 custom_minimum_size = Vector2(272, 374)
 layout_mode = 2
 size_flags_vertical = 0
@@ -1570,7 +1570,7 @@ layout_mode = 2
 [node name="SubViewport" type="SubViewport" parent="VBoxContainer/HBoxContainer/RightBoxContainer/TabContainer/Targeting/VBoxContainer/TargetRangeViewEditControl/CenterContainer/HBoxContainer/SubViewportContainer"]
 handle_input_locally = false
 size = Vector2i(240, 240)
-render_target_update_mode = 0
+render_target_update_mode = 4
 
 [node name="Node2D" type="Node2D" parent="VBoxContainer/HBoxContainer/RightBoxContainer/TabContainer/Targeting/VBoxContainer/TargetRangeViewEditControl/CenterContainer/HBoxContainer/SubViewportContainer/SubViewport"]
 position = Vector2(112, 112)
