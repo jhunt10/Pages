@@ -38,10 +38,10 @@ func has_change():
 func clear():
 	_loaded_data.clear()
 	for child in subaction_entry_container.get_children():
-		subaction_entry_container.remove_child(child)
+		child.queue_free()
 
 func load_data(object_key:String, data:Dictionary):
-	_loaded_data = data
+	_loaded_data = data.duplicate(true)
 	for index in data.keys():
 		var subaction_datas_arr = data[index]
 		for subaction_data in subaction_datas_arr:
@@ -59,7 +59,7 @@ func create_new_subaction_entry(index, data):
 func build_save_data()->Dictionary:
 	var dict = {}
 	for subaction_entry:SubActionEditEntryContainer in subaction_entry_container.get_children():
-		var frame = subaction_entry.frame_spin_box.value
+		var frame = str(subaction_entry.frame_spin_box.value)
 		if !dict.keys().has(frame):
 			dict[frame] = []
 		dict[frame].append(subaction_entry.build_save_data())

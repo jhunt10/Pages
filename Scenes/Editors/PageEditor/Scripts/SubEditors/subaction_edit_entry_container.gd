@@ -12,6 +12,7 @@ signal on_frame_changed
 
 var _prop_inputs:Dictionary = {}
 var _enum_prop_options:Dictionary = {}
+var _full_script_path:String
 
 func _ready() -> void:
 	super()
@@ -24,16 +25,16 @@ func get_key_to_input_mapping():
 	return _prop_inputs
 
 func load_data(object_key:String, data:Dictionary):
-	_loaded_data = data
-	var script_path:String = data.get("SubActionScript")
-	if !script_path:
+	_loaded_data = data.duplicate(true)
+	_full_script_path = data.get("SubActionScript")
+	if !_full_script_path:
 		script_box.text = "No SubActionScript"
 		return
-	var script:BaseSubAction = ActionLibrary.get_sub_action_script(script_path)
+	var script:BaseSubAction = ActionLibrary.get_sub_action_script(_full_script_path)
 	if !script:
 		script_box.text = "Script Not Found"
 		return
-	script_box.text = script_path.get_file()
+	script_box.text = _full_script_path.get_file()
 	var required_props = script.get_required_props()
 	for key in required_props.keys():
 		var prop_type = required_props[key]
@@ -48,7 +49,7 @@ func load_data(object_key:String, data:Dictionary):
 
 func build_save_data()->Dictionary:
 	var dict = super()
-	dict['SubActionScript'] = script_box.text
+	dict['SubActionScript'] = _full_script_path
 	return dict
 
 func on_frame_spin_box_change(val):

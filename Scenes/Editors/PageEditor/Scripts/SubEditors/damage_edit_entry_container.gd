@@ -10,6 +10,8 @@ extends BaseSubEditorContainer
 @onready var vfx_option_button:LoadedOptionButton = $InnerContainer/VFXContainer/VFXOptionButton
 
 func _ready() -> void:
+	super()
+	if Engine.is_editor_hint(): return
 	stat_option_button.get_options_func = get_attack_stats
 	type_option_button.get_options_func = get_damage_types
 	defense_option_button.get_options_func = get_defense_types
@@ -40,7 +42,6 @@ func lose_focus_if_has():
 	if base_line.has_focus():
 		base_line.release_focus()
 		base_power_spin_box.apply()
-
 
 func get_damage_effect_options():
 	return MainRootNode.vfx_libray._vfx_datas.keys()

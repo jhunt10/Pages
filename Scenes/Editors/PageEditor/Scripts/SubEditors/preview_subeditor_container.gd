@@ -15,14 +15,14 @@ func get_key_to_input_mapping()->Dictionary:
 
 
 func _ready() -> void:
-	preview_target_option_button.get_options_func = get_targeting_options
 	super()
 	if Engine.is_editor_hint():
 		return
+	preview_target_option_button.get_options_func = get_targeting_options
 
 
 func get_targeting_options()->Array:
-	return []
+	return ["Target1"]
 
 func load_data(object_key:String, data:Dictionary):
 	super(object_key, data)

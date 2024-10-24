@@ -4,6 +4,7 @@ extends BackPatchContainer
 
 signal data_changed
 
+@export var title_label:Label
 @export var root_editor_control:RootEditorControler
 
 var _loaded_data:Dictionary = {}
@@ -24,6 +25,15 @@ func _process(delta: float) -> void:
 	if Engine.is_editor_hint(): return
 	pass
 
+func set_show_change(show:bool):
+	if !title_label:
+		return
+	var raw_title = title_label.text.trim_prefix("*")
+	if show:
+		title_label.text = "*" + raw_title
+	else:
+		title_label.text = raw_title
+
 func lose_focus_if_has():
 	var mapping = get_key_to_input_mapping()
 	for key in mapping.keys():
@@ -32,9 +42,11 @@ func lose_focus_if_has():
 
 func has_change():
 	var mapping = get_key_to_input_mapping()
+	var loaded_keys = _loaded_data.keys()
 	for key in mapping.keys():
 		var input_node = get_key_to_input_mapping().get(key)
 		if _check_input_has_changed(key, _loaded_data, input_node):
+			print("Change found in %s" % [key])
 			return true
 	return false
 
@@ -46,7 +58,7 @@ func clear():
 	_loaded_data.clear()
 
 func load_data(object_key:String, data:Dictionary):
-	_loaded_data = data
+	_loaded_data = data.duplicate(true)
 	var mapping = get_key_to_input_mapping()
 	for key in mapping.keys():
 		var input_node = get_key_to_input_mapping().get(key)
@@ -67,7 +79,7 @@ func _load_input(key, data, input_node):
 	if input_node is LineEdit or input_node is TextEdit:
 		input_node.text = data.get(key, "")
 	elif input_node is SpinBox:
-		return input_node.value != data.get(key, 0)
+		input_node.set_value_no_signal(data.get(key, 0))
 	elif input_node is LoadedOptionButton:
 		input_node.load_options(data.get(key, ""))
 	elif input_node is TagEditContainer:
@@ -75,7 +87,7 @@ func _load_input(key, data, input_node):
 	elif input_node is MoveInputContainer:
 		input_node.set_value(data.get(key, null))
 	else:
-		printerr("%s: Unknown input type: '%s'." % [self.name, input_node])
+		printerr("%s._load_input: Key '%s' has unknown input type: '%s'." % [self.name, key, input_node])
 
 func _input_lose_focus_if_has(key, input_node):
 	if input_node is LineEdit or input_node is TextEdit:
@@ -91,7 +103,7 @@ func _input_lose_focus_if_has(key, input_node):
 	elif input_node is LoadedOptionButton:
 		return
 	else:
-		printerr("Unknown input type: '%s'." % [input_node])
+		printerr("%s._input_lose_focus_if_has: Key '%s' has unknown input type: '%s'." % [self.name, key, input_node])
 
 func _check_input_has_changed(key, data, input_node)->bool:
 	if input_node is LineEdit or input_node is TextEdit:
@@ -101,13 +113,15 @@ func _check_input_has_changed(key, data, input_node)->bool:
 	elif input_node is LoadedOptionButton:
 		return input_node.get_current_option_text() != data.get(key, "")
 	elif input_node is TagEditContainer:
-		return input_node.chack_for_change(data.get(key, []))
+		return input_node.check_for_change(data.get(key, []))
 	elif input_node is MoveInputContainer:
-		return input_node.get_val() == data.get(key, "")
+		return input_node.check_for_change(data.get(key, null))
 	elif input_node is SubActionPropInputContainer:
-		return input_node.get_prop_value() == data.get(key)
+		return input_node.get_prop_value() != data.get(key, "")
+	elif input_node is BaseSubEditorContainer:
+		return input_node.has_change()
 	else:
-		printerr("%s: Unknown input type: '%s'." % [self.name, input_node])
+		printerr("%s._check_input_has_changed: Key '%s' has unknown input type: '%s'." % [self.name, key, input_node])
 	return false
 
 func _save_input(key, data, input_node):
@@ -122,9 +136,11 @@ func _save_input(key, data, input_node):
 	elif input_node is MoveInputContainer:
 		data[key] = input_node.get_val()
 	elif input_node is SubActionPropInputContainer:
-		return input_node.get_prop_value() 
+		data[key] = input_node.get_prop_value() 
+	elif input_node is BaseSubEditorContainer:
+		data[key] = input_node.build_save_data() 
 	else:
-		printerr("%s: Unknown input type: '%s'." % [self.name, input_node])
+		printerr("%s._save_input: Key '%s' has unknown input type: '%s'." % [self.name, key, input_node])
 
 func _clear_input(key, input_node):
 	if input_node is LineEdit or input_node is TextEdit:
@@ -140,5 +156,5 @@ func _clear_input(key, input_node):
 	elif input_node is SubActionPropInputContainer:
 		input_node.clear() 
 	else:
-		printerr("%s: Unknown input type: '%s'." % [self.name, input_node])
+		printerr("%s._clear_input: Key '%s' has unknown input type: '%s'." % [self.name, key, input_node])
 	

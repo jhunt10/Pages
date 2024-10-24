@@ -1,0 +1,70 @@
+[gd_scene load_steps=4 format=3 uid="uid://dx2mo80r3mxm0"]
+
+[ext_resource type="Script" path="res://Scenes/Editors/SharedSubEditors/yesno_popup_container.gd" id="1_bict4"]
+[ext_resource type="Script" path="res://assets/Scripts/Ui/DisplayNodes/back_patch_container.gd" id="2_ikcwr"]
+[ext_resource type="Texture2D" uid="uid://cdwxmahms0ybk" path="res://assets/Sprites/UI/BackPatches/Patch_32_8_Red_Dark.png" id="3_fggll"]
+
+[node name="YesNoPopUpContainer" type="CenterContainer" node_paths=PackedStringArray("message_label", "yes_button", "no_button")]
+script = ExtResource("1_bict4")
+message_label = NodePath("PopUpContainer/InnerContainer/MessageContainer/MessageLabel")
+yes_button = NodePath("PopUpContainer/InnerContainer/ButtonsContainer/YesButton")
+no_button = NodePath("PopUpContainer/InnerContainer/ButtonsContainer/NoButton")
+
+[node name="PopUpContainer" type="Container" parent="." node_paths=PackedStringArray("background", "inner_container")]
+custom_minimum_size = Vector2(306, 98)
+layout_mode = 2
+script = ExtResource("2_ikcwr")
+background = NodePath("Background")
+inner_container = NodePath("InnerContainer")
+
+[node name="Background" type="NinePatchRect" parent="PopUpContainer"]
+layout_mode = 2
+texture = ExtResource("3_fggll")
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+
+[node name="InnerContainer" type="VBoxContainer" parent="PopUpContainer"]
+layout_mode = 2
+
+[node name="MessageContainer" type="HBoxContainer" parent="PopUpContainer/InnerContainer"]
+layout_mode = 2
+
+[node name="MessageLabel" type="Label" parent="PopUpContainer/InnerContainer/MessageContainer"]
+self_modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+text = "Some text for you to confirm or deny."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="PopUpContainer/InnerContainer"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="ButtonsContainer" type="HBoxContainer" parent="PopUpContainer/InnerContainer"]
+layout_mode = 2
+
+[node name="VSeparator" type="VSeparator" parent="PopUpContainer/InnerContainer/ButtonsContainer"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="YesButton" type="Button" parent="PopUpContainer/InnerContainer/ButtonsContainer"]
+layout_mode = 2
+text = "Comfirm"
+
+[node name="VSeparator2" type="VSeparator" parent="PopUpContainer/InnerContainer/ButtonsContainer"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="NoButton" type="Button" parent="PopUpContainer/InnerContainer/ButtonsContainer"]
+layout_mode = 2
+text = "Cancel"
+
+[node name="VSeparator3" type="VSeparator" parent="PopUpContainer/InnerContainer/ButtonsContainer"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_horizontal = 3

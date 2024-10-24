@@ -66,3 +66,15 @@ func lose_focus_if_has():
 	if line_edit.has_focus():
 		y_input.apply()
 		line_edit.release_focus()
+
+func check_for_change(val):
+	if val == null:
+		return not self.disabled
+	elif val is String:
+		return val != get_val()
+	elif val is Array:
+		return (x_input.value != val[0] or 
+				y_input.value != val[1] or 
+				turn_input.selected != val[3])
+	else:
+		print("MoveInputContainer.check_for_change: Unknown val given: '%s'." % [val])

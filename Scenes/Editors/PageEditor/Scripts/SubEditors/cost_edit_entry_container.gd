@@ -24,7 +24,7 @@ func get_cost_value()->int:
 
 func check_for_change(data:Dictionary):
 	var key = get_cost_key()
-	if !data.keys.has(key):
+	if !data.keys().has(key):
 		return true
 	if data.get(key) != get_cost_value():
 		return true

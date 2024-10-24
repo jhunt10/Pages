@@ -119,7 +119,8 @@ func clear():
 		spin_box.value = 0
 
 func get_target_options():
-	return PageEditorControl.Instance.get_subeditor_option_keys("TargetParams")
+	#return PageEditorControl.Instance.get_subeditor_option_keys("TargetParams")
+	return ["Target1"]
 
 func get_damage_options():
 	return PageEditorControl.Instance.get_subeditor_option_keys("DamageDatas")

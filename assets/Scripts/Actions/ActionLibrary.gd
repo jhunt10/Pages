@@ -49,6 +49,7 @@ static func get_sub_action_script(script_path)->BaseSubAction:
 	var script = load(script_path)
 	if not script:
 		printerr("ActionLibrary.get_sub_action_script: No script found with name '%s'." % [script_path])
+		return null
 	var sub_action = script.new()
 	_cached_subaction_scripts[script_path] = sub_action
 	return sub_action

@@ -1,11 +1,12 @@
-[gd_scene load_steps=22 format=3 uid="uid://bhfn0tyxcesh3"]
+[gd_scene load_steps=23 format=3 uid="uid://bhfn0tyxcesh3"]
 
 [ext_resource type="Script" path="res://Scenes/Editors/PageEditor/Scripts/page_editor_control.gd" id="1_j87ob"]
 [ext_resource type="Texture2D" uid="uid://io35wpu802fp" path="res://assets/Sprites/UI/BackPatches/Patch_64_12.png" id="2_57tad"]
+[ext_resource type="Script" path="res://Scenes/Editors/SharedSubEditors/file_subeditor_container.gd" id="3_ds010"]
 [ext_resource type="Script" path="res://assets/Scripts/Ui/DisplayNodes/back_patch_container.gd" id="3_k0vcb"]
 [ext_resource type="Texture2D" uid="uid://dul8y1l1gw420" path="res://assets/Sprites/UI/BackPatches/Patch_32_8_Dark.png" id="4_s5hjt"]
 [ext_resource type="Script" path="res://Scenes/UiNodes/loaded_option_button.gd" id="5_xop6x"]
-[ext_resource type="Script" path="res://assets/Scripts/DevTools/EditorHelpers/details_editor_container.gd" id="6_cxghu"]
+[ext_resource type="Script" path="res://Scenes/Editors/SharedSubEditors/details_editor_container.gd" id="6_3peke"]
 [ext_resource type="Texture2D" uid="uid://s8s7rktavc7e" path="res://assets/Sprites/UI/BackPatches/Patch_32_8.png" id="7_hxhw1"]
 [ext_resource type="Texture2D" uid="uid://dqdbifqrtc5py" path="res://assets/Sprites/UI/DevTools/small_icon_box.png" id="8_ycik2"]
 [ext_resource type="Texture2D" uid="uid://cl0vvm446vnhg" path="res://assets/Sprites/UI/DevTools/large_icon_box.png" id="9_die6s"]
@@ -22,7 +23,7 @@
 [ext_resource type="Script" path="res://Scenes/Editors/PageEditor/Scripts/SubEditors/damage_subeditor_container.gd" id="20_j2ru7"]
 [ext_resource type="Script" path="res://Scenes/Editors/PageEditor/Scripts/SubEditors/damage_edit_entry_container.gd" id="21_re071"]
 
-[node name="PageEditorControl" type="Container" node_paths=PackedStringArray("preview_subedit_container", "cost_subedit_container", "subactions_subedit_container", "damage_subedit_container", "exit_button", "file_path_line_edit", "file_name_line_edit", "open_file_button", "save_file_button", "load_file_button", "quick_load_option_button", "edit_selection_option_button", "details_editor_control", "background", "inner_container")]
+[node name="PageEditorControl" type="Container" node_paths=PackedStringArray("preview_subedit_container", "cost_subedit_container", "subactions_subedit_container", "damage_subedit_container", "exit_button", "details_editor_control", "file_subeitor_container", "background", "inner_container")]
 custom_minimum_size = Vector2(1148, 648)
 offset_right = 1148.0
 offset_bottom = 648.0
@@ -34,14 +35,8 @@ cost_subedit_container = NodePath("InnerContainer/MainContainer/RightContainer/C
 subactions_subedit_container = NodePath("InnerContainer/MainContainer/MiddleContainer/SubActionSubEditorContainer")
 damage_subedit_container = NodePath("InnerContainer/MainContainer/RightContainer/DamageDataSubEditorContainer")
 exit_button = NodePath("InnerContainer/TopBarContainer/ExitButton")
-file_path_line_edit = NodePath("InnerContainer/TopBarContainer/FileSelectionContainer/FileSelectionInnerContainer/FilePathContainer/FilePathLineEdit")
-file_name_line_edit = NodePath("InnerContainer/TopBarContainer/FileSelectionContainer/FileSelectionInnerContainer/FileNameContainer/FileNameLineEdit")
-open_file_button = NodePath("InnerContainer/TopBarContainer/FileSelectionContainer/FileSelectionInnerContainer/FilePathContainer/OpenButton")
-save_file_button = NodePath("InnerContainer/TopBarContainer/FileSelectionContainer/FileSelectionInnerContainer/FileNameContainer/SaveButton")
-load_file_button = NodePath("InnerContainer/TopBarContainer/FileSelectionContainer/FileSelectionInnerContainer/FileNameContainer/LoadButton")
-quick_load_option_button = NodePath("InnerContainer/TopBarContainer/EditSelectionContainer/InnerContainer/QuickLoadContainer/QuickLoadOptionButton")
-edit_selection_option_button = NodePath("InnerContainer/TopBarContainer/EditSelectionContainer/InnerContainer/EditSelectorContainer/EditSelectorOptionButton")
 details_editor_control = NodePath("InnerContainer/MainContainer/LeftContainer/DetailsEditorContainer")
+file_subeitor_container = NodePath("InnerContainer/TopBarContainer/FileSubEditorContainer")
 background = NodePath("Background")
 inner_container = NodePath("InnerContainer")
 margin_override = 6
@@ -64,16 +59,45 @@ vertical = true
 [node name="TopBarContainer" type="HBoxContainer" parent="InnerContainer"]
 layout_mode = 2
 
-[node name="FileSelectionContainer" type="Container" parent="InnerContainer/TopBarContainer" node_paths=PackedStringArray("background", "inner_container")]
+[node name="FileSubEditorContainer" type="Container" parent="InnerContainer/TopBarContainer" node_paths=PackedStringArray("file_path_line_edit", "file_name_line_edit", "open_file_button", "save_file_button", "file_dialog", "quick_file_option_button", "edit_object_option_button", "root_editor_control", "background", "inner_container")]
+custom_minimum_size = Vector2(0, 84)
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("3_ds010")
+file_path_line_edit = NodePath("InnerContainer/FileSelectionContainer/FileSelectionInnerContainer/FilePathContainer/FilePathLineEdit")
+file_name_line_edit = NodePath("InnerContainer/FileSelectionContainer/FileSelectionInnerContainer/FileNameContainer/FileNameLineEdit")
+open_file_button = NodePath("InnerContainer/FileSelectionContainer/FileSelectionInnerContainer/FilePathContainer/OpenButton")
+save_file_button = NodePath("InnerContainer/FileSelectionContainer/FileSelectionInnerContainer/FileNameContainer/SaveButton")
+file_dialog = NodePath("InnerContainer/FileSelectionContainer/FileDialog")
+quick_file_option_button = NodePath("InnerContainer/EditSelectionContainer/InnerContainer/QuickLoadContainer/QuickLoadOptionButton")
+edit_object_option_button = NodePath("InnerContainer/EditSelectionContainer/InnerContainer/EditSelectorContainer/EditSelectorOptionButton")
+root_editor_control = NodePath("../../..")
+background = NodePath("Background")
+inner_container = NodePath("InnerContainer")
+margin_override = 0
+
+[node name="Background" type="NinePatchRect" parent="InnerContainer/TopBarContainer/FileSubEditorContainer"]
+visible = false
+custom_minimum_size = Vector2(376, 16)
+layout_mode = 2
+texture = ExtResource("4_s5hjt")
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+
+[node name="InnerContainer" type="HBoxContainer" parent="InnerContainer/TopBarContainer/FileSubEditorContainer"]
+layout_mode = 2
+
+[node name="FileSelectionContainer" type="Container" parent="InnerContainer/TopBarContainer/FileSubEditorContainer/InnerContainer" node_paths=PackedStringArray("background", "inner_container")]
 custom_minimum_size = Vector2(16, 82)
 layout_mode = 2
 size_flags_horizontal = 3
 script = ExtResource("3_k0vcb")
 background = NodePath("Background")
 inner_container = NodePath("FileSelectionInnerContainer")
-force_dimintions = null
 
-[node name="Background" type="NinePatchRect" parent="InnerContainer/TopBarContainer/FileSelectionContainer"]
+[node name="Background" type="NinePatchRect" parent="InnerContainer/TopBarContainer/FileSubEditorContainer/InnerContainer/FileSelectionContainer"]
 layout_mode = 2
 texture = ExtResource("4_s5hjt")
 patch_margin_left = 8
@@ -81,58 +105,54 @@ patch_margin_top = 8
 patch_margin_right = 8
 patch_margin_bottom = 8
 
-[node name="FileSelectionInnerContainer" type="BoxContainer" parent="InnerContainer/TopBarContainer/FileSelectionContainer"]
+[node name="FileSelectionInnerContainer" type="BoxContainer" parent="InnerContainer/TopBarContainer/FileSubEditorContainer/InnerContainer/FileSelectionContainer"]
 custom_minimum_size = Vector2(360, 0)
 layout_mode = 2
 vertical = true
 
-[node name="FilePathContainer" type="HBoxContainer" parent="InnerContainer/TopBarContainer/FileSelectionContainer/FileSelectionInnerContainer"]
+[node name="FilePathContainer" type="HBoxContainer" parent="InnerContainer/TopBarContainer/FileSubEditorContainer/InnerContainer/FileSelectionContainer/FileSelectionInnerContainer"]
 layout_mode = 2
 
-[node name="FilePathLabel" type="Label" parent="InnerContainer/TopBarContainer/FileSelectionContainer/FileSelectionInnerContainer/FilePathContainer"]
+[node name="FilePathLabel" type="Label" parent="InnerContainer/TopBarContainer/FileSubEditorContainer/InnerContainer/FileSelectionContainer/FileSelectionInnerContainer/FilePathContainer"]
 layout_mode = 2
 text = "File Path:"
 
-[node name="FilePathLineEdit" type="LineEdit" parent="InnerContainer/TopBarContainer/FileSelectionContainer/FileSelectionInnerContainer/FilePathContainer"]
+[node name="FilePathLineEdit" type="LineEdit" parent="InnerContainer/TopBarContainer/FileSubEditorContainer/InnerContainer/FileSelectionContainer/FileSelectionInnerContainer/FilePathContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="OpenButton" type="Button" parent="InnerContainer/TopBarContainer/FileSelectionContainer/FileSelectionInnerContainer/FilePathContainer"]
+[node name="OpenButton" type="Button" parent="InnerContainer/TopBarContainer/FileSubEditorContainer/InnerContainer/FileSelectionContainer/FileSelectionInnerContainer/FilePathContainer"]
+custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 text = "Open"
 
-[node name="FileNameContainer" type="HBoxContainer" parent="InnerContainer/TopBarContainer/FileSelectionContainer/FileSelectionInnerContainer"]
+[node name="FileNameContainer" type="HBoxContainer" parent="InnerContainer/TopBarContainer/FileSubEditorContainer/InnerContainer/FileSelectionContainer/FileSelectionInnerContainer"]
 layout_mode = 2
 
-[node name="FileNameLabel" type="Label" parent="InnerContainer/TopBarContainer/FileSelectionContainer/FileSelectionInnerContainer/FileNameContainer"]
+[node name="FileNameLabel" type="Label" parent="InnerContainer/TopBarContainer/FileSubEditorContainer/InnerContainer/FileSelectionContainer/FileSelectionInnerContainer/FileNameContainer"]
 layout_mode = 2
 text = "File Path:"
 
-[node name="FileNameLineEdit" type="LineEdit" parent="InnerContainer/TopBarContainer/FileSelectionContainer/FileSelectionInnerContainer/FileNameContainer"]
+[node name="FileNameLineEdit" type="LineEdit" parent="InnerContainer/TopBarContainer/FileSubEditorContainer/InnerContainer/FileSelectionContainer/FileSelectionInnerContainer/FileNameContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="SaveButton" type="Button" parent="InnerContainer/TopBarContainer/FileSelectionContainer/FileSelectionInnerContainer/FileNameContainer"]
+[node name="SaveButton" type="Button" parent="InnerContainer/TopBarContainer/FileSubEditorContainer/InnerContainer/FileSelectionContainer/FileSelectionInnerContainer/FileNameContainer"]
+custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 text = "Save"
 
-[node name="LoadButton" type="Button" parent="InnerContainer/TopBarContainer/FileSelectionContainer/FileSelectionInnerContainer/FileNameContainer"]
-layout_mode = 2
-text = "Load
-"
+[node name="FileDialog" type="FileDialog" parent="InnerContainer/TopBarContainer/FileSubEditorContainer/InnerContainer/FileSelectionContainer"]
 
-[node name="FileDialog" type="FileDialog" parent="InnerContainer/TopBarContainer/FileSelectionContainer"]
-
-[node name="EditSelectionContainer" type="Container" parent="InnerContainer/TopBarContainer" node_paths=PackedStringArray("background", "inner_container")]
+[node name="EditSelectionContainer" type="Container" parent="InnerContainer/TopBarContainer/FileSubEditorContainer/InnerContainer" node_paths=PackedStringArray("background", "inner_container")]
 custom_minimum_size = Vector2(16, 84)
 layout_mode = 2
 size_flags_horizontal = 3
 script = ExtResource("3_k0vcb")
 background = NodePath("Background")
 inner_container = NodePath("InnerContainer")
-force_dimintions = null
 
-[node name="Background" type="NinePatchRect" parent="InnerContainer/TopBarContainer/EditSelectionContainer"]
+[node name="Background" type="NinePatchRect" parent="InnerContainer/TopBarContainer/FileSubEditorContainer/InnerContainer/EditSelectionContainer"]
 layout_mode = 2
 texture = ExtResource("4_s5hjt")
 patch_margin_left = 8
@@ -140,38 +160,40 @@ patch_margin_top = 8
 patch_margin_right = 8
 patch_margin_bottom = 8
 
-[node name="InnerContainer" type="BoxContainer" parent="InnerContainer/TopBarContainer/EditSelectionContainer"]
+[node name="InnerContainer" type="BoxContainer" parent="InnerContainer/TopBarContainer/FileSubEditorContainer/InnerContainer/EditSelectionContainer"]
 custom_minimum_size = Vector2(360, 0)
 layout_mode = 2
 vertical = true
 
-[node name="QuickLoadContainer" type="HBoxContainer" parent="InnerContainer/TopBarContainer/EditSelectionContainer/InnerContainer"]
+[node name="QuickLoadContainer" type="HBoxContainer" parent="InnerContainer/TopBarContainer/FileSubEditorContainer/InnerContainer/EditSelectionContainer/InnerContainer"]
 layout_mode = 2
 
-[node name="QuickLoadLabel" type="Label" parent="InnerContainer/TopBarContainer/EditSelectionContainer/InnerContainer/QuickLoadContainer"]
+[node name="QuickLoadLabel" type="Label" parent="InnerContainer/TopBarContainer/FileSubEditorContainer/InnerContainer/EditSelectionContainer/InnerContainer/QuickLoadContainer"]
 layout_mode = 2
 text = "Quick Load:"
 
-[node name="QuickLoadOptionButton" type="OptionButton" parent="InnerContainer/TopBarContainer/EditSelectionContainer/InnerContainer/QuickLoadContainer"]
+[node name="QuickLoadOptionButton" type="OptionButton" parent="InnerContainer/TopBarContainer/FileSubEditorContainer/InnerContainer/EditSelectionContainer/InnerContainer/QuickLoadContainer"]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 size_flags_horizontal = 3
+text_overrun_behavior = 3
 fit_to_longest_item = false
 script = ExtResource("5_xop6x")
 allways_show_none = true
 no_option_text = "-New-"
 
-[node name="EditSelectorContainer" type="HBoxContainer" parent="InnerContainer/TopBarContainer/EditSelectionContainer/InnerContainer"]
+[node name="EditSelectorContainer" type="HBoxContainer" parent="InnerContainer/TopBarContainer/FileSubEditorContainer/InnerContainer/EditSelectionContainer/InnerContainer"]
 layout_mode = 2
 
-[node name="EditSelectorLabel" type="Label" parent="InnerContainer/TopBarContainer/EditSelectionContainer/InnerContainer/EditSelectorContainer"]
+[node name="EditSelectorLabel" type="Label" parent="InnerContainer/TopBarContainer/FileSubEditorContainer/InnerContainer/EditSelectionContainer/InnerContainer/EditSelectorContainer"]
 layout_mode = 2
 text = "Select To Edit:"
 
-[node name="EditSelectorOptionButton" type="OptionButton" parent="InnerContainer/TopBarContainer/EditSelectionContainer/InnerContainer/EditSelectorContainer"]
+[node name="EditSelectorOptionButton" type="OptionButton" parent="InnerContainer/TopBarContainer/FileSubEditorContainer/InnerContainer/EditSelectionContainer/InnerContainer/EditSelectorContainer"]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 size_flags_horizontal = 3
+text_overrun_behavior = 3
 fit_to_longest_item = false
 script = ExtResource("5_xop6x")
 
@@ -190,7 +212,7 @@ layout_mode = 2
 custom_minimum_size = Vector2(376, 16)
 layout_mode = 2
 size_flags_vertical = 3
-script = ExtResource("6_cxghu")
+script = ExtResource("6_3peke")
 object_key_line_edit = NodePath("InnerContainer/ObjectKeyContainer/ObjectKeyLineEdit")
 display_name_line_edit = NodePath("InnerContainer/DisplayNameContainer/DisplayNameLineEdit")
 snippet_line_edit = NodePath("InnerContainer/SnippetContainer/SnippetLineEdit")
@@ -203,7 +225,6 @@ large_icon_option_button = NodePath("InnerContainer/IconsContainer/InnerContaine
 root_editor_control = NodePath("../../../..")
 background = NodePath("Background")
 inner_container = NodePath("InnerContainer")
-force_dimintions = null
 
 [node name="Background" type="NinePatchRect" parent="InnerContainer/MainContainer/LeftContainer/DetailsEditorContainer"]
 custom_minimum_size = Vector2(376, 16)
@@ -238,7 +259,6 @@ script = ExtResource("3_k0vcb")
 background = NodePath("Background")
 inner_container = NodePath("InnerContainer")
 force_fill_x = true
-force_dimintions = null
 
 [node name="Background" type="NinePatchRect" parent="InnerContainer/MainContainer/LeftContainer/DetailsEditorContainer/InnerContainer/IconsContainer"]
 layout_mode = 2
@@ -359,7 +379,6 @@ custom_minimum_size = Vector2(12, 84)
 layout_mode = 2
 show_background = false
 force_fill_x = true
-force_dimintions = null
 
 [node name="MiddleContainer" type="VBoxContainer" parent="InnerContainer/MainContainer"]
 layout_mode = 2
@@ -374,7 +393,6 @@ preview_move_check_box = NodePath("InnerContainer/PreviewMoveContainer/CheckBox"
 root_editor_control = NodePath("../../../..")
 background = NodePath("Background")
 inner_container = NodePath("InnerContainer")
-force_dimintions = null
 
 [node name="Background" type="NinePatchRect" parent="InnerContainer/MainContainer/MiddleContainer/PreviewEditorContainer"]
 custom_minimum_size = Vector2(376, 16)
@@ -453,7 +471,7 @@ layout_mode = 2
 visible = false
 layout_mode = 2
 
-[node name="SubActionSubEditorContainer" type="Container" parent="InnerContainer/MainContainer/MiddleContainer" node_paths=PackedStringArray("add_option_button", "premade_subaction_edit_entry", "subaction_entry_container", "root_editor_control", "background", "inner_container")]
+[node name="SubActionSubEditorContainer" type="Container" parent="InnerContainer/MainContainer/MiddleContainer" node_paths=PackedStringArray("add_option_button", "premade_subaction_edit_entry", "subaction_entry_container", "title_label", "root_editor_control", "background", "inner_container")]
 custom_minimum_size = Vector2(16, 16)
 layout_mode = 2
 size_flags_vertical = 3
@@ -461,12 +479,12 @@ script = ExtResource("14_hcxeu")
 add_option_button = NodePath("InnerContainer/TitleContainer/AddOptionButton")
 premade_subaction_edit_entry = NodePath("InnerContainer/SubActionEditorEntryContainer")
 subaction_entry_container = NodePath("InnerContainer/ScrollContainer/SubActionEntriesContainer")
+title_label = NodePath("InnerContainer/TitleContainer/TitleLabel")
 root_editor_control = NodePath("../../../..")
 background = NodePath("Background")
 inner_container = NodePath("InnerContainer")
 force_fill_x = true
 force_fill_y = true
-force_dimintions = null
 
 [node name="Background" type="NinePatchRect" parent="InnerContainer/MainContainer/MiddleContainer/SubActionSubEditorContainer"]
 custom_minimum_size = Vector2(376, 16)
@@ -483,7 +501,7 @@ layout_mode = 2
 [node name="TitleContainer" type="HBoxContainer" parent="InnerContainer/MainContainer/MiddleContainer/SubActionSubEditorContainer/InnerContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="InnerContainer/MainContainer/MiddleContainer/SubActionSubEditorContainer/InnerContainer/TitleContainer"]
+[node name="TitleLabel" type="Label" parent="InnerContainer/MainContainer/MiddleContainer/SubActionSubEditorContainer/InnerContainer/TitleContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 22
@@ -506,7 +524,6 @@ script = ExtResource("14_65vrg")
 background = NodePath("Background")
 inner_container = NodePath("InnerContainer")
 force_fill_x = true
-force_dimintions = null
 
 [node name="Background" type="NinePatchRect" parent="InnerContainer/MainContainer/MiddleContainer/SubActionSubEditorContainer/InnerContainer/SubActionEditorEntryContainer"]
 layout_mode = 2
@@ -625,16 +642,17 @@ size_flags_vertical = 3
 [node name="RightContainer" type="VBoxContainer" parent="InnerContainer/MainContainer"]
 layout_mode = 2
 
-[node name="CostSubEditorContainer" type="Container" parent="InnerContainer/MainContainer/RightContainer" node_paths=PackedStringArray("add_button", "premade_cost_entry", "entry_container", "background", "inner_container")]
+[node name="CostSubEditorContainer" type="Container" parent="InnerContainer/MainContainer/RightContainer" node_paths=PackedStringArray("add_button", "premade_cost_entry", "entry_container", "title_label", "root_editor_control", "background", "inner_container")]
 custom_minimum_size = Vector2(376, 77)
 layout_mode = 2
 script = ExtResource("14_258ts")
 add_button = NodePath("InnerContainer/HBoxContainer/VBoxContainer/Button")
 premade_cost_entry = NodePath("InnerContainer/HBoxContainer/CostEditEntryContainer")
 entry_container = NodePath("InnerContainer/HBoxContainer/ScrollContainer/FlowContainer")
+title_label = NodePath("InnerContainer/HBoxContainer/VBoxContainer/TitleLabel")
+root_editor_control = NodePath("../../../..")
 background = NodePath("Background")
 inner_container = NodePath("InnerContainer")
-force_dimintions = null
 
 [node name="Background" type="NinePatchRect" parent="InnerContainer/MainContainer/RightContainer/CostSubEditorContainer"]
 custom_minimum_size = Vector2(376, 16)
@@ -656,7 +674,7 @@ layout_mode = 2
 [node name="VBoxContainer" type="VBoxContainer" parent="InnerContainer/MainContainer/RightContainer/CostSubEditorContainer/InnerContainer/HBoxContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="InnerContainer/MainContainer/RightContainer/CostSubEditorContainer/InnerContainer/HBoxContainer/VBoxContainer"]
+[node name="TitleLabel" type="Label" parent="InnerContainer/MainContainer/RightContainer/CostSubEditorContainer/InnerContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 1
 theme_override_font_sizes/font_size = 18
@@ -667,12 +685,12 @@ layout_mode = 2
 text = "Add"
 
 [node name="CostEditEntryContainer" type="Container" parent="InnerContainer/MainContainer/RightContainer/CostSubEditorContainer/InnerContainer/HBoxContainer" node_paths=PackedStringArray("background", "inner_container")]
-custom_minimum_size = Vector2(162, 47)
+custom_minimum_size = Vector2(146, 39)
 layout_mode = 2
 script = ExtResource("15_2nobb")
 background = NodePath("Background")
 inner_container = NodePath("InnerContainer")
-force_dimintions = null
+margin_override = 4
 
 [node name="Background" type="NinePatchRect" parent="InnerContainer/MainContainer/RightContainer/CostSubEditorContainer/InnerContainer/HBoxContainer/CostEditEntryContainer"]
 layout_mode = 2
@@ -684,6 +702,7 @@ patch_margin_bottom = 8
 
 [node name="InnerContainer" type="HBoxContainer" parent="InnerContainer/MainContainer/RightContainer/CostSubEditorContainer/InnerContainer/HBoxContainer/CostEditEntryContainer"]
 layout_mode = 2
+theme_override_constants/separation = 0
 
 [node name="SelfScalingLineEdit" type="LineEdit" parent="InnerContainer/MainContainer/RightContainer/CostSubEditorContainer/InnerContainer/HBoxContainer/CostEditEntryContainer/InnerContainer" node_paths=PackedStringArray("hidden_text_edit")]
 custom_minimum_size = Vector2(52, 31)
@@ -718,19 +737,20 @@ layout_mode = 2
 size_flags_horizontal = 3
 alignment = 2
 
-[node name="DamageDataSubEditorContainer" type="Container" parent="InnerContainer/MainContainer/RightContainer" node_paths=PackedStringArray("add_button", "premade_edit_entry", "damage_entries_container", "background", "inner_container")]
+[node name="DamageDataSubEditorContainer" type="Container" parent="InnerContainer/MainContainer/RightContainer" node_paths=PackedStringArray("add_button", "premade_edit_entry", "entries_container", "title_label", "root_editor_control", "background", "inner_container")]
 custom_minimum_size = Vector2(16, 16)
 layout_mode = 2
 size_flags_vertical = 3
 script = ExtResource("20_j2ru7")
 add_button = NodePath("InnerContainer/TitleContainer/Button")
 premade_edit_entry = NodePath("InnerContainer/DamageEditEntryContainer")
-damage_entries_container = NodePath("InnerContainer/ScrollContainer/DamageEntriesContainer")
+entries_container = NodePath("InnerContainer/ScrollContainer/DamageEntriesContainer")
+title_label = NodePath("InnerContainer/TitleContainer/TitleLabel")
+root_editor_control = NodePath("../../../..")
 background = NodePath("Background")
 inner_container = NodePath("InnerContainer")
 force_fill_x = true
 force_fill_y = true
-force_dimintions = null
 
 [node name="Background" type="NinePatchRect" parent="InnerContainer/MainContainer/RightContainer/DamageDataSubEditorContainer"]
 custom_minimum_size = Vector2(376, 16)
@@ -764,7 +784,6 @@ script = ExtResource("21_re071")
 background = NodePath("Background")
 inner_container = NodePath("InnerContainer")
 force_fill_x = true
-force_dimintions = null
 
 [node name="Background" type="NinePatchRect" parent="InnerContainer/MainContainer/RightContainer/DamageDataSubEditorContainer/InnerContainer/DamageEditEntryContainer"]
 layout_mode = 2

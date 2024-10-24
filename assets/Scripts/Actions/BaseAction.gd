@@ -39,13 +39,14 @@ func _init(file_load_path:String, args:Dictionary) -> void:
 	ActionData = args
 	
 	#TODO: Translations
-	DisplayName = args['DisplayName']
-	SnippetDesc = args['SnippetDesc']
-	Description = args['Description']
-	Tags = args['Tags']
+	var details = args.get("Details", args)
+	DisplayName = details['DisplayName']
+	SnippetDesc = details['SnippetDesc']
+	Description = details['Description']
+	Tags = details['Tags']
 	
-	SmallSprite = args['SmallSprite']
-	LargeSprite = args.get('LargeSprite', '')
+	SmallSprite = details.get('SmallSprite', '')
+	LargeSprite = details.get('LargeSprite', '')
 	if args.keys().has("OnQueUiState"):
 		OnQueUiState = args['OnQueUiState']
 	

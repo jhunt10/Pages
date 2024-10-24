@@ -4,11 +4,11 @@ extends BaseSubEditorContainer
 
 @export var add_button:Button
 @export var premade_edit_entry:DamageEditEntryContainer
-@export var damage_entries_container:VBoxContainer
+@export var entries_container:VBoxContainer
 
 func get_key_to_input_mapping()->Dictionary:
 	var dict = {}
-	for entry:DamageEditEntryContainer in damage_entries_container.get_children():
+	for entry:DamageEditEntryContainer in entries_container.get_children():
 		var key = entry.damage_key_line_edit.text
 		dict[key] = entry
 	return dict
@@ -21,21 +21,33 @@ func _ready() -> void:
 
 func clear():
 	_loaded_data.clear()
-	for child in damage_entries_container.get_children():
-		damage_entries_container.remove_child(child)
-	
+	for child in entries_container.get_children():
+		child.queue_free()
+
+func has_change():
+	var loaded_keys = _loaded_data.keys()
+	for entry:DamageEditEntryContainer in entries_container.get_children():
+		if entry.has_change():
+			return true
+		var key = entry.damage_key_line_edit.text
+		if loaded_keys.has(key):
+			loaded_keys.erase(key)
+	# Keys that were loaed but are now gone
+	if loaded_keys.size() > 0:
+		return true
+	return false
 
 func load_data(object_key:String, data:Dictionary):
-	_loaded_data = data
+	_loaded_data = data.duplicate(true)
 	for key in data:
 		create_new_entry(key, data[key])
 
 func create_new_entry(key:String, data:Dictionary):
 	var new_entry:DamageEditEntryContainer = premade_edit_entry.duplicate()
-	damage_entries_container.add_child(new_entry)
+	entries_container.add_child(new_entry)
 	new_entry.visible = true
 	if key == "":
-		key = "DamgeData" + str((damage_entries_container.get_child_count()+1))
+		key = "DamgeData" + str((entries_container.get_child_count()))
 	new_entry.load_data(key, data)
 
 func on_add_button():

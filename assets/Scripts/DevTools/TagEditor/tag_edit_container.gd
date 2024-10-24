@@ -57,6 +57,6 @@ func lose_focus_if_has():
 	for tag_entry:TagEditEntryContainer in tags_container.get_children():
 		tag_entry.lose_focus_if_has()
 
-func chack_for_change(source_list:Array)->bool:
+func check_for_change(source_list:Array)->bool:
 	#TODO
 	return false
