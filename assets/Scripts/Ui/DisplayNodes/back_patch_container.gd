@@ -4,7 +4,7 @@ extends Container
 
 static var global_refresh_list:Array = []
 
-const LOGGING = true
+const LOGGING = false
 
 @export var global_refresh:bool = false
 @export var refresh:bool = false
@@ -14,6 +14,7 @@ const LOGGING = true
 
 @export var force_fill_x:bool = false
 @export var force_fill_y:bool = false
+@export var force_dimintions:Vector2i
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -92,6 +93,11 @@ func resize_self_around_child():
 	else:
 		self_custom_min.y = min_inner_size.y + (2 * margin_val)
 		self_size.y = self_custom_min.y
+	
+	if force_dimintions != Vector2i.ZERO:
+		self_size = force_dimintions
+		self_custom_min = force_dimintions
+		inner_size = Vector2i(force_dimintions.x - (2 * margin_val), force_dimintions.y - (2 * margin_val))
 	
 	self.set_size(self_size)
 	self.custom_minimum_size = self_custom_min

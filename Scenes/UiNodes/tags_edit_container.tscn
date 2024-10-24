@@ -17,6 +17,7 @@ show_background = true
 background = NodePath("Background")
 inner_container = NodePath("InnerContainer")
 margin_override = 6
+force_dimintions = null
 
 [node name="Background" type="NinePatchRect" parent="."]
 layout_mode = 2
@@ -43,12 +44,13 @@ layout_mode = 2
 text = "Add"
 
 [node name="TagEditContainer" type="Container" parent="InnerContainer" node_paths=PackedStringArray("background", "inner_container")]
-custom_minimum_size = Vector2(77, 33)
+custom_minimum_size = Vector2(97, 39)
 layout_mode = 2
 script = ExtResource("3_uu4md")
 background = NodePath("Background")
 inner_container = NodePath("InnerContainer")
 margin_override = 4
+force_dimintions = null
 
 [node name="Background" type="NinePatchRect" parent="InnerContainer/TagEditContainer"]
 layout_mode = 2

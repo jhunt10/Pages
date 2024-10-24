@@ -35,6 +35,11 @@ func has_change():
 			return true
 	return false
 
+func clear():
+	_loaded_data.clear()
+	for child in subaction_entry_container.get_children():
+		subaction_entry_container.remove_child(child)
+
 func load_data(object_key:String, data:Dictionary):
 	_loaded_data = data
 	for index in data.keys():

@@ -44,7 +44,7 @@ func load_options(force_option:String=''):
 	if allways_show_none:
 		self.add_item(no_option_text)
 		selected_index = 0
-		
+	
 	var options = get_options_func.call()
 	if options.size() > 0:
 		for option in options:

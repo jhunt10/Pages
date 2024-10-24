@@ -49,12 +49,26 @@ func _process(delta: float) -> void:
 	if Engine.is_editor_hint(): return
 	pass
 
+func clear_all_subeditors():
+	for sub:BaseSubEditorContainer in get_keys_to_subeditor_mapping().values():
+		sub.clear()
+
 func get_keys_to_subeditor_mapping()->Dictionary:
 	return {
 		"Details": details_editor_control
 	}
 
+func get_subeditor_option_keys(key:String)->Array:
+	var subeditors = get_keys_to_subeditor_mapping()
+	var subeditor:BaseSubEditorContainer = subeditors.get(key)
+	if !subeditor:
+		printerr("%s.get_subeditor_option_keys:Failed to find subeditor '%s'." % [self.name, key])
+		return []
+	return subeditor.get_key_to_input_mapping().keys()
+
+
 func load_file(full_path:String, selected_object=''):
+	clear_all_subeditors()
 	file_path_line_edit.text = full_path.get_base_dir()
 	file_name_line_edit.text = full_path.get_file()
 	_editing_file_datas = parse_datas_from_file(full_path)
@@ -69,6 +83,8 @@ func save_file():
 	var saving_object_key = details_editor_control.object_key_line_edit.text
 	var data = {object_key_name: saving_object_key}
 	print(data)
+
+
 
 func load_object_data(object_key:String):
 	if !_editing_file_datas.keys().has(object_key):

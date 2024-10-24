@@ -8,6 +8,11 @@ extends BaseSubEditorContainer
 @export var description_text_edit:TextEdit
 @export var tags_edit_container:TagEditContainer
 
+@export var small_icon_texture_rect:TextureRect
+@export var large_icon_texture_rect:TextureRect
+@export var small_icon_option_button:LoadedOptionButton
+@export var large_icon_option_button:LoadedOptionButton
+
 func get_key_to_input_mapping()->Dictionary:
 	return {
 		"DisplayName": display_name_line_edit,
@@ -17,11 +22,6 @@ func get_key_to_input_mapping()->Dictionary:
 		"LargeIcon": large_icon_option_button,
 		"Tags": tags_edit_container
 	}
-
-@export var small_icon_texture_rect:TextureRect
-@export var large_icon_texture_rect:TextureRect
-@export var small_icon_option_button:LoadedOptionButton
-@export var large_icon_option_button:LoadedOptionButton
 
 var _cached_sprite_options:Array = []
 
@@ -39,9 +39,6 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	super(delta)
 	if Engine.is_editor_hint(): return
-	if has_change():
-		printerr("Change!!")
-	pass
 
 
 ##############################
@@ -52,6 +49,10 @@ func lose_focus_if_has():
 
 func has_change():
 	return super()
+
+func clear():
+	super()
+	object_key_line_edit.text = ""
 
 func load_data(object_key:String, data:Dictionary):
 	super(object_key, data)

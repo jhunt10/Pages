@@ -38,6 +38,13 @@ func has_change():
 			return true
 	return false
 
+func clear():
+	var mapping = get_key_to_input_mapping()
+	for key in mapping.keys():
+		var input_node = get_key_to_input_mapping().get(key)
+		_clear_input(key, input_node)
+	_loaded_data.clear()
+
 func load_data(object_key:String, data:Dictionary):
 	_loaded_data = data
 	var mapping = get_key_to_input_mapping()
@@ -59,6 +66,8 @@ func build_save_data()->Dictionary:
 func _load_input(key, data, input_node):
 	if input_node is LineEdit or input_node is TextEdit:
 		input_node.text = data.get(key, "")
+	elif input_node is SpinBox:
+		return input_node.value != data.get(key, 0)
 	elif input_node is LoadedOptionButton:
 		input_node.load_options(data.get(key, ""))
 	elif input_node is TagEditContainer:
@@ -72,6 +81,11 @@ func _input_lose_focus_if_has(key, input_node):
 	if input_node is LineEdit or input_node is TextEdit:
 		if input_node.has_focus():
 			input_node.release_focus()
+	elif input_node is SpinBox:
+		input_node.apply
+		var line = input_node.get_line_edit()
+		if line.has_focus():
+			line.release_focus()
 	elif input_node.has_method("lose_focus_if_has"):
 		input_node.lose_focus_if_has()
 	elif input_node is LoadedOptionButton:
@@ -82,6 +96,8 @@ func _input_lose_focus_if_has(key, input_node):
 func _check_input_has_changed(key, data, input_node)->bool:
 	if input_node is LineEdit or input_node is TextEdit:
 		return input_node.text != data.get(key, "")
+	elif input_node is SpinBox:
+		return input_node.value != data.get(key, 0)
 	elif input_node is LoadedOptionButton:
 		return input_node.get_current_option_text() != data.get(key, "")
 	elif input_node is TagEditContainer:
@@ -97,6 +113,8 @@ func _check_input_has_changed(key, data, input_node)->bool:
 func _save_input(key, data, input_node):
 	if input_node is LineEdit or input_node is TextEdit:
 		data[key] = input_node.text
+	elif input_node is SpinBox:
+		data[key] = input_node.value
 	elif input_node is LoadedOptionButton:
 		data[key] = input_node.get_current_option_text()
 	elif input_node is TagEditContainer:
@@ -107,3 +125,20 @@ func _save_input(key, data, input_node):
 		return input_node.get_prop_value() 
 	else:
 		printerr("%s: Unknown input type: '%s'." % [self.name, input_node])
+
+func _clear_input(key, input_node):
+	if input_node is LineEdit or input_node is TextEdit:
+		input_node.text = ""
+	elif input_node is SpinBox:
+		input_node.value = 0
+	elif input_node is LoadedOptionButton:
+		input_node.load_options("")
+	elif input_node is TagEditContainer:
+		input_node.load_optional_tags([])
+	elif input_node is MoveInputContainer:
+		input_node.set_value([0,0,0,0])
+	elif input_node is SubActionPropInputContainer:
+		input_node.clear() 
+	else:
+		printerr("%s: Unknown input type: '%s'." % [self.name, input_node])
+	

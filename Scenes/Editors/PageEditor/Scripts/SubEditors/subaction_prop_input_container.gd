@@ -100,17 +100,35 @@ func get_prop_value():
 		return spin_box.value
 	return null
 
+func clear():
+	if _prop_type == BaseSubAction.SubActionPropType.EnumVal:
+		option_button.load_options("")
+	if _prop_type == BaseSubAction.SubActionPropType.TargetKey:
+		option_button.load_options("")
+	elif _prop_type == BaseSubAction.SubActionPropType.EffectKey:
+		option_button.load_options("")
+	elif _prop_type == BaseSubAction.SubActionPropType.DamageKey:
+		option_button.load_options("")
+	elif _prop_type == BaseSubAction.SubActionPropType.MissileKey:
+		option_button.load_options("")
+	elif _prop_type == BaseSubAction.SubActionPropType.MoveValue:
+		move_value_container.set_value([0,0,0,0])
+	elif _prop_type == BaseSubAction.SubActionPropType.StringVal:
+		line_edit.text = ""
+	elif _prop_type == BaseSubAction.SubActionPropType.IntVal:
+		spin_box.value = 0
+
 func get_target_options():
-	return []
+	return PageEditorControl.Instance.get_subeditor_option_keys("TargetParams")
 
 func get_damage_options():
-	return []
+	return PageEditorControl.Instance.get_subeditor_option_keys("DamageDatas")
 
 func get_effect_options():
-	return []
+	return EffectLibary._effects_data.keys()
 
 func get_missile_options():
-	return []
+	return PageEditorControl.Instance.get_subeditor_option_keys("MissileDatas")
 
 func get_enum_options():
 	return _parent_subaction_edit_entry
