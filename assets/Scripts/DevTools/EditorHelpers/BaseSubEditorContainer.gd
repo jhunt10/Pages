@@ -88,6 +88,8 @@ func _check_input_has_changed(key, data, input_node)->bool:
 		return input_node.chack_for_change(data.get(key, []))
 	elif input_node is MoveInputContainer:
 		return input_node.get_val() == data.get(key, "")
+	elif input_node is SubActionPropInputContainer:
+		return input_node.get_prop_value() == data.get(key)
 	else:
 		printerr("%s: Unknown input type: '%s'." % [self.name, input_node])
 	return false
@@ -101,5 +103,7 @@ func _save_input(key, data, input_node):
 		data[key] = input_node.get_tags()
 	elif input_node is MoveInputContainer:
 		data[key] = input_node.get_val()
+	elif input_node is SubActionPropInputContainer:
+		return input_node.get_prop_value() 
 	else:
 		printerr("%s: Unknown input type: '%s'." % [self.name, input_node])

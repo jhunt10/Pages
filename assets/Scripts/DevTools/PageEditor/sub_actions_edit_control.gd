@@ -1,6 +1,8 @@
 class_name SubActionsEditControl
 extends Control
 
+static var SUB_ACTIONS_PATH = "res://assets/Scripts/Actions/SubActions/"
+
 @onready var subactions_container:VBoxContainer = $VBoxContainer/ScrollContainer/VBoxContainer
 @onready var premade_subaction_entry:SubActionEntryControl = $VBoxContainer/SubActionEntry
 @onready var add_button:Button = $VBoxContainer/HBoxContainer/Button

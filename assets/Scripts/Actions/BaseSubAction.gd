@@ -3,12 +3,15 @@ extends GDScript
 
 ### SubActions do not get global properties
 
-enum SubActionPropType {TargetKey, DamageKey, EffectKey, MissileKey, MoveValue, StringVal, IntVal}
+enum SubActionPropType {TargetKey, DamageKey, EffectKey, MissileKey, MoveValue, StringVal, IntVal, EnumVal}
 
 # Returns a Dictionary of {Property Name, Property Type} for what properties this subaction
 # 	exspects to find in it's _subaction_data (Mostly for Page Editor)
 func get_required_props()->Dictionary:
 	return {}
+
+func get_prop_enum_values(prop_key:String)->Array:
+	return []
 
 ## Returns Tags that are automatically added to the parent Action's Tags
 func get_action_tags(_subaction_data:Dictionary)->Array:

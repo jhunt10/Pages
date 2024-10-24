@@ -4,6 +4,7 @@ extends BackPatchContainer
 
 @export var tag_entry_container:TagEditEntryContainer
 @export var tags_container:FlowContainer
+@export var show_background:bool
 
 @onready var add_button:Button = $InnerContainer/TitleContainer/AddButton
 
@@ -14,6 +15,11 @@ func _ready() -> void:
 		return
 	add_button.pressed.connect(add_entry)
 	tag_entry_container.visible = false
+
+func _process(delta: float) -> void:
+	super(delta)
+	if show_background != background.visible:
+		background.visible = show_background
 
 func load_optional_tags(tags:Array):
 	_build_tags_list(tags)

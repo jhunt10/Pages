@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://bhfn0tyxcesh3"]
+[gd_scene load_steps=20 format=3 uid="uid://bhfn0tyxcesh3"]
 
 [ext_resource type="Script" path="res://Scenes/Editors/PageEditor/Scripts/page_editor_control.gd" id="1_j87ob"]
 [ext_resource type="Texture2D" uid="uid://io35wpu802fp" path="res://assets/Sprites/UI/BackPatches/Patch_64_12.png" id="2_57tad"]
@@ -14,16 +14,20 @@
 [ext_resource type="Script" path="res://Scenes/Editors/PageEditor/Scripts/SubEditors/preview_subeditor_container.gd" id="11_orgne"]
 [ext_resource type="Theme" uid="uid://c1ayl4757lx1v" path="res://assets/Themes/small_spinner.tres" id="12_i1k1i"]
 [ext_resource type="Script" path="res://assets/Scripts/DevTools/self_scale_line_edit.gd" id="13_wcuop"]
+[ext_resource type="Script" path="res://Scenes/Editors/PageEditor/Scripts/SubEditors/subaction_prop_input_container.gd" id="14_2kt5x"]
+[ext_resource type="Script" path="res://Scenes/Editors/PageEditor/Scripts/SubEditors/subaction_edit_entry_container.gd" id="14_65vrg"]
 [ext_resource type="Script" path="res://Scenes/Editors/PageEditor/Scripts/SubEditors/cost_subeditor_container.gd" id="14_258ts"]
+[ext_resource type="Script" path="res://Scenes/Editors/PageEditor/Scripts/SubEditors/subaction_subeditor_container.gd" id="14_hcxeu"]
 [ext_resource type="Script" path="res://Scenes/Editors/PageEditor/Scripts/SubEditors/cost_edit_entry_container.gd" id="15_2nobb"]
 
-[node name="PageEditorControl" type="Container" node_paths=PackedStringArray("preview_subedit_container", "cost_subedit_container", "exit_button", "file_path_line_edit", "file_name_line_edit", "open_file_button", "save_file_button", "load_file_button", "quick_load_option_button", "edit_selection_option_button", "details_editor_control", "background", "inner_container")]
+[node name="PageEditorControl" type="Container" node_paths=PackedStringArray("preview_subedit_container", "cost_subedit_container", "subactions_subedit_container", "exit_button", "file_path_line_edit", "file_name_line_edit", "open_file_button", "save_file_button", "load_file_button", "quick_load_option_button", "edit_selection_option_button", "details_editor_control", "background", "inner_container")]
 custom_minimum_size = Vector2(1148, 544)
 offset_right = 1148.0
 offset_bottom = 544.0
 script = ExtResource("1_j87ob")
-preview_subedit_container = NodePath("InnerContainer/MainContainer/PreviewEditorContainer")
-cost_subedit_container = NodePath("InnerContainer/MainContainer/CostSubEditorContainer")
+preview_subedit_container = NodePath("InnerContainer/MainContainer/MiddleContainer/PreviewEditorContainer")
+cost_subedit_container = NodePath("InnerContainer/MainContainer/RightContainer/CostSubEditorContainer")
+subactions_subedit_container = NodePath("InnerContainer/MainContainer/MiddleContainer/SubActionSubEditorContainer")
 exit_button = NodePath("InnerContainer/TopBarContainer/ExitButton")
 file_path_line_edit = NodePath("InnerContainer/TopBarContainer/FileSelectionContainer/FileSelectionInnerContainer/FilePathContainer/FilePathLineEdit")
 file_name_line_edit = NodePath("InnerContainer/TopBarContainer/FileSelectionContainer/FileSelectionInnerContainer/FileNameContainer/FileNameLineEdit")
@@ -341,78 +345,82 @@ wrap_mode = 1
 [node name="TagEditContainer" parent="InnerContainer/MainContainer/LeftContainer/DetailsEditorContainer/InnerContainer" instance=ExtResource("10_ojh5a")]
 custom_minimum_size = Vector2(12, 84)
 layout_mode = 2
+show_background = false
 force_fill_x = true
 
-[node name="PreviewEditorContainer" type="Container" parent="InnerContainer/MainContainer" node_paths=PackedStringArray("preview_target_option_button", "preview_move_input_container", "preview_move_check_box", "root_editor_control", "background", "inner_container")]
+[node name="MiddleContainer" type="VBoxContainer" parent="InnerContainer/MainContainer"]
+layout_mode = 2
+
+[node name="PreviewEditorContainer" type="Container" parent="InnerContainer/MainContainer/MiddleContainer" node_paths=PackedStringArray("preview_target_option_button", "preview_move_input_container", "preview_move_check_box", "root_editor_control", "background", "inner_container")]
 custom_minimum_size = Vector2(376, 83)
 layout_mode = 2
 script = ExtResource("11_orgne")
 preview_target_option_button = NodePath("InnerContainer/PreviewTargetContainer/PreviewTargetOptionButton")
 preview_move_input_container = NodePath("InnerContainer/PreviewMoveContainer/MoveInputContainer")
 preview_move_check_box = NodePath("InnerContainer/PreviewMoveContainer/CheckBox")
-root_editor_control = NodePath("../../..")
+root_editor_control = NodePath("../../../..")
 background = NodePath("Background")
 inner_container = NodePath("InnerContainer")
 
-[node name="Background" type="NinePatchRect" parent="InnerContainer/MainContainer/PreviewEditorContainer"]
+[node name="Background" type="NinePatchRect" parent="InnerContainer/MainContainer/MiddleContainer/PreviewEditorContainer"]
 custom_minimum_size = Vector2(376, 16)
 layout_mode = 2
-texture = ExtResource("7_hxhw1")
+texture = ExtResource("4_s5hjt")
 patch_margin_left = 8
 patch_margin_top = 8
 patch_margin_right = 8
 patch_margin_bottom = 8
 
-[node name="InnerContainer" type="BoxContainer" parent="InnerContainer/MainContainer/PreviewEditorContainer"]
+[node name="InnerContainer" type="BoxContainer" parent="InnerContainer/MainContainer/MiddleContainer/PreviewEditorContainer"]
 custom_minimum_size = Vector2(360, 0)
 layout_mode = 2
 vertical = true
 
-[node name="PreviewTargetContainer" type="HBoxContainer" parent="InnerContainer/MainContainer/PreviewEditorContainer/InnerContainer"]
+[node name="PreviewTargetContainer" type="HBoxContainer" parent="InnerContainer/MainContainer/MiddleContainer/PreviewEditorContainer/InnerContainer"]
 layout_mode = 2
 
-[node name="PreviewTargetLabel" type="Label" parent="InnerContainer/MainContainer/PreviewEditorContainer/InnerContainer/PreviewTargetContainer"]
+[node name="PreviewTargetLabel" type="Label" parent="InnerContainer/MainContainer/MiddleContainer/PreviewEditorContainer/InnerContainer/PreviewTargetContainer"]
 layout_mode = 2
 text = "Preview Target:"
 
-[node name="PreviewTargetOptionButton" type="OptionButton" parent="InnerContainer/MainContainer/PreviewEditorContainer/InnerContainer/PreviewTargetContainer"]
+[node name="PreviewTargetOptionButton" type="OptionButton" parent="InnerContainer/MainContainer/MiddleContainer/PreviewEditorContainer/InnerContainer/PreviewTargetContainer"]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 size_flags_horizontal = 3
 script = ExtResource("5_xop6x")
 allways_show_none = true
 
-[node name="PreviewMoveContainer" type="HBoxContainer" parent="InnerContainer/MainContainer/PreviewEditorContainer/InnerContainer"]
+[node name="PreviewMoveContainer" type="HBoxContainer" parent="InnerContainer/MainContainer/MiddleContainer/PreviewEditorContainer/InnerContainer"]
 layout_mode = 2
 
-[node name="PreviewMoveLabel" type="Label" parent="InnerContainer/MainContainer/PreviewEditorContainer/InnerContainer/PreviewMoveContainer"]
+[node name="PreviewMoveLabel" type="Label" parent="InnerContainer/MainContainer/MiddleContainer/PreviewEditorContainer/InnerContainer/PreviewMoveContainer"]
 layout_mode = 2
 text = "Preview Move:"
 
-[node name="MoveInputContainer" type="HBoxContainer" parent="InnerContainer/MainContainer/PreviewEditorContainer/InnerContainer/PreviewMoveContainer"]
+[node name="MoveInputContainer" type="HBoxContainer" parent="InnerContainer/MainContainer/MiddleContainer/PreviewEditorContainer/InnerContainer/PreviewMoveContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 alignment = 2
 script = ExtResource("11_dqkys")
 start_disabled = true
 
-[node name="XInput" type="SpinBox" parent="InnerContainer/MainContainer/PreviewEditorContainer/InnerContainer/PreviewMoveContainer/MoveInputContainer"]
+[node name="XInput" type="SpinBox" parent="InnerContainer/MainContainer/MiddleContainer/PreviewEditorContainer/InnerContainer/PreviewMoveContainer/MoveInputContainer"]
 layout_mode = 2
 theme = ExtResource("12_i1k1i")
 min_value = -100.0
 editable = false
 
-[node name="YInput" type="SpinBox" parent="InnerContainer/MainContainer/PreviewEditorContainer/InnerContainer/PreviewMoveContainer/MoveInputContainer"]
+[node name="YInput" type="SpinBox" parent="InnerContainer/MainContainer/MiddleContainer/PreviewEditorContainer/InnerContainer/PreviewMoveContainer/MoveInputContainer"]
 layout_mode = 2
 theme = ExtResource("12_i1k1i")
 min_value = -100.0
 editable = false
 
-[node name="Label" type="Label" parent="InnerContainer/MainContainer/PreviewEditorContainer/InnerContainer/PreviewMoveContainer/MoveInputContainer"]
+[node name="Label" type="Label" parent="InnerContainer/MainContainer/MiddleContainer/PreviewEditorContainer/InnerContainer/PreviewMoveContainer/MoveInputContainer"]
 layout_mode = 2
 text = "R:"
 
-[node name="RotInput" type="OptionButton" parent="InnerContainer/MainContainer/PreviewEditorContainer/InnerContainer/PreviewMoveContainer/MoveInputContainer"]
+[node name="RotInput" type="OptionButton" parent="InnerContainer/MainContainer/MiddleContainer/PreviewEditorContainer/InnerContainer/PreviewMoveContainer/MoveInputContainer"]
 layout_mode = 2
 disabled = true
 item_count = 4
@@ -424,14 +432,183 @@ popup/item_2/id = 2
 popup/item_3/text = "Left"
 popup/item_3/id = 3
 
-[node name="CheckBox" type="CheckBox" parent="InnerContainer/MainContainer/PreviewEditorContainer/InnerContainer/PreviewMoveContainer"]
+[node name="CheckBox" type="CheckBox" parent="InnerContainer/MainContainer/MiddleContainer/PreviewEditorContainer/InnerContainer/PreviewMoveContainer"]
 layout_mode = 2
 
-[node name="CostEditorContainer" type="VBoxContainer" parent="InnerContainer/MainContainer/PreviewEditorContainer/InnerContainer"]
+[node name="CostEditorContainer" type="VBoxContainer" parent="InnerContainer/MainContainer/MiddleContainer/PreviewEditorContainer/InnerContainer"]
 visible = false
 layout_mode = 2
 
-[node name="CostSubEditorContainer" type="Container" parent="InnerContainer/MainContainer" node_paths=PackedStringArray("add_button", "premade_cost_entry", "entry_container", "background", "inner_container")]
+[node name="SubActionSubEditorContainer" type="Container" parent="InnerContainer/MainContainer/MiddleContainer" node_paths=PackedStringArray("add_option_button", "premade_subaction_edit_entry", "subaction_entry_container", "root_editor_control", "background", "inner_container")]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+size_flags_vertical = 3
+script = ExtResource("14_hcxeu")
+add_option_button = NodePath("InnerContainer/TitleContainer/AddOptionButton")
+premade_subaction_edit_entry = NodePath("InnerContainer/SubActionEditorEntryContainer")
+subaction_entry_container = NodePath("InnerContainer/ScrollContainer/SubActionEntriesContainer")
+root_editor_control = NodePath("../../../..")
+background = NodePath("Background")
+inner_container = NodePath("InnerContainer")
+force_fill_x = true
+
+[node name="Background" type="NinePatchRect" parent="InnerContainer/MainContainer/MiddleContainer/SubActionSubEditorContainer"]
+custom_minimum_size = Vector2(376, 16)
+layout_mode = 2
+texture = ExtResource("4_s5hjt")
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+
+[node name="InnerContainer" type="VBoxContainer" parent="InnerContainer/MainContainer/MiddleContainer/SubActionSubEditorContainer"]
+layout_mode = 2
+
+[node name="TitleContainer" type="HBoxContainer" parent="InnerContainer/MainContainer/MiddleContainer/SubActionSubEditorContainer/InnerContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="InnerContainer/MainContainer/MiddleContainer/SubActionSubEditorContainer/InnerContainer/TitleContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 22
+text = "SubActions:"
+
+[node name="AddOptionButton" type="OptionButton" parent="InnerContainer/MainContainer/MiddleContainer/SubActionSubEditorContainer/InnerContainer/TitleContainer"]
+layout_mode = 2
+selected = 0
+fit_to_longest_item = false
+item_count = 1
+popup/item_0/text = "Add "
+script = ExtResource("5_xop6x")
+allways_show_none = true
+no_option_text = "Add"
+
+[node name="SubActionEditorEntryContainer" type="Container" parent="InnerContainer/MainContainer/MiddleContainer/SubActionSubEditorContainer/InnerContainer" node_paths=PackedStringArray("background", "inner_container")]
+custom_minimum_size = Vector2(16, 87)
+layout_mode = 2
+script = ExtResource("14_65vrg")
+background = NodePath("Background")
+inner_container = NodePath("InnerContainer")
+force_fill_x = true
+
+[node name="Background" type="NinePatchRect" parent="InnerContainer/MainContainer/MiddleContainer/SubActionSubEditorContainer/InnerContainer/SubActionEditorEntryContainer"]
+layout_mode = 2
+texture = ExtResource("7_hxhw1")
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+
+[node name="InnerContainer" type="VBoxContainer" parent="InnerContainer/MainContainer/MiddleContainer/SubActionSubEditorContainer/InnerContainer/SubActionEditorEntryContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TitleContainer" type="HBoxContainer" parent="InnerContainer/MainContainer/MiddleContainer/SubActionSubEditorContainer/InnerContainer/SubActionEditorEntryContainer/InnerContainer"]
+layout_mode = 2
+
+[node name="FrameSpinBox" type="SpinBox" parent="InnerContainer/MainContainer/MiddleContainer/SubActionSubEditorContainer/InnerContainer/SubActionEditorEntryContainer/InnerContainer/TitleContainer"]
+layout_mode = 2
+theme = ExtResource("12_i1k1i")
+
+[node name="ScriptLabel" type="Label" parent="InnerContainer/MainContainer/MiddleContainer/SubActionSubEditorContainer/InnerContainer/SubActionEditorEntryContainer/InnerContainer/TitleContainer"]
+layout_mode = 2
+text = "Script:"
+
+[node name="ScriptLineEdit" type="LineEdit" parent="InnerContainer/MainContainer/MiddleContainer/SubActionSubEditorContainer/InnerContainer/SubActionEditorEntryContainer/InnerContainer/TitleContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 2
+editable = false
+
+[node name="DeleteButton" type="Button" parent="InnerContainer/MainContainer/MiddleContainer/SubActionSubEditorContainer/InnerContainer/SubActionEditorEntryContainer/InnerContainer/TitleContainer"]
+layout_mode = 2
+text = "X"
+
+[node name="SubActionPropertyEditorEntry" type="HBoxContainer" parent="InnerContainer/MainContainer/MiddleContainer/SubActionSubEditorContainer/InnerContainer/SubActionEditorEntryContainer/InnerContainer"]
+layout_mode = 2
+script = ExtResource("14_2kt5x")
+
+[node name="PropNameLabel" type="Label" parent="InnerContainer/MainContainer/MiddleContainer/SubActionSubEditorContainer/InnerContainer/SubActionEditorEntryContainer/InnerContainer/SubActionPropertyEditorEntry"]
+layout_mode = 2
+text = "Property Name:"
+
+[node name="PropInputsContainer" type="HBoxContainer" parent="InnerContainer/MainContainer/MiddleContainer/SubActionSubEditorContainer/InnerContainer/SubActionEditorEntryContainer/InnerContainer/SubActionPropertyEditorEntry"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 2
+
+[node name="LoadedOptionButton" type="OptionButton" parent="InnerContainer/MainContainer/MiddleContainer/SubActionSubEditorContainer/InnerContainer/SubActionEditorEntryContainer/InnerContainer/SubActionPropertyEditorEntry/PropInputsContainer"]
+visible = false
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+size_flags_horizontal = 3
+fit_to_longest_item = false
+script = ExtResource("5_xop6x")
+
+[node name="MoveInputContainer" type="HBoxContainer" parent="InnerContainer/MainContainer/MiddleContainer/SubActionSubEditorContainer/InnerContainer/SubActionEditorEntryContainer/InnerContainer/SubActionPropertyEditorEntry/PropInputsContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 2
+script = ExtResource("11_dqkys")
+start_disabled = true
+
+[node name="XInput" type="SpinBox" parent="InnerContainer/MainContainer/MiddleContainer/SubActionSubEditorContainer/InnerContainer/SubActionEditorEntryContainer/InnerContainer/SubActionPropertyEditorEntry/PropInputsContainer/MoveInputContainer"]
+layout_mode = 2
+theme = ExtResource("12_i1k1i")
+min_value = -100.0
+editable = false
+
+[node name="YInput" type="SpinBox" parent="InnerContainer/MainContainer/MiddleContainer/SubActionSubEditorContainer/InnerContainer/SubActionEditorEntryContainer/InnerContainer/SubActionPropertyEditorEntry/PropInputsContainer/MoveInputContainer"]
+layout_mode = 2
+theme = ExtResource("12_i1k1i")
+min_value = -100.0
+editable = false
+
+[node name="Label" type="Label" parent="InnerContainer/MainContainer/MiddleContainer/SubActionSubEditorContainer/InnerContainer/SubActionEditorEntryContainer/InnerContainer/SubActionPropertyEditorEntry/PropInputsContainer/MoveInputContainer"]
+layout_mode = 2
+text = "R:"
+
+[node name="RotInput" type="OptionButton" parent="InnerContainer/MainContainer/MiddleContainer/SubActionSubEditorContainer/InnerContainer/SubActionEditorEntryContainer/InnerContainer/SubActionPropertyEditorEntry/PropInputsContainer/MoveInputContainer"]
+layout_mode = 2
+disabled = true
+item_count = 4
+popup/item_0/text = "None"
+popup/item_1/text = "Right"
+popup/item_1/id = 1
+popup/item_2/text = "180°"
+popup/item_2/id = 2
+popup/item_3/text = "Left"
+popup/item_3/id = 3
+
+[node name="LineEdit" type="LineEdit" parent="InnerContainer/MainContainer/MiddleContainer/SubActionSubEditorContainer/InnerContainer/SubActionEditorEntryContainer/InnerContainer/SubActionPropertyEditorEntry/PropInputsContainer"]
+visible = false
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SpinBox" type="SpinBox" parent="InnerContainer/MainContainer/MiddleContainer/SubActionSubEditorContainer/InnerContainer/SubActionEditorEntryContainer/InnerContainer/SubActionPropertyEditorEntry/PropInputsContainer"]
+layout_mode = 2
+alignment = 2
+
+[node name="PropsContainer" type="VBoxContainer" parent="InnerContainer/MainContainer/MiddleContainer/SubActionSubEditorContainer/InnerContainer/SubActionEditorEntryContainer/InnerContainer"]
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="InnerContainer/MainContainer/MiddleContainer/SubActionSubEditorContainer/InnerContainer"]
+self_modulate = Color(0, 0.73371, 0.736977, 1)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="SubActionEntriesContainer" type="VBoxContainer" parent="InnerContainer/MainContainer/MiddleContainer/SubActionSubEditorContainer/InnerContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="RightContainer" type="VBoxContainer" parent="InnerContainer/MainContainer"]
+layout_mode = 2
+
+[node name="CostSubEditorContainer" type="Container" parent="InnerContainer/MainContainer/RightContainer" node_paths=PackedStringArray("add_button", "premade_cost_entry", "entry_container", "background", "inner_container")]
 custom_minimum_size = Vector2(376, 77)
 layout_mode = 2
 script = ExtResource("14_258ts")
@@ -441,44 +618,44 @@ entry_container = NodePath("InnerContainer/HBoxContainer/ScrollContainer/FlowCon
 background = NodePath("Background")
 inner_container = NodePath("InnerContainer")
 
-[node name="Background" type="NinePatchRect" parent="InnerContainer/MainContainer/CostSubEditorContainer"]
+[node name="Background" type="NinePatchRect" parent="InnerContainer/MainContainer/RightContainer/CostSubEditorContainer"]
 custom_minimum_size = Vector2(376, 16)
 layout_mode = 2
-texture = ExtResource("7_hxhw1")
+texture = ExtResource("4_s5hjt")
 patch_margin_left = 8
 patch_margin_top = 8
 patch_margin_right = 8
 patch_margin_bottom = 8
 
-[node name="InnerContainer" type="BoxContainer" parent="InnerContainer/MainContainer/CostSubEditorContainer"]
+[node name="InnerContainer" type="BoxContainer" parent="InnerContainer/MainContainer/RightContainer/CostSubEditorContainer"]
 custom_minimum_size = Vector2(360, 0)
 layout_mode = 2
 vertical = true
 
-[node name="HBoxContainer" type="HBoxContainer" parent="InnerContainer/MainContainer/CostSubEditorContainer/InnerContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="InnerContainer/MainContainer/RightContainer/CostSubEditorContainer/InnerContainer"]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="InnerContainer/MainContainer/CostSubEditorContainer/InnerContainer/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="InnerContainer/MainContainer/RightContainer/CostSubEditorContainer/InnerContainer/HBoxContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="InnerContainer/MainContainer/CostSubEditorContainer/InnerContainer/HBoxContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="InnerContainer/MainContainer/RightContainer/CostSubEditorContainer/InnerContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 1
 theme_override_font_sizes/font_size = 18
 text = "Costs:"
 
-[node name="Button" type="Button" parent="InnerContainer/MainContainer/CostSubEditorContainer/InnerContainer/HBoxContainer/VBoxContainer"]
+[node name="Button" type="Button" parent="InnerContainer/MainContainer/RightContainer/CostSubEditorContainer/InnerContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 text = "Add"
 
-[node name="CostEditEntryContainer" type="Container" parent="InnerContainer/MainContainer/CostSubEditorContainer/InnerContainer/HBoxContainer" node_paths=PackedStringArray("background", "inner_container")]
+[node name="CostEditEntryContainer" type="Container" parent="InnerContainer/MainContainer/RightContainer/CostSubEditorContainer/InnerContainer/HBoxContainer" node_paths=PackedStringArray("background", "inner_container")]
 custom_minimum_size = Vector2(162, 47)
 layout_mode = 2
 script = ExtResource("15_2nobb")
 background = NodePath("Background")
 inner_container = NodePath("InnerContainer")
 
-[node name="Background" type="NinePatchRect" parent="InnerContainer/MainContainer/CostSubEditorContainer/InnerContainer/HBoxContainer/CostEditEntryContainer"]
+[node name="Background" type="NinePatchRect" parent="InnerContainer/MainContainer/RightContainer/CostSubEditorContainer/InnerContainer/HBoxContainer/CostEditEntryContainer"]
 layout_mode = 2
 texture = ExtResource("7_hxhw1")
 patch_margin_left = 8
@@ -486,10 +663,10 @@ patch_margin_top = 8
 patch_margin_right = 8
 patch_margin_bottom = 8
 
-[node name="InnerContainer" type="HBoxContainer" parent="InnerContainer/MainContainer/CostSubEditorContainer/InnerContainer/HBoxContainer/CostEditEntryContainer"]
+[node name="InnerContainer" type="HBoxContainer" parent="InnerContainer/MainContainer/RightContainer/CostSubEditorContainer/InnerContainer/HBoxContainer/CostEditEntryContainer"]
 layout_mode = 2
 
-[node name="SelfScalingLineEdit" type="LineEdit" parent="InnerContainer/MainContainer/CostSubEditorContainer/InnerContainer/HBoxContainer/CostEditEntryContainer/InnerContainer" node_paths=PackedStringArray("hidden_text_edit")]
+[node name="SelfScalingLineEdit" type="LineEdit" parent="InnerContainer/MainContainer/RightContainer/CostSubEditorContainer/InnerContainer/HBoxContainer/CostEditEntryContainer/InnerContainer" node_paths=PackedStringArray("hidden_text_edit")]
 custom_minimum_size = Vector2(52, 31)
 layout_mode = 2
 text = "Mana"
@@ -497,27 +674,27 @@ script = ExtResource("13_wcuop")
 hidden_text_edit = NodePath("TextEdit")
 _padding = 4
 
-[node name="TextEdit" type="TextEdit" parent="InnerContainer/MainContainer/CostSubEditorContainer/InnerContainer/HBoxContainer/CostEditEntryContainer/InnerContainer/SelfScalingLineEdit"]
+[node name="TextEdit" type="TextEdit" parent="InnerContainer/MainContainer/RightContainer/CostSubEditorContainer/InnerContainer/HBoxContainer/CostEditEntryContainer/InnerContainer/SelfScalingLineEdit"]
 visible = false
 layout_mode = 0
 offset_right = 8.0
 offset_bottom = 8.0
 text = "Mana"
 
-[node name="SpinBox" type="SpinBox" parent="InnerContainer/MainContainer/CostSubEditorContainer/InnerContainer/HBoxContainer/CostEditEntryContainer/InnerContainer"]
+[node name="SpinBox" type="SpinBox" parent="InnerContainer/MainContainer/RightContainer/CostSubEditorContainer/InnerContainer/HBoxContainer/CostEditEntryContainer/InnerContainer"]
 layout_mode = 2
 theme = ExtResource("12_i1k1i")
 
-[node name="Button" type="Button" parent="InnerContainer/MainContainer/CostSubEditorContainer/InnerContainer/HBoxContainer/CostEditEntryContainer/InnerContainer"]
+[node name="Button" type="Button" parent="InnerContainer/MainContainer/RightContainer/CostSubEditorContainer/InnerContainer/HBoxContainer/CostEditEntryContainer/InnerContainer"]
 layout_mode = 2
 text = "X"
 
-[node name="ScrollContainer" type="ScrollContainer" parent="InnerContainer/MainContainer/CostSubEditorContainer/InnerContainer/HBoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="InnerContainer/MainContainer/RightContainer/CostSubEditorContainer/InnerContainer/HBoxContainer"]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="FlowContainer" type="FlowContainer" parent="InnerContainer/MainContainer/CostSubEditorContainer/InnerContainer/HBoxContainer/ScrollContainer"]
+[node name="FlowContainer" type="FlowContainer" parent="InnerContainer/MainContainer/RightContainer/CostSubEditorContainer/InnerContainer/HBoxContainer/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 alignment = 2
