@@ -38,7 +38,7 @@ func load_data(object_key:String, data:Dictionary):
 	super(object_key, data)
 	for key in data.keys():
 		var val = data[key]
-		if not val is float:
+		if not (val is float or val is int):
 			continue
 		create_new_entry(key, val)
 

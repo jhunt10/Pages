@@ -1012,7 +1012,6 @@ missiles_tab = NodePath("../Missiles")
 targets_tab = NodePath("../TargetSubEditorContainer")
 
 [node name="Damage" type="Container" parent="InnerContainer/MainContainer/RightContainer" node_paths=PackedStringArray("add_button", "premade_edit_entry", "entries_container", "title_label", "root_editor_control", "background", "inner_container")]
-visible = false
 custom_minimum_size = Vector2(16, 16)
 layout_mode = 2
 size_flags_vertical = 3
@@ -1389,6 +1388,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="TargetSubEditorContainer" type="Container" parent="InnerContainer/MainContainer/RightContainer" node_paths=PackedStringArray("options_button", "add_button", "premade_edit_entry", "entries_container", "title_label", "root_editor_control", "background", "inner_container")]
+visible = false
 custom_minimum_size = Vector2(16, 16)
 layout_mode = 2
 size_flags_vertical = 3
@@ -1511,7 +1511,7 @@ layout_mode = 2
 [node name="SubViewport" type="SubViewport" parent="InnerContainer/MainContainer/RightContainer/TargetSubEditorContainer/InnerContainer/TargetEditEntryContainer/InnerContainer/AreaSubEditorContainer/InnerContainer/SubViewportContainer"]
 handle_input_locally = false
 size = Vector2i(240, 240)
-render_target_update_mode = 4
+render_target_update_mode = 0
 
 [node name="Node2D" type="Node2D" parent="InnerContainer/MainContainer/RightContainer/TargetSubEditorContainer/InnerContainer/TargetEditEntryContainer/InnerContainer/AreaSubEditorContainer/InnerContainer/SubViewportContainer/SubViewport"]
 position = Vector2(112, 112)

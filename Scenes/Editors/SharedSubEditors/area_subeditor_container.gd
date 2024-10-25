@@ -94,10 +94,12 @@ func add_editable_area(key:String, val, show_now:bool):
 	if arr != null:
 		_create_editing_area(key, arr, show_now)
 
-func get_editable_area(key:String)->Array:
+func build_area_data(key:String)->String:
+	var out_list = []
 	if _editing_areas.has(key):
-		return _editing_areas[key]
-	return []
+		for vec in _editing_areas[key]:
+			out_list.append([vec.x, vec.y])
+	return JSON.stringify(out_list)
 
 func _create_editing_area(key:String, spots:Array, show_now:bool=false):
 	if !_editing_areas.keys().has(key):

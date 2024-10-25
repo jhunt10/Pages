@@ -26,11 +26,7 @@ func _init(target_key:String, args:Dictionary) -> void:
 	line_of_sight = args.get('LineOfSight', true)
 	
 	# Get Targeting Area
-	if args.has('TargetAreaKey'):
-		#TODO
-		target_area = AreaMatrix.new([[0,0]])
-	else:
-		target_area = AreaMatrix.new(args['TargetArea'])
+	target_area = AreaMatrix.new(args.get("TargetArea", [[0,0]]))
 	
 	if args.has('EffectArea'):
 		effect_area = AreaMatrix.new(args['EffectArea'])

@@ -39,7 +39,7 @@ func load_data(object_key:String, data:Dictionary):
 	super(object_key, data)
 	area_subedit_container.clear()
 	var target_area = data.get("TargetArea", [])
-	area_subedit_container.add_editable_area("Targ", target_area, true)
+	area_subedit_container.add_editable_area("TRG", target_area, true)
 	var area_effect = data.get("EffectArea", "[]")
 	if area_effect and not (area_effect == "[]" or area_effect == ""):
 		area_subedit_container.add_editable_area("AOE", data['EffectArea'], false)
@@ -47,6 +47,14 @@ func load_data(object_key:String, data:Dictionary):
 	else:
 		set_has_effect(false)
 	area_subedit_container.set_editing_area("Targ")
+
+func build_save_data():
+	var data = super()
+	data['TargetArea'] = area_subedit_container.build_area_data("TRG")
+	if has_aoe_check_box.button_pressed:
+		data['EffectArea'] = area_subedit_container.build_area_data("AOE")
+	return data
+	
 
 #func lose_focus_if_has():
 	#if key_line_edit.has_focus():
@@ -72,7 +80,7 @@ func set_has_effect(val:bool):
 			has_aoe_check_box.button_pressed = true
 	else:
 		effect_check_boxes_container.visible = false
-		area_subedit_container.set_editing_area("Targ")
+		area_subedit_container.set_editing_area("TRG")
 		area_subedit_container.remove_editable_area("AOE")
 		if has_aoe_check_box.button_pressed:
 			has_aoe_check_box.button_pressed = false

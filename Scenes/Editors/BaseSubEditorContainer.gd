@@ -38,7 +38,6 @@ func set_show_change(show:bool):
 
 func connect_focus_exit_signals():
 	var mapping = get_key_to_input_mapping()
-	print("Connecting FOcus for %s found %s keys" % [self.name, mapping.size()])
 	for key in mapping.keys():
 		var input_node = get_key_to_input_mapping().get(key)
 		_connect_input_on_focus_exit(key, input_node)
@@ -107,7 +106,6 @@ func on_input_lose_focus(key:String):
 
 
 func _connect_input_on_focus_exit(key, input_node):
-	print("Connecting Inputs: %s : %s " % [key, input_node.name])
 	if input_node is LineEdit or input_node is TextEdit:
 		input_node.focus_exited.connect(on_input_lose_focus.bind(key))
 	elif input_node is SpinBox:
@@ -215,6 +213,8 @@ func _clear_input(key, input_node):
 	elif input_node is MoveInputContainer:
 		input_node.set_value([0,0,0,0])
 	elif input_node is SubActionPropInputContainer:
+		input_node.clear() 
+	elif input_node is BaseSubEditorContainer:
 		input_node.clear() 
 	else:
 		printerr("%s._clear_input: Key '%s' has unknown input type: '%s'." % [self.name, key, input_node])

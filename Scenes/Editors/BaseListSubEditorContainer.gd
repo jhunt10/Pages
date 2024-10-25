@@ -1,6 +1,6 @@
 @tool
 class_name BaseListSubEditorConatiner
-extends BaseSubEditEntryContainer
+extends BaseSubEditorContainer
 
 @export var default_entry_name:String
 @export var add_button:Button

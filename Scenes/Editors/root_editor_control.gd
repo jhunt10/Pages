@@ -48,7 +48,8 @@ func lose_focus_if_has():
 	for subeditor:BaseSubEditorContainer in get_keys_to_subeditor_mapping().values():
 		subeditor.lose_focus_if_has()
 
-func clear_all_subeditors():
+func clear():
+	_editing_object_key = ''
 	for sub:BaseSubEditorContainer in get_keys_to_subeditor_mapping().values():
 		sub.set_show_change(false)
 		sub.clear()
@@ -74,7 +75,8 @@ func on_exit_menu():
 	pass
 
 func load_file(full_path:String, selected_object=''):
-	clear_all_subeditors()
+	clear()
+	_changed_object_keys.clear()
 	file_subeitor_container.set_current_file(full_path)
 	_editing_objects_datas = parse_datas_from_file(full_path)
 	file_subeitor_container.set_editing_oject(selected_object)
@@ -87,20 +89,20 @@ func save_file(override:bool = false):
 	if full_path == "":
 		printerr("%s.save_file: Invalid file_path.")
 		return
+	
 	if !override and FileAccess.file_exists(full_path):
 		var yes_no_popup:YesNoPopupContainer = load("res://Scenes/Editors/SharedSubEditors/yesno_popup_container.tscn").instantiate()
 		yes_no_popup.set_message_and_funcs("File '%s' already exists.\nOverwrite saved file?" % [full_path], save_file.bind(true), null)
 		self.add_child(yes_no_popup)
-	else:
-		var temp_dir = full_path.get_base_dir()
-		var temp_name = full_path.get_file()
-		full_path = temp_dir.path_join("TEST_" + temp_name)
-		
-		var save_data = JSON.stringify(_editing_objects_datas.values())
-		var file = FileAccess.open(full_path, FileAccess.WRITE)
-		file.store_string(save_data)
-		file.close()
+		return
 	
+	var save_data = JSON.stringify(_editing_objects_datas.values())
+	var file = FileAccess.open(full_path, FileAccess.WRITE)
+	file.store_string(save_data)
+	file.close()
+	_changed_object_keys.clear()
+	file_subeitor_container.quick_file_option_button.load_options(full_path)
+	load_file(full_path, _editing_object_key)
 
 
 
@@ -131,12 +133,13 @@ func on_editable_object_selected(object_key:String):
 func load_object_data(object_key:String, save_current=false):
 	if save_current:
 		save_object_data()
-	clear_all_subeditors()
+	clear()
 	if !_editing_objects_datas.keys().has(object_key):
 		_editing_object_key = ''
 		printerr("No Object found with key: '%s'." % [object_key])
 		return
 	_editing_object_key = object_key
+	details_editor_control.set_object_key(_editing_object_key)
 	var active_data = _editing_objects_datas[_editing_object_key]
 	var mappings = get_keys_to_subeditor_mapping()
 	for key in mappings:
@@ -145,7 +148,7 @@ func load_object_data(object_key:String, save_current=false):
 
 ## Save current object to _editing_objects_datas
 func save_object_data():
-	var saving_object_key = details_editor_control.object_key_line_edit.text
+	var saving_object_key = details_editor_control.get_object_key()
 	if saving_object_key == _editing_object_key:
 		var changed = _check_active_object_for_change()
 		if !changed:
@@ -194,8 +197,9 @@ func parse_datas_from_file(path:String)->Dictionary:
 			dict[data[object_key_name]] = data
 	return dict
 
-func search_current_directory(sufix:String)->Array:
-	var files = search_for_files(file_subeitor_container.get_current_directory(), sufix)
+func search_current_directory(sufix:String, recursive:bool = true)->Array:
+	var files = []
+	_rec_search_for_files(get_current_directory(), sufix, files, recursive)
 	return files
 
 static func search_for_files(path:String, sufix:String)->Array:
@@ -203,7 +207,7 @@ static func search_for_files(path:String, sufix:String)->Array:
 	_rec_search_for_files(path, sufix, list)
 	return list
 	
-static func _rec_search_for_files(path:String, sufix:String, list:Array, limit:int=1000):
+static func _rec_search_for_files(path:String, sufix:String, list:Array, recursive:bool=true, limit:int=1000):
 	var dir = DirAccess.open(path)
 	if limit == 0:
 		printerr("RootEditorControler._rec_search_for_files: Search limit reached!")
@@ -213,7 +217,7 @@ static func _rec_search_for_files(path:String, sufix:String, list:Array, limit:i
 		var file_name:String = dir.get_next()
 		while file_name != "":
 			var full_path = path+"/"+file_name
-			if dir.current_is_dir():
+			if dir.current_is_dir() and recursive:
 				_rec_search_for_files(full_path, sufix, list, limit-1)
 			elif file_name.ends_with(sufix):
 				list.append(full_path)
