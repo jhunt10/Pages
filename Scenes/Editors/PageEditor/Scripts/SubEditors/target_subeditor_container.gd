@@ -14,6 +14,8 @@ func get_key_to_input_mapping()->Dictionary:
 func _ready() -> void:
 	if Engine.is_editor_hint(): return
 	delete_button.pressed.connect(on_delete_button)
+	options_button.get_options_func = get_target_options
+	options_button.item_selected.connect(on_option_selected)
 
 func clear():
 	_loaded_data.clear()
@@ -31,6 +33,18 @@ func load_data(object_key:String, data:Dictionary):
 func load_entry(key:String):
 	var data = _loaded_data.get(key, {})
 	target_edit_entry_container.load_data(key, data)
+	options_button.load_options(key)
+
+func get_target_options()->Array:
+	return _loaded_data.keys()
+
+func on_option_selected(index:int):
+	var key = options_button.get_current_option_text()
+	if key == options_button.no_option_text:
+		load_entry("")
+	if _loaded_data.has(key):
+		load_entry(key)
+	pass
 
 func on_delete_button():
 	pass

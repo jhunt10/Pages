@@ -23,6 +23,10 @@ func _ready() -> void:
 
 func get_key_to_input_mapping()->Dictionary:
 	return {
+		"TargetType":$InnerContainer/TypeContainer/TypeOptionButton,
+		"LineOfSight": $InnerContainer/HasAreaContainer/LOSCheckBox,
+		"EffectsAllies": $InnerContainer/CheckBoxesContainer/AlliesCheckBox,
+		"EffectsEnemies": $InnerContainer/CheckBoxesContainer/EnemiesCheckBox
 	}
 
 func load_data(object_key:String, data:Dictionary):
@@ -31,8 +35,12 @@ func load_data(object_key:String, data:Dictionary):
 	area_subedit_container.clear()
 	var target_area = data.get("TargetArea", [])
 	area_subedit_container.add_editable_area("Targ", target_area, true)
-	if data.keys().has("EffectArea"):
+	var area_effect = data.get("EffectArea", "[]")
+	if area_effect and not (area_effect == "[]" or area_effect == ""):
 		area_subedit_container.add_editable_area("AOE", data['EffectArea'], false)
+		set_has_effect(true)
+	else:
+		set_has_effect(false)
 	area_subedit_container.set_editing_area("Targ")
 
 func lose_focus_if_has():
@@ -48,10 +56,14 @@ func set_has_effect(val:bool):
 		effect_check_boxes_container.visible = true
 		if !area_subedit_container._editing_areas.keys().has("AOE"):
 			area_subedit_container.add_editable_area("AOE", [], true)
+		if not has_aoe_check_box.button_pressed:
+			has_aoe_check_box.button_pressed = true
 	else:
 		effect_check_boxes_container.visible = false
 		area_subedit_container.set_editing_area("Targ")
 		area_subedit_container.remove_editable_area("AOE")
+		if has_aoe_check_box.button_pressed:
+			has_aoe_check_box.button_pressed = false
 
 func get_vfx_options():
 	return MainRootNode.vfx_libray._vfx_datas.keys()

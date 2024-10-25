@@ -113,7 +113,6 @@ func get_editable_object_options()->Array:
 	return out_list
 
 func on_editable_object_selected(object_key:String):
-	print("## Selected Object: %s " % [object_key])
 	if object_key.begins_with("*"):
 		object_key = object_key.trim_prefix("*")
 	if _editing_object_key != "":
@@ -128,7 +127,6 @@ func on_editable_object_selected(object_key:String):
 	load_object_data(object_key, false)
 
 func load_object_data(object_key:String, save_current=false):
-	print("## Loading Object Data: %s | save:%s" % [object_key, save_current])
 	if save_current:
 		save_object_data()
 	clear_all_subeditors()
@@ -138,7 +136,6 @@ func load_object_data(object_key:String, save_current=false):
 		return
 	_editing_object_key = object_key
 	var active_data = _editing_objects_datas[_editing_object_key]
-	print("Active Data: %s" % [active_data])
 	var mappings = get_keys_to_subeditor_mapping()
 	for key in mappings:
 		var sub_editor:BaseSubEditorContainer = mappings[key]
@@ -147,7 +144,6 @@ func load_object_data(object_key:String, save_current=false):
 ## Save current object to _editing_objects_datas
 func save_object_data():
 	var saving_object_key = details_editor_control.object_key_line_edit.text
-	print("## Saving Object Data: %s | current:%s" % [saving_object_key, _editing_object_key])
 	if saving_object_key == _editing_object_key:
 		var changed = _check_active_object_for_change()
 		if !changed:

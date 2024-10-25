@@ -80,6 +80,8 @@ func _load_input(key, data, input_node):
 		input_node.text = data.get(key, "")
 	elif input_node is SpinBox:
 		input_node.set_value_no_signal(data.get(key, 0))
+	elif input_node is CheckBox:
+		input_node.button_pressed = data.get(key, false)
 	elif input_node is LoadedOptionButton:
 		input_node.load_options(data.get(key, ""))
 	elif input_node is TagEditContainer:
@@ -98,6 +100,9 @@ func _input_lose_focus_if_has(key, input_node):
 		var line = input_node.get_line_edit()
 		if line.has_focus():
 			line.release_focus()
+	elif input_node is CheckBox:
+		if input_node.has_focus():
+			input_node.release_focus()
 	elif input_node.has_method("lose_focus_if_has"):
 		input_node.lose_focus_if_has()
 	elif input_node is LoadedOptionButton:
@@ -110,6 +115,8 @@ func _check_input_has_changed(key, data, input_node)->bool:
 		return input_node.text != data.get(key, "")
 	elif input_node is SpinBox:
 		return input_node.value != data.get(key, 0)
+	elif input_node is CheckBox:
+		return input_node.button_pressed != data.get(key, false)
 	elif input_node is LoadedOptionButton:
 		return input_node.get_current_option_text() != data.get(key, "")
 	elif input_node is TagEditContainer:
@@ -129,6 +136,8 @@ func _save_input(key, data, input_node):
 		data[key] = input_node.text
 	elif input_node is SpinBox:
 		data[key] = input_node.value
+	elif input_node is CheckBox:
+		data[key] = input_node.button_pressed
 	elif input_node is LoadedOptionButton:
 		data[key] = input_node.get_current_option_text()
 	elif input_node is TagEditContainer:
@@ -147,6 +156,8 @@ func _clear_input(key, input_node):
 		input_node.text = ""
 	elif input_node is SpinBox:
 		input_node.value = 0
+	elif input_node is CheckBox:
+		input_node.button_pressed = false
 	elif input_node is LoadedOptionButton:
 		input_node.load_options("")
 	elif input_node is TagEditContainer:
