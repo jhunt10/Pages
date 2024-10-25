@@ -27,6 +27,7 @@ var _cached_sprite_options:Array = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	super()
 	if Engine.is_editor_hint(): return
 	small_icon_option_button.get_options_func = get_sprite_options
 	small_icon_option_button.item_selected.connect(on_small_icon_selected)

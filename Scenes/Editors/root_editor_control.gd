@@ -6,6 +6,8 @@ const BASE_DATA_DIR = "res://data"
 
 static var Instance:RootEditorControler
 
+signal edit_entry_key_changed(editor_key:String, old_key:String, new_key:String)
+
 @export var exit_button:Button
 @export var details_editor_control:DetailsEditorContainer
 @export var file_subeitor_container:FileSubEditorContainer
@@ -139,7 +141,7 @@ func load_object_data(object_key:String, save_current=false):
 	var mappings = get_keys_to_subeditor_mapping()
 	for key in mappings:
 		var sub_editor:BaseSubEditorContainer = mappings[key]
-		sub_editor.load_data(_editing_object_key, active_data.get(key, active_data))
+		sub_editor.load_data(key, active_data.get(key, active_data))
 
 ## Save current object to _editing_objects_datas
 func save_object_data():

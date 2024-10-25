@@ -25,6 +25,7 @@ func get_key_to_input_mapping():
 	return _prop_inputs
 
 func load_data(object_key:String, data:Dictionary):
+	_object_key = object_key
 	_loaded_data = data.duplicate(true)
 	_full_script_path = data.get("SubActionScript")
 	if !_full_script_path:

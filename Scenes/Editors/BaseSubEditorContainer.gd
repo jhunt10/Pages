@@ -8,7 +8,8 @@ signal data_changed
 @export var root_editor_control:RootEditorControler
 
 var _loaded_data:Dictionary = {}
-
+var _has_changed:bool = false
+var _object_key:String
 
 func get_key_to_input_mapping()->Dictionary:
 	return {}
@@ -16,6 +17,7 @@ func get_key_to_input_mapping()->Dictionary:
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	if Engine.is_editor_hint(): return
+	connect_focus_exit_signals()
 	pass # Replace with function body.
 
 
@@ -34,6 +36,13 @@ func set_show_change(show:bool):
 	else:
 		title_label.text = raw_title
 
+func connect_focus_exit_signals():
+	var mapping = get_key_to_input_mapping()
+	print("Connecting FOcus for %s found %s keys" % [self.name, mapping.size()])
+	for key in mapping.keys():
+		var input_node = get_key_to_input_mapping().get(key)
+		_connect_input_on_focus_exit(key, input_node)
+		
 func lose_focus_if_has():
 	var mapping = get_key_to_input_mapping()
 	for key in mapping.keys():
@@ -51,6 +60,7 @@ func has_change():
 	return false
 
 func clear():
+	_has_changed = false
 	var mapping = get_key_to_input_mapping()
 	for key in mapping.keys():
 		var input_node = get_key_to_input_mapping().get(key)
@@ -58,7 +68,9 @@ func clear():
 	_loaded_data.clear()
 
 func load_data(object_key:String, data:Dictionary):
+	_object_key = object_key
 	_loaded_data = data.duplicate(true)
+	_has_changed = false
 	var mapping = get_key_to_input_mapping()
 	for key in mapping.keys():
 		var input_node = get_key_to_input_mapping().get(key)
@@ -74,6 +86,44 @@ func build_save_data()->Dictionary:
 
 
 
+
+func on_input_lose_focus(key:String):
+	var mapping = get_key_to_input_mapping()
+	if !mapping.keys().has(key):
+		printerr("%s.on_input_lose_focus: Unknown key '%s'." % [self.name, key])
+		return
+	var input = mapping[key]
+	var has_change = _check_input_has_changed(key, _loaded_data, input)
+	
+	# new change
+	if has_change and not _has_changed:
+		set_show_change(true)
+		data_changed.emit()
+		_has_changed = true
+	# changed back
+	elif not has_change() and _has_changed:
+		set_show_change(false)
+		_has_changed = false
+
+
+func _connect_input_on_focus_exit(key, input_node):
+	print("Connecting Inputs: %s : %s " % [key, input_node.name])
+	if input_node is LineEdit or input_node is TextEdit:
+		input_node.focus_exited.connect(on_input_lose_focus.bind(key))
+	elif input_node is SpinBox:
+		input_node.focus_exited.connect(on_input_lose_focus.bind(key))
+	elif input_node is CheckBox:
+		input_node.focus_exited.connect(on_input_lose_focus.bind(key))
+		input_node.button_up.connect(input_node.release_focus)
+	elif input_node is LoadedOptionButton:
+		input_node.focus_exited.connect(on_input_lose_focus.bind(key))
+	elif input_node is TagEditContainer:
+		input_node.focus_exited.connect(on_input_lose_focus.bind(key))
+	elif input_node is MoveInputContainer:
+		input_node.focus_exited.connect(on_input_lose_focus.bind(key))
+	else:
+		printerr("%s._load_input: Key '%s' has unknown input type: '%s'." % [self.name, key, input_node])
+	
 
 func _load_input(key, data, input_node):
 	if input_node is LineEdit or input_node is TextEdit:

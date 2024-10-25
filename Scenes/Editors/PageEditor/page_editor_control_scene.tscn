@@ -561,7 +561,7 @@ size_flags_vertical = 3
 [node name="LeftContainer" type="VBoxContainer" parent="InnerContainer/MainContainer"]
 layout_mode = 2
 
-[node name="DetailsEditorContainer" type="Container" parent="InnerContainer/MainContainer/LeftContainer" node_paths=PackedStringArray("object_key_line_edit", "display_name_line_edit", "snippet_line_edit", "description_text_edit", "tags_edit_container", "small_icon_texture_rect", "large_icon_texture_rect", "small_icon_option_button", "large_icon_option_button", "root_editor_control", "background", "inner_container")]
+[node name="DetailsEditorContainer" type="Container" parent="InnerContainer/MainContainer/LeftContainer" node_paths=PackedStringArray("object_key_line_edit", "display_name_line_edit", "snippet_line_edit", "description_text_edit", "tags_edit_container", "small_icon_texture_rect", "large_icon_texture_rect", "small_icon_option_button", "large_icon_option_button", "title_label", "root_editor_control", "background", "inner_container")]
 custom_minimum_size = Vector2(376, 16)
 layout_mode = 2
 size_flags_vertical = 3
@@ -575,6 +575,7 @@ small_icon_texture_rect = NodePath("InnerContainer/IconsContainer/InnerContainer
 large_icon_texture_rect = NodePath("InnerContainer/IconsContainer/InnerContainer/LargeIconBackground/LargeIconRect")
 small_icon_option_button = NodePath("InnerContainer/IconsContainer/InnerContainer/VBoxContainer/SmallOptionContainer/SmallOptionButton")
 large_icon_option_button = NodePath("InnerContainer/IconsContainer/InnerContainer/VBoxContainer/LargeOptionContainer/LargeOptionButton")
+title_label = NodePath("InnerContainer/ObjectKeyContainer/ObjectKeyLabel")
 root_editor_control = NodePath("../../../..")
 background = NodePath("Background")
 inner_container = NodePath("InnerContainer")
@@ -998,7 +999,7 @@ layout_mode = 2
 [node name="TabBar" type="TabBar" parent="InnerContainer/MainContainer/RightContainer" node_paths=PackedStringArray("damage_tab", "costs_tab", "missiles_tab", "targets_tab")]
 custom_minimum_size = Vector2(376, 0)
 layout_mode = 2
-current_tab = 3
+current_tab = 0
 tab_count = 4
 tab_0/title = "Damage"
 tab_1/title = "Costs"
@@ -1016,6 +1017,7 @@ custom_minimum_size = Vector2(16, 16)
 layout_mode = 2
 size_flags_vertical = 3
 script = ExtResource("20_j2ru7")
+default_entry_name = "DamageData"
 add_button = NodePath("InnerContainer/TitleContainer/Button")
 premade_edit_entry = NodePath("InnerContainer/DamageEditEntryContainer")
 entries_container = NodePath("InnerContainer/ScrollContainer/EntriesContainer")
@@ -1070,18 +1072,18 @@ patch_margin_bottom = 8
 [node name="InnerContainer" type="VBoxContainer" parent="InnerContainer/MainContainer/RightContainer/Damage/InnerContainer/DamageEditEntryContainer"]
 layout_mode = 2
 
-[node name="DamageDataKeyContainer" type="HBoxContainer" parent="InnerContainer/MainContainer/RightContainer/Damage/InnerContainer/DamageEditEntryContainer/InnerContainer"]
+[node name="KeyContainer" type="HBoxContainer" parent="InnerContainer/MainContainer/RightContainer/Damage/InnerContainer/DamageEditEntryContainer/InnerContainer"]
 layout_mode = 2
 
-[node name="DamageDataKeyLabel" type="Label" parent="InnerContainer/MainContainer/RightContainer/Damage/InnerContainer/DamageEditEntryContainer/InnerContainer/DamageDataKeyContainer"]
+[node name="KeyLabel" type="Label" parent="InnerContainer/MainContainer/RightContainer/Damage/InnerContainer/DamageEditEntryContainer/InnerContainer/KeyContainer"]
 layout_mode = 2
 text = "DataKey:"
 
-[node name="DamageDataKeyLineEdit" type="LineEdit" parent="InnerContainer/MainContainer/RightContainer/Damage/InnerContainer/DamageEditEntryContainer/InnerContainer/DamageDataKeyContainer"]
+[node name="KeyLineEdit" type="LineEdit" parent="InnerContainer/MainContainer/RightContainer/Damage/InnerContainer/DamageEditEntryContainer/InnerContainer/KeyContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="DeleteButton" type="Button" parent="InnerContainer/MainContainer/RightContainer/Damage/InnerContainer/DamageEditEntryContainer/InnerContainer/DamageDataKeyContainer"]
+[node name="DeleteButton" type="Button" parent="InnerContainer/MainContainer/RightContainer/Damage/InnerContainer/DamageEditEntryContainer/InnerContainer/KeyContainer"]
 layout_mode = 2
 text = "X"
 
@@ -1251,6 +1253,7 @@ custom_minimum_size = Vector2(16, 16)
 layout_mode = 2
 size_flags_vertical = 3
 script = ExtResource("23_2sg21")
+default_entry_name = "Missile"
 add_button = NodePath("InnerContainer/TitleContainer/Button")
 premade_edit_entry = NodePath("InnerContainer/MissileEditEntryContainer")
 entries_container = NodePath("InnerContainer/ScrollContainer/EntriesContainer")
@@ -1286,11 +1289,12 @@ text = "Missile Datas"
 layout_mode = 2
 text = "Add"
 
-[node name="MissileEditEntryContainer" type="Container" parent="InnerContainer/MainContainer/RightContainer/Missiles/InnerContainer" node_paths=PackedStringArray("title_label", "background", "inner_container")]
+[node name="MissileEditEntryContainer" type="Container" parent="InnerContainer/MainContainer/RightContainer/Missiles/InnerContainer" node_paths=PackedStringArray("title_label", "root_editor_control", "background", "inner_container")]
 custom_minimum_size = Vector2(215, 154)
 layout_mode = 2
 script = ExtResource("23_8euos")
 title_label = NodePath("InnerContainer/KeyContainer/KeyLabel")
+root_editor_control = NodePath("../../../../../..")
 background = NodePath("Background")
 inner_container = NodePath("InnerContainer")
 
@@ -1384,14 +1388,16 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="TargetSubEditorContainer" type="Container" parent="InnerContainer/MainContainer/RightContainer" node_paths=PackedStringArray("options_button", "delete_button", "target_edit_entry_container", "title_label", "root_editor_control", "background", "inner_container")]
+[node name="TargetSubEditorContainer" type="Container" parent="InnerContainer/MainContainer/RightContainer" node_paths=PackedStringArray("options_button", "add_button", "premade_edit_entry", "entries_container", "title_label", "root_editor_control", "background", "inner_container")]
 custom_minimum_size = Vector2(16, 16)
 layout_mode = 2
 size_flags_vertical = 3
 script = ExtResource("26_haw51")
 options_button = NodePath("InnerContainer/TitleContainer/LoadedOptionButton")
-delete_button = NodePath("InnerContainer/TitleContainer/Button")
-target_edit_entry_container = NodePath("InnerContainer/TargetEditEntryContainer")
+default_entry_name = "Target"
+add_button = NodePath("InnerContainer/TitleContainer/Button")
+premade_edit_entry = NodePath("InnerContainer/TargetEditEntryContainer")
+entries_container = NodePath("InnerContainer/ScrollContainer/EntiresContainer")
 title_label = NodePath("InnerContainer/TitleContainer/TitleLabel")
 root_editor_control = NodePath("../../../..")
 background = NodePath("Background")
@@ -1423,17 +1429,14 @@ layout_mode = 2
 size_flags_horizontal = 3
 fit_to_longest_item = false
 script = ExtResource("5_xop6x")
-allways_show_none = true
-no_option_text = "Add"
 
 [node name="Button" type="Button" parent="InnerContainer/MainContainer/RightContainer/TargetSubEditorContainer/InnerContainer/TitleContainer"]
 layout_mode = 2
-text = "Delete"
+text = "Add"
 
 [node name="TargetEditEntryContainer" type="Container" parent="InnerContainer/MainContainer/RightContainer/TargetSubEditorContainer/InnerContainer" node_paths=PackedStringArray("title_label", "root_editor_control", "background", "inner_container")]
-custom_minimum_size = Vector2(16, 16)
+custom_minimum_size = Vector2(16, 383)
 layout_mode = 2
-size_flags_vertical = 3
 script = ExtResource("26_dw0h4")
 title_label = NodePath("InnerContainer/KeyContainer/KeyLabel")
 root_editor_control = NodePath("../../../../../..")
@@ -1462,6 +1465,10 @@ text = "DataKey:"
 [node name="KeyLineEdit" type="LineEdit" parent="InnerContainer/MainContainer/RightContainer/TargetSubEditorContainer/InnerContainer/TargetEditEntryContainer/InnerContainer/KeyContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+
+[node name="DeleteButton" type="Button" parent="InnerContainer/MainContainer/RightContainer/TargetSubEditorContainer/InnerContainer/TargetEditEntryContainer/InnerContainer/KeyContainer"]
+layout_mode = 2
+text = "X"
 
 [node name="AreaSubEditorContainer" type="Container" parent="InnerContainer/MainContainer/RightContainer/TargetSubEditorContainer/InnerContainer/TargetEditEntryContainer/InnerContainer" node_paths=PackedStringArray("sub_viewport_container", "root_subview_node", "grid_tile_layer", "center_sprite", "pan_up_button", "pan_center_button", "pan_down_button", "edit_buttons_container", "background", "inner_container")]
 custom_minimum_size = Vector2(0, 240)
@@ -1632,3 +1639,12 @@ layout_mode = 2
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 size_flags_horizontal = 3
+
+[node name="ScrollContainer" type="ScrollContainer" parent="InnerContainer/MainContainer/RightContainer/TargetSubEditorContainer/InnerContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="EntiresContainer" type="VBoxContainer" parent="InnerContainer/MainContainer/RightContainer/TargetSubEditorContainer/InnerContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3

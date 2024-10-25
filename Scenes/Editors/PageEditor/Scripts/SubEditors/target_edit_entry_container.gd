@@ -1,9 +1,7 @@
 @tool
 class_name TargetEditEntryContainer
-extends BaseSubEditorContainer
+extends BaseSubEditEntryContainer
 
-@onready var key_lable:Label = $InnerContainer/KeyContainer/KeyLabel
-@onready var key_line_edit:LineEdit =  $InnerContainer/KeyContainer/KeyLineEdit
 @onready var area_subedit_container:AreaEditorContainer = $InnerContainer/AreaSubEditorContainer
 @onready var type_option_button:LoadedOptionButton = $InnerContainer/TypeContainer/TypeOptionButton
 @onready var los_check_box:CheckBox = $InnerContainer/HasAreaContainer/LOSCheckBox
@@ -12,12 +10,19 @@ extends BaseSubEditorContainer
 @onready var effects_enemies_check_box:CheckBox = $InnerContainer/CheckBoxesContainer/EnemiesCheckBox
 @onready var effect_check_boxes_container:HBoxContainer = $InnerContainer/CheckBoxesContainer
 
+func _get_key_input()->LineEdit:
+	return $InnerContainer/KeyContainer/KeyLineEdit
+func _get_delete_button()->Button:
+	return $InnerContainer/KeyContainer/DeleteButton
+
 func _ready() -> void:
 	super()
 	if Engine.is_editor_hint(): return
-	title_label = key_lable
+	#title_label = key_lable
 	type_option_button.get_options_func = get_target_type_options
 	has_aoe_check_box.pressed.connect(on_has_effect_pressed)
+	#key_line_edit.focus_exited.connect(on_key_change)
+	#delete_button.pressed.connect(on_delete)
 	pass
 	
 
@@ -43,9 +48,16 @@ func load_data(object_key:String, data:Dictionary):
 		set_has_effect(false)
 	area_subedit_container.set_editing_area("Targ")
 
-func lose_focus_if_has():
-	if key_line_edit.has_focus():
-		key_line_edit.release_focus()
+#func lose_focus_if_has():
+	#if key_line_edit.has_focus():
+		#key_line_edit.release_focus()
+
+#func clear():
+	#super()
+	#key_line_edit.text = ""
+	#area_subedit_container.clear()
+
+
 
 func on_has_effect_pressed():
 	set_has_effect(has_aoe_check_box.button_pressed)
@@ -64,6 +76,17 @@ func set_has_effect(val:bool):
 		area_subedit_container.remove_editable_area("AOE")
 		if has_aoe_check_box.button_pressed:
 			has_aoe_check_box.button_pressed = false
+
+#func on_key_change():
+	## Key didn't change
+	#if key_line_edit.text == _object_key:
+		#printerr("Key didn't change")
+		#return
+	#printerr("Key changed")
+	#var new_key = key_line_edit.text
+	#_parent_target_subeditor.on_entry_key_changed(_object_key, new_key)
+	#self._object_key = new_key
+	
 
 func get_vfx_options():
 	return MainRootNode.vfx_libray._vfx_datas.keys()

@@ -41,6 +41,7 @@ func clear():
 		child.queue_free()
 
 func load_data(object_key:String, data:Dictionary):
+	_object_key = object_key
 	_loaded_data = data.duplicate(true)
 	for index in data.keys():
 		var subaction_datas_arr = data[index]
@@ -54,6 +55,7 @@ func create_new_subaction_entry(index, data):
 	new_entry.visible = true
 	new_entry.frame_spin_box.set_value_no_signal(int(index))
 	new_entry.on_frame_changed.connect(_order_entries)
+	new_entry.root_editor_control = self.root_editor_control
 	new_entry.load_data("", data)
 
 func build_save_data()->Dictionary:

@@ -24,6 +24,7 @@ func lose_focus_if_has():
 			spin_line.release_focus()
 
 func set_props(parent, prop_name:String, prop_type:BaseSubAction.SubActionPropType, prop_value):
+	parent.root_editor_control.edit_entry_key_changed.connect(on_entry_key_change)
 	option_button.visible = false
 	move_value_container.visible = false
 	line_edit.visible = false
@@ -118,9 +119,16 @@ func clear():
 	elif _prop_type == BaseSubAction.SubActionPropType.IntVal:
 		spin_box.value = 0
 
+
+func on_entry_key_change(editor_key:String, old_key:String, new_key:String):
+	if ((_prop_type == BaseSubAction.SubActionPropType.DamageKey and editor_key == "DamageDatas") or
+		(_prop_type == BaseSubAction.SubActionPropType.MissileKey and editor_key == "MissileDatas") or
+		(_prop_type == BaseSubAction.SubActionPropType.TargetKey and editor_key == "TargetParams")):
+		if option_button.get_current_option_text() == old_key:
+			option_button.load_options(new_key)
+
 func get_target_options():
-	#return PageEditorControl.Instance.get_subeditor_option_keys("TargetParams")
-	return ["Target1"]
+	return PageEditorControl.Instance.get_subeditor_option_keys("TargetParams")
 
 func get_damage_options():
 	return PageEditorControl.Instance.get_subeditor_option_keys("DamageDatas")
