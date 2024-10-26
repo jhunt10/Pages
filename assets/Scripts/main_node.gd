@@ -16,7 +16,7 @@ func _ready() -> void:
 		self.queue_free()
 		return
 	Instance = self
-	current_scene = load("res://Scenes/Editors/PageEditor/page_editor_control_scene.tscn").instantiate()
+	current_scene = load("res://Scenes/main_menu_root_control.tscn").instantiate()
 	self.add_child(current_scene)
 
 func _load_test_map():
@@ -57,12 +57,12 @@ func open_character_sheet(_actor:BaseActor=null):
 	pass
 	
 func open_page_editor():
-	var page_editor = load("res://Scenes/UiNodes/page_editor_control.tscn").instantiate()
+	var page_editor = load("res://Scenes/Editors/PageEditor/page_editor_control_scene.tscn").instantiate()
 	self.add_child(page_editor)
 	
 	
 func open_effect_editor():
-	var page_editor = load("res://Scenes/UiNodes/effect_editor_control.tscn").instantiate()
+	var page_editor = load("res://Scenes/Editors/EffectEditor/effect_editor_control_scene.tscn").instantiate()
 	self.add_child(page_editor)
 	
 	

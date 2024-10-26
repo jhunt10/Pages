@@ -9,7 +9,7 @@ extends HBoxContainer
 
 var _parent_subaction_edit_entry:SubActionEditEntryContainer
 var _prop_name:String
-var _prop_type:BaseSubAction.SubActionPropType
+var _prop_type:BaseSubAction.SubActionPropTypes
 
 func lose_focus_if_has():
 	if move_value_container.visible:
@@ -23,22 +23,18 @@ func lose_focus_if_has():
 		if spin_line.has_focus():
 			spin_line.release_focus()
 
-func set_props(parent, prop_name:String, prop_type:BaseSubAction.SubActionPropType, prop_value):
+func set_props(parent, prop_name:String, prop_type:BaseSubAction.SubActionPropTypes, prop_value):
 	parent.root_editor_control.edit_entry_key_changed.connect(on_entry_key_change)
-	option_button.visible = false
-	move_value_container.visible = false
-	line_edit.visible = false
-	spin_box.visible = false
-	
 	_parent_subaction_edit_entry = parent
 	option_button.visible = false
 	line_edit.visible = false
 	move_value_container.visible = false
+	spin_box.visible = false
 	prop_name_label.text = prop_name + ": "
 	self._prop_name = prop_name
 	self._prop_type = prop_type
 	
-	if prop_type == BaseSubAction.SubActionPropType.TargetKey:
+	if prop_type == BaseSubAction.SubActionPropTypes.TargetKey:
 		option_button.visible = true
 		option_button.get_options_func = get_target_options
 		option_button.no_option_text = "Self"
@@ -47,34 +43,34 @@ func set_props(parent, prop_name:String, prop_type:BaseSubAction.SubActionPropTy
 			option_button.load_options(prop_value)
 		else:
 			option_button.load_options()
-	elif _prop_type == BaseSubAction.SubActionPropType.EnumVal:
+	elif _prop_type == BaseSubAction.SubActionPropTypes.EnumVal:
 		option_button.visible = true
 		option_button.get_options_func = get_enum_options
 		if prop_value is String and prop_value != '':
 			option_button.load_options(prop_value)
-	elif _prop_type == BaseSubAction.SubActionPropType.EffectKey:
+	elif _prop_type == BaseSubAction.SubActionPropTypes.EffectKey:
 		option_button.visible = true
 		option_button.get_options_func = get_effect_options
 		if prop_value is String and prop_value != '':
 			option_button.load_options(prop_value)
-	elif prop_type == BaseSubAction.SubActionPropType.DamageKey:
+	elif prop_type == BaseSubAction.SubActionPropTypes.DamageKey:
 		option_button.visible = true
 		option_button.get_options_func = get_damage_options
 		if prop_value is String and prop_value != '':
 			option_button.load_options(prop_value)
-	elif prop_type == BaseSubAction.SubActionPropType.MissileKey:
+	elif prop_type == BaseSubAction.SubActionPropTypes.MissileKey:
 		option_button.visible = true
 		option_button.get_options_func = get_missile_options
 		if prop_value is String and prop_value != '':
 			option_button.load_options(prop_value)
-	elif prop_type == BaseSubAction.SubActionPropType.MoveValue:
+	elif prop_type == BaseSubAction.SubActionPropTypes.MoveValue:
 		move_value_container.visible = true
 		move_value_container.set_value(prop_value)
-	elif prop_type == BaseSubAction.SubActionPropType.StringVal:
+	elif prop_type == BaseSubAction.SubActionPropTypes.StringVal:
 		line_edit.visible = true
 		if prop_value:
 			line_edit.text = str(prop_value)
-	elif prop_type == BaseSubAction.SubActionPropType.IntVal:
+	elif prop_type == BaseSubAction.SubActionPropTypes.IntVal:
 		spin_box.visible = true
 		if prop_value:
 			spin_box.set_value_no_signal(int(prop_value))
@@ -83,47 +79,47 @@ func set_props(parent, prop_name:String, prop_type:BaseSubAction.SubActionPropTy
 		line_edit.text = "Unknown Prop Type: " + str(prop_type)
 
 func get_prop_value():
-	if _prop_type == BaseSubAction.SubActionPropType.EnumVal:
+	if _prop_type == BaseSubAction.SubActionPropTypes.EnumVal:
 		return option_button.get_current_option_text()
-	if _prop_type == BaseSubAction.SubActionPropType.TargetKey:
+	if _prop_type == BaseSubAction.SubActionPropTypes.TargetKey:
 		return option_button.get_current_option_text()
-	elif _prop_type == BaseSubAction.SubActionPropType.EffectKey:
+	elif _prop_type == BaseSubAction.SubActionPropTypes.EffectKey:
 		return option_button.get_current_option_text()
-	elif _prop_type == BaseSubAction.SubActionPropType.DamageKey:
+	elif _prop_type == BaseSubAction.SubActionPropTypes.DamageKey:
 		return option_button.get_current_option_text()
-	elif _prop_type == BaseSubAction.SubActionPropType.MissileKey:
+	elif _prop_type == BaseSubAction.SubActionPropTypes.MissileKey:
 		return option_button.get_current_option_text()
-	elif _prop_type == BaseSubAction.SubActionPropType.MoveValue:
+	elif _prop_type == BaseSubAction.SubActionPropTypes.MoveValue:
 		return move_value_container.get_val()
-	elif _prop_type == BaseSubAction.SubActionPropType.StringVal:
+	elif _prop_type == BaseSubAction.SubActionPropTypes.StringVal:
 		return line_edit.text
-	elif _prop_type == BaseSubAction.SubActionPropType.IntVal:
+	elif _prop_type == BaseSubAction.SubActionPropTypes.IntVal:
 		return spin_box.value
 	return null
 
 func clear():
-	if _prop_type == BaseSubAction.SubActionPropType.EnumVal:
+	if _prop_type == BaseSubAction.SubActionPropTypes.EnumVal:
 		option_button.load_options("")
-	if _prop_type == BaseSubAction.SubActionPropType.TargetKey:
+	if _prop_type == BaseSubAction.SubActionPropTypes.TargetKey:
 		option_button.load_options("")
-	elif _prop_type == BaseSubAction.SubActionPropType.EffectKey:
+	elif _prop_type == BaseSubAction.SubActionPropTypes.EffectKey:
 		option_button.load_options("")
-	elif _prop_type == BaseSubAction.SubActionPropType.DamageKey:
+	elif _prop_type == BaseSubAction.SubActionPropTypes.DamageKey:
 		option_button.load_options("")
-	elif _prop_type == BaseSubAction.SubActionPropType.MissileKey:
+	elif _prop_type == BaseSubAction.SubActionPropTypes.MissileKey:
 		option_button.load_options("")
-	elif _prop_type == BaseSubAction.SubActionPropType.MoveValue:
+	elif _prop_type == BaseSubAction.SubActionPropTypes.MoveValue:
 		move_value_container.set_value([0,0,0,0])
-	elif _prop_type == BaseSubAction.SubActionPropType.StringVal:
+	elif _prop_type == BaseSubAction.SubActionPropTypes.StringVal:
 		line_edit.text = ""
-	elif _prop_type == BaseSubAction.SubActionPropType.IntVal:
+	elif _prop_type == BaseSubAction.SubActionPropTypes.IntVal:
 		spin_box.value = 0
 
 
 func on_entry_key_change(editor_key:String, old_key:String, new_key:String):
-	if ((_prop_type == BaseSubAction.SubActionPropType.DamageKey and editor_key == "DamageDatas") or
-		(_prop_type == BaseSubAction.SubActionPropType.MissileKey and editor_key == "MissileDatas") or
-		(_prop_type == BaseSubAction.SubActionPropType.TargetKey and editor_key == "TargetParams")):
+	if ((_prop_type == BaseSubAction.SubActionPropTypes.DamageKey and editor_key == "DamageDatas") or
+		(_prop_type == BaseSubAction.SubActionPropTypes.MissileKey and editor_key == "MissileDatas") or
+		(_prop_type == BaseSubAction.SubActionPropTypes.TargetKey and editor_key == "TargetParams")):
 		if option_button.get_current_option_text() == old_key:
 			option_button.load_options(new_key)
 

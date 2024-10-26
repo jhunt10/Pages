@@ -5,12 +5,14 @@ enum DurationTypes {Turn, Round, Trigger}
 
 func get_required_props()->Dictionary:
 	return {
-		"DurationType": BaseSubEffect.SubEffectPropTypes.EnumOptions,
+		"DurationType": BaseSubEffect.SubEffectPropTypes.EnumVal,
 		"DurationValue": BaseSubEffect.SubEffectPropTypes.IntVal
 	}
-func get_enum_option_values()->Dictionary: return {
-	"DurationType": DurationTypes.keys()
-}
+	
+func get_prop_enum_values(key:String)->Array:
+	if key ==  "DurationType": 
+		return DurationTypes.keys()
+	return []
 
 func get_triggers(effect:BaseEffect, subeffect_data:Dictionary)->Array:
 	var list = super(effect, subeffect_data)

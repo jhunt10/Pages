@@ -91,7 +91,7 @@ func _build_props_for_script(script_name):
 			continue
 		if extr_prop_key == "SubActionScript":
 			continue
-		create_prop_input(extr_prop_key, BaseSubAction.SubActionPropType.StringVal, true)
+		create_prop_input(extr_prop_key, BaseSubAction.SubActionPropTypes.StringVal, true)
 	resize = true
 		
 

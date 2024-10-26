@@ -4,7 +4,7 @@ extends BaseSubAction
 
 func get_required_props()->Dictionary:
 	return {
-		"TargetKey": BaseSubAction.SubActionPropType.TargetKey
+		"TargetKey": BaseSubAction.SubActionPropTypes.TargetKey
 	}
 ## Returns Tags that are automatically added to the parent Action's Tags
 func get_action_tags(_subaction_data:Dictionary)->Array:

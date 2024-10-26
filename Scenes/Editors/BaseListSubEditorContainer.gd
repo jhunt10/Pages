@@ -19,7 +19,8 @@ func get_key_to_input_mapping()->Dictionary:
 func _ready() -> void:
 	super()
 	if Engine.is_editor_hint(): return
-	add_button.pressed.connect(on_add_button)
+	if add_button:
+		add_button.pressed.connect(on_add_button)
 	premade_edit_entry.visible = false
 
 func clear():
@@ -56,6 +57,7 @@ func create_new_entry(key:String, data:Dictionary)->String:
 	new_entry.visible = true
 	if key == "":
 		key = default_entry_name + str((entries_container.get_child_count()))
+	new_entry.root_editor_control = self.root_editor_control
 	new_entry.load_data(key, data)
 	new_entry.key_changed.connect(on_entry_key_change)
 	return key

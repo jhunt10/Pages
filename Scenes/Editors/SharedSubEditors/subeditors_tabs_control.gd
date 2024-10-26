@@ -1,23 +1,30 @@
 class_name SubEditorsTabControl
 extends TabBar
 
+@export var tab_set:String
 
-@export var damage_tab:DamageSubEditorContainer
-@export var costs_tab:CostSubEditorContainer
-@export var missiles_tab:MissileSubEditorContainer
-@export var targets_tab:TargetSubEditorContainer
-
-func get_subeditor_tabs()->Dictionary:
-	return {
-		"Damage": damage_tab,
-		"Costs": costs_tab,
-		"Missiles": missiles_tab,
-		"Targets": targets_tab
-	}
+func get_sub_editors()->Dictionary:
+	#TODO: This but not dumb
+	if tab_set == "Effects":
+		return {
+			"StatMods": $"../StatModSubEditContainer",
+			"DamageMods": $"../DamageModSubEditContainer",
+			"Damage": $"../Damage"
+		}
+		
+	if tab_set == "Actions":
+		return {
+			"Damage": $"../Damage",
+			"Costs": $"../CostSubEditorContainer",
+			"Missiles": $"../Missiles",
+			"Targets": $"../TargetSubEditorContainer"
+		}
+	return {}
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	self.tab_changed.connect(on_tab_change)
+	self.tab_clicked.connect(on_tab_change)
+	_build_tabs()
 	pass # Replace with function body.
 
 
@@ -25,15 +32,20 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 
+func _build_tabs():
+	self.clear_tabs()
+	for key in get_sub_editors():
+		self.add_tab(key)
+
 func on_tab_change(index:int):
-	var sub_tabs = get_subeditor_tabs()
 	var selected_tab = self.get_tab_title(index).trim_prefix("*")
-	if !sub_tabs.keys().has(selected_tab):
-		return
-	
 	var sub_index = 0
-	for key in sub_tabs.keys():
-		var sub_edit:BaseSubEditorContainer = sub_tabs[key]
+	var subeditors = get_sub_editors()
+	for key in subeditors.keys():
+		if index >= self.tab_count:
+			break
+		#var sub_edit_path:NodePath 
+		var sub_edit = subeditors[key]
 		if sub_edit.has_change():
 			self.set_tab_title(sub_index, "*" + key)
 		else:

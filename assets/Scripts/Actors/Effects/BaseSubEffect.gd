@@ -1,11 +1,11 @@
 class_name BaseSubEffect
 
-enum SubEffectPropTypes {Triggers, StatModKey, DamageModKey, SubEffectKey, EnumOptions, StringVal, IntVal}
+enum SubEffectPropTypes {Triggers, StatModKey, DamageModKey, DamageKey, SubEffectKey, EnumVal, StringVal, IntVal}
 
 # Returns a Dictionary of {Property Name, Property Type} for what properties this subeffect
 # 	exspects to find in it's subeffect_data (Mostly for Effect Editor)
 func get_required_props()->Dictionary: return {}
-func get_enum_option_values()->Dictionary: return {}
+func get_prop_enum_values(key:String)->Array: return []
 
 func _init() -> void:
 	pass

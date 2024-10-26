@@ -69,9 +69,9 @@ func get_subeditor_option_keys(key:String)->Array:
 	return subeditor.get_key_to_input_mapping().keys()
 
 func on_exit_menu():
-	#Instance = null
-	#self.queue_free()
-	print(_editing_objects_datas)
+	Instance = null
+	self.queue_free()
+	#print(_editing_objects_datas)
 	pass
 
 func load_file(full_path:String, selected_object=''):
@@ -144,7 +144,10 @@ func load_object_data(object_key:String, save_current=false):
 	var mappings = get_keys_to_subeditor_mapping()
 	for key in mappings:
 		var sub_editor:BaseSubEditorContainer = mappings[key]
-		sub_editor.load_data(key, active_data.get(key, active_data))
+		var default = {}
+		if key == "Details": # Hack for importing old files
+			default = active_data
+		sub_editor.load_data(key, active_data.get(key, default))
 
 ## Save current object to _editing_objects_datas
 func save_object_data():

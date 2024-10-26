@@ -37,11 +37,11 @@ func get_prop_value():
 		return _triggers.keys()
 	elif _prop_type == BaseSubEffect.SubEffectPropTypes.StatModKey:
 		return option_button.get_current_option_text()
-	elif _prop_type == BaseSubEffect.SubEffectPropTypes.DamageModKey:
+	elif _prop_type == BaseSubEffect.SubEffectPropTypes.DamageKey:
 		return option_button.get_current_option_text()
 	elif _prop_type == BaseSubEffect.SubEffectPropTypes.SubEffectKey:
 		return option_button.get_current_option_text()
-	elif _prop_type == BaseSubEffect.SubEffectPropTypes.EnumOptions:
+	elif _prop_type == BaseSubEffect.SubEffectPropTypes.EnumVal:
 		return option_button.get_current_option_text()
 	elif _prop_type == BaseSubEffect.SubEffectPropTypes.StringVal:
 		return line_edit.text
@@ -77,14 +77,14 @@ func set_prop(prop_name:String, prop_type:BaseSubEffect.SubEffectPropTypes, prop
 			option_button.load_options(prop_value)
 		else:
 			option_button.load_options()
-	elif prop_type == BaseSubEffect.SubEffectPropTypes.DamageModKey:
+	elif prop_type == BaseSubEffect.SubEffectPropTypes.DamageKey:
 		option_button.visible = true
 		option_button.get_options_func = get_damage_mod_options
 		if prop_value is String and prop_value != '':
 			option_button.load_options(prop_value)
 		else:
 			option_button.load_options()
-	elif prop_type == BaseSubEffect.SubEffectPropTypes.EnumOptions:
+	elif prop_type == BaseSubEffect.SubEffectPropTypes.EnumVal:
 		option_button.visible = true
 		option_button.get_options_func = get_enum_options
 		if prop_value is String and prop_value != '':

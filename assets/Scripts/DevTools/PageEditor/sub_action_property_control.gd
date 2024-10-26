@@ -7,10 +7,10 @@ extends Control
 @onready var spin_box:SpinBox = $VBoxContainer/SpinBox
 @onready var move_value_container:MoveInputContainer = $VBoxContainer/MoveInputContainer
 
-var _prop_type:BaseSubAction.SubActionPropType
+var _prop_type:BaseSubAction.SubActionPropTypes
 
 var _ready_name:String
-var _ready_type:BaseSubAction.SubActionPropType
+var _ready_type:BaseSubAction.SubActionPropTypes
 var _ready_value
 
 # Called when the node enters the scene tree for the first time.
@@ -27,19 +27,19 @@ func get_prop_name():
 	return label.text.trim_prefix('*').trim_suffix(": ")
 
 func get_prop_value():
-	if _prop_type == BaseSubAction.SubActionPropType.TargetKey:
+	if _prop_type == BaseSubAction.SubActionPropTypes.TargetKey:
 		return option_button.get_current_option_text()
-	elif _prop_type == BaseSubAction.SubActionPropType.EffectKey:
+	elif _prop_type == BaseSubAction.SubActionPropTypes.EffectKey:
 		return option_button.get_current_option_text()
-	elif _prop_type == BaseSubAction.SubActionPropType.DamageKey:
+	elif _prop_type == BaseSubAction.SubActionPropTypes.DamageKey:
 		return option_button.get_current_option_text()
-	elif _prop_type == BaseSubAction.SubActionPropType.MissileKey:
+	elif _prop_type == BaseSubAction.SubActionPropTypes.MissileKey:
 		return option_button.get_current_option_text()
-	elif _prop_type == BaseSubAction.SubActionPropType.MoveValue:
+	elif _prop_type == BaseSubAction.SubActionPropTypes.MoveValue:
 		return move_value_container.get_val()
-	elif _prop_type == BaseSubAction.SubActionPropType.StringVal:
+	elif _prop_type == BaseSubAction.SubActionPropTypes.StringVal:
 		return line_edit.text
-	elif _prop_type == BaseSubAction.SubActionPropType.IntVal:
+	elif _prop_type == BaseSubAction.SubActionPropTypes.IntVal:
 		return spin_box.value
 	return null
 	
@@ -48,7 +48,7 @@ func lose_focus_if_has():
 	if move_value_container.visible:
 		move_value_container.lose_focus_if_has()
 	
-func set_prop(prop_name:String, prop_type:BaseSubAction.SubActionPropType, prop_value, is_unknown:bool):
+func set_prop(prop_name:String, prop_type:BaseSubAction.SubActionPropTypes, prop_value, is_unknown:bool):
 	option_button.visible = false
 	line_edit.visible = false
 	move_value_container.visible = false
@@ -57,7 +57,7 @@ func set_prop(prop_name:String, prop_type:BaseSubAction.SubActionPropType, prop_
 		label.text = "*" + prop_name + ": "
 	self._prop_type = prop_type
 	
-	if prop_type == BaseSubAction.SubActionPropType.TargetKey:
+	if prop_type == BaseSubAction.SubActionPropTypes.TargetKey:
 		option_button.visible = true
 		option_button.get_options_func = get_target_options
 		option_button.no_option_text = "Self"
@@ -66,29 +66,29 @@ func set_prop(prop_name:String, prop_type:BaseSubAction.SubActionPropType, prop_
 			option_button.load_options(prop_value)
 		else:
 			option_button.load_options()
-	elif _prop_type == BaseSubAction.SubActionPropType.EffectKey:
+	elif _prop_type == BaseSubAction.SubActionPropTypes.EffectKey:
 		option_button.visible = true
 		option_button.get_options_func = get_effect_options
 		if prop_value is String and prop_value != '':
 			option_button.load_options(prop_value)
-	elif prop_type == BaseSubAction.SubActionPropType.DamageKey:
+	elif prop_type == BaseSubAction.SubActionPropTypes.DamageKey:
 		option_button.visible = true
 		option_button.get_options_func = get_damage_options
 		if prop_value is String and prop_value != '':
 			option_button.load_options(prop_value)
-	elif prop_type == BaseSubAction.SubActionPropType.MissileKey:
+	elif prop_type == BaseSubAction.SubActionPropTypes.MissileKey:
 		option_button.visible = true
 		option_button.get_options_func = get_missile_options
 		if prop_value is String and prop_value != '':
 			option_button.load_options(prop_value)
-	elif prop_type == BaseSubAction.SubActionPropType.MoveValue:
+	elif prop_type == BaseSubAction.SubActionPropTypes.MoveValue:
 		move_value_container.visible = true
 		move_value_container.set_value(prop_value)
-	elif prop_type == BaseSubAction.SubActionPropType.StringVal:
+	elif prop_type == BaseSubAction.SubActionPropTypes.StringVal:
 		line_edit.visible = true
 		if prop_value:
 			line_edit.text = str(prop_value)
-	elif prop_type == BaseSubAction.SubActionPropType.IntVal:
+	elif prop_type == BaseSubAction.SubActionPropTypes.IntVal:
 		spin_box.visible = true
 		if prop_value:
 			spin_box.set_value_no_signal(int(prop_value))

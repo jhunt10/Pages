@@ -173,6 +173,8 @@ func _check_input_has_changed(key, data, input_node)->bool:
 		return input_node.check_for_change(data.get(key, null))
 	elif input_node is SubActionPropInputContainer:
 		return input_node.get_prop_value() != data.get(key, "")
+	elif input_node is SubEffectPropInputContainer:
+		return input_node.get_prop_value() != data.get(key, "")
 	elif input_node is BaseSubEditorContainer:
 		return input_node.has_change()
 	else:
@@ -193,6 +195,8 @@ func _save_input(key, data, input_node):
 	elif input_node is MoveInputContainer:
 		data[key] = input_node.get_val()
 	elif input_node is SubActionPropInputContainer:
+		data[key] = input_node.get_prop_value() 
+	elif input_node is SubEffectPropInputContainer:
 		data[key] = input_node.get_prop_value() 
 	elif input_node is BaseSubEditorContainer:
 		data[key] = input_node.build_save_data() 

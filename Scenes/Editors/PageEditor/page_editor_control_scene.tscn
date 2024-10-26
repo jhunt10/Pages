@@ -1,6 +1,6 @@
 [gd_scene load_steps=36 format=4 uid="uid://bhfn0tyxcesh3"]
 
-[ext_resource type="Script" path="res://Scenes/Editors/PageEditor/Scripts/page_editor_control.gd" id="1_j87ob"]
+[ext_resource type="Script" path="res://Scenes/Editors/PageEditor/page_editor_control.gd" id="1_j87ob"]
 [ext_resource type="Texture2D" uid="uid://io35wpu802fp" path="res://assets/Sprites/UI/BackPatches/Patch_64_12.png" id="2_57tad"]
 [ext_resource type="Script" path="res://Scenes/Editors/SharedSubEditors/file_subeditor_container.gd" id="3_ds010"]
 [ext_resource type="Script" path="res://assets/Scripts/Ui/DisplayNodes/back_patch_container.gd" id="3_k0vcb"]
@@ -12,22 +12,22 @@
 [ext_resource type="Texture2D" uid="uid://cl0vvm446vnhg" path="res://assets/Sprites/UI/DevTools/large_icon_box.png" id="9_die6s"]
 [ext_resource type="PackedScene" uid="uid://cp8kja0sx5u7a" path="res://Scenes/UiNodes/tags_edit_container.tscn" id="10_ojh5a"]
 [ext_resource type="Script" path="res://assets/Scripts/DevTools/PageEditor/move_input_container.gd" id="11_dqkys"]
-[ext_resource type="Script" path="res://Scenes/Editors/PageEditor/Scripts/SubEditors/preview_subeditor_container.gd" id="11_orgne"]
+[ext_resource type="Script" path="res://Scenes/Editors/PageEditor/SubEditors/preview_subeditor_container.gd" id="11_orgne"]
 [ext_resource type="Theme" uid="uid://c1ayl4757lx1v" path="res://assets/Themes/small_spinner.tres" id="12_i1k1i"]
 [ext_resource type="Script" path="res://assets/Scripts/DevTools/self_scale_line_edit.gd" id="13_wcuop"]
-[ext_resource type="Script" path="res://Scenes/Editors/PageEditor/Scripts/SubEditors/subaction_prop_input_container.gd" id="14_2kt5x"]
-[ext_resource type="Script" path="res://Scenes/Editors/PageEditor/Scripts/SubEditors/subaction_edit_entry_container.gd" id="14_65vrg"]
-[ext_resource type="Script" path="res://Scenes/Editors/PageEditor/Scripts/SubEditors/cost_subeditor_container.gd" id="14_258ts"]
-[ext_resource type="Script" path="res://Scenes/Editors/PageEditor/Scripts/SubEditors/subaction_subeditor_container.gd" id="14_hcxeu"]
-[ext_resource type="Script" path="res://Scenes/Editors/PageEditor/Scripts/SubEditors/cost_edit_entry_container.gd" id="15_2nobb"]
-[ext_resource type="Script" path="res://Scenes/Editors/PageEditor/Scripts/SubEditors/damage_subeditor_container.gd" id="20_j2ru7"]
-[ext_resource type="Script" path="res://Scenes/Editors/PageEditor/Scripts/SubEditors/damage_edit_entry_container.gd" id="21_re071"]
+[ext_resource type="Script" path="res://Scenes/Editors/PageEditor/SubEditors/subaction_prop_input_container.gd" id="14_2kt5x"]
+[ext_resource type="Script" path="res://Scenes/Editors/PageEditor/SubEditors/subaction_edit_entry_container.gd" id="14_65vrg"]
+[ext_resource type="Script" path="res://Scenes/Editors/PageEditor/SubEditors/cost_subeditor_container.gd" id="14_258ts"]
+[ext_resource type="Script" path="res://Scenes/Editors/PageEditor/SubEditors/subaction_subeditor_container.gd" id="14_hcxeu"]
+[ext_resource type="Script" path="res://Scenes/Editors/PageEditor/SubEditors/cost_edit_entry_container.gd" id="15_2nobb"]
+[ext_resource type="Script" path="res://Scenes/Editors/SharedSubEditors/damage_subeditor_container.gd" id="20_j2ru7"]
+[ext_resource type="Script" path="res://Scenes/Editors/SharedSubEditors/damage_edit_entry_container.gd" id="21_re071"]
 [ext_resource type="Script" path="res://Scenes/Editors/SharedSubEditors/subeditors_tabs_control.gd" id="21_yq8bh"]
-[ext_resource type="Script" path="res://Scenes/Editors/PageEditor/Scripts/SubEditors/missile_subeditor_container.gd" id="23_2sg21"]
-[ext_resource type="Script" path="res://Scenes/Editors/PageEditor/Scripts/SubEditors/missile_edit_entry_container.gd" id="23_8euos"]
-[ext_resource type="Script" path="res://Scenes/Editors/PageEditor/Scripts/SubEditors/target_edit_entry_container.gd" id="26_dw0h4"]
+[ext_resource type="Script" path="res://Scenes/Editors/PageEditor/SubEditors/missile_subeditor_container.gd" id="23_2sg21"]
+[ext_resource type="Script" path="res://Scenes/Editors/PageEditor/SubEditors/missile_edit_entry_container.gd" id="23_8euos"]
+[ext_resource type="Script" path="res://Scenes/Editors/PageEditor/SubEditors/target_edit_entry_container.gd" id="26_dw0h4"]
 [ext_resource type="Texture2D" uid="uid://b5hwdm5jyjhqo" path="res://assets/Sprites/UI/DevTools/AreaEditor/SmallAreaTiles.png" id="26_fpu0m"]
-[ext_resource type="Script" path="res://Scenes/Editors/PageEditor/Scripts/SubEditors/target_subeditor_container.gd" id="26_haw51"]
+[ext_resource type="Script" path="res://Scenes/Editors/PageEditor/SubEditors/target_subeditor_container.gd" id="26_haw51"]
 [ext_resource type="Script" path="res://Scenes/Editors/SharedSubEditors/area_subeditor_container.gd" id="26_vurp0"]
 [ext_resource type="Texture2D" uid="uid://bfwuijybad3co" path="res://assets/Sprites/UI/DevTools/AreaEditor/CenterSprite.png" id="27_qoroh"]
 [ext_resource type="Texture2D" uid="uid://84vyicm827uj" path="res://assets/Sprites/UI/DevTools/AreaEditor/UpArrowButton.png" id="28_tvii8"]
@@ -996,7 +996,7 @@ size_flags_vertical = 3
 [node name="RightContainer" type="VBoxContainer" parent="InnerContainer/MainContainer"]
 layout_mode = 2
 
-[node name="TabBar" type="TabBar" parent="InnerContainer/MainContainer/RightContainer" node_paths=PackedStringArray("damage_tab", "costs_tab", "missiles_tab", "targets_tab")]
+[node name="TabBar" type="TabBar" parent="InnerContainer/MainContainer/RightContainer"]
 custom_minimum_size = Vector2(376, 0)
 layout_mode = 2
 current_tab = 0
@@ -1006,10 +1006,7 @@ tab_1/title = "Costs"
 tab_2/title = "Missiles"
 tab_3/title = "Targets"
 script = ExtResource("21_yq8bh")
-damage_tab = NodePath("../Damage")
-costs_tab = NodePath("../CostSubEditorContainer")
-missiles_tab = NodePath("../Missiles")
-targets_tab = NodePath("../TargetSubEditorContainer")
+tab_set = "Actions"
 
 [node name="Damage" type="Container" parent="InnerContainer/MainContainer/RightContainer" node_paths=PackedStringArray("add_button", "premade_edit_entry", "entries_container", "title_label", "root_editor_control", "background", "inner_container")]
 custom_minimum_size = Vector2(16, 16)

@@ -89,9 +89,9 @@ func create_prop_input(prop_name:String, prop_type, is_unknown:bool=false):
 	prop_inputs[prop_name] = new_prop
 	var prop_value = subeffect_data.get(prop_name, null)
 	var enum_options = []
-	if prop_type == BaseSubEffect.SubEffectPropTypes.EnumOptions:
+	if prop_type == BaseSubEffect.SubEffectPropTypes.EnumVal:
 		var sub_effect:BaseSubEffect = EffectLibary.get_sub_effect_script(real_script)
-		var options_dict = sub_effect.get_enum_option_values()
+		var options_dict = sub_effect.get_prop_enum_values("")
 		enum_options = options_dict.get(prop_name, [])
 	new_prop.set_prop(prop_name, prop_type, prop_value, is_unknown, enum_options)
 

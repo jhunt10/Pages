@@ -34,7 +34,6 @@ func hide_selected_icon(index):
 		set_item_icon(index, null)
 
 func load_options(force_option:String=''):
-	print("%s.load_options" % [self.name])
 	var current_option = force_option
 	if force_option != '' and current_option == '' and self.selected >= 0:
 		current_option = self.get_item_text(self.selected)

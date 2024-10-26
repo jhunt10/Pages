@@ -95,9 +95,14 @@ func resize_self_around_child():
 		self_size.y = self_custom_min.y
 	
 	if force_dimintions != Vector2i.ZERO:
-		self_size = force_dimintions
-		self_custom_min = force_dimintions
-		inner_size = Vector2i(force_dimintions.x - (2 * margin_val), force_dimintions.y - (2 * margin_val))
+		if force_dimintions.x > 0:
+			self_size.x = force_dimintions.x
+			self_custom_min.x = force_dimintions.x
+			inner_size.x = force_dimintions.x - (2 * margin_val)
+		if force_dimintions.y > 0:
+			self_size.y = force_dimintions.y
+			self_custom_min.y = force_dimintions.y
+			inner_size.y = force_dimintions.y - (2 * margin_val)
 	
 	self.set_size(self_size)
 	self.custom_minimum_size = self_custom_min

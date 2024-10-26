@@ -5,8 +5,8 @@ const RELATIVE_POS_KEY = "RelativePos"
 
 func get_required_props()->Dictionary:
 	return {
-		RELATIVE_POS_KEY: BaseSubAction.SubActionPropType.MoveValue,
-		"MovementType": BaseSubAction.SubActionPropType.StringVal
+		RELATIVE_POS_KEY: BaseSubAction.SubActionPropTypes.MoveValue,
+		"MovementType": BaseSubAction.SubActionPropTypes.StringVal
 	}
 ## Returns Tags that are automatically added to the parent Action's Tags
 func get_action_tags(_subaction_data:Dictionary)->Array:

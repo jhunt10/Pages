@@ -9,7 +9,6 @@ extends BaseSubEditEntryContainer
 
 func _get_key_input()->LineEdit:
 	return $InnerContainer/KeyContainer/KeyLineEdit
-	return $InnerContainer/KeyContainer/KeyLineEdit
 func _get_delete_button()->Button:
 	return $InnerContainer/KeyContainer/DeleteButton
 
