@@ -666,20 +666,6 @@ grow_vertical = 2
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="SmallOptionContainer" type="HBoxContainer" parent="InnerContainer/MainContainer/LeftContainer/DetailsEditorContainer/InnerContainer/IconsContainer/InnerContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="SmallOptionLabel" type="Label" parent="InnerContainer/MainContainer/LeftContainer/DetailsEditorContainer/InnerContainer/IconsContainer/InnerContainer/VBoxContainer/SmallOptionContainer"]
-layout_mode = 2
-text = "Small:"
-
-[node name="SmallOptionButton" type="OptionButton" parent="InnerContainer/MainContainer/LeftContainer/DetailsEditorContainer/InnerContainer/IconsContainer/InnerContainer/VBoxContainer/SmallOptionContainer"]
-custom_minimum_size = Vector2(0, 32)
-layout_mode = 2
-size_flags_horizontal = 3
-fit_to_longest_item = false
-script = ExtResource("5_xop6x")
-
 [node name="LargeOptionContainer" type="HBoxContainer" parent="InnerContainer/MainContainer/LeftContainer/DetailsEditorContainer/InnerContainer/IconsContainer/InnerContainer/VBoxContainer"]
 layout_mode = 2
 
@@ -688,6 +674,20 @@ layout_mode = 2
 text = "Large:"
 
 [node name="LargeOptionButton" type="OptionButton" parent="InnerContainer/MainContainer/LeftContainer/DetailsEditorContainer/InnerContainer/IconsContainer/InnerContainer/VBoxContainer/LargeOptionContainer"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+size_flags_horizontal = 3
+fit_to_longest_item = false
+script = ExtResource("5_xop6x")
+
+[node name="SmallOptionContainer" type="HBoxContainer" parent="InnerContainer/MainContainer/LeftContainer/DetailsEditorContainer/InnerContainer/IconsContainer/InnerContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="SmallOptionLabel" type="Label" parent="InnerContainer/MainContainer/LeftContainer/DetailsEditorContainer/InnerContainer/IconsContainer/InnerContainer/VBoxContainer/SmallOptionContainer"]
+layout_mode = 2
+text = "Small:"
+
+[node name="SmallOptionButton" type="OptionButton" parent="InnerContainer/MainContainer/LeftContainer/DetailsEditorContainer/InnerContainer/IconsContainer/InnerContainer/VBoxContainer/SmallOptionContainer"]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 size_flags_horizontal = 3

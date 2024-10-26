@@ -8,7 +8,7 @@ var Que:ActionQue
 var node:ActorNode
 var stats:StatHolder
 var effects:EffectHolder
-var items:ItemHolder
+var items:BaseItemBag
 
 var Id : String = str(ResourceUID.create_id())
 func get_tagable_id(): return Id
@@ -57,7 +57,7 @@ func _init(args:Dictionary, faction_index:int) -> void:
 	var stat_data = args["Stats"]
 	stats = StatHolder.new(self, stat_data)
 	effects = EffectHolder.new(self)
-	items = ItemHolder.new(self)
+	items = BaseItemBag.new(self)
 	
 func die():
 	is_dead = true

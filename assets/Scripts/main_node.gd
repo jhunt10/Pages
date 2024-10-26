@@ -6,7 +6,7 @@ var current_scene
 static var action_library = ActionLibrary.new()
 static var actor_libary = ActorLibary.new()
 static var effect_libary = EffectLibary.new()
-static var item_libary = ItemLibary.new()
+static var item_libary = ItemLibrary.new()
 static var vfx_libray = VfxLibrary.new()
 static var Instance:MainRootNode
 

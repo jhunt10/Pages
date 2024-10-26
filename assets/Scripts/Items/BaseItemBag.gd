@@ -1,4 +1,4 @@
-class_name ItemHolder
+class_name BaseItemBag
 
 var _actor:BaseActor
 var _max_slots:int = 0

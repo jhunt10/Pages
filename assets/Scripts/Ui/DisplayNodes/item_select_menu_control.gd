@@ -7,7 +7,7 @@ signal on_item_selected(item_id:String)
 @onready var button_container:VBoxContainer = $MenuPanel/VBoxContainer
 
 var buttons:Array = []
-var _item_holder:ItemHolder
+var _item_holder:BaseItemBag
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -18,7 +18,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 	
-func set_items(item_holder:ItemHolder):
+func set_items(item_holder:BaseItemBag):
 	_item_holder = item_holder
 	_build_buttons()
 	

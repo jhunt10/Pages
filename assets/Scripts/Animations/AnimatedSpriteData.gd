@@ -1,3 +1,11 @@
+
+
+
+# Obolete in favor of FVXs
+
+
+
+
 class_name AnimatedSpriteData
 
 const NO_SPRITE_PATH = "res://assets/Sprites/BadSprite.png"
