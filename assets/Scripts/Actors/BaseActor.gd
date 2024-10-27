@@ -1,4 +1,5 @@
 class_name BaseActor
+extends BaseLoadObject
 
 # Actor holds no references to the current map state so this method is called by MapState.set_actor_pos()
 signal on_move(old_pos:MapPos, new_pos:MapPos, move_type:String, moved_by:BaseActor)
@@ -10,35 +11,49 @@ var stats:StatHolder
 var effects:EffectHolder
 var items:BaseItemBag
 
-var Id : String = str(ResourceUID.create_id())
+var Id : String:
+	get: return _id
+var ActorKey : String:
+	get: return _key
 func get_tagable_id(): return Id
 func get_tags(): return Tags
 
 var FactionIndex : int
+
+
 var LoadPath:String
-var ActorData:Dictionary
-var ActorKey:String 
 var DisplayName:String
 var SnippetDesc:String
 var Description:String
 var Tags:Array = []
 
 var spawn_map_layer
-var leaves_corpse:bool = true
 
 var _default_sprite:String
 var _allow_auto_que:bool = false
 
 var is_dead:bool = false
 
-func _init(args:Dictionary, faction_index:int) -> void:
+func _init(key:String, load_path:String, def:Dictionary, id:String, data:Dictionary) -> void:
+	super(key, load_path, def, id, data)
+	spawn_map_layer = _def.get('SpawnOnMapLayer', MapStateData.DEFAULT_ACTOR_LAYER)
+	
+	_default_sprite = _def['Sprite']
+	_allow_auto_que = _def.get('AutoQueing', false)
+	
+	Que = ActionQue.new(self)
+	
+	var stat_data = _def["Stats"]
+	stats = StatHolder.new(self, stat_data)
+	effects = EffectHolder.new(self)
+	items = BaseItemBag.new(self)
+	
+	
+func _init_old(args:Dictionary, faction_index:int) -> void:
 	LoadPath = args['LoadPath']
 	ActorKey = args['ActorKey']
-	ActorData = args
 	FactionIndex = faction_index
 	
-	leaves_corpse = args.get("LeavesCorpse", true)
-	spawn_map_layer = args.get('SpawnOnMapLayer', MapStateData.DEFAULT_ACTOR_LAYER)
 	if spawn_map_layer is String:
 		spawn_map_layer = MapStateData.MapLayers.get(spawn_map_layer)
 	
@@ -49,15 +64,6 @@ func _init(args:Dictionary, faction_index:int) -> void:
 	Description = args['Description']
 	Tags = args['Tags']
 	
-	_default_sprite = args['Sprite']
-	_allow_auto_que = args.get('AutoQueing', false)
-	
-	Que = ActionQue.new(self)
-	
-	var stat_data = args["Stats"]
-	stats = StatHolder.new(self, stat_data)
-	effects = EffectHolder.new(self)
-	items = BaseItemBag.new(self)
 	
 func die():
 	is_dead = true
@@ -65,24 +71,29 @@ func die():
 	node.sprite.texture = get_coprse_texture()
 	
 func  get_default_sprite()->Texture2D:
-	return load(LoadPath + "/" +_default_sprite)
+	return load(_def_load_path + "/" +_default_sprite)
 	
 func get_portrait_sprite()->Texture2D:
-	return load(LoadPath + "/" +_default_sprite)
+	return load(_def_load_path + "/" +_default_sprite)
 
 func get_coprse_texture()->Texture2D:
-	if ActorData.has("CorpseSprite"):
-		return load(LoadPath + "/" +ActorData['CorpseSprite'])
-	return MainRootNode.actor_libary.get_default_corpse_texture()
+	if _def.has("CorpseSprite"):
+		return load(LoadPath + "/" +_def['CorpseSprite'])
+	return SpriteCache._get_no_sprite()
 
 func auto_build_que(current_turn:int):
 	if !_allow_auto_que:
 		return
-	print("Auto Que for : " + ActorKey)
-	if Que:
-		if Que.available_action_list.size() > 0:
-			var action = MainRootNode.action_library.get_action(Que.available_action_list[0])
-			for n in range(Que.que_size):
-				print("AutoQue: " + action.ActionKey)
-				Que.que_action(action)
+	printerr("Auto Que for : " + ActorKey)
+	#if Que:
+		#if Que.available_action_list.size() > 0:
+			#var action = ActionLibrary.get_action(Que.available_action_list[0])
+			#for n in range(Que.que_size):
+				#print("AutoQue: " + action.ActionKey)
+				#Que.que_action(action)
 			
+func get_action_list()->Array:
+	return []
+
+func get_que_data()->Dictionary:
+	return _def['QueData']

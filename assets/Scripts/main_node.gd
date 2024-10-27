@@ -4,7 +4,7 @@ extends Control
 var current_scene
 
 static var action_library = ActionLibrary.new()
-static var actor_libary = ActorLibary.new()
+static var actor_libary = ActorLibrary.new()
 static var effect_libary = EffectLibary.new()
 static var item_libary = ItemLibrary.new()
 static var vfx_libray = VfxLibrary.new()
@@ -16,6 +16,7 @@ func _ready() -> void:
 		self.queue_free()
 		return
 	Instance = self
+	#ActorLibrary.load_from_files()
 	current_scene = load("res://Scenes/main_menu_root_control.tscn").instantiate()
 	self.add_child(current_scene)
 
@@ -49,8 +50,7 @@ func start_combat():
 func open_character_sheet(_actor:BaseActor=null):
 	var actor = _actor
 	if not actor:
-		var actor_data = MainRootNode.actor_libary.get_actor_data("TestActor")
-		actor = BaseActor.new(actor_data, 0)
+		actor = ActorLibrary.create_actor("TestActor", {})
 	var charsheet = load("res://Scenes/character_edit_control.tscn").instantiate()
 	self.add_child(charsheet)
 	charsheet.set_actor(actor)

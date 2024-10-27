@@ -21,7 +21,7 @@ func _init(act) -> void:
 		printerr("Actor already has que")
 		return
 	act.Que = self
-	var que_data = act.ActorData['QueData']
+	var que_data = act.get_que_data()
 	que_size = que_data['MaxSize']
 	available_action_list = que_data.get('ActionList', [])
 	actor = act

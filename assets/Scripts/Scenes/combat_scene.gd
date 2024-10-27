@@ -39,13 +39,12 @@ func _ready() -> void:
 		return
 	
 	for actor_info in actor_creation_que:
-		var actor_key = actor_info['ActorKey']
+		var actor_id = actor_info['ActorId']
 		var actor_pos = actor_info['Pos']
-		var actor_data = MainRootNode.actor_libary.get_actor_data(actor_key)
-		var new_actor = create_new_actor(actor_data, 1, actor_pos)
+		var actor = ActorLibrary.get_actor(actor_id)
 		if actor_info.get('IsPlayer', false):
-			new_actor.FactionIndex = 0
-			ui_control.set_player_actor(new_actor)
+			actor.FactionIndex = 0
+			ui_control.set_player_actor(actor)
 	actor_creation_que.clear()
 	
 	ui_control.ui_state_controller.set_ui_state(UiStateController.UiStates.ActionInput)
@@ -67,10 +66,10 @@ func set_init_state(map_data:Dictionary, actor_creation_que:Array):
 func kill_actor(actor:BaseActor):
 	actor.die()
 	QueController.remove_action_que(actor.Que)
-	if actor.leaves_corpse:
-		GameState.MapState.set_actor_layer(actor, MapStateData.MapLayers.Corpse)
-	else:
-		delete_actor(actor)
+	#if actor.leaves_corpse:
+	GameState.MapState.set_actor_layer(actor, MapStateData.MapLayers.Corpse)
+	#else:
+		#delete_actor(actor)
 
 
 func delete_actor(actor:BaseActor):
@@ -78,30 +77,27 @@ func delete_actor(actor:BaseActor):
 	MapController.delete_actor(actor)
 	#GameState.Actors.erase(actor.Id)
 	
-func create_new_actor(data:Dictionary, faction_index:int, pos:MapPos):
-	#var file = FileAccess.open(path, FileAccess.READ)
-	#var text:String = file.get_as_text()
-	#var data = JSON.parse_string(text)
-	var new_actor = BaseActor.new(data, faction_index)
-	
+func add_actor(actor:BaseActor, faction_id:int, pos:MapPos):
+	if GameState.get_actor(actor.Id, true):
+		printerr("Actor '%s' already added" % [actor.Id])
+		return
 	# Add actor to GameState and set position
-	GameState.add_actor(new_actor)
-	GameState.MapState.set_actor_pos(new_actor, pos, new_actor.spawn_map_layer)
-	QueController.add_action_que(new_actor.Que)
+	actor.FactionIndex = faction_id
+	GameState.add_actor(actor)
+	GameState.MapState.set_actor_pos(actor, pos, actor.spawn_map_layer)
+	QueController.add_action_que(actor.Que)
 	
 	# Register new node with MapController and sync  pos
 	var new_node = load("res://Scenes/actor_node.tscn").instantiate()
-	new_node.set_actor(new_actor)
-	MapController.add_actor_node(new_actor, new_node)
+	new_node.set_actor(actor)
+	MapController.add_actor_node(actor, new_node)
 	MapController._sync_actor_positions()
 	new_node.visible = true
 	
-	if new_actor._allow_auto_que:
-		new_actor.auto_build_que(QueController.action_index)
+	if actor._allow_auto_que:
+		actor.auto_build_que(QueController.action_index)
 	
-	actor_spawned.emit(new_actor)
-		
-	return new_actor
+	actor_spawned.emit(actor)
 
 func create_new_missile_node(missile):
 	var new_node:MissileNode  = load("res://Scenes/missile_node.tscn").instantiate()

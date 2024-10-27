@@ -37,7 +37,7 @@ func set_actor(actor:BaseActor):
 		for but in _buttons:
 			but.queue_free()
 	var index = 0
-	for action_key in actor.ActorData['QueData']['ActionList']:
+	for action_key in actor.get_action_list():
 		var new_button:TextureButton = page_button_prefab.duplicate()
 		page_button_prefab.get_parent().add_child(new_button)
 		new_button.visible = true

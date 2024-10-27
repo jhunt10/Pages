@@ -55,7 +55,7 @@ func _build_stat_box(actor:BaseActor):
 		stat_desc_boxes.append(stat_box)
 
 func _build_page_list(actor:BaseActor):
-	var que_data = actor.ActorData['QueData']
+	var que_data = actor.get_que_data()
 	for page_key in que_data['ActionList']:
 		var page = MainRootNode.action_library.get_action(page_key)
 		if !page:

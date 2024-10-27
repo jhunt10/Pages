@@ -7,10 +7,7 @@ var _items:Dictionary = {}
 
 func _init(actor:BaseActor) -> void:
 	_actor = actor
-	if not actor.ActorData.keys().has("MaxItemSlots"):
-		return
-		
-	_max_slots = actor.ActorData['MaxItemSlots']
+	_max_slots = 5
 	
 	if _max_slots == 0:
 		return
@@ -19,11 +16,11 @@ func _init(actor:BaseActor) -> void:
 		_slots.append(null)
 	# TODO: Items shouldn't be static
 	var index = 0
-	for itemKey in actor.ActorData.get('Items', []):
-		var item = MainRootNode.item_libary.create_new_item(itemKey, {})
-		_slots[index] = item.Id
-		_items[item.Id] = item
-		index+=1
+	#for itemKey in actor.ActorData.get('Items', []):
+		#var item = MainRootNode.item_libary.create_new_item(itemKey, {})
+		#_slots[index] = item.Id
+		#_items[item.Id] = item
+		#index+=1
 
 func get_item_in_slot(slot:int):
 	if slot < 0 or slot >= _max_slots:

@@ -1,63 +1,76 @@
-class_name ActorLibary
+class_name ActorLibrary
+extends BaseLoadObjectLibrary
 
-const ActorDir = "res://data/Actors/"
+## All Libraries should be static, but static override methods can't be called by BaseLoadObjectLibrary.
+## So this is the work around.
+static var Instance:ActorLibrary
+
+func get_object_name()->String:
+	return 'Actor'
+func get_object_key_name()->String:
+	return "ActorKey"
+func get_def_file_sufix()->String:
+	return "_ActorDefs.json"
+func get_data_file_sufix()->String:
+	return "_ActorData.json"
+func get_object_script_path(object_def:Dictionary)->String:
+	return "res://assets/Scripts/Actors/BaseActor.gd"
+
 const _default_corpse_texture_path = "res://assets/Sprites/Actors/DefaultCorpse.png"
 
-# Dictionary of actor's base data config
-var _actors_data:Dictionary = {}
-
-var loaded = false
-var loaded_sprites : Dictionary = {}
-
 func _init() -> void:
-	self.load_actors_data()
-
-func load_actors_data():
-	if loaded:
+	if Instance != null:
+		printerr("Multiple ActionLibrarys created.")
 		return
-	print("Loading Actors")
-	var files = []
-	_search_for_actors(ActorDir, files)
-	for file in files:
-		_load_actor_file(file)
-	loaded = true
-	
-# Get a static instance of the action
-func get_actor_data(key:String)->Dictionary:
-	if !loaded:
-		printerr("Attepted to get Action before loading: " + key)
-	if _actors_data.has(key):
-		return _actors_data[key]
-	return {}
-	
-func _search_for_actors(path:String, list:Array):
-	var dir = DirAccess.open(path)
-	if dir:
-		dir.list_dir_begin()
-		var file_name:String = dir.get_next()
-		while file_name != "":
-			var full_path = path+"/"+file_name
-			if dir.current_is_dir():
-				_search_for_actors(full_path, list)
-			elif file_name.ends_with(".json"):
-				list.append(full_path)
-			file_name = dir.get_next()
-	else:
-		print("An error occurred when trying to access the path.")
+	Instance = self
+	Instance.init_load()
 
-func _load_actor_file(path:String):
-	var file = FileAccess.open(path, FileAccess.READ)
-	var text:String = file.get_as_text()
+# Get a static instance of the action
+static func get_actor_def(key:String)->Dictionary:
+	return Instance.get_object_def(key)
 	
-	# Wrap in brackets to support multiple actions in same file
-	if !text.begins_with("["):
-		text = "[" + text + "]" 
-		
-	var actor_datas = JSON.parse_string(text)
-	for data in actor_datas:
-		data['LoadPath'] = path.get_base_dir()
-		_actors_data[data['ActorKey']] = data
-		print("Loaded Actor: " + data['ActorKey'])
+static func get_actor(actor_id:String)->BaseActor:
+	var actor = Instance.get_object(actor_id)
+	if !actor:
+		printerr("ActorLibrary.get_actor: No actor found with id '%s'." % [actor_id])
+	return actor
+
+static func create_actor(key:String, data:Dictionary)->BaseActor:
+	var actor = Instance.create_object(key, '', data)
+	if !actor:
+		printerr("ActorLibrary.create_actor: Failed to make actor '%s'." % [key])
+	return actor
+	
+
+
+#func _search_for_actors(path:String, list:Array):
+	#var dir = DirAccess.open(path)
+	#if dir:
+		#dir.list_dir_begin()
+		#var file_name:String = dir.get_next()
+		#while file_name != "":
+			#var full_path = path+"/"+file_name
+			#if dir.current_is_dir():
+				#_search_for_actors(full_path, list)
+			#elif file_name.ends_with(".json"):
+				#list.append(full_path)
+			#file_name = dir.get_next()
+	#else:
+		#print("An error occurred when trying to access the path.")
+#
+#func _load_actor_file(path:String):
+	#var file = FileAccess.open(path, FileAccess.READ)
+	#var text:String = file.get_as_text()
+	#
+	## Wrap in brackets to support multiple actions in same file
+	#if !text.begins_with("["):
+		#text = "[" + text + "]" 
+		#
+	#var actor_datas = JSON.parse_string(text)
+	#for data in actor_datas:
+		#data['LoadPath'] = path.get_base_dir()
+		##_actors_data[data['ActorKey']] = data
+		#print("Loaded Actor: " + data['ActorKey'])
 
 #func create_page(keyName : String) -> PageAction:
 	#var script = action_scripts[keyName]
