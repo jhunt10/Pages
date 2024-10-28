@@ -10,6 +10,7 @@ var node:ActorNode
 var stats:StatHolder
 var effects:EffectHolder
 var items:BaseItemBag
+var details:ObjectDetailsData
 
 var Id : String:
 	get: return _id
@@ -21,10 +22,15 @@ func get_tags(): return Tags
 var FactionIndex : int
 
 
-var LoadPath:String
-var DisplayName:String
-var SnippetDesc:String
-var Description:String
+var LoadPath:String:
+	get: return _def_load_path
+var DisplayName:String:
+	get: return _data.get("DisplayName", details.display_name)
+	set(val): _data["DisplayName"] = val
+var SnippetDesc:String:
+	get: return details.snippet
+var Description:String:
+	get: return details.description
 var Tags:Array = []
 
 var spawn_map_layer
@@ -47,24 +53,11 @@ func _init(key:String, load_path:String, def:Dictionary, id:String, data:Diction
 	stats = StatHolder.new(self, stat_data)
 	effects = EffectHolder.new(self)
 	items = BaseItemBag.new(self)
-	
-	
-func _init_old(args:Dictionary, faction_index:int) -> void:
-	LoadPath = args['LoadPath']
-	ActorKey = args['ActorKey']
-	FactionIndex = faction_index
-	
-	if spawn_map_layer is String:
-		spawn_map_layer = MapStateData.MapLayers.get(spawn_map_layer)
-	
-	
-	#TODO: Translations
-	DisplayName = args['DisplayName']
-	SnippetDesc = args['SnippetDesc']
-	Description = args['Description']
-	Tags = args['Tags']
-	
-	
+	details = ObjectDetailsData.new(_def_load_path, def.get("Details", {}))
+
+func save_data()->Dictionary:
+	return _data
+
 func die():
 	is_dead = true
 	on_death.emit()
@@ -96,4 +89,6 @@ func get_action_list()->Array:
 	return []
 
 func get_que_data()->Dictionary:
-	return _def['QueData']
+	if !_data.keys().has('QueData'):
+		_data['QueData'] = _def['QueData']
+	return _data['QueData']

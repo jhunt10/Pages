@@ -12,7 +12,7 @@ func get_object_key_name()->String:
 func get_def_file_sufix()->String:
 	return "_ActorDefs.json"
 func get_data_file_sufix()->String:
-	return "_ActorData.json"
+	return "_ActorSave.json"
 func get_object_script_path(object_def:Dictionary)->String:
 	return "res://assets/Scripts/Actors/BaseActor.gd"
 
@@ -40,7 +40,9 @@ static func create_actor(key:String, data:Dictionary)->BaseActor:
 	if !actor:
 		printerr("ActorLibrary.create_actor: Failed to make actor '%s'." % [key])
 	return actor
-	
+
+static func save_actors():
+	Instance.save_objects_data("res://saves/Actors/_TestActor_ActorSave.json")
 
 
 #func _search_for_actors(path:String, list:Array):

@@ -23,4 +23,6 @@ func is_static():
 	return false
 
 func save_data()->Dictionary:
+	if !_data.keys().has("ObjectKey"):
+		_data['ObjectKey'] = self._key
 	return _data

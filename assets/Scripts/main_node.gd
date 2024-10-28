@@ -50,7 +50,8 @@ func start_combat():
 func open_character_sheet(_actor:BaseActor=null):
 	var actor = _actor
 	if not actor:
-		actor = ActorLibrary.create_actor("TestActor", {})
+		actor = ActorLibrary.get_actor("TestActor_ID")
+		#actor = ActorLibrary.create_actor("TestActor", {})
 	var charsheet = load("res://Scenes/character_edit_control.tscn").instantiate()
 	self.add_child(charsheet)
 	charsheet.set_actor(actor)

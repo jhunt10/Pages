@@ -76,17 +76,20 @@ func create_object(object_key:String, id:String='', data:Dictionary={})->BaseLoa
 	return new_object
 
 func save_objects_data(file_path:String):
+	if LOGGING: print("#### Saving %s Datas to: %s" % [get_object_name(), file_path])
 	var save_datas:Dictionary = {}
 	for object_id in _loaded_objects.keys():
 		var object:BaseLoadObject = _loaded_objects[object_id]
 		var data = object.save_data()
 		if !data.keys().has("Id"):
 			data['Id'] = object_id
+		if LOGGING: print("# Saving %s Datas with id: %s" % [get_object_name(), object_id])
 		save_datas[object_id] = data
 	var save_data_string = JSON.stringify(save_datas)
 	var file = FileAccess.open(file_path, FileAccess.WRITE)
 	file.store_string(save_data_string)
 	file.close()
+	if LOGGING: print("#### Saving %s Datas Done" % [get_object_name()])
 
 
 func get_sub_script(script_path):
@@ -106,18 +109,26 @@ func init_load():
 	if loaded:
 		return
 	var obj_name = get_object_name()
-	print("Loading %s" % [obj_name])
+	if LOGGING:
+		print("")
+		print("#### Loading %s" % [obj_name])
 	# Load Defs
 	for def_file in _search_for_files(OBJECTS_DEFS_DIR, get_def_file_sufix()):
+		if LOGGING: print("# Loading Def file: %s" % [def_file])
 		_load_object_def_file(def_file)
 	
 	# Load Static Objects
+	if LOGGING: print("# Loading Static Objects" )
 	_load_static_objects()
 	
 	# Load Objects
 	for object_file in _search_for_files(OBJECTS_DATA_DIR, get_data_file_sufix()):
+		if LOGGING: print("# Loading Save file: %s" % [object_file])
 		_load_object_file(object_file)
 	
+	if LOGGING:
+		print("#### DONE Loading %s" % [obj_name])
+		print("")
 	loaded = true
 
 
@@ -150,14 +161,14 @@ func _load_object_def_file(file_path:String):
 		var object_key = def[object_key_name]
 		_defs_to_load_paths[object_key] = file_path.get_base_dir()
 		_object_defs[object_key] = def
-		print("Loaded Object: " + object_key)
+		if LOGGING: print("# - Loaded Object Def: %s" % [object_key])
 
 ## Search _object_defs and load static objects to _static_objects
 func _load_static_objects():
 	for object_key in _object_defs.keys():
 		var object_def:Dictionary = _object_defs[object_key]
 		if object_def.get('IsStatic', false):
-			var script_path = object_def['ObjectScript']
+			var script_path = get_object_script_path(object_def)
 			var script = load(script_path)
 			if !script:
 				printerr("%sLibrary._load_static_objects: %s Failed to find object script '%s'. " % [get_object_name(), object_key, script_path])
@@ -175,6 +186,7 @@ func _load_static_objects():
 				printerr("%sLibrary._load_static_objects: Object %s already loaded." % [get_object_name(), object_key]) 
 				continue
 			_static_objects[object_key] = new_object
+			if LOGGING: print("# - Loaded Static Object: %s" % [object_key])
 
 ## Parse json save file and load to _loaded_objects
 func _load_object_file(file_path:String):
@@ -185,30 +197,30 @@ func _load_object_file(file_path:String):
 	var object_datas:Dictionary = JSON.parse_string(text)
 	for object_id:String in object_datas.keys():
 		var save_data = object_datas[object_id]
-		if !save_data.keys().has(object_key_name):
-			printerr("%sLibrary._load_object_file: No '%s' found on object %s in %s." % [ get_object_name(), object_key_name, object_id, file_path])
+		var object_key = save_data.get(object_key_name, save_data.get("ObjectKey", null))
+		if !object_key:
+			printerr("%sLibrary._load_object_file: No '%s' or 'ObjectKey' found on object '%s' in: %s" % [ get_object_name(), object_key_name, object_id, file_path])
 			continue
-		var object_key = save_data[object_key_name]
 		var object_def = get_object_def(object_key)
 		if !object_def:
-			printerr("%sLibrary._load_object_file: No object def found for '%s' on object %s in %s." % [get_object_name(), object_key_name, object_id, file_path])
+			printerr("%sLibrary._load_object_file: No object def found for '%s' on object '%s' in: %." % [get_object_name(), object_key_name, object_id, file_path])
 			continue
-		var script_path = object_def['ObjectScript']
+		var script_path = get_object_script_path(object_def)
 		var script = load(script_path)
 		if !script:
-			printerr("%sLibrary._load_object_file: Failed to find object script '%s' " % [get_object_name(), script_path])
+			printerr("%sLibrary._load_object_file: Failed to find object script: %s" % [get_object_name(), script_path])
 			continue
-		if not script is BaseLoadObject:
-			printerr("%sLibrary._load_object_file: Object %s loaded script '%s' " + 
-				"is not of type 'BaseLoadObject'." % [get_object_name(), object_key_name, script_path]) 
-			continue
+		# Not sure how to correctly check this (this always returns false)
+		#if not (script as BaseLoadObject):
+			#printerr("%sLibrary._load_object_file: Object %s loaded script '%s' is not of type 'BaseLoadObject'." % [get_object_name(), object_key_name, script_path]) 
+			#continue
 		var load_path = _defs_to_load_paths[object_key]
 		var new_object:BaseLoadObject = script.new(object_key, load_path, object_def, object_id, save_data)
 		if _loaded_objects.keys().has(object_id):
 			printerr("%sLibrary._load_object_file: Object with id '%s' already loaded." % [get_object_name(), object_id])
 			continue
 		_loaded_objects[object_id] = new_object
-		print("Loaded Object: %s | %s" % [object_key, object_id])
+		if LOGGING: print("# - Loaded Saved Object: %s" % [object_id])
 
 ## Recursivly search directory for files with object_file_sufix.
 ## Appends full path of found files to out_list.
