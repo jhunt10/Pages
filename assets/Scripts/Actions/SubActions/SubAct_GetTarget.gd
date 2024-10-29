@@ -19,7 +19,7 @@ func do_thing(parent_action:BaseAction, subaction_data:Dictionary, metadata:QueE
 		#print("Has Target: ", turndata.targets[target_key])
 		return
 	
-	var target_parms:TargetParameters = parent_action.TargetParams[target_key]
+	var target_parms = TargetingHelper.get_target_params(target_key, actor, parent_action)
 	if target_parms.target_type == TargetParameters.TargetTypes.Self:
 		turndata.targets[target_key] = actor.Id
 		return

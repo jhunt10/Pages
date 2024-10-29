@@ -2,6 +2,14 @@ class_name TargetingHelper
 
 enum LOS_VALUE {Blocked, Cover, Open}
 
+static func get_target_params(key:String, actor:BaseActor, action:BaseAction)->TargetParameters:
+	if key == "Weapon":
+		var weapon = actor.equipment.get_item_in_slot(BaseEquipmentItem.EquipmentSlots.Weapon)
+		if !weapon:
+			return null
+		return (weapon as BaseWeaponEquipment).target_parmas
+	return action.get_targeting_params(key)
+
 static func trace_los(from_point, to_point, _map_state):
 	var los_dict = {}
 	var line = safe_calc_line(from_point, to_point,  false, false, true)

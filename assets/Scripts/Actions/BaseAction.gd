@@ -16,7 +16,8 @@ var SnippetDesc:String
 var Description:String
 var Tags:Array = ActionData.get("Tags", [])
 
-var TargetParams:Dictionary = {}
+#var TargetParams:Dictionary = {}
+var _target_params:Dictionary
 var SubActionData:Array = []
 var ActionData:Dictionary = {}
 var CostData:Dictionary:
@@ -54,10 +55,10 @@ func _init(file_load_path:String, args:Dictionary) -> void:
 	if args.has('TargetParams'):
 		if args['TargetParams'] is Array:
 			for tparm in args['TargetParams']:
-				TargetParams[tparm['TargetKey']] = TargetParameters.new(tparm['TargetKey'], tparm)
+				_target_params[tparm['TargetKey']] = TargetParameters.new(tparm['TargetKey'], tparm)
 		if args['TargetParams'] is Dictionary:
 			for tparm_key in args['TargetParams'].keys():
-				TargetParams[tparm_key] = TargetParameters.new(tparm_key, args['TargetParams'][tparm_key])
+				_target_params[tparm_key] = TargetParameters.new(tparm_key, args['TargetParams'][tparm_key])
 		
 	# Load SubAction Data, missing indexes are left null
 	# The ActionQueController will create the subaction on demand
@@ -102,6 +103,11 @@ func list_sub_action_datas()->Array:
 
 func get_damage_data(subaction_data:Dictionary):
 	return DamageDatas.get(subaction_data.get("DamageKey", ""), subaction_data.get("DamageData", null))
+
+func get_targeting_params(target_key)->TargetParameters:
+	return _target_params.get(target_key, null)
+		
+	
 
 func get_on_que_options(actor:BaseActor, game_state:GameStateData):
 	var out_list = []

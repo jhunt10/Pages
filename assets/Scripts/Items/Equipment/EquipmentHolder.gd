@@ -14,7 +14,7 @@ func _init(actor:BaseActor) -> void:
 			_equipment_slot_to_item_id[slot_type] = null
 	
 	 #Check if Ids are already set
-	var equipt_items = actor.get_load_val("EquiptedItems", {})
+	var equipt_items = actor.get_load_val("EquiptItems", {})
 	for slot_key_str in equipt_items.keys():
 		if BaseEquipmentItem.EquipmentSlots.has(slot_key_str):
 			var slot_type = BaseEquipmentItem.EquipmentSlots.get(slot_key_str)
@@ -81,6 +81,9 @@ func equipt_armor(armor:BaseArmorEquipment):
 func equipt_trinket(armor:BaseArmorEquipment):
 	var slot = armor.get_equip_slot()
 	_set_equipment(slot, armor)
+
+func equipt_weapon(weapon:BaseWeaponEquipment, offhand:bool = false):
+	_set_equipment(BaseEquipmentItem.EquipmentSlots.Weapon, weapon)
 
 func _set_equipment(slot:BaseEquipmentItem.EquipmentSlots, item:BaseEquipmentItem):
 	if not _equipment_slot_to_item_id.keys().has(slot):

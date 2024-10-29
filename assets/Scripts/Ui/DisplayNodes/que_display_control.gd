@@ -115,6 +115,8 @@ func _preview_que_path():
 	if not show_preview_movement or !que_path_arrow:
 		return
 	var preview_pos = _actor.Que.get_movement_preview_pos()
+	if !preview_pos:
+		return
 	var local_map_pos = CombatRootControl.Instance.MapController.actor_tile_map.map_to_local(Vector2i(preview_pos.x, preview_pos.y))
 	var global_map_pos = CombatRootControl.Instance.MapController.actor_tile_map.global_position + local_map_pos
 	que_path_arrow.global_position = global_map_pos

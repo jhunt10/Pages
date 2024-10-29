@@ -49,6 +49,7 @@ func _input(event: InputEvent) -> void:
 
 func close_menu():
 	ActorLibrary.save_actors()
+	ItemLibrary.save_items()
 	self.queue_free()
 
 func set_actor(actor:BaseActor):

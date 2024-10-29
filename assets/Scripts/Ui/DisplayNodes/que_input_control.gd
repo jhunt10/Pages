@@ -64,10 +64,13 @@ func _mouse_entered_page_button(_index, key_name):
 		return
 	var action:BaseAction = MainRootNode.action_library.get_action(key_name)
 	if action.PreviewTargetKey:
-		var target_parms = action.TargetParams[action.PreviewTargetKey]
-		var preview_pos = _actor.Que.get_movement_preview_pos()
-		_target_display_key = CombatRootControl.Instance.MapController.target_area_display \
-			.set_target_parameters(preview_pos, target_parms)
+		var target_parms = TargetingHelper.get_target_params(action.PreviewTargetKey, _actor, action)
+		if !target_parms:
+			printerr("QueInputControl._mouse_entered_page_button: %s Failed to find TargetParams with key: '%s'." % [action.ActionKey, action.PreviewTargetKey])
+		else:
+			var preview_pos = _actor.Que.get_movement_preview_pos()
+			_target_display_key = CombatRootControl.Instance.MapController.target_area_display \
+				.set_target_parameters(preview_pos, target_parms)
 	if action.CostData.size() > 0:
 		CombatUiControl.Instance.stat_panel_control.preview_stat_cost(action.CostData)
 	#ui_controler.mouse_entered_action_button(key_name)

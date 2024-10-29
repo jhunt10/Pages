@@ -45,6 +45,7 @@ func _ready() -> void:
 		if actor_info.get('IsPlayer', false):
 			actor.FactionIndex = 0
 			ui_control.set_player_actor(actor)
+		add_actor(actor, 0, actor_pos)
 	actor_creation_que.clear()
 	
 	ui_control.ui_state_controller.set_ui_state(UiStateController.UiStates.ActionInput)
@@ -78,7 +79,7 @@ func delete_actor(actor:BaseActor):
 	#GameState.Actors.erase(actor.Id)
 	
 func add_actor(actor:BaseActor, faction_id:int, pos:MapPos):
-	if GameState.get_actor(actor.Id, true):
+	if GameState._actors.keys().has(actor.Id):
 		printerr("Actor '%s' already added" % [actor.Id])
 		return
 	# Add actor to GameState and set position

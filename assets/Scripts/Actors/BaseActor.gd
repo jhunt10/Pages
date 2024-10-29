@@ -90,7 +90,8 @@ func auto_build_que(current_turn:int):
 				#Que.que_action(action)
 			
 func get_action_list()->Array:
-	return []
+	var que_data = get_que_data()
+	return que_data.get("ActionList", [])
 
 func get_que_data()->Dictionary:
 	if !_data.keys().has('QueData'):

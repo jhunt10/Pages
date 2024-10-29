@@ -85,5 +85,35 @@
         "EquipSlot":"Trinket",
         "Armor": 0,
         "Ward": 10
+    },
+    {
+        "ItemKey":"TestSword",
+        "_ObjectScript": "res://assets/Scripts/Items/Equipment/BaseWeaponEquipment.gd",
+        "Details":{
+			"DisplayName": "Test Sword",
+			"SnippetDesc": "An sword made for testing.",
+			"Description": "Description.",
+			"Tags": [],
+			"LargeIcon":"TestSword.png",
+			"SmallIcon":"TestSword.png"
+		},
+        "EquipSlot":"Weapon",
+        "CanOffhand":false,
+        "DamageData":{
+            "AtkStat": "Strength",
+            "BaseDamage": 10,
+            "DamageEffect": "Slash_DamageEffect",
+            "DamageType": "Slash",
+            "DamageVarient": 0.1,
+            "DefenseType": "Armor"
+        },
+        "TargetParams": {
+            "EffectsAllies": false,
+            "EffectsEnemies": true,
+            "LineOfSight": true,
+            "TargetArea": "[[-1,0],[-1,1],[0,1],[1,1],[1,0]]",
+            "TargetType": "Actor"
+        },
+        "AttackTags": ["Melee", "Physical"]
     }
 ]

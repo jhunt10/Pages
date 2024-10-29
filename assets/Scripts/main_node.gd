@@ -29,19 +29,21 @@ func start_combat():
 	current_scene.queue_free()
 	var combat_scene:CombatRootControl = load("res://Scenes/combat_scene.tscn").instantiate()
 	var actors = []
+	var actor = ActorLibrary.get_actor("TestActor_ID")
+	#actor.equipment.equipt_weapon( ItemLibrary.create_item("TestSword", {}))
 	actors.append({
-		'ActorKey': 'TestActor',
+		'ActorId': 'TestActor_ID',
 		'Pos': MapPos.new(5,5,0,0),
 		'IsPlayer': true
 	})
-	actors.append({
-		'ActorKey': 'TestTarget',
-		'Pos': MapPos.new(5,2,0,0),
-	})
-	actors.append({
-		'ActorKey': 'TestTarget',
-		'Pos': MapPos.new(6,2,0,0),
-	})
+	#actors.append({
+		#'ActorKey': 'TestTarget',
+		#'Pos': MapPos.new(5,2,0,0),
+	#})
+	#actors.append({
+		#'ActorKey': 'TestTarget',
+		#'Pos': MapPos.new(6,2,0,0),
+	#})
 	var map_data = _load_test_map()
 	combat_scene.set_init_state(map_data, actors)
 	current_scene = combat_scene
