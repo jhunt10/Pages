@@ -14,10 +14,10 @@ func _init(load_path:String, data:Dictionary) -> void:
 	
 	var large_icon_file = data.get("LargeIcon", "")
 	if large_icon_file != "" and load_path != "":
-		large_icon_file = load_path.path_join(large_icon_file)
+		self.large_icon_path = load_path.path_join(large_icon_file)
 		
 	var small_icon_file = data.get("SmallIcon", "")
 	if small_icon_file != "" and load_path != "":
-		small_icon_file = load_path.path_join(small_icon_file)
+		self.small_icon_path = load_path.path_join(small_icon_file)
 	
 	tags = data.get("Tags", [])

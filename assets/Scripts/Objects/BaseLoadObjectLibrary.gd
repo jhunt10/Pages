@@ -13,8 +13,7 @@ func get_def_file_sufix()->String:
 func get_data_file_sufix()->String:
 	return "_Object.json"
 func get_object_script_path(object_def:Dictionary)->String:
-	printerr("No get_object_script_path set for '%s' Libarary" % [get_object_name()])
-	return ''
+	return object_def.get("_ObjectScript", "")
 
 var loaded = false
 # Dictionary of object's base data config

@@ -20,7 +20,7 @@ const _default_corpse_texture_path = "res://assets/Sprites/Actors/DefaultCorpse.
 
 func _init() -> void:
 	if Instance != null:
-		printerr("Multiple ActionLibrarys created.")
+		printerr("Multiple ActorLibrarys created.")
 		return
 	Instance = self
 	Instance.init_load()

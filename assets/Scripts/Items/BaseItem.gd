@@ -1,32 +1,29 @@
 class_name BaseItem
+extends BaseLoadObject
 
 enum ItemTypes {KeyItem, Consumable, Equipment, Material, }
 
-var Id : String = str(ResourceUID.create_id())
+var Id:String: 
+	get: return self._id
+var ItemKey:String:
+	get: return self._key
 
-
-var ItemKey:String 
-var ItemDef:Dictionary
-
-var _load_path:String
 var details:ObjectDetailsData
-
-var item_type:ItemTypes
 var can_stack:bool
 
-func _init(load_path:String, def:Dictionary, data:Dictionary={}) -> void:
-	ItemKey = def['ItemKey']
-	ItemDef = def.duplicate()
+func _init(key:String, def_load_path:String, def:Dictionary, id:String='', data:Dictionary={}) -> void:
+	super(key, def_load_path, def, id, data)
 	
-	_load_path = load_path
-	details = ObjectDetailsData.new(load_path, ItemDef.get("Details", {}))
-	can_stack = ItemDef.get("CanStack", false)
-	
-	var item_type_str = ItemDef.get("ItemType", "")
+	details = ObjectDetailsData.new(self._def_load_path, self._def.get("Details", {}))
+	can_stack = self._def.get("CanStack", false)
+
+func get_item_type()->ItemTypes:
+	var item_type_str = self._def.get("ItemType", "")
 	if item_type_str and ItemTypes.keys().has(item_type_str):
-		item_type = ItemTypes.get(item_type_str)
+		return ItemTypes.get(item_type_str)
 	else:
-		printerr("BaseItem._init: %s has unknown ItemType '%s'." % [ItemKey, item_type_str])
+		printerr("BaseItem.get_item_type: %s has unknown ItemType '%s'." % [ItemKey, item_type_str])
+	return ItemTypes.KeyItem
 
 func get_large_icon()->Texture2D:
 	return SpriteCache.get_sprite(details.large_icon_path)

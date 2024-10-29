@@ -1,0 +1,89 @@
+[
+    {
+        "ItemKey":"TestPageQue",
+        "_ObjectScript": "res://assets/Scripts/Items/Equipment/BaseQueEquipment.gd",
+        "Details":{
+			"DisplayName": "Test Page Que",
+			"SnippetDesc": "An page que made for testing.",
+			"Description": "Description.",
+			"Tags": [],
+			"LargeIcon":"TestBook.png",
+			"SmallIcon":"TestBook.png"
+		},
+        "MaxQueSize": 5,
+        "MaxPages": 10
+    },
+    {
+        "ItemKey":"TestBag",
+        "_ObjectScript": "res://assets/Scripts/Items/Equipment/BaseBagEquipment.gd",
+        "Details":{
+			"DisplayName": "Test Bag",
+			"SnippetDesc": "An bag made for testing.",
+			"Description": "Description.",
+			"Tags": [],
+			"LargeIcon":"TestBag.png",
+			"SmallIcon":"TestBag.png"
+		},
+        "MaxItemCount": 5
+    },
+    {
+        "ItemKey":"TestHelm",
+        "_ObjectScript": "res://assets/Scripts/Items/Equipment/BaseArmorEquipment.gd",
+        "Details":{
+			"DisplayName": "Test Helm",
+			"SnippetDesc": "An helmet made for testing.",
+			"Description": "Description.",
+			"Tags": [],
+			"LargeIcon":"TestHelm.png",
+			"SmallIcon":"TestHelm.png"
+		},
+        "EquipSlot":"Head",
+        "Armor": 10,
+        "Ward": 0
+    },
+    {
+        "ItemKey":"TestShirt",
+        "_ObjectScript": "res://assets/Scripts/Items/Equipment/BaseArmorEquipment.gd",
+        "Details":{
+			"DisplayName": "Test Shirt",
+			"SnippetDesc": "An shirt made for testing.",
+			"Description": "Description.",
+			"Tags": [],
+			"LargeIcon":"TestShirt.png",
+			"SmallIcon":"TestShirt.png"
+		},
+        "EquipSlot":"Body",
+        "Armor": 10,
+        "Ward": 0
+    },
+    {
+        "ItemKey":"TestBoots",
+        "_ObjectScript": "res://assets/Scripts/Items/Equipment/BaseArmorEquipment.gd",
+        "Details":{
+			"DisplayName": "Test Boots",
+			"SnippetDesc": "An boots made for testing.",
+			"Description": "Description.",
+			"Tags": [],
+			"LargeIcon":"TestBoots.png",
+			"SmallIcon":"TestBoots.png"
+		},
+        "EquipSlot":"Feet",
+        "Armor": 10,
+        "Ward": 0
+    },
+    {
+        "ItemKey":"TestTrinket",
+        "_ObjectScript": "res://assets/Scripts/Items/Equipment/BaseArmorEquipment.gd",
+        "Details":{
+			"DisplayName": "Test Trinket",
+			"SnippetDesc": "An trinket made for testing.",
+			"Description": "Description.",
+			"Tags": [],
+			"LargeIcon":"TestTrinket.png",
+			"SmallIcon":"TestTrinket.png"
+		},
+        "EquipSlot":"Trinket",
+        "Armor": 0,
+        "Ward": 10
+    }
+]

@@ -51,6 +51,25 @@ func open_character_sheet(_actor:BaseActor=null):
 	var actor = _actor
 	if not actor:
 		actor = ActorLibrary.get_actor("TestActor_ID")
+		
+		actor.equipment.equipt_que(
+			ItemLibrary.create_item("TestPageQue", {}))
+			
+		actor.equipment.equipt_bag(
+			ItemLibrary.create_item("TestBag", {}))
+			
+		actor.equipment.equipt_armor(
+			ItemLibrary.create_item("TestHelm", {}))
+			
+		actor.equipment.equipt_armor(
+			ItemLibrary.create_item("TestShirt", {}))
+			
+		actor.equipment.equipt_armor(
+			ItemLibrary.create_item("TestBoots", {}))
+			
+		actor.equipment.equipt_armor(
+			ItemLibrary.create_item("TestTrinket", {}))
+			
 		#actor = ActorLibrary.create_actor("TestActor", {})
 	var charsheet = load("res://Scenes/character_edit_control.tscn").instantiate()
 	self.add_child(charsheet)

@@ -26,3 +26,8 @@ func save_data()->Dictionary:
 	if !_data.keys().has("ObjectKey"):
 		_data['ObjectKey'] = self._key
 	return _data
+
+# TODO: Better name and description
+## Returns the value of given key if found in _data or _def in that order
+func get_load_val(key:String, default=null):
+	return _data.get(key, _def.get(key, default))

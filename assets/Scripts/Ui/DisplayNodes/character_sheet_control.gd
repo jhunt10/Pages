@@ -11,6 +11,15 @@ extends Control
 @onready var stat_desc_box_prefab:HBoxContainer = $Background/StatBox/ScrollContainer/VBoxContainer/StatDescrBox
 @onready var stat_box_seperator_prefab = $Background/StatBox/ScrollContainer/VBoxContainer/HSeparator
 
+@onready var que_equipment_slot_icon:TextureRect = $Background/EquipmentSlots/EquiptmenSlot4/TextureRect
+@onready var bag_equipment_slot_icon:TextureRect = $Background/EquipmentSlots/EquiptmenSlot5/TextureRect
+@onready var trinket_equipment_slot_icon:TextureRect = $Background/EquipmentSlots/EquiptmenSlot6/TextureRect
+@onready var head_equipment_slot_icon:TextureRect = $Background/EquipmentSlots/EquiptmenSlot1/TextureRect
+@onready var body_equipment_slot_icon:TextureRect = $Background/EquipmentSlots/EquiptmenSlot2/TextureRect
+@onready var feet_equipment_slot_icon:TextureRect = $Background/EquipmentSlots/EquiptmenSlot3/TextureRect
+
+@onready var armor_ward_label:Label = $Background/ArmorWardControl/Label
+
 @onready var page_container:HBoxContainer = $Background/PagesBox/HBoxContainer
 @onready var page_prefab = $Background/PagesBox/HBoxContainer/PageSlot
 @onready var page_description_control:PageDescControl = $Background/PageDescBox
@@ -49,6 +58,10 @@ func set_actor(actor:BaseActor):
 	character_level_label.text = "Lv " + str(_editing_actor.stats.level)
 	_build_stat_box(_editing_actor)
 	_build_page_list(_editing_actor)
+	_set_equipment_icons()
+	var total_armor = actor.equipment.get_total_equipment_armor()
+	var total_ward = actor.equipment.get_total_equipment_ward()
+	armor_ward_label.text = "Armor: %s \nWard: %s" % [total_armor, total_ward]
 
 func _build_stat_box(actor:BaseActor):
 	for stat_key in actor.stats._base_stats.keys():
@@ -76,6 +89,26 @@ func _build_page_list(actor:BaseActor):
 		page_image.texture = page.get_large_sprite()
 		page_container.add_child(page_slot)
 		page_slots.append(page_slot)
+
+func _set_equipment_icons():
+	for slot in BaseEquipmentItem.EquipmentSlots.values():
+		if _editing_actor.equipment.has_slot(slot):
+			var item:BaseEquipmentItem = _editing_actor.equipment.get_item_in_slot(slot)
+			if item == null:
+				continue
+			if slot == BaseEquipmentItem.EquipmentSlots.Que:
+				que_equipment_slot_icon.texture = load(item.details.large_icon_path)
+			if slot == BaseEquipmentItem.EquipmentSlots.Bag:
+				bag_equipment_slot_icon.texture = load(item.details.large_icon_path)
+			if slot == BaseEquipmentItem.EquipmentSlots.Head:
+				head_equipment_slot_icon.texture = load(item.details.large_icon_path)
+			if slot == BaseEquipmentItem.EquipmentSlots.Body:
+				body_equipment_slot_icon.texture = load(item.details.large_icon_path)
+			if slot == BaseEquipmentItem.EquipmentSlots.Feet:
+				feet_equipment_slot_icon.texture = load(item.details.large_icon_path)
+			if slot == BaseEquipmentItem.EquipmentSlots.Trinket:
+				trinket_equipment_slot_icon.texture = load(item.details.large_icon_path)
+			
 
 func _on_edit_name_pressed():
 	if character_name_line_edit.visible:

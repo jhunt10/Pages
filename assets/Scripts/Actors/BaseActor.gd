@@ -11,6 +11,7 @@ var stats:StatHolder
 var effects:EffectHolder
 var items:BaseItemBag
 var details:ObjectDetailsData
+var equipment:EquipmentHolder
 
 var Id : String:
 	get: return _id
@@ -53,10 +54,13 @@ func _init(key:String, load_path:String, def:Dictionary, id:String, data:Diction
 	stats = StatHolder.new(self, stat_data)
 	effects = EffectHolder.new(self)
 	items = BaseItemBag.new(self)
-	details = ObjectDetailsData.new(_def_load_path, def.get("Details", {}))
+	details = ObjectDetailsData.new(_def_load_path, _def.get("Details", {}))
+	equipment = EquipmentHolder.new(self)
 
 func save_data()->Dictionary:
-	return _data
+	var data = super()
+	data['EquiptItems'] = equipment.save_data()
+	return data
 
 func die():
 	is_dead = true

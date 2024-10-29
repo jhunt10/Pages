@@ -85,9 +85,12 @@ patch_margin_right = 12
 patch_margin_bottom = 12
 
 [node name="TextureRect" type="TextureRect" parent="Background/EquipmentSlots/EquiptmenSlot1"]
-layout_mode = 0
-offset_right = 64.0
-offset_bottom = 64.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource("3_mk888")
 
 [node name="EquiptmenSlot2" type="NinePatchRect" parent="Background/EquipmentSlots"]
@@ -104,9 +107,12 @@ patch_margin_right = 12
 patch_margin_bottom = 12
 
 [node name="TextureRect" type="TextureRect" parent="Background/EquipmentSlots/EquiptmenSlot2"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource("4_jhg4d")
 
 [node name="EquiptmenSlot3" type="NinePatchRect" parent="Background/EquipmentSlots"]
@@ -123,9 +129,12 @@ patch_margin_right = 12
 patch_margin_bottom = 12
 
 [node name="TextureRect" type="TextureRect" parent="Background/EquipmentSlots/EquiptmenSlot3"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource("5_ah28x")
 
 [node name="EquiptmenSlot4" type="NinePatchRect" parent="Background/EquipmentSlots"]
@@ -142,9 +151,12 @@ patch_margin_right = 12
 patch_margin_bottom = 12
 
 [node name="TextureRect" type="TextureRect" parent="Background/EquipmentSlots/EquiptmenSlot4"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource("6_s5jc7")
 
 [node name="EquiptmenSlot5" type="NinePatchRect" parent="Background/EquipmentSlots"]
@@ -161,9 +173,12 @@ patch_margin_right = 12
 patch_margin_bottom = 12
 
 [node name="TextureRect" type="TextureRect" parent="Background/EquipmentSlots/EquiptmenSlot5"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource("7_esltj")
 
 [node name="EquiptmenSlot6" type="NinePatchRect" parent="Background/EquipmentSlots"]
@@ -180,9 +195,12 @@ patch_margin_right = 12
 patch_margin_bottom = 12
 
 [node name="TextureRect" type="TextureRect" parent="Background/EquipmentSlots/EquiptmenSlot6"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource("8_0ysgr")
 
 [node name="EquiptmenSlot7" type="NinePatchRect" parent="Background/EquipmentSlots"]
@@ -222,6 +240,23 @@ layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("10_ehfow")
+
+[node name="ArmorWardControl" type="Control" parent="Background"]
+anchors_preset = 0
+offset_left = 91.0
+offset_top = 212.0
+offset_right = 210.0
+offset_bottom = 268.0
+
+[node name="Label" type="Label" parent="Background/ArmorWardControl"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Armor: 0
+Ward: 0"
 
 [node name="NameLabelBox" type="NinePatchRect" parent="Background"]
 layout_mode = 0
