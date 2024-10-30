@@ -89,4 +89,23 @@ func _set_equipment(slot:BaseEquipmentItem.EquipmentSlots, item:BaseEquipmentIte
 	if not _equipment_slot_to_item_id.keys().has(slot):
 		printerr("EquipmentHolder.set_equipment: Actor '%s' does not have slot of type '%s'." % [_actor.Id, slot])
 		return
+	# Check if has an item in the slot
+	var current_item = get_item_in_slot(slot) 
+	if current_item and current_item.get_equipt_to_actor_id() == _actor.Id: 
+		current_item.clear_equipt_actor()
+	
 	_equipment_slot_to_item_id[slot] = item.Id
+	
+	# Check if item has another owner
+	if item.get_equipt_to_actor_id() != self._actor.Id:
+		item.set_equipt_actor(self._actor)
+
+func clear_slot(slot:BaseEquipmentItem.EquipmentSlots):
+	if not _equipment_slot_to_item_id.keys().has(slot):
+		printerr("EquipmentHolder.set_equipment: Actor '%s' does not have slot of type '%s'." % [_actor.Id, slot])
+		return
+	# Check if has an item in the slot
+	var current_item = get_item_in_slot(slot) 
+	_equipment_slot_to_item_id[slot] = null
+	if current_item and current_item.get_equipt_to_actor_id() == _actor.Id: 
+		current_item.clear_equipt_actor()

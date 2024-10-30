@@ -29,6 +29,10 @@ func _init() -> void:
 	Instance.init_load()
 
 # Get a static instance of the action
+static func list_all_items()->Array:
+	return Instance._loaded_objects.values()
+
+# Get a static instance of the action
 static func get_item_def(key:String)->Dictionary:
 	return Instance.get_object_def(key)
 	

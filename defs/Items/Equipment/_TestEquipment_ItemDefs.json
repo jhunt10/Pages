@@ -11,7 +11,21 @@
 			"SmallIcon":"TestBook.png"
 		},
         "MaxQueSize": 5,
-        "MaxPages": 10
+        "MaxPageCount": 8
+    },
+    {
+        "ItemKey":"TestPageQue2",
+        "_ObjectScript": "res://assets/Scripts/Items/Equipment/BaseQueEquipment.gd",
+        "Details":{
+			"DisplayName": "Test Page Que",
+			"SnippetDesc": "An page que made for testing.",
+			"Description": "Description.",
+			"Tags": [],
+			"LargeIcon":"TestBook2.png",
+			"SmallIcon":"TestBook2.png"
+		},
+        "MaxQueSize": 3,
+        "MaxPageCount": 10
     },
     {
         "ItemKey":"TestBag",
@@ -23,6 +37,19 @@
 			"Tags": [],
 			"LargeIcon":"TestBag.png",
 			"SmallIcon":"TestBag.png"
+		},
+        "MaxItemCount": 5
+    },
+    {
+        "ItemKey":"TestBag2",
+        "_ObjectScript": "res://assets/Scripts/Items/Equipment/BaseBagEquipment.gd",
+        "Details":{
+			"DisplayName": "Test Bag",
+			"SnippetDesc": "An bag made for testing.",
+			"Description": "Description.",
+			"Tags": [],
+			"LargeIcon":"TestBag2.png",
+			"SmallIcon":"TestBag2.png"
 		},
         "MaxItemCount": 5
     },
@@ -55,6 +82,21 @@
         "EquipSlot":"Body",
         "Armor": 10,
         "Ward": 0
+    },
+    {
+        "ItemKey":"TestShirt2",
+        "_ObjectScript": "res://assets/Scripts/Items/Equipment/BaseArmorEquipment.gd",
+        "Details":{
+			"DisplayName": "Test Shirt",
+			"SnippetDesc": "An shirt made for testing.",
+			"Description": "Description.",
+			"Tags": [],
+			"LargeIcon":"TestShirt2.png",
+			"SmallIcon":"TestShirt2.png"
+		},
+        "EquipSlot":"Body",
+        "Armor": 0,
+        "Ward": 10
     },
     {
         "ItemKey":"TestBoots",

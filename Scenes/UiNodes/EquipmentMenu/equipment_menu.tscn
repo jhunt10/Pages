@@ -1,0 +1,574 @@
+[gd_scene load_steps=31 format=3 uid="uid://cxiyfaswdygu7"]
+
+[ext_resource type="Script" path="res://Scenes/UiNodes/EquipmentMenu/equipment_menu_container.gd" id="1_7xry3"]
+[ext_resource type="Script" path="res://assets/Scripts/Ui/DisplayNodes/back_patch_container.gd" id="1_wprwc"]
+[ext_resource type="Texture2D" uid="uid://io35wpu802fp" path="res://assets/Sprites/UI/BackPatches/Patch_64_12.png" id="2_061k4"]
+[ext_resource type="Texture2D" uid="uid://cdxe2v7hg5tuw" path="res://assets/Sprites/UI/CharacterEdit/HeadSlot.png" id="3_q8r7l"]
+[ext_resource type="Script" path="res://Scenes/UiNodes/EquipmentMenu/equipment_display_container.gd" id="3_xe4rr"]
+[ext_resource type="Texture2D" uid="uid://dul8y1l1gw420" path="res://assets/Sprites/UI/BackPatches/Patch_32_8_Dark.png" id="4_bemq8"]
+[ext_resource type="Texture2D" uid="uid://di2sns34ee4ju" path="res://assets/Sprites/UI/CharacterEdit/BodySlot.png" id="4_pxhii"]
+[ext_resource type="Texture2D" uid="uid://djwy03i8oyrfm" path="res://assets/Sprites/UI/CharacterEdit/BootSlot.png" id="5_1mjak"]
+[ext_resource type="Texture2D" uid="uid://jwg5aqbw71la" path="res://assets/Sprites/UI/CharacterEdit/MainHandSlot.png" id="6_bbncy"]
+[ext_resource type="Texture2D" uid="uid://dq2cad8orar4p" path="res://assets/Sprites/UI/SymbolIcons/ArmorSymbol.png" id="7_4vrmf"]
+[ext_resource type="Texture2D" uid="uid://d17k5iaed0gdg" path="res://assets/Sprites/UI/SymbolIcons/WardSymbol.png" id="8_cwel1"]
+[ext_resource type="Texture2D" uid="uid://wu75tejgoo7m" path="res://assets/Sprites/UI/CharacterEdit/BookSlot.png" id="9_bu15o"]
+[ext_resource type="Texture2D" uid="uid://co33b1qq2uef7" path="res://assets/Sprites/UI/CharacterEdit/BagSlot.png" id="10_gxodh"]
+[ext_resource type="Texture2D" uid="uid://diy8q5lpvpw1u" path="res://assets/Sprites/UI/SymbolIcons/PhyDamageSymbol.png" id="11_8n58u"]
+[ext_resource type="Texture2D" uid="uid://puhp53n8k1h8" path="res://assets/Sprites/UI/CharacterEdit/TrinketSlot.png" id="11_dto75"]
+[ext_resource type="Script" path="res://Scenes/UiNodes/EquipmentMenu/equipment_display_slot_button.gd" id="11_erm0j"]
+[ext_resource type="Texture2D" uid="uid://b201kpuib7q5k" path="res://assets/Sprites/UI/SymbolIcons/MagDamageSymbol.png" id="12_d5j8h"]
+[ext_resource type="Texture2D" uid="uid://dwliocipx40sq" path="res://assets/Sprites/UI/CharacterEdit/OffHandSlot.png" id="12_uskvu"]
+[ext_resource type="Texture2D" uid="uid://deqwpr7qu8fp2" path="res://assets/Sprites/UI/CharacterEdit/InventorySlotBackground.png" id="13_haq6b"]
+[ext_resource type="Script" path="res://Scenes/UiNodes/EquipmentMenu/inventory_container.gd" id="13_nccae"]
+[ext_resource type="Texture2D" uid="uid://cq2p1mnoevjoc" path="res://assets/Sprites/UI/CharacterEdit/InventoryItemButton_Pressed.png" id="14_acy0d"]
+[ext_resource type="Script" path="res://Scenes/UiNodes/EquipmentMenu/inventory_item_button_control.gd" id="14_wmipa"]
+[ext_resource type="Texture2D" uid="uid://wvy1i6avftau" path="res://defs/Items/Equipment/TestSword.png" id="15_vvw17"]
+[ext_resource type="Texture2D" uid="uid://m0ss0tg7qqou" path="res://assets/Sprites/UI/SymbolIcons/MassSymbol.png" id="15_y0ae6"]
+[ext_resource type="Texture2D" uid="uid://v6mrr2dref31" path="res://assets/Sprites/UI/SymbolIcons/SpeedIcon.png" id="16_6mdpp"]
+[ext_resource type="Texture2D" uid="uid://bpa7iavvlbhi5" path="res://assets/Sprites/UI/SymbolIcons/PageCountSymbol.png" id="17_eoa7g"]
+[ext_resource type="Texture2D" uid="uid://bujky44hog2jm" path="res://assets/Sprites/UI/SymbolIcons/QueCountSymbol.png" id="18_vyg7s"]
+[ext_resource type="Texture2D" uid="uid://bkjy2j6ra337v" path="res://assets/Sprites/UI/SymbolIcons/EquiptIcon.png" id="20_dmh46"]
+[ext_resource type="Script" path="res://Scenes/UiNodes/EquipmentMenu/equipment_menu_mouse_control.gd" id="20_vk886"]
+[ext_resource type="Texture2D" uid="uid://s8s7rktavc7e" path="res://assets/Sprites/UI/BackPatches/Patch_32_8.png" id="21_rx2hk"]
+
+[node name="EquipmentMenuContainer" type="Container" node_paths=PackedStringArray("mouse_over_control", "equipment_display_container", "inventory_container", "background", "inner_container")]
+custom_minimum_size = Vector2(312, 607)
+offset_right = 312.0
+offset_bottom = 607.0
+size_flags_vertical = 3
+script = ExtResource("1_7xry3")
+mouse_over_control = NodePath("MouseOverControl")
+equipment_display_container = NodePath("MainContainer/EquipSlotsContainer")
+inventory_container = NodePath("MainContainer/EquiptInventoryContainer")
+background = NodePath("Background")
+inner_container = NodePath("MainContainer")
+force_fill_y = true
+
+[node name="Background" type="NinePatchRect" parent="."]
+layout_mode = 2
+texture = ExtResource("2_061k4")
+region_rect = Rect2(0, 0, 64, 64)
+patch_margin_left = 12
+patch_margin_top = 12
+patch_margin_right = 12
+patch_margin_bottom = 12
+
+[node name="MainContainer" type="BoxContainer" parent="."]
+layout_mode = 2
+vertical = true
+
+[node name="EquipSlotsContainer" type="Container" parent="MainContainer" node_paths=PackedStringArray("portait_texture_rect", "armor_lable", "ward_label", "phyatk_label", "magatk_label", "mass_label", "speed_label", "page_count_label", "que_count_label", "background", "inner_container")]
+custom_minimum_size = Vector2(288, 292)
+layout_mode = 2
+script = ExtResource("3_xe4rr")
+portait_texture_rect = NodePath("InnerContainer/MiddlePortraitContainer/PortaitBackground/PortraitTextureRect")
+armor_lable = NodePath("InnerContainer/MiddlePortraitContainer/MiniStatsContainer/DefensesContainer/ArmorLabel")
+ward_label = NodePath("InnerContainer/MiddlePortraitContainer/MiniStatsContainer/DefensesContainer/WardLabel")
+phyatk_label = NodePath("InnerContainer/MiddlePortraitContainer/MiniStatsContainer/AttacksContainer/PhysicalAttackLabel")
+magatk_label = NodePath("InnerContainer/MiddlePortraitContainer/MiniStatsContainer/AttacksContainer/MagicAttackLabel")
+mass_label = NodePath("InnerContainer/MiddlePortraitContainer/MiniStatsContainer/MassSpeedContainer/MassLabel")
+speed_label = NodePath("InnerContainer/MiddlePortraitContainer/MiniStatsContainer/MassSpeedContainer/SpeedLabel")
+page_count_label = NodePath("InnerContainer/MiddlePortraitContainer/MiniStatsContainer/PageQueCountContainer/PageCountLabel")
+que_count_label = NodePath("InnerContainer/MiddlePortraitContainer/MiniStatsContainer/PageQueCountContainer/QueCountLabel")
+background = NodePath("NinePatchRect")
+inner_container = NodePath("InnerContainer")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="MainContainer/EquipSlotsContainer"]
+layout_mode = 2
+texture = ExtResource("4_bemq8")
+region_rect = Rect2(0, 0, 32, 32)
+patch_margin_left = 12
+patch_margin_top = 12
+patch_margin_right = 12
+patch_margin_bottom = 12
+
+[node name="InnerContainer" type="BoxContainer" parent="MainContainer/EquipSlotsContainer"]
+layout_mode = 2
+
+[node name="LeftEquipSlots" type="VBoxContainer" parent="MainContainer/EquipSlotsContainer/InnerContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="HeadSlotButton" type="TextureButton" parent="MainContainer/EquipSlotsContainer/InnerContainer/LeftEquipSlots" node_paths=PackedStringArray("icon_texture_rect")]
+layout_mode = 2
+texture_normal = ExtResource("13_haq6b")
+texture_pressed = ExtResource("14_acy0d")
+script = ExtResource("11_erm0j")
+background = ExtResource("13_haq6b")
+highlight_background = ExtResource("14_acy0d")
+default_icon_texture = ExtResource("3_q8r7l")
+icon_texture_rect = NodePath("IconTextureRect")
+
+[node name="IconTextureRect" type="TextureRect" parent="MainContainer/EquipSlotsContainer/InnerContainer/LeftEquipSlots/HeadSlotButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_q8r7l")
+
+[node name="BodySlotButton" type="TextureButton" parent="MainContainer/EquipSlotsContainer/InnerContainer/LeftEquipSlots" node_paths=PackedStringArray("icon_texture_rect")]
+layout_mode = 2
+texture_normal = ExtResource("13_haq6b")
+texture_pressed = ExtResource("14_acy0d")
+script = ExtResource("11_erm0j")
+background = ExtResource("13_haq6b")
+highlight_background = ExtResource("14_acy0d")
+default_icon_texture = ExtResource("4_pxhii")
+icon_texture_rect = NodePath("IconTextureRect")
+
+[node name="IconTextureRect" type="TextureRect" parent="MainContainer/EquipSlotsContainer/InnerContainer/LeftEquipSlots/BodySlotButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_pxhii")
+
+[node name="FeetSlotButton" type="TextureButton" parent="MainContainer/EquipSlotsContainer/InnerContainer/LeftEquipSlots" node_paths=PackedStringArray("icon_texture_rect")]
+layout_mode = 2
+texture_normal = ExtResource("13_haq6b")
+texture_pressed = ExtResource("14_acy0d")
+script = ExtResource("11_erm0j")
+background = ExtResource("13_haq6b")
+highlight_background = ExtResource("14_acy0d")
+default_icon_texture = ExtResource("5_1mjak")
+icon_texture_rect = NodePath("IconTextureRect")
+
+[node name="IconTextureRect" type="TextureRect" parent="MainContainer/EquipSlotsContainer/InnerContainer/LeftEquipSlots/FeetSlotButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_1mjak")
+
+[node name="MainHandSlotButton" type="TextureButton" parent="MainContainer/EquipSlotsContainer/InnerContainer/LeftEquipSlots" node_paths=PackedStringArray("icon_texture_rect")]
+layout_mode = 2
+texture_normal = ExtResource("13_haq6b")
+texture_pressed = ExtResource("14_acy0d")
+script = ExtResource("11_erm0j")
+background = ExtResource("13_haq6b")
+highlight_background = ExtResource("14_acy0d")
+default_icon_texture = ExtResource("6_bbncy")
+icon_texture_rect = NodePath("IconTextureRect")
+
+[node name="IconTextureRect" type="TextureRect" parent="MainContainer/EquipSlotsContainer/InnerContainer/LeftEquipSlots/MainHandSlotButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_bbncy")
+
+[node name="MiddlePortraitContainer" type="VBoxContainer" parent="MainContainer/EquipSlotsContainer/InnerContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="PortaitBackground" type="NinePatchRect" parent="MainContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer"]
+custom_minimum_size = Vector2(128, 192)
+layout_mode = 2
+texture = ExtResource("2_061k4")
+patch_margin_left = 12
+patch_margin_top = 12
+patch_margin_right = 12
+patch_margin_bottom = 12
+
+[node name="PortraitTextureRect" type="TextureRect" parent="MainContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer/PortaitBackground"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 3
+
+[node name="HSeparator" type="HSeparator" parent="MainContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+
+[node name="MiniStatsContainer" type="VBoxContainer" parent="MainContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+alignment = 1
+
+[node name="AttacksContainer" type="HBoxContainer" parent="MainContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer/MiniStatsContainer"]
+layout_mode = 2
+
+[node name="VSeparator2" type="VSeparator" parent="MainContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer/MiniStatsContainer/AttacksContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PhysicalAttackIcon" type="TextureRect" parent="MainContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer/MiniStatsContainer/AttacksContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("11_8n58u")
+
+[node name="PhysicalAttackLabel" type="Label" parent="MainContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer/MiniStatsContainer/AttacksContainer"]
+custom_minimum_size = Vector2(24, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "999"
+
+[node name="VSeparator" type="VSeparator" parent="MainContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer/MiniStatsContainer/AttacksContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MagicAttackIcon" type="TextureRect" parent="MainContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer/MiniStatsContainer/AttacksContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("12_d5j8h")
+stretch_mode = 2
+
+[node name="MagicAttackLabel" type="Label" parent="MainContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer/MiniStatsContainer/AttacksContainer"]
+custom_minimum_size = Vector2(24, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "999"
+
+[node name="VSeparator3" type="VSeparator" parent="MainContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer/MiniStatsContainer/AttacksContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="DefensesContainer" type="HBoxContainer" parent="MainContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer/MiniStatsContainer"]
+layout_mode = 2
+
+[node name="VSeparator2" type="VSeparator" parent="MainContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer/MiniStatsContainer/DefensesContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ArmorIcon" type="TextureRect" parent="MainContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer/MiniStatsContainer/DefensesContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("7_4vrmf")
+stretch_mode = 3
+
+[node name="ArmorLabel" type="Label" parent="MainContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer/MiniStatsContainer/DefensesContainer"]
+custom_minimum_size = Vector2(24, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "999"
+
+[node name="VSeparator" type="VSeparator" parent="MainContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer/MiniStatsContainer/DefensesContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="WardIcon" type="TextureRect" parent="MainContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer/MiniStatsContainer/DefensesContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("8_cwel1")
+stretch_mode = 2
+
+[node name="WardLabel" type="Label" parent="MainContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer/MiniStatsContainer/DefensesContainer"]
+custom_minimum_size = Vector2(24, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "999"
+
+[node name="VSeparator3" type="VSeparator" parent="MainContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer/MiniStatsContainer/DefensesContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MassSpeedContainer" type="HBoxContainer" parent="MainContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer/MiniStatsContainer"]
+visible = false
+layout_mode = 2
+
+[node name="VSeparator2" type="VSeparator" parent="MainContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer/MiniStatsContainer/MassSpeedContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MassIcon" type="TextureRect" parent="MainContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer/MiniStatsContainer/MassSpeedContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("15_y0ae6")
+stretch_mode = 2
+
+[node name="MassLabel" type="Label" parent="MainContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer/MiniStatsContainer/MassSpeedContainer"]
+custom_minimum_size = Vector2(24, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "100"
+
+[node name="VSeparator" type="VSeparator" parent="MainContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer/MiniStatsContainer/MassSpeedContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SpeedIcon" type="TextureRect" parent="MainContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer/MiniStatsContainer/MassSpeedContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("16_6mdpp")
+
+[node name="SpeedLabel" type="Label" parent="MainContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer/MiniStatsContainer/MassSpeedContainer"]
+custom_minimum_size = Vector2(24, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "100"
+
+[node name="VSeparator3" type="VSeparator" parent="MainContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer/MiniStatsContainer/MassSpeedContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PageQueCountContainer" type="HBoxContainer" parent="MainContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer/MiniStatsContainer"]
+layout_mode = 2
+
+[node name="VSeparator2" type="VSeparator" parent="MainContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer/MiniStatsContainer/PageQueCountContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="QueCountIcon" type="TextureRect" parent="MainContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer/MiniStatsContainer/PageQueCountContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("18_vyg7s")
+
+[node name="QueCountLabel" type="Label" parent="MainContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer/MiniStatsContainer/PageQueCountContainer"]
+custom_minimum_size = Vector2(24, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "999"
+
+[node name="VSeparator" type="VSeparator" parent="MainContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer/MiniStatsContainer/PageQueCountContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PageCountIcon" type="TextureRect" parent="MainContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer/MiniStatsContainer/PageQueCountContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("17_eoa7g")
+stretch_mode = 2
+
+[node name="PageCountLabel" type="Label" parent="MainContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer/MiniStatsContainer/PageQueCountContainer"]
+custom_minimum_size = Vector2(24, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "999"
+
+[node name="VSeparator3" type="VSeparator" parent="MainContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer/MiniStatsContainer/PageQueCountContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="RightEquipSlots" type="VBoxContainer" parent="MainContainer/EquipSlotsContainer/InnerContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="QueSlotButton" type="TextureButton" parent="MainContainer/EquipSlotsContainer/InnerContainer/RightEquipSlots" node_paths=PackedStringArray("icon_texture_rect")]
+layout_mode = 2
+texture_normal = ExtResource("13_haq6b")
+texture_pressed = ExtResource("14_acy0d")
+script = ExtResource("11_erm0j")
+background = ExtResource("13_haq6b")
+highlight_background = ExtResource("14_acy0d")
+default_icon_texture = ExtResource("9_bu15o")
+icon_texture_rect = NodePath("IconTextureRect")
+
+[node name="IconTextureRect" type="TextureRect" parent="MainContainer/EquipSlotsContainer/InnerContainer/RightEquipSlots/QueSlotButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("9_bu15o")
+
+[node name="BagSlotButton" type="TextureButton" parent="MainContainer/EquipSlotsContainer/InnerContainer/RightEquipSlots" node_paths=PackedStringArray("icon_texture_rect")]
+layout_mode = 2
+texture_normal = ExtResource("13_haq6b")
+texture_pressed = ExtResource("14_acy0d")
+script = ExtResource("11_erm0j")
+background = ExtResource("13_haq6b")
+highlight_background = ExtResource("14_acy0d")
+default_icon_texture = ExtResource("10_gxodh")
+icon_texture_rect = NodePath("IconTextureRect")
+
+[node name="IconTextureRect" type="TextureRect" parent="MainContainer/EquipSlotsContainer/InnerContainer/RightEquipSlots/BagSlotButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_gxodh")
+
+[node name="TrinketSlotButton" type="TextureButton" parent="MainContainer/EquipSlotsContainer/InnerContainer/RightEquipSlots" node_paths=PackedStringArray("icon_texture_rect")]
+layout_mode = 2
+texture_normal = ExtResource("13_haq6b")
+texture_pressed = ExtResource("14_acy0d")
+script = ExtResource("11_erm0j")
+background = ExtResource("13_haq6b")
+highlight_background = ExtResource("14_acy0d")
+default_icon_texture = ExtResource("11_dto75")
+icon_texture_rect = NodePath("IconTextureRect")
+
+[node name="IconTextureRect" type="TextureRect" parent="MainContainer/EquipSlotsContainer/InnerContainer/RightEquipSlots/TrinketSlotButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("11_dto75")
+
+[node name="OffHandSlotButton" type="TextureButton" parent="MainContainer/EquipSlotsContainer/InnerContainer/RightEquipSlots" node_paths=PackedStringArray("icon_texture_rect")]
+layout_mode = 2
+texture_normal = ExtResource("13_haq6b")
+texture_pressed = ExtResource("14_acy0d")
+script = ExtResource("11_erm0j")
+background = ExtResource("13_haq6b")
+highlight_background = ExtResource("14_acy0d")
+default_icon_texture = ExtResource("12_uskvu")
+icon_texture_rect = NodePath("IconTextureRect")
+
+[node name="IconTextureRect" type="TextureRect" parent="MainContainer/EquipSlotsContainer/InnerContainer/RightEquipSlots/OffHandSlotButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("12_uskvu")
+
+[node name="EquiptInventoryContainer" type="Container" parent="MainContainer" node_paths=PackedStringArray("items_container", "premade_item_button", "background", "inner_container")]
+custom_minimum_size = Vector2(12, 287)
+layout_mode = 2
+script = ExtResource("13_nccae")
+items_container = NodePath("InnerContainer/ScrollContainer/FlowContainer")
+premade_item_button = NodePath("InnerContainer/ScrollContainer/FlowContainer/InventoryItemButton")
+background = NodePath("NinePatchRect")
+inner_container = NodePath("InnerContainer")
+margin_override = 6
+force_fill_x = true
+
+[node name="NinePatchRect" type="NinePatchRect" parent="MainContainer/EquiptInventoryContainer"]
+layout_mode = 2
+texture = ExtResource("4_bemq8")
+patch_margin_left = 12
+patch_margin_top = 12
+patch_margin_right = 12
+patch_margin_bottom = 12
+
+[node name="InnerContainer" type="VBoxContainer" parent="MainContainer/EquiptInventoryContainer"]
+layout_mode = 2
+
+[node name="TabBar" type="TabBar" parent="MainContainer/EquiptInventoryContainer/InnerContainer"]
+layout_mode = 2
+current_tab = 0
+tab_count = 4
+tab_0/title = "All"
+tab_1/title = "Head"
+tab_2/title = "Body"
+tab_3/title = "Feet"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MainContainer/EquiptInventoryContainer/InnerContainer"]
+custom_minimum_size = Vector2(0, 240)
+layout_mode = 2
+vertical_scroll_mode = 2
+
+[node name="FlowContainer" type="FlowContainer" parent="MainContainer/EquiptInventoryContainer/InnerContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/h_separation = 2
+theme_override_constants/v_separation = 2
+
+[node name="InventoryItemButton" type="TextureButton" parent="MainContainer/EquiptInventoryContainer/InnerContainer/ScrollContainer/FlowContainer" node_paths=PackedStringArray("item_icon_rect", "equipt_icon")]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture_normal = ExtResource("13_haq6b")
+texture_pressed = ExtResource("14_acy0d")
+script = ExtResource("14_wmipa")
+item_icon_rect = NodePath("ItemIconRect")
+equipt_icon = NodePath("EquiptIcon")
+
+[node name="ItemIconRect" type="TextureRect" parent="MainContainer/EquiptInventoryContainer/InnerContainer/ScrollContainer/FlowContainer/InventoryItemButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("15_vvw17")
+
+[node name="EquiptIcon" type="TextureRect" parent="MainContainer/EquiptInventoryContainer/InnerContainer/ScrollContainer/FlowContainer/InventoryItemButton"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -20.0
+offset_top = 2.0
+offset_right = -2.0
+offset_bottom = 23.0
+grow_horizontal = 0
+texture = ExtResource("20_dmh46")
+
+[node name="MouseOverControl" type="Control" parent="." node_paths=PackedStringArray("mouse_over_message_container", "mouse_over_label", "drag_item_control", "drag_icon_texture_rect")]
+layout_mode = 2
+mouse_filter = 2
+script = ExtResource("20_vk886")
+mouse_over_message_container = NodePath("MouseOverDisplay")
+mouse_over_label = NodePath("MouseOverDisplay/BoxContainer/HBoxContainer/Label")
+drag_item_control = NodePath("DragItemControl")
+drag_icon_texture_rect = NodePath("DragItemControl/DragIconTextureRect")
+
+[node name="MouseOverDisplay" type="Container" parent="MouseOverControl" node_paths=PackedStringArray("background", "inner_container")]
+custom_minimum_size = Vector2(95, 31)
+layout_mode = 0
+offset_right = 95.0
+offset_bottom = 31.0
+mouse_filter = 2
+script = ExtResource("1_wprwc")
+background = NodePath("NinePatchRect")
+inner_container = NodePath("BoxContainer")
+margin_override = 4
+
+[node name="NinePatchRect" type="NinePatchRect" parent="MouseOverControl/MouseOverDisplay"]
+layout_mode = 2
+texture = ExtResource("21_rx2hk")
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+
+[node name="BoxContainer" type="BoxContainer" parent="MouseOverControl/MouseOverDisplay"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MouseOverControl/MouseOverDisplay/BoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MouseOverControl/MouseOverDisplay/BoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Item Name"
+
+[node name="DragItemControl" type="Control" parent="MouseOverControl"]
+custom_minimum_size = Vector2(64, 64)
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+
+[node name="Background" type="TextureRect" parent="MouseOverControl/DragItemControl"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+texture = ExtResource("14_acy0d")
+
+[node name="DragIconTextureRect" type="TextureRect" parent="MouseOverControl/DragItemControl"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2

@@ -53,7 +53,7 @@ func _init(key:String, load_path:String, def:Dictionary, id:String, data:Diction
 	var stat_data = _def["Stats"]
 	stats = StatHolder.new(self, stat_data)
 	effects = EffectHolder.new(self)
-	items = BaseItemBag.new(self)
+	#items = BaseItemBag.new(self)
 	details = ObjectDetailsData.new(_def_load_path, _def.get("Details", {}))
 	equipment = EquipmentHolder.new(self)
 
