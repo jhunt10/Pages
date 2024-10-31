@@ -65,7 +65,13 @@ func dragging_item_released():
 	clear_drag_item()
 
 func on_item_clicked(item:BaseItem):
-	_actor.equipment.try_equip_item(item, true)
+	var equipment = (item as BaseEquipmentItem)
+	if !equipment:
+		return
+	if equipment.get_equipt_to_actor_id() == _actor.Id:
+		_actor.equipment.remove_equipment(equipment)
+	else:
+		_actor.equipment.try_equip_item(item, true)
 	set_actor(_actor)
 
 func on_equipt_slot_clicked(slot_index:int):

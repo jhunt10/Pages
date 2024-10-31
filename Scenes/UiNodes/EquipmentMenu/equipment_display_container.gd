@@ -42,6 +42,8 @@ func set_actor(actor:BaseActor):
 		if actor.equipment.has_equipment_in_slot(index):
 			var item:BaseEquipmentItem = actor.equipment.get_equipment_in_slot(index)
 			slot_display.set_item(item)
+		else:
+			slot_display.clear_item()
 	#for slot in BaseEquipmentItem.EquipmentSlots.values():
 		#if actor.equipment.has_item_in_slot(slot):
 			#slots_to_display[slot].set_item(actor.equipment.get_item_in_slot(slot))

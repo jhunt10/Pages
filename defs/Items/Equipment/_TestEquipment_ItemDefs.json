@@ -137,6 +137,52 @@
         "Ward": 10
     },
     {
+        "ItemKey":"TestTrinket2",
+        "_ObjectScript": "res://assets/Scripts/Items/Equipment/BaseArmorEquipment.gd",
+        "Details":{
+			"DisplayName": "Test Trinket",
+			"SnippetDesc": "An trinket made for testing.",
+			"Description": "Description.",
+			"Tags": ["Trinket"],
+			"LargeIcon":"TestTrinket2.png",
+			"SmallIcon":"TestTrinket2.png"
+		},
+        "StatMods":{
+			"StatMod1": { 
+				"StatName": "Strength",
+				"DisplayName": "Name to showup in stats tool tip",
+				"ModType":"Fixed", 
+				"Value":500 
+			}
+		},
+        "EquipSlot":"Trinket",
+        "Armor": 0,
+        "Ward": 10
+    },
+    {
+        "ItemKey":"TestTrinket3",
+        "_ObjectScript": "res://assets/Scripts/Items/Equipment/BaseArmorEquipment.gd",
+        "Details":{
+			"DisplayName": "Test Trinket",
+			"SnippetDesc": "An trinket made for testing.",
+			"Description": "Description.",
+			"Tags": ["Trinket"],
+			"LargeIcon":"TestTrinket3.png",
+			"SmallIcon":"TestTrinket3.png"
+		},
+        "StatMods":{
+			"StatMod1": { 
+				"StatName": "Strength",
+				"DisplayName": "Name to showup in stats tool tip",
+				"ModType":"Fixed", 
+				"Value":500 
+			}
+		},
+        "EquipSlot":"Trinket",
+        "Armor": 0,
+        "Ward": 10
+    },
+    {
         "ItemKey":"TestSword",
         "_ObjectScript": "res://assets/Scripts/Items/Equipment/BaseWeaponEquipment.gd",
         "Details":{

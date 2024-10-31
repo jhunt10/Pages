@@ -12,10 +12,12 @@ var default_icons_paths:Dictionary = {
 	"Feet": "res://assets/Sprites/UI/CharacterEdit/BootSlot.png",
 	"Que": "res://assets/Sprites/UI/CharacterEdit/BookSlot.png",
 	"Bag": "res://assets/Sprites/UI/CharacterEdit/BagSlot.png",
+	"Trinket": "res://assets/Sprites/UI/CharacterEdit/TrinketSlot.png",
 	"Weapon": "res://assets/Sprites/UI/CharacterEdit/MainHandSlot.png",
 	"Shield": "res://assets/Sprites/UI/CharacterEdit/OffHandSlot.png"
 }
 var slot_type:String
+var current_item_id:String = ''
 
 func _ready() -> void:
 	if !icon_texture_rect.texture:
@@ -23,15 +25,15 @@ func _ready() -> void:
 
 func set_slot_type(type:String):
 	slot_type = type
-	var is_currently_default = (icon_texture_rect.texture == default_icon_texture)
 	if default_icons_paths.keys().has(type):
 		default_icon_texture = load(default_icons_paths[type])
-	if is_currently_default:
+	if current_item_id == '':
 		icon_texture_rect.texture = default_icon_texture
 		
 
 func set_item(item:BaseEquipmentItem):
 	icon_texture_rect.texture = item.get_large_icon()
+	current_item_id = item.Id
 	
 func clear_item():
 	icon_texture_rect.texture = default_icon_texture
