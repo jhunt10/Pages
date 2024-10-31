@@ -72,7 +72,9 @@ func _calc_cache_stats():
 	
 	# Aggregate all the mods together by stat_name, then type
 	var agg_mods = {}
-	for mod:BaseStatMod in _actor.effects.get_stat_mods():
+	var mods_list = _actor.effects.get_stat_mods()
+	mods_list.append_array(_actor.equipment.get_all_stat_mods())
+	for mod:BaseStatMod in mods_list:
 		if LOGGING: print("# Found Mod '", mod.display_name, " for: %s" % _actor.ActorKey)
 		if not agg_mods.keys().has(mod.stat_name):
 			agg_mods[mod.stat_name] = {}
@@ -80,9 +82,7 @@ func _calc_cache_stats():
 			agg_mods[mod.stat_name][mod.mod_type] = []
 		agg_mods[mod.stat_name][mod.mod_type].append(mod.value)
 		
-		
 	if LOGGING: print("- Found: %s modded stats" % agg_mods.size())
-	
 	
 	for stat_name in _base_stats.keys():
 		if not agg_mods.keys().has(stat_name):
@@ -100,9 +100,29 @@ func _calc_cache_stats():
 		_cached_stats[stat_name] = temp_val
 	if LOGGING: print("--- Done Caching Stats")
 	_stats_dirty = false
-		
-	
+
 func apply_damage(value:int, _damage_type:String, _source):
 	_bar_stats[HealthKey] = _bar_stats[HealthKey] - value
 	if current_health <= 0:
 		CombatRootControl.Instance.kill_actor(_actor)
+
+func base_damge_from_stat(stat_name):
+	var base_stat_val = get_stat(stat_name)
+	#var weapon:BaseWeaponEquipment = _actor.equipment.get_item_in_slot(BaseEquipmentItem.EquipmentSlots.Weapon)
+	#if weapon and weapon.get_damage_data().get("AtkStat", '') == stat_name:
+		#base_stat_val += weapon.get_damage_data().get("BaseDamage", 0)
+	return base_stat_val
+
+func get_base_phyical_attack():
+	var strength = get_stat("Strength")
+	#var weapon:BaseWeaponEquipment = _actor.equipment.get_item_in_slot(BaseEquipmentItem.EquipmentSlots.Weapon)
+	#if weapon and weapon.get_damage_data().get("AtkStat", '') == "Strength":
+		#strength += weapon.get_damage_data().get("BaseDamage", 0)
+	return strength
+	
+func get_base_magic_attack():
+	var intelligence = get_stat("Intelligence")
+	#var weapon:BaseWeaponEquipment = _actor.equipment.get_item_in_slot(BaseEquipmentItem.EquipmentSlots.Weapon)
+	#if weapon and weapon.get_damage_data().get("AtkStat", '') == "Intelligence":
+		#intelligence += weapon.get_damage_data().get("BaseDamage", 0)
+	return intelligence

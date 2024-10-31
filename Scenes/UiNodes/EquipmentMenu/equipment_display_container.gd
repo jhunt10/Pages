@@ -12,64 +12,73 @@ extends BackPatchContainer
 @export var page_count_label:Label
 @export var que_count_label:Label
 
-signal equipt_slot_pressed(slot:BaseEquipmentItem.EquipmentSlots)
+signal equipt_slot_pressed(slot:int)
 
-var slots_to_display:Dictionary:
-	get: return {
-		BaseEquipmentItem.EquipmentSlots.Head: $InnerContainer/LeftEquipSlots/HeadSlotButton,
-		BaseEquipmentItem.EquipmentSlots.Body: $InnerContainer/LeftEquipSlots/BodySlotButton,
-		BaseEquipmentItem.EquipmentSlots.Feet: $InnerContainer/LeftEquipSlots/FeetSlotButton,
-		BaseEquipmentItem.EquipmentSlots.Que: $InnerContainer/RightEquipSlots/QueSlotButton,
-		BaseEquipmentItem.EquipmentSlots.Bag: $InnerContainer/RightEquipSlots/BagSlotButton,
-		BaseEquipmentItem.EquipmentSlots.Trinket: $InnerContainer/RightEquipSlots/TrinketSlotButton,
-		BaseEquipmentItem.EquipmentSlots.Weapon: $InnerContainer/LeftEquipSlots/MainHandSlotButton,
-		BaseEquipmentItem.EquipmentSlots.Shield: $InnerContainer/RightEquipSlots/OffHandSlotButton,
-	}
+var slot_displays:Array:
+	get: return [
+		$InnerContainer/RightEquipSlots/QueSlotButton,
+		$InnerContainer/RightEquipSlots/BagSlotButton,
+		$InnerContainer/LeftEquipSlots/HeadSlotButton,
+		$InnerContainer/LeftEquipSlots/BodySlotButton,
+		$InnerContainer/LeftEquipSlots/FeetSlotButton,
+		$InnerContainer/RightEquipSlots/TrinketSlotButton,
+		$InnerContainer/LeftEquipSlots/MainHandSlotButton,
+		$InnerContainer/RightEquipSlots/OffHandSlotButton,
+	]
 
 func _ready() -> void:
-	for slot in slots_to_display:
-		var slot_display:EquipmentDisplaySlotButton = slots_to_display[slot]
+	for slot:int in range(slot_displays.size()):
+		var slot_display:EquipmentDisplaySlotButton = slot_displays[slot]
 		slot_display.pressed.connect(_on_slot_pressed.bind(slot))
 
 func set_actor(actor:BaseActor):
 	portait_texture_rect.texture = actor.get_default_sprite()
 	armor_lable.text = str(actor.equipment.get_total_equipment_armor())
 	ward_label.text = str(actor.equipment.get_total_equipment_ward())
-	for slot in BaseEquipmentItem.EquipmentSlots.values():
-		if actor.equipment.has_item_in_slot(slot):
-			slots_to_display[slot].set_item(actor.equipment.get_item_in_slot(slot))
-		else:
-			slots_to_display[slot].clear_item()
-	mass_label.text = str(actor.stats.get_stat("Mass"))
-	speed_label.text = str(actor.stats.get_stat("Speed"))
-	var que:BaseQueEquipment = actor.equipment.get_item_in_slot(BaseEquipmentItem.EquipmentSlots.Que)
-	if que:
-		page_count_label.text = str(que.get_max_page_count())
-		page_count_label.self_modulate = Color.WHITE
-		que_count_label.text = str(que.get_max_que_size())
-		que_count_label.self_modulate = Color.WHITE
-	else:
-		page_count_label.text = "!!!"
-		page_count_label.self_modulate = Color.RED
-		que_count_label.text = "!!!"
-		que_count_label.self_modulate = Color.RED
+	for index:int in range(slot_displays.size()):
+		var slot_display:EquipmentDisplaySlotButton = slot_displays[index]
+		var slot_type = actor.equipment.get_slot_equipment_type(index)
+		slot_display.set_slot_type(slot_type)
+		if actor.equipment.has_equipment_in_slot(index):
+			var item:BaseEquipmentItem = actor.equipment.get_equipment_in_slot(index)
+			slot_display.set_item(item)
+	#for slot in BaseEquipmentItem.EquipmentSlots.values():
+		#if actor.equipment.has_item_in_slot(slot):
+			#slots_to_display[slot].set_item(actor.equipment.get_item_in_slot(slot))
+		#else:
+			#slots_to_display[slot].clear_item()
+	#mass_label.text = str(actor.stats.get_stat("Mass"))
+	#speed_label.text = str(actor.stats.get_stat("Speed"))
+	#var que:BaseQueEquipment = actor.equipment.get_item_in_slot(BaseEquipmentItem.EquipmentSlots.Que)
+	#if que:
+		#page_count_label.text = str(que.get_max_page_count())
+		#page_count_label.self_modulate = Color.WHITE
+		#que_count_label.text = str(que.get_max_que_size())
+		#que_count_label.self_modulate = Color.WHITE
+	#else:
+		#page_count_label.text = "!!!"
+		#page_count_label.self_modulate = Color.RED
+		#que_count_label.text = "!!!"
+		#que_count_label.self_modulate = Color.RED
+	magatk_label.text = str(actor.stats.get_base_magic_attack())
+	phyatk_label.text = str(actor.stats.get_base_phyical_attack())
 		
 
-func _on_slot_pressed(slot:BaseEquipmentItem.EquipmentSlots):
-	equipt_slot_pressed.emit(slot)
+func _on_slot_pressed(index:int):
+	var slot_display:EquipmentDisplaySlotButton = slot_displays[index]
+	equipt_slot_pressed.emit(index)
 
 func clear_highlights():
-	for slot_display:EquipmentDisplaySlotButton in slots_to_display.values():
+	for slot_display:EquipmentDisplaySlotButton in slot_displays:
 		slot_display.highlight(false)
 
-func highlight_slot(slot:BaseEquipmentItem.EquipmentSlots):
-	var slot_display:EquipmentDisplaySlotButton = slots_to_display.get(slot, null)
-	if slots_to_display:
-		slot_display.highlight(true)
+func highlight_slots_of_type(slot_type:String):
+	for slot_display:EquipmentDisplaySlotButton in slot_displays:
+		slot_display.highlight(slot_display.slot_type == slot_type)
 
-func get_mouse_over_slot():
-	for slot:BaseEquipmentItem.EquipmentSlots in slots_to_display.keys():
-		var slot_display:EquipmentDisplaySlotButton = slots_to_display[slot]
+func get_mouse_over_slot_index()->int:
+	for index:int in range(slot_displays.size()):
+		var slot_display:EquipmentDisplaySlotButton = slot_displays[index]
 		if slot_display.is_mouse_over():
-			return slot
-	return null
+			return index
+	return -1

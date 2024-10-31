@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://cxiyfaswdygu7"]
+[gd_scene load_steps=33 format=3 uid="uid://cxiyfaswdygu7"]
 
 [ext_resource type="Script" path="res://Scenes/UiNodes/EquipmentMenu/equipment_menu_container.gd" id="1_7xry3"]
 [ext_resource type="Script" path="res://assets/Scripts/Ui/DisplayNodes/back_patch_container.gd" id="1_wprwc"]
@@ -30,15 +30,18 @@
 [ext_resource type="Texture2D" uid="uid://bkjy2j6ra337v" path="res://assets/Sprites/UI/SymbolIcons/EquiptIcon.png" id="20_dmh46"]
 [ext_resource type="Script" path="res://Scenes/UiNodes/EquipmentMenu/equipment_menu_mouse_control.gd" id="20_vk886"]
 [ext_resource type="Texture2D" uid="uid://s8s7rktavc7e" path="res://assets/Sprites/UI/BackPatches/Patch_32_8.png" id="21_rx2hk"]
+[ext_resource type="Script" path="res://Scenes/UiNodes/EquipmentMenu/stats_display_container.gd" id="24_2alwo"]
+[ext_resource type="Script" path="res://Scenes/UiNodes/EquipmentMenu/stat_display_entry.gd" id="25_7op4r"]
 
-[node name="EquipmentMenuContainer" type="Container" node_paths=PackedStringArray("mouse_over_control", "equipment_display_container", "inventory_container", "background", "inner_container")]
-custom_minimum_size = Vector2(312, 607)
-offset_right = 312.0
+[node name="EquipmentMenuContainer" type="Container" node_paths=PackedStringArray("mouse_over_control", "stats_display_container", "equipment_display_container", "inventory_container", "background", "inner_container")]
+custom_minimum_size = Vector2(576, 607)
+offset_right = 576.0
 offset_bottom = 607.0
 size_flags_vertical = 3
 script = ExtResource("1_7xry3")
 mouse_over_control = NodePath("MouseOverControl")
-equipment_display_container = NodePath("MainContainer/EquipSlotsContainer")
+stats_display_container = NodePath("MainContainer/HBoxContainer/StatsDisplayContainer")
+equipment_display_container = NodePath("MainContainer/HBoxContainer/EquipSlotsContainer")
 inventory_container = NodePath("MainContainer/EquiptInventoryContainer")
 background = NodePath("Background")
 inner_container = NodePath("MainContainer")
@@ -57,7 +60,10 @@ patch_margin_bottom = 12
 layout_mode = 2
 vertical = true
 
-[node name="EquipSlotsContainer" type="Container" parent="MainContainer" node_paths=PackedStringArray("portait_texture_rect", "armor_lable", "ward_label", "phyatk_label", "magatk_label", "mass_label", "speed_label", "page_count_label", "que_count_label", "background", "inner_container")]
+[node name="HBoxContainer" type="HBoxContainer" parent="MainContainer"]
+layout_mode = 2
+
+[node name="EquipSlotsContainer" type="Container" parent="MainContainer/HBoxContainer" node_paths=PackedStringArray("portait_texture_rect", "armor_lable", "ward_label", "phyatk_label", "magatk_label", "mass_label", "speed_label", "page_count_label", "que_count_label", "background", "inner_container")]
 custom_minimum_size = Vector2(288, 292)
 layout_mode = 2
 script = ExtResource("3_xe4rr")
@@ -73,7 +79,7 @@ que_count_label = NodePath("InnerContainer/MiddlePortraitContainer/MiniStatsCont
 background = NodePath("NinePatchRect")
 inner_container = NodePath("InnerContainer")
 
-[node name="NinePatchRect" type="NinePatchRect" parent="MainContainer/EquipSlotsContainer"]
+[node name="NinePatchRect" type="NinePatchRect" parent="MainContainer/HBoxContainer/EquipSlotsContainer"]
 layout_mode = 2
 texture = ExtResource("4_bemq8")
 region_rect = Rect2(0, 0, 32, 32)
@@ -82,14 +88,14 @@ patch_margin_top = 12
 patch_margin_right = 12
 patch_margin_bottom = 12
 
-[node name="InnerContainer" type="BoxContainer" parent="MainContainer/EquipSlotsContainer"]
+[node name="InnerContainer" type="BoxContainer" parent="MainContainer/HBoxContainer/EquipSlotsContainer"]
 layout_mode = 2
 
-[node name="LeftEquipSlots" type="VBoxContainer" parent="MainContainer/EquipSlotsContainer/InnerContainer"]
+[node name="LeftEquipSlots" type="VBoxContainer" parent="MainContainer/HBoxContainer/EquipSlotsContainer/InnerContainer"]
 layout_mode = 2
 alignment = 1
 
-[node name="HeadSlotButton" type="TextureButton" parent="MainContainer/EquipSlotsContainer/InnerContainer/LeftEquipSlots" node_paths=PackedStringArray("icon_texture_rect")]
+[node name="HeadSlotButton" type="TextureButton" parent="MainContainer/HBoxContainer/EquipSlotsContainer/InnerContainer/LeftEquipSlots" node_paths=PackedStringArray("icon_texture_rect")]
 layout_mode = 2
 texture_normal = ExtResource("13_haq6b")
 texture_pressed = ExtResource("14_acy0d")
@@ -99,7 +105,7 @@ highlight_background = ExtResource("14_acy0d")
 default_icon_texture = ExtResource("3_q8r7l")
 icon_texture_rect = NodePath("IconTextureRect")
 
-[node name="IconTextureRect" type="TextureRect" parent="MainContainer/EquipSlotsContainer/InnerContainer/LeftEquipSlots/HeadSlotButton"]
+[node name="IconTextureRect" type="TextureRect" parent="MainContainer/HBoxContainer/EquipSlotsContainer/InnerContainer/LeftEquipSlots/HeadSlotButton"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -108,7 +114,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("3_q8r7l")
 
-[node name="BodySlotButton" type="TextureButton" parent="MainContainer/EquipSlotsContainer/InnerContainer/LeftEquipSlots" node_paths=PackedStringArray("icon_texture_rect")]
+[node name="BodySlotButton" type="TextureButton" parent="MainContainer/HBoxContainer/EquipSlotsContainer/InnerContainer/LeftEquipSlots" node_paths=PackedStringArray("icon_texture_rect")]
 layout_mode = 2
 texture_normal = ExtResource("13_haq6b")
 texture_pressed = ExtResource("14_acy0d")
@@ -118,7 +124,7 @@ highlight_background = ExtResource("14_acy0d")
 default_icon_texture = ExtResource("4_pxhii")
 icon_texture_rect = NodePath("IconTextureRect")
 
-[node name="IconTextureRect" type="TextureRect" parent="MainContainer/EquipSlotsContainer/InnerContainer/LeftEquipSlots/BodySlotButton"]
+[node name="IconTextureRect" type="TextureRect" parent="MainContainer/HBoxContainer/EquipSlotsContainer/InnerContainer/LeftEquipSlots/BodySlotButton"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -127,7 +133,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("4_pxhii")
 
-[node name="FeetSlotButton" type="TextureButton" parent="MainContainer/EquipSlotsContainer/InnerContainer/LeftEquipSlots" node_paths=PackedStringArray("icon_texture_rect")]
+[node name="FeetSlotButton" type="TextureButton" parent="MainContainer/HBoxContainer/EquipSlotsContainer/InnerContainer/LeftEquipSlots" node_paths=PackedStringArray("icon_texture_rect")]
 layout_mode = 2
 texture_normal = ExtResource("13_haq6b")
 texture_pressed = ExtResource("14_acy0d")
@@ -137,7 +143,7 @@ highlight_background = ExtResource("14_acy0d")
 default_icon_texture = ExtResource("5_1mjak")
 icon_texture_rect = NodePath("IconTextureRect")
 
-[node name="IconTextureRect" type="TextureRect" parent="MainContainer/EquipSlotsContainer/InnerContainer/LeftEquipSlots/FeetSlotButton"]
+[node name="IconTextureRect" type="TextureRect" parent="MainContainer/HBoxContainer/EquipSlotsContainer/InnerContainer/LeftEquipSlots/FeetSlotButton"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -146,7 +152,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("5_1mjak")
 
-[node name="MainHandSlotButton" type="TextureButton" parent="MainContainer/EquipSlotsContainer/InnerContainer/LeftEquipSlots" node_paths=PackedStringArray("icon_texture_rect")]
+[node name="MainHandSlotButton" type="TextureButton" parent="MainContainer/HBoxContainer/EquipSlotsContainer/InnerContainer/LeftEquipSlots" node_paths=PackedStringArray("icon_texture_rect")]
 layout_mode = 2
 texture_normal = ExtResource("13_haq6b")
 texture_pressed = ExtResource("14_acy0d")
@@ -156,7 +162,7 @@ highlight_background = ExtResource("14_acy0d")
 default_icon_texture = ExtResource("6_bbncy")
 icon_texture_rect = NodePath("IconTextureRect")
 
-[node name="IconTextureRect" type="TextureRect" parent="MainContainer/EquipSlotsContainer/InnerContainer/LeftEquipSlots/MainHandSlotButton"]
+[node name="IconTextureRect" type="TextureRect" parent="MainContainer/HBoxContainer/EquipSlotsContainer/InnerContainer/LeftEquipSlots/MainHandSlotButton"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -165,11 +171,11 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("6_bbncy")
 
-[node name="MiddlePortraitContainer" type="VBoxContainer" parent="MainContainer/EquipSlotsContainer/InnerContainer"]
+[node name="MiddlePortraitContainer" type="VBoxContainer" parent="MainContainer/HBoxContainer/EquipSlotsContainer/InnerContainer"]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="PortaitBackground" type="NinePatchRect" parent="MainContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer"]
+[node name="PortaitBackground" type="NinePatchRect" parent="MainContainer/HBoxContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer"]
 custom_minimum_size = Vector2(128, 192)
 layout_mode = 2
 texture = ExtResource("2_061k4")
@@ -178,7 +184,7 @@ patch_margin_top = 12
 patch_margin_right = 12
 patch_margin_bottom = 12
 
-[node name="PortraitTextureRect" type="TextureRect" parent="MainContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer/PortaitBackground"]
+[node name="PortraitTextureRect" type="TextureRect" parent="MainContainer/HBoxContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer/PortaitBackground"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -187,182 +193,182 @@ grow_horizontal = 2
 grow_vertical = 2
 stretch_mode = 3
 
-[node name="HSeparator" type="HSeparator" parent="MainContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer"]
+[node name="HSeparator" type="HSeparator" parent="MainContainer/HBoxContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer"]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 
-[node name="MiniStatsContainer" type="VBoxContainer" parent="MainContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer"]
+[node name="MiniStatsContainer" type="VBoxContainer" parent="MainContainer/HBoxContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 alignment = 1
 
-[node name="AttacksContainer" type="HBoxContainer" parent="MainContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer/MiniStatsContainer"]
+[node name="AttacksContainer" type="HBoxContainer" parent="MainContainer/HBoxContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer/MiniStatsContainer"]
 layout_mode = 2
 
-[node name="VSeparator2" type="VSeparator" parent="MainContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer/MiniStatsContainer/AttacksContainer"]
+[node name="VSeparator2" type="VSeparator" parent="MainContainer/HBoxContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer/MiniStatsContainer/AttacksContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="PhysicalAttackIcon" type="TextureRect" parent="MainContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer/MiniStatsContainer/AttacksContainer"]
+[node name="PhysicalAttackIcon" type="TextureRect" parent="MainContainer/HBoxContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer/MiniStatsContainer/AttacksContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource("11_8n58u")
 
-[node name="PhysicalAttackLabel" type="Label" parent="MainContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer/MiniStatsContainer/AttacksContainer"]
+[node name="PhysicalAttackLabel" type="Label" parent="MainContainer/HBoxContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer/MiniStatsContainer/AttacksContainer"]
 custom_minimum_size = Vector2(24, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 14
 text = "999"
 
-[node name="VSeparator" type="VSeparator" parent="MainContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer/MiniStatsContainer/AttacksContainer"]
+[node name="VSeparator" type="VSeparator" parent="MainContainer/HBoxContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer/MiniStatsContainer/AttacksContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="MagicAttackIcon" type="TextureRect" parent="MainContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer/MiniStatsContainer/AttacksContainer"]
+[node name="MagicAttackIcon" type="TextureRect" parent="MainContainer/HBoxContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer/MiniStatsContainer/AttacksContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource("12_d5j8h")
 stretch_mode = 2
 
-[node name="MagicAttackLabel" type="Label" parent="MainContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer/MiniStatsContainer/AttacksContainer"]
+[node name="MagicAttackLabel" type="Label" parent="MainContainer/HBoxContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer/MiniStatsContainer/AttacksContainer"]
 custom_minimum_size = Vector2(24, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 14
 text = "999"
 
-[node name="VSeparator3" type="VSeparator" parent="MainContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer/MiniStatsContainer/AttacksContainer"]
+[node name="VSeparator3" type="VSeparator" parent="MainContainer/HBoxContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer/MiniStatsContainer/AttacksContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="DefensesContainer" type="HBoxContainer" parent="MainContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer/MiniStatsContainer"]
+[node name="DefensesContainer" type="HBoxContainer" parent="MainContainer/HBoxContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer/MiniStatsContainer"]
 layout_mode = 2
 
-[node name="VSeparator2" type="VSeparator" parent="MainContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer/MiniStatsContainer/DefensesContainer"]
+[node name="VSeparator2" type="VSeparator" parent="MainContainer/HBoxContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer/MiniStatsContainer/DefensesContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="ArmorIcon" type="TextureRect" parent="MainContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer/MiniStatsContainer/DefensesContainer"]
+[node name="ArmorIcon" type="TextureRect" parent="MainContainer/HBoxContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer/MiniStatsContainer/DefensesContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource("7_4vrmf")
 stretch_mode = 3
 
-[node name="ArmorLabel" type="Label" parent="MainContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer/MiniStatsContainer/DefensesContainer"]
+[node name="ArmorLabel" type="Label" parent="MainContainer/HBoxContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer/MiniStatsContainer/DefensesContainer"]
 custom_minimum_size = Vector2(24, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 14
 text = "999"
 
-[node name="VSeparator" type="VSeparator" parent="MainContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer/MiniStatsContainer/DefensesContainer"]
+[node name="VSeparator" type="VSeparator" parent="MainContainer/HBoxContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer/MiniStatsContainer/DefensesContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="WardIcon" type="TextureRect" parent="MainContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer/MiniStatsContainer/DefensesContainer"]
+[node name="WardIcon" type="TextureRect" parent="MainContainer/HBoxContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer/MiniStatsContainer/DefensesContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource("8_cwel1")
 stretch_mode = 2
 
-[node name="WardLabel" type="Label" parent="MainContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer/MiniStatsContainer/DefensesContainer"]
+[node name="WardLabel" type="Label" parent="MainContainer/HBoxContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer/MiniStatsContainer/DefensesContainer"]
 custom_minimum_size = Vector2(24, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 14
 text = "999"
 
-[node name="VSeparator3" type="VSeparator" parent="MainContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer/MiniStatsContainer/DefensesContainer"]
+[node name="VSeparator3" type="VSeparator" parent="MainContainer/HBoxContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer/MiniStatsContainer/DefensesContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="MassSpeedContainer" type="HBoxContainer" parent="MainContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer/MiniStatsContainer"]
+[node name="MassSpeedContainer" type="HBoxContainer" parent="MainContainer/HBoxContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer/MiniStatsContainer"]
 visible = false
 layout_mode = 2
 
-[node name="VSeparator2" type="VSeparator" parent="MainContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer/MiniStatsContainer/MassSpeedContainer"]
+[node name="VSeparator2" type="VSeparator" parent="MainContainer/HBoxContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer/MiniStatsContainer/MassSpeedContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="MassIcon" type="TextureRect" parent="MainContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer/MiniStatsContainer/MassSpeedContainer"]
+[node name="MassIcon" type="TextureRect" parent="MainContainer/HBoxContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer/MiniStatsContainer/MassSpeedContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource("15_y0ae6")
 stretch_mode = 2
 
-[node name="MassLabel" type="Label" parent="MainContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer/MiniStatsContainer/MassSpeedContainer"]
+[node name="MassLabel" type="Label" parent="MainContainer/HBoxContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer/MiniStatsContainer/MassSpeedContainer"]
 custom_minimum_size = Vector2(24, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 14
 text = "100"
 
-[node name="VSeparator" type="VSeparator" parent="MainContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer/MiniStatsContainer/MassSpeedContainer"]
+[node name="VSeparator" type="VSeparator" parent="MainContainer/HBoxContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer/MiniStatsContainer/MassSpeedContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="SpeedIcon" type="TextureRect" parent="MainContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer/MiniStatsContainer/MassSpeedContainer"]
+[node name="SpeedIcon" type="TextureRect" parent="MainContainer/HBoxContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer/MiniStatsContainer/MassSpeedContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource("16_6mdpp")
 
-[node name="SpeedLabel" type="Label" parent="MainContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer/MiniStatsContainer/MassSpeedContainer"]
+[node name="SpeedLabel" type="Label" parent="MainContainer/HBoxContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer/MiniStatsContainer/MassSpeedContainer"]
 custom_minimum_size = Vector2(24, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 14
 text = "100"
 
-[node name="VSeparator3" type="VSeparator" parent="MainContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer/MiniStatsContainer/MassSpeedContainer"]
+[node name="VSeparator3" type="VSeparator" parent="MainContainer/HBoxContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer/MiniStatsContainer/MassSpeedContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="PageQueCountContainer" type="HBoxContainer" parent="MainContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer/MiniStatsContainer"]
+[node name="PageQueCountContainer" type="HBoxContainer" parent="MainContainer/HBoxContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer/MiniStatsContainer"]
 layout_mode = 2
 
-[node name="VSeparator2" type="VSeparator" parent="MainContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer/MiniStatsContainer/PageQueCountContainer"]
+[node name="VSeparator2" type="VSeparator" parent="MainContainer/HBoxContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer/MiniStatsContainer/PageQueCountContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="QueCountIcon" type="TextureRect" parent="MainContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer/MiniStatsContainer/PageQueCountContainer"]
+[node name="QueCountIcon" type="TextureRect" parent="MainContainer/HBoxContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer/MiniStatsContainer/PageQueCountContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource("18_vyg7s")
 
-[node name="QueCountLabel" type="Label" parent="MainContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer/MiniStatsContainer/PageQueCountContainer"]
+[node name="QueCountLabel" type="Label" parent="MainContainer/HBoxContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer/MiniStatsContainer/PageQueCountContainer"]
 custom_minimum_size = Vector2(24, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 14
 text = "999"
 
-[node name="VSeparator" type="VSeparator" parent="MainContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer/MiniStatsContainer/PageQueCountContainer"]
+[node name="VSeparator" type="VSeparator" parent="MainContainer/HBoxContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer/MiniStatsContainer/PageQueCountContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="PageCountIcon" type="TextureRect" parent="MainContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer/MiniStatsContainer/PageQueCountContainer"]
+[node name="PageCountIcon" type="TextureRect" parent="MainContainer/HBoxContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer/MiniStatsContainer/PageQueCountContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource("17_eoa7g")
 stretch_mode = 2
 
-[node name="PageCountLabel" type="Label" parent="MainContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer/MiniStatsContainer/PageQueCountContainer"]
+[node name="PageCountLabel" type="Label" parent="MainContainer/HBoxContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer/MiniStatsContainer/PageQueCountContainer"]
 custom_minimum_size = Vector2(24, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 14
 text = "999"
 
-[node name="VSeparator3" type="VSeparator" parent="MainContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer/MiniStatsContainer/PageQueCountContainer"]
+[node name="VSeparator3" type="VSeparator" parent="MainContainer/HBoxContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer/MiniStatsContainer/PageQueCountContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="RightEquipSlots" type="VBoxContainer" parent="MainContainer/EquipSlotsContainer/InnerContainer"]
+[node name="RightEquipSlots" type="VBoxContainer" parent="MainContainer/HBoxContainer/EquipSlotsContainer/InnerContainer"]
 layout_mode = 2
 alignment = 1
 
-[node name="QueSlotButton" type="TextureButton" parent="MainContainer/EquipSlotsContainer/InnerContainer/RightEquipSlots" node_paths=PackedStringArray("icon_texture_rect")]
+[node name="QueSlotButton" type="TextureButton" parent="MainContainer/HBoxContainer/EquipSlotsContainer/InnerContainer/RightEquipSlots" node_paths=PackedStringArray("icon_texture_rect")]
 layout_mode = 2
 texture_normal = ExtResource("13_haq6b")
 texture_pressed = ExtResource("14_acy0d")
@@ -372,7 +378,7 @@ highlight_background = ExtResource("14_acy0d")
 default_icon_texture = ExtResource("9_bu15o")
 icon_texture_rect = NodePath("IconTextureRect")
 
-[node name="IconTextureRect" type="TextureRect" parent="MainContainer/EquipSlotsContainer/InnerContainer/RightEquipSlots/QueSlotButton"]
+[node name="IconTextureRect" type="TextureRect" parent="MainContainer/HBoxContainer/EquipSlotsContainer/InnerContainer/RightEquipSlots/QueSlotButton"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -381,7 +387,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("9_bu15o")
 
-[node name="BagSlotButton" type="TextureButton" parent="MainContainer/EquipSlotsContainer/InnerContainer/RightEquipSlots" node_paths=PackedStringArray("icon_texture_rect")]
+[node name="BagSlotButton" type="TextureButton" parent="MainContainer/HBoxContainer/EquipSlotsContainer/InnerContainer/RightEquipSlots" node_paths=PackedStringArray("icon_texture_rect")]
 layout_mode = 2
 texture_normal = ExtResource("13_haq6b")
 texture_pressed = ExtResource("14_acy0d")
@@ -391,7 +397,7 @@ highlight_background = ExtResource("14_acy0d")
 default_icon_texture = ExtResource("10_gxodh")
 icon_texture_rect = NodePath("IconTextureRect")
 
-[node name="IconTextureRect" type="TextureRect" parent="MainContainer/EquipSlotsContainer/InnerContainer/RightEquipSlots/BagSlotButton"]
+[node name="IconTextureRect" type="TextureRect" parent="MainContainer/HBoxContainer/EquipSlotsContainer/InnerContainer/RightEquipSlots/BagSlotButton"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -400,7 +406,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("10_gxodh")
 
-[node name="TrinketSlotButton" type="TextureButton" parent="MainContainer/EquipSlotsContainer/InnerContainer/RightEquipSlots" node_paths=PackedStringArray("icon_texture_rect")]
+[node name="TrinketSlotButton" type="TextureButton" parent="MainContainer/HBoxContainer/EquipSlotsContainer/InnerContainer/RightEquipSlots" node_paths=PackedStringArray("icon_texture_rect")]
 layout_mode = 2
 texture_normal = ExtResource("13_haq6b")
 texture_pressed = ExtResource("14_acy0d")
@@ -410,7 +416,7 @@ highlight_background = ExtResource("14_acy0d")
 default_icon_texture = ExtResource("11_dto75")
 icon_texture_rect = NodePath("IconTextureRect")
 
-[node name="IconTextureRect" type="TextureRect" parent="MainContainer/EquipSlotsContainer/InnerContainer/RightEquipSlots/TrinketSlotButton"]
+[node name="IconTextureRect" type="TextureRect" parent="MainContainer/HBoxContainer/EquipSlotsContainer/InnerContainer/RightEquipSlots/TrinketSlotButton"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -419,7 +425,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("11_dto75")
 
-[node name="OffHandSlotButton" type="TextureButton" parent="MainContainer/EquipSlotsContainer/InnerContainer/RightEquipSlots" node_paths=PackedStringArray("icon_texture_rect")]
+[node name="OffHandSlotButton" type="TextureButton" parent="MainContainer/HBoxContainer/EquipSlotsContainer/InnerContainer/RightEquipSlots" node_paths=PackedStringArray("icon_texture_rect")]
 layout_mode = 2
 texture_normal = ExtResource("13_haq6b")
 texture_pressed = ExtResource("14_acy0d")
@@ -429,7 +435,7 @@ highlight_background = ExtResource("14_acy0d")
 default_icon_texture = ExtResource("12_uskvu")
 icon_texture_rect = NodePath("IconTextureRect")
 
-[node name="IconTextureRect" type="TextureRect" parent="MainContainer/EquipSlotsContainer/InnerContainer/RightEquipSlots/OffHandSlotButton"]
+[node name="IconTextureRect" type="TextureRect" parent="MainContainer/HBoxContainer/EquipSlotsContainer/InnerContainer/RightEquipSlots/OffHandSlotButton"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -438,10 +444,73 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("12_uskvu")
 
-[node name="EquiptInventoryContainer" type="Container" parent="MainContainer" node_paths=PackedStringArray("items_container", "premade_item_button", "background", "inner_container")]
+[node name="StatsDisplayContainer" type="Container" parent="MainContainer/HBoxContainer" node_paths=PackedStringArray("name_label", "level_label", "premade_stat_entry", "entry_container", "background", "inner_container")]
+custom_minimum_size = Vector2(260, 16)
+layout_mode = 2
+script = ExtResource("24_2alwo")
+name_label = NodePath("InnerContainer/HBoxContainer/NameLabel")
+level_label = NodePath("InnerContainer/HBoxContainer/LevelLabel")
+premade_stat_entry = NodePath("InnerContainer/ScrollContainer/VBoxContainer/StatDisplayEntry")
+entry_container = NodePath("InnerContainer/ScrollContainer/VBoxContainer")
+background = NodePath("Background")
+inner_container = NodePath("InnerContainer")
+force_fill_y = true
+
+[node name="Background" type="NinePatchRect" parent="MainContainer/HBoxContainer/StatsDisplayContainer"]
+layout_mode = 2
+texture = ExtResource("4_bemq8")
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+
+[node name="InnerContainer" type="VBoxContainer" parent="MainContainer/HBoxContainer/StatsDisplayContainer"]
+custom_minimum_size = Vector2(244, 0)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MainContainer/HBoxContainer/StatsDisplayContainer/InnerContainer"]
+layout_mode = 2
+
+[node name="NameLabel" type="Label" parent="MainContainer/HBoxContainer/StatsDisplayContainer/InnerContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Character Name"
+
+[node name="LevelLabel" type="Label" parent="MainContainer/HBoxContainer/StatsDisplayContainer/InnerContainer/HBoxContainer"]
+layout_mode = 2
+text = "Lvl: 99"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MainContainer/HBoxContainer/StatsDisplayContainer/InnerContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainContainer/HBoxContainer/StatsDisplayContainer/InnerContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="StatDisplayEntry" type="HBoxContainer" parent="MainContainer/HBoxContainer/StatsDisplayContainer/InnerContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+script = ExtResource("25_7op4r")
+
+[node name="StatNameLabel" type="Label" parent="MainContainer/HBoxContainer/StatsDisplayContainer/InnerContainer/ScrollContainer/VBoxContainer/StatDisplayEntry"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Prop Name"
+
+[node name="VSeparator" type="VSeparator" parent="MainContainer/HBoxContainer/StatsDisplayContainer/InnerContainer/ScrollContainer/VBoxContainer/StatDisplayEntry"]
+layout_mode = 2
+
+[node name="StatValueLabel" type="Label" parent="MainContainer/HBoxContainer/StatsDisplayContainer/InnerContainer/ScrollContainer/VBoxContainer/StatDisplayEntry"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Value"
+
+[node name="EquiptInventoryContainer" type="Container" parent="MainContainer" node_paths=PackedStringArray("tab_bar", "items_container", "premade_item_button", "background", "inner_container")]
 custom_minimum_size = Vector2(12, 287)
 layout_mode = 2
 script = ExtResource("13_nccae")
+tab_bar = NodePath("InnerContainer/TabBar")
 items_container = NodePath("InnerContainer/ScrollContainer/FlowContainer")
 premade_item_button = NodePath("InnerContainer/ScrollContainer/FlowContainer/InventoryItemButton")
 background = NodePath("NinePatchRect")
@@ -514,6 +583,8 @@ texture = ExtResource("20_dmh46")
 
 [node name="MouseOverControl" type="Control" parent="." node_paths=PackedStringArray("mouse_over_message_container", "mouse_over_label", "drag_item_control", "drag_icon_texture_rect")]
 layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
 mouse_filter = 2
 script = ExtResource("20_vk886")
 mouse_over_message_container = NodePath("MouseOverDisplay")

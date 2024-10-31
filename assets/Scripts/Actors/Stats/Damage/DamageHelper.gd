@@ -42,8 +42,7 @@ static func handle_damage(attacker:BaseActor, defender:BaseActor, damage_data:Di
 		printerr("DamageHelper.handle_damage: No 'DefenseType' found.")
 		return
 		
-	var damage_event = DamageEvent.new(attacker, defender,source_tag_chain, game_state, 
-									base_damage, attack_stat, damage_type, defense_type)
+	var damage_event = DamageEvent.new(damage_data, attacker, defender,source_tag_chain, game_state)
 	
 	var damage = DamageHelper._calc_damage_for_event(damage_event)
 	# TODO: Acccuracy and chance to apply effects
@@ -58,19 +57,23 @@ static func _calc_damage_for_event(event:DamageEvent):
 	var attacker = event.attacker
 	var defender = event.defender
 	
-	var attack_stat_val = attacker.stats.get_stat(event.attack_stat)
+	# Calc raw damage
+	var attack_stat_val = attacker.stats.base_damge_from_stat(event.attack_stat)
 	event.raw_damage = event.base_damage * ((attack_stat_val + STAT_BALENCE) / (STAT_BALENCE))
 	
+	# Get the defend's Armor or Ward
 	var defense_armor = 0
 	if event.defense_type == DamageEvent.DefenseType.Armor:
 		defense_armor = defender.stats.get_stat('Armor')
-	if event.defense_type == DamageEvent.DefenseType.Resist:
-		defense_armor = defender.stats.get_stat('Resist')
+	if event.defense_type == DamageEvent.DefenseType.Ward:
+		defense_armor = defender.stats.get_stat('Ward')
 	var armor_reduction = calc_armor_reduction(defense_armor)
 	event.damage_after_armor = event.raw_damage * armor_reduction
 	
+	# Get all tags that apply to the attack  and defense
 	var attack_tags = event.source_tag_chain.get_all_tags()
 	var defend_tags = defender.get_tags()
+	# Add Ally or Enemy tag
 	if attacker.FactionIndex == defender.FactionIndex:
 		attack_tags.append("Ally")
 		defend_tags.append("Ally")
@@ -78,6 +81,8 @@ static func _calc_damage_for_event(event:DamageEvent):
 		attack_tags.append("Enemy")
 		defend_tags.append("Enemy")
 	
+	
+	# Get and apply all "OnDealDamage" mods from the attacker
 	event.damage_after_attack_mods = event.damage_after_armor
 	var attacker_damage_mods = attacker.effects.get_on_deal_damage_mods()
 	attacker_damage_mods = _order_damage_mods(attacker_damage_mods)
@@ -85,6 +90,7 @@ static func _calc_damage_for_event(event:DamageEvent):
 		if mod.is_valid_in_case(false, attack_tags, defend_tags, event):
 			event.damage_after_attack_mods = mod.apply_mod(event.damage_after_attack_mods, event)
 	
+	# Get and apply all "OnTakeDamage" mods from the defender
 	event.damage_after_defend_mods = event.damage_after_attack_mods
 	var defender_damage_mods = defender.effects.get_on_take_damage_mods()
 	defender_damage_mods = _order_damage_mods(defender_damage_mods)

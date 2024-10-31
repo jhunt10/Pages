@@ -26,3 +26,6 @@ func set_item(item:BaseItem):
 func on_equipt_change():
 	var item = ItemLibrary.get_item(_item_id)
 	equipt_icon.visible = (item as BaseEquipmentItem).get_equipt_to_actor_id() != ''
+
+func get_item()->BaseItem:
+	return ItemLibrary.get_item(_item_id)

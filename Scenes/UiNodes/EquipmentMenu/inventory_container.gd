@@ -7,6 +7,7 @@ signal item_button_hover(item:BaseItem)
 signal item_button_hover_end
 signal item_button_clicked(item:BaseItem)
 
+@export var tab_bar:TabBar
 @export var items_container:FlowContainer
 @export var premade_item_button:InventoryItemButton
 
@@ -14,11 +15,12 @@ var _mouse_in_button:InventoryItemButton
 var _item_buttons:Dictionary = {}
 var _hover_delay:float = 0.3
 var _hover_timer:float
-var _click_delay:float = 0.2
+var _click_delay:float = 0.4
 var _click_timer:float
 
 func _ready() -> void:
 	premade_item_button.visible = false
+	tab_bar.tab_changed.connect(_on_tab_bar_select)
 	if !ItemLibrary.Instance:
 		ItemLibrary.new()
 	build_item_list()
@@ -31,6 +33,7 @@ func _process(delta: float) -> void:
 			if item:
 				item_button_hover.emit(item)
 	if _click_timer > 0:
+		print(_click_timer)
 		_click_timer -= delta
 
 func build_item_list():
@@ -38,7 +41,7 @@ func build_item_list():
 		button.queue_free()
 	_item_buttons.clear()
 	
-	for item in ItemLibrary.list_all_items():
+	for item in PlayerInventory.get_held_items():
 		_build_button(item)
 
 func _build_button(item:BaseItem):
@@ -53,12 +56,12 @@ func _build_button(item:BaseItem):
 	new_button.mouse_exited.connect(_mouse_exit_button.bind(new_button))
 
 func _on_item_button_down(button:InventoryItemButton):
-	var item = ItemLibrary.get_item(button._item_id)
+	var item = button.get_item()
 	item_button_down.emit(item, button)
 	_click_timer = _click_delay
 func _on_item_button_up(button:InventoryItemButton):
 	if _click_timer > 0:
-		var item = ItemLibrary.get_item(button._item_id)
+		var item = button.get_item()
 		item_button_clicked.emit(item)
 	_click_timer = 0
 	
@@ -70,4 +73,21 @@ func _mouse_exit_button(button:InventoryItemButton):
 	_mouse_in_button = null
 	_hover_timer = -1
 	item_button_hover_end.emit()
-	
+
+func _on_tab_bar_select(index:int):
+	var tab_name = tab_bar.get_tab_title(index)
+	if tab_name == "All":
+		filter_items_with_tag('')
+	else:
+		filter_items_with_tag(tab_name)
+	pass
+
+func filter_items_with_tag(tag:String):
+	for button:InventoryItemButton in _item_buttons.values():
+		var item = button.get_item()
+		if tag == '':
+			button.visible = true
+		elif item.details.tags.has(tag):
+			button.visible = true
+		else:
+			button.visible = false

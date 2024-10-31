@@ -1,8 +1,8 @@
 class_name BaseQueEquipment
 extends BaseEquipmentItem
 
-func get_equip_slot()->EquipmentSlots:
-	return EquipmentSlots.Que
+func get_equipment_slot_type()->String:
+	return "Que"
 
 func get_max_page_count()->int:
 	var val = get_load_val("MaxPageCount", 0)

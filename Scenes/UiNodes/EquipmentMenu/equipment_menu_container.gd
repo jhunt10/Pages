@@ -3,6 +3,7 @@ class_name EquipmentMenuContainer
 extends BackPatchContainer
 
 @export var mouse_over_control:EquipmentMenuMouseControl
+@export var stats_display_container:StatsDisplayContainer
 @export var equipment_display_container:EquipmentDisplayContainer
 @export var inventory_container:InventoryContainer
 
@@ -12,6 +13,7 @@ var _drag_icon_offset:Vector2 = Vector2.ZERO
 
 func _ready() -> void:
 	super()
+	if Engine.is_editor_hint(): return
 	inventory_container.item_button_down.connect(set_dragging_item)
 	if !ActorLibrary.Instance:
 		ActionLibrary.new()
@@ -24,6 +26,7 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	super(delta)
+	if Engine.is_editor_hint(): return
 	mouse_over_control.position = get_local_mouse_position() - _drag_icon_offset
 	if _dragging_item and !Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
 		dragging_item_released()
@@ -37,6 +40,7 @@ func clear_hover_item():
 func set_actor(actor:BaseActor):
 	_actor = actor
 	equipment_display_container.set_actor(_actor)
+	stats_display_container.set_actor(_actor)
 
 func clear_drag_item():
 	_dragging_item = null
@@ -47,22 +51,25 @@ func set_dragging_item(item:BaseItem, button:InventoryItemButton):
 	_dragging_item = item
 	mouse_over_control.set_dragging_item(item)
 	mouse_over_control.drag_item_control.position = Vector2.ZERO - button.get_local_mouse_position()
-	equipment_display_container.highlight_slot(_dragging_item.get_equip_slot())
+	equipment_display_container.highlight_slots_of_type(_dragging_item.get_equipment_slot_type())
 
 func dragging_item_released():
-	var mouse_over_slot = equipment_display_container.get_mouse_over_slot()
-	if  mouse_over_slot != null and _dragging_item and _dragging_item.get_equip_slot() == mouse_over_slot:
-		_actor.equipment._set_equipment(mouse_over_slot, _dragging_item)
-		equipment_display_container.set_actor(_actor)
+	var mouse_over_slot_index = equipment_display_container.get_mouse_over_slot_index()
+	if mouse_over_slot_index < 0:
+		clear_drag_item()
+		return
+	var slot_type = _actor.equipment.get_slot_equipment_type(mouse_over_slot_index)
+	if _dragging_item.get_equipment_slot_type() == slot_type:
+		_actor.equipment.equip_item_to_slot(mouse_over_slot_index, _dragging_item)
+		set_actor(_actor)
 	clear_drag_item()
 
 func on_item_clicked(item:BaseItem):
-	var slot = (item as BaseEquipmentItem).get_equip_slot()
-	_actor.equipment._set_equipment(slot, item)
-	equipment_display_container.set_actor(_actor)
+	_actor.equipment.try_equip_item(item, true)
+	set_actor(_actor)
 
-func on_equipt_slot_clicked(slot:BaseEquipmentItem.EquipmentSlots):
-	if _actor.equipment.has_item_in_slot(slot):
-		_actor.equipment.clear_slot(slot)
-		equipment_display_container.set_actor(_actor)
+func on_equipt_slot_clicked(slot_index:int):
+	if _actor.equipment.has_item_in_slot(slot_index):
+		_actor.equipment.clear_slot(slot_index)
+		set_actor(_actor)
 		

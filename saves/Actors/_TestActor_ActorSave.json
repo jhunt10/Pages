@@ -1,1 +1,35 @@
-{"TestActor_ID":{"ActorKey":"TestActor","DisplayName":"Bob","EquiptItems":{"Bag":"TestBag9165141696502356482","Body":"TestShirt2048334462569349970","Feet":"TestBoots676419905389809803","Head":"TestHelm2662625034301456950","Que":"TestPageQue7631840199575832397","Trinket":"TestTrinket2950029648216441954","Weapon":"TestSword105596744733394109"},"Id":"TestActor_ID","ObjectKey":"TestActor","QueData":{"ActionList":["MoveForward","MoveLeft","MoveRight","MoveBack","TurnAround","TurnLeft","TurnRight","Wait","Dev_AnyEffect","TestBullets","TestSlash","TestSlam"],"MaxSize":4}}}
+{
+    "TestActor_ID": {
+        "ActorKey": "TestActor",
+        "DisplayName": "Bob",
+        "Equipment": [
+            "TestPageQue7631840199575832397",
+            "TestBag9165141696502356482",
+            "TestHelm2662625034301456950",
+            "TestShirt2048334462569349970",
+            "TestBoots676419905389809803",
+            "TestTrinket2950029648216441954",
+            "TestSword105596744733394109",
+            null
+        ],
+        "Id": "TestActor_ID",
+        "ObjectKey": "TestActor",
+        "QueData": {
+            "ActionList": [
+                "MoveForward",
+                "MoveLeft",
+                "MoveRight",
+                "MoveBack",
+                "TurnAround",
+                "TurnLeft",
+                "TurnRight",
+                "Wait",
+                "Dev_AnyEffect",
+                "TestBullets",
+                "TestSlash",
+                "TestSlam"
+            ],
+            "MaxSize": 4
+        }
+    }
+}

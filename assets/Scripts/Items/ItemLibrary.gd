@@ -27,6 +27,8 @@ func _init() -> void:
 		return
 	Instance = self
 	Instance.init_load()
+	for item in list_all_items():
+		PlayerInventory.add_item(item)
 
 # Get a static instance of the action
 static func list_all_items()->Array:
