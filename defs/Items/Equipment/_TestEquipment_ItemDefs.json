@@ -183,6 +183,52 @@
         "Ward": 10
     },
     {
+        "ItemKey":"TestShield",
+        "_ObjectScript": "res://assets/Scripts/Items/Equipment/BaseArmorEquipment.gd",
+        "Details":{
+			"DisplayName": "Test Shield",
+			"SnippetDesc": "An shield made for testing.",
+			"Description": "Description.",
+			"Tags": ["OffHand","Shield"],
+			"LargeIcon":"TestShield.png",
+			"SmallIcon":"TestShield.png"
+		},
+        "StatMods":{
+			"StatMod1": { 
+				"StatName": "Strength",
+				"DisplayName": "Name to showup in stats tool tip",
+				"ModType":"Fixed", 
+				"Value":500 
+			}
+		},
+        "EquipSlot":"OffHand",
+        "Armor": 10,
+        "Ward": 0
+    },
+    {
+        "ItemKey":"TestOrb",
+        "_ObjectScript": "res://assets/Scripts/Items/Equipment/BaseArmorEquipment.gd",
+        "Details":{
+			"DisplayName": "Test Orb",
+			"SnippetDesc": "An orb made for testing.",
+			"Description": "Description.",
+			"Tags": ["OffHand","Orb"],
+			"LargeIcon":"TestOrb.png",
+			"SmallIcon":"TestOrb.png"
+		},
+        "StatMods":{
+			"StatMod1": { 
+				"StatName": "Strength",
+				"DisplayName": "Name to showup in stats tool tip",
+				"ModType":"Fixed", 
+				"Value":500 
+			}
+		},
+        "EquipSlot":"OffHand",
+        "Armor": 0,
+        "Ward": 10
+    },
+    {
         "ItemKey":"TestSword",
         "_ObjectScript": "res://assets/Scripts/Items/Equipment/BaseWeaponEquipment.gd",
         "Details":{
@@ -210,7 +256,70 @@
             "TargetArea": "[[-1,0],[-1,1],[0,1],[1,1],[1,0]]",
             "TargetType": "Actor"
         },
-        "AttackTags": ["Melee", "Physical"]
+        "AttackTags": ["Melee", "Physical"],
+        "WeaponClass": "Medium"
+    },
+    {
+        "ItemKey":"TestSwordHeavy",
+        "_ObjectScript": "res://assets/Scripts/Items/Equipment/BaseWeaponEquipment.gd",
+        "Details":{
+			"DisplayName": "Test Heavy Sword",
+			"SnippetDesc": "An sword made for testing.",
+			"Description": "Description.",
+			"Tags": ["Weapon"],
+			"LargeIcon":"TestSwordHeavy.png",
+			"SmallIcon":"TestSwordHeavy.png"
+		},
+        "EquipSlot":"Weapon",
+        "CanOffhand":false,
+        "DamageData":{
+            "AtkStat": "Strength",
+            "BaseDamage": 10,
+            "DamageEffect": "Slash_DamageEffect",
+            "DamageType": "Slash",
+            "DamageVarient": 0.1,
+            "DefenseType": "Armor"
+        },
+        "TargetParams": {
+            "EffectsAllies": false,
+            "EffectsEnemies": true,
+            "LineOfSight": true,
+            "TargetArea": "[[-1,0],[-1,1],[0,1],[1,1],[1,0]]",
+            "TargetType": "Actor"
+        },
+        "AttackTags": ["Melee", "Physical"],
+        "WeaponClass": "Heavy"
+    },
+    {
+        "ItemKey":"TestDagger",
+        "_ObjectScript": "res://assets/Scripts/Items/Equipment/BaseWeaponEquipment.gd",
+        "Details":{
+			"DisplayName": "Test Dagger",
+			"SnippetDesc": "An dagger  made for testing.",
+			"Description": "Description.",
+			"Tags": ["Weapon","OffHand"],
+			"LargeIcon":"TestDagger.png",
+			"SmallIcon":"TestDagger.png"
+		},
+        "EquipSlot":"Weapon",
+        "CanOffhand":false,
+        "DamageData":{
+            "AtkStat": "Strength",
+            "BaseDamage": 10,
+            "DamageEffect": "Slash_DamageEffect",
+            "DamageType": "Slash",
+            "DamageVarient": 0.1,
+            "DefenseType": "Armor"
+        },
+        "TargetParams": {
+            "EffectsAllies": false,
+            "EffectsEnemies": true,
+            "LineOfSight": true,
+            "TargetArea": "[[-1,0],[-1,1],[0,1],[1,1],[1,0]]",
+            "TargetType": "Actor"
+        },
+        "AttackTags": ["Melee", "Physical"],
+        "WeaponClass": "Light"
     },
     {
         "ItemKey":"TestStaff",
@@ -240,6 +349,7 @@
             "TargetArea": "[[-1,1],[0,1],[1,1],[-1,2],[0,2],[1,2]]",
             "TargetType": "Actor"
         },
-        "AttackTags": ["Ranged", "Magic"]
+        "AttackTags": ["Ranged", "Magic"],
+        "WeaponClass": "Light"
     }
 ]

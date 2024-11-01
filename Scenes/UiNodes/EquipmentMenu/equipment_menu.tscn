@@ -37,7 +37,6 @@
 custom_minimum_size = Vector2(576, 607)
 offset_right = 576.0
 offset_bottom = 607.0
-size_flags_vertical = 3
 script = ExtResource("1_7xry3")
 mouse_over_control = NodePath("MouseOverControl")
 stats_display_container = NodePath("MainContainer/HBoxContainer/StatsDisplayContainer")
@@ -45,7 +44,7 @@ equipment_display_container = NodePath("MainContainer/HBoxContainer/EquipSlotsCo
 inventory_container = NodePath("MainContainer/EquiptInventoryContainer")
 background = NodePath("Background")
 inner_container = NodePath("MainContainer")
-force_fill_y = true
+force_dimintions = Vector2i(576, 607)
 
 [node name="Background" type="NinePatchRect" parent="."]
 layout_mode = 2
@@ -532,11 +531,13 @@ layout_mode = 2
 [node name="TabBar" type="TabBar" parent="MainContainer/EquiptInventoryContainer/InnerContainer"]
 layout_mode = 2
 current_tab = 0
-tab_count = 4
+tab_count = 6
 tab_0/title = "All"
 tab_1/title = "Head"
 tab_2/title = "Body"
 tab_3/title = "Feet"
+tab_4/title = "Weapon"
+tab_5/title = "OffHand"
 
 [node name="ScrollContainer" type="ScrollContainer" parent="MainContainer/EquiptInventoryContainer/InnerContainer"]
 custom_minimum_size = Vector2(0, 240)
@@ -551,6 +552,7 @@ theme_override_constants/h_separation = 2
 theme_override_constants/v_separation = 2
 
 [node name="InventoryItemButton" type="TextureButton" parent="MainContainer/EquiptInventoryContainer/InnerContainer/ScrollContainer/FlowContainer" node_paths=PackedStringArray("item_icon_rect", "equipt_icon")]
+visible = false
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 texture_normal = ExtResource("13_haq6b")

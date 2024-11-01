@@ -2,25 +2,28 @@ class_name EquipmentHolder
 
 var _actor:BaseActor
 
-var _slot_equipment_types:Array=[]
-var _slot_equipment_ids:Array=[]
+var _slot_equipment_types:Array:
+	get: return _actor.get_load_val("EquipmentSlots", [])
+var _slot_equipment_ids:Array:
+	get: return _actor.get_load_val("Equipment", [])
 
 func _init(actor:BaseActor) -> void:
 	self._actor = actor
 	
 	_slot_equipment_types = actor.get_load_val("EquipmentSlots", [])
-	var equipt_items:Array = actor.get_load_val("Equipment", {})
-	# Load or Create entries for each slot defined in ActorDef
-	for equipment_id in equipt_items:
-		if !equipment_id or equipment_id == '':
+	_slot_equipment_ids = actor.get_load_val("Equipment", [])
+	if _slot_equipment_ids.size() < _slot_equipment_types.size():
+		for i in range(_slot_equipment_types.size() -_slot_equipment_ids.size()):
 			_slot_equipment_ids.append(null)
-		else:
-			_slot_equipment_ids.append(equipment_id)
+	# Load or Create entries for each slot defined in ActorDef
+	#for equipment_id in equipt_items:
+		#if !equipment_id or equipment_id == '':
+			#_slot_equipment_ids.append(null)
+		#else:
+			#_slot_equipment_ids.append(equipment_id)
 
-func save_data()->Dictionary:
-	var out_dict = {}
-	out_dict["Equipment"] = _slot_equipment_ids
-	return out_dict
+func save_equipt_items()->Array:
+	return _slot_equipment_ids
 
 ## Return true if actor can equipt item in slot
 func has_slot(slot:String)->bool:
@@ -75,6 +78,13 @@ func clear_slot(index:int):
 	# Unbind current item if it thinks it;s still bound
 	if current_item and current_item.is_equipped_to_actor(_actor): 
 			current_item.clear_equipt_actor()
+	
+	# Clear OffHand is item is Heavy Weapon
+	var weapon = current_item as BaseWeaponEquipment
+	if weapon and weapon.get_weapon_class() == BaseWeaponEquipment.WeaponClasses.Heavy:
+		for i in range(_slot_equipment_ids.size()):
+			if _slot_equipment_ids[i]  == weapon.Id:
+				_slot_equipment_ids[i] = null
 	_actor.stats.dirty_stats()
 
 func equip_item_to_slot(index:int, equipment:BaseEquipmentItem):
@@ -84,10 +94,41 @@ func equip_item_to_slot(index:int, equipment:BaseEquipmentItem):
 	if _slot_equipment_ids[index] == equipment.Id:
 		return
 	var equipment_slot_type = equipment.get_equipment_slot_type()
-	if _slot_equipment_types[index] != equipment_slot_type:
+	if equipment_slot_type == "Weapon":
+		var slot_type = _slot_equipment_types[index]
+		var weapon = (equipment as BaseWeaponEquipment)
+		if !weapon:
+			printerr("%s.EquipmentHolder: Attempted to equip non-weapon %s to 'MainHand' slot %s." % 
+					[_actor.Id, equipment.Id, index])
+			return
+		# Handle Heavy Weapons
+		if weapon.get_weapon_class() == BaseWeaponEquipment.WeaponClasses.Heavy:
+			if slot_type == "OffHand":
+				printerr("%s.EquipmentHolder: Attempted to Heavy weapon %s to an 'OffHand' slot." % 
+						[_actor.Id, equipment.Id, index])
+				return
+			var off_hand_slot = _get_first_or_open_slot_of_type("OffHand")
+			if off_hand_slot < 0:
+				printerr("%s.EquipmentHolder: Attempted to Heavt weapon %s without an 'OffHand' slot." % 
+						[_actor.Id, equipment.Id, index])
+				return
+			else:
+				clear_slot(off_hand_slot)
+				_slot_equipment_ids[off_hand_slot] = equipment.Id
+		# Handle Medium Weapons
+		if weapon.get_weapon_class() == BaseWeaponEquipment.WeaponClasses.Medium:
+			if slot_type == "OffHand":
+				printerr("%s.EquipmentHolder: Attempted to Medium weapon %s to an 'OffHand' slot." % 
+						[_actor.Id, equipment.Id, index])
+				return
+			else:
+				_clear_offhand_weapons()
+	elif _slot_equipment_types[index] != equipment_slot_type :
 		printerr("%s.EquipmentHolder: Equipment %s of type '%s' can no go in slot %s of type '%s'." % 
 				[_actor.Id, equipment.Id, equipment_slot_type, index, _slot_equipment_types[index]])
 		return
+			
+			
 	# Clear anythng else in slot
 	if has_equipment_in_slot(index):
 		clear_slot(index)
@@ -97,25 +138,54 @@ func equip_item_to_slot(index:int, equipment:BaseEquipmentItem):
 	if not equipment.is_equipped_to_actor(_actor): 
 		equipment.set_equipt_actor(_actor, index)
 
+func _clear_offhand_weapons():
+	print("Cear offhand")
+	for check_index in range(_slot_equipment_types.size()):
+		if _slot_equipment_types[check_index] != "OffHand":
+			continue
+		var item_id = _slot_equipment_ids[check_index]
+		print("Check: %s"%[item_id])
+		if !item_id: 
+			continue
+		var item = ItemLibrary.get_item(item_id)
+		if !item: 
+			continue
+		if (item is BaseEquipmentItem) and (item as BaseEquipmentItem).get_equipment_slot_type() == "Weapon":
+			print("CLEAR: %s"%[item_id])
+			clear_slot(check_index)
+		
+
 ## Try to equip the item to the first open slot for it's type. If no open slots are found, replace first if allowed
 func try_equip_item(equipment:BaseEquipmentItem, replace:bool=false)->bool:
-	var first_found_slot = -1
 	var equipment_slot_type = equipment.get_equipment_slot_type()
-	for index in range(_slot_equipment_types.size()):
-		var check_type = _slot_equipment_types[index]
-		if check_type == equipment_slot_type:
-			if not has_equipment_in_slot(index):
-				equip_item_to_slot(index, equipment)
-				return true
-			elif first_found_slot < 0:
-				first_found_slot = index
-	if replace and first_found_slot >= 0:
-		equip_item_to_slot(first_found_slot, equipment)
-		return true
+	if equipment_slot_type == "Weapon":
+		equipment_slot_type = "MainHand"
+		var weapon = (equipment as BaseWeaponEquipment)
+		if weapon:
+			# For Light weapons, see if MainHand is occupied, then try OffHand
+			var main_hand_index = _get_first_or_open_slot_of_type('MainHand')
+			var current_weapon = get_equipment_in_slot(main_hand_index)
+			if (current_weapon and weapon.get_weapon_class() == BaseWeaponEquipment.WeaponClasses.Light
+				and current_weapon.get_weapon_class() == BaseWeaponEquipment.WeaponClasses.Light):
+				equipment_slot_type = "OffHand"
+				
+			
+	var first_found_slot = _get_first_or_open_slot_of_type(equipment_slot_type)
+	if first_found_slot >= 0:
+		if replace or not has_equipment_in_slot(first_found_slot):
+			equip_item_to_slot(first_found_slot, equipment)
+			return true
 	return false
 
 
-
+func get_primary_weapon()->BaseWeaponEquipment:
+	var main_hand_slot_index = _get_first_or_open_slot_of_type("MainHand")
+	if main_hand_slot_index < 0:
+		return null
+	var item = get_equipment_in_slot(main_hand_slot_index)
+	if item is BaseWeaponEquipment:
+		return item as BaseWeaponEquipment
+	return null
 
 func get_total_equipment_armor()->int:
 	var val = 0
@@ -129,8 +199,16 @@ func get_total_equipment_ward()->int:
 		val +=  equipment.get_ward_value()
 	return val
 
-
-
+func _get_first_or_open_slot_of_type(slot_type:String)->int:
+	var first_found_slot = -1
+	for index in range(_slot_equipment_types.size()):
+		var check_type = _slot_equipment_types[index]
+		if check_type == slot_type:
+			if not has_equipment_in_slot(index):
+				return index
+			elif first_found_slot < 0:
+				first_found_slot = index
+	return first_found_slot
 
 
 #func equipt_que(que:BaseQueEquipment):

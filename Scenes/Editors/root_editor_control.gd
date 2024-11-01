@@ -66,7 +66,7 @@ func get_subeditor_option_keys(key:String)->Array:
 	if !subeditor:
 		printerr("%s.get_subeditor_option_keys:Failed to find subeditor '%s'." % [self.name, key])
 		return []
-	return subeditor.get_key_to_input_mapping().keys()
+	return subeditor.get_option_keys()
 
 func on_exit_menu():
 	Instance = null

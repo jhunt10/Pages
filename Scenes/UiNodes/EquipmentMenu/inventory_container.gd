@@ -33,7 +33,6 @@ func _process(delta: float) -> void:
 			if item:
 				item_button_hover.emit(item)
 	if _click_timer > 0:
-		print(_click_timer)
 		_click_timer -= delta
 
 func build_item_list():

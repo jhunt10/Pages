@@ -41,7 +41,10 @@ func connect_focus_exit_signals():
 	for key in mapping.keys():
 		var input_node = get_key_to_input_mapping().get(key)
 		_connect_input_on_focus_exit(key, input_node)
-		
+
+func get_option_keys()->Array:
+	return get_key_to_input_mapping().keys()
+
 func lose_focus_if_has():
 	var mapping = get_key_to_input_mapping()
 	for key in mapping.keys():

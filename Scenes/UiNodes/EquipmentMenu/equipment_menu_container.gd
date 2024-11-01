@@ -7,6 +7,7 @@ extends BackPatchContainer
 @export var equipment_display_container:EquipmentDisplayContainer
 @export var inventory_container:InventoryContainer
 
+var _allow_editing:bool = true
 var _actor:BaseActor
 var _dragging_item:BaseEquipmentItem
 var _drag_icon_offset:Vector2 = Vector2.ZERO
@@ -30,6 +31,16 @@ func _process(delta: float) -> void:
 	mouse_over_control.position = get_local_mouse_position() - _drag_icon_offset
 	if _dragging_item and !Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
 		dragging_item_released()
+
+func _input(event: InputEvent) -> void:
+	if Engine.is_editor_hint(): return
+	if event is InputEventKey and (event as InputEventKey).keycode == KEY_ESCAPE:
+		self.close_menu()
+
+func close_menu():
+	ActorLibrary.save_actors()
+	ItemLibrary.save_items()
+	self.queue_free()
 
 func set_hover_item(item):
 	mouse_over_control.set_hover_item(item)
@@ -69,13 +80,12 @@ func on_item_clicked(item:BaseItem):
 	if !equipment:
 		return
 	if equipment.get_equipt_to_actor_id() == _actor.Id:
-		_actor.equipment.remove_equipment(equipment)
+		equipment.clear_equipt_actor()
 	else:
 		_actor.equipment.try_equip_item(item, true)
 	set_actor(_actor)
 
 func on_equipt_slot_clicked(slot_index:int):
-	if _actor.equipment.has_item_in_slot(slot_index):
+	if _actor.equipment.has_equipment_in_slot(slot_index):
 		_actor.equipment.clear_slot(slot_index)
 		set_actor(_actor)
-		

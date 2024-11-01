@@ -3,13 +3,13 @@
         "ActorKey": "TestActor",
         "DisplayName": "Bob",
         "Equipment": [
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
+            "TestPageQue7416115509833780446",
+            "TestBag8499941620751783627",
+            "TestHelm4591582668978864445",
+            "TestShirt4132601984731090163",
+            "TestBoots3573379213580047645",
+            "TestTrinket1784632698260471697",
+            "TestStaff4484902450472647542",
             null
         ],
         "Id": "TestActor_ID",
@@ -30,6 +30,39 @@
                 "TestSlam"
             ],
             "MaxSize": 4
+        }
+    },
+    "TestTarget_ID": {
+        "ActorKey": "TestTarget",
+        "DisplayName": "Bob",
+        "Equipment": [
+            "TestPageQue7416115509833780446",
+            "TestBag8499941620751783627",
+            "TestHelm4591582668978864445",
+            "TestShirt4132601984731090163",
+            "TestBoots3573379213580047645",
+            "TestTrinket1784632698260471697",
+            "TestStaff4484902450472647542",
+            null
+        ],
+        "Id": "TestTarget_ID",
+        "ObjectKey": "TestTarget",
+        "QueData": {
+            "ActionList": [
+                "MoveForward",
+                "MoveLeft",
+                "MoveRight",
+                "MoveBack",
+                "TurnAround",
+                "TurnLeft",
+                "TurnRight",
+                "Wait",
+                "Dev_AnyEffect",
+                "TestBullets",
+                "TestSlash",
+                "TestSlam"
+            ],
+            "MaxSize": 2
         }
     }
 }

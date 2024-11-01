@@ -1,7 +1,6 @@
 class_name MainMenuSceneControl
 extends VBoxContainer
-
-@onready var root_node:MainRootNode = $".."
+var root_node:MainRootNode = MainRootNode.Instance
 @onready var start_button:TextureButton = $StartContainer/StartButton
 @onready var page_button:TextureButton = $PagesContainer/PagesButton
 @onready var character_button:TextureButton = $CharacterContainer/CharacterButton

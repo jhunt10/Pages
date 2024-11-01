@@ -15,7 +15,12 @@ func _ready() -> void:
 
 func get_target_options()->Array:
 	return get_key_to_input_mapping().keys()
-	
+
+
+func get_option_keys()->Array:
+	var out_list = ["Self"]
+	out_list.append_array(get_key_to_input_mapping().keys())
+	return out_list
 	
 func on_option_selected(index:int):
 	var key = options_button.get_current_option_text()

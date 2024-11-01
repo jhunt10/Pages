@@ -59,7 +59,6 @@ func _init(key:String, load_path:String, def:Dictionary, id:String, data:Diction
 
 func save_data()->Dictionary:
 	var data = super()
-	data['EquiptItems'] = equipment.save_data()
 	return data
 
 func die():

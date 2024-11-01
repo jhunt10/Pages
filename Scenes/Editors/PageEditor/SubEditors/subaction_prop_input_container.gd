@@ -37,8 +37,6 @@ func set_props(parent, prop_name:String, prop_type:BaseSubAction.SubActionPropTy
 	if prop_type == BaseSubAction.SubActionPropTypes.TargetKey:
 		option_button.visible = true
 		option_button.get_options_func = get_target_options
-		option_button.no_option_text = "Self"
-		option_button.allways_show_none = true
 		if prop_value is String and prop_value != '':
 			option_button.load_options(prop_value)
 		else:
