@@ -3,7 +3,7 @@ extends GDScript
 
 ### SubActions do not get global properties
 
-enum SubActionPropTypes {TargetKey, DamageKey, EffectKey, MissileKey, MoveValue, StringVal, IntVal, EnumVal}
+enum SubActionPropTypes {TargetParamKey, SetTargetKey, TargetKey, DamageKey, EffectKey, MissileKey, MoveValue, StringVal, IntVal, EnumVal}
 
 # Returns a Dictionary of {Property Name, Property Type} for what properties this subaction
 # 	exspects to find in it's _subaction_data (Mostly for Page Editor)
@@ -27,24 +27,42 @@ func do_thing(_parent_action:BaseAction, _subaction_data:Dictionary, _metadata:Q
 	printerr("BaseSubAction.do_thing: No Override.")
 	pass
 
-func find_targeted_actors(parent_action:BaseAction, target_key:String, metadata:QueExecutionData,
-				game_state:GameStateData, actor:BaseActor)->Array:
-	var target_params:TargetParameters = parent_action.TargetParams.get(target_key, null)
-	if not target_params:
-		printerr("BaseSubAction.find_targeted_actors: Failed to find target params with key: '%s' on action '%s'." % [target_key, parent_action.ActionKey])
-		return []
-		
-	if target_params.target_type == TargetParameters.TargetTypes.Self:
-		return [actor]
-	
+func _get_target_parameters(parent_action:BaseAction, actor:BaseActor, subaction_data:Dictionary)->TargetParameters:
+	var target_param_key = subaction_data.get("TargetParamKey", null)
+	if !target_param_key or target_param_key == '':
+		printerr("BaseSubAction._get_target_parameters: No TargetParamKey found in subaction_data.")
+		return null
+	var target_parms = TargetingHelper.get_target_params(target_param_key, actor, parent_action)
+	if !target_parms:
+		printerr("BaseSubAction._get_target_parameters: No TargetParam found in subaction_data.")
+		return null
+	return target_parms
+
+
+## Get actors that were effected by the selected target key
+func _find_target_effected_actors(parent_action:BaseAction, subaction_data:Dictionary, target_key:String, 
+					metadata:QueExecutionData, 	game_state:GameStateData, source_actor:BaseActor)->Array:
 	var turn_data = metadata.get_current_turn_data()
-	var target = turn_data.targets.get(target_key, null)
-	if not target:
-		print("No target with key '" + target_key + "' found.")
+	var target_param_key = turn_data.get_param_key_for_target(target_key)
+	if !target_param_key or target_param_key == '':
+		printerr("BaseSubAction._find_target_effected_actors: No TargetParamKey found in turn_data.")
+		return []
+	var target_params = TargetingHelper.get_target_params(target_param_key, source_actor, parent_action)
+	if !target_params:
+		printerr("BaseSubAction._find_target_effected_actors: No TargetParam found with key '%s' from TargetingHelper." % [target_param_key])
 		return []
 	
-	var actor_pos = game_state.MapState.get_actor_pos(actor)
-	var center_spot = null
+	# Shortcut self targeting
+	if target_params.target_type == TargetParameters.TargetTypes.Self:
+		return [source_actor]
+	
+	var target = turn_data.get_target(target_key)
+	if not target:
+		print("No target with key '%s found." % [target_key])
+		return []
+	
+	var source_actor_pos = game_state.MapState.get_actor_pos(source_actor)
+	var center_spot:MapPos = null
 	var out_list = []
 	
 	# Targeting an actor
@@ -54,7 +72,7 @@ func find_targeted_actors(parent_action:BaseAction, target_key:String, metadata:
 		var target_actor:BaseActor = game_state.get_actor(target)
 		if not target_actor:
 			printerr("BaseSubAction.find_targeted_actors: Failed to find target action '%s' for action '%s'." % [target, parent_action])
-		if target_params.is_valid_target_actor(actor, target_actor, game_state):
+		if target_params.is_valid_target_actor(source_actor, target_actor, game_state):
 			center_spot = game_state.MapState.get_actor_pos(target_actor)
 			out_list.append(target_actor)
 	
@@ -64,15 +82,15 @@ func find_targeted_actors(parent_action:BaseAction, target_key:String, metadata:
 			printerr("BaseSubAction.find_targeted_actors: Invalid target '%s' provided to Spot Target Type for action '%s'." % [target, parent_action])
 		center_spot = MapPos.Vector2i(target)
 		for target_actor in game_state.MapState.get_actors_at_pos(center_spot):
-			if target_params.is_valid_target_actor(actor, target_actor, game_state) and not out_list.has(target_actor):
+			if target_params.is_valid_target_actor(source_actor, target_actor, game_state) and not out_list.has(target_actor):
 				out_list.append(target_actor)
 	
 	# Area of effect
 	if center_spot and target_params.has_area_of_effect():
-		(center_spot as MapPos).dir = actor_pos.dir
+		center_spot.dir = source_actor_pos.dir
 		var area = target_params.get_area_of_effect(center_spot)
 		for spot in area:
 			for target_actor in game_state.MapState.get_actors_at_pos(spot):
-				if target_params.is_valid_target_actor(actor, target_actor, game_state) and not out_list.has(target_actor):
+				if target_params.is_valid_target_actor(source_actor, target_actor, game_state) and not out_list.has(target_actor):
 					out_list.append(target_actor)
 	return out_list

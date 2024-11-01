@@ -39,17 +39,20 @@ func set_value(val):
 		return
 	if val is String:
 		val = JSON.parse_string(val)
+	
 	if val is Array:
 		if val.size() >= 1:
 			x_input.set_value_no_signal(val[0])
 		if val.size() >= 2:
-			x_input.set_value_no_signal(val[1])
+			y_input.set_value_no_signal(val[1])
 		if val.size() == 3:
 			turn_input.select((val[2]+4)%4)
 		if val.size() == 4:
 			turn_input.select(int(val[3]+4)%4)
 	
-func get_val()->String:
+func get_val():
+	if disabled:
+		return null
 	return str([x_input.value, y_input.value, 0, turn_input.selected])
 	
 func lose_focus_if_has():

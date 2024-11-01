@@ -15,7 +15,7 @@ func do_thing(parent_action:BaseAction, subaction_data:Dictionary, que_exe_data:
 	
 	var turn_data = que_exe_data.get_current_turn_data()
 	var target_key = subaction_data['TargetKey']
-	var targets:Array = find_targeted_actors(parent_action, target_key, que_exe_data, game_state, actor)
+	var targets:Array = _find_targeted_actors(parent_action, _subaction_data, target_key, que_exe_data, game_state, actor)
 	
 	var effect_key = subaction_data['EffectKey']
 	var effect_data = {}

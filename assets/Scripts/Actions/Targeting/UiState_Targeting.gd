@@ -5,6 +5,7 @@ var target_display_key:String
 var target_params:TargetParameters
 var que_metadata:QueExecutionData
 var actor_pos:MapPos
+var setting_target_key:String
 
 var target_area_dislay_node:TargetAreaDisplayNode:
 	get: return CombatRootControl.Instance.MapController.target_area_display
@@ -14,6 +15,7 @@ func _get_debug_name()->String:
 	
 func _init(controler:UiStateController, args:Dictionary) -> void:
 	super(controler, args)
+	setting_target_key = args['SetTargetKey']
 	actor_pos = args['Position']
 	target_params = args['TargetParameters']
 	que_metadata = args['MetaData']
@@ -48,7 +50,7 @@ func select_target(coord:Vector2i):
 	if _logging: print("Setting Target: " + str(coord))
 	var turndata = que_metadata.get_current_turn_data()
 	if target_params.is_spot_target_type():
-		turndata.targets[target_params.target_key] = coord
+		turndata.set_target_key(setting_target_key, target_params.target_param_key, coord)
 	elif target_params.is_actor_target_type():
 		var actors = CombatRootControl.Instance.GameState.MapState.get_actors_at_pos(coord)
 		if actors.size() > 1:
@@ -56,5 +58,5 @@ func select_target(coord:Vector2i):
 			return
 		if actors.size() == 0:
 			return
-		turndata.targets[target_params.target_key] = actors[0].Id
+		turndata.set_target_key(setting_target_key, target_params.target_param_key, actors[0].Id)
 	CombatUiControl.ui_state_controller.set_ui_state(UiStateController.UiStates.ExecRound)

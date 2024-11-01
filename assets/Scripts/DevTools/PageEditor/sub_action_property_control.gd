@@ -27,7 +27,7 @@ func get_prop_name():
 	return label.text.trim_prefix('*').trim_suffix(": ")
 
 func get_prop_value():
-	if _prop_type == BaseSubAction.SubActionPropTypes.TargetKey:
+	if _prop_type == BaseSubAction.SubActionPropTypes.TargetParamKey:
 		return option_button.get_current_option_text()
 	elif _prop_type == BaseSubAction.SubActionPropTypes.EffectKey:
 		return option_button.get_current_option_text()
@@ -57,7 +57,7 @@ func set_prop(prop_name:String, prop_type:BaseSubAction.SubActionPropTypes, prop
 		label.text = "*" + prop_name + ": "
 	self._prop_type = prop_type
 	
-	if prop_type == BaseSubAction.SubActionPropTypes.TargetKey:
+	if prop_type == BaseSubAction.SubActionPropTypes.TargetParamKey:
 		option_button.visible = true
 		option_button.get_options_func = get_target_options
 		option_button.no_option_text = "Self"

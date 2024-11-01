@@ -11,7 +11,7 @@ func _ready() -> void:
 	pass # Replace with function body.
 
 func set_page(action:BaseAction):
-	page_image.texture = action.get_large_sprite()
+	page_image.texture = action.get_large_page_icon()
 	name_label.text = action.DisplayName
 	tags_label.text = "Tags: "
 	var first = true

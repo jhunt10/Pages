@@ -43,6 +43,11 @@ func start_combat():
 		'Pos': MapPos.new(5,2,0,0),
 		'IsPlayer': false
 	})
+	actors.append({
+		'ActorId': 'TestTarget_ID2',
+		'Pos': MapPos.new(6,2,0,0),
+		'IsPlayer': false
+	})
 	#actors.append({
 		#'ActorKey': 'TestTarget',
 		#'Pos': MapPos.new(6,2,0,0),

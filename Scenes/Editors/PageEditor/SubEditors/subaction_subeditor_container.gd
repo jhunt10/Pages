@@ -45,6 +45,8 @@ func load_data(object_key:String, data:Dictionary):
 	_loaded_data = data.duplicate(true)
 	for index in data.keys():
 		var subaction_datas_arr = data[index]
+		if subaction_datas_arr is Dictionary:
+			subaction_datas_arr = [subaction_datas_arr]
 		for subaction_data in subaction_datas_arr:
 			create_new_subaction_entry(index, subaction_data)
 	_order_entries()
@@ -52,6 +54,7 @@ func load_data(object_key:String, data:Dictionary):
 func create_new_subaction_entry(index, data):
 	var new_entry:SubActionEditEntryContainer = premade_subaction_edit_entry.duplicate()
 	subaction_entry_container.add_child(new_entry)
+	new_entry._parent_subaction_subeditor = self
 	new_entry.visible = true
 	new_entry.frame_spin_box.set_value_no_signal(int(index))
 	new_entry.on_frame_changed.connect(_order_entries)
@@ -88,6 +91,16 @@ func _order_entries():
 		for subaction_entry:SubActionEditEntryContainer in list:
 			if index == subaction_entry.frame_spin_box.value:
 				subaction_entry_container.add_child(subaction_entry)
+
+func get_target_key_options():
+	var out_list = []
+	for subaction_entry:SubActionEditEntryContainer in subaction_entry_container.get_children():
+		for prop:SubActionPropInputContainer in subaction_entry._prop_inputs.values():
+			if prop._prop_type == BaseSubAction.SubActionPropTypes.SetTargetKey:
+				var val = prop.get_prop_value()
+				if val and val != '':
+					out_list.append(val)
+	return out_list
 
 static func get_sub_actions_scripts():
 	var list = []

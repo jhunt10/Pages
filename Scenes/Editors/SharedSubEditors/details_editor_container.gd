@@ -74,8 +74,8 @@ func clear():
 
 func load_data(object_key:String, data:Dictionary):
 	super(object_key, data)
-	load_icon(small_icon_texture_rect, _loaded_data.get("SmallIcon", ""))
-	load_icon(large_icon_texture_rect, _loaded_data.get("LargeIcon", ""))
+	load_icon(small_icon_texture_rect, _loaded_data.get("SmallIcon", _loaded_data.get("SmallSprite", "")))
+	load_icon(large_icon_texture_rect, _loaded_data.get("LargeIcon", _loaded_data.get("LargeSprite", "")))
 
 func build_save_data()->Dictionary:
 	return super()

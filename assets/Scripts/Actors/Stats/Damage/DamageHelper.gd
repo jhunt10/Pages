@@ -58,8 +58,8 @@ static func _calc_damage_for_event(event:DamageEvent):
 	var defender = event.defender
 	
 	# Calc raw damage
-	var attack_stat_val = attacker.stats.base_damge_from_stat(event.attack_stat)
-	event.raw_damage = event.base_damage * ((attack_stat_val + STAT_BALENCE) / (STAT_BALENCE))
+	var attack_stat_val = attacker.stats.base_damge_from_stat(event._attack_stat_name)
+	event.raw_damage = 1 * ((attack_stat_val + STAT_BALENCE) / (STAT_BALENCE))
 	
 	# Get the defend's Armor or Ward
 	var defense_armor = 0

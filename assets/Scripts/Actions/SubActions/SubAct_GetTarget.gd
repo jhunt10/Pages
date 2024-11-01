@@ -4,7 +4,8 @@ extends BaseSubAction
 
 func get_required_props()->Dictionary:
 	return {
-		"TargetKey": BaseSubAction.SubActionPropTypes.TargetKey
+		"TargetParamKey": BaseSubAction.SubActionPropTypes.TargetParamKey,
+		"SetTargetKey": BaseSubAction.SubActionPropTypes.SetTargetKey
 	}
 ## Returns Tags that are automatically added to the parent Action's Tags
 func get_action_tags(_subaction_data:Dictionary)->Array:
@@ -13,30 +14,33 @@ func get_action_tags(_subaction_data:Dictionary)->Array:
 func do_thing(parent_action:BaseAction, subaction_data:Dictionary, metadata:QueExecutionData,
 				game_state:GameStateData, actor:BaseActor):
 	# Check if Target is already set
-	var target_key = subaction_data['TargetKey']
-	var turndata = metadata.get_current_turn_data()
-	if turndata.targets.has(target_key):
-		#print("Has Target: ", turndata.targets[target_key])
+	var setting_target_key = subaction_data['SetTargetKey']
+	var turn_data:TurnExecutionData = metadata.get_current_turn_data()
+	if turn_data.has_target(setting_target_key):
 		return
 	
-	var target_parms = TargetingHelper.get_target_params(target_key, actor, parent_action)
-	if target_parms.target_type == TargetParameters.TargetTypes.Self:
-		turndata.targets[target_key] = actor.Id
+	var target_params = _get_target_parameters(parent_action, actor, subaction_data)
+	if !target_params:
+		turn_data.turn_failed = true
+		return
+	
+	if target_params.target_type == TargetParameters.TargetTypes.Self:
+		turn_data.set_target_key(setting_target_key, target_params.target_param_key, actor.Id,)
 		return
 	
 	# Get Targeting Params
 	var actor_pos = game_state.MapState.get_actor_pos(actor)
 	
-	if target_parms.is_actor_target_type():
-		var potentials = _get_potential_actor_targets(game_state, actor, target_parms)
+	if target_params.is_actor_target_type():
+		var potentials = _get_potential_actor_targets(game_state, actor, target_params)
 		if potentials.size() == 0:
 			print("No valid Targets")
 			CombatRootControl.Instance.create_flash_text_on_actor(actor, "No Target", Color.ORANGE_RED)
-			turndata.turn_failed = true
+			turn_data.turn_failed = true
 			return
 			
 		if potentials.size() == 1:
-			turndata.targets[target_key] = potentials[0].Id
+			turn_data.set_target_key(setting_target_key, target_params.target_param_key, potentials[0].Id)
 			return
 	
 	CombatRootControl.Instance.QueController.pause_execution()
@@ -44,7 +48,8 @@ func do_thing(parent_action:BaseAction, subaction_data:Dictionary, metadata:QueE
 		"res://assets/Scripts/Actions/Targeting/UiState_Targeting.gd",
 	{
 		"Position": actor_pos,
-		"TargetParameters": target_parms,
+		"SetTargetKey": setting_target_key,
+		"TargetParameters": target_params,
 		"SourceAction": parent_action,
 		"MetaData": metadata,
 	})

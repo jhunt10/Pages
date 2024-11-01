@@ -5,16 +5,17 @@ class_name BaseAction
 const SUB_ACTIONS_PER_ACTION = 24
 
 func get_tagable_id(): return ActionKey
-func get_tags(): return Tags
+func get_tags(): return details.tags
 
 var _loaded_from_file:String
 var LoadPath:String:
 	get: return _loaded_from_file.get_base_dir()
 var ActionKey:String 
-var DisplayName:String
-var SnippetDesc:String
-var Description:String
-var Tags:Array = ActionData.get("Tags", [])
+#var DisplayName:String
+#var SnippetDesc:String
+#var Description:String
+#var Tags:Array = ActionData.get("Tags", [])
+var details:ObjectDetailsData
 
 #var TargetParams:Dictionary = {}
 var _target_params:Dictionary
@@ -31,23 +32,20 @@ var PreviewTargetKey:String
 var PreviewMoveOffset:MapPos
 var OnQueUiState:String
 
-var SmallSprite:String 
-var LargeSprite:String 
-
 func _init(file_load_path:String, args:Dictionary) -> void:
 	_loaded_from_file = file_load_path
 	ActionKey = args['ActionKey']
 	ActionData = args
 	
 	#TODO: Translations
-	var details = args.get("Details", args)
-	DisplayName = details['DisplayName']
-	SnippetDesc = details['SnippetDesc']
-	Description = details['Description']
-	Tags = details['Tags']
+	#var details = args.get("Details", args)
+	#DisplayName = details['DisplayName']
+	#SnippetDesc = details['SnippetDesc']
+	#Description = details['Description']
+	#Tags = details['Tags']
 	
-	SmallSprite = details.get('SmallSprite', '')
-	LargeSprite = details.get('LargeSprite', '')
+	details = ObjectDetailsData.new(LoadPath, args.get("Details", {}))
+	
 	if args.keys().has("OnQueUiState"):
 		OnQueUiState = args['OnQueUiState']
 	
@@ -75,23 +73,28 @@ func _init(file_load_path:String, args:Dictionary) -> void:
 		else:
 			printerr("Uknown SubActionType: " + str(subData))
 	
-	if args.has("PreviewTargetKey"):
-		PreviewTargetKey = args["PreviewTargetKey"]
-	if args.has("PreviewMoveOffset"):
-		var pre_move_arr = []
-		if args['PreviewMoveOffset'] is Array:
-			pre_move_arr = args["PreviewMoveOffset"]
-		if args['PreviewMoveOffset'] is String:
-			pre_move_arr = JSON.parse_string(args['PreviewMoveOffset'])
-		PreviewMoveOffset = MapPos.new(pre_move_arr[0],pre_move_arr[1],pre_move_arr[2],pre_move_arr[3])
+	if args.keys().has("Preview"):
+		var preview_data = args.get("Preview", {})
+		if preview_data.keys().has("PreviewTargetKey"):
+			PreviewTargetKey = preview_data["PreviewTargetKey"]
+		if preview_data.keys().has("PreviewMoveOffset"):
+			var pre_move_arr = []
+			if preview_data['PreviewMoveOffset'] is Array:
+				pre_move_arr = args["PreviewMoveOffset"]
+			if preview_data['PreviewMoveOffset'] is String:
+				pre_move_arr = JSON.parse_string(preview_data['PreviewMoveOffset'])
+			print("Set Preview MOve: %s" % [pre_move_arr])
+			PreviewMoveOffset = MapPos.new(pre_move_arr[0],pre_move_arr[1],pre_move_arr[2],pre_move_arr[3])
+		else:
+			printerr("No Preview Move")
+	else:
+		printerr("No Preview")
 
-func  get_small_sprite()->Texture2D:
-	var path = LoadPath.path_join(LargeSprite)
-	return ActionLibrary.get_action_icon(path)
+func  get_small_page_icon()->Texture2D:
+	return ActionLibrary.get_action_icon(details.small_icon_path)
 
-func  get_large_sprite()->Texture2D:
-	var path = LoadPath.path_join(SmallSprite)
-	return ActionLibrary.get_action_icon(path)
+func  get_large_page_icon()->Texture2D:
+	return ActionLibrary.get_action_icon(details.large_icon_path)
 
 func list_sub_action_datas()->Array:
 	var out_list = []
@@ -104,8 +107,8 @@ func list_sub_action_datas()->Array:
 func get_damage_data(subaction_data:Dictionary):
 	return DamageDatas.get(subaction_data.get("DamageKey", ""), subaction_data.get("DamageData", null))
 
-func get_targeting_params(target_key)->TargetParameters:
-	return _target_params.get(target_key, null)
+func get_targeting_params(target_param_key)->TargetParameters:
+	return _target_params.get(target_param_key, null)
 		
 	
 

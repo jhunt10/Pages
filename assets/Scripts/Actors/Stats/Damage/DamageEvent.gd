@@ -46,7 +46,7 @@ func _init(data:Dictionary, attacker:BaseActor, defender:BaseActor, source_tag_c
 	
 	_attack_power = data.get("AtkPow", 0)
 	_attack_variance = data.get("AtkVar", 0)
-	_weapon_bonus = attacker.equipment.get_weapon_attack_bonus(_attack_stat_name)
+	#_weapon_bonus = attacker.equipment.get_weapon_attack_bonus(_attack_stat_name)
 	
 	var damage_type = data.get("DamageType", null)
 	if damage_type is String: self.damage_type = DamageTypes.get(damage_type, 0)

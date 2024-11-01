@@ -3,7 +3,7 @@ extends BaseSubAction
 
 func get_required_props()->Dictionary:
 	return {
-		"TargetKey": BaseSubAction.SubActionPropTypes.TargetKey,
+		"TargetParam": BaseSubAction.SubActionPropTypes.TargetParamKey,
 		"DamageKey": BaseSubAction.SubActionPropTypes.DamageKey,
 		"MissileKey": BaseSubAction.SubActionPropTypes.MissileKey
 	}
@@ -14,15 +14,13 @@ func get_action_tags(_subaction_data:Dictionary)->Array:
 
 func do_thing(parent_action:BaseAction, subaction_data:Dictionary, metadata:QueExecutionData,
 				game_state:GameStateData, actor:BaseActor):
+	var target_param_key = subaction_data.get('TargetParam', '')
+	var target_params = _get_target_parameters(parent_action, actor, target_param_key)
 	var target_key = subaction_data['TargetKey']
-	var target_params = parent_action.TargetParams.get(target_key, null)
-	if !target_params:
-		printerr("SubAct_SpawnMissile.get_target_spt_of_missile: No TargetParams found for : ", target_key)
-		return
 	var damage_key = subaction_data['DamageKey']
 	var missile_key = subaction_data['MissileKey']
-	var turndata = metadata.get_current_turn_data()
-	if !turndata.targets.has(target_key):
+	var turn_data:TurnExecutionData = metadata.get_current_turn_data()
+	if !turn_data.has_target(target_key):
 		printerr("SubAct_SpawnMissile.get_target_spt_of_missile: No TargetData found for : ", target_key)
 		return
 	if !parent_action.DamageDatas.has(damage_key):

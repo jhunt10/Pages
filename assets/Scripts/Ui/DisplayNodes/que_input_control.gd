@@ -46,7 +46,7 @@ func set_actor(actor:BaseActor):
 		if action == null:
 			new_button.get_child(0).texture = load(ActionLibrary.NO_ICON_SPRITE)
 		else:
-			new_button.get_child(0).texture = action.get_large_sprite()
+			new_button.get_child(0).texture = action.get_large_page_icon()
 			new_button.mouse_entered.connect(_mouse_entered_page_button.bind(index, action_key))
 			new_button.mouse_exited.connect(_mouse_exited_action_button.bind(index, action_key))
 			new_button.pressed.connect(_page_button_pressed.bind(index, action_key))

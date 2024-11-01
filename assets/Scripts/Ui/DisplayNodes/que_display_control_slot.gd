@@ -27,7 +27,7 @@ func set_is_gap(val:bool):
 func set_action(action:BaseAction):
 	if action and not is_gap:
 		icon.visible = true
-		icon.texture = action.get_small_sprite()
+		icon.texture = action.get_small_page_icon()
 	else:
 		icon.visible = false
 		icon.texture = null

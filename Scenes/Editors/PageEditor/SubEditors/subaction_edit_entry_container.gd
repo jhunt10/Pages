@@ -10,6 +10,7 @@ signal on_frame_changed
 @onready var premade_prop_input:SubActionPropInputContainer = $InnerContainer/SubActionPropertyEditorEntry
 @onready var props_container:VBoxContainer = $InnerContainer/PropsContainer
 
+var _parent_subaction_subeditor:SubActionSubEditorControl
 var _prop_inputs:Dictionary = {}
 var _enum_prop_options:Dictionary = {}
 var _full_script_path:String

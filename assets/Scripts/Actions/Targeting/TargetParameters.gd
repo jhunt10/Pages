@@ -2,15 +2,15 @@ class_name TargetParameters
 
 enum TargetTypes {Self, Spot, OpenSpot, Actor, Ally, Enemy}
 
-var target_key:String
+var target_param_key:String
 var target_type:TargetTypes
 var line_of_sight:bool
 var target_area:AreaMatrix
 var effect_area:AreaMatrix
 
-func _init(target_key:String, args:Dictionary) -> void:
+func _init(target_param_key:String, args:Dictionary) -> void:
 	# Assign Target Key
-	self.target_key = target_key
+	self.target_param_key = target_param_key
 	
 	# Get Target Type
 	if args['TargetType'] is int:

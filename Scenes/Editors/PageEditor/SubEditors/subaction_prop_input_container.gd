@@ -8,6 +8,9 @@ extends HBoxContainer
 @onready var spin_box:SpinBox = $PropInputsContainer/SpinBox
 
 var _parent_subaction_edit_entry:SubActionEditEntryContainer
+var _parent_subaction_editor:SubActionSubEditorControl:
+	get: return _parent_subaction_edit_entry._parent_subaction_subeditor
+	
 var _prop_name:String
 var _prop_type:BaseSubAction.SubActionPropTypes
 
@@ -34,16 +37,20 @@ func set_props(parent, prop_name:String, prop_type:BaseSubAction.SubActionPropTy
 	self._prop_name = prop_name
 	self._prop_type = prop_type
 	
-	if prop_type == BaseSubAction.SubActionPropTypes.TargetKey:
+	if prop_type == BaseSubAction.SubActionPropTypes.TargetParamKey:
 		option_button.visible = true
-		option_button.get_options_func = get_target_options
+		option_button.get_options_func = get_target_param_options
 		if prop_value is String and prop_value != '':
 			option_button.load_options(prop_value)
 		else:
 			option_button.load_options()
-	elif _prop_type == BaseSubAction.SubActionPropTypes.EnumVal:
+	elif prop_type == BaseSubAction.SubActionPropTypes.SetTargetKey:
+		line_edit.visible = true
+		if prop_value:
+			line_edit.text = str(prop_value)
+	elif _prop_type == BaseSubAction.SubActionPropTypes.TargetKey:
 		option_button.visible = true
-		option_button.get_options_func = get_enum_options
+		option_button.get_options_func = get_target_key_option
 		if prop_value is String and prop_value != '':
 			option_button.load_options(prop_value)
 	elif _prop_type == BaseSubAction.SubActionPropTypes.EffectKey:
@@ -59,6 +66,11 @@ func set_props(parent, prop_name:String, prop_type:BaseSubAction.SubActionPropTy
 	elif prop_type == BaseSubAction.SubActionPropTypes.MissileKey:
 		option_button.visible = true
 		option_button.get_options_func = get_missile_options
+		if prop_value is String and prop_value != '':
+			option_button.load_options(prop_value)
+	elif _prop_type == BaseSubAction.SubActionPropTypes.EnumVal:
+		option_button.visible = true
+		option_button.get_options_func = get_enum_options
 		if prop_value is String and prop_value != '':
 			option_button.load_options(prop_value)
 	elif prop_type == BaseSubAction.SubActionPropTypes.MoveValue:
@@ -79,6 +91,10 @@ func set_props(parent, prop_name:String, prop_type:BaseSubAction.SubActionPropTy
 func get_prop_value():
 	if _prop_type == BaseSubAction.SubActionPropTypes.EnumVal:
 		return option_button.get_current_option_text()
+	if _prop_type == BaseSubAction.SubActionPropTypes.TargetParamKey:
+		return option_button.get_current_option_text()
+	elif _prop_type == BaseSubAction.SubActionPropTypes.SetTargetKey:
+		return line_edit.text
 	if _prop_type == BaseSubAction.SubActionPropTypes.TargetKey:
 		return option_button.get_current_option_text()
 	elif _prop_type == BaseSubAction.SubActionPropTypes.EffectKey:
@@ -98,7 +114,11 @@ func get_prop_value():
 func clear():
 	if _prop_type == BaseSubAction.SubActionPropTypes.EnumVal:
 		option_button.load_options("")
-	if _prop_type == BaseSubAction.SubActionPropTypes.TargetKey:
+	if _prop_type == BaseSubAction.SubActionPropTypes.TargetParamKey:
+		option_button.load_options("")
+	elif _prop_type == BaseSubAction.SubActionPropTypes.SetTargetKey:
+		line_edit.text = ""
+	elif _prop_type == BaseSubAction.SubActionPropTypes.TargetKey:
 		option_button.load_options("")
 	elif _prop_type == BaseSubAction.SubActionPropTypes.EffectKey:
 		option_button.load_options("")
@@ -117,11 +137,14 @@ func clear():
 func on_entry_key_change(editor_key:String, old_key:String, new_key:String):
 	if ((_prop_type == BaseSubAction.SubActionPropTypes.DamageKey and editor_key == "DamageDatas") or
 		(_prop_type == BaseSubAction.SubActionPropTypes.MissileKey and editor_key == "MissileDatas") or
-		(_prop_type == BaseSubAction.SubActionPropTypes.TargetKey and editor_key == "TargetParams")):
+		(_prop_type == BaseSubAction.SubActionPropTypes.TargetParamKey and editor_key == "TargetParams")):
 		if option_button.get_current_option_text() == old_key:
 			option_button.load_options(new_key)
 
-func get_target_options():
+func get_target_key_option()->Array:
+	return _parent_subaction_editor.get_target_key_options()
+
+func get_target_param_options():
 	return PageEditorControl.Instance.get_subeditor_option_keys("TargetParams")
 
 func get_damage_options():
