@@ -3,7 +3,8 @@ extends BaseSubAction
 
 func get_required_props()->Dictionary:
 	return {
-		"TargetParam": BaseSubAction.SubActionPropTypes.TargetParamKey,
+		"TargetParamKey": BaseSubAction.SubActionPropTypes.TargetParamKey,
+		"TargetKey": BaseSubAction.SubActionPropTypes.TargetKey,
 		"DamageKey": BaseSubAction.SubActionPropTypes.DamageKey,
 		"MissileKey": BaseSubAction.SubActionPropTypes.MissileKey
 	}
@@ -14,12 +15,14 @@ func get_action_tags(_subaction_data:Dictionary)->Array:
 
 func do_thing(parent_action:BaseAction, subaction_data:Dictionary, metadata:QueExecutionData,
 				game_state:GameStateData, actor:BaseActor):
-	var target_param_key = subaction_data.get('TargetParam', '')
-	var target_params = _get_target_parameters(parent_action, actor, target_param_key)
+	var target_params = _get_target_parameters(parent_action, actor, subaction_data)
 	var target_key = subaction_data['TargetKey']
 	var damage_key = subaction_data['DamageKey']
 	var missile_key = subaction_data['MissileKey']
 	var turn_data:TurnExecutionData = metadata.get_current_turn_data()
+	if !target_params:
+		printerr("SubAct_SpawnMissile.get_target_spt_of_missile: No TargetParams found for: %s " % [subaction_data.get("TargetParamKey")])
+		return
 	if !turn_data.has_target(target_key):
 		printerr("SubAct_SpawnMissile.get_target_spt_of_missile: No TargetData found for : ", target_key)
 		return
@@ -49,11 +52,11 @@ func do_thing(parent_action:BaseAction, subaction_data:Dictionary, metadata:QueE
 func get_target_spot_of_missile(target_key:String, metadata:QueExecutionData, game_state:GameStateData)->MapPos:
 	var turn_data = metadata.get_current_turn_data()
 	
-	if !turn_data.targets.has(target_key):
+	if !turn_data.has_target(target_key):
 		print("No target with key '" + target_key + "' found.")
 		return null
 		
-	var target = turn_data.targets[target_key]
+	var target = turn_data.get_target(target_key)
 	if target is Vector2i:
 		return MapPos.Vector2i(target)
 	if target is String:

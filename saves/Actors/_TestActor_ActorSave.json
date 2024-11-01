@@ -17,8 +17,6 @@
         "QueData": {
             "ActionList": [
                 "MoveForward",
-                "MoveLeft",
-                "MoveRight",
                 "MoveBack",
                 "TurnAround",
                 "TurnLeft",
@@ -27,7 +25,9 @@
                 "Dev_AnyEffect",
                 "TestBullets",
                 "TestSlash",
-                "TestSlam"
+                "TestSlam",
+                "TestFireBall",
+                "TestArrow"
             ],
             "MaxSize": 4
         }
@@ -49,18 +49,6 @@
         "ObjectKey": "TestTarget",
         "QueData": {
             "ActionList": [
-                "MoveForward",
-                "MoveLeft",
-                "MoveRight",
-                "MoveBack",
-                "TurnAround",
-                "TurnLeft",
-                "TurnRight",
-                "Wait",
-                "Dev_AnyEffect",
-                "TestBullets",
-                "TestSlash",
-                "TestSlam"
             ],
             "MaxSize": 2
         }
@@ -82,18 +70,6 @@
         "ObjectKey": "TestTarget",
         "QueData": {
             "ActionList": [
-                "MoveForward",
-                "MoveLeft",
-                "MoveRight",
-                "MoveBack",
-                "TurnAround",
-                "TurnLeft",
-                "TurnRight",
-                "Wait",
-                "Dev_AnyEffect",
-                "TestBullets",
-                "TestSlash",
-                "TestSlam"
             ],
             "MaxSize": 6
         }
