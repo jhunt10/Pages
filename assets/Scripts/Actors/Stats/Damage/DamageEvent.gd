@@ -17,7 +17,7 @@ var _attack_stat_name:String
 var _base_attack_stat:int
 var _weapon_bonus:int
 var _attack_power:int
-var _attack_variance:int
+var _damage_variance:int
 
 var damage_type:DamageTypes
 var defense_type:DefenseType
@@ -42,11 +42,10 @@ func _init(data:Dictionary, attacker:BaseActor, defender:BaseActor, source_tag_c
 		printerr("DamageEvent: No AtkStat given.")
 		is_successful = false
 		return
-	_base_attack_stat = attacker.stats.get_stat(_attack_stat_name)
+	_base_attack_stat = attacker.stats.base_damge_from_stat(_attack_stat_name)
 	
-	_attack_power = data.get("AtkPow", 0)
-	_attack_variance = data.get("AtkVar", 0)
-	#_weapon_bonus = attacker.equipment.get_weapon_attack_bonus(_attack_stat_name)
+	_attack_power = data.get("AtkPower", 0)
+	_damage_variance = data.get("DamageVarient", 0)
 	
 	var damage_type = data.get("DamageType", null)
 	if damage_type is String: self.damage_type = DamageTypes.get(damage_type, 0)

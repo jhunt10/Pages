@@ -1,36 +1,39 @@
 class_name DamageHelper
 
+const LOGGING = true
+
 const STAT_BALENCE:int = 100
 const ARMOR_STRETCH:float = 30
 const ARMOR_SCALE:float = 80
 
 static func handle_damage(attacker:BaseActor, defender:BaseActor, damage_data:Dictionary, 
 							source_tag_chain:SourceTagChain, game_state:GameStateData):
-	var base_damage = damage_data.get("BaseDamage", null)
-	if base_damage == null:
-		printerr("DamageHelper.handle_damage: No 'BaseDamage' found.")
-		return
+	#var attack_stat = damage_data.get("AtkStat", null)
+	#if attack_stat == null:
+		#printerr("DamageHelper.handle_damage: No 'AtkStat' found.")
+		#return
+	#
+	#var base_damage = attacker.stats.base_damge_from_stat(attack_stat)
+	#if base_damage == null:
+		#printerr("DamageHelper.handle_damage: No BaseDamage found for stat '%s'." % [attack_stat])
+		#return
+	#
+		#
+	#var damage_type = damage_data.get("DamageType", null)
+	#if damage_type == null:
+		#printerr("DamageHelper.handle_damage: No 'DamageType' found.")
+		#return
+		#
+	#var defense_type = damage_data.get("DefenseType", DamageEvent.DefenseType.None)
+	#if defense_type == null:
+		#printerr("DamageHelper.handle_damage: No 'DefenseType' found.")
+		#return
 	
-	var attack_stat = damage_data.get("AtkStat", null)
-	if base_damage == null:
-		printerr("DamageHelper.handle_damage: No 'BaseDamage' found.")
-		return
-		
-	var damage_type = damage_data.get("DamageType", null)
-	if damage_type == null:
-		printerr("DamageHelper.handle_damage: No 'DamageType' found.")
-		return
-		
-	var defense_type = damage_data.get("DefenseType", DamageEvent.DefenseType.None)
-	if defense_type == null:
-		printerr("DamageHelper.handle_damage: No 'DefenseType' found.")
-		return
-		
 	var damage_event = DamageEvent.new(damage_data, attacker, defender,source_tag_chain, game_state)
 	
 	var damage = DamageHelper._calc_damage_for_event(damage_event)
 	# TODO: Acccuracy and chance to apply effects
-	defender.stats.apply_damage(damage, damage_type, attacker)
+	defender.stats.apply_damage(damage_event, attacker)
 	
 	var damage_effect = damage_data.get("DamageEffect", null)
 	if damage_effect:
@@ -43,7 +46,8 @@ static func _calc_damage_for_event(event:DamageEvent):
 	
 	# Calc raw damage
 	var attack_stat_val = attacker.stats.base_damge_from_stat(event._attack_stat_name)
-	event.raw_damage = 1 * ((attack_stat_val + STAT_BALENCE) / (STAT_BALENCE))
+	var attack_power = event._attack_power + randf_range(-event._damage_variance, event._damage_variance)
+	event.raw_damage = attack_stat_val * (attack_power/100.0)
 	
 	# Get the defend's Armor or Ward
 	var defense_armor = 0
@@ -81,7 +85,8 @@ static func _calc_damage_for_event(event:DamageEvent):
 	for mod:BaseDamageMod in defender_damage_mods:
 		if mod.is_valid_in_case(true, attack_tags, defend_tags, event):
 			event.damage_after_defend_mods = mod.apply_mod(event.damage_after_defend_mods, event)
-	
+	if LOGGING:
+		print("DamageHelper: raw_damage: %s | after_armor: %s | " % [event.raw_damage, event.damage_after_armor])
 	event.final_damage = event.damage_after_defend_mods
 	return event.final_damage
 

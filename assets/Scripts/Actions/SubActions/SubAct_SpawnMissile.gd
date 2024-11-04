@@ -57,13 +57,16 @@ func get_target_spot_of_missile(target_key:String, metadata:QueExecutionData, ga
 		return null
 		
 	var target = turn_data.get_target(target_key)
-	if target is Vector2i:
+	if target is MapPos:
+		return target
+	elif target is Vector2i:
 		return MapPos.Vector2i(target)
-	if target is String:
+	elif target is String:
 		var actor = game_state.get_actor(target, true)
 		if not actor:
 			printerr("SubAct_SpawnMissile.get_target_spt_of_missile: No actor found with id '%s'." % [target])
 			return null
 		return game_state.MapState.get_actor_pos(actor)
-	printerr("SubAct_SpawnMissile.get_target_spt_of_missile: Unknown target type: " + str(target))
-	return null
+	else:
+		printerr("SubAct_SpawnMissile.get_target_spt_of_missile: Unknown target type: " + str(target))
+		return null

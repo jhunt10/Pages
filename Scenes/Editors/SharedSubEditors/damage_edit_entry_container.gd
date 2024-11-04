@@ -31,7 +31,7 @@ func _ready() -> void:
 
 func get_key_to_input_mapping()->Dictionary:
 	return {
-		"BaseDamage": $InnerContainer/PowerStatContainer/PowerSpinBox,
+		"AtkPower": $InnerContainer/PowerStatContainer/PowerSpinBox,
 		"AtkStat": $InnerContainer/StatContainer/StatOptionButton,
 		"DamageType": $InnerContainer/TypeSDefenseContainer/TypeOptionButton,
 		"DefenseType": $InnerContainer/TypeSDefenseContainer/DefenseOptionButton,

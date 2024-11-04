@@ -60,6 +60,8 @@ func on_option_selectec(key, value):
 
 func _build_option_buttons(option_data:OnQueOptionsData):
 	var button_count = 0
+	for child in options_container.get_children():
+		child.queue_free()
 	_current_option_data = option_data
 	title_lable.text = option_data.title_text
 	for option in _current_option_data.options_arr:

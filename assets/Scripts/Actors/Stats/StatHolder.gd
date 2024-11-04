@@ -101,8 +101,8 @@ func _calc_cache_stats():
 	if LOGGING: print("--- Done Caching Stats")
 	_stats_dirty = false
 
-func apply_damage(value:int, _damage_type:String, _source):
-	_bar_stats[HealthKey] = _bar_stats[HealthKey] - value
+func apply_damage(damage_event:DamageEvent, _source):
+	_bar_stats[HealthKey] = _bar_stats[HealthKey] - damage_event.final_damage
 	if current_health <= 0:
 		CombatRootControl.Instance.kill_actor(_actor)
 

@@ -50,7 +50,59 @@
 			"Mass":100,
 			"Speed":5,
 			"Strength": 50,
-			"Armor": 200
+			"Armor": 50
+		},
+		"QueData":{
+			"MaxSize": 2,
+			"ActionList": ["TotemMissile"]
+		}
+	},
+	{
+		"ActorKey": "TestArmoredTarget",
+		"Details":{
+			"DisplayName": "Test Target",
+			"SnippetDesc": "A target made for testing.",
+			"Description": "Description.",
+			"Tags": ["AnActorTag", "Dummy"],
+			"LargeIcon":"TestTargetSprite.png",
+			"SmallIcon":"TestTargetSprite.png"
+		},
+		"Sprite": "TestArmoredTargetSprite.png",
+		"CorpseSprite": "TargetCorpse.png",
+		"AutoQueing": false,
+		"LeavesCorpse": true,
+		"Stats":{
+			"Max:Health":100,
+			"Mass":100,
+			"Speed":5,
+			"Strength": 50,
+			"Armor": 50
+		},
+		"QueData":{
+			"MaxSize": 2,
+			"ActionList": ["TotemMissile"]
+		}
+	},
+	{
+		"ActorKey": "TestWardedTarget",
+		"Details":{
+			"DisplayName": "Test Target",
+			"SnippetDesc": "A target made for testing.",
+			"Description": "Description.",
+			"Tags": ["AnActorTag", "Dummy"],
+			"LargeIcon":"TestTargetSprite.png",
+			"SmallIcon":"TestTargetSprite.png"
+		},
+		"Sprite": "TestWardedTargetSprite.png",
+		"CorpseSprite": "TargetCorpse.png",
+		"AutoQueing": false,
+		"LeavesCorpse": true,
+		"Stats":{
+			"Max:Health":100,
+			"Mass":100,
+			"Speed":5,
+			"Strength": 50,
+			"Ward": 50
 		},
 		"QueData":{
 			"MaxSize": 2,
