@@ -1,5 +1,13 @@
 class_name TargetParameters
 
+static var SelfTargetParams:TargetParameters = TargetParameters.new(
+	'Self',
+	{
+		"TargetType": "Self",
+		"LineOfSight": false,
+	}
+)
+
 enum TargetTypes {Self, FullArea, Spot, OpenSpot, Actor, Ally, Enemy}
 
 var target_param_key:String

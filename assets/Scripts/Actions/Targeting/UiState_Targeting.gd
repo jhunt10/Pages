@@ -45,7 +45,7 @@ func handle_input(event):
 		
 		
 	# Mouse in viewport coordinates.
-	if event is InputEventMouseButton:
+	if event is InputEventMouseButton and not (event as InputEventMouseButton).pressed:
 		var spot = CombatRootControl.Instance.GridCursor.current_spot
 		select_target(spot)
 

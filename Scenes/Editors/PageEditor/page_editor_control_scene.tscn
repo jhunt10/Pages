@@ -680,6 +680,7 @@ text = "Large:"
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 size_flags_horizontal = 3
+text_overrun_behavior = 3
 fit_to_longest_item = false
 script = ExtResource("5_xop6x")
 
@@ -694,6 +695,7 @@ text = "Small:"
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 size_flags_horizontal = 3
+text_overrun_behavior = 3
 fit_to_longest_item = false
 script = ExtResource("5_xop6x")
 
@@ -1126,6 +1128,7 @@ text = "Scales with Stat:"
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 size_flags_horizontal = 3
+text_overrun_behavior = 3
 fit_to_longest_item = false
 script = ExtResource("5_xop6x")
 
@@ -1140,6 +1143,7 @@ text = "Type:"
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 size_flags_horizontal = 3
+text_overrun_behavior = 3
 fit_to_longest_item = false
 script = ExtResource("5_xop6x")
 
@@ -1151,6 +1155,7 @@ text = "Defense:"
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 size_flags_horizontal = 3
+text_overrun_behavior = 3
 fit_to_longest_item = false
 script = ExtResource("5_xop6x")
 
@@ -1165,6 +1170,8 @@ text = "Damage VFX: "
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 size_flags_horizontal = 3
+text_overrun_behavior = 3
+fit_to_longest_item = false
 script = ExtResource("5_xop6x")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="InnerContainer/MainContainer/RightContainer/Damage/InnerContainer"]

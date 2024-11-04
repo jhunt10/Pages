@@ -110,6 +110,8 @@ func get_targeting_params(target_param_key, actor:BaseActor)->TargetParameters:
 			printerr("No Weapon")
 			return null
 		return (weapon as BaseWeaponEquipment).target_parmas
+	if target_param_key == "Self":
+		return TargetParameters.SelfTargetParams
 	var params = _target_params.get(target_param_key, null)
 	if !params:
 		printerr("No Params")
