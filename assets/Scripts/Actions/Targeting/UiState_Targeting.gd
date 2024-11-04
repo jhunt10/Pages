@@ -53,7 +53,8 @@ func select_target(coord:Vector2i):
 	if _logging: print("Setting Target: " + str(coord))
 	var turndata = que_metadata.get_current_turn_data()
 	if target_params.is_spot_target_type():
-		turndata.set_target_key(setting_target_key, target_params.target_param_key, coord)
+		var map_spot = MapPos.new(coord.x, coord.y, actor_pos.z, actor_pos.dir)
+		turndata.set_target_key(setting_target_key, target_params.target_param_key, map_spot)
 	elif target_params.is_actor_target_type():
 		var actors = CombatRootControl.Instance.GameState.MapState.get_actors_at_pos(coord)
 		if actors.size() > 1:

@@ -49,6 +49,7 @@ func _sync_que():
 func set_actor(actor:BaseActor):
 	_actor = actor
 	actor.Que.action_que_changed.connect(_sync_que)
+	actor.equipment.equipment_changed.connect(_sync_que)
 	if portrait:
 		portrait.texture = actor.get_portrait_sprite()
 		_build_slots()
@@ -83,7 +84,7 @@ func _sync_icons():
 		while slot and slot.is_gap:
 			index += 1
 			slot = _slots[index]
-		slot.set_action(action)
+		slot.set_action(_actor, action)
 		#print("Set SLot Page: %s | %s " % [index, action.ActionKey])
 		index += 1
 		
@@ -91,7 +92,7 @@ func _sync_icons():
 		if n < _slots.size():
 			#print("Set SLot Page: %s | NULL " % [index])
 			var slot:QueMiniSlotIcon = _slots[n]
-			slot.set_action(null)
+			slot.set_action(_actor, null)
 
 func _on_frame_start():
 	# set bar position

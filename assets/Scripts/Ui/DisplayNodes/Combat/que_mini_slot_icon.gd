@@ -23,12 +23,13 @@ func set_is_gap(val:bool):
 	is_gap = val
 	gap_icon.visible = is_gap
 	if is_gap:
-		set_action(null)
+		page_icon.visible = false
+		page_icon.texture = null
 		
-func set_action(action:BaseAction):
+func set_action(actor:BaseActor, action:BaseAction):
 	if action and not is_gap:
 		page_icon.visible = true
-		page_icon.texture = action.get_small_page_icon()
+		page_icon.texture = action.get_small_page_icon(actor)
 	else:
 		page_icon.visible = false
 		page_icon.texture = null

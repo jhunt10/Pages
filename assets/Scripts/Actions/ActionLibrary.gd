@@ -47,35 +47,18 @@ const TILE_WIDTH = 64
 const TILE_HIGHT = 56
 const ActionDir = "res://data/Actions"
 
-
-#func load_pages():
-	#if loaded:
-		#return
-	#print("### Loading Actions")
-	#_cached_icon_sprites[NO_ICON_SPRITE] = get_action_icon(NO_ICON_SPRITE)
-	#for file in search_for_action_files():
-		#print('# Checking File: ' + file)
-		#var actions_dicts = parse_actions_from_file(file)
-		#for act_key in actions_dicts.keys():
-			#_action_list[act_key] = actions_dicts[act_key]
-			#print("# -Loaded Action: " + act_key)
-	#print("### Done Loading Actions")
-	#loaded = true
-	
-#func reload_pages():
-	#_action_list.clear()
-	#_cached_icon_sprites.clear()
-	#loaded = false
-	#load_pages()
-
-static func get_action_icon(file_path:String):
-	if _cached_icon_sprites.keys().has(file_path):
-		return _cached_icon_sprites[file_path]
-	if FileAccess.file_exists(file_path):
+static func get_action_icon(file_path:String)->Texture2D:
+	if !_cached_icon_sprites.keys().has(file_path):
 		var sprite = load(file_path)
-		_cached_icon_sprites[file_path] = sprite
-		return sprite
-	return _cached_icon_sprites[NO_ICON_SPRITE]
+		if sprite:
+			_cached_icon_sprites[file_path] = sprite
+		elif file_path == NO_ICON_SPRITE:
+			printerr("Failed to find NO_ICON_SPRITE at: %s" % [file_path])
+			_cached_icon_sprites[file_path] = null
+		else:
+			printerr("Failed to find action_icon: %s" % [file_path])
+			_cached_icon_sprites[file_path] = get_action(NO_ICON_SPRITE)
+	return _cached_icon_sprites[file_path]
 
 static func get_sub_action_script(script_path)->BaseSubAction:
 	if _cached_subaction_scripts.keys().has(script_path):
@@ -87,26 +70,3 @@ static func get_sub_action_script(script_path)->BaseSubAction:
 	var sub_action = script.new()
 	_cached_subaction_scripts[script_path] = sub_action
 	return sub_action
-
-static func search_for_action_files()->Array:
-	var list = []
-	_rec_search_for_actions(ActionDir, list)
-	return list
-	
-static func _rec_search_for_actions(path:String, list:Array, limit:int=1000):
-	var dir = DirAccess.open(path)
-	if limit == 0:
-		printerr("ActionLibrary._rec_search_for_actions: Search limit reached!")
-		return
-	if dir:
-		dir.list_dir_begin()
-		var file_name:String = dir.get_next()
-		while file_name != "":
-			var full_path = path+"/"+file_name
-			if dir.current_is_dir():
-				_rec_search_for_actions(full_path, list, limit-1)
-			elif file_name.ends_with(".json"):
-				list.append(full_path)
-			file_name = dir.get_next()
-	else:
-		print("An error occurred when trying to access the path: %s" % [path])

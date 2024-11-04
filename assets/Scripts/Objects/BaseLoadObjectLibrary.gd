@@ -135,7 +135,13 @@ func init_load():
 	loaded = true
 
 
-
+func reload():
+	loaded = false
+	_object_defs.clear()
+	_defs_to_load_paths.clear()
+	_static_objects.clear()
+	_loaded_objects.clear()
+	init_load()
 
 
 func load_objects():

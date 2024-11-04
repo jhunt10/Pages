@@ -23,3 +23,7 @@ func get_keys_to_subeditor_mapping()->Dictionary:
 	dict['SubActions'] = subactions_subedit_container
 	dict['Preview'] = preview_subedit_container
 	return dict
+
+func on_exit_menu():
+	ActionLibrary.Instance.reload()
+	super()

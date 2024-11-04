@@ -59,6 +59,7 @@ func _sync_que():
 func set_actor(actor:BaseActor):
 	_actor = actor
 	actor.Que.action_que_changed.connect(_sync_que)
+	actor.equipment.equipment_changed.connect(_sync_que)
 	if portrait:
 		portrait.texture = actor.get_portrait_sprite()
 		_build_slots()
@@ -94,13 +95,13 @@ func _sync_icons():
 	var index = 0
 	for action:BaseAction in _actor.Que.list_qued_actions():
 		var slot:QueDisplaySlot = _real_slots[index]
-		slot.set_action(action)
+		slot.set_action(_actor, action)
 		index += 1
 		
 	for n in range(index, _actor.Que.que_size):
 		if n < _real_slots.size():
 			var slot:QueDisplaySlot = _real_slots[n]
-			slot.set_action(null)
+			slot.set_action(_actor, null)
 	
 func _slot_pressed(index:int):
 	_actor.Que.delete_at_index(index)

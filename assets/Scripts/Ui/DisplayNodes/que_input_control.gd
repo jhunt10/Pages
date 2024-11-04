@@ -33,11 +33,17 @@ func _process(_delta: float) -> void:
 
 func set_actor(actor:BaseActor):
 	_actor = actor
+	_actor.equipment.equipment_changed.connect(_build_buttons)
+	_build_buttons()
+	
+
+func _build_buttons():
 	if _buttons.size() > 0:
 		for but in _buttons:
 			but.queue_free()
+		_buttons.clear()
 	var index = 0
-	for action_key in actor.get_action_list():
+	for action_key in _actor.get_action_list():
 		var new_button:TextureButton = page_button_prefab.duplicate()
 		page_button_prefab.get_parent().add_child(new_button)
 		new_button.visible = true
@@ -46,7 +52,7 @@ func set_actor(actor:BaseActor):
 		if action == null:
 			new_button.get_child(0).texture = load(ActionLibrary.NO_ICON_SPRITE)
 		else:
-			new_button.get_child(0).texture = action.get_large_page_icon()
+			new_button.get_child(0).texture = action.get_large_page_icon(_actor)
 			new_button.mouse_entered.connect(_mouse_entered_page_button.bind(index, action_key))
 			new_button.mouse_exited.connect(_mouse_exited_action_button.bind(index, action_key))
 			new_button.pressed.connect(_page_button_pressed.bind(index, action_key))
@@ -63,10 +69,10 @@ func _mouse_entered_page_button(_index, key_name):
 	if CombatRootControl.Instance.QueController.execution_state != ActionQueController.ActionStates.Waiting:
 		return
 	var action:BaseAction = MainRootNode.action_library.get_action(key_name)
-	if action.PreviewTargetKey:
-		var target_parms = TargetingHelper.get_target_params(action.PreviewTargetKey, _actor, action)
+	if action.has_preview_target():
+		var target_parms = action.get_preview_target_params(_actor)
 		if !target_parms:
-			printerr("QueInputControl._mouse_entered_page_button: %s Failed to find TargetParams with key: '%s'." % [action.ActionKey, action.PreviewTargetKey])
+			printerr("QueInputControl._mouse_entered_page_button: %s Failed to find preview TargetParams ." % [action.ActionKey])
 		else:
 			var preview_pos = _actor.Que.get_movement_preview_pos()
 			_target_display_key = CombatRootControl.Instance.MapController.target_area_display \

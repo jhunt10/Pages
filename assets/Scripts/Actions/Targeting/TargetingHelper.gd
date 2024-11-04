@@ -2,14 +2,6 @@ class_name TargetingHelper
 
 enum LOS_VALUE {Blocked, Cover, Open}
 
-static func get_target_params(key:String, actor:BaseActor, action:BaseAction)->TargetParameters:
-	if key == "Weapon":
-		var weapon = actor.equipment.get_primary_weapon()
-		if !weapon:
-			return null
-		return (weapon as BaseWeaponEquipment).target_parmas
-	return action.get_targeting_params(key)
-
 ## Returns all actors effected by selected target
 static func get_targeted_actors(target_params:TargetParameters, target, source_actor:BaseActor, game_state:GameStateData)->Array:
 	if not (target is String or target is MapPos):

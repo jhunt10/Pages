@@ -18,7 +18,7 @@ func get_target_options()->Array:
 
 
 func get_option_keys()->Array:
-	var out_list = ["Self"]
+	var out_list = ["Self", "Weapon"]
 	out_list.append_array(get_key_to_input_mapping().keys())
 	return out_list
 	

@@ -7,7 +7,7 @@ var target_parmas:TargetParameters
 
 func _init(key:String, def_load_path:String, def:Dictionary, id:String='', data:Dictionary={}) -> void:
 	super(key, def_load_path, def, id, data)
-	target_parmas = TargetParameters.new("TargetParams", get_load_val("TargetParams", {}))
+	target_parmas = TargetParameters.new("Weapon", get_load_val("TargetParams", {}))
 
 func get_equipment_slot_type()->String:
 	return "Weapon"

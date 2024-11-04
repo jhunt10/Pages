@@ -32,7 +32,7 @@ func _get_target_parameters(parent_action:BaseAction, actor:BaseActor, subaction
 	if !target_param_key or target_param_key == '':
 		printerr("BaseSubAction._get_target_parameters: No TargetParamKey found in subaction_data.")
 		return null
-	var target_parms = TargetingHelper.get_target_params(target_param_key, actor, parent_action)
+	var target_parms = parent_action.get_targeting_params(target_param_key, actor)
 	if !target_parms:
 		printerr("BaseSubAction._get_target_parameters: No TargetParam found in subaction_data.")
 		return null
@@ -47,7 +47,7 @@ func _find_target_effected_actors(parent_action:BaseAction, subaction_data:Dicti
 	if !target_param_key or target_param_key == '':
 		printerr("BaseSubAction._find_target_effected_actors: No TargetParamKey found in turn_data.")
 		return []
-	var target_params = TargetingHelper.get_target_params(target_param_key, source_actor, parent_action)
+	var target_params = parent_action.get_targeting_params(target_param_key, source_actor)
 	if !target_params:
 		printerr("BaseSubAction._find_target_effected_actors: No TargetParam found with key '%s' from TargetingHelper." % [target_param_key])
 		return []

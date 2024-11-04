@@ -1,5 +1,7 @@
 class_name EquipmentHolder
 
+signal equipment_changed
+
 var _actor:BaseActor
 
 var _slot_equipment_types:Array:
@@ -86,6 +88,7 @@ func clear_slot(index:int):
 			if _slot_equipment_ids[i]  == weapon.Id:
 				_slot_equipment_ids[i] = null
 	_actor.stats.dirty_stats()
+	equipment_changed.emit()
 
 func equip_item_to_slot(index:int, equipment:BaseEquipmentItem):
 	if index < 0 or index >= _slot_equipment_types.size():
@@ -137,6 +140,7 @@ func equip_item_to_slot(index:int, equipment:BaseEquipmentItem):
 	# Set equipment's actor if not already set
 	if not equipment.is_equipped_to_actor(_actor): 
 		equipment.set_equipt_actor(_actor, index)
+	equipment_changed.emit()
 
 func _clear_offhand_weapons():
 	print("Cear offhand")
@@ -180,6 +184,15 @@ func try_equip_item(equipment:BaseEquipmentItem, replace:bool=false)->bool:
 
 func get_primary_weapon()->BaseWeaponEquipment:
 	var main_hand_slot_index = _get_first_or_open_slot_of_type("MainHand")
+	if main_hand_slot_index < 0:
+		return null
+	var item = get_equipment_in_slot(main_hand_slot_index)
+	if item is BaseWeaponEquipment:
+		return item as BaseWeaponEquipment
+	return null
+
+func get_offhand_weapon()->BaseWeaponEquipment:
+	var main_hand_slot_index = _get_first_or_open_slot_of_type("OffHand")
 	if main_hand_slot_index < 0:
 		return null
 	var item = get_equipment_in_slot(main_hand_slot_index)

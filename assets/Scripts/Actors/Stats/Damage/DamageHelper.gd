@@ -4,22 +4,6 @@ const STAT_BALENCE:int = 100
 const ARMOR_STRETCH:float = 30
 const ARMOR_SCALE:float = 80
 
-
-#static func get_target_params(key:String, actor:BaseActor, action:BaseAction, effect:BaseEffect):
-	#if key == "Weapon":
-		#var weapon = actor.equipment.get_item_in_slot(BaseEquipmentItem.EquipmentSlots.Weapon)
-		#if !weapon:
-			#return null
-		#return (weapon as BaseWeaponEquipment).get_damage_data()
-	#if action:
-		#var parms = action.get_damage_data(key)
-		#if parms: return parms
-	#if effect:
-		#var parms = effect.get_tar(key)
-		#if parms: return parms
-	#return 
-
-
 static func handle_damage(attacker:BaseActor, defender:BaseActor, damage_data:Dictionary, 
 							source_tag_chain:SourceTagChain, game_state:GameStateData):
 	var base_damage = damage_data.get("BaseDamage", null)

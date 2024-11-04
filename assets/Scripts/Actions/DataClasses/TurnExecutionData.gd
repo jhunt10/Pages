@@ -16,8 +16,11 @@ func _init(on_que:Dictionary) -> void:
 	on_que_data = on_que
 
 func set_target_key(target_key:String, from_target_param_key:String, value):
-	_targets[target_key] = value
-	_targets_from_params[target_key] = from_target_param_key
+	if value is String or value is MapPos:
+		_targets[target_key] = value
+		_targets_from_params[target_key] = from_target_param_key
+	else:
+		printerr("TurnExecutionData.set_target_key: Invalid object '%s' for key '%s'." % [value, target_key])
 
 func has_target(target_key:String)->bool:
 	return _targets.keys().has(target_key)
