@@ -54,7 +54,7 @@ func set_target_area(target_area:Dictionary, effect_area:Array, show_area_effect
 			covered_list.append(spot)
 		if target_area[spot] == TargetingHelper.LOS_VALUE.Blocked:
 			blocked_list.append(spot)
-	new_area.set_cells_terrain_path(open_list,0,0)
+	new_area.set_cells_terrain_connect(open_list,0,0)
 	new_area.set_cells_terrain_connect(covered_list,0,1)
 	
 	var id = str(ResourceUID.create_id())
