@@ -19,8 +19,6 @@ func get_object_script_path(object_def:Dictionary)->String:
 		return script
 	return "res://assets/Scripts/Items/BaseItem.gd"
 
-const _default_corpse_texture_path = "res://assets/Sprites/Items/DefaultCorpse.png"
-
 func _init() -> void:
 	if Instance != null:
 		printerr("Multiple ItemLibrarys created.")

@@ -52,45 +52,10 @@ func _find_target_effected_actors(parent_action:BaseAction, subaction_data:Dicti
 		printerr("BaseSubAction._find_target_effected_actors: No TargetParam found with key '%s' from TargetingHelper." % [target_param_key])
 		return []
 	
-	# Shortcut self targeting
-	if target_params.target_type == TargetParameters.TargetTypes.Self:
-		return [source_actor]
-	
 	var target = turn_data.get_target(target_key)
 	if not target:
 		print("No target with key '%s found." % [target_key])
 		return []
-	
-	var source_actor_pos = game_state.MapState.get_actor_pos(source_actor)
-	var center_spot:MapPos = null
-	var out_list = []
-	
-	# Targeting an actor
-	if target_params.is_actor_target_type():
-		if target is not String:
-			printerr("BaseSubAction.find_targeted_actors: Invalid target '%s' provided to Actor Target Type for action '%s'." % [target, parent_action])
-		var target_actor:BaseActor = game_state.get_actor(target)
-		if not target_actor:
-			printerr("BaseSubAction.find_targeted_actors: Failed to find target action '%s' for action '%s'." % [target, parent_action])
-		if target_params.is_valid_target_actor(source_actor, target_actor, game_state):
-			center_spot = game_state.MapState.get_actor_pos(target_actor)
-			out_list.append(target_actor)
-	
-	# Targeting a spot
-	if target_params.is_spot_target_type():
-		if target is not Vector2i:
-			printerr("BaseSubAction.find_targeted_actors: Invalid target '%s' provided to Spot Target Type for action '%s'." % [target, parent_action])
-		center_spot = MapPos.Vector2i(target)
-		for target_actor in game_state.MapState.get_actors_at_pos(center_spot):
-			if target_params.is_valid_target_actor(source_actor, target_actor, game_state) and not out_list.has(target_actor):
-				out_list.append(target_actor)
-	
-	# Area of effect
-	if center_spot and target_params.has_area_of_effect():
-		center_spot.dir = source_actor_pos.dir
-		var area = target_params.get_area_of_effect(center_spot)
-		for spot in area:
-			for target_actor in game_state.MapState.get_actors_at_pos(spot):
-				if target_params.is_valid_target_actor(source_actor, target_actor, game_state) and not out_list.has(target_actor):
-					out_list.append(target_actor)
-	return out_list
+		
+	var targets = TargetingHelper.get_targeted_actors(target_params, target, source_actor, game_state)
+	return targets

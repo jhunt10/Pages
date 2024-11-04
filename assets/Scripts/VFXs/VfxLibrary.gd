@@ -68,7 +68,7 @@ static func _rec_search_for_vfx(path:String, list:Array, limit:int=1000):
 				list.append(full_path)
 			file_name = dir.get_next()
 	else:
-		print("An error occurred when trying to access the path.")
+		print("An error occurred when trying to access the path: %s" % [path])
 
 static func parse_vfx_datas_from_file(path:String)->Dictionary:
 	var file = FileAccess.open(path, FileAccess.READ)

@@ -10,6 +10,57 @@ static func get_target_params(key:String, actor:BaseActor, action:BaseAction)->T
 		return (weapon as BaseWeaponEquipment).target_parmas
 	return action.get_targeting_params(key)
 
+## Returns all actors effected by selected target
+static func get_targeted_actors(target_params:TargetParameters, target, source_actor:BaseActor, game_state:GameStateData)->Array:
+	if not (target is String or target is MapPos):
+		printerr("TargetingHelper.get_targeted_actors: Provided target '%s' is neither String nor MapPos." % [target])
+		return []
+	
+	var area_of_effect = null
+	var out_list = []
+	
+	# Targeting an actor
+	if target_params.is_actor_target_type():
+		if target is not String:
+			printerr("TargetingHelper.get_targeted_actors: TargetParams exspect Actor but provided target '%s' is not String." % [target])
+			return []
+		var target_actor:BaseActor = game_state.get_actor(target)
+		if not target_actor:
+			printerr("TargetingHelper.get_targeted_actors: Failed to find target Actor with id '%s'." % [target])
+			return []
+		if target_params.is_valid_target_actor(source_actor, target_actor, game_state):
+			if target_params.has_area_of_effect():
+				area_of_effect = target_params.get_area_of_effect(game_state.MapState.get_actor_pos(target_actor))
+			else:
+				out_list.append(target_actor)
+	
+	# Targeting a spot
+	if target_params.is_spot_target_type():
+		if target is not MapPos:
+			printerr("TargetingHelper.get_targeted_actors: TargetParams exspect Actor but provided target '%s' is not MapPos." % [target])
+			return []
+		if target_params.has_area_of_effect():
+			area_of_effect = target_params.get_area_of_effect(target)
+		else:
+			for target_actor in game_state.MapState.get_actors_at_pos(target):
+				if target_params.is_valid_target_actor(source_actor, target_actor, game_state) and not out_list.has(target_actor):
+					out_list.append(target_actor)
+	
+	if target_params.target_type == TargetParameters.TargetTypes.FullArea:
+		area_of_effect = target_params.get_area_of_effect(game_state.MapState.get_actor_pos(source_actor))
+		
+	
+	# Area of effect
+	if area_of_effect:
+		for spot in area_of_effect:
+			for target_actor:BaseActor in game_state.MapState.get_actors_at_pos(spot):
+				if out_list.has(target_actor):
+					continue
+				if target_params.is_actor_effected_by_aoe(source_actor, target_actor, game_state):
+					out_list.append(target_actor)
+	return out_list
+	
+
 static func trace_los(from_point, to_point, _map_state):
 	var los_dict = {}
 	var line = safe_calc_line(from_point, to_point,  false, false, true)

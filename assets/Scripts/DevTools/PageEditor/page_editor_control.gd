@@ -80,7 +80,7 @@ func load_action_options_from_file(file_path):
 	if selected_file == file_path:
 		return
 	selected_file = file_path
-	action_datas = ActionLibrary.parse_action_datas_from_file(file_path)
+	#action_datas = ActionLibrary.parse_action_datas_from_file(file_path)
 	page_option_button.load_options()
 	#print("Loaded %s Page Options from: %s" % [page_option_button.item_count, file_path])
 	
@@ -126,7 +126,7 @@ func save_data(force_overide:bool=false):
 	var file_exists = false
 	if FileAccess.file_exists(file_name):
 		file_exists = true
-		existing_data = ActionLibrary.parse_action_datas_from_file(file_name)
+		#existing_data = ActionLibrary.parse_action_datas_from_file(file_name)
 	var page_exists = existing_data.keys().has(new_page_data['ActionKey'])
 	if not force_overide and file_exists:
 		popup_message_box.show_pop_up("File exists. Override?", save_data.bind(true))

@@ -12,6 +12,8 @@ func get_def_file_sufix()->String:
 	return "_Object.json"
 func get_data_file_sufix()->String:
 	return "_Object.json"
+func is_object_static(object_def:Dictionary)->bool:
+	return object_def.get("IsStatic", false)
 func get_object_script_path(object_def:Dictionary)->String:
 	return object_def.get("_ObjectScript", "")
 
@@ -34,6 +36,8 @@ func get_object_def(key:String):
 	return {}
 
 func get_object(id:String)->BaseLoadObject:
+	if _static_objects.keys().has(id):
+		return _static_objects[id]
 	return _loaded_objects.get(id, null)
 
 # Get static instance of static object
@@ -166,26 +170,25 @@ func _load_object_def_file(file_path:String):
 func _load_static_objects():
 	for object_key in _object_defs.keys():
 		var object_def:Dictionary = _object_defs[object_key]
-		if object_def.get('IsStatic', false):
+		if is_object_static(object_def):
 			var script_path = get_object_script_path(object_def)
 			var script = load(script_path)
 			if !script:
 				printerr("%sLibrary._load_static_objects: %s Failed to find object script '%s'. " % [get_object_name(), object_key, script_path])
 				continue
-			if not script is BaseLoadObject:
-				printerr("%sLibrary._load_static_objects: Object %s loaded script '%s' " + 
-					"is not of type 'BaseLoadObject'." % [get_object_name(), object_key, script_path]) 
-				continue
-			if not (script as BaseLoadObject).is_static():
-				printerr("%sLibrary._load_static_objects: Object %s is_static method returned false." % [get_object_name(), object_key]) 
-				continue
+			#if not script is BaseLoadObject:
+				#printerr("%sLibrary._load_static_objects: Object %s loaded script '%s' is not of type 'BaseLoadObject'." % [get_object_name(), object_key, script_path]) 
+				#continue
+			#if not (script as BaseLoadObject).is_static():
+				#printerr("%sLibrary._load_static_objects: Object %s is_static method returned false." % [get_object_name(), object_key]) 
+				#continue
 			var load_path = _defs_to_load_paths[object_key]
-			var new_object:BaseLoadObject = script.new(object_key, load_path, object_def)
+			var new_object:BaseLoadObject = script.new(object_key, load_path, object_def, object_key)
 			if _static_objects.keys().has(object_key):
 				printerr("%sLibrary._load_static_objects: Object %s already loaded." % [get_object_name(), object_key]) 
 				continue
 			_static_objects[object_key] = new_object
-			if LOGGING: print("# - Loaded Static Object: %s" % [object_key])
+			if LOGGING: print("# - Loaded Static Object: %s" % [new_object._id])
 
 ## Parse json save file and load to _loaded_objects
 func _load_object_file(file_path:String):

@@ -1,68 +1,47 @@
 class_name BaseAction
+extends BaseLoadObject
 
 #const TargetParameters = preload("res://assets/Scripts/Targeting/TargetParameters.gd")
 
 const SUB_ACTIONS_PER_ACTION = 24
 
-func get_tagable_id(): return ActionKey
-func get_tags(): return details.tags
+var ActionKey:String:
+	get: return self._key
 
-var _loaded_from_file:String
-var LoadPath:String:
-	get: return _loaded_from_file.get_base_dir()
-var ActionKey:String 
-#var DisplayName:String
-#var SnippetDesc:String
-#var Description:String
-#var Tags:Array = ActionData.get("Tags", [])
 var details:ObjectDetailsData
 
-#var TargetParams:Dictionary = {}
-var _target_params:Dictionary
 var SubActionData:Array = []
-var ActionData:Dictionary = {}
+
 var CostData:Dictionary:
-		get: return ActionData.get('CostData', {})
+		get: return get_load_val('CostData', {})
 var DamageDatas:Dictionary:
-		get: return ActionData.get('DamageDatas', {})
+		get: return get_load_val('DamageDatas', {})
 var MissileDatas:Dictionary:
-		get: return ActionData.get('MissileDatas', {})
+		get: return get_load_val('MissileDatas', {})
 
-var PreviewTargetKey:String
-var PreviewMoveOffset:MapPos
-var OnQueUiState:String
+var OnQueUiState:String:
+	get: return get_load_val("OnQueUiState")
+var _target_params:Dictionary
 
-func _init(file_load_path:String, args:Dictionary) -> void:
-	_loaded_from_file = file_load_path
-	ActionKey = args['ActionKey']
-	ActionData = args
+func _init(key:String, def_load_path:String, def:Dictionary, id:String='', data:Dictionary={}) -> void:
+	super(key, def_load_path, def, id, data)
 	
-	#TODO: Translations
-	#var details = args.get("Details", args)
-	#DisplayName = details['DisplayName']
-	#SnippetDesc = details['SnippetDesc']
-	#Description = details['Description']
-	#Tags = details['Tags']
-	
-	details = ObjectDetailsData.new(LoadPath, args.get("Details", {}))
-	
-	if args.keys().has("OnQueUiState"):
-		OnQueUiState = args['OnQueUiState']
+	details = ObjectDetailsData.new(self._def_load_path, self._def.get("Details", {}))
 	
 	# Load Targeting Parameters
-	if args.has('TargetParams'):
-		if args['TargetParams'] is Array:
-			for tparm in args['TargetParams']:
+	if def.has('TargetParams'):
+		if def['TargetParams'] is Array:
+			for tparm in def['TargetParams']:
 				_target_params[tparm['TargetKey']] = TargetParameters.new(tparm['TargetKey'], tparm)
-		if args['TargetParams'] is Dictionary:
-			for tparm_key in args['TargetParams'].keys():
-				_target_params[tparm_key] = TargetParameters.new(tparm_key, args['TargetParams'][tparm_key])
+		if def['TargetParams'] is Dictionary:
+			for tparm_key in def['TargetParams'].keys():
+				_target_params[tparm_key] = TargetParameters.new(tparm_key, def['TargetParams'][tparm_key])
 		
 	# Load SubAction Data, missing indexes are left null
 	# The ActionQueController will create the subaction on demand
-	SubActionData = []	
+	SubActionData = []
 	for index in range(SUB_ACTIONS_PER_ACTION):
-		var subData = args.get('SubActions', {}).get(str(index), null)
+		var subData = def.get('SubActions', {}).get(str(index), null)
 		if not subData:
 			SubActionData.append(null)
 		elif subData is Dictionary:
@@ -73,23 +52,51 @@ func _init(file_load_path:String, args:Dictionary) -> void:
 		else:
 			printerr("Uknown SubActionType: " + str(subData))
 	
-	if args.keys().has("Preview"):
-		var preview_data = args.get("Preview", {})
+	if def.keys().has("Preview"):
+		var preview_data = def.get("Preview", {})
 		if preview_data.keys().has("PreviewTargetKey"):
 			PreviewTargetKey = preview_data["PreviewTargetKey"]
 		if preview_data.keys().has("PreviewMoveOffset"):
 			var pre_move_arr = []
 			if preview_data['PreviewMoveOffset'] is Array:
-				pre_move_arr = args["PreviewMoveOffset"]
+				pre_move_arr = def["PreviewMoveOffset"]
 			if preview_data['PreviewMoveOffset'] is String:
 				pre_move_arr = JSON.parse_string(preview_data['PreviewMoveOffset'])
-			print("Set Preview MOve: %s" % [pre_move_arr])
 			PreviewMoveOffset = MapPos.new(pre_move_arr[0],pre_move_arr[1],pre_move_arr[2],pre_move_arr[3])
-		else:
-			printerr("No Preview Move")
-	else:
-		printerr("No Preview")
 
+
+func get_tagable_id(): return ActionKey
+func get_tags(): return details.tags
+
+var _loaded_from_file:String
+var LoadPath:String:
+	get: return _loaded_from_file.get_base_dir()
+#var DisplayName:String
+#var SnippetDesc:String
+#var Description:String
+#var Tags:Array = ActionData.get("Tags", [])
+
+#var TargetParams:Dictionary = {}
+#var SubActionData:Array = []
+#var ActionData:Dictionary = {}
+
+var PreviewTargetKey:String
+var PreviewMoveOffset:MapPos
+
+#func _init(file_load_path:String, def:Dictionary) -> void:
+	#_loaded_from_file = file_load_path
+	#ActionKey = def['ActionKey']
+	#ActionData = def
+	
+	#TODO: Translations
+	#var details = def.get("Details", def)
+	#DisplayName = details['DisplayName']
+	#SnippetDesc = details['SnippetDesc']
+	#Description = details['Description']
+	#Tags = details['Tags']
+	
+	#details = ObjectDetailsData.new(LoadPath, def.get("Details", {}))
+	
 func  get_small_page_icon()->Texture2D:
 	return ActionLibrary.get_action_icon(details.small_icon_path)
 

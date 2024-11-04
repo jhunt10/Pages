@@ -2,6 +2,7 @@ class_name MapControllerNode
 extends Node2D
 
 @onready var actor_tile_map:TileMapLayer = $ActorTileMap
+@onready var terrain_tile_map:TileMapLayer = $TerrainTileMap
 @onready var target_area_display:TargetAreaDisplayNode = $TargetAreaDisplayNode
 
 static var game_state:GameStateData:
@@ -33,13 +34,13 @@ func _build_terrain():
 			
 	for spot:MapSpot in map_state.list_map_spots():
 		if spot.terrain_index == 0:
-			actor_tile_map.set_cell(Vector2i(spot.X,spot.Y), 0, Vector2i(10,1))
+			terrain_tile_map.set_cell(Vector2i(spot.X,spot.Y), 0, Vector2i(10,1))
 		else:
 			if not terrain_arrys.keys().has(spot.terrain_index):
 				terrain_arrys[spot.terrain_index] = []
 			terrain_arrys[spot.terrain_index].append(Vector2i(spot.X, spot.Y))
 	for terrain_index in terrain_arrys.keys():
-		actor_tile_map.set_cells_terrain_connect(terrain_arrys[terrain_index],0,0)
+		terrain_tile_map.set_cells_terrain_connect(terrain_arrys[terrain_index],0,0)
 	
 	
 func add_missile_node(missile:BaseMissile, node:MissileNode):

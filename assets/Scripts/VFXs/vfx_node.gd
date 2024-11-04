@@ -57,6 +57,7 @@ func set_vfx_data(data:VfxData, extra_data:Dictionary):
 			sprite.texture = load(sprite_path)
 			sprite.hframes = _data.sprite_sheet_width
 			sprite.vframes = _data.sprite_sheet_hight
+			sprite.scale = Vector2(_data.scale,_data.scale)
 		else:
 			printerr("VfxNode.set_vfx_data: Failed to find file '%s'." % [sprite_path])
 			_bad_sprite = true

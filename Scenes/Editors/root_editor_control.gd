@@ -2,7 +2,7 @@
 class_name RootEditorControler
 extends BackPatchContainer
 
-const BASE_DATA_DIR = "res://data"
+const BASE_DATA_DIR = "res://defs"
 
 static var Instance:RootEditorControler
 
@@ -226,4 +226,4 @@ static func _rec_search_for_files(path:String, sufix:String, list:Array, recursi
 				list.append(full_path)
 			file_name = dir.get_next()
 	else:
-		print("An error occurred when trying to access the path.")
+		print("An error occurred when trying to access the path: %s" % [path])

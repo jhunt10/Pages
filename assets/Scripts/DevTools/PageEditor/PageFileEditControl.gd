@@ -70,7 +70,7 @@ func get_load_path():
 func get_full_fill_path():
 	return file_path_input.text.path_join(file_name_input.text)
 
-func on_load():
+func on_load_editor():
 	var full_file_path = file_path_input.text.path_join(file_name_input.text)
 	if FileAccess.file_exists(full_file_path):
 		var actions = ActionLibrary.parse_actions_from_file(full_file_path)
