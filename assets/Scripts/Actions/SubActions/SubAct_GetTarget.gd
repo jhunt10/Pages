@@ -24,7 +24,7 @@ func do_thing(parent_action:BaseAction, subaction_data:Dictionary, metadata:QueE
 		turn_data.turn_failed = true
 		return
 	
-	if target_params.target_type == TargetParameters.TargetTypes.Self:
+	if target_params.target_type == TargetParameters.TargetTypes.Self or target_params.target_type == TargetParameters.TargetTypes.FullArea:
 		turn_data.set_target_key(setting_target_key, target_params.target_param_key, actor.Id,)
 		return
 	

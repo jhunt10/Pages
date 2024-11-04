@@ -34,7 +34,7 @@ func set_actor(act:BaseActor):
 	CombatRootControl.Instance.QueController.start_of_round.connect(_on_start_round)
 	CombatRootControl.Instance.QueController.end_of_frame.connect(_on_frame_or_turn_end)
 	CombatRootControl.Instance.QueController.end_of_turn.connect(_on_frame_or_turn_end)
-	CombatRootControl.Instance.QueController.end_of_round.connect(_on_end_round)
+	CombatRootControl.Instance.QueController.after_round.connect(_on_end_round)
 	_build_stat_bars()
 	_sync_values()
 	

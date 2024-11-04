@@ -47,7 +47,7 @@ static func get_targeted_actors(target_params:TargetParameters, target, source_a
 					out_list.append(target_actor)
 	
 	if target_params.target_type == TargetParameters.TargetTypes.FullArea:
-		area_of_effect = target_params.get_area_of_effect(game_state.MapState.get_actor_pos(source_actor))
+		area_of_effect = target_params.target_area.to_map_spots(game_state.MapState.get_actor_pos(source_actor))
 		
 	
 	# Area of effect

@@ -24,9 +24,11 @@ signal end_of_frame_with_state(game_state:GameStateData)
 # End of current Turn
 signal end_of_turn()
 signal end_of_turn_with_state(game_state:GameStateData)
-# End of current Round
+# End of current Round (before ques and execution_data have been cleared) 
 signal end_of_round()
 signal end_of_round_with_state(game_state:GameStateData)
+# When the round has ended and all data has been cleaned up
+signal after_round()
 
 # Emitted any time the que switches to excuting action
 signal execution_active
@@ -85,6 +87,7 @@ func _end_round():
 	end_of_round_with_state.emit(CombatRootControl.Instance.GameState)
 	execution_suspended.emit()
 	_clear_ques()
+	after_round.emit()
 	
 	
 func start_or_resume_execution():

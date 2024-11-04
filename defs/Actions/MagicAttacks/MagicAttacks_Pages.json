@@ -1,1 +1,55 @@
-[{"ActionKey":"IceMagic","CostData":{"Mana":10},"DamageDatas":{"IceDamage":{"AtkStat":"Intelligence","BaseDamage":100,"DamageEffect":"SmallIce_DamageEffect","DamageType":"Cold","DamageVarient":0.1,"DefenseType":"Ward"}},"Details":{"Description":"Deal Ice damage to all creature in cone","DisplayName":"Ice Cone","LargeIcon":"Ice.png","SmallIcon":"Ice.png","SnippetDesc":"Attack with cone of Ice ","Tags":[]},"MissileDatas":{},"Preview":{"PreviewTargetKey":"ConeArea"},"SubActions":{"0":[{"SetTargetKey":"ConeTarget","SubActionScript":"res://assets/Scripts/Actions/SubActions/SubAct_GetTarget.gd","TargetParamKey":"ConeArea"},{"DamageKey":"IceDamage","SubActionScript":"res://assets/Scripts/Actions/SubActions/SubAct_ApplyDamage.gd","TargetKey":"ConeTarget"}]},"TargetParams":{"ConeArea":{"EffectArea":"[]","EffectsAllies":true,"EffectsEnemies":true,"LineOfSight":true,"TargetArea":"[[0,1],[1,2],[0,2],[-1,2],[2,3],[1,3],[0,3],[-1,3],[-2,3],[3,4],[2,4],[1,4],[0,4],[-1,4],[-2,4],[-3,4],[4,5],[3,5],[2,5],[1,5],[0,5],[-1,5],[-2,5],[-3,5],[-4,5]]","TargetType":"FullArea"}}}]
+[
+    {
+        "ActionKey": "IceMagic",
+        "CostData": {
+            "Mana": 10
+        },
+        "DamageDatas": {
+            "IceDamage": {
+                "AtkStat": "Intelligence",
+                "BaseDamage": 100,
+                "DamageEffect": "SmallIce_DamageEffect",
+                "DamageType": "Cold",
+                "DamageVarient": 0.1,
+                "DefenseType": "Ward"
+            }
+        },
+        "Details": {
+            "Description": "Deal Ice damage to all creature in cone",
+            "DisplayName": "Ice Cone",
+            "LargeIcon": "Ice.png",
+            "SmallIcon": "Ice.png",
+            "SnippetDesc": "Attack with cone of Ice ",
+            "Tags": []
+        },
+        "MissileDatas": {},
+        "Preview": {
+            "PreviewTargetKey": "ConeArea"
+        },
+        "SubActions": {
+            "0": [
+                {
+                    "SetTargetKey": "ConeTarget",
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_GetTarget.gd",
+                    "TargetParamKey": "ConeArea"
+                },
+                {
+                    "DamageKey": "IceDamage",
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_ApplyDamage.gd",
+                    "TargetKey": "ConeTarget"
+                }
+            ]
+        },
+        "TargetParams": {
+            "ConeArea": {
+                "EffectArea": "[]",
+                "IncludeSelfInAoe": false,
+                "IncludeAlliesInAoe": true,
+                "IncludeEnemiesInAoe": true,
+                "LineOfSight": true,
+                "TargetArea": "[[0,1],[1,2],[0,2],[-1,2],[2,3],[1,3],[0,3],[-1,3],[-2,3],[3,4],[2,4],[1,4],[0,4],[-1,4],[-2,4],[-3,4],[4,5],[3,5],[2,5],[1,5],[0,5],[-1,5],[-2,5],[-3,5],[-4,5]]",
+                "TargetType": "FullArea"
+            }
+        }
+    }
+]
