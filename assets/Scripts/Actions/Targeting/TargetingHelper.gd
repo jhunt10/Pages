@@ -1,6 +1,6 @@
 class_name TargetingHelper
 
-enum LOS_VALUE {Blocked, Cover, Open}
+enum LOS_VALUE {Invalid, Blocked, Cover, Open}
 
 ## Returns all actors effected by selected target
 static func get_targeted_actors(target_params:TargetParameters, target, source_actor:BaseActor, game_state:GameStateData)->Array:
@@ -51,7 +51,75 @@ static func get_targeted_actors(target_params:TargetParameters, target, source_a
 				if target_params.is_actor_effected_by_aoe(source_actor, target_actor, game_state):
 					out_list.append(target_actor)
 	return out_list
+
+static func get_selectable_target_spots(target_params:TargetParameters, actor:BaseActor, game_state:GameStateData, exclude_targets:Array=[])->Array:
+	var potentials = _get_potential_coor_to_targets(target_params, actor, game_state, exclude_targets)
+	return potentials.keys()
 	
+static func get_potential_target_actors(target_params:TargetParameters, actor:BaseActor, game_state:GameStateData, exclude_targets:Array=[])->Array:
+	if not target_params.is_actor_target_type():
+		return []
+	var potentials = _get_potential_coor_to_targets(target_params, actor, game_state, exclude_targets)
+	var targets = dicarry_to_values(potentials)
+	return targets
+
+## Returns a Dictionary<Vector21, Array> of spots within target_area mapped to potential targets in that spot.
+static func _get_potential_coor_to_targets(target_params:TargetParameters, actor:BaseActor, game_state:GameStateData, exclude_targets:Array=[])->Dictionary:
+	var actor_pos = game_state.MapState.get_actor_pos(actor)
+	var target_area = target_params.get_valid_target_area(actor_pos)
+	var potential_targets:Dictionary = {}
+	
+	if target_params.target_type == TargetParameters.TargetTypes.Self:
+		return {actor_pos: [actor]}
+	
+	if target_params.target_type == TargetParameters.TargetTypes.FullArea:
+		return {actor_pos: [actor]}
+	
+	for spot:Vector2i in target_area.keys():
+		var spot_los:LOS_VALUE = target_area[spot]
+		
+		if spot_los == LOS_VALUE.Blocked:
+			continue
+			
+		if target_params.is_actor_target_type():
+			for target:BaseActor in game_state.MapState.get_actors_at_pos(spot, null, true):
+				if (target_params.target_type == TargetParameters.TargetTypes.Enemy and
+						actor.FactionIndex == target.FactionIndex):
+							continue
+				if (target_params.target_type == TargetParameters.TargetTypes.Ally and
+						actor.FactionIndex != target.FactionIndex):
+							continue
+				if (target_params.target_type == TargetParameters.TargetTypes.Corpse and
+						not target.is_dead):
+							continue
+				if target_params.is_valid_target_actor(actor, target, game_state):
+					if not potential_targets.has(target.Id) and not exclude_targets.has(target.Id):
+						add_to_dicarry(potential_targets, spot, target.Id)
+		
+		if target_params.is_spot_target_type():
+			var target = MapPos.new(spot.x, spot.y, actor_pos.z, actor_pos.dir)
+			if target_params.target_type == TargetParameters.TargetTypes.Spot:
+				if not potential_targets.has(target) and not exclude_targets.has(target):
+					add_to_dicarry(potential_targets, spot, target)
+			if target_params.target_type == TargetParameters.TargetTypes.OpenSpot:
+				if game_state.MapState.is_spot_open(target):
+					if not potential_targets.has(target) and not exclude_targets.has(target):
+						add_to_dicarry(potential_targets, spot, target)
+	return potential_targets
+
+static func add_to_dicarry(dict, key, value):
+	if !dict.keys().has(key):
+		dict[key] = []
+	if not dict[key].has(value):
+		dict[key].append(value)
+		
+static func dicarry_to_values(dict:Dictionary)->Array:
+	var out_list = []
+	for arr in dict.values():
+		for val in arr:
+			if not out_list.has(val):
+				out_list.append(val)
+	return out_list
 
 static func trace_los(from_point, to_point, _map_state):
 	var los_dict = {}
@@ -65,7 +133,11 @@ static func get_line_of_sight_for_spots(from_point, to_point, map:MapStateData, 
 	var out_line_is_unbroken = true
 	if log: print("#### LOS CHECK")
 	if log: print("# From: %s | To: %s" % [from_point, to_point])
-		
+	
+	if map.get_map_spot(to_point) == null or map.spot_blocks_los(to_point):
+		check_cache[to_point] = LOS_VALUE.Invalid
+		return check_cache[to_point]
+	
 	var path = safe_calc_line(from_point, to_point, false, true, false)
 	if log: print("# Path: %s" % [path])
 	for p in path:

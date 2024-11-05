@@ -1,4 +1,4 @@
-class_name SubAct_GetTarget
+class_name SubAct_GetTargetRandom
 extends BaseSubAction
 
 
@@ -6,8 +6,7 @@ func get_required_props()->Dictionary:
 	return {
 		"TargetParamKey": BaseSubAction.SubActionPropTypes.TargetParamKey,
 		"SetTargetKey": BaseSubAction.SubActionPropTypes.SetTargetKey,
-		"AllowAutoTarget": BaseSubAction.SubActionPropTypes.BoolVal,
-		"AllowAlreadyTargeted": BaseSubAction.SubActionPropTypes.BoolVal,
+		"AllowAlreadyTargeted": BaseSubAction.SubActionPropTypes.BoolVal
 	}
 ## Returns Tags that are automatically added to the parent Action's Tags
 func get_action_tags(_subaction_data:Dictionary)->Array:
@@ -33,7 +32,6 @@ func do_thing(parent_action:BaseAction, subaction_data:Dictionary, metadata:QueE
 	# Get Targeting Params
 	var actor_pos = game_state.MapState.get_actor_pos(actor)
 	var allow_dups = subaction_data.get("AllowAlreadyTargeted", false)
-	var allow_auto = subaction_data.get("AllowAutoTarget", false)
 	
 	var exclude_targets = []
 	if not allow_dups:
@@ -46,14 +44,6 @@ func do_thing(parent_action:BaseAction, subaction_data:Dictionary, metadata:QueE
 		CombatRootControl.Instance.create_flash_text_on_actor(actor, "No Target", Color.ORANGE_RED)
 		turn_data.turn_failed = true
 		return
-		
-	if allow_auto and selection_data.get_potential_target_count() == 1:
-		turn_data.set_target_key(setting_target_key, target_params.target_param_key, selection_data.list_potential_targets()[0])
-		return
-	
-	CombatRootControl.Instance.QueController.pause_execution()
-	CombatUiControl.ui_state_controller.set_ui_state_from_path(
-		"res://assets/Scripts/Actions/Targeting/UiState_Targeting.gd",
-	{
-		"TargetSelectionData": selection_data
-	})
+	var random_index = randi_range(0, selection_data.get_potential_target_count()-1)
+	var target = selection_data.list_potential_targets()[random_index]
+	turn_data.set_target_key(setting_target_key, target_params.target_param_key, target)

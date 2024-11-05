@@ -6,6 +6,7 @@ extends HBoxContainer
 @onready var move_value_container:MoveInputContainer = $PropInputsContainer/MoveInputContainer
 @onready var line_edit:LineEdit = $PropInputsContainer/LineEdit
 @onready var spin_box:SpinBox = $PropInputsContainer/SpinBox
+@onready var check_box:CheckBox = $PropInputsContainer/CheckBox
 
 var _parent_subaction_edit_entry:SubActionEditEntryContainer
 var _parent_subaction_editor:SubActionSubEditorControl:
@@ -33,6 +34,7 @@ func set_props(parent, prop_name:String, prop_type:BaseSubAction.SubActionPropTy
 	line_edit.visible = false
 	move_value_container.visible = false
 	spin_box.visible = false
+	check_box.visible = false
 	prop_name_label.text = prop_name + ": "
 	self._prop_name = prop_name
 	self._prop_type = prop_type
@@ -84,6 +86,10 @@ func set_props(parent, prop_name:String, prop_type:BaseSubAction.SubActionPropTy
 		spin_box.visible = true
 		if prop_value:
 			spin_box.set_value_no_signal(int(prop_value))
+	elif prop_type == BaseSubAction.SubActionPropTypes.BoolVal:
+		check_box.visible = true
+		if prop_value:
+			check_box.button_pressed = prop_value
 	else:
 		line_edit.visible = true
 		line_edit.text = "Unknown Prop Type: " + str(prop_type)
@@ -109,6 +115,8 @@ func get_prop_value():
 		return line_edit.text
 	elif _prop_type == BaseSubAction.SubActionPropTypes.IntVal:
 		return spin_box.value
+	elif _prop_type == BaseSubAction.SubActionPropTypes.BoolVal:
+		return check_box.button_pressed
 	return null
 
 func clear():
@@ -132,6 +140,8 @@ func clear():
 		line_edit.text = ""
 	elif _prop_type == BaseSubAction.SubActionPropTypes.IntVal:
 		spin_box.value = 0
+	elif _prop_type == BaseSubAction.SubActionPropTypes.BoolVal:
+		check_box.button_pressed = false
 
 
 func on_entry_key_change(editor_key:String, old_key:String, new_key:String):

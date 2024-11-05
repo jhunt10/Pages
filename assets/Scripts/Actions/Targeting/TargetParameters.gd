@@ -8,7 +8,7 @@ static var SelfTargetParams:TargetParameters = TargetParameters.new(
 	}
 )
 
-enum TargetTypes {Self, FullArea, Spot, OpenSpot, Actor, Ally, Enemy}
+enum TargetTypes {Self, FullArea, Spot, OpenSpot, Actor, Ally, Enemy, Corpse}
 
 var target_param_key:String
 var target_type:TargetTypes
@@ -18,6 +18,9 @@ var effect_area:AreaMatrix
 var include_self_in_aoe:bool
 var include_allies_in_aoe:bool
 var include_enemies_in_aoe:bool
+
+var _cached_canter_pos:MapPos
+var _cached_target_area:Dictionary
 
 func _init(target_param_key:String, args:Dictionary) -> void:
 	# Assign Target Key
@@ -63,7 +66,8 @@ func is_spot_target_type()->bool:
 func is_actor_target_type()->bool:
 	return (self.target_type == TargetTypes.Actor or 
 			self.target_type == TargetTypes.Ally or 
-			self.target_type == TargetTypes.Enemy)
+			self.target_type == TargetTypes.Enemy or 
+			self.target_type == TargetTypes.Corpse)
 
 func is_point_in_area(center:MapPos, point:Vector2i)->bool:
 	return target_area.to_map_spots(center).has(point)
@@ -88,14 +92,17 @@ func is_actor_effected_by_aoe(actor:BaseActor, target:BaseActor, game_state:Game
 	return false
 
 func get_valid_target_area(center:MapPos)->Dictionary:
+	if _cached_canter_pos == center:
+		return _cached_target_area
+		
 	var spots =  target_area.to_map_spots(center)
 	var los_dict = {}
-	if not line_of_sight:
-		for spot in spots:
+	for spot in spots:
+		if line_of_sight:
+			TargetingHelper.get_line_of_sight_for_spots(center, spot, CombatRootControl.Instance.GameState.MapState, los_dict)
+		else:
 			los_dict[spot] = TargetingHelper.LOS_VALUE.Open
-		return los_dict
-	
-	for check in spots:
-		TargetingHelper.get_line_of_sight_for_spots(center, check, CombatRootControl.Instance.GameState.MapState, los_dict)
+	_cached_canter_pos = center
+	_cached_target_area = los_dict
 	return los_dict
 	

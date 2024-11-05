@@ -1,9 +1,10 @@
-[gd_scene load_steps=31 format=4 uid="uid://dfeilp6hbiuqs"]
+[gd_scene load_steps=33 format=4 uid="uid://dfeilp6hbiuqs"]
 
 [ext_resource type="Script" path="res://assets/Scripts/Scenes/combat_scene.gd" id="1_crigy"]
 [ext_resource type="Script" path="res://assets/Scripts/Map/map_controler_node.gd" id="3_vohw8"]
 [ext_resource type="Texture2D" uid="uid://baxsyc20mlvx0" path="res://assets/Sprites/TileSets/TestMapTileSheet.png" id="4_w5k6o"]
 [ext_resource type="Script" path="res://assets/Scripts/Ui/DisplayNodes/target_area_display_node.gd" id="5_17esk"]
+[ext_resource type="Texture2D" uid="uid://bethv8mo5j28j" path="res://assets/Sprites/TileSets/TargetingTileSet.png" id="5_fxjcf"]
 [ext_resource type="Texture2D" uid="uid://b03yygahg1o8b" path="res://assets/Sprites/UI/Targeting/TargetAreaTiles.png" id="6_evsty"]
 [ext_resource type="Texture2D" uid="uid://b232xm2ly0peh" path="res://assets/Sprites/UI/GridCursors/GridCursor_Default.png" id="7_7lt4y"]
 [ext_resource type="Script" path="res://assets/Scripts/Ui/DisplayNodes/Combat/combat_ui_control.gd" id="8_8l3el"]
@@ -367,6 +368,18 @@ terrain_set_0/mode = 0
 terrain_set_0/terrain_0/name = "Terrain 0"
 terrain_set_0/terrain_0/color = Color(0.5, 0.34375, 0.25, 1)
 sources/0 = SubResource("TileSetAtlasSource_iaggc")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xnl3u"]
+texture = ExtResource("5_fxjcf")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2ibvb"]
 texture = ExtResource("6_evsty")
@@ -1143,6 +1156,7 @@ terrain_set_0/terrain_2/color = Color(0.298412, 0.414409, 0.935489, 1)
 terrain_set_0/terrain_3/name = "SelectableCovered"
 terrain_set_0/terrain_3/color = Color(0.375, 0.5, 0.25, 1)
 sources/1 = SubResource("TileSetAtlasSource_2ibvb")
+sources/0 = SubResource("TileSetAtlasSource_xnl3u")
 
 [sub_resource type="TileSet" id="TileSet_lvs5x"]
 

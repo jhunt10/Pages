@@ -95,7 +95,4 @@ static func spot_is_valid_and_open(game_state:GameStateData, pos:MapPos):
 	if (pos.x < 0 or pos.x >= game_state.MapState.max_width 
 		or pos.y < 0 or pos.y >= game_state.MapState.max_hight):
 			return false
-	var spot = game_state.MapState.get_map_spot(pos)
-	if spot.terrain_index != 0:
-		return false
-	return true
+	return game_state.MapState.is_spot_open(pos)

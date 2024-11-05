@@ -981,8 +981,13 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="SpinBox" type="SpinBox" parent="InnerContainer/MainContainer/MiddleContainer/SubActionSubEditorContainer/InnerContainer/SubActionEditorEntryContainer/InnerContainer/SubActionPropertyEditorEntry/PropInputsContainer"]
+visible = false
 layout_mode = 2
 alignment = 2
+
+[node name="CheckBox" type="CheckBox" parent="InnerContainer/MainContainer/MiddleContainer/SubActionSubEditorContainer/InnerContainer/SubActionEditorEntryContainer/InnerContainer/SubActionPropertyEditorEntry/PropInputsContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="PropsContainer" type="VBoxContainer" parent="InnerContainer/MainContainer/MiddleContainer/SubActionSubEditorContainer/InnerContainer/SubActionEditorEntryContainer/InnerContainer"]
 layout_mode = 2

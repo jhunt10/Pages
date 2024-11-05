@@ -8,6 +8,15 @@ func _init(points):
 		points = JSON.parse_string(points)
 	for p in points:
 		relative_points.append(Vector2i(p[0], -p[1]))
+	var org_size = relative_points.size()
+	var distinct = []
+	for p in relative_points:
+		if not distinct.has(p):
+			distinct.append(p)
+	var dist_size = distinct.size()
+	if dist_size != org_size:
+		printerr("Non-Distinct Area Matrix loaded.")
+		relative_points = distinct
 
 func to_map_spots(pos:MapPos)->Array:
 	var out_arr = []

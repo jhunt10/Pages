@@ -24,7 +24,16 @@ func set_target_key(target_key:String, from_target_param_key:String, value):
 
 func has_target(target_key:String)->bool:
 	return _targets.keys().has(target_key)
+func has_target_value(target_value)->bool:
+	return _targets.values().has(target_value)
 
+func list_targets()->Array:
+	var out_list = []
+	for val in _targets.values():
+		if not out_list.has(val):
+			out_list.append(val)
+	return out_list
+	
 func get_target(target_key:String):
 	var target_value = _targets.get(target_key, null)
 	if !target_value:

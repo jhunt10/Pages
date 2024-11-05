@@ -28,39 +28,34 @@ func hide_area_effect(key):
 	if _effect_area_maps.keys().has(key):
 		_effect_area_maps[key].visible = false
 
-# Returns a unique key to use for clear_display later
-func set_target_parameters(pos:MapPos, target_params:TargetParameters, show_area_effect=false)->String:
-	var target_area = target_params.get_valid_target_area(pos)
-	var effect_area = [Vector2i.ZERO]
-	if target_params.has_area_of_effect():
-		effect_area = target_params.get_area_of_effect(MapPos.new(0,0,0, pos.dir))
-	return set_target_area(target_area, effect_area, show_area_effect)
-
-func get_target_tile_map_layer(key)->TileMapLayer:
-	return _target_area_maps.get(key, null)
-
-func set_target_area(target_area:Dictionary, effect_area:Array, show_area_effect:bool):
+func build_from_target_selection_data(data:TargetSelectionData, show_area_effect:bool=false):
 	var new_area:TileMapLayer = permade_target_area_tile_map.duplicate()
 	self.add_child(new_area)
 	new_area.visible = true
 	new_area.clear()
-	var open_list = []
-	var covered_list = []
-	var blocked_list = []
-	for spot in target_area.keys():
-		if target_area[spot] == TargetingHelper.LOS_VALUE.Open:
-			open_list.append(spot)
-		if target_area[spot] == TargetingHelper.LOS_VALUE.Cover:
-			covered_list.append(spot)
-		if target_area[spot] == TargetingHelper.LOS_VALUE.Blocked:
-			blocked_list.append(spot)
-	new_area.set_cells_terrain_connect(open_list,0,0)
-	new_area.set_cells_terrain_connect(covered_list,0,1)
 	
 	var id = str(ResourceUID.create_id())
 	_target_area_maps[id] = new_area
 	
-	if effect_area:
+	for coor in data.get_targeting_area_coords():
+		var los_val = data.get_coords_los(coor)
+		var selectable = data.is_coor_selectable(coor)
+		if los_val == TargetingHelper.LOS_VALUE.Open:
+			if selectable:
+				new_area.set_cell(coor, 0, Vector2i(2,0))
+			else:
+				new_area.set_cell(coor, 0, Vector2i(0,0))
+			#open_list.append(spot)
+		if los_val == TargetingHelper.LOS_VALUE.Cover:
+			if selectable:
+				new_area.set_cell(coor, 0, Vector2i(3,0))
+			else:
+				new_area.set_cell(coor, 0, Vector2i(1,0))
+		if los_val == TargetingHelper.LOS_VALUE.Blocked:
+			new_area.set_cell(coor, 0, Vector2i(0,1))
+	
+	if data.target_params.has_area_of_effect():
+		var effect_area = data.target_params.get_area_of_effect(MapPos.new(0,0,0, data.actor_pos.dir))
 		var new_effect_area = permade_target_area_tile_map.duplicate()
 		self.add_child(new_effect_area)
 		new_effect_area.visible = show_area_effect
@@ -68,7 +63,7 @@ func set_target_area(target_area:Dictionary, effect_area:Array, show_area_effect
 		new_effect_area.set_cells_terrain_connect(effect_area,0,2)
 		_effect_area_maps[id] = new_effect_area
 	return id
-	
+
 func clear_display(key:String, error_if_wrong_key:bool = true):
 	if _effect_area_maps.has(key):
 		_effect_area_maps[key].queue_free()

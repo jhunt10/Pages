@@ -127,3 +127,15 @@ func spot_blocks_los(pos)->bool:
 	if not spot:
 		return false
 	return spot.terrain_index > 0
+
+func is_spot_open(pos)->bool:
+	var spot = get_map_spot(pos)
+	if not spot:
+		return false
+	if spot.terrain_index > 0:
+		return false
+	var actors = get_actors_at_pos(pos)
+	if actors.size() > 0:
+		return false
+	return true
+	

@@ -17,7 +17,7 @@ var _attack_stat_name:String
 var _base_attack_stat:int
 var _weapon_bonus:int
 var _attack_power:int
-var _damage_variance:int
+var _damage_variance:float
 
 var damage_type:DamageTypes
 var defense_type:DefenseType
