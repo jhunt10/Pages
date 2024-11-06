@@ -12,3 +12,7 @@ func on_effect_trigger(effect:BaseEffect, _subeffect_data:Dictionary, trigger:Ba
 	var damage_data = effect.DamageDatas.get(damage_key, {})
 	var test_damage = damage_data.get("AtkPower", 0)
 	actor.stats.apply_damage(test_damage, effect)
+	
+	var damage_effect = damage_data.get("DamageEffect", null)
+	if damage_effect:
+		CombatRootControl.Instance.create_damage_effect(actor, damage_effect, test_damage)

@@ -155,7 +155,7 @@ func save_object_data():
 	if saving_object_key == _editing_object_key:
 		var changed = _check_active_object_for_change()
 		if !changed:
-			printerr("%s.save_object_data: No Change")
+			printerr("%s.save_object_data: No Change" % self.name)
 			return
 	_editing_objects_datas[saving_object_key] = _build_active_object_save_data(saving_object_key)
 	_changed_object_keys.append(saving_object_key)

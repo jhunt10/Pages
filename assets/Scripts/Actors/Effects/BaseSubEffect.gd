@@ -12,7 +12,11 @@ func _init() -> void:
 
 ## Returns an array of EffectTriggers on which to call this SubEffect
 func get_triggers(_effect:BaseEffect, subeffect_data:Dictionary)->Array:
+	var optional_triggers = subeffect_data.get("OptionalTriggers")
+	if !optional_triggers: return []
 	var list = []
+	for key in optional_triggers:
+		list.append(BaseEffect.EffectTriggers.get(key))
 	return list
 
 func get_active_stat_mods(_effect:BaseEffect, _subeffect_data:Dictionary)->Array:

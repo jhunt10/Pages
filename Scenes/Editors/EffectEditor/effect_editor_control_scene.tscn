@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://comw2plhg3jti"]
+[gd_scene load_steps=24 format=3 uid="uid://comw2plhg3jti"]
 
 [ext_resource type="Script" path="res://Scenes/Editors/EffectEditor/effect_editor_control.gd" id="1_kf572"]
 [ext_resource type="Texture2D" uid="uid://io35wpu802fp" path="res://assets/Sprites/UI/BackPatches/Patch_64_12.png" id="2_hh6a5"]
@@ -16,7 +16,9 @@
 [ext_resource type="Script" path="res://assets/Scripts/DevTools/EditorHelpers/move_input_container.gd" id="13_cjagm"]
 [ext_resource type="Theme" uid="uid://c1ayl4757lx1v" path="res://assets/Themes/small_spinner.tres" id="14_2sky4"]
 [ext_resource type="Script" path="res://Scenes/Editors/EffectEditor/SubEditors/subeffect_prop_input_container.gd" id="14_3fkmg"]
+[ext_resource type="Script" path="res://Scenes/Editors/EffectEditor/SubEditors/sub_effect_trigger_input_container.gd" id="17_cg1dd"]
 [ext_resource type="Script" path="res://Scenes/Editors/SharedSubEditors/subeditors_tabs_control.gd" id="18_kuqng"]
+[ext_resource type="Script" path="res://Scenes/Editors/EffectEditor/SubEditors/trigger_edit_entry_container.gd" id="18_nd72t"]
 [ext_resource type="Script" path="res://Scenes/Editors/EffectEditor/SubEditors/damage_mod_edit_entry_container.gd" id="20_g8gg4"]
 [ext_resource type="Script" path="res://Scenes/Editors/BaseListSubEditorContainer.gd" id="20_jnagu"]
 [ext_resource type="PackedScene" uid="uid://cm4vnagvadn3h" path="res://Scenes/Editors/SharedSubEditors/DamageDataSubEditor/damage_data_subeditor.tscn" id="21_147dt"]
@@ -431,7 +433,7 @@ allways_show_none = true
 no_option_text = "Add"
 
 [node name="SubEffectEditorEntryContainer" type="Container" parent="InnerContainer/MainContainer/MiddleContainer/SubEffectsSubEditorContainer/InnerContainer" node_paths=PackedStringArray("background", "inner_container")]
-custom_minimum_size = Vector2(16, 122)
+custom_minimum_size = Vector2(16, 196)
 layout_mode = 2
 script = ExtResource("13_607y1")
 background = NodePath("Background")
@@ -545,6 +547,44 @@ size_flags_horizontal = 3
 [node name="SpinBox" type="SpinBox" parent="InnerContainer/MainContainer/MiddleContainer/SubEffectsSubEditorContainer/InnerContainer/SubEffectEditorEntryContainer/InnerContainer/SubEffectPropertyEditorEntry/PropInputsContainer"]
 layout_mode = 2
 alignment = 2
+
+[node name="SubEffectTriggerEditorEntry" type="VBoxContainer" parent="InnerContainer/MainContainer/MiddleContainer/SubEffectsSubEditorContainer/InnerContainer/SubEffectEditorEntryContainer/InnerContainer"]
+layout_mode = 2
+script = ExtResource("17_cg1dd")
+
+[node name="TitleContainer" type="HBoxContainer" parent="InnerContainer/MainContainer/MiddleContainer/SubEffectsSubEditorContainer/InnerContainer/SubEffectEditorEntryContainer/InnerContainer/SubEffectTriggerEditorEntry"]
+layout_mode = 2
+
+[node name="PropNameLabel" type="Label" parent="InnerContainer/MainContainer/MiddleContainer/SubEffectsSubEditorContainer/InnerContainer/SubEffectEditorEntryContainer/InnerContainer/SubEffectTriggerEditorEntry/TitleContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Triggers Names:"
+
+[node name="AddOptionButton" type="OptionButton" parent="InnerContainer/MainContainer/MiddleContainer/SubEffectsSubEditorContainer/InnerContainer/SubEffectEditorEntryContainer/InnerContainer/SubEffectTriggerEditorEntry/TitleContainer"]
+layout_mode = 2
+selected = 0
+item_count = 1
+popup/item_0/text = "Add"
+script = ExtResource("6_0163n")
+allways_show_none = true
+no_option_text = "Add"
+
+[node name="EntriesContainer" type="FlowContainer" parent="InnerContainer/MainContainer/MiddleContainer/SubEffectsSubEditorContainer/InnerContainer/SubEffectEditorEntryContainer/InnerContainer/SubEffectTriggerEditorEntry"]
+layout_mode = 2
+
+[node name="PremadeTriggerEntry" type="HBoxContainer" parent="InnerContainer/MainContainer/MiddleContainer/SubEffectsSubEditorContainer/InnerContainer/SubEffectEditorEntryContainer/InnerContainer/SubEffectTriggerEditorEntry"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+script = ExtResource("18_nd72t")
+
+[node name="Button" type="Button" parent="InnerContainer/MainContainer/MiddleContainer/SubEffectsSubEditorContainer/InnerContainer/SubEffectEditorEntryContainer/InnerContainer/SubEffectTriggerEditorEntry/PremadeTriggerEntry"]
+layout_mode = 2
+text = "X"
+
+[node name="Label" type="Label" parent="InnerContainer/MainContainer/MiddleContainer/SubEffectsSubEditorContainer/InnerContainer/SubEffectEditorEntryContainer/InnerContainer/SubEffectTriggerEditorEntry/PremadeTriggerEntry"]
+layout_mode = 2
+text = "TiggerName"
 
 [node name="PropsContainer" type="VBoxContainer" parent="InnerContainer/MainContainer/MiddleContainer/SubEffectsSubEditorContainer/InnerContainer/SubEffectEditorEntryContainer/InnerContainer"]
 layout_mode = 2

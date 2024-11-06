@@ -28,11 +28,12 @@ func start_vfx():
 	if !_readyed:
 		_delayed_start = true
 		return
+	sprite.position = _data.fixed_offset
 	if _data.random_offset_range != Vector2.ZERO:
 		var sprite_size = sprite.get_rect().size
 		var offset_x = randf_range(-_data.random_offset_range.x, _data.random_offset_range.x) * sprite_size.x
 		var offset_y = randf_range(-_data.random_offset_range.y, _data.random_offset_range.y) * sprite_size.y
-		sprite.position = Vector2(offset_x, offset_y)
+		sprite.position += Vector2(offset_x, offset_y)
 	if _data.animation_name != '':
 		_has_animation = true
 		animation.play(_data.animation_name)

@@ -180,6 +180,8 @@ func _check_input_has_changed(key, data, input_node)->bool:
 		return true
 	elif input_node is SubEffectPropInputContainer:
 		return input_node.get_prop_value() != data.get(key, "")
+	elif input_node is SubEffectTriggerInputContainer:
+		return input_node.check_for_change(data.get(key, []))
 	elif input_node is BaseSubEditorContainer:
 		return input_node.has_change()
 	else:
@@ -203,6 +205,8 @@ func _save_input(key, data, input_node):
 		data[key] = input_node.get_prop_value() 
 	elif input_node is SubEffectPropInputContainer:
 		data[key] = input_node.get_prop_value() 
+	elif input_node is SubEffectTriggerInputContainer:
+		data[key] = input_node.get_prop_value() 
 	elif input_node is BaseSubEditorContainer:
 		data[key] = input_node.build_save_data() 
 	else:
@@ -225,6 +229,8 @@ func _clear_input(key, input_node):
 		input_node.clear() 
 	elif input_node is SubEffectPropInputContainer:
 		input_node.clear() 
+	elif input_node is SubEffectTriggerInputContainer:
+		input_node.clear()
 	elif input_node is BaseSubEditorContainer:
 		input_node.clear() 
 	else:
