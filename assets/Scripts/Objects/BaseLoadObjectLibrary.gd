@@ -239,7 +239,7 @@ static func _search_for_files(path:String,  sufix:String):
 		dir.list_dir_begin()
 		var file_name:String = dir.get_next()
 		while file_name != "":
-			var full_path = path+"/"+file_name
+			var full_path = path.path_join(file_name)
 			if dir.current_is_dir():
 				out_list.append_array(_search_for_files(full_path, sufix))
 			elif file_name.ends_with(sufix):

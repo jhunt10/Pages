@@ -31,7 +31,7 @@ func load_data(object_key:String, data:Dictionary):
 	if !_full_script_path:
 		script_box.text = "No SubEffectScript"
 		return
-	var script:BaseSubEffect = EffectLibary.get_sub_effect_script(_full_script_path)
+	var script:BaseSubEffect = EffectLibrary.get_sub_effect_script(_full_script_path)
 	if !script:
 		script_box.text = "Script Not Found"
 		return

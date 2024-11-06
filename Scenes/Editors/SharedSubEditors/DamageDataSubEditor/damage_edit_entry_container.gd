@@ -19,6 +19,8 @@ func _get_delete_button()->Button:
 func _ready() -> void:
 	super()
 	if Engine.is_editor_hint(): return
+	var nam = self.name
+	printerr(self.name)
 	stat_option_button.get_options_func = get_attack_stats
 	type_option_button.get_options_func = get_damage_types
 	defense_option_button.get_options_func = get_defense_types

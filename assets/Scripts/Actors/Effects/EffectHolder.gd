@@ -1,6 +1,6 @@
 class_name EffectHolder
 
-const LOGGING = false
+const LOGGING = true
 
 #signal lost_effect(effect_id:String)
 #signal gained_effect(effect:BaseEffect)
@@ -11,22 +11,25 @@ var _triggers_to_effect_ids:Dictionary = {}
 
 func _init(actor:BaseActor) -> void:
 	_actor = actor
-	actor.on_death.connect(_on_actor_death)
+	_actor.on_death.connect(_on_actor_death)
+	_actor.on_move.connect(_on_actor_moved)
 	
 	for t in BaseEffect.EffectTriggers.values():
 		_triggers_to_effect_ids[t] = []
 	
 	# Connect signals
+func on_combat_start():
 	if CombatRootControl.Instance:
 		CombatRootControl.Instance.QueController.start_of_turn_with_state.connect(_on_turn_start)
 		CombatRootControl.Instance.QueController.end_of_turn_with_state.connect(_on_turn_end)
 		CombatRootControl.Instance.QueController.start_of_round_with_state.connect(_on_round_start)
 		CombatRootControl.Instance.QueController.end_of_round_with_state.connect(_on_round_end)
-		actor.on_move.connect(_on_actor_moved)
+	else:
+		printerr("EffectHolder.on_combat_start: No CombatRootControl found")
 	
 func add_effect(effect_key:String, effect_data:Dictionary)->BaseEffect:
-	var effect = MainRootNode.effect_libary.create_new_effect(effect_key, _actor, effect_data)
-	
+	var effect = EffectLibrary.create_effect(effect_key, _actor, effect_data)
+	if LOGGING: print("EffectHolder.add_effect: Added effect '%s' to actor '%s'." % [effect.Id, _actor.Id])
 	_effects[effect.Id] = effect
 	for trigger in effect.Triggers:
 		_triggers_to_effect_ids[trigger].append(effect.Id)
@@ -35,22 +38,27 @@ func add_effect(effect_key:String, effect_data:Dictionary)->BaseEffect:
 		
 func list_effects()->Array:
 	return _effects.values()
-	
+
+func has_effect(effect_id:String)->bool:
+	return _effects.keys().has(effect_id)
+
 func get_effect(effect_id:String)->BaseEffect:
 	if _effects.keys().has(effect_id):
 		return _effects[effect_id]
 	return null
 		
 func remove_effect(effect:BaseEffect):
-	var effect_id = effect.Id
-	if !_effects.has(effect_id):
-		printerr("Unknown effect: " + effect_id)
+	var deleting_effect_id = effect.Id
+	if !_effects.has(deleting_effect_id):
+		printerr("Unknown effect: " + deleting_effect_id)
 		return
-	effect.on_delete()
-	_effects.erase(effect_id)
+	_effects.erase(deleting_effect_id)
+	if !effect._deleted:
+		effect.on_delete()
+	print("EffectHolder.remove_effect: Deleted Effect '%s' from actor '%s'." % [deleting_effect_id, _actor.Id])
 	for trigger in BaseEffect.EffectTriggers:
-		if _triggers_to_effect_ids.get(trigger, []).has(effect_id):
-			_triggers_to_effect_ids[trigger].erase(effect_id)
+		if _triggers_to_effect_ids.get(trigger, []).has(deleting_effect_id):
+			_triggers_to_effect_ids[trigger].erase(deleting_effect_id)
 	_actor.stats.dirty_stats()
 	
 func get_on_deal_damage_mods():

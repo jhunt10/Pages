@@ -33,7 +33,7 @@ static func handle_damage(attacker:BaseActor, defender:BaseActor, damage_data:Di
 	
 	var damage = DamageHelper._calc_damage_for_event(damage_event)
 	# TODO: Acccuracy and chance to apply effects
-	defender.stats.apply_damage(damage_event, attacker)
+	defender.stats.apply_damage(damage_event.final_damage, attacker)
 	
 	var damage_effect = damage_data.get("DamageEffect", null)
 	if damage_effect:

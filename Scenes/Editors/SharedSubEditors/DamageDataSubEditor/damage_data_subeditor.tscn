@@ -1,0 +1,183 @@
+[gd_scene load_steps=8 format=3 uid="uid://cm4vnagvadn3h"]
+
+[ext_resource type="Script" path="res://Scenes/Editors/SharedSubEditors/DamageDataSubEditor/damage_subeditor_container.gd" id="1_3f4yg"]
+[ext_resource type="Texture2D" uid="uid://dul8y1l1gw420" path="res://assets/Sprites/UI/BackPatches/Patch_32_8_Dark.png" id="2_res0v"]
+[ext_resource type="Script" path="res://Scenes/Editors/SharedSubEditors/DamageDataSubEditor/damage_edit_entry_container.gd" id="3_5kekf"]
+[ext_resource type="Texture2D" uid="uid://s8s7rktavc7e" path="res://assets/Sprites/UI/BackPatches/Patch_32_8.png" id="4_6r8ui"]
+[ext_resource type="Theme" uid="uid://c1ayl4757lx1v" path="res://assets/Themes/small_spinner.tres" id="5_4ciid"]
+[ext_resource type="Script" path="res://Scenes/UiNodes/loaded_option_button.gd" id="5_vyr2s"]
+
+[sub_resource type="Theme" id="Theme_fnami"]
+LineEdit/constants/minimum_character_width = 3
+
+[node name="Damage" type="Container" node_paths=PackedStringArray("add_button", "premade_edit_entry", "entries_container", "title_label", "background", "inner_container")]
+custom_minimum_size = Vector2(376, 245)
+offset_right = 376.0
+offset_bottom = 245.0
+size_flags_vertical = 3
+script = ExtResource("1_3f4yg")
+default_entry_name = "DamageData"
+add_button = NodePath("InnerContainer/TitleContainer/Button")
+premade_edit_entry = NodePath("InnerContainer/DamageEditEntryContainer")
+entries_container = NodePath("InnerContainer/ScrollContainer/EntriesContainer")
+title_label = NodePath("InnerContainer/TitleContainer/TitleLabel")
+background = NodePath("Background")
+inner_container = NodePath("InnerContainer")
+force_fill_x = true
+force_fill_y = true
+force_dimintions = Vector2i(376, 0)
+
+[node name="Background" type="NinePatchRect" parent="."]
+custom_minimum_size = Vector2(376, 0)
+layout_mode = 2
+texture = ExtResource("2_res0v")
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+
+[node name="InnerContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="TitleContainer" type="HBoxContainer" parent="InnerContainer"]
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="InnerContainer/TitleContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 18
+text = "Damage Datas"
+
+[node name="Button" type="Button" parent="InnerContainer/TitleContainer"]
+layout_mode = 2
+text = "Add"
+
+[node name="DamageEditEntryContainer" type="Container" parent="InnerContainer" node_paths=PackedStringArray("background", "inner_container")]
+custom_minimum_size = Vector2(16, 190)
+layout_mode = 2
+script = ExtResource("3_5kekf")
+background = NodePath("Background")
+inner_container = NodePath("InnerContainer")
+force_fill_x = true
+
+[node name="Background" type="NinePatchRect" parent="InnerContainer/DamageEditEntryContainer"]
+layout_mode = 2
+texture = ExtResource("4_6r8ui")
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+
+[node name="InnerContainer" type="VBoxContainer" parent="InnerContainer/DamageEditEntryContainer"]
+layout_mode = 2
+
+[node name="KeyContainer" type="HBoxContainer" parent="InnerContainer/DamageEditEntryContainer/InnerContainer"]
+layout_mode = 2
+
+[node name="KeyLabel" type="Label" parent="InnerContainer/DamageEditEntryContainer/InnerContainer/KeyContainer"]
+layout_mode = 2
+text = "DataKey:"
+
+[node name="KeyLineEdit" type="LineEdit" parent="InnerContainer/DamageEditEntryContainer/InnerContainer/KeyContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="DeleteButton" type="Button" parent="InnerContainer/DamageEditEntryContainer/InnerContainer/KeyContainer"]
+layout_mode = 2
+text = "X"
+
+[node name="PowerStatContainer" type="HBoxContainer" parent="InnerContainer/DamageEditEntryContainer/InnerContainer"]
+layout_mode = 2
+
+[node name="PowerLabel" type="Label" parent="InnerContainer/DamageEditEntryContainer/InnerContainer/PowerStatContainer"]
+layout_mode = 2
+text = "Base:"
+
+[node name="PowerSpinBox" type="SpinBox" parent="InnerContainer/DamageEditEntryContainer/InnerContainer/PowerStatContainer"]
+layout_mode = 2
+theme = SubResource("Theme_fnami")
+max_value = 1e+06
+alignment = 2
+
+[node name="VariantLabel" type="Label" parent="InnerContainer/DamageEditEntryContainer/InnerContainer/PowerStatContainer"]
+layout_mode = 2
+text = "Varient:"
+
+[node name="VarientSpinBox" type="SpinBox" parent="InnerContainer/DamageEditEntryContainer/InnerContainer/PowerStatContainer"]
+layout_mode = 2
+theme = ExtResource("5_4ciid")
+max_value = 1.0
+step = 0.1
+
+[node name="MinMaxLabel" type="Label" parent="InnerContainer/DamageEditEntryContainer/InnerContainer/PowerStatContainer"]
+self_modulate = Color(0.223103, 0.223103, 0.223103, 1)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "( 0 - 0 )"
+horizontal_alignment = 1
+
+[node name="StatContainer" type="HBoxContainer" parent="InnerContainer/DamageEditEntryContainer/InnerContainer"]
+layout_mode = 2
+
+[node name="StatLabel" type="Label" parent="InnerContainer/DamageEditEntryContainer/InnerContainer/StatContainer"]
+layout_mode = 2
+text = "Scales with Stat:"
+
+[node name="StatOptionButton" type="OptionButton" parent="InnerContainer/DamageEditEntryContainer/InnerContainer/StatContainer"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+size_flags_horizontal = 3
+text_overrun_behavior = 3
+fit_to_longest_item = false
+script = ExtResource("5_vyr2s")
+
+[node name="TypeSDefenseContainer" type="HBoxContainer" parent="InnerContainer/DamageEditEntryContainer/InnerContainer"]
+layout_mode = 2
+
+[node name="TypeLabel" type="Label" parent="InnerContainer/DamageEditEntryContainer/InnerContainer/TypeSDefenseContainer"]
+layout_mode = 2
+text = "Type:"
+
+[node name="TypeOptionButton" type="OptionButton" parent="InnerContainer/DamageEditEntryContainer/InnerContainer/TypeSDefenseContainer"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+size_flags_horizontal = 3
+text_overrun_behavior = 3
+fit_to_longest_item = false
+script = ExtResource("5_vyr2s")
+
+[node name="DefenseLabel" type="Label" parent="InnerContainer/DamageEditEntryContainer/InnerContainer/TypeSDefenseContainer"]
+layout_mode = 2
+text = "Defense:"
+
+[node name="DefenseOptionButton" type="OptionButton" parent="InnerContainer/DamageEditEntryContainer/InnerContainer/TypeSDefenseContainer"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+size_flags_horizontal = 3
+text_overrun_behavior = 3
+fit_to_longest_item = false
+script = ExtResource("5_vyr2s")
+
+[node name="VFXContainer" type="HBoxContainer" parent="InnerContainer/DamageEditEntryContainer/InnerContainer"]
+layout_mode = 2
+
+[node name="VFXLabel" type="Label" parent="InnerContainer/DamageEditEntryContainer/InnerContainer/VFXContainer"]
+layout_mode = 2
+text = "Damage VFX: "
+
+[node name="VFXOptionButton" type="OptionButton" parent="InnerContainer/DamageEditEntryContainer/InnerContainer/VFXContainer"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+size_flags_horizontal = 3
+text_overrun_behavior = 3
+fit_to_longest_item = false
+script = ExtResource("5_vyr2s")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="InnerContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="EntriesContainer" type="VBoxContainer" parent="InnerContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3

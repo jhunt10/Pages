@@ -61,6 +61,9 @@ func save_data()->Dictionary:
 	var data = super()
 	return data
 
+func on_combat_start():
+	effects.on_combat_start()
+
 func die():
 	is_dead = true
 	on_death.emit()

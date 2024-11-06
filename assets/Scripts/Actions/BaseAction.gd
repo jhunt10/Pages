@@ -26,10 +26,6 @@ var _target_params:Dictionary
 func get_tagable_id(): return ActionKey
 func get_tags(): return details.tags
 
-var _loaded_from_file:String
-var LoadPath:String:
-	get: return _loaded_from_file.get_base_dir()
-
 var PreviewMoveOffset:MapPos
 
 func _init(key:String, def_load_path:String, def:Dictionary, id:String='', data:Dictionary={}) -> void:

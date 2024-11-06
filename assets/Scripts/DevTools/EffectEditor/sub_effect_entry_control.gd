@@ -66,7 +66,7 @@ func script_selected(index:int):
 
 func _build_props_for_script(script_name):
 	real_script = script_name
-	var sub_effect:BaseSubEffect = EffectLibary.get_sub_effect_script(script_name)
+	var sub_effect:BaseSubEffect = EffectLibrary.get_sub_effect_script(script_name)
 	var required_props = sub_effect.get_required_props()
 	for child in prop_inputs.values():
 		child.queue_free()
@@ -90,7 +90,7 @@ func create_prop_input(prop_name:String, prop_type, is_unknown:bool=false):
 	var prop_value = subeffect_data.get(prop_name, null)
 	var enum_options = []
 	if prop_type == BaseSubEffect.SubEffectPropTypes.EnumVal:
-		var sub_effect:BaseSubEffect = EffectLibary.get_sub_effect_script(real_script)
+		var sub_effect:BaseSubEffect = EffectLibrary.get_sub_effect_script(real_script)
 		var options_dict = sub_effect.get_prop_enum_values("")
 		enum_options = options_dict.get(prop_name, [])
 	new_prop.set_prop(prop_name, prop_type, prop_value, is_unknown, enum_options)

@@ -223,6 +223,8 @@ func _clear_input(key, input_node):
 		input_node.set_value([0,0,0,0])
 	elif input_node is SubActionPropInputContainer:
 		input_node.clear() 
+	elif input_node is SubEffectPropInputContainer:
+		input_node.clear() 
 	elif input_node is BaseSubEditorContainer:
 		input_node.clear() 
 	else:

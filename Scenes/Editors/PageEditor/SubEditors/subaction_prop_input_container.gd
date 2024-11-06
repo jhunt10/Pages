@@ -161,7 +161,7 @@ func get_damage_options():
 	return PageEditorControl.Instance.get_subeditor_option_keys("DamageDatas")
 
 func get_effect_options():
-	return EffectLibary._effects_data.keys()
+	return EffectLibrary.list_all_effects_keys()
 
 func get_missile_options():
 	return PageEditorControl.Instance.get_subeditor_option_keys("MissileDatas")

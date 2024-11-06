@@ -51,6 +51,8 @@ func _ready() -> void:
 	ui_control.ui_state_controller.set_ui_state(UiStateController.UiStates.ActionInput)
 	
 	MapController._build_terrain()
+	for actor:BaseActor in GameState._actors.values():
+		actor.on_combat_start()
 	pass # Replace with function body.
 
 func _process(delta: float) -> void:

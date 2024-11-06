@@ -1,7 +1,7 @@
 class_name StatHolder
 
 const HealthKey:String = "Health"
-const LOGGING = false
+const LOGGING = true
 
 var _actor:BaseActor
 var _base_stats:Dictionary = {}
@@ -27,14 +27,13 @@ func _init(actor:BaseActor, data:Dictionary) -> void:
 			_base_stats[key] = data[key]
 		elif data[key] is int or data[key] is float:
 			_base_stats[key] = data[key]
-			
-	_calc_cache_stats()
-	current_health = max_health
 
 func dirty_stats():
 	if LOGGING: print("Stats Dirty")
 	_stats_dirty = true
-	
+
+func recache_stats():
+	_calc_cache_stats()
 
 func get_stat(stat_name:String, default:int=0):
 	if _bar_stats.has(stat_name):
@@ -64,10 +63,6 @@ func get_max_stat(stat_name):
 	return get_stat("Max:"+stat_name)
 
 func _calc_cache_stats():
-	if !_actor.effects:
-		for stat_name in _base_stats.keys():
-			_cached_stats[stat_name] = _base_stats[stat_name]
-		return
 	if LOGGING: print("#Caching Stats for: %s" % _actor.ActorKey)
 	
 	# Aggregate all the mods together by stat_name, then type
@@ -101,8 +96,8 @@ func _calc_cache_stats():
 	if LOGGING: print("--- Done Caching Stats")
 	_stats_dirty = false
 
-func apply_damage(damage_event:DamageEvent, _source):
-	_bar_stats[HealthKey] = _bar_stats[HealthKey] - damage_event.final_damage
+func apply_damage(damage, _source):
+	_bar_stats[HealthKey] = _bar_stats[HealthKey] - damage
 	if current_health <= 0:
 		CombatRootControl.Instance.kill_actor(_actor)
 

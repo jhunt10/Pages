@@ -61,11 +61,11 @@ func _sync_values():
 func _sync_icons():
 	for effect:BaseEffect in actor.effects.list_effects():
 		if effect_icons.has(effect.Id):
-			if true or effect._duration_counter >= 0:
+			if effect._duration_counter >= 0:
 				_set_duration_text(effect.Id, effect.RemainingDuration)
 			continue
 		var new_icon = premade_effect_icon.duplicate()
-		new_icon.texture = effect.get_sprite()
+		new_icon.texture = effect.get_small_icon()
 		new_icon.visible = true
 		if true or effect._duration_counter >= 0:
 			_set_duration_text(effect.Id, effect.RemainingDuration)

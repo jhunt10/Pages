@@ -42,11 +42,6 @@ static func get_action(action_key:String)->BaseAction:
 		printerr("ActionLibrary.get_action: No item found with id '%s'." % [action_key])
 	return action
 
-
-const TILE_WIDTH = 64
-const TILE_HIGHT = 56
-const ActionDir = "res://data/Actions"
-
 static func get_action_icon(file_path:String)->Texture2D:
 	if !_cached_icon_sprites.keys().has(file_path):
 		var sprite = load(file_path)

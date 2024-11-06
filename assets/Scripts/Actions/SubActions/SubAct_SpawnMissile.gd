@@ -46,7 +46,7 @@ func do_thing(parent_action:BaseAction, subaction_data:Dictionary, metadata:QueE
 			.append_source(SourceTagChain.SourceTypes.Action, parent_action)
 	missile_data['DamageData'] = damage_data
 	var missile = BaseMissile.new(actor, missile_data, tag_chain, target_params,
-									actor_pos, target_spot, parent_action.LoadPath)
+									actor_pos, target_spot, parent_action._def_load_path)
 	CombatRootControl.Instance.create_new_missile_node(missile)
 
 func get_target_spot_of_missile(target_key:String, metadata:QueExecutionData, game_state:GameStateData)->MapPos:
