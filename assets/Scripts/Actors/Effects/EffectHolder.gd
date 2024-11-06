@@ -56,8 +56,8 @@ func remove_effect(effect:BaseEffect):
 	if !effect._deleted:
 		effect.on_delete()
 	print("EffectHolder.remove_effect: Deleted Effect '%s' from actor '%s'." % [deleting_effect_id, _actor.Id])
-	for trigger in BaseEffect.EffectTriggers:
-		if _triggers_to_effect_ids.get(trigger, []).has(deleting_effect_id):
+	for trigger in _triggers_to_effect_ids.keys():
+		if _triggers_to_effect_ids[trigger].has(deleting_effect_id):
 			_triggers_to_effect_ids[trigger].erase(deleting_effect_id)
 	_actor.stats.dirty_stats()
 	
@@ -85,7 +85,7 @@ func get_stat_mods():
 	return out_list
 	
 func _trigger_effects(trigger:BaseEffect.EffectTriggers, game_state:GameStateData):
-	if LOGGING: print("Triggering Effect Trigger: " + BaseEffect.EffectTriggers.keys()[trigger])
+	if LOGGING: print("Triggering Effect Trigger '%s' for actor:%s." % [BaseEffect.EffectTriggers.keys()[trigger], _actor.Id])
 	for id in _triggers_to_effect_ids[trigger]:
 		var effect:BaseEffect = _effects.get(id, null)
 		if not effect:
@@ -93,7 +93,7 @@ func _trigger_effects(trigger:BaseEffect.EffectTriggers, game_state:GameStateDat
 			_effects.erase(id)
 			_triggers_to_effect_ids.erase(id)
 		else:
-			if LOGGING: print("Trigger effect with id: '%s'." % [id])
+			if LOGGING: print("Trigger effect with id: '%s'." % [ id])
 			effect.trigger_effect(trigger, game_state)
 	pass
 
