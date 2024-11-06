@@ -111,7 +111,7 @@ func _on_round_end(game_state:GameStateData):
 		
 func _on_actor_moved(old_pos:MapPos, new_pos:MapPos, move_type:String, moved_by:BaseActor):
 	for id in _triggers_to_effect_ids[BaseEffect.EffectTriggers.OnMove]:
-		_effects[id].trigger_on_move(old_pos, new_pos, move_type, moved_by)
+		_effects[id].trigger_on_move(CombatRootControl.Instance.GameState, old_pos, new_pos, move_type, moved_by)
 	
 func _on_actor_death():
 	if LOGGING: print("EffectHolder: Actor Death")

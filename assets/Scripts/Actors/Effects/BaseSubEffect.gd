@@ -34,18 +34,22 @@ func on_effect_trigger(_effect:BaseEffect, _subeffect_data:Dictionary,
 
 func on_deal_damage(_effect:BaseEffect, _subeffect_data:Dictionary,
 					_game_state:GameStateData, _value:int, _damage_type:String, _target:BaseActor):
+	on_effect_trigger(_effect, _subeffect_data, BaseEffect.EffectTriggers.OnDamagDealt, _game_state )
 	pass
 
 func on_take_damage(_effect:BaseEffect, _subeffect_data:Dictionary,
 					_game_state:GameStateData, _value:int, _damage_type:String, _source):
+	on_effect_trigger(_effect, _subeffect_data, BaseEffect.EffectTriggers.OnDamageTaken, _game_state)
 	pass
 
 func on_move(_effect:BaseEffect, _subeffect_data:Dictionary,
 			_game_state:GameStateData, _old_pos:MapPos, _new_pos:MapPos, _move_type:String, _moved_by:BaseActor):
+	on_effect_trigger(_effect, _subeffect_data, BaseEffect.EffectTriggers.OnMove, _game_state)
 	pass
 
 func on_use_item(_effect:BaseEffect, _subeffect_data:Dictionary,
 				_game_state:GameStateData, _item, _target):
+	on_effect_trigger(_effect, _subeffect_data, BaseEffect.EffectTriggers.OnUseItem, _game_state)
 	pass
 
 ## Convert an array of String or int to an array of EffectTriggers 

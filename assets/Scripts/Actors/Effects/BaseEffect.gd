@@ -7,7 +7,8 @@ enum EffectTriggers {
 	OnTurnStart, OnTurnEnd, 
 	OnRoundStart, OnRoundEnd,
 	OnMove, OnDamageTaken, OnDamagDealt,
-	OnDeath, OnKill
+	OnDeath, OnKill,
+	OnUseItem
 	}
 
 ## Triggers which require additional information. They have thier own methods and can not be called from trigger_effect()
