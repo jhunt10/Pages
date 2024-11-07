@@ -23,7 +23,7 @@ func do_thing(parent_action:BaseAction, subaction_data:Dictionary, que_exe_data:
 			.append_source(SourceTagChain.SourceTypes.Action, parent_action)
 	
 	for target:BaseActor in targets:
-		DamageHelper.handle_damage(actor, target, damage_data, tag_chain, game_state)
+		DamageHelper.handle_attack(actor, target, damage_data, tag_chain, game_state)
 	
 
 	

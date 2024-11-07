@@ -11,9 +11,9 @@ func _process(delta: float) -> void:
 	pass
 
 func build_slots(que:ActionQue):
-	var section_size = 120 / max(que.que_size,1)
+	var section_size = 120 / max(que.get_max_que_size(),1)
 	var box_prefab:NinePatchRect = self.get_child(0)
-	for n in range(que.que_size):
+	for n in range(que.get_max_que_size()):
 		var new_box:NinePatchRect = box_prefab.duplicate()
 		new_box.custom_minimum_size = Vector2i(section_size*2, 32)
 		new_box.visible = true

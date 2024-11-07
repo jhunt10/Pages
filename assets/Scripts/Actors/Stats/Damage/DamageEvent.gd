@@ -9,13 +9,10 @@ enum DamageTypes {
 }
 
 var game_state:GameStateData
-var attacker:BaseActor
+var source
 var defender:BaseActor
 var source_tag_chain:SourceTagChain
 
-var _attack_stat_name:String
-var _base_attack_stat:int
-var _weapon_bonus:int
 var _attack_power:int
 var _damage_variance:float
 
@@ -23,27 +20,21 @@ var damage_type:DamageTypes
 var defense_type:DefenseType
 
 var is_successful:bool
+var base_damage:int
 var raw_damage:float
 var damage_after_armor:float
 var damage_after_attack_mods:float
 var damage_after_defend_mods:float
 var final_damage:int
 
-func _init(data:Dictionary, attacker:BaseActor, defender:BaseActor, source_tag_chain:SourceTagChain, game_state:GameStateData) -> void:
+func _init(data:Dictionary, source, base_damage:int, defender:BaseActor, source_tag_chain:SourceTagChain, game_state:GameStateData) -> void:
 	self.game_state = game_state
-	self.attacker = attacker
+	self.source = source
 	self.defender = defender
 	self.source_tag_chain = source_tag_chain
-	
 	is_successful = true
 	
-	_attack_stat_name = data.get("AtkStat", '')
-	if _attack_stat_name == '':
-		printerr("DamageEvent: No AtkStat given.")
-		is_successful = false
-		return
-	_base_attack_stat = attacker.stats.base_damge_from_stat(_attack_stat_name)
-	
+	self.base_damage = base_damage
 	_attack_power = data.get("AtkPower", 0)
 	_damage_variance = data.get("DamageVarient", 0)
 	

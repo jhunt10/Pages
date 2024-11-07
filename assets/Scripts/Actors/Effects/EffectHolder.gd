@@ -1,6 +1,6 @@
 class_name EffectHolder
 
-const LOGGING = true
+const LOGGING = false
 
 #signal lost_effect(effect_id:String)
 #signal gained_effect(effect:BaseEffect)

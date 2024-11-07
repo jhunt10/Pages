@@ -19,6 +19,8 @@ var _click_delay:float = 0.4
 var _click_timer:float
 
 func _ready() -> void:
+	super()
+	if Engine.is_editor_hint(): return
 	premade_item_button.visible = false
 	tab_bar.tab_changed.connect(_on_tab_bar_select)
 	if !ItemLibrary.Instance:
@@ -26,6 +28,8 @@ func _ready() -> void:
 	build_item_list()
 
 func _process(delta: float) -> void:
+	super(delta)
+	if Engine.is_editor_hint(): return
 	if _mouse_in_button and _hover_timer > 0:
 		_hover_timer -= delta
 		if _hover_timer < 0:

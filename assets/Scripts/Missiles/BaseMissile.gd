@@ -70,7 +70,7 @@ func do_thing(game_state:GameStateData):
 	if LOGGING: print("Found %s effected actors" % [effected_actors.size()])
 	for target_actor in effected_actors:
 		#if _target_params.is_valid_target_actor(source_actor, target_actor, game_state):
-		DamageHelper.handle_damage(source_actor, target_actor, _missle_data['DamageData'], 
+		DamageHelper.handle_attack(source_actor, target_actor, _missle_data['DamageData'], 
 								_source_target_chain, CombatRootControl.Instance.GameState)
 	node.on_missile_reach_target()
 

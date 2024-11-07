@@ -8,8 +8,11 @@ extends Control
 @export var que_input:QueInputControl
 @export var que_display:QueDisplayControl
 @export var que_collection_display:QueCollectionControl
+@export var stats_collection_display:StatCollectionDisplayControl
 
 @onready var item_select_menu:ItemSelectMenuControl = $ItemSelectMenuControl
+
+@onready var test_button:Button = $NextActorButton
 
 static var Instance:CombatUiControl
 static var ui_state_controller:UiStateController = UiStateController.new()
@@ -22,8 +25,14 @@ func _ready() -> void:
 		self.queue_free()
 		return
 	menu_button.pressed.connect(_on_menu_pressed)
+	test_button.pressed.connect(do_test)
 	pass # Replace with function body.
 
+func do_test():
+	var current_actor_id = stat_panel_control.actor.Id
+	var cur_index = CombatRootControl.Instance.GameState._actors.keys().find(current_actor_id)
+	var next_index = (cur_index + 1) % CombatRootControl.Instance.GameState._actors.size()
+	set_player_actor(CombatRootControl.Instance.GameState._actors.values()[next_index])
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

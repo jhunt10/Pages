@@ -1,7 +1,7 @@
 class_name UiState_CharacterSheet
 extends BaseUiState
 
-var character_sheet:CharacterSheetControl
+var character_sheet#:CharacterSheetControl
 
 func _init(controler:UiStateController, args:Dictionary) -> void:
 	super(controler, args)

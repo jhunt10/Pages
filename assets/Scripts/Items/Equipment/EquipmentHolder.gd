@@ -31,6 +31,18 @@ func save_equipt_items()->Array:
 func has_slot(slot:String)->bool:
 	return _slot_equipment_ids.has(slot)
 
+func get_equipt_items_of_slot_type(slot_type:String)->Array:
+	var out_list = []
+	for index in range(_slot_equipment_types.size()):
+		if _slot_equipment_types[index] == slot_type:
+			var item_id = _slot_equipment_ids[index]
+			if item_id == null:
+				continue
+			var item = ItemLibrary.get_item(item_id)
+			if item:
+				out_list.append(item)
+	return out_list
+
 func get_slot_equipment_type(index:int)->String:
 	if index < 0 or index >= _slot_equipment_types.size():
 		return ''

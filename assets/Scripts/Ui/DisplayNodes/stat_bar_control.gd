@@ -110,6 +110,8 @@ func _sync(snap_sync:bool = false):
 		#blink_value_bar.visible = false
 
 func set_color(color:Color):
+	if bar_holder == null:
+		bar_holder = $BarHolder
 	bar_holder.modulate = color
 
 func stop_preview_animation():

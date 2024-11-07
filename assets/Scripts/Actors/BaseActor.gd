@@ -48,14 +48,14 @@ func _init(key:String, load_path:String, def:Dictionary, id:String, data:Diction
 	_default_sprite = _def['Sprite']
 	_allow_auto_que = _def.get('AutoQueing', false)
 	
-	Que = ActionQue.new(self)
-	
 	var stat_data = _def["Stats"]
 	stats = StatHolder.new(self, stat_data)
 	effects = EffectHolder.new(self)
 	#items = BaseItemBag.new(self)
 	details = ObjectDetailsData.new(_def_load_path, _def.get("Details", {}))
 	equipment = EquipmentHolder.new(self)
+	Que = ActionQue.new(self)
+	
 
 func save_data()->Dictionary:
 	var data = super()

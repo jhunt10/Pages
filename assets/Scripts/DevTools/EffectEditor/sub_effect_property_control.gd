@@ -113,7 +113,8 @@ func set_prop(prop_name:String, prop_type:BaseSubEffect.SubEffectPropTypes, prop
 		line_edit.text = "Unknown Prop Type: " + str(prop_type)
 
 func get_stat_mod_options():
-	return EffectEditorControl.Instance.get_stat_mods()
+	#return EffectEditorControl.Instance.get_stat_mods()
+	return []
 	
 func get_damage_mod_options():
 	return []

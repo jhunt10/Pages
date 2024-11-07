@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://cxiyfaswdygu7"]
+[gd_scene load_steps=36 format=3 uid="uid://cxiyfaswdygu7"]
 
 [ext_resource type="Script" path="res://Scenes/UiNodes/EquipmentMenu/equipment_menu_container.gd" id="1_7xry3"]
 [ext_resource type="Script" path="res://assets/Scripts/Ui/DisplayNodes/back_patch_container.gd" id="1_wprwc"]
@@ -32,19 +32,23 @@
 [ext_resource type="Texture2D" uid="uid://s8s7rktavc7e" path="res://assets/Sprites/UI/BackPatches/Patch_32_8.png" id="21_rx2hk"]
 [ext_resource type="Script" path="res://Scenes/UiNodes/EquipmentMenu/stats_display_container.gd" id="24_2alwo"]
 [ext_resource type="Script" path="res://Scenes/UiNodes/EquipmentMenu/stat_display_entry.gd" id="25_7op4r"]
+[ext_resource type="Script" path="res://Scenes/UiNodes/EquipmentMenu/page_list_container.gd" id="26_pcb3t"]
+[ext_resource type="Texture2D" uid="uid://cg1yo6bhpalea" path="res://assets/Sprites/UI/QueInputAndDisplay/mini_page_slot.png" id="27_1e8xt"]
+[ext_resource type="Script" path="res://Scenes/UiNodes/PageQueMenu/page_slot_button.gd" id="28_um48u"]
 
-[node name="EquipmentMenuContainer" type="Container" node_paths=PackedStringArray("mouse_over_control", "stats_display_container", "equipment_display_container", "inventory_container", "background", "inner_container")]
-custom_minimum_size = Vector2(576, 607)
+[node name="EquipmentMenuContainer" type="Container" node_paths=PackedStringArray("mouse_over_control", "stats_display_container", "equipment_display_container", "inventory_container", "page_list_container", "background", "inner_container")]
+custom_minimum_size = Vector2(576, 631)
 offset_right = 576.0
-offset_bottom = 607.0
+offset_bottom = 631.0
 script = ExtResource("1_7xry3")
 mouse_over_control = NodePath("MouseOverControl")
 stats_display_container = NodePath("MainContainer/HBoxContainer/StatsDisplayContainer")
 equipment_display_container = NodePath("MainContainer/HBoxContainer/EquipSlotsContainer")
 inventory_container = NodePath("MainContainer/EquiptInventoryContainer")
+page_list_container = NodePath("MainContainer/PageListContainer")
 background = NodePath("Background")
 inner_container = NodePath("MainContainer")
-force_dimintions = Vector2i(576, 607)
+force_dimintions = Vector2i(576, 0)
 
 [node name="Background" type="NinePatchRect" parent="."]
 layout_mode = 2
@@ -505,8 +509,53 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "Value"
 
+[node name="PageListContainer" type="Container" parent="MainContainer" node_paths=PackedStringArray("equipment_menu_container", "page_menu_button", "premade_page_slot_button", "page_slots_container", "background", "inner_container")]
+custom_minimum_size = Vector2(8, 40)
+layout_mode = 2
+script = ExtResource("26_pcb3t")
+equipment_menu_container = NodePath("../..")
+page_menu_button = NodePath("HBoxContainer/PagesButton")
+premade_page_slot_button = NodePath("HBoxContainer/PageQueSlotButton")
+page_slots_container = NodePath("HBoxContainer/PageButtonsContainer")
+background = NodePath("NinePatchRect")
+inner_container = NodePath("HBoxContainer")
+margin_override = 4
+force_fill_x = true
+
+[node name="NinePatchRect" type="NinePatchRect" parent="MainContainer/PageListContainer"]
+layout_mode = 2
+texture = ExtResource("4_bemq8")
+patch_margin_left = 12
+patch_margin_top = 12
+patch_margin_right = 12
+patch_margin_bottom = 12
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MainContainer/PageListContainer"]
+layout_mode = 2
+
+[node name="PageQueSlotButton" type="TextureButton" parent="MainContainer/PageListContainer/HBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("27_1e8xt")
+script = ExtResource("28_um48u")
+
+[node name="IconRect" type="TextureRect" parent="MainContainer/PageListContainer/HBoxContainer/PageQueSlotButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PageButtonsContainer" type="HBoxContainer" parent="MainContainer/PageListContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PagesButton" type="Button" parent="MainContainer/PageListContainer/HBoxContainer"]
+layout_mode = 2
+text = "Edit Pages"
+
 [node name="EquiptInventoryContainer" type="Container" parent="MainContainer" node_paths=PackedStringArray("tab_bar", "items_container", "premade_item_button", "background", "inner_container")]
-custom_minimum_size = Vector2(12, 287)
+custom_minimum_size = Vector2(12, 267)
 layout_mode = 2
 script = ExtResource("13_nccae")
 tab_bar = NodePath("InnerContainer/TabBar")
@@ -540,7 +589,7 @@ tab_4/title = "Weapon"
 tab_5/title = "OffHand"
 
 [node name="ScrollContainer" type="ScrollContainer" parent="MainContainer/EquiptInventoryContainer/InnerContainer"]
-custom_minimum_size = Vector2(0, 240)
+custom_minimum_size = Vector2(0, 220)
 layout_mode = 2
 vertical_scroll_mode = 2
 

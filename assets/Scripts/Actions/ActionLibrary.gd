@@ -31,7 +31,7 @@ func _init() -> void:
 	Instance.init_load()
 
 static func list_all_actions()->Array:
-	return Instance._loaded_objects.values()
+	return Instance._static_objects.values()
 
 static func get_action_def(key:String)->Dictionary:
 	return Instance.get_object_def(key)

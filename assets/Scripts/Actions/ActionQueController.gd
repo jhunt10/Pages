@@ -341,12 +341,12 @@ func _calc_turn_padding():
 	var max_que_last_key = ''
 	for que_id in que_order:
 		var que:ActionQue = _action_ques[que_id]
-		if que.que_size >= max_que_size:	
-			max_que_size = que.que_size
+		if que.get_max_que_size() >= max_que_size:	
+			max_que_size = que.get_max_que_size()
 			max_que_last_key = que_id
 		ques_to_slots[que_id] = []
 		que_section_indexes[que_id] = 0
-		que_section_sizes[que_id] = floori(120 / maxi(que.que_size, 1))
+		que_section_sizes[que_id] = floori(120 / maxi(que.get_max_que_size(), 1))
 	
 	# Add slots up front, or only as thier section is passed
 	# changes behavior in way I can't exomplain right now
@@ -365,7 +365,7 @@ func _calc_turn_padding():
 			var section_index = que_section_indexes[key]
 			var next_section = (section_index + pre_offset) * section_size
 			# Has entered new section
-			if index >= next_section and _action_ques[key].que_size > 0:
+			if index >= next_section and _action_ques[key].get_max_que_size() > 0:
 				had_increase = true
 				increased_cache.append(key)
 		

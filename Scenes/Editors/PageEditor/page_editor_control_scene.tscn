@@ -373,7 +373,7 @@ terrain_set_0/terrain_0/name = "Terrain 0"
 terrain_set_0/terrain_0/color = Color(0.224135, 0.184226, 1, 1)
 sources/0 = SubResource("TileSetAtlasSource_tlacb")
 
-[node name="PageEditorControl" type="Container" node_paths=PackedStringArray("preview_subedit_container", "cost_subedit_container", "subactions_subedit_container", "missile_subedit_container", "target_subedit_container", "exit_button", "details_editor_control", "file_subeitor_container", "background", "inner_container")]
+[node name="PageEditorControl" type="Container" node_paths=PackedStringArray("preview_subedit_container", "cost_subedit_container", "subactions_subedit_container", "damage_subedit_container", "missile_subedit_container", "target_subedit_container", "exit_button", "details_editor_control", "file_subeitor_container", "background", "inner_container")]
 custom_minimum_size = Vector2(1148, 648)
 offset_right = 1148.0
 offset_bottom = 648.0
@@ -383,6 +383,7 @@ script = ExtResource("1_j87ob")
 preview_subedit_container = NodePath("InnerContainer/MainContainer/MiddleContainer/PreviewEditorContainer")
 cost_subedit_container = NodePath("InnerContainer/MainContainer/RightContainer/CostSubEditorContainer")
 subactions_subedit_container = NodePath("InnerContainer/MainContainer/MiddleContainer/SubActionSubEditorContainer")
+damage_subedit_container = NodePath("InnerContainer/MainContainer/RightContainer/Damage")
 missile_subedit_container = NodePath("InnerContainer/MainContainer/RightContainer/Missiles")
 target_subedit_container = NodePath("InnerContainer/MainContainer/RightContainer/TargetSubEditorContainer")
 exit_button = NodePath("InnerContainer/TopBarContainer/ExitButton")

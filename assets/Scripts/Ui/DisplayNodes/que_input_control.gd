@@ -32,6 +32,8 @@ func _process(_delta: float) -> void:
 		_resize = false
 
 func set_actor(actor:BaseActor):
+	if _actor:
+		_actor.equipment.equipment_changed.disconnect(_build_buttons)
 	_actor = actor
 	_actor.equipment.equipment_changed.connect(_build_buttons)
 	_build_buttons()
@@ -44,10 +46,11 @@ func _build_buttons():
 		_buttons.clear()
 	var index = 0
 	for action_key in _actor.get_action_list():
+		if action_key == null:
+			continue
 		var new_button:TextureButton = page_button_prefab.duplicate()
 		page_button_prefab.get_parent().add_child(new_button)
 		new_button.visible = true
-		
 		var action = MainRootNode.action_library.get_action(action_key)
 		if action == null:
 			new_button.get_child(0).texture = load(ActionLibrary.NO_ICON_SPRITE)

@@ -71,6 +71,12 @@ func open_character_sheet(_actor:BaseActor=null):
 	center_container.add_child(charsheet)
 	charsheet.set_actor(actor)
 	pass
+
+func open_page_menu(actor:BaseActor):
+	var page_menu = load("res://Scenes/UiNodes/PageQueMenu/page_que_menu.tscn").instantiate()
+	center_container.add_child(page_menu)
+	page_menu.set_actor(actor)
+	return page_menu
 	
 func open_page_editor():
 	var page_editor = load("res://Scenes/Editors/PageEditor/page_editor_control_scene.tscn").instantiate()

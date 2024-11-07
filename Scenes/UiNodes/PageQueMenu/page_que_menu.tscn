@@ -1,0 +1,184 @@
+[gd_scene load_steps=12 format=3 uid="uid://bfvirkm6ona2f"]
+
+[ext_resource type="Script" path="res://Scenes/UiNodes/PageQueMenu/page_que_menu_container.gd" id="1_gsfc6"]
+[ext_resource type="Script" path="res://Scenes/UiNodes/PageQueMenu/page_inventory_container.gd" id="1_iqfre"]
+[ext_resource type="Texture2D" uid="uid://io35wpu802fp" path="res://assets/Sprites/UI/BackPatches/Patch_64_12.png" id="2_dvvmy"]
+[ext_resource type="Script" path="res://Scenes/UiNodes/PageQueMenu/page_que_slots_container.gd" id="3_2c81l"]
+[ext_resource type="Script" path="res://Scenes/UiNodes/PageQueMenu/page_detials_container.gd" id="3_c223m"]
+[ext_resource type="Texture2D" uid="uid://dul8y1l1gw420" path="res://assets/Sprites/UI/BackPatches/Patch_32_8_Dark.png" id="3_cmsq4"]
+[ext_resource type="Texture2D" uid="uid://deqwpr7qu8fp2" path="res://assets/Sprites/UI/CharacterEdit/InventorySlotBackground.png" id="4_vtugl"]
+[ext_resource type="Texture2D" uid="uid://cg1yo6bhpalea" path="res://assets/Sprites/UI/QueInputAndDisplay/mini_page_slot.png" id="5_admv5"]
+[ext_resource type="Texture2D" uid="uid://cq2p1mnoevjoc" path="res://assets/Sprites/UI/CharacterEdit/InventoryItemButton_Pressed.png" id="5_ot6vt"]
+[ext_resource type="Script" path="res://Scenes/UiNodes/PageQueMenu/page_slot_button.gd" id="6_4qrjt"]
+[ext_resource type="Script" path="res://Scenes/UiNodes/PageQueMenu/inventory_page_button.gd" id="6_40qok"]
+
+[node name="PageQueMenu" type="Container" node_paths=PackedStringArray("page_que_slots_container", "details_container", "page_inventory_container", "background", "inner_container")]
+custom_minimum_size = Vector2(628, 418)
+offset_right = 628.0
+offset_bottom = 418.0
+script = ExtResource("1_gsfc6")
+page_que_slots_container = NodePath("InnerContainer/HBoxContainer/PageQueSlotsContainer")
+details_container = NodePath("InnerContainer/HBoxContainer/PageDetialsContainer")
+page_inventory_container = NodePath("InnerContainer/PageInventoryContainer")
+background = NodePath("Background")
+inner_container = NodePath("InnerContainer")
+
+[node name="Background" type="NinePatchRect" parent="."]
+layout_mode = 2
+texture = ExtResource("2_dvvmy")
+patch_margin_left = 12
+patch_margin_top = 12
+patch_margin_right = 12
+patch_margin_bottom = 12
+
+[node name="InnerContainer" type="BoxContainer" parent="."]
+layout_mode = 2
+vertical = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="InnerContainer"]
+layout_mode = 2
+
+[node name="PageQueSlotsContainer" type="Container" parent="InnerContainer/HBoxContainer" node_paths=PackedStringArray("premade_page_slot_button", "page_slots_container", "background", "inner_container")]
+custom_minimum_size = Vector2(360, 16)
+layout_mode = 2
+script = ExtResource("3_2c81l")
+premade_page_slot_button = NodePath("InnerContainer/PageSlotButton")
+page_slots_container = NodePath("InnerContainer/FlowContainer")
+background = NodePath("NinePatchRect")
+inner_container = NodePath("InnerContainer")
+force_fill_x = true
+force_fill_y = true
+force_dimintions = Vector2i(360, 0)
+
+[node name="NinePatchRect" type="NinePatchRect" parent="InnerContainer/HBoxContainer/PageQueSlotsContainer"]
+layout_mode = 2
+texture = ExtResource("3_cmsq4")
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+
+[node name="InnerContainer" type="BoxContainer" parent="InnerContainer/HBoxContainer/PageQueSlotsContainer"]
+layout_mode = 2
+vertical = true
+
+[node name="PageSlotButton" type="TextureButton" parent="InnerContainer/HBoxContainer/PageQueSlotsContainer/InnerContainer"]
+layout_mode = 2
+texture_normal = ExtResource("5_admv5")
+script = ExtResource("6_4qrjt")
+
+[node name="IconRect" type="TextureRect" parent="InnerContainer/HBoxContainer/PageQueSlotsContainer/InnerContainer/PageSlotButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="FlowContainer" type="FlowContainer" parent="InnerContainer/HBoxContainer/PageQueSlotsContainer/InnerContainer"]
+layout_mode = 2
+
+[node name="PageDetialsContainer" type="Container" parent="InnerContainer/HBoxContainer" node_paths=PackedStringArray("name_label", "tags_label", "description_label", "background", "inner_container")]
+custom_minimum_size = Vector2(240, 150)
+layout_mode = 2
+script = ExtResource("3_c223m")
+name_label = NodePath("InnerContainer/PageNameContainer/NameLabel")
+tags_label = NodePath("InnerContainer/TagsContainer/TagsLabel")
+description_label = NodePath("InnerContainer/DescriptionLabel")
+background = NodePath("NinePatchRect")
+inner_container = NodePath("InnerContainer")
+force_fill_x = true
+force_dimintions = Vector2i(240, 0)
+
+[node name="NinePatchRect" type="NinePatchRect" parent="InnerContainer/HBoxContainer/PageDetialsContainer"]
+layout_mode = 2
+texture = ExtResource("3_cmsq4")
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+
+[node name="InnerContainer" type="BoxContainer" parent="InnerContainer/HBoxContainer/PageDetialsContainer"]
+layout_mode = 2
+vertical = true
+
+[node name="PageNameContainer" type="HBoxContainer" parent="InnerContainer/HBoxContainer/PageDetialsContainer/InnerContainer"]
+layout_mode = 2
+
+[node name="NameLabel" type="Label" parent="InnerContainer/HBoxContainer/PageDetialsContainer/InnerContainer/PageNameContainer"]
+layout_mode = 2
+text = "Page Name"
+
+[node name="TagsContainer" type="HBoxContainer" parent="InnerContainer/HBoxContainer/PageDetialsContainer/InnerContainer"]
+layout_mode = 2
+
+[node name="TagsLabel" type="Label" parent="InnerContainer/HBoxContainer/PageDetialsContainer/InnerContainer/TagsContainer"]
+layout_mode = 2
+text = "Tags: "
+
+[node name="DescriptionLabel" type="RichTextLabel" parent="InnerContainer/HBoxContainer/PageDetialsContainer/InnerContainer"]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+text = "Description "
+
+[node name="PageInventoryContainer" type="Container" parent="InnerContainer" node_paths=PackedStringArray("tab_bar", "pages_container", "premade_page_button", "background", "inner_container")]
+custom_minimum_size = Vector2(24, 240)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_iqfre")
+tab_bar = NodePath("InnerContainer/TabBar")
+pages_container = NodePath("InnerContainer/ScrollContainer/FlowContainer")
+premade_page_button = NodePath("InnerContainer/InventoryPageButton")
+background = NodePath("Background")
+inner_container = NodePath("InnerContainer")
+force_fill_y = true
+force_dimintions = Vector2i(0, 240)
+
+[node name="Background" type="NinePatchRect" parent="InnerContainer/PageInventoryContainer"]
+layout_mode = 2
+texture = ExtResource("3_cmsq4")
+patch_margin_left = 12
+patch_margin_top = 12
+patch_margin_right = 12
+patch_margin_bottom = 12
+
+[node name="InnerContainer" type="BoxContainer" parent="InnerContainer/PageInventoryContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+vertical = true
+
+[node name="TabBar" type="TabBar" parent="InnerContainer/PageInventoryContainer/InnerContainer"]
+layout_mode = 2
+tab_count = 1
+tab_0/title = "Page"
+
+[node name="InventoryPageButton" type="TextureButton" parent="InnerContainer/PageInventoryContainer/InnerContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture_normal = ExtResource("4_vtugl")
+texture_pressed = ExtResource("5_ot6vt")
+stretch_mode = 3
+script = ExtResource("6_40qok")
+
+[node name="IconRect" type="TextureRect" parent="InnerContainer/PageInventoryContainer/InnerContainer/InventoryPageButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="InnerContainer/PageInventoryContainer/InnerContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+horizontal_scroll_mode = 3
+vertical_scroll_mode = 2
+
+[node name="FlowContainer" type="FlowContainer" parent="InnerContainer/PageInventoryContainer/InnerContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3

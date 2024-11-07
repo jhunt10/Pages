@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=4 uid="uid://dfeilp6hbiuqs"]
+[gd_scene load_steps=34 format=4 uid="uid://dfeilp6hbiuqs"]
 
 [ext_resource type="Script" path="res://assets/Scripts/Scenes/combat_scene.gd" id="1_crigy"]
 [ext_resource type="Script" path="res://assets/Scripts/Map/map_controler_node.gd" id="3_vohw8"]
@@ -19,6 +19,7 @@
 [ext_resource type="Script" path="res://assets/Scripts/DevTools/dev_combat_data_control.gd" id="19_yc3tw"]
 [ext_resource type="Texture2D" uid="uid://s8s7rktavc7e" path="res://assets/Sprites/UI/BackPatches/Patch_32_8.png" id="20_6lcyn"]
 [ext_resource type="Texture2D" uid="uid://brpsb4iq3cd3k" path="res://assets/Sprites/UI/MenuButtonBackground_Pressed.png" id="20_jcfy7"]
+[ext_resource type="Script" path="res://assets/Scripts/Ui/DisplayNodes/stat_collection_display_control.gd" id="21_fx1yp"]
 [ext_resource type="Texture2D" uid="uid://b71e02wpy7dij" path="res://assets/Sprites/UI/GearButton.png" id="21_s2qa8"]
 [ext_resource type="Script" path="res://assets/Scripts/DevTools/que_cal_control.gd" id="22_4rk3c"]
 [ext_resource type="Texture2D" uid="uid://cen5h0gfhguhg" path="res://assets/Sprites/UI/GearButtonPressed.png" id="22_eoo3l"]
@@ -1213,6 +1214,7 @@ que_display = NodePath("QueDisplayControl")
 que_collection_display = NodePath("QueCollectionDisplayControl")
 
 [node name="StatPanelControl" parent="CombatUiControl" instance=ExtResource("16_jsy0k")]
+layout_mode = 0
 
 [node name="MenuButton" type="TextureButton" parent="CombatUiControl"]
 layout_mode = 1
@@ -1429,6 +1431,33 @@ offset_left = 16.0
 offset_top = 183.0
 offset_right = 56.0
 offset_bottom = 223.0
+
+[node name="StatCollectionDisplayControl" type="Control" parent="CombatUiControl"]
+anchors_preset = 0
+offset_left = 907.0
+offset_top = 179.0
+offset_right = 947.0
+offset_bottom = 219.0
+script = ExtResource("21_fx1yp")
+
+[node name="PremadePanelControl" parent="CombatUiControl/StatCollectionDisplayControl" instance=ExtResource("16_jsy0k")]
+layout_mode = 2
+offset_right = 180.0
+offset_bottom = 82.0
+
+[node name="PanelsContainer" type="VBoxContainer" parent="CombatUiControl/StatCollectionDisplayControl"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="NextActorButton" type="Button" parent="CombatUiControl"]
+layout_mode = 0
+offset_left = 293.0
+offset_top = 5.0
+offset_right = 384.0
+offset_bottom = 36.0
+text = "Next Actor
+"
 
 [node name="DevDataControl" type="Control" parent="."]
 layout_mode = 1

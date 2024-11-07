@@ -1,7 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://cyakkk5i1nreg"]
+[gd_scene load_steps=12 format=3 uid="uid://cyakkk5i1nreg"]
 
 [ext_resource type="Script" path="res://assets/Scripts/Ui/DisplayNodes/stat_panel_control.gd" id="1_mnhn6"]
 [ext_resource type="Texture2D" uid="uid://5sc84oyivah" path="res://assets/Sprites/UI/backpatch.png" id="2_4hrfb"]
+[ext_resource type="Script" path="res://assets/Scripts/Ui/DisplayNodes/back_patch_container.gd" id="2_or0gt"]
 [ext_resource type="Texture2D" uid="uid://bg625rwa6bewf" path="res://data/Actors/TestActorSprite.png" id="3_f6mh4"]
 [ext_resource type="Script" path="res://assets/Scripts/Ui/DisplayNodes/stat_bar_control.gd" id="3_tsv3q"]
 [ext_resource type="Texture2D" uid="uid://ccygr5mnjfwq1" path="res://assets/Sprites/UI/StatPanel/full_bar_background.png" id="5_3nnr1"]
@@ -110,20 +111,21 @@ _data = {
 "blink_preview": SubResource("Animation_xgc6q")
 }
 
-[node name="StatPanelControl" type="Control"]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 180.0
-offset_bottom = 59.0
+[node name="StatPanelControl" type="VBoxContainer"]
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/separation = 1
 script = ExtResource("1_mnhn6")
 
-[node name="Background" type="NinePatchRect" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="BackPatchContainer" type="Container" parent="." node_paths=PackedStringArray("background", "inner_container")]
+custom_minimum_size = Vector2(180, 48)
+layout_mode = 2
+script = ExtResource("2_or0gt")
+background = NodePath("Background")
+inner_container = NodePath("VBoxContainer")
+
+[node name="Background" type="NinePatchRect" parent="BackPatchContainer"]
+layout_mode = 2
 texture = ExtResource("2_4hrfb")
 region_rect = Rect2(0, 0, 64, 64)
 patch_margin_left = 8
@@ -131,38 +133,34 @@ patch_margin_top = 8
 patch_margin_right = 8
 patch_margin_bottom = 8
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-layout_mode = 0
-offset_left = 8.0
-offset_top = 8.0
-offset_right = 172.0
-offset_bottom = 48.0
+[node name="VBoxContainer" type="VBoxContainer" parent="BackPatchContainer"]
+layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="BackPatchContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer"]
+[node name="PortaitTextureRect" type="TextureRect" parent="BackPatchContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 texture = ExtResource("3_f6mh4")
 stretch_mode = 2
 
-[node name="StatBarContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
+[node name="StatBarContainer" type="VBoxContainer" parent="BackPatchContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(128, 0)
 layout_mode = 2
 
-[node name="HealthStatBar" type="Control" parent="VBoxContainer/HBoxContainer/StatBarContainer"]
+[node name="HealthStatBar" type="Control" parent="BackPatchContainer/VBoxContainer/HBoxContainer/StatBarContainer"]
 custom_minimum_size = Vector2(128, 16)
 layout_mode = 2
 script = ExtResource("3_tsv3q")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="VBoxContainer/HBoxContainer/StatBarContainer/HealthStatBar"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="BackPatchContainer/VBoxContainer/HBoxContainer/StatBarContainer/HealthStatBar"]
 root_node = NodePath("../BarHolder")
 libraries = {
 "": SubResource("AnimationLibrary_o32q1")
 }
 
-[node name="FullBarRect" type="NinePatchRect" parent="VBoxContainer/HBoxContainer/StatBarContainer/HealthStatBar"]
+[node name="FullBarRect" type="NinePatchRect" parent="BackPatchContainer/VBoxContainer/HBoxContainer/StatBarContainer/HealthStatBar"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -176,13 +174,13 @@ patch_margin_top = 8
 patch_margin_right = 8
 patch_margin_bottom = 8
 
-[node name="BarHolder" type="Control" parent="VBoxContainer/HBoxContainer/StatBarContainer/HealthStatBar"]
+[node name="BarHolder" type="Control" parent="BackPatchContainer/VBoxContainer/HBoxContainer/StatBarContainer/HealthStatBar"]
 modulate = Color(1, 0, 0, 1)
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="BackValueRect" type="NinePatchRect" parent="VBoxContainer/HBoxContainer/StatBarContainer/HealthStatBar/BarHolder"]
+[node name="BackValueRect" type="NinePatchRect" parent="BackPatchContainer/VBoxContainer/HBoxContainer/StatBarContainer/HealthStatBar/BarHolder"]
 modulate = Color(0.310617, 0.310617, 0.310617, 1)
 layout_mode = 0
 offset_right = 90.0
@@ -194,7 +192,7 @@ patch_margin_top = 8
 patch_margin_right = 8
 patch_margin_bottom = 8
 
-[node name="ColorValueRect" type="NinePatchRect" parent="VBoxContainer/HBoxContainer/StatBarContainer/HealthStatBar/BarHolder"]
+[node name="ColorValueRect" type="NinePatchRect" parent="BackPatchContainer/VBoxContainer/HBoxContainer/StatBarContainer/HealthStatBar/BarHolder"]
 layout_mode = 0
 offset_right = 42.0
 offset_bottom = 16.0
@@ -205,7 +203,7 @@ patch_margin_top = 8
 patch_margin_right = 8
 patch_margin_bottom = 8
 
-[node name="BlinkValueRect" type="NinePatchRect" parent="VBoxContainer/HBoxContainer/StatBarContainer/HealthStatBar/BarHolder"]
+[node name="BlinkValueRect" type="NinePatchRect" parent="BackPatchContainer/VBoxContainer/HBoxContainer/StatBarContainer/HealthStatBar/BarHolder"]
 modulate = Color(1, 1, 1, 0)
 layout_mode = 0
 offset_right = 73.0
@@ -217,7 +215,7 @@ patch_margin_top = 8
 patch_margin_right = 8
 patch_margin_bottom = 8
 
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/StatBarContainer/HealthStatBar"]
+[node name="Label" type="Label" parent="BackPatchContainer/VBoxContainer/HBoxContainer/StatBarContainer/HealthStatBar"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -231,23 +229,45 @@ text = "CUR / MAX"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="EffectIcon" type="TextureRect" parent="VBoxContainer"]
+[node name="EffectIcon" type="TextureRect" parent="."]
+z_as_relative = false
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 texture = ExtResource("7_k56th")
 stretch_mode = 2
 
-[node name="Label" type="Label" parent="VBoxContainer/EffectIcon"]
-modulate = Color(0, 0, 0, 1)
+[node name="Label" type="Label" parent="EffectIcon"]
+self_modulate = Color(0, 0, 0, 1)
+z_index = 1
+z_as_relative = false
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+offset_left = -10.0
+offset_top = -23.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "X"
 horizontal_alignment = 2
 vertical_alignment = 2
 
-[node name="IconBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="ColorRect" type="ColorRect" parent="EffectIcon/Label"]
+z_as_relative = false
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1.0
+offset_top = 3.0
+offset_right = 1.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.439049, 0.439049, 0.439049, 1)
+
+[node name="IconBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 2

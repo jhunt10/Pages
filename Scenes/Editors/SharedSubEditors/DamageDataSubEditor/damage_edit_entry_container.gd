@@ -7,9 +7,11 @@ extends BaseSubEditEntryContainer
 @onready var defense_option_button:LoadedOptionButton = $InnerContainer/TypeSDefenseContainer/DefenseOptionButton
 @onready var vfx_option_button:LoadedOptionButton = $InnerContainer/VFXContainer/VFXOptionButton
 
-@onready var base_damage_spinbox:SpinBox = $InnerContainer/PowerStatContainer/PowerSpinBox
+@onready var power_spinbox:SpinBox = $InnerContainer/PowerStatContainer/PowerSpinBox
 @onready var var_damage_spinbox:SpinBox = $InnerContainer/PowerStatContainer/VarientSpinBox
 @onready var min_max_label:Label = $InnerContainer/PowerStatContainer/MinMaxLabel
+
+@onready var base_damage_container:HBoxContainer = $InnerContainer/BaseDamageContainer
 
 func _get_key_input()->LineEdit:
 	return $InnerContainer/KeyContainer/KeyLineEdit
@@ -22,10 +24,11 @@ func _ready() -> void:
 	var nam = self.name
 	printerr(self.name)
 	stat_option_button.get_options_func = get_attack_stats
+	stat_option_button.item_selected.connect(on_stat_selected)
 	type_option_button.get_options_func = get_damage_types
 	defense_option_button.get_options_func = get_defense_types
 	vfx_option_button.get_options_func = get_damage_effect_options
-	base_damage_spinbox.value_changed.connect(on_base_or_var_damage_change)
+	power_spinbox.value_changed.connect(on_base_or_var_damage_change)
 	var_damage_spinbox.value_changed.connect(on_base_or_var_damage_change)
 	set_min_max()
 	pass
@@ -38,18 +41,20 @@ func get_key_to_input_mapping()->Dictionary:
 		"DamageType": $InnerContainer/TypeSDefenseContainer/TypeOptionButton,
 		"DefenseType": $InnerContainer/TypeSDefenseContainer/DefenseOptionButton,
 		"DamageEffect": $InnerContainer/VFXContainer/VFXOptionButton,
-		"DamageVarient": $InnerContainer/PowerStatContainer/VarientSpinBox
+		"DamageVarient": $InnerContainer/PowerStatContainer/VarientSpinBox,
+		"BaseDamage": $InnerContainer/BaseDamageContainer/BaseDamageSpinBox
 	}
 
 func load_data(object_key:String, data:Dictionary):
 	super(object_key, data)
+	base_damage_container.visible = data.has("BaseDamage")
 	set_min_max()
 
 func on_base_or_var_damage_change(val):
 	set_min_max()
 
 func set_min_max():
-	var base = base_damage_spinbox.value
+	var base = power_spinbox.value
 	var vare = var_damage_spinbox.value
 	var min = base - (base * vare)
 	var max = base + (base * vare)
@@ -66,3 +71,10 @@ func get_attack_stats()->Array:
 	
 func get_defense_types()->Array:
 	return DamageEvent.DefenseType.keys()
+
+func on_stat_selected(index:int):
+	printerr("SELECTED %s" % [index])
+	if index == 0:
+		base_damage_container.visible = true
+	else:
+		base_damage_container.visible = false

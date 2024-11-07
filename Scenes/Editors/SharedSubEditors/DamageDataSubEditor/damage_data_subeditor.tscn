@@ -11,9 +11,9 @@
 LineEdit/constants/minimum_character_width = 3
 
 [node name="Damage" type="Container" node_paths=PackedStringArray("add_button", "premade_edit_entry", "entries_container", "title_label", "background", "inner_container")]
-custom_minimum_size = Vector2(376, 245)
+custom_minimum_size = Vector2(376, 280)
 offset_right = 376.0
-offset_bottom = 245.0
+offset_bottom = 280.0
 size_flags_vertical = 3
 script = ExtResource("1_3f4yg")
 default_entry_name = "DamageData"
@@ -53,7 +53,7 @@ layout_mode = 2
 text = "Add"
 
 [node name="DamageEditEntryContainer" type="Container" parent="InnerContainer" node_paths=PackedStringArray("background", "inner_container")]
-custom_minimum_size = Vector2(16, 190)
+custom_minimum_size = Vector2(16, 225)
 layout_mode = 2
 script = ExtResource("3_5kekf")
 background = NodePath("Background")
@@ -86,12 +86,42 @@ size_flags_horizontal = 3
 layout_mode = 2
 text = "X"
 
+[node name="StatContainer" type="HBoxContainer" parent="InnerContainer/DamageEditEntryContainer/InnerContainer"]
+layout_mode = 2
+
+[node name="StatLabel" type="Label" parent="InnerContainer/DamageEditEntryContainer/InnerContainer/StatContainer"]
+layout_mode = 2
+text = "Base Damage Stat:"
+
+[node name="StatOptionButton" type="OptionButton" parent="InnerContainer/DamageEditEntryContainer/InnerContainer/StatContainer"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+size_flags_horizontal = 3
+text_overrun_behavior = 3
+fit_to_longest_item = false
+allow_reselect = true
+script = ExtResource("5_vyr2s")
+allways_show_none = true
+no_option_text = "Custom"
+
+[node name="BaseDamageContainer" type="HBoxContainer" parent="InnerContainer/DamageEditEntryContainer/InnerContainer"]
+layout_mode = 2
+
+[node name="BaseDamageLabel" type="Label" parent="InnerContainer/DamageEditEntryContainer/InnerContainer/BaseDamageContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Custom Base Damage:"
+
+[node name="BaseDamageSpinBox" type="SpinBox" parent="InnerContainer/DamageEditEntryContainer/InnerContainer/BaseDamageContainer"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+
 [node name="PowerStatContainer" type="HBoxContainer" parent="InnerContainer/DamageEditEntryContainer/InnerContainer"]
 layout_mode = 2
 
 [node name="PowerLabel" type="Label" parent="InnerContainer/DamageEditEntryContainer/InnerContainer/PowerStatContainer"]
 layout_mode = 2
-text = "Base:"
+text = "Power:"
 
 [node name="PowerSpinBox" type="SpinBox" parent="InnerContainer/DamageEditEntryContainer/InnerContainer/PowerStatContainer"]
 layout_mode = 2
@@ -115,21 +145,6 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "( 0 - 0 )"
 horizontal_alignment = 1
-
-[node name="StatContainer" type="HBoxContainer" parent="InnerContainer/DamageEditEntryContainer/InnerContainer"]
-layout_mode = 2
-
-[node name="StatLabel" type="Label" parent="InnerContainer/DamageEditEntryContainer/InnerContainer/StatContainer"]
-layout_mode = 2
-text = "Scales with Stat:"
-
-[node name="StatOptionButton" type="OptionButton" parent="InnerContainer/DamageEditEntryContainer/InnerContainer/StatContainer"]
-custom_minimum_size = Vector2(0, 32)
-layout_mode = 2
-size_flags_horizontal = 3
-text_overrun_behavior = 3
-fit_to_longest_item = false
-script = ExtResource("5_vyr2s")
 
 [node name="TypeSDefenseContainer" type="HBoxContainer" parent="InnerContainer/DamageEditEntryContainer/InnerContainer"]
 layout_mode = 2

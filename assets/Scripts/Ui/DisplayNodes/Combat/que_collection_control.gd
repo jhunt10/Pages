@@ -13,14 +13,6 @@ func _ready() -> void:
 	mini_que_prefab.visible = false
 	pass # Replace with function body.
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-
-func on_new_actor(actor:BaseActor):
-	_build_que_displays()
-	
 func _build_que_displays():
 	for que:QueMinDisplayContainer in _ques.values():
 		que.queue_free()
