@@ -1,10 +1,10 @@
 [gd_scene load_steps=6 format=3 uid="uid://cp8kja0sx5u7a"]
 
-[ext_resource type="Script" path="res://assets/Scripts/DevTools/TagEditor/tag_edit_container.gd" id="1_8i8wl"]
+[ext_resource type="Script" path="res://Scenes/Editors/EffectEditor/HelpfulNodes/tag_edit_container.gd" id="1_8i8wl"]
 [ext_resource type="Texture2D" uid="uid://io35wpu802fp" path="res://assets/Sprites/UI/BackPatches/Patch_64_12.png" id="2_7corr"]
 [ext_resource type="Texture2D" uid="uid://s8s7rktavc7e" path="res://assets/Sprites/UI/BackPatches/Patch_32_8.png" id="3_bns26"]
-[ext_resource type="Script" path="res://assets/Scripts/DevTools/TagEditor/tag_edit_entry_container.gd" id="3_uu4md"]
-[ext_resource type="Script" path="res://assets/Scripts/DevTools/self_scale_line_edit.gd" id="4_g2cgw"]
+[ext_resource type="Script" path="res://Scenes/Editors/EffectEditor/HelpfulNodes/tag_edit_entry_container.gd" id="3_uu4md"]
+[ext_resource type="Script" path="res://Scenes/Editors/EffectEditor/HelpfulNodes/self_scale_line_edit.gd" id="4_g2cgw"]
 
 [node name="TagEditContainer" type="Container" node_paths=PackedStringArray("tag_entry_container", "tags_container", "background", "inner_container")]
 custom_minimum_size = Vector2(105, 84)

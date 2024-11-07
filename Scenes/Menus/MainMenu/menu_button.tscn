@@ -1,16 +1,16 @@
 [gd_scene load_steps=3 format=3 uid="uid://drimqhj6jl5wh"]
 
-[ext_resource type="Texture2D" uid="uid://ccv4ridl8evo8" path="res://assets/Sprites/UI/MenuButtonBackground.png" id="1_v6em4"]
-[ext_resource type="Texture2D" uid="uid://brpsb4iq3cd3k" path="res://assets/Sprites/UI/MenuButtonBackground_Pressed.png" id="2_wg36a"]
+[ext_resource type="Texture2D" uid="uid://ccv4ridl8evo8" path="res://assets/Sprites/UI/MenuButtonBackground.png" id="1_2pur0"]
+[ext_resource type="Texture2D" uid="uid://brpsb4iq3cd3k" path="res://assets/Sprites/UI/MenuButtonBackground_Pressed.png" id="2_pbfai"]
 
 [node name="StartContainer" type="HBoxContainer"]
 alignment = 1
 
 [node name="StartButton" type="TextureButton" parent="."]
 layout_mode = 2
-texture_normal = ExtResource("1_v6em4")
-texture_pressed = ExtResource("2_wg36a")
-texture_disabled = ExtResource("2_wg36a")
+texture_normal = ExtResource("1_2pur0")
+texture_pressed = ExtResource("2_pbfai")
+texture_disabled = ExtResource("2_pbfai")
 stretch_mode = 0
 
 [node name="Label" type="Label" parent="StartButton"]

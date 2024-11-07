@@ -19,7 +19,7 @@ func _ready() -> void:
 		return
 	Instance = self
 	#ActorLibrary.load_from_files()
-	current_scene = load("res://Scenes/main_menu_root_control.tscn").instantiate()
+	current_scene = load("res://Scenes/Menus/MainMenu/main_menu_root_control.tscn").instantiate()
 	center_container.add_child(current_scene)
 
 func _load_test_map():
@@ -29,7 +29,7 @@ func _load_test_map():
 
 func start_combat():
 	current_scene.queue_free()
-	var combat_scene:CombatRootControl = load("res://Scenes/combat_scene.tscn").instantiate()
+	var combat_scene:CombatRootControl = load("res://Scenes/Combat/combat_scene.tscn").instantiate()
 	var actors = []
 	var actor = ActorLibrary.get_actor("TestActor_ID")
 	#actor.equipment.equipt_weapon( ItemLibrary.create_item("TestSword", {}))
@@ -67,13 +67,13 @@ func open_character_sheet(_actor:BaseActor=null):
 	if not actor:
 		actor = ActorLibrary.get_actor("TestActor_ID")
 		#actor = ActorLibrary.create_actor("TestActor", {})
-	var charsheet = load("res://Scenes/UiNodes/EquipmentMenu/equipment_menu.tscn").instantiate()
+	var charsheet = load("res://Scenes/Menus/EquipmentMenu/equipment_menu.tscn").instantiate()
 	center_container.add_child(charsheet)
 	charsheet.set_actor(actor)
 	pass
 
 func open_page_menu(actor:BaseActor):
-	var page_menu = load("res://Scenes/UiNodes/PageQueMenu/page_que_menu.tscn").instantiate()
+	var page_menu = load("res://Scenes/Menus/PageQueMenu/page_que_menu.tscn").instantiate()
 	center_container.add_child(page_menu)
 	page_menu.set_actor(actor)
 	return page_menu
@@ -90,6 +90,6 @@ func open_effect_editor():
 	
 func go_to_main_menu():
 	current_scene.queue_free()
-	current_scene = load("res://Scenes/main_menu_root_control.tscn").instantiate()
+	current_scene = load("res://Scenes/Menus/MainMenu/main_menu_root_control.tscn").instantiate()
 	center_container.add_child(current_scene)
 	

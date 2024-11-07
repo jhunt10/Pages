@@ -91,7 +91,7 @@ func add_actor(actor:BaseActor, faction_id:int, pos:MapPos):
 	QueController.add_action_que(actor.Que)
 	
 	# Register new node with MapController and sync  pos
-	var new_node = load("res://Scenes/actor_node.tscn").instantiate()
+	var new_node = load("res://Scenes/Combat/MapObjects/actor_node.tscn").instantiate()
 	new_node.set_actor(actor)
 	MapController.add_actor_node(actor, new_node)
 	MapController._sync_actor_positions()
@@ -103,7 +103,7 @@ func add_actor(actor:BaseActor, faction_id:int, pos:MapPos):
 	actor_spawned.emit(actor)
 
 func create_new_missile_node(missile):
-	var new_node:MissileNode  = load("res://Scenes/missile_node.tscn").instantiate()
+	var new_node:MissileNode  = load("res://Scenes/Combat/MapObjects/missile_node.tscn").instantiate()
 	new_node.set_missile_data(missile)
 	MapController.add_missile_node(missile, new_node)
 	
@@ -129,7 +129,7 @@ func create_flash_text_on_actor(actor:BaseActor, value:String, color:Color):
 	
 
 func create_flash_text(parent_node:Node, value:String, color:Color):
-	var new_node:FlashTextControl  = load("res://Scenes/Effects/flash_text_control.tscn").instantiate()
+	var new_node:FlashTextControl  = load("res://Scenes/Combat/Effects/flash_text_control.tscn").instantiate()
 	new_node.set_values(value, color)
 	parent_node.add_child(new_node)
 

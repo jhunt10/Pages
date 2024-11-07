@@ -1,16 +1,16 @@
 [gd_scene load_steps=12 format=3 uid="uid://bfvirkm6ona2f"]
 
-[ext_resource type="Script" path="res://Scenes/UiNodes/PageQueMenu/page_que_menu_container.gd" id="1_gsfc6"]
-[ext_resource type="Script" path="res://Scenes/UiNodes/PageQueMenu/page_inventory_container.gd" id="1_iqfre"]
+[ext_resource type="Script" path="res://Scenes/Menus/PageQueMenu/page_que_menu_container.gd" id="1_gsfc6"]
+[ext_resource type="Script" path="res://Scenes/Menus/PageQueMenu/page_inventory_container.gd" id="1_iqfre"]
 [ext_resource type="Texture2D" uid="uid://io35wpu802fp" path="res://assets/Sprites/UI/BackPatches/Patch_64_12.png" id="2_dvvmy"]
-[ext_resource type="Script" path="res://Scenes/UiNodes/PageQueMenu/page_que_slots_container.gd" id="3_2c81l"]
-[ext_resource type="Script" path="res://Scenes/UiNodes/PageQueMenu/page_detials_container.gd" id="3_c223m"]
+[ext_resource type="Script" path="res://Scenes/Menus/PageQueMenu/page_que_slots_container.gd" id="3_2c81l"]
+[ext_resource type="Script" path="res://Scenes/Menus/PageQueMenu/page_detials_container.gd" id="3_c223m"]
 [ext_resource type="Texture2D" uid="uid://dul8y1l1gw420" path="res://assets/Sprites/UI/BackPatches/Patch_32_8_Dark.png" id="3_cmsq4"]
 [ext_resource type="Texture2D" uid="uid://deqwpr7qu8fp2" path="res://assets/Sprites/UI/CharacterEdit/InventorySlotBackground.png" id="4_vtugl"]
 [ext_resource type="Texture2D" uid="uid://cg1yo6bhpalea" path="res://assets/Sprites/UI/QueInputAndDisplay/mini_page_slot.png" id="5_admv5"]
 [ext_resource type="Texture2D" uid="uid://cq2p1mnoevjoc" path="res://assets/Sprites/UI/CharacterEdit/InventoryItemButton_Pressed.png" id="5_ot6vt"]
-[ext_resource type="Script" path="res://Scenes/UiNodes/PageQueMenu/page_slot_button.gd" id="6_4qrjt"]
-[ext_resource type="Script" path="res://Scenes/UiNodes/PageQueMenu/inventory_page_button.gd" id="6_40qok"]
+[ext_resource type="Script" path="res://Scenes/Menus/PageQueMenu/page_slot_button.gd" id="6_4qrjt"]
+[ext_resource type="Script" path="res://Scenes/Menus/PageQueMenu/inventory_page_button.gd" id="6_40qok"]
 
 [node name="PageQueMenu" type="Container" node_paths=PackedStringArray("page_que_slots_container", "details_container", "page_inventory_container", "background", "inner_container")]
 custom_minimum_size = Vector2(628, 418)

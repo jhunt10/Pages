@@ -62,12 +62,9 @@ func set_actor(actor:BaseActor):
 			actor.Que.action_que_changed.disconnect(_sync_que)
 		if actor.equipment.equipment_changed.is_connected(_sync_que):
 			actor.equipment.equipment_changed.disconnect(_sync_que)
-		if actor.Que.max_que_size_changed.is_connected(_build_slots):
-			actor.Que.max_que_size_changed.disconnect(_build_slots)
 	_actor = actor
 	actor.Que.action_que_changed.connect(_sync_que)
 	actor.equipment.equipment_changed.connect(_sync_que)
-	actor.Que.max_que_size_changed.connect(_build_slots)
 	if portrait:
 		portrait.texture = actor.get_portrait_sprite()
 		_build_slots()
