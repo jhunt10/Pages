@@ -3,6 +3,8 @@ class_name StatHolder
 const HealthKey:String = "Health"
 const LOGGING = true
 
+signal stats_changed
+
 var _actor:BaseActor
 var _base_stats:Dictionary = {}
 var _cached_stats:Dictionary = {}
@@ -15,7 +17,6 @@ var max_health:int:
 	get: return _cached_stats.get('Max:'+HealthKey,1)
 var level:int:
 	get: return _cached_stats.get('Level',-1)
-
 
 func _init(actor:BaseActor, data:Dictionary) -> void:
 	_actor = actor
@@ -95,6 +96,7 @@ func _calc_cache_stats():
 		_cached_stats[stat_name] = temp_val
 	if LOGGING: print("--- Done Caching Stats")
 	_stats_dirty = false
+	stats_changed.emit()
 
 func apply_damage(damage, _source):
 	_bar_stats[HealthKey] = _bar_stats[HealthKey] - damage

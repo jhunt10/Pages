@@ -516,7 +516,7 @@ script = ExtResource("26_pcb3t")
 equipment_menu_container = NodePath("../..")
 page_menu_button = NodePath("HBoxContainer/PagesButton")
 premade_page_slot_button = NodePath("HBoxContainer/PageQueSlotButton")
-page_slots_container = NodePath("HBoxContainer/PageButtonsContainer")
+page_slots_container = NodePath("HBoxContainer/ScrollContainer/PageButtonsContainer")
 background = NodePath("NinePatchRect")
 inner_container = NodePath("HBoxContainer")
 margin_override = 4
@@ -546,7 +546,12 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="PageButtonsContainer" type="HBoxContainer" parent="MainContainer/PageListContainer/HBoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="MainContainer/PageListContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+vertical_scroll_mode = 0
+
+[node name="PageButtonsContainer" type="HBoxContainer" parent="MainContainer/PageListContainer/HBoxContainer/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 

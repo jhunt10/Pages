@@ -8,13 +8,7 @@ var QueExecData:QueExecutionData
 
 var actor:BaseActor
 var real_que : Array = []
-#var que_size:int = 0
-#var page_count:int=0
-var available_action_list:Array = []
-
 var _cached_max_que_size:int = -1
-var _cached_max_page_count:int = -1
-var _page_slots:Array=[]
 
 ## Mapping from turn index to real_que index to account for padding
 # Positive numbers denote real_que index offset by 1	Example: 3 padded to 6 [1,-1,2,-2,3,-3]
@@ -30,53 +24,28 @@ func _init(act) -> void:
 		return
 	actor = act
 	actor.Que = self
-	actor.equipment.equipment_changed.connect(_cache_que_info)
-	var que_data = actor.get_que_data()
+	actor.stats.stats_changed.connect(_cache_que_info)
 	QueExecData = QueExecutionData.new(self)
-	_page_slots = que_data.get('ActionList', [])
 
 func _cache_que_info():
-	var que_equipments = actor.equipment.get_equipt_items_of_slot_type("Que")
-	var page_count = 0
-	var que_size = 0
-	for que_equipment:BaseQueEquipment in que_equipments:
-		page_count += que_equipment.get_max_page_count()
-		que_size += que_equipment.get_max_que_size()
-	if page_count != _page_slots.size():
-		if _page_slots.size() < page_count:
-			for index in range(page_count - _page_slots.size()):
-				_page_slots.append(null)
-		else:
-			for index in range(page_count - _page_slots.size()):
-				_page_slots.remove_at(page_count + index)
-	_cached_max_page_count = page_count
+	var que_size = actor.stats.get_stat("PagesPerRound", -1)
+	if que_size < 0:
+		que_size = actor.get_load_val("MaxQueSize", 0)
+	#var que_equipments = actor.equipment.get_equipt_items_of_slot_type("Que")
+	#for que_equipment:BaseQueEquipment in que_equipments:
+		#que_size += que_equipment.get_max_que_size()
+	#
+	#_cached_max_page_count = page_count
 	if _cached_max_que_size != que_size:
 		_cached_max_que_size = que_size
 		max_que_size_changed.emit()
 	else:
 		_cached_max_que_size = que_size
-	
-
-func get_max_page_count()->int:
-	if _cached_max_page_count < 0:
-		_cache_que_info()
-	return _cached_max_page_count
 
 func get_max_que_size()->int:
 	if _cached_max_que_size < 0:
 		_cache_que_info()
 	return _cached_max_que_size
-
-func set_page_for_slot(index:int, page:BaseAction):
-	if page and _page_slots.has(page.ActionKey):
-		return
-	if index < 0 or index >= _page_slots.size():
-		return
-	if page:
-		_page_slots[index] = page.ActionKey
-	else:
-		_page_slots[index] = null
-	action_list_changed.emit()
 
 func list_qued_actions():
 	return real_que

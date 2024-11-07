@@ -12,6 +12,7 @@ var effects:EffectHolder
 var items:BaseItemBag
 var details:ObjectDetailsData
 var equipment:EquipmentHolder
+var pages:PageHolder
 
 var Id : String:
 	get: return _id
@@ -21,7 +22,6 @@ func get_tagable_id(): return Id
 func get_tags(): return Tags
 
 var FactionIndex : int
-
 
 var LoadPath:String:
 	get: return _def_load_path
@@ -55,10 +55,12 @@ func _init(key:String, load_path:String, def:Dictionary, id:String, data:Diction
 	details = ObjectDetailsData.new(_def_load_path, _def.get("Details", {}))
 	equipment = EquipmentHolder.new(self)
 	Que = ActionQue.new(self)
+	pages = PageHolder.new(self)
 	
 
 func save_data()->Dictionary:
 	var data = super()
+	data['Pages'] = pages.get_pages_per_page_tags()
 	return data
 
 func on_combat_start():
@@ -92,10 +94,4 @@ func auto_build_que(current_turn:int):
 				#Que.que_action(action)
 			
 func get_action_list()->Array:
-	var que_data = get_que_data()
-	return que_data.get("ActionList", [])
-
-func get_que_data()->Dictionary:
-	if !_data.keys().has('QueData'):
-		_data['QueData'] = _def['QueData']
-	return _data['QueData']
+	return pages.list_action_keys()

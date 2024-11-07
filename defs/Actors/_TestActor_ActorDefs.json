@@ -23,11 +23,8 @@
 			"Agility": 10,
 			"Intelligence": 10,
 			"Wisdom": 10,
-			"Armor": 80
-		},
-		"QueData":{
-			"MaxSize": 4,
-			"ActionList": ["MoveForward", "MoveBack", "TurnAround","TurnLeft","TurnRight","Dev_AnyEffect", "TestBullets","TestSlash","TestSlam","TestItem","TestMissile","TestZone"]
+			"Armor": 80,
+			"PagesPerRound": 0
 		},
 		"EquipmentSlots": ["Que", "Bag", "Head", "Body", "Feet", "Trinket", "MainHand", "OffHand"]
 	},
@@ -55,7 +52,8 @@
 		"QueData":{
 			"MaxSize": 2,
 			"ActionList": ["TotemMissile"]
-		}
+		},
+		"MaxQueSize": 2
 	},
 	{
 		"ActorKey": "TestArmoredTarget",
@@ -78,10 +76,7 @@
 			"Strength": 50,
 			"Armor": 50
 		},
-		"QueData":{
-			"MaxSize": 2,
-			"ActionList": ["TotemMissile"]
-		}
+		"MaxQueSize": 2
 	},
 	{
 		"ActorKey": "TestWardedTarget",
@@ -104,9 +99,6 @@
 			"Strength": 50,
 			"Ward": 50
 		},
-		"QueData":{
-			"MaxSize": 2,
-			"ActionList": ["TotemMissile"]
-		}
+		"MaxQueSize": 2
 	}
 ]

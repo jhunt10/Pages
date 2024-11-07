@@ -64,8 +64,8 @@ func set_actor(actor:BaseActor):
 		#que_count_label.self_modulate = Color.RED
 	magatk_label.text = str(actor.stats.get_base_magic_attack())
 	phyatk_label.text = str(actor.stats.get_base_phyical_attack())
-	page_count_label.text = str(actor.Que.get_max_page_count())
-	que_count_label.text = str(actor.Que.get_max_que_size())
+	page_count_label.text = str(actor.pages.get_max_page_count())
+	que_count_label.text = str(actor.stats.get_stat("PagesPerRound"))
 		
 
 func _on_slot_pressed(index:int):

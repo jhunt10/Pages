@@ -62,5 +62,5 @@ func get_stat_mods()->Array:
 	var stat_mod_datas:Dictionary = get_load_val("StatMods", {})
 	var out_list = []
 	for mod_data in stat_mod_datas.values():
-		out_list.append(BaseStatMod.new(Id, mod_data))
+		out_list.append(BaseStatMod.create_from_data(Id, mod_data))
 	return out_list

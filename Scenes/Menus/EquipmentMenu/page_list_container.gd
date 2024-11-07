@@ -18,13 +18,18 @@ func _ready() -> void:
 	page_menu_button.pressed.connect(equipment_menu_container.open_page_que_menu)
 
 func set_actor(actor:BaseActor):
+	if _actor and _actor.pages.pages_changed.is_connected(_sync_pages):
+		_actor.pages.pages_changed.disconnect(_sync_pages)
 	_actor = actor
+	_actor.pages.pages_changed.connect(_sync_pages)
+	_sync_pages()
+
+func _sync_pages():
 	for child in page_slots_container.get_children():
 		child.queue_free()
-	var que_equipments = _actor.equipment.get_equipt_items_of_slot_type("Que")
 	var action_key_list:Array = _actor.get_action_list()
-	var que_equipment:BaseQueEquipment = que_equipments[0]
-	for index in range(que_equipment.get_max_page_count()):
+	var max_page_count = _actor.pages.get_max_page_count()
+	for index in range(max_page_count):
 		var page:BaseAction = null
 		if index < action_key_list.size() and action_key_list[index]:
 			page = ActionLibrary.get_action(action_key_list[index])

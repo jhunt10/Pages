@@ -2,36 +2,63 @@
 class_name PageQueSlotsContainer
 extends BackPatchContainer
 
-signal page_slot_pressed(index:int)
+signal page_slot_pressed(page_tags:String, index:int)
 
+@export var premade_page_tag_slots_entry:PageTagSlotsEntry
 @export var premade_page_slot_button:PageQueSlotButton
-@export var page_slots_container:FlowContainer
+@export var page_tag_slots_entries_container:Container
 
 func _ready() -> void:
 	#super()
 	if Engine.is_editor_hint(): return
 	premade_page_slot_button.visible = false
+	premade_page_tag_slots_entry.visible = false
 
 func set_actor(actor:BaseActor):
-	for child in page_slots_container.get_children():
+	for child in page_tag_slots_entries_container.get_children():
 		child.queue_free()
-	var que_equipments = actor.equipment.get_equipt_items_of_slot_type("Que")
 	var action_key_list:Array = actor.get_action_list()
-	var que_equipment:BaseQueEquipment = que_equipments[0]
-	for index in range(que_equipment.get_max_page_count()):
-		var page:BaseAction = null
-		if index < action_key_list.size() and action_key_list[index]:
-			page = ActionLibrary.get_action(action_key_list[index])
-		_create_slots(index, page)
+	var pages = actor.pages.get_pages_per_page_tags()
+	for page_tags in pages.keys():
+		_create_new_page_tags_entry(page_tags, pages[page_tags])
 	pass
 
-func _create_slots(index:int, page:BaseAction):
+func _create_new_page_tags_entry(page_tags:String, pages:Array):
+	var new_slot_entry:PageTagSlotsEntry = premade_page_tag_slots_entry.duplicate()
+	new_slot_entry.visible = true
+	new_slot_entry.title.text = page_tags
+	for index in range(pages.size()):
+		var page:BaseAction = null
+		if pages[index]:
+			page = ActionLibrary.get_action(pages[index])
+		var new_slot = _create_page_slots(page_tags, index,page)
+		new_slot_entry.page_slots_container.add_child(new_slot)
+	page_tag_slots_entries_container.add_child(new_slot_entry)
+
+func _create_page_slots(page_tags:String, index:int, page:BaseAction):
 	var new_slot:PageQueSlotButton = premade_page_slot_button.duplicate()
-	page_slots_container.add_child(new_slot)
 	new_slot.visible = true
 	if page:
 		new_slot.set_page(page)
-	new_slot.pressed.connect(on_page_slot_pressed.bind(index))
+	new_slot.pressed.connect(on_page_slot_pressed.bind(page_tags, index))
+	return new_slot
 
-func on_page_slot_pressed(index:int):
-	page_slot_pressed.emit(index)
+func on_page_slot_pressed(page_tags:String, index:int):
+	page_slot_pressed.emit(page_tags, index)
+
+func get_mouse_over_page_tags_and_index()->Array:
+	var mouse_pos = get_global_mouse_position()
+	if !page_tag_slots_entries_container.get_global_rect().has_point(mouse_pos):
+		return ["", -1]
+	for page_tag_entry:PageTagSlotsEntry in page_tag_slots_entries_container.get_children():
+		var rect = page_tag_entry.get_global_rect()
+		if rect.has_point(mouse_pos):
+			var page_tags = page_tag_entry.title.text
+			var index = 0
+			for slot:PageQueSlotButton in  page_tag_entry.page_slots_container.get_children():
+				if slot.get_global_rect().has_point(mouse_pos):
+					return [page_tags, index]
+				else: 
+					index += 1
+	return ["", -1]
+	

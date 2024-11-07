@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bfvirkm6ona2f"]
+[gd_scene load_steps=16 format=3 uid="uid://bfvirkm6ona2f"]
 
 [ext_resource type="Script" path="res://Scenes/Menus/PageQueMenu/page_que_menu_container.gd" id="1_gsfc6"]
 [ext_resource type="Script" path="res://Scenes/Menus/PageQueMenu/page_inventory_container.gd" id="1_iqfre"]
@@ -11,17 +11,23 @@
 [ext_resource type="Texture2D" uid="uid://cq2p1mnoevjoc" path="res://assets/Sprites/UI/CharacterEdit/InventoryItemButton_Pressed.png" id="5_ot6vt"]
 [ext_resource type="Script" path="res://Scenes/Menus/PageQueMenu/page_slot_button.gd" id="6_4qrjt"]
 [ext_resource type="Script" path="res://Scenes/Menus/PageQueMenu/inventory_page_button.gd" id="6_40qok"]
+[ext_resource type="Script" path="res://Scenes/Menus/PageQueMenu/page_tag_slots_entry_container.gd" id="7_h8onf"]
+[ext_resource type="Script" path="res://Scenes/Menus/PageQueMenu/page_menu_mouse_control.gd" id="13_el43l"]
+[ext_resource type="Script" path="res://Scenes/UiNodes/back_patch_container.gd" id="14_vgqas"]
+[ext_resource type="Texture2D" uid="uid://s8s7rktavc7e" path="res://assets/Sprites/UI/BackPatches/Patch_32_8.png" id="15_6vqgx"]
 
-[node name="PageQueMenu" type="Container" node_paths=PackedStringArray("page_que_slots_container", "details_container", "page_inventory_container", "background", "inner_container")]
-custom_minimum_size = Vector2(628, 418)
+[node name="PageQueMenu" type="Container" node_paths=PackedStringArray("page_que_slots_container", "details_container", "page_inventory_container", "mouse_over_control", "background", "inner_container")]
+custom_minimum_size = Vector2(628, 631)
 offset_right = 628.0
-offset_bottom = 418.0
+offset_bottom = 631.0
 script = ExtResource("1_gsfc6")
 page_que_slots_container = NodePath("InnerContainer/HBoxContainer/PageQueSlotsContainer")
 details_container = NodePath("InnerContainer/HBoxContainer/PageDetialsContainer")
 page_inventory_container = NodePath("InnerContainer/PageInventoryContainer")
+mouse_over_control = NodePath("MouseOverControl")
 background = NodePath("Background")
 inner_container = NodePath("InnerContainer")
+force_dimintions = Vector2i(0, 631)
 
 [node name="Background" type="NinePatchRect" parent="."]
 layout_mode = 2
@@ -37,13 +43,15 @@ vertical = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="InnerContainer"]
 layout_mode = 2
+size_flags_vertical = 3
 
-[node name="PageQueSlotsContainer" type="Container" parent="InnerContainer/HBoxContainer" node_paths=PackedStringArray("premade_page_slot_button", "page_slots_container", "background", "inner_container")]
+[node name="PageQueSlotsContainer" type="Container" parent="InnerContainer/HBoxContainer" node_paths=PackedStringArray("premade_page_tag_slots_entry", "premade_page_slot_button", "page_tag_slots_entries_container", "background", "inner_container")]
 custom_minimum_size = Vector2(360, 16)
 layout_mode = 2
 script = ExtResource("3_2c81l")
+premade_page_tag_slots_entry = NodePath("InnerContainer/PageTagSlotsContainer")
 premade_page_slot_button = NodePath("InnerContainer/PageSlotButton")
-page_slots_container = NodePath("InnerContainer/FlowContainer")
+page_tag_slots_entries_container = NodePath("InnerContainer/ScrollContainer/EntriesContainer")
 background = NodePath("NinePatchRect")
 inner_container = NodePath("InnerContainer")
 force_fill_x = true
@@ -75,11 +83,29 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="FlowContainer" type="FlowContainer" parent="InnerContainer/HBoxContainer/PageQueSlotsContainer/InnerContainer"]
+[node name="PageTagSlotsContainer" type="VBoxContainer" parent="InnerContainer/HBoxContainer/PageQueSlotsContainer/InnerContainer"]
+layout_mode = 2
+script = ExtResource("7_h8onf")
+
+[node name="Label" type="Label" parent="InnerContainer/HBoxContainer/PageQueSlotsContainer/InnerContainer/PageTagSlotsContainer"]
+layout_mode = 2
+text = "Any:"
+
+[node name="FlowContainer" type="FlowContainer" parent="InnerContainer/HBoxContainer/PageQueSlotsContainer/InnerContainer/PageTagSlotsContainer"]
 layout_mode = 2
 
+[node name="ScrollContainer" type="ScrollContainer" parent="InnerContainer/HBoxContainer/PageQueSlotsContainer/InnerContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+vertical_scroll_mode = 2
+
+[node name="EntriesContainer" type="VBoxContainer" parent="InnerContainer/HBoxContainer/PageQueSlotsContainer/InnerContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
 [node name="PageDetialsContainer" type="Container" parent="InnerContainer/HBoxContainer" node_paths=PackedStringArray("name_label", "tags_label", "description_label", "background", "inner_container")]
-custom_minimum_size = Vector2(240, 150)
+custom_minimum_size = Vector2(240, 16)
 layout_mode = 2
 script = ExtResource("3_c223m")
 name_label = NodePath("InnerContainer/PageNameContainer/NameLabel")
@@ -88,6 +114,7 @@ description_label = NodePath("InnerContainer/DescriptionLabel")
 background = NodePath("NinePatchRect")
 inner_container = NodePath("InnerContainer")
 force_fill_x = true
+force_fill_y = true
 force_dimintions = Vector2i(240, 0)
 
 [node name="NinePatchRect" type="NinePatchRect" parent="InnerContainer/HBoxContainer/PageDetialsContainer"]
@@ -122,7 +149,7 @@ layout_mode = 2
 text = "Description "
 
 [node name="PageInventoryContainer" type="Container" parent="InnerContainer" node_paths=PackedStringArray("tab_bar", "pages_container", "premade_page_button", "background", "inner_container")]
-custom_minimum_size = Vector2(24, 240)
+custom_minimum_size = Vector2(8, 8)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -132,8 +159,8 @@ pages_container = NodePath("InnerContainer/ScrollContainer/FlowContainer")
 premade_page_button = NodePath("InnerContainer/InventoryPageButton")
 background = NodePath("Background")
 inner_container = NodePath("InnerContainer")
+margin_override = 4
 force_fill_y = true
-force_dimintions = Vector2i(0, 240)
 
 [node name="Background" type="NinePatchRect" parent="InnerContainer/PageInventoryContainer"]
 layout_mode = 2
@@ -182,3 +209,69 @@ vertical_scroll_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+
+[node name="MouseOverControl" type="Control" parent="." node_paths=PackedStringArray("mouse_over_message_container", "mouse_over_label", "drag_page_control", "drag_icon_texture_rect")]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+mouse_filter = 2
+script = ExtResource("13_el43l")
+mouse_over_message_container = NodePath("MouseOverDisplay")
+mouse_over_label = NodePath("MouseOverDisplay/BoxContainer/HBoxContainer/Label")
+drag_page_control = NodePath("DragItemControl")
+drag_icon_texture_rect = NodePath("DragItemControl/DragIconTextureRect")
+
+[node name="MouseOverDisplay" type="Container" parent="MouseOverControl" node_paths=PackedStringArray("background", "inner_container")]
+custom_minimum_size = Vector2(95, 31)
+layout_mode = 0
+offset_right = 95.0
+offset_bottom = 31.0
+mouse_filter = 2
+script = ExtResource("14_vgqas")
+background = NodePath("NinePatchRect")
+inner_container = NodePath("BoxContainer")
+margin_override = 4
+
+[node name="NinePatchRect" type="NinePatchRect" parent="MouseOverControl/MouseOverDisplay"]
+layout_mode = 2
+texture = ExtResource("15_6vqgx")
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+
+[node name="BoxContainer" type="BoxContainer" parent="MouseOverControl/MouseOverDisplay"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MouseOverControl/MouseOverDisplay/BoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MouseOverControl/MouseOverDisplay/BoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Item Name"
+
+[node name="DragItemControl" type="Control" parent="MouseOverControl"]
+custom_minimum_size = Vector2(32, 32)
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+
+[node name="Background" type="TextureRect" parent="MouseOverControl/DragItemControl"]
+layout_mode = 0
+offset_right = 32.0
+offset_bottom = 32.0
+mouse_filter = 2
+texture = ExtResource("5_admv5")
+
+[node name="DragIconTextureRect" type="TextureRect" parent="MouseOverControl/DragItemControl"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -8.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2

@@ -40,6 +40,14 @@ func _process(delta: float) -> void:
 	if _click_timer > 0:
 		_click_timer -= delta
 
+func set_actor(actor:BaseActor):
+	tab_bar.clear_tabs()
+	var pages_per_tags = actor.pages.get_pages_per_page_tags()
+	for page_tags in pages_per_tags.keys():
+		if page_tags == "Any":
+			page_tags = "All"
+		tab_bar.add_tab(page_tags)
+
 func build_page_list():
 	for button in _page_buttons.values():
 		button.queue_free()

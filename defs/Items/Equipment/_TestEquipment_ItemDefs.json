@@ -10,8 +10,12 @@
 			"LargeIcon":"TestBook.png",
 			"SmallIcon":"TestBook.png"
 		},
-        "MaxQueSize": 5,
-        "MaxPageCount": 8
+        "PagesPerRound": 5,
+        "PageTagSlots": {
+            "Any": 6,
+            "Movement":4,
+            "Attack":4
+        }
     },
     {
         "ItemKey":"TestPageQue2",
@@ -24,8 +28,10 @@
 			"LargeIcon":"TestBook2.png",
 			"SmallIcon":"TestBook2.png"
 		},
-        "MaxQueSize": 3,
-        "MaxPageCount": 10
+        "PagesPerRound": 3,
+        "PageTagSlots": {
+            "Any": 10
+        }
     },
     {
         "ItemKey":"TestBag",

@@ -122,6 +122,7 @@ func add_action_que(new_que:ActionQue):
 	_action_ques[new_que.Id] = new_que
 	# TODO: Que Speed Ordering
 	que_order.append(new_que.Id)
+	new_que.max_que_size_changed.connect(_calc_turn_padding)
 	_calc_turn_padding()
 
 func remove_action_que(que:ActionQue):
@@ -388,7 +389,7 @@ func _calc_turn_padding():
 			shift_forward = false
 			
 		var slots:Array = ques_to_slots[que_id]
-		if shift_forward and slots[0] == false:
+		if shift_forward and slots.size() > 0 and slots[0] == false:
 			slots.remove_at(0)
 			slots.append(false)
 		if DEEP_LOGGING: printerr("Key: %s | Sec: %s | Shift: %s | %s" % [que_id, que_section_sizes[que_id], shift_forward, slots])

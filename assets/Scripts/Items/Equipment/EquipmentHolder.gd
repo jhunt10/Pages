@@ -82,7 +82,7 @@ func remove_equipment(equipment:BaseEquipmentItem):
 		return
 	clear_slot(index)
 
-func clear_slot(index:int):
+func clear_slot(index:int, emit_change:bool=true):
 	if index < 0 or index >= _slot_equipment_types.size() or _slot_equipment_ids[index] == null:
 		return null
 	# Get current item
@@ -99,8 +99,8 @@ func clear_slot(index:int):
 		for i in range(_slot_equipment_ids.size()):
 			if _slot_equipment_ids[i]  == weapon.Id:
 				_slot_equipment_ids[i] = null
-	_actor.stats.dirty_stats()
-	equipment_changed.emit()
+	if emit_change:
+		equipment_changed.emit()
 
 func equip_item_to_slot(index:int, equipment:BaseEquipmentItem):
 	if index < 0 or index >= _slot_equipment_types.size():
@@ -146,7 +146,7 @@ func equip_item_to_slot(index:int, equipment:BaseEquipmentItem):
 			
 	# Clear anythng else in slot
 	if has_equipment_in_slot(index):
-		clear_slot(index)
+		clear_slot(index, false)
 	# Set equipment in slot
 	_slot_equipment_ids[index] = equipment.Id
 	# Set equipment's actor if not already set
