@@ -2,7 +2,7 @@
 class_name EquipmentDisplayContainer
 extends BackPatchContainer
 
-@export var portrait_sprite:Sprite2D
+@export var actor_node:ActorNode
 @export var armor_lable:Label
 @export var ward_label:Label
 @export var phyatk_label:Label
@@ -12,9 +12,13 @@ extends BackPatchContainer
 @export var page_count_label:Label
 @export var que_count_label:Label
 
+@onready var left_button:Button = $InnerContainer/MiddlePortraitContainer/ButtonsContainer/Button
+@onready var right_button:Button = $InnerContainer/MiddlePortraitContainer/ButtonsContainer/Button2
+
 signal equipt_slot_pressed(slot:int)
 
 var _actor:BaseActor
+var _display_dir:int = 2
 
 var slot_displays:Array:
 	get: return [
@@ -32,20 +36,21 @@ func _ready() -> void:
 	for slot:int in range(slot_displays.size()):
 		var slot_display:EquipmentDisplaySlotButton = slot_displays[slot]
 		slot_display.pressed.connect(_on_slot_pressed.bind(slot))
+	left_button.pressed.connect(_rotate_sprite.bind(true))
+	right_button.pressed.connect(_rotate_sprite.bind(false))
+
+func _rotate_sprite(left:bool):
+	var dir = _display_dir
+	var new_dir = dir 
+	if left: new_dir = (dir + 1 + 4) % 4
+	else: new_dir = (dir - 1 + 4) % 4
+	actor_node.set_display_pos(MapPos.new(0,0,0,new_dir))
+	_display_dir = new_dir
 
 func set_actor(actor:BaseActor):
 	#portait_texture_rect.texture = _actor.get_sprite()
-	if _actor and _actor.sprite_changed.is_connected(on_actor_sprite_change):
-		_actor.sprite_changed.disconnect(on_actor_sprite_change)
 	_actor = actor
-	_actor.sprite_changed.connect(on_actor_sprite_change)
-	
-	portrait_sprite.texture = _actor.get_sprite()
-	var frames = _actor.get_load_val("SpriteFrameWH", [1,1])
-	portrait_sprite.hframes = frames[0]
-	portrait_sprite.vframes = frames[1]
-	var offset = _actor.get_load_val("SpriteOffset", [0,0])
-	portrait_sprite.position = Vector2(offset[0], offset[1])
+	actor_node.set_actor(actor)
 	
 	
 	armor_lable.text = str(_actor.equipment.get_total_equipment_armor())
@@ -81,10 +86,6 @@ func set_actor(actor:BaseActor):
 	phyatk_label.text = str(_actor.stats.get_base_phyical_attack())
 	page_count_label.text = str(_actor.pages.get_max_page_count())
 	que_count_label.text = str(_actor.stats.get_stat("PagesPerRound"))
-
-func on_actor_sprite_change():
-	portrait_sprite.texture = _actor.get_sprite()
-	
 
 func _on_slot_pressed(index:int):
 	var slot_display:EquipmentDisplaySlotButton = slot_displays[index]

@@ -1,7 +1,9 @@
-[gd_scene load_steps=14 format=3 uid="uid://uo60871y6t54"]
+[gd_scene load_steps=16 format=3 uid="uid://uo60871y6t54"]
 
 [ext_resource type="Script" path="res://assets/Scripts/Actors/actor_node.gd" id="1_wfbib"]
-[ext_resource type="Texture2D" uid="uid://b3q58s7620mah" path="res://defs/Actors/TestActorSprite.png" id="2_qe2pt"]
+[ext_resource type="Texture2D" uid="uid://c4ncnuj3jpg7o" path="res://defs/Actors/Guy-Walking.png" id="2_pgnwf"]
+[ext_resource type="Texture2D" uid="uid://wvy1i6avftau" path="res://defs/Items/Equipment/TestSword.png" id="3_l605h"]
+[ext_resource type="Texture2D" uid="uid://br3wpwar62uxh" path="res://defs/Items/Equipment/TestSword_OverHand.png" id="4_gwrxf"]
 
 [sub_resource type="Animation" id="Animation_cuq8k"]
 length = 0.001
@@ -297,12 +299,53 @@ _data = {
 "walk_west_out": SubResource("Animation_53oab")
 }
 
-[node name="ActorNode" type="Node2D"]
+[node name="ActorNode" type="Node2D" node_paths=PackedStringArray("sprite", "main_weapon_sprite", "main_weapon_overhand_sprite", "over_hand_sprite")]
 y_sort_enabled = true
 script = ExtResource("1_wfbib")
+sprite = NodePath("Sprite")
+main_weapon_sprite = NodePath("Sprite/MainWeaponSprite")
+main_weapon_overhand_sprite = NodePath("Sprite/MainWeaponSprite/MainWeaponOverHandSprite")
+over_hand_sprite = NodePath("Sprite/OverHandSprite")
+metadata/_edit_horizontal_guides_ = [-40.0]
 
 [node name="Sprite" type="Sprite2D" parent="."]
-texture = ExtResource("2_qe2pt")
+texture = ExtResource("2_pgnwf")
+hframes = 12
+vframes = 4
+
+[node name="MainWeaponSprite" type="Sprite2D" parent="Sprite"]
+z_index = 1
+position = Vector2(-6, 15)
+rotation = 1.8939
+texture = ExtResource("3_l605h")
+offset = Vector2(-8, -8)
+
+[node name="MainWeaponOverHandSprite" type="Sprite2D" parent="Sprite/MainWeaponSprite"]
+z_index = 2
+scale = Vector2(1, 1)
+texture = ExtResource("4_gwrxf")
+offset = Vector2(-8, -8)
+
+[node name="OffHandWeaponSprite" type="Sprite2D" parent="Sprite"]
+visible = false
+z_index = 1
+position = Vector2(6, 15)
+rotation = 0.785398
+texture = ExtResource("3_l605h")
+offset = Vector2(-8, -8)
+
+[node name="OffHandWeaponOverHandSprite" type="Sprite2D" parent="Sprite/OffHandWeaponSprite"]
+z_index = 2
+scale = Vector2(1, 1)
+texture = ExtResource("4_gwrxf")
+offset = Vector2(-8, -8)
+
+[node name="OverHandSprite" type="Sprite2D" parent="Sprite"]
+z_index = 1
+texture = ExtResource("2_pgnwf")
+hframes = 12
+vframes = 4
+frame = 6
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

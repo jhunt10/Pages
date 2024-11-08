@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://cxiyfaswdygu7"]
+[gd_scene load_steps=37 format=3 uid="uid://cxiyfaswdygu7"]
 
 [ext_resource type="Script" path="res://Scenes/Menus/EquipmentMenu/equipment_menu_container.gd" id="1_7xry3"]
 [ext_resource type="Script" path="res://Scenes/UiNodes/back_patch_container.gd" id="1_wprwc"]
@@ -17,6 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://puhp53n8k1h8" path="res://assets/Sprites/UI/CharacterEdit/TrinketSlot.png" id="11_dto75"]
 [ext_resource type="Script" path="res://Scenes/Menus/EquipmentMenu/equipment_display_slot_button.gd" id="11_erm0j"]
 [ext_resource type="Texture2D" uid="uid://b201kpuib7q5k" path="res://assets/Sprites/UI/SymbolIcons/MagDamageSymbol.png" id="12_d5j8h"]
+[ext_resource type="PackedScene" uid="uid://uo60871y6t54" path="res://Scenes/Combat/MapObjects/actor_node.tscn" id="12_gpyle"]
 [ext_resource type="Texture2D" uid="uid://dwliocipx40sq" path="res://assets/Sprites/UI/CharacterEdit/OffHandSlot.png" id="12_uskvu"]
 [ext_resource type="Texture2D" uid="uid://deqwpr7qu8fp2" path="res://assets/Sprites/UI/CharacterEdit/InventorySlotBackground.png" id="13_haq6b"]
 [ext_resource type="Script" path="res://Scenes/Menus/EquipmentMenu/inventory_container.gd" id="13_nccae"]
@@ -37,9 +38,9 @@
 [ext_resource type="Script" path="res://Scenes/Menus/PageQueMenu/page_slot_button.gd" id="28_um48u"]
 
 [node name="EquipmentMenuContainer" type="Container" node_paths=PackedStringArray("mouse_over_control", "stats_display_container", "equipment_display_container", "inventory_container", "page_list_container", "background", "inner_container")]
-custom_minimum_size = Vector2(576, 631)
+custom_minimum_size = Vector2(576, 634)
 offset_right = 576.0
-offset_bottom = 631.0
+offset_bottom = 634.0
 script = ExtResource("1_7xry3")
 mouse_over_control = NodePath("MouseOverControl")
 stats_display_container = NodePath("MainContainer/HBoxContainer/StatsDisplayContainer")
@@ -66,11 +67,11 @@ vertical = true
 [node name="HBoxContainer" type="HBoxContainer" parent="MainContainer"]
 layout_mode = 2
 
-[node name="EquipSlotsContainer" type="Container" parent="MainContainer/HBoxContainer" node_paths=PackedStringArray("portrait_sprite", "armor_lable", "ward_label", "phyatk_label", "magatk_label", "mass_label", "speed_label", "page_count_label", "que_count_label", "background", "inner_container")]
-custom_minimum_size = Vector2(288, 292)
+[node name="EquipSlotsContainer" type="Container" parent="MainContainer/HBoxContainer" node_paths=PackedStringArray("actor_node", "armor_lable", "ward_label", "phyatk_label", "magatk_label", "mass_label", "speed_label", "page_count_label", "que_count_label", "background", "inner_container")]
+custom_minimum_size = Vector2(288, 295)
 layout_mode = 2
 script = ExtResource("3_xe4rr")
-portrait_sprite = NodePath("InnerContainer/MiddlePortraitContainer/PortaitBackground/CenterContainer/Control/Sprite2D")
+actor_node = NodePath("InnerContainer/MiddlePortraitContainer/PortaitBackground/CenterContainer/Control/Node2D/ActorNode")
 armor_lable = NodePath("InnerContainer/MiddlePortraitContainer/MiniStatsContainer/DefensesContainer/ArmorLabel")
 ward_label = NodePath("InnerContainer/MiddlePortraitContainer/MiniStatsContainer/DefensesContainer/WardLabel")
 phyatk_label = NodePath("InnerContainer/MiddlePortraitContainer/MiniStatsContainer/AttacksContainer/PhysicalAttackLabel")
@@ -198,8 +199,24 @@ grow_vertical = 2
 [node name="Control" type="Control" parent="MainContainer/HBoxContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer/PortaitBackground/CenterContainer"]
 layout_mode = 2
 
-[node name="Sprite2D" type="Sprite2D" parent="MainContainer/HBoxContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer/PortaitBackground/CenterContainer/Control"]
+[node name="Node2D" type="Node2D" parent="MainContainer/HBoxContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer/PortaitBackground/CenterContainer/Control"]
 scale = Vector2(4, 4)
+
+[node name="ActorNode" parent="MainContainer/HBoxContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer/PortaitBackground/CenterContainer/Control/Node2D" instance=ExtResource("12_gpyle")]
+position = Vector2(0, 8)
+
+[node name="ButtonsContainer" type="HBoxContainer" parent="MainContainer/HBoxContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer"]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="MainContainer/HBoxContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer/ButtonsContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "<"
+
+[node name="Button2" type="Button" parent="MainContainer/HBoxContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer/ButtonsContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = ">"
 
 [node name="HSeparator" type="HSeparator" parent="MainContainer/HBoxContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer"]
 self_modulate = Color(1, 1, 1, 0)
@@ -333,6 +350,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="PageQueCountContainer" type="HBoxContainer" parent="MainContainer/HBoxContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer/MiniStatsContainer"]
+visible = false
 layout_mode = 2
 
 [node name="VSeparator2" type="VSeparator" parent="MainContainer/HBoxContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer/MiniStatsContainer/PageQueCountContainer"]

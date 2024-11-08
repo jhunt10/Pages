@@ -94,8 +94,10 @@ func on_item_clicked(item:BaseItem):
 	if !equipment:
 		return
 	if equipment.get_equipt_to_actor_id() == _actor.Id:
+		print("Is Equipt, clearing")
 		equipment.clear_equipt_actor()
 	else:
+		print("Not Equipt, trying")
 		_actor.equipment.try_equip_item(item, true)
 	set_actor(_actor)
 

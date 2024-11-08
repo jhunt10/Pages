@@ -266,6 +266,10 @@
 			"LargeIcon":"TestSword.png",
 			"SmallIcon":"TestSword.png"
 		},
+        "SpriteSheet":"TestSword_SpriteSheet.png",
+        "WeaponSprite":"TestSword.png",
+        "OverHandSprite":"TestSword_OverHand.png",
+        "DisplayRotation":108,
         "EquipSlot":"Weapon",
         "CanOffhand":false,
         "DamageData":{
@@ -294,9 +298,10 @@
 			"SnippetDesc": "An sword made for testing.",
 			"Description": "Description.",
 			"Tags": ["Weapon"],
-			"LargeIcon":"TestSwordHeavy.png",
-			"SmallIcon":"TestSwordHeavy.png"
+			"LargeIcon":"TestHammer.png",
+			"SmallIcon":"TestHammer.png"
 		},
+        "SpriteSheet":"TestHammer_SpriteSheet.png",
         "EquipSlot":"Weapon",
         "CanOffhand":false,
         "DamageData":{
@@ -328,6 +333,7 @@
 			"LargeIcon":"TestDagger.png",
 			"SmallIcon":"TestDagger.png"
 		},
+        "SpriteSheet":"TestDagger_SpriteSheet.png",
         "EquipSlot":"Weapon",
         "CanOffhand":false,
         "DamageData":{
@@ -359,6 +365,7 @@
 			"LargeIcon":"TestStaff.png",
 			"SmallIcon":"TestStaff.png"
 		},
+        "SpriteSheet":"TestWand_SpriteSheet.png",
         "EquipSlot":"Weapon",
         "CanOffhand":false,
         "DamageData":{
