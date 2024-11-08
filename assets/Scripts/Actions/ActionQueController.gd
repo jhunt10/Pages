@@ -7,7 +7,7 @@ signal que_marked_as_dead(que_id:String)
 const SHORTCUT_QUE = true
 const DEEP_LOGGING = false
 const FRAMES_PER_ACTION = 24
-const SUB_ACTION_FRAME_TIME = 0.05
+const SUB_ACTION_FRAME_TIME = 1.0 / 12.0
 
 # Start of new Round
 signal start_of_round()
@@ -139,7 +139,7 @@ func update(delta: float) -> void:
 				print("") 
 				print("")
 				print("Doing Action: " + str(action_index) + ":" + str(sub_action_index))# + " | delta: " + str(delta))
-			sub_action_timer = 0
+			sub_action_timer -= SUB_ACTION_FRAME_TIME
 			
 			#TODO: GameState
 			var game_state:GameStateData = CombatRootControl.Instance.GameState

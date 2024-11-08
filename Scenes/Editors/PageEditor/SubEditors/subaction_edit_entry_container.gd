@@ -56,3 +56,6 @@ func build_save_data()->Dictionary:
 
 func on_frame_spin_box_change(val):
 	on_frame_changed.emit()
+
+func get_enum_prop_options(prop_name:String)->Array:
+	return _enum_prop_options.get(prop_name, [])

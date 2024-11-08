@@ -167,4 +167,4 @@ func get_missile_options():
 	return PageEditorControl.Instance.get_subeditor_option_keys("MissileDatas")
 
 func get_enum_options():
-	return _parent_subaction_edit_entry
+	return _parent_subaction_edit_entry.get_enum_prop_options(_prop_name)

@@ -73,7 +73,7 @@ func add_zone_node(zone:BaseZone, node:ZoneNode):
 		
 func _sync_positions():
 	_build_terrain()
-	_sync_actor_positions()
+	#_sync_actor_positions()
 	_sync_missile_positions()
 
 func _sync_actor_positions():

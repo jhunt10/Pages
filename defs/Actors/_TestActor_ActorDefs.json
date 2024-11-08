@@ -6,10 +6,10 @@
 			"SnippetDesc": "An actor made for testing.",
 			"Description": "Description.",
 			"Tags": ["AnActorTag", "Player", "Human"],
-			"LargeIcon":"TestActorSprite.png",
-			"SmallIcon":"TestActorSprite.png"
+			"LargeIcon":"GuyPortrait.png",
+			"SmallIcon":"GuyPortrait.png"
 		},
-		"Sprite": "TestActorSprite.png",
+		"SpriteSheet": "Guy-Walking.png",
 		"MaxItemSlots": 5,
 		"Items": ["TestHealingPotion","TestHealingPotion","TestHealingPotion"],
 		"Stats":{
@@ -26,6 +26,9 @@
 			"Armor": 80,
 			"PagesPerRound": 0
 		},
+		"SpriteFrameWH": [6,2],
+		"SpriteOffset": [0,-16],
+		"PortraitRect":[5, 22, 22, 22],
 		"EquipmentSlots": ["Que", "Bag", "Head", "Body", "Feet", "Trinket", "MainHand", "OffHand"]
 	},
 	{
@@ -38,7 +41,7 @@
 			"LargeIcon":"TestTargetSprite.png",
 			"SmallIcon":"TestTargetSprite.png"
 		},
-		"Sprite": "TestTargetSprite.png",
+		"SpriteSheet": "TestTargetSprite.png",
 		"CorpseSprite": "TargetCorpse.png",
 		"AutoQueing": false,
 		"LeavesCorpse": true,
@@ -65,7 +68,7 @@
 			"LargeIcon":"TestTargetSprite.png",
 			"SmallIcon":"TestTargetSprite.png"
 		},
-		"Sprite": "TestArmoredTargetSprite.png",
+		"SpriteSheet": "TestArmoredTargetSprite.png",
 		"CorpseSprite": "TargetCorpse.png",
 		"AutoQueing": false,
 		"LeavesCorpse": true,
@@ -88,7 +91,7 @@
 			"LargeIcon":"TestTargetSprite.png",
 			"SmallIcon":"TestTargetSprite.png"
 		},
-		"Sprite": "TestWardedTargetSprite.png",
+		"SpriteSheet": "TestWardedTargetSprite.png",
 		"CorpseSprite": "TargetCorpse.png",
 		"AutoQueing": false,
 		"LeavesCorpse": true,

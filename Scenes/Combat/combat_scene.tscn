@@ -1191,6 +1191,7 @@ tile_set = SubResource("TileSet_hpguw")
 tile_set = SubResource("TileSet_lvs5x")
 
 [node name="ActorTileMap" type="TileMapLayer" parent="MapControlerNode"]
+y_sort_enabled = true
 tile_set = SubResource("TileSet_th678")
 
 [node name="GridCursor" type="Sprite2D" parent="MapControlerNode"]

@@ -66,11 +66,11 @@ vertical = true
 [node name="HBoxContainer" type="HBoxContainer" parent="MainContainer"]
 layout_mode = 2
 
-[node name="EquipSlotsContainer" type="Container" parent="MainContainer/HBoxContainer" node_paths=PackedStringArray("portait_texture_rect", "armor_lable", "ward_label", "phyatk_label", "magatk_label", "mass_label", "speed_label", "page_count_label", "que_count_label", "background", "inner_container")]
+[node name="EquipSlotsContainer" type="Container" parent="MainContainer/HBoxContainer" node_paths=PackedStringArray("portrait_sprite", "armor_lable", "ward_label", "phyatk_label", "magatk_label", "mass_label", "speed_label", "page_count_label", "que_count_label", "background", "inner_container")]
 custom_minimum_size = Vector2(288, 292)
 layout_mode = 2
 script = ExtResource("3_xe4rr")
-portait_texture_rect = NodePath("InnerContainer/MiddlePortraitContainer/PortaitBackground/PortraitTextureRect")
+portrait_sprite = NodePath("InnerContainer/MiddlePortraitContainer/PortaitBackground/CenterContainer/Control/Sprite2D")
 armor_lable = NodePath("InnerContainer/MiddlePortraitContainer/MiniStatsContainer/DefensesContainer/ArmorLabel")
 ward_label = NodePath("InnerContainer/MiddlePortraitContainer/MiniStatsContainer/DefensesContainer/WardLabel")
 phyatk_label = NodePath("InnerContainer/MiddlePortraitContainer/MiniStatsContainer/AttacksContainer/PhysicalAttackLabel")
@@ -187,14 +187,19 @@ patch_margin_top = 12
 patch_margin_right = 12
 patch_margin_bottom = 12
 
-[node name="PortraitTextureRect" type="TextureRect" parent="MainContainer/HBoxContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer/PortaitBackground"]
+[node name="CenterContainer" type="CenterContainer" parent="MainContainer/HBoxContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer/PortaitBackground"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-stretch_mode = 3
+
+[node name="Control" type="Control" parent="MainContainer/HBoxContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer/PortaitBackground/CenterContainer"]
+layout_mode = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="MainContainer/HBoxContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer/PortaitBackground/CenterContainer/Control"]
+scale = Vector2(4, 4)
 
 [node name="HSeparator" type="HSeparator" parent="MainContainer/HBoxContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer"]
 self_modulate = Color(1, 1, 1, 0)

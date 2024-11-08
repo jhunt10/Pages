@@ -70,6 +70,23 @@
 			"LargeIcon":"TestHelm.png",
 			"SmallIcon":"TestHelm.png"
 		},
+        "SpriteSheet":"TestHelm_SpriteSheet.png",
+        "EquipSlot":"Head",
+        "Armor": 10,
+        "Ward": 0
+    },
+    {
+        "ItemKey":"RedHat",
+        "_ObjectScript": "res://assets/Scripts/Items/Equipment/BaseArmorEquipment.gd",
+        "Details":{
+			"DisplayName": "Red Hat",
+			"SnippetDesc": "An Red Hat made for testing.",
+			"Description": "Description.",
+			"Tags": ["Head"],
+			"LargeIcon":"RedHat.png",
+			"SmallIcon":"RedHat.png"
+		},
+        "SpriteSheet":"RedHat_SpriteSheet.png",
         "EquipSlot":"Head",
         "Armor": 10,
         "Ward": 0
@@ -82,9 +99,10 @@
 			"SnippetDesc": "An shirt made for testing.",
 			"Description": "Description.",
 			"Tags": ["Body"],
-			"LargeIcon":"TestShirt.png",
-			"SmallIcon":"TestShirt.png"
+			"LargeIcon":"TestArmor.png",
+			"SmallIcon":"TestArmor.png"
 		},
+        "SpriteSheet":"TestArmor_SpriteSheet.png",
         "EquipSlot":"Body",
         "Armor": 10,
         "Ward": 0
@@ -101,6 +119,7 @@
 			"SmallIcon":"TestShirt2.png"
 		},
         "EquipSlot":"Body",
+        "SpriteSheet":"RedRobes_SpriteSheet.png",
         "Armor": 0,
         "Ward": 10
     },
@@ -115,6 +134,7 @@
 			"LargeIcon":"TestBoots.png",
 			"SmallIcon":"TestBoots.png"
 		},
+        "SpriteSheet":"TestBoots_SpriteSheet.png",
         "EquipSlot":"Feet",
         "Armor": 10,
         "Ward": 0
@@ -207,6 +227,7 @@
 				"Value":500 
 			}
 		},
+        "SpriteSheet":"TestShield_SpriteSheet.png",
         "EquipSlot":"OffHand",
         "Armor": 10,
         "Ward": 0

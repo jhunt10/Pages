@@ -85,7 +85,7 @@ func set_actor_pos(actor:BaseActor, pos:MapPos, layer=DEFAULT_ACTOR_LAYER):
 	
 	if old_pos != null and old_pos != pos:
 		if LOGGING: printerr("Emit Move: " + str(old_pos) + " | " + str(pos))
-		actor.on_move.emit(old_pos, pos, "TEST", null)
+		actor.set_pos(old_pos, pos, "TEST", null)
 		_handle_enter_exit_zone(actor, old_pos, pos)
 
 func _handle_enter_exit_zone(actor:BaseActor, old_pos:MapPos, new_pos:MapPos):
