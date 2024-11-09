@@ -1,0 +1,215 @@
+[
+    {
+        "ItemKey":"TestDagger",
+        "_ObjectScript": "res://assets/Scripts/Items/Equipment/BaseWeaponEquipment.gd",
+        "Details":{
+			"DisplayName": "Test Dagger",
+			"SnippetDesc": "An dagger  made for testing.",
+			"Description": "Description.",
+			"Tags": ["Weapon","OffHand"],
+			"LargeIcon":"TestDagger.png",
+			"SmallIcon":"TestDagger.png"
+		},
+        "WeaponSpriteData":{
+            "Offset":[0,0],
+            "SpriteName":"TestDagger",
+            "Rotation":0
+        },
+        "EquipSlot":"Weapon",
+        "DamageData":{
+            "AtkStat": "Strength",
+            "BaseDamage": 10,
+            "DamageEffect": "Pierce_DamageEffect",
+            "DamageType": "Slash",
+            "DamageVarient": 0.1,
+            "DefenseType": "Armor"
+        },
+        "TargetParams": {
+            "EffectsAllies": false,
+            "EffectsEnemies": true,
+            "LineOfSight": true,
+            "TargetArea": "[[-1,0],[-1,1],[0,1],[1,1],[1,0]]",
+            "TargetType": "Actor"
+        },
+        "AttackTags": ["Melee", "Physical"],
+        "WeaponClass": "Light"
+    },
+    {
+        "ItemKey":"TestWand",
+        "_ObjectScript": "res://assets/Scripts/Items/Equipment/BaseWeaponEquipment.gd",
+        "Details":{
+			"DisplayName": "Test Staff",
+			"SnippetDesc": "An staff made for testing.",
+			"Description": "Description.",
+			"Tags": ["Weapon"],
+			"LargeIcon":"TestStaff.png",
+			"SmallIcon":"TestStaff.png"
+		},
+
+        "WeaponSpriteData":{
+            "Offset":[0,0],
+            "SpriteName":"TestWand",
+            "Rotation":-45
+        },
+
+        "EquipSlot":"Weapon",
+        "DamageData":{
+            "AtkStat": "Intelligence",
+            "BaseDamage": 10,
+            "DamageEffect": "SmallFire_DamageEffect",
+            "DamageType": "Fire",
+            "DamageVarient": 0.1,
+            "DefenseType": "Ward"
+        },
+        "TargetParams": {
+            "EffectsAllies": false,
+            "EffectsEnemies": true,
+            "LineOfSight": true,
+            "TargetArea": "[[-1,1],[0,1],[1,1],[-1,2],[0,2],[1,2]]",
+            "TargetType": "Actor"
+        },
+        "AttackTags": ["Ranged", "Magic"],
+        "WeaponClass": "Light"
+    },
+    {
+        "ItemKey":"TestSword",
+        "_ObjectScript": "res://assets/Scripts/Items/Equipment/BaseWeaponEquipment.gd",
+        "Details":{
+			"DisplayName": "Test Sword",
+			"SnippetDesc": "An sword made for testing.",
+			"Description": "Description.",
+			"Tags": ["Weapon"],
+			"LargeIcon":"TestSword.png",
+			"SmallIcon":"TestSword.png"
+		},
+        "WeaponSpriteData":{
+            "Offset":[0,0],
+            "SpriteName":"TestSword",
+            "Rotation":-45
+        },
+        "EquipSlot":"Weapon",
+        "CanOffhand":false,
+        "DamageData":{
+            "AtkStat": "Strength",
+            "BaseDamage": 10,
+            "DamageEffect": "Slash_DamageEffect",
+            "DamageType": "Slash",
+            "DamageVarient": 0.1,
+            "DefenseType": "Armor"
+        },
+        "TargetParams": {
+            "EffectsAllies": false,
+            "EffectsEnemies": true,
+            "LineOfSight": true,
+            "TargetArea": "[[-1,0],[-1,1],[0,1],[1,1],[1,0]]",
+            "TargetType": "Actor"
+        },
+        "AttackTags": ["Melee", "Physical"],
+        "WeaponClass": "Medium"
+    },
+    {
+        "ItemKey":"TestSwordHeavy",
+        "_ObjectScript": "res://assets/Scripts/Items/Equipment/BaseWeaponEquipment.gd",
+        "Details":{
+			"DisplayName": "Test Heavy Sword",
+			"SnippetDesc": "An sword made for testing.",
+			"Description": "Description.",
+			"Tags": ["Weapon"],
+			"LargeIcon":"TestSwordHeavy.png",
+			"SmallIcon":"TestSwordHeavy.png"
+		},
+        "WeaponSpriteData":{
+            "Offset":[-7,-7],
+            "SpriteName":"TestSwordHeavy",
+            "Rotation":0
+        },
+        "EquipSlot":"Weapon",
+        "DamageData":{
+            "AtkStat": "Strength",
+            "BaseDamage": 10,
+            "DamageEffect": "Slash_DamageEffect",
+            "DamageType": "Slash",
+            "DamageVarient": 0.1,
+            "DefenseType": "Armor"
+        },
+        "TargetParams": {
+            "EffectsAllies": false,
+            "EffectsEnemies": true,
+            "LineOfSight": true,
+            "TargetArea": "[[-1,0],[-1,1],[0,1],[1,1],[1,0]]",
+            "TargetType": "Actor"
+        },
+        "AttackTags": ["Melee", "Physical"],
+        "WeaponClass": "Heavy"
+    },
+    {
+        "ItemKey":"TestHammer",
+        "_ObjectScript": "res://assets/Scripts/Items/Equipment/BaseWeaponEquipment.gd",
+        "Details":{
+			"DisplayName": "Test Hammer",
+			"SnippetDesc": "An hammer  made for testing.",
+			"Description": "Description.",
+			"Tags": ["Weapon"],
+			"LargeIcon":"TestHammer.png",
+			"SmallIcon":"TestHammer.png"
+		},
+        "WeaponSpriteData":{
+            "Offset":[0,0],
+            "SpriteName":"TestHammer",
+            "Rotation":0
+        },
+        "EquipSlot":"Weapon",
+        "DamageData":{
+            "AtkStat": "Strength",
+            "BaseDamage": 10,
+            "DamageEffect": "Slash_DamageEffect",
+            "DamageType": "Slash",
+            "DamageVarient": 0.1,
+            "DefenseType": "Armor"
+        },
+        "TargetParams": {
+            "EffectsAllies": false,
+            "EffectsEnemies": true,
+            "LineOfSight": true,
+            "TargetArea": "[[-1,0],[-1,1],[0,1],[1,1],[1,0]]",
+            "TargetType": "Actor"
+        },
+        "AttackTags": ["Melee", "Physical"],
+        "WeaponClass": "Heavy"
+    },
+    {
+        "ItemKey":"TestStaff",
+        "_ObjectScript": "res://assets/Scripts/Items/Equipment/BaseWeaponEquipment.gd",
+        "Details":{
+			"DisplayName": "Test Staff",
+			"SnippetDesc": "An staff made for testing.",
+			"Description": "Description.",
+			"Tags": ["Weapon"],
+			"LargeIcon":"TestStaff.png",
+			"SmallIcon":"TestStaff.png"
+		},
+        "WeaponSpriteData":{
+            "Offset":[0,0],
+            "SpriteName":"TestStaff",
+            "Rotation":-45
+        },
+        "EquipSlot":"Weapon",
+        "DamageData":{
+            "AtkStat": "Intelligence",
+            "BaseDamage": 10,
+            "DamageEffect": "SmallFire_DamageEffect",
+            "DamageType": "Fire",
+            "DamageVarient": 0.1,
+            "DefenseType": "Ward"
+        },
+        "TargetParams": {
+            "EffectsAllies": false,
+            "EffectsEnemies": true,
+            "LineOfSight": true,
+            "TargetArea": "[[-1,1],[0,1],[1,1],[-1,2],[0,2],[1,2]]",
+            "TargetType": "Actor"
+        },
+        "AttackTags": ["Ranged", "Magic"],
+        "WeaponClass": "Meium"
+    }
+]

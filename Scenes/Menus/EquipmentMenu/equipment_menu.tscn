@@ -23,7 +23,7 @@
 [ext_resource type="Script" path="res://Scenes/Menus/EquipmentMenu/inventory_container.gd" id="13_nccae"]
 [ext_resource type="Texture2D" uid="uid://cq2p1mnoevjoc" path="res://assets/Sprites/UI/CharacterEdit/InventoryItemButton_Pressed.png" id="14_acy0d"]
 [ext_resource type="Script" path="res://Scenes/Menus/EquipmentMenu/inventory_item_button_control.gd" id="14_wmipa"]
-[ext_resource type="Texture2D" uid="uid://wvy1i6avftau" path="res://defs/Items/Equipment/TestSword.png" id="15_vvw17"]
+[ext_resource type="Texture2D" uid="uid://wvy1i6avftau" path="res://defs/Items/Equipment/TestWeapons/TestSword.png" id="15_vvw17"]
 [ext_resource type="Texture2D" uid="uid://m0ss0tg7qqou" path="res://assets/Sprites/UI/SymbolIcons/MassSymbol.png" id="15_y0ae6"]
 [ext_resource type="Texture2D" uid="uid://v6mrr2dref31" path="res://assets/Sprites/UI/SymbolIcons/SpeedIcon.png" id="16_6mdpp"]
 [ext_resource type="Texture2D" uid="uid://bpa7iavvlbhi5" path="res://assets/Sprites/UI/SymbolIcons/PageCountSymbol.png" id="17_eoa7g"]
@@ -68,7 +68,7 @@ vertical = true
 layout_mode = 2
 
 [node name="EquipSlotsContainer" type="Container" parent="MainContainer/HBoxContainer" node_paths=PackedStringArray("actor_node", "armor_lable", "ward_label", "phyatk_label", "magatk_label", "mass_label", "speed_label", "page_count_label", "que_count_label", "background", "inner_container")]
-custom_minimum_size = Vector2(288, 295)
+custom_minimum_size = Vector2(288, 313)
 layout_mode = 2
 script = ExtResource("3_xe4rr")
 actor_node = NodePath("InnerContainer/MiddlePortraitContainer/PortaitBackground/CenterContainer/Control/Node2D/ActorNode")
@@ -583,7 +583,7 @@ layout_mode = 2
 text = "Edit Pages"
 
 [node name="EquiptInventoryContainer" type="Container" parent="MainContainer" node_paths=PackedStringArray("tab_bar", "items_container", "premade_item_button", "background", "inner_container")]
-custom_minimum_size = Vector2(12, 267)
+custom_minimum_size = Vector2(12, 236)
 layout_mode = 2
 script = ExtResource("13_nccae")
 tab_bar = NodePath("InnerContainer/TabBar")

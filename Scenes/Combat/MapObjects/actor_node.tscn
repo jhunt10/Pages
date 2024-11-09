@@ -3,12 +3,12 @@
 [ext_resource type="Script" path="res://assets/Scripts/Actors/actor_node.gd" id="1_wfbib"]
 [ext_resource type="Texture2D" uid="uid://cp2wc5s8ju613" path="res://defs/Actors/Template_SpriteSheet.png" id="2_g31ob"]
 [ext_resource type="Script" path="res://Scenes/Combat/MapObjects/actor_weapon_node.gd" id="3_1fhqb"]
-[ext_resource type="Texture2D" uid="uid://wvy1i6avftau" path="res://defs/Items/Equipment/TestSword.png" id="3_l605h"]
+[ext_resource type="Texture2D" uid="uid://wvy1i6avftau" path="res://defs/Items/Equipment/TestWeapons/TestSword.png" id="3_l605h"]
 [ext_resource type="Texture2D" uid="uid://clqv3gafyrfqv" path="res://defs/Actors/Template_SpriteSheet_OffHand.png" id="3_swwt0"]
-[ext_resource type="Texture2D" uid="uid://br3wpwar62uxh" path="res://defs/Items/Equipment/TestSword_OverHand.png" id="4_gwrxf"]
-[ext_resource type="Texture2D" uid="uid://bn6l78advgud" path="res://defs/Items/Equipment/TestDagger.png" id="4_oftcj"]
-[ext_resource type="Texture2D" uid="uid://hswueqwv7use" path="res://defs/Items/Equipment/TestDagger_OverHand.png" id="5_ui06o"]
+[ext_resource type="Texture2D" uid="uid://br3wpwar62uxh" path="res://defs/Items/Equipment/TestWeapons/TestSword_OverHand.png" id="4_gwrxf"]
 [ext_resource type="Texture2D" uid="uid://bvdyspj30c1k1" path="res://defs/Actors/Template_SpriteSheet_MainHand.png" id="7_d028b"]
+[ext_resource type="Texture2D" uid="uid://iapxuerier3i" path="res://defs/Items/Equipment/TestWeapons/TestWand.png" id="8_iur6c"]
+[ext_resource type="Texture2D" uid="uid://dnau6lgncbjao" path="res://defs/Items/Equipment/TestWeapons/TestWand_OverHand.png" id="9_mr4ys"]
 [ext_resource type="Texture2D" uid="uid://biqv7gysaynst" path="res://defs/Actors/Template_SpriteSheet_TwoHand.png" id="10_hviaj"]
 
 [sub_resource type="Animation" id="Animation_y5og4"]
@@ -119,7 +119,7 @@ tracks/8/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(-4, 15)]
+"values": [Vector2(-4, 14)]
 }
 tracks/9/type = "value"
 tracks/9/imported = false
@@ -155,7 +155,7 @@ tracks/11/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(4, 15)]
+"values": [Vector2(4, 14)]
 }
 tracks/12/type = "value"
 tracks/12/imported = false
@@ -191,7 +191,7 @@ tracks/14/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(0, 15)]
+"values": [Vector2(0, 14)]
 }
 tracks/15/type = "value"
 tracks/15/imported = false
@@ -375,7 +375,7 @@ tracks/8/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [Vector2(0, 15)]
+"values": [Vector2(0, 14)]
 }
 tracks/9/type = "value"
 tracks/9/imported = false
@@ -411,7 +411,7 @@ tracks/11/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [Vector2(0, 15)]
+"values": [Vector2(0, 14)]
 }
 tracks/12/type = "value"
 tracks/12/imported = false
@@ -630,7 +630,7 @@ tracks/8/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [Vector2(4, 15)]
+"values": [Vector2(4, 14)]
 }
 tracks/9/type = "value"
 tracks/9/imported = false
@@ -666,7 +666,7 @@ tracks/11/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [Vector2(-4, 15)]
+"values": [Vector2(-4, 14)]
 }
 tracks/12/type = "value"
 tracks/12/imported = false
@@ -885,7 +885,7 @@ tracks/8/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [Vector2(-4, 15)]
+"values": [Vector2(-4, 14)]
 }
 tracks/9/type = "value"
 tracks/9/imported = false
@@ -921,7 +921,7 @@ tracks/11/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [Vector2(4, 15)]
+"values": [Vector2(4, 14)]
 }
 tracks/12/type = "value"
 tracks/12/imported = false
@@ -957,7 +957,7 @@ tracks/14/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [Vector2(0, 15)]
+"values": [Vector2(0, 14)]
 }
 tracks/15/type = "value"
 tracks/15/imported = false
@@ -1014,6 +1014,18 @@ tracks/19/path = NodePath("ActorSpriteNode/OffHandOverlaySprite/OffHandWeaponNod
 tracks/19/interp = 1
 tracks/19/loop_wrap = true
 tracks/19/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/20/type = "value"
+tracks/20/imported = false
+tracks/20/enabled = true
+tracks/20/path = NodePath("ActorSpriteNode/ActorSprite:z_index")
+tracks/20/interp = 1
+tracks/20/loop_wrap = true
+tracks/20/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -1129,7 +1141,7 @@ tracks/8/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [Vector2(0, 15)]
+"values": [Vector2(0, 14)]
 }
 tracks/9/type = "value"
 tracks/9/imported = false
@@ -1165,7 +1177,7 @@ tracks/11/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [Vector2(0, 15)]
+"values": [Vector2(0, 14)]
 }
 tracks/12/type = "value"
 tracks/12/imported = false
@@ -1201,7 +1213,7 @@ tracks/14/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [Vector2(-3, 15)]
+"values": [Vector2(-3, 14)]
 }
 tracks/15/type = "value"
 tracks/15/imported = false
@@ -1339,17 +1351,17 @@ hframes = 12
 vframes = 4
 
 [node name="OffHandWeaponNode" type="Node2D" parent="ActorSpriteNode/OffHandOverlaySprite"]
-position = Vector2(4, 15)
+position = Vector2(4, 14)
 script = ExtResource("3_1fhqb")
 
 [node name="WeaponSprite" type="Sprite2D" parent="ActorSpriteNode/OffHandOverlaySprite/OffHandWeaponNode"]
 z_index = -1
 texture = ExtResource("3_l605h")
-offset = Vector2(-8, -8)
+offset = Vector2(-7, -7)
 
 [node name="OverHandSprite" type="Sprite2D" parent="ActorSpriteNode/OffHandOverlaySprite/OffHandWeaponNode"]
 texture = ExtResource("4_gwrxf")
-offset = Vector2(-8, -8)
+offset = Vector2(-7, -7)
 
 [node name="MainHandOverSprite" type="Sprite2D" parent="ActorSpriteNode"]
 z_index = 1
@@ -1358,17 +1370,15 @@ hframes = 12
 vframes = 4
 
 [node name="MainHandWeaponNode" type="Node2D" parent="ActorSpriteNode/MainHandOverSprite"]
-position = Vector2(-4, 15)
+position = Vector2(-4, 14)
 script = ExtResource("3_1fhqb")
 
 [node name="WeaponSprite" type="Sprite2D" parent="ActorSpriteNode/MainHandOverSprite/MainHandWeaponNode"]
 z_index = -1
-texture = ExtResource("4_oftcj")
-offset = Vector2(-5, -5)
+texture = ExtResource("8_iur6c")
 
 [node name="OverHandSprite" type="Sprite2D" parent="ActorSpriteNode/MainHandOverSprite/MainHandWeaponNode"]
-texture = ExtResource("5_ui06o")
-offset = Vector2(-5, -5)
+texture = ExtResource("9_mr4ys")
 
 [node name="TwoHandOverSprite" type="Sprite2D" parent="ActorSpriteNode"]
 visible = false
@@ -1378,7 +1388,7 @@ hframes = 12
 vframes = 4
 
 [node name="TwoHandWeaponNode" type="Node2D" parent="ActorSpriteNode/TwoHandOverSprite"]
-position = Vector2(0, 15)
+position = Vector2(0, 14)
 script = ExtResource("3_1fhqb")
 
 [node name="WeaponSprite" type="Sprite2D" parent="ActorSpriteNode/TwoHandOverSprite/TwoHandWeaponNode"]

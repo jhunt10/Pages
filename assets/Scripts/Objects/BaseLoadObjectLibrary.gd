@@ -168,6 +168,7 @@ func _load_object_def_file(file_path:String):
 			printerr("No '%s' found on object in %s." % [object_key_name, file_path])
 			continue
 		var object_key = def[object_key_name]
+		printerr("FilePath: %s | %s" % [file_path, file_path.get_base_dir()])
 		_defs_to_load_paths[object_key] = file_path.get_base_dir()
 		_object_defs[object_key] = def
 		if LOGGING: print("# - Loaded Object Def: %s" % [object_key])

@@ -75,22 +75,21 @@ func sync_sprites():
 		
 
 func _load_weapon_sprite(weapon_node:ActorWeaponNode, weapon:BaseWeaponEquipment):
-	weapon_node.visible = true
-	var weapon_sprite = weapon.get_equipt_sprite()
-	if weapon_sprite:
-		weapon_node.weapon_sprite.visible = true
-		weapon_node.weapon_sprite.texture = weapon_sprite
-	else:
-		weapon_node.weapon_sprite.visible = false
+	var sprite_data:Dictionary = weapon.get_load_val("WeaponSpriteData", {})
+	if sprite_data.size() == 0:
+		weapon_node.visible = false
 		return
-	var over_hand_sprite = weapon.get_overhand_sprite()
-	if over_hand_sprite:
-		weapon_node.overhand_weapon_sprite.visible = true
-		weapon_node.overhand_weapon_sprite.texture = over_hand_sprite
-	else:
-		weapon_node.overhand_weapon_sprite.visible = false
-	#weapon_node.weapon_sprite.rotation_degrees = weapon.get_load_val("DisplayRotation", 0)
-	var offset_arr = weapon.get_load_val("WeaponSpriteOffset", [0,0])
+	weapon_node.visible = true
+	var sprite_base_path = weapon._def_load_path.path_join(sprite_data.get("SpriteName"))
+	var sprite_file = sprite_base_path + ".png"
+	var overhand_sprite_file = sprite_base_path + "_OverHand.png"
+	weapon_node.weapon_sprite.texture = SpriteCache.get_sprite(sprite_file)
+	weapon_node.overhand_weapon_sprite.texture = SpriteCache.get_sprite(overhand_sprite_file)
+	
+	var rotation = sprite_data.get("Rotation", 0)
+	weapon_node.weapon_sprite.rotation_degrees = rotation
+	weapon_node.overhand_weapon_sprite.rotation_degrees = rotation
+	var offset_arr = sprite_data.get("Offset", [0,0])
 	var offset = Vector2i(offset_arr[0], offset_arr[1])
 	weapon_node.weapon_sprite.offset = offset
 	weapon_node.overhand_weapon_sprite.offset = offset
