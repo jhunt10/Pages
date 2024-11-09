@@ -160,7 +160,7 @@ func equip_item_to_slot(index:int, equipment:BaseEquipmentItem):
 		var primary_weapon = get_primary_weapon()
 		var offhand_weapon = get_offhand_weapon()
 		# Two Handing a weapon
-		if primary_weapon.Id == offhand_weapon.Id:
+		if offhand_weapon and primary_weapon.Id == offhand_weapon.Id:
 			# Two Handing a Heavy weapon, clear both hands
 			if offhand_weapon.get_weapon_class() == BaseWeaponEquipment.WeaponClasses.Heavy:
 				if LOGGING: print("Two Handed Heavy Case" )

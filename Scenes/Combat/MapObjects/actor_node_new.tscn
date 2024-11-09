@@ -1,15 +1,15 @@
-[gd_scene load_steps=24 format=3 uid="uid://uo60871y6t54"]
+[gd_scene load_steps=24 format=3 uid="uid://ddtgynjurgh0g"]
 
-[ext_resource type="Script" path="res://assets/Scripts/Actors/actor_node.gd" id="1_wfbib"]
-[ext_resource type="Texture2D" uid="uid://cp2wc5s8ju613" path="res://defs/Actors/Template_SpriteSheet.png" id="2_g31ob"]
-[ext_resource type="Script" path="res://Scenes/Combat/MapObjects/actor_weapon_node.gd" id="3_1fhqb"]
-[ext_resource type="Texture2D" uid="uid://wvy1i6avftau" path="res://defs/Items/Equipment/TestSword.png" id="3_l605h"]
-[ext_resource type="Texture2D" uid="uid://clqv3gafyrfqv" path="res://defs/Actors/Template_SpriteSheet_OffHand.png" id="3_swwt0"]
-[ext_resource type="Texture2D" uid="uid://br3wpwar62uxh" path="res://defs/Items/Equipment/TestSword_OverHand.png" id="4_gwrxf"]
-[ext_resource type="Texture2D" uid="uid://bn6l78advgud" path="res://defs/Items/Equipment/TestDagger.png" id="4_oftcj"]
-[ext_resource type="Texture2D" uid="uid://hswueqwv7use" path="res://defs/Items/Equipment/TestDagger_OverHand.png" id="5_ui06o"]
-[ext_resource type="Texture2D" uid="uid://bvdyspj30c1k1" path="res://defs/Actors/Template_SpriteSheet_MainHand.png" id="7_d028b"]
-[ext_resource type="Texture2D" uid="uid://biqv7gysaynst" path="res://defs/Actors/Template_SpriteSheet_TwoHand.png" id="10_hviaj"]
+[ext_resource type="Script" path="res://assets/Scripts/Actors/actor_node.gd" id="1_532xh"]
+[ext_resource type="Texture2D" uid="uid://cp2wc5s8ju613" path="res://defs/Actors/Template_SpriteSheet.png" id="2_uch0i"]
+[ext_resource type="Texture2D" uid="uid://clqv3gafyrfqv" path="res://defs/Actors/Template_SpriteSheet_OffHand.png" id="3_3alhy"]
+[ext_resource type="Script" path="res://Scenes/Combat/MapObjects/actor_weapon_node.gd" id="4_nx333"]
+[ext_resource type="Texture2D" uid="uid://wvy1i6avftau" path="res://defs/Items/Equipment/TestSword.png" id="5_13bt4"]
+[ext_resource type="Texture2D" uid="uid://br3wpwar62uxh" path="res://defs/Items/Equipment/TestSword_OverHand.png" id="6_n067w"]
+[ext_resource type="Texture2D" uid="uid://bvdyspj30c1k1" path="res://defs/Actors/Template_SpriteSheet_MainHand.png" id="7_y2b5d"]
+[ext_resource type="Texture2D" uid="uid://bn6l78advgud" path="res://defs/Items/Equipment/TestDagger.png" id="8_7euvb"]
+[ext_resource type="Texture2D" uid="uid://hswueqwv7use" path="res://defs/Items/Equipment/TestDagger_OverHand.png" id="9_jr68q"]
+[ext_resource type="Texture2D" uid="uid://biqv7gysaynst" path="res://defs/Actors/Template_SpriteSheet_TwoHand.png" id="10_it0q0"]
 
 [sub_resource type="Animation" id="Animation_y5og4"]
 length = 0.001
@@ -253,18 +253,6 @@ tracks/19/keys = {
 "update": 1,
 "values": [0]
 }
-tracks/20/type = "value"
-tracks/20/imported = false
-tracks/20/enabled = true
-tracks/20/path = NodePath("ActorSpriteNode/ActorSprite:z_index")
-tracks/20/interp = 1
-tracks/20/loop_wrap = true
-tracks/20/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
 
 [sub_resource type="Animation" id="Animation_cjmop"]
 resource_name = "facing_east"
@@ -315,7 +303,7 @@ tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [2]
+"values": [1]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -339,7 +327,7 @@ tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [0]
+"values": [-1]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
@@ -509,18 +497,6 @@ tracks/19/keys = {
 "update": 1,
 "values": [0]
 }
-tracks/20/type = "value"
-tracks/20/imported = false
-tracks/20/enabled = true
-tracks/20/path = NodePath("ActorSpriteNode/ActorSprite:z_index")
-tracks/20/interp = 1
-tracks/20/loop_wrap = true
-tracks/20/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [1]
-}
 
 [sub_resource type="Animation" id="Animation_t272s"]
 resource_name = "facing_north"
@@ -570,7 +546,7 @@ tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [1]
+"values": [-1]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -594,7 +570,7 @@ tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [1]
+"values": [-1]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
@@ -618,7 +594,7 @@ tracks/7/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [1]
+"values": [-1]
 }
 tracks/8/type = "value"
 tracks/8/imported = false
@@ -763,18 +739,6 @@ tracks/19/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [-1]
-}
-tracks/20/type = "value"
-tracks/20/imported = false
-tracks/20/enabled = true
-tracks/20/path = NodePath("ActorSpriteNode/ActorSprite:z_index")
-tracks/20/interp = 1
-tracks/20/loop_wrap = true
-tracks/20/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [2]
 }
 
 [sub_resource type="Animation" id="Animation_0j6s4"]
@@ -1069,7 +1033,7 @@ tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [0]
+"values": [-1]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -1093,7 +1057,7 @@ tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [2]
+"values": [1]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
@@ -1263,18 +1227,6 @@ tracks/19/keys = {
 "update": 1,
 "values": [0]
 }
-tracks/20/type = "value"
-tracks/20/imported = false
-tracks/20/enabled = true
-tracks/20/path = NodePath("ActorSpriteNode/ActorSprite:z_index")
-tracks/20/interp = 1
-tracks/20/loop_wrap = true
-tracks/20/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [1]
-}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_yjxky"]
 _data = {
@@ -1322,73 +1274,76 @@ transitions = ["Start", "Facing", SubResource("AnimationNodeStateMachineTransiti
 
 [node name="ActorNode" type="Node2D"]
 y_sort_enabled = true
-script = ExtResource("1_wfbib")
+script = ExtResource("1_532xh")
 metadata/_edit_horizontal_guides_ = [-40.0]
 
 [node name="ActorSpriteNode" type="Node2D" parent="."]
 
 [node name="ActorSprite" type="Sprite2D" parent="ActorSpriteNode"]
-texture = ExtResource("2_g31ob")
+texture = ExtResource("2_uch0i")
 hframes = 12
 vframes = 4
 
 [node name="OffHandOverlaySprite" type="Sprite2D" parent="ActorSpriteNode"]
+self_modulate = Color(0.313726, 1, 1, 1)
 z_index = 1
-texture = ExtResource("3_swwt0")
+texture = ExtResource("3_3alhy")
 hframes = 12
 vframes = 4
 
 [node name="OffHandWeaponNode" type="Node2D" parent="ActorSpriteNode/OffHandOverlaySprite"]
 position = Vector2(4, 15)
-script = ExtResource("3_1fhqb")
+script = ExtResource("4_nx333")
 
 [node name="WeaponSprite" type="Sprite2D" parent="ActorSpriteNode/OffHandOverlaySprite/OffHandWeaponNode"]
 z_index = -1
-texture = ExtResource("3_l605h")
+texture = ExtResource("5_13bt4")
 offset = Vector2(-8, -8)
 
 [node name="OverHandSprite" type="Sprite2D" parent="ActorSpriteNode/OffHandOverlaySprite/OffHandWeaponNode"]
-texture = ExtResource("4_gwrxf")
+texture = ExtResource("6_n067w")
 offset = Vector2(-8, -8)
 
 [node name="MainHandOverSprite" type="Sprite2D" parent="ActorSpriteNode"]
+self_modulate = Color(1, 0.517647, 1, 1)
 z_index = 1
-texture = ExtResource("7_d028b")
+texture = ExtResource("7_y2b5d")
 hframes = 12
 vframes = 4
 
 [node name="MainHandWeaponNode" type="Node2D" parent="ActorSpriteNode/MainHandOverSprite"]
 position = Vector2(-4, 15)
-script = ExtResource("3_1fhqb")
+script = ExtResource("4_nx333")
 
 [node name="WeaponSprite" type="Sprite2D" parent="ActorSpriteNode/MainHandOverSprite/MainHandWeaponNode"]
 z_index = -1
-texture = ExtResource("4_oftcj")
+texture = ExtResource("8_7euvb")
 offset = Vector2(-5, -5)
 
 [node name="OverHandSprite" type="Sprite2D" parent="ActorSpriteNode/MainHandOverSprite/MainHandWeaponNode"]
-texture = ExtResource("5_ui06o")
+texture = ExtResource("9_jr68q")
 offset = Vector2(-5, -5)
 
 [node name="TwoHandOverSprite" type="Sprite2D" parent="ActorSpriteNode"]
 visible = false
+self_modulate = Color(0.423529, 1, 1, 1)
 z_index = 1
-texture = ExtResource("10_hviaj")
+texture = ExtResource("10_it0q0")
 hframes = 12
 vframes = 4
 
 [node name="TwoHandWeaponNode" type="Node2D" parent="ActorSpriteNode/TwoHandOverSprite"]
 position = Vector2(0, 15)
-script = ExtResource("3_1fhqb")
+script = ExtResource("4_nx333")
 
 [node name="WeaponSprite" type="Sprite2D" parent="ActorSpriteNode/TwoHandOverSprite/TwoHandWeaponNode"]
 z_index = -1
-texture = ExtResource("3_l605h")
+texture = ExtResource("5_13bt4")
 offset = Vector2(-8, -8)
 
-[node name="OverHandSprite" type="Sprite2D" parent="ActorSpriteNode/TwoHandOverSprite/TwoHandWeaponNode"]
+[node name="OverHandSprite" type="Sprite2D" parent="ActorSpriteNode/TwoHandOverSprite/TwoHandWeaponNode/WeaponSprite"]
 z_index = 1
-texture = ExtResource("4_gwrxf")
+texture = ExtResource("6_n067w")
 offset = Vector2(-8, -8)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -1399,4 +1354,4 @@ libraries = {
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeStateMachine_snx2p")
 anim_player = NodePath("../AnimationPlayer")
-parameters/Facing/blend_position = 1.98794
+parameters/Facing/blend_position = 1.48107

@@ -267,9 +267,13 @@
 			"SmallIcon":"TestSword.png"
 		},
         "SpriteSheet":"TestSword_SpriteSheet.png",
+
+        "WeaponSpriteOffset":[-8,-8],
         "WeaponSprite":"TestSword.png",
         "OverHandSprite":"TestSword_OverHand.png",
-        "DisplayRotation":108,
+        "MainHandDisplayRotation":30,
+        "OffHandDisplayRotation":0,
+        "TwoHandDisplayRotation":11,
         "EquipSlot":"Weapon",
         "CanOffhand":false,
         "DamageData":{
@@ -333,6 +337,16 @@
 			"LargeIcon":"TestDagger.png",
 			"SmallIcon":"TestDagger.png"
 		},
+        
+        
+        "WeaponSpriteOffset":[-5,-5],
+        "WeaponSprite":"TestDagger.png",
+        "OverHandSprite":"TestDagger_OverHand.png",
+        "MainHandDisplayRotation":30,
+        "OffHandDisplayRotation":0,
+        "TwoHandDisplayRotation":11,
+
+
         "SpriteSheet":"TestDagger_SpriteSheet.png",
         "EquipSlot":"Weapon",
         "CanOffhand":false,

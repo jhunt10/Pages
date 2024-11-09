@@ -38,9 +38,13 @@ var Tags:Array = []
 var spawn_map_layer
 
 var _default_sprite:String
-var _cached_sprite:Texture2D
-var _cached_over_hand_sprite:Texture2D
+
+var _cached_body_sprite:Texture2D
+var _cached_main_hand_over_sprite:Texture2D
+var _cached_off_hand_over_sprite:Texture2D
+var _cached_two_hand_over_sprite:Texture2D
 var _cached_portrait:Texture2D
+
 var _allow_auto_que:bool = false
 
 var is_dead:bool = false
@@ -109,69 +113,91 @@ func auto_build_que(current_turn:int):
 func get_action_list()->Array:
 	return pages.list_action_keys()
 
-func get_sprite()->Texture2D:
-	if _cached_sprite == null:
+func get_body_sprite()->Texture2D:
+	if _cached_body_sprite == null:
 		_build_sprite_sheet()
-	return _cached_sprite
+	return _cached_body_sprite
+
+func get_main_hand_sprite()->Texture2D:
+	if _cached_main_hand_over_sprite == null:
+		_build_sprite_sheet()
+	return _cached_main_hand_over_sprite
+
+func get_off_hand_sprite()->Texture2D:
+	if _cached_off_hand_over_sprite == null:
+		_build_sprite_sheet()
+	return _cached_off_hand_over_sprite
+
+func get_two_hand_sprite()->Texture2D:
+	if _cached_two_hand_over_sprite == null:
+		_build_sprite_sheet()
+	return _cached_two_hand_over_sprite
 
 func _build_sprite_sheet():
-	var first_cache = (_cached_sprite == null)
+	var first_cache = (_cached_body_sprite == null)
 	var sprite_sheet_file = get_load_val("SpriteSheet", null)
 	if !sprite_sheet_file:
-		_cached_sprite = load(details.large_icon_path)
+		_cached_body_sprite = load(details.large_icon_path)
 		return
-	var sprite_path = _def_load_path.path_join(sprite_sheet_file)
-	var actor_sprite:Texture2D = load(sprite_path)
-	var full_actor_sheet_image = actor_sprite.get_image()
 	
-	var sheet_size = full_actor_sheet_image.get_size()
-	var sub_sheet_rect = Rect2i(0, 0, sheet_size.x/4, sheet_size.y)
-	if equipment.is_two_handing():
-		sub_sheet_rect = Rect2i(sheet_size.x/4, 0, sheet_size.x/4, sheet_size.y)
+	var sprite_path = _def_load_path.path_join(sprite_sheet_file).trim_suffix(".png")
+	var body_texture:Texture2D = load(sprite_path+".png")
+	var main_hand_texture:Texture2D = load(sprite_path+"_MainHand.png")
+	var off_hand_texture:Texture2D = load(sprite_path+"_OffHand.png")
+	var two_hand_texture:Texture2D = load(sprite_path+"_TwoHand.png")
 	
-	var mering_image = full_actor_sheet_image.get_region(sub_sheet_rect)
-	var over_hand_rec = Rect2i(sub_sheet_rect.position.x + (sheet_size.x/2), 0,  sheet_size.x/4, sheet_size.y)
-	var overhand_image = full_actor_sheet_image.get_region(over_hand_rec)
+	var body_image = body_texture.get_image()
+	var main_hand_image = main_hand_texture.get_image()
+	var off_hand_image = off_hand_texture.get_image()
+	var two_hand_image = two_hand_texture.get_image()
+	
+	var sheet_size = body_image.get_size()
+	var sheet_rect = Rect2i(0, 0, sheet_size.x, sheet_size.y)
 	
 	# Maerge Equipment Images
 	for item:BaseEquipmentItem in _get_draw_ordered_equipment():
-		# Skip weapons for now
+		# Skip weapons
 		if item.get_equipment_slot_type() == "Weapon":
 			continue
-		var equip_sprite:Texture2D = item.get_sprite_sheet()
-		if !equip_sprite:
+		var equip_sprite_path = item.get_sprite_sheet_file_path()
+		if !equip_sprite_path:
 			continue
-		var equip_image = equip_sprite.get_image()
-		mering_image.blend_rect(equip_image, sub_sheet_rect, Vector2i.ZERO)
-		if equip_image.get_size().x > over_hand_rec.position.x:
-			overhand_image.blend_rect(equip_image, over_hand_rec, Vector2i.ZERO)
+		equip_sprite_path = equip_sprite_path.trim_suffix(".png")
+		if FileAccess.file_exists(equip_sprite_path+".png"):
+			var equip_body_texture = load(equip_sprite_path + ".png")
+			if equip_body_texture:
+				var equip_image = equip_body_texture.get_image()
+				body_image.blend_rect(equip_image, sheet_rect, Vector2i.ZERO)
+		
+		if FileAccess.file_exists(equip_sprite_path+"_MainHand.png"):
+			var equip_hand_texture = load(equip_sprite_path + "_MainHand.png")
+			if equip_hand_texture:
+				var equip_image = equip_hand_texture.get_image()
+				main_hand_image.blend_rect(equip_image, sheet_rect, Vector2i.ZERO)
+		
+		if FileAccess.file_exists(equip_sprite_path+"_OffHand.png"):
+			var equip_hand_texture = load(equip_sprite_path + "_OffHand.png")
+			if equip_hand_texture:
+				var equip_image = equip_hand_texture.get_image()
+				off_hand_image.blend_rect(equip_image, sheet_rect, Vector2i.ZERO)
+		
+		if FileAccess.file_exists(equip_sprite_path+"_TwoHand.png"):
+			var equip_hand_texture = load(equip_sprite_path + "_TwoHand.png")
+			if equip_hand_texture:
+				var equip_image = equip_hand_texture.get_image()
+				two_hand_image.blend_rect(equip_image, sheet_rect, Vector2i.ZERO)
 	
-	# Handle Weapons
-	#if equipment.is_two_handing():
-		#var primary_weapon = equipment.get_primary_weapon()
-		#var primary_sprite = primary_weapon.get_two_hand_sprite()
-		#if primary_sprite:
-			#mering_image.blend_rect(primary_sprite.get_image(), Rect2i(0, 0, sheet_size.x/2, sheet_size.y), Vector2i.ZERO)
-	#else:
-		#var primary_weapon = equipment.get_primary_weapon()
-		#var offhand_weapon = equipment.get_offhand_weapon()
-		#if offhand_weapon:
-			#var off_hand_sprite = offhand_weapon.get_off_hand_sprite()
-			#if off_hand_sprite:
-				#mering_image.blend_rect(off_hand_sprite.get_image(), Rect2i(0, 0, sheet_size.x/2, sheet_size.y), Vector2i.ZERO)
-		#if primary_weapon:
-			#var primary_sprite = primary_weapon.get_main_hand_sprite()
-			#if primary_sprite:
-				#mering_image.blend_rect(primary_sprite.get_image(), Rect2i(0, 0, sheet_size.x/2, sheet_size.y), Vector2i.ZERO)
+	_cached_body_sprite = ImageTexture.create_from_image(body_image)
+	_cached_main_hand_over_sprite = ImageTexture.create_from_image(main_hand_image)
+	_cached_off_hand_over_sprite = ImageTexture.create_from_image(off_hand_image)
+	_cached_two_hand_over_sprite = ImageTexture.create_from_image(two_hand_image)
 	
-	_cached_sprite = ImageTexture.create_from_image(mering_image)
-	_cached_over_hand_sprite = ImageTexture.create_from_image(overhand_image)
 	var port_rect = get_load_val("PortraitRect", null)
 	if !port_rect:
-		_cached_portrait = ImageTexture.create_from_image(full_actor_sheet_image)
+		_cached_portrait = ImageTexture.create_from_image(body_image)
 	else:
 		var rect = Rect2i(port_rect[0], port_rect[1], port_rect[2], port_rect[3])
-		var port_image = mering_image.get_region(rect)
+		var port_image = body_image.get_region(rect)
 		_cached_portrait = ImageTexture.create_from_image(port_image)
 	if not first_cache:
 		sprite_changed.emit()
@@ -179,7 +205,7 @@ func _build_sprite_sheet():
 func _get_draw_ordered_equipment()->Array:
 	var out_list = []
 	var all_equipment = equipment.list_equipment()
-	var draw_order = ["Feet", "Body", "Head", "OffHand", "MainHand", "Weapon", ]
+	var draw_order = ["Feet", "Body", "Head", "OffHand", "MainHand" ]
 	for slot in draw_order:
 		for equip:BaseEquipmentItem in all_equipment:
 			if equip.get_equipment_slot_type() == slot:

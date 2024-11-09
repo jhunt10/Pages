@@ -65,9 +65,8 @@ func get_stat_mods()->Array:
 		out_list.append(BaseStatMod.create_from_data(Id, mod_data))
 	return out_list
 
-func get_sprite_sheet()->Texture2D:
+func get_sprite_sheet_file_path():
 	var file_name = get_load_val("SpriteSheet", null)
 	if !file_name:
 		return null
-	var file_path = _def_load_path.path_join(file_name)
-	return load(file_path)
+	return _def_load_path.path_join(file_name)
