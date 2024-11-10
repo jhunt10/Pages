@@ -37,8 +37,6 @@ var Tags:Array = []
 
 var spawn_map_layer
 
-var _default_sprite:String
-
 var _cached_body_sprite:Texture2D
 var _cached_main_hand_over_sprite:Texture2D
 var _cached_off_hand_over_sprite:Texture2D
@@ -53,7 +51,6 @@ func _init(key:String, load_path:String, def:Dictionary, id:String, data:Diction
 	super(key, load_path, def, id, data)
 	spawn_map_layer = _def.get('SpawnOnMapLayer', MapStateData.DEFAULT_ACTOR_LAYER)
 	
-	_default_sprite = _def['SpriteSheet']
 	_allow_auto_que = _def.get('AutoQueing', false)
 	
 	var stat_data = _def["Stats"]
@@ -84,10 +81,6 @@ func die():
 	is_dead = true
 	on_death.emit()
 	node.sprite.texture = get_coprse_texture()
-	
-func  get_default_sprite()->Texture2D:
-	var sprite_path = _def_load_path.path_join(_default_sprite)
-	return load(sprite_path)
 	
 func get_portrait_sprite()->Texture2D:
 	if !_cached_portrait:

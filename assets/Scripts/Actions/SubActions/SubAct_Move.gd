@@ -18,8 +18,8 @@ func do_thing(parent_action:BaseAction, subaction_data:Dictionary, metadata:QueE
 	#TODO: Movement
 	var move:MapPos = MapPos.Parse(subaction_data.get("RelativePos", [0,0,0,0]))
 	var success = MoveHandler.handle_movement(game_state, actor, move, subaction_data['MovementType'])
-	if success and subaction_data.get("PlayWalkin", false):
-		actor.node.set_display_pos(game_state.MapState.get_actor_pos(actor), true)
+	#if success and subaction_data.get("PlayWalkin", false):
+		#actor.node.set_display_pos(game_state.MapState.get_actor_pos(actor), true)
 	if not success:
-		actor.node.animation.stop()
+		actor.node.fail_movement()
 	pass
