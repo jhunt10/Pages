@@ -1174,7 +1174,7 @@ script = ExtResource("1_crigy")
 ui_control = NodePath("CombatUiControl")
 
 [node name="MapControlerNode" type="Node2D" parent="."]
-position = Vector2(245, 31)
+position = Vector2(398, 99)
 script = ExtResource("3_vohw8")
 
 [node name="TerrainTileMap" type="TileMapLayer" parent="MapControlerNode"]
@@ -1435,10 +1435,10 @@ offset_bottom = 223.0
 
 [node name="StatCollectionDisplayControl" type="Control" parent="CombatUiControl"]
 anchors_preset = 0
-offset_left = 907.0
-offset_top = 179.0
-offset_right = 947.0
-offset_bottom = 219.0
+offset_left = 971.0
+offset_top = 176.0
+offset_right = 1011.0
+offset_bottom = 216.0
 script = ExtResource("21_fx1yp")
 
 [node name="PremadePanelControl" parent="CombatUiControl/StatCollectionDisplayControl" instance=ExtResource("16_jsy0k")]

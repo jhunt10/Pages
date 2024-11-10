@@ -8,6 +8,7 @@ signal stats_changed
 var _actor:BaseActor
 var _base_stats:Dictionary = {}
 var _cached_stats:Dictionary = {}
+var _cached_mods_names:Dictionary = {}
 # Stats which frequently change in battle (Health, Mana, ...)
 var _bar_stats:Dictionary = {}
 var _stats_dirty = true
@@ -42,6 +43,9 @@ func get_stat(stat_name:String, default:int=0):
 	if _stats_dirty:
 		_calc_cache_stats()
 	return _cached_stats.get(stat_name, default)
+
+func get_base_stat(stat_name:String, default:int=0):
+	return _base_stats.get(stat_name, default)
 	
 func list_bar_stats():
 	return _bar_stats.keys()
@@ -66,6 +70,7 @@ func get_max_stat(stat_name):
 func _calc_cache_stats():
 	if LOGGING: print("#Caching Stats for: %s" % _actor.ActorKey)
 	
+	_cached_mods_names.clear()
 	# Aggregate all the mods together by stat_name, then type
 	var agg_mods = {}
 	var mods_list = _actor.effects.get_stat_mods()
@@ -77,6 +82,9 @@ func _calc_cache_stats():
 		if not agg_mods[mod.stat_name].keys().has(mod.mod_type):
 			agg_mods[mod.stat_name][mod.mod_type] = []
 		agg_mods[mod.stat_name][mod.mod_type].append(mod.value)
+		if not _cached_mods_names.keys().has(mod.stat_name):
+			_cached_mods_names[mod.stat_name] = []
+		_cached_mods_names[mod.stat_name].append(mod.display_name)
 		
 	if LOGGING: print("- Found: %s modded stats" % agg_mods.size())
 	
@@ -123,3 +131,8 @@ func get_base_magic_attack():
 	#if weapon and weapon.get_damage_data().get("AtkStat", '') == "Intelligence":
 		#intelligence += weapon.get_damage_data().get("BaseDamage", 0)
 	return intelligence
+
+func get_mod_names_for_stat(stat_name:String)->Array:
+	if _cached_mods_names.keys().has(stat_name):
+		return _cached_mods_names[stat_name]
+	return []

@@ -64,6 +64,7 @@ func _init(key:String, load_path:String, def:Dictionary, id:String, data:Diction
 	pages = PageHolder.new(self)
 	
 	equipment.equipment_changed.connect(_build_sprite_sheet)
+	equipment.equipment_changed.connect(stats.dirty_stats)
 	
 
 func save_data()->Dictionary:

@@ -137,17 +137,26 @@ layout_mode = 2
 layout_mode = 2
 text = "Page Name"
 
+[node name="HSeparator2" type="HSeparator" parent="InnerContainer/HBoxContainer/PageDetialsContainer/InnerContainer"]
+layout_mode = 2
+
 [node name="TagsContainer" type="HBoxContainer" parent="InnerContainer/HBoxContainer/PageDetialsContainer/InnerContainer"]
 layout_mode = 2
 
 [node name="TagsLabel" type="Label" parent="InnerContainer/HBoxContainer/PageDetialsContainer/InnerContainer/TagsContainer"]
+custom_minimum_size = Vector2(200, 23)
 layout_mode = 2
+size_flags_horizontal = 3
 text = "Tags: "
+autowrap_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="InnerContainer/HBoxContainer/PageDetialsContainer/InnerContainer"]
+layout_mode = 2
 
 [node name="DescriptionLabel" type="RichTextLabel" parent="InnerContainer/HBoxContainer/PageDetialsContainer/InnerContainer"]
 custom_minimum_size = Vector2(0, 80)
 layout_mode = 2
-text = "Description "
+text = "Description a bunch of lon texts"
 
 [node name="PageInventoryContainer" type="Container" parent="InnerContainer" node_paths=PackedStringArray("tab_bar", "pages_container", "premade_page_button", "background", "inner_container")]
 custom_minimum_size = Vector2(8, 8)

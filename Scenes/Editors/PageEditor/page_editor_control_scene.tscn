@@ -1151,13 +1151,14 @@ layout_mode = 2
 text = "Add"
 
 [node name="MissileEditEntryContainer" type="Container" parent="InnerContainer/MainContainer/RightContainer/Missiles/InnerContainer" node_paths=PackedStringArray("title_label", "root_editor_control", "background", "inner_container")]
-custom_minimum_size = Vector2(215, 154)
+custom_minimum_size = Vector2(16, 154)
 layout_mode = 2
 script = ExtResource("23_8euos")
 title_label = NodePath("InnerContainer/KeyContainer/KeyLabel")
 root_editor_control = NodePath("../../../../../..")
 background = NodePath("Background")
 inner_container = NodePath("InnerContainer")
+force_fill_x = true
 
 [node name="Background" type="NinePatchRect" parent="InnerContainer/MainContainer/RightContainer/Missiles/InnerContainer/MissileEditEntryContainer"]
 layout_mode = 2
@@ -1238,6 +1239,7 @@ text = "Impact VFX: "
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 size_flags_horizontal = 3
+fit_to_longest_item = false
 script = ExtResource("5_xop6x")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="InnerContainer/MainContainer/RightContainer/Missiles/InnerContainer"]

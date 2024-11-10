@@ -485,13 +485,13 @@ max_value = 180.0
 custom_minimum_size = Vector2(260, 16)
 layout_mode = 2
 script = ExtResource("24_2alwo")
+force_fill_y = true
 name_label = NodePath("InnerContainer/HBoxContainer/NameLabel")
 level_label = NodePath("InnerContainer/HBoxContainer/LevelLabel")
 premade_stat_entry = NodePath("InnerContainer/ScrollContainer/VBoxContainer/StatDisplayEntry")
 entry_container = NodePath("InnerContainer/ScrollContainer/VBoxContainer")
 background = NodePath("Background")
 inner_container = NodePath("InnerContainer")
-force_fill_y = true
 
 [node name="Background" type="NinePatchRect" parent="MainContainer/HBoxContainer/StatsDisplayContainer"]
 layout_mode = 2

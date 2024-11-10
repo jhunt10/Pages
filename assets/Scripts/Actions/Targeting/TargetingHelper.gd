@@ -89,8 +89,9 @@ static func _get_potential_coor_to_targets(target_params:TargetParameters, actor
 				if (target_params.target_type == TargetParameters.TargetTypes.Ally and
 						actor.FactionIndex != target.FactionIndex):
 							continue
-				if (target_params.target_type == TargetParameters.TargetTypes.Corpse and
-						not target.is_dead):
+				if target.is_dead and not (target_params.target_type == TargetParameters.TargetTypes.Corpse):
+							continue
+				if target_params.target_type == TargetParameters.TargetTypes.Corpse and not target.is_dead:
 							continue
 				if target_params.is_valid_target_actor(actor, target, game_state):
 					if not potential_targets.has(target.Id) and not exclude_targets.has(target.Id):

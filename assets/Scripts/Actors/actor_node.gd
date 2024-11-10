@@ -238,6 +238,6 @@ func set_corpse_sprite():
 	off_hand_sprite.visible = false
 	two_hand_sprite.visible = false
 	actor_sprite.texture = Actor.get_coprse_texture()
-	actor_sprite.vframes = 0
-	actor_sprite.hframes = 0
+	actor_sprite.vframes = 1
+	actor_sprite.hframes = 1
 	actor_sprite.offset = Vector2i.ZERO

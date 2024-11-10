@@ -6,7 +6,8 @@ func get_required_props()->Dictionary:
 	return {
 		"TargetParamKey": BaseSubAction.SubActionPropTypes.TargetParamKey,
 		"SetTargetKey": BaseSubAction.SubActionPropTypes.SetTargetKey,
-		"AllowAlreadyTargeted": BaseSubAction.SubActionPropTypes.BoolVal
+		"AllowAlreadyTargeted": BaseSubAction.SubActionPropTypes.BoolVal,
+		"AllowDeadTargets": BaseSubAction.SubActionPropTypes.BoolVal
 	}
 ## Returns Tags that are automatically added to the parent Action's Tags
 func get_action_tags(_subaction_data:Dictionary)->Array:
