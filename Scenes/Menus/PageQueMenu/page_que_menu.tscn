@@ -17,6 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://s8s7rktavc7e" path="res://assets/Sprites/UI/BackPatches/Patch_32_8.png" id="15_6vqgx"]
 
 [node name="PageQueMenu" type="Container" node_paths=PackedStringArray("page_que_slots_container", "details_container", "page_inventory_container", "mouse_over_control", "background", "inner_container")]
+z_index = 2
 custom_minimum_size = Vector2(628, 631)
 offset_right = 628.0
 offset_bottom = 631.0

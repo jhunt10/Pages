@@ -168,7 +168,6 @@ func _load_object_def_file(file_path:String):
 			printerr("No '%s' found on object in %s." % [object_key_name, file_path])
 			continue
 		var object_key = def[object_key_name]
-		printerr("FilePath: %s | %s" % [file_path, file_path.get_base_dir()])
 		_defs_to_load_paths[object_key] = file_path.get_base_dir()
 		_object_defs[object_key] = def
 		if LOGGING: print("# - Loaded Object Def: %s" % [object_key])
@@ -212,7 +211,7 @@ func _load_object_file(file_path:String):
 			continue
 		var object_def = get_object_def(object_key)
 		if !object_def:
-			printerr("%sLibrary._load_object_file: No object def found for '%s' on object '%s' in: %." % [get_object_name(), object_key_name, object_id, file_path])
+			printerr("%sLibrary._load_object_file: No object def found for '%s' on object '%s' in: %s." % [get_object_name(), object_key_name, object_id, file_path])
 			continue
 		var script_path = get_object_script_path(object_def)
 		var script = load(script_path)

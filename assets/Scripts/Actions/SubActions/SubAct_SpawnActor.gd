@@ -14,11 +14,13 @@ func do_thing(parent_action:BaseAction, subaction_data:Dictionary, que_exe_data:
 				game_state:GameStateData, actor:BaseActor):
 	var turn_data = que_exe_data.get_current_turn_data()
 	var target_key = subaction_data['TargetKey']
-	var target = turn_data.targets[target_key]
-	if not target is Vector2i:
+	var target = turn_data.get_target(target_key)
+	if not target is MapPos:
+		printerr("SubAct_SpawnActor: Invalid Target")
 		return
 	var actor_key = subaction_data['ActorKey']
-	CombatRootControl.Instance.create_new_actor(
-		MainRootNode.actor_libary.get_actor_data(actor_key), 
+	var new_actor = ActorLibrary.Instance.create_object(actor_key)
+	CombatRootControl.Instance.add_actor(
+		new_actor,
 		actor.FactionIndex,
-		MapPos.new(target.x, target.y, 0, 0))
+		target)

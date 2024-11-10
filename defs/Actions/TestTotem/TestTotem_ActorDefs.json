@@ -1,0 +1,27 @@
+[
+    {
+		"ActorKey": "TestTotem",
+		"Details":{
+			"DisplayName": "Test Totem",
+			"SnippetDesc": "An totem  made for testing.",
+			"Description": "Description.",
+			"Tags": ["Minion"],
+			"LargeIcon":"TestTotem.png",
+			"SmallIcon":"TestTotem.png"
+		},
+		"Stats":{
+			"Max:Health":100,
+			"Max:Stamina":100,
+			"Max:Mana":100,
+			"Mass":15,
+			"Speed":10,
+			"Level":0,
+			"Strength": 10,
+			"Agility": 10,
+			"Intelligence": 10,
+			"Wisdom": 10,
+			"PagesPerRound": 2
+		},
+        "AutoQue":["TestTotemAttack", "TestTotemAttack"]
+	}
+]

@@ -36,22 +36,26 @@ func start_combat():
 	actors.append({
 		'ActorId': 'TestActor_ID',
 		'Pos': MapPos.new(5,5,0,0),
-		'IsPlayer': true
+		'IsPlayer': true,
+		'IsEnemy':false
 	})
 	actors.append({
 		'ActorId': 'TestTarget_ID',
 		'Pos': MapPos.new(5,2,0,2),
-		'IsPlayer': false
+		'IsPlayer': false,
+		'IsEnemy':true
 	})
 	actors.append({
 		'ActorId': 'TestTarget_ID2',
 		'Pos': MapPos.new(5,4,0,2),
-		'IsPlayer': false
+		'IsPlayer': false,
+		'IsEnemy':true
 	})
 	actors.append({
 		'ActorId': 'TestTarget_ID3',
 		'Pos': MapPos.new(4,1,0,2),
-		'IsPlayer': false
+		'IsPlayer': false,
+		'IsEnemy':true
 	})
 	#actors.append({
 		#'ActorKey': 'TestTarget',

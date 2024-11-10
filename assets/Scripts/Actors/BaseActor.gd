@@ -51,7 +51,8 @@ func _init(key:String, load_path:String, def:Dictionary, id:String, data:Diction
 	super(key, load_path, def, id, data)
 	spawn_map_layer = _def.get('SpawnOnMapLayer', MapStateData.DEFAULT_ACTOR_LAYER)
 	
-	_allow_auto_que = _def.get('AutoQueing', false)
+	var auto_que_list = _def.get("AutoQue", [])
+	_allow_auto_que = auto_que_list.size() > 0
 	
 	var stat_data = _def["Stats"]
 	stats = StatHolder.new(self, stat_data)
@@ -80,7 +81,7 @@ func set_pos(old_pos:MapPos, new_pos:MapPos, move_type:String, moved_by:BaseActo
 func die():
 	is_dead = true
 	on_death.emit()
-	node.sprite.texture = get_coprse_texture()
+	node.set_corpse_sprite()
 	
 func get_portrait_sprite()->Texture2D:
 	if !_cached_portrait:
@@ -89,19 +90,19 @@ func get_portrait_sprite()->Texture2D:
 
 func get_coprse_texture()->Texture2D:
 	if _def.has("CorpseSprite"):
-		return load(LoadPath + "/" +_def['CorpseSprite'])
+		return SpriteCache.get_sprite(_def_load_path + "/" +_def['CorpseSprite'])
 	return SpriteCache._get_no_sprite()
 
 func auto_build_que(current_turn:int):
 	if !_allow_auto_que:
 		return
-	printerr("Auto Que for : " + ActorKey)
-	#if Que:
-		#if Que.available_action_list.size() > 0:
-			#var action = ActionLibrary.get_action(Que.available_action_list[0])
-			#for n in range(Que.que_size):
-				#print("AutoQue: " + action.ActionKey)
-				#Que.que_action(action)
+	var auto_que_list = get_load_val("AutoQue", null)
+	if Que:
+		for action_key in auto_que_list:
+			var action = ActionLibrary.get_action(action_key)
+			print("AutoQue: " + action.ActionKey)
+			if action:
+				Que.que_action(action)
 			
 func get_action_list()->Array:
 	return pages.list_action_keys()
@@ -130,14 +131,15 @@ func _build_sprite_sheet():
 	var first_cache = (_cached_body_sprite == null)
 	var sprite_sheet_file = get_load_val("SpriteSheet", null)
 	if !sprite_sheet_file:
-		_cached_body_sprite = load(details.large_icon_path)
+		_cached_body_sprite = SpriteCache.get_sprite(details.large_icon_path)
+		_cached_portrait = SpriteCache.get_sprite(details.large_icon_path)
 		return
 	
 	var sprite_path = _def_load_path.path_join(sprite_sheet_file).trim_suffix(".png")
-	var body_texture:Texture2D = load(sprite_path+".png")
-	var main_hand_texture:Texture2D = load(sprite_path+"_MainHand.png")
-	var off_hand_texture:Texture2D = load(sprite_path+"_OffHand.png")
-	var two_hand_texture:Texture2D = load(sprite_path+"_TwoHand.png")
+	var body_texture:Texture2D = SpriteCache.get_sprite(sprite_path+".png")
+	var main_hand_texture:Texture2D = SpriteCache.get_sprite(sprite_path+"_MainHand.png")
+	var off_hand_texture:Texture2D = SpriteCache.get_sprite(sprite_path+"_OffHand.png")
+	var two_hand_texture:Texture2D = SpriteCache.get_sprite(sprite_path+"_TwoHand.png")
 	
 	var body_image = body_texture.get_image()
 	var main_hand_image = main_hand_texture.get_image()
@@ -157,25 +159,25 @@ func _build_sprite_sheet():
 			continue
 		equip_sprite_path = equip_sprite_path.trim_suffix(".png")
 		if FileAccess.file_exists(equip_sprite_path+".png"):
-			var equip_body_texture = load(equip_sprite_path + ".png")
+			var equip_body_texture = SpriteCache.get_sprite(equip_sprite_path + ".png")
 			if equip_body_texture:
 				var equip_image = equip_body_texture.get_image()
 				body_image.blend_rect(equip_image, sheet_rect, Vector2i.ZERO)
 		
 		if FileAccess.file_exists(equip_sprite_path+"_MainHand.png"):
-			var equip_hand_texture = load(equip_sprite_path + "_MainHand.png")
+			var equip_hand_texture = SpriteCache.get_sprite(equip_sprite_path + "_MainHand.png")
 			if equip_hand_texture:
 				var equip_image = equip_hand_texture.get_image()
 				main_hand_image.blend_rect(equip_image, sheet_rect, Vector2i.ZERO)
 		
 		if FileAccess.file_exists(equip_sprite_path+"_OffHand.png"):
-			var equip_hand_texture = load(equip_sprite_path + "_OffHand.png")
+			var equip_hand_texture = SpriteCache.get_sprite(equip_sprite_path + "_OffHand.png")
 			if equip_hand_texture:
 				var equip_image = equip_hand_texture.get_image()
 				off_hand_image.blend_rect(equip_image, sheet_rect, Vector2i.ZERO)
 		
 		if FileAccess.file_exists(equip_sprite_path+"_TwoHand.png"):
-			var equip_hand_texture = load(equip_sprite_path + "_TwoHand.png")
+			var equip_hand_texture = SpriteCache.get_sprite(equip_sprite_path + "_TwoHand.png")
 			if equip_hand_texture:
 				var equip_image = equip_hand_texture.get_image()
 				two_hand_image.blend_rect(equip_image, sheet_rect, Vector2i.ZERO)

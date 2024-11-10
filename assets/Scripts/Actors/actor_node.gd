@@ -26,7 +26,10 @@ func _ready() -> void:
 func set_actor(actor:BaseActor):
 	Id = actor.Id
 	Actor = actor
-	Actor.node = self
+	if Actor.node == null:
+		Actor.node = self
+	if not actor.equipment.equipment_changed.is_connected(sync_sprites):
+		actor.equipment.equipment_changed.connect(sync_sprites)
 	_load_nodes()
 	var frames = actor.get_load_val("SpriteFrameWH", [1,1])
 	actor_sprite.hframes = frames[0]
@@ -40,8 +43,6 @@ func set_actor(actor:BaseActor):
 	var offset = actor.get_load_val("SpriteOffset", [0,0])
 	offset_node.position = Vector2i(offset[0], offset[1])
 	sync_sprites()
-	if not actor.equipment.equipment_changed.is_connected(sync_sprites):
-		actor.equipment.equipment_changed.connect(sync_sprites)
 
 func sync_sprites():
 	actor_sprite.texture = Actor.get_body_sprite()
@@ -90,6 +91,7 @@ func _load_weapon_sprite(weapon_node:ActorWeaponNode, weapon:BaseWeaponEquipment
 	weapon_node.overhand_weapon_sprite.texture = SpriteCache.get_sprite(overhand_sprite_file)
 	
 	var rotation = sprite_data.get("Rotation", 0)
+	print("Loaded Weapon: %s with rotation %s" % [weapon.Id, rotation])
 	weapon_node.weapon_sprite.rotation_degrees = rotation
 	weapon_node.overhand_weapon_sprite.rotation_degrees = rotation
 	var offset_arr = sprite_data.get("Offset", [0,0])
@@ -154,10 +156,10 @@ func set_display_pos(pos:MapPos, start_walkin:bool=false):
 	rot_dir = pos.dir
 	
 	if actor_sprite.vframes == 1:
-		if rot_dir == 0: actor_sprite.set_rotation_degrees(0)
-		if rot_dir == 1: actor_sprite.set_rotation_degrees(90)
-		if rot_dir == 2: actor_sprite.set_rotation_degrees(180)
-		if rot_dir == 3: actor_sprite.set_rotation_degrees(270) 
+		#if rot_dir == 0: actor_sprite.set_rotation_degrees(0)
+		#if rot_dir == 1: actor_sprite.set_rotation_degrees(90)
+		#if rot_dir == 2: actor_sprite.set_rotation_degrees(180)
+		#if rot_dir == 3: actor_sprite.set_rotation_degrees(270) 
 		var parent = get_parent()
 		if parent is TileMapLayer:
 			self.position = parent.map_to_local(Vector2i(pos.x, pos.y))
@@ -230,3 +232,12 @@ func start_walk_in_animation():
 	#animation_tree.set("parameters/conditions/Walk", false)
 	#animation_tree.set("parameters/conditions/FinishWalk", true)
 	#animation_tree.set("parameters/conditions/MoveFailed", false)
+
+func set_corpse_sprite():
+	main_hand_sprite.visible = false
+	off_hand_sprite.visible = false
+	two_hand_sprite.visible = false
+	actor_sprite.texture = Actor.get_coprse_texture()
+	actor_sprite.vframes = 0
+	actor_sprite.hframes = 0
+	actor_sprite.offset = Vector2i.ZERO

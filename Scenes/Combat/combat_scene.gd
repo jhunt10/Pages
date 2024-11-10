@@ -45,7 +45,10 @@ func _ready() -> void:
 		if actor_info.get('IsPlayer', false):
 			actor.FactionIndex = 0
 			ui_control.set_player_actor(actor)
-		add_actor(actor, 0, actor_pos)
+			add_actor(actor, 0, actor_pos)
+		else:
+			add_actor(actor, 1, actor_pos)
+		
 	actor_creation_que.clear()
 	
 	ui_control.ui_state_controller.set_ui_state(UiStateController.UiStates.ActionInput)

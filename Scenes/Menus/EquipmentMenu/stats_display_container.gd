@@ -18,6 +18,7 @@ func set_actor(actor:BaseActor):
 	for child in entry_container.get_children():
 		if child != premade_stat_entry:
 			child.queue_free()
+	create_entry("Faction", actor.FactionIndex)
 	create_entry("Strength", actor.stats.get_stat("Strength", 0))
 	create_entry("Agility", actor.stats.get_stat("Agility", 0))
 	create_entry("Intelligence", actor.stats.get_stat("Intelligence", 0))

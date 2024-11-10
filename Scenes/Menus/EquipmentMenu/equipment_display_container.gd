@@ -17,6 +17,9 @@ extends BackPatchContainer
 
 signal equipt_slot_pressed(slot:int)
 
+@onready var main_hand_slider:Slider = $InnerContainer/LeftEquipSlots/HSlider
+@onready var off_hand_slider:Slider = $InnerContainer/RightEquipSlots/HSlider
+
 var _actor:BaseActor
 var _display_dir:int = 2
 
@@ -38,6 +41,39 @@ func _ready() -> void:
 		slot_display.pressed.connect(_on_slot_pressed.bind(slot))
 	left_button.pressed.connect(_rotate_sprite.bind(true))
 	right_button.pressed.connect(_rotate_sprite.bind(false))
+	main_hand_slider.value_changed.connect(rotate_main_hand)
+	off_hand_slider.value_changed.connect(rotate_off_hand)
+
+func rotate_main_hand(val):
+	print("Setting MainHand rotation: %s " % [val])
+	if _actor.equipment.is_two_handing():
+		actor_node.two_hand_weapon_node.weapon_sprite.rotation_degrees = val
+		actor_node.two_hand_weapon_node.overhand_weapon_sprite.rotation_degrees = val
+		off_hand_slider.set_value_no_signal(val)
+		var primary = _actor.equipment.get_primary_weapon()
+		if primary:
+			primary.get_load_val("WeaponSpriteData", {})['Rotation'] = val
+	else:
+		var primary = _actor.equipment.get_primary_weapon()
+		if primary:
+			primary.get_load_val("WeaponSpriteData", {})['Rotation'] = val
+		actor_node.main_hand_weapon_node.weapon_sprite.rotation_degrees = val
+		actor_node.main_hand_weapon_node.overhand_weapon_sprite.rotation_degrees = val
+func rotate_off_hand(val):
+	print("Setting OffHand rotation: %s " % [val])
+	if _actor.equipment.is_two_handing():
+		actor_node.two_hand_weapon_node.weapon_sprite.rotation_degrees = val
+		actor_node.two_hand_weapon_node.overhand_weapon_sprite.rotation_degrees = val
+		off_hand_slider.set_value_no_signal(val)
+		var primary = _actor.equipment.get_primary_weapon()
+		if primary:
+			primary.get_load_val("WeaponSpriteData", {})['Rotation'] = val
+	else:
+		var offhand = _actor.equipment.get_offhand_weapon()
+		if offhand:
+			offhand.get_load_val("WeaponSpriteData", {})['Rotation'] = val
+		actor_node.off_hand_weapon_node.weapon_sprite.rotation_degrees = val
+		actor_node.off_hand_weapon_node.overhand_weapon_sprite.rotation_degrees = val
 
 func _rotate_sprite(left:bool):
 	var dir = _display_dir
@@ -86,6 +122,12 @@ func set_actor(actor:BaseActor):
 	phyatk_label.text = str(_actor.stats.get_base_phyical_attack())
 	page_count_label.text = str(_actor.pages.get_max_page_count())
 	que_count_label.text = str(_actor.stats.get_stat("PagesPerRound"))
+	var primary_weapon = actor.equipment.get_primary_weapon()
+	if primary_weapon:
+		main_hand_slider.value = primary_weapon.get_load_val("WeaponSpriteData", {}).get("Rotation", 0)
+	var offhand_weapon = actor.equipment.get_primary_weapon()
+	if offhand_weapon:
+		off_hand_slider.value = offhand_weapon.get_load_val("WeaponSpriteData", {}).get("Rotation", 0)
 
 func _on_slot_pressed(index:int):
 	var slot_display:EquipmentDisplaySlotButton = slot_displays[index]

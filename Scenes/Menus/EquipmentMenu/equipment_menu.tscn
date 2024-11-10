@@ -38,9 +38,10 @@
 [ext_resource type="Script" path="res://Scenes/Menus/PageQueMenu/page_slot_button.gd" id="28_um48u"]
 
 [node name="EquipmentMenuContainer" type="Container" node_paths=PackedStringArray("mouse_over_control", "stats_display_container", "equipment_display_container", "inventory_container", "page_list_container", "background", "inner_container")]
-custom_minimum_size = Vector2(576, 634)
+z_index = 1
+custom_minimum_size = Vector2(576, 651)
 offset_right = 576.0
-offset_bottom = 634.0
+offset_bottom = 651.0
 script = ExtResource("1_7xry3")
 mouse_over_control = NodePath("MouseOverControl")
 stats_display_container = NodePath("MainContainer/HBoxContainer/StatsDisplayContainer")
@@ -68,7 +69,7 @@ vertical = true
 layout_mode = 2
 
 [node name="EquipSlotsContainer" type="Container" parent="MainContainer/HBoxContainer" node_paths=PackedStringArray("actor_node", "armor_lable", "ward_label", "phyatk_label", "magatk_label", "mass_label", "speed_label", "page_count_label", "que_count_label", "background", "inner_container")]
-custom_minimum_size = Vector2(288, 313)
+custom_minimum_size = Vector2(288, 312)
 layout_mode = 2
 script = ExtResource("3_xe4rr")
 actor_node = NodePath("InnerContainer/MiddlePortraitContainer/PortaitBackground/CenterContainer/Control/Node2D/ActorNode")
@@ -174,6 +175,11 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("6_bbncy")
+
+[node name="HSlider" type="HSlider" parent="MainContainer/HBoxContainer/EquipSlotsContainer/InnerContainer/LeftEquipSlots"]
+layout_mode = 2
+min_value = -180.0
+max_value = 180.0
 
 [node name="MiddlePortraitContainer" type="VBoxContainer" parent="MainContainer/HBoxContainer/EquipSlotsContainer/InnerContainer"]
 layout_mode = 2
@@ -470,6 +476,11 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("12_uskvu")
 
+[node name="HSlider" type="HSlider" parent="MainContainer/HBoxContainer/EquipSlotsContainer/InnerContainer/RightEquipSlots"]
+layout_mode = 2
+min_value = -180.0
+max_value = 180.0
+
 [node name="StatsDisplayContainer" type="Container" parent="MainContainer/HBoxContainer" node_paths=PackedStringArray("name_label", "level_label", "premade_stat_entry", "entry_container", "background", "inner_container")]
 custom_minimum_size = Vector2(260, 16)
 layout_mode = 2
@@ -583,7 +594,7 @@ layout_mode = 2
 text = "Edit Pages"
 
 [node name="EquiptInventoryContainer" type="Container" parent="MainContainer" node_paths=PackedStringArray("tab_bar", "items_container", "premade_item_button", "background", "inner_container")]
-custom_minimum_size = Vector2(12, 236)
+custom_minimum_size = Vector2(12, 267)
 layout_mode = 2
 script = ExtResource("13_nccae")
 tab_bar = NodePath("InnerContainer/TabBar")

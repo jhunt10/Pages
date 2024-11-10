@@ -58,5 +58,11 @@ func lose_focus_if_has():
 		tag_entry.lose_focus_if_has()
 
 func check_for_change(source_list:Array)->bool:
-	#TODO
+	var tags = get_tags()
+	for tag in tags:
+		if not source_list.has(tag):
+			return true
+	for tag in source_list:
+		if not tags.has(tag):
+			return true
 	return false

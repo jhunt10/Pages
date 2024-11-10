@@ -5,16 +5,13 @@ var character_sheet#:CharacterSheetControl
 
 func _init(controler:UiStateController, args:Dictionary) -> void:
 	super(controler, args)
-	character_sheet = load("res://Scenes/character_edit_control.tscn").instantiate()
-	CombatUiControl.Instance.add_child(character_sheet)
-	character_sheet.tree_exited.connect(on_menu_closed)
 	var actor_id = args.get("ActorId", null)
 	if not actor_id:
 		return
 	var actor = CombatRootControl.Instance.GameState.get_actor(actor_id)
 	if not actor:
 		return
-	character_sheet.set_actor(actor)
+	main
 	
 
 func start_state():

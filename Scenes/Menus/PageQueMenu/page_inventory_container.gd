@@ -19,6 +19,8 @@ var _hover_timer:float
 var _click_delay:float = 0.4
 var _click_timer:float
 
+const static_tags=["All", "Movement", "Attack", "Spell", "Tactic"]
+
 func _ready() -> void:
 	super()
 	if Engine.is_editor_hint(): return
@@ -43,10 +45,14 @@ func _process(delta: float) -> void:
 func set_actor(actor:BaseActor):
 	tab_bar.clear_tabs()
 	var pages_per_tags = actor.pages.get_pages_per_page_tags()
+	var tab_list = static_tags.duplicate()
 	for page_tags in pages_per_tags.keys():
 		if page_tags == "Any":
 			page_tags = "All"
-		tab_bar.add_tab(page_tags)
+		if !tab_list.has(page_tags):
+			tab_list.append(page_tags)
+	for tab in tab_list:
+		tab_bar.add_tab(tab)
 
 func build_page_list():
 	for button in _page_buttons.values():

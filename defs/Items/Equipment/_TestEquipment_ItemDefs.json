@@ -10,27 +10,43 @@
 			"LargeIcon":"TestBook.png",
 			"SmallIcon":"TestBook.png"
 		},
-        "PagesPerRound": 5,
+        "PagesPerRound": 4,
         "PageTagSlots": {
-            "Any": 6,
-            "Movement":4,
-            "Attack":4
+            "Any": 8
         }
     },
     {
-        "ItemKey":"TestPageQue2",
+        "ItemKey":"PageQue_FieldManual",
         "_ObjectScript": "res://assets/Scripts/Items/Equipment/BaseQueEquipment.gd",
         "Details":{
-			"DisplayName": "Test Page Que",
-			"SnippetDesc": "An page que made for testing.",
+			"DisplayName": "Field Manual",
+			"SnippetDesc": "Basic reading for all soldiers.",
 			"Description": "Description.",
 			"Tags": ["Que"],
-			"LargeIcon":"TestBook2.png",
-			"SmallIcon":"TestBook2.png"
+			"LargeIcon":"FieldManual.png",
+			"SmallIcon":"FieldManual.png"
+		},
+        "PagesPerRound": 5,
+        "PageTagSlots": {
+            "Any": 6,
+			"Tactic": 2
+        }
+    },
+    {
+        "ItemKey":"PageQue_NoviceNoteBook",
+        "_ObjectScript": "res://assets/Scripts/Items/Equipment/BaseQueEquipment.gd",
+        "Details":{
+			"DisplayName": "Novice's Notebook",
+			"SnippetDesc": "Pefect for the mage just starting out.",
+			"Description": "Description.",
+			"Tags": ["Que"],
+			"LargeIcon":"NoteBook.png",
+			"SmallIcon":"NoteBook.png"
 		},
         "PagesPerRound": 3,
         "PageTagSlots": {
-            "Any": 10
+            "Any": 6,
+			"Spell": 4
         }
     },
     {
@@ -251,6 +267,7 @@
 				"Value":500 
 			}
 		},
+        "SpriteSheet":"TestOrb_SpriteSheet.png",
         "EquipSlot":"OffHand",
         "Armor": 0,
         "Ward": 10

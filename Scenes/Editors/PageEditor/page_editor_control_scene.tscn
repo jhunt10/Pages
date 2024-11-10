@@ -1013,9 +1013,10 @@ tab_3/title = "Targets"
 script = ExtResource("21_yq8bh")
 tab_set = "Actions"
 
-[node name="Damage" parent="InnerContainer/MainContainer/RightContainer" instance=ExtResource("19_0cohb")]
+[node name="Damage" parent="InnerContainer/MainContainer/RightContainer" node_paths=PackedStringArray("root_editor_control") instance=ExtResource("19_0cohb")]
 custom_minimum_size = Vector2(376, 16)
 layout_mode = 2
+root_editor_control = NodePath("../../../..")
 
 [node name="CostSubEditorContainer" type="Container" parent="InnerContainer/MainContainer/RightContainer" node_paths=PackedStringArray("add_button", "premade_cost_entry", "entry_container", "title_label", "root_editor_control", "background", "inner_container")]
 visible = false
@@ -1255,7 +1256,7 @@ layout_mode = 2
 size_flags_vertical = 3
 script = ExtResource("26_haw51")
 options_button = NodePath("InnerContainer/TitleContainer/LoadedOptionButton")
-default_entry_name = "Target"
+default_entry_name = "TargetParams"
 add_button = NodePath("InnerContainer/TitleContainer/Button")
 premade_edit_entry = NodePath("InnerContainer/TargetEditEntryContainer")
 entries_container = NodePath("InnerContainer/ScrollContainer/EntiresContainer")
