@@ -3524,7 +3524,6 @@ hframes = 12
 vframes = 4
 
 [node name="OffHandOverlaySprite" type="Sprite2D" parent="ActorMotionNode/ActorSpriteNode/OffsetNode"]
-visible = false
 z_index = 1
 texture = ExtResource("3_swwt0")
 hframes = 12
@@ -3542,7 +3541,6 @@ texture = ExtResource("3_l605h")
 texture = ExtResource("4_gwrxf")
 
 [node name="MainHandOverSprite" type="Sprite2D" parent="ActorMotionNode/ActorSpriteNode/OffsetNode"]
-visible = false
 z_index = 1
 texture = ExtResource("7_d028b")
 hframes = 12
@@ -3560,6 +3558,7 @@ texture = ExtResource("8_iur6c")
 texture = ExtResource("9_mr4ys")
 
 [node name="TwoHandOverSprite" type="Sprite2D" parent="ActorMotionNode/ActorSpriteNode/OffsetNode"]
+visible = false
 z_index = 1
 texture = ExtResource("10_hviaj")
 hframes = 12
