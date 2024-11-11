@@ -19,6 +19,9 @@ var Actor:BaseActor
 var rot_dir
 var start_walk_on_pos_change:bool
 
+var current_animation_action_name:String
+var current_animation_hand_name:String
+
 func _ready() -> void:
 	animation.animation_started.connect(animation_started)
 	animation.animation_finished.connect(animation_finished)
@@ -58,7 +61,7 @@ func sync_sprites():
 		var two_hand_weapon = Actor.equipment.get_primary_weapon()
 		if two_hand_weapon:
 			print("Loading 2hand primarty: " + two_hand_weapon.Id)
-			_load_weapon_sprite(two_hand_weapon_node, two_hand_weapon)
+			two_hand_weapon_node.set_weapon(two_hand_weapon)
 		else:
 			two_hand_weapon_node.visible = false
 	else:
@@ -67,13 +70,13 @@ func sync_sprites():
 		two_hand_sprite.visible = false
 		var main_hand_weapon = Actor.equipment.get_primary_weapon()
 		if main_hand_weapon:
-			_load_weapon_sprite(main_hand_weapon_node, main_hand_weapon)
+			main_hand_weapon_node.set_weapon(main_hand_weapon)
 		else:
 			main_hand_weapon_node.visible = false
 			
 		var off_hand_weapon = Actor.equipment.get_offhand_weapon()
 		if off_hand_weapon:
-			_load_weapon_sprite(off_hand_weapon_node, off_hand_weapon)
+			off_hand_weapon_node.set_weapon(off_hand_weapon)
 		else:
 			off_hand_weapon_node.visible = false
 		
@@ -166,7 +169,7 @@ func set_display_pos(pos:MapPos, start_walkin:bool=false):
 		return
 	
 	if !is_walking:
-		animation.play("facing_"+get_animation_sufix())
+		animation.play("facing"+get_animation_sufix())
 	
 	var parent = get_parent()
 	if parent is TileMapLayer:
@@ -187,16 +190,22 @@ func set_display_pos(pos:MapPos, start_walkin:bool=false):
 		#animation_tree.set("parameters/Walk_Out/blend_position", pos.dir)
 
 func get_animation_sufix()->String:
-	if rot_dir == 0: return "north"
-	if rot_dir == 1: return "east"
-	if rot_dir == 2: return "south"
-	if rot_dir == 3: return "west"
-	return "south"
+	if rot_dir == 0: return "_north"
+	if rot_dir == 1: return "_east"
+	if rot_dir == 2: return "_south"
+	if rot_dir == 3: return "_west"
+	return "_south"
 
 func animation_finished(name):
+	main_hand_weapon_node.on_animation_end(name)
+	off_hand_weapon_node.on_animation_end(name)
+	two_hand_weapon_node.on_animation_end(name)
 	printerr("AnimationEnded: "+name)
 
 func animation_started(name:String):
+	main_hand_weapon_node.on_animation_start(name)
+	off_hand_weapon_node.on_animation_start(name)
+	two_hand_weapon_node.on_animation_start(name)
 	if name.begins_with("walk_out_"):
 		is_walking = true
 	else:
@@ -212,23 +221,42 @@ func fail_movement():
 	#animation_tree.set("parameters/conditions/FinishWalk", false)
 	#animation_tree.set("parameters/conditions/MoveFailed", true)
 	print("PlayConnecnd")
-	animation.play("facing_"+get_animation_sufix())
+	animation.play("facing"+get_animation_sufix())
 	print("After_PlayConnecnd")
 	
 
 func play_shake():
 	animation.play("shake_effect")
 
+func start_animation(name:String):
+	var directional_name = name + get_animation_sufix()
+	print("%s.start_animation: Starting Animation '%s'." % [self.Id, directional_name])
+	animation.play(directional_name)
+
+func ready_action_animation(action_name:String, hand_name:String):
+	current_animation_action_name = action_name
+	current_animation_hand_name = hand_name
+	var full_animation_name = current_animation_action_name + "_ready_" + current_animation_hand_name + get_animation_sufix()
+	animation.play(full_animation_name)
+
+func execute_animation_motion():
+	var full_animation_name = current_animation_action_name + "_motion_" + current_animation_hand_name + get_animation_sufix()
+	animation.play(full_animation_name)
+
+func cancel_current_animation():
+	var full_animation_name = current_animation_action_name + "_cancel_" + current_animation_hand_name + get_animation_sufix()
+	animation.play(full_animation_name)
+
 func start_walk_out_animation():
 	printerr("Start Walk")
-	animation.play("walk_out_"+get_animation_sufix())
+	animation.play("walk_out"+get_animation_sufix())
 	#animation_tree.set("parameters/conditions/Walk", true)
 	#animation_tree.set("parameters/conditions/FinishWalk", false)
 	#animation_tree.set("parameters/conditions/MoveFailed", false)
 	
 func start_walk_in_animation():
 	printerr("Finish Walk")
-	animation.play("walk_in_"+get_animation_sufix())
+	animation.play("walk_in"+get_animation_sufix())
 	#animation_tree.set("parameters/conditions/Walk", false)
 	#animation_tree.set("parameters/conditions/FinishWalk", true)
 	#animation_tree.set("parameters/conditions/MoveFailed", false)

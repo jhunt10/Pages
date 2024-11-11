@@ -14,7 +14,7 @@ func get_action_tags(_subaction_data:Dictionary)->Array:
 	return ["Move"]
 
 func do_thing(parent_action:BaseAction, subaction_data:Dictionary, metadata:QueExecutionData,
-				game_state:GameStateData, actor:BaseActor):
+				game_state:GameStateData, actor:BaseActor)->bool:
 	#TODO: Movement
 	var move:MapPos = MapPos.Parse(subaction_data.get("RelativePos", [0,0,0,0]))
 	var success = MoveHandler.handle_movement(game_state, actor, move, subaction_data['MovementType'])
@@ -22,4 +22,5 @@ func do_thing(parent_action:BaseAction, subaction_data:Dictionary, metadata:QueE
 		#actor.node.set_display_pos(game_state.MapState.get_actor_pos(actor), true)
 	if not success:
 		actor.node.fail_movement()
-	pass
+		return BaseSubAction.Failed
+	return BaseSubAction.Success

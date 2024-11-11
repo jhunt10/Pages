@@ -42,6 +42,15 @@ func _cache_que_info():
 	else:
 		_cached_max_que_size = que_size
 
+func fail_turn():
+	var turn_data = QueExecData.get_current_turn_data()
+	if !turn_data:
+		return
+	if turn_data.turn_failed:
+		return
+	turn_data.turn_failed = true
+	actor.on_turn_failed()
+
 func get_max_que_size()->int:
 	if _cached_max_que_size < 0:
 		_cache_que_info()

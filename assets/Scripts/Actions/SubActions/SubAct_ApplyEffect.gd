@@ -11,7 +11,7 @@ func get_action_tags(_subaction_data:Dictionary)->Array:
 	return ["SpawnEffect"]
 
 func do_thing(parent_action:BaseAction, subaction_data:Dictionary, que_exe_data:QueExecutionData,
-				game_state:GameStateData, actor:BaseActor):
+				game_state:GameStateData, actor:BaseActor)->bool:
 	
 	var turn_data = que_exe_data.get_current_turn_data()
 	var target_key = subaction_data['TargetKey']
@@ -23,3 +23,4 @@ func do_thing(parent_action:BaseAction, subaction_data:Dictionary, que_exe_data:
 		effect_data = subaction_data['EffectData']
 	for target:BaseActor in targets:
 		target.effects.add_effect(effect_key, effect_data)
+	return BaseSubAction.Success

@@ -259,13 +259,15 @@ func _execute_turn_frames(game_state:GameStateData, que:ActionQue, turn_index:in
 		
 		if DEEP_LOGGING: print("\t\tExecuting SubAction: " + script_key)
 		# Finnaly do subaction
-		subaction.do_thing(
+		var result = subaction.do_thing(
 			action, # Parent Action
 			sub_action_data, # SubAction configuration
 			que.QueExecData, # Metadata for action execution
 			game_state, # GameState
 			que.actor # Actor
 		)
+		if result == BaseSubAction.Failed:
+			que.fail_turn()
 		
 		# Check if the last sub action stopped execution
 		if execution_state != ActionStates.Running:
@@ -307,7 +309,7 @@ func _pay_turn_costs():
 		for stat_name in turn_data.costs.keys():
 			if not actor.stats.reduce_bar_stat_value(stat_name, turn_data.costs[stat_name], false):
 				CombatRootControl.Instance.create_flash_text_on_actor(actor, "-"+stat_name, Color.ORANGE)
-				turn_data.turn_failed = true
+				que.fail_turn()
 				return
 				
 func _sort_ques_by_speed():

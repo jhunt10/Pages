@@ -79,6 +79,9 @@ func set_pos(old_pos:MapPos, new_pos:MapPos, move_type:String, moved_by:BaseActo
 	on_move.emit(old_pos, new_pos, move_type, moved_by)
 	node.set_display_pos(new_pos)
 
+func on_turn_failed():
+	node.cancel_current_animation()
+
 func die():
 	is_dead = true
 	on_death.emit()

@@ -14,7 +14,7 @@ func get_action_tags(_subaction_data:Dictionary)->Array:
 
 
 func do_thing(parent_action:BaseAction, subaction_data:Dictionary, metadata:QueExecutionData,
-				game_state:GameStateData, actor:BaseActor):
+				game_state:GameStateData, actor:BaseActor)->bool:
 	var target_params = _get_target_parameters(parent_action, actor, subaction_data)
 	var target_key = subaction_data['TargetKey']
 	var damage_key = subaction_data['DamageKey']
@@ -22,21 +22,21 @@ func do_thing(parent_action:BaseAction, subaction_data:Dictionary, metadata:QueE
 	var turn_data:TurnExecutionData = metadata.get_current_turn_data()
 	if !target_params:
 		printerr("SubAct_SpawnMissile.get_target_spt_of_missile: No TargetParams found for: %s " % [subaction_data.get("TargetParamKey")])
-		return
+		return BaseSubAction.Failed
 	if !turn_data.has_target(target_key):
 		printerr("SubAct_SpawnMissile.get_target_spt_of_missile: No TargetData found for : ", target_key)
-		return
+		return BaseSubAction.Failed
 	if !parent_action.DamageDatas.has(damage_key):
 		printerr("SubAct_SpawnMissile.get_target_spt_of_missile: No DamageData found for : ", damage_key)
-		return
+		return BaseSubAction.Failed
 	if !parent_action.MissileDatas.has(missile_key):
 		printerr("SubAct_SpawnMissile.get_target_spt_of_missile: No MissileData found for : ", missile_key)
-		return
+		return BaseSubAction.Failed
 	
 	var target_spot = get_target_spot_of_missile(target_key, metadata, game_state)
 	if not target_spot:
 		printerr("SubAct_SpawnMissile.get_target_spt_of_missile: No target found for : ", target_key)
-		return
+		return BaseSubAction.Failed
 	
 	var damage_data = (parent_action.DamageDatas[damage_key] as Dictionary).duplicate(true)
 	var missile_data = (parent_action.MissileDatas[missile_key] as Dictionary).duplicate(true)
@@ -48,6 +48,7 @@ func do_thing(parent_action:BaseAction, subaction_data:Dictionary, metadata:QueE
 	var missile = BaseMissile.new(actor, missile_data, tag_chain, target_params,
 									actor_pos, target_spot, parent_action._def_load_path)
 	CombatRootControl.Instance.create_new_missile_node(missile)
+	return BaseSubAction.Success
 
 func get_target_spot_of_missile(target_key:String, metadata:QueExecutionData, game_state:GameStateData)->MapPos:
 	var turn_data = metadata.get_current_turn_data()

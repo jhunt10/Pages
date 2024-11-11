@@ -21,7 +21,7 @@ func start_state():
 	var selectable_spots = selection_data.get_selectable_coords()
 	if selectable_spots.size() == 0:
 		printerr("No Valid Selectable Target Spots")
-		selection_data.focused_actor.Que.QueExecData.get_current_turn_data().turn_failed = true
+		selection_data.focused_actor.Que.fail_turn()
 		CombatUiControl.ui_state_controller.back_to_last_state()
 		
 	_target_display_key = target_area_dislay_node.build_from_target_selection_data(selection_data, true)

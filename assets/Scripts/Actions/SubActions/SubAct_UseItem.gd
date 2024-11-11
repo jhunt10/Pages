@@ -10,7 +10,7 @@ func get_on_que_options(parent_action:BaseAction, _subaction_data:Dictionary, _a
 	return [OnQueOptionsData.new("SelectedItemId", "Select Item to use:", _actor.items._items.keys())]
 
 func do_thing(parent_action:BaseAction, subaction_data:Dictionary, que_exe_data:QueExecutionData,
-				game_state:GameStateData, actor:BaseActor):
+				game_state:GameStateData, actor:BaseActor)->bool:
 	
 	var turn_data:TurnExecutionData = que_exe_data.get_current_turn_data()
 	var item_id = turn_data.on_que_data['ItemId']
@@ -18,3 +18,4 @@ func do_thing(parent_action:BaseAction, subaction_data:Dictionary, que_exe_data:
 	
 	item.use_on_actor(actor)
 	actor.items.delete_item(item_id)
+	return BaseSubAction.Success

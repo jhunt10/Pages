@@ -5,6 +5,10 @@ extends GDScript
 
 enum SubActionPropTypes {TargetParamKey, SetTargetKey, TargetKey, DamageKey, EffectKey, MissileKey, MoveValue, StringVal, IntVal, BoolVal, EnumVal}
 
+# Just incase I want to refactor do_thing to return more than a bool
+const Failed = false
+const Success = true
+
 # Returns a Dictionary of {Property Name, Property Type} for what properties this subaction
 # 	exspects to find in it's _subaction_data (Mostly for Page Editor)
 func get_required_props()->Dictionary:
@@ -22,10 +26,11 @@ func get_on_que_options(parent_action:BaseAction, _subaction_data:Dictionary, _a
 	#var example = OnQueOptionsData.new("SelectedItemId", "Select Item to use:", _actor.items._items.keys())
 	return []
 
+## Execute this sub_action. Returns true if the sub_action was successful. If false is returned, no further sub_actions will be executed this turn.
 func do_thing(_parent_action:BaseAction, _subaction_data:Dictionary, _metadata:QueExecutionData,
-				_game_state:GameStateData, _actor:BaseActor):
+				_game_state:GameStateData, _actor:BaseActor)->bool:
 	printerr("BaseSubAction.do_thing: No Override.")
-	pass
+	return false
 
 func _get_target_parameters(parent_action:BaseAction, actor:BaseActor, subaction_data:Dictionary)->TargetParameters:
 	var target_param_key = subaction_data.get("TargetParamKey", null)

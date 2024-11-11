@@ -11,7 +11,7 @@ func get_action_tags(_subaction_data:Dictionary)->Array:
 	return ["Attack"]
 
 func do_thing(parent_action:BaseAction, subaction_data:Dictionary, que_exe_data:QueExecutionData,
-				game_state:GameStateData, actor:BaseActor):
+				game_state:GameStateData, actor:BaseActor)->bool:
 	
 	var turn_data = que_exe_data.get_current_turn_data()
 	var target_key = subaction_data['TargetKey']
@@ -25,5 +25,4 @@ func do_thing(parent_action:BaseAction, subaction_data:Dictionary, que_exe_data:
 	for target:BaseActor in targets:
 		DamageHelper.handle_attack(actor, target, damage_data, tag_chain, game_state)
 	
-
-	
+	return BaseSubAction.Success

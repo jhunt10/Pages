@@ -14,7 +14,7 @@ func get_action_tags(_subaction_data:Dictionary)->Array:
 	return ["Move"]
 
 func do_thing(parent_action:BaseAction, subaction_data:Dictionary, que_exe_data:QueExecutionData,
-				game_state:GameStateData, actor:BaseActor):
+				game_state:GameStateData, actor:BaseActor)->bool:
 	
 	var turn_data = que_exe_data.get_current_turn_data()
 	var target_dest_key = subaction_data['TargetDestKey']
@@ -29,6 +29,7 @@ func do_thing(parent_action:BaseAction, subaction_data:Dictionary, que_exe_data:
 		teleporting_actor = game_state.get_actor(teleporting_target_id)
 	else:
 		print("Invalid Target for teleporting: %s." % [teleporting_target_id])
+		return BaseSubAction.Failed
 	
 	var target_pos:MapPos = null
 	if target_dest_params.is_actor_target_type():
@@ -40,5 +41,8 @@ func do_thing(parent_action:BaseAction, subaction_data:Dictionary, que_exe_data:
 	var relative_pos = MapPos.Parse(subaction_data.get("DestRelativePos", [0,0,0,0])) 
 	var move_to_pos:MapPos = target_pos.apply_relative_pos(relative_pos)
 	print("Teleporting to target: %s | targeted:%s | relpos:%s" % [move_to_pos, target_pos, relative_pos])
-	if MoveHandler.spot_is_valid_and_open(game_state, move_to_pos):
-		game_state.MapState.set_actor_pos(teleporting_actor, move_to_pos)
+	if not MoveHandler.spot_is_valid_and_open(game_state, move_to_pos):
+		return BaseSubAction.Failed
+		
+	game_state.MapState.set_actor_pos(teleporting_actor, move_to_pos)
+	return BaseSubAction.Success

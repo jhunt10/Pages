@@ -8,13 +8,17 @@ func get_required_props()->Dictionary:
 
 
 func get_prop_enum_values(prop_key:String)->Array:
-	return ["WalkOut", "WalkIn"]
+	return [
+		"walk_out", "walk_in", "
+		raise_main_hand", "raise_lower_main_hand", 
+		"swing_ready_main_hand", "swing_motion_main_hand",
+		"stab_ready_main_hand", "stab_motion_main_hand"
+	]
 
 
 func do_thing(parent_action:BaseAction, subaction_data:Dictionary, metadata:QueExecutionData,
-				game_state:GameStateData, actor:BaseActor):
-	var animation = subaction_data['Animation']
-	if animation == "WalkOut":
-		actor.node.start_walk_out_animation()
-	if animation == "WalkIn":
-		actor.node.start_walk_in_animation()
+				game_state:GameStateData, actor:BaseActor)->bool:
+	var animation = subaction_data.get('Animation', null)
+	if animation:
+		actor.node.start_animation(animation)
+	return BaseSubAction.Success
