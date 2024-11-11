@@ -20,7 +20,7 @@ var rot_dir
 var start_walk_on_pos_change:bool
 
 var current_animation_action_name:String
-var current_animation_hand_name:String
+#var current_animation_hand_name:String
 
 func _ready() -> void:
 	animation.animation_started.connect(animation_started)
@@ -104,21 +104,21 @@ func _load_weapon_sprite(weapon_node:ActorWeaponNode, weapon:BaseWeaponEquipment
 
 #var delay_pos
 #var still_waiting:bool
-var delay_set_pos
-var wait_more
+#var delay_set_pos
+#var wait_more
 var is_walking
-func _process(delta: float) -> void:
-	if delay_set_pos:
-		if not wait_more: 
-			#TODO: ????
-			# Extra delay needed when SUB_ACTION_FRAME_TIME = 1.0 / 8.0 but not 11
-			print("Set pos after delay")
-			self.position = delay_set_pos
-			delay_set_pos = null
-			wait_more = false
-		else:
-			print("Waiting...")
-			wait_more = true
+#func _process(delta: float) -> void:
+	#if delay_set_pos:
+		#if not wait_more: 
+			#printerr("%s | Applying Delay Pos : %s"  % [Time.get_ticks_msec(), animation.current_animation])
+			##TODO: ????
+			## Extra delay needed when SUB_ACTION_FRAME_TIME = 1.0 / 8.0 but not 11
+			#self.position = delay_set_pos
+			#delay_set_pos = null
+			#wait_more = false
+		#else:
+			#print("Waiting...")
+			#wait_more = true
 	#if Actor.ActorKey != 'TestActor':
 		#return
 	#print("-------------------")
@@ -169,19 +169,23 @@ func set_display_pos(pos:MapPos, start_walkin:bool=false):
 		return
 	
 	if !is_walking:
+		printerr("%s | set Facing: %s"  % [Time.get_ticks_msec(), get_animation_sufix()])
 		animation.play("facing"+get_animation_sufix())
 	
 	var parent = get_parent()
 	if parent is TileMapLayer:
 		var map_pos = parent.map_to_local(Vector2i(pos.x, pos.y))
-		
-		if is_walking:
-			print("Seting Delay POs")
-			delay_set_pos = map_pos
-			start_walk_in_animation()
-		else:
-			print("HardSet pos")
-			self.position = map_pos
+		#
+		#if is_walking:
+			#printerr("%s | set Delay Pos"  % [Time.get_ticks_msec()])
+			#print("Seting Delay POs")
+			##delay_set_pos = map_pos
+			#self.position = map_pos
+			##start_walk_in_animation()
+		#else:
+		printerr("%s | Set Pos"  % [Time.get_ticks_msec()])
+		print("HardSet pos")
+		self.position = map_pos
 	#elif !delay_pos:
 		#fail_movement()
 		
@@ -197,12 +201,13 @@ func get_animation_sufix()->String:
 	return "_south"
 
 func animation_finished(name):
+	printerr("%s | Animation Finished: %s"  % [Time.get_ticks_msec(), name])
 	main_hand_weapon_node.on_animation_end(name)
 	off_hand_weapon_node.on_animation_end(name)
 	two_hand_weapon_node.on_animation_end(name)
-	printerr("AnimationEnded: "+name)
 
 func animation_started(name:String):
+	printerr("%s | Animation Started: %s"  % [Time.get_ticks_msec(), name])
 	main_hand_weapon_node.on_animation_start(name)
 	off_hand_weapon_node.on_animation_start(name)
 	two_hand_weapon_node.on_animation_start(name)
@@ -213,7 +218,6 @@ func animation_started(name:String):
 	#if delay_pos :
 		#self.position = delay_pos
 		#delay_pos = null
-	printerr("AnimationStarted: "+name)
 
 func fail_movement():
 	#printerr("fail Walk")
@@ -233,19 +237,29 @@ func start_animation(name:String):
 	print("%s.start_animation: Starting Animation '%s'." % [self.Id, directional_name])
 	animation.play(directional_name)
 
-func ready_action_animation(action_name:String, hand_name:String):
-	current_animation_action_name = action_name
-	current_animation_hand_name = hand_name
-	var full_animation_name = current_animation_action_name + "_ready_" + current_animation_hand_name + get_animation_sufix()
-	animation.play(full_animation_name)
+func into_action_animation(action_name:String):
+	#current_animation_hand_name = hand_name
+	current_animation_action_name = action_name + get_animation_sufix()
+	animation.play(current_animation_action_name)
 
 func execute_animation_motion():
-	var full_animation_name = current_animation_action_name + "_motion_" + current_animation_hand_name + get_animation_sufix()
-	animation.play(full_animation_name)
+	# TODO: Clean up once I deside on names
+	if current_animation_action_name.contains("_ready_"):
+		var animation_name = current_animation_action_name.replace("_ready_", "_motion_")
+		print("Playing Motion Animation: " + animation_name)
+		animation.play(animation_name)
+	elif current_animation_action_name.begins_with("walk_"):
+		var animation_name = current_animation_action_name.replace("_out_", "_in_")
+		animation.play(animation_name)
 
 func cancel_current_animation():
-	var full_animation_name = current_animation_action_name + "_cancel_" + current_animation_hand_name + get_animation_sufix()
-	animation.play(full_animation_name)
+	if current_animation_action_name.contains("_ready_"):
+		var animation_name = current_animation_action_name.replace("_ready_", "_cancel_")
+		print("Playing Cancel Animation: " + animation_name)
+		animation.play(animation_name)
+	elif current_animation_action_name.begins_with("walk_"):
+		var animation_name = current_animation_action_name.replace("_in_", "_cancel_")
+		animation.play(animation_name)
 
 func start_walk_out_animation():
 	printerr("Start Walk")

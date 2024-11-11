@@ -1,31 +1,30 @@
+@tool
 class_name ActorWeaponNode
 extends Node2D
-
+@export var weapon_sprite:Sprite2D
+@export var overhand_weapon_sprite:Sprite2D
 @export var hand_name:String
 @export var force_rotation:bool
-
-var _wpn_sprt
-var weapon_sprite:Sprite2D:
-	get: 
-		if !_wpn_sprt: _wpn_sprt = get_child(0)
-		return _wpn_sprt
-var _ovr_sprt
-var overhand_weapon_sprite:Sprite2D:
-	get: 
-		if !_ovr_sprt: _ovr_sprt = get_child(1)
-		return _ovr_sprt
-
-var _rest_sprite_rotation:float
-
-func _process(delta: float) -> void:
-	if force_rotation and weapon_sprite.rotation_degrees != 0:
-		self.weapon_sprite.rotation_degrees = 0
-		self.overhand_weapon_sprite.rotation_degrees = 0
-	elif not force_rotation and weapon_sprite.rotation_degrees != _rest_sprite_rotation:
-		self.weapon_sprite.rotation_degrees = _rest_sprite_rotation
-		self.overhand_weapon_sprite.rotation_degrees = _rest_sprite_rotation
-		
-		
+@export var rotation_factor:float:
+	set(val):  
+		rotation_factor = val
+		if self.weapon_sprite:
+			var local_default_target = custom_rotation - self.rotation_degrees
+			var local_forced_target = 0
+			var target_rotation:float = (custom_rotation - self.rotation_degrees) * rotation_factor
+			if weapon_sprite.rotation_degrees != target_rotation:
+				print("Setting Rotation: cur:%s | cust:%s | fact:%s | result: %s " % [self.rotation_degrees, custom_rotation, rotation_factor, target_rotation])
+				self.weapon_sprite.rotation_degrees = target_rotation
+				self.overhand_weapon_sprite.rotation_degrees = target_rotation
+@export var custom_rotation:int:
+	set(val):  
+		custom_rotation = val
+		if self.weapon_sprite:
+			var target_rotation:float = rotation_factor * custom_rotation + self.rotation_degrees 
+			if weapon_sprite.rotation_degrees != target_rotation:
+				print("Setting Rotation: " + str(target_rotation))
+				self.weapon_sprite.rotation_degrees = target_rotation
+				self.overhand_weapon_sprite.rotation_degrees = target_rotation
 
 func set_weapon(weapon:BaseWeaponEquipment):
 	var sprite_data:Dictionary = weapon.get_load_val("WeaponSpriteData", {})
@@ -47,9 +46,9 @@ func set_weapon(weapon:BaseWeaponEquipment):
 	self.weapon_sprite.offset = offset
 	self.overhand_weapon_sprite.offset = offset
 	
-	_rest_sprite_rotation = sprite_data.get("Rotation", 0)
-	self.weapon_sprite.rotation_degrees = _rest_sprite_rotation
-	self.overhand_weapon_sprite.rotation_degrees = _rest_sprite_rotation
+	custom_rotation = sprite_data.get("Rotation", 0)
+	self.weapon_sprite.rotation_degrees = custom_rotation
+	self.overhand_weapon_sprite.rotation_degrees = custom_rotation
 
 func on_animation_end(animation_name:String):
 	#if animation_name.begins_with("swing_motion_"):

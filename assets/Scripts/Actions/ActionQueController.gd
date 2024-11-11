@@ -7,7 +7,8 @@ signal que_marked_as_dead(que_id:String)
 const SHORTCUT_QUE = true
 const DEEP_LOGGING = false
 const FRAMES_PER_ACTION = 24
-const SUB_ACTION_FRAME_TIME = 1.0 / 12.0
+const ACTION_TIME = 2.4 # Seconds
+const SUB_ACTION_FRAME_TIME = ACTION_TIME / FRAMES_PER_ACTION
 
 # Start of new Round
 signal start_of_round()

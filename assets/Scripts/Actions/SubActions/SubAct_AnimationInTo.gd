@@ -1,4 +1,4 @@
-class_name SubAct_StartAnimation
+class_name SubAct_AnimationInTo
 extends BaseSubAction
 
 func get_required_props()->Dictionary:
@@ -9,10 +9,10 @@ func get_required_props()->Dictionary:
 
 func get_prop_enum_values(prop_key:String)->Array:
 	return [
-		"walk_out", "walk_in", "
-		raise_main_hand", "raise_lower_main_hand", 
-		"swing_ready_main_hand", "swing_motion_main_hand",
-		"stab_ready_main_hand", "stab_motion_main_hand"
+		"walk_ready", 
+		"raise_ready_main_hand",
+		"swing_ready_main_hand",
+		"stab_ready_main_hand"
 	]
 
 
@@ -20,5 +20,5 @@ func do_thing(parent_action:BaseAction, subaction_data:Dictionary, metadata:QueE
 				game_state:GameStateData, actor:BaseActor)->bool:
 	var animation = subaction_data.get('Animation', null)
 	if animation:
-		actor.node.start_animation(animation)
+		actor.node.into_action_animation(animation)
 	return BaseSubAction.Success
