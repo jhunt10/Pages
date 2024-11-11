@@ -4,7 +4,9 @@ extends Node2D
 @export var weapon_sprite:Sprite2D
 @export var overhand_weapon_sprite:Sprite2D
 @export var hand_name:String
-@export var force_rotation:bool
+## Ratio between natural Node rotation and custom Sprite rotation
+## At rotation_factor = 0, the sprite's rotation will match the nodes
+## At roation factor = 1, the sprite's rotation will match custom_rotation
 @export var rotation_factor:float:
 	set(val):  
 		rotation_factor = val
