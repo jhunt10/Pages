@@ -11,9 +11,7 @@ extends Node2D
 	set(val):  
 		rotation_factor = val
 		if self.weapon_sprite:
-			var local_default_target = custom_rotation - self.rotation_degrees
-			var local_forced_target = 0
-			var target_rotation:float = (custom_rotation - self.rotation_degrees) * rotation_factor
+			var target_rotation:float = (custom_rotation - (self.rotation_degrees * self.scale.x)) * rotation_factor
 			if weapon_sprite.rotation_degrees != target_rotation:
 				print("Setting Rotation: cur:%s | cust:%s | fact:%s | result: %s " % [self.rotation_degrees, custom_rotation, rotation_factor, target_rotation])
 				self.weapon_sprite.rotation_degrees = target_rotation
