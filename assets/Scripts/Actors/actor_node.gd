@@ -25,6 +25,8 @@ var current_animation_action_name:String
 func _ready() -> void:
 	animation.animation_started.connect(animation_started)
 	animation.animation_finished.connect(animation_finished)
+	#var test_anima:AnimationLibrary = load("res://animations/AttackAnimations/weapon_raise.tres")
+	#for ani:Animation in test_anima.get_animation_list():
 
 func set_actor(actor:BaseActor):
 	Id = actor.Id
@@ -197,7 +199,7 @@ func animation_started(name:String):
 	main_hand_weapon_node.on_animation_start(name)
 	off_hand_weapon_node.on_animation_start(name)
 	two_hand_weapon_node.on_animation_start(name)
-	if name.begins_with("walk_out_"):
+	if name.begins_with("walk"):
 		is_walking = true
 	else:
 		is_walking = false
@@ -227,7 +229,6 @@ func start_animation(name:String):
 func into_action_animation(action_name:String):
 	#current_animation_hand_name = hand_name
 	current_animation_action_name = action_name + get_animation_sufix()
-	current_animation_action_name = current_animation_action_name.replace("walk_", "walk/walk_")
 	animation.play(current_animation_action_name)
 
 func execute_animation_motion():
@@ -236,7 +237,7 @@ func execute_animation_motion():
 		var animation_name = current_animation_action_name.replace("_ready_", "_motion_")
 		print("Playing Motion Animation: " + animation_name)
 		animation.play(animation_name)
-	elif current_animation_action_name.begins_with("walk/walk_"):
+	elif current_animation_action_name.begins_with("walk"):
 		var animation_name = current_animation_action_name.replace("_out_", "_in_")
 		animation.play(animation_name)
 
@@ -245,7 +246,7 @@ func cancel_current_animation():
 		var animation_name = current_animation_action_name.replace("_ready_", "_cancel_")
 		print("Playing Cancel Animation: " + animation_name)
 		animation.play(animation_name)
-	elif current_animation_action_name.begins_with("walk_"):
+	elif current_animation_action_name.begins_with("walk"):
 		var animation_name = current_animation_action_name.replace("_in_", "_cancel_")
 		animation.play(animation_name)
 

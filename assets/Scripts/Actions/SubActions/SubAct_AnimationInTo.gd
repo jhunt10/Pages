@@ -9,10 +9,10 @@ func get_required_props()->Dictionary:
 
 func get_prop_enum_values(prop_key:String)->Array:
 	return [
-		"walk_ready", 
-		"raise_ready_main_hand",
-		"swing_ready_main_hand",
-		"stab_ready_main_hand"
+		"walk/walk_ready", 
+		"weapon_raise/raise_ready_main_hand",
+		"weapon_swing/swing_ready_main_hand",
+		"weapon_stab/stab_ready_main_hand"
 	]
 
 
