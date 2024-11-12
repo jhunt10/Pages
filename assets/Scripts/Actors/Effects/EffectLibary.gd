@@ -30,8 +30,14 @@ func _init() -> void:
 	Instance = self
 	Instance.init_load()
 
-static func create_effect(key:String, actor:BaseActor, data:Dictionary)->BaseEffect:
+static func create_effect(source, key:String, actor:BaseActor, data:Dictionary)->BaseEffect:
 	data['EffectedActorId'] = actor.Id
+	if source is BaseActor:
+		data['SourceId'] = (source as BaseActor).Id
+		data['SourceType'] = 'Actor'
+	else:
+		printerr("EffectLibrary.create_effect: Unknown source type: %s" % [source])
+		return
 	var effect = Instance.create_object(key, '', data)
 	if !effect:
 		printerr("EffectLibrary.create_effect: Failed to make effect '%s'." % [key])

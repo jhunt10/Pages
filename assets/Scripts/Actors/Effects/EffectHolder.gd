@@ -27,8 +27,8 @@ func on_combat_start():
 	else:
 		printerr("EffectHolder.on_combat_start: No CombatRootControl found")
 	
-func add_effect(effect_key:String, effect_data:Dictionary)->BaseEffect:
-	var effect = EffectLibrary.create_effect(effect_key, _actor, effect_data)
+func add_effect(source, effect_key:String, effect_data:Dictionary)->BaseEffect:
+	var effect = EffectLibrary.create_effect(source, effect_key, _actor, effect_data)
 	if LOGGING: print("EffectHolder.add_effect: Added effect '%s' to actor '%s'." % [effect.Id, _actor.Id])
 	_effects[effect.Id] = effect
 	for trigger in effect.Triggers:
@@ -83,7 +83,15 @@ func get_stat_mods():
 		for mod in effect.get_active_stat_mods():
 			out_list.append(mod)
 	return out_list
-	
+
+func trigger_damage_dealt(game_state:GameStateData, damage_event:DamageEvent):
+	for effect:BaseEffect in _effects.values():
+		effect.trigger_on_damage_dealt(game_state, damage_event)
+
+func trigger_damage_taken(game_state:GameStateData, damage_event:DamageEvent):
+	for effect:BaseEffect in _effects.values():
+		effect.trigger_on_damage_taken(game_state, damage_event)
+
 func _trigger_effects(trigger:BaseEffect.EffectTriggers, game_state:GameStateData):
 	if LOGGING: print("Triggering Effect Trigger '%s' for actor:%s." % [BaseEffect.EffectTriggers.keys()[trigger], _actor.Id])
 	for id in _triggers_to_effect_ids[trigger]:

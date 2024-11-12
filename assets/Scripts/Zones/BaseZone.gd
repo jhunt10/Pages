@@ -68,7 +68,7 @@ func _apply_effect(actor:BaseActor):
 		return
 	if not apply_to_source and _source_actor.Id == actor.Id:
 		return
-	var effect = actor.effects.add_effect(EffectKey, EffectData)
+	var effect = actor.effects.add_effect(self, EffectKey, EffectData)
 	_actors_to_effects[actor.Id] = effect.Id
 	
 func on_create(map_state:MapStateData):

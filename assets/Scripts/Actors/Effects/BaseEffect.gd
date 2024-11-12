@@ -48,6 +48,7 @@ var SubEffectDatas:Dictionary:
 var RemainingDuration:int:
 	get: return _duration_counter
 
+var _source
 var _enabled:bool = true
 var _deleted:bool = false
 var _sub_effects_data:Dictionary={}
@@ -58,6 +59,15 @@ func _init(key:String, def_load_path:String, def:Dictionary, id:String='', data:
 	super(key, def_load_path, def, id, data)
 	details = ObjectDetailsData.new(self._def_load_path, self._def.get("Details", {}))
 	_cache_triggers()
+
+func get_source_actor()->BaseActor:
+	var source_id = get_load_val('SourceId')
+	var source_type = get_load_val('SourceType')
+	if source_type == "Actor":
+		return ActorLibrary.get_actor(source_id)
+	else:
+		printerr("BaseEffect.get_source_actor: TODO")
+		return null
 
 func get_effected_actor()->BaseActor:
 	var actor_id = get_load_val("EffectedActorId", null)
@@ -140,3 +150,16 @@ func trigger_on_move(game_state:GameStateData, old_pos:MapPos, new_pos:MapPos, m
 		var sub_effect_data = SubEffectDatas[sub_effect_key]
 		var sub_effect = _get_sub_effect_script(sub_effect_key)
 		sub_effect.on_move(self, sub_effect_data, game_state, old_pos, new_pos, move_type, moved_by_actor)
+
+func trigger_on_damage_taken(game_state:GameStateData, damage_event:DamageEvent):
+	for sub_effect_key in _triggers_to_sub_effect_keys.get(EffectTriggers.OnDamageTaken, []):
+		var sub_effect_data = SubEffectDatas[sub_effect_key]
+		var sub_effect = _get_sub_effect_script(sub_effect_key)
+		sub_effect.on_damage_taken(self, sub_effect_data, game_state, damage_event)
+
+func trigger_on_damage_dealt(game_state:GameStateData, damage_event:DamageEvent):
+	for sub_effect_key in _triggers_to_sub_effect_keys.get(EffectTriggers.OnDamagDealt, []):
+		var sub_effect_data = SubEffectDatas[sub_effect_key]
+		var sub_effect = _get_sub_effect_script(sub_effect_key)
+		sub_effect.on_damage_dealt(self, sub_effect_data, game_state, damage_event)
+		

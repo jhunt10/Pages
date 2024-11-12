@@ -39,6 +39,9 @@ func _init(source_actor:BaseActor, missile_data:Dictionary, source_tag_chain:Sou
 	_calc_positions()
 	_source_target_chain = source_tag_chain.append_source(SourceTagChain.SourceTypes.Missile, self)
 
+func get_source_actor()->BaseActor:
+	return ActorLibrary.get_actor(_source_actor_id)
+
 func get_missile_vfx_data()->VfxData:
 	return MainRootNode.vfx_libray.get_vfx_data(_missile_vfx_key)
 

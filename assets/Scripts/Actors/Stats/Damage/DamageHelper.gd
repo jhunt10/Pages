@@ -11,7 +11,7 @@ static func handle_attack(attacker:BaseActor, defender:BaseActor, damage_data:Di
 	
 	var base_damage = 0
 	var attack_stat = damage_data.get("AtkStat", null)
-	if attack_stat != null:
+	if attack_stat != null and attack_stat != "Custom":
 		base_damage = attacker.stats.base_damge_from_stat(attack_stat)
 	else:
 		base_damage = damage_data.get("BaseDamage", 0)
@@ -22,8 +22,12 @@ static func handle_damage(source, base_damage:int, defender:BaseActor, damage_da
 	var damage_event = DamageEvent.new(damage_data, source, base_damage, defender,source_tag_chain, game_state)
 	
 	var damage = DamageHelper._calc_damage_for_event(damage_event)
-	# TODO: Acccuracy and chance to apply effects
 	defender.stats.apply_damage(damage_event.final_damage, source)
+	defender.effects.trigger_damage_taken(game_state, damage_event)
+	# TODO: Acccuracy and chance to apply effects
+	if source is BaseActor:
+		var source_actor:BaseActor = source as BaseActor
+		source_actor.effects.trigger_damage_dealt(game_state, damage_event)
 	
 	var damage_effect = damage_data.get("DamageEffect", null)
 	if damage_effect:

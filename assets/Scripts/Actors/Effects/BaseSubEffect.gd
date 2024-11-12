@@ -32,13 +32,13 @@ func on_effect_trigger(_effect:BaseEffect, _subeffect_data:Dictionary,
 						_trigger:BaseEffect.EffectTriggers, _game_state:GameStateData):
 	pass
 
-func on_deal_damage(_effect:BaseEffect, _subeffect_data:Dictionary,
-					_game_state:GameStateData, _value:int, _damage_type:String, _target:BaseActor):
+func on_damage_dealt(_effect:BaseEffect, _subeffect_data:Dictionary,
+					_game_state:GameStateData, _damage_event:DamageEvent):
 	on_effect_trigger(_effect, _subeffect_data, BaseEffect.EffectTriggers.OnDamagDealt, _game_state )
 	pass
 
-func on_take_damage(_effect:BaseEffect, _subeffect_data:Dictionary,
-					_game_state:GameStateData, _value:int, _damage_type:String, _source):
+func on_damage_taken(_effect:BaseEffect, _subeffect_data:Dictionary,
+					_game_state:GameStateData, _damage_event:DamageEvent):
 	on_effect_trigger(_effect, _subeffect_data, BaseEffect.EffectTriggers.OnDamageTaken, _game_state)
 	pass
 

@@ -47,3 +47,10 @@ func _init(data:Dictionary, source, base_damage:int, defender:BaseActor, source_
 	if defense_type is String: self.defense_type = DefenseType.get(defense_type, 0)
 	elif defense_type is int and DefenseType.has(defense_type): self.defense_type = defense_type
 	else: printerr("DamageEvent: Unknown DefenseType type")
+
+func get_source_actor()->BaseActor:
+	if source is BaseActor:
+		return (source as BaseActor)
+	if source.has("get_source_actor"):
+		return source.get_source_actor()
+	return null
