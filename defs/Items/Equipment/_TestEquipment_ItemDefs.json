@@ -108,6 +108,22 @@
         "Ward": 0
     },
     {
+        "ItemKey":"HolyHat",
+        "_ObjectScript": "res://assets/Scripts/Items/Equipment/BaseArmorEquipment.gd",
+        "Details":{
+			"DisplayName": "Holy Hat",
+			"SnippetDesc": "An Holy Hat made for testing.",
+			"Description": "Description.",
+			"Tags": ["Head"],
+			"LargeIcon":"HolyHat.png",
+			"SmallIcon":"HolyHat.png"
+		},
+        "SpriteSheet":"HolyHat_SpriteSheet.png",
+        "EquipSlot":"Head",
+        "Armor": 10,
+        "Ward": 0
+    },
+    {
         "ItemKey":"TestShirt",
         "_ObjectScript": "res://assets/Scripts/Items/Equipment/BaseArmorEquipment.gd",
         "Details":{
@@ -124,18 +140,42 @@
         "Ward": 0
     },
     {
-        "ItemKey":"TestShirt2",
+        "ItemKey":"RedRobes",
         "_ObjectScript": "res://assets/Scripts/Items/Equipment/BaseArmorEquipment.gd",
         "Details":{
-			"DisplayName": "Test Shirt",
-			"SnippetDesc": "An shirt made for testing.",
+			"DisplayName": "Red Robes",
+			"SnippetDesc": "An Red Shirt made for testing.",
 			"Description": "Description.",
 			"Tags": ["Body"],
-			"LargeIcon":"TestShirt2.png",
-			"SmallIcon":"TestShirt2.png"
+			"LargeIcon":"RedRobes.png",
+			"SmallIcon":"RedRobes.png"
+		},
+        "StatMods":{
+			"StatMod1": { 
+				"StatName": "Intelligence",
+				"DisplayName": "RedRobes",
+				"ModType":"Add", 
+				"Value":5
+			}
 		},
         "EquipSlot":"Body",
         "SpriteSheet":"RedRobes_SpriteSheet.png",
+        "Armor": 0,
+        "Ward": 5
+    },
+    {
+        "ItemKey":"HolyRobes",
+        "_ObjectScript": "res://assets/Scripts/Items/Equipment/BaseArmorEquipment.gd",
+        "Details":{
+			"DisplayName": "Holy Robes",
+			"SnippetDesc": "An Holy Robes made for testing.",
+			"Description": "Description.",
+			"Tags": ["Body"],
+			"LargeIcon":"HolyRobes.png",
+			"SmallIcon":"HolyRobes.png"
+		},
+        "EquipSlot":"Body",
+        "SpriteSheet":"HolyRobes_SpriteSheet.png",
         "Armor": 0,
         "Ward": 10
     },

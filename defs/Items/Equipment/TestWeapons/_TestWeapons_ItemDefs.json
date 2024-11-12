@@ -108,6 +108,78 @@
         "WeaponClass": "Medium"
     },
     {
+        "ItemKey":"TestAxe",
+        "_ObjectScript": "res://assets/Scripts/Items/Equipment/BaseWeaponEquipment.gd",
+        "Details":{
+			"DisplayName": "Test Axe",
+			"SnippetDesc": "A axe made for testing.",
+			"Description": "Description.",
+			"Tags": ["Weapon"],
+			"LargeIcon":"TestAxe.png",
+			"SmallIcon":"TestAxe.png"
+		},
+        "WeaponSpriteData":{
+            "Offset":[0,0],
+            "SpriteName":"TestAxe",
+            "Rotation":0
+        },
+        "EquipSlot":"Weapon",
+        "CanOffhand":false,
+        "DamageData":{
+            "AtkStat": "Strength",
+            "BaseDamage": 10,
+            "DamageEffect": "Slash_DamageEffect",
+            "DamageType": "Slash",
+            "DamageVarient": 0.3,
+            "DefenseType": "Armor"
+        },
+        "TargetParams": {
+            "EffectsAllies": false,
+            "EffectsEnemies": true,
+            "LineOfSight": true,
+            "TargetArea": "[[-1,0],[-1,1],[0,1],[1,1],[1,0]]",
+            "TargetType": "Actor"
+        },
+        "AttackTags": ["Melee", "Physical"],
+        "WeaponClass": "Medium"
+    },
+    {
+        "ItemKey":"TestSpear",
+        "_ObjectScript": "res://assets/Scripts/Items/Equipment/BaseWeaponEquipment.gd",
+        "Details":{
+			"DisplayName": "Test Spear",
+			"SnippetDesc": "An spear made for testing.",
+			"Description": "Description.",
+			"Tags": ["Weapon"],
+			"LargeIcon":"TestSpear.png",
+			"SmallIcon":"TestSpear.png"
+		},
+        "WeaponSpriteData":{
+            "Offset":[0,0],
+            "SpriteName":"TestSpear",
+            "Rotation":0
+        },
+        "EquipSlot":"Weapon",
+        "CanOffhand":false,
+        "DamageData":{
+            "AtkStat": "Strength",
+            "BaseDamage": 10,
+            "DamageEffect": "Slash_DamageEffect",
+            "DamageType": "Slash",
+            "DamageVarient": 0.3,
+            "DefenseType": "Armor"
+        },
+        "TargetParams": {
+            "EffectsAllies": false,
+            "EffectsEnemies": true,
+            "LineOfSight": true,
+            "TargetArea": "[[-1,0],[-1,1],[0,1],[1,1],[1,0]]",
+            "TargetType": "Actor"
+        },
+        "AttackTags": ["Melee", "Physical"],
+        "WeaponClass": "Medium"
+    },
+    {
         "ItemKey":"TestSwordHeavy",
         "_ObjectScript": "res://assets/Scripts/Items/Equipment/BaseWeaponEquipment.gd",
         "Details":{
