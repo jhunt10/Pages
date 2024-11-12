@@ -170,28 +170,14 @@ func set_display_pos(pos:MapPos, start_walkin:bool=false):
 	
 	if !is_walking:
 		printerr("%s | set Facing: %s"  % [Time.get_ticks_msec(), get_animation_sufix()])
-		animation.play("facing"+get_animation_sufix())
+		animation.play("facing/facing"+get_animation_sufix())
 	
 	var parent = get_parent()
 	if parent is TileMapLayer:
 		var map_pos = parent.map_to_local(Vector2i(pos.x, pos.y))
-		#
-		#if is_walking:
-			#printerr("%s | set Delay Pos"  % [Time.get_ticks_msec()])
-			#print("Seting Delay POs")
-			##delay_set_pos = map_pos
-			#self.position = map_pos
-			##start_walk_in_animation()
-		#else:
 		printerr("%s | Set Pos"  % [Time.get_ticks_msec()])
 		print("HardSet pos")
 		self.position = map_pos
-	#elif !delay_pos:
-		#fail_movement()
-		
-		#animation_tree.set("parameters/Facing/blend_position", pos.dir)
-		#animation_tree.set("parameters/Walk_In/blend_position", pos.dir)
-		#animation_tree.set("parameters/Walk_Out/blend_position", pos.dir)
 
 func get_animation_sufix()->String:
 	if rot_dir == 0: return "_north"
@@ -225,7 +211,8 @@ func fail_movement():
 	#animation_tree.set("parameters/conditions/FinishWalk", false)
 	#animation_tree.set("parameters/conditions/MoveFailed", true)
 	print("PlayConnecnd")
-	animation.play("facing"+get_animation_sufix())
+	is_walking = false
+	animation.play("facing/facing"+get_animation_sufix())
 	print("After_PlayConnecnd")
 	
 
@@ -240,6 +227,7 @@ func start_animation(name:String):
 func into_action_animation(action_name:String):
 	#current_animation_hand_name = hand_name
 	current_animation_action_name = action_name + get_animation_sufix()
+	current_animation_action_name = current_animation_action_name.replace("walk_", "walk/walk_")
 	animation.play(current_animation_action_name)
 
 func execute_animation_motion():
@@ -248,7 +236,7 @@ func execute_animation_motion():
 		var animation_name = current_animation_action_name.replace("_ready_", "_motion_")
 		print("Playing Motion Animation: " + animation_name)
 		animation.play(animation_name)
-	elif current_animation_action_name.begins_with("walk_"):
+	elif current_animation_action_name.begins_with("walk/walk_"):
 		var animation_name = current_animation_action_name.replace("_out_", "_in_")
 		animation.play(animation_name)
 
@@ -263,14 +251,14 @@ func cancel_current_animation():
 
 func start_walk_out_animation():
 	printerr("Start Walk")
-	animation.play("walk_out"+get_animation_sufix())
+	animation.play("walk/walk_out"+get_animation_sufix())
 	#animation_tree.set("parameters/conditions/Walk", true)
 	#animation_tree.set("parameters/conditions/FinishWalk", false)
 	#animation_tree.set("parameters/conditions/MoveFailed", false)
 	
 func start_walk_in_animation():
 	printerr("Finish Walk")
-	animation.play("walk_in"+get_animation_sufix())
+	animation.play("walk/walk_in"+get_animation_sufix())
 	#animation_tree.set("parameters/conditions/Walk", false)
 	#animation_tree.set("parameters/conditions/FinishWalk", true)
 	#animation_tree.set("parameters/conditions/MoveFailed", false)
