@@ -1,0 +1,270 @@
+[gd_scene load_steps=7 format=3 uid="uid://rlujsvrbrlv"]
+
+[ext_resource type="Script" path="res://Scenes/Menus/tutorial_menu_control.gd" id="1_oa5j2"]
+[ext_resource type="Texture2D" uid="uid://chg42o5oo8xg3" path="res://notes/TutorialImages/ExamplePages.png" id="2_nexu8"]
+[ext_resource type="Texture2D" uid="uid://b7xc06rb4cvdt" path="res://notes/TutorialImages/ExampleBooks.png" id="3_n60sr"]
+[ext_resource type="Texture2D" uid="uid://cmj8qu2115t7j" path="res://notes/TutorialImages/ExampleQue.png" id="4_5t7jr"]
+[ext_resource type="Texture2D" uid="uid://bsoyk34nkldrr" path="res://notes/TutorialImages/ExamplePageSlots.png" id="4_sb0u0"]
+[ext_resource type="Texture2D" uid="uid://bcjloe3dg1r5h" path="res://notes/TutorialImages/QueExecution.png" id="5_twimf"]
+
+[node name="TutorialScreenControl" type="Control" node_paths=PackedStringArray("next_button", "back_button", "close_button", "page_one", "page_two")]
+custom_minimum_size = Vector2(896, 512)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 896.0
+offset_bottom = 512.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_oa5j2")
+next_button = NodePath("NextButton")
+back_button = NodePath("BackButton")
+close_button = NodePath("CloseButton")
+page_one = NodePath("ColorRect")
+page_two = NodePath("ColorRect2")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 896.0
+offset_bottom = 512.0
+color = Color(0.937255, 0.772549, 0.521569, 1)
+
+[node name="Pages" type="Control" parent="ColorRect"]
+anchors_preset = 0
+offset_left = 64.0
+offset_top = 48.0
+offset_right = 104.0
+offset_bottom = 88.0
+
+[node name="Title" type="Label" parent="ColorRect/Pages"]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 0
+offset_left = 224.0
+offset_top = -8.0
+offset_right = 292.0
+offset_bottom = 26.0
+theme_override_font_sizes/font_size = 24
+text = "Pages"
+
+[node name="Example Pages" type="TextureRect" parent="ColorRect/Pages"]
+layout_mode = 0
+offset_right = 208.0
+offset_bottom = 136.0
+texture = ExtResource("2_nexu8")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ColorRect/Pages"]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 0
+offset_left = 224.0
+offset_top = 32.0
+offset_right = 744.0
+offset_bottom = 160.0
+text = "Every action a character can preform is defined by a Page. This includes everything from movement and attacks to casting spells and using items. A character can only bring a limited number of Pages into combat and can not preform an action if they do not have the Page for it. "
+
+[node name="Books" type="Control" parent="ColorRect"]
+anchors_preset = 0
+offset_left = 64.0
+offset_top = 208.0
+offset_right = 104.0
+offset_bottom = 248.0
+
+[node name="Title2" type="Label" parent="ColorRect/Books"]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 0
+offset_left = 152.0
+offset_right = 223.0
+offset_bottom = 34.0
+theme_override_font_sizes/font_size = 24
+text = "Books"
+
+[node name="ExampleBooks" type="TextureRect" parent="ColorRect/Books"]
+layout_mode = 0
+offset_top = 24.0
+offset_right = 132.0
+offset_bottom = 88.0
+texture = ExtResource("3_n60sr")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ColorRect/Books"]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 0
+offset_left = 152.0
+offset_top = 32.0
+offset_right = 736.0
+offset_bottom = 128.0
+text = "The number of Pages a character can equip and use in combat is defined by their PageBook equipment.  Each PageBook has a certain number of slots to equip Pages into and a PPR (Page Per Round) value which defines how many Pages a character can queue each round. "
+
+[node name="Control" type="Control" parent="ColorRect"]
+anchors_preset = 0
+offset_left = 64.0
+offset_top = 352.0
+offset_right = 104.0
+offset_bottom = 392.0
+
+[node name="TextureRect" type="TextureRect" parent="ColorRect/Control"]
+layout_mode = 0
+offset_left = 88.0
+offset_right = 308.0
+offset_bottom = 125.0
+texture = ExtResource("4_sb0u0")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ColorRect/Control"]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 0
+offset_left = 320.0
+offset_top = 32.0
+offset_right = 664.0
+offset_bottom = 112.0
+text = "Some PageBooks have  additional slots that are limited to Pages with specific Tags. "
+
+[node name="Label" type="Label" parent="ColorRect"]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 0
+offset_left = 520.0
+offset_top = 464.0
+offset_right = 859.0
+offset_bottom = 513.0
+text = "Warning: Next page has a lot more text.
+Just wanted you to be emotionally prepared"
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+visible = false
+layout_mode = 0
+offset_right = 896.0
+offset_bottom = 512.0
+color = Color(0.936962, 0.772126, 0.521653, 1)
+
+[node name="PageQue" type="Control" parent="ColorRect2"]
+anchors_preset = 0
+offset_left = 40.0
+offset_top = 32.0
+offset_right = 848.0
+offset_bottom = 192.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ColorRect2/PageQue"]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 0
+offset_right = 808.0
+offset_bottom = 101.0
+text = "Before each Round, all character must prepare their PageQue by selecting Pages from thier Book.
+The number of Pages that can be queue each Round is limited by the character’s PPR (Pages per Round). "
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="ColorRect2/PageQue"]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 0
+offset_left = 448.0
+offset_top = 64.0
+offset_right = 776.0
+offset_bottom = 160.0
+text = "Pages can be used multiple times per Round, but characters can only use Pages that are currently equipped to their Page Book."
+
+[node name="Example Que" type="TextureRect" parent="ColorRect2/PageQue"]
+layout_mode = 0
+offset_top = 48.0
+offset_right = 432.0
+offset_bottom = 161.0
+texture = ExtResource("4_5t7jr")
+
+[node name="Label" type="Label" parent="ColorRect2/PageQue"]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 0
+offset_left = 232.0
+offset_top = 56.0
+offset_right = 396.0
+offset_bottom = 79.0
+text = "< Click to delete Page"
+
+[node name="Label2" type="Label" parent="ColorRect2/PageQue"]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 0
+offset_left = 232.0
+offset_top = 80.0
+offset_right = 414.0
+offset_bottom = 103.0
+text = " V Click to prepare Page"
+
+[node name="QueExecution" type="Control" parent="ColorRect2"]
+anchors_preset = 0
+offset_left = 40.0
+offset_top = 200.0
+offset_right = 80.0
+offset_bottom = 240.0
+
+[node name="TextureRect" type="TextureRect" parent="ColorRect2/QueExecution"]
+layout_mode = 0
+offset_left = -16.0
+offset_top = 16.0
+offset_right = 192.0
+offset_bottom = 204.0
+texture = ExtResource("5_twimf")
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="ColorRect2/QueExecution"]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 0
+offset_left = 208.0
+offset_top = 8.0
+offset_right = 784.0
+offset_bottom = 80.0
+text = "Once all PageQues are ready, the Round will begin and characters will act out one Page per Turn in the order they were added to the PageQue. "
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ColorRect2/QueExecution"]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 0
+offset_left = 208.0
+offset_top = 64.0
+offset_right = 784.0
+offset_bottom = 136.0
+text = "The number of Turns per Round is determined by the highest PPR value of any character. Each Turn, characters will preform their Page for that Turn in order of the character’s Speed stat, with highest Speed going first. "
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="ColorRect2/QueExecution"]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 0
+offset_left = 208.0
+offset_top = 144.0
+offset_right = 792.0
+offset_bottom = 240.0
+text = "If a character has less than the highest PPR,  “gaps” will be inserted into their PageQue to make up the difference. If they are slower than any character with the highest PPR, their first turn will be a gap turn. "
+
+[node name="RichTextLabel6" type="RichTextLabel" parent="ColorRect2/QueExecution"]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 0
+offset_left = 208.0
+offset_top = 224.0
+offset_right = 784.0
+offset_bottom = 280.0
+text = "On a gap turn the character will not preform any actions and 
+OnTurn Effects will not be triggers or have their duration go down. "
+
+[node name="RichTextLabel5" type="RichTextLabel" parent="ColorRect2/QueExecution"]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 0
+offset_left = 48.0
+offset_top = 200.0
+offset_right = 232.0
+offset_bottom = 272.0
+theme_override_font_sizes/normal_font_size = 12
+text = "Kight:  4 PPR  
+Targets:  2 PPR
+"
+
+[node name="BackButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 464.0
+offset_right = 61.0
+offset_bottom = 495.0
+text = "Back"
+
+[node name="NextButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 832.0
+offset_top = 464.0
+offset_right = 877.0
+offset_bottom = 495.0
+text = "Next"
+
+[node name="CloseButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 840.0
+offset_top = 8.0
+offset_right = 885.0
+offset_bottom = 39.0
+text = "X"

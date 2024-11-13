@@ -2,6 +2,8 @@
 class_name EquipmentMenuContainer
 extends BackPatchContainer
 
+signal menu_closed
+
 @export var mouse_over_control:EquipmentMenuMouseControl
 @export var stats_display_container:StatsDisplayContainer
 @export var equipment_display_container:EquipmentDisplayContainer

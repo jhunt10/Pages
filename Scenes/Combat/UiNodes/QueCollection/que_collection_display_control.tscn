@@ -23,24 +23,24 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="QueMiniDisplayContainer" type="Container" parent="VBoxContainer" node_paths=PackedStringArray("background", "inner_container")]
-custom_minimum_size = Vector2(88, 48)
+custom_minimum_size = Vector2(84, 44)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 script = ExtResource("1_orr8s")
 background = NodePath("Background")
 inner_container = NodePath("BoxContainer")
+margin_override = 6
 
 [node name="Background" type="NinePatchRect" parent="VBoxContainer/QueMiniDisplayContainer"]
-custom_minimum_size = Vector2(88, 48)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 texture = ExtResource("2_gyjv3")
-patch_margin_left = 8
-patch_margin_top = 8
-patch_margin_right = 8
-patch_margin_bottom = 8
+patch_margin_left = 12
+patch_margin_top = 12
+patch_margin_right = 12
+patch_margin_bottom = 12
 
 [node name="Control" type="Control" parent="VBoxContainer/QueMiniDisplayContainer"]
 layout_mode = 2
@@ -49,9 +49,9 @@ layout_mode = 2
 custom_minimum_size = Vector2(2, 40)
 layout_mode = 2
 offset_left = 44.0
-offset_top = 4.0
+offset_top = 2.0
 offset_right = 46.0
-offset_bottom = 44.0
+offset_bottom = 42.0
 color = Color(1, 0, 0, 1)
 
 [node name="BoxContainer" type="BoxContainer" parent="VBoxContainer/QueMiniDisplayContainer"]

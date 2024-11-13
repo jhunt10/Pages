@@ -1,0 +1,218 @@
+[gd_scene load_steps=7 format=3 uid="uid://cfxkaxrmekifh"]
+
+[ext_resource type="Script" path="res://Scenes/Combat/UiNodes/StatsPanel/stat_bar_control.gd" id="1_7vqd5"]
+[ext_resource type="Texture2D" uid="uid://ccygr5mnjfwq1" path="res://assets/Sprites/UI/StatPanel/full_bar_background.png" id="2_643ug"]
+[ext_resource type="Texture2D" uid="uid://bxdvfksha7bq5" path="res://assets/Sprites/UI/StatPanel/value_bar_texture.png" id="3_8ww20"]
+
+[sub_resource type="Animation" id="Animation_euxtp"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BlinkValueRect:modulate:r")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BlinkValueRect:modulate:g")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("BlinkValueRect:modulate:b")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("BlinkValueRect:modulate:a")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_xgc6q"]
+resource_name = "blink_preview"
+loop_mode = 1
+step = 0.25
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BlinkValueRect:modulate:r")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.5, 1)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BlinkValueRect:modulate:g")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.5, 1)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("BlinkValueRect:modulate:b")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.5, 1)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("BlinkValueRect:modulate:a")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.5, 1)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_o32q1"]
+_data = {
+"RESET": SubResource("Animation_euxtp"),
+"blink_preview": SubResource("Animation_xgc6q")
+}
+
+[node name="StatBarControl" type="Control" node_paths=PackedStringArray("full_bar", "bar_holder", "dark_value_bar", "colored_value_bar", "blink_value_bar", "animation", "left_label", "mid_label", "right_label")]
+custom_minimum_size = Vector2(128, 16)
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_7vqd5")
+BAR_SPEED = 10.0
+max_value = 100
+current_value = 100
+predicted_value = 100
+full_bar = NodePath("FullBarRect")
+bar_holder = NodePath("BarHolder")
+dark_value_bar = NodePath("BarHolder/BackValueRect")
+colored_value_bar = NodePath("BarHolder/ColorValueRect")
+blink_value_bar = NodePath("BarHolder/BlinkValueRect")
+animation = NodePath("AnimationPlayer")
+left_label = NodePath("HBoxContainer/Left_Label")
+mid_label = NodePath("HBoxContainer/Mid_Label")
+right_label = NodePath("HBoxContainer/Right_Label")
+change_delay = 0.5
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../BarHolder")
+libraries = {
+"": SubResource("AnimationLibrary_o32q1")
+}
+
+[node name="FullBarRect" type="NinePatchRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_643ug")
+region_rect = Rect2(0, 0, 32, 32)
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+
+[node name="BarHolder" type="Control" parent="."]
+modulate = Color(1, 0, 0, 1)
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="BackValueRect" type="NinePatchRect" parent="BarHolder"]
+modulate = Color(0.310617, 0.310617, 0.310617, 1)
+layout_mode = 0
+offset_right = 128.0
+offset_bottom = 16.0
+texture = ExtResource("3_8ww20")
+region_rect = Rect2(0, 0, 32, 32)
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+
+[node name="BlinkValueRect" type="NinePatchRect" parent="BarHolder"]
+visible = false
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_right = 128.0
+offset_bottom = 16.0
+texture = ExtResource("3_8ww20")
+region_rect = Rect2(0, 0, 32, 32)
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+
+[node name="ColorValueRect" type="NinePatchRect" parent="BarHolder"]
+layout_mode = 0
+offset_right = 128.0
+offset_bottom = 16.0
+texture = ExtResource("3_8ww20")
+region_rect = Rect2(0, 0, 32, 32)
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Left_Label" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 14
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Mid_Label" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 10
+text = "100 / 100"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Right_Label" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 10
+vertical_alignment = 1

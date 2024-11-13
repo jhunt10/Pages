@@ -11,7 +11,7 @@ const BoxPadding:int = 4
 
 @onready var portrait_texture_rect:TextureRect = $BackPatchContainer/VBoxContainer/HBoxContainer/PortaitTextureRect
 @onready var main_container:VBoxContainer = $BackPatchContainer/VBoxContainer
-@onready var health_bar:StatBarControl = $BackPatchContainer/VBoxContainer/HBoxContainer/StatBarContainer/HealthStatBar
+@onready var health_bar:StatBarControl = $BackPatchContainer/VBoxContainer/HBoxContainer/StatBarContainer/HealthBarControl
 @onready var bars_container:VBoxContainer = $BackPatchContainer/VBoxContainer/HBoxContainer/StatBarContainer
 @onready var effect_icon_box:HBoxContainer = $IconBoxContainer
 @onready var premade_effect_icon:TextureRect = $EffectIcon
@@ -21,7 +21,7 @@ func _fake_ready():
 		return
 	portrait_texture_rect = $BackPatchContainer/VBoxContainer/HBoxContainer/PortaitTextureRect
 	main_container = $BackPatchContainer/VBoxContainer
-	health_bar = $BackPatchContainer/VBoxContainer/HBoxContainer/StatBarContainer/HealthStatBar
+	health_bar = $BackPatchContainer/VBoxContainer/HBoxContainer/StatBarContainer/HealthBarControl
 	bars_container = $BackPatchContainer/VBoxContainer/HBoxContainer/StatBarContainer
 	effect_icon_box = $IconBoxContainer
 	premade_effect_icon = $EffectIcon
@@ -67,7 +67,7 @@ func _process(delta: float) -> void:
 func sync(_double_sync = true):
 	if !actor:
 		return
-	_sync_values()
+	#_sync_values()
 	_sync_icons()
 	_resize = _double_sync
 
@@ -115,7 +115,7 @@ func _build_stat_bars():
 func _create_stat_bar(stat_name):
 	if _stat_bars.has(stat_name):
 		return
-	var new_bar:StatBarControl = health_bar.duplicate()
+	var new_bar:StatBarControl = load("res://Scenes/Combat/UiNodes/StatsPanel/stat_bar_control.tscn").instantiate()
 	new_bar.set_actor(actor, stat_name)
 	bars_container.add_child(new_bar)
 	if StatBarColors.keys().has(stat_name):
@@ -131,14 +131,15 @@ func _on_frame_or_turn_end():
 	
 func _on_end_round():
 	for bar:StatBarControl in _stat_bars.values():
-		bar.set_previewing_mode(true)
+		bar.set_previewing_mode(true, true)
 
 func preview_stat_cost(cost_data:Dictionary):
 	for stat_name in cost_data.keys():
 		if _stat_bars.keys().has(stat_name):
-			_stat_bars[stat_name].play_preview_blink(cost_data[stat_name])
+			var stat_bar:StatBarControl = _stat_bars[stat_name]
+			stat_bar.preview_cost = cost_data[stat_name]
 		
 			
 func stop_preview_stat_cost():
 	for bar:StatBarControl in _stat_bars.values():
-		bar.stop_preview_animation()
+		bar.preview_cost = 0

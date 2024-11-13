@@ -51,7 +51,7 @@ var action_index = 0
 var max_que_size = 0
 
 var _action_ques:Dictionary = {}
-var que_order:Array = []
+var _que_order:Array = []
 var subaction_script_cache:Dictionary = {}
 
 # Ques that have been removed durring execution
@@ -73,6 +73,10 @@ func _start_round():
 	execution_state = ActionStates.Running
 	start_of_round.emit()
 	start_of_round_with_state.emit(CombatRootControl.Instance.GameState)
+	# Emit start of round for actors
+	for que_id in _que_order:
+		var que:ActionQue = _action_ques[que_id]
+		que.actor.round_starting.emit()
 	execution_active.emit()
 
 func _end_round():
@@ -83,31 +87,31 @@ func _end_round():
 	que_index = 0
 	sub_action_timer = 0
 	execution_state = ActionStates.Waiting
+	# Emit end of round for actors
+	for que_id in _que_order:
+		var que:ActionQue = _action_ques[que_id]
+		que.actor.round_ended.emit()
 	_cleanup_dead_ques()
 	end_of_round.emit()
 	end_of_round_with_state.emit(CombatRootControl.Instance.GameState)
+			
 	execution_suspended.emit()
 	_clear_ques()
 	after_round.emit()
-	
-	
+
 func start_or_resume_execution():
 	if execution_state == ActionStates.Waiting:
 		_start_round()
 	else:
 		execution_state = ActionStates.Running
 		execution_active.emit()
-	
+
 func pause_execution():
 	execution_state = ActionStates.Paused
 	execution_suspended.emit()
-	
+
 func get_paused_on_que()->ActionQue:
-	return _action_ques[que_order[que_index]]
-	
-func get_current_turn_for_que(que_id:String)->int:
-	var que:ActionQue = _action_ques[que_id]
-	return que.turn_to_que_index(action_index)
+	return _action_ques[_que_order[que_index]]
 
 func get_active_action_ques()->Array:
 	var out_list = []
@@ -121,10 +125,8 @@ func add_action_que(new_que:ActionQue):
 	if _action_ques.has(new_que.Id):
 		return
 	_action_ques[new_que.Id] = new_que
-	# TODO: Que Speed Ordering
-	que_order.append(new_que.Id)
-	new_que.max_que_size_changed.connect(_calc_turn_padding)
-	_calc_turn_padding()
+	new_que.max_que_size_changed.connect(_organize_ques)
+	_organize_ques()
 
 func remove_action_que(que:ActionQue):
 	if not _dead_ques.has(que.Id):
@@ -150,6 +152,11 @@ func update(delta: float) -> void:
 				start_of_turn.emit()
 				start_of_turn_with_state.emit(game_state)
 				_pay_turn_costs()
+				# Emit start of turn for actors
+				for que_id in _que_order:
+					var que:ActionQue = _action_ques[que_id]
+					if not que.is_turn_gap(action_index):
+						que.actor.turn_starting.emit()
 			
 			# Start Frame
 			start_of_frame.emit()
@@ -158,7 +165,7 @@ func update(delta: float) -> void:
 			
 			# Do all actions for frame
 			for q_index in range(que_index, _action_ques.size()):
-				var que = _action_ques[que_order[q_index]]
+				var que = _action_ques[_que_order[q_index]]
 				_execute_turn_frames(game_state, que, action_index, sub_action_index)
 				
 				# Check if the last action stopped execution
@@ -182,6 +189,13 @@ func update(delta: float) -> void:
 			if sub_action_index >= BaseAction.SUB_ACTIONS_PER_ACTION:
 				end_of_turn.emit()
 				end_of_turn_with_state.emit(game_state)
+				# Emit end of turn for actors
+				for que_id in _que_order:
+					var que:ActionQue = _action_ques[que_id]
+					if not que.is_turn_gap(action_index):
+						que.actor.turn_ended.emit()
+						
+				# Reset / Increment values
 				sub_action_index = 0
 				que_index = 0
 				action_index += 1
@@ -193,16 +207,12 @@ func update(delta: float) -> void:
 							any_left = true
 					if not any_left:
 						if DEEP_LOGGING: print("\tShort Cutting Que")
-						end_of_round.emit()
-						end_of_round_with_state.emit(game_state)
 						_end_round()
 						return
 				
 			# All actions for que have finished
 			if action_index >= max_que_size:
 				if DEEP_LOGGING: print("\taction_index reach max_que_size")
-				end_of_round.emit()
-				end_of_round_with_state.emit(game_state)
 				_end_round()
 
 func _clear_ques():
@@ -216,7 +226,7 @@ func _cleanup_dead_ques():
 	for dead_que_id in _dead_ques:
 		_action_ques.erase(dead_que_id)
 	_dead_ques.clear()
-	_calc_turn_padding()
+	_organize_ques()
 
 func _execute_turn_frames(game_state:GameStateData, que:ActionQue, turn_index:int, subaction_index:int):
 	if DEEP_LOGGING: print("\tChecking Que: %s(%s)" %[que.actor.ActorKey, que.Id])
@@ -292,17 +302,6 @@ func _get_subaction(script_key:String)->BaseSubAction:
 			printerr("Failed to find subaction script: " + script_key)
 	return subaction
 
-### Get local action index for a que. This accounts for miss matched que sizes 
-###	and inserts gaps for smaller ques.
-#func _get_step_from_turn(que:ActionQue, turn_index:int)->int:
-	#var mapping = que_turn_to_step_mapping.get(que.Id, null)
-	#if !mapping:
-		#printerr("No turn mapping found for que: "+que.Id)
-		#return -1
-	#if mapping.has(turn_index):
-		#return mapping[turn_index]
-	#return -1
-
 func _pay_turn_costs():
 	for que:ActionQue in get_active_action_ques():
 		var actor = que.actor
@@ -312,7 +311,12 @@ func _pay_turn_costs():
 				CombatRootControl.Instance.create_flash_text_on_actor(actor, "-"+stat_name, Color.ORANGE)
 				que.fail_turn()
 				return
-				
+
+func _organize_ques():
+	_sort_ques_by_speed()
+	_calc_turn_padding()
+
+## Sort ques in order of Actor.Speed desc
 func _sort_ques_by_speed():
 	var speeds = []
 	var speed_to_ques = {}
@@ -325,11 +329,11 @@ func _sort_ques_by_speed():
 		speed_to_ques[speed].append(que.Id)
 	speeds.sort()
 	speeds.reverse()
-	que_order.clear()
+	_que_order.clear()
 	for spd in speeds:
 		var spd_ques = speed_to_ques[spd]
 		for que_id in spd_ques:
-			que_order.append(que_id)
+			_que_order.append(que_id)
 	
 
 ## Add padding to make shorter ques match the longest
@@ -337,13 +341,12 @@ func _sort_ques_by_speed():
 # A sider moves across all the bars and adds a action slot every time it reaches a new section
 # when it reaches a new section in the longest que a gap is added to all other ques
 func _calc_turn_padding():
-	_sort_ques_by_speed()
 	var que_section_sizes = {}
 	var que_section_indexes = {}
 	var ques_to_slots = {}
 	max_que_size = -1
 	var max_que_last_key = ''
-	for que_id in que_order:
+	for que_id in _que_order:
 		var que:ActionQue = _action_ques[que_id]
 		if que.get_max_que_size() >= max_que_size:	
 			max_que_size = que.get_max_que_size()
@@ -385,8 +388,7 @@ func _calc_turn_padding():
 	if DEEP_LOGGING: printerr("Que Padding Results")
 	
 	var shift_forward = true
-	for que_id in que_order:
-		
+	for que_id in _que_order:
 		var que:ActionQue = _action_ques[que_id]
 		if que.Id == max_que_last_key:
 			shift_forward = false

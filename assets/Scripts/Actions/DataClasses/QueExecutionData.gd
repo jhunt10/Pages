@@ -22,7 +22,7 @@ func que_data(data:Dictionary):
 	)
 
 func get_current_turn_data()->TurnExecutionData:
-	var current_turn = CombatRootControl.QueController.get_current_turn_for_que(_que.Id)
+	var current_turn = _que.turn_to_que_index(CombatRootControl.QueController.action_index)
 	if current_turn < 0:
 		printerr("Faked Turn Data")
 		return TurnExecutionData.new({})

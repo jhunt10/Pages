@@ -1,6 +1,15 @@
 class_name BaseActor
 extends BaseLoadObject
 
+# These signals are emited by ActionQueController
+## Emitted only when this Actor starts a turn (not emitted on gap turns)
+signal turn_starting
+## Emitted only when this Actor ends a turn (not emitted on gap turns)
+signal turn_ended
+# This is just here because I don't want all the Holders to have to connect dirrectly to ActionQueController
+signal round_starting
+signal round_ended
+
 # Actor holds no references to the current map state so this method is called by MapState.set_actor_pos()
 signal on_move(old_pos:MapPos, new_pos:MapPos, move_type:String, moved_by:BaseActor)
 signal on_death()

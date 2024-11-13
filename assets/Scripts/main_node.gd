@@ -66,15 +66,15 @@ func start_combat():
 	current_scene = combat_scene
 	center_container.add_child(current_scene)
 
-func open_character_sheet(_actor:BaseActor=null):
+func open_character_sheet(_actor:BaseActor=null)->EquipmentMenuContainer:
 	var actor = _actor
 	if not actor:
 		actor = ActorLibrary.get_actor("TestActor_ID")
 		#actor = ActorLibrary.create_actor("TestActor", {})
-	var charsheet = load("res://Scenes/Menus/EquipmentMenu/equipment_menu.tscn").instantiate()
+	var charsheet:EquipmentMenuContainer = load("res://Scenes/Menus/EquipmentMenu/equipment_menu.tscn").instantiate()
 	center_container.add_child(charsheet)
 	charsheet.set_actor(actor)
-	pass
+	return charsheet
 
 func open_page_menu(actor:BaseActor):
 	var page_menu = load("res://Scenes/Menus/PageQueMenu/page_que_menu.tscn").instantiate()
@@ -90,7 +90,10 @@ func open_page_editor():
 func open_effect_editor():
 	var page_editor = load("res://Scenes/Editors/EffectEditor/effect_editor_control_scene.tscn").instantiate()
 	center_container.add_child(page_editor)
-	
+
+func open_tutorial():
+	var tutorial = load("res://Scenes/Menus/tutorial_menu_control.tscn").instantiate()
+	center_container.add_child(tutorial)
 	
 func go_to_main_menu():
 	current_scene.queue_free()

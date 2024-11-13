@@ -1,6 +1,9 @@
 @tool
 class_name ActorWeaponNode
 extends Node2D
+
+const LOGGING = false
+
 @export var weapon_sprite:Sprite2D
 @export var overhand_weapon_sprite:Sprite2D
 @export var hand_name:String
@@ -13,7 +16,7 @@ extends Node2D
 		if self.weapon_sprite:
 			var target_rotation:float = (custom_rotation - (self.rotation_degrees * self.scale.x)) * rotation_factor
 			if weapon_sprite.rotation_degrees != target_rotation:
-				print("Setting Rotation: cur:%s | cust:%s | fact:%s | result: %s " % [self.rotation_degrees, custom_rotation, rotation_factor, target_rotation])
+				if LOGGING: print("Setting Rotation: cur:%s | cust:%s | fact:%s | result: %s " % [self.rotation_degrees, custom_rotation, rotation_factor, target_rotation])
 				self.weapon_sprite.rotation_degrees = target_rotation
 				self.overhand_weapon_sprite.rotation_degrees = target_rotation
 @export var custom_rotation:int:
@@ -22,7 +25,7 @@ extends Node2D
 		if self.weapon_sprite:
 			var target_rotation:float = rotation_factor * custom_rotation + self.rotation_degrees 
 			if weapon_sprite.rotation_degrees != target_rotation:
-				print("Setting Rotation: " + str(target_rotation))
+				if LOGGING: print("Setting Rotation: " + str(target_rotation))
 				self.weapon_sprite.rotation_degrees = target_rotation
 				self.overhand_weapon_sprite.rotation_degrees = target_rotation
 

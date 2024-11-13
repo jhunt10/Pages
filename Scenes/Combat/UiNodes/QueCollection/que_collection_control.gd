@@ -17,7 +17,7 @@ func _build_que_displays():
 	for que:QueMinDisplayContainer in _ques.values():
 		que.queue_free()
 	_ques.clear()
-	for que_id in CombatRootControl.QueController.que_order:
+	for que_id in CombatRootControl.QueController._que_order:
 		var que:ActionQue = CombatRootControl.QueController._action_ques[que_id]
 		var new_display:QueMinDisplayContainer = mini_que_prefab.duplicate()
 		new_display.visible = true

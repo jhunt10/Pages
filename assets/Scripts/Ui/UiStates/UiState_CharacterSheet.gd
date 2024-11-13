@@ -1,8 +1,6 @@
 class_name UiState_CharacterSheet
 extends BaseUiState
 
-var character_sheet#:CharacterSheetControl
-
 func _init(controler:UiStateController, args:Dictionary) -> void:
 	super(controler, args)
 	var actor_id = args.get("ActorId", null)
@@ -11,7 +9,9 @@ func _init(controler:UiStateController, args:Dictionary) -> void:
 	var actor = CombatRootControl.Instance.GameState.get_actor(actor_id)
 	if not actor:
 		return
-	main
+	var menu = MainRootNode.Instance.open_character_sheet(actor)
+	menu.on_closed.connect(on_menu_closed)
+	
 	
 
 func start_state():

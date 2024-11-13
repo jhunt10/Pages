@@ -1,6 +1,8 @@
 class_name ActorNode
 extends Node2D
 
+const LOGGING = false
+
 @onready var animation:AnimationPlayer = $AnimationPlayer
 @onready var animation_tree:AnimationTree = $AnimationTree
 
@@ -62,7 +64,7 @@ func sync_sprites():
 		
 		var two_hand_weapon = Actor.equipment.get_primary_weapon()
 		if two_hand_weapon:
-			print("Loading 2hand primarty: " + two_hand_weapon.Id)
+			if LOGGING: print("Loading 2hand primarty: " + two_hand_weapon.Id)
 			two_hand_weapon_node.set_weapon(two_hand_weapon)
 		else:
 			two_hand_weapon_node.visible = false
@@ -96,7 +98,7 @@ func _load_weapon_sprite(weapon_node:ActorWeaponNode, weapon:BaseWeaponEquipment
 	weapon_node.overhand_weapon_sprite.texture = SpriteCache.get_sprite(overhand_sprite_file)
 	
 	var rotation = sprite_data.get("Rotation", 0)
-	print("Loaded Weapon: %s with rotation %s" % [weapon.Id, rotation])
+	if LOGGING: print("Loaded Weapon: %s with rotation %s" % [weapon.Id, rotation])
 	weapon_node.weapon_sprite.rotation_degrees = rotation
 	weapon_node.overhand_weapon_sprite.rotation_degrees = rotation
 	var offset_arr = sprite_data.get("Offset", [0,0])
@@ -154,7 +156,7 @@ func _load_nodes():
 
 func set_display_pos(pos:MapPos, start_walkin:bool=false):
 	if Actor.ActorKey == 'TestActor':
-		print("-------set_display_pos------------")
+		if LOGGING: print("-------set_display_pos------------")
 	_load_nodes()
 	if !pos:
 		return
@@ -171,14 +173,14 @@ func set_display_pos(pos:MapPos, start_walkin:bool=false):
 		return
 	
 	if !is_walking:
-		printerr("%s | set Facing: %s"  % [Time.get_ticks_msec(), get_animation_sufix()])
+		if LOGGING: print("%s | set Facing: %s"  % [Time.get_ticks_msec(), get_animation_sufix()])
 		animation.play("facing/facing"+get_animation_sufix())
 	
 	var parent = get_parent()
 	if parent is TileMapLayer:
 		var map_pos = parent.map_to_local(Vector2i(pos.x, pos.y))
-		printerr("%s | Set Pos"  % [Time.get_ticks_msec()])
-		print("HardSet pos")
+		if LOGGING: print("%s | Set Pos"  % [Time.get_ticks_msec()])
+		if LOGGING: print("HardSet pos")
 		self.position = map_pos
 
 func get_animation_sufix()->String:
@@ -189,13 +191,13 @@ func get_animation_sufix()->String:
 	return "_south"
 
 func animation_finished(name):
-	printerr("%s | Animation Finished: %s"  % [Time.get_ticks_msec(), name])
+	if LOGGING: print("%s | Animation Finished: %s"  % [Time.get_ticks_msec(), name])
 	main_hand_weapon_node.on_animation_end(name)
 	off_hand_weapon_node.on_animation_end(name)
 	two_hand_weapon_node.on_animation_end(name)
 
 func animation_started(name:String):
-	printerr("%s | Animation Started: %s"  % [Time.get_ticks_msec(), name])
+	if LOGGING: print("%s | Animation Started: %s"  % [Time.get_ticks_msec(), name])
 	main_hand_weapon_node.on_animation_start(name)
 	off_hand_weapon_node.on_animation_start(name)
 	two_hand_weapon_node.on_animation_start(name)
@@ -212,10 +214,10 @@ func fail_movement():
 	#animation_tree.set("parameters/conditions/Walk", false)
 	#animation_tree.set("parameters/conditions/FinishWalk", false)
 	#animation_tree.set("parameters/conditions/MoveFailed", true)
-	print("PlayConnecnd")
+	if LOGGING: print("PlayConnecnd")
 	is_walking = false
 	animation.play("facing/facing"+get_animation_sufix())
-	print("After_PlayConnecnd")
+	if LOGGING: print("After_PlayConnecnd")
 	
 
 func play_shake():
@@ -223,7 +225,7 @@ func play_shake():
 
 func start_animation(name:String):
 	var directional_name = name + get_animation_sufix()
-	print("%s.start_animation: Starting Animation '%s'." % [self.Id, directional_name])
+	if LOGGING: print("%s.start_animation: Starting Animation '%s'." % [self.Id, directional_name])
 	animation.play(directional_name)
 
 func into_action_animation(action_name:String):
@@ -235,7 +237,7 @@ func execute_animation_motion():
 	# TODO: Clean up once I deside on names
 	if current_animation_action_name.contains("_ready_"):
 		var animation_name = current_animation_action_name.replace("_ready_", "_motion_")
-		print("Playing Motion Animation: " + animation_name)
+		if LOGGING: print("Playing Motion Animation: " + animation_name)
 		animation.play(animation_name)
 	elif current_animation_action_name.begins_with("walk"):
 		var animation_name = current_animation_action_name.replace("_out_", "_in_")
@@ -244,21 +246,21 @@ func execute_animation_motion():
 func cancel_current_animation():
 	if current_animation_action_name.contains("_ready_"):
 		var animation_name = current_animation_action_name.replace("_ready_", "_cancel_")
-		print("Playing Cancel Animation: " + animation_name)
+		if LOGGING: print("Playing Cancel Animation: " + animation_name)
 		animation.play(animation_name)
 	elif current_animation_action_name.begins_with("walk"):
 		var animation_name = current_animation_action_name.replace("_in_", "_cancel_")
 		animation.play(animation_name)
 
 func start_walk_out_animation():
-	printerr("Start Walk")
+	if LOGGING: print("Start Walk")
 	animation.play("walk/walk_out"+get_animation_sufix())
 	#animation_tree.set("parameters/conditions/Walk", true)
 	#animation_tree.set("parameters/conditions/FinishWalk", false)
 	#animation_tree.set("parameters/conditions/MoveFailed", false)
 	
 func start_walk_in_animation():
-	printerr("Finish Walk")
+	if LOGGING: print("Finish Walk")
 	animation.play("walk/walk_in"+get_animation_sufix())
 	#animation_tree.set("parameters/conditions/Walk", false)
 	#animation_tree.set("parameters/conditions/FinishWalk", true)
