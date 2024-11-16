@@ -1,0 +1,51 @@
+[gd_scene load_steps=5 format=3 uid="uid://c1bs8grs7gsc1"]
+
+[ext_resource type="Script" path="res://Scenes/UiNodes/MiniRangeDisplay/mini_range_display.gd" id="1_q7yfg"]
+[ext_resource type="Texture2D" uid="uid://ynbkbpxcep0o" path="res://Scenes/UiNodes/MiniRangeDisplay/MiniRangeBackground.png" id="2_k4qsm"]
+
+[sub_resource type="Image" id="Image_1bs4q"]
+data = {
+"data": PackedByteArray(255, 0, 0, 255, 255, 0, 0, 255, 255, 0, 0, 255, 255, 0, 0, 255, 0, 0, 0, 255, 255, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+"format": "RGBA8",
+"height": 3,
+"mipmaps": false,
+"width": 3
+}
+
+[sub_resource type="ImageTexture" id="ImageTexture_n6ukp"]
+image = SubResource("Image_1bs4q")
+
+[node name="MiniRangeDisplay" type="Control" node_paths=PackedStringArray("texture_rect")]
+custom_minimum_size = Vector2(44, 44)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1130.0
+offset_bottom = -626.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_q7yfg")
+texture_rect = NodePath("TextureRect")
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_k4qsm")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 3.0
+offset_top = 3.0
+offset_right = -3.0
+offset_bottom = -3.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("ImageTexture_n6ukp")

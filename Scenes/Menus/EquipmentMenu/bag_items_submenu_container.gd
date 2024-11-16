@@ -23,7 +23,6 @@ func _load_items():
 	for child in item_slots_container.get_children():
 		child.queue_free()
 	var item_count = _actor.items.get_max_item_count()
-	var item_key_list:Array = _actor.items.list_items()
 	var items = _actor.items.get_items_per_item_tags()
 	for item_tags in items.keys():
 		_create_new_item_tags_entry(item_tags, items[item_tags])
@@ -53,4 +52,7 @@ func _create_item_slots(item_tags:String, index:int, item:BaseItem):
 	return new_slot
 	
 func on_item_slot_pressed(tags:String, index:int, item_id:String):
+	var item = ItemLibrary.get_item(item_id)
+	if item:
+		PlayerInventory.add_item(item)
 	_actor.items.set_item_for_slot(tags, index, null)

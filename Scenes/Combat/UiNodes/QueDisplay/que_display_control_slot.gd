@@ -25,10 +25,10 @@ func set_is_gap(val:bool):
 		icon.visible = false
 		icon.texture = null
 		
-func set_action(actor:BaseActor, action:BaseAction):
+func set_action(index:int, actor:BaseActor, action:BaseAction):
 	if action and not is_gap:
 		icon.visible = true
-		icon.texture = action.get_small_page_icon(actor)
+		icon.texture = action.get_qued_icon(index, actor)
 	else:
 		icon.visible = false
 		icon.texture = null

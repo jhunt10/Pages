@@ -152,7 +152,7 @@ func _calc_cache_stats():
 
 
 func apply_damage(damage, _source):
-	_bar_stats[HealthKey] = _bar_stats[HealthKey] - damage
+	_bar_stats[HealthKey] = max(min(_bar_stats[HealthKey] - damage, max_health), 0)
 	if current_health <= 0:
 		CombatRootControl.Instance.kill_actor(_actor)
 	bar_stat_changed.emit()

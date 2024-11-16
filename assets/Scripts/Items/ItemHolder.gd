@@ -8,7 +8,7 @@ var _actor:BaseActor
 func _init(actor:BaseActor) -> void:
 	self._actor = actor
 	_actor.equipment_changed.connect(_count_item_tag_slots)
-	_item_tagged_slots = _actor.get_load_val("Items", {})
+	_item_tagged_slots = _actor.get_load_val("BagItems", {})
 	_count_item_tag_slots()
 	
 
@@ -18,12 +18,14 @@ func get_max_item_count()->int:
 		count += val
 	return count
 
+## Returns an all item slots and the item id they are set to. This includes empty slots will null values. 
 func list_item_ids()->Array:
 	var out_list = []
 	for val in _item_tagged_slots.values():
 		out_list.append_array(val)
 	return out_list
 
+## Returns all items in slots. Does not include nulls for empty slots.
 func list_items()->Array:
 	var ids = list_item_ids()
 	var out_list=[]
@@ -31,16 +33,16 @@ func list_items()->Array:
 		if id == null: continue
 		var item = ItemLibrary.get_item(id)
 		if item:
-			out_list.append(id)
+			out_list.append(item)
 	return out_list
 
 func has_item(item_id:String):
 	var item_ids = list_item_ids()
 	return item_ids.has(item_id)
 
-func remove_item(item_key:String):
+func remove_item(item_id:String):
 	for item_tags in _item_tagged_slots.keys():
-		var index = _item_tagged_slots[item_tags].find(item_key)
+		var index = _item_tagged_slots[item_tags].find(item_id)
 		if index < 0:
 			continue
 		_item_tagged_slots[item_tags][index] = null

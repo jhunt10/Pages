@@ -65,15 +65,23 @@ func _init(key:String, def_load_path:String, def:Dictionary, id:String='', data:
 				pre_move_arr = JSON.parse_string(preview_data['PreviewMoveOffset'])
 			PreviewMoveOffset = MapPos.new(pre_move_arr[0],pre_move_arr[1],pre_move_arr[2],pre_move_arr[3])
 
+func get_qued_icon(turn_index:int, actor:BaseActor =  null)->Texture2D:
+	if self.get_load_val("UseDynamicIcons", false):
+		var turn_data = actor.Que.QueExecData.get_data_for_turn(turn_index)
+		var icon = turn_data.on_que_data.get("OverrideQueIcon", null)
+		if icon:
+			return icon
+	return get_small_page_icon(actor)
+
 func  get_small_page_icon(actor:BaseActor = null)->Texture2D:
-	if get_load_val("UseWeaponIcons", false):
+	if actor and self.get_load_val("UseWeaponIcons", false):
 		var main_weapon:BaseWeaponEquipment = actor.equipment.get_primary_weapon()
 		if main_weapon:
 			return load(main_weapon.details.small_icon_path)
 	return ActionLibrary.get_action_icon(details.small_icon_path)
 
 func  get_large_page_icon(actor:BaseActor = null)->Texture2D:
-	if get_load_val("UseWeaponIcons", false):
+	if actor and get_load_val("UseWeaponIcons", false):
 		var main_weapon:BaseWeaponEquipment = actor.equipment.get_primary_weapon()
 		if main_weapon:
 			return load(main_weapon.details.large_icon_path)
@@ -100,7 +108,7 @@ func get_damage_data(actor:BaseActor, subaction_data:Dictionary)->Dictionary:
 	return DamageDatas.get(damage_key, subaction_data.get("DamageData", null))
 
 func get_targeting_params(target_param_key, actor:BaseActor)->TargetParameters:
-	if target_param_key == "Weapon":
+	if actor and target_param_key == "Weapon":
 		var weapon = actor.equipment.get_primary_weapon()
 		if !weapon:
 			printerr("No Weapon")

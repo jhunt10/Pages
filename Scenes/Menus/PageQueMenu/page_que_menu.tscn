@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bfvirkm6ona2f"]
+[gd_scene load_steps=17 format=3 uid="uid://bfvirkm6ona2f"]
 
 [ext_resource type="Script" path="res://Scenes/Menus/PageQueMenu/page_que_menu_container.gd" id="1_gsfc6"]
 [ext_resource type="Script" path="res://Scenes/Menus/PageQueMenu/page_inventory_container.gd" id="1_iqfre"]
@@ -12,6 +12,7 @@
 [ext_resource type="Script" path="res://Scenes/Menus/PageQueMenu/page_slot_button.gd" id="6_4qrjt"]
 [ext_resource type="Script" path="res://Scenes/Menus/PageQueMenu/inventory_page_button.gd" id="6_40qok"]
 [ext_resource type="Script" path="res://Scenes/Menus/PageQueMenu/page_tag_slots_entry_container.gd" id="7_h8onf"]
+[ext_resource type="PackedScene" uid="uid://c1bs8grs7gsc1" path="res://Scenes/UiNodes/MiniRangeDisplay/mini_range_display.tscn" id="9_pm8ef"]
 [ext_resource type="Script" path="res://Scenes/Menus/PageQueMenu/page_menu_mouse_control.gd" id="13_el43l"]
 [ext_resource type="Script" path="res://Scenes/UiNodes/back_patch_container.gd" id="14_vgqas"]
 [ext_resource type="Texture2D" uid="uid://s8s7rktavc7e" path="res://assets/Sprites/UI/BackPatches/Patch_32_8.png" id="15_6vqgx"]
@@ -105,13 +106,14 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="PageDetialsContainer" type="Container" parent="InnerContainer/HBoxContainer" node_paths=PackedStringArray("name_label", "tags_label", "description_label", "background", "inner_container")]
+[node name="PageDetialsContainer" type="Container" parent="InnerContainer/HBoxContainer" node_paths=PackedStringArray("name_label", "tags_label", "description_label", "range_display", "background", "inner_container")]
 custom_minimum_size = Vector2(240, 16)
 layout_mode = 2
 script = ExtResource("3_c223m")
 name_label = NodePath("InnerContainer/PageNameContainer/NameLabel")
 tags_label = NodePath("InnerContainer/TagsContainer/TagsLabel")
 description_label = NodePath("InnerContainer/DescriptionLabel")
+range_display = NodePath("InnerContainer/PageNameContainer/MiniRangeDisplay")
 background = NodePath("NinePatchRect")
 inner_container = NodePath("InnerContainer")
 force_fill_x = true
@@ -135,7 +137,11 @@ layout_mode = 2
 
 [node name="NameLabel" type="Label" parent="InnerContainer/HBoxContainer/PageDetialsContainer/InnerContainer/PageNameContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
 text = "Page Name"
+
+[node name="MiniRangeDisplay" parent="InnerContainer/HBoxContainer/PageDetialsContainer/InnerContainer/PageNameContainer" instance=ExtResource("9_pm8ef")]
+layout_mode = 2
 
 [node name="HSeparator2" type="HSeparator" parent="InnerContainer/HBoxContainer/PageDetialsContainer/InnerContainer"]
 layout_mode = 2

@@ -100,13 +100,13 @@ func _sync_icons():
 	var index = 0
 	for action:BaseAction in _actor.Que.list_qued_actions():
 		var slot:QueDisplaySlot = _real_slots[index]
-		slot.set_action(_actor, action)
+		slot.set_action(index, _actor, action)
 		index += 1
 		
 	for n in range(index, _actor.Que.get_max_que_size()):
 		if n < _real_slots.size():
 			var slot:QueDisplaySlot = _real_slots[n]
-			slot.set_action(_actor, null)
+			slot.set_action(n, _actor, null)
 	
 func _slot_pressed(index:int):
 	_actor.Que.delete_at_index(index)

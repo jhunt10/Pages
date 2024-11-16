@@ -14,6 +14,8 @@ signal menu_closed
 #TODO: Move this
 @export var edit_items_button:Button
 
+@export var dev_add_item_button:LoadedOptionButton
+
 var _allow_editing:bool = true
 var _actor:BaseActor
 var _dragging_item:BaseItem
@@ -37,6 +39,19 @@ func _ready() -> void:
 	equipment_display_container.equipt_slot_pressed.connect(on_equipt_slot_clicked)
 	edit_items_button.pressed.connect(open_bag_items_submenu)
 	bag_items_submenu.close_button.pressed.connect(close_bag_items_submenu)
+	dev_add_item_button.get_options_func = _dev_add_item_options
+	dev_add_item_button.item_selected.connect(_dev_add_item_selected)
+
+func _dev_add_item_options()->Array:
+	return ItemLibrary.list_all_item_keys()
+
+func _dev_add_item_selected(index:int):
+	var item_key = dev_add_item_button.get_item_text(index)
+	if item_key == dev_add_item_button.no_option_text:
+		return
+	var item = ItemLibrary.create_item(item_key, {})
+	if item:
+		PlayerInventory.add_item(item)
 
 func _process(delta: float) -> void:
 	super(delta)
@@ -63,6 +78,7 @@ func open_bag_items_submenu():
 	equipment_display_container.visible = false
 	bag_items_submenu.visible = true
 	bag_items_submenu.set_actor(_actor)
+	inventory_container.set_greater_filter("Consumable")
 
 func close_bag_items_submenu():
 	equipment_display_container.visible = true
@@ -124,6 +140,7 @@ func on_item_clicked(item:BaseItem):
 		set_actor(_actor)
 	elif bag_items_submenu.visible:
 		_actor.items.add_item_to_first_valid_slot(item)
+		PlayerInventory.remove_item(item)
 
 func on_equipt_slot_clicked(slot_index:int):
 	if _actor.equipment.has_equipment_in_slot(slot_index):

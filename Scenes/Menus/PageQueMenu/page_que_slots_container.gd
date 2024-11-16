@@ -8,6 +8,8 @@ signal page_slot_pressed(page_tags:String, index:int)
 @export var premade_page_slot_button:PageQueSlotButton
 @export var page_tag_slots_entries_container:Container
 
+var _actor:BaseActor
+
 func _ready() -> void:
 	#super()
 	if Engine.is_editor_hint(): return
@@ -17,6 +19,7 @@ func _ready() -> void:
 func set_actor(actor:BaseActor):
 	for child in page_tag_slots_entries_container.get_children():
 		child.queue_free()
+	_actor = actor
 	var action_key_list:Array = actor.get_action_list()
 	var pages = actor.pages.get_pages_per_page_tags()
 	for page_tags in pages.keys():
@@ -39,7 +42,7 @@ func _create_page_slots(page_tags:String, index:int, page:BaseAction):
 	var new_slot:PageQueSlotButton = premade_page_slot_button.duplicate()
 	new_slot.visible = true
 	if page:
-		new_slot.set_page(page)
+		new_slot.set_page(page, _actor)
 	new_slot.pressed.connect(on_page_slot_pressed.bind(page_tags, index))
 	return new_slot
 

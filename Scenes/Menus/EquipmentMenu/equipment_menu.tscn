@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://cxiyfaswdygu7"]
+[gd_scene load_steps=43 format=3 uid="uid://cxiyfaswdygu7"]
 
 [ext_resource type="Script" path="res://Scenes/Menus/EquipmentMenu/equipment_menu_container.gd" id="1_7xry3"]
 [ext_resource type="Script" path="res://Scenes/UiNodes/back_patch_container.gd" id="1_wprwc"]
@@ -39,8 +39,11 @@
 [ext_resource type="Script" path="res://Scenes/Menus/EquipmentMenu/bag_items_submenu_container.gd" id="27_tothq"]
 [ext_resource type="Script" path="res://Scenes/Menus/PageQueMenu/page_slot_button.gd" id="28_um48u"]
 [ext_resource type="Script" path="res://Scenes/UiNodes/loaded_option_button.gd" id="33_nmyhf"]
+[ext_resource type="Texture2D" uid="uid://0wkhsf2kgce1" path="res://assets/Sprites/UI/BackPatches/Patch_12_4_Dark.png" id="37_rieal"]
+[ext_resource type="Script" path="res://Scenes/Menus/EquipmentMenu/mouse_over_weapon_container.gd" id="41_h0ji4"]
+[ext_resource type="PackedScene" uid="uid://c1bs8grs7gsc1" path="res://Scenes/UiNodes/MiniRangeDisplay/mini_range_display.tscn" id="41_xvul5"]
 
-[node name="EquipmentMenuContainer" type="Container" node_paths=PackedStringArray("mouse_over_control", "stats_display_container", "equipment_display_container", "inventory_container", "page_list_container", "bag_items_submenu", "edit_items_button", "background", "inner_container")]
+[node name="EquipmentMenuContainer" type="Container" node_paths=PackedStringArray("mouse_over_control", "stats_display_container", "equipment_display_container", "inventory_container", "page_list_container", "bag_items_submenu", "edit_items_button", "dev_add_item_button", "background", "inner_container")]
 z_index = 1
 custom_minimum_size = Vector2(576, 651)
 offset_right = 576.0
@@ -53,6 +56,7 @@ inventory_container = NodePath("MainContainer/EquiptInventoryContainer")
 page_list_container = NodePath("MainContainer/PageListContainer")
 bag_items_submenu = NodePath("MainContainer/HBoxContainer/BagItemsSubMenuContainer")
 edit_items_button = NodePath("MainContainer/PageListContainer/HBoxContainer/BagButton")
+dev_add_item_button = NodePath("MainContainer/HBoxContainer/StatsDisplayContainer/InnerContainer/AddItemOptionButton")
 background = NodePath("Background")
 inner_container = NodePath("MainContainer")
 force_dimintions = Vector2i(576, 0)
@@ -582,6 +586,15 @@ patch_margin_bottom = 8
 custom_minimum_size = Vector2(244, 0)
 layout_mode = 2
 
+[node name="AddItemOptionButton" type="OptionButton" parent="MainContainer/HBoxContainer/StatsDisplayContainer/InnerContainer"]
+layout_mode = 2
+selected = 0
+item_count = 1
+popup/item_0/text = "Dev - Add Item"
+script = ExtResource("33_nmyhf")
+allways_show_none = true
+no_option_text = "Dev - Add Item"
+
 [node name="HBoxContainer" type="HBoxContainer" parent="MainContainer/HBoxContainer/StatsDisplayContainer/InnerContainer"]
 layout_mode = 2
 
@@ -624,14 +637,14 @@ text = "Value"
 custom_minimum_size = Vector2(8, 40)
 layout_mode = 2
 script = ExtResource("26_pcb3t")
+margin_override = 4
+force_fill_x = true
 equipment_menu_container = NodePath("../..")
 page_menu_button = NodePath("HBoxContainer/PagesButton")
 premade_page_slot_button = NodePath("HBoxContainer/PageQueSlotButton")
 page_slots_container = NodePath("HBoxContainer/ScrollContainer/PageButtonsContainer")
 background = NodePath("NinePatchRect")
 inner_container = NodePath("HBoxContainer")
-margin_override = 4
-force_fill_x = true
 
 [node name="NinePatchRect" type="NinePatchRect" parent="MainContainer/PageListContainer"]
 layout_mode = 2
@@ -734,8 +747,7 @@ size_flags_vertical = 3
 theme_override_constants/h_separation = 2
 theme_override_constants/v_separation = 2
 
-[node name="InventoryItemButton" type="TextureButton" parent="MainContainer/EquiptInventoryContainer/InnerContainer/ScrollContainer/FlowContainer" node_paths=PackedStringArray("item_icon_rect", "equipt_icon")]
-visible = false
+[node name="InventoryItemButton" type="TextureButton" parent="MainContainer/EquiptInventoryContainer/InnerContainer/ScrollContainer/FlowContainer" node_paths=PackedStringArray("item_icon_rect", "equipt_icon", "count_label")]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 texture_normal = ExtResource("13_haq6b")
@@ -743,6 +755,7 @@ texture_pressed = ExtResource("14_acy0d")
 script = ExtResource("14_wmipa")
 item_icon_rect = NodePath("ItemIconRect")
 equipt_icon = NodePath("EquiptIcon")
+count_label = NodePath("CountLabel")
 
 [node name="ItemIconRect" type="TextureRect" parent="MainContainer/EquiptInventoryContainer/InnerContainer/ScrollContainer/FlowContainer/InventoryItemButton"]
 layout_mode = 1
@@ -766,18 +779,63 @@ offset_bottom = 23.0
 grow_horizontal = 0
 texture = ExtResource("20_dmh46")
 
-[node name="MouseOverControl" type="Control" parent="." node_paths=PackedStringArray("mouse_over_message_container", "mouse_over_label", "drag_item_control", "drag_icon_texture_rect")]
+[node name="CountLabel" type="Label" parent="MainContainer/EquiptInventoryContainer/InnerContainer/ScrollContainer/FlowContainer/InventoryItemButton"]
+layout_direction = 3
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -58.0
+offset_top = -26.0
+offset_right = -48.0
+offset_bottom = -3.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "0"
+horizontal_alignment = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="MainContainer/EquiptInventoryContainer/InnerContainer/ScrollContainer/FlowContainer/InventoryItemButton/CountLabel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -2.0
+offset_right = 3.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("37_rieal")
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+
+[node name="Label" type="Label" parent="MainContainer/EquiptInventoryContainer/InnerContainer/ScrollContainer/FlowContainer/InventoryItemButton/CountLabel"]
+layout_direction = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "0"
+horizontal_alignment = 2
+
+[node name="MouseOverControl" type="Control" parent="." node_paths=PackedStringArray("weapon_mouse_over", "mouse_over_message_container", "mouse_over_label", "drag_item_control", "drag_icon_texture_rect")]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 mouse_filter = 2
 script = ExtResource("20_vk886")
+weapon_mouse_over = NodePath("MouseOverWeaponDisplay")
 mouse_over_message_container = NodePath("MouseOverDisplay")
 mouse_over_label = NodePath("MouseOverDisplay/BoxContainer/HBoxContainer/Label")
 drag_item_control = NodePath("DragItemControl")
 drag_icon_texture_rect = NodePath("DragItemControl/DragIconTextureRect")
 
 [node name="MouseOverDisplay" type="Container" parent="MouseOverControl" node_paths=PackedStringArray("background", "inner_container")]
+visible = false
 custom_minimum_size = Vector2(95, 31)
 layout_mode = 0
 offset_right = 95.0
@@ -806,7 +864,42 @@ layout_mode = 2
 layout_mode = 2
 text = "Item Name"
 
+[node name="MouseOverWeaponDisplay" type="Container" parent="MouseOverControl" node_paths=PackedStringArray("range_display", "label", "background", "inner_container")]
+custom_minimum_size = Vector2(143, 52)
+layout_mode = 0
+offset_right = 143.0
+offset_bottom = 52.0
+mouse_filter = 2
+script = ExtResource("41_h0ji4")
+range_display = NodePath("BoxContainer/HBoxContainer/MiniRangeDisplay")
+label = NodePath("BoxContainer/HBoxContainer/Label")
+background = NodePath("NinePatchRect")
+inner_container = NodePath("BoxContainer")
+margin_override = 4
+
+[node name="NinePatchRect" type="NinePatchRect" parent="MouseOverControl/MouseOverWeaponDisplay"]
+layout_mode = 2
+texture = ExtResource("21_rx2hk")
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+
+[node name="BoxContainer" type="BoxContainer" parent="MouseOverControl/MouseOverWeaponDisplay"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MouseOverControl/MouseOverWeaponDisplay/BoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MouseOverControl/MouseOverWeaponDisplay/BoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Item Name"
+
+[node name="MiniRangeDisplay" parent="MouseOverControl/MouseOverWeaponDisplay/BoxContainer/HBoxContainer" instance=ExtResource("41_xvul5")]
+layout_mode = 2
+
 [node name="DragItemControl" type="Control" parent="MouseOverControl"]
+visible = false
 custom_minimum_size = Vector2(64, 64)
 anchors_preset = 0
 offset_right = 40.0

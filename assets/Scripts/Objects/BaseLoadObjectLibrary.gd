@@ -35,6 +35,9 @@ func get_object_def(key:String):
 		return _object_defs[key]
 	return {}
 
+func get_object_def_load_path(key:String):
+	return _defs_to_load_paths.get(key, null)
+
 func get_object(id:String)->BaseLoadObject:
 	if _static_objects.keys().has(id):
 		return _static_objects[id]
@@ -78,15 +81,17 @@ func create_object(object_key:String, id:String='', data:Dictionary={})->BaseLoa
 		_loaded_objects[new_object._id] = new_object
 	return new_object
 
-func save_objects_data(file_path:String):
+func save_objects_data(file_path:String, extra_data={}):
 	if LOGGING: print("#### Saving %s Datas to: %s" % [get_object_name(), file_path])
-	var save_datas:Dictionary = {}
+	var obj_datas:Dictionary = {}
 	for object_id in _loaded_objects.keys():
 		var object:BaseLoadObject = _loaded_objects[object_id]
 		var data = object.save_data()
 		if LOGGING: print("# Saving %s Datas with id: %s" % [get_object_name(), object_id])
-		save_datas[object_id] = data
-	var save_data_string = JSON.stringify(save_datas)
+		obj_datas[object_id] = data
+	var save_data = extra_data.duplicate(true)
+	save_data['Objects'] = obj_datas
+	var save_data_string = JSON.stringify(save_data)
 	var file = FileAccess.open(file_path, FileAccess.WRITE)
 	file.store_string(save_data_string)
 	file.close()
@@ -200,7 +205,8 @@ func _load_objects_save_file(file_path:String):
 	var text:String = file.get_as_text()
 	
 	var object_key_name = get_object_key_name()
-	var object_datas:Dictionary = JSON.parse_string(text)
+	var saved_data:Dictionary = JSON.parse_string(text)
+	var object_datas = saved_data.get("Objects", {})
 	for object_id:String in object_datas.keys():
 		var save_data = object_datas[object_id]
 		var object_key = save_data.get(object_key_name, save_data.get("ObjectKey", null))
@@ -227,6 +233,10 @@ func _load_objects_save_file(file_path:String):
 			continue
 		_loaded_objects[object_id] = new_object
 		if LOGGING: print("# - Loaded Saved Object: %s" % [object_id])
+	_after_loading_saved_objects(saved_data)
+
+func _after_loading_saved_objects(saved_data:Dictionary):
+	pass
 
 ## Recursivly search directory for files with object_file_sufix.
 ## Appends full path of found files to out_list.

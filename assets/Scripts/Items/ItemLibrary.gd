@@ -25,14 +25,13 @@ func _init() -> void:
 		return
 	Instance = self
 	Instance.init_load()
-	for item in list_all_items():
-		PlayerInventory.add_item(item)
 
-# Get a static instance of the action
+static func list_all_item_keys()->Array:
+	return Instance._object_defs.keys()
+
 static func list_all_items()->Array:
 	return Instance._loaded_objects.values()
 
-# Get a static instance of the action
 static func get_item_def(key:String)->Dictionary:
 	return Instance.get_object_def(key)
 	
@@ -49,4 +48,13 @@ static func create_item(key:String, data:Dictionary)->BaseItem:
 	return item
 
 static func save_items():
-	Instance.save_objects_data("res://saves/Items/_TestItem_ItemSave.json")
+	var data = {}
+	data["PlayerInventory"] = PlayerInventory.list_all_held_item_ids()
+	Instance.save_objects_data("res://saves/Items/_TestItem_ItemSave.json", data)
+
+func _after_loading_saved_objects(saved_data:Dictionary):
+	var player_invetory = saved_data.get("PlayerInventory", [])
+	for id in player_invetory:
+		var item = get_item(id)
+		if item:
+			PlayerInventory.add_item(item)

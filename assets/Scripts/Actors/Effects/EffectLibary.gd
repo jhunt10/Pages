@@ -43,6 +43,9 @@ static func create_effect(source, key:String, actor:BaseActor, data:Dictionary)-
 		printerr("EffectLibrary.create_effect: Failed to make effect '%s'." % [key])
 	return effect
 
+static func list_effect_defs()->Array:
+	return Instance._object_defs.values()
+
 static func list_all_effects_keys()->Array:
 	return Instance._object_defs.keys()
 

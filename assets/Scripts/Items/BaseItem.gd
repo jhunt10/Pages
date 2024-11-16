@@ -9,13 +9,20 @@ var ItemKey:String:
 	get: return self._key
 
 var details:ObjectDetailsData
-var can_stack:bool
+var can_stack:bool:
+	get:
+		return get_load_val("CanStack", false)
+
+## A semi-typed path for the inventory currently holding this item 
+## Examples: "PlayerInventory", "Actor:TestActor_ID"
+var inventory_path:String:
+	get:
+		return get_load_val("InventoryPath", "")
 
 func _init(key:String, def_load_path:String, def:Dictionary, id:String='', data:Dictionary={}) -> void:
 	super(key, def_load_path, def, id, data)
 	
 	details = ObjectDetailsData.new(self._def_load_path, self._def.get("Details", {}))
-	can_stack = self._def.get("CanStack", false)
 
 func get_item_type()->ItemTypes:
 	var item_type_str = self._def.get("ItemType", "")

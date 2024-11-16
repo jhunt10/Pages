@@ -11,11 +11,11 @@ func _ready() -> void:
 		icon_rect =  $IconRect
 	pass # Replace with function body.
 
-func set_page(page:BaseAction):
+func set_page(page:BaseAction, actor:BaseActor):
 	if !icon_rect:
 		icon_rect =  $IconRect
 	_action_key = page.ActionKey
-	icon_rect.texture = page.get_large_page_icon()
+	icon_rect.texture = page.get_small_page_icon(actor)
 
 func get_page()->BaseAction:
 	return ActionLibrary.get_action(_action_key)

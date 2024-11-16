@@ -41,7 +41,7 @@ func _create_slots(index:int, page:BaseAction):
 	page_slots_container.add_child(new_slot)
 	new_slot.visible = true
 	if page:
-		new_slot.set_page(page)
+		new_slot.set_page(page, _actor)
 	new_slot.pressed.connect(on_page_slot_pressed.bind(index))
 
 func on_page_slot_pressed(index:int):

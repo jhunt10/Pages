@@ -84,7 +84,7 @@ func _sync_icons():
 		while slot and slot.is_gap:
 			index += 1
 			slot = _slots[index]
-		slot.set_action(_actor, action)
+		slot.set_action(index, _actor, action)
 		#print("Set SLot Page: %s | %s " % [index, action.ActionKey])
 		index += 1
 		
@@ -92,7 +92,7 @@ func _sync_icons():
 		if n < _slots.size():
 			#print("Set SLot Page: %s | NULL " % [index])
 			var slot:QueMiniSlotIcon = _slots[n]
-			slot.set_action(_actor, null)
+			slot.set_action(n, _actor, null)
 
 func _on_frame_start():
 	# set bar position

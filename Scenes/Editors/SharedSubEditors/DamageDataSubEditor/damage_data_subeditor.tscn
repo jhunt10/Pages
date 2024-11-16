@@ -115,6 +115,7 @@ text = "Custom Base Damage:"
 [node name="BaseDamageSpinBox" type="SpinBox" parent="InnerContainer/DamageEditEntryContainer/InnerContainer/BaseDamageContainer"]
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
+min_value = -100.0
 
 [node name="PowerStatContainer" type="HBoxContainer" parent="InnerContainer/DamageEditEntryContainer/InnerContainer"]
 layout_mode = 2

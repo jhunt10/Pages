@@ -21,15 +21,18 @@ func que_data(data:Dictionary):
 		TurnExecutionData.new(data)
 	)
 
-func get_current_turn_data()->TurnExecutionData:
-	var current_turn = _que.turn_to_que_index(CombatRootControl.QueController.action_index)
-	if current_turn < 0:
+func get_data_for_turn(turn_index:int)->TurnExecutionData:
+	if turn_index < 0:
 		printerr("Faked Turn Data")
 		return TurnExecutionData.new({})
 	# If TurnDataList doesn't exist for this turn, back fill the list with new empty records
-	if TurnDataList.size() < current_turn+1:
-		for n in range(TurnDataList.size(), current_turn+2):
+	if TurnDataList.size() < turn_index+1:
+		for n in range(TurnDataList.size(), turn_index+2):
 			TurnDataList.append(
 				TurnExecutionData.new({})
 			)
-	return TurnDataList[current_turn]
+	return TurnDataList[turn_index]
+
+func get_current_turn_data()->TurnExecutionData:
+	var current_turn = _que.turn_to_que_index(CombatRootControl.QueController.action_index)
+	return get_data_for_turn(current_turn)

@@ -83,6 +83,7 @@ func _init(key:String, load_path:String, def:Dictionary, id:String, data:Diction
 func save_data()->Dictionary:
 	var data = super()
 	data['Pages'] = pages.get_pages_per_page_tags()
+	data['BagItems'] = items.get_items_per_item_tags()
 	return data
 
 func on_combat_start():
