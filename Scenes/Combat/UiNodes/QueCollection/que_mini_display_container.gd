@@ -49,7 +49,7 @@ func _sync_que():
 func set_actor(actor:BaseActor):
 	_actor = actor
 	actor.Que.action_que_changed.connect(_sync_que)
-	actor.equipment.equipment_changed.connect(_sync_que)
+	actor.equipment_changed.connect(_sync_que)
 	if portrait:
 		portrait.texture = actor.get_portrait_sprite()
 		_build_slots()

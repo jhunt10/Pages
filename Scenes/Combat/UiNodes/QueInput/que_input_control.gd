@@ -33,9 +33,9 @@ func _process(_delta: float) -> void:
 
 func set_actor(actor:BaseActor):
 	if _actor:
-		_actor.equipment.equipment_changed.disconnect(_build_buttons)
+		_actor.equipment_changed.disconnect(_build_buttons)
 	_actor = actor
-	_actor.equipment.equipment_changed.connect(_build_buttons)
+	_actor.equipment_changed.connect(_build_buttons)
 	_build_buttons()
 	
 

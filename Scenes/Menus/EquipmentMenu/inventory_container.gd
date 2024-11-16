@@ -10,6 +10,7 @@ signal item_button_clicked(item:BaseItem)
 @export var tab_bar:TabBar
 @export var items_container:FlowContainer
 @export var premade_item_button:InventoryItemButton
+@export var filter_option_button:LoadedOptionButton
 
 var _mouse_in_button:InventoryItemButton
 var _item_buttons:Dictionary = {}
@@ -18,11 +19,19 @@ var _hover_timer:float
 var _click_delay:float = 0.4
 var _click_timer:float
 
+var greater_filters:Dictionary = {
+	'All': ['Equipment', 'Armor', 'Weapon', 'Consumable'],
+	'Equipment': ['Head', 'Body', 'Feet', 'Book', 'Bag', 'Trinket', 'Offhand', 'Weapon'],
+	'Consumable': ['Potion', 'Bomb'],
+}
+
 func _ready() -> void:
 	super()
 	if Engine.is_editor_hint(): return
 	premade_item_button.visible = false
 	tab_bar.tab_changed.connect(_on_tab_bar_select)
+	filter_option_button.get_options_func = get_greater_filter_options
+	filter_option_button.item_selected.connect(on_greater_filter_selected)
 	if !ItemLibrary.Instance:
 		ItemLibrary.new()
 	build_item_list()
@@ -86,11 +95,31 @@ func _on_tab_bar_select(index:int):
 	pass
 
 func filter_items_with_tag(tag:String):
+	var greater_filter = filter_option_button.get_current_option_text()
 	for button:InventoryItemButton in _item_buttons.values():
 		var item = button.get_item()
+		var tags = item.get_item_tags()
+		if greater_filter != 'All' and not tags.has(greater_filter):
+			button.visible = false
+			continue
+			
 		if tag == '':
 			button.visible = true
-		elif item.details.tags.has(tag):
+		elif tags.has(tag):
 			button.visible = true
 		else:
 			button.visible = false
+
+func get_greater_filter_options()->Array:
+	return greater_filters.keys()
+
+func on_greater_filter_selected(index:int):
+	var filter_option = filter_option_button.get_current_option_text()
+	var tabs_list = greater_filters[filter_option]
+	tab_bar.clear_tabs()
+	tab_bar.add_tab('All')
+	for t in tabs_list:
+		tab_bar.add_tab(t)
+	tab_bar.current_tab = 0
+	filter_items_with_tag('')
+	

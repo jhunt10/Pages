@@ -1,0 +1,26 @@
+[
+    {
+        "ItemKey":"TestPotion",
+        "_ObjectScript": "res://assets/Scripts/Items/BaseConsumableItem.gd",
+        "Details":{
+			"DisplayName": "Test Potion",
+			"SnippetDesc": "An potion made for testing.",
+			"Description": "Description.",
+			"Tags": ["Potion"],
+			"LargeIcon":"TestPotion.png",
+			"SmallIcon":"TestPotion.png"
+		}
+    },
+    {
+        "ItemKey":"TestBomb",
+        "_ObjectScript": "res://assets/Scripts/Items/BaseConsumableItem.gd",
+        "Details":{
+			"DisplayName": "Test Bomb",
+			"SnippetDesc": "A explosive made for testing.",
+			"Description": "Description.",
+			"Tags": ["Bomb"],
+			"LargeIcon":"TestBomb.png",
+			"SmallIcon":"TestBomb.png"
+		}
+    }
+]

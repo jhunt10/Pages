@@ -47,6 +47,7 @@ func _init(actor:BaseActor, data:Dictionary) -> void:
 		# Other Stats
 		elif data[key] is int or data[key] is float:
 			_base_stats[key] = data[key]
+	actor.equipment_changed.connect(dirty_stats)
 	actor.turn_starting.connect(_on_actor_turn_start)
 	actor.turn_ended.connect(_on_actor_turn_end)
 	actor.round_ended.connect(_on_actor_round_end)

@@ -35,8 +35,8 @@ func set_actor(actor:BaseActor):
 	Actor = actor
 	if Actor.node == null:
 		Actor.node = self
-	if not actor.equipment.equipment_changed.is_connected(sync_sprites):
-		actor.equipment.equipment_changed.connect(sync_sprites)
+	if not actor.equipment_changed.is_connected(sync_sprites):
+		actor.equipment_changed.connect(sync_sprites)
 	_load_nodes()
 	var frames = actor.get_load_val("SpriteFrameWH", [1,1])
 	actor_sprite.hframes = frames[0]

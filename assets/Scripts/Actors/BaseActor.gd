@@ -10,6 +10,11 @@ signal turn_ended
 signal round_starting
 signal round_ended
 
+signal equipment_changed
+signal bag_items_changed
+signal page_list_changed
+signal action_que_changed
+
 # Actor holds no references to the current map state so this method is called by MapState.set_actor_pos()
 signal on_move(old_pos:MapPos, new_pos:MapPos, move_type:String, moved_by:BaseActor)
 signal on_death()
@@ -19,7 +24,7 @@ var Que:ActionQue
 var node:ActorNode
 var stats:StatHolder
 var effects:EffectHolder
-var items:BaseItemBag
+var items:ItemHolder
 var details:ObjectDetailsData
 var equipment:EquipmentHolder
 var pages:PageHolder
@@ -66,14 +71,13 @@ func _init(key:String, load_path:String, def:Dictionary, id:String, data:Diction
 	var stat_data = _def["Stats"]
 	stats = StatHolder.new(self, stat_data)
 	effects = EffectHolder.new(self)
-	#items = BaseItemBag.new(self)
 	details = ObjectDetailsData.new(_def_load_path, _def.get("Details", {}))
 	equipment = EquipmentHolder.new(self)
+	items = ItemHolder.new(self)
 	Que = ActionQue.new(self)
 	pages = PageHolder.new(self)
 	
-	equipment.equipment_changed.connect(_build_sprite_sheet)
-	equipment.equipment_changed.connect(stats.dirty_stats)
+	self.equipment_changed.connect(_build_sprite_sheet)
 	
 
 func save_data()->Dictionary:

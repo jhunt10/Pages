@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://cxiyfaswdygu7"]
+[gd_scene load_steps=40 format=3 uid="uid://cxiyfaswdygu7"]
 
 [ext_resource type="Script" path="res://Scenes/Menus/EquipmentMenu/equipment_menu_container.gd" id="1_7xry3"]
 [ext_resource type="Script" path="res://Scenes/UiNodes/back_patch_container.gd" id="1_wprwc"]
@@ -35,9 +35,12 @@
 [ext_resource type="Script" path="res://Scenes/Menus/EquipmentMenu/stat_display_entry.gd" id="25_7op4r"]
 [ext_resource type="Script" path="res://Scenes/Menus/EquipmentMenu/page_list_container.gd" id="26_pcb3t"]
 [ext_resource type="Texture2D" uid="uid://cg1yo6bhpalea" path="res://assets/Sprites/UI/QueInputAndDisplay/mini_page_slot.png" id="27_1e8xt"]
+[ext_resource type="Script" path="res://Scenes/Menus/EquipmentMenu/bag_item_slot_button.gd" id="27_1qh7n"]
+[ext_resource type="Script" path="res://Scenes/Menus/EquipmentMenu/bag_items_submenu_container.gd" id="27_tothq"]
 [ext_resource type="Script" path="res://Scenes/Menus/PageQueMenu/page_slot_button.gd" id="28_um48u"]
+[ext_resource type="Script" path="res://Scenes/UiNodes/loaded_option_button.gd" id="33_nmyhf"]
 
-[node name="EquipmentMenuContainer" type="Container" node_paths=PackedStringArray("mouse_over_control", "stats_display_container", "equipment_display_container", "inventory_container", "page_list_container", "background", "inner_container")]
+[node name="EquipmentMenuContainer" type="Container" node_paths=PackedStringArray("mouse_over_control", "stats_display_container", "equipment_display_container", "inventory_container", "page_list_container", "bag_items_submenu", "edit_items_button", "background", "inner_container")]
 z_index = 1
 custom_minimum_size = Vector2(576, 651)
 offset_right = 576.0
@@ -48,6 +51,8 @@ stats_display_container = NodePath("MainContainer/HBoxContainer/StatsDisplayCont
 equipment_display_container = NodePath("MainContainer/HBoxContainer/EquipSlotsContainer")
 inventory_container = NodePath("MainContainer/EquiptInventoryContainer")
 page_list_container = NodePath("MainContainer/PageListContainer")
+bag_items_submenu = NodePath("MainContainer/HBoxContainer/BagItemsSubMenuContainer")
+edit_items_button = NodePath("MainContainer/PageListContainer/HBoxContainer/BagButton")
 background = NodePath("Background")
 inner_container = NodePath("MainContainer")
 force_dimintions = Vector2i(576, 0)
@@ -68,7 +73,79 @@ vertical = true
 [node name="HBoxContainer" type="HBoxContainer" parent="MainContainer"]
 layout_mode = 2
 
+[node name="BagItemsSubMenuContainer" type="Container" parent="MainContainer/HBoxContainer" node_paths=PackedStringArray("close_button", "item_slots_container", "premade_item_slot_button", "background", "inner_container")]
+custom_minimum_size = Vector2(288, 312)
+layout_mode = 2
+script = ExtResource("27_tothq")
+close_button = NodePath("InnerContainer/HBoxContainer/Button")
+item_slots_container = NodePath("InnerContainer/ScrollContainer/ItemSlotEntriesContainer")
+premade_item_slot_button = NodePath("InnerContainer/BagItemSlotButton")
+background = NodePath("Background")
+inner_container = NodePath("InnerContainer")
+force_fill_y = true
+force_dimintions = Vector2i(288, 312)
+
+[node name="Background" type="NinePatchRect" parent="MainContainer/HBoxContainer/BagItemsSubMenuContainer"]
+layout_mode = 2
+texture = ExtResource("4_bemq8")
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+
+[node name="InnerContainer" type="VBoxContainer" parent="MainContainer/HBoxContainer/BagItemsSubMenuContainer"]
+custom_minimum_size = Vector2(244, 0)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MainContainer/HBoxContainer/BagItemsSubMenuContainer/InnerContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MainContainer/HBoxContainer/BagItemsSubMenuContainer/InnerContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Item Bag"
+
+[node name="Button" type="Button" parent="MainContainer/HBoxContainer/BagItemsSubMenuContainer/InnerContainer/HBoxContainer"]
+layout_mode = 2
+text = "Close"
+
+[node name="BagItemSlotButton" type="Button" parent="MainContainer/HBoxContainer/BagItemsSubMenuContainer/InnerContainer"]
+visible = false
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+script = ExtResource("27_1qh7n")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MainContainer/HBoxContainer/BagItemsSubMenuContainer/InnerContainer/BagItemSlotButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="MainContainer/HBoxContainer/BagItemsSubMenuContainer/InnerContainer/BagItemSlotButton/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("27_1e8xt")
+
+[node name="Label" type="Label" parent="MainContainer/HBoxContainer/BagItemsSubMenuContainer/InnerContainer/BagItemSlotButton/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "- - - - - - - - - - - -"
+vertical_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MainContainer/HBoxContainer/BagItemsSubMenuContainer/InnerContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 2
+
+[node name="ItemSlotEntriesContainer" type="VBoxContainer" parent="MainContainer/HBoxContainer/BagItemsSubMenuContainer/InnerContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
 [node name="EquipSlotsContainer" type="Container" parent="MainContainer/HBoxContainer" node_paths=PackedStringArray("actor_node", "armor_lable", "ward_label", "phyatk_label", "magatk_label", "mass_label", "speed_label", "page_count_label", "que_count_label", "background", "inner_container")]
+visible = false
 custom_minimum_size = Vector2(288, 312)
 layout_mode = 2
 script = ExtResource("3_xe4rr")
@@ -485,13 +562,13 @@ max_value = 180.0
 custom_minimum_size = Vector2(260, 16)
 layout_mode = 2
 script = ExtResource("24_2alwo")
-force_fill_y = true
 name_label = NodePath("InnerContainer/HBoxContainer/NameLabel")
 level_label = NodePath("InnerContainer/HBoxContainer/LevelLabel")
 premade_stat_entry = NodePath("InnerContainer/ScrollContainer/VBoxContainer/StatDisplayEntry")
 entry_container = NodePath("InnerContainer/ScrollContainer/VBoxContainer")
 background = NodePath("Background")
 inner_container = NodePath("InnerContainer")
+force_fill_y = true
 
 [node name="Background" type="NinePatchRect" parent="MainContainer/HBoxContainer/StatsDisplayContainer"]
 layout_mode = 2
@@ -593,13 +670,18 @@ size_flags_horizontal = 3
 layout_mode = 2
 text = "Edit Pages"
 
-[node name="EquiptInventoryContainer" type="Container" parent="MainContainer" node_paths=PackedStringArray("tab_bar", "items_container", "premade_item_button", "background", "inner_container")]
+[node name="BagButton" type="Button" parent="MainContainer/PageListContainer/HBoxContainer"]
+layout_mode = 2
+text = "Edit Items"
+
+[node name="EquiptInventoryContainer" type="Container" parent="MainContainer" node_paths=PackedStringArray("tab_bar", "items_container", "premade_item_button", "filter_option_button", "background", "inner_container")]
 custom_minimum_size = Vector2(12, 267)
 layout_mode = 2
 script = ExtResource("13_nccae")
-tab_bar = NodePath("InnerContainer/TabBar")
+tab_bar = NodePath("InnerContainer/HBoxContainer/TabBar")
 items_container = NodePath("InnerContainer/ScrollContainer/FlowContainer")
 premade_item_button = NodePath("InnerContainer/ScrollContainer/FlowContainer/InventoryItemButton")
+filter_option_button = NodePath("InnerContainer/HBoxContainer/LoadedOptionButton")
 background = NodePath("NinePatchRect")
 inner_container = NodePath("InnerContainer")
 margin_override = 6
@@ -616,8 +698,12 @@ patch_margin_bottom = 12
 [node name="InnerContainer" type="VBoxContainer" parent="MainContainer/EquiptInventoryContainer"]
 layout_mode = 2
 
-[node name="TabBar" type="TabBar" parent="MainContainer/EquiptInventoryContainer/InnerContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MainContainer/EquiptInventoryContainer/InnerContainer"]
 layout_mode = 2
+
+[node name="TabBar" type="TabBar" parent="MainContainer/EquiptInventoryContainer/InnerContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
 current_tab = 0
 tab_count = 6
 tab_0/title = "All"
@@ -626,6 +712,15 @@ tab_2/title = "Body"
 tab_3/title = "Feet"
 tab_4/title = "Weapon"
 tab_5/title = "OffHand"
+
+[node name="LoadedOptionButton" type="OptionButton" parent="MainContainer/EquiptInventoryContainer/InnerContainer/HBoxContainer"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+selected = 0
+fit_to_longest_item = false
+item_count = 1
+popup/item_0/text = "Items"
+script = ExtResource("33_nmyhf")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="MainContainer/EquiptInventoryContainer/InnerContainer"]
 custom_minimum_size = Vector2(0, 220)

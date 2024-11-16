@@ -60,11 +60,11 @@ func set_actor(actor:BaseActor):
 	if _actor:
 		if actor.Que.action_que_changed.is_connected(_sync_que):
 			actor.Que.action_que_changed.disconnect(_sync_que)
-		if actor.equipment.equipment_changed.is_connected(_sync_que):
-			actor.equipment.equipment_changed.disconnect(_sync_que)
+		if actor.equipment_changed.is_connected(_sync_que):
+			actor.equipment_changed.disconnect(_sync_que)
 	_actor = actor
 	actor.Que.action_que_changed.connect(_sync_que)
-	actor.equipment.equipment_changed.connect(_sync_que)
+	actor.equipment_changed.connect(_sync_que)
 	if portrait:
 		portrait.texture = actor.get_portrait_sprite()
 		_build_slots()

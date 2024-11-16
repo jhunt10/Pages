@@ -25,6 +25,9 @@ func get_item_type()->ItemTypes:
 		printerr("BaseItem.get_item_type: %s has unknown ItemType '%s'." % [ItemKey, item_type_str])
 	return ItemTypes.KeyItem
 
+func get_item_tags()->Array:
+	return details.tags
+
 func get_large_icon()->Texture2D:
 	return SpriteCache.get_sprite(details.large_icon_path)
 func get_small_icon()->Texture2D:

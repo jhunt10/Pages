@@ -13,6 +13,11 @@ var _equipt_slot_index:int:
 func get_item_type()->ItemTypes:
 	return ItemTypes.Equipment
 
+func get_item_tags()->Array:
+	var tags = super()
+	tags.append("Equipment")
+	return tags
+
 func get_equipment_slot_type()->String:
 	return self.get_load_val("EquipSlot", "UNSET")
 

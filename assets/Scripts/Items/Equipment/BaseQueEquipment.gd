@@ -1,3 +1,4 @@
+## Que Equipment holds all the parameters for the Actor's Pages, but PageHolder manages the pages
 class_name BaseQueEquipment
 extends BaseEquipmentItem
 

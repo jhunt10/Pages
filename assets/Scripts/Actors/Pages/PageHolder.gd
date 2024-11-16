@@ -9,7 +9,7 @@ var actor:BaseActor
 
 func _init(actor:BaseActor) -> void:
 	self.actor = actor
-	actor.equipment.equipment_changed.connect(_count_page_tag_slots)
+	actor.equipment_changed.connect(_count_page_tag_slots)
 	_page_tagged_slots = actor.get_load_val("Pages", {})
 	_count_page_tag_slots()
 	

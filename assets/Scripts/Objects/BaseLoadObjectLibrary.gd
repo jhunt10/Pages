@@ -84,8 +84,6 @@ func save_objects_data(file_path:String):
 	for object_id in _loaded_objects.keys():
 		var object:BaseLoadObject = _loaded_objects[object_id]
 		var data = object.save_data()
-		if !data.keys().has("Id"):
-			data['Id'] = object_id
 		if LOGGING: print("# Saving %s Datas with id: %s" % [get_object_name(), object_id])
 		save_datas[object_id] = data
 	var save_data_string = JSON.stringify(save_datas)
@@ -127,7 +125,7 @@ func init_load():
 	# Load Objects
 	for object_file in _search_for_files(OBJECTS_DATA_DIR, get_data_file_sufix()):
 		if LOGGING: print("# Loading Save file: %s" % [object_file])
-		_load_object_file(object_file)
+		_load_objects_save_file(object_file)
 	
 	if LOGGING:
 		print("#### DONE Loading %s" % [obj_name])
@@ -197,7 +195,7 @@ func _load_static_objects():
 			if LOGGING: print("# - Loaded Static Object: %s" % [new_object._id])
 
 ## Parse json save file and load to _loaded_objects
-func _load_object_file(file_path:String):
+func _load_objects_save_file(file_path:String):
 	var file = FileAccess.open(file_path, FileAccess.READ)
 	var text:String = file.get_as_text()
 	

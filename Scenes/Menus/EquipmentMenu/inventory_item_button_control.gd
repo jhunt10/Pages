@@ -21,7 +21,9 @@ func set_item(item:BaseItem):
 	item_icon_rect.texture = item.get_large_icon()
 	if item is BaseEquipmentItem:
 		equipt_icon.visible = (item as BaseEquipmentItem).get_equipt_to_actor_id() != ''
-	(item as BaseEquipmentItem).equipt_actor_change.connect(on_equipt_change)
+		(item as BaseEquipmentItem).equipt_actor_change.connect(on_equipt_change)
+	else:
+		equipt_icon.visible = false
 
 func on_equipt_change():
 	var item = ItemLibrary.get_item(_item_id)

@@ -2,8 +2,6 @@ class_name EquipmentHolder
 
 const LOGGING = true
 
-signal equipment_changed
-
 var _actor:BaseActor
 
 var _slot_equipment_types:Array:
@@ -94,7 +92,7 @@ func remove_equipment(equipment:BaseEquipmentItem):
 			if LOGGING: print("Removeing Weapon: Twohanding primary weapon '%s' to slot %s:%s" %[equipment.Id, index, equipment_slot_type])
 			clear_slot(index, false)
 			_slot_equipment_ids[index] = primary.Id
-			equipment_changed.emit()
+			_actor.equipment_changed.emit()
 			return
 	# Removeing a Weapon
 	if equipment_slot_type == "Weapon":
@@ -106,7 +104,7 @@ func remove_equipment(equipment:BaseEquipmentItem):
 			for i in range(_slot_equipment_ids.size()):
 				if _slot_equipment_ids[i]  == equipment.Id:
 					clear_slot(i, false)
-			equipment_changed.emit()
+			_actor.equipment_changed.emit()
 			return
 					
 		# Removeing primary with an offhand weapon equip, move the offhand to main slot
@@ -115,7 +113,7 @@ func remove_equipment(equipment:BaseEquipmentItem):
 			var off_hand_slot = _slot_equipment_ids.find(offhand.Id)
 			_slot_equipment_ids[off_hand_slot] = null
 			_slot_equipment_ids[index] = offhand.Id
-			equipment_changed.emit()
+			_actor.equipment_changed.emit()
 			return
 	
 	clear_slot(index)
@@ -134,7 +132,7 @@ func clear_slot(index:int, emit_change:bool=true, skip_unbind:bool=false):
 			current_item.clear_equipt_actor()
 		
 	if emit_change:
-		equipment_changed.emit()
+		_actor.equipment_changed.emit()
 
 func equip_item_to_slot(index:int, equipment:BaseEquipmentItem):
 	if index < 0 or index >= _slot_equipment_types.size() or _slot_equipment_ids[index] == equipment.Id:
@@ -185,7 +183,7 @@ func equip_item_to_slot(index:int, equipment:BaseEquipmentItem):
 	# Set equipment's actor if not already set
 	if not equipment.is_equipped_to_actor(_actor): 
 		equipment.set_equipt_actor(_actor, index)
-	equipment_changed.emit()
+	_actor.equipment_changed.emit()
 
 func equip_weapon_to_slot(index:int, weapon:BaseWeaponEquipment):
 	var slot_type = _slot_equipment_types[index]
@@ -222,7 +220,7 @@ func equip_weapon_to_slot(index:int, weapon:BaseWeaponEquipment):
 	# Set equipment's actor if not already set
 	if not weapon.is_equipped_to_actor(_actor): 
 		weapon.set_equipt_actor(_actor, index)
-	equipment_changed.emit()
+	_actor.equipment_changed.emit()
 
 
 func _clear_offhand_weapons():

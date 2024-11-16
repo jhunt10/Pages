@@ -60,7 +60,10 @@
 			"LargeIcon":"TestBag.png",
 			"SmallIcon":"TestBag.png"
 		},
-        "MaxItemCount": 5
+        "ItemTagSlots": {
+            "Any": 6,
+			"Potion": 2
+        }
     },
     {
         "ItemKey":"TestBag2",
@@ -73,7 +76,10 @@
 			"LargeIcon":"TestBag2.png",
 			"SmallIcon":"TestBag2.png"
 		},
-        "MaxItemCount": 5
+        "ItemTagSlots": {
+            "Any": 6,
+			"Bomb": 2
+        }
     },
     {
         "ItemKey":"TestHelm",
@@ -137,6 +143,22 @@
         "SpriteSheet":"TestArmor_SpriteSheet.png",
         "EquipSlot":"Body",
         "Armor": 10,
+        "Ward": 0
+    },
+    {
+        "ItemKey":"GreenShirt",
+        "_ObjectScript": "res://assets/Scripts/Items/Equipment/BaseArmorEquipment.gd",
+        "Details":{
+			"DisplayName": "Greening Shirt",
+			"SnippetDesc": "An shirt made for greening.",
+			"Description": "Description.",
+			"Tags": ["Body"],
+			"LargeIcon":"GreenShirt.png",
+			"SmallIcon":"GreenShirt.png"
+		},
+        "SpriteSheet":"GreenShirt_SpriteSheet.png",
+        "EquipSlot":"Body",
+        "Armor": 5,
         "Ward": 0
     },
     {
