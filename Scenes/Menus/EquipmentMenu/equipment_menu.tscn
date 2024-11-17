@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://cxiyfaswdygu7"]
+[gd_scene load_steps=48 format=3 uid="uid://cxiyfaswdygu7"]
 
 [ext_resource type="Script" path="res://Scenes/Menus/EquipmentMenu/equipment_menu_container.gd" id="1_7xry3"]
 [ext_resource type="Script" path="res://Scenes/UiNodes/back_patch_container.gd" id="1_wprwc"]
@@ -39,12 +39,16 @@
 [ext_resource type="Script" path="res://Scenes/Menus/EquipmentMenu/bag_item_slot_button.gd" id="27_1qh7n"]
 [ext_resource type="Script" path="res://Scenes/Menus/EquipmentMenu/bag_items_submenu_container.gd" id="27_tothq"]
 [ext_resource type="Script" path="res://Scenes/Menus/PageQueMenu/page_slot_button.gd" id="28_um48u"]
+[ext_resource type="Script" path="res://Scenes/Menus/EquipmentMenu/equipment_details_container.gd" id="32_1iwer"]
+[ext_resource type="Script" path="res://Scenes/Menus/EquipmentMenu/weapon_info_sub_container.gd" id="32_gerxd"]
 [ext_resource type="Script" path="res://Scenes/UiNodes/loaded_option_button.gd" id="33_nmyhf"]
+[ext_resource type="Script" path="res://Scenes/Menus/EquipmentMenu/armor_info_sub_container.gd" id="34_cdfy7"]
+[ext_resource type="Script" path="res://Scenes/Menus/EquipmentMenu/book_info_sub_container.gd" id="36_p1pen"]
 [ext_resource type="Texture2D" uid="uid://0wkhsf2kgce1" path="res://assets/Sprites/UI/BackPatches/Patch_12_4_Dark.png" id="37_rieal"]
 [ext_resource type="Script" path="res://Scenes/Menus/EquipmentMenu/mouse_over_weapon_container.gd" id="41_h0ji4"]
 [ext_resource type="PackedScene" uid="uid://c1bs8grs7gsc1" path="res://Scenes/UiNodes/MiniRangeDisplay/mini_range_display.tscn" id="41_xvul5"]
 
-[node name="EquipmentMenuContainer" type="Container" node_paths=PackedStringArray("exit_button", "mouse_over_control", "stats_display_container", "equipment_display_container", "inventory_container", "page_list_container", "bag_items_submenu", "edit_items_button", "dev_add_item_button", "background", "inner_container")]
+[node name="EquipmentMenuContainer" type="Container" node_paths=PackedStringArray("exit_button", "mouse_over_control", "stats_display_container", "equipment_display_container", "inventory_container", "page_list_container", "bag_items_submenu", "equipment_details_container", "edit_items_button", "dev_add_item_button", "background", "inner_container")]
 z_index = 5
 custom_minimum_size = Vector2(576, 648)
 offset_right = 576.0
@@ -57,6 +61,7 @@ equipment_display_container = NodePath("MainContainer/HBoxContainer/EquipSlotsCo
 inventory_container = NodePath("MainContainer/EquiptInventoryContainer")
 page_list_container = NodePath("MainContainer/PageListContainer")
 bag_items_submenu = NodePath("MainContainer/HBoxContainer/BagItemsSubMenuContainer")
+equipment_details_container = NodePath("MainContainer/HBoxContainer/EquipmenDetailsContainer")
 edit_items_button = NodePath("MainContainer/PageListContainer/HBoxContainer/BagButton")
 dev_add_item_button = NodePath("MainContainer/HBoxContainer/StatsDisplayContainer/InnerContainer/HBoxContainer2/AddItemOptionButton")
 background = NodePath("Background")
@@ -568,6 +573,7 @@ min_value = -180.0
 max_value = 180.0
 
 [node name="StatsDisplayContainer" type="Container" parent="MainContainer/HBoxContainer" node_paths=PackedStringArray("name_label", "level_label", "premade_stat_entry", "entry_container", "background", "inner_container")]
+visible = false
 custom_minimum_size = Vector2(260, 16)
 layout_mode = 2
 script = ExtResource("24_2alwo")
@@ -650,6 +656,245 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("5_63y7a")
 text = "Value"
+
+[node name="EquipmenDetailsContainer" type="Container" parent="MainContainer/HBoxContainer" node_paths=PackedStringArray("icon", "title_label", "tags_label", "description_label", "armor_details", "weapon_details", "book_details", "background", "inner_container")]
+custom_minimum_size = Vector2(260, 16)
+layout_mode = 2
+script = ExtResource("32_1iwer")
+icon = NodePath("InnerContainer/TitleContainer/TextureRect/IconTextureRect")
+title_label = NodePath("InnerContainer/TitleContainer/TitleLabel")
+tags_label = NodePath("InnerContainer/TagsLabel")
+description_label = NodePath("InnerContainer/ScrollContainer/VBoxContainer/DescriptionLabel")
+armor_details = NodePath("InnerContainer/ArmoInfoContainer")
+weapon_details = NodePath("InnerContainer/WeaponInfoContainer")
+book_details = NodePath("InnerContainer/BookInfoContainer")
+background = NodePath("Background")
+inner_container = NodePath("InnerContainer")
+force_fill_y = true
+
+[node name="Background" type="NinePatchRect" parent="MainContainer/HBoxContainer/EquipmenDetailsContainer"]
+layout_mode = 2
+texture = ExtResource("4_bemq8")
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+
+[node name="InnerContainer" type="VBoxContainer" parent="MainContainer/HBoxContainer/EquipmenDetailsContainer"]
+custom_minimum_size = Vector2(244, 0)
+layout_mode = 2
+
+[node name="TitleContainer" type="HBoxContainer" parent="MainContainer/HBoxContainer/EquipmenDetailsContainer/InnerContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="MainContainer/HBoxContainer/EquipmenDetailsContainer/InnerContainer/TitleContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = ExtResource("27_1e8xt")
+
+[node name="IconTextureRect" type="TextureRect" parent="MainContainer/HBoxContainer/EquipmenDetailsContainer/InnerContainer/TitleContainer/TextureRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TitleLabel" type="Label" parent="MainContainer/HBoxContainer/EquipmenDetailsContainer/InnerContainer/TitleContainer"]
+custom_minimum_size = Vector2(176, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme = ExtResource("5_63y7a")
+text = "Item Name"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="CloseButton" type="Button" parent="MainContainer/HBoxContainer/EquipmenDetailsContainer/InnerContainer/TitleContainer"]
+layout_mode = 2
+theme = ExtResource("5_63y7a")
+text = " X "
+
+[node name="TagsLabel" type="Label" parent="MainContainer/HBoxContainer/EquipmenDetailsContainer/InnerContainer"]
+custom_minimum_size = Vector2(244, 20)
+layout_mode = 2
+theme = ExtResource("5_63y7a")
+text = "Tags: "
+autowrap_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="MainContainer/HBoxContainer/EquipmenDetailsContainer/InnerContainer"]
+layout_mode = 2
+
+[node name="WeaponInfoContainer" type="HBoxContainer" parent="MainContainer/HBoxContainer/EquipmenDetailsContainer/InnerContainer" node_paths=PackedStringArray("range_display", "class_label", "attack_power_label", "damage_var_label", "damage_type_label", "physical_attack_icon", "magic_attack_icon")]
+layout_mode = 2
+script = ExtResource("32_gerxd")
+range_display = NodePath("MiniRangeDisplay")
+class_label = NodePath("VBoxContainer/WeaponClassContainer/ClassLabel")
+attack_power_label = NodePath("VBoxContainer/DamageContainer/AtkPowLabel")
+damage_var_label = NodePath("VBoxContainer/DamageContainer/DamageVarLabel")
+damage_type_label = NodePath("VBoxContainer/DamageContainer/DamageTypeLabel")
+physical_attack_icon = NodePath("VBoxContainer/DamageContainer/PhyIconTextureRect")
+magic_attack_icon = NodePath("VBoxContainer/DamageContainer/MagIconTextureRect")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainContainer/HBoxContainer/EquipmenDetailsContainer/InnerContainer/WeaponInfoContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="WeaponClassContainer" type="HBoxContainer" parent="MainContainer/HBoxContainer/EquipmenDetailsContainer/InnerContainer/WeaponInfoContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="ClassLabel" type="Label" parent="MainContainer/HBoxContainer/EquipmenDetailsContainer/InnerContainer/WeaponInfoContainer/VBoxContainer/WeaponClassContainer"]
+layout_mode = 2
+theme = ExtResource("5_63y7a")
+text = "Medium"
+
+[node name="ClassLabel2" type="Label" parent="MainContainer/HBoxContainer/EquipmenDetailsContainer/InnerContainer/WeaponInfoContainer/VBoxContainer/WeaponClassContainer"]
+layout_mode = 2
+theme = ExtResource("5_63y7a")
+text = "Weapon"
+
+[node name="DamageContainer" type="HBoxContainer" parent="MainContainer/HBoxContainer/EquipmenDetailsContainer/InnerContainer/WeaponInfoContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="PhyIconTextureRect" type="TextureRect" parent="MainContainer/HBoxContainer/EquipmenDetailsContainer/InnerContainer/WeaponInfoContainer/VBoxContainer/DamageContainer"]
+layout_mode = 2
+texture = ExtResource("11_8n58u")
+stretch_mode = 3
+
+[node name="MagIconTextureRect" type="TextureRect" parent="MainContainer/HBoxContainer/EquipmenDetailsContainer/InnerContainer/WeaponInfoContainer/VBoxContainer/DamageContainer"]
+layout_mode = 2
+texture = ExtResource("12_d5j8h")
+stretch_mode = 3
+
+[node name="AtkPowLabel" type="Label" parent="MainContainer/HBoxContainer/EquipmenDetailsContainer/InnerContainer/WeaponInfoContainer/VBoxContainer/DamageContainer"]
+layout_mode = 2
+theme = ExtResource("5_63y7a")
+text = "100"
+
+[node name="PlusMinLabel" type="Label" parent="MainContainer/HBoxContainer/EquipmenDetailsContainer/InnerContainer/WeaponInfoContainer/VBoxContainer/DamageContainer"]
+layout_mode = 2
+theme = ExtResource("5_63y7a")
+text = "±"
+
+[node name="DamageVarLabel" type="Label" parent="MainContainer/HBoxContainer/EquipmenDetailsContainer/InnerContainer/WeaponInfoContainer/VBoxContainer/DamageContainer"]
+layout_mode = 2
+theme = ExtResource("5_63y7a")
+text = "10%"
+
+[node name="DamageTypeLabel" type="Label" parent="MainContainer/HBoxContainer/EquipmenDetailsContainer/InnerContainer/WeaponInfoContainer/VBoxContainer/DamageContainer"]
+layout_mode = 2
+theme = ExtResource("5_63y7a")
+text = " Slash"
+
+[node name="MiniRangeDisplay" parent="MainContainer/HBoxContainer/EquipmenDetailsContainer/InnerContainer/WeaponInfoContainer" instance=ExtResource("41_xvul5")]
+layout_mode = 2
+
+[node name="ArmoInfoContainer" type="HBoxContainer" parent="MainContainer/HBoxContainer/EquipmenDetailsContainer/InnerContainer" node_paths=PackedStringArray("slot_label", "armor_icon", "armor_label", "ward_icon", "ward_label")]
+layout_mode = 2
+script = ExtResource("34_cdfy7")
+slot_label = NodePath("SlotLabel")
+armor_icon = NodePath("ArmorContainer/ArmorTextureRect")
+armor_label = NodePath("ArmorContainer/ArmorLabel")
+ward_icon = NodePath("WardContainer/WardTextureRect")
+ward_label = NodePath("WardContainer/WardLabel")
+
+[node name="SlotTitleLabel" type="Label" parent="MainContainer/HBoxContainer/EquipmenDetailsContainer/InnerContainer/ArmoInfoContainer"]
+layout_mode = 2
+theme = ExtResource("5_63y7a")
+text = "Slot: "
+
+[node name="SlotLabel" type="Label" parent="MainContainer/HBoxContainer/EquipmenDetailsContainer/InnerContainer/ArmoInfoContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("5_63y7a")
+text = "Body"
+
+[node name="ArmorContainer" type="HBoxContainer" parent="MainContainer/HBoxContainer/EquipmenDetailsContainer/InnerContainer/ArmoInfoContainer"]
+layout_mode = 2
+
+[node name="ArmorTextureRect" type="TextureRect" parent="MainContainer/HBoxContainer/EquipmenDetailsContainer/InnerContainer/ArmoInfoContainer/ArmorContainer"]
+layout_mode = 2
+texture = ExtResource("7_4vrmf")
+
+[node name="ArmorLabel" type="Label" parent="MainContainer/HBoxContainer/EquipmenDetailsContainer/InnerContainer/ArmoInfoContainer/ArmorContainer"]
+layout_mode = 2
+theme = ExtResource("5_63y7a")
+text = "999"
+
+[node name="WardContainer" type="HBoxContainer" parent="MainContainer/HBoxContainer/EquipmenDetailsContainer/InnerContainer/ArmoInfoContainer"]
+layout_mode = 2
+
+[node name="WardTextureRect" type="TextureRect" parent="MainContainer/HBoxContainer/EquipmenDetailsContainer/InnerContainer/ArmoInfoContainer/WardContainer"]
+layout_mode = 2
+texture = ExtResource("8_cwel1")
+
+[node name="WardLabel" type="Label" parent="MainContainer/HBoxContainer/EquipmenDetailsContainer/InnerContainer/ArmoInfoContainer/WardContainer"]
+layout_mode = 2
+theme = ExtResource("5_63y7a")
+text = "999"
+
+[node name="BookInfoContainer" type="HBoxContainer" parent="MainContainer/HBoxContainer/EquipmenDetailsContainer/InnerContainer" node_paths=PackedStringArray("ppr_label", "page_count_label")]
+layout_mode = 2
+script = ExtResource("36_p1pen")
+ppr_label = NodePath("PPRLabel")
+page_count_label = NodePath("PageCountLabel")
+
+[node name="VSeparator" type="VSeparator" parent="MainContainer/HBoxContainer/EquipmenDetailsContainer/InnerContainer/BookInfoContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PPRTextureRect" type="TextureRect" parent="MainContainer/HBoxContainer/EquipmenDetailsContainer/InnerContainer/BookInfoContainer"]
+layout_mode = 2
+texture = ExtResource("18_vyg7s")
+
+[node name="PPRLabel" type="Label" parent="MainContainer/HBoxContainer/EquipmenDetailsContainer/InnerContainer/BookInfoContainer"]
+layout_mode = 2
+theme = ExtResource("5_63y7a")
+text = "99"
+
+[node name="VSeparator2" type="VSeparator" parent="MainContainer/HBoxContainer/EquipmenDetailsContainer/InnerContainer/BookInfoContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PageCountTextureRect" type="TextureRect" parent="MainContainer/HBoxContainer/EquipmenDetailsContainer/InnerContainer/BookInfoContainer"]
+layout_mode = 2
+texture = ExtResource("17_eoa7g")
+
+[node name="PageCountLabel" type="Label" parent="MainContainer/HBoxContainer/EquipmenDetailsContainer/InnerContainer/BookInfoContainer"]
+layout_mode = 2
+theme = ExtResource("5_63y7a")
+text = "99"
+
+[node name="VSeparator3" type="VSeparator" parent="MainContainer/HBoxContainer/EquipmenDetailsContainer/InnerContainer/BookInfoContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HSeparator2" type="HSeparator" parent="MainContainer/HBoxContainer/EquipmenDetailsContainer/InnerContainer"]
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MainContainer/HBoxContainer/EquipmenDetailsContainer/InnerContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainContainer/HBoxContainer/EquipmenDetailsContainer/InnerContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="DescriptionLabel" type="Label" parent="MainContainer/HBoxContainer/EquipmenDetailsContainer/InnerContainer/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(244, 20)
+layout_mode = 2
+theme = ExtResource("5_63y7a")
+text = "Description bal bla bla some text for tesing if wrapping works correctly"
+autowrap_mode = 2
+
+[node name="Button" type="Button" parent="MainContainer/HBoxContainer/EquipmenDetailsContainer/InnerContainer"]
+layout_mode = 2
+text = "Equipt"
 
 [node name="PageListContainer" type="Container" parent="MainContainer" node_paths=PackedStringArray("equipment_menu_container", "page_menu_button", "premade_page_slot_button", "page_slots_container", "background", "inner_container")]
 custom_minimum_size = Vector2(8, 40)

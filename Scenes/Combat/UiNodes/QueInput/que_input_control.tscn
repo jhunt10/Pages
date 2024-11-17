@@ -76,6 +76,8 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="OnQueOptionsMenuControl" type="Container" parent="." node_paths=PackedStringArray("options_container", "title_lable", "parent_que_input", "background", "inner_container")]
+visible = false
+z_index = 5
 custom_minimum_size = Vector2(133, 35)
 layout_mode = 0
 offset_right = 40.0

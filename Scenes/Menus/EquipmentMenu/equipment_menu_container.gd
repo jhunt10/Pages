@@ -12,6 +12,8 @@ signal menu_closed
 @export var page_list_container:PageListContainer
 @export var bag_items_submenu:BagItemsSubMenuContainer
 
+@export var equipment_details_container:EquipmentDetailsContainer
+
 #TODO: Move this
 @export var edit_items_button:Button
 
@@ -94,6 +96,7 @@ func open_page_que_menu():
 		page_que_menu.set_actor(_actor)
 
 func set_hover_item(item):
+	equipment_details_container.set_item(item)
 	mouse_over_control.set_hover_item(item)
 
 func clear_hover_item():

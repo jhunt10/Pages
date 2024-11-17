@@ -44,13 +44,13 @@ func load_range(points:Array):
 		image_size = Vector2i(11,11)
 	
 	var center = Vector2i(floori(float(image_size.x) / 2.0)-(max_x + min_x), floori(float(image_size.y) / 2.0)-((max_y + min_y)/2))
-	print("MinX: %s, MaxX: %s, MinY:%s, MaxY:%s, Center: %s"%[min_x, max_x, min_y, max_y, center])
+	#print("MinX: %s, MaxX: %s, MinY:%s, MaxY:%s, Center: %s"%[min_x, max_x, min_y, max_y, center])
 	
 	var image = Image.create_empty(image_size.x, image_size.y,  false, Image.FORMAT_RGBA8)
 	for i in range(x_points.size()):
 		var x = center.x + x_points[i]
 		var y = center.y + y_points[i]
-		print("%s,%s" % [x,y])
+		#print("%s,%s" % [x,y])
 		if x >= 0 and x < image_size.x and y >= 0 and y < image_size.y:
 			image.set_pixel(x, y, range_color)
 	image.set_pixelv(center, center_color)

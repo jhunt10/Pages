@@ -76,7 +76,7 @@ func start_combat():
 	var map_data = _load_test_map()
 	combat_scene.set_init_state(map_data, actors)
 	current_scene = combat_scene
-	center_container.add_child(current_scene)
+	self.add_child(current_scene)
 
 func open_character_sheet(_actor:BaseActor=null)->EquipmentMenuContainer:
 	var actor = _actor

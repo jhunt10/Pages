@@ -14,7 +14,9 @@ func set_page(page:BaseAction):
 		tags_string += tag + ", "
 	tags_label.text = "Tags: " + tags_string.trim_suffix(", ")
 	description_label.text = page.details.description
+	range_display.visible = false
 	if page.has_preview_target():
 		var preview_params = page.get_preview_target_params(null)
 		if preview_params:
+			range_display.visible = true
 			range_display.load_area_matrix(preview_params.target_area)
