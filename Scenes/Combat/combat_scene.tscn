@@ -1235,6 +1235,7 @@ stretch_mode = 0
 
 [node name="PauseMenuControl" type="Control" parent="CombatUiControl"]
 visible = false
+z_index = 5
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1425,7 +1426,7 @@ offset_top = 503.0
 offset_right = 148.0
 offset_bottom = 559.0
 show_preview_movement = true
-show_gaps = null
+show_gaps = false
 
 [node name="QueCollectionDisplayControl" parent="CombatUiControl" instance=ExtResource("19_t74bn")]
 offset_left = 16.0

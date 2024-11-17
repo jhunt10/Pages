@@ -27,6 +27,9 @@ func get_armor_value()->int:
 func get_ward_value()->int:
 	return self.get_load_val("Ward", 0)
 
+func get_required_stat()->Dictionary:
+	return self.get_load_val("RequireStats", {})
+
 ## Returns true if this item is equipped to provided actor, or any actor if none is provided
 func is_equipped_to_actor(actor:BaseActor=null)->bool:
 	if actor:
@@ -46,6 +49,12 @@ func clear_equipt_actor():
 func set_equipt_actor(actor:BaseActor, slot:int):
 	if _equipt_to_actor_id == actor.Id:
 		return
+	
+	# Return if actor can not equipe this item
+	if !actor.equipment.can_equip_item(self):
+		# Unless they alreay think it's equiped
+		if not actor.equipment.has_equipment_in_slot(slot, self):
+			return
 	
 	var old_actor_id = _equipt_to_actor_id
 	

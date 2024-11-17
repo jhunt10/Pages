@@ -176,29 +176,25 @@ func _build_sprite_sheet():
 		if !equip_sprite_path:
 			continue
 		equip_sprite_path = equip_sprite_path.trim_suffix(".png")
-		if FileAccess.file_exists(equip_sprite_path+".png"):
-			var equip_body_texture = SpriteCache.get_sprite(equip_sprite_path + ".png")
-			if equip_body_texture:
-				var equip_image = equip_body_texture.get_image()
-				body_image.blend_rect(equip_image, sheet_rect, Vector2i.ZERO)
+		var equip_body_texture = SpriteCache.get_sprite(equip_sprite_path + ".png", true)
+		if equip_body_texture:
+			var equip_image = equip_body_texture.get_image()
+			body_image.blend_rect(equip_image, sheet_rect, Vector2i.ZERO)
 		
-		if FileAccess.file_exists(equip_sprite_path+"_MainHand.png"):
-			var equip_hand_texture = SpriteCache.get_sprite(equip_sprite_path + "_MainHand.png")
-			if equip_hand_texture:
-				var equip_image = equip_hand_texture.get_image()
-				main_hand_image.blend_rect(equip_image, sheet_rect, Vector2i.ZERO)
+		var equip_hand_texture = SpriteCache.get_sprite(equip_sprite_path + "_MainHand.png", true)
+		if equip_hand_texture:
+			var equip_image = equip_hand_texture.get_image()
+			main_hand_image.blend_rect(equip_image, sheet_rect, Vector2i.ZERO)
 		
-		if FileAccess.file_exists(equip_sprite_path+"_OffHand.png"):
-			var equip_hand_texture = SpriteCache.get_sprite(equip_sprite_path + "_OffHand.png")
-			if equip_hand_texture:
-				var equip_image = equip_hand_texture.get_image()
-				off_hand_image.blend_rect(equip_image, sheet_rect, Vector2i.ZERO)
+		var equip_off_hand_texture = SpriteCache.get_sprite(equip_sprite_path + "_OffHand.png", true)
+		if equip_off_hand_texture:
+			var equip_image = equip_off_hand_texture.get_image()
+			off_hand_image.blend_rect(equip_image, sheet_rect, Vector2i.ZERO)
 		
-		if FileAccess.file_exists(equip_sprite_path+"_TwoHand.png"):
-			var equip_hand_texture = SpriteCache.get_sprite(equip_sprite_path + "_TwoHand.png")
-			if equip_hand_texture:
-				var equip_image = equip_hand_texture.get_image()
-				two_hand_image.blend_rect(equip_image, sheet_rect, Vector2i.ZERO)
+		var equip_two_hand_texture = SpriteCache.get_sprite(equip_sprite_path + "_TwoHand.png", true)
+		if equip_two_hand_texture:
+			var equip_image = equip_two_hand_texture.get_image()
+			two_hand_image.blend_rect(equip_image, sheet_rect, Vector2i.ZERO)
 	
 	_cached_body_sprite = ImageTexture.create_from_image(body_image)
 	_cached_main_hand_over_sprite = ImageTexture.create_from_image(main_hand_image)

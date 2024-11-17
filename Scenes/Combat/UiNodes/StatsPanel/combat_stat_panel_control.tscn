@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://cyakkk5i1nreg"]
+[gd_scene load_steps=8 format=3 uid="uid://cyakkk5i1nreg"]
 
 [ext_resource type="Script" path="res://Scenes/Combat/UiNodes/StatsPanel/stat_panel_control.gd" id="1_mnhn6"]
 [ext_resource type="Texture2D" uid="uid://5sc84oyivah" path="res://assets/Sprites/UI/backpatch.png" id="2_4hrfb"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bg625rwa6bewf" path="res://data/Actors/TestActorSprite.png" id="3_f6mh4"]
 [ext_resource type="PackedScene" uid="uid://cfxkaxrmekifh" path="res://Scenes/Combat/UiNodes/StatsPanel/stat_bar_control.tscn" id="5_x5tep"]
 [ext_resource type="Texture2D" uid="uid://b3v2ga86mbxn8" path="res://data/Actions/Attack/TestHeart.png" id="7_k56th"]
+[ext_resource type="Theme" uid="uid://dwinll8pgdjhc" path="res://Scenes/Themes/standard_theme.tres" id="7_xlcc4"]
 
 [node name="StatPanelControl" type="VBoxContainer"]
 offset_right = 40.0
@@ -70,6 +71,7 @@ offset_left = -10.0
 offset_top = -23.0
 grow_horizontal = 0
 grow_vertical = 0
+theme = ExtResource("7_xlcc4")
 text = "X"
 horizontal_alignment = 2
 vertical_alignment = 2

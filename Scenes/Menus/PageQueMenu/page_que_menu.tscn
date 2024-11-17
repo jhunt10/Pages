@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://bfvirkm6ona2f"]
+[gd_scene load_steps=18 format=3 uid="uid://bfvirkm6ona2f"]
 
 [ext_resource type="Script" path="res://Scenes/Menus/PageQueMenu/page_que_menu_container.gd" id="1_gsfc6"]
 [ext_resource type="Script" path="res://Scenes/Menus/PageQueMenu/page_inventory_container.gd" id="1_iqfre"]
@@ -12,17 +12,19 @@
 [ext_resource type="Script" path="res://Scenes/Menus/PageQueMenu/page_slot_button.gd" id="6_4qrjt"]
 [ext_resource type="Script" path="res://Scenes/Menus/PageQueMenu/inventory_page_button.gd" id="6_40qok"]
 [ext_resource type="Script" path="res://Scenes/Menus/PageQueMenu/page_tag_slots_entry_container.gd" id="7_h8onf"]
+[ext_resource type="Theme" uid="uid://dwinll8pgdjhc" path="res://Scenes/Themes/standard_theme.tres" id="8_ety70"]
 [ext_resource type="PackedScene" uid="uid://c1bs8grs7gsc1" path="res://Scenes/UiNodes/MiniRangeDisplay/mini_range_display.tscn" id="9_pm8ef"]
 [ext_resource type="Script" path="res://Scenes/Menus/PageQueMenu/page_menu_mouse_control.gd" id="13_el43l"]
 [ext_resource type="Script" path="res://Scenes/UiNodes/back_patch_container.gd" id="14_vgqas"]
 [ext_resource type="Texture2D" uid="uid://s8s7rktavc7e" path="res://assets/Sprites/UI/BackPatches/Patch_32_8.png" id="15_6vqgx"]
 
-[node name="PageQueMenu" type="Container" node_paths=PackedStringArray("page_que_slots_container", "details_container", "page_inventory_container", "mouse_over_control", "background", "inner_container")]
-z_index = 2
+[node name="PageQueMenu" type="Container" node_paths=PackedStringArray("close_button", "page_que_slots_container", "details_container", "page_inventory_container", "mouse_over_control", "background", "inner_container")]
+z_index = 5
 custom_minimum_size = Vector2(628, 631)
 offset_right = 628.0
 offset_bottom = 631.0
 script = ExtResource("1_gsfc6")
+close_button = NodePath("Background/Button")
 page_que_slots_container = NodePath("InnerContainer/HBoxContainer/PageQueSlotsContainer")
 details_container = NodePath("InnerContainer/HBoxContainer/PageDetialsContainer")
 page_inventory_container = NodePath("InnerContainer/PageInventoryContainer")
@@ -38,6 +40,16 @@ patch_margin_left = 12
 patch_margin_top = 12
 patch_margin_right = 12
 patch_margin_bottom = 12
+
+[node name="Button" type="Button" parent="Background"]
+layout_mode = 2
+offset_left = 629.0
+offset_top = 3.0
+offset_right = 656.0
+offset_bottom = 34.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+text = " X "
 
 [node name="InnerContainer" type="BoxContainer" parent="."]
 layout_mode = 2
@@ -91,6 +103,7 @@ script = ExtResource("7_h8onf")
 
 [node name="Label" type="Label" parent="InnerContainer/HBoxContainer/PageQueSlotsContainer/InnerContainer/PageTagSlotsContainer"]
 layout_mode = 2
+theme = ExtResource("8_ety70")
 text = "Any:"
 
 [node name="FlowContainer" type="FlowContainer" parent="InnerContainer/HBoxContainer/PageQueSlotsContainer/InnerContainer/PageTagSlotsContainer"]
@@ -138,6 +151,7 @@ layout_mode = 2
 [node name="NameLabel" type="Label" parent="InnerContainer/HBoxContainer/PageDetialsContainer/InnerContainer/PageNameContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme = ExtResource("8_ety70")
 text = "Page Name"
 
 [node name="MiniRangeDisplay" parent="InnerContainer/HBoxContainer/PageDetialsContainer/InnerContainer/PageNameContainer" instance=ExtResource("9_pm8ef")]
@@ -153,6 +167,7 @@ layout_mode = 2
 custom_minimum_size = Vector2(200, 23)
 layout_mode = 2
 size_flags_horizontal = 3
+theme = ExtResource("8_ety70")
 text = "Tags: "
 autowrap_mode = 2
 
@@ -162,7 +177,8 @@ layout_mode = 2
 [node name="DescriptionLabel" type="RichTextLabel" parent="InnerContainer/HBoxContainer/PageDetialsContainer/InnerContainer"]
 custom_minimum_size = Vector2(0, 80)
 layout_mode = 2
-text = "Description a bunch of lon texts"
+theme = ExtResource("8_ety70")
+text = "Description a bunch of long texts"
 
 [node name="PageInventoryContainer" type="Container" parent="InnerContainer" node_paths=PackedStringArray("tab_bar", "pages_container", "premade_page_button", "background", "inner_container")]
 custom_minimum_size = Vector2(8, 8)
@@ -194,6 +210,7 @@ vertical = true
 
 [node name="TabBar" type="TabBar" parent="InnerContainer/PageInventoryContainer/InnerContainer"]
 layout_mode = 2
+theme = ExtResource("8_ety70")
 tab_count = 1
 tab_0/title = "Page"
 

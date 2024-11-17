@@ -78,14 +78,14 @@ func  get_small_page_icon(actor:BaseActor = null)->Texture2D:
 		var main_weapon:BaseWeaponEquipment = actor.equipment.get_primary_weapon()
 		if main_weapon:
 			return load(main_weapon.details.small_icon_path)
-	return ActionLibrary.get_action_icon(details.small_icon_path)
+	return SpriteCache.get_sprite(details.small_icon_path)
 
 func  get_large_page_icon(actor:BaseActor = null)->Texture2D:
 	if actor and get_load_val("UseWeaponIcons", false):
 		var main_weapon:BaseWeaponEquipment = actor.equipment.get_primary_weapon()
 		if main_weapon:
 			return load(main_weapon.details.large_icon_path)
-	return ActionLibrary.get_action_icon(details.large_icon_path)
+	return SpriteCache.get_sprite(details.large_icon_path)
 
 func list_sub_action_datas()->Array:
 	var out_list = []

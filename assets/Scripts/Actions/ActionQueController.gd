@@ -291,16 +291,19 @@ func _execute_turn_frames(game_state:GameStateData, que:ActionQue, turn_index:in
 
 # Get script either load script or retreave from cache 
 func _get_subaction(script_key:String)->BaseSubAction:
-	var subaction:BaseSubAction = subaction_script_cache.get(script_key, null)
-	if !subaction and FileAccess.file_exists(script_key):
-		var script = load(script_key)
-		if script:
-			var new_subaction = script.new()
-			subaction_script_cache[script_key] = new_subaction
-			subaction = subaction_script_cache[script_key]
+	if !subaction_script_cache.keys().has(script_key):
+		if ResourceLoader.exists(script_key):
+			var script = load(script_key)
+			if script:
+				var new_subaction = script.new()
+				subaction_script_cache[script_key] = new_subaction
+			else:
+				printerr("Failed to load subaction script: " + script_key)
+				subaction_script_cache[script_key] = null
 		else:
 			printerr("Failed to find subaction script: " + script_key)
-	return subaction
+			subaction_script_cache[script_key] = null
+	return subaction_script_cache[script_key]
 
 func _pay_turn_costs():
 	for que:ActionQue in get_active_action_ques():

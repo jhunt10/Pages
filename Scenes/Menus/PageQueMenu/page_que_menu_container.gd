@@ -2,6 +2,7 @@
 class_name PageQueMenuContainer
 extends BackPatchContainer
 
+@export var close_button:Button
 @export var page_que_slots_container:PageQueSlotsContainer
 @export var details_container:PageDetailsContainer
 @export var page_inventory_container:PageInventoryContainer
@@ -15,6 +16,7 @@ var _actor:BaseActor
 func _ready() -> void:
 	super()
 	if Engine.is_editor_hint(): return
+	close_button.pressed.connect(close_menu)
 	page_inventory_container.page_button_enter.connect(on_page_inventory_button_entered)
 	page_que_slots_container.page_slot_pressed.connect(on_page_slot_pressed)
 	page_inventory_container.page_button_clicked.connect(on_page_inventory_button_pressed)

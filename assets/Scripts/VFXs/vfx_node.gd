@@ -54,7 +54,7 @@ func set_vfx_data(data:VfxData, extra_data:Dictionary):
 	_data = data
 	if _data.sprite_name != '':
 		var sprite_path = _data.load_path.path_join(data.sprite_name)
-		if FileAccess.file_exists(sprite_path):
+		if ResourceLoader.exists(sprite_path):
 			sprite.texture = load(sprite_path)
 			sprite.hframes = _data.sprite_sheet_width
 			sprite.vframes = _data.sprite_sheet_hight

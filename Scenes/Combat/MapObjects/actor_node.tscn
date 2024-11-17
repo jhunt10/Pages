@@ -1,10 +1,11 @@
-[gd_scene load_steps=46 format=3 uid="uid://uo60871y6t54"]
+[gd_scene load_steps=47 format=3 uid="uid://uo60871y6t54"]
 
 [ext_resource type="Script" path="res://assets/Scripts/Actors/actor_node.gd" id="1_wfbib"]
 [ext_resource type="Texture2D" uid="uid://cp2wc5s8ju613" path="res://defs/Actors/Template_SpriteSheet.png" id="2_g31ob"]
 [ext_resource type="Script" path="res://Scenes/Combat/MapObjects/actor_weapon_node.gd" id="3_1fhqb"]
 [ext_resource type="Texture2D" uid="uid://clqv3gafyrfqv" path="res://defs/Actors/Template_SpriteSheet_OffHand.png" id="3_swwt0"]
 [ext_resource type="Texture2D" uid="uid://bvdyspj30c1k1" path="res://defs/Actors/Template_SpriteSheet_MainHand.png" id="7_d028b"]
+[ext_resource type="Texture2D" uid="uid://gn0hd044nt2q" path="res://defs/Items/Equipment/TestWeapons/TestFlail_WeaponSprite.png" id="7_mdhyh"]
 [ext_resource type="Texture2D" uid="uid://cv0eag85uqrls" path="res://defs/Items/Equipment/TestWeapons/TestHeavySword_WeaponSprite.png" id="8_kyaua"]
 [ext_resource type="Texture2D" uid="uid://dqhe4m5k0yht8" path="res://defs/Items/Equipment/TestWeapons/TestSpear_WeaponSprite.png" id="9_4h1bd"]
 [ext_resource type="Texture2D" uid="uid://biqv7gysaynst" path="res://defs/Actors/Template_SpriteSheet_TwoHand.png" id="10_hviaj"]
@@ -1952,7 +1953,6 @@ vframes = 2
 frame = 2
 
 [node name="MainHandOverSprite" type="Sprite2D" parent="ActorMotionNode/ActorSpriteNode/OffsetNode"]
-visible = false
 z_index = 1
 texture = ExtResource("7_d028b")
 hframes = 12
@@ -1965,19 +1965,23 @@ overhand_weapon_sprite = NodePath("MainHand_OverHandSprite")
 underhand_weapon_sprite = NodePath("MainHand_UnderHandSprite")
 hand_name = "main_hand"
 rotation_factor = 1.0
+weapon_texture = ExtResource("7_mdhyh")
 
 [node name="MainHand_OverHandSprite" type="Sprite2D" parent="ActorMotionNode/ActorSpriteNode/OffsetNode/MainHandOverSprite/MainHandWeaponNode"]
+texture = ExtResource("7_mdhyh")
 hframes = 2
 vframes = 2
 frame = 1
 
 [node name="MainHand_UnderHandSprite" type="Sprite2D" parent="ActorMotionNode/ActorSpriteNode/OffsetNode/MainHandOverSprite/MainHandWeaponNode"]
 z_index = -1
+texture = ExtResource("7_mdhyh")
 hframes = 2
 vframes = 2
 frame = 2
 
 [node name="TwoHandOverSprite" type="Sprite2D" parent="ActorMotionNode/ActorSpriteNode/OffsetNode"]
+visible = false
 z_index = 1
 texture = ExtResource("10_hviaj")
 hframes = 12

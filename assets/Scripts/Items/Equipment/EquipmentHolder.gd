@@ -76,6 +76,21 @@ func list_equipment()->Array:
 				out_list.append(item)
 	return out_list
 
+func can_equip_item(equipment:BaseEquipmentItem)->bool:
+	if !equipment:
+		return false
+	var slot = equipment.get_equipment_slot_type()
+	if slot != "Weapon" and !_slot_equipment_types.has(slot):
+		print
+		return false
+	var stat_req = equipment.get_required_stat()
+	for stat_name in stat_req.keys():
+		var req_stat_val = stat_req[stat_name]
+		var stat_val = _actor.stats.get_stat(stat_name, 0)
+		if stat_val < req_stat_val:
+			return false
+	return true
+
 func remove_equipment(equipment:BaseEquipmentItem):
 	var index = _slot_equipment_ids.find(equipment.Id)
 	if index < 0:
@@ -137,6 +152,10 @@ func clear_slot(index:int, emit_change:bool=true, skip_unbind:bool=false):
 func equip_item_to_slot(index:int, equipment:BaseEquipmentItem):
 	if index < 0 or index >= _slot_equipment_types.size() or _slot_equipment_ids[index] == equipment.Id:
 		return 
+	
+	if !can_equip_item(equipment):
+		if LOGGING: print("Does not meet stat requirments")
+		return
 		
 	var slot_type = _slot_equipment_types[index]
 	var equipment_slot_type = equipment.get_equipment_slot_type()
@@ -187,7 +206,11 @@ func equip_item_to_slot(index:int, equipment:BaseEquipmentItem):
 
 func equip_weapon_to_slot(index:int, weapon:BaseWeaponEquipment):
 	var slot_type = _slot_equipment_types[index]
-		
+	
+	if !can_equip_item(weapon):
+		if LOGGING: print("Does not meet stat requirments")
+		return
+	
 	# Handle Heavy Weapons
 	if weapon.get_weapon_class() == BaseWeaponEquipment.WeaponClasses.Heavy:
 		var off_hand_slot = _get_first_or_open_slot_of_type("OffHand")
@@ -242,6 +265,11 @@ func _clear_offhand_weapons():
 
 ## Try to equip the item to the first open slot for it's type. If no open slots are found, replace first if allowed
 func try_equip_item(equipment:BaseEquipmentItem, replace:bool=false)->bool:
+	
+	if !can_equip_item(equipment):
+		if LOGGING: print("Does not meet stat requirments")
+		return false
+	
 	var equipment_slot_type = equipment.get_equipment_slot_type()
 	if equipment_slot_type == "Weapon":
 		equipment_slot_type = "MainHand"

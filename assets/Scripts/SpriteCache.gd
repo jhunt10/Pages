@@ -4,14 +4,18 @@ const NO_SPRITE_PATH = "res://assets/Sprites/BadSprite.png"
 
 static var _cached_sprites:Dictionary = {}
 
-static func get_sprite(path:String)->Texture2D:
+static func get_sprite(path:String, nullable:bool=false)->Texture2D:
 	if not _cached_sprites.keys().has(path):
-		if not FileAccess.file_exists(path):
+		if not ResourceLoader.exists(path):
 			printerr("SpriteCache.get_sprite: No file found: '%s'." % [path])
+			if nullable:
+				return null
 			return _get_no_sprite()
 		var sprite:Texture2D = load(path)
 		if !sprite:
 			printerr("SpriteCache.get_sprite: Failed to load file as Texture2D: '%s'." % [path])
+			if nullable:
+				return null
 			return _get_no_sprite()
 		_cached_sprites[path] = sprite
 	return _cached_sprites[path]

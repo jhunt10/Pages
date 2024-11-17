@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://cxiyfaswdygu7"]
+[gd_scene load_steps=44 format=3 uid="uid://cxiyfaswdygu7"]
 
 [ext_resource type="Script" path="res://Scenes/Menus/EquipmentMenu/equipment_menu_container.gd" id="1_7xry3"]
 [ext_resource type="Script" path="res://Scenes/UiNodes/back_patch_container.gd" id="1_wprwc"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://dul8y1l1gw420" path="res://assets/Sprites/UI/BackPatches/Patch_32_8_Dark.png" id="4_bemq8"]
 [ext_resource type="Texture2D" uid="uid://di2sns34ee4ju" path="res://assets/Sprites/UI/CharacterEdit/BodySlot.png" id="4_pxhii"]
 [ext_resource type="Texture2D" uid="uid://djwy03i8oyrfm" path="res://assets/Sprites/UI/CharacterEdit/BootSlot.png" id="5_1mjak"]
+[ext_resource type="Theme" uid="uid://dwinll8pgdjhc" path="res://Scenes/Themes/standard_theme.tres" id="5_63y7a"]
 [ext_resource type="Texture2D" uid="uid://jwg5aqbw71la" path="res://assets/Sprites/UI/CharacterEdit/MainHandSlot.png" id="6_bbncy"]
 [ext_resource type="Texture2D" uid="uid://dq2cad8orar4p" path="res://assets/Sprites/UI/SymbolIcons/ArmorSymbol.png" id="7_4vrmf"]
 [ext_resource type="Texture2D" uid="uid://d17k5iaed0gdg" path="res://assets/Sprites/UI/SymbolIcons/WardSymbol.png" id="8_cwel1"]
@@ -43,12 +44,13 @@
 [ext_resource type="Script" path="res://Scenes/Menus/EquipmentMenu/mouse_over_weapon_container.gd" id="41_h0ji4"]
 [ext_resource type="PackedScene" uid="uid://c1bs8grs7gsc1" path="res://Scenes/UiNodes/MiniRangeDisplay/mini_range_display.tscn" id="41_xvul5"]
 
-[node name="EquipmentMenuContainer" type="Container" node_paths=PackedStringArray("mouse_over_control", "stats_display_container", "equipment_display_container", "inventory_container", "page_list_container", "bag_items_submenu", "edit_items_button", "dev_add_item_button", "background", "inner_container")]
-z_index = 1
-custom_minimum_size = Vector2(576, 651)
+[node name="EquipmentMenuContainer" type="Container" node_paths=PackedStringArray("exit_button", "mouse_over_control", "stats_display_container", "equipment_display_container", "inventory_container", "page_list_container", "bag_items_submenu", "edit_items_button", "dev_add_item_button", "background", "inner_container")]
+z_index = 5
+custom_minimum_size = Vector2(576, 648)
 offset_right = 576.0
-offset_bottom = 651.0
+offset_bottom = 648.0
 script = ExtResource("1_7xry3")
+exit_button = NodePath("MainContainer/HBoxContainer/StatsDisplayContainer/InnerContainer/HBoxContainer2/Button")
 mouse_over_control = NodePath("MouseOverControl")
 stats_display_container = NodePath("MainContainer/HBoxContainer/StatsDisplayContainer")
 equipment_display_container = NodePath("MainContainer/HBoxContainer/EquipSlotsContainer")
@@ -56,7 +58,7 @@ inventory_container = NodePath("MainContainer/EquiptInventoryContainer")
 page_list_container = NodePath("MainContainer/PageListContainer")
 bag_items_submenu = NodePath("MainContainer/HBoxContainer/BagItemsSubMenuContainer")
 edit_items_button = NodePath("MainContainer/PageListContainer/HBoxContainer/BagButton")
-dev_add_item_button = NodePath("MainContainer/HBoxContainer/StatsDisplayContainer/InnerContainer/AddItemOptionButton")
+dev_add_item_button = NodePath("MainContainer/HBoxContainer/StatsDisplayContainer/InnerContainer/HBoxContainer2/AddItemOptionButton")
 background = NodePath("Background")
 inner_container = NodePath("MainContainer")
 force_dimintions = Vector2i(576, 0)
@@ -78,6 +80,7 @@ vertical = true
 layout_mode = 2
 
 [node name="BagItemsSubMenuContainer" type="Container" parent="MainContainer/HBoxContainer" node_paths=PackedStringArray("close_button", "item_slots_container", "premade_item_slot_button", "background", "inner_container")]
+visible = false
 custom_minimum_size = Vector2(288, 312)
 layout_mode = 2
 script = ExtResource("27_tothq")
@@ -107,10 +110,12 @@ layout_mode = 2
 [node name="Label" type="Label" parent="MainContainer/HBoxContainer/BagItemsSubMenuContainer/InnerContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme = ExtResource("5_63y7a")
 text = "Item Bag"
 
 [node name="Button" type="Button" parent="MainContainer/HBoxContainer/BagItemsSubMenuContainer/InnerContainer/HBoxContainer"]
 layout_mode = 2
+theme = ExtResource("5_63y7a")
 text = "Close"
 
 [node name="BagItemSlotButton" type="Button" parent="MainContainer/HBoxContainer/BagItemsSubMenuContainer/InnerContainer"]
@@ -135,6 +140,7 @@ texture = ExtResource("27_1e8xt")
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
+theme = ExtResource("5_63y7a")
 text = "- - - - - - - - - - - -"
 vertical_alignment = 1
 
@@ -149,8 +155,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="EquipSlotsContainer" type="Container" parent="MainContainer/HBoxContainer" node_paths=PackedStringArray("actor_node", "armor_lable", "ward_label", "phyatk_label", "magatk_label", "mass_label", "speed_label", "page_count_label", "que_count_label", "background", "inner_container")]
-visible = false
-custom_minimum_size = Vector2(288, 312)
+custom_minimum_size = Vector2(292, 312)
 layout_mode = 2
 script = ExtResource("3_xe4rr")
 actor_node = NodePath("InnerContainer/MiddlePortraitContainer/PortaitBackground/CenterContainer/Control/Node2D/ActorNode")
@@ -330,7 +335,7 @@ texture = ExtResource("11_8n58u")
 [node name="PhysicalAttackLabel" type="Label" parent="MainContainer/HBoxContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer/MiniStatsContainer/AttacksContainer"]
 custom_minimum_size = Vector2(24, 0)
 layout_mode = 2
-theme_override_font_sizes/font_size = 14
+theme = ExtResource("5_63y7a")
 text = "999"
 
 [node name="VSeparator" type="VSeparator" parent="MainContainer/HBoxContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer/MiniStatsContainer/AttacksContainer"]
@@ -347,7 +352,7 @@ stretch_mode = 2
 [node name="MagicAttackLabel" type="Label" parent="MainContainer/HBoxContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer/MiniStatsContainer/AttacksContainer"]
 custom_minimum_size = Vector2(24, 0)
 layout_mode = 2
-theme_override_font_sizes/font_size = 14
+theme = ExtResource("5_63y7a")
 text = "999"
 
 [node name="VSeparator3" type="VSeparator" parent="MainContainer/HBoxContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer/MiniStatsContainer/AttacksContainer"]
@@ -371,7 +376,7 @@ stretch_mode = 3
 [node name="ArmorLabel" type="Label" parent="MainContainer/HBoxContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer/MiniStatsContainer/DefensesContainer"]
 custom_minimum_size = Vector2(24, 0)
 layout_mode = 2
-theme_override_font_sizes/font_size = 14
+theme = ExtResource("5_63y7a")
 text = "999"
 
 [node name="VSeparator" type="VSeparator" parent="MainContainer/HBoxContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer/MiniStatsContainer/DefensesContainer"]
@@ -388,7 +393,7 @@ stretch_mode = 2
 [node name="WardLabel" type="Label" parent="MainContainer/HBoxContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer/MiniStatsContainer/DefensesContainer"]
 custom_minimum_size = Vector2(24, 0)
 layout_mode = 2
-theme_override_font_sizes/font_size = 14
+theme = ExtResource("5_63y7a")
 text = "999"
 
 [node name="VSeparator3" type="VSeparator" parent="MainContainer/HBoxContainer/EquipSlotsContainer/InnerContainer/MiddlePortraitContainer/MiniStatsContainer/DefensesContainer"]
@@ -586,8 +591,12 @@ patch_margin_bottom = 8
 custom_minimum_size = Vector2(244, 0)
 layout_mode = 2
 
-[node name="AddItemOptionButton" type="OptionButton" parent="MainContainer/HBoxContainer/StatsDisplayContainer/InnerContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="MainContainer/HBoxContainer/StatsDisplayContainer/InnerContainer"]
 layout_mode = 2
+
+[node name="AddItemOptionButton" type="OptionButton" parent="MainContainer/HBoxContainer/StatsDisplayContainer/InnerContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
 selected = 0
 item_count = 1
 popup/item_0/text = "Dev - Add Item"
@@ -595,16 +604,23 @@ script = ExtResource("33_nmyhf")
 allways_show_none = true
 no_option_text = "Dev - Add Item"
 
+[node name="Button" type="Button" parent="MainContainer/HBoxContainer/StatsDisplayContainer/InnerContainer/HBoxContainer2"]
+layout_mode = 2
+theme = ExtResource("5_63y7a")
+text = " X "
+
 [node name="HBoxContainer" type="HBoxContainer" parent="MainContainer/HBoxContainer/StatsDisplayContainer/InnerContainer"]
 layout_mode = 2
 
 [node name="NameLabel" type="Label" parent="MainContainer/HBoxContainer/StatsDisplayContainer/InnerContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme = ExtResource("5_63y7a")
 text = "Character Name"
 
 [node name="LevelLabel" type="Label" parent="MainContainer/HBoxContainer/StatsDisplayContainer/InnerContainer/HBoxContainer"]
 layout_mode = 2
+theme = ExtResource("5_63y7a")
 text = "Lvl: 99"
 
 [node name="ScrollContainer" type="ScrollContainer" parent="MainContainer/HBoxContainer/StatsDisplayContainer/InnerContainer"]
@@ -623,6 +639,7 @@ script = ExtResource("25_7op4r")
 [node name="StatNameLabel" type="Label" parent="MainContainer/HBoxContainer/StatsDisplayContainer/InnerContainer/ScrollContainer/VBoxContainer/StatDisplayEntry"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme = ExtResource("5_63y7a")
 text = "Prop Name"
 
 [node name="VSeparator" type="VSeparator" parent="MainContainer/HBoxContainer/StatsDisplayContainer/InnerContainer/ScrollContainer/VBoxContainer/StatDisplayEntry"]
@@ -631,20 +648,21 @@ layout_mode = 2
 [node name="StatValueLabel" type="Label" parent="MainContainer/HBoxContainer/StatsDisplayContainer/InnerContainer/ScrollContainer/VBoxContainer/StatDisplayEntry"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme = ExtResource("5_63y7a")
 text = "Value"
 
 [node name="PageListContainer" type="Container" parent="MainContainer" node_paths=PackedStringArray("equipment_menu_container", "page_menu_button", "premade_page_slot_button", "page_slots_container", "background", "inner_container")]
 custom_minimum_size = Vector2(8, 40)
 layout_mode = 2
 script = ExtResource("26_pcb3t")
-margin_override = 4
-force_fill_x = true
 equipment_menu_container = NodePath("../..")
 page_menu_button = NodePath("HBoxContainer/PagesButton")
 premade_page_slot_button = NodePath("HBoxContainer/PageQueSlotButton")
 page_slots_container = NodePath("HBoxContainer/ScrollContainer/PageButtonsContainer")
 background = NodePath("NinePatchRect")
 inner_container = NodePath("HBoxContainer")
+margin_override = 4
+force_fill_x = true
 
 [node name="NinePatchRect" type="NinePatchRect" parent="MainContainer/PageListContainer"]
 layout_mode = 2
@@ -681,14 +699,17 @@ size_flags_horizontal = 3
 
 [node name="PagesButton" type="Button" parent="MainContainer/PageListContainer/HBoxContainer"]
 layout_mode = 2
+theme = ExtResource("5_63y7a")
 text = "Edit Pages"
 
 [node name="BagButton" type="Button" parent="MainContainer/PageListContainer/HBoxContainer"]
 layout_mode = 2
+theme = ExtResource("5_63y7a")
+theme_override_font_sizes/font_size = 16
 text = "Edit Items"
 
 [node name="EquiptInventoryContainer" type="Container" parent="MainContainer" node_paths=PackedStringArray("tab_bar", "items_container", "premade_item_button", "filter_option_button", "background", "inner_container")]
-custom_minimum_size = Vector2(12, 267)
+custom_minimum_size = Vector2(12, 264)
 layout_mode = 2
 script = ExtResource("13_nccae")
 tab_bar = NodePath("InnerContainer/HBoxContainer/TabBar")
@@ -717,6 +738,7 @@ layout_mode = 2
 [node name="TabBar" type="TabBar" parent="MainContainer/EquiptInventoryContainer/InnerContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme = ExtResource("5_63y7a")
 current_tab = 0
 tab_count = 6
 tab_0/title = "All"
@@ -729,6 +751,7 @@ tab_5/title = "OffHand"
 [node name="LoadedOptionButton" type="OptionButton" parent="MainContainer/EquiptInventoryContainer/InnerContainer/HBoxContainer"]
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
+theme = ExtResource("5_63y7a")
 selected = 0
 fit_to_longest_item = false
 item_count = 1
@@ -788,11 +811,12 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -58.0
-offset_top = -26.0
-offset_right = -48.0
-offset_bottom = -3.0
+offset_top = -24.0
+offset_right = -49.0
+offset_bottom = -4.0
 grow_horizontal = 0
 grow_vertical = 0
+theme = ExtResource("5_63y7a")
 text = "0"
 horizontal_alignment = 2
 
@@ -819,8 +843,10 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("5_63y7a")
 text = "0"
 horizontal_alignment = 2
+vertical_alignment = 1
 
 [node name="MouseOverControl" type="Control" parent="." node_paths=PackedStringArray("weapon_mouse_over", "mouse_over_message_container", "mouse_over_label", "drag_item_control", "drag_icon_texture_rect")]
 layout_mode = 2
@@ -835,11 +861,10 @@ drag_item_control = NodePath("DragItemControl")
 drag_icon_texture_rect = NodePath("DragItemControl/DragIconTextureRect")
 
 [node name="MouseOverDisplay" type="Container" parent="MouseOverControl" node_paths=PackedStringArray("background", "inner_container")]
-visible = false
-custom_minimum_size = Vector2(95, 31)
+custom_minimum_size = Vector2(94, 28)
 layout_mode = 0
-offset_right = 95.0
-offset_bottom = 31.0
+offset_right = 94.0
+offset_bottom = 28.0
 mouse_filter = 2
 script = ExtResource("1_wprwc")
 background = NodePath("NinePatchRect")
@@ -862,13 +887,15 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="MouseOverControl/MouseOverDisplay/BoxContainer/HBoxContainer"]
 layout_mode = 2
+theme = ExtResource("5_63y7a")
 text = "Item Name"
 
 [node name="MouseOverWeaponDisplay" type="Container" parent="MouseOverControl" node_paths=PackedStringArray("range_display", "label", "tags_label", "damage_label", "physical_attack_icon", "magic_attack_icon", "background", "inner_container")]
-custom_minimum_size = Vector2(200, 62)
+visible = false
+custom_minimum_size = Vector2(200, 56)
 layout_mode = 0
 offset_right = 200.0
-offset_bottom = 62.0
+offset_bottom = 56.0
 mouse_filter = 2
 script = ExtResource("41_h0ji4")
 range_display = NodePath("BoxContainer/HBoxContainer/MiniRangeDisplay")
@@ -904,6 +931,7 @@ size_flags_horizontal = 3
 [node name="Label" type="Label" parent="MouseOverControl/MouseOverWeaponDisplay/BoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme = ExtResource("5_63y7a")
 text = "Item Name"
 
 [node name="DamageContainer" type="HBoxContainer" parent="MouseOverControl/MouseOverWeaponDisplay/BoxContainer/HBoxContainer/VBoxContainer"]
@@ -919,6 +947,8 @@ texture = ExtResource("12_d5j8h")
 
 [node name="DamageLabel" type="Label" parent="MouseOverControl/MouseOverWeaponDisplay/BoxContainer/HBoxContainer/VBoxContainer/DamageContainer"]
 layout_mode = 2
+theme = ExtResource("5_63y7a")
+text = "100 + 10% Slashing"
 
 [node name="MiniRangeDisplay" parent="MouseOverControl/MouseOverWeaponDisplay/BoxContainer/HBoxContainer" instance=ExtResource("41_xvul5")]
 layout_mode = 2

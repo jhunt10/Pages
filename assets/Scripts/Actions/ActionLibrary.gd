@@ -42,18 +42,19 @@ static func get_action(action_key:String)->BaseAction:
 		printerr("ActionLibrary.get_action: No item found with id '%s'." % [action_key])
 	return action
 
-static func get_action_icon(file_path:String)->Texture2D:
-	if !_cached_icon_sprites.keys().has(file_path):
-		var sprite = load(file_path)
-		if sprite:
-			_cached_icon_sprites[file_path] = sprite
-		elif file_path == NO_ICON_SPRITE:
-			printerr("Failed to find NO_ICON_SPRITE at: %s" % [file_path])
-			_cached_icon_sprites[file_path] = null
-		else:
-			printerr("Failed to find action_icon: %s" % [file_path])
-			_cached_icon_sprites[file_path] = get_action(NO_ICON_SPRITE)
-	return _cached_icon_sprites[file_path]
+#static func get_action_icon(file_path:String)->Texture2D:
+	##return SpriteCache.get_sprite(file_path)
+	#if !_cached_icon_sprites.keys().has(file_path):
+		#var sprite = load(file_path)
+		#if sprite:
+			#_cached_icon_sprites[file_path] = sprite
+		#elif file_path == NO_ICON_SPRITE:
+			#printerr("Failed to find NO_ICON_SPRITE at: %s" % [file_path])
+			#_cached_icon_sprites[file_path] = null
+		#else:
+			#printerr("Failed to find action_icon: %s" % [file_path])
+			#_cached_icon_sprites[file_path] = get_action(NO_ICON_SPRITE)
+	#return _cached_icon_sprites[file_path]
 
 static func get_sub_action_script(script_path)->BaseSubAction:
 	if _cached_subaction_scripts.keys().has(script_path):

@@ -4,6 +4,7 @@ extends BackPatchContainer
 
 signal menu_closed
 
+@export var exit_button:Button
 @export var mouse_over_control:EquipmentMenuMouseControl
 @export var stats_display_container:StatsDisplayContainer
 @export var equipment_display_container:EquipmentDisplayContainer
@@ -26,6 +27,7 @@ var page_que_menu:PageQueMenuContainer
 func _ready() -> void:
 	super()
 	if Engine.is_editor_hint(): return
+	exit_button.pressed.connect(close_menu)
 	if bag_items_submenu.visible:
 		close_bag_items_submenu()
 	inventory_container.item_button_down.connect(set_dragging_item)
@@ -66,13 +68,13 @@ func _input(event: InputEvent) -> void:
 		self.close_menu()
 
 func close_menu():
-	if page_que_menu:
-		page_que_menu.close_menu()
-		page_que_menu = null
-	else:
-		ActorLibrary.save_actors()
-		ItemLibrary.save_items()
-		self.queue_free()
+	#if page_que_menu:
+		#page_que_menu.close_menu()
+		#page_que_menu = null
+	#else:
+	ActorLibrary.save_actors()
+	ItemLibrary.save_items()
+	self.queue_free()
 
 func open_bag_items_submenu():
 	equipment_display_container.visible = false
@@ -87,6 +89,7 @@ func close_bag_items_submenu():
 func open_page_que_menu():
 	if page_que_menu == null:
 		page_que_menu = MainRootNode.Instance.open_page_menu(_actor)
+		page_que_menu.z_index = self.z_index + 5
 	else:
 		page_que_menu.set_actor(_actor)
 
