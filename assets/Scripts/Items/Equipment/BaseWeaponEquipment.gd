@@ -19,7 +19,8 @@ func get_equipment_slot_type()->String:
 
 func get_item_tags()->Array:
 	var tags = super()
-	tags.append("Weapon")
+	if !tags.has("Weapon"):
+		tags.append("Weapon")
 	return tags
 
 func get_weapon_class()->WeaponClasses:

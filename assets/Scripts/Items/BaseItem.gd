@@ -33,7 +33,7 @@ func get_item_type()->ItemTypes:
 	return ItemTypes.KeyItem
 
 func get_item_tags()->Array:
-	return details.tags
+	return details.tags.duplicate()
 
 func get_large_icon()->Texture2D:
 	return SpriteCache.get_sprite(details.large_icon_path)

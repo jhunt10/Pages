@@ -15,7 +15,8 @@ func get_item_type()->ItemTypes:
 
 func get_item_tags()->Array:
 	var tags = super()
-	tags.append("Equipment")
+	if !tags.has("Equipment"):
+		tags.append("Equipment")
 	return tags
 
 func get_equipment_slot_type()->String:

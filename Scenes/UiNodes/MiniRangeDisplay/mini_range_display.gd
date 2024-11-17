@@ -38,7 +38,7 @@ func load_range(points:Array):
 			y_points.append(point[1])
 	
 	
-	var max_size = max(max_x + 1 - min_x, max_y + 1 - min_y)
+	var max_size = max(max_x + 1 - min_x, max_y + 1 - min_y, 5)
 	var image_size = Vector2i(max_size, max_size)
 	if max_x - min_x > 5 or max_y - min_y > 5:
 		image_size = Vector2i(11,11)
