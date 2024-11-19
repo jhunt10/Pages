@@ -573,7 +573,6 @@ min_value = -180.0
 max_value = 180.0
 
 [node name="StatsDisplayContainer" type="Container" parent="MainContainer/HBoxContainer" node_paths=PackedStringArray("name_label", "level_label", "premade_stat_entry", "entry_container", "background", "inner_container")]
-visible = false
 custom_minimum_size = Vector2(260, 16)
 layout_mode = 2
 script = ExtResource("24_2alwo")
@@ -611,6 +610,7 @@ allways_show_none = true
 no_option_text = "Dev - Add Item"
 
 [node name="Button" type="Button" parent="MainContainer/HBoxContainer/StatsDisplayContainer/InnerContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(48, 48)
 layout_mode = 2
 theme = ExtResource("5_63y7a")
 text = " X "
@@ -658,6 +658,7 @@ theme = ExtResource("5_63y7a")
 text = "Value"
 
 [node name="EquipmenDetailsContainer" type="Container" parent="MainContainer/HBoxContainer" node_paths=PackedStringArray("close_button", "icon", "title_label", "tags_label", "description_label", "equip_button", "armor_details", "weapon_details", "book_details", "background", "inner_container")]
+visible = false
 custom_minimum_size = Vector2(260, 16)
 layout_mode = 2
 script = ExtResource("32_1iwer")
@@ -693,6 +694,7 @@ layout_mode = 2
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 texture = ExtResource("27_1e8xt")
+stretch_mode = 3
 
 [node name="IconTextureRect" type="TextureRect" parent="MainContainer/HBoxContainer/EquipmenDetailsContainer/InnerContainer/TitleContainer/TextureRect"]
 layout_mode = 1
@@ -701,9 +703,10 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+stretch_mode = 3
 
 [node name="TitleLabel" type="Label" parent="MainContainer/HBoxContainer/EquipmenDetailsContainer/InnerContainer/TitleContainer"]
-custom_minimum_size = Vector2(176, 0)
+custom_minimum_size = Vector2(156, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
@@ -714,6 +717,7 @@ vertical_alignment = 1
 autowrap_mode = 2
 
 [node name="CloseButton" type="Button" parent="MainContainer/HBoxContainer/EquipmenDetailsContainer/InnerContainer/TitleContainer"]
+custom_minimum_size = Vector2(48, 48)
 layout_mode = 2
 theme = ExtResource("5_63y7a")
 text = " X "

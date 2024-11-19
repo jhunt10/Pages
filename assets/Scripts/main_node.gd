@@ -45,30 +45,30 @@ func start_combat():
 		'IsPlayer': false,
 		'IsEnemy':true
 	})
-	actors.append({
-		'ActorId': 'TestTarget_ID2',
-		'Pos': MapPos.new(5,6,0,2),
-		'IsPlayer': false,
-		'IsEnemy':true
-	})
-	actors.append({
-		'ActorId': 'TestTarget_ID3',
-		'Pos': MapPos.new(4,1,0,2),
-		'IsPlayer': false,
-		'IsEnemy':true
-	})
-	actors.append({
-		'ActorId': 'TestTarget_ID4',
-		'Pos': MapPos.new(3,5,0,2),
-		'IsPlayer': false,
-		'IsEnemy':true
-	})
-	actors.append({
-		'ActorId': 'TestTarget_ID5',
-		'Pos': MapPos.new(8,5,0,2),
-		'IsPlayer': false,
-		'IsEnemy':true
-	})
+	#actors.append({
+		#'ActorId': 'TestTarget_ID2',
+		#'Pos': MapPos.new(5,6,0,2),
+		#'IsPlayer': false,
+		#'IsEnemy':true
+	#})
+	#actors.append({
+		#'ActorId': 'TestTarget_ID3',
+		#'Pos': MapPos.new(4,1,0,2),
+		#'IsPlayer': false,
+		#'IsEnemy':true
+	#})
+	##actors.append({
+		##'ActorId': 'TestTarget_ID4',
+		##'Pos': MapPos.new(3,5,0,2),
+		##'IsPlayer': false,
+		##'IsEnemy':true
+	##})
+	##actors.append({
+		##'ActorId': 'TestTarget_ID5',
+		##'Pos': MapPos.new(8,5,0,2),
+		##'IsPlayer': false,
+		##'IsEnemy':true
+	##})
 	#actors.append({
 		#'ActorKey': 'TestTarget',
 		#'Pos': MapPos.new(6,2,0,0),
@@ -78,13 +78,16 @@ func start_combat():
 	current_scene = combat_scene
 	self.add_child(current_scene)
 
-func open_character_sheet(_actor:BaseActor=null)->EquipmentMenuContainer:
+func open_character_sheet(_actor:BaseActor=null, parent_node=null)->EquipmentMenuContainer:
 	var actor = _actor
 	if not actor:
 		actor = ActorLibrary.get_actor("TestActor_ID")
 		#actor = ActorLibrary.create_actor("TestActor", {})
 	var charsheet:EquipmentMenuContainer = load("res://Scenes/Menus/EquipmentMenu/equipment_menu.tscn").instantiate()
-	center_container.add_child(charsheet)
+	if parent_node:
+		parent_node.add_child(charsheet)
+	else:
+		center_container.add_child(charsheet)
 	charsheet.set_actor(actor)
 	return charsheet
 

@@ -1,10 +1,12 @@
 class_name ActorNode
 extends Node2D
 
-const LOGGING = true
+const LOGGING = false
 
+@onready var vfx_holder:Node2D = $VFXHolder
 @onready var animation:AnimationPlayer = $AnimationPlayer
 @onready var animation_tree:AnimationTree = $AnimationTree
+@onready var path_arrow:Sprite2D = $PathArrow
 
 @onready var offset_node:Node2D = $ActorMotionNode/ActorSpriteNode/OffsetNode
 
@@ -276,3 +278,26 @@ func set_corpse_sprite():
 	actor_sprite.vframes = 1
 	actor_sprite.hframes = 1
 	actor_sprite.offset = Vector2i.ZERO
+
+func hide_path_arrow():
+	path_arrow.visible = false
+
+func reset_path_arrow():
+	path_arrow.visible = true
+	path_arrow.position = Vector2.ZERO
+	if rot_dir == 0: path_arrow.set_rotation_degrees(0) 
+	if rot_dir == 1: path_arrow.set_rotation_degrees(90) 
+	if rot_dir == 2: path_arrow.set_rotation_degrees(180) 
+	if rot_dir == 3: path_arrow.set_rotation_degrees(270) 
+
+func set_path_arrow_pos(pos:MapPos):
+	if not path_arrow.visible:
+		path_arrow.visible = true
+	var tile_map = get_parent() as TileMapLayer
+	var local_pos = tile_map.map_to_local(Vector2i(pos.x, pos.y)) - self.position
+	path_arrow.position = local_pos
+	path_arrow.visible = true
+	if pos.dir == 0: path_arrow.set_rotation_degrees(0) 
+	if pos.dir == 1: path_arrow.set_rotation_degrees(90) 
+	if pos.dir == 2: path_arrow.set_rotation_degrees(180) 
+	if pos.dir == 3: path_arrow.set_rotation_degrees(270) 

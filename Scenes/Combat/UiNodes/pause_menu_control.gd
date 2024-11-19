@@ -22,5 +22,8 @@ func _on_close_menu():
 	CombatUiControl.ui_state_controller.back_to_last_state()
 
 func _on_character():
-	MainRootNode.Instance.open_character_sheet(CombatUiControl.Instance.stat_panel_control.actor)
+			CombatUiControl.ui_state_controller.set_ui_state(
+				UiStateController.UiStates.CharacterSheet, 
+				{"ActorId":CombatUiControl.Instance.stat_panel_control.actor.Id},
+				false)
 	

@@ -7,7 +7,7 @@ const PADDING = 8
 @onready var main_container:HBoxContainer = $HBoxContainer
 @onready var slot_button_prefab:TextureButton = $HBoxContainer/PageSlotButtonPrefab
 @onready var slots_container:HBoxContainer = $HBoxContainer/SlotsContainer
-@onready var que_path_arrow:Sprite2D = $QuePathArrow
+#@onready var que_path_arrow:Sprite2D = $QuePathArrow
 
 @export var show_preview_movement:bool
 @export var show_gaps:bool
@@ -21,8 +21,8 @@ var _delayed_init = false
 
 func _ready():
 	slot_button_prefab.visible = false
-	if !show_preview_movement:
-		que_path_arrow.visible = false
+	#if !show_preview_movement:
+		#que_path_arrow.visible = false
 	CombatRootControl.QueController.que_ordering_changed.connect(_build_slots)
 	CombatRootControl.QueController.start_of_round.connect(_hide_preview_path)
 	CombatRootControl.QueController.end_of_round.connect(_show_preview_path)
@@ -112,23 +112,18 @@ func _slot_pressed(index:int):
 	_actor.Que.delete_at_index(index)
 
 func _hide_preview_path():
-	que_path_arrow.visible = false
+	#que_path_arrow.visible = false
+	_actor.node.hide_path_arrow()
 
 func _show_preview_path():
-	que_path_arrow.visible = show_preview_movement
+	#que_path_arrow.visible = show_preview_movement
+	_actor.node.reset_path_arrow()
 
 func _preview_que_path():
-	if not show_preview_movement or !que_path_arrow:
-		return
+	#if not show_preview_movement or !que_path_arrow:
+		#return
 	var preview_pos = _actor.Que.get_movement_preview_pos()
 	if !preview_pos:
 		return
-	var local_map_pos = CombatRootControl.Instance.MapController.actor_tile_map.map_to_local(Vector2i(preview_pos.x, preview_pos.y))
-	var global_map_pos = CombatRootControl.Instance.MapController.actor_tile_map.global_position + local_map_pos
-	que_path_arrow.global_position = global_map_pos
-	que_path_arrow.visible = true
-	if preview_pos.dir == 0: que_path_arrow.set_rotation_degrees(0) 
-	if preview_pos.dir == 1: que_path_arrow.set_rotation_degrees(90) 
-	if preview_pos.dir == 2: que_path_arrow.set_rotation_degrees(180) 
-	if preview_pos.dir == 3: que_path_arrow.set_rotation_degrees(270) 
+	_actor.node.set_path_arrow_pos(preview_pos)
 	movement_preview_pos = preview_pos

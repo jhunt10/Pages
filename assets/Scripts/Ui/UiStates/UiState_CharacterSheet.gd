@@ -9,8 +9,8 @@ func _init(controler:UiStateController, args:Dictionary) -> void:
 	var actor = CombatRootControl.Instance.GameState.get_actor(actor_id)
 	if not actor:
 		return
-	var menu = MainRootNode.Instance.open_character_sheet(actor)
-	menu.on_closed.connect(on_menu_closed)
+	var menu = MainRootNode.Instance.open_character_sheet(actor, CombatUiControl.Instance.menu_container)
+	menu.menu_closed.connect(on_menu_closed)
 	
 	
 

@@ -1,8 +1,7 @@
-[gd_scene load_steps=9 format=4 uid="uid://dcan2k534n88q"]
+[gd_scene load_steps=8 format=4 uid="uid://dcan2k534n88q"]
 
 [ext_resource type="Texture2D" uid="uid://dxan6lyrg8db3" path="res://assets/Sprites/TileSets/GrassPath_TileSheet.png" id="1_55p3y"]
 [ext_resource type="Script" path="res://Scenes/Maps/tile_map_outputer.gd" id="2_h1apl"]
-[ext_resource type="PackedScene" uid="uid://uo60871y6t54" path="res://Scenes/Combat/MapObjects/actor_node.tscn" id="3_acdgf"]
 [ext_resource type="Texture2D" uid="uid://cp7wugglf6mfb" path="res://assets/Sprites/TileSets/Tree_TileSet.png" id="3_w22i8"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lwpvo"]
@@ -962,8 +961,5 @@ tile_set = SubResource("TileSet_3ewkw")
 visible = false
 tile_map_data = PackedByteArray("AAAOAAQAAQABAAEAAAAOAAMAAQABAAAAAAABAAQAAQABAAAAAAACAAMAAQABAAAAAAAEAAEAAQABAAAAAAA=")
 tile_set = SubResource("TileSet_4uxfv")
-
-[node name="ActorNode" parent="." instance=ExtResource("3_acdgf")]
-position = Vector2(40, 214)
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]

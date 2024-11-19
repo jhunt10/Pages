@@ -79,6 +79,7 @@ func close_menu():
 	#else:
 	ActorLibrary.save_actors()
 	ItemLibrary.save_items()
+	menu_closed.emit()
 	self.queue_free()
 
 func open_bag_items_submenu():

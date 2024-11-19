@@ -4,6 +4,7 @@ extends Control
 signal actor_spawned(actor:BaseActor)
 
 @export var ui_control:CombatUiControl
+@export var camera:MoveableCamera2D
 
 @onready var MapController:MapControllerNode = $MapControlerNode
 
@@ -46,6 +47,7 @@ func _ready() -> void:
 			actor.FactionIndex = 0
 			ui_control.set_player_actor(actor)
 			add_actor(actor, 0, actor_pos)
+			camera.snap_to_map_pos(actor_pos)
 		else:
 			add_actor(actor, 1, actor_pos)
 		
@@ -119,7 +121,7 @@ func create_damage_effect(actor:BaseActor, vfx_key:String, flash_number:int):
 	if !vfx_node:
 		printerr("Failed to create VFX node from key '%s'." % [vfx_key])
 		return
-	actor_node.add_child(vfx_node)
+	actor_node.vfx_holder.add_child(vfx_node)
 	if flash_number >= 0:
 		if flash_number > 0 and vfx_node._data.shake_actor:
 			actor_node.play_shake()
@@ -131,7 +133,7 @@ func create_damage_effect(actor:BaseActor, vfx_key:String, flash_number:int):
 
 func create_flash_text_on_actor(actor:BaseActor, value:String, color:Color):
 	var actor_node:ActorNode = MapController.actor_nodes[actor.Id]
-	create_flash_text(actor_node, value, color)
+	create_flash_text(actor_node.vfx_holder, value, color)
 	
 
 func create_flash_text(parent_node:Node, value:String, color:Color):

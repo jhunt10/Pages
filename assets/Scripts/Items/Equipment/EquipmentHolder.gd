@@ -1,6 +1,6 @@
 class_name EquipmentHolder
 
-const LOGGING = true
+const LOGGING = false
 
 var _actor:BaseActor
 

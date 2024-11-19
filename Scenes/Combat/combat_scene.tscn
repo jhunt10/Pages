@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=4 uid="uid://dfeilp6hbiuqs"]
+[gd_scene load_steps=37 format=4 uid="uid://dfeilp6hbiuqs"]
 
 [ext_resource type="Script" path="res://Scenes/Combat/combat_scene.gd" id="1_crigy"]
 [ext_resource type="Script" path="res://assets/Scripts/Map/map_controler_node.gd" id="3_vohw8"]
@@ -14,6 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://5sc84oyivah" path="res://assets/Sprites/UI/backpatch.png" id="10_8c137"]
 [ext_resource type="PackedScene" uid="uid://6dlh0wlnsedb" path="res://Scenes/Combat/UiNodes/QueInput/que_input_control.tscn" id="14_atc5n"]
 [ext_resource type="PackedScene" uid="uid://cyakkk5i1nreg" path="res://Scenes/Combat/UiNodes/StatsPanel/combat_stat_panel_control.tscn" id="16_jsy0k"]
+[ext_resource type="Script" path="res://Scenes/Combat/MoveableCamera2D.gd" id="17_7dull"]
 [ext_resource type="Script" path="res://Scenes/Combat/UiNodes/pause_menu_control.gd" id="18_acqto"]
 [ext_resource type="Script" path="res://Scenes/Combat/UiNodes/QueInput/item_select_menu_control.gd" id="19_p0l6r"]
 [ext_resource type="PackedScene" uid="uid://bti610xcgtmrs" path="res://Scenes/Combat/UiNodes/QueCollection/que_collection_display_control.tscn" id="19_t74bn"]
@@ -1163,7 +1164,7 @@ sources/0 = SubResource("TileSetAtlasSource_xnl3u")
 
 [sub_resource type="TileSet" id="TileSet_lvs5x"]
 
-[node name="CombatRootControl" type="Control" node_paths=PackedStringArray("ui_control")]
+[node name="CombatRootControl" type="Control" node_paths=PackedStringArray("ui_control", "camera")]
 custom_minimum_size = Vector2(1152, 648)
 layout_mode = 3
 anchors_preset = 15
@@ -1175,15 +1176,18 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 2
 script = ExtResource("1_crigy")
-ui_control = NodePath("CombatUiControl")
+ui_control = NodePath("MoveableCamera2D/CanvasLayer/CombatUiControl")
+camera = NodePath("MoveableCamera2D")
 
 [node name="MapControlerNode" type="Node2D" parent="."]
-position = Vector2(398, 99)
 script = ExtResource("3_vohw8")
 
 [node name="TerrainTileMap" type="TileMapLayer" parent="MapControlerNode"]
 tile_map_data = PackedByteArray("AAAAAAAAAAABAAAAAAAAAAEAAAAAAAEAAAAAAAIAAAAAAAEAAAAAAAMAAAAAAAEAAAAAAAQAAAAAAAEAAAAAAAUAAAAAAAEAAAAAAAYAAAAAAAEAAAAAAAcAAAAAAAEAAAAAAAgAAAAAAAIAAAABAAAAAAACAAMAAAABAAEAAAAKAAEAAAABAAIAAAAKAAEAAAABAAMAAAAKAAEAAAABAAQAAAAKAAEAAAABAAUAAAAKAAEAAAABAAYAAAAKAAEAAAABAAcAAAAKAAEAAAABAAgAAAAKAAEAAAACAAAAAAACAAMAAAACAAEAAAAKAAEAAAACAAIAAAAKAAEAAAACAAMAAAAKAAEAAAACAAQAAAAKAAEAAAACAAUAAAAKAAEAAAACAAYAAAAKAAEAAAACAAcAAAAKAAEAAAACAAgAAAAKAAEAAAADAAAAAAACAAMAAAADAAEAAAAKAAEAAAADAAIAAAAKAAEAAAADAAMAAAAAAAMAAAADAAQAAAAKAAEAAAADAAUAAAAKAAEAAAADAAYAAAAKAAEAAAADAAcAAAAKAAEAAAADAAgAAAAKAAEAAAAEAAAAAAACAAMAAAAEAAEAAAAKAAEAAAAEAAIAAAAKAAEAAAAEAAMAAAAKAAEAAAAEAAQAAAAKAAEAAAAEAAUAAAAKAAEAAAAEAAYAAAAKAAEAAAAEAAcAAAAKAAEAAAAEAAgAAAAKAAEAAAAFAAAAAAACAAMAAAAFAAEAAAAKAAEAAAAFAAIAAAAKAAEAAAAFAAMAAAAKAAEAAAAFAAQAAAAKAAEAAAAFAAUAAAAKAAEAAAAFAAYAAAAKAAEAAAAFAAcAAAAKAAEAAAAFAAgAAAAKAAEAAAAGAAAAAAACAAMAAAAGAAEAAAAKAAEAAAAGAAIAAAAKAAEAAAAGAAMAAAAKAAEAAAAGAAQAAAAKAAEAAAAGAAUAAAAKAAEAAAAGAAYAAAAKAAEAAAAGAAcAAAAKAAEAAAAGAAgAAAAKAAEAAAAHAAAAAAACAAMAAAAHAAEAAAAKAAEAAAAHAAIAAAAKAAEAAAAHAAMAAAAAAAMAAAAHAAQAAAAKAAEAAAAHAAUAAAAKAAEAAAAHAAYAAAAKAAEAAAAHAAcAAAAKAAEAAAAHAAgAAAAKAAEAAAAIAAAAAAACAAMAAAAIAAEAAAAKAAEAAAAIAAIAAAAKAAEAAAAIAAMAAAAKAAEAAAAIAAQAAAAKAAEAAAAIAAUAAAAKAAEAAAAIAAYAAAAKAAEAAAAIAAcAAAAKAAEAAAAIAAgAAAAKAAEAAAAJAAAAAAACAAMAAAAKAAAAAAADAAAAAAAKAAEAAAAAAAEAAAAKAAIAAAAAAAEAAAAKAAMAAAAAAAEAAAAKAAQAAAAAAAEAAAAKAAUAAAAAAAEAAAAKAAYAAAAAAAEAAAAKAAcAAAAAAAEAAAAKAAgAAAAAAAEAAAAKAAkAAAAAAAIAAAA=")
 tile_set = SubResource("TileSet_th678")
+
+[node name="Node2D" parent="MapControlerNode" instance=ExtResource("7_ce1oe")]
+y_sort_enabled = true
 
 [node name="TargetAreaDisplayNode" type="Node2D" parent="MapControlerNode"]
 script = ExtResource("5_17esk")
@@ -1193,9 +1197,6 @@ tile_set = SubResource("TileSet_hpguw")
 
 [node name="EffectAreaTileMap" type="TileMapLayer" parent="MapControlerNode/TargetAreaDisplayNode"]
 tile_set = SubResource("TileSet_lvs5x")
-
-[node name="Node2D" parent="MapControlerNode" instance=ExtResource("7_ce1oe")]
-y_sort_enabled = true
 
 [node name="ActorTileMap" type="TileMapLayer" parent="MapControlerNode"]
 y_sort_enabled = true
@@ -1208,30 +1209,149 @@ position = Vector2(42, 208)
 texture = ExtResource("7_7lt4y")
 script = ExtResource("8_wf3xb")
 
-[node name="CombatUiControl" type="Control" parent="." node_paths=PackedStringArray("menu_button", "pause_menu", "stat_panel_control", "que_input", "que_display", "que_collection_display")]
+[node name="MoveableCamera2D" type="Camera2D" parent="."]
+script = ExtResource("17_7dull")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="MoveableCamera2D"]
+
+[node name="DevDataControl" type="Control" parent="MoveableCamera2D/CanvasLayer"]
+layout_mode = 3
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -108.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = 61.0
+grow_horizontal = 0
+script = ExtResource("19_yc3tw")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="MoveableCamera2D/CanvasLayer/DevDataControl"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+texture = ExtResource("20_6lcyn")
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MoveableCamera2D/CanvasLayer/DevDataControl"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TimerContainer" type="HBoxContainer" parent="MoveableCamera2D/CanvasLayer/DevDataControl/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MoveableCamera2D/CanvasLayer/DevDataControl/VBoxContainer/TimerContainer"]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "8:24"
+horizontal_alignment = 2
+
+[node name="QueCalControl" type="Control" parent="MoveableCamera2D/CanvasLayer/DevDataControl"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -254.0
+offset_top = 87.0
+offset_right = -98.0
+offset_bottom = 158.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("22_4rk3c")
+
+[node name="NinePatchRect2" type="NinePatchRect" parent="MoveableCamera2D/CanvasLayer/DevDataControl/QueCalControl"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("20_6lcyn")
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MoveableCamera2D/CanvasLayer/DevDataControl/QueCalControl"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="QueSlotsContainer" type="HBoxContainer" parent="MoveableCamera2D/CanvasLayer/DevDataControl/QueCalControl/VBoxContainer"]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 0
+script = ExtResource("23_tcvpd")
+
+[node name="QueSlotRect" type="NinePatchRect" parent="MoveableCamera2D/CanvasLayer/DevDataControl/QueCalControl/VBoxContainer/QueSlotsContainer"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+texture = ExtResource("23_o55pl")
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+
+[node name="RedBar" type="TextureRect" parent="MoveableCamera2D/CanvasLayer/DevDataControl/QueCalControl"]
+modulate = Color(1, 0, 0, 1)
+custom_minimum_size = Vector2(1, 124)
+layout_mode = 0
+offset_right = 2.0
+offset_bottom = 120.0
+texture = ExtResource("24_5fn7e")
+expand_mode = 4
+
+[node name="CombatUiControl" type="Control" parent="MoveableCamera2D/CanvasLayer" node_paths=PackedStringArray("menu_container", "menu_button", "pause_menu", "stat_panel_control", "que_input", "que_display", "que_collection_display", "stats_collection_display")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 mouse_filter = 2
 script = ExtResource("8_8l3el")
+menu_container = NodePath("../CenterContainer")
 menu_button = NodePath("MenuButton")
 pause_menu = NodePath("PauseMenuControl")
 stat_panel_control = NodePath("StatPanelControl")
 que_input = NodePath("QueInputControl")
 que_display = NodePath("QueDisplayControl")
 que_collection_display = NodePath("QueCollectionDisplayControl")
+stats_collection_display = NodePath("StatCollectionDisplayControl")
 
-[node name="StatPanelControl" parent="CombatUiControl" instance=ExtResource("16_jsy0k")]
+[node name="StatPanelControl" parent="MoveableCamera2D/CanvasLayer/CombatUiControl" instance=ExtResource("16_jsy0k")]
 layout_mode = 0
 offset_left = 8.0
 offset_top = 8.0
 offset_right = 184.0
 offset_bottom = 86.0
 
-[node name="MenuButton" type="TextureButton" parent="CombatUiControl"]
+[node name="MenuButton" type="TextureButton" parent="MoveableCamera2D/CanvasLayer/CombatUiControl"]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -1249,136 +1369,7 @@ texture_pressed = ExtResource("22_eoo3l")
 texture_disabled = ExtResource("22_eoo3l")
 stretch_mode = 0
 
-[node name="PauseMenuControl" type="Control" parent="CombatUiControl"]
-visible = false
-z_index = 5
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("18_acqto")
-
-[node name="ColorRect" type="ColorRect" parent="CombatUiControl/PauseMenuControl"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.266667, 0.266667, 0.266667, 0.521569)
-
-[node name="HBoxContainer" type="HBoxContainer" parent="CombatUiControl/PauseMenuControl"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-alignment = 1
-
-[node name="VBoxContainer" type="VBoxContainer" parent="CombatUiControl/PauseMenuControl/HBoxContainer"]
-layout_mode = 2
-alignment = 1
-
-[node name="ButtonContainer4" type="HBoxContainer" parent="CombatUiControl/PauseMenuControl/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-alignment = 1
-
-[node name="CharacterButton" type="TextureButton" parent="CombatUiControl/PauseMenuControl/HBoxContainer/VBoxContainer/ButtonContainer4"]
-layout_mode = 2
-texture_normal = ExtResource("19_u4d2a")
-texture_pressed = ExtResource("20_jcfy7")
-texture_disabled = ExtResource("20_jcfy7")
-stretch_mode = 0
-
-[node name="Label" type="Label" parent="CombatUiControl/PauseMenuControl/HBoxContainer/VBoxContainer/ButtonContainer4/CharacterButton"]
-modulate = Color(0.462291, 0.462291, 0.462291, 1)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 32
-text = "Character"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="ButtonContainer" type="HBoxContainer" parent="CombatUiControl/PauseMenuControl/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-alignment = 1
-
-[node name="MainMenuButton" type="TextureButton" parent="CombatUiControl/PauseMenuControl/HBoxContainer/VBoxContainer/ButtonContainer"]
-layout_mode = 2
-texture_normal = ExtResource("19_u4d2a")
-texture_pressed = ExtResource("20_jcfy7")
-texture_disabled = ExtResource("20_jcfy7")
-stretch_mode = 0
-
-[node name="Label" type="Label" parent="CombatUiControl/PauseMenuControl/HBoxContainer/VBoxContainer/ButtonContainer/MainMenuButton"]
-modulate = Color(0.462291, 0.462291, 0.462291, 1)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 32
-text = "Main Menu"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="ButtonContainer2" type="HBoxContainer" parent="CombatUiControl/PauseMenuControl/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-alignment = 1
-
-[node name="QuitButton" type="TextureButton" parent="CombatUiControl/PauseMenuControl/HBoxContainer/VBoxContainer/ButtonContainer2"]
-layout_mode = 2
-texture_normal = ExtResource("19_u4d2a")
-texture_pressed = ExtResource("20_jcfy7")
-texture_disabled = ExtResource("20_jcfy7")
-stretch_mode = 0
-
-[node name="Label" type="Label" parent="CombatUiControl/PauseMenuControl/HBoxContainer/VBoxContainer/ButtonContainer2/QuitButton"]
-modulate = Color(0.462291, 0.462291, 0.462291, 1)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 32
-text = "Quit Game"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="ButtonContainer3" type="HBoxContainer" parent="CombatUiControl/PauseMenuControl/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-alignment = 1
-
-[node name="ReturnButton" type="TextureButton" parent="CombatUiControl/PauseMenuControl/HBoxContainer/VBoxContainer/ButtonContainer3"]
-layout_mode = 2
-texture_normal = ExtResource("19_u4d2a")
-texture_pressed = ExtResource("20_jcfy7")
-texture_disabled = ExtResource("20_jcfy7")
-stretch_mode = 0
-
-[node name="Label" type="Label" parent="CombatUiControl/PauseMenuControl/HBoxContainer/VBoxContainer/ButtonContainer3/ReturnButton"]
-modulate = Color(0.462291, 0.462291, 0.462291, 1)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 32
-text = "Close Menu"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="ItemSelectMenuControl" type="Control" parent="CombatUiControl"]
+[node name="ItemSelectMenuControl" type="Control" parent="MoveableCamera2D/CanvasLayer/CombatUiControl"]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -1388,7 +1379,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("19_p0l6r")
 
-[node name="ColorRect" type="ColorRect" parent="CombatUiControl/ItemSelectMenuControl"]
+[node name="ColorRect" type="ColorRect" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/ItemSelectMenuControl"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1397,7 +1388,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.266667, 0.266667, 0.266667, 0.521569)
 
-[node name="MenuPanel" type="Control" parent="CombatUiControl/ItemSelectMenuControl"]
+[node name="MenuPanel" type="Control" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/ItemSelectMenuControl"]
 custom_minimum_size = Vector2(128, 0)
 anchors_preset = 0
 offset_left = 508.0
@@ -1405,7 +1396,7 @@ offset_top = 267.0
 offset_right = 636.0
 offset_bottom = 307.0
 
-[node name="Background" type="NinePatchRect" parent="CombatUiControl/ItemSelectMenuControl/MenuPanel"]
+[node name="Background" type="NinePatchRect" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/ItemSelectMenuControl/MenuPanel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1419,7 +1410,7 @@ patch_margin_top = 8
 patch_margin_right = 8
 patch_margin_bottom = 8
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CombatUiControl/ItemSelectMenuControl/MenuPanel"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/ItemSelectMenuControl/MenuPanel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1429,31 +1420,31 @@ grow_vertical = 2
 theme_override_constants/separation = 0
 alignment = 1
 
-[node name="QueInputControl" parent="CombatUiControl" instance=ExtResource("14_atc5n")]
+[node name="QueInputControl" parent="MoveableCamera2D/CanvasLayer/CombatUiControl" instance=ExtResource("14_atc5n")]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_left = 8.0
-offset_top = -64.0
-offset_right = 132.0
+offset_top = -96.0
+offset_right = 228.0
 offset_bottom = -8.0
 grow_vertical = 0
 
-[node name="QueDisplayControl" parent="CombatUiControl" instance=ExtResource("22_i32rr")]
+[node name="QueDisplayControl" parent="MoveableCamera2D/CanvasLayer/CombatUiControl" instance=ExtResource("22_i32rr")]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 8.0
-offset_top = -123.0
-offset_right = 108.0
-offset_bottom = -67.0
+offset_left = 12.0
+offset_top = -159.0
+offset_right = 112.0
+offset_bottom = -103.0
 grow_vertical = 0
 show_preview_movement = true
 show_gaps = false
 
-[node name="QueCollectionDisplayControl" parent="CombatUiControl" instance=ExtResource("19_t74bn")]
+[node name="QueCollectionDisplayControl" parent="MoveableCamera2D/CanvasLayer/CombatUiControl" instance=ExtResource("19_t74bn")]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -1464,7 +1455,7 @@ offset_right = 48.0
 offset_bottom = -184.0
 grow_vertical = 2
 
-[node name="StatCollectionDisplayControl" type="Control" parent="CombatUiControl"]
+[node name="StatCollectionDisplayControl" type="Control" parent="MoveableCamera2D/CanvasLayer/CombatUiControl"]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -1479,17 +1470,17 @@ grow_horizontal = 0
 grow_vertical = 2
 script = ExtResource("21_fx1yp")
 
-[node name="PremadePanelControl" parent="CombatUiControl/StatCollectionDisplayControl" instance=ExtResource("16_jsy0k")]
+[node name="PremadePanelControl" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/StatCollectionDisplayControl" instance=ExtResource("16_jsy0k")]
 layout_mode = 2
 offset_right = 180.0
 offset_bottom = 82.0
 
-[node name="PanelsContainer" type="VBoxContainer" parent="CombatUiControl/StatCollectionDisplayControl"]
+[node name="PanelsContainer" type="VBoxContainer" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/StatCollectionDisplayControl"]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="NextActorButton" type="Button" parent="CombatUiControl"]
+[node name="NextActorButton" type="Button" parent="MoveableCamera2D/CanvasLayer/CombatUiControl"]
 layout_mode = 0
 offset_left = 293.0
 offset_top = 5.0
@@ -1498,112 +1489,139 @@ offset_bottom = 36.0
 text = "Next Actor
 "
 
-[node name="DevDataControl" type="Control" parent="."]
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -108.0
-offset_top = 8.0
-offset_right = -8.0
-offset_bottom = 61.0
-grow_horizontal = 0
-script = ExtResource("19_yc3tw")
-
-[node name="NinePatchRect" type="NinePatchRect" parent="DevDataControl"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("20_6lcyn")
-patch_margin_left = 8
-patch_margin_top = 8
-patch_margin_right = 8
-patch_margin_bottom = 8
-
-[node name="VBoxContainer" type="VBoxContainer" parent="DevDataControl"]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 8.0
-offset_top = 8.0
-offset_right = -8.0
-offset_bottom = -8.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="TimerContainer" type="HBoxContainer" parent="DevDataControl/VBoxContainer"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="DevDataControl/VBoxContainer/TimerContainer"]
-modulate = Color(0, 0, 0, 1)
-layout_mode = 2
-size_flags_horizontal = 3
-text = "8:24"
-horizontal_alignment = 2
-
-[node name="QueCalControl" type="Control" parent="DevDataControl"]
+[node name="PauseMenuControl" type="Control" parent="MoveableCamera2D/CanvasLayer/CombatUiControl"]
 visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -254.0
-offset_top = 87.0
-offset_right = -98.0
-offset_bottom = 158.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("22_4rk3c")
-
-[node name="NinePatchRect2" type="NinePatchRect" parent="DevDataControl/QueCalControl"]
+z_index = 5
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("20_6lcyn")
-patch_margin_left = 8
-patch_margin_top = 8
-patch_margin_right = 8
-patch_margin_bottom = 8
+script = ExtResource("18_acqto")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="DevDataControl/QueCalControl"]
+[node name="ColorRect" type="ColorRect" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/PauseMenuControl"]
 layout_mode = 1
-anchors_preset = -1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 8.0
-offset_top = 8.0
-offset_right = -8.0
-offset_bottom = -8.0
 grow_horizontal = 2
 grow_vertical = 2
+color = Color(0.266667, 0.266667, 0.266667, 0.521569)
 
-[node name="QueSlotsContainer" type="HBoxContainer" parent="DevDataControl/QueCalControl/VBoxContainer"]
-visible = false
+[node name="HBoxContainer" type="HBoxContainer" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/PauseMenuControl"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/PauseMenuControl/HBoxContainer"]
 layout_mode = 2
-theme_override_constants/separation = 0
-script = ExtResource("23_tcvpd")
+alignment = 1
 
-[node name="QueSlotRect" type="NinePatchRect" parent="DevDataControl/QueCalControl/VBoxContainer/QueSlotsContainer"]
-custom_minimum_size = Vector2(0, 32)
+[node name="ButtonContainer4" type="HBoxContainer" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/PauseMenuControl/HBoxContainer/VBoxContainer"]
 layout_mode = 2
-texture = ExtResource("23_o55pl")
-patch_margin_left = 8
-patch_margin_top = 8
-patch_margin_right = 8
-patch_margin_bottom = 8
+alignment = 1
 
-[node name="RedBar" type="TextureRect" parent="DevDataControl/QueCalControl"]
-modulate = Color(1, 0, 0, 1)
-custom_minimum_size = Vector2(1, 124)
-layout_mode = 0
-offset_right = 2.0
-offset_bottom = 120.0
-texture = ExtResource("24_5fn7e")
-expand_mode = 4
+[node name="CharacterButton" type="TextureButton" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/PauseMenuControl/HBoxContainer/VBoxContainer/ButtonContainer4"]
+layout_mode = 2
+texture_normal = ExtResource("19_u4d2a")
+texture_pressed = ExtResource("20_jcfy7")
+texture_disabled = ExtResource("20_jcfy7")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/PauseMenuControl/HBoxContainer/VBoxContainer/ButtonContainer4/CharacterButton"]
+modulate = Color(0.462291, 0.462291, 0.462291, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 32
+text = "Character"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ButtonContainer" type="HBoxContainer" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/PauseMenuControl/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="MainMenuButton" type="TextureButton" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/PauseMenuControl/HBoxContainer/VBoxContainer/ButtonContainer"]
+layout_mode = 2
+texture_normal = ExtResource("19_u4d2a")
+texture_pressed = ExtResource("20_jcfy7")
+texture_disabled = ExtResource("20_jcfy7")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/PauseMenuControl/HBoxContainer/VBoxContainer/ButtonContainer/MainMenuButton"]
+modulate = Color(0.462291, 0.462291, 0.462291, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 32
+text = "Main Menu"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ButtonContainer2" type="HBoxContainer" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/PauseMenuControl/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="QuitButton" type="TextureButton" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/PauseMenuControl/HBoxContainer/VBoxContainer/ButtonContainer2"]
+layout_mode = 2
+texture_normal = ExtResource("19_u4d2a")
+texture_pressed = ExtResource("20_jcfy7")
+texture_disabled = ExtResource("20_jcfy7")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/PauseMenuControl/HBoxContainer/VBoxContainer/ButtonContainer2/QuitButton"]
+modulate = Color(0.462291, 0.462291, 0.462291, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 32
+text = "Quit Game"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ButtonContainer3" type="HBoxContainer" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/PauseMenuControl/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="ReturnButton" type="TextureButton" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/PauseMenuControl/HBoxContainer/VBoxContainer/ButtonContainer3"]
+layout_mode = 2
+texture_normal = ExtResource("19_u4d2a")
+texture_pressed = ExtResource("20_jcfy7")
+texture_disabled = ExtResource("20_jcfy7")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/PauseMenuControl/HBoxContainer/VBoxContainer/ButtonContainer3/ReturnButton"]
+modulate = Color(0.462291, 0.462291, 0.462291, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 32
+text = "Close Menu"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="MoveableCamera2D/CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2

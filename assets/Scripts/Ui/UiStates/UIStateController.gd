@@ -11,7 +11,12 @@ var _state_scripts = {
 }
 
 var current_ui_state:BaseUiState
-var last_state:BaseUiState
+var state_stack:Array = []
+var last_state:BaseUiState:
+	get:
+		if state_stack.size() > 0:
+			return state_stack[state_stack.size() -1] 
+		return null
 
 func update(delta):
 	if current_ui_state:
@@ -22,16 +27,18 @@ func handle_input(event:InputEvent):
 	if current_ui_state:
 		current_ui_state.handle_input(event)
 
-func set_ui_state(state:UiStates, args:Dictionary={}):
-	#print("Setting UI State: %s" %[state])
+func set_ui_state(state:UiStates, args:Dictionary={}, clear_stack:bool=true):
+	print("Setting UI State: %s" %[UiStates.keys()[int(state)]])
 	var path = _state_scripts[state]
-	set_ui_state_from_path(path, args)
+	set_ui_state_from_path(path, args, clear_stack)
 
-func set_ui_state_from_path(path, args):
+func set_ui_state_from_path(path, args, clear_stack:bool=true):
+	if clear_stack:
+		state_stack.clear()
 	if current_ui_state:
 		current_ui_state.end_state()
-		last_state = current_ui_state
-		#print("Last UiState set to: " + last_state._get_debug_name())
+		state_stack.append(current_ui_state)
+		print("Last UiState set to: " + last_state._get_debug_name())
 		current_ui_state = null
 	var script = load(path)
 	current_ui_state = script.new(self, args)
@@ -40,11 +47,12 @@ func set_ui_state_from_path(path, args):
 func back_to_last_state():
 	if !last_state:
 		printerr("Last UiState Lost")
+		state_stack.clear()
 		return
-	#print("Returning to state: " + last_state._get_debug_name())
+	print("Returning to state: " + last_state._get_debug_name())
 	if current_ui_state:
 		current_ui_state.end_state()
 		current_ui_state = null
 	current_ui_state = last_state
-	last_state = null
+	state_stack.remove_at(state_stack.size()-1)
 	current_ui_state.start_state()

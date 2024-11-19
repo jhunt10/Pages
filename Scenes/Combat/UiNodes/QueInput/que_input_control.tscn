@@ -1,19 +1,20 @@
-[gd_scene load_steps=8 format=3 uid="uid://6dlh0wlnsedb"]
+[gd_scene load_steps=9 format=3 uid="uid://6dlh0wlnsedb"]
 
 [ext_resource type="Script" path="res://Scenes/Combat/UiNodes/QueInput/que_input_control.gd" id="1_bqb47"]
 [ext_resource type="Texture2D" uid="uid://io35wpu802fp" path="res://assets/Sprites/UI/BackPatches/Patch_64_12.png" id="2_p5j4l"]
 [ext_resource type="Texture2D" uid="uid://cwsvq3qu6228n" path="res://assets/Sprites/UI/QueInputAndDisplay/page_button.png" id="3_dtm50"]
 [ext_resource type="Texture2D" uid="uid://bdn528i15d122" path="res://data/Actions/Attack/TestSword.png" id="4_l8485"]
 [ext_resource type="Texture2D" uid="uid://01rf6dbmahgb" path="res://assets/Sprites/UI/QueInputAndDisplay/start_button.png" id="5_tlwb0"]
+[ext_resource type="Theme" uid="uid://dwinll8pgdjhc" path="res://Scenes/Themes/standard_theme.tres" id="6_56l8d"]
 [ext_resource type="Script" path="res://Scenes/Combat/UiNodes/QueInput/on_que_option_menu_control.gd" id="6_ci2p0"]
 [ext_resource type="Texture2D" uid="uid://c6kesqll0wvk6" path="res://assets/Sprites/UI/QueInputAndDisplay/on_que_options_backpatch_32_4.png" id="7_5asbx"]
 
 [node name="QueInputControl" type="Control" node_paths=PackedStringArray("on_que_options_menu")]
-custom_minimum_size = Vector2(124, 56)
+custom_minimum_size = Vector2(124, 88)
 layout_mode = 3
 anchors_preset = 0
-offset_right = 124.0
-offset_bottom = 56.0
+offset_right = 220.0
+offset_bottom = 88.0
 script = ExtResource("1_bqb47")
 on_que_options_menu = NodePath("OnQueOptionsMenuControl")
 
@@ -41,7 +42,6 @@ offset_bottom = 40.0
 layout_mode = 2
 
 [node name="PageButtonPrefab" type="TextureButton" parent="HBoxContainer/HBoxContainer"]
-visible = false
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 texture_normal = ExtResource("3_dtm50")
@@ -49,20 +49,23 @@ stretch_mode = 3
 
 [node name="Icon" type="TextureRect" parent="HBoxContainer/HBoxContainer/PageButtonPrefab"]
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = -4.0
+offset_bottom = -4.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("4_l8485")
-stretch_mode = 3
 
 [node name="StartButton" type="TextureButton" parent="HBoxContainer"]
-custom_minimum_size = Vector2(0, 32)
+custom_minimum_size = Vector2(128, 64)
 layout_mode = 2
 texture_normal = ExtResource("5_tlwb0")
 texture_pressed = ExtResource("5_tlwb0")
-stretch_mode = 3
+stretch_mode = 0
 
 [node name="Label" type="Label" parent="HBoxContainer/StartButton"]
 layout_mode = 1
@@ -71,6 +74,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("6_56l8d")
+theme_override_font_sizes/font_size = 32
 text = "Start"
 horizontal_alignment = 1
 vertical_alignment = 1
