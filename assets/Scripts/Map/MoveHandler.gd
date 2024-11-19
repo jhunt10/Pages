@@ -94,5 +94,6 @@ static func _try_push(game_state:GameStateData, moveing_actor:BaseActor, pushed_
 static func spot_is_valid_and_open(game_state:GameStateData, pos:MapPos):
 	if (pos.x < 0 or pos.x >= game_state.MapState.max_width 
 		or pos.y < 0 or pos.y >= game_state.MapState.max_hight):
+			if LOGGING: print("\tSpot %s outside map bounds [%s,%s]" % [pos, game_state.MapState.max_width, game_state.MapState.max_hight])
 			return false
 	return game_state.MapState.is_spot_open(pos)

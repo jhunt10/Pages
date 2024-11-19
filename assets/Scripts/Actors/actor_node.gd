@@ -1,7 +1,7 @@
 class_name ActorNode
 extends Node2D
 
-const LOGGING = false
+const LOGGING = true
 
 @onready var animation:AnimationPlayer = $AnimationPlayer
 @onready var animation_tree:AnimationTree = $AnimationTree
@@ -20,6 +20,7 @@ var Id:String
 var Actor:BaseActor 
 var rot_dir
 var start_walk_on_pos_change:bool
+var is_walking
 
 var current_animation_action_name:String
 #var current_animation_hand_name:String
@@ -110,7 +111,6 @@ func _load_weapon_sprite(weapon_node:ActorWeaponNode, weapon:BaseWeaponEquipment
 #var still_waiting:bool
 #var delay_set_pos
 #var wait_more
-var is_walking
 #func _process(delta: float) -> void:
 	#if delay_set_pos:
 		#if not wait_more: 
@@ -251,6 +251,7 @@ func cancel_current_animation():
 	elif current_animation_action_name.begins_with("walk"):
 		var animation_name = current_animation_action_name.replace("_in_", "_cancel_")
 		animation.play(animation_name)
+		is_walking = false
 
 func start_walk_out_animation():
 	if LOGGING: print("Start Walk")
@@ -262,6 +263,7 @@ func start_walk_out_animation():
 func start_walk_in_animation():
 	if LOGGING: print("Finish Walk")
 	animation.play("walk/walk_in"+get_animation_sufix())
+	is_walking = false
 	#animation_tree.set("parameters/conditions/Walk", false)
 	#animation_tree.set("parameters/conditions/FinishWalk", true)
 	#animation_tree.set("parameters/conditions/MoveFailed", false)

@@ -18,8 +18,8 @@ func _init(game_state:GameStateData, map_data:Dictionary) -> void:
 	max_hight = map_data['Hight']
 	_position_data = []
 	var terrain_data = map_data['Terrain']
-	for x in range(max_width):
-		for y in range(max_hight):
+	for y in range(max_hight):
+		for x in range(max_width):
 			_position_data.append(MapSpot.new(x,y,terrain_data[y*max_width + x], self))
 			
 func get_map_spot(pos)->MapSpot:
@@ -131,11 +131,21 @@ func spot_blocks_los(pos)->bool:
 func is_spot_open(pos)->bool:
 	var spot = get_map_spot(pos)
 	if not spot:
+		print("Failed to find spot at pos: %s" % [pos])
 		return false
 	if spot.terrain_index > 0:
+		#print("Pos: %s | Terrain > 0" % [pos])
+		#for y in range(max_hight):
+			#var line = ""
+			#for x in range(max_width):
+				#var val = self.get_map_spot(Vector2i(x, y))
+				#line += "(" + str(val.X) + "," + str(val.Y) + ")," 
+			#print(line.trim_suffix(","))
+				
 		return false
 	var actors = get_actors_at_pos(pos)
 	if actors.size() > 0:
+		print("Actors found on spot")
 		return false
 	return true
 	

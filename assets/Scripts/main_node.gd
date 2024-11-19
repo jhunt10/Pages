@@ -23,7 +23,7 @@ func _ready() -> void:
 	center_container.add_child(current_scene)
 
 func _load_test_map():
-	var file = FileAccess.open("res://data/Maps/_ExampleMap.json", FileAccess.READ)
+	var file = FileAccess.open("res://data/Maps/FirstMap.json", FileAccess.READ)
 	var text:String = file.get_as_text()
 	return JSON.parse_string(text)
 

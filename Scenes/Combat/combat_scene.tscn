@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=4 uid="uid://dfeilp6hbiuqs"]
+[gd_scene load_steps=36 format=4 uid="uid://dfeilp6hbiuqs"]
 
 [ext_resource type="Script" path="res://Scenes/Combat/combat_scene.gd" id="1_crigy"]
 [ext_resource type="Script" path="res://assets/Scripts/Map/map_controler_node.gd" id="3_vohw8"]
@@ -7,6 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://bethv8mo5j28j" path="res://assets/Sprites/TileSets/TargetingTileSet.png" id="5_fxjcf"]
 [ext_resource type="Texture2D" uid="uid://b03yygahg1o8b" path="res://assets/Sprites/UI/Targeting/TargetAreaTiles.png" id="6_evsty"]
 [ext_resource type="Texture2D" uid="uid://b232xm2ly0peh" path="res://assets/Sprites/UI/GridCursors/GridCursor_Default.png" id="7_7lt4y"]
+[ext_resource type="PackedScene" uid="uid://dcan2k534n88q" path="res://Scenes/Maps/working_map.tscn" id="7_ce1oe"]
+[ext_resource type="PackedScene" uid="uid://uo60871y6t54" path="res://Scenes/Combat/MapObjects/actor_node.tscn" id="8_7uvc5"]
 [ext_resource type="Script" path="res://Scenes/Combat/UiNodes/combat_ui_control.gd" id="8_8l3el"]
 [ext_resource type="Script" path="res://Scenes/Combat/UiNodes/grid_cursor_node.gd" id="8_wf3xb"]
 [ext_resource type="Texture2D" uid="uid://5sc84oyivah" path="res://assets/Sprites/UI/backpatch.png" id="10_8c137"]
@@ -1192,9 +1194,15 @@ tile_set = SubResource("TileSet_hpguw")
 [node name="EffectAreaTileMap" type="TileMapLayer" parent="MapControlerNode/TargetAreaDisplayNode"]
 tile_set = SubResource("TileSet_lvs5x")
 
+[node name="Node2D" parent="MapControlerNode" instance=ExtResource("7_ce1oe")]
+y_sort_enabled = true
+
 [node name="ActorTileMap" type="TileMapLayer" parent="MapControlerNode"]
 y_sort_enabled = true
 tile_set = SubResource("TileSet_th678")
+
+[node name="ActorNode" parent="MapControlerNode/ActorTileMap" instance=ExtResource("8_7uvc5")]
+position = Vector2(42, 208)
 
 [node name="GridCursor" type="Sprite2D" parent="MapControlerNode"]
 texture = ExtResource("7_7lt4y")

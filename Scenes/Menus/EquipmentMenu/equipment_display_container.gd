@@ -88,11 +88,18 @@ func _rotate_sprite(left:bool):
 	_display_dir = new_dir
 
 func set_actor(actor:BaseActor):
-	#portait_texture_rect.texture = _actor.get_sprite()
+	if actor == _actor:
+		_sync()
+		return
+	if _actor:
+		if _actor.equipment_changed.is_connected(_sync):
+			_actor.equipment_changed.disconnect(_sync)
 	_actor = actor
 	actor_node.set_actor(actor)
-	
-	
+	_actor.equipment_changed.connect(_sync)
+	_sync()
+
+func _sync():
 	armor_lable.text = str(_actor.equipment.get_total_equipment_armor())
 	ward_label.text = str(_actor.equipment.get_total_equipment_ward())
 	for index:int in range(slot_displays.size()):
@@ -126,10 +133,10 @@ func set_actor(actor:BaseActor):
 	phyatk_label.text = str(_actor.stats.get_base_phyical_attack())
 	page_count_label.text = str(_actor.pages.get_max_page_count())
 	que_count_label.text = str(_actor.stats.get_stat("PagesPerRound"))
-	var primary_weapon = actor.equipment.get_primary_weapon()
+	var primary_weapon = _actor.equipment.get_primary_weapon()
 	if primary_weapon:
 		main_hand_slider.value = primary_weapon.get_load_val("WeaponSpriteData", {}).get("Rotation", 0)
-	var offhand_weapon = actor.equipment.get_primary_weapon()
+	var offhand_weapon = _actor.equipment.get_primary_weapon()
 	if offhand_weapon:
 		off_hand_slider.value = offhand_weapon.get_load_val("WeaponSpriteData", {}).get("Rotation", 0)
 

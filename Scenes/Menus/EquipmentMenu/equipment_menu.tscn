@@ -657,14 +657,16 @@ size_flags_horizontal = 3
 theme = ExtResource("5_63y7a")
 text = "Value"
 
-[node name="EquipmenDetailsContainer" type="Container" parent="MainContainer/HBoxContainer" node_paths=PackedStringArray("icon", "title_label", "tags_label", "description_label", "armor_details", "weapon_details", "book_details", "background", "inner_container")]
+[node name="EquipmenDetailsContainer" type="Container" parent="MainContainer/HBoxContainer" node_paths=PackedStringArray("close_button", "icon", "title_label", "tags_label", "description_label", "equip_button", "armor_details", "weapon_details", "book_details", "background", "inner_container")]
 custom_minimum_size = Vector2(260, 16)
 layout_mode = 2
 script = ExtResource("32_1iwer")
+close_button = NodePath("InnerContainer/TitleContainer/CloseButton")
 icon = NodePath("InnerContainer/TitleContainer/TextureRect/IconTextureRect")
 title_label = NodePath("InnerContainer/TitleContainer/TitleLabel")
 tags_label = NodePath("InnerContainer/TagsLabel")
 description_label = NodePath("InnerContainer/ScrollContainer/VBoxContainer/DescriptionLabel")
+equip_button = NodePath("InnerContainer/Button")
 armor_details = NodePath("InnerContainer/ArmoInfoContainer")
 weapon_details = NodePath("InnerContainer/WeaponInfoContainer")
 book_details = NodePath("InnerContainer/BookInfoContainer")

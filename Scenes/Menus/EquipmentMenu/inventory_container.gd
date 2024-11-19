@@ -44,12 +44,12 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	super(delta)
 	if Engine.is_editor_hint(): return
-	if _mouse_in_button and _hover_timer > 0:
-		_hover_timer -= delta
-		if _hover_timer < 0:
-			var item = ItemLibrary.get_item(_mouse_in_button._item_id)
-			if item:
-				item_button_hover.emit(item)
+	#if _mouse_in_button and _hover_timer > 0:
+		#_hover_timer -= delta
+		#if _hover_timer < 0:
+			#var item = ItemLibrary.get_item(_mouse_in_button._item_id)
+			#if item:
+				#item_button_hover.emit(item)
 	if _click_timer > 0:
 		_click_timer -= delta
 

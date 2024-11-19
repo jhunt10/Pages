@@ -93,7 +93,7 @@ func _count_item_tag_slots():
 	var total_max_count = 0
 	for equipment:BaseEquipmentItem in _actor.equipment.list_equipment():
 		var item_tags_dict:Dictionary = equipment.get_load_val("ItemTagSlots", {})
-		printerr("Checking Equipment for ItemTagSlots: %s : %s" % [equipment.Id, item_tags_dict])
+		#printerr("Checking Equipment for ItemTagSlots: %s : %s" % [equipment.Id, item_tags_dict])
 		for item_tags in item_tags_dict.keys():
 			if !_item_tag_slot_counts.keys().has(item_tags):
 				_item_tag_slot_counts[item_tags] = 0

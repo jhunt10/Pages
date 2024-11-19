@@ -37,14 +37,17 @@ func _ready() -> void:
 		ActionLibrary.new()
 	var actor = ActorLibrary.get_actor("TestActor_ID")
 	set_actor(actor)
-	inventory_container.item_button_hover.connect(set_hover_item)
-	inventory_container.item_button_hover_end.connect(clear_hover_item)
+	#inventory_container.item_button_hover.connect(set_hover_item)
+	#inventory_container.item_button_hover_end.connect(clear_hover_item)
 	inventory_container.item_button_clicked.connect(on_item_clicked)
 	equipment_display_container.equipt_slot_pressed.connect(on_equipt_slot_clicked)
 	edit_items_button.pressed.connect(open_bag_items_submenu)
 	bag_items_submenu.close_button.pressed.connect(close_bag_items_submenu)
 	dev_add_item_button.get_options_func = _dev_add_item_options
 	dev_add_item_button.item_selected.connect(_dev_add_item_selected)
+	equipment_details_container.close_menu.connect(close_equipment_details)
+	stats_display_container.visible = true
+	equipment_details_container.visible = false
 
 func _dev_add_item_options()->Array:
 	return ItemLibrary.list_all_item_keys()
@@ -88,6 +91,10 @@ func close_bag_items_submenu():
 	equipment_display_container.visible = true
 	bag_items_submenu.visible = false
 
+func close_equipment_details():
+	equipment_details_container.visible = false
+	stats_display_container.visible = true
+
 func open_page_que_menu():
 	if page_que_menu == null:
 		page_que_menu = MainRootNode.Instance.open_page_menu(_actor)
@@ -95,18 +102,18 @@ func open_page_que_menu():
 	else:
 		page_que_menu.set_actor(_actor)
 
-func set_hover_item(item):
-	equipment_details_container.set_item(item)
-	mouse_over_control.set_hover_item(item)
+#func set_hover_item(item):
+	#mouse_over_control.set_hover_item(item)
 
-func clear_hover_item():
-	mouse_over_control.clear_message()
+#func clear_hover_item():
+	#mouse_over_control.clear_message()
 
 func set_actor(actor:BaseActor):
 	_actor = actor
 	equipment_display_container.set_actor(_actor)
 	stats_display_container.set_actor(_actor)
 	page_list_container.set_actor(_actor)
+	equipment_details_container.set_actor(_actor)
 
 func clear_drag_item():
 	_dragging_item = null
@@ -133,20 +140,25 @@ func dragging_item_released():
 	clear_drag_item()
 
 func on_item_clicked(item:BaseItem):
-	if equipment_display_container.visible:
-		var equipment = (item as BaseEquipmentItem)
-		if !equipment:
-			return
-		if equipment.get_equipt_to_actor_id() == _actor.Id:
-			print("Is Equipt, clearing")
-			equipment.clear_equipt_actor()
-		else:
-			print("Not Equipt, trying")
-			_actor.equipment.try_equip_item(item, true)
-		set_actor(_actor)
-	elif bag_items_submenu.visible:
+	if bag_items_submenu.visible:
 		_actor.items.add_item_to_first_valid_slot(item)
 		PlayerInventory.remove_item(item)
+		return
+	else:
+		stats_display_container.visible = false
+		equipment_details_container.visible = true
+		equipment_details_container.set_item(item)
+		#var equipment = (item as BaseEquipmentItem)
+		#if !equipment:
+			#return
+		#if equipment.get_equipt_to_actor_id() == _actor.Id:
+			#print("Is Equipt, clearing")
+			#equipment.clear_equipt_actor()
+		#else:
+			#print("Not Equipt, trying")
+			#_actor.equipment.try_equip_item(item, true)
+		#set_actor(_actor)
+		
 
 func on_equipt_slot_clicked(slot_index:int):
 	if _actor.equipment.has_equipment_in_slot(slot_index):
