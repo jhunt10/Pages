@@ -5,7 +5,7 @@ signal que_marked_as_dead(que_id:String)
 
 # End round early if no more actions are qued (for testing)
 const SHORTCUT_QUE = true
-const DEEP_LOGGING = true
+const DEEP_LOGGING = false
 const FRAMES_PER_ACTION = 24
 const ACTION_TIME = 2.4 # Seconds
 const SUB_ACTION_FRAME_TIME = ACTION_TIME / FRAMES_PER_ACTION

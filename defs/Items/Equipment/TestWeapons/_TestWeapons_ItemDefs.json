@@ -32,7 +32,8 @@
             "TargetType": "Actor"
         },
         "AttackTags": ["Melee", "Physical"],
-        "WeaponClass": "Light"
+        "WeaponClass": "Light",
+        "WeaponAnimation": "weapon_stab"
     },
     {
         "ItemKey":"TestWand",
@@ -69,7 +70,8 @@
             "TargetType": "Actor"
         },
         "AttackTags": ["Ranged", "Magic"],
-        "WeaponClass": "Light"
+        "WeaponClass": "Light",
+        "WeaponAnimation": "weapon_raise"
     },
     {
         "ItemKey":"TestSword",
@@ -105,7 +107,8 @@
             "TargetType": "Actor"
         },
         "AttackTags": ["Melee", "Physical"],
-        "WeaponClass": "Medium"
+        "WeaponClass": "Medium",
+        "WeaponAnimation": "weapon_swing"
     },
     {
         "ItemKey":"TestAxe",
@@ -141,7 +144,8 @@
             "TargetType": "Actor"
         },
         "AttackTags": ["Melee", "Physical"],
-        "WeaponClass": "Medium"
+        "WeaponClass": "Medium",
+        "WeaponAnimation": "weapon_swing"
     },
     {
         "ItemKey":"TestSpear",
@@ -173,11 +177,12 @@
             "EffectsAllies": false,
             "EffectsEnemies": true,
             "LineOfSight": true,
-            "TargetArea": "[[-1,0],[-1,1],[0,1],[1,1],[1,0]]",
+            "TargetArea": "[[-1,1],[0,1],[1,1],[0,2]]",
             "TargetType": "Actor"
         },
         "AttackTags": ["Melee", "Physical"],
-        "WeaponClass": "Medium"
+        "WeaponClass": "Medium",
+        "WeaponAnimation": "weapon_stab"
     },
     {
         "ItemKey":"TestSwordHeavy",
@@ -208,11 +213,12 @@
             "EffectsAllies": false,
             "EffectsEnemies": true,
             "LineOfSight": true,
-            "TargetArea": "[[-1,0],[-1,1],[0,1],[1,1],[1,0]]",
+            "TargetArea": "[[-1,1],[0,1],[1,1],[0,2]]",
             "TargetType": "Actor"
         },
         "AttackTags": ["Melee", "Physical"],
-        "WeaponClass": "Heavy"
+        "WeaponClass": "Heavy",
+        "WeaponAnimation": "weapon_swing"
     },
     {
         "ItemKey":"TestHammer",
@@ -243,11 +249,12 @@
             "EffectsAllies": false,
             "EffectsEnemies": true,
             "LineOfSight": true,
-            "TargetArea": "[[-1,0],[-1,1],[0,1],[1,1],[1,0]]",
+            "TargetArea": "[[-1,1],[0,1],[1,1],[0,2]]",
             "TargetType": "Actor"
         },
         "AttackTags": ["Melee", "Physical"],
-        "WeaponClass": "Heavy"
+        "WeaponClass": "Heavy",
+        "WeaponAnimation": "weapon_swing"
     },
     {
         "ItemKey":"TestStaff",
@@ -282,6 +289,7 @@
             "TargetType": "Actor"
         },
         "AttackTags": ["Ranged", "Magic"],
-        "WeaponClass": "Meium"
+        "WeaponClass": "Meium",
+        "WeaponAnimation": "weapon_raise"
     }
 ]

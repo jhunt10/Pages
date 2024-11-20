@@ -31,7 +31,7 @@ static func handle_damage(source, base_damage:int, defender:BaseActor, damage_da
 	
 	var damage_effect = damage_data.get("DamageEffect", null)
 	if damage_effect:
-		CombatRootControl.Instance.create_damage_effect(defender, damage_effect, damage)
+		CombatRootControl.Instance.create_damage_effect(defender, damage_effect, damage, source)
 	
 
 static func _calc_damage_for_event(event:DamageEvent):

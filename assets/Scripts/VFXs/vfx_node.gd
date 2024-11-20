@@ -70,6 +70,11 @@ func set_vfx_data(data:VfxData, extra_data:Dictionary):
 		sprite.texture = load(NO_SPRITE_PATH)
 	else:
 		sprite.visible = false
+	
+	var dir = extra_data.get("Direction", 0)
+	if dir == 1: sprite.rotation_degrees = 90
+	if dir == 2: sprite.rotation_degrees = 180
+	if dir == 3: sprite.rotation_degrees = 270
 
 func add_flash_text(text:String, color:Color):
 	_flash_text_value = text

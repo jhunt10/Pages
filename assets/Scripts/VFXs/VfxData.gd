@@ -11,7 +11,7 @@ var scale:float=1.0
 
 var random_offset_range:Vector2=Vector2.ZERO
 var fixed_offset:Vector2i=Vector2i.ZERO
-
+var match_source_dir:bool=false
 var shake_actor:bool
 
 func _init(data:Dictionary, load_path:String) -> void:
@@ -33,3 +33,4 @@ func _init(data:Dictionary, load_path:String) -> void:
 	if offsets:
 		fixed_offset = Vector2i(offsets[0], offsets[1])
 	shake_actor = data.get("ShakeActor", true)
+	match_source_dir = data.get("MatchSourceDir", false)

@@ -18,6 +18,9 @@ const LOGGING = true
 @onready var off_hand_weapon_node:ActorWeaponNode = $ActorMotionNode/ActorSpriteNode/OffsetNode/OffHandOverlaySprite/OffHandWeaponNode
 @onready var two_hand_weapon_node:ActorWeaponNode = $ActorMotionNode/ActorSpriteNode/OffsetNode/TwoHandOverSprite/TwoHandWeaponNode
 
+## Represents the position of the actor accounting for movement
+@onready var actor_motion_node:Node2D = $ActorMotionNode
+
 var Id:String 
 var Actor:BaseActor 
 var rot_dir
@@ -231,20 +234,23 @@ func fail_movement():
 func play_shake():
 	animation.play("shake_effect")
 
-func start_animation(name:String):
-	var directional_name = name + get_animation_sufix()
-	if LOGGING: print("%s.start_animation: Starting Animation '%s'." % [self.Id, directional_name])
-	animation.play(directional_name)
-
-func into_action_animation(action_name:String):
-	#current_animation_hand_name = hand_name
-	current_animation_action_name = action_name + get_animation_sufix()
+func start_weapon_animation(action_name:String):
+	var hand_name = "main_hand"
+	if Actor.equipment.is_two_handing():
+		hand_name = "two_hand"
+	
+	current_animation_action_name = action_name + "/ready_" + hand_name + get_animation_sufix()
 	animation.play(current_animation_action_name)
+
+func start_walk_animation():
+	current_animation_action_name = "walk/walk_out" + get_animation_sufix()
+	animation.play(current_animation_action_name)
+	
 
 func execute_animation_motion():
 	# TODO: Clean up once I deside on names
-	if current_animation_action_name.contains("_ready_"):
-		var animation_name = current_animation_action_name.replace("_ready_", "_motion_")
+	if current_animation_action_name.contains("/ready_"):
+		var animation_name = current_animation_action_name.replace("/ready_", "/motion_")
 		if LOGGING: print("Playing Motion Animation: " + animation_name)
 		animation.play(animation_name)
 	elif current_animation_action_name.begins_with("walk"):
@@ -253,8 +259,8 @@ func execute_animation_motion():
 		if LOGGING: print("Playing Motion Animation: " + animation_name)
 
 func cancel_current_animation():
-	if current_animation_action_name.contains("_ready_"):
-		var animation_name = current_animation_action_name.replace("_ready_", "_cancel_")
+	if current_animation_action_name.contains("/ready_"):
+		var animation_name = current_animation_action_name.replace("/ready_", "/cancel_")
 		if LOGGING: print("Playing Cancel Animation: " + animation_name)
 		animation.play(animation_name)
 	elif current_animation_action_name.begins_with("walk"):

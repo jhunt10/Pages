@@ -112,19 +112,27 @@ func create_new_missile_node(missile):
 	new_node.set_missile_data(missile)
 	MapController.add_missile_node(missile, new_node)
 	
-func create_damage_effect(actor:BaseActor, vfx_key:String, flash_number:int):
-	var actor_node:ActorNode = MapController.actor_nodes.get(actor.Id, null)
-	if !actor_node:
-		printerr("Failed to find actor node for: %s" % [actor.Id])
+func create_damage_effect(target_actor:BaseActor, vfx_key:String, flash_number:int, source = null):
+	var target_actor_node:ActorNode = MapController.actor_nodes.get(target_actor.Id, null)
+	if !target_actor_node:
+		printerr("Failed to find actor node for: %s" % [target_actor.Id])
 		return
-	var vfx_node = MainRootNode.vfx_libray.create_vfx_node_from_key(vfx_key)
+	var vfx_data = MainRootNode.vfx_libray.get_vfx_data(vfx_key)
+	if !vfx_data:
+		printerr("Failed to VFX with key: %s" % [vfx_key])
+		return
+	
+	var extra_data = {}
+	if vfx_data.match_source_dir and source is BaseActor:
+		extra_data['Direction'] = source.node.rot_dir
+	var vfx_node = MainRootNode.vfx_libray.create_vfx_node(vfx_data, extra_data)
 	if !vfx_node:
 		printerr("Failed to create VFX node from key '%s'." % [vfx_key])
 		return
-	actor_node.vfx_holder.add_child(vfx_node)
+	target_actor_node.vfx_holder.add_child(vfx_node)
 	if flash_number >= 0:
 		if flash_number > 0 and vfx_node._data.shake_actor:
-			actor_node.play_shake()
+			target_actor_node.play_shake()
 		vfx_node.add_flash_text(str(0-flash_number), Color.RED)
 	if flash_number < 0:
 		vfx_node.add_flash_text(str(0-flash_number), Color.GREEN)

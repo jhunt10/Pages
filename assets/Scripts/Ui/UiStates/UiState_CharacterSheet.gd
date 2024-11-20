@@ -15,12 +15,14 @@ func _init(controler:UiStateController, args:Dictionary) -> void:
 	
 
 func start_state():
+	CombatRootControl.Instance.camera.freeze = true
 	pass
 
 func on_menu_closed():
 	CombatUiControl.ui_state_controller.back_to_last_state()
 
 func end_state():
+	CombatRootControl.Instance.camera.freeze = false
 	CombatUiControl.Instance.que_input.allow_input(false)
 	pass
 

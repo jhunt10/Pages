@@ -11,6 +11,8 @@ func start_state():
 	if _logging: print("Start UiState: Exec Round")
 	CombatRootControl.QueController.start_or_resume_execution()
 	CombatRootControl.QueController.end_of_round.connect(_on_round_end)
+	
+	CombatRootControl.Instance.camera.lock_to_actor(CombatUiControl.Instance.que_input._actor)
 	pass
 
 func update(_delta:float):
