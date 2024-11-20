@@ -64,8 +64,10 @@ static func get_potential_target_actors(target_params:TargetParameters, actor:Ba
 	return targets
 
 ## Returns a Dictionary<Vector21, Array> of spots within target_area mapped to potential targets in that spot.
-static func _get_potential_coor_to_targets(target_params:TargetParameters, actor:BaseActor, game_state:GameStateData, exclude_targets:Array=[])->Dictionary:
+static func _get_potential_coor_to_targets(target_params:TargetParameters, actor:BaseActor, game_state:GameStateData, exclude_targets:Array=[], pos_override:MapPos=null)->Dictionary:
 	var actor_pos = game_state.MapState.get_actor_pos(actor)
+	if pos_override:
+		actor_pos = pos_override
 	var target_area = target_params.get_valid_target_area(actor_pos)
 	var potential_targets:Dictionary = {}
 	

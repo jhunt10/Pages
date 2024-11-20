@@ -5,7 +5,7 @@ signal que_marked_as_dead(que_id:String)
 
 # End round early if no more actions are qued (for testing)
 const SHORTCUT_QUE = true
-const DEEP_LOGGING = false
+const DEEP_LOGGING = true
 const FRAMES_PER_ACTION = 24
 const ACTION_TIME = 2.4 # Seconds
 const SUB_ACTION_FRAME_TIME = ACTION_TIME / FRAMES_PER_ACTION
@@ -255,10 +255,13 @@ func _execute_turn_frames(game_state:GameStateData, que:ActionQue, turn_index:in
 		if DEEP_LOGGING: print("\t\tNo SubAction List on action: %s" % [action.ActionKey])
 		return
 		
-		
+	
+	print("Starting SubAction Index: %s of  %s" % [sub_sub_action_index, sub_action_list.size()])
 	while sub_sub_action_index < sub_action_list.size():
+		print("Executing SubAction Index: %s " % [sub_sub_action_index])
 		if turn_data.turn_failed:
 			if DEEP_LOGGING: print("\t\tTurn Failed")
+			sub_sub_action_index = 0
 			return
 		var sub_action_data = sub_action_list[sub_sub_action_index]
 			
@@ -277,6 +280,7 @@ func _execute_turn_frames(game_state:GameStateData, que:ActionQue, turn_index:in
 			game_state, # GameState
 			que.actor # Actor
 		)
+		print("SubAction finished: %s " % [result])
 		if result == BaseSubAction.Failed:
 			que.fail_turn()
 		
@@ -285,7 +289,7 @@ func _execute_turn_frames(game_state:GameStateData, que:ActionQue, turn_index:in
 			if DEEP_LOGGING: print("\t\tExecution no loger running")
 			return
 		sub_sub_action_index += 1
-		
+	if DEEP_LOGGING: print("SubSubActions finished")
 	# All sub actions completed
 	sub_sub_action_index = 0
 

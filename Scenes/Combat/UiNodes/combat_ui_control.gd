@@ -9,6 +9,7 @@ var camera:MoveableCamera2D:
 @export var menu_button:TextureButton 
 @export var pause_menu:PauseMenuControl 
 
+@export var target_input_display:TargetInputControl
 @export var stat_panel_control:StatPanelControl
 @export var que_input:QueInputControl
 @export var que_display:QueDisplayControl
@@ -31,6 +32,7 @@ func _ready() -> void:
 		return
 	menu_button.pressed.connect(_on_menu_pressed)
 	test_button.pressed.connect(do_test)
+	target_input_display.visible = false
 	pass # Replace with function body.
 
 func do_test():

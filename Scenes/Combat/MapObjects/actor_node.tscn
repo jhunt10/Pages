@@ -578,7 +578,7 @@ tracks/13/keys = {
 [sub_resource type="Animation" id="Animation_3t468"]
 resource_name = "walk_in_north"
 length = 1.25
-step = 0.25
+step = 0.3
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -586,7 +586,7 @@ tracks/0/path = NodePath("ActorMotionNode:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1),
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.9, 1.2),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
 "values": [Vector2(0, 16), Vector2(0, 12), Vector2(0, 8), Vector2(0, 4), Vector2(0, 0)]
@@ -598,7 +598,7 @@ tracks/1/path = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/ActorSprite
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1),
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.9, 1.2),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
 "values": [12, 13, 12, 14, 12]
@@ -610,7 +610,7 @@ tracks/2/path = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/MainHandOve
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1),
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.9, 1.2),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
 "values": [12, 14, 12, 13, 12]
@@ -622,7 +622,7 @@ tracks/3/path = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/OffHandOver
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1),
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.9, 1.2),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
 "values": [12, 14, 12, 13, 12]
@@ -634,7 +634,7 @@ tracks/4/path = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/TwoHandOver
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1),
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.9, 1.2),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
 "values": [12, 14, 12, 13, 12]
@@ -646,7 +646,7 @@ tracks/5/path = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/MainHandOve
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1),
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.9, 1.2),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
 "values": [Vector2(4, 14), Vector2(6, 15), Vector2(4, 14), Vector2(3, 14), Vector2(4, 14)]
@@ -751,7 +751,7 @@ tracks/13/keys = {
 [sub_resource type="Animation" id="Animation_pkwgy"]
 resource_name = "walk_in_south"
 length = 1.25
-step = 0.25
+step = 0.3
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -759,7 +759,7 @@ tracks/0/path = NodePath("ActorMotionNode:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1),
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.9, 1.2),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
 "values": [Vector2(0, -16), Vector2(0, -12), Vector2(0, -8), Vector2(0, -4), Vector2(0, 0)]
@@ -771,7 +771,7 @@ tracks/1/path = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/ActorSprite
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1),
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.9, 1.2),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 0, 2, 0]
@@ -783,7 +783,7 @@ tracks/2/path = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/MainHandOve
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1),
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.9, 1.2),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 0, 2, 0]
@@ -795,7 +795,7 @@ tracks/3/path = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/OffHandOver
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1),
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.9, 1.2),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 0, 2, 0]
@@ -807,7 +807,7 @@ tracks/4/path = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/TwoHandOver
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1),
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.9, 1.2),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 0, 2, 0]
@@ -819,7 +819,7 @@ tracks/5/path = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/MainHandOve
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1),
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.9, 1.2),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
 "values": [Vector2(-4, 14), Vector2(-6, 15), Vector2(-4, 14), Vector2(-3, 14), Vector2(-4, 14)]
@@ -1270,7 +1270,7 @@ tracks/13/keys = {
 [sub_resource type="Animation" id="Animation_lh2c6"]
 resource_name = "walk_out_north"
 length = 1.25
-step = 0.25
+step = 0.3
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -1278,7 +1278,7 @@ tracks/0/path = NodePath("ActorMotionNode:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1),
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.9, 1.2),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
 "values": [Vector2(0, 0), Vector2(0, -4), Vector2(0, -8), Vector2(0, -12), Vector2(0, -16)]
@@ -1290,7 +1290,7 @@ tracks/1/path = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/ActorSprite
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1),
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.9, 1.2),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
 "values": [12, 13, 12, 14, 12]
@@ -1302,7 +1302,7 @@ tracks/2/path = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/MainHandOve
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1),
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.9, 1.2),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
 "values": [12, 14, 12, 13, 12]
@@ -1314,7 +1314,7 @@ tracks/3/path = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/OffHandOver
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1),
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.9, 1.2),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
 "values": [12, 14, 12, 13, 12]
@@ -1326,7 +1326,7 @@ tracks/4/path = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/TwoHandOver
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1),
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.9, 1.2),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
 "values": [12, 14, 12, 13, 12]
@@ -1338,7 +1338,7 @@ tracks/5/path = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/MainHandOve
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1),
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.9, 1.2),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
 "values": [Vector2(4, 14), Vector2(6, 15), Vector2(4, 14), Vector2(3, 14), Vector2(4, 14)]
@@ -1443,7 +1443,7 @@ tracks/13/keys = {
 [sub_resource type="Animation" id="Animation_41xs4"]
 resource_name = "walk_out_south"
 length = 1.25
-step = 0.25
+step = 0.3
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -1451,7 +1451,7 @@ tracks/0/path = NodePath("ActorMotionNode:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1),
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.9, 1.2),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
 "values": [Vector2(0, 0), Vector2(0, 4), Vector2(0, 8), Vector2(0, 12), Vector2(0, 16)]
@@ -1463,7 +1463,7 @@ tracks/1/path = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/ActorSprite
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1),
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.9, 1.2),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 0, 2, 0]
@@ -1475,7 +1475,7 @@ tracks/2/path = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/MainHandOve
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1),
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.9, 1.2),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 0, 2, 0]
@@ -1487,7 +1487,7 @@ tracks/3/path = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/OffHandOver
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1),
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.9, 1.2),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 0, 2, 0]
@@ -1499,7 +1499,7 @@ tracks/4/path = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/TwoHandOver
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1),
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.9, 1.2),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 0, 2, 0]
@@ -1511,7 +1511,7 @@ tracks/5/path = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/MainHandOve
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1),
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.9, 1.2),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
 "values": [Vector2(-4, 14), Vector2(-6, 15), Vector2(-4, 14), Vector2(-3, 14), Vector2(-4, 14)]

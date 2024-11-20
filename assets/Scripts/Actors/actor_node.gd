@@ -1,7 +1,7 @@
 class_name ActorNode
 extends Node2D
 
-const LOGGING = false
+const LOGGING = true
 
 @onready var vfx_holder:Node2D = $VFXHolder
 @onready var animation:AnimationPlayer = $AnimationPlayer
@@ -177,6 +177,9 @@ func set_display_pos(pos:MapPos, start_walkin:bool=false):
 	if !is_walking:
 		if LOGGING: print("%s | set Facing: %s"  % [Time.get_ticks_msec(), get_animation_sufix()])
 		animation.play("facing/facing"+get_animation_sufix())
+	else:
+		if LOGGING:
+			print("IS Walking")
 	
 	var parent = get_parent()
 	if parent is TileMapLayer:
@@ -194,6 +197,7 @@ func get_animation_sufix()->String:
 
 func animation_finished(name):
 	if LOGGING: print("%s | Animation Finished: %s"  % [Time.get_ticks_msec(), name])
+	is_walking = false
 	main_hand_weapon_node.on_animation_end(name)
 	off_hand_weapon_node.on_animation_end(name)
 	two_hand_weapon_node.on_animation_end(name)
@@ -205,8 +209,10 @@ func animation_started(name:String):
 	two_hand_weapon_node.on_animation_start(name)
 	if name.begins_with("walk"):
 		is_walking = true
+		if LOGGING: print("-Set Is Walking")
 	else:
 		is_walking = false
+		if LOGGING: print("-Set Not Walking")
 	#if delay_pos :
 		#self.position = delay_pos
 		#delay_pos = null
@@ -216,7 +222,7 @@ func fail_movement():
 	#animation_tree.set("parameters/conditions/Walk", false)
 	#animation_tree.set("parameters/conditions/FinishWalk", false)
 	#animation_tree.set("parameters/conditions/MoveFailed", true)
-	if LOGGING: print("PlayConnecnd")
+	if LOGGING: printerr("Movment Failed")
 	is_walking = false
 	animation.play("facing/facing"+get_animation_sufix())
 	if LOGGING: print("After_PlayConnecnd")
@@ -244,6 +250,7 @@ func execute_animation_motion():
 	elif current_animation_action_name.begins_with("walk"):
 		var animation_name = current_animation_action_name.replace("_out_", "_in_")
 		animation.play(animation_name)
+		if LOGGING: print("Playing Motion Animation: " + animation_name)
 
 func cancel_current_animation():
 	if current_animation_action_name.contains("_ready_"):
@@ -251,8 +258,8 @@ func cancel_current_animation():
 		if LOGGING: print("Playing Cancel Animation: " + animation_name)
 		animation.play(animation_name)
 	elif current_animation_action_name.begins_with("walk"):
-		var animation_name = current_animation_action_name.replace("_in_", "_cancel_")
-		animation.play(animation_name)
+		if LOGGING: print("Playing Cancel Walk Animation: " + current_animation_action_name)
+		animation.play("facing/facing"+get_animation_sufix())
 		is_walking = false
 
 func start_walk_out_animation():

@@ -35,7 +35,7 @@ func start_combat():
 	#actor.equipment.equipt_weapon( ItemLibrary.create_item("TestSword", {}))
 	actors.append({
 		'ActorId': 'TestActor_ID',
-		'Pos': MapPos.new(5,5,0,2),
+		'Pos': MapPos.new(5,5,0,0),
 		'IsPlayer': true,
 		'IsEnemy':false
 	})

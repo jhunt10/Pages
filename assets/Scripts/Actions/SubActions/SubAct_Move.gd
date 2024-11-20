@@ -15,7 +15,7 @@ func get_action_tags(_subaction_data:Dictionary)->Array:
 
 func do_thing(parent_action:BaseAction, subaction_data:Dictionary, metadata:QueExecutionData,
 				game_state:GameStateData, actor:BaseActor)->bool:
-	print("Doing Movement")
+	print("Doing Movement for page: %s" % [parent_action.details.display_name])
 	#TODO: Movement
 	var move:MapPos = MapPos.Parse(subaction_data.get("RelativePos", [0,0,0,0]))
 	var success = MoveHandler.handle_movement(game_state, actor, move, subaction_data['MovementType'])

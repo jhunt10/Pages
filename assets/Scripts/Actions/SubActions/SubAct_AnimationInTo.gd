@@ -19,6 +19,7 @@ func get_prop_enum_values(prop_key:String)->Array:
 func do_thing(parent_action:BaseAction, subaction_data:Dictionary, metadata:QueExecutionData,
 				game_state:GameStateData, actor:BaseActor)->bool:
 	var animation = subaction_data.get('Animation', null)
+	print("SubAct Animation: " + animation)
 	if animation:
 		actor.node.into_action_animation(animation)
 	return BaseSubAction.Success
