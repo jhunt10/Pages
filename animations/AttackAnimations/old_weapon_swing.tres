@@ -1,0 +1,77 @@
+[gd_resource type="AnimationLibrary" load_steps=13 format=3 uid="uid://cmrwkhivcki0l"]
+
+[sub_resource type="Animation" id="Animation_2iils"]
+resource_name = "cancel_main_hand_east"
+length = 0.5
+step = 0.05
+
+[sub_resource type="Animation" id="Animation_8flbm"]
+resource_name = "cancel_main_hand_north"
+length = 0.45
+step = 0.1
+
+[sub_resource type="Animation" id="Animation_1m6i1"]
+resource_name = "cancel_main_hand_south"
+length = 0.45
+step = 0.1
+
+[sub_resource type="Animation" id="Animation_twyh0"]
+resource_name = "cancel_main_hand_west"
+length = 0.5
+step = 0.05
+
+[sub_resource type="Animation" id="Animation_8w8ri"]
+resource_name = "motion_main_hand_east"
+length = 0.75
+step = 0.05
+
+[sub_resource type="Animation" id="Animation_rygu0"]
+resource_name = "motion_main_hand_north"
+length = 0.75
+step = 0.1
+
+[sub_resource type="Animation" id="Animation_33na2"]
+resource_name = "motion_main_hand_south"
+length = 0.75
+step = 0.1
+
+[sub_resource type="Animation" id="Animation_oojjk"]
+resource_name = "motion_main_hand_west"
+length = 0.75
+step = 0.05
+
+[sub_resource type="Animation" id="Animation_wxt42"]
+resource_name = "ready_main_hand_east"
+length = 0.5
+step = 0.05
+
+[sub_resource type="Animation" id="Animation_qq1ua"]
+resource_name = "ready_main_hand_north"
+length = 0.5
+step = 0.1
+
+[sub_resource type="Animation" id="Animation_xjisj"]
+resource_name = "ready_main_hand_south"
+length = 0.5
+step = 0.1
+
+[sub_resource type="Animation" id="Animation_4nexm"]
+resource_name = "ready_main_hand_west"
+length = 0.5
+step = 0.05
+
+[resource]
+_data = {
+"cancel_main_hand_east": SubResource("Animation_2iils"),
+"cancel_main_hand_north": SubResource("Animation_8flbm"),
+"cancel_main_hand_south": SubResource("Animation_1m6i1"),
+"cancel_main_hand_west": SubResource("Animation_twyh0"),
+"motion_main_hand_east": SubResource("Animation_8w8ri"),
+"motion_main_hand_north": SubResource("Animation_rygu0"),
+"motion_main_hand_south": SubResource("Animation_33na2"),
+"motion_main_hand_west": SubResource("Animation_oojjk"),
+"ready_main_hand_east": SubResource("Animation_wxt42"),
+"ready_main_hand_north": SubResource("Animation_qq1ua"),
+"ready_main_hand_south": SubResource("Animation_xjisj"),
+"ready_main_hand_west": SubResource("Animation_4nexm")
+}

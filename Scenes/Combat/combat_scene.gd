@@ -124,7 +124,7 @@ func create_damage_effect(target_actor:BaseActor, vfx_key:String, flash_number:i
 	
 	var extra_data = {}
 	if vfx_data.match_source_dir and source is BaseActor:
-		extra_data['Direction'] = source.node.rot_dir
+		extra_data['Direction'] = source.node.facing_dir
 	var vfx_node = MainRootNode.vfx_libray.create_vfx_node(vfx_data, extra_data)
 	if !vfx_node:
 		printerr("Failed to create VFX node from key '%s'." % [vfx_key])

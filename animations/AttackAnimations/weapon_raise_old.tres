@@ -1,0 +1,101 @@
+[gd_resource type="AnimationLibrary" load_steps=17 format=3 uid="uid://2d6dfaaswjyt"]
+
+[sub_resource type="Animation" id="Animation_tov1a"]
+resource_name = "cancel_main_hand_east"
+length = 0.65
+step = 0.1
+
+[sub_resource type="Animation" id="Animation_wfpgu"]
+resource_name = "cancel_main_hand_north"
+length = 0.65
+step = 0.2
+
+[sub_resource type="Animation" id="Animation_kbsy6"]
+resource_name = "cancel_main_hand_south"
+length = 0.65
+step = 0.1
+
+[sub_resource type="Animation" id="Animation_movpg"]
+resource_name = "cancel_main_hand_west"
+length = 0.65
+step = 0.1
+
+[sub_resource type="Animation" id="Animation_mndr7"]
+resource_name = "cancel_two_hand_south"
+length = 0.65
+step = 0.1
+
+[sub_resource type="Animation" id="Animation_604t0"]
+resource_name = "motion_main_hand_east"
+length = 0.65
+step = 0.1
+
+[sub_resource type="Animation" id="Animation_0u6tq"]
+resource_name = "motion_main_hand_north"
+length = 0.65
+step = 0.2
+
+[sub_resource type="Animation" id="Animation_bxfbw"]
+resource_name = "motion_main_hand_south"
+length = 0.65
+step = 0.1
+
+[sub_resource type="Animation" id="Animation_ote8c"]
+resource_name = "motion_main_hand_west"
+length = 0.65
+step = 0.1
+
+[sub_resource type="Animation" id="Animation_gdc80"]
+resource_name = "motion_two_hand_south"
+length = 0.65
+step = 0.1
+
+[sub_resource type="Animation" id="Animation_vdldy"]
+resource_name = "ready_main_hand_east"
+length = 0.65
+step = 0.2
+
+[sub_resource type="Animation" id="Animation_gatue"]
+resource_name = "ready_main_hand_north"
+length = 0.65
+step = 0.2
+
+[sub_resource type="Animation" id="Animation_fmjaq"]
+resource_name = "ready_main_hand_south"
+length = 0.65
+step = 0.1
+
+[sub_resource type="Animation" id="Animation_0k3sf"]
+resource_name = "ready_main_hand_west"
+length = 0.65
+step = 0.1
+
+[sub_resource type="Animation" id="Animation_tglox"]
+resource_name = "ready_two_hand_south"
+length = 0.65
+step = 0.1
+
+[sub_resource type="Animation" id="Animation_d1g7d"]
+resource_name = "ready_two_hand_east"
+length = 0.65
+step = 0.1
+
+[resource]
+_data = {
+"cancel_main_hand_east": SubResource("Animation_tov1a"),
+"cancel_main_hand_north": SubResource("Animation_wfpgu"),
+"cancel_main_hand_south": SubResource("Animation_kbsy6"),
+"cancel_main_hand_west": SubResource("Animation_movpg"),
+"cancel_two_hand_south": SubResource("Animation_mndr7"),
+"motion_main_hand_east": SubResource("Animation_604t0"),
+"motion_main_hand_north": SubResource("Animation_0u6tq"),
+"motion_main_hand_south": SubResource("Animation_bxfbw"),
+"motion_main_hand_west": SubResource("Animation_ote8c"),
+"motion_two_hand_south": SubResource("Animation_gdc80"),
+"ready_main_hand_east": SubResource("Animation_vdldy"),
+"ready_main_hand_north": SubResource("Animation_gatue"),
+"ready_main_hand_south": SubResource("Animation_fmjaq"),
+"ready_main_hand_west": SubResource("Animation_0k3sf"),
+"ready_two_hand_east": SubResource("Animation_d1g7d"),
+"ready_two_hand_south": SubResource("Animation_tglox")
+}
