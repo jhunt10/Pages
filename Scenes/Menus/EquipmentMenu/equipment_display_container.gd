@@ -47,9 +47,9 @@ func _ready() -> void:
 func rotate_main_hand(val):
 	print("Setting MainHand rotation: %s " % [val])
 	if _actor.equipment.is_two_handing():
-		if actor_node.two_hand_weapon_node.rotation_factor != 1:
-			actor_node.two_hand_weapon_node.rotation_factor = 1
-		actor_node.two_hand_weapon_node.custom_rotation = val
+		if actor_node.main_hand_node.weapon_node.rotation_factor != 1:
+			actor_node.main_hand_node.weapon_node.rotation_factor = 1
+		actor_node.main_hand_node.weapon_node.custom_rotation = val
 		off_hand_slider.set_value_no_signal(val)
 		var primary = _actor.equipment.get_primary_weapon()
 		if primary:
@@ -58,15 +58,15 @@ func rotate_main_hand(val):
 		var primary = _actor.equipment.get_primary_weapon()
 		if primary:
 			primary.get_load_val("WeaponSpriteData", {})['Rotation'] = val
-		if actor_node.main_hand_weapon_node.rotation_factor != 1:
-			actor_node.main_hand_weapon_node.rotation_factor = 1
-		actor_node.main_hand_weapon_node.custom_rotation = val
+		if actor_node.main_hand_node.weapon_node.rotation_factor != 1:
+			actor_node.main_hand_node.weapon_node.rotation_factor = 1
+		actor_node.main_hand_node.weapon_node.custom_rotation = val
 func rotate_off_hand(val):
 	print("Setting OffHand rotation: %s " % [val])
 	if _actor.equipment.is_two_handing():
-		if actor_node.two_hand_weapon_node.rotation_factor != 1:
-			actor_node.two_hand_weapon_node.rotation_factor = 1
-		actor_node.two_hand_weapon_node.custom_rotation = val
+		if actor_node.main_hand_node.weapon_node.rotation_factor != 1:
+			actor_node.main_hand_node.weapon_node.rotation_factor = 1
+		actor_node.main_hand_node.weapon_node.custom_rotation = val
 		off_hand_slider.set_value_no_signal(val)
 		var primary = _actor.equipment.get_primary_weapon()
 		if primary:
@@ -75,9 +75,9 @@ func rotate_off_hand(val):
 		var offhand = _actor.equipment.get_offhand_weapon()
 		if offhand:
 			offhand.get_load_val("WeaponSpriteData", {})['Rotation'] = val
-		if actor_node.off_hand_weapon_node.rotation_factor != 1:
-			actor_node.off_hand_weapon_node.rotation_factor = 1
-		actor_node.off_hand_weapon_node.custom_rotation = val
+		if actor_node.off_hand_node.weapon_node.rotation_factor != 1:
+			actor_node.off_hand_node.weapon_node.rotation_factor = 1
+		actor_node.off_hand_node.weapon_node.custom_rotation = val
 
 func _rotate_sprite(left:bool):
 	var dir = _display_dir

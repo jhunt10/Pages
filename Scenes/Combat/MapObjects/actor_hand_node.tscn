@@ -1,0 +1,179 @@
+[gd_scene load_steps=13 format=3 uid="uid://dooeg4ake0jdk"]
+
+[ext_resource type="Script" path="res://Scenes/Combat/MapObjects/actor_hand_node.gd" id="1_dwep3"]
+[ext_resource type="Texture2D" uid="uid://bvdyspj30c1k1" path="res://defs/Actors/Template_SpriteSheet_MainHand.png" id="1_h8dad"]
+[ext_resource type="Script" path="res://Scenes/Combat/MapObjects/actor_weapon_node.gd" id="2_ga04f"]
+[ext_resource type="Texture2D" uid="uid://clqv3gafyrfqv" path="res://defs/Actors/Template_SpriteSheet_OffHand.png" id="3_6v6cl"]
+[ext_resource type="Texture2D" uid="uid://biqv7gysaynst" path="res://defs/Actors/Template_SpriteSheet_TwoHand.png" id="4_osigu"]
+[ext_resource type="AnimationLibrary" uid="uid://ccngkcn1vievo" path="res://animations/AttackAnimations/weapon_facing.tres" id="5_8cigs"]
+[ext_resource type="Texture2D" uid="uid://dsjtdr8yd4h3d" path="res://defs/Items/Equipment/TestWeapons/TestAxe_WeaponSprite.png" id="5_wntwi"]
+[ext_resource type="AnimationLibrary" uid="uid://b6fh00go4jw6l" path="res://animations/AttackAnimations/weapon_raise.tres" id="6_oogit"]
+[ext_resource type="AnimationLibrary" uid="uid://bncx65ubhxgcv" path="res://animations/AttackAnimations/weapon_stab.tres" id="7_qybst"]
+[ext_resource type="AnimationLibrary" uid="uid://m4qmirmpwwfa" path="res://animations/AttackAnimations/weapon_swing.tres" id="8_1q6ng"]
+
+[sub_resource type="Animation" id="Animation_5vfo0"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../WeaponNode:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../WeaponNode:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2(1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../WeaponNode:rotation_factor")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../WeaponNode:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2(3, 13)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("../WeaponNode:main_hand_position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2(-4, 14)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("../WeaponNode:two_hand_offset")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2(-4, 0)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("../WeaponNode:unflip_offhand")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("../WeaponNode:off_hand_offset")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-8, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kttg8"]
+_data = {
+"RESET": SubResource("Animation_5vfo0")
+}
+
+[node name="HandNode" type="Node2D" node_paths=PackedStringArray("animation", "hand_sprite", "weapon_node")]
+script = ExtResource("1_dwep3")
+main_hand_sprite_sheet = ExtResource("1_h8dad")
+off_hand_sprite_sheet = ExtResource("3_6v6cl")
+two_hand_sprite_sheet = ExtResource("4_osigu")
+animation = NodePath("AnimationPlayer")
+hand_sprite = NodePath("HandSprite")
+weapon_node = NodePath("WeaponNode")
+weapon_under_hand_z_offset = -1
+weapon_over_hand_z_offset = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../HandSprite")
+libraries = {
+"": SubResource("AnimationLibrary_kttg8"),
+"weapon_facing": ExtResource("5_8cigs"),
+"weapon_raise": ExtResource("6_oogit"),
+"weapon_stab": ExtResource("7_qybst"),
+"weapon_swing": ExtResource("8_1q6ng")
+}
+
+[node name="WeaponNode" type="Node2D" parent="." node_paths=PackedStringArray("overhand_weapon_sprite", "underhand_weapon_sprite")]
+position = Vector2(-4, 14)
+script = ExtResource("2_ga04f")
+main_hand_position = Vector2(-4, 14)
+off_hand_offset = Vector2(-8, 0)
+two_hand_offset = Vector2(-4, 0)
+overhand_weapon_sprite = NodePath("WeaponOverHandSprite")
+underhand_weapon_sprite = NodePath("WeaponUnderHandSprite")
+rotation_factor = 1.0
+weapon_texture = ExtResource("5_wntwi")
+
+[node name="WeaponUnderHandSprite" type="Sprite2D" parent="WeaponNode"]
+z_index = -1
+texture = ExtResource("5_wntwi")
+hframes = 2
+vframes = 2
+frame = 2
+
+[node name="WeaponOverHandSprite" type="Sprite2D" parent="WeaponNode"]
+z_index = 1
+texture = ExtResource("5_wntwi")
+hframes = 2
+vframes = 2
+frame = 1
+
+[node name="HandSprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_h8dad")
+hframes = 12
+vframes = 4
