@@ -107,6 +107,8 @@ func sync_sprites():
 	else:
 		main_hand_node.hide_weapon()
 	
+	# Resets sprite
+	off_hand_node.hand = ActorHandNode.HANDS.OffHand
 	var off_hand_weapon = Actor.equipment.get_offhand_weapon()
 	if off_hand_weapon:
 		off_hand_node.set_weapon(off_hand_weapon)
