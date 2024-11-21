@@ -84,6 +84,12 @@ func set_actor(actor:BaseActor):
 
 func sync_sprites():
 	actor_sprite.texture = Actor.get_body_sprite()
+	
+	if actor_sprite.hframes == 1:
+		main_hand_node.visible = false
+		off_hand_node.visible = false
+		return
+		
 	main_hand_node.main_hand_sprite_sheet = Actor.get_main_hand_sprite()
 	main_hand_node.two_hand_sprite_sheet = Actor.get_two_hand_sprite()
 	off_hand_node.off_hand_sprite_sheet = Actor.get_off_hand_sprite()

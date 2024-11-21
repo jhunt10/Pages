@@ -21,7 +21,9 @@ func animation_list()->Array:
 	return [
 		'None',
 		'Walk',
-		'weapon_raise'
+		'weapon_raise',
+		'weapon_swing',
+		'weapon_stab'
 	]
 
 func on_animation_selected(index):

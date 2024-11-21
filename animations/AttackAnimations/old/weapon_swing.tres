@@ -1,13 +1,13 @@
-[gd_resource type="AnimationLibrary" load_steps=13 format=3 uid="uid://m4qmirmpwwfa"]
+[gd_resource type="AnimationLibrary" load_steps=13 format=3 uid="uid://yldhgn04ugxy"]
 
 [sub_resource type="Animation" id="Animation_2iils"]
-resource_name = "cancel_east"
+resource_name = "cancel_main_hand_east"
 length = 0.5
 step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
+tracks/0/path = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/MainHandOverSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -19,7 +19,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("../WeaponNode:main_hand_position")
+tracks/1/path = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/MainHandOverSprite/MainHandWeaponNode:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -31,7 +31,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("../WeaponNode:rotation")
+tracks/2/path = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/MainHandOverSprite/MainHandWeaponNode:rotation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -43,7 +43,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("../WeaponNode:scale")
+tracks/3/path = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/MainHandOverSprite/MainHandWeaponNode:scale")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -55,7 +55,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("../WeaponNode:rotation_factor")
+tracks/4/path = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/MainHandOverSprite/MainHandWeaponNode:rotation_factor")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -66,13 +66,13 @@ tracks/4/keys = {
 }
 
 [sub_resource type="Animation" id="Animation_8flbm"]
-resource_name = "cancel_north"
+resource_name = "cancel_main_hand_north"
 length = 0.45
 step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
+tracks/0/path = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/MainHandOverSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -84,7 +84,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("../WeaponNode:main_hand_position")
+tracks/1/path = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/MainHandOverSprite/MainHandWeaponNode:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -96,7 +96,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("../WeaponNode:rotation")
+tracks/2/path = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/MainHandOverSprite/MainHandWeaponNode:rotation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -108,7 +108,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("../WeaponNode:scale")
+tracks/3/path = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/MainHandOverSprite/MainHandWeaponNode:scale")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -120,7 +120,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("../WeaponNode:rotation_factor")
+tracks/4/path = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/MainHandOverSprite/MainHandWeaponNode:rotation_factor")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -131,13 +131,13 @@ tracks/4/keys = {
 }
 
 [sub_resource type="Animation" id="Animation_1m6i1"]
-resource_name = "cancel_south"
+resource_name = "cancel_main_hand_south"
 length = 0.45
 step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
+tracks/0/path = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/MainHandOverSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -149,7 +149,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("../WeaponNode:main_hand_position")
+tracks/1/path = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/MainHandOverSprite/MainHandWeaponNode:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -161,7 +161,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("../WeaponNode:rotation")
+tracks/2/path = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/MainHandOverSprite/MainHandWeaponNode:rotation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -173,7 +173,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("../WeaponNode:scale")
+tracks/3/path = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/MainHandOverSprite/MainHandWeaponNode:scale")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -185,7 +185,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("../WeaponNode:rotation_factor")
+tracks/4/path = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/MainHandOverSprite/MainHandWeaponNode:rotation_factor")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -196,13 +196,13 @@ tracks/4/keys = {
 }
 
 [sub_resource type="Animation" id="Animation_twyh0"]
-resource_name = "cancel_west"
+resource_name = "cancel_main_hand_west"
 length = 0.5
 step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
+tracks/0/path = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/MainHandOverSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -214,7 +214,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("../WeaponNode:main_hand_position")
+tracks/1/path = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/MainHandOverSprite/MainHandWeaponNode:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -226,7 +226,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("../WeaponNode:rotation")
+tracks/2/path = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/MainHandOverSprite/MainHandWeaponNode:rotation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -238,7 +238,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("../WeaponNode:scale")
+tracks/3/path = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/MainHandOverSprite/MainHandWeaponNode:scale")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -250,7 +250,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("../WeaponNode:rotation_factor")
+tracks/4/path = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/MainHandOverSprite/MainHandWeaponNode:rotation_factor")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -261,13 +261,13 @@ tracks/4/keys = {
 }
 
 [sub_resource type="Animation" id="Animation_8w8ri"]
-resource_name = "motion_east"
+resource_name = "motion_main_hand_east"
 length = 0.75
 step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
+tracks/0/path = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/MainHandOverSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -279,7 +279,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("../WeaponNode:main_hand_position")
+tracks/1/path = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/MainHandOverSprite/MainHandWeaponNode:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -291,7 +291,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("../WeaponNode:rotation")
+tracks/2/path = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/MainHandOverSprite/MainHandWeaponNode:rotation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -303,7 +303,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("../WeaponNode:scale")
+tracks/3/path = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/MainHandOverSprite/MainHandWeaponNode:scale")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -315,7 +315,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("../WeaponNode:rotation_factor")
+tracks/4/path = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/MainHandOverSprite/MainHandWeaponNode:rotation_factor")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -326,13 +326,13 @@ tracks/4/keys = {
 }
 
 [sub_resource type="Animation" id="Animation_rygu0"]
-resource_name = "motion_north"
+resource_name = "motion_main_hand_north"
 length = 0.75
 step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
+tracks/0/path = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/MainHandOverSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -344,7 +344,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("../WeaponNode:main_hand_position")
+tracks/1/path = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/MainHandOverSprite/MainHandWeaponNode:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -356,7 +356,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("../WeaponNode:rotation")
+tracks/2/path = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/MainHandOverSprite/MainHandWeaponNode:rotation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -368,7 +368,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("../WeaponNode:scale")
+tracks/3/path = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/MainHandOverSprite/MainHandWeaponNode:scale")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -380,7 +380,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("../WeaponNode:rotation_factor")
+tracks/4/path = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/MainHandOverSprite/MainHandWeaponNode:rotation_factor")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -391,13 +391,13 @@ tracks/4/keys = {
 }
 
 [sub_resource type="Animation" id="Animation_33na2"]
-resource_name = "motion_south"
+resource_name = "motion_main_hand_south"
 length = 0.75
 step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
+tracks/0/path = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/MainHandOverSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -409,7 +409,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("../WeaponNode:main_hand_position")
+tracks/1/path = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/MainHandOverSprite/MainHandWeaponNode:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -421,7 +421,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("../WeaponNode:rotation")
+tracks/2/path = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/MainHandOverSprite/MainHandWeaponNode:rotation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -433,7 +433,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("../WeaponNode:scale")
+tracks/3/path = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/MainHandOverSprite/MainHandWeaponNode:scale")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -445,7 +445,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("../WeaponNode:rotation_factor")
+tracks/4/path = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/MainHandOverSprite/MainHandWeaponNode:rotation_factor")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -456,13 +456,13 @@ tracks/4/keys = {
 }
 
 [sub_resource type="Animation" id="Animation_oojjk"]
-resource_name = "motion_west"
+resource_name = "motion_main_hand_west"
 length = 0.75
 step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
+tracks/0/path = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/MainHandOverSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -474,7 +474,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("../WeaponNode:main_hand_position")
+tracks/1/path = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/MainHandOverSprite/MainHandWeaponNode:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -486,7 +486,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("../WeaponNode:rotation")
+tracks/2/path = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/MainHandOverSprite/MainHandWeaponNode:rotation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -498,7 +498,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("../WeaponNode:scale")
+tracks/3/path = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/MainHandOverSprite/MainHandWeaponNode:scale")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -510,7 +510,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("../WeaponNode:rotation_factor")
+tracks/4/path = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/MainHandOverSprite/MainHandWeaponNode:rotation_factor")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -521,13 +521,13 @@ tracks/4/keys = {
 }
 
 [sub_resource type="Animation" id="Animation_wxt42"]
-resource_name = "ready_east"
+resource_name = "ready_main_hand_east"
 length = 0.5
 step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
+tracks/0/path = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/MainHandOverSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -539,7 +539,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("../WeaponNode:main_hand_position")
+tracks/1/path = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/MainHandOverSprite/MainHandWeaponNode:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -551,7 +551,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("../WeaponNode:rotation")
+tracks/2/path = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/MainHandOverSprite/MainHandWeaponNode:rotation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -563,7 +563,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("../WeaponNode:scale")
+tracks/3/path = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/MainHandOverSprite/MainHandWeaponNode:scale")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -575,7 +575,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("../WeaponNode:rotation_factor")
+tracks/4/path = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/MainHandOverSprite/MainHandWeaponNode:rotation_factor")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -586,13 +586,13 @@ tracks/4/keys = {
 }
 
 [sub_resource type="Animation" id="Animation_qq1ua"]
-resource_name = "ready_north"
+resource_name = "ready_main_hand_north"
 length = 0.5
 step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
+tracks/0/path = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/MainHandOverSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -604,7 +604,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("../WeaponNode:main_hand_position")
+tracks/1/path = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/MainHandOverSprite/MainHandWeaponNode:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -616,7 +616,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("../WeaponNode:rotation")
+tracks/2/path = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/MainHandOverSprite/MainHandWeaponNode:rotation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -628,7 +628,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("../WeaponNode:scale")
+tracks/3/path = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/MainHandOverSprite/MainHandWeaponNode:scale")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -640,7 +640,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("../WeaponNode:rotation_factor")
+tracks/4/path = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/MainHandOverSprite/MainHandWeaponNode:rotation_factor")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -651,13 +651,13 @@ tracks/4/keys = {
 }
 
 [sub_resource type="Animation" id="Animation_xjisj"]
-resource_name = "ready_south"
+resource_name = "ready_main_hand_south"
 length = 0.5
 step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
+tracks/0/path = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/MainHandOverSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -669,7 +669,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("../WeaponNode:main_hand_position")
+tracks/1/path = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/MainHandOverSprite/MainHandWeaponNode:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -681,7 +681,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("../WeaponNode:rotation")
+tracks/2/path = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/MainHandOverSprite/MainHandWeaponNode:rotation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -693,7 +693,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("../WeaponNode:scale")
+tracks/3/path = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/MainHandOverSprite/MainHandWeaponNode:scale")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -705,7 +705,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("../WeaponNode:rotation_factor")
+tracks/4/path = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/MainHandOverSprite/MainHandWeaponNode:rotation_factor")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -716,13 +716,13 @@ tracks/4/keys = {
 }
 
 [sub_resource type="Animation" id="Animation_4nexm"]
-resource_name = "ready_west"
+resource_name = "ready_main_hand_west"
 length = 0.5
 step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
+tracks/0/path = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/MainHandOverSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -734,7 +734,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("../WeaponNode:main_hand_position")
+tracks/1/path = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/MainHandOverSprite/MainHandWeaponNode:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -746,7 +746,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("../WeaponNode:rotation")
+tracks/2/path = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/MainHandOverSprite/MainHandWeaponNode:rotation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -758,7 +758,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("../WeaponNode:scale")
+tracks/3/path = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/MainHandOverSprite/MainHandWeaponNode:scale")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -770,7 +770,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("../WeaponNode:rotation_factor")
+tracks/4/path = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/MainHandOverSprite/MainHandWeaponNode:rotation_factor")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -782,16 +782,16 @@ tracks/4/keys = {
 
 [resource]
 _data = {
-"cancel_east": SubResource("Animation_2iils"),
-"cancel_north": SubResource("Animation_8flbm"),
-"cancel_south": SubResource("Animation_1m6i1"),
-"cancel_west": SubResource("Animation_twyh0"),
-"motion_east": SubResource("Animation_8w8ri"),
-"motion_north": SubResource("Animation_rygu0"),
-"motion_south": SubResource("Animation_33na2"),
-"motion_west": SubResource("Animation_oojjk"),
-"ready_east": SubResource("Animation_wxt42"),
-"ready_north": SubResource("Animation_qq1ua"),
-"ready_south": SubResource("Animation_xjisj"),
-"ready_west": SubResource("Animation_4nexm")
+"cancel_main_hand_east": SubResource("Animation_2iils"),
+"cancel_main_hand_north": SubResource("Animation_8flbm"),
+"cancel_main_hand_south": SubResource("Animation_1m6i1"),
+"cancel_main_hand_west": SubResource("Animation_twyh0"),
+"motion_main_hand_east": SubResource("Animation_8w8ri"),
+"motion_main_hand_north": SubResource("Animation_rygu0"),
+"motion_main_hand_south": SubResource("Animation_33na2"),
+"motion_main_hand_west": SubResource("Animation_oojjk"),
+"ready_main_hand_east": SubResource("Animation_wxt42"),
+"ready_main_hand_north": SubResource("Animation_qq1ua"),
+"ready_main_hand_south": SubResource("Animation_xjisj"),
+"ready_main_hand_west": SubResource("Animation_4nexm")
 }
