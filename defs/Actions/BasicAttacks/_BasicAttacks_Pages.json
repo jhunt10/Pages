@@ -464,6 +464,7 @@
         "CostData": {
             "Stamina": 10
         },
+        "UseWeaponIcons": true,
         "DamageDatas": {},
         "Details": {
             "Description": "Attack with MainHand Weapon for 100±10% Damage",
@@ -484,7 +485,7 @@
             "10": [
                 {
                     "AllowAlreadyTargeted": false,
-                    "AllowAutoTarget": false,
+                    "AllowAutoTarget": true,
                     "SetTargetKey": "Target1",
                     "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_GetTarget.gd",
                     "TargetParamKey": "Weapon"
@@ -506,7 +507,6 @@
                 }
             ]
         },
-        "TargetParams": {},
-        "UseWeaponIcons": true
+        "TargetParams": {}
     }
 ]

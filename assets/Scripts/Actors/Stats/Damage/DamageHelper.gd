@@ -1,6 +1,6 @@
 class_name DamageHelper
 
-const LOGGING = false
+const LOGGING = true
 
 const STAT_BALENCE:int = 100
 const ARMOR_STRETCH:float = 30

@@ -35,7 +35,7 @@ func _init(data:Dictionary, source, base_damage:int, defender:BaseActor, source_
 	is_successful = true
 	
 	self.base_damage = base_damage
-	_attack_power = data.get("AtkPower", 0)
+	_attack_power = data.get("AtkPower", 100)
 	_damage_variance = data.get("DamageVarient", 0)
 	
 	var damage_type = data.get("DamageType", null)

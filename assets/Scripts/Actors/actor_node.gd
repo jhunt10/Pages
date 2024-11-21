@@ -1,7 +1,7 @@
 class_name ActorNode
 extends Node2D
 
-const LOGGING = true
+const LOGGING = false
 
 @onready var vfx_holder:Node2D = $VFXHolder
 @onready var animation:AnimationPlayer = $AnimationPlayer

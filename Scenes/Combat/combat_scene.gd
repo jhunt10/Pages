@@ -48,6 +48,7 @@ func _ready() -> void:
 			ui_control.set_player_actor(actor)
 			add_actor(actor, 0, actor_pos)
 			camera.snap_to_map_pos(actor_pos)
+			camera.zoom = Vector2(2,2)
 		else:
 			add_actor(actor, 1, actor_pos)
 		
