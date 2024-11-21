@@ -188,13 +188,14 @@ func fail_movement():
 func play_shake():
 	animation.play("shake_effect")
 
-func start_weapon_animation(action_name:String):
-	var hand_name = "main_hand"
-	if Actor.equipment.is_two_handing():
-		hand_name = "two_hand"
-	
-	current_animation_action_name = action_name + "/ready_" + hand_name + get_animation_dir_sufix()
-	animation.play(current_animation_action_name)
+func start_weapon_animation(action_name:String, off_hand:bool=false):
+	var animation_name = action_name + "/ready" + get_animation_dir_sufix()
+	if off_hand and off_hand_node:
+		off_hand_node.ready_arnimation(action_name, get_animation_dir_sufix())
+	elif main_hand_node:
+		main_hand_node.ready_arnimation(action_name, get_animation_dir_sufix())
+	current_animation_action_name = animation_name
+	#animation.play(current_animation_action_name)
 
 func start_walk_animation():
 	current_animation_action_name = "walk/walk_out" + get_animation_dir_sufix()
@@ -203,14 +204,16 @@ func start_walk_animation():
 
 func execute_animation_motion():
 	# TODO: Clean up once I deside on names
-	if current_animation_action_name.contains("/ready_"):
-		var animation_name = current_animation_action_name.replace("/ready_", "/motion_")
-		if LOGGING: print("Playing Motion Animation: " + animation_name)
-		animation.play(animation_name)
-	elif current_animation_action_name.begins_with("walk"):
+	#if current_animation_action_name.contains("/ready_"):
+		#var animation_name = current_animation_action_name.replace("/ready_", "/motion_")
+		#if LOGGING: print("Playing Motion Animation: " + animation_name)
+		#animation.play(animation_name)
+	if current_animation_action_name.begins_with("walk"):
 		var animation_name = current_animation_action_name.replace("_out_", "_in_")
 		animation.play(animation_name)
 		if LOGGING: print("Playing Motion Animation: " + animation_name)
+	else:
+		main_hand_node.execute_animation()
 
 func cancel_current_animation():
 	if current_animation_action_name.contains("/ready_"):
@@ -221,6 +224,8 @@ func cancel_current_animation():
 		if LOGGING: print("Playing Cancel Walk Animation: " + current_animation_action_name)
 		animation.play("facing/facing"+get_animation_dir_sufix())
 		is_walking = false
+	elif main_hand_node.current_animation.contains("/ready"):
+		main_hand_node.cancel_animation()
 
 func start_walk_out_animation():
 	if LOGGING: print("Start Walk")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=3 uid="uid://cxiyfaswdygu7"]
+[gd_scene load_steps=49 format=3 uid="uid://cxiyfaswdygu7"]
 
 [ext_resource type="Script" path="res://Scenes/Menus/EquipmentMenu/equipment_menu_container.gd" id="1_7xry3"]
 [ext_resource type="Script" path="res://Scenes/UiNodes/back_patch_container.gd" id="1_wprwc"]
@@ -39,6 +39,7 @@
 [ext_resource type="Script" path="res://Scenes/Menus/EquipmentMenu/bag_item_slot_button.gd" id="27_1qh7n"]
 [ext_resource type="Script" path="res://Scenes/Menus/EquipmentMenu/bag_items_submenu_container.gd" id="27_tothq"]
 [ext_resource type="Script" path="res://Scenes/Menus/PageQueMenu/page_slot_button.gd" id="28_um48u"]
+[ext_resource type="Script" path="res://Scenes/Menus/EquipmentMenu/DEV_animation_tester.gd" id="31_hjf6e"]
 [ext_resource type="Script" path="res://Scenes/Menus/EquipmentMenu/equipment_details_container.gd" id="32_1iwer"]
 [ext_resource type="Script" path="res://Scenes/Menus/EquipmentMenu/weapon_info_sub_container.gd" id="32_gerxd"]
 [ext_resource type="Script" path="res://Scenes/UiNodes/loaded_option_button.gd" id="33_nmyhf"]
@@ -614,6 +615,18 @@ custom_minimum_size = Vector2(48, 48)
 layout_mode = 2
 theme = ExtResource("5_63y7a")
 text = " X "
+
+[node name="AnimationTester" type="HBoxContainer" parent="MainContainer/HBoxContainer/StatsDisplayContainer/InnerContainer" node_paths=PackedStringArray("actor_node", "option_button")]
+layout_mode = 2
+script = ExtResource("31_hjf6e")
+actor_node = NodePath("../../../EquipSlotsContainer/InnerContainer/MiddlePortraitContainer/PortaitBackground/CenterContainer/Control/Node2D/ActorNode")
+option_button = NodePath("LoadedOptionButton")
+
+[node name="LoadedOptionButton" type="OptionButton" parent="MainContainer/HBoxContainer/StatsDisplayContainer/InnerContainer/AnimationTester"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("33_nmyhf")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MainContainer/HBoxContainer/StatsDisplayContainer/InnerContainer"]
 layout_mode = 2

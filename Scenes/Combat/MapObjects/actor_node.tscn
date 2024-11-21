@@ -178,6 +178,18 @@ tracks/13/keys = {
 "update": 1,
 "values": [0]
 }
+tracks/14/type = "value"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/MainHandNode:two_hand_z_west_override")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_d7ja8"]
 resource_name = "shake_effect"
@@ -310,6 +322,7 @@ graph_offset = Vector2(0, -98.1367)
 [node name="ActorNode" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_wfbib")
+editing_facing_direction = 3
 metadata/_edit_horizontal_guides_ = [-40.0]
 
 [node name="ColorRect" type="ColorRect" parent="."]
@@ -333,10 +346,13 @@ vframes = 4
 
 [node name="MainHandNode" parent="ActorMotionNode/ActorSpriteNode/OffsetNode" instance=ExtResource("3_dpgwv")]
 z_index = 3
+hand = 2
 
 [node name="OffHandNode" parent="ActorMotionNode/ActorSpriteNode/OffsetNode" instance=ExtResource("3_dpgwv")]
+visible = false
 z_index = 1
 hand = 1
+two_hand_z_west_override = null
 
 [node name="VFXHolder" type="Node2D" parent="."]
 z_index = 3
