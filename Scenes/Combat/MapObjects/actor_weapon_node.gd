@@ -89,7 +89,7 @@ var _lock_position_edit:bool = false
 		rotation_factor = val
 		if self.overhand_weapon_sprite:
 			var rot_degs = self.rotation_degrees
-			if flip_sprite:
+			if flip_sprite or self.scale.x < 0:
 				rot_degs = -rot_degs
 			var target_rotation:float = (custom_rotation - rot_degs) * rotation_factor
 			if overhand_weapon_sprite.rotation_degrees != target_rotation:
