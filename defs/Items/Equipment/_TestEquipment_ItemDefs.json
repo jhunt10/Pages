@@ -162,6 +162,22 @@
         "Ward": 0
     },
     {
+        "ItemKey":"GreenHood",
+        "_ObjectScript": "res://assets/Scripts/Items/Equipment/BaseArmorEquipment.gd",
+        "Details":{
+			"DisplayName": "Greening Shirt",
+			"SnippetDesc": "An hood  made for greening.",
+			"Description": "An hood  made for greening.",
+			"Tags": ["Head"],
+			"LargeIcon":"GreenHood.png",
+			"SmallIcon":"GreenHood.png"
+		},
+        "SpriteSheet":"GreenHood_SpriteSheet.png",
+        "EquipSlot":"Head",
+        "Armor": 5,
+        "Ward": 0
+    },
+    {
         "ItemKey":"RedRobes",
         "_ObjectScript": "res://assets/Scripts/Items/Equipment/BaseArmorEquipment.gd",
         "Details":{
@@ -215,6 +231,22 @@
         "SpriteSheet":"TestBoots_SpriteSheet.png",
         "EquipSlot":"Feet",
         "Armor": 10,
+        "Ward": 0
+    },
+    {
+        "ItemKey":"LeatherBoots",
+        "_ObjectScript": "res://assets/Scripts/Items/Equipment/BaseArmorEquipment.gd",
+        "Details":{
+			"DisplayName": "Leather Boots",
+			"SnippetDesc": "An boots made for leathering.",
+			"Description": "An boots made for leathering.",
+			"Tags": ["Feet"],
+			"LargeIcon":"LeatherBoots.png",
+			"SmallIcon":"LeatherBoots.png"
+		},
+        "SpriteSheet":"LeatherBoots_SpriteSheet.png",
+        "EquipSlot":"Feet",
+        "Armor": 5,
         "Ward": 0
     },
     {
