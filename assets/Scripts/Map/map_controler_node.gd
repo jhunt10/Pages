@@ -1,8 +1,8 @@
 class_name MapControllerNode
 extends Node2D
 
-@onready var actor_tile_map:TileMapLayer = $ActorTileMap
-@onready var terrain_tile_map:TileMapLayer = $TerrainTileMap
+@export var actor_tile_map:TileMapLayer 
+@export var terrain_path_map:TerrainPathingMap
 @onready var target_area_display:TargetAreaDisplayNode = $TargetAreaDisplayNode
 
 static var game_state:GameStateData:
@@ -15,11 +15,43 @@ var zone_nodes = {}
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	terrain_path_map.hide()
 	CombatRootControl.QueController.end_of_frame.connect(_sync_positions)
 	pass # Replace with function body.
 
+func get_map_data()->Dictionary:
+	var map_data = terrain_path_map.get_map_data()
+	var actors = []
+	for child in actor_tile_map.get_children():
+		if child is ActorSpawnNode:
+			var actor = null
+			var is_player = false
+			if child.spawn_actor_by == ActorSpawnNode.SpawnBy.Player:
+				actor = ActorLibrary.get_actor("TestActor_ID")#.Instance.get_player_actor()
+				is_player = true
+			elif child.spawn_actor_by == ActorSpawnNode.SpawnBy.Id:
+				actor = ActorLibrary.get_actor(child.spawn_actor_value)
+			elif  child.spawn_actor_by == ActorSpawnNode.SpawnBy.Key:
+				actor = ActorLibrary.create_actor(child.spawn_actor_value, {})
+			
+			var pos = MapPos.new(child.map_coor.x, child.map_coor.y, 0, 0)
+			if !actor:
+				printerr("MapControl.init_load: Failed to spawn actor %s with value '%s" % [ActorSpawnNode.SpawnBy.keys()[child.spawn_actor_by], child.spawn_actor_value])
+			else:
+				printerr("MapControl.init_load: Spawning actor %s with value '%s" % [ActorSpawnNode.SpawnBy.keys()[child.spawn_actor_by], child.spawn_actor_value])
+				actors.append({
+					"ActorId": actor.Id,
+					"Pos": pos,
+					"IsPlayer": is_player,
+				})
+		child.queue_free()
+	map_data['Actors'] = actors
+	return map_data
+				
+
 func add_actor_node(actor:BaseActor, node:ActorNode):
 	actor_nodes[actor.Id] = node
+	actor_tile_map.add_child(node)
 
 func delete_actor(actor:BaseActor):
 	var node:ActorNode = actor_nodes.get(actor.Id, null)
@@ -27,25 +59,7 @@ func delete_actor(actor:BaseActor):
 		return
 	node.queue_free()
 	actor_nodes.erase(actor.Id)
-	
-func _build_terrain():
-	var map_state = game_state.MapState
-	if !map_state:
-		printerr("MapControllerNode._build_terrain: No Loaded MapState")
-		return
-		
-	var terrain_arrys = {}
-	for spot:MapSpot in map_state.list_map_spots():
-		if spot.terrain_index == 0:
-			terrain_tile_map.set_cell(Vector2i(spot.X,spot.Y), 0, Vector2i(10,1))
-		else:
-			if not terrain_arrys.keys().has(spot.terrain_index):
-				terrain_arrys[spot.terrain_index] = []
-			terrain_arrys[spot.terrain_index].append(Vector2i(spot.X, spot.Y))
-	for terrain_index in terrain_arrys.keys():
-		terrain_tile_map.set_cells_terrain_connect(terrain_arrys[terrain_index],0,0)
-	
-	
+
 func add_missile_node(missile:BaseMissile, node:MissileNode):
 	missile_nodes[missile.Id] = node
 	game_state.add_missile(missile)
@@ -57,7 +71,7 @@ func add_missile_node(missile:BaseMissile, node:MissileNode):
 	elif current_partent == null:
 		actor_tile_map.add_child(node)
 	node.sync_pos()
-	
+
 func add_zone_node(zone:BaseZone, node:ZoneNode):
 	zone_nodes[zone.Id] = node
 	game_state.add_zone(zone)
@@ -75,7 +89,7 @@ func add_zone_node(zone:BaseZone, node:ZoneNode):
 		actor_tile_map.add_child(node)
 		
 func _sync_positions():
-	_build_terrain()
+	#_build_terrain()
 	#_sync_actor_positions()
 	_sync_missile_positions()
 
@@ -96,7 +110,6 @@ func _sync_actor_positions():
 			actor_tile_map.add_child(node)
 		elif current_partent == null:
 			actor_tile_map.add_child(node)
-			
 		node.position = local_pos
 
 func _sync_missile_positions():

@@ -1,4 +1,5 @@
 @tool
+class_name TerrainPathingMap
 extends TileMapLayer
 
 @export var print_tiles:bool = false
@@ -27,3 +28,21 @@ func _process(delta: float) -> void:
 				
 			
 	pass
+
+func get_map_data()->Dictionary:
+	var map_rect = get_used_rect()
+	var out_dict = {}
+	out_dict['Width'] = map_rect.size.x
+	out_dict['Hight'] = map_rect.size.y
+	var out_arr = []
+	for size_y in range(map_rect.size.y):
+		var y = map_rect.position.y + size_y
+		out_arr.append([])
+		for size_x in range(map_rect.size.x):
+			var x = map_rect.position.x + size_x
+			var val = self.get_cell_atlas_coords(Vector2i(x, y))
+			var terrain = val.x
+			out_arr[y].append(terrain)
+	out_dict['Terrain'] = out_arr
+	return out_dict
+	

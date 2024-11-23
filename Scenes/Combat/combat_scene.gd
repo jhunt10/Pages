@@ -6,9 +6,9 @@ signal actor_spawned(actor:BaseActor)
 @export var ui_control:CombatUiControl
 @export var camera:MoveableCamera2D
 
-@onready var MapController:MapControllerNode = $MapControlerNode
+@export var MapController:MapControllerNode
 
-@onready var GridCursor:GridCursorNode = $MapControlerNode/GridCursor
+@export var GridCursor:GridCursorNode
 
 static var Instance:CombatRootControl 
 static var QueController:ActionQueController = ActionQueController.new()
@@ -40,7 +40,7 @@ func _ready() -> void:
 		printerr("Multiple CombatRootControls found")
 		queue_free()
 		return
-	
+	#load_map(MapController)
 	for actor_info in actor_creation_que:
 		var actor_id = actor_info['ActorId']
 		var actor_pos = actor_info['Pos']
@@ -57,23 +57,31 @@ func _ready() -> void:
 	actor_creation_que.clear()
 	
 	ui_control.ui_state_controller.set_ui_state(UiStateController.UiStates.ActionInput)
-	
-	MapController._build_terrain()
+	#
+	#MapController._build_terrain()
 	for actor:BaseActor in GameState._actors.values():
 		actor.on_combat_start()
 	pass # Replace with function body.
 
 func _process(delta: float) -> void:
 	QueController.update(delta)
-
-func set_init_state(map_data:Dictionary, actor_creation_que:Array):
+#
+#func load_map(map_control:MapControllerNode):
+	#GameState = GameStateData.new()
+	#map_control.init_load()
+##
+func load_init_state():
+	var data = MapController.get_map_data()
 	if GameState:
 		printerr("Combate Scene already init")
 		return
 	GameState = GameStateData.new()
-	GameState.MapState = MapStateData.new(GameState, map_data)
-	self.actor_creation_que = actor_creation_que
-	
+	GameState.MapState = MapStateData.new(GameState, data)
+	self.actor_creation_que = data['Actors']
+
+func get_player_actor()->BaseActor:
+	return ActorLibrary.get_actor("TestActor_ID")
+
 func kill_actor(actor:BaseActor):
 	actor.die()
 	QueController.remove_action_que(actor.Que)
@@ -95,15 +103,16 @@ func add_actor(actor:BaseActor, faction_id:int, pos:MapPos):
 	# Add actor to GameState and set position
 	actor.FactionIndex = faction_id
 	GameState.add_actor(actor)
-	GameState.MapState.set_actor_pos(actor, pos, actor.spawn_map_layer)
 	QueController.add_action_que(actor.Que)
 	
 	# Register new node with MapController and sync  pos
 	var new_node = load("res://Scenes/Combat/MapObjects/actor_node.tscn").instantiate()
 	new_node.set_actor(actor)
 	MapController.add_actor_node(actor, new_node)
-	MapController._sync_actor_positions()
 	new_node.visible = true
+	
+	GameState.MapState.set_actor_pos(actor, pos, actor.spawn_map_layer)
+	MapController._sync_actor_positions()
 	
 	if actor._allow_auto_que:
 		actor.auto_build_que(QueController.action_index)

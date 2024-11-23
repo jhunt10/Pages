@@ -1,8 +1,6 @@
 class_name GridCursorNode
 extends Sprite2D
 
-@onready var map_controller:MapControllerNode = $".."
-
 enum Cursors {None, Default, Targeting}
 var file_paths:Dictionary = {
 	Cursors.Default: "res://assets/Sprites/UI/GridCursors/GridCursor_Default.png",
@@ -47,6 +45,7 @@ func _process(_delta: float) -> void:
 	_sync_position()
 	
 func _sync_position():
+	var map_controller = CombatRootControl.Instance.MapController
 	if !map_controller or !map_controller.actor_tile_map:
 		return
 	var mouse_pos = map_controller.get_local_mouse_position()

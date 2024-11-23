@@ -32,7 +32,7 @@ enum HANDS {MainHand, OffHand, TwoHand}
 @export var hand_z_offset:int:
 	set(val):
 		if self.weapon_node: self.hand_sprite.z_index = val
-		else: print("NoWeaponNode")
+		elif LOGGING: print("NoWeaponNode")
 	get:
 		if self.weapon_node: return self.hand_sprite.z_index
 		else: return 0
@@ -40,7 +40,7 @@ enum HANDS {MainHand, OffHand, TwoHand}
 @export var weapon_z_offset:int:
 	set(val):
 		if self.weapon_node: self.weapon_node.z_index = val
-		else: print("NoWeaponNode")
+		elif LOGGING: print("NoWeaponNode")
 	get:
 		if self.weapon_node: return self.weapon_node.z_index
 		else: return 0
@@ -48,7 +48,7 @@ enum HANDS {MainHand, OffHand, TwoHand}
 @export var weapon_under_hand_z_offset:int:
 	set(val):
 		if self.weapon_node: self.weapon_node.underhand_weapon_sprite.z_index = val
-		else: print("NoWeaponNode")
+		elif LOGGING: print("NoWeaponNode")
 	get:
 		if self.weapon_node: return self.weapon_node.underhand_weapon_sprite.z_index
 		else: return 0
@@ -56,7 +56,7 @@ enum HANDS {MainHand, OffHand, TwoHand}
 @export var weapon_over_hand_z_offset:int:
 	set(val):
 		if self.weapon_node: self.weapon_node.overhand_weapon_sprite.z_index = val
-		else: print("NoWeaponNode")
+		elif LOGGING: print("NoWeaponNode")
 	get:
 		if self.weapon_node: return self.weapon_node.overhand_weapon_sprite.z_index
 		else: return 0
@@ -70,7 +70,7 @@ enum HANDS {MainHand, OffHand, TwoHand}
 				weapon_node.z_index = 1
 				weapon_node.underhand_weapon_sprite.z_index = -1
 				weapon_node.overhand_weapon_sprite.z_index = 1
-		else: print("NoWeaponNode")
+		elif LOGGING: print("NoWeaponNode")
 
 var current_animation
 

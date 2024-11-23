@@ -20,7 +20,7 @@ func _init(game_state:GameStateData, map_data:Dictionary) -> void:
 	var terrain_data = map_data['Terrain']
 	for y in range(max_hight):
 		for x in range(max_width):
-			_position_data.append(MapSpot.new(x,y,terrain_data[y*max_width + x], self))
+			_position_data.append(MapSpot.new(x,y,terrain_data[y][x], self))
 			
 func get_map_spot(pos)->MapSpot:
 	if pos.x < 0 or pos.x >= max_width or pos.y < 0 or pos.y >= max_hight:
@@ -126,14 +126,14 @@ func spot_blocks_los(pos)->bool:
 	var spot = get_map_spot(pos)
 	if not spot:
 		return false
-	return spot.terrain_index > 0
+	return spot.terrain_index == 0
 
 func is_spot_open(pos)->bool:
 	var spot = get_map_spot(pos)
 	if not spot:
 		print("Failed to find spot at pos: %s" % [pos])
 		return false
-	if spot.terrain_index > 0:
+	if spot.terrain_index == 0:
 		#print("Pos: %s | Terrain > 0" % [pos])
 		#for y in range(max_hight):
 			#var line = ""

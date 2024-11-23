@@ -30,39 +30,39 @@ func _load_test_map():
 func start_combat():
 	current_scene.queue_free()
 	var combat_scene:CombatRootControl = load("res://Scenes/Combat/combat_scene.tscn").instantiate()
-	var actors = []
-	var actor = ActorLibrary.get_actor("TestActor_ID")
-	#actor.equipment.equipt_weapon( ItemLibrary.create_item("TestSword", {}))
-	actors.append({
-		'ActorId': 'TestActor_ID',
-		'Pos': MapPos.new(5,5,0,2),
-		'IsPlayer': true,
-		'IsEnemy':false
-	})
-	actors.append({
-		'ActorId': 'TestTarget_ID',
-		'Pos': MapPos.new(6,1,0,2),
-		'IsPlayer': false,
-		'IsEnemy':true
-	})
-	actors.append({
-		'ActorId': 'TestTarget_ID2',
-		'Pos': MapPos.new(3,1,0,2),
-		'IsPlayer': false,
-		'IsEnemy':true
-	})
-	actors.append({
-		'ActorId': 'TestTarget_ID3',
-		'Pos': MapPos.new(4,1,0,2),
-		'IsPlayer': false,
-		'IsEnemy':true
-	})
-	actors.append({
-		'ActorId': 'TestTarget_ID4',
-		'Pos': MapPos.new(5,7,0,2),
-		'IsPlayer': false,
-		'IsEnemy':true
-	})
+	#var actors = []
+	#var actor = ActorLibrary.get_actor("TestActor_ID")
+	##actor.equipment.equipt_weapon( ItemLibrary.create_item("TestSword", {}))
+	#actors.append({
+		#'ActorId': 'TestActor_ID',
+		#'Pos': MapPos.new(5,5,0,2),
+		#'IsPlayer': true,
+		#'IsEnemy':false
+	#})
+	#actors.append({
+		#'ActorId': 'TestTarget_ID',
+		#'Pos': MapPos.new(6,1,0,2),
+		#'IsPlayer': false,
+		#'IsEnemy':true
+	#})
+	#actors.append({
+		#'ActorId': 'TestTarget_ID2',
+		#'Pos': MapPos.new(3,1,0,2),
+		#'IsPlayer': false,
+		#'IsEnemy':true
+	#})
+	#actors.append({
+		#'ActorId': 'TestTarget_ID3',
+		#'Pos': MapPos.new(4,1,0,2),
+		#'IsPlayer': false,
+		#'IsEnemy':true
+	#})
+	#actors.append({
+		#'ActorId': 'TestTarget_ID4',
+		#'Pos': MapPos.new(5,7,0,2),
+		#'IsPlayer': false,
+		#'IsEnemy':true
+	#})
 	##actors.append({
 		##'ActorId': 'TestTarget_ID5',
 		##'Pos': MapPos.new(8,5,0,2),
@@ -73,8 +73,8 @@ func start_combat():
 		#'ActorKey': 'TestTarget',
 		#'Pos': MapPos.new(6,2,0,0),
 	#})
-	var map_data = _load_test_map()
-	combat_scene.set_init_state(map_data, actors)
+	#var map_data = _load_test_map()
+	combat_scene.load_init_state()
 	current_scene = combat_scene
 	self.add_child(current_scene)
 

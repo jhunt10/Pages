@@ -58,7 +58,7 @@ var _lock_position_edit:bool = false
 #@export var hand_name:String
 @export var main_hand_position:Vector2:
 	set(val):
-		print("Set MainHand Pos")
+		if LOGGING: print("Set MainHand Pos")
 		main_hand_position = val
 		if not edit_mode and hand == ActorHandNode.HANDS.MainHand:
 			self.position = main_hand_position
@@ -67,13 +67,13 @@ var _lock_position_edit:bool = false
 			
 @export var off_hand_offset:Vector2:
 	set(val):
-		print("Set OffHand Pos")
+		if LOGGING: print("Set OffHand Pos")
 		off_hand_offset = val
 		if hand == ActorHandNode.HANDS.OffHand:
 			self.position = main_hand_position - off_hand_offset
 @export var two_hand_offset:Vector2:
 	set(val):
-		print("Set Two Pos")
+		if LOGGING: print("Set Two Pos")
 		two_hand_offset = val
 		if hand == ActorHandNode.HANDS.TwoHand:
 			self.position = main_hand_position - two_hand_offset
@@ -121,7 +121,6 @@ func _notification(what):
 	if what == NOTIFICATION_TRANSFORM_CHANGED:
 		if last_pos != self.position:
 			last_pos = self.position
-			print("Moved")
 			# Edit Mode
 			if edit_mode:
 				if hand == ActorHandNode.HANDS.MainHand:
