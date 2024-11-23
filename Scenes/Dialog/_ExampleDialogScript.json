@@ -1,0 +1,100 @@
+[
+	{
+		"BlockType": "SpeechDialogBlock",
+		"Speaker": "Narrator",
+		"WaitForButton": true,
+		"Lines": [
+			"\nWelcome to the world of Pages!",
+			"\nFirst off, let me say this long line of text so that I can test dialog is properly showing up on the screen.",
+			"\n",
+			"\nNow ",
+			"@Delay:0.3",
+			". ",
+			"@Delay:0.3",
+			". ",
+			"@Delay:0.3",
+			". ",
+			"how's this line look?",
+			"\n",
+			"\nSee if the next button works:\n",
+			"@WaitButton",
+			"\nGood. We're on a roll."
+		]
+	},
+	{
+		"BlockType": "PopUpDialogBlock",
+		"Create":"PopUp1",
+		"TargetElement": "/root/CombatRootControl/MoveableCamera2D/CanvasLayer/CombatUiControl/QueInputControl"
+	},
+	{
+		"BlockType": "PositonDialogBlock",
+		"Position": "Top"
+	},
+	{
+		"BlockType": "SpeechDialogBlock",
+		"Speaker": "Narrator",
+		"WaitForButton": true,
+		"Lines": [
+			"The text should now be at the top of the screen",
+			"\nAnd that target thing should be highlighted.",
+			"\nBut probably not because I deleted it after finishing tesing"
+		]
+	},
+	{
+		"BlockType": "PopUpDialogBlock",
+		"Destory":"PopUp1"
+	},
+	{
+		"BlockType": "SpeechDialogBlock",
+		"Speaker": "Narrator",
+		"WaitForButton": true,
+		"Lines": [
+			"Should be gone now."
+		]
+	},
+	{
+		"BlockType": "PositonDialogBlock",
+		"Position": "Bottom"
+	},
+	{
+		"BlockType": "SpeechDialogBlock",
+		"Speaker": "Narrator",
+		"WaitForButton": false,
+		"Lines": [
+			"And now it should be at the bottom of the screen."
+		]
+	},
+	{
+		"BlockType": "SpeechDialogBlock",
+		"Speaker": "Narrator",
+		"WaitForButton": true,
+		"Lines": [
+			"It's time for a Multiple Choice Quiz!"
+		]
+	},
+	{
+		"BlockType": "QuestionDialogBlock",
+		"WaitForButton": false,
+		"QuestionText": "What is the capitail of Paris?",
+		"Options": [
+			"Yes",
+			"No",
+			"Maybe?"
+		]
+	},
+	{
+		"BlockType": "SpeechDialogBlock",
+		"Speaker": "Narrator",
+		"WaitForButton": false,
+		"Lines": [
+			"Good Job! ",
+			"@Delay:0.5",
+			". ",
+			"@Delay:0.5",
+			". ",
+			"@Delay:0.5",
+			". to me!",
+			"\nYour answer was wrong, but my buttons worked correctly."
+		]
+	}
+]

@@ -1,0 +1,220 @@
+[gd_scene load_steps=11 format=3 uid="uid://bje0k82nenje6"]
+
+[ext_resource type="Script" path="res://Scenes/Dialog/dialog_control.gd" id="1_h8gog"]
+[ext_resource type="Texture2D" uid="uid://dul8y1l1gw420" path="res://assets/Sprites/UI/BackPatches/Patch_32_8_Dark.png" id="2_reu70"]
+[ext_resource type="Theme" uid="uid://dwinll8pgdjhc" path="res://Scenes/Themes/standard_theme.tres" id="3_rdgwk"]
+[ext_resource type="Script" path="res://Scenes/Dialog/DialogBlocks/DialogBlock_Speech.gd" id="4_csh83"]
+[ext_resource type="Texture2D" uid="uid://6slo2uod40i3" path="res://Scenes/Dialog/Icons/OptionIcon_Empty.png" id="5_e5bkt"]
+[ext_resource type="Script" path="res://Scenes/Dialog/DialogBlocks/DialogBlock_Question.gd" id="5_rj868"]
+[ext_resource type="Script" path="res://Scenes/Dialog/dialog_question_option.gd" id="6_3gfcs"]
+[ext_resource type="Texture2D" uid="uid://bg2pfkcrb1fj1" path="res://Scenes/Dialog/Icons/OptionIcon_Filled.png" id="8_eainl"]
+[ext_resource type="Script" path="res://Scenes/Dialog/DialogBlocks/DialogBlock_PositionBox.gd" id="9_ruoe1"]
+[ext_resource type="Script" path="res://Scenes/Dialog/DialogBlocks/DialogBlock_PopUp.gd" id="10_qbkjc"]
+
+[node name="DialogControl" type="Control" node_paths=PackedStringArray("premade_blocks", "popup_holder", "dialog_box", "next_button", "scroll_container", "blocks_container", "seperator", "premade_speech_block", "premade_question_block", "premade_position_block", "premade_popup_block")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_h8gog")
+premade_blocks = NodePath("DialogBox/PremadeDialogBlocks")
+popup_holder = NodePath("PopUpHolder")
+dialog_box = NodePath("DialogBox")
+next_button = NodePath("DialogBox/Button")
+scroll_container = NodePath("DialogBox/ScrollContainer")
+blocks_container = NodePath("DialogBox/ScrollContainer/VBoxContainer")
+seperator = NodePath("DialogBox/PremadeDialogBlocks/Seperator")
+premade_speech_block = NodePath("DialogBox/PremadeDialogBlocks/SpeechDialogBlock")
+premade_question_block = NodePath("DialogBox/PremadeDialogBlocks/QuestionDialogBlock")
+premade_position_block = NodePath("DialogBox/PremadeDialogBlocks/PositonDialogBlock")
+premade_popup_block = NodePath("DialogBox/PremadeDialogBlocks/PopUpDialogBlock")
+
+[node name="DialogBox" type="Control" parent="."]
+custom_minimum_size = Vector2(1152, 240)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="NinePatchRect" type="NinePatchRect" parent="DialogBox"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_reu70")
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+
+[node name="PremadeDialogBlocks" type="Control" parent="DialogBox"]
+visible = false
+layout_mode = 2
+anchors_preset = 0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 16.0
+offset_bottom = 16.0
+
+[node name="SpeechDialogBlock" type="BoxContainer" parent="DialogBox/PremadeDialogBlocks" node_paths=PackedStringArray("speaker_label", "text_box")]
+layout_mode = 2
+offset_right = 1120.0
+offset_bottom = 40.0
+script = ExtResource("4_csh83")
+speaker_label = NodePath("SpeakerLabel")
+text_box = NodePath("TextLabel")
+
+[node name="SpeakerLabel" type="RichTextLabel" parent="DialogBox/PremadeDialogBlocks/SpeechDialogBlock"]
+layout_mode = 2
+theme = ExtResource("3_rdgwk")
+theme_override_font_sizes/normal_font_size = 32
+text = "Speaker: "
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="TextLabel" type="RichTextLabel" parent="DialogBox/PremadeDialogBlocks/SpeechDialogBlock"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("3_rdgwk")
+theme_override_font_sizes/normal_font_size = 32
+text = "Some test text"
+fit_content = true
+scroll_active = false
+
+[node name="QuestionDialogBlock" type="BoxContainer" parent="DialogBox/PremadeDialogBlocks" node_paths=PackedStringArray("question_text_box", "options_container")]
+layout_mode = 2
+offset_top = 44.0
+offset_right = 1120.0
+offset_bottom = 132.0
+vertical = true
+script = ExtResource("5_rj868")
+question_text_box = NodePath("TextLabel")
+options_container = NodePath("VBoxContainer")
+
+[node name="TextLabel" type="RichTextLabel" parent="DialogBox/PremadeDialogBlocks/QuestionDialogBlock"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("3_rdgwk")
+theme_override_font_sizes/normal_font_size = 32
+text = "A Question being asked?"
+fit_content = true
+scroll_active = false
+
+[node name="VBoxContainer" type="VBoxContainer" parent="DialogBox/PremadeDialogBlocks/QuestionDialogBlock"]
+layout_mode = 2
+
+[node name="DialogQuestionOption" type="Control" parent="DialogBox/PremadeDialogBlocks/QuestionDialogBlock" node_paths=PackedStringArray("option_icon", "option_label", "button")]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+script = ExtResource("6_3gfcs")
+option_icon_texture_empty = ExtResource("5_e5bkt")
+option_icon_texture_filled = ExtResource("8_eainl")
+option_icon = NodePath("Container/TextureRect")
+option_label = NodePath("Container/Label")
+button = NodePath("Button")
+
+[node name="Container" type="HBoxContainer" parent="DialogBox/PremadeDialogBlocks/QuestionDialogBlock/DialogQuestionOption"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="DialogBox/PremadeDialogBlocks/QuestionDialogBlock/DialogQuestionOption/Container"]
+layout_mode = 2
+texture = ExtResource("5_e5bkt")
+stretch_mode = 3
+
+[node name="Label" type="Label" parent="DialogBox/PremadeDialogBlocks/QuestionDialogBlock/DialogQuestionOption/Container"]
+layout_mode = 2
+theme = ExtResource("3_rdgwk")
+theme_override_font_sizes/font_size = 32
+text = "Option A"
+
+[node name="Button" type="Button" parent="DialogBox/PremadeDialogBlocks/QuestionDialogBlock/DialogQuestionOption"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PositonDialogBlock" type="BoxContainer" parent="DialogBox/PremadeDialogBlocks"]
+layout_mode = 2
+offset_top = 136.0
+offset_right = 1120.0
+offset_bottom = 136.0
+vertical = true
+script = ExtResource("9_ruoe1")
+
+[node name="PopUpDialogBlock" type="BoxContainer" parent="DialogBox/PremadeDialogBlocks"]
+layout_mode = 2
+offset_top = 140.0
+offset_right = 1120.0
+offset_bottom = 140.0
+vertical = true
+script = ExtResource("10_qbkjc")
+
+[node name="Seperator" type="Label" parent="DialogBox/PremadeDialogBlocks"]
+layout_mode = 2
+offset_top = 144.0
+offset_right = 1120.0
+offset_bottom = 164.0
+theme = ExtResource("3_rdgwk")
+text = "----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------"
+text_overrun_behavior = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="DialogBox"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = -16.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+follow_focus = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="DialogBox/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Button" type="Button" parent="DialogBox"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -92.0
+offset_top = -48.0
+offset_right = -16.0
+offset_bottom = -16.0
+grow_horizontal = 0
+grow_vertical = 0
+theme = ExtResource("3_rdgwk")
+theme_override_font_sizes/font_size = 32
+text = "Next"
+
+[node name="PopUpHolder" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2

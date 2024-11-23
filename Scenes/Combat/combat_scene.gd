@@ -21,6 +21,8 @@ var actor_creation_que:Array
 func _enter_tree() -> void:
 	if !Instance: 
 		Instance = self
+		if !GameState:
+			GameState = GameStateData.new()
 	if !QueController:
 		QueController = ActionQueController.new()
 	elif Instance != self: 

@@ -30,8 +30,11 @@ func delete_actor(actor:BaseActor):
 	
 func _build_terrain():
 	var map_state = game_state.MapState
+	if !map_state:
+		printerr("MapControllerNode._build_terrain: No Loaded MapState")
+		return
+		
 	var terrain_arrys = {}
-			
 	for spot:MapSpot in map_state.list_map_spots():
 		if spot.terrain_index == 0:
 			terrain_tile_map.set_cell(Vector2i(spot.X,spot.Y), 0, Vector2i(10,1))

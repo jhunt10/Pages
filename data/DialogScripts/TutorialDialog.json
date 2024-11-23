@@ -1,0 +1,101 @@
+[
+	{
+		"BlockType": "SpeechDialogBlock",
+		"Speaker": "Narrator",
+		"WaitForButton": true,
+		"Lines": [
+			"\nWelcome to the wonderful world of Pages!"
+		]
+	},
+	{
+		"BlockType": "SpeechDialogBlock",
+		"Speaker": "Narrator",
+		"WaitForButton": true,
+		"Lines": [
+			"\nI'm assuming you've never played before since I just made it.",
+            "\nSo let's go over how it works."
+		]
+	},
+    {
+		"BlockType": "SpeechDialogBlock",
+		"Speaker": "Narrator",
+		"WaitForButton": true,
+		"Lines": [
+			"\nThis is a Multi Turn-Based game, meaning each round you and your opponent will plan out multiple turns worth of action."
+		]
+	},
+    {
+		"BlockType": "SpeechDialogBlock",
+		"Speaker": "Narrator",
+		"WaitForButton": true,
+		"Lines": [
+            "\nOnce everyone has thier turns ready, the round will start and all characters will act out thier planned turns."
+		]
+	},
+	{
+		"BlockType": "PositonDialogBlock",
+		"Position": "Top"
+	},
+	{
+		"BlockType": "SpeechDialogBlock",
+		"Speaker": "Narrator",
+		"WaitForButton": true,
+		"Lines": [
+			"\nDown at the bottom of the screen are your Pages and your PageQue."
+		]
+	},
+	{
+		"BlockType": "PopUpDialogBlock",
+		"Create":"PopUp1",
+		"TargetElement": "MoveableCamera2D/CanvasLayer/CombatUiControl/QueInputControl"
+	},
+	{
+		"BlockType": "SpeechDialogBlock",
+		"Speaker": "Narrator",
+		"WaitForButton": true,
+		"Lines": [
+			"\nThese are your Pages.",
+            "\nEach one represents an action you can preform durring combat."
+		]
+	},
+	{
+		"BlockType": "PopUpDialogBlock",
+		"Destory":"PopUp1",
+		"Create":"PopUp2",
+		"TargetElement": "MoveableCamera2D/CanvasLayer/CombatUiControl/QueDisplayControl"
+	},
+	{
+		"BlockType": "SpeechDialogBlock",
+		"Speaker": "Narrator",
+		"WaitForButton": true,
+		"Lines": [
+			"\nThis is your PageQue.",
+            "\nIt holds the Pages you have queued up for the next round."
+		]
+	},
+	{
+		"BlockType": "PopUpDialogBlock",
+		"Destory":"PopUp2"
+	},
+	{
+		"BlockType": "SpeechDialogBlock",
+		"Speaker": "Narrator",
+		"WaitForButton": true,
+		"Lines": [
+			"\nYou can add Pages to your PageQue by simply clicking on them.",
+            "\nOr remove them by clicking thier icon in the PageQue."
+		]
+	},
+	{
+		"BlockType": "SpeechDialogBlock",
+		"Speaker": "Narrator",
+		"WaitForButton": true,
+		"Lines": [
+			"\nWhen the round begins, your character will act out each Page in the order they were added to the PageQue."
+		]
+	},
+	{
+		"BlockType": "PositonDialogBlock",
+		"Position": "Bottom"
+	}
+]
