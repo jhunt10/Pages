@@ -18,7 +18,6 @@ func do_thing():
 		new_pos = Vector2(screen_size.x / 2 - parent_size.x / 2, screen_size.y - parent_size.y)
 	else:
 		printerr("PositionBoxDialogBlock: Unknown postion name '%s'. " % [position_name])
-	print("Setting Position: Cur: %s | New: %s" % [_parent_dialog_control.position, new_pos] )
 	_parent_dialog_control.dialog_box.position = new_pos
 	self._finished = true
 	self.finished.emit()

@@ -23,5 +23,7 @@ func delete():
 	pass
 
 func on_option_selected(index:int):
-	print("Selected Choice: %s" % [self._block_data.get("Options", [])[index]])
+	var choice = self._block_data.get("Options", [])[index]
+	var key = self._block_data.get("AnswerKey")
+	_parent_dialog_control.meta_data[key] = choice
 	self.finish()

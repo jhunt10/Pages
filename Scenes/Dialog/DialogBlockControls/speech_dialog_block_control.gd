@@ -43,15 +43,7 @@ func print_text():
 		if letter_index == 0:
 			# Special Command Line
 			if current_line.begins_with("@"):
-				# Set min delay
-				_delay_timer = 0.0001
-				if current_line == "@WaitForNextButton":
-					dialog_block.wait_for_next_button()
-					_paused = true
-				if current_line.begins_with("@Delay:"):
-					var tokens = current_line.split(":")
-					var delay = float(tokens[1])
-					_delay_timer = delay
+				handle_special_line(current_line)
 				line_index += 1
 				return
 		# Print next letter
@@ -69,6 +61,22 @@ func print_text():
 	# Finished all lines
 	else:
 		is_finished = true
+
+func handle_special_line(current_line):
+	# Set min delay
+	_delay_timer = 0.0001
+	if current_line == "@WaitForNextButton":
+		dialog_block.wait_for_next_button()
+		_paused = true
+	if current_line.begins_with("@Delay:"):
+		var tokens = current_line.split(":")
+		var delay = float(tokens[1])
+		_delay_timer = delay
+	if current_line.begins_with("@Image|"):
+		var tokens = current_line.split("|")
+		var image = load(tokens[1])
+		if image:
+			text_box.add_image(image)
 
 func set_dailog_block(block:SpeechDialogBlock):
 	self.dialog_block = block
@@ -94,10 +102,9 @@ func try_skip()->bool:
 			line_index = index
 			current_line = lines[line_index]
 			if current_line.begins_with("@"):
-				if current_line == "@WaitForNextButton":
-					line_index += 1
-					dialog_block.wait_for_next_button()
-					_paused = true
+				handle_special_line(current_line)
+				line_index += 1
+				if _paused:
 					return false
 			else:
 				text_box.append_text(lines[index])

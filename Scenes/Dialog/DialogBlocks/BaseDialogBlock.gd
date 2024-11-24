@@ -43,5 +43,8 @@ func finish():
 	_finished = true
 	self.finished.emit()
 
+func get_next_block_tag():
+	return _block_data.get("NextBlockTag")
+
 func delete():
 	pass

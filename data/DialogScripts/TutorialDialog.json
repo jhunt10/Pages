@@ -1,5 +1,6 @@
 [
 	{
+        "Index": 0,
 		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_Speech.gd",
 		"Speaker": "Narrator",
 		"WaitForButton": true,
@@ -8,15 +9,37 @@
 		]
 	},
 	{
+        "Index": 1,
 		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_Speech.gd",
 		"Speaker": "Narrator",
 		"WaitForButton": true,
 		"Lines": [
 			"\nI'm assuming you've never played before since I just made it.",
-            "\nSo let's go over how it works."
 		]
 	},
+	{
+		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_Question.gd",
+		"QuestionText": "Would you like to go over the tutorial?",
+		"AnswerKey": "Answer1",
+		"Options": [
+			"Yes",
+			"No"
+		]
+	},
+	{
+		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_Condition.gd",
+		"AnswerConsition":
+		{
+			"AnswerKey": "Answer1",
+			"JumpToMapping": {
+				"Yes": "AnsweredYes",
+				"No": "End"
+			}
+		}
+	},
     {
+        "BlockTag": "AnsweredYes",
+        "Index": 2,
 		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_Speech.gd",
 		"Speaker": "Narrator",
 		"WaitForButton": true,
@@ -25,6 +48,7 @@
 		]
 	},
     {
+        "Index": 3,
 		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_Speech.gd",
 		"Speaker": "Narrator",
 		"WaitForButton": true,
@@ -33,24 +57,28 @@
 		]
 	},
 	{
+        "Index": 4,
 		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_PositionBox.gd",
 		"Position": "Top"
 	},
 	{
+        "Index": 5,
 		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_Speech.gd",
 		"Speaker": "Narrator",
 		"WaitForButton": true,
 		"Lines": [
-			"\nDown at the bottom of the screen are your Pages and your PageQue."
+			"\nAt the bottom of the screen are your Pages and PageQue."
 		]
 	},
 	{
+        "Index": 6,
 		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_PopUp.gd",
 		"Create":"PopUp1",
 		"TargetElement": "MoveableCamera2D/CanvasLayer/CombatUiControl/QueInputControl",
 		"PopupControlSript": "res://Scenes/Dialog/DialogBlockControls/PopUps/dotted_outline_pop_up_control.tscn"
 	},
 	{
+        "Index": 7,
 		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_Speech.gd",
 		"Speaker": "Narrator",
 		"WaitForButton": true,
@@ -60,6 +88,7 @@
 		]
 	},
 	{
+        "Index": 8,
 		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_PopUp.gd",
 		"Delete":"PopUp1",
 		"Create":"PopUp2",
@@ -67,6 +96,7 @@
 		"PopupControlSript": "res://Scenes/Dialog/DialogBlockControls/PopUps/dotted_outline_pop_up_control.tscn"
 	},
 	{
+        "Index": 9,
 		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_Speech.gd",
 		"Speaker": "Narrator",
 		"WaitForButton": true,
@@ -76,27 +106,112 @@
 		]
 	},
 	{
+        "Index": 10,
 		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_PopUp.gd",
 		"Delete":"PopUp2"
 	},
 	{
+        "Index": 11,
 		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_Speech.gd",
 		"Speaker": "Narrator",
 		"WaitForButton": true,
 		"Lines": [
-			"\nYou can add Pages to your PageQue by simply clicking on them.",
+			"\nYou can add Pages to your PageQue by clicking on them.",
             "\nOr remove them by clicking thier icon in the PageQue."
 		]
 	},
 	{
+		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_PositionBox.gd",
+		"BlockType": "PositonDialogBlock",
+		"Position": "Bottom"
+	},
+	{
 		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_Speech.gd",
 		"Speaker": "Narrator",
 		"WaitForButton": true,
 		"Lines": [
-			"\nWhen the round begins, your character will act out each Page in the order they were added to the PageQue."
+			"\nTo get started, try turning left and walking three steps forward."
 		]
 	},
 	{
+		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_PositionBox.gd",
+		"BlockType": "PositonDialogBlock",
+		"Position": "Top"
+	},
+	{
+        "BlockTag": "FirstInput_Instruction",
+		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_Speech.gd",
+		"Speaker": "Narrator",
+		"WaitForButton": true,
+		"Lines": [
+			"\nPress the \"Turn Left\" ",
+            "@Image|res://data/Actions/Movement/TurnRight.png",
+            " Page once.",
+			"\nThen press the \"Move Forward\" ",
+            "@Image|res://data/Actions/Movement/MoveForward.png",
+            " Page 3 times."
+		]
+	},
+    {
+        "BlockTag":"FirstInput_Check",
+        "BlockScript": "res://Scenes/Dialog/DialogBlocks/Custom/DialogBlock_TutorialConditions.gd"
+    },
+    {
+        "BlockTag":"FirstInput_Failed",
+		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_Speech.gd",
+		"Speaker": "Narrator",
+		"WaitForButton": true,
+		"Lines": [
+			"\nWhoops, that's not right.",
+			"\nLet's try again."
+		],
+        "NextBlockTag": "FirstInput_Instruction"
+
+    },
+	{
+        "BlockTag":"FirstInput_Success",
+		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_Speech.gd",
+		"Speaker": "Narrator",
+		"WaitForButton": true,
+		"Lines": [
+			"\nYou'll notice an arrow that appeared under your character.",
+			"\nThis is peviews where your character will end up once the round is done."
+		]
+	},
+	{
+		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_PopUp.gd",
+		"Create":"PopUp3",
+		"TargetElement": "MoveableCamera2D/CanvasLayer/CombatUiControl/QueInputControl/HBoxContainer/StartButton",
+		"PopupControlSript": "res://Scenes/Dialog/DialogBlockControls/PopUps/dotted_outline_pop_up_control.tscn"
+	},
+	{
+        "BlockTag":"FirstInput_Success",
+		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_Speech.gd",
+		"Speaker": "Narrator",
+		"WaitForButton": true,
+		"Lines": [
+			"\nNow that you're PageQue is ready, press the Start button to begine the round."
+		]
+	},
+	{
+		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_PopUp.gd",
+		"Delete":"PopUp3"
+	},
+    {
+        "BlockTag":"ForceStart",
+        "BlockScript": "res://Scenes/Dialog/DialogBlocks/Custom/DialogBlock_TutorialConditions.gd"
+    },
+	{
+		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_Speech.gd",
+		"Speaker": "Narrator",
+		"WaitForButton": true,
+		"Lines": [
+			"\nMore Text."
+		]
+	},
+	{
+        "BlockTag":"End",
+		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_PositionBox.gd",
 		"BlockType": "PositonDialogBlock",
 		"Position": "Bottom"
 	}

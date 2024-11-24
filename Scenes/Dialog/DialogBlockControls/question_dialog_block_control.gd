@@ -58,7 +58,8 @@ func print_text():
 	var option_index = options_container.get_children().size() 
 	if  options.size() > option_index:
 		create_option(options[option_index], option_index)
-	_done_printing = true
+	else:
+		_done_printing = true
 	## Finished all lines
 
 func create_option(option_text, option_index):

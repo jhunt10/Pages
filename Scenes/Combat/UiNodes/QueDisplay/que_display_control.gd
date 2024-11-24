@@ -99,9 +99,10 @@ func _build_slots():
 func _sync_icons():
 	var index = 0
 	for action:BaseAction in _actor.Que.list_qued_actions():
-		var slot:QueDisplaySlot = _real_slots[index]
-		slot.set_action(index, _actor, action)
-		index += 1
+		if _real_slots.size() > index:
+			var slot:QueDisplaySlot = _real_slots[index]
+			slot.set_action(index, _actor, action)
+			index += 1
 		
 	for n in range(index, _actor.Que.get_max_que_size()):
 		if n < _real_slots.size():

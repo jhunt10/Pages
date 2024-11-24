@@ -15,6 +15,8 @@ const LETTER_DELAY:float = 0.03
 var _start_position
 
 var dialog_script_data:Array
+var block_tags:Array
+var meta_data:Dictionary = {}
 var popups:Dictionary
 var current_block:BaseDialogBlock
 var block_index:int
@@ -90,14 +92,22 @@ func create_new_block(block_data):
 
 func block_finished(from_next_button:bool=false):
 	if LOGGING: print("Block Finished")
+	var next_index = block_index + 1
 	if current_block:
 		if current_block._block_data.get("WaitForButton", true) and not from_next_button:
 			show_next_button()
 			return
+		var next_tag = current_block.get_next_block_tag()
+		if next_tag:
+			var index = block_tags.find(next_tag)
+			if index < 0:
+				printerr("Failed to find next block with tag: %s" % [next_tag])
+			else:
+				next_index = index
 		current_block.delete()
 		current_block.finished.disconnect(block_finished)
-	if dialog_script_data.size() > block_index + 1:
-		block_index += 1
+	if dialog_script_data.size() > next_index:
+		block_index = next_index
 		start_block()
 	else:
 		self.hide()
@@ -123,6 +133,12 @@ func load_dialog_script(file_path):
 	var file = FileAccess.open(file_path, FileAccess.READ)
 	var text:String = file.get_as_text()
 	dialog_script_data = JSON.parse_string(text)
+	block_tags = []
+	for block_data in dialog_script_data:
+		if block_data.keys().has("BlockTag"):
+			block_tags.append(block_data['BlockTag'])
+		else:
+			block_tags.append(null)
 
 func on_next_button_pressed():
 	if LOGGING: print("Next Button Pressed")

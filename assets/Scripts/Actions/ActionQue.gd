@@ -72,6 +72,9 @@ func turn_to_que_index(turn_index:int)->int:
 		real_index = -real_index
 	return real_index-1
 
+func is_ready()->bool:
+	return real_que.size() ==  get_max_que_size()
+
 func get_action_for_turn(turn_index : int):
 	var real_index = turn_to_que_index(turn_index)
 	if real_index < 0 or real_index >= real_que.size():
@@ -102,6 +105,8 @@ func delete_at_index(index):
 # Get the end position if all qued movement actions were resolved
 func get_movement_preview_pos()->MapPos:
 	var current_pos = CombatRootControl.Instance.GameState.MapState.get_actor_pos(actor)
+	if !current_pos:
+		return null
 	for action:BaseAction in real_que:
 		if action.PreviewMoveOffset:
 			var next_pos = MoveHandler.relative_pos_to_real(current_pos, action.PreviewMoveOffset)
