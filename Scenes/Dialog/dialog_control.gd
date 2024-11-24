@@ -1,6 +1,8 @@
 class_name DialogControl
 extends Control
 
+const LOGGING = false
+
 const LETTER_DELAY:float = 0.03
 @export var scene_root:Node
 @export var premade_blocks:Control
@@ -9,12 +11,6 @@ const LETTER_DELAY:float = 0.03
 @export var next_button:Button
 @export var scroll_container:ScrollContainer
 @export var blocks_container:VBoxContainer
-
-@export var seperator:Label
-@export var premade_speech_block:SpeechDialogBlock
-@export var premade_question_block:QuestionDialogBlock
-@export var premade_position_block:PositionBoxDialogBlock
-@export var premade_popup_block:PopUpBoxDialogBlock
 
 var _start_position
 
@@ -29,11 +25,9 @@ var _delayed_scroll:bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	premade_speech_block.hide()
-	seperator.hide()
-	premade_question_block.hide()
 	next_button.pressed.connect(on_next_button_pressed)
 	_start_position = dialog_box.position
+	#load_dialog_script("res://Scenes/Dialog/_ExampleDialogScript.json")#
 	load_dialog_script("res://data/DialogScripts/TutorialDialog.json")
 	start_dialog()
 	pass # Replace with function body.
@@ -42,14 +36,12 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if _scroll_to_bottom and current_block:
-		scroll_container.ensure_control_visible(current_block)
+		scroll_container.ensure_control_visible(blocks_container)
 		_scroll_to_bottom = false
-	#if waiting_for_button:
-		#return
-	#if delay_timer > 0:
-		#delay_timer -= delta
-		#if delay_timer <= 0:
-			#do_thing()
+	if waiting_for_button:
+		return
+	if current_block and not current_block.is_finished:
+		current_block.update(delta)
 
 func _input(event: InputEvent) -> void:
 	if !self.visible:
@@ -60,9 +52,9 @@ func _input(event: InputEvent) -> void:
 			if next_button.visible:
 				on_next_button_pressed()
 			else:
-				if current_block:
+				if current_block and not current_block.is_finished:
+					if LOGGING: print("Skipping")
 					current_block.skip()
-					print("Skipping")
 					scroll_to_bottom()
 
 func start_dialog():
@@ -70,45 +62,40 @@ func start_dialog():
 	start_block()
 
 func start_block():
-	print("Starting Block %s" % [block_index])
+	if LOGGING: print("Starting Block %s" % [block_index])
 	if dialog_script_data.size() > block_index:
-		#if block_index > 0:
-			#var new_seperator = seperator.duplicate()
-			#new_seperator.show()
-			#blocks_container.add_child(new_seperator)
 		var new_block_data = dialog_script_data[block_index]
 		var new_block = await create_new_block(new_block_data)
-		if current_block:
-			current_block.archive()
+		if !new_block:
+			printerr("DialogControl: create_new_block failed on index %s" % [block_index])
+			current_block = null
+			block_finished()
+			return
 		current_block = new_block
+		current_block.finished.connect(block_finished)
 		current_block.start()
 
 func create_new_block(block_data):
-	var block_type = block_data.get("BlockType")
-	var premade = premade_blocks.get_node(block_type)
-	if !premade:
-		printerr("Failed to find premade DialogBlock: %s" % [block_type])
-		return
+	var block_script_path = block_data.get("BlockScript")
+	if !block_script_path:
+		printerr("DialogControl: No BlockScript found on script block #%s" % [block_index])
+		return null
 		
-	var new_block = premade.duplicate()
-	if !new_block:
-		printerr("Unknown DialogBlock Type: %s" %[block_type])
-		return
-		
-	blocks_container.add_child(new_block)
-	new_block.show()
-	new_block.custom_minimum_size = Vector2(blocks_container.size.x, scroll_container.size.y-8)
-	await get_tree().process_frame
-	scroll_container.ensure_control_visible(new_block)
-	new_block.finished.connect(block_finished)
-	new_block.set_block_data(self, block_data)
+	var script = load(block_script_path)
+	if !script:
+		printerr("DialogControl: Failed to find script: %s" % [block_script_path])
+		return null
+	var new_block = script.new(self, block_data)
 	return new_block
-		 
 
-func block_finished():
-	if current_block._block_data.get("WaitForButton", true):
-		show_next_button()
-		return
+func block_finished(from_next_button:bool=false):
+	if LOGGING: print("Block Finished")
+	if current_block:
+		if current_block._block_data.get("WaitForButton", true) and not from_next_button:
+			show_next_button()
+			return
+		current_block.delete()
+		current_block.finished.disconnect(block_finished)
 	if dialog_script_data.size() > block_index + 1:
 		block_index += 1
 		start_block()
@@ -116,9 +103,17 @@ func block_finished():
 		self.hide()
 
 func show_next_button():
-	print("Show Next Button")
+	if LOGGING: print("Show Next Button")
 	next_button.show()
 	waiting_for_button = true
+
+func add_block_container(new_block):
+	blocks_container.add_child(new_block)
+	new_block.show()
+	var scroll_bar_size = scroll_container.get_v_scroll_bar().size.x
+	new_block.custom_minimum_size = Vector2(blocks_container.size.x-scroll_bar_size, scroll_container.size.y)
+	await get_tree().process_frame
+	scroll_container.ensure_control_visible(new_block)
 
 func scroll_to_bottom():
 	#scroll_container.ensure_control_visible(current_block)
@@ -130,20 +125,19 @@ func load_dialog_script(file_path):
 	dialog_script_data = JSON.parse_string(text)
 
 func on_next_button_pressed():
-	print("Next Button Pressed")
+	if LOGGING: print("Next Button Pressed")
 	waiting_for_button = false
 	next_button.hide()
-	if current_block and current_block._finished:
-		block_index += 1
-		start_block()
+	if current_block and current_block.is_finished:
+		block_finished(true)
 
 func add_popup(key, pop_up, pos=null):
 	if popups.keys().has(key):
-		printerr("Popup with key: '%s' already exists." % [key])
+		printerr("DialogControl: Popup with key: '%s' already exists." % [key])
 		return
 	popups[key] = pop_up
 	popup_holder.add_child(pop_up)
-	print("---Added Pop Up")
+	if LOGGING: print("---Added Pop Up")
 	if pos:
 		pop_up.position = pos
 

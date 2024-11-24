@@ -1,0 +1,36 @@
+[gd_scene load_steps=3 format=3 uid="uid://coxyk656wswap"]
+
+[ext_resource type="Script" path="res://Scenes/Dialog/DialogBlockControls/PopUps/dotted_outline_pop_up_control.gd" id="1_jfgny"]
+[ext_resource type="Texture2D" uid="uid://61a0f8egvi8c" path="res://Scenes/Dialog/DialogBlockControls/PopUps/DottedPatch_32_8.png" id="2_hnfxo"]
+
+[node name="DottedOutlinePopUpControl" type="Control"]
+modulate = Color(0.733185, 0.772229, 0.512226, 1)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_jfgny")
+
+[node name="DottedPatch" type="NinePatchRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_hnfxo")
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="."]
+self_modulate = Color(1, 1, 1, 0.156863)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

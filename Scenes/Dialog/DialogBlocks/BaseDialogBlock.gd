@@ -1,5 +1,4 @@
 class_name BaseDialogBlock
-extends BoxContainer
 
 signal finished
 
@@ -8,44 +7,41 @@ const LINE_DELAY:float = 0.3
 
 var _parent_dialog_control:DialogControl
 var _block_data:Dictionary
-var _delay_timer:float = 0
 var _finished:bool = false
+var is_finished:bool:
+	get: return _finished
 
-func set_block_data(parent, data):
+func _init(parent, data)->void:
 	self._parent_dialog_control = parent
 	self._block_data = data
+
+func get_block_data()->Dictionary:
+	return _block_data
 
 func start():
 	do_thing()
 
-func _process(delta: float) -> void:
-	if self._finished:
-		return
-		
-	if !_parent_dialog_control or !_block_data:
-		return
-		
-	if _parent_dialog_control.waiting_for_button:
-		return
-	
-	if _delay_timer > 0:
-		_delay_timer -= delta
-		if _delay_timer <= 0:
-			do_thing()
+func update(delta: float) -> void:
+	pass
 
 func do_thing():
 	pass
 
 func skip():
-	if !self._finished:
-		on_skip()
+	if self._finished:
+		return
+	if try_skip():
+		self.finish()
 
-func on_skip():
-	pass
+## Returns true if skipping caused the block to finish 
+func try_skip()->bool:
+	return true
 
-func archive():
-	self.queue_free()
+func finish():
+	if _finished:
+		return
+	_finished = true
+	self.finished.emit()
+
+func delete():
 	pass
-	#self.custom_minimum_size = Vector2.ZERO
-	#self.size = Vector2.ZERO
-	#_parent_dialog_control.scroll_to_bottom()

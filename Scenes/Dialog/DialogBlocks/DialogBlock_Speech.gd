@@ -1,91 +1,36 @@
 class_name SpeechDialogBlock
 extends BaseDialogBlock
 
-@export var speaker_label:RichTextLabel
-@export var text_box:RichTextLabel
+var dialog_block_control:SpeechDialogBlockControl
 
-var line_index:int
-var letter_index:int
+var waiting:bool = false
 
-func _process(delta: float) -> void:
-	if self._finished:
-		return
+func start():
+	dialog_block_control = load("res://Scenes/Dialog/DialogBlockControls/speech_dialog_block.tscn").instantiate()
+	_parent_dialog_control.add_block_container(dialog_block_control)
+	dialog_block_control.set_dailog_block(self)
+	dialog_block_control.start()
 	
-	if !_parent_dialog_control or !_block_data:
-		return
-		
-	if _parent_dialog_control.waiting_for_button:
-		return
-	
-	if _delay_timer > 0:
-		_delay_timer -= delta
-		if _delay_timer <= 0:
-			do_thing()
 
-func do_thing():
-	var lines:Array = _block_data.get("Lines", [])
-	# Print next line
-	if lines.size() > line_index:
-		_parent_dialog_control.scroll_to_bottom()
-		var current_line:String = lines[line_index]
-		# Line Starting
-		if letter_index == 0:
-			# Special Command Line
-			if current_line.begins_with("@"):
-				# Set min delay
-				_delay_timer = 0.0001
-				if current_line == "@WaitButton":
-					_parent_dialog_control.show_next_button()
-				if current_line.begins_with("@Delay:"):
-					var tokens = current_line.split(":")
-					var delay = float(tokens[1])
-					_delay_timer = delay
-				line_index += 1
-				return
-		# Print next letter
-		if current_line.length() > letter_index:
-			text_box.append_text(current_line.substr(letter_index,1))
-			letter_index += 1
-			_delay_timer = LETTER_DELAY
-			return
-		# Line Finished
-		else:
-			line_index += 1
-			letter_index = 0
-			_delay_timer = LINE_DELAY
-			return
-	# Finished all lines
+func update(delta: float) -> void:
+	if waiting:
+		if !_parent_dialog_control.waiting_for_button:
+			dialog_block_control.resume()
+	if dialog_block_control.is_finished:
+		self.finish()
+	pass
+
+func try_skip()->bool:
+	if dialog_block_control.is_finished:
+		return true
 	else:
-		_finished = true
-		self.finished.emit()
+		return dialog_block_control.try_skip()
 
-func set_block_data(parent_control, data):
-	text_box.clear()
-	text_box.text = ''
-	if data.keys().has("Speaker"):
-		speaker_label.text = data.get("Speaker", "") + ": "
-	else:
-		speaker_label.hide()
-	super(parent_control, data)
+func delete():
+	printerr("Deleting Speech Block")
+	dialog_block_control.queue_free()
+	pass
 
-func on_skip():
-	var lines:Array = _block_data.get("Lines", [])
-	if lines.size() > line_index:
-		var current_line = lines[line_index]
-		if letter_index > 0 and current_line.length() > letter_index:
-			text_box.append_text(current_line.substr(letter_index))
-			line_index += 1
-		letter_index = 0
-		for index in range(line_index, lines.size()):
-			line_index = index
-			if lines[index].begins_with("@"):
-				if current_line == "@WaitButton":
-					_parent_dialog_control.show_next_button()
-					line_index += 1
-					return
-			else:
-				text_box.append_text(lines[index])
-	_finished = true
-	self.finished.emit()
-	
-		
+func wait_for_next_button():
+	_parent_dialog_control.show_next_button()
+	self.waiting = true

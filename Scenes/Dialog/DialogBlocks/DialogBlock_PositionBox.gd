@@ -1,13 +1,13 @@
 class_name PositionBoxDialogBlock
 extends BaseDialogBlock
 
-func set_block_data(parent, data):
+func _init(parent, data)->void:
 	data['WaitForButton'] = false
 	super(parent, data)
 
 func do_thing():
 	var position_name = _block_data.get('Position', null)
-	var screen_size = get_viewport_rect().size
+	var screen_size = _parent_dialog_control.get_viewport_rect().size
 	var parent_size = _parent_dialog_control.dialog_box.size
 	var new_pos = _parent_dialog_control._start_position
 	if position_name == 'Reset':

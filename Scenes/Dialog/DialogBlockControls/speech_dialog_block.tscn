@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=3 uid="uid://cyi7xhb25f7cs"]
+
+[ext_resource type="Script" path="res://Scenes/Dialog/DialogBlockControls/speech_dialog_block_control.gd" id="1_nxhwm"]
+[ext_resource type="Theme" uid="uid://dwinll8pgdjhc" path="res://Scenes/Themes/standard_theme.tres" id="2_7rrsn"]
+
+[node name="SpeechDialogBlock" type="BoxContainer" node_paths=PackedStringArray("speaker_label", "text_box")]
+offset_right = 1120.0
+offset_bottom = 40.0
+script = ExtResource("1_nxhwm")
+speaker_label = NodePath("SpeakerLabel")
+text_box = NodePath("TextLabel")
+
+[node name="SpeakerLabel" type="RichTextLabel" parent="."]
+layout_mode = 2
+theme = ExtResource("2_7rrsn")
+theme_override_font_sizes/normal_font_size = 32
+text = "Speaker: "
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="TextLabel" type="RichTextLabel" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("2_7rrsn")
+theme_override_font_sizes/normal_font_size = 32
+text = "Some test text"
+fit_content = true
+scroll_active = false

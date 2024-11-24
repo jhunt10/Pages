@@ -1,6 +1,6 @@
 [
 	{
-		"BlockType": "SpeechDialogBlock",
+		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_Speech.gd",
 		"Speaker": "Narrator",
 		"WaitForButton": true,
 		"Lines": [
@@ -8,7 +8,7 @@
 		]
 	},
 	{
-		"BlockType": "SpeechDialogBlock",
+		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_Speech.gd",
 		"Speaker": "Narrator",
 		"WaitForButton": true,
 		"Lines": [
@@ -17,7 +17,7 @@
 		]
 	},
     {
-		"BlockType": "SpeechDialogBlock",
+		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_Speech.gd",
 		"Speaker": "Narrator",
 		"WaitForButton": true,
 		"Lines": [
@@ -25,7 +25,7 @@
 		]
 	},
     {
-		"BlockType": "SpeechDialogBlock",
+		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_Speech.gd",
 		"Speaker": "Narrator",
 		"WaitForButton": true,
 		"Lines": [
@@ -33,11 +33,11 @@
 		]
 	},
 	{
-		"BlockType": "PositonDialogBlock",
+		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_PositionBox.gd",
 		"Position": "Top"
 	},
 	{
-		"BlockType": "SpeechDialogBlock",
+		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_Speech.gd",
 		"Speaker": "Narrator",
 		"WaitForButton": true,
 		"Lines": [
@@ -45,12 +45,13 @@
 		]
 	},
 	{
-		"BlockType": "PopUpDialogBlock",
+		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_PopUp.gd",
 		"Create":"PopUp1",
-		"TargetElement": "MoveableCamera2D/CanvasLayer/CombatUiControl/QueInputControl"
+		"TargetElement": "MoveableCamera2D/CanvasLayer/CombatUiControl/QueInputControl",
+		"PopupControlSript": "res://Scenes/Dialog/DialogBlockControls/PopUps/dotted_outline_pop_up_control.tscn"
 	},
 	{
-		"BlockType": "SpeechDialogBlock",
+		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_Speech.gd",
 		"Speaker": "Narrator",
 		"WaitForButton": true,
 		"Lines": [
@@ -59,13 +60,14 @@
 		]
 	},
 	{
-		"BlockType": "PopUpDialogBlock",
-		"Destory":"PopUp1",
+		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_PopUp.gd",
+		"Delete":"PopUp1",
 		"Create":"PopUp2",
-		"TargetElement": "MoveableCamera2D/CanvasLayer/CombatUiControl/QueDisplayControl"
+		"TargetElement": "MoveableCamera2D/CanvasLayer/CombatUiControl/QueDisplayControl",
+		"PopupControlSript": "res://Scenes/Dialog/DialogBlockControls/PopUps/dotted_outline_pop_up_control.tscn"
 	},
 	{
-		"BlockType": "SpeechDialogBlock",
+		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_Speech.gd",
 		"Speaker": "Narrator",
 		"WaitForButton": true,
 		"Lines": [
@@ -74,11 +76,11 @@
 		]
 	},
 	{
-		"BlockType": "PopUpDialogBlock",
-		"Destory":"PopUp2"
+		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_PopUp.gd",
+		"Delete":"PopUp2"
 	},
 	{
-		"BlockType": "SpeechDialogBlock",
+		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_Speech.gd",
 		"Speaker": "Narrator",
 		"WaitForButton": true,
 		"Lines": [
@@ -87,7 +89,7 @@
 		]
 	},
 	{
-		"BlockType": "SpeechDialogBlock",
+		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_Speech.gd",
 		"Speaker": "Narrator",
 		"WaitForButton": true,
 		"Lines": [

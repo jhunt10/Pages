@@ -1,6 +1,6 @@
 [
 	{
-		"BlockType": "SpeechDialogBlock",
+		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_Speech.gd",
 		"Speaker": "Narrator",
 		"WaitForButton": true,
 		"Lines": [
@@ -17,21 +17,22 @@
 			"how's this line look?",
 			"\n",
 			"\nSee if the next button works:\n",
-			"@WaitButton",
+			"@WaitForNextButton",
 			"\nGood. We're on a roll."
 		]
 	},
 	{
-		"BlockType": "PopUpDialogBlock",
-		"Create":"PopUp1",
-		"TargetElement": "/root/CombatRootControl/MoveableCamera2D/CanvasLayer/CombatUiControl/QueInputControl"
+		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_PositionBox.gd",
+		"Position":"Top"
 	},
 	{
-		"BlockType": "PositonDialogBlock",
-		"Position": "Top"
+		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_PopUp.gd",
+		"Create": "PopUp1",
+		"PopupControlSript": "res://Scenes/Dialog/DialogBlockControls/PopUps/dotted_outline_pop_up_control.tscn",
+		"Rect": [100,100,100,100]
 	},
 	{
-		"BlockType": "SpeechDialogBlock",
+		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_Speech.gd",
 		"Speaker": "Narrator",
 		"WaitForButton": true,
 		"Lines": [
@@ -41,11 +42,11 @@
 		]
 	},
 	{
-		"BlockType": "PopUpDialogBlock",
-		"Destory":"PopUp1"
+		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_PopUp.gd",
+		"Delete": "PopUp1"
 	},
 	{
-		"BlockType": "SpeechDialogBlock",
+		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_Speech.gd",
 		"Speaker": "Narrator",
 		"WaitForButton": true,
 		"Lines": [
@@ -53,11 +54,11 @@
 		]
 	},
 	{
-		"BlockType": "PositonDialogBlock",
-		"Position": "Bottom"
+		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_PositionBox.gd",
+		"Position":"Reset"
 	},
 	{
-		"BlockType": "SpeechDialogBlock",
+		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_Speech.gd",
 		"Speaker": "Narrator",
 		"WaitForButton": false,
 		"Lines": [
@@ -65,7 +66,7 @@
 		]
 	},
 	{
-		"BlockType": "SpeechDialogBlock",
+		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_Speech.gd",
 		"Speaker": "Narrator",
 		"WaitForButton": true,
 		"Lines": [
@@ -73,7 +74,7 @@
 		]
 	},
 	{
-		"BlockType": "QuestionDialogBlock",
+		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_Question.gd",
 		"WaitForButton": false,
 		"QuestionText": "What is the capitail of Paris?",
 		"Options": [
@@ -83,9 +84,9 @@
 		]
 	},
 	{
-		"BlockType": "SpeechDialogBlock",
+		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_Speech.gd",
 		"Speaker": "Narrator",
-		"WaitForButton": false,
+		"WaitForButton": true,
 		"Lines": [
 			"Good Job! ",
 			"@Delay:0.5",
@@ -96,5 +97,12 @@
 			". to me!",
 			"\nYour answer was wrong, but my buttons worked correctly."
 		]
-	}
+	},{
+		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_Speech.gd",
+		"Speaker": "Narrator",
+		"WaitForButton": true,
+		"Lines": [
+			"THE END"
+		]
+	},
 ]

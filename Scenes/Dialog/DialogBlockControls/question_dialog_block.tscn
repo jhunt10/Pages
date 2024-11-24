@@ -1,0 +1,67 @@
+[gd_scene load_steps=6 format=3 uid="uid://by02p6lkrr3iv"]
+
+[ext_resource type="Script" path="res://Scenes/Dialog/DialogBlockControls/question_dialog_block_control.gd" id="1_rimbp"]
+[ext_resource type="Theme" uid="uid://dwinll8pgdjhc" path="res://Scenes/Themes/standard_theme.tres" id="2_av8dg"]
+[ext_resource type="Script" path="res://Scenes/Dialog/dialog_question_option.gd" id="3_57a61"]
+[ext_resource type="Texture2D" uid="uid://6slo2uod40i3" path="res://Scenes/Dialog/Icons/OptionIcon_Empty.png" id="4_3gk02"]
+[ext_resource type="Texture2D" uid="uid://bg2pfkcrb1fj1" path="res://Scenes/Dialog/Icons/OptionIcon_Filled.png" id="5_xemam"]
+
+[node name="QuestionDialogBlock" type="BoxContainer" node_paths=PackedStringArray("question_text_box", "options_container")]
+offset_top = 44.0
+offset_right = 1120.0
+offset_bottom = 132.0
+vertical = true
+script = ExtResource("1_rimbp")
+question_text_box = NodePath("TextLabel")
+options_container = NodePath("VBoxContainer")
+
+[node name="TextLabel" type="RichTextLabel" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("2_av8dg")
+theme_override_font_sizes/normal_font_size = 32
+text = "A Question being asked?"
+fit_content = true
+scroll_active = false
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="DialogQuestionOption" type="Control" parent="." node_paths=PackedStringArray("option_icon", "option_label", "button")]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+mouse_filter = 1
+script = ExtResource("3_57a61")
+option_icon_texture_empty = ExtResource("4_3gk02")
+option_icon_texture_filled = ExtResource("5_xemam")
+option_icon = NodePath("Container/TextureRect")
+option_label = NodePath("Container/Label")
+button = NodePath("Button")
+
+[node name="Container" type="HBoxContainer" parent="DialogQuestionOption"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="DialogQuestionOption/Container"]
+layout_mode = 2
+texture = ExtResource("4_3gk02")
+stretch_mode = 3
+
+[node name="Label" type="Label" parent="DialogQuestionOption/Container"]
+layout_mode = 2
+theme = ExtResource("2_av8dg")
+theme_override_font_sizes/font_size = 32
+text = "Option A"
+
+[node name="Button" type="Button" parent="DialogQuestionOption"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

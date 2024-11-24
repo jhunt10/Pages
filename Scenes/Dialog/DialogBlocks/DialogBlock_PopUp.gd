@@ -1,13 +1,12 @@
 class_name PopUpBoxDialogBlock
 extends BaseDialogBlock
 
-func set_block_data(parent, data):
+func _init(parent, data):
 	data['WaitForButton'] = false
 	super(parent, data)
 
 func do_thing():
-	print("Doing Pop Up Thing")
-	if _block_data.get("Destory", false):
+	if _block_data.keys().has("Delete"):
 		destory_popup()
 	if _block_data.keys().has("Create"):
 		create_popup()
@@ -15,37 +14,46 @@ func do_thing():
 	self.finished.emit()
 
 func create_popup():
-	print("### Creating Pop Up")
 	var popup_key = _block_data.get("Create", null)
-	var target_element_path = _block_data.get("TargetElement", null)
-	if !target_element_path:
-		return
-	
-	var target_element = null
-	if _parent_dialog_control.scene_root:
-		target_element = _parent_dialog_control.scene_root.get_node(target_element_path)
-	if !target_element:
-		printerr("PopUpDialogBlock: No Target Element found.")
-		return
-		
-	var screen_size = get_viewport_rect().size
+	var screen_size = _parent_dialog_control.get_viewport_rect().size
 	var parent_size = _parent_dialog_control.dialog_box.size
-	var popup_pos = Vector2.ZERO
+	var popup_pos = null
+	var popup_size = null
+	var size = null
 	
-	var popup = ColorRect.new()
-	popup.color = Color("ffffad65")
+	var popup_rect_arr = _block_data.get("Rect", null)
+	if popup_rect_arr:
+		popup_pos = Vector2(popup_rect_arr[0], popup_rect_arr[1])
+		popup_size = Vector2(popup_rect_arr[2], popup_rect_arr[3])
 	
-	if (target_element as Control):
-		popup.size = (target_element as Control).size
-		popup_pos = target_element.get_screen_position()
+	var target_element_path = _block_data.get("TargetElement", null)
+	if target_element_path:
+		var target_element = null
+		if _parent_dialog_control.scene_root:
+			target_element = _parent_dialog_control.scene_root.get_node(target_element_path)
+		if !target_element:
+			printerr("PopUpDialogBlock: No Target Element found.")
+		if target_element is Control:
+			popup_pos = target_element.get_screen_position()
+			popup_size = target_element.size
+		else:
+			printerr("Target Element is not a control")
+		
+	if popup_pos and popup_size:
+		var popup_path = _block_data.get("PopupControlSript", null)
+		if !popup_path:
+			printerr("No PopupControlSript")
+			return
+		var popup = load(popup_path).instantiate()
+		popup.size = popup_size
+		
+		_parent_dialog_control.add_popup(popup_key, popup, popup_pos)
 	else:
-		printerr("Target Element is not a control")
-	_parent_dialog_control.add_popup(popup_key, popup, popup_pos)
+		printerr("Failed to pop")
 	
 
 func destory_popup():
-	print("### Destorying Pop Up")
-	var popup_key = _block_data.get("Destory", null)
+	var popup_key = _block_data.get("Delete", null)
 	if popup_key:
 		_parent_dialog_control.remove_popup(popup_key)
 	

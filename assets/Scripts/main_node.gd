@@ -12,6 +12,8 @@ static var Instance:MainRootNode
 
 @export var center_container:CenterContainer
 
+static var is_mobile:bool
+
 func _ready() -> void:
 	if MainRootNode.Instance:
 		printerr("MainRootNode already exists.")
