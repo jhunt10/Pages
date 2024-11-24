@@ -8,7 +8,6 @@ var Id:String:
 var ItemKey:String:
 	get: return self._key
 
-var details:ObjectDetailsData
 var can_stack:bool:
 	get:
 		return get_load_val("CanStack", false)
@@ -21,8 +20,6 @@ var inventory_path:String:
 
 func _init(key:String, def_load_path:String, def:Dictionary, id:String='', data:Dictionary={}) -> void:
 	super(key, def_load_path, def, id, data)
-	
-	details = ObjectDetailsData.new(self._def_load_path, self._def.get("Details", {}))
 
 func get_item_type()->ItemTypes:
 	var item_type_str = self._def.get("ItemType", "")

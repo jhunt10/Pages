@@ -83,16 +83,16 @@ func set_actor(actor:BaseActor):
 	sync_sprites()
 
 func sync_sprites():
-	actor_sprite.texture = Actor.get_body_sprite()
+	actor_sprite.texture = Actor.sprite.get_body_sprite()
 	
 	if actor_sprite.hframes == 1:
 		main_hand_node.visible = false
 		off_hand_node.visible = false
 		return
 		
-	main_hand_node.main_hand_sprite_sheet = Actor.get_main_hand_sprite()
-	main_hand_node.two_hand_sprite_sheet = Actor.get_two_hand_sprite()
-	off_hand_node.off_hand_sprite_sheet = Actor.get_off_hand_sprite()
+	main_hand_node.main_hand_sprite_sheet = Actor.sprite.get_main_hand_sprite()
+	main_hand_node.two_hand_sprite_sheet = Actor.sprite.get_two_hand_sprite()
+	off_hand_node.off_hand_sprite_sheet = Actor.sprite.get_off_hand_sprite()
 	
 	if Actor.equipment.is_two_handing():
 		main_hand_node.hand = ActorHandNode.HANDS.TwoHand
@@ -178,15 +178,8 @@ func animation_started(name:String):
 	else:
 		is_walking = false
 		if LOGGING: print("-Set Not Walking")
-	#if delay_pos :
-		#self.position = delay_pos
-		#delay_pos = null
 
 func fail_movement():
-	#printerr("fail Walk")
-	#animation_tree.set("parameters/conditions/Walk", false)
-	#animation_tree.set("parameters/conditions/FinishWalk", false)
-	#animation_tree.set("parameters/conditions/MoveFailed", true)
 	if LOGGING: printerr("Movment Failed")
 	is_walking = false
 	animation.play("facing/facing"+get_animation_dir_sufix())
@@ -203,7 +196,6 @@ func start_weapon_animation(action_name:String, off_hand:bool=false):
 	elif main_hand_node:
 		main_hand_node.ready_arnimation(action_name, get_animation_dir_sufix())
 	current_animation_action_name = animation_name
-	#animation.play(current_animation_action_name)
 
 func start_walk_animation():
 	current_animation_action_name = "walk/walk_out" + get_animation_dir_sufix()
@@ -238,17 +230,11 @@ func cancel_current_animation():
 func start_walk_out_animation():
 	if LOGGING: print("Start Walk")
 	animation.play("walk/walk_out"+get_animation_dir_sufix())
-	#animation_tree.set("parameters/conditions/Walk", true)
-	#animation_tree.set("parameters/conditions/FinishWalk", false)
-	#animation_tree.set("parameters/conditions/MoveFailed", false)
 	
 func start_walk_in_animation():
 	if LOGGING: print("Finish Walk")
 	animation.play("walk/walk_in"+get_animation_dir_sufix())
 	is_walking = false
-	#animation_tree.set("parameters/conditions/Walk", false)
-	#animation_tree.set("parameters/conditions/FinishWalk", true)
-	#animation_tree.set("parameters/conditions/MoveFailed", false)
 
 func set_corpse_sprite():
 	actor_sprite.texture = Actor.get_coprse_texture()

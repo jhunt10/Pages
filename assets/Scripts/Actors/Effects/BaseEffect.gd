@@ -28,8 +28,6 @@ var Id:String:
 var EffectKey:String:
 	get: return self._key
 
-var details:ObjectDetailsData
-
 # Triggers added by the system an not config, like OnTurnEnds for TurnDuration
 var system_triggers:Array = []
 
@@ -57,7 +55,6 @@ var _duration_counter:int = -1
 
 func _init(key:String, def_load_path:String, def:Dictionary, id:String='', data:Dictionary={}) -> void:
 	super(key, def_load_path, def, id, data)
-	details = ObjectDetailsData.new(self._def_load_path, self._def.get("Details", {}))
 	_cache_triggers()
 
 func get_source_actor()->BaseActor:

@@ -46,7 +46,7 @@ func set_actor(act:BaseActor):
 	_stat_bars[StatHolder.HealthKey] = health_bar
 	_stat_bars[StatHolder.HealthKey].set_actor(actor, StatHolder.HealthKey)
 	actor.Que.action_que_changed.connect(sync)
-	portrait_texture_rect.texture = actor.get_portrait_sprite()
+	portrait_texture_rect.texture = actor.sprite.get_portrait_sprite()
 	if not CombatRootControl.Instance.QueController.start_of_round.is_connected(_on_start_round):
 		CombatRootControl.Instance.QueController.start_of_round.connect(_on_start_round)
 		CombatRootControl.Instance.QueController.end_of_frame.connect(_on_frame_or_turn_end)

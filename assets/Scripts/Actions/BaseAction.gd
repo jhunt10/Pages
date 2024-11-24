@@ -8,8 +8,6 @@ const SUB_ACTIONS_PER_ACTION = 24
 var ActionKey:String:
 	get: return self._key
 
-var details:ObjectDetailsData
-
 var SubActionData:Array = []
 
 var CostData:Dictionary:
@@ -30,7 +28,6 @@ var PreviewMoveOffset:MapPos
 
 func _init(key:String, def_load_path:String, def:Dictionary, id:String='', data:Dictionary={}) -> void:
 	super(key, def_load_path, def, id, data)
-	details = ObjectDetailsData.new(self._def_load_path, self._def.get("Details", {}))
 	# Load Targeting Parameters
 	if def.has('TargetParams'):
 		if def['TargetParams'] is Array:

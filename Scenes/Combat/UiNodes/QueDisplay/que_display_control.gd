@@ -30,7 +30,7 @@ func _ready():
 	CombatRootControl.QueController.end_of_turn.connect(_hide_action_highlight)
 	
 	if _delayed_init:
-		portrait.texture = _actor.get_portrait_sprite()
+		portrait.texture = _actor.sprite.get_portrait_sprite()
 		_build_slots()
 		_sync_que()
 	
@@ -66,7 +66,7 @@ func set_actor(actor:BaseActor):
 	actor.Que.action_que_changed.connect(_sync_que)
 	actor.equipment_changed.connect(_sync_que)
 	if portrait:
-		portrait.texture = actor.get_portrait_sprite()
+		portrait.texture = actor.sprite.get_portrait_sprite()
 		_build_slots()
 		_sync_que()
 	else:

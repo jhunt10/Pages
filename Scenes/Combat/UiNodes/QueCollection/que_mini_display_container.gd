@@ -26,7 +26,7 @@ func _ready():
 	CombatRootControl.QueController.end_of_round.connect(hide_all_highlights)
 	
 	if _delayed_init:
-		portrait.texture = _actor.get_portrait_sprite()
+		portrait.texture = _actor.sprite.get_portrait_sprite()
 		_build_slots()
 		_sync_que()
 		
