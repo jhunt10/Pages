@@ -57,6 +57,11 @@ func _process(delta: float) -> void:
 	#GameState = GameStateData.new()
 	#map_control.init_load()
 ##
+
+static func get_time_scale()->float:
+	return 1.5
+
+
 func load_init_state(map_scene_path:String):
 	if !Instance: Instance = self
 	elif Instance != self: 

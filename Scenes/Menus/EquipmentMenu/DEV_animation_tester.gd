@@ -23,7 +23,8 @@ func animation_list()->Array:
 		'Walk',
 		'weapon_raise',
 		'weapon_swing',
-		'weapon_stab'
+		'weapon_stab',
+		'die'
 	]
 
 func on_animation_selected(index):
@@ -32,6 +33,8 @@ func on_animation_selected(index):
 		actor_node.set_display_pos(MapPos.new(0,0,0,2))
 	elif animation == 'Walk':
 		actor_node.start_walk_animation()
+	elif animation == 'die':
+		actor_node.animation.play("death_effect")
 	else:
 		actor_node.start_weapon_animation(animation)
 

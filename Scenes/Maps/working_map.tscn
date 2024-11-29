@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=4 uid="uid://dcan2k534n88q"]
+[gd_scene load_steps=23 format=4 uid="uid://dcan2k534n88q"]
 
 [ext_resource type="Script" path="res://assets/Scripts/Map/map_controler_node.gd" id="1_8htqa"]
 [ext_resource type="Texture2D" uid="uid://dxan6lyrg8db3" path="res://assets/Sprites/TileSets/GrassPath_TileSheet.png" id="1_55p3y"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://kh2uekpf4sb8" path="res://Scenes/Maps/MapEditing/ActorSpawnSprite.png" id="8_3ret4"]
 [ext_resource type="Script" path="res://Scenes/Maps/MapEditing/actor_spawn_node.gd" id="9_p3ftp"]
 [ext_resource type="Texture2D" uid="uid://bds8rjmyltjys" path="res://assets/Sprites/TileSets/Decor_TileSet.png" id="10_rc2rj"]
+[ext_resource type="Texture2D" uid="uid://bf0qdu0v1wdy6" path="res://defs/Actors/Tutorial/TutorShroom.png" id="11_52ceh"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lwpvo"]
 texture = ExtResource("1_55p3y")
@@ -1060,13 +1061,20 @@ spawn_actor_id = "TestActor_ID"
 is_player = true
 map_coor = Vector2i(5, 5)
 
+[node name="SpwanNode_Player2" type="Sprite2D" parent="ActorTileMapLayer"]
+self_modulate = Color(0, 1, 0, 1)
+position = Vector2(144, 144)
+texture = ExtResource("11_52ceh")
+script = ExtResource("9_p3ftp")
+spawn_actor_key = "TutorShroom"
+map_coor = Vector2i(4, 4)
+
 [node name="SpwanNode_Target1" type="Sprite2D" parent="ActorTileMapLayer"]
 self_modulate = Color(0, 1, 1, 1)
 position = Vector2(144, 48)
 texture = ExtResource("8_3ret4")
 script = ExtResource("9_p3ftp")
 spawn_actor_key = "TestTarget"
-is_player = null
 map_coor = Vector2i(4, 1)
 
 [node name="SpwanNode_TargetArmored" type="Sprite2D" parent="ActorTileMapLayer"]
@@ -1075,7 +1083,6 @@ position = Vector2(176, 48)
 texture = ExtResource("8_3ret4")
 script = ExtResource("9_p3ftp")
 spawn_actor_key = "TestArmoredTarget"
-is_player = null
 map_coor = Vector2i(5, 1)
 
 [node name="SpwanNode_TargetWard" type="Sprite2D" parent="ActorTileMapLayer"]
@@ -1084,5 +1091,4 @@ position = Vector2(208, 48)
 texture = ExtResource("8_3ret4")
 script = ExtResource("9_p3ftp")
 spawn_actor_key = "TestWardedTarget"
-is_player = null
 map_coor = Vector2i(6, 1)

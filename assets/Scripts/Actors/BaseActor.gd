@@ -98,7 +98,8 @@ func on_turn_failed():
 func die():
 	is_dead = true
 	on_death.emit()
-	node.set_corpse_sprite()
+	#node.set_corpse_sprite()
+	node.queue_death()
 	
 func auto_build_que(current_turn:int):
 	if !_allow_auto_que:

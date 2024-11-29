@@ -10,6 +10,9 @@ const FRAMES_PER_ACTION = 24
 const ACTION_TIME = 2.4 # Seconds
 const SUB_ACTION_FRAME_TIME = ACTION_TIME / FRAMES_PER_ACTION
 
+var scaled_sub_action_frame_time:float:
+	get: return SUB_ACTION_FRAME_TIME / CombatRootControl.get_time_scale()
+
 # Start of new Round
 signal start_of_round()
 signal start_of_round_with_state(game_state:GameStateData)
@@ -137,12 +140,12 @@ func remove_action_que(que:ActionQue):
 func update(delta: float) -> void:
 	if execution_state == ActionStates.Running:
 		sub_action_timer += delta
-		if sub_action_timer > SUB_ACTION_FRAME_TIME:
+		if sub_action_timer > scaled_sub_action_frame_time:
 			if DEEP_LOGGING: 
 				print("") 
 				print("")
 				print("Doing Action: " + str(action_index) + ":" + str(sub_action_index))# + " | delta: " + str(delta))
-			sub_action_timer -= SUB_ACTION_FRAME_TIME
+			sub_action_timer -= scaled_sub_action_frame_time
 			
 			#TODO: GameState
 			var game_state:GameStateData = CombatRootControl.Instance.GameState

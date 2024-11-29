@@ -2,7 +2,7 @@
 class_name ActorNode
 extends Node2D
 
-const LOGGING = false
+const LOGGING = true
 
 
 enum FACING_DIRS {North, East, South, West}
@@ -42,6 +42,8 @@ var facing_dir
 var start_walk_on_pos_change:bool
 var is_walking
 
+var is_dieing:bool
+
 var current_animation_action_name:String
 #var current_animation_hand_name:String
 
@@ -50,6 +52,14 @@ func _ready() -> void:
 		return
 	animation.animation_started.connect(animation_started)
 	animation.animation_finished.connect(animation_finished)
+
+func _process(delta: float) -> void:
+	if is_dieing:
+		if animation.is_playing():
+			return
+		if vfx_holder.get_children().size() > 0:
+			return
+		self.queue_free()
 
 func set_actor(actor:BaseActor):
 	Id = actor.Id
@@ -113,7 +123,7 @@ func set_facing_dir(dir:int):
 	facing_dir = dir
 	#print("Facing Direction: %s" % [facing_dir])
 	if animation:
-		animation.play(FACING_ANIMATION + get_animation_dir_sufix())
+		_start_anim(FACING_ANIMATION + get_animation_dir_sufix())
 	if main_hand_node:
 		main_hand_node.animation.play("weapon_" + FACING_ANIMATION + get_animation_dir_sufix())
 	if off_hand_node:
@@ -139,7 +149,7 @@ func set_display_pos(pos:MapPos, start_walkin:bool=false):
 	
 	if !is_walking:
 		if LOGGING: print("%s | set Facing: %s"  % [Time.get_ticks_msec(), get_animation_dir_sufix()])
-		#animation.play("facing/facing"+get_animation_dir_sufix())
+		#_start_anim("facing/facing"+get_animation_dir_sufix())
 	else:
 		if LOGGING:
 			print("IS Walking")
@@ -174,12 +184,28 @@ func animation_started(name:String):
 func fail_movement():
 	if LOGGING: printerr("Movment Failed")
 	is_walking = false
-	animation.play("facing/facing"+get_animation_dir_sufix())
+	_start_anim("facing/facing"+get_animation_dir_sufix())
 	if LOGGING: print("After_PlayConnecnd")
 	
 
 func play_shake():
-	animation.play("shake_effect")
+	_start_anim("shake_effect")
+
+func queue_death():
+	if is_dieing:
+		return
+	if LOGGING: print("########################## Que Dieing")
+	_start_anim("death_effect")
+	is_dieing = true
+
+
+func _start_anim(animation_name):
+	if is_dieing:
+		return
+	if LOGGING: print("Playing Animation: %s" + animation_name)
+	animation.play(animation_name)
+	animation.speed_scale = CombatRootControl.get_time_scale()
+
 
 func start_weapon_animation(action_name:String, off_hand:bool=false):
 	var animation_name = action_name + "/ready" + get_animation_dir_sufix()
@@ -191,7 +217,7 @@ func start_weapon_animation(action_name:String, off_hand:bool=false):
 
 func start_walk_animation():
 	current_animation_action_name = "walk/walk_out" + get_animation_dir_sufix()
-	animation.play(current_animation_action_name)
+	_start_anim(current_animation_action_name)
 	
 
 func execute_animation_motion():
@@ -199,33 +225,34 @@ func execute_animation_motion():
 	#if current_animation_action_name.contains("/ready_"):
 		#var animation_name = current_animation_action_name.replace("/ready_", "/motion_")
 		#if LOGGING: print("Playing Motion Animation: " + animation_name)
-		#animation.play(animation_name)
+		#_start_anim(animation_name)
 	if current_animation_action_name.begins_with("walk"):
 		var animation_name = current_animation_action_name.replace("_out_", "_in_")
-		animation.play(animation_name)
+		_start_anim(animation_name)
 		if LOGGING: print("Playing Motion Animation: " + animation_name)
 	else:
 		main_hand_node.execute_animation()
 
 func cancel_current_animation():
-	if current_animation_action_name.contains("/ready_"):
+	if current_animation_action_name.begins_with("weapon_"):
+		if main_hand_node.current_animation.contains("/ready"):
+			main_hand_node.cancel_animation()
+	elif current_animation_action_name.contains("/ready_"):
 		var animation_name = current_animation_action_name.replace("/ready_", "/cancel_")
 		if LOGGING: print("Playing Cancel Animation: " + animation_name)
-		animation.play(animation_name)
+		_start_anim(animation_name)
 	elif current_animation_action_name.begins_with("walk"):
 		if LOGGING: print("Playing Cancel Walk Animation: " + current_animation_action_name)
-		animation.play("facing/facing"+get_animation_dir_sufix())
+		_start_anim("facing/facing"+get_animation_dir_sufix())
 		is_walking = false
-	elif main_hand_node.current_animation.contains("/ready"):
-		main_hand_node.cancel_animation()
 
 func start_walk_out_animation():
 	if LOGGING: print("Start Walk")
-	animation.play("walk/walk_out"+get_animation_dir_sufix())
+	_start_anim("walk/walk_out"+get_animation_dir_sufix())
 	
 func start_walk_in_animation():
 	if LOGGING: print("Finish Walk")
-	animation.play("walk/walk_in"+get_animation_dir_sufix())
+	_start_anim("walk/walk_in"+get_animation_dir_sufix())
 	is_walking = false
 
 func set_corpse_sprite():
