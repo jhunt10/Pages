@@ -5,6 +5,10 @@ extends Sprite2D
 enum Direction {North, East, South, West}
 enum SpawnBy {Player, Key, Id}
 
+@export var spawn_actor_key:String
+@export var spawn_actor_id:String
+@export var is_player:bool
+
 @export var facing:Direction:
 	set(val):
 		facing = val
@@ -20,17 +24,15 @@ enum SpawnBy {Player, Key, Id}
 		if parent and parent is TileMapLayer:
 			self.position = (parent as TileMapLayer).map_to_local(map_coor)
 
-@export var spawn_actor_by:SpawnBy:
-	set(val):
-		spawn_actor_by = val
-		if spawn_actor_by == SpawnBy.Player:
-			spawn_actor_value = "Player"
-			self.self_modulate = Color.GREEN
-		if spawn_actor_by == SpawnBy.Key:
-			self.self_modulate = Color.AQUA
-		if spawn_actor_by == SpawnBy.Id:
-			self.self_modulate = Color.RED
-@export var spawn_actor_value:String
+#@export var spawn_actor_by:SpawnBy:
+	#set(val):
+		#spawn_actor_by = val
+		#if spawn_actor_by == SpawnBy.Player:
+			#self.self_modulate = Color.GREEN
+		#if spawn_actor_by == SpawnBy.Key:
+			#self.self_modulate = Color.AQUA
+		#if spawn_actor_by == SpawnBy.Id:
+			#self.self_modulate = Color.RED
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

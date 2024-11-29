@@ -41,27 +41,32 @@ func has_page(action_key:String):
 	return action_keys.has(action_key)
 
 func remove_page(action_key:String):
+	var changed = false
 	for page_tags in _page_tagged_slots.keys():
 		var index = _page_tagged_slots[page_tags].find(action_key)
 		if index < 0:
 			continue
 		_page_tagged_slots[page_tags][index] = null
+		changed = true
+	if changed:
 		pages_changed.emit()
-		return
 
-func add_page_to_first_valid_slot(page:BaseAction):
+func try_add_page(page:BaseAction)->bool:
+	if has_page(page.ActionKey):
+		return true
 	for page_tags in _page_tagged_slots.keys():
 		if _does_page_match_tags(page_tags, page):
 			var open_slot = _page_tagged_slots[page_tags].find(null)
 			if open_slot >= 0:
 				_page_tagged_slots[page_tags][open_slot] = page.ActionKey
 				pages_changed.emit()
-				return
+				return true
 			else:
 				print("No Open Slot found in '%s'" %[page_tags])
 		else:
 			print("%s Not match tags '%s'" %[page.ActionKey, page_tags])
 	print("No Valid PageTags Slot Found")
+	return false
 
 func _does_page_match_tags(page_tags:String, page:BaseAction)->bool:
 	var tags = page_tags.split("|")

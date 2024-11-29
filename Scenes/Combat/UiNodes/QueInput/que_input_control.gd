@@ -4,10 +4,10 @@ extends Control
 const PADDING = 8
 
 @export var on_que_options_menu:OnQueOptionsMenu
-
-@onready var main_container:HBoxContainer = $HBoxContainer
-@onready var page_button_prefab:TextureButton = $HBoxContainer/HBoxContainer/PageButtonPrefab
-@onready var start_button = $HBoxContainer/StartButton
+@export var main_container:HBoxContainer 
+@export var page_button_prefab:TextureButton
+@export var start_label:Label
+@export var start_button:TextureButton
 
 var _actor:BaseActor
 var _buttons = []
@@ -21,6 +21,7 @@ func _ready() -> void:
 	#if Engine.is_editor_hint(): return
 	CombatRootControl.QueController.end_of_round.connect(_round_ends)
 	start_button.pressed.connect(_start_button_pressed)
+	start_button.disabled = true
 	page_button_prefab.visible = false
 	on_que_options_menu.visible = false
 	pass # Replace with function body.
@@ -31,19 +32,21 @@ func _process(_delta: float) -> void:
 	#super(delta)
 	#if Engine.is_editor_hint(): return
 	if _resize:
-		self.size = Vector2i(main_container.size.x + (2 * PADDING),
-							main_container.size.y + (2 * PADDING))
 		_resize = false
 
 func set_actor(actor:BaseActor):
 	if _actor:
-		_actor.equipment_changed.disconnect(_build_buttons)
+		_actor.pages.pages_changed.disconnect(_build_buttons)
+		_actor.Que.action_que_changed.disconnect(_on_que_change)
 	_actor = actor
-	_actor.equipment_changed.connect(_build_buttons)
+	_actor.pages.pages_changed.connect(_build_buttons)
+	_actor.Que.action_que_changed.connect(_on_que_change)
 	_build_buttons()
 	
 
 func _build_buttons():
+	
+	printerr("\nBUILD BUTTONS \n")
 	if _buttons.size() > 0:
 		for but in _buttons:
 			but.queue_free()
@@ -53,6 +56,7 @@ func _build_buttons():
 		if action_key == null:
 			continue
 		var new_button:TextureButton = page_button_prefab.duplicate()
+		new_button.name = "PageSlot" + str(index)
 		page_button_prefab.get_parent().add_child(new_button)
 		new_button.visible = true
 		var action = MainRootNode.action_library.get_action(action_key)
@@ -60,13 +64,24 @@ func _build_buttons():
 			new_button.get_child(0).texture = load(ActionLibrary.NO_ICON_SPRITE)
 		else:
 			new_button.get_child(0).texture = action.get_large_page_icon(_actor)
-			new_button.mouse_entered.connect(_mouse_entered_page_button.bind(index, action_key))
-			new_button.mouse_exited.connect(_mouse_exited_action_button.bind(index, action_key))
+			if not MainRootNode.is_mobile:
+				new_button.mouse_entered.connect(_mouse_entered_page_button.bind(index, action_key))
+				new_button.mouse_exited.connect(_mouse_exited_action_button.bind(index, action_key))
 			new_button.pressed.connect(_page_button_pressed.bind(index, action_key))
 		
 		_buttons.append(new_button)
 		index += 1
-	_resize = true
+	_on_que_change()
+	#self.size = Vector2i(main_container.size.x + (2 * PADDING),
+						#main_container.size.y + (2 * PADDING))
+
+func _on_que_change():
+	if _actor.Que.is_ready():
+		start_button.disabled = false
+		start_label.text = "Start"
+	else:
+		start_button.disabled = true
+		start_label.text = "Queue"
 
 func allow_input(_allow:bool):
 	pass
@@ -115,7 +130,7 @@ func _on_all_que_options_selected(action_key:String, options_data:Dictionary):
 func _start_button_pressed():
 	CombatUiControl.ui_state_controller.set_ui_state(UiStateController.UiStates.ExecRound)
 	start_button.disabled = true
-	start_button.get_child(0).text = " XXX"
+	start_button.get_child(0).text = "Wait"
 
 func _round_ends():
 	start_button.disabled = false

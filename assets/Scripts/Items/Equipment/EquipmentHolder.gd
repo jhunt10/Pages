@@ -12,11 +12,13 @@ var _slot_equipment_ids:Array:
 func _init(actor:BaseActor) -> void:
 	self._actor = actor
 	
-	_slot_equipment_types = actor.get_load_val("EquipmentSlots", [])
-	_slot_equipment_ids = actor.get_load_val("Equipment", [])
-	if _slot_equipment_ids.size() < _slot_equipment_types.size():
+	_slot_equipment_types = _slot_equipment_types
+	var saved_equipment = actor.get_load_val("Equipment")
+	if !saved_equipment or saved_equipment.size() != _slot_equipment_types.size():
+		actor._data['Equipment'] = []
 		for i in range(_slot_equipment_types.size() -_slot_equipment_ids.size()):
-			_slot_equipment_ids.append(null)
+			actor._data['Equipment'].append(null)
+	
 	# Load or Create entries for each slot defined in ActorDef
 	#for equipment_id in equipt_items:
 		#if !equipment_id or equipment_id == '':

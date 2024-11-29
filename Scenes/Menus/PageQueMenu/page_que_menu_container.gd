@@ -77,7 +77,7 @@ func on_page_inventory_button_pressed(page:BaseAction):
 	if _actor.pages.has_page(page.ActionKey):
 		_actor.pages.remove_page(page.ActionKey)
 	else:
-		_actor.pages.add_page_to_first_valid_slot(page)
+		_actor.pages.try_add_page(page)
 	#var has_index = _actor.pages._page_slots.find(page.ActionKey)
 	#if has_index >= 0:
 		#print("Cleaing Index: " + str(has_index))

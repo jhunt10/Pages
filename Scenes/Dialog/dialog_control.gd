@@ -5,7 +5,7 @@ const LOGGING = false
 
 const LETTER_DELAY:float = 0.03
 @export var scene_root:Node
-@export var premade_blocks:Control
+@export var dialog_box_holder:Control
 @export var popup_holder:Control
 @export var dialog_box:Control
 @export var next_button:Button
@@ -21,6 +21,7 @@ var popups:Dictionary
 var current_block:BaseDialogBlock
 var block_index:int
 var delay_timer:float = 0
+
 var waiting_for_button:bool = false
 var _scroll_to_bottom:bool = true
 var _delayed_scroll:bool = false
@@ -30,8 +31,11 @@ func _ready() -> void:
 	next_button.pressed.connect(on_next_button_pressed)
 	_start_position = dialog_box.position
 	#load_dialog_script("res://Scenes/Dialog/_ExampleDialogScript.json")#
-	load_dialog_script("res://data/DialogScripts/TutorialDialog.json")
-	start_dialog()
+	#load_dialog_script("res://data/DialogScripts/TutorialDialog.json")
+	if dialog_script_data.size() > 0:
+		start_dialog()
+	else:
+		printerr("No Dialog Script loaded on _ready")
 	pass # Replace with function body.
 
 
@@ -46,13 +50,16 @@ func _process(delta: float) -> void:
 		current_block.update(delta)
 
 func _input(event: InputEvent) -> void:
-	if !self.visible:
+	if !self.visible or !dialog_box_holder.visible:
 		return
 	if event is InputEventMouseButton:
 		var mouse_event =  (event as InputEventMouseButton)
 		if mouse_event.button_index == 1 and mouse_event.pressed:
 			if next_button.visible:
-				on_next_button_pressed()
+				if current_block and current_block.read_any_touch_as_next():
+					on_next_button_pressed()
+				elif not current_block:
+					on_next_button_pressed()
 			else:
 				if current_block and not current_block.is_finished:
 					if LOGGING: print("Skipping")
@@ -66,7 +73,12 @@ func start_dialog():
 func start_block():
 	if LOGGING: print("Starting Block %s" % [block_index])
 	if dialog_script_data.size() > block_index:
-		var new_block_data = dialog_script_data[block_index]
+		var new_block_data:Dictionary = dialog_script_data[block_index]
+		if new_block_data.keys().has("@LABEL@"):
+			printerr("LabelBlock: " + new_block_data['@LABEL@'])
+			block_index += 1
+			start_block()
+			return
 		var new_block = await create_new_block(new_block_data)
 		if !new_block:
 			printerr("DialogControl: create_new_block failed on index %s" % [block_index])
@@ -76,6 +88,8 @@ func start_block():
 		current_block = new_block
 		current_block.finished.connect(block_finished)
 		current_block.start()
+		if current_block._block_data.keys().has("FreezeCamera"):
+			CombatRootControl.Instance.camera.freeze = current_block._block_data.get("FreezeCamera")
 
 func create_new_block(block_data):
 	var block_script_path = block_data.get("BlockScript")
@@ -99,6 +113,7 @@ func block_finished(from_next_button:bool=false):
 			return
 		var next_tag = current_block.get_next_block_tag()
 		if next_tag:
+			print("Jumping to block %s" % [next_tag])
 			var index = block_tags.find(next_tag)
 			if index < 0:
 				printerr("Failed to find next block with tag: %s" % [next_tag])
@@ -111,6 +126,7 @@ func block_finished(from_next_button:bool=false):
 		start_block()
 	else:
 		self.hide()
+		CombatRootControl.Instance.camera.freeze = false
 
 func show_next_button():
 	if LOGGING: print("Show Next Button")

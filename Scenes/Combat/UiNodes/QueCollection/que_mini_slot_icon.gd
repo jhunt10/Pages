@@ -1,11 +1,11 @@
 class_name QueMiniSlotIcon
 extends Control
 
-@onready var background:TextureRect = $PageSlot
-@onready var gap_icon:TextureRect = $GapTextureRect
-@onready var page_icon:TextureRect = $Icon
-@onready var highlight:TextureRect = $Highlight
-@onready var dead_icon:TextureRect = $DeadIcon
+@export var background:TextureRect
+@export var gap_icon:TextureRect
+@export var page_icon:TextureRect
+@export var highlight:TextureRect
+@export var dead_icon:TextureRect
 
 var is_gap = true
 

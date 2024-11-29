@@ -1,20 +1,29 @@
 [
 	{
-        "Index": 0,
+		"BlockTag": "Start",
+		"BlockScript": "res://Scenes/Dialog/DialogBlocks/Custom/DialogBlock_TutorialConditions.gd",
+		"FreezeCamera": true
+	},
+	{
+		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_PositionBox.gd",
+		"BlockType": "PositonDialogBlock",
+		"Position": "Bottom"
+	},
+	{
 		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_Speech.gd",
 		"Speaker": "Narrator",
 		"WaitForButton": true,
 		"Lines": [
 			"\nWelcome to the wonderful world of Pages!"
-		]
+		],
+		"__NextBlockTag": "SkipTo"
 	},
 	{
-        "Index": 1,
 		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_Speech.gd",
 		"Speaker": "Narrator",
 		"WaitForButton": true,
 		"Lines": [
-			"\nI'm assuming you've never played before since I just made it.",
+			"\nI'm assuming you've never played before since I just made it."
 		]
 	},
 	{
@@ -28,96 +37,162 @@
 	},
 	{
 		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_Condition.gd",
-		"AnswerConsition":
-		{
+		"AnswerConsition": {
 			"AnswerKey": "Answer1",
 			"JumpToMapping": {
 				"Yes": "AnsweredYes",
-				"No": "End"
+				"No": "AddPage_End"
 			}
 		}
 	},
-    {
-        "BlockTag": "AnsweredYes",
-        "Index": 2,
+	{
+		"BlockTag": "AnsweredYes",
 		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_Speech.gd",
 		"Speaker": "Narrator",
 		"WaitForButton": true,
 		"Lines": [
-			"\nThis is a Multi Turn-Based game, meaning each round you and your opponent will plan out multiple turns worth of action."
-		]
-	},
-    {
-        "Index": 3,
-		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_Speech.gd",
-		"Speaker": "Narrator",
-		"WaitForButton": true,
-		"Lines": [
-            "\nOnce everyone has thier turns ready, the round will start and all characters will act out thier planned turns."
+			"\nThis is a Multi Turn-Based game. Each round you and your opponents will plan out multiple turns worth of actions."
 		]
 	},
 	{
-        "Index": 4,
+		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_Speech.gd",
+		"Speaker": "Narrator",
+		"WaitForButton": true,
+		"Lines": [
+			"\nOnce everyone has thier turns ready, the round will start and all characters will act out thier planned turns."
+		]
+	},
+	{
 		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_PositionBox.gd",
 		"Position": "Top"
 	},
 	{
-        "Index": 5,
 		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_Speech.gd",
 		"Speaker": "Narrator",
 		"WaitForButton": true,
 		"Lines": [
-			"\nAt the bottom of the screen are your Pages and PageQue."
+			"\nAt the bottom of the screen are your\nPages and PageQue."
 		]
 	},
 	{
-        "Index": 6,
 		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_PopUp.gd",
-		"Create":"PopUp1",
-		"TargetElement": "MoveableCamera2D/CanvasLayer/CombatUiControl/QueInputControl",
+		"Create": "PopUp1",
+		"TargetElement": "MoveableCamera2D/CanvasLayer/CombatUiControl/QueInputControl/BackPatchContainer",
 		"PopupControlSript": "res://Scenes/Dialog/DialogBlockControls/PopUps/dotted_outline_pop_up_control.tscn"
 	},
 	{
-        "Index": 7,
 		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_Speech.gd",
 		"Speaker": "Narrator",
 		"WaitForButton": true,
 		"Lines": [
 			"\nThese are your Pages.",
-            "\nEach one represents an action you can preform durring combat."
+			"\nEach one is an action you can preform during combat.",
+			"\nMoving, ",
+			"attacking, ",
+			"using items, ",
+			"all of it is done using Pages."
 		]
 	},
 	{
-        "Index": 8,
 		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_PopUp.gd",
-		"Delete":"PopUp1",
-		"Create":"PopUp2",
+		"Delete": "PopUp1",
+		"TargetElement": "MoveableCamera2D/CanvasLayer/CombatUiControl/QueDisplayControl"
+	},
+	{
+		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_PopUp.gd",
+		"Create": "PopUp2",
 		"TargetElement": "MoveableCamera2D/CanvasLayer/CombatUiControl/QueDisplayControl",
 		"PopupControlSript": "res://Scenes/Dialog/DialogBlockControls/PopUps/dotted_outline_pop_up_control.tscn"
 	},
 	{
-        "Index": 9,
 		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_Speech.gd",
 		"Speaker": "Narrator",
 		"WaitForButton": true,
 		"Lines": [
 			"\nThis is your PageQue.",
-            "\nIt holds the Pages you have queued up for the next round."
+			"@WaitForNextButton",
+			"\nIt holds the Pages you have queued up for the next round."
 		]
 	},
 	{
-        "Index": 10,
 		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_PopUp.gd",
-		"Delete":"PopUp2"
+		"Delete": "PopUp2"
 	},
 	{
-        "Index": 11,
 		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_Speech.gd",
 		"Speaker": "Narrator",
 		"WaitForButton": true,
 		"Lines": [
-			"\nYou can add Pages to your PageQue by clicking on them.",
-            "\nOr remove them by clicking thier icon in the PageQue."
+			"\nDuring combat, the game will cycle through Rounds and Turns."
+		]
+	},
+	{
+		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_PopUp.gd",
+		"Create": "TurnPopUp",
+		"TargetElement": "MoveableCamera2D/CanvasLayer/CombatUiControl/QueDisplayControl/HBoxContainer/SlotsContainer/PageSlot1",
+		"PopupControlSript": "res://Scenes/Dialog/DialogBlockControls/PopUps/dotted_outline_pop_up_control.tscn"
+	},
+	{
+		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_Speech.gd",
+		"Speaker": "Narrator",
+		"WaitForButton": true,
+		"Lines": [
+			"\nA Turn is the a single slot on your PageQue.",
+			"\nWhen your turn comes up, you will act out the Page that was queued in that slot."
+		]
+	},
+	{
+		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_PopUp.gd",
+		"Delete": "TurnPopUp",
+		"Create": "RoundPopUp",
+		"TargetElement": "MoveableCamera2D/CanvasLayer/CombatUiControl/QueDisplayControl/HBoxContainer/SlotsContainer",
+		"PopupControlSript": "res://Scenes/Dialog/DialogBlockControls/PopUps/dotted_outline_pop_up_control.tscn"
+	},
+	{
+		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_Speech.gd",
+		"Speaker": "Narrator",
+		"WaitForButton": true,
+		"Lines": [
+			"\nA Round is the full length your PageQue.",
+			"\nBefore each round, you will prepare your PageQue by filing each slot with a page."
+		]
+	},
+	{
+		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_PopUp.gd",
+		"Delete": "RoundPopUp"
+	},
+	{
+		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_Speech.gd",
+		"Speaker": "Narrator",
+		"WaitForButton": true,
+		"Lines": [
+			"\nWhen the round starts, characters will begin acting out their turns.",
+			"@WaitForNextButton",
+			"\nEach turn, the character will preform the next Page prepared in it's PageQue.",
+			"@WaitForNextButton",
+			"\nAll characters take thier turns simultaneously, but start the turn ordered by thier Speed.",
+			"@WaitForNextButton",
+			"\nOnce all PageQues are finished, the round ends and characters start preparing thier PageQue for the next round."
+		]
+	},
+	{
+		"BlockScript": "res://Scenes/Dialog/DialogBlocks/Custom/DialogBlock_TutorialConditions.gd",
+		"RemovePages": [
+			"BasicWeaponAttack",
+			"TestArrow",
+			"TestBullets",
+			"TeleportSelf",
+			"TestPoison",
+			"TestFireBall",
+			"SpawnTestTotem"
+		]
+	},
+	{
+		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_Speech.gd",
+		"Speaker": "Narrator",
+		"WaitForButton": true,
+		"Lines": [
+			"\nTo keep things simple, let's cut down to just the movement pages."
 		]
 	},
 	{
@@ -126,11 +201,14 @@
 		"Position": "Bottom"
 	},
 	{
+		"@LABEL@": "Movement Instructions"
+	},
+	{
 		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_Speech.gd",
 		"Speaker": "Narrator",
 		"WaitForButton": true,
 		"Lines": [
-			"\nTo get started, try turning left and walking three steps forward."
+			"\nLet's start by walking towards the cabin to the north east."
 		]
 	},
 	{
@@ -139,25 +217,54 @@
 		"Position": "Top"
 	},
 	{
-        "BlockTag": "FirstInput_Instruction",
+		"BlockTag": "FirstInput_Instruction",
 		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_Speech.gd",
 		"Speaker": "Narrator",
 		"WaitForButton": true,
 		"Lines": [
-			"\nPress the \"Turn Left\" ",
-            "@Image|res://data/Actions/Movement/TurnRight.png",
-            " Page once.",
-			"\nThen press the \"Move Forward\" ",
-            "@Image|res://data/Actions/Movement/MoveForward.png",
-            " Page 3 times."
+			"\nTo plan out movement for the round, add Pages to the PageQue by clicking on them.",
+			"\nOr remove them by click thier icon in the PageQue."
 		]
 	},
-    {
-        "BlockTag":"FirstInput_Check",
-        "BlockScript": "res://Scenes/Dialog/DialogBlocks/Custom/DialogBlock_TutorialConditions.gd"
-    },
-    {
-        "BlockTag":"FirstInput_Failed",
+	{
+		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_Speech.gd",
+		"Speaker": "Narrator",
+		"WaitForButton": true,
+		"Lines": [
+			"\nTry walking forward one spot,",
+			" turn right,",
+			" then forward three more times."
+		]
+	},
+	{
+		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_PopUp.gd",
+		"PopupControlSript": "res://Scenes/Dialog/DialogBlockControls/PopUps/popup_message_control.tscn",
+		"Create": "MoveInstructions_Popup",
+		"Rect": [
+			0,
+			0,
+			-1,
+			-1
+		],
+		"Lines": [
+			"[color=black]Queue Pages: [/color]",
+			"@Image|res://data/Actions/Movement/MoveForward.png",
+			"@Image|res://data/Actions/Movement/TurnRight.png",
+			"@Image|res://data/Actions/Movement/MoveForward.png",
+			"@Image|res://data/Actions/Movement/MoveForward.png",
+			"@Image|res://data/Actions/Movement/MoveForward.png"
+		]
+	},
+	{
+		"BlockTag": "FirstInput_Check",
+		"BlockScript": "res://Scenes/Dialog/DialogBlocks/Custom/DialogBlock_TutorialConditions.gd"
+	},
+	{
+		"BlockTag": "FirstInput_Failed",
+		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_PopUp.gd",
+		"Delete": "MoveInstructions_Popup"
+	},
+	{
 		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_Speech.gd",
 		"Speaker": "Narrator",
 		"WaitForButton": true,
@@ -165,54 +272,306 @@
 			"\nWhoops, that's not right.",
 			"\nLet's try again."
 		],
-        "NextBlockTag": "FirstInput_Instruction"
-
-    },
+		"NextBlockTag": "FirstInput_Instruction"
+	},
 	{
-        "BlockTag":"FirstInput_Success",
+		"BlockTag": "FirstInput_Success",
+		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_PopUp.gd",
+		"Delete": "MoveInstructions_Popup"
+	},
+	{
 		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_Speech.gd",
 		"Speaker": "Narrator",
 		"WaitForButton": true,
 		"Lines": [
-			"\nYou'll notice an arrow that appeared under your character.",
-			"\nThis is peviews where your character will end up once the round is done."
+			"\nNotice the big blue arrow that appeared when you added a page?",
+			"\nThat shows you where your character will end up when the round is done."
 		]
 	},
 	{
 		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_PopUp.gd",
-		"Create":"PopUp3",
-		"TargetElement": "MoveableCamera2D/CanvasLayer/CombatUiControl/QueInputControl/HBoxContainer/StartButton",
+		"Create": "PopUp3",
+		"TargetElement": "MoveableCamera2D/CanvasLayer/CombatUiControl/QueInputControl/BackPatchContainer/HBoxContainer/StartButton",
 		"PopupControlSript": "res://Scenes/Dialog/DialogBlockControls/PopUps/dotted_outline_pop_up_control.tscn"
 	},
 	{
-        "BlockTag":"FirstInput_Success",
+		"BlockTag": "FirstInput_Success",
 		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_Speech.gd",
 		"Speaker": "Narrator",
 		"WaitForButton": true,
 		"Lines": [
-			"\nNow that you're PageQue is ready, press the Start button to begine the round."
+			"\nYour PageQue is now ready, so we'll start the round."
 		]
 	},
 	{
 		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_PopUp.gd",
-		"Delete":"PopUp3"
+		"Delete": "PopUp3"
 	},
-    {
-        "BlockTag":"ForceStart",
-        "BlockScript": "res://Scenes/Dialog/DialogBlocks/Custom/DialogBlock_TutorialConditions.gd"
-    },
+	{
+		"BlockTag": "ForceStart",
+		"BlockScript": "res://Scenes/Dialog/DialogBlocks/Custom/DialogBlock_TutorialConditions.gd",
+		"FreezeCamera": true
+	},
 	{
 		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_Speech.gd",
 		"Speaker": "Narrator",
 		"WaitForButton": true,
 		"Lines": [
-			"\nMore Text."
+			"\nIt's important to note that all movement is realive to where your character is facing.\n"
+		],
+		"FreezeCamera": true
+	},
+	{
+		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_Speech.gd",
+		"Speaker": "Narrator",
+		"WaitForButton": true,
+		"Lines": [
+			"\nMoving Forward will always be the tile in front of your character.",
+			"\n",
+			"\nWhen facing North: ",
+			"@Image|res://data/Actions/Movement/TurnRight.png",
+			" goes to the East.",
+			"\n",
+			"\nWhen facing East: ",
+			"@Image|res://data/Actions/Movement/TurnRight.png",
+			" goes to the South.",
+			"\nAnd so on."
 		]
 	},
 	{
-        "BlockTag":"End",
+		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_PositionBox.gd",
+		"Position": "Bottom"
+	},
+	{
+		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_Speech.gd",
+		"Speaker": "Narrator",
+		"WaitForButton": true,
+		"Lines": [
+			"\nNow that you've learned to walk, it's time to kill."
+		]
+	},
+	{
+		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_PanCamera.gd",
+		"TargetType": "MapPos",
+		"TargetMapPos": [
+			12,
+			10
+		]
+	},
+	{
+		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_Speech.gd",
+		"Speaker": "Narrator",
+		"WaitForButton": true,
+		"Lines": [
+			"\nOh look, a conveniantly placed mushroom."
+		]
+	},
+	{
+		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_PanCamera.gd",
+		"TargetType": "Actor",
+		"TargetActorId": "TutorialActor_ID"
+	},
+	{
+		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_Speech.gd",
+		"Speaker": "Narrator",
+		"WaitForButton": true,
+		"Lines": [
+			"\nHow about we use that as a target?"
+		]
+	},
+	{
+		"BlockTag": "SkipTo",
+		"@LABEL@": "Attack Instructions"
+	},
+	{
+		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_PositionBox.gd",
+		"Position": "Top"
+	},
+	{
+		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_Speech.gd",
+		"Speaker": "Narrator",
+		"WaitForButton": true,
+		"Lines": [
+			"\nJust like movement, attacks are done using Pages."
+		]
+	},
+	{
+		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_Speech.gd",
+		"Speaker": "Narrator",
+		"WaitForButton": true,
+		"Lines": [
+			"\nI'll add the Basic Weapon Page back to your PageBook."
+		]
+	},
+	{
+		"BlockTag": "AddPage_BWA",
+		"BlockScript": "res://Scenes/Dialog/DialogBlocks/Custom/DialogBlock_TutorialConditions.gd",
+		"Pages": [
+			"BasicWeaponAttack"
+		]
+	},
+	{
+		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_PanCamera.gd",
+		"TargetType": "Actor",
+		"TargetActorId": "TutorialActor_ID"
+	},
+	{
+		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_PopUp.gd",
+		"Create": "PopUp4",
+		"TargetElement": "MoveableCamera2D/CanvasLayer/CombatUiControl/QueInputControl/BackPatchContainer/HBoxContainer/HBoxContainer/PageSlot3",
+		"PopupControlSript": "res://Scenes/Dialog/DialogBlockControls/PopUps/dotted_outline_pop_up_control.tscn",
+		"FreezeCamera": true
+	},
+	{
+		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_Speech.gd",
+		"Speaker": "Narrator",
+		"WaitForButton": true,
+		"Lines": [
+			"\nWith this Page, you can use you primary weapon to attack a target.",
+			"\nSince you're using a sword, we'll need to get in range."
+		]
+	},
+	{
+		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_PopUp.gd",
+		"Delete": "PopUp4"
+	},
+	{
+		"BlockTag": "SecondInput_Instruction",
+		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_Speech.gd",
+		"Speaker": "Narrator",
+		"WaitForButton": true,
+		"Lines": [
+			"\nWalk up right next to the mushroom and attack it twice."
+		]
+	},
+	{
+		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_PopUp.gd",
+		"PopupControlSript": "res://Scenes/Dialog/DialogBlockControls/PopUps/popup_message_control.tscn",
+		"Create": "MoveInstructions_Popup",
+		"Rect": [
+			0,
+			0,
+			-1,
+			-1
+		],
+		"Lines": [
+			"[color=black]Queue Pages: [/color]",
+			"@Image|res://data/Actions/Movement/MoveForward.png",
+			"@Image|res://data/Actions/Movement/MoveForward.png",
+			"@Image|res://data/Actions/Movement/MoveForward.png",
+			"@Image|res://defs/Items/Equipment/TestWeapons/TestSword.png",
+			"@Image|res://defs/Items/Equipment/TestWeapons/TestSword.png"
+		]
+	},
+	{
+		"BlockTag": "SecondInput_Check",
+		"BlockScript": "res://Scenes/Dialog/DialogBlocks/Custom/DialogBlock_TutorialConditions.gd"
+	},
+	{
+		"BlockTag": "SecondInput_Failed",
+		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_PopUp.gd",
+		"Delete": "MoveInstructions_Popup"
+	},
+	{
+		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_Speech.gd",
+		"Speaker": "Narrator",
+		"WaitForButton": true,
+		"Lines": [
+			"\nWhoops, that's not right.",
+			"\nLet's try again."
+		],
+		"NextBlockTag": "SecondInput_Instruction"
+	},
+	{
+		"BlockTag": "SecondInput_Success",
+		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_PopUp.gd",
+		"Delete": "MoveInstructions_Popup"
+	},
+	{
 		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_PositionBox.gd",
 		"BlockType": "PositonDialogBlock",
 		"Position": "Bottom"
+	},
+	{
+		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_Speech.gd",
+		"Speaker": "Narrator",
+		"WaitForButton": true,
+		"Lines": [
+			"\nSee that red area that showed up around your character?",
+			"\nThat's a preview for the Target Area of your Basic Weapon Page."
+		]
+	},
+	{
+		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_Speech.gd",
+		"Speaker": "Narrator",
+		"WaitForButton": true,
+		"Lines": [
+			"\nMany Pages will require a target to be selected, but you don't have to pick a target until that Page comes up on your turn.",
+			"@WaitForNextButton",
+			"\n\nWhen a Page needs a target, the round will pause and you will be asked to select a spot or creature from the Target Area.",
+			"@WaitForNextButton",
+			"\n\nThe Target Area shows up as red tiles with circles on valid targets. The area's size and shape depends on the Page, but is always centered on your character.",
+			"@WaitForNextButton",
+			"\n\nIf no target is in the area, the Page will fail and your turn will be skipped."
+		]
+	},
+	{
+		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_Speech.gd",
+		"Speaker": "Narrator",
+		"WaitForButton": true,
+		"Lines": [
+			"\nAuto-Targeting is turned on right now. So if only one target is in range, that target is automatically selected."
+		]
+	},
+	{
+		"BlockTag": "FirstInput_Success",
+		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_Speech.gd",
+		"Speaker": "Narrator",
+		"WaitForButton": true,
+		"Lines": [
+			"\nWithout further ado, let's kill this shroom."
+		]
+	},
+	{
+		"BlockTag": "ForceStart",
+		"BlockScript": "res://Scenes/Dialog/DialogBlocks/Custom/DialogBlock_TutorialConditions.gd"
+	},
+	{
+		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_Speech.gd",
+		"Speaker": "Narrator",
+		"WaitForButton": true,
+		"Lines": [
+			"\nGood job! Now that mushroom will think twice before growing in a tutorial."
+		],
+		"FreezeCamera": true
+	},
+	{
+		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_Speech.gd",
+		"Speaker": "Narrator",
+		"WaitForButton": true,
+		"Lines": [
+			"\nThis is it for the tutorial. But you can stay and play around on the map if you want.",
+			"\n\nThere are more mushrooms and target dummies to the north if you want to play with them.",
+			"\n\nAnd I've taken the liberty of adding some fun pages to your Page Book."
+		]
+	},
+	{
+		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_PositionBox.gd",
+		"BlockType": "PositonDialogBlock",
+		"Position": "Bottom"
+	},
+	{
+		"BlockTag": "AddPage_End",
+		"BlockScript": "res://Scenes/Dialog/DialogBlocks/Custom/DialogBlock_TutorialConditions.gd",
+		"Pages": [
+			"BasicWeaponAttack",
+			"TestArrow",
+			"TestBullets",
+			"TeleportSelf",
+			"TestPoison",
+			"TestFireBall",
+			"SpawnTestTotem"
+		],
+		"FreezeCamera": false
 	}
 ]

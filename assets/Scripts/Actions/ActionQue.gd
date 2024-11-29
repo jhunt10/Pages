@@ -30,12 +30,7 @@ func _init(act) -> void:
 func _cache_que_info():
 	var que_size = actor.stats.get_stat("PagesPerRound", -1)
 	if que_size < 0:
-		que_size = actor.get_load_val("MaxQueSize", 0)
-	#var que_equipments = actor.equipment.get_equipt_items_of_slot_type("Que")
-	#for que_equipment:BaseQueEquipment in que_equipments:
-		#que_size += que_equipment.get_max_que_size()
-	#
-	#_cached_max_page_count = page_count
+		que_size = actor.get_load_val("DefaultQueSize", 0)
 	if _cached_max_que_size != que_size:
 		_cached_max_que_size = que_size
 		max_que_size_changed.emit()

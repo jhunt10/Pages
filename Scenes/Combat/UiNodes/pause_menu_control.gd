@@ -10,6 +10,7 @@ func _ready() -> void:
 	main_menu_button.pressed.connect(_on_main_menu_pressed)
 	quit_button.pressed.connect(_on_quit_pressed)
 	close_button.pressed.connect(_on_close_menu)
+	character_button.visible = false
 	character_button.pressed.connect(_on_character)
 
 func _on_main_menu_pressed():

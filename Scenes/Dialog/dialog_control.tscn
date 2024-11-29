@@ -6,22 +6,28 @@
 [ext_resource type="Theme" uid="uid://dwinll8pgdjhc" path="res://Scenes/Themes/standard_theme.tres" id="3_rdgwk"]
 [ext_resource type="PackedScene" uid="uid://by02p6lkrr3iv" path="res://Scenes/Dialog/DialogBlockControls/question_dialog_block.tscn" id="4_0x12l"]
 
-[node name="DialogControl" type="Control" node_paths=PackedStringArray("premade_blocks", "popup_holder", "dialog_box", "next_button", "scroll_container", "blocks_container")]
+[node name="DialogControl" type="Control" node_paths=PackedStringArray("dialog_box_holder", "popup_holder", "dialog_box", "next_button", "scroll_container", "blocks_container")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 script = ExtResource("1_h8gog")
-premade_blocks = NodePath("DialogBox/PremadeDialogBlocks")
+dialog_box_holder = NodePath("BoxHolderControl")
 popup_holder = NodePath("PopUpHolder")
-dialog_box = NodePath("DialogBox")
-next_button = NodePath("DialogBox/Button")
-scroll_container = NodePath("DialogBox/ScrollContainer")
-blocks_container = NodePath("DialogBox/ScrollContainer/VBoxContainer")
+dialog_box = NodePath("BoxHolderControl/DialogBox")
+next_button = NodePath("BoxHolderControl/DialogBox/Button")
+scroll_container = NodePath("BoxHolderControl/DialogBox/ScrollContainer")
+blocks_container = NodePath("BoxHolderControl/DialogBox/ScrollContainer/VBoxContainer")
 
-[node name="DialogBox" type="Control" parent="."]
+[node name="BoxHolderControl" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="DialogBox" type="Control" parent="BoxHolderControl"]
 custom_minimum_size = Vector2(1152, 240)
 layout_mode = 1
 anchors_preset = 7
@@ -29,10 +35,14 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = 368.0
+offset_right = 1132.0
+offset_bottom = 608.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="NinePatchRect" type="NinePatchRect" parent="DialogBox"]
+[node name="NinePatchRect" type="NinePatchRect" parent="BoxHolderControl/DialogBox"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -45,7 +55,7 @@ patch_margin_top = 8
 patch_margin_right = 8
 patch_margin_bottom = 8
 
-[node name="PremadeDialogBlocks" type="Control" parent="DialogBox"]
+[node name="PremadeDialogBlocks" type="Control" parent="BoxHolderControl/DialogBox"]
 visible = false
 layout_mode = 2
 anchors_preset = 0
@@ -54,15 +64,15 @@ offset_top = 16.0
 offset_right = 16.0
 offset_bottom = 16.0
 
-[node name="SpeechDialogBlock" parent="DialogBox/PremadeDialogBlocks" instance=ExtResource("3_er26g")]
+[node name="SpeechDialogBlock" parent="BoxHolderControl/DialogBox/PremadeDialogBlocks" instance=ExtResource("3_er26g")]
 layout_mode = 0
 
-[node name="QuestionDialogBlock" parent="DialogBox/PremadeDialogBlocks" instance=ExtResource("4_0x12l")]
+[node name="QuestionDialogBlock" parent="BoxHolderControl/DialogBox/PremadeDialogBlocks" instance=ExtResource("4_0x12l")]
 layout_mode = 0
 offset_top = 0.0
 offset_bottom = 88.0
 
-[node name="Seperator" type="Label" parent="DialogBox/PremadeDialogBlocks"]
+[node name="Seperator" type="Label" parent="BoxHolderControl/DialogBox/PremadeDialogBlocks"]
 layout_mode = 2
 offset_top = 144.0
 offset_right = 1120.0
@@ -71,7 +81,7 @@ theme = ExtResource("3_rdgwk")
 text = "----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------"
 text_overrun_behavior = 1
 
-[node name="ScrollContainer" type="ScrollContainer" parent="DialogBox"]
+[node name="ScrollContainer" type="ScrollContainer" parent="BoxHolderControl/DialogBox"]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -84,12 +94,12 @@ grow_horizontal = 2
 grow_vertical = 2
 follow_focus = true
 
-[node name="VBoxContainer" type="VBoxContainer" parent="DialogBox/ScrollContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="BoxHolderControl/DialogBox/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Button" type="Button" parent="DialogBox"]
+[node name="Button" type="Button" parent="BoxHolderControl/DialogBox"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0

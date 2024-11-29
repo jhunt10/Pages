@@ -25,6 +25,9 @@ func _init(key:String, def_load_path:String, def:Dictionary, id:String='', data:
 func is_static():
 	return false
 
+func save_me()->bool:
+	return false
+
 func save_data()->Dictionary:
 	if !_data.keys().has("ObjectKey"):
 		_data['ObjectKey'] = self._key

@@ -13,36 +13,28 @@ const FACING_ANIMATION:String = 'facing/facing'
 		if Engine.is_editor_hint():
 			set_facing_dir(val)
 		
-@onready var vfx_holder:Node2D = $VFXHolder
-@onready var animation:AnimationPlayer = $AnimationPlayer
-@onready var animation_tree:AnimationTree = $AnimationTree
-@onready var path_arrow:Sprite2D = $PathArrow
-
-@onready var offset_node:Node2D = $ActorMotionNode/ActorSpriteNode/OffsetNode
-
-@onready var actor_sprite:Sprite2D = $ActorMotionNode/ActorSpriteNode/OffsetNode/ActorSprite
-#@onready var main_hand_sprite:Sprite2D = $ActorMotionNode/ActorSpriteNode/OffsetNode/MainHandOverSprite
-#@onready var off_hand_sprite:Sprite2D = $ActorMotionNode/ActorSpriteNode/OffsetNode/OffHandOverlaySprite
-#@onready var two_hand_sprite:Sprite2D = $ActorMotionNode/ActorSpriteNode/OffsetNode/TwoHandOverSprite
-@onready var main_hand_node:ActorHandNode = $ActorMotionNode/ActorSpriteNode/OffsetNode/MainHandNode
-@onready var off_hand_node:ActorHandNode = $ActorMotionNode/ActorSpriteNode/OffsetNode/OffHandNode
-#@onready var two_hand_weapon_node:ActorWeaponNode = $ActorMotionNode/ActorSpriteNode/OffsetNode/TwoHandOverSprite/TwoHandWeaponNode
+@export var vfx_holder:Node2D
+@export var animation:AnimationPlayer
+@export var path_arrow:Sprite2D
+@export var offset_node:Node2D
+@export var actor_sprite:Sprite2D
+@export var main_hand_node:ActorHandNode
+@export var off_hand_node:ActorHandNode
 
 ## Represents the position of the actor accounting for movement
-@onready var actor_motion_node:Node2D = $ActorMotionNode
+@export var actor_motion_node:Node2D
 
-func _load_nodes():
-	if !actor_sprite:
-		animation = $AnimationPlayer
-		animation_tree = $AnimationTree
-		offset_node = $ActorMotionNode/ActorSpriteNode/OffsetNode
-		actor_sprite = $ActorMotionNode/ActorSpriteNode/OffsetNode/ActorSprite
-		#main_hand_sprite = $ActorMotionNode/ActorSpriteNode/OffsetNode/MainHandOverSprite
-		#off_hand_sprite = $ActorMotionNode/ActorSpriteNode/OffsetNode/OffHandOverlaySprite
-		#two_hand_sprite = $ActorMotionNode/ActorSpriteNode/OffsetNode/TwoHandOverSprite
-		main_hand_node = $ActorMotionNode/ActorSpriteNode/OffsetNode/MainHandNode
-		off_hand_node = $ActorMotionNode/ActorSpriteNode/OffsetNode/OffHandNode
-		#two_hand_weapon_node = $ActorMotionNode/ActorSpriteNode/OffsetNode/TwoHandOverSprite/TwoHandWeaponNode
+#func _load_nodes():
+	#if !actor_sprite:
+		#animation = $AnimationPlayer
+		#offset_node = $ActorMotionNode/ActorSpriteNode/OffsetNode
+		#actor_sprite = $ActorMotionNode/ActorSpriteNode/OffsetNode/ActorSprite
+		##main_hand_sprite = $ActorMotionNode/ActorSpriteNode/OffsetNode/MainHandOverSprite
+		##off_hand_sprite = $ActorMotionNode/ActorSpriteNode/OffsetNode/OffHandOverlaySprite
+		##two_hand_sprite = $ActorMotionNode/ActorSpriteNode/OffsetNode/TwoHandOverSprite
+		#main_hand_node = $ActorMotionNode/ActorSpriteNode/OffsetNode/MainHandNode
+		#off_hand_node = $ActorMotionNode/ActorSpriteNode/OffsetNode/OffHandNode
+		##two_hand_weapon_node = $ActorMotionNode/ActorSpriteNode/OffsetNode/TwoHandOverSprite/TwoHandWeaponNode
 
 var Id:String 
 var Actor:BaseActor 
@@ -66,7 +58,7 @@ func set_actor(actor:BaseActor):
 		Actor.node = self
 	if not actor.equipment_changed.is_connected(sync_sprites):
 		actor.equipment_changed.connect(sync_sprites)
-	_load_nodes()
+	#_load_nodes()
 	var frames = actor.get_load_val("SpriteFrameWH", [1,1])
 	actor_sprite.hframes = frames[0]
 	actor_sprite.vframes = frames[1]
@@ -119,7 +111,7 @@ func set_facing_dir(dir:int):
 	if facing_dir == dir:
 		return
 	facing_dir = dir
-	print("Facing Direction: %s" % [facing_dir])
+	#print("Facing Direction: %s" % [facing_dir])
 	if animation:
 		animation.play(FACING_ANIMATION + get_animation_dir_sufix())
 	if main_hand_node:
@@ -130,7 +122,7 @@ func set_facing_dir(dir:int):
 func set_display_pos(pos:MapPos, start_walkin:bool=false):
 	if Actor.ActorKey == 'TestActor':
 		if LOGGING: print("-------set_display_pos------------")
-	_load_nodes()
+	#_load_nodes()
 	if !pos:
 		return
 	set_facing_dir(pos.dir)
@@ -237,13 +229,16 @@ func start_walk_in_animation():
 	is_walking = false
 
 func set_corpse_sprite():
-	actor_sprite.texture = Actor.get_coprse_texture()
+	actor_sprite.texture = Actor.sprite.get_corpse_sprite()
 	actor_sprite.vframes = 1
 	actor_sprite.hframes = 1
 	actor_sprite.offset = Vector2i.ZERO
 
 func hide_path_arrow():
 	path_arrow.visible = false
+
+func show_path_arrow():
+	path_arrow.visible = true
 
 func reset_path_arrow():
 	path_arrow.visible = true

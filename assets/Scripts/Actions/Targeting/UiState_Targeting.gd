@@ -46,9 +46,11 @@ func start_state():
 		CombatRootControl.Instance.GridCursor.set_cursor(GridCursorNode.Cursors.Targeting)
 	else:
 		CombatRootControl.Instance.GridCursor.set_cursor(GridCursorNode.Cursors.Default)
+	CombatRootControl.Instance.camera.freeze = false
 	
 func end_state():
 	CombatRootControl.Instance.GridCursor.set_cursor(GridCursorNode.Cursors.Default)
+	CombatRootControl.Instance.GridCursor.lock_position = false
 	target_area_dislay_node.clear_display(_target_display_key)
 	target_confirm_button.visible = false
 	target_confirm_button.on_pressed_func = null
@@ -77,6 +79,9 @@ func select_target(coord:Vector2i, confirmed:bool):
 		waiting_selection = coord
 		target_area_dislay_node.set_area_effect_coor(_target_display_key, coord)
 		target_confirm_button.set_button_text("Confirm")
+		CombatRootControl.Instance.GridCursor.set_cursor(GridCursorNode.Cursors.Targeting)
+		CombatRootControl.Instance.GridCursor.position = CombatRootControl.Instance.MapController.actor_tile_map.map_to_local(coord)
+		CombatRootControl.Instance.GridCursor.lock_position = true
 		return
 	is_waiting_for_confirm = false
 	waiting_selection = null

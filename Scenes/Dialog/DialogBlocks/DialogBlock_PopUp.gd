@@ -39,14 +39,15 @@ func create_popup():
 		else:
 			printerr("Target Element is not a control")
 		
-	if popup_pos and popup_size:
+	if popup_pos != null and popup_size != null:
 		var popup_path = _block_data.get("PopupControlSript", null)
 		if !popup_path:
 			printerr("No PopupControlSript")
 			return
 		var popup = load(popup_path).instantiate()
-		popup.size = popup_size
-		
+		if popup_size.x > 0:
+			popup.size = popup_size
+		popup.set_dialog_block(self)
 		_parent_dialog_control.add_popup(popup_key, popup, popup_pos)
 	else:
 		printerr("Failed to pop")

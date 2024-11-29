@@ -12,7 +12,8 @@ static var Instance:MainRootNode
 
 @export var center_container:CenterContainer
 
-static var is_mobile:bool
+static var is_mobile:bool:
+	get: return true# OS.has_feature("web_android") or OS.has_feature("web_ios")
 
 func _ready() -> void:
 	if MainRootNode.Instance:
@@ -32,58 +33,14 @@ func _load_test_map():
 func start_combat():
 	current_scene.queue_free()
 	var combat_scene:CombatRootControl = load("res://Scenes/Combat/combat_scene.tscn").instantiate()
-	#var actors = []
-	#var actor = ActorLibrary.get_actor("TestActor_ID")
-	##actor.equipment.equipt_weapon( ItemLibrary.create_item("TestSword", {}))
-	#actors.append({
-		#'ActorId': 'TestActor_ID',
-		#'Pos': MapPos.new(5,5,0,2),
-		#'IsPlayer': true,
-		#'IsEnemy':false
-	#})
-	#actors.append({
-		#'ActorId': 'TestTarget_ID',
-		#'Pos': MapPos.new(6,1,0,2),
-		#'IsPlayer': false,
-		#'IsEnemy':true
-	#})
-	#actors.append({
-		#'ActorId': 'TestTarget_ID2',
-		#'Pos': MapPos.new(3,1,0,2),
-		#'IsPlayer': false,
-		#'IsEnemy':true
-	#})
-	#actors.append({
-		#'ActorId': 'TestTarget_ID3',
-		#'Pos': MapPos.new(4,1,0,2),
-		#'IsPlayer': false,
-		#'IsEnemy':true
-	#})
-	#actors.append({
-		#'ActorId': 'TestTarget_ID4',
-		#'Pos': MapPos.new(5,7,0,2),
-		#'IsPlayer': false,
-		#'IsEnemy':true
-	#})
-	##actors.append({
-		##'ActorId': 'TestTarget_ID5',
-		##'Pos': MapPos.new(8,5,0,2),
-		##'IsPlayer': false,
-		##'IsEnemy':true
-	##})
-	#actors.append({
-		#'ActorKey': 'TestTarget',
-		#'Pos': MapPos.new(6,2,0,0),
-	#})
-	#var map_data = _load_test_map()
-	combat_scene.load_init_state()
+	combat_scene.load_init_state("res://Scenes/Maps/working_map.tscn")
 	current_scene = combat_scene
 	self.add_child(current_scene)
 
 func open_character_sheet(_actor:BaseActor=null, parent_node=null)->EquipmentMenuContainer:
 	var actor = _actor
 	if not actor:
-		actor = ActorLibrary.get_actor("TestActor_ID")
+		actor = ActorLibrary.get_or_create_actor("TestActor", "TestActor_ID")
 		#actor = ActorLibrary.create_actor("TestActor", {})
 	var charsheet:EquipmentMenuContainer = load("res://Scenes/Menus/EquipmentMenu/equipment_menu.tscn").instantiate()
 	if parent_node:
@@ -109,8 +66,17 @@ func open_effect_editor():
 	center_container.add_child(page_editor)
 
 func open_tutorial():
-	var tutorial = load("res://Scenes/Menus/tutorial_menu_control.tscn").instantiate()
-	center_container.add_child(tutorial)
+	if current_scene:
+		current_scene.queue_free()
+	var combat_scene:CombatRootControl = load("res://Scenes/Combat/combat_scene.tscn").instantiate()
+	combat_scene.load_init_state("res://Scenes/Maps/Tutorial/tutorial_map.tscn")
+	current_scene = combat_scene
+	self.add_child(current_scene)
+	
+	var dialog:DialogControl = load("res://Scenes/Dialog/dialog_control.tscn").instantiate()
+	dialog.scene_root = combat_scene
+	dialog.load_dialog_script("res://data/DialogScripts/TutorialDialog.json")
+	combat_scene.camera.canvas_layer.add_child(dialog)
 	
 func go_to_main_menu():
 	current_scene.queue_free()

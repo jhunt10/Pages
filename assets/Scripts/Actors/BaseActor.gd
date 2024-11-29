@@ -53,6 +53,7 @@ var spawn_map_layer
 
 var _allow_auto_que:bool = false
 
+var is_player:bool = false
 var is_dead:bool = false
 
 func _init(key:String, load_path:String, def:Dictionary, id:String, data:Dictionary) -> void:
@@ -72,7 +73,11 @@ func _init(key:String, load_path:String, def:Dictionary, id:String, data:Diction
 	items = ItemHolder.new(self)
 	Que = ActionQue.new(self)
 	pages = PageHolder.new(self)
-	
+	if get_load_val("IsPlayer", false):
+		is_player = true
+
+func save_me()->bool:
+	return self.is_player
 
 func save_data()->Dictionary:
 	var data = super()

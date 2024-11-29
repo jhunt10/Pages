@@ -15,10 +15,8 @@ var camera:MoveableCamera2D:
 @export var que_display:QueDisplayControl
 @export var que_collection_display:QueCollectionControl
 @export var stats_collection_display:StatCollectionDisplayControl
+@export var item_select_menu:ItemSelectMenuControl
 
-@onready var item_select_menu:ItemSelectMenuControl = $ItemSelectMenuControl
-
-@onready var test_button:Button = $NextActorButton
 
 static var Instance:CombatUiControl
 static var ui_state_controller:UiStateController = UiStateController.new()
@@ -31,7 +29,7 @@ func _ready() -> void:
 		self.queue_free()
 		return
 	menu_button.pressed.connect(_on_menu_pressed)
-	test_button.pressed.connect(do_test)
+	#test_button.pressed.connect(do_test)
 	target_input_display.visible = false
 	pass # Replace with function body.
 

@@ -3,16 +3,34 @@ extends Camera2D
 
 const LOGGING = false
 
+signal panning_finished
+
 @export var speed:float = 200
-var freeze:bool = false
+@export var canvas_layer:CanvasLayer
+
+var freeze:bool:
+	set(val):
+		freeze = val
+		if freeze: printerr("****** Freezing Camera")
+		else: printerr("****** UNFreezing Camera")
 
 var following_actor_node:ActorNode
+
+var is_auto_panning:bool:
+	get: return auto_pan_start_pos != null
+var auto_pan_start_pos
+var auto_pan_target_pos
+var auto_pan_velocity:float
+var auto_pan_max_velocity:float = 500
+var auto_pan_min_velocity:float = 100
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.
 
+# Camera must be later in tree than Actors, otherwise camera will bounce around when the actor walks between tiles
 func lock_to_actor(actor:BaseActor):
+	if LOGGING: print("Camera lock to actor: %s" %[actor.Id] )
 	var pos = CombatRootControl.Instance.GameState.MapState.get_actor_pos(actor)
 	self.snap_to_map_pos(pos)
 	following_actor_node = actor.node
@@ -27,6 +45,32 @@ func snap_to_map_pos(pos):
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	if auto_pan_start_pos:
+		var distance_from = self.position.distance_to(auto_pan_start_pos)
+		var distance_to = self.position.distance_to(auto_pan_target_pos)
+		var full_dist = auto_pan_start_pos.distance_to(auto_pan_target_pos)
+		var dist_fact = distance_from / full_dist * 2
+		if distance_to < distance_from:
+			dist_fact = distance_to / full_dist * 2
+		auto_pan_velocity = auto_pan_min_velocity + ((auto_pan_max_velocity - auto_pan_min_velocity) * dist_fact)
+		#if dist_fact > 0.5:
+			#auto_pan_velocity = min_v
+		#else:
+			#auto_pan_velocity = max(auto_pan_velocity - (auto_pan_acceleration), auto_pan_min_velocity)
+		#print("AutoPan Fact: %s | Vel: %s " % [dist_fact, auto_pan_velocity])
+		var new_pos:Vector2 = self.position.move_toward(auto_pan_target_pos, delta * auto_pan_velocity) 
+		if new_pos == self.position:
+			force_finish_panning()
+			return
+		else:
+			self.position = new_pos
+			return
+	
+	if following_actor_node:
+		var move_node = following_actor_node.actor_motion_node
+		if LOGGING: print("Following Actor: " + str(move_node.position))
+		set_camera_pos(move_node.global_position, false)
+		return
 	if freeze:
 		return
 	var dist = delta * speed
@@ -64,20 +108,38 @@ func _process(delta: float) -> void:
 				if LOGGING: print("New Zoom: %s" % [self.zoom])
 			if LOGGING: print("Radius Change: R:%s | Start:%s | Change: %s" % [radius, _pinch_start_radius, pinch_change] )
 			#_pinch_last_radius = radius
-	if following_actor_node:
-		var move_node = following_actor_node.actor_motion_node
-		if LOGGING: print("Following Actor: " + str(move_node.position))
-		set_camera_pos(move_node.global_position, false)
 	pass
 
 func set_camera_pos(pos:Vector2, unfollow:bool=true):
 	self.position = pos
 	if unfollow:
 		following_actor_node = null
-	
+
+func start_auto_pan(target_pos:Vector2):
+	following_actor_node = null
+	auto_pan_start_pos = self.position
+	auto_pan_target_pos = target_pos
+	auto_pan_velocity = auto_pan_min_velocity
+
+func start_auto_pan_to_map_pos(map_pos:MapPos):
+	var target_pos = MapHelper.get_map_pos_global_position(map_pos)
+	start_auto_pan(target_pos)
+
+func start_auto_pan_to_actor(actor:BaseActor):
+	var target_pos = MapHelper.get_actor_global_position(actor)
+	following_actor_node = actor.node
+	start_auto_pan(target_pos)
+
+func force_finish_panning():
+	if not is_auto_panning:
+		return
+	self.position = auto_pan_target_pos
+	auto_pan_target_pos = null
+	auto_pan_start_pos = null
+	panning_finished.emit()
 
 func _input(event: InputEvent) -> void:
-	if freeze:
+	if freeze or is_auto_panning:
 		return
 	if event is InputEventMouseButton:
 		var mouse_event = event as InputEventMouseButton
@@ -94,7 +156,7 @@ var _pinch_start_radius:float
 var _pinch_last_radius:float
 var _pinch_start_zoom:Vector2
 func _unhandled_input(event: InputEvent) -> void:
-	if freeze:
+	if freeze or is_auto_panning:
 		return
 	if event is InputEventScreenTouch and event.pressed:
 		if _touch_events.size() == 0:
@@ -108,5 +170,6 @@ func _unhandled_input(event: InputEvent) -> void:
 			_pinch_start_radius = -1
 			_pinch_last_radius = -1
 	if event is InputEventScreenDrag:
-		_touch_events[event.index]["current"] = event
+		if _touch_events.keys().has(event.index):
+			_touch_events[event.index]["current"] = event
 		

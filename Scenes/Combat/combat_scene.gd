@@ -15,8 +15,7 @@ static var QueController:ActionQueController = ActionQueController.new()
 	
 var GameState:GameStateData
 
-# Actors to create on ready {ActorKey,Position}
-var actor_creation_que:Array
+var player_actor_id = "TestActor_ID"
 
 func _enter_tree() -> void:
 	if !Instance: 
@@ -41,20 +40,8 @@ func _ready() -> void:
 		queue_free()
 		return
 	#load_map(MapController)
-	for actor_info in actor_creation_que:
-		var actor_id = actor_info['ActorId']
-		var actor_pos = actor_info['Pos']
-		var actor = ActorLibrary.get_actor(actor_id)
-		if actor_info.get('IsPlayer', false):
-			actor.FactionIndex = 0
-			ui_control.set_player_actor(actor)
-			add_actor(actor, 0, actor_pos)
-			camera.snap_to_map_pos(actor_pos)
-			camera.zoom = Vector2(2,2)
-		else:
-			add_actor(actor, 1, actor_pos)
-		
-	actor_creation_que.clear()
+	
+		#
 	
 	ui_control.ui_state_controller.set_ui_state(UiStateController.UiStates.ActionInput)
 	#
@@ -70,21 +57,65 @@ func _process(delta: float) -> void:
 	#GameState = GameStateData.new()
 	#map_control.init_load()
 ##
-func load_init_state():
-	var data = MapController.get_map_data()
+func load_init_state(map_scene_path:String):
+	if !Instance: Instance = self
+	elif Instance != self: 
+		printerr("Multiple CombatRootControls found")
+		queue_free()
+		return
 	if GameState:
 		printerr("Combate Scene already init")
 		return
+	var map_scene = load(map_scene_path)
+	if MapController:
+		MapController.queue_free()
+		
+	MapController = map_scene.instantiate()
+	self.add_child(MapController)
+	
+	# Keep Camera last in sceen (prevents flickering)
+	self.remove_child(camera)
+	self.add_child(camera)
+	self.remove_child(GridCursor)
+	self.add_child(GridCursor)
+	
+	var map_data = MapController.get_map_data()
 	GameState = GameStateData.new()
-	GameState.MapState = MapStateData.new(GameState, data)
-	self.actor_creation_que = data['Actors']
+	GameState.MapState = MapStateData.new(GameState, map_data)
+	QueController = ActionQueController.new()
+	
+	for actor_info:Dictionary in map_data['Actors']:
+		var new_actor = null
+		var actor_pos = actor_info['Pos']
+		if actor_info.keys().has("ActorId"):
+			if actor_info.keys().has("ActorKey"):
+				new_actor = ActorLibrary.get_or_create_actor(actor_info['ActorKey'], actor_info['ActorId'])
+			else:
+				new_actor = ActorLibrary.get_actor(actor_info['ActorId'])
+		elif actor_info.keys().has("ActorKey"):
+			new_actor = ActorLibrary.create_actor(actor_info['ActorKey'], {})
+		if new_actor:
+			add_actor(new_actor, 0, actor_pos)
+		if actor_info.get("IsPlayer", false):
+			player_actor_id = new_actor.Id
+			
+	
+	var player_actor = get_player_actor()
+	if !GameState.get_actor(player_actor.Id):
+		printerr("Player Actor not loaded to GameState")
+	ui_control.set_player_actor(player_actor)
+	var actor_pos = GameState.MapState.get_actor_pos(player_actor)
+	if actor_pos:
+		camera.snap_to_map_pos(actor_pos)
+		camera.zoom = Vector2(2,2)
 
 func get_player_actor()->BaseActor:
-	return ActorLibrary.get_actor("TestActor_ID")
+	return ActorLibrary.get_actor(player_actor_id)
 
 func kill_actor(actor:BaseActor):
 	actor.die()
 	QueController.remove_action_que(actor.Que)
+	GameState.delete_actor(actor)
 	#if actor.leaves_corpse:
 	GameState.MapState.set_actor_layer(actor, MapStateData.MapLayers.Corpse)
 	#else:

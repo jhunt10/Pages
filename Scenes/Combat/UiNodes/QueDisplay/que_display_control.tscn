@@ -10,13 +10,17 @@
 [ext_resource type="Texture2D" uid="uid://mglbobw62vc1" path="res://assets/Sprites/UI/QueInputAndDisplay/page_gap_slot.png" id="7_xxjie"]
 [ext_resource type="Texture2D" uid="uid://clnubp7dsthut" path="res://assets/Sprites/UI/QueInputAndDisplay/dead_page_slot.png" id="8_2n88r"]
 
-[node name="QueDisplayControl" type="Control"]
+[node name="QueDisplayControl" type="Control" node_paths=PackedStringArray("portrait", "main_container", "slot_button_prefab", "slots_container")]
 custom_minimum_size = Vector2(100, 56)
 layout_mode = 3
 anchors_preset = 0
 offset_right = 56.0
 offset_bottom = 56.0
 script = ExtResource("1_qogk3")
+portrait = NodePath("HBoxContainer/PortraitTextureRect")
+main_container = NodePath("HBoxContainer")
+slot_button_prefab = NodePath("HBoxContainer/PageSlotButtonPrefab")
+slots_container = NodePath("HBoxContainer/SlotsContainer")
 show_gaps = true
 
 [node name="Background" type="NinePatchRect" parent="."]
@@ -43,12 +47,16 @@ offset_bottom = 48.0
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 
-[node name="PageSlotButtonPrefab" type="TextureButton" parent="HBoxContainer"]
+[node name="PageSlotButtonPrefab" type="TextureButton" parent="HBoxContainer" node_paths=PackedStringArray("gap_texture", "icon", "highlight", "dead_icon")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 texture_normal = ExtResource("3_g4vab")
 stretch_mode = 3
 script = ExtResource("4_m80jh")
+gap_texture = NodePath("GapTextureRect")
+icon = NodePath("Icon")
+highlight = NodePath("SlotHighlight")
+dead_icon = NodePath("DeadSlotIcon")
 
 [node name="GapTextureRect" type="TextureRect" parent="HBoxContainer/PageSlotButtonPrefab"]
 layout_mode = 1

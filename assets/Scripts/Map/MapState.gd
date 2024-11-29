@@ -88,6 +88,15 @@ func set_actor_pos(actor:BaseActor, pos:MapPos, layer=DEFAULT_ACTOR_LAYER):
 		actor.set_pos(old_pos, pos, "TEST", null)
 		_handle_enter_exit_zone(actor, old_pos, pos)
 
+func remove_actor(actor:BaseActor):
+	var old_pos = null
+	# Check if already has position
+	if _actor_pos_cache.has(actor.Id):
+		old_pos = _actor_pos_cache[actor.Id]
+		var old_spot = get_map_spot(old_pos)
+		old_spot.remove_actor(actor)
+		_actor_pos_cache.erase(actor.Id)
+
 func _handle_enter_exit_zone(actor:BaseActor, old_pos:MapPos, new_pos:MapPos):
 	var old_zones = get_map_spot(old_pos).get_zones()
 	var new_zones = get_map_spot(new_pos).get_zones()

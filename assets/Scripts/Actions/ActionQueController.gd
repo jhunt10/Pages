@@ -256,9 +256,9 @@ func _execute_turn_frames(game_state:GameStateData, que:ActionQue, turn_index:in
 		return
 		
 	
-	print("Starting SubAction Index: %s of  %s" % [sub_sub_action_index, sub_action_list.size()])
+	if DEEP_LOGGING: print("Starting SubAction Index: %s of  %s" % [sub_sub_action_index, sub_action_list.size()])
 	while sub_sub_action_index < sub_action_list.size():
-		print("Executing SubAction Index: %s " % [sub_sub_action_index])
+		if DEEP_LOGGING: print("Executing SubAction Index: %s " % [sub_sub_action_index])
 		if turn_data.turn_failed:
 			if DEEP_LOGGING: print("\t\tTurn Failed")
 			sub_sub_action_index = 0
@@ -280,7 +280,7 @@ func _execute_turn_frames(game_state:GameStateData, que:ActionQue, turn_index:in
 			game_state, # GameState
 			que.actor # Actor
 		)
-		print("SubAction finished: %s " % [result])
+		if DEEP_LOGGING: print("SubAction finished: %s " % [result])
 		if result == BaseSubAction.Failed:
 			que.fail_turn()
 		
@@ -310,14 +310,15 @@ func _get_subaction(script_key:String)->BaseSubAction:
 	return subaction_script_cache[script_key]
 
 func _pay_turn_costs():
-	for que:ActionQue in get_active_action_ques():
-		var actor = que.actor
-		var turn_data = que.QueExecData.get_current_turn_data()
-		for stat_name in turn_data.costs.keys():
-			if not actor.stats.reduce_bar_stat_value(stat_name, turn_data.costs[stat_name], false):
-				CombatRootControl.Instance.create_flash_text_on_actor(actor, "-"+stat_name, Color.ORANGE)
-				que.fail_turn()
-				return
+	pass
+	#for que:ActionQue in get_active_action_ques():
+		#var actor = que.actor
+		#var turn_data = que.QueExecData.get_current_turn_data()
+		#for stat_name in turn_data.costs.keys():
+			#if not actor.stats.reduce_bar_stat_value(stat_name, turn_data.costs[stat_name], false):
+				#CombatRootControl.Instance.create_flash_text_on_actor(actor, "-"+stat_name, Color.ORANGE)
+				#que.fail_turn()
+				#return
 
 func _organize_ques():
 	_sort_ques_by_speed()

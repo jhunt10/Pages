@@ -1,10 +1,10 @@
 class_name QueDisplaySlot
 extends TextureButton
 
-@onready var gap_texture:TextureRect = $GapTextureRect
-@onready var icon:TextureRect = $Icon
-@onready var highlight:TextureRect = $SlotHighlight
-@onready var dead_icon:TextureRect = $DeadSlotIcon
+@export var gap_texture:TextureRect
+@export var icon:TextureRect 
+@export var highlight:TextureRect
+@export var dead_icon:TextureRect
 
 var is_gap:bool = false
 

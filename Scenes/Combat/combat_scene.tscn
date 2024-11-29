@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://dfeilp6hbiuqs"]
+[gd_scene load_steps=28 format=3 uid="uid://dfeilp6hbiuqs"]
 
 [ext_resource type="Script" path="res://Scenes/Combat/combat_scene.gd" id="1_crigy"]
 [ext_resource type="Texture2D" uid="uid://b232xm2ly0peh" path="res://assets/Sprites/UI/GridCursors/GridCursor_Default.png" id="7_7lt4y"]
@@ -26,7 +26,6 @@
 [ext_resource type="Texture2D" uid="uid://cwsvq3qu6228n" path="res://assets/Sprites/UI/QueInputAndDisplay/page_button.png" id="24_5fn7e"]
 [ext_resource type="Script" path="res://Scenes/Combat/UiNodes/target_input_control.gd" id="31_jtehh"]
 [ext_resource type="Texture2D" uid="uid://io35wpu802fp" path="res://assets/Sprites/UI/BackPatches/Patch_64_12.png" id="32_f81f5"]
-[ext_resource type="PackedScene" uid="uid://bje0k82nenje6" path="res://Scenes/Dialog/dialog_control.tscn" id="33_oard6"]
 [ext_resource type="Theme" uid="uid://dwinll8pgdjhc" path="res://Scenes/Themes/standard_theme.tres" id="33_yh7y3"]
 
 [node name="CombatRootControl" type="Control" node_paths=PackedStringArray("ui_control", "camera", "MapController", "GridCursor")]
@@ -46,15 +45,10 @@ camera = NodePath("MoveableCamera2D")
 MapController = NodePath("MapNode")
 GridCursor = NodePath("GridCursor")
 
-[node name="MapNode" parent="." instance=ExtResource("7_ce1oe")]
-
-[node name="GridCursor" type="Sprite2D" parent="."]
-texture = ExtResource("7_7lt4y")
-script = ExtResource("8_wf3xb")
-
-[node name="MoveableCamera2D" type="Camera2D" parent="."]
+[node name="MoveableCamera2D" type="Camera2D" parent="." node_paths=PackedStringArray("canvas_layer")]
 position = Vector2(576, 324)
 script = ExtResource("17_7dull")
+canvas_layer = NodePath("CanvasLayer")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="MoveableCamera2D"]
 
@@ -168,7 +162,7 @@ offset_bottom = 120.0
 texture = ExtResource("24_5fn7e")
 expand_mode = 4
 
-[node name="CombatUiControl" type="Control" parent="MoveableCamera2D/CanvasLayer" node_paths=PackedStringArray("menu_container", "menu_button", "pause_menu", "target_input_display", "stat_panel_control", "que_input", "que_display", "que_collection_display", "stats_collection_display")]
+[node name="CombatUiControl" type="Control" parent="MoveableCamera2D/CanvasLayer" node_paths=PackedStringArray("menu_container", "menu_button", "pause_menu", "target_input_display", "stat_panel_control", "que_input", "que_display", "que_collection_display", "stats_collection_display", "item_select_menu")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -188,6 +182,7 @@ que_input = NodePath("QueInputControl")
 que_display = NodePath("QueDisplayControl")
 que_collection_display = NodePath("QueCollectionDisplayControl")
 stats_collection_display = NodePath("StatCollectionDisplayControl")
+item_select_menu = NodePath("ItemSelectMenuControl")
 
 [node name="StatPanelControl" parent="MoveableCamera2D/CanvasLayer/CombatUiControl" instance=ExtResource("16_jsy0k")]
 layout_mode = 0
@@ -290,6 +285,7 @@ show_preview_movement = true
 show_gaps = false
 
 [node name="QueCollectionDisplayControl" parent="MoveableCamera2D/CanvasLayer/CombatUiControl" instance=ExtResource("19_t74bn")]
+visible = false
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -301,6 +297,7 @@ offset_bottom = -184.0
 grow_vertical = 2
 
 [node name="StatCollectionDisplayControl" type="Control" parent="MoveableCamera2D/CanvasLayer/CombatUiControl"]
+visible = false
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -326,6 +323,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="NextActorButton" type="Button" parent="MoveableCamera2D/CanvasLayer/CombatUiControl"]
+visible = false
 layout_mode = 0
 offset_left = 293.0
 offset_top = 5.0
@@ -562,5 +560,8 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="DialogControl" parent="MoveableCamera2D/CanvasLayer" node_paths=PackedStringArray("scene_root") instance=ExtResource("33_oard6")]
-scene_root = NodePath("../../..")
+[node name="MapNode" parent="." instance=ExtResource("7_ce1oe")]
+
+[node name="GridCursor" type="Sprite2D" parent="."]
+texture = ExtResource("7_7lt4y")
+script = ExtResource("8_wf3xb")

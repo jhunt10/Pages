@@ -29,11 +29,11 @@ func do_thing(parent_action:BaseAction, subaction_data:Dictionary, que_exe_data:
 	for target:BaseActor in targets:
 		DamageHelper.handle_attack(actor, target, damage_data, tag_chain, game_state)
 	
-	var offhand_weapon = actor.equipment.get_offhand_weapon()
-	if offhand_weapon:
-		var offhand_damage_data = (offhand_weapon as BaseWeaponEquipment).get_damage_data()
-		for target:BaseActor in targets:
-			DamageHelper.handle_attack(actor, target, offhand_damage_data, tag_chain, game_state)
+	#var offhand_weapon = actor.equipment.get_offhand_weapon()
+	#if offhand_weapon:
+		#var offhand_damage_data = (offhand_weapon as BaseWeaponEquipment).get_damage_data()
+		#for target:BaseActor in targets:
+			#DamageHelper.handle_attack(actor, target, offhand_damage_data, tag_chain, game_state)
 	
 	return BaseSubAction.Success
 	

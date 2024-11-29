@@ -16,7 +16,7 @@ func get_portrait_sprite()->Texture2D:
 		_build_sprite_sheet()
 	return _cached_portrait
 
-func get_coprse_sprite()->Texture2D:
+func get_corpse_sprite()->Texture2D:
 	if _actor.get_load_val("CorpseSprite"):
 		return SpriteCache.get_sprite(_actor.get_load_path().path_join(_actor.get_load_val("CorpseSprite")))
 	return SpriteCache._get_no_sprite()
@@ -51,7 +51,12 @@ func _build_sprite_sheet():
 		return
 	
 	var sprite_path = _actor.get_load_path().path_join(sprite_sheet_file).trim_suffix(".png")
-	var body_texture:Texture2D = SpriteCache.get_sprite(sprite_path+".png")
+	var body_texture:Texture2D = SpriteCache.get_sprite(sprite_path+".png", true)
+	if !body_texture:
+		printerr("Failed to find boday texture: %s" % [sprite_path])
+		_cached_body_sprite = SpriteCache._get_no_sprite()
+		_cached_portrait = SpriteCache._get_no_sprite()
+		return
 	var main_hand_texture:Texture2D = SpriteCache.get_sprite(sprite_path+"_MainHand.png", true)
 	var off_hand_texture:Texture2D = SpriteCache.get_sprite(sprite_path+"_OffHand.png", true)
 	var two_hand_texture:Texture2D = SpriteCache.get_sprite(sprite_path+"_TwoHand.png", true)

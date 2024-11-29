@@ -5,7 +5,7 @@ extends Control
 @onready var red_bar:TextureRect = $RedBar
 
 var que_bars:Dictionary = {}
-var max_que_size = 0
+var max_que_size = 1
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

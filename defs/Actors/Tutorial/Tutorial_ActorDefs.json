@@ -1,0 +1,79 @@
+[
+	{
+		"ActorKey": "TutorialActor",
+		"Details":{
+			"DisplayName": "Tutorial Actor",
+			"SnippetDesc": "An actor made for Tutorialing.",
+			"Description": "Description.",
+			"Tags": ["AnActorTag", "Player", "Human"],
+			"LargeIcon":"GuyPortrait.png",
+			"SmallIcon":"GuyPortrait.png"
+		},
+		"Stats":{
+			"Max:Health":100,
+			"Max:Stamina":100,
+			"Max:Mana":100,
+			"Regen:Stamina:Turn":5,
+			"Regen:Mana:Round":20,
+			"Mass":15,
+			"Speed":10,
+			"Level":69,
+			"Strength": 10,
+			"Agility": 10,
+			"Intelligence": 10,
+			"Wisdom": 10,
+			"Armor": 80,
+			"PagesPerRound": 0
+		},
+		"SpriteSheet": "Template_SpriteSheet.png",
+		"SpriteFrameWH": [12,4],
+		"SpriteOffset": [0,-16],
+		"PortraitRect":[12, 20, 24, 24],
+		"EquipmentSlots": ["Que", "Bag", "Head", "Body", "Feet", "OffHand", "MainHand" ],
+        "SpawnEquipmentList": [
+            "TestPageQue",
+            "TestBag",
+            "TestHelm",
+            "TestShirt",
+            "TestBoots",
+            "TestShield",
+            "TestSword",
+        ],
+        "SpawnPageList":[
+            "MoveForward",
+            "TurnLeft",
+            "TurnRight",
+            "BasicWeaponAttack",
+			"TestArrow",
+			"TestBullets",
+			"TeleportSelf",
+			"TestPoison",
+			"TestFireBall",
+			"SpawnTestTotem"
+        ]
+	},
+	{
+		"ActorKey": "TutorShroom",
+		"Details":{
+			"DisplayName": "Mushroom",
+			"SnippetDesc": "A pesky mushroom.",
+			"Description": "These mushrooms can quickly spring up over night. While annoying, they do make for good target practice.",
+			"Tags": ["Plant", "Dummy"],
+			"LargeIcon":"TutorShroom.png",
+			"SmallIcon":"TutorShroom.png"
+		},
+		"SpriteSheet": "TutorShroom_SpriteSheet.png",
+		"SpriteFrameWH": [12,4],
+		"SpriteOffset": [0,-8],
+		"PortraitRect":[0, 0, 24, 24],
+		"CorpseSprite": "MushroomCorpse.png",
+		"AutoQueing": false,
+		"LeavesCorpse": true,
+		"Stats":{
+			"Max:Health":15,
+			"Mass":1000,
+			"Speed":0
+		},
+		"DefaultQueSize": 0
+	}
+]

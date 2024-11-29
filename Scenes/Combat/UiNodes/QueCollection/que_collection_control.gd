@@ -1,8 +1,7 @@
 class_name QueCollectionControl
 extends Control
 
-@onready var ques_container = $VBoxContainer
-@onready var mini_que_prefab:QueMinDisplayContainer = $VBoxContainer/QueMiniDisplayContainer
+@export var ques_container:Container
 
 var _ques:Dictionary = {}
 
@@ -10,7 +9,6 @@ var _ques:Dictionary = {}
 func _ready() -> void:
 	CombatRootControl.QueController.que_ordering_changed.connect(_build_que_displays)
 	CombatRootControl.QueController.que_marked_as_dead.connect(on_que_death)
-	mini_que_prefab.visible = false
 	pass # Replace with function body.
 
 func _build_que_displays():
@@ -19,7 +17,7 @@ func _build_que_displays():
 	_ques.clear()
 	for que_id in CombatRootControl.QueController._que_order:
 		var que:ActionQue = CombatRootControl.QueController._action_ques[que_id]
-		var new_display:QueMinDisplayContainer = mini_que_prefab.duplicate()
+		var new_display:QueMinDisplayContainer = load("res://Scenes/Combat/UiNodes/QueDisplay/mini_que_display_container.tscn").instantiate()
 		new_display.visible = true
 		new_display.set_actor(que.actor)
 		ques_container.add_child(new_display)

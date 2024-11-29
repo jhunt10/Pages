@@ -21,6 +21,9 @@ var inventory_path:String:
 func _init(key:String, def_load_path:String, def:Dictionary, id:String='', data:Dictionary={}) -> void:
 	super(key, def_load_path, def, id, data)
 
+func save_me()->bool:
+	return true
+
 func get_item_type()->ItemTypes:
 	var item_type_str = self._def.get("ItemType", "")
 	if item_type_str and ItemTypes.keys().has(item_type_str):

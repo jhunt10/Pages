@@ -23,6 +23,11 @@ func get_actor(actor_id:String, allow_dead:bool=false):
 		return null
 	return actor
 
+func delete_actor(actor:BaseActor):
+	if _actors.keys().has(actor.Id):
+		_actors.erase(actor.Id)
+		MapState.remove_actor(actor)
+
 func list_actors(include_dead:bool=false):
 	var out_list = []
 	for actor:BaseActor in _actors.values():

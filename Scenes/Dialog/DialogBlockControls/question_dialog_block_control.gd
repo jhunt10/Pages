@@ -12,7 +12,6 @@ var dialog_block:QuestionDialogBlock
 var line_index:int
 var letter_index:int
 var _delay_timer:float
-var is_finished:bool
 
 var _done_printing:bool
 var _selected_index:int = -1
@@ -32,7 +31,7 @@ func set_dailog_block(block:QuestionDialogBlock):
 func _process(delta: float) -> void:
 	if !dialog_block or dialog_block.is_finished:
 		return
-	if is_finished or _done_printing:
+	if _done_printing:
 		return
 	if _delay_timer > 0:
 		_delay_timer -= delta
@@ -40,11 +39,8 @@ func _process(delta: float) -> void:
 			print_text()
 
 func print_text():
-	if is_finished:
-		return
 	var question_text = dialog_block._block_data.get("QuestionText", null)
 	if !question_text:
-		is_finished = true
 		return
 	
 	# Print next letter
@@ -74,7 +70,6 @@ func create_option(option_text, option_index):
 	if not MainRootNode.is_mobile:
 		new_option.button.mouse_entered.connect(mouse_enter_option.bind(option_index))
 		new_option.button.mouse_exited.connect(mouse_exit_option.bind(option_index))
-	return
 
 func print_all():
 	var question_text = dialog_block._block_data.get("QuestionText", null)
@@ -88,22 +83,19 @@ func print_all():
 	
 
 func mouse_enter_option(index:int):
-	if !is_finished:
+	if _selected_index < 0:
 		var option:DialogQuestionOption = options_container.get_child(index)
 		option.set_selected(true)
 	
 func mouse_exit_option(index:int):
-	if !is_finished:
+	if _selected_index < 0:
 		var option:DialogQuestionOption = options_container.get_child(index)
 		option.set_selected(false)
 
 func on_option_selected(index:int):
-	if self.is_finished:
-		return
 	for child in options_container.get_children():
 		child.set_selected(false)
 	var option:DialogQuestionOption = options_container.get_children()[index]
 	option.set_selected(true)
 	_selected_index = index
-	is_finished = true
 	option_selected.emit(index)

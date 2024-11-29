@@ -4,10 +4,10 @@ extends BackPatchContainer
 
 const PADDING = 8
 
-@onready var portrait:TextureRect = $BoxContainer/PortraitTextureRect
-@onready var slot_button_prefab:QueMiniSlotIcon = $BoxContainer/PageSlotPrefab
-@onready var slots_container:HBoxContainer = $BoxContainer/SlotsContainer
-@onready var color_bar:ColorRect = $Control/ColorRect
+@export var portrait:TextureRect
+@export var slot_button_prefab:QueMiniSlotIcon
+@export var slots_container:HBoxContainer
+@export var color_bar:ColorRect
 
 
 var _actor:BaseActor
@@ -51,7 +51,7 @@ func set_actor(actor:BaseActor):
 	actor.Que.action_que_changed.connect(_sync_que)
 	actor.equipment_changed.connect(_sync_que)
 	if portrait:
-		portrait.texture = actor.get_portrait_sprite()
+		portrait.texture = actor.sprite.get_portrait_sprite()
 		_build_slots()
 		_sync_que()
 	else:

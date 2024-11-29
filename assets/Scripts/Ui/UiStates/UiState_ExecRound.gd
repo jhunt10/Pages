@@ -19,6 +19,7 @@ func update(_delta:float):
 	pass
 
 func end_state():
+	CombatRootControl.QueController.end_of_round.disconnect(_on_round_end)
 	pass
 	
 func _on_round_end():

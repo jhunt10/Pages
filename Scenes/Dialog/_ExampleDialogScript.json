@@ -85,6 +85,24 @@
 		]
 	},
 	{
+		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_Condition.gd",
+		"WaitForButton": false,
+		"QuestionText": "What is the capitail of Paris?",
+		"AnswerConsition":
+		{
+			"AnswerKey": "Answer1",
+			"JumpTo": {
+				"Yes": "AnsweredYes",
+				"No": "AnsweredNo",
+				"Maybe?": "AnsweredMaybe"
+			}
+		}
+	},
+	{
+		"JumpToTag": "AnsweredYes"
+	},
+	{
+		"JumpToTag": "AfterQuestionAnswered",
 		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_Speech.gd",
 		"Speaker": "Narrator",
 		"WaitForButton": true,

@@ -10,6 +10,8 @@ var textures:Dictionary={}
 var current_cur:Cursors
 var current_spot:Vector2i
 
+var lock_position:bool = false
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	set_cursor(Cursors.Default)
@@ -45,6 +47,8 @@ func _process(_delta: float) -> void:
 	_sync_position()
 	
 func _sync_position():
+	if lock_position:
+		return
 	var map_controller = CombatRootControl.Instance.MapController
 	if !map_controller or !map_controller.actor_tile_map:
 		return

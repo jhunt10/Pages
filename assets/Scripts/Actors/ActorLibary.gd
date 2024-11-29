@@ -35,10 +35,32 @@ static func get_actor(actor_id:String)->BaseActor:
 		printerr("ActorLibrary.get_actor: No actor found with id '%s'." % [actor_id])
 	return actor
 
-static func create_actor(key:String, data:Dictionary)->BaseActor:
-	var actor = Instance.create_object(key, '', data)
+static func get_or_create_actor(key:String, id:String)->BaseActor:
+	if  Instance._loaded_objects.keys().has(id):
+		return get_actor(id)
+	return create_actor(key, {}, id)
+
+static func create_actor(key:String, data:Dictionary, premade_id:String = '')->BaseActor:
+	if  Instance._loaded_objects.keys().has(premade_id):
+		return get_actor(premade_id)
+	var actor:BaseActor = Instance.create_object(key, premade_id, data)
 	if !actor:
 		printerr("ActorLibrary.create_actor: Failed to make actor '%s'." % [key])
+		return null
+	var equipment_list = actor.get_load_val("SpawnEquipmentList", [])
+	for equip in equipment_list:
+		var item = ItemLibrary.create_item(equip, {})
+		if item:
+			if !actor.equipment.try_equip_item(item):
+				printerr("ActorLibrary.create_actor: Failed to equip item '%s'." % [equip])
+				
+	var page_list = actor.get_load_val("SpawnPageList", [])
+	for page_key in page_list:
+		var page = ActionLibrary.get_action(page_key)
+		if page:
+			if !actor.pages.try_add_page(page):
+				printerr("ActorLibrary.create_actor: Failed add Page '%s'." % [page_key])
+				
 	return actor
 
 static func save_actors():

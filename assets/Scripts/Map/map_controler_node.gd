@@ -24,26 +24,15 @@ func get_map_data()->Dictionary:
 	var actors = []
 	for child in actor_tile_map.get_children():
 		if child is ActorSpawnNode:
-			var actor = null
-			var is_player = false
-			if child.spawn_actor_by == ActorSpawnNode.SpawnBy.Player:
-				actor = ActorLibrary.get_actor("TestActor_ID")#.Instance.get_player_actor()
-				is_player = true
-			elif child.spawn_actor_by == ActorSpawnNode.SpawnBy.Id:
-				actor = ActorLibrary.get_actor(child.spawn_actor_value)
-			elif  child.spawn_actor_by == ActorSpawnNode.SpawnBy.Key:
-				actor = ActorLibrary.create_actor(child.spawn_actor_value, {})
-			
-			var pos = MapPos.new(child.map_coor.x, child.map_coor.y, 0, 0)
-			if !actor:
-				printerr("MapControl.init_load: Failed to spawn actor %s with value '%s" % [ActorSpawnNode.SpawnBy.keys()[child.spawn_actor_by], child.spawn_actor_value])
-			else:
-				printerr("MapControl.init_load: Spawning actor %s with value '%s" % [ActorSpawnNode.SpawnBy.keys()[child.spawn_actor_by], child.spawn_actor_value])
-				actors.append({
-					"ActorId": actor.Id,
-					"Pos": pos,
-					"IsPlayer": is_player,
-				})
+			var pos = MapPos.new(child.map_coor.x, child.map_coor.y, 0, child.facing)
+			var data = {"Pos": pos}
+			if child.spawn_actor_key != '':
+				data["ActorKey"] = child.spawn_actor_key
+			if child.spawn_actor_id != '':
+				data["ActorId"] = child.spawn_actor_id
+			if child.is_player:
+				data["IsPlayer"] = true
+			actors.append(data)
 		child.queue_free()
 	map_data['Actors'] = actors
 	return map_data

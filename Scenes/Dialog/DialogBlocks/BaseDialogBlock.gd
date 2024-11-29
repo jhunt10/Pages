@@ -37,6 +37,10 @@ func skip():
 func try_skip()->bool:
 	return true
 
+## Will consider any input as equivilent to clicking the Next button
+func read_any_touch_as_next()->bool:
+	return true
+
 func finish():
 	if _finished:
 		return

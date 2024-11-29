@@ -86,9 +86,10 @@ func save_objects_data(file_path:String, extra_data={}):
 	var obj_datas:Dictionary = {}
 	for object_id in _loaded_objects.keys():
 		var object:BaseLoadObject = _loaded_objects[object_id]
-		var data = object.save_data()
-		if LOGGING: print("# Saving %s Datas with id: %s" % [get_object_name(), object_id])
-		obj_datas[object_id] = data
+		if object.save_me():
+			var data = object.save_data()
+			if LOGGING: print("# Saving %s Datas with id: %s" % [get_object_name(), object_id])
+			obj_datas[object_id] = data
 	var save_data = extra_data.duplicate(true)
 	save_data['Objects'] = obj_datas
 	var save_data_string = JSON.stringify(save_data)
