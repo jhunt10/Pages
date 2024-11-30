@@ -64,10 +64,11 @@ func _process(delta: float) -> void:
 func set_actor(actor:BaseActor):
 	Id = actor.Id
 	Actor = actor
-	if Actor.node == null:
-		Actor.node = self
 	if not actor.equipment_changed.is_connected(sync_sprites):
 		actor.equipment_changed.connect(sync_sprites)
+		actor.turn_failed.connect(_turn_failed_animations)
+		actor.on_move.connect(on_actor_moved)
+		actor.on_death.connect(queue_death)
 	#_load_nodes()
 	var frames = actor.get_load_val("SpriteFrameWH", [1,1])
 	actor_sprite.hframes = frames[0]
@@ -117,6 +118,9 @@ func sync_sprites():
 	else:
 		off_hand_node.hide_weapon()
 
+func on_actor_moved(old_pos:MapPos, new_pos:MapPos, move_data:Dictionary):
+	set_display_pos(new_pos)
+
 func set_facing_dir(dir:int):
 	if facing_dir == dir:
 		return
@@ -129,7 +133,7 @@ func set_facing_dir(dir:int):
 	if off_hand_node:
 		off_hand_node.animation.play("weapon_" + FACING_ANIMATION + get_animation_dir_sufix())
 
-func set_display_pos(pos:MapPos, start_walkin:bool=false):
+func set_display_pos(pos:MapPos):
 	if Actor.ActorKey == 'TestActor':
 		if LOGGING: print("-------set_display_pos------------")
 	#_load_nodes()
@@ -180,6 +184,9 @@ func animation_started(name:String):
 	else:
 		is_walking = false
 		if LOGGING: print("-Set Not Walking")
+
+func _turn_failed_animations():
+	cancel_current_animation()
 
 func fail_movement():
 	if LOGGING: printerr("Movment Failed")

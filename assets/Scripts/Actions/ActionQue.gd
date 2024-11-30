@@ -44,7 +44,7 @@ func fail_turn():
 	if turn_data.turn_failed:
 		return
 	turn_data.turn_failed = true
-	actor.on_turn_failed()
+	actor.turn_failed.emit()
 
 func get_max_que_size()->int:
 	if _cached_max_que_size < 0:

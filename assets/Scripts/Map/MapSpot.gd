@@ -11,6 +11,7 @@ var _layer_to_actor_ids:Dictionary = {}
 
 #var _actor_ids:Array=[]
 var _zone_ids:Array = []
+var item_ids:Array = []
 
 func _init(x:int, y:int, terrain_index:int, parent:MapStateData) -> void:
 	parent_map = parent
@@ -53,6 +54,25 @@ func get_actor_layer(actor:BaseActor)->MapStateData.MapLayers:
 			return layer
 	printerr("MapSpot.get_actor_layer: Failed to find actor '%s'." % [actor.Id])
 	return MapStateData.DEFAULT_ACTOR_LAYER
+
+func add_item(item:BaseItem):
+	if item_ids.has(item.Id):
+		return
+	item_ids.append(item.Id)
+
+func get_items()->Array:
+	var out_list = []
+	for item_id in item_ids:
+		var item = ItemLibrary.get_item(item_id)
+		if !item:
+			item_ids.erase(item_id)
+		else:
+			out_list.append(item)
+	return out_list
+
+func remove_item(item:BaseItem):
+	if item_ids.has(item.Id):
+		item_ids.erase(item.Id)
 
 func add_zone(zone:BaseZone):
 	if _zone_ids.has(zone.Id):

@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=4 uid="uid://dcan2k534n88q"]
+[gd_scene load_steps=24 format=4 uid="uid://dcan2k534n88q"]
 
 [ext_resource type="Script" path="res://assets/Scripts/Map/map_controler_node.gd" id="1_8htqa"]
 [ext_resource type="Texture2D" uid="uid://dxan6lyrg8db3" path="res://assets/Sprites/TileSets/GrassPath_TileSheet.png" id="1_55p3y"]
@@ -1014,12 +1014,16 @@ texture_region_size = Vector2i(32, 32)
 tile_size = Vector2i(32, 32)
 sources/0 = SubResource("TileSetAtlasSource_6gfyt")
 
+[sub_resource type="TileSet" id="TileSet_r8ipj"]
+tile_size = Vector2i(32, 32)
+
 [sub_resource type="TileSet" id="TileSet_5ipcw"]
 tile_size = Vector2i(32, 32)
 
-[node name="MapNode" type="Node2D" node_paths=PackedStringArray("actor_tile_map", "terrain_path_map")]
+[node name="MapNode" type="Node2D" node_paths=PackedStringArray("actor_tile_map", "item_tile_map", "terrain_path_map")]
 script = ExtResource("1_8htqa")
 actor_tile_map = NodePath("ActorTileMapLayer")
+item_tile_map = NodePath("ItemTileMapLayer")
 terrain_path_map = NodePath("TerrainMap")
 
 [node name="GroundTileMapLayer" type="TileMapLayer" parent="."]
@@ -1048,6 +1052,9 @@ tile_map_data = PackedByteArray("AAADAAEAAAACAAAAAAADAAIAAAACAAAAAAADAAMAAAACAAA
 tile_set = SubResource("TileSet_63me0")
 script = ExtResource("2_h1apl")
 
+[node name="ItemTileMapLayer" type="TileMapLayer" parent="."]
+tile_set = SubResource("TileSet_r8ipj")
+
 [node name="ActorTileMapLayer" type="TileMapLayer" parent="."]
 tile_set = SubResource("TileSet_5ipcw")
 
@@ -1063,11 +1070,11 @@ map_coor = Vector2i(5, 5)
 
 [node name="SpwanNode_Player2" type="Sprite2D" parent="ActorTileMapLayer"]
 self_modulate = Color(0, 1, 0, 1)
-position = Vector2(144, 144)
+position = Vector2(176, 144)
 texture = ExtResource("11_52ceh")
 script = ExtResource("9_p3ftp")
 spawn_actor_key = "TutorShroom"
-map_coor = Vector2i(4, 4)
+map_coor = Vector2i(5, 4)
 
 [node name="SpwanNode_Target1" type="Sprite2D" parent="ActorTileMapLayer"]
 self_modulate = Color(0, 1, 1, 1)

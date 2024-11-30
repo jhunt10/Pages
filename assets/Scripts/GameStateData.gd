@@ -4,6 +4,7 @@ class_name GameStateData
 
 # Dictionary of Actor.Id to Actor
 var _actors:Dictionary = {}
+var _items:Dictionary = {}
 var Missiles:Dictionary = {}
 var Zones:Dictionary = {}
 
@@ -34,7 +35,17 @@ func list_actors(include_dead:bool=false):
 		if include_dead or not actor.is_dead:
 			out_list.append(actor)
 	return out_list
+
+
+func add_item(item:BaseItem):
+	_items[item.Id] = item
 	
+func get_item(item_id:String):
+	return _items.get(item_id)
+
+func delete_item(item:BaseItem):
+	_items.erase(item.Id)
+
 func add_missile(missile:BaseMissile):
 	Missiles[missile.Id] = missile
 

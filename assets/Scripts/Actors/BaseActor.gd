@@ -9,6 +9,7 @@ signal turn_ended
 # This is just here because I don't want all the Holders to have to connect dirrectly to ActionQueController
 signal round_starting
 signal round_ended
+signal turn_failed
 
 signal equipment_changed
 signal bag_items_changed
@@ -16,12 +17,12 @@ signal page_list_changed
 signal action_que_changed
 
 # Actor holds no references to the current map state so this method is called by MapState.set_actor_pos()
-signal on_move(old_pos:MapPos, new_pos:MapPos, move_type:String, moved_by:BaseActor)
+signal on_move(old_pos:MapPos, new_pos:MapPos, move_data:Dictionary)
 signal on_death()
 signal sprite_changed()
 
 var Que:ActionQue
-var node:ActorNode
+#var node:ActorNode
 var sprite:ActorSprite
 var stats:StatHolder
 var effects:EffectHolder
@@ -88,18 +89,27 @@ func save_data()->Dictionary:
 func on_combat_start():
 	effects.on_combat_start()
 
-func set_pos(old_pos:MapPos, new_pos:MapPos, move_type:String, moved_by:BaseActor):
-	on_move.emit(old_pos, new_pos, move_type, moved_by)
-	node.set_display_pos(new_pos)
+#func set_pos(old_pos:MapPos, new_pos:MapPos, move_type:String, moved_by:BaseActor):
+	#on_move.emit(old_pos, new_pos, move_type, moved_by)
+	#if node:
+		#node.set_display_pos(new_pos)
 
-func on_turn_failed():
-	node.cancel_current_animation()
+#func on_turn_failed():
+	#node.cancel_current_animation()
 
 func die():
+	if is_dead:
+		return
 	is_dead = true
+	var map_pos = CombatRootControl.Instance.GameState.MapState.get_actor_pos(self)
+	if map_pos:
+		var drop_items = get_load_val("DropItems")
+		for item_key in drop_items:
+			ItemHelper.spawn_item(item_key, {}, map_pos)
+		
 	on_death.emit()
 	#node.set_corpse_sprite()
-	node.queue_death()
+	#node.queue_death()
 	
 func auto_build_que(current_turn:int):
 	if !_allow_auto_que:

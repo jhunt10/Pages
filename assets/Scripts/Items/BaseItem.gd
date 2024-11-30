@@ -38,7 +38,7 @@ func get_item_tags()->Array:
 func get_large_icon()->Texture2D:
 	return SpriteCache.get_sprite(details.large_icon_path)
 func get_small_icon()->Texture2D:
-	return SpriteCache.get_sprite(details.large_icon_path)
+	return SpriteCache.get_sprite(details.small_icon_path)
 
 #func use_on_actor(actor:BaseActor):
 	#var effect_key = ItemData['EffectKey']

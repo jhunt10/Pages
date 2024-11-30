@@ -10,7 +10,7 @@ func _ready() -> void:
 	_build_displays()
 	CombatRootControl.Instance.actor_spawned.connect(on_new_actor)
 
-func on_new_actor(actor:BaseActor):
+func on_new_actor(actor:BaseActor, pos):
 	_build_displays()
 	
 func _build_displays():

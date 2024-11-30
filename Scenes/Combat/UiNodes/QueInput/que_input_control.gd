@@ -76,7 +76,7 @@ func _build_buttons():
 						#main_container.size.y + (2 * PADDING))
 
 func _on_que_change():
-	if _actor.Que.is_ready():
+	if _actor.Que.is_ready() or CombatRootControl.QueController.SHORTCUT_QUE:
 		start_button.disabled = false
 		start_label.text = "Start"
 	else:

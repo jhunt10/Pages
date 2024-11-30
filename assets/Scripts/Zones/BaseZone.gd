@@ -59,7 +59,7 @@ func _on_area_moved(new_pos:MapPos):
 	_center_pos = new_pos
 	
 	
-func _on_source_actor_move(_old_pos:MapPos, new_pos:MapPos, _move_type:String, _moved_by:BaseActor):
+func _on_source_actor_move(_old_pos:MapPos, new_pos:MapPos, move_data:Dictionary):
 	_on_area_moved(new_pos)
 	
 func _apply_effect(actor:BaseActor):

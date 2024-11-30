@@ -25,9 +25,10 @@ func do_thing(parent_action:BaseAction, subaction_data:Dictionary, metadata:QueE
 		if primary_weapon:
 			animation = primary_weapon.get_load_val("WeaponAnimation", null)
 	print("SubAct Animation: " + animation)
-	if animation:
+	var actor_node = CombatRootControl.Instance.MapController.actor_nodes.get(actor.Id)
+	if actor_node and animation:
 		if animation == "walk":
-			actor.node.start_walk_animation()
+			actor_node.start_walk_animation()
 		else:
-			actor.node.start_weapon_animation(animation)
+			actor_node.start_weapon_animation(animation)
 	return BaseSubAction.Success

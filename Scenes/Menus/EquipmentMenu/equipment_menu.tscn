@@ -161,7 +161,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="EquipSlotsContainer" type="Container" parent="MainContainer/HBoxContainer" node_paths=PackedStringArray("actor_node", "armor_lable", "ward_label", "phyatk_label", "magatk_label", "mass_label", "speed_label", "page_count_label", "que_count_label", "background", "inner_container")]
-custom_minimum_size = Vector2(292, 312)
+custom_minimum_size = Vector2(288, 313)
 layout_mode = 2
 script = ExtResource("3_xe4rr")
 actor_node = NodePath("InnerContainer/MiddlePortraitContainer/PortaitBackground/CenterContainer/Control/Node2D/ActorNode")
@@ -973,7 +973,7 @@ theme_override_font_sizes/font_size = 16
 text = "Edit Items"
 
 [node name="EquiptInventoryContainer" type="Container" parent="MainContainer" node_paths=PackedStringArray("tab_bar", "items_container", "premade_item_button", "filter_option_button", "background", "inner_container")]
-custom_minimum_size = Vector2(12, 264)
+custom_minimum_size = Vector2(12, 267)
 layout_mode = 2
 script = ExtResource("13_nccae")
 tab_bar = NodePath("InnerContainer/HBoxContainer/TabBar")

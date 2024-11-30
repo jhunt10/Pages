@@ -33,7 +33,7 @@ func _process(delta: float) -> void:
 		
 	pass
 
-func on_actor_spawn(actor):
+func on_actor_spawn(actor, pos):
 	que_bars[actor.Id] = add_que(actor.Que)
 
 func add_que(que:ActionQue):

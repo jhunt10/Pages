@@ -13,6 +13,8 @@ const PADDING = 8
 @export var show_gaps:bool
 
 var _actor:BaseActor
+var _actor_node:ActorNode:
+	get: return CombatRootControl.Instance.MapController.actor_nodes.get(_actor.Id)
 var _slot_buttons = []
 var _real_slots = []
 var movement_preview_pos:MapPos
@@ -131,24 +133,24 @@ func _slot_pressed(index:int):
 	_actor.Que.delete_at_index(index)
 
 func _hide_preview():
-	_actor.node.hide_path_arrow()
+	_actor_node.hide_path_arrow()
 	if _target_display_key:
 		CombatRootControl.Instance.MapController.target_area_display.clear_display(_target_display_key)
 
 func _preview_que_path():
-	if !_actor or !_actor.node:
+	if !_actor or !_actor_node:
 		return
 	#if not show_preview_movement or !que_path_arrow:
 		#return
 	var actor_pos = CombatRootControl.Instance.GameState.MapState.get_actor_pos(_actor)
 	var preview_pos = _actor.Que.get_movement_preview_pos()
 	if !preview_pos:
-		_actor.node.hide_path_arrow()
+		_actor_node.hide_path_arrow()
 		return
 	if preview_pos == actor_pos:
-		_actor.node.hide_path_arrow()
+		_actor_node.hide_path_arrow()
 		return
 		
-	_actor.node.set_path_arrow_pos(preview_pos)
+	_actor_node.set_path_arrow_pos(preview_pos)
 	movement_preview_pos = preview_pos
-	_actor.node.show_path_arrow()
+	_actor_node.show_path_arrow()

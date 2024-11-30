@@ -33,7 +33,8 @@ func lock_to_actor(actor:BaseActor):
 	if LOGGING: print("Camera lock to actor: %s" %[actor.Id] )
 	var pos = CombatRootControl.Instance.GameState.MapState.get_actor_pos(actor)
 	self.snap_to_map_pos(pos)
-	following_actor_node = actor.node
+	var actor_node = CombatRootControl.Instance.MapController.actor_nodes.get(actor.Id)
+	following_actor_node = actor_node
 	
 
 func snap_to_map_pos(pos):
@@ -127,7 +128,8 @@ func start_auto_pan_to_map_pos(map_pos:MapPos):
 
 func start_auto_pan_to_actor(actor:BaseActor):
 	var target_pos = MapHelper.get_actor_global_position(actor)
-	following_actor_node = actor.node
+	var actor_node = CombatRootControl.Instance.MapController.actor_nodes.get(actor.Id)
+	following_actor_node = actor_node
 	start_auto_pan(target_pos)
 
 func force_finish_panning():

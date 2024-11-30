@@ -1,6 +1,6 @@
 class_name BaseLoadObjectLibrary
 
-const LOGGING = false
+const LOGGING = true
 const OBJECTS_DEFS_DIR = "res://defs/"
 const OBJECTS_DATA_DIR = "res://saves/"
 

@@ -2,6 +2,7 @@ class_name MapControllerNode
 extends Node2D
 
 @export var actor_tile_map:TileMapLayer 
+@export var item_tile_map:TileMapLayer 
 @export var terrain_path_map:TerrainPathingMap
 @onready var target_area_display:TargetAreaDisplayNode = $TargetAreaDisplayNode
 
@@ -10,12 +11,15 @@ static var game_state:GameStateData:
 		return CombatRootControl.Instance.GameState
 
 var actor_nodes = {}
+var item_nodes = {}
 var missile_nodes = {}
 var zone_nodes = {}
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	terrain_path_map.hide()
+	print("Readying MapCont: Inst:%s" % [CombatRootControl.Instance])
+	CombatRootControl.Instance.actor_spawned.connect(create_actor_node)
 	CombatRootControl.QueController.end_of_frame.connect(_sync_positions)
 	pass # Replace with function body.
 
@@ -38,16 +42,46 @@ func get_map_data()->Dictionary:
 	return map_data
 				
 
-func add_actor_node(actor:BaseActor, node:ActorNode):
-	actor_nodes[actor.Id] = node
-	actor_tile_map.add_child(node)
+func create_actor_node(actor:BaseActor, map_pos:MapPos):
+	print("MapControllerNode: Creating Actor Node: %s" % [actor.Id])
+	if actor_nodes.keys().has(actor.Id):
+		return
+	
+	var new_node:ActorNode = load("res://Scenes/Combat/MapObjects/actor_node.tscn").instantiate()
+	actor_nodes[actor.Id] = new_node
+	actor_tile_map.add_child(new_node)
+	new_node.position = actor_tile_map.map_to_local(map_pos.to_vector2i())
+	new_node.set_actor(actor)
+	new_node.set_display_pos(map_pos)
+	new_node.visible = true
+	print("MapControllerNode: Created Actor Node: %s" % [actor.Id])
 
-func delete_actor(actor:BaseActor):
+func delete_actor_node(actor:BaseActor):
 	var node:ActorNode = actor_nodes.get(actor.Id, null)
 	if !node:
 		return
 	node.queue_free()
 	actor_nodes.erase(actor.Id)
+	
+func create_item_node(item:BaseItem, map_pos:MapPos):
+	print("MapControllerNode: Creating Item Node: %s" % [item.Id])
+	if item_nodes.keys().has(item.Id):
+		return
+	
+	var new_node = load("res://Scenes/Combat/MapObjects/item_node.tscn").instantiate()
+	item_nodes[item.Id] = new_node
+	item_tile_map.add_child(new_node)
+	new_node.position = item_tile_map.map_to_local(map_pos.to_vector2i())
+	new_node.set_item(item)
+	new_node.visible = true
+	print("MapControllerNode: Created item Node: %s" % [item.Id])
+
+func delete_item_node(item:BaseItem):
+	var node:ItemNode = item_nodes.get(item.Id, null)
+	if !node:
+		return
+	node.queue_free()
+	item_nodes.erase(item.Id)
 
 func add_missile_node(missile:BaseMissile, node:MissileNode):
 	missile_nodes[missile.Id] = node

@@ -1,7 +1,8 @@
 class_name CombatRootControl
 extends Control
 
-signal actor_spawned(actor:BaseActor)
+signal actor_spawned(actor:BaseActor, map_pos:MapPos)
+signal item_spawned(item:BaseItem, map_pos:MapPos)
 
 @export var ui_control:CombatUiControl
 @export var camera:MoveableCamera2D
@@ -128,8 +129,8 @@ func kill_actor(actor:BaseActor):
 
 
 func delete_actor(actor:BaseActor):
-	GameState.MapState.delete_actor(actor)
-	MapController.delete_actor(actor)
+	GameState.MapState.remove_actor(actor)
+	MapController.delete_actor_node(actor)
 	#GameState.Actors.erase(actor.Id)
 	
 func add_actor(actor:BaseActor, faction_id:int, pos:MapPos):
@@ -141,19 +142,28 @@ func add_actor(actor:BaseActor, faction_id:int, pos:MapPos):
 	GameState.add_actor(actor)
 	QueController.add_action_que(actor.Que)
 	
-	# Register new node with MapController and sync  pos
-	var new_node = load("res://Scenes/Combat/MapObjects/actor_node.tscn").instantiate()
-	new_node.set_actor(actor)
-	MapController.add_actor_node(actor, new_node)
-	new_node.visible = true
-	
 	GameState.MapState.set_actor_pos(actor, pos, actor.spawn_map_layer)
-	MapController._sync_actor_positions()
+	# Must call without signals because actors are spawned before MapControlNode._ready()
+	MapController.create_actor_node(actor, pos)
 	
 	if actor._allow_auto_que:
 		actor.auto_build_que(QueController.action_index)
-	
-	actor_spawned.emit(actor)
+	actor_spawned.emit(actor, pos)
+
+func add_item(item:BaseItem, pos:MapPos):
+	if GameState._items.keys().has(item.Id):
+		printerr("Item '%s' already added" % [item.Id])
+		return
+	# Add item to GameState and set position
+	GameState.add_item(item)
+	GameState.MapState.set_item_pos(item, pos)
+	# Must call without signals because items are spawned before MapControlNode._ready()
+	MapController.create_item_node(item, pos)
+	item_spawned.emit(item, pos)
+
+func remove_item(item:BaseItem):
+	GameState.MapState.remove_item(item)
+	MapController.delete_item_node(item)
 
 func create_new_missile_node(missile):
 	var new_node:MissileNode  = load("res://Scenes/Combat/MapObjects/missile_node.tscn").instantiate()
@@ -172,7 +182,9 @@ func create_damage_effect(target_actor:BaseActor, vfx_key:String, flash_number:i
 	
 	var extra_data = {}
 	if vfx_data.match_source_dir and source is BaseActor:
-		extra_data['Direction'] = source.node.facing_dir
+		var node = MapController.actor_nodes.get(source.Id)
+		if node:
+			extra_data['Direction'] = node.facing_dir
 	var vfx_node = MainRootNode.vfx_libray.create_vfx_node(vfx_data, extra_data)
 	if !vfx_node:
 		printerr("Failed to create VFX node from key '%s'." % [vfx_key])
