@@ -2,7 +2,7 @@
 class_name ActorNode
 extends Node2D
 
-const LOGGING = true
+const LOGGING = false
 
 
 enum FACING_DIRS {North, East, South, West}

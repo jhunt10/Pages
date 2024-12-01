@@ -62,7 +62,10 @@ func _init(key:String, load_path:String, def:Dictionary, id:String, data:Diction
 	spawn_map_layer = _def.get('SpawnOnMapLayer', MapStateData.DEFAULT_ACTOR_LAYER)
 	
 	var auto_que_list = _def.get("AutoQue", [])
-	_allow_auto_que = auto_que_list.size() > 0
+	if auto_que_list is Array:
+		_allow_auto_que = auto_que_list.size() > 0
+	elif auto_que_list:
+		_allow_auto_que = true
 	
 	var stat_data = _def["Stats"]
 	
@@ -114,13 +117,40 @@ func die():
 func auto_build_que(current_turn:int):
 	if !_allow_auto_que:
 		return
-	var auto_que_list = get_load_val("AutoQue", null)
-	if Que:
-		for action_key in auto_que_list:
-			var action = ActionLibrary.get_action(action_key)
-			print("AutoQue: " + action.ActionKey)
-			if action:
-				Que.que_action(action)
+	#var auto_que_list = get_load_val("AutoQue", null)
+	#if Que:
+		#for action_key in auto_que_list:
+			#var action = ActionLibrary.get_action(action_key)
+			#print("AutoQue: " + action.ActionKey)
+			#if action:
+				#Que.que_action(action)
+				
+				
+				
+	#var player = CombatRootControl.Instance.get_player_actor()
+	#var player_pos = CombatRootControl.Instance.GameState.MapState.get_actor_pos(player)
+	#
+	#var self_pos = CombatRootControl.Instance.GameState.MapState.get_actor_pos(self)
+	#var path_res = AiHandler.path_to_target(self, self_pos, player_pos, CombatRootControl.Instance.GameState)
+	#print("Actor: %s built path:\n\tFrom: %s to %s\n\t%s" % [self.Id, self_pos, player_pos, path_res])
+	#for move_name in path_res['Moves']:
+		#if pages.has_page(move_name):
+			#var action = ActionLibrary.get_action(move_name)
+			#if action:
+				#print("Queing Page: " + move_name)
+				#Que.que_action(action)
+			#else:
+				#printerr("Move Page %s not found" % [move_name])
+		#else:
+			#printerr("Move Page %s not equipt" % [move_name])
+	var actions = AiHandler.build_action_que(self, CombatRootControl.Instance.GameState)
+	for action_name in actions:
+		var action = ActionLibrary.get_action(action_name)
+		if action:
+			print("Queing Page: " + action_name)
+			Que.que_action(action)
+		else:
+			printerr("Quied Page %s not found" % [action_name])
 			
 func get_action_list()->Array:
 	return pages.list_action_keys()

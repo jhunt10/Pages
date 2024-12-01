@@ -9,6 +9,7 @@ var _ques:Dictionary = {}
 func _ready() -> void:
 	CombatRootControl.QueController.que_ordering_changed.connect(_build_que_displays)
 	CombatRootControl.QueController.que_marked_as_dead.connect(on_que_death)
+	_build_que_displays()
 	pass # Replace with function body.
 
 func _build_que_displays():

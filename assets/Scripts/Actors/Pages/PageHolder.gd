@@ -33,7 +33,7 @@ func list_pages()->Array:
 		if key == null: continue
 		var page = ActionLibrary.get_action(key)
 		if page:
-			out_list.append(key)
+			out_list.append(page)
 	return out_list
 
 func has_page(action_key:String):

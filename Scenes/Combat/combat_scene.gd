@@ -101,8 +101,8 @@ func load_init_state(map_scene_path:String):
 		elif actor_info.keys().has("ActorKey"):
 			new_actor = ActorLibrary.create_actor(actor_info['ActorKey'], {})
 		if new_actor:
-			add_actor(new_actor, 0, actor_pos)
-		if actor_info.get("IsPlayer", false):
+			add_actor(new_actor, actor_info.get("FactionId", 1), actor_pos)
+		if actor_info.get("FactionId", -1) == 0:
 			player_actor_id = new_actor.Id
 			
 	

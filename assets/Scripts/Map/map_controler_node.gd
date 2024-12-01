@@ -1,3 +1,4 @@
+@tool
 class_name MapControllerNode
 extends Node2D
 
@@ -17,6 +18,7 @@ var zone_nodes = {}
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	if Engine.is_editor_hint(): return
 	terrain_path_map.hide()
 	print("Readying MapCont: Inst:%s" % [CombatRootControl.Instance])
 	CombatRootControl.Instance.actor_spawned.connect(create_actor_node)
@@ -35,14 +37,19 @@ func get_map_data()->Dictionary:
 			if child.spawn_actor_id != '':
 				data["ActorId"] = child.spawn_actor_id
 			if child.is_player:
-				data["IsPlayer"] = true
+				data["FactionId"] = 0
+			else:
+				data["FactionId"] = 1
 			actors.append(data)
-		child.queue_free()
+		
+		if not Engine.is_editor_hint():
+			child.queue_free()
 	map_data['Actors'] = actors
 	return map_data
 				
 
 func create_actor_node(actor:BaseActor, map_pos:MapPos):
+	if Engine.is_editor_hint(): return
 	print("MapControllerNode: Creating Actor Node: %s" % [actor.Id])
 	if actor_nodes.keys().has(actor.Id):
 		return
@@ -57,6 +64,7 @@ func create_actor_node(actor:BaseActor, map_pos:MapPos):
 	print("MapControllerNode: Created Actor Node: %s" % [actor.Id])
 
 func delete_actor_node(actor:BaseActor):
+	if Engine.is_editor_hint(): return
 	var node:ActorNode = actor_nodes.get(actor.Id, null)
 	if !node:
 		return
@@ -64,6 +72,7 @@ func delete_actor_node(actor:BaseActor):
 	actor_nodes.erase(actor.Id)
 	
 func create_item_node(item:BaseItem, map_pos:MapPos):
+	if Engine.is_editor_hint(): return
 	print("MapControllerNode: Creating Item Node: %s" % [item.Id])
 	if item_nodes.keys().has(item.Id):
 		return
@@ -77,6 +86,7 @@ func create_item_node(item:BaseItem, map_pos:MapPos):
 	print("MapControllerNode: Created item Node: %s" % [item.Id])
 
 func delete_item_node(item:BaseItem):
+	if Engine.is_editor_hint(): return
 	var node:ItemNode = item_nodes.get(item.Id, null)
 	if !node:
 		return
@@ -84,6 +94,7 @@ func delete_item_node(item:BaseItem):
 	item_nodes.erase(item.Id)
 
 func add_missile_node(missile:BaseMissile, node:MissileNode):
+	if Engine.is_editor_hint(): return
 	missile_nodes[missile.Id] = node
 	game_state.add_missile(missile)
 	# Set missile parent if not already set
@@ -96,6 +107,7 @@ func add_missile_node(missile:BaseMissile, node:MissileNode):
 	node.sync_pos()
 
 func add_zone_node(zone:BaseZone, node:ZoneNode):
+	if Engine.is_editor_hint(): return
 	zone_nodes[zone.Id] = node
 	game_state.add_zone(zone)
 	# Set node parent if not already set
@@ -112,11 +124,13 @@ func add_zone_node(zone:BaseZone, node:ZoneNode):
 		actor_tile_map.add_child(node)
 		
 func _sync_positions():
+	if Engine.is_editor_hint(): return
 	#_build_terrain()
 	#_sync_actor_positions()
 	_sync_missile_positions()
 
 func _sync_actor_positions():
+	if Engine.is_editor_hint(): return
 	for node:ActorNode in actor_nodes.values():
 		var actor = game_state.get_actor(node.Actor.Id, true)
 		if !node:
@@ -136,6 +150,7 @@ func _sync_actor_positions():
 		node.position = local_pos
 
 func _sync_missile_positions():
+	if Engine.is_editor_hint(): return
 	# Clean up old nodes
 	for missile_id in missile_nodes.keys():
 		if !is_instance_valid(missile_nodes[missile_id]):

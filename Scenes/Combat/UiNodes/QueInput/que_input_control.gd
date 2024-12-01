@@ -45,8 +45,6 @@ func set_actor(actor:BaseActor):
 	
 
 func _build_buttons():
-	
-	printerr("\nBUILD BUTTONS \n")
 	if _buttons.size() > 0:
 		for but in _buttons:
 			but.queue_free()

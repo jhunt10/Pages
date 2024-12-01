@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=4 uid="uid://dcan2k534n88q"]
+[gd_scene load_steps=25 format=4 uid="uid://dcan2k534n88q"]
 
 [ext_resource type="Script" path="res://assets/Scripts/Map/map_controler_node.gd" id="1_8htqa"]
 [ext_resource type="Texture2D" uid="uid://dxan6lyrg8db3" path="res://assets/Sprites/TileSets/GrassPath_TileSheet.png" id="1_55p3y"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://bpurspf6xbf1h" path="res://Scenes/Combat/UiNodes/TargetAreaDisplay/target_area_display_node.tscn" id="6_bacnm"]
 [ext_resource type="Texture2D" uid="uid://kh2uekpf4sb8" path="res://Scenes/Maps/MapEditing/ActorSpawnSprite.png" id="8_3ret4"]
 [ext_resource type="Script" path="res://Scenes/Maps/MapEditing/actor_spawn_node.gd" id="9_p3ftp"]
+[ext_resource type="Script" path="res://assets/Scripts/Ai/PathTestingMap.gd" id="9_yvmnn"]
 [ext_resource type="Texture2D" uid="uid://bds8rjmyltjys" path="res://assets/Sprites/TileSets/Decor_TileSet.png" id="10_rc2rj"]
 [ext_resource type="Texture2D" uid="uid://bf0qdu0v1wdy6" path="res://defs/Actors/Tutorial/TutorShroom.png" id="11_52ceh"]
 
@@ -1055,6 +1056,13 @@ script = ExtResource("2_h1apl")
 [node name="ItemTileMapLayer" type="TileMapLayer" parent="."]
 tile_set = SubResource("TileSet_r8ipj")
 
+[node name="PathTestingTerrainMap" type="TileMapLayer" parent="." node_paths=PackedStringArray("map_controller", "terrain_map")]
+tile_map_data = PackedByteArray("AAAFAAUAAAAAAAAAAAAFAAQAAAAAAAAAAAAGAAQAAAAAAAAAAAAHAAQAAAAAAAAAAAAHAAMAAAAAAAAAAAA=")
+tile_set = SubResource("TileSet_63me0")
+script = ExtResource("9_yvmnn")
+map_controller = NodePath("..")
+terrain_map = NodePath("../TerrainMap")
+
 [node name="ActorTileMapLayer" type="TileMapLayer" parent="."]
 tile_set = SubResource("TileSet_5ipcw")
 
@@ -1089,7 +1097,7 @@ self_modulate = Color(0, 1, 1, 1)
 position = Vector2(176, 48)
 texture = ExtResource("8_3ret4")
 script = ExtResource("9_p3ftp")
-spawn_actor_key = "TestArmoredTarget"
+spawn_actor_key = "TestChaser"
 map_coor = Vector2i(5, 1)
 
 [node name="SpwanNode_TargetWard" type="Sprite2D" parent="ActorTileMapLayer"]

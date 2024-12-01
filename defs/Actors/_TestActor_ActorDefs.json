@@ -56,13 +56,7 @@
 			"Speed":50,
 			"Strength": 50,
 			"Armor": 50
-		},
-		"QueData":{
-			"MaxSize": 2,
-			"ActionList": ["TotemMissile"]
-		},
-		"MaxQueSize": 2,
-        "AutoQue_OFF":["MoveLeft", "MoveRight"]
+		}
 	},
 	{
 		"ActorKey": "TestArmoredTarget",
@@ -87,8 +81,7 @@
 			"Speed":5,
 			"Strength": 50,
 			"Armor": 50
-		},
-		"MaxQueSize": 2
+		}
 	},
 	{
 		"ActorKey": "TestWardedTarget",
@@ -113,7 +106,43 @@
 			"Speed":5,
 			"Strength": 50,
 			"Ward": 50
+		}
+	},
+	{
+		"ActorKey": "TestChaser",
+		"Details":{
+			"DisplayName": "Test Chaser",
+			"SnippetDesc": "A chaser made for testing.",
+			"Description": "Description.",
+			"Tags": ["AnActorTag", "Dummy"],
+			"LargeIcon":"TestTarget.png",
+			"SmallIcon":"TestTarget.png"
 		},
-		"MaxQueSize": 2
+		"SpriteSheet": "TestChaser_SpriteSheet.png",
+		"SpriteFrameWH": [12,4],
+		"SpriteOffset": [0,-16],
+		"PortraitRect":[12, 31, 24, 24],
+		"CorpseSprite": "TargetCorpse.png",
+		"AutoQueing": false,
+		"LeavesCorpse": true,
+		"Stats":{
+			"Max:Health":100,
+			"Mass":100,
+			"Speed":50,
+			"Strength": 50,
+			"Armor": 50
+		},
+		"DefaultQueSize": 3,
+		"AutoQue": true,
+		"EquipmentSlots": ["Que"],
+        "SpawnEquipmentList": [
+            "TestPageQue"
+        ],
+        "SpawnPageList":[
+            "MoveForward",
+            "TurnLeft",
+            "TurnRight",
+            "BasicMelee"
+        ]
 	}
 ]

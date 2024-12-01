@@ -83,6 +83,8 @@ func que_action(action:BaseAction, data:Dictionary={}):
 			data["CostData"] = action.CostData
 		QueExecData.que_data(data)
 		action_que_changed.emit()
+	else:
+		print("Que Reach Max Size: %s" % get_max_que_size())
 		
 func clear_que():
 	real_que.clear()

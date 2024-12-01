@@ -38,6 +38,12 @@ func spot_blocks_los(pos)->bool:
 		return false
 	return spot.terrain_index == 0
 
+func get_terrain_at_pos(pos):
+	var spot = get_map_spot(pos)
+	if not spot:
+		return false
+	return spot.terrain_index 
+
 func is_spot_open(pos)->bool:
 	var spot = get_map_spot(pos)
 	if not spot:

@@ -56,10 +56,10 @@ static func get_selectable_target_spots(target_params:TargetParameters, actor:Ba
 	var potentials = _get_potential_coor_to_targets(target_params, actor, game_state, exclude_targets)
 	return potentials.keys()
 	
-static func get_potential_target_actors(target_params:TargetParameters, actor:BaseActor, game_state:GameStateData, exclude_targets:Array=[])->Array:
-	if not target_params.is_actor_target_type():
+static func get_potential_target_actor_ids(target_params:TargetParameters, actor:BaseActor, game_state:GameStateData, exclude_targets:Array=[], pos_override:MapPos=null)->Array:
+	if !target_params or not target_params.is_actor_target_type():
 		return []
-	var potentials = _get_potential_coor_to_targets(target_params, actor, game_state, exclude_targets)
+	var potentials = _get_potential_coor_to_targets(target_params, actor, game_state, exclude_targets, pos_override)
 	var targets = dicarry_to_values(potentials)
 	return targets
 
