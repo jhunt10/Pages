@@ -44,9 +44,9 @@ static func handle_movement(game_state:GameStateData, moving_actor:BaseActor,
 		return true
 	
 	# Check if spot is valid
-	if not spot_is_valid_and_open(game_state, new_pos):
+	if not is_spot_traversable(moving_actor, game_state, new_pos):
 		if LOGGING: 
-			print("\tSpot is not valid" )
+			print("\tSpot is not traversable" )
 			print("------------------------------")
 		return false
 	
@@ -78,18 +78,28 @@ static func handle_movement(game_state:GameStateData, moving_actor:BaseActor,
 	return true
 
 # Returns new pos for pushed_actor if the pushed_actor can be pushed
-static func _try_push(game_state:GameStateData, moveing_actor:BaseActor, pushed_actor:BaseActor, relativeMovemnt:MapPos)->MapPos:
-	#TODO: mass check
-	var current_mover_pos:MapPos = game_state.MapState.get_actor_pos(moveing_actor)
+static func _try_push(game_state:GameStateData, moving_actor:BaseActor, pushed_actor:BaseActor, relative_movemnt:MapPos)->MapPos:
+	DamageHelper.handle_push(moving_actor, pushed_actor, game_state)
+	
+	if moving_actor.stats.get_stat("Mass") < pushed_actor.stats.get_stat("Mass"):
+		return null
+	
+	var current_mover_pos:MapPos = game_state.MapState.get_actor_pos(moving_actor)
 	var current_pushed_pos:MapPos = game_state.MapState.get_actor_pos(pushed_actor)
 	# Need to use pushed's pos but mover's direction. Also ignore dir change of move
 	var pushed_to_pos = relative_pos_to_real(
 		MapPos.new(current_pushed_pos.x, current_pushed_pos.y, current_pushed_pos.z, current_mover_pos.dir),
-		 MapPos.new(relativeMovemnt.x, relativeMovemnt.y, 0, 0))
-	if spot_is_valid_and_open(game_state, pushed_to_pos):
-		return pushed_to_pos
-	return null
+		 MapPos.new(relative_movemnt.x, relative_movemnt.y, 0, 0))
 	
+	if not spot_is_valid_and_open(game_state, pushed_to_pos):
+		return null
+	
+	pushed_to_pos.dir = current_pushed_pos.dir
+	return pushed_to_pos
+	
+static func is_spot_traversable(actor:BaseActor, game_state:GameStateData, pos:MapPos):
+	var terrain = game_state.MapState.get_terrain_at_pos(pos)
+	return terrain > 0
 	
 static func spot_is_valid_and_open(game_state:GameStateData, pos:MapPos):
 	if (pos.x < 0 or pos.x >= game_state.MapState.max_width 

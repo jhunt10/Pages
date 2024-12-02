@@ -8,7 +8,6 @@ const ARMOR_SCALE:float = 80
 
 static func handle_attack(attacker:BaseActor, defender:BaseActor, damage_data:Dictionary, 
 							source_tag_chain:SourceTagChain, game_state:GameStateData):
-	
 	var base_damage = 0
 	var attack_stat = damage_data.get("AtkStat", null)
 	if attack_stat != null and attack_stat != "Custom":
@@ -16,6 +15,27 @@ static func handle_attack(attacker:BaseActor, defender:BaseActor, damage_data:Di
 	else:
 		base_damage = damage_data.get("BaseDamage", 0)
 	handle_damage(attacker, base_damage, defender, damage_data, source_tag_chain, game_state)
+
+
+static func handle_push(moving_actor:BaseActor, pushed_actor:BaseActor, game_state:GameStateData):
+	var winner = moving_actor
+	var loser = pushed_actor
+	if moving_actor.stats.get_stat("Mass") < pushed_actor.stats.get_stat("Mass"):
+		loser = moving_actor
+		winner = pushed_actor
+	var base_damage = 0
+	base_damage = winner.stats.get_stat("Strength", 0)
+	var damage_data = {
+		"AtkPower": 10,
+		"AtkStat": "Strength",
+		"BaseDamage": base_damage,
+		"DamageEffect": "Blunt_DamageEffect",
+		"DamageType": "Push",
+		"DamageVarient": 0,
+		"DefenseType": null
+	}
+	var tag_chain = SourceTagChain.new().append_source(SourceTagChain.SourceTypes.Actor, winner)
+	handle_damage(winner, base_damage, loser, damage_data, tag_chain, game_state)
 
 static func handle_damage(source, base_damage:int, defender:BaseActor, damage_data:Dictionary, 
 							source_tag_chain:SourceTagChain, game_state:GameStateData):
