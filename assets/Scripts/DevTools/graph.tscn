@@ -1,0 +1,42 @@
+[gd_scene load_steps=2 format=3 uid="uid://bp2yv06fos8sw"]
+
+[ext_resource type="Script" path="res://assets/Scripts/DevTools/grapher.gd" id="1_genlh"]
+
+[node name="Control" type="Control" node_paths=PackedStringArray("slider", "point", "label")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -897.0
+offset_bottom = -548.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(5, 5)
+mouse_filter = 1
+script = ExtResource("1_genlh")
+slider = NodePath("HSlider")
+point = NodePath("ColorRect")
+label = NodePath("ColorRect/Label")
+
+[node name="HSlider" type="HSlider" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 16.0
+grow_horizontal = 2
+max_value = 255.0
+value = 100.0
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 2.0
+offset_bottom = 2.0
+color = Color(1, 0, 0.0156863, 1)
+
+[node name="Label" type="Label" parent="ColorRect"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+scale = Vector2(0.25, 0.25)
+text = "1,1"
+horizontal_alignment = 2

@@ -4,7 +4,7 @@ enum DefenseType{None, Armor, Ward}
 
 enum DamageTypes {	
 	Test, RAW, Healing, Percent,
-	Pierce, Slash, Blunt, Blast, # Usually negated by Armor
+	Pierce, Slash, Blunt, Crash, # Usually negated by Armor
 	Fire, Cold, Electric, Poison, # Usually negated by Ward
 }
 

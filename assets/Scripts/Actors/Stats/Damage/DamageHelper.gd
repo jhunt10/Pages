@@ -20,19 +20,19 @@ static func handle_attack(attacker:BaseActor, defender:BaseActor, damage_data:Di
 static func handle_push(moving_actor:BaseActor, pushed_actor:BaseActor, game_state:GameStateData):
 	var winner = moving_actor
 	var loser = pushed_actor
+	var base_damage = winner.stats.get_stat("Strength", 0)
 	if moving_actor.stats.get_stat("Mass") < pushed_actor.stats.get_stat("Mass"):
 		loser = moving_actor
 		winner = pushed_actor
-	var base_damage = 0
-	base_damage = winner.stats.get_stat("Strength", 0)
+		base_damage = winner.stats.get_stat("Strength", 0) / 2
 	var damage_data = {
 		"AtkPower": 10,
 		"AtkStat": "Strength",
 		"BaseDamage": base_damage,
 		"DamageEffect": "Blunt_DamageEffect",
-		"DamageType": "Push",
+		"DamageType": "Crash",
 		"DamageVarient": 0,
-		"DefenseType": null
+		"DefenseType": "Armor"
 	}
 	var tag_chain = SourceTagChain.new().append_source(SourceTagChain.SourceTypes.Actor, winner)
 	handle_damage(winner, base_damage, loser, damage_data, tag_chain, game_state)
@@ -121,6 +121,5 @@ static func _order_damage_mods(mods:Array):
 	
 
 static func calc_armor_reduction(armor)->float:
-	var log_x = log(armor)
 	var val = (log((armor+ARMOR_STRETCH)/ARMOR_STRETCH) / log(10)) * ARMOR_SCALE
 	return 1-(val/100)

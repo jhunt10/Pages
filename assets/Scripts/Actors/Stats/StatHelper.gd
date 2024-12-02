@@ -2,21 +2,22 @@ class_name StatHelper
 
 enum CoreStats {Strength, Agility, Intelligence, Wisdom}
 
-enum Stats {
+## Every Actor is exspected to have these stats
+enum BasicStats {
 	Health,
 	Mass,
 	Speed,
 	
-	Evasion,
-	Protection,
 	Armor,
-	Resist,
+	Ward,
 	
-	Stamina,
-	Mana,
-	
-	Shove,
+	Push,
 	CritChance,
 	CritDamage,
+	
+	Evasion,
+	Resist,
+	
 	Accuracy,
+	Potency
 }
