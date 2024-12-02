@@ -345,70 +345,170 @@ func _sort_ques_by_speed():
 		var spd_ques = speed_to_ques[spd]
 		for que_id in spd_ques:
 			_que_order.append(que_id)
-	
 
-## Add padding to make shorter ques match the longest
-# To solve this, think of each que as a bar cut into sections
-# A sider moves across all the bars and adds a action slot every time it reaches a new section
-# when it reaches a new section in the longest que a gap is added to all other ques
 func _calc_turn_padding():
-	var que_section_sizes = {}
-	var que_section_indexes = {}
-	var ques_to_slots = {}
-	max_que_size = -1
-	var max_que_last_key = ''
-	for que_id in _que_order:
+	var new_max_que_size = -1
+	var max_que_last_index = 0
+	for index in range(_que_order.size()):
+		var que_id = _que_order[index]
 		var que:ActionQue = _action_ques[que_id]
-		if que.get_max_que_size() >= max_que_size:	
-			max_que_size = que.get_max_que_size()
-			max_que_last_key = que_id
-		ques_to_slots[que_id] = []
-		que_section_indexes[que_id] = 0
-		que_section_sizes[que_id] = floori(120 / maxi(que.get_max_que_size(), 1))
-	
-	# Add slots up front, or only as thier section is passed
-	# changes behavior in way I can't exomplain right now
-	var pre_offset = 0.5 # 0
-	
-	var natural_index = 0
-	var had_increase = false
-	var increased_cache = []
-	# 120 is a common multiple of most numbers
-	for index in range(121):
-		increased_cache.clear()
-		had_increase = false
-		# Check if any ques entered new section
-		for key in que_section_sizes.keys():
-			var section_size = que_section_sizes[key]
-			var section_index = que_section_indexes[key]
-			var next_section = (section_index + pre_offset) * section_size
-			# Has entered new section
-			if index >= next_section and _action_ques[key].get_max_que_size() > 0:
-				had_increase = true
-				increased_cache.append(key)
-		
-		# If we had an increase on the max que, go through all the ques and record gap or not
-		if had_increase and increased_cache.has(max_que_last_key):
-			for key in que_section_sizes.keys():
-				if increased_cache.has(key):
-					que_section_indexes[key] += 1
-					ques_to_slots[key].append(true)
-				else:
-					ques_to_slots[key].append(false)
-	
-	if DEEP_LOGGING: printerr("Que Padding Results")
-	
-	var shift_forward = true
-	for que_id in _que_order:
+		if que.get_max_que_size() >= max_que_size:
+			new_max_que_size = que.get_max_que_size()
+			max_que_last_index = index
+	max_que_size = new_max_que_size
+	for index in range(_que_order.size()):
+		var que_id = _que_order[index]
 		var que:ActionQue = _action_ques[que_id]
-		if que.Id == max_que_last_key:
-			shift_forward = false
+		var is_slow = index >= max_que_last_index
+		var que_gaps = _get_premade_que_gaps(que.get_max_que_size(), max_que_size, is_slow)
+		que._set_turn_mapping(que_gaps)
+
+
+
+func _get_premade_que_gaps(que_size:int, max_que_size:int, is_slow:bool)->Array:
+	var out_list = []
+	if max_que_size == 1:
+		if que_size == 1: out_list = [1]
+	elif max_que_size == 2:
+		if que_size == 1: out_list = [1, 0]
+		if que_size == 2: out_list = [1, 1]
+	elif max_que_size == 3:
+		if que_size == 1: return [0, 1, 0] # No shifting
+		if que_size == 2: out_list = [1, 1, 0]
+		if que_size == 3: out_list = [1, 1, 1]
+	elif max_que_size == 4:
+		if que_size == 1: out_list = [0, 1, 0, 0]
+		if que_size == 2: out_list = [1, 0, 1, 0]
+		if que_size == 3: out_list = [1, 1, 1, 0]
+		if que_size == 4: out_list = [1, 1, 1, 1]
+	elif max_que_size == 5:
+		if que_size == 1: return [0, 0, 1, 0, 0]
+		if que_size == 2: out_list = [0, 1, 0, 1, 0]
+		if que_size == 3: out_list = [1, 0, 1, 0, 1]
+		if que_size == 4: out_list = [1, 1, 1, 1, 0]
+		if que_size == 5: out_list = [1, 1, 1, 1, 1]
+	elif max_que_size == 6:
+		if que_size == 1: out_list = [0, 0, 1, 0, 0, 0]
+		if que_size == 2: out_list = [0, 1, 0, 1, 0, 0]
+		if que_size == 3: out_list = [1, 0, 1, 0, 1, 0]
+		if que_size == 4: out_list = [1, 1, 0, 1, 1, 0]
+		if que_size == 5: out_list = [1, 1, 1, 1, 1, 0]
+		if que_size == 6: out_list = [1, 1, 1, 1, 1, 1]
+	elif max_que_size == 7:
+		if que_size == 1: return     [0, 0, 0, 1, 0, 0, 0]
+		if que_size == 2: out_list = [0, 1, 0, 0, 1, 0, 0]
+		if que_size == 3: return     [0, 1, 0, 1, 0, 1, 0]
+		if que_size == 4: return     [0, 1, 1, 0, 1, 1, 0]
+		if que_size == 5: return     [0, 1, 1, 1, 1, 1, 0]
+		if que_size == 6: out_list = [1, 1, 1, 1, 1, 1, 0]
+		if que_size == 7: out_list = [1, 1, 1, 1, 1, 1, 1]
+	elif max_que_size == 8:
+		if que_size == 1: out_list = [0, 0, 0, 1, 0, 0, 0, 0]
+		if que_size == 2: out_list = [0, 1, 0, 0, 0, 1, 0, 0]
+		if que_size == 3: out_list = [0, 1, 0, 1, 0, 1, 0, 0]
+		if que_size == 4: out_list = [1, 0, 1, 0, 1, 0, 1, 0]
+		if que_size == 5: out_list = [1, 1, 0, 1, 1, 0, 1, 0]
+		if que_size == 6: out_list = [1, 1, 1, 0, 1, 1, 1, 0]
+		if que_size == 7: out_list = [1, 1, 1, 1, 1, 1, 1, 0]
+		if que_size == 8: out_list = [1, 1, 1, 1, 1, 1, 1, 1]
+	elif max_que_size == 9:
+		if que_size == 1: return     [0, 0, 0, 0, 1, 0, 0, 0, 0]
+		if que_size == 2: return     [0, 0, 1, 0, 0, 0, 1, 0, 0]
+		if que_size == 3: return     [0, 0, 1, 0, 1, 0, 1, 0, 0]
+		if que_size == 4: return     [0, 1, 0, 1, 0, 1, 0, 1, 0]
+		if que_size == 5: return     [0, 1, 1, 0, 1, 0, 1, 1, 0]
+		if que_size == 6: out_list = [1, 1, 0, 1, 1, 0, 1, 1, 0]
+		if que_size == 7: return     [1, 1, 0, 1, 1, 1, 0, 1, 1]
+		if que_size == 8: out_list = [1, 1, 1, 1, 1, 1, 1, 1, 0]
+		if que_size == 9: out_list = [1, 1, 1, 1, 1, 1, 1, 1, 1]
+	elif max_que_size == 10:
+		if que_size == 1: out_list = [0, 0, 0, 0, 1, 0, 0, 0, 0, 0]
+		if que_size == 2: out_list = [0, 0, 1, 0, 0, 0, 1, 0, 0, 0]
+		if que_size == 3: out_list = [0, 1, 0, 0, 1, 0, 0, 1, 0, 0]
+		if que_size == 4: out_list = [0, 1, 0, 1, 0, 1, 0, 1, 0, 0]
+		if que_size == 5: out_list = [1, 0, 1, 0, 1, 0, 1, 0, 1, 0]
+		if que_size == 6: return     [0, 1, 1, 0, 1, 1, 0, 1, 1, 0]
+		if que_size == 7: out_list = [1, 1, 0, 1, 1, 1, 0, 1, 1, 0]
+		if que_size == 8: out_list = [1, 1, 1, 1, 0, 1, 1, 1, 1, 0]
+		if que_size == 9: out_list = [1, 1, 1, 1, 1, 1, 1, 1, 1, 0]
+		if que_size == 9: out_list = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+	
+	if out_list.size() == 0:
+		printerr("No Premade Que Gaps found for QueSize: %s MaxQue: %s" % [que_size, max_que_size])
+		for i in range(max_que_size):
+			out_list.append(0)
+		return out_list
 			
-		var slots:Array = ques_to_slots[que_id]
-		if shift_forward and slots.size() > 0 and slots[0] == false:
-			slots.remove_at(0)
-			slots.append(false)
-		if DEEP_LOGGING: printerr("Key: %s | Sec: %s | Shift: %s | %s" % [que_id, que_section_sizes[que_id], shift_forward, slots])
-			
-		que._set_turn_mapping(slots)
-	que_ordering_changed.emit()
+	if out_list[-1] == 0 and is_slow:
+		var shifted_list = []
+		shifted_list.append(0)
+		shifted_list.append_array(out_list)
+		shifted_list.remove_at(shifted_list.size()-1)
+		return shifted_list
+	return out_list
+
+### Add padding to make shorter ques match the longest
+## To solve this, think of each que as a bar cut into sections
+## A sider moves across all the bars and adds a action slot every time it reaches a new section
+## when it reaches a new section in the longest que a gap is added to all other ques
+#func _calc_turn_padding():
+	#var que_section_sizes = {}
+	#var que_section_indexes = {}
+	#var ques_to_slots = {}
+	#max_que_size = -1
+	#var max_que_last_key = ''
+	#for que_id in _que_order:
+		#var que:ActionQue = _action_ques[que_id]
+		#if que.get_max_que_size() >= max_que_size:	
+			#max_que_size = que.get_max_que_size()
+			#max_que_last_key = que_id
+		#ques_to_slots[que_id] = []
+		#que_section_indexes[que_id] = 0
+		#que_section_sizes[que_id] = floori(120 / maxi(que.get_max_que_size(), 1))
+	#
+	## Add slots up front, or only as thier section is passed
+	## changes behavior in way I can't exomplain right now
+	#var pre_offset = 0.5 # 0
+	#
+	#var natural_index = 0
+	#var had_increase = false
+	#var increased_cache = []
+	## 120 is a common multiple of most numbers
+	#for index in range(121):
+		#increased_cache.clear()
+		#had_increase = false
+		## Check if any ques entered new section
+		#for key in que_section_sizes.keys():
+			#var section_size = que_section_sizes[key]
+			#var section_index = que_section_indexes[key]
+			#var next_section = (section_index + pre_offset) * section_size
+			## Has entered new section
+			#if index >= next_section and _action_ques[key].get_max_que_size() > 0:
+				#had_increase = true
+				#increased_cache.append(key)
+		#
+		## If we had an increase on the max que, go through all the ques and record gap or not
+		#if had_increase and increased_cache.has(max_que_last_key):
+			#for key in que_section_sizes.keys():
+				#if increased_cache.has(key):
+					#que_section_indexes[key] += 1
+					#ques_to_slots[key].append(true)
+				#else:
+					#ques_to_slots[key].append(false)
+	#
+	#if DEEP_LOGGING: printerr("Que Padding Results")
+	#
+	#var shift_forward = true
+	#for que_id in _que_order:
+		#var que:ActionQue = _action_ques[que_id]
+		#if que.Id == max_que_last_key:
+			#shift_forward = false
+			#
+		#var slots:Array = ques_to_slots[que_id]
+		#if shift_forward and slots.size() > 0 and slots[0] == false:
+			#slots.remove_at(0)
+			#slots.append(false)
+		#if DEEP_LOGGING: printerr("Key: %s | Sec: %s | Shift: %s | %s" % [que_id, que_section_sizes[que_id], shift_forward, slots])
+			#
+		#que._set_turn_mapping(slots)
+	#que_ordering_changed.emit()

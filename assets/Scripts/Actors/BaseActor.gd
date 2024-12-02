@@ -106,7 +106,7 @@ func die():
 	is_dead = true
 	var map_pos = CombatRootControl.Instance.GameState.MapState.get_actor_pos(self)
 	if map_pos:
-		var drop_items = get_load_val("DropItems")
+		var drop_items = get_load_val("DropItems", [])
 		for item_key in drop_items:
 			ItemHelper.spawn_item(item_key, {}, map_pos)
 		
