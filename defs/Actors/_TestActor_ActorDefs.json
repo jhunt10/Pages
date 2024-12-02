@@ -85,6 +85,7 @@
 	},
 	{
 		"ActorKey": "TestWardedTarget",
+		"ParentKey": "TestTarget",
 		"Details":{
 			"DisplayName": "Test Target",
 			"SnippetDesc": "A target made for testing.",
@@ -94,17 +95,7 @@
 			"SmallIcon":"TestTarget_Warded.png"
 		},
 		"SpriteSheet": "TestWardedTarget_SpriteSheet.png",
-		"SpriteFrameWH": [12,4],
-		"SpriteOffset": [0,-16],
-		"PortraitRect":[12, 31, 24, 24],
-		"CorpseSprite": "TargetCorpse.png",
-		"AutoQueing": false,
-		"LeavesCorpse": true,
 		"Stats":{
-			"Max:Health":100,
-			"Mass":100,
-			"Speed":5,
-			"Strength": 50,
 			"Ward": 50
 		}
 	},
@@ -144,5 +135,10 @@
             "TurnRight",
             "BasicMelee"
         ]
+	},
+	{
+		"ActorKey": "TestChaser2",
+		"ParentKey": "TestChaser",
+		"DefaultQueSize": 4
 	}
 ]

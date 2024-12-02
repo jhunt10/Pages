@@ -1058,6 +1058,7 @@ script = ExtResource("2_h1apl")
 tile_set = SubResource("TileSet_r8ipj")
 
 [node name="PathTestingTerrainMap" type="TileMapLayer" parent="." node_paths=PackedStringArray("map_controller", "terrain_map")]
+visible = false
 tile_map_data = PackedByteArray("AAAFAAUAAAAAAAAAAAAFAAQAAAAAAAAAAAAGAAQAAAAAAAAAAAAHAAQAAAAAAAAAAAAHAAMAAAAAAAAAAAA=")
 tile_set = SubResource("TileSet_63me0")
 script = ExtResource("9_yvmnn")
@@ -1120,7 +1121,7 @@ offset = Vector2(0, -16)
 hframes = 12
 vframes = 4
 script = ExtResource("9_p3ftp")
-spawn_actor_key = "TestChaser"
+spawn_actor_key = "TestChaser2"
 map_coor = Vector2i(10, 3)
 
 [node name="SpwanNode_Squirrel3" type="Sprite2D" parent="ActorTileMapLayer"]

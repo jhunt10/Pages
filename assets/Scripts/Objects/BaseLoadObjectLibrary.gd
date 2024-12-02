@@ -119,10 +119,9 @@ func init_load():
 	if LOGGING:
 		print("")
 		print("#### Loading %s" % [obj_name])
-	# Load Defs
-	for def_file in _search_for_files(OBJECTS_DEFS_DIR, get_def_file_sufix()):
-		if LOGGING: print("# Loading Def file: %s" % [def_file])
-		_load_object_def_file(def_file)
+	
+	_load_object_defs()
+	
 	
 	# Load Static Objects
 	if LOGGING: print("# Loading Static Objects" )
@@ -148,20 +147,48 @@ func reload():
 	init_load()
 
 
-func load_objects():
-	if loaded:
-		return
-	print("Loading Objects")
-	var files = _search_for_files(OBJECTS_DEFS_DIR, get_def_file_sufix())
-	for file in files:
-		_load_object_def_file(file)
-	loaded = true
+#func load_objects():
+	#if loaded:
+		#return
+	#print("Loading Objects")
+	#var files = _search_for_files(OBJECTS_DEFS_DIR, get_def_file_sufix())
+	#for file in files:
+		#_load_object_def_file(file)
+	#loaded = true
 
-## Parse json def file and load to _object_defs
-func _load_object_def_file(file_path:String):
+func _load_object_defs():
+	var delayed_defs = {}
+	# Load Defs
+	for def_file in _search_for_files(OBJECTS_DEFS_DIR, get_def_file_sufix()):
+		if LOGGING: print("# Loading Def file: %s" % [def_file])
+		var delayed = _load_object_def_file(def_file)
+		for parent_key in delayed.keys():
+			if not delayed_defs.keys().has(parent_key):
+				delayed_defs[parent_key] = {}
+			for child_key in delayed[parent_key]:
+				delayed_defs[parent_key][child_key] = delayed[parent_key][child_key]
+	
+	var safety_limit = 100
+	var safety_index = 0
+	while delayed_defs.size() > 0 and safety_index <= safety_limit:
+		for parent_key in delayed_defs.keys():
+			if not _object_defs.keys().has(parent_key):
+				print("Parent Def: %s not found" % [parent_key])
+				continue
+			var parent_def = _object_defs[parent_key]
+			for child_key in delayed_defs[parent_key].keys():
+				_object_defs[child_key] = _merge_defs(delayed_defs[parent_key][child_key], parent_def)
+			delayed_defs.erase(parent_key)
+		safety_index += 1
+	if delayed_defs.size() > 0:
+		printerr("Failed to load all inherited defs defs")
+			
+
+## Parse json def file and load to _object_defs and returns nest dicionaries of  parent key to child key to defs for child defs with non-loaded parents
+func _load_object_def_file(file_path:String)->Dictionary:
 	var file = FileAccess.open(file_path, FileAccess.READ)
 	var text:String = file.get_as_text()
-	
+	var delayed_dic = {}
 	# Wrap in brackets and parse as Array to support multiple objects in same file
 	if !text.begins_with("["):
 		text = "[" + text + "]" 
@@ -172,9 +199,21 @@ func _load_object_def_file(file_path:String):
 			printerr("No '%s' found on object in %s." % [object_key_name, file_path])
 			continue
 		var object_key = def[object_key_name]
+		var parent_key = def.get("ParentKey", null)
 		_defs_to_load_paths[object_key] = file_path.get_base_dir()
-		_object_defs[object_key] = def
-		if LOGGING: print("# - Loaded Object Def: %s" % [object_key])
+		if object_key == "TestChaser2":
+			var t = true
+		# Check if needs to wait for parent to be loaded
+		if parent_key == null:
+			_object_defs[object_key] = def
+			if LOGGING: print("# - Loaded Object Def: %s" % [object_key])
+		elif _object_defs.keys().has(parent_key):
+			_object_defs[object_key] = _merge_defs(def, _object_defs[parent_key])
+		else:
+			if !delayed_dic.keys().has(parent_key):
+				delayed_dic[parent_key] = {}
+			delayed_dic[parent_key][object_key] = def
+	return delayed_dic
 
 ## Search _object_defs and load static objects to _static_objects
 func _load_static_objects():
@@ -257,3 +296,12 @@ static func _search_for_files(path:String,  sufix:String):
 	else:
 		printerr("BaseObjectLibrary._search_for_files: An error occurred when trying to access the path '%s'." % [path])
 	return out_list
+
+func _merge_defs(child:Dictionary, parent:Dictionary)->Dictionary:
+	var new_data = parent.duplicate()
+	for key in child.keys():
+		var val = child[key]
+		if val is Dictionary:
+			val = _merge_defs(child[key], parent.get(key, {}))
+		new_data[key] = val
+	return new_data
