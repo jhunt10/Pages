@@ -27,27 +27,33 @@ func _init() -> void:
 	Instance.init_load()
 
 static func list_all_item_keys()->Array:
+	if !Instance: Instance = ItemLibrary.new()
 	return Instance._object_defs.keys()
 
 static func list_all_items()->Array:
+	if !Instance: Instance = ItemLibrary.new()
 	return Instance._loaded_objects.values()
 
 static func get_item_def(key:String)->Dictionary:
+	if !Instance: Instance = ItemLibrary.new()
 	return Instance.get_object_def(key)
 	
 static func get_item(item_id:String)->BaseItem:
+	if !Instance: Instance = ItemLibrary.new()
 	var item = Instance.get_object(item_id)
 	if !item:
 		printerr("ItemLibrary.get_item: No item found with id '%s'." % [item_id])
 	return item
 
 static func create_item(key:String, data:Dictionary)->BaseItem:
+	if !Instance: Instance = ItemLibrary.new()
 	var item = Instance.create_object(key, '', data)
 	if !item:
 		printerr("ItemLibrary.create_item: Failed to make item '%s'." % [key])
 	return item
 
 static func save_items():
+	if !Instance: Instance = ItemLibrary.new()
 	var data = {}
 	data["PlayerInventory"] = PlayerInventory.list_all_held_item_ids()
 	Instance.save_objects_data("res://saves/Items/_TestItem_ItemSave.json", data)

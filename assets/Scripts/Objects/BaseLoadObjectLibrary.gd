@@ -297,7 +297,7 @@ static func _search_for_files(path:String,  sufix:String):
 		printerr("BaseObjectLibrary._search_for_files: An error occurred when trying to access the path '%s'." % [path])
 	return out_list
 
-func _merge_defs(child:Dictionary, parent:Dictionary)->Dictionary:
+static func _merge_defs(child:Dictionary, parent:Dictionary)->Dictionary:
 	var new_data = parent.duplicate()
 	for key in child.keys():
 		var val = child[key]

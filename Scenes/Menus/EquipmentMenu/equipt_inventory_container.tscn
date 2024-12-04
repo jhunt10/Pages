@@ -1,0 +1,474 @@
+[gd_scene load_steps=12 format=3 uid="uid://dmlpvjyai521d"]
+
+[ext_resource type="Script" path="res://Scenes/Menus/EquipmentMenu/inventory_container.gd" id="1_j4lhh"]
+[ext_resource type="Texture2D" uid="uid://c4yedxpiinlff" path="res://Scenes/Menus/EquipmentMenu/outline.png" id="2_bctqj"]
+[ext_resource type="Theme" uid="uid://dwinll8pgdjhc" path="res://Scenes/Themes/standard_theme.tres" id="3_e4t5p"]
+[ext_resource type="PackedScene" uid="uid://bpvy87uagttpr" path="res://Scenes/UiNodes/ScollBar/scroll_bar.tscn" id="5_0hjxr"]
+[ext_resource type="Texture2D" uid="uid://deqwpr7qu8fp2" path="res://assets/Sprites/UI/CharacterEdit/InventorySlotBackground.png" id="5_6r5b7"]
+[ext_resource type="Texture2D" uid="uid://cq2p1mnoevjoc" path="res://assets/Sprites/UI/CharacterEdit/InventoryItemButton_Pressed.png" id="6_6i0vq"]
+[ext_resource type="Script" path="res://Scenes/Menus/EquipmentMenu/inventory_item_button_control.gd" id="7_1h41b"]
+[ext_resource type="Texture2D" uid="uid://wvy1i6avftau" path="res://defs/Items/Equipment/TestWeapons/TestSword.png" id="8_8cp3a"]
+[ext_resource type="Texture2D" uid="uid://bkjy2j6ra337v" path="res://assets/Sprites/UI/SymbolIcons/EquiptIcon.png" id="9_a4qxi"]
+[ext_resource type="Texture2D" uid="uid://0wkhsf2kgce1" path="res://assets/Sprites/UI/BackPatches/Patch_12_4_Dark.png" id="10_nckkb"]
+[ext_resource type="Texture2D" uid="uid://3ncohf5a6kf7" path="res://Scenes/Menus/EquipmentMenu/HoleBackground.png" id="13_pu80u"]
+
+[node name="InventoryPage" type="Control" node_paths=PackedStringArray("items_container", "premade_item_button")]
+custom_minimum_size = Vector2(280, 395)
+layout_mode = 3
+anchors_preset = 0
+mouse_filter = 1
+script = ExtResource("1_j4lhh")
+items_container = NodePath("BoxBackground/ScrollContainer/FlowContainer")
+premade_item_button = NodePath("BoxBackground/ScrollContainer/FlowContainer/InventoryItemButton")
+
+[node name="Background" type="NinePatchRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 12.0
+offset_top = 5.0
+offset_right = -12.0
+offset_bottom = -5.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("2_bctqj")
+region_rect = Rect2(0, 0, 64, 65)
+patch_margin_left = 18
+patch_margin_top = 18
+patch_margin_right = 18
+patch_margin_bottom = 19
+
+[node name="ScrollBar" parent="." node_paths=PackedStringArray("scroll_container") instance=ExtResource("5_0hjxr")]
+layout_mode = 0
+offset_left = 231.0
+offset_top = 35.0
+offset_right = 263.0
+offset_bottom = 378.0
+scroll_container = NodePath("../BoxBackground/ScrollContainer")
+
+[node name="BoxBackground" type="NinePatchRect" parent="."]
+layout_mode = 2
+offset_left = 20.0
+offset_top = 35.0
+offset_right = 230.0
+offset_bottom = 378.0
+texture = ExtResource("13_pu80u")
+patch_margin_left = 32
+patch_margin_top = 32
+patch_margin_right = 32
+patch_margin_bottom = 32
+
+[node name="ScrollContainer" type="ScrollContainer" parent="BoxBackground"]
+custom_minimum_size = Vector2(0, 220)
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = -5.0
+offset_bottom = -5.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
+
+[node name="FlowContainer" type="FlowContainer" parent="BoxBackground/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="InventoryItemButton" type="TextureButton" parent="BoxBackground/ScrollContainer/FlowContainer" node_paths=PackedStringArray("item_icon_rect", "equipt_icon", "count_label")]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture_normal = ExtResource("5_6r5b7")
+texture_pressed = ExtResource("6_6i0vq")
+script = ExtResource("7_1h41b")
+item_icon_rect = NodePath("ItemIconRect")
+equipt_icon = NodePath("EquiptIcon")
+count_label = NodePath("CountLabel")
+
+[node name="ItemIconRect" type="TextureRect" parent="BoxBackground/ScrollContainer/FlowContainer/InventoryItemButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("8_8cp3a")
+
+[node name="EquiptIcon" type="TextureRect" parent="BoxBackground/ScrollContainer/FlowContainer/InventoryItemButton"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -20.0
+offset_top = 2.0
+offset_right = -2.0
+offset_bottom = 23.0
+grow_horizontal = 0
+texture = ExtResource("9_a4qxi")
+
+[node name="CountLabel" type="Label" parent="BoxBackground/ScrollContainer/FlowContainer/InventoryItemButton"]
+layout_direction = 3
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -58.0
+offset_top = -24.0
+offset_right = -49.0
+offset_bottom = -4.0
+grow_horizontal = 0
+grow_vertical = 0
+theme = ExtResource("3_e4t5p")
+text = "0"
+horizontal_alignment = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="BoxBackground/ScrollContainer/FlowContainer/InventoryItemButton/CountLabel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -2.0
+offset_right = 3.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_nckkb")
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+
+[node name="Label" type="Label" parent="BoxBackground/ScrollContainer/FlowContainer/InventoryItemButton/CountLabel"]
+layout_direction = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_e4t5p")
+text = "0"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="InventoryItemButton2" type="TextureButton" parent="BoxBackground/ScrollContainer/FlowContainer" node_paths=PackedStringArray("item_icon_rect", "equipt_icon", "count_label")]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture_normal = ExtResource("5_6r5b7")
+texture_pressed = ExtResource("6_6i0vq")
+script = ExtResource("7_1h41b")
+item_icon_rect = NodePath("ItemIconRect")
+equipt_icon = NodePath("EquiptIcon")
+count_label = NodePath("CountLabel")
+
+[node name="ItemIconRect" type="TextureRect" parent="BoxBackground/ScrollContainer/FlowContainer/InventoryItemButton2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("8_8cp3a")
+
+[node name="EquiptIcon" type="TextureRect" parent="BoxBackground/ScrollContainer/FlowContainer/InventoryItemButton2"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -20.0
+offset_top = 2.0
+offset_right = -2.0
+offset_bottom = 23.0
+grow_horizontal = 0
+texture = ExtResource("9_a4qxi")
+
+[node name="CountLabel" type="Label" parent="BoxBackground/ScrollContainer/FlowContainer/InventoryItemButton2"]
+layout_direction = 3
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -58.0
+offset_top = -24.0
+offset_right = -49.0
+offset_bottom = -4.0
+grow_horizontal = 0
+grow_vertical = 0
+theme = ExtResource("3_e4t5p")
+text = "0"
+horizontal_alignment = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="BoxBackground/ScrollContainer/FlowContainer/InventoryItemButton2/CountLabel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -2.0
+offset_right = 3.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_nckkb")
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+
+[node name="Label" type="Label" parent="BoxBackground/ScrollContainer/FlowContainer/InventoryItemButton2/CountLabel"]
+layout_direction = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_e4t5p")
+text = "0"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="InventoryItemButton3" type="TextureButton" parent="BoxBackground/ScrollContainer/FlowContainer" node_paths=PackedStringArray("item_icon_rect", "equipt_icon", "count_label")]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture_normal = ExtResource("5_6r5b7")
+texture_pressed = ExtResource("6_6i0vq")
+script = ExtResource("7_1h41b")
+item_icon_rect = NodePath("ItemIconRect")
+equipt_icon = NodePath("EquiptIcon")
+count_label = NodePath("CountLabel")
+
+[node name="ItemIconRect" type="TextureRect" parent="BoxBackground/ScrollContainer/FlowContainer/InventoryItemButton3"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("8_8cp3a")
+
+[node name="EquiptIcon" type="TextureRect" parent="BoxBackground/ScrollContainer/FlowContainer/InventoryItemButton3"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -20.0
+offset_top = 2.0
+offset_right = -2.0
+offset_bottom = 23.0
+grow_horizontal = 0
+texture = ExtResource("9_a4qxi")
+
+[node name="CountLabel" type="Label" parent="BoxBackground/ScrollContainer/FlowContainer/InventoryItemButton3"]
+layout_direction = 3
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -58.0
+offset_top = -24.0
+offset_right = -49.0
+offset_bottom = -4.0
+grow_horizontal = 0
+grow_vertical = 0
+theme = ExtResource("3_e4t5p")
+text = "0"
+horizontal_alignment = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="BoxBackground/ScrollContainer/FlowContainer/InventoryItemButton3/CountLabel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -2.0
+offset_right = 3.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_nckkb")
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+
+[node name="Label" type="Label" parent="BoxBackground/ScrollContainer/FlowContainer/InventoryItemButton3/CountLabel"]
+layout_direction = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_e4t5p")
+text = "0"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="InventoryItemButton4" type="TextureButton" parent="BoxBackground/ScrollContainer/FlowContainer" node_paths=PackedStringArray("item_icon_rect", "equipt_icon", "count_label")]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture_normal = ExtResource("5_6r5b7")
+texture_pressed = ExtResource("6_6i0vq")
+script = ExtResource("7_1h41b")
+item_icon_rect = NodePath("ItemIconRect")
+equipt_icon = NodePath("EquiptIcon")
+count_label = NodePath("CountLabel")
+
+[node name="ItemIconRect" type="TextureRect" parent="BoxBackground/ScrollContainer/FlowContainer/InventoryItemButton4"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("8_8cp3a")
+
+[node name="EquiptIcon" type="TextureRect" parent="BoxBackground/ScrollContainer/FlowContainer/InventoryItemButton4"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -20.0
+offset_top = 2.0
+offset_right = -2.0
+offset_bottom = 23.0
+grow_horizontal = 0
+texture = ExtResource("9_a4qxi")
+
+[node name="CountLabel" type="Label" parent="BoxBackground/ScrollContainer/FlowContainer/InventoryItemButton4"]
+layout_direction = 3
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -58.0
+offset_top = -24.0
+offset_right = -49.0
+offset_bottom = -4.0
+grow_horizontal = 0
+grow_vertical = 0
+theme = ExtResource("3_e4t5p")
+text = "0"
+horizontal_alignment = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="BoxBackground/ScrollContainer/FlowContainer/InventoryItemButton4/CountLabel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -2.0
+offset_right = 3.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_nckkb")
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+
+[node name="Label" type="Label" parent="BoxBackground/ScrollContainer/FlowContainer/InventoryItemButton4/CountLabel"]
+layout_direction = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_e4t5p")
+text = "0"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="InventoryItemButton5" type="TextureButton" parent="BoxBackground/ScrollContainer/FlowContainer" node_paths=PackedStringArray("item_icon_rect", "equipt_icon", "count_label")]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture_normal = ExtResource("5_6r5b7")
+texture_pressed = ExtResource("6_6i0vq")
+script = ExtResource("7_1h41b")
+item_icon_rect = NodePath("ItemIconRect")
+equipt_icon = NodePath("EquiptIcon")
+count_label = NodePath("CountLabel")
+
+[node name="ItemIconRect" type="TextureRect" parent="BoxBackground/ScrollContainer/FlowContainer/InventoryItemButton5"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("8_8cp3a")
+
+[node name="EquiptIcon" type="TextureRect" parent="BoxBackground/ScrollContainer/FlowContainer/InventoryItemButton5"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -20.0
+offset_top = 2.0
+offset_right = -2.0
+offset_bottom = 23.0
+grow_horizontal = 0
+texture = ExtResource("9_a4qxi")
+
+[node name="CountLabel" type="Label" parent="BoxBackground/ScrollContainer/FlowContainer/InventoryItemButton5"]
+layout_direction = 3
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -58.0
+offset_top = -24.0
+offset_right = -49.0
+offset_bottom = -4.0
+grow_horizontal = 0
+grow_vertical = 0
+theme = ExtResource("3_e4t5p")
+text = "0"
+horizontal_alignment = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="BoxBackground/ScrollContainer/FlowContainer/InventoryItemButton5/CountLabel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -2.0
+offset_right = 3.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_nckkb")
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+
+[node name="Label" type="Label" parent="BoxBackground/ScrollContainer/FlowContainer/InventoryItemButton5/CountLabel"]
+layout_direction = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_e4t5p")
+text = "0"
+horizontal_alignment = 2
+vertical_alignment = 1

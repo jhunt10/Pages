@@ -1,0 +1,159 @@
+[gd_scene load_steps=8 format=3 uid="uid://cbexkor24ce0h"]
+
+[ext_resource type="Script" path="res://Scenes/Menus/EquipmentMenu/Scripts/equipment_page_control.gd" id="1_6pwc2"]
+[ext_resource type="Texture2D" uid="uid://c4yedxpiinlff" path="res://Scenes/Menus/EquipmentMenu/outline.png" id="2_5i0tg"]
+[ext_resource type="Theme" uid="uid://dwinll8pgdjhc" path="res://Scenes/Themes/standard_theme.tres" id="3_th70d"]
+[ext_resource type="PackedScene" uid="uid://1i88k2ep23hk" path="res://Scenes/Menus/EquipmentMenu/equip_slots_container_new.tscn" id="4_csrfe"]
+[ext_resource type="Script" path="res://Scenes/UiNodes/loaded_option_button.gd" id="6_ihid0"]
+[ext_resource type="Script" path="res://Scenes/Menus/EquipmentMenu/DEV_animation_tester.gd" id="7_bhsdd"]
+[ext_resource type="Script" path="res://Scenes/Menus/EquipmentMenu/stat_display_entry.gd" id="8_4dqui"]
+
+[node name="EquipmentPage" type="Control" node_paths=PackedStringArray("name_label", "level_label", "equipment_slots_container")]
+custom_minimum_size = Vector2(280, 395)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 280.0
+offset_bottom = 395.0
+script = ExtResource("1_6pwc2")
+name_label = NodePath("TitleBox/HBoxContainer/NameLabel")
+level_label = NodePath("TitleBox/HBoxContainer/LevelLabel")
+equipment_slots_container = NodePath("EquipSlotsContainer")
+
+[node name="TitleBox" type="NinePatchRect" parent="."]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 5.0
+offset_right = 268.0
+offset_bottom = 45.0
+texture = ExtResource("2_5i0tg")
+region_rect = Rect2(0, 0, 64, 64)
+patch_margin_left = 18
+patch_margin_top = 18
+patch_margin_right = 18
+patch_margin_bottom = 18
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TitleBox"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 12.0
+offset_right = -12.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="NameLabel" type="Label" parent="TitleBox/HBoxContainer"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("3_th70d")
+theme_override_font_sizes/font_size = 20
+text = "Character Name"
+
+[node name="LevelLabel" type="Label" parent="TitleBox/HBoxContainer"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("3_th70d")
+theme_override_font_sizes/font_size = 20
+text = "99"
+
+[node name="EquipSlotsContainer" parent="." instance=ExtResource("4_csrfe")]
+layout_mode = 2
+offset_left = 12.0
+offset_top = 49.0
+offset_right = 268.0
+offset_bottom = 305.0
+
+[node name="StatsDisplayContainer" type="Container" parent="."]
+custom_minimum_size = Vector2(256, 80)
+layout_mode = 2
+offset_left = 12.0
+offset_top = 309.0
+offset_right = 268.0
+offset_bottom = 389.0
+
+[node name="Background" type="NinePatchRect" parent="StatsDisplayContainer"]
+layout_mode = 2
+texture = ExtResource("2_5i0tg")
+patch_margin_left = 18
+patch_margin_top = 18
+patch_margin_right = 18
+patch_margin_bottom = 18
+
+[node name="InnerContainer" type="VBoxContainer" parent="StatsDisplayContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="StatsDisplayContainer/InnerContainer"]
+visible = false
+layout_mode = 2
+
+[node name="AddItemOptionButton" type="OptionButton" parent="StatsDisplayContainer/InnerContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+selected = 0
+item_count = 1
+popup/item_0/text = "Dev - Add Item"
+script = ExtResource("6_ihid0")
+allways_show_none = true
+no_option_text = "Dev - Add Item"
+
+[node name="Button" type="Button" parent="StatsDisplayContainer/InnerContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+theme = ExtResource("3_th70d")
+text = " X "
+
+[node name="AnimationTester" type="HBoxContainer" parent="StatsDisplayContainer/InnerContainer" node_paths=PackedStringArray("equipment_display", "option_button")]
+visible = false
+layout_mode = 2
+script = ExtResource("7_bhsdd")
+equipment_display = NodePath("../../../EquipSlotsContainer")
+option_button = NodePath("LoadedOptionButton")
+
+[node name="LoadedOptionButton" type="OptionButton" parent="StatsDisplayContainer/InnerContainer/AnimationTester"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("6_ihid0")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="StatsDisplayContainer/InnerContainer"]
+layout_mode = 2
+
+[node name="NameLabel" type="Label" parent="StatsDisplayContainer/InnerContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("3_th70d")
+text = "Character Name"
+
+[node name="LevelLabel" type="Label" parent="StatsDisplayContainer/InnerContainer/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_th70d")
+text = "Lvl: 99"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="StatsDisplayContainer/InnerContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="StatsDisplayContainer/InnerContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="StatDisplayEntry" type="HBoxContainer" parent="StatsDisplayContainer/InnerContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+script = ExtResource("8_4dqui")
+
+[node name="StatNameLabel" type="Label" parent="StatsDisplayContainer/InnerContainer/ScrollContainer/VBoxContainer/StatDisplayEntry"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("3_th70d")
+text = "Prop Name"
+
+[node name="VSeparator" type="VSeparator" parent="StatsDisplayContainer/InnerContainer/ScrollContainer/VBoxContainer/StatDisplayEntry"]
+layout_mode = 2
+
+[node name="StatValueLabel" type="Label" parent="StatsDisplayContainer/InnerContainer/ScrollContainer/VBoxContainer/StatDisplayEntry"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("3_th70d")
+text = "Value"

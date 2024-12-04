@@ -3,11 +3,36 @@ extends Control
 
 var current_scene
 
-static var action_library = ActionLibrary.new()
-static var item_libary = ItemLibrary.new()
-static var actor_libary = ActorLibrary.new()
-static var effect_libary = EffectLibrary.new()
-static var vfx_libray = VfxLibrary.new()
+static var action_library:ActionLibrary:
+	get: 
+		if !action_library:
+			action_library = ActionLibrary.new()
+		return action_library
+
+static var item_libary:ItemLibrary:
+	get: 
+		if !item_libary:
+			item_libary = ItemLibrary.new()
+		return item_libary
+
+static var actor_libary:ActorLibrary:
+	get: 
+		if !actor_libary:
+			actor_libary = ActorLibrary.new()
+		return actor_libary
+
+static var effect_libary:EffectLibrary:
+	get: 
+		if !effect_libary:
+			effect_libary = EffectLibrary.new()
+		return effect_libary
+
+static var vfx_libray:VfxLibrary:
+	get: 
+		if !vfx_libray:
+			vfx_libray = VfxLibrary.new()
+		return vfx_libray
+		
 static var Instance:MainRootNode
 
 @export var center_container:CenterContainer
@@ -37,12 +62,15 @@ func start_combat():
 	current_scene = combat_scene
 	self.add_child(current_scene)
 
-func open_character_sheet(_actor:BaseActor=null, parent_node=null)->EquipmentMenuContainer:
+func open_character_sheet(_actor:BaseActor=null, parent_node=null)->CharacterMenuControl:
 	var actor = _actor
 	if not actor:
 		actor = ActorLibrary.get_or_create_actor("TestActor", "TestActor_ID")
 		#actor = ActorLibrary.create_actor("TestActor", {})
-	var charsheet:EquipmentMenuContainer = load("res://Scenes/Menus/EquipmentMenu/equipment_menu.tscn").instantiate()
+	var charsheet:CharacterMenuControl = load("res://Scenes/Menus/EquipmentMenu/character_menu.tscn").instantiate()
+	var screen_size = self.size
+	#if screen_size.y > charsheet.size.y * 1.5:
+		#charsheet.scale_control.scale = Vector2(1.5, 1.5)
 	if parent_node:
 		parent_node.add_child(charsheet)
 	else:

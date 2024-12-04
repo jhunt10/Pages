@@ -85,7 +85,7 @@ func set_item_for_slot(slot_item_tags:String, index:int, item:BaseItem):
 		_item_tagged_slots[slot_item_tags][index] = null
 	_actor.bag_items_changed.emit()
 
-func get_items_per_item_tags()->Dictionary:
+func get_item_ids_per_item_tags()->Dictionary:
 	return _item_tagged_slots.duplicate()
 
 func _count_item_tag_slots():

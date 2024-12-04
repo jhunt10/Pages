@@ -1,15 +1,19 @@
 class_name AnimationTester
 extends HBoxContainer
 
-@export var actor_node:ActorNode
+@export var equipment_display:EquipmentDisplayContainer
 @export var option_button:LoadedOptionButton
+
+var actor_node:ActorNode:
+	get: return equipment_display.actor_node
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	actor_node.animation.animation_finished.connect(on_animation_end)
-	actor_node.main_hand_node.animation.animation_finished.connect(on_animation_end)
-	option_button.get_options_func = animation_list
-	option_button.item_selected.connect(on_animation_selected)
+	if actor_node:
+		actor_node.animation.animation_finished.connect(on_animation_end)
+		actor_node.main_hand_node.animation.animation_finished.connect(on_animation_end)
+		option_button.get_options_func = animation_list
+		option_button.item_selected.connect(on_animation_selected)
 	pass # Replace with function body.
 
 

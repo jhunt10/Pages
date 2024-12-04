@@ -1,0 +1,223 @@
+[gd_scene load_steps=13 format=3 uid="uid://ciah50qt3htui"]
+
+[ext_resource type="Texture2D" uid="uid://bkps664mkkmfn" path="res://assets/Sprites/UI/DevTools/small_x.png" id="5_ckkxq"]
+[ext_resource type="PackedScene" uid="uid://cbexkor24ce0h" path="res://Scenes/Menus/CharacterMenu/MenuPages/equipment_menu_page.tscn" id="8_ac523"]
+[ext_resource type="PackedScene" uid="uid://c4bhs27nmviba" path="res://Scenes/Menus/CharacterMenu/MenuPages/PageMenuPage/pages_menu_page.tscn" id="10_5sjxb"]
+[ext_resource type="PackedScene" uid="uid://bjatwk3wdws0y" path="res://Scenes/Menus/CharacterMenu/MenuPages/BagMenuPage/bag_menu_page.tscn" id="11_enkwy"]
+[ext_resource type="Script" path="res://Scenes/Menus/EquipmentMenu/Scripts/character_menu_control.gd" id="13_hrexr"]
+[ext_resource type="Texture2D" uid="uid://mpwjrtfjnbth" path="res://Scenes/Menus/EquipmentMenu/BookBackground.png" id="26_cxdm5"]
+[ext_resource type="Texture2D" uid="uid://c46ah48rf6j3w" path="res://Scenes/Menus/EquipmentMenu/TabBackground.png" id="27_vcaj6"]
+[ext_resource type="Texture2D" uid="uid://jwg5aqbw71la" path="res://assets/Sprites/UI/CharacterEdit/MainHandSlot.png" id="28_flcwx"]
+[ext_resource type="Texture2D" uid="uid://wu75tejgoo7m" path="res://assets/Sprites/UI/CharacterEdit/BookSlot.png" id="29_sscw5"]
+[ext_resource type="Texture2D" uid="uid://co33b1qq2uef7" path="res://assets/Sprites/UI/CharacterEdit/BagSlot.png" id="30_66qpn"]
+[ext_resource type="PackedScene" uid="uid://dmlpvjyai521d" path="res://Scenes/Menus/EquipmentMenu/equipt_inventory_container.tscn" id="37_k73hl"]
+
+[sub_resource type="GDScript" id="GDScript_rvisf"]
+script/source = "extends TextureRect
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+"
+
+[node name="CharacterMenuControl" type="Control" node_paths=PackedStringArray("equipment_page", "page_page", "bag_page", "scale_control", "inventory_container", "close_button", "tab_equipment_button", "tab_pages_button", "tab_bag_button")]
+custom_minimum_size = Vector2(600, 420)
+layout_mode = 3
+anchors_preset = 0
+offset_left = 110.0
+offset_top = 7.0
+offset_right = 110.0
+offset_bottom = 7.0
+mouse_filter = 1
+script = ExtResource("13_hrexr")
+equipment_page = NodePath("ScaleControl/EquipmentPage")
+page_page = NodePath("ScaleControl/PagesPage")
+bag_page = NodePath("ScaleControl/BagPage")
+scale_control = NodePath("ScaleControl")
+inventory_container = NodePath("ScaleControl/InventoryContainer")
+close_button = NodePath("ScaleControl/TabsControl/ExitTabButton/Button")
+tab_equipment_button = NodePath("ScaleControl/TabsControl/EquipmentTabButton/Button")
+tab_pages_button = NodePath("ScaleControl/TabsControl/BookTabButton/Button")
+tab_bag_button = NodePath("ScaleControl/TabsControl/BagTabButton2/Button")
+
+[node name="ScaleControl" type="Control" parent="."]
+custom_minimum_size = Vector2(600, 420)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -210.0
+offset_right = 300.0
+offset_bottom = 210.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(300, 210)
+mouse_filter = 1
+
+[node name="Background" type="TextureRect" parent="ScaleControl"]
+layout_mode = 0
+offset_right = 600.0
+offset_bottom = 420.0
+texture = ExtResource("26_cxdm5")
+
+[node name="TabsControl" type="Control" parent="ScaleControl"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="EquipmentTabButton" type="TextureRect" parent="ScaleControl/TabsControl"]
+self_modulate = Color(0.795186, 0.323344, 0.272967, 1)
+layout_mode = 0
+offset_left = -53.0
+offset_top = 33.0
+offset_right = 11.0
+offset_bottom = 97.0
+texture = ExtResource("27_vcaj6")
+script = SubResource("GDScript_rvisf")
+
+[node name="TextureRect" type="TextureRect" parent="ScaleControl/TabsControl/EquipmentTabButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("28_flcwx")
+
+[node name="Button" type="Button" parent="ScaleControl/TabsControl/EquipmentTabButton"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ExitTabButton" type="TextureRect" parent="ScaleControl/TabsControl"]
+self_modulate = Color(0.795186, 0.323344, 0.272967, 1)
+layout_mode = 0
+offset_left = 653.0
+offset_top = 85.0
+offset_right = 717.0
+offset_bottom = 149.0
+rotation = 3.14159
+texture = ExtResource("27_vcaj6")
+script = SubResource("GDScript_rvisf")
+
+[node name="TextureRect" type="TextureRect" parent="ScaleControl/TabsControl/ExitTabButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -15.9999
+offset_right = 3.99996
+offset_bottom = 5.34058e-05
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2, 2)
+texture = ExtResource("5_ckkxq")
+stretch_mode = 3
+
+[node name="Button" type="Button" parent="ScaleControl/TabsControl/ExitTabButton"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BookTabButton" type="TextureRect" parent="ScaleControl/TabsControl"]
+self_modulate = Color(0.466667, 0.360784, 1, 1)
+layout_mode = 0
+offset_left = -53.0
+offset_top = 109.0
+offset_right = 11.0
+offset_bottom = 173.0
+texture = ExtResource("27_vcaj6")
+script = SubResource("GDScript_rvisf")
+
+[node name="TextureRect" type="TextureRect" parent="ScaleControl/TabsControl/BookTabButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("29_sscw5")
+
+[node name="Button" type="Button" parent="ScaleControl/TabsControl/BookTabButton"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BagTabButton2" type="TextureRect" parent="ScaleControl/TabsControl"]
+self_modulate = Color(0.281913, 0.562043, 0.43056, 1)
+layout_mode = 0
+offset_left = -53.0
+offset_top = 185.0
+offset_right = 11.0
+offset_bottom = 249.0
+texture = ExtResource("27_vcaj6")
+script = SubResource("GDScript_rvisf")
+
+[node name="TextureRect" type="TextureRect" parent="ScaleControl/TabsControl/BagTabButton2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("30_66qpn")
+
+[node name="Button" type="Button" parent="ScaleControl/TabsControl/BagTabButton2"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="InventoryContainer" parent="ScaleControl" instance=ExtResource("37_k73hl")]
+layout_mode = 0
+offset_left = 316.0
+offset_top = 14.0
+offset_right = 596.0
+offset_bottom = 409.0
+
+[node name="EquipmentPage" parent="ScaleControl" instance=ExtResource("8_ac523")]
+visible = false
+offset_left = 17.0
+offset_top = 9.0
+offset_right = 297.0
+offset_bottom = 404.0
+
+[node name="PagesPage" parent="ScaleControl" instance=ExtResource("10_5sjxb")]
+visible = false
+offset_left = 17.0
+offset_top = 9.0
+offset_right = 297.0
+offset_bottom = 404.0
+
+[node name="BagPage" parent="ScaleControl" instance=ExtResource("11_enkwy")]
+offset_left = 17.0
+offset_top = 9.0
+offset_right = 297.0
+offset_bottom = 404.0

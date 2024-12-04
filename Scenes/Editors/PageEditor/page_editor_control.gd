@@ -10,7 +10,7 @@ extends RootEditorControler
 @export var target_subedit_container:TargetSubEditorContainer
 
 func _ready() -> void:
-	self.object_file_sufux = "_Pages.json"
+	self.object_file_sufux = "_ActionDefs.json"
 	self.object_key_name = "ActionKey"
 	super()
 

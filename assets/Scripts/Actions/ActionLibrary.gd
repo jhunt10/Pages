@@ -15,9 +15,9 @@ func get_object_name()->String:
 func get_object_key_name()->String:
 	return "ActionKey"
 func get_def_file_sufix()->String:
-	return "_Pages.json"
+	return "_ActionDefs.json"
 func get_data_file_sufix()->String:
-	return "_Pages.json"
+	return "_ActionDefs.json"
 func is_object_static(object_def:Dictionary)->bool:
 	return true
 func get_object_script_path(object_def:Dictionary)->String:
@@ -31,12 +31,15 @@ func _init() -> void:
 	Instance.init_load()
 
 static func list_all_actions()->Array:
+	if !Instance: Instance = ActionLibrary.new()
 	return Instance._static_objects.values()
 
 static func get_action_def(key:String)->Dictionary:
+	if !Instance: Instance = ActionLibrary.new()
 	return Instance.get_object_def(key)
 	
 static func get_action(action_key:String)->BaseAction:
+	if !Instance: Instance = ActionLibrary.new()
 	var action = Instance.get_object(action_key)
 	if !action:
 		printerr("ActionLibrary.get_action: No item found with id '%s'." % [action_key])

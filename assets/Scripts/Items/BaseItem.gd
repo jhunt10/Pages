@@ -1,7 +1,7 @@
 class_name BaseItem
 extends BaseLoadObject
 
-enum ItemTypes {KeyItem, Consumable, Equipment, Material, }
+enum ItemTypes {KeyItem, Page, Consumable, Equipment, Material}
 
 var Id:String: 
 	get: return self._id

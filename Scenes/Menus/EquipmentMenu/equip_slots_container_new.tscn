@@ -1,0 +1,380 @@
+[gd_scene load_steps=19 format=3 uid="uid://1i88k2ep23hk"]
+
+[ext_resource type="Script" path="res://Scenes/Menus/EquipmentMenu/equipment_display_container.gd" id="1_ct401"]
+[ext_resource type="Texture2D" uid="uid://bvdik5isqdgxf" path="res://Scenes/Menus/EquipmentMenu/EquipmentGrid_Background.png" id="2_72n3y"]
+[ext_resource type="Script" path="res://Scenes/Menus/EquipmentMenu/equipment_display_slot_button.gd" id="5_dbhp5"]
+[ext_resource type="Texture2D" uid="uid://567vutk12a12" path="res://Scenes/Menus/EquipmentMenu/SlotHighlight.png" id="5_rr8mb"]
+[ext_resource type="Texture2D" uid="uid://cdxe2v7hg5tuw" path="res://assets/Sprites/UI/CharacterEdit/HeadSlot.png" id="6_bo6a8"]
+[ext_resource type="Texture2D" uid="uid://di2sns34ee4ju" path="res://assets/Sprites/UI/CharacterEdit/BodySlot.png" id="8_y64km"]
+[ext_resource type="Texture2D" uid="uid://djwy03i8oyrfm" path="res://assets/Sprites/UI/CharacterEdit/BootSlot.png" id="9_7jip2"]
+[ext_resource type="Texture2D" uid="uid://jwg5aqbw71la" path="res://assets/Sprites/UI/CharacterEdit/MainHandSlot.png" id="10_f7o3x"]
+[ext_resource type="PackedScene" uid="uid://uo60871y6t54" path="res://Scenes/Combat/MapObjects/actor_node.tscn" id="12_61hpq"]
+[ext_resource type="Texture2D" uid="uid://diy8q5lpvpw1u" path="res://assets/Sprites/UI/SymbolIcons/PhyDamageSymbol.png" id="13_nbe28"]
+[ext_resource type="Theme" uid="uid://dwinll8pgdjhc" path="res://Scenes/Themes/standard_theme.tres" id="14_aw5jh"]
+[ext_resource type="Texture2D" uid="uid://b201kpuib7q5k" path="res://assets/Sprites/UI/SymbolIcons/MagDamageSymbol.png" id="15_cj871"]
+[ext_resource type="Texture2D" uid="uid://dq2cad8orar4p" path="res://assets/Sprites/UI/SymbolIcons/ArmorSymbol.png" id="16_sxj00"]
+[ext_resource type="Texture2D" uid="uid://d17k5iaed0gdg" path="res://assets/Sprites/UI/SymbolIcons/WardSymbol.png" id="17_nfgxb"]
+[ext_resource type="Texture2D" uid="uid://wu75tejgoo7m" path="res://assets/Sprites/UI/CharacterEdit/BookSlot.png" id="22_kg0km"]
+[ext_resource type="Texture2D" uid="uid://co33b1qq2uef7" path="res://assets/Sprites/UI/CharacterEdit/BagSlot.png" id="23_cwvkr"]
+[ext_resource type="Texture2D" uid="uid://puhp53n8k1h8" path="res://assets/Sprites/UI/CharacterEdit/TrinketSlot.png" id="24_llov4"]
+[ext_resource type="Texture2D" uid="uid://dwliocipx40sq" path="res://assets/Sprites/UI/CharacterEdit/OffHandSlot.png" id="25_nixud"]
+
+[node name="EquipmentSlotsControl" type="Control" node_paths=PackedStringArray("actor_node", "armor_lable", "ward_label", "phyatk_label", "magatk_label")]
+custom_minimum_size = Vector2(256, 256)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 256.0
+offset_bottom = 256.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("1_ct401")
+actor_node = NodePath("CenterContainer/Control/Node2D/ActorNode")
+armor_lable = NodePath("MiddlePortraitContainer/StatsContainer/LeftStatContainer/PhyDefense/Label")
+ward_label = NodePath("MiddlePortraitContainer/StatsContainer/RightStatContainer/MagDefense/Label")
+phyatk_label = NodePath("MiddlePortraitContainer/StatsContainer/LeftStatContainer/PhyAttack/Label")
+magatk_label = NodePath("MiddlePortraitContainer/StatsContainer/RightStatContainer/MagAttack/Label")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_72n3y")
+
+[node name="LeftEquipSlots" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.25
+anchor_bottom = 1.0
+grow_vertical = 2
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="HeadSlotButton" type="TextureButton" parent="LeftEquipSlots" node_paths=PackedStringArray("highlight_background", "icon_texture_rect")]
+layout_mode = 2
+size_flags_vertical = 3
+script = ExtResource("5_dbhp5")
+highlight_background = NodePath("TextureRect")
+default_icon_texture = ExtResource("6_bo6a8")
+icon_texture_rect = NodePath("IconTextureRect")
+
+[node name="TextureRect" type="TextureRect" parent="LeftEquipSlots/HeadSlotButton"]
+visible = false
+layout_mode = 0
+offset_right = 64.0
+offset_bottom = 64.0
+texture = ExtResource("5_rr8mb")
+
+[node name="IconTextureRect" type="TextureRect" parent="LeftEquipSlots/HeadSlotButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_bo6a8")
+
+[node name="BodySlotButton" type="TextureButton" parent="LeftEquipSlots" node_paths=PackedStringArray("highlight_background", "icon_texture_rect")]
+layout_mode = 2
+size_flags_vertical = 3
+script = ExtResource("5_dbhp5")
+highlight_background = NodePath("TextureRect")
+default_icon_texture = ExtResource("8_y64km")
+icon_texture_rect = NodePath("IconTextureRect")
+
+[node name="TextureRect" type="TextureRect" parent="LeftEquipSlots/BodySlotButton"]
+visible = false
+layout_mode = 0
+offset_right = 64.0
+offset_bottom = 64.0
+texture = ExtResource("5_rr8mb")
+
+[node name="IconTextureRect" type="TextureRect" parent="LeftEquipSlots/BodySlotButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("8_y64km")
+
+[node name="FeetSlotButton" type="TextureButton" parent="LeftEquipSlots" node_paths=PackedStringArray("highlight_background", "icon_texture_rect")]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_vertical = 3
+script = ExtResource("5_dbhp5")
+highlight_background = NodePath("TextureRect")
+default_icon_texture = ExtResource("9_7jip2")
+icon_texture_rect = NodePath("IconTextureRect")
+
+[node name="TextureRect" type="TextureRect" parent="LeftEquipSlots/FeetSlotButton"]
+visible = false
+layout_mode = 0
+offset_right = 64.0
+offset_bottom = 64.0
+texture = ExtResource("5_rr8mb")
+
+[node name="IconTextureRect" type="TextureRect" parent="LeftEquipSlots/FeetSlotButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("9_7jip2")
+
+[node name="MainHandSlotButton" type="TextureButton" parent="LeftEquipSlots" node_paths=PackedStringArray("highlight_background", "icon_texture_rect")]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_vertical = 3
+script = ExtResource("5_dbhp5")
+highlight_background = NodePath("TextureRect")
+default_icon_texture = ExtResource("10_f7o3x")
+icon_texture_rect = NodePath("IconTextureRect")
+
+[node name="TextureRect" type="TextureRect" parent="LeftEquipSlots/MainHandSlotButton"]
+visible = false
+layout_mode = 0
+offset_right = 64.0
+offset_bottom = 64.0
+texture = ExtResource("5_rr8mb")
+
+[node name="IconTextureRect" type="TextureRect" parent="LeftEquipSlots/MainHandSlotButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_f7o3x")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.25
+anchor_right = 0.75
+anchor_bottom = 0.75
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" type="Control" parent="CenterContainer"]
+layout_mode = 2
+
+[node name="Node2D" type="Node2D" parent="CenterContainer/Control"]
+scale = Vector2(3, 3)
+
+[node name="ActorNode" parent="CenterContainer/Control/Node2D" instance=ExtResource("12_61hpq")]
+position = Vector2(0, 8)
+
+[node name="MiddlePortraitContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.25
+anchor_top = 0.75
+anchor_right = 0.75
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+alignment = 2
+
+[node name="StatsContainer" type="HBoxContainer" parent="MiddlePortraitContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="LeftStatContainer" type="VBoxContainer" parent="MiddlePortraitContainer/StatsContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="PhyAttack" type="HBoxContainer" parent="MiddlePortraitContainer/StatsContainer/LeftStatContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="Icon" type="TextureRect" parent="MiddlePortraitContainer/StatsContainer/LeftStatContainer/PhyAttack"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("13_nbe28")
+
+[node name="Label" type="Label" parent="MiddlePortraitContainer/StatsContainer/LeftStatContainer/PhyAttack"]
+self_modulate = Color(0.498039, 0, 0, 1)
+custom_minimum_size = Vector2(24, 0)
+layout_mode = 2
+theme = ExtResource("14_aw5jh")
+text = "999"
+
+[node name="PhyDefense" type="HBoxContainer" parent="MiddlePortraitContainer/StatsContainer/LeftStatContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="Icon" type="TextureRect" parent="MiddlePortraitContainer/StatsContainer/LeftStatContainer/PhyDefense"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("16_sxj00")
+
+[node name="Label" type="Label" parent="MiddlePortraitContainer/StatsContainer/LeftStatContainer/PhyDefense"]
+self_modulate = Color(0.498039, 0, 0, 1)
+custom_minimum_size = Vector2(24, 0)
+layout_mode = 2
+theme = ExtResource("14_aw5jh")
+text = "999"
+
+[node name="RightStatContainer" type="VBoxContainer" parent="MiddlePortraitContainer/StatsContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="MagAttack" type="HBoxContainer" parent="MiddlePortraitContainer/StatsContainer/RightStatContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="Icon" type="TextureRect" parent="MiddlePortraitContainer/StatsContainer/RightStatContainer/MagAttack"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("15_cj871")
+
+[node name="Label" type="Label" parent="MiddlePortraitContainer/StatsContainer/RightStatContainer/MagAttack"]
+self_modulate = Color(0.498039, 0, 0, 1)
+custom_minimum_size = Vector2(24, 0)
+layout_mode = 2
+theme = ExtResource("14_aw5jh")
+text = "999"
+
+[node name="MagDefense" type="HBoxContainer" parent="MiddlePortraitContainer/StatsContainer/RightStatContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="Icon" type="TextureRect" parent="MiddlePortraitContainer/StatsContainer/RightStatContainer/MagDefense"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("17_nfgxb")
+
+[node name="Label" type="Label" parent="MiddlePortraitContainer/StatsContainer/RightStatContainer/MagDefense"]
+self_modulate = Color(0.498039, 0, 0, 1)
+custom_minimum_size = Vector2(24, 0)
+layout_mode = 2
+theme = ExtResource("14_aw5jh")
+text = "999"
+
+[node name="RightEquipSlots" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(6, 0)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.75
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_constants/separation = 0
+
+[node name="BookSlotButton" type="TextureButton" parent="RightEquipSlots" node_paths=PackedStringArray("highlight_background", "icon_texture_rect")]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_vertical = 3
+script = ExtResource("5_dbhp5")
+highlight_background = NodePath("TextureRect")
+default_icon_texture = ExtResource("22_kg0km")
+icon_texture_rect = NodePath("IconTextureRect")
+
+[node name="TextureRect" type="TextureRect" parent="RightEquipSlots/BookSlotButton"]
+visible = false
+layout_mode = 0
+offset_right = 64.0
+offset_bottom = 64.0
+texture = ExtResource("5_rr8mb")
+
+[node name="IconTextureRect" type="TextureRect" parent="RightEquipSlots/BookSlotButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("22_kg0km")
+
+[node name="BagSlotButton" type="TextureButton" parent="RightEquipSlots" node_paths=PackedStringArray("highlight_background", "icon_texture_rect")]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_vertical = 3
+script = ExtResource("5_dbhp5")
+highlight_background = NodePath("TextureRect")
+default_icon_texture = ExtResource("23_cwvkr")
+icon_texture_rect = NodePath("IconTextureRect")
+
+[node name="TextureRect" type="TextureRect" parent="RightEquipSlots/BagSlotButton"]
+visible = false
+layout_mode = 0
+offset_right = 64.0
+offset_bottom = 64.0
+texture = ExtResource("5_rr8mb")
+
+[node name="IconTextureRect" type="TextureRect" parent="RightEquipSlots/BagSlotButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("23_cwvkr")
+
+[node name="TrinketSlotButton" type="TextureButton" parent="RightEquipSlots" node_paths=PackedStringArray("highlight_background", "icon_texture_rect")]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_vertical = 3
+script = ExtResource("5_dbhp5")
+highlight_background = NodePath("TextureRect")
+default_icon_texture = ExtResource("24_llov4")
+icon_texture_rect = NodePath("IconTextureRect")
+
+[node name="TextureRect" type="TextureRect" parent="RightEquipSlots/TrinketSlotButton"]
+visible = false
+layout_mode = 0
+offset_right = 64.0
+offset_bottom = 64.0
+texture = ExtResource("5_rr8mb")
+
+[node name="IconTextureRect" type="TextureRect" parent="RightEquipSlots/TrinketSlotButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("24_llov4")
+
+[node name="OffHandSlotButton" type="TextureButton" parent="RightEquipSlots" node_paths=PackedStringArray("highlight_background", "icon_texture_rect")]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_vertical = 3
+script = ExtResource("5_dbhp5")
+highlight_background = NodePath("TextureRect")
+default_icon_texture = ExtResource("25_nixud")
+icon_texture_rect = NodePath("IconTextureRect")
+
+[node name="TextureRect" type="TextureRect" parent="RightEquipSlots/OffHandSlotButton"]
+visible = false
+layout_mode = 0
+offset_right = 64.0
+offset_bottom = 64.0
+texture = ExtResource("5_rr8mb")
+
+[node name="IconTextureRect" type="TextureRect" parent="RightEquipSlots/OffHandSlotButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("25_nixud")

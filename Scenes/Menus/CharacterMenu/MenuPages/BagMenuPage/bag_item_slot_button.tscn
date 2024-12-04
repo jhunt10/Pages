@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=3 uid="uid://c20lud2px2apo"]
+
+[ext_resource type="Texture2D" uid="uid://cr8xn35dq755e" path="res://Scenes/Menus/CharacterMenu/MenuPages/BagMenuPage/ItemSlotBackground.png" id="1_3ed7x"]
+[ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/BagMenuPage/bag_item_slot_button.gd" id="2_st005"]
+
+[node name="BagItemSlotButton" type="NinePatchRect"]
+custom_minimum_size = Vector2(64, 64)
+size_flags_horizontal = 3
+texture = ExtResource("1_3ed7x")
+region_rect = Rect2(0, 0, 64, 64)
+patch_margin_left = 18
+patch_margin_top = 18
+patch_margin_right = 18
+patch_margin_bottom = 18
+script = ExtResource("2_st005")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_3ed7x")
+
+[node name="Button" type="Button" parent="."]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

@@ -10,9 +10,9 @@ var small_icon_path:String
 var tags:Array
 
 func _init(load_path:String, data:Dictionary) -> void:
-	display_name = data.get("DisplayName", "No Display Name!")
-	snippet = data.get("SnippetDesc", "No Snippet Desc!")
-	description = data.get("Description", "No Description!")
+	display_name = data.get("DisplayName", "")
+	snippet = data.get("SnippetDesc", "")
+	description = data.get("Description", "")
 	var large_icon_file = data.get("LargeIcon", "")
 	if large_icon_file != "" and load_path != "":
 		self.large_icon_path = load_path.path_join(large_icon_file)

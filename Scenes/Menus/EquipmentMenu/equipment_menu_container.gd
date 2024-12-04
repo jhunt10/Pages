@@ -32,22 +32,23 @@ func _ready() -> void:
 	exit_button.pressed.connect(close_menu)
 	if bag_items_submenu.visible:
 		close_bag_items_submenu()
-	inventory_container.item_button_down.connect(set_dragging_item)
-	if !ActorLibrary.Instance:
-		ActionLibrary.new()
-	var actor = ActorLibrary.get_actor("TestActor_ID")
-	set_actor(actor)
-	#inventory_container.item_button_hover.connect(set_hover_item)
-	#inventory_container.item_button_hover_end.connect(clear_hover_item)
-	inventory_container.item_button_clicked.connect(on_item_clicked)
-	equipment_display_container.equipt_slot_pressed.connect(on_equipt_slot_clicked)
-	edit_items_button.pressed.connect(open_bag_items_submenu)
-	bag_items_submenu.close_button.pressed.connect(close_bag_items_submenu)
-	dev_add_item_button.get_options_func = _dev_add_item_options
-	dev_add_item_button.item_selected.connect(_dev_add_item_selected)
-	equipment_details_container.close_menu.connect(close_equipment_details)
-	stats_display_container.visible = true
-	equipment_details_container.visible = false
+	if inventory_container:
+		inventory_container.item_button_down.connect(set_dragging_item)
+		#if !ActorLibrary.Instance:
+			#ActionLibrary.new()
+		#var actor = ActorLibrary.get_actor("TestActor_ID")
+		#set_actor(actor)
+		#inventory_container.item_button_hover.connect(set_hover_item)
+		#inventory_container.item_button_hover_end.connect(clear_hover_item)
+		inventory_container.item_button_clicked.connect(on_item_clicked)
+		equipment_display_container.equipt_slot_pressed.connect(on_equipt_slot_clicked)
+		edit_items_button.pressed.connect(open_bag_items_submenu)
+		bag_items_submenu.close_button.pressed.connect(close_bag_items_submenu)
+		dev_add_item_button.get_options_func = _dev_add_item_options
+		dev_add_item_button.item_selected.connect(_dev_add_item_selected)
+		equipment_details_container.close_menu.connect(close_equipment_details)
+		stats_display_container.visible = true
+		equipment_details_container.visible = false
 
 func _dev_add_item_options()->Array:
 	return ItemLibrary.list_all_item_keys()

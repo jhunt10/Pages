@@ -27,20 +27,24 @@ func _init() -> void:
 
 # Get a static instance of the action
 static func get_actor_def(key:String)->Dictionary:
+	if !Instance: Instance = ActorLibrary.new()
 	return Instance.get_object_def(key)
 	
 static func get_actor(actor_id:String)->BaseActor:
+	if !Instance: Instance = ActorLibrary.new()
 	var actor = Instance.get_object(actor_id)
 	if !actor:
 		printerr("ActorLibrary.get_actor: No actor found with id '%s'." % [actor_id])
 	return actor
 
 static func get_or_create_actor(key:String, id:String)->BaseActor:
+	if !Instance: Instance = ActorLibrary.new()
 	if  Instance._loaded_objects.keys().has(id):
 		return get_actor(id)
 	return create_actor(key, {}, id)
 
 static func create_actor(key:String, data:Dictionary, premade_id:String = '')->BaseActor:
+	if !Instance: Instance = ActorLibrary.new()
 	if  Instance._loaded_objects.keys().has(premade_id):
 		return get_actor(premade_id)
 	var actor:BaseActor = Instance.create_object(key, premade_id, data)
@@ -64,6 +68,7 @@ static func create_actor(key:String, data:Dictionary, premade_id:String = '')->B
 	return actor
 
 static func save_actors():
+	if !Instance: Instance = ActorLibrary.new()
 	Instance.save_objects_data("res://saves/Actors/_TestActor_ActorSave.json")
 
 

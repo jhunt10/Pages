@@ -1,4 +1,4 @@
-class_name BagItemSlotButton
+class_name BagItemSlotButton_Old
 extends Button
 
 var item_id:String
