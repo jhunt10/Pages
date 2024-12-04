@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=3 uid="uid://dmlpvjyai521d"]
 
 [ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/InventoryPage/inventory_container.gd" id="1_j4lhh"]
-[ext_resource type="Texture2D" uid="uid://c4yedxpiinlff" path="res://Scenes/Menus/EquipmentMenu/outline.png" id="2_bctqj"]
+[ext_resource type="Texture2D" uid="uid://c4yedxpiinlff" path="res://Scenes/Menus/CharacterMenu/MenuPages/outline.png" id="2_bctqj"]
 [ext_resource type="Theme" uid="uid://dwinll8pgdjhc" path="res://Scenes/Themes/standard_theme.tres" id="3_e4t5p"]
 [ext_resource type="PackedScene" uid="uid://bpvy87uagttpr" path="res://Scenes/UiNodes/ScollBar/scroll_bar.tscn" id="5_0hjxr"]
 [ext_resource type="Texture2D" uid="uid://deqwpr7qu8fp2" path="res://assets/Sprites/UI/CharacterEdit/InventorySlotBackground.png" id="5_6r5b7"]
@@ -10,7 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://wvy1i6avftau" path="res://defs/Items/Equipment/TestWeapons/TestSword.png" id="8_8cp3a"]
 [ext_resource type="Texture2D" uid="uid://bkjy2j6ra337v" path="res://assets/Sprites/UI/SymbolIcons/EquiptIcon.png" id="9_a4qxi"]
 [ext_resource type="Texture2D" uid="uid://0wkhsf2kgce1" path="res://assets/Sprites/UI/BackPatches/Patch_12_4_Dark.png" id="10_nckkb"]
-[ext_resource type="Texture2D" uid="uid://3ncohf5a6kf7" path="res://Scenes/Menus/EquipmentMenu/HoleBackground.png" id="13_pu80u"]
+[ext_resource type="Texture2D" uid="uid://3ncohf5a6kf7" path="res://Scenes/Menus/CharacterMenu/HoleBackground.png" id="13_pu80u"]
 
 [node name="InventoryPage" type="Control" node_paths=PackedStringArray("items_container", "premade_item_button")]
 custom_minimum_size = Vector2(280, 395)
