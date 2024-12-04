@@ -1,23 +1,23 @@
 [gd_scene load_steps=19 format=3 uid="uid://1i88k2ep23hk"]
 
-[ext_resource type="Script" path="res://Scenes/Menus/EquipmentMenu/equipment_display_container.gd" id="1_ct401"]
-[ext_resource type="Texture2D" uid="uid://bvdik5isqdgxf" path="res://Scenes/Menus/EquipmentMenu/EquipmentGrid_Background.png" id="2_72n3y"]
-[ext_resource type="Script" path="res://Scenes/Menus/EquipmentMenu/equipment_display_slot_button.gd" id="5_dbhp5"]
-[ext_resource type="Texture2D" uid="uid://567vutk12a12" path="res://Scenes/Menus/EquipmentMenu/SlotHighlight.png" id="5_rr8mb"]
-[ext_resource type="Texture2D" uid="uid://cdxe2v7hg5tuw" path="res://assets/Sprites/UI/CharacterEdit/HeadSlot.png" id="6_bo6a8"]
-[ext_resource type="Texture2D" uid="uid://di2sns34ee4ju" path="res://assets/Sprites/UI/CharacterEdit/BodySlot.png" id="8_y64km"]
-[ext_resource type="Texture2D" uid="uid://djwy03i8oyrfm" path="res://assets/Sprites/UI/CharacterEdit/BootSlot.png" id="9_7jip2"]
-[ext_resource type="Texture2D" uid="uid://jwg5aqbw71la" path="res://assets/Sprites/UI/CharacterEdit/MainHandSlot.png" id="10_f7o3x"]
-[ext_resource type="PackedScene" uid="uid://uo60871y6t54" path="res://Scenes/Combat/MapObjects/actor_node.tscn" id="12_61hpq"]
-[ext_resource type="Texture2D" uid="uid://diy8q5lpvpw1u" path="res://assets/Sprites/UI/SymbolIcons/PhyDamageSymbol.png" id="13_nbe28"]
-[ext_resource type="Theme" uid="uid://dwinll8pgdjhc" path="res://Scenes/Themes/standard_theme.tres" id="14_aw5jh"]
-[ext_resource type="Texture2D" uid="uid://b201kpuib7q5k" path="res://assets/Sprites/UI/SymbolIcons/MagDamageSymbol.png" id="15_cj871"]
-[ext_resource type="Texture2D" uid="uid://dq2cad8orar4p" path="res://assets/Sprites/UI/SymbolIcons/ArmorSymbol.png" id="16_sxj00"]
-[ext_resource type="Texture2D" uid="uid://d17k5iaed0gdg" path="res://assets/Sprites/UI/SymbolIcons/WardSymbol.png" id="17_nfgxb"]
-[ext_resource type="Texture2D" uid="uid://wu75tejgoo7m" path="res://assets/Sprites/UI/CharacterEdit/BookSlot.png" id="22_kg0km"]
-[ext_resource type="Texture2D" uid="uid://co33b1qq2uef7" path="res://assets/Sprites/UI/CharacterEdit/BagSlot.png" id="23_cwvkr"]
-[ext_resource type="Texture2D" uid="uid://puhp53n8k1h8" path="res://assets/Sprites/UI/CharacterEdit/TrinketSlot.png" id="24_llov4"]
-[ext_resource type="Texture2D" uid="uid://dwliocipx40sq" path="res://assets/Sprites/UI/CharacterEdit/OffHandSlot.png" id="25_nixud"]
+[ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/EquipmentMenu/EquipmentSlotsContainer/equipment_display_container.gd" id="1_1ll62"]
+[ext_resource type="Texture2D" uid="uid://bvdik5isqdgxf" path="res://Scenes/Menus/CharacterMenu/MenuPages/EquipmentMenu/EquipmentSlotsContainer/EquipmentGrid_Background.png" id="2_tlto1"]
+[ext_resource type="Script" path="res://Scenes/Menus/EquipmentMenu/equipment_display_slot_button.gd" id="3_1srlt"]
+[ext_resource type="Texture2D" uid="uid://cdxe2v7hg5tuw" path="res://assets/Sprites/UI/CharacterEdit/HeadSlot.png" id="4_gsvfu"]
+[ext_resource type="Texture2D" uid="uid://567vutk12a12" path="res://Scenes/Menus/EquipmentMenu/SlotHighlight.png" id="5_nf14f"]
+[ext_resource type="Texture2D" uid="uid://di2sns34ee4ju" path="res://assets/Sprites/UI/CharacterEdit/BodySlot.png" id="6_4ymfl"]
+[ext_resource type="Texture2D" uid="uid://djwy03i8oyrfm" path="res://assets/Sprites/UI/CharacterEdit/BootSlot.png" id="7_ovqa5"]
+[ext_resource type="Texture2D" uid="uid://jwg5aqbw71la" path="res://assets/Sprites/UI/CharacterEdit/MainHandSlot.png" id="8_iq4ns"]
+[ext_resource type="PackedScene" uid="uid://uo60871y6t54" path="res://Scenes/Combat/MapObjects/actor_node.tscn" id="9_11hbc"]
+[ext_resource type="Texture2D" uid="uid://diy8q5lpvpw1u" path="res://assets/Sprites/UI/SymbolIcons/PhyDamageSymbol.png" id="10_fakc6"]
+[ext_resource type="Theme" uid="uid://dwinll8pgdjhc" path="res://Scenes/Themes/standard_theme.tres" id="11_yoiqy"]
+[ext_resource type="Texture2D" uid="uid://dq2cad8orar4p" path="res://assets/Sprites/UI/SymbolIcons/ArmorSymbol.png" id="12_gi4jt"]
+[ext_resource type="Texture2D" uid="uid://b201kpuib7q5k" path="res://assets/Sprites/UI/SymbolIcons/MagDamageSymbol.png" id="13_qtcvn"]
+[ext_resource type="Texture2D" uid="uid://d17k5iaed0gdg" path="res://assets/Sprites/UI/SymbolIcons/WardSymbol.png" id="14_oxpvh"]
+[ext_resource type="Texture2D" uid="uid://wu75tejgoo7m" path="res://assets/Sprites/UI/CharacterEdit/BookSlot.png" id="15_pfudu"]
+[ext_resource type="Texture2D" uid="uid://co33b1qq2uef7" path="res://assets/Sprites/UI/CharacterEdit/BagSlot.png" id="16_f6co0"]
+[ext_resource type="Texture2D" uid="uid://puhp53n8k1h8" path="res://assets/Sprites/UI/CharacterEdit/TrinketSlot.png" id="17_oq3ld"]
+[ext_resource type="Texture2D" uid="uid://dwliocipx40sq" path="res://assets/Sprites/UI/CharacterEdit/OffHandSlot.png" id="18_rpkhf"]
 
 [node name="EquipmentSlotsControl" type="Control" node_paths=PackedStringArray("actor_node", "armor_lable", "ward_label", "phyatk_label", "magatk_label")]
 custom_minimum_size = Vector2(256, 256)
@@ -27,7 +27,7 @@ offset_right = 256.0
 offset_bottom = 256.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
-script = ExtResource("1_ct401")
+script = ExtResource("1_1ll62")
 actor_node = NodePath("CenterContainer/Control/Node2D/ActorNode")
 armor_lable = NodePath("MiddlePortraitContainer/StatsContainer/LeftStatContainer/PhyDefense/Label")
 ward_label = NodePath("MiddlePortraitContainer/StatsContainer/RightStatContainer/MagDefense/Label")
@@ -41,7 +41,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_72n3y")
+texture = ExtResource("2_tlto1")
 
 [node name="LeftEquipSlots" type="VBoxContainer" parent="."]
 custom_minimum_size = Vector2(64, 0)
@@ -56,9 +56,9 @@ alignment = 1
 [node name="HeadSlotButton" type="TextureButton" parent="LeftEquipSlots" node_paths=PackedStringArray("highlight_background", "icon_texture_rect")]
 layout_mode = 2
 size_flags_vertical = 3
-script = ExtResource("5_dbhp5")
+script = ExtResource("3_1srlt")
 highlight_background = NodePath("TextureRect")
-default_icon_texture = ExtResource("6_bo6a8")
+default_icon_texture = ExtResource("4_gsvfu")
 icon_texture_rect = NodePath("IconTextureRect")
 
 [node name="TextureRect" type="TextureRect" parent="LeftEquipSlots/HeadSlotButton"]
@@ -66,7 +66,7 @@ visible = false
 layout_mode = 0
 offset_right = 64.0
 offset_bottom = 64.0
-texture = ExtResource("5_rr8mb")
+texture = ExtResource("5_nf14f")
 
 [node name="IconTextureRect" type="TextureRect" parent="LeftEquipSlots/HeadSlotButton"]
 layout_mode = 1
@@ -75,14 +75,14 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("6_bo6a8")
+texture = ExtResource("4_gsvfu")
 
 [node name="BodySlotButton" type="TextureButton" parent="LeftEquipSlots" node_paths=PackedStringArray("highlight_background", "icon_texture_rect")]
 layout_mode = 2
 size_flags_vertical = 3
-script = ExtResource("5_dbhp5")
+script = ExtResource("3_1srlt")
 highlight_background = NodePath("TextureRect")
-default_icon_texture = ExtResource("8_y64km")
+default_icon_texture = ExtResource("6_4ymfl")
 icon_texture_rect = NodePath("IconTextureRect")
 
 [node name="TextureRect" type="TextureRect" parent="LeftEquipSlots/BodySlotButton"]
@@ -90,7 +90,7 @@ visible = false
 layout_mode = 0
 offset_right = 64.0
 offset_bottom = 64.0
-texture = ExtResource("5_rr8mb")
+texture = ExtResource("5_nf14f")
 
 [node name="IconTextureRect" type="TextureRect" parent="LeftEquipSlots/BodySlotButton"]
 layout_mode = 1
@@ -99,15 +99,15 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("8_y64km")
+texture = ExtResource("6_4ymfl")
 
 [node name="FeetSlotButton" type="TextureButton" parent="LeftEquipSlots" node_paths=PackedStringArray("highlight_background", "icon_texture_rect")]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 size_flags_vertical = 3
-script = ExtResource("5_dbhp5")
+script = ExtResource("3_1srlt")
 highlight_background = NodePath("TextureRect")
-default_icon_texture = ExtResource("9_7jip2")
+default_icon_texture = ExtResource("7_ovqa5")
 icon_texture_rect = NodePath("IconTextureRect")
 
 [node name="TextureRect" type="TextureRect" parent="LeftEquipSlots/FeetSlotButton"]
@@ -115,7 +115,7 @@ visible = false
 layout_mode = 0
 offset_right = 64.0
 offset_bottom = 64.0
-texture = ExtResource("5_rr8mb")
+texture = ExtResource("5_nf14f")
 
 [node name="IconTextureRect" type="TextureRect" parent="LeftEquipSlots/FeetSlotButton"]
 layout_mode = 1
@@ -124,15 +124,15 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("9_7jip2")
+texture = ExtResource("7_ovqa5")
 
 [node name="MainHandSlotButton" type="TextureButton" parent="LeftEquipSlots" node_paths=PackedStringArray("highlight_background", "icon_texture_rect")]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 size_flags_vertical = 3
-script = ExtResource("5_dbhp5")
+script = ExtResource("3_1srlt")
 highlight_background = NodePath("TextureRect")
-default_icon_texture = ExtResource("10_f7o3x")
+default_icon_texture = ExtResource("8_iq4ns")
 icon_texture_rect = NodePath("IconTextureRect")
 
 [node name="TextureRect" type="TextureRect" parent="LeftEquipSlots/MainHandSlotButton"]
@@ -140,7 +140,7 @@ visible = false
 layout_mode = 0
 offset_right = 64.0
 offset_bottom = 64.0
-texture = ExtResource("5_rr8mb")
+texture = ExtResource("5_nf14f")
 
 [node name="IconTextureRect" type="TextureRect" parent="LeftEquipSlots/MainHandSlotButton"]
 layout_mode = 1
@@ -149,7 +149,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("10_f7o3x")
+texture = ExtResource("8_iq4ns")
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 layout_mode = 1
@@ -166,7 +166,7 @@ layout_mode = 2
 [node name="Node2D" type="Node2D" parent="CenterContainer/Control"]
 scale = Vector2(3, 3)
 
-[node name="ActorNode" parent="CenterContainer/Control/Node2D" instance=ExtResource("12_61hpq")]
+[node name="ActorNode" parent="CenterContainer/Control/Node2D" instance=ExtResource("9_11hbc")]
 position = Vector2(0, 8)
 
 [node name="MiddlePortraitContainer" type="VBoxContainer" parent="."]
@@ -200,13 +200,13 @@ alignment = 1
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-texture = ExtResource("13_nbe28")
+texture = ExtResource("10_fakc6")
 
 [node name="Label" type="Label" parent="MiddlePortraitContainer/StatsContainer/LeftStatContainer/PhyAttack"]
 self_modulate = Color(0.498039, 0, 0, 1)
 custom_minimum_size = Vector2(24, 0)
 layout_mode = 2
-theme = ExtResource("14_aw5jh")
+theme = ExtResource("11_yoiqy")
 text = "999"
 
 [node name="PhyDefense" type="HBoxContainer" parent="MiddlePortraitContainer/StatsContainer/LeftStatContainer"]
@@ -218,13 +218,13 @@ alignment = 1
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-texture = ExtResource("16_sxj00")
+texture = ExtResource("12_gi4jt")
 
 [node name="Label" type="Label" parent="MiddlePortraitContainer/StatsContainer/LeftStatContainer/PhyDefense"]
 self_modulate = Color(0.498039, 0, 0, 1)
 custom_minimum_size = Vector2(24, 0)
 layout_mode = 2
-theme = ExtResource("14_aw5jh")
+theme = ExtResource("11_yoiqy")
 text = "999"
 
 [node name="RightStatContainer" type="VBoxContainer" parent="MiddlePortraitContainer/StatsContainer"]
@@ -241,13 +241,13 @@ alignment = 1
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-texture = ExtResource("15_cj871")
+texture = ExtResource("13_qtcvn")
 
 [node name="Label" type="Label" parent="MiddlePortraitContainer/StatsContainer/RightStatContainer/MagAttack"]
 self_modulate = Color(0.498039, 0, 0, 1)
 custom_minimum_size = Vector2(24, 0)
 layout_mode = 2
-theme = ExtResource("14_aw5jh")
+theme = ExtResource("11_yoiqy")
 text = "999"
 
 [node name="MagDefense" type="HBoxContainer" parent="MiddlePortraitContainer/StatsContainer/RightStatContainer"]
@@ -259,13 +259,13 @@ alignment = 1
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-texture = ExtResource("17_nfgxb")
+texture = ExtResource("14_oxpvh")
 
 [node name="Label" type="Label" parent="MiddlePortraitContainer/StatsContainer/RightStatContainer/MagDefense"]
 self_modulate = Color(0.498039, 0, 0, 1)
 custom_minimum_size = Vector2(24, 0)
 layout_mode = 2
-theme = ExtResource("14_aw5jh")
+theme = ExtResource("11_yoiqy")
 text = "999"
 
 [node name="RightEquipSlots" type="VBoxContainer" parent="."]
@@ -283,9 +283,9 @@ theme_override_constants/separation = 0
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 size_flags_vertical = 3
-script = ExtResource("5_dbhp5")
+script = ExtResource("3_1srlt")
 highlight_background = NodePath("TextureRect")
-default_icon_texture = ExtResource("22_kg0km")
+default_icon_texture = ExtResource("15_pfudu")
 icon_texture_rect = NodePath("IconTextureRect")
 
 [node name="TextureRect" type="TextureRect" parent="RightEquipSlots/BookSlotButton"]
@@ -293,7 +293,7 @@ visible = false
 layout_mode = 0
 offset_right = 64.0
 offset_bottom = 64.0
-texture = ExtResource("5_rr8mb")
+texture = ExtResource("5_nf14f")
 
 [node name="IconTextureRect" type="TextureRect" parent="RightEquipSlots/BookSlotButton"]
 layout_mode = 1
@@ -302,15 +302,15 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("22_kg0km")
+texture = ExtResource("15_pfudu")
 
 [node name="BagSlotButton" type="TextureButton" parent="RightEquipSlots" node_paths=PackedStringArray("highlight_background", "icon_texture_rect")]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 size_flags_vertical = 3
-script = ExtResource("5_dbhp5")
+script = ExtResource("3_1srlt")
 highlight_background = NodePath("TextureRect")
-default_icon_texture = ExtResource("23_cwvkr")
+default_icon_texture = ExtResource("16_f6co0")
 icon_texture_rect = NodePath("IconTextureRect")
 
 [node name="TextureRect" type="TextureRect" parent="RightEquipSlots/BagSlotButton"]
@@ -318,7 +318,7 @@ visible = false
 layout_mode = 0
 offset_right = 64.0
 offset_bottom = 64.0
-texture = ExtResource("5_rr8mb")
+texture = ExtResource("5_nf14f")
 
 [node name="IconTextureRect" type="TextureRect" parent="RightEquipSlots/BagSlotButton"]
 layout_mode = 1
@@ -327,15 +327,15 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("23_cwvkr")
+texture = ExtResource("16_f6co0")
 
 [node name="TrinketSlotButton" type="TextureButton" parent="RightEquipSlots" node_paths=PackedStringArray("highlight_background", "icon_texture_rect")]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 size_flags_vertical = 3
-script = ExtResource("5_dbhp5")
+script = ExtResource("3_1srlt")
 highlight_background = NodePath("TextureRect")
-default_icon_texture = ExtResource("24_llov4")
+default_icon_texture = ExtResource("17_oq3ld")
 icon_texture_rect = NodePath("IconTextureRect")
 
 [node name="TextureRect" type="TextureRect" parent="RightEquipSlots/TrinketSlotButton"]
@@ -343,7 +343,7 @@ visible = false
 layout_mode = 0
 offset_right = 64.0
 offset_bottom = 64.0
-texture = ExtResource("5_rr8mb")
+texture = ExtResource("5_nf14f")
 
 [node name="IconTextureRect" type="TextureRect" parent="RightEquipSlots/TrinketSlotButton"]
 layout_mode = 1
@@ -352,15 +352,15 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("24_llov4")
+texture = ExtResource("17_oq3ld")
 
 [node name="OffHandSlotButton" type="TextureButton" parent="RightEquipSlots" node_paths=PackedStringArray("highlight_background", "icon_texture_rect")]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 size_flags_vertical = 3
-script = ExtResource("5_dbhp5")
+script = ExtResource("3_1srlt")
 highlight_background = NodePath("TextureRect")
-default_icon_texture = ExtResource("25_nixud")
+default_icon_texture = ExtResource("18_rpkhf")
 icon_texture_rect = NodePath("IconTextureRect")
 
 [node name="TextureRect" type="TextureRect" parent="RightEquipSlots/OffHandSlotButton"]
@@ -368,7 +368,7 @@ visible = false
 layout_mode = 0
 offset_right = 64.0
 offset_bottom = 64.0
-texture = ExtResource("5_rr8mb")
+texture = ExtResource("5_nf14f")
 
 [node name="IconTextureRect" type="TextureRect" parent="RightEquipSlots/OffHandSlotButton"]
 layout_mode = 1
@@ -377,4 +377,4 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("25_nixud")
+texture = ExtResource("18_rpkhf")

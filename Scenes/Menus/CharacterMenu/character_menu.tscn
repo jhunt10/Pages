@@ -1,16 +1,16 @@
 [gd_scene load_steps=13 format=3 uid="uid://ciah50qt3htui"]
 
-[ext_resource type="Texture2D" uid="uid://bkps664mkkmfn" path="res://assets/Sprites/UI/DevTools/small_x.png" id="5_ckkxq"]
-[ext_resource type="PackedScene" uid="uid://cbexkor24ce0h" path="res://Scenes/Menus/CharacterMenu/MenuPages/equipment_menu_page.tscn" id="8_ac523"]
-[ext_resource type="PackedScene" uid="uid://c4bhs27nmviba" path="res://Scenes/Menus/CharacterMenu/MenuPages/PageMenuPage/pages_menu_page.tscn" id="10_5sjxb"]
-[ext_resource type="PackedScene" uid="uid://bjatwk3wdws0y" path="res://Scenes/Menus/CharacterMenu/MenuPages/BagMenuPage/bag_menu_page.tscn" id="11_enkwy"]
-[ext_resource type="Script" path="res://Scenes/Menus/EquipmentMenu/Scripts/character_menu_control.gd" id="13_hrexr"]
-[ext_resource type="Texture2D" uid="uid://mpwjrtfjnbth" path="res://Scenes/Menus/EquipmentMenu/BookBackground.png" id="26_cxdm5"]
-[ext_resource type="Texture2D" uid="uid://c46ah48rf6j3w" path="res://Scenes/Menus/EquipmentMenu/TabBackground.png" id="27_vcaj6"]
-[ext_resource type="Texture2D" uid="uid://jwg5aqbw71la" path="res://assets/Sprites/UI/CharacterEdit/MainHandSlot.png" id="28_flcwx"]
-[ext_resource type="Texture2D" uid="uid://wu75tejgoo7m" path="res://assets/Sprites/UI/CharacterEdit/BookSlot.png" id="29_sscw5"]
-[ext_resource type="Texture2D" uid="uid://co33b1qq2uef7" path="res://assets/Sprites/UI/CharacterEdit/BagSlot.png" id="30_66qpn"]
-[ext_resource type="PackedScene" uid="uid://dmlpvjyai521d" path="res://Scenes/Menus/EquipmentMenu/equipt_inventory_container.tscn" id="37_k73hl"]
+[ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/character_menu_control.gd" id="1_b43ae"]
+[ext_resource type="Texture2D" uid="uid://mpwjrtfjnbth" path="res://Scenes/Menus/CharacterMenu/BookBackground.png" id="2_ny2th"]
+[ext_resource type="Texture2D" uid="uid://c46ah48rf6j3w" path="res://Scenes/Menus/EquipmentMenu/TabBackground.png" id="3_ktt5q"]
+[ext_resource type="Texture2D" uid="uid://jwg5aqbw71la" path="res://assets/Sprites/UI/CharacterEdit/MainHandSlot.png" id="4_xk513"]
+[ext_resource type="Texture2D" uid="uid://bkps664mkkmfn" path="res://assets/Sprites/UI/DevTools/small_x.png" id="5_o0bpc"]
+[ext_resource type="Texture2D" uid="uid://wu75tejgoo7m" path="res://assets/Sprites/UI/CharacterEdit/BookSlot.png" id="6_qgkgg"]
+[ext_resource type="Texture2D" uid="uid://co33b1qq2uef7" path="res://assets/Sprites/UI/CharacterEdit/BagSlot.png" id="7_t340l"]
+[ext_resource type="PackedScene" uid="uid://dmlpvjyai521d" path="res://Scenes/Menus/CharacterMenu/MenuPages/InventoryPage/equipt_inventory_container.tscn" id="8_6gqbj"]
+[ext_resource type="PackedScene" uid="uid://cbexkor24ce0h" path="res://Scenes/Menus/CharacterMenu/MenuPages/EquipmentMenu/equipment_menu_page.tscn" id="9_bofun"]
+[ext_resource type="PackedScene" uid="uid://c4bhs27nmviba" path="res://Scenes/Menus/CharacterMenu/MenuPages/PageMenuPage/pages_menu_page.tscn" id="10_porhc"]
+[ext_resource type="PackedScene" uid="uid://bjatwk3wdws0y" path="res://Scenes/Menus/CharacterMenu/MenuPages/BagMenuPage/bag_menu_page.tscn" id="11_j5k8v"]
 
 [sub_resource type="GDScript" id="GDScript_rvisf"]
 script/source = "extends TextureRect
@@ -35,7 +35,7 @@ offset_top = 7.0
 offset_right = 110.0
 offset_bottom = 7.0
 mouse_filter = 1
-script = ExtResource("13_hrexr")
+script = ExtResource("1_b43ae")
 equipment_page = NodePath("ScaleControl/EquipmentPage")
 page_page = NodePath("ScaleControl/PagesPage")
 bag_page = NodePath("ScaleControl/BagPage")
@@ -67,7 +67,7 @@ mouse_filter = 1
 layout_mode = 0
 offset_right = 600.0
 offset_bottom = 420.0
-texture = ExtResource("26_cxdm5")
+texture = ExtResource("2_ny2th")
 
 [node name="TabsControl" type="Control" parent="ScaleControl"]
 anchors_preset = 0
@@ -81,7 +81,7 @@ offset_left = -53.0
 offset_top = 33.0
 offset_right = 11.0
 offset_bottom = 97.0
-texture = ExtResource("27_vcaj6")
+texture = ExtResource("3_ktt5q")
 script = SubResource("GDScript_rvisf")
 
 [node name="TextureRect" type="TextureRect" parent="ScaleControl/TabsControl/EquipmentTabButton"]
@@ -91,7 +91,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("28_flcwx")
+texture = ExtResource("4_xk513")
 
 [node name="Button" type="Button" parent="ScaleControl/TabsControl/EquipmentTabButton"]
 self_modulate = Color(1, 1, 1, 0)
@@ -110,7 +110,7 @@ offset_top = 85.0
 offset_right = 717.0
 offset_bottom = 149.0
 rotation = 3.14159
-texture = ExtResource("27_vcaj6")
+texture = ExtResource("3_ktt5q")
 script = SubResource("GDScript_rvisf")
 
 [node name="TextureRect" type="TextureRect" parent="ScaleControl/TabsControl/ExitTabButton"]
@@ -127,7 +127,7 @@ offset_bottom = 5.34058e-05
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(2, 2)
-texture = ExtResource("5_ckkxq")
+texture = ExtResource("5_o0bpc")
 stretch_mode = 3
 
 [node name="Button" type="Button" parent="ScaleControl/TabsControl/ExitTabButton"]
@@ -146,7 +146,7 @@ offset_left = -53.0
 offset_top = 109.0
 offset_right = 11.0
 offset_bottom = 173.0
-texture = ExtResource("27_vcaj6")
+texture = ExtResource("3_ktt5q")
 script = SubResource("GDScript_rvisf")
 
 [node name="TextureRect" type="TextureRect" parent="ScaleControl/TabsControl/BookTabButton"]
@@ -156,7 +156,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("29_sscw5")
+texture = ExtResource("6_qgkgg")
 
 [node name="Button" type="Button" parent="ScaleControl/TabsControl/BookTabButton"]
 self_modulate = Color(1, 1, 1, 0)
@@ -174,7 +174,7 @@ offset_left = -53.0
 offset_top = 185.0
 offset_right = 11.0
 offset_bottom = 249.0
-texture = ExtResource("27_vcaj6")
+texture = ExtResource("3_ktt5q")
 script = SubResource("GDScript_rvisf")
 
 [node name="TextureRect" type="TextureRect" parent="ScaleControl/TabsControl/BagTabButton2"]
@@ -184,7 +184,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("30_66qpn")
+texture = ExtResource("7_t340l")
 
 [node name="Button" type="Button" parent="ScaleControl/TabsControl/BagTabButton2"]
 self_modulate = Color(1, 1, 1, 0)
@@ -195,28 +195,28 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="InventoryContainer" parent="ScaleControl" instance=ExtResource("37_k73hl")]
+[node name="InventoryContainer" parent="ScaleControl" instance=ExtResource("8_6gqbj")]
 layout_mode = 0
 offset_left = 316.0
 offset_top = 14.0
 offset_right = 596.0
 offset_bottom = 409.0
 
-[node name="EquipmentPage" parent="ScaleControl" instance=ExtResource("8_ac523")]
+[node name="EquipmentPage" parent="ScaleControl" instance=ExtResource("9_bofun")]
+offset_left = 17.0
+offset_top = 9.0
+offset_right = 297.0
+offset_bottom = 404.0
+
+[node name="PagesPage" parent="ScaleControl" instance=ExtResource("10_porhc")]
 visible = false
 offset_left = 17.0
 offset_top = 9.0
 offset_right = 297.0
 offset_bottom = 404.0
 
-[node name="PagesPage" parent="ScaleControl" instance=ExtResource("10_5sjxb")]
+[node name="BagPage" parent="ScaleControl" instance=ExtResource("11_j5k8v")]
 visible = false
-offset_left = 17.0
-offset_top = 9.0
-offset_right = 297.0
-offset_bottom = 404.0
-
-[node name="BagPage" parent="ScaleControl" instance=ExtResource("11_enkwy")]
 offset_left = 17.0
 offset_top = 9.0
 offset_right = 297.0
