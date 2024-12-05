@@ -2,14 +2,23 @@
 class_name InventoryContainer
 extends Control
 
-signal item_button_down(item:BaseItem, button:InventoryItemButton)
-signal item_button_hover(item:BaseItem)
-signal item_button_hover_end
-signal item_button_clicked(item:BaseItem)
+var event_context = "Inventory"
+signal item_button_down(context, item_key, index)
+signal item_button_up(context, item_key, index)
+signal mouse_enter_item(context, item_key, index)
+signal mouse_exit_item(context, item_key, index)
+
+#signal item_button_down(item:BaseItem, button:InventoryItemButton)
+#signal item_button_hover(item:BaseItem)
+#signal item_button_hover_end
+#signal item_button_clicked(item:BaseItem)
 
 #@export var tab_bar:TabBar
+@export var scroll_container:ScrollContainer
 @export var items_container:FlowContainer
 @export var premade_item_button:InventoryItemButton
+@export var scroll_bar:CustScrollBar
+@export var inventory_box_highlight:NinePatchRect
 #@export var filter_option_button:LoadedOptionButton
 
 var _mouse_in_button:InventoryItemButton
@@ -19,11 +28,7 @@ var _hover_timer:float
 var _click_delay:float = 0.4
 var _click_timer:float
 
-var greater_filters:Dictionary = {
-	'All': ['Equipment', 'Armor', 'Weapon', 'Consumable'],
-	'Equipment': ['Head', 'Body', 'Feet', 'Book', 'Bag', 'Trinket', 'Offhand', 'Weapon'],
-	'Consumable': ['Potion', 'Bomb'],
-}
+var _forced_filters:Array=[]
 
 func _ready() -> void:
 	#super()
@@ -32,25 +37,14 @@ func _ready() -> void:
 		PlayerInventory.Instance.inventory_changed.connect(on_player_inventory_changed)
 	if premade_item_button:
 		premade_item_button.visible = false
-		#tab_bar.tab_changed.connect(_on_tab_bar_select)
-		#filter_option_button.get_options_func = get_greater_filter_options
-		#filter_option_button.item_selected.connect(on_greater_filter_selected)
 		if !ItemLibrary.Instance:
 			ItemLibrary.new()
 		build_item_list()
-		#filter_option_button.load_options()
-		#filter_option_button.select(0)
-		on_greater_filter_selected(0)
+	inventory_box_highlight.hide()
+	scroll_container.mouse_entered.connect(on_mouse_enter_inventory_box)
+	scroll_container.mouse_exited.connect(on_mouse_exit_inventory_box)
 
 func _process(delta: float) -> void:
-	#super(delta)
-	if Engine.is_editor_hint(): return
-	#if _mouse_in_button and _hover_timer > 0:
-		#_hover_timer -= delta
-		#if _hover_timer < 0:
-			#var item = ItemLibrary.get_item(_mouse_in_button._item_id)
-			#if item:
-				#item_button_hover.emit(item)
 	if _click_timer > 0:
 		_click_timer -= delta
 
@@ -83,72 +77,52 @@ func on_player_inventory_changed():
 	#filter_items_with_tag(tab_filter)
 
 func _on_item_button_down(button:InventoryItemButton):
-	var item = button.get_item()
-	item_button_down.emit(item, button)
-	_click_timer = _click_delay
+	var offset = button.get_local_mouse_position()
+	item_button_down.emit(event_context, button._item_id, {"Offset":offset})
+	
 func _on_item_button_up(button:InventoryItemButton):
-	if _click_timer > 0:
-		var item = button.get_item()
-		item_button_clicked.emit(item)
-	_click_timer = 0
+	var item = button.get_item()
+	var offset = button.get_local_mouse_position()
+	item_button_up.emit(event_context, button._item_id, {"Offset":offset})
 	
 
 func _mouse_enter_button(button:InventoryItemButton):
-	_mouse_in_button = button
-	_hover_timer = _hover_delay
+	mouse_enter_item.emit(event_context, button._item_id, {})
 func _mouse_exit_button(button:InventoryItemButton):
-	_mouse_in_button = null
-	_hover_timer = -1
-	item_button_hover_end.emit()
+	mouse_exit_item.emit(event_context, button._item_id, {})
 
-func _on_tab_bar_select(index:int):
-	#var tab_name = tab_bar.get_tab_title(index)
-	#if tab_name == "All":
-		#filter_items_with_tag('')
-	#else:
-		#filter_items_with_tag(tab_name)
-	pass
+func on_mouse_enter_inventory_box():
+	inventory_box_highlight.show()
+	mouse_enter_item.emit(event_context, null, {"InventoryBox":true})
 
-func filter_items_with_tag(tag:String):
-	#var greater_filter = filter_option_button.get_current_option_text()
+func on_mouse_exit_inventory_box():
+	inventory_box_highlight.hide()
+	mouse_exit_item.emit(event_context, null, {"InventoryBox":true})
+
+func clear_forced_filters(refilter:bool=true):
+	_forced_filters.clear()
+	if refilter:
+		_refilter()
+
+func add_forced_filter(tag, refilter:bool=true):
+	if !_forced_filters.has(tag):
+		_forced_filters.append(tag)
+		if refilter:
+			_refilter()
+
+func _refilter():
 	for button:InventoryItemButton in _item_buttons.values():
 		var item = button.get_item()
 		var tags = item.get_item_tags()
 		#if greater_filter != 'All' and not tags.has(greater_filter):
 			#button.visible = false
 			#continue
-			
-		if tag == '' or tag == 'All':
-			button.visible = true
-		elif tags.has(tag):
-			button.visible = true
-		else:
-			button.visible = false
-
-func set_greater_filter(key:String):
-	#filter_option_button.load_options(key)
-	#var filter_option = filter_option_button.get_current_option_text()
-	#if filter_option != key:
-		#return
-	#var tabs_list = []#greater_filters[filter_option]
-	#tab_bar.clear_tabs()
-	#tab_bar.add_tab('All')
-	#for t in tabs_list:
-		#tab_bar.add_tab(t)
-	#tab_bar.current_tab = 0
-	#filter_items_with_tag('')
-	return ''
-
-func get_greater_filter_options()->Array:
-	return greater_filters.keys()
-
-func on_greater_filter_selected(index:int):
-	#var filter_option = filter_option_button.get_item_text(index)
-	var tabs_list = [] #greater_filters[filter_option]
-	#tab_bar.clear_tabs()
-	#tab_bar.add_tab('All')
-	#for t in tabs_list:
-		#tab_bar.add_tab(t)
-	#tab_bar.current_tab = 0
-	filter_items_with_tag('')
-	
+		var show = true
+		for f_filter in _forced_filters:
+			if not tags.has(f_filter):
+				show = false
+				break
+		
+		button.visible = show
+	await get_tree().process_frame
+	scroll_bar.calc_bar_size()

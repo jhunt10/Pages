@@ -1,12 +1,29 @@
-[gd_scene load_steps=2 format=3 uid="uid://b6a64dt8gveex"]
+[gd_scene load_steps=3 format=3 uid="uid://b6a64dt8gveex"]
 
+[ext_resource type="Texture2D" uid="uid://567vutk12a12" path="res://Scenes/Menus/CharacterMenu/MenuPages/SlotHighlight.png" id="2_d3xtx"]
 [ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/PageMenuPage/page_slot_button.gd" id="2_mh0jw"]
 
-[node name="PageSlotButton" type="TextureRect" node_paths=PackedStringArray("icon", "button")]
+[node name="PageSlotButotn" type="Control" node_paths=PackedStringArray("highlight", "icon", "button")]
 custom_minimum_size = Vector2(64, 64)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
 script = ExtResource("2_mh0jw")
+highlight = NodePath("Highlight")
 icon = NodePath("Icon")
 button = NodePath("Button")
+
+[node name="Highlight" type="TextureRect" parent="."]
+visible = false
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_d3xtx")
 
 [node name="Icon" type="TextureRect" parent="."]
 layout_mode = 1

@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Scenes/UiNodes/MiniRangeDisplay/mini_range_display.gd" id="1_q7yfg"]
 [ext_resource type="Texture2D" uid="uid://ynbkbpxcep0o" path="res://Scenes/UiNodes/MiniRangeDisplay/MiniRangeBackground.png" id="2_k4qsm"]
 
-[sub_resource type="Image" id="Image_g83i7"]
+[sub_resource type="Image" id="Image_cb5c7"]
 data = {
 "data": PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 0, 0, 255, 255, 0, 0, 255, 255, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 255, 0, 0, 255, 0, 0, 0, 255, 255, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
 "format": "RGBA8",
@@ -13,7 +13,7 @@ data = {
 }
 
 [sub_resource type="ImageTexture" id="ImageTexture_qn4ff"]
-image = SubResource("Image_g83i7")
+image = SubResource("Image_cb5c7")
 
 [node name="MiniRangeDisplay" type="Control" node_paths=PackedStringArray("texture_rect")]
 custom_minimum_size = Vector2(44, 44)
@@ -21,8 +21,8 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = -1130.0
-offset_bottom = -626.0
+offset_right = -1108.0
+offset_bottom = -604.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_q7yfg")

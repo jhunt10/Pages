@@ -25,5 +25,4 @@ func get_keys_to_subeditor_mapping()->Dictionary:
 	return dict
 
 func on_exit_menu():
-	ActionLibrary.Instance.reload()
 	super()

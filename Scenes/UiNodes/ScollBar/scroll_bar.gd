@@ -22,7 +22,6 @@ func get_container_scroll_precent()->float:
 	var min_scroll = 0
 	var max_scroll = child_container.size.y - scroll_container.size.y
 	var current_scroll = -child_container.position.y / max_scroll 
-	print("Current Scrol: %s" % [current_scroll] )
 	return current_scroll
 	
 func set_container_scroll_precent(val:float):
@@ -38,7 +37,6 @@ func set_container_scroll_precent(val:float):
 	child_container.position.y = -current_pos
 	if _last_child_perc != _last_bar_perc:
 		set_scroll_bar_percent(_last_child_perc)
-	print("Set Pos: %s" % [current_pos])
 
 
 func get_bar_scroll_percent():
@@ -63,9 +61,6 @@ func _ready() -> void:
 	bar_button.button_down.connect(button_pressed)
 	bar_button.button_up.connect(button_relase)
 	if scroll_container:
-		bar_button.pressed.connect(scroll_started)
-		scroll_container.scroll_started.connect(scroll_started)
-		scroll_container.scroll_ended.connect(scroll_ended)
 		_delay_size_calc = true
 	pass # Replace with function body.
 
@@ -79,7 +74,6 @@ func _process(delta: float) -> void:
 		var mouse_pos = scroll_bounds.get_local_mouse_position()
 		bar.position.y = max(0, min(scroll_bounds.size.y - bar.size.y,  mouse_pos.y - drag_offset))
 		var scroll_prec = get_bar_scroll_percent()
-		print("Dragging Scroll Prec: %s " % [scroll_prec])
 		set_scroll_bar_percent(scroll_prec)
 	elif scroll_container:
 		# Scroll Container was scrolled on it's own
@@ -110,10 +104,3 @@ func calc_bar_size():
 	var bounds_hight = scroll_bounds.size.y
 	var bar_hight = bounds_hight * percent_vis
 	bar.size.y = bar_hight
-	print("Ser Pre: %s" %[cur_percent])
-	
-func scroll_started():
-	printerr("Scroll Start")
-	
-func scroll_ended():
-	printerr("Scroll End")

@@ -1,25 +1,77 @@
-[gd_scene load_steps=3 format=3 uid="uid://c20lud2px2apo"]
+[gd_scene load_steps=8 format=3 uid="uid://c20lud2px2apo"]
 
-[ext_resource type="Texture2D" uid="uid://cr8xn35dq755e" path="res://Scenes/Menus/CharacterMenu/MenuPages/BagMenuPage/ItemSlotBackground.png" id="1_3ed7x"]
+[ext_resource type="Texture2D" uid="uid://cp5akpqbgypog" path="res://Scenes/Menus/CharacterMenu/MenuPages/BagMenuPage/BagItemSlotBackground_Single.png" id="1_48nkv"]
 [ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/BagMenuPage/bag_item_slot_button.gd" id="2_st005"]
+[ext_resource type="Texture2D" uid="uid://bol6kpkqd31hg" path="res://Scenes/Menus/CharacterMenu/MenuPages/BagMenuPage/BagItemSlotBackground_Top.png" id="3_3q2pt"]
+[ext_resource type="Theme" uid="uid://dwinll8pgdjhc" path="res://Scenes/Themes/standard_theme.tres" id="3_efey5"]
+[ext_resource type="Texture2D" uid="uid://vu3ywikrdx3o" path="res://Scenes/Menus/CharacterMenu/MenuPages/BagMenuPage/BagItemSlotBackground_Middle.png" id="4_mg8vk"]
+[ext_resource type="Texture2D" uid="uid://djsuny4df1lpu" path="res://Scenes/Menus/CharacterMenu/MenuPages/BagMenuPage/BagItemSlotBackground_Bottom.png" id="5_6o53i"]
+[ext_resource type="Texture2D" uid="uid://567vutk12a12" path="res://Scenes/Menus/CharacterMenu/MenuPages/SlotHighlight.png" id="6_lp4b0"]
 
-[node name="BagItemSlotButton" type="NinePatchRect"]
-custom_minimum_size = Vector2(64, 64)
+[node name="BagItemSlotButton" type="Control" node_paths=PackedStringArray("highlight", "background", "item_icon", "label", "button")]
+custom_minimum_size = Vector2(128, 36)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 128.0
+offset_bottom = 32.0
+script = ExtResource("2_st005")
+highlight = NodePath("Highlight")
+background = NodePath("Background")
+item_icon = NodePath("Icon")
+label = NodePath("Label")
+button = NodePath("Button")
+bg_texture_single = ExtResource("1_48nkv")
+bg_texture_top = ExtResource("3_3q2pt")
+bg_texture_middle = ExtResource("4_mg8vk")
+bg_texture_bottom = ExtResource("5_6o53i")
+
+[node name="Highlight" type="TextureRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_lp4b0")
+expand_mode = 1
+
+[node name="Background" type="NinePatchRect" parent="."]
+custom_minimum_size = Vector2(128, 32)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 3
-texture = ExtResource("1_3ed7x")
-region_rect = Rect2(0, 0, 64, 64)
-patch_margin_left = 18
+texture = ExtResource("1_48nkv")
+region_rect = Rect2(0, 0, 128, 34)
+patch_margin_left = 47
 patch_margin_top = 18
 patch_margin_right = 18
 patch_margin_bottom = 18
-script = ExtResource("2_st005")
 
-[node name="TextureRect" type="TextureRect" parent="."]
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-texture = ExtResource("1_3ed7x")
+[node name="Icon" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 1
+anchors_preset = -1
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 34.0
+offset_bottom = 34.0
+
+[node name="Label" type="Label" parent="."]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 42.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_efey5")
+vertical_alignment = 1
 
 [node name="Button" type="Button" parent="."]
 self_modulate = Color(1, 1, 1, 0)

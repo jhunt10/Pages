@@ -1,5 +1,9 @@
 ## Manages the items in an Actor's bag
 class_name ItemHolder
+
+# Use Actor.bag_items_changed
+#signal items_changed
+
 var _item_tag_slot_counts:Dictionary={}
 var _item_tagged_slots:Dictionary={}
 
@@ -56,6 +60,7 @@ func add_item_to_first_valid_slot(item:BaseItem):
 			if open_slot >= 0:
 				_item_tagged_slots[item_tags][open_slot] = item.Id
 				_actor.bag_items_changed.emit()
+				print("Added Item: " + item.Id)
 				return
 			else:
 				print("No Open Slot found in '%s'" %[item_tags])

@@ -22,8 +22,12 @@ func get_max_page_count()->int:
 
 func list_action_keys()->Array:
 	var out_list = []
-	for val in _page_tagged_slots.values():
-		out_list.append_array(val)
+	for item_ids in _page_tagged_slots.values():
+		for item_id in item_ids:
+			if item_id:
+				var item = ItemLibrary.get_item(item_id)
+				if item and item is BasePageItem:
+					out_list.append(item.get_action_key())
 	return out_list
 
 func list_pages()->Array:
@@ -51,24 +55,42 @@ func remove_page(action_key:String):
 	if changed:
 		pages_changed.emit()
 
-func try_add_page(page:BaseAction)->bool:
-	if has_page(page.ActionKey):
+func can_place_page_in_slot(page:BasePageItem, page_tag:String, slot_index:int, allow_replace:bool = false):
+	if has_page(page.get_action_key()):
+		return false
+	if not _does_page_match_tags(page_tag, page):
+		return false
+	if slot_index < 0 or slot_index >= _page_tagged_slots.get(page_tag, []).size():
+		return false
+	if not allow_replace and _page_tagged_slots.get(page_tag)[slot_index] != null:
+		return false
+	return true
+
+func try_place_page_in_slot(page:BasePageItem, page_tag:String, slot_index:int, allow_replace:bool = false):
+	if not can_place_page_in_slot(page, page_tag, slot_index, allow_replace):
+		return false
+	_page_tagged_slots[page_tag][slot_index] = page.Id
+	pages_changed.emit()
+	return true
+
+func try_add_page(page:BasePageItem)->bool:
+	if has_page(page.Id):
 		return true
 	for page_tags in _page_tagged_slots.keys():
 		if _does_page_match_tags(page_tags, page):
 			var open_slot = _page_tagged_slots[page_tags].find(null)
 			if open_slot >= 0:
-				_page_tagged_slots[page_tags][open_slot] = page.ActionKey
+				_page_tagged_slots[page_tags][open_slot] = page.Id
 				pages_changed.emit()
 				return true
 			else:
 				print("No Open Slot found in '%s'" %[page_tags])
 		else:
-			print("%s Not match tags '%s'" %[page.ActionKey, page_tags])
+			print("%s Not match tags '%s'" %[page.Id, page_tags])
 	print("No Valid PageTags Slot Found")
 	return false
 
-func _does_page_match_tags(page_tags:String, page:BaseAction)->bool:
+func _does_page_match_tags(page_tags:String, page:BasePageItem)->bool:
 	var tags = page_tags.split("|")
 	for tag in tags:
 		if tag == "Any":
@@ -77,15 +99,15 @@ func _does_page_match_tags(page_tags:String, page:BaseAction)->bool:
 			return false
 	return true
 
-func set_page_for_slot(slot_page_tags:String, index:int, page:BaseAction):
+func set_page_for_slot(slot_page_tags:String, index:int, page:BasePageItem):
 	if !_page_tag_slot_counts.keys().has(slot_page_tags):
 		return
-	if page and _page_tagged_slots[slot_page_tags].has(page.ActionKey):
+	if page and _page_tagged_slots[slot_page_tags].has(page.Id):
 		return
 	if index < 0 or index >= _page_tagged_slots[slot_page_tags].size():
 		return
 	if page:
-		_page_tagged_slots[slot_page_tags][index] = page.ActionKey
+		_page_tagged_slots[slot_page_tags][index] = page.Id
 	else:
 		_page_tagged_slots[slot_page_tags][index] = null
 	pages_changed.emit()

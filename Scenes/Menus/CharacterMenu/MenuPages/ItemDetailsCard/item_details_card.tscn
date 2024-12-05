@@ -1,0 +1,141 @@
+[gd_scene load_steps=8 format=3 uid="uid://btr6wpgyitqc0"]
+
+[ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/ItemDetailsCard/item_details_card.gd" id="1_vq5a0"]
+[ext_resource type="Texture2D" uid="uid://bqmtfkh0uj2bk" path="res://Scenes/Menus/CharacterMenu/MenuPages/ItemDetailsCard/DetailsCard_Background_working.png" id="2_7ol1j"]
+[ext_resource type="Texture2D" uid="uid://cv0i7fr0kh62s" path="res://Scenes/Menus/CharacterMenu/MenuPages/PageMenuPage/PageSlotBackground.png" id="3_1ywch"]
+[ext_resource type="Theme" uid="uid://dwinll8pgdjhc" path="res://Scenes/Themes/standard_theme.tres" id="4_xmy3g"]
+[ext_resource type="PackedScene" uid="uid://c1bs8grs7gsc1" path="res://Scenes/UiNodes/MiniRangeDisplay/mini_range_display.tscn" id="5_jmtol"]
+[ext_resource type="Texture2D" uid="uid://b7yikap63psbv" path="res://Scenes/Menus/CharacterMenu/MenuPages/ItemDetailsCard/ExitButton.png" id="6_folnv"]
+[ext_resource type="Texture2D" uid="uid://dbag7m6cb83vp" path="res://Scenes/Menus/CharacterMenu/MenuPages/ItemDetailsCard/Button_Patch_32_6.png" id="7_850b7"]
+
+[node name="ItemDetailsCard" type="Control" node_paths=PackedStringArray("offset_control", "icon", "title_lable", "description_box", "exit_button", "equip_button", "button_label")]
+custom_minimum_size = Vector2(300, 200)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 300.0
+offset_bottom = 200.0
+mouse_filter = 1
+script = ExtResource("1_vq5a0")
+speed = 500.0
+offset_control = NodePath("OffsetControl")
+icon = NodePath("OffsetControl/IconBackground/Icon")
+title_lable = NodePath("OffsetControl/TitleLabel")
+description_box = NodePath("OffsetControl/RichTextLabel")
+exit_button = NodePath("OffsetControl/ExitButton/Button")
+equip_button = NodePath("OffsetControl/ButtonBackground/Button")
+button_label = NodePath("OffsetControl/ButtonBackground/ButtonLabel")
+
+[node name="OffsetControl" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Background" type="TextureRect" parent="OffsetControl"]
+layout_mode = 0
+offset_right = 300.0
+offset_bottom = 200.0
+texture = ExtResource("2_7ol1j")
+
+[node name="IconBackground" type="TextureRect" parent="OffsetControl"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_left = 18.0
+offset_top = 20.0
+offset_right = 82.0
+offset_bottom = 84.0
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_1ywch")
+
+[node name="Icon" type="TextureRect" parent="OffsetControl/IconBackground"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TitleLabel" type="Label" parent="OffsetControl"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 0
+offset_left = 54.0
+offset_top = 20.0
+offset_right = 239.0
+offset_bottom = 52.0
+theme = ExtResource("4_xmy3g")
+theme_override_font_sizes/font_size = 24
+text = "Item Name"
+vertical_alignment = 1
+
+[node name="MiniRangeDisplay" parent="OffsetControl" instance=ExtResource("5_jmtol")]
+layout_mode = 1
+offset_left = 238.0
+offset_top = 62.0
+offset_right = 242.0
+offset_bottom = 66.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="OffsetControl"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 0
+offset_left = 18.0
+offset_top = 57.0
+offset_right = 282.0
+offset_bottom = 180.0
+theme = ExtResource("4_xmy3g")
+text = "Item Description"
+
+[node name="ExitButton" type="TextureRect" parent="OffsetControl"]
+layout_mode = 0
+offset_left = 249.0
+offset_top = 11.0
+offset_right = 289.0
+offset_bottom = 51.0
+texture = ExtResource("6_folnv")
+
+[node name="Button" type="Button" parent="OffsetControl/ExitButton"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Button" type="Button" parent="OffsetControl"]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+
+[node name="ButtonBackground" type="NinePatchRect" parent="OffsetControl"]
+layout_mode = 0
+offset_left = 38.0
+offset_top = 143.0
+offset_right = 257.0
+offset_bottom = 178.0
+texture = ExtResource("7_850b7")
+region_rect = Rect2(0, 0, 32, 32)
+patch_margin_left = 6
+patch_margin_top = 6
+patch_margin_right = 6
+patch_margin_bottom = 6
+
+[node name="ButtonLabel" type="Label" parent="OffsetControl/ButtonBackground"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("4_xmy3g")
+text = "Equipe"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="OffsetControl/ButtonBackground"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

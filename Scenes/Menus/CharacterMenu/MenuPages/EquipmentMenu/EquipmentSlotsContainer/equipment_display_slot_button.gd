@@ -4,6 +4,7 @@ extends TextureButton
 @export var highlight_background:TextureRect
 @export var default_icon_texture:Texture2D
 @export var icon_texture_rect:TextureRect
+@export var button:Button
 
 var default_icons_paths:Dictionary = {
 	"Head": "res://assets/Sprites/UI/CharacterEdit/HeadSlot.png",

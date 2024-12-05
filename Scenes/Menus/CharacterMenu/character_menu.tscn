@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://ciah50qt3htui"]
+[gd_scene load_steps=15 format=3 uid="uid://ciah50qt3htui"]
 
 [ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/character_menu_control.gd" id="1_b43ae"]
 [ext_resource type="Texture2D" uid="uid://mpwjrtfjnbth" path="res://Scenes/Menus/CharacterMenu/BookBackground.png" id="2_ny2th"]
@@ -11,6 +11,8 @@
 [ext_resource type="PackedScene" uid="uid://cbexkor24ce0h" path="res://Scenes/Menus/CharacterMenu/MenuPages/EquipmentMenu/equipment_menu_page.tscn" id="9_bofun"]
 [ext_resource type="PackedScene" uid="uid://c4bhs27nmviba" path="res://Scenes/Menus/CharacterMenu/MenuPages/PageMenuPage/pages_menu_page.tscn" id="10_porhc"]
 [ext_resource type="PackedScene" uid="uid://bjatwk3wdws0y" path="res://Scenes/Menus/CharacterMenu/MenuPages/BagMenuPage/bag_menu_page.tscn" id="11_j5k8v"]
+[ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MouseOverControl/character_menu_mouse_control.gd" id="12_yj8n3"]
+[ext_resource type="Texture2D" uid="uid://xcjbd3xju45w" path="res://Scenes/Menus/CharacterMenu/MouseOverControl/DragItemBackground.png" id="13_0dekw"]
 
 [sub_resource type="GDScript" id="GDScript_rvisf"]
 script/source = "extends TextureRect
@@ -26,7 +28,7 @@ func _process(delta: float) -> void:
 	pass
 "
 
-[node name="CharacterMenuControl" type="Control" node_paths=PackedStringArray("equipment_page", "page_page", "bag_page", "scale_control", "inventory_container", "close_button", "tab_equipment_button", "tab_pages_button", "tab_bag_button")]
+[node name="CharacterMenuControl" type="Control" node_paths=PackedStringArray("details_card_spawn_point", "equipment_page", "page_page", "bag_page", "scale_control", "inventory_container", "close_button", "tab_equipment_button", "tab_pages_button", "tab_bag_button", "mouse_control")]
 custom_minimum_size = Vector2(600, 420)
 layout_mode = 3
 anchors_preset = 0
@@ -36,6 +38,7 @@ offset_right = 110.0
 offset_bottom = 7.0
 mouse_filter = 1
 script = ExtResource("1_b43ae")
+details_card_spawn_point = NodePath("ScaleControl/DetailsCardSpawnPoint")
 equipment_page = NodePath("ScaleControl/EquipmentPage")
 page_page = NodePath("ScaleControl/PagesPage")
 bag_page = NodePath("ScaleControl/BagPage")
@@ -45,6 +48,7 @@ close_button = NodePath("ScaleControl/TabsControl/ExitTabButton/Button")
 tab_equipment_button = NodePath("ScaleControl/TabsControl/EquipmentTabButton/Button")
 tab_pages_button = NodePath("ScaleControl/TabsControl/BookTabButton/Button")
 tab_bag_button = NodePath("ScaleControl/TabsControl/BagTabButton2/Button")
+mouse_control = NodePath("ScaleControl/MouseOverControl")
 
 [node name="ScaleControl" type="Control" parent="."]
 custom_minimum_size = Vector2(600, 420)
@@ -197,10 +201,10 @@ grow_vertical = 2
 
 [node name="InventoryContainer" parent="ScaleControl" instance=ExtResource("8_6gqbj")]
 layout_mode = 0
-offset_left = 316.0
-offset_top = 14.0
-offset_right = 596.0
-offset_bottom = 409.0
+offset_left = 303.0
+offset_top = 9.0
+offset_right = 583.0
+offset_bottom = 404.0
 
 [node name="EquipmentPage" parent="ScaleControl" instance=ExtResource("9_bofun")]
 offset_left = 17.0
@@ -221,3 +225,35 @@ offset_left = 17.0
 offset_top = 9.0
 offset_right = 297.0
 offset_bottom = 404.0
+
+[node name="DetailsCardSpawnPoint" type="Control" parent="ScaleControl"]
+anchors_preset = 0
+offset_left = 297.0
+offset_top = 222.0
+offset_right = 337.0
+offset_bottom = 262.0
+
+[node name="MouseOverControl" type="Control" parent="ScaleControl" node_paths=PackedStringArray("drag_item_icon")]
+custom_minimum_size = Vector2(64, 64)
+anchors_preset = 0
+offset_right = 64.0
+offset_bottom = 64.0
+mouse_filter = 2
+script = ExtResource("12_yj8n3")
+drag_item_icon = NodePath("DragItemIcon")
+
+[node name="DargItemBackground" type="TextureRect" parent="ScaleControl/MouseOverControl"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+texture = ExtResource("13_0dekw")
+
+[node name="DragItemIcon" type="TextureRect" parent="ScaleControl/MouseOverControl"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2

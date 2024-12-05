@@ -1,6 +1,11 @@
 class_name EquipmentDisplayContainer
 extends Control
 
+signal item_button_down(item_id)
+signal item_button_up(item_id)
+signal mouse_enter_item(item_id)
+signal mouse_exit_item(item_id)
+
 @export var actor_node:ActorNode
 @export var armor_lable:Label
 @export var ward_label:Label
@@ -26,7 +31,10 @@ var slot_displays:Array:
 func _ready() -> void:
 	for slot:int in range(slot_displays.size()):
 		var slot_display:EquipmentDisplaySlotButton = slot_displays[slot]
-		slot_display.pressed.connect(_on_slot_pressed.bind(slot))
+		slot_display.button_down.connect(_on_item_button_down.bind(slot))
+		slot_display.button_up.connect(_on_item_button_up.bind(slot))
+		slot_display.mouse_entered.connect(_on_mouse_enter_item.bind(slot))
+		slot_display.mouse_exited.connect(_on_mouse_exit_item.bind(slot))
 
 func set_actor(actor:BaseActor):
 	if actor == _actor:
@@ -55,10 +63,6 @@ func _sync():
 	magatk_label.text = str(_actor.stats.get_base_magic_attack())
 	phyatk_label.text = str(_actor.stats.get_base_phyical_attack())
 
-func _on_slot_pressed(index:int):
-	var slot_display:EquipmentDisplaySlotButton = slot_displays[index]
-	equipt_slot_pressed.emit(index)
-
 func clear_highlights():
 	for slot_display:EquipmentDisplaySlotButton in slot_displays:
 		slot_display.highlight(false)
@@ -73,3 +77,20 @@ func get_mouse_over_slot_index()->int:
 		if slot_display.is_mouse_over():
 			return index
 	return -1
+
+func _on_item_button_down(index):
+	var item = _actor.equipment.get_equipment_in_slot(index)
+	if item:
+		item_button_down.emit(item.Id)
+func _on_item_button_up(index):
+	var item = _actor.equipment.get_equipment_in_slot(index)
+	if item:
+		item_button_up.emit(item.Id)
+func _on_mouse_enter_item(index):
+	var item = _actor.equipment.get_equipment_in_slot(index)
+	if item:
+		mouse_enter_item.emit(item.Id)
+func _on_mouse_exit_item(index):
+	var item = _actor.equipment.get_equipment_in_slot(index)
+	if item:
+		mouse_exit_item.emit(item.Id)

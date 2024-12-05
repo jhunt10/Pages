@@ -20,6 +20,9 @@ func _init(key:String, def_load_path:String, def:Dictionary, id:String='', data:
 		details_data = BaseLoadObjectLibrary._merge_defs(details_data, action_def.get("Details", {}))
 		details = ObjectDetailsData.new(ActionLibrary.Instance._defs_to_load_paths[action_key], details_data)
 
+func get_action_key():
+	return get_load_val("ActionKey")
+
 func get_action()->BaseAction:
 	var action_key = get_load_val("ActionKey")
 	if action_key:
