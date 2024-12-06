@@ -29,7 +29,7 @@ func get_map_data()->Dictionary:
 	var map_data = terrain_path_map.get_map_data()
 	var actors = []
 	for child in actor_tile_map.get_children():
-		if child is ActorSpawnNode:
+		if child is ActorSpawnNode and child.visible:
 			var pos = MapPos.new(child.map_coor.x, child.map_coor.y, 0, child.facing)
 			var data = {"Pos": pos}
 			if child.spawn_actor_key != '':

@@ -11,7 +11,7 @@ static func build_action_que(actor:BaseActor, game_state:GameStateData)->Array:
 	var target_enemy = enimes[0]
 	
 	var attack_target_params = {}
-	for page:BaseAction in actor.pages.list_pages():
+	for page:BaseAction in actor.pages.list_actions():
 		if page.has_preview_target():
 			attack_target_params[page.ActionKey] = page.get_preview_target_params(actor)
 	
@@ -144,16 +144,16 @@ static func build_path_finder(game_state:GameStateData)->AStar2D:
 	var star = AStar2D.new()
 	star.reserve_space(game_state.MapState.max_hight * game_state.MapState.max_width)
 	for y in range(game_state.MapState.max_hight):
-		var line = ''
-		var line2 = ''
+		#var line = ''
+		#var line2 = ''
 		for x in range(game_state.MapState.max_width):
 			var pos = Vector2i(x, y)
 			var index = _pos_to_index(pos, game_state)
-			line2 += str(pos) + ", "
+			#line2 += str(pos) + ", "
 			if _is_terrain_traversable(pos, game_state):
 				#print("Adding Point: %s" % [pos])
 				star.add_point(index, pos, 1)
-				line += "0"
+				#line += "0"
 				if y > 0:
 					var upper_pos = Vector2i(x, y-1)
 					var upper_index = _pos_to_index(upper_pos, game_state)
@@ -166,9 +166,9 @@ static func build_path_finder(game_state:GameStateData)->AStar2D:
 					if star.has_point(back_index):
 						#print("Connecing Back Points: %s | %s" % [pos, back_pos])
 						star.connect_points(index, back_index)
-			else:
-				line += "X"
-		print(line)
+			#else:
+				#line += "X"
+		#print(line)
 	return star
 		
 

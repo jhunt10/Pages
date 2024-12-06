@@ -1,7 +1,7 @@
 class_name BagItemSlotButton
 extends Control
 
-var item_key:String
+var _item_id:String
 @export var highlight:TextureRect
 @export var background:NinePatchRect
 @export var item_icon:TextureRect
@@ -21,12 +21,11 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 
-func set_key(key, background_type):
-	if key:
-		item_key = key
-		var item = ItemLibrary.get_item(item_key)
+func set_item_id(item_id, background_type):
+	if item_id:
+		_item_id = item_id
+		var item = ItemLibrary.get_item(_item_id)
 		if item:
-			item_key = item._key
 			item_icon.texture = item.get_large_icon()
 			label.text = item.details.display_name
 	if background_type == "Single":

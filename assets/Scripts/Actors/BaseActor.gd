@@ -26,7 +26,7 @@ var Que:ActionQue
 var sprite:ActorSprite
 var stats:StatHolder
 var effects:EffectHolder
-var items:ItemHolder
+var items:BagItemHolder
 var equipment:EquipmentHolder
 var pages:PageHolder
 
@@ -74,7 +74,7 @@ func _init(key:String, load_path:String, def:Dictionary, id:String, data:Diction
 	effects = EffectHolder.new(self)
 	details = ObjectDetailsData.new(_def_load_path, _def.get("Details", {}))
 	equipment = EquipmentHolder.new(self)
-	items = ItemHolder.new(self)
+	items = BagItemHolder.new(self)
 	Que = ActionQue.new(self)
 	pages = PageHolder.new(self)
 	if get_load_val("IsPlayer", false):
@@ -85,8 +85,8 @@ func save_me()->bool:
 
 func save_data()->Dictionary:
 	var data = super()
-	data['Pages'] = pages.get_pages_per_page_tags()
-	data['BagItems'] = items.get_item_ids_per_item_tags()
+	data['Pages'] = pages.list_item_ids(true)
+	data['BagItems'] = items.list_item_ids(true)
 	return data
 
 func on_combat_start():
@@ -147,7 +147,7 @@ func auto_build_que(current_turn:int):
 	for action_name in actions:
 		var action = ActionLibrary.get_action(action_name)
 		if action:
-			print("Queing Page: " + action_name)
+			#print("Queing Page: " + action_name)
 			Que.que_action(action)
 		else:
 			printerr("Quied Page %s not found" % [action_name])

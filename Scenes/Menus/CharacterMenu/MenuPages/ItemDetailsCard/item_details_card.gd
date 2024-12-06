@@ -7,11 +7,15 @@ signal hide_done
 @export var speed:float
 @export var offset_control:Control
 @export var icon:TextureRect
-@export var title_lable:Label
+@export var title_lable:FitScaleLabel
 @export var description_box:RichTextLabel
 @export var exit_button:Button
 @export var equip_button:Button
 @export var button_label:Label
+
+@export var weapon_details:WeaponDetailsControl
+@export var armor_details:ArmorDetailsControl
+@export var default_details:DefaultItemDetailsControl
 
 enum AnimationStates {In, Showing, Out, Hidden}
 var animation_state:AnimationStates
@@ -60,12 +64,26 @@ func set_item(item:BaseItem):
 	icon.texture = item.get_small_icon()
 	title_lable.text = item.details.display_name
 	description_box.text = item.details.description
-	if item is BaseEquipmentItem:
-		var equipment = (item as BaseEquipmentItem)
-		if equipment.get_equipt_to_actor_id():
-			button_label.text = "Remove"
-		else:
-			button_label.text = "Equipt"
+	
+	
+	default_details.hide()
+	weapon_details.hide()
+	armor_details.hide()
+	if item is BaseWeaponEquipment:
+		var weapon = (item as BaseWeaponEquipment)
+		weapon_details.set_weapon(weapon)
+		weapon_details.show()
+	elif item is BaseArmorEquipment:
+		var armor = (item as BaseArmorEquipment)
+		armor_details.set_armor(armor)
+		armor_details.show()
+	else:
+		default_details.set_item(item)
+		default_details.show()
+		#if equipment.get_equipt_to_actor_id():
+			#button_label.text = "Remove"
+		#else:
+			#button_label.text = "Equipt"
 	self.start_show()
 
 func equip_button_pressed():

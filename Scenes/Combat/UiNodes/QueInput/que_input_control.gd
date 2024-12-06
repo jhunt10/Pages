@@ -36,10 +36,10 @@ func _process(_delta: float) -> void:
 
 func set_actor(actor:BaseActor):
 	if _actor:
-		_actor.pages.pages_changed.disconnect(_build_buttons)
+		_actor.pages.items_changed.disconnect(_build_buttons)
 		_actor.Que.action_que_changed.disconnect(_on_que_change)
 	_actor = actor
-	_actor.pages.pages_changed.connect(_build_buttons)
+	_actor.pages.items_changed.connect(_build_buttons)
 	_actor.Que.action_que_changed.connect(_on_que_change)
 	_build_buttons()
 	

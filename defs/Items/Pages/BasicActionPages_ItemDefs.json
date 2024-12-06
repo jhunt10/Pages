@@ -1,26 +1,158 @@
 [
     {
-        "ItemKey":"MoveForward_Page",
+        "ItemKey": "MoveForward_PageItem",
         "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
         "CanStack": true,
         "ActionKey": "MoveForward"
     },
     {
-        "ItemKey":"TurnLeft_Page",
+        "ItemKey": "MoveBack_PageItem",
+        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
+        "CanStack": true,
+        "ActionKey": "MoveBack"
+    },
+    {
+        "ItemKey": "MoveLeft_PageItem",
+        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
+        "CanStack": true,
+        "ActionKey": "MoveLeft"
+    },
+    {
+        "ItemKey": "MoveRight_PageItem",
+        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
+        "CanStack": true,
+        "ActionKey": "MoveRight"
+    },
+    {
+        "ItemKey": "TurnLeft_PageItem",
         "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
         "CanStack": true,
         "ActionKey": "TurnLeft"
     },
     {
-        "ItemKey":"TurnRight_Page",
+        "ItemKey": "TurnRight_PageItem",
         "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
         "CanStack": true,
         "ActionKey": "TurnRight"
     },
     {
-        "ItemKey":"MoveBack_Page",
+        "ItemKey": "Wait_PageItem",
         "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
         "CanStack": true,
-        "ActionKey": "MoveBack"
+        "ActionKey": "Wait"
+    },
+    {
+        "ItemKey": "TurnAround_PageItem",
+        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
+        "CanStack": true,
+        "ActionKey": "TurnAround"
+    },
+    {
+        "ItemKey": "TestSlash_PageItem",
+        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
+        "CanStack": true,
+        "ActionKey": "TestSlash"
+    },
+    {
+        "ItemKey": "Charge_PageItem",
+        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
+        "CanStack": true,
+        "ActionKey": "Charge"
+    },
+    {
+        "ItemKey": "TestSlam_PageItem",
+        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
+        "CanStack": true,
+        "ActionKey": "TestSlam"
+    },
+    {
+        "ItemKey": "TestBullets_PageItem",
+        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
+        "CanStack": true,
+        "ActionKey": "TestBullets"
+    },
+    {
+        "ItemKey": "TestFireBall_PageItem",
+        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
+        "CanStack": true,
+        "ActionKey": "TestFireBall"
+    },
+    {
+        "ItemKey": "TestArrow_PageItem",
+        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
+        "CanStack": true,
+        "ActionKey": "TestArrow"
+    },
+    {
+        "ItemKey": "BasicWeaponAttack_PageItem",
+        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
+        "CanStack": true,
+        "ActionKey": "BasicWeaponAttack"
+    },
+    {
+        "ItemKey": "BasicMelee_PageItem",
+        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
+        "CanStack": true,
+        "ActionKey": "BasicMelee"
+    },
+    {
+        "ItemKey": "UseItemSelf_PageItem",
+        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
+        "CanStack": true,
+        "ActionKey": "UseItemSelf"
+    },
+    {
+        "ItemKey": "IceMagic_PageItem",
+        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
+        "CanStack": true,
+        "ActionKey": "IceMagic"
+    },
+    {
+        "ItemKey": "ElectricMagic_PageItem",
+        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
+        "CanStack": true,
+        "ActionKey": "ElectricMagic"
+    },
+    {
+        "ItemKey": "PoisonMagic_PageItem",
+        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
+        "CanStack": true,
+        "ActionKey": "PoisonMagic"
+    },
+    {
+        "ItemKey": "TeleportBehind_PageItem",
+        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
+        "CanStack": true,
+        "ActionKey": "TeleportBehind"
+    },
+    {
+        "ItemKey": "TeleportOther_PageItem",
+        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
+        "CanStack": true,
+        "ActionKey": "TeleportOther"
+    },
+    {
+        "ItemKey": "TeleportSwapOther_PageItem",
+        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
+        "CanStack": true,
+        "ActionKey": "TeleportSwapOther"
+    },
+    {
+        "ItemKey": "TeleportSelf_PageItem",
+        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
+        "CanStack": true,
+        "ActionKey": "TeleportSelf"
+    },
+    {
+        "ItemKey": "TeleportSwapSelf_PageItem",
+        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
+        "CanStack": true,
+        "ActionKey": "TeleportSwapSelf"
+    },
+    {
+        "ItemKey": "SpawnTestTotem_PageItem",
+        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
+        "CanStack": true,
+        "ActionKey": "SpawnTestTotem"
     }
 ]

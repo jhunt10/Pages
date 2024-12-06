@@ -52,8 +52,8 @@ func do_thing():
 			var page = ActionLibrary.get_action(page_name)
 			if page:
 				var actor = CombatRootControl.Instance.ui_control.que_input._actor
-				actor.pages.remove_page(page.ActionKey)
-				self.finish()
+				actor.pages.remove_item(page_name)
+		self.finish()
 	var tag = _block_data.get("BlockTag", null)
 	if !tag:
 		self.finish()

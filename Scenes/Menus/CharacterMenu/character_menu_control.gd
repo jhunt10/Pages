@@ -38,17 +38,17 @@ func _ready() -> void:
 	equipment_page.item_button_up.connect(on_item_button_up)
 	equipment_page.mouse_enter_item.connect(on_mouse_enter_slot)
 	equipment_page.mouse_exit_item.connect(on_mouse_exit_slot)
-	
+	#
 	inventory_container.item_button_down.connect(on_item_button_down)
 	inventory_container.item_button_up.connect(on_item_button_up)
 	inventory_container.mouse_enter_item.connect(on_mouse_enter_slot)
 	inventory_container.mouse_exit_item.connect(on_mouse_exit_slot)
-	
+	#
 	page_page.item_button_down.connect(on_item_button_down)
 	page_page.item_button_up.connect(on_item_button_up)
 	page_page.mouse_enter_item.connect(on_mouse_enter_slot)
 	page_page.mouse_exit_item.connect(on_mouse_exit_slot)
-	
+	#
 	bag_page.item_button_down.connect(on_item_button_down)
 	bag_page.item_button_up.connect(on_item_button_up)
 	bag_page.mouse_enter_item.connect(on_mouse_enter_slot)
@@ -118,7 +118,7 @@ func start_dragging():
 		mouse_control.drag_item_icon.texture = _selected_item.get_large_icon()
 		mouse_control.position = _button_down_pos - mouse_control.offset
 		mouse_control.show()
-		print("StartDragging")
+		print("StartDragging: SelectedItem: %s" % [_selected_item.Id])
 
 func stop_dragging():
 	_dragging = false
@@ -131,24 +131,25 @@ func stop_dragging():
 		
 		# From Left Page to Inventory - Remove Item
 		if _mouse_over_context == "Inventory" and _selected_context != "Inventory":
-			print("Remove Item")
+			print("Remove Item: %s" %[_selected_item.Id])
 			var page_control = context_to_page_control(_selected_context)
 			if page_control:
 				page_control.remove_item_from_slot(_selected_item, _selected_index_data)
 		
-		# From Inventory to Left Page - Add Item
-		if _mouse_over_context != "Inventory" and _selected_context == "Inventory":
-			print("Add Item")
-			var page_control = context_to_page_control(_mouse_over_context)
-			if page_control:
-				page_control.try_place_item_in_slot(_selected_item, _mouse_over_index_data)
-		
-		# From Left Page to Left Page - Move Item
-		if _mouse_over_context != "Inventory" and _selected_context == _mouse_over_context:
-			print("Move Item")
-			var page_control = context_to_page_control(_mouse_over_context)
-			if page_control:
-				page_control.try_move_item_to_slot(_selected_item, _selected_index_data, _mouse_over_index_data)
+		if _mouse_over_index_data != null:
+			# From Inventory to Left Page - Add Item
+			if _mouse_over_context != "Inventory" and _selected_context == "Inventory":
+				print("Add Item")
+				var page_control = context_to_page_control(_mouse_over_context)
+				if page_control:
+					page_control.try_place_item_in_slot(_selected_item, _mouse_over_index_data)
+			
+			# From Left Page to Left Page - Move Item
+			if _mouse_over_context != "Inventory" and _selected_context == _mouse_over_context:
+				print("Move Item")
+				var page_control = context_to_page_control(_mouse_over_context)
+				if page_control:
+					page_control.try_move_item_to_slot(_selected_item, _selected_index_data, _mouse_over_index_data)
 		
 
 func clear_highlights():
@@ -156,23 +157,22 @@ func clear_highlights():
 	page_page.clear_highlights()
 	bag_page.clear_highlights()
 
-func on_item_button_down(context, item_key, index_data):
+func on_item_button_down(context, item_key, index, offset):
 	clear_highlights()
 	_selected_context = context
 	_button_down_pos = scale_control.get_local_mouse_position()
-	_selected_index_data = index_data
+	_selected_index_data = index
 	if _current_details_card and _current_details_card.item_id != item_key:
 		_current_details_card.start_hide()
 	if item_key:
 		_selected_item = ItemLibrary.get_item(item_key)
-		if index_data.has("Offset"):
-			mouse_control.offset = index_data['Offset']
+		mouse_control.offset = offset
 	var page_control = context_to_page_control(context)
 	if page_control:
-		page_control.highlight_slot(index_data)
-	print("Item Button Down: %s | %s | %s" % [context, item_key, index_data])
+		page_control.highlight_slot(index)
+	print("Item Button Down: %s | %s | %s" % [context, item_key, index])
 
-func on_item_button_up(context, item_key, index_data):
+func on_item_button_up(context, item_key, index):
 	_button_down_pos = null
 	clear_highlights()
 	if _dragging:
@@ -186,23 +186,24 @@ func on_item_button_up(context, item_key, index_data):
 			create_details_card(_selected_item)
 			var page_control = context_to_page_control(context)
 			if page_control:
-				page_control.highlight_slot(index_data)
-	print("Item Button Up: %s | %s | %s" % [context, item_key, index_data])
+				page_control.highlight_slot(index)
+	print("Item Button Up: %s | %s | %s" % [context, item_key, index])
 
-func on_mouse_enter_slot(context, item_key, index_data):
+func on_mouse_enter_slot(context, item_key, index):
 	_mouse_over_context = context
-	_mouse_over_index_data = index_data
-	print("Item Button Enter: %s | %s | %s" % [context, item_key, index_data])
+	_mouse_over_index_data = index
+	print("Item Button Enter: %s | %s | %s" % [context, item_key, index])
 	if _dragging:
 		var control = context_to_page_control(context)
 		if control:
-			control.highlight_slot(index_data)
-func on_mouse_exit_slot(context, item_key, index_data):
+			control.highlight_slot(index)
+			
+func on_mouse_exit_slot(context, item_key, index):
 	_mouse_over_context = context
 	_mouse_over_index_data = null
 	if _dragging:
 		clear_highlights()
-	print("Item Button Exit : %s | %s | %s" % [context, item_key, index_data])
+	print("Item Button Exit : %s | %s | %s" % [context, item_key, index])
 
 func on_details_card_button_pressed():
 	if _selected_item:
@@ -215,17 +216,17 @@ func on_details_card_button_pressed():
 		
 		if _left_page_context == "Pages" and _selected_item is BasePageItem:
 			var page = (_selected_item as BasePageItem)
-			if _actor.pages.has_page(page.Id):
-				_actor.pages.remove_page(page.Id)
+			if _actor.pages.has_item(page.Id):
+				_actor.pages.remove_item(page.Id)
 			else:
-				_actor.pages.try_add_page(page)
+				_actor.pages.add_item_to_first_valid_slot(page)
 				
 		if _left_page_context == "Bag" and _selected_item is BaseConsumableItem:
-			var bag_item = (_selected_item as BaseConsumableItem)
-			if _actor.items.has_item(bag_item.Id):
-				_actor.items.remove_item(bag_item.Id)
+			var item = (_selected_item as BaseConsumableItem)
+			if _actor.items.has_item(item.Id):
+				_actor.items.remove_item(item.Id)
 			else:
-				_actor.items.add_item_to_first_valid_slot(bag_item)
+				_actor.items.add_item_to_first_valid_slot(item)
 		_current_details_card.start_hide()
 
 func on_tab_pressed(tab_name:String):
