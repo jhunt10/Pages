@@ -1,0 +1,74 @@
+[
+    {
+        "ActionKey": "ChuckAcorn",
+        "CostData": {
+            "Stamina": 10
+        },
+        "DamageDatas": {
+            "Damage1": {
+                "AtkPower": 100,
+                "AtkStat": "Strength",
+                "BaseDamage": 0,
+                "DamageEffect": "Blunt_DamageEffect",
+                "DamageType": "Blunt",
+                "DamageVarient": 0,
+                "DefenseType": "Armor"
+            }
+        },
+        "Details": {
+            "Description": "Toss an acorn at the target",
+            "DisplayName": "Chuck Acorn",
+            "LargeIcon": "AcornIcon.png",
+            "SmallIcon": "AcornIcon.png",
+            "SnippetDesc": "Chuck an acorn",
+            "Tags": [
+                "Attack",
+                "Blunt",
+                "Missile",
+                "Ranged",
+                "Tactic"
+            ]
+        },
+        "MissileDatas": {
+            "Missile1": {
+                "DamageDataKey": "Damage1",
+                "FramesPerTile": 6,
+                "ImpactVfxKey": "Blunt_DamageEffect",
+                "MissileVfxKey": "AcornMissile",
+                "UseLobPath": true
+            }
+        },
+        "Preview": {
+            "PreviewTargetKey": "TargetParam"
+        },
+        "SubActions": {
+            "3": [
+                {
+                    "AllowAlreadyTargeted": false,
+                    "AllowAutoTarget": true,
+                    "SetTargetKey": "Target1",
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_GetTarget.gd",
+                    "TargetParamKey": "TargetParam"
+                }
+            ],
+            "4": [
+                {
+                    "DamageKey": "Damage1",
+                    "MissileKey": "Missile1",
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_SpawnMissile.gd",
+                    "TargetKey": "Target1",
+                    "TargetParamKey": "TargetParam"
+                }
+            ]
+        },
+        "TargetParams": {
+            "TargetParam": {
+                "EffectsAllies": false,
+                "EffectsEnemies": true,
+                "LineOfSight": true,
+                "TargetArea": "[[-1,1],[0,1],[1,1],[-1,2],[0,2],[1,2],[-1,3],[0,3],[1,3]]",
+                "TargetType": "Spot"
+            }
+        }
+    }
+]

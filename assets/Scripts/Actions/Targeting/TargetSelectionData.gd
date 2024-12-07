@@ -6,6 +6,7 @@ var focused_actor:BaseActor
 var actor_pos:MapPos
 var exclude_targets:Array
 var _los_mapping:Dictionary
+## Dictionary of potenial coors to actors in that spot
 var _potential_target_dictray:Dictionary
 var _potential_target_count:int
 
@@ -20,7 +21,7 @@ func _init(params:TargetParameters, target_key:String, actor:BaseActor, game_sta
 	exclude_targets = exclude
 	_los_mapping = params.get_valid_target_area(actor_pos)
 	printerr("ActorPoswe: %s" % [actor_pos.dir])
-	_potential_target_dictray = TargetingHelper._get_potential_coor_to_targets(target_params, focused_actor, game_state, exclude_targets, center_override)
+	_potential_target_dictray = TargetingHelper.get_potential_coor_to_targets(target_params, focused_actor, game_state, exclude_targets, center_override)
 	_potential_target_count = TargetingHelper.dicarry_to_values(_potential_target_dictray).size()
 	
 func get_targeting_area_coords()->Array:
@@ -41,5 +42,6 @@ func get_selectable_coords()->Array:
 func is_coor_selectable(coor:Vector2i)->bool:
 	return _potential_target_dictray.keys().has(coor)
 
+## Returns list of Actors or MapSpots depending on Targeting Type
 func list_potential_targets()->Array:
 	return TargetingHelper.dicarry_to_values(_potential_target_dictray)

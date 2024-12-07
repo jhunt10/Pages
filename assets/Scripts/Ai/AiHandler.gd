@@ -51,6 +51,36 @@ static func get_enemy_actors(actor:BaseActor, game_state:GameStateData)->Array:
 			out_list.append(act)
 	return out_list
 
+static func try_handle_get_target_sub_action(actor:BaseActor, selection_data:TargetSelectionData, action:BaseAction, game_state:GameStateData)->bool:
+	var turndata = selection_data.focused_actor.Que.QueExecData.get_current_turn_data()
+	var potentail_actors = []
+	var coor_to_actor = {}
+	if selection_data.target_params.is_actor_target_type():
+		potentail_actors = selection_data.list_potential_targets()
+	else:
+		var actor_pos = game_state.MapState.get_actor_pos(actor)
+		for coor in selection_data.get_selectable_coords():
+			var actors = game_state.MapState.get_actors_at_pos(coor)
+			for act in actors:
+				if not potentail_actors.has(act):
+					potentail_actors.append(act)
+					coor_to_actor[act.Id] = MapPos.new(coor.x, coor.y, actor_pos.z, actor_pos.dir)
+	var enemy_actors = []
+	for p_actor:BaseActor in potentail_actors:
+		if p_actor.FactionIndex != actor.FactionIndex:
+			enemy_actors.append(p_actor)
+			
+	var selected_target = null
+	if enemy_actors.size() > 0:
+		if selection_data.target_params.is_spot_target_type():
+			turndata.set_target_key(selection_data.setting_target_key, 
+					selection_data.target_params.target_param_key, coor_to_actor[enemy_actors[0].Id])
+		elif selection_data.target_params.is_actor_target_type():
+			turndata.set_target_key(selection_data.setting_target_key, selection_data.target_params.target_param_key, enemy_actors[0].Id)
+		return true
+	else:
+		return false
+	
 
 static func path_to_target(actor:BaseActor, start_pos:MapPos, target_pos:MapPos, game_state:GameStateData)->Dictionary:
 	#if !astar:

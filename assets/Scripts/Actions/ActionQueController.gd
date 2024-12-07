@@ -38,6 +38,8 @@ signal after_round()
 signal execution_active
 # Emitted any time the que stops executing actions
 signal execution_suspended
+signal  execution_paused
+signal  execution_resumed
 
 enum ActionStates {
 	Waiting, # Waiting for input
@@ -107,11 +109,13 @@ func start_or_resume_execution():
 		_start_round()
 	else:
 		execution_state = ActionStates.Running
+		execution_resumed.emit()
 		execution_active.emit()
 
 func pause_execution():
 	execution_state = ActionStates.Paused
 	execution_suspended.emit()
+	execution_paused.emit()
 
 func get_paused_on_que()->ActionQue:
 	return _action_ques[_que_order[que_index]]

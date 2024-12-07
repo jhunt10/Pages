@@ -68,10 +68,13 @@ func _process(delta: float) -> void:
 			return
 	
 	if following_actor_node:
-		var move_node = following_actor_node.actor_motion_node
-		if LOGGING: print("Following Actor: " + str(move_node.position))
-		set_camera_pos(move_node.global_position, false)
-		return
+		if not is_instance_valid(following_actor_node):
+			following_actor_node = null
+		else:
+			var move_node = following_actor_node.actor_motion_node
+			if LOGGING: print("Following Actor: " + str(move_node.position))
+			set_camera_pos(move_node.global_position, false)
+			return
 	if freeze:
 		return
 	var dist = delta * speed

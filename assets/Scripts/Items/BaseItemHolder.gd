@@ -49,7 +49,6 @@ func _build_slots_list():
 				_raw_item_slots.append(null)
 			raw_index += 1
 		slot_set_index += 1
-	print("Loaded Item Slots: %s : %s : %s" % [_actor.Id, self, _raw_to_slot_set_mapping])
 
 func get_raw_slot_index(tag:String, sub_index:int)->int:
 	var slot_set_index = _slot_set_key_mapping.find(tag)
@@ -59,7 +58,6 @@ func get_raw_slot_index(tag:String, sub_index:int)->int:
 		return _item_slot_sets_datas[slot_set_index]['IndexOffset'] + sub_index
 
 func get_slot_set_data_for_index(index:int):
-	print("Getting Item Slots: %s : %s : %s" % [_actor.Id, self, _raw_to_slot_set_mapping])
 	if index < 0 or index > _raw_item_slots.size():
 		return null
 	var index_data = _raw_to_slot_set_mapping[index]

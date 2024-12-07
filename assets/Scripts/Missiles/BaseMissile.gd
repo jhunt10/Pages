@@ -1,6 +1,6 @@
 class_name BaseMissile
 
-const LOGGING = false
+const LOGGING = true
 
 var Id : String = str(ResourceUID.create_id())
 func get_tagable_id(): return Id
@@ -15,7 +15,7 @@ var _missile_vfx_key:String
 var _impact_vfx_key:String
 var StartSpot:Vector2i
 var TargetSpot:Vector2i
-
+var _lob_path:bool = false
 # Number of frames to travel 1 tile of distance
 # inverted so that it stays an int and arounds rounding issues
 var _frames_per_tile:int
@@ -30,6 +30,7 @@ func _init(source_actor:BaseActor, missile_data:Dictionary, source_tag_chain:Sou
 	_target_params = target_params
 	_missile_vfx_key = missile_data['MissileVfxKey']
 	_impact_vfx_key = missile_data.get('ImpactVfxKey', '')
+	_lob_path = missile_data.get("UseLobPath", false)
 	
 	_frames_per_tile = missile_data['FramesPerTile']
 	_start_frame = CombatRootControl.Instance.QueController.sub_action_index
@@ -93,14 +94,14 @@ func _calc_positions():
 	# Get distance in pixels between start and end point
 	var start_pos = CombatRootControl.Instance.MapController.actor_tile_map.map_to_local(StartSpot)
 	var end_pos = CombatRootControl.Instance.MapController.actor_tile_map.map_to_local(TargetSpot)
-	var local_distance = start_pos.distance_to(end_pos)
+	var pixel_distance = start_pos.distance_to(end_pos)
 	
 	# Get distance in tiles between start and end 
 	# diagnal movement counts as 1, so we only need greatest side
 	var tile_distance = maxi(abs(TargetSpot.x - StartSpot.x), abs(TargetSpot.y - StartSpot.y))
 	
 	# Convert from frames_per_tile to pixels_per_frame
-	var pixels_per_tile = local_distance / tile_distance
+	var pixels_per_tile = pixel_distance / tile_distance
 	var pixels_per_frame = pixels_per_tile / _frames_per_tile
 	var frames_till_hit = tile_distance * _frames_per_tile
 	_end_frame = _start_frame + frames_till_hit
@@ -108,15 +109,19 @@ func _calc_positions():
 	# Check if the missile will take more frames to reach the target then there are frames left in turn
 	# If so, log an error and clap the end frame.
 	if  _end_frame > BaseAction.SUB_ACTIONS_PER_ACTION:
-		if LOGGING: printerr("Missile '%s' created by '%s' would not reach target before end of turn." % [Id, _source_actor_id])
 		_end_frame = BaseAction.SUB_ACTIONS_PER_ACTION - 1
-		
+		frames_till_hit = _end_frame - _start_frame
+		pixels_per_frame = pixel_distance / frames_till_hit
 	# Calculate position per frame upfront
 	_position_per_frame.clear()
 	for n in range(_start_frame, _end_frame + 1):
 		var delta = n - _start_frame
 		var dist = delta * pixels_per_frame
 		var new_pos = start_pos.move_toward(end_pos, dist)
+		if _lob_path:
+			var relative_dist = (n - _start_frame) * pixels_per_frame
+			var lob_y_offset = relative_dist - ((relative_dist*relative_dist)/ pixel_distance)
+			new_pos.y -= lob_y_offset
 		_position_per_frame.append(new_pos)
 		
 	pass

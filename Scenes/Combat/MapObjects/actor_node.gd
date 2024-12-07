@@ -50,6 +50,9 @@ var current_animation_action_name:String
 func _ready() -> void:
 	if Engine.is_editor_hint():
 		return
+	if CombatRootControl.Instance and CombatRootControl.Instance.QueController:
+		CombatRootControl.Instance.QueController.execution_paused.connect(pause_animations)
+		CombatRootControl.Instance.QueController.execution_resumed.connect(resume_animations)
 	animation.animation_started.connect(animation_started)
 	animation.animation_finished.connect(animation_finished)
 
@@ -293,3 +296,9 @@ func set_path_arrow_pos(pos:MapPos):
 	if pos.dir == 1: path_arrow.set_rotation_degrees(90) 
 	if pos.dir == 2: path_arrow.set_rotation_degrees(180) 
 	if pos.dir == 3: path_arrow.set_rotation_degrees(270) 
+
+func pause_animations():
+	animation.pause()
+
+func resume_animations():
+	animation.play()

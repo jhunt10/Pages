@@ -53,18 +53,24 @@ static func get_targeted_actors(target_params:TargetParameters, target, source_a
 	return out_list
 
 static func get_selectable_target_spots(target_params:TargetParameters, actor:BaseActor, game_state:GameStateData, exclude_targets:Array=[])->Array:
-	var potentials = _get_potential_coor_to_targets(target_params, actor, game_state, exclude_targets)
+	var potentials = get_potential_coor_to_targets(target_params, actor, game_state, exclude_targets)
 	return potentials.keys()
 	
 static func get_potential_target_actor_ids(target_params:TargetParameters, actor:BaseActor, game_state:GameStateData, exclude_targets:Array=[], pos_override:MapPos=null)->Array:
-	if !target_params or not target_params.is_actor_target_type():
-		return []
-	var potentials = _get_potential_coor_to_targets(target_params, actor, game_state, exclude_targets, pos_override)
+	var potentials = get_potential_coor_to_targets(target_params, actor, game_state, exclude_targets, pos_override)
 	var targets = dicarry_to_values(potentials)
-	return targets
+	if target_params.is_actor_target_type():
+		return targets
+	var actor_ids_list = []
+	for target_spot in potentials.keys():
+		var actors = game_state.MapState.get_actors_at_pos(target_spot)
+		for act in actors:
+			if not actor_ids_list.has(act.Id):
+				actor_ids_list.append(act.Id)
+	return actor_ids_list
 
 ## Returns a Dictionary<Vector21, Array> of spots within target_area mapped to potential targets in that spot.
-static func _get_potential_coor_to_targets(target_params:TargetParameters, actor:BaseActor, game_state:GameStateData, exclude_targets:Array=[], pos_override:MapPos=null)->Dictionary:
+static func get_potential_coor_to_targets(target_params:TargetParameters, actor:BaseActor, game_state:GameStateData, exclude_targets:Array=[], pos_override:MapPos=null)->Dictionary:
 	var actor_pos = game_state.MapState.get_actor_pos(actor)
 	if pos_override:
 		actor_pos = pos_override

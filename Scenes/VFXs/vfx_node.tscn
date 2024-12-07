@@ -123,7 +123,7 @@ tracks/1/keys = {
 }
 
 [sub_resource type="Animation" id="Animation_kvxq2"]
-resource_name = "8_sprites_250ms_frames"
+resource_name = "8_sprites_250ms_frames_loop"
 length = 2.0
 loop_mode = 1
 step = 0.25
@@ -158,11 +158,12 @@ _data = {
 "4_sprites_250ms_frames_loop": SubResource("Animation_mg4p0"),
 "6_sprites_250ms_frames": SubResource("Animation_uwom5"),
 "6_sprites_250ms_frames_loop": SubResource("Animation_7qvkc"),
-"8_sprites_250ms_frames": SubResource("Animation_kvxq2"),
+"8_sprites_250ms_frames_loop": SubResource("Animation_kvxq2"),
 "RESET": SubResource("Animation_lwwt5")
 }
 
 [node name="VFXNode" type="Node2D" node_paths=PackedStringArray("sprite", "animation")]
+z_index = 9
 script = ExtResource("1_kylwc")
 sprite = NodePath("Sprite2D")
 animation = NodePath("AnimationPlayer")

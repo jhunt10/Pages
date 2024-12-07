@@ -45,7 +45,13 @@ func do_thing(parent_action:BaseAction, subaction_data:Dictionary, metadata:QueE
 	if selection_data.get_potential_target_count() == 0:
 		CombatRootControl.Instance.create_flash_text_on_actor(actor, "No Target", Color.ORANGE_RED)
 		return BaseSubAction.Failed
-		
+	
+	if not actor.is_player:
+		if AiHandler.try_handle_get_target_sub_action(actor, selection_data, parent_action, game_state):
+			return BaseSubAction.Success
+		else:
+			return BaseSubAction.Failed 
+	
 	if allow_auto and selection_data.get_potential_target_count() == 1:
 		turn_data.set_target_key(setting_target_key, target_params.target_param_key, selection_data.list_potential_targets()[0])
 		return BaseSubAction.Success
