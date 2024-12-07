@@ -303,5 +303,14 @@ static func _merge_defs(child:Dictionary, parent:Dictionary)->Dictionary:
 		var val = child[key]
 		if val is Dictionary:
 			val = _merge_defs(child[key], parent.get(key, {}))
+		if val is Array:
+			var new_list = []
+			for arr_val in parent.get(key, []):
+				if not new_list.has(arr_val):
+					new_list.append(arr_val)
+			for arr_val in val:
+				if not new_list.has(arr_val):
+					new_list.append(arr_val)
+			val = new_list
 		new_data[key] = val
 	return new_data

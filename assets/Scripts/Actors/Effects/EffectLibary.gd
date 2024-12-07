@@ -44,12 +44,15 @@ static func create_effect(source, key:String, actor:BaseActor, data:Dictionary)-
 	return effect
 
 static func list_effect_defs()->Array:
+	if !Instance: Instance = EffectLibrary.new()
 	return Instance._object_defs.values()
 
 static func list_all_effects_keys()->Array:
+	if !Instance: Instance = EffectLibrary.new()
 	return Instance._object_defs.keys()
 
 static func get_effect_def(key:String)->Dictionary:
+	if !Instance: Instance = EffectLibrary.new()
 	return Instance.get_object_def(key)
 	
 static func get_effect(effect_key:String)->BaseEffect:

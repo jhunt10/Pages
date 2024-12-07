@@ -21,6 +21,8 @@ func get_item_tags()->Array:
 	var tags = super()
 	if !tags.has("Weapon"):
 		tags.append("Weapon")
+	if !tags.has("MainHand"):
+		tags.append("MainHand")
 	return tags
 
 func get_weapon_class()->WeaponClasses:

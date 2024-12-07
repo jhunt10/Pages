@@ -1,6 +1,7 @@
 class_name ItemDetailsCard
 extends Control
 
+signal exit_button_pressed
 signal action_button_pressed
 signal hide_done
 
@@ -22,7 +23,7 @@ var animation_state:AnimationStates
 var item_id:String
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	exit_button.pressed.connect(self.start_hide)
+	exit_button.pressed.connect(_on_exit_button)
 	equip_button.pressed.connect(equip_button_pressed)
 	pass # Replace with function body.
 
@@ -47,6 +48,11 @@ func _process(delta: float) -> void:
 			animation_state == AnimationStates.Showing
 	else:
 		offset_control.position = target
+
+func _on_exit_button():
+	exit_button_pressed.emit()
+	start_hide()
+	
 
 func start_show():
 	self.show()

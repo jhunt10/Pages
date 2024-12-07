@@ -15,10 +15,16 @@ func _init(key:String, def_load_path:String, def:Dictionary, id:String='', data:
 	super(key, def_load_path, def, id, data)
 	var details_data = def.get("Details", {})
 	var action_key = def.get("ActionKey")
-	if action_key:
+	var effect_key = def.get("EffectKey")
+	if action_key and not effect_key:
 		var action_def = ActionLibrary.get_action_def(action_key)
 		details_data = BaseLoadObjectLibrary._merge_defs(details_data, action_def.get("Details", {}))
 		details = ObjectDetailsData.new(ActionLibrary.Instance._defs_to_load_paths[action_key], details_data)
+	if effect_key and not action_key:
+		var effect_def = EffectLibrary.get_effect_def(effect_key)
+		details_data = BaseLoadObjectLibrary._merge_defs(details_data, effect_def.get("Details", {}))
+		details = ObjectDetailsData.new(EffectLibrary.Instance._defs_to_load_paths[effect_key], details_data)
+		
 
 func get_action_key():
 	return get_load_val("ActionKey")
@@ -29,5 +35,8 @@ func get_action()->BaseAction:
 		return ActionLibrary.get_action(action_key)
 	return null
 
-func get_effect()->BaseEffect:
+func get_effect_def():
+	var effect_key = get_load_val("EffectKey")
+	if effect_key:
+		return EffectLibrary.get_effect_def(effect_key)
 	return null

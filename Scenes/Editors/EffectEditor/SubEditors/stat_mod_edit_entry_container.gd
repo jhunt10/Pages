@@ -28,5 +28,5 @@ func get_mod_types()->Array:
 
 func get_stat_names()->Array:
 	var list = StatHelper.CoreStats.keys()
-	list.append_array(StatHelper.Stats.keys())
+	list.append_array(StatHelper.BasicStats.keys())
 	return list

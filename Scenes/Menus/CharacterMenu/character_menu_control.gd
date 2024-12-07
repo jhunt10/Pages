@@ -83,6 +83,7 @@ func set_actor(actor:BaseActor):
 
 func close_menu():
 	ActorLibrary.save_actors()
+	ItemLibrary.save_items()
 	self.queue_free()
 
 func on_details_card_freed():
@@ -95,10 +96,13 @@ func create_details_card(item:BaseItem):
 			_current_details_card.show()
 			return
 		_current_details_card.hide_done.disconnect(on_details_card_freed)
+		_current_details_card.action_button_pressed.disconnect(on_details_card_button_pressed)
+		_current_details_card.exit_button_pressed.disconnect(on_details_card_exit)
 		_current_details_card.start_hide()
 	_current_details_card = load("res://Scenes/Menus/CharacterMenu/MenuPages/ItemDetailsCard/item_details_card.tscn").instantiate()
 	details_card_spawn_point.add_child(_current_details_card)
 	_current_details_card.action_button_pressed.connect(on_details_card_button_pressed)
+	_current_details_card.exit_button_pressed.connect(on_details_card_exit)
 	_current_details_card.hide_done.connect(on_details_card_freed)
 	_current_details_card.set_item(item)
 	_current_details_card.start_show()
@@ -205,6 +209,9 @@ func on_mouse_exit_slot(context, item_key, index):
 		clear_highlights()
 	print("Item Button Exit : %s | %s | %s" % [context, item_key, index])
 
+func on_details_card_exit():
+	self.clear_highlights()
+	
 func on_details_card_button_pressed():
 	if _selected_item:
 		if _left_page_context == "Equipment" and _selected_item is BaseEquipmentItem:

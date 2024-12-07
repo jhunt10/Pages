@@ -10,7 +10,9 @@ var slot_sets_data:Array:
 	get:
 		return _item_slot_sets_datas
 
+## Def of each slot set. Using Array to preserve order.
 var _item_slot_sets_datas:Array=[]
+## Ordered Array of slot set keyes
 var _slot_set_key_mapping:Array=[]
 var _raw_item_slots:Array=[]
 var _raw_to_slot_set_mapping:Array=[]
@@ -18,13 +20,12 @@ var _actor:BaseActor
 
 func _init(actor:BaseActor) -> void:
 	self._actor = actor
-	_actor.equipment_changed.connect(_build_slots_list)
 	_build_slots_list()
 
-func _get_slots_sets_data()->Array:
+func _load_slots_sets_data()->Array:
 	return []
 
-func _get_saved_items()->Array:
+func _load_saved_items()->Array:
 	return []
 
 func _build_slots_list():
@@ -32,8 +33,8 @@ func _build_slots_list():
 	var raw_index = 0
 	_slot_set_key_mapping = []
 	_raw_to_slot_set_mapping = []
-	_item_slot_sets_datas = _get_slots_sets_data()
-	var saved_items = _get_saved_items()
+	_item_slot_sets_datas = _load_slots_sets_data()
+	var saved_items = _load_saved_items()
 	#if _actor.ActorKey == "TestChaser":
 		#var t = true
 	for sub_slot_data in _item_slot_sets_datas:
@@ -113,11 +114,12 @@ func get_item_in_slot(index:int)->BaseItem:
 			return ItemLibrary.get_item(item_id)
 	return null
 
-func remove_item(item_id:String):
+func remove_item(item_id:String, supress_signal:bool=false):
 	var index = _raw_item_slots.find(item_id)
 	if index >= 0:
 		_raw_item_slots[index] = null
-		items_changed.emit()
+		if not supress_signal:
+			items_changed.emit()
 
 func can_set_item_in_slot(item:BaseItem, index:int, allow_replace:bool=false)->bool:
 	if index < 0 or index >= _raw_item_slots.size():
@@ -148,6 +150,11 @@ func _can_slot_set_accept_item(slot_set_data:Dictionary, item:BaseItem)->bool:
 		if required_tags is String:
 			if item_tags.has(required_tags):
 				return true
+		if required_tags is Array:
+			for req_tag in required_tags:
+				if not item_tags.has(req_tag):
+					return false
+			return true
 	else:
 		return true
 	return false

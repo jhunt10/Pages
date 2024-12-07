@@ -1,42 +1,32 @@
 class_name PageHolder
 extends BaseItemHolder
 
-#signal pages_changed
+var page_que_item_id
 
-#var _page_tag_slot_counts:Dictionary={}
-#var _page_tagged_slots:Dictionary={}
-#
-#var actor:BaseActor
-
-func _init(actor) -> void:
-	_actor = actor
-	var slot_sets_data = _get_slots_sets_data()
+func _init(actor, page_que_item) -> void:
+	if page_que_item:
+		page_que_item_id = page_que_item.Id
 	super(actor)
 
-func _get_slots_sets_data()->Array:
-	var que_items = _actor.equipment.get_equipt_items_of_slot_type("Que")
-	if que_items.size() > 0:
-		return que_items[0].get_load_val("ItemSlotsData", [])
+func _load_slots_sets_data()->Array:
+	if page_que_item_id:
+		var page_que = ItemLibrary.get_item(page_que_item_id)
+		if page_que:
+			return page_que.get_load_val("ItemSlotsData", [])
 	var defaults = _actor.get_load_val("DefaultPageSlotSet")
 	if defaults:
 		return defaults
 	return []
 
-func _get_saved_items()->Array:
+func _load_saved_items()->Array:
 	return _actor.get_load_val("Pages", [])
 
-#func _init(actor:BaseActor) -> void:
-	#self.actor = actor
-	#actor.equipment_changed.connect(_count_page_tag_slots)
-	#_page_tagged_slots = actor.get_load_val("Pages", {})
-	#_count_page_tag_slots()
-	
-
-#func get_max_page_count()->int:
-	#var count = 0
-	#for val in _page_tag_slot_counts.values():
-		#count += val
-	#return count
+func set_page_que_item(page_que:BaseQueEquipment):
+	if page_que:
+		page_que_item_id = page_que.Id
+	else:
+		page_que_item_id = null
+	_build_slots_list()
 
 func list_action_keys()->Array:
 	var out_list = []
@@ -52,68 +42,6 @@ func list_actions()->Array:
 			out_list.append(action)
 	return out_list
 
-#func list_pages()->Array:
-	#return list_items()
-#
-#func has_page(action_key:String):
-	#var action_keys = list_action_keys()
-	#return action_keys.has(action_key)
-#
-#func remove_page(action_key:String):
-	#var changed = false
-	#for page_tags in _page_tagged_slots.keys():
-		#var index = _page_tagged_slots[page_tags].find(action_key)
-		#if index < 0:
-			#continue
-		#_page_tagged_slots[page_tags][index] = null
-		#changed = true
-	#if changed:
-		#pages_changed.emit()
-#
-#func can_place_page_in_slot(page:BasePageItem, page_tag:String, slot_index:int, allow_replace:bool = false):
-	#if has_page(page.get_action_key()):
-		#return false
-	#if not _does_page_match_tags(page_tag, page):
-		#return false
-	#if slot_index < 0 or slot_index >= _page_tagged_slots.get(page_tag, []).size():
-		#return false
-	#if not allow_replace and _page_tagged_slots.get(page_tag)[slot_index] != null:
-		#return false
-	#return true
-#
-#func try_place_page_in_slot(page:BasePageItem, page_tag:String, slot_index:int, allow_replace:bool = false):
-	#if not can_place_page_in_slot(page, page_tag, slot_index, allow_replace):
-		#return false
-	#_page_tagged_slots[page_tag][slot_index] = page.Id
-	#pages_changed.emit()
-	#return true
-#
-#func try_add_page(page:BasePageItem)->bool:
-	#if has_page(page.Id):
-		#return true
-	#for page_tags in _page_tagged_slots.keys():
-		#if _does_page_match_tags(page_tags, page):
-			#var open_slot = _page_tagged_slots[page_tags].find(null)
-			#if open_slot >= 0:
-				#_page_tagged_slots[page_tags][open_slot] = page.Id
-				#pages_changed.emit()
-				#return true
-			#else:
-				#print("No Open Slot found in '%s'" %[page_tags])
-		#else:
-			#print("%s Not match tags '%s'" %[page.Id, page_tags])
-	#print("No Valid PageTags Slot Found")
-	#return false
-#
-#func _does_page_match_tags(page_tags:String, page:BasePageItem)->bool:
-	#var tags = page_tags.split("|")
-	#for tag in tags:
-		#if tag == "Any":
-			#continue
-		#if not page.details.tags.has(tag):
-			#return false
-	#return true
-#
 #func set_page_for_slot(slot_page_tags:String, index:int, page:BasePageItem):
 	#if !_page_tag_slot_counts.keys().has(slot_page_tags):
 		#return

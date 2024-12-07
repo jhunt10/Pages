@@ -74,11 +74,27 @@ func _init(key:String, load_path:String, def:Dictionary, id:String, data:Diction
 	effects = EffectHolder.new(self)
 	details = ObjectDetailsData.new(_def_load_path, _def.get("Details", {}))
 	equipment = EquipmentHolder.new(self)
-	items = BagItemHolder.new(self)
+	equipment.items_changed.connect(_on_equipment_holder_items_change)
+	items = BagItemHolder.new(self, equipment.get_bag_equipment())
 	Que = ActionQue.new(self)
-	pages = PageHolder.new(self)
+	pages = PageHolder.new(self, equipment.get_que_equipment())
 	if get_load_val("IsPlayer", false):
 		is_player = true
+
+func _on_equipment_holder_items_change():
+	var bag = equipment.get_bag_equipment()
+	if not bag and items.bag_item_id != null:
+		items.set_bag_item(null)
+	if bag and items.bag_item_id != bag.Id:
+		items.set_bag_item(bag)
+		
+	var page_que = equipment.get_que_equipment()
+	if not page_que and pages.page_que_item_id != null:
+		pages.set_page_que_item(null)
+	if page_que and pages.page_que_item_id != page_que.Id:
+		pages.set_page_que_item(page_que)
+	
+	self.equipment_changed.emit()
 
 func save_me()->bool:
 	return self.is_player

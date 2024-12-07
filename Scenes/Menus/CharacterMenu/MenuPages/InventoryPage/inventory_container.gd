@@ -96,7 +96,6 @@ func _on_item_button_up(button:InventoryItemButton):
 	var item = button.get_item()
 	var offset = button.get_local_mouse_position()
 	item_button_up.emit(event_context, button._item_id, -1)
-	
 
 func _mouse_enter_button(button:InventoryItemButton):
 	mouse_enter_item.emit(event_context, button._item_id, -1)

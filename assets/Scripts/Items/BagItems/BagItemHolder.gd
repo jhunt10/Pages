@@ -1,16 +1,30 @@
 class_name BagItemHolder
 extends BaseItemHolder
 
-func _init(actor) -> void:
-	_actor = actor
-	var slot_sets_data = _get_slots_sets_data()
+var bag_item_id
+
+func _init(actor, bag_item) -> void:
+	if bag_item:
+		bag_item_id = bag_item.Id
 	super(actor)
 
-func _get_slots_sets_data()->Array:
-	var bag_items = _actor.equipment.get_equipt_items_of_slot_type("Bag")
-	if bag_items.size() > 0:
-		return bag_items[0].get_load_val("ItemSlotsData", [])
+func _load_slots_sets_data()->Array:
+	if bag_item_id:
+		var bag_item = ItemLibrary.get_item(bag_item_id)
+		if bag_item:
+			return bag_item.get_load_val("ItemSlotsData", [])
+	var defaults = _actor.get_load_val("DefaultBagItemSlotSet")
+	if defaults:
+		return defaults
 	return []
 
-func _get_saved_items()->Array:
+func set_bag_item(bag_item:BaseItemBag):
+	if bag_item:
+		bag_item_id = bag_item.Id
+	else:
+		bag_item_id = null
+	_build_slots_list()
+
+
+func _load_saved_items()->Array:
 	return _actor.get_load_val("BagItems", [])

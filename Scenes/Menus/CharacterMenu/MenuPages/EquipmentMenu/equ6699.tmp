@@ -4,7 +4,6 @@
 [ext_resource type="Texture2D" uid="uid://c4yedxpiinlff" path="res://Scenes/Menus/CharacterMenu/MenuPages/outline.png" id="2_5i0tg"]
 [ext_resource type="Theme" uid="uid://dwinll8pgdjhc" path="res://Scenes/Themes/standard_theme.tres" id="3_th70d"]
 [ext_resource type="Texture2D" uid="uid://bvdik5isqdgxf" path="res://Scenes/Menus/CharacterMenu/MenuPages/EquipmentMenu/EquipmentSlotsContainer/EquipmentGrid_Background.png" id="4_cj3ey"]
-[ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/EquipmentMenu/EquipmentSlotsContainer/equipment_display_container.gd" id="4_p6hdl"]
 [ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/EquipmentMenu/EquipmentSlotsContainer/equipment_display_slot_button.gd" id="5_pa62e"]
 [ext_resource type="Texture2D" uid="uid://cdxe2v7hg5tuw" path="res://assets/Sprites/UI/CharacterEdit/HeadSlot.png" id="6_tt121"]
 [ext_resource type="Texture2D" uid="uid://567vutk12a12" path="res://Scenes/Menus/CharacterMenu/MenuPages/SlotHighlight.png" id="7_0h3qm"]
@@ -20,6 +19,105 @@
 [ext_resource type="Texture2D" uid="uid://co33b1qq2uef7" path="res://assets/Sprites/UI/CharacterEdit/BagSlot.png" id="17_t6rl3"]
 [ext_resource type="Texture2D" uid="uid://puhp53n8k1h8" path="res://assets/Sprites/UI/CharacterEdit/TrinketSlot.png" id="18_pfurv"]
 [ext_resource type="Texture2D" uid="uid://dwliocipx40sq" path="res://assets/Sprites/UI/CharacterEdit/OffHandSlot.png" id="19_vhvqa"]
+
+[sub_resource type="GDScript" id="GDScript_esjy6"]
+script/source = "class_name EquipmentDisplayContainer
+extends Control
+
+signal item_button_down(item_key)
+signal item_button_up(item_key)
+signal mouse_enter_item(item_key)
+signal mouse_exit_item(item_key)
+
+@export var actor_node:ActorNode
+@export var armor_lable:Label
+@export var ward_label:Label
+@export var phyatk_label:Label
+@export var magatk_label:Label
+signal equipt_slot_pressed(slot:int)
+
+var _actor:BaseActor
+var _display_dir:int = 2
+
+var slot_displays:Array:
+	get: return [
+		$RightEquipSlots/BookSlotButton,
+		$RightEquipSlots/BagSlotButton,
+		$LeftEquipSlots/HeadSlotButton,
+		$LeftEquipSlots/BodySlotButton,
+		$LeftEquipSlots/FeetSlotButton,
+		$RightEquipSlots/TrinketSlotButton,
+		$LeftEquipSlots/MainHandSlotButton,
+		$RightEquipSlots/OffHandSlotButton,
+	]
+
+func _ready() -> void:
+	for slot:int in range(slot_displays.size()):
+		var slot_display:EquipmentDisplaySlotButton = slot_displays[slot]
+		slot_display.button_down.connect(_on_item_button_down.bind(slot))
+		slot_display.button_up.connect(_on_item_button_up.bind(slot))
+		slot_display.mouse_entered.connect(_on_mouse_enter_item.bind(slot))
+		slot_display.mouse_exited.connect(_on_mouse_exit_item.bind(slot))
+
+func set_actor(actor:BaseActor):
+	if actor == _actor:
+		_sync()
+		return
+	if _actor:
+		if _actor.equipment_changed.is_connected(_sync):
+			_actor.equipment_changed.disconnect(_sync)
+	_actor = actor
+	actor_node.set_actor(actor)
+	_actor.equipment_changed.connect(_sync)
+	_sync()
+
+func _sync():
+	armor_lable.text = str(_actor.equipment.get_total_equipment_armor())
+	ward_label.text = str(_actor.equipment.get_total_equipment_ward())
+	for index:int in range(slot_displays.size()):
+		var slot_display:EquipmentDisplaySlotButton = slot_displays[index]
+		var slot_type = _actor.equipment.get_slot_equipment_type(index)
+		slot_display.set_slot_type(slot_type)
+		if _actor.equipment.has_equipment_in_slot(index):
+			var item:BaseEquipmentItem = _actor.equipment.get_equipment_in_slot(index)
+			slot_display.set_item(item)
+		else:
+			slot_display.clear_item()
+	magatk_label.text = str(_actor.stats.get_base_magic_attack())
+	phyatk_label.text = str(_actor.stats.get_base_phyical_attack())
+
+func clear_highlights():
+	for slot_display:EquipmentDisplaySlotButton in slot_displays:
+		slot_display.highlight(false)
+
+func highlight_slots_of_type(slot_type:String):
+	for slot_display:EquipmentDisplaySlotButton in slot_displays:
+		slot_display.highlight(slot_display.slot_type == slot_type)
+
+func get_mouse_over_slot_index()->int:
+	for index:int in range(slot_displays.size()):
+		var slot_display:EquipmentDisplaySlotButton = slot_displays[index]
+		if slot_display.is_mouse_over():
+			return index
+	return -1
+
+func _on_item_button_down(index):
+	var item = _actor.equipment.get_equipment_in_slot(index)
+	if item:
+		item_button_down.emit(item.ItemKey)
+func _on_item_button_up(index):
+	var item = _actor.equipment.get_equipment_in_slot(index)
+	if item:
+		item_button_up.emit(item.ItemKey)
+func _on_mouse_enter_item(index):
+	var item = _actor.equipment.get_equipment_in_slot(index)
+	if item:
+		mouse_enter_item.emit(item.ItemKey)
+func _on_mouse_exit_item(index):
+	var item = _actor.equipment.get_equipment_in_slot(index)
+	if item:
+		mouse_exit_item.emit(item.ItemKey)
+"
 
 [node name="EquipmentPage" type="Control" node_paths=PackedStringArray("name_label", "level_label", "equipment_slots_container")]
 custom_minimum_size = Vector2(280, 395)
@@ -80,7 +178,7 @@ offset_right = 268.0
 offset_bottom = 306.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
-script = ExtResource("4_p6hdl")
+script = SubResource("GDScript_esjy6")
 actor_node = NodePath("CenterContainer/Control/Node2D/ActorNode")
 armor_lable = NodePath("MiddlePortraitContainer/StatsContainer/LeftStatContainer/PhyDefense/Label")
 ward_label = NodePath("MiddlePortraitContainer/StatsContainer/RightStatContainer/MagDefense/Label")

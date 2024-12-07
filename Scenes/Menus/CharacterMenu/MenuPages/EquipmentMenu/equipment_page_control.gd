@@ -2,7 +2,7 @@ class_name EquipmentPageControl
 extends Control
 
 var event_context = "Equipment"
-signal item_button_down(context, item_key, index)
+signal item_button_down(context, item_key, index, offset)
 signal item_button_up(context, item_key, index)
 signal mouse_enter_item(context, item_key, index)
 signal mouse_exit_item(context, item_key, index)
@@ -33,19 +33,19 @@ func set_actor(actor:BaseActor):
 	equipment_slots_container.set_actor(actor)
 
 func clear_highlights():
-	pass
+	equipment_slots_container.clear_highlights()
 
-func highlight_slot(index_data):
-	pass
+func highlight_slot(index):
+	equipment_slots_container.highlight_slot(index)
 
-func _on_item_button_down(item_key, offset):
-	item_button_down.emit(event_context, item_key, offset)
-func _on_item_button_up(item_key):
-	item_button_up.emit(event_context, item_key, {})
-func _on_mouse_enter_item(item_key):
-	mouse_enter_item.emit(event_context, item_key, {})
-func _on_mouse_exit_item(item_key):
-	mouse_exit_item.emit(event_context, item_key, {})
+func _on_item_button_down(item_key, index, offset):
+	item_button_down.emit(event_context, item_key, index, offset)
+func _on_item_button_up(item_key, index):
+	item_button_up.emit(event_context, item_key, index)
+func _on_mouse_enter_item(item_key, index):
+	mouse_enter_item.emit(event_context, item_key, index)
+func _on_mouse_exit_item(item_key, index):
+	mouse_exit_item.emit(event_context, item_key, index)
 
 func can_place_item_in_slot(item:BaseItem, index:int):
 	if item is BaseEquipmentItem:
@@ -60,13 +60,13 @@ func can_place_item_in_slot(item:BaseItem, index:int):
 	return false
 
 func remove_item_from_slot(item:BaseItem, index:int):
-	ItemHelper.try_transfer_item_from_holder_to_inventory(item, _actor.pages)
+	ItemHelper.try_transfer_item_from_holder_to_inventory(item, _actor.equipment)
 
 func try_place_item_in_slot(item:BaseItem, index:int):
-	var res = ItemHelper.try_transfer_item_from_inventory_to_holder(item, _actor.pages, index, true)
+	var res = ItemHelper.try_transfer_item_from_inventory_to_holder(item, _actor.equipment, index, true)
 	if res == '':
 		return true
 	return false
 
 func try_move_item_to_slot(item:BaseItem, from_index:int, to_index:int):
-	ItemHelper.swap_item_holder_slots(_actor.items, from_index, to_index)
+	ItemHelper.swap_item_holder_slots(_actor.equipment, from_index, to_index)
