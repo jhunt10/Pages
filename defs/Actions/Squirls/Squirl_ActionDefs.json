@@ -70,5 +70,52 @@
                 "TargetType": "Spot"
             }
         }
-    }
+    },
+    {
+        "ActionKey": "SpawnSquirrle",
+        "CostData": {},
+        "DamageDatas": {},
+        "Details": {
+            "Description": "Spawn a squirrle which might attacks nearby enemies (or maybe you).",
+            "DisplayName": "Spawn Totem",
+            "LargeIcon": "SpawnSquirrle.png",
+            "SmallIcon": "SpawnSquirrle.png",
+            "SnippetDesc": "Spawn a (maybe) friendly squirrle",
+            "Tags": [
+                "Spell",
+                "Spawn"
+            ]
+        },
+        "MissileDatas": {},
+        "Preview": {
+            "PreviewTargetKey": "TargetParams1"
+        },
+        "SubActions": {
+            "10": [
+                {
+                    "AllowAlreadyTargeted": false,
+                    "AllowAutoTarget": false,
+                    "SetTargetKey": "Target1",
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_GetTarget.gd",
+                    "TargetParamKey": "TargetParams1"
+                }
+            ],
+            "11": [
+                {
+                    "ActorKey": "TestChaser",
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_SpawnActor.gd",
+                    "TargetKey": "Target1"
+                }
+            ]
+        },
+        "TargetParams": {
+            "TargetParams1": {
+                "EffectsAllies": false,
+                "EffectsEnemies": false,
+                "LineOfSight": true,
+                "TargetArea": "[[0,1],[1,1],[1,0],[1,-1],[0,-1],[-1,-1],[-1,0],[-1,1],[-1,2],[0,2],[1,2],[2,1],[2,0],[2,-1],[1,-2],[0,-2],[-1,-2],[-2,-1],[-2,0],[-2,1]]",
+                "TargetType": "OpenSpot"
+            }
+        }
+    },
 ]

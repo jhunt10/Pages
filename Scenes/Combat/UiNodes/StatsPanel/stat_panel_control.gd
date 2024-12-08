@@ -84,6 +84,8 @@ func _sync_icons():
 			if effect._duration_counter >= 0:
 				_set_duration_text(effect.Id, effect.RemainingDuration)
 			continue
+		if effect.get_load_val("HideInHud", false):
+			continue
 		var new_icon = premade_effect_icon.duplicate()
 		new_icon.texture = effect.get_small_icon()
 		new_icon.visible = true
@@ -107,7 +109,7 @@ func _build_stat_bars():
 	_stat_bars.clear()
 	_stat_bars[StatHolder.HealthKey] = health_bar
 	
-	for stat_name in actor.stats.list_bar_stats():
+	for stat_name in actor.stats.list_bar_stat_names():
 		if stat_name == StatHolder.HealthKey:
 			continue
 		_create_stat_bar(stat_name)

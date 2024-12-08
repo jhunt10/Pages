@@ -177,7 +177,7 @@
 	},
 	{
 		"BlockScript": "res://Scenes/Dialog/DialogBlocks/Custom/DialogBlock_TutorialConditions.gd",
-		"RemovePages": [
+		"RemoveActions": [
 			"BasicWeaponAttack",
 			"TestArrow",
 			"TestBullets",
@@ -406,8 +406,8 @@
 	{
 		"BlockTag": "AddPage_BWA",
 		"BlockScript": "res://Scenes/Dialog/DialogBlocks/Custom/DialogBlock_TutorialConditions.gd",
-		"Pages": [
-			"BasicWeaponAttack"
+		"AddPages": [
+			"BasicWeaponAttack_PageItem1"
 		]
 	},
 	{
@@ -563,14 +563,14 @@
 	{
 		"BlockTag": "AddPage_End",
 		"BlockScript": "res://Scenes/Dialog/DialogBlocks/Custom/DialogBlock_TutorialConditions.gd",
-		"Pages": [
-			"BasicWeaponAttack",
-			"TestArrow",
-			"TestBullets",
-			"TeleportSelf",
-			"TestPoison",
-			"TestFireBall",
-			"SpawnTestTotem"
+		"AddPages": [
+			"BasicWeaponAttack_PageItem1",
+			"TestArrow_PageItem1",
+			"TestBullets_PageItem1",
+			"TeleportSelf_PageItem1",
+			"TestPoison_PageItem1",
+			"TestFireBall_PageItem1",
+			"SpawnTestTotem_PageItem1"
 		],
 		"FreezeCamera": false
 	}

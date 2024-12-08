@@ -20,6 +20,7 @@ func update(_delta:float):
 
 func end_state():
 	CombatRootControl.QueController.end_of_round.disconnect(_on_round_end)
+	CombatRootControl.Instance.camera.following_actor_node = null
 	pass
 	
 func _on_round_end():

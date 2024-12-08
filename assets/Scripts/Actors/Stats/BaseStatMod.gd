@@ -9,7 +9,7 @@ var value
 enum ModTypes {
 	Add, # Add to stat 		| x = x + val
 	Scale, # Multiply stat 		| x = x * val 
-	Replc, # Replaces the stat 	| x = val
+	Set, # Set the stat 	| x = val
 }
 
 static func create_from_data(source_id:String, data:Dictionary) -> BaseStatMod:

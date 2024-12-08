@@ -1,10 +1,30 @@
 [
     {
+        "ItemKey": "TestHealthBuff_ClassPage",
+        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
+        "CanStack": true,
+        "ActionKey": null,
+        "EffectKey": "TestHealthBuff",
+        "Details":{
+            "Tags": ["ClassPage"]
+        }
+    },
+    {
         "ItemKey": "RegenStamina_ClassPage",
         "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
         "CanStack": true,
         "ActionKey": null,
         "EffectKey": "StaminaRegen",
+        "Details":{
+            "Tags": ["ClassPage"]
+        }
+    },
+    {
+        "ItemKey": "RegenMana_ClassPage",
+        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
+        "CanStack": true,
+        "ActionKey": null,
+        "EffectKey": "ManaRegen",
         "Details":{
             "Tags": ["ClassPage"]
         }

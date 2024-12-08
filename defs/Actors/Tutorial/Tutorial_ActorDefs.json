@@ -10,11 +10,10 @@
 			"SmallIcon":"GuyPortrait.png"
 		},
 		"Stats":{
+			"BarStat:Health":100,
 			"Max:Health":100,
-			"Max:Stamina":100,
-			"Max:Mana":100,
-			"Regen:Stamina:Turn":5,
-			"Regen:Mana:Round":20,
+			"Regen:Health:Round":0,
+			"Regen:Health:Turn":0,
 			"Mass":15,
 			"Speed":10,
 			"Level":69,
@@ -25,6 +24,7 @@
 			"Armor": 80,
 			"PagesPerRound": 0
 		},
+		"IsPlayer": true,
 		"SpriteSheet": "Template_SpriteSheet.png",
 		"SpriteFrameWH": [12,4],
 		"SpriteOffset": [0,-16],
@@ -70,7 +70,10 @@
 		"AutoQueing": false,
 		"LeavesCorpse": true,
 		"Stats":{
+			"BarStat:Health":15,
 			"Max:Health":15,
+			"Regen:Health:Round":0,
+			"Regen:Health:Turn":0,
 			"Mass":1000,
 			"Speed":0
 		},

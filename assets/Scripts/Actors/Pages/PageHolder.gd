@@ -1,7 +1,10 @@
 class_name PageHolder
 extends BaseItemHolder
 
+signal class_page_changed
+
 var page_que_item_id
+var item_id_to_effect_id:Dictionary = {}
 
 func _init(actor, page_que_item) -> void:
 	if page_que_item:
@@ -20,6 +23,14 @@ func _load_slots_sets_data()->Array:
 
 func _load_saved_items()->Array:
 	return _actor.get_load_val("Pages", [])
+
+func load_effects():
+	for slot_index in range(_raw_item_slots.size()):
+		var page_id = _raw_item_slots[slot_index]
+		if not page_id:
+			continue
+		var page_item = ItemLibrary.get_item(page_id)
+		_on_item_added_to_slot(page_item, slot_index)
 
 func set_page_que_item(page_que:BaseQueEquipment):
 	if page_que:
@@ -42,6 +53,29 @@ func list_actions()->Array:
 			out_list.append(action)
 	return out_list
 
+func get_page_item_for_action_key(action_key:String)->BasePageItem:
+	for page:BasePageItem in list_items():
+		if page.get_action_key() == action_key:
+			return page
+	return null
+
+func _on_item_removed_from_slot(item_id:String, index:int):
+	if item_id_to_effect_id.keys().has(item_id):
+		var effect = EffectLibrary.get_effect(item_id_to_effect_id[item_id])
+		_actor.effects.remove_effect(effect)
+		item_id_to_effect_id.erase(item_id)
+		class_page_changed.emit()
+
+func _on_item_added_to_slot(item:BaseItem, index:int):
+	var page = item as BasePageItem
+	if not page:
+		printerr("PageHolder._on_item_added_to_slot: Item '%s' is not of type BasePageItem." % [item.Id])
+		return
+	var effect_def = page.get_effect_def()
+	if effect_def:
+		var new_effect = _actor.effects.add_effect(page, page.get_load_val("EffectKey"), effect_def)
+		item_id_to_effect_id[item.Id] = new_effect.Id
+		class_page_changed.emit()
 #func set_page_for_slot(slot_page_tags:String, index:int, page:BasePageItem):
 	#if !_page_tag_slot_counts.keys().has(slot_page_tags):
 		#return

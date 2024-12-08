@@ -78,8 +78,12 @@ func _init(key:String, load_path:String, def:Dictionary, id:String, data:Diction
 	items = BagItemHolder.new(self, equipment.get_bag_equipment())
 	Que = ActionQue.new(self)
 	pages = PageHolder.new(self, equipment.get_que_equipment())
+	pages.class_page_changed.connect(_on_class_page_change)
 	if get_load_val("IsPlayer", false):
 		is_player = true
+
+func post_creation():
+	pages.load_effects()
 
 func _on_equipment_holder_items_change():
 	var bag = equipment.get_bag_equipment()
@@ -95,6 +99,10 @@ func _on_equipment_holder_items_change():
 		pages.set_page_que_item(page_que)
 	
 	self.equipment_changed.emit()
+
+func _on_class_page_change():
+	stats.dirty_stats()
+	stats.recache_stats()
 
 func save_me()->bool:
 	return self.is_player

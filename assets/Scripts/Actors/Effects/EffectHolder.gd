@@ -27,13 +27,13 @@ func on_combat_start():
 	else:
 		printerr("EffectHolder.on_combat_start: No CombatRootControl found")
 	
-func add_effect(source, effect_key:String, effect_data:Dictionary)->BaseEffect:
+func add_effect(source, effect_key:String, effect_data:Dictionary, game_state:GameStateData=null)->BaseEffect:
 	var effect = EffectLibrary.create_effect(source, effect_key, _actor, effect_data)
 	if LOGGING: print("EffectHolder.add_effect: Added effect '%s' to actor '%s'." % [effect.Id, _actor.Id])
 	_effects[effect.Id] = effect
 	for trigger in effect.Triggers:
 		_triggers_to_effect_ids[trigger].append(effect.Id)
-	effect.on_created(CombatRootControl.Instance.GameState)
+	effect.on_created(game_state)
 	return effect
 		
 func list_effects()->Array:

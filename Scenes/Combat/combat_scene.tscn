@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://dfeilp6hbiuqs"]
+[gd_scene load_steps=32 format=3 uid="uid://dfeilp6hbiuqs"]
 
 [ext_resource type="Script" path="res://Scenes/Combat/combat_scene.gd" id="1_crigy"]
 [ext_resource type="Texture2D" uid="uid://b232xm2ly0peh" path="res://assets/Sprites/UI/GridCursors/GridCursor_Default.png" id="7_7lt4y"]
@@ -24,6 +24,10 @@
 [ext_resource type="Texture2D" uid="uid://cu00gc8hhk0h3" path="res://assets/Sprites/UI/QueInputAndDisplay/page_slot.png" id="23_o55pl"]
 [ext_resource type="Script" path="res://assets/Scripts/DevTools/que_cal_bar_control.gd" id="23_tcvpd"]
 [ext_resource type="Texture2D" uid="uid://cwsvq3qu6228n" path="res://assets/Sprites/UI/QueInputAndDisplay/page_button.png" id="24_5fn7e"]
+[ext_resource type="Script" path="res://Scenes/Combat/UiNodes/CameraLock/camera_lock_control.gd" id="25_ig6gl"]
+[ext_resource type="Texture2D" uid="uid://e0lb1vqlst3i" path="res://Scenes/Combat/UiNodes/CameraLock/CameraLock_Locked.png" id="26_muuhh"]
+[ext_resource type="Texture2D" uid="uid://88hhiituab5b" path="res://Scenes/Combat/UiNodes/CameraLock/CameraLock_Unlocked.png" id="27_cweuh"]
+[ext_resource type="Texture2D" uid="uid://dx5cq5wifod2g" path="res://Scenes/Combat/UiNodes/CameraLock/CameraLock_Following.png" id="28_mng7g"]
 [ext_resource type="Script" path="res://Scenes/Combat/UiNodes/target_input_control.gd" id="31_jtehh"]
 [ext_resource type="Texture2D" uid="uid://io35wpu802fp" path="res://assets/Sprites/UI/BackPatches/Patch_64_12.png" id="32_f81f5"]
 [ext_resource type="Theme" uid="uid://dwinll8pgdjhc" path="res://Scenes/Themes/standard_theme.tres" id="33_yh7y3"]
@@ -322,6 +326,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="NextActorButton" type="Button" parent="MoveableCamera2D/CanvasLayer/CombatUiControl"]
+visible = false
 layout_mode = 0
 offset_left = 293.0
 offset_top = 5.0
@@ -557,6 +562,50 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+
+[node name="CameraLockControl" type="Control" parent="MoveableCamera2D/CanvasLayer" node_paths=PackedStringArray("camera", "locked_icon", "unlocked_icon", "following_icon", "button")]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 955.0
+offset_top = 4.0
+offset_right = 995.0
+offset_bottom = 44.0
+scale = Vector2(2, 2)
+script = ExtResource("25_ig6gl")
+camera = NodePath("../..")
+locked_icon = NodePath("LockedIcon")
+unlocked_icon = NodePath("UnlockedIcon")
+following_icon = NodePath("FollowingIcon")
+button = NodePath("Button")
+
+[node name="LockedIcon" type="TextureRect" parent="MoveableCamera2D/CanvasLayer/CameraLockControl"]
+visible = false
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("26_muuhh")
+
+[node name="UnlockedIcon" type="TextureRect" parent="MoveableCamera2D/CanvasLayer/CameraLockControl"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("27_cweuh")
+
+[node name="FollowingIcon" type="TextureRect" parent="MoveableCamera2D/CanvasLayer/CameraLockControl"]
+visible = false
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("28_mng7g")
+
+[node name="Button" type="Button" parent="MoveableCamera2D/CanvasLayer/CameraLockControl"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="MapNode" parent="." instance=ExtResource("7_ce1oe")]
 

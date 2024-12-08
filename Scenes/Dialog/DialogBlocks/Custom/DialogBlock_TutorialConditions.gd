@@ -47,12 +47,19 @@ func update(delta: float) -> void:
 	pass
 
 func do_thing():
-	if _block_data.keys().has("RemovePages"):
-		for page_name in _block_data.get("RemovePages", []):
-			var page = ActionLibrary.get_action(page_name)
+	if _block_data.keys().has("RemoveActions"):
+		var actor = CombatRootControl.Instance.ui_control.que_input._actor
+		for action_key in _block_data.get("RemoveActions", []):
+			var page = actor.pages.get_page_item_for_action_key(action_key)
+			if page:
+				actor.pages.remove_item(page.Id)
+		self.finish()
+	if _block_data.keys().has("AddPages"):
+		for page_name in _block_data.get("AddPages", []):
+			var page = ItemLibrary.get_item(page_name)
 			if page:
 				var actor = CombatRootControl.Instance.ui_control.que_input._actor
-				actor.pages.remove_item(page_name)
+				actor.pages.add_item_to_first_valid_slot(page)
 		self.finish()
 	var tag = _block_data.get("BlockTag", null)
 	if !tag:
@@ -76,13 +83,6 @@ func do_thing():
 		_parent_dialog_control.hide()
 		CombatRootControl.QueController.end_of_round.connect(on_round_finish)
 		CombatUiControl.ui_state_controller.set_ui_state(UiStateController.UiStates.ExecRound)
-	elif tag.begins_with("AddPage_"):
-		for page_name in _block_data.get("Pages", []):
-			var page = ActionLibrary.get_action(page_name)
-			if page:
-				var actor = CombatRootControl.Instance.ui_control.que_input._actor
-				actor.pages.try_add_page(page)
-				self.finish()
 
 func on_round_finish():
 	var tag = _block_data.get("BlockTag", null)

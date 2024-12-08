@@ -35,6 +35,9 @@ static func create_effect(source, key:String, actor:BaseActor, data:Dictionary)-
 	if source is BaseActor:
 		data['SourceId'] = (source as BaseActor).Id
 		data['SourceType'] = 'Actor'
+	if source is BasePageItem:
+		data['SourceId'] = (source as BasePageItem).Id
+		data['SourceType'] = 'Page'
 	else:
 		printerr("EffectLibrary.create_effect: Unknown source type: %s" % [source])
 		return

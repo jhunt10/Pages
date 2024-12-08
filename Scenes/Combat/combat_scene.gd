@@ -146,8 +146,12 @@ func add_actor(actor:BaseActor, faction_id:int, pos:MapPos):
 	# Must call without signals because actors are spawned before MapControlNode._ready()
 	MapController.create_actor_node(actor, pos)
 	
+	actor.Que.clear_que()
+	actor.stats.fill_bar_stats()
 	if actor._allow_auto_que:
 		actor.auto_build_que(QueController.action_index)
+		if QueController.execution_state == ActionQueController.ActionStates.Running:
+			actor.Que.fail_turn()
 	actor_spawned.emit(actor, pos)
 
 func add_item(item:BaseItem, pos:MapPos):

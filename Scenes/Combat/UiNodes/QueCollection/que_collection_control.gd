@@ -18,6 +18,8 @@ func _build_que_displays():
 	_ques.clear()
 	for que_id in CombatRootControl.QueController._que_order:
 		var que:ActionQue = CombatRootControl.QueController._action_ques[que_id]
+		if que.get_max_que_size() == 0:
+			continue
 		var new_display:QueMinDisplayContainer = load("res://Scenes/Combat/UiNodes/QueDisplay/mini_que_display_container.tscn").instantiate()
 		new_display.visible = true
 		new_display.set_actor(que.actor)

@@ -69,11 +69,13 @@ func handle_input(event):
 	# Mouse in viewport coordinates.
 	if event is InputEventMouseButton and not (event as InputEventMouseButton).pressed:
 		print("Button Pressed")
-		var spot = CombatRootControl.Instance.GridCursor.current_spot
-		select_target(spot, false)
+		var mouse_pos = CombatRootControl.Instance.MapController.actor_tile_map.get_local_mouse_position()
+		var spot = CombatRootControl.Instance.MapController.actor_tile_map.local_to_map(mouse_pos)
+		if selection_data.is_coor_selectable(spot):
+			select_target(spot, false)
 
 func select_target(coord:Vector2i, confirmed:bool):
-	if wait_for_confirm and not confirmed:
+	if (wait_for_confirm and not confirmed) or coord != waiting_selection:
 		print("Started Waiting for comfirm")
 		is_waiting_for_confirm = true
 		waiting_selection = coord
@@ -83,6 +85,7 @@ func select_target(coord:Vector2i, confirmed:bool):
 		CombatRootControl.Instance.GridCursor.position = CombatRootControl.Instance.MapController.actor_tile_map.map_to_local(coord)
 		CombatRootControl.Instance.GridCursor.lock_position = true
 		return
+		
 	is_waiting_for_confirm = false
 	waiting_selection = null
 	if _logging: print("Setting Target: " + str(coord))

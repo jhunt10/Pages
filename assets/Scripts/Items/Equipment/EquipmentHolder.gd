@@ -379,6 +379,8 @@ func _inform_equitment_it_was_removed(equipment:BaseEquipmentItem):
 ## Try to equip the item to the first open slot for it's type. If no open slots are found, replace first if allowed
 func try_equip_item(equipment:BaseEquipmentItem, replace:bool=false)->bool:
 	var slot_type = equipment.get_equipment_slot_type()
+	if slot_type == "Weapon":
+		slot_type = "MainHand"
 	if not _slot_set_key_mapping.has(slot_type):
 		# No slot for item
 		return false

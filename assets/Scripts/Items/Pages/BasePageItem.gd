@@ -24,7 +24,6 @@ func _init(key:String, def_load_path:String, def:Dictionary, id:String='', data:
 		var effect_def = EffectLibrary.get_effect_def(effect_key)
 		details_data = BaseLoadObjectLibrary._merge_defs(details_data, effect_def.get("Details", {}))
 		details = ObjectDetailsData.new(EffectLibrary.Instance._defs_to_load_paths[effect_key], details_data)
-		
 
 func get_action_key():
 	return get_load_val("ActionKey")

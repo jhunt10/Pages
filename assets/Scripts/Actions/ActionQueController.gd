@@ -330,6 +330,7 @@ func _pay_turn_costs():
 func _organize_ques():
 	_sort_ques_by_speed()
 	_calc_turn_padding()
+	que_ordering_changed.emit()
 
 ## Sort ques in order of Actor.Speed desc
 func _sort_ques_by_speed():
@@ -370,6 +371,8 @@ func _calc_turn_padding():
 
 
 func _get_premade_que_gaps(que_size:int, max_que_size:int, is_slow:bool)->Array:
+	if que_size == 0:
+		return []
 	var out_list = []
 	if max_que_size == 1:
 		if que_size == 1: out_list = [1]

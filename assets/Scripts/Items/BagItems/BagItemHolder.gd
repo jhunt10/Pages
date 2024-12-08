@@ -18,7 +18,7 @@ func _load_slots_sets_data()->Array:
 		return defaults
 	return []
 
-func set_bag_item(bag_item:BaseItemBag):
+func set_bag_item(bag_item:BaseBagEquipment):
 	if bag_item:
 		bag_item_id = bag_item.Id
 	else:

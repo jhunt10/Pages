@@ -50,7 +50,7 @@ var current_animation_action_name:String
 func _ready() -> void:
 	if Engine.is_editor_hint():
 		return
-	if CombatRootControl.Instance and CombatRootControl.Instance.QueController:
+	if CombatRootControl.Instance and is_instance_valid(CombatRootControl.Instance) and CombatRootControl.Instance.QueController:
 		CombatRootControl.Instance.QueController.execution_paused.connect(pause_animations)
 		CombatRootControl.Instance.QueController.execution_resumed.connect(resume_animations)
 	animation.animation_started.connect(animation_started)

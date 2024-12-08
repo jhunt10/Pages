@@ -118,6 +118,7 @@ func remove_item(item_id:String, supress_signal:bool=false):
 	var index = _raw_item_slots.find(item_id)
 	if index >= 0:
 		_raw_item_slots[index] = null
+		_on_item_removed_from_slot(item_id, index)
 		if not supress_signal:
 			items_changed.emit()
 
@@ -135,11 +136,12 @@ func can_set_item_in_slot(item:BaseItem, index:int, allow_replace:bool=false)->b
 
 func try_set_item_in_slot(item:BaseItem, index:int, allow_replace:bool=false)->bool:
 	if not can_set_item_in_slot(item, index, allow_replace):
-		print("Can't Set Item")
 		return false
+	if _raw_item_slots[index] != null:
+		remove_item(_raw_item_slots[index], true)
 	_raw_item_slots[index] = item.Id
+	_on_item_added_to_slot(item, index)
 	items_changed.emit()
-	print("Item Added")
 	return true
 
 func _can_slot_set_accept_item(slot_set_data:Dictionary, item:BaseItem)->bool:
@@ -166,8 +168,11 @@ func add_item_to_first_valid_slot(item:BaseItem):
 			return true
 	return false
 
+func _on_item_removed_from_slot(item_id:String, index:int):
+	pass
 
-
+func _on_item_added_to_slot(item:BaseItem, index:int):
+	pass
 
 
 

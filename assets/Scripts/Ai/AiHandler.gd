@@ -66,9 +66,12 @@ static func try_handle_get_target_sub_action(actor:BaseActor, selection_data:Tar
 					potentail_actors.append(act)
 					coor_to_actor[act.Id] = MapPos.new(coor.x, coor.y, actor_pos.z, actor_pos.dir)
 	var enemy_actors = []
-	for p_actor:BaseActor in potentail_actors:
-		if p_actor.FactionIndex != actor.FactionIndex:
-			enemy_actors.append(p_actor)
+	for p_actor in potentail_actors:
+		var pp_actor = p_actor
+		if pp_actor is String:
+			pp_actor = ActorLibrary.get_actor(p_actor)
+		if pp_actor.FactionIndex != actor.FactionIndex:
+			enemy_actors.append(pp_actor)
 			
 	var selected_target = null
 	if enemy_actors.size() > 0:

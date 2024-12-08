@@ -33,7 +33,7 @@ var _current_value:int = 1
 @export var current_value:int:
 	get:
 		if _actor:
-			_current_value = _actor.stats.get_stat(_stat_name)
+			_current_value = _actor.stats.get_bar_stat(_stat_name)
 		return _current_value
 	set(val):
 		if val != _current_value:
@@ -205,7 +205,7 @@ func _sync():
 		return
 	if _actor and LOGGING:
 		print("Syncing: %s for '%s' | PreviewMod: %s" % [self.name, _actor.Id, _preview_mode])
-	var max = _max_value
+	var max = max_value
 	var new_val = current_value
 	if not preview_mode:
 		if animation.is_playing():

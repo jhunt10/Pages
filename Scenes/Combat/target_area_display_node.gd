@@ -50,13 +50,19 @@ func build_from_target_selection_data(data:TargetSelectionData, show_area_effect
 		var selectable = data.is_coor_selectable(coor)
 		if los_val == TargetingHelper.LOS_VALUE.Open:
 			if selectable:
-				new_area.set_cell(coor, 0, Vector2i(2,0))
+				if data.target_params.is_actor_target_type():
+					new_area.set_cell(coor, 0, Vector2i(2,0))
+				else:
+					new_area.set_cell(coor, 0, Vector2i(2,1))
 			else:
 				new_area.set_cell(coor, 0, Vector2i(0,0))
 			#open_list.append(spot)
 		if los_val == TargetingHelper.LOS_VALUE.Cover:
 			if selectable:
-				new_area.set_cell(coor, 0, Vector2i(3,0))
+				if data.target_params.is_actor_target_type():
+					new_area.set_cell(coor, 0, Vector2i(3,0))
+				else:
+					new_area.set_cell(coor, 0, Vector2i(3,1))
 			else:
 				new_area.set_cell(coor, 0, Vector2i(1,0))
 		if los_val == TargetingHelper.LOS_VALUE.Blocked:

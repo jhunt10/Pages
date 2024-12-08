@@ -1079,6 +1079,7 @@ is_player = true
 map_coor = Vector2i(5, 5)
 
 [node name="SpwanNode_Player2" type="Sprite2D" parent="ActorTileMapLayer"]
+visible = false
 self_modulate = Color(0, 1, 0, 1)
 position = Vector2(176, 144)
 texture = ExtResource("11_52ceh")

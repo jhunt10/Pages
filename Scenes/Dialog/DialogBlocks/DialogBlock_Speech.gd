@@ -27,7 +27,7 @@ func try_skip()->bool:
 		return dialog_block_control.try_skip()
 
 func delete():
-	printerr("Deleting Speech Block")
+	#printerr("Deleting Speech Block")
 	dialog_block_control.queue_free()
 	pass
 

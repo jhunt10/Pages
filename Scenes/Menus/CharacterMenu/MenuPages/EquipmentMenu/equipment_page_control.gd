@@ -10,6 +10,7 @@ signal mouse_exit_item(context, item_key, index)
 @export var name_label:Label
 @export var level_label:Label
 @export var equipment_slots_container:EquipmentDisplayContainer
+@export var stat_box:StatBoxControl
 var _actor:BaseActor
 
 # Called when the node enters the scene tree for the first time.
@@ -31,6 +32,7 @@ func set_actor(actor:BaseActor):
 	name_label.text = actor.details.display_name
 	level_label.text = str(actor.stats.level)
 	equipment_slots_container.set_actor(actor)
+	stat_box.set_actor(actor)
 
 func clear_highlights():
 	equipment_slots_container.clear_highlights()

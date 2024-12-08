@@ -15,7 +15,7 @@
             "StatMod1": {
                 "DisplayName": "Health Buff",
                 "ModType": "Add",
-                "StatName": "Health",
+                "StatName": "Max:Health",
                 "Value": 50
             }
         },
@@ -161,36 +161,98 @@
         }
     },
     {
-        "DamageDatas": {
-            "DamageData1": {
-                "AtkPower": 100,
-                "AtkStat": "Custom",
-                "BaseDamage": 10,
-                "DamageEffect": "Poison_DamageEffect",
-                "DamageType": "Poison",
-                "DamageVarient": 0,
-                "DefenseType": "None"
-            }
-        },
         "DamageMods": {},
+        "HideInHud":true,
         "Details": {
-            "Description": "Regenerate 10 Stamina per Round",
+            "Description": "Gain 50 Stamina and regen 10 per Round.",
             "DisplayName": "Stamina Regen",
-            "LargeIcon": "TestHeart.png",
-            "SmallIcon": "TestHeart.png",
-            "SnippetDesc": "Regen 10 Stamina per Round",
+            "LargeIcon": "StaminaRegen.png",
+            "SmallIcon": "StaminaRegen.png",
+            "SnippetDesc": "50 Stamina +10 per Round",
             "Tags": ["Regen"]
         },
         "EffectKey": "StaminaRegen",
-        "StatMods": {},
-        "SubEffects": {
-            "RegenStat": {
-                "StatName": "Stamina",
-                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_RegenStat.gd",
-                "Triggers": [
-                    "OnRoundEnd"
-                ],
+        "StatMods": {
+            "BaseStatMod1": {
+                "DisplayName": "Base Stamina",
+                "ModType": "Add",
+                "StatName": "BarStat:Stamina",
+                "Value": 50
+            },
+            "MaxStatMod1": {
+                "DisplayName": "Max Stamina",
+                "ModType": "Add",
+                "StatName": "Max:Stamina",
+                "Value": 50
+            },
+            "RegenMod1": {
+                "DisplayName": "Regen Stamina",
+                "ModType": "Add",
+                "StatName": "Regen:Stamina:Round",
                 "Value": 10
+            }
+            
+        },
+        "SubEffects": {
+            "ApplyBaseStatMod": {
+                "StatModKey": "BaseStatMod1",
+                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_ModStat.gd"
+            },
+            "ApplyMaxStatMod": {
+                "StatModKey": "MaxStatMod1",
+                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_ModStat.gd"
+            },
+            "ApplyRegenMod": {
+                "StatModKey": "RegenMod1",
+                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_ModStat.gd"
+            }
+        }
+    },
+    {
+        "DamageMods": {},
+        "HideInHud":true,
+        "Details": {
+            "Description": "Gain 50 Mana and regen 10 per Round.",
+            "DisplayName": "Stamina Regen",
+            "LargeIcon": "ManaRegen.png",
+            "SmallIcon": "ManaRegen.png",
+            "SnippetDesc": "50 Mana +10 per Round",
+            "Tags": ["Regen"]
+        },
+        "EffectKey": "ManaRegen",
+        "StatMods": {
+            "BaseStatMod1": {
+                "DisplayName": "Base Mana",
+                "ModType": "Add",
+                "StatName": "BarStat:Mana",
+                "Value": 50
+            },
+            "MaxStatMod1": {
+                "DisplayName": "Max Mana",
+                "ModType": "Add",
+                "StatName": "Max:Mana",
+                "Value": 50
+            },
+            "RegenMod1": {
+                "DisplayName": "Regen Mana",
+                "ModType": "Add",
+                "StatName": "Regen:Mana:Round",
+                "Value": 10
+            }
+            
+        },
+        "SubEffects": {
+            "ApplyBaseStatMod": {
+                "StatModKey": "BaseStatMod1",
+                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_ModStat.gd"
+            },
+            "ApplyMaxStatMod": {
+                "StatModKey": "MaxStatMod1",
+                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_ModStat.gd"
+            },
+            "ApplyRegenMod": {
+                "StatModKey": "RegenMod1",
+                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_ModStat.gd"
             }
         }
     }

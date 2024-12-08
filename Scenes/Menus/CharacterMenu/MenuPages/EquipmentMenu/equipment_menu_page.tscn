@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://cbexkor24ce0h"]
+[gd_scene load_steps=23 format=3 uid="uid://cbexkor24ce0h"]
 
 [ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/EquipmentMenu/equipment_page_control.gd" id="1_6pwc2"]
 [ext_resource type="Texture2D" uid="uid://c4yedxpiinlff" path="res://Scenes/Menus/CharacterMenu/MenuPages/outline.png" id="2_5i0tg"]
@@ -20,8 +20,10 @@
 [ext_resource type="Texture2D" uid="uid://co33b1qq2uef7" path="res://assets/Sprites/UI/CharacterEdit/BagSlot.png" id="17_t6rl3"]
 [ext_resource type="Texture2D" uid="uid://puhp53n8k1h8" path="res://assets/Sprites/UI/CharacterEdit/TrinketSlot.png" id="18_pfurv"]
 [ext_resource type="Texture2D" uid="uid://dwliocipx40sq" path="res://assets/Sprites/UI/CharacterEdit/OffHandSlot.png" id="19_vhvqa"]
+[ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/EquipmentMenu/stat_box_control.gd" id="21_8w6l2"]
+[ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/EquipmentMenu/stat_label.gd" id="21_hnuvf"]
 
-[node name="EquipmentPage" type="Control" node_paths=PackedStringArray("name_label", "level_label", "equipment_slots_container")]
+[node name="EquipmentPage" type="Control" node_paths=PackedStringArray("name_label", "level_label", "equipment_slots_container", "stat_box")]
 custom_minimum_size = Vector2(280, 395)
 layout_mode = 3
 anchors_preset = 0
@@ -31,6 +33,7 @@ script = ExtResource("1_6pwc2")
 name_label = NodePath("TitleBox/HBoxContainer/NameLabel")
 level_label = NodePath("TitleBox/HBoxContainer/LevelLabel")
 equipment_slots_container = NodePath("EquipmentSlotsControl")
+stat_box = NodePath("StatBoxControl")
 
 [node name="TitleBox" type="NinePatchRect" parent="."]
 layout_mode = 0
@@ -431,3 +434,249 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("19_vhvqa")
+
+[node name="StatBoxControl" type="Control" parent="." node_paths=PackedStringArray("stat_labels_container")]
+anchors_preset = 0
+offset_left = 12.0
+offset_top = 312.0
+offset_right = 268.0
+offset_bottom = 383.0
+script = ExtResource("21_8w6l2")
+stat_labels_container = NodePath("VBoxContainer")
+
+[node name="Background" type="NinePatchRect" parent="StatBoxControl"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_5i0tg")
+region_rect = Rect2(0, 0, 64, 64)
+patch_margin_left = 18
+patch_margin_top = 18
+patch_margin_right = 18
+patch_margin_bottom = 18
+
+[node name="VBoxContainer" type="VBoxContainer" parent="StatBoxControl"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 18.0
+offset_top = 4.0
+offset_right = -18.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="StatBoxControl/VBoxContainer"]
+layout_mode = 2
+
+[node name="StatLabel_Str" type="HBoxContainer" parent="StatBoxControl/VBoxContainer/HBoxContainer" node_paths=PackedStringArray("name_label", "value_label")]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+alignment = 1
+script = ExtResource("21_hnuvf")
+stat_name = "Strength"
+name_label = NodePath("NameLabel")
+value_label = NodePath("ValueLabel")
+
+[node name="NameLabel" type="Label" parent="StatBoxControl/VBoxContainer/HBoxContainer/StatLabel_Str"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("3_th70d")
+text = "St"
+
+[node name="DividerLabel" type="Label" parent="StatBoxControl/VBoxContainer/HBoxContainer/StatLabel_Str"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("3_th70d")
+text = ":"
+
+[node name="ValueLabel" type="Label" parent="StatBoxControl/VBoxContainer/HBoxContainer/StatLabel_Str"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("3_th70d")
+text = "00"
+
+[node name="StatLabel_Agi" type="HBoxContainer" parent="StatBoxControl/VBoxContainer/HBoxContainer" node_paths=PackedStringArray("name_label", "value_label")]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+alignment = 1
+script = ExtResource("21_hnuvf")
+stat_name = "Agility"
+name_label = NodePath("NameLabel")
+value_label = NodePath("ValueLabel")
+
+[node name="NameLabel" type="Label" parent="StatBoxControl/VBoxContainer/HBoxContainer/StatLabel_Agi"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("3_th70d")
+text = "Ag"
+
+[node name="DividerLabel" type="Label" parent="StatBoxControl/VBoxContainer/HBoxContainer/StatLabel_Agi"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("3_th70d")
+text = ":"
+
+[node name="ValueLabel" type="Label" parent="StatBoxControl/VBoxContainer/HBoxContainer/StatLabel_Agi"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("3_th70d")
+text = "00"
+
+[node name="StatLabel_Int" type="HBoxContainer" parent="StatBoxControl/VBoxContainer/HBoxContainer" node_paths=PackedStringArray("name_label", "value_label")]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+alignment = 1
+script = ExtResource("21_hnuvf")
+stat_name = "Intelligence"
+name_label = NodePath("NameLabel")
+value_label = NodePath("ValueLabel")
+
+[node name="NameLabel" type="Label" parent="StatBoxControl/VBoxContainer/HBoxContainer/StatLabel_Int"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("3_th70d")
+text = "In"
+
+[node name="DividerLabel" type="Label" parent="StatBoxControl/VBoxContainer/HBoxContainer/StatLabel_Int"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("3_th70d")
+text = ":"
+
+[node name="ValueLabel" type="Label" parent="StatBoxControl/VBoxContainer/HBoxContainer/StatLabel_Int"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("3_th70d")
+text = "00"
+
+[node name="StatLabel_Wis" type="HBoxContainer" parent="StatBoxControl/VBoxContainer/HBoxContainer" node_paths=PackedStringArray("name_label", "value_label")]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+alignment = 1
+script = ExtResource("21_hnuvf")
+stat_name = "Wisdom"
+name_label = NodePath("NameLabel")
+value_label = NodePath("ValueLabel")
+
+[node name="NameLabel" type="Label" parent="StatBoxControl/VBoxContainer/HBoxContainer/StatLabel_Wis"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("3_th70d")
+text = "Ws"
+
+[node name="DividerLabel" type="Label" parent="StatBoxControl/VBoxContainer/HBoxContainer/StatLabel_Wis"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("3_th70d")
+text = ":"
+
+[node name="ValueLabel" type="Label" parent="StatBoxControl/VBoxContainer/HBoxContainer/StatLabel_Wis"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("3_th70d")
+text = "00"
+
+[node name="FlowContainer" type="FlowContainer" parent="StatBoxControl/VBoxContainer"]
+layout_mode = 2
+
+[node name="StatLabel_Hp" type="HBoxContainer" parent="StatBoxControl/VBoxContainer/FlowContainer" node_paths=PackedStringArray("name_label", "value_label")]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+script = ExtResource("21_hnuvf")
+stat_name = "Max:Health"
+name_label = NodePath("NameLabel")
+value_label = NodePath("ValueLabel")
+
+[node name="NameLabel" type="Label" parent="StatBoxControl/VBoxContainer/FlowContainer/StatLabel_Hp"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("3_th70d")
+text = "HP"
+
+[node name="DividerLabel" type="Label" parent="StatBoxControl/VBoxContainer/FlowContainer/StatLabel_Hp"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("3_th70d")
+text = ":"
+
+[node name="ValueLabel" type="Label" parent="StatBoxControl/VBoxContainer/FlowContainer/StatLabel_Hp"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("3_th70d")
+text = "000"
+
+[node name="StatLabel_Stamina2" type="HBoxContainer" parent="StatBoxControl/VBoxContainer/FlowContainer" node_paths=PackedStringArray("name_label", "value_label", "regen_label")]
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("21_hnuvf")
+stat_name = "Max:Mana"
+name_label = NodePath("NameLabel")
+value_label = NodePath("ValueLabel")
+regen_label = NodePath("RegenLabel")
+
+[node name="NameLabel" type="Label" parent="StatBoxControl/VBoxContainer/FlowContainer/StatLabel_Stamina2"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("3_th70d")
+text = "Mana"
+
+[node name="DividerLabel" type="Label" parent="StatBoxControl/VBoxContainer/FlowContainer/StatLabel_Stamina2"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("3_th70d")
+text = ":"
+
+[node name="ValueLabel" type="Label" parent="StatBoxControl/VBoxContainer/FlowContainer/StatLabel_Stamina2"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("3_th70d")
+text = "000"
+
+[node name="RegenLabel" type="Label" parent="StatBoxControl/VBoxContainer/FlowContainer/StatLabel_Stamina2"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("3_th70d")
+text = "+10 PR"
+
+[node name="StatLabel_Stamina" type="HBoxContainer" parent="StatBoxControl/VBoxContainer/FlowContainer" node_paths=PackedStringArray("name_label", "value_label", "regen_label")]
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("21_hnuvf")
+stat_name = "Max:Stamina"
+name_label = NodePath("NameLabel")
+value_label = NodePath("ValueLabel")
+regen_label = NodePath("RegenLabel")
+
+[node name="NameLabel" type="Label" parent="StatBoxControl/VBoxContainer/FlowContainer/StatLabel_Stamina"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("3_th70d")
+text = "Stamina"
+
+[node name="DividerLabel" type="Label" parent="StatBoxControl/VBoxContainer/FlowContainer/StatLabel_Stamina"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("3_th70d")
+text = ":"
+
+[node name="ValueLabel" type="Label" parent="StatBoxControl/VBoxContainer/FlowContainer/StatLabel_Stamina"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("3_th70d")
+text = "000"
+
+[node name="RegenLabel" type="Label" parent="StatBoxControl/VBoxContainer/FlowContainer/StatLabel_Stamina"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("3_th70d")
+text = "+10 PR"

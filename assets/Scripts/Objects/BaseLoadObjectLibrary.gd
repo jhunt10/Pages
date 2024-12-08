@@ -273,6 +273,7 @@ func _load_objects_save_file(file_path:String):
 			continue
 		_loaded_objects[object_id] = new_object
 		if LOGGING: print("# - Loaded Saved Object: %s" % [object_id])
+		new_object.post_creation()
 	_after_loading_saved_objects(saved_data)
 
 func _after_loading_saved_objects(saved_data:Dictionary):

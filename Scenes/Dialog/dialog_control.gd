@@ -87,9 +87,9 @@ func start_block():
 			return
 		current_block = new_block
 		current_block.finished.connect(block_finished)
-		current_block.start()
 		if current_block._block_data.keys().has("FreezeCamera"):
 			CombatRootControl.Instance.camera.freeze = current_block._block_data.get("FreezeCamera")
+		current_block.start()
 
 func create_new_block(block_data):
 	var block_script_path = block_data.get("BlockScript")

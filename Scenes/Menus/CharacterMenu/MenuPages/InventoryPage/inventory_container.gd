@@ -159,7 +159,7 @@ func get_filter_options()->Array:
 	if _forced_filters.has("Equipment"):
 		return ["All", "Que", "Bag", "Head", "Body", "Feet", "Trinket", "MainHand", "OffHand"]
 	if _forced_filters.has("Page"):
-		return ["All", "Movement", "Tactic", "Spell"]
+		return ["All", "ClassPage", "Movement", "Tactic", "Spell"]
 	if _forced_filters.has("Consumable"):
 		return ["All", "Potion", "Bomb"]
 	return []
