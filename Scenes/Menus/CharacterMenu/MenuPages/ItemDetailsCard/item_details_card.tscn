@@ -16,7 +16,7 @@
 [ext_resource type="Texture2D" uid="uid://dq2cad8orar4p" path="res://assets/Sprites/UI/SymbolIcons/ArmorSymbol.png" id="13_t6qv2"]
 [ext_resource type="Texture2D" uid="uid://d17k5iaed0gdg" path="res://assets/Sprites/UI/SymbolIcons/WardSymbol.png" id="14_4xeqv"]
 
-[node name="ItemDetailsCard" type="Control" node_paths=PackedStringArray("offset_control", "icon", "title_lable", "description_box", "exit_button", "equip_button", "button_label", "weapon_details", "armor_details", "default_details")]
+[node name="ItemDetailsCard" type="Control" node_paths=PackedStringArray("offset_control", "icon", "title_lable", "description_box", "exit_button", "weapon_details", "armor_details", "default_details")]
 custom_minimum_size = Vector2(300, 200)
 layout_mode = 3
 anchors_preset = 0
@@ -30,8 +30,6 @@ icon = NodePath("OffsetControl/IconBackground/Icon")
 title_lable = NodePath("OffsetControl/FitScaleLabel")
 description_box = NodePath("OffsetControl/WeaponDetailsControl/VBoxContainer/HBoxContainer2/DescriptionBox")
 exit_button = NodePath("OffsetControl/ExitButton/Button")
-equip_button = NodePath("OffsetControl/ButtonBackground/Button")
-button_label = NodePath("OffsetControl/ButtonBackground/ButtonLabel")
 weapon_details = NodePath("OffsetControl/WeaponDetailsControl")
 armor_details = NodePath("OffsetControl/ArmorDetailsControl")
 default_details = NodePath("OffsetControl/DefaultDetailsControl")
@@ -109,48 +107,15 @@ layout_mode = 0
 offset_right = 8.0
 offset_bottom = 8.0
 
-[node name="ButtonBackground" type="NinePatchRect" parent="OffsetControl"]
-layout_mode = 0
-offset_left = 38.0
-offset_top = 143.0
-offset_right = 257.0
-offset_bottom = 178.0
-texture = ExtResource("7_850b7")
-region_rect = Rect2(0, 0, 32, 32)
-patch_margin_left = 6
-patch_margin_top = 6
-patch_margin_right = 6
-patch_margin_bottom = 6
-
-[node name="ButtonLabel" type="Label" parent="OffsetControl/ButtonBackground"]
-self_modulate = Color(0.498039, 0, 0, 1)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("4_xmy3g")
-text = "Equipe"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Button" type="Button" parent="OffsetControl/ButtonBackground"]
-self_modulate = Color(1, 1, 1, 0)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="WeaponDetailsControl" type="Control" parent="OffsetControl" node_paths=PackedStringArray("weapon_class_label", "phy_damage_icon", "mag_damage_icon", "attack_power_label", "damage_type_label", "description_box", "range_display")]
+[node name="WeaponDetailsControl" type="Control" parent="OffsetControl" node_paths=PackedStringArray("parent_card_control", "weapon_class_label", "phy_damage_icon", "mag_damage_icon", "attack_power_label", "damage_type_label", "description_box", "range_display", "equip_button_background", "equip_button", "equip_label")]
+visible = false
 anchors_preset = 0
 offset_left = 17.0
 offset_top = 58.0
 offset_right = 278.0
-offset_bottom = 140.0
+offset_bottom = 178.0
 script = ExtResource("7_sv4xn")
+parent_card_control = NodePath("../..")
 weapon_class_label = NodePath("VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/WeaponClassLabel")
 phy_damage_icon = NodePath("VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/PhyDamIcon")
 mag_damage_icon = NodePath("VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/MagDamIcon")
@@ -158,6 +123,9 @@ attack_power_label = NodePath("VBoxContainer/HBoxContainer/VBoxContainer/HBoxCon
 damage_type_label = NodePath("VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/DamageTypeLabel")
 description_box = NodePath("VBoxContainer/HBoxContainer2/DescriptionBox")
 range_display = NodePath("VBoxContainer/HBoxContainer/MiniRangeDisplay")
+equip_button_background = NodePath("VBoxContainer/ButtonBackground")
+equip_button = NodePath("VBoxContainer/ButtonBackground/Button")
+equip_label = NodePath("VBoxContainer/ButtonBackground/ButtonLabel")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="OffsetControl/WeaponDetailsControl"]
 layout_mode = 1
@@ -235,20 +203,55 @@ size_flags_horizontal = 3
 theme = ExtResource("4_xmy3g")
 text = "Item Description"
 
-[node name="ArmorDetailsControl" type="Control" parent="OffsetControl" node_paths=PackedStringArray("slot_label", "phy_icon", "mag_icon", "armor_label", "ward_label", "description_box")]
-visible = false
+[node name="ButtonBackground" type="NinePatchRect" parent="OffsetControl/WeaponDetailsControl/VBoxContainer"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+texture = ExtResource("7_850b7")
+region_rect = Rect2(0, 0, 32, 32)
+patch_margin_left = 6
+patch_margin_top = 6
+patch_margin_right = 6
+patch_margin_bottom = 6
+
+[node name="ButtonLabel" type="Label" parent="OffsetControl/WeaponDetailsControl/VBoxContainer/ButtonBackground"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("4_xmy3g")
+text = "Equipe"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="OffsetControl/WeaponDetailsControl/VBoxContainer/ButtonBackground"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ArmorDetailsControl" type="Control" parent="OffsetControl" node_paths=PackedStringArray("parent_card_control", "slot_label", "phy_icon", "mag_icon", "armor_label", "ward_label", "description_box", "equip_button_background", "equip_button", "equip_label")]
 anchors_preset = 0
 offset_left = 17.0
 offset_top = 58.0
 offset_right = 278.0
-offset_bottom = 140.0
+offset_bottom = 178.0
 script = ExtResource("12_rxuc0")
+parent_card_control = NodePath("../..")
 slot_label = NodePath("VBoxContainer/HBoxContainer3/TypeLabel")
 phy_icon = NodePath("VBoxContainer/HBoxContainer3/PhyIcon")
 mag_icon = NodePath("VBoxContainer/HBoxContainer3/MagIcon")
 armor_label = NodePath("VBoxContainer/HBoxContainer3/ArmorLabel")
 ward_label = NodePath("VBoxContainer/HBoxContainer3/WardLabel")
 description_box = NodePath("VBoxContainer/HBoxContainer2/DescriptionBox")
+equip_button_background = NodePath("VBoxContainer/ButtonBackground")
+equip_button = NodePath("VBoxContainer/ButtonBackground/Button")
+equip_label = NodePath("VBoxContainer/ButtonBackground/ButtonLabel")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="OffsetControl/ArmorDetailsControl"]
 layout_mode = 1
@@ -303,6 +306,38 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("4_xmy3g")
 text = "Item Description"
+
+[node name="ButtonBackground" type="NinePatchRect" parent="OffsetControl/ArmorDetailsControl/VBoxContainer"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+texture = ExtResource("7_850b7")
+region_rect = Rect2(0, 0, 32, 32)
+patch_margin_left = 6
+patch_margin_top = 6
+patch_margin_right = 6
+patch_margin_bottom = 6
+
+[node name="ButtonLabel" type="Label" parent="OffsetControl/ArmorDetailsControl/VBoxContainer/ButtonBackground"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("4_xmy3g")
+text = "Equipe"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="OffsetControl/ArmorDetailsControl/VBoxContainer/ButtonBackground"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="DefaultDetailsControl" type="Control" parent="OffsetControl" node_paths=PackedStringArray("description_box")]
 visible = false

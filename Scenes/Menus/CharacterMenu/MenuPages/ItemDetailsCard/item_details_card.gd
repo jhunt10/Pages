@@ -11,8 +11,8 @@ signal hide_done
 @export var title_lable:FitScaleLabel
 @export var description_box:RichTextLabel
 @export var exit_button:Button
-@export var equip_button:Button
-@export var button_label:Label
+#@export var equip_button:Button
+#@export var button_label:Label
 
 @export var weapon_details:WeaponDetailsControl
 @export var armor_details:ArmorDetailsControl
@@ -24,7 +24,7 @@ var item_id:String
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	exit_button.pressed.connect(_on_exit_button)
-	equip_button.pressed.connect(equip_button_pressed)
+	#equip_button.pressed.connect(equip_button_pressed)
 	pass # Replace with function body.
 
 
@@ -65,7 +65,7 @@ func start_hide():
 	offset_control.position.y = 0
 	animation_state = AnimationStates.Out
 
-func set_item(item:BaseItem):
+func set_item(actor:BaseActor, item:BaseItem):
 	item_id = item.Id
 	icon.texture = item.get_small_icon()
 	title_lable.text = item.details.display_name
@@ -77,11 +77,11 @@ func set_item(item:BaseItem):
 	armor_details.hide()
 	if item is BaseWeaponEquipment:
 		var weapon = (item as BaseWeaponEquipment)
-		weapon_details.set_weapon(weapon)
+		weapon_details.set_weapon(actor, weapon)
 		weapon_details.show()
 	elif item is BaseArmorEquipment:
 		var armor = (item as BaseArmorEquipment)
-		armor_details.set_armor(armor)
+		armor_details.set_armor(actor, armor)
 		armor_details.show()
 	else:
 		default_details.set_item(item)

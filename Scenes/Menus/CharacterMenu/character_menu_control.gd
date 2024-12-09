@@ -5,6 +5,7 @@ extends Control
 @export var equipment_page:EquipmentPageControl
 @export var page_page:PagePageControl
 @export var bag_page:BagPageControl
+@export var stats_page:StatsPageControl
 
 @export var scale_control:Control
 @export var inventory_container:InventoryContainer
@@ -12,6 +13,8 @@ extends Control
 @export var tab_equipment_button:Button
 @export var tab_pages_button:Button
 @export var tab_bag_button:Button
+@export var tab_inventory_button:Button
+@export var tab_stats_button:Button
 @export var mouse_control:CharacterMenuMouseControl
 
 var _actor:BaseActor
@@ -33,6 +36,8 @@ func _ready() -> void:
 	tab_equipment_button.pressed.connect(on_tab_pressed.bind("Equipment"))
 	tab_pages_button.pressed.connect(on_tab_pressed.bind("Pages"))
 	tab_bag_button.pressed.connect(on_tab_pressed.bind("Bag"))
+	tab_inventory_button.pressed.connect(on_tab_pressed.bind("Inventory"))
+	tab_stats_button.pressed.connect(on_tab_pressed.bind("Stats"))
 	
 	equipment_page.item_button_down.connect(on_item_button_down)
 	equipment_page.item_button_up.connect(on_item_button_up)
@@ -80,10 +85,10 @@ func set_actor(actor:BaseActor):
 	equipment_page.set_actor(actor)
 	page_page.set_actor(actor)
 	bag_page.set_actor(actor)
+	stats_page.set_actor(actor)
 
 func close_menu():
 	ActorLibrary.save_actors()
-	ItemLibrary.save_items()
 	self.queue_free()
 
 func on_details_card_freed():
@@ -96,15 +101,12 @@ func create_details_card(item:BaseItem):
 			_current_details_card.show()
 			return
 		_current_details_card.hide_done.disconnect(on_details_card_freed)
-		_current_details_card.action_button_pressed.disconnect(on_details_card_button_pressed)
-		_current_details_card.exit_button_pressed.disconnect(on_details_card_exit)
 		_current_details_card.start_hide()
 	_current_details_card = load("res://Scenes/Menus/CharacterMenu/MenuPages/ItemDetailsCard/item_details_card.tscn").instantiate()
 	details_card_spawn_point.add_child(_current_details_card)
-	_current_details_card.action_button_pressed.connect(on_details_card_button_pressed)
-	_current_details_card.exit_button_pressed.connect(on_details_card_exit)
+	#_current_details_card.action_button_pressed.connect(on_details_card_button_pressed)
 	_current_details_card.hide_done.connect(on_details_card_freed)
-	_current_details_card.set_item(item)
+	_current_details_card.set_item(_actor, item)
 	_current_details_card.start_show()
 
 func context_to_page_control(context):
@@ -209,34 +211,40 @@ func on_mouse_exit_slot(context, item_key, index):
 		clear_highlights()
 	print("Item Button Exit : %s | %s | %s" % [context, item_key, index])
 
-func on_details_card_exit():
-	self.clear_highlights()
-	
-func on_details_card_button_pressed():
-	if _selected_item:
-		if _left_page_context == "Equipment" and _selected_item is BaseEquipmentItem:
-			var equipment = (_selected_item as BaseEquipmentItem)
-			if equipment.get_equipt_to_actor_id():
-				equipment.clear_equipt_actor()
-			else:
-				_actor.equipment.try_equip_item(equipment,true)
-		
-		if _left_page_context == "Pages" and _selected_item is BasePageItem:
-			var page = (_selected_item as BasePageItem)
-			if _actor.pages.has_item(page.Id):
-				_actor.pages.remove_item(page.Id)
-			else:
-				_actor.pages.add_item_to_first_valid_slot(page)
-				
-		if _left_page_context == "Bag" and _selected_item is BaseConsumableItem:
-			var item = (_selected_item as BaseConsumableItem)
-			if _actor.items.has_item(item.Id):
-				_actor.items.remove_item(item.Id)
-			else:
-				_actor.items.add_item_to_first_valid_slot(item)
-		_current_details_card.start_hide()
+#func on_details_card_button_pressed():
+	#if _selected_item:
+		#if _left_page_context == "Equipment" and _selected_item is BaseEquipmentItem:
+			#var equipment = (_selected_item as BaseEquipmentItem)
+			#if equipment.get_equipt_to_actor_id():
+				#equipment.clear_equipt_actor()
+			#else:
+				#_actor.equipment.try_equip_item(equipment,true)
+		#
+		#if _left_page_context == "Pages" and _selected_item is BasePageItem:
+			#var page = (_selected_item as BasePageItem)
+			#if _actor.pages.has_item(page.Id):
+				#_actor.pages.remove_item(page.Id)
+			#else:
+				#_actor.pages.add_item_to_first_valid_slot(page)
+				#
+		#if _left_page_context == "Bag" and _selected_item is BaseConsumableItem:
+			#var item = (_selected_item as BaseConsumableItem)
+			#if _actor.items.has_item(item.Id):
+				#_actor.items.remove_item(item.Id)
+			#else:
+				#_actor.items.add_item_to_first_valid_slot(item)
+		#_current_details_card.start_hide()
 
 func on_tab_pressed(tab_name:String):
+	if tab_name == "Inventory":
+		inventory_container.show()
+		stats_page.hide()
+		return
+	if tab_name == "Stats":
+		stats_page.show()
+		inventory_container.hide()
+		return
+	
 	_left_page_context = tab_name
 	
 	if _left_page_context == "Equipment":

@@ -1,18 +1,26 @@
-[gd_scene load_steps=15 format=3 uid="uid://ciah50qt3htui"]
+[gd_scene load_steps=23 format=3 uid="uid://ciah50qt3htui"]
 
 [ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/character_menu_control.gd" id="1_b43ae"]
 [ext_resource type="Texture2D" uid="uid://mpwjrtfjnbth" path="res://Scenes/Menus/CharacterMenu/BookBackground.png" id="2_ny2th"]
 [ext_resource type="Texture2D" uid="uid://c46ah48rf6j3w" path="res://Scenes/Menus/CharacterMenu/TabBackground.png" id="3_ktt5q"]
 [ext_resource type="Texture2D" uid="uid://jwg5aqbw71la" path="res://assets/Sprites/UI/CharacterEdit/MainHandSlot.png" id="4_xk513"]
 [ext_resource type="Texture2D" uid="uid://bkps664mkkmfn" path="res://assets/Sprites/UI/DevTools/small_x.png" id="5_o0bpc"]
+[ext_resource type="Texture2D" uid="uid://bof4jswuf8op1" path="res://Scenes/Menus/CharacterMenu/InventoryTabIcon.png" id="6_4s47y"]
 [ext_resource type="Texture2D" uid="uid://wu75tejgoo7m" path="res://assets/Sprites/UI/CharacterEdit/BookSlot.png" id="6_qgkgg"]
+[ext_resource type="Texture2D" uid="uid://dufhnrnqg20hj" path="res://Scenes/Menus/CharacterMenu/StatsTabIcon.png" id="7_es420"]
 [ext_resource type="Texture2D" uid="uid://co33b1qq2uef7" path="res://assets/Sprites/UI/CharacterEdit/BagSlot.png" id="7_t340l"]
 [ext_resource type="PackedScene" uid="uid://dmlpvjyai521d" path="res://Scenes/Menus/CharacterMenu/MenuPages/InventoryPage/equipt_inventory_container.tscn" id="8_6gqbj"]
+[ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/StatsMenuPage/stats_page_control.gd" id="9_2fkn3"]
 [ext_resource type="PackedScene" uid="uid://cbexkor24ce0h" path="res://Scenes/Menus/CharacterMenu/MenuPages/EquipmentMenu/equipment_menu_page.tscn" id="9_bofun"]
+[ext_resource type="Texture2D" uid="uid://c4yedxpiinlff" path="res://Scenes/Menus/CharacterMenu/MenuPages/outline.png" id="9_dsxwx"]
+[ext_resource type="PackedScene" uid="uid://bpvy87uagttpr" path="res://Scenes/UiNodes/ScollBar/scroll_bar.tscn" id="10_2kgep"]
 [ext_resource type="PackedScene" uid="uid://c4bhs27nmviba" path="res://Scenes/Menus/CharacterMenu/MenuPages/PageMenuPage/pages_menu_page.tscn" id="10_porhc"]
+[ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/StatsMenuPage/stat_entry_container.gd" id="11_7qatu"]
 [ext_resource type="PackedScene" uid="uid://bjatwk3wdws0y" path="res://Scenes/Menus/CharacterMenu/MenuPages/BagMenuPage/bag_menu_page.tscn" id="11_j5k8v"]
+[ext_resource type="Theme" uid="uid://dwinll8pgdjhc" path="res://Scenes/Themes/standard_theme.tres" id="12_dy5pv"]
 [ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MouseOverControl/character_menu_mouse_control.gd" id="12_yj8n3"]
 [ext_resource type="Texture2D" uid="uid://xcjbd3xju45w" path="res://Scenes/Menus/CharacterMenu/MouseOverControl/DragItemBackground.png" id="13_0dekw"]
+[ext_resource type="Texture2D" uid="uid://3ncohf5a6kf7" path="res://Scenes/Menus/CharacterMenu/HoleBackground.png" id="13_uqggl"]
 
 [sub_resource type="GDScript" id="GDScript_rvisf"]
 script/source = "extends TextureRect
@@ -28,7 +36,7 @@ func _process(delta: float) -> void:
 	pass
 "
 
-[node name="CharacterMenuControl" type="Control" node_paths=PackedStringArray("details_card_spawn_point", "equipment_page", "page_page", "bag_page", "scale_control", "inventory_container", "close_button", "tab_equipment_button", "tab_pages_button", "tab_bag_button", "mouse_control")]
+[node name="CharacterMenuControl" type="Control" node_paths=PackedStringArray("details_card_spawn_point", "equipment_page", "page_page", "bag_page", "stats_page", "scale_control", "inventory_container", "close_button", "tab_equipment_button", "tab_pages_button", "tab_bag_button", "tab_inventory_button", "tab_stats_button", "mouse_control")]
 custom_minimum_size = Vector2(600, 420)
 layout_mode = 3
 anchors_preset = 0
@@ -42,12 +50,15 @@ details_card_spawn_point = NodePath("ScaleControl/DetailsCardSpawnPoint")
 equipment_page = NodePath("ScaleControl/EquipmentPage")
 page_page = NodePath("ScaleControl/PagesPage")
 bag_page = NodePath("ScaleControl/BagPage")
+stats_page = NodePath("ScaleControl/StatsPage")
 scale_control = NodePath("ScaleControl")
 inventory_container = NodePath("ScaleControl/InventoryContainer")
 close_button = NodePath("ScaleControl/TabsControl/ExitTabButton/Button")
 tab_equipment_button = NodePath("ScaleControl/TabsControl/EquipmentTabButton/Button")
 tab_pages_button = NodePath("ScaleControl/TabsControl/BookTabButton/Button")
 tab_bag_button = NodePath("ScaleControl/TabsControl/BagTabButton2/Button")
+tab_inventory_button = NodePath("ScaleControl/TabsControl/InventoryTabButton/Button")
+tab_stats_button = NodePath("ScaleControl/TabsControl/StatsTabButton/Button")
 mouse_control = NodePath("ScaleControl/MouseOverControl")
 
 [node name="ScaleControl" type="Control" parent="."]
@@ -143,6 +154,68 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="InventoryTabButton" type="TextureRect" parent="ScaleControl/TabsControl"]
+self_modulate = Color(0.466667, 0.360784, 1, 1)
+layout_mode = 0
+offset_left = 653.0
+offset_top = 219.0
+offset_right = 717.0
+offset_bottom = 283.0
+rotation = 3.14159
+texture = ExtResource("3_ktt5q")
+script = SubResource("GDScript_rvisf")
+
+[node name="TextureRect" type="TextureRect" parent="ScaleControl/TabsControl/InventoryTabButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 3.14159
+pivot_offset = Vector2(32, 32)
+texture = ExtResource("6_4s47y")
+stretch_mode = 3
+
+[node name="Button" type="Button" parent="ScaleControl/TabsControl/InventoryTabButton"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="StatsTabButton" type="TextureRect" parent="ScaleControl/TabsControl"]
+self_modulate = Color(0.282353, 0.560784, 0.431373, 1)
+layout_mode = 0
+offset_left = 653.0
+offset_top = 296.0
+offset_right = 717.0
+offset_bottom = 360.0
+rotation = 3.14159
+texture = ExtResource("3_ktt5q")
+script = SubResource("GDScript_rvisf")
+
+[node name="TextureRect" type="TextureRect" parent="ScaleControl/TabsControl/StatsTabButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_es420")
+stretch_mode = 3
+
+[node name="Button" type="Button" parent="ScaleControl/TabsControl/StatsTabButton"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
 [node name="BookTabButton" type="TextureRect" parent="ScaleControl/TabsControl"]
 self_modulate = Color(0.466667, 0.360784, 1, 1)
 layout_mode = 0
@@ -200,11 +273,130 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="InventoryContainer" parent="ScaleControl" instance=ExtResource("8_6gqbj")]
+visible = false
 layout_mode = 0
 offset_left = 303.0
 offset_top = 9.0
 offset_right = 583.0
 offset_bottom = 404.0
+
+[node name="StatsPage" type="Control" parent="ScaleControl" node_paths=PackedStringArray("premade_stat_entry", "entry_container", "scroll_bar")]
+custom_minimum_size = Vector2(280, 395)
+anchors_preset = 0
+offset_left = 303.0
+offset_top = 9.0
+offset_right = 583.0
+offset_bottom = 404.0
+mouse_filter = 1
+script = ExtResource("9_2fkn3")
+premade_stat_entry = NodePath("ScrollContainer/VBoxContainer/StatEntryContainer")
+entry_container = NodePath("ScrollContainer/VBoxContainer")
+scroll_bar = NodePath("ScrollBar")
+
+[node name="Background" type="NinePatchRect" parent="ScaleControl/StatsPage"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 12.0
+offset_top = 5.0
+offset_right = -12.0
+offset_bottom = -5.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("9_dsxwx")
+region_rect = Rect2(0, 0, 64, 65)
+patch_margin_left = 18
+patch_margin_top = 18
+patch_margin_right = 18
+patch_margin_bottom = 19
+
+[node name="ScrollBar" parent="ScaleControl/StatsPage" node_paths=PackedStringArray("scroll_container") instance=ExtResource("10_2kgep")]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 16.0
+offset_right = -16.0
+offset_bottom = -16.0
+grow_horizontal = 0
+grow_vertical = 2
+scroll_container = NodePath("../ScrollContainer")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="ScaleControl/StatsPage"]
+custom_minimum_size = Vector2(0, 220)
+layout_mode = 0
+offset_left = 28.0
+offset_top = 13.0
+offset_right = 233.0
+offset_bottom = 381.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScaleControl/StatsPage/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="StatEntryContainer" type="HBoxContainer" parent="ScaleControl/StatsPage/ScrollContainer/VBoxContainer" node_paths=PackedStringArray("name_label", "base_value_label", "value_label")]
+layout_mode = 2
+script = ExtResource("11_7qatu")
+name_label = NodePath("StatNameLabel")
+base_value_label = NodePath("BaseValueLabel")
+value_label = NodePath("ValueLabel")
+
+[node name="StatNameLabel" type="Label" parent="ScaleControl/StatsPage/ScrollContainer/VBoxContainer/StatEntryContainer"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("12_dy5pv")
+text = "StatName"
+
+[node name="DividerLabel" type="Label" parent="ScaleControl/StatsPage/ScrollContainer/VBoxContainer/StatEntryContainer"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("12_dy5pv")
+text = ":"
+
+[node name="BaseValueLabel" type="Label" parent="ScaleControl/StatsPage/ScrollContainer/VBoxContainer/StatEntryContainer"]
+self_modulate = Color(0.498039, 0, 0, 1)
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+theme = ExtResource("12_dy5pv")
+text = "000"
+
+[node name="DividerLabel2" type="Label" parent="ScaleControl/StatsPage/ScrollContainer/VBoxContainer/StatEntryContainer"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("12_dy5pv")
+text = ":"
+
+[node name="ValueLabel" type="Label" parent="ScaleControl/StatsPage/ScrollContainer/VBoxContainer/StatEntryContainer"]
+self_modulate = Color(0.498039, 0, 0, 1)
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+theme = ExtResource("12_dy5pv")
+text = "000"
+
+[node name="BoxBackground" type="NinePatchRect" parent="ScaleControl/StatsPage"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 50.0
+offset_right = -48.0
+offset_bottom = -16.0
+texture = ExtResource("13_uqggl")
+patch_margin_left = 32
+patch_margin_top = 32
+patch_margin_right = 32
+patch_margin_bottom = 32
 
 [node name="EquipmentPage" parent="ScaleControl" instance=ExtResource("9_bofun")]
 offset_left = 17.0
