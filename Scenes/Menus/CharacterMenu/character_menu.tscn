@@ -354,7 +354,7 @@ self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("12_dy5pv")
-text = "StatName"
+text = "0123456789"
 
 [node name="DividerLabel" type="Label" parent="ScaleControl/StatsPage/ScrollContainer/VBoxContainer/StatEntryContainer"]
 self_modulate = Color(0.498039, 0, 0, 1)
@@ -449,3 +449,14 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+
+[node name="StatNameLabel2" type="Label" parent="."]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+offset_left = 17.0
+offset_top = -6.0
+offset_right = 115.0
+offset_bottom = 14.0
+size_flags_horizontal = 3
+theme = ExtResource("12_dy5pv")
+text = "0123456789"

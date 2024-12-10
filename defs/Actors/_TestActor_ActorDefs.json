@@ -22,8 +22,16 @@
 			"Agility": 10,
 			"Intelligence": 10,
 			"Wisdom": 10,
-			"Armor": 80,
-			"PagesPerRound": 0
+			"PagesPerRound": 0,
+
+			"Accuracy":100,
+			"Potency":100,
+			"CritChance":5,
+			"CritMod":1.5,
+			"Evasion":5,
+			"Resist":5,
+			"BlockChance":0,
+			"BlockMod":0
 		},
 		"IsPlayer": true,
 		"SpriteSheet": "Template_SpriteSheet.png",
@@ -57,7 +65,10 @@
 			"Mass":100,
 			"Speed":50,
 			"Strength": 50,
-			"Armor": 50
+			"Armor": 50,
+			"Evasion":0,
+			"BlockChance":0,
+			"BlockMod":0.5
 		}
 	},
 	{
@@ -130,7 +141,8 @@
 			"Mass":10,
 			"Speed":50,
 			"Strength": 10,
-			"Armor": 10
+			"Armor": 10,
+			"Evasion":100
 		},
 		"DefaultQueSize": 3,
 		"AutoQue": true,

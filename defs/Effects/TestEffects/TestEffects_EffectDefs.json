@@ -255,5 +255,26 @@
                 "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_ModStat.gd"
             }
         }
+    },
+    {
+        "DamageMods": {},
+        "HideInHud":false,
+        "Details": {
+            "Description": "Grants a 100% chance to Crit when attacking from behind the target.",
+            "DisplayName": "Back Stab",
+            "LargeIcon": "BackStab.png",
+            "SmallIcon": "BackStab.png",
+            "SnippetDesc": "Allways Crit when behind target.",
+            "Tags": ["CritChance"]
+        },
+        "EffectKey": "BackStab",
+        "StatMods": {
+        },
+        "SubEffects": {
+            "SubEffect1": {
+                "CritMod:Back": 1,
+                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_AttackMod.gd"
+            }
+        }
     }
 ]

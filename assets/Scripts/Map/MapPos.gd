@@ -25,7 +25,9 @@ static func String(val:String)->MapPos:
 	else:
 		printerr("Failed to parse MapPos from string '%s'" % val)
 	return MapPos.new(0,0)
-	
+
+enum Directions {North, East, South, West}
+
 static func Array(arr:Array)->MapPos:
 	if arr.size() == 2:
 		return MapPos.new(arr[0], arr[1], 0, 0)

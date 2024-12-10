@@ -17,12 +17,22 @@ func do_thing(parent_action:BaseAction, subaction_data:Dictionary, que_exe_data:
 	var target_key = subaction_data['TargetKey']
 	var targets:Array = _find_target_effected_actors(parent_action, subaction_data, target_key, que_exe_data, game_state, actor)
 	var damage_data = parent_action.get_damage_data(actor, subaction_data)
+	var target_param_key = turn_data.get_param_key_for_target(target_key)
+	var target_params = parent_action.get_targeting_params(target_param_key, actor)
 	
 	var tag_chain = SourceTagChain.new()\
 			.append_source(SourceTagChain.SourceTypes.Actor, actor)\
 			.append_source(SourceTagChain.SourceTypes.Action, parent_action)
 	
+	var attack_data = {
+		"DamageDatas": [damage_data]
+		
+	}
+	
 	for target:BaseActor in targets:
-		DamageHelper.handle_attack(actor, target, damage_data, tag_chain, game_state)
+		DamageHelper.handle_attack(actor, target, attack_data, tag_chain, game_state, target_params)
+	
+	#for target:BaseActor in targets:
+		#DamageHelper.handle_attack(actor, target, damage_data, tag_chain, game_state)
 	
 	return BaseSubAction.Success

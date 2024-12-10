@@ -7,6 +7,7 @@ enum EffectTriggers {
 	OnTurnStart, OnTurnEnd, 
 	OnRoundStart, OnRoundEnd,
 	OnMove, OnDamageTaken, OnDamagDealt,
+	OnAttacking, OnDefending, 
 	OnDeath, OnKill,
 	OnUseItem
 	}
@@ -16,7 +17,9 @@ const TRIGGERS_WITH_ADDITIONAL_DATA = [
 	EffectTriggers.OnMove, 
 	EffectTriggers.OnDamagDealt, 
 	EffectTriggers.OnDamageTaken, 
-	EffectTriggers.OnKill 
+	EffectTriggers.OnKill,
+	EffectTriggers.OnAttacking,
+	EffectTriggers.OnDefending
 ]
 
 func get_tagable_id(): return Id
@@ -96,7 +99,7 @@ func get_active_damage_mods():
 			out_list.append(mod)
 	return out_list
 
-func _get_sub_effect_script(sub_effect_key:String)->BaseSubEffect:
+func _get_sub_effect_script(sub_effect_key:String):
 	return EffectLibrary.get_sub_effect_script(SubEffectDatas[sub_effect_key]['SubEffectScript'])
 
 func _cache_triggers():
@@ -159,4 +162,15 @@ func trigger_on_damage_dealt(game_state:GameStateData, damage_event:DamageEvent)
 		var sub_effect_data = SubEffectDatas[sub_effect_key]
 		var sub_effect = _get_sub_effect_script(sub_effect_key)
 		sub_effect.on_damage_dealt(self, sub_effect_data, game_state, damage_event)
-		
+
+func trigger_on_attack(game_state:GameStateData, attack_event:AttackEvent):
+	if attack_event.attacker.Id == get_load_val("EffectedActorId", null):
+		for sub_effect_key in _triggers_to_sub_effect_keys.get(EffectTriggers.OnAttacking, []):
+			var sub_effect_data = SubEffectDatas[sub_effect_key]
+			var sub_effect = _get_sub_effect_script(sub_effect_key)
+			sub_effect.on_attacking(self, sub_effect_data, game_state, attack_event)
+	if attack_event.defender.Id == get_load_val("EffectedActorId", null):
+		for sub_effect_key in _triggers_to_sub_effect_keys.get(EffectTriggers.OnDefending, []):
+			var sub_effect_data = SubEffectDatas[sub_effect_key]
+			var sub_effect = _get_sub_effect_script(sub_effect_key)
+			sub_effect.on_defending(self, sub_effect_data, game_state, attack_event)

@@ -15,6 +15,8 @@ func do_thing(parent_action:BaseAction, subaction_data:Dictionary, que_exe_data:
 	var turn_data = que_exe_data.get_current_turn_data()
 	var target_key = subaction_data['TargetKey']
 	var targets:Array = _find_target_effected_actors(parent_action, subaction_data, target_key, que_exe_data, game_state, actor)
+	var target_param_key = turn_data.get_param_key_for_target(target_key)
+	var target_params = parent_action.get_targeting_params(target_param_key, actor)
 	
 	var weapon = actor.equipment.get_primary_weapon()
 	if !weapon:
@@ -26,8 +28,13 @@ func do_thing(parent_action:BaseAction, subaction_data:Dictionary, que_exe_data:
 			.append_source(SourceTagChain.SourceTypes.Actor, actor)\
 			.append_source(SourceTagChain.SourceTypes.Action, parent_action)
 	
+	var attack_data = {
+		"DamageDatas": [damage_data]
+		
+	}
+	
 	for target:BaseActor in targets:
-		DamageHelper.handle_attack(actor, target, damage_data, tag_chain, game_state)
+		DamageHelper.handle_attack(actor, target, attack_data, tag_chain, game_state,target_params)
 	
 	#var offhand_weapon = actor.equipment.get_offhand_weapon()
 	#if offhand_weapon:

@@ -18,18 +18,21 @@ func do_thing(parent_action:BaseAction, subaction_data:Dictionary, que_exe_data:
 	
 	var turn_data = que_exe_data.get_current_turn_data()
 	var target_dest_key = subaction_data['TargetDestKey']
-	var target_actor_key = subaction_data['TargetActorKey']
 	var target_dest = turn_data.get_target(target_dest_key)
 	var target_dest_params = parent_action.get_targeting_params(
 				turn_data.get_param_key_for_target(target_dest_key), actor)
 	
-	var teleporting_target_id = turn_data.get_target(target_actor_key)
 	var teleporting_actor:BaseActor = null
-	if teleporting_target_id is String:
-		teleporting_actor = game_state.get_actor(teleporting_target_id)
+	if subaction_data.has('TargetActorKey') and not (subaction_data['TargetActorKey'] != '' or subaction_data['TargetActorKey'] != 'Self'):
+		var target_actor_key = subaction_data['TargetActorKey']
+		var teleporting_target_id = turn_data.get_target(target_actor_key)
+		if teleporting_target_id is String:
+			teleporting_actor = game_state.get_actor(teleporting_target_id)
+		else:
+			print("Invalid Target for teleporting: %s." % [teleporting_target_id])
+			return BaseSubAction.Failed
 	else:
-		print("Invalid Target for teleporting: %s." % [teleporting_target_id])
-		return BaseSubAction.Failed
+		teleporting_actor = actor
 	
 	var target_pos:MapPos = null
 	if target_dest_params.is_actor_target_type():

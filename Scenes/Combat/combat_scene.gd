@@ -174,7 +174,7 @@ func create_new_missile_node(missile):
 	new_node.set_missile_data(missile)
 	MapController.add_missile_node(missile, new_node)
 	
-func create_damage_effect(target_actor:BaseActor, vfx_key:String, flash_number:int, source = null):
+func create_damage_effect(target_actor:BaseActor, vfx_key:String, flash_number:int, source = null, color:Color=Color.RED):
 	var target_actor_node:ActorNode = MapController.actor_nodes.get(target_actor.Id, null)
 	if !target_actor_node:
 		printerr("Failed to find actor node for: %s" % [target_actor.Id])
@@ -197,7 +197,7 @@ func create_damage_effect(target_actor:BaseActor, vfx_key:String, flash_number:i
 	if flash_number >= 0:
 		if flash_number > 0 and vfx_node._data.shake_actor:
 			target_actor_node.play_shake()
-		vfx_node.add_flash_text(str(0-flash_number), Color.RED)
+		vfx_node.add_flash_text(str(0-flash_number), color)
 	if flash_number < 0:
 		vfx_node.add_flash_text(str(0-flash_number), Color.GREEN)
 	vfx_node.start_vfx()

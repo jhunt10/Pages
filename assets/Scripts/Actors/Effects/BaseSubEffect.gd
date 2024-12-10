@@ -42,6 +42,14 @@ func on_damage_taken(_effect:BaseEffect, _subeffect_data:Dictionary,
 	on_effect_trigger(_effect, _subeffect_data, BaseEffect.EffectTriggers.OnDamageTaken, _game_state)
 	pass
 
+func on_attacking(_effect:BaseEffect, _subeffect_data:Dictionary, _game_state:GameStateData, _attack_event:AttackEvent):
+	on_effect_trigger(_effect, _subeffect_data, BaseEffect.EffectTriggers.OnAttacking, _game_state)
+	pass
+
+func on_defending(_effect:BaseEffect, _subeffect_data:Dictionary, _game_state:GameStateData, _attack_event:AttackEvent):
+	on_effect_trigger(_effect, _subeffect_data, BaseEffect.EffectTriggers.OnDefending, _game_state)
+	pass
+
 func on_move(_effect:BaseEffect, _subeffect_data:Dictionary,
 			_game_state:GameStateData, _old_pos:MapPos, _new_pos:MapPos, _move_type:String, _moved_by:BaseActor):
 	on_effect_trigger(_effect, _subeffect_data, BaseEffect.EffectTriggers.OnMove, _game_state)

@@ -1,8 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://eox4g5msr5a"]
+[gd_scene load_steps=3 format=3 uid="uid://eox4g5msr5a"]
 
 [ext_resource type="Script" path="res://assets/Scripts/VFXs/flash_text_control.gd" id="1_fmkua"]
+[ext_resource type="Texture2D" uid="uid://dfygd1k1nms2o" path="res://assets/Sprites/VEffects/DamageNumbers.png" id="2_pkmap"]
 
-[node name="FlashTextControl" type="Control"]
+[node name="FlashTextControl" type="Control" node_paths=PackedStringArray("numbers_container", "premade_number")]
 z_index = 9
 layout_mode = 3
 anchors_preset = 7
@@ -16,6 +17,9 @@ offset_right = 20.0
 grow_horizontal = 2
 grow_vertical = 0
 script = ExtResource("1_fmkua")
+numbers_texture = ExtResource("2_pkmap")
+numbers_container = NodePath("Label/HBoxContainer")
+premade_number = NodePath("Label/HBoxContainer/TextureRect")
 
 [node name="Label" type="Label" parent="."]
 clip_contents = true
@@ -27,3 +31,16 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "00"
 horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Label"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 56.0
+scale = Vector2(0.25, 0.25)
+
+[node name="TextureRect" type="TextureRect" parent="Label/HBoxContainer"]
+custom_minimum_size = Vector2(40, 56)
+layout_mode = 2
+texture = ExtResource("2_pkmap")
+expand_mode = 1
+stretch_mode = 2

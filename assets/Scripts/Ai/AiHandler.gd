@@ -100,7 +100,7 @@ static func path_to_target(actor:BaseActor, start_pos:MapPos, target_pos:MapPos,
 			continue
 		if check_pos.to_vector2i() == target_pos.to_vector2i():
 			continue
-		print("Disabling Point: %s because %s " % [check_pos, check_actor.Id])
+		#print("Disabling Point: %s because %s " % [check_pos, check_actor.Id])
 		t_astar.set_point_disabled(_pos_to_index(check_pos, game_state), true)
 	
 	var point_path = t_astar.get_point_path(start_index, end_index, true)
@@ -109,14 +109,14 @@ static func path_to_target(actor:BaseActor, start_pos:MapPos, target_pos:MapPos,
 	var pos_list = []
 	var last_pos = start_pos
 	for point:Vector2i in point_path:
-		print("\n------------------------------")
-		print("From %s to %s: " % [last_pos, point])
+		#print("\n------------------------------")
+		#print("From %s to %s: " % [last_pos, point])
 		var reses = _translate_next_point_to_movement(last_pos, point, [])
 		for res in reses:
 			move_list.append(res['Movement'])
 			pos_list.append(res['NextPos'])
 			last_pos = res['NextPos']
-			print("\t\tMovement: %s | Result: %s" % [res['Movement'], last_pos])
+			#print("\t\tMovement: %s | Result: %s" % [res['Movement'], last_pos])
 		
 	return {"Moves": move_list, "Poses": pos_list, "Path": point_path}
 

@@ -92,6 +92,10 @@ func trigger_damage_taken(game_state:GameStateData, damage_event:DamageEvent):
 	for effect:BaseEffect in _effects.values():
 		effect.trigger_on_damage_taken(game_state, damage_event)
 
+func trigger_attack(game_state:GameStateData, attack_event:AttackEvent):
+	for effect:BaseEffect in _effects.values():
+		effect.trigger_on_attack(game_state, attack_event)
+
 func _trigger_effects(trigger:BaseEffect.EffectTriggers, game_state:GameStateData):
 	if LOGGING: print("Triggering Effect Trigger '%s' for actor:%s." % [BaseEffect.EffectTriggers.keys()[trigger], _actor.Id])
 	for id in _triggers_to_effect_ids[trigger]:

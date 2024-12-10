@@ -398,7 +398,20 @@
 			"LargeIcon":"TestShield.png",
 			"SmallIcon":"TestShield.png"
 		},
-        "StatMods":{},
+        "StatMods":{
+			"StatMod1": { 
+				"StatName": "BlockChance",
+				"DisplayName": "Test Shield",
+				"ModType":"Set", 
+				"Value":5
+			},
+			"StatMod2": { 
+				"StatName": "BlockMod",
+				"DisplayName": "Test Shield",
+				"ModType":"Set", 
+				"Value":0.5
+			}
+        },
         "SpriteSheet":"TestShield_SpriteSheet.png",
         "EquipSlot":"OffHand",
         "Armor": 10,
