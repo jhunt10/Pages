@@ -58,7 +58,7 @@ static func handle_attack(attacker:BaseActor, defender:BaseActor, attack_data:Di
 		
 	attack_event.attack_stage = AttackEvent.AttackStage.Resolved
 	
-	# Trigger Post-Attacj effects
+	# Trigger Post-Attack effects
 	attacker.effects.trigger_attack(game_state, attack_event)
 	defender.effects.trigger_attack(game_state, attack_event)
 	

@@ -43,26 +43,25 @@ func get_terrain_at_pos(pos):
 	if not spot:
 		return false
 	return spot.terrain_index 
-
-func is_spot_open(pos)->bool:
+	
+func is_spot_traversable(pos, actor)->bool:
 	var spot = get_map_spot(pos)
 	if not spot:
 		print("Failed to find spot at pos: %s" % [pos])
 		return false
 	if spot.terrain_index == 0:
-		#print("Pos: %s | Terrain > 0" % [pos])
-		#for y in range(max_hight):
-			#var line = ""
-			#for x in range(max_width):
-				#var val = self.get_map_spot(Vector2i(x, y))
-				#line += "(" + str(val.X) + "," + str(val.Y) + ")," 
-			#print(line.trim_suffix(","))
-				
+		return false
+	return true
+	
+
+func is_spot_open(pos, ignore_actor_ids:Array=[])->bool:
+	if not is_spot_traversable(pos, null):
 		return false
 	var actors = get_actors_at_pos(pos)
-	if actors.size() > 0:
-		print("Actors found on spot")
-		return false
+	for actor in actors:
+		if not ignore_actor_ids.has(actor.Id):
+			print("Actors found on spot")
+			return false
 	return true
 
 # ----------------------------- Actors -----------------------------

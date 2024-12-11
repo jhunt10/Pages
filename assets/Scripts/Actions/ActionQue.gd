@@ -111,7 +111,7 @@ func get_movement_preview_pos()->MapPos:
 			if current_pos.x == next_pos.x and current_pos.y == next_pos.y:
 				current_pos = next_pos
 			# Check if spot is open
-			elif MoveHandler.spot_is_valid_and_open(CombatRootControl.Instance.GameState, next_pos):
+			elif MoveHandler.is_spot_traversable(CombatRootControl.Instance.GameState, next_pos, actor):
 				current_pos = next_pos
 			#print("Before: " + str(befor) + " | Prev: " + str(action.PreviewMoveOffset) + " | After: " + str(current_pos))
 	return current_pos

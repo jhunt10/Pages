@@ -44,6 +44,7 @@ var is_walking
 
 var is_dieing:bool
 
+var current_animation_speed:float=1.0
 var current_animation_action_name:String
 #var current_animation_hand_name:String
 
@@ -175,13 +176,16 @@ func get_animation_dir_sufix()->String:
 	if facing_dir == 3: return "_west"
 	return "_south"
 
-func animation_finished(name):
+func animation_finished(name:String):
 	if LOGGING: print("%s | Animation Finished: %s"  % [Time.get_ticks_msec(), name])
 	is_walking = false
+	if name.contains("motion_"):
+		_start_anim("facing/facing"+get_animation_dir_sufix())
+		
 
 func animation_started(name:String):
 	if LOGGING: print("%s | Animation Started: %s"  % [Time.get_ticks_msec(), name])
-	if name.begins_with("walk"):
+	if name.begins_with("move_"):
 		is_walking = true
 		if LOGGING: print("-Set Is Walking")
 	else:
@@ -209,15 +213,16 @@ func queue_death():
 	is_dieing = true
 
 
-func _start_anim(animation_name):
+func _start_anim(animation_name, speed:float=current_animation_speed):
 	if is_dieing:
 		return
 	if LOGGING: print("Playing Animation: %s" + animation_name)
 	animation.play(animation_name)
-	animation.speed_scale = CombatRootControl.get_time_scale()
+	animation.speed_scale = speed * CombatRootControl.get_time_scale()
+	current_animation_speed = speed
 
 
-func start_weapon_animation(action_name:String, off_hand:bool=false):
+func start_weapon_animation(action_name:String, off_hand:bool=false, speed:float=1):
 	var animation_name = action_name + "/ready" + get_animation_dir_sufix()
 	if off_hand and off_hand_node:
 		off_hand_node.ready_arnimation(action_name, get_animation_dir_sufix())
@@ -225,19 +230,14 @@ func start_weapon_animation(action_name:String, off_hand:bool=false):
 		main_hand_node.ready_arnimation(action_name, get_animation_dir_sufix())
 	current_animation_action_name = animation_name
 
-func start_walk_animation():
-	current_animation_action_name = "walk/walk_out" + get_animation_dir_sufix()
-	_start_anim(current_animation_action_name)
+func start_walk_animation(animation_name, speed:float=1):
+	current_animation_action_name = animation_name + "/ready" + get_animation_dir_sufix()
+	_start_anim(current_animation_action_name, speed)
 	
 
 func execute_animation_motion():
-	# TODO: Clean up once I deside on names
-	#if current_animation_action_name.contains("/ready_"):
-		#var animation_name = current_animation_action_name.replace("/ready_", "/motion_")
-		#if LOGGING: print("Playing Motion Animation: " + animation_name)
-		#_start_anim(animation_name)
-	if current_animation_action_name.begins_with("walk"):
-		var animation_name = current_animation_action_name.replace("_out_", "_in_")
+	if current_animation_action_name.begins_with("move_") or current_animation_action_name.begins_with("move_"):
+		var animation_name = current_animation_action_name.replace("/ready_", "/motion_")
 		_start_anim(animation_name)
 		if LOGGING: print("Playing Motion Animation: " + animation_name)
 	else:
@@ -251,19 +251,20 @@ func cancel_current_animation():
 		var animation_name = current_animation_action_name.replace("/ready_", "/cancel_")
 		if LOGGING: print("Playing Cancel Animation: " + animation_name)
 		_start_anim(animation_name)
-	elif current_animation_action_name.begins_with("walk"):
-		if LOGGING: print("Playing Cancel Walk Animation: " + current_animation_action_name)
-		_start_anim("facing/facing"+get_animation_dir_sufix())
 		is_walking = false
 
-func start_walk_out_animation():
-	if LOGGING: print("Start Walk")
-	_start_anim("walk/walk_out"+get_animation_dir_sufix())
-	
-func start_walk_in_animation():
-	if LOGGING: print("Finish Walk")
-	_start_anim("walk/walk_in"+get_animation_dir_sufix())
-	is_walking = false
+func clear_any_animations():
+	_start_anim("facing/facing"+get_animation_dir_sufix())
+	main_hand_node.clear_any_animations(get_animation_dir_sufix())
+
+#func start_walk_out_animation():
+	#if LOGGING: print("Start Walk")
+	#_start_anim("walk/ready_"+get_animation_dir_sufix())
+	#
+#func start_walk_in_animation():
+	#if LOGGING: print("Finish Walk")
+	#_start_anim("walk/motion_"+get_animation_dir_sufix())
+	#is_walking = false
 
 func set_corpse_sprite():
 	actor_sprite.texture = Actor.sprite.get_corpse_sprite()

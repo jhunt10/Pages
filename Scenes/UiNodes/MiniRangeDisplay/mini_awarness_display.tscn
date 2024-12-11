@@ -1,0 +1,57 @@
+[gd_scene load_steps=6 format=3 uid="uid://bd7k0s02cumgn"]
+
+[ext_resource type="Script" path="res://Scenes/UiNodes/MiniRangeDisplay/mini_awarness_display.gd" id="1_3oigm"]
+[ext_resource type="Texture2D" uid="uid://ynbkbpxcep0o" path="res://Scenes/UiNodes/MiniRangeDisplay/MiniRangeBackground.png" id="2_01hq7"]
+[ext_resource type="Texture2D" uid="uid://cup842jh8o7v4" path="res://Scenes/UiNodes/MiniRangeDisplay/MiniRangeBackground_Frame.png" id="3_dha8t"]
+
+[sub_resource type="Image" id="Image_0vydt"]
+data = {
+"data": PackedByteArray(0, 100, 0, 255, 0, 100, 0, 255, 0, 100, 0, 255, 0, 100, 0, 255, 0, 100, 0, 255, 255, 165, 0, 255, 0, 100, 0, 255, 0, 100, 0, 255, 0, 100, 0, 255, 255, 165, 0, 255, 255, 165, 0, 255, 255, 165, 0, 255, 0, 0, 0, 0, 255, 165, 0, 255, 255, 165, 0, 255, 255, 165, 0, 255, 255, 0, 0, 255, 255, 0, 0, 255, 255, 0, 0, 255, 255, 165, 0, 255, 255, 0, 0, 255, 255, 0, 0, 255, 255, 0, 0, 255, 255, 0, 0, 255, 255, 0, 0, 255),
+"format": "RGBA8",
+"height": 5,
+"mipmaps": false,
+"width": 5
+}
+
+[sub_resource type="ImageTexture" id="ImageTexture_s8yt5"]
+image = SubResource("Image_0vydt")
+
+[node name="MiniAwarnessDisplay" type="Control" node_paths=PackedStringArray("texture_rect")]
+custom_minimum_size = Vector2(44, 44)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1108.0
+offset_bottom = -604.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_3oigm")
+texture_rect = NodePath("TextureRect")
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_01hq7")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("ImageTexture_s8yt5")
+
+[node name="Frame" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_dha8t")

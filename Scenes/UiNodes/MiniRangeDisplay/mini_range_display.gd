@@ -37,7 +37,6 @@ func load_range(points:Array):
 			x_points.append(point[0])
 			y_points.append(point[1])
 	
-	
 	var max_size = max(max_x + 1 - min_x, max_y + 1 - min_y, 5)
 	var image_size = Vector2i(max_size, max_size)
 	if max_x - min_x > 5 or max_y - min_y > 5:
@@ -63,6 +62,14 @@ func load_area_matrix(area:AreaMatrix):
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if update:
-		var test_range = [[-1,0],[-1,-1],[0,-1],[1,-1],[1,0]]
+		var test_range = [
+			[-2,-3],[-1,-3],[0,-3],[1,-3],[2,-3],
+			[-2,-2],[-1,-2],[0,-2],[1,-2],[2,-2],
+			[-2,-1],[-1,-1],[0,-1],[1,-1],[2,-1],
+			[-2,0],[-1,0],[0,0],[1,0],[2,0],
+			[-2,1],[-1,1],[0,1],[1,1],[2,1],
+			[-2,2],[-1,2],[0,2],[1,2],[2,2],
+			[-2,3],[-1,3],[0,3],[1,3],[2,3],
+			]
 		load_range(test_range)
 		update = false

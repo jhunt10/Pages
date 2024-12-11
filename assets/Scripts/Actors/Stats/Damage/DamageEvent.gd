@@ -6,8 +6,9 @@ enum DefenseType{None, Armor, Ward}
 
 enum DamageTypes {	
 	Test, RAW, Healing, Percent,
+	Light, Dark, Chaos, Psycic,
 	Pierce, Slash, Blunt, Crash, # Usually negated by Armor
-	Fire, Cold, Electric, Poison, # Usually negated by Ward
+	Fire, Ice, Electric, Poison, # Usually negated by Ward
 }
 
 var game_state:GameStateData

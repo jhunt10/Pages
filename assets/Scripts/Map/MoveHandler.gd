@@ -14,13 +14,13 @@ static func relative_pos_to_real(current_pos:MapPos, relative_pos:MapPos) -> Map
 			new_pos.y += relative_pos.y
 		1: # East (-y,-x)
 			new_pos.x -= relative_pos.y
-			new_pos.y -= relative_pos.x
+			new_pos.y += relative_pos.x
 		2: # South (-x,-y)
 			new_pos.x -= relative_pos.x
 			new_pos.y -= relative_pos.y
 		3: # West (y,x)
 			new_pos.x += relative_pos.y
-			new_pos.y += relative_pos.x
+			new_pos.y -= relative_pos.x
 	new_pos.z += relative_pos.z
 	new_pos.dir = (current_pos.dir + relative_pos.dir + MOVE_MOD) % MOVE_MOD
 	return new_pos
@@ -44,7 +44,7 @@ static func handle_movement(game_state:GameStateData, moving_actor:BaseActor,
 		return true
 	
 	# Check if spot is valid
-	if not is_spot_traversable(moving_actor, game_state, new_pos):
+	if not is_spot_traversable(game_state, new_pos, moving_actor):
 		if LOGGING: 
 			print("\tSpot is not traversable" )
 			print("------------------------------")
@@ -97,13 +97,12 @@ static func _try_push(game_state:GameStateData, moving_actor:BaseActor, pushed_a
 	pushed_to_pos.dir = current_pushed_pos.dir
 	return pushed_to_pos
 	
-static func is_spot_traversable(actor:BaseActor, game_state:GameStateData, pos:MapPos):
-	var terrain = game_state.MapState.get_terrain_at_pos(pos)
-	return terrain > 0
+static func is_spot_traversable(game_state:GameStateData, pos:MapPos, actor:BaseActor):
+	return game_state.MapState.is_spot_traversable(pos, actor)
 	
-static func spot_is_valid_and_open(game_state:GameStateData, pos:MapPos):
+static func spot_is_valid_and_open(game_state:GameStateData, pos:MapPos, ignore_actor_ids:Array=[]):
 	if (pos.x < 0 or pos.x >= game_state.MapState.max_width 
 		or pos.y < 0 or pos.y >= game_state.MapState.max_hight):
 			if LOGGING: print("\tSpot %s outside map bounds [%s,%s]" % [pos, game_state.MapState.max_width, game_state.MapState.max_hight])
 			return false
-	return game_state.MapState.is_spot_open(pos)
+	return game_state.MapState.is_spot_open(pos, ignore_actor_ids)

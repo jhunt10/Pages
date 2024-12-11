@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://ciah50qt3htui"]
+[gd_scene load_steps=24 format=3 uid="uid://ciah50qt3htui"]
 
 [ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/character_menu_control.gd" id="1_b43ae"]
 [ext_resource type="Texture2D" uid="uid://mpwjrtfjnbth" path="res://Scenes/Menus/CharacterMenu/BookBackground.png" id="2_ny2th"]
@@ -20,7 +20,8 @@
 [ext_resource type="Theme" uid="uid://dwinll8pgdjhc" path="res://Scenes/Themes/standard_theme.tres" id="12_dy5pv"]
 [ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MouseOverControl/character_menu_mouse_control.gd" id="12_yj8n3"]
 [ext_resource type="Texture2D" uid="uid://xcjbd3xju45w" path="res://Scenes/Menus/CharacterMenu/MouseOverControl/DragItemBackground.png" id="13_0dekw"]
-[ext_resource type="Texture2D" uid="uid://3ncohf5a6kf7" path="res://Scenes/Menus/CharacterMenu/HoleBackground.png" id="13_uqggl"]
+[ext_resource type="Texture2D" uid="uid://d0pn1i5o4fqj5" path="res://assets/Sprites/UI/SymbolIcons/AwarenessSymbol.png" id="16_i6djh"]
+[ext_resource type="PackedScene" uid="uid://bd7k0s02cumgn" path="res://Scenes/UiNodes/MiniRangeDisplay/mini_awarness_display.tscn" id="17_wej2u"]
 
 [sub_resource type="GDScript" id="GDScript_rvisf"]
 script/source = "extends TextureRect
@@ -289,19 +290,25 @@ offset_right = 583.0
 offset_bottom = 404.0
 mouse_filter = 1
 script = ExtResource("9_2fkn3")
-premade_stat_entry = NodePath("ScrollContainer/VBoxContainer/StatEntryContainer")
-entry_container = NodePath("ScrollContainer/VBoxContainer")
-scroll_bar = NodePath("ScrollBar")
+premade_stat_entry = NodePath("StatListControl/ScrollContainer/VBoxContainer/StatEntryContainer")
+entry_container = NodePath("StatListControl/ScrollContainer/VBoxContainer")
+scroll_bar = NodePath("StatListControl/ScrollBar")
 
-[node name="Background" type="NinePatchRect" parent="ScaleControl/StatsPage"]
+[node name="StatListControl" type="Control" parent="ScaleControl/StatsPage"]
 layout_mode = 1
-anchors_preset = -1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 12.0
-offset_top = 5.0
+offset_top = 100.0
 offset_right = -12.0
 offset_bottom = -5.0
+
+[node name="Background" type="NinePatchRect" parent="ScaleControl/StatsPage/StatListControl"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
@@ -313,90 +320,245 @@ patch_margin_top = 18
 patch_margin_right = 18
 patch_margin_bottom = 19
 
-[node name="ScrollBar" parent="ScaleControl/StatsPage" node_paths=PackedStringArray("scroll_container") instance=ExtResource("10_2kgep")]
+[node name="ScrollBar" parent="ScaleControl/StatsPage/StatListControl" node_paths=PackedStringArray("scroll_container") instance=ExtResource("10_2kgep")]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = 16.0
-offset_right = -16.0
-offset_bottom = -16.0
+offset_left = -36.0
+offset_top = 12.0
+offset_right = -4.0
+offset_bottom = -12.0
 grow_horizontal = 0
 grow_vertical = 2
 scroll_container = NodePath("../ScrollContainer")
 
-[node name="ScrollContainer" type="ScrollContainer" parent="ScaleControl/StatsPage"]
+[node name="ScrollContainer" type="ScrollContainer" parent="ScaleControl/StatsPage/StatListControl"]
 custom_minimum_size = Vector2(0, 220)
 layout_mode = 0
-offset_left = 28.0
-offset_top = 13.0
-offset_right = 233.0
-offset_bottom = 381.0
+offset_left = 16.0
+offset_top = 8.0
+offset_right = 221.0
+offset_bottom = 376.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 horizontal_scroll_mode = 0
 vertical_scroll_mode = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ScaleControl/StatsPage/ScrollContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="ScaleControl/StatsPage/StatListControl/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="StatEntryContainer" type="HBoxContainer" parent="ScaleControl/StatsPage/ScrollContainer/VBoxContainer" node_paths=PackedStringArray("name_label", "base_value_label", "value_label")]
+[node name="StatEntryContainer" type="HBoxContainer" parent="ScaleControl/StatsPage/StatListControl/ScrollContainer/VBoxContainer" node_paths=PackedStringArray("name_label", "base_value_label", "value_label")]
 layout_mode = 2
 script = ExtResource("11_7qatu")
 name_label = NodePath("StatNameLabel")
 base_value_label = NodePath("BaseValueLabel")
 value_label = NodePath("ValueLabel")
 
-[node name="StatNameLabel" type="Label" parent="ScaleControl/StatsPage/ScrollContainer/VBoxContainer/StatEntryContainer"]
+[node name="StatNameLabel" type="Label" parent="ScaleControl/StatsPage/StatListControl/ScrollContainer/VBoxContainer/StatEntryContainer"]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("12_dy5pv")
 text = "0123456789"
 
-[node name="DividerLabel" type="Label" parent="ScaleControl/StatsPage/ScrollContainer/VBoxContainer/StatEntryContainer"]
+[node name="DividerLabel" type="Label" parent="ScaleControl/StatsPage/StatListControl/ScrollContainer/VBoxContainer/StatEntryContainer"]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("12_dy5pv")
 text = ":"
 
-[node name="BaseValueLabel" type="Label" parent="ScaleControl/StatsPage/ScrollContainer/VBoxContainer/StatEntryContainer"]
+[node name="BaseValueLabel" type="Label" parent="ScaleControl/StatsPage/StatListControl/ScrollContainer/VBoxContainer/StatEntryContainer"]
 self_modulate = Color(0.498039, 0, 0, 1)
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 theme = ExtResource("12_dy5pv")
 text = "000"
 
-[node name="DividerLabel2" type="Label" parent="ScaleControl/StatsPage/ScrollContainer/VBoxContainer/StatEntryContainer"]
+[node name="DividerLabel2" type="Label" parent="ScaleControl/StatsPage/StatListControl/ScrollContainer/VBoxContainer/StatEntryContainer"]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("12_dy5pv")
 text = ":"
 
-[node name="ValueLabel" type="Label" parent="ScaleControl/StatsPage/ScrollContainer/VBoxContainer/StatEntryContainer"]
+[node name="ValueLabel" type="Label" parent="ScaleControl/StatsPage/StatListControl/ScrollContainer/VBoxContainer/StatEntryContainer"]
 self_modulate = Color(0.498039, 0, 0, 1)
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 theme = ExtResource("12_dy5pv")
 text = "000"
 
-[node name="BoxBackground" type="NinePatchRect" parent="ScaleControl/StatsPage"]
-visible = false
+[node name="Control" type="Control" parent="ScaleControl/StatsPage"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 12.0
+offset_top = 5.0
+offset_right = -12.0
+offset_bottom = 95.0
+
+[node name="Background" type="NinePatchRect" parent="ScaleControl/StatsPage/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("9_dsxwx")
+region_rect = Rect2(0, 0, 64, 65)
+patch_margin_left = 18
+patch_margin_top = 18
+patch_margin_right = 18
+patch_margin_bottom = 19
+
+[node name="MainContainer" type="HBoxContainer" parent="ScaleControl/StatsPage/Control"]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 20.0
-offset_top = 50.0
-offset_right = -48.0
-offset_bottom = -16.0
-texture = ExtResource("13_uqggl")
-patch_margin_left = 32
-patch_margin_top = 32
-patch_margin_right = 32
-patch_margin_bottom = 32
+offset_left = 8.0
+offset_top = 4.0
+offset_right = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="EvadeBlockGrid" type="VBoxContainer" parent="ScaleControl/StatsPage/Control/MainContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+
+[node name="TopColumns" type="HBoxContainer" parent="ScaleControl/StatsPage/Control/MainContainer/EvadeBlockGrid"]
+layout_mode = 2
+
+[node name="Spacer" type="Label" parent="ScaleControl/StatsPage/Control/MainContainer/EvadeBlockGrid/TopColumns"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("12_dy5pv")
+
+[node name="EvasionLabel" type="Label" parent="ScaleControl/StatsPage/Control/MainContainer/EvadeBlockGrid/TopColumns"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("12_dy5pv")
+text = "Evasion"
+
+[node name="BlockLabel" type="Label" parent="ScaleControl/StatsPage/Control/MainContainer/EvadeBlockGrid/TopColumns"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("12_dy5pv")
+text = "Block"
+horizontal_alignment = 1
+
+[node name="FrontRow" type="HBoxContainer" parent="ScaleControl/StatsPage/Control/MainContainer/EvadeBlockGrid"]
+layout_mode = 2
+
+[node name="RowLabel" type="Label" parent="ScaleControl/StatsPage/Control/MainContainer/EvadeBlockGrid/FrontRow"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("12_dy5pv")
+text = "Front"
+horizontal_alignment = 2
+
+[node name="EvadeValLabel" type="Label" parent="ScaleControl/StatsPage/Control/MainContainer/EvadeBlockGrid/FrontRow"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("12_dy5pv")
+text = "50%"
+horizontal_alignment = 1
+
+[node name="BlockValLabel" type="Label" parent="ScaleControl/StatsPage/Control/MainContainer/EvadeBlockGrid/FrontRow"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("12_dy5pv")
+text = "50%"
+horizontal_alignment = 1
+
+[node name="FlankRow" type="HBoxContainer" parent="ScaleControl/StatsPage/Control/MainContainer/EvadeBlockGrid"]
+layout_mode = 2
+
+[node name="RowLabel" type="Label" parent="ScaleControl/StatsPage/Control/MainContainer/EvadeBlockGrid/FlankRow"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("12_dy5pv")
+text = "Flank"
+horizontal_alignment = 2
+
+[node name="EvadeValLabel" type="Label" parent="ScaleControl/StatsPage/Control/MainContainer/EvadeBlockGrid/FlankRow"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("12_dy5pv")
+text = "25%"
+horizontal_alignment = 1
+
+[node name="BlockValLabel" type="Label" parent="ScaleControl/StatsPage/Control/MainContainer/EvadeBlockGrid/FlankRow"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("12_dy5pv")
+text = "25%"
+horizontal_alignment = 1
+
+[node name="BackRow" type="HBoxContainer" parent="ScaleControl/StatsPage/Control/MainContainer/EvadeBlockGrid"]
+layout_mode = 2
+
+[node name="RowLabel" type="Label" parent="ScaleControl/StatsPage/Control/MainContainer/EvadeBlockGrid/BackRow"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("12_dy5pv")
+text = "Back"
+horizontal_alignment = 2
+
+[node name="EvadeValLabel" type="Label" parent="ScaleControl/StatsPage/Control/MainContainer/EvadeBlockGrid/BackRow"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("12_dy5pv")
+text = "--%"
+horizontal_alignment = 1
+
+[node name="BlockValLabel" type="Label" parent="ScaleControl/StatsPage/Control/MainContainer/EvadeBlockGrid/BackRow"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("12_dy5pv")
+text = "--%"
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScaleControl/StatsPage/Control/MainContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="AwarenessContainer" type="HBoxContainer" parent="ScaleControl/StatsPage/Control/MainContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="ScaleControl/StatsPage/Control/MainContainer/VBoxContainer/AwarenessContainer"]
+layout_mode = 2
+texture = ExtResource("16_i6djh")
+
+[node name="AwarenessLabel" type="Label" parent="ScaleControl/StatsPage/Control/MainContainer/VBoxContainer/AwarenessContainer"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("12_dy5pv")
+text = "1"
+horizontal_alignment = 1
+
+[node name="MiniAwarnessDisplay" parent="ScaleControl/StatsPage/Control/MainContainer/VBoxContainer" instance=ExtResource("17_wej2u")]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 
 [node name="EquipmentPage" parent="ScaleControl" instance=ExtResource("9_bofun")]
 offset_left = 17.0

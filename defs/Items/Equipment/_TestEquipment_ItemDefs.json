@@ -35,7 +35,7 @@
         "ItemSlotsData": [
             {
                 "Key":"Class",
-                "DisplayName":"Class Pages",
+                "DisplayName":"Resource",
                 "Count": 1,
                 "FilterData":{
                     "RequiredTags":"ClassPage"
@@ -393,7 +393,7 @@
         "Details":{
 			"DisplayName": "Test Shield",
 			"SnippetDesc": "An shield made for testing.",
-			"Description": "An shield made for testing.",
+			"Description": "An shield made for testing. 50% chance to block 50% of damage",
 			"Tags": ["OffHand","Shield"],
 			"LargeIcon":"TestShield.png",
 			"SmallIcon":"TestShield.png"
@@ -403,7 +403,7 @@
 				"StatName": "BlockChance",
 				"DisplayName": "Test Shield",
 				"ModType":"Set", 
-				"Value":5
+				"Value":50
 			},
 			"StatMod2": { 
 				"StatName": "BlockMod",

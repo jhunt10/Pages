@@ -39,21 +39,23 @@ var _lock_position_edit:bool = false
 @export var flip_sprite:bool:
 	set(val):
 		flip_sprite = val
-		if flip_sprite and !unflip_offhand:
-			overhand_weapon_sprite.scale = Vector2(-1,1)
-			underhand_weapon_sprite.scale = Vector2(-1,1)
-		else:
-			overhand_weapon_sprite.scale = Vector2(1,1)
-			underhand_weapon_sprite.scale = Vector2(1,1)
+		if overhand_weapon_sprite:
+			if flip_sprite and !unflip_offhand:
+				overhand_weapon_sprite.scale = Vector2(-1,1)
+				underhand_weapon_sprite.scale = Vector2(-1,1)
+			else:
+				overhand_weapon_sprite.scale = Vector2(1,1)
+				underhand_weapon_sprite.scale = Vector2(1,1)
 @export var unflip_offhand:bool:
 	set(val):
 		unflip_offhand = val
-		if flip_sprite and !unflip_offhand:
-			overhand_weapon_sprite.scale = Vector2(-1,1)
-			underhand_weapon_sprite.scale = Vector2(-1,1)
-		else:
-			overhand_weapon_sprite.scale = Vector2(1,1)
-			underhand_weapon_sprite.scale = Vector2(1,1)
+		if overhand_weapon_sprite:
+			if flip_sprite and !unflip_offhand:
+				overhand_weapon_sprite.scale = Vector2(-1,1)
+				underhand_weapon_sprite.scale = Vector2(-1,1)
+			else:
+				overhand_weapon_sprite.scale = Vector2(1,1)
+				underhand_weapon_sprite.scale = Vector2(1,1)
 		
 #@export var hand_name:String
 @export var main_hand_position:Vector2:

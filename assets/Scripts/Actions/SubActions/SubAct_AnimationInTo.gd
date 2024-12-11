@@ -10,7 +10,12 @@ func get_required_props()->Dictionary:
 func get_prop_enum_values(prop_key:String)->Array:
 	return [
 		"WEAPON_DEFAULT",
-		"walk", 
+		"move_walk_forward", 
+		"move_walk_back",
+		"move_walk_left",
+		"move_walk_right",
+		"move_turn_left",
+		"move_turn_right",
 		"weapon_raise",
 		"weapon_swing",
 		"weapon_stab"
@@ -19,16 +24,21 @@ func get_prop_enum_values(prop_key:String)->Array:
 
 func do_thing(parent_action:BaseAction, subaction_data:Dictionary, metadata:QueExecutionData,
 				game_state:GameStateData, actor:BaseActor)->bool:
-	var animation = subaction_data.get('Animation', null)
+	var animation:String = subaction_data.get('Animation', "")
+	if animation == "":
+		return true
 	if animation == "WEAPON_DEFAULT":
 		var primary_weapon = actor.equipment.get_primary_weapon()
 		if primary_weapon:
 			animation = primary_weapon.get_load_val("WeaponAnimation", null)
+	var animation_speed = 1.0
+	if subaction_data.keys().has("AnimationSpeed"):
+		animation_speed = subaction_data.get("AnimationSpeed", 1.0)
 	print("SubAct Animation: " + animation)
-	var actor_node = CombatRootControl.Instance.MapController.actor_nodes.get(actor.Id)
+	var actor_node:ActorNode = CombatRootControl.Instance.MapController.actor_nodes.get(actor.Id)
 	if actor_node and animation:
-		if animation == "walk":
-			actor_node.start_walk_animation()
+		if animation.begins_with("move_"):
+			actor_node.start_walk_animation(animation, animation_speed)
 		else:
-			actor_node.start_weapon_animation(animation)
+			actor_node.start_weapon_animation(animation, animation_speed)
 	return BaseSubAction.Success

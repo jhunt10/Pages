@@ -38,7 +38,7 @@ static var Instance:MainRootNode
 @export var center_container:CenterContainer
 
 static var is_mobile:bool:
-	get: return true# OS.has_feature("web_android") or OS.has_feature("web_ios")
+	get: return false# OS.has_feature("web_android") or OS.has_feature("web_ios")
 
 func _ready() -> void:
 	if MainRootNode.Instance:

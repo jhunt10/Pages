@@ -93,6 +93,9 @@ func ready_arnimation(name, dir_sufix):
 	current_animation = animation_name
 
 func execute_animation():
+	if not current_animation:
+		printerr("ActorHandNode.execute_animation: Called with no current_animation.")
+		return
 	if current_animation.contains("/ready_"):
 		current_animation = current_animation.replace("/ready_", "/motion_")
 		animation.play(current_animation)
@@ -101,6 +104,9 @@ func cancel_animation():
 	if current_animation.contains("/ready_"):
 		current_animation = current_animation.replace("/ready_", "/cancel_")
 		animation.play(current_animation)
+
+func clear_any_animations(dir_sufix):
+	animation.play("weapon_facing/facing" + dir_sufix)
 
 func on_animation_finished(finished):
 	# Hold onto the "ready" animation since the actor is holding the pose
