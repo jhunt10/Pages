@@ -1,6 +1,8 @@
 class_name CharacterMenuControl
 extends Control
 
+const LOGGING = false
+
 @export var details_card_spawn_point:Control
 @export var equipment_page:EquipmentPageControl
 @export var page_page:PagePageControl
@@ -130,14 +132,14 @@ func stop_dragging():
 	_dragging = false
 	_button_down_pos = null
 	mouse_control.hide()
-	print("Stop Dragging: %s | %s" % [_selected_context, _mouse_over_context])
+	if LOGGING: print("Stop Dragging: %s | %s" % [_selected_context, _mouse_over_context])
 	
 	# Transfering items
 	if _selected_context and _mouse_over_context:
 		
 		# From Left Page to Inventory - Remove Item
 		if _mouse_over_context == "Inventory" and _selected_context != "Inventory":
-			print("Remove Item: %s" %[_selected_item.Id])
+			if LOGGING: print("Remove Item: %s" %[_selected_item.Id])
 			var page_control = context_to_page_control(_selected_context)
 			if page_control:
 				page_control.remove_item_from_slot(_selected_item, _selected_index_data)
@@ -145,14 +147,14 @@ func stop_dragging():
 		if _mouse_over_index_data != null:
 			# From Inventory to Left Page - Add Item
 			if _mouse_over_context != "Inventory" and _selected_context == "Inventory":
-				print("Add Item")
+				if LOGGING: print("Add Item")
 				var page_control = context_to_page_control(_mouse_over_context)
 				if page_control:
 					page_control.try_place_item_in_slot(_selected_item, _mouse_over_index_data)
 			
 			# From Left Page to Left Page - Move Item
 			if _mouse_over_context != "Inventory" and _selected_context == _mouse_over_context:
-				print("Move Item")
+				if LOGGING: print("Move Item")
 				var page_control = context_to_page_control(_mouse_over_context)
 				if page_control:
 					page_control.try_move_item_to_slot(_selected_item, _selected_index_data, _mouse_over_index_data)
@@ -176,7 +178,7 @@ func on_item_button_down(context, item_key, index, offset):
 	var page_control = context_to_page_control(context)
 	if page_control:
 		page_control.highlight_slot(index)
-	print("Item Button Down: %s | %s | %s" % [context, item_key, index])
+	if LOGGING: print("Item Button Down: %s | %s | %s" % [context, item_key, index])
 
 func on_item_button_up(context, item_key, index):
 	_button_down_pos = null
@@ -193,12 +195,12 @@ func on_item_button_up(context, item_key, index):
 			var page_control = context_to_page_control(context)
 			if page_control:
 				page_control.highlight_slot(index)
-	print("Item Button Up: %s | %s | %s" % [context, item_key, index])
+	if LOGGING: print("Item Button Up: %s | %s | %s" % [context, item_key, index])
 
 func on_mouse_enter_slot(context, item_key, index):
 	_mouse_over_context = context
 	_mouse_over_index_data = index
-	print("Item Button Enter: %s | %s | %s" % [context, item_key, index])
+	if LOGGING: print("Item Button Enter: %s | %s | %s" % [context, item_key, index])
 	if _dragging:
 		var control = context_to_page_control(context)
 		if control:
@@ -209,7 +211,7 @@ func on_mouse_exit_slot(context, item_key, index):
 	_mouse_over_index_data = null
 	if _dragging:
 		clear_highlights()
-	print("Item Button Exit : %s | %s | %s" % [context, item_key, index])
+	if LOGGING: print("Item Button Exit : %s | %s | %s" % [context, item_key, index])
 
 #func on_details_card_button_pressed():
 	#if _selected_item:

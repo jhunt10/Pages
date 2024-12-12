@@ -2,6 +2,11 @@ class_name StatHelper
 
 enum CoreStats {Strength, Agility, Intelligence, Wisdom}
 
+const StatBarColors:Dictionary = {
+	"Health": Color.RED,
+	"Mana": Color.DEEP_SKY_BLUE,
+	"Stamina": Color.GREEN
+}
 
 
 ## Every Actor is exspected to have these stats

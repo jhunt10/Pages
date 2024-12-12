@@ -1,7 +1,7 @@
 class_name StatHolder
 
 const HealthKey:String = "Health"
-const LOGGING = false
+const LOGGING = true
 
 signal stats_changed
 signal bar_stat_changed
@@ -57,12 +57,11 @@ func dirty_stats():
 	_stats_dirty = true
 
 func recache_stats():
+	if LOGGING: printerr("Recaching Stats")
 	_calc_cache_stats()
 
 func get_stat(stat_name:String, default:int=0):
 	var full_stat_name = stat_name
-	if _cached_stats.has(full_stat_name):
-		return _cached_stats[full_stat_name]
 	if _stats_dirty:
 		_calc_cache_stats()
 	return _cached_stats.get(stat_name, default)

@@ -1,12 +1,6 @@
 class_name StatPanelControl
 extends VBoxContainer
 
-const StatBarColors:Dictionary = {
-	"Health": Color.RED,
-	"Mana": Color.DEEP_SKY_BLUE,
-	"Stamina": Color.GREEN
-}
-
 const BoxPadding:int = 4
 
 @onready var portrait_texture_rect:TextureRect = $BackPatchContainer/VBoxContainer/HBoxContainer/PortaitTextureRect
@@ -120,8 +114,8 @@ func _create_stat_bar(stat_name):
 	var new_bar:StatBarControl = load("res://Scenes/Combat/UiNodes/StatsPanel/stat_bar_control.tscn").instantiate()
 	new_bar.set_actor(actor, stat_name)
 	bars_container.add_child(new_bar)
-	if StatBarColors.keys().has(stat_name):
-		new_bar.set_color(StatBarColors[stat_name])
+	if StatHelper.StatBarColors.keys().has(stat_name):
+		new_bar.set_color(StatHelper.StatBarColors[stat_name])
 	_stat_bars[stat_name] = new_bar
 	
 func _on_start_round():

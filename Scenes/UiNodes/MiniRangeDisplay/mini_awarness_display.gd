@@ -1,5 +1,5 @@
 @tool
-class_name MiniBlockDisplay
+class_name MiniAwarenessDisplay
 extends Control
 
 @export var awareness:int = 0:

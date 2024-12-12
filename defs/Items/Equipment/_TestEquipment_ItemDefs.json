@@ -322,7 +322,7 @@
         "ItemKey":"TestTrinket",
         "_ObjectScript": "res://assets/Scripts/Items/Equipment/BaseArmorEquipment.gd",
         "Details":{
-			"DisplayName": "Test Trinket",
+			"DisplayName": "Evasion Trinket",
 			"SnippetDesc": "An trinket made for testing.",
 			"Description": "An trinket made for testing.",
 			"Tags": ["Trinket"],
@@ -331,10 +331,10 @@
 		},
         "StatMods":{
 			"StatMod1": { 
-				"StatName": "Agility",
+				"StatName": "Evasion",
 				"DisplayName": "TestTrinket AGI mod",
 				"ModType":"Add", 
-				"Value":5
+				"Value":50
 			}
 		},
         "EquipSlot":"Trinket",
@@ -345,7 +345,7 @@
         "ItemKey":"TestTrinket2",
         "_ObjectScript": "res://assets/Scripts/Items/Equipment/BaseArmorEquipment.gd",
         "Details":{
-			"DisplayName": "Test Trinket",
+			"DisplayName": "Awareness Trinket",
 			"SnippetDesc": "An trinket made for testing.",
 			"Description": "An trinket made for testing.",
 			"Tags": ["Trinket"],
@@ -354,10 +354,10 @@
 		},
         "StatMods":{
 			"StatMod1": { 
-				"StatName": "Intelligence",
+				"StatName": "Awareness",
 				"DisplayName": "TestTrinket INT mod",
 				"ModType":"Add", 
-				"Value":5
+				"Value":1
 			}
 		},
         "EquipSlot":"Trinket",
@@ -368,7 +368,7 @@
         "ItemKey":"TestTrinket3",
         "_ObjectScript": "res://assets/Scripts/Items/Equipment/BaseArmorEquipment.gd",
         "Details":{
-			"DisplayName": "Test Trinket",
+			"DisplayName": "Test Trinket3",
 			"SnippetDesc": "An trinket made for testing.",
 			"Description": "An trinket made for testing.",
 			"Tags": ["Trinket"],

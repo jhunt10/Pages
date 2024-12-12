@@ -21,7 +21,7 @@
 [ext_resource type="Texture2D" uid="uid://puhp53n8k1h8" path="res://assets/Sprites/UI/CharacterEdit/TrinketSlot.png" id="18_pfurv"]
 [ext_resource type="Texture2D" uid="uid://dwliocipx40sq" path="res://assets/Sprites/UI/CharacterEdit/OffHandSlot.png" id="19_vhvqa"]
 [ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/EquipmentMenu/stat_box_control.gd" id="21_8w6l2"]
-[ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/EquipmentMenu/stat_label.gd" id="21_hnuvf"]
+[ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/StatsMenuPage/stat_label_container.gd" id="21_hnuvf"]
 
 [node name="EquipmentPage" type="Control" node_paths=PackedStringArray("name_label", "level_label", "equipment_slots_container", "stat_box")]
 custom_minimum_size = Vector2(280, 395)
@@ -588,95 +588,3 @@ text = "00"
 
 [node name="FlowContainer" type="FlowContainer" parent="StatBoxControl/VBoxContainer"]
 layout_mode = 2
-
-[node name="StatLabel_Hp" type="HBoxContainer" parent="StatBoxControl/VBoxContainer/FlowContainer" node_paths=PackedStringArray("name_label", "value_label")]
-custom_minimum_size = Vector2(80, 0)
-layout_mode = 2
-script = ExtResource("21_hnuvf")
-stat_name = "Max:Health"
-name_label = NodePath("NameLabel")
-value_label = NodePath("ValueLabel")
-
-[node name="NameLabel" type="Label" parent="StatBoxControl/VBoxContainer/FlowContainer/StatLabel_Hp"]
-self_modulate = Color(0.498039, 0, 0, 1)
-layout_mode = 2
-theme = ExtResource("3_th70d")
-text = "HP"
-
-[node name="DividerLabel" type="Label" parent="StatBoxControl/VBoxContainer/FlowContainer/StatLabel_Hp"]
-self_modulate = Color(0.498039, 0, 0, 1)
-layout_mode = 2
-theme = ExtResource("3_th70d")
-text = ":"
-
-[node name="ValueLabel" type="Label" parent="StatBoxControl/VBoxContainer/FlowContainer/StatLabel_Hp"]
-self_modulate = Color(0.498039, 0, 0, 1)
-layout_mode = 2
-theme = ExtResource("3_th70d")
-text = "000"
-
-[node name="StatLabel_Stamina2" type="HBoxContainer" parent="StatBoxControl/VBoxContainer/FlowContainer" node_paths=PackedStringArray("name_label", "value_label", "regen_label")]
-layout_mode = 2
-size_flags_horizontal = 3
-script = ExtResource("21_hnuvf")
-stat_name = "Max:Mana"
-name_label = NodePath("NameLabel")
-value_label = NodePath("ValueLabel")
-regen_label = NodePath("RegenLabel")
-
-[node name="NameLabel" type="Label" parent="StatBoxControl/VBoxContainer/FlowContainer/StatLabel_Stamina2"]
-self_modulate = Color(0.498039, 0, 0, 1)
-layout_mode = 2
-theme = ExtResource("3_th70d")
-text = "Mana"
-
-[node name="DividerLabel" type="Label" parent="StatBoxControl/VBoxContainer/FlowContainer/StatLabel_Stamina2"]
-self_modulate = Color(0.498039, 0, 0, 1)
-layout_mode = 2
-theme = ExtResource("3_th70d")
-text = ":"
-
-[node name="ValueLabel" type="Label" parent="StatBoxControl/VBoxContainer/FlowContainer/StatLabel_Stamina2"]
-self_modulate = Color(0.498039, 0, 0, 1)
-layout_mode = 2
-theme = ExtResource("3_th70d")
-text = "000"
-
-[node name="RegenLabel" type="Label" parent="StatBoxControl/VBoxContainer/FlowContainer/StatLabel_Stamina2"]
-self_modulate = Color(0.498039, 0, 0, 1)
-layout_mode = 2
-theme = ExtResource("3_th70d")
-text = "+10 PR"
-
-[node name="StatLabel_Stamina" type="HBoxContainer" parent="StatBoxControl/VBoxContainer/FlowContainer" node_paths=PackedStringArray("name_label", "value_label", "regen_label")]
-layout_mode = 2
-size_flags_horizontal = 3
-script = ExtResource("21_hnuvf")
-stat_name = "Max:Stamina"
-name_label = NodePath("NameLabel")
-value_label = NodePath("ValueLabel")
-regen_label = NodePath("RegenLabel")
-
-[node name="NameLabel" type="Label" parent="StatBoxControl/VBoxContainer/FlowContainer/StatLabel_Stamina"]
-self_modulate = Color(0.498039, 0, 0, 1)
-layout_mode = 2
-theme = ExtResource("3_th70d")
-text = "Stamina"
-
-[node name="DividerLabel" type="Label" parent="StatBoxControl/VBoxContainer/FlowContainer/StatLabel_Stamina"]
-self_modulate = Color(0.498039, 0, 0, 1)
-layout_mode = 2
-theme = ExtResource("3_th70d")
-text = ":"
-
-[node name="ValueLabel" type="Label" parent="StatBoxControl/VBoxContainer/FlowContainer/StatLabel_Stamina"]
-self_modulate = Color(0.498039, 0, 0, 1)
-layout_mode = 2
-theme = ExtResource("3_th70d")
-text = "000"
-
-[node name="RegenLabel" type="Label" parent="StatBoxControl/VBoxContainer/FlowContainer/StatLabel_Stamina"]
-self_modulate = Color(0.498039, 0, 0, 1)
-layout_mode = 2
-theme = ExtResource("3_th70d")
-text = "+10 PR"

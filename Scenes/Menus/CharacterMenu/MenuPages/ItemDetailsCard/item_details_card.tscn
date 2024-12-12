@@ -108,7 +108,6 @@ offset_right = 8.0
 offset_bottom = 8.0
 
 [node name="WeaponDetailsControl" type="Control" parent="OffsetControl" node_paths=PackedStringArray("parent_card_control", "weapon_class_label", "phy_damage_icon", "mag_damage_icon", "attack_power_label", "damage_type_label", "description_box", "range_display", "equip_button_background", "equip_button", "equip_label")]
-visible = false
 anchors_preset = 0
 offset_left = 17.0
 offset_top = 58.0
@@ -236,6 +235,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="ArmorDetailsControl" type="Control" parent="OffsetControl" node_paths=PackedStringArray("parent_card_control", "slot_label", "phy_icon", "mag_icon", "armor_label", "ward_label", "description_box", "equip_button_background", "equip_button", "equip_label")]
+visible = false
 anchors_preset = 0
 offset_left = 17.0
 offset_top = 58.0
