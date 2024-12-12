@@ -3,6 +3,9 @@ extends Control
 
 const LOGGING = false
 
+# Delay after skipping before clicking anywhere counts as hitting "Next" 
+const DOUBLE_CLICK_DELAY:float = 0.3
+
 const LETTER_DELAY:float = 0.03
 @export var scene_root:Node
 @export var dialog_box_holder:Control
@@ -25,6 +28,8 @@ var delay_timer:float = 0
 var waiting_for_button:bool = false
 var _scroll_to_bottom:bool = true
 var _delayed_scroll:bool = false
+var _skipped_current_block:bool = false
+var _click_anywhere_next_delay:float = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -41,6 +46,8 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	if _click_anywhere_next_delay > 0:
+		_click_anywhere_next_delay = max(0, _click_anywhere_next_delay - delta)
 	if _scroll_to_bottom and current_block:
 		scroll_container.ensure_control_visible(blocks_container)
 		_scroll_to_bottom = false
@@ -57,12 +64,14 @@ func _input(event: InputEvent) -> void:
 		if mouse_event.button_index == 1 and mouse_event.pressed:
 			if next_button.visible:
 				if current_block and current_block.read_any_touch_as_next():
-					on_next_button_pressed()
+					if _click_anywhere_next_delay <= 0:
+						on_next_button_pressed()
 				elif not current_block:
 					on_next_button_pressed()
 			else:
 				if current_block and not current_block.is_finished:
 					if LOGGING: print("Skipping")
+					_skipped_current_block = true
 					current_block.skip()
 					scroll_to_bottom()
 
@@ -72,6 +81,7 @@ func start_dialog():
 
 func start_block():
 	if LOGGING: print("Starting Block %s" % [block_index])
+	_skipped_current_block = false
 	if dialog_script_data.size() > block_index:
 		var new_block_data:Dictionary = dialog_script_data[block_index]
 		if new_block_data.keys().has("@LABEL@"):
@@ -108,6 +118,8 @@ func block_finished(from_next_button:bool=false):
 	if LOGGING: print("Block Finished")
 	var next_index = block_index + 1
 	if current_block:
+		if _skipped_current_block:
+			_click_anywhere_next_delay = DOUBLE_CLICK_DELAY
 		if current_block._block_data.get("WaitForButton", true) and not from_next_button:
 			show_next_button()
 			return
