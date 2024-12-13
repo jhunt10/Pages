@@ -1,13 +1,11 @@
-[gd_scene load_steps=14 format=3 uid="uid://dmlpvjyai521d"]
+[gd_scene load_steps=12 format=3 uid="uid://dmlpvjyai521d"]
 
 [ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/InventoryPage/inventory_container.gd" id="1_j4lhh"]
-[ext_resource type="Texture2D" uid="uid://c4yedxpiinlff" path="res://Scenes/Menus/CharacterMenu/MenuPages/outline.png" id="2_bctqj"]
+[ext_resource type="Texture2D" uid="uid://gxk1dw0hkyuj" path="res://Scenes/Menus/CharacterMenu/MenuPages/InventoryPage/InvBoxBackground_working.png" id="2_e5pw5"]
 [ext_resource type="Theme" uid="uid://dwinll8pgdjhc" path="res://Scenes/Themes/standard_theme.tres" id="3_e4t5p"]
 [ext_resource type="PackedScene" uid="uid://bpvy87uagttpr" path="res://Scenes/UiNodes/ScollBar/scroll_bar.tscn" id="5_0hjxr"]
-[ext_resource type="Texture2D" uid="uid://deqwpr7qu8fp2" path="res://assets/Sprites/UI/CharacterEdit/InventorySlotBackground.png" id="5_6r5b7"]
-[ext_resource type="Texture2D" uid="uid://cq2p1mnoevjoc" path="res://assets/Sprites/UI/CharacterEdit/InventoryItemButton_Pressed.png" id="6_6i0vq"]
 [ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/InventoryPage/inventory_item_button_control.gd" id="7_1h41b"]
-[ext_resource type="Texture2D" uid="uid://wvy1i6avftau" path="res://defs/Items/Equipment/TestWeapons/TestSword.png" id="8_8cp3a"]
+[ext_resource type="Texture2D" uid="uid://kk75vjniq5ho" path="res://Scenes/Menus/CharacterMenu/MenuPages/InventoryPage/InventoryItemButton_Background.png" id="7_2myyq"]
 [ext_resource type="Texture2D" uid="uid://bkjy2j6ra337v" path="res://assets/Sprites/UI/SymbolIcons/EquiptIcon.png" id="9_a4qxi"]
 [ext_resource type="Texture2D" uid="uid://0wkhsf2kgce1" path="res://assets/Sprites/UI/BackPatches/Patch_12_4_Dark.png" id="10_nckkb"]
 [ext_resource type="Texture2D" uid="uid://w8cgm1tj35ld" path="res://Scenes/Menus/CharacterMenu/MenuPages/InventoryPage/HoleOutline.png" id="12_qpq5w"]
@@ -18,34 +16,35 @@
 custom_minimum_size = Vector2(280, 395)
 layout_mode = 3
 anchors_preset = 0
+offset_right = 280.0
+offset_bottom = 395.0
 mouse_filter = 1
 script = ExtResource("1_j4lhh")
+min_button_size = Vector2i(64, 64)
+max_button_size = Vector2i(96, 96)
 scroll_container = NodePath("BoxBackground/ScrollContainer")
 items_container = NodePath("BoxBackground/ScrollContainer/FlowContainer")
-premade_item_button = NodePath("BoxBackground/ScrollContainer/FlowContainer/InventoryItemButton5")
+premade_item_button = NodePath("BoxBackground/ScrollContainer/FlowContainer/InventoryItemButton")
 scroll_bar = NodePath("ScrollBar")
 inventory_box_highlight = NodePath("BoxBackground/NinePatchRect")
 filter_option_button = NodePath("FilterOptionButton")
 
 [node name="Background" type="NinePatchRect" parent="."]
+visible = false
 layout_mode = 1
-anchors_preset = -1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 12.0
-offset_top = 5.0
-offset_right = -12.0
-offset_bottom = -5.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-texture = ExtResource("2_bctqj")
-region_rect = Rect2(0, 0, 64, 65)
-patch_margin_left = 18
-patch_margin_top = 18
-patch_margin_right = 18
-patch_margin_bottom = 19
+texture = ExtResource("2_e5pw5")
+region_rect = Rect2(0, 0, 140, 124)
+patch_margin_left = 38
+patch_margin_top = 38
+patch_margin_right = 54
+patch_margin_bottom = 38
 
 [node name="ScrollBar" parent="." node_paths=PackedStringArray("scroll_container") instance=ExtResource("5_0hjxr")]
 layout_mode = 1
@@ -54,7 +53,7 @@ anchor_left = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_top = 16.0
-offset_right = -16.0
+offset_right = 0.0
 offset_bottom = -16.0
 grow_horizontal = 0
 grow_vertical = 2
@@ -66,8 +65,8 @@ anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 20.0
-offset_top = 50.0
-offset_right = -48.0
+offset_top = 17.0
+offset_right = -32.0
 offset_bottom = -16.0
 texture = ExtResource("13_pu80u")
 patch_margin_left = 32
@@ -75,107 +74,8 @@ patch_margin_top = 32
 patch_margin_right = 32
 patch_margin_bottom = 32
 
-[node name="ScrollContainer" type="ScrollContainer" parent="BoxBackground"]
-custom_minimum_size = Vector2(0, 220)
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 5.0
-offset_top = 5.0
-offset_right = -5.0
-offset_bottom = -5.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-horizontal_scroll_mode = 0
-vertical_scroll_mode = 3
-
-[node name="FlowContainer" type="FlowContainer" parent="BoxBackground/ScrollContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="InventoryItemButton5" type="TextureButton" parent="BoxBackground/ScrollContainer/FlowContainer" node_paths=PackedStringArray("item_icon_rect", "equipt_icon", "count_label")]
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 2
-texture_normal = ExtResource("5_6r5b7")
-texture_pressed = ExtResource("6_6i0vq")
-script = ExtResource("7_1h41b")
-item_icon_rect = NodePath("ItemIconRect")
-equipt_icon = NodePath("EquiptIcon")
-count_label = NodePath("CountLabel")
-
-[node name="ItemIconRect" type="TextureRect" parent="BoxBackground/ScrollContainer/FlowContainer/InventoryItemButton5"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-texture = ExtResource("8_8cp3a")
-
-[node name="EquiptIcon" type="TextureRect" parent="BoxBackground/ScrollContainer/FlowContainer/InventoryItemButton5"]
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -20.0
-offset_top = 2.0
-offset_right = -2.0
-offset_bottom = 23.0
-grow_horizontal = 0
-texture = ExtResource("9_a4qxi")
-
-[node name="CountLabel" type="Label" parent="BoxBackground/ScrollContainer/FlowContainer/InventoryItemButton5"]
-layout_direction = 3
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -58.0
-offset_top = -24.0
-offset_right = -49.0
-offset_bottom = -4.0
-grow_horizontal = 0
-grow_vertical = 0
-theme = ExtResource("3_e4t5p")
-text = "0"
-horizontal_alignment = 2
-
-[node name="NinePatchRect" type="NinePatchRect" parent="BoxBackground/ScrollContainer/FlowContainer/InventoryItemButton5/CountLabel"]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -2.0
-offset_right = 3.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("10_nckkb")
-patch_margin_left = 4
-patch_margin_top = 4
-patch_margin_right = 4
-patch_margin_bottom = 4
-
-[node name="Label" type="Label" parent="BoxBackground/ScrollContainer/FlowContainer/InventoryItemButton5/CountLabel"]
-layout_direction = 2
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("3_e4t5p")
-text = "0"
-horizontal_alignment = 2
-vertical_alignment = 1
-
 [node name="NinePatchRect" type="NinePatchRect" parent="BoxBackground"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -191,7 +91,128 @@ patch_margin_bottom = 4
 axis_stretch_horizontal = 2
 axis_stretch_vertical = 2
 
+[node name="ScrollContainer" type="ScrollContainer" parent="BoxBackground"]
+custom_minimum_size = Vector2(0, 220)
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 6.0
+offset_top = 6.0
+offset_right = -6.0
+offset_bottom = -6.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
+
+[node name="FlowContainer" type="FlowContainer" parent="BoxBackground/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/h_separation = 6
+theme_override_constants/v_separation = 6
+alignment = 1
+last_wrap_alignment = 1
+
+[node name="InventoryItemButton" type="Control" parent="BoxBackground/ScrollContainer/FlowContainer" node_paths=PackedStringArray("item_icon_rect", "equipt_icon", "count_label", "button")]
+custom_minimum_size = Vector2(68, 68)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("7_1h41b")
+item_icon_rect = NodePath("ItemIcon")
+equipt_icon = NodePath("EquiptIcon")
+count_label = NodePath("CountLabel")
+button = NodePath("Button")
+
+[node name="Background" type="TextureRect" parent="BoxBackground/ScrollContainer/FlowContainer/InventoryItemButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_2myyq")
+
+[node name="ItemIcon" type="TextureRect" parent="BoxBackground/ScrollContainer/FlowContainer/InventoryItemButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_2myyq")
+
+[node name="EquiptIcon" type="TextureRect" parent="BoxBackground/ScrollContainer/FlowContainer/InventoryItemButton"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -20.0
+offset_top = 2.0
+offset_right = -2.0
+offset_bottom = 23.0
+grow_horizontal = 0
+texture = ExtResource("9_a4qxi")
+
+[node name="CountLabel" type="Label" parent="BoxBackground/ScrollContainer/FlowContainer/InventoryItemButton"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -17.2
+offset_top = -24.2
+offset_right = -7.2
+offset_bottom = -4.2
+grow_horizontal = 0
+grow_vertical = 0
+theme = ExtResource("3_e4t5p")
+text = "0"
+horizontal_alignment = 1
+
+[node name="NinePatchRect" type="NinePatchRect" parent="BoxBackground/ScrollContainer/FlowContainer/InventoryItemButton/CountLabel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -2.0
+offset_right = 3.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_nckkb")
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+
+[node name="Label" type="Label" parent="BoxBackground/ScrollContainer/FlowContainer/InventoryItemButton/CountLabel"]
+layout_direction = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_e4t5p")
+text = "0"
+justification_flags = 160
+
+[node name="Button" type="Button" parent="BoxBackground/ScrollContainer/FlowContainer/InventoryItemButton"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
 [node name="FilterOptionButton" type="OptionButton" parent="."]
+visible = false
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 0
 offset_left = 20.0

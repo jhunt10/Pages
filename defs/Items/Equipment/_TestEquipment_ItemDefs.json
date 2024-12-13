@@ -35,10 +35,17 @@
         "ItemSlotsData": [
             {
                 "Key":"Class",
+                "DisplayName":"Class",
+                "Count": 2,
+                "FilterData":{
+                    "RequiredTags":"ClassPage"
+                }
+            },{
+                "Key":"Resource",
                 "DisplayName":"Resource",
                 "Count": 1,
                 "FilterData":{
-                    "RequiredTags":"ClassPage"
+                    "RequiredTags":"Resource"
                 }
             },
             {
@@ -403,7 +410,7 @@
 				"StatName": "BlockChance",
 				"DisplayName": "Test Shield",
 				"ModType":"Set", 
-				"Value":50
+				"Value":45
 			},
 			"StatMod2": { 
 				"StatName": "BlockMod",
@@ -413,6 +420,42 @@
 			}
         },
         "SpriteSheet":"TestShield_SpriteSheet.png",
+        "EquipSlot":"OffHand",
+        "Armor": 10,
+        "Ward": 0
+    },
+    {
+        "ItemKey":"TurtleShield",
+        "_ObjectScript": "res://assets/Scripts/Items/Equipment/BaseArmorEquipment.gd",
+        "Details":{
+			"DisplayName": "Turtle Shield",
+			"SnippetDesc": "An shield made for turteling.",
+			"Description": "An shield made for testing. 75% chance to block 50% of damage from behind.",
+			"Tags": ["OffHand","Shield"],
+			"LargeIcon":"TurtleShield.png",
+			"SmallIcon":"TurtleShield.png"
+		},
+        "StatMods":{
+			"StatMod1": { 
+				"StatName": "DefBack:BlockChance",
+				"DisplayName": "Turtle Shield",
+				"ModType":"Set", 
+				"Value":45
+			},
+			"StatMod2": { 
+				"StatName": "BlockMod",
+				"DisplayName": "Turtle Shield",
+				"ModType":"Set", 
+				"Value":0.5
+			},
+			"StatMod3": { 
+				"StatName": "Awareness",
+				"DisplayName": "Turtle Shield",
+				"ModType":"Add", 
+				"Value":-2
+			}
+        },
+        "SpriteSheet":"TurtleShield_SpriteSheet.png",
         "EquipSlot":"OffHand",
         "Armor": 10,
         "Ward": 0

@@ -107,20 +107,27 @@ func _set_stats():
 	crit_mod_label.text = "+"+str(_actor.stats.get_stat("CritMod"))
 	crit_chance_label.text = str(_actor.stats.get_stat("CritChance")) + "%  "
 	
-	armor_label.set_stat_values(_actor)
-	ward_label.set_stat_values(_actor)
+	armor_label.value_label.text = str(_actor.equipment.get_total_equipment_armor())
+	ward_label.value_label.text = str(_actor.equipment.get_total_equipment_ward())
 	evasion_stat_label.set_stat_values(_actor)
 	protection_stat_label.set_stat_values(_actor)
 	awareness_stat_label.set_stat_values(_actor)
 	awareness_display.awareness = _actor.stats.get_stat("Awareness")
 	block_chance_label.text = str(_actor.stats.get_stat("BlockChance")) +"%"
 	block_mod_label.text = "-"+str(_actor.stats.get_stat("BlockMod"))
-	#evade_front_chance_label
-	#evade_flank_chance_label
-	#evade_back_chance_label
-	#block_front_chance_label
-	#block_flank_chance_label
-	#block_back_chance_label
+	var evd_front_val = DamageHelper.get_defense_stat_for_attack_direction(_actor, AttackEvent.AttackDirection.Front, "Evasion")
+	evade_front_chance_label.text = str(evd_front_val)
+	var evd_flank_val = DamageHelper.get_defense_stat_for_attack_direction(_actor, AttackEvent.AttackDirection.Flank, "Evasion")
+	evade_flank_chance_label.text = str(evd_flank_val)
+	var evd_back_val = DamageHelper.get_defense_stat_for_attack_direction(_actor, AttackEvent.AttackDirection.Back, "Evasion")
+	evade_back_chance_label.text = str(evd_back_val)
+	
+	var blk_front_val = DamageHelper.get_defense_stat_for_attack_direction(_actor, AttackEvent.AttackDirection.Front, "BlockChance")
+	block_front_chance_label.text = str(blk_front_val)
+	var blk_flank_val = DamageHelper.get_defense_stat_for_attack_direction(_actor, AttackEvent.AttackDirection.Flank, "BlockChance")
+	block_flank_chance_label.text = str(blk_flank_val)
+	var val = DamageHelper.get_defense_stat_for_attack_direction(_actor, AttackEvent.AttackDirection.Back, "BlockChance")
+	block_back_chance_label.text = str(val)
 	
 	#printerr("Bulding Stats")
 	#block_evade_display.set_actor(_actor)

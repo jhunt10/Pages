@@ -15,7 +15,7 @@
             "StatMod1": {
                 "DisplayName": "Health Buff",
                 "ModType": "Add",
-                "StatName": "Max:Health",
+                "StatName": "BarMax:Health",
                 "Value": 50
             }
         },
@@ -182,13 +182,13 @@
             "MaxStatMod1": {
                 "DisplayName": "Max Stamina",
                 "ModType": "Add",
-                "StatName": "Max:Stamina",
+                "StatName": "BarMax:Stamina",
                 "Value": 50
             },
             "RegenMod1": {
                 "DisplayName": "Regen Stamina",
                 "ModType": "Add",
-                "StatName": "Regen:Stamina:Round",
+                "StatName": "BarRegen:Stamina:Round",
                 "Value": 10
             }
             
@@ -230,13 +230,13 @@
             "MaxStatMod1": {
                 "DisplayName": "Max Mana",
                 "ModType": "Add",
-                "StatName": "Max:Mana",
+                "StatName": "BarMax:Mana",
                 "Value": 50
             },
             "RegenMod1": {
                 "DisplayName": "Regen Mana",
                 "ModType": "Add",
-                "StatName": "Regen:Mana:Round",
+                "StatName": "BarRegen:Mana:Round",
                 "Value": 10
             }
             

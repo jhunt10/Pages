@@ -105,17 +105,17 @@ func add_to_bar_stat(stat_name:String, val:int):
 
 ## Get Max value of BarStat
 func get_bar_stat_max(stat_name):
-	return get_stat("Max:"+stat_name)
+	return get_stat("BarMax:"+stat_name)
 
 func _on_actor_turn_start():
 	pass
 
 func get_bar_stat_regen_per_turn(stat_name):
-	var full_stat_name = "Regen:" + stat_name + ":Turn"
+	var full_stat_name = "BarRegen:" + stat_name + ":Turn"
 	return get_stat(full_stat_name)
 
 func get_bar_stat_regen_per_round(stat_name):
-	var full_stat_name = "Regen:" + stat_name + ":Round"
+	var full_stat_name = "BarRegen:" + stat_name + ":Round"
 	return get_stat(full_stat_name)
 
 func _on_actor_turn_end():

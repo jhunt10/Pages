@@ -51,7 +51,7 @@ func set_scroll_bar_percent(val):
 	var min_pos = 0
 	var max_pos = scroll_bounds.size.y - bar.size.y
 	var cur_pos = max_pos * _last_bar_perc
-	bar.position.y = cur_pos
+	bar.position.y =  max(0, min(scroll_bounds.size.y - bar.size.y,  cur_pos)) 
 	if _last_child_perc != _last_bar_perc:
 		set_container_scroll_precent(_last_bar_perc)
 		
@@ -104,3 +104,4 @@ func calc_bar_size():
 	var bounds_hight = scroll_bounds.size.y
 	var bar_hight = bounds_hight * percent_vis
 	bar.size.y = bar_hight
+	set_scroll_bar_percent(cur_percent)

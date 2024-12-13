@@ -26,7 +26,7 @@ func set_item_id(item_id, background_type):
 		_item_id = item_id
 		var item = ItemLibrary.get_item(_item_id)
 		if item:
-			item_icon.texture = item.get_large_icon()
+			item_icon.texture = item.get_small_icon()
 			label.text = item.details.display_name
 	if background_type == "Single":
 		background.texture = bg_texture_single

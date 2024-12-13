@@ -1,9 +1,10 @@
 class_name InventoryItemButton
-extends TextureButton
+extends Control
 
 @export var item_icon_rect:TextureRect
 @export var equipt_icon:TextureRect
 @export var count_label:Label
+@export var button:Button
 var _item_id:String
 
 # Called when the node enters the scene tree for the first time.

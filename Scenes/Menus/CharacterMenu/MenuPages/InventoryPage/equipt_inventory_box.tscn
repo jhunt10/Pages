@@ -1,0 +1,519 @@
+[gd_scene load_steps=14 format=3 uid="uid://cg3hleeg4c7yb"]
+
+[ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/InventoryPage/inventory_container.gd" id="1_j8y2u"]
+[ext_resource type="Texture2D" uid="uid://gxk1dw0hkyuj" path="res://Scenes/Menus/CharacterMenu/MenuPages/InventoryPage/InvBoxBackground_working.png" id="2_xjwcn"]
+[ext_resource type="PackedScene" uid="uid://bpvy87uagttpr" path="res://Scenes/UiNodes/ScollBar/scroll_bar.tscn" id="3_atc4y"]
+[ext_resource type="Texture2D" uid="uid://deqwpr7qu8fp2" path="res://assets/Sprites/UI/CharacterEdit/InventorySlotBackground.png" id="4_gt0nt"]
+[ext_resource type="Texture2D" uid="uid://cq2p1mnoevjoc" path="res://assets/Sprites/UI/CharacterEdit/InventoryItemButton_Pressed.png" id="5_sebdo"]
+[ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/InventoryPage/inventory_item_button_control.gd" id="6_7ult2"]
+[ext_resource type="Texture2D" uid="uid://wvy1i6avftau" path="res://defs/Items/Equipment/TestWeapons/TestSword.png" id="7_lfg5g"]
+[ext_resource type="Texture2D" uid="uid://bkjy2j6ra337v" path="res://assets/Sprites/UI/SymbolIcons/EquiptIcon.png" id="8_oo75u"]
+[ext_resource type="Theme" uid="uid://dwinll8pgdjhc" path="res://Scenes/Themes/standard_theme.tres" id="9_v1x5t"]
+[ext_resource type="Texture2D" uid="uid://0wkhsf2kgce1" path="res://assets/Sprites/UI/BackPatches/Patch_12_4_Dark.png" id="10_w0p5f"]
+[ext_resource type="Texture2D" uid="uid://3ncohf5a6kf7" path="res://Scenes/Menus/CharacterMenu/HoleBackground.png" id="11_8xkni"]
+[ext_resource type="Texture2D" uid="uid://w8cgm1tj35ld" path="res://Scenes/Menus/CharacterMenu/MenuPages/InventoryPage/HoleOutline.png" id="12_p8862"]
+[ext_resource type="Script" path="res://Scenes/UiNodes/loaded_option_button.gd" id="13_bb8jx"]
+
+[node name="InventoryPage" type="Control" node_paths=PackedStringArray("scroll_container", "items_container", "premade_item_button", "scroll_bar", "inventory_box_highlight", "filter_option_button")]
+custom_minimum_size = Vector2(280, 395)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 325.0
+offset_bottom = 395.0
+mouse_filter = 1
+script = ExtResource("1_j8y2u")
+min_button_size = Vector2i(64, 64)
+max_button_size = Vector2i(96, 96)
+scroll_container = NodePath("ScrollContainer")
+items_container = NodePath("ScrollContainer/FlowContainer")
+premade_item_button = NodePath("ScrollContainer/FlowContainer/InventoryItemButton5")
+scroll_bar = NodePath("ScrollBar")
+inventory_box_highlight = NodePath("BoxBackground/NinePatchRect")
+filter_option_button = NodePath("FilterOptionButton")
+
+[node name="Background" type="NinePatchRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("2_xjwcn")
+region_rect = Rect2(0, 0, 140, 124)
+patch_margin_left = 38
+patch_margin_top = 38
+patch_margin_right = 54
+patch_margin_bottom = 38
+
+[node name="ScrollBar" parent="." node_paths=PackedStringArray("scroll_container") instance=ExtResource("3_atc4y")]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 16.0
+offset_right = 0.0
+offset_bottom = -16.0
+grow_horizontal = 0
+grow_vertical = 2
+scroll_container = NodePath("../ScrollContainer")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+custom_minimum_size = Vector2(0, 220)
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 28.0
+offset_top = 28.0
+offset_right = -44.0
+offset_bottom = -28.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
+
+[node name="FlowContainer" type="FlowContainer" parent="ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/h_separation = 15
+theme_override_constants/v_separation = 15
+
+[node name="InventoryItemButton5" type="TextureButton" parent="ScrollContainer/FlowContainer" node_paths=PackedStringArray("item_icon_rect", "equipt_icon", "count_label")]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture_normal = ExtResource("4_gt0nt")
+texture_pressed = ExtResource("5_sebdo")
+script = ExtResource("6_7ult2")
+item_icon_rect = NodePath("ItemIconRect")
+equipt_icon = NodePath("EquiptIcon")
+count_label = NodePath("CountLabel")
+
+[node name="ItemIconRect" type="TextureRect" parent="ScrollContainer/FlowContainer/InventoryItemButton5"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("7_lfg5g")
+
+[node name="EquiptIcon" type="TextureRect" parent="ScrollContainer/FlowContainer/InventoryItemButton5"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -20.0
+offset_top = 2.0
+offset_right = -2.0
+offset_bottom = 23.0
+grow_horizontal = 0
+texture = ExtResource("8_oo75u")
+
+[node name="CountLabel" type="Label" parent="ScrollContainer/FlowContainer/InventoryItemButton5"]
+layout_direction = 3
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -58.0
+offset_top = -24.0
+offset_right = -49.0
+offset_bottom = -4.0
+grow_horizontal = 0
+grow_vertical = 0
+theme = ExtResource("9_v1x5t")
+text = "0"
+horizontal_alignment = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="ScrollContainer/FlowContainer/InventoryItemButton5/CountLabel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -2.0
+offset_right = 3.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_w0p5f")
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+
+[node name="Label" type="Label" parent="ScrollContainer/FlowContainer/InventoryItemButton5/CountLabel"]
+layout_direction = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("9_v1x5t")
+text = "0"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="InventoryItemButton6" type="TextureButton" parent="ScrollContainer/FlowContainer" node_paths=PackedStringArray("item_icon_rect", "equipt_icon", "count_label")]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture_normal = ExtResource("4_gt0nt")
+texture_pressed = ExtResource("5_sebdo")
+script = ExtResource("6_7ult2")
+item_icon_rect = NodePath("ItemIconRect")
+equipt_icon = NodePath("EquiptIcon")
+count_label = NodePath("CountLabel")
+
+[node name="ItemIconRect" type="TextureRect" parent="ScrollContainer/FlowContainer/InventoryItemButton6"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("7_lfg5g")
+
+[node name="EquiptIcon" type="TextureRect" parent="ScrollContainer/FlowContainer/InventoryItemButton6"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -20.0
+offset_top = 2.0
+offset_right = -2.0
+offset_bottom = 23.0
+grow_horizontal = 0
+texture = ExtResource("8_oo75u")
+
+[node name="CountLabel" type="Label" parent="ScrollContainer/FlowContainer/InventoryItemButton6"]
+layout_direction = 3
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -58.0
+offset_top = -24.0
+offset_right = -49.0
+offset_bottom = -4.0
+grow_horizontal = 0
+grow_vertical = 0
+theme = ExtResource("9_v1x5t")
+text = "0"
+horizontal_alignment = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="ScrollContainer/FlowContainer/InventoryItemButton6/CountLabel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -2.0
+offset_right = 3.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_w0p5f")
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+
+[node name="Label" type="Label" parent="ScrollContainer/FlowContainer/InventoryItemButton6/CountLabel"]
+layout_direction = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("9_v1x5t")
+text = "0"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="InventoryItemButton7" type="TextureButton" parent="ScrollContainer/FlowContainer" node_paths=PackedStringArray("item_icon_rect", "equipt_icon", "count_label")]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture_normal = ExtResource("4_gt0nt")
+texture_pressed = ExtResource("5_sebdo")
+script = ExtResource("6_7ult2")
+item_icon_rect = NodePath("ItemIconRect")
+equipt_icon = NodePath("EquiptIcon")
+count_label = NodePath("CountLabel")
+
+[node name="ItemIconRect" type="TextureRect" parent="ScrollContainer/FlowContainer/InventoryItemButton7"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("7_lfg5g")
+
+[node name="EquiptIcon" type="TextureRect" parent="ScrollContainer/FlowContainer/InventoryItemButton7"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -20.0
+offset_top = 2.0
+offset_right = -2.0
+offset_bottom = 23.0
+grow_horizontal = 0
+texture = ExtResource("8_oo75u")
+
+[node name="CountLabel" type="Label" parent="ScrollContainer/FlowContainer/InventoryItemButton7"]
+layout_direction = 3
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -58.0
+offset_top = -24.0
+offset_right = -49.0
+offset_bottom = -4.0
+grow_horizontal = 0
+grow_vertical = 0
+theme = ExtResource("9_v1x5t")
+text = "0"
+horizontal_alignment = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="ScrollContainer/FlowContainer/InventoryItemButton7/CountLabel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -2.0
+offset_right = 3.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_w0p5f")
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+
+[node name="Label" type="Label" parent="ScrollContainer/FlowContainer/InventoryItemButton7/CountLabel"]
+layout_direction = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("9_v1x5t")
+text = "0"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="InventoryItemButton8" type="TextureButton" parent="ScrollContainer/FlowContainer" node_paths=PackedStringArray("item_icon_rect", "equipt_icon", "count_label")]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture_normal = ExtResource("4_gt0nt")
+texture_pressed = ExtResource("5_sebdo")
+script = ExtResource("6_7ult2")
+item_icon_rect = NodePath("ItemIconRect")
+equipt_icon = NodePath("EquiptIcon")
+count_label = NodePath("CountLabel")
+
+[node name="ItemIconRect" type="TextureRect" parent="ScrollContainer/FlowContainer/InventoryItemButton8"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("7_lfg5g")
+
+[node name="EquiptIcon" type="TextureRect" parent="ScrollContainer/FlowContainer/InventoryItemButton8"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -20.0
+offset_top = 2.0
+offset_right = -2.0
+offset_bottom = 23.0
+grow_horizontal = 0
+texture = ExtResource("8_oo75u")
+
+[node name="CountLabel" type="Label" parent="ScrollContainer/FlowContainer/InventoryItemButton8"]
+layout_direction = 3
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -58.0
+offset_top = -24.0
+offset_right = -49.0
+offset_bottom = -4.0
+grow_horizontal = 0
+grow_vertical = 0
+theme = ExtResource("9_v1x5t")
+text = "0"
+horizontal_alignment = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="ScrollContainer/FlowContainer/InventoryItemButton8/CountLabel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -2.0
+offset_right = 3.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_w0p5f")
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+
+[node name="Label" type="Label" parent="ScrollContainer/FlowContainer/InventoryItemButton8/CountLabel"]
+layout_direction = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("9_v1x5t")
+text = "0"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="InventoryItemButton9" type="TextureButton" parent="ScrollContainer/FlowContainer" node_paths=PackedStringArray("item_icon_rect", "equipt_icon", "count_label")]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture_normal = ExtResource("4_gt0nt")
+texture_pressed = ExtResource("5_sebdo")
+script = ExtResource("6_7ult2")
+item_icon_rect = NodePath("ItemIconRect")
+equipt_icon = NodePath("EquiptIcon")
+count_label = NodePath("CountLabel")
+
+[node name="ItemIconRect" type="TextureRect" parent="ScrollContainer/FlowContainer/InventoryItemButton9"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("7_lfg5g")
+
+[node name="EquiptIcon" type="TextureRect" parent="ScrollContainer/FlowContainer/InventoryItemButton9"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -20.0
+offset_top = 2.0
+offset_right = -2.0
+offset_bottom = 23.0
+grow_horizontal = 0
+texture = ExtResource("8_oo75u")
+
+[node name="CountLabel" type="Label" parent="ScrollContainer/FlowContainer/InventoryItemButton9"]
+layout_direction = 3
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -58.0
+offset_top = -24.0
+offset_right = -49.0
+offset_bottom = -4.0
+grow_horizontal = 0
+grow_vertical = 0
+theme = ExtResource("9_v1x5t")
+text = "0"
+horizontal_alignment = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="ScrollContainer/FlowContainer/InventoryItemButton9/CountLabel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -2.0
+offset_right = 3.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_w0p5f")
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+
+[node name="Label" type="Label" parent="ScrollContainer/FlowContainer/InventoryItemButton9/CountLabel"]
+layout_direction = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("9_v1x5t")
+text = "0"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="BoxBackground" type="NinePatchRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 50.0
+offset_right = -48.0
+offset_bottom = -16.0
+texture = ExtResource("11_8xkni")
+patch_margin_left = 32
+patch_margin_top = 32
+patch_margin_right = 32
+patch_margin_bottom = 32
+
+[node name="NinePatchRect" type="NinePatchRect" parent="BoxBackground"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("12_p8862")
+region_rect = Rect2(0, 0, 64, 64)
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+
+[node name="FilterOptionButton" type="OptionButton" parent="."]
+visible = false
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 0
+offset_left = 20.0
+offset_top = 13.0
+offset_right = 232.0
+offset_bottom = 45.0
+text_overrun_behavior = 3
+fit_to_longest_item = false
+script = ExtResource("13_bb8jx")

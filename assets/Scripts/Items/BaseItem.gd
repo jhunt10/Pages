@@ -22,7 +22,7 @@ func _init(key:String, def_load_path:String, def:Dictionary, id:String='', data:
 	super(key, def_load_path, def, id, data)
 
 func save_me()->bool:
-	return true
+	return not can_stack
 
 func get_item_type()->ItemTypes:
 	var item_type_str = self._def.get("ItemType", "")

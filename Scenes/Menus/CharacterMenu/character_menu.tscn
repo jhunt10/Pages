@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://ciah50qt3htui"]
+[gd_scene load_steps=47 format=3 uid="uid://ciah50qt3htui"]
 
 [ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/character_menu_control.gd" id="1_b43ae"]
 [ext_resource type="Texture2D" uid="uid://mpwjrtfjnbth" path="res://Scenes/Menus/CharacterMenu/BookBackground.png" id="2_ny2th"]
@@ -42,6 +42,9 @@
 [ext_resource type="Texture2D" uid="uid://diy8q5lpvpw1u" path="res://assets/Sprites/UI/SymbolIcons/PhyDamageSymbol.png" id="34_vfo8p"]
 [ext_resource type="PackedScene" uid="uid://c1bs8grs7gsc1" path="res://Scenes/UiNodes/MiniRangeDisplay/mini_range_display.tscn" id="34_ywo5i"]
 [ext_resource type="Texture2D" uid="uid://b201kpuib7q5k" path="res://assets/Sprites/UI/SymbolIcons/MagDamageSymbol.png" id="35_2rf2x"]
+[ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/inv_filter_tabs_control.gd" id="43_ercvn"]
+[ext_resource type="Texture2D" uid="uid://7lffl3feh6kl" path="res://Scenes/Menus/CharacterMenu/TabBackground_Small.png" id="43_gi4es"]
+[ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/InventoryPage/sub_inventory_tab.gd" id="44_vhgyr"]
 
 [sub_resource type="GDScript" id="GDScript_rvisf"]
 script/source = "extends TextureRect
@@ -57,7 +60,7 @@ func _process(delta: float) -> void:
 	pass
 "
 
-[node name="CharacterMenuControl" type="Control" node_paths=PackedStringArray("details_card_spawn_point", "equipment_page", "page_page", "bag_page", "stats_page", "scale_control", "inventory_container", "close_button", "tab_equipment_button", "tab_pages_button", "tab_bag_button", "tab_inventory_button", "tab_stats_button", "mouse_control")]
+[node name="CharacterMenuControl" type="Control" node_paths=PackedStringArray("inventory_tabs_control", "details_card_spawn_point", "equipment_page", "page_page", "bag_page", "stats_page", "scale_control", "inventory_container", "close_button", "tab_equipment_button", "tab_pages_button", "tab_bag_button", "tab_inventory_button", "tab_stats_button", "inventory_tab_rect", "stats_tab_rect", "mouse_control")]
 custom_minimum_size = Vector2(600, 420)
 layout_mode = 3
 anchors_preset = 0
@@ -67,6 +70,7 @@ offset_right = 110.0
 offset_bottom = 7.0
 mouse_filter = 1
 script = ExtResource("1_b43ae")
+inventory_tabs_control = NodePath("ScaleControl/InvFilterControl")
 details_card_spawn_point = NodePath("ScaleControl/DetailsCardSpawnPoint")
 equipment_page = NodePath("ScaleControl/EquipmentPage")
 page_page = NodePath("ScaleControl/PagesPage")
@@ -78,8 +82,10 @@ close_button = NodePath("ScaleControl/TabsControl/ExitTabButton/Button")
 tab_equipment_button = NodePath("ScaleControl/TabsControl/EquipmentTabButton/Button")
 tab_pages_button = NodePath("ScaleControl/TabsControl/BookTabButton/Button")
 tab_bag_button = NodePath("ScaleControl/TabsControl/BagTabButton2/Button")
-tab_inventory_button = NodePath("ScaleControl/TabsControl/InventoryTabButton/Button")
+tab_inventory_button = NodePath("ScaleControl/TabsControl/InvTabButton/Button")
 tab_stats_button = NodePath("ScaleControl/TabsControl/StatsTabButton/Button")
+inventory_tab_rect = NodePath("ScaleControl/TabsControl/InvTabButton")
+stats_tab_rect = NodePath("ScaleControl/TabsControl/StatsTabButton")
 mouse_control = NodePath("ScaleControl/MouseOverControl")
 
 [node name="ScaleControl" type="Control" parent="."]
@@ -175,68 +181,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="InventoryTabButton" type="TextureRect" parent="ScaleControl/TabsControl"]
-self_modulate = Color(0.466667, 0.360784, 1, 1)
-layout_mode = 0
-offset_left = 653.0
-offset_top = 219.0
-offset_right = 717.0
-offset_bottom = 283.0
-rotation = 3.14159
-texture = ExtResource("3_ktt5q")
-script = SubResource("GDScript_rvisf")
-
-[node name="TextureRect" type="TextureRect" parent="ScaleControl/TabsControl/InventoryTabButton"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-rotation = 3.14159
-pivot_offset = Vector2(32, 32)
-texture = ExtResource("6_4s47y")
-stretch_mode = 3
-
-[node name="Button" type="Button" parent="ScaleControl/TabsControl/InventoryTabButton"]
-self_modulate = Color(1, 1, 1, 0)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="StatsTabButton" type="TextureRect" parent="ScaleControl/TabsControl"]
-self_modulate = Color(0.282353, 0.560784, 0.431373, 1)
-layout_mode = 0
-offset_left = 653.0
-offset_top = 296.0
-offset_right = 717.0
-offset_bottom = 360.0
-rotation = 3.14159
-texture = ExtResource("3_ktt5q")
-script = SubResource("GDScript_rvisf")
-
-[node name="TextureRect" type="TextureRect" parent="ScaleControl/TabsControl/StatsTabButton"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("7_es420")
-stretch_mode = 3
-
-[node name="Button" type="Button" parent="ScaleControl/TabsControl/StatsTabButton"]
-self_modulate = Color(1, 1, 1, 0)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
 [node name="BookTabButton" type="TextureRect" parent="ScaleControl/TabsControl"]
 self_modulate = Color(0.466667, 0.360784, 1, 1)
 layout_mode = 0
@@ -293,8 +237,63 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="StatsTabButton" type="TextureRect" parent="ScaleControl/TabsControl"]
+self_modulate = Color(0.592157, 0.47451, 0.282353, 1)
+layout_mode = 0
+offset_left = -53.0
+offset_top = 261.0
+offset_right = 11.0
+offset_bottom = 325.0
+texture = ExtResource("3_ktt5q")
+script = SubResource("GDScript_rvisf")
+
+[node name="TextureRect" type="TextureRect" parent="ScaleControl/TabsControl/StatsTabButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_es420")
+
+[node name="Button" type="Button" parent="ScaleControl/TabsControl/StatsTabButton"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="InvTabButton" type="TextureRect" parent="ScaleControl/TabsControl"]
+self_modulate = Color(0.593598, 0.476128, 0.280404, 1)
+layout_mode = 0
+offset_left = -53.0
+offset_top = 261.0
+offset_right = 11.0
+offset_bottom = 325.0
+texture = ExtResource("3_ktt5q")
+script = SubResource("GDScript_rvisf")
+
+[node name="TextureRect" type="TextureRect" parent="ScaleControl/TabsControl/InvTabButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_4s47y")
+
+[node name="Button" type="Button" parent="ScaleControl/TabsControl/InvTabButton"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
 [node name="InventoryContainer" parent="ScaleControl" instance=ExtResource("8_6gqbj")]
-visible = false
 layout_mode = 0
 offset_left = 303.0
 offset_top = 9.0
@@ -302,6 +301,7 @@ offset_right = 583.0
 offset_bottom = 404.0
 
 [node name="StatsPage" type="Control" parent="ScaleControl" node_paths=PackedStringArray("strength_label", "agility_label", "intelligence_label", "wisdom_label", "bar_stats_container", "speed_stat_label", "mass_stat_label", "ppr_stat_label", "crash_stat_label", "mag_atk_label", "phys_atk_label", "phy_atk_icon", "mag_atk_icon", "accuracy_stat_label", "potency_stat_label", "range_display", "main_hand_min_damage_label", "main_hand_max_damage_label", "main_hand_damage_type", "crit_mod_label", "crit_chance_label", "armor_label", "ward_label", "evasion_stat_label", "protection_stat_label", "awareness_stat_label", "awareness_display", "block_chance_label", "block_mod_label", "evade_front_chance_label", "evade_flank_chance_label", "evade_back_chance_label", "block_front_chance_label", "block_flank_chance_label", "block_back_chance_label")]
+visible = false
 custom_minimum_size = Vector2(280, 395)
 anchors_preset = 0
 offset_left = 303.0
@@ -774,7 +774,7 @@ layout_mode = 2
 size_flags_vertical = 3
 
 [node name="BarStatsDisplayContainer" type="Container" parent="ScaleControl/StatsPage/ContainerControl/StatsMainContainer" node_paths=PackedStringArray("health_bar_container", "divider", "background", "inner_container")]
-custom_minimum_size = Vector2(12, 44)
+custom_minimum_size = Vector2(256, 44)
 layout_mode = 2
 script = ExtResource("22_nfk1x")
 health_bar_container = NodePath("BoxContainer/HealthContainer")
@@ -1567,6 +1567,249 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+
+[node name="InvFilterControl" type="Control" parent="ScaleControl" node_paths=PackedStringArray("premade_sub_tab")]
+anchors_preset = 0
+offset_left = 589.0
+offset_top = 93.0
+offset_right = 629.0
+offset_bottom = 133.0
+script = ExtResource("43_ercvn")
+premade_sub_tab = NodePath("SubInventoryTab")
+
+[node name="SubInventoryTab" type="NinePatchRect" parent="ScaleControl/InvFilterControl" node_paths=PackedStringArray("highlight_texture", "name_label", "button")]
+self_modulate = Color(0.409466, 0.588298, 0.803891, 1)
+clip_contents = true
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 0
+offset_right = 64.0
+offset_bottom = 30.0
+texture = ExtResource("43_gi4es")
+patch_margin_top = 15
+patch_margin_right = 10
+patch_margin_bottom = 15
+script = ExtResource("44_vhgyr")
+filter_name = "Class Pages"
+selected_spacer_size = 48.0
+grow_speed = 200
+highlight_texture = NodePath("Highlight")
+name_label = NodePath("Control/NameLabel")
+button = NodePath("Button")
+
+[node name="Highlight" type="NinePatchRect" parent="ScaleControl/InvFilterControl/SubInventoryTab"]
+self_modulate = Color(1, 1, 1, -0.0287634)
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("43_gi4es")
+patch_margin_top = 15
+patch_margin_right = 10
+patch_margin_bottom = 15
+
+[node name="Control" type="Control" parent="ScaleControl/InvFilterControl/SubInventoryTab"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_right = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="NameLabel" type="Label" parent="ScaleControl/InvFilterControl/SubInventoryTab/Control"]
+self_modulate = Color(0.288617, 0.311146, 1, 1)
+clip_contents = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("12_dy5pv")
+text = "Class Pages"
+vertical_alignment = 1
+text_overrun_behavior = 1
+
+[node name="Button" type="Button" parent="ScaleControl/InvFilterControl/SubInventoryTab"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SubInventoryTab2" type="NinePatchRect" parent="ScaleControl/InvFilterControl" node_paths=PackedStringArray("highlight_texture", "name_label")]
+self_modulate = Color(0.409466, 0.588298, 0.803891, 1)
+clip_contents = true
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 0
+offset_top = 36.0
+offset_right = 64.0
+offset_bottom = 66.0
+texture = ExtResource("43_gi4es")
+patch_margin_top = 15
+patch_margin_right = 10
+patch_margin_bottom = 15
+script = ExtResource("44_vhgyr")
+filter_name = "Movement"
+selected_spacer_size = 64.0
+grow_speed = 200
+highlight_texture = NodePath("Highlight")
+name_label = NodePath("Control/NameLabel")
+
+[node name="Highlight" type="NinePatchRect" parent="ScaleControl/InvFilterControl/SubInventoryTab2"]
+self_modulate = Color(1, 1, 1, -0.00780681)
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("43_gi4es")
+patch_margin_top = 15
+patch_margin_right = 10
+patch_margin_bottom = 15
+
+[node name="Control" type="Control" parent="ScaleControl/InvFilterControl/SubInventoryTab2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_right = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="NameLabel" type="Label" parent="ScaleControl/InvFilterControl/SubInventoryTab2/Control"]
+self_modulate = Color(0.290196, 0.309804, 1, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("12_dy5pv")
+text = "Movement"
+vertical_alignment = 1
+text_overrun_behavior = 1
+
+[node name="SubInventoryTab3" type="NinePatchRect" parent="ScaleControl/InvFilterControl" node_paths=PackedStringArray("highlight_texture", "name_label")]
+self_modulate = Color(0.409466, 0.588298, 0.803891, 1)
+clip_contents = true
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 0
+offset_top = 72.0
+offset_right = 64.0
+offset_bottom = 102.0
+texture = ExtResource("43_gi4es")
+patch_margin_top = 15
+patch_margin_right = 10
+patch_margin_bottom = 15
+script = ExtResource("44_vhgyr")
+filter_name = "Spell"
+selected_spacer_size = 64.0
+grow_speed = 200
+highlight_texture = NodePath("Highlight")
+name_label = NodePath("Control/NameLabel")
+
+[node name="Highlight" type="NinePatchRect" parent="ScaleControl/InvFilterControl/SubInventoryTab3"]
+self_modulate = Color(1, 1, 1, -0.0185466)
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("43_gi4es")
+patch_margin_top = 15
+patch_margin_right = 10
+patch_margin_bottom = 15
+
+[node name="Control" type="Control" parent="ScaleControl/InvFilterControl/SubInventoryTab3"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_right = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="NameLabel" type="Label" parent="ScaleControl/InvFilterControl/SubInventoryTab3/Control"]
+self_modulate = Color(0.290196, 0.309804, 1, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("12_dy5pv")
+text = "Spell"
+vertical_alignment = 1
+text_overrun_behavior = 1
+
+[node name="SubInventoryTab4" type="NinePatchRect" parent="ScaleControl/InvFilterControl" node_paths=PackedStringArray("highlight_texture", "name_label")]
+self_modulate = Color(0.409466, 0.588298, 0.803891, 1)
+clip_contents = true
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 0
+offset_top = 108.0
+offset_right = 64.0
+offset_bottom = 138.0
+texture = ExtResource("43_gi4es")
+patch_margin_top = 15
+patch_margin_right = 10
+patch_margin_bottom = 15
+script = ExtResource("44_vhgyr")
+filter_name = "Tacticts"
+selected_spacer_size = 64.0
+grow_speed = 200
+highlight_texture = NodePath("Highlight")
+name_label = NodePath("Control/NameLabel")
+
+[node name="Highlight" type="NinePatchRect" parent="ScaleControl/InvFilterControl/SubInventoryTab4"]
+self_modulate = Color(1, 1, 1, -0.0337103)
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("43_gi4es")
+patch_margin_top = 15
+patch_margin_right = 10
+patch_margin_bottom = 15
+
+[node name="Control" type="Control" parent="ScaleControl/InvFilterControl/SubInventoryTab4"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_right = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="NameLabel" type="Label" parent="ScaleControl/InvFilterControl/SubInventoryTab4/Control"]
+self_modulate = Color(0.290196, 0.309804, 1, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("12_dy5pv")
+text = "Tacticts"
+vertical_alignment = 1
+text_overrun_behavior = 1
 
 [node name="StatNameLabel2" type="Label" parent="."]
 self_modulate = Color(0.498039, 0, 0, 1)

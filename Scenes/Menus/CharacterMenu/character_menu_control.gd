@@ -3,6 +3,7 @@ extends Control
 
 const LOGGING = false
 
+@export var inventory_tabs_control:ItemFilterTabsControl
 @export var details_card_spawn_point:Control
 @export var equipment_page:EquipmentPageControl
 @export var page_page:PagePageControl
@@ -17,6 +18,8 @@ const LOGGING = false
 @export var tab_bag_button:Button
 @export var tab_inventory_button:Button
 @export var tab_stats_button:Button
+@export var inventory_tab_rect:TextureRect
+@export var stats_tab_rect:TextureRect
 @export var mouse_control:CharacterMenuMouseControl
 
 var _actor:BaseActor
@@ -61,7 +64,10 @@ func _ready() -> void:
 	bag_page.mouse_enter_item.connect(on_mouse_enter_slot)
 	bag_page.mouse_exit_item.connect(on_mouse_exit_slot)
 	stop_dragging()
+	on_tab_pressed("Inventory")
 	on_tab_pressed("Equipment")
+	inventory_tabs_control.on_tab_selected.connect(on_inv_filter_selected)
+	inventory_tabs_control.on_tab_unselected.connect(on_inv_filter_unselected)
 	#if _actor == null:
 		#ActorLibrary.new()
 		#var test = ActorLibrary.get_actor("TestActor_ID")
@@ -213,6 +219,12 @@ func on_mouse_exit_slot(context, item_key, index):
 		clear_highlights()
 	if LOGGING: print("Item Button Exit : %s | %s | %s" % [context, item_key, index])
 
+func on_inv_filter_selected(tab_name):
+	inventory_container.add_sub_filter(tab_name)
+
+func on_inv_filter_unselected(tab_name):
+	inventory_container.remvoe_sub_filter(tab_name)
+
 #func on_details_card_button_pressed():
 	#if _selected_item:
 		#if _left_page_context == "Equipment" and _selected_item is BaseEquipmentItem:
@@ -241,10 +253,16 @@ func on_tab_pressed(tab_name:String):
 	if tab_name == "Inventory":
 		inventory_container.show()
 		stats_page.hide()
+		inventory_tab_rect.hide()
+		stats_tab_rect.show()
+		inventory_tabs_control.show()
 		return
 	if tab_name == "Stats":
 		stats_page.show()
 		inventory_container.hide()
+		stats_tab_rect.hide()
+		inventory_tab_rect.show()
+		inventory_tabs_control.hide()
 		return
 	
 	_left_page_context = tab_name
@@ -255,6 +273,7 @@ func on_tab_pressed(tab_name:String):
 		bag_page.visible = false
 		inventory_container.clear_forced_filters(false)
 		inventory_container.add_forced_filter("Equipment")
+		inventory_tabs_control.set_tabs(["Que", "Bag", "Helm", "Body", "Feet", "Weapon", "OffHand", "Trinket"])
 		
 	if _left_page_context == "Pages":
 		equipment_page.visible = false
@@ -262,6 +281,7 @@ func on_tab_pressed(tab_name:String):
 		bag_page.visible = false
 		inventory_container.clear_forced_filters(false)
 		inventory_container.add_forced_filter("Page")
+		inventory_tabs_control.set_tabs(["ClassPage", "Movement", "Tactic", "Spell"])
 		
 	if _left_page_context == "Bag":
 		equipment_page.visible = false
@@ -269,3 +289,4 @@ func on_tab_pressed(tab_name:String):
 		bag_page.visible = true
 		inventory_container.clear_forced_filters(false)
 		inventory_container.add_forced_filter("Consumable")
+		inventory_tabs_control.set_tabs(["Potion", "Bomb"])
