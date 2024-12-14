@@ -28,6 +28,20 @@ func _load_slots_sets_data()->Array:
 func _load_saved_items()->Array:
 	return []
 
+func validate_items():
+	for slot_index in range(_raw_item_slots.size()):
+		var item_id = _raw_item_slots[slot_index]
+		if not item_id:
+			continue
+		var item = ItemLibrary.get_item(item_id, false)
+		if not item:
+			_raw_item_slots[slot_index] = null
+		if not _is_item_valid(item):
+			remove_item(item.Id)
+
+func _is_item_valid(item:BaseItem)->bool:
+	return true
+
 func _build_slots_list():
 	var slot_set_index = 0
 	var raw_index = 0
