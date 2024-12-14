@@ -38,16 +38,24 @@ static func get_item_def(key:String)->Dictionary:
 	if !Instance: Instance = ItemLibrary.new()
 	return Instance.get_object_def(key)
 	
-static func get_item(item_id:String)->BaseItem:
+static func get_item(item_id:String, error_if_null:bool=true)->BaseItem:
 	if !Instance: Instance = ItemLibrary.new()
 	var item = Instance.get_object(item_id)
-	if !item:
+	if !item and error_if_null:
 		printerr("ItemLibrary.get_item: No item found with id '%s'." % [item_id])
 	return item
 
-static func create_item(key:String, data:Dictionary)->BaseItem:
+static func get_or_create_item(item_id:String, item_key:String, data:Dictionary)->BaseItem:
 	if !Instance: Instance = ItemLibrary.new()
-	var item = Instance.create_object(key, '', data)
+	var item = Instance.get_item(item_id, false)
+	if item:
+		return item
+	return create_item(item_key, data, item_id)
+	
+
+static func create_item(key:String, data:Dictionary, force_id:String='')->BaseItem:
+	if !Instance: Instance = ItemLibrary.new()
+	var item = Instance.create_object(key, force_id, data)
 	if !item:
 		printerr("ItemLibrary.create_item: Failed to make item '%s'." % [key])
 	return item

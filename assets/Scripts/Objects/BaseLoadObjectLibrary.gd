@@ -149,16 +149,6 @@ func reload():
 	_loaded_objects.clear()
 	init_load()
 
-
-#func load_objects():
-	#if loaded:
-		#return
-	#print("Loading Objects")
-	#var files = _search_for_files(OBJECTS_DEFS_DIR, get_def_file_sufix())
-	#for file in files:
-		#_load_object_def_file(file)
-	#loaded = true
-
 func _load_object_defs():
 	var delayed_defs = {}
 	# Load Defs

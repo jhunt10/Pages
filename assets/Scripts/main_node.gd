@@ -108,6 +108,11 @@ func open_tutorial():
 	dialog.load_dialog_script("res://data/DialogScripts/TutorialDialog.json")
 	combat_scene.camera.canvas_layer.add_child(dialog)
 	
+func open_dev_tools():
+	var page_editor = load("res://Scenes/DevTools/dev_tools_menu.tscn").instantiate()
+	self.add_child(page_editor)
+	
+	
 func go_to_main_menu():
 	current_scene.queue_free()
 	current_scene = load("res://Scenes/Menus/MainMenu/main_menu_root_control.tscn").instantiate()

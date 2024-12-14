@@ -132,3 +132,28 @@ theme_override_font_sizes/font_size = 32
 text = "Effects"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="DevToolsContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+alignment = 1
+
+[node name="DevToolsButton" type="TextureButton" parent="DevToolsContainer"]
+layout_mode = 2
+texture_normal = ExtResource("1_gojdr")
+texture_pressed = ExtResource("3_78x4c")
+texture_disabled = ExtResource("3_78x4c")
+stretch_mode = 0
+
+[node name="DevLabel" type="Label" parent="DevToolsContainer/DevToolsButton"]
+modulate = Color(0.462291, 0.462291, 0.462291, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 32
+text = "Dev Tools
+"
+horizontal_alignment = 1
+vertical_alignment = 1

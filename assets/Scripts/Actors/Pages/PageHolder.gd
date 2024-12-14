@@ -30,6 +30,8 @@ func load_effects():
 		if not page_id:
 			continue
 		var page_item = ItemLibrary.get_item(page_id)
+		if not page_item:
+			continue
 		_on_item_added_to_slot(page_item, slot_index)
 
 func set_page_que_item(page_que:BaseQueEquipment):
@@ -67,6 +69,8 @@ func _on_item_removed_from_slot(item_id:String, index:int):
 		class_page_changed.emit()
 
 func _on_item_added_to_slot(item:BaseItem, index:int):
+	if item == null:
+		return
 	var page = item as BasePageItem
 	if not page:
 		printerr("PageHolder._on_item_added_to_slot: Item '%s' is not of type BasePageItem." % [item.Id])

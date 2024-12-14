@@ -18,9 +18,11 @@ func _init() -> void:
 		_inst = self
 
 static func has_item_id(item_id:String):
-	var item = ItemLibrary.get_item(item_id)
-	if item:
-		return has_item(item)
+	if _held_unique_items_ids.has(item_id):
+		return true
+	for stack in _stacked_item_ids_by_keys.values():
+		if stack.has(item_id):
+			return true
 	return false
 
 static func has_item(item:BaseItem):

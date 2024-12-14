@@ -6,6 +6,7 @@ var root_node:MainRootNode = MainRootNode.Instance
 @onready var page_button:TextureButton = $PagesContainer/PagesButton
 @onready var character_button:TextureButton = $CharacterContainer/CharacterButton
 @onready var effects_button:TextureButton = $EffectsContainer/EffectsButton
+@onready var dev_tools_button:TextureButton = $DevToolsContainer/DevToolsButton
 
 func _ready() -> void:
 	#self.size = get_viewport_rect().size
@@ -14,6 +15,7 @@ func _ready() -> void:
 	page_button.pressed.connect(_open_page_edit)
 	effects_button.pressed.connect(_open_effect_edit)
 	tutorial_button.pressed.connect(_open_tutorial)
+	dev_tools_button.pressed.connect(_dev_tools)
 
 func start_combat():
 	root_node.start_combat()
@@ -28,3 +30,6 @@ func _open_effect_edit():
 
 func _open_tutorial():
 	root_node.open_tutorial()
+
+func _dev_tools():
+	root_node.open_dev_tools()
