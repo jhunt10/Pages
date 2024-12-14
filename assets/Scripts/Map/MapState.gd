@@ -36,6 +36,9 @@ func spot_blocks_los(pos)->bool:
 	var spot = get_map_spot(pos)
 	if not spot:
 		return false
+	for actor:BaseActor in spot.get_actors():
+		if actor.stats.get_stat("BlocksLOS", 0) > 0:
+			return true
 	return spot.terrain_index == 0
 
 func get_terrain_at_pos(pos):

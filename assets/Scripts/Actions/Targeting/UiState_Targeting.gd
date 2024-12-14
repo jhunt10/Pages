@@ -92,7 +92,7 @@ func select_target(coord:Vector2i, confirmed:bool):
 	var turndata = selection_data.focused_actor.Que.QueExecData.get_current_turn_data()
 	if selection_data.target_params.is_spot_target_type():
 		var map_spot = MapPos.new(coord.x, coord.y, selection_data.actor_pos.z, selection_data.actor_pos.dir)
-		turndata.set_target_key(selection_data.setting_target_key, selection_data.target_params.target_param_key, map_spot)
+		turndata.add_target_for_key(selection_data.setting_target_key, selection_data.target_params.target_param_key, map_spot)
 	elif selection_data.target_params.is_actor_target_type():
 		var actors = CombatRootControl.Instance.GameState.MapState.get_actors_at_pos(coord)
 		if actors.size() > 1:
@@ -100,7 +100,7 @@ func select_target(coord:Vector2i, confirmed:bool):
 			return
 		if actors.size() == 0:
 			return
-		turndata.set_target_key(selection_data.setting_target_key, selection_data.target_params.target_param_key, actors[0].Id)
+		turndata.add_target_for_key(selection_data.setting_target_key, selection_data.target_params.target_param_key, actors[0].Id)
 	CombatUiControl.ui_state_controller.set_ui_state(UiStateController.UiStates.ExecRound)
 
 func ui_button_pressed():

@@ -264,7 +264,7 @@ grow_vertical = 2
 theme_override_constants/separation = 0
 alignment = 1
 
-[node name="QueInputControl" parent="MoveableCamera2D/CanvasLayer/CombatUiControl" instance=ExtResource("14_atc5n")]
+[node name="QueInputControl" parent="MoveableCamera2D/CanvasLayer/CombatUiControl" node_paths=PackedStringArray("que_display_control") instance=ExtResource("14_atc5n")]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -274,6 +274,7 @@ offset_top = -96.0
 offset_right = 228.0
 offset_bottom = -8.0
 grow_vertical = 0
+que_display_control = NodePath("../QueDisplayControl")
 
 [node name="QueDisplayControl" parent="MoveableCamera2D/CanvasLayer/CombatUiControl" instance=ExtResource("22_i32rr")]
 layout_mode = 1

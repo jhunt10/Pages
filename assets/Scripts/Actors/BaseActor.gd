@@ -15,6 +15,7 @@ signal equipment_changed
 signal bag_items_changed
 signal page_list_changed
 signal action_que_changed
+signal effacts_changed
 
 # Actor holds no references to the current map state so this method is called by MapState.set_actor_pos()
 signal on_move(old_pos:MapPos, new_pos:MapPos, move_data:Dictionary)

@@ -57,7 +57,11 @@ func get_target_spot_of_missile(target_key:String, metadata:QueExecutionData, ga
 		print("No target with key '" + target_key + "' found.")
 		return null
 		
-	var target = turn_data.get_target(target_key)
+	var targets = turn_data.get_targets(target_key)
+	if not targets or targets.size() == 0:
+		printerr("SubAct_SpawnMissile.get_target_spt_of_missile: No targets found with id '%s'." % [target_key])
+		return null
+	var target = targets[0]
 	if target is MapPos:
 		return target
 	elif target is Vector2i:

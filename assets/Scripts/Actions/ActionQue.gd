@@ -24,16 +24,18 @@ func _init(act) -> void:
 		return
 	actor = act
 	actor.Que = self
+	_cache_que_info(true)
 	actor.stats.stats_changed.connect(_cache_que_info)
 	QueExecData = QueExecutionData.new(self)
 
-func _cache_que_info():
-	var que_size = actor.stats.get_stat("PagesPerRound", -1)
+func _cache_que_info(supress_emit:bool=false):
+	var que_size = actor.stats.get_stat("PPR", -1)
 	if que_size < 0:
 		que_size = actor.get_load_val("DefaultQueSize", 0)
 	if _cached_max_que_size != que_size:
 		_cached_max_que_size = que_size
-		max_que_size_changed.emit()
+		if not supress_emit:
+			max_que_size_changed.emit()
 	else:
 		_cached_max_que_size = que_size
 

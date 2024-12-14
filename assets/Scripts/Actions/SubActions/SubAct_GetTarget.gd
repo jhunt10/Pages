@@ -27,7 +27,7 @@ func do_thing(parent_action:BaseAction, subaction_data:Dictionary, metadata:QueE
 	
 	# Shortcut Self and FullArea
 	if target_params.target_type == TargetParameters.TargetTypes.Self or target_params.target_type == TargetParameters.TargetTypes.FullArea:
-		turn_data.set_target_key(setting_target_key, target_params.target_param_key, actor.Id,)
+		turn_data.add_target_for_key(setting_target_key, target_params.target_param_key, actor.Id,)
 		return BaseSubAction.Success
 	
 	# Get Targeting Params
@@ -53,7 +53,7 @@ func do_thing(parent_action:BaseAction, subaction_data:Dictionary, metadata:QueE
 			return BaseSubAction.Failed 
 	
 	if allow_auto and selection_data.get_potential_target_count() == 1:
-		turn_data.set_target_key(setting_target_key, target_params.target_param_key, selection_data.list_potential_targets()[0])
+		turn_data.add_target_for_key(setting_target_key, target_params.target_param_key, selection_data.list_potential_targets()[0])
 		return BaseSubAction.Success
 	
 	CombatRootControl.Instance.QueController.pause_execution()

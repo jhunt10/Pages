@@ -148,6 +148,10 @@ func load_object_data(object_key:String, save_current=false):
 		if key == "Details": # Hack for importing old files
 			default = active_data
 		sub_editor.load_data(key, active_data.get(key, default))
+	_on_data_loaded(active_data)
+
+func _on_data_loaded(data:Dictionary):
+	pass
 
 ## Save current object to _editing_objects_datas
 func save_object_data():
@@ -195,6 +199,7 @@ func parse_datas_from_file(path:String)->Dictionary:
 	var dict = {}
 	var datas = JSON.parse_string(text)
 	for data in datas:
+		if !data: continue
 		var object_key = data.get(object_key_name, '')
 		if object_key != '' and !dict.keys().has(object_key):
 			dict[data[object_key_name]] = data

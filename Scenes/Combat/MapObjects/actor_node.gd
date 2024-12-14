@@ -193,7 +193,8 @@ func animation_started(name:String):
 		if LOGGING: print("-Set Not Walking")
 
 func _turn_failed_animations():
-	cancel_current_animation()
+	if not current_animation_action_name.contains("/ready"):
+		cancel_current_animation()
 
 func fail_movement():
 	if LOGGING: printerr("Movment Failed")

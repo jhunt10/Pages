@@ -30,18 +30,25 @@ func _init() -> void:
 	Instance = self
 	Instance.init_load()
 
-static func create_effect(source, key:String, actor:BaseActor, data:Dictionary)->BaseEffect:
-	data['EffectedActorId'] = actor.Id
+static func create_effect(source, key:String, actor:BaseActor, data:Dictionary, force_id:String='')->BaseEffect:
+	var effect_data = data.duplicate(true)
+	effect_data['EffectedActorId'] = actor.Id
 	if source is BaseActor:
-		data['SourceId'] = (source as BaseActor).Id
-		data['SourceType'] = 'Actor'
-	if source is BasePageItem:
-		data['SourceId'] = (source as BasePageItem).Id
-		data['SourceType'] = 'Page'
+		effect_data['SourceId'] = (source as BaseActor).Id
+		effect_data['SourceType'] = 'Actor'
+	elif source is BasePageItem:
+		effect_data['SourceId'] = (source as BasePageItem).Id
+		effect_data['SourceType'] = 'Page'
+	elif source is BaseEffect:
+		effect_data['SourceId'] = (source as BaseEffect).Id
+		effect_data['SourceType'] = 'Effect'
 	else:
 		printerr("EffectLibrary.create_effect: Unknown source type: %s" % [source])
-		return
-	var effect = Instance.create_object(key, '', data)
+		return null
+	# Make Id Unique to actor
+	if force_id == '': force_id = key + str(ResourceUID.create_id())
+	var effect_id = actor.Id + ":" + force_id
+	var effect = Instance.create_object(key, effect_id, effect_data)
 	if !effect:
 		printerr("EffectLibrary.create_effect: Failed to make effect '%s'." % [key])
 	return effect

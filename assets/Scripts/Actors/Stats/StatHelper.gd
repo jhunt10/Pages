@@ -11,7 +11,11 @@ const StatBarColors:Dictionary = {
 
 ## Every Actor is exspected to have these stats
 const BasicStats:Array = [
-	Health, Mass, Speed, Armor, Ward, Push, CritChance, CritMod, Accuracy, Evasion, Potency, Resist
+	Health, Mass, Speed, Push, PPR,
+	Armor, Ward, 
+	Accuracy, Evasion, Potency, Protection,
+	Awareness, CritChance, CritMod, BlockChance, BlockMod,
+	BlocksLOS
 ]
 const Health = "BarStat:Health"
 const Mass = "Mass"
@@ -19,6 +23,8 @@ const Speed = "Speed"
 const Armor = "Armor"
 const Ward = "Ward"
 const Push = "Push"
+const PPR = "PPR"
+const Awareness = "Awareness"
 const CritChance = "CritChance"
 const CritMod = "CritMod"
 const BlockChance = "BlockChance"
@@ -26,4 +32,5 @@ const BlockMod = "BlockMod"
 const Accuracy = "Accuracy"
 const Evasion = "Evasion"
 const Potency = "Potency"
-const Resist = "Resist"
+const Protection = "Protection"
+const BlocksLOS = "BlocksLOS"

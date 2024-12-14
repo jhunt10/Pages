@@ -76,10 +76,10 @@ static func try_handle_get_target_sub_action(actor:BaseActor, selection_data:Tar
 	var selected_target = null
 	if enemy_actors.size() > 0:
 		if selection_data.target_params.is_spot_target_type():
-			turndata.set_target_key(selection_data.setting_target_key, 
+			turndata.add_target_for_key(selection_data.setting_target_key, 
 					selection_data.target_params.target_param_key, coor_to_actor[enemy_actors[0].Id])
 		elif selection_data.target_params.is_actor_target_type():
-			turndata.set_target_key(selection_data.setting_target_key, selection_data.target_params.target_param_key, enemy_actors[0].Id)
+			turndata.add_target_for_key(selection_data.setting_target_key, selection_data.target_params.target_param_key, enemy_actors[0].Id)
 		return true
 	else:
 		return false

@@ -29,8 +29,11 @@
 			"CritChance":5,
 			"CritMod":1.5,
 			"Evasion":5,
-			"Resist":5
+			"Resist":5,
+			"PPR":1,
+			"BlocksLOS":0
 		},
+		"DefaultQueSize": 1,
 		"IsPlayer": true,
 		"SpriteSheet": "Template_SpriteSheet.png",
 		"SpriteFrameWH": [12,4],
@@ -140,7 +143,8 @@
 			"Speed":50,
 			"Strength": 10,
 			"Armor": 10,
-			"Evasion":100
+			"Evasion":100,
+			"PPR":3
 		},
 		"DefaultQueSize": 3,
 		"AutoQue": true,
@@ -166,6 +170,9 @@
 	{
 		"ActorKey": "TestChaser2",
 		"ParentKey": "TestChaser",
-		"DefaultQueSize": 4
+		"DefaultQueSize": 4,
+		"Stats":{
+			"PPR":4
+		}
 	}
 ]

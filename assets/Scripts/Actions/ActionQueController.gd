@@ -156,6 +156,7 @@ func update(delta: float) -> void:
 			
 			# Emit starting signals
 			if sub_action_index == 0:
+				game_state.current_turn_index = action_index
 				start_of_turn.emit()
 				start_of_turn_with_state.emit(game_state)
 				_pay_turn_costs()
@@ -357,8 +358,9 @@ func _calc_turn_padding():
 	for index in range(_que_order.size()):
 		var que_id = _que_order[index]
 		var que:ActionQue = _action_ques[que_id]
-		if que.get_max_que_size() >= max_que_size:
-			new_max_que_size = que.get_max_que_size()
+		var que_size = que.get_max_que_size()
+		if que_size >= new_max_que_size:
+			new_max_que_size = que_size
 			max_que_last_index = index
 	max_que_size = new_max_que_size
 	for index in range(_que_order.size()):
@@ -367,6 +369,7 @@ func _calc_turn_padding():
 		var is_slow = index >= max_que_last_index
 		var que_gaps = _get_premade_que_gaps(que.get_max_que_size(), max_que_size, is_slow)
 		que._set_turn_mapping(que_gaps)
+	
 
 
 

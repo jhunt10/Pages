@@ -53,11 +53,12 @@ layout_mode = 2
 
 [node name="EffectIcon" type="TextureRect" parent="."]
 z_as_relative = false
+custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 texture = ExtResource("7_k56th")
-stretch_mode = 2
+expand_mode = 1
 
 [node name="Label" type="Label" parent="EffectIcon"]
 self_modulate = Color(0, 0, 0, 1)

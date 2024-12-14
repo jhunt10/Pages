@@ -52,13 +52,13 @@ static func get_sub_actions_scripts():
 		printerr("SubEffectSubEditorContainer.get_sub_actions_scripts: Effect not loaded")
 	return list
 
-static func _search_for_actions(path, list):
+static func _search_for_actions(path:String, list):
 	var dir = DirAccess.open(path)
 	if dir:
 		dir.list_dir_begin()
 		var file:String = dir.get_next()
 		while file != "":
-			var full_path = path+file
+			var full_path = path.path_join(file)
 			if dir.current_is_dir(): _search_for_actions(full_path, list)
 			elif file.begins_with("SubEffect_") and file.ends_with(".gd"): 
 				list.append(full_path)

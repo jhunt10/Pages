@@ -3,6 +3,7 @@ extends Control
 
 const PADDING = 8
 
+@export var que_display_control:QueDisplayControl
 @export var on_que_options_menu:OnQueOptionsMenu
 @export var main_container:HBoxContainer 
 @export var page_button_prefab:TextureButton
@@ -74,6 +75,7 @@ func _build_buttons():
 						#main_container.size.y + (2 * PADDING))
 
 func _on_que_change():
+	clear_preview_display()
 	if _actor.Que.is_ready() or CombatRootControl.QueController.SHORTCUT_QUE:
 		start_button.disabled = false
 		start_label.text = "Start"
@@ -84,28 +86,48 @@ func _on_que_change():
 func allow_input(_allow:bool):
 	pass
 
+var que_was_displaying_target:bool = false
+func clear_preview_display():
+	if _target_display_key:
+		CombatRootControl.Instance.MapController.target_area_display.clear_display(_target_display_key, false)
+		_target_display_key = null
+	if que_was_displaying_target:
+		que_display_control.show_last_qued_target_area()
+		que_was_displaying_target = false
+
+func show_preview_target_area(action:BaseAction):
+	if que_display_control._target_display_key:
+		que_was_displaying_target = true
+		que_display_control.clear_preview()
+	else:
+		que_was_displaying_target = false
+	var target_parms = action.get_preview_target_params(_actor)
+	if !target_parms:
+		printerr("QueInputControl._mouse_entered_page_button: %s Failed to find preview TargetParams ." % [action.ActionKey])
+	else:
+		var preview_pos = _actor.Que.get_movement_preview_pos()
+		if action.PreviewMoveOffset:
+			preview_pos = MoveHandler.relative_pos_to_real(preview_pos, action.PreviewMoveOffset)
+		var target_selection_data = TargetSelectionData.new(target_parms, 'Preview', _actor, CombatRootControl.Instance.GameState, [], preview_pos)
+		_target_display_key = CombatRootControl.Instance.MapController.target_area_display.build_from_target_selection_data(target_selection_data)
 
 func _mouse_entered_page_button(_index, key_name):
 	if CombatRootControl.Instance.QueController.execution_state != ActionQueController.ActionStates.Waiting:
 		return
 	var action:BaseAction = MainRootNode.action_library.get_action(key_name)
+	if action.PreviewMoveOffset:
+		que_display_control.preview_que_path(action.PreviewMoveOffset)
 	if action.has_preview_target():
-		var target_parms = action.get_preview_target_params(_actor)
-		if !target_parms:
-			printerr("QueInputControl._mouse_entered_page_button: %s Failed to find preview TargetParams ." % [action.ActionKey])
-		else:
-			var preview_pos = _actor.Que.get_movement_preview_pos()
-			var target_selection_data = TargetSelectionData.new(target_parms, 'Preview', _actor, CombatRootControl.Instance.GameState, [], preview_pos)
-			_target_display_key = CombatRootControl.Instance.MapController.target_area_display.build_from_target_selection_data(target_selection_data)
+		show_preview_target_area(action)
 	if action.CostData.size() > 0:
 		CombatUiControl.Instance.stat_panel_control.preview_stat_cost(action.CostData)
 	#ui_controler.mouse_entered_action_button(key_name)
 	pass
-	
+
 func _mouse_exited_action_button(_index, _key_name):
-	if _target_display_key:
-		CombatRootControl.Instance.MapController.target_area_display.clear_display(_target_display_key, false)
+	clear_preview_display()
 	CombatUiControl.Instance.stat_panel_control.stop_preview_stat_cost()
+	que_display_control.preview_que_path()
 	#ui_controler.mouse_exited_action_button(key_name)
 	pass
 

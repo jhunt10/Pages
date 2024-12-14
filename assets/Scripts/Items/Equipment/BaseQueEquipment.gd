@@ -20,5 +20,5 @@ func get_pages_per_round()->int:
 
 func get_stat_mods()->Array:
 	print("PagesPerRound: %s" % [get_pages_per_round()])
-	var ppr_mod = BaseStatMod.new(_id, "PagesPerRound", "", BaseStatMod.ModTypes.Add, get_pages_per_round())
+	var ppr_mod = BaseStatMod.new(_id, "PPR", "", BaseStatMod.ModTypes.Set, get_pages_per_round())
 	return [ppr_mod]

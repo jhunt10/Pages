@@ -152,7 +152,9 @@ func on_entry_key_change(editor_key:String, old_key:String, new_key:String):
 			option_button.load_options(new_key)
 
 func get_target_key_option()->Array:
-	return _parent_subaction_editor.get_target_key_options()
+	var options = ["Self"]
+	options.append_array(_parent_subaction_editor.get_target_key_options())
+	return options
 
 func get_target_param_options():
 	return PageEditorControl.Instance.get_subeditor_option_keys("TargetParams")

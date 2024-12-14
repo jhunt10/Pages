@@ -5,19 +5,22 @@ var costs:Dictionary:
 	get: return on_que_data.get("CostData", {})
 var on_que_data:Dictionary = {}
 
-# Mapping of TargetKey to target Id or MapPos
+# Mapping of TargetKey to Array<Target_Id> or Array<MapPos>
 var _targets:Dictionary = {}
 # Mapping of TargetKey to TargetParamKey that set it
 var _targets_from_params:Dictionary = {}
 
 var turn_failed:bool = false
-
-func _init(on_que:Dictionary) -> void:
+var _actor:BaseActor
+func _init(actor:BaseActor, on_que:Dictionary) -> void:
+	_actor = actor
 	on_que_data = on_que
 
-func set_target_key(target_key:String, from_target_param_key:String, value):
+func add_target_for_key(target_key:String, from_target_param_key:String, value):
 	if value is String or value is MapPos:
-		_targets[target_key] = value
+		if not _targets.keys().has(target_key):
+			_targets[target_key] = [] 
+		_targets[target_key].append(value)
 		_targets_from_params[target_key] = from_target_param_key
 	else:
 		printerr("TurnExecutionData.set_target_key: Invalid object '%s' for key '%s'." % [value, target_key])
@@ -33,8 +36,11 @@ func list_targets()->Array:
 		if not out_list.has(val):
 			out_list.append(val)
 	return out_list
-	
-func get_target(target_key:String):
+
+## Returns Array<Actor_Id> for Array<Coor>
+func get_targets(target_key:String):
+	if target_key == "Self":
+		return _actor.Id
 	var target_value = _targets.get(target_key, null)
 	if !target_value:
 		printerr("TurnExecutionData.get_target: No target with key '%s'." % [target_key])

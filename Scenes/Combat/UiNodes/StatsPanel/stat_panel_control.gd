@@ -35,11 +35,13 @@ func set_actor(act:BaseActor):
 	if actor:
 		if actor.Que.action_que_changed.is_connected(sync):
 			actor.Que.action_que_changed.disconnect(sync)
+			actor.effacts_changed.disconnect(_sync_icons)
 	actor = act
 	_fake_ready()
 	_stat_bars[StatHolder.HealthKey] = health_bar
 	_stat_bars[StatHolder.HealthKey].set_actor(actor, StatHolder.HealthKey)
 	actor.Que.action_que_changed.connect(sync)
+	actor.effacts_changed.connect(_sync_icons)
 	portrait_texture_rect.texture = actor.sprite.get_portrait_sprite()
 	if not CombatRootControl.Instance.QueController.start_of_round.is_connected(_on_start_round):
 		CombatRootControl.Instance.QueController.start_of_round.connect(_on_start_round)
@@ -78,13 +80,15 @@ func _sync_icons():
 			if effect._duration_counter >= 0:
 				_set_duration_text(effect.Id, effect.RemainingDuration)
 			continue
-		if effect.get_load_val("HideInHud", false):
+		if not effect.show_in_hud():
 			continue
 		var new_icon = premade_effect_icon.duplicate()
 		new_icon.texture = effect.get_small_icon()
 		new_icon.visible = true
-		if true or effect._duration_counter >= 0:
+		if effect.show_counter():
 			_set_duration_text(effect.Id, effect.RemainingDuration)
+		else:
+			new_icon.get_child(0).hide()
 		effect_icon_box.add_child(new_icon)
 		effect_icons[effect.Id] = new_icon
 	for id in effect_icons.keys():
@@ -94,6 +98,7 @@ func _sync_icons():
 
 func _set_duration_text(effect_id:String, val:int):
 	if effect_icons.keys().has(effect_id):
+		effect_icons[effect_id].get_child(0).show()
 		effect_icons[effect_id].get_child(0).text = str(val)
 
 func _build_stat_bars():

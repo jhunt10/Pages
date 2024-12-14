@@ -164,12 +164,21 @@ func _calc_cache_stats():
 			agg_mods[mod.stat_name][mod.mod_type].append(mod.value)
 		
 	if LOGGING: print("- Found: %s modded stats" % agg_mods.size())
-	_cached_stats.clear()
+	
+	# Build temp stat list from base stats and stats created by mods
 	var temp_stats = {}
 	for base_stat_name in _base_stats.keys():
 		temp_stats[base_stat_name] = _base_stats[base_stat_name]
 	for set_stat_name in set_stats.keys():
 		temp_stats[set_stat_name] = set_stats[set_stat_name]
+	# Add current values for bar stats
+	for stat_name:String in temp_stats.keys():
+		if stat_name.begins_with("BarMax:"):
+			var bar_stat_name = stat_name.replace("BarMax:","BarStat:")
+			if not temp_stats.keys().has(bar_stat_name):
+				temp_stats[bar_stat_name] = _cached_stats.get(bar_stat_name, temp_stats[stat_name])
+	
+	_cached_stats.clear()
 	for stat_name:String in temp_stats.keys():
 		# No mods for stat
 		if not agg_mods.keys().has(stat_name):

@@ -1,0 +1,83 @@
+[
+    {
+        "ItemKey": "StrongStamina_BarStatPage",
+        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
+        "CanStack": true,
+        "EffectKey": "StrongStamina_BarStatPage",
+        "Details":{
+            "Tags": ["Bar"]
+        }
+    },
+    {
+        "ItemKey": "WideGuard_Page",
+        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
+        "CanStack": true,
+        "EffectKey": "WideGuard_Page",
+        "Details":{
+            "Tags": ["ClassPage"]
+        }
+    },
+    {
+        "ItemKey": "HeavyFoot_Page",
+        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
+        "CanStack": true,
+        "EffectKey": "HeavyFoot_Page",
+        "Details":{
+            "Tags": ["ClassPage"]
+        }
+    },
+    {
+        "ItemKey": "PassiveGuard_Page",
+        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
+        "CanStack": true,
+        "EffectKey": "PassiveGuard_Page",
+        "Details":{
+            "Tags": ["ClassPage"]
+        }
+    },
+    {
+        "ItemKey": "ShieldWall_Page",
+        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
+        "CanStack": true,
+        "EffectKey": "ShieldWall_Page",
+        "Details":{
+            "Tags": ["ClassPage"]
+        }
+    },
+    {
+        "ItemKey": "Guard_Page",
+        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
+        "CanStack": true,
+        "ActionKey": "GuardAction",
+        "Details":{
+            "Tags": ["Tactic"]
+        }
+    },
+    {
+        "ItemKey": "Charge_Page",
+        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
+        "CanStack": true,
+        "ActionKey": "ChargeAttack",
+        "Details":{
+            "Tags": ["Tactic"]
+        }
+    },
+    {
+        "ItemKey": "Cleave_Page",
+        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
+        "CanStack": true,
+        "ActionKey": "Cleave",
+        "Details":{
+            "Tags": ["Tactic"]
+        }
+    },
+    {
+        "ItemKey": "FullAssault_Page",
+        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
+        "CanStack": true,
+        "ActionKey": "FullAssault",
+        "Details":{
+            "Tags": ["Tactic"]
+        }
+    }
+]

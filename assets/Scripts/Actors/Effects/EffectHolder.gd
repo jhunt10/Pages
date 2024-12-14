@@ -27,13 +27,15 @@ func on_combat_start():
 	else:
 		printerr("EffectHolder.on_combat_start: No CombatRootControl found")
 	
-func add_effect(source, effect_key:String, effect_data:Dictionary, game_state:GameStateData=null)->BaseEffect:
-	var effect = EffectLibrary.create_effect(source, effect_key, _actor, effect_data)
+func add_effect(source, effect_key:String, effect_data:Dictionary, force_id:String='')->BaseEffect:
+	if _effects.keys().has(force_id):
+		return _effects[force_id]
+	var effect = EffectLibrary.create_effect(source, effect_key, _actor, effect_data, force_id)
 	if LOGGING: print("EffectHolder.add_effect: Added effect '%s' to actor '%s'." % [effect.Id, _actor.Id])
 	_effects[effect.Id] = effect
 	for trigger in effect.Triggers:
 		_triggers_to_effect_ids[trigger].append(effect.Id)
-	effect.on_created(game_state)
+	effect.on_created()
 	return effect
 		
 func list_effects()->Array:
@@ -46,20 +48,42 @@ func get_effect(effect_id:String)->BaseEffect:
 	if _effects.keys().has(effect_id):
 		return _effects[effect_id]
 	return null
-		
-func remove_effect(effect:BaseEffect):
-	var deleting_effect_id = effect.Id
-	if !_effects.has(deleting_effect_id):
-		printerr("Unknown effect: " + deleting_effect_id)
+
+var _removing_effect_id
+var _remove_effect_queue = []
+func remove_effect(effect:BaseEffect, supress_signal:bool=false):
+	printerr("remove_effect(%s)" %[effect.Id])
+	# Skip if already removing
+	if _removing_effect_id == effect.Id:
 		return
-	_effects.erase(deleting_effect_id)
-	if !effect._deleted:
-		effect.on_delete()
-	print("EffectHolder.remove_effect: Deleted Effect '%s' from actor '%s'." % [deleting_effect_id, _actor.Id])
-	for trigger in _triggers_to_effect_ids.keys():
-		if _triggers_to_effect_ids[trigger].has(deleting_effect_id):
-			_triggers_to_effect_ids[trigger].erase(deleting_effect_id)
+	# Add to que if removing another
+	if _removing_effect_id != null:
+		if not _remove_effect_queue.has(effect.Id):
+			_remove_effect_queue.append(effect.Id)
+		return
+	_removing_effect_id = effect.Id
+	if !_effects.has(_removing_effect_id):
+		printerr("Unknown effect: " + _removing_effect_id)
+	else:
+		# Inform effect it's being deleted
+		if !effect._deleted:
+			effect.on_delete()
+		# Clean from data
+		_effects.erase(_removing_effect_id)
+		print("EffectHolder.remove_effect: Deleted Effect '%s' from actor '%s'." % [_removing_effect_id, _actor.Id])
+		for trigger in _triggers_to_effect_ids.keys():
+			if _triggers_to_effect_ids[trigger].has(_removing_effect_id):
+				_triggers_to_effect_ids[trigger].erase(_removing_effect_id)
+		EffectLibrary.Instance.erase_object(_removing_effect_id)
+	_removing_effect_id = null
+	if _remove_effect_queue.size() > 0:
+		while _remove_effect_queue.size() > 0:
+			var qued_effect_id = _remove_effect_queue[0]
+			_remove_effect_queue.erase(qued_effect_id)
+			remove_effect(qued_effect_id, true)
 	_actor.stats.dirty_stats()
+	if not supress_signal:
+		_actor.effacts_changed.emit()
 	
 func get_on_deal_damage_mods():
 	var out_list = []
@@ -111,9 +135,17 @@ func _trigger_effects(trigger:BaseEffect.EffectTriggers, game_state:GameStateDat
 
 func _on_turn_start(game_state:GameStateData):
 	_trigger_effects(BaseEffect.EffectTriggers.OnTurnStart, game_state)
+	if _actor.Que.is_turn_gap(game_state.current_turn_index):
+		_trigger_effects(BaseEffect.EffectTriggers.OnGapTurnStart, game_state)
+	else:
+		_trigger_effects(BaseEffect.EffectTriggers.OnActionStart, game_state)
 
 func _on_turn_end(game_state:GameStateData):
 	_trigger_effects(BaseEffect.EffectTriggers.OnTurnEnd, game_state)
+	if _actor.Que.is_turn_gap(game_state.current_turn_index):
+		_trigger_effects(BaseEffect.EffectTriggers.OnGapTurnEnd, game_state)
+	else:
+		_trigger_effects(BaseEffect.EffectTriggers.OnActionEnd, game_state)
 
 func _on_round_start(game_state:GameStateData):
 	_trigger_effects(BaseEffect.EffectTriggers.OnRoundStart, game_state)

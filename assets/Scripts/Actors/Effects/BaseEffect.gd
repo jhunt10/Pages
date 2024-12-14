@@ -5,6 +5,8 @@ extends BaseLoadObject
 enum EffectTriggers { 
 	OnCreate, OnDurationEnds,
 	OnTurnStart, OnTurnEnd, 
+	OnActionStart, OnActionEnd, 
+	OnGapTurnStart, OnGapTurnEnd,
 	OnRoundStart, OnRoundEnd,
 	OnMove, OnDamageTaken, OnDamagDealt,
 	OnAttacking, OnDefending, 
@@ -49,6 +51,8 @@ var SubEffectDatas:Dictionary:
 var RemainingDuration:int:
 	get: return _duration_counter
 
+var source_id:String:
+	get: return get_load_val("SourceId")
 var _source
 var _enabled:bool = true
 var _deleted:bool = false
@@ -61,7 +65,6 @@ func _init(key:String, def_load_path:String, def:Dictionary, id:String='', data:
 	_cache_triggers()
 
 func get_source_actor()->BaseActor:
-	var source_id = get_load_val('SourceId')
 	var source_type = get_load_val('SourceType')
 	if source_type == "Actor":
 		return ActorLibrary.get_actor(source_id)
@@ -75,6 +78,12 @@ func get_effected_actor()->BaseActor:
 		printerr("Effect '%' found with no EffectedActor")
 		return null
 	return ActorLibrary.get_actor(actor_id)
+
+func show_in_hud()->bool:
+	return get_load_val("ShowInHud", false)
+
+func show_counter()->bool:
+	return get_load_val("ShowCounter", false)
 
 func get_small_icon():
 	return load(details.small_icon_path)
@@ -114,8 +123,8 @@ func _cache_triggers():
 			if not _triggers_to_sub_effect_keys[trig].has(sub_effect_key):
 				_triggers_to_sub_effect_keys[trig].append(sub_effect_key)
 
-func on_created(game_state:GameStateData):
-	trigger_effect(EffectTriggers.OnCreate, game_state)
+func on_created():
+	trigger_effect(EffectTriggers.OnCreate, null)
 	pass
 
 func on_delete():
@@ -134,10 +143,13 @@ func trigger_effect(trigger:EffectTriggers, game_state:GameStateData):
 	if TRIGGERS_WITH_ADDITIONAL_DATA.has(trigger):
 		printerr("BaseEffect.trigger_effect: Called with trigger '%s' which requirers it's own method." % [trigger])
 		return
+	# Trigger each sub effect mapped to trigger
 	for sub_effect_key in _triggers_to_sub_effect_keys.get(trigger, []):
 		var sub_effect_data = SubEffectDatas[sub_effect_key]
 		var sub_effect = _get_sub_effect_script(sub_effect_key)
 		sub_effect.on_effect_trigger(self, sub_effect_data, trigger, game_state)
+	# Check if durration has ended and remove self if so
+	printerr("trigger_effect: Check Duration: %s" % _duration_counter)
 	if _enabled and _duration_counter == 0 and trigger != EffectTriggers.OnDurationEnds:
 		trigger_effect(EffectTriggers.OnDurationEnds, game_state)
 		_enabled = false

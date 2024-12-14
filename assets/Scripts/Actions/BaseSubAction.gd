@@ -47,6 +47,8 @@ func _get_target_parameters(parent_action:BaseAction, actor:BaseActor, subaction
 ## Get actors that were effected by the selected target key
 func _find_target_effected_actors(parent_action:BaseAction, subaction_data:Dictionary, target_key:String, 
 					metadata:QueExecutionData, 	game_state:GameStateData, source_actor:BaseActor)->Array:
+	if target_key == "Self":
+		return [source_actor]
 	var turn_data = metadata.get_current_turn_data()
 	var target_param_key = turn_data.get_param_key_for_target(target_key)
 	if !target_param_key or target_param_key == '':
@@ -57,10 +59,10 @@ func _find_target_effected_actors(parent_action:BaseAction, subaction_data:Dicti
 		printerr("BaseSubAction._find_target_effected_actors: No TargetParam found with key '%s' from TargetingHelper." % [target_param_key])
 		return []
 	
-	var target = turn_data.get_target(target_key)
-	if not target:
+	var targets = turn_data.get_targets(target_key)
+	if not targets or targets.size() == 0:
 		print("No target with key '%s found." % [target_key])
 		return []
 		
-	var targets = TargetingHelper.get_targeted_actors(target_params, target, source_actor, game_state)
-	return targets
+	var target_list = TargetingHelper.get_targeted_actors(target_params, targets, source_actor, game_state)
+	return target_list

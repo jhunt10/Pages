@@ -17,14 +17,14 @@ func do_thing(parent_action:BaseAction, subaction_data:Dictionary, que_exe_data:
 	var turn_data = que_exe_data.get_current_turn_data()
 	
 	var target_actor_a_key = subaction_data['TargetActorAKey']
-	var target_id_a = turn_data.get_target(target_actor_a_key)
+	var target_id_a = turn_data.get_targets(target_actor_a_key)[0]
 	var target_a:BaseActor = game_state.get_actor(target_id_a)
 	if !target_a:
 		printerr("Invalid Target for teleporting: %s." % [target_actor_a_key])
 		return BaseSubAction.Failed
 		
 	var target_actor_b_key = subaction_data['TargetActorBKey']
-	var target_id_b = turn_data.get_target(target_actor_b_key)
+	var target_id_b = turn_data.get_targets(target_actor_b_key)[0]
 	var target_b:BaseActor = game_state.get_actor(target_id_b)
 	if !target_b:
 		printerr("Invalid Target for teleporting: %s." % [target_actor_b_key])

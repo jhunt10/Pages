@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://ynbkbpxcep0o" path="res://Scenes/UiNodes/MiniRangeDisplay/MiniRangeBackground.png" id="2_01hq7"]
 [ext_resource type="Texture2D" uid="uid://cup842jh8o7v4" path="res://Scenes/UiNodes/MiniRangeDisplay/MiniRangeBackground_Frame.png" id="3_dha8t"]
 
-[sub_resource type="Image" id="Image_0vydt"]
+[sub_resource type="Image" id="Image_48431"]
 data = {
 "data": PackedByteArray(0, 100, 0, 255, 0, 100, 0, 255, 0, 100, 0, 255, 0, 100, 0, 255, 0, 100, 0, 255, 255, 165, 0, 255, 0, 100, 0, 255, 0, 100, 0, 255, 0, 100, 0, 255, 255, 165, 0, 255, 255, 165, 0, 255, 255, 165, 0, 255, 0, 0, 0, 0, 255, 165, 0, 255, 255, 165, 0, 255, 255, 165, 0, 255, 255, 0, 0, 255, 255, 0, 0, 255, 255, 0, 0, 255, 255, 165, 0, 255, 255, 0, 0, 255, 255, 0, 0, 255, 255, 0, 0, 255, 255, 0, 0, 255, 255, 0, 0, 255),
 "format": "RGBA8",
@@ -13,8 +13,8 @@ data = {
 "width": 5
 }
 
-[sub_resource type="ImageTexture" id="ImageTexture_s8yt5"]
-image = SubResource("Image_0vydt")
+[sub_resource type="ImageTexture" id="ImageTexture_jg3u4"]
+image = SubResource("Image_48431")
 
 [node name="MiniAwarnessDisplay" type="Control" node_paths=PackedStringArray("texture_rect")]
 custom_minimum_size = Vector2(44, 44)
@@ -45,7 +45,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = SubResource("ImageTexture_s8yt5")
+texture = SubResource("ImageTexture_jg3u4")
 
 [node name="Frame" type="TextureRect" parent="."]
 layout_mode = 1

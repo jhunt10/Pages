@@ -11,6 +11,7 @@ func _ready() -> void:
 	super()
 	if Engine.is_editor_hint(): return
 	$InnerContainer/TypeValContainer/ModTypeOptionButton.get_options_func = get_mod_types
+	$InnerContainer/TypeValContainer/ModTypeOptionButton.item_selected.connect(on_type_selected)
 	$InnerContainer/StatContainer/StatOptionButton.get_options_func = get_stat_names
 	pass
 	
@@ -30,3 +31,8 @@ func get_stat_names()->Array:
 	var list = StatHelper.CoreStats.keys()
 	list.append_array(StatHelper.BasicStats)
 	return list
+
+func on_type_selected(index:int):
+	var type_name = $InnerContainer/TypeValContainer/ModTypeOptionButton.get_item_text(index)
+	if type_name == "Scale":
+		var spin_box

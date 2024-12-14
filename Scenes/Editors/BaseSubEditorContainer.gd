@@ -179,7 +179,7 @@ func _check_input_has_changed(key, data, input_node)->bool:
 			return input_node.get_prop_value() != data.get(key, "")
 		return true
 	elif input_node is SubEffectPropInputContainer:
-		return input_node.get_prop_value() != data.get(key, "")
+		return input_node.get_prop_value() != data.get(key, null)
 	elif input_node is SubEffectTriggerInputContainer:
 		return input_node.check_for_change(data.get(key, []))
 	elif input_node is BaseSubEditorContainer:

@@ -27,7 +27,7 @@ func do_thing(parent_action:BaseAction, subaction_data:Dictionary, metadata:QueE
 	
 	# Short cut Self and FullArea 
 	if target_params.target_type == TargetParameters.TargetTypes.Self or target_params.target_type == TargetParameters.TargetTypes.FullArea:
-		turn_data.set_target_key(setting_target_key, target_params.target_param_key, actor.Id,)
+		turn_data.add_target_for_key(setting_target_key, target_params.target_param_key, actor.Id,)
 		return BaseSubAction.Success
 	
 	# Get Targeting Params
@@ -46,5 +46,5 @@ func do_thing(parent_action:BaseAction, subaction_data:Dictionary, metadata:QueE
 		return BaseSubAction.Failed
 	var random_index = randi_range(0, selection_data.get_potential_target_count()-1)
 	var target = selection_data.list_potential_targets()[random_index]
-	turn_data.set_target_key(setting_target_key, target_params.target_param_key, target)
+	turn_data.add_target_for_key(setting_target_key, target_params.target_param_key, target)
 	return BaseSubAction.Success

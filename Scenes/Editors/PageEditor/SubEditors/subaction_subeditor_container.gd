@@ -30,10 +30,10 @@ func lose_focus_if_has():
 		subaction_entry.lose_focus_if_has()
 
 func has_change():
-	for subaction_entry:SubActionEditEntryContainer in subaction_entry_container.get_children():
-		if subaction_entry.has_change():
-			return true
-	return false
+	#for subaction_entry:SubActionEditEntryContainer in subaction_entry_container.get_children():
+		#if subaction_entry.has_change():
+			#return true
+	return true
 
 func clear():
 	_loaded_data.clear()
@@ -104,10 +104,11 @@ func get_target_key_options():
 
 static func get_sub_actions_scripts():
 	var list = []
-	if MainRootNode.action_library.loaded:
-		_search_for_actions(SUB_ACTIONS_PATH, list)
-	else:
-		printerr("SubActionEntryControl.get_sub_actions_scripts: Actions not loaded")
+	#if not ActionLibrary.Instance:
+		#ActionLibrary.lo
+	_search_for_actions(SUB_ACTIONS_PATH, list)
+	#else:
+		#printerr("SubActionEntryControl.get_sub_actions_scripts: Actions not loaded")
 	return list
 
 static func _search_for_actions(path, list):

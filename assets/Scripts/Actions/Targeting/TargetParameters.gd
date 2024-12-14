@@ -27,15 +27,17 @@ func _init(target_param_key:String, args:Dictionary) -> void:
 	self.target_param_key = target_param_key
 	
 	# Get Target Type
-	if args['TargetType'] is int:
+	var target_type_val = args.get('TargetType', null)
+	if target_type_val is int:
 		target_type = args['TargetType']
-	elif args['TargetType'] is String:
-		var temp_type = TargetTypes.get(args['TargetType'])
+	elif target_type_val is String:
+		var temp_type = TargetTypes.get(target_type_val)
 		if temp_type >= 0:
 			target_type = temp_type
-		else: 
-			printerr("Unknown Target Type: " + args['TargetType'])
-		
+	else: 
+		printerr("Unknown Target Type: " + args['TargetType'])
+		target_type = TargetTypes.Self
+	
 	# Requires Line of Sight
 	line_of_sight = args.get('LineOfSight', true)
 	

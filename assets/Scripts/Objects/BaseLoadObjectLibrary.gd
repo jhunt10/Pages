@@ -81,6 +81,10 @@ func create_object(object_key:String, id:String='', data:Dictionary={})->BaseLoa
 		_loaded_objects[new_object._id] = new_object
 	return new_object
 
+func erase_object(object_id:String):
+	if _loaded_objects.keys().has(object_id):
+		_loaded_objects.erase(object_id)
+
 func save_objects_data(file_path:String, extra_data={}):
 	if LOGGING: print("#### Saving %s Datas to: %s" % [get_object_name(), file_path])
 	var obj_datas:Dictionary = {}
@@ -97,7 +101,6 @@ func save_objects_data(file_path:String, extra_data={}):
 	file.store_string(save_data_string)
 	file.close()
 	if LOGGING: print("#### Saving %s Datas Done" % [get_object_name()])
-
 
 func get_sub_script(script_path):
 	if _cached_scripts.keys().has(script_path):

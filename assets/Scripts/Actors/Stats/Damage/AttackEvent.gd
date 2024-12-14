@@ -52,13 +52,13 @@ func _init( attacking_actor:BaseActor,
 	attack_direction = direction_of_attack
 	defender_has_cover = defender_is_under_cover
 	
-	attacker_accuracy = attacker.stats.get_stat(StatHelper.Accuracy, 100)
-	attacker_crit_chance = (attacker.stats.get_stat(StatHelper.CritChance, 0) / 100.0)
-	attcker_crit_mod = attacker.stats.get_stat(StatHelper.CritMod, 1.5)
+	attacker_accuracy = DamageHelper.get_attack_stat_for_attack_direction(attacker, attack_direction, StatHelper.Accuracy, 100)
+	attacker_crit_chance =  DamageHelper.get_attack_stat_for_attack_direction(attacker, attack_direction, StatHelper.CritChance, 0) / 100.0
+	attcker_crit_mod = DamageHelper.get_attack_stat_for_attack_direction(attacker, attack_direction, StatHelper.CritMod, 1.5)
 	
-	defender_evasion = defender.stats.get_stat(StatHelper.Evasion, 0)
-	defender_block_chance = (defender.stats.get_stat(StatHelper.BlockChance, 0) / 100.0)
-	defender_block_mod = defender.stats.get_stat(StatHelper.BlockMod, 0.25)
+	defender_evasion = DamageHelper.get_defense_stat_for_attack_direction(defender, attack_direction, StatHelper.Evasion, 0)
+	defender_block_chance = (DamageHelper.get_defense_stat_for_attack_direction(defender, attack_direction, StatHelper.BlockChance, 0) / 100.0)
+	defender_block_mod = DamageHelper.get_defense_stat_for_attack_direction(defender, attack_direction, StatHelper.BlockMod, 0.25)
 
 func roll_for_hit():
 	if attack_direction == AttackDirection.Front:
@@ -83,15 +83,15 @@ func roll_for_hit():
 	print("Accuracy: %s | Evasion: %s | Net: %s" % [attacker_accuracy, defender_evasion, net_evasion])
 	print("Attack Roll: %s | Hit Chance: %s | Crit Chance: %s | Is Hit: %s | Is Crit: %s"%
 		[roll, hit_chance, attacker_crit_chance, is_hit, is_crit])
-	print("Block Roll: %s | Block Chance: %s | Is Block: %s" % [block_roll, defender_block_chance, is_blocked])
+	print("Block Roll: %s | Block Chance: %s | Is Block: %s | Block Mod: %s" % [block_roll, defender_block_chance, is_blocked, defender_block_mod])
 	
-	if attack_direction != AttackDirection.AOE:
-		final_damage_mod = 1.0
-	elif is_hit:
+	final_damage_mod = 1.0
+	if is_hit and attack_direction != AttackDirection.AOE:
 		if is_crit and not is_blocked:
 			final_damage_mod = attcker_crit_mod
 		elif is_blocked and not is_crit:
 			final_damage_mod = defender_block_mod
+			
 	self.attack_stage = AttackStage.PostAttackRoll
 
 func get_damage_datas():

@@ -8,6 +8,8 @@ var _items:Dictionary = {}
 var Missiles:Dictionary = {}
 var Zones:Dictionary = {}
 
+var current_turn_index:int = 0
+
 # Current state of the map
 var MapState:MapStateData
 

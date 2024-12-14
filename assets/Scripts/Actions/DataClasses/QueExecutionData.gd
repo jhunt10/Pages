@@ -1,7 +1,7 @@
 class_name QueExecutionData
 # This dictionary holds meta data for execution of the que
 
-var _que
+var _que:ActionQue
 
 func _init(que) -> void:
 	_que = que
@@ -18,18 +18,18 @@ func clear():
 	
 func que_data(data:Dictionary):
 	TurnDataList.append(
-		TurnExecutionData.new(data)
+		TurnExecutionData.new(_que.actor, data)
 	)
 
 func get_data_for_turn(turn_index:int)->TurnExecutionData:
 	if turn_index < 0:
 		printerr("Faked Turn Data")
-		return TurnExecutionData.new({})
+		return TurnExecutionData.new(_que.actor, {})
 	# If TurnDataList doesn't exist for this turn, back fill the list with new empty records
 	if TurnDataList.size() < turn_index+1:
 		for n in range(TurnDataList.size(), turn_index+2):
 			TurnDataList.append(
-				TurnExecutionData.new({})
+				TurnExecutionData.new(_que.actor, {})
 			)
 	return TurnDataList[turn_index]
 

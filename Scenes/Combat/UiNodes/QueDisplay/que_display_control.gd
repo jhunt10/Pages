@@ -58,13 +58,17 @@ func _hide_action_highlight():
 func _sync():
 	_sync_icons()
 	if CombatRootControl.QueController.execution_state == CombatRootControl.QueController.ActionStates.Waiting:
-		_preview_que_path()
+		preview_que_path()
 	# Delete old target area display
 	if _target_display_key:
 		CombatRootControl.Instance.MapController.target_area_display.clear_display(_target_display_key)
-	
+		_target_display_key = null
+	if _actor.Que.real_que.size() > 0:
+		show_last_qued_target_area()
+
+func show_last_qued_target_area():
 	# Display last page's target area for mobile
-	if MainRootNode.is_mobile and _actor.Que.real_que.size() > 0:
+	if _actor and _actor.Que and _actor.Que.real_que and _actor.Que.real_que.size() > 0:
 		var last_page:BaseAction = _actor.Que.real_que[-1]
 		if last_page.has_preview_target():
 			var target_parms = last_page.get_preview_target_params(_actor)
@@ -74,6 +78,11 @@ func _sync():
 				var preview_pos = _actor.Que.get_movement_preview_pos()
 				var target_selection_data = TargetSelectionData.new(target_parms, 'Preview', _actor, CombatRootControl.Instance.GameState, [], preview_pos)
 				_target_display_key = CombatRootControl.Instance.MapController.target_area_display.build_from_target_selection_data(target_selection_data)
+
+func clear_preview():
+	if _target_display_key:
+		CombatRootControl.Instance.MapController.target_area_display.clear_display(_target_display_key)
+		_target_display_key = null
 
 func set_actor(actor:BaseActor):
 	if _actor:
@@ -137,13 +146,15 @@ func _hide_preview():
 	if _target_display_key:
 		CombatRootControl.Instance.MapController.target_area_display.clear_display(_target_display_key)
 
-func _preview_que_path():
+func preview_que_path(add_movement:MapPos=null):
 	if !_actor or !_actor_node:
 		return
 	#if not show_preview_movement or !que_path_arrow:
 		#return
 	var actor_pos = CombatRootControl.Instance.GameState.MapState.get_actor_pos(_actor)
 	var preview_pos = _actor.Que.get_movement_preview_pos()
+	if add_movement:
+		preview_pos = preview_pos.apply_relative_pos(add_movement)
 	if !preview_pos:
 		_actor_node.hide_path_arrow()
 		return
