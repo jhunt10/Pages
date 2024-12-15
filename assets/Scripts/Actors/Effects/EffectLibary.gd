@@ -31,6 +31,7 @@ func _init() -> void:
 	Instance.init_load()
 
 static func create_effect(source, key:String, actor:BaseActor, data:Dictionary, force_id:String='')->BaseEffect:
+	print("Creating Effect: %s on actor %s" %[key, actor.Id])
 	var effect_data = data.duplicate(true)
 	effect_data['EffectedActorId'] = actor.Id
 	if source is BaseActor:

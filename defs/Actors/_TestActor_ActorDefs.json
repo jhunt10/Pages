@@ -1,5 +1,6 @@
 [
 	{
+		"ParentKey": "DefaultActor",
 		"ActorKey": "TestActor",
 		"Details":{
 			"DisplayName": "Test Actor",
@@ -9,7 +10,6 @@
 			"LargeIcon":"GuyPortrait.png",
 			"SmallIcon":"GuyPortrait.png"
 		},
-		"MaxItemSlots": 5,
 		"Stats":{
 			"BarStat:Health":100,
 			"BarMax:Health":100,
@@ -33,7 +33,6 @@
 			"PPR":1,
 			"BlocksLOS":0
 		},
-		"DefaultQueSize": 1,
 		"IsPlayer": true,
 		"SpriteSheet": "Template_SpriteSheet.png",
 		"SpriteFrameWH": [12,4],
@@ -42,6 +41,7 @@
 		"EquipmentSlots": ["Que", "Bag", "Head", "Body", "Feet", "Trinket", "MainHand", "OffHand"]
 	},
 	{
+		"ParentKey": "DefaultActor",
 		"ActorKey": "TestTarget",
 		"Details":{
 			"DisplayName": "Test Target",
@@ -73,6 +73,7 @@
 		}
 	},
 	{
+		"ParentKey": "DefaultActor",
 		"ActorKey": "TestArmoredTarget",
 		"Details":{
 			"DisplayName": "Test Target",
@@ -146,7 +147,6 @@
 			"Evasion":100,
 			"PPR":3
 		},
-		"DefaultQueSize": 3,
 		"AutoQue": true,
 		"EquipmentSlots": ["Que"],
         "SpawnEquipmentList": [

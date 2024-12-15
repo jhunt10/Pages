@@ -97,6 +97,7 @@ func set_actor(actor:BaseActor):
 
 func close_menu():
 	ActorLibrary.save_actors()
+	ItemLibrary.save_items()
 	self.queue_free()
 
 func on_details_card_freed():
@@ -132,14 +133,13 @@ func start_dragging():
 		mouse_control.drag_item_icon.texture = _selected_item.get_large_icon()
 		mouse_control.position = _button_down_pos - mouse_control.offset
 		mouse_control.show()
-		print("StartDragging: SelectedItem: %s" % [_selected_item.Id])
+		if LOGGING: print("StartDragging: SelectedItem: %s" % [_selected_item.Id])
 
 func stop_dragging():
 	_dragging = false
 	_button_down_pos = null
 	mouse_control.hide()
 	if LOGGING: print("Stop Dragging: %s | %s" % [_selected_context, _mouse_over_context])
-	
 	# Transfering items
 	if _selected_context and _mouse_over_context:
 		
@@ -164,6 +164,7 @@ func stop_dragging():
 				var page_control = context_to_page_control(_mouse_over_context)
 				if page_control:
 					page_control.try_move_item_to_slot(_selected_item, _selected_index_data, _mouse_over_index_data)
+		_selected_item  
 		
 
 func clear_highlights():
@@ -181,6 +182,8 @@ func on_item_button_down(context, item_key, index, offset):
 	if item_key:
 		_selected_item = ItemLibrary.get_item(item_key)
 		mouse_control.offset = offset
+	else:
+		_selected_item = null
 	var page_control = context_to_page_control(context)
 	if page_control:
 		page_control.highlight_slot(index)
@@ -224,30 +227,6 @@ func on_inv_filter_selected(tab_name):
 
 func on_inv_filter_unselected(tab_name):
 	inventory_container.remvoe_sub_filter(tab_name)
-
-#func on_details_card_button_pressed():
-	#if _selected_item:
-		#if _left_page_context == "Equipment" and _selected_item is BaseEquipmentItem:
-			#var equipment = (_selected_item as BaseEquipmentItem)
-			#if equipment.get_equipt_to_actor_id():
-				#equipment.clear_equipt_actor()
-			#else:
-				#_actor.equipment.try_equip_item(equipment,true)
-		#
-		#if _left_page_context == "Pages" and _selected_item is BasePageItem:
-			#var page = (_selected_item as BasePageItem)
-			#if _actor.pages.has_item(page.Id):
-				#_actor.pages.remove_item(page.Id)
-			#else:
-				#_actor.pages.add_item_to_first_valid_slot(page)
-				#
-		#if _left_page_context == "Bag" and _selected_item is BaseConsumableItem:
-			#var item = (_selected_item as BaseConsumableItem)
-			#if _actor.items.has_item(item.Id):
-				#_actor.items.remove_item(item.Id)
-			#else:
-				#_actor.items.add_item_to_first_valid_slot(item)
-		#_current_details_card.start_hide()
 
 func on_tab_pressed(tab_name:String):
 	if tab_name == "Inventory":

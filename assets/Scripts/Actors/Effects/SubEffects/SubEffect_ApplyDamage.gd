@@ -10,7 +10,7 @@ func on_effect_trigger(effect:BaseEffect, subeffect_data:Dictionary, trigger:Bas
 	var actor = effect.get_effected_actor()
 	var damage_key = subeffect_data.get("DamageKey")
 	var damage_data = effect.DamageDatas.get(damage_key, {})
-	var test_damage = damage_data.get("BaseDamage", 0)
+	var test_damage = damage_data.get("FixedBaseDamage", 0)
 	
 	var tag_chain = SourceTagChain.new()\
 			.append_source(SourceTagChain.SourceTypes.Actor, effect)

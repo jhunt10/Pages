@@ -17,6 +17,7 @@ signal hide_done
 @export var weapon_details:WeaponDetailsControl
 @export var armor_details:ArmorDetailsControl
 @export var default_details:DefaultItemDetailsControl
+@export var tag_label:Label
 
 enum AnimationStates {In, Showing, Out, Hidden}
 var animation_state:AnimationStates
@@ -70,8 +71,11 @@ func set_item(actor:BaseActor, item:BaseItem):
 	icon.texture = item.get_small_icon()
 	title_lable.text = item.details.display_name
 	description_box.text = item.details.description
-	
-	
+	var tag_string = ''
+	for tag in item.get_item_tags():
+		tag_string += ", " + tag
+	#var tag_label_text = ("[%s]: %s" % [item.ItemKey, tag_string.trim_prefix(", ")])
+	tag_label.text = tag_string.trim_prefix(", ")
 	default_details.hide()
 	weapon_details.hide()
 	armor_details.hide()

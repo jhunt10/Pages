@@ -5,6 +5,7 @@ extends Control
 @export var equipt_icon:TextureRect
 @export var count_label:Label
 @export var button:Button
+@export var name_label:FitScaleLabel
 var _item_id:String
 
 # Called when the node enters the scene tree for the first time.
@@ -20,7 +21,10 @@ func set_item(item:BaseItem, count:int=0):
 		item_icon_rect =  $ItemIconRect
 		equipt_icon = $EquiptIcon
 		count_label = $CountLabel
+	if !name_label:
+		name_label = $NinePatchRect/FitScaleLabel
 	_item_id = item.Id
+	name_label.text = item.details.display_name
 	item_icon_rect.texture = item.get_large_icon()
 	if item is BaseEquipmentItem:
 		equipt_icon.visible = (item as BaseEquipmentItem).get_equipt_to_actor_id() != ''

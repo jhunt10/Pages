@@ -36,48 +36,21 @@
         }
     },
     {
+        "ItemKey": "PassiveCounter_Page",
+        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
+        "CanStack": true,
+        "EffectKey": "PassiveCounter_Page",
+        "Details":{
+            "Tags": ["ClassPage"]
+        }
+    },
+    {
         "ItemKey": "ShieldWall_Page",
         "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
         "CanStack": true,
         "EffectKey": "ShieldWall_Page",
         "Details":{
             "Tags": ["ClassPage"]
-        }
-    },
-    {
-        "ItemKey": "Guard_Page",
-        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
-        "CanStack": true,
-        "ActionKey": "GuardAction",
-        "Details":{
-            "Tags": ["Tactic"]
-        }
-    },
-    {
-        "ItemKey": "Charge_Page",
-        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
-        "CanStack": true,
-        "ActionKey": "ChargeAttack",
-        "Details":{
-            "Tags": ["Tactic"]
-        }
-    },
-    {
-        "ItemKey": "Cleave_Page",
-        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
-        "CanStack": true,
-        "ActionKey": "Cleave",
-        "Details":{
-            "Tags": ["Tactic"]
-        }
-    },
-    {
-        "ItemKey": "FullAssault_Page",
-        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
-        "CanStack": true,
-        "ActionKey": "FullAssault",
-        "Details":{
-            "Tags": ["Tactic"]
         }
     }
 ]

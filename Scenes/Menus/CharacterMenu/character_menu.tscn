@@ -293,7 +293,251 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="InvFilterControl" type="Control" parent="ScaleControl" node_paths=PackedStringArray("premade_sub_tab")]
+anchors_preset = 0
+offset_left = 589.0
+offset_top = 93.0
+offset_right = 629.0
+offset_bottom = 133.0
+script = ExtResource("43_ercvn")
+premade_sub_tab = NodePath("SubInventoryTab")
+
+[node name="SubInventoryTab" type="NinePatchRect" parent="ScaleControl/InvFilterControl" node_paths=PackedStringArray("highlight_texture", "name_label", "button")]
+self_modulate = Color(0.409466, 0.588298, 0.803891, 1)
+clip_contents = true
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 0
+offset_right = 64.0
+offset_bottom = 30.0
+texture = ExtResource("43_gi4es")
+patch_margin_top = 15
+patch_margin_right = 10
+patch_margin_bottom = 15
+script = ExtResource("44_vhgyr")
+filter_name = "Class Pages"
+selected_spacer_size = 48.0
+grow_speed = 200
+highlight_texture = NodePath("Highlight")
+name_label = NodePath("Control/NameLabel")
+button = NodePath("Button")
+
+[node name="Highlight" type="NinePatchRect" parent="ScaleControl/InvFilterControl/SubInventoryTab"]
+self_modulate = Color(1, 1, 1, -0.0287634)
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("43_gi4es")
+patch_margin_top = 15
+patch_margin_right = 10
+patch_margin_bottom = 15
+
+[node name="Control" type="Control" parent="ScaleControl/InvFilterControl/SubInventoryTab"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_right = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="NameLabel" type="Label" parent="ScaleControl/InvFilterControl/SubInventoryTab/Control"]
+self_modulate = Color(0.288617, 0.311146, 1, 1)
+clip_contents = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("12_dy5pv")
+text = "Class Pages"
+vertical_alignment = 1
+text_overrun_behavior = 1
+
+[node name="Button" type="Button" parent="ScaleControl/InvFilterControl/SubInventoryTab"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SubInventoryTab2" type="NinePatchRect" parent="ScaleControl/InvFilterControl" node_paths=PackedStringArray("highlight_texture", "name_label")]
+self_modulate = Color(0.409466, 0.588298, 0.803891, 1)
+clip_contents = true
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 0
+offset_top = 36.0
+offset_right = 64.0
+offset_bottom = 66.0
+texture = ExtResource("43_gi4es")
+patch_margin_top = 15
+patch_margin_right = 10
+patch_margin_bottom = 15
+script = ExtResource("44_vhgyr")
+filter_name = "Movement"
+selected_spacer_size = 64.0
+grow_speed = 200
+highlight_texture = NodePath("Highlight")
+name_label = NodePath("Control/NameLabel")
+
+[node name="Highlight" type="NinePatchRect" parent="ScaleControl/InvFilterControl/SubInventoryTab2"]
+self_modulate = Color(1, 1, 1, -0.00780681)
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("43_gi4es")
+patch_margin_top = 15
+patch_margin_right = 10
+patch_margin_bottom = 15
+
+[node name="Control" type="Control" parent="ScaleControl/InvFilterControl/SubInventoryTab2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_right = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="NameLabel" type="Label" parent="ScaleControl/InvFilterControl/SubInventoryTab2/Control"]
+self_modulate = Color(0.290196, 0.309804, 1, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("12_dy5pv")
+text = "Movement"
+vertical_alignment = 1
+text_overrun_behavior = 1
+
+[node name="SubInventoryTab3" type="NinePatchRect" parent="ScaleControl/InvFilterControl" node_paths=PackedStringArray("highlight_texture", "name_label")]
+self_modulate = Color(0.409466, 0.588298, 0.803891, 1)
+clip_contents = true
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 0
+offset_top = 72.0
+offset_right = 64.0
+offset_bottom = 102.0
+texture = ExtResource("43_gi4es")
+patch_margin_top = 15
+patch_margin_right = 10
+patch_margin_bottom = 15
+script = ExtResource("44_vhgyr")
+filter_name = "Spell"
+selected_spacer_size = 64.0
+grow_speed = 200
+highlight_texture = NodePath("Highlight")
+name_label = NodePath("Control/NameLabel")
+
+[node name="Highlight" type="NinePatchRect" parent="ScaleControl/InvFilterControl/SubInventoryTab3"]
+self_modulate = Color(1, 1, 1, -0.0185466)
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("43_gi4es")
+patch_margin_top = 15
+patch_margin_right = 10
+patch_margin_bottom = 15
+
+[node name="Control" type="Control" parent="ScaleControl/InvFilterControl/SubInventoryTab3"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_right = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="NameLabel" type="Label" parent="ScaleControl/InvFilterControl/SubInventoryTab3/Control"]
+self_modulate = Color(0.290196, 0.309804, 1, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("12_dy5pv")
+text = "Spell"
+vertical_alignment = 1
+text_overrun_behavior = 1
+
+[node name="SubInventoryTab4" type="NinePatchRect" parent="ScaleControl/InvFilterControl" node_paths=PackedStringArray("highlight_texture", "name_label")]
+self_modulate = Color(0.409466, 0.588298, 0.803891, 1)
+clip_contents = true
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 0
+offset_top = 108.0
+offset_right = 64.0
+offset_bottom = 138.0
+texture = ExtResource("43_gi4es")
+patch_margin_top = 15
+patch_margin_right = 10
+patch_margin_bottom = 15
+script = ExtResource("44_vhgyr")
+filter_name = "Tacticts"
+selected_spacer_size = 64.0
+grow_speed = 200
+highlight_texture = NodePath("Highlight")
+name_label = NodePath("Control/NameLabel")
+
+[node name="Highlight" type="NinePatchRect" parent="ScaleControl/InvFilterControl/SubInventoryTab4"]
+self_modulate = Color(1, 1, 1, -0.0337103)
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("43_gi4es")
+patch_margin_top = 15
+patch_margin_right = 10
+patch_margin_bottom = 15
+
+[node name="Control" type="Control" parent="ScaleControl/InvFilterControl/SubInventoryTab4"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_right = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="NameLabel" type="Label" parent="ScaleControl/InvFilterControl/SubInventoryTab4/Control"]
+self_modulate = Color(0.290196, 0.309804, 1, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("12_dy5pv")
+text = "Tacticts"
+vertical_alignment = 1
+text_overrun_behavior = 1
+
 [node name="InventoryContainer" parent="ScaleControl" instance=ExtResource("8_6gqbj")]
+visible = false
 layout_mode = 0
 offset_left = 303.0
 offset_top = 9.0
@@ -301,7 +545,6 @@ offset_right = 583.0
 offset_bottom = 404.0
 
 [node name="StatsPage" type="Control" parent="ScaleControl" node_paths=PackedStringArray("strength_label", "agility_label", "intelligence_label", "wisdom_label", "bar_stats_container", "speed_stat_label", "mass_stat_label", "ppr_stat_label", "crash_stat_label", "mag_atk_label", "phys_atk_label", "phy_atk_icon", "mag_atk_icon", "accuracy_stat_label", "potency_stat_label", "range_display", "main_hand_min_damage_label", "main_hand_max_damage_label", "main_hand_damage_type", "crit_mod_label", "crit_chance_label", "armor_label", "ward_label", "evasion_stat_label", "protection_stat_label", "awareness_stat_label", "awareness_display", "block_chance_label", "block_mod_label", "evade_front_chance_label", "evade_flank_chance_label", "evade_back_chance_label", "block_front_chance_label", "block_flank_chance_label", "block_back_chance_label")]
-visible = false
 custom_minimum_size = Vector2(280, 395)
 anchors_preset = 0
 offset_left = 303.0
@@ -1109,7 +1352,6 @@ color = Color(0.498039, 0, 0, 1)
 [node name="CritContainer" type="BoxContainer" parent="ScaleControl/StatsPage/ContainerControl/StatsMainContainer/AtkStatsContainer/BoxContainer/RangeDamageContainer/DamageDatasContainer"]
 custom_minimum_size = Vector2(68, 0)
 layout_mode = 2
-size_flags_horizontal = 4
 theme_override_constants/separation = 0
 alignment = 1
 
@@ -1124,31 +1366,45 @@ horizontal_alignment = 2
 layout_mode = 2
 texture = ExtResource("29_ogudx")
 
-[node name="ModValLabel" type="Label" parent="ScaleControl/StatsPage/ContainerControl/StatsMainContainer/AtkStatsContainer/BoxContainer/RangeDamageContainer/DamageDatasContainer/CritContainer"]
-self_modulate = Color(0.498039, 0, 0, 1)
-custom_minimum_size = Vector2(66, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-theme = ExtResource("12_dy5pv")
-text = "+1.5"
-horizontal_alignment = 1
-
-[node name="DividerLabel" type="Label" parent="ScaleControl/StatsPage/ContainerControl/StatsMainContainer/AtkStatsContainer/BoxContainer/RangeDamageContainer/DamageDatasContainer/CritContainer"]
-self_modulate = Color(0.498039, 0, 0, 1)
-layout_mode = 2
-size_flags_horizontal = 3
-theme = ExtResource("12_dy5pv")
-text = "x"
-horizontal_alignment = 1
-
 [node name="ChanceLabel" type="Label" parent="ScaleControl/StatsPage/ContainerControl/StatsMainContainer/AtkStatsContainer/BoxContainer/RangeDamageContainer/DamageDatasContainer/CritContainer"]
 self_modulate = Color(0.498039, 0, 0, 1)
 custom_minimum_size = Vector2(46, 0)
 layout_mode = 2
-size_flags_horizontal = 3
 theme = ExtResource("12_dy5pv")
 text = "50%"
-horizontal_alignment = 2
+horizontal_alignment = 1
+
+[node name="DividerLabel2" type="Label" parent="ScaleControl/StatsPage/ContainerControl/StatsMainContainer/AtkStatsContainer/BoxContainer/RangeDamageContainer/DamageDatasContainer/CritContainer"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("12_dy5pv")
+text = "="
+horizontal_alignment = 1
+
+[node name="PhyAttackIcon" type="TextureRect" parent="ScaleControl/StatsPage/ContainerControl/StatsMainContainer/AtkStatsContainer/BoxContainer/RangeDamageContainer/DamageDatasContainer/CritContainer"]
+layout_mode = 2
+texture = ExtResource("34_vfo8p")
+
+[node name="DividerLabel" type="Label" parent="ScaleControl/StatsPage/ContainerControl/StatsMainContainer/AtkStatsContainer/BoxContainer/RangeDamageContainer/DamageDatasContainer/CritContainer"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("12_dy5pv")
+text = "x"
+horizontal_alignment = 1
+
+[node name="ModValLabel" type="Label" parent="ScaleControl/StatsPage/ContainerControl/StatsMainContainer/AtkStatsContainer/BoxContainer/RangeDamageContainer/DamageDatasContainer/CritContainer"]
+self_modulate = Color(0.498039, 0, 0, 1)
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+theme = ExtResource("12_dy5pv")
+text = "1.5"
+horizontal_alignment = 1
+
+[node name="VSeparator2" type="VSeparator" parent="ScaleControl/StatsPage/ContainerControl/StatsMainContainer/AtkStatsContainer/BoxContainer/RangeDamageContainer/DamageDatasContainer/CritContainer"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="HSeparator4" type="HSeparator" parent="ScaleControl/StatsPage/ContainerControl/StatsMainContainer"]
 self_modulate = Color(1, 1, 1, 0)
@@ -1324,9 +1580,13 @@ color = Color(0.498039, 0, 0, 1)
 [node name="BlockContainer" type="BoxContainer" parent="ScaleControl/StatsPage/ContainerControl/StatsMainContainer/DefStatsContainer/BoxContainer"]
 custom_minimum_size = Vector2(68, 0)
 layout_mode = 2
-size_flags_horizontal = 4
 theme_override_constants/separation = 0
 alignment = 1
+
+[node name="VSeparator" type="VSeparator" parent="ScaleControl/StatsPage/ContainerControl/StatsMainContainer/DefStatsContainer/BoxContainer/BlockContainer"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="NameLabel" type="Label" parent="ScaleControl/StatsPage/ContainerControl/StatsMainContainer/DefStatsContainer/BoxContainer/BlockContainer"]
 self_modulate = Color(0.498039, 0, 0, 1)
@@ -1339,31 +1599,45 @@ horizontal_alignment = 2
 layout_mode = 2
 texture = ExtResource("30_0ruo6")
 
-[node name="ModValLabel" type="Label" parent="ScaleControl/StatsPage/ContainerControl/StatsMainContainer/DefStatsContainer/BoxContainer/BlockContainer"]
-self_modulate = Color(0.498039, 0, 0, 1)
-custom_minimum_size = Vector2(66, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-theme = ExtResource("12_dy5pv")
-text = "-0.5"
-horizontal_alignment = 1
-
-[node name="DividerLabel" type="Label" parent="ScaleControl/StatsPage/ContainerControl/StatsMainContainer/DefStatsContainer/BoxContainer/BlockContainer"]
-self_modulate = Color(0.498039, 0, 0, 1)
-layout_mode = 2
-size_flags_horizontal = 3
-theme = ExtResource("12_dy5pv")
-text = "x"
-horizontal_alignment = 1
-
 [node name="ChanceLabel" type="Label" parent="ScaleControl/StatsPage/ContainerControl/StatsMainContainer/DefStatsContainer/BoxContainer/BlockContainer"]
 self_modulate = Color(0.498039, 0, 0, 1)
 custom_minimum_size = Vector2(46, 0)
 layout_mode = 2
-size_flags_horizontal = 3
 theme = ExtResource("12_dy5pv")
 text = "50%"
-horizontal_alignment = 2
+horizontal_alignment = 1
+
+[node name="DividerLabel2" type="Label" parent="ScaleControl/StatsPage/ContainerControl/StatsMainContainer/DefStatsContainer/BoxContainer/BlockContainer"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("12_dy5pv")
+text = "="
+horizontal_alignment = 1
+
+[node name="PhyAttackIcon" type="TextureRect" parent="ScaleControl/StatsPage/ContainerControl/StatsMainContainer/DefStatsContainer/BoxContainer/BlockContainer"]
+layout_mode = 2
+texture = ExtResource("34_vfo8p")
+
+[node name="DividerLabel" type="Label" parent="ScaleControl/StatsPage/ContainerControl/StatsMainContainer/DefStatsContainer/BoxContainer/BlockContainer"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("12_dy5pv")
+text = "x"
+horizontal_alignment = 1
+
+[node name="ModValLabel" type="Label" parent="ScaleControl/StatsPage/ContainerControl/StatsMainContainer/DefStatsContainer/BoxContainer/BlockContainer"]
+self_modulate = Color(0.498039, 0, 0, 1)
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+theme = ExtResource("12_dy5pv")
+text = "0.5"
+horizontal_alignment = 1
+
+[node name="VSeparator2" type="VSeparator" parent="ScaleControl/StatsPage/ContainerControl/StatsMainContainer/DefStatsContainer/BoxContainer/BlockContainer"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="ColorRect12" type="ColorRect" parent="ScaleControl/StatsPage/ContainerControl/StatsMainContainer/DefStatsContainer/BoxContainer"]
 custom_minimum_size = Vector2(2, 2)
@@ -1567,257 +1841,3 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-
-[node name="InvFilterControl" type="Control" parent="ScaleControl" node_paths=PackedStringArray("premade_sub_tab")]
-anchors_preset = 0
-offset_left = 589.0
-offset_top = 93.0
-offset_right = 629.0
-offset_bottom = 133.0
-script = ExtResource("43_ercvn")
-premade_sub_tab = NodePath("SubInventoryTab")
-
-[node name="SubInventoryTab" type="NinePatchRect" parent="ScaleControl/InvFilterControl" node_paths=PackedStringArray("highlight_texture", "name_label", "button")]
-self_modulate = Color(0.409466, 0.588298, 0.803891, 1)
-clip_contents = true
-custom_minimum_size = Vector2(64, 0)
-layout_mode = 0
-offset_right = 64.0
-offset_bottom = 30.0
-texture = ExtResource("43_gi4es")
-patch_margin_top = 15
-patch_margin_right = 10
-patch_margin_bottom = 15
-script = ExtResource("44_vhgyr")
-filter_name = "Class Pages"
-selected_spacer_size = 48.0
-grow_speed = 200
-highlight_texture = NodePath("Highlight")
-name_label = NodePath("Control/NameLabel")
-button = NodePath("Button")
-
-[node name="Highlight" type="NinePatchRect" parent="ScaleControl/InvFilterControl/SubInventoryTab"]
-self_modulate = Color(1, 1, 1, -0.0287634)
-custom_minimum_size = Vector2(64, 0)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("43_gi4es")
-patch_margin_top = 15
-patch_margin_right = 10
-patch_margin_bottom = 15
-
-[node name="Control" type="Control" parent="ScaleControl/InvFilterControl/SubInventoryTab"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 16.0
-offset_right = -8.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="NameLabel" type="Label" parent="ScaleControl/InvFilterControl/SubInventoryTab/Control"]
-self_modulate = Color(0.288617, 0.311146, 1, 1)
-clip_contents = true
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("12_dy5pv")
-text = "Class Pages"
-vertical_alignment = 1
-text_overrun_behavior = 1
-
-[node name="Button" type="Button" parent="ScaleControl/InvFilterControl/SubInventoryTab"]
-self_modulate = Color(1, 1, 1, 0)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="SubInventoryTab2" type="NinePatchRect" parent="ScaleControl/InvFilterControl" node_paths=PackedStringArray("highlight_texture", "name_label")]
-self_modulate = Color(0.409466, 0.588298, 0.803891, 1)
-clip_contents = true
-custom_minimum_size = Vector2(64, 0)
-layout_mode = 0
-offset_top = 36.0
-offset_right = 64.0
-offset_bottom = 66.0
-texture = ExtResource("43_gi4es")
-patch_margin_top = 15
-patch_margin_right = 10
-patch_margin_bottom = 15
-script = ExtResource("44_vhgyr")
-filter_name = "Movement"
-selected_spacer_size = 64.0
-grow_speed = 200
-highlight_texture = NodePath("Highlight")
-name_label = NodePath("Control/NameLabel")
-
-[node name="Highlight" type="NinePatchRect" parent="ScaleControl/InvFilterControl/SubInventoryTab2"]
-self_modulate = Color(1, 1, 1, -0.00780681)
-custom_minimum_size = Vector2(64, 0)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("43_gi4es")
-patch_margin_top = 15
-patch_margin_right = 10
-patch_margin_bottom = 15
-
-[node name="Control" type="Control" parent="ScaleControl/InvFilterControl/SubInventoryTab2"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 16.0
-offset_right = -8.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="NameLabel" type="Label" parent="ScaleControl/InvFilterControl/SubInventoryTab2/Control"]
-self_modulate = Color(0.290196, 0.309804, 1, 1)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("12_dy5pv")
-text = "Movement"
-vertical_alignment = 1
-text_overrun_behavior = 1
-
-[node name="SubInventoryTab3" type="NinePatchRect" parent="ScaleControl/InvFilterControl" node_paths=PackedStringArray("highlight_texture", "name_label")]
-self_modulate = Color(0.409466, 0.588298, 0.803891, 1)
-clip_contents = true
-custom_minimum_size = Vector2(64, 0)
-layout_mode = 0
-offset_top = 72.0
-offset_right = 64.0
-offset_bottom = 102.0
-texture = ExtResource("43_gi4es")
-patch_margin_top = 15
-patch_margin_right = 10
-patch_margin_bottom = 15
-script = ExtResource("44_vhgyr")
-filter_name = "Spell"
-selected_spacer_size = 64.0
-grow_speed = 200
-highlight_texture = NodePath("Highlight")
-name_label = NodePath("Control/NameLabel")
-
-[node name="Highlight" type="NinePatchRect" parent="ScaleControl/InvFilterControl/SubInventoryTab3"]
-self_modulate = Color(1, 1, 1, -0.0185466)
-custom_minimum_size = Vector2(64, 0)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("43_gi4es")
-patch_margin_top = 15
-patch_margin_right = 10
-patch_margin_bottom = 15
-
-[node name="Control" type="Control" parent="ScaleControl/InvFilterControl/SubInventoryTab3"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 16.0
-offset_right = -8.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="NameLabel" type="Label" parent="ScaleControl/InvFilterControl/SubInventoryTab3/Control"]
-self_modulate = Color(0.290196, 0.309804, 1, 1)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("12_dy5pv")
-text = "Spell"
-vertical_alignment = 1
-text_overrun_behavior = 1
-
-[node name="SubInventoryTab4" type="NinePatchRect" parent="ScaleControl/InvFilterControl" node_paths=PackedStringArray("highlight_texture", "name_label")]
-self_modulate = Color(0.409466, 0.588298, 0.803891, 1)
-clip_contents = true
-custom_minimum_size = Vector2(64, 0)
-layout_mode = 0
-offset_top = 108.0
-offset_right = 64.0
-offset_bottom = 138.0
-texture = ExtResource("43_gi4es")
-patch_margin_top = 15
-patch_margin_right = 10
-patch_margin_bottom = 15
-script = ExtResource("44_vhgyr")
-filter_name = "Tacticts"
-selected_spacer_size = 64.0
-grow_speed = 200
-highlight_texture = NodePath("Highlight")
-name_label = NodePath("Control/NameLabel")
-
-[node name="Highlight" type="NinePatchRect" parent="ScaleControl/InvFilterControl/SubInventoryTab4"]
-self_modulate = Color(1, 1, 1, -0.0337103)
-custom_minimum_size = Vector2(64, 0)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("43_gi4es")
-patch_margin_top = 15
-patch_margin_right = 10
-patch_margin_bottom = 15
-
-[node name="Control" type="Control" parent="ScaleControl/InvFilterControl/SubInventoryTab4"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 16.0
-offset_right = -8.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="NameLabel" type="Label" parent="ScaleControl/InvFilterControl/SubInventoryTab4/Control"]
-self_modulate = Color(0.290196, 0.309804, 1, 1)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("12_dy5pv")
-text = "Tacticts"
-vertical_alignment = 1
-text_overrun_behavior = 1
-
-[node name="StatNameLabel2" type="Label" parent="."]
-self_modulate = Color(0.498039, 0, 0, 1)
-layout_mode = 2
-offset_left = 17.0
-offset_top = -6.0
-offset_right = 115.0
-offset_bottom = 14.0
-size_flags_horizontal = 3
-theme = ExtResource("12_dy5pv")
-text = "0123456789"

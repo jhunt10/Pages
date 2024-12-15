@@ -1089,6 +1089,16 @@ map_coor = Vector2i(5, 4)
 
 [node name="SpwanNode_Target1" type="Sprite2D" parent="ActorTileMapLayer"]
 self_modulate = Color(0, 1, 1, 1)
+position = Vector2(144, 48)
+rotation = 3.14159
+texture = ExtResource("8_3ret4")
+script = ExtResource("9_p3ftp")
+spawn_actor_key = "TestTarget"
+facing = 2
+map_coor = Vector2i(4, 1)
+
+[node name="SpwanNode_Target2" type="Sprite2D" parent="ActorTileMapLayer"]
+self_modulate = Color(0, 1, 1, 1)
 position = Vector2(176, 144)
 rotation = 3.14159
 texture = ExtResource("8_3ret4")
@@ -1097,47 +1107,38 @@ spawn_actor_key = "TestTarget"
 facing = 2
 map_coor = Vector2i(5, 4)
 
-[node name="SpwanNode_Target2" type="Sprite2D" parent="ActorTileMapLayer"]
-self_modulate = Color(0, 1, 1, 1)
-position = Vector2(144, 144)
-rotation = 3.14159
-texture = ExtResource("8_3ret4")
-script = ExtResource("9_p3ftp")
-spawn_actor_key = "TestTarget"
-facing = 2
-map_coor = Vector2i(4, 4)
-
 [node name="SpwanNode_Target3" type="Sprite2D" parent="ActorTileMapLayer"]
 self_modulate = Color(0, 1, 1, 1)
-position = Vector2(208, 144)
+position = Vector2(208, 176)
 rotation = 3.14159
 texture = ExtResource("8_3ret4")
 script = ExtResource("9_p3ftp")
 spawn_actor_key = "TestTarget"
 facing = 2
-map_coor = Vector2i(6, 4)
+map_coor = Vector2i(6, 5)
 
 [node name="SpwanNode_Target4" type="Sprite2D" parent="ActorTileMapLayer"]
 self_modulate = Color(0, 1, 1, 1)
-position = Vector2(144, 112)
+position = Vector2(144, 176)
 rotation = 3.14159
 texture = ExtResource("8_3ret4")
 script = ExtResource("9_p3ftp")
 spawn_actor_key = "TestTarget"
 facing = 2
-map_coor = Vector2i(4, 3)
+map_coor = Vector2i(4, 5)
 
 [node name="SpwanNode_Target5" type="Sprite2D" parent="ActorTileMapLayer"]
 self_modulate = Color(0, 1, 1, 1)
-position = Vector2(176, 112)
+position = Vector2(176, 208)
 rotation = 3.14159
 texture = ExtResource("8_3ret4")
 script = ExtResource("9_p3ftp")
 spawn_actor_key = "TestTarget"
 facing = 2
-map_coor = Vector2i(5, 3)
+map_coor = Vector2i(5, 6)
 
 [node name="SpwanNode_Target6" type="Sprite2D" parent="ActorTileMapLayer"]
+visible = false
 self_modulate = Color(0, 1, 1, 1)
 position = Vector2(208, 112)
 rotation = 3.14159
@@ -1148,6 +1149,7 @@ facing = 2
 map_coor = Vector2i(6, 3)
 
 [node name="SpwanNode_TargetWard" type="Sprite2D" parent="ActorTileMapLayer"]
+visible = false
 self_modulate = Color(0, 1, 1, 1)
 position = Vector2(208, 48)
 texture = ExtResource("8_3ret4")
@@ -1185,10 +1187,12 @@ map_coor = Vector2i(10, 3)
 visible = false
 self_modulate = Color(1, 0, 0, 1)
 position = Vector2(48, 208)
+rotation = 1.5708
 texture = ExtResource("13_67j37")
 offset = Vector2(0, -16)
 hframes = 12
 vframes = 4
 script = ExtResource("9_p3ftp")
 spawn_actor_key = "TestChaser"
+facing = 1
 map_coor = Vector2i(1, 6)

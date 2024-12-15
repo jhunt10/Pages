@@ -33,11 +33,13 @@ signal selected_index_changed(index:int)
 	set(val):
 		if dots_container and dot_count != val:
 			_create_dots(val)
+			selected_index = selected_index
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	if premade_dot and premade_dot.visible and not Engine.is_editor_hint():
-		premade_dot.visible = false
+	if premade_dot and not Engine.is_editor_hint():
+		if premade_dot.visible:
+			premade_dot.visible = false
 	pass # Replace with function body.
 
 

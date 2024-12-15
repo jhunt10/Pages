@@ -4,7 +4,7 @@ const LOGGING = true
 
 const STAT_BALENCE:int = 100
 
-static func handle_attack(attacker:BaseActor, defender:BaseActor, attack_data:Dictionary, 
+static func handle_attack(attacker:BaseActor, defender:BaseActor, damage_datas, 
 							source_tag_chain:SourceTagChain, game_state:GameStateData, 
 							target_parameters:TargetParameters,
 							attack_from_spot_override:MapPos = null):
@@ -22,8 +22,21 @@ static func handle_attack(attacker:BaseActor, defender:BaseActor, attack_data:Di
 		var defender_pos = game_state.MapState.get_actor_pos(defender)
 		attack_direction = get_relative_attack_direction(attacker_pos, defender_pos)
 	
+	var damage_list = []
+	if damage_datas is Array:
+		damage_list = damage_datas
+	elif damage_datas is Dictionary:
+		if damage_datas.values()[0] is Dictionary:
+			for d_data_key in damage_datas.keys():
+				var d_data = damage_datas[d_data_key].duplicate()
+				if not d_data.keys().has("DamageDataKey"):
+					d_data['DamageDataKey'] = d_data_key
+				damage_list.append(d_data)
+		else:
+			damage_list = [damage_datas]
+	
 	# TODO:Cover
-	var attack_event = AttackEvent.new(attacker, defender, attack_direction, false, source_tag_chain, attack_data)
+	var attack_event = AttackEvent.new(attacker, defender, attack_direction, false, source_tag_chain, damage_list)
 	
 	# Apply Pre-Roll effects
 	attacker.effects.trigger_attack(game_state, attack_event)
@@ -45,15 +58,18 @@ static func handle_attack(attacker:BaseActor, defender:BaseActor, attack_data:Di
 	# On Hit
 	else:
 		# Resolve Damage
-		var damage_datas = attack_event.get_damage_datas()
-		print("Found %s Damage Datas to apply | Final Damage Mod: %s" % [damage_datas.size(), attack_event.final_damage_mod])
-		for damage_data in damage_datas:
+		var attacK_damage_datas = attack_event.get_damage_datas()
+		print("Found %s Damage Datas to apply | Final Damage Mod: %s" % [attacK_damage_datas.size(), attack_event.final_damage_mod])
+		for damage_data in attacK_damage_datas:
 			var base_damage = 0
-			var attack_stat = damage_data.get("AtkStat", null)
-			if attack_stat != null and attack_stat != "Custom":
+			if damage_data.keys().has("FixedBaseDamage") and damage_data['FixedBaseDamage'] != null:
+				base_damage = damage_data['FixedBaseDamage']
+			elif damage_data.has("AtkStat"):
+				var attack_stat = damage_data['AtkStat']
 				base_damage = attacker.stats.base_damge_from_stat(attack_stat)
 			else:
-				base_damage = damage_data.get("BaseDamage", 0)
+				printerr("No FixedBaseDamage or AtkStat found on damage data")
+				continue
 			handle_damage(attacker, base_damage, defender, damage_data, source_tag_chain, game_state, attack_event.final_damage_mod)
 		
 	attack_event.attack_stage = AttackEvent.AttackStage.Resolved

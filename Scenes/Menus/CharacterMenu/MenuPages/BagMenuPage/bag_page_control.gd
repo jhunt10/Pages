@@ -12,6 +12,7 @@ signal mouse_exit_item(context, item_key, index)
 @export var premade_sub_container:SubBagContainer
 @export var sub_container:VBoxContainer
 @export var scroll_bar:CustScrollBar
+var _current_bag_item_id
 var _actor:BaseActor
 var _sub_containers:Dictionary
 
@@ -29,18 +30,30 @@ func _process(delta: float) -> void:
 func set_actor(actor:BaseActor):
 	_actor = actor
 	_actor.items.items_changed.connect(build_sub_containers)
-	_actor.equipment_changed.connect(build_sub_containers)
-	var bags = actor.equipment.get_equipt_items_of_slot_type("Bag")
-	if !bags or bags.size() == 0:
+	_actor.equipment_changed.connect(actor_equipment_changed)
+	actor_equipment_changed()
+
+func actor_equipment_changed():
+	var ques = _actor.equipment.get_equipt_items_of_slot_type("Bag")
+	if !ques or ques.size() == 0:
 		name_label.text = "No Bag!"
+		bag_icon.texture = null
+		_current_bag_item_id = null
 		return
-	elif bags.size() > 1:
+	elif ques.size() > 1:
 		name_label.text = "2 Bags?"
+		bag_icon.texture = null
+		_current_bag_item_id = null
 		return
-	var bag:BaseBagEquipment = bags[0]
+	var bag:BaseBagEquipment = ques[0]
+	if bag.Id == _current_bag_item_id:
+		return
+	_current_bag_item_id = bag.Id
 	name_label.text = bag.details.display_name
 	bag_icon.texture = bag.get_large_icon()
 	build_sub_containers()
+	
+
 
 func build_sub_containers():
 	for sub in _sub_containers.values():

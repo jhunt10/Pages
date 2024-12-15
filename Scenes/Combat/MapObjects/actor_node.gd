@@ -223,13 +223,12 @@ func _start_anim(animation_name, speed:float=current_animation_speed):
 	current_animation_speed = speed
 
 
-func start_weapon_animation(action_name:String, off_hand:bool=false, speed:float=1):
+func start_weapon_animation(action_name:String, speed:float=1, off_hand:bool=false):
 	var animation_name = action_name + "/ready" + get_animation_dir_sufix()
 	if off_hand and off_hand_node:
 		off_hand_node.ready_arnimation(action_name, get_animation_dir_sufix())
 	elif main_hand_node:
 		main_hand_node.ready_arnimation(action_name, get_animation_dir_sufix())
-	current_animation_action_name = animation_name
 
 func start_walk_animation(animation_name, speed:float=1):
 	current_animation_action_name = animation_name + "/ready" + get_animation_dir_sufix()
@@ -241,7 +240,7 @@ func execute_animation_motion():
 		var animation_name = current_animation_action_name.replace("/ready_", "/motion_")
 		_start_anim(animation_name)
 		if LOGGING: print("Playing Motion Animation: " + animation_name)
-	else:
+	elif main_hand_node.current_animation:
 		main_hand_node.execute_animation()
 
 func cancel_current_animation():

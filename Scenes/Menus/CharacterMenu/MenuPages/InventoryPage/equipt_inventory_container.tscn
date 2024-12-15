@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dmlpvjyai521d"]
+[gd_scene load_steps=14 format=3 uid="uid://dmlpvjyai521d"]
 
 [ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/InventoryPage/inventory_container.gd" id="1_j4lhh"]
 [ext_resource type="Texture2D" uid="uid://gxk1dw0hkyuj" path="res://Scenes/Menus/CharacterMenu/MenuPages/InventoryPage/InvBoxBackground_working.png" id="2_e5pw5"]
@@ -6,8 +6,10 @@
 [ext_resource type="PackedScene" uid="uid://bpvy87uagttpr" path="res://Scenes/UiNodes/ScollBar/scroll_bar.tscn" id="5_0hjxr"]
 [ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/InventoryPage/inventory_item_button_control.gd" id="7_1h41b"]
 [ext_resource type="Texture2D" uid="uid://kk75vjniq5ho" path="res://Scenes/Menus/CharacterMenu/MenuPages/InventoryPage/InventoryItemButton_Background.png" id="7_2myyq"]
+[ext_resource type="Texture2D" uid="uid://cbv0i5ukubx6w" path="res://defs/Items/Equipment/TestWeapons/TestAxe.png" id="8_do01t"]
 [ext_resource type="Texture2D" uid="uid://bkjy2j6ra337v" path="res://assets/Sprites/UI/SymbolIcons/EquiptIcon.png" id="9_a4qxi"]
 [ext_resource type="Texture2D" uid="uid://0wkhsf2kgce1" path="res://assets/Sprites/UI/BackPatches/Patch_12_4_Dark.png" id="10_nckkb"]
+[ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/ItemDetailsCard/fit_scale_label.gd" id="12_3jefk"]
 [ext_resource type="Texture2D" uid="uid://w8cgm1tj35ld" path="res://Scenes/Menus/CharacterMenu/MenuPages/InventoryPage/HoleOutline.png" id="12_qpq5w"]
 [ext_resource type="Script" path="res://Scenes/UiNodes/loaded_option_button.gd" id="13_32pmb"]
 [ext_resource type="Texture2D" uid="uid://3ncohf5a6kf7" path="res://Scenes/Menus/CharacterMenu/HoleBackground.png" id="13_pu80u"]
@@ -117,8 +119,8 @@ theme_override_constants/v_separation = 6
 alignment = 1
 last_wrap_alignment = 1
 
-[node name="InventoryItemButton" type="Control" parent="BoxBackground/ScrollContainer/FlowContainer" node_paths=PackedStringArray("item_icon_rect", "equipt_icon", "count_label", "button")]
-custom_minimum_size = Vector2(68, 68)
+[node name="InventoryItemButton" type="Control" parent="BoxBackground/ScrollContainer/FlowContainer" node_paths=PackedStringArray("item_icon_rect", "equipt_icon", "count_label", "button", "name_label")]
+custom_minimum_size = Vector2(68, 84)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -127,50 +129,46 @@ item_icon_rect = NodePath("ItemIcon")
 equipt_icon = NodePath("EquiptIcon")
 count_label = NodePath("CountLabel")
 button = NodePath("Button")
+name_label = NodePath("NinePatchRect/FitScaleLabel")
 
 [node name="Background" type="TextureRect" parent="BoxBackground/ScrollContainer/FlowContainer/InventoryItemButton"]
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_bottom = -16.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("7_2myyq")
 
 [node name="ItemIcon" type="TextureRect" parent="BoxBackground/ScrollContainer/FlowContainer/InventoryItemButton"]
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_bottom = -16.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("7_2myyq")
+texture = ExtResource("8_do01t")
 
 [node name="EquiptIcon" type="TextureRect" parent="BoxBackground/ScrollContainer/FlowContainer/InventoryItemButton"]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -20.0
-offset_top = 2.0
-offset_right = -2.0
-offset_bottom = 23.0
+offset_left = -17.0
+offset_top = -1.0
+offset_right = 1.0
+offset_bottom = 20.0
 grow_horizontal = 0
 texture = ExtResource("9_a4qxi")
 
 [node name="CountLabel" type="Label" parent="BoxBackground/ScrollContainer/FlowContainer/InventoryItemButton"]
 layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -17.2
-offset_top = -24.2
-offset_right = -7.2
-offset_bottom = -4.2
-grow_horizontal = 0
-grow_vertical = 0
+offset_left = 54.0
+offset_top = 1.0
+offset_right = 64.0
+offset_bottom = 21.0
 theme = ExtResource("3_e4t5p")
 text = "0"
 horizontal_alignment = 1
@@ -201,6 +199,49 @@ grow_vertical = 2
 theme = ExtResource("3_e4t5p")
 text = "0"
 justification_flags = 160
+
+[node name="NinePatchRect" type="NinePatchRect" parent="BoxBackground/ScrollContainer/FlowContainer/InventoryItemButton"]
+custom_minimum_size = Vector2(64, 18)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -16.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("10_nckkb")
+patch_margin_left = 5
+patch_margin_top = 5
+patch_margin_right = 5
+patch_margin_bottom = 5
+
+[node name="FitScaleLabel" type="Control" parent="BoxBackground/ScrollContainer/FlowContainer/InventoryItemButton/NinePatchRect" node_paths=PackedStringArray("label")]
+layout_mode = 1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 6.0
+offset_top = 2.0
+offset_right = -6.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("12_3jefk")
+label = NodePath("Label")
+text = "Test THing"
+center_x = true
+
+[node name="Label" type="Label" parent="BoxBackground/ScrollContainer/FlowContainer/InventoryItemButton/NinePatchRect/FitScaleLabel"]
+layout_mode = 0
+offset_top = 0.488372
+offset_right = 129.0
+offset_bottom = 30.4884
+scale = Vector2(0.434109, 0.434109)
+theme = ExtResource("3_e4t5p")
+theme_override_font_sizes/font_size = 24
+text = "Test THing"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Button" type="Button" parent="BoxBackground/ScrollContainer/FlowContainer/InventoryItemButton"]
 self_modulate = Color(1, 1, 1, 0)

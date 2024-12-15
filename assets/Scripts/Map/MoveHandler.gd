@@ -1,6 +1,6 @@
 class_name MoveHandler
 
-const LOGGING:bool = false
+const LOGGING:bool = true
 
 # Incase of diagninal movement
 static var MOVE_MOD:int = 4

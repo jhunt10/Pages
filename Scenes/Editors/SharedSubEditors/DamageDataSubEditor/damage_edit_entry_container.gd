@@ -42,12 +42,12 @@ func get_key_to_input_mapping()->Dictionary:
 		"DefenseType": $InnerContainer/TypeSDefenseContainer/DefenseOptionButton,
 		"DamageEffect": $InnerContainer/VFXContainer/VFXOptionButton,
 		"DamageVarient": $InnerContainer/PowerStatContainer/VarientSpinBox,
-		"BaseDamage": $InnerContainer/BaseDamageContainer/BaseDamageSpinBox
+		"FixedBaseDamage": $InnerContainer/BaseDamageContainer/BaseDamageSpinBox
 	}
 
 func load_data(object_key:String, data:Dictionary):
 	super(object_key, data)
-	base_damage_container.visible = data.has("BaseDamage")
+	base_damage_container.visible = data.has("FixedBaseDamage")
 	set_min_max()
 
 func on_base_or_var_damage_change(val):

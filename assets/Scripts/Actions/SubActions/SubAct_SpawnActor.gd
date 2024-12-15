@@ -14,7 +14,7 @@ func do_thing(parent_action:BaseAction, subaction_data:Dictionary, que_exe_data:
 				game_state:GameStateData, actor:BaseActor)->bool:
 	var turn_data = que_exe_data.get_current_turn_data()
 	var target_key = subaction_data['TargetKey']
-	var targets = turn_data.get_targets(target_key)[0]
+	var targets = turn_data.get_targets(target_key)
 	if not targets or targets.size() == 0 or not targets[0] is MapPos:
 		printerr("SubAct_SpawnActor: Invalid Target")
 		return BaseSubAction.Failed

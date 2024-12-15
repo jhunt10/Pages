@@ -117,18 +117,11 @@ func save_data()->Dictionary:
 	var data = super()
 	data['Pages'] = pages.list_item_ids(true)
 	data['BagItems'] = items.list_item_ids(true)
+	data['Equipment'] = equipment.list_item_ids(true)
 	return data
 
 func on_combat_start():
 	effects.on_combat_start()
-
-#func set_pos(old_pos:MapPos, new_pos:MapPos, move_type:String, moved_by:BaseActor):
-	#on_move.emit(old_pos, new_pos, move_type, moved_by)
-	#if node:
-		#node.set_display_pos(new_pos)
-
-#func on_turn_failed():
-	#node.cancel_current_animation()
 
 func die():
 	if is_dead:
@@ -147,32 +140,6 @@ func die():
 func auto_build_que(current_turn:int):
 	if !_allow_auto_que:
 		return
-	#var auto_que_list = get_load_val("AutoQue", null)
-	#if Que:
-		#for action_key in auto_que_list:
-			#var action = ActionLibrary.get_action(action_key)
-			#print("AutoQue: " + action.ActionKey)
-			#if action:
-				#Que.que_action(action)
-				
-				
-				
-	#var player = CombatRootControl.Instance.get_player_actor()
-	#var player_pos = CombatRootControl.Instance.GameState.MapState.get_actor_pos(player)
-	#
-	#var self_pos = CombatRootControl.Instance.GameState.MapState.get_actor_pos(self)
-	#var path_res = AiHandler.path_to_target(self, self_pos, player_pos, CombatRootControl.Instance.GameState)
-	#print("Actor: %s built path:\n\tFrom: %s to %s\n\t%s" % [self.Id, self_pos, player_pos, path_res])
-	#for move_name in path_res['Moves']:
-		#if pages.has_page(move_name):
-			#var action = ActionLibrary.get_action(move_name)
-			#if action:
-				#print("Queing Page: " + move_name)
-				#Que.que_action(action)
-			#else:
-				#printerr("Move Page %s not found" % [move_name])
-		#else:
-			#printerr("Move Page %s not equipt" % [move_name])
 	var actions = AiHandler.build_action_que(self, CombatRootControl.Instance.GameState)
 	for action_name in actions:
 		var action = ActionLibrary.get_action(action_name)
@@ -184,3 +151,26 @@ func auto_build_que(current_turn:int):
 			
 func get_action_list()->Array:
 	return pages.list_action_keys()
+
+func get_default_attack_target_params()->TargetParameters:
+	var weapon = equipment.get_primary_weapon()
+	if weapon:
+		return TargetParameters.new("Default", weapon.get_load_val("TargetParams"))
+	var default_attack_data = get_load_val("DefaultAttackData", {})
+	var default = TargetParameters.new("Default", default_attack_data.get("TargetParams", {}))
+	return default
+
+func get_default_attack_damage_datas()->Dictionary:
+	var out_dict = {}
+	var weapon = equipment.get_primary_weapon()
+	if weapon:
+		out_dict['WeaponDamage'] = weapon.get_damage_data()
+	else:
+		var default_attack_data = get_load_val("DefaultAttackData", {})
+		var default_damage_datas = default_attack_data.get("DamageDatas", {})
+		for d_data_key in default_damage_datas.keys():
+			var d_data = default_damage_datas[d_data_key]
+			if not d_data.keys().has("DamageDataKey"):
+				d_data["DamageDataKey"] = d_data_key
+			out_dict[d_data_key] = d_data.duplicate()
+	return out_dict

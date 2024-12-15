@@ -75,7 +75,7 @@ func calc_button_size():
 	print("Width: %s | Est Cnt: %s | Button Size: %s" % [container_width, est_button_count, real_button_width])
 	for child in items_container.get_children():
 		if child is InventoryItemButton:
-			(child as InventoryItemButton).custom_minimum_size = Vector2(real_button_width, real_button_width)
+			(child as InventoryItemButton).custom_minimum_size = Vector2(real_button_width, real_button_width + 16)
 
 func build_item_list():
 	for item_id in _item_buttons.keys():

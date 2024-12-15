@@ -28,13 +28,9 @@ func do_thing(parent_action:BaseAction, subaction_data:Dictionary, que_exe_data:
 			.append_source(SourceTagChain.SourceTypes.Actor, actor)\
 			.append_source(SourceTagChain.SourceTypes.Action, parent_action)
 	
-	var attack_data = {
-		"DamageDatas": [damage_data]
-		
-	}
 	
 	for target:BaseActor in targets:
-		DamageHelper.handle_attack(actor, target, attack_data, tag_chain, game_state,target_params)
+		DamageHelper.handle_attack(actor, target, damage_data, tag_chain, game_state,target_params)
 	
 	#var offhand_weapon = actor.equipment.get_offhand_weapon()
 	#if offhand_weapon:

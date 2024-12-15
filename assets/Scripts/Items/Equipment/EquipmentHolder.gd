@@ -159,6 +159,10 @@ func remove_item(item_id:String, supress_signal:bool=false):
 		if (main_hand_weapon.get_weapon_class() == BaseWeaponEquipment.WeaponClasses.Medium
 			or main_hand_weapon.get_weapon_class() == BaseWeaponEquipment.WeaponClasses.Heavy):
 			_safe_set_slot(off_hand_index, main_hand_weapon, supress_signal)
+		else: # Can't two hand Main Hand
+			_safe_set_slot(off_hand_index, null, supress_signal)
+			return
+			
 	
 	# Only in Main Hand
 	elif in_main_hand and not in_off_hand:
@@ -399,6 +403,8 @@ func try_set_item_in_slot(item:BaseItem, index:int, allow_replace:bool=false)->b
 			var two_hand_weapon = get_primary_weapon()
 			if two_hand_weapon.get_weapon_class() == BaseWeaponEquipment.WeaponClasses.Heavy:
 				remove_equipment(two_hand_weapon, true)
+			else:
+				_raw_item_slots[index] = null
 	
 	if not item is BaseWeaponEquipment:
 		_safe_set_slot(index, item)

@@ -329,9 +329,9 @@
         "ItemKey":"TestTrinket",
         "_ObjectScript": "res://assets/Scripts/Items/Equipment/BaseArmorEquipment.gd",
         "Details":{
-			"DisplayName": "Evasion Trinket",
-			"SnippetDesc": "An trinket made for testing.",
-			"Description": "An trinket made for testing.",
+			"DisplayName": "Evd Trinket",
+			"SnippetDesc": "+50 to Evasion.",
+			"Description": "+50 to Evasion.",
 			"Tags": ["Trinket"],
 			"LargeIcon":"TestTrinket.png",
 			"SmallIcon":"TestTrinket.png"
@@ -339,7 +339,7 @@
         "StatMods":{
 			"StatMod1": { 
 				"StatName": "Evasion",
-				"DisplayName": "TestTrinket AGI mod",
+				"DisplayName": "Evd Trinket",
 				"ModType":"Add", 
 				"Value":50
 			}
@@ -352,9 +352,9 @@
         "ItemKey":"TestTrinket2",
         "_ObjectScript": "res://assets/Scripts/Items/Equipment/BaseArmorEquipment.gd",
         "Details":{
-			"DisplayName": "Awareness Trinket",
-			"SnippetDesc": "An trinket made for testing.",
-			"Description": "An trinket made for testing.",
+			"DisplayName": "Awr Trinket",
+			"SnippetDesc": "+1 to Awareness",
+			"Description": "+1 to Awareness",
 			"Tags": ["Trinket"],
 			"LargeIcon":"TestTrinket2.png",
 			"SmallIcon":"TestTrinket2.png"
@@ -362,7 +362,7 @@
         "StatMods":{
 			"StatMod1": { 
 				"StatName": "Awareness",
-				"DisplayName": "TestTrinket INT mod",
+				"DisplayName": "Awr Trinket",
 				"ModType":"Add", 
 				"Value":1
 			}
@@ -375,9 +375,9 @@
         "ItemKey":"TestTrinket3",
         "_ObjectScript": "res://assets/Scripts/Items/Equipment/BaseArmorEquipment.gd",
         "Details":{
-			"DisplayName": "Test Trinket3",
-			"SnippetDesc": "An trinket made for testing.",
-			"Description": "An trinket made for testing.",
+			"DisplayName": "Str Trinket",
+			"SnippetDesc": "+5 to Strength",
+			"Description": "5 to Strength",
 			"Tags": ["Trinket"],
 			"LargeIcon":"TestTrinket3.png",
 			"SmallIcon":"TestTrinket3.png"
@@ -385,7 +385,7 @@
         "StatMods":{
 			"StatMod1": { 
 				"StatName": "Strength",
-				"DisplayName": "TestTrinket STR mod",
+				"DisplayName": "Str Trinket",
 				"ModType":"Add", 
 				"Value":5
 			}

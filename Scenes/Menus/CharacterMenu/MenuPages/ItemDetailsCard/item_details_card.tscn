@@ -16,7 +16,7 @@
 [ext_resource type="Texture2D" uid="uid://dq2cad8orar4p" path="res://assets/Sprites/UI/SymbolIcons/ArmorSymbol.png" id="13_t6qv2"]
 [ext_resource type="Texture2D" uid="uid://d17k5iaed0gdg" path="res://assets/Sprites/UI/SymbolIcons/WardSymbol.png" id="14_4xeqv"]
 
-[node name="ItemDetailsCard" type="Control" node_paths=PackedStringArray("offset_control", "icon", "title_lable", "description_box", "exit_button", "weapon_details", "armor_details", "default_details")]
+[node name="ItemDetailsCard" type="Control" node_paths=PackedStringArray("offset_control", "icon", "title_lable", "description_box", "exit_button", "weapon_details", "armor_details", "default_details", "tag_label")]
 custom_minimum_size = Vector2(300, 200)
 layout_mode = 3
 anchors_preset = 0
@@ -33,6 +33,7 @@ exit_button = NodePath("OffsetControl/ExitButton/Button")
 weapon_details = NodePath("OffsetControl/WeaponDetailsControl")
 armor_details = NodePath("OffsetControl/ArmorDetailsControl")
 default_details = NodePath("OffsetControl/DefaultDetailsControl")
+tag_label = NodePath("OffsetControl/TagLabel")
 
 [node name="OffsetControl" type="Control" parent="."]
 custom_minimum_size = Vector2(300, 200)
@@ -73,6 +74,7 @@ offset_bottom = 52.0
 script = ExtResource("4_yxoqv")
 label = NodePath("Label")
 text = "Item Name"
+center_x = null
 
 [node name="Label" type="Label" parent="OffsetControl/FitScaleLabel"]
 self_modulate = Color(0.498039, 0, 0, 1)
@@ -84,6 +86,21 @@ theme = ExtResource("4_xmy3g")
 theme_override_font_sizes/font_size = 24
 text = "Item Name"
 vertical_alignment = 1
+
+[node name="TagLabel" type="Label" parent="OffsetControl"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 0
+offset_left = 18.0
+offset_top = 53.0
+offset_right = 552.0
+offset_bottom = 83.0
+scale = Vector2(0.5, 0.5)
+theme = ExtResource("4_xmy3g")
+theme_override_font_sizes/font_size = 16
+text = "Tag 1 Tag 2 Tage3asd asdas"
+vertical_alignment = 1
+text_overrun_behavior = 4
+ellipsis_char = "+"
 
 [node name="ExitButton" type="TextureRect" parent="OffsetControl"]
 layout_mode = 0
@@ -110,7 +127,7 @@ offset_bottom = 8.0
 [node name="WeaponDetailsControl" type="Control" parent="OffsetControl" node_paths=PackedStringArray("parent_card_control", "weapon_class_label", "phy_damage_icon", "mag_damage_icon", "attack_power_label", "damage_type_label", "description_box", "range_display", "equip_button_background", "equip_button", "equip_label")]
 anchors_preset = 0
 offset_left = 17.0
-offset_top = 58.0
+offset_top = 68.0
 offset_right = 278.0
 offset_bottom = 178.0
 script = ExtResource("7_sv4xn")
@@ -200,7 +217,7 @@ self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("4_xmy3g")
-text = "Item Description"
+text = "Item Description hk hbkhjhl jhlkjl ljlkj"
 
 [node name="ButtonBackground" type="NinePatchRect" parent="OffsetControl/WeaponDetailsControl/VBoxContainer"]
 custom_minimum_size = Vector2(0, 32)
@@ -238,9 +255,9 @@ grow_vertical = 2
 visible = false
 anchors_preset = 0
 offset_left = 17.0
-offset_top = 58.0
+offset_top = 68.0
 offset_right = 278.0
-offset_bottom = 178.0
+offset_bottom = 188.0
 script = ExtResource("12_rxuc0")
 parent_card_control = NodePath("../..")
 slot_label = NodePath("VBoxContainer/HBoxContainer3/TypeLabel")
@@ -343,7 +360,7 @@ grow_vertical = 2
 visible = false
 anchors_preset = 0
 offset_left = 17.0
-offset_top = 58.0
+offset_top = 67.0
 offset_right = 278.0
 offset_bottom = 140.0
 script = ExtResource("12_gvhwc")

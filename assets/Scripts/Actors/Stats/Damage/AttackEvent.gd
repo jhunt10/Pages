@@ -14,7 +14,6 @@ enum AttackStage {
 var attacker:BaseActor
 var defender:BaseActor
 var source_tag_chain:SourceTagChain
-var attack_data:Dictionary
 var attack_stage:AttackStage
 
 var attack_direction:AttackDirection
@@ -26,6 +25,8 @@ var is_hit:bool
 var is_evade:bool
 var is_crit:bool
 var is_blocked:bool
+
+var damage_data_arr:Array
 
 var attacker_accuracy:int
 var attacker_crit_chance:float
@@ -42,11 +43,11 @@ func _init( attacking_actor:BaseActor,
 			direction_of_attack:AttackDirection, 
 			defender_is_under_cover:bool, 
 			tag_chain:SourceTagChain, 
-			data:Dictionary		) -> void:
+			damage_datas:Array) -> void:
 	attacker = attacking_actor
 	defender = defending_actor
 	source_tag_chain = tag_chain
-	attack_data = data
+	damage_data_arr = damage_datas
 	attack_stage = AttackStage.PreAttackRoll
 	
 	attack_direction = direction_of_attack
@@ -95,5 +96,5 @@ func roll_for_hit():
 	self.attack_stage = AttackStage.PostAttackRoll
 
 func get_damage_datas():
-	return attack_data.get("DamageDatas", [])
+	return damage_data_arr
 	

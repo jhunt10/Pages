@@ -14,6 +14,7 @@ signal mouse_exit_item(context, item_key, index)
 @export var slot_width:int 
 @export var scroll_dots:HTabsControls
 
+var _current_que_item_id
 var _actor:BaseActor
 var _sub_containers:Dictionary = {}
 var sub_book_pages:Array = []
@@ -34,19 +35,30 @@ func _process(delta: float) -> void:
 
 func set_actor(actor:BaseActor):
 	_actor = actor
+	_actor.equipment_changed.connect(actor_equipment_changed)
+	actor.pages.items_changed.connect(build_sub_containers)
+	actor_equipment_changed()
+
+func actor_equipment_changed():
 	var ques = _actor.equipment.get_equipt_items_of_slot_type("Que")
 	if !ques or ques.size() == 0:
 		name_label.text = "No Book!"
+		book_icon.texture = null
+		_current_que_item_id = null
 		return
 	elif ques.size() > 1:
 		name_label.text = "2 Books?"
+		book_icon.texture = null
+		_current_que_item_id = null
 		return
 	var que:BaseQueEquipment = ques[0]
+	if que.Id == _current_que_item_id:
+		return
+	_current_que_item_id = que.Id
 	name_label.text = que.details.display_name
 	book_icon.texture = que.get_large_icon()
-	_actor.equipment_changed.connect(build_sub_containers)
-	actor.pages.items_changed.connect(build_sub_containers)
 	build_sub_containers()
+	
 
 func build_sub_containers():
 	for page in sub_book_pages:

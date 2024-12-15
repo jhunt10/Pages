@@ -1,0 +1,63 @@
+[
+    {
+		"ActorKey": "DefaultActor",
+		"Details":{
+			"DisplayName": "Default Actor",
+			"SnippetDesc": "An actor made for defaulting.",
+			"Description": "Description.",
+			"Tags": [],
+			"LargeIcon":"GuyPortrait.png",
+			"SmallIcon":"GuyPortrait.png"
+		},
+		"Stats":{
+			"BlocksLOS":0,
+			"Level":0,
+			"BarMax:Health":100,
+			"BarReg:Health:Round":0,
+			"BarReg:Health:Turn":0,
+			"Mass":0,
+			"Speed":0,
+			"PPR":0,
+            "CrashPower":20,
+			"Strength": 0,
+			"Agility": 0,
+			"Intelligence": 0,
+			"Wisdom": 0,
+			"PagesPerRound": 0,
+			"Awareness":0,
+			"Accuracy":100,
+			"Potency":100,
+			"CritChance":5,
+			"CritMod":1.5,
+			"Evasion":5,
+			"Resist":5
+		},
+		"IsPlayer": false,
+		"SpriteSheet": "Template_SpriteSheet.png",
+		"SpriteFrameWH": [12,4],
+		"SpriteOffset": [0,-16],
+		"PortraitRect":[12, 20, 24, 24],
+		"EquipmentSlots": [],
+        "DefaultAttackData":
+        {
+            "TargetParams": {
+                "EffectsAllies": true,
+                "EffectsEnemies": true,
+                "LineOfSight": true,
+                "TargetArea": "[[-1,0],[-1,1],[0,1],[1,1],[1,0]]",
+                "TargetType": "Actor"
+            },
+            "DamageDatas":{
+                "DefaultDamage": {
+                    "AtkPower": 20,
+                    "AtkStat": "Strength",
+                    "FixedBaseDamage": null,
+                    "DamageEffect": "Blunt_DamageEffect",
+                    "DamageType": "Blunt",
+                    "DamageVarient": 0.5,
+                    "DefenseType": "Physical"
+                }
+            }
+        }
+	}
+]

@@ -29,9 +29,7 @@ func _init(act) -> void:
 	QueExecData = QueExecutionData.new(self)
 
 func _cache_que_info(supress_emit:bool=false):
-	var que_size = actor.stats.get_stat("PPR", -1)
-	if que_size < 0:
-		que_size = actor.get_load_val("DefaultQueSize", 0)
+	var que_size = actor.stats.get_stat("PPR", 0)
 	if _cached_max_que_size != que_size:
 		_cached_max_que_size = que_size
 		if not supress_emit:

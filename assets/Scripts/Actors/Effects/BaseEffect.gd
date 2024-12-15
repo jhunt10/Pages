@@ -149,7 +149,7 @@ func trigger_effect(trigger:EffectTriggers, game_state:GameStateData):
 		var sub_effect = _get_sub_effect_script(sub_effect_key)
 		sub_effect.on_effect_trigger(self, sub_effect_data, trigger, game_state)
 	# Check if durration has ended and remove self if so
-	printerr("trigger_effect: Check Duration: %s" % _duration_counter)
+	printerr("trigger_effect:Check Duration: %s" % _duration_counter)
 	if _enabled and _duration_counter == 0 and trigger != EffectTriggers.OnDurationEnds:
 		trigger_effect(EffectTriggers.OnDurationEnds, game_state)
 		_enabled = false

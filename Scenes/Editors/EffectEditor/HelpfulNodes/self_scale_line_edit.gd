@@ -3,6 +3,7 @@ class_name SelfScalingLineEdit
 extends LineEdit
 
 @export var resize:bool = false
+@export var scale_mode:bool = false
 @export var hidden_text_edit:TextEdit
 
 @export var _padding: int = 8
@@ -38,8 +39,12 @@ func _sync_size():
 	hidden_text_edit.text = self.text
 	var new_size = Vector2i(max(self._orig_min_size.x, hidden_text_edit.get_line_width(0) + (2 * _padding)),
 							max(self._orig_min_size.y, self.size.y))
-	var diff = new_size.x - self.size.x
-	self.custom_minimum_size = new_size
-	var parent:HBoxContainer = self.get_parent()
-	if parent:
+	if scale_mode:
+		var new_scale = self.size.x / new_size.x
+		self.scale = Vector2(new_scale, new_scale)
+	else:
+		var diff = new_size.x - self.size.x
+		self.custom_minimum_size = new_size
+	var parent = self.get_parent()
+	if parent and parent is HBoxContainer:
 		parent.reset_size()

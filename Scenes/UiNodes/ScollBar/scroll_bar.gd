@@ -61,6 +61,7 @@ func _ready() -> void:
 	bar_button.button_down.connect(button_pressed)
 	bar_button.button_up.connect(button_relase)
 	if scroll_container:
+		scroll_container.item_rect_changed.connect(calc_bar_size)
 		_delay_size_calc = true
 	pass # Replace with function body.
 

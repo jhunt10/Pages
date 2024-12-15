@@ -35,7 +35,7 @@ func _init(target_param_key:String, args:Dictionary) -> void:
 		if temp_type >= 0:
 			target_type = temp_type
 	else: 
-		printerr("Unknown Target Type: " + args['TargetType'])
+		printerr("Unknown Target Type: " + args.get("TargetType", "NULL"))
 		target_type = TargetTypes.Self
 	
 	# Requires Line of Sight
@@ -71,8 +71,10 @@ func is_actor_target_type()->bool:
 			self.target_type == TargetTypes.Enemy or 
 			self.target_type == TargetTypes.Corpse)
 
-func is_point_in_area(center:MapPos, point:Vector2i)->bool:
-	return target_area.to_map_spots(center).has(point)
+func is_point_in_area(center:MapPos, point)->bool:
+	if point is Vector2i:
+		return target_area.to_map_spots(center).has(point)
+	return target_area.to_map_spots(center).has(Vector2i(point.x, point.y))
 
 ## Returns true if target actor is valid as a selected target
 func is_valid_target_actor(actor:BaseActor, target:BaseActor, game_state:GameStateData)->bool:
