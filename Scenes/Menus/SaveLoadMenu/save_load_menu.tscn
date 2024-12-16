@@ -1,0 +1,440 @@
+[gd_scene load_steps=11 format=3 uid="uid://bdwsbeo8w1f1k"]
+
+[ext_resource type="Script" path="res://Scenes/Menus/SaveLoadMenu/save_load_menu.gd" id="1_gp8dy"]
+[ext_resource type="Texture2D" uid="uid://mpwjrtfjnbth" path="res://Scenes/Menus/CharacterMenu/BookBackground.png" id="1_v5dju"]
+[ext_resource type="PackedScene" uid="uid://bpvy87uagttpr" path="res://Scenes/UiNodes/ScollBar/scroll_bar.tscn" id="2_1xa6p"]
+[ext_resource type="Texture2D" uid="uid://7x0clyrtcupf" path="res://assets/Sprites/UI/BackPatches/FancyBackPatch_64_18.png" id="3_cirb2"]
+[ext_resource type="Theme" uid="uid://dwinll8pgdjhc" path="res://Scenes/Themes/standard_theme.tres" id="4_6ghyw"]
+[ext_resource type="Texture2D" uid="uid://baeij3edhokkp" path="res://Scenes/Menus/CampMenu/PrettyPictures/DefaultCampPic.png" id="5_gsdij"]
+[ext_resource type="Script" path="res://Scenes/Menus/SaveLoadMenu/save_slot_container.gd" id="5_yc8rx"]
+[ext_resource type="Texture2D" uid="uid://yx5nqpwtvayg" path="res://Scenes/Menus/SaveLoadMenu/Highlight_Patch_32_6.png" id="6_5sm3v"]
+[ext_resource type="Texture2D" uid="uid://cdy53ml2tuvc8" path="res://assets/Sprites/UI/BackPatches/FancyBackPatch_Frame_64_18.png" id="6_k47kv"]
+[ext_resource type="Texture2D" uid="uid://dj76get1aahli" path="res://Scenes/Menus/SaveLoadMenu/Button_Patch_32_6.png" id="7_iovtk"]
+
+[node name="SaveLoadMenu" type="Control"]
+custom_minimum_size = Vector2(600, 420)
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_gp8dy")
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 600.0
+offset_bottom = 420.0
+texture = ExtResource("1_v5dju")
+
+[node name="ScrollBar" parent="." instance=ExtResource("2_1xa6p")]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 64.0
+offset_right = -20.0
+offset_bottom = -24.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="NinePatchRect3" type="NinePatchRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 1.0
+offset_left = 16.0
+offset_top = 20.0
+offset_right = -32.0
+grow_horizontal = 2
+texture = ExtResource("3_cirb2")
+region_rect = Rect2(0, 0, 64, 64)
+patch_margin_left = 18
+patch_margin_top = 18
+patch_margin_right = 18
+patch_margin_bottom = 18
+
+[node name="HBoxContainer" type="HBoxContainer" parent="NinePatchRect3"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SaveNameLabel" type="Label" parent="NinePatchRect3/HBoxContainer"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme = ExtResource("4_6ghyw")
+theme_override_font_sizes/font_size = 24
+text = "Save Game"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = 60.0
+offset_right = -60.0
+offset_bottom = -32.0
+grow_horizontal = 0
+grow_vertical = 2
+horizontal_scroll_mode = 3
+vertical_scroll_mode = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+
+[node name="SaveSlotContainer" type="NinePatchRect" parent="ScrollContainer/VBoxContainer" node_paths=PackedStringArray("name_label", "date_time_label", "button", "highlight")]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+texture = ExtResource("3_cirb2")
+region_rect = Rect2(0, 0, 64, 64)
+patch_margin_left = 18
+patch_margin_top = 18
+patch_margin_right = 18
+patch_margin_bottom = 18
+script = ExtResource("5_yc8rx")
+name_label = NodePath("Container/SaveNameLabel")
+date_time_label = NodePath("Container/SaveDateTimeLabel")
+button = NodePath("Button")
+highlight = NodePath("Highlight")
+
+[node name="Highlight" type="NinePatchRect" parent="ScrollContainer/VBoxContainer/SaveSlotContainer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_5sm3v")
+region_rect = Rect2(0, 0, 24, 24)
+patch_margin_left = 11
+patch_margin_top = 11
+patch_margin_right = 11
+patch_margin_bottom = 11
+
+[node name="Container" type="BoxContainer" parent="ScrollContainer/VBoxContainer/SaveSlotContainer"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+vertical = true
+
+[node name="SaveNameLabel" type="Label" parent="ScrollContainer/VBoxContainer/SaveSlotContainer/Container"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("4_6ghyw")
+theme_override_font_sizes/font_size = 24
+text = "New Save"
+horizontal_alignment = 1
+
+[node name="ColorRect" type="ColorRect" parent="ScrollContainer/VBoxContainer/SaveSlotContainer/Container"]
+self_modulate = Color(0.498039, 0, 0, 1)
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+
+[node name="SaveDateTimeLabel" type="Label" parent="ScrollContainer/VBoxContainer/SaveSlotContainer/Container"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("4_6ghyw")
+theme_override_font_sizes/font_size = 14
+text = "12:00 1-1-2024 "
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="ScrollContainer/VBoxContainer/SaveSlotContainer"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SaveDetailsControl" type="Control" parent="."]
+layout_mode = 1
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 32.0
+offset_top = 20.0
+offset_right = -16.0
+offset_bottom = -32.0
+
+[node name="NinePatchRect" type="NinePatchRect" parent="SaveDetailsControl"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+grow_horizontal = 2
+texture = ExtResource("3_cirb2")
+region_rect = Rect2(0, 0, 64, 64)
+patch_margin_left = 18
+patch_margin_top = 18
+patch_margin_right = 18
+patch_margin_bottom = 18
+
+[node name="HBoxContainer" type="HBoxContainer" parent="SaveDetailsControl/NinePatchRect"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SaveNameLabel" type="Label" parent="SaveDetailsControl/NinePatchRect/HBoxContainer"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme = ExtResource("4_6ghyw")
+theme_override_font_sizes/font_size = 24
+text = "Save Name"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CampPicControl" type="Control" parent="SaveDetailsControl"]
+clip_contents = true
+layout_mode = 1
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = 40.0
+offset_bottom = -4.0
+
+[node name="PrettyPictureRect" type="TextureRect" parent="SaveDetailsControl/CampPicControl"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_gsdij")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="PictureBackground" type="NinePatchRect" parent="SaveDetailsControl/CampPicControl"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_k47kv")
+region_rect = Rect2(0, 0, 64, 64)
+patch_margin_left = 18
+patch_margin_top = 18
+patch_margin_right = 18
+patch_margin_bottom = 18
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="NinePatchRect2" type="NinePatchRect" parent="SaveDetailsControl"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.9
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_cirb2")
+region_rect = Rect2(0, 0, 64, 64)
+patch_margin_left = 18
+patch_margin_top = 18
+patch_margin_right = 18
+patch_margin_bottom = 18
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SaveDetailsControl/NinePatchRect2"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 1
+
+[node name="TimeDateContainer" type="HBoxContainer" parent="SaveDetailsControl/NinePatchRect2/VBoxContainer"]
+layout_mode = 2
+
+[node name="RuntmieLabel" type="Label" parent="SaveDetailsControl/NinePatchRect2/VBoxContainer/TimeDateContainer"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("4_6ghyw")
+text = "06:09:03"
+
+[node name="SaveDateLabel" type="Label" parent="SaveDetailsControl/NinePatchRect2/VBoxContainer/TimeDateContainer"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("4_6ghyw")
+text = "1-1-2024 24:00 "
+horizontal_alignment = 2
+
+[node name="ColorRect" type="ColorRect" parent="SaveDetailsControl/NinePatchRect2/VBoxContainer"]
+self_modulate = Color(0.498039, 0, 0, 1)
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+
+[node name="LocationContainer" type="HBoxContainer" parent="SaveDetailsControl/NinePatchRect2/VBoxContainer"]
+layout_mode = 2
+
+[node name="LocationTitleLabel" type="Label" parent="SaveDetailsControl/NinePatchRect2/VBoxContainer/LocationContainer"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("4_6ghyw")
+text = "Location:"
+
+[node name="LocationNameLabel" type="Label" parent="SaveDetailsControl/NinePatchRect2/VBoxContainer/LocationContainer"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("4_6ghyw")
+text = "Somewhere"
+horizontal_alignment = 2
+
+[node name="PartyContainer" type="HBoxContainer" parent="SaveDetailsControl/NinePatchRect2/VBoxContainer"]
+layout_mode = 2
+
+[node name="PartyLabel" type="Label" parent="SaveDetailsControl/NinePatchRect2/VBoxContainer/PartyContainer"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+size_flags_vertical = 1
+theme = ExtResource("4_6ghyw")
+text = "Party:"
+
+[node name="PartyNamesContainer" type="VBoxContainer" parent="SaveDetailsControl/NinePatchRect2/VBoxContainer/PartyContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+
+[node name="PartyActorLabel" type="Label" parent="SaveDetailsControl/NinePatchRect2/VBoxContainer/PartyContainer/PartyNamesContainer"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("4_6ghyw")
+text = "Actor A"
+horizontal_alignment = 2
+
+[node name="PartyActorLabel2" type="Label" parent="SaveDetailsControl/NinePatchRect2/VBoxContainer/PartyContainer/PartyNamesContainer"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("4_6ghyw")
+text = "Actor B"
+horizontal_alignment = 2
+
+[node name="PartyLevelsContainer" type="VBoxContainer" parent="SaveDetailsControl/NinePatchRect2/VBoxContainer/PartyContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+
+[node name="PartyActorLabel" type="Label" parent="SaveDetailsControl/NinePatchRect2/VBoxContainer/PartyContainer/PartyLevelsContainer"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("4_6ghyw")
+text = "-lv 69"
+
+[node name="PartyActorLabel2" type="Label" parent="SaveDetailsControl/NinePatchRect2/VBoxContainer/PartyContainer/PartyLevelsContainer"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("4_6ghyw")
+text = "-lv 4"
+
+[node name="Control" type="Control" parent="SaveDetailsControl"]
+layout_mode = 1
+anchor_top = 0.9
+anchor_right = 0.3
+anchor_bottom = 1.0
+offset_top = 4.0
+offset_right = -2.0
+
+[node name="NinePatchRect3" type="NinePatchRect" parent="SaveDetailsControl/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_iovtk")
+region_rect = Rect2(0, 0, 24, 24)
+patch_margin_left = 19
+patch_margin_top = 19
+patch_margin_right = 19
+patch_margin_bottom = 19
+
+[node name="Label" type="Label" parent="SaveDetailsControl/Control"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme = ExtResource("4_6ghyw")
+text = "Delete"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Control2" type="Control" parent="SaveDetailsControl"]
+layout_mode = 1
+anchor_left = 0.3
+anchor_top = 0.9
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = 4.0
+
+[node name="NinePatchRect3" type="NinePatchRect" parent="SaveDetailsControl/Control2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_iovtk")
+region_rect = Rect2(0, 0, 24, 24)
+patch_margin_left = 19
+patch_margin_top = 19
+patch_margin_right = 19
+patch_margin_bottom = 19
+
+[node name="Label" type="Label" parent="SaveDetailsControl/Control2"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme = ExtResource("4_6ghyw")
+text = "Save"
+horizontal_alignment = 1
+vertical_alignment = 1

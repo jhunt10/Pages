@@ -1,9 +1,36 @@
 [
     {
-        "ItemKey": "StrongStamina_BarStatPage",
+        "ItemKey": "StaminaPool_BarStatPage",
         "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
         "CanStack": true,
-        "EffectKey": "StrongStamina_BarStatPage",
+        "EffectKey": "StaminaPool_BarStatPage",
+        "Details":{
+            "Tags": ["Bar"]
+        }
+    },
+    {
+        "ItemKey": "StaminaStream_BarStatPage",
+        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
+        "CanStack": true,
+        "EffectKey": "StaminaStream_BarStatPage",
+        "Details":{
+            "Tags": ["Bar"]
+        }
+    },
+    {
+        "ItemKey": "ManaPool_BarStatPage",
+        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
+        "CanStack": true,
+        "EffectKey": "ManaPool_BarStatPage",
+        "Details":{
+            "Tags": ["Bar"]
+        }
+    },
+    {
+        "ItemKey": "ManaStream_BarStatPage",
+        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
+        "CanStack": true,
+        "EffectKey": "ManaStream_BarStatPage",
         "Details":{
             "Tags": ["Bar"]
         }

@@ -3,8 +3,8 @@
 [ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/ItemDetailsCard/item_details_card.gd" id="1_vq5a0"]
 [ext_resource type="Texture2D" uid="uid://bqmtfkh0uj2bk" path="res://Scenes/Menus/CharacterMenu/MenuPages/ItemDetailsCard/DetailsCard_Background_working.png" id="2_7ol1j"]
 [ext_resource type="Texture2D" uid="uid://cv0i7fr0kh62s" path="res://Scenes/Menus/CharacterMenu/MenuPages/PageMenuPage/PageSlotBackground.png" id="3_1ywch"]
+[ext_resource type="PackedScene" uid="uid://c4p8fix52jdyq" path="res://Scenes/UiNodes/FitScaleLabel/fit_scale_label.tscn" id="4_34k8o"]
 [ext_resource type="Theme" uid="uid://dwinll8pgdjhc" path="res://Scenes/Themes/standard_theme.tres" id="4_xmy3g"]
-[ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/ItemDetailsCard/fit_scale_label.gd" id="4_yxoqv"]
 [ext_resource type="PackedScene" uid="uid://c1bs8grs7gsc1" path="res://Scenes/UiNodes/MiniRangeDisplay/mini_range_display.tscn" id="5_jmtol"]
 [ext_resource type="Texture2D" uid="uid://b7yikap63psbv" path="res://Scenes/Menus/CharacterMenu/MenuPages/ItemDetailsCard/ExitButton.png" id="6_folnv"]
 [ext_resource type="Texture2D" uid="uid://dbag7m6cb83vp" path="res://Scenes/Menus/CharacterMenu/MenuPages/ItemDetailsCard/Button_Patch_32_6.png" id="7_850b7"]
@@ -16,7 +16,7 @@
 [ext_resource type="Texture2D" uid="uid://dq2cad8orar4p" path="res://assets/Sprites/UI/SymbolIcons/ArmorSymbol.png" id="13_t6qv2"]
 [ext_resource type="Texture2D" uid="uid://d17k5iaed0gdg" path="res://assets/Sprites/UI/SymbolIcons/WardSymbol.png" id="14_4xeqv"]
 
-[node name="ItemDetailsCard" type="Control" node_paths=PackedStringArray("offset_control", "icon", "title_lable", "description_box", "exit_button", "weapon_details", "armor_details", "default_details", "tag_label")]
+[node name="ItemDetailsCard" type="Control" node_paths=PackedStringArray("offset_control", "icon", "description_box", "exit_button", "weapon_details", "armor_details", "default_details", "tag_label")]
 custom_minimum_size = Vector2(300, 200)
 layout_mode = 3
 anchors_preset = 0
@@ -27,7 +27,6 @@ script = ExtResource("1_vq5a0")
 speed = 500.0
 offset_control = NodePath("OffsetControl")
 icon = NodePath("OffsetControl/IconBackground/Icon")
-title_lable = NodePath("OffsetControl/FitScaleLabel")
 description_box = NodePath("OffsetControl/WeaponDetailsControl/VBoxContainer/HBoxContainer2/DescriptionBox")
 exit_button = NodePath("OffsetControl/ExitButton/Button")
 weapon_details = NodePath("OffsetControl/WeaponDetailsControl")
@@ -65,27 +64,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="FitScaleLabel" type="Control" parent="OffsetControl" node_paths=PackedStringArray("label")]
-anchors_preset = 0
-offset_left = 54.0
-offset_top = 20.0
-offset_right = 246.0
-offset_bottom = 52.0
-script = ExtResource("4_yxoqv")
-label = NodePath("Label")
-text = "Item Name"
-center_x = null
-
-[node name="Label" type="Label" parent="OffsetControl/FitScaleLabel"]
-self_modulate = Color(0.498039, 0, 0, 1)
-layout_mode = 0
-offset_top = 1.0
-offset_right = 144.0
-offset_bottom = 31.0
-theme = ExtResource("4_xmy3g")
-theme_override_font_sizes/font_size = 24
-text = "Item Name"
-vertical_alignment = 1
+[node name="FitScaleLabel" parent="OffsetControl" instance=ExtResource("4_34k8o")]
 
 [node name="TagLabel" type="Label" parent="OffsetControl"]
 self_modulate = Color(0.498039, 0, 0, 1)

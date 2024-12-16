@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://c4p8fix52jdyq"]
+
+[ext_resource type="Script" path="res://Scenes/UiNodes/FitScaleLabel/fit_scale_label.gd" id="1_7iv0g"]
+[ext_resource type="Theme" uid="uid://dwinll8pgdjhc" path="res://Scenes/Themes/standard_theme.tres" id="2_f5cwf"]
+
+[node name="FitScaleLabel" type="Control" node_paths=PackedStringArray("label")]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 54.0
+offset_top = 20.0
+offset_right = 246.0
+offset_bottom = 52.0
+script = ExtResource("1_7iv0g")
+label = NodePath("Label")
+text = "Item Name"
+
+[node name="Label" type="Label" parent="."]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 0
+offset_top = 1.0
+offset_right = 144.0
+offset_bottom = 31.0
+theme = ExtResource("2_f5cwf")
+theme_override_font_sizes/font_size = 24
+text = "Item Name"
+vertical_alignment = 1

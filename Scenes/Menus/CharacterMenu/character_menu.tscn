@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=3 uid="uid://ciah50qt3htui"]
+[gd_scene load_steps=51 format=3 uid="uid://ciah50qt3htui"]
 
 [ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/character_menu_control.gd" id="1_b43ae"]
 [ext_resource type="Texture2D" uid="uid://mpwjrtfjnbth" path="res://Scenes/Menus/CharacterMenu/BookBackground.png" id="2_ny2th"]
@@ -24,9 +24,13 @@
 [ext_resource type="Texture2D" uid="uid://d0pn1i5o4fqj5" path="res://assets/Sprites/UI/SymbolIcons/AwarenessSymbol.png" id="16_i6djh"]
 [ext_resource type="Texture2D" uid="uid://hjphvi45okvu" path="res://assets/Sprites/UI/SymbolIcons/BarStatSymbol.png" id="16_v0eqb"]
 [ext_resource type="PackedScene" uid="uid://bd7k0s02cumgn" path="res://Scenes/UiNodes/MiniRangeDisplay/mini_awarness_display.tscn" id="17_wej2u"]
+[ext_resource type="Texture2D" uid="uid://b10pvly4exem2" path="res://assets/Sprites/UI/SymbolIcons/_S_Symbole.png" id="19_qjnj7"]
+[ext_resource type="Texture2D" uid="uid://vwiqj7k1flkn" path="res://assets/Sprites/UI/SymbolIcons/_A_Symbole.png" id="20_58mkn"]
 [ext_resource type="Texture2D" uid="uid://dq2cad8orar4p" path="res://assets/Sprites/UI/SymbolIcons/ArmorSymbol.png" id="20_oqlli"]
 [ext_resource type="Texture2D" uid="uid://d17k5iaed0gdg" path="res://assets/Sprites/UI/SymbolIcons/WardSymbol.png" id="21_faesk"]
+[ext_resource type="Texture2D" uid="uid://doywp1shkpnmd" path="res://assets/Sprites/UI/SymbolIcons/_I_Symbole.png" id="21_ka64e"]
 [ext_resource type="Texture2D" uid="uid://br058igskmkwd" path="res://assets/Sprites/UI/SymbolIcons/AccuracySymbol.png" id="21_m24af"]
+[ext_resource type="Texture2D" uid="uid://ci3qbej0djsng" path="res://assets/Sprites/UI/SymbolIcons/_W_Symbole.png" id="22_0axhb"]
 [ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/StatsMenuPage/bar_stats_container.gd" id="22_nfk1x"]
 [ext_resource type="Texture2D" uid="uid://uarxllb74uai" path="res://assets/Sprites/UI/SymbolIcons/EvasionSymbol.png" id="22_yxxft"]
 [ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/StatsMenuPage/stat_label_container.gd" id="23_dhe1p"]
@@ -741,12 +745,22 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 0
 
-[node name="NameLabel" type="Label" parent="ScaleControl/StatsPage/ContainerControl/StatsMainContainer/AttributesDisplay/BoxContainer/StrengthContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="ScaleControl/StatsPage/ContainerControl/StatsMainContainer/AttributesDisplay/BoxContainer/StrengthContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="ScaleControl/StatsPage/ContainerControl/StatsMainContainer/AttributesDisplay/BoxContainer/StrengthContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("19_qjnj7")
+
+[node name="NameLabel" type="Label" parent="ScaleControl/StatsPage/ContainerControl/StatsMainContainer/AttributesDisplay/BoxContainer/StrengthContainer/HBoxContainer"]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
+size_flags_vertical = 1
 theme = ExtResource("12_dy5pv")
-text = "STR"
-horizontal_alignment = 1
+text = "tr"
+vertical_alignment = 2
 
 [node name="StatLabel" type="Label" parent="ScaleControl/StatsPage/ContainerControl/StatsMainContainer/AttributesDisplay/BoxContainer/StrengthContainer"]
 self_modulate = Color(0.498039, 0, 0, 1)
@@ -766,12 +780,22 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 0
 
-[node name="NameLabel" type="Label" parent="ScaleControl/StatsPage/ContainerControl/StatsMainContainer/AttributesDisplay/BoxContainer/AgilityContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="ScaleControl/StatsPage/ContainerControl/StatsMainContainer/AttributesDisplay/BoxContainer/AgilityContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="ScaleControl/StatsPage/ContainerControl/StatsMainContainer/AttributesDisplay/BoxContainer/AgilityContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("20_58mkn")
+
+[node name="NameLabel" type="Label" parent="ScaleControl/StatsPage/ContainerControl/StatsMainContainer/AttributesDisplay/BoxContainer/AgilityContainer/HBoxContainer"]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
+size_flags_vertical = 1
 theme = ExtResource("12_dy5pv")
-text = "AGI"
-horizontal_alignment = 1
+text = "gi"
+vertical_alignment = 2
 
 [node name="StatLabel" type="Label" parent="ScaleControl/StatsPage/ContainerControl/StatsMainContainer/AttributesDisplay/BoxContainer/AgilityContainer"]
 self_modulate = Color(0.498039, 0, 0, 1)
@@ -790,6 +814,23 @@ color = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ScaleControl/StatsPage/ContainerControl/StatsMainContainer/AttributesDisplay/BoxContainer/IntillegenceContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="ScaleControl/StatsPage/ContainerControl/StatsMainContainer/AttributesDisplay/BoxContainer/IntillegenceContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("21_ka64e")
+
+[node name="NameLabel" type="Label" parent="ScaleControl/StatsPage/ContainerControl/StatsMainContainer/AttributesDisplay/BoxContainer/IntillegenceContainer/HBoxContainer"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+size_flags_vertical = 1
+theme = ExtResource("12_dy5pv")
+text = "nt"
+vertical_alignment = 2
 
 [node name="NameLabel" type="Label" parent="ScaleControl/StatsPage/ContainerControl/StatsMainContainer/AttributesDisplay/BoxContainer/IntillegenceContainer"]
 self_modulate = Color(0.498039, 0, 0, 1)
@@ -816,12 +857,22 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 0
 
-[node name="NameLabel" type="Label" parent="ScaleControl/StatsPage/ContainerControl/StatsMainContainer/AttributesDisplay/BoxContainer/WisdomContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="ScaleControl/StatsPage/ContainerControl/StatsMainContainer/AttributesDisplay/BoxContainer/WisdomContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="ScaleControl/StatsPage/ContainerControl/StatsMainContainer/AttributesDisplay/BoxContainer/WisdomContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("22_0axhb")
+
+[node name="NameLabel" type="Label" parent="ScaleControl/StatsPage/ContainerControl/StatsMainContainer/AttributesDisplay/BoxContainer/WisdomContainer/HBoxContainer"]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
+size_flags_vertical = 1
 theme = ExtResource("12_dy5pv")
-text = "WIS"
-horizontal_alignment = 1
+text = "is"
+vertical_alignment = 2
 
 [node name="StatLabel" type="Label" parent="ScaleControl/StatsPage/ContainerControl/StatsMainContainer/AttributesDisplay/BoxContainer/WisdomContainer"]
 self_modulate = Color(0.498039, 0, 0, 1)
@@ -1108,7 +1159,7 @@ layout_mode = 2
 size_flags_vertical = 3
 
 [node name="AtkStatsContainer" type="Container" parent="ScaleControl/StatsPage/ContainerControl/StatsMainContainer" node_paths=PackedStringArray("background", "inner_container")]
-custom_minimum_size = Vector2(12, 90)
+custom_minimum_size = Vector2(12, 105)
 layout_mode = 2
 script = ExtResource("16_ep8hk")
 background = NodePath("Background")
@@ -1412,7 +1463,7 @@ layout_mode = 2
 size_flags_vertical = 3
 
 [node name="DefStatsContainer" type="Container" parent="ScaleControl/StatsPage/ContainerControl/StatsMainContainer" node_paths=PackedStringArray("background", "inner_container")]
-custom_minimum_size = Vector2(12, 118)
+custom_minimum_size = Vector2(12, 161)
 layout_mode = 2
 script = ExtResource("16_ep8hk")
 background = NodePath("Background")
