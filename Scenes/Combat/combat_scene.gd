@@ -97,19 +97,24 @@ func load_init_state(map_scene_path:String):
 			else:
 				new_actor = ActorLibrary.get_actor(actor_info['ActorId'])
 		elif actor_info.keys().has("ActorKey"):
-			new_actor = ActorLibrary.create_actor(actor_info['ActorKey'], {})
+			var actor_key = actor_info['ActorKey']
+			if actor_key == "Player1":
+				new_actor = StoryState.get_player_actor()
+			else:
+				new_actor = ActorLibrary.create_actor(actor_key, {})
 		if new_actor:
 			add_actor(new_actor, actor_info.get("FactionId", 1), actor_pos)
 			
 	
 	var player_actor = StoryState.get_player_actor()
-	if !GameState.get_actor(player_actor.Id):
+	if !player_actor or !GameState.get_actor(player_actor.Id):
 		printerr("Player Actor not loaded to GameState")
-	ui_control.set_player_actor(player_actor)
-	var actor_pos = GameState.MapState.get_actor_pos(player_actor)
-	if actor_pos:
-		camera.snap_to_map_pos(actor_pos)
-		camera.zoom = Vector2(2,2)
+	else:
+		ui_control.set_player_actor(player_actor)
+		var actor_pos = GameState.MapState.get_actor_pos(player_actor)
+		if actor_pos:
+			camera.snap_to_map_pos(actor_pos)
+			camera.zoom = Vector2(2,2)
 
 func kill_actor(actor:BaseActor):
 	actor.die()

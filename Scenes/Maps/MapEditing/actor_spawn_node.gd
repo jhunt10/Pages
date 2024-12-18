@@ -12,10 +12,18 @@ enum SpawnBy {Player, Key, Id}
 @export var facing:Direction:
 	set(val):
 		facing = val
-		if facing == Direction.North: self.rotation_degrees = 0
-		elif facing == Direction.East: self.rotation_degrees = 90
-		elif facing == Direction.South: self.rotation_degrees = 180
-		elif facing == Direction.West: self.rotation_degrees = 270
+		if self.vframes == 1:
+			self.frame = 0
+			if facing == Direction.North: self.rotation_degrees = 0
+			elif facing == Direction.East: self.rotation_degrees = 90
+			elif facing == Direction.South: self.rotation_degrees = 180
+			elif facing == Direction.West: self.rotation_degrees = 270
+		else:
+			self.rotation_degrees = 0
+			if facing == Direction.North: self.frame = 12
+			elif facing == Direction.East: self.frame = 24
+			elif facing == Direction.South: self.frame = 0
+			elif facing == Direction.West: self.frame = 36
 
 @export var map_coor:Vector2i:
 	set(val):

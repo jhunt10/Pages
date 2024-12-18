@@ -110,6 +110,8 @@ func _ready() -> void:
 	pass # Replace with function body.
 	
 func set_actor(actor:BaseActor, stat_name:String):
+	if !actor:
+		return
 	if _actor:
 		if _actor.Que.action_que_changed.is_connected(_sync):
 			_actor.Que.action_que_changed.disconnect(_sync)

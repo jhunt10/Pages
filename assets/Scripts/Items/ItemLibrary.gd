@@ -66,9 +66,7 @@ static func save_items():
 	data["PlayerInventory"] = PlayerInventory.list_all_held_item_ids()
 	Instance.save_objects_data("res://saves/Items/_TestItem_ItemSave.json", data)
 
-func _after_loading_saved_objects(saved_data:Dictionary):
-	var player_invetory = saved_data.get("PlayerInventory", [])
-	for id in player_invetory:
-		var item = get_item(id)
-		if item:
-			PlayerInventory.add_item(item)
+
+static func load_items(data:Dictionary):
+	if !Instance: Instance = ItemLibrary.new()
+	Instance._load_objects_saved_data(data)

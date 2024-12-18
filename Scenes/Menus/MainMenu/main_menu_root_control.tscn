@@ -13,18 +13,21 @@ grow_vertical = 2
 alignment = 1
 script = ExtResource("1_ytar2")
 
-[node name="TutorialContainer" type="HBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="TutorialContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
 alignment = 1
 
-[node name="TutorialButton" type="TextureButton" parent="TutorialContainer"]
+[node name="TutorialButton" type="TextureButton" parent="VBoxContainer/TutorialContainer"]
 layout_mode = 2
 texture_normal = ExtResource("1_gojdr")
 texture_pressed = ExtResource("3_78x4c")
 texture_disabled = ExtResource("3_78x4c")
 stretch_mode = 0
 
-[node name="Label" type="Label" parent="TutorialContainer/TutorialButton"]
+[node name="Label" type="Label" parent="VBoxContainer/TutorialContainer/TutorialButton"]
 modulate = Color(0.462291, 0.462291, 0.462291, 1)
 layout_mode = 1
 anchors_preset = 15
@@ -37,18 +40,18 @@ text = "Tutorial"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="StartContainer" type="HBoxContainer" parent="."]
+[node name="StartContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
 alignment = 1
 
-[node name="StartButton" type="TextureButton" parent="StartContainer"]
+[node name="StartButton" type="TextureButton" parent="VBoxContainer/StartContainer"]
 layout_mode = 2
 texture_normal = ExtResource("1_gojdr")
 texture_pressed = ExtResource("3_78x4c")
 texture_disabled = ExtResource("3_78x4c")
 stretch_mode = 0
 
-[node name="Label" type="Label" parent="StartContainer/StartButton"]
+[node name="Label" type="Label" parent="VBoxContainer/StartContainer/StartButton"]
 modulate = Color(0.462291, 0.462291, 0.462291, 1)
 layout_mode = 1
 anchors_preset = 15
@@ -61,18 +64,18 @@ text = "Start"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="CharacterContainer" type="HBoxContainer" parent="."]
+[node name="LoadContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
 alignment = 1
 
-[node name="CharacterButton" type="TextureButton" parent="CharacterContainer"]
+[node name="LoadButton" type="TextureButton" parent="VBoxContainer/LoadContainer"]
 layout_mode = 2
 texture_normal = ExtResource("1_gojdr")
 texture_pressed = ExtResource("3_78x4c")
 texture_disabled = ExtResource("3_78x4c")
 stretch_mode = 0
 
-[node name="Label" type="Label" parent="CharacterContainer/CharacterButton"]
+[node name="Label" type="Label" parent="VBoxContainer/LoadContainer/LoadButton"]
 modulate = Color(0.462291, 0.462291, 0.462291, 1)
 layout_mode = 1
 anchors_preset = 15
@@ -81,22 +84,49 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 32
-text = "Character"
+text = "Load"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="PagesContainer" type="HBoxContainer" parent="."]
+[node name="MoreContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
 alignment = 1
 
-[node name="PagesButton" type="TextureButton" parent="PagesContainer"]
+[node name="MoreButton" type="TextureButton" parent="VBoxContainer/MoreContainer"]
 layout_mode = 2
 texture_normal = ExtResource("1_gojdr")
 texture_pressed = ExtResource("3_78x4c")
 texture_disabled = ExtResource("3_78x4c")
 stretch_mode = 0
 
-[node name="Label" type="Label" parent="PagesContainer/PagesButton"]
+[node name="Label" type="Label" parent="VBoxContainer/MoreContainer/MoreButton"]
+modulate = Color(0.462291, 0.462291, 0.462291, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 32
+text = "More"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="PagesContainer" type="HBoxContainer" parent="VBoxContainer2"]
+layout_mode = 2
+alignment = 1
+
+[node name="PagesButton" type="TextureButton" parent="VBoxContainer2/PagesContainer"]
+layout_mode = 2
+texture_normal = ExtResource("1_gojdr")
+texture_pressed = ExtResource("3_78x4c")
+texture_disabled = ExtResource("3_78x4c")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="VBoxContainer2/PagesContainer/PagesButton"]
 modulate = Color(0.462291, 0.462291, 0.462291, 1)
 layout_mode = 1
 anchors_preset = 15
@@ -109,18 +139,18 @@ text = "Pages"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="EffectsContainer" type="HBoxContainer" parent="."]
+[node name="EffectsContainer" type="HBoxContainer" parent="VBoxContainer2"]
 layout_mode = 2
 alignment = 1
 
-[node name="EffectsButton" type="TextureButton" parent="EffectsContainer"]
+[node name="EffectsButton" type="TextureButton" parent="VBoxContainer2/EffectsContainer"]
 layout_mode = 2
 texture_normal = ExtResource("1_gojdr")
 texture_pressed = ExtResource("3_78x4c")
 texture_disabled = ExtResource("3_78x4c")
 stretch_mode = 0
 
-[node name="Label" type="Label" parent="EffectsContainer/EffectsButton"]
+[node name="Label" type="Label" parent="VBoxContainer2/EffectsContainer/EffectsButton"]
 modulate = Color(0.462291, 0.462291, 0.462291, 1)
 layout_mode = 1
 anchors_preset = 15
@@ -133,18 +163,18 @@ text = "Effects"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="DevToolsContainer" type="HBoxContainer" parent="."]
+[node name="DevToolsContainer" type="HBoxContainer" parent="VBoxContainer2"]
 layout_mode = 2
 alignment = 1
 
-[node name="DevToolsButton" type="TextureButton" parent="DevToolsContainer"]
+[node name="DevToolsButton" type="TextureButton" parent="VBoxContainer2/DevToolsContainer"]
 layout_mode = 2
 texture_normal = ExtResource("1_gojdr")
 texture_pressed = ExtResource("3_78x4c")
 texture_disabled = ExtResource("3_78x4c")
 stretch_mode = 0
 
-[node name="DevLabel" type="Label" parent="DevToolsContainer/DevToolsButton"]
+[node name="DevLabel" type="Label" parent="VBoxContainer2/DevToolsContainer/DevToolsButton"]
 modulate = Color(0.462291, 0.462291, 0.462291, 1)
 layout_mode = 1
 anchors_preset = 15
@@ -155,5 +185,29 @@ grow_vertical = 2
 theme_override_font_sizes/font_size = 32
 text = "Dev Tools
 "
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BackContainer" type="HBoxContainer" parent="VBoxContainer2"]
+layout_mode = 2
+alignment = 1
+
+[node name="BackButton" type="TextureButton" parent="VBoxContainer2/BackContainer"]
+layout_mode = 2
+texture_normal = ExtResource("1_gojdr")
+texture_pressed = ExtResource("3_78x4c")
+texture_disabled = ExtResource("3_78x4c")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="VBoxContainer2/BackContainer/BackButton"]
+modulate = Color(0.462291, 0.462291, 0.462291, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 32
+text = "Back"
 horizontal_alignment = 1
 vertical_alignment = 1

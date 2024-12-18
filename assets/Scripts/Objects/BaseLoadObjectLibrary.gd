@@ -85,8 +85,7 @@ func erase_object(object_id:String):
 	if _loaded_objects.keys().has(object_id):
 		_loaded_objects.erase(object_id)
 
-func save_objects_data(file_path:String, extra_data={}):
-	if LOGGING: print("#### Saving %s Datas to: %s" % [get_object_name(), file_path])
+func build_save_data(extra_data:Dictionary={})->Dictionary:
 	var obj_datas:Dictionary = {}
 	for object_id in _loaded_objects.keys():
 		var object:BaseLoadObject = _loaded_objects[object_id]
@@ -96,6 +95,11 @@ func save_objects_data(file_path:String, extra_data={}):
 			obj_datas[object_id] = data
 	var save_data = extra_data.duplicate(true)
 	save_data['Objects'] = obj_datas
+	return save_data
+
+func save_objects_data(file_path:String, extra_data={}):
+	if LOGGING: print("#### Saving %s Datas to: %s" % [get_object_name(), file_path])
+	var save_data = build_save_data(extra_data)
 	var save_data_string = JSON.stringify(save_data)
 	var file = FileAccess.open(file_path, FileAccess.WRITE)
 	file.store_string(save_data_string)
@@ -131,9 +135,9 @@ func init_load():
 	_load_static_objects()
 	
 	# Load Objects
-	for object_file in _search_for_files(OBJECTS_DATA_DIR, get_data_file_sufix()):
-		if LOGGING: print("# Loading Save file: %s" % [object_file])
-		_load_objects_save_file(object_file)
+	#for object_file in _search_for_files(OBJECTS_DATA_DIR, get_data_file_sufix()):
+		#if LOGGING: print("# Loading Save file: %s" % [object_file])
+		#_load_objects_save_file(object_file)
 	
 	if LOGGING:
 		print("#### DONE Loading %s" % [obj_name])
@@ -233,22 +237,24 @@ func _load_static_objects():
 			if LOGGING: print("# - Loaded Static Object: %s" % [new_object._id])
 
 ## Parse json save file and load to _loaded_objects
-func _load_objects_save_file(file_path:String):
-	var file = FileAccess.open(file_path, FileAccess.READ)
-	var text:String = file.get_as_text()
+func _load_objects_saved_data(saved_datas:Dictionary):
+	#var file = FileAccess.open(file_path, FileAccess.READ)
+	#var text:String = file.get_as_text()
+	#if !text:
+		#return
 	
 	var object_key_name = get_object_key_name()
-	var saved_data:Dictionary = JSON.parse_string(text)
-	var object_datas = saved_data.get("Objects", {})
-	for object_id:String in object_datas.keys():
-		var save_data = object_datas[object_id]
+	#var saved_data:Dictionary = JSON.parse_string(text)
+	#var object_datas = saved_data.get("Objects", {})
+	for object_id:String in saved_datas.keys():
+		var save_data = saved_datas[object_id]
 		var object_key = save_data.get(object_key_name, save_data.get("ObjectKey", null))
 		if !object_key:
-			printerr("%sLibrary._load_object_file: No '%s' or 'ObjectKey' found on object '%s' in: %s" % [ get_object_name(), object_key_name, object_id, file_path])
+			printerr("%sLibrary._load_object_file: No '%s' or 'ObjectKey' found on object '%s' in: %s" % [ get_object_name(), object_key_name, object_id])
 			continue
 		var object_def = get_object_def(object_key)
 		if !object_def:
-			printerr("%sLibrary._load_object_file: No object def found for '%s' on object '%s' in: %s." % [get_object_name(), object_key_name, object_id, file_path])
+			printerr("%sLibrary._load_object_file: No object def found for '%s' on object '%s' in: %s." % [get_object_name(), object_key_name, object_id])
 			continue
 		var script_path = get_object_script_path(object_def)
 		var script = load(script_path)
@@ -267,7 +273,7 @@ func _load_objects_save_file(file_path:String):
 		_loaded_objects[object_id] = new_object
 		if LOGGING: print("# - Loaded Saved Object: %s" % [object_id])
 		new_object.post_creation()
-	_after_loading_saved_objects(saved_data)
+	_after_loading_saved_objects(saved_datas)
 
 func _after_loading_saved_objects(saved_data:Dictionary):
 	pass

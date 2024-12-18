@@ -34,7 +34,7 @@ static func build_action_que(actor:BaseActor, game_state:GameStateData)->Array:
 				attack_page = attack_name
 		if attack_page:
 			action_list.append(attack_page)
-		else:
+		elif path.get("Moves", []).size() > path_index:
 			action_list.append(path['Moves'][path_index])
 			curr_pos = path['Poses'][path_index]
 			path_index += 1

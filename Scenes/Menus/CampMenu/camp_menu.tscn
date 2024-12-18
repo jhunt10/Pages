@@ -10,7 +10,7 @@
 [ext_resource type="Script" path="res://Scenes/Menus/CampMenu/camp_option_button.gd" id="6_5vfat"]
 [ext_resource type="Texture2D" uid="uid://cfdd8rgr4n8dd" path="res://assets/Sprites/UI/BackPatches/FancyBackPatch_BigFrame_128_36.png" id="6_g200m"]
 
-[node name="CampMenu" type="Control" node_paths=PackedStringArray("camp_options_container", "system_options_container", "quest_button", "character_button", "system_button", "sys_back_button")]
+[node name="CampMenu" type="Control" node_paths=PackedStringArray("camp_options_container", "system_options_container", "quest_button", "character_button", "system_button", "sys_back_button", "sys_save_button", "sys_load_button", "sys_debug_button")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -24,6 +24,9 @@ quest_button = NodePath("CampOptionsContainer/MainOptionsContainer/QuestOptionBu
 character_button = NodePath("CampOptionsContainer/MainOptionsContainer/PrepareOptionButton")
 system_button = NodePath("CampOptionsContainer/MainOptionsContainer/SystemOptionButton")
 sys_back_button = NodePath("CampOptionsContainer/SystemOptionsContainer/Sys_BackOptionButton")
+sys_save_button = NodePath("CampOptionsContainer/SystemOptionsContainer/Sys_SaveOptionButton")
+sys_load_button = NodePath("CampOptionsContainer/SystemOptionsContainer/Sys_LoadOptionButton")
+sys_debug_button = NodePath("CampOptionsContainer/SystemOptionsContainer/Sys_DebugOptionButton")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="."]
 layout_mode = 1
@@ -98,6 +101,7 @@ axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
 
 [node name="MainOptionsContainer" type="VBoxContainer" parent="CampOptionsContainer"]
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -367,7 +371,6 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="SystemOptionsContainer" type="VBoxContainer" parent="CampOptionsContainer"]
-visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -385,9 +388,132 @@ self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Sys_BackOptionButton" type="Control" parent="CampOptionsContainer/SystemOptionsContainer" node_paths=PackedStringArray("button", "highlight", "label")]
+[node name="Sys_DebugOptionButton" type="Control" parent="CampOptionsContainer/SystemOptionsContainer" node_paths=PackedStringArray("button", "highlight", "label")]
+custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
-size_flags_vertical = 3
+script = ExtResource("6_5vfat")
+button = NodePath("Button")
+highlight = NodePath("TitleLabel/ColorRect")
+label = NodePath("TitleLabel")
+text = "Debug"
+
+[node name="TitleLabel" type="Label" parent="CampOptionsContainer/SystemOptionsContainer/Sys_DebugOptionButton"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 0
+offset_right = 150.0
+offset_bottom = 60.0
+theme = ExtResource("3_ufdhk")
+theme_override_font_sizes/font_size = 48
+text = "Debug"
+
+[node name="ColorRect" type="ColorRect" parent="CampOptionsContainer/SystemOptionsContainer/Sys_DebugOptionButton/TitleLabel"]
+custom_minimum_size = Vector2(0, 3)
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0.498039, 0, 0, 1)
+
+[node name="Button" type="Button" parent="CampOptionsContainer/SystemOptionsContainer/Sys_DebugOptionButton"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 4.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Sys_LoadOptionButton" type="Control" parent="CampOptionsContainer/SystemOptionsContainer" node_paths=PackedStringArray("button", "highlight", "label")]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+script = ExtResource("6_5vfat")
+button = NodePath("Button")
+highlight = NodePath("TitleLabel/ColorRect")
+label = NodePath("TitleLabel")
+text = "Load"
+
+[node name="TitleLabel" type="Label" parent="CampOptionsContainer/SystemOptionsContainer/Sys_LoadOptionButton"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 0
+offset_right = 120.0
+offset_bottom = 60.0
+theme = ExtResource("3_ufdhk")
+theme_override_font_sizes/font_size = 48
+text = "Load"
+
+[node name="ColorRect" type="ColorRect" parent="CampOptionsContainer/SystemOptionsContainer/Sys_LoadOptionButton/TitleLabel"]
+custom_minimum_size = Vector2(0, 3)
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0.498039, 0, 0, 1)
+
+[node name="Button" type="Button" parent="CampOptionsContainer/SystemOptionsContainer/Sys_LoadOptionButton"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 4.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Sys_SaveOptionButton" type="Control" parent="CampOptionsContainer/SystemOptionsContainer" node_paths=PackedStringArray("button", "highlight", "label")]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+script = ExtResource("6_5vfat")
+button = NodePath("Button")
+highlight = NodePath("TitleLabel/ColorRect")
+label = NodePath("TitleLabel")
+text = "Save"
+
+[node name="TitleLabel" type="Label" parent="CampOptionsContainer/SystemOptionsContainer/Sys_SaveOptionButton"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 0
+offset_right = 120.0
+offset_bottom = 60.0
+theme = ExtResource("3_ufdhk")
+theme_override_font_sizes/font_size = 48
+text = "Save"
+
+[node name="ColorRect" type="ColorRect" parent="CampOptionsContainer/SystemOptionsContainer/Sys_SaveOptionButton/TitleLabel"]
+custom_minimum_size = Vector2(0, 3)
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0.498039, 0, 0, 1)
+
+[node name="Button" type="Button" parent="CampOptionsContainer/SystemOptionsContainer/Sys_SaveOptionButton"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 4.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Sys_BackOptionButton" type="Control" parent="CampOptionsContainer/SystemOptionsContainer" node_paths=PackedStringArray("button", "highlight", "label")]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
 script = ExtResource("6_5vfat")
 button = NodePath("Button")
 highlight = NodePath("TitleLabel/ColorRect")
@@ -399,7 +525,6 @@ self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 0
 offset_right = 120.0
 offset_bottom = 60.0
-scale = Vector2(1e-05, 1e-05)
 theme = ExtResource("3_ufdhk")
 theme_override_font_sizes/font_size = 48
 text = "Back"

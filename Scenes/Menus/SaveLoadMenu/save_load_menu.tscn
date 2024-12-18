@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bdwsbeo8w1f1k"]
+[gd_scene load_steps=20 format=3 uid="uid://bdwsbeo8w1f1k"]
 
 [ext_resource type="Script" path="res://Scenes/Menus/SaveLoadMenu/save_load_menu.gd" id="1_gp8dy"]
 [ext_resource type="Texture2D" uid="uid://mpwjrtfjnbth" path="res://Scenes/Menus/CharacterMenu/BookBackground.png" id="1_v5dju"]
@@ -11,45 +11,100 @@
 [ext_resource type="Texture2D" uid="uid://cdy53ml2tuvc8" path="res://assets/Sprites/UI/BackPatches/FancyBackPatch_Frame_64_18.png" id="6_k47kv"]
 [ext_resource type="Texture2D" uid="uid://dj76get1aahli" path="res://Scenes/Menus/SaveLoadMenu/Button_Patch_32_6.png" id="7_iovtk"]
 [ext_resource type="Script" path="res://Scenes/Menus/SaveLoadMenu/party_container.gd" id="10_vurx7"]
+[ext_resource type="Texture2D" uid="uid://c46ah48rf6j3w" path="res://Scenes/Menus/CharacterMenu/TabBackground.png" id="12_w8sf7"]
+[ext_resource type="Texture2D" uid="uid://bkps664mkkmfn" path="res://assets/Sprites/UI/DevTools/small_x.png" id="13_g3hhf"]
+[ext_resource type="Texture2D" uid="uid://io35wpu802fp" path="res://assets/Sprites/UI/BackPatches/Patch_64_12.png" id="14_ql31q"]
+[ext_resource type="Script" path="res://Scenes/Menus/SaveLoadMenu/save_as_box.gd" id="15_1toay"]
+[ext_resource type="Texture2D" uid="uid://b0kicr71nqhmi" path="res://Scenes/Menus/StartCharacterSelectMenu/Button.png" id="16_k3e7j"]
+[ext_resource type="Texture2D" uid="uid://bn3rws8kuwp30" path="res://Scenes/Menus/StartCharacterSelectMenu/ButtonPressed.png" id="17_6a5ey"]
+[ext_resource type="Texture2D" uid="uid://gemu0x8hrvub" path="res://Scenes/Menus/StartCharacterSelectMenu/ButtonHover.png" id="18_tmbc6"]
 
-[node name="SaveLoadMenu" type="Control" node_paths=PackedStringArray("menu_title_label", "save_load_button_label", "premade_save_slot", "save_slot_new", "slots_container", "sel_save_name_label", "sel_pretty_pic", "sel_save_details_container", "sel_save_date_label", "sel_save_loaction_label", "sel_runtime_label", "sel_party_container")]
-custom_minimum_size = Vector2(600, 420)
+[sub_resource type="GDScript" id="GDScript_bswgy"]
+script/source = "extends TextureRect
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+"
+
+[node name="SaveLoadMenu" type="Control" node_paths=PackedStringArray("scale_control", "close_button", "menu_title_label", "premade_save_slot", "save_slot_new", "slots_container", "sel_save_name_label", "sel_pretty_pic", "sel_save_details_container", "sel_save_date_label", "sel_save_loaction_label", "sel_runtime_label", "sel_party_container", "save_popup", "save_button", "save_button_label", "save_button_highlight")]
 layout_mode = 3
-anchors_preset = 0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_gp8dy")
-menu_title_label = NodePath("TitlePatchRect/HBoxContainer/MenuTitleLabel")
-save_load_button_label = NodePath("SaveDetailsControl/Control2/Label")
-premade_save_slot = NodePath("ScrollContainer/VBoxContainer/PreMade_SaveSlotContainer")
-save_slot_new = NodePath("ScrollContainer/VBoxContainer/NewSaveSlotContainer")
-slots_container = NodePath("ScrollContainer/VBoxContainer")
-sel_save_name_label = NodePath("SaveDetailsControl/NinePatchRect/HBoxContainer/SaveNameLabel")
-sel_pretty_pic = NodePath("SaveDetailsControl/CampPicControl/PrettyPictureRect")
-sel_save_details_container = NodePath("SaveDetailsControl/NinePatchRect2/VBoxContainer")
-sel_save_date_label = NodePath("SaveDetailsControl/NinePatchRect2/VBoxContainer/TimeDateContainer/SaveDateLabel")
-sel_save_loaction_label = NodePath("SaveDetailsControl/NinePatchRect2/VBoxContainer/LocationContainer/LocationNameLabel")
-sel_runtime_label = NodePath("SaveDetailsControl/NinePatchRect2/VBoxContainer/TimeDateContainer/RuntmieLabel")
-sel_party_container = NodePath("SaveDetailsControl/NinePatchRect2/VBoxContainer/PartyContainer")
+scale_control = NodePath("ScaleControl")
+close_button = NodePath("ScaleControl/TabsControl/ExitTabButton/Button")
+menu_title_label = NodePath("ScaleControl/TitlePatchRect/HBoxContainer/MenuTitleLabel")
+premade_save_slot = NodePath("ScaleControl/ScrollContainer/VBoxContainer/PreMade_SaveSlotContainer")
+save_slot_new = NodePath("ScaleControl/ScrollContainer/VBoxContainer/NewSaveSlotContainer")
+slots_container = NodePath("ScaleControl/ScrollContainer/VBoxContainer")
+sel_save_name_label = NodePath("ScaleControl/SaveDetailsControl/NinePatchRect/HBoxContainer/SaveNameLabel")
+sel_pretty_pic = NodePath("ScaleControl/SaveDetailsControl/CampPicControl/PrettyPictureRect")
+sel_save_details_container = NodePath("ScaleControl/SaveDetailsControl/NinePatchRect2/VBoxContainer")
+sel_save_date_label = NodePath("ScaleControl/SaveDetailsControl/NinePatchRect2/VBoxContainer/TimeDateContainer/SaveDateLabel")
+sel_save_loaction_label = NodePath("ScaleControl/SaveDetailsControl/NinePatchRect2/VBoxContainer/LocationContainer/LocationNameLabel")
+sel_runtime_label = NodePath("ScaleControl/SaveDetailsControl/NinePatchRect2/VBoxContainer/TimeDateContainer/RuntmieLabel")
+sel_party_container = NodePath("ScaleControl/SaveDetailsControl/NinePatchRect2/VBoxContainer/PartyContainer")
+save_popup = NodePath("ScaleControl/SaveAsBox")
+save_button = NodePath("ScaleControl/SaveDetailsControl/SaveButton/Button")
+save_button_label = NodePath("ScaleControl/SaveDetailsControl/SaveButton/Label")
+save_button_highlight = NodePath("ScaleControl/SaveDetailsControl/SaveButton/Highlight")
 save_mode = true
 
-[node name="Background" type="TextureRect" parent="."]
+[node name="BackgroundShade" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.705882)
+
+[node name="ScaleControl" type="Control" parent="."]
+custom_minimum_size = Vector2(600, 420)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -210.0
+offset_right = 300.0
+offset_bottom = 210.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(300, 210)
+
+[node name="Background" type="TextureRect" parent="ScaleControl"]
 layout_mode = 0
 offset_right = 600.0
 offset_bottom = 420.0
 texture = ExtResource("1_v5dju")
 
-[node name="ScrollBar" parent="." instance=ExtResource("2_1xa6p")]
+[node name="ScrollBar" parent="ScaleControl" instance=ExtResource("2_1xa6p")]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = -58.0
 offset_top = 64.0
 offset_right = -26.0
 offset_bottom = -24.0
 grow_horizontal = 0
 grow_vertical = 2
 
-[node name="TitlePatchRect" type="NinePatchRect" parent="."]
+[node name="TitlePatchRect" type="NinePatchRect" parent="ScaleControl"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
@@ -57,6 +112,7 @@ anchor_right = 1.0
 offset_left = 16.0
 offset_top = 20.0
 offset_right = -32.0
+offset_bottom = 56.0
 grow_horizontal = 2
 texture = ExtResource("3_cirb2")
 region_rect = Rect2(0, 0, 64, 64)
@@ -65,7 +121,7 @@ patch_margin_top = 18
 patch_margin_right = 18
 patch_margin_bottom = 18
 
-[node name="HBoxContainer" type="HBoxContainer" parent="TitlePatchRect"]
+[node name="HBoxContainer" type="HBoxContainer" parent="ScaleControl/TitlePatchRect"]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -77,7 +133,7 @@ offset_bottom = -8.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="MenuTitleLabel" type="Label" parent="TitlePatchRect/HBoxContainer"]
+[node name="MenuTitleLabel" type="Label" parent="ScaleControl/TitlePatchRect/HBoxContainer"]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -88,7 +144,7 @@ text = "Save Game"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ScrollContainer" type="ScrollContainer" parent="."]
+[node name="ScrollContainer" type="ScrollContainer" parent="ScaleControl"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
@@ -103,12 +159,12 @@ grow_vertical = 2
 horizontal_scroll_mode = 3
 vertical_scroll_mode = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="ScaleControl/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 2
 
-[node name="NewSaveSlotContainer" type="NinePatchRect" parent="ScrollContainer/VBoxContainer" node_paths=PackedStringArray("name_label", "date_time_label", "button", "highlight")]
+[node name="NewSaveSlotContainer" type="NinePatchRect" parent="ScaleControl/ScrollContainer/VBoxContainer" node_paths=PackedStringArray("name_label", "date_time_label", "button", "highlight")]
 custom_minimum_size = Vector2(0, 48)
 layout_mode = 2
 texture = ExtResource("3_cirb2")
@@ -123,7 +179,7 @@ date_time_label = NodePath("Container/SaveDateTimeLabel")
 button = NodePath("Button")
 highlight = NodePath("Highlight")
 
-[node name="Highlight" type="NinePatchRect" parent="ScrollContainer/VBoxContainer/NewSaveSlotContainer"]
+[node name="Highlight" type="NinePatchRect" parent="ScaleControl/ScrollContainer/VBoxContainer/NewSaveSlotContainer"]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -138,7 +194,7 @@ patch_margin_top = 11
 patch_margin_right = 11
 patch_margin_bottom = 11
 
-[node name="Container" type="BoxContainer" parent="ScrollContainer/VBoxContainer/NewSaveSlotContainer"]
+[node name="Container" type="BoxContainer" parent="ScaleControl/ScrollContainer/VBoxContainer/NewSaveSlotContainer"]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -153,7 +209,7 @@ theme_override_constants/separation = 0
 alignment = 1
 vertical = true
 
-[node name="SaveNameLabel" type="Label" parent="ScrollContainer/VBoxContainer/NewSaveSlotContainer/Container"]
+[node name="SaveNameLabel" type="Label" parent="ScaleControl/ScrollContainer/VBoxContainer/NewSaveSlotContainer/Container"]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("4_6ghyw")
@@ -161,13 +217,13 @@ theme_override_font_sizes/font_size = 24
 text = "--New Save--"
 horizontal_alignment = 1
 
-[node name="ColorRect" type="ColorRect" parent="ScrollContainer/VBoxContainer/NewSaveSlotContainer/Container"]
+[node name="ColorRect" type="ColorRect" parent="ScaleControl/ScrollContainer/VBoxContainer/NewSaveSlotContainer/Container"]
 visible = false
 self_modulate = Color(0.498039, 0, 0, 1)
 custom_minimum_size = Vector2(0, 2)
 layout_mode = 2
 
-[node name="SaveDateTimeLabel" type="Label" parent="ScrollContainer/VBoxContainer/NewSaveSlotContainer/Container"]
+[node name="SaveDateTimeLabel" type="Label" parent="ScaleControl/ScrollContainer/VBoxContainer/NewSaveSlotContainer/Container"]
 visible = false
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
@@ -176,7 +232,7 @@ theme_override_font_sizes/font_size = 14
 text = "12:00 1-1-2024"
 horizontal_alignment = 1
 
-[node name="Button" type="Button" parent="ScrollContainer/VBoxContainer/NewSaveSlotContainer"]
+[node name="Button" type="Button" parent="ScaleControl/ScrollContainer/VBoxContainer/NewSaveSlotContainer"]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -185,7 +241,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="PreMade_SaveSlotContainer" type="NinePatchRect" parent="ScrollContainer/VBoxContainer" node_paths=PackedStringArray("name_label", "date_time_label", "button", "highlight")]
+[node name="PreMade_SaveSlotContainer" type="NinePatchRect" parent="ScaleControl/ScrollContainer/VBoxContainer" node_paths=PackedStringArray("name_label", "date_time_label", "button", "highlight")]
 custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
 texture = ExtResource("3_cirb2")
@@ -200,7 +256,7 @@ date_time_label = NodePath("Container/SaveDateTimeLabel")
 button = NodePath("Button")
 highlight = NodePath("Highlight")
 
-[node name="Highlight" type="NinePatchRect" parent="ScrollContainer/VBoxContainer/PreMade_SaveSlotContainer"]
+[node name="Highlight" type="NinePatchRect" parent="ScaleControl/ScrollContainer/VBoxContainer/PreMade_SaveSlotContainer"]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -215,7 +271,7 @@ patch_margin_top = 11
 patch_margin_right = 11
 patch_margin_bottom = 11
 
-[node name="Container" type="BoxContainer" parent="ScrollContainer/VBoxContainer/PreMade_SaveSlotContainer"]
+[node name="Container" type="BoxContainer" parent="ScaleControl/ScrollContainer/VBoxContainer/PreMade_SaveSlotContainer"]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -229,7 +285,7 @@ grow_vertical = 2
 theme_override_constants/separation = 0
 vertical = true
 
-[node name="SaveNameLabel" type="Label" parent="ScrollContainer/VBoxContainer/PreMade_SaveSlotContainer/Container"]
+[node name="SaveNameLabel" type="Label" parent="ScaleControl/ScrollContainer/VBoxContainer/PreMade_SaveSlotContainer/Container"]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("4_6ghyw")
@@ -237,12 +293,12 @@ theme_override_font_sizes/font_size = 24
 text = "Save Name"
 horizontal_alignment = 1
 
-[node name="ColorRect" type="ColorRect" parent="ScrollContainer/VBoxContainer/PreMade_SaveSlotContainer/Container"]
+[node name="ColorRect" type="ColorRect" parent="ScaleControl/ScrollContainer/VBoxContainer/PreMade_SaveSlotContainer/Container"]
 self_modulate = Color(0.498039, 0, 0, 1)
 custom_minimum_size = Vector2(0, 2)
 layout_mode = 2
 
-[node name="SaveDateTimeLabel" type="Label" parent="ScrollContainer/VBoxContainer/PreMade_SaveSlotContainer/Container"]
+[node name="SaveDateTimeLabel" type="Label" parent="ScaleControl/ScrollContainer/VBoxContainer/PreMade_SaveSlotContainer/Container"]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("4_6ghyw")
@@ -250,7 +306,7 @@ theme_override_font_sizes/font_size = 14
 text = "12:00 1-1-2024 "
 horizontal_alignment = 1
 
-[node name="Button" type="Button" parent="ScrollContainer/VBoxContainer/PreMade_SaveSlotContainer"]
+[node name="Button" type="Button" parent="ScaleControl/ScrollContainer/VBoxContainer/PreMade_SaveSlotContainer"]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -259,7 +315,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="SaveDetailsControl" type="Control" parent="."]
+[node name="SaveDetailsControl" type="Control" parent="ScaleControl"]
 layout_mode = 1
 anchor_right = 0.5
 anchor_bottom = 1.0
@@ -268,7 +324,7 @@ offset_top = 20.0
 offset_right = -16.0
 offset_bottom = -32.0
 
-[node name="NinePatchRect" type="NinePatchRect" parent="SaveDetailsControl"]
+[node name="NinePatchRect" type="NinePatchRect" parent="ScaleControl/SaveDetailsControl"]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -280,7 +336,7 @@ patch_margin_top = 18
 patch_margin_right = 18
 patch_margin_bottom = 18
 
-[node name="HBoxContainer" type="HBoxContainer" parent="SaveDetailsControl/NinePatchRect"]
+[node name="HBoxContainer" type="HBoxContainer" parent="ScaleControl/SaveDetailsControl/NinePatchRect"]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -292,7 +348,7 @@ offset_bottom = -8.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="SaveNameLabel" type="Label" parent="SaveDetailsControl/NinePatchRect/HBoxContainer"]
+[node name="SaveNameLabel" type="Label" parent="ScaleControl/SaveDetailsControl/NinePatchRect/HBoxContainer"]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -303,7 +359,7 @@ text = "Save Name"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="CampPicControl" type="Control" parent="SaveDetailsControl"]
+[node name="CampPicControl" type="Control" parent="ScaleControl/SaveDetailsControl"]
 clip_contents = true
 layout_mode = 1
 anchor_right = 1.0
@@ -311,7 +367,7 @@ anchor_bottom = 0.5
 offset_top = 40.0
 offset_bottom = -4.0
 
-[node name="PrettyPictureRect" type="TextureRect" parent="SaveDetailsControl/CampPicControl"]
+[node name="PrettyPictureRect" type="TextureRect" parent="ScaleControl/SaveDetailsControl/CampPicControl"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -322,7 +378,7 @@ texture = ExtResource("5_gsdij")
 expand_mode = 3
 stretch_mode = 5
 
-[node name="PictureBackground" type="NinePatchRect" parent="SaveDetailsControl/CampPicControl"]
+[node name="PictureBackground" type="NinePatchRect" parent="ScaleControl/SaveDetailsControl/CampPicControl"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -338,7 +394,7 @@ patch_margin_bottom = 18
 axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
 
-[node name="NinePatchRect2" type="NinePatchRect" parent="SaveDetailsControl"]
+[node name="NinePatchRect2" type="NinePatchRect" parent="ScaleControl/SaveDetailsControl"]
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 0.5
@@ -354,7 +410,7 @@ patch_margin_top = 18
 patch_margin_right = 18
 patch_margin_bottom = 18
 
-[node name="VBoxContainer" type="VBoxContainer" parent="SaveDetailsControl/NinePatchRect2"]
+[node name="VBoxContainer" type="VBoxContainer" parent="ScaleControl/SaveDetailsControl/NinePatchRect2"]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -367,16 +423,16 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 1
 
-[node name="TimeDateContainer" type="HBoxContainer" parent="SaveDetailsControl/NinePatchRect2/VBoxContainer"]
+[node name="TimeDateContainer" type="HBoxContainer" parent="ScaleControl/SaveDetailsControl/NinePatchRect2/VBoxContainer"]
 layout_mode = 2
 
-[node name="RuntmieLabel" type="Label" parent="SaveDetailsControl/NinePatchRect2/VBoxContainer/TimeDateContainer"]
+[node name="RuntmieLabel" type="Label" parent="ScaleControl/SaveDetailsControl/NinePatchRect2/VBoxContainer/TimeDateContainer"]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("4_6ghyw")
 text = "06:09:03"
 
-[node name="SaveDateLabel" type="Label" parent="SaveDetailsControl/NinePatchRect2/VBoxContainer/TimeDateContainer"]
+[node name="SaveDateLabel" type="Label" parent="ScaleControl/SaveDetailsControl/NinePatchRect2/VBoxContainer/TimeDateContainer"]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -384,21 +440,21 @@ theme = ExtResource("4_6ghyw")
 text = "1-1-2024 24:00 "
 horizontal_alignment = 2
 
-[node name="ColorRect" type="ColorRect" parent="SaveDetailsControl/NinePatchRect2/VBoxContainer"]
+[node name="ColorRect" type="ColorRect" parent="ScaleControl/SaveDetailsControl/NinePatchRect2/VBoxContainer"]
 self_modulate = Color(0.498039, 0, 0, 1)
 custom_minimum_size = Vector2(0, 2)
 layout_mode = 2
 
-[node name="LocationContainer" type="HBoxContainer" parent="SaveDetailsControl/NinePatchRect2/VBoxContainer"]
+[node name="LocationContainer" type="HBoxContainer" parent="ScaleControl/SaveDetailsControl/NinePatchRect2/VBoxContainer"]
 layout_mode = 2
 
-[node name="LocationTitleLabel" type="Label" parent="SaveDetailsControl/NinePatchRect2/VBoxContainer/LocationContainer"]
+[node name="LocationTitleLabel" type="Label" parent="ScaleControl/SaveDetailsControl/NinePatchRect2/VBoxContainer/LocationContainer"]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("4_6ghyw")
 text = "Location:"
 
-[node name="LocationNameLabel" type="Label" parent="SaveDetailsControl/NinePatchRect2/VBoxContainer/LocationContainer"]
+[node name="LocationNameLabel" type="Label" parent="ScaleControl/SaveDetailsControl/NinePatchRect2/VBoxContainer/LocationContainer"]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -406,25 +462,25 @@ theme = ExtResource("4_6ghyw")
 text = "Somewhere"
 horizontal_alignment = 2
 
-[node name="PartyContainer" type="HBoxContainer" parent="SaveDetailsControl/NinePatchRect2/VBoxContainer" node_paths=PackedStringArray("names_container", "spacer_container", "level_container")]
+[node name="PartyContainer" type="HBoxContainer" parent="ScaleControl/SaveDetailsControl/NinePatchRect2/VBoxContainer" node_paths=PackedStringArray("names_container", "spacer_container", "level_container")]
 layout_mode = 2
 script = ExtResource("10_vurx7")
 names_container = NodePath("PartyNamesContainer")
 spacer_container = NodePath("PartyLevelsContainer2")
 level_container = NodePath("PartyLevelsContainer")
 
-[node name="PartyLabel" type="Label" parent="SaveDetailsControl/NinePatchRect2/VBoxContainer/PartyContainer"]
+[node name="PartyLabel" type="Label" parent="ScaleControl/SaveDetailsControl/NinePatchRect2/VBoxContainer/PartyContainer"]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 size_flags_vertical = 1
 theme = ExtResource("4_6ghyw")
 text = "Party:    "
 
-[node name="PartyNamesContainer" type="VBoxContainer" parent="SaveDetailsControl/NinePatchRect2/VBoxContainer/PartyContainer"]
+[node name="PartyNamesContainer" type="VBoxContainer" parent="ScaleControl/SaveDetailsControl/NinePatchRect2/VBoxContainer/PartyContainer"]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="PartyActorLabel" type="Label" parent="SaveDetailsControl/NinePatchRect2/VBoxContainer/PartyContainer/PartyNamesContainer"]
+[node name="PartyActorLabel" type="Label" parent="ScaleControl/SaveDetailsControl/NinePatchRect2/VBoxContainer/PartyContainer/PartyNamesContainer"]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -432,7 +488,7 @@ theme = ExtResource("4_6ghyw")
 text = "Actor A"
 horizontal_alignment = 2
 
-[node name="PartyActorLabel2" type="Label" parent="SaveDetailsControl/NinePatchRect2/VBoxContainer/PartyContainer/PartyNamesContainer"]
+[node name="PartyActorLabel2" type="Label" parent="ScaleControl/SaveDetailsControl/NinePatchRect2/VBoxContainer/PartyContainer/PartyNamesContainer"]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -440,16 +496,16 @@ theme = ExtResource("4_6ghyw")
 text = "Actor B"
 horizontal_alignment = 2
 
-[node name="PartyLevelsContainer2" type="VBoxContainer" parent="SaveDetailsControl/NinePatchRect2/VBoxContainer/PartyContainer"]
+[node name="PartyLevelsContainer2" type="VBoxContainer" parent="ScaleControl/SaveDetailsControl/NinePatchRect2/VBoxContainer/PartyContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 0
 
-[node name="Control" type="Control" parent="SaveDetailsControl/NinePatchRect2/VBoxContainer/PartyContainer/PartyLevelsContainer2"]
+[node name="Control" type="Control" parent="ScaleControl/SaveDetailsControl/NinePatchRect2/VBoxContainer/PartyContainer/PartyLevelsContainer2"]
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 
-[node name="ColorRect" type="ColorRect" parent="SaveDetailsControl/NinePatchRect2/VBoxContainer/PartyContainer/PartyLevelsContainer2/Control"]
+[node name="ColorRect" type="ColorRect" parent="ScaleControl/SaveDetailsControl/NinePatchRect2/VBoxContainer/PartyContainer/PartyLevelsContainer2/Control"]
 self_modulate = Color(0.498039, 0, 0, 1)
 custom_minimum_size = Vector2(0, 2)
 layout_mode = 1
@@ -462,11 +518,11 @@ offset_bottom = -3.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="Control2" type="Control" parent="SaveDetailsControl/NinePatchRect2/VBoxContainer/PartyContainer/PartyLevelsContainer2"]
+[node name="Control2" type="Control" parent="ScaleControl/SaveDetailsControl/NinePatchRect2/VBoxContainer/PartyContainer/PartyLevelsContainer2"]
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 
-[node name="ColorRect" type="ColorRect" parent="SaveDetailsControl/NinePatchRect2/VBoxContainer/PartyContainer/PartyLevelsContainer2/Control2"]
+[node name="ColorRect" type="ColorRect" parent="ScaleControl/SaveDetailsControl/NinePatchRect2/VBoxContainer/PartyContainer/PartyLevelsContainer2/Control2"]
 self_modulate = Color(0.498039, 0, 0, 1)
 custom_minimum_size = Vector2(0, 2)
 layout_mode = 1
@@ -479,11 +535,11 @@ offset_bottom = -3.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="PartyLevelsContainer" type="VBoxContainer" parent="SaveDetailsControl/NinePatchRect2/VBoxContainer/PartyContainer"]
+[node name="PartyLevelsContainer" type="VBoxContainer" parent="ScaleControl/SaveDetailsControl/NinePatchRect2/VBoxContainer/PartyContainer"]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="PartyActorLabel" type="Label" parent="SaveDetailsControl/NinePatchRect2/VBoxContainer/PartyContainer/PartyLevelsContainer"]
+[node name="PartyActorLabel" type="Label" parent="ScaleControl/SaveDetailsControl/NinePatchRect2/VBoxContainer/PartyContainer/PartyLevelsContainer"]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -491,7 +547,7 @@ theme = ExtResource("4_6ghyw")
 text = "lv 69"
 horizontal_alignment = 2
 
-[node name="PartyActorLabel2" type="Label" parent="SaveDetailsControl/NinePatchRect2/VBoxContainer/PartyContainer/PartyLevelsContainer"]
+[node name="PartyActorLabel2" type="Label" parent="ScaleControl/SaveDetailsControl/NinePatchRect2/VBoxContainer/PartyContainer/PartyLevelsContainer"]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -499,7 +555,7 @@ theme = ExtResource("4_6ghyw")
 text = "lv 4"
 horizontal_alignment = 2
 
-[node name="Control" type="Control" parent="SaveDetailsControl"]
+[node name="Control" type="Control" parent="ScaleControl/SaveDetailsControl"]
 layout_mode = 1
 anchor_top = 0.9
 anchor_right = 0.3
@@ -507,7 +563,7 @@ anchor_bottom = 1.0
 offset_top = 4.0
 offset_right = -2.0
 
-[node name="NinePatchRect3" type="NinePatchRect" parent="SaveDetailsControl/Control"]
+[node name="NinePatchRect3" type="NinePatchRect" parent="ScaleControl/SaveDetailsControl/Control"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -521,7 +577,7 @@ patch_margin_top = 19
 patch_margin_right = 19
 patch_margin_bottom = 19
 
-[node name="Label" type="Label" parent="SaveDetailsControl/Control"]
+[node name="Label" type="Label" parent="ScaleControl/SaveDetailsControl/Control"]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 1
 anchors_preset = 15
@@ -536,7 +592,7 @@ text = "Delete"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Control2" type="Control" parent="SaveDetailsControl"]
+[node name="SaveButton" type="Control" parent="ScaleControl/SaveDetailsControl"]
 layout_mode = 1
 anchor_left = 0.3
 anchor_top = 0.9
@@ -545,7 +601,7 @@ anchor_bottom = 1.0
 offset_left = 2.0
 offset_top = 4.0
 
-[node name="NinePatchRect3" type="NinePatchRect" parent="SaveDetailsControl/Control2"]
+[node name="NinePatchRect3" type="NinePatchRect" parent="ScaleControl/SaveDetailsControl/SaveButton"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -559,7 +615,22 @@ patch_margin_top = 19
 patch_margin_right = 19
 patch_margin_bottom = 19
 
-[node name="Label" type="Label" parent="SaveDetailsControl/Control2"]
+[node name="Highlight" type="NinePatchRect" parent="ScaleControl/SaveDetailsControl/SaveButton"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_5sm3v")
+region_rect = Rect2(0, 0, 24, 24)
+patch_margin_left = 11
+patch_margin_top = 11
+patch_margin_right = 11
+patch_margin_bottom = 11
+
+[node name="Label" type="Label" parent="ScaleControl/SaveDetailsControl/SaveButton"]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 1
 anchors_preset = 15
@@ -570,6 +641,143 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 theme = ExtResource("4_6ghyw")
+text = "Save"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="ScaleControl/SaveDetailsControl/SaveButton"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TabsControl" type="Control" parent="ScaleControl"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 1
+
+[node name="ExitTabButton" type="TextureRect" parent="ScaleControl/TabsControl"]
+self_modulate = Color(0.795186, 0.323344, 0.272967, 1)
+layout_mode = 0
+offset_left = 653.0
+offset_top = 85.0
+offset_right = 717.0
+offset_bottom = 149.0
+rotation = 3.14159
+texture = ExtResource("12_w8sf7")
+script = SubResource("GDScript_bswgy")
+
+[node name="TextureRect" type="TextureRect" parent="ScaleControl/TabsControl/ExitTabButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -15.9999
+offset_right = 3.99996
+offset_bottom = 5.34058e-05
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2, 2)
+texture = ExtResource("13_g3hhf")
+stretch_mode = 3
+
+[node name="Button" type="Button" parent="ScaleControl/TabsControl/ExitTabButton"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SaveAsBox" type="NinePatchRect" parent="ScaleControl" node_paths=PackedStringArray("name_input", "save_button", "back_button")]
+z_index = 1
+custom_minimum_size = Vector2(300, 150)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -150.0
+offset_top = 64.0
+offset_right = 150.0
+offset_bottom = 214.0
+grow_horizontal = 2
+texture = ExtResource("14_ql31q")
+patch_margin_left = 12
+patch_margin_top = 12
+patch_margin_right = 12
+patch_margin_bottom = 12
+script = ExtResource("15_1toay")
+name_input = NodePath("VBoxContainer/LineEdit")
+save_button = NodePath("VBoxContainer/HBoxContainer/YesButton")
+back_button = NodePath("VBoxContainer/HBoxContainer/NoButton")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScaleControl/SaveAsBox"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="ScaleControl/SaveAsBox/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Save as"
+horizontal_alignment = 1
+
+[node name="LineEdit" type="LineEdit" parent="ScaleControl/SaveAsBox/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ScaleControl/SaveAsBox/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="NoButton" type="TextureButton" parent="ScaleControl/SaveAsBox/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+texture_normal = ExtResource("16_k3e7j")
+texture_pressed = ExtResource("17_6a5ey")
+texture_hover = ExtResource("18_tmbc6")
+
+[node name="Label" type="Label" parent="ScaleControl/SaveAsBox/VBoxContainer/HBoxContainer/NoButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 24
+text = "Back"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="YesButton" type="TextureButton" parent="ScaleControl/SaveAsBox/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+texture_normal = ExtResource("16_k3e7j")
+texture_pressed = ExtResource("17_6a5ey")
+texture_hover = ExtResource("18_tmbc6")
+
+[node name="Label" type="Label" parent="ScaleControl/SaveAsBox/VBoxContainer/HBoxContainer/YesButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 24
 text = "Save"
 horizontal_alignment = 1
 vertical_alignment = 1

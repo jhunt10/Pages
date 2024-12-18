@@ -33,9 +33,23 @@ static func start_new_story(starting_class:String):
 		story_id = null
 	story_id = "Story:" + str(ResourceUID.create_id())
 	var player_id = "Player_1:" + str(ResourceUID.create_id())
+	var new_player = null
+	
 	if starting_class == "Soldier":
-		var new_player = ActorLibrary.create_actor("SoldierTemplate", {}, player_id)
+		new_player = ActorLibrary.create_actor("SoldierTemplate", {}, player_id)
+	if starting_class == "Mage":
+		new_player = ActorLibrary.create_actor("MageTemplate", {}, player_id)
+		
+	if new_player:
 		actor_ids.append(new_player.Id)
 		current_player_id = new_player.Id
 		var sprite = new_player.sprite._build_sprite_sheet()
 	PlayerInventory.clear_items()
+
+static func build_save_data()->Dictionary:
+	var out_data = {}
+	out_data['Actors'] = ActorLibrary.Instance.build_save_data()
+	var items_data = {}
+	items_data['PlayerInventory'] = PlayerInventory.list_all_held_item_ids()
+	out_data['Items'] = ItemLibrary.Instance.build_save_data(items_data)
+	return out_data

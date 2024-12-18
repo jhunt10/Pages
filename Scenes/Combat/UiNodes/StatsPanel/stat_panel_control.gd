@@ -29,6 +29,8 @@ func _ready() -> void:
 	premade_effect_icon.visible = false
 
 func set_actor(act:BaseActor):
+	if !act:
+		return
 	#if actor:
 		#printerr("Actor already set on StatPanel.")
 		#return

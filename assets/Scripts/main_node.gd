@@ -58,7 +58,7 @@ func _load_test_map():
 func start_combat():
 	current_scene.queue_free()
 	var combat_scene:CombatRootControl = load("res://Scenes/Combat/combat_scene.tscn").instantiate()
-	combat_scene.load_init_state("res://Scenes/Maps/working_map.tscn")
+	combat_scene.load_init_state("res://Scenes/Maps/SquirrderDome/squirrder_dome_map.tscn")
 	current_scene = combat_scene
 	self.add_child(current_scene)
 
@@ -77,6 +77,28 @@ func start_game():
 func _on_start_character_selected(name):
 	StoryState.start_new_story(name)
 	open_camp_menu()
+
+func open_save_menu():
+	var save_scene:SaveLoadMenu = load("res://Scenes/Menus/SaveLoadMenu/save_load_menu.tscn").instantiate()
+	save_scene.save_mode = true
+	var screen_size = self.size
+	var scale = screen_size.y / save_scene.size.y
+	save_scene.scale_control.scale = Vector2(scale, scale)
+	if screen_size.y > save_scene.size.y * 1.5:
+		save_scene.scale_control.scale = Vector2(1.5, 1.5)
+	self.add_child(save_scene)
+	current_scene = save_scene
+
+func open_load_menu():
+	var save_scene:SaveLoadMenu = load("res://Scenes/Menus/SaveLoadMenu/save_load_menu.tscn").instantiate()
+	save_scene.save_mode = false
+	var screen_size = self.size
+	var scale = screen_size.y / save_scene.size.y
+	save_scene.scale_control.scale = Vector2(1, 1)
+	if screen_size.y > save_scene.size.y * 1.5:
+		save_scene.scale_control.scale = Vector2(1.5, 1.5)
+	self.add_child(save_scene)
+	current_scene = save_scene
 
 func open_camp_menu():
 	current_scene.queue_free()

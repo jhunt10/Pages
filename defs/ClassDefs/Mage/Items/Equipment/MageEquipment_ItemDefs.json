@@ -1,0 +1,112 @@
+[
+    {
+        "ItemKey":"OldMageHelmet",
+        "_ObjectScript": "res://assets/Scripts/Items/Equipment/BaseArmorEquipment.gd",
+        "Details":{
+			"DisplayName": "Old Hat",
+			"SnippetDesc": "A mage's old Helmet.",
+			"Description": "A common design of hat worn by many new mages. Old, but still works.",
+			"Tags": ["Head"],
+			"LargeIcon":"RedHat.png",
+			"SmallIcon":"RedHat.png"
+		},
+        "SpriteSheet":"RedHat_SpriteSheet.png",
+        "EquipSlot":"Head",
+        "Armor": 0,
+        "Ward": 5
+    },
+    {
+        "ItemKey":"OldMageArmor",
+        "_ObjectScript": "res://assets/Scripts/Items/Equipment/BaseArmorEquipment.gd",
+        "Details":{
+			"DisplayName": "Old Red Robes",
+			"SnippetDesc": "A mage's old Robes.",
+			"Description": "A common design of robes worn by many new mages. Old, but still works.",
+			"Tags": ["Body"],
+			"LargeIcon":"RedRobes.png",
+			"SmallIcon":"RedRobes.png"
+		},
+        "SpriteSheet":"RedRobes_SpriteSheet.png",
+        "EquipSlot":"Body",
+        "Armor": 0,
+        "Ward": 5
+    },
+    {
+        "ItemKey":"OldMageBoots",
+        "_ObjectScript": "res://assets/Scripts/Items/Equipment/BaseArmorEquipment.gd",
+        "Details":{
+			"DisplayName": "Old Red Shoes",
+			"SnippetDesc": "A mage's old Shoes.",
+			"Description": "A common design of shoes worn by many new mages. Old, but still works.",
+			"Tags": ["Feet"],
+			"LargeIcon":"RedBoots.png",
+			"SmallIcon":"RedBoots.png"
+		},
+        "SpriteSheet":"RedBoots_SpriteSheet.png",
+        "EquipSlot":"Feet",
+        "Armor": 0,
+        "Ward": 5
+    },
+    {
+        "ItemKey":"OldWand",
+        "_ObjectScript": "res://assets/Scripts/Items/Equipment/BaseWeaponEquipment.gd",
+        "Details":{
+			"DisplayName": "Old Wand",
+			"SnippetDesc": "A mage's old Wand.",
+			"Description": "A training wand made for practice and well used. Old, but still works.",
+			"Tags": ["Weapon","OffHand"],
+			"LargeIcon":"OldWand.png",
+			"SmallIcon":"OldWand.png"
+		},
+
+        "WeaponSpriteData":{
+            "Offset":[0,0],
+            "SpriteName":"OldWand",
+            "Rotation":-45
+        },
+
+        "EquipSlot":"Weapon",
+        "DamageData":{
+            "AtkStat": "Intelligence",
+            "AtkPower": 20,
+            "DamageEffect": "SmallFire_DamageEffect",
+            "DamageType": "Fire",
+            "DamageVarient": 0.1,
+            "DefenseType": "Ward"
+        },
+        "TargetParams": {
+            "EffectsAllies": false,
+            "EffectsEnemies": true,
+            "LineOfSight": true,
+            "TargetArea": "[[-1,1],[0,1],[1,1],[-1,2],[0,2],[1,2]]",
+            "TargetType": "Actor"
+        },
+        "AttackTags": ["Ranged", "Magic"],
+        "WeaponClass": "Light",
+        "WeaponAnimation": "weapon_raise"
+    },
+    {
+        "ItemKey":"OldMageOrb",
+        "_ObjectScript": "res://assets/Scripts/Items/Equipment/BaseArmorEquipment.gd",
+        "Details":{
+			"DisplayName": "Old Orb",
+			"SnippetDesc": "A mage's old focusing Orb.",
+			"Description": "A common tool used by many new mages for focsing magic. Old, but still works.",
+			"Tags": ["OffHand","Orb"],
+			"LargeIcon":"OldOrb.png",
+			"SmallIcon":"OldOrb.png"
+		},
+        "StatMods":{
+			"StatMod1": { 
+				"StatName": "Intelligence",
+				"DisplayName": "Orb +INT",
+				"ModType":"Fixed", 
+				"Value":1
+			}
+		},
+        "SpriteSheet":"OldOrb_SpriteSheet.png",
+        "EquipSlot":"OffHand",
+        "Armor": 0,
+        "Ward": 0
+    }
+]

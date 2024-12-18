@@ -206,6 +206,8 @@ func apply_damage(damage, _source):
 	bar_stat_changed.emit()
 
 func base_damge_from_stat(stat_name):
+	if !stat_name:
+		return 1
 	var base_stat_val = get_stat(stat_name)
 	#var weapon:BaseWeaponEquipment = _actor.equipment.get_item_in_slot(BaseEquipmentItem.EquipmentSlots.Weapon)
 	#if weapon and weapon.get_damage_data().get("AtkStat", '') == stat_name:

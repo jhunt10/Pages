@@ -1,8 +1,9 @@
 class_name SaveLoadMenu
 extends Control
 
+@export var scale_control:Control
+@export var close_button:Button
 @export var menu_title_label:Label
-@export var save_load_button_label:Label
 @export var premade_save_slot:SaveSlotContainer
 @export var save_slot_new:SaveSlotContainer
 @export var slots_container:VBoxContainer
@@ -15,17 +16,22 @@ extends Control
 @export var sel_runtime_label:Label
 @export var sel_party_container:PartyContainer
 
+@export var save_popup:SaveAsBox
+@export var save_button:Button
+@export var save_button_label:Label
+@export var save_button_highlight:NinePatchRect
+
 @export var save_mode:bool:
 	set(val):
 		if save_slot_new:
 			if val: # Saving
 				save_slot_new.show()
 				menu_title_label.text = "Save Game"
-				save_load_button_label.text = "Save"
+				save_button_label.text = "Save"
 			else:
 				save_slot_new.hide()
 				menu_title_label.text = "Load Game"
-				save_load_button_label.text = "Load"
+				save_button_label.text = "Load"
 		save_mode = val
 
 var save_slots:Dictionary = {}
@@ -37,11 +43,25 @@ var _saving_data
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	premade_save_slot.visible = false
+	if save_mode:
+		save_slot_new.show()
+		save_slot_new.on_mouse_enter()
+	else:
+		save_slot_new.hide()
+		
+	save_popup.hide()
 	read_existing_saves()
 	save_mode = save_mode
 	set_saving_data(null)
+	close_button.pressed.connect(on_close_menu)
+	save_button.mouse_entered.connect(save_button_highlight.show)
+	save_button.mouse_exited.connect(save_button_highlight.hide)
+	save_button.pressed.connect(_on_save_button)
+	save_popup.on_confirmed.connect(_on_save_as_confirmed)
 	pass # Replace with function body.
 
+func on_close_menu():
+	self.queue_free()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -54,6 +74,14 @@ func set_saving_data(something):
 		"SaveDate": Time.get_datetime_string_from_system(false, true)
 	}
 	set_displayed_save_data("Saving...", _saving_data)
+
+func _on_save_as_confirmed(save_name):
+	SaveLoadHandler.write_save_data(save_name, StoryState.Instance)
+	pass
+
+func _on_save_button():
+	save_popup.name_input.text = "Save" + str(slots_container.get_child_count())
+	save_popup.show()
 
 func read_existing_saves():
 	for child in slots_container.get_children():
