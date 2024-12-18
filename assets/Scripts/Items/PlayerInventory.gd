@@ -17,6 +17,10 @@ func _init() -> void:
 	if !_inst:
 		_inst = self
 
+static func clear_items():
+	_stacked_item_ids_by_keys.clear()
+	_held_unique_items_ids.clear()
+
 static func has_item_id(item_id:String):
 	if _held_unique_items_ids.has(item_id):
 		return true

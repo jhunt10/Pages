@@ -1,0 +1,1213 @@
+[gd_scene load_steps=21 format=3 uid="uid://dd13a7hxf7ua1"]
+
+[ext_resource type="Script" path="res://Scenes/Menus/StartCharacterSelectMenu/start_character_select_menu.gd" id="1_fyf8q"]
+[ext_resource type="Texture2D" uid="uid://bqmtfkh0uj2bk" path="res://Scenes/Menus/CharacterMenu/MenuPages/ItemDetailsCard/DetailsCard_Background_working.png" id="1_sx2k1"]
+[ext_resource type="Texture2D" uid="uid://wkj00opejx8r" path="res://Scenes/Menus/StartCharacterSelectMenu/Mage_Port.png" id="2_6akbr"]
+[ext_resource type="Texture2D" uid="uid://bu2o432vvo3tg" path="res://Scenes/Menus/StartCharacterSelectMenu/Soldier_Port.png" id="2_xnpug"]
+[ext_resource type="Script" path="res://Scenes/Menus/StartCharacterSelectMenu/character_card.gd" id="3_4800i"]
+[ext_resource type="Theme" uid="uid://dwinll8pgdjhc" path="res://Scenes/Themes/standard_theme.tres" id="3_heume"]
+[ext_resource type="Texture2D" uid="uid://b10pvly4exem2" path="res://assets/Sprites/UI/SymbolIcons/_S_Symbole.png" id="4_e0vny"]
+[ext_resource type="Texture2D" uid="uid://dq2cad8orar4p" path="res://assets/Sprites/UI/SymbolIcons/ArmorSymbol.png" id="5_74fn6"]
+[ext_resource type="Texture2D" uid="uid://doywp1shkpnmd" path="res://assets/Sprites/UI/SymbolIcons/_I_Symbole.png" id="7_ouxie"]
+[ext_resource type="Texture2D" uid="uid://b201kpuib7q5k" path="res://assets/Sprites/UI/SymbolIcons/MagDamageSymbol.png" id="8_lit4u"]
+[ext_resource type="Texture2D" uid="uid://bypkbtx63t55b" path="res://Scenes/Menus/StartCharacterSelectMenu/Rogue_Port.png" id="9_tw37i"]
+[ext_resource type="Texture2D" uid="uid://vwiqj7k1flkn" path="res://assets/Sprites/UI/SymbolIcons/_A_Symbole.png" id="10_47xwd"]
+[ext_resource type="Texture2D" uid="uid://diy8q5lpvpw1u" path="res://assets/Sprites/UI/SymbolIcons/PhyDamageSymbol.png" id="11_5hvqg"]
+[ext_resource type="Texture2D" uid="uid://buhxr62svweqv" path="res://Scenes/Menus/StartCharacterSelectMenu/Preist_Port.png" id="12_cgp25"]
+[ext_resource type="Texture2D" uid="uid://ci3qbej0djsng" path="res://assets/Sprites/UI/SymbolIcons/_W_Symbole.png" id="13_1swfu"]
+[ext_resource type="Texture2D" uid="uid://d17k5iaed0gdg" path="res://assets/Sprites/UI/SymbolIcons/WardSymbol.png" id="14_d7i4i"]
+[ext_resource type="Texture2D" uid="uid://io35wpu802fp" path="res://assets/Sprites/UI/BackPatches/Patch_64_12.png" id="17_ghpss"]
+[ext_resource type="Texture2D" uid="uid://b0kicr71nqhmi" path="res://Scenes/Menus/StartCharacterSelectMenu/Button.png" id="18_3n0th"]
+[ext_resource type="Texture2D" uid="uid://bn3rws8kuwp30" path="res://Scenes/Menus/StartCharacterSelectMenu/ButtonPressed.png" id="19_foae7"]
+[ext_resource type="Texture2D" uid="uid://gemu0x8hrvub" path="res://Scenes/Menus/StartCharacterSelectMenu/ButtonHover.png" id="20_d0shl"]
+
+[node name="StartCharacterSelectMenu" type="Control" node_paths=PackedStringArray("soldier_card", "rogue_card", "mage_card", "priest_card", "selected_card_parent", "hint_box", "confirm_box", "confirm_box_label", "yes_button", "no_button")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_fyf8q")
+soldier_card = NodePath("HBoxContainer/VBoxContainer/SoldierContainer/SoldierCard")
+rogue_card = NodePath("HBoxContainer/VBoxContainer2/RogueContainer/RogueCard")
+mage_card = NodePath("HBoxContainer/VBoxContainer/MageContainer/MageCard")
+priest_card = NodePath("HBoxContainer/VBoxContainer2/PriestContainer/PriestCard")
+selected_card_parent = NodePath("SelectedControl")
+max_move_speed = 600.0
+min_move_speed = 10.0
+move_speed_factor = 100.0
+hint_box = NodePath("SelectedControl/HintBox")
+confirm_box = NodePath("SelectedControl/ConfirmBox")
+confirm_box_label = NodePath("SelectedControl/ConfirmBox/VBoxContainer/Label")
+yes_button = NodePath("SelectedControl/ConfirmBox/VBoxContainer/HBoxContainer/YesButton")
+no_button = NodePath("SelectedControl/ConfirmBox/VBoxContainer/HBoxContainer/NoButton")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.501961)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="SoldierContainer" type="CenterContainer" parent="HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(460, 280)
+layout_mode = 2
+
+[node name="SoldierCard" type="NinePatchRect" parent="HBoxContainer/VBoxContainer/SoldierContainer" node_paths=PackedStringArray("button")]
+custom_minimum_size = Vector2(460, 280)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("1_sx2k1")
+patch_margin_left = 40
+patch_margin_top = 30
+patch_margin_right = 40
+patch_margin_bottom = 40
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+script = ExtResource("3_4800i")
+button = NodePath("Button")
+
+[node name="BoxContainer" type="BoxContainer" parent="HBoxContainer/VBoxContainer/SoldierContainer/SoldierCard"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = 24.0
+offset_right = -24.0
+offset_bottom = -24.0
+grow_horizontal = 2
+grow_vertical = 2
+vertical = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/SoldierContainer/SoldierCard/BoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/VBoxContainer/SoldierContainer/SoldierCard/BoxContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("2_xnpug")
+stretch_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/SoldierContainer/SoldierCard/BoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+
+[node name="TitleLabel" type="Label" parent="HBoxContainer/VBoxContainer/SoldierContainer/SoldierCard/BoxContainer/HBoxContainer/VBoxContainer"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("3_heume")
+theme_override_font_sizes/font_size = 32
+text = "Soldier"
+
+[node name="NamesContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/SoldierContainer/SoldierCard/BoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/SoldierContainer/SoldierCard/BoxContainer/HBoxContainer/VBoxContainer/NamesContainer"]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="MainStatTitile" type="Label" parent="HBoxContainer/VBoxContainer/SoldierContainer/SoldierCard/BoxContainer/HBoxContainer/VBoxContainer/NamesContainer/VBoxContainer"]
+visible = false
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("3_heume")
+text = "Main Stat:  "
+vertical_alignment = 1
+
+[node name="SpecialtyTitle" type="Label" parent="HBoxContainer/VBoxContainer/SoldierContainer/SoldierCard/BoxContainer/HBoxContainer/VBoxContainer/NamesContainer/VBoxContainer"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("3_heume")
+text = "Specialty:  "
+
+[node name="ValuesContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/SoldierContainer/SoldierCard/BoxContainer/HBoxContainer/VBoxContainer/NamesContainer"]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="SpecialtyContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/SoldierContainer/SoldierCard/BoxContainer/HBoxContainer/VBoxContainer/NamesContainer/ValuesContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="TextureRect2" type="TextureRect" parent="HBoxContainer/VBoxContainer/SoldierContainer/SoldierCard/BoxContainer/HBoxContainer/VBoxContainer/NamesContainer/ValuesContainer/SpecialtyContainer"]
+layout_mode = 2
+texture = ExtResource("5_74fn6")
+stretch_mode = 3
+
+[node name="SpecialtyLabel" type="Label" parent="HBoxContainer/VBoxContainer/SoldierContainer/SoldierCard/BoxContainer/HBoxContainer/VBoxContainer/NamesContainer/ValuesContainer/SpecialtyContainer"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+size_flags_vertical = 1
+theme = ExtResource("3_heume")
+text = "Physical Defense"
+vertical_alignment = 1
+
+[node name="ColorRect" type="ColorRect" parent="HBoxContainer/VBoxContainer/SoldierContainer/SoldierCard/BoxContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(2, 4)
+layout_mode = 2
+size_flags_vertical = 3
+color = Color(0.498039, 0, 0, 0)
+
+[node name="ColorRect2" type="ColorRect" parent="HBoxContainer/VBoxContainer/SoldierContainer/SoldierCard/BoxContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(2, 2)
+layout_mode = 2
+color = Color(0.498039, 0, 0, 1)
+
+[node name="ColorRect3" type="ColorRect" parent="HBoxContainer/VBoxContainer/SoldierContainer/SoldierCard/BoxContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(2, 4)
+layout_mode = 2
+size_flags_vertical = 3
+color = Color(0.498039, 0, 0, 0)
+
+[node name="StatContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/SoldierContainer/SoldierCard/BoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="TextureRect2" type="TextureRect" parent="HBoxContainer/VBoxContainer/SoldierContainer/SoldierCard/BoxContainer/HBoxContainer/VBoxContainer/StatContainer"]
+layout_mode = 2
+texture = ExtResource("4_e0vny")
+stretch_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="HBoxContainer/VBoxContainer/SoldierContainer/SoldierCard/BoxContainer/HBoxContainer/VBoxContainer/StatContainer"]
+self_modulate = Color(0.498039, 0, 0, 1)
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("3_heume")
+text = "trong warrior who stands tall on the battle field. Able to take many hits and pay some back."
+fit_content = true
+
+[node name="LikesDislikesContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/SoldierContainer/SoldierCard/BoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ListContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/SoldierContainer/SoldierCard/BoxContainer/LikesDislikesContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="LikesTitleLabel" type="Label" parent="HBoxContainer/VBoxContainer/SoldierContainer/SoldierCard/BoxContainer/LikesDislikesContainer/ListContainer"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+size_flags_vertical = 1
+theme = ExtResource("3_heume")
+text = "Likes:"
+
+[node name="Like1" type="Label" parent="HBoxContainer/VBoxContainer/SoldierContainer/SoldierCard/BoxContainer/LikesDislikesContainer/ListContainer"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("3_heume")
+text = "  +Heavy Armor"
+
+[node name="Like2" type="Label" parent="HBoxContainer/VBoxContainer/SoldierContainer/SoldierCard/BoxContainer/LikesDislikesContainer/ListContainer"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("3_heume")
+text = "  +Simple Tactics"
+
+[node name="Like3" type="Label" parent="HBoxContainer/VBoxContainer/SoldierContainer/SoldierCard/BoxContainer/LikesDislikesContainer/ListContainer"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("3_heume")
+text = "  +Fine Whiskey"
+
+[node name="ListContainer2" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/SoldierContainer/SoldierCard/BoxContainer/LikesDislikesContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="DislikesTitleLabel" type="Label" parent="HBoxContainer/VBoxContainer/SoldierContainer/SoldierCard/BoxContainer/LikesDislikesContainer/ListContainer2"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+size_flags_vertical = 1
+theme = ExtResource("3_heume")
+text = "Dislikes:"
+
+[node name="Like1" type="Label" parent="HBoxContainer/VBoxContainer/SoldierContainer/SoldierCard/BoxContainer/LikesDislikesContainer/ListContainer2"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("3_heume")
+text = "  -Dealing with Magic"
+
+[node name="Like2" type="Label" parent="HBoxContainer/VBoxContainer/SoldierContainer/SoldierCard/BoxContainer/LikesDislikesContainer/ListContainer2"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("3_heume")
+text = "  -Being hit from behind"
+
+[node name="Like3" type="Label" parent="HBoxContainer/VBoxContainer/SoldierContainer/SoldierCard/BoxContainer/LikesDislikesContainer/ListContainer2"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("3_heume")
+text = "  -Long walks on beach"
+
+[node name="Button" type="Button" parent="HBoxContainer/VBoxContainer/SoldierContainer/SoldierCard"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MageContainer" type="CenterContainer" parent="HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(460, 280)
+layout_mode = 2
+
+[node name="MageCard" type="NinePatchRect" parent="HBoxContainer/VBoxContainer/MageContainer" node_paths=PackedStringArray("button")]
+custom_minimum_size = Vector2(460, 280)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("1_sx2k1")
+patch_margin_left = 40
+patch_margin_top = 30
+patch_margin_right = 40
+patch_margin_bottom = 40
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+script = ExtResource("3_4800i")
+button = NodePath("Button")
+
+[node name="BoxContainer" type="BoxContainer" parent="HBoxContainer/VBoxContainer/MageContainer/MageCard"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = 24.0
+offset_right = -24.0
+offset_bottom = -24.0
+grow_horizontal = 2
+grow_vertical = 2
+vertical = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/MageContainer/MageCard/BoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/VBoxContainer/MageContainer/MageCard/BoxContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("2_6akbr")
+stretch_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/MageContainer/MageCard/BoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+
+[node name="TitleLabel" type="Label" parent="HBoxContainer/VBoxContainer/MageContainer/MageCard/BoxContainer/HBoxContainer/VBoxContainer"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("3_heume")
+theme_override_font_sizes/font_size = 32
+text = "Mage"
+
+[node name="NamesContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/MageContainer/MageCard/BoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/MageContainer/MageCard/BoxContainer/HBoxContainer/VBoxContainer/NamesContainer"]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="MainStatTitile" type="Label" parent="HBoxContainer/VBoxContainer/MageContainer/MageCard/BoxContainer/HBoxContainer/VBoxContainer/NamesContainer/VBoxContainer"]
+visible = false
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("3_heume")
+text = "Main Stat:  "
+vertical_alignment = 1
+
+[node name="SpecialtyTitle" type="Label" parent="HBoxContainer/VBoxContainer/MageContainer/MageCard/BoxContainer/HBoxContainer/VBoxContainer/NamesContainer/VBoxContainer"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("3_heume")
+text = "Specialty:  "
+
+[node name="ValuesContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/MageContainer/MageCard/BoxContainer/HBoxContainer/VBoxContainer/NamesContainer"]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="SpecialtyContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/MageContainer/MageCard/BoxContainer/HBoxContainer/VBoxContainer/NamesContainer/ValuesContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="TextureRect2" type="TextureRect" parent="HBoxContainer/VBoxContainer/MageContainer/MageCard/BoxContainer/HBoxContainer/VBoxContainer/NamesContainer/ValuesContainer/SpecialtyContainer"]
+layout_mode = 2
+texture = ExtResource("8_lit4u")
+stretch_mode = 3
+
+[node name="SpecialtyLabel" type="Label" parent="HBoxContainer/VBoxContainer/MageContainer/MageCard/BoxContainer/HBoxContainer/VBoxContainer/NamesContainer/ValuesContainer/SpecialtyContainer"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+size_flags_vertical = 1
+theme = ExtResource("3_heume")
+text = "Magic Damage"
+vertical_alignment = 1
+
+[node name="ColorRect" type="ColorRect" parent="HBoxContainer/VBoxContainer/MageContainer/MageCard/BoxContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(2, 4)
+layout_mode = 2
+size_flags_vertical = 3
+color = Color(0.498039, 0, 0, 0)
+
+[node name="ColorRect2" type="ColorRect" parent="HBoxContainer/VBoxContainer/MageContainer/MageCard/BoxContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(2, 2)
+layout_mode = 2
+color = Color(0.498039, 0, 0, 1)
+
+[node name="ColorRect3" type="ColorRect" parent="HBoxContainer/VBoxContainer/MageContainer/MageCard/BoxContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(2, 4)
+layout_mode = 2
+size_flags_vertical = 3
+color = Color(0.498039, 0, 0, 0)
+
+[node name="StatContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/MageContainer/MageCard/BoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="TextureRect2" type="TextureRect" parent="HBoxContainer/VBoxContainer/MageContainer/MageCard/BoxContainer/HBoxContainer/VBoxContainer/StatContainer"]
+layout_mode = 2
+texture = ExtResource("7_ouxie")
+stretch_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="HBoxContainer/VBoxContainer/MageContainer/MageCard/BoxContainer/HBoxContainer/VBoxContainer/StatContainer"]
+self_modulate = Color(0.498039, 0, 0, 1)
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("3_heume")
+text = "ntelligent spellcaster best on the back lines. Unstoppable power, until someone get's close."
+fit_content = true
+
+[node name="LikesDislikesContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/MageContainer/MageCard/BoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ListContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/MageContainer/MageCard/BoxContainer/LikesDislikesContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="LikesTitleLabel" type="Label" parent="HBoxContainer/VBoxContainer/MageContainer/MageCard/BoxContainer/LikesDislikesContainer/ListContainer"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+size_flags_vertical = 1
+theme = ExtResource("3_heume")
+text = "Likes:"
+
+[node name="Like1" type="Label" parent="HBoxContainer/VBoxContainer/MageContainer/MageCard/BoxContainer/LikesDislikesContainer/ListContainer"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("3_heume")
+text = "  +Varriaty of Spells"
+
+[node name="Like2" type="Label" parent="HBoxContainer/VBoxContainer/MageContainer/MageCard/BoxContainer/LikesDislikesContainer/ListContainer"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("3_heume")
+text = "  +Dealing AoE Damage"
+
+[node name="Like3" type="Label" parent="HBoxContainer/VBoxContainer/MageContainer/MageCard/BoxContainer/LikesDislikesContainer/ListContainer"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("3_heume")
+text = "  +Fantasy Novels"
+
+[node name="ListContainer2" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/MageContainer/MageCard/BoxContainer/LikesDislikesContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="DislikesTitleLabel" type="Label" parent="HBoxContainer/VBoxContainer/MageContainer/MageCard/BoxContainer/LikesDislikesContainer/ListContainer2"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+size_flags_vertical = 1
+theme = ExtResource("3_heume")
+text = "Dislikes:"
+
+[node name="Like1" type="Label" parent="HBoxContainer/VBoxContainer/MageContainer/MageCard/BoxContainer/LikesDislikesContainer/ListContainer2"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("3_heume")
+text = "  -Melee Fighting"
+
+[node name="Like2" type="Label" parent="HBoxContainer/VBoxContainer/MageContainer/MageCard/BoxContainer/LikesDislikesContainer/ListContainer2"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("3_heume")
+text = "  -Small Mana Supply"
+
+[node name="Like3" type="Label" parent="HBoxContainer/VBoxContainer/MageContainer/MageCard/BoxContainer/LikesDislikesContainer/ListContainer2"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("3_heume")
+text = "  -Cliffhangers"
+
+[node name="Button" type="Button" parent="HBoxContainer/VBoxContainer/MageContainer/MageCard"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="RogueContainer" type="CenterContainer" parent="HBoxContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(460, 280)
+layout_mode = 2
+
+[node name="RogueCard" type="NinePatchRect" parent="HBoxContainer/VBoxContainer2/RogueContainer" node_paths=PackedStringArray("button")]
+custom_minimum_size = Vector2(460, 280)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("1_sx2k1")
+patch_margin_left = 40
+patch_margin_top = 30
+patch_margin_right = 40
+patch_margin_bottom = 40
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+script = ExtResource("3_4800i")
+button = NodePath("Button")
+
+[node name="BoxContainer" type="BoxContainer" parent="HBoxContainer/VBoxContainer2/RogueContainer/RogueCard"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = 24.0
+offset_right = -24.0
+offset_bottom = -24.0
+grow_horizontal = 2
+grow_vertical = 2
+vertical = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer2/RogueContainer/RogueCard/BoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/VBoxContainer2/RogueContainer/RogueCard/BoxContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("9_tw37i")
+stretch_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer2/RogueContainer/RogueCard/BoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 4
+
+[node name="TitleLabel" type="Label" parent="HBoxContainer/VBoxContainer2/RogueContainer/RogueCard/BoxContainer/HBoxContainer/VBoxContainer"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("3_heume")
+theme_override_font_sizes/font_size = 32
+text = "Rogue"
+
+[node name="NamesContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer2/RogueContainer/RogueCard/BoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="SpecialtyTitle" type="Label" parent="HBoxContainer/VBoxContainer2/RogueContainer/RogueCard/BoxContainer/HBoxContainer/VBoxContainer/NamesContainer"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("3_heume")
+text = "Specialty:  "
+
+[node name="TextureRect2" type="TextureRect" parent="HBoxContainer/VBoxContainer2/RogueContainer/RogueCard/BoxContainer/HBoxContainer/VBoxContainer/NamesContainer"]
+layout_mode = 2
+texture = ExtResource("11_5hvqg")
+stretch_mode = 3
+
+[node name="SpecialtyLabel" type="Label" parent="HBoxContainer/VBoxContainer2/RogueContainer/RogueCard/BoxContainer/HBoxContainer/VBoxContainer/NamesContainer"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+size_flags_vertical = 1
+theme = ExtResource("3_heume")
+text = "Physical Damge"
+vertical_alignment = 1
+
+[node name="ColorRect2" type="ColorRect" parent="HBoxContainer/VBoxContainer2/RogueContainer/RogueCard/BoxContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(2, 2)
+layout_mode = 2
+color = Color(0.498039, 0, 0, 1)
+
+[node name="StatContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer2/RogueContainer/RogueCard/BoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="TextureRect2" type="TextureRect" parent="HBoxContainer/VBoxContainer2/RogueContainer/RogueCard/BoxContainer/HBoxContainer/VBoxContainer/StatContainer"]
+layout_mode = 2
+texture = ExtResource("10_47xwd")
+stretch_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="HBoxContainer/VBoxContainer2/RogueContainer/RogueCard/BoxContainer/HBoxContainer/VBoxContainer/StatContainer"]
+self_modulate = Color(0.498039, 0, 0, 1)
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("3_heume")
+text = "gile fighter skilled in melee and range. Weaker attacks, but good placement makes them deadly."
+fit_content = true
+
+[node name="LikesDislikesContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer2/RogueContainer/RogueCard/BoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ListContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer2/RogueContainer/RogueCard/BoxContainer/LikesDislikesContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="LikesTitleLabel" type="Label" parent="HBoxContainer/VBoxContainer2/RogueContainer/RogueCard/BoxContainer/LikesDislikesContainer/ListContainer"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+size_flags_vertical = 1
+theme = ExtResource("3_heume")
+text = "Likes:"
+
+[node name="Like1" type="Label" parent="HBoxContainer/VBoxContainer2/RogueContainer/RogueCard/BoxContainer/LikesDislikesContainer/ListContainer"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("3_heume")
+text = "  +Deadly Critical Hits"
+
+[node name="Like2" type="Label" parent="HBoxContainer/VBoxContainer2/RogueContainer/RogueCard/BoxContainer/LikesDislikesContainer/ListContainer"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("3_heume")
+text = "  +Evading Attacks"
+
+[node name="Like3" type="Label" parent="HBoxContainer/VBoxContainer2/RogueContainer/RogueCard/BoxContainer/LikesDislikesContainer/ListContainer"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("3_heume")
+text = "  +Money & Romance"
+
+[node name="ListContainer2" type="VBoxContainer" parent="HBoxContainer/VBoxContainer2/RogueContainer/RogueCard/BoxContainer/LikesDislikesContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="DislikesTitleLabel" type="Label" parent="HBoxContainer/VBoxContainer2/RogueContainer/RogueCard/BoxContainer/LikesDislikesContainer/ListContainer2"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+size_flags_vertical = 1
+theme = ExtResource("3_heume")
+text = "Dislikes:"
+
+[node name="Like1" type="Label" parent="HBoxContainer/VBoxContainer2/RogueContainer/RogueCard/BoxContainer/LikesDislikesContainer/ListContainer2"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("3_heume")
+text = "  -Wearing Heavy Armor"
+
+[node name="Like2" type="Label" parent="HBoxContainer/VBoxContainer2/RogueContainer/RogueCard/BoxContainer/LikesDislikesContainer/ListContainer2"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("3_heume")
+text = "  -Getting Cornered"
+
+[node name="Like3" type="Label" parent="HBoxContainer/VBoxContainer2/RogueContainer/RogueCard/BoxContainer/LikesDislikesContainer/ListContainer2"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("3_heume")
+text = "  -Poeple who talk loud"
+
+[node name="Button" type="Button" parent="HBoxContainer/VBoxContainer2/RogueContainer/RogueCard"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PriestContainer" type="CenterContainer" parent="HBoxContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(460, 280)
+layout_mode = 2
+
+[node name="PriestCard" type="NinePatchRect" parent="HBoxContainer/VBoxContainer2/PriestContainer" node_paths=PackedStringArray("button")]
+custom_minimum_size = Vector2(460, 280)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("1_sx2k1")
+patch_margin_left = 40
+patch_margin_top = 30
+patch_margin_right = 40
+patch_margin_bottom = 40
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+script = ExtResource("3_4800i")
+button = NodePath("Button")
+
+[node name="BoxContainer" type="BoxContainer" parent="HBoxContainer/VBoxContainer2/PriestContainer/PriestCard"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = 24.0
+offset_right = -24.0
+offset_bottom = -24.0
+grow_horizontal = 2
+grow_vertical = 2
+vertical = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer2/PriestContainer/PriestCard/BoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/VBoxContainer2/PriestContainer/PriestCard/BoxContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("12_cgp25")
+stretch_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer2/PriestContainer/PriestCard/BoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+
+[node name="TitleLabel" type="Label" parent="HBoxContainer/VBoxContainer2/PriestContainer/PriestCard/BoxContainer/HBoxContainer/VBoxContainer"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("3_heume")
+theme_override_font_sizes/font_size = 32
+text = "Priest"
+
+[node name="NamesContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer2/PriestContainer/PriestCard/BoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer2/PriestContainer/PriestCard/BoxContainer/HBoxContainer/VBoxContainer/NamesContainer"]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="MainStatTitile" type="Label" parent="HBoxContainer/VBoxContainer2/PriestContainer/PriestCard/BoxContainer/HBoxContainer/VBoxContainer/NamesContainer/VBoxContainer"]
+visible = false
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("3_heume")
+text = "Main Stat:  "
+vertical_alignment = 1
+
+[node name="SpecialtyTitle" type="Label" parent="HBoxContainer/VBoxContainer2/PriestContainer/PriestCard/BoxContainer/HBoxContainer/VBoxContainer/NamesContainer/VBoxContainer"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("3_heume")
+text = "Specialty:  "
+
+[node name="ValuesContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer2/PriestContainer/PriestCard/BoxContainer/HBoxContainer/VBoxContainer/NamesContainer"]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="StatContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer2/PriestContainer/PriestCard/BoxContainer/HBoxContainer/VBoxContainer/NamesContainer/ValuesContainer"]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="NameLabel" type="Label" parent="HBoxContainer/VBoxContainer2/PriestContainer/PriestCard/BoxContainer/HBoxContainer/VBoxContainer/NamesContainer/ValuesContainer/StatContainer"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+size_flags_vertical = 1
+theme = ExtResource("3_heume")
+text = "isdom"
+vertical_alignment = 2
+
+[node name="SpecialtyContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer2/PriestContainer/PriestCard/BoxContainer/HBoxContainer/VBoxContainer/NamesContainer/ValuesContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="TextureRect2" type="TextureRect" parent="HBoxContainer/VBoxContainer2/PriestContainer/PriestCard/BoxContainer/HBoxContainer/VBoxContainer/NamesContainer/ValuesContainer/SpecialtyContainer"]
+layout_mode = 2
+texture = ExtResource("14_d7i4i")
+stretch_mode = 3
+
+[node name="SpecialtyLabel" type="Label" parent="HBoxContainer/VBoxContainer2/PriestContainer/PriestCard/BoxContainer/HBoxContainer/VBoxContainer/NamesContainer/ValuesContainer/SpecialtyContainer"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+size_flags_vertical = 1
+theme = ExtResource("3_heume")
+text = "Magic Defense"
+vertical_alignment = 1
+
+[node name="ColorRect" type="ColorRect" parent="HBoxContainer/VBoxContainer2/PriestContainer/PriestCard/BoxContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(2, 4)
+layout_mode = 2
+size_flags_vertical = 3
+color = Color(0.498039, 0, 0, 0)
+
+[node name="ColorRect2" type="ColorRect" parent="HBoxContainer/VBoxContainer2/PriestContainer/PriestCard/BoxContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(2, 2)
+layout_mode = 2
+color = Color(0.498039, 0, 0, 1)
+
+[node name="ColorRect3" type="ColorRect" parent="HBoxContainer/VBoxContainer2/PriestContainer/PriestCard/BoxContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(2, 4)
+layout_mode = 2
+size_flags_vertical = 3
+color = Color(0.498039, 0, 0, 0)
+
+[node name="StatContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer2/PriestContainer/PriestCard/BoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/VBoxContainer2/PriestContainer/PriestCard/BoxContainer/HBoxContainer/VBoxContainer/StatContainer"]
+layout_mode = 2
+texture = ExtResource("13_1swfu")
+stretch_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="HBoxContainer/VBoxContainer2/PriestContainer/PriestCard/BoxContainer/HBoxContainer/VBoxContainer/StatContainer"]
+self_modulate = Color(0.498039, 0, 0, 1)
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("3_heume")
+text = "ise healer deep in the fray to provide support. Relies on others for damage. (Hard to start with)
+"
+fit_content = true
+
+[node name="LikesDislikesContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer2/PriestContainer/PriestCard/BoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ListContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer2/PriestContainer/PriestCard/BoxContainer/LikesDislikesContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="LikesTitleLabel" type="Label" parent="HBoxContainer/VBoxContainer2/PriestContainer/PriestCard/BoxContainer/LikesDislikesContainer/ListContainer"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+size_flags_vertical = 1
+theme = ExtResource("3_heume")
+text = "Likes:"
+
+[node name="Like1" type="Label" parent="HBoxContainer/VBoxContainer2/PriestContainer/PriestCard/BoxContainer/LikesDislikesContainer/ListContainer"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("3_heume")
+text = "  +Healing and Support"
+
+[node name="Like2" type="Label" parent="HBoxContainer/VBoxContainer2/PriestContainer/PriestCard/BoxContainer/LikesDislikesContainer/ListContainer"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("3_heume")
+text = "  +Removing Ailments"
+
+[node name="Like3" type="Label" parent="HBoxContainer/VBoxContainer2/PriestContainer/PriestCard/BoxContainer/LikesDislikesContainer/ListContainer"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("3_heume")
+text = "  +Keeping an Open Mind"
+
+[node name="ListContainer2" type="VBoxContainer" parent="HBoxContainer/VBoxContainer2/PriestContainer/PriestCard/BoxContainer/LikesDislikesContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="DislikesTitleLabel" type="Label" parent="HBoxContainer/VBoxContainer2/PriestContainer/PriestCard/BoxContainer/LikesDislikesContainer/ListContainer2"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+size_flags_vertical = 1
+theme = ExtResource("3_heume")
+text = "Dislikes:"
+
+[node name="Like1" type="Label" parent="HBoxContainer/VBoxContainer2/PriestContainer/PriestCard/BoxContainer/LikesDislikesContainer/ListContainer2"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("3_heume")
+text = "  -Fighting Alone"
+
+[node name="Like2" type="Label" parent="HBoxContainer/VBoxContainer2/PriestContainer/PriestCard/BoxContainer/LikesDislikesContainer/ListContainer2"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("3_heume")
+text = "  -Harming Others"
+
+[node name="Like3" type="Label" parent="HBoxContainer/VBoxContainer2/PriestContainer/PriestCard/BoxContainer/LikesDislikesContainer/ListContainer2"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("3_heume")
+text = "  -Bugs with lots of legs"
+
+[node name="Button" type="Button" parent="HBoxContainer/VBoxContainer2/PriestContainer/PriestCard"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SelectedControl" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="SoldierCard" type="NinePatchRect" parent="SelectedControl" node_paths=PackedStringArray("button")]
+visible = false
+custom_minimum_size = Vector2(460, 280)
+offset_left = 349.0
+offset_top = 174.0
+offset_right = 809.0
+offset_bottom = 454.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("1_sx2k1")
+patch_margin_left = 40
+patch_margin_top = 30
+patch_margin_right = 40
+patch_margin_bottom = 40
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+script = ExtResource("3_4800i")
+button = NodePath("Button")
+
+[node name="BoxContainer" type="BoxContainer" parent="SelectedControl/SoldierCard"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = 24.0
+offset_right = -24.0
+offset_bottom = -24.0
+grow_horizontal = 2
+grow_vertical = 2
+vertical = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="SelectedControl/SoldierCard/BoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="TextureRect" type="TextureRect" parent="SelectedControl/SoldierCard/BoxContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("2_xnpug")
+stretch_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SelectedControl/SoldierCard/BoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+
+[node name="TitleLabel" type="Label" parent="SelectedControl/SoldierCard/BoxContainer/HBoxContainer/VBoxContainer"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("3_heume")
+theme_override_font_sizes/font_size = 32
+text = "Soldier"
+
+[node name="NamesContainer" type="HBoxContainer" parent="SelectedControl/SoldierCard/BoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SelectedControl/SoldierCard/BoxContainer/HBoxContainer/VBoxContainer/NamesContainer"]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="MainStatTitile" type="Label" parent="SelectedControl/SoldierCard/BoxContainer/HBoxContainer/VBoxContainer/NamesContainer/VBoxContainer"]
+visible = false
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("3_heume")
+text = "Main Stat:  "
+vertical_alignment = 1
+
+[node name="SpecialtyTitle" type="Label" parent="SelectedControl/SoldierCard/BoxContainer/HBoxContainer/VBoxContainer/NamesContainer/VBoxContainer"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("3_heume")
+text = "Specialty:  "
+
+[node name="ValuesContainer" type="VBoxContainer" parent="SelectedControl/SoldierCard/BoxContainer/HBoxContainer/VBoxContainer/NamesContainer"]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="SpecialtyContainer" type="HBoxContainer" parent="SelectedControl/SoldierCard/BoxContainer/HBoxContainer/VBoxContainer/NamesContainer/ValuesContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="TextureRect2" type="TextureRect" parent="SelectedControl/SoldierCard/BoxContainer/HBoxContainer/VBoxContainer/NamesContainer/ValuesContainer/SpecialtyContainer"]
+layout_mode = 2
+texture = ExtResource("5_74fn6")
+stretch_mode = 3
+
+[node name="SpecialtyLabel" type="Label" parent="SelectedControl/SoldierCard/BoxContainer/HBoxContainer/VBoxContainer/NamesContainer/ValuesContainer/SpecialtyContainer"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+size_flags_vertical = 1
+theme = ExtResource("3_heume")
+text = "Physical Defense"
+vertical_alignment = 1
+
+[node name="ColorRect" type="ColorRect" parent="SelectedControl/SoldierCard/BoxContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(2, 4)
+layout_mode = 2
+size_flags_vertical = 3
+color = Color(0.498039, 0, 0, 0)
+
+[node name="ColorRect2" type="ColorRect" parent="SelectedControl/SoldierCard/BoxContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(2, 2)
+layout_mode = 2
+color = Color(0.498039, 0, 0, 1)
+
+[node name="ColorRect3" type="ColorRect" parent="SelectedControl/SoldierCard/BoxContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(2, 4)
+layout_mode = 2
+size_flags_vertical = 3
+color = Color(0.498039, 0, 0, 0)
+
+[node name="StatContainer" type="HBoxContainer" parent="SelectedControl/SoldierCard/BoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="TextureRect2" type="TextureRect" parent="SelectedControl/SoldierCard/BoxContainer/HBoxContainer/VBoxContainer/StatContainer"]
+layout_mode = 2
+texture = ExtResource("4_e0vny")
+stretch_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="SelectedControl/SoldierCard/BoxContainer/HBoxContainer/VBoxContainer/StatContainer"]
+self_modulate = Color(0.498039, 0, 0, 1)
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("3_heume")
+text = "trong warrior who stands tall on the battle field. Able to take many hits and pay some back."
+fit_content = true
+
+[node name="LikesDislikesContainer" type="HBoxContainer" parent="SelectedControl/SoldierCard/BoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ListContainer" type="VBoxContainer" parent="SelectedControl/SoldierCard/BoxContainer/LikesDislikesContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="LikesTitleLabel" type="Label" parent="SelectedControl/SoldierCard/BoxContainer/LikesDislikesContainer/ListContainer"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+size_flags_vertical = 1
+theme = ExtResource("3_heume")
+text = "Likes:"
+
+[node name="Like1" type="Label" parent="SelectedControl/SoldierCard/BoxContainer/LikesDislikesContainer/ListContainer"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("3_heume")
+text = "  +Heavy Armor"
+
+[node name="Like2" type="Label" parent="SelectedControl/SoldierCard/BoxContainer/LikesDislikesContainer/ListContainer"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("3_heume")
+text = "  +Simple Tactics"
+
+[node name="Like3" type="Label" parent="SelectedControl/SoldierCard/BoxContainer/LikesDislikesContainer/ListContainer"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("3_heume")
+text = "  +Fine Whiskey"
+
+[node name="ListContainer2" type="VBoxContainer" parent="SelectedControl/SoldierCard/BoxContainer/LikesDislikesContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="DislikesTitleLabel" type="Label" parent="SelectedControl/SoldierCard/BoxContainer/LikesDislikesContainer/ListContainer2"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+size_flags_vertical = 1
+theme = ExtResource("3_heume")
+text = "Dislikes:"
+
+[node name="Like1" type="Label" parent="SelectedControl/SoldierCard/BoxContainer/LikesDislikesContainer/ListContainer2"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("3_heume")
+text = "  -Dealing with Magic"
+
+[node name="Like2" type="Label" parent="SelectedControl/SoldierCard/BoxContainer/LikesDislikesContainer/ListContainer2"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("3_heume")
+text = "  -Being hit from behind"
+
+[node name="Like3" type="Label" parent="SelectedControl/SoldierCard/BoxContainer/LikesDislikesContainer/ListContainer2"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("3_heume")
+text = "  -Long walks on beach"
+
+[node name="Button" type="Button" parent="SelectedControl/SoldierCard"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" type="Control" parent="SelectedControl"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="HintBox" type="NinePatchRect" parent="SelectedControl"]
+z_index = 1
+custom_minimum_size = Vector2(300, 120)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -228.0
+offset_top = 32.0
+offset_right = 229.0
+offset_bottom = 152.0
+grow_horizontal = 2
+texture = ExtResource("17_ghpss")
+patch_margin_left = 12
+patch_margin_top = 12
+patch_margin_right = 12
+patch_margin_bottom = 12
+
+[node name="RichTextLabel" type="RichTextLabel" parent="SelectedControl/HintBox"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 12.0
+offset_top = 12.0
+offset_right = -12.0
+offset_bottom = -12.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "This choice will only determine what equipment and Pages are availible at the start of the story. 
+All class abilities are defined by Pages and can be freely changed  once new Pages are aquired."
+
+[node name="ConfirmBox" type="NinePatchRect" parent="SelectedControl"]
+z_index = 1
+custom_minimum_size = Vector2(300, 128)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -150.0
+offset_top = -160.0
+offset_right = 150.0
+offset_bottom = -32.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("17_ghpss")
+patch_margin_left = 12
+patch_margin_top = 12
+patch_margin_right = 12
+patch_margin_bottom = 12
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SelectedControl/ConfirmBox"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="SelectedControl/ConfirmBox/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Start as the Soldier?"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="SelectedControl/ConfirmBox/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="NoButton" type="TextureButton" parent="SelectedControl/ConfirmBox/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+texture_normal = ExtResource("18_3n0th")
+texture_pressed = ExtResource("19_foae7")
+texture_hover = ExtResource("20_d0shl")
+
+[node name="Label" type="Label" parent="SelectedControl/ConfirmBox/VBoxContainer/HBoxContainer/NoButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 24
+text = "No"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="YesButton" type="TextureButton" parent="SelectedControl/ConfirmBox/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+texture_normal = ExtResource("18_3n0th")
+texture_pressed = ExtResource("19_foae7")
+texture_hover = ExtResource("20_d0shl")
+
+[node name="Label" type="Label" parent="SelectedControl/ConfirmBox/VBoxContainer/HBoxContainer/YesButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 24
+text = "Yes"
+horizontal_alignment = 1
+vertical_alignment = 1

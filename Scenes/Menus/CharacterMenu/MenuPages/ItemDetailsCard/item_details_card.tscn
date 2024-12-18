@@ -16,7 +16,7 @@
 [ext_resource type="Texture2D" uid="uid://dq2cad8orar4p" path="res://assets/Sprites/UI/SymbolIcons/ArmorSymbol.png" id="13_t6qv2"]
 [ext_resource type="Texture2D" uid="uid://d17k5iaed0gdg" path="res://assets/Sprites/UI/SymbolIcons/WardSymbol.png" id="14_4xeqv"]
 
-[node name="ItemDetailsCard" type="Control" node_paths=PackedStringArray("offset_control", "icon", "description_box", "exit_button", "weapon_details", "armor_details", "default_details", "tag_label")]
+[node name="ItemDetailsCard" type="Control" node_paths=PackedStringArray("offset_control", "icon", "title_lable", "description_box", "exit_button", "weapon_details", "armor_details", "default_details", "tag_label")]
 custom_minimum_size = Vector2(300, 200)
 layout_mode = 3
 anchors_preset = 0
@@ -27,6 +27,7 @@ script = ExtResource("1_vq5a0")
 speed = 500.0
 offset_control = NodePath("OffsetControl")
 icon = NodePath("OffsetControl/IconBackground/Icon")
+title_lable = NodePath("OffsetControl/FitScaleLabel")
 description_box = NodePath("OffsetControl/WeaponDetailsControl/VBoxContainer/HBoxContainer2/DescriptionBox")
 exit_button = NodePath("OffsetControl/ExitButton/Button")
 weapon_details = NodePath("OffsetControl/WeaponDetailsControl")

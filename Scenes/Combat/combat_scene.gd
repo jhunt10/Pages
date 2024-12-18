@@ -16,8 +16,6 @@ static var QueController:ActionQueController = ActionQueController.new()
 	
 var GameState:GameStateData
 
-var player_actor_id = "TestActor_ID"
-
 func _enter_tree() -> void:
 	if !Instance: 
 		Instance = self
@@ -102,11 +100,9 @@ func load_init_state(map_scene_path:String):
 			new_actor = ActorLibrary.create_actor(actor_info['ActorKey'], {})
 		if new_actor:
 			add_actor(new_actor, actor_info.get("FactionId", 1), actor_pos)
-		if actor_info.get("FactionId", -1) == 0:
-			player_actor_id = new_actor.Id
 			
 	
-	var player_actor = get_player_actor()
+	var player_actor = StoryState.get_player_actor()
 	if !GameState.get_actor(player_actor.Id):
 		printerr("Player Actor not loaded to GameState")
 	ui_control.set_player_actor(player_actor)
@@ -114,9 +110,6 @@ func load_init_state(map_scene_path:String):
 	if actor_pos:
 		camera.snap_to_map_pos(actor_pos)
 		camera.zoom = Vector2(2,2)
-
-func get_player_actor()->BaseActor:
-	return ActorLibrary.get_actor(player_actor_id)
 
 func kill_actor(actor:BaseActor):
 	actor.die()

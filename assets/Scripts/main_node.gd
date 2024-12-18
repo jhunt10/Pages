@@ -62,6 +62,28 @@ func start_combat():
 	current_scene = combat_scene
 	self.add_child(current_scene)
 
+func start_game():
+	current_scene.queue_free()
+	if !ActionLibrary.Instance: var lib = ActionLibrary.new()
+	if !ItemLibrary.Instance: var lib = ItemLibrary.new()
+	if !EffectLibrary.Instance: var lib = EffectLibrary.new()
+	if !ActorLibrary.Instance: var lib = ActorLibrary.new()
+		
+	var char_select:StartCharacterSelectMenu = load("res://Scenes/Menus/StartCharacterSelectMenu/start_character_select_menu.tscn").instantiate()
+	self.add_child(char_select)
+	char_select.character_selected.connect(_on_start_character_selected)
+	current_scene = char_select
+
+func _on_start_character_selected(name):
+	StoryState.start_new_story(name)
+	open_camp_menu()
+
+func open_camp_menu():
+	current_scene.queue_free()
+	var camp_scene = load("res://Scenes/Menus/CampMenu/camp_menu.tscn").instantiate()
+	self.add_child(camp_scene)
+	current_scene = camp_scene
+
 func open_character_sheet(_actor:BaseActor=null, parent_node=null)->CharacterMenuControl:
 	var actor = _actor
 	if not actor:
@@ -70,13 +92,16 @@ func open_character_sheet(_actor:BaseActor=null, parent_node=null)->CharacterMen
 	var charsheet:CharacterMenuControl = load("res://Scenes/Menus/CharacterMenu/character_menu.tscn").instantiate()
 	var screen_size = self.size
 	var scale = screen_size.y / charsheet.size.y
-	charsheet.scale_control.scale = Vector2(scale, scale)
-	#if screen_size.y > charsheet.size.y * 1.5:
-		#charsheet.scale_control.scale = Vector2(1.5, 1.5)
+	#charsheet.scale_control.scale = Vector2(scale, scale)
+	charsheet.scale_control.scale = Vector2(1, 1)
+	if screen_size.y > charsheet.size.y * 1.5:
+		charsheet.scale_control.scale = Vector2(1.5, 1.5)
 	if parent_node:
 		parent_node.add_child(charsheet)
 	else:
-		center_container.add_child(charsheet)
+		self.add_child(charsheet)
+	#self.remove_child(center_container)
+	#self.add_child(center_container)
 	charsheet.set_actor(actor)
 	return charsheet
 

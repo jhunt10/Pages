@@ -67,11 +67,11 @@ func _process(delta: float) -> void:
 [node name="CharacterMenuControl" type="Control" node_paths=PackedStringArray("inventory_tabs_control", "details_card_spawn_point", "equipment_page", "page_page", "bag_page", "stats_page", "scale_control", "inventory_container", "close_button", "tab_equipment_button", "tab_pages_button", "tab_bag_button", "tab_inventory_button", "tab_stats_button", "inventory_tab_rect", "stats_tab_rect", "mouse_control")]
 custom_minimum_size = Vector2(600, 420)
 layout_mode = 3
-anchors_preset = 0
-offset_left = 110.0
-offset_top = 7.0
-offset_right = 110.0
-offset_bottom = 7.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 1
 script = ExtResource("1_b43ae")
 inventory_tabs_control = NodePath("ScaleControl/InvFilterControl")
@@ -91,6 +91,15 @@ tab_stats_button = NodePath("ScaleControl/TabsControl/StatsTabButton/Button")
 inventory_tab_rect = NodePath("ScaleControl/TabsControl/InvTabButton")
 stats_tab_rect = NodePath("ScaleControl/TabsControl/StatsTabButton")
 mouse_control = NodePath("ScaleControl/MouseOverControl")
+
+[node name="BackgroundShade" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.705882)
 
 [node name="ScaleControl" type="Control" parent="."]
 custom_minimum_size = Vector2(600, 420)
@@ -832,13 +841,6 @@ theme = ExtResource("12_dy5pv")
 text = "nt"
 vertical_alignment = 2
 
-[node name="NameLabel" type="Label" parent="ScaleControl/StatsPage/ContainerControl/StatsMainContainer/AttributesDisplay/BoxContainer/IntillegenceContainer"]
-self_modulate = Color(0.498039, 0, 0, 1)
-layout_mode = 2
-theme = ExtResource("12_dy5pv")
-text = "INT"
-horizontal_alignment = 1
-
 [node name="StatLabel" type="Label" parent="ScaleControl/StatsPage/ContainerControl/StatsMainContainer/AttributesDisplay/BoxContainer/IntillegenceContainer"]
 self_modulate = Color(0.498039, 0, 0, 1)
 custom_minimum_size = Vector2(30, 0)
@@ -1159,7 +1161,7 @@ layout_mode = 2
 size_flags_vertical = 3
 
 [node name="AtkStatsContainer" type="Container" parent="ScaleControl/StatsPage/ContainerControl/StatsMainContainer" node_paths=PackedStringArray("background", "inner_container")]
-custom_minimum_size = Vector2(12, 105)
+custom_minimum_size = Vector2(12, 90)
 layout_mode = 2
 script = ExtResource("16_ep8hk")
 background = NodePath("Background")
@@ -1463,7 +1465,7 @@ layout_mode = 2
 size_flags_vertical = 3
 
 [node name="DefStatsContainer" type="Container" parent="ScaleControl/StatsPage/ContainerControl/StatsMainContainer" node_paths=PackedStringArray("background", "inner_container")]
-custom_minimum_size = Vector2(12, 161)
+custom_minimum_size = Vector2(12, 118)
 layout_mode = 2
 script = ExtResource("16_ep8hk")
 background = NodePath("Background")

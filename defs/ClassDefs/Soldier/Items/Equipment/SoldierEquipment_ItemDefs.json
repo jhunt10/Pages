@@ -1,0 +1,117 @@
+[
+    {
+        "ItemKey":"OldSoldierHelmet",
+        "_ObjectScript": "res://assets/Scripts/Items/Equipment/BaseArmorEquipment.gd",
+        "Details":{
+			"DisplayName": "Old Helmet",
+			"SnippetDesc": "A soldier's old Helmet.",
+			"Description": "Standard issue helmet for some army somewhere. Old, but still works.",
+			"Tags": ["Head"],
+			"LargeIcon":"OldHelm.png",
+			"SmallIcon":"OldHelm.png"
+		},
+        "SpriteSheet":"OldHelm_SpriteSheet.png",
+        "EquipSlot":"Head",
+        "Armor": 5,
+        "Ward": 0
+    },
+    {
+        "ItemKey":"OldSoldierArmor",
+        "_ObjectScript": "res://assets/Scripts/Items/Equipment/BaseArmorEquipment.gd",
+        "Details":{
+			"DisplayName": "Old Armor",
+			"SnippetDesc": "A soldier's old Armor.",
+			"Description": "Standard issue armor for some army somewhere. Old, but still works.",
+			"Tags": ["Body"],
+			"LargeIcon":"OldArmor.png",
+			"SmallIcon":"OldArmor.png"
+		},
+        "SpriteSheet":"OldArmor_SpriteSheet.png",
+        "EquipSlot":"Body",
+        "Armor": 5,
+        "Ward": 0
+    },
+    {
+        "ItemKey":"OldSoldierBoots",
+        "_ObjectScript": "res://assets/Scripts/Items/Equipment/BaseArmorEquipment.gd",
+        "Details":{
+			"DisplayName": "Old Boots",
+			"SnippetDesc": "A soldier's old Boots.",
+			"Description": "Standard issue boots for some army somewhere. Old, but still works.",
+			"Tags": ["Feet"],
+			"LargeIcon":"OldBoots.png",
+			"SmallIcon":"OldBoots.png"
+		},
+        "SpriteSheet":"OldBoots_SpriteSheet.png",
+        "EquipSlot":"Feet",
+        "Armor": 5,
+        "Ward": 0
+    },
+    {
+        "ItemKey":"OldSword",
+        "_ObjectScript": "res://assets/Scripts/Items/Equipment/BaseWeaponEquipment.gd",
+        "Details":{
+			"DisplayName": "Old Sword",
+			"SnippetDesc": "A soldier's old sword.",
+			"Description": "A old sword dulled from years of practice but no combat. Old, but still works.",
+			"Tags": ["Weapon"],
+			"LargeIcon":"OldSword.png",
+			"SmallIcon":"OldSword.png"
+		},
+        "WeaponSpriteData":{
+            "Offset":[0,0],
+            "SpriteName":"OldSword",
+            "Rotation":-60
+        },
+        "EquipSlot":"Weapon",
+        "CanOffhand":false,
+        "DamageData":{
+            "AtkStat": "Strength",
+            "AtkPower": 30,
+            "DamageEffect": "Slash_DamageEffect",
+            "DamageType": "Slash",
+            "DamageVarient": 0.1,
+            "DefenseType": "Armor"
+        },
+        "TargetParams": {
+            "EffectsAllies": false,
+            "EffectsEnemies": true,
+            "LineOfSight": true,
+            "TargetArea": "[[-1,0],[-1,1],[0,1],[1,1],[1,0]]",
+            "TargetType": "Actor"
+        },
+        "AttackTags": ["Melee", "Physical"],
+        "WeaponClass": "Medium",
+        "WeaponAnimation": "weapon_swing"
+    },
+    {
+        "ItemKey":"OldShield",
+        "_ObjectScript": "res://assets/Scripts/Items/Equipment/BaseArmorEquipment.gd",
+        "Details":{
+			"DisplayName": "Old Shield",
+			"SnippetDesc": "A soldier's old Shield.",
+			"Description": "Standard issue shield for some army somewhere. Old, but still works.",
+			"Tags": ["OffHand","Shield"],
+			"LargeIcon":"OldShield.png",
+			"SmallIcon":"OldShield.png"
+		},
+        "StatMods":{
+			"StatMod1": { 
+				"StatName": "BlockChance",
+				"DisplayName": "Old Shield",
+				"ModType":"Set", 
+				"Value":45
+			},
+			"StatMod2": { 
+				"StatName": "BlockMod",
+				"DisplayName": "Old Shield",
+				"ModType":"Set", 
+				"Value":0.5
+			}
+        },
+        "SpriteSheet":"OldShield_SpriteSheet.png",
+        "EquipSlot":"OffHand",
+        "Armor": 5,
+        "Ward": 0
+    }
+]

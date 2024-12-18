@@ -18,7 +18,7 @@ func _ready() -> void:
 	dev_tools_button.pressed.connect(_dev_tools)
 
 func start_combat():
-	root_node.start_combat()
+	root_node.start_game()
 
 func _open_character_edit():
 	root_node.open_character_sheet()

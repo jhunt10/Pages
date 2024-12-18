@@ -18,11 +18,17 @@ func _init(key:String, def_load_path:String, def:Dictionary, id:String='', data:
 	var effect_key = def.get("EffectKey")
 	if action_key and not effect_key:
 		var action_def = ActionLibrary.get_action_def(action_key)
-		details_data = BaseLoadObjectLibrary._merge_defs(details_data, action_def.get("Details", {}))
+		var org_detail_data =  action_def.get("Details", {"Tags":[]})
+		if not org_detail_data['Tags'].has("Action"):
+			org_detail_data['Tags'].append("Action")
+		details_data = BaseLoadObjectLibrary._merge_defs(details_data,org_detail_data)
 		details = ObjectDetailsData.new(ActionLibrary.Instance._defs_to_load_paths[action_key], details_data)
 	if effect_key and not action_key:
 		var effect_def = EffectLibrary.get_effect_def(effect_key)
-		details_data = BaseLoadObjectLibrary._merge_defs(details_data, effect_def.get("Details", {}))
+		var org_detail_data =  effect_def.get("Details", {"Tags":[]})
+		if not org_detail_data['Tags'].has("Passive"):
+			org_detail_data['Tags'].append("Passive")
+		details_data = BaseLoadObjectLibrary._merge_defs(details_data,org_detail_data)
 		details = ObjectDetailsData.new(EffectLibrary.Instance._defs_to_load_paths[effect_key], details_data)
 
 func get_action_key():

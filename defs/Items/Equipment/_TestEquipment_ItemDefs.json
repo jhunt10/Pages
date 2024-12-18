@@ -21,6 +21,45 @@
         ]
     },
     {
+        "ItemKey":"PageQue_OldJournal",
+        "_ObjectScript": "res://assets/Scripts/Items/Equipment/BaseQueEquipment.gd",
+        "Details":{
+			"DisplayName": "Old Journal",
+			"SnippetDesc": "Our Hero's old journal.",
+			"Description": "An old journal from our Hero's wandering days.",
+			"Tags": ["Que"],
+			"LargeIcon":"TestBook.png",
+			"SmallIcon":"TestBook.png"
+		},
+        "PagesPerRound": 4,
+        "ItemSlotsData": [
+            {
+                "Key":"Bar",
+                "DisplayName":"Bar",
+                "Count": 1,
+                "FilterData":{
+                    "RequiredTags":"Bar"
+                }
+            },
+            {
+                "Key":"Class",
+                "DisplayName":"Class",
+                "Count": 1,
+                "FilterData":{
+                    "RequiredTags":"ClassPage"
+                }
+            },
+            {
+                "Key":"Actions",
+                "DisplayName":"Any Page",
+                "Count": 6,
+                "FilterData":{
+                    "RequiredTags":"Action"
+                }
+            }
+        ]
+    },
+    {
         "ItemKey":"PageQue_FieldManual",
         "_ObjectScript": "res://assets/Scripts/Items/Equipment/BaseQueEquipment.gd",
         "Details":{
@@ -483,5 +522,23 @@
         "EquipSlot":"OffHand",
         "Armor": 0,
         "Ward": 5
+    },
+    {
+        "ItemKey":"EmptyOffHand",
+        "_ObjectScript": "res://assets/Scripts/Items/Equipment/BaseArmorEquipment.gd",
+        "Details":{
+			"DisplayName": "Empty Off",
+			"SnippetDesc": "An offhand made for testing.",
+			"Description": "An offhand made for testing.",
+			"Tags": ["OffHand"],
+			"LargeIcon":"Empty.png",
+			"SmallIcon":"Empty.png"
+		},
+        "StatMods":{
+		},
+        "SpriteSheet":null,
+        "EquipSlot":"OffHand",
+        "Armor": 0,
+        "Ward": 0
     }
 ]

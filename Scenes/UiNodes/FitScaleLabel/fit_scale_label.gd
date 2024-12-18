@@ -31,7 +31,7 @@ func _process(delta: float) -> void:
 			new_x = (self.size.x - (label_scale * label.size.x)) / 2
 		var new_y = (self.size.y - (label_scale * label.size.y)) / 2
 		label.position = Vector2i(new_x, new_y)
-		print("Size Dirty: Self: %s | Label: %s | New Scale: %s" % [self.size, label.size, label_scale])
+		#print("Size Dirty: Self: %s | Label: %s | New Scale: %s" % [self.size, label.size, label_scale])
 		#if label_scale == 1:
 			#label.custom_minimum_size = self.size
 		#else:

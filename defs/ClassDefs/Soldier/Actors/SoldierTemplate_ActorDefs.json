@@ -1,0 +1,53 @@
+[
+    {
+		"ParentKey": "DefaultActor",
+		"ActorKey": "SoldierTemplate",
+		"Details":{
+			"DisplayName": "Soldier",
+			"SnippetDesc": "The hero of our story.",
+			"Description": "The hero of our story.",
+			"Tags": ["Player"],
+			"LargeIcon":"GuyPortrait.png",
+			"SmallIcon":"GuyPortrait.png"
+		},
+		"Stats":{
+			"BarStat:Health":100,
+			"BarMax:Health":100,
+			"BarRegen:Health:Round":0,
+			"BarRegen:Health:Turn":0,
+			"Mass":10,
+			"Speed":10,
+			"Level":1,
+			"Strength": 10,
+			"Agility": 10,
+			"Intelligence": 10,
+			"Wisdom": 10,
+			"PagesPerRound": 0
+		},
+		"IsPlayer": true,
+		"SpriteFrameWH": [12,4],
+		"SpriteOffset": [0,-16],
+		"PortraitRect":[12, 20, 24, 24],
+		"EquipmentSlots": ["Que", "Bag", "Head", "Body", "Feet", "Trinket", "MainHand", "OffHand" ],
+        "SpawnEquipmentList": [
+            "PageQue_OldJournal",
+            "TestBag",
+            "OldSoldierHelmet",
+            "OldSoldierArmor",
+            "OldSoldierBoots",
+            "OldShield",
+            "OldSword"
+        ],
+        "SpawnPageList":[
+			"HeavyFoot",
+			"WideGuard",
+			"StaminaPool_BarStatPage",
+            "MoveForward",
+            "TurnLeft",
+            "TurnRight",
+            "BasicWeaponAttack",
+			"GuardAction",
+			"Cleave"
+        ]
+	}
+]
