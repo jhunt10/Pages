@@ -68,14 +68,18 @@ static func create_actor(key:String, data:Dictionary, premade_id:String = '')->B
 		
 	return actor
 
-static func save_actors():
-	if !Instance: Instance = ActorLibrary.new()
-	Instance.save_objects_data("res://saves/Actors/_TestActor_ActorSave.json")
+#static func save_actors():
+	#if !Instance: Instance = ActorLibrary.new()
+	#Instance.save_objects_data("res://saves/Actors/_TestActor_ActorSave.json")
 
 static func load_actors(data:Dictionary):
 	if !Instance: Instance = ActorLibrary.new()
 	Instance._load_objects_saved_data(data)
-	
+
+
+static func purge_actors():
+	if !Instance: Instance = ActorLibrary.new()
+	Instance.purge_objects()
 
 #func _search_for_actors(path:String, list:Array):
 	#var dir = DirAccess.open(path)

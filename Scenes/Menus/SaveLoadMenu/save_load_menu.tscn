@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://bdwsbeo8w1f1k"]
+[gd_scene load_steps=21 format=3 uid="uid://bdwsbeo8w1f1k"]
 
 [ext_resource type="Script" path="res://Scenes/Menus/SaveLoadMenu/save_load_menu.gd" id="1_gp8dy"]
 [ext_resource type="Texture2D" uid="uid://mpwjrtfjnbth" path="res://Scenes/Menus/CharacterMenu/BookBackground.png" id="1_v5dju"]
@@ -18,6 +18,7 @@
 [ext_resource type="Texture2D" uid="uid://b0kicr71nqhmi" path="res://Scenes/Menus/StartCharacterSelectMenu/Button.png" id="16_k3e7j"]
 [ext_resource type="Texture2D" uid="uid://bn3rws8kuwp30" path="res://Scenes/Menus/StartCharacterSelectMenu/ButtonPressed.png" id="17_6a5ey"]
 [ext_resource type="Texture2D" uid="uid://gemu0x8hrvub" path="res://Scenes/Menus/StartCharacterSelectMenu/ButtonHover.png" id="18_tmbc6"]
+[ext_resource type="Script" path="res://Scenes/Menus/SaveLoadMenu/message_box.gd" id="19_cf6ly"]
 
 [sub_resource type="GDScript" id="GDScript_bswgy"]
 script/source = "extends TextureRect
@@ -33,7 +34,7 @@ func _process(delta: float) -> void:
 	pass
 "
 
-[node name="SaveLoadMenu" type="Control" node_paths=PackedStringArray("scale_control", "close_button", "menu_title_label", "premade_save_slot", "save_slot_new", "slots_container", "sel_save_name_label", "sel_pretty_pic", "sel_save_details_container", "sel_save_date_label", "sel_save_loaction_label", "sel_runtime_label", "sel_party_container", "save_popup", "save_button", "save_button_label", "save_button_highlight")]
+[node name="SaveLoadMenu" type="Control" node_paths=PackedStringArray("scale_control", "close_button", "scroll_bar", "menu_title_label", "premade_save_slot", "save_slot_new", "slots_container", "sel_save_name_label", "sel_pretty_pic", "sel_save_details_container", "sel_save_date_label", "sel_save_loaction_label", "sel_runtime_label", "sel_party_container", "message_box", "save_popup", "save_button", "save_button_label", "save_button_highlight")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -43,6 +44,7 @@ grow_vertical = 2
 script = ExtResource("1_gp8dy")
 scale_control = NodePath("ScaleControl")
 close_button = NodePath("ScaleControl/TabsControl/ExitTabButton/Button")
+scroll_bar = NodePath("ScaleControl/ScrollBar")
 menu_title_label = NodePath("ScaleControl/TitlePatchRect/HBoxContainer/MenuTitleLabel")
 premade_save_slot = NodePath("ScaleControl/ScrollContainer/VBoxContainer/PreMade_SaveSlotContainer")
 save_slot_new = NodePath("ScaleControl/ScrollContainer/VBoxContainer/NewSaveSlotContainer")
@@ -54,6 +56,7 @@ sel_save_date_label = NodePath("ScaleControl/SaveDetailsControl/NinePatchRect2/V
 sel_save_loaction_label = NodePath("ScaleControl/SaveDetailsControl/NinePatchRect2/VBoxContainer/LocationContainer/LocationNameLabel")
 sel_runtime_label = NodePath("ScaleControl/SaveDetailsControl/NinePatchRect2/VBoxContainer/TimeDateContainer/RuntmieLabel")
 sel_party_container = NodePath("ScaleControl/SaveDetailsControl/NinePatchRect2/VBoxContainer/PartyContainer")
+message_box = NodePath("ScaleControl/MessageBox")
 save_popup = NodePath("ScaleControl/SaveAsBox")
 save_button = NodePath("ScaleControl/SaveDetailsControl/SaveButton/Button")
 save_button_label = NodePath("ScaleControl/SaveDetailsControl/SaveButton/Label")
@@ -91,7 +94,7 @@ offset_right = 600.0
 offset_bottom = 420.0
 texture = ExtResource("1_v5dju")
 
-[node name="ScrollBar" parent="ScaleControl" instance=ExtResource("2_1xa6p")]
+[node name="ScrollBar" parent="ScaleControl" node_paths=PackedStringArray("scroll_container") instance=ExtResource("2_1xa6p")]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
@@ -103,6 +106,7 @@ offset_right = -26.0
 offset_bottom = -24.0
 grow_horizontal = 0
 grow_vertical = 2
+scroll_container = NodePath("../ScrollContainer")
 
 [node name="TitlePatchRect" type="NinePatchRect" parent="ScaleControl"]
 layout_mode = 1
@@ -699,6 +703,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="SaveAsBox" type="NinePatchRect" parent="ScaleControl" node_paths=PackedStringArray("name_input", "save_button", "back_button")]
+visible = false
 z_index = 1
 custom_minimum_size = Vector2(300, 150)
 layout_mode = 1
@@ -722,9 +727,11 @@ back_button = NodePath("VBoxContainer/HBoxContainer/NoButton")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ScaleControl/SaveAsBox"]
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 12.0
+offset_right = -12.0
 grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
@@ -779,5 +786,141 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 24
 text = "Save"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ComfirmBox" type="NinePatchRect" parent="ScaleControl"]
+visible = false
+z_index = 1
+custom_minimum_size = Vector2(300, 150)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -150.0
+offset_top = 64.0
+offset_right = 150.0
+offset_bottom = 214.0
+grow_horizontal = 2
+texture = ExtResource("14_ql31q")
+patch_margin_left = 12
+patch_margin_top = 12
+patch_margin_right = 12
+patch_margin_bottom = 12
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScaleControl/ComfirmBox"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 12.0
+offset_top = 12.0
+offset_right = -12.0
+offset_bottom = -12.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="ScaleControl/ComfirmBox/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ScaleControl/ComfirmBox/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 24
+text = "Load Game: "
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="ScaleControl/ComfirmBox/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "Save Name"
+
+[node name="Label3" type="Label" parent="ScaleControl/ComfirmBox/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Any unsaved progress will be lost"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ScaleControl/ComfirmBox/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="NoButton" type="TextureButton" parent="ScaleControl/ComfirmBox/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+texture_normal = ExtResource("16_k3e7j")
+texture_pressed = ExtResource("17_6a5ey")
+texture_hover = ExtResource("18_tmbc6")
+
+[node name="Label" type="Label" parent="ScaleControl/ComfirmBox/VBoxContainer/HBoxContainer/NoButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 24
+text = "No"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="YesButton" type="TextureButton" parent="ScaleControl/ComfirmBox/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+texture_normal = ExtResource("16_k3e7j")
+texture_pressed = ExtResource("17_6a5ey")
+texture_hover = ExtResource("18_tmbc6")
+
+[node name="Label" type="Label" parent="ScaleControl/ComfirmBox/VBoxContainer/HBoxContainer/YesButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 24
+text = "Yes"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MessageBox" type="NinePatchRect" parent="ScaleControl" node_paths=PackedStringArray("message_label")]
+visible = false
+z_index = 1
+custom_minimum_size = Vector2(300, 150)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -150.0
+offset_top = 64.0
+offset_right = 150.0
+offset_bottom = 214.0
+grow_horizontal = 2
+texture = ExtResource("14_ql31q")
+patch_margin_left = 12
+patch_margin_top = 12
+patch_margin_right = 12
+patch_margin_bottom = 12
+script = ExtResource("19_cf6ly")
+message_label = NodePath("VBoxContainer/Label")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScaleControl/MessageBox"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -12.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="ScaleControl/MessageBox/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 24
+text = "Game Saved"
 horizontal_alignment = 1
 vertical_alignment = 1

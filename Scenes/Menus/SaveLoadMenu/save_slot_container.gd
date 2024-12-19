@@ -1,23 +1,8 @@
 class_name SaveSlotContainer
 extends NinePatchRect
 
-@export var selected:bool:
-	set(val):
-		selected = val
-		if highlight:
-			if mouse_over or selected:
-				highlight.show()
-			else:
-				highlight.hide()
-@export var mouse_over:bool:
-	set(val):
-		mouse_over = val
-		print("Moues Over: %s " % [val])
-		if highlight:
-			if mouse_over or selected:
-				highlight.show()
-			else:
-				highlight.hide()
+@export var selected:bool
+@export var mouse_over:bool
 @export var name_label:Label
 @export var date_time_label:Label
 @export var button:Button

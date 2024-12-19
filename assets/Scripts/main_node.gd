@@ -9,24 +9,6 @@ static var action_library:ActionLibrary:
 			action_library = ActionLibrary.new()
 		return action_library
 
-static var item_libary:ItemLibrary:
-	get: 
-		if !item_libary:
-			item_libary = ItemLibrary.new()
-		return item_libary
-
-static var actor_libary:ActorLibrary:
-	get: 
-		if !actor_libary:
-			actor_libary = ActorLibrary.new()
-		return actor_libary
-
-static var effect_libary:EffectLibrary:
-	get: 
-		if !effect_libary:
-			effect_libary = EffectLibrary.new()
-		return effect_libary
-
 static var vfx_libray:VfxLibrary:
 	get: 
 		if !vfx_libray:
@@ -87,7 +69,6 @@ func open_save_menu():
 	if screen_size.y > save_scene.size.y * 1.5:
 		save_scene.scale_control.scale = Vector2(1.5, 1.5)
 	self.add_child(save_scene)
-	current_scene = save_scene
 
 func open_load_menu():
 	var save_scene:SaveLoadMenu = load("res://Scenes/Menus/SaveLoadMenu/save_load_menu.tscn").instantiate()
@@ -98,7 +79,6 @@ func open_load_menu():
 	if screen_size.y > save_scene.size.y * 1.5:
 		save_scene.scale_control.scale = Vector2(1.5, 1.5)
 	self.add_child(save_scene)
-	current_scene = save_scene
 
 func open_camp_menu():
 	current_scene.queue_free()

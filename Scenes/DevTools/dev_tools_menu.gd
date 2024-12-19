@@ -67,6 +67,5 @@ func items_to_inventory():
 				printerr("DevTools.items_to_inventory: Failed to create item '%s'." % [new_item_id])
 			else:
 				PlayerInventory.add_item(new_item)
-	ItemLibrary.save_items()
 			
 			

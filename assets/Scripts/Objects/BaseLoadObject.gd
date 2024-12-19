@@ -43,3 +43,6 @@ func get_load_path()->String:
 ## Returns the value of given key if found in _data or _def in that order
 func get_load_val(key:String, default=null):
 	return _data.get(key, _def.get(key, default))
+
+func on_delete():
+	pass

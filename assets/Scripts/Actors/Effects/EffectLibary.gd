@@ -30,6 +30,10 @@ func _init() -> void:
 	Instance = self
 	Instance.init_load()
 
+static func purge_effects():
+	if !Instance: Instance = EffectLibrary.new()
+	Instance.purge_objects()
+
 static func create_effect(source, key:String, actor:BaseActor, data:Dictionary, force_id:String='')->BaseEffect:
 	print("Creating Effect: %s on actor %s" %[key, actor.Id])
 	var effect_data = data.duplicate(true)

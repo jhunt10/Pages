@@ -52,7 +52,6 @@ static func get_or_create_item(item_id:String, item_key:String, data:Dictionary)
 		return item
 	return create_item(item_key, data, item_id)
 	
-
 static func create_item(key:String, data:Dictionary, force_id:String='')->BaseItem:
 	if !Instance: Instance = ItemLibrary.new()
 	var item = Instance.create_object(key, force_id, data)
@@ -60,12 +59,10 @@ static func create_item(key:String, data:Dictionary, force_id:String='')->BaseIt
 		printerr("ItemLibrary.create_item: Failed to make item '%s'." % [key])
 	return item
 
-static func save_items():
-	if !Instance: Instance = ItemLibrary.new()
-	var data = {}
-	data["PlayerInventory"] = PlayerInventory.list_all_held_item_ids()
-	Instance.save_objects_data("res://saves/Items/_TestItem_ItemSave.json", data)
 
+static func purge_items():
+	if !Instance: Instance = ItemLibrary.new()
+	Instance.purge_objects()
 
 static func load_items(data:Dictionary):
 	if !Instance: Instance = ItemLibrary.new()

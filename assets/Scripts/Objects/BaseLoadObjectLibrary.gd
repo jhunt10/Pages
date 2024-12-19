@@ -81,11 +81,17 @@ func create_object(object_key:String, id:String='', data:Dictionary={})->BaseLoa
 		_loaded_objects[new_object._id] = new_object
 	return new_object
 
+func purge_objects():
+	for loaded_object:BaseLoadObject in _loaded_objects:
+		loaded_object.on_delete()
+	_loaded_objects.clear()
+	
 func erase_object(object_id:String):
 	if _loaded_objects.keys().has(object_id):
+		_loaded_objects[object_id].on_delete()
 		_loaded_objects.erase(object_id)
 
-func build_save_data(extra_data:Dictionary={})->Dictionary:
+func build_save_data()->Dictionary:
 	var obj_datas:Dictionary = {}
 	for object_id in _loaded_objects.keys():
 		var object:BaseLoadObject = _loaded_objects[object_id]
@@ -93,18 +99,16 @@ func build_save_data(extra_data:Dictionary={})->Dictionary:
 			var data = object.save_data()
 			if LOGGING: print("# Saving %s Datas with id: %s" % [get_object_name(), object_id])
 			obj_datas[object_id] = data
-	var save_data = extra_data.duplicate(true)
-	save_data['Objects'] = obj_datas
-	return save_data
+	return obj_datas
 
-func save_objects_data(file_path:String, extra_data={}):
-	if LOGGING: print("#### Saving %s Datas to: %s" % [get_object_name(), file_path])
-	var save_data = build_save_data(extra_data)
-	var save_data_string = JSON.stringify(save_data)
-	var file = FileAccess.open(file_path, FileAccess.WRITE)
-	file.store_string(save_data_string)
-	file.close()
-	if LOGGING: print("#### Saving %s Datas Done" % [get_object_name()])
+#func save_objects_data(file_path:String, extra_data={}):
+	#if LOGGING: print("#### Saving %s Datas to: %s" % [get_object_name(), file_path])
+	#var save_data = build_save_data(extra_data)
+	#var save_data_string = JSON.stringify(save_data)
+	#var file = FileAccess.open(file_path, FileAccess.WRITE)
+	#file.store_string(save_data_string)
+	#file.close()
+	#if LOGGING: print("#### Saving %s Datas Done" % [get_object_name()])
 
 func get_sub_script(script_path):
 	if _cached_scripts.keys().has(script_path):
@@ -237,12 +241,10 @@ func _load_static_objects():
 			if LOGGING: print("# - Loaded Static Object: %s" % [new_object._id])
 
 ## Parse json save file and load to _loaded_objects
-func _load_objects_saved_data(saved_datas:Dictionary):
-	#var file = FileAccess.open(file_path, FileAccess.READ)
-	#var text:String = file.get_as_text()
-	#if !text:
-		#return
-	
+func _load_objects_saved_data(saved_datas:Dictionary, purge_data:bool=true):
+	if purge_data:
+		purge_objects()
+		
 	var object_key_name = get_object_key_name()
 	#var saved_data:Dictionary = JSON.parse_string(text)
 	#var object_datas = saved_data.get("Objects", {})

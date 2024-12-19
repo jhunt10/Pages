@@ -15,4 +15,4 @@ func _ready() -> void:
 
 func on_save():
 	on_confirmed.emit(name_input.text)
-	self.queue_free()
+	self.hide()

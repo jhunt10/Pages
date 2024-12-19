@@ -34,6 +34,8 @@ var _sub_filters:Array = []
 
 var _cached_size
 
+var delayed_build:bool = false
+
 func _ready() -> void:
 	if Engine.is_editor_hint(): return
 	filter_option_button.get_options_func = get_filter_options
@@ -46,12 +48,15 @@ func _ready() -> void:
 		premade_item_button.visible = false
 		if !ItemLibrary.Instance:
 			ItemLibrary.new()
-		build_item_list()
+		delayed_build = true
 	inventory_box_highlight.hide()
 	scroll_container.mouse_entered.connect(on_mouse_enter_inventory_box)
 	scroll_container.mouse_exited.connect(on_mouse_exit_inventory_box)
 
 func _process(delta: float) -> void:
+	if delayed_build:
+		build_item_list()
+		delayed_build = false
 	if self.size != _cached_size:
 		calc_button_size()
 	if Engine.is_editor_hint(): return

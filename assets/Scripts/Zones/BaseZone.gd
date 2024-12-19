@@ -18,7 +18,7 @@ func _init(args:Dictionary, center) -> void:
 	var area = args['ZoneArea']
 	area_matrix = AreaMatrix.new(area)
 	EffectKey = args['EffectKey']
-	var effect_def = MainRootNode.effect_libary.get_effect_data(EffectKey)
+	var effect_def = EffectLibrary.get_effect_def(EffectKey)
 	if effect_def.has("TurnDuration") or effect_def.has("RoundDuration"):
 		push_error("Zone ", ZoneKey, " found with effect ", EffectKey, " which uses Durrations. Zone effects should not have a Duration.")
 	

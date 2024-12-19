@@ -89,15 +89,19 @@ func _process(delta: float) -> void:
 			#stop_dragging()
 
 func set_actor(actor:BaseActor):
+	var start_time = Time.get_unix_time_from_system()
+	print("Starting Set Actor: %s" % Time.get_datetime_string_from_unix_time(start_time))
 	_actor = actor
 	equipment_page.set_actor(actor)
 	page_page.set_actor(actor)
 	bag_page.set_actor(actor)
 	stats_page.set_actor(actor)
+	var finish_time = Time.get_unix_time_from_system()
+	var time_diff = finish_time - start_time
+	print("Finished Set Actor: %s" % Time.get_datetime_string_from_unix_time(finish_time))
+	print("RunTime: %s" % Time.get_time_string_from_unix_time(time_diff))
 
 func close_menu():
-	ActorLibrary.save_actors()
-	ItemLibrary.save_items()
 	self.queue_free()
 
 func on_details_card_freed():
