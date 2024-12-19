@@ -25,7 +25,7 @@ func _process(delta: float) -> void:
 func estimate_hight()->float:
 	return title_label.size.y + (page_slots_containers.size() * 64)
 
-func set_slot_set_data(page_holder:PageHolder, slot_set_data:Dictionary):
+func set_slot_set_data(actor:BaseActor, page_holder:PageHolder, slot_set_data:Dictionary):
 	_slot_set_key = slot_set_data['Key']
 	title_label.text = slot_set_data['DisplayName']
 	var index_offset = slot_set_data['IndexOffset']
@@ -51,7 +51,7 @@ func set_slot_set_data(page_holder:PageHolder, slot_set_data:Dictionary):
 		_buttons[raw_index] = new_button
 		var item_id = page_holder.get_item_id_in_slot(raw_index)
 		if item_id:
-			new_button.set_key(item_id)
+			new_button.set_key(actor, item_id)
 		new_button.visible = true
 		tile_mapping.append(Vector2i(x,y))
 		x += 1

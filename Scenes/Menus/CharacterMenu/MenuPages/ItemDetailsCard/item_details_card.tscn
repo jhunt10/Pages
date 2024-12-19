@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://btr6wpgyitqc0"]
+[gd_scene load_steps=19 format=3 uid="uid://btr6wpgyitqc0"]
 
 [ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/ItemDetailsCard/item_details_card.gd" id="1_vq5a0"]
 [ext_resource type="Texture2D" uid="uid://bqmtfkh0uj2bk" path="res://Scenes/Menus/CharacterMenu/MenuPages/ItemDetailsCard/DetailsCard_Background_working.png" id="2_7ol1j"]
@@ -14,11 +14,12 @@
 [ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/ItemDetailsCard/action_details_card.gd" id="12_fd6vk"]
 [ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/ItemDetailsCard/default_item_details_control.gd" id="12_gvhwc"]
 [ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/ItemDetailsCard/armor_details_control.gd" id="12_rxuc0"]
+[ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/ItemDetailsCard/cost_container.gd" id="13_an536"]
 [ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/ItemDetailsCard/cost_label.gd" id="13_kr8n3"]
 [ext_resource type="Texture2D" uid="uid://dq2cad8orar4p" path="res://assets/Sprites/UI/SymbolIcons/ArmorSymbol.png" id="13_t6qv2"]
 [ext_resource type="Texture2D" uid="uid://d17k5iaed0gdg" path="res://assets/Sprites/UI/SymbolIcons/WardSymbol.png" id="14_4xeqv"]
 
-[node name="ItemDetailsCard" type="Control" node_paths=PackedStringArray("offset_control", "icon", "title_lable", "description_box", "exit_button", "weapon_details", "armor_details", "default_details", "tag_label")]
+[node name="ItemDetailsCard" type="Control" node_paths=PackedStringArray("offset_control", "icon", "title_lable", "description_box", "exit_button", "weapon_details", "armor_details", "action_details", "default_details", "tag_label")]
 custom_minimum_size = Vector2(300, 200)
 layout_mode = 3
 anchors_preset = 0
@@ -34,6 +35,7 @@ description_box = NodePath("OffsetControl/WeaponDetailsControl/VBoxContainer/HBo
 exit_button = NodePath("OffsetControl/ExitButton/Button")
 weapon_details = NodePath("OffsetControl/WeaponDetailsControl")
 armor_details = NodePath("OffsetControl/ArmorDetailsControl")
+action_details = NodePath("OffsetControl/ActionPageDetailsControl")
 default_details = NodePath("OffsetControl/DefaultDetailsControl")
 tag_label = NodePath("OffsetControl/TagLabel")
 
@@ -234,7 +236,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ActionPageDetailsControl" type="Control" parent="OffsetControl" node_paths=PackedStringArray("parent_card_control")]
+[node name="ActionPageDetailsControl" type="Control" parent="OffsetControl" node_paths=PackedStringArray("parent_card_control", "description_box", "cost_container", "range_display")]
 anchors_preset = 0
 offset_left = 17.0
 offset_top = 68.0
@@ -242,6 +244,9 @@ offset_right = 278.0
 offset_bottom = 178.0
 script = ExtResource("12_fd6vk")
 parent_card_control = NodePath("../..")
+description_box = NodePath("VBoxContainer/HBoxContainer/DescriptionBox")
+cost_container = NodePath("VBoxContainer/CostContainer")
+range_display = NodePath("VBoxContainer/HBoxContainer/MiniRangeDisplay")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="OffsetControl/ActionPageDetailsControl"]
 layout_mode = 1
@@ -251,32 +256,37 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="OffsetControl/ActionPageDetailsControl/VBoxContainer"]
+[node name="CostContainer" type="HBoxContainer" parent="OffsetControl/ActionPageDetailsControl/VBoxContainer" node_paths=PackedStringArray("title_label", "cost_label")]
 layout_mode = 2
+script = ExtResource("13_an536")
+title_label = NodePath("CostTitle")
+cost_label = NodePath("CostLabel")
 
-[node name="CostTitle" type="Label" parent="OffsetControl/ActionPageDetailsControl/VBoxContainer/HBoxContainer2"]
+[node name="CostTitle" type="Label" parent="OffsetControl/ActionPageDetailsControl/VBoxContainer/CostContainer"]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("4_xmy3g")
 text = "Costs: "
 
-[node name="CostLabel" type="HBoxContainer" parent="OffsetControl/ActionPageDetailsControl/VBoxContainer/HBoxContainer2"]
+[node name="CostLabel" type="HBoxContainer" parent="OffsetControl/ActionPageDetailsControl/VBoxContainer/CostContainer" node_paths=PackedStringArray("name_label", "cost_label")]
 layout_mode = 2
 script = ExtResource("13_kr8n3")
+name_label = NodePath("NameLabel")
+cost_label = NodePath("ValueLabel")
 
-[node name="NameLabel" type="Label" parent="OffsetControl/ActionPageDetailsControl/VBoxContainer/HBoxContainer2/CostLabel"]
+[node name="NameLabel" type="Label" parent="OffsetControl/ActionPageDetailsControl/VBoxContainer/CostContainer/CostLabel"]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("4_xmy3g")
 text = "Stamina"
 
-[node name="Seperator" type="Label" parent="OffsetControl/ActionPageDetailsControl/VBoxContainer/HBoxContainer2/CostLabel"]
+[node name="Seperator" type="Label" parent="OffsetControl/ActionPageDetailsControl/VBoxContainer/CostContainer/CostLabel"]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("4_xmy3g")
 text = ":"
 
-[node name="ValueLabel" type="Label" parent="OffsetControl/ActionPageDetailsControl/VBoxContainer/HBoxContainer2/CostLabel"]
+[node name="ValueLabel" type="Label" parent="OffsetControl/ActionPageDetailsControl/VBoxContainer/CostContainer/CostLabel"]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("4_xmy3g")
@@ -284,6 +294,7 @@ text = "100"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="OffsetControl/ActionPageDetailsControl/VBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 3
 
 [node name="MiniRangeDisplay" parent="OffsetControl/ActionPageDetailsControl/VBoxContainer/HBoxContainer" instance=ExtResource("5_jmtol")]
 layout_mode = 2

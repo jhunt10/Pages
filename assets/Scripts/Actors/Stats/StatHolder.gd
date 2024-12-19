@@ -69,7 +69,7 @@ func get_stat(stat_name:String, default:int=0):
 func get_base_stat(stat_name:String, default:int=0):
 	return _base_stats.get(stat_name, default)
 	
-func get_bar_stat(stat_name:String):
+func get_bar_stat(stat_name:String)->int:
 	return get_stat("BarStat:" + stat_name, 0)
 	
 ## Retruns list of StatKey for all bar stats
@@ -88,10 +88,10 @@ func fill_bar_stats():
 ## Reduce current value of bar stat by given val and return true if cost was be paied
 func reduce_bar_stat_value(stat_name:String, val:int, allow_partial:bool=true) -> bool:
 	var full_stat_name = "BarStat:" + stat_name
-	if _cached_stats.has(stat_name):
-		if not allow_partial and _cached_stats[stat_name] < val:
+	if _cached_stats.has(full_stat_name):
+		if not allow_partial and _cached_stats[full_stat_name] < val:
 			return false
-		_cached_stats[stat_name] = max(0, _cached_stats[stat_name]  - val)
+		_cached_stats[full_stat_name] = max(0, _cached_stats[full_stat_name]  - val)
 		bar_stat_changed.emit()
 		return true
 	return false
@@ -99,8 +99,8 @@ func reduce_bar_stat_value(stat_name:String, val:int, allow_partial:bool=true) -
 ## Increase current value of bar stat by given val
 func add_to_bar_stat(stat_name:String, val:int):
 	var full_stat_name = "BarStat:" + stat_name
-	if _cached_stats.has(stat_name):
-		_cached_stats[stat_name] = min(_cached_stats[stat_name] + val, get_bar_stat_max(stat_name))
+	if _cached_stats.has(full_stat_name):
+		_cached_stats[full_stat_name] = min(_cached_stats[full_stat_name] + val, get_bar_stat_max(stat_name))
 		bar_stat_changed.emit()
 
 ## Get Max value of BarStat
@@ -119,12 +119,14 @@ func get_bar_stat_regen_per_round(stat_name):
 	return get_stat(full_stat_name)
 
 func _on_actor_turn_end():
+	# On Turn Regen
 	for stat_name in list_bar_stat_names():
 		var regen = get_bar_stat_regen_per_turn(stat_name) 
 		if regen != 0:
 			add_to_bar_stat(stat_name, regen)
 
 func _on_actor_round_end():
+	# On Round Regen
 	for stat_name in list_bar_stat_names():
 		var regen = get_bar_stat_regen_per_round(stat_name) 
 		if regen != 0:

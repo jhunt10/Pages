@@ -117,7 +117,7 @@ func show_page(index):
 func _create_sub_container(slot_set_data:Dictionary)->SubBookContainer:
 	var slot_key = slot_set_data['Key']
 	var new_sub:SubBookContainer = premade_sub_container.duplicate()
-	new_sub.set_slot_set_data(_actor.pages, slot_set_data)
+	new_sub.set_slot_set_data(_actor, _actor.pages, slot_set_data)
 	sub_container.add_child(new_sub)
 	_sub_containers[slot_key] = new_sub
 	new_sub.item_button_down.connect(_on_item_button_down)

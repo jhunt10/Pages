@@ -77,6 +77,9 @@ func  get_small_page_icon(actor:BaseActor = null)->Texture2D:
 			return load(main_weapon.details.small_icon_path)
 	return SpriteCache.get_sprite(details.small_icon_path)
 
+func use_weapon_icon()->bool:
+	return get_load_val("UseWeaponIcons", false)
+
 func  get_large_page_icon(actor:BaseActor = null)->Texture2D:
 	if actor and get_load_val("UseWeaponIcons", false):
 		var main_weapon:BaseWeaponEquipment = actor.equipment.get_primary_weapon()

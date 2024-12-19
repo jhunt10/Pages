@@ -136,6 +136,10 @@ func _on_end_round():
 	for bar:StatBarControl in _stat_bars.values():
 		bar.set_previewing_mode(true, true)
 
+func force_preview_mode():
+	for bar:StatBarControl in _stat_bars.values():
+		bar.set_previewing_mode(true, true)
+
 func preview_stat_cost(cost_data:Dictionary):
 	for stat_name in cost_data.keys():
 		if _stat_bars.keys().has(stat_name):

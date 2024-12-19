@@ -2,7 +2,7 @@
 class_name StatBarControl
 extends Control
 
-const LOGGING = false
+const LOGGING = true
 
 @export var BAR_SPEED:float = 100
 var _preview_mode:bool = false
@@ -206,7 +206,8 @@ func _sync():
 	if !full_bar:
 		return
 	if _actor and LOGGING:
-		print("Syncing: %s for '%s' | PreviewMod: %s" % [self.name, _actor.Id, _preview_mode])
+		print("Syncing: %s for '%s' | PreviewMod: %s" % [_stat_name, _actor.Id, _preview_mode])
+		print("MaxVal: %s | Current Val: %s" % [max_value, current_value])
 	var max = max_value
 	var new_val = current_value
 	if not preview_mode:

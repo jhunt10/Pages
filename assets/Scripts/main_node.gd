@@ -40,7 +40,7 @@ func _load_test_map():
 func start_combat():
 	current_scene.queue_free()
 	var combat_scene:CombatRootControl = load("res://Scenes/Combat/combat_scene.tscn").instantiate()
-	combat_scene.load_init_state("res://Scenes/Maps/SquirrderDome/squirrder_dome_map.tscn")
+	combat_scene.load_init_state("res://Scenes/Maps/TestingMap/testing_map.tscn")
 	current_scene = combat_scene
 	self.add_child(current_scene)
 

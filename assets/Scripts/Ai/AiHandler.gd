@@ -10,10 +10,12 @@ static func build_action_que(actor:BaseActor, game_state:GameStateData)->Array:
 	# TODO: Pick a target
 	var target_enemy = enimes[0]
 	
+	# get possible attack ranges
 	var attack_target_params = {}
-	for page:BaseAction in actor.pages.list_actions():
-		if page.has_preview_target():
-			attack_target_params[page.ActionKey] = page.get_preview_target_params(actor)
+	for action:BaseAction in actor.pages.list_actions():
+		if can_actor_pay_cost(actor, action):
+			if action.has_preview_target():
+				attack_target_params[action.ActionKey] = action.get_preview_target_params(actor)
 	
 	# Find Path
 	var target_pos = game_state.MapState.get_actor_pos(target_enemy)
@@ -43,6 +45,13 @@ static func build_action_que(actor:BaseActor, game_state:GameStateData)->Array:
 		printerr("Qued %s pages in %s tries" % [action_list.size(), try_count])
 		
 	return action_list
+
+static func can_actor_pay_cost(actor:BaseActor, action:BaseAction)->bool:
+	var cost_data = action.CostData
+	for cost_key in cost_data.keys():
+		if actor.stats.get_bar_stat(cost_key) < cost_data[cost_key]:
+			return false
+	return true
 
 static func get_enemy_actors(actor:BaseActor, game_state:GameStateData)->Array:
 	var out_list = []

@@ -5,6 +5,7 @@ extends Control
 var camera:MoveableCamera2D:
 	get: return CombatRootControl.Instance.camera
 
+@export var game_over_screen:GameOverScreen
 @export var menu_container:CenterContainer
 @export var menu_button:TextureButton 
 @export var pause_menu:PauseMenuControl 
@@ -31,6 +32,7 @@ func _ready() -> void:
 	menu_button.pressed.connect(_on_menu_pressed)
 	#test_button.pressed.connect(do_test)
 	target_input_display.visible = false
+	game_over_screen.hide()
 	pass # Replace with function body.
 
 func do_test():

@@ -16,6 +16,7 @@ signal hide_done
 
 @export var weapon_details:WeaponDetailsControl
 @export var armor_details:ArmorDetailsControl
+@export var action_details:ActionDetailsControl
 @export var default_details:DefaultItemDetailsControl
 @export var tag_label:Label
 
@@ -79,6 +80,7 @@ func set_item(actor:BaseActor, item:BaseItem):
 	default_details.hide()
 	weapon_details.hide()
 	armor_details.hide()
+	action_details.hide()
 	if item is BaseWeaponEquipment:
 		var weapon = (item as BaseWeaponEquipment)
 		weapon_details.set_weapon(actor, weapon)
@@ -87,6 +89,14 @@ func set_item(actor:BaseActor, item:BaseItem):
 		var armor = (item as BaseArmorEquipment)
 		armor_details.set_armor(actor, armor)
 		armor_details.show()
+	elif item is BasePageItem:
+		var page = (item as BasePageItem)
+		if page.get_action_key():
+			action_details.set_action(actor, page)
+			action_details.show()
+		else:
+			default_details.set_item(item)
+			default_details.show()
 	else:
 		default_details.set_item(item)
 		default_details.show()

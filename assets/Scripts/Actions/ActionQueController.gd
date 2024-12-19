@@ -318,15 +318,14 @@ func _get_subaction(script_key:String)->BaseSubAction:
 	return subaction_script_cache[script_key]
 
 func _pay_turn_costs():
-	pass
-	#for que:ActionQue in get_active_action_ques():
-		#var actor = que.actor
-		#var turn_data = que.QueExecData.get_current_turn_data()
-		#for stat_name in turn_data.costs.keys():
-			#if not actor.stats.reduce_bar_stat_value(stat_name, turn_data.costs[stat_name], false):
-				#CombatRootControl.Instance.create_flash_text_on_actor(actor, "-"+stat_name, Color.ORANGE)
-				#que.fail_turn()
-				#return
+	for que:ActionQue in get_active_action_ques():
+		var actor = que.actor
+		var turn_data = que.QueExecData.get_current_turn_data()
+		for stat_name in turn_data.costs.keys():
+			if not actor.stats.reduce_bar_stat_value(stat_name, turn_data.costs[stat_name], false):
+				CombatRootControl.Instance.create_flash_text_on_actor(actor, stat_name, Color.ORANGE)
+				que.fail_turn()
+				break
 
 func _organize_ques():
 	_sort_ques_by_speed()

@@ -87,6 +87,7 @@ func load_init_state(map_scene_path:String):
 	GameState = GameStateData.new()
 	GameState.MapState = MapStateData.new(GameState, map_data)
 	QueController = ActionQueController.new()
+	QueController.end_of_round.connect(check_end_conditions)
 	
 	for actor_info:Dictionary in map_data['Actors']:
 		var new_actor = null
@@ -222,3 +223,8 @@ func add_zone(zone:BaseZone):
 	var new_node:ZoneNode  = load("res://Scenes/zone_node.tscn").instantiate()
 	new_node._zone = zone
 	MapController.add_zone_node(zone, new_node)
+
+func check_end_conditions():
+	var player_actor = StoryState.get_player_actor()
+	if player_actor.is_dead:
+		ui_control.game_over_screen.show()

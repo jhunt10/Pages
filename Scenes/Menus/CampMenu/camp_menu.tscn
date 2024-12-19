@@ -119,7 +119,6 @@ size_flags_vertical = 3
 script = ExtResource("6_5vfat")
 button = NodePath("Button")
 highlight = NodePath("TitleLabel/ColorRect")
-disabled = null
 label = NodePath("TitleLabel")
 text = "Quest"
 
@@ -400,8 +399,10 @@ text = "Debug"
 [node name="TitleLabel" type="Label" parent="CampOptionsContainer/SystemOptionsContainer/Sys_DebugOptionButton"]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 0
+offset_top = 30.0
 offset_right = 150.0
-offset_bottom = 60.0
+offset_bottom = 90.0
+scale = Vector2(1e-05, 1e-05)
 theme = ExtResource("3_ufdhk")
 theme_override_font_sizes/font_size = 48
 text = "Debug"
@@ -441,8 +442,10 @@ text = "Load"
 [node name="TitleLabel" type="Label" parent="CampOptionsContainer/SystemOptionsContainer/Sys_LoadOptionButton"]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 0
+offset_top = 30.0
 offset_right = 120.0
-offset_bottom = 60.0
+offset_bottom = 90.0
+scale = Vector2(1e-05, 1e-05)
 theme = ExtResource("3_ufdhk")
 theme_override_font_sizes/font_size = 48
 text = "Load"
@@ -482,8 +485,10 @@ text = "Save"
 [node name="TitleLabel" type="Label" parent="CampOptionsContainer/SystemOptionsContainer/Sys_SaveOptionButton"]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 0
+offset_top = 30.0
 offset_right = 120.0
-offset_bottom = 60.0
+offset_bottom = 90.0
+scale = Vector2(1e-05, 1e-05)
 theme = ExtResource("3_ufdhk")
 theme_override_font_sizes/font_size = 48
 text = "Save"
@@ -523,8 +528,10 @@ text = "Back"
 [node name="TitleLabel" type="Label" parent="CampOptionsContainer/SystemOptionsContainer/Sys_BackOptionButton"]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 0
+offset_top = 30.0
 offset_right = 120.0
-offset_bottom = 60.0
+offset_bottom = 90.0
+scale = Vector2(1e-05, 1e-05)
 theme = ExtResource("3_ufdhk")
 theme_override_font_sizes/font_size = 48
 text = "Back"
