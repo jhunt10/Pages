@@ -405,7 +405,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource("3_heume")
-text = "ntelligent spellcaster best on the back lines. Unstoppable power, until someone get's close."
+text = "ntelligent spellcaster best on the back lines. An unstoppable force, until someone get's close."
 fit_content = true
 
 [node name="LikesDislikesContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/MageContainer/MageCard/BoxContainer"]
@@ -892,6 +892,7 @@ mouse_filter = 2
 [node name="SoldierCard" type="NinePatchRect" parent="SelectedControl" node_paths=PackedStringArray("button")]
 visible = false
 custom_minimum_size = Vector2(460, 280)
+layout_mode = 0
 offset_left = 349.0
 offset_top = 174.0
 offset_right = 809.0

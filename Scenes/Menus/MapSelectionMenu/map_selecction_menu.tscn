@@ -1,0 +1,383 @@
+[gd_scene load_steps=12 format=3 uid="uid://dpswy5pmd4wu2"]
+
+[ext_resource type="Script" path="res://Scenes/Menus/MapSelectionMenu/map_selecction_menu.gd" id="1_loaak"]
+[ext_resource type="Texture2D" uid="uid://bwbvifw2c8wlg" path="res://Scenes/Menus/CampMenu/PaperBackground.png" id="2_r5e1x"]
+[ext_resource type="Texture2D" uid="uid://dj3aoohuok4yc" path="res://assets/Sprites/UI/BackPatches/FancyBackPatch_Big_128_36.png" id="3_dsrjw"]
+[ext_resource type="Theme" uid="uid://dwinll8pgdjhc" path="res://Scenes/Themes/standard_theme.tres" id="4_ceeot"]
+[ext_resource type="PackedScene" uid="uid://bpvy87uagttpr" path="res://Scenes/UiNodes/ScollBar/scroll_bar.tscn" id="5_bf76b"]
+[ext_resource type="Script" path="res://Scenes/Menus/CampMenu/camp_option_button.gd" id="6_xysw0"]
+[ext_resource type="Texture2D" uid="uid://567vutk12a12" path="res://Scenes/Menus/CharacterMenu/MenuPages/SlotHighlight.png" id="7_bpxch"]
+[ext_resource type="Texture2D" uid="uid://dfs8kxj1rmlga" path="res://Scenes/Menus/MapSelectionMenu/_T_Icon.png" id="8_xqq87"]
+[ext_resource type="Texture2D" uid="uid://baeij3edhokkp" path="res://Scenes/Menus/CampMenu/PrettyPictures/DefaultCampPic.png" id="9_1d1qs"]
+[ext_resource type="Texture2D" uid="uid://cfdd8rgr4n8dd" path="res://assets/Sprites/UI/BackPatches/FancyBackPatch_BigFrame_128_36.png" id="10_cmrsr"]
+[ext_resource type="Texture2D" uid="uid://cejqf0u2igwvw" path="res://assets/Sprites/UI/BackPatches/FancyButtonPatch_64_18.png" id="11_wlare"]
+
+[node name="MapSelectionMenu" type="Control" node_paths=PackedStringArray("premade_option_button", "option_button_container", "description_box", "map_preview_image", "back_button", "explore_button")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_loaak")
+premade_option_button = NodePath("OptionsContainer/ScrollContainer/MainOptionsContainer/MapOptionButton")
+option_button_container = NodePath("OptionsContainer/ScrollContainer/MainOptionsContainer")
+description_box = NodePath("TextBoxBackground/RichTextLabel")
+map_preview_image = NodePath("PreviewImageContainer/PrettyPictureRect")
+back_button = NodePath("TitileContainer/BackButton")
+explore_button = NodePath("ExplortButtonBackground/ExploreButton")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_r5e1x")
+region_rect = Rect2(0, 0, 300, 200)
+patch_margin_left = 9
+patch_margin_top = 9
+patch_margin_right = 9
+patch_margin_bottom = 9
+
+[node name="TitileContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = -16.0
+offset_bottom = 48.0
+grow_horizontal = 2
+theme_override_constants/separation = 2
+
+[node name="TextureRect" type="TextureRect" parent="TitileContainer"]
+self_modulate = Color(0.498039, 0, 0, 1)
+custom_minimum_size = Vector2(28, 32)
+layout_mode = 2
+texture = ExtResource("8_xqq87")
+stretch_mode = 5
+
+[node name="TitleLabel" type="Label" parent="TitileContainer"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("4_ceeot")
+theme_override_font_sizes/font_size = 32
+text = "he hero returns to..."
+
+[node name="BackButton" type="Control" parent="TitileContainer" node_paths=PackedStringArray("button", "under_line", "highlight", "label")]
+custom_minimum_size = Vector2(96, 48)
+layout_mode = 2
+script = ExtResource("6_xysw0")
+button = NodePath("Button")
+under_line = NodePath("TitleLabel/ColorRect")
+highlight = NodePath("TextureRect")
+is_highlighted = null
+label = NodePath("TitleLabel")
+text = "Back"
+
+[node name="TextureRect" type="TextureRect" parent="TitileContainer/BackButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_bpxch")
+
+[node name="TitleLabel" type="Label" parent="TitileContainer/BackButton"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 0
+offset_right = 120.0
+offset_bottom = 60.0
+scale = Vector2(0.8, 0.8)
+theme = ExtResource("4_ceeot")
+theme_override_font_sizes/font_size = 48
+text = "Back"
+
+[node name="ColorRect" type="ColorRect" parent="TitileContainer/BackButton/TitleLabel"]
+custom_minimum_size = Vector2(0, 3)
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0.498039, 0, 0, 1)
+
+[node name="Button" type="Button" parent="TitileContainer/BackButton"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 4.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PreviewImageContainer" type="Control" parent="."]
+clip_contents = true
+layout_mode = 1
+anchor_right = 0.5
+anchor_bottom = 0.7
+offset_left = 16.0
+offset_top = 64.0
+offset_right = -4.0
+offset_bottom = -4.0
+grow_vertical = 2
+
+[node name="PrettyPictureRect" type="TextureRect" parent="PreviewImageContainer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("9_1d1qs")
+expand_mode = 5
+stretch_mode = 4
+
+[node name="PictureBackground" type="NinePatchRect" parent="PreviewImageContainer"]
+custom_minimum_size = Vector2(0, 180)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_cmrsr")
+region_rect = Rect2(0, 0, 128, 128)
+patch_margin_left = 36
+patch_margin_top = 36
+patch_margin_right = 36
+patch_margin_bottom = 36
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="TextBoxBackground" type="NinePatchRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.7
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = 4.0
+offset_right = -4.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("3_dsrjw")
+region_rect = Rect2(0, 0, 128, 128)
+patch_margin_left = 36
+patch_margin_top = 36
+patch_margin_right = 36
+patch_margin_bottom = 36
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="TextBoxBackground"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 32.0
+offset_top = 16.0
+offset_right = -32.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("4_ceeot")
+theme_override_font_sizes/normal_font_size = 32
+text = "What shall our hero do next?"
+
+[node name="OptionsContainer" type="NinePatchRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.8
+offset_left = 4.0
+offset_top = 64.0
+offset_right = -16.0
+offset_bottom = -4.0
+grow_horizontal = 0
+grow_vertical = 2
+texture = ExtResource("3_dsrjw")
+region_rect = Rect2(0, 0, 128, 128)
+patch_margin_left = 36
+patch_margin_top = 36
+patch_margin_right = 36
+patch_margin_bottom = 36
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="ScrollBar" parent="OptionsContainer" node_paths=PackedStringArray("scroll_container") instance=ExtResource("5_bf76b")]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -48.0
+offset_top = 16.0
+offset_right = -16.0
+offset_bottom = -16.0
+grow_horizontal = 0
+grow_vertical = 2
+scroll_container = NodePath("../ScrollContainer")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="OptionsContainer"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = -48.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MainOptionsContainer" type="VBoxContainer" parent="OptionsContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="MapOptionButton" type="Control" parent="OptionsContainer/ScrollContainer/MainOptionsContainer" node_paths=PackedStringArray("button", "under_line", "highlight", "label")]
+custom_minimum_size = Vector2(0, 55)
+layout_mode = 2
+script = ExtResource("6_xysw0")
+button = NodePath("Button")
+under_line = NodePath("TitleLabel/ColorRect")
+highlight = NodePath("TextureRect")
+is_highlighted = null
+label = NodePath("TitleLabel")
+text = "Map Option"
+
+[node name="TextureRect" type="TextureRect" parent="OptionsContainer/ScrollContainer/MainOptionsContainer/MapOptionButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_bpxch")
+
+[node name="TitleLabel" type="Label" parent="OptionsContainer/ScrollContainer/MainOptionsContainer/MapOptionButton"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 0
+offset_right = 276.0
+offset_bottom = 60.0
+scale = Vector2(0.916667, 0.916667)
+theme = ExtResource("4_ceeot")
+theme_override_font_sizes/font_size = 48
+text = "Map Option"
+
+[node name="ColorRect" type="ColorRect" parent="OptionsContainer/ScrollContainer/MainOptionsContainer/MapOptionButton/TitleLabel"]
+custom_minimum_size = Vector2(0, 3)
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0.498039, 0, 0, 1)
+
+[node name="Button" type="Button" parent="OptionsContainer/ScrollContainer/MainOptionsContainer/MapOptionButton"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 4.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ExplortButtonBackground" type="NinePatchRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.8
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = -16.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("11_wlare")
+patch_margin_left = 18
+patch_margin_top = 18
+patch_margin_right = 18
+patch_margin_bottom = 18
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="ExploreButton" type="Control" parent="ExplortButtonBackground" node_paths=PackedStringArray("button", "under_line", "highlight", "label")]
+custom_minimum_size = Vector2(96, 48)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("6_xysw0")
+button = NodePath("Button")
+under_line = NodePath("TitleLabel/ColorRect")
+highlight = NodePath("TextureRect")
+is_highlighted = null
+label = NodePath("TitleLabel")
+text = "Explore"
+center_x = true
+
+[node name="TextureRect" type="TextureRect" parent="ExplortButtonBackground/ExploreButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_bpxch")
+
+[node name="TitleLabel" type="Label" parent="ExplortButtonBackground/ExploreButton"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 0
+offset_left = 179.0
+offset_top = 24.0
+offset_right = 377.0
+offset_bottom = 84.0
+theme = ExtResource("4_ceeot")
+theme_override_font_sizes/font_size = 48
+text = "Explore"
+
+[node name="ColorRect" type="ColorRect" parent="ExplortButtonBackground/ExploreButton/TitleLabel"]
+custom_minimum_size = Vector2(0, 3)
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0.498039, 0, 0, 1)
+
+[node name="Button" type="Button" parent="ExplortButtonBackground/ExploreButton"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 4.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2

@@ -148,6 +148,14 @@ func on_actor_exit_spot(actor:BaseActor, map_pos:MapPos, map_spot:MapSpot, movin
 
 # ----------------------------- Items -----------------------------
 
+func list_items()->Array:
+	var out_list = []
+	for item_id in _item_pos_cache.keys():
+		var item = ItemLibrary.get_item(item_id)
+		if item:
+			out_list.append(item)
+	return out_list
+
 func set_item_pos(item:BaseItem, pos):
 	remove_item(item)
 	var map_spot = get_map_spot(pos)

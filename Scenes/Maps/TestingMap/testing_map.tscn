@@ -1069,6 +1069,7 @@ terrain_map = NodePath("../TerrainMap")
 tile_set = SubResource("TileSet_5ipcw")
 
 [node name="SpwanNode_Player" type="Sprite2D" parent="ActorTileMapLayer"]
+visible = false
 self_modulate = Color(0, 1, 0, 1)
 position = Vector2(240, 240)
 texture = ExtResource("10_361jm")

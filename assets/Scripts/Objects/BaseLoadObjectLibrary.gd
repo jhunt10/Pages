@@ -82,13 +82,20 @@ func create_object(object_key:String, id:String='', data:Dictionary={})->BaseLoa
 	return new_object
 
 func purge_objects():
-	for loaded_object:BaseLoadObject in _loaded_objects:
-		loaded_object.on_delete()
+	for obj_key in _loaded_objects.keys():
+		var object = _loaded_objects[obj_key]
+		var loaded_object:BaseLoadObject = object as BaseLoadObject
+		if !loaded_object:
+			printerr("Non-BaseLoadObject found with key: %s" % [obj_key])
+		else:
+			loaded_object.on_delete()
 	_loaded_objects.clear()
 	
 func erase_object(object_id:String):
 	if _loaded_objects.keys().has(object_id):
-		_loaded_objects[object_id].on_delete()
+		if _loaded_objects.has(object_id):
+			if not _loaded_objects[object_id].is_deleted:
+				_loaded_objects[object_id].on_delete()
 		_loaded_objects.erase(object_id)
 
 func build_save_data()->Dictionary:

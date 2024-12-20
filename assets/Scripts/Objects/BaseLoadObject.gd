@@ -5,6 +5,7 @@ var _def_load_path:String
 var _key:String
 var _def:Dictionary
 var _data:Dictionary
+var is_deleted:bool = false
 
 var details:ObjectDetailsData
 
@@ -45,4 +46,4 @@ func get_load_val(key:String, default=null):
 	return _data.get(key, _def.get(key, default))
 
 func on_delete():
-	pass
+	is_deleted = true

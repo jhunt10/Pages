@@ -6,6 +6,7 @@ extends Control
 
 @export var quest_button:CampOptionButton
 @export var character_button:CampOptionButton
+@export var explort_button:CampOptionButton
 @export var system_button:CampOptionButton
 
 @export var sys_back_button:CampOptionButton
@@ -18,6 +19,7 @@ extends Control
 func _ready() -> void:
 	character_button.button.pressed.connect(_on_prepare_button)
 	quest_button.button.pressed.connect(_on_quest_button)
+	explort_button.button.pressed.connect(_on_explore_button)
 	system_button.button.pressed.connect(_sub_menu_open.bind("System"))
 	sys_back_button.button.pressed.connect(_sub_menu_open.bind("Main"))
 	sys_save_button.button.pressed.connect(_on_save_button)
@@ -42,7 +44,11 @@ func _sub_menu_open(name:String):
 		system_options_container.hide()
 
 func _on_quest_button():
-	MainRootNode.Instance.start_combat()
+	#MainRootNode.Instance.start_combat()
+	pass
+
+func _on_explore_button():
+	MainRootNode.Instance.open_map_selection_menu()
 
 func _on_prepare_button():
 	var actor = StoryState.get_player_actor()

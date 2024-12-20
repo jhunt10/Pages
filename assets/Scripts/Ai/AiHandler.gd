@@ -12,10 +12,11 @@ static func build_action_que(actor:BaseActor, game_state:GameStateData)->Array:
 	
 	# get possible attack ranges
 	var attack_target_params = {}
+	var attack_costs_data = {}
 	for action:BaseAction in actor.pages.list_actions():
-		if can_actor_pay_cost(actor, action):
-			if action.has_preview_target():
-				attack_target_params[action.ActionKey] = action.get_preview_target_params(actor)
+		if action.has_preview_target():
+			attack_target_params[action.ActionKey] = action.get_preview_target_params(actor)
+			attack_costs_data[action.ActionKey] = action.CostData
 	
 	# Find Path
 	var target_pos = game_state.MapState.get_actor_pos(target_enemy)
@@ -27,15 +28,25 @@ static func build_action_que(actor:BaseActor, game_state:GameStateData)->Array:
 	var curr_pos = start_pos
 	var path_index = 0
 	var try_count = 0
+	var running_costs = {}
 	while try_count < 50 and action_list.size() < actor.Que.get_max_que_size():
 		var attack_page = null
 		for attack_name in attack_target_params.keys():
+			# Remove attack as option if we can't pay it's cost
+			if not can_actor_pay_cost(actor, attack_costs_data.get(attack_name, {}), running_costs):
+				attack_target_params.erase(attack_name)
+				continue
 			var attack_params =  attack_target_params[attack_name]
 			var potential_targets = TargetingHelper.get_potential_target_actor_ids(attack_params, actor, game_state, [], curr_pos) 
 			if potential_targets.has(target_enemy.Id):
 				attack_page = attack_name
 		if attack_page:
 			action_list.append(attack_page)
+			# Record cost of action as payed
+			for cost_key in attack_costs_data.get(attack_page, {}).keys():
+				if not running_costs.has(cost_key):
+					running_costs[cost_key] = 0
+				running_costs[cost_key] += attack_costs_data[attack_page][cost_key]
 		elif path.get("Moves", []).size() > path_index:
 			action_list.append(path['Moves'][path_index])
 			curr_pos = path['Poses'][path_index]
@@ -46,10 +57,9 @@ static func build_action_que(actor:BaseActor, game_state:GameStateData)->Array:
 		
 	return action_list
 
-static func can_actor_pay_cost(actor:BaseActor, action:BaseAction)->bool:
-	var cost_data = action.CostData
+static func can_actor_pay_cost(actor:BaseActor, cost_data:Dictionary, running_cost:Dictionary)->bool:
 	for cost_key in cost_data.keys():
-		if actor.stats.get_bar_stat(cost_key) < cost_data[cost_key]:
+		if cost_data[cost_key] + running_cost.get(cost_key, 0) > actor.stats.get_bar_stat(cost_key):
 			return false
 	return true
 

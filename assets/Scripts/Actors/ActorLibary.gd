@@ -76,6 +76,10 @@ static func load_actors(data:Dictionary):
 	if !Instance: Instance = ActorLibrary.new()
 	Instance._load_objects_saved_data(data)
 
+static func delete_actor(actor:BaseActor):
+	if !Instance: Instance = ActorLibrary.new()
+	Instance.erase_object(actor.Id)
+	
 
 static func purge_actors():
 	if !Instance: Instance = ActorLibrary.new()

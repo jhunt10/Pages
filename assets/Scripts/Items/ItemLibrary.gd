@@ -63,6 +63,12 @@ static func create_item(key:String, data:Dictionary, force_id:String='')->BaseIt
 static func purge_items():
 	if !Instance: Instance = ItemLibrary.new()
 	Instance.purge_objects()
+	
+static func delete_item(item:BaseItem):
+	if !Instance: Instance = ItemLibrary.new()
+	if !item.is_deleted:
+		item.on_delete()
+	Instance.erase_object(item.Id)
 
 static func load_items(data:Dictionary):
 	if !Instance: Instance = ItemLibrary.new()

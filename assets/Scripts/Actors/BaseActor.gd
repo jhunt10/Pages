@@ -123,15 +123,37 @@ func save_data()->Dictionary:
 func on_combat_start():
 	effects.on_combat_start()
 
+func on_delete():
+	if is_deleted:
+		return
+	for page in pages.list_items():
+		ItemLibrary.delete_item(page)
+	for bag_item in items.list_items():
+		ItemLibrary.delete_item(bag_item)
+	for equip_item in equipment.list_items():
+		if !PlayerInventory.has_item(equip_item):
+			ItemLibrary.delete_item(equip_item)
+	super()
+
 func die():
 	if is_dead:
 		return
 	is_dead = true
 	var map_pos = CombatRootControl.Instance.GameState.MapState.get_actor_pos(self)
 	if map_pos:
-		var drop_items = get_load_val("DropItems", [])
-		for item_key in drop_items:
-			ItemHelper.spawn_item(item_key, {}, map_pos)
+		
+		# Roll for item drop
+		var drop_items = get_load_val("DropItems", {})
+		var max_val:int = 0
+		for weight in drop_items.values():
+			max_val += weight
+		var roll = randi() % (max_val + 1)
+		for key in drop_items.keys():
+			roll -= drop_items[key]
+			if roll <= 0:
+				if key != "":
+					ItemHelper.spawn_item(key, {}, map_pos)
+				break
 		
 	on_death.emit()
 	#node.set_corpse_sprite()

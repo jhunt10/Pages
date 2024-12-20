@@ -37,10 +37,15 @@ func _load_test_map():
 	var text:String = file.get_as_text()
 	return JSON.parse_string(text)
 
-func start_combat():
+func start_combat(map_key):
+	var map_data = MapLoader.get_map_data(map_key)
+	var map_path = map_data['LoadPath'].path_join(map_data.get("MapScene", ""))
+	if not FileAccess.file_exists(map_path):
+		printerr("Failed to start combat on map '%s'. No MapScene found for: '%s'." % [map_key, map_path])
+		return
 	current_scene.queue_free()
 	var combat_scene:CombatRootControl = load("res://Scenes/Combat/combat_scene.tscn").instantiate()
-	combat_scene.load_init_state("res://Scenes/Maps/TestingMap/testing_map.tscn")
+	combat_scene.load_init_state(map_path)
 	current_scene = combat_scene
 	self.add_child(current_scene)
 
@@ -83,6 +88,12 @@ func open_load_menu():
 func open_camp_menu():
 	current_scene.queue_free()
 	var camp_scene = load("res://Scenes/Menus/CampMenu/camp_menu.tscn").instantiate()
+	self.add_child(camp_scene)
+	current_scene = camp_scene
+	
+func open_map_selection_menu():
+	current_scene.queue_free()
+	var camp_scene = load("res://Scenes/Menus/MapSelectionMenu/map_selecction_menu.tscn").instantiate()
 	self.add_child(camp_scene)
 	current_scene = camp_scene
 

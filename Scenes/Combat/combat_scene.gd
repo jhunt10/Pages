@@ -120,16 +120,16 @@ func load_init_state(map_scene_path:String):
 func kill_actor(actor:BaseActor):
 	actor.die()
 	QueController.remove_action_que(actor.Que)
-	GameState.delete_actor(actor)
+	#GameState.delete_actor(actor)
 	#if actor.leaves_corpse:
 	GameState.MapState.set_actor_layer(actor, MapStateData.MapLayers.Corpse)
 	#else:
 		#delete_actor(actor)
 
 
-func delete_actor(actor:BaseActor):
-	GameState.MapState.remove_actor(actor)
-	MapController.delete_actor_node(actor)
+#func delete_actor(actor:BaseActor):
+	#GameState.MapState.remove_actor(actor)
+	#MapController.delete_actor_node(actor)
 	#GameState.Actors.erase(actor.Id)
 	
 func add_actor(actor:BaseActor, faction_id:int, pos:MapPos):
@@ -225,6 +225,20 @@ func add_zone(zone:BaseZone):
 	MapController.add_zone_node(zone, new_node)
 
 func check_end_conditions():
-	var player_actor = StoryState.get_player_actor()
-	if player_actor.is_dead:
+	var living_players = []
+	var living_enimes = []
+	for actor:BaseActor in GameState.list_actors(false):
+		if actor.is_player:
+			living_players.append(actor)
+		else:
+			living_enimes.append(actor)
+	if living_players.size() == 0:
 		ui_control.game_over_screen.show()
+	elif living_enimes.size() == 0:
+		ui_control.victory_screen.show_game_result()
+
+func cleanup_combat():
+	for actor:BaseActor in GameState.list_actors(true):
+		if actor.is_player:
+			continue
+		ActorLibrary.delete_actor(actor)

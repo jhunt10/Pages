@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cev10u5562peq"]
+[gd_scene load_steps=11 format=3 uid="uid://cev10u5562peq"]
 
 [ext_resource type="Texture2D" uid="uid://bwbvifw2c8wlg" path="res://Scenes/Menus/CampMenu/PaperBackground.png" id="1_b8omp"]
 [ext_resource type="Script" path="res://Scenes/Menus/CampMenu/camp_menu.gd" id="1_yrr0s"]
@@ -9,8 +9,9 @@
 [ext_resource type="Texture2D" uid="uid://baeij3edhokkp" path="res://Scenes/Menus/CampMenu/PrettyPictures/DefaultCampPic.png" id="5_hjh2a"]
 [ext_resource type="Script" path="res://Scenes/Menus/CampMenu/camp_option_button.gd" id="6_5vfat"]
 [ext_resource type="Texture2D" uid="uid://cfdd8rgr4n8dd" path="res://assets/Sprites/UI/BackPatches/FancyBackPatch_BigFrame_128_36.png" id="6_g200m"]
+[ext_resource type="Texture2D" uid="uid://567vutk12a12" path="res://Scenes/Menus/CharacterMenu/MenuPages/SlotHighlight.png" id="7_hs7sy"]
 
-[node name="CampMenu" type="Control" node_paths=PackedStringArray("camp_options_container", "system_options_container", "quest_button", "character_button", "system_button", "sys_back_button", "sys_save_button", "sys_load_button", "sys_debug_button")]
+[node name="CampMenu" type="Control" node_paths=PackedStringArray("camp_options_container", "system_options_container", "quest_button", "character_button", "explort_button", "system_button", "sys_back_button", "sys_save_button", "sys_load_button", "sys_debug_button")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -22,6 +23,7 @@ camp_options_container = NodePath("CampOptionsContainer/MainOptionsContainer")
 system_options_container = NodePath("CampOptionsContainer/SystemOptionsContainer")
 quest_button = NodePath("CampOptionsContainer/MainOptionsContainer/QuestOptionButton")
 character_button = NodePath("CampOptionsContainer/MainOptionsContainer/PrepareOptionButton")
+explort_button = NodePath("CampOptionsContainer/MainOptionsContainer/ExplorOptionButton")
 system_button = NodePath("CampOptionsContainer/MainOptionsContainer/SystemOptionButton")
 sys_back_button = NodePath("CampOptionsContainer/SystemOptionsContainer/Sys_BackOptionButton")
 sys_save_button = NodePath("CampOptionsContainer/SystemOptionsContainer/Sys_SaveOptionButton")
@@ -113,14 +115,25 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("4_gjck3")
 
-[node name="QuestOptionButton" type="Control" parent="CampOptionsContainer/MainOptionsContainer" node_paths=PackedStringArray("button", "highlight", "label")]
+[node name="QuestOptionButton" type="Control" parent="CampOptionsContainer/MainOptionsContainer" node_paths=PackedStringArray("button", "under_line", "highlight", "label")]
 layout_mode = 2
 size_flags_vertical = 3
 script = ExtResource("6_5vfat")
 button = NodePath("Button")
-highlight = NodePath("TitleLabel/ColorRect")
+under_line = NodePath("TitleLabel/ColorRect")
+highlight = NodePath("TextureRect")
+is_highlighted = null
 label = NodePath("TitleLabel")
 text = "Quest"
+
+[node name="TextureRect" type="TextureRect" parent="CampOptionsContainer/MainOptionsContainer/QuestOptionButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_hs7sy")
 
 [node name="TitleLabel" type="Label" parent="CampOptionsContainer/MainOptionsContainer/QuestOptionButton"]
 self_modulate = Color(0.498039, 0, 0, 1)
@@ -155,15 +168,28 @@ offset_bottom = 12.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ShopOptionButton" type="Control" parent="CampOptionsContainer/MainOptionsContainer" node_paths=PackedStringArray("button", "highlight", "label")]
+[node name="ShopOptionButton" type="Control" parent="CampOptionsContainer/MainOptionsContainer" node_paths=PackedStringArray("button", "under_line", "highlight", "label")]
 layout_mode = 2
 size_flags_vertical = 3
 script = ExtResource("6_5vfat")
 button = NodePath("Button")
-highlight = NodePath("TitleLabel/ColorRect")
+under_line = NodePath("TitleLabel/ColorRect")
+highlight = NodePath("TextureRect")
 disabled = true
+is_highlighted = null
 label = NodePath("TitleLabel")
 text = "Shop"
+
+[node name="TextureRect" type="TextureRect" parent="CampOptionsContainer/MainOptionsContainer/ShopOptionButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -4.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_hs7sy")
 
 [node name="TitleLabel" type="Label" parent="CampOptionsContainer/MainOptionsContainer/ShopOptionButton"]
 self_modulate = Color(0.498039, 0, 0, 1)
@@ -198,14 +224,27 @@ offset_bottom = 12.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="PrepareOptionButton" type="Control" parent="CampOptionsContainer/MainOptionsContainer" node_paths=PackedStringArray("button", "highlight", "label")]
+[node name="PrepareOptionButton" type="Control" parent="CampOptionsContainer/MainOptionsContainer" node_paths=PackedStringArray("button", "under_line", "highlight", "label")]
 layout_mode = 2
 size_flags_vertical = 3
 script = ExtResource("6_5vfat")
 button = NodePath("Button")
-highlight = NodePath("TitleLabel/ColorRect")
+under_line = NodePath("TitleLabel/ColorRect")
+highlight = NodePath("TextureRect")
+is_highlighted = null
 label = NodePath("TitleLabel")
 text = "Prepare"
+
+[node name="TextureRect" type="TextureRect" parent="CampOptionsContainer/MainOptionsContainer/PrepareOptionButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -4.5
+offset_bottom = 4.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_hs7sy")
 
 [node name="TitleLabel" type="Label" parent="CampOptionsContainer/MainOptionsContainer/PrepareOptionButton"]
 self_modulate = Color(0.498039, 0, 0, 1)
@@ -240,15 +279,27 @@ offset_bottom = 12.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ExplorOptionButton" type="Control" parent="CampOptionsContainer/MainOptionsContainer" node_paths=PackedStringArray("button", "highlight", "label")]
+[node name="ExplorOptionButton" type="Control" parent="CampOptionsContainer/MainOptionsContainer" node_paths=PackedStringArray("button", "under_line", "highlight", "label")]
 layout_mode = 2
 size_flags_vertical = 3
 script = ExtResource("6_5vfat")
 button = NodePath("Button")
-highlight = NodePath("TitleLabel/ColorRect")
-disabled = true
+under_line = NodePath("TitleLabel/ColorRect")
+highlight = NodePath("TextureRect")
+is_highlighted = null
 label = NodePath("TitleLabel")
 text = "Explore"
+
+[node name="TextureRect" type="TextureRect" parent="CampOptionsContainer/MainOptionsContainer/ExplorOptionButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -4.5
+offset_bottom = 4.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_hs7sy")
 
 [node name="TitleLabel" type="Label" parent="CampOptionsContainer/MainOptionsContainer/ExplorOptionButton"]
 self_modulate = Color(0.498039, 0, 0, 1)
@@ -283,15 +334,28 @@ offset_bottom = 12.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="RecordsOptionButton" type="Control" parent="CampOptionsContainer/MainOptionsContainer" node_paths=PackedStringArray("button", "highlight", "label")]
+[node name="RecordsOptionButton" type="Control" parent="CampOptionsContainer/MainOptionsContainer" node_paths=PackedStringArray("button", "under_line", "highlight", "label")]
 layout_mode = 2
 size_flags_vertical = 3
 script = ExtResource("6_5vfat")
 button = NodePath("Button")
-highlight = NodePath("TitleLabel/ColorRect")
+under_line = NodePath("TitleLabel/ColorRect")
+highlight = NodePath("TextureRect")
 disabled = true
+is_highlighted = null
 label = NodePath("TitleLabel")
 text = "Records"
+
+[node name="TextureRect" type="TextureRect" parent="CampOptionsContainer/MainOptionsContainer/RecordsOptionButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -4.5
+offset_bottom = 4.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_hs7sy")
 
 [node name="TitleLabel" type="Label" parent="CampOptionsContainer/MainOptionsContainer/RecordsOptionButton"]
 self_modulate = Color(0.498039, 0, 0, 1)
@@ -326,14 +390,27 @@ offset_bottom = 12.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="SystemOptionButton" type="Control" parent="CampOptionsContainer/MainOptionsContainer" node_paths=PackedStringArray("button", "highlight", "label")]
+[node name="SystemOptionButton" type="Control" parent="CampOptionsContainer/MainOptionsContainer" node_paths=PackedStringArray("button", "under_line", "highlight", "label")]
 layout_mode = 2
 size_flags_vertical = 3
 script = ExtResource("6_5vfat")
 button = NodePath("Button")
-highlight = NodePath("TitleLabel/ColorRect")
+under_line = NodePath("TitleLabel/ColorRect")
+highlight = NodePath("TextureRect")
+is_highlighted = null
 label = NodePath("TitleLabel")
 text = "System"
+
+[node name="TextureRect" type="TextureRect" parent="CampOptionsContainer/MainOptionsContainer/SystemOptionButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -4.5
+offset_bottom = 4.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_hs7sy")
 
 [node name="TitleLabel" type="Label" parent="CampOptionsContainer/MainOptionsContainer/SystemOptionButton"]
 self_modulate = Color(0.498039, 0, 0, 1)
@@ -387,14 +464,29 @@ self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Sys_DebugOptionButton" type="Control" parent="CampOptionsContainer/SystemOptionsContainer" node_paths=PackedStringArray("button", "highlight", "label")]
+[node name="Sys_DebugOptionButton" type="Control" parent="CampOptionsContainer/SystemOptionsContainer" node_paths=PackedStringArray("button", "under_line", "highlight", "label")]
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 script = ExtResource("6_5vfat")
 button = NodePath("Button")
-highlight = NodePath("TitleLabel/ColorRect")
+under_line = NodePath("TitleLabel/ColorRect")
+highlight = NodePath("TextureRect")
+is_highlighted = null
 label = NodePath("TitleLabel")
 text = "Debug"
+
+[node name="TextureRect" type="TextureRect" parent="CampOptionsContainer/SystemOptionsContainer/Sys_DebugOptionButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -32.0
+offset_top = -4.5
+offset_right = 32.0
+offset_bottom = 4.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_hs7sy")
 
 [node name="TitleLabel" type="Label" parent="CampOptionsContainer/SystemOptionsContainer/Sys_DebugOptionButton"]
 self_modulate = Color(0.498039, 0, 0, 1)
@@ -430,14 +522,29 @@ offset_bottom = 12.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Sys_LoadOptionButton" type="Control" parent="CampOptionsContainer/SystemOptionsContainer" node_paths=PackedStringArray("button", "highlight", "label")]
+[node name="Sys_LoadOptionButton" type="Control" parent="CampOptionsContainer/SystemOptionsContainer" node_paths=PackedStringArray("button", "under_line", "highlight", "label")]
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 script = ExtResource("6_5vfat")
 button = NodePath("Button")
-highlight = NodePath("TitleLabel/ColorRect")
+under_line = NodePath("TitleLabel/ColorRect")
+highlight = NodePath("TextureRect")
+is_highlighted = null
 label = NodePath("TitleLabel")
 text = "Load"
+
+[node name="TextureRect" type="TextureRect" parent="CampOptionsContainer/SystemOptionsContainer/Sys_LoadOptionButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -32.0
+offset_top = -4.5
+offset_right = 32.0
+offset_bottom = 4.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_hs7sy")
 
 [node name="TitleLabel" type="Label" parent="CampOptionsContainer/SystemOptionsContainer/Sys_LoadOptionButton"]
 self_modulate = Color(0.498039, 0, 0, 1)
@@ -473,14 +580,29 @@ offset_bottom = 12.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Sys_SaveOptionButton" type="Control" parent="CampOptionsContainer/SystemOptionsContainer" node_paths=PackedStringArray("button", "highlight", "label")]
+[node name="Sys_SaveOptionButton" type="Control" parent="CampOptionsContainer/SystemOptionsContainer" node_paths=PackedStringArray("button", "under_line", "highlight", "label")]
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 script = ExtResource("6_5vfat")
 button = NodePath("Button")
-highlight = NodePath("TitleLabel/ColorRect")
+under_line = NodePath("TitleLabel/ColorRect")
+highlight = NodePath("TextureRect")
+is_highlighted = null
 label = NodePath("TitleLabel")
 text = "Save"
+
+[node name="TextureRect" type="TextureRect" parent="CampOptionsContainer/SystemOptionsContainer/Sys_SaveOptionButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -32.0
+offset_top = -4.5
+offset_right = 32.0
+offset_bottom = 4.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_hs7sy")
 
 [node name="TitleLabel" type="Label" parent="CampOptionsContainer/SystemOptionsContainer/Sys_SaveOptionButton"]
 self_modulate = Color(0.498039, 0, 0, 1)
@@ -516,14 +638,29 @@ offset_bottom = 12.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Sys_BackOptionButton" type="Control" parent="CampOptionsContainer/SystemOptionsContainer" node_paths=PackedStringArray("button", "highlight", "label")]
+[node name="Sys_BackOptionButton" type="Control" parent="CampOptionsContainer/SystemOptionsContainer" node_paths=PackedStringArray("button", "under_line", "highlight", "label")]
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 script = ExtResource("6_5vfat")
 button = NodePath("Button")
-highlight = NodePath("TitleLabel/ColorRect")
+under_line = NodePath("TitleLabel/ColorRect")
+highlight = NodePath("TextureRect")
+is_highlighted = null
 label = NodePath("TitleLabel")
 text = "Back"
+
+[node name="TextureRect" type="TextureRect" parent="CampOptionsContainer/SystemOptionsContainer/Sys_BackOptionButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -32.0
+offset_top = -4.5
+offset_right = 32.0
+offset_bottom = 4.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_hs7sy")
 
 [node name="TitleLabel" type="Label" parent="CampOptionsContainer/SystemOptionsContainer/Sys_BackOptionButton"]
 self_modulate = Color(0.498039, 0, 0, 1)

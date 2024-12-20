@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://dfeilp6hbiuqs"]
+[gd_scene load_steps=35 format=3 uid="uid://dfeilp6hbiuqs"]
 
 [ext_resource type="Script" path="res://Scenes/Combat/combat_scene.gd" id="1_crigy"]
 [ext_resource type="Texture2D" uid="uid://b232xm2ly0peh" path="res://assets/Sprites/UI/GridCursors/GridCursor_Default.png" id="7_7lt4y"]
@@ -26,8 +26,10 @@
 [ext_resource type="Texture2D" uid="uid://cwsvq3qu6228n" path="res://assets/Sprites/UI/QueInputAndDisplay/page_button.png" id="24_5fn7e"]
 [ext_resource type="Script" path="res://Scenes/Combat/game_over_screen.gd" id="25_byrc6"]
 [ext_resource type="Script" path="res://Scenes/Combat/UiNodes/CameraLock/camera_lock_control.gd" id="25_ig6gl"]
+[ext_resource type="Script" path="res://Scenes/Combat/game_victory_screen.gd" id="26_1uhkb"]
 [ext_resource type="Texture2D" uid="uid://e0lb1vqlst3i" path="res://Scenes/Combat/UiNodes/CameraLock/CameraLock_Locked.png" id="26_muuhh"]
 [ext_resource type="Texture2D" uid="uid://88hhiituab5b" path="res://Scenes/Combat/UiNodes/CameraLock/CameraLock_Unlocked.png" id="27_cweuh"]
+[ext_resource type="Texture2D" uid="uid://q0f5h7rfqbc2" path="res://defs/Items/Consumables/BarPotions/HealthPotion_M_L.png" id="27_vsjit"]
 [ext_resource type="Texture2D" uid="uid://dx5cq5wifod2g" path="res://Scenes/Combat/UiNodes/CameraLock/CameraLock_Following.png" id="28_mng7g"]
 [ext_resource type="Script" path="res://Scenes/Combat/UiNodes/target_input_control.gd" id="31_jtehh"]
 [ext_resource type="Texture2D" uid="uid://io35wpu802fp" path="res://assets/Sprites/UI/BackPatches/Patch_64_12.png" id="32_f81f5"]
@@ -167,7 +169,7 @@ offset_bottom = 120.0
 texture = ExtResource("24_5fn7e")
 expand_mode = 4
 
-[node name="CombatUiControl" type="Control" parent="MoveableCamera2D/CanvasLayer" node_paths=PackedStringArray("game_over_screen", "menu_container", "menu_button", "pause_menu", "target_input_display", "stat_panel_control", "que_input", "que_display", "que_collection_display", "stats_collection_display", "item_select_menu")]
+[node name="CombatUiControl" type="Control" parent="MoveableCamera2D/CanvasLayer" node_paths=PackedStringArray("game_over_screen", "victory_screen", "menu_container", "menu_button", "pause_menu", "target_input_display", "stat_panel_control", "que_input", "que_display", "que_collection_display", "stats_collection_display", "item_select_menu")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -179,6 +181,7 @@ size_flags_vertical = 3
 mouse_filter = 2
 script = ExtResource("8_8l3el")
 game_over_screen = NodePath("GameOverScreen")
+victory_screen = NodePath("GameVictoryScreen")
 menu_container = NodePath("../CenterContainer")
 menu_button = NodePath("MenuButton")
 pause_menu = NodePath("PauseMenuControl")
@@ -558,6 +561,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="GameOverScreen" type="Control" parent="MoveableCamera2D/CanvasLayer/CombatUiControl" node_paths=PackedStringArray("main_menu_button")]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -658,6 +662,226 @@ grow_vertical = 2
 theme = ExtResource("33_yh7y3")
 theme_override_font_sizes/font_size = 32
 text = "Main Menu"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GameVictoryScreen" type="Control" parent="MoveableCamera2D/CanvasLayer/CombatUiControl" node_paths=PackedStringArray("camp_button", "premade_pickup_page", "pickup_pages_container", "premade_pickup_item", "pickup_items_container")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("26_1uhkb")
+camp_button = NodePath("CenterContainer/VBoxContainer/CampButton")
+premade_pickup_page = NodePath("CenterContainer/VBoxContainer/PickupPagesContainer/PickupPageContainer")
+pickup_pages_container = NodePath("CenterContainer/VBoxContainer/PickupPagesContainer")
+premade_pickup_item = NodePath("CenterContainer/VBoxContainer/PickupItemsContainer/PickupItemContainer")
+pickup_items_container = NodePath("CenterContainer/VBoxContainer/PickupItemsContainer")
+
+[node name="ColorRect" type="ColorRect" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/GameVictoryScreen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.501961)
+
+[node name="CenterContainer" type="CenterContainer" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/GameVictoryScreen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/GameVictoryScreen/CenterContainer"]
+layout_mode = 2
+
+[node name="GameOverTitleLabel" type="Label" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/GameVictoryScreen/CenterContainer/VBoxContainer"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+size_flags_vertical = 1
+theme = ExtResource("33_yh7y3")
+theme_override_font_sizes/font_size = 92
+text = "Victory!"
+vertical_alignment = 2
+
+[node name="LoadGameButton" type="Button" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/GameVictoryScreen/CenterContainer/VBoxContainer"]
+visible = false
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(200, 64)
+layout_mode = 2
+
+[node name="NinePatchRect2" type="NinePatchRect" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/GameVictoryScreen/CenterContainer/VBoxContainer/LoadGameButton"]
+custom_minimum_size = Vector2(200, 32)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("32_f81f5")
+patch_margin_left = 12
+patch_margin_top = 12
+patch_margin_right = 12
+patch_margin_bottom = 12
+
+[node name="Label" type="Label" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/GameVictoryScreen/CenterContainer/VBoxContainer/LoadGameButton/NinePatchRect2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("33_yh7y3")
+theme_override_font_sizes/font_size = 32
+text = "Load Game"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PickupPagesContainer" type="VBoxContainer" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/GameVictoryScreen/CenterContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/GameVictoryScreen/CenterContainer/VBoxContainer/PickupPagesContainer"]
+layout_mode = 2
+theme = ExtResource("33_yh7y3")
+theme_override_font_sizes/font_size = 32
+text = "New Pages"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PickupPageContainer" type="HBoxContainer" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/GameVictoryScreen/CenterContainer/VBoxContainer/PickupPagesContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/GameVictoryScreen/CenterContainer/VBoxContainer/PickupPagesContainer/PickupPageContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("27_vsjit")
+stretch_mode = 5
+
+[node name="ItemNameLabel" type="Label" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/GameVictoryScreen/CenterContainer/VBoxContainer/PickupPagesContainer/PickupPageContainer"]
+layout_mode = 2
+theme = ExtResource("33_yh7y3")
+theme_override_font_sizes/font_size = 32
+text = "Item"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/GameVictoryScreen/CenterContainer/VBoxContainer/PickupPagesContainer/PickupPageContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("33_yh7y3")
+theme_override_font_sizes/font_size = 32
+text = ". . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . "
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+
+[node name="Label3" type="Label" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/GameVictoryScreen/CenterContainer/VBoxContainer/PickupPagesContainer/PickupPageContainer"]
+layout_mode = 2
+theme = ExtResource("33_yh7y3")
+theme_override_font_sizes/font_size = 32
+text = "x "
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CountLabel" type="Label" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/GameVictoryScreen/CenterContainer/VBoxContainer/PickupPagesContainer/PickupPageContainer"]
+layout_mode = 2
+theme = ExtResource("33_yh7y3")
+theme_override_font_sizes/font_size = 32
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PickupItemsContainer" type="VBoxContainer" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/GameVictoryScreen/CenterContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/GameVictoryScreen/CenterContainer/VBoxContainer/PickupItemsContainer"]
+layout_mode = 2
+theme = ExtResource("33_yh7y3")
+theme_override_font_sizes/font_size = 32
+text = "Found Items"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PickupItemContainer" type="HBoxContainer" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/GameVictoryScreen/CenterContainer/VBoxContainer/PickupItemsContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/GameVictoryScreen/CenterContainer/VBoxContainer/PickupItemsContainer/PickupItemContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("27_vsjit")
+stretch_mode = 5
+
+[node name="ItemNameLabel" type="Label" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/GameVictoryScreen/CenterContainer/VBoxContainer/PickupItemsContainer/PickupItemContainer"]
+layout_mode = 2
+theme = ExtResource("33_yh7y3")
+theme_override_font_sizes/font_size = 32
+text = "Item"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/GameVictoryScreen/CenterContainer/VBoxContainer/PickupItemsContainer/PickupItemContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("33_yh7y3")
+theme_override_font_sizes/font_size = 32
+text = ". . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . "
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+
+[node name="Label3" type="Label" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/GameVictoryScreen/CenterContainer/VBoxContainer/PickupItemsContainer/PickupItemContainer"]
+layout_mode = 2
+theme = ExtResource("33_yh7y3")
+theme_override_font_sizes/font_size = 32
+text = "x "
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CountLabel" type="Label" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/GameVictoryScreen/CenterContainer/VBoxContainer/PickupItemsContainer/PickupItemContainer"]
+layout_mode = 2
+theme = ExtResource("33_yh7y3")
+theme_override_font_sizes/font_size = 32
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CampButton" type="Button" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/GameVictoryScreen/CenterContainer/VBoxContainer"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(200, 64)
+layout_mode = 2
+
+[node name="NinePatchRect2" type="NinePatchRect" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/GameVictoryScreen/CenterContainer/VBoxContainer/CampButton"]
+custom_minimum_size = Vector2(200, 32)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("32_f81f5")
+patch_margin_left = 12
+patch_margin_top = 12
+patch_margin_right = 12
+patch_margin_bottom = 12
+
+[node name="Label" type="Label" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/GameVictoryScreen/CenterContainer/VBoxContainer/CampButton/NinePatchRect2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("33_yh7y3")
+theme_override_font_sizes/font_size = 32
+text = "Back to Camp"
 horizontal_alignment = 1
 vertical_alignment = 1
 

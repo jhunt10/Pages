@@ -16,7 +16,10 @@ func _process(delta: float) -> void:
 
 func set_item(item:BaseItem):
 	self._item = item
-	item_sprite.texture = item.get_small_icon()
+	if item is BasePageItem:
+		item_sprite.texture = SpriteCache.get_sprite("res://defs/Items/Pages/PageDropItem_Icon.png")
+	else:
+		item_sprite.texture = item.get_small_icon()
 	#item.map_pos_set.connect(on_map_pos_change)
 
 func on_map_pos_change(map_pos:MapPos):

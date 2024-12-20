@@ -1,0 +1,63 @@
+[
+    {
+        "ItemKey":"OldJournal_PageQue",
+        "_ObjectScript": "res://assets/Scripts/Items/Equipment/BaseQueEquipment.gd",
+        "Details":{
+			"DisplayName": "Old Journal",
+			"SnippetDesc": "Our Hero's old journal.",
+			"Description": "An old journal from our Hero's wandering days. Old, but still works.",
+			"Tags": ["Que"],
+			"LargeIcon":"TestBook.png",
+			"SmallIcon":"TestBook.png"
+		},
+        "PagesPerRound": 4,
+        "ItemSlotsData": [
+            {
+                "Key":"Bar",
+                "DisplayName":"Bar",
+                "Count": 1,
+                "FilterData":{
+                    "RequiredTags":"Bar"
+                }
+            },
+            {
+                "Key":"Class",
+                "DisplayName":"Class",
+                "Count": 1,
+                "FilterData":{
+                    "RequiredTags":"ClassPage"
+                }
+            },
+            {
+                "Key":"Actions",
+                "DisplayName":"Any Page",
+                "Count": 6,
+                "FilterData":{
+                    "RequiredTags":"Action"
+                }
+            }
+        ]
+    },
+    {
+        "ItemKey":"OldBag_ItemBag",
+        "_ObjectScript": "res://assets/Scripts/Items/Equipment/BaseBagEquipment.gd",
+        "Details":{
+			"DisplayName": "Old Pouch",
+			"SnippetDesc": "An old worn item pouch.",
+			"Description": "An old worn pouch for carrying 3 of consumable item. Old, but still works.",
+			"Tags": ["Bag"],
+			"LargeIcon":"TestBag.png",
+			"SmallIcon":"TestBag.png"
+		},
+        "ItemSlotsData": [
+            {
+                "Key":"Consumables",
+                "DisplayName":"Bag Items",
+                "Count": 3,
+                "FilterData":{
+                    "RequiredTags":"Consumable"
+                }
+            }
+        ]
+    }
+]
