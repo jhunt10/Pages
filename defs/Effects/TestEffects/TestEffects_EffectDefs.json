@@ -162,16 +162,18 @@
     },
     {
         "DamageMods": {},
-        "HideInHud":true,
         "Details": {
             "Description": "Gain 50 Stamina and regen 10 per Round.",
             "DisplayName": "Stamina Regen",
             "LargeIcon": "StaminaRegen.png",
             "SmallIcon": "StaminaRegen.png",
             "SnippetDesc": "50 Stamina +10 per Round",
-            "Tags": ["Bar"]
+            "Tags": [
+                "Bar"
+            ]
         },
         "EffectKey": "StaminaRegen",
+        "HideInHud": true,
         "StatMods": {
             "BaseStatMod1": {
                 "DisplayName": "Base Stamina",
@@ -191,7 +193,6 @@
                 "StatName": "BarRegen:Stamina:Round",
                 "Value": 10
             }
-            
         },
         "SubEffects": {
             "ApplyBaseStatMod": {
@@ -210,16 +211,18 @@
     },
     {
         "DamageMods": {},
-        "HideInHud":true,
         "Details": {
             "Description": "Gain 50 Mana and regen 10 per Round.",
             "DisplayName": "Mana Regen",
             "LargeIcon": "ManaRegen.png",
             "SmallIcon": "ManaRegen.png",
             "SnippetDesc": "50 Mana +10 per Round",
-            "Tags": ["Bar"]
+            "Tags": [
+                "Bar"
+            ]
         },
         "EffectKey": "ManaRegen",
+        "HideInHud": true,
         "StatMods": {
             "BaseStatMod1": {
                 "DisplayName": "Base Mana",
@@ -239,7 +242,6 @@
                 "StatName": "BarRegen:Mana:Round",
                 "Value": 10
             }
-            
         },
         "SubEffects": {
             "ApplyBaseStatMod": {
@@ -258,22 +260,55 @@
     },
     {
         "DamageMods": {},
-        "HideInHud":false,
         "Details": {
             "Description": "Grants a 100% chance to Crit when attacking from behind the target.",
             "DisplayName": "Back Stab",
             "LargeIcon": "BackStab.png",
             "SmallIcon": "BackStab.png",
             "SnippetDesc": "Allways Crit when behind target.",
-            "Tags": ["CritChance"]
+            "Tags": [
+                "CritChance"
+            ]
         },
         "EffectKey": "BackStab",
-        "StatMods": {
-        },
+        "HideInHud": false,
+        "StatMods": {},
         "SubEffects": {
             "SubEffect1": {
                 "CritMod:Back": 1,
                 "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_AttackMod.gd"
+            }
+        }
+    },
+    {
+        "DamageDatas": {},
+        "DamageMods": {},
+        "Details": {
+            "Description": "Regen",
+            "DisplayName": "Regen",
+            "LargeIcon": "TestHeart.png",
+            "SmallIcon": "TestHeart.png",
+            "SnippetDesc": "Regen",
+            "Tags": []
+        },
+        "EffectKey": "RegenBarStat",
+        "ShowDuration": false,
+        "ShowInHud": true,
+        "StatMods": {},
+        "SubEffects": {
+            "Duration": {
+                "DurationType": "TurnEnd",
+                "DurationValue": 0,
+                "MaxDuration": 0,
+                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_Duration.gd"
+            },
+            "RegenStat": {
+                "StatName": "Health",
+                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_RegenStat.gd",
+                "Triggers": [
+                    "OnCreate"
+                ],
+                "Value": 0
             }
         }
     }

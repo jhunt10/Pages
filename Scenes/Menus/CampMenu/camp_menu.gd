@@ -5,6 +5,7 @@ extends Control
 @export var system_options_container:CampOptionsContainer
 
 @export var quest_button:CampOptionButton
+@export var shop_button:CampOptionButton
 @export var character_button:CampOptionButton
 @export var explort_button:CampOptionButton
 @export var system_button:CampOptionButton
@@ -13,18 +14,23 @@ extends Control
 @export var sys_save_button:CampOptionButton
 @export var sys_load_button:CampOptionButton
 @export var sys_debug_button:CampOptionButton
+@export var sys_quit_button:CampOptionButton
 
+@export var no_shop_pop_up:NoShopPopUp
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	no_shop_pop_up.hide()
 	character_button.button.pressed.connect(_on_prepare_button)
 	quest_button.button.pressed.connect(_on_quest_button)
+	shop_button.button.pressed.connect(no_shop_pop_up.do_thing)
 	explort_button.button.pressed.connect(_on_explore_button)
 	system_button.button.pressed.connect(_sub_menu_open.bind("System"))
 	sys_back_button.button.pressed.connect(_sub_menu_open.bind("Main"))
 	sys_save_button.button.pressed.connect(_on_save_button)
 	sys_load_button.button.pressed.connect(_on_load_button)
 	sys_debug_button.button.pressed.connect(_on_debug_button)
+	sys_quit_button.button.pressed.connect(_on_quit)
 	
 	_sub_menu_open("Main")
 	pass # Replace with function body.
@@ -67,3 +73,6 @@ func _on_load_button():
 
 func _on_debug_button():
 	MainRootNode.Instance.open_dev_tools()
+
+func _on_quit():
+	MainRootNode.Instance.go_to_main_menu()

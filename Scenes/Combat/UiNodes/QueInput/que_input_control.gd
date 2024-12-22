@@ -58,7 +58,7 @@ func _build_buttons():
 		new_button.name = "PageSlot" + str(index)
 		page_button_prefab.get_parent().add_child(new_button)
 		new_button.visible = true
-		var action = MainRootNode.action_library.get_action(action_key)
+		var action = ActionLibrary.get_action(action_key)
 		if action == null:
 			new_button.get_child(0).texture = load(ActionLibrary.NO_ICON_SPRITE)
 		else:
@@ -114,7 +114,7 @@ func show_preview_target_area(action:BaseAction):
 func _mouse_entered_page_button(_index, key_name):
 	if CombatRootControl.Instance.QueController.execution_state != ActionQueController.ActionStates.Waiting:
 		return
-	var action:BaseAction = MainRootNode.action_library.get_action(key_name)
+	var action:BaseAction = ActionLibrary.get_action(key_name)
 	if action.PreviewMoveOffset:
 		que_display_control.preview_que_path(action.PreviewMoveOffset)
 	if action.has_preview_target():
@@ -132,7 +132,7 @@ func _mouse_exited_action_button(_index, _key_name):
 	pass
 
 func _page_button_pressed(index, key_name):
-	var action:BaseAction = MainRootNode.action_library.get_action(key_name)
+	var action:BaseAction = ActionLibrary.get_action(key_name)
 	var on_que_options = action.get_on_que_options(_actor, CombatRootControl.Instance.GameState)
 	if on_que_options.size() > 0:
 		on_que_options_menu.visible = true

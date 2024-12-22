@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://cbexkor24ce0h"]
+[gd_scene load_steps=35 format=3 uid="uid://cbexkor24ce0h"]
 
 [ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/EquipmentMenu/equipment_page_control.gd" id="1_6pwc2"]
 [ext_resource type="Texture2D" uid="uid://c4yedxpiinlff" path="res://Scenes/Menus/CharacterMenu/MenuPages/outline.png" id="2_5i0tg"]
@@ -22,6 +22,18 @@
 [ext_resource type="Texture2D" uid="uid://dwliocipx40sq" path="res://assets/Sprites/UI/CharacterEdit/OffHandSlot.png" id="19_vhvqa"]
 [ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/EquipmentMenu/stat_box_control.gd" id="21_8w6l2"]
 [ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/StatsMenuPage/stat_label_container.gd" id="21_hnuvf"]
+[ext_resource type="Texture2D" uid="uid://b10pvly4exem2" path="res://assets/Sprites/UI/SymbolIcons/_S_Symbole.png" id="23_6x5jd"]
+[ext_resource type="Texture2D" uid="uid://vwiqj7k1flkn" path="res://assets/Sprites/UI/SymbolIcons/_A_Symbole.png" id="24_ai7tk"]
+[ext_resource type="Texture2D" uid="uid://doywp1shkpnmd" path="res://assets/Sprites/UI/SymbolIcons/_I_Symbole.png" id="25_6q8gs"]
+[ext_resource type="Texture2D" uid="uid://ci3qbej0djsng" path="res://assets/Sprites/UI/SymbolIcons/_W_Symbole.png" id="26_c0jlx"]
+[ext_resource type="Texture2D" uid="uid://br058igskmkwd" path="res://assets/Sprites/UI/SymbolIcons/AccuracySymbol.png" id="27_unmnp"]
+[ext_resource type="Texture2D" uid="uid://uarxllb74uai" path="res://assets/Sprites/UI/SymbolIcons/EvasionSymbol.png" id="28_i6cff"]
+[ext_resource type="Texture2D" uid="uid://dgxwfm0wf7rhw" path="res://assets/Sprites/UI/SymbolIcons/PotencySymbol.png" id="29_mqoyh"]
+[ext_resource type="Texture2D" uid="uid://clebb0eitse2k" path="res://assets/Sprites/UI/SymbolIcons/ProtectionSymbol.png" id="30_sbeok"]
+[ext_resource type="Texture2D" uid="uid://v6mrr2dref31" path="res://assets/Sprites/UI/SymbolIcons/SpeedSymbol.png" id="31_wfp0r"]
+[ext_resource type="Texture2D" uid="uid://m0ss0tg7qqou" path="res://assets/Sprites/UI/SymbolIcons/MassSymbol.png" id="32_ohw0h"]
+[ext_resource type="Texture2D" uid="uid://bujky44hog2jm" path="res://assets/Sprites/UI/SymbolIcons/QueCountSymbol.png" id="33_tgryk"]
+[ext_resource type="Texture2D" uid="uid://den756c067qbk" path="res://assets/Sprites/UI/SymbolIcons/CrashSymbol.png" id="34_giu80"]
 
 [node name="EquipmentPage" type="Control" node_paths=PackedStringArray("name_label", "level_label", "equipment_slots_container", "stat_box")]
 custom_minimum_size = Vector2(280, 395)
@@ -469,9 +481,11 @@ offset_right = -18.0
 offset_bottom = -4.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 0
+theme_override_constants/separation = 1
+alignment = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="StatBoxControl/VBoxContainer"]
+visible = false
 layout_mode = 2
 
 [node name="StatLabel_Str" type="HBoxContainer" parent="StatBoxControl/VBoxContainer/HBoxContainer" node_paths=PackedStringArray("name_label", "value_label")]
@@ -587,4 +601,398 @@ theme = ExtResource("3_th70d")
 text = "00"
 
 [node name="FlowContainer" type="FlowContainer" parent="StatBoxControl/VBoxContainer"]
+visible = false
 layout_mode = 2
+
+[node name="AttributesContainer" type="HBoxContainer" parent="StatBoxControl/VBoxContainer"]
+layout_mode = 2
+
+[node name="StrContainer" type="BoxContainer" parent="StatBoxControl/VBoxContainer/AttributesContainer" node_paths=PackedStringArray("name_label", "icon", "value_label")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_constants/separation = 0
+alignment = 1
+script = ExtResource("21_hnuvf")
+stat_name = "Strength"
+name_label = NodePath("NameLabel")
+icon = NodePath("IconRect")
+value_label = NodePath("StatLabel")
+
+[node name="NameLabel" type="Label" parent="StatBoxControl/VBoxContainer/AttributesContainer/StrContainer"]
+visible = false
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("3_th70d")
+text = "Spd: "
+horizontal_alignment = 1
+
+[node name="IconRect" type="TextureRect" parent="StatBoxControl/VBoxContainer/AttributesContainer/StrContainer"]
+layout_mode = 2
+texture = ExtResource("23_6x5jd")
+
+[node name="StatLabel" type="Label" parent="StatBoxControl/VBoxContainer/AttributesContainer/StrContainer"]
+self_modulate = Color(0.498039, 0, 0, 1)
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+theme = ExtResource("3_th70d")
+text = "000"
+horizontal_alignment = 1
+
+[node name="AgiContainer" type="BoxContainer" parent="StatBoxControl/VBoxContainer/AttributesContainer" node_paths=PackedStringArray("name_label", "icon", "value_label")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_constants/separation = 0
+alignment = 1
+script = ExtResource("21_hnuvf")
+stat_name = "Agility"
+name_label = NodePath("NameLabel")
+icon = NodePath("IconRect")
+value_label = NodePath("StatLabel")
+
+[node name="NameLabel" type="Label" parent="StatBoxControl/VBoxContainer/AttributesContainer/AgiContainer"]
+visible = false
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("3_th70d")
+text = "Spd: "
+horizontal_alignment = 1
+
+[node name="IconRect" type="TextureRect" parent="StatBoxControl/VBoxContainer/AttributesContainer/AgiContainer"]
+layout_mode = 2
+texture = ExtResource("24_ai7tk")
+
+[node name="StatLabel" type="Label" parent="StatBoxControl/VBoxContainer/AttributesContainer/AgiContainer"]
+self_modulate = Color(0.498039, 0, 0, 1)
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+theme = ExtResource("3_th70d")
+text = "000"
+horizontal_alignment = 1
+
+[node name="IntContainer" type="BoxContainer" parent="StatBoxControl/VBoxContainer/AttributesContainer" node_paths=PackedStringArray("name_label", "icon", "value_label")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_constants/separation = 0
+alignment = 1
+script = ExtResource("21_hnuvf")
+stat_name = "Intelligence"
+name_label = NodePath("NameLabel")
+icon = NodePath("IconRect")
+value_label = NodePath("StatLabel")
+
+[node name="NameLabel" type="Label" parent="StatBoxControl/VBoxContainer/AttributesContainer/IntContainer"]
+visible = false
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("3_th70d")
+text = "Spd: "
+horizontal_alignment = 1
+
+[node name="IconRect" type="TextureRect" parent="StatBoxControl/VBoxContainer/AttributesContainer/IntContainer"]
+layout_mode = 2
+texture = ExtResource("25_6q8gs")
+
+[node name="StatLabel" type="Label" parent="StatBoxControl/VBoxContainer/AttributesContainer/IntContainer"]
+self_modulate = Color(0.498039, 0, 0, 1)
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+theme = ExtResource("3_th70d")
+text = "000"
+horizontal_alignment = 1
+
+[node name="WisContainer" type="BoxContainer" parent="StatBoxControl/VBoxContainer/AttributesContainer" node_paths=PackedStringArray("name_label", "icon", "value_label")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_constants/separation = 0
+alignment = 1
+script = ExtResource("21_hnuvf")
+stat_name = "Wisdom"
+name_label = NodePath("NameLabel")
+icon = NodePath("IconRect")
+value_label = NodePath("StatLabel")
+
+[node name="NameLabel" type="Label" parent="StatBoxControl/VBoxContainer/AttributesContainer/WisContainer"]
+visible = false
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("3_th70d")
+text = "Spd: "
+horizontal_alignment = 1
+
+[node name="IconRect" type="TextureRect" parent="StatBoxControl/VBoxContainer/AttributesContainer/WisContainer"]
+layout_mode = 2
+texture = ExtResource("26_c0jlx")
+
+[node name="StatLabel" type="Label" parent="StatBoxControl/VBoxContainer/AttributesContainer/WisContainer"]
+self_modulate = Color(0.498039, 0, 0, 1)
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+theme = ExtResource("3_th70d")
+text = "000"
+horizontal_alignment = 1
+
+[node name="AccEvdPotPrtContainer" type="HBoxContainer" parent="StatBoxControl/VBoxContainer"]
+layout_mode = 2
+
+[node name="AccContainer" type="BoxContainer" parent="StatBoxControl/VBoxContainer/AccEvdPotPrtContainer" node_paths=PackedStringArray("name_label", "icon", "value_label")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_constants/separation = 0
+alignment = 1
+script = ExtResource("21_hnuvf")
+stat_name = "Accuracy"
+name_label = NodePath("NameLabel")
+icon = NodePath("IconRect")
+value_label = NodePath("StatLabel")
+
+[node name="NameLabel" type="Label" parent="StatBoxControl/VBoxContainer/AccEvdPotPrtContainer/AccContainer"]
+visible = false
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("3_th70d")
+text = "Spd: "
+horizontal_alignment = 1
+
+[node name="IconRect" type="TextureRect" parent="StatBoxControl/VBoxContainer/AccEvdPotPrtContainer/AccContainer"]
+layout_mode = 2
+texture = ExtResource("27_unmnp")
+
+[node name="StatLabel" type="Label" parent="StatBoxControl/VBoxContainer/AccEvdPotPrtContainer/AccContainer"]
+self_modulate = Color(0.498039, 0, 0, 1)
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+theme = ExtResource("3_th70d")
+text = "000"
+horizontal_alignment = 1
+
+[node name="EvdContainer" type="BoxContainer" parent="StatBoxControl/VBoxContainer/AccEvdPotPrtContainer" node_paths=PackedStringArray("name_label", "icon", "value_label")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_constants/separation = 0
+alignment = 1
+script = ExtResource("21_hnuvf")
+stat_name = "Evasion"
+name_label = NodePath("NameLabel")
+icon = NodePath("IconRect")
+value_label = NodePath("StatLabel")
+
+[node name="NameLabel" type="Label" parent="StatBoxControl/VBoxContainer/AccEvdPotPrtContainer/EvdContainer"]
+visible = false
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("3_th70d")
+text = "Spd: "
+horizontal_alignment = 1
+
+[node name="IconRect" type="TextureRect" parent="StatBoxControl/VBoxContainer/AccEvdPotPrtContainer/EvdContainer"]
+layout_mode = 2
+texture = ExtResource("28_i6cff")
+
+[node name="StatLabel" type="Label" parent="StatBoxControl/VBoxContainer/AccEvdPotPrtContainer/EvdContainer"]
+self_modulate = Color(0.498039, 0, 0, 1)
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+theme = ExtResource("3_th70d")
+text = "000"
+horizontal_alignment = 1
+
+[node name="PotContainer" type="BoxContainer" parent="StatBoxControl/VBoxContainer/AccEvdPotPrtContainer" node_paths=PackedStringArray("name_label", "icon", "value_label")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_constants/separation = 0
+alignment = 1
+script = ExtResource("21_hnuvf")
+stat_name = "Potency"
+name_label = NodePath("NameLabel")
+icon = NodePath("IconRect")
+value_label = NodePath("StatLabel")
+
+[node name="NameLabel" type="Label" parent="StatBoxControl/VBoxContainer/AccEvdPotPrtContainer/PotContainer"]
+visible = false
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("3_th70d")
+text = "Spd: "
+horizontal_alignment = 1
+
+[node name="IconRect" type="TextureRect" parent="StatBoxControl/VBoxContainer/AccEvdPotPrtContainer/PotContainer"]
+layout_mode = 2
+texture = ExtResource("29_mqoyh")
+
+[node name="StatLabel" type="Label" parent="StatBoxControl/VBoxContainer/AccEvdPotPrtContainer/PotContainer"]
+self_modulate = Color(0.498039, 0, 0, 1)
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+theme = ExtResource("3_th70d")
+text = "000"
+horizontal_alignment = 1
+
+[node name="PrtContainer" type="BoxContainer" parent="StatBoxControl/VBoxContainer/AccEvdPotPrtContainer" node_paths=PackedStringArray("name_label", "icon", "value_label")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_constants/separation = 0
+alignment = 1
+script = ExtResource("21_hnuvf")
+stat_name = "Protection"
+name_label = NodePath("NameLabel")
+icon = NodePath("IconRect")
+value_label = NodePath("StatLabel")
+
+[node name="NameLabel" type="Label" parent="StatBoxControl/VBoxContainer/AccEvdPotPrtContainer/PrtContainer"]
+visible = false
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("3_th70d")
+text = "Spd: "
+horizontal_alignment = 1
+
+[node name="IconRect" type="TextureRect" parent="StatBoxControl/VBoxContainer/AccEvdPotPrtContainer/PrtContainer"]
+layout_mode = 2
+texture = ExtResource("30_sbeok")
+
+[node name="StatLabel" type="Label" parent="StatBoxControl/VBoxContainer/AccEvdPotPrtContainer/PrtContainer"]
+self_modulate = Color(0.498039, 0, 0, 1)
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+theme = ExtResource("3_th70d")
+text = "000"
+horizontal_alignment = 1
+
+[node name="MiscStatsContainer2" type="HBoxContainer" parent="StatBoxControl/VBoxContainer"]
+layout_mode = 2
+
+[node name="MassContainer" type="BoxContainer" parent="StatBoxControl/VBoxContainer/MiscStatsContainer2" node_paths=PackedStringArray("name_label", "icon", "value_label")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_constants/separation = 0
+alignment = 1
+script = ExtResource("21_hnuvf")
+stat_name = "Mass"
+name_label = NodePath("NameLabel")
+icon = NodePath("IconRect")
+value_label = NodePath("StatLabel")
+
+[node name="NameLabel" type="Label" parent="StatBoxControl/VBoxContainer/MiscStatsContainer2/MassContainer"]
+visible = false
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("3_th70d")
+text = "Spd: "
+horizontal_alignment = 1
+
+[node name="IconRect" type="TextureRect" parent="StatBoxControl/VBoxContainer/MiscStatsContainer2/MassContainer"]
+layout_mode = 2
+texture = ExtResource("32_ohw0h")
+
+[node name="StatLabel" type="Label" parent="StatBoxControl/VBoxContainer/MiscStatsContainer2/MassContainer"]
+self_modulate = Color(0.498039, 0, 0, 1)
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+theme = ExtResource("3_th70d")
+text = "000"
+horizontal_alignment = 1
+
+[node name="SpeedContainer" type="BoxContainer" parent="StatBoxControl/VBoxContainer/MiscStatsContainer2" node_paths=PackedStringArray("name_label", "icon", "value_label")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_constants/separation = 0
+alignment = 1
+script = ExtResource("21_hnuvf")
+stat_name = "Speed"
+name_label = NodePath("NameLabel")
+icon = NodePath("IconRect")
+value_label = NodePath("StatLabel")
+
+[node name="NameLabel" type="Label" parent="StatBoxControl/VBoxContainer/MiscStatsContainer2/SpeedContainer"]
+visible = false
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("3_th70d")
+text = "Spd: "
+horizontal_alignment = 1
+
+[node name="IconRect" type="TextureRect" parent="StatBoxControl/VBoxContainer/MiscStatsContainer2/SpeedContainer"]
+layout_mode = 2
+texture = ExtResource("31_wfp0r")
+
+[node name="StatLabel" type="Label" parent="StatBoxControl/VBoxContainer/MiscStatsContainer2/SpeedContainer"]
+self_modulate = Color(0.498039, 0, 0, 1)
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+theme = ExtResource("3_th70d")
+text = "000"
+horizontal_alignment = 1
+
+[node name="PprContainer" type="BoxContainer" parent="StatBoxControl/VBoxContainer/MiscStatsContainer2" node_paths=PackedStringArray("name_label", "icon", "value_label")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_constants/separation = 0
+alignment = 1
+script = ExtResource("21_hnuvf")
+stat_name = "PPR"
+name_label = NodePath("NameLabel")
+icon = NodePath("IconRect")
+value_label = NodePath("StatLabel")
+
+[node name="NameLabel" type="Label" parent="StatBoxControl/VBoxContainer/MiscStatsContainer2/PprContainer"]
+visible = false
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("3_th70d")
+text = "Spd: "
+horizontal_alignment = 1
+
+[node name="IconRect" type="TextureRect" parent="StatBoxControl/VBoxContainer/MiscStatsContainer2/PprContainer"]
+layout_mode = 2
+texture = ExtResource("33_tgryk")
+
+[node name="StatLabel" type="Label" parent="StatBoxControl/VBoxContainer/MiscStatsContainer2/PprContainer"]
+self_modulate = Color(0.498039, 0, 0, 1)
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+theme = ExtResource("3_th70d")
+text = "000"
+horizontal_alignment = 1
+
+[node name="CrashContainer" type="BoxContainer" parent="StatBoxControl/VBoxContainer/MiscStatsContainer2" node_paths=PackedStringArray("name_label", "icon", "value_label")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_constants/separation = 0
+alignment = 1
+script = ExtResource("21_hnuvf")
+stat_name = "Crash"
+name_label = NodePath("NameLabel")
+icon = NodePath("IconRect")
+value_label = NodePath("StatLabel")
+
+[node name="NameLabel" type="Label" parent="StatBoxControl/VBoxContainer/MiscStatsContainer2/CrashContainer"]
+visible = false
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("3_th70d")
+text = "Spd: "
+horizontal_alignment = 1
+
+[node name="IconRect" type="TextureRect" parent="StatBoxControl/VBoxContainer/MiscStatsContainer2/CrashContainer"]
+layout_mode = 2
+texture = ExtResource("34_giu80")
+
+[node name="StatLabel" type="Label" parent="StatBoxControl/VBoxContainer/MiscStatsContainer2/CrashContainer"]
+self_modulate = Color(0.498039, 0, 0, 1)
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+theme = ExtResource("3_th70d")
+text = "000"
+horizontal_alignment = 1

@@ -39,6 +39,45 @@
         ]
     },
     {
+        "ItemKey":"TutorialJournal_PageQue",
+        "_ObjectScript": "res://assets/Scripts/Items/Equipment/BaseQueEquipment.gd",
+        "Details":{
+			"DisplayName": "Old Journal",
+			"SnippetDesc": "Our Hero's old journal.",
+			"Description": "An old journal from our Hero's wandering days. Old, but still works.",
+			"Tags": ["Que"],
+			"LargeIcon":"TestBook.png",
+			"SmallIcon":"TestBook.png"
+		},
+        "PagesPerRound": 5,
+        "ItemSlotsData": [
+            {
+                "Key":"Bar",
+                "DisplayName":"Bar",
+                "Count": 1,
+                "FilterData":{
+                    "RequiredTags":"Bar"
+                }
+            },
+            {
+                "Key":"Class",
+                "DisplayName":"Class",
+                "Count": 1,
+                "FilterData":{
+                    "RequiredTags":"ClassPage"
+                }
+            },
+            {
+                "Key":"Actions",
+                "DisplayName":"Any Page",
+                "Count": 6,
+                "FilterData":{
+                    "RequiredTags":"Action"
+                }
+            }
+        ]
+    },
+    {
         "ItemKey":"OldBag_ItemBag",
         "_ObjectScript": "res://assets/Scripts/Items/Equipment/BaseBagEquipment.gd",
         "Details":{

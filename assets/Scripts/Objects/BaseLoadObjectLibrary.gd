@@ -317,7 +317,7 @@ static func _merge_defs(child:Dictionary, parent:Dictionary)->Dictionary:
 			if val.size() == 0:
 				val = parent.get(key, [])
 			# Merge list only when Strings
-			if val[0] is String:
+			if val[0] is String and not key.begins_with("Spawn"):
 				var new_list = []
 				for arr_val in parent.get(key, []):
 					if not new_list.has(arr_val):

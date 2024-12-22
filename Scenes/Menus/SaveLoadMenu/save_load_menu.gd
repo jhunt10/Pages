@@ -54,13 +54,12 @@ func _ready() -> void:
 		
 	save_popup.hide()
 	message_box.hide()
+	clear_displayed_save_data()
 	read_existing_saves()
 	if _last_save_load_name != null:
 		_on_slot_pressed(_last_save_load_name)
 	elif save_mode:
 		_on_slot_pressed(NEW_SAVE_KEY)
-	else:
-		clear_displayed_save_data()
 	close_button.pressed.connect(on_close_menu)
 	save_button.mouse_entered.connect(save_button_highlight.show)
 	save_button.mouse_exited.connect(save_button_highlight.hide)
@@ -156,6 +155,8 @@ func _on_slot_pressed(save_name):
 		var old_slot:SaveSlotContainer = save_slots[_selected_save_name]
 		old_slot.highlight.hide()
 	_selected_save_name = save_name
+	if not save_slots.has(save_name):
+		return
 	var slot:SaveSlotContainer = save_slots[save_name]
 	slot.highlight.show()
 	var data = _cached_save_meta_data.get(save_name, {})

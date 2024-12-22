@@ -14,7 +14,6 @@ func on_new_actor(actor:BaseActor, pos):
 	_build_displays()
 	
 func _build_displays():
-	return
 	for child in panels_container.get_children():
 		child.queue_free()
 	for actor in CombatRootControl.Instance.GameState._actors.values():

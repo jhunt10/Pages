@@ -157,5 +157,7 @@ func set_weapon(weapon:BaseWeaponEquipment):
 	self.underhand_weapon_sprite.offset = offset
 	
 	custom_rotation = sprite_data.get("Rotation", 0)
+	if hand == ActorHandNode.HANDS.TwoHand and sprite_data.has("TwoHandRotation"):
+		custom_rotation = sprite_data.get("TwoHandRotation", 0)
 	self.overhand_weapon_sprite.rotation_degrees = custom_rotation
 	self.underhand_weapon_sprite.rotation_degrees = custom_rotation

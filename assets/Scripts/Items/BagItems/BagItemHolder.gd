@@ -3,9 +3,7 @@ extends BaseItemHolder
 
 var bag_item_id
 
-func _init(actor, bag_item) -> void:
-	if bag_item:
-		bag_item_id = bag_item.Id
+func _init(actor) -> void:
 	super(actor)
 
 func _load_slots_sets_data()->Array:

@@ -76,20 +76,27 @@ func _init(key:String, load_path:String, def:Dictionary, id:String, data:Diction
 	details = ObjectDetailsData.new(_def_load_path, _def.get("Details", {}))
 	equipment = EquipmentHolder.new(self)
 	equipment.items_changed.connect(_on_equipment_holder_items_change)
-	items = BagItemHolder.new(self, equipment.get_bag_equipment())
-	pages = PageHolder.new(self, equipment.get_que_equipment())
+	items = BagItemHolder.new(self)
+	pages = PageHolder.new(self)
 	pages.class_page_changed.connect(_on_class_page_change)
 	
-	equipment.validate_items()
-	items.validate_items()
-	pages.validate_items()
 	# Que requires info from Pages and Equipment so must be inited after item validation
 	Que = ActionQue.new(self)
 	if get_load_val("IsPlayer", false):
 		is_player = true
 
 func post_creation():
-	pages.load_effects()
+	equipment.load_saved_items()
+	
+	items.load_saved_items()
+	items.set_bag_item(equipment.get_bag_equipment())
+	
+	pages.load_saved_items()
+	pages.set_page_que_item(equipment.get_que_equipment())
+	
+	equipment.validate_items()
+	items.validate_items()
+	pages.validate_items()
 
 func _on_equipment_holder_items_change():
 	var bag = equipment.get_bag_equipment()

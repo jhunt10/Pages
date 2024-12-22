@@ -1,7 +1,7 @@
 class_name StatHolder
 
 const HealthKey:String = "Health"
-const LOGGING = true
+const LOGGING = false
 
 signal stats_changed
 signal bar_stat_changed
@@ -28,24 +28,6 @@ func _init(actor:BaseActor, data:Dictionary) -> void:
 	_actor = actor
 	# Parse Stat Data
 	for key:String in data.keys():
-		## BarStat max
-		#if key.begins_with("Max:"):
-			#var subKey = key.substr(4)
-			#_bar_stats[subKey] = data[key]
-			#_base_stats[key] = data[key]
-		## Bar Stat Regens
-		#elif key.begins_with("Regen:"):
-			#var tokens = key.split(":")
-			#if tokens.size() != 3:
-				#printerr("StatHolder._init: Invalid BarStat Regen format: '%s' exspected 'Regen:STAT_NAME:[TURN|ROUND]'." % [key])
-				#continue
-			#var stat_name = tokens[1]
-			#var trigger = tokens[2]
-			#if !_bar_stats_regen.keys().has(stat_name):
-				#_bar_stats_regen[stat_name] = {}
-			#_bar_stats_regen[stat_name][trigger] = data[key]
-		## Other Stats
-		#elif data[key] is int or data[key] is float:
 		_base_stats[key] = data[key]
 	actor.equipment_changed.connect(dirty_stats)
 	actor.turn_starting.connect(_on_actor_turn_start)
@@ -140,11 +122,14 @@ func _calc_cache_stats():
 	# Aggregate all the mods together by stat_name, then type
 	var agg_mods = {}
 	var set_stats = {}
+	var key_depends_on_vals = {}
+	var key_is_dependant_of_vals = {}
 	var mods_list = _actor.effects.get_stat_mods()
 	mods_list.append_array(_actor.equipment.get_all_stat_mods())
 	for mod:BaseStatMod in mods_list:
 		if LOGGING: print("# Found Mod '", mod.display_name, " for: %s" % _actor.ActorKey)
 		
+		#
 		if not agg_mods.keys().has(mod.stat_name): # Add stat name to agg mods
 			agg_mods[mod.stat_name] = {}
 		if not agg_mods[mod.stat_name].keys().has(mod.mod_type): # Add mod type to agg mods
@@ -162,6 +147,21 @@ func _calc_cache_stats():
 				if not set_stats.keys().has(mod.stat_name):
 					set_stats[mod.stat_name] = 0
 			agg_mods[mod.stat_name][mod.mod_type].append(mod.value)
+		elif mod.mod_type == BaseStatMod.ModTypes.AddStat:
+			var dep_stat_name = mod.dep_stat_name
+			if key_depends_on_vals.has(dep_stat_name) and key_depends_on_vals[dep_stat_name].has(mod.stat_name):
+				printerr("StatHolder._calc_cache_stats: Circular dependancy found for stats %s <-> %s. Rejecting mod: %s" % [mod.stat_name, dep_stat_name, mod.display_name] )
+				continue
+			if not key_depends_on_vals.keys().has(mod.stat_name):
+				key_depends_on_vals[mod.stat_name] = []
+			if not key_depends_on_vals[mod.stat_name].has(dep_stat_name):
+				key_depends_on_vals[mod.stat_name].append(dep_stat_name)
+				
+			if not key_is_dependant_of_vals.has(dep_stat_name):
+				key_is_dependant_of_vals[dep_stat_name] = []
+			if not key_is_dependant_of_vals[dep_stat_name].has(mod.stat_name):
+				key_is_dependant_of_vals[dep_stat_name].append(mod.stat_name)
+			agg_mods[mod.stat_name][mod.mod_type].append(dep_stat_name)
 		else:
 			agg_mods[mod.stat_name][mod.mod_type].append(mod.value)
 		
@@ -173,30 +173,50 @@ func _calc_cache_stats():
 		temp_stats[base_stat_name] = _base_stats[base_stat_name]
 	for set_stat_name in set_stats.keys():
 		temp_stats[set_stat_name] = set_stats[set_stat_name]
+	
 	# Add current values for bar stats
 	for stat_name:String in temp_stats.keys():
-		if stat_name.begins_with("BarMax:"):
+		if stat_name.begins_with("BarStat:") and _cached_stats.keys().has(stat_name):
+				temp_stats[stat_name] = _cached_stats.get(stat_name, 0)
+		elif stat_name.begins_with("BarMax:"):
 			var bar_stat_name = stat_name.replace("BarMax:","BarStat:")
 			if not temp_stats.keys().has(bar_stat_name):
 				temp_stats[bar_stat_name] = _cached_stats.get(bar_stat_name, temp_stats[stat_name])
 	
 	_cached_stats.clear()
-	for stat_name:String in temp_stats.keys():
-		# No mods for stat
-		if not agg_mods.keys().has(stat_name):
-			_cached_stats[stat_name] = temp_stats[stat_name]
-			continue
-		#if stat_name.begins_with("Max:"):
-		var agg_stat:Dictionary = agg_mods[stat_name]
-		var temp_val = float(temp_stats[stat_name])
-		if agg_stat.keys().has(BaseStatMod.ModTypes.Add):
-			for val in agg_stat[BaseStatMod.ModTypes.Add]:
-				temp_val += val
-		if agg_stat.keys().has(BaseStatMod.ModTypes.Scale):
-			for val in agg_stat[BaseStatMod.ModTypes.Scale]:
-				temp_val = temp_val * val
-		_cached_stats[stat_name] = temp_val
+	var safety_limit = 10
+	var first_pass = true
+	while (first_pass or key_depends_on_vals.size() > 0) and safety_limit > 0:
+		safety_limit -= 1
+		first_pass = false
+		for stat_name:String in temp_stats.keys():
+			if key_depends_on_vals.keys().has(stat_name):
+				var still_waiting = false
+				for dep_stat in key_depends_on_vals[stat_name]:
+					if _cached_stats.has(dep_stat):
+						key_depends_on_vals[stat_name].erase(dep_stat)
+				if key_depends_on_vals[stat_name].size() > 0:
+					continue
+				else:
+					key_depends_on_vals.erase(stat_name)
+			var temp_val = float(temp_stats[stat_name])
+			# Apply stat mods
+			if agg_mods.keys().has(stat_name):
+				var agg_stat:Dictionary = agg_mods[stat_name]
+				if agg_stat.keys().has(BaseStatMod.ModTypes.Add):
+					for val in agg_stat[BaseStatMod.ModTypes.Add]:
+						temp_val += val
+				if agg_stat.keys().has(BaseStatMod.ModTypes.AddStat):
+					for val in agg_stat[BaseStatMod.ModTypes.AddStat]:
+						temp_val += _cached_stats[val]
+				if agg_stat.keys().has(BaseStatMod.ModTypes.Scale):
+					for val in agg_stat[BaseStatMod.ModTypes.Scale]:
+						temp_val = temp_val * val
+			_cached_stats[stat_name] = temp_val
+	
 	if LOGGING: print("--- Done Caching Stats")
+	if safety_limit <= 0:
+		printerr("Stat Caching Failed wth to many dependancies!")
 	_stats_dirty = false
 	stats_changed.emit()
 

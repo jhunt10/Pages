@@ -7,10 +7,10 @@
 			"SnippetDesc": "A soldier's old Helmet.",
 			"Description": "Standard issue helmet for some army somewhere. Old, but still works.",
 			"Tags": ["Head"],
-			"LargeIcon":"OldHelm.png",
-			"SmallIcon":"OldHelm.png"
+			"LargeIcon":"Sprites/OldHelm.png",
+			"SmallIcon":"Sprites/OldHelm.png"
 		},
-        "SpriteSheet":"OldHelm_SpriteSheet.png",
+        "SpriteSheet":"Sprites/OldHelm_SpriteSheet.png",
         "EquipSlot":"Head",
         "Armor": 5,
         "Ward": 0
@@ -23,10 +23,10 @@
 			"SnippetDesc": "A soldier's old Armor.",
 			"Description": "Standard issue armor for some army somewhere. Old, but still works.",
 			"Tags": ["Body"],
-			"LargeIcon":"OldArmor.png",
-			"SmallIcon":"OldArmor.png"
+			"LargeIcon":"Sprites/OldArmor.png",
+			"SmallIcon":"Sprites/OldArmor.png"
 		},
-        "SpriteSheet":"OldArmor_SpriteSheet.png",
+        "SpriteSheet":"Sprites/OldArmor_SpriteSheet.png",
         "EquipSlot":"Body",
         "Armor": 5,
         "Ward": 0
@@ -39,10 +39,10 @@
 			"SnippetDesc": "A soldier's old Boots.",
 			"Description": "Standard issue boots for some army somewhere. Old, but still works.",
 			"Tags": ["Feet"],
-			"LargeIcon":"OldBoots.png",
-			"SmallIcon":"OldBoots.png"
+			"LargeIcon":"Sprites/OldBoots.png",
+			"SmallIcon":"Sprites/OldBoots.png"
 		},
-        "SpriteSheet":"OldBoots_SpriteSheet.png",
+        "SpriteSheet":"Sprites/OldBoots_SpriteSheet.png",
         "EquipSlot":"Feet",
         "Armor": 5,
         "Ward": 0
@@ -55,19 +55,19 @@
 			"SnippetDesc": "A soldier's old sword.",
 			"Description": "A old sword dulled from years of practice but no combat. Old, but still works.",
 			"Tags": ["Weapon"],
-			"LargeIcon":"OldSword.png",
-			"SmallIcon":"OldSword.png"
+			"LargeIcon":"Sprites/OldSword.png",
+			"SmallIcon":"Sprites/OldSword.png"
 		},
         "WeaponSpriteData":{
             "Offset":[0,0],
-            "SpriteName":"OldSword",
+            "SpriteName":"Sprites/OldSword",
             "Rotation":-60
         },
         "EquipSlot":"Weapon",
         "CanOffhand":false,
         "DamageData":{
             "AtkStat": "Strength",
-            "AtkPower": 30,
+            "AtkPower": 100,
             "DamageEffect": "Slash_DamageEffect",
             "DamageType": "Slash",
             "DamageVarient": 0.1,
@@ -92,8 +92,8 @@
 			"SnippetDesc": "A soldier's old Shield.",
 			"Description": "Standard issue shield for some army somewhere. Old, but still works.",
 			"Tags": ["OffHand","Shield"],
-			"LargeIcon":"OldShield.png",
-			"SmallIcon":"OldShield.png"
+			"LargeIcon":"Sprites/OldShield.png",
+			"SmallIcon":"Sprites/OldShield.png"
 		},
         "StatMods":{
 			"StatMod1": { 
@@ -109,7 +109,7 @@
 				"Value":0.5
 			}
         },
-        "SpriteSheet":"OldShield_SpriteSheet.png",
+        "SpriteSheet":"Sprites/OldShield_SpriteSheet.png",
         "EquipSlot":"OffHand",
         "Armor": 5,
         "Ward": 0

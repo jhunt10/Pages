@@ -5,11 +5,14 @@ var stat_name:String
 var display_name:String
 var mod_type:ModTypes
 var value
+var dep_stat_name:String
 
 enum ModTypes {
 	Add, # Add to stat 		| x = x + val
 	Scale, # Multiply stat 		| x = x * val 
 	Set, # Set the stat 	| x = val
+	
+	AddStat, # Add other_stat to stat | x = x + [Stat]
 }
 
 static func create_from_data(source_id:String, data:Dictionary) -> BaseStatMod:
@@ -19,13 +22,19 @@ static func create_from_data(source_id:String, data:Dictionary) -> BaseStatMod:
 	if type != null:
 		set_mode_type = type
 	else:
-		printerr("Unknown Stat Mod Type: %s" % [type_key])
+		printerr("Stat Mod: '%s' Unknown Stat Mod Type: %s" % [data.get("DisplayName", "NO NAME"), type_key])
 		set_mode_type = ModTypes.Add
-	return BaseStatMod.new(source_id, data['StatName'], data['DisplayName'], set_mode_type, data["Value"])
+	if set_mode_type == ModTypes.AddStat:
+		if not data.has("DepStatName"):
+			printerr("Stat Mod: '%s' set to AddStat but is missing 'DepStatName'." % [data.get("DisplayName", "NO NAME")])
+			set_mode_type = ModTypes.Add
+	return BaseStatMod.new(source_id, data['StatName'], data['DisplayName'], set_mode_type, data["Value"], data.get("DepStatName", null))
 
-func _init(source_id:String, stat_name:String, display_name:String, mod_type:ModTypes, value):
+func _init(source_id:String, stat_name:String, display_name:String, mod_type:ModTypes, value, dep_stat=null):
 	self.source_id = source_id
 	self.stat_name = stat_name
 	self.display_name = display_name
 	self.mod_type = mod_type
+	if dep_stat:
+		self.dep_stat_name = dep_stat
 	self.value = value

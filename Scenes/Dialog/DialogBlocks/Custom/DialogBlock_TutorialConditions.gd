@@ -47,6 +47,9 @@ func update(delta: float) -> void:
 	pass
 
 func do_thing():
+	ActionQueController.SHORTCUT_QUE = false
+	CombatRootControl.Instance.ui_control.que_collection_display.hide()
+	CombatRootControl.Instance.ui_control.stats_collection_display.hide()
 	if _block_data.keys().has("RemoveActions"):
 		var actor = CombatRootControl.Instance.ui_control.que_input._actor
 		for action_key in _block_data.get("RemoveActions", []):
@@ -56,7 +59,7 @@ func do_thing():
 		self.finish()
 	if _block_data.keys().has("AddPages"):
 		for page_name in _block_data.get("AddPages", []):
-			var page = ItemLibrary.get_item(page_name)
+			var page = ItemLibrary.create_item(page_name, {})
 			if page:
 				var actor = CombatRootControl.Instance.ui_control.que_input._actor
 				actor.pages.add_item_to_first_valid_slot(page)

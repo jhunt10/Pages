@@ -407,20 +407,13 @@
 		"BlockTag": "AddPage_BWA",
 		"BlockScript": "res://Scenes/Dialog/DialogBlocks/Custom/DialogBlock_TutorialConditions.gd",
 		"AddPages": [
-			"BasicWeaponAttack_PageItem1"
+			"BasicWeaponAttack_PageItem"
 		]
 	},
 	{
 		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_PanCamera.gd",
 		"TargetType": "Actor",
 		"TargetActorId": "TutorialActor_ID"
-	},
-	{
-		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_PopUp.gd",
-		"Create": "PopUp4",
-		"TargetElement": "MoveableCamera2D/CanvasLayer/CombatUiControl/QueInputControl/BackPatchContainer/HBoxContainer/HBoxContainer/PageSlot3",
-		"PopupControlSript": "res://Scenes/Dialog/DialogBlockControls/PopUps/dotted_outline_pop_up_control.tscn",
-		"FreezeCamera": true
 	},
 	{
 		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_Speech.gd",
@@ -430,10 +423,6 @@
 			"\nWith this Page, you can use you primary weapon to attack a target.",
 			"\nSince you're using a sword, we'll need to get in range."
 		]
-	},
-	{
-		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_PopUp.gd",
-		"Delete": "PopUp4"
 	},
 	{
 		"BlockTag": "SecondInput_Instruction",
@@ -564,13 +553,13 @@
 		"BlockTag": "AddPage_End",
 		"BlockScript": "res://Scenes/Dialog/DialogBlocks/Custom/DialogBlock_TutorialConditions.gd",
 		"AddPages": [
-			"BasicWeaponAttack_PageItem1",
-			"TestArrow_PageItem1",
-			"TestBullets_PageItem1",
-			"TeleportSelf_PageItem1",
-			"TestPoison_PageItem1",
-			"TestFireBall_PageItem1",
-			"SpawnTestTotem_PageItem1"
+			"BasicWeaponAttack_PageItem",
+			"TestArrow_PageItem",
+			"TestBullets_PageItem",
+			"TeleportSelf_PageItem",
+			"TestPoison_PageItem",
+			"TestFireBall_PageItem",
+			"SpawnTestTotem_PageItem"
 		],
 		"FreezeCamera": false
 	}

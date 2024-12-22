@@ -1,0 +1,86 @@
+[
+    {
+        "DamageDatas": {},
+        "DamageMods": {},
+        "Details": {
+            "Description": "Your Agility is added to your Evasion.",
+            "DisplayName": "Agile Evasion",
+            "LargeIcon": "AgileEvasion.png",
+            "SmallIcon": "AgileEvasion.png",
+            "SnippetDesc": "Evasion scales with Agility",
+            "Tags": []
+        },
+        "EffectKey": "AgileEvasion_Page",
+        "StatMods": {
+            "StatMod1": {
+                "DisplayName": "Agile Evasion",
+                "ModType": "AddStat",
+                "StatName": "Evasion",
+                "DepStatName": "Agility",
+                "Value": 1
+            }
+        },
+        "SubEffects": {
+            "ModStat": {
+                "StatModKey": "StatMod1",
+                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_ModStat.gd"
+            }
+        }
+    },
+    {
+        "DamageDatas": {},
+        "DamageMods": {},
+        "Details": {
+            "Description": "Your Agility is added to your Accuracy.",
+            "DisplayName": "Agile Accuracy",
+            "LargeIcon": "AgileAccuracy.png",
+            "SmallIcon": "AgileAccuracy.png",
+            "SnippetDesc": "Accuracy scales with Agility",
+            "Tags": []
+        },
+        "EffectKey": "AgileAccuracy_Page",
+        "StatMods": {
+            "StatMod1": {
+                "DisplayName": "Agile Accuracy",
+                "ModType": "AddStat",
+                "StatName": "Accuracy",
+                "DepStatName": "Agility",
+                "Value": 1
+            }
+        },
+        "SubEffects": {
+            "ModStat": {
+                "StatModKey": "StatMod1",
+                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_ModStat.gd"
+            }
+        }
+    },
+    {
+        "DamageDatas": {},
+        "DamageMods": {},
+        "Details": {
+            "Description": "Your Agility is added to your Crit Chance.",
+            "DisplayName": "Agile Crits",
+            "LargeIcon": "AgileCrits.png",
+            "SmallIcon": "AgileCrits.png",
+            "SnippetDesc": "Crit Chance scales with Agility",
+            "Tags": []
+        },
+        "EffectKey": "AgileCrit_Page",
+        "StatMods": {
+            "StatMod1": {
+                "DisplayName": "Agile Crits",
+                "ModType": "AddStat",
+                "StatName": "CritChance",
+                "DepStatName": "Agility",
+                "Value": 1
+            }
+        },
+        "SubEffects": {
+            "ModStat": {
+                "StatModKey": "StatMod1",
+                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_ModStat.gd"
+            }
+        }
+    }
+]

@@ -7,7 +7,7 @@ const STAT_BALENCE:int = 100
 static func handle_attack(attacker:BaseActor, defender:BaseActor, damage_datas, 
 							source_tag_chain:SourceTagChain, game_state:GameStateData, 
 							target_parameters:TargetParameters,
-							attack_from_spot_override:MapPos = null):
+							attack_from_spot_override:MapPos = null)->AttackEvent:
 	print("################ Attacking #########################")
 	print("Handing Attack: %s to %s " % [attacker.details.display_name, defender.details.display_name])
 	
@@ -70,7 +70,9 @@ static func handle_attack(attacker:BaseActor, defender:BaseActor, damage_datas,
 			else:
 				printerr("No FixedBaseDamage or AtkStat found on damage data")
 				continue
-			handle_damage(attacker, base_damage, defender, damage_data, source_tag_chain, game_state, attack_event.final_damage_mod)
+			var damage_event = handle_damage(attacker, base_damage, defender, damage_data, source_tag_chain, game_state, attack_event.final_damage_mod)
+			if damage_event:
+				attack_event.damage_events.append(damage_event)
 		
 	attack_event.attack_stage = AttackEvent.AttackStage.Resolved
 	
@@ -79,6 +81,7 @@ static func handle_attack(attacker:BaseActor, defender:BaseActor, damage_datas,
 	defender.effects.trigger_attack(game_state, attack_event)
 	
 	print("################## Attack Done #######################")
+	return attack_event
 
 static func handle_push(moving_actor:BaseActor, pushed_actor:BaseActor, game_state:GameStateData):
 	var winner = moving_actor
@@ -101,7 +104,7 @@ static func handle_push(moving_actor:BaseActor, pushed_actor:BaseActor, game_sta
 	handle_damage(winner, base_damage, loser, damage_data, tag_chain, game_state)
 
 static func handle_damage(source, base_damage:int, defender:BaseActor, damage_data:Dictionary, 
-							source_tag_chain:SourceTagChain, game_state:GameStateData, final_damage_mod:float = 1):
+							source_tag_chain:SourceTagChain, game_state:GameStateData, final_damage_mod:float = 1)->DamageEvent:
 	var damage_event = DamageEvent.new(damage_data, source, base_damage, defender,source_tag_chain, game_state)
 	
 	var damage = damage_event.final_damage * final_damage_mod
@@ -120,6 +123,7 @@ static func handle_damage(source, base_damage:int, defender:BaseActor, damage_da
 		elif final_damage_mod < 1:
 			damage_color = Color.BLUE
 		CombatRootControl.Instance.create_damage_effect(defender, damage_effect, damage, source, damage_color)
+	return damage_event
 	
 
 static func _order_damage_mods(mods:Array):

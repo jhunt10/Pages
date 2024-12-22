@@ -1,0 +1,30 @@
+[
+    {
+        "DamageDatas": {},
+        "DamageMods": {},
+        "Details": {
+            "Description": "Your Wisdom is added to your Protection.",
+            "DisplayName": "Wise Protection",
+            "LargeIcon": "Sprites/WiseProtection.png",
+            "SmallIcon": "Sprites/WiseProtection.png",
+            "SnippetDesc": "Protection scales with Wisdom",
+            "Tags": []
+        },
+        "EffectKey": "WiseProtection_Page",
+        "StatMods": {
+            "StatMod1": {
+                "DisplayName": "Wise Protection",
+                "ModType": "AddStat",
+                "StatName": "Protection",
+                "DepStatName": "Wisdom",
+                "Value": 1
+            }
+        },
+        "SubEffects": {
+            "ModStat": {
+                "StatModKey": "StatMod1",
+                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_ModStat.gd"
+            }
+        }
+    }
+]

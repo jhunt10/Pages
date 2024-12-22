@@ -56,7 +56,7 @@ static func create_actor(key:String, data:Dictionary, premade_id:String = '')->B
 	for equip in equipment_list:
 		var item = ItemLibrary.create_item(equip, {})
 		if item:
-			if !actor.equipment.try_equip_item(item):
+			if !actor.equipment.try_equip_item(item, false):
 				printerr("ActorLibrary.create_actor: Failed to equip item '%s'." % [equip])
 				
 	var page_list = actor.get_load_val("SpawnPageList", [])

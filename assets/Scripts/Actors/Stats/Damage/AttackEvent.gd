@@ -37,6 +37,7 @@ var defender_block_chance:float
 var defender_block_mod:float
 
 var final_damage_mod:float
+var damage_events:Array = []
 
 func _init( attacking_actor:BaseActor, 
 			defending_actor:BaseActor, 

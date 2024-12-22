@@ -1,10 +1,12 @@
 class_name SaveLoadHandler
 
-const SAVE_DAYA_PATH = "res://saves/"
+const SAVE_DATA_PATH = "user://saves/"
 
 static func read_saves_meta_data()->Dictionary:
-	var meta_file_path = SAVE_DAYA_PATH.path_join("saves.json")
+	var meta_file_path = SAVE_DATA_PATH.path_join("saves.json")
 	var file = FileAccess.open(meta_file_path, FileAccess.READ)
+	if !file:
+		return {}
 	var text:String = file.get_as_text()
 	var parsed_object = JSON.parse_string(text)
 	if parsed_object and parsed_object is Dictionary:
@@ -12,7 +14,7 @@ static func read_saves_meta_data()->Dictionary:
 	return {}
 
 static func read_save_data(save_id:String)->Dictionary:
-	var meta_file_path = SAVE_DAYA_PATH.path_join(save_id.replace(":", "_")+".json")
+	var meta_file_path = SAVE_DATA_PATH.path_join(save_id.replace(":", "_")+".json")
 	var file = FileAccess.open(meta_file_path, FileAccess.READ)
 	var text:String = file.get_as_text()
 	var parsed_object = JSON.parse_string(text)
@@ -26,20 +28,21 @@ static func write_save_data(save_name:String, story_state:StoryState):
 	var new_meta_data = _build_save_meta_data(save_name, story_state)
 	var saves_dic = read_saves_meta_data()
 	if saves_dic.keys().has(save_name):
-		save_id = saves_dic['SaveId']
-		# TODO: Override
-		saves_dic.erase(save_name)
+		save_id = saves_dic[save_name]['SaveId']
+		
+	if !FileAccess.file_exists(SAVE_DATA_PATH):
+		DirAccess.make_dir_recursive_absolute(SAVE_DATA_PATH)
 		
 	new_meta_data['SaveId'] = save_id
 	saves_dic[save_name] = new_meta_data
 	
-	var save_file_path = SAVE_DAYA_PATH.path_join(save_id+".json")
+	var save_file_path = SAVE_DATA_PATH.path_join(save_id+".json")
 	var save_file = FileAccess.open(save_file_path, FileAccess.WRITE)
 	var save_data = story_state.Instance.build_save_data()
 	save_file.store_string(JSON.stringify(save_data))
 	
 	# Save Meta Data
-	var meta_file_path = SAVE_DAYA_PATH.path_join("saves.json")
+	var meta_file_path = SAVE_DATA_PATH.path_join("saves.json")
 	var meta_file = FileAccess.open(meta_file_path, FileAccess.WRITE)
 	meta_file.store_string(JSON.stringify(saves_dic))
 
@@ -54,7 +57,9 @@ static func _build_save_meta_data(save_name:String, story_state:StoryState):
 		"Party":{player_actor.details.display_name: player_actor.stats.level}
 	}
 
-static func load_save_data(save_id:String):
+static func load_save_data(save_id:String, go_to_camp:bool=true):
 	var data = read_save_data(save_id)
 	StoryState.load_save_data(data)
+	if go_to_camp:
+		MainRootNode.Instance.open_camp_menu()
 	

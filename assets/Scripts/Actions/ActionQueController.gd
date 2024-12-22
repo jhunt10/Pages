@@ -4,7 +4,7 @@ signal que_ordering_changed
 signal que_marked_as_dead(que_id:String)
 
 # End round early if no more actions are qued (for testing)
-const SHORTCUT_QUE = true
+static var SHORTCUT_QUE = true
 const DEEP_LOGGING = false
 const FRAMES_PER_ACTION = 24
 const ACTION_TIME = 2.4 # Seconds
@@ -129,6 +129,8 @@ func get_active_action_ques()->Array:
 
 # Add an action que to the controller
 func add_action_que(new_que:ActionQue):
+	#TODO: Remvoe Hack
+	SHORTCUT_QUE = true
 	if _action_ques.has(new_que.Id):
 		return
 	_action_ques[new_que.Id] = new_que
@@ -319,13 +321,14 @@ func _get_subaction(script_key:String)->BaseSubAction:
 
 func _pay_turn_costs():
 	for que:ActionQue in get_active_action_ques():
-		var actor = que.actor
-		var turn_data = que.QueExecData.get_current_turn_data()
-		for stat_name in turn_data.costs.keys():
-			if not actor.stats.reduce_bar_stat_value(stat_name, turn_data.costs[stat_name], false):
-				CombatRootControl.Instance.create_flash_text_on_actor(actor, stat_name, Color.ORANGE)
-				que.fail_turn()
-				break
+		if que.get_max_que_size() > 0:
+			var actor = que.actor
+			var turn_data = que.QueExecData.get_current_turn_data()
+			for stat_name in turn_data.costs.keys():
+				if not actor.stats.reduce_bar_stat_value(stat_name, turn_data.costs[stat_name], false):
+					CombatRootControl.Instance.create_flash_text_on_actor(actor, stat_name, Color.ORANGE)
+					que.fail_turn()
+					break
 
 func _organize_ques():
 	_sort_ques_by_speed()

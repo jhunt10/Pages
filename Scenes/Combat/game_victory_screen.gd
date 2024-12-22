@@ -8,6 +8,7 @@ extends Control
 @export var pickup_items_container:VBoxContainer
 
 func _ready() -> void:
+	premade_pickup_page.hide()
 	premade_pickup_item.hide()
 	camp_button.pressed.connect(_on_camp_button)
 
@@ -38,6 +39,7 @@ func collect_dropped_items():
 		else:
 			items_datas[item_type][item_name]['Count'] += 1
 		PlayerInventory.add_item(item)
+		CombatRootControl.Instance.GameState.MapState.remove_item(item)
 	
 	if not items_datas.has("Page"):
 		pickup_pages_container.hide()

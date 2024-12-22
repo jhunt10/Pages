@@ -2,7 +2,7 @@
 class_name StatBarControl
 extends Control
 
-const LOGGING = true
+const LOGGING = false
 
 @export var BAR_SPEED:float = 100
 var _preview_mode:bool = false

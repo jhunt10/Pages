@@ -3,7 +3,7 @@
 		"ParentKey": "DefaultActor",
 		"ActorKey": "RogueTemplate",
 		"Details":{
-			"DisplayName": "Mage",
+			"DisplayName": "Rogue",
 			"SnippetDesc": "The hero of our story.",
 			"Description": "The hero of our story.",
 			"Tags": ["Player"],
@@ -32,22 +32,21 @@
         "SpawnEquipmentList": [
             "OldJournal_PageQue",
             "OldBag_ItemBag",
-            "OldMageHelmet",
-            "OldMageArmor",
-            "OldMageBoots",
-			"OldMageOrb",
-			"OldWand"
+            "OldRogueHelmet",
+            "OldRogueArmor",
+            "OldRogueBoots",
+			"OldDagger",
+			"OldDagger"
         ],
         "SpawnPageList":[
-			"HeavyFoot",
-			"WideGuard",
-			"ManaStream_BarStatPage",
+			"AgileEvasion",
+			"StaminaStream_BarStatPage",
             "MoveForward",
             "TurnLeft",
             "TurnRight",
             "BasicWeaponAttack",
-			"FireBall",
-			"TeleportSelf"
+			"ThrowKnife",
+			"BehindYou"
         ]
 	}
 ]

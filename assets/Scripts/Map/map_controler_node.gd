@@ -2,6 +2,8 @@
 class_name MapControllerNode
 extends Node2D
 
+const LOGGING = false
+
 @export var actor_tile_map:TileMapLayer 
 @export var item_tile_map:TileMapLayer 
 @export var terrain_path_map:TerrainPathingMap
@@ -20,7 +22,7 @@ var zone_nodes = {}
 func _ready() -> void:
 	if Engine.is_editor_hint(): return
 	terrain_path_map.hide()
-	print("Readying MapCont: Inst:%s" % [CombatRootControl.Instance])
+	if LOGGING: print("Readying MapCont: Inst:%s" % [CombatRootControl.Instance])
 	CombatRootControl.Instance.actor_spawned.connect(create_actor_node)
 	CombatRootControl.QueController.end_of_frame.connect(_sync_positions)
 	pass # Replace with function body.
@@ -50,7 +52,7 @@ func get_map_data()->Dictionary:
 
 func create_actor_node(actor:BaseActor, map_pos:MapPos):
 	if Engine.is_editor_hint(): return
-	print("MapControllerNode: Creating Actor Node: %s" % [actor.Id])
+	if LOGGING: print("MapControllerNode: Creating Actor Node: %s" % [actor.Id])
 	if actor_nodes.keys().has(actor.Id):
 		return
 	
@@ -61,7 +63,7 @@ func create_actor_node(actor:BaseActor, map_pos:MapPos):
 	new_node.set_actor(actor)
 	new_node.set_display_pos(map_pos)
 	new_node.visible = true
-	print("MapControllerNode: Created Actor Node: %s" % [actor.Id])
+	if LOGGING: print("MapControllerNode: Created Actor Node: %s" % [actor.Id])
 
 func delete_actor_node(actor:BaseActor):
 	if Engine.is_editor_hint(): return
@@ -73,7 +75,7 @@ func delete_actor_node(actor:BaseActor):
 	
 func create_item_node(item:BaseItem, map_pos:MapPos):
 	if Engine.is_editor_hint(): return
-	print("MapControllerNode: Creating Item Node: %s" % [item.Id])
+	if LOGGING: print("MapControllerNode: Creating Item Node: %s" % [item.Id])
 	if item_nodes.keys().has(item.Id):
 		return
 	
@@ -83,7 +85,7 @@ func create_item_node(item:BaseItem, map_pos:MapPos):
 	new_node.position = item_tile_map.map_to_local(map_pos.to_vector2i())
 	new_node.set_item(item)
 	new_node.visible = true
-	print("MapControllerNode: Created item Node: %s" % [item.Id])
+	if LOGGING: print("MapControllerNode: Created item Node: %s" % [item.Id])
 
 func delete_item_node(item:BaseItem):
 	if Engine.is_editor_hint(): return
@@ -134,7 +136,7 @@ func _sync_actor_positions():
 	for node:ActorNode in actor_nodes.values():
 		var actor = game_state.get_actor(node.Actor.Id, true)
 		if !node:
-			printerr("Failed to find node for actor: ", actor.Id)
+			if LOGGING: printerr("Failed to find node for actor: ", actor.Id)
 			continue
 		var pos = game_state.MapState.get_actor_pos(actor)
 		node.set_display_pos(pos)
@@ -158,6 +160,6 @@ func _sync_missile_positions():
 	for missile:BaseMissile in game_state.Missiles.values():
 		var node:MissileNode = missile_nodes.get(missile.Id, null)
 		if !node:
-			printerr("Failed to find node for missile: ", missile.Id)
+			if LOGGING: printerr("Failed to find node for missile: ", missile.Id)
 			continue
 		node.sync_pos()

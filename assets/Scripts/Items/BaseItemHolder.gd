@@ -20,15 +20,26 @@ var _actor:BaseActor
 
 func _init(actor:BaseActor) -> void:
 	self._actor = actor
-	_build_slots_list()
+	#_build_slots_list()
+
+func load_saved_items():
+	_raw_item_slots = _load_saved_items()
+	for item_id in _raw_item_slots:
+		if item_id:
+			var item = ItemLibrary.get_item(item_id)
+			_on_item_loaded(item)
 
 func _load_slots_sets_data()->Array:
 	return []
+
+func _on_item_loaded(Item:BaseItem):
+	pass
 
 func _load_saved_items()->Array:
 	return []
 
 func validate_items():
+	_build_slots_list()
 	for slot_index in range(_raw_item_slots.size()):
 		var item_id = _raw_item_slots[slot_index]
 		if not item_id:
@@ -43,14 +54,15 @@ func _is_item_valid(item:BaseItem)->bool:
 	return true
 
 func _build_slots_list():
-	var slot_set_index = 0
-	var raw_index = 0
 	_slot_set_key_mapping = []
 	_raw_to_slot_set_mapping = []
 	_item_slot_sets_datas = _load_slots_sets_data()
-	var saved_items = _load_saved_items()
+	var _backup_slots = _raw_item_slots.duplicate()
+	_raw_item_slots.clear()
 	#if _actor.ActorKey == "TestChaser":
 		#var t = true
+	var raw_index = 0
+	var slot_set_index = 0
 	for sub_slot_data in _item_slot_sets_datas:
 		var slot_key = sub_slot_data.get("Key")
 		var sub_slot_count = sub_slot_data.get("Count")
@@ -58,12 +70,19 @@ func _build_slots_list():
 		_slot_set_key_mapping.append(slot_key)
 		for sub_index in range(sub_slot_count):
 			_raw_to_slot_set_mapping.append({"SlotSetIndex":slot_set_index, "SlotSetKey":slot_key, "SubIndex":sub_index})
-			if saved_items.size() > raw_index:
-				_raw_item_slots.append(saved_items[raw_index])
+			if _backup_slots.size() > raw_index:
+				_raw_item_slots.append(_backup_slots[raw_index])
 			else:
 				_raw_item_slots.append(null)
 			raw_index += 1
 		slot_set_index += 1
+		
+	while raw_index < _backup_slots.size():
+		if _backup_slots[raw_index] and _actor.is_player:
+			var item = ItemLibrary.get_item(_backup_slots[raw_index], false)
+			if item:
+				PlayerInventory.add_item(item)
+		raw_index += 1
 
 func get_raw_slot_index(tag:String, sub_index:int)->int:
 	var slot_set_index = _slot_set_key_mapping.find(tag)
@@ -129,6 +148,7 @@ func get_item_in_slot(index:int)->BaseItem:
 	return null
 
 func remove_item(item_id:String, supress_signal:bool=false):
+	print("Remove Item: %s" % [item_id])
 	var index = _raw_item_slots.find(item_id)
 	if index >= 0:
 		_raw_item_slots[index] = null

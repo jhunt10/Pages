@@ -1,5 +1,6 @@
 [
 	{
+		"ParentKey": "DefaultActor",
 		"ActorKey": "TutorialActor",
 		"Details":{
 			"DisplayName": "Tutorial Actor",
@@ -20,9 +21,7 @@
 			"Strength": 10,
 			"Agility": 10,
 			"Intelligence": 10,
-			"Wisdom": 10,
-			"Armor": 80,
-			"PagesPerRound": 0
+			"Wisdom": 10
 		},
 		"IsPlayer": true,
 		"SpriteSheet": "Template_SpriteSheet.png",
@@ -31,13 +30,13 @@
 		"PortraitRect":[12, 20, 24, 24],
 		"EquipmentSlots": ["Que", "Bag", "Head", "Body", "Feet", "OffHand", "MainHand" ],
         "SpawnEquipmentList": [
-            "TestPageQue",
-            "TestBag",
-            "TestHelm",
-            "TestShirt",
-            "TestBoots",
-            "TestShield",
-            "TestSword"
+            "TutorialJournal_PageQue",
+            "OldBag_ItemBag",
+            "OldSoldierHelmet",
+            "OldSoldierArmor",
+            "OldSoldierBoots",
+            "OldShield",
+            "OldSword"
         ],
         "SpawnPageList":[
             "MoveForward",

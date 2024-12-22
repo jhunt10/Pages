@@ -920,43 +920,6 @@ vertical = true
 layout_mode = 2
 alignment = 1
 
-[node name="SpeedContainer" type="BoxContainer" parent="ScaleControl/StatsPage/ContainerControl/StatsMainContainer/MiscStatsContainer/BoxContainer/SpeedMassContainer" node_paths=PackedStringArray("name_label", "icon", "value_label")]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 4
-theme_override_constants/separation = 0
-alignment = 1
-script = ExtResource("23_dhe1p")
-stat_name = "Speed"
-name_label = NodePath("NameLabel")
-icon = NodePath("IconRect")
-value_label = NodePath("StatLabel")
-
-[node name="NameLabel" type="Label" parent="ScaleControl/StatsPage/ContainerControl/StatsMainContainer/MiscStatsContainer/BoxContainer/SpeedMassContainer/SpeedContainer"]
-visible = false
-self_modulate = Color(0.498039, 0, 0, 1)
-layout_mode = 2
-theme = ExtResource("12_dy5pv")
-text = "Spd: "
-horizontal_alignment = 1
-
-[node name="IconRect" type="TextureRect" parent="ScaleControl/StatsPage/ContainerControl/StatsMainContainer/MiscStatsContainer/BoxContainer/SpeedMassContainer/SpeedContainer"]
-layout_mode = 2
-texture = ExtResource("26_k518l")
-
-[node name="StatLabel" type="Label" parent="ScaleControl/StatsPage/ContainerControl/StatsMainContainer/MiscStatsContainer/BoxContainer/SpeedMassContainer/SpeedContainer"]
-self_modulate = Color(0.498039, 0, 0, 1)
-custom_minimum_size = Vector2(30, 0)
-layout_mode = 2
-theme = ExtResource("12_dy5pv")
-text = "000"
-horizontal_alignment = 1
-
-[node name="ColorRect" type="ColorRect" parent="ScaleControl/StatsPage/ContainerControl/StatsMainContainer/MiscStatsContainer/BoxContainer/SpeedMassContainer"]
-custom_minimum_size = Vector2(2, 0)
-layout_mode = 2
-color = Color(0.498039, 0, 0, 1)
-
 [node name="MassContainer" type="BoxContainer" parent="ScaleControl/StatsPage/ContainerControl/StatsMainContainer/MiscStatsContainer/BoxContainer/SpeedMassContainer" node_paths=PackedStringArray("name_label", "icon", "value_label")]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -990,6 +953,43 @@ theme = ExtResource("12_dy5pv")
 text = "000"
 horizontal_alignment = 1
 
+[node name="ColorRect" type="ColorRect" parent="ScaleControl/StatsPage/ContainerControl/StatsMainContainer/MiscStatsContainer/BoxContainer/SpeedMassContainer"]
+custom_minimum_size = Vector2(2, 0)
+layout_mode = 2
+color = Color(0.498039, 0, 0, 1)
+
+[node name="SpeedContainer" type="BoxContainer" parent="ScaleControl/StatsPage/ContainerControl/StatsMainContainer/MiscStatsContainer/BoxContainer/SpeedMassContainer" node_paths=PackedStringArray("name_label", "icon", "value_label")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_constants/separation = 0
+alignment = 1
+script = ExtResource("23_dhe1p")
+stat_name = "Speed"
+name_label = NodePath("NameLabel")
+icon = NodePath("IconRect")
+value_label = NodePath("StatLabel")
+
+[node name="NameLabel" type="Label" parent="ScaleControl/StatsPage/ContainerControl/StatsMainContainer/MiscStatsContainer/BoxContainer/SpeedMassContainer/SpeedContainer"]
+visible = false
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("12_dy5pv")
+text = "Spd: "
+horizontal_alignment = 1
+
+[node name="IconRect" type="TextureRect" parent="ScaleControl/StatsPage/ContainerControl/StatsMainContainer/MiscStatsContainer/BoxContainer/SpeedMassContainer/SpeedContainer"]
+layout_mode = 2
+texture = ExtResource("26_k518l")
+
+[node name="StatLabel" type="Label" parent="ScaleControl/StatsPage/ContainerControl/StatsMainContainer/MiscStatsContainer/BoxContainer/SpeedMassContainer/SpeedContainer"]
+self_modulate = Color(0.498039, 0, 0, 1)
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+theme = ExtResource("12_dy5pv")
+text = "000"
+horizontal_alignment = 1
+
 [node name="ColorRect2" type="ColorRect" parent="ScaleControl/StatsPage/ContainerControl/StatsMainContainer/MiscStatsContainer/BoxContainer/SpeedMassContainer"]
 custom_minimum_size = Vector2(2, 0)
 layout_mode = 2
@@ -1002,7 +1002,7 @@ size_flags_vertical = 4
 theme_override_constants/separation = 0
 alignment = 1
 script = ExtResource("23_dhe1p")
-stat_name = "Mass"
+stat_name = "PPR"
 name_label = NodePath("NameLabel")
 icon = NodePath("IconRect")
 value_label = NodePath("StatLabel")
@@ -1039,7 +1039,7 @@ size_flags_vertical = 4
 theme_override_constants/separation = 0
 alignment = 1
 script = ExtResource("23_dhe1p")
-stat_name = "Speed"
+stat_name = "Crash"
 name_label = NodePath("NameLabel")
 icon = NodePath("IconRect")
 value_label = NodePath("StatLabel")

@@ -44,6 +44,12 @@ static func start_new_story(starting_class:String):
 		new_player = ActorLibrary.create_actor("SoldierTemplate", {}, player_id)
 	if starting_class == "Mage":
 		new_player = ActorLibrary.create_actor("MageTemplate", {}, player_id)
+	if starting_class == "Rogue":
+		new_player = ActorLibrary.create_actor("RogueTemplate", {}, player_id)
+	if starting_class == "Priest":
+		new_player = ActorLibrary.create_actor("PriestTemplate", {}, player_id)
+	if starting_class == "Tutorial":
+		new_player = ActorLibrary.create_actor("TutorialActor", {}, player_id)
 		
 	if new_player:
 		actor_ids.append(new_player.Id)
@@ -81,4 +87,3 @@ static func load_save_data(data:Dictionary):
 		PlayerInventory.add_item(item)
 	total_play_time = data.get("RunTime", 0)
 	session_start_unix_time = Time.get_unix_time_from_system()
-	MainRootNode.Instance.open_camp_menu()

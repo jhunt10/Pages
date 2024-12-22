@@ -3,33 +3,33 @@
         "ItemKey":"OldRogueHelmet",
         "_ObjectScript": "res://assets/Scripts/Items/Equipment/BaseArmorEquipment.gd",
         "Details":{
-			"DisplayName": "Old Hood",
+			"DisplayName": "Old Green Hood",
 			"SnippetDesc": "A rogue's old Hood.",
 			"Description": "A cheap and probably stolen hood. Old, but still works.",
 			"Tags": ["Head"],
-			"LargeIcon":"RedHat.png",
-			"SmallIcon":"RedHat.png"
+			"LargeIcon":"Sprites/GreenHood.png",
+			"SmallIcon":"Sprites/GreenHood.png"
 		},
-        "SpriteSheet":"RedHat_SpriteSheet.png",
+        "SpriteSheet":"Sprites/GreenHood_SpriteSheet.png",
         "EquipSlot":"Head",
-        "Armor": 0,
-        "Ward": 5
+        "Armor": 2,
+        "Ward": 0
     },
     {
         "ItemKey":"OldRogueArmor",
         "_ObjectScript": "res://assets/Scripts/Items/Equipment/BaseArmorEquipment.gd",
         "Details":{
-			"DisplayName": "Old Red Robes",
+			"DisplayName": "Old Shirt",
 			"SnippetDesc": "A rogue's old Robes.",
-			"Description": "A common design of robes worn by many new rogues. Old, but still works.",
+			"Description": "A cheap and probably stolen shirt with minimal padding. Old, but still works.",
 			"Tags": ["Body"],
-			"LargeIcon":"RedRobes.png",
-			"SmallIcon":"RedRobes.png"
+			"LargeIcon":"Sprites/GreenShirt.png",
+			"SmallIcon":"Sprites/GreenShirt.png"
 		},
-        "SpriteSheet":"RedRobes_SpriteSheet.png",
+        "SpriteSheet":"Sprites/GreenShirt_SpriteSheet.png",
         "EquipSlot":"Body",
-        "Armor": 0,
-        "Ward": 5
+        "Armor": 2,
+        "Ward": 0
     },
     {
         "ItemKey":"OldRogueBoots",
@@ -37,76 +37,50 @@
         "Details":{
 			"DisplayName": "Old Boots",
 			"SnippetDesc": "A rogue's old Boots.",
-			"Description": "A common design of boots worn by many new rogues. Old, but still works.",
+			"Description": "A cheap and probably stolen pair of leather boots. Old, but still works.",
 			"Tags": ["Feet"],
-			"LargeIcon":"OldBoots.png",
-			"SmallIcon":"OldBoots.png"
+			"LargeIcon":"Sprites/LeatherBoots.png",
+			"SmallIcon":"Sprites/LeatherBoots.png"
 		},
-        "SpriteSheet":"OldBoots_SpriteSheet.png",
+        "SpriteSheet":"Sprites/LeatherBoots_SpriteSheet.png",
         "EquipSlot":"Feet",
-        "Armor": 0,
-        "Ward": 5
+        "Armor": 2,
+        "Ward": 0
     },
     {
         "ItemKey":"OldDagger",
         "_ObjectScript": "res://assets/Scripts/Items/Equipment/BaseWeaponEquipment.gd",
         "Details":{
-			"DisplayName": "Old Wand",
-			"SnippetDesc": "A rogue's old Wand.",
-			"Description": "A training wand made for practice and well used. Old, but still works.",
+			"DisplayName": "Old Dagger",
+			"SnippetDesc": "A rogue's old dagger.",
+			"Description": "A simple dagger dulled from years of various uses. Old, but still works.",
 			"Tags": ["Weapon","OffHand"],
-			"LargeIcon":"TestWand.png",
-			"SmallIcon":"TestWand.png"
+			"LargeIcon":"Sprites/OldDagger.png",
+			"SmallIcon":"Sprites/OldDagger.png"
 		},
-
         "WeaponSpriteData":{
             "Offset":[0,0],
-            "SpriteName":"TestWand",
-            "Rotation":-45
+            "SpriteName":"Sprites/OldDagger",
+            "Rotation":0
         },
-
         "EquipSlot":"Weapon",
-        "DarogueData":{
-            "AtkStat": "Intelligence",
-            "AtkPower": 20,
-            "DarogueEffect": "SmallFire_DarogueEffect",
-            "DarogueType": "Fire",
-            "DarogueVarient": 0.1,
-            "DefenseType": "Ward"
+        "DamageData":{
+            "AtkStat": "Strength",
+            "AtkPower": 80,
+            "DamageEffect": "Pierce_DamageEffect",
+            "DamageType": "Slash",
+            "DamageVarient": 0.1,
+            "DefenseType": "Armor"
         },
         "TargetParams": {
             "EffectsAllies": false,
             "EffectsEnemies": true,
             "LineOfSight": true,
-            "TargetArea": "[[-1,1],[0,1],[1,1],[-1,2],[0,2],[1,2]]",
+            "TargetArea": "[[-1,0],[-1,1],[0,1],[1,1],[1,0]]",
             "TargetType": "Actor"
         },
-        "AttackTags": ["Ranged", "Magic"],
+        "AttackTags": ["Melee", "Physical"],
         "WeaponClass": "Light",
-        "WeaponAnimation": "weapon_raise"
-    },
-    {
-        "ItemKey":"OldRogueOrb",
-        "_ObjectScript": "res://assets/Scripts/Items/Equipment/BaseArmorEquipment.gd",
-        "Details":{
-			"DisplayName": "Old Orb",
-			"SnippetDesc": "A rogue's old focusing Orb.",
-			"Description": "A common tool used by many new rogues for focsing magic. Old, but still works.",
-			"Tags": ["OffHand","Orb"],
-			"LargeIcon":"OldOrb.png",
-			"SmallIcon":"OldOrb.png"
-		},
-        "StatMods":{
-			"StatMod1": { 
-				"StatName": "Intelligence",
-				"DisplayName": "Orb +INT",
-				"ModType":"Fixed", 
-				"Value":1
-			}
-		},
-        "SpriteSheet":"OldOrb_SpriteSheet.png",
-        "EquipSlot":"OffHand",
-        "Armor": 0,
-        "Ward": 0
+        "WeaponAnimation": "weapon_stab"
     }
 ]

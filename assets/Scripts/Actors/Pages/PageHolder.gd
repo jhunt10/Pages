@@ -3,36 +3,45 @@ extends BaseItemHolder
 
 signal class_page_changed
 
+const LOGGING = false
+
 var page_que_item_id
 var item_id_to_effect_id:Dictionary = {}
 
-func _init(actor, page_que_item) -> void:
-	if page_que_item:
-		page_que_item_id = page_que_item.Id
+func _init(actor) -> void:
 	super(actor)
+	self._actor.effacts_changed.connect(_build_slots_list)
 
 func _load_slots_sets_data()->Array:
+	var out_list = []
 	if page_que_item_id:
 		var page_que = ItemLibrary.get_item(page_que_item_id)
 		if page_que:
-			return page_que.get_load_val("ItemSlotsData", [])
-	var defaults = _actor.get_load_val("DefaultPageSlotSet")
-	if defaults:
-		return defaults
-	return []
+			var page_que_slots = page_que.get_load_val("ItemSlotsData", [])
+			out_list.append_array(page_que_slots)
+	for effect:BaseEffect in _actor.effects.list_effects():
+		if LOGGING: print("Checking Effect: %s" % [effect.details.display_name] )
+		var extra_pages_data = effect.get_load_val("ExtraPageSlotsData", [])
+		if extra_pages_data.size() > 0:
+			out_list.append_array(extra_pages_data)
+	if out_list.size() == 0:
+		var defaults = _actor.get_load_val("DefaultPageSlotSet")
+		if defaults:
+			return defaults
+	if LOGGING: print("Loaded Page Slots: %s " % [JSON.stringify(out_list)])
+	return out_list
 
 func _load_saved_items()->Array:
 	return _actor.get_load_val("Pages", [])
 
-func load_effects():
-	for slot_index in range(_raw_item_slots.size()):
-		var page_id = _raw_item_slots[slot_index]
-		if not page_id:
-			continue
-		var page_item = ItemLibrary.get_item(page_id)
-		if not page_item:
-			continue
-		_on_item_added_to_slot(page_item, slot_index)
+func _on_item_loaded(item:BaseItem):
+	var page = item as BasePageItem
+	if not page:
+		return
+	var effect_def = page.get_effect_def()
+	if effect_def:
+		var new_effect = _actor.effects.add_effect(page, page.get_load_val("EffectKey"), effect_def, '', true)
+		item_id_to_effect_id[item.Id] = new_effect.Id
 
 func set_page_que_item(page_que:BaseQueEquipment):
 	if page_que:
@@ -80,55 +89,3 @@ func _on_item_added_to_slot(item:BaseItem, index:int):
 		var new_effect = _actor.effects.add_effect(page, page.get_load_val("EffectKey"), effect_def)
 		item_id_to_effect_id[item.Id] = new_effect.Id
 		class_page_changed.emit()
-#func set_page_for_slot(slot_page_tags:String, index:int, page:BasePageItem):
-	#if !_page_tag_slot_counts.keys().has(slot_page_tags):
-		#return
-	#if page and _page_tagged_slots[slot_page_tags].has(page.Id):
-		#return
-	#if index < 0 or index >= _page_tagged_slots[slot_page_tags].size():
-		#return
-	#if page:
-		#_page_tagged_slots[slot_page_tags][index] = page.Id
-	#else:
-		#_page_tagged_slots[slot_page_tags][index] = null
-	#pages_changed.emit()
-#
-#func get_pages_per_page_tags()->Dictionary:
-	#return _page_tagged_slots.duplicate()
-#
-#func _count_page_tag_slots():
-	#_page_tag_slot_counts.clear()
-	#var total_max_count = 0
-	#for equipment:BaseEquipmentItem in actor.equipment.list_equipment():
-		#var page_tags_dict:Dictionary = equipment.get_load_val("PageTagSlots", {})
-		#for page_tags in page_tags_dict.keys():
-			#if !_page_tag_slot_counts.keys().has(page_tags):
-				#_page_tag_slot_counts[page_tags] = 0
-			#_page_tag_slot_counts[page_tags] += page_tags_dict[page_tags]
-			#total_max_count += page_tags_dict[page_tags]
-	#
-	#var found_change = false
-	#
-	## Remove lost Page Tags
-	#for page_tags in _page_tagged_slots.keys():
-		#if not _page_tag_slot_counts.keys().has(page_tags):
-			#found_change = true
-			#_page_tagged_slots.erase(page_tags)
-	#
-	## Correct slots size
-	#for page_tags in _page_tag_slot_counts.keys():
-		## Page Tags did not exist
-		#if !_page_tagged_slots.keys().has(page_tags):
-			#_page_tagged_slots[page_tags] = []
-			#found_change = true
-		## Correct for size change
-		#var max_count = _page_tag_slot_counts[page_tags]
-		#if max_count != _page_tagged_slots[page_tags].size():
-			#found_change = true
-			#if _page_tagged_slots[page_tags].size() < max_count:
-				#for index in range(max_count - _page_tagged_slots[page_tags].size()):
-					#_page_tagged_slots[page_tags].append(null)
-			#else:
-				#for index in range(_page_tagged_slots[page_tags].size() - max_count):
-					#_page_tagged_slots[page_tags].remove_at(max_count)
-	

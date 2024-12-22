@@ -27,7 +27,7 @@ func on_combat_start():
 	else:
 		printerr("EffectHolder.on_combat_start: No CombatRootControl found")
 	
-func add_effect(source, effect_key:String, effect_data:Dictionary, force_id:String='')->BaseEffect:
+func add_effect(source, effect_key:String, effect_data:Dictionary, force_id:String='', suppress_signals:bool = false)->BaseEffect:
 	if _effects.keys().has(force_id):
 		return _effects[force_id]
 	var effect = EffectLibrary.create_effect(source, effect_key, _actor, effect_data, force_id)
@@ -36,6 +36,8 @@ func add_effect(source, effect_key:String, effect_data:Dictionary, force_id:Stri
 	for trigger in effect.Triggers:
 		_triggers_to_effect_ids[trigger].append(effect.Id)
 	effect.on_created()
+	if not suppress_signals:
+		_actor.effacts_changed.emit()
 	return effect
 		
 func list_effects()->Array:

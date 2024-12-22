@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cev10u5562peq"]
+[gd_scene load_steps=13 format=3 uid="uid://cev10u5562peq"]
 
 [ext_resource type="Texture2D" uid="uid://bwbvifw2c8wlg" path="res://Scenes/Menus/CampMenu/PaperBackground.png" id="1_b8omp"]
 [ext_resource type="Script" path="res://Scenes/Menus/CampMenu/camp_menu.gd" id="1_yrr0s"]
@@ -10,8 +10,10 @@
 [ext_resource type="Script" path="res://Scenes/Menus/CampMenu/camp_option_button.gd" id="6_5vfat"]
 [ext_resource type="Texture2D" uid="uid://cfdd8rgr4n8dd" path="res://assets/Sprites/UI/BackPatches/FancyBackPatch_BigFrame_128_36.png" id="6_g200m"]
 [ext_resource type="Texture2D" uid="uid://567vutk12a12" path="res://Scenes/Menus/CharacterMenu/MenuPages/SlotHighlight.png" id="7_hs7sy"]
+[ext_resource type="Script" path="res://Scenes/Menus/CampMenu/no_shop_pop_up.gd" id="11_o6asw"]
+[ext_resource type="Texture2D" uid="uid://io35wpu802fp" path="res://assets/Sprites/UI/BackPatches/Patch_64_12.png" id="12_j1y8g"]
 
-[node name="CampMenu" type="Control" node_paths=PackedStringArray("camp_options_container", "system_options_container", "quest_button", "character_button", "explort_button", "system_button", "sys_back_button", "sys_save_button", "sys_load_button", "sys_debug_button")]
+[node name="CampMenu" type="Control" node_paths=PackedStringArray("camp_options_container", "system_options_container", "quest_button", "shop_button", "character_button", "explort_button", "system_button", "sys_back_button", "sys_save_button", "sys_load_button", "sys_debug_button", "sys_quit_button", "no_shop_pop_up")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -22,6 +24,7 @@ script = ExtResource("1_yrr0s")
 camp_options_container = NodePath("CampOptionsContainer/MainOptionsContainer")
 system_options_container = NodePath("CampOptionsContainer/SystemOptionsContainer")
 quest_button = NodePath("CampOptionsContainer/MainOptionsContainer/QuestOptionButton")
+shop_button = NodePath("CampOptionsContainer/MainOptionsContainer/ShopOptionButton")
 character_button = NodePath("CampOptionsContainer/MainOptionsContainer/PrepareOptionButton")
 explort_button = NodePath("CampOptionsContainer/MainOptionsContainer/ExplorOptionButton")
 system_button = NodePath("CampOptionsContainer/MainOptionsContainer/SystemOptionButton")
@@ -29,6 +32,8 @@ sys_back_button = NodePath("CampOptionsContainer/SystemOptionsContainer/Sys_Back
 sys_save_button = NodePath("CampOptionsContainer/SystemOptionsContainer/Sys_SaveOptionButton")
 sys_load_button = NodePath("CampOptionsContainer/SystemOptionsContainer/Sys_LoadOptionButton")
 sys_debug_button = NodePath("CampOptionsContainer/SystemOptionsContainer/Sys_DebugOptionButton")
+sys_quit_button = NodePath("CampOptionsContainer/SystemOptionsContainer/Sys_QuitOptionButton")
+no_shop_pop_up = NodePath("NoShopPopUp")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="."]
 layout_mode = 1
@@ -122,6 +127,7 @@ script = ExtResource("6_5vfat")
 button = NodePath("Button")
 under_line = NodePath("TitleLabel/ColorRect")
 highlight = NodePath("TextureRect")
+disabled = true
 is_highlighted = null
 label = NodePath("TitleLabel")
 text = "Quest"
@@ -175,10 +181,9 @@ script = ExtResource("6_5vfat")
 button = NodePath("Button")
 under_line = NodePath("TitleLabel/ColorRect")
 highlight = NodePath("TextureRect")
-disabled = true
 is_highlighted = null
 label = NodePath("TitleLabel")
-text = "Shop"
+text = "Shop*"
 
 [node name="TextureRect" type="TextureRect" parent="CampOptionsContainer/MainOptionsContainer/ShopOptionButton"]
 layout_mode = 1
@@ -194,12 +199,12 @@ texture = ExtResource("7_hs7sy")
 [node name="TitleLabel" type="Label" parent="CampOptionsContainer/MainOptionsContainer/ShopOptionButton"]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 0
-offset_right = 120.0
+offset_right = 141.0
 offset_bottom = 60.0
 scale = Vector2(0.933333, 0.933333)
 theme = ExtResource("3_ufdhk")
 theme_override_font_sizes/font_size = 48
-text = "Shop"
+text = "Shop*"
 
 [node name="ColorRect" type="ColorRect" parent="CampOptionsContainer/MainOptionsContainer/ShopOptionButton/TitleLabel"]
 custom_minimum_size = Vector2(0, 3)
@@ -463,6 +468,63 @@ script = ExtResource("4_gjck3")
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 size_flags_vertical = 3
+
+[node name="Sys_QuitOptionButton" type="Control" parent="CampOptionsContainer/SystemOptionsContainer" node_paths=PackedStringArray("button", "under_line", "highlight", "label")]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+script = ExtResource("6_5vfat")
+button = NodePath("Button")
+under_line = NodePath("TitleLabel/ColorRect")
+highlight = NodePath("TextureRect")
+label = NodePath("TitleLabel")
+text = "Quit"
+
+[node name="TextureRect" type="TextureRect" parent="CampOptionsContainer/SystemOptionsContainer/Sys_QuitOptionButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -32.0
+offset_top = -4.5
+offset_right = 32.0
+offset_bottom = 4.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_hs7sy")
+
+[node name="TitleLabel" type="Label" parent="CampOptionsContainer/SystemOptionsContainer/Sys_QuitOptionButton"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 0
+offset_top = 30.0
+offset_right = 72.0
+offset_bottom = 90.0
+scale = Vector2(1e-05, 1e-05)
+theme = ExtResource("3_ufdhk")
+theme_override_font_sizes/font_size = 48
+text = "Quit"
+
+[node name="ColorRect" type="ColorRect" parent="CampOptionsContainer/SystemOptionsContainer/Sys_QuitOptionButton/TitleLabel"]
+custom_minimum_size = Vector2(0, 3)
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0.498039, 0, 0, 1)
+
+[node name="Button" type="Button" parent="CampOptionsContainer/SystemOptionsContainer/Sys_QuitOptionButton"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 4.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Sys_DebugOptionButton" type="Control" parent="CampOptionsContainer/SystemOptionsContainer" node_paths=PackedStringArray("button", "under_line", "highlight", "label")]
 custom_minimum_size = Vector2(0, 60)
@@ -756,3 +818,53 @@ patch_margin_right = 36
 patch_margin_bottom = 36
 axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
+
+[node name="NoShopPopUp" type="Control" parent="." node_paths=PackedStringArray("close_button")]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("11_o6asw")
+close_button = NodePath("Button")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="NoShopPopUp"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -277.5
+offset_top = -84.5
+offset_right = 277.5
+offset_bottom = 84.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("12_j1y8g")
+patch_margin_left = 12
+patch_margin_top = 12
+patch_margin_right = 12
+patch_margin_bottom = 12
+
+[node name="Label" type="Label" parent="NoShopPopUp/NinePatchRect"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 20.0
+offset_right = 524.0
+offset_bottom = 161.0
+theme_override_font_sizes/font_size = 32
+text = "There is no Shop right now. 
+One of ever item has been added 
+to your inventory"
+
+[node name="Button" type="Button" parent="NoShopPopUp"]
+layout_mode = 0
+offset_left = 810.0
+offset_top = 249.0
+offset_right = 828.0
+offset_bottom = 280.0
+scale = Vector2(2, 2)
+text = "X"

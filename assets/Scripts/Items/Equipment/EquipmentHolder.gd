@@ -384,7 +384,13 @@ func _inform_equitment_it_was_removed(equipment:BaseEquipmentItem):
 func try_equip_item(equipment:BaseEquipmentItem, replace:bool=false)->bool:
 	var slot_type = equipment.get_equipment_slot_type()
 	if slot_type == "Weapon":
+		var weapon = equipment as BaseWeaponEquipment
 		slot_type = "MainHand"
+		if weapon.get_weapon_class() == BaseWeaponEquipment.WeaponClasses.Light:
+			var have_weapon = get_primary_weapon()
+			if have_weapon and have_weapon.get_weapon_class() == BaseWeaponEquipment.WeaponClasses.Light:
+				slot_type = "OffHand"
+			
 	if not _slot_set_key_mapping.has(slot_type):
 		# No slot for item
 		return false
@@ -529,19 +535,25 @@ func _get_single_equipment_of_type(slot_type)->BaseEquipmentItem:
 	return null
 
 func get_bag_equipment()->BaseBagEquipment:
-	var bag = _get_single_equipment_of_type("Bag")
-	if bag: 
-		if bag is BaseBagEquipment:
-			return bag as BaseBagEquipment
-		printerr("EquipmentHolder.get_bag_equipment: Equipt Item '%s' is not of type 'BaseBagEquipment'." % [bag.Id])
+	for item in list_equipment():
+		if item is BaseBagEquipment:
+			return item
+	#var bag = _get_single_equipment_of_type("Bag")
+	#if bag: 
+		#if bag is BaseBagEquipment:
+			#return bag as BaseBagEquipment
+		#printerr("EquipmentHolder.get_bag_equipment: Equipt Item '%s' is not of type 'BaseBagEquipment'." % [bag.Id])
 	return null
 
 func get_que_equipment()->BaseQueEquipment:
-	var bag = _get_single_equipment_of_type("Que")
-	if bag: 
-		if bag is BaseQueEquipment:
-			return bag as BaseQueEquipment
-		printerr("EquipmentHolder.get_bag_equipment: Equipt Item '%s' is not of type 'BaseQueEquipment'." % [bag.Id])
+	for item in list_equipment():
+		if item is BaseQueEquipment:
+			return item
+	#var bag = _get_single_equipment_of_type("Que")
+	#if bag: 
+		#if bag is BaseQueEquipment:
+			#return bag as BaseQueEquipment
+		#printerr("EquipmentHolder.get_bag_equipment: Equipt Item '%s' is not of type 'BaseQueEquipment'." % [bag.Id])
 	return null
 
 func is_two_handing()->bool:

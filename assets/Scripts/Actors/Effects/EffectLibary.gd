@@ -36,7 +36,8 @@ static func purge_effects():
 
 static func create_effect(source, key:String, actor:BaseActor, data:Dictionary, force_id:String='')->BaseEffect:
 	print("Creating Effect: %s on actor %s" %[key, actor.Id])
-	var effect_data = data.duplicate(true)
+	var effect_def = get_effect_def(key)
+	var effect_data = _merge_defs(data, effect_def)
 	effect_data['EffectedActorId'] = actor.Id
 	if source is BaseActor:
 		effect_data['SourceId'] = (source as BaseActor).Id

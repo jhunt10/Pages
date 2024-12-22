@@ -27,16 +27,24 @@ func _process(delta: float) -> void:
 
 func _build_options():
 	var maps = MapLoader.get_map_datas()
-	for map_key in maps.keys():
+	var sorted_map_array = maps.values()
+	sorted_map_array.sort_custom(_sort_maps)
+	
+	for sorted_data in sorted_map_array:
+		var map_key = sorted_data.get("MapKey")
+		if !_selected_map_key:
+			_selected_map_key = map_key
 		var new_button:CampOptionButton = premade_option_button.duplicate()
 		new_button.text = maps[map_key]['MapName']
 		option_button_container.add_child(new_button)
 		new_button.button.pressed.connect(_on_button_pressed.bind(map_key))
 		new_button.show()
 		_map_buttons[map_key] = new_button
-	if maps.size() > 0:
-		_selected_map_key = maps.keys()[0]
+	if _selected_map_key:
 		display_map_details(_selected_map_key)
+
+func _sort_maps(a, b)->bool:
+	return a.get("SortOrder", 0) < b.get("SortOrder", 0)
 
 func _on_button_pressed(map_key):
 	_selected_map_key = map_key

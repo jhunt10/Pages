@@ -7,13 +7,13 @@
 			"SnippetDesc": "A mage's old Helmet.",
 			"Description": "A common design of hat worn by many new mages. Old, but still works.",
 			"Tags": ["Head"],
-			"LargeIcon":"RedHat.png",
-			"SmallIcon":"RedHat.png"
+			"LargeIcon":"Sprites/RedHat.png",
+			"SmallIcon":"Sprites/RedHat.png"
 		},
-        "SpriteSheet":"RedHat_SpriteSheet.png",
+        "SpriteSheet":"Sprites/RedHat_SpriteSheet.png",
         "EquipSlot":"Head",
         "Armor": 0,
-        "Ward": 5
+        "Ward": 2
     },
     {
         "ItemKey":"OldMageArmor",
@@ -23,13 +23,13 @@
 			"SnippetDesc": "A mage's old Robes.",
 			"Description": "A common design of robes worn by many new mages. Old, but still works.",
 			"Tags": ["Body"],
-			"LargeIcon":"RedRobes.png",
-			"SmallIcon":"RedRobes.png"
+			"LargeIcon":"Sprites/RedRobes.png",
+			"SmallIcon":"Sprites/RedRobes.png"
 		},
-        "SpriteSheet":"RedRobes_SpriteSheet.png",
+        "SpriteSheet":"Sprites/RedRobes_SpriteSheet.png",
         "EquipSlot":"Body",
         "Armor": 0,
-        "Ward": 5
+        "Ward": 2
     },
     {
         "ItemKey":"OldMageBoots",
@@ -39,13 +39,13 @@
 			"SnippetDesc": "A mage's old Shoes.",
 			"Description": "A common design of shoes worn by many new mages. Old, but still works.",
 			"Tags": ["Feet"],
-			"LargeIcon":"RedBoots.png",
-			"SmallIcon":"RedBoots.png"
+			"LargeIcon":"Sprites/RedBoots.png",
+			"SmallIcon":"Sprites/RedBoots.png"
 		},
-        "SpriteSheet":"RedBoots_SpriteSheet.png",
+        "SpriteSheet":"Sprites/RedBoots_SpriteSheet.png",
         "EquipSlot":"Feet",
         "Armor": 0,
-        "Ward": 5
+        "Ward": 2
     },
     {
         "ItemKey":"OldWand",
@@ -55,20 +55,20 @@
 			"SnippetDesc": "A mage's old Wand.",
 			"Description": "A training wand made for practice and well used. Old, but still works.",
 			"Tags": ["Weapon","OffHand"],
-			"LargeIcon":"OldWand.png",
-			"SmallIcon":"OldWand.png"
+			"LargeIcon":"Sprites/OldWand.png",
+			"SmallIcon":"Sprites/OldWand.png"
 		},
 
         "WeaponSpriteData":{
             "Offset":[0,0],
-            "SpriteName":"OldWand",
+            "SpriteName":"Sprites/OldWand",
             "Rotation":-45
         },
 
         "EquipSlot":"Weapon",
         "DamageData":{
             "AtkStat": "Intelligence",
-            "AtkPower": 200,
+            "AtkPower": 80,
             "DamageEffect": "SmallFire_DamageEffect",
             "DamageType": "Fire",
             "DamageVarient": 0.1,
@@ -93,8 +93,8 @@
 			"SnippetDesc": "A mage's old focusing Orb.",
 			"Description": "A common tool used by many new mages for focsing magic. Old, but still works.",
 			"Tags": ["OffHand","Orb"],
-			"LargeIcon":"OldOrb.png",
-			"SmallIcon":"OldOrb.png"
+			"LargeIcon":"Sprites/OldOrb.png",
+			"SmallIcon":"Sprites/OldOrb.png"
 		},
         "StatMods":{
 			"StatMod1": { 
@@ -104,7 +104,7 @@
 				"Value":1
 			}
 		},
-        "SpriteSheet":"OldOrb_SpriteSheet.png",
+        "SpriteSheet":"Sprites/OldOrb_SpriteSheet.png",
         "EquipSlot":"OffHand",
         "Armor": 0,
         "Ward": 0

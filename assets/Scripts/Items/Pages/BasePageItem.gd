@@ -22,7 +22,8 @@ func _init(key:String, def_load_path:String, def:Dictionary, id:String='', data:
 		if not org_detail_data['Tags'].has("Action"):
 			org_detail_data['Tags'].append("Action")
 		details_data = BaseLoadObjectLibrary._merge_defs(details_data,org_detail_data)
-		details = ObjectDetailsData.new(ActionLibrary.Instance._defs_to_load_paths[action_key], details_data)
+		if ActionLibrary.Instance._defs_to_load_paths.has(action_key):
+			details = ObjectDetailsData.new(ActionLibrary.Instance._defs_to_load_paths[action_key], details_data)
 	if effect_key and not action_key:
 		var effect_def = EffectLibrary.get_effect_def(effect_key)
 		var org_detail_data =  effect_def.get("Details", {"Tags":[]})

@@ -11,16 +11,19 @@ enum DamageTypes {
 	Fire, Ice, Electric, Poison, # Usually negated by Ward
 }
 
-var game_state:GameStateData
+var _been_calced
 var source
 var defender:BaseActor
 var source_tag_chain:SourceTagChain
 
-var _attack_power:int
-var _damage_variance:float
+var attack_power:int
+var damage_variance:float
+var applied_power:float
 
 var damage_type:DamageTypes
 var defense_type:DefenseType
+var defense_value:int
+var defense_reduction:float
 
 var is_successful:bool
 var base_damage:int
@@ -30,16 +33,15 @@ var damage_after_attack_mods:float
 var damage_after_defend_mods:float
 var final_damage:int
 
-func _init(data:Dictionary, source, base_damage:int, defender:BaseActor, source_tag_chain:SourceTagChain, game_state:GameStateData) -> void:
-	self.game_state = game_state
+func _init(data:Dictionary, source, base_damage:int, defender:BaseActor, tag_chain:SourceTagChain, game_state:GameStateData) -> void:
 	self.source = source
 	self.defender = defender
-	self.source_tag_chain = source_tag_chain
-	is_successful = true
+	self.source_tag_chain = tag_chain
+	self.is_successful = true
 	
 	self.base_damage = base_damage
-	_attack_power = data.get("AtkPower", 100)
-	_damage_variance = data.get("DamageVarient", 0)
+	self.attack_power = data.get("AtkPower", 100)
+	self.damage_variance = data.get("DamageVarient", 0)
 	
 	var damage_type = data.get("DamageType", null)
 	if damage_type is String: self.damage_type = DamageTypes.get(damage_type, 0)
@@ -61,35 +63,38 @@ func get_source_actor()->BaseActor:
 	return null
 
 func _calc_damage_for_event():
+	if _been_calced:
+		printerr("Attempted to _calc_damage_for_event on already completed damage event!")
+		return
+	_been_calced = true
 	#var attacker = event.attacker
-	var defender = self.defender
+	var defender = defender
 	
 	# Calc raw damage
-	var attack_power:float = (float(self._attack_power)/100.0) + randf_range(-self._damage_variance, self._damage_variance)
-	self.raw_damage = self.base_damage * attack_power
+	applied_power = (float(attack_power)/100.0) + randf_range(-damage_variance, damage_variance)
+	raw_damage = base_damage * applied_power
 	
 	# Get the defend's Armor or Ward
-	var defense_armor = 0
-	if self.defense_type == DamageEvent.DefenseType.Armor:
-		defense_armor = defender.stats.get_stat('Armor')
-	if self.defense_type == DamageEvent.DefenseType.Ward:
-		defense_armor = defender.stats.get_stat('Ward')
-	var armor_reduction = DamageHelper.calc_armor_reduction(defense_armor)
-	self.damage_after_armor = self.raw_damage * armor_reduction
+	if defense_type == DamageEvent.DefenseType.Armor:
+		defense_value = defender.stats.get_stat('Armor')
+	if defense_type == DamageEvent.DefenseType.Ward:
+		defense_value = defender.stats.get_stat('Ward')
+	defense_reduction = DamageHelper.calc_armor_reduction(defense_value)
+	damage_after_armor = raw_damage * defense_reduction
 	
 	# Get all tags that apply to the attack  and defense
-	var attack_tags = self.source_tag_chain.get_all_tags()
+	var attack_tags = source_tag_chain.get_all_tags()
 	var defend_tags = defender.get_tags()
 		
 	
 	# Get and apply all "OnDealDamage" mods from the attacker
-	self.damage_after_attack_mods = self.damage_after_armor
+	damage_after_attack_mods = damage_after_armor
 	
 	# Damage is coming from another actor
-	if self.source is BaseActor:
+	if source is BaseActor:
 		# Add Ally or Enemy tag
-		var attacker = self.source as BaseActor
-		if self.source.FactionIndex == defender.FactionIndex:
+		var attacker = source as BaseActor
+		if source.FactionIndex == defender.FactionIndex:
 			attack_tags.append("Ally")
 			defend_tags.append("Ally")
 		else:
@@ -99,15 +104,15 @@ func _calc_damage_for_event():
 		attacker_damage_mods = DamageHelper._order_damage_mods(attacker_damage_mods)
 		for mod:BaseDamageMod in attacker_damage_mods:
 			if mod.is_valid_in_case(false, attack_tags, defend_tags, self):
-				self.damage_after_attack_mods = mod.apply_mod(self.damage_after_attack_mods, self)
+				damage_after_attack_mods = mod.apply_mod(damage_after_attack_mods, self)
 	
 	# Get and apply all "OnTakeDamage" mods from the defender
-	self.damage_after_defend_mods = self.damage_after_attack_mods
+	damage_after_defend_mods = damage_after_attack_mods
 	var defender_damage_mods = defender.effects.get_on_take_damage_mods()
 	defender_damage_mods = DamageHelper._order_damage_mods(defender_damage_mods)
 	for mod:BaseDamageMod in defender_damage_mods:
 		if mod.is_valid_in_case(true, attack_tags, defend_tags, self):
-			self.damage_after_defend_mods = mod.apply_mod(self.damage_after_defend_mods, self)
+			damage_after_defend_mods = mod.apply_mod(damage_after_defend_mods, self)
 	if LOGGING:
-		print("DamageHelper: base_damage: %s | raw_damage: %s | after_armor: %s" % [self.base_damage, self.raw_damage, self.damage_after_armor])
-	self.final_damage = self.damage_after_defend_mods
+		print("DamageHelper: base_damage: %s | raw_damage: %s | after_armor: %s" % [base_damage, raw_damage, damage_after_armor])
+	final_damage = damage_after_defend_mods

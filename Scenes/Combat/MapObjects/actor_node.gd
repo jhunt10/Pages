@@ -179,7 +179,8 @@ func get_animation_dir_sufix()->String:
 func animation_finished(name:String):
 	if LOGGING: print("%s | Animation Finished: %s"  % [Time.get_ticks_msec(), name])
 	is_walking = false
-	if name.contains("motion_"):
+	if name.contains("motion_") or name == 'shake_effect':
+		current_animation_action_name = ''
 		_start_anim("facing/facing"+get_animation_dir_sufix())
 		
 
