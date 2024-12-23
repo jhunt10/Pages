@@ -152,7 +152,15 @@ func set_facing_dir(dir:int):
 	if facing_dir == dir:
 		return
 	facing_dir = dir
-	if actor_sprite: actor_sprite.direction = dir
+	
+	if main_hand_node: main_hand_node.set_facing_dir(facing_dir)
+	if off_hand_node: off_hand_node.set_facing_dir(facing_dir)
+	
+	if actor_sprite: 
+		actor_sprite.direction = facing_dir
+	else:
+		return
+		
 	if facing_dir == MapPos.Directions.North:
 		actor_sprite.z_index = 4
 		main_hand_node.z_index = 2
@@ -169,8 +177,6 @@ func set_facing_dir(dir:int):
 		actor_sprite.z_index = 3
 		main_hand_node.z_index = 0
 		off_hand_node.z_index = 3
-	if main_hand_node: main_hand_node.facing_dir = dir # main_hand_node.animation.play("weapon_" + FACING_ANIMATION + _get_animation_dir_sufix())
-	if off_hand_node: off_hand_node.facing_dir = dir #off_hand_node.animation.play("weapon_" + FACING_ANIMATION + _get_animation_dir_sufix())
 
 var move_timmer = 0
 func _process(delta: float) -> void:
@@ -308,12 +314,18 @@ func queue_death():
 	#current_animation_speed = speed
 
 
-func start_weapon_animation(action_name:String, speed:float=1, off_hand:bool=false):
+func ready_weapon_animation(action_name:String, speed:float=1, off_hand:bool=false):
 	var animation_name = action_name + "/ready" + _get_animation_dir_sufix()
 	if off_hand and off_hand_node:
-		off_hand_node.ready_arnimation(action_name)#, _get_animation_dir_sufix())
+		off_hand_node.ready_arnimation(action_name)
 	elif main_hand_node:
-		main_hand_node.ready_arnimation(action_name)#, _get_animation_dir_sufix())
+		main_hand_node.ready_arnimation(action_name)
+
+func execute_weapon_motion_animation(speed:float=1, off_hand:bool=false):
+	if off_hand and off_hand_node:
+		off_hand_node.execute_animation(speed)
+	elif main_hand_node:
+		main_hand_node.execute_animation(speed)
 
 #func start_walk_animation(animation_name, speed:float=1):
 	#current_body_animation_action = animation_name + "/ready" + _get_animation_dir_sufix()

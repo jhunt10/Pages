@@ -3,7 +3,9 @@ extends GDScript
 
 ### SubActions do not get global properties
 
-enum SubActionPropTypes {TargetParamKey, SetTargetKey, TargetKey, DamageKey, EffectKey, MissileKey, MoveValue, StringVal, IntVal, BoolVal, EnumVal}
+enum SubActionPropTypes {
+	TargetParamKey, SetTargetKey, TargetKey, DamageKey, EffectKey, MissileKey, 
+	MoveValue, StringVal, IntVal, BoolVal, EnumVal, FloatVal}
 
 # Just incase I want to refactor do_thing to return more than a bool
 const Failed = false

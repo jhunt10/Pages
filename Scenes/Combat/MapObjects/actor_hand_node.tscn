@@ -1,4 +1,4 @@
-[gd_scene load_steps=61 format=3 uid="uid://dooeg4ake0jdk"]
+[gd_scene load_steps=81 format=3 uid="uid://dooeg4ake0jdk"]
 
 [ext_resource type="Script" path="res://Scenes/Combat/MapObjects/actor_hand_node.gd" id="1_dwep3"]
 [ext_resource type="Texture2D" uid="uid://bvdyspj30c1k1" path="res://defs/Actors/Template_SpriteSheet_MainHand.png" id="1_h8dad"]
@@ -39,7 +39,7 @@ tracks/1/keys = {
 }
 tracks/2/type = "value"
 tracks/2/imported = false
-tracks/2/enabled = true
+tracks/2/enabled = false
 tracks/2/path = NodePath("../WeaponNode:scale")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
@@ -111,15 +111,15 @@ tracks/7/keys = {
 }
 tracks/8/type = "value"
 tracks/8/imported = false
-tracks/8/enabled = true
+tracks/8/enabled = false
 tracks/8/path = NodePath("../WeaponNode:off_hand_offset")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(-8, 0)]
+"update": 1,
+"values": [Vector2(8, 0)]
 }
 tracks/9/type = "value"
 tracks/9/imported = false
@@ -217,6 +217,82 @@ min_space = 0.0
 max_space = 3.0
 snap = 1.0
 value_label = "dirrection"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_n7p7g"]
+animation = &"weapon_raise/cancel_north"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_v1b5o"]
+animation = &"weapon_raise/cancel_east"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_86ruq"]
+animation = &"weapon_raise/cancel_south"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5i8on"]
+animation = &"weapon_raise/cancel_west"
+
+[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_hurcw"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_n7p7g")
+blend_point_0/pos = 0.0
+blend_point_1/node = SubResource("AnimationNodeAnimation_v1b5o")
+blend_point_1/pos = 1.0
+blend_point_2/node = SubResource("AnimationNodeAnimation_86ruq")
+blend_point_2/pos = 2.0
+blend_point_3/node = SubResource("AnimationNodeAnimation_5i8on")
+blend_point_3/pos = 3.0
+min_space = 0.0
+max_space = 3.0
+snap = 1.0
+blend_mode = 1
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ll727"]
+animation = &"weapon_raise/motion_north"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_0papi"]
+animation = &"weapon_raise/motion_east"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_o43dy"]
+animation = &"weapon_raise/motion_south"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ybrsf"]
+animation = &"weapon_raise/motion_west"
+
+[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_8n3h1"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_ll727")
+blend_point_0/pos = 0.0
+blend_point_1/node = SubResource("AnimationNodeAnimation_0papi")
+blend_point_1/pos = 1.0
+blend_point_2/node = SubResource("AnimationNodeAnimation_o43dy")
+blend_point_2/pos = 2.0
+blend_point_3/node = SubResource("AnimationNodeAnimation_ybrsf")
+blend_point_3/pos = 3.0
+min_space = 0.0
+max_space = 3.0
+snap = 1.0
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_2d3n2"]
+animation = &"weapon_raise/ready_north"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_a5fg7"]
+animation = &"weapon_raise/ready_east"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_qeiww"]
+animation = &"weapon_raise/ready_south"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_0vydj"]
+animation = &"weapon_raise/ready_west"
+
+[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_odosn"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_2d3n2")
+blend_point_0/pos = 0.0
+blend_point_1/node = SubResource("AnimationNodeAnimation_a5fg7")
+blend_point_1/pos = 1.0
+blend_point_2/node = SubResource("AnimationNodeAnimation_qeiww")
+blend_point_2/pos = 2.0
+blend_point_3/node = SubResource("AnimationNodeAnimation_0vydj")
+blend_point_3/pos = 3.0
+min_space = 0.0
+max_space = 3.0
+snap = 1.0
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_oxa1b"]
 animation = &"weapon_stab/cancel_north"
@@ -417,10 +493,38 @@ advance_condition = &"PlayMotion"
 advance_mode = 2
 advance_condition = &"Cancel"
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_peejm"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_wcawc"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_3jdai"]
+switch_mode = 2
+advance_mode = 2
+advance_condition = &"PlayMotion"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_rra1o"]
+switch_mode = 2
+advance_mode = 2
+advance_condition = &"Cancel"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_50hd5"]
+advance_mode = 2
+advance_condition = &"Raise"
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_dl25k"]
-states/End/position = Vector2(887, 95)
+states/End/position = Vector2(200, 29)
 states/Idel/node = SubResource("AnimationNodeBlendSpace1D_05e0v")
-states/Idel/position = Vector2(368, 95)
+states/Idel/position = Vector2(621, 95)
+states/RaiseCancel/node = SubResource("AnimationNodeBlendSpace1D_hurcw")
+states/RaiseCancel/position = Vector2(976, 29)
+states/RaiseMotion/node = SubResource("AnimationNodeBlendSpace1D_8n3h1")
+states/RaiseMotion/position = Vector2(976, 163.051)
+states/RaiseReady/node = SubResource("AnimationNodeBlendSpace1D_odosn")
+states/RaiseReady/position = Vector2(976, 95)
 states/StabCancel/node = SubResource("AnimationNodeBlendSpace1D_vcod6")
 states/StabCancel/position = Vector2(445, 181.983)
 states/StabMotion/node = SubResource("AnimationNodeBlendSpace1D_1hp1m")
@@ -434,11 +538,12 @@ states/SwingMotion/node = SubResource("AnimationNodeBlendSpace1D_cta04")
 states/SwingMotion/position = Vector2(795, -30)
 states/SwingReady/node = SubResource("AnimationNodeBlendSpace1D_y8q8e")
 states/SwingReady/position = Vector2(621, -30)
-transitions = ["Start", "Idel", SubResource("AnimationNodeStateMachineTransition_wunu1"), "Idel", "SwingReady", SubResource("AnimationNodeStateMachineTransition_83kmq"), "SwingMotion", "Idel", SubResource("AnimationNodeStateMachineTransition_br30j"), "SwingCancel", "Idel", SubResource("AnimationNodeStateMachineTransition_4nla6"), "Idel", "StabReady", SubResource("AnimationNodeStateMachineTransition_f7fpi"), "StabReady", "StabMotion", SubResource("AnimationNodeStateMachineTransition_od8kq"), "StabReady", "StabCancel", SubResource("AnimationNodeStateMachineTransition_ro0k6"), "StabCancel", "Idel", SubResource("AnimationNodeStateMachineTransition_ufpmg"), "StabMotion", "Idel", SubResource("AnimationNodeStateMachineTransition_nnpx6"), "SwingReady", "SwingMotion", SubResource("AnimationNodeStateMachineTransition_8wuix"), "SwingReady", "SwingCancel", SubResource("AnimationNodeStateMachineTransition_npxte")]
+transitions = ["Start", "Idel", SubResource("AnimationNodeStateMachineTransition_wunu1"), "Idel", "SwingReady", SubResource("AnimationNodeStateMachineTransition_83kmq"), "SwingMotion", "Idel", SubResource("AnimationNodeStateMachineTransition_br30j"), "SwingCancel", "Idel", SubResource("AnimationNodeStateMachineTransition_4nla6"), "Idel", "StabReady", SubResource("AnimationNodeStateMachineTransition_f7fpi"), "StabReady", "StabMotion", SubResource("AnimationNodeStateMachineTransition_od8kq"), "StabReady", "StabCancel", SubResource("AnimationNodeStateMachineTransition_ro0k6"), "StabCancel", "Idel", SubResource("AnimationNodeStateMachineTransition_ufpmg"), "StabMotion", "Idel", SubResource("AnimationNodeStateMachineTransition_nnpx6"), "SwingReady", "SwingMotion", SubResource("AnimationNodeStateMachineTransition_8wuix"), "SwingReady", "SwingCancel", SubResource("AnimationNodeStateMachineTransition_npxte"), "RaiseCancel", "Idel", SubResource("AnimationNodeStateMachineTransition_peejm"), "RaiseMotion", "Idel", SubResource("AnimationNodeStateMachineTransition_wcawc"), "RaiseReady", "RaiseMotion", SubResource("AnimationNodeStateMachineTransition_3jdai"), "RaiseReady", "RaiseCancel", SubResource("AnimationNodeStateMachineTransition_rra1o"), "Idel", "RaiseReady", SubResource("AnimationNodeStateMachineTransition_50hd5")]
 graph_offset = Vector2(0, -108.949)
 
 [node name="HandNode" type="Node2D" node_paths=PackedStringArray("animation_tree", "hand_sprite", "weapon_node")]
 script = ExtResource("1_dwep3")
+hand = 1
 facing_dir = 2
 animation_is_ready = true
 main_hand_sprite_sheet = ExtResource("1_h8dad")
@@ -447,7 +552,7 @@ two_hand_sprite_sheet = ExtResource("4_osigu")
 animation_tree = NodePath("AnimationTree")
 hand_sprite = NodePath("HandSprite")
 weapon_node = NodePath("WeaponNode")
-ready_animation_name = null
+animation_speed = 1.0
 weapon_z_offset = 1
 weapon_under_hand_z_offset = -1
 weapon_over_hand_z_offset = 1
@@ -464,23 +569,21 @@ libraries = {
 
 [node name="WeaponNode" type="Node2D" parent="." node_paths=PackedStringArray("overhand_weapon_sprite", "underhand_weapon_sprite")]
 z_index = 1
-position = Vector2(-4, 14)
+position = Vector2(3, 13)
 script = ExtResource("2_ga04f")
-edit_mode = false
-hand = 0
-flip_sprite = false
-unflip_offhand = false
+hand = 1
+flip_sprite = true
 main_hand_position = Vector2(-4, 14)
-off_hand_offset = Vector2(-8, 0)
+off_hand_offset = Vector2(2, 0)
 two_hand_offset = Vector2(-4, 0)
 overhand_weapon_sprite = NodePath("WeaponOverHandSprite")
 underhand_weapon_sprite = NodePath("WeaponUnderHandSprite")
 rotation_factor = 1.0
-custom_rotation = 0
 weapon_texture = ExtResource("5_wntwi")
 
 [node name="WeaponUnderHandSprite" type="Sprite2D" parent="WeaponNode"]
 z_index = -1
+scale = Vector2(-1, 1)
 texture = ExtResource("5_wntwi")
 hframes = 2
 vframes = 2
@@ -488,26 +591,34 @@ frame = 2
 
 [node name="WeaponOverHandSprite" type="Sprite2D" parent="WeaponNode"]
 z_index = 1
+scale = Vector2(-1, 1)
 texture = ExtResource("5_wntwi")
 hframes = 2
 vframes = 2
 frame = 1
 
 [node name="HandSprite" type="Sprite2D" parent="."]
-texture = ExtResource("1_h8dad")
+texture = ExtResource("3_6v6cl")
 hframes = 12
 vframes = 4
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
+active = false
+deterministic = false
+reset_on_save = false
 root_node = NodePath("../HandSprite")
 callback_mode_process = 2
 tree_root = SubResource("AnimationNodeStateMachine_dl25k")
 anim_player = NodePath("../AnimationPlayer")
 parameters/conditions/Cancel = false
 parameters/conditions/PlayMotion = false
+parameters/conditions/Raise = false
 parameters/conditions/Stab = false
 parameters/conditions/Swing = false
 parameters/Idel/blend_position = 2
+parameters/RaiseCancel/blend_position = 0
+parameters/RaiseMotion/blend_position = 0
+parameters/RaiseReady/blend_position = 0
 parameters/StabCancel/blend_position = 2
 parameters/StabMotion/blend_position = 2
 parameters/StabReady/blend_position = 2

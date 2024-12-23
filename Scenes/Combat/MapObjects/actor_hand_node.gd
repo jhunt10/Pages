@@ -7,6 +7,8 @@ const LOGGING = false
 enum HANDS {MainHand, OffHand, TwoHand}
 enum ANIMATIONS {None, Swing, Stab}
 
+@export var editing_mod:bool = false
+
 @export var hand:HANDS:
 	set(val):
 		hand = val
@@ -23,48 +25,18 @@ enum ANIMATIONS {None, Swing, Stab}
 
 @export var facing_dir:MapPos.Directions:
 	set(val):
-		facing_dir = val
-		set_facing_dir(val)
-		if animation_tree:
-			animation_tree.set("parameters/Idel/blend_position", facing_dir)
-			animation_tree.set("parameters/SwingReady/blend_position", facing_dir)
-			animation_tree.set("parameters/SwingMotion/blend_position", facing_dir)
-			animation_tree.set("parameters/SwingCancel/blend_position", facing_dir)
-			animation_tree.set("parameters/StabReady/blend_position", facing_dir)
-			animation_tree.set("parameters/StabMotion/blend_position", facing_dir)
-			animation_tree.set("parameters/StabCancel/blend_position", facing_dir)
-
-# For editing
-#@export var ready_animation:ANIMATIONS:
-	#set(val):
-		#if animation_tree:
-			#animation_tree.set("parameters/conditions/Cancel", false)
-			#animation_tree.set("parameters/conditions/PlayMotion", false)
-			#ready_animation = ANIMATIONS.None
-			#if val == ANIMATIONS.Swing:
-				#animation_tree.set("parameters/conditions/Swing", true)
-			#if val == ANIMATIONS.Stab:
-				#animation_tree.set("parameters/conditions/Stab", true)
+		if val != facing_dir:
+			facing_dir = val
+			set_facing_dir(val)
 
 @export var animation_is_ready:bool
-
-#@export var play_animation:bool:
-	#set(val):
-		#play_animation = false
-		#animation_tree.set("parameters/conditions/Cancel", false)
-		#animation_tree.set("parameters/conditions/PlayMotion", true)
-
-
 @export var main_hand_sprite_sheet:Texture2D
 @export var off_hand_sprite_sheet:Texture2D
 @export var two_hand_sprite_sheet:Texture2D
-
-#@export var animation:AnimationPlayer
 @export var animation_tree:AnimationTree
 @export var hand_sprite:Sprite2D
 @export var weapon_node:ActorWeaponNode
-
-@export var ready_animation_name:String = ''
+@export var animation_speed:float = -1
 
 @export var hand_z_offset:int:
 	set(val):
@@ -109,25 +81,24 @@ enum ANIMATIONS {None, Swing, Stab}
 				weapon_node.overhand_weapon_sprite.z_index = 1
 		elif LOGGING: print("NoWeaponNode")
 
-var current_animation
+var current_animation_name
+var last_animation_name
+var readied_animation
 
 func _init() -> void:
 	set_notify_transform(true)
 
 func _ready() -> void:
-	#animation.animation_finished.connect(on_animation_finished)
 	animation_tree.animation_started.connect(on_animation_started)
 	animation_tree.animation_finished.connect(on_animation_finished)
 
-var should_be_playing:bool
 func _process(delta: float) -> void:
-	animation_tree.advance(delta * CombatRootControl.get_time_scale())
-	#if should_be_playing:
-		#if not animation_tree.get("parameters/conditions/PlayMotion"):
-			#printerr("Bad Play")
-			#animation_tree.set("parameters/conditions/PlayMotion", true)
-		#else:
-			#should_be_playing = false
+	if editing_mod and Engine.is_editor_hint():
+		return
+	var time_scale = CombatRootControl.get_time_scale()
+	if animation_speed > 0:
+		time_scale = time_scale * animation_speed
+	animation_tree.advance(delta * time_scale)
 
 func set_weapon(weapon:BaseWeaponEquipment):
 	weapon_node.visible = true
@@ -136,66 +107,64 @@ func set_weapon(weapon:BaseWeaponEquipment):
 func hide_weapon():
 	weapon_node.visible = false
 
-func ready_arnimation(name):
-	#animation.speed_scale = 100# = CombatRootControl.get_time_scale()
+func ready_arnimation(name, speed:float=1.0):
 	animation_tree.set("parameters/conditions/Cancel", false)
 	animation_tree.set("parameters/conditions/PlayMotion", false)
-	if name == "weapon_swing":
+	if name == "Swing":
 		animation_tree.set("parameters/conditions/Swing", true)
-		current_animation = name
-		
-	#var animation_name = name + "/ready" + dir_sufix
-	#if not animation.has_animation(animation_name):
-		#printerr("No ActorHand animation found with name: %s" % [animation_name])
-		#return
-	#animation.play(animation_name)
-	#current_animation = animation_name
+		readied_animation = name
+		animation_speed = speed
+	if name == "Stab":
+		animation_tree.set("parameters/conditions/Stab", true)
+		readied_animation = name
+		animation_speed = speed
+	if name == "Raise":
+		animation_tree.set("parameters/conditions/Raise", true)
+		readied_animation = name
+		animation_speed = speed
 
-func execute_animation():
-	if not current_animation:
-		printerr("ActorHandNode.execute_animation: Called with no current_animation.")
+func execute_animation(speed:float=1.0):
+	if not readied_animation:
+		printerr("ActorHandNode.execute_animation: Called with no readied_animation.")
 		return
-	should_be_playing = true
-	printerr("Set Motion")
+	animation_speed = speed
+	readied_animation = null
 	animation_tree.set("parameters/conditions/PlayMotion", true)
+	printerr("Set Motion")
 	printerr("HandAnimation Executing: Cancel:%s | PlayMotion: %s" % 
 	[animation_tree.get("parameters/conditions/Cancel"), animation_tree.get("parameters/conditions/PlayMotion")])
-	#if current_animation.contains("/ready_"):
-		#current_animation = current_animation.replace("/ready_", "/motion_")
-		#animation.play(current_animation)
 
 func cancel_animation():
+	readied_animation = null
 	animation_tree.set("parameters/conditions/Cancel", true)
-	#if current_animation.contains("/ready_"):
-		#current_animation = current_animation.replace("/ready_", "/cancel_")
-		#animation.play(current_animation)
 
 func clear_any_animations(dir_sufix):
+	readied_animation = null
 	animation_tree.set("parameters/conditions/Cancel", true)
-	#animation.play("weapon_facing/facing" + dir_sufix)
-
-func on_animation_finished(animation_name):
-	printerr("HandAnimation Finished: %s" % [animation_name])
-	printerr("HandAnimation Finished: Cancel:%s | PlayMotion: %s" % 
-	[animation_tree.get("parameters/conditions/Cancel"), animation_tree.get("parameters/conditions/PlayMotion")])
 
 func on_animation_started(animation_name):
-	#animation.speed_scale = 100
-	printerr("HandAnimation Started: %s" % [animation_name])
-	printerr("HandAnimation Started: Cancel:%s | PlayMotion: %s" % 
-	[animation_tree.get("parameters/conditions/Cancel"), animation_tree.get("parameters/conditions/PlayMotion")])
+	current_animation_name = animation_name
+	if animation_name.contains("facing"):
+		animation_speed = 1
+	if LOGGING: printerr("HandAnimation Started: %s | Cancel:%s | PlayMotion: %s" % [
+		animation_name, 
+		animation_tree.get("parameters/conditions/Cancel"), 
+		animation_tree.get("parameters/conditions/PlayMotion")])
 	
-	
-	## Hold onto the "ready" animation since the actor is holding the pose
-	#if finished.contains("/ready_"):
-		#return
-	#if current_animation == finished:
-		#current_animation = null
-	#else:
-		#printerr("Hand Animation mismatch: Current: %s | Finshed: %s" % [current_animation, finished])
+func on_animation_finished(animation_name):
+	current_animation_name = null
+	last_animation_name = animation_name
+	if LOGGING: printerr("HandAnimation Finished: %s | Cancel:%s | PlayMotion: %s" % [
+		animation_name, 
+		animation_tree.get("parameters/conditions/Cancel"), 
+		animation_tree.get("parameters/conditions/PlayMotion")])
 
 
 func set_facing_dir(dir):
+	if dir != facing_dir:
+		facing_dir = dir
+		return # Avoid Stack Overflow
+		
 	if dir == MapPos.Directions.North:
 		if hand == HANDS.MainHand:
 			hand_z_offset = 0
@@ -209,7 +178,6 @@ func set_facing_dir(dir):
 			weapon_over_hand_z_offset = 0
 		if hand_sprite and hand_sprite.vframes == 4:
 			hand_sprite.frame_coords.y = 1
-		#animation.play("weapon_facing/facing_north")
 	
 	if dir == MapPos.Directions.East:
 		if hand == HANDS.MainHand:
@@ -224,7 +192,6 @@ func set_facing_dir(dir):
 			weapon_over_hand_z_offset = 0
 		if hand_sprite and hand_sprite.vframes == 4:
 			hand_sprite.frame_coords.y = 2
-		#animation.play("weapon_facing/facing_east")
 	
 	if dir == MapPos.Directions.South:
 		if hand == HANDS.MainHand:
@@ -239,7 +206,6 @@ func set_facing_dir(dir):
 			weapon_over_hand_z_offset = 1
 		if hand_sprite and hand_sprite.vframes == 4:
 			hand_sprite.frame_coords.y = 0
-		#animation.play("weapon_facing/facing_south")
 	
 	if dir == MapPos.Directions.West:
 		if hand == HANDS.MainHand:
@@ -254,4 +220,15 @@ func set_facing_dir(dir):
 			weapon_over_hand_z_offset = 1
 		if hand_sprite and hand_sprite.vframes == 4:
 			hand_sprite.frame_coords.y = 3
-		#animation.play("weapon_facing/facing_west")
+	
+	if animation_tree:
+		animation_tree.set("parameters/Idel/blend_position", dir)
+		animation_tree.set("parameters/SwingReady/blend_position", dir)
+		animation_tree.set("parameters/SwingMotion/blend_position", dir)
+		animation_tree.set("parameters/SwingCancel/blend_position", dir)
+		animation_tree.set("parameters/StabReady/blend_position", dir)
+		animation_tree.set("parameters/StabMotion/blend_position", dir)
+		animation_tree.set("parameters/StabCancel/blend_position", dir)
+		animation_tree.set("parameters/RaiseReady/blend_position", dir)
+		animation_tree.set("parameters/RaiseMotion/blend_position", dir)
+		animation_tree.set("parameters/RaiseCancel/blend_position", dir)

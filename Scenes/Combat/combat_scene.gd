@@ -64,6 +64,10 @@ static func get_remaining_frames_for_turn()->int:
 		if Instance.QueController and Instance.QueController.execution_state != ActionQueController.ActionStates.Waiting:
 			return ActionQueController.FRAMES_PER_ACTION - Instance.QueController.sub_action_index
 	return 0
+static func get_actor_node(actor_id:String)->ActorNode:
+	if !Instance: return null
+	if !Instance.MapController: return null
+	return Instance.MapController.actor_nodes.get(actor_id)
 
 func load_init_state(map_scene_path:String):
 	if !Instance: Instance = self

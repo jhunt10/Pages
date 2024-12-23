@@ -1,11 +1,9 @@
 class_name SubAct_Move
 extends BaseSubAction
 
-const RELATIVE_POS_KEY = "RelativePos"
-
 func get_required_props()->Dictionary:
 	return {
-		RELATIVE_POS_KEY: BaseSubAction.SubActionPropTypes.MoveValue,
+		"RelativePos": BaseSubAction.SubActionPropTypes.MoveValue,
 		"MovementType": BaseSubAction.SubActionPropTypes.StringVal,
 		"PlayWalkin": BaseSubAction.SubActionPropTypes.BoolVal
 	}

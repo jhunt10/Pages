@@ -90,6 +90,12 @@ func set_props(parent, prop_name:String, prop_type:BaseSubAction.SubActionPropTy
 		check_box.visible = true
 		if prop_value:
 			check_box.button_pressed = prop_value
+	elif prop_type == BaseSubAction.SubActionPropTypes.FloatVal:
+		spin_box.visible = true
+		spin_box.rounded = false
+		spin_box.step = 0.01
+		if prop_value:
+			spin_box.set_value_no_signal(float(prop_value))
 	else:
 		line_edit.visible = true
 		line_edit.text = "Unknown Prop Type: " + str(prop_type)
@@ -115,6 +121,8 @@ func get_prop_value():
 		return line_edit.text
 	elif _prop_type == BaseSubAction.SubActionPropTypes.IntVal:
 		return spin_box.value
+	elif _prop_type == BaseSubAction.SubActionPropTypes.FloatVal:
+		return spin_box.value
 	elif _prop_type == BaseSubAction.SubActionPropTypes.BoolVal:
 		return check_box.button_pressed
 	return null
@@ -139,6 +147,8 @@ func clear():
 	elif _prop_type == BaseSubAction.SubActionPropTypes.StringVal:
 		line_edit.text = ""
 	elif _prop_type == BaseSubAction.SubActionPropTypes.IntVal:
+		spin_box.value = 0
+	elif _prop_type == BaseSubAction.SubActionPropTypes.FloatVal:
 		spin_box.value = 0
 	elif _prop_type == BaseSubAction.SubActionPropTypes.BoolVal:
 		check_box.button_pressed = false

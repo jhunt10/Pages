@@ -69,10 +69,10 @@ var _lock_position_edit:bool = false
 			
 @export var off_hand_offset:Vector2:
 	set(val):
-		if LOGGING: print("Set OffHand Pos")
 		off_hand_offset = val
 		if hand == ActorHandNode.HANDS.OffHand:
-			self.position = main_hand_position - off_hand_offset
+			if LOGGING: print("Set OffHand Pos: %s | Val: %s | MHPos: %s" % [hand, val, main_hand_position])
+			self.position = main_hand_position + off_hand_offset
 @export var two_hand_offset:Vector2:
 	set(val):
 		if LOGGING: print("Set Two Pos")
