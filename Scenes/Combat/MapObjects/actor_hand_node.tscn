@@ -39,7 +39,7 @@ tracks/1/keys = {
 }
 tracks/2/type = "value"
 tracks/2/imported = false
-tracks/2/enabled = false
+tracks/2/enabled = true
 tracks/2/path = NodePath("../WeaponNode:scale")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
@@ -111,7 +111,7 @@ tracks/7/keys = {
 }
 tracks/8/type = "value"
 tracks/8/imported = false
-tracks/8/enabled = false
+tracks/8/enabled = true
 tracks/8/path = NodePath("../WeaponNode:off_hand_offset")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
@@ -569,12 +569,12 @@ libraries = {
 
 [node name="WeaponNode" type="Node2D" parent="." node_paths=PackedStringArray("overhand_weapon_sprite", "underhand_weapon_sprite")]
 z_index = 1
-position = Vector2(3, 13)
+position = Vector2(4, 14)
 script = ExtResource("2_ga04f")
 hand = 1
 flip_sprite = true
 main_hand_position = Vector2(-4, 14)
-off_hand_offset = Vector2(2, 0)
+off_hand_offset = Vector2(8, 0)
 two_hand_offset = Vector2(-4, 0)
 overhand_weapon_sprite = NodePath("WeaponOverHandSprite")
 underhand_weapon_sprite = NodePath("WeaponUnderHandSprite")
@@ -603,9 +603,6 @@ hframes = 12
 vframes = 4
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-active = false
-deterministic = false
-reset_on_save = false
 root_node = NodePath("../HandSprite")
 callback_mode_process = 2
 tree_root = SubResource("AnimationNodeStateMachine_dl25k")

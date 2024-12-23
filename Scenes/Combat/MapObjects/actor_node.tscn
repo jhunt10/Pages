@@ -409,13 +409,10 @@ direction = 2
 
 [node name="MainHandNode" parent="ActorMotionNode/ActorSpriteNode/OffsetNode" instance=ExtResource("3_dpgwv")]
 z_index = 3
-animation_speed = 1.0
 weapon_z_offset = 0
 
 [node name="OffHandNode" parent="ActorMotionNode/ActorSpriteNode/OffsetNode" instance=ExtResource("3_dpgwv")]
 z_index = 1
-hand = 1
-animation_speed = 1.0
 weapon_z_offset = 0
 
 [node name="VFXHolder" type="Node2D" parent="."]
