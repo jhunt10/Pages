@@ -1,15 +1,18 @@
-[gd_scene load_steps=37 format=3 uid="uid://uo60871y6t54"]
+[gd_scene load_steps=40 format=3 uid="uid://uo60871y6t54"]
 
 [ext_resource type="Script" path="res://Scenes/Combat/MapObjects/actor_node.gd" id="1_wfbib"]
 [ext_resource type="Texture2D" uid="uid://cp2wc5s8ju613" path="res://defs/Actors/Template_SpriteSheet.png" id="2_g31ob"]
 [ext_resource type="PackedScene" uid="uid://dooeg4ake0jdk" path="res://Scenes/Combat/MapObjects/actor_hand_node.tscn" id="3_dpgwv"]
+[ext_resource type="Script" path="res://Scenes/Combat/MapObjects/actor_body_sprite.gd" id="3_ltbfj"]
 [ext_resource type="AnimationLibrary" uid="uid://b5jo3ljcsi13k" path="res://animations/facing.tres" id="4_fix78"]
 [ext_resource type="AnimationLibrary" uid="uid://dgn4snawpxnvc" path="res://animations/move_turn_left.tres" id="5_dtvap"]
 [ext_resource type="AnimationLibrary" uid="uid://cgmk38o40y6ri" path="res://animations/move_turn_right.tres" id="6_ub6w0"]
+[ext_resource type="AnimationLibrary" uid="uid://k2vqtcfqwwvq" path="res://animations/move_walk.tres" id="7_0nd28"]
 [ext_resource type="AnimationLibrary" uid="uid://bw7ib64yurx24" path="res://animations/move_walk_back.tres" id="7_7k4lr"]
 [ext_resource type="AnimationLibrary" uid="uid://wha54qyt851d" path="res://animations/move_walk_forward.tres" id="8_h2r8d"]
 [ext_resource type="AnimationLibrary" uid="uid://p5lde56584bj" path="res://animations/move_walk_left.tres" id="9_h7joc"]
 [ext_resource type="AnimationLibrary" uid="uid://5r01u3xg2eii" path="res://animations/move_walk_right.tres" id="10_88tvj"]
+[ext_resource type="Texture2D" uid="uid://dj76get1aahli" path="res://Scenes/Menus/SaveLoadMenu/Button_Patch_32_6.png" id="14_6kv2p"]
 [ext_resource type="Texture2D" uid="uid://dgfxtmtdjfgey" path="res://assets/Sprites/UI/QuePathArrow.png" id="14_38ite"]
 
 [sub_resource type="Animation" id="Animation_y5og4"]
@@ -207,6 +210,18 @@ tracks/15/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 1)]
 }
+tracks/16/type = "value"
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/path = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/ActorSprite:frame_index")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
 
 [sub_resource type="Animation" id="Animation_jh7fm"]
 resource_name = "death_effect"
@@ -353,12 +368,12 @@ states/Walk_Out/position = Vector2(464, 40)
 transitions = ["Start", "Facing", SubResource("AnimationNodeStateMachineTransition_8gq1i"), "Facing", "Walk_Out", SubResource("AnimationNodeStateMachineTransition_n430j"), "Walk_Out", "Facing", SubResource("AnimationNodeStateMachineTransition_cccvi"), "Walk_Out", "Walk_In", SubResource("AnimationNodeStateMachineTransition_cgc86"), "Walk_In", "Facing", SubResource("AnimationNodeStateMachineTransition_dajqi")]
 graph_offset = Vector2(0, -98.1367)
 
-[node name="ActorNode" type="Node2D" node_paths=PackedStringArray("vfx_holder", "animation", "path_arrow", "offset_node", "actor_sprite", "main_hand_node", "off_hand_node", "actor_motion_node")]
+[node name="ActorNode" type="Node2D" node_paths=PackedStringArray("vfx_holder", "body_animation", "path_arrow", "offset_node", "actor_sprite", "main_hand_node", "off_hand_node", "actor_motion_node")]
 y_sort_enabled = true
 script = ExtResource("1_wfbib")
-editing_facing_direction = 3
+editing_facing_direction = 2
 vfx_holder = NodePath("VFXHolder")
-animation = NodePath("AnimationPlayer")
+body_animation = NodePath("AnimationPlayer")
 path_arrow = NodePath("PathArrow")
 offset_node = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode")
 actor_sprite = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/ActorSprite")
@@ -374,6 +389,9 @@ offset_top = -26.0
 offset_right = 21.0
 offset_bottom = 14.0
 
+[node name="TileOutline" type="Sprite2D" parent="."]
+texture = ExtResource("14_6kv2p")
+
 [node name="ActorMotionNode" type="Node2D" parent="."]
 
 [node name="ActorSpriteNode" type="Node2D" parent="ActorMotionNode"]
@@ -386,15 +404,21 @@ scale = Vector2(1.2, 1.2)
 texture = ExtResource("2_g31ob")
 hframes = 12
 vframes = 4
+script = ExtResource("3_ltbfj")
+direction = 2
 
 [node name="MainHandNode" parent="ActorMotionNode/ActorSpriteNode/OffsetNode" instance=ExtResource("3_dpgwv")]
 z_index = 3
-hand = 2
+animation_is_ready = null
+ready_animation_name = ""
+weapon_z_offset = 0
 
 [node name="OffHandNode" parent="ActorMotionNode/ActorSpriteNode/OffsetNode" instance=ExtResource("3_dpgwv")]
-visible = false
 z_index = 1
 hand = 1
+animation_is_ready = null
+ready_animation_name = ""
+weapon_z_offset = 0
 
 [node name="VFXHolder" type="Node2D" parent="."]
 z_index = 3
@@ -405,6 +429,7 @@ libraries = {
 "facing": ExtResource("4_fix78"),
 "move_turn_left": ExtResource("5_dtvap"),
 "move_turn_right": ExtResource("6_ub6w0"),
+"move_walk": ExtResource("7_0nd28"),
 "move_walk_back": ExtResource("7_7k4lr"),
 "move_walk_forward": ExtResource("8_h2r8d"),
 "move_walk_left": ExtResource("9_h7joc"),

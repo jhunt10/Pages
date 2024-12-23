@@ -59,7 +59,11 @@ func _process(delta: float) -> void:
 
 static func get_time_scale()->float:
 	return 1.5
-
+static func get_remaining_frames_for_turn()->int:
+	if Instance:
+		if Instance.QueController and Instance.QueController.execution_state != ActionQueController.ActionStates.Waiting:
+			return ActionQueController.FRAMES_PER_ACTION - Instance.QueController.sub_action_index
+	return 0
 
 func load_init_state(map_scene_path:String):
 	if !Instance: Instance = self
@@ -153,7 +157,7 @@ func add_actor(actor:BaseActor, faction_id:int, pos:MapPos):
 	
 	actor.Que.clear_que()
 	actor.stats.fill_bar_stats()
-	if actor._allow_auto_que:
+	if actor.use_ai:
 		actor.auto_build_que(QueController.action_index)
 		if QueController.execution_state == ActionQueController.ActionStates.Running:
 			actor.Que.fail_turn()

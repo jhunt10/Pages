@@ -1077,16 +1077,51 @@ spawn_actor_key = "Player1"
 is_player = true
 map_coor = Vector2i(7, 7)
 
-[node name="SpwanNode_TestTarget" type="Sprite2D" parent="ActorTileMapLayer"]
+[node name="SpwanNode_MovingTarget" type="Sprite2D" parent="ActorTileMapLayer"]
 position = Vector2(208, 208)
 texture = ExtResource("12_2qpl1")
 offset = Vector2(0, -16)
 hframes = 12
 vframes = 4
 script = ExtResource("11_vji11")
-spawn_actor_key = "TestTarget"
+spawn_actor_key = "MovingTarget"
 facing = 2
 map_coor = Vector2i(6, 6)
+
+[node name="SpwanNode_MovingTarget2" type="Sprite2D" parent="ActorTileMapLayer"]
+position = Vector2(208, 272)
+texture = ExtResource("12_2qpl1")
+offset = Vector2(0, -16)
+hframes = 12
+vframes = 4
+frame = 24
+script = ExtResource("11_vji11")
+spawn_actor_key = "MovingTarget"
+facing = 1
+map_coor = Vector2i(6, 8)
+
+[node name="SpwanNode_MovingTarget3" type="Sprite2D" parent="ActorTileMapLayer"]
+position = Vector2(272, 272)
+texture = ExtResource("12_2qpl1")
+offset = Vector2(0, -16)
+hframes = 12
+vframes = 4
+frame = 12
+script = ExtResource("11_vji11")
+spawn_actor_key = "MovingTarget"
+map_coor = Vector2i(8, 8)
+
+[node name="SpwanNode_MovingTarget4" type="Sprite2D" parent="ActorTileMapLayer"]
+position = Vector2(272, 208)
+texture = ExtResource("12_2qpl1")
+offset = Vector2(0, -16)
+hframes = 12
+vframes = 4
+frame = 36
+script = ExtResource("11_vji11")
+spawn_actor_key = "MovingTarget"
+facing = 3
+map_coor = Vector2i(8, 6)
 
 [node name="SpwanNode_TestTarget2" type="Sprite2D" parent="ActorTileMapLayer"]
 position = Vector2(240, 112)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dooeg4ake0jdk"]
+[gd_scene load_steps=61 format=3 uid="uid://dooeg4ake0jdk"]
 
 [ext_resource type="Script" path="res://Scenes/Combat/MapObjects/actor_hand_node.gd" id="1_dwep3"]
 [ext_resource type="Texture2D" uid="uid://bvdyspj30c1k1" path="res://defs/Actors/Template_SpriteSheet_MainHand.png" id="1_h8dad"]
@@ -121,20 +121,334 @@ tracks/8/keys = {
 "update": 0,
 "values": [Vector2(-8, 0)]
 }
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("..:animation_ready")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [null]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("../AnimationTree:parameters/conditions/Swing")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("../AnimationTree:parameters/conditions/Stab")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("..:animation_is_ready")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [null]
+}
+
+[sub_resource type="Animation" id="Animation_frmxv"]
+resource_name = "_animation_ready"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:animation_is_ready")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_kttg8"]
 _data = {
-"RESET": SubResource("Animation_5vfo0")
+"RESET": SubResource("Animation_5vfo0"),
+"_animation_ready": SubResource("Animation_frmxv")
 }
 
-[node name="HandNode" type="Node2D" node_paths=PackedStringArray("animation", "hand_sprite", "weapon_node")]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_xhi4g"]
+animation = &"weapon_facing/facing_north"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_o71io"]
+animation = &"weapon_facing/facing_east"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_tk0ai"]
+animation = &"weapon_facing/facing_south"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ef8ry"]
+animation = &"weapon_facing/facing_west"
+
+[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_05e0v"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_xhi4g")
+blend_point_0/pos = 0.0
+blend_point_1/node = SubResource("AnimationNodeAnimation_o71io")
+blend_point_1/pos = 1.0
+blend_point_2/node = SubResource("AnimationNodeAnimation_tk0ai")
+blend_point_2/pos = 2.0
+blend_point_3/node = SubResource("AnimationNodeAnimation_ef8ry")
+blend_point_3/pos = 3.0
+min_space = 0.0
+max_space = 3.0
+snap = 1.0
+value_label = "dirrection"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_oxa1b"]
+animation = &"weapon_stab/cancel_north"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_hi2lp"]
+animation = &"weapon_stab/cancel_east"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_l5jru"]
+animation = &"weapon_stab/cancel_south"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_yj0qa"]
+animation = &"weapon_stab/cancel_west"
+
+[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_vcod6"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_oxa1b")
+blend_point_0/pos = 0.0
+blend_point_1/node = SubResource("AnimationNodeAnimation_hi2lp")
+blend_point_1/pos = 1.0
+blend_point_2/node = SubResource("AnimationNodeAnimation_l5jru")
+blend_point_2/pos = 2.0
+blend_point_3/node = SubResource("AnimationNodeAnimation_yj0qa")
+blend_point_3/pos = 3.0
+min_space = 0.0
+max_space = 3.0
+snap = 1.0
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5qk7e"]
+animation = &"weapon_stab/motion_north"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_8ctes"]
+animation = &"weapon_stab/motion_east"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ypajl"]
+animation = &"weapon_stab/motion_south"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_dxni3"]
+animation = &"weapon_stab/motion_west"
+
+[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_1hp1m"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_5qk7e")
+blend_point_0/pos = 0.0
+blend_point_1/node = SubResource("AnimationNodeAnimation_8ctes")
+blend_point_1/pos = 1.0
+blend_point_2/node = SubResource("AnimationNodeAnimation_ypajl")
+blend_point_2/pos = 2.0
+blend_point_3/node = SubResource("AnimationNodeAnimation_dxni3")
+blend_point_3/pos = 3.0
+min_space = 0.0
+max_space = 3.0
+snap = 1.0
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5iux8"]
+animation = &"weapon_stab/ready_north"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_1owjb"]
+animation = &"weapon_stab/ready_east"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_qgoqt"]
+animation = &"weapon_stab/ready_south"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_o1i4j"]
+animation = &"weapon_stab/ready_west"
+
+[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_ix6t5"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_5iux8")
+blend_point_0/pos = 0.0
+blend_point_1/node = SubResource("AnimationNodeAnimation_1owjb")
+blend_point_1/pos = 1.0
+blend_point_2/node = SubResource("AnimationNodeAnimation_qgoqt")
+blend_point_2/pos = 2.0
+blend_point_3/node = SubResource("AnimationNodeAnimation_o1i4j")
+blend_point_3/pos = 3.0
+min_space = 0.0
+max_space = 3.0
+snap = 1.0
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_mvi34"]
+animation = &"weapon_swing/motion_north"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_jbrsl"]
+animation = &"weapon_swing/cancel_east"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_nohiw"]
+animation = &"weapon_swing/cancel_south"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_07ro2"]
+animation = &"weapon_swing/cancel_west"
+
+[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_yytka"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_mvi34")
+blend_point_0/pos = 0.0
+blend_point_1/node = SubResource("AnimationNodeAnimation_jbrsl")
+blend_point_1/pos = 1.0
+blend_point_2/node = SubResource("AnimationNodeAnimation_nohiw")
+blend_point_2/pos = 2.0
+blend_point_3/node = SubResource("AnimationNodeAnimation_07ro2")
+blend_point_3/pos = 3.0
+min_space = 0.0
+max_space = 3.0
+snap = 1.0
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_4r11q"]
+animation = &"weapon_swing/motion_north"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_gm5i1"]
+animation = &"weapon_swing/motion_east"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_1yfqw"]
+animation = &"weapon_swing/motion_south"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_c5io5"]
+animation = &"weapon_swing/motion_west"
+
+[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_cta04"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_4r11q")
+blend_point_0/pos = 0.0
+blend_point_1/node = SubResource("AnimationNodeAnimation_gm5i1")
+blend_point_1/pos = 1.0
+blend_point_2/node = SubResource("AnimationNodeAnimation_1yfqw")
+blend_point_2/pos = 2.0
+blend_point_3/node = SubResource("AnimationNodeAnimation_c5io5")
+blend_point_3/pos = 3.0
+min_space = 0.0
+max_space = 3.0
+snap = 1.0
+value_label = "dirrection"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_dxxmm"]
+animation = &"weapon_swing/ready_north"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_8xkio"]
+animation = &"weapon_swing/ready_east"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_qih6h"]
+animation = &"weapon_swing/ready_south"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_cc40s"]
+animation = &"weapon_swing/ready_west"
+
+[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_y8q8e"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_dxxmm")
+blend_point_0/pos = 0.0
+blend_point_1/node = SubResource("AnimationNodeAnimation_8xkio")
+blend_point_1/pos = 1.0
+blend_point_2/node = SubResource("AnimationNodeAnimation_qih6h")
+blend_point_2/pos = 2.0
+blend_point_3/node = SubResource("AnimationNodeAnimation_cc40s")
+blend_point_3/pos = 3.0
+min_space = 0.0
+max_space = 3.0
+snap = 1.0
+value_label = "dirrection"
+blend_mode = 1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_wunu1"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_83kmq"]
+advance_mode = 2
+advance_condition = &"Swing"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_br30j"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_4nla6"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_f7fpi"]
+advance_mode = 2
+advance_condition = &"Stab"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_od8kq"]
+switch_mode = 2
+advance_mode = 2
+advance_condition = &"PlayMotion"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ro0k6"]
+switch_mode = 2
+advance_mode = 2
+advance_condition = &"Cancel"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ufpmg"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_nnpx6"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_8wuix"]
+switch_mode = 2
+advance_mode = 2
+advance_condition = &"PlayMotion"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_npxte"]
+advance_mode = 2
+advance_condition = &"Cancel"
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_dl25k"]
+states/End/position = Vector2(887, 95)
+states/Idel/node = SubResource("AnimationNodeBlendSpace1D_05e0v")
+states/Idel/position = Vector2(368, 95)
+states/StabCancel/node = SubResource("AnimationNodeBlendSpace1D_vcod6")
+states/StabCancel/position = Vector2(445, 181.983)
+states/StabMotion/node = SubResource("AnimationNodeBlendSpace1D_1hp1m")
+states/StabMotion/position = Vector2(795, 181.983)
+states/StabReady/node = SubResource("AnimationNodeBlendSpace1D_ix6t5")
+states/StabReady/position = Vector2(621, 181.983)
+states/Start/position = Vector2(200, 95)
+states/SwingCancel/node = SubResource("AnimationNodeBlendSpace1D_yytka")
+states/SwingCancel/position = Vector2(445, -30)
+states/SwingMotion/node = SubResource("AnimationNodeBlendSpace1D_cta04")
+states/SwingMotion/position = Vector2(795, -30)
+states/SwingReady/node = SubResource("AnimationNodeBlendSpace1D_y8q8e")
+states/SwingReady/position = Vector2(621, -30)
+transitions = ["Start", "Idel", SubResource("AnimationNodeStateMachineTransition_wunu1"), "Idel", "SwingReady", SubResource("AnimationNodeStateMachineTransition_83kmq"), "SwingMotion", "Idel", SubResource("AnimationNodeStateMachineTransition_br30j"), "SwingCancel", "Idel", SubResource("AnimationNodeStateMachineTransition_4nla6"), "Idel", "StabReady", SubResource("AnimationNodeStateMachineTransition_f7fpi"), "StabReady", "StabMotion", SubResource("AnimationNodeStateMachineTransition_od8kq"), "StabReady", "StabCancel", SubResource("AnimationNodeStateMachineTransition_ro0k6"), "StabCancel", "Idel", SubResource("AnimationNodeStateMachineTransition_ufpmg"), "StabMotion", "Idel", SubResource("AnimationNodeStateMachineTransition_nnpx6"), "SwingReady", "SwingMotion", SubResource("AnimationNodeStateMachineTransition_8wuix"), "SwingReady", "SwingCancel", SubResource("AnimationNodeStateMachineTransition_npxte")]
+graph_offset = Vector2(0, -108.949)
+
+[node name="HandNode" type="Node2D" node_paths=PackedStringArray("animation_tree", "hand_sprite", "weapon_node")]
 script = ExtResource("1_dwep3")
+facing_dir = 2
+animation_is_ready = true
 main_hand_sprite_sheet = ExtResource("1_h8dad")
 off_hand_sprite_sheet = ExtResource("3_6v6cl")
 two_hand_sprite_sheet = ExtResource("4_osigu")
-animation = NodePath("AnimationPlayer")
+animation_tree = NodePath("AnimationTree")
 hand_sprite = NodePath("HandSprite")
 weapon_node = NodePath("WeaponNode")
+ready_animation_name = null
+weapon_z_offset = 1
 weapon_under_hand_z_offset = -1
 weapon_over_hand_z_offset = 1
 
@@ -149,14 +463,20 @@ libraries = {
 }
 
 [node name="WeaponNode" type="Node2D" parent="." node_paths=PackedStringArray("overhand_weapon_sprite", "underhand_weapon_sprite")]
+z_index = 1
 position = Vector2(-4, 14)
 script = ExtResource("2_ga04f")
+edit_mode = false
+hand = 0
+flip_sprite = false
+unflip_offhand = false
 main_hand_position = Vector2(-4, 14)
 off_hand_offset = Vector2(-8, 0)
 two_hand_offset = Vector2(-4, 0)
 overhand_weapon_sprite = NodePath("WeaponOverHandSprite")
 underhand_weapon_sprite = NodePath("WeaponUnderHandSprite")
 rotation_factor = 1.0
+custom_rotation = 0
 weapon_texture = ExtResource("5_wntwi")
 
 [node name="WeaponUnderHandSprite" type="Sprite2D" parent="WeaponNode"]
@@ -177,3 +497,20 @@ frame = 1
 texture = ExtResource("1_h8dad")
 hframes = 12
 vframes = 4
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+root_node = NodePath("../HandSprite")
+callback_mode_process = 2
+tree_root = SubResource("AnimationNodeStateMachine_dl25k")
+anim_player = NodePath("../AnimationPlayer")
+parameters/conditions/Cancel = false
+parameters/conditions/PlayMotion = false
+parameters/conditions/Stab = false
+parameters/conditions/Swing = false
+parameters/Idel/blend_position = 2
+parameters/StabCancel/blend_position = 2
+parameters/StabMotion/blend_position = 2
+parameters/StabReady/blend_position = 2
+parameters/SwingCancel/blend_position = 2
+parameters/SwingMotion/blend_position = 2
+parameters/SwingReady/blend_position = 2

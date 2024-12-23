@@ -1,5 +1,7 @@
 class_name MapPos
 
+enum Directions {North, East, South, West}
+
 static func Parse(val)->MapPos:
 	if val is Vector2i:
 		return MapPos.Vector2i(val)
@@ -25,8 +27,6 @@ static func String(val:String)->MapPos:
 	else:
 		printerr("Failed to parse MapPos from string '%s'" % val)
 	return MapPos.new(0,0)
-
-enum Directions {North, East, South, West}
 
 static func Array(arr:Array)->MapPos:
 	if arr.size() == 2:

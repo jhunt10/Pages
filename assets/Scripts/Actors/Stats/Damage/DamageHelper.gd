@@ -83,7 +83,7 @@ static func handle_attack(attacker:BaseActor, defender:BaseActor, damage_datas,
 	print("################## Attack Done #######################")
 	return attack_event
 
-static func handle_push(moving_actor:BaseActor, pushed_actor:BaseActor, game_state:GameStateData):
+static func handle_push_damage(moving_actor:BaseActor, pushed_actor:BaseActor, game_state:GameStateData):
 	var winner = moving_actor
 	var loser = pushed_actor
 	var base_damage = winner.stats.get_stat("Strength", 0)

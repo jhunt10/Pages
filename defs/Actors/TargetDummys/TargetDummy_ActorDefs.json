@@ -67,5 +67,31 @@
 		"Stats":{
 			"Ward": 50
 		}
+	},
+	{
+		"ParentKey": "TestTarget",
+		"ActorKey": "MovingTarget",
+		"Details":{
+			"DisplayName": "Moving Target",
+			"SnippetDesc": "A moving target made for testing.",
+			"Description": "Description.",
+			"Tags": ["AnActorTag", "Dummy"],
+			"LargeIcon":"TestTarget_Armored.png",
+			"SmallIcon":"TestTarget_Armored.png"
+		},
+		"SpriteSheet": "MovingTarget_SpriteSheet.png",
+		"SpriteFrameWH": [12,4],
+		"SpriteOffset": [0,-16],
+		"PortraitRect":[12, 31, 24, 24],
+		"CorpseSprite": "TargetCorpse.png",
+		"AutoQueing": true,
+		"LeavesCorpse": true,
+		"Stats":{
+            "Speed":20,
+			"PPR": 4
+		},
+        "AiData":{
+            "PrebuiltQueArr":["MoveLeft", "MoveLeft", "MoveRight", "MoveRight"]
+        }
 	}
 ]

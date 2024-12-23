@@ -9,7 +9,7 @@ signal turn_ended
 # This is just here because I don't want all the Holders to have to connect dirrectly to ActionQueController
 signal round_starting
 signal round_ended
-signal turn_failed
+signal action_failed
 
 signal equipment_changed
 signal bag_items_changed
@@ -19,6 +19,7 @@ signal effacts_changed
 
 # Actor holds no references to the current map state so this method is called by MapState.set_actor_pos()
 signal on_move(old_pos:MapPos, new_pos:MapPos, move_data:Dictionary)
+signal on_move_failed(cur_pos:MapPos)
 signal on_death()
 signal sprite_changed()
 
@@ -53,7 +54,10 @@ var Tags:Array = []
 
 var spawn_map_layer
 
-var _allow_auto_que:bool = false
+var use_ai:bool: 
+	get: return ai_def.size() > 0
+var ai_action_list:Array = []
+var ai_def:Dictionary = {}
 
 var is_player:bool = false
 var is_dead:bool = false
@@ -62,14 +66,8 @@ func _init(key:String, load_path:String, def:Dictionary, id:String, data:Diction
 	super(key, load_path, def, id, data)
 	spawn_map_layer = _def.get('SpawnOnMapLayer', MapStateData.DEFAULT_ACTOR_LAYER)
 	
-	var auto_que_list = _def.get("AutoQue", [])
-	if auto_que_list is Array:
-		_allow_auto_que = auto_que_list.size() > 0
-	elif auto_que_list:
-		_allow_auto_que = true
-	
 	var stat_data = _def["Stats"]
-	
+	ai_def = get_load_val("AiData", {})
 	sprite = ActorSprite.new(self)
 	stats = StatHolder.new(self, stat_data)
 	effects = EffectHolder.new(self)
@@ -166,11 +164,18 @@ func die():
 	#node.set_corpse_sprite()
 	#node.queue_death()
 	
-func auto_build_que(current_turn:int):
-	if !_allow_auto_que:
+func auto_build_que(current_turn:int=0):
+	var ai_data = ai_def
+	if !ai_data:
 		return
-	var actions = AiHandler.build_action_que(self, CombatRootControl.Instance.GameState)
-	for action_name in actions:
+	
+	var action_keys_que = []
+	if ai_data.has("PrebuiltQueArr"):
+		action_keys_que = ai_data['PrebuiltQueArr']
+	else:
+		action_keys_que = AiHandler.build_action_que(self, CombatRootControl.Instance.GameState)
+		
+	for action_name in action_keys_que:
 		var action = ActionLibrary.get_action(action_name)
 		if action:
 			#print("Queing Page: " + action_name)

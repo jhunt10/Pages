@@ -61,7 +61,7 @@ func create_actor_node(actor:BaseActor, map_pos:MapPos):
 	actor_tile_map.add_child(new_node)
 	new_node.position = actor_tile_map.map_to_local(map_pos.to_vector2i())
 	new_node.set_actor(actor)
-	new_node.set_display_pos(map_pos)
+	new_node.force_display_pos(map_pos)
 	new_node.visible = true
 	if LOGGING: print("MapControllerNode: Created Actor Node: %s" % [actor.Id])
 
@@ -131,25 +131,25 @@ func _sync_positions():
 	#_sync_actor_positions()
 	_sync_missile_positions()
 
-func _sync_actor_positions():
-	if Engine.is_editor_hint(): return
-	for node:ActorNode in actor_nodes.values():
-		var actor = game_state.get_actor(node.Actor.Id, true)
-		if !node:
-			if LOGGING: printerr("Failed to find node for actor: ", actor.Id)
-			continue
-		var pos = game_state.MapState.get_actor_pos(actor)
-		node.set_display_pos(pos)
-		var local_pos = actor_tile_map.map_to_local(Vector2i(pos.x, pos.y))
-		
-		# Set actor parent if not already set
-		var current_partent = node.get_parent()
-		if current_partent != actor_tile_map and current_partent != null:
-			current_partent.remove_child(node)
-			actor_tile_map.add_child(node)
-		elif current_partent == null:
-			actor_tile_map.add_child(node)
-		node.position = local_pos
+#func _sync_actor_positions():
+	#if Engine.is_editor_hint(): return
+	#for node:ActorNode in actor_nodes.values():
+		#var actor = game_state.get_actor(node.Actor.Id, true)
+		#if !node:
+			#if LOGGING: printerr("Failed to find node for actor: ", actor.Id)
+			#continue
+		#var pos = game_state.MapState.get_actor_pos(actor)
+		#node.set_display_pos(pos)
+		#var local_pos = actor_tile_map.map_to_local(Vector2i(pos.x, pos.y))
+		#
+		## Set actor parent if not already set
+		#var current_partent = node.get_parent()
+		#if current_partent != actor_tile_map and current_partent != null:
+			#current_partent.remove_child(node)
+			#actor_tile_map.add_child(node)
+		#elif current_partent == null:
+			#actor_tile_map.add_child(node)
+		#node.position = local_pos
 
 func _sync_missile_positions():
 	if Engine.is_editor_hint(): return

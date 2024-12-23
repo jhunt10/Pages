@@ -308,7 +308,7 @@ static func _search_for_files(path:String,  sufix:String):
 
 static func _merge_defs(child:Dictionary, parent:Dictionary)->Dictionary:
 	var new_data = parent.duplicate()
-	for key in child.keys():
+	for key:String in child.keys():
 		var val = child[key]
 		if val is Dictionary:
 			val = _merge_defs(child[key], parent.get(key, {}))
@@ -317,7 +317,7 @@ static func _merge_defs(child:Dictionary, parent:Dictionary)->Dictionary:
 			if val.size() == 0:
 				val = parent.get(key, [])
 			# Merge list only when Strings
-			if val[0] is String and not key.begins_with("Spawn"):
+			if val[0] is String and not key.begins_with("Spawn") and not key.ends_with("Arr"):
 				var new_list = []
 				for arr_val in parent.get(key, []):
 					if not new_list.has(arr_val):

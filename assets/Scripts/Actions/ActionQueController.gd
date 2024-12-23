@@ -71,13 +71,14 @@ func _start_round():
 	que_index = 0
 	sub_action_timer = 0
 	
-	for actor:BaseActor in CombatRootControl.Instance.GameState.list_actors():
-		if actor._allow_auto_que:
+	var game_state = CombatRootControl.Instance.GameState
+	for actor:BaseActor in game_state.list_actors():
+		if actor.use_ai:
 			actor.auto_build_que(0)
 	
 	execution_state = ActionStates.Running
 	start_of_round.emit()
-	start_of_round_with_state.emit(CombatRootControl.Instance.GameState)
+	start_of_round_with_state.emit(game_state)
 	# Emit start of round for actors
 	for que_id in _que_order:
 		var que:ActionQue = _action_ques[que_id]

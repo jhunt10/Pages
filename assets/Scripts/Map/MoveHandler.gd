@@ -48,28 +48,36 @@ static func handle_movement(game_state:GameStateData, moving_actor:BaseActor,
 		if LOGGING: 
 			print("\tSpot is not traversable" )
 			print("------------------------------")
+		game_state.MapState.set_actor_pos(moving_actor, actor_pos)
 		return false
 	
 	# Get actor in same z layer as where we are going
 	var occupying_actors:Array = game_state.MapState.get_actors_at_pos(Vector2i(new_pos.x, new_pos.y))
-	var blocking_actor = null
+	var blocking_actor:BaseActor = null
 	if LOGGING: print("\t%s occupying_actors found" % [occupying_actors.size()])
 	for b_act:BaseActor in occupying_actors:
 		var b_act_pos = game_state.MapState.get_actor_pos(b_act)
 		if b_act_pos.z == new_pos.z:
 			blocking_actor = b_act
-			
+	
+	# Handle Push
 	if blocking_actor:
 		if LOGGING: print("\tFound blocking actor: " + blocking_actor.ActorKey)
 		if not PushableMovement.has(move_type):
 			if LOGGING: print("\t\tPush NotAllowed")
+			game_state.MapState.set_actor_pos(moving_actor, actor_pos)
 			return false
 		var push_res = _try_push(game_state, moving_actor, blocking_actor, relative_movement)
 		if push_res:
 			if LOGGING: print("\t\tPush success")
+			DamageHelper.handle_push_damage(moving_actor, blocking_actor, game_state)
+			var blocking_node:ActorNode = CombatRootControl.Instance.MapController.actor_nodes.get(blocking_actor.Id)
+			blocking_node.set_move_destination(push_res, 24, false)
 			game_state.MapState.set_actor_pos(blocking_actor, push_res)
 		else:
 			if LOGGING: print("\t\tPush Failed")
+			DamageHelper.handle_push_damage(blocking_actor, moving_actor, game_state)
+			game_state.MapState.set_actor_pos(moving_actor, actor_pos)
 			return false
 	
 	game_state.MapState.set_actor_pos(moving_actor, new_pos)
@@ -79,7 +87,6 @@ static func handle_movement(game_state:GameStateData, moving_actor:BaseActor,
 
 # Returns new pos for pushed_actor if the pushed_actor can be pushed
 static func _try_push(game_state:GameStateData, moving_actor:BaseActor, pushed_actor:BaseActor, relative_movemnt:MapPos)->MapPos:
-	DamageHelper.handle_push(moving_actor, pushed_actor, game_state)
 	
 	if moving_actor.stats.get_stat("Mass") < pushed_actor.stats.get_stat("Mass"):
 		return null
