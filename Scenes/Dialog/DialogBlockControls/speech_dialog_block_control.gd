@@ -82,7 +82,8 @@ func set_dailog_block(block:SpeechDialogBlock):
 	self.dialog_block = block
 	text_box.clear()
 	text_box.text = ''
-	if dialog_block.get_block_data().keys().has("Speaker"):
+	var block_data = dialog_block.get_block_data()
+	if block_data.keys().has("Speaker") and block_data.get("Speaker", null):
 		speaker_label.text = dialog_block.get_block_data().get("Speaker", "") + ": "
 	else:
 		speaker_label.hide()

@@ -138,13 +138,13 @@ func open_tutorial():
 		current_scene.queue_free()
 	StoryState.start_new_story("Tutorial")
 	var combat_scene:CombatRootControl = load("res://Scenes/Combat/combat_scene.tscn").instantiate()
-	combat_scene.load_init_state("res://Scenes/Maps/Tutorial/tutorial_map.tscn")
+	combat_scene.load_init_state("res://Scenes/Maps/StoryMaps/1_StartingMap/starting_map.tscn")
 	current_scene = combat_scene
 	self.add_child(current_scene)
 	
 	var dialog:DialogControl = load("res://Scenes/Dialog/dialog_control.tscn").instantiate()
 	dialog.scene_root = combat_scene
-	dialog.load_dialog_script("res://data/DialogScripts/TutorialDialog.json")
+	dialog.load_dialog_script("res://Scenes/Maps/StoryMaps/1_StartingMap/start_game_dialog_script.json")
 	combat_scene.camera.canvas_layer.add_child(dialog)
 	
 func open_dev_tools():

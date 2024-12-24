@@ -4,6 +4,7 @@ extends Node2D
 
 const LOGGING = false
 
+signal reached_motion_destination
 
 enum FACING_DIRS {North, East, South, West}
 const FACING_ANIMATION:String = 'facing/facing'
@@ -216,27 +217,54 @@ var is_moving:bool
 var is_walking:bool:
 	get: return current_body_animation_action == WALK_ANIM_NAME
 
-func set_move_destination(map_pos:MapPos, frames_to_reach:int, start_walking_if_not:bool=true):
+func set_move_destination(map_pos:MapPos, frames_to_reach:int, start_walking_if_not:bool=true, speed_scale:float=1):
 	movement_start_pos = actor_motion_node.position
 	var tile_map = get_parent()  as TileMapLayer
 	if not tile_map: return
-	
+	if map_pos.dir != facing_dir:
+		set_facing_dir(map_pos.dir)
 	movement_dest_pos = tile_map.map_to_local(map_pos.to_vector2i())  - self.position
 	var secs_to_reach = (frames_to_reach * ActionQueController.SUB_ACTION_FRAME_TIME) 
 	var dist = movement_start_pos.distance_to(movement_dest_pos)
-	movement_speed =  dist / secs_to_reach * CombatRootControl.get_time_scale()
+	movement_speed =  dist / secs_to_reach * CombatRootControl.get_time_scale() * speed_scale
 	is_moving = movement_start_pos.distance_to(movement_dest_pos) > 0.01
 	print("Starting Movement: FtR: %s | TtR: %s | Dist: %s | MS: %s " % [frames_to_reach, secs_to_reach,dist, movement_speed ])
 	print("Start Pos: %s | Target Pos: %s" % [movement_start_pos, movement_dest_pos])
-	if start_walking_if_not and not is_walking:
-		start_walk_animation()
+	if  is_moving:
+		if start_walking_if_not and not is_walking:
+			start_walk_animation()
+	else:
+		_start_next_queued_movement()
+	
 	pass
 
+var _movement_que:Array
+func que_scripted_movement(path_pos_data:Array):
+	if path_pos_data.size() == 0:
+		return
+	for pos in path_pos_data:
+		_movement_que.append(pos)
+	if not is_moving:
+		_start_next_queued_movement()
+
 func _on_reached_dest():
-	is_moving = false
 	if is_walking:
 		finsh_walk_animation()
+	is_moving = false
+	if _movement_que.size() > 0:
+		_start_next_queued_movement()
+	else:
+		reached_motion_destination.emit()
 
+func _start_next_queued_movement():
+	if _movement_que.size() > 0:
+		var next_pos = _movement_que[0]
+		_movement_que.remove_at(0)
+		print("--Starting Queued Pos: %s " % [next_pos['Pos']])
+		var pos = next_pos['Pos']
+		var frames = next_pos['Frames']
+		var speed = next_pos['Speed']
+		set_move_destination(pos, frames, true, speed)
 
 ####################################################
 #			BODY ANIMATIONS
@@ -337,7 +365,7 @@ func execute_animation_motion():
 		var animation_name = current_body_animation_action.replace("/ready_", "/motion_")
 		#_start_anim(animation_name)
 		if LOGGING: print("Playing Motion Animation: " + animation_name)
-	elif main_hand_node.current_animation:
+	elif main_hand_node.readied_animation:
 		main_hand_node.execute_animation()
 
 func cancel_current_animation():

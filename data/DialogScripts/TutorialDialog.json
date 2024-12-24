@@ -1,5 +1,13 @@
 [
 	{
+		"BlockTag": "MoveActor",
+		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_MoveActor.gd",
+		"TargetActorId": "Player1",
+		"MarkerPosName": "MF:Pos1",
+		"FollowActor": true,
+		"SpeedScale": 1
+	},
+	{
 		"BlockTag": "Start",
 		"BlockScript": "res://Scenes/Dialog/DialogBlocks/Custom/DialogBlock_TutorialConditions.gd",
 		"FreezeCamera": true

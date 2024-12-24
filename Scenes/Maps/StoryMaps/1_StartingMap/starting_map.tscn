@@ -1,22 +1,26 @@
-[gd_scene load_steps=28 format=4 uid="uid://bmgbtylwcdprj"]
+[gd_scene load_steps=33 format=4 uid="uid://cqru24o8nm3be"]
 
-[ext_resource type="Script" path="res://assets/Scripts/Map/map_controler_node.gd" id="1_7vcol"]
-[ext_resource type="Texture2D" uid="uid://dxan6lyrg8db3" path="res://assets/Sprites/TileSets/GrassPath_TileSheet.png" id="2_0pm6g"]
-[ext_resource type="Texture2D" uid="uid://cws63rlm6rfno" path="res://assets/Sprites/TileSets/TerrainEditingTileSet.png" id="3_sbtdh"]
-[ext_resource type="Script" path="res://Scenes/Maps/tile_map_outputer.gd" id="4_gy2i1"]
-[ext_resource type="Texture2D" uid="uid://bbyc1lssrgqcw" path="res://assets/Sprites/TileSets/DisplayTileSet.png" id="5_yfhgy"]
-[ext_resource type="PackedScene" uid="uid://bpurspf6xbf1h" path="res://Scenes/Combat/UiNodes/TargetAreaDisplay/target_area_display_node.tscn" id="6_u68pr"]
-[ext_resource type="Texture2D" uid="uid://cp7wugglf6mfb" path="res://assets/Sprites/TileSets/Tree_TileSet.png" id="7_igwdp"]
-[ext_resource type="Texture2D" uid="uid://kh2uekpf4sb8" path="res://Scenes/Maps/MapEditing/ActorSpawnSprite.png" id="8_u580h"]
-[ext_resource type="Texture2D" uid="uid://den150d8i4nwt" path="res://assets/Sprites/TileSets/House_TileSet.png" id="9_kis1k"]
-[ext_resource type="Script" path="res://Scenes/Maps/MapEditing/actor_spawn_node.gd" id="9_nunat"]
-[ext_resource type="Texture2D" uid="uid://bf0qdu0v1wdy6" path="res://defs/Actors/Tutorial/TutorShroom.png" id="10_of813"]
-[ext_resource type="Texture2D" uid="uid://bds8rjmyltjys" path="res://assets/Sprites/TileSets/Decor_TileSet.png" id="11_gcylw"]
-[ext_resource type="Script" path="res://Scenes/Maps/MapEditing/map_marker_node.gd" id="13_3lu1a"]
-[ext_resource type="Texture2D" uid="uid://b3q58s7620mah" path="res://defs/Actors/TestActorSprite.png" id="13_bb143"]
+[ext_resource type="Script" path="res://assets/Scripts/Map/map_controler_node.gd" id="1_8owwq"]
+[ext_resource type="Texture2D" uid="uid://dxan6lyrg8db3" path="res://assets/Sprites/TileSets/GrassPath_TileSheet.png" id="2_rfkbp"]
+[ext_resource type="Texture2D" uid="uid://cws63rlm6rfno" path="res://assets/Sprites/TileSets/TerrainEditingTileSet.png" id="3_pvwfv"]
+[ext_resource type="Script" path="res://Scenes/Maps/tile_map_outputer.gd" id="4_dhkrj"]
+[ext_resource type="Texture2D" uid="uid://bbyc1lssrgqcw" path="res://assets/Sprites/TileSets/DisplayTileSet.png" id="5_qg1n5"]
+[ext_resource type="Texture2D" uid="uid://cp7wugglf6mfb" path="res://assets/Sprites/TileSets/Tree_TileSet.png" id="6_ur0qr"]
+[ext_resource type="Texture2D" uid="uid://bds8rjmyltjys" path="res://assets/Sprites/TileSets/Decor_TileSet.png" id="7_f8uo4"]
+[ext_resource type="Texture2D" uid="uid://den150d8i4nwt" path="res://assets/Sprites/TileSets/House_TileSet.png" id="8_gc8n7"]
+[ext_resource type="PackedScene" uid="uid://bpurspf6xbf1h" path="res://Scenes/Combat/UiNodes/TargetAreaDisplay/target_area_display_node.tscn" id="9_d87j1"]
+[ext_resource type="Texture2D" uid="uid://kh2uekpf4sb8" path="res://Scenes/Maps/MapEditing/ActorSpawnSprite.png" id="10_hh112"]
+[ext_resource type="Script" path="res://Scenes/Maps/MapEditing/actor_spawn_node.gd" id="11_md0j5"]
+[ext_resource type="Texture2D" uid="uid://cj6vsmbdbfmqb" path="res://defs/Actors/NPCs/MnFg/Sprites/MysteriousFigure_SpriteSheet.png" id="12_246fu"]
+[ext_resource type="Texture2D" uid="uid://bf0qdu0v1wdy6" path="res://defs/Actors/Tutorial/TutorShroom.png" id="12_w22o7"]
+[ext_resource type="Texture2D" uid="uid://d1rfl5p8pk2qv" path="res://Scenes/Maps/MapEditing/MapMarker.png" id="13_bfpo1"]
+[ext_resource type="Script" path="res://Scenes/Maps/MapEditing/map_marker_node.gd" id="14_t0c8n"]
+[ext_resource type="Script" path="res://Scenes/Maps/MapEditing/map_path_node.gd" id="16_0ajgq"]
+[ext_resource type="Texture2D" uid="uid://lfjvqyylrvku" path="res://Scenes/Maps/MapEditing/MapPathMarker.png" id="17_ohkco"]
+[ext_resource type="Script" path="res://Scenes/Maps/MapEditing/map_path_point_node.gd" id="18_tvogg"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lwpvo"]
-texture = ExtResource("2_0pm6g")
+texture = ExtResource("2_rfkbp")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 1:0/0 = 0
@@ -408,7 +412,7 @@ terrain_set_0/terrain_1/color = Color(0.714138, 0.0121868, 0.724753, 1)
 sources/1 = SubResource("TileSetAtlasSource_lwpvo")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6gfyt"]
-texture = ExtResource("3_sbtdh")
+texture = ExtResource("3_pvwfv")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 1:0/0 = 0
@@ -432,7 +436,7 @@ tile_size = Vector2i(32, 32)
 sources/0 = SubResource("TileSetAtlasSource_6gfyt")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yyoo6"]
-texture = ExtResource("5_yfhgy")
+texture = ExtResource("5_qg1n5")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 1:0/0 = 0
@@ -456,7 +460,7 @@ tile_size = Vector2i(32, 32)
 sources/1 = SubResource("TileSetAtlasSource_yyoo6")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_n7gid"]
-texture = ExtResource("7_igwdp")
+texture = ExtResource("6_ur0qr")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 0:0/0/z_index = 8
@@ -1011,8 +1015,11 @@ terrain_set_0/terrain_1/name = "Terrain 1"
 terrain_set_0/terrain_1/color = Color(0.767167, 0.22471, 0, 1)
 sources/0 = SubResource("TileSetAtlasSource_n7gid")
 
+[sub_resource type="TileSet" id="TileSet_5ipcw"]
+tile_size = Vector2i(32, 32)
+
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ku4ha"]
-texture = ExtResource("11_gcylw")
+texture = ExtResource("7_f8uo4")
 texture_region_size = Vector2i(32, 64)
 0:0/0 = 0
 1:0/0 = 0
@@ -1020,7 +1027,7 @@ texture_region_size = Vector2i(32, 64)
 1:1/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3hxgx"]
-texture = ExtResource("9_kis1k")
+texture = ExtResource("8_gc8n7")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 1:0/0 = 0
@@ -1041,14 +1048,14 @@ tile_size = Vector2i(32, 32)
 sources/0 = SubResource("TileSetAtlasSource_ku4ha")
 sources/1 = SubResource("TileSetAtlasSource_3hxgx")
 
-[sub_resource type="TileSet" id="TileSet_5ipcw"]
-tile_size = Vector2i(32, 32)
-
 [sub_resource type="TileSet" id="TileSet_eodif"]
 tile_size = Vector2i(32, 32)
 
+[sub_resource type="TileSet" id="TileSet_o1yif"]
+tile_size = Vector2i(32, 32)
+
 [node name="MapNode" type="Node2D" node_paths=PackedStringArray("actor_tile_map", "item_tile_map", "terrain_path_map", "marker_tile_map")]
-script = ExtResource("1_7vcol")
+script = ExtResource("1_8owwq")
 actor_tile_map = NodePath("ActorTileMapLayer")
 item_tile_map = NodePath("ItemTileMapLayer")
 terrain_path_map = NodePath("TerrainMap")
@@ -1061,7 +1068,7 @@ tile_set = SubResource("TileSet_4uxfv")
 [node name="TerrainMap" type="TileMapLayer" parent="."]
 tile_map_data = PackedByteArray("AAADAAMAAAAAAAAAAAADAAQAAAACAAAAAAADAAUAAAACAAAAAAADAAYAAAACAAAAAAADAAcAAAACAAAAAAAEAAEAAAAAAAAAAAAEAAQAAAACAAAAAAAEAAUAAAACAAAAAAAEAAYAAAACAAAAAAAEAAcAAAACAAAAAAAFAAEAAAACAAAAAAAFAAIAAAAAAAAAAAAFAAMAAAACAAAAAAAFAAQAAAACAAAAAAAFAAUAAAACAAAAAAAFAAYAAAACAAAAAAAFAAcAAAACAAAAAAAGAAEAAAAAAAAAAAAGAAIAAAACAAAAAAAGAAMAAAACAAAAAAAGAAQAAAACAAAAAAAGAAUAAAACAAAAAAAGAAYAAAACAAAAAAAGAAcAAAACAAAAAAABAAQAAAAAAAAAAAACAAQAAAAAAAAAAAAHAAQAAAACAAAAAAAIAAQAAAACAAAAAAAJAAQAAAACAAAAAAAKAAQAAAACAAAAAAALAAQAAAACAAAAAAAMAAQAAAACAAAAAAANAAQAAAACAAAAAAAHAAMAAAACAAAAAAAHAAUAAAACAAAAAAAIAAMAAAACAAAAAAAIAAUAAAACAAAAAAAJAAMAAAAAAAAAAAAJAAUAAAACAAAAAAAKAAMAAAAAAAAAAAAKAAUAAAACAAAAAAALAAMAAAACAAAAAAALAAUAAAACAAAAAAAMAAMAAAACAAAAAAAMAAUAAAACAAAAAAANAAMAAAACAAAAAAANAAUAAAAAAAAAAAAHAAIAAAACAAAAAAAIAAIAAAACAAAAAAAJAAIAAAAAAAAAAAAKAAIAAAAAAAAAAAALAAIAAAAAAAAAAAAMAAIAAAACAAAAAAANAAIAAAACAAAAAAAJAAEAAAAAAAAAAAAKAAEAAAAAAAAAAAALAAEAAAACAAAAAAAMAAEAAAACAAAAAAAOAAMAAAACAAAAAAAOAAQAAAACAAAAAAACAAMAAAAAAAAAAAACAAUAAAACAAAAAAACAAYAAAACAAAAAAABAAYAAAACAAAAAAAHAAYAAAACAAAAAAAIAAYAAAACAAAAAAAJAAYAAAACAAAAAAAHAAcAAAACAAAAAAAIAAcAAAACAAAAAAALABAAAAACAAAAAAALABEAAAACAAAAAAALABIAAAACAAAAAAALABMAAAACAAAAAAAMABAAAAACAAAAAAAMABEAAAACAAAAAAAMABIAAAACAAAAAAAMABMAAAACAAAAAAAKABEAAAACAAAAAAAKABIAAAACAAAAAAAKABMAAAACAAAAAAANABEAAAACAAAAAAANABIAAAACAAAAAAAGABIAAAACAAAAAAAHABIAAAACAAAAAAAIABIAAAACAAAAAAAJABIAAAACAAAAAAAGABEAAAACAAAAAAAHABEAAAACAAAAAAACAA8AAAACAAAAAAACABAAAAACAAAAAAACABEAAAACAAAAAAACABIAAAACAAAAAAADAA8AAAACAAAAAAADABAAAAACAAAAAAADABEAAAACAAAAAAADABIAAAACAAAAAAABABAAAAACAAAAAAABABEAAAACAAAAAAAEABAAAAACAAAAAAAEABEAAAACAAAAAAAFABAAAAACAAAAAAAFABEAAAACAAAAAAAGABAAAAACAAAAAAAEAAgAAAACAAAAAAAEAAkAAAACAAAAAAAEAAoAAAACAAAAAAAEAAsAAAACAAAAAAAEAAwAAAACAAAAAAAEAA0AAAACAAAAAAAEAA4AAAACAAAAAAAEAA8AAAACAAAAAAAFAAgAAAACAAAAAAAFAAkAAAACAAAAAAAFAAoAAAACAAAAAAAFAAsAAAACAAAAAAAFAAwAAAACAAAAAAAFAA0AAAACAAAAAAAFAA4AAAACAAAAAAAFAA8AAAACAAAAAAAGAAgAAAACAAAAAAAGAAkAAAACAAAAAAAGAAoAAAACAAAAAAAGAAsAAAACAAAAAAAGAAwAAAACAAAAAAAGAA0AAAACAAAAAAAGAA4AAAACAAAAAAAGAA8AAAACAAAAAAADAAkAAAACAAAAAAADAAoAAAACAAAAAAADAAsAAAACAAAAAAABAAsAAAACAAAAAAACAAsAAAACAAAAAAAHAAwAAAACAAAAAAAHAA0AAAACAAAAAAAIAAwAAAACAAAAAAAIAA0AAAACAAAAAAAJAA0AAAACAAAAAAAHAA4AAAACAAAAAAALAAcAAAAAAAAAAAALAAgAAAAAAAAAAAALAAkAAAACAAAAAAALAAoAAAACAAAAAAALAAsAAAACAAAAAAAMAAcAAAAAAAAAAAAMAAgAAAAAAAAAAAAMAAkAAAACAAAAAAAMAAoAAAACAAAAAAAMAAsAAAAAAAAAAAANAAgAAAAAAAAAAAANAAkAAAACAAAAAAANAAoAAAACAAAAAAAOAAkAAAAAAAAAAAAOAAoAAAAAAAAAAAAHAAoAAAACAAAAAAAIAAoAAAACAAAAAAAJAAoAAAACAAAAAAAKAAoAAAACAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAACAAAAAAAAAAAAAAADAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAFAAAAAAAAAAAAAAAGAAAAAAAAAAAAAAAHAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAJAAAAAAAAAAAAAAAKAAAAAAAAAAAAAAALAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAANAAAAAAAAAAAAAAAOAAAAAAAAAAAAAAAPAAAAAAAAAAAAAAANAAEAAAAAAAAAAAAOAAEAAAAAAAAAAAAPAAEAAAAAAAAAAAAOAAIAAAAAAAAAAAAPAAIAAAAAAAAAAAAPAAMAAAAAAAAAAAAPAAQAAAAAAAAAAAAPAAUAAAAAAAAAAAAPAAYAAAAAAAAAAAAOAAUAAAAAAAAAAAAOAAYAAAAAAAAAAAAOAAcAAAAAAAAAAAAPAAcAAAAAAAAAAAANAAYAAAAAAAAAAAANAAcAAAAAAAAAAAAKAAYAAAAAAAAAAAALAAYAAAAAAAAAAAAMAAYAAAAAAAAAAAABABMAAAAAAAAAAAABABIAAAAAAAAAAAAAABIAAAAAAAAAAAAAABEAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA0AAAAAAAAAAAAAAAwAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAAUAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAEAAAAAAAAAAAABAAEAAAAAAAAAAAABAAIAAAAAAAAAAAABAAMAAAAAAAAAAAACAAIAAAAAAAAAAAACAAEAAAAAAAAAAAABAAUAAAAAAAAAAAABAAcAAAAAAAAAAAABAAgAAAAAAAAAAAABAAkAAAAAAAAAAAABAAoAAAAAAAAAAAACAAoAAAAAAAAAAAACAAkAAAAAAAAAAAACAAgAAAAAAAAAAAACAAcAAAAAAAAAAAADAAgAAAAAAAAAAAABAAwAAAAAAAAAAAABAA0AAAAAAAAAAAABAA4AAAAAAAAAAAABAA8AAAAAAAAAAAACAA4AAAAAAAAAAAACAA0AAAAAAAAAAAACAAwAAAAAAAAAAAADAAwAAAAAAAAAAAADAA0AAAAAAAAAAAADAA4AAAAAAAAAAAAAABMAAAAAAAAAAAAAABQAAAAAAAAAAAABABQAAAAAAAAAAAACABQAAAAAAAAAAAACABMAAAAAAAAAAAADABMAAAAAAAAAAAADABQAAAAAAAAAAAAEABQAAAAAAAAAAAAEABMAAAAAAAAAAAAEABIAAAAAAAAAAAAFABIAAAAAAAAAAAAFABMAAAAAAAAAAAAFABQAAAAAAAAAAAAGABQAAAAAAAAAAAAGABMAAAAAAAAAAAAHABMAAAAAAAAAAAAHABQAAAAAAAAAAAAIABQAAAAAAAAAAAAIABMAAAAAAAAAAAAJABMAAAAAAAAAAAAJABQAAAAAAAAAAAAKABQAAAAAAAAAAAALABQAAAAAAAAAAAAMABQAAAAAAAAAAAANABQAAAAAAAAAAAANABMAAAAAAAAAAAAOABMAAAAAAAAAAAAOABIAAAAAAAAAAAAOABEAAAAAAAAAAAAOABAAAAAAAAAAAAAOAA8AAAAAAAAAAAAOAA4AAAAAAAAAAAAOAA0AAAAAAAAAAAAOAAwAAAAAAAAAAAAOAAsAAAAAAAAAAAANAAsAAAAAAAAAAAANAAwAAAAAAAAAAAAMAAwAAAAAAAAAAAALAAwAAAAAAAAAAAAKAAwAAAAAAAAAAAAKAAsAAAAAAAAAAAAJAAsAAAAAAAAAAAAIAAsAAAAAAAAAAAAHAAsAAAAAAAAAAAAJAAwAAAAAAAAAAAAKAA0AAAAAAAAAAAAKAA4AAAAAAAAAAAAJAA4AAAAAAAAAAAAIAA4AAAAAAAAAAAAIAA8AAAAAAAAAAAAHAA8AAAAAAAAAAAAHABAAAAAAAAAAAAAIABAAAAAAAAAAAAAIABEAAAAAAAAAAAAJABEAAAAAAAAAAAAJABAAAAAAAAAAAAAJAA8AAAAAAAAAAAAKAA8AAAAAAAAAAAAKABAAAAAAAAAAAAALAA8AAAAAAAAAAAALAA4AAAAAAAAAAAALAA0AAAAAAAAAAAAMAA0AAAAAAAAAAAAMAA4AAAAAAAAAAAAMAA8AAAAAAAAAAAANAA8AAAAAAAAAAAANAA4AAAAAAAAAAAANAA0AAAAAAAAAAAANABAAAAAAAAAAAAAPAAsAAAAAAAAAAAAPAAoAAAAAAAAAAAAPAAkAAAAAAAAAAAAPAAgAAAAAAAAAAAAOAAgAAAAAAAAAAAAPAAwAAAAAAAAAAAAPAA0AAAAAAAAAAAAPAA4AAAAAAAAAAAAPAA8AAAAAAAAAAAAPABAAAAAAAAAAAAAPABEAAAAAAAAAAAAPABIAAAAAAAAAAAAPABMAAAAAAAAAAAAPABQAAAAAAAAAAAAOABQAAAAAAAAAAAAJAAgAAAAAAAAAAAAJAAcAAAAAAAAAAAAKAAcAAAAAAAAAAAAKAAgAAAAAAAAAAAAKAAkAAAAAAAAAAAAJAAkAAAAAAAAAAAAIAAkAAAAAAAAAAAAIAAgAAAAAAAAAAAAHAAgAAAAAAAAAAAAHAAkAAAAAAAAAAAAHAAEAAAAAAAAAAAAIAAEAAAAAAAAAAAADAAEAAAAAAAAAAAADAAIAAAAAAAAAAAAEAAIAAAAAAAAAAAAEAAMAAAAAAAAAAAA=")
 tile_set = SubResource("TileSet_63me0")
-script = ExtResource("4_gy2i1")
+script = ExtResource("4_dhkrj")
 
 [node name="GridDisplayLayer" type="TileMapLayer" parent="."]
 self_modulate = Color(1, 1, 1, 0.196078)
@@ -1073,69 +1080,335 @@ y_sort_enabled = true
 tile_map_data = PackedByteArray("AAAPAAAAAAALAAEAAAAOAAAAAAAKAAEAAAANAAAAAAAFAAEAAAAMAAAAAAACAAoAAAALAAAAAAACAAoAAAAKAAAAAAACAAoAAAAJAAAAAAACAAoAAAAIAAAAAAAGAAEAAAAHAAAAAAAFAAEAAAAGAAAAAAACAAoAAAAFAAAAAAACAAoAAAAEAAAAAAACAAoAAAADAAAAAAACAAoAAAACAAAAAAAGAAEAAAABAAAAAAAKAAEAAAAAAAAAAAAIAAEAAAAIAAEAAAALAAoAAAAHAAEAAAAIAAoAAAACAAIAAAALAAoAAAACAAEAAAALAAcAAAABAAIAAAAGAAcAAAABAAEAAAAJAAcAAAAAAAIAAAAIAAQAAAAAAAEAAAAIAAQAAAABAAMAAAALAAoAAAAAAAMAAAAEAAcAAAAPAAEAAAALAAcAAAAOAAEAAAAFAAcAAAANAAEAAAAIAAoAAAAPAAIAAAAHAAcAAAAOAAIAAAAIAAoAAAAPAAUAAAAHAAQAAAAPAAQAAAAGAAAAAAAPAAMAAAAAAAQAAAAOAAUAAAAIAAAAAAAPAAYAAAALAAcAAAAOAAYAAAAFAAQAAAANAAYAAAAFAAEAAAAMAAYAAAACAAoAAAALAAYAAAACAAoAAAAKAAYAAAAKAAAAAAAKAAgAAAALAAoAAAAJAAgAAAAJAAQAAAAJAAcAAAAIAAAAAAAIAAgAAAAKAAEAAAAHAAgAAAAIAAEAAAAPAAcAAAALAAcAAAAOAAcAAAAFAAcAAAANAAcAAAAIAAoAAAAPAAgAAAAHAAcAAAAOAAgAAAAIAAoAAAAAAAgAAAAIAAQAAAAAAAcAAAAEAAQAAAAAAAYAAAAEAAAAAAAAAAUAAAABAAQAAAAAAAQAAAAEAAAAAAABAAUAAAADAAoAAAACAAcAAAAHAAAAAAABAAgAAAAJAAcAAAABAAcAAAAKAAEAAAADAAgAAAADAAoAAAAHAAcAAAABAAAAAAAIAAcAAAACAAAAAAADAAcAAAADAAAAAAAPAP//AAADAAAAAAAOAP//AAACAAAAAAANAP//AAACAAAAAAAMAP//AAACAAAAAAALAP//AAACAAAAAAAKAP//AAACAAAAAAAJAP//AAACAAAAAAAIAP//AAACAAAAAAAHAP//AAACAAAAAAAGAP//AAACAAAAAAAFAP//AAACAAAAAAAEAP//AAACAAAAAAADAP//AAACAAAAAAACAP//AAACAAAAAAABAP//AAACAAAAAAAAAP//AAABAAAAAAACAAoAAAALAAoAAAACAAkAAAALAAcAAAABAAoAAAAJAAoAAAABAAkAAAAJAAcAAAAAAAoAAAAEAAcAAAAAAAkAAAAIAAQAAAAAABQAAAAIAAoAAAAAABMAAAAIAAQAAAAAABIAAAAEAAQAAAAAABEAAAAEAAAAAAAAABAAAAAAAAQAAAAAAA8AAAAEAAcAAAAAAA4AAAAIAAQAAAAAAA0AAAAIAAQAAAAAAAwAAAAEAAQAAAAAAAsAAAAEAAAAAAABAA8AAAALAAoAAAABAA4AAAAGAAcAAAABAA0AAAAJAAcAAAABAAwAAAAFAAQAAAADAA4AAAALAAoAAAADAA0AAAALAAcAAAADAAwAAAAHAAQAAAACAA4AAAAJAAoAAAACAA0AAAAJAAcAAAACAAwAAAAGAAQAAAAKAAsAAAAHAAAAAAAJAAsAAAAFAAEAAAAIAAsAAAACAAoAAAAHAAsAAAABAAoAAAAKAAwAAAAKAAcAAAAJAAwAAAAIAAoAAAAPAA8AAAALAAcAAAAPAA4AAAALAAcAAAAPAA0AAAALAAcAAAAPAAwAAAALAAcAAAAOAA8AAAAJAAcAAAAOAA4AAAAJAAcAAAAOAA0AAAAJAAcAAAAOAAwAAAAJAAcAAAANAA8AAAAFAAcAAAANAA4AAAAJAAcAAAANAA0AAAAJAAcAAAANAAwAAAAFAAQAAAAMAA8AAAAJAAoAAAAMAA4AAAAJAAcAAAAMAA0AAAAJAAcAAAAMAAwAAAAGAAQAAAALAA8AAAAJAAoAAAALAA4AAAAJAAcAAAALAA0AAAAJAAcAAAALAAwAAAAKAAEAAAAKAA8AAAAGAAcAAAAKAA4AAAAFAAQAAAAKAA0AAAAIAAAAAAAKABAAAAALAAoAAAAJABAAAAAGAAcAAAAJAA8AAAAJAAcAAAAJAA4AAAAGAAQAAAAIABAAAAAFAAcAAAAIAA8AAAAFAAQAAAAIAA4AAAAIAAAAAAAJABEAAAALAAoAAAAIABEAAAAIAAoAAAAHABAAAAAIAAoAAAAHAA8AAAAEAAQAAAAPAAsAAAAHAAQAAAAOAAsAAAAKAAEAAAANAAsAAAAIAAAAAAAPAAoAAAAGAAAAAAAPAAkAAAAAAAQAAAAPABQAAAALAAoAAAAPABMAAAALAAcAAAAPABIAAAALAAcAAAAPABEAAAALAAcAAAAPABAAAAALAAcAAAAOABQAAAAJAAoAAAAOABMAAAAFAAQAAAAOABIAAAAIAAAAAAAOABEAAAAIAAQAAAAOABAAAAAFAAcAAAANABAAAAAIAAoAAAANABQAAAAFAAoAAAANABMAAAAIAAAAAAAMABQAAAACAAoAAAALABQAAAACAAoAAAAKABQAAAACAAoAAAAJABQAAAAGAAoAAAAIABQAAAAJAAoAAAAHABQAAAAJAAoAAAAGABQAAAAJAAoAAAAFABQAAAAJAAoAAAAEABQAAAAJAAoAAAADABQAAAAJAAoAAAACABQAAAAJAAoAAAABABQAAAAJAAoAAAAJABMAAAAHAAAAAAAIABMAAAAJAAEAAAAHABMAAAAKAAEAAAAGABMAAAAKAAEAAAAFABMAAAAGAAQAAAAEABMAAAAFAAQAAAADABMAAAAKAAEAAAACABMAAAAJAAEAAAABABMAAAAGAAQAAAAFABIAAAAHAAAAAAAEABIAAAAIAAAAAAABABIAAAAHAAAAAAAJAAkAAAALAAoAAAAIAAkAAAAJAAoAAAAHAAkAAAAIAAoAAAANAAUAAAACAAAAAAAMAAUAAAACAAAAAAALAAUAAAACAAAAAAAKAAUAAAABAAAAAAAHAAoAAAABAAAAAAAIAAoAAAACAAAAAAAJAAoAAAACAAAAAAAKAAoAAAADAAAAAAANAAoAAAABAAAAAAAOAAoAAAACAAAAAAALAAsAAAACAAAAAAAMAAsAAAACAAAAAAACAAsAAAACAAAAAAADAAsAAAADAAAAAAABAAsAAAACAAAAAAABAAYAAAACAAAAAAAIAA0AAAABAAAAAAAJAA0AAAACAAAAAAAEABEAAAABAAAAAAAFABEAAAADAAAAAAABABEAAAADAAAAAAACABIAAAACAAAAAAADABIAAAACAAAAAAAGABIAAAACAAAAAAAHABIAAAACAAAAAAAIABIAAAACAAAAAAAJABIAAAADAAAAAAAKABMAAAACAAAAAAALABMAAAACAAAAAAAMABMAAAACAAAAAAANABIAAAABAAAAAAACAAYAAAADAAAAAAACAAgAAAALAAQAAAAOAAQAAAABAAAAAAAJAAYAAAABAAAAAAAHAA4AAAABAAAAAAAKAAcAAAAHAAQAAAA=")
 tile_set = SubResource("TileSet_3ewkw")
 
-[node name="Decor_TileMapLayer" type="TileMapLayer" parent="."]
-tile_map_data = PackedByteArray("AAABAAQAAAAAAAAAAAACAAMAAAAAAAAAAAACAAQAAAABAAAAAAAGAAEAAAABAAAAAAALAAIAAAAAAAAAAAANAAUAAAAAAAAAAAAMAAsAAAABAAAAAAANAAgAAAABAAAAAAAOAAkAAAAAAAAAAAAOAAoAAAAAAAAAAAAKAAkAAAAAAAAAAAALAAgAAQACAAEAAAAMAAgAAQADAAEAAAALAAYAAQAAAAAAAAAMAAYAAQABAAAAAAALAAcAAQAAAAIAAAAMAAcAAQABAAIAAAAJAAMAAQACAAEAAAAKAAMAAQADAAEAAAAJAAAAAQAAAAAAAAAJAAEAAQAAAAEAAAAJAAIAAQAAAAIAAAAKAAAAAQABAAAAAAAKAAEAAQABAAEAAAAKAAIAAQABAAIAAAADAAAAAQAAAAAAAAADAAEAAQAAAAEAAAADAAIAAQAAAAIAAAAEAAAAAQABAAAAAAAEAAEAAQABAAEAAAAEAAIAAQABAAIAAAADAAMAAQACAAEAAAAEAAMAAQADAAEAAAAFAAIAAAAAAAAAAAA=")
-tile_set = SubResource("TileSet_i35ih")
-
-[node name="TargetAreaDisplayNode" parent="." instance=ExtResource("6_u68pr")]
+[node name="TargetAreaDisplayNode" parent="." instance=ExtResource("9_d87j1")]
 
 [node name="ActorTileMapLayer" type="TileMapLayer" parent="."]
 tile_set = SubResource("TileSet_5ipcw")
+
+[node name="Decor_TileMapLayer" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray("AAABAAQAAAAAAAAAAAACAAMAAAAAAAAAAAACAAQAAAABAAAAAAAGAAEAAAABAAAAAAALAAIAAAAAAAAAAAANAAUAAAAAAAAAAAAMAAsAAAABAAAAAAANAAgAAAABAAAAAAAOAAkAAAAAAAAAAAAOAAoAAAAAAAAAAAAKAAkAAAAAAAAAAAALAAgAAQACAAEAAAAMAAgAAQADAAEAAAALAAYAAQAAAAAAAAAMAAYAAQABAAAAAAALAAcAAQAAAAIAAAAMAAcAAQABAAIAAAAJAAMAAQACAAEAAAAKAAMAAQADAAEAAAAJAAAAAQAAAAAAAAAJAAEAAQAAAAEAAAAJAAIAAQAAAAIAAAAKAAAAAQABAAAAAAAKAAEAAQABAAEAAAAKAAIAAQABAAIAAAADAAAAAQAAAAAAAAADAAEAAQAAAAEAAAADAAIAAQAAAAIAAAAEAAAAAQABAAAAAAAEAAEAAQABAAEAAAAEAAIAAQABAAIAAAADAAMAAQACAAEAAAAEAAMAAQADAAEAAAAFAAIAAAAAAAAAAAA=")
+tile_set = SubResource("TileSet_i35ih")
 
 [node name="ItemTileMapLayer" type="TileMapLayer" parent="."]
 tile_set = SubResource("TileSet_eodif")
 
 [node name="MarkerTileMapLayer" type="TileMapLayer" parent="."]
+tile_set = SubResource("TileSet_o1yif")
 
 [node name="SpwanNode_Player" type="Sprite2D" parent="MarkerTileMapLayer"]
 self_modulate = Color(0, 1, 0, 1)
-position = Vector2(176, 368)
-texture = ExtResource("8_u580h")
-script = ExtResource("9_nunat")
+position = Vector2(176, 496)
+texture = ExtResource("10_hh112")
+script = ExtResource("11_md0j5")
 spawn_actor_key = "Player1"
 is_player = true
-map_coor = Vector2i(5, 11)
+map_coor = Vector2i(5, 15)
+
+[node name="SpwanNode_MF" type="Sprite2D" parent="MarkerTileMapLayer"]
+position = Vector2(48, 368)
+texture = ExtResource("12_246fu")
+offset = Vector2(0, -16)
+hframes = 12
+vframes = 4
+frame = 24
+script = ExtResource("11_md0j5")
+spawn_actor_key = "MysteriousFigure"
+spawn_actor_id = "MysteriousFigure"
+facing = 1
+map_coor = Vector2i(1, 11)
 
 [node name="SpwanNode_Mushroom1" type="Sprite2D" parent="MarkerTileMapLayer"]
 self_modulate = Color(0, 1, 1, 1)
 position = Vector2(400, 336)
-texture = ExtResource("10_of813")
-script = ExtResource("9_nunat")
+texture = ExtResource("12_w22o7")
+script = ExtResource("11_md0j5")
 spawn_actor_key = "TutorShroom"
 map_coor = Vector2i(12, 10)
 
 [node name="SpwanNode_Mushroom2" type="Sprite2D" parent="MarkerTileMapLayer"]
 self_modulate = Color(0, 1, 1, 1)
 position = Vector2(48, 208)
-texture = ExtResource("10_of813")
-script = ExtResource("9_nunat")
+texture = ExtResource("12_w22o7")
+script = ExtResource("11_md0j5")
 spawn_actor_key = "TutorShroom"
 map_coor = Vector2i(1, 6)
 
 [node name="SpwanNode_Mushroom3" type="Sprite2D" parent="MarkerTileMapLayer"]
 self_modulate = Color(0, 1, 1, 1)
 position = Vector2(176, 48)
-texture = ExtResource("10_of813")
-script = ExtResource("9_nunat")
+texture = ExtResource("12_w22o7")
+script = ExtResource("11_md0j5")
 spawn_actor_key = "TutorShroom"
 map_coor = Vector2i(5, 1)
 
 [node name="SpwanNode_Mushroom4" type="Sprite2D" parent="MarkerTileMapLayer"]
 self_modulate = Color(0, 1, 1, 1)
 position = Vector2(400, 48)
-texture = ExtResource("10_of813")
-script = ExtResource("9_nunat")
+texture = ExtResource("12_w22o7")
+script = ExtResource("11_md0j5")
 spawn_actor_key = "TutorShroom"
 map_coor = Vector2i(12, 1)
 
 [node name="SpwanNode_Mushroom5" type="Sprite2D" parent="MarkerTileMapLayer"]
 self_modulate = Color(0, 1, 1, 1)
 position = Vector2(400, 176)
-texture = ExtResource("10_of813")
-script = ExtResource("9_nunat")
+texture = ExtResource("12_w22o7")
+script = ExtResource("11_md0j5")
 spawn_actor_key = "TutorShroom"
 map_coor = Vector2i(12, 5)
 
-[node name="MapMarker" type="Sprite2D" parent="MarkerTileMapLayer"]
-texture = ExtResource("13_bb143")
-script = ExtResource("13_3lu1a")
+[node name="Pos_P1" type="Sprite2D" parent="MarkerTileMapLayer" node_paths=PackedStringArray("label")]
+position = Vector2(176, 368)
+texture = ExtResource("13_bfpo1")
+script = ExtResource("14_t0c8n")
+marker_name = "P1"
+map_coor = Vector2i(5, 11)
+label = NodePath("Label")
+
+[node name="Label" type="Label" parent="MarkerTileMapLayer/Pos_P1"]
+self_modulate = Color(1, 0, 0, 1)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -36.0
+offset_top = -27.5
+offset_right = 4.0
+offset_bottom = -4.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 12
+text = "P1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Pos_P2" type="Sprite2D" parent="MarkerTileMapLayer" node_paths=PackedStringArray("label")]
+position = Vector2(176, 368)
+rotation = 4.71239
+texture = ExtResource("13_bfpo1")
+script = ExtResource("14_t0c8n")
+marker_name = "P2"
+facing = 3
+map_coor = Vector2i(5, 11)
+label = NodePath("Label")
+
+[node name="Label" type="Label" parent="MarkerTileMapLayer/Pos_P2"]
+self_modulate = Color(1, 0, 0, 1)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -36.0
+offset_top = -27.5
+offset_right = 4.0
+offset_bottom = -4.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 12
+text = "P2"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Pos_MF1" type="Sprite2D" parent="MarkerTileMapLayer" node_paths=PackedStringArray("label")]
+position = Vector2(144, 368)
+rotation = 1.5708
+texture = ExtResource("13_bfpo1")
+script = ExtResource("14_t0c8n")
+marker_name = "MF1"
+facing = 1
+map_coor = Vector2i(4, 11)
+label = NodePath("Label")
+
+[node name="Label" type="Label" parent="MarkerTileMapLayer/Pos_MF1"]
+self_modulate = Color(1, 0, 0, 1)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -36.0
+offset_top = -27.5
+offset_right = 4.0
+offset_bottom = -4.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 12
+text = "MF1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Path_MF2" type="Node2D" parent="MarkerTileMapLayer" node_paths=PackedStringArray("sprite", "label")]
+position = Vector2(144, 368)
+script = ExtResource("16_0ajgq")
+marker_name = "MF2"
+facing = 1
+map_coor = Vector2i(4, 11)
+sprite = NodePath("PathSprite")
+label = NodePath("PathSprite/Label")
+
+[node name="PathSprite" type="Sprite2D" parent="MarkerTileMapLayer/Path_MF2"]
+self_modulate = Color(0, 1, 1, 1)
+rotation = 1.5708
+texture = ExtResource("13_bfpo1")
+
+[node name="Label" type="Label" parent="MarkerTileMapLayer/Path_MF2/PathSprite"]
+self_modulate = Color(1, 0, 0, 1)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -36.0
+offset_top = -27.5
+offset_right = 4.0
+offset_bottom = -4.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 12
+text = "MF2"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Point1" type="Sprite2D" parent="MarkerTileMapLayer/Path_MF2"]
+position = Vector2(0, 32)
+rotation = 1.5708
+texture = ExtResource("17_ohkco")
+script = ExtResource("18_tvogg")
+facing = 1
+map_coor = Vector2i(4, 12)
+
+[node name="Point2" type="Sprite2D" parent="MarkerTileMapLayer/Path_MF2"]
+position = Vector2(0, 32)
+texture = ExtResource("17_ohkco")
+script = ExtResource("18_tvogg")
+map_coor = Vector2i(4, 12)
+
+[node name="Point3" type="Sprite2D" parent="MarkerTileMapLayer/Path_MF2"]
+position = Vector2(32, 32)
+texture = ExtResource("17_ohkco")
+script = ExtResource("18_tvogg")
+map_coor = Vector2i(5, 12)
+
+[node name="Path_MF3" type="Node2D" parent="MarkerTileMapLayer" node_paths=PackedStringArray("sprite", "label")]
+position = Vector2(176, 400)
+script = ExtResource("16_0ajgq")
+marker_name = "MF3"
+map_coor = Vector2i(5, 12)
+sprite = NodePath("PathSprite")
+label = NodePath("PathSprite/Label")
+
+[node name="PathSprite" type="Sprite2D" parent="MarkerTileMapLayer/Path_MF3"]
+self_modulate = Color(0, 1, 1, 1)
+texture = ExtResource("13_bfpo1")
+
+[node name="Label" type="Label" parent="MarkerTileMapLayer/Path_MF3/PathSprite"]
+self_modulate = Color(1, 0, 0, 1)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -36.0
+offset_top = -27.5
+offset_right = 4.0
+offset_bottom = -4.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 12
+text = "MF3"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Point1" type="Sprite2D" parent="MarkerTileMapLayer/Path_MF3"]
+position = Vector2(32, 0)
+texture = ExtResource("17_ohkco")
+script = ExtResource("18_tvogg")
+map_coor = Vector2i(6, 12)
+
+[node name="Point2" type="Sprite2D" parent="MarkerTileMapLayer/Path_MF3"]
+position = Vector2(32, 0)
+rotation = 4.71239
+texture = ExtResource("17_ohkco")
+script = ExtResource("18_tvogg")
+facing = 3
+map_coor = Vector2i(6, 12)
+
+[node name="Point3" type="Sprite2D" parent="MarkerTileMapLayer/Path_MF3"]
+position = Vector2(32, -32)
+rotation = 4.71239
+texture = ExtResource("17_ohkco")
+script = ExtResource("18_tvogg")
+facing = 3
+map_coor = Vector2i(6, 11)
+
+[node name="Path_MF4" type="Node2D" parent="MarkerTileMapLayer" node_paths=PackedStringArray("sprite", "label")]
+position = Vector2(208, 368)
+script = ExtResource("16_0ajgq")
+marker_name = "MF4"
+facing = 3
+map_coor = Vector2i(6, 11)
+sprite = NodePath("PathSprite")
+label = NodePath("PathSprite/Label")
+
+[node name="PathSprite" type="Sprite2D" parent="MarkerTileMapLayer/Path_MF4"]
+self_modulate = Color(0, 1, 1, 1)
+rotation = 4.71239
+texture = ExtResource("13_bfpo1")
+
+[node name="Label" type="Label" parent="MarkerTileMapLayer/Path_MF4/PathSprite"]
+self_modulate = Color(1, 0, 0, 1)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -36.0
+offset_top = -27.5
+offset_right = 4.0
+offset_bottom = -4.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 12
+text = "MF4"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Point1" type="Sprite2D" parent="MarkerTileMapLayer/Path_MF4"]
+position = Vector2(0, -32)
+rotation = 4.71239
+texture = ExtResource("17_ohkco")
+script = ExtResource("18_tvogg")
+facing = 3
+map_coor = Vector2i(6, 10)
+
+[node name="Point2" type="Sprite2D" parent="MarkerTileMapLayer/Path_MF4"]
+position = Vector2(0, -32)
+rotation = 3.14159
+texture = ExtResource("17_ohkco")
+script = ExtResource("18_tvogg")
+facing = 2
+map_coor = Vector2i(6, 10)
+
+[node name="Point3" type="Sprite2D" parent="MarkerTileMapLayer/Path_MF4"]
+position = Vector2(-32, -32)
+rotation = 3.14159
+texture = ExtResource("17_ohkco")
+script = ExtResource("18_tvogg")
+facing = 2
+map_coor = Vector2i(5, 10)
+
+[node name="Point4" type="Sprite2D" parent="MarkerTileMapLayer/Path_MF4"]
+position = Vector2(-32, -64)
+rotation = 3.14159
+texture = ExtResource("17_ohkco")
+script = ExtResource("18_tvogg")
+facing = 2
+map_coor = Vector2i(5, 9)

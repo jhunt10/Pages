@@ -18,6 +18,7 @@ signal character_selected(char_name:String)
 @export var confirm_box_label:Label
 @export var yes_button:TextureButton
 @export var no_button:TextureButton
+@export var back_button:Button
 
 var selected_card_name
 var selected_card:Control
@@ -48,8 +49,12 @@ func _ready() -> void:
 	yes_button.pressed.connect(on_card_confirmed)
 	yes_button.disabled = true
 	no_button.disabled = true
+	back_button.pressed.connect(on_back)
 	pass # Replace with function body.
 
+func on_back():
+	self.queue_free()
+	MainRootNode.Instance.go_to_main_menu()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

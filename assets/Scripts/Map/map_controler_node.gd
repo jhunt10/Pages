@@ -7,6 +7,7 @@ const LOGGING = false
 @export var actor_tile_map:TileMapLayer 
 @export var item_tile_map:TileMapLayer 
 @export var terrain_path_map:TerrainPathingMap
+@export var marker_tile_map:TileMapLayer
 @onready var target_area_display:TargetAreaDisplayNode = $TargetAreaDisplayNode
 
 static var game_state:GameStateData:
@@ -17,6 +18,9 @@ var actor_nodes = {}
 var item_nodes = {}
 var missile_nodes = {}
 var zone_nodes = {}
+
+var _cached_marker_poses:Dictionary = {}
+var _cached_marker_paths:Dictionary = {}
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -30,7 +34,7 @@ func _ready() -> void:
 func get_map_data()->Dictionary:
 	var map_data = terrain_path_map.get_map_data()
 	var actors = []
-	for child in actor_tile_map.get_children():
+	for child in marker_tile_map.get_children():
 		if child is ActorSpawnNode and child.visible:
 			var pos = MapPos.new(child.map_coor.x, child.map_coor.y, 0, child.facing)
 			var data = {"Pos": pos}
@@ -43,12 +47,26 @@ func get_map_data()->Dictionary:
 			else:
 				data["FactionId"] = 1
 			actors.append(data)
-		
-		if not Engine.is_editor_hint():
-			child.queue_free()
+		elif child is MapMarkerNode:
+			var pos = MapPos.new(child.map_coor.x, child.map_coor.y, 0, child.facing)
+			var marker_name = child.marker_name
+			_cached_marker_poses[marker_name] = pos
+		elif child is MapPathNode:
+			var marker_name = child.marker_name
+			_cached_marker_paths[marker_name] = child
+	marker_tile_map.hide()
 	map_data['Actors'] = actors
 	return map_data
-				
+
+func get_pos_marker(marker_name)->MapPos:
+	if _cached_marker_poses.has(marker_name):
+		return _cached_marker_poses[marker_name]
+	return null
+	
+func get_path_marker(marker_name)->MapPathNode:
+	if _cached_marker_paths.has(marker_name):
+		return _cached_marker_paths[marker_name]
+	return null
 
 func create_actor_node(actor:BaseActor, map_pos:MapPos):
 	if Engine.is_editor_hint(): return

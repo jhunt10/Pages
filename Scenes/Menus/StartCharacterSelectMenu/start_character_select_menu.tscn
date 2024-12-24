@@ -21,7 +21,7 @@
 [ext_resource type="Texture2D" uid="uid://bn3rws8kuwp30" path="res://Scenes/Menus/StartCharacterSelectMenu/ButtonPressed.png" id="19_foae7"]
 [ext_resource type="Texture2D" uid="uid://gemu0x8hrvub" path="res://Scenes/Menus/StartCharacterSelectMenu/ButtonHover.png" id="20_d0shl"]
 
-[node name="StartCharacterSelectMenu" type="Control" node_paths=PackedStringArray("soldier_card", "rogue_card", "mage_card", "priest_card", "selected_card_parent", "hint_box", "confirm_box", "confirm_box_label", "yes_button", "no_button")]
+[node name="StartCharacterSelectMenu" type="Control" node_paths=PackedStringArray("soldier_card", "rogue_card", "mage_card", "priest_card", "selected_card_parent", "hint_box", "confirm_box", "confirm_box_label", "yes_button", "no_button", "back_button")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -42,6 +42,7 @@ confirm_box = NodePath("SelectedControl/ConfirmBox")
 confirm_box_label = NodePath("SelectedControl/ConfirmBox/VBoxContainer/Label")
 yes_button = NodePath("SelectedControl/ConfirmBox/VBoxContainer/HBoxContainer/YesButton")
 no_button = NodePath("SelectedControl/ConfirmBox/VBoxContainer/HBoxContainer/NoButton")
+back_button = NodePath("BackButton")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
@@ -1212,3 +1213,16 @@ theme_override_font_sizes/font_size = 24
 text = "Yes"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="BackButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -99.0
+offset_top = 10.0
+offset_right = -54.0
+offset_bottom = 41.0
+grow_horizontal = 0
+scale = Vector2(2, 2)
+text = "Back"

@@ -1,0 +1,138 @@
+[
+	{
+		"BlockTag": "MoveActor",
+		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_MoveActor.gd",
+		"TargetActorId": "Player1",
+		"PosMarkerName": "P1",
+		"FollowActor": true,
+        "WaitToFinish": false,
+		"SpeedScale": 1
+	},
+	{
+		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_Speech.gd",
+		"Speaker": null,
+		"WaitForButton": true,
+		"Lines": [
+			"\nAnd so our Hero finds find themselves wondering aimlessly when meet a Mysterious Figure."
+		]
+	},
+	{
+		"BlockTag": "MoveActor",
+		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_MoveActor.gd",
+		"TargetActorId": "MysteriousFigure",
+		"PosMarkerName": "MF1",
+		"FollowActor": false,
+        "WaitToFinish": false,
+		"SpeedScale": 2
+	},
+	{
+		"BlockTag": "MoveActor",
+		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_MoveActor.gd",
+		"TargetActorId": "Player1",
+		"PosMarkerName": "P2",
+		"FollowActor": true,
+		"SpeedScale": 1
+	},
+	{
+		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_Speech.gd",
+		"Speaker": "MtFg",
+		"WaitForButton": true,
+		"Lines": [
+			"\nHello friend!"
+		]
+	},
+	{
+		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_Speech.gd",
+		"Speaker": "MtFg",
+		"WaitForButton": true,
+		"Lines": [
+			"\nI couldn't help but notice you wondering aimlessly"
+		]
+	},
+	{
+		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_Speech.gd",
+		"Speaker": "MtFg",
+		"WaitForButton": true,
+		"Lines": [
+			"Hmm",
+			".",
+			".",
+			"."
+		]
+	},
+	{
+		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_Speech.gd",
+		"Speaker": null,
+		"WaitForButton": true,
+		"Lines": [
+			"\nThe Mysterious Figure leans in a little too close and looks you up and down."
+		]
+	},
+	{
+		"BlockTag": "MoveActor",
+		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_MoveActor.gd",
+		"TargetActorId": "MysteriousFigure",
+		"PathMarkerName": "MF2",
+		"FollowActor": false,
+        "WaitToFinish": false,
+		"SpeedScale": 1.5
+	},
+	{
+		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_Speech.gd",
+		"Speaker": "MtFg",
+		"WaitForButton": true,
+		"Lines": [
+			"\nCapable",
+			".",
+			".",
+			".",
+			" but inexperienced."
+		]
+	},
+	{
+		"BlockTag": "MoveActor",
+		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_MoveActor.gd",
+		"TargetActorId": "MysteriousFigure",
+		"PathMarkerName": "MF3",
+		"FollowActor": false,
+        "WaitToFinish": false,
+		"SpeedScale": 1.5
+	},
+	{
+		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_Speech.gd",
+		"Speaker": "MtFg",
+		"WaitForButton": true,
+		"Lines": [
+			"\nAmbitious",
+			".",
+			".",
+			".",
+			" but directionless."
+		]
+	},
+	{
+		"BlockTag": "MoveActor",
+		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_MoveActor.gd",
+		"TargetActorId": "MysteriousFigure",
+		"PathMarkerName": "MF4",
+		"FollowActor": false,
+        "WaitToFinish": false,
+		"SpeedScale": 1.5
+	},
+	{
+		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_Speech.gd",
+		"Speaker": "MtFg",
+		"WaitForButton": true,
+		"Lines": [
+			"\nAnd completly anonymous!"
+		]
+	},
+	{
+		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_Speech.gd",
+		"Speaker": "MtFg",
+		"WaitForButton": true,
+		"Lines": [
+			"\nYes! You are just the person I’ve been looking for."
+		]
+	},
+]
