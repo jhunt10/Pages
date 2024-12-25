@@ -5,9 +5,9 @@
 [ext_resource type="Texture2D" uid="uid://wkj00opejx8r" path="res://Scenes/Menus/StartCharacterSelectMenu/Mage_Port.png" id="2_6akbr"]
 [ext_resource type="Texture2D" uid="uid://bu2o432vvo3tg" path="res://Scenes/Menus/StartCharacterSelectMenu/Soldier_Port.png" id="2_xnpug"]
 [ext_resource type="Script" path="res://Scenes/Menus/StartCharacterSelectMenu/character_card.gd" id="3_4800i"]
-[ext_resource type="Theme" uid="uid://dwinll8pgdjhc" path="res://Scenes/Themes/standard_theme.tres" id="3_heume"]
 [ext_resource type="Texture2D" uid="uid://b10pvly4exem2" path="res://assets/Sprites/UI/SymbolIcons/_S_Symbole.png" id="4_e0vny"]
 [ext_resource type="Texture2D" uid="uid://dq2cad8orar4p" path="res://assets/Sprites/UI/SymbolIcons/ArmorSymbol.png" id="5_74fn6"]
+[ext_resource type="Theme" uid="uid://by8t8e4s2str7" path="res://Scenes/VFXs/SpeachBubble/speach_bubble_theme.tres" id="5_um7y6"]
 [ext_resource type="Texture2D" uid="uid://doywp1shkpnmd" path="res://assets/Sprites/UI/SymbolIcons/_I_Symbole.png" id="7_ouxie"]
 [ext_resource type="Texture2D" uid="uid://b201kpuib7q5k" path="res://assets/Sprites/UI/SymbolIcons/MagDamageSymbol.png" id="8_lit4u"]
 [ext_resource type="Texture2D" uid="uid://bypkbtx63t55b" path="res://Scenes/Menus/StartCharacterSelectMenu/Rogue_Port.png" id="9_tw37i"]
@@ -117,7 +117,7 @@ theme_override_constants/separation = 0
 [node name="TitleLabel" type="Label" parent="HBoxContainer/VBoxContainer/SoldierContainer/SoldierCard/BoxContainer/HBoxContainer/VBoxContainer"]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
-theme = ExtResource("3_heume")
+theme = ExtResource("5_um7y6")
 theme_override_font_sizes/font_size = 32
 text = "Soldier"
 
@@ -133,7 +133,7 @@ theme_override_constants/separation = 2
 visible = false
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
-theme = ExtResource("3_heume")
+theme = ExtResource("5_um7y6")
 text = "Main Stat:  "
 vertical_alignment = 1
 
@@ -141,7 +141,7 @@ vertical_alignment = 1
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 size_flags_horizontal = 3
-theme = ExtResource("3_heume")
+theme = ExtResource("5_um7y6")
 text = "Specialty:  "
 
 [node name="ValuesContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/SoldierContainer/SoldierCard/BoxContainer/HBoxContainer/VBoxContainer/NamesContainer"]
@@ -162,7 +162,7 @@ stretch_mode = 3
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 size_flags_vertical = 1
-theme = ExtResource("3_heume")
+theme = ExtResource("5_um7y6")
 text = "Physical Defense"
 vertical_alignment = 1
 
@@ -198,7 +198,7 @@ custom_minimum_size = Vector2(0, 44)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme = ExtResource("3_heume")
+theme = ExtResource("5_um7y6")
 text = "trong warrior who stands tall on the battle field. Able to take many hits and pay some back."
 fit_content = true
 
@@ -215,25 +215,25 @@ alignment = 1
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 size_flags_vertical = 1
-theme = ExtResource("3_heume")
+theme = ExtResource("5_um7y6")
 text = "Likes:"
 
 [node name="Like1" type="Label" parent="HBoxContainer/VBoxContainer/SoldierContainer/SoldierCard/BoxContainer/LikesDislikesContainer/ListContainer"]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
-theme = ExtResource("3_heume")
+theme = ExtResource("5_um7y6")
 text = "  +Heavy Armor"
 
 [node name="Like2" type="Label" parent="HBoxContainer/VBoxContainer/SoldierContainer/SoldierCard/BoxContainer/LikesDislikesContainer/ListContainer"]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
-theme = ExtResource("3_heume")
+theme = ExtResource("5_um7y6")
 text = "  +Simple Tactics"
 
 [node name="Like3" type="Label" parent="HBoxContainer/VBoxContainer/SoldierContainer/SoldierCard/BoxContainer/LikesDislikesContainer/ListContainer"]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
-theme = ExtResource("3_heume")
+theme = ExtResource("5_um7y6")
 text = "  +Fine Whiskey"
 
 [node name="ListContainer2" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/SoldierContainer/SoldierCard/BoxContainer/LikesDislikesContainer"]
@@ -245,25 +245,25 @@ alignment = 1
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 size_flags_vertical = 1
-theme = ExtResource("3_heume")
+theme = ExtResource("5_um7y6")
 text = "Dislikes:"
 
 [node name="Like1" type="Label" parent="HBoxContainer/VBoxContainer/SoldierContainer/SoldierCard/BoxContainer/LikesDislikesContainer/ListContainer2"]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
-theme = ExtResource("3_heume")
+theme = ExtResource("5_um7y6")
 text = "  -Dealing with Magic"
 
 [node name="Like2" type="Label" parent="HBoxContainer/VBoxContainer/SoldierContainer/SoldierCard/BoxContainer/LikesDislikesContainer/ListContainer2"]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
-theme = ExtResource("3_heume")
+theme = ExtResource("5_um7y6")
 text = "  -Being hit from behind"
 
 [node name="Like3" type="Label" parent="HBoxContainer/VBoxContainer/SoldierContainer/SoldierCard/BoxContainer/LikesDislikesContainer/ListContainer2"]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
-theme = ExtResource("3_heume")
+theme = ExtResource("5_um7y6")
 text = "  -Long walks on beach"
 
 [node name="Button" type="Button" parent="HBoxContainer/VBoxContainer/SoldierContainer/SoldierCard"]
@@ -324,7 +324,7 @@ theme_override_constants/separation = 0
 [node name="TitleLabel" type="Label" parent="HBoxContainer/VBoxContainer/MageContainer/MageCard/BoxContainer/HBoxContainer/VBoxContainer"]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
-theme = ExtResource("3_heume")
+theme = ExtResource("5_um7y6")
 theme_override_font_sizes/font_size = 32
 text = "Mage"
 
@@ -340,7 +340,7 @@ theme_override_constants/separation = 2
 visible = false
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
-theme = ExtResource("3_heume")
+theme = ExtResource("5_um7y6")
 text = "Main Stat:  "
 vertical_alignment = 1
 
@@ -348,7 +348,7 @@ vertical_alignment = 1
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 size_flags_horizontal = 3
-theme = ExtResource("3_heume")
+theme = ExtResource("5_um7y6")
 text = "Specialty:  "
 
 [node name="ValuesContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/MageContainer/MageCard/BoxContainer/HBoxContainer/VBoxContainer/NamesContainer"]
@@ -369,7 +369,7 @@ stretch_mode = 3
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 size_flags_vertical = 1
-theme = ExtResource("3_heume")
+theme = ExtResource("5_um7y6")
 text = "Magic Damage"
 vertical_alignment = 1
 
@@ -405,7 +405,7 @@ custom_minimum_size = Vector2(0, 44)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme = ExtResource("3_heume")
+theme = ExtResource("5_um7y6")
 text = "ntelligent spellcaster best on the back lines. An unstoppable force, until someone get's close."
 fit_content = true
 
@@ -422,25 +422,25 @@ alignment = 1
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 size_flags_vertical = 1
-theme = ExtResource("3_heume")
+theme = ExtResource("5_um7y6")
 text = "Likes:"
 
 [node name="Like1" type="Label" parent="HBoxContainer/VBoxContainer/MageContainer/MageCard/BoxContainer/LikesDislikesContainer/ListContainer"]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
-theme = ExtResource("3_heume")
+theme = ExtResource("5_um7y6")
 text = "  +Varriaty of Spells"
 
 [node name="Like2" type="Label" parent="HBoxContainer/VBoxContainer/MageContainer/MageCard/BoxContainer/LikesDislikesContainer/ListContainer"]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
-theme = ExtResource("3_heume")
+theme = ExtResource("5_um7y6")
 text = "  +Dealing AoE Damage"
 
 [node name="Like3" type="Label" parent="HBoxContainer/VBoxContainer/MageContainer/MageCard/BoxContainer/LikesDislikesContainer/ListContainer"]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
-theme = ExtResource("3_heume")
+theme = ExtResource("5_um7y6")
 text = "  +Fantasy Novels"
 
 [node name="ListContainer2" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/MageContainer/MageCard/BoxContainer/LikesDislikesContainer"]
@@ -452,25 +452,25 @@ alignment = 1
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 size_flags_vertical = 1
-theme = ExtResource("3_heume")
+theme = ExtResource("5_um7y6")
 text = "Dislikes:"
 
 [node name="Like1" type="Label" parent="HBoxContainer/VBoxContainer/MageContainer/MageCard/BoxContainer/LikesDislikesContainer/ListContainer2"]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
-theme = ExtResource("3_heume")
+theme = ExtResource("5_um7y6")
 text = "  -Melee Fighting"
 
 [node name="Like2" type="Label" parent="HBoxContainer/VBoxContainer/MageContainer/MageCard/BoxContainer/LikesDislikesContainer/ListContainer2"]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
-theme = ExtResource("3_heume")
+theme = ExtResource("5_um7y6")
 text = "  -Small Mana Supply"
 
 [node name="Like3" type="Label" parent="HBoxContainer/VBoxContainer/MageContainer/MageCard/BoxContainer/LikesDislikesContainer/ListContainer2"]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
-theme = ExtResource("3_heume")
+theme = ExtResource("5_um7y6")
 text = "  -Cliffhangers"
 
 [node name="Button" type="Button" parent="HBoxContainer/VBoxContainer/MageContainer/MageCard"]
@@ -536,7 +536,7 @@ theme_override_constants/separation = 4
 [node name="TitleLabel" type="Label" parent="HBoxContainer/VBoxContainer2/RogueContainer/RogueCard/BoxContainer/HBoxContainer/VBoxContainer"]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
-theme = ExtResource("3_heume")
+theme = ExtResource("5_um7y6")
 theme_override_font_sizes/font_size = 32
 text = "Rogue"
 
@@ -547,7 +547,7 @@ theme_override_constants/separation = 0
 [node name="SpecialtyTitle" type="Label" parent="HBoxContainer/VBoxContainer2/RogueContainer/RogueCard/BoxContainer/HBoxContainer/VBoxContainer/NamesContainer"]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
-theme = ExtResource("3_heume")
+theme = ExtResource("5_um7y6")
 text = "Specialty:  "
 
 [node name="TextureRect2" type="TextureRect" parent="HBoxContainer/VBoxContainer2/RogueContainer/RogueCard/BoxContainer/HBoxContainer/VBoxContainer/NamesContainer"]
@@ -559,7 +559,7 @@ stretch_mode = 3
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 size_flags_vertical = 1
-theme = ExtResource("3_heume")
+theme = ExtResource("5_um7y6")
 text = "Physical Damge"
 vertical_alignment = 1
 
@@ -583,7 +583,7 @@ custom_minimum_size = Vector2(0, 44)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme = ExtResource("3_heume")
+theme = ExtResource("5_um7y6")
 text = "gile fighter skilled in melee and range. Weaker attacks, but good placement makes them deadly."
 fit_content = true
 
@@ -600,25 +600,25 @@ alignment = 1
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 size_flags_vertical = 1
-theme = ExtResource("3_heume")
+theme = ExtResource("5_um7y6")
 text = "Likes:"
 
 [node name="Like1" type="Label" parent="HBoxContainer/VBoxContainer2/RogueContainer/RogueCard/BoxContainer/LikesDislikesContainer/ListContainer"]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
-theme = ExtResource("3_heume")
+theme = ExtResource("5_um7y6")
 text = "  +Deadly Critical Hits"
 
 [node name="Like2" type="Label" parent="HBoxContainer/VBoxContainer2/RogueContainer/RogueCard/BoxContainer/LikesDislikesContainer/ListContainer"]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
-theme = ExtResource("3_heume")
+theme = ExtResource("5_um7y6")
 text = "  +Evading Attacks"
 
 [node name="Like3" type="Label" parent="HBoxContainer/VBoxContainer2/RogueContainer/RogueCard/BoxContainer/LikesDislikesContainer/ListContainer"]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
-theme = ExtResource("3_heume")
+theme = ExtResource("5_um7y6")
 text = "  +Money & Romance"
 
 [node name="ListContainer2" type="VBoxContainer" parent="HBoxContainer/VBoxContainer2/RogueContainer/RogueCard/BoxContainer/LikesDislikesContainer"]
@@ -630,25 +630,25 @@ alignment = 1
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 size_flags_vertical = 1
-theme = ExtResource("3_heume")
+theme = ExtResource("5_um7y6")
 text = "Dislikes:"
 
 [node name="Like1" type="Label" parent="HBoxContainer/VBoxContainer2/RogueContainer/RogueCard/BoxContainer/LikesDislikesContainer/ListContainer2"]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
-theme = ExtResource("3_heume")
+theme = ExtResource("5_um7y6")
 text = "  -Wearing Heavy Armor"
 
 [node name="Like2" type="Label" parent="HBoxContainer/VBoxContainer2/RogueContainer/RogueCard/BoxContainer/LikesDislikesContainer/ListContainer2"]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
-theme = ExtResource("3_heume")
+theme = ExtResource("5_um7y6")
 text = "  -Getting Cornered"
 
 [node name="Like3" type="Label" parent="HBoxContainer/VBoxContainer2/RogueContainer/RogueCard/BoxContainer/LikesDislikesContainer/ListContainer2"]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
-theme = ExtResource("3_heume")
+theme = ExtResource("5_um7y6")
 text = "  -Poeple who talk loud"
 
 [node name="Button" type="Button" parent="HBoxContainer/VBoxContainer2/RogueContainer/RogueCard"]
@@ -709,7 +709,7 @@ theme_override_constants/separation = 0
 [node name="TitleLabel" type="Label" parent="HBoxContainer/VBoxContainer2/PriestContainer/PriestCard/BoxContainer/HBoxContainer/VBoxContainer"]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
-theme = ExtResource("3_heume")
+theme = ExtResource("5_um7y6")
 theme_override_font_sizes/font_size = 32
 text = "Priest"
 
@@ -725,7 +725,7 @@ theme_override_constants/separation = 2
 visible = false
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
-theme = ExtResource("3_heume")
+theme = ExtResource("5_um7y6")
 text = "Main Stat:  "
 vertical_alignment = 1
 
@@ -733,7 +733,7 @@ vertical_alignment = 1
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 size_flags_horizontal = 3
-theme = ExtResource("3_heume")
+theme = ExtResource("5_um7y6")
 text = "Specialty:  "
 
 [node name="ValuesContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer2/PriestContainer/PriestCard/BoxContainer/HBoxContainer/VBoxContainer/NamesContainer"]
@@ -749,7 +749,7 @@ theme_override_constants/separation = 0
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 size_flags_vertical = 1
-theme = ExtResource("3_heume")
+theme = ExtResource("5_um7y6")
 text = "isdom"
 vertical_alignment = 2
 
@@ -767,7 +767,7 @@ stretch_mode = 3
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 size_flags_vertical = 1
-theme = ExtResource("3_heume")
+theme = ExtResource("5_um7y6")
 text = "Magic Defense"
 vertical_alignment = 1
 
@@ -803,7 +803,7 @@ custom_minimum_size = Vector2(0, 44)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme = ExtResource("3_heume")
+theme = ExtResource("5_um7y6")
 text = "ise healer deep in the fray to provide support. Relies on others for damage. (Hard to start with)
 "
 fit_content = true
@@ -821,25 +821,25 @@ alignment = 1
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 size_flags_vertical = 1
-theme = ExtResource("3_heume")
+theme = ExtResource("5_um7y6")
 text = "Likes:"
 
 [node name="Like1" type="Label" parent="HBoxContainer/VBoxContainer2/PriestContainer/PriestCard/BoxContainer/LikesDislikesContainer/ListContainer"]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
-theme = ExtResource("3_heume")
+theme = ExtResource("5_um7y6")
 text = "  +Healing and Support"
 
 [node name="Like2" type="Label" parent="HBoxContainer/VBoxContainer2/PriestContainer/PriestCard/BoxContainer/LikesDislikesContainer/ListContainer"]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
-theme = ExtResource("3_heume")
+theme = ExtResource("5_um7y6")
 text = "  +Removing Ailments"
 
 [node name="Like3" type="Label" parent="HBoxContainer/VBoxContainer2/PriestContainer/PriestCard/BoxContainer/LikesDislikesContainer/ListContainer"]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
-theme = ExtResource("3_heume")
+theme = ExtResource("5_um7y6")
 text = "  +Keeping an Open Mind"
 
 [node name="ListContainer2" type="VBoxContainer" parent="HBoxContainer/VBoxContainer2/PriestContainer/PriestCard/BoxContainer/LikesDislikesContainer"]
@@ -851,25 +851,25 @@ alignment = 1
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 size_flags_vertical = 1
-theme = ExtResource("3_heume")
+theme = ExtResource("5_um7y6")
 text = "Dislikes:"
 
 [node name="Like1" type="Label" parent="HBoxContainer/VBoxContainer2/PriestContainer/PriestCard/BoxContainer/LikesDislikesContainer/ListContainer2"]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
-theme = ExtResource("3_heume")
+theme = ExtResource("5_um7y6")
 text = "  -Fighting Alone"
 
 [node name="Like2" type="Label" parent="HBoxContainer/VBoxContainer2/PriestContainer/PriestCard/BoxContainer/LikesDislikesContainer/ListContainer2"]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
-theme = ExtResource("3_heume")
+theme = ExtResource("5_um7y6")
 text = "  -Harming Others"
 
 [node name="Like3" type="Label" parent="HBoxContainer/VBoxContainer2/PriestContainer/PriestCard/BoxContainer/LikesDislikesContainer/ListContainer2"]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
-theme = ExtResource("3_heume")
+theme = ExtResource("5_um7y6")
 text = "  -Bugs with lots of legs"
 
 [node name="Button" type="Button" parent="HBoxContainer/VBoxContainer2/PriestContainer/PriestCard"]
@@ -940,7 +940,7 @@ theme_override_constants/separation = 0
 [node name="TitleLabel" type="Label" parent="SelectedControl/SoldierCard/BoxContainer/HBoxContainer/VBoxContainer"]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
-theme = ExtResource("3_heume")
+theme = ExtResource("5_um7y6")
 theme_override_font_sizes/font_size = 32
 text = "Soldier"
 
@@ -956,7 +956,7 @@ theme_override_constants/separation = 2
 visible = false
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
-theme = ExtResource("3_heume")
+theme = ExtResource("5_um7y6")
 text = "Main Stat:  "
 vertical_alignment = 1
 
@@ -964,7 +964,7 @@ vertical_alignment = 1
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 size_flags_horizontal = 3
-theme = ExtResource("3_heume")
+theme = ExtResource("5_um7y6")
 text = "Specialty:  "
 
 [node name="ValuesContainer" type="VBoxContainer" parent="SelectedControl/SoldierCard/BoxContainer/HBoxContainer/VBoxContainer/NamesContainer"]
@@ -985,7 +985,7 @@ stretch_mode = 3
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 size_flags_vertical = 1
-theme = ExtResource("3_heume")
+theme = ExtResource("5_um7y6")
 text = "Physical Defense"
 vertical_alignment = 1
 
@@ -1021,7 +1021,7 @@ custom_minimum_size = Vector2(0, 44)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme = ExtResource("3_heume")
+theme = ExtResource("5_um7y6")
 text = "trong warrior who stands tall on the battle field. Able to take many hits and pay some back."
 fit_content = true
 
@@ -1038,25 +1038,25 @@ alignment = 1
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 size_flags_vertical = 1
-theme = ExtResource("3_heume")
+theme = ExtResource("5_um7y6")
 text = "Likes:"
 
 [node name="Like1" type="Label" parent="SelectedControl/SoldierCard/BoxContainer/LikesDislikesContainer/ListContainer"]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
-theme = ExtResource("3_heume")
+theme = ExtResource("5_um7y6")
 text = "  +Heavy Armor"
 
 [node name="Like2" type="Label" parent="SelectedControl/SoldierCard/BoxContainer/LikesDislikesContainer/ListContainer"]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
-theme = ExtResource("3_heume")
+theme = ExtResource("5_um7y6")
 text = "  +Simple Tactics"
 
 [node name="Like3" type="Label" parent="SelectedControl/SoldierCard/BoxContainer/LikesDislikesContainer/ListContainer"]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
-theme = ExtResource("3_heume")
+theme = ExtResource("5_um7y6")
 text = "  +Fine Whiskey"
 
 [node name="ListContainer2" type="VBoxContainer" parent="SelectedControl/SoldierCard/BoxContainer/LikesDislikesContainer"]
@@ -1068,25 +1068,25 @@ alignment = 1
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 size_flags_vertical = 1
-theme = ExtResource("3_heume")
+theme = ExtResource("5_um7y6")
 text = "Dislikes:"
 
 [node name="Like1" type="Label" parent="SelectedControl/SoldierCard/BoxContainer/LikesDislikesContainer/ListContainer2"]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
-theme = ExtResource("3_heume")
+theme = ExtResource("5_um7y6")
 text = "  -Dealing with Magic"
 
 [node name="Like2" type="Label" parent="SelectedControl/SoldierCard/BoxContainer/LikesDislikesContainer/ListContainer2"]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
-theme = ExtResource("3_heume")
+theme = ExtResource("5_um7y6")
 text = "  -Being hit from behind"
 
 [node name="Like3" type="Label" parent="SelectedControl/SoldierCard/BoxContainer/LikesDislikesContainer/ListContainer2"]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
-theme = ExtResource("3_heume")
+theme = ExtResource("5_um7y6")
 text = "  -Long walks on beach"
 
 [node name="Button" type="Button" parent="SelectedControl/SoldierCard"]

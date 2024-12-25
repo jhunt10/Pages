@@ -5,8 +5,10 @@ signal option_selected(index:int)
 
 @export var question_text_box:RichTextLabel
 @export var options_container:VBoxContainer 
+@export var speaker_label:RichTextLabel
+@export var portrait_rect:TextureRect
 var premade_option:DialogQuestionOption:
-	get: return $DialogQuestionOption
+	get: return $HBoxContainer/VBoxContainer2/DialogQuestionOption
 
 var dialog_block:QuestionDialogBlock
 var line_index:int
@@ -27,6 +29,17 @@ func set_dailog_block(block:QuestionDialogBlock):
 	self.dialog_block = block
 	question_text_box.clear()
 	question_text_box.text = ''
+	var block_data = block.get_block_data()
+	if block_data.keys().has("Speaker") and block_data.get("Speaker", null):
+		speaker_label.text = dialog_block.get_block_data().get("Speaker", "") + ": "
+	else:
+		speaker_label.hide()
+	if block_data.keys().has("PortraitTexture") and block_data.get("PortraitTexture", null):
+		var port = SpriteCache.get_sprite(block_data.get("PortraitTexture"))
+		if port:
+			portrait_rect.texture = port
+	else:
+		portrait_rect.hide()
 
 func _process(delta: float) -> void:
 	if !dialog_block or dialog_block.is_finished:

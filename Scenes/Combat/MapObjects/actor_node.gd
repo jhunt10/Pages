@@ -113,13 +113,12 @@ func on_actor_moved(old_pos:MapPos, new_pos:MapPos, move_data:Dictionary):
 		set_facing_dir(new_pos.dir)
 		set_move_destination(new_pos, CombatRootControl.get_remaining_frames_for_turn())
 		var global_motion_pos = self.global_position + actor_motion_node.position
-		var global_motion_dest_pos = self.global_position + movement_dest_pos
-		force_display_pos(new_pos)
+		var global_motion_dest_pos = self.global_position + movement_dest_position
+		set_map_pos(new_pos, true)
 		actor_motion_node.position = global_motion_pos - self.global_position
-		movement_dest_pos = global_motion_dest_pos - self.global_position
-		
+		movement_dest_position = global_motion_dest_pos - self.global_position
 	else:
-		force_display_pos(new_pos)
+		set_map_pos(new_pos)
 	pass
 
 func _on_movement_failed(cur_pos:MapPos):
@@ -132,7 +131,7 @@ func _on_action_failed():
 	pass
 
 ## Forces the actor to given position
-func force_display_pos(pos:MapPos):
+func set_map_pos(pos:MapPos, keep_movement_offset:bool=false):
 	if !pos: return
 	set_facing_dir(pos.dir)
 	
@@ -140,14 +139,10 @@ func force_display_pos(pos:MapPos):
 	var tile_map = parent as TileMapLayer
 	if not tile_map: return
 	
-	if actor_sprite.vframes == 1:
-		self.position = parent.map_to_local(Vector2i(pos.x, pos.y))
-		return
-	else:
-		var map_pos = parent.map_to_local(Vector2i(pos.x, pos.y))
-		if LOGGING: print("%s | Set Pos"  % [Time.get_ticks_msec()])
-		if LOGGING: print("HardSet pos")
-		self.position = map_pos
+	self.position = parent.map_to_local(Vector2i(pos.x, pos.y))
+	if not keep_movement_offset:
+		actor_motion_node.position = Vector2.ZERO
+	cur_map_pos = pos
 
 func set_facing_dir(dir:int):
 	if facing_dir == dir:
@@ -194,51 +189,57 @@ func _process(delta: float) -> void:
 		var change = delta * movement_speed
 		move_timmer += delta
 		#print("Moveing: Pos: %s | Change: %s | Time: %s" % [self.position, change, move_timmer])
-		if actor_motion_node.position.distance_to(movement_dest_pos) < change:
-			actor_motion_node.position = movement_dest_pos
+		if actor_motion_node.position.distance_to(movement_dest_position) < change:
+			actor_motion_node.position = movement_dest_position
 			is_moving = false
 			if current_body_animation_action:
 				_on_reached_dest()
 				move_timmer = 0
 		else:
-			actor_motion_node.position = actor_motion_node.position.move_toward(movement_dest_pos, change)
+			actor_motion_node.position = actor_motion_node.position.move_toward(movement_dest_position, change)
 	# Not Moving
 	else:
 		if is_walking:
 			printerr("%s: Stray walking animation without moving" % [Actor.Id])
 			finsh_walk_animation()
-			
 
-var movement_start_pos:Vector2
-var movement_dest_pos:Vector2
+var cur_map_pos:MapPos
+var movement_start_position:Vector2
+var movement_dest_position:Vector2
 var movement_speed:float
 
 var is_moving:bool
 var is_walking:bool:
 	get: return current_body_animation_action == WALK_ANIM_NAME
 
+## Set the MapPosition the Actor is moving towards.
 func set_move_destination(map_pos:MapPos, frames_to_reach:int, start_walking_if_not:bool=true, speed_scale:float=1):
-	movement_start_pos = actor_motion_node.position
+	if _is_moving_on_script:
+		printerr("ActorNode: Attemped set_move_destination while scripted movevment is active.")
+		return
+	movement_start_position = actor_motion_node.position
 	var tile_map = get_parent()  as TileMapLayer
 	if not tile_map: return
 	if map_pos.dir != facing_dir:
 		set_facing_dir(map_pos.dir)
-	movement_dest_pos = tile_map.map_to_local(map_pos.to_vector2i())  - self.position
+	movement_dest_position = tile_map.map_to_local(map_pos.to_vector2i())  - self.position
 	var secs_to_reach = (frames_to_reach * ActionQueController.SUB_ACTION_FRAME_TIME) 
-	var dist = movement_start_pos.distance_to(movement_dest_pos)
-	movement_speed =  dist / secs_to_reach * CombatRootControl.get_time_scale() * speed_scale
-	is_moving = movement_start_pos.distance_to(movement_dest_pos) > 0.01
+	var dist = movement_start_position.distance_to(movement_dest_position)
+	movement_speed =  (dist / secs_to_reach) * CombatRootControl.get_time_scale() * speed_scale
+	is_moving = movement_start_position.distance_to(movement_dest_position) > 0.01
 	print("Starting Movement: FtR: %s | TtR: %s | Dist: %s | MS: %s " % [frames_to_reach, secs_to_reach,dist, movement_speed ])
-	print("Start Pos: %s | Target Pos: %s" % [movement_start_pos, movement_dest_pos])
-	if  is_moving:
-		if start_walking_if_not and not is_walking:
-			start_walk_animation()
-	else:
-		_start_next_queued_movement()
+	print("Start Pos: %s | Target Pos: %s" % [movement_start_position, movement_dest_position])
+	if  is_moving and start_walking_if_not and not is_walking:
+		start_walk_animation()
+	
+	if not is_moving and _is_moving_on_script:
+		_scripted_move_finshed()
 	
 	pass
 
 var _movement_que:Array
+var _is_moving_on_script:bool
+
 func que_scripted_movement(path_pos_data:Array):
 	if path_pos_data.size() == 0:
 		return
@@ -248,23 +249,68 @@ func que_scripted_movement(path_pos_data:Array):
 		_start_next_queued_movement()
 
 func _on_reached_dest():
+	print("Reached Dest")
 	if is_walking:
 		finsh_walk_animation()
 	is_moving = false
+	if _is_moving_on_script:
+		print("Was Moving On Script")
+		_scripted_move_finshed()
+		return
+	reached_motion_destination.emit()
+
+func _start_next_queued_movement():
+	print("Starting Movemnt")
+	if _movement_que.size() <= 0:
+		print("--Move Que Empty")
+		_is_moving_on_script = false
+		return
+	
+	var next_pos_data = _movement_que[0]
+	if (next_pos_data == null or next_pos_data['Pos'] == cur_map_pos):
+		_scripted_move_finshed()
+		return
+	
+	print("--Starting Queued Pos: %s " % [next_pos_data['Pos']])
+	var pos = next_pos_data['Pos']
+	var frames = next_pos_data['Frames']
+	var speed = next_pos_data['Speed']
+	
+	movement_start_position = actor_motion_node.position
+	var tile_map = get_parent()  as TileMapLayer
+	if not tile_map: 
+		_is_moving_on_script = false
+		return
+	
+	movement_dest_position = tile_map.map_to_local(pos.to_vector2i())  - self.position
+	var secs_to_reach = (frames * ActionQueController.SUB_ACTION_FRAME_TIME) 
+	var dist = movement_start_position.distance_to(movement_dest_position)
+	movement_speed =  (dist / secs_to_reach) * CombatRootControl.get_time_scale() * speed
+	is_moving = movement_start_position.distance_to(movement_dest_position) > 0.01
+	if not is_moving:
+		_scripted_move_finshed()
+	else:
+		start_walk_animation()
+		_is_moving_on_script = true
+
+func _scripted_move_finshed():
+	var next_pos_data = _movement_que[0]
+	print("Script Finished: %s" % [next_pos_data])
+	_movement_que.remove_at(0)
+	var next_pos = next_pos_data['Pos']
+	if next_pos != cur_map_pos:
+		set_map_pos(next_pos)
 	if _movement_que.size() > 0:
 		_start_next_queued_movement()
 	else:
+		_is_moving_on_script = false
 		reached_motion_destination.emit()
-
-func _start_next_queued_movement():
-	if _movement_que.size() > 0:
-		var next_pos = _movement_que[0]
-		_movement_que.remove_at(0)
-		print("--Starting Queued Pos: %s " % [next_pos['Pos']])
-		var pos = next_pos['Pos']
-		var frames = next_pos['Frames']
-		var speed = next_pos['Speed']
-		set_move_destination(pos, frames, true, speed)
+		
+	
+	#while _movement_que.size() > 0 and (next_pos_data == null or next_pos_data['Pos'] == cur_map_pos):
+		#next_pos_data = _movement_que[0]
+		#_movement_que.remove_at(0)
+	
 
 ####################################################
 #			BODY ANIMATIONS

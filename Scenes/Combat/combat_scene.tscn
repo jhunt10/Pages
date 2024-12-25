@@ -20,6 +20,7 @@
 [ext_resource type="Texture2D" uid="uid://b71e02wpy7dij" path="res://assets/Sprites/UI/GearButton.png" id="21_s2qa8"]
 [ext_resource type="Script" path="res://assets/Scripts/DevTools/que_cal_control.gd" id="22_4rk3c"]
 [ext_resource type="Texture2D" uid="uid://cen5h0gfhguhg" path="res://assets/Sprites/UI/GearButtonPressed.png" id="22_eoo3l"]
+[ext_resource type="Theme" uid="uid://by8t8e4s2str7" path="res://Scenes/VFXs/SpeachBubble/speach_bubble_theme.tres" id="22_gl452"]
 [ext_resource type="PackedScene" uid="uid://2ij8q0r7uy4y" path="res://Scenes/Combat/UiNodes/QueDisplay/que_display_control.tscn" id="22_i32rr"]
 [ext_resource type="Texture2D" uid="uid://cu00gc8hhk0h3" path="res://assets/Sprites/UI/QueInputAndDisplay/page_slot.png" id="23_o55pl"]
 [ext_resource type="Script" path="res://assets/Scripts/DevTools/que_cal_bar_control.gd" id="23_tcvpd"]
@@ -33,7 +34,6 @@
 [ext_resource type="Texture2D" uid="uid://dx5cq5wifod2g" path="res://Scenes/Combat/UiNodes/CameraLock/CameraLock_Following.png" id="28_mng7g"]
 [ext_resource type="Script" path="res://Scenes/Combat/UiNodes/target_input_control.gd" id="31_jtehh"]
 [ext_resource type="Texture2D" uid="uid://io35wpu802fp" path="res://assets/Sprites/UI/BackPatches/Patch_64_12.png" id="32_f81f5"]
-[ext_resource type="Theme" uid="uid://dwinll8pgdjhc" path="res://Scenes/Themes/standard_theme.tres" id="33_yh7y3"]
 
 [node name="CombatRootControl" type="Control" node_paths=PackedStringArray("ui_control", "camera", "MapController", "GridCursor")]
 custom_minimum_size = Vector2(1152, 648)
@@ -494,7 +494,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("33_yh7y3")
+theme = ExtResource("22_gl452")
 text = "Select Target Actor"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -537,7 +537,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("33_yh7y3")
+theme = ExtResource("22_gl452")
 theme_override_font_sizes/font_size = 32
 text = "Cancel"
 horizontal_alignment = 1
@@ -596,7 +596,7 @@ layout_mode = 2
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 size_flags_vertical = 1
-theme = ExtResource("33_yh7y3")
+theme = ExtResource("22_gl452")
 theme_override_font_sizes/font_size = 92
 text = "You Dead!"
 vertical_alignment = 2
@@ -628,7 +628,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("33_yh7y3")
+theme = ExtResource("22_gl452")
 theme_override_font_sizes/font_size = 32
 text = "Load Game"
 horizontal_alignment = 1
@@ -660,7 +660,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("33_yh7y3")
+theme = ExtResource("22_gl452")
 theme_override_font_sizes/font_size = 32
 text = "Main Menu"
 horizontal_alignment = 1
@@ -705,7 +705,7 @@ layout_mode = 2
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 size_flags_vertical = 1
-theme = ExtResource("33_yh7y3")
+theme = ExtResource("22_gl452")
 theme_override_font_sizes/font_size = 92
 text = "Victory!"
 vertical_alignment = 2
@@ -737,7 +737,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("33_yh7y3")
+theme = ExtResource("22_gl452")
 theme_override_font_sizes/font_size = 32
 text = "Load Game"
 horizontal_alignment = 1
@@ -748,7 +748,7 @@ layout_mode = 2
 
 [node name="TitleLabel" type="Label" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/GameVictoryScreen/CenterContainer/VBoxContainer/PickupPagesContainer"]
 layout_mode = 2
-theme = ExtResource("33_yh7y3")
+theme = ExtResource("22_gl452")
 theme_override_font_sizes/font_size = 32
 text = "New Pages"
 horizontal_alignment = 1
@@ -767,7 +767,7 @@ stretch_mode = 5
 
 [node name="ItemNameLabel" type="Label" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/GameVictoryScreen/CenterContainer/VBoxContainer/PickupPagesContainer/PickupPageContainer"]
 layout_mode = 2
-theme = ExtResource("33_yh7y3")
+theme = ExtResource("22_gl452")
 theme_override_font_sizes/font_size = 32
 text = "Item"
 horizontal_alignment = 1
@@ -776,7 +776,7 @@ vertical_alignment = 1
 [node name="Label2" type="Label" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/GameVictoryScreen/CenterContainer/VBoxContainer/PickupPagesContainer/PickupPageContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme = ExtResource("33_yh7y3")
+theme = ExtResource("22_gl452")
 theme_override_font_sizes/font_size = 32
 text = ". . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . "
 horizontal_alignment = 1
@@ -785,7 +785,7 @@ text_overrun_behavior = 1
 
 [node name="Label3" type="Label" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/GameVictoryScreen/CenterContainer/VBoxContainer/PickupPagesContainer/PickupPageContainer"]
 layout_mode = 2
-theme = ExtResource("33_yh7y3")
+theme = ExtResource("22_gl452")
 theme_override_font_sizes/font_size = 32
 text = "x "
 horizontal_alignment = 1
@@ -793,7 +793,7 @@ vertical_alignment = 1
 
 [node name="CountLabel" type="Label" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/GameVictoryScreen/CenterContainer/VBoxContainer/PickupPagesContainer/PickupPageContainer"]
 layout_mode = 2
-theme = ExtResource("33_yh7y3")
+theme = ExtResource("22_gl452")
 theme_override_font_sizes/font_size = 32
 text = "1"
 horizontal_alignment = 1
@@ -804,7 +804,7 @@ layout_mode = 2
 
 [node name="TitleLabel" type="Label" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/GameVictoryScreen/CenterContainer/VBoxContainer/PickupItemsContainer"]
 layout_mode = 2
-theme = ExtResource("33_yh7y3")
+theme = ExtResource("22_gl452")
 theme_override_font_sizes/font_size = 32
 text = "Found Items"
 horizontal_alignment = 1
@@ -823,7 +823,7 @@ stretch_mode = 5
 
 [node name="ItemNameLabel" type="Label" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/GameVictoryScreen/CenterContainer/VBoxContainer/PickupItemsContainer/PickupItemContainer"]
 layout_mode = 2
-theme = ExtResource("33_yh7y3")
+theme = ExtResource("22_gl452")
 theme_override_font_sizes/font_size = 32
 text = "Item"
 horizontal_alignment = 1
@@ -832,7 +832,7 @@ vertical_alignment = 1
 [node name="Label2" type="Label" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/GameVictoryScreen/CenterContainer/VBoxContainer/PickupItemsContainer/PickupItemContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme = ExtResource("33_yh7y3")
+theme = ExtResource("22_gl452")
 theme_override_font_sizes/font_size = 32
 text = ". . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . "
 horizontal_alignment = 1
@@ -841,7 +841,7 @@ text_overrun_behavior = 1
 
 [node name="Label3" type="Label" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/GameVictoryScreen/CenterContainer/VBoxContainer/PickupItemsContainer/PickupItemContainer"]
 layout_mode = 2
-theme = ExtResource("33_yh7y3")
+theme = ExtResource("22_gl452")
 theme_override_font_sizes/font_size = 32
 text = "x "
 horizontal_alignment = 1
@@ -849,7 +849,7 @@ vertical_alignment = 1
 
 [node name="CountLabel" type="Label" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/GameVictoryScreen/CenterContainer/VBoxContainer/PickupItemsContainer/PickupItemContainer"]
 layout_mode = 2
-theme = ExtResource("33_yh7y3")
+theme = ExtResource("22_gl452")
 theme_override_font_sizes/font_size = 32
 text = "1"
 horizontal_alignment = 1
@@ -881,7 +881,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("33_yh7y3")
+theme = ExtResource("22_gl452")
 theme_override_font_sizes/font_size = 32
 text = "Back to Camp"
 horizontal_alignment = 1

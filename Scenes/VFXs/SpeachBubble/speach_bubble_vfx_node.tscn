@@ -1,0 +1,231 @@
+[gd_scene load_steps=11 format=3 uid="uid://b07c3300ehfi5"]
+
+[ext_resource type="Script" path="res://Scenes/VFXs/SpeachBubble/speach_bubble_vfx_node.gd" id="1_3hi8n"]
+[ext_resource type="Texture2D" uid="uid://dimnf2vvlptow" path="res://Scenes/VFXs/SpeachBubble/SpeachBub_BotLeft.png" id="3_f6tw2"]
+[ext_resource type="Theme" uid="uid://by8t8e4s2str7" path="res://Scenes/VFXs/SpeachBubble/speach_bubble_theme.tres" id="4_27tdc"]
+
+[sub_resource type="Animation" id="Animation_wtg8w"]
+resource_name = "4_sprites_250ms_frames"
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:animation_half_way")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_mg4p0"]
+resource_name = "4_sprites_250ms_frames_loop"
+loop_mode = 1
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_uwom5"]
+resource_name = "6_sprites_250ms_frames"
+length = 1.5
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1, 1.25),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:animation_half_way")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.75),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_7qvkc"]
+resource_name = "6_sprites_250ms_frames_loop"
+length = 1.5
+loop_mode = 1
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1, 1.25),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+
+[sub_resource type="Animation" id="Animation_kvxq2"]
+resource_name = "8_sprites_250ms_frames_loop"
+length = 2.0
+loop_mode = 1
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:animation_half_way")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_lwwt5"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:animation_half_way")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3vpeu"]
+_data = {
+"4_sprites_250ms_frames": SubResource("Animation_wtg8w"),
+"4_sprites_250ms_frames_loop": SubResource("Animation_mg4p0"),
+"6_sprites_250ms_frames": SubResource("Animation_uwom5"),
+"6_sprites_250ms_frames_loop": SubResource("Animation_7qvkc"),
+"8_sprites_250ms_frames_loop": SubResource("Animation_kvxq2"),
+"RESET": SubResource("Animation_lwwt5")
+}
+
+[node name="SpeachBubbleVFXNode" type="Node2D" node_paths=PackedStringArray("text_label", "hidden_line_edit", "speach_bubble_background", "speach_bubble_sprite")]
+z_index = 9
+script = ExtResource("1_3hi8n")
+display_text = "Hello, Friend!"
+begin_offset = 8
+end_trim = 14
+padding = Vector2i(8, 0)
+grow_speed = 3.0
+letter_delay = 0.05
+unprint_speed = 200.0
+text_label = NodePath("SpeachBubble/Label")
+hidden_line_edit = NodePath("SpeachBubble/LineEdit")
+speach_bubble_background = NodePath("SpeachBubble")
+speach_bubble_sprite = NodePath("Sprite2D")
+animation_half_way = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(1e-05, 1e-05)
+texture = ExtResource("3_f6tw2")
+offset = Vector2(14, -14)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_3vpeu")
+}
+
+[node name="SpeachBubble" type="NinePatchRect" parent="."]
+visible = false
+custom_minimum_size = Vector2(28, 28)
+anchors_preset = -1
+anchor_bottom = 1.0
+offset_top = -28.0
+offset_right = 28.0
+texture = ExtResource("3_f6tw2")
+patch_margin_left = 10
+patch_margin_top = 7
+patch_margin_right = 7
+patch_margin_bottom = 11
+
+[node name="Label" type="Label" parent="SpeachBubble"]
+self_modulate = Color(0, 0, 0, 1)
+custom_minimum_size = Vector2(21, 0)
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_right = -2.0
+offset_bottom = -3.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("4_27tdc")
+theme_override_constants/line_spacing = -5
+vertical_alignment = 1
+clip_text = true
+
+[node name="LineEdit" type="LineEdit" parent="SpeachBubble"]
+visible = false
+layout_mode = 0
+offset_left = 8.0
+offset_right = 122.0
+offset_bottom = 28.0
+theme = ExtResource("4_27tdc")
+theme_override_constants/minimum_character_width = 0
+alignment = 1
+expand_to_text_length = true

@@ -1,12 +1,18 @@
-[gd_scene load_steps=6 format=3 uid="uid://bje0k82nenje6"]
+[gd_scene load_steps=12 format=3 uid="uid://bje0k82nenje6"]
 
 [ext_resource type="Script" path="res://Scenes/Dialog/dialog_control.gd" id="1_h8gog"]
-[ext_resource type="Texture2D" uid="uid://dul8y1l1gw420" path="res://assets/Sprites/UI/BackPatches/Patch_32_8_Dark.png" id="2_reu70"]
+[ext_resource type="Script" path="res://Scenes/Dialog/black_out_control.gd" id="2_g02yb"]
 [ext_resource type="PackedScene" uid="uid://cyi7xhb25f7cs" path="res://Scenes/Dialog/DialogBlockControls/speech_dialog_block.tscn" id="3_er26g"]
-[ext_resource type="Theme" uid="uid://dwinll8pgdjhc" path="res://Scenes/Themes/standard_theme.tres" id="3_rdgwk"]
+[ext_resource type="Texture2D" uid="uid://cgrlfobidw8xl" path="res://assets/Sprites/UI/BackPatches/PaperPatch_Bigger_276x192_48.png" id="3_iu7f6"]
 [ext_resource type="PackedScene" uid="uid://by02p6lkrr3iv" path="res://Scenes/Dialog/DialogBlockControls/question_dialog_block.tscn" id="4_0x12l"]
+[ext_resource type="Theme" uid="uid://by8t8e4s2str7" path="res://Scenes/VFXs/SpeachBubble/speach_bubble_theme.tres" id="6_482q4"]
+[ext_resource type="Script" path="res://Scenes/Dialog/auto_play_button.gd" id="7_snrsi"]
+[ext_resource type="Texture2D" uid="uid://fva0obvct2kj" path="res://Scenes/Dialog/Icons/CheckBox_On.png" id="8_1tqry"]
+[ext_resource type="Texture2D" uid="uid://cul356gq6n1tw" path="res://Scenes/Dialog/Icons/CheckBox_Off.png" id="9_imyb2"]
+[ext_resource type="Texture2D" uid="uid://ccwj8ucsjhl6w" path="res://assets/Sprites/UI/BackPatches/Patch_64_12_Dark.png" id="10_6rdjr"]
+[ext_resource type="FontFile" uid="uid://0kbg00s43xf0" path="res://assets/Fonts/8bit.ttf" id="11_sd5id"]
 
-[node name="DialogControl" type="Control" node_paths=PackedStringArray("dialog_box_holder", "popup_holder", "dialog_box", "next_button", "scroll_container", "blocks_container")]
+[node name="DialogControl" type="Control" node_paths=PackedStringArray("dialog_box_holder", "popup_holder", "dialog_box", "next_button", "auto_play_button", "scroll_container", "blocks_container", "blackout_coontrol")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -18,9 +24,23 @@ script = ExtResource("1_h8gog")
 dialog_box_holder = NodePath("BoxHolderControl")
 popup_holder = NodePath("PopUpHolder")
 dialog_box = NodePath("BoxHolderControl/DialogBox")
-next_button = NodePath("BoxHolderControl/DialogBox/Button")
+next_button = NodePath("BoxHolderControl/DialogBox/NextButton")
+auto_play_button = NodePath("BoxHolderControl/DialogBox/AutoButton")
 scroll_container = NodePath("BoxHolderControl/DialogBox/ScrollContainer")
 blocks_container = NodePath("BoxHolderControl/DialogBox/ScrollContainer/VBoxContainer")
+blackout_coontrol = NodePath("BlackOutControl")
+
+[node name="BlackOutControl" type="ColorRect" parent="."]
+self_modulate = Color(1, 1, 1, 0.992989)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+script = ExtResource("2_g02yb")
+fade_to_black = true
 
 [node name="BoxHolderControl" type="Control" parent="."]
 anchors_preset = 0
@@ -49,14 +69,15 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_reu70")
-patch_margin_left = 8
-patch_margin_top = 8
-patch_margin_right = 8
-patch_margin_bottom = 8
+texture = ExtResource("3_iu7f6")
+patch_margin_left = 48
+patch_margin_top = 48
+patch_margin_right = 48
+patch_margin_bottom = 48
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 2
 
 [node name="PremadeDialogBlocks" type="Control" parent="BoxHolderControl/DialogBox"]
-visible = false
 layout_mode = 2
 anchors_preset = 0
 offset_left = 16.0
@@ -68,6 +89,7 @@ offset_bottom = 16.0
 layout_mode = 0
 
 [node name="QuestionDialogBlock" parent="BoxHolderControl/DialogBox/PremadeDialogBlocks" instance=ExtResource("4_0x12l")]
+visible = false
 layout_mode = 0
 offset_top = 0.0
 offset_bottom = 88.0
@@ -77,7 +99,7 @@ layout_mode = 2
 offset_top = 144.0
 offset_right = 1120.0
 offset_bottom = 164.0
-theme = ExtResource("3_rdgwk")
+theme = ExtResource("6_482q4")
 text = "----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------"
 text_overrun_behavior = 1
 
@@ -99,7 +121,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Button" type="Button" parent="BoxHolderControl/DialogBox"]
+[node name="NextButton" type="Button" parent="BoxHolderControl/DialogBox"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
@@ -112,9 +134,118 @@ offset_right = -16.0
 offset_bottom = -16.0
 grow_horizontal = 0
 grow_vertical = 0
-theme = ExtResource("3_rdgwk")
+theme = ExtResource("6_482q4")
 theme_override_font_sizes/font_size = 32
 text = "Next"
+
+[node name="AutoButton" type="Control" parent="BoxHolderControl/DialogBox" node_paths=PackedStringArray("button", "check_box_rect")]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -140.0
+offset_top = -104.0
+offset_right = -8.0
+offset_bottom = -56.0
+grow_horizontal = 0
+script = ExtResource("7_snrsi")
+button = NodePath("Button")
+check_box_rect = NodePath("TextureRect")
+checked_texture = ExtResource("8_1tqry")
+unchecked_texture = ExtResource("9_imyb2")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="BoxHolderControl/DialogBox/AutoButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_6rdjr")
+patch_margin_left = 12
+patch_margin_top = 12
+patch_margin_right = 12
+patch_margin_bottom = 12
+
+[node name="TextureRect" type="TextureRect" parent="BoxHolderControl/DialogBox/AutoButton"]
+layout_mode = 1
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 44.0
+offset_bottom = 44.0
+texture = ExtResource("8_1tqry")
+
+[node name="Label" type="Label" parent="BoxHolderControl/DialogBox/AutoButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("11_sd5id")
+theme_override_font_sizes/font_size = 32
+text = "Auto "
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="BoxHolderControl/DialogBox/AutoButton"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SkipButton" type="Control" parent="BoxHolderControl/DialogBox" node_paths=PackedStringArray("button")]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -140.0
+offset_top = -52.0
+offset_right = -8.0
+offset_bottom = -4.0
+grow_horizontal = 0
+script = ExtResource("7_snrsi")
+button = NodePath("Button")
+checked_texture = ExtResource("8_1tqry")
+unchecked_texture = ExtResource("9_imyb2")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="BoxHolderControl/DialogBox/SkipButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_6rdjr")
+patch_margin_left = 12
+patch_margin_top = 12
+patch_margin_right = 12
+patch_margin_bottom = 12
+
+[node name="Label" type="Label" parent="BoxHolderControl/DialogBox/SkipButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("11_sd5id")
+theme_override_font_sizes/font_size = 32
+text = "Skip"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="BoxHolderControl/DialogBox/SkipButton"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="PopUpHolder" type="Control" parent="."]
 layout_mode = 1

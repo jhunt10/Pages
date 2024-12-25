@@ -36,6 +36,10 @@ func do_thing():
 	
 	if _block_data.get('FollowActor', false):
 		CombatRootControl.Instance.camera.lock_to_actor(target_actor)
+	elif (CombatRootControl.Instance.camera.following_actor_node and 
+		CombatRootControl.Instance.camera.following_actor_node.Actor.Id == target_id):
+		CombatRootControl.Instance.camera.following_actor_node = null
+		
 		
 	if _block_data.get('WaitToFinish', true) and actor_node.is_moving:
 		actor_node.reached_motion_destination.connect(on_move_finsh)
@@ -48,11 +52,17 @@ func _do_pose_marker(actor, actor_node, marker_name):
 		printerr("MoveActorDialogBlock: Failed to find Marker Pos: %s" %[marker_name])
 		self.finish()
 		return
-	var actor_pos = CombatRootControl.Instance.GameState.MapState.get_actor_pos(actor)
+	var actor_pos = actor_node.cur_map_pos
 	var distance = max(abs(actor_pos.x - marker_pos.x), abs(actor_pos.y - marker_pos.y) )
-	var frames = distance * ActionQueController.FRAMES_PER_ACTION
+	var frames = (distance) * ActionQueController.FRAMES_PER_ACTION
 	var speed = _block_data.get("SpeedScale", 1)
-	actor_node.set_move_destination(marker_pos, frames, true, speed)
+	var path_data = []
+	path_data.append({
+			"Pos": marker_pos,
+			"Frames": frames,
+			"Speed": speed
+		})
+	actor_node.que_scripted_movement(path_data)
 
 func _do_path_marker(actor, actor_node, marker_name):
 	var path_marker = CombatRootControl.Instance.MapController.get_path_marker(marker_name)
@@ -63,7 +73,7 @@ func _do_path_marker(actor, actor_node, marker_name):
 	var path_poses = path_marker.get_path_poses()
 	var path_data = []
 	
-	var actor_pos = CombatRootControl.Instance.GameState.MapState.get_actor_pos(actor)
+	var actor_pos = actor_node.cur_map_pos
 	for path_pos in path_poses:
 		var distance = max(abs(actor_pos.x - path_pos.x), abs(actor_pos.y - path_pos.y) )
 		var frames = max(1, distance * ActionQueController.FRAMES_PER_ACTION)

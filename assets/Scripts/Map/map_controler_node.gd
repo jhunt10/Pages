@@ -79,7 +79,7 @@ func create_actor_node(actor:BaseActor, map_pos:MapPos):
 	actor_tile_map.add_child(new_node)
 	new_node.position = actor_tile_map.map_to_local(map_pos.to_vector2i())
 	new_node.set_actor(actor)
-	new_node.force_display_pos(map_pos)
+	new_node.set_map_pos(map_pos)
 	new_node.visible = true
 	if LOGGING: print("MapControllerNode: Created Actor Node: %s" % [actor.Id])
 

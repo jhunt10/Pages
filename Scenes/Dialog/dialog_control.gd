@@ -12,9 +12,10 @@ const LETTER_DELAY:float = 0.03
 @export var popup_holder:Control
 @export var dialog_box:Control
 @export var next_button:Button
+@export var auto_play_button:AutoPlayButton
 @export var scroll_container:ScrollContainer
 @export var blocks_container:VBoxContainer
-
+@export var blackout_coontrol:BlackOutControl
 var _start_position
 
 var dialog_script_data:Array
@@ -35,6 +36,7 @@ var _click_anywhere_next_delay:float = 0
 func _ready() -> void:
 	next_button.pressed.connect(on_next_button_pressed)
 	_start_position = dialog_box.position
+	auto_play_button.toggled.connect(on_auto_play_toggeled)
 	#load_dialog_script("res://Scenes/Dialog/_ExampleDialogScript.json")#
 	#load_dialog_script("res://data/DialogScripts/TutorialDialog.json")
 	if dialog_script_data.size() > 0:
@@ -174,6 +176,9 @@ func on_next_button_pressed():
 	next_button.hide()
 	if current_block and current_block.is_finished:
 		block_finished(true)
+
+func on_auto_play_toggeled(is_on):
+	print("AutoPlay: %s" % [is_on])
 
 func add_popup(key, pop_up, pos=null):
 	if popups.keys().has(key):

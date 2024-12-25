@@ -1,29 +1,107 @@
-[gd_scene load_steps=3 format=3 uid="uid://cyi7xhb25f7cs"]
+[gd_scene load_steps=7 format=3 uid="uid://cyi7xhb25f7cs"]
 
-[ext_resource type="Script" path="res://Scenes/Dialog/DialogBlockControls/speech_dialog_block_control.gd" id="1_nxhwm"]
-[ext_resource type="Theme" uid="uid://dwinll8pgdjhc" path="res://Scenes/Themes/standard_theme.tres" id="2_7rrsn"]
+[ext_resource type="Script" path="res://Scenes/Dialog/DialogBox/dialog_box.gd" id="1_s306v"]
+[ext_resource type="Texture2D" uid="uid://cgrlfobidw8xl" path="res://assets/Sprites/UI/BackPatches/PaperPatch_Bigger_276x192_48.png" id="1_x1pkb"]
+[ext_resource type="Theme" uid="uid://d14wnuq8dl417" path="res://Scenes/Themes/dialog_theme.tres" id="4_5vyn8"]
+[ext_resource type="Texture2D" uid="uid://dqgfhiakoqw2y" path="res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Happy.png" id="4_51sb5"]
+[ext_resource type="Texture2D" uid="uid://cdy53ml2tuvc8" path="res://assets/Sprites/UI/BackPatches/FancyBackPatch_Frame_64_18.png" id="5_ctiiv"]
+[ext_resource type="PackedScene" uid="uid://bpvy87uagttpr" path="res://Scenes/UiNodes/ScollBar/scroll_bar.tscn" id="7_h5ro5"]
 
-[node name="SpeechDialogBlock" type="BoxContainer" node_paths=PackedStringArray("speaker_label", "text_box")]
-offset_right = 1120.0
-offset_bottom = 40.0
-script = ExtResource("1_nxhwm")
-speaker_label = NodePath("SpeakerLabel")
-text_box = NodePath("TextLabel")
+[node name="DialogBox" type="Control" node_paths=PackedStringArray("speaker_container", "speaker_portrait", "speaker_label", "scroll_bar", "entry_contaier", "read_timer_label", "premade_text_label")]
+custom_minimum_size = Vector2(640, 180)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 640.0
+offset_bottom = 180.0
+script = ExtResource("1_s306v")
+speaker_container = NodePath("SpeechDialogBlock/SpeakerContainer")
+speaker_portrait = NodePath("SpeechDialogBlock/SpeakerContainer/SpeakerRect")
+speaker_label = NodePath("SpeechDialogBlock/SpeakerContainer/SpeakerLabel")
+scroll_bar = NodePath("SpeechDialogBlock/ScrollBar")
+entry_contaier = NodePath("SpeechDialogBlock/ScrollContainer/VBoxContainer")
+read_timer_label = NodePath("SpeechDialogBlock/SpeakerContainer/ReadTimerLabel")
+premade_text_label = NodePath("SpeechDialogBlock/ScrollContainer/VBoxContainer/TextLabel")
 
-[node name="SpeakerLabel" type="RichTextLabel" parent="."]
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_x1pkb")
+patch_margin_left = 48
+patch_margin_top = 48
+patch_margin_right = 48
+patch_margin_bottom = 48
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 2
+
+[node name="SpeechDialogBlock" type="BoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = -16.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SpeakerContainer" type="VBoxContainer" parent="SpeechDialogBlock"]
 layout_mode = 2
-theme = ExtResource("2_7rrsn")
-theme_override_font_sizes/normal_font_size = 32
-text = "Speaker: "
-fit_content = true
-scroll_active = false
-autowrap_mode = 0
+theme_override_constants/separation = 0
 
-[node name="TextLabel" type="RichTextLabel" parent="."]
+[node name="SpeakerRect" type="TextureRect" parent="SpeechDialogBlock/SpeakerContainer"]
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 2
+texture = ExtResource("4_51sb5")
+
+[node name="PortraitFrame" type="TextureRect" parent="SpeechDialogBlock/SpeakerContainer/SpeakerRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_ctiiv")
+
+[node name="SpeakerLabel" type="Label" parent="SpeechDialogBlock/SpeakerContainer"]
+layout_mode = 2
+theme = ExtResource("4_5vyn8")
+text = "MtFg"
+horizontal_alignment = 1
+
+[node name="ReadTimerLabel" type="Label" parent="SpeechDialogBlock/SpeakerContainer"]
+self_modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+text = "124"
+horizontal_alignment = 1
+
+[node name="VSeparator" type="VSeparator" parent="SpeechDialogBlock"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(8, 8)
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="SpeechDialogBlock"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme = ExtResource("2_7rrsn")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SpeechDialogBlock/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TextLabel" type="RichTextLabel" parent="SpeechDialogBlock/ScrollContainer/VBoxContainer"]
+self_modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("4_5vyn8")
 theme_override_font_sizes/normal_font_size = 32
 text = "Some test text"
 fit_content = true
 scroll_active = false
+
+[node name="ScrollBar" parent="SpeechDialogBlock" node_paths=PackedStringArray("scroll_container") instance=ExtResource("7_h5ro5")]
+layout_mode = 2
+scroll_container = NodePath("../ScrollContainer")

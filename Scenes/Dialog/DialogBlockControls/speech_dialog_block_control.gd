@@ -3,6 +3,7 @@ extends Container
 
 @export var speaker_label:RichTextLabel
 @export var text_box:RichTextLabel
+@export var portrait_rect:TextureRect
 
 var dialog_block:SpeechDialogBlock
 var line_index:int
@@ -87,6 +88,13 @@ func set_dailog_block(block:SpeechDialogBlock):
 		speaker_label.text = dialog_block.get_block_data().get("Speaker", "") + ": "
 	else:
 		speaker_label.hide()
+	if block_data.keys().has("PortraitTexture") and block_data.get("PortraitTexture", null):
+		var port = SpriteCache.get_sprite(block_data.get("PortraitTexture"))
+		if port:
+			portrait_rect.texture = port
+	else:
+		portrait_rect.hide()
+
 
 ## Returns true if the block was completed while skipping
 func try_skip()->bool:
