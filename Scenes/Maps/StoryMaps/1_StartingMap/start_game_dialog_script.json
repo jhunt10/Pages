@@ -1,300 +1,93 @@
-[
-    {
-        "BlockScript":"res://Scenes/Dialog/DialogBlocks/DialogBlock_FadeToBlack.gd",
-        "FadeIn":"true"
-    },
-	{
-		"BlockTag": "MoveActor",
-		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_MoveActor.gd",
-		"TargetActorId": "Player1",
-		"PosMarkerName": "P1",
-		"FollowActor": true,
-        "WaitToFinish": false,
-		"SpeedScale": 1
-	},
-	{
-		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_Speech.gd",
-		"Speaker": null,
-		"WaitForButton": true,
-		"Lines": [
-			"\nAnd so our Hero finds find themselves wondering aimlessly,",
-            "\nwhen meet a Mysterious Figure."
-		]
-	},
-	{
-		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_SpeechBubble.gd",
-        "TargetActorId": "MysteriousFigure",
-        "Text":"Hello, Friend!",
-        "Create":"HelloBubble",
-        "WaitToFinish": true
-	},
-	{
-		"BlockTag": "MoveActor",
-		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_MoveActor.gd",
-		"TargetActorId": "Player1",
-		"PosMarkerName": "P2",
-		"FollowActor": true,
-		"SpeedScale": 1
-	},
-	{
-		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_SpeechBubble.gd",
-        "TargetActorId": "MysteriousFigure",
-        "Text":"Hello, Friend!",
-        "Delete":"HelloBubble"
-	},
-	{
-		"BlockTag": "MoveActor",
-		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_MoveActor.gd",
-		"TargetActorId": "MysteriousFigure",
-		"PosMarkerName": "MF1",
-		"FollowActor": false,
-        "WaitToFinish": true,
-		"SpeedScale": 2
-	},
-	{
-		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_Speech.gd",
-		"Speaker": "MtFg",
-		"WaitForButton": true,
-        "PortraitTexture": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Happy.png",
-		"Lines": [
-			"\nI couldn't help but notice you wondering aimlessly"
-		]
-	},
-	{
-		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_Speech.gd",
-		"Speaker": "MtFg",
-		"WaitForButton": true,
-        "PortraitTexture": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Squint.png",
-		"Lines": [
-			"\nHmm",
-			".",
-			".",
-			"."
-		]
-	},
-	{
-		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_Speech.gd",
-		"Speaker": null,
-		"WaitForButton": true,
-		"Lines": [
-			"\nThe Mysterious Figure leans in a little too close, looking you up and down."
-		]
-	},
-	{
-		"BlockTag": "MoveActor",
-		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_MoveActor.gd",
-		"TargetActorId": "MysteriousFigure",
-		"PathMarkerName": "MF2",
-		"FollowActor": false,
-        "WaitToFinish": false,
-		"SpeedScale": 1.5
-	},
-	{
-		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_Speech.gd",
-		"Speaker": "MtFg",
-		"WaitForButton": true,
-        "PortraitTexture": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Squint.png",
-		"Lines": [
-			"\nCapable",
-			".",
-			".",
-			".",
-			" but inexperienced."
-		]
-	},
-	{
-		"BlockTag": "MoveActor",
-		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_MoveActor.gd",
-		"TargetActorId": "Player1",
-		"PosMarkerName": "P3",
-		"FollowActor": true,
-		"SpeedScale": 1
-	},
-	{
-		"BlockTag": "MoveActor",
-		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_MoveActor.gd",
-		"TargetActorId": "MysteriousFigure",
-		"PathMarkerName": "MF3",
-		"FollowActor": false,
-        "WaitToFinish": false,
-		"SpeedScale": 1.5
-	},
-	{
-		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_Speech.gd",
-		"Speaker": "MtFg",
-		"WaitForButton": true,
-        "PortraitTexture": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Squint.png",
-		"Lines": [
-			"\nAmbitious",
-			".",
-			".",
-			".",
-			" but directionless."
-		]
-	},
-	{
-		"BlockTag": "MoveActor",
-		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_MoveActor.gd",
-		"TargetActorId": "Player1",
-		"PosMarkerName": "P4",
-		"FollowActor": true,
-		"SpeedScale": 1
-	},
-	{
-		"BlockTag": "MoveActor",
-		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_MoveActor.gd",
-		"TargetActorId": "MysteriousFigure",
-		"PathMarkerName": "MF4",
-		"FollowActor": false,
-        "WaitToFinish": false,
-		"SpeedScale": 1.5
-	},
-	{
-		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_Speech.gd",
-		"Speaker": "MtFg",
-		"WaitForButton": true,
-        "PortraitTexture": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Squint.png",
-		"Lines": [
-			"\nAnd",
-            ".",
-            ".",
-            ".",
-            " completly anonymous."
-		]
-	},
-	{
-		"BlockTag": "MoveActor",
-		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_MoveActor.gd",
-		"TargetActorId": "Player1",
-		"PosMarkerName": "P1",
-		"FollowActor": true,
-		"SpeedScale": 1
-	},
-	{
-		"BlockTag": "MoveActor",
-		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_MoveActor.gd",
-		"TargetActorId": "MysteriousFigure",
-		"PosMarkerName": "MF5",
-		"FollowActor": false,
-        "WaitToFinish": false,
-		"SpeedScale": 1
-	},
-	{
-		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_Speech.gd",
-		"Speaker": "MtFg",
-		"WaitForButton": true,
-        "PortraitTexture": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Happy.png",
-		"Lines": [
-			"\nYes,",
-            " you are just the person I’ve been looking for."
-		]
-	},
-    
-	{
-		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_Question.gd",
-		"Speaker": "MtFg",
-		"QuestionText": "My friend, will you be the Hero of this world?",
-		"AnswerKey": "Answer1",
-        "PortraitTexture": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Happy.png",
-		"Options": [
-			"Yes",
-			"No"
-		]
-	},
-	{
-		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_Condition.gd",
-		"AnswerConsition": {
-			"AnswerKey": "Answer1",
-			"JumpToMapping": {
-				"Yes": "AnsweredYes",
-				"No": "NoStoryEnding"
+{
+	"_Start_":{
+		"_NextBlock": "Intro_WalkIn",
+		"WaitForNextButton": true,
+		"Blocks":[
+			{
+				"BlockType": "Speech",
+				"Entries": [
+					{
+						"BlockType": "Blackout",
+						"State":"Black"
+					},
+					{
+						"EntryType":"Text",
+						"Text": "Unable to find their allies and in fear of being branded a deserter, "
+					}
+				]
 			}
-		}
-	},
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	{
-        "BlockTag": "NoStoryEnding",
-		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_Speech.gd",
-		"Speaker": "MtFg",
-		"WaitForButton": true,
-        "PortraitTexture": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Neutral.png",
-		"Lines": [
-			"\nOh."
 		]
 	},
-    {
-		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_Speech.gd",
-		"Speaker": "MtFg",
-		"WaitForButton": true,
-        "PortraitTexture": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Sad.png",
-		"Lines": [
-			"\nThen sorry to bother you."
+	"Intro_WalkIn":{
+		"_NextBlock": "Intro_Inspection",
+		"WaitForNextButton": true,
+		"EnsurePoses": {
+			"Player1":"Player_Spawn",
+			"MysteriousFigure":"MF_Spawn"
+		},
+		"Blocks":[
+			{
+				"BlockType": "Speech",
+				"WaitToFinish": false,
+				"Entries": [
+					{
+						"EntryType":"Text",
+						"Text": "our Hero find themselves wondering aimlessly "
+					}
+				]
+			},
+			{
+				"BlockType": "Blackout",
+				"WaitToFinish": false,
+				"State":"FadeIn"
+			},
+			{
+				"BlockType": "MoveActor",
+				"WaitToFinish": true,
+				"TargetActorId": "Player1",
+				"PosMarkerName": "P1",
+				"FollowActor": true,
+				"SpeedScale": 1
+			},
+			{
+				"BlockType": "SpeechBubble",
+				"WaitToFinish": true,
+				"TargetActorId": "MysteriousFigure",
+				"Text":"Hello, Friend!",
+				"Create":"HelloBubble"
+			},
+			{
+				"BlockType": "MoveActor",
+				"WaitToFinish": false,
+				"TargetActorId": "Player1",
+				"PosMarkerName": "P2",
+				"FollowActor": true,
+				"SpeedScale": 1
+			},
+			{
+				"BlockType": "Speech",
+				"WaitToFinish": true,
+				"Entries": [
+					{
+						"EntryType":"Text",
+						"Text": "when they meet a Mysterious Figure,"
+					},
+					{
+						"EntryType":"WaitToRead"
+					}
+				]
+			}
 		]
 	},
-	{
-		"BlockTag": "MoveActor",
-		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_MoveActor.gd",
-		"TargetActorId": "MysteriousFigure",
-		"PathMarkerName": "NSE_MF1",
-		"FollowActor": false,
-        "WaitToFinish": false,
-		"SpeedScale": 1
-	},
-	{
-		"BlockTag": "MoveActor",
-		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_MoveActor.gd",
-		"TargetActorId": "Player1",
-		"PosMarkerName": "NSE_P1",
-		"FollowActor": false,
-		"SpeedScale": 1,
-        "WaitToFinish": true,
-		"WaitForButton": false
-	},
-    {
-        "BlockScript":"res://Scenes/Dialog/DialogBlocks/DialogBlock_FadeToBlack.gd",
-        "FadeOut":"true"
-    },
-	{
-		"BlockTag": "MoveActor",
-		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_MoveActor.gd",
-		"TargetActorId": "Player1",
-		"PosMarkerName": "NSE_P2",
-		"FollowActor": false,
-		"SpeedScale": 1,
-        "WaitToFinish": true
-	},
-	{
-		"BlockScript": "res://Scenes/Dialog/DialogBlocks/DialogBlock_Speech.gd",
-		"Speaker": null,
-		"WaitForButton": true,
-		"Lines": [
-			"\nAnd so,",
-            " somebody else became thier hero..."
-		]
-	},
-    {
-        "BlockScript": "res://Scenes/Dialog/DialogBlocks/Custom/DialogBlock_FirstMap.gd",
-        "ReturnToMainMenu": true
-    }
+	"Intro_Inspection":{
+		"_NextBlock": null,
+		"WaitForNextButton": true,
+		"EnsurePoses": {
+			"Player1":"P1",
+			"MysteriousFigure":"MF_Spawn"
+		},
+		"Blocks":[
 
-]
+		]
+	}
+}

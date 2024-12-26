@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=4 uid="uid://cqru24o8nm3be"]
+[gd_scene load_steps=34 format=4 uid="uid://cqru24o8nm3be"]
 
 [ext_resource type="Script" path="res://assets/Scripts/Map/map_controler_node.gd" id="1_8owwq"]
 [ext_resource type="Texture2D" uid="uid://dxan6lyrg8db3" path="res://assets/Sprites/TileSets/GrassPath_TileSheet.png" id="2_rfkbp"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://den150d8i4nwt" path="res://assets/Sprites/TileSets/House_TileSet.png" id="8_gc8n7"]
 [ext_resource type="PackedScene" uid="uid://bpurspf6xbf1h" path="res://Scenes/Combat/UiNodes/TargetAreaDisplay/target_area_display_node.tscn" id="9_d87j1"]
 [ext_resource type="Texture2D" uid="uid://kh2uekpf4sb8" path="res://Scenes/Maps/MapEditing/ActorSpawnSprite.png" id="10_hh112"]
+[ext_resource type="Texture2D" uid="uid://c6x1hjsewv0qj" path="res://defs/Actors/NPCs/FishMerch/test.png" id="10_iguy0"]
 [ext_resource type="Script" path="res://Scenes/Maps/MapEditing/actor_spawn_node.gd" id="11_md0j5"]
 [ext_resource type="Texture2D" uid="uid://cj6vsmbdbfmqb" path="res://defs/Actors/NPCs/MnFg/Sprites/MysteriousFigure_SpriteSheet.png" id="12_246fu"]
 [ext_resource type="Texture2D" uid="uid://bf0qdu0v1wdy6" path="res://defs/Actors/Tutorial/TutorShroom.png" id="12_w22o7"]
@@ -1091,6 +1092,10 @@ tile_set = SubResource("TileSet_i35ih")
 
 [node name="ItemTileMapLayer" type="TileMapLayer" parent="."]
 tile_set = SubResource("TileSet_eodif")
+
+[node name="Test" type="Sprite2D" parent="."]
+position = Vector2(128, 289)
+texture = ExtResource("10_iguy0")
 
 [node name="MarkerTileMapLayer" type="TileMapLayer" parent="."]
 tile_set = SubResource("TileSet_o1yif")

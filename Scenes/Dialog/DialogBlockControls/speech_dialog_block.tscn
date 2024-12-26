@@ -1,26 +1,31 @@
-[gd_scene load_steps=7 format=3 uid="uid://cyi7xhb25f7cs"]
+[gd_scene load_steps=10 format=3 uid="uid://cyi7xhb25f7cs"]
 
 [ext_resource type="Script" path="res://Scenes/Dialog/DialogBox/dialog_box.gd" id="1_s306v"]
 [ext_resource type="Texture2D" uid="uid://cgrlfobidw8xl" path="res://assets/Sprites/UI/BackPatches/PaperPatch_Bigger_276x192_48.png" id="1_x1pkb"]
 [ext_resource type="Theme" uid="uid://d14wnuq8dl417" path="res://Scenes/Themes/dialog_theme.tres" id="4_5vyn8"]
 [ext_resource type="Texture2D" uid="uid://dqgfhiakoqw2y" path="res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Happy.png" id="4_51sb5"]
 [ext_resource type="Texture2D" uid="uid://cdy53ml2tuvc8" path="res://assets/Sprites/UI/BackPatches/FancyBackPatch_Frame_64_18.png" id="5_ctiiv"]
+[ext_resource type="Script" path="res://Scenes/Dialog/dialog_question_option.gd" id="6_2qrd2"]
+[ext_resource type="Texture2D" uid="uid://6slo2uod40i3" path="res://Scenes/Dialog/Icons/OptionIcon_Empty.png" id="7_2u1ax"]
 [ext_resource type="PackedScene" uid="uid://bpvy87uagttpr" path="res://Scenes/UiNodes/ScollBar/scroll_bar.tscn" id="7_h5ro5"]
+[ext_resource type="Texture2D" uid="uid://bg2pfkcrb1fj1" path="res://Scenes/Dialog/Icons/OptionIcon_Filled.png" id="8_3a0dq"]
 
-[node name="DialogBox" type="Control" node_paths=PackedStringArray("speaker_container", "speaker_portrait", "speaker_label", "scroll_bar", "entry_contaier", "read_timer_label", "premade_text_label")]
+[node name="DialogBox" type="Control" node_paths=PackedStringArray("speaker_container", "speaker_portrait", "speaker_label", "scroll_bar", "entry_contaier", "scroll_contaier", "read_timer_label", "premade_text_label", "premade_question_option")]
 custom_minimum_size = Vector2(640, 180)
 layout_mode = 3
 anchors_preset = 0
-offset_right = 640.0
+offset_right = 980.0
 offset_bottom = 180.0
 script = ExtResource("1_s306v")
 speaker_container = NodePath("SpeechDialogBlock/SpeakerContainer")
 speaker_portrait = NodePath("SpeechDialogBlock/SpeakerContainer/SpeakerRect")
 speaker_label = NodePath("SpeechDialogBlock/SpeakerContainer/SpeakerLabel")
-scroll_bar = NodePath("SpeechDialogBlock/ScrollBar")
-entry_contaier = NodePath("SpeechDialogBlock/ScrollContainer/VBoxContainer")
+scroll_bar = NodePath("SpeechDialogBlock/ScrollBarPlaceHolder/ScrollBar")
+entry_contaier = NodePath("SpeechDialogBlock/ScrollContainer/EntriyContainer")
+scroll_contaier = NodePath("SpeechDialogBlock/ScrollContainer")
 read_timer_label = NodePath("SpeechDialogBlock/SpeakerContainer/ReadTimerLabel")
-premade_text_label = NodePath("SpeechDialogBlock/ScrollContainer/VBoxContainer/TextLabel")
+premade_text_label = NodePath("SpeechDialogBlock/ScrollContainer/EntriyContainer/PreMade_TextLabel")
+premade_question_option = NodePath("SpeechDialogBlock/ScrollContainer/EntriyContainer/PreMade_QuestionOption")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="."]
 layout_mode = 1
@@ -87,12 +92,15 @@ layout_mode = 2
 [node name="ScrollContainer" type="ScrollContainer" parent="SpeechDialogBlock"]
 layout_mode = 2
 size_flags_horizontal = 3
+follow_focus = true
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="SpeechDialogBlock/ScrollContainer"]
+[node name="EntriyContainer" type="VBoxContainer" parent="SpeechDialogBlock/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="TextLabel" type="RichTextLabel" parent="SpeechDialogBlock/ScrollContainer/VBoxContainer"]
+[node name="PreMade_TextLabel" type="RichTextLabel" parent="SpeechDialogBlock/ScrollContainer/EntriyContainer"]
 self_modulate = Color(0, 0, 0, 1)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -102,6 +110,51 @@ text = "Some test text"
 fit_content = true
 scroll_active = false
 
-[node name="ScrollBar" parent="SpeechDialogBlock" node_paths=PackedStringArray("scroll_container") instance=ExtResource("7_h5ro5")]
+[node name="PreMade_QuestionOption" type="Control" parent="SpeechDialogBlock/ScrollContainer/EntriyContainer" node_paths=PackedStringArray("option_icon", "option_label", "button")]
+custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
-scroll_container = NodePath("../ScrollContainer")
+mouse_filter = 1
+script = ExtResource("6_2qrd2")
+option_icon_texture_empty = ExtResource("7_2u1ax")
+option_icon_texture_filled = ExtResource("8_3a0dq")
+option_icon = NodePath("Container/TextureRect")
+option_label = NodePath("Container/Label")
+button = NodePath("Button")
+
+[node name="Container" type="HBoxContainer" parent="SpeechDialogBlock/ScrollContainer/EntriyContainer/PreMade_QuestionOption"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="SpeechDialogBlock/ScrollContainer/EntriyContainer/PreMade_QuestionOption/Container"]
+layout_mode = 2
+texture = ExtResource("7_2u1ax")
+stretch_mode = 3
+
+[node name="Label" type="Label" parent="SpeechDialogBlock/ScrollContainer/EntriyContainer/PreMade_QuestionOption/Container"]
+self_modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("4_5vyn8")
+theme_override_font_sizes/font_size = 32
+text = "Option A"
+
+[node name="Button" type="Button" parent="SpeechDialogBlock/ScrollContainer/EntriyContainer/PreMade_QuestionOption"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ScrollBarPlaceHolder" type="Control" parent="SpeechDialogBlock"]
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 2
+
+[node name="ScrollBar" parent="SpeechDialogBlock/ScrollBarPlaceHolder" node_paths=PackedStringArray("scroll_container") instance=ExtResource("7_h5ro5")]
+layout_mode = 2
+offset_bottom = 159.0
+scroll_container = NodePath("../../ScrollContainer")

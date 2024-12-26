@@ -1,5 +1,5 @@
-class_name AutoPlayButton
-extends Control
+class_name AutoDialogControlButton
+extends DialogControlButton
 
 signal toggled(on:bool)
 
@@ -8,7 +8,6 @@ signal toggled(on:bool)
 		is_on = val
 		if is_on: check_box_rect.texture = checked_texture
 		else:check_box_rect.texture = unchecked_texture
-@export var button:Button
 @export var check_box_rect:TextureRect
 @export var checked_texture:Texture2D
 @export var unchecked_texture:Texture2D

@@ -1,18 +1,16 @@
-[gd_scene load_steps=12 format=3 uid="uid://bje0k82nenje6"]
+[gd_scene load_steps=10 format=3 uid="uid://bje0k82nenje6"]
 
-[ext_resource type="Script" path="res://Scenes/Dialog/dialog_control.gd" id="1_h8gog"]
+[ext_resource type="Script" path="res://Scenes/Dialog/dialog_controller.gd" id="1_17lfl"]
 [ext_resource type="Script" path="res://Scenes/Dialog/black_out_control.gd" id="2_g02yb"]
 [ext_resource type="PackedScene" uid="uid://cyi7xhb25f7cs" path="res://Scenes/Dialog/DialogBlockControls/speech_dialog_block.tscn" id="3_er26g"]
-[ext_resource type="Texture2D" uid="uid://cgrlfobidw8xl" path="res://assets/Sprites/UI/BackPatches/PaperPatch_Bigger_276x192_48.png" id="3_iu7f6"]
-[ext_resource type="PackedScene" uid="uid://by02p6lkrr3iv" path="res://Scenes/Dialog/DialogBlockControls/question_dialog_block.tscn" id="4_0x12l"]
-[ext_resource type="Theme" uid="uid://by8t8e4s2str7" path="res://Scenes/VFXs/SpeachBubble/speach_bubble_theme.tres" id="6_482q4"]
 [ext_resource type="Script" path="res://Scenes/Dialog/auto_play_button.gd" id="7_snrsi"]
 [ext_resource type="Texture2D" uid="uid://fva0obvct2kj" path="res://Scenes/Dialog/Icons/CheckBox_On.png" id="8_1tqry"]
+[ext_resource type="Script" path="res://Scenes/Dialog/dialog_control_button.gd" id="9_dcgg0"]
 [ext_resource type="Texture2D" uid="uid://cul356gq6n1tw" path="res://Scenes/Dialog/Icons/CheckBox_Off.png" id="9_imyb2"]
 [ext_resource type="Texture2D" uid="uid://ccwj8ucsjhl6w" path="res://assets/Sprites/UI/BackPatches/Patch_64_12_Dark.png" id="10_6rdjr"]
 [ext_resource type="FontFile" uid="uid://0kbg00s43xf0" path="res://assets/Fonts/8bit.ttf" id="11_sd5id"]
 
-[node name="DialogControl" type="Control" node_paths=PackedStringArray("dialog_box_holder", "popup_holder", "dialog_box", "next_button", "auto_play_button", "scroll_container", "blocks_container", "blackout_coontrol")]
+[node name="DialogControl" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -20,18 +18,10 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-script = ExtResource("1_h8gog")
-dialog_box_holder = NodePath("BoxHolderControl")
-popup_holder = NodePath("PopUpHolder")
-dialog_box = NodePath("BoxHolderControl/DialogBox")
-next_button = NodePath("BoxHolderControl/DialogBox/NextButton")
-auto_play_button = NodePath("BoxHolderControl/DialogBox/AutoButton")
-scroll_container = NodePath("BoxHolderControl/DialogBox/ScrollContainer")
-blocks_container = NodePath("BoxHolderControl/DialogBox/ScrollContainer/VBoxContainer")
-blackout_coontrol = NodePath("BlackOutControl")
+script = ExtResource("1_17lfl")
 
 [node name="BlackOutControl" type="ColorRect" parent="."]
-self_modulate = Color(1, 1, 1, 0.992989)
+self_modulate = Color(1, 1, 1, 0.950814)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -42,119 +32,34 @@ color = Color(0, 0, 0, 1)
 script = ExtResource("2_g02yb")
 fade_to_black = true
 
-[node name="BoxHolderControl" type="Control" parent="."]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="DialogBox" type="Control" parent="BoxHolderControl"]
-custom_minimum_size = Vector2(1152, 240)
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -20.0
-offset_top = 368.0
-offset_right = 1132.0
-offset_bottom = 608.0
-grow_horizontal = 2
-grow_vertical = 0
-
-[node name="NinePatchRect" type="NinePatchRect" parent="BoxHolderControl/DialogBox"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("3_iu7f6")
-patch_margin_left = 48
-patch_margin_top = 48
-patch_margin_right = 48
-patch_margin_bottom = 48
-axis_stretch_horizontal = 1
-axis_stretch_vertical = 2
-
-[node name="PremadeDialogBlocks" type="Control" parent="BoxHolderControl/DialogBox"]
-layout_mode = 2
-anchors_preset = 0
-offset_left = 16.0
-offset_top = 16.0
-offset_right = 16.0
-offset_bottom = 16.0
-
-[node name="SpeechDialogBlock" parent="BoxHolderControl/DialogBox/PremadeDialogBlocks" instance=ExtResource("3_er26g")]
-layout_mode = 0
-
-[node name="QuestionDialogBlock" parent="BoxHolderControl/DialogBox/PremadeDialogBlocks" instance=ExtResource("4_0x12l")]
-visible = false
-layout_mode = 0
-offset_top = 0.0
-offset_bottom = 88.0
-
-[node name="Seperator" type="Label" parent="BoxHolderControl/DialogBox/PremadeDialogBlocks"]
-layout_mode = 2
-offset_top = 144.0
-offset_right = 1120.0
-offset_bottom = 164.0
-theme = ExtResource("6_482q4")
-text = "----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------"
-text_overrun_behavior = 1
-
-[node name="ScrollContainer" type="ScrollContainer" parent="BoxHolderControl/DialogBox"]
+[node name="SpeechDialogBlock" parent="." instance=ExtResource("3_er26g")]
 layout_mode = 1
 anchors_preset = -1
+anchor_top = 0.7
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 16.0
-offset_top = 16.0
 offset_right = -16.0
 offset_bottom = -16.0
 grow_horizontal = 2
-grow_vertical = 2
-follow_focus = true
-
-[node name="VBoxContainer" type="VBoxContainer" parent="BoxHolderControl/DialogBox/ScrollContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="NextButton" type="Button" parent="BoxHolderControl/DialogBox"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -92.0
-offset_top = -48.0
-offset_right = -16.0
-offset_bottom = -16.0
-grow_horizontal = 0
 grow_vertical = 0
-theme = ExtResource("6_482q4")
-theme_override_font_sizes/font_size = 32
-text = "Next"
 
-[node name="AutoButton" type="Control" parent="BoxHolderControl/DialogBox" node_paths=PackedStringArray("button", "check_box_rect")]
+[node name="AutoButton" type="Control" parent="." node_paths=PackedStringArray("check_box_rect", "button")]
 layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -140.0
-offset_top = -104.0
-offset_right = -8.0
-offset_bottom = -56.0
-grow_horizontal = 0
+anchor_top = 0.7
+anchor_bottom = 0.7
+offset_left = 16.0
+offset_top = -56.0
+offset_right = 148.0
+offset_bottom = -8.0
+grow_vertical = 2
 script = ExtResource("7_snrsi")
-button = NodePath("Button")
 check_box_rect = NodePath("TextureRect")
 checked_texture = ExtResource("8_1tqry")
 unchecked_texture = ExtResource("9_imyb2")
+button = NodePath("Button")
 
-[node name="NinePatchRect" type="NinePatchRect" parent="BoxHolderControl/DialogBox/AutoButton"]
+[node name="NinePatchRect" type="NinePatchRect" parent="AutoButton"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -167,7 +72,7 @@ patch_margin_top = 12
 patch_margin_right = 12
 patch_margin_bottom = 12
 
-[node name="TextureRect" type="TextureRect" parent="BoxHolderControl/DialogBox/AutoButton"]
+[node name="TextureRect" type="TextureRect" parent="AutoButton"]
 layout_mode = 1
 offset_left = 4.0
 offset_top = 4.0
@@ -175,7 +80,7 @@ offset_right = 44.0
 offset_bottom = 44.0
 texture = ExtResource("8_1tqry")
 
-[node name="Label" type="Label" parent="BoxHolderControl/DialogBox/AutoButton"]
+[node name="Label" type="Label" parent="AutoButton"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -188,7 +93,7 @@ text = "Auto "
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="Button" type="Button" parent="BoxHolderControl/DialogBox/AutoButton"]
+[node name="Button" type="Button" parent="AutoButton"]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -197,22 +102,22 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="SkipButton" type="Control" parent="BoxHolderControl/DialogBox" node_paths=PackedStringArray("button")]
+[node name="SkipButton" type="Control" parent="." node_paths=PackedStringArray("button")]
 layout_mode = 1
-anchors_preset = 1
 anchor_left = 1.0
+anchor_top = 0.7
 anchor_right = 1.0
-offset_left = -140.0
-offset_top = -52.0
-offset_right = -8.0
-offset_bottom = -4.0
+anchor_bottom = 0.7
+offset_left = -148.0
+offset_top = -56.0
+offset_right = -16.0
+offset_bottom = -8.0
 grow_horizontal = 0
-script = ExtResource("7_snrsi")
+grow_vertical = 2
+script = ExtResource("9_dcgg0")
 button = NodePath("Button")
-checked_texture = ExtResource("8_1tqry")
-unchecked_texture = ExtResource("9_imyb2")
 
-[node name="NinePatchRect" type="NinePatchRect" parent="BoxHolderControl/DialogBox/SkipButton"]
+[node name="NinePatchRect" type="NinePatchRect" parent="SkipButton"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -225,7 +130,7 @@ patch_margin_top = 12
 patch_margin_right = 12
 patch_margin_bottom = 12
 
-[node name="Label" type="Label" parent="BoxHolderControl/DialogBox/SkipButton"]
+[node name="Label" type="Label" parent="SkipButton"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -238,7 +143,57 @@ text = "Skip"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Button" type="Button" parent="BoxHolderControl/DialogBox/SkipButton"]
+[node name="Button" type="Button" parent="SkipButton"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="NextButton" type="Control" parent="." node_paths=PackedStringArray("button")]
+layout_mode = 1
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -180.0
+offset_top = -80.0
+offset_right = -64.0
+offset_bottom = -32.0
+grow_horizontal = 0
+grow_vertical = 0
+script = ExtResource("9_dcgg0")
+button = NodePath("Button")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="NextButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_6rdjr")
+patch_margin_left = 12
+patch_margin_top = 12
+patch_margin_right = 12
+patch_margin_bottom = 12
+
+[node name="Label" type="Label" parent="NextButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("11_sd5id")
+theme_override_font_sizes/font_size = 32
+text = "Next"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="NextButton"]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15

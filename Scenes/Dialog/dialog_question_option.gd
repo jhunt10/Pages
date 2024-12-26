@@ -9,6 +9,10 @@ extends Control
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	if not MainRootNode.is_mobile:
+		button.mouse_entered.connect(_mouse_enter)
+		button.mouse_exited.connect(_mouse_exit)
+		
 	pass # Replace with function body.
 
 
@@ -25,3 +29,12 @@ func set_selected(val):
 		option_icon.texture = option_icon_texture_filled
 	else:
 		option_icon.texture = option_icon_texture_empty
+	if  button.mouse_entered.is_connected(_mouse_enter):
+		button.mouse_entered.disconnect(_mouse_enter)
+	if  button.mouse_exited.is_connected(_mouse_exit):
+		button.mouse_exited.disconnect(_mouse_exit)
+
+func _mouse_enter():
+	option_icon.texture = option_icon_texture_filled
+func _mouse_exit():
+	option_icon.texture = option_icon_texture_empty
