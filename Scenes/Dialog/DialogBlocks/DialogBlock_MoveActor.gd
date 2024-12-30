@@ -64,12 +64,7 @@ func _do_pose_marker(actor, actor_node, marker_name):
 		})
 	actor_node.que_scripted_movement(path_data)
 
-func _do_path_marker(actor, actor_node, marker_name):
-	var path_marker = CombatRootControl.Instance.MapController.get_path_marker(marker_name)
-	if !path_marker:
-		printerr("MoveActorDialogBlock: Failed to find Path Marker: %s" %[marker_name])
-		self.finish()
-		return
+func _do_path_marker(actor_node, path_marker):
 	var path_poses = path_marker.get_path_poses()
 	var path_data = []
 	

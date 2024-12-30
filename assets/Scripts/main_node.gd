@@ -142,10 +142,10 @@ func open_tutorial():
 	current_scene = combat_scene
 	self.add_child(current_scene)
 	
-	#var dialog:DialogControl = load("res://Scenes/Dialog/dialog_control.tscn").instantiate()
-	#dialog.scene_root = combat_scene
-	#dialog.load_dialog_script("res://Scenes/Maps/StoryMaps/1_StartingMap/start_game_dialog_script.json")
-	#combat_scene.camera.canvas_layer.add_child(dialog)
+	var dialog:DialogController = load("res://Scenes/Dialog/dialog_control.tscn").instantiate()
+	dialog.scene_root = combat_scene
+	dialog.load_dialog_script("res://Scenes/Maps/StoryMaps/1_StartingMap/start_game_dialog_script.json")
+	combat_scene.camera.canvas_layer.add_child(dialog)
 	
 func open_dev_tools():
 	var page_editor = load("res://Scenes/DevTools/dev_tools_menu.tscn").instantiate()

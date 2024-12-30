@@ -44,6 +44,10 @@ func get_path_poses()->Array:
 		out_list.append(marker.get_map_pos())
 	return out_list
 
+func get_last_pos()->MapPos:
+	var poses = get_path_poses()
+	return poses[-1]
+
 var last_pos:Vector2
 func _notification(what):
 	if what == NOTIFICATION_TRANSFORM_CHANGED:

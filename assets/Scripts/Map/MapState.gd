@@ -54,6 +54,8 @@ func is_spot_traversable(pos, actor)->bool:
 		return false
 	if spot.terrain_index == 0:
 		return false
+	if spot.terrain_index == 1:
+		return false
 	return true
 	
 

@@ -31,9 +31,10 @@ func _ready() -> void:
 # Camera must be later in tree than Actors, otherwise camera will bounce around when the actor walks between tiles
 func lock_to_actor(actor:BaseActor):
 	if LOGGING: print("Camera lock to actor: %s" %[actor.Id] )
-	var pos = CombatRootControl.Instance.GameState.MapState.get_actor_pos(actor)
-	self.snap_to_map_pos(pos)
-	var actor_node = CombatRootControl.Instance.MapController.actor_nodes.get(actor.Id)
+	var actor_node = CombatRootControl.get_actor_node(actor.Id)
+	if not actor_node:
+		printerr("Camera lock_to_actor: Failed to find node for actor: %s" % [actor.Id])
+	self.snap_to_map_pos(actor_node.cur_map_pos)
 	following_actor_node = actor_node
 	
 

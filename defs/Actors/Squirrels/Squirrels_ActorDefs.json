@@ -9,7 +9,7 @@
 			"LargeIcon":"Squirrel_Icon.png",
 			"SmallIcon":"Squirrel_Icon.png"
 		},
-		"SpriteSheet": "Squirrel_SpriteSheet.png",
+		"SpriteSheet": "Wolf_SpriteSheet.png",
 		"SpriteFrameWH": [12,4],
 		"SpriteOffset": [0,-20],
 		"PortraitRect":[12, 31, 24, 24],
@@ -36,13 +36,16 @@
 		"EquipmentSlots": ["Que"],
         "SpawnEquipmentList": [
         ],
-        "SpawnPageList":[
-            "MoveForward",
-            "TurnLeft",
-            "TurnRight",
-			"ChuckAcorn",
-            "BasicMelee"
-        ],
+		
+        "AiData":{
+            "Actions":[
+				"MoveForward",
+				"TurnLeft",
+				"TurnRight",
+				"ChuckAcorn",
+				"BasicMelee"
+			]
+        },
 		"DefaultPageSlotSet": [
             {
                 "Key":"Any",

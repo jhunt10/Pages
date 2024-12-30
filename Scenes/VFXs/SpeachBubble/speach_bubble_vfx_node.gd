@@ -4,6 +4,9 @@ extends VfxNode
 
 enum STATES { Hidden, Growing, Printing, Showing, Unprinting, Shrinking}
 
+signal finished_showing
+signal finished_hideing
+
 @export var showing:bool = false:
 	set(val):
 		if showing != val:
@@ -116,6 +119,7 @@ func _process(delta: float) -> void:
 				_letter_timer = letter_delay
 			else:
 				state = STATES.Showing
+				finished_showing.emit()
 				return
 	if state == STATES.Unprinting:
 		var min_x = speach_bubble_background.custom_minimum_size.x
@@ -129,6 +133,7 @@ func _process(delta: float) -> void:
 		speach_bubble_sprite.scale.y = speach_bubble_sprite.scale.x
 		if speach_bubble_sprite.scale.x <= 0.001:
 			state = STATES.Hidden
+			finished_hideing.emit()
 			return
 	if Engine.is_editor_hint():
 		return

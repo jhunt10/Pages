@@ -82,5 +82,41 @@
         "AttackTags": ["Melee", "Physical"],
         "WeaponClass": "Light",
         "WeaponAnimation": "Stab"
+    },
+    {
+        "ItemKey":"OldBow",
+        "_ObjectScript": "res://assets/Scripts/Items/Equipment/BaseWeaponEquipment.gd",
+        "Details":{
+			"DisplayName": "Old Bow",
+			"SnippetDesc": "A rogue's old bow.",
+			"Description": "A simple dagger dulled from years of various uses. Old, but still works.",
+			"Tags": ["Weapon","OffHand"],
+			"LargeIcon":"Sprites/OldBow.png",
+			"SmallIcon":"Sprites/OldBow.png"
+		},
+        "WeaponSpriteData":{
+            "Offset":[0,0],
+            "SpriteName":"Sprites/OldBow",
+            "Rotation":30
+        },
+        "EquipSlot":"Weapon",
+        "DamageData":{
+            "AtkStat": "Strength",
+            "AtkPower": 50,
+            "DamageEffect": "Pierce_DamageEffect",
+            "DamageType": "Pierce",
+            "DamageVarient": 0.3,
+            "DefenseType": "Armor"
+        },
+        "TargetParams": {
+            "EffectsAllies": false,
+            "EffectsEnemies": true,
+            "LineOfSight": true,
+            "TargetArea": "[[-1,0],[-1,1],[0,1],[1,1],[1,0]]",
+            "TargetType": "Actor"
+        },
+        "AttackTags": ["Melee", "Physical"],
+        "WeaponClass": "Light",
+        "WeaponAnimation": "Stab"
     }
 ]

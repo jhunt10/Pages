@@ -2,9 +2,6 @@ class_name BaseDialogBlock
 
 signal finished
 
-const LETTER_DELAY:float = 0.03
-const LINE_DELAY:float = 0.3
-
 var _parent_dialog_control:DialogControl
 var _block_data:Dictionary
 var _finished:bool = false

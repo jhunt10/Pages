@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bje0k82nenje6"]
+[gd_scene load_steps=11 format=3 uid="uid://bje0k82nenje6"]
 
 [ext_resource type="Script" path="res://Scenes/Dialog/dialog_controller.gd" id="1_17lfl"]
 [ext_resource type="Script" path="res://Scenes/Dialog/black_out_control.gd" id="2_g02yb"]
@@ -8,9 +8,10 @@
 [ext_resource type="Script" path="res://Scenes/Dialog/dialog_control_button.gd" id="9_dcgg0"]
 [ext_resource type="Texture2D" uid="uid://cul356gq6n1tw" path="res://Scenes/Dialog/Icons/CheckBox_Off.png" id="9_imyb2"]
 [ext_resource type="Texture2D" uid="uid://ccwj8ucsjhl6w" path="res://assets/Sprites/UI/BackPatches/Patch_64_12_Dark.png" id="10_6rdjr"]
+[ext_resource type="Script" path="res://Scenes/Dialog/dialog_popup_controller.gd" id="10_mbn4m"]
 [ext_resource type="FontFile" uid="uid://0kbg00s43xf0" path="res://assets/Fonts/8bit.ttf" id="11_sd5id"]
 
-[node name="DialogControl" type="Control"]
+[node name="DialogControl" type="Control" node_paths=PackedStringArray("next_button", "skip_button", "auto_button", "top_speech_box", "bot_speech_box", "blackout_control", "dialog_popup_controller")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -19,9 +20,15 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_17lfl")
+next_button = NodePath("NextButton")
+skip_button = NodePath("SkipButton")
+auto_button = NodePath("AutoButton")
+top_speech_box = NodePath("SpeechDialogBlock_Top")
+bot_speech_box = NodePath("SpeechDialogBlock_Bot")
+blackout_control = NodePath("BlackOutControl")
+dialog_popup_controller = NodePath("PopupController")
 
 [node name="BlackOutControl" type="ColorRect" parent="."]
-self_modulate = Color(1, 1, 1, 0.950814)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -30,9 +37,15 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
 script = ExtResource("2_g02yb")
-fade_to_black = true
 
-[node name="SpeechDialogBlock" parent="." instance=ExtResource("3_er26g")]
+[node name="PopupController" type="Control" parent="." node_paths=PackedStringArray("parent_dialog_controller")]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("10_mbn4m")
+parent_dialog_controller = NodePath("..")
+
+[node name="SpeechDialogBlock_Bot" parent="." instance=ExtResource("3_er26g")]
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 0.7
@@ -41,6 +54,18 @@ anchor_bottom = 1.0
 offset_left = 16.0
 offset_right = -16.0
 offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="SpeechDialogBlock_Top" parent="." instance=ExtResource("3_er26g")]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.3
+offset_left = 16.0
+offset_top = 16.0
+offset_right = -16.0
+offset_bottom = 0.0
 grow_horizontal = 2
 grow_vertical = 0
 
@@ -154,6 +179,7 @@ grow_vertical = 2
 
 [node name="NextButton" type="Control" parent="." node_paths=PackedStringArray("button")]
 layout_mode = 1
+anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0

@@ -13,6 +13,7 @@ mouse_filter = 2
 script = ExtResource("1_jfgny")
 
 [node name="DottedPatch" type="NinePatchRect" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -28,6 +29,7 @@ axis_stretch_horizontal = 2
 axis_stretch_vertical = 2
 
 [node name="ColorRect" type="ColorRect" parent="."]
+visible = false
 self_modulate = Color(1, 1, 1, 0.156863)
 layout_mode = 1
 anchors_preset = 15
@@ -36,3 +38,37 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+
+[node name="BlackOut" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+offset_left = -2000.0
+offset_top = -2000.0
+offset_bottom = 2000.0
+color = Color(0, 0, 0, 0.509804)
+
+[node name="BlackOut2" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_top = -2000.0
+offset_right = 2000.0
+offset_bottom = 2000.0
+color = Color(0, 0, 0, 0.509804)
+
+[node name="BlackOut3" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+offset_top = -2000.0
+color = Color(0, 0, 0, 0.509804)
+
+[node name="BlackOut4" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = 2000.0
+color = Color(0, 0, 0, 0.509804)

@@ -390,6 +390,7 @@ offset_right = 21.0
 offset_bottom = 14.0
 
 [node name="TileOutline" type="Sprite2D" parent="."]
+visible = false
 texture = ExtResource("14_6kv2p")
 
 [node name="ActorMotionNode" type="Node2D" parent="."]
@@ -398,7 +399,6 @@ texture = ExtResource("14_6kv2p")
 
 [node name="OffsetNode" type="Node2D" parent="ActorMotionNode/ActorSpriteNode"]
 position = Vector2(0, -16)
-scale = Vector2(1.2, 1.2)
 
 [node name="ActorSprite" type="Sprite2D" parent="ActorMotionNode/ActorSpriteNode/OffsetNode"]
 texture = ExtResource("2_g31ob")

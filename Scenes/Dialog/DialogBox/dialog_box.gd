@@ -4,7 +4,7 @@ extends Control
 const DEFAULT_LETTER_DELAY:float = 0.03
 const DEFAULT_QUESTION_OPTION_DELAY:float = 0.3
 
-enum EntryTypes {Clear, Speaker, Text, Question, WaitToRead, BackTrack}
+enum EntryTypes {Clear, Delay, Speaker, Text, Question, WaitToRead, BackTrack}
 enum STATES {Ready, Printing, Done, Question}
 
 signal finished_printing
@@ -27,6 +27,9 @@ var _current_text_entry:RichTextLabel
 var _question_options:Dictionary ={}
 var _delay_timer:float = 0
 var _reader_timer:float = 0
+	#set(val):
+		#print("_reader_timer: %s" % [val])
+		#_reader_timer = val
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -34,11 +37,12 @@ func _ready() -> void:
 	premade_question_option.hide()
 	_clear_speaker()
 
+var _starting_read:bool = false
 
 func _process(delta: float) -> void:
-	if delta > DEFAULT_LETTER_DELAY:
-		printerr("DialogBlock: Delta less than Delay: %s | %s" % [DEFAULT_LETTER_DELAY, delta])
-	read_timer_label.text =  "%s | %2.3f" % [state, _reader_timer * 100]
+	#if delta > DEFAULT_LETTER_DELAY:
+		#print("DialogBlock: Delta less than Delay: %s | %s" % [DEFAULT_LETTER_DELAY, delta])
+	#read_timer_label.text =  "%s | %2.3f" % [state, _reader_timer * 100]
 	if state == STATES.Printing:
 		if _entry_que.size() <= 0:
 			state = STATES.Done
@@ -49,6 +53,7 @@ func _process(delta: float) -> void:
 			var current_entry = _entry_que[0]
 			if _handle_entry(current_entry, delta):
 				_entry_que.remove_at(0)
+				_starting_read = false
 
 func add_entry(entry_data:Dictionary):
 	_entry_que.append(entry_data)
@@ -70,11 +75,13 @@ func _handle_entry(entry_data:Dictionary, delta)->bool:
 	#----------------------------------
 	#          Clear
 	# Options:
-	# 	"ClearSpeaker": bool (true) | Clear Speaker Namd and Portrait
+	# 	 "ClearSpeaker": bool (true) | Clear Speaker Namd and Portrait
+	# 	 "ClearText": bool (true) | Clear displayed text
 	#----------------------------------
 	if entry_type == EntryTypes.Clear:
 		if entry_data.get("ClearSpeaker", true):
 			_clear_speaker()
+		_reader_timer = 0.0
 		for child in entry_contaier.get_children():
 			if child == premade_text_label: continue
 			if child == premade_question_option: continue
@@ -82,6 +89,15 @@ func _handle_entry(entry_data:Dictionary, delta)->bool:
 		scroll_bar.calc_bar_size()
 		scroll_bar.hide()
 		_delay_timer = -1
+		return true
+	
+	#----------------------------------
+	#          Delay
+	# Options:
+	# 	 "Delay": Float (-1) | Second delay
+	#----------------------------------
+	if entry_type == EntryTypes.Delay:
+		_delay_timer = entry_data.get("Delay", -1)
 		return true
 	
 	#----------------------------------
@@ -121,12 +137,12 @@ func _handle_entry(entry_data:Dictionary, delta)->bool:
 			entry_data['NewLine'] = false
 		if not entry_data.has("RemainingText"):
 			entry_data['RemainingText'] = text
-			entry_data['EstimateReadTime'] = _estimate_read_time(text)
+			#entry_data['EstimateReadTime'] = _estimate_read_time(text)
 		var remaining_text:String = entry_data['RemainingText']
 		if remaining_text.length() == 0:
-			_reader_timer += entry_data['EstimateReadTime']
+			#_reader_timer += entry_data['EstimateReadTime']
 			return true
-		_reader_timer -= delta
+		#_reader_timer -= delta
 		var new_char = remaining_text.substr(0,1)
 		remaining_text = remaining_text.trim_prefix(new_char)
 		entry_data['RemainingText'] = remaining_text
@@ -203,6 +219,11 @@ func _handle_entry(entry_data:Dictionary, delta)->bool:
 	# 	Should only be used at end of block. Othwersize it can not wait for next button.
 	#----------------------------------
 	elif entry_type == EntryTypes.WaitToRead:
+		if not _starting_read:
+			#printerr("Staring Read Timer: %s | %s" % [_reader_timer, _current_text_entry.get_parsed_text()])
+			#print("Read------------------------------------------------------------------------------------------")
+			_starting_read = true
+			_reader_timer = _estimate_read_time(_current_text_entry.get_parsed_text())
 		_reader_timer -= delta
 		#print("Read Timer: %s" % [_reader_timer])
 		return _reader_timer <= 0
@@ -218,10 +239,13 @@ func _create_new_text_entry():
 
 func _estimate_read_time(text:String)->float:
 	# TODO: Account for special logic characters
-	var word_cound:float = text.split(" ").size()
-	var avg_wpm:float = 230
+	if text.replace(".", "").replace(" ", "") == "":
+		return 0
+	var word_cound:float = text.replace(".", "").split(" ").size()
+	var avg_wpm:float = 260
 	var seconds:float = (word_cound / avg_wpm) * 60.0
-	return seconds * 1.0
+	#printerr("Estimated Read: '%s' | %s" % [text,seconds])
+	return  0.5#max(1, seconds * 1.0)
 
 func _clear_speaker():
 	speaker_portrait.texture = null

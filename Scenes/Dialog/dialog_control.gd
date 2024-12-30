@@ -12,7 +12,7 @@ const LETTER_DELAY:float = 0.03
 @export var popup_holder:Control
 @export var dialog_box:Control
 @export var next_button:Button
-@export var auto_play_button:AutoPlayButton
+@export var auto_play_button:AutoDialogControlButton
 @export var scroll_container:ScrollContainer
 @export var blocks_container:VBoxContainer
 @export var blackout_coontrol:BlackOutControl

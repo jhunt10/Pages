@@ -1,4 +1,4 @@
-[gd_scene load_steps=81 format=3 uid="uid://dooeg4ake0jdk"]
+[gd_scene load_steps=82 format=3 uid="uid://dooeg4ake0jdk"]
 
 [ext_resource type="Script" path="res://Scenes/Combat/MapObjects/actor_hand_node.gd" id="1_dwep3"]
 [ext_resource type="Texture2D" uid="uid://bvdyspj30c1k1" path="res://defs/Actors/Template_SpriteSheet_MainHand.png" id="1_h8dad"]
@@ -10,6 +10,7 @@
 [ext_resource type="AnimationLibrary" uid="uid://b6fh00go4jw6l" path="res://animations/AttackAnimations/weapon_raise.tres" id="6_oogit"]
 [ext_resource type="AnimationLibrary" uid="uid://bncx65ubhxgcv" path="res://animations/AttackAnimations/weapon_stab.tres" id="7_qybst"]
 [ext_resource type="AnimationLibrary" uid="uid://m4qmirmpwwfa" path="res://animations/AttackAnimations/weapon_swing.tres" id="8_1q6ng"]
+[ext_resource type="Texture2D" uid="uid://cas3t1k8qpsqc" path="res://defs/ClassDefs/Rogue/Items/Equipment/Sprites/OldBow_WeaponSprite.png" id="11_lf7gn"]
 
 [sub_resource type="Animation" id="Animation_5vfo0"]
 length = 0.001
@@ -579,20 +580,23 @@ two_hand_offset = Vector2(-4, 0)
 overhand_weapon_sprite = NodePath("WeaponOverHandSprite")
 underhand_weapon_sprite = NodePath("WeaponUnderHandSprite")
 rotation_factor = 1.0
+custom_rotation = -32
 weapon_texture = ExtResource("5_wntwi")
 
 [node name="WeaponUnderHandSprite" type="Sprite2D" parent="WeaponNode"]
 z_index = -1
+rotation = -0.558505
 scale = Vector2(-1, 1)
-texture = ExtResource("5_wntwi")
+texture = ExtResource("11_lf7gn")
 hframes = 2
 vframes = 2
 frame = 2
 
 [node name="WeaponOverHandSprite" type="Sprite2D" parent="WeaponNode"]
 z_index = 1
+rotation = -0.558505
 scale = Vector2(-1, 1)
-texture = ExtResource("5_wntwi")
+texture = ExtResource("11_lf7gn")
 hframes = 2
 vframes = 2
 frame = 1
