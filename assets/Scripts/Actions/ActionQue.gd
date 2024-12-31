@@ -70,7 +70,7 @@ func turn_to_que_index(turn_index:int)->int:
 func is_ready()->bool:
 	return real_que.size() ==  get_max_que_size()
 
-func get_action_for_turn(turn_index : int):
+func get_action_for_turn(turn_index : int)->BaseAction:
 	var real_index = turn_to_que_index(turn_index)
 	if real_index < 0 or real_index >= real_que.size():
 		return null

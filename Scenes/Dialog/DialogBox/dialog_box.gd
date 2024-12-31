@@ -4,7 +4,7 @@ extends Control
 const DEFAULT_LETTER_DELAY:float = 0.03
 const DEFAULT_QUESTION_OPTION_DELAY:float = 0.3
 
-enum EntryTypes {Clear, Delay, Speaker, Text, Question, WaitToRead, BackTrack}
+enum EntryTypes {Clear, Delay, Speaker, Text, Question, WaitToRead, BackTrack, IconImage}
 enum STATES {Ready, Printing, Done, Question}
 
 signal finished_printing
@@ -228,6 +228,10 @@ func _handle_entry(entry_data:Dictionary, delta)->bool:
 		#print("Read Timer: %s" % [_reader_timer])
 		return _reader_timer <= 0
 	
+	elif entry_type == EntryTypes.IconImage:
+		var image_path = entry_data.get("Image", '')
+		var image = SpriteCache.get_sprite(image_path)
+		_current_text_entry.add_image(image)
 	return true
 
 func _create_new_text_entry():

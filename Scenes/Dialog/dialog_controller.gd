@@ -1,7 +1,7 @@
 class_name DialogController
 extends Control
 
-enum STATES {Ready, Playing, WaitingForBlocks, WaitingForNextButton, Finished}
+enum STATES {Ready, Playing, WaitingForBlocks, WaitingForNextButton, WaitingForCondition, Finished}
 enum BlockTypes {Delay, SpeechBox, SpeechBubble, MoveActor, Blackout, PanCamera, Highlight}
 
 @export var scene_root:Node
@@ -12,9 +12,11 @@ enum BlockTypes {Delay, SpeechBox, SpeechBubble, MoveActor, Blackout, PanCamera,
 @export var bot_speech_box:DialogBox
 @export var blackout_control:BlackOutControl
 @export var dialog_popup_controller:DialogPopUpController
+@export var input_blocker:Control
 
 
 var _condition_flags:Dictionary={}
+var _condition_watcher:BaseDialogConditionWatcher
 
 ## Dialog scripts are divided into "parts" made up of "blocks"
 var _dialog_part_datas:Dictionary
@@ -39,12 +41,12 @@ var _block_states:Dictionary
 
 ## Data for current part is duplicated from _dialog_part_datas to allow for altering but still replaying
 var _current_part_data:Dictionary
-var _current_block_data:Dictionary
+var _last_block_data:Dictionary
 
 var _delay_timer:float = -1
 
 # Blocks are "fire and forget", they are given thier data, kicked off, and moved on
-# (_current_block_data is saved for postarity)
+# (_cur_block_data is saved for postarity)
 # If a block has any logic that holds up the Part, they flag themselves with "WaitToFinish"
 # 	and some key for them is added to _block_states. When they finish, they report back and 
 # 	update thier value in _block_states. 
@@ -68,10 +70,19 @@ func _ready() -> void:
 	bot_speech_box.hide()
 
 func _process(delta: float) -> void:
+	if _state == STATES.WaitingForCondition:
+		if not _condition_watcher:
+			printerr("DialogController: WaitingForCondition with no condition watcher.")
+			_state = STATES.Playing
+		else:
+			_condition_watcher.update(delta)
+			if _condition_watcher.is_finished():
+				_state = STATES.Playing
+			
 	if _state == STATES.WaitingForBlocks:
 		if _are_blocks_playing():
 			return
-		if _current_block_data and _current_block_data.get("WaitForNextButton", false):
+		if _last_block_data and _last_block_data.get("WaitForNextButton", false):
 			_state = STATES.WaitingForNextButton
 			return
 		else:
@@ -85,25 +96,26 @@ func _process(delta: float) -> void:
 			_state = STATES.WaitingForBlocks
 			return
 		var part_finished = true
-		if _current_part_data['Blocks'].size() > 0:
-			part_finished = _handle_next_part(_current_part_data)
-		if part_finished and _state == STATES.Playing:
+		# Cycle through blocks, removing them as they are handled
+		while _current_part_data['Blocks'].size() > 0:
+			_last_block_data = _current_part_data['Blocks'][0]
+			_current_part_data['Blocks'].remove_at(0)
+			# Each block only has _handle_block called once on it
+			var waiting_on_block = _handle_block(_last_block_data)
+			if waiting_on_block:
+				_state = STATES.WaitingForBlocks 
+				return
+		
+		# All blocks are finished and we are still in Playing state
+		if _current_part_data['Blocks'].size() == 0 and _state == STATES.Playing:
+			
+			# Part says to wait for next button
 			if _current_part_data.get("WaitForNextButton", false):
 				_current_part_data['WaitForNextButton'] = false
 				_state = STATES.WaitingForNextButton
 				return
 			
-			var next_part_key = null
-			var next_part_logic = _current_part_data.get("_NextPartLogic", null)
-			if next_part_logic:
-				var flag_name = next_part_logic.get("FlagName", null)
-				if _condition_flags.has(flag_name):
-					var flag_val = _condition_flags.get(flag_name)
-					var cases  = next_part_logic.get("Cases", {})
-					if cases.has(flag_val):
-						next_part_key = cases[flag_val]
-			else:
-				next_part_key = _current_part_data.get("_NextPartKey", null)
+			var next_part_key = _get_next_part_key()
 			if next_part_key:
 				_start_part(next_part_key)
 			else:
@@ -130,34 +142,61 @@ func _are_blocks_waiting_for_next_button():
 			_block_states.erase(key)
 	return is_playing
 
+## Returns key for next part of script checking in order:
+## Condition Watcher's get_next_part_key
+## Result of '_NextPartLogic' if any cases are valid
+## '_NextPartKey' if present
+func _get_next_part_key():
+	if _condition_watcher:
+		var condition_key = _condition_watcher.get_next_part_key()
+		if condition_key != '':
+			return condition_key
+			
+	var next_part_logic = _current_part_data.get("_NextPartLogic", null)
+	if next_part_logic:
+		var flag_name = next_part_logic.get("FlagName", null)
+		if _condition_flags.has(flag_name):
+			var flag_val = _condition_flags.get(flag_name)
+			var cases  = next_part_logic.get("Cases", {})
+			if cases.has(flag_val):
+				return cases[flag_val]
+	return _current_part_data.get("_NextPartKey", null)
+
 func _start_part(part_key:String):
 	print("Starting  part: " + part_key)
-	
 	_cur_part_key = part_key
+	_condition_watcher = null
 	if not _dialog_part_datas.has(part_key):
 		printerr("DialogControl: No script part found with key '%s'." % [part_key])
 		_state = STATES.Finished
 		return
-	_current_part_data = _dialog_part_datas[part_key].duplicate()
+	_current_part_data = _dialog_part_datas[part_key].duplicate(true)
 	if not _current_part_data.keys().has('Blocks'):
 		_current_part_data['Blocks'] = []
+		
 	if _current_part_data.has("EnsurePoses"):
 		var force_poses = _current_part_data['EnsurePoses']
 		force_positions(force_poses)
+	
 	if _current_part_data.get("Inital_BlackOutState", null):
 		blackout_control.set_state_string(_current_part_data['Inital_BlackOutState'])
-
-## Returns true if part is finished
-func _handle_next_part(part_data:Dictionary)->bool:
-	print("Handleing part: " + _cur_part_key)
-	var waiting = false
-	while not waiting and part_data['Blocks'].size() > 0:
-		_current_block_data = part_data['Blocks'][0]
-		part_data['Blocks'].remove_at(0)
-		waiting = _handle_block(_current_block_data)
-		if waiting:
-			_state = STATES.WaitingForBlocks 
-	return part_data['Blocks'].size() > 0
+	
+	if _current_part_data.get("AllowInputThrough", false):
+		input_blocker.hide()
+	else:
+		input_blocker.show()
+	
+	if _current_part_data.has("ConditionWatcherScript"):
+		var script_path = _current_part_data['ConditionWatcherScript']
+		var script = load(script_path)
+		if not script:
+			printerr("DialogController._start_part: No script found with name '%s'." % [script_path])
+			return null
+		_condition_watcher = script.new()
+		_condition_watcher.set_data(self, _current_part_data)
+		_state = STATES.WaitingForCondition
+	else:
+		_state = STATES.Playing
 
 ## Returns true if block should be waitied on
 func _handle_block(block_data:Dictionary)->bool:
@@ -309,6 +348,7 @@ func _handle_block(block_data:Dictionary)->bool:
 func load_dialog_script(file_path):
 	var file = FileAccess.open(file_path, FileAccess.READ)
 	var text:String = file.get_as_text()
+	_condition_watcher = null
 	_dialog_part_datas = JSON.parse_string(text)
 	if not _dialog_part_datas.keys().has("_MetaData_"):
 		printerr("No _MetaData_ found in dialog script.")
@@ -372,12 +412,12 @@ func force_positions(force_pos_data:Dictionary):
 			printerr("force_positions: Failed to find Path Marker: %s" %[path_marker_name])
 			return false
 		
-		if actor_id == "Player1":
-			actor_id = StoryState.get_player_id()
 		if actor_id == "_Camera":
 			var pos = path_marker.get_last_pos()
 			CombatRootControl.Instance.camera.snap_to_map_pos(pos)
 			continue
+		if actor_id == "Player1":
+			actor_id = StoryState.get_player_id()
 		var game_state = CombatRootControl.Instance.GameState
 		var actor = game_state.get_actor(actor_id)
 		game_state.MapState.set_actor_pos(actor, path_marker.get_last_pos())
