@@ -1,27 +1,43 @@
 class_name DialogPopUpController
 extends Control
 
+enum PopUpTypes { SpeachBubble, Highlight, TutorialCard}
+
 @export var parent_dialog_controller:DialogController
 var _popups:Dictionary = {}
 
 ## Returns true if block should be waitied on
 func handle_pop_up(block_data:Dictionary)->bool:
-	var block_type_str = block_data.get("BlockType", '')
-	var block_type = DialogController.BlockTypes.get(block_type_str)
-	if block_type == null:
-		printerr("Unknown DialogBox PopUp BlockType: '%s'." % [block_type_str])
-		return false
-	if block_type == DialogController.BlockTypes.SpeechBubble:
-		return create_speech_bubble(block_data)
-	
 	var destroy_id  = block_data.get("Destroy", null)
 	if destroy_id and _popups.has(destroy_id):
 		_popups[destroy_id].queue_free()
 		_popups.erase(destroy_id)
 	
 	var create_id = block_data.get("Create")
-	if create_id:
+	if not create_id:
+		return false
+	
+	var popup_type_str = block_data.get("PopUpType", "")
+	var popup_type = PopUpTypes.get(popup_type_str)
+	if popup_type == null:
+		printerr("Unknown PopUpType: '%s'." % [popup_type_str])
+		return false
+	
+	#----------------------------------
+	#         Speech Bubble
+	# Options:
+	# 	 "WaitToFinish": Bool(false): Add "[PopUp_Id]" to list of block states
+	# 	 "TargetActorId": String: Actor to place speech bubble on
+	# 	 "Text": String: Text to be displayed in speech bubble
+	#----------------------------------
+	if popup_type == PopUpTypes.SpeachBubble:
+		return create_speech_bubble(block_data)
+	
+	if popup_type == PopUpTypes.Highlight:
 		return create_highlight(block_data)
+	
+	if popup_type == PopUpTypes.TutorialCard:
+		return create_tutorial_card(block_data)
 	return false
 
 ## Returns true if block should be waitied on
@@ -69,7 +85,7 @@ func create_highlight(block_data:Dictionary)->bool:
 
 ## Returns true if block should be waitied on
 func create_speech_bubble(block_data:Dictionary)->bool:
-	var pop_up_key = block_data.get("PopUpKey", null)
+	var pop_up_key = block_data.get("Create", null)
 	if !pop_up_key:
 		printerr("DialogController: No 'PopUpKey' provided on SpeechBubble block.")
 		return false
@@ -109,3 +125,18 @@ func create_speech_bubble(block_data:Dictionary)->bool:
 			return true
 	return false
 		
+func create_tutorial_card(block_data):
+	var pop_up_key = block_data.get("Create", null)
+	if !pop_up_key:
+		printerr("DialogController: No 'PopUpKey' provided on SpeechBubble block.")
+		return false
+	var card_list = block_data.get("Cards", [])
+	if card_list.size() == 0:
+		return false
+	var new_cards:TutorialCardsController = load("res://Scenes/TutorialCards/tutorial_cards.tscn").instantiate()
+	parent_dialog_controller.add_child(new_cards)
+	new_cards.card_list = card_list
+	new_cards.card_index = block_data.get("Index", 0)
+	new_cards.closed.connect(parent_dialog_controller._on_popup_finished.bind(pop_up_key))
+	parent_dialog_controller._block_states[pop_up_key] = DialogController.BlockStates.Playing
+	return true

@@ -15,7 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://bo44u0dxhlqhp" path="res://notes/TutorialImages/TargetDemo.png" id="12_vkq77"]
 [ext_resource type="Texture2D" uid="uid://b8nni7o238kns" path="res://notes/TutorialImages/TargetSpotDemo.png" id="14_eljgu"]
 
-[node name="TutorialCardsControl" type="Control" node_paths=PackedStringArray("title_label", "back_button", "back_button_background", "next_button", "next_button_background", "page_que_card", "movement_card", "targeting_actor_card", "targeting_spot_card")]
+[node name="TutorialCardsControl" type="Control" node_paths=PackedStringArray("title_label", "back_button", "back_button_background", "next_button", "next_button_background", "done_button", "done_button_background", "page_que_card", "movement_card", "targeting_actor_card", "targeting_spot_card")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -28,11 +28,12 @@ back_button = NodePath("CardControl/TopContainer/HBoxContainer/BackButtonControl
 back_button_background = NodePath("CardControl/TopContainer/HBoxContainer/BackButtonControl/BackButton")
 next_button = NodePath("CardControl/TopContainer/HBoxContainer/NextButtonControl/NextButton/Button")
 next_button_background = NodePath("CardControl/TopContainer/HBoxContainer/NextButtonControl/NextButton")
+done_button = NodePath("CardControl/TopContainer/HBoxContainer/NextButtonControl/DonetButton/Button")
+done_button_background = NodePath("CardControl/TopContainer/HBoxContainer/NextButtonControl/DonetButton")
 page_que_card = NodePath("CardControl/Page_System")
 movement_card = NodePath("CardControl/Movement")
 targeting_actor_card = NodePath("CardControl/Targeting_Actors")
 targeting_spot_card = NodePath("CardControl/Targeting_Spots")
-card_index = -1
 
 [node name="CardControl" type="Control" parent="."]
 custom_minimum_size = Vector2(800, 500)
@@ -59,7 +60,6 @@ patch_margin_right = 48
 patch_margin_bottom = 48
 
 [node name="Page_System" type="Control" parent="CardControl"]
-visible = false
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
@@ -95,8 +95,8 @@ theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/normal_font_size = 32
 text = "Before each Round,
 Prepare you PageQue
-by filling each slot with 
-an Action Page.
+by filling all slots with 
+Action Pages.
 
 When the Round starts,
 Pages will be executed
@@ -117,6 +117,7 @@ text = "Blue arrow shows end position"
 scroll_active = false
 
 [node name="Movement" type="Control" parent="CardControl"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -435,6 +436,43 @@ horizontal_alignment = 1
 [node name="NextButtonControl" type="Control" parent="CardControl/TopContainer/HBoxContainer"]
 custom_minimum_size = Vector2(92, 0)
 layout_mode = 2
+
+[node name="DonetButton" type="NinePatchRect" parent="CardControl/TopContainer/HBoxContainer/NextButtonControl"]
+custom_minimum_size = Vector2(92, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_nxh5l")
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+
+[node name="Label" type="Label" parent="CardControl/TopContainer/HBoxContainer/NextButtonControl/DonetButton"]
+self_modulate = Color(0.498039, 0.4, 0.376471, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_bdbcw")
+theme_override_font_sizes/font_size = 24
+text = "Done"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="CardControl/TopContainer/HBoxContainer/NextButtonControl/DonetButton"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="NextButton" type="NinePatchRect" parent="CardControl/TopContainer/HBoxContainer/NextButtonControl"]
 custom_minimum_size = Vector2(92, 0)

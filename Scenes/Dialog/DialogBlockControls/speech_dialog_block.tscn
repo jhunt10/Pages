@@ -101,10 +101,11 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="PreMade_TextLabel" type="RichTextLabel" parent="SpeechDialogBlock/ScrollContainer/EntriyContainer"]
-self_modulate = Color(0, 0, 0, 1)
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("4_5vyn8")
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/normal_font_size = 32
 text = "Some test text"
 fit_content = true

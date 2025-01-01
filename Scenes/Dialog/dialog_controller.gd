@@ -2,7 +2,7 @@ class_name DialogController
 extends Control
 
 enum STATES {Ready, Playing, WaitingForBlocks, WaitingForNextButton, WaitingForCondition, Finished}
-enum BlockTypes {Delay, SpeechBox, SpeechBubble, MoveActor, Blackout, PanCamera, Highlight}
+enum BlockTypes {Delay, SetFlag, SpeechBox, MoveActor, Blackout, PanCamera, PopUp, ClearQue}
 
 @export var scene_root:Node
 @export var next_button:DialogControlButton
@@ -221,6 +221,19 @@ func _handle_block(block_data:Dictionary)->bool:
 		return true
 	
 	#----------------------------------
+	#          Set Flag
+	# Options:
+	# 	"FlagName" String
+	#----------------------------------
+	if block_type == BlockTypes.Delay:
+		var flag_name = block_data.get("FlagName", null)
+		if !flag_name:
+			return false
+		var val = block_data.get("Value", null)
+		_condition_flags[flag_name] =  val
+		return false
+	
+	#----------------------------------
 	#          Speech
 	# Options:
 	# 	"WaitToFinish": Bool(false): Add "Speech" to list of block states
@@ -320,29 +333,26 @@ func _handle_block(block_data:Dictionary)->bool:
 				return true
 		
 	#----------------------------------
-	#         Speech Bubble
+	#         Pop Up
 	# Options:
 	# 	 "WaitToFinish": Bool(false): Add "[PopUp_Id]" to list of block states
-	# 	 "Action": [ Create | Destroy ]: Create a new popup with given PopUpKey, or destory the existing one
-	# 	 "PopUpKey": String : Key for manageing popup
-	# 	 "TargetActorId": String: Actor to place speech bubble on
-	# 	 "Text": String: Text to be displayed in speech bubble
+	# 	 "PopUpType": String (See PopupController for options)
+	# 	 "Create": String : Key for popup to be created
+	# 	 "Destory": String : Key for popup to be deleted
 	#----------------------------------
-	if block_type == BlockTypes.SpeechBubble:
-		var wait_on_pop_up = dialog_popup_controller.create_speech_bubble(block_data)
-		if wait_on_pop_up:
-			return true
-		
-	#----------------------------------
-	#         Highlight
-	# Options:
-	# 	 "WaitToFinish": Bool(false): Add "[PopUp_Id]" to list of block states
-	#----------------------------------
-	if block_type == BlockTypes.Highlight:
+	if block_type == BlockTypes.PopUp:
 		var wait_on_pop_up = dialog_popup_controller.handle_pop_up(block_data)
 		if wait_on_pop_up:
 			return true
-		
+	
+	#----------------------------------
+	#         Clear Que
+	# clears player que
+	#----------------------------------
+	if block_type == BlockTypes.ClearQue:
+		var player_actor = StoryState.get_player_actor()
+		player_actor.Que.clear_que()
+		return false
 	
 	return false
 func load_dialog_script(file_path):

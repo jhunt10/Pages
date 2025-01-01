@@ -2,14 +2,29 @@ class_name DialogCondition_Tutorial
 extends  BaseDialogConditionWatcher
 
 func _on_create():
-	if _data.has("RequiredActionQue"):
+	var condition_key = _data.get("ConditionKey", null)
+	if !condition_key:
+		self._is_finished = true
+		return
+	if condition_key == "Condition_WalkInput" or condition_key == "Condition_AttackInput":
 		var player_actor = StoryState.get_player_actor()
 		player_actor.Que.action_que_changed.connect(_on_que_change.bind(player_actor))
+		return
+	if condition_key == "PlayingWalk" or condition_key == "PlayingAttack":
+		#_dialog_controller.hide()
+		CombatRootControl.QueController.end_of_round.connect(on_round_finish)
+		CombatUiControl.ui_state_controller.set_ui_state(UiStateController.UiStates.ExecRound)
+		return
+
+func on_round_finish():
+	CombatRootControl.QueController.end_of_round.disconnect(on_round_finish)
+	_is_finished = true
+	
 
 func _is_condition(data:Dictionary, game_state:GameStateData, delta:float)->bool:
 	#var player_actor = StoryState.get_player_actor()
 	#if player_actor.Que.
-	return false
+	return _is_finished
 
 func _on_que_change(actor:BaseActor):
 	if not actor.Que.is_ready():
@@ -22,17 +37,40 @@ func _on_que_change(actor:BaseActor):
 			que_matches = false
 			break
 	if not que_matches:
-		_dialog_controller._condition_flags['FailedTutorial_1'] = \
-			_dialog_controller._condition_flags.get("FailedTutorial_1", 0) + 1
+		_dialog_controller._condition_flags['FailedTutorial'] = \
+			_dialog_controller._condition_flags.get("FailedTutorial", 0) + 1
+	else:
+		var condition_key = _data.get("ConditionKey", null)
+		if condition_key == "Condition_WalkInput":
+			_dialog_controller._condition_flags['PassedTutorial_Walk'] = true
+		if condition_key == "Condition_AttackInput":
+			_dialog_controller._condition_flags['PassedTutorial_Attack'] = true
+			
 	_is_finished = true
 	actor.Que.action_que_changed.disconnect(_on_que_change)
 
 func get_next_part_key()->String:
 	var condition_key = _data.get("ConditionKey", null)
-	if condition_key == "WalkTutorial":
-		var failed_count = _dialog_controller._condition_flags.get("FailedTutorial_1", 0)
-		if failed_count == 0:
+	if condition_key == "Condition_WalkInput":
+		if _dialog_controller._condition_flags.get('PassedTutorial_Walk', false):
 			return "Tutorial_Part2"
-		if failed_count == 1:
-			return "Tutorial_Walk_Fail1" 
+	if condition_key == "Condition_AttackInput":
+		if _dialog_controller._condition_flags.get('PassedTutorial_Attack', false):
+			return "Tutorial_Part4"
+	
+	if condition_key == "PlayingWalk":
+		return "Tutorial_Part3"
+	if condition_key == "PlayingAttack":
+		return "Tutorial_Part5"
+	var failed_count = _dialog_controller._condition_flags.get("FailedTutorial", 0)
+	if failed_count == 1:
+		return "Tutorial_Walk_Fail1" 
+	if failed_count == 2:
+		return "Tutorial_Walk_Fail2" 
+	if failed_count == 3:
+		return "Tutorial_Walk_Fail3" 
+	if failed_count == 4:
+		return "Tutorial_Walk_Fail4"
+	if failed_count == 5:
+		return "Tutorial_Walk_Fail5"
 	return ''

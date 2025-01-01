@@ -1,6 +1,6 @@
 {
 	"_MetaData_": {
-		"StartPartKey": "Tutorial_Walk"
+		"StartPartKey": "Tutorial_Attack"
 	},
 	"Prolog":{
 		"_NextPartKey": "Intro_WalkIn",
@@ -61,10 +61,10 @@
 				"SpeedScale": 1
 			},
 			{
-				"BlockType": "SpeechBubble",
+				"BlockType": "PopUp",
 				"WaitToFinish": true,
-				"PopUpKey":"HelloBubble",
-				"Action": "Create",
+				"Create":"HelloBubble",
+				"PopUpType": "SpeechBubble",
 				"TargetActorId": "MysteriousFigure",
 				"Text":"Hello, Friend!"
 			},
@@ -111,10 +111,9 @@
 				]
 			},
 			{
-				"BlockType": "SpeechBubble",
+				"BlockType": "PopUp",
 				"WaitToFinish": false,
-				"PopUpKey":"HelloBubble",
-				"Action": "Destroy"
+				"Create":"HelloBubble"
 			},
 			{
 				"BlockType": "MoveActor",
@@ -778,7 +777,7 @@
 					{
 						"EntryType": "Speaker",
 						"SpeakerName": "MtFr",
-						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Neutral.png"
+						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Happy.png"
 					},
 					{
 						"EntryType": "Text",
@@ -893,7 +892,7 @@
 					{
 						"EntryType": "Speaker",
 						"SpeakerName": "MtFr",
-						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Neutral.png"
+						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Happy.png"
 					},
 					{
 						"EntryType": "Text",
@@ -945,7 +944,7 @@
 					{
 						"EntryType": "Speaker",
 						"SpeakerName": "MtFr",
-						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Neutral.png"
+						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Happy.png"
 					},
 					{
 						"EntryType": "Text",
@@ -957,7 +956,8 @@
 				]
 			},
 			{
-				"BlockType": "Highlight",
+				"BlockType": "PopUp",
+				"PopUpType": "Highlight",
 				"WaitToFinish": false,
 				"Create": "PopUp1",
 				"TargetElement": "MoveableCamera2D/CanvasLayer/CombatUiControl/QueInputControl/BackPatchContainer",
@@ -1035,16 +1035,37 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "jump, fly, pray, curse, teleport, shoot guns, shapeshift, summon minions, consume souls, raise the dead, command beast, sing, dance, or anything else, ",
-						"LetterDelay": 0.0
-					},
-					{
-						"EntryType": "Delay",
-						"Delay": 0.3
+						"Text": "jump, sprint, strafe, fly, ",
+						"LetterDelay": 0.01
 					},
 					{
 						"EntryType": "Text",
-						"Text": "you have to have a Page to do it."
+						"Text": "create miracles, lay curses, teleport, shoot guns, ",
+						"LetterDelay": 0.005
+					},
+					{
+						"EntryType": "Text",
+						"Text": "shapeshift, summon minions, levy taxes, teleport, oh wait I said that one, buff allies, cull the weak, consume souls, take drugs, make it rain, turn back time, smell what the rock is cooking, contemplate life, kill god, be sexy, do kung fu fighting, call some lightning, punch ghost, dig a hole, throw bombs, play with fire, commune with spirits, create earthquakes, analyze foes, brew potions, heal the sick, raise the dead, command beast, sing, dance, ",
+						"LetterDelay": 0.001
+					},
+					{
+						"EntryType": "Text",
+						"Text": "... or anything else,",
+						"NewLine": true
+					},
+					{
+						"EntryType": "Text",
+						"Text": " ",
+						"NewLine": true
+					},
+					{
+						"EntryType": "Delay",
+						"Delay": 0.5
+					},
+					{
+						"EntryType": "Text",
+						"Text": "you have to have a Page to do it.",
+						"NewLine": false
 					},
 					{
 						"EntryType": "WaitToRead"
@@ -1052,7 +1073,27 @@
 				]
 			},
 			{
-				"BlockType": "Highlight",
+				"BlockType": "SpeechBox",
+				"TopBox": true,
+				"WaitToFinish": true,
+				"WaitForNextButton": true,
+				"Entries": [
+					{
+						"EntryType": "Clear",
+						"ClearSpeaker": false
+					},
+					{
+						"EntryType": "Text",
+						"Text": "But, how do you uses these Pages?"
+					},
+					{
+						"EntryType": "WaitToRead"
+					}
+				]
+			},
+			{
+				"BlockType": "PopUp",
+				"PopUpType": "Highlight",
 				"WaitToFinish": false,
 				"Destroy": "PopUp1",
 				"Create": "PopUp2",
@@ -1071,7 +1112,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "The smaller bar would be your PageQue."
+						"Text": "You put them here in your PageQue."
 					},
 					{
 						"EntryType": "Delay",
@@ -1079,8 +1120,27 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "These slots are where you put the Action Pages you want to use next Round.",
+						"Text": "Befor each Round",
 						"NewLine":true
+					},
+					{
+						"EntryType": "Speaker",
+						"SpeakerName": "MtFr",
+						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Squint.png"
+					},
+					{
+						"EntryType":"Text",
+						"Text": "... ",
+						"LetterDelay": 0.3
+					},
+					{
+						"EntryType": "Text",
+						"Text": "Hold on, I think I have some flash cards for this"
+					},
+					{
+						"EntryType":"Text",
+						"Text": "... ",
+						"LetterDelay": 0.3
 					},
 					{
 						"EntryType": "WaitToRead"
@@ -1088,7 +1148,7 @@
 				]
 			},
 			{
-				"BlockType": "Highlight",
+				"BlockType": "PopUp",
 				"WaitToFinish": false,
 				"Destroy": "PopUp2"
 			},
@@ -1103,26 +1163,13 @@
 						"ClearSpeaker": false
 					},
 					{
-						"EntryType": "Text",
-						"Text": "Once you have your PageQue ready, "
-					},
-					{
-						"EntryType": "Delay",
-						"Delay": 0.3
+						"EntryType": "Speaker",
+						"SpeakerName": "MtFr",
+						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Happy.png"
 					},
 					{
 						"EntryType": "Text",
-						"Text": "you can start the Round, ",
-						"NewLine": true
-					},
-					{
-						"EntryType": "Delay",
-						"Delay": 0.3
-					},
-					{
-						"EntryType": "Text",
-						"Text": "and you'll act out each Page in order of right to left.",
-						"NewLine": true
+						"Text": "Yep, here they are!"
 					},
 					{
 						"EntryType": "WaitToRead"
@@ -1142,6 +1189,13 @@
 				]
 			},
 			{
+				"BlockType": "PopUp",
+				"WaitToFinish": true,
+				"Create": "TutorialCards_1",
+				"PopUpType":"TutorialCard",
+				"Cards": ["Page Que"]
+			},
+			{
 				"BlockType": "SpeechBox",
 				"TopBox": false,
 				"WaitToFinish": true,
@@ -1154,11 +1208,11 @@
 					{
 						"EntryType": "Speaker",
 						"SpeakerName": "MtFr",
-						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Neutral.png"
+						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Happy.png"
 					},
 					{
 						"EntryType": "Text",
-						"Text": "Maybe it will make more sense with a practical demonstration.",
+						"Text": "Now how about a practical demonstration?",
 						"NewLine": true
 					},
 					{
@@ -1195,7 +1249,7 @@
 					{
 						"EntryType": "Speaker",
 						"SpeakerName": "MtFr",
-						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Neutral.png"
+						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Happy.png"
 					},
 					{
 						"EntryType": "Text",
@@ -1221,7 +1275,7 @@
 					{
 						"EntryType": "Speaker",
 						"SpeakerName": "MtFr",
-						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Neutral.png"
+						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Happy.png"
 					},
 					{
 						"EntryType": "Text",
@@ -1274,7 +1328,7 @@
 					{
 						"EntryType": "Speaker",
 						"SpeakerName": "MtFr",
-						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Neutral.png"
+						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Happy.png"
 					},
 					{
 						"EntryType": "Text",
@@ -1285,11 +1339,45 @@
 						"EntryType": "WaitToRead"
 					}
 				]
+			},
+			{
+				"BlockType": "SpeechBox",
+				"TopBox": false,
+				"WaitToFinish": true,
+				"WaitForNextButton": true,
+				"Hide": false,
+				"Entries": [
+					{
+						"EntryType": "Clear",
+						"ClearSpeaker": false
+					},
+					{
+						"EntryType": "Speaker",
+						"SpeakerName": "MtFr",
+						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Happy.png"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "Here's another flash card about movement.",
+						"NewLine": true
+					},
+					{
+						"EntryType": "WaitToRead"
+					}
+				]
+			},
+			{
+				"BlockType": "PopUp",
+				"WaitToFinish": true,
+				"Create": "TutorialCards_1",
+				"PopUpType":"TutorialCard",
+				"Cards": ["Page Que", "Movement"],
+				"Index": 1
 			}
 		]
 	},
 	"Tutorial_Walk":{
-		"_NextPartKey": "Condition_WalkTutorial",
+		"_NextPartKey": "Condition_WalkInput",
 		"WaitForNextButton": false,
 		"Inital_BlackOutState": "Clear",
 		"EnsurePoses": {
@@ -1318,16 +1406,17 @@
 				"Hide": false,
 				"Entries": [
 					{
-						"EntryType": "Clear"
+						"EntryType": "Clear",
+						"ClearSpeaker": false
 					},
 					{
 						"EntryType": "Speaker",
 						"SpeakerName": "MtFr",
-						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Neutral.png"
+						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Happy.png"
 					},
 					{
 						"EntryType": "Text",
-						"Text": "Queue these Pages:",
+						"Text": "Queue up these Pages:",
 						"NewLine": false
 					},
 					{
@@ -1360,7 +1449,7 @@
 			}
 		]
 	},
-	"Condition_WalkTutorial":
+	"Condition_WalkInput":
 	{
 		"_NextPartKey": null,
 		"WaitForNextButton": false,
@@ -1372,58 +1461,9 @@
 		},
 		"AllowInputThrough": true,
 		"ConditionWatcherScript": "res://Scenes/Dialog/DialogConditionWatchers/DialogCondition_Tutorial.gd",
-		"ConditionKey": "WalkTutorial",
+		"ConditionKey": "Condition_WalkInput",
 		"RequiredActionQue": ["MoveForward", "TurnRight", "MoveForward", "MoveForward"]
 
-	},
-	"Tutorial_Part2":{
-		"_NextPartKey": null,
-		"WaitForNextButton": true,
-		"Inital_BlackOutState": "Clear",
-		"EnsurePoses": {
-			"_Camera":"P1",
-			"Player1":"P1",
-			"MysteriousFigure":"MF5"
-		},
-		"Blocks":[
-			{
-				"BlockType": "SpeechBox",
-				"TopBox": false,
-				"WaitToFinish": false,
-				"WaitForNextButton": false,
-				"Hide": true,
-				"Entries": [
-					{
-						"EntryType": "Clear"
-					}
-				]
-			},
-			{
-				"BlockType": "SpeechBox",
-				"TopBox": true,
-				"WaitToFinish": false,
-				"WaitForNextButton": false,
-				"Hide": false,
-				"Entries": [
-					{
-						"EntryType": "Clear"
-					},
-					{
-						"EntryType": "Speaker",
-						"SpeakerName": "MtFr",
-						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Neutral.png"
-					},
-					{
-						"EntryType": "Text",
-						"Text": "Hurray!",
-						"NewLine": false
-					},
-					{
-						"EntryType": "WaitToRead"
-					}
-				]
-			}
-		]
 	},
 	"Tutorial_Walk_Fail1":{
 		"_NextPartKey": "Tutorial_Walk",
@@ -1437,13 +1477,325 @@
 		"Blocks":[
 			{
 				"BlockType": "SpeechBox",
-				"TopBox": false,
-				"WaitToFinish": false,
-				"WaitForNextButton": false,
-				"Hide": true,
+				"TopBox": true,
+				"WaitToFinish": true,
+				"WaitForNextButton": true,
+				"Hide": false,
 				"Entries": [
 					{
-						"EntryType": "Clear"
+						"EntryType": "Clear",
+						"ClearSpeaker": false
+					},
+					{
+						"EntryType": "Speaker",
+						"SpeakerName": "MtFr",
+						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Happy.png"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "Whoops, that's not right.",
+						"NewLine": true
+					},
+					{
+						"EntryType":"WaitToRead"
+					}
+				]
+			},
+			{
+				"BlockType": "ClearQue"
+			},
+			{
+				"BlockType": "SpeechBox",
+				"TopBox": true,
+				"WaitToFinish": true,
+				"WaitForNextButton": false,
+				"Hide": false,
+				"Entries": [
+					{
+						"EntryType": "Clear",
+						"ClearSpeaker": false
+					},
+					{
+						"EntryType": "Text",
+						"Text": "Let's try again.",
+						"NewLine": true
+					},
+					{
+						"EntryType":"WaitToRead"
+					}
+				]
+			}
+		]
+	},
+	"Tutorial_Walk_Fail2":{
+		"_NextPartKey": "Tutorial_Walk",
+		"WaitForNextButton": true,
+		"Inital_BlackOutState": "Clear",
+		"EnsurePoses": {
+			"_Camera":"P1",
+			"Player1":"P1",
+			"MysteriousFigure":"MF5"
+		},
+		"Blocks":[
+			{
+				"BlockType": "SpeechBox",
+				"TopBox": true,
+				"WaitToFinish": true,
+				"WaitForNextButton": true,
+				"Hide": false,
+				"Entries": [
+					{
+						"EntryType": "Clear",
+						"ClearSpeaker": false
+					},
+					{
+						"EntryType": "Speaker",
+						"SpeakerName": "MtFr",
+						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Sad.png"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "No, that's not right either.",
+						"NewLine": true
+					},
+					{
+						"EntryType":"WaitToRead"
+					}
+				]
+			},
+			{
+				"BlockType": "ClearQue"
+			},
+			{
+				"BlockType": "SpeechBox",
+				"TopBox": true,
+				"WaitToFinish": true,
+				"WaitForNextButton": false,
+				"Hide": false,
+				"Entries": [
+					{
+						"EntryType": "Clear",
+						"ClearSpeaker": false
+					},
+					{
+						"EntryType": "Speaker",
+						"SpeakerName": "MtFr",
+						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Neutral.png"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "I'm sure what every you're trying to do is perfectly valid. But, we've got to follow the script. Just humor me for now and you can do your own thing in a couple Rounds.",
+						"NewLine": true
+					},
+					{
+						"EntryType":"WaitToRead"
+					}
+				]
+			}
+		]
+	},
+	"Tutorial_Walk_Fail3":{
+		"_NextPartKey": "Tutorial_Walk",
+		"WaitForNextButton": true,
+		"Inital_BlackOutState": "Clear",
+		"EnsurePoses": {
+			"_Camera":"P1",
+			"Player1":"P1",
+			"MysteriousFigure":"MF5"
+		},
+		"Blocks":[
+			{
+				"BlockType": "SpeechBox",
+				"TopBox": true,
+				"WaitToFinish": true,
+				"WaitForNextButton": true,
+				"Hide": false,
+				"Entries": [
+					{
+						"EntryType": "Clear",
+						"ClearSpeaker": false
+					},
+					{
+						"EntryType": "Speaker",
+						"SpeakerName": "MtFr",
+						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Sad.png"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "No.",
+						"NewLine": true
+					},
+					{
+						"EntryType":"WaitToRead"
+					}
+				]
+			},
+			{
+				"BlockType": "ClearQue"
+			},
+			{
+				"BlockType": "SpeechBox",
+				"TopBox": true,
+				"WaitToFinish": true,
+				"WaitForNextButton": true,
+				"Hide": false,
+				"Entries": [
+					{
+						"EntryType": "Clear",
+						"ClearSpeaker": false
+					},
+					{
+						"EntryType": "Speaker",
+						"SpeakerName": "MtFr",
+						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Neutral.png"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "Are you having trouble with the inputs? Or are you just checking to see if I have funny things to say?",
+						"NewLine": true
+					},
+					{
+						"EntryType":"WaitToRead"
+					}
+				]
+			},
+			{
+				"BlockType": "SpeechBox",
+				"TopBox": true,
+				"WaitToFinish": true,
+				"WaitForNextButton": true,
+				"Hide": false,
+				"Entries": [
+					{
+						"EntryType": "Clear",
+						"ClearSpeaker": false
+					},
+					{
+						"EntryType": "Speaker",
+						"SpeakerName": "MtFr",
+						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Neutral.png"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "Because it's not like I have the time to come up with a bunch of responces for someone choosing to fail a tutorial.",
+						"NewLine": true
+					},
+					{
+						"EntryType":"WaitToRead"
+					}
+				]
+			},
+			{
+				"BlockType": "SpeechBox",
+				"TopBox": true,
+				"WaitToFinish": true,
+				"WaitForNextButton": true,
+				"Hide": false,
+				"Entries": [
+					{
+						"EntryType": "Clear",
+						"ClearSpeaker": false
+					},
+					{
+						"EntryType": "Speaker",
+						"SpeakerName": "MtFr",
+						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Neutral.png"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "There's a whole epic quest to get to, and a world full of people and creatures to see. A bit like this would just be a horrible waste of my time.",
+						"NewLine": true
+					},
+					{
+						"EntryType":"WaitToRead"
+					}
+				]
+			},
+			{
+				"BlockType": "SpeechBox",
+				"TopBox": true,
+				"WaitToFinish": true,
+				"WaitForNextButton": false,
+				"Hide": false,
+				"Entries": [
+					{
+						"EntryType": "Clear",
+						"ClearSpeaker": false
+					},
+					{
+						"EntryType": "Speaker",
+						"SpeakerName": "MtFr",
+						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Neutral.png"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "So can you please just follow the script and we'll get on with the quest?",
+						"NewLine": true
+					},
+					{
+						"EntryType":"WaitToRead"
+					}
+				]
+			}
+		]
+	},
+	"Tutorial_Walk_Fail4":{
+		"_NextPartKey": "Tutorial_Walk",
+		"WaitForNextButton": true,
+		"Inital_BlackOutState": "Clear",
+		"EnsurePoses": {
+			"_Camera":"P1",
+			"Player1":"P1",
+			"MysteriousFigure":"MF5"
+		},
+		"Blocks":[
+			{
+				"BlockType": "SpeechBox",
+				"TopBox": true,
+				"WaitToFinish": true,
+				"WaitForNextButton": true,
+				"Hide": false,
+				"Entries": [
+					{
+						"EntryType": "Clear",
+						"ClearSpeaker": false
+					},
+					{
+						"EntryType": "Speaker",
+						"SpeakerName": "MtFr",
+						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Squint.png"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "1,679,616",
+						"NewLine": true
+					},
+					{
+						"EntryType":"WaitToRead"
+					}
+				]
+			},
+			{
+				"BlockType": "ClearQue"
+			},
+			{
+				"BlockType": "SpeechBox",
+				"TopBox": true,
+				"WaitToFinish": true,
+				"WaitForNextButton": true,
+				"Hide": false,
+				"Entries": [
+					{
+						"EntryType": "Clear",
+						"ClearSpeaker": false
+					},
+					{
+						"EntryType": "Text",
+						"Text": "You have 6 Action Pages and a PPR of 4. That 1,296 unique permutations for your first Round. It will take at least 2 Rounds to reach the mushroom, so 1,296 squared is 1,679,616 possible paths I'd have to account for.",
+						"NewLine": true
+					},
+					{
+						"EntryType":"WaitToRead"
 					}
 				]
 			},
@@ -1460,7 +1812,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "You FAILED!",
+						"Text": "I have the power to send you back to the Main Menu. This is your last warning.",
 						"NewLine": true
 					},
 					{
@@ -1469,5 +1821,454 @@
 				]
 			}
 		]
-	}
+	},
+	"Tutorial_Walk_Fail5":{
+		"_NextPartKey": null,
+		"WaitForNextButton": false,
+		"Inital_BlackOutState": "Clear",
+		"EnsurePoses": {
+			"_Camera":"P1",
+			"Player1":"P1",
+			"MysteriousFigure":"MF5"
+		},
+		"Blocks":[
+			{
+				"BlockType": "SpeechBox",
+				"TopBox": true,
+				"WaitToFinish": true,
+				"WaitForNextButton": false,
+				"Hide": false,
+				"Entries": [
+					{
+						"EntryType": "Clear",
+						"ClearSpeaker": false
+					},
+					{
+						"EntryType": "Speaker",
+						"SpeakerName": "MtFr",
+						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Neutral.png"
+					},
+					{
+						"EntryType":"Text",
+						"Text": "... ",
+						"LetterDelay": 0.3
+					},
+					{
+						"EntryType": "Text",
+						"Text": "Fuck it."
+					},
+					{
+						"EntryType":"Delay",
+						"Delay": 1.0
+					}
+				]
+			},
+			{
+				"BlockType": "MainMenu"
+			}
+		]
+	},
+	"Tutorial_Part2":{
+		"_NextPartKey": "Condition_WalkPlaying",
+		"WaitForNextButton": false,
+		"Inital_BlackOutState": "Clear",
+		"EnsurePoses": {
+			"_Camera":"P1",
+			"Player1":"P1",
+			"MysteriousFigure":"MF5"
+		},
+		"Blocks":[
+			{
+				"BlockType": "SpeechBox",
+				"TopBox": true,
+				"WaitToFinish": true,
+				"WaitForNextButton": true,
+				"Hide": false,
+				"Entries": [
+					{
+						"EntryType": "Clear"
+					},
+					{
+						"EntryType": "Speaker",
+						"SpeakerName": "MtFr",
+						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Happy.png"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "Great! Now we'll start the round and see the amazing Page System in action!",
+						"NewLine": false
+					}
+				]
+			},
+			{
+				"BlockType": "SpeechBox",
+				"TopBox": true,
+				"WaitToFinish": true,
+				"WaitForNextButton": false,
+				"Hide": true,
+				"Entries": [
+					{
+						"EntryType": "Clear"
+					}
+				]
+			}
+		]
+	},
+	"Condition_WalkPlaying":
+	{
+		"_NextPartKey": null,
+		"WaitForNextButton": false,
+		"Inital_BlackOutState": "Clear",
+		"EnsurePoses": {
+			"_Camera":"P1",
+			"Player1":"P1",
+			"MysteriousFigure":"MF5"
+		},
+		"AllowInputThrough": true,
+		"ConditionWatcherScript": "res://Scenes/Dialog/DialogConditionWatchers/DialogCondition_Tutorial.gd",
+		"ConditionKey": "PlayingWalk"
+
+	},
+	"Tutorial_Part3":{
+		"_NextPartKey": "Tutorial_Attack",
+		"WaitForNextButton": false,
+		"Inital_BlackOutState": "Clear",
+		"EnsurePoses": {
+			"_Camera":"P5",
+			"Player1":"P5",
+			"MysteriousFigure":"MF5"
+		},
+		"Blocks":[
+			{
+				"BlockType": "SpeechBox",
+				"TopBox": true,
+				"WaitToFinish": true,
+				"WaitForNextButton": true,
+				"Hide": false,
+				"Entries": [
+					{
+						"EntryType": "Clear"
+					},
+					{
+						"EntryType": "Speaker",
+						"SpeakerName": "MtFr",
+						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Happy.png"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "Doing great so far!",
+						"NewLine": false
+					},
+					{
+						"EntryType":"Delay",
+						"Delay":0.3
+					},
+					{
+						"EntryType": "Text",
+						"Text": "Next up is attacking.",
+						"NewLine": true
+					}
+				]
+			},
+			{
+				"BlockType": "SpeechBox",
+				"TopBox": true,
+				"WaitToFinish": true,
+				"WaitForNextButton": true,
+				"Hide": false,
+				"Entries": [
+					{
+						"EntryType": "Clear"
+					},
+					{
+						"EntryType": "Speaker",
+						"SpeakerName": "MtFr",
+						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Happy.png"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "You'll have to walk to get in range of the mushroom.",
+						"NewLine": false
+					},
+					{
+						"EntryType":"Delay",
+						"Delay":0.3
+					},
+					{
+						"EntryType": "Text",
+						"Text": "I've got a flash card for that too.",
+						"NewLine": true
+					},
+					{
+						"EntryType":"WaitToRead"
+					}
+				]
+			},
+			{
+				"BlockType": "SpeechBox",
+				"TopBox": true,
+				"WaitToFinish": true,
+				"WaitForNextButton": false,
+				"Hide": true,
+				"Entries": [
+					{
+						"EntryType": "Clear"
+					}
+				]
+			},
+			{
+				"BlockType": "PopUp",
+				"WaitToFinish": true,
+				"Create": "TutorialCards_1",
+				"PopUpType":"TutorialCard",
+				"Cards": ["Page Que", "Movement", "Targeting Actors"],
+				"Index": 2
+			}
+		]
+	},
+	"Tutorial_Attack":{
+		"_NextPartKey": "Condition_AttackInput",
+		"WaitForNextButton": false,
+		"Inital_BlackOutState": "Clear",
+		"EnsurePoses": {
+			"_Camera":"P5",
+			"Player1":"P5",
+			"MysteriousFigure":"MF5"
+		},
+		"Blocks":[
+			{
+				"BlockType": "SpeechBox",
+				"TopBox": false,
+				"WaitToFinish": false,
+				"WaitForNextButton": false,
+				"Hide": true,
+				"Entries": [
+					{
+						"EntryType": "Clear"
+					}
+				]
+			},
+			{
+				"BlockType": "SpeechBox",
+				"TopBox": true,
+				"WaitToFinish": false,
+				"WaitForNextButton": false,
+				"Hide": false,
+				"Entries": [
+					{
+						"EntryType": "Clear",
+						"ClearSpeaker": false
+					},
+					{
+						"EntryType": "Speaker",
+						"SpeakerName": "MtFr",
+						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Happy.png"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "Queue up these Pages:",
+						"NewLine": false
+					},
+					{
+						"EntryType": "IconImage",
+						"Image": "res://data/Actions/Movement/MoveForward.png"
+					},
+					{
+						"EntryType": "IconImage",
+						"Image": "res://data/Actions/Movement/MoveForward.png"
+					},
+					{
+						"EntryType": "IconImage",
+						"Image": "res://data/Actions/Movement/MoveForward.png"
+					},
+					{
+						"EntryType": "IconImage",
+						"Image": "res://data/Actions/Movement/MoveForward.png"
+					},
+					{
+						"EntryType": "IconImage",
+						"Image": "res://defs/ClassDefs/Soldier/Items/Equipment/Sprites/OldSword.png"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "Click the Pages to add them to your PageQue.",
+						"NewLine": true
+					},
+					{
+						"EntryType": "Text",
+						"Text": "Click the PageQue to remove a Page.",
+						"NewLine": true
+					}
+				]
+			}
+		]
+	},
+	"Condition_AttackInput":
+	{
+		"_NextPartKey": null,
+		"WaitForNextButton": false,
+		"Inital_BlackOutState": "Clear",
+		"EnsurePoses": {
+			"_Camera":"P5",
+			"Player1":"P5",
+			"MysteriousFigure":"MF5"
+		},
+		"AllowInputThrough": true,
+		"ConditionWatcherScript": "res://Scenes/Dialog/DialogConditionWatchers/DialogCondition_Tutorial.gd",
+		"ConditionKey": "Condition_AttackInput",
+		"RequiredActionQue": ["MoveForward", "MoveForward", "MoveForward", "BasicWeaponAttack"]
+
+	},
+	"Tutorial_Part4":{
+		"_NextPartKey": "Condition_PlayAttack",
+		"WaitForNextButton": false,
+		"Inital_BlackOutState": "Clear",
+		"EnsurePoses": {
+			"_Camera":"P5",
+			"Player1":"P5",
+			"MysteriousFigure":"MF5"
+		},
+		"Blocks":[
+			{
+				"BlockType": "SpeechBox",
+				"TopBox": true,
+				"WaitToFinish": true,
+				"WaitForNextButton": true,
+				"Hide": false,
+				"Entries": [
+					{
+						"EntryType": "Clear"
+					},
+					{
+						"EntryType": "Speaker",
+						"SpeakerName": "MtFr",
+						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Happy.png"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "Time to pick some mushrooms!",
+						"NewLine": false
+					}
+				]
+			},
+			{
+				"BlockType": "SpeechBox",
+				"TopBox": true,
+				"WaitToFinish": false,
+				"WaitForNextButton": false,
+				"Hide": true,
+				"Entries": [
+					{
+						"EntryType": "Clear"
+					}
+				]
+			}
+		]
+	},
+	"Condition_PlayAttack":
+	{
+		"_NextPartKey": null,
+		"WaitForNextButton": false,
+		"Inital_BlackOutState": "Clear",
+		"EnsurePoses": {
+			"_Camera":"P5",
+			"Player1":"P5",
+			"MysteriousFigure":"MF5"
+		},
+		"AllowInputThrough": true,
+		"ConditionWatcherScript": "res://Scenes/Dialog/DialogConditionWatchers/DialogCondition_Tutorial.gd",
+		"ConditionKey": "PlayingAttack"
+	},
+	"Tutorial_Part5":{
+		"_NextPartKey": "Condition_PlayAttack",
+		"WaitForNextButton": false,
+		"Inital_BlackOutState": "Clear",
+		"EnsurePoses": {
+			"_Camera":"P6",
+			"Player1":"P6",
+			"MysteriousFigure":"MF5"
+		},
+		"Blocks":[
+			{
+				"BlockType": "SpeechBox",
+				"TopBox": true,
+				"WaitToFinish": true,
+				"WaitForNextButton": true,
+				"Hide": false,
+				"Entries": [
+					{
+						"EntryType": "Clear"
+					},
+					{
+						"EntryType": "Speaker",
+						"SpeakerName": "MtFr",
+						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Smile.png"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "The legend of the Mushroom Slayer is born!",
+						"NewLine": false
+					},
+					{
+						"EntryType":"WaitToRead"
+					},
+					{
+						"EntryType": "Speaker",
+						"SpeakerName": "MtFr",
+						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Happy.png"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "Oh, and it looks like the mushroom dropped an item.",
+						"NewLine": true
+					},
+					{
+						"EntryType":"WaitToRead"
+					}
+				]
+			},
+			{
+				"BlockType": "SpeechBox",
+				"TopBox": true,
+				"WaitToFinish": true,
+				"WaitForNextButton": true,
+				"Hide": false,
+				"Entries": [
+					{
+						"EntryType": "Clear",
+						"ClearSpeaker": false
+					},
+					{
+						"EntryType": "Text",
+						"Text": "To pick up an item, just move into the same spot and it will be added to your Bag.",
+						"NewLine": false
+					},
+					{
+						"EntryType":"WaitToRead"
+					}
+				]
+			},
+			{
+				"BlockType": "SpeechBox",
+				"TopBox": true,
+				"WaitToFinish": true,
+				"WaitForNextButton": true,
+				"Hide": false,
+				"Entries": [
+					{
+						"EntryType": "Clear",
+						"ClearSpeaker": false
+					},
+					{
+						"EntryType": "Text",
+						"Text": "When the Page System deactivates, Items that are left in the area will automatically be added to your Inventory. (Assuming you're still alive) So don't worry if you miss something.",
+						"NewLine": false
+					},
+					{
+						"EntryType":"WaitToRead"
+					}
+				]
+			}
+		]
+	},
 }

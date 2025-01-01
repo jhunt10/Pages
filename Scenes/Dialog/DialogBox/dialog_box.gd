@@ -1,7 +1,7 @@
 class_name DialogBox
 extends Control
 
-const DEFAULT_LETTER_DELAY:float = 0.03
+const DEFAULT_LETTER_DELAY:float = 0.01
 const DEFAULT_QUESTION_OPTION_DELAY:float = 0.3
 
 enum EntryTypes {Clear, Delay, Speaker, Text, Question, WaitToRead, BackTrack, IconImage}
@@ -48,12 +48,15 @@ func _process(delta: float) -> void:
 			state = STATES.Done
 			finished_printing.emit()
 			return
-		_delay_timer = _delay_timer - delta
-		if _delay_timer <= 0:
+		
+		if _delay_timer <= delta:
 			var current_entry = _entry_que[0]
-			if _handle_entry(current_entry, delta):
+			var remaining_delta = min(0.03, delta - _delay_timer)
+			if _handle_entry(current_entry, delta, remaining_delta):
 				_entry_que.remove_at(0)
 				_starting_read = false
+		else:
+			_delay_timer = _delay_timer - delta
 
 func add_entry(entry_data:Dictionary):
 	_entry_que.append(entry_data)
@@ -66,7 +69,7 @@ func add_entries(entry_arr:Array):
 		state = STATES.Printing
 
 ## Returns true if entry is finished
-func _handle_entry(entry_data:Dictionary, delta)->bool:
+func _handle_entry(entry_data:Dictionary, raw_delta, remaining_delta)->bool:
 	var entry_type_str = entry_data.get("EntryType", '')
 	var entry_type = EntryTypes.get(entry_type_str)
 	if entry_type == null:
@@ -143,24 +146,17 @@ func _handle_entry(entry_data:Dictionary, delta)->bool:
 			#_reader_timer += entry_data['EstimateReadTime']
 			return true
 		#_reader_timer -= delta
-		var new_char = remaining_text.substr(0,1)
-		remaining_text = remaining_text.trim_prefix(new_char)
-		entry_data['RemainingText'] = remaining_text
-		if new_char == "@":
-			var command_end_index = remaining_text.find("@")
-			if command_end_index < 0:
-				printerr("Unterminated Command in text: %s" % [text])
-				_delay_timer = -1
-				return true
-			var command_str = remaining_text.substr(0, command_end_index)
-			remaining_text = remaining_text.trim_prefix(command_str + "@")
+		var letter_delay = entry_data.get("LetterDelay", DEFAULT_LETTER_DELAY)
+		while remaining_delta >= 0 and remaining_text.length() > 0:
+			#printerr("Remainging DElta: " + str(remaining_delta))
+			var new_char = remaining_text.substr(0,1)
+			remaining_text = remaining_text.trim_prefix(new_char)
 			entry_data['RemainingText'] = remaining_text
-			return _handle_special_command(command_str)
-		else:
 			_current_text_entry.append_text(new_char)
 			_update_scrolling()
-			if remaining_text.length() > 0:
-				_delay_timer = entry_data.get("LetterDelay", DEFAULT_LETTER_DELAY)
+			remaining_delta -= letter_delay
+		if remaining_text.length() > 0:
+			_delay_timer = entry_data.get("LetterDelay", DEFAULT_LETTER_DELAY) - remaining_delta
 			return false
 	
 	#----------------------------------
@@ -186,7 +182,7 @@ func _handle_entry(entry_data:Dictionary, delta)->bool:
 		_current_text_entry.text = cur_text
 		_update_scrolling()
 		if remaining_text.length() > 0:
-			_delay_timer = entry_data.get("LetterDelay", DEFAULT_LETTER_DELAY)
+			_delay_timer = entry_data.get("LetterDelay", DEFAULT_LETTER_DELAY) - remaining_delta
 		return false
 	
 	#----------------------------------
@@ -224,7 +220,7 @@ func _handle_entry(entry_data:Dictionary, delta)->bool:
 			#print("Read------------------------------------------------------------------------------------------")
 			_starting_read = true
 			_reader_timer = _estimate_read_time(_current_text_entry.get_parsed_text())
-		_reader_timer -= delta
+		_reader_timer -= raw_delta
 		#print("Read Timer: %s" % [_reader_timer])
 		return _reader_timer <= 0
 	
