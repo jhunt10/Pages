@@ -63,6 +63,17 @@ func start_game():
 
 func _on_start_character_selected(name):
 	StoryState.start_new_story(name)
+	#if current_scene:
+		#current_scene.queue_free()
+	#var combat_scene:CombatRootControl = load("res://Scenes/Combat/combat_scene.tscn").instantiate()
+	#combat_scene.load_init_state("res://Scenes/Maps/StoryMaps/1_StartingMap/starting_map.tscn")
+	#current_scene = combat_scene
+	#self.add_child(current_scene)
+	#
+	#var dialog:DialogController = load("res://Scenes/Dialog/dialog_control.tscn").instantiate()
+	#dialog.scene_root = combat_scene
+	#dialog.load_dialog_script("res://Scenes/Maps/StoryMaps/1_StartingMap/start_game_dialog_script.json")
+	#combat_scene.camera.canvas_layer.add_child(dialog)
 	open_camp_menu()
 
 func open_save_menu():

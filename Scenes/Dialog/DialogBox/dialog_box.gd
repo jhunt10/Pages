@@ -70,6 +70,14 @@ func add_entries(entry_arr:Array):
 
 ## Returns true if entry is finished
 func _handle_entry(entry_data:Dictionary, raw_delta, remaining_delta)->bool:
+	var conditions = entry_data.get("ConditionFlags", {})
+	for flag_name in conditions.keys():
+		var flag_val = conditions[flag_name]
+		if not StoryState.story_flags.has(flag_name):
+			return true
+		if StoryState.story_flags[flag_name] != flag_val:
+			return true
+	
 	var entry_type_str = entry_data.get("EntryType", '')
 	var entry_type = EntryTypes.get(entry_type_str)
 	if entry_type == null:

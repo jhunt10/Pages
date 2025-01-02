@@ -63,7 +63,7 @@
 		},
 		"SpriteSheet": "TutorShroom_SpriteSheet.png",
 		"SpriteFrameWH": [12,4],
-		"SpriteOffset": [0,-8],
+		"SpriteOffset": [0,0],
 		"PortraitRect":[0, 0, 24, 24],
 		"CorpseSprite": "MushroomCorpse.png",
 		"AutoQueing": false,
@@ -80,5 +80,15 @@
 		"DropItems":{
 			"TestPotion":1
 		}
+	},
+	{
+		"ParentKey": "TutorShroom",
+		"ActorKey": "TutorShroom_Roof",
+		"SpriteSheet": "RoofShroom_SpriteSheet.png",
+		"DropItems":{
+            "":1,
+			"TestPotion":0
+		},
+		"SpriteOffset": [0,-5]
 	}
 ]

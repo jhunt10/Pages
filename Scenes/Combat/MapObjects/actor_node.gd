@@ -16,6 +16,7 @@ const FACING_ANIMATION:String = 'facing/facing'
 		
 @export var vfx_holder:Node2D
 @export var body_animation:AnimationPlayer
+@export var death_animation:AnimationPlayer
 @export var path_arrow:Sprite2D
 @export var offset_node:Node2D
 @export var actor_sprite:ActorBodySprite
@@ -179,7 +180,7 @@ func _process(delta: float) -> void:
 	if paused:
 		return
 	if is_dieing:
-		if body_animation.is_playing():
+		if death_animation.is_playing():
 			return
 		if vfx_holder.get_children().size() > 0:
 			return
@@ -375,7 +376,7 @@ func queue_death():
 	if is_dieing:
 		return
 	if LOGGING: print("########################## Que Dieing")
-	#_start_anim("death_effect")
+	death_animation.play("death_effect")
 	is_dieing = true
 
 

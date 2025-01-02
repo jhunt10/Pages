@@ -1,8 +1,21 @@
 {
 	"_MetaData_": {
-		"StartPartKey": "Tutorial_Attack"
+		"StartPartKey": "Tutorial_Part5"
 	},
-	"Prolog":{
+	"PrologSwitch": {
+		"_NextPartLogic": 
+		{
+			"FlagName": "StartClass",
+			"Cases": {
+				"Soldier": "Prolog_Soldier",
+				"Rogue": "Prolog_Rogue",
+				"Mage": "Prolog_Mage",
+				"Priest": "Prolog_Priest"
+			}
+		},
+		"WaitForNextButton": false
+	},
+	"Prolog_Soldier":{
 		"_NextPartKey": "Intro_WalkIn",
 		"WaitForNextButton": true,
 		"Blocks":[
@@ -25,9 +38,78 @@
 			}
 		]
 	},
+	"Prolog_Rogue":{
+		"_NextPartKey": "Intro_WalkIn",
+		"WaitForNextButton": true,
+		"Blocks":[
+			{
+				"BlockType": "Blackout",
+				"BlackOutState":"Black"
+			},
+			{
+				"BlockType": "SpeechBox",
+				"WaitToFinish": true,
+				"Entries": [
+					{
+						"EntryType":"Text",
+						"Text": "Unable to return home and being hunted by the law, "
+					},
+					{
+						"EntryType":"WaitToRead"
+					}
+				]
+			}
+		]
+	},
+	"Prolog_Mage":{
+		"_NextPartKey": "Intro_WalkIn",
+		"WaitForNextButton": true,
+		"Blocks":[
+			{
+				"BlockType": "Blackout",
+				"BlackOutState":"Black"
+			},
+			{
+				"BlockType": "SpeechBox",
+				"WaitToFinish": true,
+				"Entries": [
+					{
+						"EntryType":"Text",
+						"Text": "Unable to face thier master and where no were else to go, "
+					},
+					{
+						"EntryType":"WaitToRead"
+					}
+				]
+			}
+		]
+	},
+	"Prolog_Priest":{
+		"_NextPartKey": "Intro_WalkIn",
+		"WaitForNextButton": true,
+		"Blocks":[
+			{
+				"BlockType": "Blackout",
+				"BlackOutState":"Black"
+			},
+			{
+				"BlockType": "SpeechBox",
+				"WaitToFinish": true,
+				"Entries": [
+					{
+						"EntryType":"Text",
+						"Text": "Running for thier life and unsure who to turn to, "
+					},
+					{
+						"EntryType":"WaitToRead"
+					}
+				]
+			}
+		]
+	},
 	"Intro_WalkIn":{
 		"_NextPartKey": "Intro_Inspection",
-		"WaitForNextButton": true,
+		"WaitForNextButton": false,
 		"EnsurePoses": {
 			"Player1":"Player_Spawn",
 			"MysteriousFigure":"MF_Spawn"
@@ -79,6 +161,7 @@
 			{
 				"BlockType": "SpeechBox",
 				"WaitToFinish": true,
+				"WaitForNextButton": true,
 				"Entries": [
 					{
 						"EntryType":"Text",
@@ -88,6 +171,11 @@
 						"EntryType":"WaitToRead"
 					}
 				]
+			},
+			{
+				"BlockType": "PopUp",
+				"WaitToFinish": false,
+				"Delete":"HelloBubble"
 			}
 		]
 	},
@@ -109,11 +197,6 @@
 						"EntryType":"Clear"
 					}
 				]
-			},
-			{
-				"BlockType": "PopUp",
-				"WaitToFinish": false,
-				"Create":"HelloBubble"
 			},
 			{
 				"BlockType": "MoveActor",
@@ -905,24 +988,6 @@
 			},
 			{
 				"BlockType": "SpeechBox",
-				"WaitToFinish": true,
-				"WaitForNextButton": true,
-				"Entries": [
-					{
-						"EntryType": "Clear",
-						"ClearSpeaker": false
-					},
-					{
-						"EntryType": "Text",
-						"Text": "Imagine you're looking down on the world through a magical window called \"the screen\"."
-					},
-					{
-						"EntryType": "WaitToRead"
-					}
-				]
-			},
-			{
-				"BlockType": "SpeechBox",
 				"TopBox": false,
 				"Hide": true,
 				"Entries": [
@@ -948,6 +1013,25 @@
 					},
 					{
 						"EntryType": "Text",
+						"Text": "Imagine you're looking down on the world through a magical window called \"the screen\"."
+					},
+					{
+						"EntryType": "WaitToRead"
+					}
+				]
+			},
+			{
+				"BlockType": "SpeechBox",
+				"TopBox": true,
+				"WaitToFinish": true,
+				"WaitForNextButton": true,
+				"Entries": [
+					{
+						"EntryType": "Clear",
+						"ClearSpeaker": false
+					},
+					{
+						"EntryType": "Text",
 						"Text": "At the bottom of \"the screen\" you will see your Pages."
 					},
 					{
@@ -961,7 +1045,8 @@
 				"WaitToFinish": false,
 				"Create": "PopUp1",
 				"TargetElement": "MoveableCamera2D/CanvasLayer/CombatUiControl/QueInputControl/BackPatchContainer",
-				"PopupControlSript": "res://Scenes/Dialog/DialogBlockControls/PopUps/dotted_outline_pop_up_control.tscn"
+				"PopupControlSript": "res://Scenes/Dialog/DialogBlockControls/PopUps/OutlinePopUp/outline_pop_up_control.tscn",
+				"DarkenScreen": true
 			},
 			{
 				"BlockType": "SpeechBox",
@@ -1095,10 +1180,10 @@
 				"BlockType": "PopUp",
 				"PopUpType": "Highlight",
 				"WaitToFinish": false,
-				"Destroy": "PopUp1",
+				"Delete": "PopUp1",
 				"Create": "PopUp2",
 				"TargetElement": "MoveableCamera2D/CanvasLayer/CombatUiControl/QueDisplayControl",
-				"PopupControlSript": "res://Scenes/Dialog/DialogBlockControls/PopUps/dotted_outline_pop_up_control.tscn"
+				"PopupControlSript": "res://Scenes/Dialog/DialogBlockControls/PopUps/OutlinePopUp/outline_pop_up_control.tscn"
 			},
 			{
 				"BlockType": "SpeechBox",
@@ -1120,7 +1205,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "Befor each Round",
+						"Text": "Before each Round, umm",
 						"NewLine":true
 					},
 					{
@@ -1135,12 +1220,12 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "Hold on, I think I have some flash cards for this"
+						"Text": "hold on, I think I have some flash cards for this"
 					},
 					{
 						"EntryType":"Text",
 						"Text": "... ",
-						"LetterDelay": 0.3
+						"LetterDelay": 0.1
 					},
 					{
 						"EntryType": "WaitToRead"
@@ -1150,7 +1235,7 @@
 			{
 				"BlockType": "PopUp",
 				"WaitToFinish": false,
-				"Destroy": "PopUp2"
+				"Delete": "PopUp2"
 			},
 			{
 				"BlockType": "SpeechBox",
@@ -1363,6 +1448,18 @@
 					},
 					{
 						"EntryType": "WaitToRead"
+					}
+				]
+			},
+			{
+				"BlockType": "SpeechBox",
+				"TopBox": false,
+				"WaitToFinish": false,
+				"WaitForNextButton": false,
+				"Hide": true,
+				"Entries": [
+					{
+						"EntryType": "Clear"
 					}
 				]
 			},
@@ -1956,16 +2053,16 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "Doing great so far!",
+						"Text": "Incredible, isn't it?",
 						"NewLine": false
 					},
 					{
 						"EntryType":"Delay",
-						"Delay":0.3
+						"Delay":0.5
 					},
 					{
 						"EntryType": "Text",
-						"Text": "Next up is attacking.",
+						"Text": "Now for some violence.",
 						"NewLine": true
 					}
 				]
@@ -1987,12 +2084,12 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "You'll have to walk to get in range of the mushroom.",
+						"Text": "To attack the mushroom, you'll need to move into range.",
 						"NewLine": false
 					},
 					{
 						"EntryType":"Delay",
-						"Delay":0.3
+						"Delay":0.5
 					},
 					{
 						"EntryType": "Text",
@@ -2086,8 +2183,36 @@
 						"Image": "res://data/Actions/Movement/MoveForward.png"
 					},
 					{
+						"ConditionFlags":
+						{
+							"StartClass": "Soldier"
+						},
 						"EntryType": "IconImage",
 						"Image": "res://defs/ClassDefs/Soldier/Items/Equipment/Sprites/OldSword.png"
+					},
+					{
+						"ConditionFlags":
+						{
+							"StartClass": "Rogue"
+						},
+						"EntryType": "IconImage",
+						"Image": "res://defs/ClassDefs/Rogue/Items/Equipment/Sprites/OldDagger.png"
+					},
+					{
+						"ConditionFlags":
+						{
+							"StartClass": "Mage"
+						},
+						"EntryType": "IconImage",
+						"Image": "res://defs/ClassDefs/Mage/Items/Equipment/Sprites/OldWand.png"
+					},
+					{
+						"ConditionFlags":
+						{
+							"StartClass": "Priest"
+						},
+						"EntryType": "IconImage",
+						"Image": "res://defs/ClassDefs/Priest/Items/Equipment/Sprites/OldStaff.png"
 					},
 					{
 						"EntryType": "Text",
@@ -2137,7 +2262,8 @@
 				"Hide": false,
 				"Entries": [
 					{
-						"EntryType": "Clear"
+						"EntryType": "Clear",
+						"ClearSpeaker": false
 					},
 					{
 						"EntryType": "Speaker",
@@ -2180,7 +2306,7 @@
 		"ConditionKey": "PlayingAttack"
 	},
 	"Tutorial_Part5":{
-		"_NextPartKey": "Condition_PlayAttack",
+		"_NextPartKey": null,
 		"WaitForNextButton": false,
 		"Inital_BlackOutState": "Clear",
 		"EnsurePoses": {
@@ -2219,7 +2345,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "Oh, and it looks like the mushroom dropped an item.",
+						"Text": "Oh, and it looks like the mushroom dropped an Item.",
 						"NewLine": true
 					},
 					{
@@ -2240,7 +2366,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "To pick up an item, just move into the same spot and it will be added to your Bag.",
+						"Text": "To pick up an Item, just move into the same spot and it will be added to your Bag (assuming you have room).",
 						"NewLine": false
 					},
 					{
@@ -2261,7 +2387,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "When the Page System deactivates, Items that are left in the area will automatically be added to your Inventory. (Assuming you're still alive) So don't worry if you miss something.",
+						"Text": "When the Page System deactivates, Items that are left in the area will automatically be added to your Inventory (assuming you're still alive). So don't worry if you miss something.",
 						"NewLine": false
 					},
 					{

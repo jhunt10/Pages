@@ -15,6 +15,7 @@ static var actors:Array = []
 static var items:Array = []
 static var effects:Array = []
 static var current_player_id 
+static var story_flags:Dictionary = {}
 
 #TODO: Curent set up doesn't account for time spent in the save menu
 static var total_play_time
@@ -39,6 +40,8 @@ static func start_new_story(starting_class:String):
 	story_id = "Story:" + str(ResourceUID.create_id())
 	var player_id = "Player_1:" + str(ResourceUID.create_id())
 	var new_player = null
+	story_flags = {}
+	story_flags['StartClass'] = starting_class
 	
 	if starting_class == "Soldier":
 		new_player = ActorLibrary.create_actor("SoldierTemplate", {}, player_id)
@@ -69,16 +72,17 @@ static func build_save_data()->Dictionary:
 	out_data['StoryId'] = story_id
 	out_data['PlayerActorId'] = current_player_id
 	out_data['Actors'] = ActorLibrary.Instance.build_save_data()
-	var items_data = {}
 	out_data['PlayerInventory'] = PlayerInventory.list_all_held_item_ids()
 	out_data['Items'] = ItemLibrary.Instance.build_save_data()
 	out_data['RunTime'] = total_play_time + (Time.get_unix_time_from_system() - session_start_unix_time)
+	out_data['StoryFlags'] = story_flags.duplicate(true)
 	return out_data
 
 static func load_save_data(data:Dictionary):
 	if !Instance: Instance = StoryState.new()
 	story_id = data['StoryId']
 	current_player_id = data['PlayerActorId']
+	story_flags = data.get("StoryFlags", {}).duplicate(true)
 	EffectLibrary.purge_effects()
 	ItemLibrary.load_items(data.get("Items", {}))
 	ActorLibrary.load_actors(data.get("Actors", {}))

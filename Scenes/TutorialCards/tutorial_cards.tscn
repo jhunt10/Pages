@@ -60,6 +60,7 @@ patch_margin_right = 48
 patch_margin_bottom = 48
 
 [node name="Page_System" type="Control" parent="CardControl"]
+visible = false
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
@@ -117,7 +118,6 @@ text = "Blue arrow shows end position"
 scroll_active = false
 
 [node name="Movement" type="Control" parent="CardControl"]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -171,15 +171,14 @@ texture = ExtResource("11_65dks")
 
 [node name="DescriptionLabel2" type="RichTextLabel" parent="CardControl/Movement"]
 layout_mode = 0
-offset_left = 283.0
-offset_top = 87.0
-offset_right = 776.0
-offset_bottom = 274.0
+offset_left = 271.0
+offset_top = 83.0
+offset_right = 764.0
+offset_bottom = 270.0
 theme = ExtResource("2_iouli")
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/normal_font_size = 32
-text = "A Move Page's direction is always relative to which way an Actor is facing when they
-                               use the Page."
+text = "The direction of your moves are relative to which way your Actor is  facing."
 scroll_active = false
 
 [node name="Targeting_Actors" type="Control" parent="CardControl"]

@@ -251,31 +251,6 @@ grow_vertical = 2
 theme_override_constants/separation = 0
 alignment = 1
 
-[node name="QueInputControl" parent="MoveableCamera2D/CanvasLayer/CombatUiControl" node_paths=PackedStringArray("que_display_control") instance=ExtResource("14_atc5n")]
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 8.0
-offset_top = -96.0
-offset_right = 228.0
-offset_bottom = -8.0
-grow_vertical = 0
-que_display_control = NodePath("../QueDisplayControl")
-
-[node name="QueDisplayControl" parent="MoveableCamera2D/CanvasLayer/CombatUiControl" instance=ExtResource("22_i32rr")]
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 9.0
-offset_top = -154.0
-offset_right = 109.0
-offset_bottom = -98.0
-grow_vertical = 0
-show_preview_movement = true
-show_gaps = false
-
 [node name="QueCollectionDisplayControl" parent="MoveableCamera2D/CanvasLayer/CombatUiControl" instance=ExtResource("19_t74bn")]
 layout_mode = 1
 anchors_preset = 4
@@ -311,6 +286,31 @@ offset_bottom = 82.0
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
+
+[node name="QueInputControl" parent="MoveableCamera2D/CanvasLayer/CombatUiControl" node_paths=PackedStringArray("que_display_control") instance=ExtResource("14_atc5n")]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = -96.0
+offset_right = 228.0
+offset_bottom = -8.0
+grow_vertical = 0
+que_display_control = NodePath("../QueDisplayControl")
+
+[node name="QueDisplayControl" parent="MoveableCamera2D/CanvasLayer/CombatUiControl" instance=ExtResource("22_i32rr")]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 9.0
+offset_top = -154.0
+offset_right = 109.0
+offset_bottom = -98.0
+grow_vertical = 0
+show_preview_movement = true
+show_gaps = false
 
 [node name="NextActorButton" type="Button" parent="MoveableCamera2D/CanvasLayer/CombatUiControl"]
 visible = false

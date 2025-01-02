@@ -1,0 +1,83 @@
+[gd_scene load_steps=4 format=3 uid="uid://d34va3btgyawv"]
+
+[ext_resource type="Script" path="res://Scenes/Dialog/DialogBlockControls/PopUps/dotted_outline_pop_up_control.gd" id="1_wnjes"]
+[ext_resource type="Texture2D" uid="uid://co50bgo6jm2hv" path="res://Scenes/Dialog/DialogBlockControls/PopUps/OutlinePopUp/FancyOutline_BackPatch_Big_128_36.png" id="2_rbmo7"]
+[ext_resource type="Texture2D" uid="uid://brs3cugoogpf0" path="res://Scenes/Dialog/DialogBlockControls/PopUps/OutlinePopUp/FancyOutlineShadowed_BackPatch_Big_128_36.png" id="3_j0htr"]
+
+[node name="OutlinePopUpControl" type="Control" node_paths=PackedStringArray("outline_patch", "shadow_rect_left", "shadow_rect_right", "shadow_rect_top", "shadow_rect_bot", "button")]
+modulate = Color(0.733185, 0.772229, 0.512226, 1)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+script = ExtResource("1_wnjes")
+outline_texture = ExtResource("2_rbmo7")
+outline_shadowed_texture = ExtResource("3_j0htr")
+outline_patch = NodePath("OutlinePatch")
+shadow_rect_left = NodePath("OutlinePatch/BlackOut_Left")
+shadow_rect_right = NodePath("OutlinePatch/BlackOut_Right")
+shadow_rect_top = NodePath("OutlinePatch/BlackOut_Top")
+shadow_rect_bot = NodePath("OutlinePatch/BlackOut_Bot")
+button = NodePath("OutlinePatch/Button")
+
+[node name="OutlinePatch" type="NinePatchRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_j0htr")
+patch_margin_left = 36
+patch_margin_top = 36
+patch_margin_right = 36
+patch_margin_bottom = 36
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+
+[node name="BlackOut_Left" type="ColorRect" parent="OutlinePatch"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = -2000.0
+offset_top = -2000.0
+offset_bottom = 2000.0
+grow_vertical = 2
+color = Color(0, 0, 0, 0.509804)
+
+[node name="BlackOut_Right" type="ColorRect" parent="OutlinePatch"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_top = -2000.0
+offset_right = 2000.0
+offset_bottom = 2000.0
+color = Color(0, 0, 0, 0.509804)
+
+[node name="BlackOut_Top" type="ColorRect" parent="OutlinePatch"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+offset_top = -2000.0
+color = Color(0, 0, 0, 0.509804)
+
+[node name="BlackOut_Bot" type="ColorRect" parent="OutlinePatch"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = 2000.0
+color = Color(0, 0, 0, 0.509804)
+
+[node name="Button" type="Button" parent="OutlinePatch"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

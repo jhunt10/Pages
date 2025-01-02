@@ -119,8 +119,9 @@ func _process(delta: float) -> void:
 			if next_part_key:
 				_start_part(next_part_key)
 			else:
-				_state == STATES.Finished
-				self.hide()
+				printerr("No Next Part Key Found")
+				_state = STATES.Finished
+				self.queue_free()
 
 ## Returns true if any blocks are currently playing
 func _are_blocks_playing():
@@ -160,6 +161,11 @@ func _get_next_part_key():
 			var cases  = next_part_logic.get("Cases", {})
 			if cases.has(flag_val):
 				return cases[flag_val]
+		if StoryState.story_flags.has(flag_name):
+			var flag_val = StoryState.story_flags.get(flag_name)
+			var cases  = next_part_logic.get("Cases", {})
+			if cases.has(flag_val):
+				return cases[flag_val]
 	return _current_part_data.get("_NextPartKey", null)
 
 func _start_part(part_key:String):
@@ -169,6 +175,7 @@ func _start_part(part_key:String):
 	if not _dialog_part_datas.has(part_key):
 		printerr("DialogControl: No script part found with key '%s'." % [part_key])
 		_state = STATES.Finished
+		self.queue_free()
 		return
 	_current_part_data = _dialog_part_datas[part_key].duplicate(true)
 	if not _current_part_data.keys().has('Blocks'):
@@ -338,7 +345,7 @@ func _handle_block(block_data:Dictionary)->bool:
 	# 	 "WaitToFinish": Bool(false): Add "[PopUp_Id]" to list of block states
 	# 	 "PopUpType": String (See PopupController for options)
 	# 	 "Create": String : Key for popup to be created
-	# 	 "Destory": String : Key for popup to be deleted
+	# 	 "Delete": String : Key for popup to be deleted
 	#----------------------------------
 	if block_type == BlockTypes.PopUp:
 		var wait_on_pop_up = dialog_popup_controller.handle_pop_up(block_data)
@@ -363,15 +370,16 @@ func load_dialog_script(file_path):
 	if not _dialog_part_datas.keys().has("_MetaData_"):
 		printerr("No _MetaData_ found in dialog script.")
 		_dialog_part_datas.clear()
+		self.queue_free()
 		return
 	var start_part_key = _dialog_part_datas["_MetaData_"].get("StartPartKey", null)
 	if !start_part_key:
 		printerr("No 'StartPartKey' found in _MetaData_ of dialog script.")
 		_dialog_part_datas.clear()
+		self.queue_free()
 		return
 	_cur_part_key = start_part_key
 	_start_part(_cur_part_key)
-	self._state = STATES.Playing
 
 func _on_speech_box_finished(is_top:bool):
 	print("Speech Box Finished")

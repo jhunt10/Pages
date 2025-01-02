@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=4 uid="uid://b5mglr34pxb1o"]
+[gd_scene load_steps=27 format=4 uid="uid://b5mglr34pxb1o"]
 
 [ext_resource type="Script" path="res://assets/Scripts/Map/map_controler_node.gd" id="1_37oqj"]
 [ext_resource type="Texture2D" uid="uid://dxan6lyrg8db3" path="res://assets/Sprites/TileSets/GrassPath_TileSheet.png" id="2_otaqg"]
@@ -11,7 +11,9 @@
 [ext_resource type="Script" path="res://assets/Scripts/Ai/PathTestingMap.gd" id="9_8rtge"]
 [ext_resource type="Texture2D" uid="uid://kh2uekpf4sb8" path="res://Scenes/Maps/MapEditing/ActorSpawnSprite.png" id="10_wtffo"]
 [ext_resource type="Script" path="res://Scenes/Maps/MapEditing/actor_spawn_node.gd" id="11_f7y3r"]
-[ext_resource type="Texture2D" uid="uid://b2c8r43nh7m0a" path="res://defs/Actors/TestChaser_SpriteSheet.png" id="13_it5h4"]
+[ext_resource type="Texture2D" uid="uid://d4iuq6lbdnutl" path="res://defs/Actors/Squirrels/Squirrel_SpriteSheet.png" id="12_1olrc"]
+[ext_resource type="Texture2D" uid="uid://ddi38ixf3oob2" path="res://defs/Actors/Squirrels/Squirrior_SpriteSheet.png" id="13_pqf28"]
+[ext_resource type="Texture2D" uid="uid://hel2yqwqa2do" path="res://defs/Actors/Squirrels/Squirrcerer_SpriteSheet.png" id="14_tjt6f"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lwpvo"]
 texture = ExtResource("2_otaqg")
@@ -1080,101 +1082,197 @@ is_player = true
 map_coor = Vector2i(7, 7)
 
 [node name="SpwanNode_Squirrel" type="Sprite2D" parent="MarkerTileMapLayer"]
-self_modulate = Color(1, 0, 0, 1)
-position = Vector2(176, 48)
-texture = ExtResource("13_it5h4")
+position = Vector2(176, 80)
+texture = ExtResource("12_1olrc")
 offset = Vector2(0, -16)
 hframes = 12
 vframes = 4
 script = ExtResource("11_f7y3r")
 spawn_actor_key = "Squirrel"
 facing = 2
-map_coor = Vector2i(5, 1)
-
-[node name="SpwanNode_Squirrel4" type="Sprite2D" parent="MarkerTileMapLayer"]
-self_modulate = Color(1, 0, 0, 1)
-position = Vector2(304, 48)
-texture = ExtResource("13_it5h4")
-offset = Vector2(0, -16)
-hframes = 12
-vframes = 4
-script = ExtResource("11_f7y3r")
-spawn_actor_key = "Squirrel"
-facing = 2
-map_coor = Vector2i(9, 1)
+map_coor = Vector2i(5, 2)
 
 [node name="SpwanNode_Squirrel2" type="Sprite2D" parent="MarkerTileMapLayer"]
-self_modulate = Color(1, 0, 0, 1)
-position = Vector2(432, 176)
-texture = ExtResource("13_it5h4")
+position = Vector2(304, 80)
+texture = ExtResource("12_1olrc")
 offset = Vector2(0, -16)
 hframes = 12
 vframes = 4
-frame = 36
 script = ExtResource("11_f7y3r")
 spawn_actor_key = "Squirrel"
-facing = 3
-map_coor = Vector2i(13, 5)
+facing = 2
+map_coor = Vector2i(9, 2)
 
-[node name="SpwanNode_Squirrel5" type="Sprite2D" parent="MarkerTileMapLayer"]
-self_modulate = Color(1, 0, 0, 1)
-position = Vector2(432, 304)
-texture = ExtResource("13_it5h4")
+[node name="SpwanNode_Arm_Squirrel" type="Sprite2D" parent="MarkerTileMapLayer"]
+position = Vector2(240, 112)
+texture = ExtResource("13_pqf28")
 offset = Vector2(0, -16)
 hframes = 12
 vframes = 4
-frame = 36
 script = ExtResource("11_f7y3r")
-spawn_actor_key = "Squirrel"
-facing = 3
-map_coor = Vector2i(13, 9)
+spawn_actor_key = "Squirrior"
+facing = 2
+map_coor = Vector2i(7, 3)
 
-[node name="SpwanNode_Squirrel3" type="Sprite2D" parent="MarkerTileMapLayer"]
-self_modulate = Color(1, 0, 0, 1)
-position = Vector2(48, 176)
-texture = ExtResource("13_it5h4")
+[node name="SpwanNode_Mag_Squirrel" type="Sprite2D" parent="MarkerTileMapLayer"]
+position = Vector2(240, 48)
+texture = ExtResource("14_tjt6f")
 offset = Vector2(0, -16)
 hframes = 12
 vframes = 4
-frame = 24
 script = ExtResource("11_f7y3r")
-spawn_actor_key = "Squirrel"
-facing = 1
-map_coor = Vector2i(1, 5)
-
-[node name="SpwanNode_Squirrel6" type="Sprite2D" parent="MarkerTileMapLayer"]
-self_modulate = Color(1, 0, 0, 1)
-position = Vector2(48, 304)
-texture = ExtResource("13_it5h4")
-offset = Vector2(0, -16)
-hframes = 12
-vframes = 4
-frame = 24
-script = ExtResource("11_f7y3r")
-spawn_actor_key = "Squirrel"
-facing = 1
-map_coor = Vector2i(1, 9)
+spawn_actor_key = "Squirrcerer"
+facing = 2
+map_coor = Vector2i(7, 1)
 
 [node name="SpwanNode_Squirrel7" type="Sprite2D" parent="MarkerTileMapLayer"]
-self_modulate = Color(1, 0, 0, 1)
-position = Vector2(176, 432)
-texture = ExtResource("13_it5h4")
+visible = false
+position = Vector2(176, 400)
+texture = ExtResource("12_1olrc")
 offset = Vector2(0, -16)
 hframes = 12
 vframes = 4
 frame = 12
 script = ExtResource("11_f7y3r")
 spawn_actor_key = "Squirrel"
-map_coor = Vector2i(5, 13)
+map_coor = Vector2i(5, 12)
 
 [node name="SpwanNode_Squirrel8" type="Sprite2D" parent="MarkerTileMapLayer"]
-self_modulate = Color(1, 0, 0, 1)
-position = Vector2(304, 432)
-texture = ExtResource("13_it5h4")
+visible = false
+position = Vector2(304, 400)
+texture = ExtResource("12_1olrc")
 offset = Vector2(0, -16)
 hframes = 12
 vframes = 4
 frame = 12
 script = ExtResource("11_f7y3r")
 spawn_actor_key = "Squirrel"
-map_coor = Vector2i(9, 13)
+map_coor = Vector2i(9, 12)
+
+[node name="SpwanNode_Arm_Squirrel4" type="Sprite2D" parent="MarkerTileMapLayer"]
+visible = false
+position = Vector2(240, 368)
+texture = ExtResource("13_pqf28")
+offset = Vector2(0, -16)
+hframes = 12
+vframes = 4
+frame = 12
+script = ExtResource("11_f7y3r")
+spawn_actor_key = "Squirrior"
+map_coor = Vector2i(7, 11)
+
+[node name="SpwanNode_Mag_Squirrel4" type="Sprite2D" parent="MarkerTileMapLayer"]
+visible = false
+position = Vector2(240, 432)
+texture = ExtResource("14_tjt6f")
+offset = Vector2(0, -16)
+hframes = 12
+vframes = 4
+frame = 12
+script = ExtResource("11_f7y3r")
+spawn_actor_key = "Squirrcerer"
+map_coor = Vector2i(7, 13)
+
+[node name="SpwanNode_Squirrel3" type="Sprite2D" parent="MarkerTileMapLayer"]
+visible = false
+position = Vector2(80, 176)
+texture = ExtResource("12_1olrc")
+offset = Vector2(0, -16)
+hframes = 12
+vframes = 4
+frame = 24
+script = ExtResource("11_f7y3r")
+spawn_actor_key = "Squirrel"
+facing = 1
+map_coor = Vector2i(2, 5)
+
+[node name="SpwanNode_Squirrel4" type="Sprite2D" parent="MarkerTileMapLayer"]
+visible = false
+position = Vector2(80, 304)
+texture = ExtResource("12_1olrc")
+offset = Vector2(0, -16)
+hframes = 12
+vframes = 4
+frame = 24
+script = ExtResource("11_f7y3r")
+spawn_actor_key = "Squirrel"
+facing = 1
+map_coor = Vector2i(2, 9)
+
+[node name="SpwanNode_Arm_Squirrel2" type="Sprite2D" parent="MarkerTileMapLayer"]
+visible = false
+position = Vector2(112, 240)
+texture = ExtResource("13_pqf28")
+offset = Vector2(0, -16)
+hframes = 12
+vframes = 4
+frame = 24
+script = ExtResource("11_f7y3r")
+spawn_actor_key = "Squirrior"
+facing = 1
+map_coor = Vector2i(3, 7)
+
+[node name="SpwanNode_Mag_Squirrel2" type="Sprite2D" parent="MarkerTileMapLayer"]
+visible = false
+position = Vector2(48, 240)
+texture = ExtResource("14_tjt6f")
+offset = Vector2(0, -16)
+hframes = 12
+vframes = 4
+frame = 24
+script = ExtResource("11_f7y3r")
+spawn_actor_key = "Squirrcerer"
+facing = 1
+map_coor = Vector2i(1, 7)
+
+[node name="SpwanNode_Squirrel5" type="Sprite2D" parent="MarkerTileMapLayer"]
+visible = false
+position = Vector2(400, 176)
+texture = ExtResource("12_1olrc")
+offset = Vector2(0, -16)
+hframes = 12
+vframes = 4
+frame = 36
+script = ExtResource("11_f7y3r")
+spawn_actor_key = "Squirrel"
+facing = 3
+map_coor = Vector2i(12, 5)
+
+[node name="SpwanNode_Squirrel6" type="Sprite2D" parent="MarkerTileMapLayer"]
+visible = false
+position = Vector2(400, 304)
+texture = ExtResource("12_1olrc")
+offset = Vector2(0, -16)
+hframes = 12
+vframes = 4
+frame = 36
+script = ExtResource("11_f7y3r")
+spawn_actor_key = "Squirrel"
+facing = 3
+map_coor = Vector2i(12, 9)
+
+[node name="SpwanNode_Arm_Squirrel3" type="Sprite2D" parent="MarkerTileMapLayer"]
+visible = false
+position = Vector2(368, 240)
+texture = ExtResource("13_pqf28")
+offset = Vector2(0, -16)
+hframes = 12
+vframes = 4
+frame = 36
+script = ExtResource("11_f7y3r")
+spawn_actor_key = "Squirrior"
+facing = 3
+map_coor = Vector2i(11, 7)
+
+[node name="SpwanNode_Mag_Squirrel3" type="Sprite2D" parent="MarkerTileMapLayer"]
+visible = false
+position = Vector2(432, 240)
+texture = ExtResource("14_tjt6f")
+offset = Vector2(0, -16)
+hframes = 12
+vframes = 4
+frame = 36
+script = ExtResource("11_f7y3r")
+spawn_actor_key = "Squirrcerer"
+facing = 3
+map_coor = Vector2i(13, 7)

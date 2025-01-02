@@ -9,10 +9,9 @@
 			"LargeIcon":"Squirrel_Icon.png",
 			"SmallIcon":"Squirrel_Icon.png"
 		},
-		"SpriteSheet": "Wolf_SpriteSheet.png",
+		"SpriteSheet": "Squirrel_SpriteSheet.png",
 		"SpriteFrameWH": [12,4],
 		"SpriteOffset": [0,-20],
-		"PortraitRect":[12, 31, 24, 24],
 		"CorpseSprite": null,
 		"AutoQueing": false,
 		"LeavesCorpse": true,
@@ -28,7 +27,7 @@
 			"Mass":10,
 			"Speed":50,
 			"Strength": 10,
-			"Armor": 10,
+			"Armor": 0,
 			"Evasion":100,
 			"PPR":3
 		},
@@ -62,5 +61,64 @@
 			"ChuckAcorn_PageItem":1,
 			"HealthPotionL":1
         }
+	},
+	{
+		"ParentKey": "Squirrel",
+		"ActorKey": "Squirrcerer",
+		"SpriteSheet": "Squirrcerer_SpriteSheet.png",
+		"Details":{
+			"DisplayName": "Squirrel",
+			"SnippetDesc": "A squirrel.",
+			"Description": "Dangerous political extremist who will commit any atrocity to see their new world order come to light.",
+			"Tags": ["Squirrel"],
+			"LargeIcon":"Squirrcerer_IconSmall.png",
+			"SmallIcon":"Squirrcerer_IconSmall.png"
+		},
+		"Stats":{
+			"BarStat:Health":12,
+			"BarMax:Health":12,
+			"BarRegen:Health:Round":0,
+			"BarRegen:Health:Turn":0,
+			"BarStat:Stamina":10,
+			"BarMax:Stamina":10,
+			"BarRegen:Stamina:Round":0,
+			"BarRegen:Stamina:Turn":10,
+			"Mass":10,
+			"Speed":50,
+			"Strength": 10,
+			"Ward": 10,
+			"Evasion":100,
+			"PPR":2
+		}
+	},
+	{
+		"ParentKey": "Squirrel",
+		"ActorKey": "Squirrior",
+		"SpriteSheet": "Squirrior_SpriteSheet.png",
+		"Details":{
+			"DisplayName": "Squirrel",
+			"SnippetDesc": "A squirrel.",
+			"Description": "Dangerous political extremist who will commit any atrocity to see their new world order come to light.",
+			"Tags": ["Squirrel"],
+			"LargeIcon":"Squirrior_IconSmall.png",
+			"SmallIcon":"Squirrior_IconSmall.png"
+		},
+		
+		"Stats":{
+			"BarStat:Health":12,
+			"BarMax:Health":12,
+			"BarRegen:Health:Round":0,
+			"BarRegen:Health:Turn":0,
+			"BarStat:Stamina":10,
+			"BarMax:Stamina":10,
+			"BarRegen:Stamina:Round":0,
+			"BarRegen:Stamina:Turn":10,
+			"Mass":10,
+			"Speed":0,
+			"Strength": 10,
+			"Ward": 10,
+			"Evasion":100,
+			"PPR":3
+		}
 	}
 ]
