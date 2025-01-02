@@ -1,10 +1,11 @@
-[gd_scene load_steps=15 format=3 uid="uid://wa8bgcuurt5n"]
+[gd_scene load_steps=18 format=3 uid="uid://wa8bgcuurt5n"]
 
 [ext_resource type="Texture2D" uid="uid://cgrlfobidw8xl" path="res://assets/Sprites/UI/BackPatches/PaperPatch_Bigger_276x192_48.png" id="1_dsnfm"]
 [ext_resource type="Script" path="res://Scenes/TutorialCards/tutorial_cards.gd" id="1_imldm"]
 [ext_resource type="Theme" uid="uid://cayt153s5ro4a" path="res://Scenes/Themes/standard_theme_red.tres" id="2_iouli"]
 [ext_resource type="Texture2D" uid="uid://dgkdwn6nnwtcv" path="res://assets/Sprites/UI/BackPatches/DrawnPatch_64_16.png" id="2_nxh5l"]
 [ext_resource type="Theme" uid="uid://dwinll8pgdjhc" path="res://Scenes/Themes/standard_theme.tres" id="3_bdbcw"]
+[ext_resource type="Texture2D" uid="uid://io35wpu802fp" path="res://assets/Sprites/UI/BackPatches/Patch_64_12.png" id="4_kjbxh"]
 [ext_resource type="Texture2D" uid="uid://b2tm6hnoq5pei" path="res://notes/TutorialImages/MoveDemoNorth.png" id="7_tm0tf"]
 [ext_resource type="Texture2D" uid="uid://dirot53u7vol0" path="res://notes/TutorialImages/MoveDemoEast.png" id="8_2oidn"]
 [ext_resource type="Texture2D" uid="uid://xmsubuhqv0bo" path="res://notes/TutorialImages/QueOrderDemo.png" id="9_m3d0h"]
@@ -14,6 +15,8 @@
 [ext_resource type="Texture2D" uid="uid://cv6jm64dgx2iu" path="res://notes/TutorialImages/MoveDemo_Pages.png" id="11_65dks"]
 [ext_resource type="Texture2D" uid="uid://bo44u0dxhlqhp" path="res://notes/TutorialImages/TargetDemo.png" id="12_vkq77"]
 [ext_resource type="Texture2D" uid="uid://b8nni7o238kns" path="res://notes/TutorialImages/TargetSpotDemo.png" id="14_eljgu"]
+[ext_resource type="Texture2D" uid="uid://bujky44hog2jm" path="res://assets/Sprites/UI/SymbolIcons/QueCountSymbol.png" id="15_ifnkw"]
+[ext_resource type="Texture2D" uid="uid://cf0uynqde6atg" path="res://notes/TutorialImages/PPR_Demo.png" id="16_aseqn"]
 
 [node name="TutorialCardsControl" type="Control" node_paths=PackedStringArray("title_label", "back_button", "back_button_background", "next_button", "next_button_background", "done_button", "done_button_background", "page_que_card", "movement_card", "targeting_actor_card", "targeting_spot_card")]
 layout_mode = 3
@@ -58,6 +61,150 @@ patch_margin_left = 48
 patch_margin_top = 48
 patch_margin_right = 48
 patch_margin_bottom = 48
+
+[node name="TopContainer" type="VBoxContainer" parent="CardControl"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = 16.0
+offset_right = -24.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CardControl/TopContainer"]
+layout_mode = 2
+
+[node name="BackButtonControl" type="Control" parent="CardControl/TopContainer/HBoxContainer"]
+custom_minimum_size = Vector2(92, 0)
+layout_mode = 2
+
+[node name="BackButton" type="NinePatchRect" parent="CardControl/TopContainer/HBoxContainer/BackButtonControl"]
+custom_minimum_size = Vector2(92, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_nxh5l")
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+
+[node name="Label" type="Label" parent="CardControl/TopContainer/HBoxContainer/BackButtonControl/BackButton"]
+self_modulate = Color(0.498039, 0.4, 0.376471, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_bdbcw")
+theme_override_font_sizes/font_size = 24
+text = "Back"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="CardControl/TopContainer/HBoxContainer/BackButtonControl/BackButton"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TitleLabel" type="Label" parent="CardControl/TopContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("2_iouli")
+theme_override_colors/font_outline_color = Color(0.470588, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 48
+text = "Targeting Actors"
+horizontal_alignment = 1
+
+[node name="NextButtonControl" type="Control" parent="CardControl/TopContainer/HBoxContainer"]
+custom_minimum_size = Vector2(92, 0)
+layout_mode = 2
+
+[node name="DonetButton" type="NinePatchRect" parent="CardControl/TopContainer/HBoxContainer/NextButtonControl"]
+custom_minimum_size = Vector2(92, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_nxh5l")
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+
+[node name="Label" type="Label" parent="CardControl/TopContainer/HBoxContainer/NextButtonControl/DonetButton"]
+self_modulate = Color(0.498039, 0.4, 0.376471, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_bdbcw")
+theme_override_font_sizes/font_size = 24
+text = "Done"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="CardControl/TopContainer/HBoxContainer/NextButtonControl/DonetButton"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="NextButton" type="NinePatchRect" parent="CardControl/TopContainer/HBoxContainer/NextButtonControl"]
+custom_minimum_size = Vector2(92, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_nxh5l")
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+
+[node name="Label" type="Label" parent="CardControl/TopContainer/HBoxContainer/NextButtonControl/NextButton"]
+self_modulate = Color(0.498039, 0.4, 0.376471, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_bdbcw")
+theme_override_font_sizes/font_size = 24
+text = "Next"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="CardControl/TopContainer/HBoxContainer/NextButtonControl/NextButton"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Page_System" type="Control" parent="CardControl"]
 visible = false
@@ -118,6 +265,7 @@ text = "Blue arrow shows end position"
 scroll_active = false
 
 [node name="Movement" type="Control" parent="CardControl"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -366,146 +514,175 @@ text = "Faster Actors might move before the attack is made."
 fit_content = true
 scroll_active = false
 
-[node name="TopContainer" type="VBoxContainer" parent="CardControl"]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 24.0
-offset_top = 16.0
-offset_right = -24.0
-offset_bottom = -16.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="CardControl/TopContainer"]
-layout_mode = 2
-
-[node name="BackButtonControl" type="Control" parent="CardControl/TopContainer/HBoxContainer"]
-custom_minimum_size = Vector2(92, 0)
-layout_mode = 2
-
-[node name="BackButton" type="NinePatchRect" parent="CardControl/TopContainer/HBoxContainer/BackButtonControl"]
-custom_minimum_size = Vector2(92, 0)
+[node name="PPR" type="Control" parent="CardControl"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_nxh5l")
-patch_margin_left = 16
-patch_margin_top = 16
-patch_margin_right = 16
-patch_margin_bottom = 16
 
-[node name="Label" type="Label" parent="CardControl/TopContainer/HBoxContainer/BackButtonControl/BackButton"]
-self_modulate = Color(0.498039, 0.4, 0.376471, 1)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="VBoxContainer" type="VBoxContainer" parent="CardControl/PPR"]
+layout_mode = 0
+offset_left = 27.0
+offset_top = 104.0
+offset_right = 774.0
+offset_bottom = 484.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CardControl/PPR/VBoxContainer"]
+layout_mode = 2
+
+[node name="PPR_Icon" type="TextureRect" parent="CardControl/PPR/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("15_ifnkw")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="CardControl/PPR/VBoxContainer/HBoxContainer"]
+self_modulate = Color(0.470588, 0, 0, 1)
+layout_mode = 2
 theme = ExtResource("3_bdbcw")
-theme_override_font_sizes/font_size = 24
-text = "Back"
-horizontal_alignment = 1
-vertical_alignment = 1
+theme_override_font_sizes/font_size = 32
+text = "PPR "
 
-[node name="Button" type="Button" parent="CardControl/TopContainer/HBoxContainer/BackButtonControl/BackButton"]
-self_modulate = Color(1, 1, 1, 0)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="TitleLabel" type="Label" parent="CardControl/TopContainer/HBoxContainer"]
+[node name="Label2" type="Label" parent="CardControl/PPR/VBoxContainer/HBoxContainer"]
+self_modulate = Color(0, 0, 0, 1)
 layout_mode = 2
-size_flags_horizontal = 3
+theme = ExtResource("3_bdbcw")
+theme_override_font_sizes/font_size = 32
+text = ": Pages per Round"
+
+[node name="DescriptionLabel1" type="RichTextLabel" parent="CardControl/PPR/VBoxContainer"]
+layout_mode = 2
 theme = ExtResource("2_iouli")
-theme_override_colors/font_outline_color = Color(0.470588, 0, 0, 1)
-theme_override_constants/outline_size = 4
-theme_override_font_sizes/font_size = 48
-text = "Targeting Actors"
-horizontal_alignment = 1
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 32
+text = "The number of Pages an 
+Actor can use in a Round.
+"
+fit_content = true
+scroll_active = false
 
-[node name="NextButtonControl" type="Control" parent="CardControl/TopContainer/HBoxContainer"]
-custom_minimum_size = Vector2(92, 0)
+[node name="HSeparator" type="HSeparator" parent="CardControl/PPR/VBoxContainer"]
+self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
+size_flags_vertical = 3
 
-[node name="DonetButton" type="NinePatchRect" parent="CardControl/TopContainer/HBoxContainer/NextButtonControl"]
-custom_minimum_size = Vector2(92, 0)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("2_nxh5l")
-patch_margin_left = 16
-patch_margin_top = 16
-patch_margin_right = 16
-patch_margin_bottom = 16
+[node name="DescriptionLabel2" type="RichTextLabel" parent="CardControl/PPR/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_iouli")
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 32
+text = "Gap Slots are added to space out the Turns of Actors with lower PPR."
+fit_content = true
+scroll_active = false
 
-[node name="Label" type="Label" parent="CardControl/TopContainer/HBoxContainer/NextButtonControl/DonetButton"]
-self_modulate = Color(0.498039, 0.4, 0.376471, 1)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("3_bdbcw")
-theme_override_font_sizes/font_size = 24
-text = "Done"
-horizontal_alignment = 1
-vertical_alignment = 1
+[node name="DescriptionLabel3" type="RichTextLabel" parent="CardControl/PPR/VBoxContainer"]
+visible = false
+layout_mode = 2
+theme = ExtResource("2_iouli")
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 32
+text = "When the effect of the Page is executed, it will target the selected Spot whether or not an Actor is still there."
+fit_content = true
+scroll_active = false
 
-[node name="Button" type="Button" parent="CardControl/TopContainer/HBoxContainer/NextButtonControl/DonetButton"]
+[node name="HSeparator2" type="HSeparator" parent="CardControl/PPR/VBoxContainer"]
 self_modulate = Color(1, 1, 1, 0)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 2
+size_flags_vertical = 3
 
-[node name="NextButton" type="NinePatchRect" parent="CardControl/TopContainer/HBoxContainer/NextButtonControl"]
-custom_minimum_size = Vector2(92, 0)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("2_nxh5l")
-patch_margin_left = 16
-patch_margin_top = 16
-patch_margin_right = 16
-patch_margin_bottom = 16
+[node name="DescriptionLabel4" type="RichTextLabel" parent="CardControl/PPR/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_iouli")
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 28
+text = "Gaps do not trigger or reduce the duration of Effects that say \"On Turn ...\" or \"For x Turns\" and \"... until next Turn\" effects will remain active."
+fit_content = true
+scroll_active = false
 
-[node name="Label" type="Label" parent="CardControl/TopContainer/HBoxContainer/NextButtonControl/NextButton"]
-self_modulate = Color(0.498039, 0.4, 0.376471, 1)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("3_bdbcw")
-theme_override_font_sizes/font_size = 24
-text = "Next"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Button" type="Button" parent="CardControl/TopContainer/HBoxContainer/NextButtonControl/NextButton"]
+[node name="HSeparator3" type="HSeparator" parent="CardControl/PPR/VBoxContainer"]
 self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="PPR_Demo_Image" type="TextureRect" parent="CardControl/PPR"]
+layout_mode = 0
+offset_left = 543.0
+offset_top = 122.0
+offset_right = 731.0
+offset_bottom = 238.0
+texture = ExtResource("16_aseqn")
+
+[node name="BunnyPPR2" type="Label" parent="CardControl/PPR/PPR_Demo_Image"]
+self_modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+offset_left = 6.0
+offset_top = -32.0
+offset_right = 186.0
+offset_bottom = 18.0
+theme = ExtResource("3_bdbcw")
+theme_override_constants/line_spacing = -10
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/font_size = 24
+text = "Gap Slot
+v"
+horizontal_alignment = 1
+
+[node name="NinePatchRect" type="NinePatchRect" parent="CardControl/PPR"]
+layout_mode = 0
+offset_left = 499.0
+offset_top = 82.0
+offset_right = 539.0
+offset_bottom = 204.0
+texture = ExtResource("4_kjbxh")
+patch_margin_left = 12
+patch_margin_top = 12
+patch_margin_right = 12
+patch_margin_bottom = 12
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CardControl/PPR/NinePatchRect"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = -2
+alignment = 1
+
+[node name="PPR_Icon" type="TextureRect" parent="CardControl/PPR/NinePatchRect/VBoxContainer"]
+custom_minimum_size = Vector2(36, 40)
+layout_mode = 2
+texture = ExtResource("15_ifnkw")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="BunnyPPR" type="Label" parent="CardControl/PPR/NinePatchRect/VBoxContainer"]
+self_modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("3_bdbcw")
+theme_override_font_sizes/font_size = 32
+text = "2"
+horizontal_alignment = 1
+
+[node name="TurtPPR" type="Label" parent="CardControl/PPR/NinePatchRect/VBoxContainer"]
+self_modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("3_bdbcw")
+theme_override_font_sizes/font_size = 32
+text = "3"
+horizontal_alignment = 1
+
+[node name="DescriptionLabel5" type="RichTextLabel" parent="CardControl/PPR"]
+layout_mode = 2
+offset_left = 478.0
+offset_top = 202.0
+offset_right = 1225.0
+offset_bottom = 242.0
+theme = ExtResource("2_iouli")
+theme_override_colors/default_color = Color(0.470588, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 32
+text = "1 Page = 1 Turn"
+fit_content = true
+scroll_active = false
