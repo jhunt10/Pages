@@ -1,6 +1,6 @@
 {
 	"_MetaData_": {
-		"StartPartKey": "Tutorial_Part5"
+		"StartPartKey": null
 	},
 	"PrologSwitch": {
 		"_NextPartLogic": 
@@ -2306,7 +2306,7 @@
 		"ConditionKey": "PlayingAttack"
 	},
 	"Tutorial_Part5":{
-		"_NextPartKey": null,
+		"_NextPartKey": "Tutorial_Part6",
 		"WaitForNextButton": false,
 		"Inital_BlackOutState": "Clear",
 		"EnsurePoses": {
@@ -2317,7 +2317,7 @@
 		"Blocks":[
 			{
 				"BlockType": "SpeechBox",
-				"TopBox": true,
+				"TopBox": false,
 				"WaitToFinish": true,
 				"WaitForNextButton": true,
 				"Hide": false,
@@ -2355,7 +2355,7 @@
 			},
 			{
 				"BlockType": "SpeechBox",
-				"TopBox": true,
+				"TopBox": false,
 				"WaitToFinish": true,
 				"WaitForNextButton": true,
 				"Hide": false,
@@ -2376,7 +2376,7 @@
 			},
 			{
 				"BlockType": "SpeechBox",
-				"TopBox": true,
+				"TopBox": false,
 				"WaitToFinish": true,
 				"WaitForNextButton": true,
 				"Hide": false,
@@ -2396,5 +2396,272 @@
 				]
 			}
 		]
+	},
+	"Tutorial_Part6":{
+		"_NextPartKey": "Tutorial_Range",
+		"WaitForNextButton": false,
+		"Inital_BlackOutState": "Clear",
+		"EnsurePoses": {
+			"_Camera":"P6",
+			"Player1":"P6",
+			"MysteriousFigure":"MF5"
+		},
+		"Blocks":[
+			{
+				"BlockType": "SpeechBox",
+				"TopBox": false,
+				"WaitToFinish": true,
+				"WaitForNextButton": true,
+				"Hide": false,
+				"Entries": [
+					{
+						"EntryType": "Clear",
+						"ClearSpeaker": false
+					},
+					{
+						"EntryType": "Speaker",
+						"SpeakerName": "MtFr",
+						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Happy.png"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "For your next lesson, we'll cover Ranged Attacks.",
+						"NewLine": false
+					},
+					{
+						"EntryType":"WaitToRead"
+					}
+				]
+			},
+			{
+				"BlockType": "SpeechBox",
+				"TopBox": false,
+				"WaitToFinish": true,
+				"WaitForNextButton": true,
+				"Hide": false,
+				"Entries": [
+					{
+						"EntryType": "Clear",
+						"ClearSpeaker": false
+					},
+					{
+						"EntryType": "Speaker",
+						"SpeakerName": "MtFr",
+						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Neutral.png"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "See the Mushroom on the Roof?",
+						"NewLine": false
+					},
+					{
+						"EntryType":"Delay",
+						"Delay":0.5
+					},
+					{
+						"EntryType": "Text",
+						"Text": "You won't be able to reach it with a melee attack, so you'll need to use a Page with more ranged.",
+						"NewLine": true
+					},
+					{
+						"EntryType":"WaitToRead"
+					}
+				]
+			},
+			{
+				"BlockType": "SpeechBox",
+				"TopBox": false,
+				"WaitToFinish": true,
+				"WaitForNextButton": true,
+				"Hide": false,
+				"Entries": [
+					{
+						"EntryType": "Clear",
+						"ClearSpeaker": false
+					},
+					{
+						"EntryType": "Speaker",
+						"SpeakerName": "MtFr",
+						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Happy.png"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "Technically any Page with large enough Target Area would work, but since this is a tutorial we'll use one that targets Spots instead of an Actor.",
+						"NewLine": true
+					},
+					{
+						"EntryType":"WaitToRead"
+					}
+				]
+			},
+			{
+				"BlockType": "SpeechBox",
+				"TopBox": false,
+				"WaitToFinish": true,
+				"WaitForNextButton": false,
+				"Hide": false,
+				"Entries": [
+					{
+						"EntryType": "Clear",
+						"ClearSpeaker": false
+					},
+					{
+						"EntryType": "Speaker",
+						"SpeakerName": "MtFr",
+						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Smile.png"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "FLASH CARD!",
+						"LetterDelay": -1
+					},
+					{
+						"EntryType":"Delay",
+						"Delay": 0.5
+					}
+				]
+			},
+			{
+				"BlockType": "SpeechBox",
+				"TopBox": false,
+				"WaitToFinish": true,
+				"WaitForNextButton": false,
+				"Hide": true,
+				"Entries": [
+					{
+						"EntryType": "Clear"
+					}
+				]
+			},
+			{
+				"BlockType": "PopUp",
+				"WaitToFinish": true,
+				"Create": "TutorialCards_1",
+				"PopUpType":"TutorialCard",
+				"Cards": ["Page Que", "Movement", "Targeting Actors", "Targeting Spots"],
+				"Index": 3
+			}
+		]
+	},
+	"Tutorial_Range":{
+		"_NextPartKey": "Condition_RangeInput",
+		"WaitForNextButton": false,
+		"Inital_BlackOutState": "Clear",
+		"EnsurePoses": {
+			"_Camera":"P6",
+			"Player1":"P6",
+			"MysteriousFigure":"MF5"
+		},
+		"Blocks":[
+			{
+				"BlockType": "SpeechBox",
+				"TopBox": false,
+				"WaitToFinish": false,
+				"WaitForNextButton": false,
+				"Hide": true,
+				"Entries": [
+					{
+						"EntryType": "Clear"
+					}
+				]
+			},
+			{
+				"BlockType": "SpeechBox",
+				"TopBox": true,
+				"WaitToFinish": false,
+				"WaitForNextButton": false,
+				"Hide": false,
+				"Entries": [
+					{
+						"EntryType": "Clear",
+						"ClearSpeaker": false
+					},
+					{
+						"EntryType": "Speaker",
+						"SpeakerName": "MtFr",
+						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Happy.png"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "Queue up these Pages:",
+						"NewLine": false
+					},
+					{
+						"EntryType": "IconImage",
+						"Image": "res://data/Actions/Movement/MoveForward.png"
+					},
+					{
+						"EntryType": "IconImage",
+						"Image": "res://data/Actions/Movement/MoveForward.png"
+					},
+					{
+						"EntryType": "IconImage",
+						"Image": "res://data/Actions/Movement/MoveForward.png"
+					},
+					{
+						"EntryType": "IconImage",
+						"Image": "res://data/Actions/Movement/MoveForward.png"
+					},
+					{
+						"ConditionFlags":
+						{
+							"StartClass": "Soldier"
+						},
+						"EntryType": "IconImage",
+						"Image": "res://defs/ClassDefs/Soldier/Items/Equipment/Sprites/OldSword.png"
+					},
+					{
+						"ConditionFlags":
+						{
+							"StartClass": "Rogue"
+						},
+						"EntryType": "IconImage",
+						"Image": "res://defs/ClassDefs/Rogue/Items/Equipment/Sprites/OldDagger.png"
+					},
+					{
+						"ConditionFlags":
+						{
+							"StartClass": "Mage"
+						},
+						"EntryType": "IconImage",
+						"Image": "res://defs/ClassDefs/Mage/Items/Equipment/Sprites/OldWand.png"
+					},
+					{
+						"ConditionFlags":
+						{
+							"StartClass": "Priest"
+						},
+						"EntryType": "IconImage",
+						"Image": "res://defs/ClassDefs/Priest/Items/Equipment/Sprites/OldStaff.png"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "Click the Pages to add them to your PageQue.",
+						"NewLine": true
+					},
+					{
+						"EntryType": "Text",
+						"Text": "Click the PageQue to remove a Page.",
+						"NewLine": true
+					}
+				]
+			}
+		]
+	},
+	"Condition_RangeInput":
+	{
+		"_NextPartKey": null,
+		"WaitForNextButton": false,
+		"Inital_BlackOutState": "Clear",
+		"EnsurePoses": {
+			"_Camera":"P6",
+			"Player1":"P6",
+			"MysteriousFigure":"MF5"
+		},
+		"AllowInputThrough": true,
+		"ConditionWatcherScript": "res://Scenes/Dialog/DialogConditionWatchers/DialogCondition_Tutorial.gd",
+		"ConditionKey": "Condition_RangeInput",
+		"RequiredActionQue": ["MoveForward", "TurnLeft", "MoveForward", "BasicWeaponAttack"]
+
 	},
 }

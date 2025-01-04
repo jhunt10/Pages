@@ -44,19 +44,21 @@ func _process(delta: float) -> void:
 		#print("DialogBlock: Delta less than Delay: %s | %s" % [DEFAULT_LETTER_DELAY, delta])
 	#read_timer_label.text =  "%s | %2.3f" % [state, _reader_timer * 100]
 	if state == STATES.Printing:
-		if _entry_que.size() <= 0:
-			state = STATES.Done
-			finished_printing.emit()
-			return
 		
-		if _delay_timer <= delta:
+		if _delay_timer <= delta and _entry_que.size() > 0:
 			var current_entry = _entry_que[0]
 			var remaining_delta = min(0.03, delta - _delay_timer)
 			if _handle_entry(current_entry, delta, remaining_delta):
 				_entry_que.remove_at(0)
 				_starting_read = false
 		else:
+			#print("Delay: %s | Delta: %s" % [_delay_timer, delta])
 			_delay_timer = _delay_timer - delta
+		
+		if _delay_timer <= 0 and _entry_que.size() <= 0:
+			state = STATES.Done
+			finished_printing.emit()
+			return
 
 func add_entry(entry_data:Dictionary):
 	_entry_que.append(entry_data)

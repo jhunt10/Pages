@@ -15,6 +15,10 @@ signal closed
 @export var movement_card:Control
 @export var targeting_actor_card:Control
 @export var targeting_spot_card:Control
+@export var ppr_card:Control
+@export var speed_card:Control
+@export var mass_card:Control
+@export var armor_card:Control
 
 var cards:Dictionary
 
@@ -54,9 +58,20 @@ func _ready() -> void:
 		"Movement": movement_card,
 		"Targeting Actors": targeting_actor_card,
 		"Targeting Spots": targeting_spot_card,
+		"Turns and Gaps": ppr_card,
+		"Turn Order": speed_card,
+		"Crashing": mass_card,
+		"Armor and Damage": armor_card
 	}
 	card_list = [
-		"Page Que"
+		"Page Que",
+		"Movement",
+		"Targeting Actors",
+		"Targeting Spots",
+		"Turns and Gaps",
+		"Turn Order",
+		"Crashing",
+		"Armor and Damage"
 	]
 	card_index = card_index
 

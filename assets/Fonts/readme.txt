@@ -2,12 +2,12 @@
 font-building tool.
 This font was created by “neon1028”.
 This font has a homepage where this archive and other versions may be found:
-https://fontstruct.com/fontstructions/show/1259048
+https://fontstruct.com/fontstructions/show/2602020
 
 Try Fontstruct at https://fontstruct.com
 It’s easy and it’s fun.
 
-Fontstruct is copyright ©2016-2024 Rob Meek
+Fontstruct is copyright ©2025 Rob Meek
 
 LEGAL NOTICE:
 In using this font you must comply with the licensing terms described in the

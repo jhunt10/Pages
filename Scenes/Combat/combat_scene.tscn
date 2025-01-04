@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://dfeilp6hbiuqs"]
+[gd_scene load_steps=36 format=3 uid="uid://dfeilp6hbiuqs"]
 
 [ext_resource type="Script" path="res://Scenes/Combat/combat_scene.gd" id="1_crigy"]
 [ext_resource type="Texture2D" uid="uid://b232xm2ly0peh" path="res://assets/Sprites/UI/GridCursors/GridCursor_Default.png" id="7_7lt4y"]
@@ -34,6 +34,7 @@
 [ext_resource type="Texture2D" uid="uid://dx5cq5wifod2g" path="res://Scenes/Combat/UiNodes/CameraLock/CameraLock_Following.png" id="28_mng7g"]
 [ext_resource type="Script" path="res://Scenes/Combat/UiNodes/target_input_control.gd" id="31_jtehh"]
 [ext_resource type="Texture2D" uid="uid://io35wpu802fp" path="res://assets/Sprites/UI/BackPatches/Patch_64_12.png" id="32_f81f5"]
+[ext_resource type="Texture2D" uid="uid://bqv6yn42oymo" path="res://defs/Actors/NPCs/FishMerch/cart.png" id="33_cdw0u"]
 
 [node name="CombatRootControl" type="Control" node_paths=PackedStringArray("ui_control", "camera", "MapController", "GridCursor")]
 custom_minimum_size = Vector2(1152, 648)
@@ -940,6 +941,10 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="MapNode" parent="." instance=ExtResource("7_ce1oe")]
+
+[node name="Cart" type="Sprite2D" parent="."]
+position = Vector2(386, 226)
+texture = ExtResource("33_cdw0u")
 
 [node name="GridCursor" type="Sprite2D" parent="."]
 texture = ExtResource("7_7lt4y")

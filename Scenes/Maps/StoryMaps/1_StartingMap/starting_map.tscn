@@ -1097,12 +1097,12 @@ tile_set = SubResource("TileSet_o1yif")
 
 [node name="SpwanNode_Player" type="Sprite2D" parent="MarkerTileMapLayer"]
 self_modulate = Color(0, 1, 0, 1)
-position = Vector2(176, 464)
+position = Vector2(368, 304)
 texture = ExtResource("10_hh112")
 script = ExtResource("11_md0j5")
 spawn_actor_key = "Player1"
 is_player = true
-map_coor = Vector2i(5, 14)
+map_coor = Vector2i(11, 9)
 
 [node name="SpwanNode_MF" type="Sprite2D" parent="MarkerTileMapLayer"]
 position = Vector2(48, 368)
