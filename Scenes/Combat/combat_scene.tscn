@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://dfeilp6hbiuqs"]
+[gd_scene load_steps=37 format=3 uid="uid://dfeilp6hbiuqs"]
 
 [ext_resource type="Script" path="res://Scenes/Combat/combat_scene.gd" id="1_crigy"]
 [ext_resource type="Texture2D" uid="uid://b232xm2ly0peh" path="res://assets/Sprites/UI/GridCursors/GridCursor_Default.png" id="7_7lt4y"]
@@ -29,6 +29,7 @@
 [ext_resource type="Script" path="res://Scenes/Combat/UiNodes/CameraLock/camera_lock_control.gd" id="25_ig6gl"]
 [ext_resource type="Script" path="res://Scenes/Combat/game_victory_screen.gd" id="26_1uhkb"]
 [ext_resource type="Texture2D" uid="uid://e0lb1vqlst3i" path="res://Scenes/Combat/UiNodes/CameraLock/CameraLock_Locked.png" id="26_muuhh"]
+[ext_resource type="Theme" uid="uid://cayt153s5ro4a" path="res://Scenes/Themes/standard_theme_red.tres" id="27_3mvka"]
 [ext_resource type="Texture2D" uid="uid://88hhiituab5b" path="res://Scenes/Combat/UiNodes/CameraLock/CameraLock_Unlocked.png" id="27_cweuh"]
 [ext_resource type="Texture2D" uid="uid://q0f5h7rfqbc2" path="res://defs/Items/Consumables/BarPotions/HealthPotion_M_L.png" id="27_vsjit"]
 [ext_resource type="Texture2D" uid="uid://dx5cq5wifod2g" path="res://Scenes/Combat/UiNodes/CameraLock/CameraLock_Following.png" id="28_mng7g"]
@@ -668,7 +669,6 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="GameVictoryScreen" type="Control" parent="MoveableCamera2D/CanvasLayer/CombatUiControl" node_paths=PackedStringArray("camp_button", "premade_pickup_page", "pickup_pages_container", "premade_pickup_item", "pickup_items_container")]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -703,10 +703,11 @@ grow_vertical = 2
 layout_mode = 2
 
 [node name="GameOverTitleLabel" type="Label" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/GameVictoryScreen/CenterContainer/VBoxContainer"]
-self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 size_flags_vertical = 1
-theme = ExtResource("22_gl452")
+theme = ExtResource("27_3mvka")
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 12
 theme_override_font_sizes/font_size = 92
 text = "Victory!"
 vertical_alignment = 2
@@ -749,7 +750,8 @@ layout_mode = 2
 
 [node name="TitleLabel" type="Label" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/GameVictoryScreen/CenterContainer/VBoxContainer/PickupPagesContainer"]
 layout_mode = 2
-theme = ExtResource("22_gl452")
+theme = ExtResource("27_3mvka")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 32
 text = "New Pages"
 horizontal_alignment = 1
@@ -768,7 +770,8 @@ stretch_mode = 5
 
 [node name="ItemNameLabel" type="Label" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/GameVictoryScreen/CenterContainer/VBoxContainer/PickupPagesContainer/PickupPageContainer"]
 layout_mode = 2
-theme = ExtResource("22_gl452")
+theme = ExtResource("27_3mvka")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 32
 text = "Item"
 horizontal_alignment = 1
@@ -777,7 +780,8 @@ vertical_alignment = 1
 [node name="Label2" type="Label" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/GameVictoryScreen/CenterContainer/VBoxContainer/PickupPagesContainer/PickupPageContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme = ExtResource("22_gl452")
+theme = ExtResource("27_3mvka")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 32
 text = ". . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . "
 horizontal_alignment = 1
@@ -786,7 +790,8 @@ text_overrun_behavior = 1
 
 [node name="Label3" type="Label" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/GameVictoryScreen/CenterContainer/VBoxContainer/PickupPagesContainer/PickupPageContainer"]
 layout_mode = 2
-theme = ExtResource("22_gl452")
+theme = ExtResource("27_3mvka")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 32
 text = "x "
 horizontal_alignment = 1
@@ -794,7 +799,8 @@ vertical_alignment = 1
 
 [node name="CountLabel" type="Label" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/GameVictoryScreen/CenterContainer/VBoxContainer/PickupPagesContainer/PickupPageContainer"]
 layout_mode = 2
-theme = ExtResource("22_gl452")
+theme = ExtResource("27_3mvka")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 32
 text = "1"
 horizontal_alignment = 1
@@ -805,7 +811,8 @@ layout_mode = 2
 
 [node name="TitleLabel" type="Label" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/GameVictoryScreen/CenterContainer/VBoxContainer/PickupItemsContainer"]
 layout_mode = 2
-theme = ExtResource("22_gl452")
+theme = ExtResource("27_3mvka")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 32
 text = "Found Items"
 horizontal_alignment = 1
@@ -824,7 +831,8 @@ stretch_mode = 5
 
 [node name="ItemNameLabel" type="Label" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/GameVictoryScreen/CenterContainer/VBoxContainer/PickupItemsContainer/PickupItemContainer"]
 layout_mode = 2
-theme = ExtResource("22_gl452")
+theme = ExtResource("27_3mvka")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 32
 text = "Item"
 horizontal_alignment = 1
@@ -833,7 +841,8 @@ vertical_alignment = 1
 [node name="Label2" type="Label" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/GameVictoryScreen/CenterContainer/VBoxContainer/PickupItemsContainer/PickupItemContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme = ExtResource("22_gl452")
+theme = ExtResource("27_3mvka")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 32
 text = ". . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . "
 horizontal_alignment = 1
@@ -842,7 +851,8 @@ text_overrun_behavior = 1
 
 [node name="Label3" type="Label" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/GameVictoryScreen/CenterContainer/VBoxContainer/PickupItemsContainer/PickupItemContainer"]
 layout_mode = 2
-theme = ExtResource("22_gl452")
+theme = ExtResource("27_3mvka")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 32
 text = "x "
 horizontal_alignment = 1
@@ -850,7 +860,8 @@ vertical_alignment = 1
 
 [node name="CountLabel" type="Label" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/GameVictoryScreen/CenterContainer/VBoxContainer/PickupItemsContainer/PickupItemContainer"]
 layout_mode = 2
-theme = ExtResource("22_gl452")
+theme = ExtResource("27_3mvka")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 32
 text = "1"
 horizontal_alignment = 1
