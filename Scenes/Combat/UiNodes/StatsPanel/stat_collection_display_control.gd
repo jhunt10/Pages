@@ -8,8 +8,8 @@ extends Control
 func _ready() -> void:
 	premade_stat_panel.visible = false
 	_build_displays()
-	CombatRootControl.Instance.actor_spawned.connect(on_new_actor)
-	CombatRootControl.Instance.QueController.que_ordering_changed.connect(_build_displays)
+	#CombatRootControl.Instance.actor_spawned.connect(on_new_actor)
+	#CombatRootControl.Instance.QueController.que_ordering_changed.connect(_build_displays)
 
 func on_new_actor(actor:BaseActor, pos):
 	_build_displays()

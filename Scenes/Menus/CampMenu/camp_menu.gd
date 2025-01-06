@@ -3,6 +3,7 @@ extends Control
 
 @export var camp_options_container:CampOptionsContainer
 @export var system_options_container:CampOptionsContainer
+@export var pretty_picture_texure_rect:TextureRect
 
 @export var quest_button:CampOptionButton
 @export var shop_button:CampOptionButton
@@ -31,6 +32,15 @@ func _ready() -> void:
 	sys_load_button.button.pressed.connect(_on_load_button)
 	sys_debug_button.button.pressed.connect(_on_debug_button)
 	sys_quit_button.button.pressed.connect(_on_quit)
+	
+	var flags = StoryState.story_flags
+	var location = StoryState.story_flags.get("CampLocation", "")
+	if location != "":
+		var image_path = "res://Scenes/Menus/CampMenu/PrettyPictures/" + location + ".png"
+		var pretty_picture = SpriteCache.get_sprite(image_path)
+		if pretty_picture:
+			pretty_picture_texure_rect.texture = pretty_picture
+			
 	
 	_sub_menu_open("Main")
 	pass # Replace with function body.

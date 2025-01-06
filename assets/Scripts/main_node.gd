@@ -102,6 +102,13 @@ func open_camp_menu():
 	self.add_child(camp_scene)
 	current_scene = camp_scene
 	
+	var camp_dialog_script = 	StoryState.story_flags.get("NextCampDialog", null)
+	if camp_dialog_script:
+		var dialog:DialogController = load("res://Scenes/Dialog/dialog_control.tscn").instantiate()
+		dialog.scene_root = camp_scene
+		dialog.load_dialog_script(camp_dialog_script)
+		current_scene.add_child(dialog)
+	
 func open_map_selection_menu():
 	current_scene.queue_free()
 	var camp_scene = load("res://Scenes/Menus/MapSelectionMenu/map_selecction_menu.tscn").instantiate()

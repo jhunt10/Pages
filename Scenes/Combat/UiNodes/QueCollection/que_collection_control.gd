@@ -24,19 +24,30 @@ func _process(delta: float) -> void:
 	super(delta)
 
 func _build_que_displays():
-	for que in _ques.values():
-		que.queue_free()
+	var old_ques = {}
+	for que_id in _ques.keys():
+		var old_que = _ques[que_id]
+		ques_container.remove_child(old_que)
+		old_ques[que_id] = old_que
 	_ques.clear()
 	for que_id in CombatRootControl.QueController._que_order:
 		var que:ActionQue = CombatRootControl.QueController._action_ques[que_id]
 		if que.get_max_que_size() == 0:
 			continue
-		var new_display:QueCollection_QueDisplayContainer = premade_que_container.duplicate()
-		new_display.visible = true
-		new_display.set_actor(que.actor)
+		var new_display:QueCollection_QueDisplayContainer = null
+		if old_ques.has(que_id):
+			new_display = old_ques[que_id]
+			old_ques.erase(que_id)
+		else:
+			new_display = premade_que_container.duplicate()
+			new_display.set_actor(que.actor)
+			
 		ques_container.add_child(new_display)
 		_ques[que.Id] = new_display
 		new_display.show()
+	
+	for old_que in old_ques.values():
+		old_que.queue_free()
 
 func on_que_death(que_id:String):
 	var que_display = _ques.get(que_id, null)

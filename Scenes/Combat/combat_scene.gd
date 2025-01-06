@@ -166,7 +166,7 @@ func add_actor(actor:BaseActor, faction_id:int, pos:MapPos):
 	actor_node.visible = true
 	GameState.MapState.set_actor_pos(actor, pos, actor.spawn_map_layer)
 	#actor.Que.clear_que()
-	#actor.stats.fill_bar_stats()
+	actor.stats.fill_bar_stats()
 	#if actor.use_ai:
 		#actor.auto_build_que(QueController.action_index)
 		#if QueController.execution_state == ActionQueController.ActionStates.Running:
@@ -253,9 +253,15 @@ func check_end_conditions():
 		else:
 			living_enimes.append(actor)
 	if living_players.size() == 0:
-		ui_control.game_over_screen.show()
+		trigger_end_condition(false)
 	elif living_enimes.size() == 0:
+		trigger_end_condition(true)
+
+func trigger_end_condition(victory:bool):
+	if victory:
 		ui_control.victory_screen.show_game_result()
+	else:
+		ui_control.game_over_screen.show()
 
 func cleanup_combat():
 	for actor:BaseActor in GameState.list_actors(true):

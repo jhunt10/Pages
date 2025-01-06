@@ -52,10 +52,13 @@ func collect_dropped_items():
 			pickup_pages_container.add_child(new_line)
 			new_line.show()
 
-	for item_name in items_datas["default"].keys():
-		var new_line = premade_pickup_item.duplicate()
-		new_line.get_child(0).texture = items_datas['default'][item_name]['Texture']
-		new_line.get_child(1).text = item_name
-		new_line.get_child(4).text = str(items_datas['default'][item_name]['Count'])
-		pickup_items_container.add_child(new_line)
-		new_line.show()
+	if not items_datas.has("default"):
+		pickup_items_container.hide()
+	else:
+		for item_name in items_datas["default"].keys():
+			var new_line = premade_pickup_item.duplicate()
+			new_line.get_child(0).texture = items_datas['default'][item_name]['Texture']
+			new_line.get_child(1).text = item_name
+			new_line.get_child(4).text = str(items_datas['default'][item_name]['Count'])
+			pickup_items_container.add_child(new_line)
+			new_line.show()

@@ -10,15 +10,27 @@ func _on_create():
 		var player_actor = StoryState.get_player_actor()
 		player_actor.Que.action_que_changed.connect(_on_que_change.bind(player_actor))
 		return
-	if condition_key == "PlayingWalk" or condition_key == "PlayingAttack" or condition_key == "PlayingRange":
+	if (condition_key as String).begins_with("Playing"):
 		#_dialog_controller.hide()
 		CombatRootControl.QueController.end_of_round.connect(on_round_finish)
-		CombatUiControl.ui_state_controller.set_ui_state(UiStateController.UiStates.ExecRound)
+		if condition_key != "PlayingCombat":
+			CombatUiControl.ui_state_controller.set_ui_state(UiStateController.UiStates.ExecRound)
 		return
 
 func on_round_finish():
-	CombatRootControl.QueController.end_of_round.disconnect(on_round_finish)
-	_is_finished = true
+	var condition_key = _data.get("ConditionKey", null)
+	if condition_key == "PlayingCombat":
+		var squirrel_left = false
+		var living_actors = CombatRootControl.Instance.GameState.list_actors(false)
+		for actor:BaseActor in living_actors:
+			if actor.Tags.has("Squirrel") and actor.FactionIndex != 0:
+				squirrel_left = true
+		if not squirrel_left:
+			_is_finished = true
+	else:
+		CombatRootControl.QueController.end_of_round.disconnect(on_round_finish)
+		_is_finished = true
+	
 	
 
 func _is_condition(data:Dictionary, game_state:GameStateData, delta:float)->bool:
@@ -65,14 +77,16 @@ func get_next_part_key()->String:
 	
 	if condition_key == "PlayingWalk":
 		return "Tutorial_Part3"
-	if condition_key == "PlayingAttack":
+	elif condition_key == "PlayingAttack":
 		return "Tutorial_Part5"
-	if condition_key == "PlayingRange":
+	elif condition_key == "PlayingRange":
 		var roof_shroom = CombatRootControl.Instance.GameState.get_actor("RoofShroom_1", true)
 		if not roof_shroom or roof_shroom.is_dead:
 			return "Tutorial_Part8"
 		else:
 			return "Tutorial_MissedRange"
+	elif condition_key == "PlayingCombat":
+		return "AfterCombat"
 		
 		
 	var failed_count = _dialog_controller._condition_flags.get("FailedTutorial", 0)

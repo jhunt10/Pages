@@ -13,6 +13,8 @@ enum BlockTypes {
 	PopUp,
 	ClearQue, 
 	SpawnActor,
+	TextInput,
+	ToCamp,
 	CustomBlock
 }
 
@@ -213,6 +215,10 @@ func _start_part(part_key:String):
 		input_blocker.hide()
 	else:
 		input_blocker.show()
+	if _current_part_data.get("HideDialogUI", false):
+		self.hide()
+	else:
+		self.show()
 	
 	if _current_part_data.has("ConditionWatcherScript"):
 		var script_path = _current_part_data['ConditionWatcherScript']
@@ -271,12 +277,15 @@ func _handle_block(block_data:Dictionary)->bool:
 	# Options:
 	# 	"FlagName" String
 	#----------------------------------
-	if block_type == BlockTypes.Delay:
+	if block_type == BlockTypes.SetFlag:
 		var flag_name = block_data.get("FlagName", null)
 		if !flag_name:
 			return false
 		var val = block_data.get("Value", null)
-		_condition_flags[flag_name] =  val
+		if block_data.get("IsStoryFlag", false):
+			StoryState.story_flags[flag_name] = val
+		else:
+			_condition_flags[flag_name] =  val
 		return false
 	
 	#----------------------------------
@@ -434,6 +443,41 @@ func _handle_block(block_data:Dictionary)->bool:
 			var actor_pos = spawn_node.get_map_pos()
 			var new_actor = ActorLibrary.get_or_create_actor(actor_key, actor_id)
 			CombatRootControl.Instance.add_actor(new_actor, 1, actor_pos)
+	
+	
+	
+	#----------------------------------
+	#          Text Input
+	# Options:
+	# 	"TitleMessage" String
+	# 	"PlaceHolder" String
+	#----------------------------------
+	if block_type == BlockTypes.TextInput:
+		var title_text = block_data.get("TitleMessage")
+		if not title_text: return false
+		var place_holder = block_data.get("PlaceHolder", "")
+		var new_input:DialogTextInput = load("res://Scenes/Dialog/DialogTextInput/dialog_text_input_control.tscn").instantiate()
+		new_input.set_texts(title_text, place_holder)
+		self.add_child(new_input)
+		new_input.input_confirmed.connect(_on_text_input)
+		_block_states["TextInput"] = BlockStates.Playing
+		return true
+	
+	#----------------------------------
+	#          To Camp
+	# Options:
+	# 	"TitleMessage" String
+	# 	"PlaceHolder" String
+	#----------------------------------
+	if block_type == BlockTypes.ToCamp:
+		var camp_dialog = block_data.get("WithDialogScript", null)
+		if camp_dialog:
+			StoryState.story_flags["NextCampDialog"] = camp_dialog
+		if CombatRootControl.Instance:
+			CombatRootControl.Instance.trigger_end_condition(true)
+			_state = STATES.Finished
+		return false
+	
 	return false
 func load_dialog_script(file_path):
 	var file = FileAccess.open(file_path, FileAccess.READ)
@@ -503,6 +547,12 @@ func _on_question_answered(answer_val:String):
 	var flag_val = tokens[1]
 	_condition_flags[flag_name] = flag_val
 
+func _on_text_input(val:String):
+	_block_states["TextInput"] = BlockStates.Finished
+	var set_flag = _last_block_data.get("SetFlag", null)
+	if set_flag:
+		StoryState.story_flags[set_flag] = val
+
 func force_positions(force_pos_data:Dictionary):
 	for actor_id in force_pos_data.keys():
 		var path_marker_name = force_pos_data[actor_id]
@@ -519,7 +569,10 @@ func force_positions(force_pos_data:Dictionary):
 			if !path_marker:
 				printerr("force_positions: Failed to find Path Marker: %s" %[path_marker_name])
 				continue
-				
+			
+			## HACK
+			if actor_id.begins_with("@"):
+				continue
 			if actor_id == "_Camera":
 				var pos = path_marker.get_last_pos()
 				CombatRootControl.Instance.camera.snap_to_map_pos(pos)

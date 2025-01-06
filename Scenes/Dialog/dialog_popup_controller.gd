@@ -87,6 +87,10 @@ func create_highlight(block_data:Dictionary)->bool:
 		self.add_child(popup)
 		_popups[popup_key] = popup
 		popup.position = popup_pos
+		if block_data.get("WaitToBeClicked", false):
+			parent_dialog_controller._block_states[popup_key] = DialogController.BlockStates.Playing
+			popup.button.pressed.connect(parent_dialog_controller._on_popup_finished.bind(popup_key))
+			return true
 	else:
 		printerr("Failed to pop")
 	return false

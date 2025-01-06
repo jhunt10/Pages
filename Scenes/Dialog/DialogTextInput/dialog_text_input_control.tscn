@@ -1,0 +1,113 @@
+[gd_scene load_steps=6 format=3 uid="uid://d0oob60ijrf8"]
+
+[ext_resource type="Script" path="res://Scenes/Dialog/DialogTextInput/dialog_text_input.gd" id="1_hlrp0"]
+[ext_resource type="Texture2D" uid="uid://io35wpu802fp" path="res://assets/Sprites/UI/BackPatches/Patch_64_12.png" id="2_hpjmc"]
+[ext_resource type="Theme" uid="uid://bfce41la62bs6" path="res://Scenes/Themes/readable_theme.tres" id="3_nn4wx"]
+[ext_resource type="Texture2D" uid="uid://dul8y1l1gw420" path="res://assets/Sprites/UI/BackPatches/Patch_32_8_Dark.png" id="4_du7mv"]
+[ext_resource type="Theme" uid="uid://cayt153s5ro4a" path="res://Scenes/Themes/standard_theme_red.tres" id="5_pdewl"]
+
+[node name="DialogTextInputControl" type="Control" node_paths=PackedStringArray("card_patch", "box_container", "title_label", "line_edit", "confirm_button")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_hlrp0")
+card_patch = NodePath("NinePatchRect")
+box_container = NodePath("NinePatchRect/VBoxContainer")
+title_label = NodePath("NinePatchRect/VBoxContainer/TitleLabel")
+line_edit = NodePath("NinePatchRect/VBoxContainer/LineEdit")
+confirm_button = NodePath("NinePatchRect/VBoxContainer/NinePatchRect/Button")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.501961)
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+custom_minimum_size = Vector2(400, 150)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -75.0
+offset_right = 200.0
+offset_bottom = 86.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_hpjmc")
+patch_margin_left = 12
+patch_margin_top = 12
+patch_margin_right = 12
+patch_margin_bottom = 12
+
+[node name="VBoxContainer" type="VBoxContainer" parent="NinePatchRect"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 6.0
+offset_top = 6.0
+offset_right = -6.0
+offset_bottom = -6.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TitleLabel" type="Label" parent="NinePatchRect/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_nn4wx")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 32
+text = "The Soldier's name is:"
+horizontal_alignment = 1
+
+[node name="LineEdit" type="LineEdit" parent="NinePatchRect/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_nn4wx")
+theme_override_font_sizes/font_size = 32
+placeholder_text = "Place Holder"
+alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="NinePatchRect/VBoxContainer"]
+layout_mode = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="NinePatchRect/VBoxContainer"]
+custom_minimum_size = Vector2(200, 48)
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("4_du7mv")
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+
+[node name="Label" type="Label" parent="NinePatchRect/VBoxContainer/NinePatchRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("5_pdewl")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 32
+text = "Yes"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="NinePatchRect/VBoxContainer/NinePatchRect"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

@@ -1,0 +1,119 @@
+{
+	"_MetaData_": {
+		"StartPartKey": "Tutorial1"
+	},
+	"Tutorial1":{
+		"_NextPartKey": null,
+		"WaitForNextButton": false,
+		"Inital_BlackOutState": "Clear",
+		"EnsurePoses": {},
+		"Blocks":[
+			{
+				"BlockType": "SpeechBox",
+				"TopBox": false,
+				"WaitToFinish": true,
+				"WaitForNextButton": true,
+				"Hide": false,
+				"Entries": [
+					{
+						"EntryType":"Clear"
+					},
+					{
+						"EntryType": "Speaker",
+						"SpeakerName": "MtFr",
+						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Happy.png"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "Welcome to Camp!",
+						"NewLine": false
+					},
+					{
+						"EntryType":"WaitToRead"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "Pretty cozy isn't it?",
+						"NewLine": true
+					},
+					{
+						"EntryType":"WaitToRead"
+					}
+				]
+			},
+			{
+				"BlockType": "SpeechBox",
+				"TopBox": false,
+				"WaitToFinish": true,
+				"WaitForNextButton": true,
+				"Hide": false,
+				"Entries": [
+					{
+						"EntryType":"Clear",
+                        "ClearSpeaker": false
+					},
+					{
+						"EntryType": "Text",
+						"Text": "We'll be setting up camp in a lot of differenct places as we travel to save the world, so don't get too attached to this old cabin.",
+						"NewLine": false
+					},
+					{
+						"EntryType":"WaitToRead"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "Now that we've got a moment, let's look at your Equipment and PageBook.",
+						"NewLine": true
+					},
+					{
+						"EntryType":"WaitToRead"
+					}
+				]
+			},
+			{
+				"BlockType": "SpeechBox",
+				"TopBox": false,
+				"WaitToFinish": false,
+				"WaitForNextButton": false,
+				"Hide": false,
+				"Entries": [
+					{
+						"EntryType":"Clear",
+                        "ClearSpeaker": false
+					},
+					{
+						"EntryType": "Text",
+						"Text": "Click the \"Prepare\" option so look at your Equipment.",
+						"NewLine": false
+					},
+					{
+						"EntryType":"WaitToRead"
+					}
+				]
+			},
+			{
+				"BlockType": "PopUp",
+				"PopUpType": "Highlight",
+				"WaitToFinish": false,
+				"Create": "PopUp1",
+				"TargetElement": "CampOptionsContainer/MainOptionsContainer/PrepareOptionButton",
+				"PopupControlSript": "res://Scenes/Dialog/DialogBlockControls/PopUps/OutlinePopUp/outline_pop_up_control.tscn",
+				"DarkenScreen": true,
+                "WaitToBeClicked": true
+			}
+		]
+	},
+	"EquipmentTutorial":{
+		"_NextPartKey": null,
+		"WaitForNextButton": false,
+		"Inital_BlackOutState": "Clear",
+		"EnsurePoses": {},
+		"Blocks":[
+            {
+				"BlockType":"CustomBlock",
+				"ScriptPath": "res://Scenes/Dialog/CustomDialogBlocks/CampTutorialBlocks.gd",
+				"OpenMenu": "Equipment"
+            }
+        ]
+    }
+}

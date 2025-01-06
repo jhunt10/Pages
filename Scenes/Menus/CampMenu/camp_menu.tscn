@@ -13,7 +13,7 @@
 [ext_resource type="Script" path="res://Scenes/Menus/CampMenu/no_shop_pop_up.gd" id="11_o6asw"]
 [ext_resource type="Texture2D" uid="uid://io35wpu802fp" path="res://assets/Sprites/UI/BackPatches/Patch_64_12.png" id="12_j1y8g"]
 
-[node name="CampMenu" type="Control" node_paths=PackedStringArray("camp_options_container", "system_options_container", "quest_button", "shop_button", "character_button", "explort_button", "system_button", "sys_back_button", "sys_save_button", "sys_load_button", "sys_debug_button", "sys_quit_button", "no_shop_pop_up")]
+[node name="CampMenu" type="Control" node_paths=PackedStringArray("camp_options_container", "system_options_container", "pretty_picture_texure_rect", "quest_button", "shop_button", "character_button", "explort_button", "system_button", "sys_back_button", "sys_save_button", "sys_load_button", "sys_debug_button", "sys_quit_button", "no_shop_pop_up")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -23,6 +23,7 @@ grow_vertical = 2
 script = ExtResource("1_yrr0s")
 camp_options_container = NodePath("CampOptionsContainer/MainOptionsContainer")
 system_options_container = NodePath("CampOptionsContainer/SystemOptionsContainer")
+pretty_picture_texure_rect = NodePath("Control/PrettyPictureRect")
 quest_button = NodePath("CampOptionsContainer/MainOptionsContainer/QuestOptionButton")
 shop_button = NodePath("CampOptionsContainer/MainOptionsContainer/ShopOptionButton")
 character_button = NodePath("CampOptionsContainer/MainOptionsContainer/PrepareOptionButton")
@@ -128,7 +129,6 @@ button = NodePath("Button")
 under_line = NodePath("TitleLabel/ColorRect")
 highlight = NodePath("TextureRect")
 disabled = true
-is_highlighted = null
 label = NodePath("TitleLabel")
 text = "Quest"
 
@@ -181,7 +181,6 @@ script = ExtResource("6_5vfat")
 button = NodePath("Button")
 under_line = NodePath("TitleLabel/ColorRect")
 highlight = NodePath("TextureRect")
-is_highlighted = null
 label = NodePath("TitleLabel")
 text = "Shop*"
 
@@ -236,7 +235,6 @@ script = ExtResource("6_5vfat")
 button = NodePath("Button")
 under_line = NodePath("TitleLabel/ColorRect")
 highlight = NodePath("TextureRect")
-is_highlighted = null
 label = NodePath("TitleLabel")
 text = "Prepare"
 
@@ -291,7 +289,6 @@ script = ExtResource("6_5vfat")
 button = NodePath("Button")
 under_line = NodePath("TitleLabel/ColorRect")
 highlight = NodePath("TextureRect")
-is_highlighted = null
 label = NodePath("TitleLabel")
 text = "Explore"
 
@@ -347,7 +344,6 @@ button = NodePath("Button")
 under_line = NodePath("TitleLabel/ColorRect")
 highlight = NodePath("TextureRect")
 disabled = true
-is_highlighted = null
 label = NodePath("TitleLabel")
 text = "Records"
 
@@ -402,7 +398,6 @@ script = ExtResource("6_5vfat")
 button = NodePath("Button")
 under_line = NodePath("TitleLabel/ColorRect")
 highlight = NodePath("TextureRect")
-is_highlighted = null
 label = NodePath("TitleLabel")
 text = "System"
 
@@ -496,7 +491,7 @@ texture = ExtResource("7_hs7sy")
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 0
 offset_top = 30.0
-offset_right = 72.0
+offset_right = 96.0
 offset_bottom = 90.0
 scale = Vector2(1e-05, 1e-05)
 theme = ExtResource("3_ufdhk")
@@ -533,7 +528,6 @@ script = ExtResource("6_5vfat")
 button = NodePath("Button")
 under_line = NodePath("TitleLabel/ColorRect")
 highlight = NodePath("TextureRect")
-is_highlighted = null
 label = NodePath("TitleLabel")
 text = "Debug"
 
@@ -591,7 +585,6 @@ script = ExtResource("6_5vfat")
 button = NodePath("Button")
 under_line = NodePath("TitleLabel/ColorRect")
 highlight = NodePath("TextureRect")
-is_highlighted = null
 label = NodePath("TitleLabel")
 text = "Load"
 
@@ -649,7 +642,6 @@ script = ExtResource("6_5vfat")
 button = NodePath("Button")
 under_line = NodePath("TitleLabel/ColorRect")
 highlight = NodePath("TextureRect")
-is_highlighted = null
 label = NodePath("TitleLabel")
 text = "Save"
 
@@ -707,7 +699,6 @@ script = ExtResource("6_5vfat")
 button = NodePath("Button")
 under_line = NodePath("TitleLabel/ColorRect")
 highlight = NodePath("TextureRect")
-is_highlighted = null
 label = NodePath("TitleLabel")
 text = "Back"
 

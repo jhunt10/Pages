@@ -1092,6 +1092,7 @@ tile_set = SubResource("TileSet_i35ih")
 tile_set = SubResource("TileSet_eodif")
 
 [node name="MarkerTileMapLayer" type="TileMapLayer" parent="."]
+visible = false
 tile_set = SubResource("TileSet_o1yif")
 
 [node name="Path_S1" type="Node2D" parent="MarkerTileMapLayer" node_paths=PackedStringArray("sprite", "label")]

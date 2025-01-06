@@ -4,7 +4,7 @@ extends Control
 const DEFAULT_LETTER_DELAY:float = 0.01
 const DEFAULT_QUESTION_OPTION_DELAY:float = 0.3
 
-enum EntryTypes {Clear, Delay, Speaker, Text, Question, WaitToRead, BackTrack, IconImage}
+enum EntryTypes {Clear, Delay, Speaker, Text, Flag, Question, WaitToRead, BackTrack, IconImage}
 enum STATES {Ready, Printing, Done, Question}
 
 signal finished_printing
@@ -104,6 +104,18 @@ func _handle_entry(entry_data:Dictionary, raw_delta, remaining_delta)->bool:
 		scroll_bar.hide()
 		_delay_timer = -1
 		return true
+	
+	
+	#----------------------------------
+	#          Flag
+	# 	Gets the current value of a story flag and replaces self with Text entry with flag as Text value.
+	#----------------------------------
+	if entry_type == EntryTypes.Flag:
+		var flag_name = entry_data.get("FlagName")
+		if StoryState.story_flags.has(flag_name):
+			entry_data['Text'] = str(StoryState.story_flags[flag_name])
+			entry_data['EntryType'] = 'Text'
+			entry_type = EntryTypes.Text
 	
 	#----------------------------------
 	#          Delay
@@ -237,6 +249,7 @@ func _handle_entry(entry_data:Dictionary, raw_delta, remaining_delta)->bool:
 		_reader_timer -= raw_delta
 		#print("Read Timer: %s" % [_reader_timer])
 		return _reader_timer <= 0
+	
 	
 	elif entry_type == EntryTypes.IconImage:
 		var image_path = entry_data.get("Image", '')

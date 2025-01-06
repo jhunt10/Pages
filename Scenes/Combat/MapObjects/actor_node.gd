@@ -109,7 +109,7 @@ func sync_sprites():
 
 
 func on_actor_moved(old_pos:MapPos, new_pos:MapPos, move_data:Dictionary):
-	print("ActorNode: OnActorMoved: Actor: %s | old_pos: %s | new_pos: %s" % [Actor.Id, old_pos, new_pos])
+	if LOGGING: print("ActorNode: OnActorMoved: Actor: %s | old_pos: %s | new_pos: %s" % [Actor.Id, old_pos, new_pos])
 	if is_moving and new_pos:
 		set_facing_dir(new_pos.dir)
 		set_move_destination(new_pos, CombatRootControl.get_remaining_frames_for_turn())
@@ -228,8 +228,8 @@ func set_move_destination(map_pos:MapPos, frames_to_reach:int, start_walking_if_
 	var dist = movement_start_position.distance_to(movement_dest_position)
 	movement_speed =  (dist / secs_to_reach) * CombatRootControl.get_time_scale() * speed_scale
 	is_moving = movement_start_position.distance_to(movement_dest_position) > 0.01
-	print("Starting Movement: FtR: %s | TtR: %s | Dist: %s | MS: %s " % [frames_to_reach, secs_to_reach,dist, movement_speed ])
-	print("Start Pos: %s | Target Pos: %s" % [movement_start_position, movement_dest_position])
+	if LOGGING: print("Starting Movement: FtR: %s | TtR: %s | Dist: %s | MS: %s " % [frames_to_reach, secs_to_reach,dist, movement_speed ])
+	if LOGGING: print("Start Pos: %s | Target Pos: %s" % [movement_start_position, movement_dest_position])
 	if  is_moving and start_walking_if_not and not is_walking:
 		start_walk_animation()
 	
@@ -250,20 +250,20 @@ func que_scripted_movement(path_pos_data:Array):
 		_start_next_queued_movement()
 
 func _on_reached_dest():
-	print("Reached Dest")
+	if LOGGING: print("Reached Dest")
 	if is_walking:
 		finsh_walk_animation()
 	is_moving = false
 	if _is_moving_on_script:
-		print("Was Moving On Script")
+		if LOGGING: print("Was Moving On Script")
 		_scripted_move_finshed()
 		return
 	reached_motion_destination.emit()
 
 func _start_next_queued_movement():
-	print("Starting Movemnt")
+	if LOGGING: print("Starting Movemnt")
 	if _movement_que.size() <= 0:
-		print("--Move Que Empty")
+		if LOGGING: print("--Move Que Empty")
 		_is_moving_on_script = false
 		return
 	
@@ -272,7 +272,7 @@ func _start_next_queued_movement():
 		_scripted_move_finshed()
 		return
 	
-	print("--Starting Queued Pos: %s " % [next_pos_data['Pos']])
+	if LOGGING: print("--Starting Queued Pos: %s " % [next_pos_data['Pos']])
 	var pos = next_pos_data['Pos']
 	var frames = next_pos_data['Frames']
 	var speed = next_pos_data['Speed']
@@ -296,7 +296,7 @@ func _start_next_queued_movement():
 
 func _scripted_move_finshed():
 	var next_pos_data = _movement_que[0]
-	print("Script Finished: %s" % [next_pos_data])
+	if LOGGING: print("Script Finished: %s" % [next_pos_data])
 	_movement_que.remove_at(0)
 	var next_pos = next_pos_data['Pos']
 	if next_pos != cur_map_pos:
@@ -318,7 +318,7 @@ func _scripted_move_finshed():
 ####################################################
 
 func start_walk_animation():
-	print("Walk Animation Starting. Cur: %s" % [current_body_animation_action])
+	if LOGGING: print("Walk Animation Starting. Cur: %s" % [current_body_animation_action])
 	if is_walking:
 		return
 	current_body_animation_action = WALK_ANIM_NAME
@@ -326,7 +326,7 @@ func start_walk_animation():
 	body_animation.play(current_body_animation_action)
 
 func finsh_walk_animation():
-	print("Walk Animation Finished. Cur: %s" % [current_body_animation_action])
+	if LOGGING: print("Walk Animation Finished. Cur: %s" % [current_body_animation_action])
 	if not is_walking:
 		return
 	body_animation.stop()
@@ -334,37 +334,8 @@ func finsh_walk_animation():
 	current_body_animation_action = null
 
 
-
-
-
-
-
-
-#func animation_finished(name:String):
-	#if LOGGING: print("%s | Animation Finished: %s"  % [Time.get_ticks_msec(), name])
-	#is_wwalking = false
-	#if name.contains("motion_") or name == 'shake_effect':
-		#current_body_animation_action = null
-		##_start_anim("facing/facing"+_get_animation_dir_sufix())
-		#
-#
-#func animation_started(name:String):
-	#if LOGGING: print("%s | Animation Started: %s"  % [Time.get_ticks_msec(), name])
-	#if name.begins_with("move_"):
-		#is_wwalking = true
-		#if LOGGING: print("-Set Is Walking")
-	#else:
-		#is_wwalking = false
-		#if LOGGING: print("-Set Not Walking")
-
-#func _turn_failed_animations():
-	#if not current_body_animation_action.contains("/ready"):
-		#cancel_current_animation()
-
 func fail_movement():
 	if LOGGING: printerr("Movment Failed")
-	#is_wwalking = false
-	#_start_anim("facing/facing"+_get_animation_dir_sufix())
 	if LOGGING: print("After_PlayConnecnd")
 	
 
@@ -379,16 +350,6 @@ func queue_death():
 	death_animation.play("death_effect")
 	is_dieing = true
 
-
-#func _start_anim(animation_name, speed:float=current_animation_speed):
-	#if is_dieing:
-		#return
-	#if LOGGING: print("Playing Animation: %s" + animation_name)
-	#animation.play(animation_name)
-	#animation.speed_scale = speed * CombatRootControl.get_time_scale()
-	#current_animation_speed = speed
-
-
 func ready_weapon_animation(action_name:String, speed:float=1, off_hand:bool=false):
 	var animation_name = action_name + "/ready" + _get_animation_dir_sufix()
 	if off_hand and off_hand_node:
@@ -402,10 +363,6 @@ func execute_weapon_motion_animation(speed:float=1, off_hand:bool=false):
 	elif main_hand_node:
 		main_hand_node.execute_animation(speed)
 
-#func start_walk_animation(animation_name, speed:float=1):
-	#current_body_animation_action = animation_name + "/ready" + _get_animation_dir_sufix()
-	#_start_anim(current_body_animation_action, speed)
-	
 
 func execute_animation_motion():
 	if current_body_animation_action and (current_body_animation_action.begins_with("move_") or current_body_animation_action.begins_with("move_")):
@@ -422,13 +379,8 @@ func cancel_current_animation():
 	elif current_body_animation_action.contains("/ready_"):
 		var animation_name = current_body_animation_action.replace("/ready_", "/cancel_")
 		if LOGGING: print("Playing Cancel Animation: " + animation_name)
-		#_start_anim(animation_name)
-		#is_wawlking = false
-	#else:
-		#animation.stop(false)
 
 func clear_any_animations():
-	#_start_anim("facing/facing"+_get_animation_dir_sufix())
 	main_hand_node.clear_any_animations(_get_animation_dir_sufix())
 
 func set_corpse_sprite():
