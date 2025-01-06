@@ -3,6 +3,7 @@ extends Control
 
 signal closed
 
+@export var top_container:Control
 @export var title_label:Label
 @export var back_button:Button
 @export var back_button_background:NinePatchRect
@@ -50,6 +51,8 @@ var card_list:Array = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	if top_container and not top_container.visible:
+		top_container.show()
 	back_button.pressed.connect(_on_back)
 	next_button.pressed.connect(_on_next)
 	done_button.pressed.connect(_on_done)

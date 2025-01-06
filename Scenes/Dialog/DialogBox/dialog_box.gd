@@ -21,6 +21,7 @@ signal question_answered(choice:String)
 @export var read_timer_label:Label
 @export var premade_text_label:RichTextLabel
 @export var premade_question_option:DialogQuestionOption
+@export var unknown_speaker_port:Texture2D
 
 var _entry_que:Array = []
 var _current_text_entry:RichTextLabel
@@ -126,7 +127,10 @@ func _handle_entry(entry_data:Dictionary, raw_delta, remaining_delta)->bool:
 			speaker_label.text = speaker_name
 		var speaker_port = entry_data.get("SpeakerPort", null)
 		if speaker_port:
-			speaker_portrait.texture = SpriteCache.get_sprite(speaker_port)
+			if speaker_port == "Unknown":
+				speaker_portrait.texture = unknown_speaker_port
+			else:
+				speaker_portrait.texture = SpriteCache.get_sprite(speaker_port)
 			speaker_portrait.show()
 		if speaker_name or speaker_port:
 			speaker_container.show()
@@ -258,7 +262,7 @@ func _estimate_read_time(text:String)->float:
 	return  0.5#max(1, seconds * 1.0)
 
 func _clear_speaker():
-	speaker_portrait.texture = null
+	speaker_portrait.texture = unknown_speaker_port
 	speaker_label.text = ""
 	speaker_container.hide()
 

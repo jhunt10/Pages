@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bje0k82nenje6"]
+[gd_scene load_steps=13 format=3 uid="uid://bje0k82nenje6"]
 
 [ext_resource type="Script" path="res://Scenes/Dialog/dialog_controller.gd" id="1_17lfl"]
 [ext_resource type="Script" path="res://Scenes/Dialog/black_out_control.gd" id="2_g02yb"]
@@ -9,7 +9,9 @@
 [ext_resource type="Texture2D" uid="uid://cul356gq6n1tw" path="res://Scenes/Dialog/Icons/CheckBox_Off.png" id="9_imyb2"]
 [ext_resource type="Texture2D" uid="uid://ccwj8ucsjhl6w" path="res://assets/Sprites/UI/BackPatches/Patch_64_12_Dark.png" id="10_6rdjr"]
 [ext_resource type="Script" path="res://Scenes/Dialog/dialog_popup_controller.gd" id="10_mbn4m"]
+[ext_resource type="Theme" uid="uid://by8t8e4s2str7" path="res://Scenes/VFXs/SpeachBubble/speach_bubble_theme.tres" id="11_bkcx1"]
 [ext_resource type="FontFile" uid="uid://0kbg00s43xf0" path="res://assets/Fonts/8bit.ttf" id="11_sd5id"]
+[ext_resource type="FontFile" uid="uid://cq1gkq6upl513" path="res://assets/Fonts/8bit-2.ttf" id="12_xp3b1"]
 
 [node name="DialogControl" type="Control" node_paths=PackedStringArray("next_button", "skip_button", "auto_button", "top_speech_box", "bot_speech_box", "blackout_control", "dialog_popup_controller", "input_blocker")]
 layout_mode = 3
@@ -238,3 +240,15 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="Label" type="Label" parent="."]
+self_modulate = Color(0, 0, 0, 1)
+layout_mode = 0
+offset_right = 10.0
+offset_bottom = 17.0
+theme = ExtResource("11_bkcx1")
+theme_override_fonts/font = ExtResource("12_xp3b1")
+theme_override_font_sizes/font_size = 16
+text = "H"
+vertical_alignment = 1
+justification_flags = 0

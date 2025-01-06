@@ -120,7 +120,9 @@ static func path_to_target(actor:BaseActor, start_pos:MapPos, target_pos:MapPos,
 		if check_pos.to_vector2i() == target_pos.to_vector2i():
 			continue
 		#print("Disabling Point: %s because %s " % [check_pos, check_actor.Id])
-		t_astar.set_point_disabled(_pos_to_index(check_pos, game_state), true)
+		var path_index = _pos_to_index(check_pos, game_state)
+		if t_astar.has_point(path_index):
+			t_astar.set_point_disabled(path_index, true)
 	
 	var point_path = t_astar.get_point_path(start_index, end_index, true)
 	

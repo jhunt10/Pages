@@ -2,6 +2,7 @@
 class_name SpeachBubbleVfxNode
 extends VfxNode
 
+enum GrowDirections {Left, Center, Right}
 enum STATES { Hidden, Growing, Printing, Showing, Unprinting, Shrinking}
 
 signal finished_showing
@@ -18,51 +19,78 @@ signal finished_hideing
 				if state == STATES.Growing or state == STATES.Printing or state == STATES.Showing:
 					state = STATES.Unprinting
 
+@export var bounce:bool = false
 @export var display_text:String:
 	set(val):
 		if display_text != val:
 			display_text = val
 			if text_label:
 				text_label.text = display_text
-			if hidden_line_edit:
-				hidden_line_edit.text = val
-				_sync_size()
+				bounce_text_controller.display_text = display_text
+				if Engine.is_editor_hint():
+					_sync_size()
+
+@export var grow_direction:GrowDirections:
+	set(val):
+		grow_direction = val
+		if corner_spike_bot_left:
+			if grow_direction == GrowDirections.Left:
+				corner_spike_bot_left.show()
+				corner_spike_bot_center.hide()
+				corner_spike_bot_right.hide()
+			if grow_direction == GrowDirections.Center:
+				corner_spike_bot_left.hide()
+				corner_spike_bot_center.show()
+				corner_spike_bot_right.hide()
+			if grow_direction == GrowDirections.Right:
+				corner_spike_bot_left.hide()
+				corner_spike_bot_center.hide()
+				corner_spike_bot_right.show()
 
 @export var state:STATES = STATES.Hidden:
 	set(val):
 		if val != state:
 			state = val
-			if not speach_bubble_sprite or not speach_bubble_background or not text_label or not hidden_line_edit:
+			if not scale_control or not speach_bubble_background or not text_label:
 				return
 			if state == STATES.Hidden:
-				speach_bubble_sprite.scale = Vector2.ZERO
-				speach_bubble_background.hide()
+				scale_control.scale = Vector2.ZERO
+				#speach_bubble_background.hide()
 				speach_bubble_background.size = Vector2.ZERO
 				text_label.text = ''
-				hidden_line_edit.text = ''
+				bounce_text_controller.display_text = ''
 			if state == STATES.Growing:
-				speach_bubble_sprite.scale = Vector2.ZERO
-				speach_bubble_background.hide()
+				scale_control.scale = Vector2.ZERO
+				#speach_bubble_background.hide()
 				text_label.text = ''
-				hidden_line_edit.text = ''
+				bounce_text_controller.display_text = ''
 				speach_bubble_background.size = Vector2.ZERO
-			if state == STATES.Printing:
-				speach_bubble_sprite.scale = Vector2.ONE
-				speach_bubble_background.show()
+			#if state == STATES.Printing:
+				#scale_control.scale = Vector2.ONE
+				#speach_bubble_background.show()
 				text_label.text = ''
-				hidden_line_edit.text = ''
+				bounce_text_controller.display_text = ''
 				_sync_size()
 			if state == STATES.Showing:
-				speach_bubble_sprite.scale = Vector2.ONE
-				speach_bubble_background.show()
+				scale_control.scale = Vector2.ONE
+				#speach_bubble_background.show()
 				text_label.text = display_text
-				hidden_line_edit.text = display_text
+				bounce_text_controller.display_text = display_text
 				_sync_size()
-			if state == STATES.Shrinking:
-				speach_bubble_background.hide()
-				text_label.text = display_text
-				hidden_line_edit.text = display_text
-				_sync_size()
+			if state == STATES.Shrinking or state == STATES.Unprinting:
+				bounce_text_controller.hide()
+				text_label.hide()
+			else:
+				if bounce:
+					text_label.hide()
+					bounce_text_controller.show()
+				else:
+					bounce_text_controller.hide()
+					text_label.show()
+				#speach_bubble_background.hide()
+				#text_label.text = display_text
+				#hidden_line_edit.text = display_text
+				#_sync_size()
 	
 @export var begin_offset:int:
 	set(val):
@@ -79,9 +107,13 @@ signal finished_hideing
 @export var letter_delay:float = 0.1
 @export var unprint_speed:float = 1
 @export var text_label:Label
-@export var hidden_line_edit:LineEdit
 @export var speach_bubble_background:NinePatchRect
-@export var speach_bubble_sprite:Sprite2D
+@export var scale_control:Control
+@export var bounce_text_controller:BounceTextControl
+
+@export var corner_spike_bot_left:TextureRect
+@export var corner_spike_bot_center:TextureRect
+@export var corner_spike_bot_right:TextureRect
 
 var _letter_timer:float
 
@@ -90,6 +122,16 @@ func _ready() -> void:
 	if Engine.is_editor_hint():
 		return
 	_readyed = true
+	self.state = STATES.Hidden
+	if showing:
+		self.state = STATES.Growing
+	#scale_control.scale = Vector2.ZERO
+	if grow_direction == GrowDirections.Left:
+		speach_bubble_background.position = Vector2(3, -speach_bubble_background.size.y-3)
+	if grow_direction == GrowDirections.Center:
+		speach_bubble_background.position = Vector2(-28/ 2.0, -speach_bubble_background.size.y-5)
+	if grow_direction == GrowDirections.Right:
+		speach_bubble_background.position = Vector2(-28-3, -speach_bubble_background.size.y-3)
 	if _delayed_start:
 		start_vfx()
 
@@ -100,38 +142,56 @@ func start_vfx():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if state == STATES.Growing:
-		speach_bubble_sprite.scale.x = min(1, speach_bubble_sprite.scale.x + (delta * grow_speed))
-		speach_bubble_sprite.scale.y = speach_bubble_sprite.scale.x
-		if speach_bubble_sprite.scale.x >= 1:
-			_letter_timer = 0
-			state = STATES.Printing
-			return
-	if state == STATES.Printing:
+		if scale_control.scale.x < 1:
+			## Correct for odd offset when growing to right. Maybe rounding error?
+			if grow_direction == GrowDirections.Center and scale_control.scale.x  <= 0.001:
+				speach_bubble_background.position.x = -14
+			if grow_direction == GrowDirections.Right and scale_control.scale.x  <= 0.001:
+				speach_bubble_background.position.x = speach_bubble_background.position.y
+				
+			scale_control.scale.x = min(1, scale_control.scale.x + (delta * grow_speed))
+			scale_control.scale.y = scale_control.scale.x
+			if scale_control.scale.x >= 1:
+				#_letter_timer = 0
+				#state = STATES.Printing
+				scale_control.scale.x = 1
+	#if state == STATES.Growing or state == STATES.Printing:
 		_letter_timer -= delta
+		var remaining_text = display_text.trim_prefix(text_label.text)
 		if _letter_timer <= 0:
 			var current_text = text_label.text
-			var remaining_text = display_text.trim_prefix(current_text)
 			var next_letter = remaining_text.substr(0,1)
 			text_label.text = current_text + next_letter
-			hidden_line_edit.text = current_text + next_letter
+			if bounce:
+				bounce_text_controller.display_text = text_label.text 
 			_sync_size()
 			if remaining_text.length() > 1:
 				_letter_timer = letter_delay
-			else:
-				state = STATES.Showing
-				finished_showing.emit()
-				return
+			
+		if scale_control.scale.x >= 1 and remaining_text.length() == 0:
+			state = STATES.Showing
+			finished_showing.emit()
+			return
+			
 	if state == STATES.Unprinting:
 		var min_x = speach_bubble_background.custom_minimum_size.x
-		var new_x = max(0, speach_bubble_background.size.x - (unprint_speed * delta))
-		speach_bubble_background.size.x = new_x
+		var new_x = maxf(0, speach_bubble_background.size.x - (unprint_speed * delta))
+
 		if min_x >= new_x:
 			state = STATES.Shrinking
 			return
+		else:
+			speach_bubble_background.size.x = new_x
+			if grow_direction == GrowDirections.Left:
+				speach_bubble_background.position = Vector2(3, -speach_bubble_background.size.y-3)
+			if grow_direction == GrowDirections.Center:
+				speach_bubble_background.position = Vector2(-new_x/ 2.0, -speach_bubble_background.size.y-5)
+			if grow_direction == GrowDirections.Right:
+				speach_bubble_background.position = Vector2(-new_x-3, -speach_bubble_background.size.y-3)
 	if state == STATES.Shrinking:
-		speach_bubble_sprite.scale.x = max(0.0, speach_bubble_sprite.scale.x - (delta * grow_speed))
-		speach_bubble_sprite.scale.y = speach_bubble_sprite.scale.x
-		if speach_bubble_sprite.scale.x <= 0.001:
+		scale_control.scale.x = max(0.0, scale_control.scale.x - (delta * grow_speed))
+		scale_control.scale.y = scale_control.scale.x
+		if scale_control.scale.x <= 0.001:
 			state = STATES.Hidden
 			finished_hideing.emit()
 			return
@@ -144,18 +204,37 @@ func _process(delta: float) -> void:
 			_flash_text_shown = true
 
 func set_vfx_data(data:VfxData, extra_data:Dictionary):
+	
 	pass
+
+func set_block_data(block_data:Dictionary):
+	var grow_direction_str = block_data.get("GrowDirection", "Center")
+	grow_direction = GrowDirections.keys().find(grow_direction_str)
+	var offset = block_data.get("Offset", [0,-8])
+	self.position = Vector2(offset[0],offset[1])
+	display_text = block_data.get("Text", "null")
+	bounce = block_data.get("UseBounceText", false)
+	letter_delay = block_data.get("LetterDelay", letter_delay)
 
 func add_flash_text(text:String, color:Color):
 	pass
 
 
 func _sync_size():
-	if !hidden_line_edit:
-		printerr("SelfScalingLineEdit '%s' No Hidden TextEdit found." % [self.name])
-		return
-	hidden_line_edit.size = Vector2.ZERO
-	hidden_line_edit.text = self.display_text
-	var new_size = hidden_line_edit.size
+	var new_size = text_label.get_minimum_size()
+	new_size.x += text_label.offset_left - text_label.offset_right -2
+	new_size.y = 28
 	new_size = Vector2(new_size.x + (padding.x * 2) - end_trim, new_size.y + (padding.y*2))
+	if new_size.x > 28:
+		new_size.x += 1
+		text_label.offset_right = -5
+	else:
+		text_label.offset_right = -4
 	speach_bubble_background.size = new_size
+	var new_width = max(speach_bubble_background.custom_minimum_size.x, new_size.x)
+	if grow_direction == GrowDirections.Left:
+				speach_bubble_background.position = Vector2i(3, -new_size.y-3)
+	if grow_direction == GrowDirections.Center:
+		speach_bubble_background.position = Vector2i(-new_width/ 2, -new_size.y-5)
+	if grow_direction == GrowDirections.Right:
+		speach_bubble_background.position = Vector2i(-new_width-3, -new_size.y-3)

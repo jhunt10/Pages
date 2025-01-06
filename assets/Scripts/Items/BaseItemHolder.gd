@@ -84,12 +84,15 @@ func _build_slots_list():
 				PlayerInventory.add_item(item)
 		raw_index += 1
 
-func get_raw_slot_index(tag:String, sub_index:int)->int:
-	var slot_set_index = _slot_set_key_mapping.find(tag)
-	if slot_set_index < 0:
-		return slot_set_index
-	else:
-		return _item_slot_sets_datas[slot_set_index]['IndexOffset'] + sub_index
+func get_raw_slot_index_of_item(item:BaseItem):
+	return _raw_item_slots.find(item.Id)
+
+#func get_raw_slot_index(tag:String, sub_index:int)->int:
+	#var slot_set_index = _slot_set_key_mapping.find(tag)
+	#if slot_set_index < 0:
+		#return slot_set_index
+	#else:
+		#return _item_slot_sets_datas[slot_set_index]['IndexOffset'] + sub_index
 
 func get_slot_set_data_for_index(index:int):
 	if index < 0 or index > _raw_item_slots.size():

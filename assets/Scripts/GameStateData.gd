@@ -16,7 +16,7 @@ var MapState:MapStateData
 func add_actor(actor:BaseActor):
 	_actors[actor.Id] = actor
 
-func get_actor(actor_id:String, allow_dead:bool=false):
+func get_actor(actor_id:String, allow_dead:bool=false)->BaseActor:
 	var actor = _actors.get(actor_id, null)
 	if !actor:
 		printerr("GameStateData.get_actor: Failed to Actor with Id '%s'." % [actor_id])

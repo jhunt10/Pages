@@ -5,9 +5,11 @@ extends Sprite2D
 enum Direction {North, East, South, West}
 enum SpawnBy {Player, Key, Id}
 
+@export var marker_name:String
 @export var spawn_actor_key:String
 @export var spawn_actor_id:String
 @export var is_player:bool
+@export var wait_to_spawn:bool
 
 @export var facing:Direction:
 	set(val):
@@ -31,6 +33,9 @@ enum SpawnBy {Player, Key, Id}
 		var parent = get_parent()
 		if parent and parent is TileMapLayer:
 			self.position = (parent as TileMapLayer).map_to_local(map_coor)
+
+func get_map_pos()->MapPos:
+	return MapPos.new(self.map_coor.x, self.map_coor.y, 0, self.facing)
 
 #@export var spawn_actor_by:SpawnBy:
 	#set(val):

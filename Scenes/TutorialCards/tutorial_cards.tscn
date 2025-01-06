@@ -39,7 +39,7 @@
 [ext_resource type="Texture2D" uid="uid://cl627unmyivbd" path="res://assets/Sprites/UI/SymbolIcons/DmgSymbol_Poison.png" id="36_ct4tu"]
 [ext_resource type="Texture2D" uid="uid://do85dvxvlf5wk" path="res://defs/Actors/Squirrels/Squirrcerer_IconSmall.png" id="37_16bex"]
 
-[node name="TutorialCardsControl" type="Control" node_paths=PackedStringArray("title_label", "back_button", "back_button_background", "next_button", "next_button_background", "done_button", "done_button_background", "page_que_card", "movement_card", "targeting_actor_card", "targeting_spot_card", "ppr_card", "speed_card", "mass_card", "armor_card")]
+[node name="TutorialCardsControl" type="Control" node_paths=PackedStringArray("top_container", "title_label", "back_button", "back_button_background", "next_button", "next_button_background", "done_button", "done_button_background", "page_que_card", "movement_card", "targeting_actor_card", "targeting_spot_card", "ppr_card", "speed_card", "mass_card", "armor_card")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -47,6 +47,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_imldm")
+top_container = NodePath("CardControl/TopContainer")
 title_label = NodePath("CardControl/TopContainer/HBoxContainer/TitleLabel")
 back_button = NodePath("CardControl/TopContainer/HBoxContainer/BackButtonControl/BackButton/Button")
 back_button_background = NodePath("CardControl/TopContainer/HBoxContainer/BackButtonControl/BackButton")
@@ -241,6 +242,7 @@ text = "If multiple are in range, the system will Pause and allow you to select 
 scroll_active = false
 
 [node name="ImageCaptionLabel" type="RichTextLabel" parent="CardControl/Targeting_Actors"]
+layout_mode = 0
 offset_left = 524.0
 offset_top = 120.0
 offset_right = 732.0
@@ -318,7 +320,6 @@ layout_mode = 2
 size_flags_vertical = 3
 
 [node name="Targeting_Spots" type="Control" parent="CardControl"]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -348,6 +349,7 @@ text = "If multiple are in range, the system will Pause and allow you to select 
 scroll_active = false
 
 [node name="ImageCaptionLabel" type="RichTextLabel" parent="CardControl/Targeting_Spots"]
+layout_mode = 0
 offset_left = 524.0
 offset_top = 120.0
 offset_right = 732.0
@@ -371,7 +373,7 @@ layout_mode = 2
 theme = ExtResource("5_l4e1i")
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/normal_font_size = 32
-text = "Pages that fire Missiles or have the \"Spot\" type target aim for a tile on the map."
+text = "Pages that fire Missiles or have the \"Spot\"  target type aim for a tile on the map instead of a specific Actor."
 fit_content = true
 scroll_active = false
 
@@ -385,7 +387,7 @@ layout_mode = 2
 theme = ExtResource("5_l4e1i")
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/normal_font_size = 32
-text = "Targets are still selected mid Round, but when targeting Spots any tile in the Target Area may be selected."
+text = "When the Page is executed, you will be asked to select a  tile in the Target Area."
 fit_content = true
 scroll_active = false
 
@@ -399,7 +401,7 @@ layout_mode = 2
 theme = ExtResource("5_l4e1i")
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/normal_font_size = 32
-text = "Missiles take time to reach the target. Faster Actors might move before then."
+text = "Missiles take time to reach the spot, so the Actor you're aiming at might move away. "
 fit_content = true
 scroll_active = false
 
@@ -936,6 +938,7 @@ scale = Vector2(2, 2)
 texture = ExtResource("27_o232v")
 
 [node name="Armor" type="Control" parent="CardControl"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

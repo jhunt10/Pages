@@ -335,6 +335,7 @@ func _organize_ques():
 	_sort_ques_by_speed()
 	_calc_turn_padding()
 	que_ordering_changed.emit()
+	pass
 
 ## Sort ques in order of Actor.Speed desc
 func _sort_ques_by_speed():

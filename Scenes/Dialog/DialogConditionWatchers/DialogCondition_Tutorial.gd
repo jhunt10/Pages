@@ -6,11 +6,11 @@ func _on_create():
 	if !condition_key:
 		self._is_finished = true
 		return
-	if condition_key == "Condition_WalkInput" or condition_key == "Condition_AttackInput":
+	if _data.has("RequiredActionQue"):
 		var player_actor = StoryState.get_player_actor()
 		player_actor.Que.action_que_changed.connect(_on_que_change.bind(player_actor))
 		return
-	if condition_key == "PlayingWalk" or condition_key == "PlayingAttack":
+	if condition_key == "PlayingWalk" or condition_key == "PlayingAttack" or condition_key == "PlayingRange":
 		#_dialog_controller.hide()
 		CombatRootControl.QueController.end_of_round.connect(on_round_finish)
 		CombatUiControl.ui_state_controller.set_ui_state(UiStateController.UiStates.ExecRound)
@@ -45,6 +45,8 @@ func _on_que_change(actor:BaseActor):
 			_dialog_controller._condition_flags['PassedTutorial_Walk'] = true
 		if condition_key == "Condition_AttackInput":
 			_dialog_controller._condition_flags['PassedTutorial_Attack'] = true
+		if condition_key == "Condition_RangeInput":
+			_dialog_controller._condition_flags['PassedTutorial_Range'] = true
 			
 	_is_finished = true
 	actor.Que.action_que_changed.disconnect(_on_que_change)
@@ -57,11 +59,22 @@ func get_next_part_key()->String:
 	if condition_key == "Condition_AttackInput":
 		if _dialog_controller._condition_flags.get('PassedTutorial_Attack', false):
 			return "Tutorial_Part4"
+	if condition_key == "Condition_RangeInput":
+		if _dialog_controller._condition_flags.get('PassedTutorial_Range', false):
+			return "Tutorial_Part7"
 	
 	if condition_key == "PlayingWalk":
 		return "Tutorial_Part3"
 	if condition_key == "PlayingAttack":
 		return "Tutorial_Part5"
+	if condition_key == "PlayingRange":
+		var roof_shroom = CombatRootControl.Instance.GameState.get_actor("RoofShroom_1", true)
+		if not roof_shroom or roof_shroom.is_dead:
+			return "Tutorial_Part8"
+		else:
+			return "Tutorial_MissedRange"
+		
+		
 	var failed_count = _dialog_controller._condition_flags.get("FailedTutorial", 0)
 	if failed_count == 1:
 		return "Tutorial_Walk_Fail1" 

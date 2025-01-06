@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" path="res://Scenes/Dialog/DialogBox/dialog_box.gd" id="1_s306v"]
 [ext_resource type="Texture2D" uid="uid://cgrlfobidw8xl" path="res://assets/Sprites/UI/BackPatches/PaperPatch_Bigger_276x192_48.png" id="1_x1pkb"]
+[ext_resource type="Texture2D" uid="uid://b6u5htxioouqh" path="res://Scenes/Dialog/DialogBox/UnknownSpeakerPort.png" id="2_vdnsa"]
 [ext_resource type="Theme" uid="uid://d14wnuq8dl417" path="res://Scenes/Themes/dialog_theme.tres" id="4_5vyn8"]
-[ext_resource type="Texture2D" uid="uid://dqgfhiakoqw2y" path="res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Happy.png" id="4_51sb5"]
 [ext_resource type="Texture2D" uid="uid://cdy53ml2tuvc8" path="res://assets/Sprites/UI/BackPatches/FancyBackPatch_Frame_64_18.png" id="5_ctiiv"]
 [ext_resource type="Script" path="res://Scenes/Dialog/dialog_question_option.gd" id="6_2qrd2"]
 [ext_resource type="Texture2D" uid="uid://6slo2uod40i3" path="res://Scenes/Dialog/Icons/OptionIcon_Empty.png" id="7_2u1ax"]
@@ -26,6 +26,7 @@ scroll_contaier = NodePath("SpeechDialogBlock/ScrollContainer")
 read_timer_label = NodePath("SpeechDialogBlock/SpeakerContainer/ReadTimerLabel")
 premade_text_label = NodePath("SpeechDialogBlock/ScrollContainer/EntriyContainer/PreMade_TextLabel")
 premade_question_option = NodePath("SpeechDialogBlock/ScrollContainer/EntriyContainer/PreMade_QuestionOption")
+unknown_speaker_port = ExtResource("2_vdnsa")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="."]
 layout_mode = 1
@@ -48,9 +49,9 @@ anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 16.0
-offset_top = 16.0
+offset_top = 24.0
 offset_right = -16.0
-offset_bottom = -16.0
+offset_bottom = -24.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -61,7 +62,7 @@ theme_override_constants/separation = 0
 [node name="SpeakerRect" type="TextureRect" parent="SpeechDialogBlock/SpeakerContainer"]
 custom_minimum_size = Vector2(96, 96)
 layout_mode = 2
-texture = ExtResource("4_51sb5")
+texture = ExtResource("2_vdnsa")
 
 [node name="PortraitFrame" type="TextureRect" parent="SpeechDialogBlock/SpeakerContainer/SpeakerRect"]
 layout_mode = 1

@@ -111,7 +111,11 @@ func load_init_state(map_scene_path:String):
 				new_actor = StoryState.get_player_actor()
 			else:
 				new_actor = ActorLibrary.create_actor(actor_key, {})
-		if new_actor:
+				
+		if actor_info['WaitToSpawn']:
+			# Must call without signals because actors are spawned before MapControlNode._ready()
+			MapController.create_actor_node(new_actor, actor_pos, true)
+		else:
 			add_actor(new_actor, actor_info.get("FactionId", 1), actor_pos)
 			
 	
@@ -155,17 +159,19 @@ func add_actor(actor:BaseActor, faction_id:int, pos:MapPos):
 	GameState.add_actor(actor)
 	QueController.add_action_que(actor.Que)
 	
+	var actor_node = get_actor_node(actor.Id)
+	if !actor_node:
+		# Must call without signals because actors are spawned before MapControlNode._ready()
+		actor_node  = MapController.create_actor_node(actor, pos)
+	actor_node.visible = true
 	GameState.MapState.set_actor_pos(actor, pos, actor.spawn_map_layer)
-	# Must call without signals because actors are spawned before MapControlNode._ready()
-	MapController.create_actor_node(actor, pos)
-	
-	actor.Que.clear_que()
-	actor.stats.fill_bar_stats()
-	if actor.use_ai:
-		actor.auto_build_que(QueController.action_index)
-		if QueController.execution_state == ActionQueController.ActionStates.Running:
-			actor.Que.fail_turn()
-	actor_spawned.emit(actor, pos)
+	#actor.Que.clear_que()
+	#actor.stats.fill_bar_stats()
+	#if actor.use_ai:
+		#actor.auto_build_que(QueController.action_index)
+		#if QueController.execution_state == ActionQueController.ActionStates.Running:
+			#actor.Que.fail_turn()
+	#actor_spawned.emit(actor, pos)
 
 func add_item(item:BaseItem, pos:MapPos):
 	if GameState._items.keys().has(item.Id):

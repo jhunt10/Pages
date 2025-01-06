@@ -21,6 +21,7 @@ var zone_nodes = {}
 
 var _cached_marker_poses:Dictionary = {}
 var _cached_marker_paths:Dictionary = {}
+var _cached_spawn_nodes:Dictionary = {}
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -35,7 +36,9 @@ func get_map_data()->Dictionary:
 	var map_data = terrain_path_map.get_map_data()
 	var actors = []
 	for child in marker_tile_map.get_children():
-		if child is ActorSpawnNode and child.visible:
+		if child is ActorSpawnNode:
+			if !child.visible:
+				continue
 			var pos = MapPos.new(child.map_coor.x, child.map_coor.y, 0, child.facing)
 			var data = {"Pos": pos}
 			if child.spawn_actor_key != '':
@@ -46,7 +49,10 @@ func get_map_data()->Dictionary:
 				data["FactionId"] = 0
 			else:
 				data["FactionId"] = 1
+			data['WaitToSpawn'] = child.wait_to_spawn
 			actors.append(data)
+			var marker_name = child.marker_name
+			_cached_spawn_nodes[marker_name] = child
 		elif child is MapMarkerNode:
 			var pos = MapPos.new(child.map_coor.x, child.map_coor.y, 0, child.facing)
 			var marker_name = child.marker_name
@@ -67,12 +73,17 @@ func get_path_marker(marker_name)->MapPathNode:
 	if _cached_marker_paths.has(marker_name):
 		return _cached_marker_paths[marker_name]
 	return null
+	
+func get_spawn_node(marker_name)->ActorSpawnNode:
+	if _cached_spawn_nodes.has(marker_name):
+		return _cached_spawn_nodes[marker_name]
+	return null
 
-func create_actor_node(actor:BaseActor, map_pos:MapPos):
+func create_actor_node(actor:BaseActor, map_pos:MapPos, wait_to_show:bool=false)->ActorNode:
 	if Engine.is_editor_hint(): return
 	if LOGGING: print("MapControllerNode: Creating Actor Node: %s" % [actor.Id])
 	if actor_nodes.keys().has(actor.Id):
-		return
+		return actor_nodes[actor.Id]
 	
 	var new_node:ActorNode = load("res://Scenes/Combat/MapObjects/actor_node.tscn").instantiate()
 	actor_nodes[actor.Id] = new_node
@@ -80,8 +91,9 @@ func create_actor_node(actor:BaseActor, map_pos:MapPos):
 	new_node.position = actor_tile_map.map_to_local(map_pos.to_vector2i())
 	new_node.set_actor(actor)
 	new_node.set_map_pos(map_pos)
-	new_node.visible = true
+	new_node.visible = !wait_to_show
 	if LOGGING: print("MapControllerNode: Created Actor Node: %s" % [actor.Id])
+	return new_node
 
 func delete_actor_node(actor:BaseActor):
 	if Engine.is_editor_hint(): return

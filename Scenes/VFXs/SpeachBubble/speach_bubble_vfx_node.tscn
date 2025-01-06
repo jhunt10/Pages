@@ -1,231 +1,136 @@
-[gd_scene load_steps=11 format=3 uid="uid://b07c3300ehfi5"]
+[gd_scene load_steps=8 format=3 uid="uid://b07c3300ehfi5"]
 
 [ext_resource type="Script" path="res://Scenes/VFXs/SpeachBubble/speach_bubble_vfx_node.gd" id="1_3hi8n"]
+[ext_resource type="PackedScene" uid="uid://bicesld0k4p4b" path="res://Scenes/VFXs/BounceText/bounce_text_control.tscn" id="2_plq2c"]
 [ext_resource type="Texture2D" uid="uid://dimnf2vvlptow" path="res://Scenes/VFXs/SpeachBubble/SpeachBub_BotLeft.png" id="3_f6tw2"]
+[ext_resource type="Texture2D" uid="uid://bgh5iaghkhs27" path="res://Scenes/VFXs/SpeachBubble/SpeechBubbleBackground.png" id="3_wusc4"]
+[ext_resource type="Texture2D" uid="uid://cs1jnjit3sqvg" path="res://Scenes/VFXs/SpeachBubble/SpeechBubble_Corner_BL.png" id="3_xgluu"]
+[ext_resource type="Texture2D" uid="uid://c2uyb8l6t1k2b" path="res://Scenes/VFXs/SpeachBubble/SpeechBubble_Corner_BC.png" id="4_5g4et"]
 [ext_resource type="Theme" uid="uid://by8t8e4s2str7" path="res://Scenes/VFXs/SpeachBubble/speach_bubble_theme.tres" id="4_27tdc"]
 
-[sub_resource type="Animation" id="Animation_wtg8w"]
-resource_name = "4_sprites_250ms_frames"
-step = 0.25
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.25, 0.5, 0.75),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:animation_half_way")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0.5),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-
-[sub_resource type="Animation" id="Animation_mg4p0"]
-resource_name = "4_sprites_250ms_frames_loop"
-loop_mode = 1
-step = 0.25
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.25, 0.5, 0.75),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3]
-}
-
-[sub_resource type="Animation" id="Animation_uwom5"]
-resource_name = "6_sprites_250ms_frames"
-length = 1.5
-step = 0.25
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1, 1.25),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 4, 5]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:animation_half_way")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0.75),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-
-[sub_resource type="Animation" id="Animation_7qvkc"]
-resource_name = "6_sprites_250ms_frames_loop"
-length = 1.5
-loop_mode = 1
-step = 0.25
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1, 1.25),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 4, 5]
-}
-
-[sub_resource type="Animation" id="Animation_kvxq2"]
-resource_name = "8_sprites_250ms_frames_loop"
-length = 2.0
-loop_mode = 1
-step = 0.25
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 4, 5, 6, 7]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:animation_half_way")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(1),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-
-[sub_resource type="Animation" id="Animation_lwwt5"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:animation_half_way")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_3vpeu"]
-_data = {
-"4_sprites_250ms_frames": SubResource("Animation_wtg8w"),
-"4_sprites_250ms_frames_loop": SubResource("Animation_mg4p0"),
-"6_sprites_250ms_frames": SubResource("Animation_uwom5"),
-"6_sprites_250ms_frames_loop": SubResource("Animation_7qvkc"),
-"8_sprites_250ms_frames_loop": SubResource("Animation_kvxq2"),
-"RESET": SubResource("Animation_lwwt5")
-}
-
-[node name="SpeachBubbleVFXNode" type="Node2D" node_paths=PackedStringArray("text_label", "hidden_line_edit", "speach_bubble_background", "speach_bubble_sprite")]
+[node name="SpeachBubbleVFXNode" type="Node2D" node_paths=PackedStringArray("text_label", "speach_bubble_background", "scale_control", "bounce_text_controller", "corner_spike_bot_left", "corner_spike_bot_center", "corner_spike_bot_right")]
 z_index = 9
 script = ExtResource("1_3hi8n")
-display_text = "Hello, Friend!"
-begin_offset = 8
-end_trim = 14
-padding = Vector2i(8, 0)
+showing = true
+bounce = true
+display_text = "DIE HUMANS!"
+grow_direction = 1
+state = 3
 grow_speed = 3.0
 letter_delay = 0.05
-unprint_speed = 200.0
-text_label = NodePath("SpeachBubble/Label")
-hidden_line_edit = NodePath("SpeachBubble/LineEdit")
-speach_bubble_background = NodePath("SpeachBubble")
-speach_bubble_sprite = NodePath("Sprite2D")
+unprint_speed = 300.0
+text_label = NodePath("ScaleControl/SpeachBubble/Label")
+speach_bubble_background = NodePath("ScaleControl/SpeachBubble")
+scale_control = NodePath("ScaleControl")
+bounce_text_controller = NodePath("ScaleControl/SpeachBubble/BounceTextControl")
+corner_spike_bot_left = NodePath("ScaleControl/SpeachBubble/CornerSpike_BotLeft")
+corner_spike_bot_center = NodePath("ScaleControl/SpeachBubble/CornerSpike_BotCenter")
+corner_spike_bot_right = NodePath("ScaleControl/SpeachBubble/CornerSpike_BotRight")
 animation_half_way = true
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(1e-05, 1e-05)
-texture = ExtResource("3_f6tw2")
-offset = Vector2(14, -14)
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_3vpeu")
-}
-
-[node name="SpeachBubble" type="NinePatchRect" parent="."]
-visible = false
-custom_minimum_size = Vector2(28, 28)
-anchors_preset = -1
+[node name="ScaleControl" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
 anchor_bottom = 1.0
-offset_top = -28.0
-offset_right = 28.0
-texture = ExtResource("3_f6tw2")
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="SpeachBubble" type="NinePatchRect" parent="ScaleControl"]
+custom_minimum_size = Vector2(28, 28)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -55.0
+offset_top = -33.0
+offset_right = 55.0
+offset_bottom = -5.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_wusc4")
 patch_margin_left = 10
 patch_margin_top = 7
 patch_margin_right = 7
 patch_margin_bottom = 11
 
-[node name="Label" type="Label" parent="SpeachBubble"]
+[node name="CornerSpike_BotLeft" type="TextureRect" parent="ScaleControl/SpeachBubble"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = -3.0
+offset_top = -9.0
+offset_right = 9.0
+offset_bottom = 3.0
+grow_vertical = 0
+texture = ExtResource("3_xgluu")
+
+[node name="CornerSpike_BotCenter" type="TextureRect" parent="ScaleControl/SpeachBubble"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -6.0
+offset_top = -6.0
+offset_right = 6.0
+offset_bottom = 5.0
+grow_vertical = 0
+texture = ExtResource("4_5g4et")
+stretch_mode = 3
+
+[node name="CornerSpike_BotRight" type="TextureRect" parent="ScaleControl/SpeachBubble"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -9.0
+offset_top = -9.0
+offset_right = 3.0
+offset_bottom = 3.0
+grow_vertical = 0
+texture = ExtResource("3_xgluu")
+flip_h = true
+
+[node name="Label" type="Label" parent="ScaleControl/SpeachBubble"]
+visible = false
 self_modulate = Color(0, 0, 0, 1)
-custom_minimum_size = Vector2(21, 0)
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 8.0
-offset_right = -2.0
-offset_bottom = -3.0
+offset_left = 6.0
+offset_top = 2.0
+offset_right = -5.0
+offset_bottom = -2.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("4_27tdc")
 theme_override_constants/line_spacing = -5
+text = "DIE HUMANS!"
 vertical_alignment = 1
-clip_text = true
+justification_flags = 0
 
-[node name="LineEdit" type="LineEdit" parent="SpeachBubble"]
+[node name="BounceTextControl" parent="ScaleControl/SpeachBubble" instance=ExtResource("2_plq2c")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+display_text = "DIE HUMANS!"
+
+[node name="SpeachBubBotLeft" type="Sprite2D" parent="."]
 visible = false
-layout_mode = 0
-offset_left = 8.0
-offset_right = 122.0
-offset_bottom = 28.0
-theme = ExtResource("4_27tdc")
-theme_override_constants/minimum_character_width = 0
-alignment = 1
-expand_to_text_length = true
+position = Vector2(11, -12)
+texture = ExtResource("3_f6tw2")

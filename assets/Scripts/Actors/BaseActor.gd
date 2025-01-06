@@ -153,6 +153,8 @@ func die():
 			max_val += weight
 		var roll = randi() % (max_val + 1)
 		for key in drop_items.keys():
+			if drop_items[key] <= 0:
+				continue
 			roll -= drop_items[key]
 			if roll <= 0:
 				if key != "":

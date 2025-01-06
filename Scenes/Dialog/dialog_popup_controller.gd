@@ -67,6 +67,11 @@ func create_highlight(block_data:Dictionary)->bool:
 		if target_element is Control:
 			popup_pos = target_element.get_screen_position()
 			popup_size = target_element.size
+			var padding = block_data.get("Padding", [0,0,0,0])
+			popup_pos.x += padding[0]
+			popup_pos.y += padding[2]
+			popup_size.x += padding[1] - padding[0]
+			popup_size.y += padding[3] - padding[2]
 		else:
 			printerr("Target Element is not a control")
 		
@@ -96,7 +101,6 @@ func create_speech_bubble(block_data:Dictionary)->bool:
 		printerr("DialogController: SpeechBubble '%s' already exists" % [pop_up_key])
 		return false
 		
-	var display_text = block_data.get("Text", "null")
 	var target_actor_id = block_data.get("TargetActorId", null)
 	if !target_actor_id:
 		printerr("DialogController: No 'TargetActorId' provided on SpeechBubble block.")
@@ -107,10 +111,12 @@ func create_speech_bubble(block_data:Dictionary)->bool:
 		return false
 	
 	var new_bubble:SpeachBubbleVfxNode = load("res://Scenes/VFXs/SpeachBubble/speach_bubble_vfx_node.tscn").instantiate()
+	var grow_direction = block_data.get("GrowDirection", "Center")
+	var offset = block_data.get("Offset", [0,-8])
+	
 	actor_node.vfx_holder.add_child(new_bubble)
-	new_bubble.display_text = display_text
+	new_bubble.set_block_data(block_data)
 	new_bubble.showing = true
-	new_bubble.position = Vector2(8,-21)
 	_popups[pop_up_key] = new_bubble
 	if block_data.get("WaitToFinish", false):
 		new_bubble.finished_showing.connect(parent_dialog_controller._on_popup_finished.bind(pop_up_key))

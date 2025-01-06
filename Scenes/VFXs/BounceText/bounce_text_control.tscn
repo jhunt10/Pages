@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=3 uid="uid://bicesld0k4p4b"]
+
+[ext_resource type="Script" path="res://Scenes/VFXs/BounceText/bounce_text_control.gd" id="1_ihqmm"]
+[ext_resource type="Theme" uid="uid://by8t8e4s2str7" path="res://Scenes/VFXs/SpeachBubble/speach_bubble_theme.tres" id="2_48acu"]
+[ext_resource type="Script" path="res://Scenes/VFXs/BounceText/bounce_letter_control.gd" id="2_nsf0g"]
+
+[node name="BounceTextControl" type="HBoxContainer" node_paths=PackedStringArray("premade_bounce_letter")]
+theme_override_constants/separation = 0
+alignment = 1
+script = ExtResource("1_ihqmm")
+premade_bounce_letter = NodePath("BounceLetterControl")
+
+[node name="BounceLetterControl" type="Label" parent="." node_paths=PackedStringArray("label")]
+visible = false
+self_modulate = Color(0, 0, 0, 0)
+layout_mode = 2
+theme = ExtResource("2_48acu")
+text = "Bounce"
+vertical_alignment = 1
+justification_flags = 0
+script = ExtResource("2_nsf0g")
+label = NodePath("Label")
+speed_scale = 10.0
+
+[node name="Label" type="Label" parent="BounceLetterControl"]
+self_modulate = Color(0, 0, 0, 1)
+offset_right = 10.0
+offset_bottom = 17.0
+theme = ExtResource("2_48acu")
+text = "Bounce"
+vertical_alignment = 1
+justification_flags = 0

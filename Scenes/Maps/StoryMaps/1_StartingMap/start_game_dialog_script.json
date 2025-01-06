@@ -1,6 +1,6 @@
 {
 	"_MetaData_": {
-		"StartPartKey": null
+		"StartPartKey": "Tutorial_Part12"
 	},
 	"PrologSwitch": {
 		"_NextPartLogic": 
@@ -148,7 +148,9 @@
 				"Create":"HelloBubble",
 				"PopUpType": "SpeechBubble",
 				"TargetActorId": "MysteriousFigure",
-				"Text":"Hello, Friend!"
+				"GrowDirection": "Left",
+				"Text":"Hello, Friend!",
+				"Offset": [8,-21]
 			},
 			{
 				"BlockType": "MoveActor",
@@ -2366,7 +2368,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "To pick up an Item, just move into the same spot and it will be added to your Bag (assuming you have room).",
+						"Text": "To pick up an Item, just move into the same spot and it will be added to your Bag, if you have room.",
 						"NewLine": false
 					},
 					{
@@ -2387,7 +2389,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "When the Page System deactivates, Items that are left in the area will automatically be added to your Inventory (assuming you're still alive). So don't worry if you miss something.",
+						"Text": "When the Page System deactivates, Items that are left in the area will automatically be added to your Inventory (if you're still alive). So don't worry if you miss something.",
 						"NewLine": false
 					},
 					{
@@ -2404,34 +2406,16 @@
 		"EnsurePoses": {
 			"_Camera":"P6",
 			"Player1":"P6",
-			"MysteriousFigure":"MF5"
+			"MysteriousFigure":"MF5",
+			"TutorShroom_1": "_DEAD_"
 		},
 		"Blocks":[
 			{
-				"BlockType": "SpeechBox",
-				"TopBox": false,
-				"WaitToFinish": true,
-				"WaitForNextButton": true,
-				"Hide": false,
-				"Entries": [
-					{
-						"EntryType": "Clear",
-						"ClearSpeaker": false
-					},
-					{
-						"EntryType": "Speaker",
-						"SpeakerName": "MtFr",
-						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Happy.png"
-					},
-					{
-						"EntryType": "Text",
-						"Text": "For your next lesson, we'll cover Ranged Attacks.",
-						"NewLine": false
-					},
-					{
-						"EntryType":"WaitToRead"
-					}
-				]
+				"WaitToFinish": false,
+				"WaitForNextButton": false,
+				"BlockType": "PanCamera",
+				"TargetType": "PathMarker",
+				"PathMarkerName": "C1"
 			},
 			{
 				"BlockType": "SpeechBox",
@@ -2451,7 +2435,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "See the Mushroom on the Roof?",
+						"Text": "Now, see the Mushroom on the Roof?",
 						"NewLine": false
 					},
 					{
@@ -2460,7 +2444,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "You won't be able to reach it with a melee attack, so you'll need to use a Page with more ranged.",
+						"Text": "You won't be able to reach it with a melee attack, so let's learn about Missile Pages by throwing a rock at it.",
 						"NewLine": true
 					},
 					{
@@ -2486,7 +2470,48 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "Technically any Page with large enough Target Area would work, but since this is a tutorial we'll use one that targets Spots instead of an Actor.",
+						"Text": "A \"Missile\" just means any projectile that is created by a Page. ",
+						"NewLine": false
+					},
+					{
+						"EntryType":"WaitToRead"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "This includes arrows, fireballs, rocks, stuff like that.",
+						"NewLine": false
+					},
+					{
+						"EntryType":"WaitToRead"
+					}
+				]
+			},
+			{
+				"BlockType":"CustomBlock",
+				"ScriptPath": "res://Scenes/Dialog/CustomDialogBlocks/AlterPagesDialogBlock.gd",
+				"SwapPages":{
+					"BasicWeaponAttack": "ThrowStone_PageItem"
+				}
+			},
+			{
+				"BlockType": "SpeechBox",
+				"TopBox": false,
+				"WaitToFinish": true,
+				"WaitForNextButton": true,
+				"Hide": false,
+				"Entries": [
+					{
+						"EntryType": "Clear",
+						"ClearSpeaker": false
+					},
+					{
+						"EntryType": "Speaker",
+						"SpeakerName": "MtFr",
+						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Neutral.png"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "I'm replacing your Basic Weapon Attack with a Chuck-A-Rock Page, but I'm just letting you borrow it! You have to give it back.",
 						"NewLine": true
 					},
 					{
@@ -2504,6 +2529,21 @@
 					{
 						"EntryType": "Clear",
 						"ClearSpeaker": false
+					},
+					{
+						"EntryType": "Speaker",
+						"SpeakerName": "MtFr",
+						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Neutral.png"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "But first",
+						"LetterDelay": -1
+					},
+					{
+						"EntryType":"Text",
+						"Text":"... ",
+						"LetterDelay": 0.3
 					},
 					{
 						"EntryType": "Speaker",
@@ -2548,9 +2588,10 @@
 		"WaitForNextButton": false,
 		"Inital_BlackOutState": "Clear",
 		"EnsurePoses": {
-			"_Camera":"P6",
+			"_Camera":"C1",
 			"Player1":"P6",
-			"MysteriousFigure":"MF5"
+			"MysteriousFigure":"MF5",
+			"TutorShroom_1": "_DEAD_"
 		},
 		"Blocks":[
 			{
@@ -2596,43 +2637,11 @@
 					},
 					{
 						"EntryType": "IconImage",
-						"Image": "res://data/Actions/Movement/MoveForward.png"
+						"Image": "res://data/Actions/Movement/TurnLeft.png"
 					},
 					{
 						"EntryType": "IconImage",
-						"Image": "res://data/Actions/Movement/MoveForward.png"
-					},
-					{
-						"ConditionFlags":
-						{
-							"StartClass": "Soldier"
-						},
-						"EntryType": "IconImage",
-						"Image": "res://defs/ClassDefs/Soldier/Items/Equipment/Sprites/OldSword.png"
-					},
-					{
-						"ConditionFlags":
-						{
-							"StartClass": "Rogue"
-						},
-						"EntryType": "IconImage",
-						"Image": "res://defs/ClassDefs/Rogue/Items/Equipment/Sprites/OldDagger.png"
-					},
-					{
-						"ConditionFlags":
-						{
-							"StartClass": "Mage"
-						},
-						"EntryType": "IconImage",
-						"Image": "res://defs/ClassDefs/Mage/Items/Equipment/Sprites/OldWand.png"
-					},
-					{
-						"ConditionFlags":
-						{
-							"StartClass": "Priest"
-						},
-						"EntryType": "IconImage",
-						"Image": "res://defs/ClassDefs/Priest/Items/Equipment/Sprites/OldStaff.png"
+						"Image": "res://defs/Actions/BasicAttacks/ThrowStone/ThrowStone.png"
 					},
 					{
 						"EntryType": "Text",
@@ -2654,14 +2663,1082 @@
 		"WaitForNextButton": false,
 		"Inital_BlackOutState": "Clear",
 		"EnsurePoses": {
-			"_Camera":"P6",
+			"_Camera":"C1",
 			"Player1":"P6",
-			"MysteriousFigure":"MF5"
+			"MysteriousFigure":"MF5",
+			"TutorShroom_1": "_DEAD_"
 		},
 		"AllowInputThrough": true,
 		"ConditionWatcherScript": "res://Scenes/Dialog/DialogConditionWatchers/DialogCondition_Tutorial.gd",
 		"ConditionKey": "Condition_RangeInput",
-		"RequiredActionQue": ["MoveForward", "TurnLeft", "MoveForward", "BasicWeaponAttack"]
+		"RequiredActionQue": ["MoveForward", "MoveForward", "TurnLeft", "ThrowStone"]
 
 	},
+	"Tutorial_Part7":{
+		"_NextPartKey": "Condition_RangePlaying",
+		"WaitForNextButton": false,
+		"Inital_BlackOutState": "Clear",
+		"EnsurePoses": {
+			"_Camera":"P7",
+			"Player1":"P7",
+			"MysteriousFigure":"MF5",
+			"TutorShroom_1": "_DEAD_"
+		},
+		"Blocks":[
+			{
+				"BlockType": "SpeechBox",
+				"TopBox": true,
+				"WaitToFinish": false,
+				"WaitForNextButton": false,
+				"Hide": true,
+				"Entries": [
+					{
+						"EntryType": "Clear"
+					}
+				]
+			},
+			{
+				"BlockType": "SpeechBox",
+				"TopBox": false,
+				"WaitToFinish": true,
+				"WaitForNextButton": true,
+				"Hide": false,
+				"Entries": [
+					{
+						"EntryType": "Clear"
+					},
+					{
+						"EntryType": "Speaker",
+						"SpeakerName": "MtFr",
+						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Happy.png"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "Great! Now we'll start the turn and when the Targeting UI comes up, just select the spot with the mushroom in it.",
+						"NewLine": false
+					}
+				]
+			},
+			{
+				"BlockType": "SpeechBox",
+				"TopBox": false,
+				"WaitToFinish": false,
+				"WaitForNextButton": false,
+				"Hide": true,
+				"Entries": [
+					{
+						"EntryType": "Clear"
+					}
+				]
+			}
+		]
+	},
+	"Condition_RangePlaying":
+	{
+		"_NextPartKey": null,
+		"WaitForNextButton": false,
+		"Inital_BlackOutState": "Clear",
+		"EnsurePoses": {
+			"_Camera":"P6",
+			"Player1":"P6",
+			"MysteriousFigure":"MF5",
+			"TutorShroom_1": "_DEAD_"
+		},
+		"AllowInputThrough": true,
+		"ConditionWatcherScript": "res://Scenes/Dialog/DialogConditionWatchers/DialogCondition_Tutorial.gd",
+		"ConditionKey": "PlayingRange"
+
+	},
+	"Tutorial_MissedRange":{
+		"_NextPartKey": "Tutorial_Part9",
+		"WaitForNextButton": false,
+		"Inital_BlackOutState": "Clear",
+		"EnsurePoses": {
+			"_Camera":"P6",
+			"Player1":"P7",
+			"MysteriousFigure":"MF5",
+			"TutorShroom_1": "_DEAD_"
+		},
+		"Blocks":[
+			{
+				"BlockType": "SpeechBox",
+				"TopBox": false,
+				"WaitToFinish": true,
+				"WaitForNextButton": true,
+				"Hide": false,
+				"Entries": [
+					{
+						"EntryType": "Clear"
+					},
+					{
+						"EntryType": "Speaker",
+						"SpeakerName": "MtFr",
+						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Neutral.png"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "You missed!? ",
+						"NewLine": false
+					},
+					{
+						"EntryType": "Delay",
+						"Delay": 1.2
+					},
+					{
+						"EntryType": "Text",
+						"Text": "You just had to click on the mushroom! ",
+						"NewLine": false
+					},
+					{
+						"EntryType":"WaitToRead"
+					},
+					{
+						"EntryType": "Speaker",
+						"SpeakerName": "MtFr",
+						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Sad.png"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "Well, thanks for wasting my rock I guess,",
+						"NewLine": true
+					},
+
+					{
+						"EntryType": "WaitToRead"
+					}
+				]
+			},
+			{
+				"BlockType":"CustomBlock",
+				"ScriptPath": "res://Scenes/Dialog/CustomDialogBlocks/AlterPagesDialogBlock.gd",
+				"SwapPages":{
+					"ThrowStone": "BasicWeaponAttack_PageItem"
+				}
+			},
+			{
+				"BlockType": "SpeechBox",
+				"TopBox": false,
+				"WaitToFinish": true,
+				"WaitForNextButton": true,
+				"Hide": false,
+				"Entries": [
+					{
+						"EntryType": "Clear",
+						"ClearSpeaker":false
+					},
+					{
+						"EntryType": "Speaker",
+						"SpeakerName": "MtFr",
+						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Neutral.png"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "At least you got the basics of how Missiles work. I'm giving you back your Basic Weapon Attack, but you still owe me a rock.",
+						"NewLine": false
+					},
+					{
+						"EntryType": "WaitToRead"
+					}
+				]
+			}
+		]
+	},
+	"Tutorial_Part8":{
+		"_NextPartKey": "Tutorial_Part9",
+		"WaitForNextButton": false,
+		"Inital_BlackOutState": "Clear",
+		"EnsurePoses": {
+			"_Camera":"P7",
+			"Player1":"P7",
+			"MysteriousFigure":"MF5",
+			"TutorShroom_1": "_DEAD_"
+		},
+		"Blocks":[
+			{
+				"BlockType": "SpeechBox",
+				"TopBox": false,
+				"WaitToFinish": true,
+				"WaitForNextButton": true,
+				"Hide": false,
+				"Entries": [
+					{
+						"EntryType": "Clear"
+					},
+					{
+						"EntryType": "Speaker",
+						"SpeakerName": "MtFr",
+						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Squint.png"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "Now no mushroom can escape your wrath!",
+						"NewLine": false
+					},
+					{
+						"EntryType": "WaitToRead"
+					}
+				]
+			},
+			{
+				"BlockType":"CustomBlock",
+				"ScriptPath": "res://Scenes/Dialog/CustomDialogBlocks/AlterPagesDialogBlock.gd",
+				"SwapPages":{
+					"ThrowStone": "BasicWeaponAttack_PageItem"
+				}
+			},
+			{
+				"BlockType": "SpeechBox",
+				"TopBox": false,
+				"WaitToFinish": true,
+				"WaitForNextButton": true,
+				"Hide": false,
+				"Entries": [
+					{
+						"EntryType": "Clear",
+						"ClearSpeaker": false
+					},
+					{
+						"EntryType": "Speaker",
+						"SpeakerName": "MtFr",
+						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Happy.png"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "You can have your Basic Weapon Attack back, and thank you for keeping good care of my rock.",
+						"NewLine": false
+					},
+					{
+						"EntryType": "WaitToRead"
+					}
+				]
+			}
+		]
+	},
+	"Tutorial_Part9":{
+		"_NextPartKey": "Tutorial_Part10",
+		"WaitForNextButton": true,
+		"Inital_BlackOutState": "Clear",
+		"EnsurePoses": {
+			"_Camera":"P7",
+			"Player1":"P7",
+			"MysteriousFigure":"MF8",
+			"TutorShroom_1": "_DEAD_"
+		},
+		"Blocks":[
+			{
+				"BlockType": "SpeechBox",
+				"TopBox": false,
+				"WaitToFinish": true,
+				"WaitForNextButton": false,
+				"Hide": false,
+				"Entries": [
+					{
+						"EntryType": "Clear"
+					},
+					{
+						"EntryType": "Speaker",
+						"SpeakerName": "MtFr",
+						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Happy.png"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "Your final lesson is by far the most important",
+						"NewLine": false
+					},
+					{
+						"EntryType": "Text",
+						"Text": "... ",
+						"LetterDelay": 0.3
+					},
+					{
+						"EntryType": "Speaker",
+						"SpeakerName": "MtFr",
+						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Squint.png"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "Something that you MUST know before going into combat",
+						"NewLine": true
+					},
+					{
+						"EntryType": "Text",
+						"Text": "... ",
+						"LetterDelay": 0.3
+					},
+					{
+						"EntryType": "Text",
+						"Text": "So, it would be seriously bad if if I was inter-",
+						"NewLine": true
+					}
+				]
+			},
+			{
+				"BlockType": "SpeechBox",
+				"TopBox": true,
+				"WaitToFinish": true,
+				"WaitForNextButton": false,
+				"Hide": false,
+				"Entries": [
+					{
+						"EntryType": "Clear"
+					},
+					{
+						"EntryType": "Speaker",
+						"SpeakerName": "????",
+						"SpeakerPort": "Unknown"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "INTRUDERS!!!",
+						"NewLine": false
+					}
+				]
+			},
+			{
+				"BlockType": "SpeechBox",
+				"TopBox": false,
+				"WaitToFinish": true,
+				"WaitForNextButton": false,
+				"Hide": false,
+				"Entries": [
+					{
+						"EntryType": "Speaker",
+						"SpeakerName": "MtFr",
+						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Surprize.png"
+					},
+					{
+						"EntryType": "Text",
+						"Text": " What?!",
+						"NewLine": true
+					}
+				]
+			}
+		]
+	},
+	"Tutorial_Part10":{
+		"_NextPartKey": "Tutorial_Part11",
+		"WaitForNextButton": true,
+		"Inital_BlackOutState": "Clear",
+		"EnsurePoses": {
+			"_Camera":"P7",
+			"Player1":"P7",
+			"MysteriousFigure":"MF8",
+			"TutorShroom_1": "_DEAD_"
+		},
+		"Blocks":[
+			{
+				"BlockType":"SpawnActor",
+				"SpawnNodeName": "SSquirrel_1"
+			},
+			{
+				"BlockType": "SpeechBox",
+				"TopBox": true,
+				"WaitToFinish": true,
+				"WaitForNextButton": false,
+				"Hide": true,
+				"Entries": [
+					{
+						"EntryType": "Clear"
+					}
+				]
+			},
+			{
+				"BlockType": "MoveActor",
+				"WaitToFinish": false,
+				"TargetActorId": "Squirrel_1",
+				"PathMarkerName": "S1",
+				"FollowActor": false,
+				"SpeedScale": 1
+			},
+			{
+				"BlockType": "SpeechBox",
+				"TopBox": false,
+				"WaitToFinish": false,
+				"WaitForNextButton": false,
+				"Hide": false,
+				"Entries": [
+					{
+						"EntryType": "Clear",
+						"ClearSpeaker": false
+					},
+					{
+						"EntryType": "Speaker",
+						"SpeakerName": "MtFr",
+						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Squint.png"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "Nevermind what I was just saying.",
+						"NewLine": false
+					},
+					{
+						"EntryType":"WaitToRead"
+					}
+				]
+			},
+			{
+				"WaitToFinish": true,
+				"WaitForNextButton": false,
+				"BlockType": "PanCamera",
+				"TargetType": "PathMarker",
+				"PathMarkerName": "C2"
+			},
+			{
+				"BlockType": "SpeechBox",
+				"TopBox": false,
+				"WaitToFinish": true,
+				"WaitForNextButton": true,
+				"Hide": false,
+				"Entries": [
+					{
+						"EntryType": "Text",
+						"Text": "We've got Squirrels, and they're ready to fight.",
+						"NewLine": true
+					},
+					{
+						"EntryType":"WaitToRead"
+					}
+				]
+			},
+			{
+				"BlockType": "SpeechBox",
+				"TopBox": false,
+				"WaitToFinish": true,
+				"WaitForNextButton": true,
+				"Hide": false,
+				"Entries": [
+					{
+						"EntryType": "Clear",
+						"ClearSpeaker": false
+					},
+					{
+						"EntryType": "Speaker",
+						"SpeakerName": "MtFr",
+						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Happy.png"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "I guess it's time for your first live combat exercise.",
+						"NewLine": false
+					},
+					{
+						"EntryType":"WaitToRead"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "Oh, and if you feel bad about beating up cute woodland critters, don't worry.",
+						"NewLine": true
+					},
+					{
+						"EntryType":"WaitToRead"
+					}
+				]
+			},
+			{
+				"BlockType": "SpeechBox",
+				"TopBox": false,
+				"WaitToFinish": true,
+				"WaitForNextButton": true,
+				"Hide": false,
+				"Entries": [
+					{
+						"EntryType": "Clear",
+						"ClearSpeaker": false
+					},
+					{
+						"EntryType": "Speaker",
+						"SpeakerName": "MtFr",
+						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Happy.png"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "These squirrels are radical political extremists whos views are the exact opposite of whatever you belive in.",
+						"NewLine": false
+					},
+					{
+						"EntryType":"WaitToRead"
+					}
+				]
+			},
+			{
+				"BlockType": "PopUp",
+				"WaitToFinish": true,
+				"Create":"SquirrleBubble1",
+				"PopUpType": "SpeechBubble",
+				"TargetActorId": "Squirrel_1",
+				"Text":"DIE!!!",
+				"UseBounceText": true,
+				"LetterDelay": 0.03
+			},
+			{
+				"BlockType": "SpeechBox",
+				"TopBox": false,
+				"WaitToFinish": true,
+				"WaitForNextButton": true,
+				"Hide": false,
+				"Entries": [
+					{
+						"EntryType": "Speaker",
+						"SpeakerName": "MtFr",
+						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Sad.png"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "Also, they are trying to kill you.",
+						"NewLine": true
+					},
+					{
+						"EntryType":"WaitToRead"
+					}
+				]
+			},
+			{
+				"BlockType": "PopUp",
+				"WaitToFinish": false,
+				"Delete":"SquirrleBubble1",
+				"PopUpType": "SpeechBubble"
+			}
+		]
+	},
+	"Tutorial_Part11":{
+		"_NextPartKey": "Tutorial_Part12",
+		"WaitForNextButton": true,
+		"Inital_BlackOutState": "Clear",
+		"EnsurePoses": {
+			"_Camera":"C2",
+			"Player1":"P7",
+			"MysteriousFigure":"MF8",
+			"TutorShroom_1": "_DEAD_",
+			"Squirrel_1": "S1"
+		},
+		"Blocks":[
+			{
+				"BlockType": "PopUp",
+				"PopUpType": "Highlight",
+				"WaitToFinish": false,
+				"Create": "PopUp1",
+				"TargetElement": "MoveableCamera2D/CanvasLayer/CombatUiControl/QueCollectionDisplayControl",
+				"PopupControlSript": "res://Scenes/Dialog/DialogBlockControls/PopUps/OutlinePopUp/outline_pop_up_control.tscn",
+				"DarkenScreen": true,
+				"Padding":[-8,8,-8,8]
+			},
+			{
+				"BlockType": "SpeechBox",
+				"TopBox": false,
+				"WaitToFinish": false,
+				"WaitForNextButton": false,
+				"Hide": false,
+				"Entries": [
+					{
+						"EntryType":"Clear",
+						"ClearSpeaker":false
+					},
+					{
+						"EntryType": "Speaker",
+						"SpeakerName": "MtFr",
+						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Happy.png"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "This is a good chance to talk about ",
+						"NewLine": true
+					}
+				]
+			},
+			{
+				"BlockType":"Delay",
+				"Time": 0
+			},
+			{
+				"BlockType": "PopUp",
+				"WaitToFinish": false,
+				"Create":"SquirrleBubble1",
+				"PopUpType": "SpeechBubble",
+				"TargetActorId": "Squirrel_1",
+				"Text":"TO ME MY COMRADES!!!",
+				"UseBounceText": true,
+				"LetterDelay": 0.03
+			},
+			{
+				"BlockType": "SpeechBox",
+				"TopBox": false,
+				"WaitToFinish": true,
+				"WaitForNextButton": true,
+				"Hide": false,
+				"Entries": [
+					{
+						"EntryType": "Speaker",
+						"SpeakerName": "MtFr",
+						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Happy.png"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "how the Round works when multiple Actors are on the field.",
+						"NewLine": false
+					},
+					{
+						"EntryType":"WaitToRead"
+					}
+				]
+			},
+			{
+				"BlockType": "PopUp",
+				"WaitToFinish": false,
+				"Delete":"SquirrleBubble1"
+			},
+			{
+				"BlockType": "SpeechBox",
+				"TopBox": false,
+				"WaitToFinish": false,
+				"WaitForNextButton": false,
+				"Hide": false,
+				"Entries": [
+					{
+						"EntryType":"Clear",
+						"ClearSpeaker":false
+					},
+					{
+						"EntryType": "Speaker",
+						"SpeakerName": "MtFr",
+						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Happy.png"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "Actors can have a different number of actions per turn. I think I've got a flash- ",
+						"NewLine": false
+					},
+					{
+						"EntryType":"WaitToRead"
+					}
+				]
+			},
+			{
+				"BlockType":"Delay",
+				"Time": 0.4
+			},
+			{
+				"BlockType":"SpawnActor",
+				"SpawnNodeList": ["SSquirrel_Arm1"]
+			},
+			{
+				"BlockType": "MoveActor",
+				"WaitToFinish": false,
+				"TargetActorId": "Squirrel_Arm1",
+				"PathMarkerName": "SA1",
+				"FollowActor": false,
+				"SpeedScale": 1
+			},
+			{
+				"BlockType":"Delay",
+				"Time": 0.4
+			},
+			{
+				"BlockType":"SpawnActor",
+				"SpawnNodeList": ["SSquirrel_2"]
+			},
+			{
+				"BlockType": "MoveActor",
+				"WaitToFinish": false,
+				"TargetActorId": "Squirrel_2",
+				"PathMarkerName": "S2",
+				"FollowActor": false,
+				"SpeedScale": 1
+			},
+			{
+				"BlockType":"Delay",
+				"Time": 0.4
+			},
+			{
+				"BlockType":"SpawnActor",
+				"SpawnNodeList": ["SSquirrel_3"]
+			},
+			{
+				"BlockType": "MoveActor",
+				"WaitToFinish": false,
+				"TargetActorId": "Squirrel_3",
+				"PathMarkerName": "S3",
+				"FollowActor": false,
+				"SpeedScale": 1
+			},
+			{
+				"BlockType":"Delay",
+				"Time": 0.4
+			},
+			{
+				"BlockType":"SpawnActor",
+				"SpawnNodeList": ["SSquirrel_Arm2"]
+			},
+			{
+				"BlockType": "MoveActor",
+				"WaitToFinish": false,
+				"TargetActorId": "Squirrel_Arm2",
+				"PathMarkerName": "SA2",
+				"FollowActor": false,
+				"SpeedScale": 1
+			},
+			{
+				"BlockType": "SpeechBox",
+				"TopBox": false,
+				"WaitToFinish": true,
+				"WaitForNextButton": true,
+				"Hide": false,
+				"Entries": [
+					{
+						"EntryType": "Speaker",
+						"SpeakerName": "MtFr",
+						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Neutral.png"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "umm",
+						"NewLine": false
+					},
+					{
+						"EntryType": "Text",
+						"Text": "... ",
+						"LetterDelay":0.3,
+						"NewLine": false
+					},
+					{
+						"EntryType":"WaitToRead"
+					}
+				]
+			},
+			{
+				"BlockType": "SpeechBox",
+				"TopBox": false,
+				"WaitToFinish": true,
+				"WaitForNextButton": true,
+				"Hide": false,
+				"Entries": [
+					{
+						"EntryType": "Speaker",
+						"SpeakerName": "MtFr",
+						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Neutral.png"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "There's more of them than I though.",
+						"NewLine": true
+					},
+					{
+						"EntryType":"WaitToRead"
+					}
+				]
+			},
+			{
+				"BlockType": "PopUp",
+				"PopUpType": "Highlight",
+				"WaitToFinish": false,
+				"Delete": "PopUp1"
+			},
+			{
+				"BlockType": "SpeechBox",
+				"TopBox": false,
+				"WaitToFinish": true,
+				"WaitForNextButton": true,
+				"Hide": false,
+				"Entries": [
+					{
+						"EntryType":"Clear",
+						"ClearSpeaker": false
+					},
+					{
+						"EntryType": "Speaker",
+						"SpeakerName": "MtFr",
+						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Happy.png"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "That's fine though.",
+						"NewLine": false
+					}
+				]
+			},
+			{
+				"WaitToFinish": true,
+				"WaitForNextButton": false,
+				"BlockType": "PanCamera",
+				"TargetType": "Actor",
+				"ActorId": "Squirrel_Arm1"
+			},
+			{
+				"BlockType": "SpeechBox",
+				"TopBox": false,
+				"WaitToFinish": true,
+				"WaitForNextButton": true,
+				"Hide": false,
+				"Entries": [
+					{
+						"EntryType": "Text",
+						"Text": "See theses Squirriors?.",
+						"NewLine": true
+					}
+				]
+			},
+			{
+				"BlockType": "MoveActor",
+				"WaitToFinish": false,
+				"TargetActorId": "Squirrel_Arm1",
+				"PathMarkerName": "SA1_2",
+				"FollowActor": false,
+				"SpeedScale": 1
+			},
+			{
+				"BlockType":"SpawnActor",
+				"SpawnNodeList": ["SSquirrel_Wiz1"]
+			},
+			{
+				"BlockType": "MoveActor",
+				"WaitToFinish": false,
+				"TargetActorId": "Squirrel_Wiz1",
+				"PathMarkerName": "SA1",
+				"FollowActor": false,
+				"SpeedScale": 1
+			},
+			{
+				"BlockType": "SpeechBox",
+				"TopBox": false,
+				"WaitToFinish": true,
+				"WaitForNextButton": false,
+				"Hide": false,
+				"Entries": [
+					{
+						"EntryType":"Clear",
+						"ClearSpeaker": false
+					},
+					{
+						"EntryType": "Speaker",
+						"SpeakerName": "MtFr",
+						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Happy.png"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "Looks like they are wearing heavy Armor, so you'll want to-",
+						"NewLine": false
+					}
+				]
+			},
+			{
+				"BlockType": "MoveActor",
+				"WaitToFinish": false,
+				"TargetActorId": "Squirrel_Arm2",
+				"PathMarkerName": "SA2_2",
+				"FollowActor": false,
+				"SpeedScale": 1
+			},
+			{
+				"BlockType":"SpawnActor",
+				"SpawnNodeList": ["SSquirrel_Wiz2"]
+			},
+			{
+				"BlockType": "MoveActor",
+				"WaitToFinish": false,
+				"TargetActorId": "Squirrel_Wiz2",
+				"PathMarkerName": "SA2",
+				"FollowActor": false,
+				"SpeedScale": 1
+			},
+			{
+				"BlockType": "SpeechBox",
+				"TopBox": false,
+				"WaitToFinish": true,
+				"WaitForNextButton": false,
+				"Hide": false,
+				"Entries": [
+					{
+						"EntryType": "Speaker",
+						"SpeakerName": "MtFr",
+						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Squint.png"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "a",
+						"NewLine": false
+					},
+					{
+						"EntryType": "Text",
+						"Text": "aaaa",
+						"LetterDelay":0.3,
+						"NewLine": false
+					},
+					{
+						"EntryType": "Text",
+						"Text": "nd they've got some Squirrcerer",
+						"NewLine": false
+					},
+					{
+						"EntryType": "Text",
+						"Text": "... ",
+						"LetterDelay":0.3,
+						"NewLine": false
+					},
+					{
+						"EntryType": "Text",
+						"Text": "great.",
+						"NewLine": false
+					}
+				]
+			}
+		]
+	},
+	"Tutorial_Part12":{
+		"_NextPartKey": "End",
+		"WaitForNextButton": false,
+		"Inital_BlackOutState": "Clear",
+		"EnsurePoses": {
+			"_Camera":"C2",
+			"Player1":"P7",
+			"MysteriousFigure":"MF8",
+			"TutorShroom_1": "_DEAD_",
+			"Squirrel_1": "S1"
+		},
+		"Blocks":[
+			{
+				"BlockType": "SpeechBox",
+				"TopBox": false,
+				"WaitToFinish": false,
+				"WaitForNextButton": false,
+				"Hide": false,
+				"Entries": [
+					{
+						"EntryType":"Clear",
+						"ClearSpeaker":false
+					},
+					{
+						"EntryType": "Speaker",
+						"SpeakerName": "MtFr",
+						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Happy.png"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "Let's do this, ",
+						"NewLine": true
+					}
+
+				]
+			},
+			{
+				"WaitToFinish": true,
+				"WaitForNextButton": false,
+				"BlockType": "PanCamera",
+				"TargetType": "Actor",
+				"ActorId": "Player1"
+			},
+			{
+				"BlockType": "SpeechBox",
+				"TopBox": false,
+				"WaitToFinish": true,
+				"WaitForNextButton": true,
+				"Hide": false,
+				"Entries": [
+					{
+						"EntryType": "Text",
+						"Text": "you take the rest of the Flash Cards,",
+						"NewLine": false
+					},
+					{
+						"EntryType":"Delay",
+						"Delay": 0.3
+					},
+					{
+						"EntryType": "Text",
+						"Text": " and I'll wait in the safty of this cabin.",
+						"NewLine": true
+					}
+
+				]
+			},
+			{
+				"BlockType": "SpeechBox",
+				"TopBox": false,
+				"WaitToFinish": true,
+				"WaitForNextButton": true,
+				"Hide": false,
+				"Entries": [
+					{
+						"EntryType":"Clear",
+						"ClearSpeaker":false
+					},
+					{
+						"EntryType": "Speaker",
+						"SpeakerName": "MtFr",
+						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Smile.png"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "You've got this, Hero.",
+						"NewLine": false
+					},
+					{
+						"EntryType":"WaitToRead"
+					}
+
+				]
+			},
+			{
+				"BlockType": "SpeechBox",
+				"TopBox": false,
+				"WaitToFinish": false,
+				"WaitForNextButton": false,
+				"Hide": true,
+				"Entries": [
+					{
+						"EntryType":"Clear",
+						"ClearSpeaker":true
+					}
+
+				]
+			},
+			{
+				"BlockType": "MoveActor",
+				"WaitToFinish": false,
+				"TargetActorId": "MysteriousFigure",
+				"PathMarkerName": "MF9",
+				"FollowActor": false,
+				"SpeedScale": 1
+			},
+			{
+				"BlockType": "MoveActor",
+				"WaitToFinish": false,
+				"AsyncWaitToFinish": true,
+				"TargetActorId": "Player1",
+				"PathMarkerName": "P8",
+				"FollowActor": true,
+				"SpeedScale": 1
+			},
+			{
+				"BlockType": "Delay",
+				"Time": 1
+			},
+			{
+				"BlockType": "PopUp",
+				"WaitToFinish": true,
+				"Create": "TutorialCards_1",
+				"PopUpType":"TutorialCard",
+				"Cards": ["Page Que","Movement","Targeting Actors","Targeting Spots","Turns and Gaps","Turn Order","Crashing","Armor and Damage"],
+				"Index": 4
+			}
+		]
+	},
+	"End":{
+		"_NextPartKey": null,
+		"WaitForNextButton": false,
+		"Inital_BlackOutState": "Clear",
+		"EnsurePoses": {
+			"_Camera":"P8",
+			"Player1":"P8",
+			"MysteriousFigure":"MF9",
+			"TutorShroom_1": "_DEAD_",
+			"TutorShroom_2": "_DEAD_",
+			"Squirrel_1": "S1",
+			"Squirrel_2": "S2",
+			"Squirrel_3": "S3",
+			"Squirrel_Arm1": "SA1_2",
+			"Squirrel_Arm2": "SA2_2",
+			"Squirrel_Wiz1": "SA1",
+			"Squirrel_Wiz2": "SA2"
+		},
+		"Blocks":[]
+	}
 }
