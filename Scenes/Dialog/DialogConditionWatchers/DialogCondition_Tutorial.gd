@@ -6,6 +6,10 @@ func _on_create():
 	if !condition_key:
 		self._is_finished = true
 		return
+	if condition_key == "SaveTutorial":
+		if SaveLoadMenu.Instance:
+			SaveLoadMenu.Instance.menu_closed.connect(_on_save_menu_closed)
+			return
 	if _data.has("RequiredActionQue"):
 		var player_actor = StoryState.get_player_actor()
 		player_actor.Que.action_que_changed.connect(_on_que_change.bind(player_actor))
@@ -38,6 +42,10 @@ func _is_condition(data:Dictionary, game_state:GameStateData, delta:float)->bool
 	#if player_actor.Que.
 	return _is_finished
 
+func _on_save_menu_closed():
+	_is_finished = true
+	
+
 func _on_que_change(actor:BaseActor):
 	if not actor.Que.is_ready():
 		return
@@ -65,6 +73,11 @@ func _on_que_change(actor:BaseActor):
 
 func get_next_part_key()->String:
 	var condition_key = _data.get("ConditionKey", null)
+	if condition_key == "SaveTutorial":
+		if StoryState.story_flags.has("LastSaveId"):
+			return "ScribeTutorialEnd"
+		else:
+			return "NoSave_ScribeTutorialEnd"
 	if condition_key == "Condition_WalkInput":
 		if _dialog_controller._condition_flags.get('PassedTutorial_Walk', false):
 			return "Tutorial_Part2"

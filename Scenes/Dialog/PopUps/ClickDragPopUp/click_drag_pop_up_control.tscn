@@ -1,0 +1,106 @@
+[gd_scene load_steps=4 format=3 uid="uid://8k6sk7jgh2s8"]
+
+[ext_resource type="Script" path="res://Scenes/Dialog/PopUps/ClickDragPopUp/click_drag_pop_up_control.gd" id="1_x02y6"]
+[ext_resource type="Texture2D" uid="uid://cdx22n82nog8i" path="res://Scenes/Dialog/PopUps/OutlinePopUp/DottedPatch_64_8.png" id="2_7juwr"]
+[ext_resource type="Theme" uid="uid://dwinll8pgdjhc" path="res://Scenes/Themes/standard_theme.tres" id="3_tya8c"]
+
+[node name="ClickDragPopUpControl" type="Control" node_paths=PackedStringArray("click_control", "click_outline_patch", "drag_control", "drag_outline_patch", "click_button")]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+script = ExtResource("1_x02y6")
+click_control = NodePath("ClickControl")
+click_outline_patch = NodePath("ClickControl/ClickOutlinePatch")
+drag_control = NodePath("DragControl")
+drag_outline_patch = NodePath("DragControl/ClickOutlinePatch")
+click_button = NodePath("ClickControl/Button")
+
+[node name="ClickControl" type="Control" parent="."]
+anchors_preset = 0
+offset_left = 33.0
+offset_top = 107.0
+offset_right = 147.0
+offset_bottom = 201.0
+
+[node name="ClickOutlinePatch" type="NinePatchRect" parent="ClickControl"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_7juwr")
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+
+[node name="Label" type="Label" parent="ClickControl/ClickOutlinePatch"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 0.5
+offset_top = -40.0
+grow_horizontal = 2
+theme = ExtResource("3_tya8c")
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 32
+text = "Click"
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="ClickControl"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="DragControl" type="Control" parent="."]
+anchors_preset = 0
+offset_left = 191.0
+offset_top = 120.0
+offset_right = 305.0
+offset_bottom = 214.0
+
+[node name="ClickOutlinePatch" type="NinePatchRect" parent="DragControl"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_7juwr")
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+
+[node name="Label" type="Label" parent="DragControl/ClickOutlinePatch"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 0.5
+offset_top = -40.0
+grow_horizontal = 2
+theme = ExtResource("3_tya8c")
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 32
+text = "Drag"
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="DragControl"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

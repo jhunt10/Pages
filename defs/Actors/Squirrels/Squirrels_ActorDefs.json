@@ -58,8 +58,22 @@
 			"HealthPotionS":2,
 			"StaminaPotionM":2,
 			"ManaPotionM":2,
-			"ChuckAcorn_PageItem":1,
 			"HealthPotionL":1
+        }
+	},
+	{
+		"ParentKey": "Squirrel",
+		"ActorKey": "FirstSquirrel",
+		"Details":{
+			"DisplayName": "Squirrel",
+			"SnippetDesc": "A squirrel.",
+			"Description": "Dangerous political extremist who will commit any atrocity to see their new squirreld order come to light.",
+			"Tags": ["Squirrel"],
+			"LargeIcon":"Squirrel_Icon.png",
+			"SmallIcon":"Squirrel_Icon.png"
+		},
+		"DropItems":{
+			"ChuckAcorn_PageItem":1
         }
 	},
 	{

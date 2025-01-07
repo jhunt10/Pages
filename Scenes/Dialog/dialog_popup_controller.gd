@@ -1,7 +1,7 @@
 class_name DialogPopUpController
 extends Control
 
-enum PopUpTypes { SpeechBubble, Highlight, TutorialCard}
+enum PopUpTypes { SpeechBubble, Highlight, TutorialCard, ClickDrag}
 
 @export var parent_dialog_controller:DialogController
 var _popups:Dictionary = {}
@@ -42,6 +42,9 @@ func handle_pop_up(block_data:Dictionary)->bool:
 	
 	if popup_type == PopUpTypes.TutorialCard:
 		return create_tutorial_card(block_data)
+	
+	if popup_type == PopUpTypes.ClickDrag:
+		return create_click_drag(block_data)
 	return false
 
 ## Returns true if block should be waitied on
@@ -50,7 +53,6 @@ func create_highlight(block_data:Dictionary)->bool:
 	var screen_size = parent_dialog_controller.get_viewport_rect().size
 	var popup_pos = null
 	var popup_size = null
-	var size = null
 	
 	var popup_rect_arr = block_data.get("Rect", null)
 	if popup_rect_arr:
@@ -66,7 +68,12 @@ func create_highlight(block_data:Dictionary)->bool:
 			printerr("PopUpDialogBlock: No Target Element found.")
 		if target_element is Control:
 			popup_pos = target_element.get_screen_position()
-			popup_size = target_element.size
+			popup_size = target_element.get_global_rect().size
+			
+			var hack_scale = block_data.get("HackScale", [1,1])
+			popup_size.x = popup_size.x * hack_scale[0]
+			popup_size.y = popup_size.y * hack_scale[1]
+			
 			var padding = block_data.get("Padding", [0,0,0,0])
 			popup_pos.x += padding[0]
 			popup_pos.y += padding[2]
@@ -74,7 +81,6 @@ func create_highlight(block_data:Dictionary)->bool:
 			popup_size.y += padding[3] - padding[2]
 		else:
 			printerr("Target Element is not a control")
-		
 	if popup_pos != null and popup_size != null:
 		var popup_path = block_data.get("PopupControlSript", null)
 		if !popup_path:
@@ -143,3 +149,16 @@ func create_tutorial_card(block_data):
 	new_cards.closed.connect(parent_dialog_controller._on_popup_finished.bind(pop_up_key))
 	parent_dialog_controller._block_states[pop_up_key] = DialogController.BlockStates.Playing
 	return true
+
+func create_click_drag(block_data):
+	var pop_up_key = block_data.get("Create", null)
+	if !pop_up_key:
+		printerr("DialogController: No 'PopUpKey' provided on SpeechBubble block.")
+		return false
+	var new_popup:ClickDragPopUpControl = load("res://Scenes/Dialog/PopUps/ClickDragPopUp/click_drag_pop_up_control.tscn").instantiate()
+	parent_dialog_controller.add_child(new_popup)
+	new_popup.set_dialog_block(parent_dialog_controller, block_data)
+	parent_dialog_controller._block_states[pop_up_key] = DialogController.BlockStates.Playing
+	new_popup.finished.connect(parent_dialog_controller._on_popup_finished.bind(pop_up_key))
+	return true
+	

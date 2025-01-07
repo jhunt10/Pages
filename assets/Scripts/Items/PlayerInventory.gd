@@ -120,6 +120,16 @@ static func get_item_or_top_stack(item:BaseItem)->BaseItem:
 		return item
 	return null
 
+static func get_item_by_key(item_key:String)->BaseItem:
+	if _stacked_item_ids_by_keys.has(item_key):
+		var item_id = _stacked_item_ids_by_keys[item_key][0]
+		return ItemLibrary.get_item(item_id)
+	for item_id in _held_unique_items_ids:
+		var item = ItemLibrary.get_item(item_id)
+		if item and item.ItemKey == item_key:
+			return item
+	return null
+
 static func get_sorted_items()->Array:
 	var items = list_held_item_stacks()
 	items.sort_custom(sort_item)

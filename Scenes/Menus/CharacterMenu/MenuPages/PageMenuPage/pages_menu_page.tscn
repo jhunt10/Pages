@@ -1,13 +1,14 @@
-[gd_scene load_steps=11 format=4 uid="uid://c4bhs27nmviba"]
+[gd_scene load_steps=12 format=4 uid="uid://c4bhs27nmviba"]
 
 [ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/PageMenuPage/page_page_control.gd" id="1_1k8ki"]
-[ext_resource type="Texture2D" uid="uid://c4yedxpiinlff" path="res://Scenes/Menus/CharacterMenu/MenuPages/outline.png" id="2_bd1ih"]
+[ext_resource type="Texture2D" uid="uid://igbqbvrp4q2" path="res://Scenes/Menus/CharacterMenu/MenuPages/PageMenuPage/TtitleItem_Patch_64_16.png" id="2_fvu4f"]
 [ext_resource type="Theme" uid="uid://dwinll8pgdjhc" path="res://Scenes/Themes/standard_theme.tres" id="3_2qajg"]
+[ext_resource type="Texture2D" uid="uid://syhgjauerse4" path="res://Scenes/Menus/CharacterMenu/MenuPages/PageMenuPage/TtitleLabel_Patch_64_16.png" id="4_clxke"]
 [ext_resource type="Texture2D" uid="uid://dsg2v6rx5tbaj" path="res://defs/Items/Equipment/TestBook.png" id="4_wkknv"]
+[ext_resource type="PackedScene" uid="uid://c4p8fix52jdyq" path="res://Scenes/UiNodes/FitScaleLabel/fit_scale_label.tscn" id="5_p805u"]
 [ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/PageMenuPage/sub_book_container.gd" id="6_kqus5"]
 [ext_resource type="PackedScene" uid="uid://dugyf6csi731x" path="res://Scenes/Menus/CharacterMenu/MenuPages/PageMenuPage/HDotScrollBar/h_dot_scroll_bar_control.tscn" id="7_f7tj7"]
 [ext_resource type="Texture2D" uid="uid://uml26adl6hu3" path="res://Scenes/Menus/CharacterMenu/MenuPages/PageMenuPage/FancyGrid_TileSheet.png" id="7_hgl8k"]
-[ext_resource type="Texture2D" uid="uid://e0f7tq3irfca" path="res://Scenes/Menus/CharacterMenu/MenuPages/PageMenuPage/TtitleBackground.png" id="8_h4lnb"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wck0g"]
 texture = ExtResource("7_hgl8k")
@@ -129,78 +130,12 @@ anchors_preset = 0
 offset_right = 280.0
 offset_bottom = 395.0
 script = ExtResource("1_1k8ki")
-name_label = NodePath("TitleRect/BookNameLabel")
-book_icon = NodePath("TitleRect/BookIconRect")
+name_label = NodePath("VBoxContainer/TitleContainer/NinePatchRect2/FitScaleLabel")
+book_icon = NodePath("VBoxContainer/TitleContainer/NinePatchRect/BookIconRect")
 premade_sub_container = NodePath("VBoxContainer/FlowContainer/SubBookContainer")
 sub_container = NodePath("VBoxContainer/FlowContainer")
 slot_width = 4
 scroll_dots = NodePath("VBoxContainer/HDotScrollBarControl")
-
-[node name="Background" type="NinePatchRect" parent="."]
-visible = false
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 12.0
-offset_top = 145.0
-offset_right = -12.0
-offset_bottom = 65.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("2_bd1ih")
-patch_margin_left = 18
-patch_margin_top = 18
-patch_margin_right = 18
-patch_margin_bottom = 18
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Background"]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 8.0
-offset_top = 8.0
-offset_right = -8.0
-offset_bottom = -8.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Background/VBoxContainer"]
-layout_mode = 2
-
-[node name="FlowContainer" type="FlowContainer" parent="Background/VBoxContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="TitleRect" type="TextureRect" parent="."]
-layout_mode = 0
-offset_left = 12.0
-offset_top = 5.0
-offset_right = 268.0
-offset_bottom = 71.0
-texture = ExtResource("8_h4lnb")
-
-[node name="BookIconRect" type="TextureRect" parent="TitleRect"]
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 0
-offset_top = 1.0
-offset_right = 64.0
-offset_bottom = 65.0
-texture = ExtResource("4_wkknv")
-
-[node name="BookNameLabel" type="Label" parent="TitleRect"]
-self_modulate = Color(0.498039, 0, 0, 1)
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 64.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("3_2qajg")
-text = "Book Name"
-horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -208,11 +143,65 @@ anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 12.0
-offset_top = 76.0
+offset_top = 5.0
 offset_right = -12.0
 offset_bottom = -5.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="TitleContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="NinePatchRect" type="NinePatchRect" parent="VBoxContainer/TitleContainer"]
+custom_minimum_size = Vector2(44, 44)
+layout_mode = 2
+texture = ExtResource("2_fvu4f")
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+
+[node name="BookIconRect" type="TextureRect" parent="VBoxContainer/TitleContainer/NinePatchRect"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 6.0
+offset_top = 6.0
+offset_right = -6.0
+offset_bottom = -6.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_wkknv")
+expand_mode = 1
+
+[node name="NinePatchRect2" type="NinePatchRect" parent="VBoxContainer/TitleContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("4_clxke")
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+
+[node name="FitScaleLabel" parent="VBoxContainer/TitleContainer/NinePatchRect2" instance=ExtResource("5_p805u")]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+text = "Book Name"
+center_x = true
 
 [node name="FlowContainer" type="FlowContainer" parent="VBoxContainer"]
 layout_mode = 2

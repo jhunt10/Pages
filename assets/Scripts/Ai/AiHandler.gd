@@ -111,7 +111,9 @@ static func path_to_target(actor:BaseActor, start_pos:MapPos, target_pos:MapPos,
 	var end_index = _pos_to_index(target_pos, game_state)
 	# Disable occupied spots 
 	for actor_id in game_state.MapState._actor_pos_cache.keys():
-		var check_actor = game_state.get_actor(actor_id)
+		var check_actor = game_state.get_actor(actor_id, false)
+		if not check_actor or check_actor.is_dead:
+			continue
 		var check_pos:MapPos = game_state.MapState._actor_pos_cache[actor_id]
 		if actor and actor_id == actor.Id:
 			continue

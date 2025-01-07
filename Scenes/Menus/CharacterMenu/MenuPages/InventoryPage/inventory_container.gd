@@ -98,6 +98,7 @@ func build_item_list():
 		if item.can_stack:
 			button.set_item(item, PlayerInventory.get_item_stack_count(item.ItemKey))
 		button.visible = should_item_be_visible(item)
+		
 	await get_tree().process_frame
 	scroll_bar.calc_bar_size()
 
@@ -111,6 +112,7 @@ func _build_button(item:BaseItem)->InventoryItemButton:
 	new_button.button.button_up.connect(_on_item_button_up.bind(new_button))
 	new_button.button.mouse_entered.connect(_mouse_enter_button.bind(new_button))
 	new_button.button.mouse_exited.connect(_mouse_exit_button.bind(new_button))
+	new_button.name = "InventoryButton_" + item.ItemKey
 	_item_buttons[item.Id] = new_button
 	return new_button
 

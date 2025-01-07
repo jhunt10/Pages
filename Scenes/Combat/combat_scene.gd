@@ -30,6 +30,7 @@ func _enter_tree() -> void:
 
 func _exit_tree() -> void:
 	QueController = null
+	Instance = null
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

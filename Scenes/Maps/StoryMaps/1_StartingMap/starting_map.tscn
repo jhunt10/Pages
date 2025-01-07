@@ -1092,7 +1092,6 @@ tile_set = SubResource("TileSet_i35ih")
 tile_set = SubResource("TileSet_eodif")
 
 [node name="MarkerTileMapLayer" type="TileMapLayer" parent="."]
-visible = false
 tile_set = SubResource("TileSet_o1yif")
 
 [node name="Path_S1" type="Node2D" parent="MarkerTileMapLayer" node_paths=PackedStringArray("sprite", "label")]
@@ -1384,14 +1383,12 @@ map_coor = Vector2i(10, 4)
 
 [node name="SpwanNode_Player" type="Sprite2D" parent="MarkerTileMapLayer"]
 self_modulate = Color(0, 1, 0, 1)
-position = Vector2(176, 464)
+position = Vector2(176, 432)
 texture = ExtResource("10_hh112")
 script = ExtResource("11_md0j5")
-marker_name = null
 spawn_actor_key = "Player1"
 is_player = true
-wait_to_spawn = null
-map_coor = Vector2i(5, 14)
+map_coor = Vector2i(5, 13)
 
 [node name="SpwanNode_MF" type="Sprite2D" parent="MarkerTileMapLayer"]
 position = Vector2(48, 368)
@@ -1401,10 +1398,8 @@ hframes = 12
 vframes = 4
 frame = 24
 script = ExtResource("11_md0j5")
-marker_name = null
 spawn_actor_key = "MysteriousFigure"
 spawn_actor_id = "MysteriousFigure"
-wait_to_spawn = null
 facing = 1
 map_coor = Vector2i(1, 11)
 
@@ -1414,10 +1409,8 @@ texture = ExtResource("13_ol0fu")
 hframes = 12
 vframes = 4
 script = ExtResource("11_md0j5")
-marker_name = null
 spawn_actor_key = "TutorShroom"
 spawn_actor_id = "TutorShroom_1"
-wait_to_spawn = null
 map_coor = Vector2i(11, 10)
 
 [node name="SpwanNode_Mushroom2" type="Sprite2D" parent="MarkerTileMapLayer"]
@@ -1427,10 +1420,8 @@ offset = Vector2(0, -4)
 hframes = 12
 vframes = 4
 script = ExtResource("11_md0j5")
-marker_name = null
 spawn_actor_key = "TutorShroom_Roof"
 spawn_actor_id = "RoofShroom_1"
-wait_to_spawn = null
 map_coor = Vector2i(12, 7)
 
 [node name="SpwanNode_Squirrel1" type="Sprite2D" parent="MarkerTileMapLayer"]
@@ -1441,7 +1432,7 @@ hframes = 12
 vframes = 4
 script = ExtResource("11_md0j5")
 marker_name = "SSquirrel_1"
-spawn_actor_key = "Squirrel"
+spawn_actor_key = "FirstSquirrel"
 spawn_actor_id = "Squirrel_1"
 wait_to_spawn = true
 facing = 2

@@ -39,6 +39,7 @@ func set_slot_set_data(actor:BaseActor, page_holder:PageHolder, slot_set_data:Di
 			x = 0
 			y += 1
 			var new_row = HBoxContainer.new()
+			new_row.name = "PageRow" + str(y)
 			self.add_child(new_row)
 			new_row.add_theme_constant_override("separation", 0)
 			page_slots_containers.append(new_row)
@@ -48,6 +49,7 @@ func set_slot_set_data(actor:BaseActor, page_holder:PageHolder, slot_set_data:Di
 		new_button.button.mouse_entered.connect(on_slot_button_mouse_enter.bind(raw_index))
 		new_button.button.mouse_exited.connect(on_slot_button_mouse_exit.bind(raw_index))
 		page_slots_containers[page_slots_containers.size()-1].add_child(new_button)
+		new_button.name = "PageSlot" + str(sub_index)
 		_buttons[raw_index] = new_button
 		var item_id = page_holder.get_item_id_in_slot(raw_index)
 		if item_id:

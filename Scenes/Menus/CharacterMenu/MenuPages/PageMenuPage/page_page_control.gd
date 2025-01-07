@@ -7,7 +7,7 @@ signal item_button_up(context, item_key, index)
 signal mouse_enter_item(context, item_key, index)
 signal mouse_exit_item(context, item_key, index)
 
-@export var name_label:Label
+@export var name_label:FitScaleLabel
 @export var book_icon:TextureRect
 @export var premade_sub_container:SubBookContainer
 @export var sub_container:FlowContainer
@@ -124,6 +124,7 @@ func _create_sub_container(slot_set_data:Dictionary)->SubBookContainer:
 	new_sub.item_button_up.connect(_on_item_button_up)
 	new_sub.mouse_enter_item.connect(_on_mouse_enter_item_button)
 	new_sub.mouse_exit_item.connect(_on_mouse_exit_item_button)
+	new_sub.name = "SubContainer_" + slot_key
 	return new_sub
 
 func clear_highlights():

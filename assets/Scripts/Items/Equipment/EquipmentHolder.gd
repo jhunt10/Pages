@@ -1,7 +1,7 @@
 class_name EquipmentHolder
 extends BaseItemHolder
 
-const LOGGING = false
+const LOGGING = true
 
 func _init(actor) -> void:
 	super(actor)

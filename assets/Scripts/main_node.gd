@@ -154,7 +154,7 @@ func open_effect_editor():
 func open_tutorial():
 	if current_scene:
 		current_scene.queue_free()
-	StoryState.start_new_story("Tutorial")
+	StoryState.start_new_story("Soldier")
 	var combat_scene:CombatRootControl = load("res://Scenes/Combat/combat_scene.tscn").instantiate()
 	combat_scene.load_init_state("res://Scenes/Maps/StoryMaps/1_StartingMap/starting_map.tscn")
 	current_scene = combat_scene

@@ -1,6 +1,6 @@
 {
 	"_MetaData_": {
-		"StartPartKey": "AfterCombat"
+		"StartPartKey": "Tutorial_Part12"
 	},
 	"PrologSwitch": {
 		"_NextPartLogic": 
@@ -798,7 +798,7 @@
 			},{
 				"BlockType": "SpeechBox",
 				"WaitToFinish": true,
-				"WaitForNextButton": true,
+				"WaitForNextButton": false,
 				"Entries": [
 					{
 						"EntryType": "Clear",
@@ -811,7 +811,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "Now that I know your name, I'm Min.."
+						"Text": "Now that I know your name, I'm a Min.."
 					},
 					{
 						"EntryType": "Delay",
@@ -820,7 +820,7 @@
 					},
 					{
 						"EntryType": "BackTrack",
-						"Text": " Min.."
+						"Text": " a Min.."
 					},
 					{
 						"EntryType": "Text",
@@ -866,7 +866,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "So partner, I can tell you've had some training, but your PageBook is looking a bit dusty."
+						"Text": "So Hero, I can tell you've had some training, but your PageBook is looking a bit dusty."
 					},
 					{
 						"EntryType": "WaitToRead"
@@ -1086,7 +1086,7 @@
 				"WaitToFinish": false,
 				"Create": "PopUp1",
 				"TargetElement": "MoveableCamera2D/CanvasLayer/CombatUiControl/QueInputControl/BackPatchContainer",
-				"PopupControlSript": "res://Scenes/Dialog/DialogBlockControls/PopUps/OutlinePopUp/outline_pop_up_control.tscn",
+				"PopupControlSript": "res://Scenes/Dialog/PopUps/OutlinePopUp/outline_pop_up_control.tscn",
 				"DarkenScreen": true
 			},
 			{
@@ -1224,7 +1224,8 @@
 				"Delete": "PopUp1",
 				"Create": "PopUp2",
 				"TargetElement": "MoveableCamera2D/CanvasLayer/CombatUiControl/QueDisplayControl",
-				"PopupControlSript": "res://Scenes/Dialog/DialogBlockControls/PopUps/OutlinePopUp/outline_pop_up_control.tscn"
+				"PopupControlSript": "res://Scenes/Dialog/PopUps/OutlinePopUp/outline_pop_up_control.tscn",
+				"DarkenScreen": true
 			},
 			{
 				"BlockType": "SpeechBox",
@@ -2116,7 +2117,8 @@
 				"Hide": false,
 				"Entries": [
 					{
-						"EntryType": "Clear"
+						"EntryType": "Clear",
+						"ClearSpeaker": false
 					},
 					{
 						"EntryType": "Speaker",
@@ -2206,10 +2208,6 @@
 						"EntryType": "Text",
 						"Text": "Queue up these Pages:",
 						"NewLine": false
-					},
-					{
-						"EntryType": "IconImage",
-						"Image": "res://data/Actions/Movement/MoveForward.png"
 					},
 					{
 						"EntryType": "IconImage",
@@ -3257,7 +3255,7 @@
 				"WaitToFinish": false,
 				"Create": "PopUp1",
 				"TargetElement": "MoveableCamera2D/CanvasLayer/CombatUiControl/QueCollectionDisplayControl",
-				"PopupControlSript": "res://Scenes/Dialog/DialogBlockControls/PopUps/OutlinePopUp/outline_pop_up_control.tscn",
+				"PopupControlSript": "res://Scenes/Dialog/PopUps/OutlinePopUp/outline_pop_up_control.tscn",
 				"DarkenScreen": true,
 				"Padding":[-8,8,-8,8]
 			},
@@ -3419,7 +3417,7 @@
 				"BlockType": "SpeechBox",
 				"TopBox": false,
 				"WaitToFinish": true,
-				"WaitForNextButton": true,
+				"WaitForNextButton": false,
 				"Hide": false,
 				"Entries": [
 					{
@@ -3771,12 +3769,12 @@
 			"TutorShroom_1": "_DEAD_",
 			"TutorShroom_2": "_DEAD_",
 			"Squirrel_1": "S1",
-			"@Squirrel_2": "S2",
-			"@Squirrel_3": "S3",
-			"@Squirrel_Arm1": "SA1_2",
-			"@Squirrel_Arm2": "SA2_2",
-			"@Squirrel_Wiz1": "SA1",
-			"@Squirrel_Wiz2": "SA2"
+			"Squirrel_2": "S2",
+			"Squirrel_3": "S3",
+			"Squirrel_Arm1": "SA1_2",
+			"Squirrel_Arm2": "SA2_2",
+			"Squirrel_Wiz1": "SA1",
+			"Squirrel_Wiz2": "SA2"
 		},
 		"Blocks":[]
 	},

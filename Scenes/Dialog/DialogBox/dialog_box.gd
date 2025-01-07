@@ -96,10 +96,11 @@ func _handle_entry(entry_data:Dictionary, raw_delta, remaining_delta)->bool:
 		if entry_data.get("ClearSpeaker", true):
 			_clear_speaker()
 		_reader_timer = 0.0
-		for child in entry_contaier.get_children():
-			if child == premade_text_label: continue
-			if child == premade_question_option: continue
-			child.queue_free()
+		if entry_data.get("ClearText", true):
+			for child in entry_contaier.get_children():
+				if child == premade_text_label: continue
+				if child == premade_question_option: continue
+				child.queue_free()
 		scroll_bar.calc_bar_size()
 		scroll_bar.hide()
 		_delay_timer = -1

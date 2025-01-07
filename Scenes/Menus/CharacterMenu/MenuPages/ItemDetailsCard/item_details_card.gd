@@ -2,7 +2,6 @@ class_name ItemDetailsCard
 extends Control
 
 signal exit_button_pressed
-signal action_button_pressed
 signal hide_done
 
 @export var speed:float
@@ -17,8 +16,14 @@ signal hide_done
 @export var weapon_details:WeaponDetailsControl
 @export var armor_details:ArmorDetailsControl
 @export var action_details:ActionDetailsControl
+@export var page_que_details:PageQueDetailsControl
 @export var default_details:DefaultItemDetailsControl
 @export var tag_label:Label
+
+
+@export var equip_button_background:NinePatchRect
+@export var equip_button:Button
+@export var equip_label:FitScaleLabel
 
 enum AnimationStates {In, Showing, Out, Hidden}
 var animation_state:AnimationStates
@@ -81,6 +86,7 @@ func set_item(actor:BaseActor, item:BaseItem):
 	weapon_details.hide()
 	armor_details.hide()
 	action_details.hide()
+	page_que_details.hide()
 	if item is BaseWeaponEquipment:
 		var weapon = (item as BaseWeaponEquipment)
 		weapon_details.set_weapon(actor, weapon)
@@ -97,6 +103,9 @@ func set_item(actor:BaseActor, item:BaseItem):
 		else:
 			default_details.set_item(item)
 			default_details.show()
+	elif item is BaseQueEquipment:
+		page_que_details.set_item(actor, item)
+		page_que_details.show()
 	else:
 		default_details.set_item(item)
 		default_details.show()
@@ -107,4 +116,11 @@ func set_item(actor:BaseActor, item:BaseItem):
 	self.start_show()
 
 func equip_button_pressed():
-	action_button_pressed.emit()
+	if weapon_details.visible:
+		weapon_details.on_eqiup_button_pressed()
+	elif armor_details.visible:
+		armor_details.on_eqiup_button_pressed()
+	elif action_details.visible:
+		action_details.on_eqiup_button_pressed()
+	elif default_details.visible:
+		default_details.on_eqiup_button_pressed()

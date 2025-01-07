@@ -311,13 +311,14 @@ static func _merge_defs(child:Dictionary, parent:Dictionary)->Dictionary:
 	for key:String in child.keys():
 		var val = child[key]
 		if val is Dictionary:
-			val = _merge_defs(child[key], parent.get(key, {}))
+			if not (key == "DropItems"):
+				val = _merge_defs(child[key], parent.get(key, {}))
 		if val is Array:
 			# Default to parent on empty list
 			if val.size() == 0:
 				val = parent.get(key, [])
 			# Merge list only when Strings
-			elif val[0] is String and not key.begins_with("Spawn") and not key.ends_with("Arr"):
+			elif val[0] is String and not (key.begins_with("Spawn") or key.ends_with("Arr")):
 				var new_list = []
 				for arr_val in parent.get(key, []):
 					if not new_list.has(arr_val):

@@ -3,6 +3,8 @@ extends Control
 
 const LOGGING = false
 
+static var Instance:CharacterMenuControl
+
 @export var inventory_tabs_control:ItemFilterTabsControl
 @export var details_card_spawn_point:Control
 @export var equipment_page:EquipmentPageControl
@@ -37,6 +39,7 @@ var _drag_dead_zone = 10
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	Instance = self
 	close_button.pressed.connect(close_menu)
 	tab_equipment_button.pressed.connect(on_tab_pressed.bind("Equipment"))
 	tab_pages_button.pressed.connect(on_tab_pressed.bind("Pages"))
@@ -102,7 +105,13 @@ func set_actor(actor:BaseActor):
 	print("RunTime: %s" % Time.get_time_string_from_unix_time(time_diff))
 
 func close_menu():
-	self.queue_free()
+	var page_que = _actor.equipment.get_que_equipment()
+	if not page_que:
+		equipment_page.play_pagebook_warning_animation()
+	else:
+		self.queue_free()
+		Instance = null
+	
 
 func on_details_card_freed():
 	_current_details_card.queue_free()
@@ -117,7 +126,6 @@ func create_details_card(item:BaseItem):
 		_current_details_card.start_hide()
 	_current_details_card = load("res://Scenes/Menus/CharacterMenu/MenuPages/ItemDetailsCard/item_details_card.tscn").instantiate()
 	details_card_spawn_point.add_child(_current_details_card)
-	#_current_details_card.action_button_pressed.connect(on_details_card_button_pressed)
 	_current_details_card.hide_done.connect(on_details_card_freed)
 	_current_details_card.set_item(_actor, item)
 	_current_details_card.start_show()

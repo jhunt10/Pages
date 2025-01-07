@@ -1,6 +1,8 @@
 class_name CampMenu
 extends Control
 
+static var Instance:CampMenu
+
 @export var camp_options_container:CampOptionsContainer
 @export var system_options_container:CampOptionsContainer
 @export var pretty_picture_texure_rect:TextureRect
@@ -21,6 +23,7 @@ extends Control
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	Instance = self
 	no_shop_pop_up.hide()
 	character_button.button.pressed.connect(_on_prepare_button)
 	quest_button.button.pressed.connect(_on_quest_button)
@@ -85,4 +88,5 @@ func _on_debug_button():
 	MainRootNode.Instance.open_dev_tools()
 
 func _on_quit():
+	Instance = null
 	MainRootNode.Instance.go_to_main_menu()

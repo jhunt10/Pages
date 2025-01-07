@@ -49,7 +49,9 @@ var SnippetDesc:String:
 	get: return details.snippet
 var Description:String:
 	get: return details.description
-var Tags:Array = []
+var Tags:Array:
+	get:
+		return details.tags
 
 var spawn_map_layer
 

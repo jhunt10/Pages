@@ -11,6 +11,7 @@ signal mouse_exit_item(context, item_key, index)
 @export var level_label:Label
 @export var equipment_slots_container:EquipmentDisplayContainer
 @export var stat_box:StatBoxControl
+@export var animation_player:AnimationPlayer
 var _actor:BaseActor
 
 # Called when the node enters the scene tree for the first time.
@@ -60,7 +61,6 @@ func can_place_item_in_slot(item:BaseItem, index:int):
 			print("Can't Place")
 	print("Item Not Page Item")
 	return false
-
 func remove_item_from_slot(item:BaseItem, index:int):
 	ItemHelper.try_transfer_item_from_holder_to_inventory(item, _actor.equipment)
 
@@ -72,3 +72,6 @@ func try_place_item_in_slot(item:BaseItem, index:int):
 
 func try_move_item_to_slot(item:BaseItem, from_index:int, to_index:int):
 	ItemHelper.swap_item_holder_slots(_actor.equipment, from_index, to_index)
+
+func play_pagebook_warning_animation():
+	animation_player.play("pagebook_warning")

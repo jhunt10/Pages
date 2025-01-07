@@ -9,22 +9,9 @@ extends Control
 @export var damage_type_label:Label
 @export var description_box:RichTextLabel
 @export var range_display:MiniRangeDisplay
-@export var equip_button_background:NinePatchRect
-@export var equip_button:Button
-@export var equip_label:Label
 
 var _item:BaseWeaponEquipment
 var _actor:BaseActor
-
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	equip_button.pressed.connect(on_eqiup_button_pressed)
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
 
 func set_weapon(actor:BaseActor, weapon:BaseWeaponEquipment):
 	_actor = actor
@@ -47,11 +34,11 @@ func set_weapon(actor:BaseActor, weapon:BaseWeaponEquipment):
 	range_display.load_area_matrix(weapon.target_parmas.target_area)
 	
 	if _actor.equipment.has_item(_item.Id):
-		equip_label.text = "Remove"	
+		parent_card_control.equip_label.text = "Remove"	
 	elif _actor.equipment.can_equip_item(_item):
-		equip_label.text = "Equip"
+		parent_card_control.equip_label.text = "Equip"
 	else:
-		equip_button_background.hide()
+		parent_card_control.equip_button_background.hide()
 	
 
 func on_eqiup_button_pressed():

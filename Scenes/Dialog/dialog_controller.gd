@@ -255,7 +255,7 @@ func _handle_block(block_data:Dictionary)->bool:
 		var script = load(script_path)
 		if not script: return false
 		var new_block:BaseCustomDialogBlock = script.new()
-		if new_block.handle_block(block_data):
+		if new_block.handle_block(self, block_data):
 			var new_id = str(ResourceUID.create_id())
 			new_block.finished.connect(_on_custom_block_finished.bind(new_id))
 			_custom_blocks[new_id] = new_block
@@ -308,7 +308,10 @@ func _handle_block(block_data:Dictionary)->bool:
 			if hide_box: bot_speech_box.hide()
 			elif not bot_speech_box.visible: bot_speech_box.show()
 		if block_data.get("WaitToFinish", false):
-			_block_states['Speech'] = BlockStates.Playing
+			if top_box:
+				_block_states['TopSpeech'] = BlockStates.Playing
+			else:
+				_block_states['BotSpeech'] = BlockStates.Playing
 			return true
 	
 	#----------------------------------
@@ -500,8 +503,10 @@ func load_dialog_script(file_path):
 
 func _on_speech_box_finished(is_top:bool):
 	print("Speech Box Finished")
-	if _block_states.has("Speech"):
-		_block_states['Speech'] = BlockStates.Finished
+	if is_top and _block_states.has("TopSpeech"):
+		_block_states['TopSpeech'] = BlockStates.Finished
+	if not is_top and _block_states.has("BotSpeech"):
+		_block_states['BotSpeech'] = BlockStates.Finished
 
 func _on_blackout_finished():
 	print("BlackOut Finished")
@@ -577,7 +582,7 @@ func force_positions(force_pos_data:Dictionary):
 				var pos = path_marker.get_last_pos()
 				CombatRootControl.Instance.camera.snap_to_map_pos(pos)
 				continue
-			var actor = game_state.get_actor(actor_id)
+			var actor = game_state.get_actor(actor_id, true, false)
 			if not actor:
 				actor = ActorLibrary.get_actor(actor_id)
 				CombatRootControl.Instance.add_actor(actor, 1, path_marker.get_last_pos())

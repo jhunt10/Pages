@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://btr6wpgyitqc0"]
+[gd_scene load_steps=25 format=3 uid="uid://btr6wpgyitqc0"]
 
 [ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/ItemDetailsCard/item_details_card.gd" id="1_vq5a0"]
 [ext_resource type="Texture2D" uid="uid://bqmtfkh0uj2bk" path="res://Scenes/Menus/CharacterMenu/MenuPages/ItemDetailsCard/DetailsCard_Background_working.png" id="2_7ol1j"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://c4p8fix52jdyq" path="res://Scenes/UiNodes/FitScaleLabel/fit_scale_label.tscn" id="4_34k8o"]
 [ext_resource type="Theme" uid="uid://dwinll8pgdjhc" path="res://Scenes/Themes/standard_theme.tres" id="4_xmy3g"]
 [ext_resource type="PackedScene" uid="uid://c1bs8grs7gsc1" path="res://Scenes/UiNodes/MiniRangeDisplay/mini_range_display.tscn" id="5_jmtol"]
+[ext_resource type="Theme" uid="uid://bfce41la62bs6" path="res://Scenes/Themes/readable_theme.tres" id="6_do8nn"]
 [ext_resource type="Texture2D" uid="uid://b7yikap63psbv" path="res://Scenes/Menus/CharacterMenu/MenuPages/ItemDetailsCard/ExitButton.png" id="6_folnv"]
 [ext_resource type="Texture2D" uid="uid://dbag7m6cb83vp" path="res://Scenes/Menus/CharacterMenu/MenuPages/ItemDetailsCard/Button_Patch_32_6.png" id="7_850b7"]
 [ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/ItemDetailsCard/weapon_details_control.gd" id="7_sv4xn"]
@@ -18,8 +19,13 @@
 [ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/ItemDetailsCard/cost_label.gd" id="13_kr8n3"]
 [ext_resource type="Texture2D" uid="uid://dq2cad8orar4p" path="res://assets/Sprites/UI/SymbolIcons/ArmorSymbol.png" id="13_t6qv2"]
 [ext_resource type="Texture2D" uid="uid://d17k5iaed0gdg" path="res://assets/Sprites/UI/SymbolIcons/WardSymbol.png" id="14_4xeqv"]
+[ext_resource type="PackedScene" uid="uid://bqi05unl37q0p" path="res://Scenes/UiNodes/DamageLabelContainer/damage_label_container.tscn" id="15_idu7k"]
+[ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/ItemDetailsCard/page_que_details_control.gd" id="18_oic72"]
+[ext_resource type="Texture2D" uid="uid://bujky44hog2jm" path="res://assets/Sprites/UI/SymbolIcons/QueCountSymbol.png" id="19_aca8o"]
+[ext_resource type="Texture2D" uid="uid://bpa7iavvlbhi5" path="res://assets/Sprites/UI/SymbolIcons/PageCountSymbol.png" id="20_mtmo1"]
+[ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/ItemDetailsCard/PageQueDetails/page_set_label.gd" id="21_eimff"]
 
-[node name="ItemDetailsCard" type="Control" node_paths=PackedStringArray("offset_control", "icon", "title_lable", "description_box", "exit_button", "weapon_details", "armor_details", "action_details", "default_details", "tag_label")]
+[node name="ItemDetailsCard" type="Control" node_paths=PackedStringArray("offset_control", "icon", "title_lable", "description_box", "exit_button", "weapon_details", "armor_details", "action_details", "page_que_details", "default_details", "tag_label", "equip_button_background", "equip_button", "equip_label")]
 custom_minimum_size = Vector2(300, 200)
 layout_mode = 3
 anchors_preset = 0
@@ -29,39 +35,61 @@ mouse_filter = 1
 script = ExtResource("1_vq5a0")
 speed = 500.0
 offset_control = NodePath("OffsetControl")
-icon = NodePath("OffsetControl/IconBackground/Icon")
-title_lable = NodePath("OffsetControl/FitScaleLabel")
-description_box = NodePath("OffsetControl/WeaponDetailsControl/VBoxContainer/HBoxContainer2/DescriptionBox")
-exit_button = NodePath("OffsetControl/ExitButton/Button")
-weapon_details = NodePath("OffsetControl/WeaponDetailsControl")
-armor_details = NodePath("OffsetControl/ArmorDetailsControl")
-action_details = NodePath("OffsetControl/ActionPageDetailsControl")
-default_details = NodePath("OffsetControl/DefaultDetailsControl")
-tag_label = NodePath("OffsetControl/TagLabel")
+icon = NodePath("OffsetControl/NinePatchRect/VBoxContainer/HBoxContainer/IconBackground/Icon")
+title_lable = NodePath("OffsetControl/NinePatchRect/VBoxContainer/HBoxContainer/FitScaleLabel")
+description_box = NodePath("OffsetControl/NinePatchRect/VBoxContainer/WeaponDetailsControl/VBoxContainer/HBoxContainer2/DescriptionBox")
+exit_button = NodePath("OffsetControl/NinePatchRect/VBoxContainer/HBoxContainer/ExitButton/Button")
+weapon_details = NodePath("OffsetControl/NinePatchRect/VBoxContainer/WeaponDetailsControl")
+armor_details = NodePath("OffsetControl/NinePatchRect/VBoxContainer/ArmorDetailsControl")
+action_details = NodePath("OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsControl")
+page_que_details = NodePath("OffsetControl/NinePatchRect/VBoxContainer/PageQueDetailsControl")
+default_details = NodePath("OffsetControl/NinePatchRect/VBoxContainer/DefaultDetailsControl")
+tag_label = NodePath("OffsetControl/NinePatchRect/VBoxContainer/TagLabel")
+equip_button_background = NodePath("OffsetControl/NinePatchRect/VBoxContainer/EquipButtonBackground")
+equip_button = NodePath("OffsetControl/NinePatchRect/VBoxContainer/EquipButtonBackground/EquipButton")
+equip_label = NodePath("OffsetControl/NinePatchRect/VBoxContainer/EquipButtonBackground/FitScaleLabel")
 
 [node name="OffsetControl" type="Control" parent="."]
 custom_minimum_size = Vector2(300, 200)
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="Background" type="TextureRect" parent="OffsetControl"]
-layout_mode = 0
 offset_right = 300.0
-offset_bottom = 200.0
+offset_bottom = 256.0
+
+[node name="NinePatchRect" type="NinePatchRect" parent="OffsetControl"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource("2_7ol1j")
+patch_margin_left = 14
+patch_margin_top = 28
+patch_margin_right = 18
+patch_margin_bottom = 24
 
-[node name="IconBackground" type="TextureRect" parent="OffsetControl"]
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 0
-offset_left = 18.0
-offset_top = 20.0
-offset_right = 82.0
-offset_bottom = 84.0
-scale = Vector2(0.5, 0.5)
+[node name="VBoxContainer" type="VBoxContainer" parent="OffsetControl/NinePatchRect"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = -16.0
+offset_bottom = -24.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer"]
+layout_mode = 2
+
+[node name="IconBackground" type="TextureRect" parent="OffsetControl/NinePatchRect/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
 texture = ExtResource("3_1ywch")
+expand_mode = 3
 
-[node name="Icon" type="TextureRect" parent="OffsetControl/IconBackground"]
+[node name="Icon" type="TextureRect" parent="OffsetControl/NinePatchRect/VBoxContainer/HBoxContainer/IconBackground"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -69,32 +97,15 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="FitScaleLabel" parent="OffsetControl" instance=ExtResource("4_34k8o")]
+[node name="FitScaleLabel" parent="OffsetControl/NinePatchRect/VBoxContainer/HBoxContainer" instance=ExtResource("4_34k8o")]
+layout_mode = 2
+size_flags_horizontal = 3
 
-[node name="TagLabel" type="Label" parent="OffsetControl"]
-self_modulate = Color(0.498039, 0, 0, 1)
-layout_mode = 0
-offset_left = 18.0
-offset_top = 53.0
-offset_right = 552.0
-offset_bottom = 83.0
-scale = Vector2(0.5, 0.5)
-theme = ExtResource("4_xmy3g")
-theme_override_font_sizes/font_size = 16
-text = "Tag 1 Tag 2 Tage3asd asdas"
-vertical_alignment = 1
-text_overrun_behavior = 4
-ellipsis_char = "+"
-
-[node name="ExitButton" type="TextureRect" parent="OffsetControl"]
-layout_mode = 0
-offset_left = 249.0
-offset_top = 11.0
-offset_right = 289.0
-offset_bottom = 51.0
+[node name="ExitButton" type="TextureRect" parent="OffsetControl/NinePatchRect/VBoxContainer/HBoxContainer"]
+layout_mode = 2
 texture = ExtResource("6_folnv")
 
-[node name="Button" type="Button" parent="OffsetControl/ExitButton"]
+[node name="Button" type="Button" parent="OffsetControl/NinePatchRect/VBoxContainer/HBoxContainer/ExitButton"]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -103,20 +114,27 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Button" type="Button" parent="OffsetControl"]
-layout_mode = 0
-offset_right = 8.0
-offset_bottom = 8.0
+[node name="TagLabel" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("6_do8nn")
+theme_override_colors/font_color = Color(0.470588, 0, 0, 1)
+theme_override_font_sizes/font_size = 14
+text = "Tag 1 Tag 2 Tage3asd asdas"
+vertical_alignment = 1
+text_overrun_behavior = 4
+ellipsis_char = "+"
 
-[node name="WeaponDetailsControl" type="Control" parent="OffsetControl" node_paths=PackedStringArray("parent_card_control", "weapon_class_label", "phy_damage_icon", "mag_damage_icon", "attack_power_label", "damage_type_label", "description_box", "range_display", "equip_button_background", "equip_button", "equip_label")]
+[node name="ColorRect" type="ColorRect" parent="OffsetControl/NinePatchRect/VBoxContainer"]
+self_modulate = Color(0.470588, 0, 0, 1)
+custom_minimum_size = Vector2(2, 1)
+layout_mode = 2
+
+[node name="WeaponDetailsControl" type="Control" parent="OffsetControl/NinePatchRect/VBoxContainer" node_paths=PackedStringArray("parent_card_control", "weapon_class_label", "phy_damage_icon", "mag_damage_icon", "attack_power_label", "damage_type_label", "description_box", "range_display")]
 visible = false
-anchors_preset = 0
-offset_left = 17.0
-offset_top = 68.0
-offset_right = 278.0
-offset_bottom = 178.0
+layout_mode = 2
+size_flags_vertical = 3
 script = ExtResource("7_sv4xn")
-parent_card_control = NodePath("../..")
+parent_card_control = NodePath("../../../..")
 weapon_class_label = NodePath("VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/WeaponClassLabel")
 phy_damage_icon = NodePath("VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/PhyDamIcon")
 mag_damage_icon = NodePath("VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/MagDamIcon")
@@ -124,11 +142,8 @@ attack_power_label = NodePath("VBoxContainer/HBoxContainer/VBoxContainer/HBoxCon
 damage_type_label = NodePath("VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/DamageTypeLabel")
 description_box = NodePath("VBoxContainer/HBoxContainer2/DescriptionBox")
 range_display = NodePath("VBoxContainer/HBoxContainer/MiniRangeDisplay")
-equip_button_background = NodePath("VBoxContainer/ButtonBackground")
-equip_button = NodePath("VBoxContainer/ButtonBackground/Button")
-equip_label = NodePath("VBoxContainer/ButtonBackground/ButtonLabel")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="OffsetControl/WeaponDetailsControl"]
+[node name="VBoxContainer" type="VBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/WeaponDetailsControl"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -136,119 +151,86 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="OffsetControl/WeaponDetailsControl/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/WeaponDetailsControl/VBoxContainer"]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="OffsetControl/WeaponDetailsControl/VBoxContainer/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/WeaponDetailsControl/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="OffsetControl/WeaponDetailsControl/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/WeaponDetailsControl/VBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="WeaponClassLabel" type="Label" parent="OffsetControl/WeaponDetailsControl/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+[node name="WeaponClassLabel" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/WeaponDetailsControl/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("4_xmy3g")
 text = "Heavy"
 
-[node name="WeaponClassLabel2" type="Label" parent="OffsetControl/WeaponDetailsControl/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+[node name="WeaponClassLabel2" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/WeaponDetailsControl/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("4_xmy3g")
 text = "Weapon"
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="OffsetControl/WeaponDetailsControl/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/WeaponDetailsControl/VBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="PhyDamIcon" type="TextureRect" parent="OffsetControl/WeaponDetailsControl/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2"]
+[node name="PhyDamIcon" type="TextureRect" parent="OffsetControl/NinePatchRect/VBoxContainer/WeaponDetailsControl/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
 texture = ExtResource("8_v2bx5")
 
-[node name="MagDamIcon" type="TextureRect" parent="OffsetControl/WeaponDetailsControl/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2"]
+[node name="MagDamIcon" type="TextureRect" parent="OffsetControl/NinePatchRect/VBoxContainer/WeaponDetailsControl/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2"]
 visible = false
 layout_mode = 2
 texture = ExtResource("9_0f8c5")
 
-[node name="AttackPowerLabel" type="Label" parent="OffsetControl/WeaponDetailsControl/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2"]
+[node name="AttackPowerLabel" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/WeaponDetailsControl/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2"]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("4_xmy3g")
 text = "100±30"
 
-[node name="DamageTypeLabel" type="Label" parent="OffsetControl/WeaponDetailsControl/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2"]
+[node name="DamageTypeLabel" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/WeaponDetailsControl/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2"]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("4_xmy3g")
 text = "Slash"
 
-[node name="DamageTypeLabel2" type="Label" parent="OffsetControl/WeaponDetailsControl/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2"]
+[node name="DamageTypeLabel2" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/WeaponDetailsControl/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2"]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("4_xmy3g")
 text = "Dmg"
 
-[node name="MiniRangeDisplay" parent="OffsetControl/WeaponDetailsControl/VBoxContainer/HBoxContainer" instance=ExtResource("5_jmtol")]
+[node name="MiniRangeDisplay" parent="OffsetControl/NinePatchRect/VBoxContainer/WeaponDetailsControl/VBoxContainer/HBoxContainer" instance=ExtResource("5_jmtol")]
 layout_mode = 2
 size_flags_vertical = 0
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="OffsetControl/WeaponDetailsControl/VBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/WeaponDetailsControl/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="DescriptionBox" type="RichTextLabel" parent="OffsetControl/WeaponDetailsControl/VBoxContainer/HBoxContainer2"]
+[node name="DescriptionBox" type="RichTextLabel" parent="OffsetControl/NinePatchRect/VBoxContainer/WeaponDetailsControl/VBoxContainer/HBoxContainer2"]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("4_xmy3g")
 text = "Item Description hk hbkhjhl jhlkjl ljlkj"
 
-[node name="ButtonBackground" type="NinePatchRect" parent="OffsetControl/WeaponDetailsControl/VBoxContainer"]
-custom_minimum_size = Vector2(0, 32)
+[node name="ActionPageDetailsControl" type="Control" parent="OffsetControl/NinePatchRect/VBoxContainer" node_paths=PackedStringArray("parent_card_control", "description_box", "target_type_label", "cost_container", "range_display", "damage_label")]
 layout_mode = 2
-texture = ExtResource("7_850b7")
-region_rect = Rect2(0, 0, 32, 32)
-patch_margin_left = 6
-patch_margin_top = 6
-patch_margin_right = 6
-patch_margin_bottom = 6
-
-[node name="ButtonLabel" type="Label" parent="OffsetControl/WeaponDetailsControl/VBoxContainer/ButtonBackground"]
-self_modulate = Color(0.498039, 0, 0, 1)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("4_xmy3g")
-text = "Equipe"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Button" type="Button" parent="OffsetControl/WeaponDetailsControl/VBoxContainer/ButtonBackground"]
-self_modulate = Color(1, 1, 1, 0)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="ActionPageDetailsControl" type="Control" parent="OffsetControl" node_paths=PackedStringArray("parent_card_control", "description_box", "cost_container", "range_display")]
-anchors_preset = 0
-offset_left = 17.0
-offset_top = 68.0
-offset_right = 278.0
-offset_bottom = 178.0
+size_flags_vertical = 3
 script = ExtResource("12_fd6vk")
-parent_card_control = NodePath("../..")
+parent_card_control = NodePath("../../../..")
 description_box = NodePath("VBoxContainer/HBoxContainer/DescriptionBox")
-cost_container = NodePath("VBoxContainer/CostContainer")
-range_display = NodePath("VBoxContainer/HBoxContainer/MiniRangeDisplay")
+target_type_label = NodePath("VBoxContainer/HBoxContainer2/VBoxContainer/HBoxContainer/TargetTypeLabel")
+cost_container = NodePath("VBoxContainer/HBoxContainer2/VBoxContainer/HBoxContainer/CostContainer")
+range_display = NodePath("VBoxContainer/HBoxContainer2/MiniRangeDisplay")
+damage_label = NodePath("VBoxContainer/HBoxContainer2/VBoxContainer/DamageContainer")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="OffsetControl/ActionPageDetailsControl"]
+[node name="VBoxContainer" type="VBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsControl"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -256,51 +238,83 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="CostContainer" type="HBoxContainer" parent="OffsetControl/ActionPageDetailsControl/VBoxContainer" node_paths=PackedStringArray("title_label", "cost_label")]
+[node name="HBoxContainer2" type="HBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsControl/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsControl/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsControl/VBoxContainer/HBoxContainer2/VBoxContainer"]
+layout_mode = 2
+
+[node name="CostContainer" type="HBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsControl/VBoxContainer/HBoxContainer2/VBoxContainer/HBoxContainer" node_paths=PackedStringArray("title_label", "cost_label")]
 layout_mode = 2
 script = ExtResource("13_an536")
 title_label = NodePath("CostTitle")
 cost_label = NodePath("CostLabel")
 
-[node name="CostTitle" type="Label" parent="OffsetControl/ActionPageDetailsControl/VBoxContainer/CostContainer"]
-self_modulate = Color(0.498039, 0, 0, 1)
+[node name="CostTitle" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsControl/VBoxContainer/HBoxContainer2/VBoxContainer/HBoxContainer/CostContainer"]
 layout_mode = 2
-theme = ExtResource("4_xmy3g")
+size_flags_vertical = 8
+theme = ExtResource("6_do8nn")
+theme_override_colors/font_color = Color(0.470588, 0, 0, 1)
 text = "Costs: "
+horizontal_alignment = 2
+vertical_alignment = 1
 
-[node name="CostLabel" type="HBoxContainer" parent="OffsetControl/ActionPageDetailsControl/VBoxContainer/CostContainer" node_paths=PackedStringArray("name_label", "cost_label")]
+[node name="CostLabel" type="HBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsControl/VBoxContainer/HBoxContainer2/VBoxContainer/HBoxContainer/CostContainer" node_paths=PackedStringArray("name_label", "cost_label")]
 layout_mode = 2
 script = ExtResource("13_kr8n3")
 name_label = NodePath("NameLabel")
 cost_label = NodePath("ValueLabel")
 
-[node name="NameLabel" type="Label" parent="OffsetControl/ActionPageDetailsControl/VBoxContainer/CostContainer/CostLabel"]
-self_modulate = Color(0.498039, 0, 0, 1)
+[node name="NameLabel" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsControl/VBoxContainer/HBoxContainer2/VBoxContainer/HBoxContainer/CostContainer/CostLabel"]
 layout_mode = 2
-theme = ExtResource("4_xmy3g")
+size_flags_vertical = 8
+theme = ExtResource("6_do8nn")
+theme_override_colors/font_color = Color(0.470588, 0, 0, 1)
 text = "Stamina"
+vertical_alignment = 1
 
-[node name="Seperator" type="Label" parent="OffsetControl/ActionPageDetailsControl/VBoxContainer/CostContainer/CostLabel"]
+[node name="Seperator" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsControl/VBoxContainer/HBoxContainer2/VBoxContainer/HBoxContainer/CostContainer/CostLabel"]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("4_xmy3g")
 text = ":"
 
-[node name="ValueLabel" type="Label" parent="OffsetControl/ActionPageDetailsControl/VBoxContainer/CostContainer/CostLabel"]
+[node name="ValueLabel" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsControl/VBoxContainer/HBoxContainer2/VBoxContainer/HBoxContainer/CostContainer/CostLabel"]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("4_xmy3g")
 text = "100"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="OffsetControl/ActionPageDetailsControl/VBoxContainer"]
+[node name="TargetTypeLabel" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsControl/VBoxContainer/HBoxContainer2/VBoxContainer/HBoxContainer"]
 layout_mode = 2
-size_flags_vertical = 3
+size_flags_horizontal = 3
+size_flags_vertical = 8
+theme = ExtResource("6_do8nn")
+theme_override_colors/font_color = Color(0.470588, 0, 0, 1)
+text = "Spot"
+horizontal_alignment = 2
+vertical_alignment = 1
 
-[node name="MiniRangeDisplay" parent="OffsetControl/ActionPageDetailsControl/VBoxContainer/HBoxContainer" instance=ExtResource("5_jmtol")]
+[node name="DamageContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsControl/VBoxContainer/HBoxContainer2/VBoxContainer" instance=ExtResource("15_idu7k")]
+layout_mode = 2
+defense_type = "Armor"
+damage_type = 7
+
+[node name="MiniRangeDisplay" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsControl/VBoxContainer/HBoxContainer2" instance=ExtResource("5_jmtol")]
 layout_mode = 2
 size_flags_vertical = 0
 
-[node name="DescriptionBox" type="RichTextLabel" parent="OffsetControl/ActionPageDetailsControl/VBoxContainer/HBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsControl/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="DescriptionBox" type="RichTextLabel" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsControl/VBoxContainer/HBoxContainer"]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -308,26 +322,20 @@ size_flags_vertical = 3
 theme = ExtResource("4_xmy3g")
 text = "Item Description hk hbkhjhl jhlkjl ljlkj"
 
-[node name="ArmorDetailsControl" type="Control" parent="OffsetControl" node_paths=PackedStringArray("parent_card_control", "slot_label", "phy_icon", "mag_icon", "armor_label", "ward_label", "description_box", "equip_button_background", "equip_button", "equip_label")]
+[node name="ArmorDetailsControl" type="Control" parent="OffsetControl/NinePatchRect/VBoxContainer" node_paths=PackedStringArray("parent_card_control", "slot_label", "phy_icon", "mag_icon", "armor_label", "ward_label", "description_box")]
 visible = false
-anchors_preset = 0
-offset_left = 17.0
-offset_top = 68.0
-offset_right = 278.0
-offset_bottom = 188.0
+layout_mode = 2
+size_flags_vertical = 3
 script = ExtResource("12_rxuc0")
-parent_card_control = NodePath("../..")
+parent_card_control = NodePath("../../../..")
 slot_label = NodePath("VBoxContainer/HBoxContainer3/TypeLabel")
 phy_icon = NodePath("VBoxContainer/HBoxContainer3/PhyIcon")
 mag_icon = NodePath("VBoxContainer/HBoxContainer3/MagIcon")
 armor_label = NodePath("VBoxContainer/HBoxContainer3/ArmorLabel")
 ward_label = NodePath("VBoxContainer/HBoxContainer3/WardLabel")
 description_box = NodePath("VBoxContainer/HBoxContainer2/DescriptionBox")
-equip_button_background = NodePath("VBoxContainer/ButtonBackground")
-equip_button = NodePath("VBoxContainer/ButtonBackground/Button")
-equip_label = NodePath("VBoxContainer/ButtonBackground/ButtonLabel")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="OffsetControl/ArmorDetailsControl"]
+[node name="VBoxContainer" type="VBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/ArmorDetailsControl"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -335,63 +343,144 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="HBoxContainer3" type="HBoxContainer" parent="OffsetControl/ArmorDetailsControl/VBoxContainer"]
+[node name="HBoxContainer3" type="HBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/ArmorDetailsControl/VBoxContainer"]
 layout_mode = 2
 
-[node name="TypeLabel" type="Label" parent="OffsetControl/ArmorDetailsControl/VBoxContainer/HBoxContainer3"]
+[node name="TypeLabel" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/ArmorDetailsControl/VBoxContainer/HBoxContainer3"]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("4_xmy3g")
 text = "Slot"
 
-[node name="Dash" type="Label" parent="OffsetControl/ArmorDetailsControl/VBoxContainer/HBoxContainer3"]
+[node name="Dash" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/ArmorDetailsControl/VBoxContainer/HBoxContainer3"]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("4_xmy3g")
 text = "-"
 
-[node name="PhyIcon" type="TextureRect" parent="OffsetControl/ArmorDetailsControl/VBoxContainer/HBoxContainer3"]
+[node name="PhyIcon" type="TextureRect" parent="OffsetControl/NinePatchRect/VBoxContainer/ArmorDetailsControl/VBoxContainer/HBoxContainer3"]
 layout_mode = 2
 texture = ExtResource("13_t6qv2")
 
-[node name="ArmorLabel" type="Label" parent="OffsetControl/ArmorDetailsControl/VBoxContainer/HBoxContainer3"]
+[node name="ArmorLabel" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/ArmorDetailsControl/VBoxContainer/HBoxContainer3"]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("4_xmy3g")
 text = "000"
 
-[node name="MagIcon" type="TextureRect" parent="OffsetControl/ArmorDetailsControl/VBoxContainer/HBoxContainer3"]
+[node name="MagIcon" type="TextureRect" parent="OffsetControl/NinePatchRect/VBoxContainer/ArmorDetailsControl/VBoxContainer/HBoxContainer3"]
 layout_mode = 2
 texture = ExtResource("14_4xeqv")
 
-[node name="WardLabel" type="Label" parent="OffsetControl/ArmorDetailsControl/VBoxContainer/HBoxContainer3"]
+[node name="WardLabel" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/ArmorDetailsControl/VBoxContainer/HBoxContainer3"]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("4_xmy3g")
 text = "000"
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="OffsetControl/ArmorDetailsControl/VBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/ArmorDetailsControl/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="DescriptionBox" type="RichTextLabel" parent="OffsetControl/ArmorDetailsControl/VBoxContainer/HBoxContainer2"]
+[node name="DescriptionBox" type="RichTextLabel" parent="OffsetControl/NinePatchRect/VBoxContainer/ArmorDetailsControl/VBoxContainer/HBoxContainer2"]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("4_xmy3g")
 text = "Item Description"
 
-[node name="ButtonBackground" type="NinePatchRect" parent="OffsetControl/ArmorDetailsControl/VBoxContainer"]
-custom_minimum_size = Vector2(0, 32)
+[node name="PageQueDetailsControl" type="Control" parent="OffsetControl/NinePatchRect/VBoxContainer" node_paths=PackedStringArray("parent_card_control", "ppr_label", "page_sets_container", "premade_page_set_label", "description_box")]
+visible = false
 layout_mode = 2
-texture = ExtResource("7_850b7")
-region_rect = Rect2(0, 0, 32, 32)
-patch_margin_left = 6
-patch_margin_top = 6
-patch_margin_right = 6
-patch_margin_bottom = 6
+size_flags_vertical = 3
+script = ExtResource("18_oic72")
+parent_card_control = NodePath("../../../..")
+ppr_label = NodePath("VBoxContainer/HBoxContainer3/HBoxContainer/PPRLabel")
+page_sets_container = NodePath("VBoxContainer/HBoxContainer3/HBoxContainer2")
+premade_page_set_label = NodePath("VBoxContainer/HBoxContainer3/HBoxContainer2/PageSetLabel")
+description_box = NodePath("VBoxContainer/HBoxContainer2/DescriptionBox")
 
-[node name="ButtonLabel" type="Label" parent="OffsetControl/ArmorDetailsControl/VBoxContainer/ButtonBackground"]
+[node name="VBoxContainer" type="VBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/PageQueDetailsControl"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/PageQueDetailsControl/VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/PageQueDetailsControl/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+
+[node name="PPRIcon" type="TextureRect" parent="OffsetControl/NinePatchRect/VBoxContainer/PageQueDetailsControl/VBoxContainer/HBoxContainer3/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("19_aca8o")
+
+[node name="PPRLabel" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/PageQueDetailsControl/VBoxContainer/HBoxContainer3/HBoxContainer"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("4_xmy3g")
+text = "5"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/PageQueDetailsControl/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+
+[node name="PageCountIcon" type="TextureRect" parent="OffsetControl/NinePatchRect/VBoxContainer/PageQueDetailsControl/VBoxContainer/HBoxContainer3/HBoxContainer2"]
+layout_mode = 2
+texture = ExtResource("20_mtmo1")
+
+[node name="PageSetLabel" type="HBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/PageQueDetailsControl/VBoxContainer/HBoxContainer3/HBoxContainer2" node_paths=PackedStringArray("tag_label", "count_label")]
+layout_mode = 2
+theme_override_constants/separation = 1
+script = ExtResource("21_eimff")
+tag_label = NodePath("TagLabel")
+count_label = NodePath("CountLabel")
+
+[node name="TagLabel" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/PageQueDetailsControl/VBoxContainer/HBoxContainer3/HBoxContainer2/PageSetLabel"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("4_xmy3g")
+theme_override_font_sizes/font_size = 12
+text = "Tag"
+
+[node name="Seperator" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/PageQueDetailsControl/VBoxContainer/HBoxContainer3/HBoxContainer2/PageSetLabel"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("4_xmy3g")
+text = ":"
+
+[node name="CountLabel" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/PageQueDetailsControl/VBoxContainer/HBoxContainer3/HBoxContainer2/PageSetLabel"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("4_xmy3g")
+text = "3"
+
+[node name="ColorRect" type="ColorRect" parent="OffsetControl/NinePatchRect/VBoxContainer/PageQueDetailsControl/VBoxContainer/HBoxContainer3/HBoxContainer2/PageSetLabel"]
+custom_minimum_size = Vector2(2, 2)
+layout_mode = 2
+color = Color(0.647059, 0.298039, 0.219608, 1)
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/PageQueDetailsControl/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="DescriptionBox" type="RichTextLabel" parent="OffsetControl/NinePatchRect/VBoxContainer/PageQueDetailsControl/VBoxContainer/HBoxContainer2"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("4_xmy3g")
+text = "Item Description"
+
+[node name="DefaultDetailsControl" type="Control" parent="OffsetControl/NinePatchRect/VBoxContainer" node_paths=PackedStringArray("description_box")]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+script = ExtResource("12_gvhwc")
+description_box = NodePath("DescriptionBox")
+
+[node name="DescriptionBox" type="RichTextLabel" parent="OffsetControl/NinePatchRect/VBoxContainer/DefaultDetailsControl"]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 1
 anchors_preset = 15
@@ -399,12 +488,35 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 3
 theme = ExtResource("4_xmy3g")
-text = "Equipe"
-horizontal_alignment = 1
-vertical_alignment = 1
+text = "Item Description"
 
-[node name="Button" type="Button" parent="OffsetControl/ArmorDetailsControl/VBoxContainer/ButtonBackground"]
+[node name="EquipButtonBackground" type="NinePatchRect" parent="OffsetControl/NinePatchRect/VBoxContainer"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+texture = ExtResource("7_850b7")
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+
+[node name="FitScaleLabel" parent="OffsetControl/NinePatchRect/VBoxContainer/EquipButtonBackground" instance=ExtResource("4_34k8o")]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 0.0
+offset_top = 4.0
+offset_right = 0.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+text = "Equipe"
+center_x = true
+
+[node name="EquipButton" type="Button" parent="OffsetControl/NinePatchRect/VBoxContainer/EquipButtonBackground"]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -412,25 +524,3 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="DefaultDetailsControl" type="Control" parent="OffsetControl" node_paths=PackedStringArray("description_box")]
-visible = false
-anchors_preset = 0
-offset_left = 17.0
-offset_top = 67.0
-offset_right = 278.0
-offset_bottom = 173.0
-script = ExtResource("12_gvhwc")
-description_box = NodePath("DescriptionBox")
-
-[node name="DescriptionBox" type="RichTextLabel" parent="OffsetControl/DefaultDetailsControl"]
-self_modulate = Color(0.498039, 0, 0, 1)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 3
-theme = ExtResource("4_xmy3g")
-text = "Item Description"

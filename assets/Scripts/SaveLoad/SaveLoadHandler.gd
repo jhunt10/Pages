@@ -2,6 +2,8 @@ class_name SaveLoadHandler
 
 const SAVE_DATA_PATH = "user://saves/"
 
+static var last_save_id:String
+
 static func read_saves_meta_data()->Dictionary:
 	var meta_file_path = SAVE_DATA_PATH.path_join("saves.json")
 	var file = FileAccess.open(meta_file_path, FileAccess.READ)
@@ -45,6 +47,7 @@ static func write_save_data(save_name:String, story_state:StoryState):
 	var meta_file_path = SAVE_DATA_PATH.path_join("saves.json")
 	var meta_file = FileAccess.open(meta_file_path, FileAccess.WRITE)
 	meta_file.store_string(JSON.stringify(saves_dic))
+	StoryState.story_flags['LastSaveId'] = save_id
 
 static func _build_save_meta_data(save_name:String, story_state:StoryState):
 	var player_actor:BaseActor = story_state.get_player_actor()

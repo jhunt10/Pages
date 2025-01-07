@@ -320,6 +320,7 @@ layout_mode = 2
 size_flags_vertical = 3
 
 [node name="Targeting_Spots" type="Control" parent="CardControl"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -938,7 +939,6 @@ scale = Vector2(2, 2)
 texture = ExtResource("27_o232v")
 
 [node name="Armor" type="Control" parent="CardControl"]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

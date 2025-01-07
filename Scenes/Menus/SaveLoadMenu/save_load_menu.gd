@@ -1,6 +1,10 @@
 class_name SaveLoadMenu
 extends Control
 
+signal menu_closed
+
+static var Instance:SaveLoadMenu
+
 const NEW_SAVE_KEY = "@@NEW_SAVE@@"
 
 @export var scale_control:Control
@@ -37,6 +41,7 @@ var _saving_data
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	Instance = self
 	premade_save_slot.visible = false
 	if save_mode:
 		set_saving_data(StoryState.Instance)
@@ -69,6 +74,8 @@ func _ready() -> void:
 	pass # Replace with function body.
 
 func on_close_menu():
+	Instance = null
+	menu_closed.emit()
 	self.queue_free()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -84,7 +91,7 @@ func _on_message_box_done():
 	if message_box.message_label.text == "Saving Game...":
 		message_box.show_message("Game Saved!", 0.5)
 	elif message_box.message_label.text == "Game Saved!":
-		self.queue_free()
+		on_close_menu()
 
 func _on_save_as_confirmed(save_name):
 	message_box.show_message("Saving Game...", 0.5)
@@ -106,7 +113,7 @@ func _on_save_button():
 		var save_id = data['SaveId']
 		SaveLoadHandler.load_save_data(save_id)
 		_last_save_load_name = _selected_save_name
-		self.queue_free()
+		on_close_menu()
 
 func read_existing_saves():
 	for child in slots_container.get_children():

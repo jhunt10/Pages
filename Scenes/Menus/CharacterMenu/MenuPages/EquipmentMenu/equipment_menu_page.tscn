@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://cbexkor24ce0h"]
+[gd_scene load_steps=39 format=3 uid="uid://cbexkor24ce0h"]
 
 [ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/EquipmentMenu/equipment_page_control.gd" id="1_6pwc2"]
 [ext_resource type="Texture2D" uid="uid://c4yedxpiinlff" path="res://Scenes/Menus/CharacterMenu/MenuPages/outline.png" id="2_5i0tg"]
@@ -18,6 +18,7 @@
 [ext_resource type="Texture2D" uid="uid://d17k5iaed0gdg" path="res://assets/Sprites/UI/SymbolIcons/WardSymbol.png" id="15_3xyiw"]
 [ext_resource type="Texture2D" uid="uid://wu75tejgoo7m" path="res://assets/Sprites/UI/CharacterEdit/BookSlot.png" id="16_850j3"]
 [ext_resource type="Texture2D" uid="uid://co33b1qq2uef7" path="res://assets/Sprites/UI/CharacterEdit/BagSlot.png" id="17_t6rl3"]
+[ext_resource type="Texture2D" uid="uid://d1ad4eibf161i" path="res://Scenes/Menus/CharacterMenu/MenuPages/EquipmentMenu/EquipmentSlotsContainer/WarningSlotIcon.png" id="18_afplx"]
 [ext_resource type="Texture2D" uid="uid://puhp53n8k1h8" path="res://assets/Sprites/UI/CharacterEdit/TrinketSlot.png" id="18_pfurv"]
 [ext_resource type="Texture2D" uid="uid://dwliocipx40sq" path="res://assets/Sprites/UI/CharacterEdit/OffHandSlot.png" id="19_vhvqa"]
 [ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/EquipmentMenu/stat_box_control.gd" id="21_8w6l2"]
@@ -35,7 +36,44 @@
 [ext_resource type="Texture2D" uid="uid://bujky44hog2jm" path="res://assets/Sprites/UI/SymbolIcons/QueCountSymbol.png" id="33_tgryk"]
 [ext_resource type="Texture2D" uid="uid://den756c067qbk" path="res://assets/Sprites/UI/SymbolIcons/CrashSymbol.png" id="34_giu80"]
 
-[node name="EquipmentPage" type="Control" node_paths=PackedStringArray("name_label", "level_label", "equipment_slots_container", "stat_box")]
+[sub_resource type="Animation" id="Animation_peevg"]
+resource_name = "pagebook_warning"
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("EquipmentSlotsControl/RightEquipSlots/BookSlotButton/PageBookWarningIcon:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_t6efn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("EquipmentSlotsControl/RightEquipSlots/BookSlotButton/PageBookWarningIcon:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_i8tbc"]
+_data = {
+"RESET": SubResource("Animation_t6efn"),
+"pagebook_warning": SubResource("Animation_peevg")
+}
+
+[node name="EquipmentPage" type="Control" node_paths=PackedStringArray("name_label", "level_label", "equipment_slots_container", "stat_box", "animation_player")]
 custom_minimum_size = Vector2(280, 395)
 layout_mode = 3
 anchors_preset = 0
@@ -46,6 +84,7 @@ name_label = NodePath("TitleBox/HBoxContainer/NameLabel")
 level_label = NodePath("TitleBox/HBoxContainer/LevelLabel")
 equipment_slots_container = NodePath("EquipmentSlotsControl")
 stat_box = NodePath("StatBoxControl")
+animation_player = NodePath("AnimationPlayer")
 
 [node name="TitleBox" type="NinePatchRect" parent="."]
 layout_mode = 0
@@ -371,6 +410,17 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("16_850j3")
+
+[node name="PageBookWarningIcon" type="TextureRect" parent="EquipmentSlotsControl/RightEquipSlots/BookSlotButton"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("18_afplx")
 
 [node name="BagSlotButton" type="TextureButton" parent="EquipmentSlotsControl/RightEquipSlots" node_paths=PackedStringArray("highlight_background", "icon_texture_rect")]
 custom_minimum_size = Vector2(64, 64)
@@ -996,3 +1046,8 @@ layout_mode = 2
 theme = ExtResource("3_th70d")
 text = "000"
 horizontal_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_i8tbc")
+}

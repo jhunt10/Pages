@@ -3,8 +3,10 @@ extends Control
 
 @export var parent_card_control:ItemDetailsCard
 @export var description_box:RichTextLabel
+@export var target_type_label:Label
 @export var cost_container:PageDetailsCard_CostContaienr
 @export var range_display:MiniRangeDisplay
+@export var damage_label:DamageLabelContainer
 
 var _item:BasePageItem
 var _actor:BaseActor
@@ -36,6 +38,17 @@ func set_action(actor:BaseActor, page:BasePageItem):
 		cost_container.show()
 	else:
 		cost_container.hide()
+	
+	var damage_data = action.DamageDatas
+	if damage_data.size() == 0:
+		damage_label.hide()
+	if damage_data.size() == 1:
+		damage_label.set_damage_data(damage_data.values()[0])
+	
+	var target_params = action.get_preview_target_params(actor)
+	if target_params:
+		target_type_label.text = TargetParameters.TargetTypes.keys()[target_params.target_type]
+		
 
 #func on_eqiup_button_pressed():
 	#if _actor.equipment.has_item(_item.Id):

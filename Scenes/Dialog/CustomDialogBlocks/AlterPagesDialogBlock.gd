@@ -2,7 +2,7 @@ class_name AlterPagesDialogBlock
 extends BaseCustomDialogBlock
 
 ## Returns true if block should be waitied on
-func handle_block(block_data:Dictionary)->bool:
+func handle_block(dialog_control:DialogController, block_data:Dictionary)->bool:
 	var actor = StoryState.get_player_actor()
 	var swap_pages = block_data.get("SwapPages", {})
 	for page_key in swap_pages.keys():
