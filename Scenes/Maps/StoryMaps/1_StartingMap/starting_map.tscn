@@ -1338,7 +1338,7 @@ rotation = 3.14159
 texture = ExtResource("17_ohkco")
 script = ExtResource("18_tvogg")
 facing = 2
-map_coor = Vector2i(4, 4)
+map_coor = Vector2i(10, 4)
 
 [node name="Path_SA2_2" type="Node2D" parent="MarkerTileMapLayer" node_paths=PackedStringArray("sprite", "label")]
 position = Vector2(336, 144)
@@ -1379,7 +1379,7 @@ rotation = 4.71239
 texture = ExtResource("17_ohkco")
 script = ExtResource("18_tvogg")
 facing = 3
-map_coor = Vector2i(10, 4)
+map_coor = Vector2i(10, 5)
 
 [node name="SpwanNode_Player" type="Sprite2D" parent="MarkerTileMapLayer"]
 self_modulate = Color(0, 1, 0, 1)

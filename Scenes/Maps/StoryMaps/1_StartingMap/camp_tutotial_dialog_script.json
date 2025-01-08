@@ -75,7 +75,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "Now that we've got a moment, let's look at your Equipment and PageBook.",
+						"Text": "Now that we've got a moment, let's look at your PageBook.",
 						"NewLine": true
 					},
 					{
@@ -165,7 +165,8 @@
 				"TargetElement": "CharacterMenuControl/ScaleControl/InventoryContainer",
 				"PopupControlSript": "res://Scenes/Dialog/PopUps/OutlinePopUp/outline_pop_up_control.tscn",
 				"DarkenScreen": true,
-				"Padding":[0,0,0,0]
+				"Padding":[0,0,0,0],
+                "LineType": "Dotted"
 			},
 			{
 				"BlockType": "SpeechBox",
@@ -185,7 +186,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "This big empty box on the left is the Party Inventory.",
+						"Text": "This big empty box on the right is the Party Inventory.",
 						"NewLine": false
 					},
 					{
@@ -216,7 +217,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "It automatically filters Items depending on what is open on the left side.",
+						"Text": "It  filters Items baseed on what is open on the left. ",
 						"NewLine": false
 					},
 					{
@@ -226,8 +227,8 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "It would be showing Equipment right now, but you didn't pick up any new equipment because you can't wear squirrel armor.",
-						"NewLine": false
+						"Text": "It would be showing Equipment right now, but you didn't pick up any new equipment since you can't wear squirrel armor.",
+						"NewLine": true
 					},
 					{
 						"EntryType":"WaitToRead"
@@ -243,7 +244,8 @@
 				"TargetElement": "CharacterMenuControl/ScaleControl/EquipmentPage",
 				"PopupControlSript": "res://Scenes/Dialog/PopUps/OutlinePopUp/outline_pop_up_control.tscn",
 				"DarkenScreen": true,
-				"Padding":[0,0,0,0]
+				"Padding":[0,0,0,0],
+                "LineType": "Dotted"
 			},
 			{
 				"BlockType": "SpeechBox",
@@ -263,7 +265,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "On the left is your Equipment.",
+						"Text": "On the left is your Equipment Slots.",
 						"NewLine": false
 					},
 					{
@@ -314,7 +316,8 @@
 				"TargetElement": "CharacterMenuControl/ScaleControl/EquipmentPage/EquipmentSlotsControl/RightEquipSlots/BookSlotButton",
 				"PopupControlSript": "res://Scenes/Dialog/PopUps/OutlinePopUp/outline_pop_up_control.tscn",
 				"DarkenScreen": true,
-				"Padding":[0,0,0,0]
+				"Padding":[0,0,0,0],
+                "LineType": "Dotted"
 			},
 			{
 				"BlockType": "SpeechBox",
@@ -584,15 +587,21 @@
 				"TargetElement": "CharacterMenuControl/ScaleControl/InventoryContainer/BoxBackground/ScrollContainer/FlowContainer/InventoryButton_OldJournal_PageQue",
 				"PopupControlSript": "res://Scenes/Dialog/PopUps/OutlinePopUp/outline_pop_up_control.tscn",
 				"DarkenScreen": false,
-				"Padding":[4,4,4,4],
+				"Padding":[-4,4,-4,4],
                 "LineType":"Dotted",
                 "WaitToBeClicked": true,
                 "ShowClick": true
+			},
+			{
+				"BlockType": "PopUp",
+				"PopUpType": "Highlight",
+				"WaitToFinish": false,
+				"Delete": "SelectBookPopUp"
 			}
         ]
     },
 	"EquipmentTutorial_LookAtBook":{
-		"_NextPartKey": "EquipmentTutorial_OpenPages",
+		"_NextPartKey": "PagesTutorial",
 		"WaitForNextButton": false,
 		"Inital_BlackOutState": "Clear",
 		"EnsurePoses": {},
@@ -846,7 +855,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "And you can equip:",
+						"Text": "And you can equip: ",
 						"NewLine": true
 					},
 					{
@@ -854,7 +863,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "1 Bar Page   ",
+						"Text": " 1 Bar Page, ",
 						"NewLine": false
 					},
 					{
@@ -862,7 +871,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "1 Class Page",
+						"Text": " 1 Class Page,",
 						"NewLine": false
 					},
 					{
@@ -921,7 +930,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "Or you might find a Travel Log with high PPR and several slots, but most are limited to Movement Pages.",
+						"Text": "Or you might find a Travel Log with high PPR and extra lots just for Movement Pages.",
 						"NewLine": true
 					},
 					{
@@ -1037,6 +1046,12 @@
                 "WaitToBeClicked": true,
                 "ShowClick": true,
                 "Color": [1,1,1,1]
+			},
+			{
+				"BlockType": "PopUp",
+				"PopUpType": "Highlight",
+				"WaitToFinish": true,
+                "Delete": "OpenPagesPage"
 			}
         ]
     },

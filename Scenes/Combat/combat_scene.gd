@@ -269,3 +269,13 @@ func cleanup_combat():
 		if actor.is_player:
 			continue
 		ActorLibrary.delete_actor(actor)
+
+func list_actors_by_order()->Array:
+	var out_list = []
+	for que_id in CombatRootControl.Instance.QueController._que_order:
+		var que:ActionQue = CombatRootControl.Instance.QueController._action_ques[que_id]
+		out_list.append(que.actor)
+	return out_list
+		
+		
+	

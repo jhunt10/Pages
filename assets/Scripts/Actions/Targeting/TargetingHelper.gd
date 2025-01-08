@@ -53,11 +53,11 @@ static func get_targeted_actors(target_params:TargetParameters, targets:Array, s
 				if target_params.is_actor_effected_by_aoe(source_actor, target_actor, game_state):
 					out_list.append(target_actor)
 	return out_list
-
-static func get_selectable_target_spots(target_params:TargetParameters, actor:BaseActor, game_state:GameStateData, exclude_targets:Array=[])->Array:
-	var potentials = get_potential_coor_to_targets(target_params, actor, game_state, exclude_targets)
-	return potentials.keys()
-	
+#
+#static func get_selectable_target_spots(target_params:TargetParameters, actor:BaseActor, game_state:GameStateData, exclude_targets:Array=[])->Array:
+	#var potentials = get_potential_coor_to_targets(target_params, actor, game_state, exclude_targets)
+	#return potentials.keys()
+	#
 static func get_potential_target_actor_ids(target_params:TargetParameters, actor:BaseActor, game_state:GameStateData, exclude_targets:Array=[], pos_override:MapPos=null)->Array:
 	var potentials = get_potential_coor_to_targets(target_params, actor, game_state, exclude_targets, pos_override)
 	var targets = dicarry_to_values(potentials)
@@ -71,12 +71,12 @@ static func get_potential_target_actor_ids(target_params:TargetParameters, actor
 				actor_ids_list.append(act.Id)
 	return actor_ids_list
 	
-static func is_actor_targetable(target_params:TargetParameters, source_actor:BaseActor, target_actor:BaseActor, game_state:GameStateData, pos_override:MapPos=null)->bool:
-	var source_pos = pos_override
-	if !source_pos:
-		source_pos = game_state.MapState.get_actor_pos(source_actor)
-	var target_pos = game_state.MapState.get_actor_pos(target_actor)
-	return target_params.is_point_in_area(source_pos, target_pos)
+#static func is_actor_targetable(target_params:TargetParameters, source_actor:BaseActor, target_actor:BaseActor, game_state:GameStateData, pos_override:MapPos=null)->bool:
+	#var source_pos = pos_override
+	#if !source_pos:
+		#source_pos = game_state.MapState.get_actor_pos(source_actor)
+	#var target_pos = game_state.MapState.get_actor_pos(target_actor)
+	#return target_params.is_point_in_area(source_pos, target_pos)
 
 ## Returns a Dictionary<Vector21, Array> of spots within target_area mapped to potential targets in that spot.
 static func get_potential_coor_to_targets(target_params:TargetParameters, actor:BaseActor, game_state:GameStateData, exclude_targets:Array=[], pos_override:MapPos=null)->Dictionary:

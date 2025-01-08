@@ -112,7 +112,6 @@ func show_page(index):
 		var subs = sub_book_pages[sub_index]
 		for sub in subs:
 			sub.visible = sub_index == index
-			print("Setting Page %s Sub Hidde: %s | %s " % [sub_index, sub, sub.visible])
 		
 func _create_sub_container(slot_set_data:Dictionary)->SubBookContainer:
 	var slot_key = slot_set_data['Key']

@@ -1,7 +1,8 @@
 class_name EquipmentHolder
 extends BaseItemHolder
 
-const LOGGING = true
+func _debug_name()->String:
+	return "EquipmentHolder"
 
 func _init(actor) -> void:
 	super(actor)

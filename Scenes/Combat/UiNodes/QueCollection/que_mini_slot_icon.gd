@@ -30,12 +30,12 @@ func set_is_gap(val:bool):
 		
 func set_action(index:int, actor:BaseActor, action:BaseAction):
 	if action and not is_gap:
-		if actor.is_player or actor.FactionIndex == 0:
+		#if actor.is_player or actor.FactionIndex == 0:
 			page_icon.visible = true
 			page_icon.texture = action.get_qued_icon(index, actor)
 			unknown_icon.visible = false
-		else:
-			unknown_icon.visible = true
+		#else:
+			#unknown_icon.visible = false
 	else:
 		page_icon.visible = false
 		page_icon.texture = null

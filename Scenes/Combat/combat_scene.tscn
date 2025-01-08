@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://dfeilp6hbiuqs"]
+[gd_scene load_steps=38 format=3 uid="uid://dfeilp6hbiuqs"]
 
 [ext_resource type="Script" path="res://Scenes/Combat/combat_scene.gd" id="1_crigy"]
 [ext_resource type="Texture2D" uid="uid://b232xm2ly0peh" path="res://assets/Sprites/UI/GridCursors/GridCursor_Default.png" id="7_7lt4y"]
@@ -36,6 +36,7 @@
 [ext_resource type="Script" path="res://Scenes/Combat/UiNodes/target_input_control.gd" id="31_jtehh"]
 [ext_resource type="Texture2D" uid="uid://io35wpu802fp" path="res://assets/Sprites/UI/BackPatches/Patch_64_12.png" id="32_f81f5"]
 [ext_resource type="Texture2D" uid="uid://bqv6yn42oymo" path="res://defs/Actors/NPCs/FishMerch/cart.png" id="33_cdw0u"]
+[ext_resource type="Script" path="res://Scenes/Combat/dev_map_drawing.gd" id="37_fh4f7"]
 
 [node name="CombatRootControl" type="Control" node_paths=PackedStringArray("ui_control", "camera", "MapController", "GridCursor")]
 custom_minimum_size = Vector2(1152, 648)
@@ -61,7 +62,7 @@ canvas_layer = NodePath("CanvasLayer")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="MoveableCamera2D"]
 
-[node name="DevDataControl" type="Control" parent="MoveableCamera2D/CanvasLayer"]
+[node name="DevDataControl" type="Control" parent="MoveableCamera2D/CanvasLayer" node_paths=PackedStringArray("build_ques_button")]
 layout_mode = 3
 anchors_preset = 1
 anchor_left = 1.0
@@ -72,6 +73,7 @@ offset_right = -8.0
 offset_bottom = 61.0
 grow_horizontal = 0
 script = ExtResource("19_yc3tw")
+build_ques_button = NodePath("Button")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="MoveableCamera2D/CanvasLayer/DevDataControl"]
 layout_mode = 1
@@ -170,6 +172,14 @@ offset_right = 2.0
 offset_bottom = 120.0
 texture = ExtResource("24_5fn7e")
 expand_mode = 4
+
+[node name="Button" type="Button" parent="MoveableCamera2D/CanvasLayer/DevDataControl"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 55.0
+offset_bottom = 31.0
+text = "BQs"
 
 [node name="CombatUiControl" type="Control" parent="MoveableCamera2D/CanvasLayer" node_paths=PackedStringArray("game_over_screen", "victory_screen", "menu_container", "menu_button", "pause_menu", "target_input_display", "stat_panel_control", "que_input", "que_display", "que_collection_display", "stats_collection_display", "item_select_menu")]
 layout_mode = 3
@@ -961,3 +971,7 @@ texture = ExtResource("33_cdw0u")
 [node name="GridCursor" type="Sprite2D" parent="."]
 texture = ExtResource("7_7lt4y")
 script = ExtResource("8_wf3xb")
+
+[node name="DEV_MapDrawing" type="Node2D" parent="."]
+z_index = 100
+script = ExtResource("37_fh4f7")

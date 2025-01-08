@@ -4,6 +4,8 @@ class_name BaseItemHolder
 # Use Actor.bag_items_changed
 #signal items_changed
 
+const LOGGING = false
+
 signal items_changed
 
 var slot_sets_data:Array:
@@ -17,6 +19,9 @@ var _slot_set_key_mapping:Array=[]
 var _raw_item_slots:Array=[]
 var _raw_to_slot_set_mapping:Array=[]
 var _actor:BaseActor
+
+func _debug_name()->String:
+	return "BaseItemHolder"
 
 func _init(actor:BaseActor) -> void:
 	self._actor = actor
@@ -39,6 +44,8 @@ func _load_saved_items()->Array:
 	return []
 
 func validate_items():
+	if LOGGING: print("Validating Itemes for %s : %s" % [_actor.Id, _debug_name()])
+		
 	_build_slots_list()
 	for slot_index in range(_raw_item_slots.size()):
 		var item_id = _raw_item_slots[slot_index]
@@ -54,9 +61,11 @@ func _is_item_valid(item:BaseItem)->bool:
 	return true
 
 func _build_slots_list():
+	if LOGGING: print("Building Slots for Itemes for %s : %s" % [_actor.Id, _debug_name()])
 	_slot_set_key_mapping = []
 	_raw_to_slot_set_mapping = []
 	_item_slot_sets_datas = _load_slots_sets_data()
+	if LOGGING: print("- Raw Slots : %s" % [_raw_item_slots])
 	var _backup_slots = _raw_item_slots.duplicate()
 	_raw_item_slots.clear()
 	#if _actor.ActorKey == "TestChaser":
@@ -76,7 +85,9 @@ func _build_slots_list():
 				_raw_item_slots.append(null)
 			raw_index += 1
 		slot_set_index += 1
-		
+	
+	if LOGGING: print("- Final Raw Index: %s" % [raw_index])
+	if LOGGING: print("- Backup Slots: %s" % [_backup_slots])
 	while raw_index < _backup_slots.size():
 		if _backup_slots[raw_index] and _actor.is_player:
 			var item = ItemLibrary.get_item(_backup_slots[raw_index], false)

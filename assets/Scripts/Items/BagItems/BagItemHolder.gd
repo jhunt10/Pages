@@ -6,6 +6,9 @@ var bag_item_id
 func _init(actor) -> void:
 	super(actor)
 
+func _debug_name()->String:
+	return "BagItemHolder"
+
 func _load_slots_sets_data()->Array:
 	if bag_item_id:
 		var bag_item = ItemLibrary.get_item(bag_item_id)

@@ -1,6 +1,6 @@
 {
 	"_MetaData_": {
-		"StartPartKey": "Tutorial_Part12"
+		"StartPartKey": "OfferTutorial"
 	},
 	"PrologSwitch": {
 		"_NextPartLogic": 
@@ -922,6 +922,108 @@
 		},
 		"Blocks":[
 			{
+				"BlockType": "SpeechBox",
+				"WaitToFinish": true,
+				"WaitForNextButton": true,
+				"Entries": [
+					{
+						"EntryType": "Clear",
+						"ClearSpeaker": false
+					},
+					{
+						"EntryType": "Text",
+						"Text": "Well I hope you know what you're doing, "
+					},
+					{
+						"EntryType": "WaitToRead"
+					}
+				]
+			},
+			{
+				"BlockType":"SpawnActor",
+				"SpawnNodeList": ["SSquirrel_1"]
+			},
+			{
+				"BlockType": "MoveActor",
+				"WaitToFinish": false,
+				"TargetActorId": "Squirrel_1",
+				"PathMarkerName": "S1",
+				"FollowActor": false,
+				"SpeedScale": 1
+			},
+			{
+				"BlockType":"SpawnActor",
+				"SpawnNodeList": ["SSquirrel_Arm1"]
+			},
+			{
+				"BlockType": "MoveActor",
+				"WaitToFinish": false,
+				"TargetActorId": "Squirrel_Arm1",
+				"PathMarkerName": "SA1_2",
+				"FollowActor": false,
+				"SpeedScale": 1
+			},
+			{
+				"BlockType":"SpawnActor",
+				"SpawnNodeList": ["SSquirrel_2"]
+			},
+			{
+				"BlockType": "MoveActor",
+				"WaitToFinish": false,
+				"TargetActorId": "Squirrel_2",
+				"PathMarkerName": "S2",
+				"FollowActor": false,
+				"SpeedScale": 1
+			},
+			{
+				"BlockType":"SpawnActor",
+				"SpawnNodeList": ["SSquirrel_3"]
+			},
+			{
+				"BlockType": "MoveActor",
+				"WaitToFinish": false,
+				"TargetActorId": "Squirrel_3",
+				"PathMarkerName": "S3",
+				"FollowActor": false,
+				"SpeedScale": 1
+			},
+			{
+				"BlockType":"SpawnActor",
+				"SpawnNodeList": ["SSquirrel_Arm2"]
+			},
+			{
+				"BlockType": "MoveActor",
+				"WaitToFinish": false,
+				"TargetActorId": "Squirrel_Arm2",
+				"PathMarkerName": "SA2_2",
+				"FollowActor": false,
+				"SpeedScale": 1
+			},
+			{
+				"BlockType":"SpawnActor",
+				"SpawnNodeList": ["SSquirrel_Wiz1"]
+			},
+			{
+				"BlockType": "MoveActor",
+				"WaitToFinish": false,
+				"TargetActorId": "Squirrel_Wiz1",
+				"PathMarkerName": "SA1",
+				"FollowActor": false,
+				"SpeedScale": 1
+			},
+			{
+				"BlockType":"SpawnActor",
+				"SpawnNodeList": ["SSquirrel_Wiz2"]
+			},
+			{
+				"BlockType": "MoveActor",
+				"WaitToFinish": false,
+				"TargetActorId": "Squirrel_Wiz2",
+				"PathMarkerName": "SA2",
+				"FollowActor": false,
+				"SpeedScale": 1
+			},
+			{
 				"WaitToFinish": false,
 				"WaitForNextButton": false,
 				"BlockType": "PanCamera",
@@ -934,12 +1036,9 @@
 				"WaitForNextButton": true,
 				"Entries": [
 					{
-						"EntryType": "Clear",
-						"ClearSpeaker": false
-					},
-					{
 						"EntryType": "Text",
-						"Text": "Well I hope you know what you're doing, because there's a pack of Squirrels up there ready to fight."
+						"Text": "because there's a pack of Squirrels up there ready to fight.",
+						"NewLine": true
 					},
 					{
 						"EntryType": "WaitToRead"
@@ -3766,8 +3865,6 @@
 			"_Camera":"P8",
 			"Player1":"P8",
 			"MysteriousFigure":"MF9",
-			"TutorShroom_1": "_DEAD_",
-			"TutorShroom_2": "_DEAD_",
 			"Squirrel_1": "S1",
 			"Squirrel_2": "S2",
 			"Squirrel_3": "S3",

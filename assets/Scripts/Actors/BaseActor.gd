@@ -170,7 +170,7 @@ func die():
 func auto_build_que(current_turn:int=0):
 	var ai_data = ai_def
 	if !ai_data:
-		return
+		ai_data = pages.list_action_keys()
 	
 	var action_keys_que = []
 	if ai_data.has("PrebuiltQueArr"):

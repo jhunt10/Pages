@@ -101,20 +101,29 @@ func delete_at_index(index):
 	
 # Get the end position if all qued movement actions were resolved
 func get_movement_preview_pos()->MapPos:
+	var path = get_movement_preview_path()
+	if path.size() > 0:
+		return path[-1]
+	return null
+
+func get_movement_preview_path()->Array:
 	var current_pos = CombatRootControl.Instance.GameState.MapState.get_actor_pos(actor)
 	if !current_pos:
-		return null
+		return []
+	var path = [current_pos]
 	for action:BaseAction in real_que:
 		if action.PreviewMoveOffset:
 			var next_pos = MoveHandler.relative_pos_to_real(current_pos, action.PreviewMoveOffset)
 			# Position not changeing (turning)
 			if current_pos.x == next_pos.x and current_pos.y == next_pos.y:
 				current_pos = next_pos
+				path.append(current_pos)
 			# Check if spot is open
 			elif MoveHandler.is_spot_traversable(CombatRootControl.Instance.GameState, next_pos, actor):
 				current_pos = next_pos
+				path.append(current_pos)
 			#print("Before: " + str(befor) + " | Prev: " + str(action.PreviewMoveOffset) + " | After: " + str(current_pos))
-	return current_pos
+	return path
 
 func get_total_preview_costs():
 	var costs = {}

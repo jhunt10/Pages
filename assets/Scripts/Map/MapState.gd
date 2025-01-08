@@ -44,7 +44,7 @@ func spot_blocks_los(pos)->bool:
 func get_terrain_at_pos(pos):
 	var spot = get_map_spot(pos)
 	if not spot:
-		return false
+		return -1
 	return spot.terrain_index 
 	
 func is_spot_traversable(pos, actor)->bool:
