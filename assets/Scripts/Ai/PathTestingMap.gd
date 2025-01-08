@@ -23,12 +23,12 @@ func do_test():
 	self.clear()
 	var map_data = map_controller.get_map_data()
 	var game_state = GameStateData.new()
-	game_state.MapState = MapStateData.new(game_state, map_data)
+	game_state.set_map_data(map_data)
 	
 	#var star = AiHandler.build_path_finder(game_state)
-	#for y in range(game_state.MapState.max_hight):
+	#for y in range(game_state.map_hight):
 		#var line = ''
-		#for x in range(game_state.MapState.max_width):
+		#for x in range(game_state.map_width):
 			#var pos = Vector2i(x,y)
 			#var index = AiHandler._pos_to_index(pos, game_state)
 			#

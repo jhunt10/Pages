@@ -18,8 +18,8 @@ static func handle_attack(attacker:BaseActor, defender:BaseActor, damage_datas,
 	else:
 		var attacker_pos = attack_from_spot_override
 		if !attacker_pos:
-			attacker_pos = game_state.MapState.get_actor_pos(attacker)
-		var defender_pos = game_state.MapState.get_actor_pos(defender)
+			attacker_pos = game_state.get_actor_pos(attacker)
+		var defender_pos = game_state.get_actor_pos(defender)
 		attack_direction = get_relative_attack_direction(attacker_pos, defender_pos)
 	
 	var damage_list = []

@@ -26,7 +26,7 @@ func _init(args:Dictionary, center) -> void:
 		is_aura = true
 		apply_to_source = args["ApplyToSelf"]
 		_source_actor = center
-		_center_pos = CombatRootControl.Instance.GameState.MapState.get_actor_pos(_source_actor)
+		_center_pos = CombatRootControl.Instance.GameState.get_actor_pos(_source_actor)
 		_source_actor.on_move.connect(_on_source_actor_move)
 	elif args['ZoneType'] == 'Static':
 		is_aura = false
@@ -34,7 +34,7 @@ func _init(args:Dictionary, center) -> void:
 	
 func _get_pos()->MapPos:
 	#if is_aura:
-		#return CombatRootControl.Instance.GameState.MapState.get_actor_pos(_source_actor)
+		#return CombatRootControl.Instance.GameState.get_actor_pos(_source_actor)
 	#else:
 	return _center_pos
 	
@@ -45,7 +45,7 @@ func _on_area_moved(new_pos:MapPos):
 	var actors_in_new = {}
 	# Get actors in new area
 	for p in area_matrix.to_map_spots(new_pos):
-		for act:BaseActor in CombatRootControl.Instance.GameState.MapState.get_actors_at_pos(p):
+		for act:BaseActor in CombatRootControl.Instance.GameState.get_actors_at_pos(p):
 			actors_in_new[act.Id] = act
 	# Remove actors no longer in area
 	for old_act_id in _actors_to_effects.keys():

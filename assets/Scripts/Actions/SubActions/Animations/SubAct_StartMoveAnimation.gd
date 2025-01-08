@@ -18,7 +18,7 @@ func get_prop_enum_values(prop_key:String)->Array:
 func do_thing(parent_action:BaseAction, subaction_data:Dictionary, metadata:QueExecutionData,
 				game_state:GameStateData, actor:BaseActor)->bool:
 	var move:MapPos = MapPos.Parse(subaction_data.get("RelativePos", [0,0,0,0]))
-	var actor_pos = game_state.MapState.get_actor_pos(actor)
+	var actor_pos = game_state.get_actor_pos(actor)
 	var dest_pos =  MoveHandler.relative_pos_to_real(actor_pos, move)
 	
 	var actor_node:ActorNode = CombatRootControl.get_actor_node(actor.Id)

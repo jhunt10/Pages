@@ -24,7 +24,7 @@ static func get_targeted_actors(target_params:TargetParameters, targets:Array, s
 				return []
 			if target_params.is_valid_target_actor(source_actor, target_actor, game_state):
 				if target_params.has_area_of_effect():
-					area_of_effect = target_params.get_area_of_effect(game_state.MapState.get_actor_pos(target_actor))
+					area_of_effect = target_params.get_area_of_effect(game_state.get_actor_pos(target_actor))
 				else:
 					out_list.append(target_actor)
 		
@@ -36,18 +36,18 @@ static func get_targeted_actors(target_params:TargetParameters, targets:Array, s
 			if target_params.has_area_of_effect():
 				area_of_effect = target_params.get_area_of_effect(target)
 			else:
-				for target_actor in game_state.MapState.get_actors_at_pos(target):
+				for target_actor in game_state.get_actors_at_pos(target):
 					if target_params.is_valid_target_actor(source_actor, target_actor, game_state) and not out_list.has(target_actor):
 						out_list.append(target_actor)
 		
 		if target_params.target_type == TargetParameters.TargetTypes.FullArea:
-			area_of_effect = target_params.target_area.to_map_spots(game_state.MapState.get_actor_pos(source_actor))
+			area_of_effect = target_params.target_area.to_map_spots(game_state.get_actor_pos(source_actor))
 		
 	
 	# Area of effect
 	if area_of_effect:
 		for spot in area_of_effect:
-			for target_actor:BaseActor in game_state.MapState.get_actors_at_pos(spot):
+			for target_actor:BaseActor in game_state.get_actors_at_pos(spot):
 				if out_list.has(target_actor):
 					continue
 				if target_params.is_actor_effected_by_aoe(source_actor, target_actor, game_state):
@@ -65,7 +65,7 @@ static func get_potential_target_actor_ids(target_params:TargetParameters, actor
 		return targets
 	var actor_ids_list = []
 	for target_spot in potentials.keys():
-		var actors = game_state.MapState.get_actors_at_pos(target_spot)
+		var actors = game_state.get_actors_at_pos(target_spot)
 		for act in actors:
 			if not actor_ids_list.has(act.Id):
 				actor_ids_list.append(act.Id)
@@ -74,13 +74,13 @@ static func get_potential_target_actor_ids(target_params:TargetParameters, actor
 #static func is_actor_targetable(target_params:TargetParameters, source_actor:BaseActor, target_actor:BaseActor, game_state:GameStateData, pos_override:MapPos=null)->bool:
 	#var source_pos = pos_override
 	#if !source_pos:
-		#source_pos = game_state.MapState.get_actor_pos(source_actor)
-	#var target_pos = game_state.MapState.get_actor_pos(target_actor)
+		#source_pos = game_state.get_actor_pos(source_actor)
+	#var target_pos = game_state.get_actor_pos(target_actor)
 	#return target_params.is_point_in_area(source_pos, target_pos)
 
 ## Returns a Dictionary<Vector21, Array> of spots within target_area mapped to potential targets in that spot.
 static func get_potential_coor_to_targets(target_params:TargetParameters, actor:BaseActor, game_state:GameStateData, exclude_targets:Array=[], pos_override:MapPos=null)->Dictionary:
-	var actor_pos = game_state.MapState.get_actor_pos(actor)
+	var actor_pos = game_state.get_actor_pos(actor)
 	if pos_override:
 		actor_pos = pos_override
 	var target_area = target_params.get_valid_target_area(actor_pos)
@@ -99,7 +99,7 @@ static func get_potential_coor_to_targets(target_params:TargetParameters, actor:
 			continue
 			
 		if target_params.is_actor_target_type():
-			for target:BaseActor in game_state.MapState.get_actors_at_pos(spot, null, true):
+			for target:BaseActor in game_state.get_actors_at_pos(spot):
 				if (target_params.target_type == TargetParameters.TargetTypes.Enemy and
 						actor.FactionIndex == target.FactionIndex):
 							continue
@@ -120,7 +120,7 @@ static func get_potential_coor_to_targets(target_params:TargetParameters, actor:
 				if not potential_targets.has(target) and not exclude_targets.has(target):
 					add_to_dicarry(potential_targets, spot, target)
 			if target_params.target_type == TargetParameters.TargetTypes.OpenSpot:
-				if game_state.MapState.is_spot_open(target):
+				if game_state.is_spot_open(target):
 					if not potential_targets.has(target) and not exclude_targets.has(target):
 						add_to_dicarry(potential_targets, spot, target)
 	return potential_targets
@@ -146,26 +146,26 @@ static func trace_los(from_point, to_point, _map_state):
 		los_dict[point] = LOS_VALUE.Open
 	return los_dict
 
-static func get_line_of_sight_for_spots(from_point, to_point, map:MapStateData, check_cache:Dictionary = {}, log=false)->LOS_VALUE:
+static func get_line_of_sight_for_spots(from_point, to_point, game_state:GameStateData, check_cache:Dictionary = {}, log=false)->LOS_VALUE:
 	var in_line_is_unbroken = true
 	var out_line_is_unbroken = true
 	if log: print("#### LOS CHECK")
 	if log: print("# From: %s | To: %s" % [from_point, to_point])
 	
-	if map.get_map_spot(to_point) == null or map.spot_blocks_los(to_point):
+	if game_state.spot_blocks_los(to_point):
 		check_cache[to_point] = LOS_VALUE.Invalid
 		return check_cache[to_point]
 	
 	var path = safe_calc_line(from_point, to_point, false, true, false)
 	if log: print("# Path: %s" % [path])
 	for p in path:
-		if in_line_is_unbroken and _spot_blocks_los(p, check_cache, map):
+		if in_line_is_unbroken and game_state.spot_blocks_los(p):# _spot_blocks_los(p, check_cache, map):
 			in_line_is_unbroken = false
 	
 	path = safe_calc_line(from_point, to_point, true, false, true)
 	if log: print("# Path: %s" % [path])
 	for p in path:
-		if out_line_is_unbroken and _spot_blocks_los(p, check_cache, map):
+		if out_line_is_unbroken and game_state.spot_blocks_los(p):#  _spot_blocks_los(p, check_cache, map):
 			out_line_is_unbroken = false
 	
 	if in_line_is_unbroken:
@@ -176,9 +176,6 @@ static func get_line_of_sight_for_spots(from_point, to_point, map:MapStateData, 
 		check_cache[to_point] = LOS_VALUE.Blocked
 	#if log: print("# OutLine %s: %s" % [p, out_line_is_unbroken])
 	return check_cache[to_point]
-
-static func _spot_blocks_los(spot:Vector2i, check_cache:Dictionary, map:MapStateData):
-	return map.spot_blocks_los(MapPos.Vector2i(spot))
 	
 # Calculate path as if m is positive and < 1. Then rotate and mirror as needed
 # Rounding down will give a more generious results "leaning out" on corners

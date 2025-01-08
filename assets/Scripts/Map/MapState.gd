@@ -10,15 +10,30 @@ var _game_state:GameStateData
 var _actor_pos_cache:Dictionary = {}
 var _item_pos_cache:Dictionary = {}
 var _position_data:Array = []
+var terrain_data
 var max_width = 0
 var max_hight = 0
+
+func duplicate(new_game_state)->MapStateData:
+	var map_data = {
+		'Width': max_width,
+		'Hight': max_hight,
+		'Terrain': {}
+	}
+	var new_map = MapStateData.new(new_game_state, map_data)
+	for spot:MapSpot in _position_data:
+		new_map._position_data.append(spot.duplicate(new_map))
+	new_map._actor_pos_cache = _actor_pos_cache.duplicate(true)
+	new_map._item_pos_cache = _item_pos_cache.duplicate(true)
+	return new_map
+
 
 func _init(game_state:GameStateData, map_data:Dictionary) -> void:
 	_game_state = game_state
 	max_width = map_data['Width']
 	max_hight = map_data['Hight']
 	_position_data = []
-	var terrain_data = map_data['Terrain']
+	terrain_data = map_data['Terrain']
 	for y in range(max_hight):
 		for x in range(max_width):
 			_position_data.append(MapSpot.new(x,y,terrain_data[y][x], self))
@@ -101,7 +116,7 @@ func set_actor_layer(actor:BaseActor, layer:MapLayers):
 func set_actor_pos(actor:BaseActor, pos:MapPos, layer=DEFAULT_ACTOR_LAYER):
 	if LOGGING: print("Set Actor Pos")
 	if pos.x < 0 or pos.x >= max_width or pos.y < 0 or pos.y >= max_hight:
-		printerr("MapState.set_actor_pos: Invalid Actor Position: " + str(pos))
+		printerr("set_actor_pos: Invalid Actor Position: " + str(pos))
 		return
 	
 	var old_pos = null

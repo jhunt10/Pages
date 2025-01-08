@@ -19,7 +19,7 @@ func do_thing(parent_action:BaseAction, subaction_data:Dictionary, que_exe_data:
 	if target_spots.size() <= 0:
 		return BaseSubAction.Failed
 	var target_pos:MapPos = target_spots[0]
-	var actor_pos = game_state.MapState.get_actor_pos(actor)
+	var actor_pos = game_state.get_actor_pos(actor)
 	
 	var x_diff = target_pos.x - actor_pos.x
 	var y_diff = target_pos.y - actor_pos.y
@@ -56,5 +56,5 @@ func do_thing(parent_action:BaseAction, subaction_data:Dictionary, que_exe_data:
 			elif actor_pos.dir == 1:
 				new_dir = 2
 	var new_pos = MapPos.new(actor_pos.x, actor_pos.y, actor_pos.z, new_dir)
-	game_state.MapState.set_actor_pos(actor, new_pos)
+	game_state.set_actor_pos(actor, new_pos)
 	return BaseSubAction.Success

@@ -16,7 +16,7 @@ func do_thing(parent_action:BaseAction, subaction_data:Dictionary, metadata:QueE
 	var move:MapPos = MapPos.Parse(subaction_data.get("RelativePos", [0,0,0,0]))
 	var success = MoveHandler.handle_movement(game_state, actor, move, subaction_data['MovementType'])
 	if not success:
-		var actor_pos:MapPos = game_state.MapState.get_actor_pos(actor)
+		var actor_pos:MapPos = game_state.get_actor_pos(actor)
 		actor.on_move_failed.emit(actor_pos)
 		return BaseSubAction.Failed
 	return BaseSubAction.Success

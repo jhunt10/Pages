@@ -103,7 +103,7 @@ func get_valid_target_area(center:MapPos)->Dictionary:
 	var los_dict = {}
 	for spot in spots:
 		if line_of_sight:
-			TargetingHelper.get_line_of_sight_for_spots(center, spot, CombatRootControl.Instance.GameState.MapState, los_dict)
+			TargetingHelper.get_line_of_sight_for_spots(center, spot, CombatRootControl.Instance.GameState, los_dict)
 		else:
 			los_dict[spot] = TargetingHelper.LOS_VALUE.Open
 	_cached_canter_pos = center

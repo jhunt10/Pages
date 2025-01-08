@@ -30,9 +30,9 @@ func do_thing(parent_action:BaseAction, subaction_data:Dictionary, que_exe_data:
 		printerr("Invalid Target for teleporting: %s." % [target_actor_b_key])
 		return BaseSubAction.Failed
 	
-	var pos_a = game_state.MapState.get_actor_pos(target_a)
-	var pos_b = game_state.MapState.get_actor_pos(target_b)
+	var pos_a = game_state.get_actor_pos(target_a)
+	var pos_b = game_state.get_actor_pos(target_b)
 
-	game_state.MapState.set_actor_pos(target_a, pos_b)
-	game_state.MapState.set_actor_pos(target_b, pos_a)
+	game_state.set_actor_pos(target_a, pos_b)
+	game_state.set_actor_pos(target_b, pos_a)
 	return BaseSubAction.Success

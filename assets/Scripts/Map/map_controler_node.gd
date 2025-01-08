@@ -168,7 +168,7 @@ func _sync_positions():
 		#if !node:
 			#if LOGGING: printerr("Failed to find node for actor: ", actor.Id)
 			#continue
-		#var pos = game_state.MapState.get_actor_pos(actor)
+		#var pos = game_state.get_actor_pos(actor)
 		#node.set_display_pos(pos)
 		#var local_pos = actor_tile_map.map_to_local(Vector2i(pos.x, pos.y))
 		#

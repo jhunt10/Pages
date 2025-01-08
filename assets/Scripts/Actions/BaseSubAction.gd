@@ -72,7 +72,7 @@ func _find_target_effected_actors(parent_action:BaseAction, subaction_data:Dicti
 ## Get MapPos Array  of positions that were effected by the selected target key
 func _find_target_effected_spots(target_key:String,  metadata:QueExecutionData, game_state:GameStateData, source_actor:BaseActor)->Array:
 	if target_key == "Self":
-		return [game_state.MapState.get_actor_pos(source_actor)]
+		return [game_state.get_actor_pos(source_actor)]
 	var turn_data = metadata.get_current_turn_data()
 	#var target_param_key = turn_data.get_param_key_for_target(target_key)
 	#if !target_param_key or target_param_key == '':
@@ -88,7 +88,7 @@ func _find_target_effected_spots(target_key:String,  metadata:QueExecutionData, 
 		if target is String:
 			var target_actor = game_state.get_actor(target)
 			if target_actor:
-				target_list.append(game_state.MapState.get_actor_pos(target_actor))
+				target_list.append(game_state.get_actor_pos(target_actor))
 		if target is Vector2i:
 			target_list.append(MapPos.Vector2i(target))
 	return target_list

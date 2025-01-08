@@ -16,7 +16,7 @@ signal bag_items_changed
 signal page_list_changed
 signal effacts_changed
 
-# Actor holds no references to the current map state so this method is called by MapState.set_actor_pos()
+# Actor holds no references to the current map state so this method is called by set_actor_pos()
 signal on_move(old_pos:MapPos, new_pos:MapPos, move_data:Dictionary)
 signal on_move_failed(cur_pos:MapPos)
 signal on_death()
@@ -65,7 +65,7 @@ var is_dead:bool = false
 
 func _init(key:String, load_path:String, def:Dictionary, id:String, data:Dictionary) -> void:
 	super(key, load_path, def, id, data)
-	spawn_map_layer = _def.get('SpawnOnMapLayer', MapStateData.DEFAULT_ACTOR_LAYER)
+	spawn_map_layer = _def.get('SpawnOnMapLayer', 0)
 	
 	var stat_data = _def["Stats"]
 	ai_def = get_load_val("AiData", {})
@@ -145,7 +145,7 @@ func die():
 	if is_dead:
 		return
 	is_dead = true
-	var map_pos = CombatRootControl.Instance.GameState.MapState.get_actor_pos(self)
+	var map_pos = CombatRootControl.Instance.GameState.get_actor_pos(self)
 	if map_pos:
 		
 		# Roll for item drop

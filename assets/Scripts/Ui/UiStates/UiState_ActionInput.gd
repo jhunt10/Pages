@@ -25,7 +25,7 @@ func handle_input(event):
 		var mouse_spot = CombatRootControl.Instance.GridCursor.current_spot
 		
 		## Show Character Sheet on clicking an actor
-		#var mouse_over_actors = CombatRootControl.Instance.GameState.MapState.get_actors_at_pos(mouse_spot, null, true)
+		#var mouse_over_actors = CombatRootControl.Instance.GameState.get_actors_at_pos(mouse_spot, null, true)
 		#if mouse_over_actors.size() > 0:
 			#var actor:BaseActor = mouse_over_actors[0]
 			#ui_controller.set_ui_state(UiStateController.UiStates.CharacterSheet, {"ActorId":actor.Id})

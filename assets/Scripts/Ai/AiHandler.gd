@@ -17,7 +17,7 @@ static func build_action_ques():
 		for actor in  actors:
 			var actor_pos = null
 			if poses_by_turn.size() == 0: 
-				actor_pos =  game_state.MapState.get_actor_pos(actor)
+				actor_pos =  game_state.get_actor_pos(actor)
 			else:
 				actor_pos = turn_poses[0][actor.Id]
 			turn_poses[actor.Id] = actor_pos
@@ -75,8 +75,8 @@ static func build_action_que(actor:BaseActor, game_state:GameStateData)->Array:
 			attack_costs_data[action.ActionKey] = action.CostData
 	
 	# Find Path
-	var target_pos = game_state.MapState.get_actor_pos(target_enemy)
-	var start_pos = game_state.MapState.get_actor_pos(actor)
+	var target_pos = game_state.get_actor_pos(target_enemy)
+	var start_pos = game_state.get_actor_pos(actor)
 	var path = path_to_target(actor, start_pos, target_pos, game_state)
 	
 	
@@ -133,9 +133,9 @@ static func try_handle_get_target_sub_action(actor:BaseActor, selection_data:Tar
 	if selection_data.target_params.is_actor_target_type():
 		potentail_actors = selection_data.list_potential_targets()
 	else:
-		var actor_pos = game_state.MapState.get_actor_pos(actor)
+		var actor_pos = game_state.get_actor_pos(actor)
 		for coor in selection_data.get_selectable_coords():
-			var actors = game_state.MapState.get_actors_at_pos(coor)
+			var actors = game_state.get_actors_at_pos(coor)
 			for act in actors:
 				if not potentail_actors.has(act):
 					potentail_actors.append(act)
@@ -173,12 +173,11 @@ static func path_to_target(actor:BaseActor, start_pos:MapPos, target_pos:MapPos,
 		printerr("Path Map does not have End Point: %s | %s" % [end_index, start_pos])
 		return {}
 	# Disable occupied spots 
-	for actor_id in game_state.MapState._actor_pos_cache.keys():
-		var check_actor = game_state.get_actor(actor_id, false)
+	for check_actor in game_state.list_actors(false):
 		if not check_actor or check_actor.is_dead:
 			continue
-		var check_pos:MapPos = game_state.MapState._actor_pos_cache[actor_id]
-		if actor and actor_id == actor.Id:
+		var check_pos:MapPos = game_state.get_actor_pos(check_actor)
+		if actor and check_actor.Id == actor.Id:
 			continue
 		if check_pos.to_vector2i() == start_pos.to_vector2i():
 			continue
@@ -261,13 +260,13 @@ static func _translate_next_point_to_movement(current_pos:MapPos, move_to:Vector
 
 static func build_path_finder(game_state:GameStateData)->AStar2D:
 	var star = CustAStar.new()
-	star.reserve_space(game_state.MapState.max_hight * game_state.MapState.max_width)
-	for y in range(game_state.MapState.max_hight):
+	star.reserve_space(game_state.map_hight * game_state.map_width)
+	for y in range(game_state.map_hight):
 		#var line = ''
 		#var line2 = ''
-		for x in range(game_state.MapState.max_width):
+		for x in range(game_state.map_width):
 			var coor = Vector2i(x, y)
-			if _is_terrain_traversable(coor, game_state):
+			if game_state.is_spot_traversable(coor, null):
 				var same_pos_indexes = []
 				for dir in MapPos.Directions.values():
 					var map_pos = MapPos.new(x, y, 0, dir)
@@ -305,7 +304,7 @@ static func build_path_finder(game_state:GameStateData)->AStar2D:
 		#return targets
 	#var actor_ids_list = []
 	#for target_spot in potentials.keys():
-		#var actors = game_state.MapState.get_actors_at_pos(target_spot)
+		#var actors = game_state.get_actors_at_pos(target_spot)
 		#for act in actors:
 			#if not actor_ids_list.has(act.Id):
 				#actor_ids_list.append(act.Id)
@@ -318,7 +317,7 @@ static func _pos_to_index(pos:MapPos, game_state)->int:
 	pos_index = pos_index << 2
 	pos_index += pos.dir
 	return pos_index
-	#return (pos.x + (pos.y * game_state.MapState.max_width)) * 10 + pos.dir
+	#return (pos.x + (pos.y * game_state.map_width)) * 10 + pos.dir
 
 static func _list_pos_indexes(pos, game_state)->Array:
 	var temp_pos = MapPos.new(pos.x, pos.y, 0, 0)
@@ -327,7 +326,3 @@ static func _list_pos_indexes(pos, game_state)->Array:
 		temp_pos.dir = dir
 		out_list.append(_pos_to_index(temp_pos, game_state))
 	return out_list
-
-static func _is_terrain_traversable(pos, game_state:GameStateData)->bool:
-	var terrain = game_state.MapState.get_terrain_at_pos(pos)
-	return terrain > 0

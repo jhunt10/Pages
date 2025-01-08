@@ -17,7 +17,7 @@ func _init(params:TargetParameters, target_key:String, actor:BaseActor, game_sta
 	if center_override:
 		actor_pos = center_override
 	else:
-		actor_pos = game_state.MapState.get_actor_pos(focused_actor)
+		actor_pos = game_state.get_actor_pos(focused_actor)
 	exclude_targets = exclude
 	_los_mapping = params.get_valid_target_area(actor_pos)
 	printerr("ActorPoswe: %s" % [actor_pos.dir])

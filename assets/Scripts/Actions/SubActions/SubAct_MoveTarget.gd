@@ -27,8 +27,8 @@ func do_thing(parent_action:BaseAction, subaction_data:Dictionary, que_exe_data:
 	for target in target_actors:
 		var apply_move = MapPos.new(move.x, move.y, move.z, move.dir)
 		if not subaction_data.get("UseTargetsDirection", true):
-			var actor_pos = game_state.MapState.get_actor_pos(actor)
-			var target_pos = game_state.MapState.get_actor_pos(target)
+			var actor_pos = game_state.get_actor_pos(actor)
+			var target_pos = game_state.get_actor_pos(target)
 			var rot_diff = (actor_pos.dir - target_pos.dir + 4) % 4
 			var point = MapHelper.rotate_relative_pos(apply_move,rot_diff)
 			apply_move.x = point.x

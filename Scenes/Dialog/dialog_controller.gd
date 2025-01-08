@@ -587,7 +587,7 @@ func force_positions(force_pos_data:Dictionary):
 				actor = ActorLibrary.get_actor(actor_id)
 				CombatRootControl.Instance.add_actor(actor, 1, path_marker.get_last_pos())
 			else:
-				game_state.MapState.set_actor_pos(actor, path_marker.get_last_pos())
+				game_state.set_actor_pos(actor, path_marker.get_last_pos())
 		#var actor_node = CombatRootControl.get_actor_node(actor_id)
 		#if !actor_node:
 			#printerr("force_positions: Failed to find actor_node for Target Actor: %s" %[actor_id])

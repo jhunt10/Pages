@@ -87,7 +87,7 @@ func _get_actors_in_effect_area(game_state:GameStateData)->Array:
 	
 	var targets = []
 	for spot in effect_area:
-		for target_actor in game_state.MapState.get_actors_at_pos(spot):
+		for target_actor in game_state.get_actors_at_pos(spot):
 			if !targets.has(target_actor):
 				targets.append(target_actor)
 	return targets

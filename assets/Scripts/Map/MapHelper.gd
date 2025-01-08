@@ -18,7 +18,7 @@ static func get_map_pos_global_position(map_pos:MapPos)->Vector2:
 	return global_pos
 
 static func get_actor_global_position(actor:BaseActor)->Vector2:
-	var map_pos = CombatRootControl.Instance.GameState.MapState.get_actor_pos(actor)
+	var map_pos = CombatRootControl.Instance.GameState.get_actor_pos(actor)
 	if !map_pos:
 		printerr("MapHelper.get_actor_local_position: Failed to find actor's MapPos")
 		return Vector2.ZERO

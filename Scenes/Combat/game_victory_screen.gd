@@ -23,7 +23,7 @@ func _on_camp_button():
 
 func collect_dropped_items():
 	var items_datas = {}
-	for item:BaseItem in CombatRootControl.Instance.GameState.MapState.list_items():
+	for item:BaseItem in CombatRootControl.Instance.GameState.list_items():
 		var item_type = "default"
 		if item is BasePageItem:
 			item_type = "Page"
@@ -39,7 +39,7 @@ func collect_dropped_items():
 		else:
 			items_datas[item_type][item_name]['Count'] += 1
 		PlayerInventory.add_item(item)
-		CombatRootControl.Instance.GameState.MapState.remove_item(item)
+		CombatRootControl.Instance.GameState.remove_item(item)
 	
 	if not items_datas.has("Page"):
 		pickup_pages_container.hide()

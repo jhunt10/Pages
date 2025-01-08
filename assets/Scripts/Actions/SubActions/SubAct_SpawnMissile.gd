@@ -40,7 +40,7 @@ func do_thing(parent_action:BaseAction, subaction_data:Dictionary, metadata:QueE
 	
 	var damage_data = (parent_action.DamageDatas[damage_key] as Dictionary).duplicate(true)
 	var missile_data = (parent_action.MissileDatas[missile_key] as Dictionary).duplicate(true)
-	var actor_pos = game_state.MapState.get_actor_pos(actor)
+	var actor_pos = game_state.get_actor_pos(actor)
 	var tag_chain = SourceTagChain.new()\
 			.append_source(SourceTagChain.SourceTypes.Actor, actor)\
 			.append_source(SourceTagChain.SourceTypes.Action, parent_action)
@@ -71,7 +71,7 @@ func get_target_spot_of_missile(target_key:String, metadata:QueExecutionData, ga
 		if not actor:
 			printerr("SubAct_SpawnMissile.get_target_spt_of_missile: No actor found with id '%s'." % [target])
 			return null
-		return game_state.MapState.get_actor_pos(actor)
+		return game_state.get_actor_pos(actor)
 	else:
 		printerr("SubAct_SpawnMissile.get_target_spt_of_missile: Unknown target type: " + str(target))
 		return null

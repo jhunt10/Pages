@@ -151,7 +151,7 @@ func preview_que_path(add_movement:MapPos=null):
 		return
 	#if not show_preview_movement or !que_path_arrow:
 		#return
-	var actor_pos = CombatRootControl.Instance.GameState.MapState.get_actor_pos(_actor)
+	var actor_pos = CombatRootControl.Instance.GameState.get_actor_pos(_actor)
 	var preview_pos = _actor.Que.get_movement_preview_pos()
 	if add_movement:
 		preview_pos = preview_pos.apply_relative_pos(add_movement)

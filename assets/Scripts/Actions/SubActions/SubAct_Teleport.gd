@@ -37,7 +37,7 @@ func do_thing(parent_action:BaseAction, subaction_data:Dictionary, que_exe_data:
 	var target_pos:MapPos = null
 	if target_dest_params.is_actor_target_type():
 		var target_actor = game_state.get_actor(target_dest)
-		target_pos = game_state.MapState.get_actor_pos(target_actor)
+		target_pos = game_state.get_actor_pos(target_actor)
 	if target_dest_params.is_spot_target_type():
 		target_pos = target_dest
 	
@@ -47,5 +47,5 @@ func do_thing(parent_action:BaseAction, subaction_data:Dictionary, que_exe_data:
 	if not MoveHandler.spot_is_valid_and_open(game_state, move_to_pos):
 		return BaseSubAction.Failed
 		
-	game_state.MapState.set_actor_pos(teleporting_actor, move_to_pos)
+	game_state.set_actor_pos(teleporting_actor, move_to_pos)
 	return BaseSubAction.Success

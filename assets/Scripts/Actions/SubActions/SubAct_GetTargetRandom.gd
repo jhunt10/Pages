@@ -31,7 +31,7 @@ func do_thing(parent_action:BaseAction, subaction_data:Dictionary, metadata:QueE
 		return BaseSubAction.Success
 	
 	# Get Targeting Params
-	var actor_pos = game_state.MapState.get_actor_pos(actor)
+	var actor_pos = game_state.get_actor_pos(actor)
 	var allow_dups = subaction_data.get("AllowAlreadyTargeted", false)
 	
 	var exclude_targets = []

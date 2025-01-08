@@ -40,7 +40,7 @@ func do_thing(parent_action:BaseAction, subaction_data:Dictionary, metadata:QueE
 	#var actor_node:ActorNode = CombatRootControl.Instance.MapController.actor_nodes.get(actor.Id)
 	#if actor_node and animation:
 		#if animation.begins_with("move_"):
-			#var actor_pos = game_state.MapState.get_actor_pos(actor)
+			#var actor_pos = game_state.get_actor_pos(actor)
 			#var dest_pos =  MoveHandler.relative_pos_to_real(actor_pos, parent_action.PreviewMoveOffset)
 			#actor_node.set_move_destination(dest_pos, 
 				#CombatRootControl.QueController.FRAMES_PER_ACTION-(CombatRootControl.QueController.sub_action_index), 

@@ -107,7 +107,7 @@ func get_movement_preview_pos()->MapPos:
 	return null
 
 func get_movement_preview_path()->Array:
-	var current_pos = CombatRootControl.Instance.GameState.MapState.get_actor_pos(actor)
+	var current_pos = CombatRootControl.Instance.GameState.get_actor_pos(actor)
 	if !current_pos:
 		return []
 	var path = [current_pos]

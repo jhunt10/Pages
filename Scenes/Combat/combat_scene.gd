@@ -94,7 +94,7 @@ func load_init_state(map_scene_path:String):
 	
 	var map_data = MapController.get_map_data()
 	GameState = GameStateData.new()
-	GameState.MapState = MapStateData.new(GameState, map_data)
+	GameState.set_map_data(map_data)
 	QueController = ActionQueController.new()
 	QueController.end_of_round.connect(check_end_conditions)
 	
@@ -131,7 +131,7 @@ func load_init_state(map_scene_path:String):
 		printerr("Player Actor not loaded to GameState")
 	else:
 		ui_control.set_player_actor(player_actor)
-		var actor_pos = GameState.MapState.get_actor_pos(player_actor)
+		var actor_pos = GameState.get_actor_pos(player_actor)
 		if actor_pos:
 			camera.snap_to_map_pos(actor_pos)
 			camera.zoom = Vector2(2,2)
@@ -139,18 +139,12 @@ func load_init_state(map_scene_path:String):
 func kill_actor(actor:BaseActor):
 	actor.die()
 	QueController.remove_action_que(actor.Que)
-	#GameState.delete_actor(actor)
+	GameState.delete_actor(actor)
 	#if actor.leaves_corpse:
-	GameState.MapState.set_actor_layer(actor, MapStateData.MapLayers.Corpse)
 	#else:
 		#delete_actor(actor)
 
 
-#func delete_actor(actor:BaseActor):
-	#GameState.MapState.remove_actor(actor)
-	#MapController.delete_actor_node(actor)
-	#GameState.Actors.erase(actor.Id)
-	
 func add_actor(actor:BaseActor, faction_id:int, pos:MapPos):
 	if GameState._actors.keys().has(actor.Id):
 		printerr("Actor '%s' already added" % [actor.Id])
@@ -165,7 +159,7 @@ func add_actor(actor:BaseActor, faction_id:int, pos:MapPos):
 		# Must call without signals because actors are spawned before MapControlNode._ready()
 		actor_node  = MapController.create_actor_node(actor, pos)
 	actor_node.visible = true
-	GameState.MapState.set_actor_pos(actor, pos, actor.spawn_map_layer)
+	GameState.set_actor_pos(actor, pos)
 	#actor.Que.clear_que()
 	actor.stats.fill_bar_stats()
 	#if actor.use_ai:
@@ -179,14 +173,13 @@ func add_item(item:BaseItem, pos:MapPos):
 		printerr("Item '%s' already added" % [item.Id])
 		return
 	# Add item to GameState and set position
-	GameState.add_item(item)
-	GameState.MapState.set_item_pos(item, pos)
+	GameState.add_item(item, pos)
 	# Must call without signals because items are spawned before MapControlNode._ready()
 	MapController.create_item_node(item, pos)
 	item_spawned.emit(item, pos)
 
 func remove_item(item:BaseItem):
-	GameState.MapState.remove_item(item)
+	GameState.remove_item(item)
 	MapController.delete_item_node(item)
 
 func create_new_missile_node(missile):
