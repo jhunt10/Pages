@@ -63,6 +63,13 @@ var subaction_script_cache:Dictionary = {}
 # They will be deleted once the round finishes
 var _dead_ques:Array = []
 
+func list_actors_by_order()->Array:
+	var out_list = []
+	for que_id in _que_order:
+		var que:ActionQue = _action_ques[que_id]
+		out_list.append(que.actor)
+	return out_list
+
 func _start_round():
 	if DEEP_LOGGING: print("QueController: Start Round")
 	action_index = 0
@@ -72,9 +79,10 @@ func _start_round():
 	sub_action_timer = 0
 	
 	var game_state = CombatRootControl.Instance.GameState
-	for actor:BaseActor in game_state.list_actors():
-		if actor.use_ai:
-			actor.auto_build_que(0)
+	AiHandler.build_action_ques()
+	#for actor:BaseActor in game_state.list_actors():
+		#if actor.use_ai:
+			#actor.auto_build_que(0)
 	
 	execution_state = ActionStates.Running
 	start_of_round.emit()
@@ -162,7 +170,7 @@ func update(delta: float) -> void:
 				game_state.current_turn_index = action_index
 				start_of_turn.emit()
 				start_of_turn_with_state.emit(game_state)
-				_pay_turn_costs()
+				#_pay_turn_costs()
 				# Emit start of turn for actors
 				for que_id in _que_order:
 					var que:ActionQue = _action_ques[que_id]
@@ -320,16 +328,16 @@ func _get_subaction(script_key:String)->BaseSubAction:
 			subaction_script_cache[script_key] = null
 	return subaction_script_cache[script_key]
 
-func _pay_turn_costs():
-	for que:ActionQue in get_active_action_ques():
-		if que.get_max_que_size() > 0:
-			var actor = que.actor
-			var turn_data = que.QueExecData.get_current_turn_data()
-			for stat_name in turn_data.costs.keys():
-				if not actor.stats.reduce_bar_stat_value(stat_name, turn_data.costs[stat_name], false):
-					CombatRootControl.Instance.create_flash_text_on_actor(actor, stat_name, Color.ORANGE)
-					que.fail_turn()
-					break
+#func _pay_turn_costs():
+	#for que:ActionQue in get_active_action_ques():
+		#if que.get_max_que_size() > 0:
+			#var actor = que.actor
+			#var turn_data = que.QueExecData.get_current_turn_data()
+			#for stat_name in turn_data.costs.keys():
+				#if not actor.stats.reduce_bar_stat_value(stat_name, turn_data.costs[stat_name], false):
+					#CombatRootControl.Instance.create_flash_text_on_actor(actor, stat_name, Color.ORANGE)
+					#que.fail_turn()
+					#break
 
 func _organize_ques():
 	_sort_ques_by_speed()

@@ -5,40 +5,116 @@ static var astar:CustAStar
 static var cached_move_sets:Dictionary={}
 
 
-static func build_action_ques():
-	var game_state = CombatRootControl.Instance.GameState
-	var poses_by_turn = []
+static func build_action_ques(clear_existing_ques:bool=false):
+	var init_game_state = CombatRootControl.Instance.GameState.duplicate()
+	var turn_states = []
 	var actors = CombatRootControl.Instance.QueController.list_actors_by_order()
 	var turn_count = CombatRootControl.Instance.QueController.max_que_size
 	
-	# Build turn positions
-	for turn in range(turn_count):
-		var turn_poses = {}
-		for actor in  actors:
-			var actor_pos = null
-			if poses_by_turn.size() == 0: 
-				actor_pos =  game_state.get_actor_pos(actor)
-			else:
-				actor_pos = turn_poses[0][actor.Id]
-			turn_poses[actor.Id] = actor_pos
-		poses_by_turn.append(turn_poses)
+	if not astar:
+		astar = build_path_finder(init_game_state)
+	astar.enable_all_points()
+	
+	# Pre-Pass on Actors
+	var cost_datas = {}
+	for actor:BaseActor in actors:
+		# Clear Ques
+		if clear_existing_ques and not actor.is_player:
+			actor.Que.clear_que()
+		# Build cost data
+		cost_datas[actor.Id] = {}
+		for stat_name in actor.stats.list_bar_stat_names():
+			cost_datas[actor.Id][stat_name] = actor.stats.get_bar_stat(stat_name)
+		
+		# Disable positions
+		var pos = init_game_state.get_actor_pos(actor)
+		astar.set_pos_disabled(pos, true)
 	
 	for turn in range(turn_count):
+		var turn_state = init_game_state
+		turn_states.append(turn_state)
+		turn_state.current_turn_index = turn
+		for actor:BaseActor in actors:
+			if actor.Que.is_turn_gap(turn):
+				continue
+			
+			var current_pos = turn_state.get_actor_pos(actor)
+			# Enable current Actor's Position for Pathing
+			astar.set_pos_disabled(current_pos, false)
+			
+			var action = _choose_page_for_actor(actor, turn_state, cost_datas[actor.Id])
+			if action == null:
+				printerr("AiHandler: No Action found for '%s' on turn %s." % [actor.Id, turn])
+				continue
+			actor.Que.que_action(action)
+			
+			# Re-Disnable current Actor's Position for Pathing
+			astar.set_pos_disabled(current_pos, true)
+			
+			if action.PreviewMoveOffset:
+				MoveHandler.handle_movement(turn_state, actor, action.PreviewMoveOffset, "", true)
+				var new_pos = turn_state.get_actor_pos(actor)
+				if new_pos != current_pos:
+					astar.set_pos_disabled(current_pos, false)
+					astar.set_pos_disabled(new_pos, true)
+			if action.CostData.size() > 0:
+				var cost_data = action.CostData
+				for cost_key in cost_data:
+					cost_datas[actor.Id][cost_key] -= cost_data[cost_key]
+		#last_turn_state = turn_state
+		print("Turn: %s" % [turn])
 		for actor in actors:
-			var current_pos = poses_by_turn[min(0,turn-1)]
-			_choose_page_for_actor(actor, actors, poses_by_turn[turn])
+			print("\t\t %s | %s" % [actor.Id, turn_state.get_actor_pos(actor)] )
 	pass
 
-static func _choose_page_for_actor(actor:BaseActor, all_actors:Array, actor_poses):
-	var current_pos = actor_poses[actor.Id]
+static func _choose_page_for_actor(actor:BaseActor, game_state:GameStateData, bar_stats:Dictionary)->BaseAction:
+	var current_action = actor.Que.get_action_for_turn(game_state.current_turn_index)
+	if current_action:
+		return current_action
+	var current_pos = game_state.get_actor_pos(actor)
 	var options = _get_actor_action_options_data(actor)
+	var attack_actions = []
 	for attack_key in options['Attacks']:
 		var attack_action = ActionLibrary.get_action(attack_key)
-			# Remove attack as option if we can't pay it's cost
-		if not can_actor_pay_cost(actor, attack_action.CostData, {}):
+		if not can_actor_pay_cost(actor, attack_action.CostData, bar_stats):
 			continue
+		if attack_key == "ThrowStone":
+			print("Test")
+		# Get potential targets for attack Action
 		var attack_params =  attack_action.get_preview_target_params(actor)
-		#var potential_targets = TargetingHelper.get_potential_target_actor_ids(attack_params, actor, game_state, [], curr_pos) 
+		var potential_targets = TargetingHelper.get_potential_target_actor_ids(attack_params, actor, game_state, [], current_pos) 
+		if potential_targets.size() == 0:
+			continue
+		var attack_has_enemy_target = false
+		# Validate that targets are not allies
+		for pot_targ in potential_targets:
+			var pot_actor = game_state.get_actor(pot_targ)
+			if pot_actor.FactionIndex != actor.FactionIndex:
+				attack_has_enemy_target = true
+		if not attack_has_enemy_target:
+			continue
+		#TODO: Attack Weights
+		return attack_action
+	
+	# Get target
+	var target_enemy = get_closest_enemy(actor, game_state)
+	if not target_enemy:
+		printerr("No enemies found for actor: %s" % [actor.Id])
+		return null
+	# Path to target
+	var target_pos = game_state.get_actor_pos(target_enemy)
+	var start_pos = game_state.get_actor_pos(actor)
+	var path = path_to_target(actor, start_pos, target_pos, game_state)
+	var path_moves = path.get('Moves', [])
+	if path_moves.size() > 0:
+		var move_action = ActionLibrary.get_action(path_moves[0])
+		if move_action:
+			return move_action
+	else:
+		printerr("No Path found for actor: %s" % [actor.Id])
+		
+	return ActionLibrary.get_action("Wait")
+	
 	pass
 
 static func _get_actor_action_options_data(actor:BaseActor)->Dictionary:
@@ -46,20 +122,22 @@ static func _get_actor_action_options_data(actor:BaseActor)->Dictionary:
 		"Moves":[],
 		"Attacks":[]
 	}
-	if cached_move_sets.has(actor.ActorKey):
-		return cached_move_sets[actor.ActorKey]
-	for action_key in actor.get_action_list():
+	#if cached_move_sets.has(actor.ActorKey):
+		#return cached_move_sets[actor.ActorKey]
+	var action_list = actor.get_action_key_list()
+	for action_key in action_list:
 		var action = ActionLibrary.get_action(action_key)
 		if action.PreviewMoveOffset:
 			data['Moves'].append(action_key)
-		if action.has_preview_target() and action.DamageDatas.size() > 0:
+		var damage_data = get_damage_data_of_action(action, actor)
+		if action.has_preview_target() and damage_data.size() > 0:
 			data['Attacks'].append(action_key)
 	cached_move_sets[actor.ActorKey] = data
 	return data
 			
 
 static func build_action_que(actor:BaseActor, game_state:GameStateData)->Array:
-	var enimes = get_enemy_actors(actor, game_state)
+	var enimes = []# get_enemy_actors(actor, game_state)
 	if enimes.size() == 0:
 		return []
 		
@@ -113,18 +191,39 @@ static func build_action_que(actor:BaseActor, game_state:GameStateData)->Array:
 		
 	return action_list
 
-static func can_actor_pay_cost(actor:BaseActor, cost_data:Dictionary, running_cost:Dictionary)->bool:
+static func can_actor_pay_cost(actor:BaseActor, cost_data:Dictionary, bar_stats:Dictionary)->bool:
 	for cost_key in cost_data.keys():
-		if cost_data[cost_key] + running_cost.get(cost_key, 0) > actor.stats.get_bar_stat(cost_key):
+		if not bar_stats.has(cost_key):
+			return false
+		if cost_data[cost_key] > bar_stats[cost_key]:
 			return false
 	return true
 
-static func get_enemy_actors(actor:BaseActor, game_state:GameStateData)->Array:
-	var out_list = []
-	for act:BaseActor in game_state.list_actors():
-		if act.FactionIndex != actor.FactionIndex:
-			out_list.append(act)
-	return out_list
+static func get_closest_enemy(actor:BaseActor, game_state:GameStateData)->BaseActor:
+	var actor_pos = game_state.get_actor_pos(actor)
+	var min_dist = 10000
+	var closest_actor = null
+	for enemy:BaseActor in game_state.list_actors():
+		if enemy.FactionIndex == actor.FactionIndex:
+			continue
+		var enemy_pos = game_state.get_actor_pos(enemy)
+		var dist = astar.get_cost_to_pos(actor_pos, enemy_pos)
+		if min_dist > dist:
+			min_dist = dist
+			closest_actor = enemy
+	return closest_actor
+
+static func get_damage_data_of_action(action:BaseAction, actor:BaseActor)->Dictionary:
+	var damage_data = action.DamageDatas
+	if damage_data.size() > 0:
+		return damage_data
+	# TODO: Better
+	if action.ActionKey == "BasicWeaponAttack":
+		var weapon = actor.equipment.get_primary_weapon()
+		if weapon:
+			return (weapon as BaseWeaponEquipment).get_damage_data()
+	return {}
+		
 
 static func try_handle_get_target_sub_action(actor:BaseActor, selection_data:TargetSelectionData, action:BaseAction, game_state:GameStateData)->bool:
 	var turndata = selection_data.focused_actor.Que.QueExecData.get_current_turn_data()
@@ -162,34 +261,44 @@ static func try_handle_get_target_sub_action(actor:BaseActor, selection_data:Tar
 
 static func path_to_target(actor:BaseActor, start_pos:MapPos, target_pos:MapPos, game_state:GameStateData)->Dictionary:
 	if !astar:
-		astar = build_path_finder(game_state)
+		printerr("AStart not built")
+		return {}
 	#var t_astar = build_path_finder(game_state)
-	var start_index = _pos_to_index(start_pos, game_state)
-	var end_index = _pos_to_index(target_pos, game_state)
+	var start_index = _pos_to_index(start_pos)
+	var end_index = _pos_to_index(target_pos)
 	if not astar.has_point(start_index):
 		printerr("Path Map does not have Starting Point: %s | %s" % [start_index, start_pos])
 		return {}
 	if not astar.has_point(end_index):
 		printerr("Path Map does not have End Point: %s | %s" % [end_index, start_pos])
 		return {}
-	# Disable occupied spots 
-	for check_actor in game_state.list_actors(false):
-		if not check_actor or check_actor.is_dead:
-			continue
-		var check_pos:MapPos = game_state.get_actor_pos(check_actor)
-		if actor and check_actor.Id == actor.Id:
-			continue
-		if check_pos.to_vector2i() == start_pos.to_vector2i():
-			continue
-		if check_pos.to_vector2i() == target_pos.to_vector2i():
-			continue
-		#print("Disabling Point: %s because %s " % [check_pos, check_actor.Id])
-		var path_index = _pos_to_index(check_pos, game_state)
-		if astar.has_point(path_index):
-			astar.set_point_disabled(path_index, true)
+	## Disable occupied spots 
+	#for check_actor in game_state.list_actors(false):
+		#if not check_actor or check_actor.is_dead:
+			#continue
+		#var check_pos:MapPos = game_state.get_actor_pos(check_actor)
+		#if actor and check_actor.Id == actor.Id:
+			#continue
+		#if check_pos.to_vector2i() == start_pos.to_vector2i():
+			#continue
+		#if check_pos.to_vector2i() == target_pos.to_vector2i():
+			#continue
+		##print("Disabling Point: %s because %s " % [check_pos, check_actor.Id])
+		#var path_index = _pos_to_index(check_pos, game_state)
+		#if astar.has_point(path_index):
+			#astar.set_point_disabled(path_index, true)
+	var start_was_disabled = false
+	if astar.is_point_disabled(start_index):
+		start_was_disabled = true
+		astar.set_pos_disabled(start_pos, false)
+	var end_was_disabled = false
+	if astar.is_point_disabled(end_index):
+		end_was_disabled = true
+		astar.set_pos_disabled(target_pos, false)
 	
 	var point_path = astar.get_point_path(start_index, end_index, true)
-	
+	if point_path.size() == 0:
+		printerr("No path found from %s to %s" % [start_index, end_index])
 	var move_list = []
 	var pos_list = []
 	var last_pos = start_pos
@@ -202,7 +311,12 @@ static func path_to_target(actor:BaseActor, start_pos:MapPos, target_pos:MapPos,
 			pos_list.append(res['NextPos'])
 			last_pos = res['NextPos']
 			#print("\t\tMovement: %s | Result: %s" % [res['Movement'], last_pos])
-		
+	
+	if start_was_disabled:
+		astar.set_pos_disabled(start_pos, true)
+	if end_was_disabled:
+		astar.set_pos_disabled(target_pos, true)
+	
 	return {"Moves": move_list, "Poses": pos_list, "Path": point_path}
 
 static func _translate_next_point_to_movement(current_pos:MapPos, move_to:Vector2i, move_options:Array)->Array:
@@ -270,7 +384,7 @@ static func build_path_finder(game_state:GameStateData)->AStar2D:
 				var same_pos_indexes = []
 				for dir in MapPos.Directions.values():
 					var map_pos = MapPos.new(x, y, 0, dir)
-					var index = _pos_to_index(map_pos, game_state)
+					var index = _pos_to_index(map_pos)
 					star.add_point(index, coor, 1)
 					for same_pos in same_pos_indexes:
 						star.connect_points(index, same_pos)
@@ -297,20 +411,8 @@ static func build_path_finder(game_state:GameStateData)->AStar2D:
 		#print(line)
 	return star
 
-#static func get_potential_target_actor_ids(target_params:TargetParameters, actor:BaseActor, game_state:GameStateData, exclude_targets:Array=[], pos_override:MapPos=null)->Array:
-	#var potentials = get_potential_coor_to_targets(target_params, actor, game_state, exclude_targets, pos_override)
-	#var targets = dicarry_to_values(potentials)
-	#if target_params.is_actor_target_type():
-		#return targets
-	#var actor_ids_list = []
-	#for target_spot in potentials.keys():
-		#var actors = game_state.get_actors_at_pos(target_spot)
-		#for act in actors:
-			#if not actor_ids_list.has(act.Id):
-				#actor_ids_list.append(act.Id)
-	#return actor_ids_list
 
-static func _pos_to_index(pos:MapPos, game_state)->int:
+static func _pos_to_index(pos:MapPos)->int:
 	var pos_index = pos.x
 	pos_index = pos_index << 8
 	pos_index += pos.y
@@ -324,5 +426,5 @@ static func _list_pos_indexes(pos, game_state)->Array:
 	var out_list = []
 	for dir in MapPos.Directions.values():
 		temp_pos.dir = dir
-		out_list.append(_pos_to_index(temp_pos, game_state))
+		out_list.append(_pos_to_index(temp_pos))
 	return out_list

@@ -20,29 +20,29 @@
 			"BarMax:Health":12,
 			"BarRegen:Health:Round":0,
 			"BarRegen:Health:Turn":0,
-			"BarStat:Stamina":10,
 			"BarMax:Stamina":10,
-			"BarRegen:Stamina:Round":0,
-			"BarRegen:Stamina:Turn":10,
+			"BarRegen:Stamina:Round":5,
+			"BarRegen:Stamina:Turn":0,
 			"Mass":10,
 			"Speed":50,
 			"Strength": 10,
+			"Agility": 10,
+			"Intelligence": 5,
+			"Wisdom": 5,
 			"Armor": 0,
 			"Evasion":10,
 			"PPR":3
 		},
 		"AutoQue": true,
 		"EquipmentSlots": ["Que"],
-        "SpawnEquipmentList": [
-        ],
-		
+        "SpawnEquipmentList": [],
         "AiData":{
-            "Actions":[
+            "ActionsArr":[
 				"MoveForward",
 				"TurnLeft",
 				"TurnRight",
-				"ChuckAcorn",
-				"BasicMelee"
+				"BasicMelee",
+				"ChuckAcorn"
 			]
         },
 		"DefaultPageSlotSet": [
@@ -93,17 +93,27 @@
 			"BarMax:Health":12,
 			"BarRegen:Health:Round":0,
 			"BarRegen:Health:Turn":0,
-			"BarStat:Stamina":10,
-			"BarMax:Stamina":10,
-			"BarRegen:Stamina:Round":0,
-			"BarRegen:Stamina:Turn":10,
+			"BarMax:Mana":20,
+			"BarRegen:Mana:Round":20,
+			"BarRegen:Mana:Turn":0,
 			"Mass":10,
 			"Speed":50,
-			"Strength": 10,
-			"Ward": 10,
+			"Strength": 5,
+			"Agility": 10,
+			"Intelligence": 10,
+			"Wisdom": 5,
+			"Ward": 30,
 			"Evasion":0,
 			"PPR":2
-		}
+		},
+        "AiData":{
+            "ActionsArr":[
+				"MoveForward",
+				"TurnLeft",
+				"TurnRight",
+				"SquirrleMagic"
+			]
+        }
 	},
 	{
 		"ParentKey": "Squirrel",
@@ -123,16 +133,26 @@
 			"BarMax:Health":12,
 			"BarRegen:Health:Round":0,
 			"BarRegen:Health:Turn":0,
-			"BarStat:Stamina":10,
-			"BarMax:Stamina":10,
-			"BarRegen:Stamina:Round":0,
-			"BarRegen:Stamina:Turn":10,
+			"BarMax:Stamina":30,
+			"BarRegen:Stamina:Round":10,
+			"BarRegen:Stamina:Turn":0,
 			"Mass":10,
 			"Speed":0,
 			"Strength": 10,
-			"Ward": 10,
+			"Agility": 10,
+			"Intelligence": 5,
+			"Wisdom": 5,
+			"Armor": 30,
 			"Evasion":0,
 			"PPR":3
-		}
+		},
+        "AiData":{
+            "ActionsArr":[
+				"MoveForward",
+				"TurnLeft",
+				"TurnRight",
+				"BasicMelee"
+			]
+        }
 	}
 ]

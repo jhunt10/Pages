@@ -92,8 +92,13 @@ func create_actor_node(actor:BaseActor, map_pos:MapPos, wait_to_show:bool=false)
 	new_node.set_actor(actor)
 	new_node.set_map_pos(map_pos)
 	new_node.visible = !wait_to_show
+	new_node.tree_exiting.connect(_on_actor_node_leave_tree.bind(actor.Id))
 	if LOGGING: print("MapControllerNode: Created Actor Node: %s" % [actor.Id])
 	return new_node
+
+func _on_actor_node_leave_tree(actor_id):
+	if actor_nodes.has(actor_id):
+		actor_nodes.erase(actor_id)
 
 func delete_actor_node(actor:BaseActor):
 	if Engine.is_editor_hint(): return

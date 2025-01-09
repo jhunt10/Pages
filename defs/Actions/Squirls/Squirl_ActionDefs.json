@@ -16,7 +16,7 @@
             }
         },
         "Details": {
-            "Description": "Toss an acorn at the target",
+            "Description": "Toss an acorn Missile at the target",
             "DisplayName": "Chuck Acorn",
             "LargeIcon": "AcornIcon.png",
             "SmallIcon": "AcornIcon.png",
@@ -34,7 +34,16 @@
                 "DamageDataKey": "Damage1",
                 "FramesPerTile": 6,
                 "ImpactVfxKey": "Blunt_DamageEffect",
-                "MissileVfxKey": "AcornMissile",
+                "MissileVfxData":
+                {
+                    "VFXKey": "AcornMissile",
+                    "AnimationName": "8_sprites_250ms_frames_loop",
+                    "AnimationSpeed": 2,
+                    "SpriteName": "AcornMissile.png",
+                    "SpriteSheetWidth": 2,
+                    "SpriteSheetHight": 4,
+                    "RandomOffsets": [0, 0]
+                },
                 "UseLobPath": true
             }
         },
@@ -52,6 +61,92 @@
                 }
             ],
             "4": [
+                {
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_PayCost.gd",
+                },
+                {
+                    "DamageKey": "Damage1",
+                    "MissileKey": "Missile1",
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_SpawnMissile.gd",
+                    "TargetKey": "Target1",
+                    "TargetParamKey": "TargetParam"
+                }
+            ]
+        },
+        "TargetParams": {
+            "TargetParam": {
+                "EffectsAllies": false,
+                "EffectsEnemies": true,
+                "LineOfSight": true,
+                "TargetArea": "[[-1,1],[0,1],[1,1],[-1,2],[0,2],[1,2],[-1,3],[0,3],[1,3]]",
+                "TargetType": "Spot"
+            }
+        }
+    },
+    {
+        "ActionKey": "SquirrleMagic",
+        "CostData": {
+            "Mana": 10
+        },
+        "DamageDatas": {
+            "Damage1": {
+                "AtkPower": 30,
+                "AtkStat": "Intelligence",
+                "BaseDamage": 0,
+                "DamageEffect": "SmallFire_DamageEffect",
+                "DamageType": "Fire",
+                "DamageVarient": 0.2,
+                "DefenseType": "Ward"
+            }
+        },
+        "Details": {
+            "Description": "Shoot a flaming acorn Missile at the target",
+            "DisplayName": "Squirrel Magic",
+            "LargeIcon": "FlamingAcornIcon.png",
+            "SmallIcon": "FlamingAcornIcon.png",
+            "SnippetDesc": "Chuck a flaming acorn",
+            "Tags": [
+                "Attack",
+                "Fire",
+                "Missile",
+                "Ranged",
+                "Spell"
+            ]
+        },
+        "MissileDatas": {
+            "Missile1": {
+                "DamageDataKey": "Damage1",
+                "FramesPerTile": 6,
+                "MissileVfxData":
+                {
+                    "VFXKey": "FlamingAcornMissile",
+                    "AnimationName": "8_sprites_250ms_frames_loop",
+                    "AnimationSpeed": 2,
+                    "SpriteName": "FlamingAcornMissile.png",
+                    "SpriteSheetWidth": 2,
+                    "SpriteSheetHight": 4,
+                    "RandomOffsets": [0, 0]
+                },
+                "UseLobPath": true
+            }
+        },
+        "Preview": {
+            "PreviewTargetKey": "TargetParam"
+        },
+        "SubActions": {
+            "3": [
+                {
+                    "AllowAlreadyTargeted": false,
+                    "AllowAutoTarget": true,
+                    "SetTargetKey": "Target1",
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_GetTarget.gd",
+                    "TargetParamKey": "TargetParam"
+                }
+            ],
+            "4": [
+                {
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_PayCost.gd",
+                },
                 {
                     "DamageKey": "Damage1",
                     "MissileKey": "Missile1",

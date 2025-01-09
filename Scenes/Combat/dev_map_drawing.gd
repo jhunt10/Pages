@@ -15,6 +15,8 @@ func _process(delta: float) -> void:
 func _draw() -> void:
 	for action_que:ActionQue in CombatRootControl.QueController._action_ques.values():
 		var actor_node = CombatRootControl.get_actor_node(action_que.actor.Id)
+		if not actor_node:
+			continue
 		var tile_map:TileMapLayer = actor_node.get_parent()
 		var last_coor = actor_node.position 
 		var last_pos = actor_node.cur_map_pos 

@@ -62,7 +62,7 @@ canvas_layer = NodePath("CanvasLayer")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="MoveableCamera2D"]
 
-[node name="DevDataControl" type="Control" parent="MoveableCamera2D/CanvasLayer" node_paths=PackedStringArray("build_ques_button")]
+[node name="DevDataControl" type="Control" parent="MoveableCamera2D/CanvasLayer" node_paths=PackedStringArray("build_ques_button", "show_paths_button", "dev_map_display")]
 layout_mode = 3
 anchors_preset = 1
 anchor_left = 1.0
@@ -70,10 +70,12 @@ anchor_right = 1.0
 offset_left = -108.0
 offset_top = 8.0
 offset_right = -8.0
-offset_bottom = 61.0
+offset_bottom = 138.0
 grow_horizontal = 0
 script = ExtResource("19_yc3tw")
-build_ques_button = NodePath("Button")
+build_ques_button = NodePath("BuildQuesButton")
+show_paths_button = NodePath("ShowPathsButton")
+dev_map_display = NodePath("../../../DEV_MapDrawing")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="MoveableCamera2D/CanvasLayer/DevDataControl"]
 layout_mode = 1
@@ -173,13 +175,22 @@ offset_bottom = 120.0
 texture = ExtResource("24_5fn7e")
 expand_mode = 4
 
-[node name="Button" type="Button" parent="MoveableCamera2D/CanvasLayer/DevDataControl"]
+[node name="BuildQuesButton" type="Button" parent="MoveableCamera2D/CanvasLayer/DevDataControl"]
 layout_mode = 0
 offset_left = 8.0
-offset_top = 8.0
-offset_right = 55.0
-offset_bottom = 31.0
+offset_top = 31.0
+offset_right = 91.0
+offset_bottom = 62.0
 text = "BQs"
+
+[node name="ShowPathsButton" type="Button" parent="MoveableCamera2D/CanvasLayer/DevDataControl"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 66.0
+offset_right = 91.0
+offset_bottom = 97.0
+text = "Paths
+"
 
 [node name="CombatUiControl" type="Control" parent="MoveableCamera2D/CanvasLayer" node_paths=PackedStringArray("game_over_screen", "victory_screen", "menu_container", "menu_button", "pause_menu", "target_input_display", "stat_panel_control", "que_input", "que_display", "que_collection_display", "stats_collection_display", "item_select_menu")]
 layout_mode = 3
@@ -275,7 +286,6 @@ offset_bottom = -184.0
 grow_vertical = 2
 
 [node name="StatCollectionDisplayControl" type="Control" parent="MoveableCamera2D/CanvasLayer/CombatUiControl"]
-visible = false
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -680,6 +690,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="GameVictoryScreen" type="Control" parent="MoveableCamera2D/CanvasLayer/CombatUiControl" node_paths=PackedStringArray("camp_button", "premade_pickup_page", "pickup_pages_container", "premade_pickup_item", "pickup_items_container")]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -973,5 +984,6 @@ texture = ExtResource("7_7lt4y")
 script = ExtResource("8_wf3xb")
 
 [node name="DEV_MapDrawing" type="Node2D" parent="."]
+visible = false
 z_index = 100
 script = ExtResource("37_fh4f7")

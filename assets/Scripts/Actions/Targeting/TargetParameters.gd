@@ -95,6 +95,7 @@ func is_actor_effected_by_aoe(actor:BaseActor, target:BaseActor, game_state:Game
 		return include_enemies_in_aoe 
 	return false
 
+## Returns Dictionary of Coor mapped to LOS_VAL
 func get_valid_target_area(center:MapPos)->Dictionary:
 	if _cached_canter_pos == center:
 		return _cached_target_area

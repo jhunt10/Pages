@@ -3,6 +3,7 @@ class_name BaseMissile
 const LOGGING = true
 
 var Id : String = str(ResourceUID.create_id())
+var _load_path:String
 func get_tagable_id(): return Id
 func get_tags(): return _missle_data.get('Tags', [])
 
@@ -11,7 +12,6 @@ var _source_actor_id:String
 var _source_target_chain:SourceTagChain
 var _target_params:TargetParameters
 var _missle_data:Dictionary
-var _missile_vfx_key:String
 var _impact_vfx_key:String
 var StartSpot:Vector2i
 var TargetSpot:Vector2i
@@ -26,9 +26,9 @@ var _position_per_frame:Array=[]
 func _init(source_actor:BaseActor, missile_data:Dictionary, source_tag_chain:SourceTagChain, 
 			target_params:TargetParameters, start_pos:MapPos, target_pos:MapPos, load_path:String) -> void:
 	_source_actor_id = source_actor.Id
+	_load_path = load_path
 	_missle_data = missile_data
 	_target_params = target_params
-	_missile_vfx_key = missile_data['MissileVfxKey']
 	_impact_vfx_key = missile_data.get('ImpactVfxKey', '')
 	_lob_path = missile_data.get("UseLobPath", false)
 	
@@ -44,7 +44,18 @@ func get_source_actor()->BaseActor:
 	return ActorLibrary.get_actor(_source_actor_id)
 
 func get_missile_vfx_data()->VfxData:
-	return MainRootNode.vfx_libray.get_vfx_data(_missile_vfx_key)
+	var vfx_def = _missle_data.get("MissileVfxData", null)
+	if vfx_def:
+		var vfx_data = VfxData.new(vfx_def, _load_path)
+		return vfx_data
+	var missile_key = _missle_data.get("MissileVfxKey", null)
+	if missile_key:
+		var data = MainRootNode.vfx_libray.get_vfx_data(missile_key)
+		if not data:
+			printerr("BasMissile.get_missile_vfx_data: No Vfx Data found for key: %s" % [missile_key])
+			return null
+		return data
+	return null
 
 func get_position_for_frame(frame:int):
 	var index = frame - _start_frame
@@ -59,10 +70,21 @@ func has_reached_target()->bool:
 	return _end_frame == CombatRootControl.Instance.QueController.sub_action_index
 
 func has_impact_vfx()->bool:
-	return _impact_vfx_key != ''
-
+	return _missle_data.has("ImpactVfxKey") or _missle_data.has("ImpactVfxData")
+	
 func get_impact_vfx_data()->VfxData:
-	return MainRootNode.vfx_libray.get_vfx_data(_impact_vfx_key)
+	var vfx_def = _missle_data.get("ImpactVfxData", null)
+	if vfx_def:
+		var vfx_data = VfxData.new(vfx_def, _load_path)
+		return vfx_data
+	var vfx_key = _missle_data.get("ImpactVfxKey", null)
+	if vfx_key:
+		var data = MainRootNode.vfx_libray.get_vfx_data(vfx_key)
+		if not data:
+			printerr("BasMissile.get_impact_vfx_data: No Vfx Data found for key: %s" % [vfx_key])
+			return null
+		return data
+	return null
 
 func do_thing(game_state:GameStateData):
 	if LOGGING: print('Missile ' + str(Id) + " has done thing.")

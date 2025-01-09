@@ -15,7 +15,7 @@ func on_defending(effect:BaseEffect, _subeffect_data:Dictionary, game_state:Game
 		return
 	#var countering_actor = effect.get_effected_actor()
 	#var counter_target_actor = attack_event.attacker
-	#var primary_weapon = countering_actor.get_action_list()
+	#var primary_weapon = countering_actor.get_action_key_list()
 	#var target_params = countering_actor.get_default_attack_target_params()
 	## Check if in range
 	#if not TargetingHelper.is_actor_targetable(target_params, countering_actor, counter_target_actor, game_state):

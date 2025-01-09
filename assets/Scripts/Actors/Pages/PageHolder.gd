@@ -62,7 +62,9 @@ func set_page_que_item(page_que:BaseQueEquipment):
 func list_action_keys()->Array:
 	var out_list = []
 	for item in list_items():
-		out_list.append(item.get_action_key())
+		var key = item.get_action_key()
+		if key:
+			out_list.append(key)
 	return out_list
 
 func list_actions()->Array:

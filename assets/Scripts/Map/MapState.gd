@@ -10,7 +10,7 @@ var _game_state:GameStateData
 var _actor_pos_cache:Dictionary = {}
 var _item_pos_cache:Dictionary = {}
 var _position_data:Array = []
-var terrain_data
+var terrain_data:Array
 var max_width = 0
 var max_hight = 0
 
@@ -18,31 +18,41 @@ func duplicate(new_game_state)->MapStateData:
 	var map_data = {
 		'Width': max_width,
 		'Hight': max_hight,
-		'Terrain': {}
+		'Terrain': terrain_data.duplicate(true)
 	}
-	var new_map = MapStateData.new(new_game_state, map_data)
+	var new_map = MapStateData.new(new_game_state, map_data, true)
 	for spot:MapSpot in _position_data:
+		if spot.X == 7 and spot.Y == 7:
+			print("Had 77 Had: %s" % [spot])
+		var new_spot = spot.duplicate(new_map)
+		if new_spot.X == 7 and new_spot.Y == 7:
+			print("Dupped 77 SPot: %s to %s" % [spot, new_spot])
 		new_map._position_data.append(spot.duplicate(new_map))
 	new_map._actor_pos_cache = _actor_pos_cache.duplicate(true)
 	new_map._item_pos_cache = _item_pos_cache.duplicate(true)
+	print("Dupped MapState %s to %s" %[self, new_map])
 	return new_map
 
 
-func _init(game_state:GameStateData, map_data:Dictionary) -> void:
+func _init(game_state:GameStateData, map_data:Dictionary, wait_for_pos_data:bool=false) -> void:
 	_game_state = game_state
 	max_width = map_data['Width']
 	max_hight = map_data['Hight']
 	_position_data = []
 	terrain_data = map_data['Terrain']
-	for y in range(max_hight):
-		for x in range(max_width):
-			_position_data.append(MapSpot.new(x,y,terrain_data[y][x], self))
+	if not wait_for_pos_data:
+		for y in range(max_hight):
+			for x in range(max_width):
+				_position_data.append(MapSpot.new(x,y,terrain_data[y][x], self))
 			
 func get_map_spot(pos)->MapSpot:
 	if pos.x < 0 or pos.x >= max_width or pos.y < 0 or pos.y >= max_hight:
 		#printerr("MapState.get_map_spot Invalid Position: " + str(pos))
 		return null
-	return _position_data[pos.x + (pos.y * max_width)]
+	var spot = _position_data[pos.x + (pos.y * max_width)]
+	if spot.X != pos.x and spot.Y != pos.y:
+		printerr("Miss-Ordered Map Spots")
+	return spot
 
 func list_map_spots()->Array:
 	return _position_data
@@ -89,6 +99,8 @@ func is_spot_open(pos, ignore_actor_ids:Array=[])->bool:
 func get_actors_at_pos(pos, layer=null, include_dead:bool=false)->Array:
 	var spot:MapSpot = get_map_spot(pos)
 	if spot:
+		if pos.x == 7 and pos.y == 6:
+			print("Found 77 SPot: %s" % [spot])
 		return spot.get_actors(layer, include_dead)
 	return []
 		
@@ -113,7 +125,7 @@ func set_actor_layer(actor:BaseActor, layer:MapLayers):
 		return
 	set_actor_pos(actor, current_pos, layer)
 
-func set_actor_pos(actor:BaseActor, pos:MapPos, layer=DEFAULT_ACTOR_LAYER):
+func set_actor_pos(actor:BaseActor, pos:MapPos, supress_signal:bool=false):
 	if LOGGING: print("Set Actor Pos")
 	if pos.x < 0 or pos.x >= max_width or pos.y < 0 or pos.y >= max_hight:
 		printerr("set_actor_pos: Invalid Actor Position: " + str(pos))
@@ -124,24 +136,25 @@ func set_actor_pos(actor:BaseActor, pos:MapPos, layer=DEFAULT_ACTOR_LAYER):
 	if _actor_pos_cache.has(actor.Id):
 		# Bail if no change
 		if _actor_pos_cache[actor.Id] == pos:
-			var cur_layer = get_actor_layer(actor)
-			if cur_layer == layer:
+			#var cur_layer = get_actor_layer(actor)
+			#if cur_layer == layer:
 				return
 		# Delete old position data and cached position
 		old_pos = _actor_pos_cache[actor.Id]
 		var old_spot = get_map_spot(old_pos)
-		on_actor_exit_spot(actor, old_pos, old_spot, pos)
+		#on_actor_exit_spot(actor, old_pos, old_spot, pos)
 		old_spot.remove_actor(actor)
 		_actor_pos_cache.erase(actor.Id)
 		
 	# Set new position (Actor.DisplayPos is updated after frame)
 	var new_spot = get_map_spot(pos)
-	new_spot.add_actor(actor, layer)
+	new_spot.add_actor(actor, null)
 	_actor_pos_cache[actor.Id] = pos
 	
 	if LOGGING: printerr("Emit Move: " + str(old_pos) + " | " + str(pos))
-	actor.on_move.emit(old_pos, pos, {"MoveType": "Test", "MovedBy":null})
-	on_actor_enter_spot(actor, pos, new_spot)
+	if not supress_signal:
+		actor.on_move.emit(old_pos, pos, {"MoveType": "Test", "MovedBy":null})
+	#on_actor_enter_spot(actor, pos, new_spot)
 
 func remove_actor(actor:BaseActor):
 	if _actor_pos_cache.has(actor.Id):
@@ -150,17 +163,17 @@ func remove_actor(actor:BaseActor):
 		old_spot.remove_actor(actor)
 		_actor_pos_cache.erase(actor.Id)
 
-## Holds all logic that triggers when an actor enters a map spot
-func on_actor_enter_spot(actor:BaseActor, map_pos:MapPos, map_spot:MapSpot):
-	if actor.is_player:
-		var items = map_spot.get_items()
-		for item in items:
-			if ItemHelper.try_pickup_item(actor, item):
-				printerr("\nPicked Up Item: %s\n" % [item.Id])
-
-## Holds all logic that triggers when an actor enters a map spot
-func on_actor_exit_spot(actor:BaseActor, map_pos:MapPos, map_spot:MapSpot, moving_to_pos:MapPos):
-	pass
+### Holds all logic that triggers when an actor enters a map spot
+#func on_actor_enter_spot(actor:BaseActor, map_pos:MapPos, map_spot:MapSpot):
+	#if actor.is_player:
+		#var items = map_spot.get_items()
+		#for item in items:
+			#if ItemHelper.try_pickup_item(actor, item):
+				#printerr("\nPicked Up Item: %s\n" % [item.Id])
+#
+### Holds all logic that triggers when an actor enters a map spot
+#func on_actor_exit_spot(actor:BaseActor, map_pos:MapPos, map_spot:MapSpot, moving_to_pos:MapPos):
+	#pass
 	
 
 # ----------------------------- Items -----------------------------

@@ -20,7 +20,7 @@ func set_actor(actor:BaseActor):
 	for child in page_tag_slots_entries_container.get_children():
 		child.queue_free()
 	_actor = actor
-	var action_key_list:Array = actor.get_action_list()
+	var action_key_list:Array = actor.get_action_key_list()
 	var pages = actor.pages.get_pages_per_page_tags()
 	for page_tags in pages.keys():
 		_create_new_page_tags_entry(page_tags, pages[page_tags])

@@ -401,7 +401,6 @@ script = ExtResource("6_5vfat")
 button = NodePath("Button")
 under_line = NodePath("TitleLabel/ColorRect")
 highlight = NodePath("TextureRect")
-disabled = true
 label = NodePath("TitleLabel")
 text = "System"
 
@@ -417,7 +416,7 @@ grow_vertical = 2
 texture = ExtResource("7_hs7sy")
 
 [node name="TitleLabel" type="Label" parent="CampOptionsContainer/MainOptionsContainer/ScribeOptionButton"]
-self_modulate = Color(0.411765, 0.411765, 0.411765, 1)
+self_modulate = Color(0.470588, 0, 0, 1)
 layout_mode = 0
 offset_right = 180.0
 offset_bottom = 60.0

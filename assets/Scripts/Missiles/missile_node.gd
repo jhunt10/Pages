@@ -9,7 +9,8 @@ var missile_effect_node:VfxNode
 var impact_effect_node:VfxNode
 
 func _ready() -> void:
-	missile_effect_node.start_vfx()
+	if missile_effect_node:
+		missile_effect_node.start_vfx()
 	pass
 	#if missile:
 		#var anidata = missile.get_missile_animation_data()
@@ -19,7 +20,11 @@ func _ready() -> void:
 func set_missile_data(missle):
 	missile = missle
 	missile.node = self
-	missile_effect_node = MainRootNode.vfx_libray.create_vfx_node(missile.get_missile_vfx_data())
+	var vfx_data = missile.get_missile_vfx_data()
+	if not vfx_data:
+		printerr("missile_node: No Missile Vfx Data found")
+		return
+	missile_effect_node = MainRootNode.vfx_libray.create_vfx_node(vfx_data)
 	self.add_child(missile_effect_node)
 
 func sync_pos():
@@ -34,8 +39,9 @@ func sync_pos():
 		
 	var start_pos:Vector2 = missile._position_per_frame[0]
 	var end_pos:Vector2 = missile._position_per_frame[missile._position_per_frame.size() -1]
-	var angle = start_pos.direction_to(end_pos).angle() + (PI / 2)
-	missile_effect_node.rotation = angle
+	if missile_effect_node:
+		var angle = start_pos.direction_to(end_pos).angle() + (PI / 2)
+		missile_effect_node.rotation = angle
 
 func on_missile_reach_target():
 	if missile.has_impact_vfx():
@@ -44,6 +50,7 @@ func on_missile_reach_target():
 		impact_effect_node.tree_exited.connect(self.queue_free)
 		self.add_child(impact_effect_node)
 		impact_effect_node.start_vfx()
-		missile_effect_node.visible = false
+		if missile_effect_node:
+			missile_effect_node.visible = false
 	else:
 		self.queue_free()

@@ -51,7 +51,7 @@ func _build_buttons():
 			but.queue_free()
 		_buttons.clear()
 	var index = 0
-	for action_key in _actor.get_action_list():
+	for action_key in _actor.get_action_key_list():
 		if action_key == null:
 			continue
 		var new_button:TextureButton = page_button_prefab.duplicate()

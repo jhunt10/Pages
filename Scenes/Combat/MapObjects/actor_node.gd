@@ -56,6 +56,7 @@ func set_actor(actor:BaseActor):
 	if not actor.equipment_changed.is_connected(sync_sprites):
 		actor.equipment_changed.connect(sync_sprites)
 		actor.on_move_failed.connect(_on_movement_failed)
+		actor.action_failed.connect(_on_action_failed)
 		actor.on_move.connect(on_actor_moved)
 		actor.on_death.connect(queue_death)
 	#_load_nodes()
@@ -129,7 +130,10 @@ func _on_movement_failed(cur_pos:MapPos):
 	
 
 func _on_action_failed():
-	pass
+	if main_hand_node and main_hand_node.animation_is_ready:
+		main_hand_node.cancel_animation()
+	if off_hand_node and off_hand_node.animation_is_ready:
+		off_hand_node.cancel_animation()
 
 ## Forces the actor to given position
 func set_map_pos(pos:MapPos, keep_movement_offset:bool=false):

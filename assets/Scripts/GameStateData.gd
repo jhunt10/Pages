@@ -22,8 +22,9 @@ func duplicate()->GameStateData:
 	new_state._items = _items.duplicate()
 	new_state.Missiles = Missiles.duplicate()
 	new_state.Zones = Zones.duplicate()
-	var new_map = map_data.duplicate(new_state)
-	new_state.set_map_data(new_map)
+	new_state.map_data = map_data.duplicate(new_state)
+	new_state.map_width = new_state.map_data.max_width
+	new_state.map_hight = new_state.map_data.max_hight
 	return new_state
 
 func set_map_data(data:Dictionary):
@@ -60,8 +61,8 @@ func list_actors(include_dead:bool=false):
 	return out_list
 
 
-func set_actor_pos(actor:BaseActor, pos:MapPos):
-	map_data.set_actor_pos(actor, pos)
+func set_actor_pos(actor:BaseActor, pos:MapPos, suppress_signal:bool=false):
+	map_data.set_actor_pos(actor, pos, suppress_signal)
 	#_actor_poses[actor.Id] = pos
 	
 func get_actor_pos(actor:BaseActor)->MapPos:
@@ -102,8 +103,11 @@ func list_items()->Array:
 	return _items.values()
 
 func delete_item(item:BaseItem):
+	remove_item(item)
 	_items.erase(item.Id)
 
+func remove_item(item:BaseItem):
+	map_data.remove_item(item)
 
 
 

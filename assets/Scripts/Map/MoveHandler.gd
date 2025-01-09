@@ -26,7 +26,7 @@ static func relative_pos_to_real(current_pos:MapPos, relative_pos:MapPos) -> Map
 	return new_pos
 
 static func handle_movement(game_state:GameStateData, moving_actor:BaseActor, 
-		relative_movement:MapPos, move_type:String) -> bool:
+		relative_movement:MapPos, move_type:String, simulated:bool=false) -> bool:
 	var actor_pos:MapPos = game_state.get_actor_pos(moving_actor)
 	var new_pos = relative_pos_to_real(actor_pos, relative_movement)
 	if (new_pos.x < 0 or new_pos.x >= game_state.map_width 
@@ -38,7 +38,7 @@ static func handle_movement(game_state:GameStateData, moving_actor:BaseActor,
 	
 	# Skip pushing logic if we aren't changing spots
 	if new_pos.x == actor_pos.x and new_pos.y == actor_pos.y:
-		game_state.set_actor_pos(moving_actor, new_pos)
+		game_state.set_actor_pos(moving_actor, new_pos, simulated)
 		if LOGGING:
 			print("------------------------------")
 		return true
@@ -48,7 +48,7 @@ static func handle_movement(game_state:GameStateData, moving_actor:BaseActor,
 		if LOGGING: 
 			print("\tSpot is not traversable" )
 			print("------------------------------")
-		game_state.set_actor_pos(moving_actor, actor_pos)
+		game_state.set_actor_pos(moving_actor, actor_pos, simulated)
 		return false
 	
 	# Get actor in same z layer as where we are going
@@ -63,24 +63,30 @@ static func handle_movement(game_state:GameStateData, moving_actor:BaseActor,
 	# Handle Push
 	if blocking_actor:
 		if LOGGING: print("\tFound blocking actor: " + blocking_actor.ActorKey)
+		if simulated:
+			printerr("!!!Simulated Push!!!")
 		if not PushableMovement.has(move_type):
 			if LOGGING: print("\t\tPush NotAllowed")
-			game_state.set_actor_pos(moving_actor, actor_pos)
+			game_state.set_actor_pos(moving_actor, actor_pos, simulated)
 			return false
 		var push_res = _try_push(game_state, moving_actor, blocking_actor, relative_movement)
 		if push_res:
 			if LOGGING: print("\t\tPush success")
-			DamageHelper.handle_push_damage(moving_actor, blocking_actor, game_state)
-			var blocking_node:ActorNode = CombatRootControl.Instance.MapController.actor_nodes.get(blocking_actor.Id)
-			blocking_node.set_move_destination(push_res, 24, false)
-			game_state.set_actor_pos(blocking_actor, push_res)
+			if not simulated:
+				DamageHelper.handle_push_damage(moving_actor, blocking_actor, game_state)
+				var blocking_node:ActorNode = CombatRootControl.Instance.MapController.actor_nodes.get(blocking_actor.Id)
+				blocking_node.set_move_destination(push_res, 24, false)
+			game_state.set_actor_pos(blocking_actor, push_res, simulated)
 		else:
 			if LOGGING: print("\t\tPush Failed")
-			DamageHelper.handle_push_damage(blocking_actor, moving_actor, game_state)
-			game_state.set_actor_pos(moving_actor, actor_pos)
+			if not simulated:
+				DamageHelper.handle_push_damage(blocking_actor, moving_actor, game_state)
+			game_state.set_actor_pos(moving_actor, actor_pos, simulated)
 			return false
 	
-	game_state.set_actor_pos(moving_actor, new_pos)
+	if LOGGING:
+		print("\t\tSetting Pos: %s" % [new_pos])
+	game_state.set_actor_pos(moving_actor, new_pos, simulated)
 	if LOGGING:
 		print("------------------------------")
 	return true

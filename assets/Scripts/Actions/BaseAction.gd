@@ -18,7 +18,7 @@ var MissileDatas:Dictionary:
 		get: return get_load_val('MissileDatas', {})
 
 var OnQueUiState:String:
-	get: return get_load_val("OnQueUiState")
+	get: return get_load_val("OnQueUiState", "")
 var _target_params:Dictionary
 
 func get_tagable_id(): return ActionKey

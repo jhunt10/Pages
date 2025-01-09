@@ -58,6 +58,8 @@ static func get_targeted_actors(target_params:TargetParameters, targets:Array, s
 	#var potentials = get_potential_coor_to_targets(target_params, actor, game_state, exclude_targets)
 	#return potentials.keys()
 	#
+
+
 static func get_potential_target_actor_ids(target_params:TargetParameters, actor:BaseActor, game_state:GameStateData, exclude_targets:Array=[], pos_override:MapPos=null)->Array:
 	var potentials = get_potential_coor_to_targets(target_params, actor, game_state, exclude_targets, pos_override)
 	var targets = dicarry_to_values(potentials)

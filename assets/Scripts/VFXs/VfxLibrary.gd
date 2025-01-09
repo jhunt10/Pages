@@ -43,6 +43,9 @@ func create_vfx_node_from_key(vfx_key:String, data:Dictionary={})->VfxNode:
 	return create_vfx_node(vfx_data, data)
 
 func create_vfx_node(vfx_data:VfxData, data:Dictionary={})->VfxNode:
+	if not vfx_data:
+		printerr("VfxLibrary: Null data given to create_vfx_node.")
+		return null
 	var new_node:VfxNode = load("res://Scenes/VFXs/vfx_node.tscn").instantiate()
 	new_node.set_vfx_data(vfx_data, data)
 	return new_node

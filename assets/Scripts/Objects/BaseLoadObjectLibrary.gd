@@ -318,6 +318,7 @@ static func _merge_defs(child:Dictionary, parent:Dictionary)->Dictionary:
 			if val.size() == 0:
 				val = parent.get(key, [])
 			# Merge list only when Strings
+			# Lists sufixed with "Arr" are NOT merged
 			elif val[0] is String and not (key.begins_with("Spawn") or key.ends_with("Arr")):
 				var new_list = []
 				for arr_val in parent.get(key, []):

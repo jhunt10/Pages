@@ -167,27 +167,30 @@ func die():
 	#node.set_corpse_sprite()
 	#node.queue_death()
 	
-func auto_build_que(current_turn:int=0):
-	var ai_data = ai_def
-	if !ai_data:
-		ai_data = pages.list_action_keys()
-	
-	var action_keys_que = []
-	if ai_data.has("PrebuiltQueArr"):
-		action_keys_que = ai_data['PrebuiltQueArr']
-	else:
-		action_keys_que = AiHandler.build_action_que(self, CombatRootControl.Instance.GameState)
-		
-	for action_name in action_keys_que:
-		var action = ActionLibrary.get_action(action_name)
-		if action:
-			#print("Queing Page: " + action_name)
-			Que.que_action(action)
-		else:
-			printerr("Quied Page %s not found" % [action_name])
+#func auto_build_que(current_turn:int=0):
+	#var ai_data = ai_def
+	#if !ai_data:
+		#ai_data = pages.list_action_keys()
+	#
+	#var action_keys_que = []
+	#if ai_data.has("PrebuiltQueArr"):
+		#action_keys_que = ai_data['PrebuiltQueArr']
+	#else:
+		#action_keys_que = AiHandler.build_action_que(self, CombatRootControl.Instance.GameState)
+		#
+	#for action_name in action_keys_que:
+		#var action = ActionLibrary.get_action(action_name)
+		#if action:
+			##print("Queing Page: " + action_name)
+			#Que.que_action(action)
+		#else:
+			#printerr("Quied Page %s not found" % [action_name])
 			
-func get_action_list()->Array:
-	return pages.list_action_keys()
+func get_action_key_list()->Array:
+	var list = pages.list_action_keys()
+	if list.size() > 0:
+		return list
+	return get_load_val("AiData", {}).get("ActionsArr", [])
 
 func get_default_attack_target_params()->TargetParameters:
 	var weapon = equipment.get_primary_weapon()

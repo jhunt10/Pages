@@ -74,6 +74,8 @@ func _calc_damage_for_event():
 	applied_power = (float(attack_power)/100.0) + randf_range(-damage_variance, damage_variance)
 	raw_damage = base_damage * applied_power
 	
+	if LOGGING: print("DamageEvent: AtkPower: %s | Var: %s | Applied: %s | Raw Damage: %s" % [attack_power, damage_variance, applied_power, raw_damage])
+	
 	# Get the defend's Armor or Ward
 	if defense_type == DamageEvent.DefenseType.Armor:
 		defense_value = defender.stats.get_stat('Armor')
@@ -114,5 +116,5 @@ func _calc_damage_for_event():
 		if mod.is_valid_in_case(true, attack_tags, defend_tags, self):
 			damage_after_defend_mods = mod.apply_mod(damage_after_defend_mods, self)
 	if LOGGING:
-		print("DamageHelper: base_damage: %s | raw_damage: %s | after_armor: %s" % [base_damage, raw_damage, damage_after_armor])
+		print("DamageEvent: base_damage: %s | raw_damage: %s | after_armor: %s" % [base_damage, raw_damage, damage_after_armor])
 	final_damage = damage_after_defend_mods
