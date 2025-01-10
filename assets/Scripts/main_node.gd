@@ -23,6 +23,9 @@ static var is_mobile:bool:
 	get: return false# OS.has_feature("web_android") or OS.has_feature("web_ios")
 
 func _ready() -> void:
+	printerr("\n")
+	printerr(OS.get_data_dir())
+	printerr("\n")
 	if MainRootNode.Instance:
 		printerr("MainRootNode already exists.")
 		self.queue_free()

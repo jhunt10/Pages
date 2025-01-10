@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://btr6wpgyitqc0"]
+[gd_scene load_steps=30 format=3 uid="uid://btr6wpgyitqc0"]
 
 [ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/ItemDetailsCard/item_details_card.gd" id="1_vq5a0"]
 [ext_resource type="Texture2D" uid="uid://bqmtfkh0uj2bk" path="res://Scenes/Menus/CharacterMenu/MenuPages/ItemDetailsCard/DetailsCard_Background_working.png" id="2_7ol1j"]
@@ -20,12 +20,17 @@
 [ext_resource type="Texture2D" uid="uid://dq2cad8orar4p" path="res://assets/Sprites/UI/SymbolIcons/ArmorSymbol.png" id="13_t6qv2"]
 [ext_resource type="Texture2D" uid="uid://d17k5iaed0gdg" path="res://assets/Sprites/UI/SymbolIcons/WardSymbol.png" id="14_4xeqv"]
 [ext_resource type="PackedScene" uid="uid://bqi05unl37q0p" path="res://Scenes/UiNodes/DamageLabelContainer/damage_label_container.tscn" id="15_idu7k"]
+[ext_resource type="Script" path="res://Scenes/UiNodes/StatModLabelContainer/stat_mod_label_container.gd" id="16_hvsyk"]
+[ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/ItemDetailsCard/effect_page_details_control.gd" id="16_tp5cp"]
+[ext_resource type="Texture2D" uid="uid://cnhd7e5hwrxoy" path="res://assets/Sprites/UI/SymbolIcons/AbnormDamageSymbol.png" id="17_cevb5"]
 [ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/ItemDetailsCard/page_que_details_control.gd" id="18_oic72"]
+[ext_resource type="Theme" uid="uid://cayt153s5ro4a" path="res://Scenes/Themes/standard_theme_red.tres" id="18_wsrou"]
 [ext_resource type="Texture2D" uid="uid://bujky44hog2jm" path="res://assets/Sprites/UI/SymbolIcons/QueCountSymbol.png" id="19_aca8o"]
+[ext_resource type="Texture2D" uid="uid://b10pvly4exem2" path="res://assets/Sprites/UI/SymbolIcons/_S_Symbole.png" id="20_lxkdx"]
 [ext_resource type="Texture2D" uid="uid://bpa7iavvlbhi5" path="res://assets/Sprites/UI/SymbolIcons/PageCountSymbol.png" id="20_mtmo1"]
 [ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/ItemDetailsCard/PageQueDetails/page_set_label.gd" id="21_eimff"]
 
-[node name="ItemDetailsCard" type="Control" node_paths=PackedStringArray("offset_control", "icon", "title_lable", "description_box", "exit_button", "weapon_details", "armor_details", "action_details", "page_que_details", "default_details", "tag_label", "equip_button_background", "equip_button", "equip_label")]
+[node name="ItemDetailsCard" type="Control" node_paths=PackedStringArray("offset_control", "icon", "title_lable", "description_box", "exit_button", "weapon_details", "armor_details", "action_details", "effect_page_details", "page_que_details", "default_details", "tag_label", "equip_button_background", "equip_button", "equip_label")]
 custom_minimum_size = Vector2(300, 200)
 layout_mode = 3
 anchors_preset = 0
@@ -42,6 +47,7 @@ exit_button = NodePath("OffsetControl/NinePatchRect/VBoxContainer/HBoxContainer/
 weapon_details = NodePath("OffsetControl/NinePatchRect/VBoxContainer/WeaponDetailsControl")
 armor_details = NodePath("OffsetControl/NinePatchRect/VBoxContainer/ArmorDetailsControl")
 action_details = NodePath("OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsControl")
+effect_page_details = NodePath("OffsetControl/NinePatchRect/VBoxContainer/EffectPageDetailsControl")
 page_que_details = NodePath("OffsetControl/NinePatchRect/VBoxContainer/PageQueDetailsControl")
 default_details = NodePath("OffsetControl/NinePatchRect/VBoxContainer/DefaultDetailsControl")
 tag_label = NodePath("OffsetControl/NinePatchRect/VBoxContainer/TagLabel")
@@ -220,6 +226,7 @@ theme = ExtResource("4_xmy3g")
 text = "Item Description hk hbkhjhl jhlkjl ljlkj"
 
 [node name="ActionPageDetailsControl" type="Control" parent="OffsetControl/NinePatchRect/VBoxContainer" node_paths=PackedStringArray("parent_card_control", "description_box", "target_type_label", "cost_container", "range_display", "damage_label")]
+visible = false
 layout_mode = 2
 size_flags_vertical = 3
 script = ExtResource("12_fd6vk")
@@ -315,6 +322,110 @@ layout_mode = 2
 size_flags_vertical = 3
 
 [node name="DescriptionBox" type="RichTextLabel" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsControl/VBoxContainer/HBoxContainer"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("4_xmy3g")
+text = "Item Description hk hbkhjhl jhlkjl ljlkj"
+
+[node name="EffectPageDetailsControl" type="Control" parent="OffsetControl/NinePatchRect/VBoxContainer" node_paths=PackedStringArray("parent_card_control", "description_box", "stat_mods_container", "premade_stat_mod_label")]
+layout_mode = 2
+size_flags_vertical = 3
+script = ExtResource("16_tp5cp")
+parent_card_control = NodePath("../../../..")
+description_box = NodePath("VBoxContainer/HBoxContainer/DescriptionBox")
+stat_mods_container = NodePath("VBoxContainer/FlowContainer")
+premade_stat_mod_label = NodePath("VBoxContainer/FlowContainer/StatModLabel")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/EffectPageDetailsControl"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="FlowContainer" type="FlowContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/EffectPageDetailsControl/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
+alignment = 1
+
+[node name="StatModLabel" type="HBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/EffectPageDetailsControl/VBoxContainer/FlowContainer" node_paths=PackedStringArray("modded_stat_icon", "modded_stat_name_label", "mod_value_label", "dep_stat_label", "dep_stat_icon")]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+script = ExtResource("16_hvsyk")
+modded_stat_icon = NodePath("ModdedStatIcon")
+modded_stat_name_label = NodePath("ModdedStatNameLabel")
+mod_value_label = NodePath("ModValueLabel")
+dep_stat_label = NodePath("HBoxContainer/DepStatNameLabel")
+dep_stat_icon = NodePath("HBoxContainer/DepStatIcon")
+
+[node name="ModdedStatIcon" type="TextureRect" parent="OffsetControl/NinePatchRect/VBoxContainer/EffectPageDetailsControl/VBoxContainer/FlowContainer/StatModLabel"]
+layout_mode = 2
+texture = ExtResource("17_cevb5")
+
+[node name="ModdedStatNameLabel" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/EffectPageDetailsControl/VBoxContainer/FlowContainer/StatModLabel"]
+layout_mode = 2
+size_flags_vertical = 8
+theme = ExtResource("18_wsrou")
+theme_override_colors/font_color = Color(0.470588, 0, 0, 1)
+text = "STR"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="SignLabel" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/EffectPageDetailsControl/VBoxContainer/FlowContainer/StatModLabel"]
+layout_mode = 2
+size_flags_vertical = 8
+theme = ExtResource("18_wsrou")
+theme_override_colors/font_color = Color(0.470588, 0, 0, 1)
+text = "+"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/EffectPageDetailsControl/VBoxContainer/FlowContainer/StatModLabel"]
+layout_mode = 2
+theme_override_constants/separation = -2
+
+[node name="DepStatIcon" type="TextureRect" parent="OffsetControl/NinePatchRect/VBoxContainer/EffectPageDetailsControl/VBoxContainer/FlowContainer/StatModLabel/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("20_lxkdx")
+stretch_mode = 3
+
+[node name="DepStatNameLabel" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/EffectPageDetailsControl/VBoxContainer/FlowContainer/StatModLabel/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+theme = ExtResource("18_wsrou")
+theme_override_colors/font_color = Color(0.470588, 0, 0, 1)
+text = "TR"
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="SignLabel2" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/EffectPageDetailsControl/VBoxContainer/FlowContainer/StatModLabel"]
+layout_mode = 2
+size_flags_vertical = 8
+theme = ExtResource("18_wsrou")
+theme_override_colors/font_color = Color(0.470588, 0, 0, 1)
+text = "x"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="ModValueLabel" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/EffectPageDetailsControl/VBoxContainer/FlowContainer/StatModLabel"]
+layout_mode = 2
+size_flags_vertical = 8
+theme = ExtResource("18_wsrou")
+theme_override_colors/font_color = Color(0.470588, 0, 0, 1)
+text = "1.2"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/EffectPageDetailsControl/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="DescriptionBox" type="RichTextLabel" parent="OffsetControl/NinePatchRect/VBoxContainer/EffectPageDetailsControl/VBoxContainer/HBoxContainer"]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 size_flags_horizontal = 3

@@ -86,9 +86,9 @@ func show_counter()->bool:
 	return get_load_val("ShowCounter", false)
 
 func get_small_icon():
-	return load(details.small_icon_path)
+	return SpriteCache.get_sprite(details.small_icon_path)
 func get_large_icon():
-	return load(details.large_icon_path)
+	return SpriteCache.get_sprite(details.large_icon_path)
 
 func get_active_stat_mods():
 	var out_list = []

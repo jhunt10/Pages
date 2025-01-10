@@ -48,8 +48,8 @@ func set_count(count:int):
 		count_label = $CountLabel
 	var old_size = count_label.size
 	count_label.text = str(count)
-	count_label.get_child(1).text = str(count)
-	count_label.reset_size()
-	var new_size = count_label.size
-	count_label.position.x += old_size.x - new_size.x 
+	#count_label.get_child(1).text = str(count)
+	#count_label.reset_size()
+	#var new_size = count_label.size
+	#count_label.position.x += old_size.x - new_size.x 
 	count_label.visible = true

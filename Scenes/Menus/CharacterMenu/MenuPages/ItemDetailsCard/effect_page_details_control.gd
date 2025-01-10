@@ -1,0 +1,33 @@
+class_name EffectPageDetailsControl
+extends Control
+
+@export var parent_card_control:ItemDetailsCard
+@export var description_box:RichTextLabel
+@export var stat_mods_container:Container
+@export var premade_stat_mod_label:StatModLabelContainer
+
+var _item:BasePageItem
+var _actor:BaseActor
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	premade_stat_mod_label.hide()
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+
+func set_action(actor:BaseActor, page:BasePageItem):
+	_actor = actor
+	_item = page
+	var effect_data = page.get_effect_def()
+	var stat_mods = effect_data.get("StatMods", {})
+	for mod_data in stat_mods.values():
+		var new_mod:StatModLabelContainer = premade_stat_mod_label.duplicate()
+		new_mod.set_mod_data(mod_data)
+		stat_mods_container.add_child(new_mod)
+		new_mod.show()
+	description_box.text = page.details.description
+	

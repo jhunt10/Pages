@@ -7,14 +7,16 @@ signal item_button_up(context, item_key, index)
 signal mouse_enter_item(context, item_key, index)
 signal mouse_exit_item(context, item_key, index)
 
-@export var name_label:FitScaleLabel
-@export var book_icon:TextureRect
+@export var title_label:FitScaleLabel
+@export var title_icon:TextureRect
+@export var title_page_button:Button
+
 @export var premade_sub_container:SubBookContainer
 @export var sub_container:FlowContainer
 @export var slot_width:int 
 @export var scroll_dots:HTabsControls
 
-var _current_que_item_id
+#var _current_que_item_id
 var _actor:BaseActor
 var _sub_containers:Dictionary = {}
 var sub_book_pages:Array = []
@@ -23,9 +25,20 @@ var max_hight = 278
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	premade_sub_container.visible = false
+	title_label._size_dirty = true
 	scroll_dots.selected_index_changed.connect(show_page)
 	scroll_dots.selected_index = 0
+	
+	title_page_button.button_down.connect(_on_item_button_down.bind(0, Vector2i.ZERO))
+	title_page_button.button_up.connect(_on_item_button_up.bind(0))
+	title_page_button.mouse_entered.connect(_on_mouse_enter_item_button.bind(0))
+	title_page_button.mouse_exited.connect(_on_mouse_exit_item_button.bind(0))
+	
+	self.visibility_changed.connect(on_show)
 	pass # Replace with function body.
+
+func on_show():
+	title_label._size_dirty = true
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -40,23 +53,23 @@ func set_actor(actor:BaseActor):
 	actor_equipment_changed()
 
 func actor_equipment_changed():
-	var ques = _actor.equipment.get_equipt_items_of_slot_type("Que")
-	if !ques or ques.size() == 0:
-		name_label.text = "No Book!"
-		book_icon.texture = null
-		_current_que_item_id = null
-		return
-	elif ques.size() > 1:
-		name_label.text = "2 Books?"
-		book_icon.texture = null
-		_current_que_item_id = null
-		return
-	var que:BaseQueEquipment = ques[0]
-	if que.Id == _current_que_item_id:
-		return
-	_current_que_item_id = que.Id
-	name_label.text = que.details.display_name
-	book_icon.texture = que.get_large_icon()
+	#var ques = _actor.equipment.get_equipt_items_of_slot_type("Que")
+	#if !ques or ques.size() == 0:
+		#tit.text = "No Book!"
+		#book_icon.texture = null
+		#_current_que_item_id = null
+		#return
+	#elif ques.size() > 1:
+		#name_label.text = "2 Books?"
+		#book_icon.texture = null
+		#_current_que_item_id = null
+		#return
+	#var que:BaseQueEquipment = ques[0]
+	#if que.Id == _current_que_item_id:
+		#return
+	#_current_que_item_id = que.Id
+	#name_label.text = que.details.display_name
+	#book_icon.texture = que.get_large_icon()
 	build_sub_containers()
 	
 
@@ -69,6 +82,11 @@ func build_sub_containers():
 	sub_book_pages.clear()
 	_sub_containers.clear()
 	
+	var title_page:BasePageItem = _actor.pages.get_item_in_slot(0)
+	if title_page:
+		title_label.text = title_page.details.display_name
+		title_icon.texture = title_page.get_large_icon()
+	
 	var current_hight = 0
 	var current_width = 0
 	var current_page_index = 0
@@ -77,6 +95,8 @@ func build_sub_containers():
 	
 	for slot_set_data in _actor.pages.slot_sets_data:
 		var slot_key = slot_set_data['Key']
+		if slot_key == "TitlePage":
+			continue
 		var slot_count = slot_set_data['Count']
 		var sub = _create_sub_container(slot_set_data)
 		
@@ -108,6 +128,7 @@ func build_sub_containers():
 		scroll_dots.show()
 
 func show_page(index):
+	
 	for sub_index in range(sub_book_pages.size()):
 		var subs = sub_book_pages[sub_index]
 		for sub in subs:

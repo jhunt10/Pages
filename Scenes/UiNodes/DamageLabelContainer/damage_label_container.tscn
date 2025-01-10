@@ -9,7 +9,6 @@
 
 [node name="DamageContainer" type="HBoxContainer" node_paths=PackedStringArray("damage_icon_rect", "atk_power_label", "plus_minus_label", "variant_label", "damage_type_label")]
 script = ExtResource("1_rhguf")
-defense_type = null
 attack_power = 100
 attack_variant = 30
 damage_icon_rect = NodePath("DamageIcon")

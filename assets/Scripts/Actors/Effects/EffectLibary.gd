@@ -21,7 +21,7 @@ func get_data_file_sufix()->String:
 func is_object_static(object_def:Dictionary)->bool:
 	return false
 func get_object_script_path(object_def:Dictionary)->String:
-	return "res://assets/Scripts/Actors/Effects/BaseEffect.gd"
+	return object_def.get("EffectScriptPath", "res://assets/Scripts/Actors/Effects/BaseEffect.gd")
 
 func _init() -> void:
 	if Instance != null:

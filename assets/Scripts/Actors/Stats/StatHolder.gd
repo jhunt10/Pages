@@ -50,7 +50,45 @@ func get_stat(stat_name:String, default:int=0):
 
 func get_base_stat(stat_name:String, default:int=0):
 	return _base_stats.get(stat_name, default)
+
+
+
+
+func base_damge_from_stat(stat_name):
+	if !stat_name:
+		return 1
+	var base_stat_val = get_stat(stat_name)
+	#var weapon:BaseWeaponEquipment = _actor.equipment.get_item_in_slot(BaseEquipmentItem.EquipmentSlots.Weapon)
+	#if weapon and weapon.get_damage_data().get("AtkStat", '') == stat_name:
+		#base_stat_val += weapon.get_damage_data().get("BaseDamage", 0)
+	return base_stat_val
+
+func get_base_phyical_attack():
+	var strength = get_stat("Strength")
+	#var weapon:BaseWeaponEquipment = _actor.equipment.get_item_in_slot(BaseEquipmentItem.EquipmentSlots.Weapon)
+	#if weapon and weapon.get_damage_data().get("AtkStat", '') == "Strength":
+		#strength += weapon.get_damage_data().get("BaseDamage", 0)
+	return strength
 	
+func get_base_magic_attack():
+	var intelligence = get_stat("Intelligence")
+	#var weapon:BaseWeaponEquipment = _actor.equipment.get_item_in_slot(BaseEquipmentItem.EquipmentSlots.Weapon)
+	#if weapon and weapon.get_damage_data().get("AtkStat", '') == "Intelligence":
+		#intelligence += weapon.get_damage_data().get("BaseDamage", 0)
+	return intelligence
+
+func get_mod_names_for_stat(stat_name:String)->Array:
+	if _cached_mods_names.keys().has(stat_name):
+		return _cached_mods_names[stat_name]
+	return []
+
+
+
+# -----------------------------------------------------------------
+#					Bar Stats
+# -----------------------------------------------------------------
+
+
 func get_bar_stat(stat_name:String)->int:
 	return get_stat("BarStat:" + stat_name, 0)
 	
@@ -66,7 +104,13 @@ func fill_bar_stats():
 	for stat_name in list_bar_stat_names():
 		var max_val = get_bar_stat_max(stat_name)
 		_cached_stats["BarStat:"+stat_name] = max_val
-		
+
+func apply_damage(damage, _source):
+	_cached_stats["BarStat:"+HealthKey] = max(min(_cached_stats["BarStat:"+HealthKey] - damage, max_health), 0)
+	if current_health <= 0:
+		CombatRootControl.Instance.kill_actor(_actor)
+	bar_stat_changed.emit()
+
 ## Reduce current value of bar stat by given val and return true if cost was be paied
 func reduce_bar_stat_value(stat_name:String, val:int, allow_partial:bool=true) -> bool:
 	var full_stat_name = "BarStat:" + stat_name
@@ -115,6 +159,11 @@ func _on_actor_round_end():
 			add_to_bar_stat(stat_name, regen)
 
 
+
+
+
+
+
 func _calc_cache_stats():
 	if LOGGING: print("#Caching Stats for: %s" % _actor.ActorKey)
 	
@@ -161,7 +210,7 @@ func _calc_cache_stats():
 				key_is_dependant_of_vals[dep_stat_name] = []
 			if not key_is_dependant_of_vals[dep_stat_name].has(mod.stat_name):
 				key_is_dependant_of_vals[dep_stat_name].append(mod.stat_name)
-			agg_mods[mod.stat_name][mod.mod_type].append(dep_stat_name)
+			agg_mods[mod.stat_name][mod.mod_type].append({"DepStat": dep_stat_name, "Scale": mod.value})
 		else:
 			agg_mods[mod.stat_name][mod.mod_type].append(mod.value)
 		
@@ -208,7 +257,9 @@ func _calc_cache_stats():
 						temp_val += val
 				if agg_stat.keys().has(BaseStatMod.ModTypes.AddStat):
 					for val in agg_stat[BaseStatMod.ModTypes.AddStat]:
-						temp_val += _cached_stats[val]
+						var dep_stat_name = val['DepStat']
+						var stat_scale = val['Scale']
+						temp_val += _cached_stats[dep_stat_name] * stat_scale
 				if agg_stat.keys().has(BaseStatMod.ModTypes.Scale):
 					for val in agg_stat[BaseStatMod.ModTypes.Scale]:
 						temp_val = temp_val * val
@@ -219,38 +270,3 @@ func _calc_cache_stats():
 		printerr("Stat Caching Failed wth to many dependancies!")
 	_stats_dirty = false
 	stats_changed.emit()
-
-
-func apply_damage(damage, _source):
-	_cached_stats["BarStat:"+HealthKey] = max(min(_cached_stats["BarStat:"+HealthKey] - damage, max_health), 0)
-	if current_health <= 0:
-		CombatRootControl.Instance.kill_actor(_actor)
-	bar_stat_changed.emit()
-
-func base_damge_from_stat(stat_name):
-	if !stat_name:
-		return 1
-	var base_stat_val = get_stat(stat_name)
-	#var weapon:BaseWeaponEquipment = _actor.equipment.get_item_in_slot(BaseEquipmentItem.EquipmentSlots.Weapon)
-	#if weapon and weapon.get_damage_data().get("AtkStat", '') == stat_name:
-		#base_stat_val += weapon.get_damage_data().get("BaseDamage", 0)
-	return base_stat_val
-
-func get_base_phyical_attack():
-	var strength = get_stat("Strength")
-	#var weapon:BaseWeaponEquipment = _actor.equipment.get_item_in_slot(BaseEquipmentItem.EquipmentSlots.Weapon)
-	#if weapon and weapon.get_damage_data().get("AtkStat", '') == "Strength":
-		#strength += weapon.get_damage_data().get("BaseDamage", 0)
-	return strength
-	
-func get_base_magic_attack():
-	var intelligence = get_stat("Intelligence")
-	#var weapon:BaseWeaponEquipment = _actor.equipment.get_item_in_slot(BaseEquipmentItem.EquipmentSlots.Weapon)
-	#if weapon and weapon.get_damage_data().get("AtkStat", '') == "Intelligence":
-		#intelligence += weapon.get_damage_data().get("BaseDamage", 0)
-	return intelligence
-
-func get_mod_names_for_stat(stat_name:String)->Array:
-	if _cached_mods_names.keys().has(stat_name):
-		return _cached_mods_names[stat_name]
-	return []

@@ -17,7 +17,14 @@ func _init(actor) -> void:
 func _load_slots_sets_data()->Array:
 	
 	if LOGGING: print("--Page Slots Loading" )
-	var out_list = []
+	var out_list = [{
+		"Key":"TitlePage",
+		"DisplayName":"Title Page",
+		"Count": 1,
+		"FilterData":{
+			"RequiredTags":"Title"
+		}
+	}]
 	if page_que_item_id:
 		if LOGGING: print("--PageItemQue: %s" % [page_que_item_id])
 		var page_que = ItemLibrary.get_item(page_que_item_id)
