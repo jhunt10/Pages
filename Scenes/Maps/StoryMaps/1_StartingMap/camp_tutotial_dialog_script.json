@@ -3,7 +3,7 @@
 		"StartPartKey": "Tutorial1"
 	},
 	"Tutorial1":{
-		"_NextPartKey": "EquipmentTutorial",
+		"_NextPartKey": "ScribeIntro",
 		"WaitForNextButton": false,
 		"Inital_BlackOutState": "Clear",
 		"EnsurePoses": {},
@@ -66,7 +66,7 @@
 				"BlockType": "SpeechBox",
 				"TopBox": false,
 				"WaitToFinish": false,
-				"WaitForNextButton": false,
+				"WaitForNextButton": true,
 				"Hide": false,
 				"Entries": [
 					{
@@ -92,7 +92,33 @@
 				]
 			},
 			{
-				"BlockType": "PopUp",
+				"BlockType": "SpeechBox",
+				"TopBox": false,
+				"WaitToFinish": true,
+				"WaitForNextButton": true,
+				"Hide": false,
+				"Entries": [
+					{
+						"EntryType":"Clear",
+                        "ClearSpeaker": false
+					},
+					{
+						"EntryType": "Speaker",
+						"SpeakerName": "MtFr",
+						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Happy.png"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "On second thought. The Dev decided to completly redo PageBooks (after making the tutorial). So there is no tutorial now. We're done here.",
+						"NewLine": false
+					},
+					{
+						"EntryType":"WaitToRead"
+					}
+				]
+			},
+			{
+				"BlockType": "_PopUp",
 				"PopUpType": "Highlight",
 				"WaitToFinish": false,
 				"Create": "PopUp1",
@@ -1751,7 +1777,7 @@
 
     
 	"ScribeIntro":{
-		"_NextPartKey": null,
+		"_NextPartKey": "ScribeTutorial",
 		"WaitForNextButton": false,
 		"Inital_BlackOutState": "Clear",
 		"EnsurePoses": {},
@@ -2548,7 +2574,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "I'll make this quick.",
+						"Text": "I'm tired of talking so I'll make this quick.",
 						"NewLine": true
 					},
 					{
@@ -2687,6 +2713,14 @@
 					},
 					{
 						"EntryType":"WaitToRead"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "It can be pretty handy.",
+						"NewLine": true
+					},
+					{
+						"EntryType":"WaitToRead"
 					}
 				]
 			},
@@ -2730,7 +2764,7 @@
 					{
 						"EntryType": "Speaker",
 						"SpeakerName": "MtFr",
-						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Neutral.png"
+						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Shock.png"
 					},
 					{
 						"EntryType": "Text",
@@ -2876,7 +2910,8 @@
 				"Hide": false,
 				"Entries": [
 					{
-						"EntryType":"Clear"
+						"EntryType":"Clear",
+                        "ClearSpeaker": false
 					},
 					{
 						"EntryType": "Speaker",
@@ -2927,7 +2962,8 @@
 				"Hide": false,
 				"Entries": [
 					{
-						"EntryType":"Clear"
+						"EntryType":"Clear",
+                        "ClearSpeaker": false
 					},
 					{
 						"EntryType": "Speaker",

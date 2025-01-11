@@ -134,7 +134,8 @@ func get_preview_target_params(actor:BaseActor)->TargetParameters:
 		return null
 	return get_targeting_params(preview_key, actor)
 	
-	
+func get_ammo_data():
+	return get_load_val("AmmoData")
 
 func get_on_que_options(actor:BaseActor, game_state:GameStateData):
 	var out_list = []

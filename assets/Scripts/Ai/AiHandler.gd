@@ -60,7 +60,8 @@ static func build_action_ques(clear_existing_ques:bool=false):
 			if action.CostData.size() > 0:
 				var cost_data = action.CostData
 				for cost_key in cost_data:
-					cost_datas[actor.Id][cost_key] -= cost_data[cost_key]
+					if cost_datas[actor.Id].has(cost_key):
+						cost_datas[actor.Id][cost_key] -= cost_data[cost_key]
 		#last_turn_state = turn_state
 		print("Turn: %s" % [turn])
 		for actor in actors:

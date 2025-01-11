@@ -1,6 +1,6 @@
 {
 	"_MetaData_": {
-		"StartPartKey": "OfferTutorial"
+		"StartPartKey": "PrologSwitch"
 	},
 	"PrologSwitch": {
 		"_NextPartLogic": 
@@ -2119,8 +2119,8 @@
 			{
 				"BlockType": "SpeechBox",
 				"TopBox": true,
-				"WaitToFinish": true,
-				"WaitForNextButton": true,
+				"WaitToFinish": false,
+				"WaitForNextButton": false,
 				"Hide": false,
 				"Entries": [
 					{
@@ -2139,9 +2139,22 @@
 				]
 			},
 			{
+				"BlockType": "PopUp",
+				"PopUpType": "Highlight",
+				"WaitToFinish": true,
+				"Create": "PlayPopUp",
+				"TargetElement": "MoveableCamera2D/CanvasLayer/CombatUiControl/QueInputControl/BackPatchContainer/HBoxContainer/StartButton",
+				"PopupControlSript": "res://Scenes/Dialog/PopUps/OutlinePopUp/outline_pop_up_control.tscn",
+				"DarkenScreen": true,
+                "WaitToBeClicked": true,
+				"Padding":[0,0,0,0],
+                "LineType": "Dotted",
+                "ShowClick": true
+			},
+			{
 				"BlockType": "SpeechBox",
 				"TopBox": true,
-				"WaitToFinish": true,
+				"WaitToFinish": false,
 				"WaitForNextButton": false,
 				"Hide": true,
 				"Entries": [
@@ -2149,6 +2162,12 @@
 						"EntryType": "Clear"
 					}
 				]
+			},
+			{
+				"BlockType": "PopUp",
+				"PopUpType": "Highlight",
+				"WaitToFinish": true,
+				"Delete": "PlayPopUp"
 			}
 		]
 	},

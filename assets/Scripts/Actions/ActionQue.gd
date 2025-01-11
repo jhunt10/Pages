@@ -1,6 +1,7 @@
 class_name ActionQue
 
 signal action_list_changed
+signal ammo_changed(action_key:String)
 
 var Id : String :
 	get: return actor.Id
@@ -9,6 +10,8 @@ var QueExecData:QueExecutionData
 var actor:BaseActor
 var real_que : Array = []
 var _cached_max_que_size:int = -1
+
+var _page_ammo_values:Dictionary = {}
 
 ## Mapping from turn index to real_que index to account for padding
 # Positive numbers denote real_que index offset by 1	Example: 3 padded to 6 [1,-1,2,-2,3,-3]
@@ -145,3 +148,45 @@ func _set_turn_mapping(gap_or_nots:Array):
 			last_index += 1
 		else:
 			_turn_mapping.append(-last_index)
+
+
+func fill_page_ammo(action_key:String=""):
+	if action_key == "":
+		for key in actor.pages.list_action_keys():
+			var action = ActionLibrary.get_action(key)
+			var ammo_data = action.get_ammo_data()
+			if ammo_data:
+				_page_ammo_values[key] = ammo_data.get("Clip", 0)
+			ammo_changed.emit(key)
+	else:
+		if not _page_ammo_values.has(action_key):
+			return false
+		var action = ActionLibrary.get_action(action_key)
+		var ammo_data = action.get_ammo_data()
+		if ammo_data:
+			_page_ammo_values[action_key] = ammo_data.get("Clip", 0)
+			ammo_changed.emit(action_key)
+
+func can_pay_page_ammo(action_key:String)->bool:
+	if not _page_ammo_values.has(action_key):
+		return false
+	var action = ActionLibrary.get_action(action_key)
+	var ammo_data = action.get_ammo_data()
+	if ammo_data:
+		return _page_ammo_values[action_key] >= ammo_data.get("Cost", 0)
+	return true
+	
+func get_page_ammo(action_key:String)->bool:
+	if not _page_ammo_values.has(action_key):
+		return 0
+	return _page_ammo_values.get(action_key, "")
+	
+func consume_page_ammo(action_key:String):
+	if not _page_ammo_values.has(action_key):
+		return
+	var action = ActionLibrary.get_action(action_key)
+	var ammo_data = action.get_ammo_data()
+	if not ammo_data:
+		return
+	_page_ammo_values[action_key] = max(0, _page_ammo_values[action_key] - ammo_data.get("Cost", 0))
+	ammo_changed.emit(action_key)

@@ -6,7 +6,7 @@ const PADDING = 8
 @export var que_display_control:QueDisplayControl
 @export var on_que_options_menu:OnQueOptionsMenu
 @export var main_container:HBoxContainer 
-@export var page_button_prefab:TextureButton
+@export var page_button_prefab:QueInputButtonControl
 @export var start_label:Label
 @export var start_button:TextureButton
 
@@ -54,19 +54,20 @@ func _build_buttons():
 	for action_key in _actor.get_action_key_list():
 		if action_key == null:
 			continue
-		var new_button:TextureButton = page_button_prefab.duplicate()
+		var new_button:QueInputButtonControl = page_button_prefab.duplicate()
 		new_button.name = "PageSlot" + str(index)
 		page_button_prefab.get_parent().add_child(new_button)
 		new_button.visible = true
 		var action = ActionLibrary.get_action(action_key)
-		if action == null:
-			new_button.get_child(0).texture = load(ActionLibrary.NO_ICON_SPRITE)
-		else:
-			new_button.get_child(0).texture = action.get_large_page_icon(_actor)
-			if not MainRootNode.is_mobile:
-				new_button.mouse_entered.connect(_mouse_entered_page_button.bind(index, action_key))
-				new_button.mouse_exited.connect(_mouse_exited_action_button.bind(index, action_key))
-			new_button.pressed.connect(_page_button_pressed.bind(index, action_key))
+		new_button.set_page(_actor, action)
+		#if action == null:
+			#new_button.get_child(0).texture = load(ActionLibrary.NO_ICON_SPRITE)
+		#else:
+			#new_button.get_child(0).texture = action.get_large_page_icon(_actor)
+			#if not MainRootNode.is_mobile:
+				#new_button.mouse_entered.connect(_mouse_entered_page_button.bind(index, action_key))
+				#new_button.mouse_exited.connect(_mouse_exited_action_button.bind(index, action_key))
+		new_button.button.pressed.connect(_page_button_pressed.bind(index, action_key))
 		
 		_buttons.append(new_button)
 		index += 1

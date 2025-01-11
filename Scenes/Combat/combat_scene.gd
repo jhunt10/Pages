@@ -162,6 +162,7 @@ func add_actor(actor:BaseActor, faction_id:int, pos:MapPos):
 	GameState.set_actor_pos(actor, pos)
 	#actor.Que.clear_que()
 	actor.stats.fill_bar_stats()
+	actor.Que.fill_page_ammo()
 	#if actor.use_ai:
 		#actor.auto_build_que(QueController.action_index)
 		#if QueController.execution_state == ActionQueController.ActionStates.Running:

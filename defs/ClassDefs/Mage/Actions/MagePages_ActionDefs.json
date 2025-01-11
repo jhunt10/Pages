@@ -4,6 +4,99 @@
         "CostData": {
             "Mana":20
         },
+        "AmmoData": {
+            "Cost": 4,
+            "Clip": 36,
+            "AmmoType": "Elm"
+        },
+        "DamageDatas": {
+            "Damage1": {
+                "AtkPower": 100,
+                "AtkStat": "Intelligence",
+                "BaseDamage": 0,
+                "DamageEffect": "SmallFire_DamageEffect",
+                "DamageType": "Fire",
+                "DamageVarient": 0,
+                "DefenseType": "Ward"
+            }
+        },
+        "Details": {
+            "Description": "Shoot a bolt of Fire at Spot.",
+            "DisplayName": "Fire Ball",
+            "LargeIcon": "Sprites/FireBall.png",
+            "SmallIcon": "Sprites/FireBall.png",
+            "SnippetDesc": "Cast Fireball",
+            "Tags": [
+                "Attack",
+                "Fire",
+                "Spell",
+                "Missile"
+            ]
+        },
+        "MissileDatas": {
+            "Missile1": {
+                "DamageDataKey": "Damage1",
+                "FramesPerTile": 3,
+                "ImpactVfxKey": "SmallFire_DamageEffect",
+                "MissileVfxKey": "FireMissile"
+            }
+        },
+        "Preview": {
+            "PreviewTargetKey": "TargetParam1"
+        },
+        "SubActions": {
+            "10": [
+                {
+                    "AllowAlreadyTargeted": false,
+                    "AllowAutoTarget": false,
+                    "SetTargetKey": "Target1",
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_GetTarget.gd",
+                    "TargetParamKey": "TargetParam1"
+                }
+            ],
+            "11": [
+                {
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_PayCost.gd"
+                },
+                {
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_AnimationFinish.gd"
+                },
+                {
+                    "DamageKey": "Damage1",
+                    "MissileKey": "Missile1",
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_SpawnMissile.gd",
+                    "TargetKey": "Target1",
+                    "TargetParamKey": "TargetParam1"
+                }
+            ],
+            "5": [
+                {
+                    "Animation": "weapon_raise",
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_AnimationInTo.gd"
+                }
+            ]
+        },
+        "TargetParams": {
+            "TargetParam1": {
+                "EffectArea": null,
+                "EffectsAllies": false,
+                "EffectsEnemies": false,
+                "LineOfSight": true,
+                "TargetArea": "[[-1,1],[0,1],[1,1],[-1,2],[0,2],[1,2],[-1,3],[0,3],[1,3],[0,4],[-1,4],[1,4],[2,2],[2,4],[-2,2],[-2,3],[-2,4],[1,5],[0,5],[0,6],[-1,5],[2,3],[3,4],[3,3],[3,5],[2,6],[2,5],[1,6],[1,7],[0,7],[-1,7],[-1,6],[-2,6],[-2,5],[-3,5],[-3,4],[-3,3]]",
+                "TargetType": "Spot"
+            }
+        }
+    },
+    {
+        "ActionKey": "FireBallSpell",
+        "CostData": {
+            "Mana":20
+        },
+        "AmmoData": {
+            "Cost": 3,
+            "Clip": 12,
+            "AmmoType": "Elm"
+        },
         "DamageDatas": {
             "Damage1": {
                 "AtkPower": 100,

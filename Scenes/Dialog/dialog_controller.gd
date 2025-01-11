@@ -46,6 +46,7 @@ var _state:STATES = STATES.Ready:
 					printerr("Part TIme: %s" % [_part_start_timer])
 					_part_start_timer = 0
 					if auto_button.is_on:
+						_delay_timer = max(0.5, _delay_timer + 0.5)
 						_state = STATES.Playing
 					else:
 						next_button.show()
@@ -109,7 +110,7 @@ func _process(delta: float) -> void:
 	if _state == STATES.Playing:
 		if _delay_timer > 0:
 			_delay_timer -= delta
-			print("Delay TImer: %s" % [_delay_timer])
+			#print("Delay TImer: %s" % [_delay_timer])
 			return
 		if _are_blocks_waiting_for_next_button():
 			next_button.show()
