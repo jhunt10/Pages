@@ -1082,6 +1082,7 @@ is_player = true
 map_coor = Vector2i(7, 8)
 
 [node name="SpwanNode_Squirrel" type="Sprite2D" parent="MarkerTileMapLayer"]
+visible = false
 position = Vector2(176, 208)
 texture = ExtResource("12_1olrc")
 offset = Vector2(0, -16)
@@ -1095,6 +1096,7 @@ facing = 1
 map_coor = Vector2i(5, 6)
 
 [node name="SpwanNode_Squirrel2" type="Sprite2D" parent="MarkerTileMapLayer"]
+visible = false
 position = Vector2(304, 208)
 texture = ExtResource("12_1olrc")
 offset = Vector2(0, -16)
@@ -1107,6 +1109,7 @@ facing = 2
 map_coor = Vector2i(9, 6)
 
 [node name="SpwanNode_Arm_Squirrel" type="Sprite2D" parent="MarkerTileMapLayer"]
+visible = false
 position = Vector2(240, 112)
 texture = ExtResource("13_pqf28")
 offset = Vector2(0, -16)
@@ -1119,7 +1122,7 @@ facing = 2
 map_coor = Vector2i(7, 3)
 
 [node name="SpwanNode_Mag_Squirrel" type="Sprite2D" parent="MarkerTileMapLayer"]
-position = Vector2(240, 48)
+position = Vector2(240, 176)
 texture = ExtResource("14_tjt6f")
 offset = Vector2(0, -16)
 hframes = 12
@@ -1128,7 +1131,7 @@ script = ExtResource("11_f7y3r")
 spawn_actor_key = "Squirrcerer"
 spawn_actor_id = "WizSquirrel"
 facing = 2
-map_coor = Vector2i(7, 1)
+map_coor = Vector2i(7, 5)
 
 [node name="SpwanNode_Squirrel7" type="Sprite2D" parent="MarkerTileMapLayer"]
 visible = false

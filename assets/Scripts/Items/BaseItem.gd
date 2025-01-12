@@ -1,7 +1,8 @@
 class_name BaseItem
 extends BaseLoadObject
 
-enum ItemTypes {KeyItem, Page, Consumable, Equipment, Material}
+enum ItemTypes {KeyItem, Page, Consumable, Ammo, Equipment, Material}
+enum ItemRarity {Mundane, Common, Rare, Legendary, Unique}
 
 var Id:String: 
 	get: return self._id
@@ -18,19 +19,30 @@ var inventory_path:String:
 	get:
 		return get_load_val("InventoryPath", "")
 
+var item_details:Dictionary
+
 func _init(key:String, def_load_path:String, def:Dictionary, id:String='', data:Dictionary={}) -> void:
 	super(key, def_load_path, def, id, data)
+	item_details = get_load_val("ItemDetails", {})
 
 func save_me()->bool:
 	return true
 
 func get_item_type()->ItemTypes:
-	var item_type_str = self._def.get("ItemType", "")
+	var item_type_str = item_details.get("ItemType", null)
 	if item_type_str and ItemTypes.keys().has(item_type_str):
 		return ItemTypes.get(item_type_str)
 	else:
 		printerr("BaseItem.get_item_type: %s has unknown ItemType '%s'." % [ItemKey, item_type_str])
 	return ItemTypes.KeyItem
+
+func get_item_rarity()->ItemRarity:
+	var type_str = item_details.get("Rarity", null)
+	if type_str and ItemRarity.keys().has(type_str):
+		return ItemRarity.get(type_str)
+	else:
+		printerr("BaseItem.get_item_rarity: %s has unknown ItemRarity '%s'." % [ItemKey, type_str])
+	return ItemRarity.Mundane
 
 func get_item_tags()->Array:
 	return details.tags.duplicate()

@@ -4,6 +4,7 @@ var turn_index:int
 var costs:Dictionary:
 	get: return on_que_data.get("CostData", {})
 var on_que_data:Dictionary = {}
+var data_cache:Dictionary = {}
 
 # Mapping of TargetKey to Array<Target_Id> or Array<MapPos>
 var _targets:Dictionary = {}

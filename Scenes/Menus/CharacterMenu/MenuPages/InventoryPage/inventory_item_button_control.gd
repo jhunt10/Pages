@@ -6,6 +6,25 @@ extends Control
 @export var count_label:Label
 @export var button:Button
 @export var name_label:FitScaleLabel
+@export var background:TextureRect
+@export var rarity:BaseItem.ItemRarity:
+	set(val):
+		rarity = val
+		if background:
+			if rarity == BaseItem.ItemRarity.Common:
+				background.texture = common_background
+			elif rarity == BaseItem.ItemRarity.Rare:
+				background.texture = rare_background
+			elif rarity == BaseItem.ItemRarity.Legendary:
+				background.texture = legend_background
+			else:
+				background.texture = mundane_background
+				
+
+@export var mundane_background:Texture2D
+@export var common_background:Texture2D
+@export var rare_background:Texture2D
+@export var legend_background:Texture2D
 var _item_id:String
 
 # Called when the node enters the scene tree for the first time.
@@ -14,6 +33,7 @@ func _ready() -> void:
 		item_icon_rect =  $ItemIconRect
 		equipt_icon = $EquiptIcon
 		count_label = $CountLabel
+	rarity = rarity
 	pass # Replace with function body.
 
 func set_item(item:BaseItem, count:int=0):
@@ -31,6 +51,7 @@ func set_item(item:BaseItem, count:int=0):
 		(item as BaseEquipmentItem).equipt_actor_change.connect(on_equipt_change)
 	else:
 		equipt_icon.visible = false
+	rarity = item.get_item_rarity()
 	set_count(count)
 
 func on_equipt_change():

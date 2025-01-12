@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cpy0gmuoekexl"]
+[gd_scene load_steps=12 format=3 uid="uid://cpy0gmuoekexl"]
 
 [ext_resource type="Script" path="res://Scenes/Combat/UiNodes/QueInput/que_input_button_control.gd" id="1_duoeh"]
 [ext_resource type="Texture2D" uid="uid://bibqsudhjw4qe" path="res://assets/Sprites/Paper/CommonPageBackground.png" id="2_aiqd6"]
@@ -10,13 +10,14 @@
 [ext_resource type="Texture2D" uid="uid://dpg1sagivl60s" path="res://assets/Sprites/Paper/AmmoBarTop.png" id="8_exy2y"]
 [ext_resource type="Texture2D" uid="uid://bfxeg4r78utqk" path="res://assets/Sprites/Paper/AmmoBarMid.png" id="9_22pny"]
 [ext_resource type="Texture2D" uid="uid://c6mn76fh7ih34" path="res://assets/Sprites/Paper/AmmoBarBotpng.png" id="10_m8s5g"]
+[ext_resource type="Texture2D" uid="uid://co50bgo6jm2hv" path="res://Scenes/Dialog/PopUps/OutlinePopUp/FancyOutline_BackPatch_Big_128_36.png" id="11_6c5ut"]
 
-[node name="QueInputButtonControl" type="Control" node_paths=PackedStringArray("button", "background_texture", "page_icon_texture", "ammo_display")]
+[node name="QueInputButtonControl" type="Control" node_paths=PackedStringArray("button", "background_texture", "page_icon_texture", "ammo_display", "selection_display", "selection_button")]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_duoeh")
-button = NodePath("Button")
+button = NodePath("PageButton")
 background_texture = NodePath("BackgroundTextureRect")
 page_icon_texture = NodePath("PageIconRect")
 ammo_display = NodePath("AmmoDisplay")
@@ -24,6 +25,8 @@ common_texture = ExtResource("2_aiqd6")
 uncommon_texture = ExtResource("3_g56y2")
 rare_texture = ExtResource("4_73gup")
 epic_texture = ExtResource("5_era3k")
+selection_display = NodePath("SelectionDisplay")
+selection_button = NodePath("SelectionDisplay/ReloadButton")
 
 [node name="BackgroundTextureRect" type="TextureRect" parent="."]
 layout_mode = 1
@@ -63,9 +66,9 @@ top_bar_texture = ExtResource("8_exy2y")
 mid_bar_texture = ExtResource("9_22pny")
 bot_bar_texture = ExtResource("10_m8s5g")
 color = Color(0.3116, 0.67032, 0.76, 1)
-current_val = 60
-clip_val = 60
-cost_val = 12
+current_val = 12
+clip_val = 12
+cost_val = 3
 
 [node name="BarPartControl" type="Control" parent="AmmoDisplay"]
 visible = false
@@ -85,7 +88,37 @@ patch_margin_top = 2
 patch_margin_right = 2
 patch_margin_bottom = 2
 
-[node name="Button" type="Button" parent="."]
+[node name="PageButton" type="Button" parent="."]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SelectionDisplay" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="SelectionDisplay"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -4.0
+offset_top = -4.0
+offset_right = 4.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("11_6c5ut")
+
+[node name="ReloadButton" type="Button" parent="SelectionDisplay"]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15

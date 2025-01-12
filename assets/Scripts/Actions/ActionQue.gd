@@ -176,10 +176,10 @@ func can_pay_page_ammo(action_key:String)->bool:
 		return _page_ammo_values[action_key] >= ammo_data.get("Cost", 0)
 	return true
 	
-func get_page_ammo(action_key:String)->bool:
+func get_page_ammo(action_key:String)->int:
 	if not _page_ammo_values.has(action_key):
 		return 0
-	return _page_ammo_values.get(action_key, "")
+	return _page_ammo_values.get(action_key, 0)
 	
 func consume_page_ammo(action_key:String):
 	if not _page_ammo_values.has(action_key):
@@ -188,5 +188,7 @@ func consume_page_ammo(action_key:String):
 	var ammo_data = action.get_ammo_data()
 	if not ammo_data:
 		return
-	_page_ammo_values[action_key] = max(0, _page_ammo_values[action_key] - ammo_data.get("Cost", 0))
+	var current = _page_ammo_values[action_key]
+	var cost = ammo_data.get("Cost", 0)
+	_page_ammo_values[action_key] = max(0, current - cost)
 	ammo_changed.emit(action_key)

@@ -1,13 +1,13 @@
 [
     {
-        "ActionKey": "FireBallSpell",
+        "ActionKey": "FireBoltSpell",
         "CostData": {
             "Mana":20
         },
         "AmmoData": {
             "Cost": 4,
             "Clip": 36,
-            "AmmoType": "Elm"
+            "AmmoType": "Mag"
         },
         "DamageDatas": {
             "Damage1": {
@@ -78,7 +78,6 @@
         },
         "TargetParams": {
             "TargetParam1": {
-                "EffectArea": null,
                 "EffectsAllies": false,
                 "EffectsEnemies": false,
                 "LineOfSight": true,

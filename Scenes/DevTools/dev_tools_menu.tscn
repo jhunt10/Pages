@@ -1,10 +1,12 @@
-[gd_scene load_steps=4 format=3 uid="uid://cxyi2xhtt1gqa"]
+[gd_scene load_steps=6 format=3 uid="uid://cxyi2xhtt1gqa"]
 
 [ext_resource type="Script" path="res://Scenes/DevTools/dev_tools_menu.gd" id="1_mof5q"]
 [ext_resource type="Script" path="res://Scenes/UiNodes/back_patch_container.gd" id="2_fwuqo"]
 [ext_resource type="Texture2D" uid="uid://ccwj8ucsjhl6w" path="res://assets/Sprites/UI/BackPatches/Patch_64_12_Dark.png" id="3_nl2n8"]
+[ext_resource type="Script" path="res://Scenes/DevTools/add_item_menu.gd" id="4_qh0dk"]
+[ext_resource type="Script" path="res://Scenes/UiNodes/loaded_option_button.gd" id="5_jorv4"]
 
-[node name="DevToolsMenu" type="Control" node_paths=PackedStringArray("close_button", "create_page_items_button", "items_to_inventory_button")]
+[node name="DevToolsMenu" type="Control" node_paths=PackedStringArray("close_button", "create_page_items_button", "items_to_inventory_button", "add_item_menu_button", "add_item_menu")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -15,12 +17,14 @@ script = ExtResource("1_mof5q")
 close_button = NodePath("BackPatchContainer/BoxContainer/TitleContainer/ExitButton")
 create_page_items_button = NodePath("BackPatchContainer/BoxContainer/MakeActionPagesButton")
 items_to_inventory_button = NodePath("BackPatchContainer/BoxContainer/AddItemsToInventoryButton")
+add_item_menu_button = NodePath("BackPatchContainer/BoxContainer/AddItemMenuButton")
+add_item_menu = NodePath("AddItemMenu")
 
 [node name="BackPatchContainer" type="Container" parent="." node_paths=PackedStringArray("background", "inner_container")]
-custom_minimum_size = Vector2(302, 126)
+custom_minimum_size = Vector2(302, 161)
 layout_mode = 0
 offset_right = 302.0
-offset_bottom = 126.0
+offset_bottom = 161.0
 script = ExtResource("2_fwuqo")
 background = NodePath("NinePatchRect")
 inner_container = NodePath("BoxContainer")
@@ -57,3 +61,70 @@ text = "Build pages For all Actions in file..."
 [node name="AddItemsToInventoryButton" type="Button" parent="BackPatchContainer/BoxContainer"]
 layout_mode = 2
 text = "Add one of every Item to Inventory"
+
+[node name="AddItemMenuButton" type="Button" parent="BackPatchContainer/BoxContainer"]
+layout_mode = 2
+text = "Add Item"
+
+[node name="AddItemMenu" type="Control" parent="." node_paths=PackedStringArray("close_button", "item_options_button", "spinner", "confirm_button")]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("4_qh0dk")
+close_button = NodePath("BackPatch/BoxContainer/TitleContainer/ExitButton")
+item_options_button = NodePath("BackPatch/BoxContainer/LoadedOptionButton")
+spinner = NodePath("BackPatch/BoxContainer/HBoxContainer/SpinBox")
+confirm_button = NodePath("BackPatch/BoxContainer/HBoxContainer/AddItemButton")
+
+[node name="BackPatch" type="Container" parent="AddItemMenu" node_paths=PackedStringArray("background", "inner_container")]
+custom_minimum_size = Vector2(224, 135)
+layout_mode = 0
+offset_left = 444.0
+offset_top = 249.0
+offset_right = 668.0
+offset_bottom = 384.0
+script = ExtResource("2_fwuqo")
+background = NodePath("NinePatchRect")
+inner_container = NodePath("BoxContainer")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="AddItemMenu/BackPatch"]
+layout_mode = 2
+texture = ExtResource("3_nl2n8")
+patch_margin_left = 12
+patch_margin_top = 12
+patch_margin_right = 12
+patch_margin_bottom = 12
+
+[node name="BoxContainer" type="BoxContainer" parent="AddItemMenu/BackPatch"]
+layout_mode = 2
+vertical = true
+
+[node name="TitleContainer" type="HBoxContainer" parent="AddItemMenu/BackPatch/BoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="AddItemMenu/BackPatch/BoxContainer/TitleContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Add Item"
+
+[node name="ExitButton" type="Button" parent="AddItemMenu/BackPatch/BoxContainer/TitleContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+text = "X"
+
+[node name="LoadedOptionButton" type="OptionButton" parent="AddItemMenu/BackPatch/BoxContainer"]
+custom_minimum_size = Vector2(200, 40)
+layout_mode = 2
+script = ExtResource("5_jorv4")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="AddItemMenu/BackPatch/BoxContainer"]
+layout_mode = 2
+
+[node name="SpinBox" type="SpinBox" parent="AddItemMenu/BackPatch/BoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+value = 1.0
+
+[node name="AddItemButton" type="Button" parent="AddItemMenu/BackPatch/BoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Add Item"

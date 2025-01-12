@@ -85,6 +85,9 @@ func show_in_hud()->bool:
 func show_counter()->bool:
 	return get_load_val("ShowCounter", false)
 
+func is_instant()->bool:
+	return get_load_val("IsInstant", false)
+
 func get_small_icon():
 	return SpriteCache.get_sprite(details.small_icon_path)
 func get_large_icon():
@@ -113,18 +116,23 @@ func _get_sub_effect_script(sub_effect_key:String):
 
 func _cache_triggers():
 	_triggers_to_sub_effect_keys.clear()
-	for sub_effect_key in SubEffectDatas.keys():
-		var sub_effect_data = SubEffectDatas[sub_effect_key]
-		var sub_effect = _get_sub_effect_script(sub_effect_key)
-		var trigger_list = sub_effect.get_triggers(self, sub_effect_data)
-		for trig:EffectTriggers in trigger_list:
-			if not _triggers_to_sub_effect_keys.keys().has(trig):
-				_triggers_to_sub_effect_keys[trig] = []
-			if not _triggers_to_sub_effect_keys[trig].has(sub_effect_key):
-				_triggers_to_sub_effect_keys[trig].append(sub_effect_key)
+	if is_instant():
+		_triggers_to_sub_effect_keys[EffectTriggers.OnCreate] = []
+		for sub_effect_key in SubEffectDatas.keys():
+			_triggers_to_sub_effect_keys[EffectTriggers.OnCreate].append(sub_effect_key)
+	else:
+		for sub_effect_key in SubEffectDatas.keys():
+			var sub_effect_data = SubEffectDatas[sub_effect_key]
+			var sub_effect = _get_sub_effect_script(sub_effect_key)
+			var trigger_list = sub_effect.get_triggers(self, sub_effect_data)
+			for trig:EffectTriggers in trigger_list:
+				if not _triggers_to_sub_effect_keys.keys().has(trig):
+					_triggers_to_sub_effect_keys[trig] = []
+				if not _triggers_to_sub_effect_keys[trig].has(sub_effect_key):
+					_triggers_to_sub_effect_keys[trig].append(sub_effect_key)
 
-func on_created():
-	trigger_effect(EffectTriggers.OnCreate, null)
+func on_created(game_state:GameStateData=null):
+	trigger_effect(EffectTriggers.OnCreate, game_state)
 	pass
 
 func on_delete():

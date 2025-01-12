@@ -17,7 +17,7 @@ func on_effect_trigger(effect:BaseEffect, _subeffect_data:Dictionary, trigger:Ba
 	if actor.effects.has_effect(effect_id):
 		return
 	var effect_key = _subeffect_data['ApplyEffectKey']
-	var new_effect = actor.effects.add_effect(effect, effect_key, {}, effect_id)
+	var new_effect = actor.effects.add_effect(effect, effect_key, {}, game_state, effect_id)
 
 func on_delete(effect:BaseEffect, _subeffect_data:Dictionary):
 	var actor = effect.get_effected_actor()

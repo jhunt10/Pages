@@ -91,4 +91,6 @@ func _find_target_effected_spots(target_key:String,  metadata:QueExecutionData, 
 				target_list.append(game_state.get_actor_pos(target_actor))
 		if target is Vector2i:
 			target_list.append(MapPos.Vector2i(target))
+		if target is MapPos:
+			target_list.append(target)
 	return target_list

@@ -22,9 +22,13 @@ enum Rarity {Common, Uncommon, Rare, Epic}
 @export var rare_texture:Texture2D
 @export var epic_texture:Texture2D
 
+@export var selection_display:Control
+@export var selection_button:Button
+
 var action_key:String
 
 func set_page(actor:BaseActor, action:BaseAction):
+	selection_display.hide()
 	action_key = action.ActionKey
 	page_icon_texture.texture = action.get_large_page_icon(actor)
 	var ammo_data = action.get_ammo_data()

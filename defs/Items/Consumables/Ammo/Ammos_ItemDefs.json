@@ -1,0 +1,86 @@
+[
+    {
+        "ItemKey": "Phy_Ammo",
+        "_ObjectScript": "res://assets/Scripts/Items/BagItems/AmmoItem.gd",
+        "Details": {
+            "DisplayName": "P.Ammo",
+            "SnippetDesc": "Reload Phy Ammo",
+            "Description": "Ammo use to reload Phy Pages.",
+            "Tags": [
+                "Ammo"
+            ],
+            "LargeIcon": "Sprites/Phy_Ammo_LIcon.png",
+            "SmallIcon": "Sprites/Phy_Ammo_SIcon.png"
+        },
+        "ItemDetails":
+        {
+            "Rarity": "Mundane",
+            "Value": 50
+        },
+        "CanStack": true,
+        "AmmoType":"Phy"
+    },
+    {
+        "ItemKey": "Mag_Ammo",
+        "_ObjectScript": "res://assets/Scripts/Items/BagItems/AmmoItem.gd",
+        "Details": {
+            "DisplayName": "M.Ammo",
+            "SnippetDesc": "Reload Mag Ammo",
+            "Description": "Ammo use to reload Mag Pages.",
+            "Tags": [
+                "Ammo"
+            ],
+            "LargeIcon": "Sprites/Mag_Ammo_LIcon.png",
+            "SmallIcon": "Sprites/Mag_Ammo_SIcon.png"
+        },
+        "ItemDetails":
+        {
+            "Rarity": "Mundane",
+            "Value": 50
+        },
+        "CanStack": true,
+        "AmmoType":"Mag"
+    },
+    {
+        "ItemKey": "Gen_Ammo",
+        "_ObjectScript": "res://assets/Scripts/Items/BagItems/AmmoItem.gd",
+        "Details": {
+            "DisplayName": "G.Ammo",
+            "SnippetDesc": "Reload Generic Ammo",
+            "Description": "Generic ammo use to reload Phy and Mag Pages.",
+            "Tags": [
+                "Ammo"
+            ],
+            "LargeIcon": "Sprites/Gen_Ammo_LIcon.png",
+            "SmallIcon": "Sprites/Gen_Ammo_SIcon.png"
+        },
+        "ItemDetails":
+        {
+            "Rarity": "Common",
+            "Value": 80
+        },
+        "CanStack": true,
+        "AmmoType":"Gen"
+    },
+    {
+        "ItemKey": "Abn_Ammo",
+        "_ObjectScript": "res://assets/Scripts/Items/BagItems/AmmoItem.gd",
+        "Details": {
+            "DisplayName": "A.Ammo",
+            "SnippetDesc": "Reload Abn Ammo",
+            "Description": "Rare ammo use to reload Abn Pages.",
+            "Tags": [
+                "Ammo"
+            ],
+            "LargeIcon": "Sprites/Abn_Ammo_LIcon.png",
+            "SmallIcon": "Sprites/Abn_Ammo_SIcon.png"
+        },
+        "ItemDetails":
+        {
+            "Rarity": "Rare",
+            "Value": 100
+        },
+        "CanStack": true,
+        "AmmoType":"Abn"
+    }
+]

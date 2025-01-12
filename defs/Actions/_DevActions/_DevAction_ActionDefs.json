@@ -24,7 +24,98 @@
             ],
             "1": [
                 {
-                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_DEV_ApplyAnyEffect.gd",
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/DevSubActions/SubAct_DEV_ApplyAnyEffect.gd",
+                    "TargetKey": "Target1"
+                }
+            ]
+        },
+        "TargetParams": {
+            "Target1": {
+                "EffectsAllies": false,
+                "EffectsEnemies": false,
+                "LineOfSight": false,
+                "TargetArea": "[[0,1],[1,1],[1,0],[1,-1],[0,-1],[-1,-1],[-1,0],[-1,1],[-1,0],[0,0],[0,1],[0,2],[1,2],[2,2],[2,1],[2,0],[2,-1],[2,-2],[1,-2],[0,-2],[-1,-2],[-2,-2],[-2,-1],[-2,0],[-1,1],[-1,2],[-1,1],[-2,1],[-2,2],[-2,3],[-1,3],[0,3],[1,3],[2,3],[3,3],[3,2],[3,1],[3,0],[3,-1],[3,-2],[3,-3],[2,-3],[1,-3],[0,-3],[-1,-3],[-2,-3],[-3,-3],[-3,-2],[-3,-1],[-3,0],[-3,1],[-3,2],[-3,3],[-3,4],[-3,5],[-2,5],[-1,5],[0,5],[1,5],[2,5],[3,5],[3,4],[2,4],[1,4],[0,4],[-1,4],[-2,4]]",
+                "TargetType": "Actor"
+            }
+        }
+    },
+    {
+        "ActionKey": "Dev_Move",
+        "UseDynamicIcons": true,
+        "CostData": {},
+        "DamageDatas": {},
+        "Details": {
+            "Description": "Move to pos",
+            "DisplayName": "Dev Move",
+            "LargeIcon": "DevMove.png",
+            "SmallIcon": "DevMove.png",
+            "SnippetDesc": "Move to pos",
+            "Tags": []
+        },
+        "MissileDatas": {},
+        "Preview": {},
+        "SubActions": {
+            "0": [
+                {
+                    "SetTargetKey": "Target1",
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_GetTarget.gd",
+                    "TargetParamKey": "Target1"
+                }
+            ],
+            "1": [
+                {
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/DevSubActions/SubAct_DEV_Move.gd",
+                    "TargetKey": "Target1"
+                }
+            ]
+        },
+        "TargetParams": {
+            "Target1": {
+                "EffectsAllies": false,
+                "EffectsEnemies": false,
+                "LineOfSight": false,
+                "TargetArea": "[[0,1],[1,1],[1,0],[1,-1],[0,-1],[-1,-1],[-1,0],[-1,1],[-1,0],[0,0],[0,1],[0,2],[1,2],[2,2],[2,1],[2,0],[2,-1],[2,-2],[1,-2],[0,-2],[-1,-2],[-2,-2],[-2,-1],[-2,0],[-1,1],[-1,2],[-1,1],[-2,1],[-2,2],[-2,3],[-1,3],[0,3],[1,3],[2,3],[3,3],[3,2],[3,1],[3,0],[3,-1],[3,-2],[3,-3],[2,-3],[1,-3],[0,-3],[-1,-3],[-2,-3],[-3,-3],[-3,-2],[-3,-1],[-3,0],[-3,1],[-3,2],[-3,3],[-3,4],[-3,5],[-2,5],[-1,5],[0,5],[1,5],[2,5],[3,5],[3,4],[2,4],[1,4],[0,4],[-1,4],[-2,4]]",
+                "TargetType": "Spot"
+            }
+        }
+    },
+    {
+        "ActionKey": "Dev_KillActor",
+        "UseDynamicIcons": true,
+        "CostData": {},
+        "DamageDatas": {
+            "DamageData1": {
+                "AtkPower": 100,
+                "AtkStat": "Intelligence",
+                "FixedBaseDamage": 1000,
+                "DamageEffect": "SmallLightning_DamageEffect",
+                "DamageType": "Electric",
+                "DamageVarient": 0,
+                "DefenseType": null
+            }
+        },
+        "Details": {
+            "Description": "Kill and Actor",
+            "DisplayName": "Kill Actor",
+            "LargeIcon": "DevKillActorIcon.png",
+            "SmallIcon": "DevKillActorIcon.png",
+            "SnippetDesc": "Kill Actor",
+            "Tags": []
+        },
+        "MissileDatas": {},
+        "Preview": {},
+        "SubActions": {
+            "10": [
+                {
+                    "SetTargetKey": "Target1",
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_GetTarget.gd",
+                    "TargetParamKey": "Target1"
+                }
+            ],
+            "11": [
+                {
+                    "DamageKey": "DamageData1",
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_ApplyDamage.gd",
                     "TargetKey": "Target1"
                 }
             ]
@@ -163,14 +254,13 @@
         "CostData": {},
         "DamageDatas": {},
         "Details": {
-            "Description": "Attack with MainHand Weapon for 100±10% Damage",
-            "DisplayName": "Basic Attack",
-            "LargeIcon": "BasicAttack.png",
-            "SmallIcon": "BasicAttack.png",
-            "SnippetDesc": "Attack with MainHand Weapon",
+            "Description": "Attack target 10 times",
+            "DisplayName": "Sim Attack",
+            "LargeIcon": "DevSimAttackpng.png",
+            "SmallIcon": "DevSimAttackpng.png",
+            "SnippetDesc": "Attack target 10 times",
             "Tags": [
-                "Attack",
-                "Weapon"
+                "Attack"
             ]
         },
         "MissileDatas": {},
@@ -192,7 +282,7 @@
                     "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_AnimationFinish.gd"
                 },
                 {
-                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_DEV_SimAttacks.gd",
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/DevSubActions/SubAct_DEV_SimAttacks.gd",
                     "TargetKey": "Target1"
                 }
             ],

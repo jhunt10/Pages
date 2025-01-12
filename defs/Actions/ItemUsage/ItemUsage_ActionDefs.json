@@ -1,1 +1,54 @@
-[{"ActionKey":"UseItemSelf","UseDynamicIcons":true,"CostData":{},"DamageDatas":{},"Details":{"Description":"Select an item from your bag and use it on yourself.","DisplayName":"Use Item","LargeIcon":"Bag.png","SmallIcon":"Bag.png","SnippetDesc":"Use item on self","Tags":[]},"MissileDatas":{},"Preview":{"PreviewTargetKey":"Self"},"SubActions":{"11":[{"SubActionScript":"res://assets/Scripts/Actions/SubActions/SubAct_UseItem.gd"}]},"TargetParams":{}}]
+[
+    {
+        "ActionKey": "UseItemSelf",
+        "UseDynamicIcons": true,
+        "CostData": {},
+        "DamageDatas": {},
+        "Details": {
+            "Description": "Select an item from your bag and use it on yourself.",
+            "DisplayName": "Use Item",
+            "LargeIcon": "Bag.png",
+            "SmallIcon": "Bag.png",
+            "SnippetDesc": "Use item on self",
+            "Tags": []
+        },
+        "MissileDatas": {},
+        "Preview": {
+            "PreviewTargetKey": "Self"
+        },
+        "SubActions": {
+            "11": [
+                {
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_UseItem.gd"
+                }
+            ]
+        },
+        "TargetParams": {}
+    },
+    {
+        "ActionKey": "ReloadPage",
+        "UseDynamicIcons": true,
+        "CostData": {},
+        "DamageDatas": {},
+        "Details": {
+            "Description": "Reload",
+            "DisplayName": "Reload",
+            "LargeIcon": "Sprites/ReloadIcon.png",
+            "SmallIcon": "Sprites/ReloadIcon.png",
+            "SnippetDesc": "Reload",
+            "Tags": []
+        },
+        "MissileDatas": {},
+        "Preview": {
+            "PreviewTargetKey": "Self"
+        },
+        "SubActions": {
+            "0":[
+                {
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_ReloadPage.gd"
+                }
+            ]
+        },
+        "TargetParams": {}
+    }
+]

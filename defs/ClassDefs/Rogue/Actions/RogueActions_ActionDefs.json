@@ -1,13 +1,15 @@
 [
     {
         "ActionKey": "BehindYou",
-        "CostData": {
-            "Stamina": 60
+        "AmmoData": {
+            "Cost": 1,
+            "Clip": 2,
+            "AmmoType": "Abn"
         },
         "DamageDatas": {},
         "Details": {
             "Description": "Teleport behind the target and facing them. -\"It's nothing personnel\"",
-            "DisplayName": "Behind You",
+            "DisplayName": "Behind",
             "LargeIcon": "Sprites/Behind.png",
             "SmallIcon": "Sprites/Behind.png",
             "SnippetDesc": "Teleport behind the target",
@@ -53,8 +55,10 @@
     },
     {
         "ActionKey": "ThrowKnife",
-        "CostData": {
-            "Stamina": 20
+        "AmmoData": {
+            "Cost": 4,
+            "Clip": 36,
+            "AmmoType": "Phy"
         },
         "DamageDatas": {
             "Damage1": {

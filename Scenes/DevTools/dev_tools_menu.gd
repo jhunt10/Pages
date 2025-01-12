@@ -4,12 +4,16 @@ extends Control
 @export var close_button:Button
 @export var create_page_items_button:Button
 @export var items_to_inventory_button:Button
+@export var add_item_menu_button:Button
+
+@export var add_item_menu:AddItemMenu
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	close_button.pressed.connect(close_menu)
 	create_page_items_button.pressed.connect(create_page_items)
 	items_to_inventory_button.pressed.connect(items_to_inventory)
+	add_item_menu_button.pressed.connect(add_item_menu.show)
 	pass # Replace with function body.
 
 func close_menu():

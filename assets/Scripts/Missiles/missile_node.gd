@@ -47,10 +47,13 @@ func on_missile_reach_target():
 	if missile.has_impact_vfx():
 		self.position = missile.get_final_position()
 		impact_effect_node = MainRootNode.vfx_libray.create_vfx_node(missile.get_impact_vfx_data())
-		impact_effect_node.tree_exited.connect(self.queue_free)
-		self.add_child(impact_effect_node)
-		impact_effect_node.start_vfx()
-		if missile_effect_node:
-			missile_effect_node.visible = false
+		if not impact_effect_node:
+			printerr("Failed to find impact effect for missile: %s" + missile.Id)
+		else:
+			impact_effect_node.tree_exited.connect(self.queue_free)
+			self.add_child(impact_effect_node)
+			impact_effect_node.start_vfx()
+			if missile_effect_node:
+				missile_effect_node.visible = false
 	else:
 		self.queue_free()

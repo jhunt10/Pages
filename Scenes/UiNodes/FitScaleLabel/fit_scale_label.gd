@@ -15,7 +15,7 @@ extends Control
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	self.visibility_changed.connect(_resize)
+	#self.visibility_changed.connect(_resize)
 	pass # Replace with function body.
 
 func _resize():

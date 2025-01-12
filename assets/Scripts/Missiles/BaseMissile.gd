@@ -87,8 +87,9 @@ func get_impact_vfx_data()->VfxData:
 	return null
 
 func do_thing(game_state:GameStateData):
-	if LOGGING: print('Missile ' + str(Id) + " has done thing.")
-	var source_actor = game_state.get_actor(_source_actor_id)
+	if LOGGING: 
+		print('Missile ' + str(Id) + " has done thing.")
+	var source_actor = ActorLibrary.get_actor(_source_actor_id)
 	if not source_actor:
 		printerr("BaseMissile.do_thing: No Source Actor found with id '%s'." % [_source_actor_id])
 		return

@@ -3,6 +3,8 @@ extends Control
 
 const PADDING = 8
 
+signal page_special_selected(action_key:String)
+
 @export var que_display_control:QueDisplayControl
 @export var on_que_options_menu:OnQueOptionsMenu
 @export var main_container:HBoxContainer 
@@ -11,10 +13,12 @@ const PADDING = 8
 @export var start_button:TextureButton
 
 var _actor:BaseActor
-var _buttons = []
+var _page_buttons:Dictionary = {} 
 var _resize:bool = true
 var _target_display_key
 
+# When selecting pages for something other than queing
+var selecetion_mode:bool
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -42,14 +46,15 @@ func set_actor(actor:BaseActor):
 	_actor = actor
 	_actor.pages.items_changed.connect(_build_buttons)
 	_actor.Que.action_que_changed.connect(_on_que_change)
+	_actor.Que.ammo_changed.connect(_on_ammo_change)
 	_build_buttons()
 	
 
 func _build_buttons():
-	if _buttons.size() > 0:
-		for but in _buttons:
+	if _page_buttons.values().size() > 0:
+		for but in _page_buttons.values():
 			but.queue_free()
-		_buttons.clear()
+		_page_buttons.clear()
 	var index = 0
 	for action_key in _actor.get_action_key_list():
 		if action_key == null:
@@ -68,8 +73,9 @@ func _build_buttons():
 				#new_button.mouse_entered.connect(_mouse_entered_page_button.bind(index, action_key))
 				#new_button.mouse_exited.connect(_mouse_exited_action_button.bind(index, action_key))
 		new_button.button.pressed.connect(_page_button_pressed.bind(index, action_key))
+		new_button.selection_button.pressed.connect(_on_page_special_selected.bind(action_key))
 		
-		_buttons.append(new_button)
+		_page_buttons[action_key] = new_button
 		index += 1
 	_on_que_change()
 	#self.size = Vector2i(main_container.size.x + (2 * PADDING),
@@ -133,6 +139,8 @@ func _mouse_exited_action_button(_index, _key_name):
 	pass
 
 func _page_button_pressed(index, key_name):
+	if selecetion_mode:
+		return
 	var action:BaseAction = ActionLibrary.get_action(key_name)
 	var on_que_options = action.get_on_que_options(_actor, CombatRootControl.Instance.GameState)
 	if on_que_options.size() > 0:
@@ -156,3 +164,29 @@ func _start_button_pressed():
 func _round_ends():
 	start_button.disabled = false
 	start_button.get_child(0).text = "Start"
+
+func _on_ammo_change(page_key):
+	if _page_buttons.has(page_key):
+		var button:QueInputButtonControl = _page_buttons[page_key]
+		button.ammo_display.current_val = _actor.Que.get_page_ammo(page_key)
+	pass
+
+func hide_page_selection():
+	for button:QueInputButtonControl in _page_buttons.values():
+		button.selection_display.hide()
+	selecetion_mode = false
+
+func show_page_selection(action_keys:Array):
+	for action_key in _page_buttons.keys():
+		var button:QueInputButtonControl = _page_buttons[action_key]
+		if action_keys.has(action_key):
+			button.selection_display.show()
+		else:
+			button.selection_display.hide()
+	selecetion_mode = true
+
+func _on_page_special_selected(action_key):
+	if not selecetion_mode:
+		return
+	page_special_selected.emit(action_key)
+	hide_page_selection()

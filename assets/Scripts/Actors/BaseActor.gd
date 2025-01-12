@@ -96,6 +96,8 @@ func post_creation():
 	equipment.validate_items()
 	items.validate_items()
 	pages.validate_items()
+	
+	stats.dirty_stats()
 
 func _on_equipment_holder_items_change():
 	var bag = equipment.get_bag_equipment()

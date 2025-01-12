@@ -56,7 +56,7 @@ func _on_item_loaded(item:BaseItem):
 		return
 	var effect_def = page.get_effect_def()
 	if effect_def:
-		var new_effect = _actor.effects.add_effect(page, page.get_load_val("EffectKey"), effect_def, '', true)
+		var new_effect = _actor.effects.add_effect(page, page.get_load_val("EffectKey"), effect_def, null, '', true)
 		item_id_to_effect_id[item.Id] = new_effect.Id
 
 func set_page_que_item(page_que:BaseQueEquipment):
@@ -107,6 +107,6 @@ func _on_item_added_to_slot(item:BaseItem, index:int):
 		return
 	var effect_def = page.get_effect_def()
 	if effect_def:
-		var new_effect = _actor.effects.add_effect(page, page.get_load_val("EffectKey"), effect_def)
+		var new_effect = _actor.effects.add_effect(page, page.get_load_val("EffectKey"), effect_def, null)
 		item_id_to_effect_id[item.Id] = new_effect.Id
 		class_page_changed.emit()

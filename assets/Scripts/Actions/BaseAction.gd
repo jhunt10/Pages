@@ -133,7 +133,11 @@ func get_preview_target_params(actor:BaseActor)->TargetParameters:
 		printerr("No preview key")
 		return null
 	return get_targeting_params(preview_key, actor)
-	
+
+
+func has_ammo():
+	return get_load_val("AmmoData", {}).size() > 0
+
 func get_ammo_data():
 	return get_load_val("AmmoData")
 
