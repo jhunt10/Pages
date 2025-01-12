@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://btr6wpgyitqc0"]
+[gd_scene load_steps=33 format=3 uid="uid://btr6wpgyitqc0"]
 
 [ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/ItemDetailsCard/item_details_card.gd" id="1_vq5a0"]
 [ext_resource type="Texture2D" uid="uid://bqmtfkh0uj2bk" path="res://Scenes/Menus/CharacterMenu/MenuPages/ItemDetailsCard/DetailsCard_Background_working.png" id="2_7ol1j"]
@@ -16,13 +16,16 @@
 [ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/ItemDetailsCard/default_item_details_control.gd" id="12_gvhwc"]
 [ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/ItemDetailsCard/armor_details_control.gd" id="12_rxuc0"]
 [ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/ItemDetailsCard/cost_container.gd" id="13_an536"]
-[ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/ItemDetailsCard/cost_label.gd" id="13_kr8n3"]
 [ext_resource type="Texture2D" uid="uid://dq2cad8orar4p" path="res://assets/Sprites/UI/SymbolIcons/ArmorSymbol.png" id="13_t6qv2"]
 [ext_resource type="Texture2D" uid="uid://d17k5iaed0gdg" path="res://assets/Sprites/UI/SymbolIcons/WardSymbol.png" id="14_4xeqv"]
+[ext_resource type="Texture2D" uid="uid://dhtsefdcfxbg8" path="res://assets/Sprites/UI/SymbolIcons/AmmoSymbol_Gen.png" id="15_d0wh1"]
 [ext_resource type="PackedScene" uid="uid://bqi05unl37q0p" path="res://Scenes/UiNodes/DamageLabelContainer/damage_label_container.tscn" id="15_idu7k"]
+[ext_resource type="Texture2D" uid="uid://ckym0e60eik1k" path="res://assets/Sprites/UI/SymbolIcons/AmmoSymbol_Phy.png" id="15_pvoju"]
 [ext_resource type="Script" path="res://Scenes/UiNodes/StatModLabelContainer/stat_mod_label_container.gd" id="16_hvsyk"]
+[ext_resource type="Texture2D" uid="uid://cexlfs7svl17c" path="res://assets/Sprites/UI/SymbolIcons/AmmoSymbol_Mag.png" id="16_i15u4"]
 [ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/ItemDetailsCard/effect_page_details_control.gd" id="16_tp5cp"]
 [ext_resource type="Texture2D" uid="uid://cnhd7e5hwrxoy" path="res://assets/Sprites/UI/SymbolIcons/AbnormDamageSymbol.png" id="17_cevb5"]
+[ext_resource type="Texture2D" uid="uid://cyt5q4hutdp6y" path="res://assets/Sprites/UI/SymbolIcons/AmmoSymbol_Abn.png" id="17_n5nnh"]
 [ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/ItemDetailsCard/page_que_details_control.gd" id="18_oic72"]
 [ext_resource type="Theme" uid="uid://cayt153s5ro4a" path="res://Scenes/Themes/standard_theme_red.tres" id="18_wsrou"]
 [ext_resource type="Texture2D" uid="uid://bujky44hog2jm" path="res://assets/Sprites/UI/SymbolIcons/QueCountSymbol.png" id="19_aca8o"]
@@ -226,14 +229,13 @@ theme = ExtResource("4_xmy3g")
 text = "Item Description hk hbkhjhl jhlkjl ljlkj"
 
 [node name="ActionPageDetailsControl" type="Control" parent="OffsetControl/NinePatchRect/VBoxContainer" node_paths=PackedStringArray("parent_card_control", "description_box", "target_type_label", "cost_container", "range_display", "damage_label")]
-visible = false
 layout_mode = 2
 size_flags_vertical = 3
 script = ExtResource("12_fd6vk")
 parent_card_control = NodePath("../../../..")
 description_box = NodePath("VBoxContainer/HBoxContainer/DescriptionBox")
 target_type_label = NodePath("VBoxContainer/HBoxContainer2/VBoxContainer/HBoxContainer/TargetTypeLabel")
-cost_container = NodePath("VBoxContainer/HBoxContainer2/VBoxContainer/HBoxContainer/CostContainer")
+cost_container = NodePath("VBoxContainer/HBoxContainer2/VBoxContainer/HBoxContainer/AmmoContainer")
 range_display = NodePath("VBoxContainer/HBoxContainer2/MiniRangeDisplay")
 damage_label = NodePath("VBoxContainer/HBoxContainer2/VBoxContainer/DamageContainer")
 
@@ -257,46 +259,71 @@ theme_override_constants/separation = 0
 [node name="HBoxContainer" type="HBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsControl/VBoxContainer/HBoxContainer2/VBoxContainer"]
 layout_mode = 2
 
-[node name="CostContainer" type="HBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsControl/VBoxContainer/HBoxContainer2/VBoxContainer/HBoxContainer" node_paths=PackedStringArray("title_label", "cost_label")]
+[node name="AmmoContainer" type="HBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsControl/VBoxContainer/HBoxContainer2/VBoxContainer/HBoxContainer" node_paths=PackedStringArray("count_val_label", "cost_val_label", "clip_val_label", "ammo_icon_rect")]
 layout_mode = 2
 script = ExtResource("13_an536")
-title_label = NodePath("CostTitle")
-cost_label = NodePath("CostLabel")
+count_val_label = NodePath("CostLabel/CountLabel")
+cost_val_label = NodePath("CostLabel/CostLabel")
+clip_val_label = NodePath("CostLabel/ClipLabel")
+ammo_icon_rect = NodePath("CostLabel/AmmoIcon")
+gen_ammo_icon = ExtResource("15_d0wh1")
+phy_ammo_icon = ExtResource("15_pvoju")
+mag_ammo_icon = ExtResource("16_i15u4")
+abn_ammo_icon = ExtResource("17_n5nnh")
 
-[node name="CostTitle" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsControl/VBoxContainer/HBoxContainer2/VBoxContainer/HBoxContainer/CostContainer"]
+[node name="CostTitle" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsControl/VBoxContainer/HBoxContainer2/VBoxContainer/HBoxContainer/AmmoContainer"]
+visible = false
 layout_mode = 2
 size_flags_vertical = 8
 theme = ExtResource("6_do8nn")
 theme_override_colors/font_color = Color(0.470588, 0, 0, 1)
-text = "Costs: "
+text = "Ammo:"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="CostLabel" type="HBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsControl/VBoxContainer/HBoxContainer2/VBoxContainer/HBoxContainer/CostContainer" node_paths=PackedStringArray("name_label", "cost_label")]
+[node name="CostLabel" type="HBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsControl/VBoxContainer/HBoxContainer2/VBoxContainer/HBoxContainer/AmmoContainer"]
 layout_mode = 2
-script = ExtResource("13_kr8n3")
-name_label = NodePath("NameLabel")
-cost_label = NodePath("ValueLabel")
+theme_override_constants/separation = 1
 
-[node name="NameLabel" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsControl/VBoxContainer/HBoxContainer2/VBoxContainer/HBoxContainer/CostContainer/CostLabel"]
+[node name="AmmoIcon" type="TextureRect" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsControl/VBoxContainer/HBoxContainer2/VBoxContainer/HBoxContainer/AmmoContainer/CostLabel"]
 layout_mode = 2
-size_flags_vertical = 8
-theme = ExtResource("6_do8nn")
-theme_override_colors/font_color = Color(0.470588, 0, 0, 1)
-text = "Stamina"
-vertical_alignment = 1
+texture = ExtResource("15_d0wh1")
 
-[node name="Seperator" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsControl/VBoxContainer/HBoxContainer2/VBoxContainer/HBoxContainer/CostContainer/CostLabel"]
+[node name="CountLabel" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsControl/VBoxContainer/HBoxContainer2/VBoxContainer/HBoxContainer/AmmoContainer/CostLabel"]
 self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("4_xmy3g")
+text = "9"
+
+[node name="Seperator2" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsControl/VBoxContainer/HBoxContainer2/VBoxContainer/HBoxContainer/AmmoContainer/CostLabel"]
+self_modulate = Color(0.31, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("4_xmy3g")
+text = " ("
+
+[node name="CostLabel" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsControl/VBoxContainer/HBoxContainer2/VBoxContainer/HBoxContainer/AmmoContainer/CostLabel"]
+self_modulate = Color(0.31, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("4_xmy3g")
+text = "4"
+
+[node name="Seperator3" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsControl/VBoxContainer/HBoxContainer2/VBoxContainer/HBoxContainer/AmmoContainer/CostLabel"]
+self_modulate = Color(0.31, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("4_xmy3g")
 text = ":"
 
-[node name="ValueLabel" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsControl/VBoxContainer/HBoxContainer2/VBoxContainer/HBoxContainer/CostContainer/CostLabel"]
-self_modulate = Color(0.498039, 0, 0, 1)
+[node name="ClipLabel" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsControl/VBoxContainer/HBoxContainer2/VBoxContainer/HBoxContainer/AmmoContainer/CostLabel"]
+self_modulate = Color(0.31, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("4_xmy3g")
-text = "100"
+text = "36"
+
+[node name="Seperator4" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsControl/VBoxContainer/HBoxContainer2/VBoxContainer/HBoxContainer/AmmoContainer/CostLabel"]
+self_modulate = Color(0.31, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("4_xmy3g")
+text = ")"
 
 [node name="TargetTypeLabel" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsControl/VBoxContainer/HBoxContainer2/VBoxContainer/HBoxContainer"]
 layout_mode = 2
@@ -330,6 +357,7 @@ theme = ExtResource("4_xmy3g")
 text = "Item Description hk hbkhjhl jhlkjl ljlkj"
 
 [node name="EffectPageDetailsControl" type="Control" parent="OffsetControl/NinePatchRect/VBoxContainer" node_paths=PackedStringArray("parent_card_control", "description_box", "stat_mods_container", "premade_stat_mod_label")]
+visible = false
 layout_mode = 2
 size_flags_vertical = 3
 script = ExtResource("16_tp5cp")

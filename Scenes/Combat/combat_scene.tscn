@@ -205,12 +205,12 @@ mouse_filter = 2
 script = ExtResource("8_8l3el")
 game_over_screen = NodePath("GameOverScreen")
 victory_screen = NodePath("GameVictoryScreen")
-menu_container = NodePath("../CenterContainer")
+menu_container = NodePath("CenterContainer2")
 menu_button = NodePath("MenuButton")
 pause_menu = NodePath("PauseMenuControl")
 target_input_display = NodePath("TargetInputControl")
 stat_panel_control = NodePath("StatPanelControl")
-que_input = NodePath("QueInputControl")
+que_input = NodePath("CenterContainer/QueInputControl")
 que_display = NodePath("QueDisplayControl")
 que_collection_display = NodePath("QueCollectionDisplayControl")
 stats_collection_display = NodePath("StatCollectionDisplayControl")
@@ -311,17 +311,14 @@ layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="QueInputControl" parent="MoveableCamera2D/CanvasLayer/CombatUiControl" node_paths=PackedStringArray("que_display_control") instance=ExtResource("14_atc5n")]
+[node name="CenterContainer2" type="CenterContainer" parent="MoveableCamera2D/CanvasLayer/CombatUiControl"]
 layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
+anchors_preset = 15
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 8.0
-offset_top = -96.0
-offset_right = 228.0
-offset_bottom = -8.0
-grow_vertical = 0
-que_display_control = NodePath("../QueDisplayControl")
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 
 [node name="QueDisplayControl" parent="MoveableCamera2D/CanvasLayer/CombatUiControl" instance=ExtResource("22_i32rr")]
 layout_mode = 1
@@ -922,13 +919,22 @@ text = "Back to Camp"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="CenterContainer" type="CenterContainer" parent="MoveableCamera2D/CanvasLayer"]
-anchors_preset = 15
-anchor_right = 1.0
+[node name="CenterContainer" type="CenterContainer" parent="MoveableCamera2D/CanvasLayer/CombatUiControl"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
 anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -40.0
+offset_right = 20.0
 grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
+grow_vertical = 0
+
+[node name="QueInputControl" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/CenterContainer" node_paths=PackedStringArray("que_display_control") instance=ExtResource("14_atc5n")]
+layout_mode = 2
+que_display_control = NodePath("../../QueDisplayControl")
 
 [node name="CameraLockControl" type="Control" parent="MoveableCamera2D/CanvasLayer" node_paths=PackedStringArray("camera", "locked_icon", "unlocked_icon", "following_icon", "button")]
 layout_mode = 3

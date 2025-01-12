@@ -35,7 +35,6 @@ func set_page(actor:BaseActor, action:BaseAction):
 	if !ammo_data:
 		ammo_display.hide()
 	else:
-		ammo_display.clip_val = ammo_data.get("Clip")
-		ammo_display.cost_val = ammo_data.get("Cost")
+		ammo_display.set_ammo_data(ammo_data)
 		var ammo_val = actor.Que.get_page_ammo(action.ActionKey)
-		ammo_display.current_val = ammo_data.get("Clip")
+		ammo_display.current_val = ammo_val

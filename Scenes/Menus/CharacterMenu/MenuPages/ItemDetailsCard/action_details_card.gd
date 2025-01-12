@@ -33,8 +33,8 @@ func set_action(actor:BaseActor, page:BasePageItem):
 	else:
 		range_display.hide()
 	
-	if action.CostData.size() > 0:
-		cost_container.set_costs(action.CostData)
+	if action.has_ammo():
+		cost_container.set_data(action.get_ammo_data())
 		cost_container.show()
 	else:
 		cost_container.hide()
