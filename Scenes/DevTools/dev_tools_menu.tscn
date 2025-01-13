@@ -1,12 +1,15 @@
-[gd_scene load_steps=6 format=3 uid="uid://cxyi2xhtt1gqa"]
+[gd_scene load_steps=7 format=3 uid="uid://cxyi2xhtt1gqa"]
 
 [ext_resource type="Script" path="res://Scenes/DevTools/dev_tools_menu.gd" id="1_mof5q"]
 [ext_resource type="Script" path="res://Scenes/UiNodes/back_patch_container.gd" id="2_fwuqo"]
 [ext_resource type="Texture2D" uid="uid://ccwj8ucsjhl6w" path="res://assets/Sprites/UI/BackPatches/Patch_64_12_Dark.png" id="3_nl2n8"]
 [ext_resource type="Script" path="res://Scenes/DevTools/add_item_menu.gd" id="4_qh0dk"]
 [ext_resource type="Script" path="res://Scenes/UiNodes/loaded_option_button.gd" id="5_jorv4"]
+[ext_resource type="Script" path="res://Scenes/DevTools/objects_counts_menu.gd" id="6_8b7ua"]
 
 [node name="DevToolsMenu" type="Control" node_paths=PackedStringArray("close_button", "create_page_items_button", "items_to_inventory_button", "add_item_menu_button", "add_item_menu")]
+z_index = 999
+z_as_relative = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -28,8 +31,6 @@ offset_bottom = 161.0
 script = ExtResource("2_fwuqo")
 background = NodePath("NinePatchRect")
 inner_container = NodePath("BoxContainer")
-sides_padding = null
-center_in_parent = null
 
 [node name="NinePatchRect" type="NinePatchRect" parent="BackPatchContainer"]
 layout_mode = 2
@@ -70,8 +71,10 @@ text = "Add Item"
 
 [node name="AddItemMenu" type="Control" parent="." node_paths=PackedStringArray("close_button", "item_options_button", "spinner", "confirm_button")]
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = 59.0
+offset_top = 182.0
+offset_right = 99.0
+offset_bottom = 222.0
 script = ExtResource("4_qh0dk")
 close_button = NodePath("BackPatch/BoxContainer/TitleContainer/ExitButton")
 item_options_button = NodePath("BackPatch/BoxContainer/LoadedOptionButton")
@@ -81,15 +84,11 @@ confirm_button = NodePath("BackPatch/BoxContainer/HBoxContainer/AddItemButton")
 [node name="BackPatch" type="Container" parent="AddItemMenu" node_paths=PackedStringArray("background", "inner_container")]
 custom_minimum_size = Vector2(224, 135)
 layout_mode = 0
-offset_left = 444.0
-offset_top = 249.0
-offset_right = 668.0
-offset_bottom = 384.0
+offset_right = 224.0
+offset_bottom = 135.0
 script = ExtResource("2_fwuqo")
 background = NodePath("NinePatchRect")
 inner_container = NodePath("BoxContainer")
-sides_padding = null
-center_in_parent = null
 
 [node name="NinePatchRect" type="NinePatchRect" parent="AddItemMenu/BackPatch"]
 layout_mode = 2
@@ -132,3 +131,164 @@ value = 1.0
 [node name="AddItemButton" type="Button" parent="AddItemMenu/BackPatch/BoxContainer/HBoxContainer"]
 layout_mode = 2
 text = "Add Item"
+
+[node name="ObjectsCountsMenu" type="Control" parent="." node_paths=PackedStringArray("action_count_label", "actor_count_label", "item_count_label", "effect_count_label", "list_container", "recount_button", "list_button")]
+anchors_preset = 0
+offset_left = 829.0
+offset_top = 25.0
+offset_right = 869.0
+offset_bottom = 65.0
+script = ExtResource("6_8b7ua")
+action_count_label = NodePath("BackPatch/BoxContainer/CountsContainer/LeftCountsContaienr/ActionsLabel/Label2")
+actor_count_label = NodePath("BackPatch/BoxContainer/CountsContainer/LeftCountsContaienr/ActorsLabel/Label2")
+item_count_label = NodePath("BackPatch/BoxContainer/CountsContainer/LeftCountsContaienr/ItemsLabel/Label2")
+effect_count_label = NodePath("BackPatch/BoxContainer/CountsContainer/RightCountsContainer/EffectsLabel/Label2")
+list_container = NodePath("BackPatch/BoxContainer/ScrollContainer/VBoxContainer")
+recount_button = NodePath("BackPatch/BoxContainer/Button")
+list_button = NodePath("BackPatch/BoxContainer/OptionButton")
+
+[node name="BackPatch" type="Container" parent="ObjectsCountsMenu" node_paths=PackedStringArray("background", "inner_container")]
+custom_minimum_size = Vector2(187, 411)
+layout_mode = 0
+offset_right = 187.0
+offset_bottom = 411.0
+script = ExtResource("2_fwuqo")
+background = NodePath("NinePatchRect")
+inner_container = NodePath("BoxContainer")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="ObjectsCountsMenu/BackPatch"]
+layout_mode = 2
+texture = ExtResource("3_nl2n8")
+patch_margin_left = 12
+patch_margin_top = 12
+patch_margin_right = 12
+patch_margin_bottom = 12
+
+[node name="BoxContainer" type="BoxContainer" parent="ObjectsCountsMenu/BackPatch"]
+layout_mode = 2
+vertical = true
+
+[node name="TitleContainer" type="HBoxContainer" parent="ObjectsCountsMenu/BackPatch/BoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ObjectsCountsMenu/BackPatch/BoxContainer/TitleContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Objects"
+
+[node name="ExitButton" type="Button" parent="ObjectsCountsMenu/BackPatch/BoxContainer/TitleContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+text = "X"
+
+[node name="CountsContainer" type="HBoxContainer" parent="ObjectsCountsMenu/BackPatch/BoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="LeftCountsContaienr" type="VBoxContainer" parent="ObjectsCountsMenu/BackPatch/BoxContainer/CountsContainer"]
+layout_mode = 2
+
+[node name="ActionsLabel" type="HBoxContainer" parent="ObjectsCountsMenu/BackPatch/BoxContainer/CountsContainer/LeftCountsContaienr"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ObjectsCountsMenu/BackPatch/BoxContainer/CountsContainer/LeftCountsContaienr/ActionsLabel"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Actions:"
+
+[node name="Label2" type="Label" parent="ObjectsCountsMenu/BackPatch/BoxContainer/CountsContainer/LeftCountsContaienr/ActionsLabel"]
+layout_mode = 2
+text = "0
+"
+
+[node name="ActorsLabel" type="HBoxContainer" parent="ObjectsCountsMenu/BackPatch/BoxContainer/CountsContainer/LeftCountsContaienr"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ObjectsCountsMenu/BackPatch/BoxContainer/CountsContainer/LeftCountsContaienr/ActorsLabel"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Actors: "
+
+[node name="Label2" type="Label" parent="ObjectsCountsMenu/BackPatch/BoxContainer/CountsContainer/LeftCountsContaienr/ActorsLabel"]
+layout_mode = 2
+text = "0
+"
+
+[node name="ItemsLabel" type="HBoxContainer" parent="ObjectsCountsMenu/BackPatch/BoxContainer/CountsContainer/LeftCountsContaienr"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ObjectsCountsMenu/BackPatch/BoxContainer/CountsContainer/LeftCountsContaienr/ItemsLabel"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Items: "
+
+[node name="Label2" type="Label" parent="ObjectsCountsMenu/BackPatch/BoxContainer/CountsContainer/LeftCountsContaienr/ItemsLabel"]
+layout_mode = 2
+text = "0
+"
+
+[node name="RightCountsContainer" type="VBoxContainer" parent="ObjectsCountsMenu/BackPatch/BoxContainer/CountsContainer"]
+layout_mode = 2
+
+[node name="EffectsLabel" type="HBoxContainer" parent="ObjectsCountsMenu/BackPatch/BoxContainer/CountsContainer/RightCountsContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ObjectsCountsMenu/BackPatch/BoxContainer/CountsContainer/RightCountsContainer/EffectsLabel"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Effects:"
+
+[node name="Label2" type="Label" parent="ObjectsCountsMenu/BackPatch/BoxContainer/CountsContainer/RightCountsContainer/EffectsLabel"]
+layout_mode = 2
+text = "0
+"
+
+[node name="ActorsLabel" type="HBoxContainer" parent="ObjectsCountsMenu/BackPatch/BoxContainer/CountsContainer/RightCountsContainer"]
+visible = false
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ObjectsCountsMenu/BackPatch/BoxContainer/CountsContainer/RightCountsContainer/ActorsLabel"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Actors: "
+
+[node name="Label2" type="Label" parent="ObjectsCountsMenu/BackPatch/BoxContainer/CountsContainer/RightCountsContainer/ActorsLabel"]
+layout_mode = 2
+text = "0
+"
+
+[node name="ItemsLabel" type="HBoxContainer" parent="ObjectsCountsMenu/BackPatch/BoxContainer/CountsContainer/RightCountsContainer"]
+visible = false
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ObjectsCountsMenu/BackPatch/BoxContainer/CountsContainer/RightCountsContainer/ItemsLabel"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Items: "
+
+[node name="Label2" type="Label" parent="ObjectsCountsMenu/BackPatch/BoxContainer/CountsContainer/RightCountsContainer/ItemsLabel"]
+layout_mode = 2
+text = "0
+"
+
+[node name="Button" type="Button" parent="ObjectsCountsMenu/BackPatch/BoxContainer"]
+layout_mode = 2
+text = "Recount"
+
+[node name="OptionButton" type="OptionButton" parent="ObjectsCountsMenu/BackPatch/BoxContainer"]
+layout_mode = 2
+item_count = 2
+popup/item_0/text = "Actors"
+popup/item_1/text = "Items"
+popup/item_1/id = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="ObjectsCountsMenu/BackPatch/BoxContainer"]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ObjectsCountsMenu/BackPatch/BoxContainer/ScrollContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ObjectsCountsMenu/BackPatch/BoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "Some Item"

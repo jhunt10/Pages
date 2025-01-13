@@ -196,7 +196,7 @@ offset_bottom = 97.0
 text = "Paths
 "
 
-[node name="CombatUiControl" type="Control" parent="MoveableCamera2D/CanvasLayer" node_paths=PackedStringArray("game_over_screen", "victory_screen", "menu_container", "menu_button", "pause_menu", "target_input_display", "stat_panel_control", "que_input", "que_collection_display", "stats_collection_display", "item_select_menu", "drop_message_control")]
+[node name="CombatUiControl" type="Control" parent="MoveableCamera2D/CanvasLayer" node_paths=PackedStringArray("game_over_screen", "victory_screen", "menu_button", "pause_menu", "target_input_display", "stat_panel_control", "que_input", "que_collection_display", "stats_collection_display", "item_select_menu", "drop_message_control")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -209,7 +209,6 @@ mouse_filter = 2
 script = ExtResource("8_8l3el")
 game_over_screen = NodePath("GameOverScreen")
 victory_screen = NodePath("GameVictoryScreen")
-menu_container = NodePath("")
 menu_button = NodePath("MenuButton")
 pause_menu = NodePath("PauseMenuControl")
 target_input_display = NodePath("TargetInputControl")

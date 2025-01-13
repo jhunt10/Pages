@@ -81,6 +81,7 @@ func create_object(object_key:String, id:String='', data:Dictionary={})->BaseLoa
 		_loaded_objects[new_object._id] = new_object
 	return new_object
 
+## Delete all loaded objects
 func purge_objects():
 	for obj_key in _loaded_objects.keys():
 		var object = _loaded_objects[obj_key]

@@ -101,16 +101,18 @@ func open_load_menu():
 
 func open_camp_menu():
 	current_scene.queue_free()
+	prune_objects()
 	var camp_scene = load("res://Scenes/Menus/CampMenu/camp_menu.tscn").instantiate()
 	self.add_child(camp_scene)
 	current_scene = camp_scene
 	
-	var camp_dialog_script = 	StoryState.story_flags.get("NextCampDialog", null)
+	var camp_dialog_script = StoryState.story_flags.get("NextCampDialog", null)
 	if camp_dialog_script:
 		var dialog:DialogController = load("res://Scenes/Dialog/dialog_control.tscn").instantiate()
 		dialog.scene_root = camp_scene
 		dialog.load_dialog_script(camp_dialog_script)
 		current_scene.add_child(dialog)
+		StoryState.story_flags["NextCampDialog"] = null
 	
 func open_map_selection_menu():
 	current_scene.queue_free()
@@ -168,13 +170,35 @@ func open_tutorial():
 	dialog.load_dialog_script("res://Scenes/Maps/StoryMaps/1_StartingMap/start_game_dialog_script.json")
 	combat_scene.camera.canvas_layer.add_child(dialog)
 	
+var dev_tools_menu
 func open_dev_tools():
-	var page_editor = load("res://Scenes/DevTools/dev_tools_menu.tscn").instantiate()
-	self.add_child(page_editor)
-	
+	if dev_tools_menu:
+		return
+	dev_tools_menu = load("res://Scenes/DevTools/dev_tools_menu.tscn").instantiate()
+	if current_scene is CombatRootControl:
+		CombatRootControl.Instance.camera.get_child(0).add_child(dev_tools_menu)
+	else:
+		self.add_child(dev_tools_menu)
 	
 func go_to_main_menu():
+	if ActorLibrary.Instance:
+		ActorLibrary.Instance.purge_actors()
+	if ItemLibrary.Instance:
+		ItemLibrary.Instance.purge_items()
 	current_scene.queue_free()
 	current_scene = load("res://Scenes/Menus/MainMenu/main_menu_root_control.tscn").instantiate()
 	center_container.add_child(current_scene)
 	
+func _input(event: InputEvent) -> void:
+	if event is InputEventKey and event.is_pressed():
+		if event.keycode == KEY_U:
+			if dev_tools_menu:
+				dev_tools_menu.queue_free()
+				dev_tools_menu = null
+			else:
+				open_dev_tools()
+func prune_objects():
+	for actor_id in ActorLibrary.Instance._loaded_objects.keys():
+		var actor:BaseActor = ActorLibrary.get_actor(actor_id)
+		if not actor.is_player:
+			ActorLibrary.delete_actor(actor)

@@ -18,6 +18,7 @@ func _ready() -> void:
 
 func close_menu():
 	self.queue_free()
+	MainRootNode.Instance.dev_tools_menu = null
 
 func create_page_items():
 	var file_dialog:FileDialog = FileDialog.new()
