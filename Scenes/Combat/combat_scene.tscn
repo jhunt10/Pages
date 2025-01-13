@@ -1,16 +1,14 @@
-[gd_scene load_steps=38 format=3 uid="uid://dfeilp6hbiuqs"]
+[gd_scene load_steps=42 format=3 uid="uid://dfeilp6hbiuqs"]
 
 [ext_resource type="Script" path="res://Scenes/Combat/combat_scene.gd" id="1_crigy"]
 [ext_resource type="Texture2D" uid="uid://b232xm2ly0peh" path="res://assets/Sprites/UI/GridCursors/GridCursor_Default.png" id="7_7lt4y"]
 [ext_resource type="PackedScene" uid="uid://dcan2k534n88q" path="res://Scenes/Maps/working_map.tscn" id="7_ce1oe"]
 [ext_resource type="Script" path="res://Scenes/Combat/UiNodes/combat_ui_control.gd" id="8_8l3el"]
 [ext_resource type="Script" path="res://Scenes/Combat/UiNodes/grid_cursor_node.gd" id="8_wf3xb"]
-[ext_resource type="Texture2D" uid="uid://5sc84oyivah" path="res://assets/Sprites/UI/backpatch.png" id="10_8c137"]
 [ext_resource type="PackedScene" uid="uid://6dlh0wlnsedb" path="res://Scenes/Combat/UiNodes/QueInput/que_input_control.tscn" id="14_atc5n"]
 [ext_resource type="PackedScene" uid="uid://cyakkk5i1nreg" path="res://Scenes/Combat/UiNodes/StatsPanel/combat_stat_panel_control.tscn" id="16_jsy0k"]
 [ext_resource type="Script" path="res://Scenes/Combat/MoveableCamera2D.gd" id="17_7dull"]
 [ext_resource type="Script" path="res://Scenes/Combat/UiNodes/pause_menu_control.gd" id="18_acqto"]
-[ext_resource type="Script" path="res://Scenes/Combat/UiNodes/QueInput/item_select_menu_control.gd" id="19_p0l6r"]
 [ext_resource type="PackedScene" uid="uid://bti610xcgtmrs" path="res://Scenes/Combat/UiNodes/QueCollection/que_collection_display_control.tscn" id="19_t74bn"]
 [ext_resource type="Texture2D" uid="uid://ccv4ridl8evo8" path="res://assets/Sprites/UI/MenuButtonBackground.png" id="19_u4d2a"]
 [ext_resource type="Script" path="res://Scenes/Combat/dev_combat_data_control.gd" id="19_yc3tw"]
@@ -21,7 +19,6 @@
 [ext_resource type="Script" path="res://assets/Scripts/DevTools/que_cal_control.gd" id="22_4rk3c"]
 [ext_resource type="Texture2D" uid="uid://cen5h0gfhguhg" path="res://assets/Sprites/UI/GearButtonPressed.png" id="22_eoo3l"]
 [ext_resource type="Theme" uid="uid://by8t8e4s2str7" path="res://Scenes/VFXs/SpeachBubble/speach_bubble_theme.tres" id="22_gl452"]
-[ext_resource type="PackedScene" uid="uid://2ij8q0r7uy4y" path="res://Scenes/Combat/UiNodes/QueDisplay/que_display_control.tscn" id="22_i32rr"]
 [ext_resource type="Texture2D" uid="uid://cu00gc8hhk0h3" path="res://assets/Sprites/UI/QueInputAndDisplay/page_slot.png" id="23_o55pl"]
 [ext_resource type="Script" path="res://assets/Scripts/DevTools/que_cal_bar_control.gd" id="23_tcvpd"]
 [ext_resource type="Texture2D" uid="uid://cwsvq3qu6228n" path="res://assets/Sprites/UI/QueInputAndDisplay/page_button.png" id="24_5fn7e"]
@@ -30,11 +27,18 @@
 [ext_resource type="Script" path="res://Scenes/Combat/game_victory_screen.gd" id="26_1uhkb"]
 [ext_resource type="Texture2D" uid="uid://e0lb1vqlst3i" path="res://Scenes/Combat/UiNodes/CameraLock/CameraLock_Locked.png" id="26_muuhh"]
 [ext_resource type="Theme" uid="uid://cayt153s5ro4a" path="res://Scenes/Themes/standard_theme_red.tres" id="27_3mvka"]
+[ext_resource type="Script" path="res://Scenes/Combat/UiNodes/DropMessages/drop_message_control.gd" id="27_7037i"]
 [ext_resource type="Texture2D" uid="uid://88hhiituab5b" path="res://Scenes/Combat/UiNodes/CameraLock/CameraLock_Unlocked.png" id="27_cweuh"]
 [ext_resource type="Texture2D" uid="uid://q0f5h7rfqbc2" path="res://defs/Items/Consumables/BarPotions/HealthPotion_M_L.png" id="27_vsjit"]
+[ext_resource type="Script" path="res://Scenes/Combat/UiNodes/DropMessages/drop_message_card.gd" id="28_lvk4q"]
 [ext_resource type="Texture2D" uid="uid://dx5cq5wifod2g" path="res://Scenes/Combat/UiNodes/CameraLock/CameraLock_Following.png" id="28_mng7g"]
+[ext_resource type="PackedScene" uid="uid://banawprx6et26" path="res://Scenes/Combat/UiNodes/ItemSelectionInput/item_selection_input.tscn" id="29_6pds8"]
+[ext_resource type="Script" path="res://Scenes/UiNodes/back_patch_container.gd" id="29_vvabq"]
+[ext_resource type="Texture2D" uid="uid://5hu0ttx4jxuo" path="res://assets/Sprites/UI/BackPatches/PaperPatch_64x92_16.png" id="30_emljn"]
 [ext_resource type="Script" path="res://Scenes/Combat/UiNodes/target_input_control.gd" id="31_jtehh"]
+[ext_resource type="Texture2D" uid="uid://bibqsudhjw4qe" path="res://assets/Sprites/Paper/CommonPageBackground.png" id="31_rn36e"]
 [ext_resource type="Texture2D" uid="uid://io35wpu802fp" path="res://assets/Sprites/UI/BackPatches/Patch_64_12.png" id="32_f81f5"]
+[ext_resource type="Texture2D" uid="uid://bdh4x87ck5hi5" path="res://defs/Items/Consumables/Ammo/Sprites/Gen_Ammo_LIcon.png" id="32_f701a"]
 [ext_resource type="Texture2D" uid="uid://bqv6yn42oymo" path="res://defs/Actors/NPCs/FishMerch/cart.png" id="33_cdw0u"]
 [ext_resource type="Script" path="res://Scenes/Combat/dev_map_drawing.gd" id="37_fh4f7"]
 
@@ -192,7 +196,7 @@ offset_bottom = 97.0
 text = "Paths
 "
 
-[node name="CombatUiControl" type="Control" parent="MoveableCamera2D/CanvasLayer" node_paths=PackedStringArray("game_over_screen", "victory_screen", "menu_container", "menu_button", "pause_menu", "target_input_display", "stat_panel_control", "que_input", "que_display", "que_collection_display", "stats_collection_display", "item_select_menu")]
+[node name="CombatUiControl" type="Control" parent="MoveableCamera2D/CanvasLayer" node_paths=PackedStringArray("game_over_screen", "victory_screen", "menu_container", "menu_button", "pause_menu", "target_input_display", "stat_panel_control", "que_input", "que_collection_display", "stats_collection_display", "item_select_menu", "drop_message_control")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -205,16 +209,16 @@ mouse_filter = 2
 script = ExtResource("8_8l3el")
 game_over_screen = NodePath("GameOverScreen")
 victory_screen = NodePath("GameVictoryScreen")
-menu_container = NodePath("CenterContainer2")
+menu_container = NodePath("")
 menu_button = NodePath("MenuButton")
 pause_menu = NodePath("PauseMenuControl")
 target_input_display = NodePath("TargetInputControl")
 stat_panel_control = NodePath("StatPanelControl")
-que_input = NodePath("CenterContainer/QueInputControl")
-que_display = NodePath("QueDisplayControl")
+que_input = NodePath("QueInputControl")
 que_collection_display = NodePath("QueCollectionDisplayControl")
 stats_collection_display = NodePath("StatCollectionDisplayControl")
-item_select_menu = NodePath("ItemSelectMenuControl")
+item_select_menu = NodePath("ItemSelectionInput")
+drop_message_control = NodePath("DropMessageControl")
 
 [node name="StatPanelControl" parent="MoveableCamera2D/CanvasLayer/CombatUiControl" instance=ExtResource("16_jsy0k")]
 layout_mode = 0
@@ -222,57 +226,6 @@ offset_left = 8.0
 offset_top = 8.0
 offset_right = 184.0
 offset_bottom = 86.0
-
-[node name="ItemSelectMenuControl" type="Control" parent="MoveableCamera2D/CanvasLayer/CombatUiControl"]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("19_p0l6r")
-
-[node name="ColorRect" type="ColorRect" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/ItemSelectMenuControl"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.266667, 0.266667, 0.266667, 0.521569)
-
-[node name="MenuPanel" type="Control" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/ItemSelectMenuControl"]
-custom_minimum_size = Vector2(128, 0)
-anchors_preset = 0
-offset_left = 508.0
-offset_top = 267.0
-offset_right = 636.0
-offset_bottom = 307.0
-
-[node name="Background" type="NinePatchRect" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/ItemSelectMenuControl/MenuPanel"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("10_8c137")
-region_rect = Rect2(0, 0, 64, 64)
-patch_margin_left = 8
-patch_margin_top = 8
-patch_margin_right = 8
-patch_margin_bottom = 8
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/ItemSelectMenuControl/MenuPanel"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = 0
-alignment = 1
 
 [node name="QueCollectionDisplayControl" parent="MoveableCamera2D/CanvasLayer/CombatUiControl" instance=ExtResource("19_t74bn")]
 layout_mode = 1
@@ -311,27 +264,18 @@ layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="CenterContainer2" type="CenterContainer" parent="MoveableCamera2D/CanvasLayer/CombatUiControl"]
+[node name="QueInputControl" parent="MoveableCamera2D/CanvasLayer/CombatUiControl" node_paths=PackedStringArray("on_que_options_menu") instance=ExtResource("14_atc5n")]
+custom_minimum_size = Vector2(0, 88)
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = -1
+anchor_top = 0.9
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = 0.0
+offset_bottom = 0.0
 grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-
-[node name="QueDisplayControl" parent="MoveableCamera2D/CanvasLayer/CombatUiControl" instance=ExtResource("22_i32rr")]
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 9.0
-offset_top = -154.0
-offset_right = 109.0
-offset_bottom = -98.0
 grow_vertical = 0
-show_preview_movement = true
-show_gaps = false
+on_que_options_menu = NodePath("../ItemSelectionInput")
 
 [node name="NextActorButton" type="Button" parent="MoveableCamera2D/CanvasLayer/CombatUiControl"]
 visible = false
@@ -919,22 +863,71 @@ text = "Back to Camp"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="CenterContainer" type="CenterContainer" parent="MoveableCamera2D/CanvasLayer/CombatUiControl"]
+[node name="ItemSelectionInput" parent="MoveableCamera2D/CanvasLayer/CombatUiControl" instance=ExtResource("29_6pds8")]
+visible = false
 layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -20.0
-offset_top = -40.0
-offset_right = 20.0
-grow_horizontal = 2
-grow_vertical = 0
 
-[node name="QueInputControl" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/CenterContainer" node_paths=PackedStringArray("que_display_control") instance=ExtResource("14_atc5n")]
+[node name="DropMessageControl" type="Control" parent="MoveableCamera2D/CanvasLayer/CombatUiControl" node_paths=PackedStringArray("premade_drop_card")]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+grow_horizontal = 2
+script = ExtResource("27_7037i")
+premade_drop_card = NodePath("DropMessageCard")
+
+[node name="DropMessageCard" type="Control" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/DropMessageControl" node_paths=PackedStringArray("icon_background", "icon_rect", "label")]
+custom_minimum_size = Vector2(0, 48)
+anchors_preset = 0
+offset_bottom = 48.0
+script = ExtResource("28_lvk4q")
+icon_background = NodePath("BackPatchContainer/HBoxContainer/IconBackground")
+icon_rect = NodePath("BackPatchContainer/HBoxContainer/IconBackground/Icon")
+label = NodePath("BackPatchContainer/HBoxContainer/Label")
+
+[node name="BackPatchContainer" type="Container" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/DropMessageControl/DropMessageCard" node_paths=PackedStringArray("background", "inner_container")]
+custom_minimum_size = Vector2(160, 48)
+layout_mode = 0
+offset_left = -80.0
+offset_right = 80.0
+offset_bottom = 48.0
+script = ExtResource("29_vvabq")
+background = NodePath("NinePatchRect")
+inner_container = NodePath("HBoxContainer")
+center_in_parent = true
+
+[node name="NinePatchRect" type="NinePatchRect" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/DropMessageControl/DropMessageCard/BackPatchContainer"]
 layout_mode = 2
-que_display_control = NodePath("../../QueDisplayControl")
+texture = ExtResource("30_emljn")
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/DropMessageControl/DropMessageCard/BackPatchContainer"]
+layout_mode = 2
+
+[node name="IconBackground" type="TextureRect" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/DropMessageControl/DropMessageCard/BackPatchContainer/HBoxContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = ExtResource("31_rn36e")
+expand_mode = 1
+
+[node name="Icon" type="TextureRect" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/DropMessageControl/DropMessageCard/BackPatchContainer/HBoxContainer/IconBackground"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("32_f701a")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/DropMessageControl/DropMessageCard/BackPatchContainer/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("27_3mvka")
+text = "Item Name +1"
 
 [node name="CameraLockControl" type="Control" parent="MoveableCamera2D/CanvasLayer" node_paths=PackedStringArray("camera", "locked_icon", "unlocked_icon", "following_icon", "button")]
 layout_mode = 3

@@ -3,6 +3,8 @@ extends BaseItemHolder
 
 var bag_item_id
 
+var _queed_items_list:Array = []
+
 func _init(actor) -> void:
 	super(actor)
 
@@ -25,7 +27,3 @@ func set_bag_item(bag_item:BaseBagEquipment):
 	else:
 		bag_item_id = null
 	_build_slots_list()
-
-
-func _load_saved_items()->Array:
-	return _actor.get_load_val("BagItems", [])

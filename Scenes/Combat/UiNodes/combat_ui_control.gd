@@ -14,10 +14,15 @@ var camera:MoveableCamera2D:
 @export var target_input_display:TargetInputControl
 @export var stat_panel_control:StatPanelControl
 @export var que_input:QueInputControl
-@export var que_display:QueDisplayControl
+var que_display:QueDisplayControl:
+	get:
+		if que_input:
+			return que_input.que_display_control
+		return null
 @export var que_collection_display:QueCollectionControl
 @export var stats_collection_display:StatCollectionDisplayControl
-@export var item_select_menu:ItemSelectMenuControl
+@export var item_select_menu:ItemSelectionInputDisplay
+@export var drop_message_control:DropMessageControl
 
 
 static var Instance:CombatUiControl
@@ -50,7 +55,7 @@ func _process(delta: float) -> void:
 func set_player_actor(actor:BaseActor):
 	stat_panel_control.set_actor(actor)
 	que_input.set_actor(actor)
-	que_display.set_actor(actor)
+	#que_input.que_display_control.set_actor(actor)
 
 
 func _input(event: InputEvent) -> void:

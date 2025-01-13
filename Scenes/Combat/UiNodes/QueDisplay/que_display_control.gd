@@ -5,7 +5,7 @@ const PADDING = 8
 
 @export var portrait:TextureRect
 @export var main_container:HBoxContainer
-@export var slot_button_prefab:TextureButton
+@export var premade_que_button:QueDisplayButton
 @export var slots_container:HBoxContainer
 #@onready var que_path_arrow:Sprite2D = $QuePathArrow
 
@@ -23,14 +23,14 @@ var _resize:bool = false
 var _delayed_init = false
 
 func _ready():
-	slot_button_prefab.visible = false
+	premade_que_button.visible = false
 	#if !show_preview_movement:
 		#que_path_arrow.visible = false
 	CombatRootControl.QueController.que_ordering_changed.connect(_build_slots)
 	CombatRootControl.QueController.start_of_round.connect(_hide_preview)
 	#CombatRootControl.QueController.end_of_round.connect(_show_preview_path)
-	CombatRootControl.QueController.start_of_turn.connect(_set_action_highlight)
-	CombatRootControl.QueController.end_of_turn.connect(_hide_action_highlight)
+	#CombatRootControl.QueController.start_of_turn.connect(_set_action_highlight)
+	#CombatRootControl.QueController.end_of_turn.connect(_hide_action_highlight)
 	
 	if _delayed_init:
 		portrait.texture = _actor.sprite.get_portrait_sprite()
@@ -44,16 +44,16 @@ func _process(_delta: float) -> void:
 							main_container.size.y + (2 * PADDING))
 		_resize = false
 
-func _set_action_highlight():
-	_hide_action_highlight()
-	var turn_index = CombatRootControl.QueController.action_index
-	if turn_index < _slot_buttons.size():
-		var slot = _slot_buttons[turn_index]
-		slot.highlight.visible = true
-	
-func _hide_action_highlight():
-	for slot in _slot_buttons:
-		slot.highlight.visible = false
+#func _set_action_highlight():
+	#_hide_action_highlight()
+	#var turn_index = CombatRootControl.QueController.action_index
+	#if turn_index < _slot_buttons.size():
+		#var slot = _slot_buttons[turn_index]
+		#slot.highlight.visible = true
+	#
+#func _hide_action_highlight():
+	#for slot in _slot_buttons:
+		#slot.highlight.visible = false
 
 func _sync():
 	_sync_icons()
@@ -101,25 +101,26 @@ func set_actor(actor:BaseActor):
 		_delayed_init = true
 
 func mark_as_dead():
-	for slot:QueDisplaySlot in _slot_buttons:
+	for slot:QueDisplayButton in _slot_buttons:
 		slot.dead_icon.visible = true
 
 func _build_slots():
 	if not _actor:
 		return
 	for child in slots_container.get_children():
-		child.queue_free()
+		if child != premade_que_button:
+			child.queue_free()
 	_slot_buttons.clear()
 	_real_slots.clear()
 	for index in range(CombatRootControl.QueController.max_que_size):
 		var is_gap = _actor.Que.is_turn_gap(index)
-		var new_button:QueDisplaySlot = slot_button_prefab.duplicate()
+		var new_button:QueDisplayButton = premade_que_button.duplicate()
 		if not is_gap or show_gaps:
 			new_button.visible = true
 		new_button.name = "PageSlot" + str(index)
 		slots_container.add_child(new_button)
 		new_button.set_is_gap(is_gap)
-		new_button.pressed.connect(_slot_pressed.bind(index))
+		new_button.button.pressed.connect(_slot_pressed.bind(index))
 		_slot_buttons.append(new_button)
 		if not is_gap:
 			_real_slots.append(new_button)
@@ -129,13 +130,13 @@ func _sync_icons():
 	var index = 0
 	for action:BaseAction in _actor.Que.list_qued_actions():
 		if _real_slots.size() > index:
-			var slot:QueDisplaySlot = _real_slots[index]
+			var slot:QueDisplayButton = _real_slots[index]
 			slot.set_action(index, _actor, action)
 			index += 1
 		
 	for n in range(index, _actor.Que.get_max_que_size()):
 		if n < _real_slots.size():
-			var slot:QueDisplaySlot = _real_slots[n]
+			var slot:QueDisplayButton = _real_slots[n]
 			slot.set_action(n, _actor, null)
 	
 func _slot_pressed(index:int):

@@ -36,3 +36,10 @@ func get_data_for_turn(turn_index:int)->TurnExecutionData:
 func get_current_turn_data()->TurnExecutionData:
 	var current_turn = _que.turn_to_que_index(CombatRootControl.QueController.action_index)
 	return get_data_for_turn(current_turn)
+
+# Returns existing on_que values for key
+func get_on_que_values(key:String)->Array:
+	var out_list = []
+	for turn:TurnExecutionData in TurnDataList:
+		out_list.append(turn.on_que_data.get(key, null))
+	return out_list

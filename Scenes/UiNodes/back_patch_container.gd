@@ -6,15 +6,19 @@ static var global_refresh_list:Array = []
 
 const LOGGING = false
 
+signal custom_resized
+
 @export var global_refresh:bool = false
 @export var refresh:bool = false
 @export var background:NinePatchRect
 @export var inner_container:BoxContainer
 @export var margin_override:int = -1
+@export var sides_padding:int = 0
 
 @export var force_fill_x:bool = false
 @export var force_fill_y:bool = false
 @export var force_dimintions:Vector2i
+@export var center_in_parent:bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -78,20 +82,20 @@ func resize_self_around_child():
 	min_inner_size.y = max(inner_container.custom_minimum_size.y, min_inner_size.y)
 	
 	var self_size = self.size
-	var self_custom_min = Vector2(margin_val * 2, margin_val * 2)
+	var self_custom_min = Vector2(margin_val * 2, (margin_val + sides_padding) * 2)
 	if LOGGING: print("Self Size: " + str(self_size))
 	var inner_size = min_inner_size
 	if fit_to_current_x:
 		if LOGGING: print("Fit X")
 		inner_size.x = self.size.x - (2 * margin_val)
 	else:
-		self_custom_min.x = min_inner_size.x + (2 * margin_val)
+		self_custom_min.x = min_inner_size.x + (2 * (margin_val + sides_padding))
 		self_size.x = self_custom_min.x
 	if fit_to_current_y:
 		if LOGGING: print("Fit Y")
 		inner_size.y = self.size.y - (2 * margin_val)
 	else:
-		self_custom_min.y = min_inner_size.y + (2 * margin_val)
+		self_custom_min.y = min_inner_size.y + (2 * (margin_val ))
 		self_size.y = self_custom_min.y
 	
 	if force_dimintions != Vector2i.ZERO:
@@ -108,7 +112,7 @@ func resize_self_around_child():
 	self.custom_minimum_size = self_custom_min
 	background.size = self.size
 	inner_container.set_size(inner_size)
-	inner_container.position = Vector2(margin_val, margin_val)
+	inner_container.position = Vector2(margin_val + sides_padding, margin_val)
 	if LOGGING: print("SelfSize: %s | InnerSize: %s" % [self_size, inner_size])
 	if LOGGING: print("----------------------- DONE -----------------------")
 	
@@ -117,3 +121,8 @@ func resize_self_around_child():
 		if child is Control and child != background and child != inner_container:
 			fit_child_in_rect(child, Rect2(Vector2(), self.size))
 		child_index += 1
+	if center_in_parent:
+		var parent = get_parent()
+		if parent:
+			var parent_size = parent.size
+			self.position = Vector2i((parent_size.x / 2) - (self_size.x / 2), (parent_size.y / 2) - (self_size.y / 2))

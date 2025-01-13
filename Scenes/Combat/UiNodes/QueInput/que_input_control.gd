@@ -1,3 +1,4 @@
+@tool
 class_name QueInputControl
 extends Control
 
@@ -6,11 +7,13 @@ const PADDING = 8
 signal page_special_selected(action_key:String)
 
 @export var que_display_control:QueDisplayControl
-@export var on_que_options_menu:OnQueOptionsMenu
+@export var on_que_options_menu:ItemSelectionInputDisplay
+@export var back_patch:BackPatchContainer
 @export var main_container:HBoxContainer 
 @export var page_button_prefab:QueInputButtonControl
 @export var start_label:Label
-@export var start_button:TextureButton
+@export var side_start_button:QueInput_StartButton
+@export var top_start_button:QueInput_StartButton
 
 var _actor:BaseActor
 var _page_buttons:Dictionary = {} 
@@ -22,18 +25,55 @@ var selecetion_mode:bool
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	if Engine.is_editor_hint():
+		return
 	#super()
 	#if Engine.is_editor_hint(): return
 	CombatRootControl.QueController.end_of_round.connect(_round_ends)
-	start_button.pressed.connect(_start_button_pressed)
-	start_button.disabled = true
+	side_start_button.button.pressed.connect(_start_button_pressed)
+	side_start_button.button.disabled = true
+	top_start_button.button.pressed.connect(_start_button_pressed)
+	top_start_button.button.disabled = true
 	page_button_prefab.visible = false
 	on_que_options_menu.visible = false
 	pass # Replace with function body.
 
+func hide_start_button():
+	#var que_display_size = que_display_control.size.x
+	#var self_size = back_patch.size.x
+	#var use_top = (top_start_button.size.x > self_size - que_display_size)
+	#printerr("SelfSize: %s | DisSize: %s" % [self_size, que_display_size])
+	#if use_top:
+		top_start_button.button.disabled = true
+		top_start_button.state = QueInput_StartButton.States.Shrinking
+	#else:
+		side_start_button.button.disabled = true
+		side_start_button.state = QueInput_StartButton.States.Shrinking
+
+func show_start_button():
+	var que_display_size = que_display_control.size.x
+	var self_size = back_patch.size.x #+ (back_patch.sides_padding * 2)
+	var use_top = (top_start_button.size.x < self_size - que_display_size)
+	printerr("SelfSize: %s | DisSize: %s | UseTop: %s" % [self_size, que_display_size, use_top])
+	if use_top:
+		top_start_button.button.disabled = false
+		top_start_button.state = QueInput_StartButton.States.Growing
+	else:
+		side_start_button.button.disabled = false
+		side_start_button.state = QueInput_StartButton.States.Growing
+	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
+	var hight = self.size.y
+	var box_hight = back_patch.size.y
+	var box_scale = hight / box_hight
+	back_patch.scale = Vector2(box_scale, box_scale)
+	var self_size = self.size
+	var box_size = back_patch.size * box_scale
+	back_patch.position = Vector2((self_size.x / 2) - (box_size.x / 2), (self_size.y / 2) - (box_size.y / 2))
+	if Engine.is_editor_hint():
+		return
 	#super(delta)
 	#if Engine.is_editor_hint(): return
 	if _resize:
@@ -48,6 +88,7 @@ func set_actor(actor:BaseActor):
 	_actor.Que.action_que_changed.connect(_on_que_change)
 	_actor.Que.ammo_changed.connect(_on_ammo_change)
 	_build_buttons()
+	que_display_control.set_actor(actor)
 	
 
 func _build_buttons():
@@ -78,17 +119,16 @@ func _build_buttons():
 		_page_buttons[action_key] = new_button
 		index += 1
 	_on_que_change()
+	
 	#self.size = Vector2i(main_container.size.x + (2 * PADDING),
 						#main_container.size.y + (2 * PADDING))
 
 func _on_que_change():
 	clear_preview_display()
-	if _actor.Que.is_ready() or CombatRootControl.QueController.SHORTCUT_QUE:
-		start_button.disabled = false
-		start_label.text = "Start"
+	if _actor.Que.is_ready():# or CombatRootControl.QueController.SHORTCUT_QUE:
+		show_start_button()
 	else:
-		start_button.disabled = true
-		start_label.text = "Queue"
+		hide_start_button()
 
 func allow_input(_allow:bool):
 	pass
@@ -145,7 +185,7 @@ func _page_button_pressed(index, key_name):
 	var on_que_options = action.get_on_que_options(_actor, CombatRootControl.Instance.GameState)
 	if on_que_options.size() > 0:
 		on_que_options_menu.visible = true
-		on_que_options_menu.position = get_local_mouse_position()# _buttons[index].position + Vector2(_buttons[index].size.x,0)
+		#on_que_options_menu.position = get_local_mouse_position()# _buttons[index].position + Vector2(_buttons[index].size.x,0)
 		for opt:OnQueOptionsData in on_que_options:
 			on_que_options_menu.load_options(key_name, on_que_options, _on_all_que_options_selected)
 	else:
@@ -158,12 +198,10 @@ func _on_all_que_options_selected(action_key:String, options_data:Dictionary):
 
 func _start_button_pressed():
 	CombatUiControl.ui_state_controller.set_ui_state(UiStateController.UiStates.ExecRound)
-	start_button.disabled = true
-	start_button.get_child(0).text = "Wait"
+	hide_start_button()
 
 func _round_ends():
-	start_button.disabled = false
-	start_button.get_child(0).text = "Start"
+	hide_start_button()
 
 func _on_ammo_change(page_key):
 	if _page_buttons.has(page_key):

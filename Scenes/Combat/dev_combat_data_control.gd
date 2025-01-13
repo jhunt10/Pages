@@ -15,6 +15,7 @@ func _ready() -> void:
 
 func _toggle_dev_map_display():
 	dev_map_display.visible = not dev_map_display.visible
+	CombatRootControl.Instance.ui_control.drop_message_control.add_card("Test Message")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

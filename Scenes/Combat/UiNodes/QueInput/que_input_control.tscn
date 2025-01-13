@@ -1,42 +1,238 @@
-[gd_scene load_steps=9 format=3 uid="uid://6dlh0wlnsedb"]
+[gd_scene load_steps=16 format=3 uid="uid://6dlh0wlnsedb"]
 
 [ext_resource type="Script" path="res://Scenes/Combat/UiNodes/QueInput/que_input_control.gd" id="1_bqb47"]
-[ext_resource type="Texture2D" uid="uid://dul8y1l1gw420" path="res://assets/Sprites/UI/BackPatches/Patch_32_8_Dark.png" id="2_3y7ku"]
+[ext_resource type="Texture2D" uid="uid://clb0p8uenqo8c" path="res://Scenes/Combat/UiNodes/QueInput/PopUpButton.png" id="2_7xk62"]
 [ext_resource type="Script" path="res://Scenes/UiNodes/back_patch_container.gd" id="2_ir7m8"]
-[ext_resource type="Texture2D" uid="uid://01rf6dbmahgb" path="res://assets/Sprites/UI/QueInputAndDisplay/start_button.png" id="5_tlwb0"]
-[ext_resource type="Theme" uid="uid://dwinll8pgdjhc" path="res://Scenes/Themes/standard_theme.tres" id="6_56l8d"]
-[ext_resource type="Script" path="res://Scenes/Combat/UiNodes/QueInput/on_que_option_menu_control.gd" id="6_ci2p0"]
+[ext_resource type="Texture2D" uid="uid://cdot2t5117n5f" path="res://Scenes/Combat/UiNodes/QueInput/ScrollPatch.png" id="3_2484v"]
+[ext_resource type="Script" path="res://Scenes/Combat/UiNodes/QueInput/stat_button_control.gd" id="3_pfyt3"]
+[ext_resource type="Theme" uid="uid://cayt153s5ro4a" path="res://Scenes/Themes/standard_theme_red.tres" id="3_u12om"]
 [ext_resource type="PackedScene" uid="uid://cpy0gmuoekexl" path="res://Scenes/Combat/UiNodes/QueInput/que_input_button_control.tscn" id="6_ua6n5"]
-[ext_resource type="Texture2D" uid="uid://c6kesqll0wvk6" path="res://assets/Sprites/UI/QueInputAndDisplay/on_que_options_backpatch_32_4.png" id="7_5asbx"]
+[ext_resource type="Script" path="res://Scenes/Combat/UiNodes/QueDisplay/que_display_control.gd" id="9_o02vd"]
+[ext_resource type="Texture2D" uid="uid://dgfxtmtdjfgey" path="res://assets/Sprites/UI/QuePathArrow.png" id="10_ruo2m"]
+[ext_resource type="Texture2D" uid="uid://e71sf31qf71e" path="res://Scenes/Combat/UiNodes/QueDisplay/QueDisplayBackground.png" id="11_quda2"]
+[ext_resource type="Texture2D" uid="uid://do85dvxvlf5wk" path="res://defs/Actors/Squirrels/Squirrcerer_IconSmall.png" id="12_cgpwr"]
+[ext_resource type="Script" path="res://Scenes/Combat/UiNodes/QueInput/QueDisplayButton.gd" id="18_8nhhy"]
+[ext_resource type="Texture2D" uid="uid://cr1m3llr0pgtd" path="res://Scenes/Combat/UiNodes/QueDisplay/EmptySlotBackground.png" id="19_d7qpq"]
+[ext_resource type="Texture2D" uid="uid://dq2fpuokt1s5r" path="res://Scenes/Combat/UiNodes/QueDisplay/SlotBackground.png" id="19_gjejj"]
+[ext_resource type="Texture2D" uid="uid://bu1v4w3d6hau" path="res://Scenes/Combat/UiNodes/QueDisplay/FilledSlotBackground.png" id="20_k35kq"]
 
-[node name="QueInputControl" type="Control" node_paths=PackedStringArray("on_que_options_menu", "main_container", "page_button_prefab", "start_label", "start_button")]
-custom_minimum_size = Vector2(124, 88)
+[node name="QueInputControl" type="Control" node_paths=PackedStringArray("que_display_control", "back_patch", "main_container", "page_button_prefab", "start_label", "side_start_button", "top_start_button")]
+custom_minimum_size = Vector2(124, 80)
 layout_mode = 3
 anchors_preset = 0
-offset_right = 220.0
-offset_bottom = 88.0
+offset_right = 392.0
+offset_bottom = 96.0
 script = ExtResource("1_bqb47")
-on_que_options_menu = NodePath("OnQueOptionsMenuControl")
+que_display_control = NodePath("BackPatchContainer/Control/QueDisplayControl")
+back_patch = NodePath("BackPatchContainer")
 main_container = NodePath("BackPatchContainer/HBoxContainer")
 page_button_prefab = NodePath("BackPatchContainer/HBoxContainer/HBoxContainer/QueInputButtonControl")
-start_label = NodePath("BackPatchContainer/HBoxContainer/StartButton/Label")
-start_button = NodePath("BackPatchContainer/HBoxContainer/StartButton")
+start_label = NodePath("BackPatchContainer/Control/SideStatButtonControl/TextureRect/Label")
+side_start_button = NodePath("BackPatchContainer/Control/SideStatButtonControl")
+top_start_button = NodePath("BackPatchContainer/Control/TopStatButtonControl")
 
 [node name="BackPatchContainer" type="Container" parent="." node_paths=PackedStringArray("background", "inner_container")]
-custom_minimum_size = Vector2(212, 80)
+custom_minimum_size = Vector2(108, 80)
 layout_mode = 0
-offset_right = 212.0
+offset_left = 131.2
+offset_right = 239.2
 offset_bottom = 80.0
+scale = Vector2(1.2, 1.2)
 script = ExtResource("2_ir7m8")
 background = NodePath("Background")
 inner_container = NodePath("HBoxContainer")
+sides_padding = 14
+center_in_parent = true
+
+[node name="Control" type="Control" parent="BackPatchContainer"]
+layout_mode = 2
+
+[node name="QueDisplayControl" type="Control" parent="BackPatchContainer/Control" node_paths=PackedStringArray("portrait", "main_container", "premade_que_button", "slots_container")]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 2.0
+offset_top = -68.0
+offset_right = 118.0
+offset_bottom = -4.0
+script = ExtResource("9_o02vd")
+portrait = NodePath("BackPatchContainer/HBoxContainer/PortraitTextureRect")
+main_container = NodePath("BackPatchContainer/HBoxContainer")
+premade_que_button = NodePath("BackPatchContainer/HBoxContainer/SlotsContainer/QueDisplayButton")
+slots_container = NodePath("BackPatchContainer/HBoxContainer/SlotsContainer")
+show_gaps = true
+
+[node name="QuePathArrow" type="Sprite2D" parent="BackPatchContainer/Control/QueDisplayControl"]
+visible = false
+texture = ExtResource("10_ruo2m")
+
+[node name="BackPatchContainer" type="Container" parent="BackPatchContainer/Control/QueDisplayControl" node_paths=PackedStringArray("background", "inner_container")]
+custom_minimum_size = Vector2(120, 64)
+layout_mode = 0
+offset_right = 120.0
+offset_bottom = 64.0
+script = ExtResource("2_ir7m8")
+background = NodePath("Background")
+inner_container = NodePath("HBoxContainer")
+margin_override = 8
+
+[node name="Background" type="NinePatchRect" parent="BackPatchContainer/Control/QueDisplayControl/BackPatchContainer"]
+layout_mode = 2
+texture = ExtResource("11_quda2")
+patch_margin_left = 61
+patch_margin_top = 32
+patch_margin_right = 12
+patch_margin_bottom = 32
+
+[node name="HBoxContainer" type="HBoxContainer" parent="BackPatchContainer/Control/QueDisplayControl/BackPatchContainer"]
+layout_mode = 2
+
+[node name="PortraitTextureRect" type="TextureRect" parent="BackPatchContainer/Control/QueDisplayControl/BackPatchContainer/HBoxContainer"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+texture = ExtResource("12_cgpwr")
+
+[node name="ColorRect" type="ColorRect" parent="BackPatchContainer/Control/QueDisplayControl/BackPatchContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="SlotsContainer" type="HBoxContainer" parent="BackPatchContainer/Control/QueDisplayControl/BackPatchContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="QueDisplayButton" type="Control" parent="BackPatchContainer/Control/QueDisplayControl/BackPatchContainer/HBoxContainer/SlotsContainer" node_paths=PackedStringArray("background", "page_icon", "button")]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+script = ExtResource("18_8nhhy")
+background = NodePath("Background")
+page_icon = NodePath("PageIcon")
+button = NodePath("Button")
+empty_background_texture = ExtResource("19_d7qpq")
+gap_background_texture = ExtResource("19_gjejj")
+filled_background_texture = ExtResource("20_k35kq")
+
+[node name="Background" type="TextureRect" parent="BackPatchContainer/Control/QueDisplayControl/BackPatchContainer/HBoxContainer/SlotsContainer/QueDisplayButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("19_d7qpq")
+
+[node name="PageIcon" type="TextureRect" parent="BackPatchContainer/Control/QueDisplayControl/BackPatchContainer/HBoxContainer/SlotsContainer/QueDisplayButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Button" type="Button" parent="BackPatchContainer/Control/QueDisplayControl/BackPatchContainer/HBoxContainer/SlotsContainer/QueDisplayButton"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SideStatButtonControl" type="Control" parent="BackPatchContainer/Control" node_paths=PackedStringArray("button_texture", "button")]
+show_behind_parent = true
+clip_contents = true
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -9.0
+offset_top = 8.0
+offset_right = 119.0
+offset_bottom = 72.0
+grow_horizontal = 0
+script = ExtResource("3_pfyt3")
+grow_speed = 300.0
+button_texture = NodePath("TextureRect")
+button = NodePath("TextureRect/Button")
+
+[node name="TextureRect" type="TextureRect" parent="BackPatchContainer/Control/SideStatButtonControl"]
+layout_mode = 0
+offset_top = 64.0
+offset_right = 128.0
+offset_bottom = 128.0
+texture = ExtResource("2_7xk62")
+
+[node name="Label" type="Label" parent="BackPatchContainer/Control/SideStatButtonControl/TextureRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_u12om")
+theme_override_font_sizes/font_size = 32
+text = "Start"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="BackPatchContainer/Control/SideStatButtonControl/TextureRect"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TopStatButtonControl" type="Control" parent="BackPatchContainer/Control" node_paths=PackedStringArray("button_texture", "button")]
+clip_contents = true
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -135.0
+offset_top = -56.0
+offset_right = -7.0
+offset_bottom = 8.0
+grow_horizontal = 0
+script = ExtResource("3_pfyt3")
+vertical = true
+grow_speed = 300.0
+button_texture = NodePath("TextureRect")
+button = NodePath("TextureRect/Button")
+
+[node name="TextureRect" type="TextureRect" parent="BackPatchContainer/Control/TopStatButtonControl"]
+layout_mode = 0
+offset_top = 64.0
+offset_right = 128.0
+offset_bottom = 128.0
+texture = ExtResource("2_7xk62")
+
+[node name="Label" type="Label" parent="BackPatchContainer/Control/TopStatButtonControl/TextureRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_u12om")
+theme_override_font_sizes/font_size = 32
+text = "Start"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="BackPatchContainer/Control/TopStatButtonControl/TextureRect"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Background" type="NinePatchRect" parent="BackPatchContainer"]
 layout_mode = 2
-texture = ExtResource("2_3y7ku")
-patch_margin_left = 8
+texture = ExtResource("3_2484v")
+patch_margin_left = 21
 patch_margin_top = 8
-patch_margin_right = 8
+patch_margin_right = 21
 patch_margin_bottom = 8
 
 [node name="HBoxContainer" type="HBoxContainer" parent="BackPatchContainer"]
@@ -47,58 +243,3 @@ layout_mode = 2
 
 [node name="QueInputButtonControl" parent="BackPatchContainer/HBoxContainer/HBoxContainer" instance=ExtResource("6_ua6n5")]
 layout_mode = 2
-
-[node name="StartButton" type="TextureButton" parent="BackPatchContainer/HBoxContainer"]
-custom_minimum_size = Vector2(128, 64)
-layout_mode = 2
-texture_normal = ExtResource("5_tlwb0")
-texture_pressed = ExtResource("5_tlwb0")
-stretch_mode = 0
-
-[node name="Label" type="Label" parent="BackPatchContainer/HBoxContainer/StartButton"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("6_56l8d")
-theme_override_font_sizes/font_size = 32
-text = "Start"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="OnQueOptionsMenuControl" type="Container" parent="." node_paths=PackedStringArray("options_container", "title_lable", "parent_que_input", "background", "inner_container")]
-visible = false
-z_index = 5
-custom_minimum_size = Vector2(133, 35)
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-script = ExtResource("6_ci2p0")
-options_container = NodePath("InnerContainer/OptionsContainer")
-title_lable = NodePath("InnerContainer/TitleLabel")
-parent_que_input = NodePath("..")
-background = NodePath("Background")
-inner_container = NodePath("InnerContainer")
-
-[node name="Background" type="NinePatchRect" parent="OnQueOptionsMenuControl"]
-custom_minimum_size = Vector2(133, 35)
-layout_mode = 2
-texture = ExtResource("7_5asbx")
-patch_margin_left = 4
-patch_margin_top = 4
-patch_margin_right = 4
-patch_margin_bottom = 4
-
-[node name="InnerContainer" type="VBoxContainer" parent="OnQueOptionsMenuControl"]
-layout_mode = 2
-
-[node name="TitleLabel" type="Label" parent="OnQueOptionsMenuControl/InnerContainer"]
-clip_contents = true
-layout_mode = 2
-text = "Select an option"
-
-[node name="OptionsContainer" type="VBoxContainer" parent="OnQueOptionsMenuControl/InnerContainer"]
-layout_mode = 2
-theme_override_constants/separation = 0

@@ -28,6 +28,8 @@ offset_bottom = 161.0
 script = ExtResource("2_fwuqo")
 background = NodePath("NinePatchRect")
 inner_container = NodePath("BoxContainer")
+sides_padding = null
+center_in_parent = null
 
 [node name="NinePatchRect" type="NinePatchRect" parent="BackPatchContainer"]
 layout_mode = 2
@@ -86,6 +88,8 @@ offset_bottom = 384.0
 script = ExtResource("2_fwuqo")
 background = NodePath("NinePatchRect")
 inner_container = NodePath("BoxContainer")
+sides_padding = null
+center_in_parent = null
 
 [node name="NinePatchRect" type="NinePatchRect" parent="AddItemMenu/BackPatch"]
 layout_mode = 2
