@@ -45,3 +45,6 @@ func is_coor_selectable(coor:Vector2i)->bool:
 ## Returns list of Actors or MapSpots depending on Targeting Type
 func list_potential_targets()->Array:
 	return TargetingHelper.dicarry_to_values(_potential_target_dictray)
+
+func get_center_of_area()->MapPos:
+	return target_params.get_center_of_area(actor_pos)

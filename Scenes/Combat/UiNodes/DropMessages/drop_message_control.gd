@@ -4,6 +4,7 @@ extends Control
 @export var premade_drop_card:DropMessageCard
 @export var card_hight:int = 48
 @export var drop_speed:float = 300
+@export var showtime:float = 4
 
 var cards:Array = []
 var current_top:float = 0
@@ -36,6 +37,7 @@ func add_card(message:String, icon:Texture2D = null, icon_background:Texture2D =
 	current_top -= card_hight
 	new_card.position = Vector2i(0, current_top)
 	new_card.show()
+	new_card.show_time = showtime
 	cards.append(new_card)
 
 func card_finished(card:DropMessageCard):

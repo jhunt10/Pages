@@ -1,6 +1,7 @@
 class_name CharacterMenuMouseControl
 extends Control
 
+@export var drag_item_background:TextureRect
 @export var drag_item_icon:TextureRect
 @export var speed:float = 5000
 @export var offset:Vector2
@@ -15,3 +16,8 @@ func _process(delta: float) -> void:
 	if self.visible:
 		var mouse_pos = get_parent().get_local_mouse_position()
 		self.position = self.position.move_toward(mouse_pos - offset, delta * speed)
+
+func set_drag_item(item:BaseItem):
+	drag_item_icon.texture = item.get_large_icon()
+	drag_item_background.texture = item.get_rarity_background()
+	pass

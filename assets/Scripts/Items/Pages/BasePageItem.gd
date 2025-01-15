@@ -46,3 +46,15 @@ func get_effect_def():
 	if effect_key:
 		return EffectLibrary.get_effect_def(effect_key)
 	return null
+
+
+func get_rarity_background()->Texture2D:
+	if get_load_val("EffectKey"):
+		var rarity = get_item_rarity()
+		if rarity == BaseItem.ItemRarity.Rare:
+			return SpriteCache.get_sprite("res://assets/Sprites/Paper/RarePageBackground_Clipped.png")
+		if rarity == BaseItem.ItemRarity.Common:
+			return SpriteCache.get_sprite("res://assets/Sprites/Paper/UncommonPageBackground_Clipped.png")
+		if rarity == BaseItem.ItemRarity.Legendary:
+			return SpriteCache.get_sprite("res://assets/Sprites/Paper/EpicPageBackground_Clipped.png")
+	return ItemHelper.get_rarity_background(self.get_item_rarity())

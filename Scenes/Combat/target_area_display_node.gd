@@ -44,7 +44,7 @@ func build_from_target_selection_data(data:TargetSelectionData, show_area_effect
 	
 	var id = str(ResourceUID.create_id())
 	_target_area_maps[id] = new_area
-	
+	var min_x 
 	for coor in data.get_targeting_area_coords():
 		var los_val = data.get_coords_los(coor)
 		var selectable = data.is_coor_selectable(coor)

@@ -1,142 +1,39 @@
-[gd_scene load_steps=12 format=4 uid="uid://c4bhs27nmviba"]
+[gd_scene load_steps=11 format=3 uid="uid://c4bhs27nmviba"]
 
 [ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/PageMenuPage/page_page_control.gd" id="1_1k8ki"]
-[ext_resource type="Texture2D" uid="uid://igbqbvrp4q2" path="res://Scenes/Menus/CharacterMenu/MenuPages/PageMenuPage/TtitleItem_Patch_64_16.png" id="2_fvu4f"]
+[ext_resource type="Texture2D" uid="uid://mpwjrtfjnbth" path="res://Scenes/Menus/CharacterMenu/BookBackground.png" id="2_24rjq"]
 [ext_resource type="Theme" uid="uid://dwinll8pgdjhc" path="res://Scenes/Themes/standard_theme.tres" id="3_2qajg"]
-[ext_resource type="Texture2D" uid="uid://syhgjauerse4" path="res://Scenes/Menus/CharacterMenu/MenuPages/PageMenuPage/TtitleLabel_Patch_64_16.png" id="4_clxke"]
-[ext_resource type="Texture2D" uid="uid://dsg2v6rx5tbaj" path="res://defs/Items/Equipment/TestBook.png" id="4_wkknv"]
+[ext_resource type="Texture2D" uid="uid://cv0i7fr0kh62s" path="res://Scenes/Menus/CharacterMenu/MenuPages/PageMenuPage/PageSlotBackground.png" id="4_mmn4x"]
 [ext_resource type="PackedScene" uid="uid://c4p8fix52jdyq" path="res://Scenes/UiNodes/FitScaleLabel/fit_scale_label.tscn" id="5_p805u"]
-[ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/PageMenuPage/sub_book_container.gd" id="6_kqus5"]
 [ext_resource type="PackedScene" uid="uid://dugyf6csi731x" path="res://Scenes/Menus/CharacterMenu/MenuPages/PageMenuPage/HDotScrollBar/h_dot_scroll_bar_control.tscn" id="7_f7tj7"]
-[ext_resource type="Texture2D" uid="uid://uml26adl6hu3" path="res://Scenes/Menus/CharacterMenu/MenuPages/PageMenuPage/FancyGrid_TileSheet.png" id="7_hgl8k"]
+[ext_resource type="Texture2D" uid="uid://lv3xit0yhvj2" path="res://Scenes/Menus/CharacterMenu/MenuPages/PageMenuPage/ExpBar.png" id="7_lnpbr"]
+[ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/PageMenuPage/exp_bar_control.gd" id="8_3ocfe"]
+[ext_resource type="PackedScene" uid="uid://b6a64dt8gveex" path="res://Scenes/Menus/CharacterMenu/MenuPages/PageMenuPage/page_slot_button.tscn" id="8_ey4v2"]
+[ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/PageMenuPage/page_slot_set_container.gd" id="8_mwf3u"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wck0g"]
-texture = ExtResource("7_hgl8k")
-texture_region_size = Vector2i(80, 80)
-0:0/0 = 0
-0:0/0/terrain_set = 0
-0:0/0/terrain = 0
-1:0/0 = 0
-1:0/0/terrain_set = 0
-1:0/0/terrain = 0
-1:0/0/terrains_peering_bit/right_side = 0
-2:0/0 = 0
-2:0/0/terrain_set = 0
-2:0/0/terrain = 0
-2:0/0/terrains_peering_bit/right_side = 0
-2:0/0/terrains_peering_bit/left_side = 0
-3:0/0 = 0
-3:0/0/terrain_set = 0
-3:0/0/terrain = 0
-3:0/0/terrains_peering_bit/left_side = 0
-0:1/0 = 0
-0:1/0/terrain_set = 0
-0:1/0/terrain = 0
-0:1/0/terrains_peering_bit/right_side = 0
-0:1/0/terrains_peering_bit/bottom_right_corner = 0
-0:1/0/terrains_peering_bit/bottom_side = 0
-1:1/0 = 0
-1:1/0/terrain_set = 0
-1:1/0/terrain = 0
-1:1/0/terrains_peering_bit/right_side = 0
-1:1/0/terrains_peering_bit/bottom_right_corner = 0
-1:1/0/terrains_peering_bit/bottom_side = 0
-1:1/0/terrains_peering_bit/bottom_left_corner = 0
-1:1/0/terrains_peering_bit/left_side = 0
-2:1/0 = 0
-2:1/0/terrain_set = 0
-2:1/0/terrain = 0
-2:1/0/terrains_peering_bit/right_side = 0
-2:1/0/terrains_peering_bit/bottom_right_corner = 0
-2:1/0/terrains_peering_bit/bottom_side = 0
-2:1/0/terrains_peering_bit/bottom_left_corner = 0
-2:1/0/terrains_peering_bit/left_side = 0
-3:1/0 = 0
-3:1/0/terrain_set = 0
-3:1/0/terrain = 0
-3:1/0/terrains_peering_bit/bottom_side = 0
-3:1/0/terrains_peering_bit/bottom_left_corner = 0
-3:1/0/terrains_peering_bit/left_side = 0
-0:2/0 = 0
-0:2/0/terrain_set = 0
-0:2/0/terrain = 0
-0:2/0/terrains_peering_bit/right_side = 0
-0:2/0/terrains_peering_bit/bottom_right_corner = 0
-0:2/0/terrains_peering_bit/bottom_side = 0
-0:2/0/terrains_peering_bit/top_side = 0
-0:2/0/terrains_peering_bit/top_right_corner = 0
-1:2/0 = 0
-1:2/0/terrain_set = 0
-1:2/0/terrain = 0
-1:2/0/terrains_peering_bit/right_side = 0
-1:2/0/terrains_peering_bit/bottom_right_corner = 0
-1:2/0/terrains_peering_bit/bottom_side = 0
-1:2/0/terrains_peering_bit/bottom_left_corner = 0
-1:2/0/terrains_peering_bit/left_side = 0
-1:2/0/terrains_peering_bit/top_left_corner = 0
-1:2/0/terrains_peering_bit/top_side = 0
-1:2/0/terrains_peering_bit/top_right_corner = 0
-2:2/0 = 0
-2:2/0/terrain_set = 0
-2:2/0/terrain = 0
-2:2/0/terrains_peering_bit/right_side = 0
-2:2/0/terrains_peering_bit/bottom_side = 0
-2:2/0/terrains_peering_bit/bottom_left_corner = 0
-2:2/0/terrains_peering_bit/left_side = 0
-3:2/0 = 0
-3:2/0/terrain_set = 0
-3:2/0/terrain = 0
-3:2/0/terrains_peering_bit/bottom_left_corner = 0
-3:2/0/terrains_peering_bit/left_side = 0
-3:2/0/terrains_peering_bit/top_left_corner = 0
-3:2/0/terrains_peering_bit/top_side = 0
-0:3/0 = 0
-0:3/0/terrain_set = 0
-0:3/0/terrain = 0
-0:3/0/terrains_peering_bit/right_side = 0
-0:3/0/terrains_peering_bit/top_side = 0
-0:3/0/terrains_peering_bit/top_right_corner = 0
-1:3/0 = 0
-1:3/0/terrain_set = 0
-1:3/0/terrain = 0
-1:3/0/terrains_peering_bit/right_side = 0
-1:3/0/terrains_peering_bit/left_side = 0
-1:3/0/terrains_peering_bit/top_left_corner = 0
-1:3/0/terrains_peering_bit/top_side = 0
-1:3/0/terrains_peering_bit/top_right_corner = 0
-2:3/0 = 0
-2:3/0/terrain_set = 0
-2:3/0/terrain = 0
-2:3/0/terrains_peering_bit/left_side = 0
-2:3/0/terrains_peering_bit/top_left_corner = 0
-2:3/0/terrains_peering_bit/top_side = 0
-3:3/0 = 0
-3:3/0/terrain_set = 0
-3:3/0/terrain = 0
-3:3/0/terrains_peering_bit/bottom_left_corner = 0
-3:3/0/terrains_peering_bit/left_side = 0
-
-[sub_resource type="TileSet" id="TileSet_rma5n"]
-tile_size = Vector2i(64, 64)
-terrain_set_0/mode = 0
-terrain_set_0/terrain_0/name = "Terrain 0"
-terrain_set_0/terrain_0/color = Color(0.5, 0.34375, 0.25, 1)
-sources/1 = SubResource("TileSetAtlasSource_wck0g")
-
-[node name="PagePage" type="Control" node_paths=PackedStringArray("title_label", "title_icon", "title_page_button", "premade_sub_container", "sub_container", "scroll_dots")]
+[node name="PagePage" type="Control" node_paths=PackedStringArray("title_label", "title_page_button", "premade_page_set", "sets_container", "premade_page_button", "scroll_dots")]
 custom_minimum_size = Vector2(280, 395)
 layout_mode = 3
 anchors_preset = 0
 offset_right = 280.0
 offset_bottom = 395.0
 script = ExtResource("1_1k8ki")
-title_label = NodePath("VBoxContainer/TitleContainer/NinePatchRect2/FitScaleLabel")
-title_icon = NodePath("VBoxContainer/TitleContainer/NinePatchRect/BookIconRect")
-title_page_button = NodePath("VBoxContainer/TitleContainer/NinePatchRect/Button")
-premade_sub_container = NodePath("VBoxContainer/FlowContainer/SubBookContainer")
-sub_container = NodePath("VBoxContainer/FlowContainer")
+title_label = NodePath("VBoxContainer/TitleContainer/VBoxContainer/HBoxContainer2/FitScaleLabel")
+title_page_button = NodePath("VBoxContainer/TitleContainer/PageSlotButton")
+premade_page_set = NodePath("VBoxContainer/PageSlotSetContainer")
+sets_container = NodePath("VBoxContainer/VBoxContainer")
+premade_page_button = NodePath("VBoxContainer/PageSlotSetContainer/FlowContainer/PageSlotButton")
 slot_width = 4
 scroll_dots = NodePath("VBoxContainer/HDotScrollBarControl")
+
+[node name="Background" type="TextureRect" parent="."]
+visible = false
+layout_mode = 0
+offset_left = -15.0
+offset_top = -11.0
+offset_right = 585.0
+offset_bottom = 409.0
+texture = ExtResource("2_24rjq")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -154,82 +51,87 @@ grow_vertical = 2
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="NinePatchRect" type="NinePatchRect" parent="VBoxContainer/TitleContainer"]
-custom_minimum_size = Vector2(64, 64)
+[node name="PageSlotButton" parent="VBoxContainer/TitleContainer" instance=ExtResource("8_ey4v2")]
 layout_mode = 2
-texture = ExtResource("2_fvu4f")
-patch_margin_left = 16
-patch_margin_top = 16
-patch_margin_right = 16
-patch_margin_bottom = 16
+frame_texture = ExtResource("4_mmn4x")
 
-[node name="BookIconRect" type="TextureRect" parent="VBoxContainer/TitleContainer/NinePatchRect"]
-show_behind_parent = true
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 6.0
-offset_top = 6.0
-offset_right = -6.0
-offset_bottom = -6.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("4_wkknv")
-expand_mode = 1
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/TitleContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
 
-[node name="Button" type="Button" parent="VBoxContainer/TitleContainer/NinePatchRect"]
-self_modulate = Color(1, 1, 1, 0)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer/TitleContainer/VBoxContainer"]
+layout_mode = 2
 
-[node name="NinePatchRect2" type="NinePatchRect" parent="VBoxContainer/TitleContainer"]
+[node name="FitScaleLabel" parent="VBoxContainer/TitleContainer/VBoxContainer/HBoxContainer2" instance=ExtResource("5_p805u")]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 size_flags_horizontal = 3
-texture = ExtResource("4_clxke")
-patch_margin_left = 16
-patch_margin_top = 16
-patch_margin_right = 16
-patch_margin_bottom = 16
-
-[node name="FitScaleLabel" parent="VBoxContainer/TitleContainer/NinePatchRect2" instance=ExtResource("5_p805u")]
-custom_minimum_size = Vector2(0, 40)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 0.0
-offset_top = 0.0
-offset_right = 0.0
-offset_bottom = 0.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 3
-text = "Book Name"
+text = "Soldier"
 center_x = true
 
-[node name="FlowContainer" type="FlowContainer" parent="VBoxContainer"]
+[node name="Lvl" type="Label" parent="VBoxContainer/TitleContainer/VBoxContainer/HBoxContainer2"]
+self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
-size_flags_vertical = 3
-theme_override_constants/h_separation = 0
-theme_override_constants/v_separation = 0
+size_flags_vertical = 1
+theme = ExtResource("3_2qajg")
+theme_override_font_sizes/font_size = 16
+text = "lvl"
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="SubBookContainer" type="VBoxContainer" parent="VBoxContainer/FlowContainer" node_paths=PackedStringArray("title_label", "background_tilemap")]
+[node name="LevelLabel" type="Label" parent="VBoxContainer/TitleContainer/VBoxContainer/HBoxContainer2"]
+self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
-size_flags_horizontal = 4
+size_flags_vertical = 1
+theme = ExtResource("3_2qajg")
+theme_override_font_sizes/font_size = 24
+text = "6"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/TitleContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="VSeparator" type="VSeparator" parent="VBoxContainer/TitleContainer/VBoxContainer/HBoxContainer"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+
+[node name="ExpBar" type="TextureRect" parent="VBoxContainer/TitleContainer/VBoxContainer/HBoxContainer" node_paths=PackedStringArray("full_rect", "color_rect")]
+layout_mode = 2
+texture = ExtResource("7_lnpbr")
+script = ExtResource("8_3ocfe")
+full_rect = NodePath("FullRect")
+color_rect = NodePath("ColorRect")
+percent_full = 0.124
+
+[node name="FullRect" type="Control" parent="VBoxContainer/TitleContainer/VBoxContainer/HBoxContainer/ExpBar"]
+anchors_preset = 0
+offset_left = 9.0
+offset_top = 4.0
+offset_right = 168.0
+offset_bottom = 9.0
+
+[node name="ColorRect" type="ColorRect" parent="VBoxContainer/TitleContainer/VBoxContainer/HBoxContainer/ExpBar"]
+show_behind_parent = true
+z_index = -1
+layout_mode = 0
+offset_left = 8.0
+offset_top = 4.0
+offset_right = 27.716
+offset_bottom = 9.0
+
+[node name="VSeparator2" type="VSeparator" parent="VBoxContainer/TitleContainer/VBoxContainer/HBoxContainer"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+
+[node name="PageSlotSetContainer" type="VBoxContainer" parent="VBoxContainer" node_paths=PackedStringArray("title_label", "buttons_container")]
+layout_mode = 2
 size_flags_vertical = 3
-theme_override_constants/separation = 0
-alignment = 1
-script = ExtResource("6_kqus5")
+script = ExtResource("8_mwf3u")
 title_label = NodePath("Label")
-background_tilemap = NodePath("HBoxContainer/TileMapLayer")
+buttons_container = NodePath("FlowContainer")
 
-[node name="Label" type="Label" parent="VBoxContainer/FlowContainer/SubBookContainer"]
+[node name="Label" type="Label" parent="VBoxContainer/PageSlotSetContainer"]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("3_2qajg")
@@ -237,14 +139,18 @@ theme_override_font_sizes/font_size = 24
 text = "Class Pages"
 horizontal_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/FlowContainer/SubBookContainer"]
+[node name="FlowContainer" type="FlowContainer" parent="VBoxContainer/PageSlotSetContainer"]
 layout_mode = 2
-theme_override_constants/separation = 0
-alignment = 1
+size_flags_vertical = 3
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
 
-[node name="TileMapLayer" type="TileMapLayer" parent="VBoxContainer/FlowContainer/SubBookContainer/HBoxContainer"]
-tile_map_data = PackedByteArray("AAAAAAAAAQAAAAEAAAABAAAAAQABAAEAAAACAAAAAQACAAEAAAADAAAAAQADAAEAAAAAAAEAAQAAAAMAAAABAAEAAQABAAMAAAACAAEAAQABAAMAAAADAAEAAQACAAMAAAA=")
-tile_set = SubResource("TileSet_rma5n")
+[node name="PageSlotButton" parent="VBoxContainer/PageSlotSetContainer/FlowContainer" instance=ExtResource("8_ey4v2")]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
 
 [node name="HDotScrollBarControl" parent="VBoxContainer" instance=ExtResource("7_f7tj7")]
 layout_mode = 2

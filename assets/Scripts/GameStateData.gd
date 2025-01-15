@@ -2,6 +2,8 @@ class_name GameStateData
 # This class holds a state of the game. This involes all information about the map,
 # actors, effects, and thier statues.
 
+signal actor_entered_item_spot(actor:BaseActor, item_ids:Array)
+
 # Dictionary of Actor.Id to Actor
 var _actors:Dictionary = {}
 #var _actor_poses:Dictionary = {}
@@ -63,6 +65,11 @@ func list_actors(include_dead:bool=false):
 
 func set_actor_pos(actor:BaseActor, pos:MapPos, suppress_signal:bool=false):
 	map_data.set_actor_pos(actor, pos, suppress_signal)
+	if actor.is_player:
+		var items = map_data.get_items_at_pos(pos)
+		if items.size() > 0:
+			actor_entered_item_spot.emit(actor, items)
+			
 	#_actor_poses[actor.Id] = pos
 	
 func get_actor_pos(actor:BaseActor)->MapPos:

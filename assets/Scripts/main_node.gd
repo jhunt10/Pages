@@ -127,11 +127,11 @@ func open_character_sheet(_actor:BaseActor=null, parent_node=null)->CharacterMen
 		#actor = ActorLibrary.create_actor("TestActor", {})
 	var charsheet:CharacterMenuControl = load("res://Scenes/Menus/CharacterMenu/character_menu.tscn").instantiate()
 	var screen_size = self.size
-	var scale = screen_size.y / charsheet.size.y
+	var menu_scale = screen_size.y / charsheet.size.y
 	#charsheet.scale_control.scale = Vector2(scale, scale)
 	charsheet.scale_control.scale = Vector2(1, 1)
-	if screen_size.y > charsheet.size.y * 1.5:
-		charsheet.scale_control.scale = Vector2(1.5, 1.5)
+	#if screen_size.y > charsheet.size.y * 2:
+	charsheet.scale_control.scale = Vector2(1.5,1.5)
 	if parent_node:
 		parent_node.add_child(charsheet)
 	else:

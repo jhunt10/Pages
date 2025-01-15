@@ -118,10 +118,28 @@ grow_vertical = 2
 pivot_offset = Vector2(300, 210)
 mouse_filter = 1
 
+[node name="NinePatchRect" type="NinePatchRect" parent="ScaleControl"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_ny2th")
+region_rect = Rect2(0, 0, 600, 420)
+patch_margin_left = 17
+patch_margin_top = 9
+patch_margin_right = 17
+patch_margin_bottom = 16
+
 [node name="Background" type="TextureRect" parent="ScaleControl"]
-layout_mode = 0
-offset_right = 600.0
-offset_bottom = 420.0
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource("2_ny2th")
 
 [node name="TabsControl" type="Control" parent="ScaleControl"]
@@ -550,11 +568,15 @@ vertical_alignment = 1
 text_overrun_behavior = 1
 
 [node name="InventoryContainer" parent="ScaleControl" instance=ExtResource("8_6gqbj")]
-layout_mode = 0
-offset_left = 303.0
-offset_top = 9.0
-offset_right = 583.0
-offset_bottom = 404.0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -20.0
+offset_bottom = -12.0
+grow_horizontal = 0
+grow_vertical = 2
 
 [node name="StatsPage" type="Control" parent="ScaleControl" node_paths=PackedStringArray("strength_label", "agility_label", "intelligence_label", "wisdom_label", "bar_stats_container", "speed_stat_label", "mass_stat_label", "ppr_stat_label", "crash_stat_label", "mag_atk_label", "phys_atk_label", "phy_atk_icon", "mag_atk_icon", "accuracy_stat_label", "potency_stat_label", "range_display", "main_hand_min_damage_label", "main_hand_max_damage_label", "main_hand_damage_type", "crit_mod_label", "crit_chance_label", "armor_label", "ward_label", "evasion_stat_label", "protection_stat_label", "awareness_stat_label", "awareness_display", "block_chance_label", "block_mod_label", "evade_front_chance_label", "evade_flank_chance_label", "evade_back_chance_label", "block_front_chance_label", "block_flank_chance_label", "block_back_chance_label")]
 visible = false
@@ -1844,13 +1866,13 @@ text = "--%"
 horizontal_alignment = 1
 
 [node name="EquipmentPage" parent="ScaleControl" instance=ExtResource("9_bofun")]
+visible = false
 offset_left = 17.0
 offset_top = 9.0
 offset_right = 297.0
 offset_bottom = 404.0
 
 [node name="PagesPage" parent="ScaleControl" instance=ExtResource("10_porhc")]
-visible = false
 offset_left = 17.0
 offset_top = 9.0
 offset_right = 297.0
@@ -1870,13 +1892,14 @@ offset_top = 149.0
 offset_right = 333.0
 offset_bottom = 189.0
 
-[node name="MouseOverControl" type="Control" parent="ScaleControl" node_paths=PackedStringArray("drag_item_icon")]
+[node name="MouseOverControl" type="Control" parent="ScaleControl" node_paths=PackedStringArray("drag_item_background", "drag_item_icon")]
 custom_minimum_size = Vector2(64, 64)
 anchors_preset = 0
 offset_right = 64.0
 offset_bottom = 64.0
 mouse_filter = 2
 script = ExtResource("12_yj8n3")
+drag_item_background = NodePath("DargItemBackground")
 drag_item_icon = NodePath("DragItemIcon")
 
 [node name="DargItemBackground" type="TextureRect" parent="ScaleControl/MouseOverControl"]

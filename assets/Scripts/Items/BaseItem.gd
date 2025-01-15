@@ -52,6 +52,8 @@ func get_large_icon()->Texture2D:
 func get_small_icon()->Texture2D:
 	return SpriteCache.get_sprite(details.small_icon_path)
 
+func get_rarity_background()->Texture2D:
+	return ItemHelper.get_rarity_background(self.get_item_rarity())
 #func use_on_actor(actor:BaseActor):
 	#var effect_key = ItemData['EffectKey']
 	#var effect_data = {}

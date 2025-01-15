@@ -6,7 +6,7 @@ const DEFAULT_ACTOR_LAYER = MapLayers.Default
 
 enum MapLayers {Default, Corpse, Totem}
 
-var _game_state:GameStateData
+var _game_state
 var _actor_pos_cache:Dictionary = {}
 var _item_pos_cache:Dictionary = {}
 var _position_data:Array = []
@@ -34,7 +34,7 @@ func duplicate(new_game_state)->MapStateData:
 	return new_map
 
 
-func _init(game_state:GameStateData, map_data:Dictionary, wait_for_pos_data:bool=false) -> void:
+func _init(game_state, map_data:Dictionary, wait_for_pos_data:bool=false) -> void:
 	_game_state = game_state
 	max_width = map_data['Width']
 	max_hight = map_data['Hight']
@@ -202,7 +202,7 @@ func remove_item(item:BaseItem):
 		old_spot.remove_item(item)
 		_item_pos_cache.erase(item.Id)
 
-func get_items_at_pos(pos):
+func get_items_at_pos(pos)->Array:
 	var map_spot = get_map_spot(pos)
 	return map_spot.item_ids.duplicate()
 

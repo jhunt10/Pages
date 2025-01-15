@@ -47,7 +47,7 @@ func _build_option_buttons(option_data):
 		else:
 			button.icon.hide()
 		button.button.pressed.connect(on_option_selectec.bind(_current_option_data.option_key, _current_option_data.options_vals[index]))
-		if _current_option_data.disable_options[index]:
+		if _current_option_data.disable_options.size() > 0 and _current_option_data.disable_options[index]:
 			button.disable()
 		options_container.add_child(button)
 		button_count += 1

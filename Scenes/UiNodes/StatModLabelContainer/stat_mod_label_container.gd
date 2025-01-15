@@ -6,6 +6,8 @@ extends HBoxContainer
 @export var mod_value_label:Label
 @export var dep_stat_label:Label
 @export var dep_stat_icon:TextureRect
+@export var plus_label:Label
+@export var times_label:Label
 
 func set_mod_data(mod_data:Dictionary):
 	var stat_name:String = mod_data.get("StatName", "")
@@ -39,4 +41,17 @@ func set_mod_data(mod_data:Dictionary):
 			dep_stat_icon.texture = StatHelper.get_stat_icon(dep_stat)
 			dep_stat_label.text =  dep_stat_abbr.substr(1,2)
 	else:
+		dep_stat_label.hide()
 		dep_stat_icon.hide()
+	var mod_type_str = mod_data.get("ModType")
+	var mod_type = BaseStatMod.ModTypes.get(mod_type_str)
+	if mod_type == BaseStatMod.ModTypes.Add:
+		times_label.hide()
+	elif mod_type == BaseStatMod.ModTypes.Scale:
+		plus_label.hide()
+	elif mod_type == BaseStatMod.ModTypes.Set:
+		plus_label.hide()
+		times_label.text = " = "
+	elif mod_type == BaseStatMod.ModTypes.ScaleStat:
+		plus_label.text = " = "
+	#elif mod_type == BaseStatMod.ModTypes.AddStat:

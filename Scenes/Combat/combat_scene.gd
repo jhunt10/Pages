@@ -95,6 +95,8 @@ func load_init_state(map_scene_path:String):
 	var map_data = MapController.get_map_data()
 	GameState = GameStateData.new()
 	GameState.set_map_data(map_data)
+	GameState.actor_entered_item_spot.connect(_on_actor_pickup_item)
+	
 	QueController = ActionQueController.new()
 	QueController.end_of_round.connect(check_end_conditions)
 	
@@ -182,6 +184,22 @@ func add_item(item:BaseItem, pos:MapPos):
 func remove_item(item:BaseItem):
 	GameState.remove_item(item)
 	MapController.delete_item_node(item)
+
+func _on_actor_pickup_item(actor:BaseActor, items_ids:Array):
+	for item_id in items_ids:
+		var item = ItemLibrary.get_item(item_id)
+		var to_bag = ItemHelper.try_pickup_item(actor, item)
+		var message = item.details.display_name
+		if to_bag:
+			message += " to Bag"
+		else:
+			message += " to Inv"
+		ui_control.drop_message_control.add_card(
+			message,
+			item.get_large_icon(),
+			item.get_rarity_background()
+		)
+	pass
 
 func create_new_missile_node(missile):
 	var new_node:MissileNode  = load("res://Scenes/Combat/MapObjects/missile_node.tscn").instantiate()

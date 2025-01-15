@@ -4,11 +4,26 @@ static func spawn_item(item_key:String, item_data:Dictionary, pos:MapPos):
 	var item = ItemLibrary.create_item(item_key, item_data)
 	CombatRootControl.Instance.add_item(item, pos)
 
+
+static func get_rarity_background(rarity:BaseItem.ItemRarity)->Texture2D:
+	if rarity == BaseItem.ItemRarity.Rare:
+		return SpriteCache.get_sprite("res://assets/Sprites/Paper/EpicPageBackground.png")
+	if rarity == BaseItem.ItemRarity.Common:
+		return SpriteCache.get_sprite("res://assets/Sprites/Paper/UncommonPageBackground.png")
+	if rarity == BaseItem.ItemRarity.Mundane:
+		return SpriteCache.get_sprite("res://assets/Sprites/Paper/CommonPageBackground.png")
+		
+	return SpriteCache.get_sprite("res://assets/Sprites/Paper/CommonPageBackground.png")
+	
+
+## Returns true if Item was added to actors bag, otherwise false when added to player inventory
 static func try_pickup_item(actor:BaseActor, item:BaseItem)->bool:
 	actor.items.add_item_to_first_valid_slot(item)
 	if actor.items.has_item(item.Id):
 		CombatRootControl.Instance.remove_item(item)
 		return true
+	PlayerInventory.add_item(item)
+	CombatRootControl.Instance.remove_item(item)
 	return false
 
 static func try_transfer_item_from_inventory_to_holder(item:BaseItem, holder:BaseItemHolder, slot_index:int, allow_replace:bool = true)->String:

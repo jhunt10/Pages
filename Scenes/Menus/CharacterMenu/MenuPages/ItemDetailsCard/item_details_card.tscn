@@ -229,6 +229,7 @@ theme = ExtResource("4_xmy3g")
 text = "Item Description hk hbkhjhl jhlkjl ljlkj"
 
 [node name="ActionPageDetailsControl" type="Control" parent="OffsetControl/NinePatchRect/VBoxContainer" node_paths=PackedStringArray("parent_card_control", "description_box", "target_type_label", "cost_container", "range_display", "damage_label")]
+visible = false
 layout_mode = 2
 size_flags_vertical = 3
 script = ExtResource("12_fd6vk")
@@ -357,7 +358,6 @@ theme = ExtResource("4_xmy3g")
 text = "Item Description hk hbkhjhl jhlkjl ljlkj"
 
 [node name="EffectPageDetailsControl" type="Control" parent="OffsetControl/NinePatchRect/VBoxContainer" node_paths=PackedStringArray("parent_card_control", "description_box", "stat_mods_container", "premade_stat_mod_label")]
-visible = false
 layout_mode = 2
 size_flags_vertical = 3
 script = ExtResource("16_tp5cp")
@@ -380,7 +380,7 @@ theme_override_constants/h_separation = 0
 theme_override_constants/v_separation = 0
 alignment = 1
 
-[node name="StatModLabel" type="HBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/EffectPageDetailsControl/VBoxContainer/FlowContainer" node_paths=PackedStringArray("modded_stat_icon", "modded_stat_name_label", "mod_value_label", "dep_stat_label", "dep_stat_icon")]
+[node name="StatModLabel" type="HBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/EffectPageDetailsControl/VBoxContainer/FlowContainer" node_paths=PackedStringArray("modded_stat_icon", "modded_stat_name_label", "mod_value_label", "dep_stat_label", "dep_stat_icon", "plus_label", "times_label")]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 0
@@ -390,6 +390,8 @@ modded_stat_name_label = NodePath("ModdedStatNameLabel")
 mod_value_label = NodePath("ModValueLabel")
 dep_stat_label = NodePath("HBoxContainer/DepStatNameLabel")
 dep_stat_icon = NodePath("HBoxContainer/DepStatIcon")
+plus_label = NodePath("SignLabel")
+times_label = NodePath("SignLabel2")
 
 [node name="ModdedStatIcon" type="TextureRect" parent="OffsetControl/NinePatchRect/VBoxContainer/EffectPageDetailsControl/VBoxContainer/FlowContainer/StatModLabel"]
 layout_mode = 2
@@ -653,7 +655,6 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 text = "Equipe"
-_size_dirty = true
 center_x = true
 
 [node name="EquipButton" type="Button" parent="OffsetControl/NinePatchRect/VBoxContainer/EquipButtonBackground"]

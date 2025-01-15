@@ -7,18 +7,6 @@ extends Control
 @export var button:Button
 @export var name_label:FitScaleLabel
 @export var background:TextureRect
-@export var rarity:BaseItem.ItemRarity:
-	set(val):
-		rarity = val
-		if background:
-			if rarity == BaseItem.ItemRarity.Common:
-				background.texture = common_background
-			elif rarity == BaseItem.ItemRarity.Rare:
-				background.texture = rare_background
-			elif rarity == BaseItem.ItemRarity.Legendary:
-				background.texture = legend_background
-			else:
-				background.texture = mundane_background
 				
 
 @export var mundane_background:Texture2D
@@ -33,12 +21,12 @@ func _ready() -> void:
 		item_icon_rect =  $ItemIconRect
 		equipt_icon = $EquiptIcon
 		count_label = $CountLabel
-	rarity = rarity
 	pass # Replace with function body.
 
 func set_item(item:BaseItem, count:int=0):
 	if !item_icon_rect:
 		item_icon_rect =  $ItemIconRect
+		background =  $Background
 		equipt_icon = $EquiptIcon
 		count_label = $CountLabel
 	if !name_label:
@@ -51,7 +39,7 @@ func set_item(item:BaseItem, count:int=0):
 		(item as BaseEquipmentItem).equipt_actor_change.connect(on_equipt_change)
 	else:
 		equipt_icon.visible = false
-	rarity = item.get_item_rarity()
+	background.texture = item.get_rarity_background()
 	set_count(count)
 
 func on_equipt_change():
@@ -62,7 +50,7 @@ func get_item()->BaseItem:
 	return ItemLibrary.get_item(_item_id)
 
 func set_count(count:int):
-	if count <= 0:
+	if count <= 1:
 		count_label.visible = false
 		return
 	if !count_label:

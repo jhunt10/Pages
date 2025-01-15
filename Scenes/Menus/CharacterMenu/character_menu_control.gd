@@ -142,7 +142,8 @@ func context_to_page_control(context):
 func start_dragging():
 	if _selected_item:
 		_dragging = true
-		mouse_control.drag_item_icon.texture = _selected_item.get_large_icon()
+		mouse_control.set_drag_item(_selected_item)
+		#mouse_control.drag_item_icon.texture = _selected_item.get_large_icon()
 		mouse_control.position = _button_down_pos - mouse_control.offset
 		mouse_control.show()
 		if LOGGING: print("StartDragging: SelectedItem: %s" % [_selected_item.Id])

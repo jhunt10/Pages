@@ -110,4 +110,17 @@ func get_valid_target_area(center:MapPos)->Dictionary:
 	_cached_canter_pos = center
 	_cached_target_area = los_dict
 	return los_dict
-	
+
+func get_center_of_area(actor_pos:MapPos)->MapPos:
+	var spots =  target_area.to_map_spots(actor_pos)
+	var min_x = spots[0].x
+	var max_x = spots[0].x
+	var min_y = spots[0].y
+	var max_y = spots[0].y
+	var los_dict = {}
+	for spot in spots:
+		if spot.x > max_x: max_x = spot.x
+		if spot.x < min_x: min_x = spot.x
+		if spot.y > max_y: max_y = spot.y
+		if spot.y < min_y: min_y = spot.y
+	return MapPos.new((max_x + min_x) / 2, (max_y + min_y) / 2, actor_pos.z, actor_pos.dir)

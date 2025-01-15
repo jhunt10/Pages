@@ -1,16 +1,21 @@
 [
     {
         "ActionKey": "UseItemSelf",
-        "UseDynamicIcons": true,
+        "UseEquipmentIcon": "Bag",
         "CostData": {},
         "DamageDatas": {},
         "Details": {
             "Description": "Select an item from your bag and use it on yourself.",
             "DisplayName": "Use Item",
-            "LargeIcon": "Bag.png",
-            "SmallIcon": "Bag.png",
+            "LargeIcon": "Sprites/UseItemIcon.png",
+            "SmallIcon": "Sprites/UseItemIcon.png",
             "SnippetDesc": "Use item on self",
             "Tags": []
+        },
+        "ItemDetails":
+        {
+            "Rarity": "Mundane",
+            "Value": 50
         },
         "MissileDatas": {},
         "Preview": {
@@ -37,6 +42,11 @@
             "SmallIcon": "Sprites/ReloadIcon.png",
             "SnippetDesc": "Reload",
             "Tags": []
+        },
+        "ItemDetails":
+        {
+            "Rarity": "Mundane",
+            "Value": 50
         },
         "MissileDatas": {},
         "Preview": {

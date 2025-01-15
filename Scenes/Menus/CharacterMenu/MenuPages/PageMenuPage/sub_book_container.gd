@@ -8,7 +8,7 @@ signal mouse_exit_item(index)
 
 @export var slot_width:int = 4
 @export var title_label:Label
-@export var background_tilemap:TileMapLayer
+#@export var background_tilemap:TileMapLayer
 var page_slots_containers:Array = []
 var _slot_set_key:String
 var _buttons:Dictionary = {}
@@ -50,6 +50,7 @@ func set_slot_set_data(actor:BaseActor, page_holder:PageHolder, slot_set_data:Di
 		new_button.button.mouse_exited.connect(on_slot_button_mouse_exit.bind(raw_index))
 		page_slots_containers[page_slots_containers.size()-1].add_child(new_button)
 		new_button.name = "PageSlot" + str(sub_index)
+		new_button.is_clipped = _slot_set_key == "Passive"
 		_buttons[raw_index] = new_button
 		var item_id = page_holder.get_item_id_in_slot(raw_index)
 		if item_id:
@@ -57,8 +58,8 @@ func set_slot_set_data(actor:BaseActor, page_holder:PageHolder, slot_set_data:Di
 		new_button.visible = true
 		tile_mapping.append(Vector2i(x,y))
 		x += 1
-	background_tilemap.clear()
-	background_tilemap.set_cells_terrain_connect(tile_mapping, 0, 0)
+	#background_tilemap.clear()
+	#background_tilemap.set_cells_terrain_connect(tile_mapping, 0, 0)
 
 func clear_highlights():
 	for button in _buttons.values():
