@@ -36,7 +36,7 @@
 [ext_resource type="Script" path="res://Scenes/UiNodes/back_patch_container.gd" id="29_vvabq"]
 [ext_resource type="Texture2D" uid="uid://5hu0ttx4jxuo" path="res://assets/Sprites/UI/BackPatches/PaperPatch_64x92_16.png" id="30_emljn"]
 [ext_resource type="Script" path="res://Scenes/Combat/UiNodes/target_input_control.gd" id="31_jtehh"]
-[ext_resource type="Texture2D" uid="uid://bibqsudhjw4qe" path="res://assets/Sprites/Paper/CommonPageBackground.png" id="31_rn36e"]
+[ext_resource type="Texture2D" uid="uid://bibqsudhjw4qe" path="res://assets/Sprites/Paper/Mundane_Background.png" id="31_rn36e"]
 [ext_resource type="Texture2D" uid="uid://io35wpu802fp" path="res://assets/Sprites/UI/BackPatches/Patch_64_12.png" id="32_f81f5"]
 [ext_resource type="Texture2D" uid="uid://bdh4x87ck5hi5" path="res://defs/Items/Consumables/Ammo/Sprites/Gen_Ammo_LIcon.png" id="32_f701a"]
 [ext_resource type="Texture2D" uid="uid://bqv6yn42oymo" path="res://defs/Actors/NPCs/FishMerch/cart.png" id="33_cdw0u"]
@@ -196,7 +196,7 @@ offset_bottom = 97.0
 text = "Paths
 "
 
-[node name="CombatUiControl" type="Control" parent="MoveableCamera2D/CanvasLayer" node_paths=PackedStringArray("game_over_screen", "victory_screen", "menu_button", "pause_menu", "target_input_display", "stat_panel_control", "que_input", "que_collection_display", "stats_collection_display", "item_select_menu", "drop_message_control")]
+[node name="CombatUiControl" type="Control" parent="MoveableCamera2D/CanvasLayer" node_paths=PackedStringArray("game_over_screen", "victory_screen", "menu_button", "pause_menu", "target_input_display", "p1_stat_panel_control", "p2_stat_panel_control", "p3_stat_panel_control", "p4_stat_panel_control", "que_input", "que_collection_display", "stats_collection_display", "item_select_menu", "drop_message_control")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -212,19 +212,34 @@ victory_screen = NodePath("GameVictoryScreen")
 menu_button = NodePath("MenuButton")
 pause_menu = NodePath("PauseMenuControl")
 target_input_display = NodePath("TargetInputControl")
-stat_panel_control = NodePath("StatPanelControl")
+p1_stat_panel_control = NodePath("StatPanelsContainer/P1_StatPanelControl")
+p2_stat_panel_control = NodePath("StatPanelsContainer/P2_StatPanelControl2")
+p3_stat_panel_control = NodePath("StatPanelsContainer/P3_StatPanelControl3")
+p4_stat_panel_control = NodePath("StatPanelsContainer/P4_StatPanelControl4")
 que_input = NodePath("QueInputControl")
 que_collection_display = NodePath("QueCollectionDisplayControl")
 stats_collection_display = NodePath("StatCollectionDisplayControl")
 item_select_menu = NodePath("ItemSelectionInput")
 drop_message_control = NodePath("DropMessageControl")
 
-[node name="StatPanelControl" parent="MoveableCamera2D/CanvasLayer/CombatUiControl" instance=ExtResource("16_jsy0k")]
+[node name="StatPanelsContainer" type="HBoxContainer" parent="MoveableCamera2D/CanvasLayer/CombatUiControl"]
 layout_mode = 0
 offset_left = 8.0
 offset_top = 8.0
 offset_right = 184.0
 offset_bottom = 86.0
+
+[node name="P1_StatPanelControl" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/StatPanelsContainer" instance=ExtResource("16_jsy0k")]
+layout_mode = 2
+
+[node name="P2_StatPanelControl2" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/StatPanelsContainer" instance=ExtResource("16_jsy0k")]
+layout_mode = 2
+
+[node name="P3_StatPanelControl3" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/StatPanelsContainer" instance=ExtResource("16_jsy0k")]
+layout_mode = 2
+
+[node name="P4_StatPanelControl4" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/StatPanelsContainer" instance=ExtResource("16_jsy0k")]
+layout_mode = 2
 
 [node name="QueCollectionDisplayControl" parent="MoveableCamera2D/CanvasLayer/CombatUiControl" instance=ExtResource("19_t74bn")]
 layout_mode = 1

@@ -35,27 +35,9 @@
                 "StatName": "Mass",
                 "DepStatName": "Strength",
                 "Value": 2
-            },
-            "StaminaMax": {
-                "DisplayName": "Soldier",
-                "ModType": "Set",
-                "StatName": "BarMax:Stamina",
-                "Value": 200
-            },
-            "StaminaRegen": {
-                "DisplayName": "Soldier",
-                "ModType": "Set",
-                "StatName": "BarRegen:Stamina:Round",
-                "Value": 10
-            },
-            "StaminaScale": {
-                "DisplayName": "Soldier",
-                "ModType": "AddStat",
-                "StatName": "BarMax:Stamina",
-                "DepStatName": "Strength",
-                "Value": 1
             }
-        }
+        },
+        "AddTags": ["Soldier"]
     },
     {
         "EffectKey": "Rogue_TitlePage",
@@ -86,27 +68,9 @@
                 "StatName": "Speed",
                 "DepStatName": "Agility",
                 "Value": 1
-            },
-            "StaminaMax": {
-                "DisplayName": "Rogue",
-                "ModType": "Set",
-                "StatName": "BarMax:Stamina",
-                "Value": 200
-            },
-            "StaminaRegen": {
-                "DisplayName": "Rogue",
-                "ModType": "Set",
-                "StatName": "BarRegen:Stamina:Round",
-                "Value": 10
-            },
-            "StaminaScale": {
-                "DisplayName": "Rogue",
-                "ModType": "AddStat",
-                "StatName": "BarRegen:Stamina:Round",
-                "DepStatName": "Agility",
-                "Value": 1
             }
-        }
+        },
+        "AddTags": ["Rogue"]
     },
     {
         "EffectKey": "Mage_TitlePage",
@@ -137,27 +101,9 @@
                 "StatName": "Potency",
                 "DepStatName": "Intelligence",
                 "Value": 1
-            },
-            "StaminaMax": {
-                "DisplayName": "Mage",
-                "ModType": "Set",
-                "StatName": "BarMax:Mana",
-                "Value": 200
-            },
-            "StaminaRegen": {
-                "DisplayName": "Mage",
-                "ModType": "Set",
-                "StatName": "BarRegen:Mana:Round",
-                "Value": 10
-            },
-            "StaminaScale": {
-                "DisplayName": "Mage",
-                "ModType": "AddStat",
-                "StatName": "BarRegen:Mana:Round",
-                "DepStatName": "Intelligence",
-                "Value": 1
             }
-        }
+        },
+        "AddTags": ["Mage"]
     },
     {
         "EffectKey": "Priest_TitlePage",
@@ -188,26 +134,8 @@
                 "StatName": "Protection",
                 "DepStatName": "Wisdom",
                 "Value": 1
-            },
-            "StaminaMax": {
-                "DisplayName": "Priest",
-                "ModType": "Set",
-                "StatName": "BarMax:Mana",
-                "Value": 200
-            },
-            "StaminaRegen": {
-                "DisplayName": "Priest",
-                "ModType": "Set",
-                "StatName": "BarRegen:Mana:Round",
-                "Value": 10
-            },
-            "StaminaScale": {
-                "DisplayName": "Priest",
-                "ModType": "AddStat",
-                "StatName": "BarMax:Mana",
-                "DepStatName": "Wisdom",
-                "Value": 1
             }
-        }
+        },
+        "AddTags": ["Priest"]
     }
 ]

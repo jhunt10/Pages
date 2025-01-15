@@ -35,7 +35,7 @@ var _suppress_sync = false
 
 @export var sync:bool:
 	set(val):
-		printerr("Sync Ammo Bar: %s / %s || %s " % [cost_val, clip_val, current_val])
+		#printerr("Sync Ammo Bar: %s / %s || %s " % [cost_val, clip_val, current_val])
 		if not premade_bar:
 			return
 		if _suppress_sync:

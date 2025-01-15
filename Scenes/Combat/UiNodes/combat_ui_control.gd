@@ -12,7 +12,10 @@ var camera:MoveableCamera2D:
 @export var pause_menu:PauseMenuControl 
 
 @export var target_input_display:TargetInputControl
-@export var stat_panel_control:StatPanelControl
+@export var p1_stat_panel_control:StatPanelControl
+@export var p2_stat_panel_control:StatPanelControl
+@export var p3_stat_panel_control:StatPanelControl
+@export var p4_stat_panel_control:StatPanelControl
 @export var que_input:QueInputControl
 var que_display:QueDisplayControl:
 	get:
@@ -40,20 +43,41 @@ func _ready() -> void:
 	target_input_display.visible = false
 	game_over_screen.hide()
 	victory_screen.hide()
+	p1_stat_panel_control.button.pressed.connect(set_player_actor_index.bind(0))
+	p2_stat_panel_control.button.pressed.connect(set_player_actor_index.bind(1))
+	p3_stat_panel_control.button.pressed.connect(set_player_actor_index.bind(2))
+	p4_stat_panel_control.button.pressed.connect(set_player_actor_index.bind(3))
 	pass # Replace with function body.
 
-func do_test():
-	var current_actor_id = stat_panel_control.actor.Id
-	var cur_index = CombatRootControl.Instance.GameState._actors.keys().find(current_actor_id)
-	var next_index = (cur_index + 1) % CombatRootControl.Instance.GameState._actors.size()
-	set_player_actor(CombatRootControl.Instance.GameState._actors.values()[next_index])
+#func do_test():
+	#var current_actor_id = stat_panel_control.actor.Id
+	#var cur_index = CombatRootControl.Instance.GameState._actors.keys().find(current_actor_id)
+	#var next_index = (cur_index + 1) % CombatRootControl.Instance.GameState._actors.size()
+	#set_player_actor(CombatRootControl.Instance.GameState._actors.values()[next_index])
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	ui_state_controller.update(delta)
 
+func set_player_actor_index(index):
+	var player_actor = StoryState.get_player_actor(index)
+	if player_actor:
+		que_input.set_actor(player_actor)
+
 func set_player_actor(actor:BaseActor):
-	stat_panel_control.set_actor(actor)
+	var player_1 = StoryState.get_player_actor(0)
+	if player_1: p1_stat_panel_control.set_actor(player_1)
+	else: p1_stat_panel_control.hide()
+	var player_2 = StoryState.get_player_actor(1)
+	if player_2: p2_stat_panel_control.set_actor(player_2)
+	else: p3_stat_panel_control.hide()
+	var player_3 = StoryState.get_player_actor(2)
+	if player_3: p3_stat_panel_control.set_actor(player_3)
+	else: p3_stat_panel_control.hide()
+	var player_4 = StoryState.get_player_actor(3)
+	if player_4: p4_stat_panel_control.set_actor(player_4)
+	else: p4_stat_panel_control.hide()
+	
 	que_input.set_actor(actor)
 	#que_input.que_display_control.set_actor(actor)
 

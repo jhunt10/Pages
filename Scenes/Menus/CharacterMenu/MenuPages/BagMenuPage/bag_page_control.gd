@@ -28,6 +28,9 @@ func _process(delta: float) -> void:
 
 
 func set_actor(actor:BaseActor):
+	if _actor and _actor != actor:
+		_actor.items.items_changed.disconnect(build_sub_containers)
+		_actor.equipment_changed.disconnect(actor_equipment_changed)
 	_actor = actor
 	_actor.items.items_changed.connect(build_sub_containers)
 	_actor.equipment_changed.connect(actor_equipment_changed)

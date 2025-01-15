@@ -70,11 +70,13 @@ enum DamageTypes {
 @export var attack_variant:int:
 	set(val):
 		attack_variant = val
-		if variant_label: variant_label.text = str(attack_variant) + "%"
+		if variant_label:
+			variant_label.text = str(attack_variant) 
 
 @export var damage_icon_rect:TextureRect
 @export var atk_power_label:Label
 @export var plus_minus_label:Label
+@export var percent_label:Label
 @export var variant_label:Label
 @export var damage_type_label:Label
 
@@ -91,7 +93,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 
-func set_damage_data(damage_data:Dictionary):
+func set_damage_data(damage_data:Dictionary, actor:BaseActor = null):
 	var defense_type = damage_data.get("DefenseType", null)
 	if defense_type == "Ward":
 		damage_icon_rect.texture = mag_damage_icon
@@ -104,10 +106,20 @@ func set_damage_data(damage_data:Dictionary):
 	if fixed_base_damage:
 		plus_minus_label.hide()
 		variant_label.hide()
+		percent_label.hide()
 		attack_power = fixed_base_damage
+	elif actor:
+		var min_max = DamageHelper.get_min_max_damage(actor, damage_data)
+		attack_power = min_max[0]
+		attack_variant = min_max[1]
+		plus_minus_label.text = " - "
+		percent_label.hide()
 	else:
 		attack_power = damage_data.get("AtkPower", 0)
 		attack_variant = damage_data.get("DamageVarient", 0)
+		if attack_variant == 0:
+			variant_label.hide()
+			plus_minus_label.hide()
 	
 	defense_type = damage_data.get("DefenseType")
 	var type_string = damage_data.get("DamageType")

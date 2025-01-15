@@ -8,11 +8,18 @@
 [ext_resource type="Texture2D" uid="uid://b3v2ga86mbxn8" path="res://data/Actions/Attack/TestHeart.png" id="7_k56th"]
 [ext_resource type="Theme" uid="uid://dwinll8pgdjhc" path="res://Scenes/Themes/standard_theme.tres" id="7_xlcc4"]
 
-[node name="StatPanelControl" type="VBoxContainer"]
+[node name="StatPanelControl" type="VBoxContainer" node_paths=PackedStringArray("button", "portrait_texture_rect", "main_container", "health_bar", "bars_container", "effect_icon_box", "premade_effect_icon")]
 offset_right = 40.0
 offset_bottom = 40.0
 theme_override_constants/separation = 1
 script = ExtResource("1_mnhn6")
+button = NodePath("BackPatchContainer/Button")
+portrait_texture_rect = NodePath("BackPatchContainer/VBoxContainer/HBoxContainer/PortaitTextureRect")
+main_container = NodePath("BackPatchContainer/VBoxContainer")
+health_bar = NodePath("BackPatchContainer/VBoxContainer/HBoxContainer/StatBarContainer/HealthBarControl")
+bars_container = NodePath("BackPatchContainer/VBoxContainer/HBoxContainer/StatBarContainer")
+effect_icon_box = NodePath("IconBoxContainer")
+premade_effect_icon = NodePath("EffectIcon")
 
 [node name="BackPatchContainer" type="Container" parent="." node_paths=PackedStringArray("background", "inner_container")]
 custom_minimum_size = Vector2(176, 44)
@@ -49,6 +56,10 @@ custom_minimum_size = Vector2(128, 0)
 layout_mode = 2
 
 [node name="HealthBarControl" parent="BackPatchContainer/VBoxContainer/HBoxContainer/StatBarContainer" instance=ExtResource("5_x5tep")]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="BackPatchContainer"]
+self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 
 [node name="EffectIcon" type="TextureRect" parent="."]

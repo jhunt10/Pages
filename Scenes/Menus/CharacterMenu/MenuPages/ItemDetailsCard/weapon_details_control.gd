@@ -33,13 +33,13 @@ func set_weapon(actor:BaseActor, weapon:BaseWeaponEquipment):
 	description_box.text = weapon.details.description
 	range_display.load_area_matrix(weapon.target_parmas.target_area)
 	
-	if _actor.equipment.has_item(_item.Id):
-		parent_card_control.equip_label.text = "Remove"	
-	elif _actor.equipment.can_equip_item(_item):
-		parent_card_control.equip_label.text = "Equip"
-	else:
-		parent_card_control.equip_button_background.hide()
-	
+	#if _actor.equipment.has_item(_item.Id):
+		#parent_card_control.equip_label.text = "Remove"	
+	#elif _actor.equipment.can_equip_item(_item):
+		#parent_card_control.equip_label.text = "Equip"
+	#else:
+		#parent_card_control.equip_button_background.hide()
+	#
 
 func on_eqiup_button_pressed():
 	if _actor.equipment.has_item(_item.Id):

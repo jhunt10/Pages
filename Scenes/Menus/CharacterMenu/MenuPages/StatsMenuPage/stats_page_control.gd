@@ -59,6 +59,8 @@ extends Control
 var _actor:BaseActor
 
 func set_actor(actor:BaseActor):
+	if _actor and actor != _actor:
+		_actor.stats.stats_changed.disconnect(_set_stats)
 	_actor = actor
 	_actor.stats.stats_changed.connect(_set_stats)
 	_set_stats()

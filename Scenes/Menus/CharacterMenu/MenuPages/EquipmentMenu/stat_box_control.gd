@@ -13,6 +13,8 @@ func _process(delta: float) -> void:
 	pass
 
 func set_actor(actor:BaseActor):
+	if _actor and _actor != actor:
+		_actor.stats.stats_changed.disconnect(_sync_stats)
 	_actor = actor
 	_actor.stats.stats_changed.connect(_sync_stats)
 	_sync_stats()

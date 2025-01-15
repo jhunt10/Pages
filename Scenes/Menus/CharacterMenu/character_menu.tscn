@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=3 uid="uid://ciah50qt3htui"]
+[gd_scene load_steps=52 format=3 uid="uid://ciah50qt3htui"]
 
 [ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/character_menu_control.gd" id="1_b43ae"]
 [ext_resource type="Texture2D" uid="uid://mpwjrtfjnbth" path="res://Scenes/Menus/CharacterMenu/BookBackground.png" id="2_ny2th"]
@@ -49,6 +49,7 @@
 [ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/inv_filter_tabs_control.gd" id="43_ercvn"]
 [ext_resource type="Texture2D" uid="uid://7lffl3feh6kl" path="res://Scenes/Menus/CharacterMenu/TabBackground_Small.png" id="43_gi4es"]
 [ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/InventoryPage/sub_inventory_tab.gd" id="44_vhgyr"]
+[ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/actor_selector_control.gd" id="50_wjl1b"]
 
 [sub_resource type="GDScript" id="GDScript_rvisf"]
 script/source = "extends TextureRect
@@ -1893,6 +1894,7 @@ offset_right = 333.0
 offset_bottom = 189.0
 
 [node name="MouseOverControl" type="Control" parent="ScaleControl" node_paths=PackedStringArray("drag_item_background", "drag_item_icon")]
+visible = false
 custom_minimum_size = Vector2(64, 64)
 anchors_preset = 0
 offset_right = 64.0
@@ -1917,3 +1919,36 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+
+[node name="ActorSelectorControl" type="Control" parent="ScaleControl" node_paths=PackedStringArray("actor_1_button", "actor_2_button", "actor_3_button", "actor_4_button")]
+anchors_preset = 0
+offset_left = 7.0
+offset_top = -35.0
+offset_right = 47.0
+offset_bottom = 5.0
+script = ExtResource("50_wjl1b")
+actor_1_button = NodePath("HBoxContainer/Button")
+actor_2_button = NodePath("HBoxContainer/Button2")
+actor_3_button = NodePath("HBoxContainer/Button3")
+actor_4_button = NodePath("HBoxContainer/Button4")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ScaleControl/ActorSelectorControl"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Button" type="Button" parent="ScaleControl/ActorSelectorControl/HBoxContainer"]
+layout_mode = 2
+text = "Actor 1"
+
+[node name="Button2" type="Button" parent="ScaleControl/ActorSelectorControl/HBoxContainer"]
+layout_mode = 2
+text = "Actor 2"
+
+[node name="Button3" type="Button" parent="ScaleControl/ActorSelectorControl/HBoxContainer"]
+layout_mode = 2
+text = "Actor 3"
+
+[node name="Button4" type="Button" parent="ScaleControl/ActorSelectorControl/HBoxContainer"]
+layout_mode = 2
+text = "Actor 4"

@@ -36,7 +36,6 @@ var Id : String:
 var ActorKey : String:
 	get: return _key
 func get_tagable_id(): return Id
-func get_tags(): return Tags
 
 var FactionIndex : int
 
@@ -83,6 +82,16 @@ func _init(key:String, load_path:String, def:Dictionary, id:String, data:Diction
 	Que = ActionQue.new(self)
 	if get_load_val("IsPlayer", false):
 		is_player = true
+
+
+func get_tags(): 
+	var tag_list = []
+	tag_list.append_array(Tags)
+	var effect_tags = effects.get_tags_added_to_actor()
+	for added_tag in effect_tags:
+		if not tag_list.has(added_tag):
+			tag_list.append(added_tag)
+	return tag_list
 
 func post_creation():
 	equipment.load_saved_items()

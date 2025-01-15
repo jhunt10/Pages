@@ -6,14 +6,18 @@ static func spawn_item(item_key:String, item_data:Dictionary, pos:MapPos):
 
 
 static func get_rarity_background(rarity:BaseItem.ItemRarity)->Texture2D:
-	if rarity == BaseItem.ItemRarity.Rare:
-		return SpriteCache.get_sprite("res://assets/Sprites/Paper/EpicPageBackground.png")
-	if rarity == BaseItem.ItemRarity.Common:
-		return SpriteCache.get_sprite("res://assets/Sprites/Paper/UncommonPageBackground.png")
 	if rarity == BaseItem.ItemRarity.Mundane:
-		return SpriteCache.get_sprite("res://assets/Sprites/Paper/CommonPageBackground.png")
+		return SpriteCache.get_sprite("res://assets/Sprites/Paper/Mundane_Background.png")
+	if rarity == BaseItem.ItemRarity.Common:
+		return SpriteCache.get_sprite("res://assets/Sprites/Paper/Common_Background.png")
+	if rarity == BaseItem.ItemRarity.Rare:
+		return SpriteCache.get_sprite("res://assets/Sprites/Paper/Rare_Background.png")
+	if rarity == BaseItem.ItemRarity.Legendary:
+		return SpriteCache.get_sprite("res://assets/Sprites/Paper/Legend_Background.png")
+	if rarity == BaseItem.ItemRarity.Unique:
+		return SpriteCache.get_sprite("res://assets/Sprites/Paper/Unique_Background.png")
 		
-	return SpriteCache.get_sprite("res://assets/Sprites/Paper/CommonPageBackground.png")
+	return SpriteCache.get_sprite("res://assets/Sprites/Paper/Mundane_Background.png")
 	
 
 ## Returns true if Item was added to actors bag, otherwise false when added to player inventory
@@ -80,4 +84,19 @@ static func swap_item_holder_slots(holder:BaseItemHolder, slot_a:int, slot_b:int
 		try_transfer_item_from_holder_to_inventory(item_b, holder)
 	holder.try_set_item_in_slot(item_a, slot_b)
 		
-		
+static func cant_equip_reasons_to_string(reasons_data:Dictionary)->String:
+	var missing_string = 'Req: '
+	if reasons_data.has("Tags"):
+		var missing_tags = reasons_data['Tags']
+		for tag in missing_tags:
+			missing_string += tag + ", "
+	if reasons_data.has("Stats"):
+		var missing_stats = reasons_data['Stats']
+		for stat_name in missing_stats.keys():
+			var stat_val = missing_stats[stat_name]
+			missing_string += StatHelper.get_stat_abbr(stat_name) + ":" + str(stat_val) + ", "
+	if reasons_data.has("Equipment"):
+		var missing_equipment = reasons_data['Equipment']
+		for tag in missing_equipment:
+			missing_string += tag + ", "
+	return missing_string.trim_suffix(", ")

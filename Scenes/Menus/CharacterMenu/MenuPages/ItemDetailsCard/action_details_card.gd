@@ -28,10 +28,15 @@ func set_action(actor:BaseActor, page:BasePageItem):
 	
 	if action.has_preview_target():
 		var target_params = action.get_preview_target_params(_actor)
-		range_display.load_area_matrix(target_params.target_area)
-		range_display.show()
+		if target_params:
+			range_display.load_area_matrix(target_params.target_area)
+			range_display.show()
+		else:
+			range_display.hide()
+			target_type_label.hide()
 	else:
 		range_display.hide()
+		target_type_label.hide()
 	
 	if action.has_ammo():
 		cost_container.set_data(action.get_ammo_data())
@@ -39,11 +44,14 @@ func set_action(actor:BaseActor, page:BasePageItem):
 	else:
 		cost_container.hide()
 	
-	var damage_data = action.DamageDatas
-	if damage_data.size() == 0:
+	if action.has_preview_damage():
+		var damage_data = action.get_preview_damage_data(actor)
+		if actor.pages.has_item(page.Id):
+			damage_label.set_damage_data(damage_data, actor)
+		else:
+			damage_label.set_damage_data(damage_data)
+	else:
 		damage_label.hide()
-	if damage_data.size() == 1:
-		damage_label.set_damage_data(damage_data.values()[0])
 	
 	var target_params = action.get_preview_target_params(actor)
 	if target_params:

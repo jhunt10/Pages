@@ -101,7 +101,10 @@ func get_active_stat_mods():
 		for mod in sub_effect.get_active_stat_mods(self, sub_effect_data):
 			out_list.append(mod)
 	return out_list
-	
+
+func get_tags_added_to_actor()->Array:
+	return get_load_val("AddTags", [])
+
 func get_active_damage_mods():
 	var out_list = []
 	for sub_effect_key in SubEffectDatas.keys():

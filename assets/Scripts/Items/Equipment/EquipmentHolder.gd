@@ -66,6 +66,13 @@ func get_index_of_slot_with_type(slot_type:String)->int:
 	return slot_set_data.get('IndexOffset', -1)
 
 func get_equipt_items_of_slot_type(slot_type:String)->Array:
+	if slot_type == "Weapon":
+		var weapons = []
+		var main_hand = get_primary_weapon()
+		if main_hand: weapons.append(main_hand)
+		var offhand = get_offhand_weapon()
+		if offhand and offhand != main_hand: weapons.append(offhand)
+		return weapons
 	var slot_set_index = _slot_set_key_mapping.find(slot_type)
 	if slot_set_index < 0:
 		return []
@@ -113,12 +120,12 @@ func can_equip_item(equipment:BaseEquipmentItem)->bool:
 	var slot = equipment.get_equipment_slot_type()
 	if slot != "Weapon" and !_slot_set_key_mapping.has(slot):
 		return false
-	var stat_req = equipment.get_required_stat()
-	for stat_name in stat_req.keys():
-		var req_stat_val = stat_req[stat_name]
-		var stat_val = _actor.stats.get_stat(stat_name, 0)
-		if stat_val < req_stat_val:
-			return false
+	#var stat_req = equipment.get_required_stat()
+	#for stat_name in stat_req.keys():
+		#var req_stat_val = stat_req[stat_name]
+		#var stat_val = _actor.stats.get_stat(stat_name, 0)
+		#if stat_val < req_stat_val:
+			#return false
 	return true
 
 func remove_item(item_id:String, supress_signal:bool=false):

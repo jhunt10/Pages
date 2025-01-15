@@ -7,13 +7,14 @@
 [ext_resource type="Theme" uid="uid://dwinll8pgdjhc" path="res://Scenes/Themes/standard_theme.tres" id="4_xveyi"]
 [ext_resource type="Theme" uid="uid://bfce41la62bs6" path="res://Scenes/Themes/readable_theme.tres" id="5_korun"]
 
-[node name="DamageContainer" type="HBoxContainer" node_paths=PackedStringArray("damage_icon_rect", "atk_power_label", "plus_minus_label", "variant_label", "damage_type_label")]
+[node name="DamageContainer" type="HBoxContainer" node_paths=PackedStringArray("damage_icon_rect", "atk_power_label", "plus_minus_label", "percent_label", "variant_label", "damage_type_label")]
 script = ExtResource("1_rhguf")
 attack_power = 100
 attack_variant = 30
 damage_icon_rect = NodePath("DamageIcon")
 atk_power_label = NodePath("AtkPowerLabel")
 plus_minus_label = NodePath("PlusMinusLabel")
+percent_label = NodePath("PercentLabel")
 variant_label = NodePath("VariantLabel")
 damage_type_label = NodePath("DamageTypeLabel")
 abb_damage_icon = ExtResource("2_mm46y")
@@ -42,7 +43,13 @@ text = "@"
 layout_mode = 2
 theme = ExtResource("4_xveyi")
 theme_override_colors/font_color = Color(0.470588, 0, 0, 1)
-text = "30%"
+text = "30"
+
+[node name="PercentLabel" type="Label" parent="."]
+layout_mode = 2
+theme = ExtResource("4_xveyi")
+theme_override_colors/font_color = Color(0.470588, 0, 0, 1)
+text = "%"
 
 [node name="DamageTypeLabel" type="Label" parent="."]
 layout_mode = 2

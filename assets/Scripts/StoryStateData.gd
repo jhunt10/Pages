@@ -10,10 +10,11 @@ func _init() -> void:
 	Instance = self
 
 static var story_id
-static var actor_ids:Array = []
-static var actors:Array = []
-static var items:Array = []
-static var effects:Array = []
+#static var actor_ids:Array = []
+#static var actors:Array = []
+#static var items:Array = []
+#static var effects:Array = []
+static var _player_ids:Array = [null, null, null, null]
 static var current_player_id 
 static var story_flags:Dictionary = {}
 
@@ -27,9 +28,13 @@ static func get_player_id()->String:
 		return current_player_id
 	return ''
 
-static func get_player_actor()->BaseActor:
-	if current_player_id:
+static func get_player_actor(index:int = -1)->BaseActor:
+	if index < 0 and current_player_id:
 		return ActorLibrary.get_actor(current_player_id)
+	if index >= 0 and index < 4:
+		var player_id = _player_ids[index]
+		if player_id:
+			return ActorLibrary.get_actor(player_id)
 	return null
 
 static func start_new_story(starting_class:String):
@@ -55,7 +60,6 @@ static func start_new_story(starting_class:String):
 		new_player = ActorLibrary.create_actor("TutorialActor", {}, player_id)
 		
 	if new_player:
-		actor_ids.append(new_player.Id)
 		current_player_id = new_player.Id
 		var sprite = new_player.sprite._build_sprite_sheet()
 	PlayerInventory.clear_items()
@@ -85,7 +89,19 @@ static func load_save_data(data:Dictionary):
 	story_flags = data.get("StoryFlags", {}).duplicate(true)
 	EffectLibrary.purge_effects()
 	ItemLibrary.load_items(data.get("Items", {}))
-	ActorLibrary.load_actors(data.get("Actors", {}))
+	var actors_data = data.get("Actors", {})
+	ActorLibrary.load_actors(actors_data)
+	
+	for actor_id:String in actors_data.keys():
+		if actor_id.begins_with("Player_"):
+			if actor_id.begins_with("Player_1:"):
+				_player_ids[0] = actor_id
+			if actor_id.begins_with("Player_2:"):
+				_player_ids[1] = actor_id
+			if actor_id.begins_with("Player_3:"):
+				_player_ids[2] = actor_id
+			if actor_id.begins_with("Player_4:"):
+				_player_ids[3] = actor_id
 	for item_id in data['PlayerInventory']:
 		var item = ItemLibrary.get_item(item_id)
 		PlayerInventory.add_item(item)

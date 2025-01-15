@@ -111,15 +111,22 @@ func load_init_state(map_scene_path:String):
 		elif actor_info.keys().has("ActorKey"):
 			var actor_key = actor_info['ActorKey']
 			if actor_key == "Player1":
-				new_actor = StoryState.get_player_actor()
+				new_actor = StoryState.get_player_actor(0)
+			elif actor_key == "Player2":
+				new_actor = StoryState.get_player_actor(1)
+			elif actor_key == "Player3":
+				new_actor = StoryState.get_player_actor(2)
+			elif actor_key == "Player4":
+				new_actor = StoryState.get_player_actor(3)
 			else:
 				new_actor = ActorLibrary.create_actor(actor_key, {})
-				
-		if actor_info['WaitToSpawn']:
-			# Must call without signals because actors are spawned before MapControlNode._ready()
-			MapController.create_actor_node(new_actor, actor_pos, true)
-		else:
-			add_actor(new_actor, actor_info.get("FactionId", 1), actor_pos)
+		
+		if new_actor:
+			if actor_info['WaitToSpawn']:
+				# Must call without signals because actors are spawned before MapControlNode._ready()
+				MapController.create_actor_node(new_actor, actor_pos, true)
+			else:
+				add_actor(new_actor, actor_info.get("FactionId", 1), actor_pos)
 			
 	
 	var player_actor = StoryState.get_player_actor()

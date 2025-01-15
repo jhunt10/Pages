@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/PageMenuPage/page_page_control.gd" id="1_1k8ki"]
 [ext_resource type="Texture2D" uid="uid://mpwjrtfjnbth" path="res://Scenes/Menus/CharacterMenu/BookBackground.png" id="2_24rjq"]
 [ext_resource type="Theme" uid="uid://dwinll8pgdjhc" path="res://Scenes/Themes/standard_theme.tres" id="3_2qajg"]
-[ext_resource type="Texture2D" uid="uid://cv0i7fr0kh62s" path="res://Scenes/Menus/CharacterMenu/MenuPages/PageMenuPage/PageSlotBackground.png" id="4_mmn4x"]
+[ext_resource type="Texture2D" uid="uid://hoqi8xx27lqn" path="res://Scenes/Menus/CharacterMenu/MenuPages/PageMenuPage/TitlePageFrame.png" id="4_00pl2"]
 [ext_resource type="PackedScene" uid="uid://c4p8fix52jdyq" path="res://Scenes/UiNodes/FitScaleLabel/fit_scale_label.tscn" id="5_p805u"]
 [ext_resource type="PackedScene" uid="uid://dugyf6csi731x" path="res://Scenes/Menus/CharacterMenu/MenuPages/PageMenuPage/HDotScrollBar/h_dot_scroll_bar_control.tscn" id="7_f7tj7"]
 [ext_resource type="Texture2D" uid="uid://lv3xit0yhvj2" path="res://Scenes/Menus/CharacterMenu/MenuPages/PageMenuPage/ExpBar.png" id="7_lnpbr"]
@@ -53,7 +53,7 @@ theme_override_constants/separation = 0
 
 [node name="PageSlotButton" parent="VBoxContainer/TitleContainer" instance=ExtResource("8_ey4v2")]
 layout_mode = 2
-frame_texture = ExtResource("4_mmn4x")
+frame_texture = ExtResource("4_00pl2")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/TitleContainer"]
 layout_mode = 2

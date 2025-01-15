@@ -27,9 +27,6 @@ func get_armor_value()->int:
 func get_ward_value()->int:
 	return self.get_load_val("Ward", 0)
 
-func get_required_stat()->Dictionary:
-	return self.get_load_val("RequireStats", {})
-
 ## Returns true if this item is equipped to provided actor, or any actor if none is provided
 func is_equipped_to_actor(actor:BaseActor=null)->bool:
 	if actor:

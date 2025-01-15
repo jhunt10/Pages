@@ -1,12 +1,15 @@
-[gd_scene load_steps=6 format=3 uid="uid://b6a64dt8gveex"]
+[gd_scene load_steps=9 format=3 uid="uid://b6a64dt8gveex"]
 
 [ext_resource type="Texture2D" uid="uid://567vutk12a12" path="res://Scenes/Menus/CharacterMenu/MenuPages/SlotHighlight.png" id="2_d3xtx"]
 [ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/PageMenuPage/page_slot_button.gd" id="2_mh0jw"]
 [ext_resource type="Texture2D" uid="uid://h612uajvj723" path="res://Scenes/Menus/CharacterMenu/MenuPages/PageMenuPage/PageSlot_Background.png" id="2_oj0tc"]
 [ext_resource type="Texture2D" uid="uid://q38nsn32uoai" path="res://Scenes/Menus/CharacterMenu/MenuPages/PageMenuPage/PageSlotFrame_Clipped.png" id="3_8h5ul"]
+[ext_resource type="Texture2D" uid="uid://f5dyomv4wwn1" path="res://assets/Sprites/UI/SymbolIcons/InvalidEquipmentIcon.png" id="6_jgb8k"]
 [ext_resource type="Texture2D" uid="uid://d31nv51bv0a3k" path="res://Scenes/Menus/CharacterMenu/MenuPages/PageMenuPage/PageSlotFrame.png" id="6_r685h"]
+[ext_resource type="Theme" uid="uid://bfce41la62bs6" path="res://Scenes/Themes/readable_theme.tres" id="7_qic66"]
+[ext_resource type="Texture2D" uid="uid://s8s7rktavc7e" path="res://assets/Sprites/UI/BackPatches/Patch_32_8.png" id="8_4hx42"]
 
-[node name="PageSlotButton" type="Control" node_paths=PackedStringArray("highlight", "page_icon", "page_background", "frame", "button")]
+[node name="PageSlotButton" type="Control" node_paths=PackedStringArray("highlight", "page_icon", "page_background", "frame", "button", "invalid_icon", "invalid_label", "invalid_button")]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 3
 anchors_preset = 0
@@ -18,6 +21,9 @@ page_icon = NodePath("PageIcon")
 page_background = NodePath("PageBackground")
 frame = NodePath("SlotFrame")
 button = NodePath("Button")
+invalid_icon = NodePath("InvalidIcon")
+invalid_label = NodePath("InvalidIcon/Label")
+invalid_button = NodePath("InvalidIcon/Button")
 frame_texture = ExtResource("6_r685h")
 clipped_frame_texture = ExtResource("3_8h5ul")
 
@@ -68,6 +74,53 @@ grow_vertical = 2
 texture = ExtResource("6_r685h")
 
 [node name="Button" type="Button" parent="."]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="InvalidIcon" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 6.0
+offset_right = 15.0
+offset_bottom = 22.0
+texture = ExtResource("6_jgb8k")
+
+[node name="Label" type="Label" parent="InvalidIcon"]
+visible = false
+z_index = 5
+layout_mode = 0
+offset_left = 18.0
+offset_top = 5.0
+offset_right = 105.0
+offset_bottom = 22.0
+theme = ExtResource("7_qic66")
+text = "Req: STR:15"
+vertical_alignment = 1
+
+[node name="NinePatchRect" type="NinePatchRect" parent="InvalidIcon/Label"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -8.0
+offset_top = -4.0
+offset_right = 8.0
+offset_bottom = 3.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("8_4hx42")
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+
+[node name="Button" type="Button" parent="InvalidIcon"]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15

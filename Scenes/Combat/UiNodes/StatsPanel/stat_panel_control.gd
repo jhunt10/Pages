@@ -3,22 +3,13 @@ extends VBoxContainer
 
 const BoxPadding:int = 4
 
-@onready var portrait_texture_rect:TextureRect = $BackPatchContainer/VBoxContainer/HBoxContainer/PortaitTextureRect
-@onready var main_container:VBoxContainer = $BackPatchContainer/VBoxContainer
-@onready var health_bar:StatBarControl = $BackPatchContainer/VBoxContainer/HBoxContainer/StatBarContainer/HealthBarControl
-@onready var bars_container:VBoxContainer = $BackPatchContainer/VBoxContainer/HBoxContainer/StatBarContainer
-@onready var effect_icon_box:HBoxContainer = $IconBoxContainer
-@onready var premade_effect_icon:TextureRect = $EffectIcon
-
-func _fake_ready():
-	if portrait_texture_rect != null:
-		return
-	portrait_texture_rect = $BackPatchContainer/VBoxContainer/HBoxContainer/PortaitTextureRect
-	main_container = $BackPatchContainer/VBoxContainer
-	health_bar = $BackPatchContainer/VBoxContainer/HBoxContainer/StatBarContainer/HealthBarControl
-	bars_container = $BackPatchContainer/VBoxContainer/HBoxContainer/StatBarContainer
-	effect_icon_box = $IconBoxContainer
-	premade_effect_icon = $EffectIcon
+@export var button:Button
+@export var portrait_texture_rect:TextureRect
+@export var main_container:VBoxContainer
+@export var health_bar:StatBarControl
+@export var bars_container:VBoxContainer
+@export var effect_icon_box:HBoxContainer
+@export var premade_effect_icon:TextureRect
 
 var actor:BaseActor
 var effect_icons:Dictionary
@@ -39,7 +30,6 @@ func set_actor(act:BaseActor):
 			actor.Que.action_que_changed.disconnect(sync)
 			actor.effacts_changed.disconnect(_sync_icons)
 	actor = act
-	_fake_ready()
 	_stat_bars[StatHolder.HealthKey] = health_bar
 	_stat_bars[StatHolder.HealthKey].set_actor(actor, StatHolder.HealthKey)
 	actor.Que.action_que_changed.connect(sync)

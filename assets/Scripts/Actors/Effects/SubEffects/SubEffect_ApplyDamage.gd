@@ -15,4 +15,4 @@ func on_effect_trigger(effect:BaseEffect, subeffect_data:Dictionary, trigger:Bas
 	var tag_chain = SourceTagChain.new()\
 			.append_source(SourceTagChain.SourceTypes.Actor, effect)
 	
-	DamageHelper.handle_damage(effect, test_damage, actor, damage_data,tag_chain, game_state)
+	DamageHelper.handle_damage(effect, actor, damage_data,tag_chain, game_state)

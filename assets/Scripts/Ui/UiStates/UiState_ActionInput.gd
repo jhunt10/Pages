@@ -12,7 +12,7 @@ func _get_debug_name()->String:
 func start_state():
 	if _logging: print("Start UiState: Action Input")
 	CombatUiControl.Instance.que_input.allow_input(true)
-	CombatUiControl.Instance.stat_panel_control.force_preview_mode()
+	#CombatUiControl.Instance.stat_panel_control.force_preview_mode()
 	#CombatRootControl.Instance.camera.freeze = false
 	pass
 

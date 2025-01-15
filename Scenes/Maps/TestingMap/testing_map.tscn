@@ -918,6 +918,15 @@ spawn_actor_key = "Player1"
 is_player = true
 map_coor = Vector2i(7, 7)
 
+[node name="SpwanNode_Player2" type="Sprite2D" parent="MapMarkerMapLayer"]
+self_modulate = Color(0, 1, 0, 1)
+position = Vector2(208, 240)
+texture = ExtResource("10_361jm")
+script = ExtResource("11_vji11")
+spawn_actor_key = "Player2"
+is_player = true
+map_coor = Vector2i(6, 7)
+
 [node name="SpwanNode_MovingTarget" type="Sprite2D" parent="MapMarkerMapLayer"]
 visible = false
 position = Vector2(208, 208)

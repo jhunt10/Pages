@@ -117,6 +117,9 @@ func set_item(actor:BaseActor, item:BaseItem):
 			#button_label.text = "Remove"
 		#else:
 			#button_label.text = "Equipt"
+	
+	var cant_equip_reasons = item.get_cant_use_reasons(actor)
+	set_cant_equip_reason(cant_equip_reasons)
 	self.start_show()
 
 func equip_button_pressed():
@@ -128,3 +131,17 @@ func equip_button_pressed():
 		action_details.on_eqiup_button_pressed()
 	elif default_details.visible:
 		default_details.on_eqiup_button_pressed()
+
+func set_cant_equip_reason(reasons_data:Dictionary):
+	if reasons_data.size() == 0:
+		equip_label.text = "Equipt"
+		equip_button.disabled = false
+		return
+	if reasons_data.get("IsEquipt", false):
+		equip_label.text = "Remove"
+		equip_button.disabled = false
+		return
+	
+	equip_label.text = ItemHelper.cant_equip_reasons_to_string(reasons_data)
+	equip_button.disabled = true
+	

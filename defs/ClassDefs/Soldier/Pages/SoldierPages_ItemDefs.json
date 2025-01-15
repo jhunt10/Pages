@@ -13,7 +13,13 @@
             "Value": 50
         },
         "ItemKey": "GuardAction_PageItem",
-        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd"
+        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
+        "Requirments": {
+            "ReqTags": ["Soldier"],
+            "ReqEquip": {
+                "OffHand": "Shield"
+            }
+        }
     },
     {
         "ActionKey": "ThrowJavelin",

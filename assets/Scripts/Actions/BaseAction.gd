@@ -137,6 +137,26 @@ func get_preview_target_params(actor:BaseActor)->TargetParameters:
 		return null
 	return get_targeting_params(preview_key, actor)
 
+func has_preview_damage()->bool:
+	var preview_data:Dictionary = get_load_val("Preview", {})
+	var preview_key = preview_data.get("PreviewDamageKey", null)
+	return preview_key and preview_key != ''
+
+func get_preview_damage_data(actor:BaseActor)->Dictionary:
+	var preview_data:Dictionary = get_load_val("Preview", {})
+	var preview_key = preview_data.get("PreviewDamageKey", null)
+	if not preview_key or preview_key == '':
+		printerr("No preview key")
+		return {}
+	if preview_key == "Weapon":
+		var weapon = actor.equipment.get_primary_weapon()
+		if !weapon:
+			printerr("No Weapon")
+			return {}
+		return (weapon as BaseWeaponEquipment).get_damage_data()
+	var damage_datas = get_load_val("DamageDatas", {})
+	return damage_datas.get(preview_key, {})
+
 
 func has_ammo():
 	return get_load_val("AmmoData", {}).size() > 0

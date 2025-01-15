@@ -8,6 +8,10 @@ var item_key:String
 @export var frame:TextureRect
 @export var button:Button
 
+@export var invalid_icon:TextureRect
+@export var invalid_label:Label
+@export var invalid_button:Button
+
 @export var frame_texture:Texture2D
 @export var clipped_frame_texture:Texture2D
 
@@ -20,6 +24,9 @@ var is_clipped:bool:
 
 func _ready() -> void:
 	is_clipped = is_clipped
+	invalid_button.mouse_entered.connect(show_invaid_label)
+	invalid_button.mouse_exited.connect(hide_invaid_label)
+	invalid_label.hide()
 
 func set_key(actor:BaseActor, key):
 	if key:
@@ -36,6 +43,12 @@ func set_key(actor:BaseActor, key):
 			else:
 				page_icon.texture = page.get_large_icon()
 			page_background.texture = page.get_rarity_background()
+			var cant_equip_reasons = page.get_cant_use_reasons(actor)
+			if cant_equip_reasons.size() > 0:
+				invalid_label.text = ItemHelper.cant_equip_reasons_to_string(cant_equip_reasons)
+				invalid_icon.show()
+			else:
+				invalid_icon.hide()
 		else:
 			page_icon.texture = SpriteCache._get_no_sprite()
 
@@ -49,3 +62,9 @@ func show_highlight():
 
 func hide_highlight():
 	highlight.hide()
+
+func show_invaid_label():
+	invalid_label.show()
+
+func hide_invaid_label():
+	invalid_label.hide()

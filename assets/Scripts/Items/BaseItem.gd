@@ -60,3 +60,44 @@ func get_rarity_background()->Texture2D:
 	#if ItemData.has('EffectData'):
 		#effect_data = ItemData['EffectData']
 	#actor.effects.add_effect(effect_key, effect_data)
+
+## Returns a diction of failed requirements, mapped by requirment type 
+func get_cant_use_reasons(actor:BaseActor):
+	var requirment_data = get_load_val("Requirments", {})
+	var missing_requirements = {}
+	
+	for tag in requirment_data.get("ReqTags", []):
+		if not actor.get_tags().has(tag):
+			if not missing_requirements.has("Tags"):
+				missing_requirements['Tags'] = []
+			missing_requirements['Tags'].append(tag)
+	
+	var req_stat_data = requirment_data.get("ReqStats", {})
+	for stat_name in req_stat_data.keys():
+		var req_val = req_stat_data[stat_name]
+		var stat_val = actor.stats.get_stat(stat_name)
+		if stat_val < req_val:
+			if not missing_requirements.has("Stats"):
+				missing_requirements['Stats'] = {}
+			missing_requirements['Stats'][stat_name] = req_val
+	
+	var req_equipment_data = requirment_data.get("ReqEquip", {})
+	for slot_name in req_equipment_data.keys():
+		var req_tag = req_equipment_data[slot_name]
+		var equipt_items = actor.equipment.get_equipt_items_of_slot_type(slot_name)
+		if req_tag == "Any" and equipt_items.size() > 0:
+			continue
+		var has_tag = false
+		for equipt_item:BaseEquipmentItem in equipt_items:
+			if equipt_item.get_item_tags().has(req_tag):
+				has_tag = true
+				break
+		if not has_tag:
+			if not missing_requirements.has("Equipment"):
+				missing_requirements['Equipment'] = []
+			if req_tag == "Any":
+				missing_requirements['Equipment'].append(slot_name)
+			else:
+				missing_requirements['Equipment'].append(req_tag)
+	return missing_requirements
+	return {}
