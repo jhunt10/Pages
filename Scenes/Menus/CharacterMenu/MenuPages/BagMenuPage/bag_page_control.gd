@@ -31,9 +31,10 @@ func set_actor(actor:BaseActor):
 	if _actor and _actor != actor:
 		_actor.items.items_changed.disconnect(build_sub_containers)
 		_actor.equipment_changed.disconnect(actor_equipment_changed)
+	if actor != _actor:
+		actor.items.items_changed.connect(build_sub_containers)
+		actor.equipment_changed.connect(actor_equipment_changed)
 	_actor = actor
-	_actor.items.items_changed.connect(build_sub_containers)
-	_actor.equipment_changed.connect(actor_equipment_changed)
 	actor_equipment_changed()
 
 func actor_equipment_changed():

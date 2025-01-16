@@ -8,6 +8,7 @@ enum States {Hidden, Growing, Showing, Shrinking}
 @export var grow_speed:float
 @export var button_texture:TextureRect
 @export var button:Button
+@export var label:Label
 
 
 # Called when the node enters the scene tree for the first time.

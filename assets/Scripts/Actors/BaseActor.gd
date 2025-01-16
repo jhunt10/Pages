@@ -13,7 +13,6 @@ signal action_failed
 
 signal equipment_changed
 signal bag_items_changed
-signal page_list_changed
 signal effacts_changed
 
 # Actor holds no references to the current map state so this method is called by set_actor_pos()

@@ -121,6 +121,7 @@ func set_camera_pos(pos:Vector2, unfollow:bool=true):
 		following_actor_node = null
 
 func start_auto_pan(target_pos:Vector2):
+	_touch_events.clear()
 	following_actor_node = null
 	auto_pan_start_pos = self.position
 	auto_pan_target_pos = target_pos

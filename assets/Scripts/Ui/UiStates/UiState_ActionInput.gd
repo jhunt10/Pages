@@ -11,13 +11,16 @@ func _get_debug_name()->String:
 
 func start_state():
 	if _logging: print("Start UiState: Action Input")
-	CombatUiControl.Instance.que_input.allow_input(true)
+	#CombatUiControl.Instance.que_input.allow_input(true)
+	CombatRootControl.Instance.ui_control.que_input.showing = true
 	#CombatUiControl.Instance.stat_panel_control.force_preview_mode()
 	#CombatRootControl.Instance.camera.freeze = false
+	var first_actor = CombatRootControl.list_player_actors()[0]
+	CombatRootControl.Instance.ui_control.set_player_actor(first_actor)
 	pass
 
 func end_state():
-	CombatUiControl.Instance.que_input.allow_input(false)
+	#CombatUiControl.Instance.que_input.allow_input(false)
 	pass
 
 func handle_input(event):
@@ -25,11 +28,14 @@ func handle_input(event):
 		var mouse_spot = CombatRootControl.Instance.GridCursor.current_spot
 		
 		## Show Character Sheet on clicking an actor
-		#var mouse_over_actors = CombatRootControl.Instance.GameState.get_actors_at_pos(mouse_spot, null, true)
-		#if mouse_over_actors.size() > 0:
+		var mouse_over_actors = CombatRootControl.Instance.GameState.get_actors_at_pos(mouse_spot)
+		if mouse_over_actors.size() > 0:
+			for actor:BaseActor in mouse_over_actors:
+				if actor.is_player:
+					CombatRootControl.Instance.ui_control.set_player_actor(actor)
 			#var actor:BaseActor = mouse_over_actors[0]
 			#ui_controller.set_ui_state(UiStateController.UiStates.CharacterSheet, {"ActorId":actor.Id})
-			
+			#
 			#MainRootNode.Instance.open_character_sheet(actor)
 			#var charsheet = load("res://Scenes/character_edit_control.tscn").instantiate()
 			#CombatUiControl.Instance.add_child(charsheet)

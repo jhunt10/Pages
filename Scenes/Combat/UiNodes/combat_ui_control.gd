@@ -43,10 +43,34 @@ func _ready() -> void:
 	target_input_display.visible = false
 	game_over_screen.hide()
 	victory_screen.hide()
-	p1_stat_panel_control.button.pressed.connect(set_player_actor_index.bind(0))
-	p2_stat_panel_control.button.pressed.connect(set_player_actor_index.bind(1))
-	p3_stat_panel_control.button.pressed.connect(set_player_actor_index.bind(2))
-	p4_stat_panel_control.button.pressed.connect(set_player_actor_index.bind(3))
+	var player_1 = StoryState.get_player_actor(0)
+	if player_1: 
+		p1_stat_panel_control.set_actor(player_1)
+		p1_stat_panel_control.button.pressed.connect(set_player_actor_index.bind(0))
+	else: 
+		p1_stat_panel_control.hide()
+		
+	var player_2 = StoryState.get_player_actor(1)
+	if player_2: 
+		p2_stat_panel_control.set_actor(player_2)
+		p2_stat_panel_control.button.pressed.connect(set_player_actor_index.bind(1))
+	else: 
+		p3_stat_panel_control.hide()
+		
+	var player_3 = StoryState.get_player_actor(2)
+	if player_3: 
+		p3_stat_panel_control.set_actor(player_3)
+		p3_stat_panel_control.button.pressed.connect(set_player_actor_index.bind(2))
+	else: 
+		p3_stat_panel_control.hide()
+		
+	var player_4 = StoryState.get_player_actor(3)
+	if player_4: 
+		p4_stat_panel_control.set_actor(player_4)
+		p4_stat_panel_control.button.pressed.connect(set_player_actor_index.bind(3))
+	else: 
+		p4_stat_panel_control.hide()
+	
 	pass # Replace with function body.
 
 #func do_test():
@@ -62,24 +86,12 @@ func _process(delta: float) -> void:
 func set_player_actor_index(index):
 	var player_actor = StoryState.get_player_actor(index)
 	if player_actor:
-		que_input.set_actor(player_actor)
+		set_player_actor(player_actor)
 
 func set_player_actor(actor:BaseActor):
-	var player_1 = StoryState.get_player_actor(0)
-	if player_1: p1_stat_panel_control.set_actor(player_1)
-	else: p1_stat_panel_control.hide()
-	var player_2 = StoryState.get_player_actor(1)
-	if player_2: p2_stat_panel_control.set_actor(player_2)
-	else: p3_stat_panel_control.hide()
-	var player_3 = StoryState.get_player_actor(2)
-	if player_3: p3_stat_panel_control.set_actor(player_3)
-	else: p3_stat_panel_control.hide()
-	var player_4 = StoryState.get_player_actor(3)
-	if player_4: p4_stat_panel_control.set_actor(player_4)
-	else: p4_stat_panel_control.hide()
 	
 	que_input.set_actor(actor)
-	#que_input.que_display_control.set_actor(actor)
+	CombatRootControl.Instance.camera.start_auto_pan_to_actor(actor)
 
 
 func _input(event: InputEvent) -> void:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://6dlh0wlnsedb"]
+[gd_scene load_steps=15 format=3 uid="uid://6dlh0wlnsedb"]
 
 [ext_resource type="Script" path="res://Scenes/Combat/UiNodes/QueInput/que_input_control.gd" id="1_bqb47"]
 [ext_resource type="Texture2D" uid="uid://clb0p8uenqo8c" path="res://Scenes/Combat/UiNodes/QueInput/PopUpButton.png" id="2_7xk62"]
@@ -8,7 +8,6 @@
 [ext_resource type="Theme" uid="uid://cayt153s5ro4a" path="res://Scenes/Themes/standard_theme_red.tres" id="3_u12om"]
 [ext_resource type="PackedScene" uid="uid://cpy0gmuoekexl" path="res://Scenes/Combat/UiNodes/QueInput/que_input_button_control.tscn" id="6_ua6n5"]
 [ext_resource type="Script" path="res://Scenes/Combat/UiNodes/QueDisplay/que_display_control.gd" id="9_o02vd"]
-[ext_resource type="Texture2D" uid="uid://dgfxtmtdjfgey" path="res://assets/Sprites/UI/QuePathArrow.png" id="10_ruo2m"]
 [ext_resource type="Texture2D" uid="uid://e71sf31qf71e" path="res://Scenes/Combat/UiNodes/QueDisplay/QueDisplayBackground.png" id="11_quda2"]
 [ext_resource type="Texture2D" uid="uid://do85dvxvlf5wk" path="res://defs/Actors/Squirrels/Squirrcerer_IconSmall.png" id="12_cgpwr"]
 [ext_resource type="Script" path="res://Scenes/Combat/UiNodes/QueInput/QueDisplayButton.gd" id="18_8nhhy"]
@@ -16,66 +15,59 @@
 [ext_resource type="Texture2D" uid="uid://dq2fpuokt1s5r" path="res://Scenes/Combat/UiNodes/QueDisplay/SlotBackground.png" id="19_gjejj"]
 [ext_resource type="Texture2D" uid="uid://bu1v4w3d6hau" path="res://Scenes/Combat/UiNodes/QueDisplay/FilledSlotBackground.png" id="20_k35kq"]
 
-[node name="QueInputControl" type="Control" node_paths=PackedStringArray("que_display_control", "back_patch", "main_container", "page_button_prefab", "start_label", "side_start_button", "top_start_button")]
-custom_minimum_size = Vector2(124, 80)
+[node name="QueInputControl" type="Control" node_paths=PackedStringArray("nodes_container", "que_display_control", "back_patch", "main_container", "page_button_prefab", "start_label", "side_start_button", "top_start_button")]
+custom_minimum_size = Vector2(124, 0)
 layout_mode = 3
-anchors_preset = 0
-offset_right = 392.0
-offset_bottom = 96.0
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
 script = ExtResource("1_bqb47")
-que_display_control = NodePath("BackPatchContainer/Control/QueDisplayControl")
-back_patch = NodePath("BackPatchContainer")
-main_container = NodePath("BackPatchContainer/HBoxContainer")
-page_button_prefab = NodePath("BackPatchContainer/HBoxContainer/HBoxContainer/QueInputButtonControl")
-start_label = NodePath("BackPatchContainer/Control/SideStatButtonControl/TextureRect/Label")
-side_start_button = NodePath("BackPatchContainer/Control/SideStatButtonControl")
-top_start_button = NodePath("BackPatchContainer/Control/TopStatButtonControl")
+showing = true
+nodes_container = NodePath("VBoxContainer")
+que_display_control = NodePath("QueDisplayControl")
+back_patch = NodePath("VBoxContainer/BackPatchContainer2")
+main_container = NodePath("VBoxContainer/BackPatchContainer2/HBoxContainer")
+page_button_prefab = NodePath("VBoxContainer/BackPatchContainer2/HBoxContainer/HBoxContainer/QueInputButtonControl")
+start_label = NodePath("VBoxContainer/BackPatchContainer2/Control/SideStatButtonControl/TextureRect/Label")
+side_start_button = NodePath("VBoxContainer/BackPatchContainer2/Control/SideStatButtonControl")
+top_start_button = NodePath("VBoxContainer/BackPatchContainer2/Control/TopStatButtonControl")
+slide_speed = 300.0
+state = 2
 
-[node name="BackPatchContainer" type="Container" parent="." node_paths=PackedStringArray("background", "inner_container")]
-custom_minimum_size = Vector2(108, 80)
-layout_mode = 0
-offset_left = 131.2
-offset_right = 239.2
-offset_bottom = 80.0
-scale = Vector2(1.2, 1.2)
-script = ExtResource("2_ir7m8")
-background = NodePath("Background")
-inner_container = NodePath("HBoxContainer")
-sides_padding = 14
-center_in_parent = true
-
-[node name="Control" type="Control" parent="BackPatchContainer"]
+[node name="QueDisplayControl" type="Control" parent="." node_paths=PackedStringArray("portrait", "main_container", "premade_que_button", "slots_container")]
 layout_mode = 2
-
-[node name="QueDisplayControl" type="Control" parent="BackPatchContainer/Control" node_paths=PackedStringArray("portrait", "main_container", "premade_que_button", "slots_container")]
-layout_mode = 3
 anchors_preset = 0
-offset_left = 2.0
-offset_top = -68.0
-offset_right = 118.0
-offset_bottom = -4.0
+offset_right = 120.0
 script = ExtResource("9_o02vd")
-portrait = NodePath("BackPatchContainer/HBoxContainer/PortraitTextureRect")
-main_container = NodePath("BackPatchContainer/HBoxContainer")
-premade_que_button = NodePath("BackPatchContainer/HBoxContainer/SlotsContainer/QueDisplayButton")
-slots_container = NodePath("BackPatchContainer/HBoxContainer/SlotsContainer")
+portrait = NodePath("../VBoxContainer/BackPatchContainer/HBoxContainer/PortraitTextureRect")
+main_container = NodePath("../VBoxContainer/BackPatchContainer/HBoxContainer")
+premade_que_button = NodePath("../VBoxContainer/BackPatchContainer/HBoxContainer/SlotsContainer/QueDisplayButton")
+slots_container = NodePath("../VBoxContainer/BackPatchContainer/HBoxContainer/SlotsContainer")
 show_gaps = true
 
-[node name="QuePathArrow" type="Sprite2D" parent="BackPatchContainer/Control/QueDisplayControl"]
-visible = false
-texture = ExtResource("10_ruo2m")
-
-[node name="BackPatchContainer" type="Container" parent="BackPatchContainer/Control/QueDisplayControl" node_paths=PackedStringArray("background", "inner_container")]
-custom_minimum_size = Vector2(120, 64)
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 0
-offset_right = 120.0
-offset_bottom = 64.0
+offset_left = 516.0
+offset_top = -188.0
+offset_right = 636.0
+offset_bottom = -16.0
+
+[node name="TopPadding" type="Control" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 8)
+layout_mode = 2
+
+[node name="BackPatchContainer" type="Container" parent="VBoxContainer" node_paths=PackedStringArray("background", "inner_container")]
+custom_minimum_size = Vector2(120, 64)
+layout_mode = 2
 script = ExtResource("2_ir7m8")
 background = NodePath("Background")
 inner_container = NodePath("HBoxContainer")
 margin_override = 8
 
-[node name="Background" type="NinePatchRect" parent="BackPatchContainer/Control/QueDisplayControl/BackPatchContainer"]
+[node name="Background" type="NinePatchRect" parent="VBoxContainer/BackPatchContainer"]
 layout_mode = 2
 texture = ExtResource("11_quda2")
 patch_margin_left = 61
@@ -83,22 +75,22 @@ patch_margin_top = 32
 patch_margin_right = 12
 patch_margin_bottom = 32
 
-[node name="HBoxContainer" type="HBoxContainer" parent="BackPatchContainer/Control/QueDisplayControl/BackPatchContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/BackPatchContainer"]
 layout_mode = 2
 
-[node name="PortraitTextureRect" type="TextureRect" parent="BackPatchContainer/Control/QueDisplayControl/BackPatchContainer/HBoxContainer"]
+[node name="PortraitTextureRect" type="TextureRect" parent="VBoxContainer/BackPatchContainer/HBoxContainer"]
 custom_minimum_size = Vector2(48, 48)
 layout_mode = 2
 texture = ExtResource("12_cgpwr")
 
-[node name="ColorRect" type="ColorRect" parent="BackPatchContainer/Control/QueDisplayControl/BackPatchContainer/HBoxContainer"]
+[node name="ColorRect" type="ColorRect" parent="VBoxContainer/BackPatchContainer/HBoxContainer"]
 layout_mode = 2
 
-[node name="SlotsContainer" type="HBoxContainer" parent="BackPatchContainer/Control/QueDisplayControl/BackPatchContainer/HBoxContainer"]
+[node name="SlotsContainer" type="HBoxContainer" parent="VBoxContainer/BackPatchContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 5
 
-[node name="QueDisplayButton" type="Control" parent="BackPatchContainer/Control/QueDisplayControl/BackPatchContainer/HBoxContainer/SlotsContainer" node_paths=PackedStringArray("background", "page_icon", "button")]
+[node name="QueDisplayButton" type="Control" parent="VBoxContainer/BackPatchContainer/HBoxContainer/SlotsContainer" node_paths=PackedStringArray("background", "page_icon", "button")]
 custom_minimum_size = Vector2(48, 48)
 layout_mode = 2
 script = ExtResource("18_8nhhy")
@@ -109,7 +101,7 @@ empty_background_texture = ExtResource("19_d7qpq")
 gap_background_texture = ExtResource("19_gjejj")
 filled_background_texture = ExtResource("20_k35kq")
 
-[node name="Background" type="TextureRect" parent="BackPatchContainer/Control/QueDisplayControl/BackPatchContainer/HBoxContainer/SlotsContainer/QueDisplayButton"]
+[node name="Background" type="TextureRect" parent="VBoxContainer/BackPatchContainer/HBoxContainer/SlotsContainer/QueDisplayButton"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -118,7 +110,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("19_d7qpq")
 
-[node name="PageIcon" type="TextureRect" parent="BackPatchContainer/Control/QueDisplayControl/BackPatchContainer/HBoxContainer/SlotsContainer/QueDisplayButton"]
+[node name="PageIcon" type="TextureRect" parent="VBoxContainer/BackPatchContainer/HBoxContainer/SlotsContainer/QueDisplayButton"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -126,7 +118,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Button" type="Button" parent="BackPatchContainer/Control/QueDisplayControl/BackPatchContainer/HBoxContainer/SlotsContainer/QueDisplayButton"]
+[node name="Button" type="Button" parent="VBoxContainer/BackPatchContainer/HBoxContainer/SlotsContainer/QueDisplayButton"]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -135,7 +127,18 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="SideStatButtonControl" type="Control" parent="BackPatchContainer/Control" node_paths=PackedStringArray("button_texture", "button")]
+[node name="BackPatchContainer2" type="Container" parent="VBoxContainer" node_paths=PackedStringArray("background", "inner_container")]
+custom_minimum_size = Vector2(108, 80)
+layout_mode = 2
+script = ExtResource("2_ir7m8")
+background = NodePath("Background")
+inner_container = NodePath("HBoxContainer")
+sides_padding = 14
+
+[node name="Control" type="Control" parent="VBoxContainer/BackPatchContainer2"]
+layout_mode = 2
+
+[node name="SideStatButtonControl" type="Control" parent="VBoxContainer/BackPatchContainer2/Control" node_paths=PackedStringArray("button_texture", "button", "label")]
 show_behind_parent = true
 clip_contents = true
 layout_mode = 1
@@ -151,15 +154,15 @@ script = ExtResource("3_pfyt3")
 grow_speed = 300.0
 button_texture = NodePath("TextureRect")
 button = NodePath("TextureRect/Button")
+label = NodePath("TextureRect/Label")
 
-[node name="TextureRect" type="TextureRect" parent="BackPatchContainer/Control/SideStatButtonControl"]
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/BackPatchContainer2/Control/SideStatButtonControl"]
 layout_mode = 0
-offset_top = 64.0
-offset_right = 128.0
-offset_bottom = 128.0
+offset_left = -128.0
+offset_bottom = 64.0
 texture = ExtResource("2_7xk62")
 
-[node name="Label" type="Label" parent="BackPatchContainer/Control/SideStatButtonControl/TextureRect"]
+[node name="Label" type="Label" parent="VBoxContainer/BackPatchContainer2/Control/SideStatButtonControl/TextureRect"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -172,7 +175,7 @@ text = "Start"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Button" type="Button" parent="BackPatchContainer/Control/SideStatButtonControl/TextureRect"]
+[node name="Button" type="Button" parent="VBoxContainer/BackPatchContainer2/Control/SideStatButtonControl/TextureRect"]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -181,7 +184,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TopStatButtonControl" type="Control" parent="BackPatchContainer/Control" node_paths=PackedStringArray("button_texture", "button")]
+[node name="TopStatButtonControl" type="Control" parent="VBoxContainer/BackPatchContainer2/Control" node_paths=PackedStringArray("button_texture", "button", "label")]
 clip_contents = true
 layout_mode = 1
 anchors_preset = 1
@@ -197,15 +200,16 @@ vertical = true
 grow_speed = 300.0
 button_texture = NodePath("TextureRect")
 button = NodePath("TextureRect/Button")
+label = NodePath("TextureRect/Label")
 
-[node name="TextureRect" type="TextureRect" parent="BackPatchContainer/Control/TopStatButtonControl"]
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/BackPatchContainer2/Control/TopStatButtonControl"]
 layout_mode = 0
 offset_top = 64.0
 offset_right = 128.0
 offset_bottom = 128.0
 texture = ExtResource("2_7xk62")
 
-[node name="Label" type="Label" parent="BackPatchContainer/Control/TopStatButtonControl/TextureRect"]
+[node name="Label" type="Label" parent="VBoxContainer/BackPatchContainer2/Control/TopStatButtonControl/TextureRect"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -218,7 +222,7 @@ text = "Start"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Button" type="Button" parent="BackPatchContainer/Control/TopStatButtonControl/TextureRect"]
+[node name="Button" type="Button" parent="VBoxContainer/BackPatchContainer2/Control/TopStatButtonControl/TextureRect"]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -227,7 +231,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Background" type="NinePatchRect" parent="BackPatchContainer"]
+[node name="Background" type="NinePatchRect" parent="VBoxContainer/BackPatchContainer2"]
 layout_mode = 2
 texture = ExtResource("3_2484v")
 patch_margin_left = 21
@@ -235,12 +239,16 @@ patch_margin_top = 8
 patch_margin_right = 21
 patch_margin_bottom = 8
 
-[node name="HBoxContainer" type="HBoxContainer" parent="BackPatchContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/BackPatchContainer2"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="BackPatchContainer/HBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/BackPatchContainer2/HBoxContainer"]
 layout_mode = 2
 
-[node name="QueInputButtonControl" parent="BackPatchContainer/HBoxContainer/HBoxContainer" instance=ExtResource("6_ua6n5")]
+[node name="QueInputButtonControl" parent="VBoxContainer/BackPatchContainer2/HBoxContainer/HBoxContainer" instance=ExtResource("6_ua6n5")]
+layout_mode = 2
+
+[node name="BottomPadding" type="Control" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 8)
 layout_mode = 2

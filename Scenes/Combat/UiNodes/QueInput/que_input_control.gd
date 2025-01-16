@@ -3,9 +3,22 @@ class_name QueInputControl
 extends Control
 
 const PADDING = 8
+enum States {Hidden, Growing, Showing, Shrinking}
 
 signal page_special_selected(action_key:String)
 
+@export var showing:bool:
+	set(val):
+		showing = val
+		if val:
+			if state == States.Hidden or state == States.Shrinking:
+				state = States.Growing
+		else:
+			if state == States.Showing or state == States.Growing:
+				state = States.Shrinking
+			
+			
+@export var nodes_container:Control
 @export var que_display_control:QueDisplayControl
 @export var on_que_options_menu:ItemSelectionInputDisplay
 @export var back_patch:BackPatchContainer
@@ -14,6 +27,17 @@ signal page_special_selected(action_key:String)
 @export var start_label:Label
 @export var side_start_button:QueInput_StartButton
 @export var top_start_button:QueInput_StartButton
+@export var slide_speed:float = 100
+
+@export var state:States:
+	set(val):
+		state = val
+		if nodes_container:
+			nodes_container.position.x = (self.size.x / 2) - (nodes_container.size.x / 2)
+			if state == States.Hidden:
+				nodes_container.position.y = 0
+			if state == States.Showing:
+				nodes_container.position.y = -(nodes_container.size.y )
 
 var _actor:BaseActor
 var _page_buttons:Dictionary = {} 
@@ -51,27 +75,53 @@ func hide_start_button():
 		side_start_button.state = QueInput_StartButton.States.Shrinking
 
 func show_start_button():
+	var all_ready = true
+	for player:BaseActor in CombatRootControl.Instance.list_player_actors():
+		if not player.Que.is_ready():
+			all_ready = false
 	var que_display_size = que_display_control.size.x
 	var self_size = back_patch.size.x #+ (back_patch.sides_padding * 2)
 	var use_top = (top_start_button.size.x < self_size - que_display_size)
 	printerr("SelfSize: %s | DisSize: %s | UseTop: %s" % [self_size, que_display_size, use_top])
 	if use_top:
+		if all_ready:
+			top_start_button.label.text = "Start"
+		else:
+			top_start_button.label.text = "Next"
 		top_start_button.button.disabled = false
 		top_start_button.state = QueInput_StartButton.States.Growing
 	else:
+		if all_ready:
+			side_start_button.label.text = "Start"
+		else:
+			side_start_button.label.text = "Next"
 		side_start_button.button.disabled = false
 		side_start_button.state = QueInput_StartButton.States.Growing
 	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta: float) -> void:
-	var hight = self.size.y
-	var box_hight = back_patch.size.y
-	var box_scale = hight / box_hight
-	back_patch.scale = Vector2(box_scale, box_scale)
-	var self_size = self.size
-	var box_size = back_patch.size * box_scale
-	back_patch.position = Vector2((self_size.x / 2) - (box_size.x / 2), (self_size.y / 2) - (box_size.y / 2))
+func _process(delta: float) -> void:
+	nodes_container.position.x = (self.size.x / 2) - (nodes_container.size.x / 2)
+	if state == States.Growing:
+		var move = delta * slide_speed
+		if nodes_container.position.y - move < 0 - nodes_container.size.y:
+			state = States.Showing
+		else:
+			nodes_container.position.y -= move
+	if state == States.Shrinking:
+		var move = delta * slide_speed
+		if nodes_container.position.y + move > 0:
+			state = States.Hidden
+		else:
+			nodes_container.position.y += move
+		
+	#var hight = self.size.y
+	#var box_hight = back_patch.size.y + que_display_control.size.y
+	#var box_scale = hight / box_hight
+	#back_patch.scale = Vector2(box_scale, box_scale)
+	#var self_size = self.size
+	#var box_size = back_patch.size * box_scale
+	#back_patch.position = Vector2((self_size.x / 2) - (box_size.x / 2), (self_size.y / 2) - (box_size.y / 2))
 	if Engine.is_editor_hint():
 		return
 	#super(delta)
@@ -198,8 +248,17 @@ func _on_all_que_options_selected(action_key:String, options_data:Dictionary):
 	on_que_options_menu.visible = false
 
 func _start_button_pressed():
-	CombatUiControl.ui_state_controller.set_ui_state(UiStateController.UiStates.ExecRound)
-	hide_start_button()
+	var all_ready = true
+	for player:BaseActor in CombatRootControl.Instance.list_player_actors():
+		if not player.Que.is_ready():
+			all_ready = false
+	if all_ready:
+		CombatUiControl.ui_state_controller.set_ui_state(UiStateController.UiStates.ExecRound)
+		hide_start_button()
+	else:
+		var next_index = CombatRootControl.Instance.get_next_player_index()
+		CombatRootControl.Instance.set_player_index(next_index)
+		hide_start_button()
 
 func _round_ends():
 	hide_start_button()

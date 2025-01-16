@@ -16,6 +16,8 @@ static var QueController:ActionQueController = ActionQueController.new()
 	
 var GameState:GameStateData
 
+static var _current_player_index:int = 0
+
 func _enter_tree() -> void:
 	if !Instance: 
 		Instance = self
@@ -297,4 +299,24 @@ func list_actors_by_order()->Array:
 	return out_list
 		
 		
-	
+static func list_player_actors()->Array:
+	var out_list = []
+	for que_id in CombatRootControl.Instance.QueController._que_order:
+		var que:ActionQue = CombatRootControl.Instance.QueController._action_ques[que_id]
+		var actor = que.actor
+		if StoryState._player_ids.has(actor.Id):
+			out_list.append(actor)
+	return out_list
+
+func set_player_index(index:int):
+	_current_player_index = index
+	ui_control.set_player_actor_index(_current_player_index)
+
+func get_next_player_index()->int:
+	var next_index = (_current_player_index + 1) % 4
+	var extra_check = 0
+	while StoryState.get_player_id(next_index) == null and extra_check < 4:
+		extra_check += 1
+		next_index = (next_index + 1) % 4
+	printerr("GetNextIndex: %s | %s" % [_current_player_index, next_index])
+	return next_index

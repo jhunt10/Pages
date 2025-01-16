@@ -73,6 +73,10 @@ func set_actor(actor:BaseActor):
 	
 	var offset = actor.get_load_val("SpriteOffset", [0,0])
 	offset_node.position = Vector2i(offset[0], offset[1])
+	
+	if actor.is_player:
+		var player_index = StoryState.get_player_index_of_actor(actor)
+		path_arrow.modulate = StoryState.get_player_color(player_index)
 	sync_sprites()
 
 func sync_sprites():

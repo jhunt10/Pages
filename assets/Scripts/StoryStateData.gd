@@ -23,10 +23,20 @@ static var total_play_time
 static var session_start_unix_time
 static var _cached_save_name
 
-static func get_player_id()->String:
-	if current_player_id:
+static func get_player_index_of_actor(actor:BaseActor)->int:
+	for index in range(4):
+		if actor.Id == _player_ids[index]:
+			return index
+	return -1
+
+static func get_player_id(index:int=0):
+	if index < 0 and current_player_id:
 		return current_player_id
-	return ''
+	if index >= 0 and index < 4:
+		var player_id = _player_ids[index]
+		if player_id:
+			return current_player_id
+	return null
 
 static func get_player_actor(index:int = -1)->BaseActor:
 	if index < 0 and current_player_id:
@@ -36,6 +46,13 @@ static func get_player_actor(index:int = -1)->BaseActor:
 		if player_id:
 			return ActorLibrary.get_actor(player_id)
 	return null
+
+static func get_player_color(index:int)->Color:
+	if index == 0: return Color.BLUE
+	elif index == 1: return Color.DARK_GREEN
+	elif index == 2: return Color.YELLOW
+	elif index == 0: return Color.DARK_RED
+	return Color.WHITE
 
 static func start_new_story(starting_class:String):
 	if !Instance: Instance = StoryState.new()

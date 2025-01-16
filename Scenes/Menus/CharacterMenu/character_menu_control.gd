@@ -14,6 +14,7 @@ static var Instance:CharacterMenuControl
 
 @export var scale_control:Control
 @export var inventory_container:InventoryContainer
+@export var actor_tabs_control:ActorSelector
 @export var close_button:Button
 @export var tab_equipment_button:Button
 @export var tab_pages_button:Button
@@ -99,6 +100,7 @@ func set_actor(actor:BaseActor):
 	page_page.set_actor(actor)
 	bag_page.set_actor(actor)
 	stats_page.set_actor(actor)
+	actor_tabs_control.set_selected_actor(actor)
 	var finish_time = Time.get_unix_time_from_system()
 	var time_diff = finish_time - start_time
 	print("Finished Set Actor: %s" % Time.get_datetime_string_from_unix_time(finish_time))

@@ -37,7 +37,6 @@ func _ready():
 		_build_slots()
 		_sync()
 	
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	if _resize:
 		self.size = Vector2i(main_container.size.x + (2 * PADDING),

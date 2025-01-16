@@ -131,7 +131,7 @@ func open_character_sheet(_actor:BaseActor=null, parent_node=null)->CharacterMen
 	#charsheet.scale_control.scale = Vector2(scale, scale)
 	charsheet.scale_control.scale = Vector2(1, 1)
 	#if screen_size.y > charsheet.size.y * 2:
-	charsheet.scale_control.scale = Vector2(1.5,1.5)
+	charsheet.scale_control.scale = Vector2(1.25,1.25)
 	if parent_node:
 		parent_node.add_child(charsheet)
 	else:
