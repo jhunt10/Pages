@@ -54,13 +54,13 @@ func _init( attacking_actor:BaseActor,
 	attack_direction = direction_of_attack
 	defender_has_cover = defender_is_under_cover
 	
-	attacker_accuracy = DamageHelper.get_attack_stat_for_attack_direction(attacker, attack_direction, StatHelper.Accuracy, 100)
-	attacker_crit_chance =  DamageHelper.get_attack_stat_for_attack_direction(attacker, attack_direction, StatHelper.CritChance, 0) / 100.0
-	attcker_crit_mod = DamageHelper.get_attack_stat_for_attack_direction(attacker, attack_direction, StatHelper.CritMod, 1.5)
+	attacker_accuracy = StatHelper.get_attack_stat_for_attack_direction(attacker, attack_direction, StatHelper.Accuracy, 100)
+	attacker_crit_chance =  StatHelper.get_attack_stat_for_attack_direction(attacker, attack_direction, StatHelper.CritChance, 0) / 100.0
+	attcker_crit_mod = StatHelper.get_attack_stat_for_attack_direction(attacker, attack_direction, StatHelper.CritMod, 1.5)
 	
-	defender_evasion = DamageHelper.get_defense_stat_for_attack_direction(defender, attack_direction, StatHelper.Evasion, 0)
-	defender_block_chance = (DamageHelper.get_defense_stat_for_attack_direction(defender, attack_direction, StatHelper.BlockChance, 0) / 100.0)
-	defender_block_mod = DamageHelper.get_defense_stat_for_attack_direction(defender, attack_direction, StatHelper.BlockMod, 0.25)
+	defender_evasion = StatHelper.get_defense_stat_for_attack_direction(defender, attack_direction, StatHelper.Evasion, 0)
+	defender_block_chance = (StatHelper.get_defense_stat_for_attack_direction(defender, attack_direction, StatHelper.BlockChance, 0) / 100.0)
+	defender_block_mod = StatHelper.get_defense_stat_for_attack_direction(defender, attack_direction, StatHelper.BlockMod, 0.25)
 
 func roll_for_hit():
 	if attack_direction == AttackDirection.Front:

@@ -5,8 +5,8 @@
         "Details": {
             "Description": "Your Agility is added to your Evasion.",
             "DisplayName": "Agile Evasion",
-            "LargeIcon": "AgileEvasion.png",
-            "SmallIcon": "AgileEvasion.png",
+            "LargeIcon": "Sprites/AgileEvasion.png",
+            "SmallIcon": "Sprites/AgileEvasion.png",
             "SnippetDesc": "Evasion scales with Agility",
             "Tags": []
         },
@@ -33,8 +33,8 @@
         "Details": {
             "Description": "Your Agility is added to your Accuracy.",
             "DisplayName": "Agile Accuracy",
-            "LargeIcon": "AgileAccuracy.png",
-            "SmallIcon": "AgileAccuracy.png",
+            "LargeIcon": "Sprites/AgileAccuracy.png",
+            "SmallIcon": "Sprites/AgileAccuracy.png",
             "SnippetDesc": "Accuracy scales with Agility",
             "Tags": []
         },
@@ -61,8 +61,8 @@
         "Details": {
             "Description": "Your Agility is added to your Crit Chance.",
             "DisplayName": "Agile Crits",
-            "LargeIcon": "AgileCrits.png",
-            "SmallIcon": "AgileCrits.png",
+            "LargeIcon": "Sprites/AgileCrits.png",
+            "SmallIcon": "Sprites/AgileCrits.png",
             "SnippetDesc": "Crit Chance scales with Agility",
             "Tags": []
         },
@@ -74,6 +74,33 @@
                 "StatName": "CritChance",
                 "DepStatName": "Agility",
                 "Value": 1
+            }
+        },
+        "SubEffects": {
+            "ModStat": {
+                "StatModKey": "StatMod1",
+                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_ModStat.gd"
+            }
+        }
+    },
+    {
+        "DamageDatas": {},
+        "DamageMods": {},
+        "Details": {
+            "Description": "+10 Crit Chance when attacking from the target's Back.",
+            "DisplayName": "Backstab",
+            "LargeIcon": "Sprites/BackStab.png",
+            "SmallIcon": "Sprites/BackStab.png",
+            "SnippetDesc": "+10 CritChc from Back",
+            "Tags": []
+        },
+        "EffectKey": "BackStab_Page",
+        "StatMods": {
+            "StatMod1": {
+                "DisplayName": "BackStab",
+                "ModType": "Set",
+                "StatName": "CritChance:DirAtkBk:Add",
+                "Value": 10
             }
         },
         "SubEffects": {

@@ -7,7 +7,7 @@
         "DamageDatas": {
             "Damage1": {
                 "AtkPower": 20,
-                "AtkStat": "Strength",
+                "AtkStat": "PhyAttack",
                 "BaseDamage": 0,
                 "DamageEffect": "Blunt_DamageEffect",
                 "DamageType": "Blunt",
@@ -62,7 +62,7 @@
             ],
             "4": [
                 {
-                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_PayCost.gd",
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_PayCost.gd"
                 },
                 {
                     "DamageKey": "Damage1",
@@ -91,7 +91,7 @@
         "DamageDatas": {
             "Damage1": {
                 "AtkPower": 20,
-                "AtkStat": "Intelligence",
+                "AtkStat": "MagAttack",
                 "BaseDamage": 0,
                 "DamageEffect": "SmallFire_DamageEffect",
                 "DamageType": "Fire",
@@ -145,7 +145,7 @@
             ],
             "4": [
                 {
-                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_PayCost.gd",
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_PayCost.gd"
                 },
                 {
                     "DamageKey": "Damage1",

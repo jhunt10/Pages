@@ -17,11 +17,17 @@ const BasicStats:Array = [
 	Awareness, CritChance, CritMod, BlockChance, BlockMod,
 	BlocksLOS
 ]
+const Strength = "Strength"
+const Agility = "Agility"
+const Intelligence = "Intelligence"
+const Wisdom = "Wisdom"
 const Health = "BarStat:Health"
 const Mass = "Mass"
 const Speed = "Speed"
 const Push = "Push"
 const PPR = "PPR"
+const PhyAttack = "PhyAttack"
+const MagAttack = "MagAttack"
 const Armor = "Armor"
 const Ward = "Ward"
 const Awareness = "Awareness"
@@ -29,51 +35,62 @@ const Accuracy = "Accuracy"
 const Evasion = "Evasion"
 const Potency = "Potency"
 const Protection = "Protection"
+
+
 const CritChance = "CritChance"
 const CritMod = "CritMod"
+
 const BlockChance = "BlockChance"
 const BlockMod = "BlockMod"
-const EvasionPenaltyFlank = "EvasionPenF"
-const EvasionPenaltyBack = "EvasionPenB"
-const BlockPenaltyFlank = "BlockPenF"
-const BlockPenaltyBack = "BlockPenB"
+
+const OffHandMod = "OffHandMod"
+const TwoHandMod = "TwoHandMod"
+
 const BlocksLOS = "BlocksLOS"
 
 const stat_abbrs:Dictionary = {
-	"PhyAttack": "PHY",
-	"MagAttack": "MAG",
-	"Strength": "STR",
-	"Agility": "AGL",
-	"Intelligence": "INT",
-	"Wisdom": "WIS",
-	"Mass": "MAS",
-	"Speed": "SPD",
-	"Armor": "ARM",
-	"Ward": "WRD",
-	"Awareness": "AWR",
-	"Accuracy": "ACC",
-	"Evasion": "EVS",
-	"Potency": "POT",
-	"Protection": "PRO"
+	PhyAttack: "PHY",
+	MagAttack: "MAG",
+	Strength: "STR",
+	Agility: "AGL",
+	Intelligence: "INT",
+	Wisdom: "WIS",
+	Mass: "MAS",
+	Speed: "SPD",
+	Armor: "ARM",
+	Ward: "WRD",
+	Awareness: "AWR",
+	Accuracy: "ACC",
+	Evasion: "EVS",
+	Potency: "POT",
+	Protection: "PRO",
+	
+	CritChance: "CrtC",
+	CritMod: "CrtM",
+	BlockChance: "BlkC",
+	BlockMod: "BlkM"
 }
 
 const stat_icon_paths:Dictionary = {
 	"BarStat": "res://assets/Sprites/UI/SymbolIcons/BarStatSymbol.png",
-	"PhyAttack": "res://assets/Sprites/UI/SymbolIcons/PhyDamageSymbol.png",
-	"MagAttack": "res://assets/Sprites/UI/SymbolIcons/MagDamageSymbol.png",
-	"Strength": "res://assets/Sprites/UI/SymbolIcons/_S_Symbole.png",
-	"Agility": "res://assets/Sprites/UI/SymbolIcons/_A_Symbole.png",
-	"Intelligence": "res://assets/Sprites/UI/SymbolIcons/_I_Symbole.png",
-	"Wisdom": "res://assets/Sprites/UI/SymbolIcons/_W_Symbole.png",
-	"Mass": "res://assets/Sprites/UI/SymbolIcons/MassSymbol.png",
-	"Speed": "res://assets/Sprites/UI/SymbolIcons/SpeedSymbol.png",
-	"Armor": "res://assets/Sprites/UI/SymbolIcons/ArmorSymbol.png",
-	"Ward": "res://assets/Sprites/UI/SymbolIcons/WardSymbol.png",
-	"Awareness": "res://assets/Sprites/UI/SymbolIcons/AwarenessSymbol.png",
-	"Accuracy": "res://assets/Sprites/UI/SymbolIcons/AccuracySymbol.png",
-	"Evasion": "res://assets/Sprites/UI/SymbolIcons/EvasionSymbol.png",
-	"Potency": "res://assets/Sprites/UI/SymbolIcons/PotencySymbol.png",
-	"Protection": "res://assets/Sprites/UI/SymbolIcons/ProtectionSymbol.png"
+	PhyAttack: "res://assets/Sprites/UI/SymbolIcons/PhyDamageSymbol.png",
+	MagAttack: "res://assets/Sprites/UI/SymbolIcons/MagDamageSymbol.png",
+	Strength: "res://assets/Sprites/UI/SymbolIcons/_S_Symbole.png",
+	Agility: "res://assets/Sprites/UI/SymbolIcons/_A_Symbole.png",
+	Intelligence: "res://assets/Sprites/UI/SymbolIcons/_I_Symbole.png",
+	Wisdom: "res://assets/Sprites/UI/SymbolIcons/_W_Symbole.png",
+	Mass: "res://assets/Sprites/UI/SymbolIcons/MassSymbol.png",
+	Speed: "res://assets/Sprites/UI/SymbolIcons/SpeedSymbol.png",
+	Armor: "res://assets/Sprites/UI/SymbolIcons/ArmorSymbol.png",
+	Ward: "res://assets/Sprites/UI/SymbolIcons/WardSymbol.png",
+	Awareness: "res://assets/Sprites/UI/SymbolIcons/AwarenessSymbol.png",
+	Accuracy: "res://assets/Sprites/UI/SymbolIcons/AccuracySymbol.png",
+	Evasion: "res://assets/Sprites/UI/SymbolIcons/EvasionSymbol.png",
+	Potency: "res://assets/Sprites/UI/SymbolIcons/PotencySymbol.png",
+	Protection: "res://assets/Sprites/UI/SymbolIcons/ProtectionSymbol.png",
+	
+	CritChance: "res://assets/Sprites/UI/SymbolIcons/CriticalSymbol.png",
+	CritMod: "res://assets/Sprites/UI/SymbolIcons/CriticalSymbol.png"
 }
 
 static func get_stat_abbr(stat_name:String)->String:
@@ -84,3 +101,74 @@ static func get_stat_icon(stat_name:String)->Texture2D:
 	if path:
 		return SpriteCache.get_sprite(path)
 	return null
+
+
+
+## Added to stat_name ("StatName:SUFIX") to mod value when defending against attack from Front
+const DirectionalDefenseSufix_Front = "DirDefFr"
+## Added to stat_name ("StatName:SUFIX") to mod value when defending against attack from Flank
+const DirectionalDefenseSufix_Flank = "DirDefFl"
+## Added to stat_name ("StatName:SUFIX") to mod value when defending against attack from Back
+const DirectionalDefenseSufix_Back = "DirDefBk"
+## Added to stat_name ("StatName:SUFIX") to mod value when attacking from Front
+const DirectionalAttackSufix_Front = "DirAtkFr"
+## Added to stat_name ("StatName:SUFIX") to mod value when attacking from Flank
+const DirectionalAttackSufix_Flank = "DirAtkFl"
+## Added to stat_name ("StatName:SUFIX") to mod value when attacking from Back
+const DirectionalAttackSufix_Back = "DirAtkBk"
+
+static func get_defense_stat_for_attack_direction(actor:BaseActor, attack_dir:AttackEvent.AttackDirection, stat_name:String, default:int=0)->float:
+	var sufix = ""
+	if attack_dir == AttackEvent.AttackDirection.Front:
+		sufix = StatHelper.DirectionalDefenseSufix_Front
+	elif attack_dir == AttackEvent.AttackDirection.Flank:
+		sufix = StatHelper.DirectionalDefenseSufix_Flank
+	elif attack_dir == AttackEvent.AttackDirection.Back:
+		sufix = StatHelper.DirectionalDefenseSufix_Back
+	
+	var directional_mod = 1.0
+	var add_val = 0.0
+	if sufix != "":
+		var full_stat_name = stat_name + ":" + sufix
+		directional_mod = actor.stats.get_stat(full_stat_name, get_default_directional_mod(full_stat_name))
+		add_val = actor.stats.get_stat(full_stat_name + ":Add")
+	var raw_val = actor.stats.get_stat(stat_name, default)
+	return (raw_val * directional_mod) + add_val
+
+## Returns stat for when actor is attacking from the target's [Front / Flank / Back]
+static func get_attack_stat_for_attack_direction(actor:BaseActor, attack_dir:AttackEvent.AttackDirection, stat_name:String, default:int=0)->float:
+	var sufix = ""
+	if attack_dir == AttackEvent.AttackDirection.Front:
+		sufix = StatHelper.DirectionalAttackSufix_Front
+	elif attack_dir == AttackEvent.AttackDirection.Flank:
+		sufix = StatHelper.DirectionalAttackSufix_Flank
+	elif attack_dir == AttackEvent.AttackDirection.Back:
+		sufix = StatHelper.DirectionalAttackSufix_Back
+	
+	var directional_mod = 1.0
+	var add_val = 0.0
+	if sufix != "":
+		var full_stat_name = stat_name + ":" + sufix
+		directional_mod = actor.stats.get_stat(full_stat_name, get_default_directional_mod(full_stat_name))
+		add_val = actor.stats.get_stat(full_stat_name + ":Add")
+	var raw_val = actor.stats.get_stat(stat_name, default) 
+	return (raw_val * directional_mod) + add_val
+
+static func get_default_directional_mod(full_stat_name:String)->float:
+	var tokens = full_stat_name.split(":")
+	if tokens.size() != 2:
+		printerr("StatHelper.get_default_directional_mod: Invalid direction stat_name: %s" % [full_stat_name])
+		return 1
+	var stat_name = tokens[0]
+	var sufix = tokens[1]
+	if sufix == DirectionalDefenseSufix_Flank:
+		if stat_name == Evasion:
+			return 0.5
+		elif stat_name == BlockChance:
+			return 0.5
+	elif sufix == DirectionalDefenseSufix_Back:
+		if stat_name == Evasion:
+			return 0
+		elif stat_name == BlockChance:
+			return 0
+	return 1

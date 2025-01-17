@@ -9,12 +9,16 @@ extends Control
 @export var ward_label:Label
 @export var description_box:RichTextLabel
 
+@export var stat_mods_container:Container
+@export var premade_stat_mod_label:StatModLabelContainer
+
 var _item:BaseEquipmentItem
 var _actor:BaseActor
 
 func set_armor(actor:BaseActor, armor:BaseArmorEquipment):
 	_actor = actor
 	_item = armor
+	premade_stat_mod_label.hide()
 	slot_label.text = armor.get_equipment_slot_type()
 	if armor.get_armor_value() > 0:
 		phy_icon.show()
@@ -39,6 +43,12 @@ func set_armor(actor:BaseActor, armor:BaseArmorEquipment):
 	else:
 		parent_card_control.equip_button_background.hide()
 	
+	var stat_mods = armor.get_load_val("StatMods", {})
+	for mod_data in stat_mods.values():
+		var new_mod:StatModLabelContainer = premade_stat_mod_label.duplicate()
+		new_mod.set_mod_data(mod_data)
+		stat_mods_container.add_child(new_mod)
+		new_mod.show()
 
 func on_eqiup_button_pressed():
 	if _actor.equipment.has_item(_item.Id):

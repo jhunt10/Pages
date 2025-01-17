@@ -105,6 +105,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+expand_mode = 1
 
 [node name="FitScaleLabel" parent="OffsetControl/NinePatchRect/VBoxContainer/HBoxContainer" instance=ExtResource("4_34k8o")]
 layout_mode = 2
@@ -139,7 +140,6 @@ custom_minimum_size = Vector2(2, 1)
 layout_mode = 2
 
 [node name="WeaponDetailsControl" type="Control" parent="OffsetControl/NinePatchRect/VBoxContainer" node_paths=PackedStringArray("parent_card_control", "weapon_class_label", "phy_damage_icon", "mag_damage_icon", "attack_power_label", "damage_type_label", "description_box", "range_display")]
-visible = false
 layout_mode = 2
 size_flags_vertical = 3
 script = ExtResource("7_sv4xn")
@@ -228,17 +228,18 @@ size_flags_horizontal = 3
 theme = ExtResource("4_xmy3g")
 text = "Item Description hk hbkhjhl jhlkjl ljlkj"
 
-[node name="ActionPageDetailsControl" type="Control" parent="OffsetControl/NinePatchRect/VBoxContainer" node_paths=PackedStringArray("parent_card_control", "description_box", "target_type_label", "cost_container", "range_display", "damage_label")]
+[node name="ActionPageDetailsControl" type="Control" parent="OffsetControl/NinePatchRect/VBoxContainer" node_paths=PackedStringArray("parent_card_control", "description_box", "target_type_label", "cost_container", "range_display", "damage_label", "damage_container")]
 visible = false
 layout_mode = 2
 size_flags_vertical = 3
 script = ExtResource("12_fd6vk")
 parent_card_control = NodePath("../../../..")
 description_box = NodePath("VBoxContainer/HBoxContainer/DescriptionBox")
-target_type_label = NodePath("VBoxContainer/HBoxContainer2/VBoxContainer/HBoxContainer/TargetTypeLabel")
-cost_container = NodePath("VBoxContainer/HBoxContainer2/VBoxContainer/HBoxContainer/AmmoContainer")
+target_type_label = NodePath("VBoxContainer/HBoxContainer2/AmmoDamageContainer/HBoxContainer/TargetTypeLabel")
+cost_container = NodePath("VBoxContainer/HBoxContainer2/AmmoDamageContainer/HBoxContainer/AmmoContainer")
 range_display = NodePath("VBoxContainer/HBoxContainer2/MiniRangeDisplay")
-damage_label = NodePath("VBoxContainer/HBoxContainer2/VBoxContainer/DamageContainer")
+damage_label = NodePath("VBoxContainer/HBoxContainer2/AmmoDamageContainer/DamageContainer")
+damage_container = NodePath("VBoxContainer/HBoxContainer2/AmmoDamageContainer")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsControl"]
 layout_mode = 1
@@ -252,15 +253,15 @@ grow_vertical = 2
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsControl/VBoxContainer/HBoxContainer2"]
+[node name="AmmoDamageContainer" type="VBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsControl/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsControl/VBoxContainer/HBoxContainer2/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsControl/VBoxContainer/HBoxContainer2/AmmoDamageContainer"]
 layout_mode = 2
 
-[node name="AmmoContainer" type="HBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsControl/VBoxContainer/HBoxContainer2/VBoxContainer/HBoxContainer" node_paths=PackedStringArray("count_val_label", "cost_val_label", "clip_val_label", "ammo_icon_rect")]
+[node name="AmmoContainer" type="HBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsControl/VBoxContainer/HBoxContainer2/AmmoDamageContainer/HBoxContainer" node_paths=PackedStringArray("count_val_label", "cost_val_label", "clip_val_label", "ammo_icon_rect")]
 layout_mode = 2
 script = ExtResource("13_an536")
 count_val_label = NodePath("CostLabel/CountLabel")
@@ -272,7 +273,7 @@ phy_ammo_icon = ExtResource("15_pvoju")
 mag_ammo_icon = ExtResource("16_i15u4")
 abn_ammo_icon = ExtResource("17_n5nnh")
 
-[node name="CostTitle" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsControl/VBoxContainer/HBoxContainer2/VBoxContainer/HBoxContainer/AmmoContainer"]
+[node name="CostTitle" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsControl/VBoxContainer/HBoxContainer2/AmmoDamageContainer/HBoxContainer/AmmoContainer"]
 visible = false
 layout_mode = 2
 size_flags_vertical = 8
@@ -282,51 +283,51 @@ text = "Ammo:"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="CostLabel" type="HBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsControl/VBoxContainer/HBoxContainer2/VBoxContainer/HBoxContainer/AmmoContainer"]
+[node name="CostLabel" type="HBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsControl/VBoxContainer/HBoxContainer2/AmmoDamageContainer/HBoxContainer/AmmoContainer"]
 layout_mode = 2
 theme_override_constants/separation = 1
 
-[node name="AmmoIcon" type="TextureRect" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsControl/VBoxContainer/HBoxContainer2/VBoxContainer/HBoxContainer/AmmoContainer/CostLabel"]
+[node name="AmmoIcon" type="TextureRect" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsControl/VBoxContainer/HBoxContainer2/AmmoDamageContainer/HBoxContainer/AmmoContainer/CostLabel"]
 layout_mode = 2
 texture = ExtResource("15_d0wh1")
 
-[node name="CountLabel" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsControl/VBoxContainer/HBoxContainer2/VBoxContainer/HBoxContainer/AmmoContainer/CostLabel"]
+[node name="CountLabel" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsControl/VBoxContainer/HBoxContainer2/AmmoDamageContainer/HBoxContainer/AmmoContainer/CostLabel"]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("4_xmy3g")
 text = "9"
 
-[node name="Seperator2" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsControl/VBoxContainer/HBoxContainer2/VBoxContainer/HBoxContainer/AmmoContainer/CostLabel"]
+[node name="Seperator2" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsControl/VBoxContainer/HBoxContainer2/AmmoDamageContainer/HBoxContainer/AmmoContainer/CostLabel"]
 self_modulate = Color(0.31, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("4_xmy3g")
 text = " ("
 
-[node name="CostLabel" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsControl/VBoxContainer/HBoxContainer2/VBoxContainer/HBoxContainer/AmmoContainer/CostLabel"]
+[node name="CostLabel" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsControl/VBoxContainer/HBoxContainer2/AmmoDamageContainer/HBoxContainer/AmmoContainer/CostLabel"]
 self_modulate = Color(0.31, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("4_xmy3g")
 text = "4"
 
-[node name="Seperator3" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsControl/VBoxContainer/HBoxContainer2/VBoxContainer/HBoxContainer/AmmoContainer/CostLabel"]
+[node name="Seperator3" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsControl/VBoxContainer/HBoxContainer2/AmmoDamageContainer/HBoxContainer/AmmoContainer/CostLabel"]
 self_modulate = Color(0.31, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("4_xmy3g")
 text = ":"
 
-[node name="ClipLabel" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsControl/VBoxContainer/HBoxContainer2/VBoxContainer/HBoxContainer/AmmoContainer/CostLabel"]
+[node name="ClipLabel" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsControl/VBoxContainer/HBoxContainer2/AmmoDamageContainer/HBoxContainer/AmmoContainer/CostLabel"]
 self_modulate = Color(0.31, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("4_xmy3g")
 text = "36"
 
-[node name="Seperator4" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsControl/VBoxContainer/HBoxContainer2/VBoxContainer/HBoxContainer/AmmoContainer/CostLabel"]
+[node name="Seperator4" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsControl/VBoxContainer/HBoxContainer2/AmmoDamageContainer/HBoxContainer/AmmoContainer/CostLabel"]
 self_modulate = Color(0.31, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("4_xmy3g")
 text = ")"
 
-[node name="TargetTypeLabel" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsControl/VBoxContainer/HBoxContainer2/VBoxContainer/HBoxContainer"]
+[node name="TargetTypeLabel" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsControl/VBoxContainer/HBoxContainer2/AmmoDamageContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 8
@@ -336,7 +337,7 @@ text = "Spot"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="DamageContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsControl/VBoxContainer/HBoxContainer2/VBoxContainer" instance=ExtResource("15_idu7k")]
+[node name="DamageContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsControl/VBoxContainer/HBoxContainer2/AmmoDamageContainer" instance=ExtResource("15_idu7k")]
 layout_mode = 2
 defense_type = "Armor"
 damage_type = 7
@@ -358,6 +359,7 @@ theme = ExtResource("4_xmy3g")
 text = "Item Description hk hbkhjhl jhlkjl ljlkj"
 
 [node name="EffectPageDetailsControl" type="Control" parent="OffsetControl/NinePatchRect/VBoxContainer" node_paths=PackedStringArray("parent_card_control", "description_box", "stat_mods_container", "premade_stat_mod_label")]
+visible = false
 layout_mode = 2
 size_flags_vertical = 3
 script = ExtResource("16_tp5cp")
@@ -463,18 +465,20 @@ size_flags_vertical = 3
 theme = ExtResource("4_xmy3g")
 text = "Item Description hk hbkhjhl jhlkjl ljlkj"
 
-[node name="ArmorDetailsControl" type="Control" parent="OffsetControl/NinePatchRect/VBoxContainer" node_paths=PackedStringArray("parent_card_control", "slot_label", "phy_icon", "mag_icon", "armor_label", "ward_label", "description_box")]
+[node name="ArmorDetailsControl" type="Control" parent="OffsetControl/NinePatchRect/VBoxContainer" node_paths=PackedStringArray("parent_card_control", "slot_label", "phy_icon", "mag_icon", "armor_label", "ward_label", "description_box", "stat_mods_container", "premade_stat_mod_label")]
 visible = false
 layout_mode = 2
 size_flags_vertical = 3
 script = ExtResource("12_rxuc0")
 parent_card_control = NodePath("../../../..")
 slot_label = NodePath("VBoxContainer/HBoxContainer3/TypeLabel")
-phy_icon = NodePath("VBoxContainer/HBoxContainer3/PhyIcon")
-mag_icon = NodePath("VBoxContainer/HBoxContainer3/MagIcon")
-armor_label = NodePath("VBoxContainer/HBoxContainer3/ArmorLabel")
-ward_label = NodePath("VBoxContainer/HBoxContainer3/WardLabel")
+phy_icon = NodePath("VBoxContainer/FlowContainer/HBoxContainer/PhyIcon")
+mag_icon = NodePath("VBoxContainer/FlowContainer/HBoxContainer/MagIcon")
+armor_label = NodePath("VBoxContainer/FlowContainer/HBoxContainer/ArmorLabel")
+ward_label = NodePath("VBoxContainer/FlowContainer/HBoxContainer/WardLabel")
 description_box = NodePath("VBoxContainer/HBoxContainer2/DescriptionBox")
+stat_mods_container = NodePath("VBoxContainer/FlowContainer")
+premade_stat_mod_label = NodePath("VBoxContainer/FlowContainer/StatModLabel")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/ArmorDetailsControl"]
 layout_mode = 1
@@ -485,39 +489,129 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="HBoxContainer3" type="HBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/ArmorDetailsControl/VBoxContainer"]
+visible = false
 layout_mode = 2
 
 [node name="TypeLabel" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/ArmorDetailsControl/VBoxContainer/HBoxContainer3"]
+visible = false
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("4_xmy3g")
 text = "Slot"
 
 [node name="Dash" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/ArmorDetailsControl/VBoxContainer/HBoxContainer3"]
+visible = false
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("4_xmy3g")
 text = "-"
 
-[node name="PhyIcon" type="TextureRect" parent="OffsetControl/NinePatchRect/VBoxContainer/ArmorDetailsControl/VBoxContainer/HBoxContainer3"]
+[node name="FlowContainer" type="FlowContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/ArmorDetailsControl/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 6
+theme_override_constants/v_separation = 0
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/ArmorDetailsControl/VBoxContainer/FlowContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="PhyIcon" type="TextureRect" parent="OffsetControl/NinePatchRect/VBoxContainer/ArmorDetailsControl/VBoxContainer/FlowContainer/HBoxContainer"]
 layout_mode = 2
 texture = ExtResource("13_t6qv2")
 
-[node name="ArmorLabel" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/ArmorDetailsControl/VBoxContainer/HBoxContainer3"]
+[node name="ArmorLabel" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/ArmorDetailsControl/VBoxContainer/FlowContainer/HBoxContainer"]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("4_xmy3g")
 text = "000"
 
-[node name="MagIcon" type="TextureRect" parent="OffsetControl/NinePatchRect/VBoxContainer/ArmorDetailsControl/VBoxContainer/HBoxContainer3"]
+[node name="MagIcon" type="TextureRect" parent="OffsetControl/NinePatchRect/VBoxContainer/ArmorDetailsControl/VBoxContainer/FlowContainer/HBoxContainer"]
 layout_mode = 2
 texture = ExtResource("14_4xeqv")
 
-[node name="WardLabel" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/ArmorDetailsControl/VBoxContainer/HBoxContainer3"]
+[node name="WardLabel" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/ArmorDetailsControl/VBoxContainer/FlowContainer/HBoxContainer"]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("4_xmy3g")
 text = "000"
+
+[node name="VSeparator" type="VSeparator" parent="OffsetControl/NinePatchRect/VBoxContainer/ArmorDetailsControl/VBoxContainer/FlowContainer"]
+visible = false
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(8, 0)
+layout_mode = 2
+
+[node name="StatModLabel" type="HBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/ArmorDetailsControl/VBoxContainer/FlowContainer" node_paths=PackedStringArray("modded_stat_icon", "modded_stat_name_label", "mod_value_label", "dep_stat_label", "dep_stat_icon", "plus_label", "times_label")]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 0
+script = ExtResource("16_hvsyk")
+modded_stat_icon = NodePath("ModdedStatIcon")
+modded_stat_name_label = NodePath("ModdedStatNameLabel")
+mod_value_label = NodePath("ModValueLabel")
+dep_stat_label = NodePath("HBoxContainer/DepStatNameLabel")
+dep_stat_icon = NodePath("HBoxContainer/DepStatIcon")
+plus_label = NodePath("SignLabel")
+times_label = NodePath("SignLabel2")
+
+[node name="ModdedStatIcon" type="TextureRect" parent="OffsetControl/NinePatchRect/VBoxContainer/ArmorDetailsControl/VBoxContainer/FlowContainer/StatModLabel"]
+layout_mode = 2
+texture = ExtResource("17_cevb5")
+
+[node name="ModdedStatNameLabel" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/ArmorDetailsControl/VBoxContainer/FlowContainer/StatModLabel"]
+layout_mode = 2
+size_flags_vertical = 8
+theme = ExtResource("18_wsrou")
+theme_override_colors/font_color = Color(0.470588, 0, 0, 1)
+text = "STR"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="SignLabel" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/ArmorDetailsControl/VBoxContainer/FlowContainer/StatModLabel"]
+layout_mode = 2
+size_flags_vertical = 8
+theme = ExtResource("18_wsrou")
+theme_override_colors/font_color = Color(0.470588, 0, 0, 1)
+text = "+"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/ArmorDetailsControl/VBoxContainer/FlowContainer/StatModLabel"]
+layout_mode = 2
+theme_override_constants/separation = -2
+
+[node name="DepStatIcon" type="TextureRect" parent="OffsetControl/NinePatchRect/VBoxContainer/ArmorDetailsControl/VBoxContainer/FlowContainer/StatModLabel/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("20_lxkdx")
+stretch_mode = 3
+
+[node name="DepStatNameLabel" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/ArmorDetailsControl/VBoxContainer/FlowContainer/StatModLabel/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+theme = ExtResource("18_wsrou")
+theme_override_colors/font_color = Color(0.470588, 0, 0, 1)
+text = "TR"
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="SignLabel2" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/ArmorDetailsControl/VBoxContainer/FlowContainer/StatModLabel"]
+layout_mode = 2
+size_flags_vertical = 8
+theme = ExtResource("18_wsrou")
+theme_override_colors/font_color = Color(0.470588, 0, 0, 1)
+text = "x"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="ModValueLabel" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/ArmorDetailsControl/VBoxContainer/FlowContainer/StatModLabel"]
+layout_mode = 2
+size_flags_vertical = 8
+theme = ExtResource("18_wsrou")
+theme_override_colors/font_color = Color(0.470588, 0, 0, 1)
+text = "1.2"
+horizontal_alignment = 2
+vertical_alignment = 1
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/ArmorDetailsControl/VBoxContainer"]
 layout_mode = 2
@@ -655,7 +749,6 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 text = "Equipe"
-_size_dirty = true
 center_x = true
 
 [node name="EquipButton" type="Button" parent="OffsetControl/NinePatchRect/VBoxContainer/EquipButtonBackground"]

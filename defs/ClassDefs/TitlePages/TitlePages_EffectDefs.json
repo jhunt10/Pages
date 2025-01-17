@@ -34,7 +34,7 @@
                 "ModType": "AddStat",
                 "StatName": "Mass",
                 "DepStatName": "Strength",
-                "Value": 2
+                "Value": 0.1
             }
         },
         "AddTags": ["Soldier"]
@@ -67,7 +67,14 @@
                 "ModType": "AddStat",
                 "StatName": "Speed",
                 "DepStatName": "Agility",
-                "Value": 1
+                "Value": 0.1
+            },
+            "CritModScale": {
+                "DisplayName": "Rogue",
+                "ModType": "AddStat",
+                "StatName": "CritMod",
+                "DepStatName": "Agility",
+                "Value": 0.01
             }
         },
         "AddTags": ["Rogue"]

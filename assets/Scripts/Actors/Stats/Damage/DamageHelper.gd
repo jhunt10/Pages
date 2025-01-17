@@ -188,47 +188,6 @@ static func get_relative_attack_direction(attacker_pos:MapPos, defender_pos:MapP
 	else:
 		return AttackEvent.AttackDirection.Flank
 
-static func get_defense_stat_for_attack_direction(actor:BaseActor, attack_dir:AttackEvent.AttackDirection, stat_name:String, default:int=0)->float:
-	var prefix = ""
-	if attack_dir == AttackEvent.AttackDirection.Front:
-		prefix = "DefFront:"
-	elif attack_dir == AttackEvent.AttackDirection.Flank:
-		prefix = "DefFlank:"
-	elif attack_dir == AttackEvent.AttackDirection.Back:
-		prefix = "DefBack:"
-	if prefix != "":
-		var dir_val = actor.stats.get_stat(prefix + stat_name, -1)
-		if dir_val >= 0:
-			return dir_val
-	var raw_val = actor.stats.get_stat(stat_name)
-	if attack_dir == AttackEvent.AttackDirection.Front:
-		return raw_val
-	elif attack_dir == AttackEvent.AttackDirection.Flank:
-		return raw_val / 2.0
-	else:
-		return default
-
-## Returns stat for when actor is attacking from the target's [Front / Flank / Back]
-static func get_attack_stat_for_attack_direction(actor:BaseActor, attack_dir:AttackEvent.AttackDirection, stat_name:String, default:int=0)->float:
-	var prefix = ""
-	if attack_dir == AttackEvent.AttackDirection.Front:
-		prefix = "AtkFront:"
-	elif attack_dir == AttackEvent.AttackDirection.Flank:
-		prefix = "AtkFlank:"
-	elif attack_dir == AttackEvent.AttackDirection.Flank:
-		prefix = "AtkBack:"
-	if prefix != "":
-		var dir_val = actor.stats.get_stat(prefix + stat_name, -1)
-		if dir_val >= 0:
-			return dir_val
-	return actor.stats.get_stat(stat_name, default)
-
-	
-		
-	#if attack_dir == AttackEvent.AttackDirection.Front:
-		#var specific_stat = 
-	pass
-
 const ARMOR_STRETCH:float = 30
 const ARMOR_SCALE:float = 80
 static func calc_armor_reduction(armor)->float:

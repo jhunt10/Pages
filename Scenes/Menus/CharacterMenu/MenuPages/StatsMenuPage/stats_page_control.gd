@@ -67,10 +67,10 @@ func set_actor(actor:BaseActor):
 	_set_stats()
 #
 func _set_stats():
-	strength_label.text = str(_actor.stats.get_stat("Strength", 0))
-	agility_label.text = str(_actor.stats.get_stat("Agility", 0))
-	intelligence_label.text = str(_actor.stats.get_stat("Intelligence", 0))
-	wisdom_label.text = str(_actor.stats.get_stat("Wisdom", 0))
+	strength_label.text = str(_actor.stats.get_stat(StatHelper.Strength, 0))
+	agility_label.text = str(_actor.stats.get_stat(StatHelper.Agility, 0))
+	intelligence_label.text = str(_actor.stats.get_stat(StatHelper.Intelligence, 0))
+	wisdom_label.text = str(_actor.stats.get_stat(StatHelper.Wisdom, 0))
 	
 	bar_stats_container.set_actor(_actor)
 	
@@ -83,8 +83,8 @@ func _set_stats():
 	
 	var target_params = _actor.get_default_attack_target_params()
 	
-	var mag_attack = _actor.stats.get_base_magic_attack()
-	var phy_attack = _actor.stats.get_base_phyical_attack()
+	var mag_attack = _actor.stats.get_stat(StatHelper.MagAttack)
+	var phy_attack = _actor.stats.get_stat(StatHelper.PhyAttack)
 	range_display.load_area_matrix(target_params.target_area)
 	mag_atk_label.text = str(mag_attack)
 	phys_atk_label.text = str(phy_attack)
@@ -111,33 +111,33 @@ func _set_stats():
 		#main_hand_max_damage_label.text = "--"
 		#main_hand_damage_type.text = ""
 	
-	crit_mod_label.text = str(_actor.stats.get_stat("CritMod"))
-	crit_chance_label.text = str(_actor.stats.get_stat("CritChance")) + "%"
+	crit_mod_label.text = str(_actor.stats.get_stat(StatHelper.CritMod))
+	crit_chance_label.text = str(_actor.stats.get_stat(StatHelper.CritChance)) + "%"
 	
 	armor_label.value_label.text = str(_actor.equipment.get_total_equipment_armor())
 	ward_label.value_label.text = str(_actor.equipment.get_total_equipment_ward())
 	evasion_stat_label.set_stat_values(_actor)
 	protection_stat_label.set_stat_values(_actor)
 	awareness_stat_label.set_stat_values(_actor)
-	awareness_display.awareness = _actor.stats.get_stat("Awareness")
-	var block_chc = _actor.stats.get_stat("BlockChance")
+	awareness_display.awareness = _actor.stats.get_stat(StatHelper.Awareness)
+	var block_chc = _actor.stats.get_stat(StatHelper.BlockChance)
 	if block_chc > 0:
 		block_chance_label.text = str(block_chc) +"%"
-		block_mod_label.text = str(_actor.stats.get_stat("BlockMod", 1))
+		block_mod_label.text = str(_actor.stats.get_stat(StatHelper.BlockMod, 1))
 	else:
 		block_chance_label.text = "--%"
 		block_mod_label.text = "1.0"
-	var evd_front_val = DamageHelper.get_defense_stat_for_attack_direction(_actor, AttackEvent.AttackDirection.Front, "Evasion")
+	var evd_front_val = StatHelper.get_defense_stat_for_attack_direction(_actor, AttackEvent.AttackDirection.Front, StatHelper.Evasion)
 	evade_front_chance_label.text = str(evd_front_val)
-	var evd_flank_val = DamageHelper.get_defense_stat_for_attack_direction(_actor, AttackEvent.AttackDirection.Flank, "Evasion")
+	var evd_flank_val = StatHelper.get_defense_stat_for_attack_direction(_actor, AttackEvent.AttackDirection.Flank, StatHelper.Evasion)
 	evade_flank_chance_label.text = str(evd_flank_val)
-	var evd_back_val = DamageHelper.get_defense_stat_for_attack_direction(_actor, AttackEvent.AttackDirection.Back, "Evasion")
+	var evd_back_val = StatHelper.get_defense_stat_for_attack_direction(_actor, AttackEvent.AttackDirection.Back, StatHelper.Evasion)
 	evade_back_chance_label.text = str(evd_back_val)
 	
-	var blk_front_val = DamageHelper.get_defense_stat_for_attack_direction(_actor, AttackEvent.AttackDirection.Front, "BlockChance")
+	var blk_front_val = StatHelper.get_defense_stat_for_attack_direction(_actor, AttackEvent.AttackDirection.Front, StatHelper.BlockChance)
 	block_front_chance_label.text = str(blk_front_val)
-	var blk_flank_val = DamageHelper.get_defense_stat_for_attack_direction(_actor, AttackEvent.AttackDirection.Flank, "BlockChance")
+	var blk_flank_val = StatHelper.get_defense_stat_for_attack_direction(_actor, AttackEvent.AttackDirection.Flank, StatHelper.BlockChance)
 	block_flank_chance_label.text = str(blk_flank_val)
-	var val = DamageHelper.get_defense_stat_for_attack_direction(_actor, AttackEvent.AttackDirection.Back, "BlockChance")
+	var val = StatHelper.get_defense_stat_for_attack_direction(_actor, AttackEvent.AttackDirection.Back, StatHelper.BlockChance)
 	block_back_chance_label.text = str(val)
 	

@@ -42,7 +42,7 @@ func recache_stats():
 	if LOGGING: printerr("Recaching Stats")
 	_calc_cache_stats()
 
-func get_stat(stat_name:String, default:int=0):
+func get_stat(stat_name:String, default:float=0):
 	var full_stat_name = stat_name
 	if _stats_dirty:
 		_calc_cache_stats()
@@ -52,30 +52,11 @@ func get_base_stat(stat_name:String, default:int=0):
 	return _base_stats.get(stat_name, default)
 
 
-
-
 func base_damge_from_stat(stat_name):
 	if !stat_name:
 		return 1
 	var base_stat_val = get_stat(stat_name)
-	#var weapon:BaseWeaponEquipment = _actor.equipment.get_item_in_slot(BaseEquipmentItem.EquipmentSlots.Weapon)
-	#if weapon and weapon.get_damage_data().get("AtkStat", '') == stat_name:
-		#base_stat_val += weapon.get_damage_data().get("BaseDamage", 0)
 	return base_stat_val
-
-func get_base_phyical_attack():
-	var strength = get_stat("Strength")
-	#var weapon:BaseWeaponEquipment = _actor.equipment.get_item_in_slot(BaseEquipmentItem.EquipmentSlots.Weapon)
-	#if weapon and weapon.get_damage_data().get("AtkStat", '') == "Strength":
-		#strength += weapon.get_damage_data().get("BaseDamage", 0)
-	return strength
-	
-func get_base_magic_attack():
-	var intelligence = get_stat("Intelligence")
-	#var weapon:BaseWeaponEquipment = _actor.equipment.get_item_in_slot(BaseEquipmentItem.EquipmentSlots.Weapon)
-	#if weapon and weapon.get_damage_data().get("AtkStat", '') == "Intelligence":
-		#intelligence += weapon.get_damage_data().get("BaseDamage", 0)
-	return intelligence
 
 func get_mod_names_for_stat(stat_name:String)->Array:
 	if _cached_mods_names.keys().has(stat_name):

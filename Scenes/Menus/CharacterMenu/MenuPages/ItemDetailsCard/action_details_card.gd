@@ -7,6 +7,7 @@ extends Control
 @export var cost_container:PageDetailsCard_CostContaienr
 @export var range_display:MiniRangeDisplay
 @export var damage_label:DamageLabelContainer
+@export var damage_container:Container
 
 var _item:BasePageItem
 var _actor:BaseActor
@@ -45,11 +46,25 @@ func set_action(actor:BaseActor, page:BasePageItem):
 		cost_container.hide()
 	
 	if action.has_preview_damage():
-		var damage_data = action.get_preview_damage_data(actor)
+		
 		if actor.pages.has_item(page.Id):
-			damage_label.set_damage_data(damage_data, actor)
+			var damage_datas = action.get_preview_damage_datas(actor)
+			var dam_label = damage_label
+			for dam_data in damage_datas.values():
+				if dam_label == null:
+					dam_label = damage_label.duplicate()
+					damage_container.add_child(dam_label)
+				dam_label.set_damage_data(dam_data, actor)
+				dam_label = null
 		else:
-			damage_label.set_damage_data(damage_data)
+			var damage_datas = action.get_preview_damage_datas()
+			var dam_label = damage_label
+			for dam_data in damage_datas.values():
+				if dam_label == null:
+					dam_label = damage_label.duplicate()
+					damage_container.add_child(dam_label)
+				dam_label.set_damage_data(dam_data)
+				dam_label = null
 	else:
 		damage_label.hide()
 	

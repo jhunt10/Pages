@@ -30,11 +30,11 @@
         "DamageDatas": {},
         "DamageMods": {},
         "Details": {
-            "Description": "Increase Mass by 25% and Decrease Speed by 25%",
+            "Description": "Increase Mass by 10% and Decrease Speed by 10%",
             "DisplayName": "Heavy Foot",
             "LargeIcon": "Sprites/HeavyFoot.png",
             "SmallIcon": "Sprites/HeavyFoot.png",
-            "SnippetDesc": "+25% Mass -25% Speed",
+            "SnippetDesc": "+10% Mass -10% Speed",
             "Tags": []
         },
         "EffectKey": "HeavyFoot_Page",
@@ -43,13 +43,13 @@
                 "DisplayName": "Heavy Foot",
                 "ModType": "Scale",
                 "StatName": "Mass",
-                "Value": 1.25
+                "Value": 1.10
             },
             "StatMod2": {
                 "DisplayName": "",
                 "ModType": "Scale",
                 "StatName": "Speed",
-                "Value": 0.75
+                "Value": 0.90
             }
         },
         "SubEffects": {

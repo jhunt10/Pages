@@ -142,20 +142,19 @@ func has_preview_damage()->bool:
 	var preview_key = preview_data.get("PreviewDamageKey", null)
 	return preview_key and preview_key != ''
 
-func get_preview_damage_data(actor:BaseActor)->Dictionary:
+func get_preview_damage_datas(actor:BaseActor=null)->Dictionary:
 	var preview_data:Dictionary = get_load_val("Preview", {})
 	var preview_key = preview_data.get("PreviewDamageKey", null)
 	if not preview_key or preview_key == '':
 		printerr("No preview key")
 		return {}
-	if preview_key == "Weapon":
-		var weapon = actor.equipment.get_primary_weapon()
-		if !weapon:
-			printerr("No Weapon")
-			return {}
-		return (weapon as BaseWeaponEquipment).get_damage_data()
+	if preview_key == "Weapon" and actor:
+		return actor.get_weapon_damage_datas()
 	var damage_datas = get_load_val("DamageDatas", {})
-	return damage_datas.get(preview_key, {})
+	var preview_damage = damage_datas.get(preview_key)
+	if preview_damage: 
+		return {"Preview": preview_damage}
+	return {}
 
 
 func has_ammo():

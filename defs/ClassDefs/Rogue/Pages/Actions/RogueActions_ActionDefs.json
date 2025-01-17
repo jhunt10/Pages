@@ -68,7 +68,7 @@
         "DamageDatas": {
             "Damage1": {
                 "AtkPower": 100,
-                "AtkStat": "Strength",
+                "AtkStat": "PhyAttack",
                 "BaseDamage": 0,
                 "DamageEffect": "Pierce_DamageEffect",
                 "DamageType": "Pierce",
@@ -78,7 +78,7 @@
         },
         "ItemDetails":
         {
-            "Rarity": "Uncommon",
+            "Rarity": "Common",
             "Value": 50
         },
         "Details": {
@@ -104,7 +104,8 @@
             }
         },
         "Preview": {
-            "PreviewTargetKey": "TargetParam1"
+            "PreviewTargetKey": "TargetParam1",
+            "PreviewDamageKey": "Damage1"
         },
         "SubActions": {
             "10": [

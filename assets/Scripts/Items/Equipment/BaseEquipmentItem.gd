@@ -60,7 +60,8 @@ func set_equipt_actor(actor:BaseActor, slot:int):
 	
 	if old_actor_id != '':
 		var current_actor = ActorLibrary.get_actor(old_actor_id)
-		current_actor.equipment.remove_equipment(self)
+		if current_actor:
+			current_actor.equipment.remove_equipment(self)
 	
 	# Chack if actor know's it's equipped
 	if not actor.equipment.has_equipment_in_slot(slot, self):

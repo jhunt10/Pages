@@ -211,12 +211,9 @@ func get_default_attack_target_params()->TargetParameters:
 	return default
 
 func get_default_attack_damage_datas()->Dictionary:
-	var out_dict = {}
-	var weapon = equipment.get_primary_weapon()
-	if weapon:
-		out_dict['WeaponDamage'] = weapon.get_damage_data()
-	else:
-		var default_attack_data = get_load_val("DefaultAttackData", {})
+	var out_dict = get_weapon_damage_datas()
+	if out_dict.size() == 0:
+		var default_attack_data = get_load_val("DefaultAttackData", {}).duplicate()
 		var default_damage_datas = default_attack_data.get("DamageDatas", {})
 		for d_data_key in default_damage_datas.keys():
 			var d_data = default_damage_datas[d_data_key]
@@ -224,3 +221,23 @@ func get_default_attack_damage_datas()->Dictionary:
 				d_data["DamageDataKey"] = d_data_key
 			out_dict[d_data_key] = d_data.duplicate()
 	return out_dict
+
+func get_weapon_damage_datas()->Dictionary:
+	var out_dict = {}
+	var weapon = equipment.get_primary_weapon()
+	if weapon:
+		var main_hand_data = weapon.get_damage_data().duplicate()
+		if equipment.is_two_handing():
+			var two_hand_mod = stats.get_stat(StatHelper.TwoHandMod)
+			main_hand_data['AtkPower'] = main_hand_data['AtkPower'] * two_hand_mod
+			out_dict['WeaponDamage'] = main_hand_data
+		else:
+			out_dict['WeaponDamage'] = main_hand_data
+			var off_hand_weapon = equipment.get_offhand_weapon()
+			if off_hand_weapon:
+				var off_hand_data = off_hand_weapon.get_damage_data().duplicate()
+				var off_hand_mod = stats.get_stat(StatHelper.OffHandMod)
+				off_hand_data['AtkPower'] = off_hand_data['AtkPower'] * off_hand_mod
+				out_dict['OffHandDamage'] = off_hand_data
+	return out_dict
+	

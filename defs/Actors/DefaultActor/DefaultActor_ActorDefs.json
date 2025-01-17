@@ -21,6 +21,8 @@
 			"Agility": 0,
 			"Intelligence": 0,
 			"Wisdom": 0,
+			"PhyAttack":0,
+			"MagAttack":0,
 			"PagesPerRound": 0,
 			"Awareness":0,
 			"Accuracy":100,
@@ -28,7 +30,9 @@
 			"Potency":100,
 			"Protection":5,
 			"CritChance":5,
-			"CritMod":1.5
+			"CritMod":1.5,
+			"OffHandMod": 0.5,
+			"TwoHandMod": 1.2
 		},
 		"IsPlayer": false,
 		"SpriteSheet": "Template_SpriteSheet.png",
@@ -48,7 +52,7 @@
             "DamageDatas":{
                 "DefaultDamage": {
                     "AtkPower": 20,
-                    "AtkStat": "Strength",
+                    "AtkStat": "PhyAttack",
                     "FixedBaseDamage": null,
                     "DamageEffect": "Blunt_DamageEffect",
                     "DamageType": "Blunt",

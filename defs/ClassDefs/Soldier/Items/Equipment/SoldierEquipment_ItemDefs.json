@@ -5,15 +5,39 @@
         "Details":{
 			"DisplayName": "Old Helmet",
 			"SnippetDesc": "A soldier's old Helmet.",
-			"Description": "Standard issue helmet for some army somewhere. Old, but still works.",
+			"Description": "Standard issue helmet provided by The Military. Old, but still works.",
 			"Tags": ["Head"],
 			"LargeIcon":"Sprites/OldHelm.png",
 			"SmallIcon":"Sprites/OldHelm.png"
 		},
+        "ItemDetails":
+        {
+            "Rarity": "Mundane",
+            "Value": -1
+        },
         "SpriteSheet":"Sprites/OldHelm_SpriteSheet.png",
         "EquipSlot":"Head",
         "Armor": 5,
-        "Ward": 0
+        "Ward": 0,
+        "StatMods": {
+            "MassBonus": {
+                "DisplayName": "Old Helmet",
+                "ModType": "Add",
+                "StatName": "Mass",
+                "Value": 1
+            },
+            "SpeedPen": {
+                "DisplayName": "Old Helmet",
+                "ModType": "Add",
+                "StatName": "Speed",
+                "Value": -1
+            }
+        },
+        "Requirments": {
+            "ReqStats": {
+                "Strength": 10
+            }
+        }
     },
     {
         "ItemKey":"OldSoldierArmor",
@@ -21,15 +45,39 @@
         "Details":{
 			"DisplayName": "Old Armor",
 			"SnippetDesc": "A soldier's old Armor.",
-			"Description": "Standard issue armor for some army somewhere. Old, but still works.",
+			"Description": "Standard issue armor provided by The Military. Old, but still works.",
 			"Tags": ["Body"],
 			"LargeIcon":"Sprites/OldArmor.png",
 			"SmallIcon":"Sprites/OldArmor.png"
 		},
+        "ItemDetails":
+        {
+            "Rarity": "Mundane",
+            "Value": 50
+        },
         "SpriteSheet":"Sprites/OldArmor_SpriteSheet.png",
         "EquipSlot":"Body",
         "Armor": 5,
-        "Ward": 0
+        "Ward": 0,
+        "StatMods": {
+            "MassBonus": {
+                "DisplayName": "Old Armor",
+                "ModType": "Add",
+                "StatName": "Mass",
+                "Value": 1
+            },
+            "SpeedPen": {
+                "DisplayName": "Old Armor",
+                "ModType": "Add",
+                "StatName": "Speed",
+                "Value": -1
+            }
+        },
+        "Requirments": {
+            "ReqStats": {
+                "Strength": 10
+            }
+        }
     },
     {
         "ItemKey":"OldSoldierBoots",
@@ -37,15 +85,39 @@
         "Details":{
 			"DisplayName": "Old Boots",
 			"SnippetDesc": "A soldier's old Boots.",
-			"Description": "Standard issue boots for some army somewhere. Old, but still works.",
+			"Description": "Standard issue boots provided by The Military. Old, but still works.",
 			"Tags": ["Feet"],
 			"LargeIcon":"Sprites/OldBoots.png",
 			"SmallIcon":"Sprites/OldBoots.png"
 		},
+        "ItemDetails":
+        {
+            "Rarity": "Mundane",
+            "Value": 50
+        },
         "SpriteSheet":"Sprites/OldBoots_SpriteSheet.png",
         "EquipSlot":"Feet",
         "Armor": 5,
-        "Ward": 0
+        "Ward": 0,
+        "StatMods": {
+            "MassBonus": {
+                "DisplayName": "Old Boots",
+                "ModType": "Add",
+                "StatName": "Mass",
+                "Value": 1
+            },
+            "SpeedPen": {
+                "DisplayName": "Old Boots",
+                "ModType": "Add",
+                "StatName": "Speed",
+                "Value": -1
+            }
+        },
+        "Requirments": {
+            "ReqStats": {
+                "Strength": 10
+            }
+        }
     },
     {
         "ItemKey":"OldSword",
@@ -58,6 +130,16 @@
 			"LargeIcon":"Sprites/OldSword.png",
 			"SmallIcon":"Sprites/OldSword.png"
 		},
+        "ItemDetails":
+        {
+            "Rarity": "Mundane",
+            "Value": 50
+        },
+        "Requirments": {
+            "ReqStats": {
+                "Strength": 10
+            }
+        },
         "WeaponSpriteData":{
             "Offset":[0,0],
             "SpriteName":"Sprites/OldSword",
@@ -66,12 +148,20 @@
         "EquipSlot":"Weapon",
         "CanOffhand":false,
         "DamageData":{
-            "AtkStat": "Strength",
+            "AtkStat": "PhyAttack",
             "AtkPower": 100,
             "DamageEffect": "Slash_DamageEffect",
             "DamageType": "Slash",
             "DamageVarient": 0.1,
             "DefenseType": "Armor"
+        },
+        "StatMods": {
+            "AttackBonus": {
+                "DisplayName": "Old Sword",
+                "ModType": "Add",
+                "StatName": "PhyAttack",
+                "Value": 10
+            }
         },
         "TargetParams": {
             "EffectsAllies": false,
@@ -90,11 +180,21 @@
         "Details":{
 			"DisplayName": "Old Shield",
 			"SnippetDesc": "A soldier's old Shield.",
-			"Description": "Standard issue shield for some army somewhere. Old, but still works.",
+			"Description": "Standard issue shield provided by The Military. Old, but still works.",
 			"Tags": ["OffHand","Shield"],
 			"LargeIcon":"Sprites/OldShield.png",
 			"SmallIcon":"Sprites/OldShield.png"
 		},
+        "ItemDetails":
+        {
+            "Rarity": "Mundane",
+            "Value": 50
+        },
+        "Requirments": {
+            "ReqStats": {
+                "Strength": 10
+            }
+        },
         "StatMods":{
 			"StatMod1": { 
 				"StatName": "BlockChance",
@@ -111,7 +211,7 @@
         },
         "SpriteSheet":"Sprites/OldShield_SpriteSheet.png",
         "EquipSlot":"OffHand",
-        "Armor": 5,
+        "Armor": 0,
         "Ward": 0
     }
 ]

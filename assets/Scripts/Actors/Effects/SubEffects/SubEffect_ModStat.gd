@@ -30,4 +30,6 @@ func on_effect_trigger(effect:BaseEffect, _subeffect_data:Dictionary, trigger:Ba
 		effect.get_effected_actor().stats.dirty_stats()
 
 func on_delete(effect:BaseEffect, _subeffect_data:Dictionary):
-	effect.get_effected_actor().stats.dirty_stats()
+	var actor = effect.get_effected_actor()
+	if actor:
+		actor.stats.dirty_stats()

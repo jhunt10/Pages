@@ -34,7 +34,7 @@ func sync_labels():
 		var title_page:BasePageItem = actor.pages.get_item_in_slot(0)
 		if title_page:
 			buttons[index].button_label.text = title_page.details.display_name
-			buttons[index].self_modulate = StoryState.get_player_color(index)
+			buttons[index].button_texture.self_modulate = StoryState.get_player_color(index)
 
 func set_selected_actor(actor):
 	var player_index = StoryState.get_player_index_of_actor(actor)

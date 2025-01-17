@@ -1,0 +1,50 @@
+[
+    {
+        "ItemKey":"BanditHelmet",
+        "_ObjectScript": "res://assets/Scripts/Items/Equipment/BaseArmorEquipment.gd",
+        "Details":{
+			"DisplayName": "Bandit Helm",
+			"SnippetDesc": "A bandit's metal helmet.",
+			"Description": "A cheap metal helmet paired with a stylish red scarf for extra annonimity.",
+			"Tags": ["Head"],
+			"LargeIcon":"Sprites/BanditHelment.png",
+			"SmallIcon":"Sprites/BanditHelment.png"
+		},
+        "SpriteSheet":"Sprites/BanditHelmet_SpriteSheet.png",
+        "EquipSlot":"Head",
+        "Armor": 5,
+        "Ward": 0
+    },
+    {
+        "ItemKey":"BanditArmor",
+        "_ObjectScript": "res://assets/Scripts/Items/Equipment/BaseArmorEquipment.gd",
+        "Details":{
+			"DisplayName": "Bandit Armor",
+			"SnippetDesc": "A bandit's metal armor.",
+			"Description": "A cheap leather shirt reinforeced with iron. Prefect protection for robbing innocents of thier livelyhood.",
+			"Tags": ["Body"],
+			"LargeIcon":"Sprites/BanditArmor.png",
+			"SmallIcon":"Sprites/BanditArmor.png"
+		},
+        "SpriteSheet":"Sprites/BanditChest_SpriteSheet.png",
+        "EquipSlot":"Body",
+        "Armor": 5,
+        "Ward": 0
+    },
+    {
+        "ItemKey":"BanditPants",
+        "_ObjectScript": "res://assets/Scripts/Items/Equipment/BaseArmorEquipment.gd",
+        "Details":{
+			"DisplayName": "Bandit Pants",
+			"SnippetDesc": "A bandit's old pants.",
+			"Description": "Cheap leather pants reinforecd with iron. Someone probably died in these.",
+			"Tags": ["Feet"],
+			"LargeIcon":"Sprites/BanitPants.png",
+			"SmallIcon":"Sprites/BanitPants.png"
+		},
+        "SpriteSheet":"Sprites/BanditPants_SpriteSheet.png",
+        "EquipSlot":"Feet",
+        "Armor": 5,
+        "Ward": 0
+    }
+]

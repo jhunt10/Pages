@@ -27,7 +27,7 @@ func set_weapon(actor:BaseActor, weapon:BaseWeaponEquipment):
 		mag_damage_icon.hide()
 	var base_damage = damage_data.get("AtkPower", 0)
 	var damage_var = damage_data.get("DamageVarient", 0)
-	attack_power_label.text = "%s±%s" % [base_damage, (damage_var * base_damage)]
+	attack_power_label.text = ("%s±%s" % [base_damage, (damage_var * base_damage)]) + "%"
 	var damage_type = damage_data.get("DamageType")
 	damage_type_label.text = damage_type
 	description_box.text = weapon.details.description

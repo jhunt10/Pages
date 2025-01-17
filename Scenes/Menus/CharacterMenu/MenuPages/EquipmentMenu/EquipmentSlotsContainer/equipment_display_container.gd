@@ -60,8 +60,8 @@ func _sync():
 			slot_display.set_item(item)
 		else:
 			slot_display.clear_item()
-	magatk_label.text = str(_actor.stats.get_base_magic_attack())
-	phyatk_label.text = str(_actor.stats.get_base_phyical_attack())
+	magatk_label.text = str(_actor.stats.get_stat(StatHelper.MagAttack))
+	phyatk_label.text = str(_actor.stats.get_stat(StatHelper.PhyAttack))
 
 func clear_highlights():
 	for slot_display:EquipmentDisplaySlotButton in slot_displays:

@@ -51,7 +51,6 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	delta = min(delta, 0.03)
 	if state == States.Growing:
-		print(delta)
 		var move = delta * slide_speed
 		if button_texture.position.y - move < 0 - top_hight:
 			state = States.Showing

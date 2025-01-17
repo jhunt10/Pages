@@ -5,14 +5,32 @@
         "Details":{
 			"DisplayName": "Old Green Hood",
 			"SnippetDesc": "A rogue's old Hood.",
-			"Description": "A cheap and probably stolen hood. Old, but still works.",
+			"Description": "A cheap hood sold by The Guild. Old, but still works.",
 			"Tags": ["Head"],
 			"LargeIcon":"Sprites/GreenHood.png",
 			"SmallIcon":"Sprites/GreenHood.png"
 		},
+        "ItemDetails":
+        {
+            "Rarity": "Mundane",
+            "Value": -1
+        },
+        "Requirments": {
+            "ReqStats": {
+                "Agility": 10
+            }
+        },
+        "StatMods": {
+            "SpeedBonus": {
+                "DisplayName": "Old Green Hood",
+                "ModType": "Add",
+                "StatName": "Speed",
+                "Value": 1
+            }
+        },
         "SpriteSheet":"Sprites/GreenHood_SpriteSheet.png",
         "EquipSlot":"Head",
-        "Armor": 2,
+        "Armor": 1,
         "Ward": 0
     },
     {
@@ -21,14 +39,32 @@
         "Details":{
 			"DisplayName": "Old Shirt",
 			"SnippetDesc": "A rogue's old Robes.",
-			"Description": "A cheap and probably stolen shirt with minimal padding. Old, but still works.",
+			"Description": "A cheap padded shirt sold by The Guild. Old, but still works.",
 			"Tags": ["Body"],
 			"LargeIcon":"Sprites/GreenShirt.png",
 			"SmallIcon":"Sprites/GreenShirt.png"
 		},
+        "ItemDetails":
+        {
+            "Rarity": "Mundane",
+            "Value": 50
+        },
+        "Requirments": {
+            "ReqStats": {
+                "Agility": 10
+            }
+        },
+        "StatMods": {
+            "SpeedBonus": {
+                "DisplayName": "Old Shirt Hood",
+                "ModType": "Add",
+                "StatName": "Speed",
+                "Value": 1
+            }
+        },
         "SpriteSheet":"Sprites/GreenShirt_SpriteSheet.png",
         "EquipSlot":"Body",
-        "Armor": 2,
+        "Armor": 1,
         "Ward": 0
     },
     {
@@ -37,14 +73,32 @@
         "Details":{
 			"DisplayName": "Old Boots",
 			"SnippetDesc": "A rogue's old Boots.",
-			"Description": "A cheap and probably stolen pair of leather boots. Old, but still works.",
+			"Description": "A cheap pair of leather boots sold by The Guild. Old, but still works.",
 			"Tags": ["Feet"],
 			"LargeIcon":"Sprites/LeatherBoots.png",
 			"SmallIcon":"Sprites/LeatherBoots.png"
 		},
+        "ItemDetails":
+        {
+            "Rarity": "Mundane",
+            "Value": 50
+        },
+        "Requirments": {
+            "ReqStats": {
+                "Agility": 10
+            }
+        },
+        "StatMods": {
+            "SpeedBonus": {
+                "DisplayName": "Old Boots",
+                "ModType": "Add",
+                "StatName": "Speed",
+                "Value": 1
+            }
+        },
         "SpriteSheet":"Sprites/LeatherBoots_SpriteSheet.png",
         "EquipSlot":"Feet",
-        "Armor": 2,
+        "Armor": 1,
         "Ward": 0
     },
     {
@@ -58,6 +112,16 @@
 			"LargeIcon":"Sprites/OldDagger.png",
 			"SmallIcon":"Sprites/OldDagger.png"
 		},
+        "ItemDetails":
+        {
+            "Rarity": "Mundane",
+            "Value": 50
+        },
+        "Requirments": {
+            "ReqStats": {
+                "Agility": 10
+            }
+        },
         "WeaponSpriteData":{
             "Offset":[0,0],
             "SpriteName":"Sprites/OldDagger",
@@ -65,12 +129,20 @@
         },
         "EquipSlot":"Weapon",
         "DamageData":{
-            "AtkStat": "Strength",
-            "AtkPower": 80,
+            "AtkStat": "PhyAttack",
+            "AtkPower": 70,
             "DamageEffect": "Pierce_DamageEffect",
             "DamageType": "Slash",
             "DamageVarient": 0.1,
             "DefenseType": "Armor"
+        },
+        "StatMods": {
+            "AttackBonus": {
+                "DisplayName": "Old Dagger",
+                "ModType": "Add",
+                "StatName": "PhyAttack",
+                "Value": 5
+            }
         },
         "TargetParams": {
             "EffectsAllies": false,
@@ -84,6 +156,60 @@
         "WeaponAnimation": "Stab"
     },
     {
+        "ItemKey":"BlackJack",
+        "_ObjectScript": "res://assets/Scripts/Items/Equipment/BaseWeaponEquipment.gd",
+        "Details":{
+			"DisplayName": "Black Jack",
+			"SnippetDesc": "Small hand club.",
+			"Description": "A small club great for knocking poeple out cold.",
+			"Tags": ["Weapon","OffHand"],
+			"LargeIcon":"Sprites/BlackJack.png",
+			"SmallIcon":"Sprites/BlackJack.png"
+		},
+        "ItemDetails":
+        {
+            "Rarity": "Mundane",
+            "Value": 50
+        },
+        "Requirments": {
+            "ReqStats": {
+                "Agility": 10
+            }
+        },
+        "WeaponSpriteData":{
+            "Offset":[0,0],
+            "SpriteName":"Sprites/BlackJack",
+            "Rotation":0
+        },
+        "EquipSlot":"Weapon",
+        "DamageData":{
+            "AtkStat": "PhyAttack",
+            "AtkPower": 70,
+            "DamageEffect": "Blunt_DamageEffect",
+            "DamageType": "Blunt",
+            "DamageVarient": 0.3,
+            "DefenseType": "Armor"
+        },
+        "StatMods": {
+            "AttackBonus": {
+                "DisplayName": "Blackjack",
+                "ModType": "Add",
+                "StatName": "PhyAttack",
+                "Value": 5
+            }
+        },
+        "TargetParams": {
+            "EffectsAllies": false,
+            "EffectsEnemies": true,
+            "LineOfSight": true,
+            "TargetArea": "[[-1,0],[-1,1],[0,1],[1,1],[1,0]]",
+            "TargetType": "Actor"
+        },
+        "AttackTags": ["Melee", "Physical"],
+        "WeaponClass": "Light",
+        "WeaponAnimation": "Swing"
+    },
+    {
         "ItemKey":"OldBow",
         "_ObjectScript": "res://assets/Scripts/Items/Equipment/BaseWeaponEquipment.gd",
         "Details":{
@@ -94,6 +220,16 @@
 			"LargeIcon":"Sprites/OldBow.png",
 			"SmallIcon":"Sprites/OldBow.png"
 		},
+        "ItemDetails":
+        {
+            "Rarity": "Mundane",
+            "Value": 50
+        },
+        "Requirments": {
+            "ReqStats": {
+                "Agility": 10
+            }
+        },
         "WeaponSpriteData":{
             "Offset":[0,0],
             "SpriteName":"Sprites/OldBow",
@@ -101,7 +237,7 @@
         },
         "EquipSlot":"Weapon",
         "DamageData":{
-            "AtkStat": "Strength",
+            "AtkStat": "PhyAttack",
             "AtkPower": 50,
             "DamageEffect": "Pierce_DamageEffect",
             "DamageType": "Pierce",

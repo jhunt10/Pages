@@ -1,5 +1,42 @@
 [
     {
+        "ItemKey": "BehindYou_PageItem",
+        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
+        "ActionKey": "BehindYou",
+        "CanStack": true,
+        "Details": {
+            "Tags": [
+                "Tactic"
+            ]
+        },
+        "ItemDetails":
+        {
+            "Rarity": "Rare",
+            "Value": 50
+        }
+    },
+    {
+         "ItemKey": "ThrowKnife_PageItem",
+        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
+        "ActionKey": "ThrowKnife",
+        "CanStack": true,
+        "Details": {
+            "Tags": [
+                "Tactic"
+            ]
+        },
+        "ItemDetails":
+        {
+            "Rarity": "Common",
+            "Value": 50
+        }
+    },
+
+
+
+
+
+    {
         "ItemKey": "AgileEvasion_PageItem",
         "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
         "CanStack": true,
