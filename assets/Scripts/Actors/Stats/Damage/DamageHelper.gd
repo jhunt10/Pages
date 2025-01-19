@@ -163,6 +163,14 @@ static func _order_damage_mods(mods:Array):
 	return add_list
 
 static func get_relative_attack_direction(attacker_pos:MapPos, defender_pos:MapPos)->AttackEvent.AttackDirection:
+	if defender_pos == null:
+		#TODO: Missiles from dead actors
+		printerr("Defender posision not provided")
+		return AttackEvent.AttackDirection.Front
+	if attacker_pos == null:
+		#TODO: Missiles from dead actors
+		printerr("Attcker posision not provided")
+		return AttackEvent.AttackDirection.Front
 	var x_change = defender_pos.x - attacker_pos.x
 	var y_change = defender_pos.y - attacker_pos.y
 	var front_back_change = 0
@@ -171,14 +179,14 @@ static func get_relative_attack_direction(attacker_pos:MapPos, defender_pos:MapP
 		front_back_change = y_change
 		right_left_change = x_change
 	elif defender_pos.dir == MapPos.Directions.East:
-		front_back_change = x_change
-		right_left_change = y_change
+		front_back_change = -x_change
+		right_left_change = -y_change
 	elif defender_pos.dir == MapPos.Directions.South:
 		front_back_change = -y_change
 		right_left_change = -x_change
 	elif defender_pos.dir == MapPos.Directions.West:
-		front_back_change = -x_change
-		right_left_change = -y_change
+		front_back_change = x_change
+		right_left_change = y_change
 	
 	if abs(front_back_change) >= abs(right_left_change):
 		if front_back_change >= 0:

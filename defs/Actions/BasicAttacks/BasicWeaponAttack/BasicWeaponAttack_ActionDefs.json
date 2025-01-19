@@ -1,7 +1,9 @@
 [
     {
         "ActionKey": "BasicWeaponAttack",
-        "CostData": {},
+        "AmmoData": {
+            "UseWeaponAmmo": true
+        },
         "DamageDatas": {},
         "Details": {
             "Description": "Preform a Weapon Attack against one enemy in range.",
@@ -38,6 +40,9 @@
                 }
             ],
             "11": [
+                {
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_PayCost.gd"
+                },
                 {
                     "SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponMotionAnimation.gd",
                     "MainHand": true,

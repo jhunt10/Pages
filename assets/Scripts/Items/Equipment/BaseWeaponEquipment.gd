@@ -34,6 +34,12 @@ func get_weapon_class()->WeaponClasses:
 func get_damage_data()->Dictionary:
 	return get_load_val("DamageData", {})
 
+func get_ammo_data()->Dictionary:
+	return get_load_val("AmmoData", {})
+
+func get_misile_data()->Dictionary:
+	return get_load_val("MissileData", {})
+
 func get_main_hand_sprite()->Texture2D:
 	if !_loaded_sprites:
 		_build_sprite_sheets()

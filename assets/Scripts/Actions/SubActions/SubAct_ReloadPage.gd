@@ -42,7 +42,7 @@ func do_thing(parent_action:BaseAction, subaction_data:Dictionary, metadata:QueE
 	var ammo_type = (ammo_item as AmmoItem).get_ammo_type()
 	var page_that_use_ammo = []
 	for action:BaseAction in actor.pages.list_actions():
-		if action.has_ammo() and ammo_item.can_reload_page(action):
+		if action.has_ammo() and ammo_item.can_reload_page(actor, action):
 			page_that_use_ammo.append(action.ActionKey)
 	if page_that_use_ammo.size() == 0:
 		printerr("SubAct_ReloadPage: No pages could use Ammo '%s'" % [item_id])

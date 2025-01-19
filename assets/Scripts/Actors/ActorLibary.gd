@@ -54,6 +54,8 @@ static func create_actor(key:String, data:Dictionary, premade_id:String = '')->B
 	actor.post_creation()
 	var equipment_list = actor.get_load_val("SpawnEquipmentList", [])
 	for equip in equipment_list:
+		if equip == null:
+			continue
 		var item = ItemLibrary.create_item(equip, {})
 		if item:
 			if !actor.equipment.try_equip_item(item, false):

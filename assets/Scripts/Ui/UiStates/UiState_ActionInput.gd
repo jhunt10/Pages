@@ -12,12 +12,13 @@ func _get_debug_name()->String:
 func start_state():
 	if _logging: print("Start UiState: Action Input")
 	#CombatUiControl.Instance.que_input.allow_input(true)
-	CombatRootControl.Instance.ui_control.que_input.showing = true
 	#CombatUiControl.Instance.stat_panel_control.force_preview_mode()
 	#CombatRootControl.Instance.camera.freeze = false
-	var first_actor = CombatRootControl.list_player_actors()[0]
-	CombatRootControl.Instance.ui_control.set_player_actor(first_actor)
-	pass
+	var living_actors =CombatRootControl.list_player_actors()
+	if living_actors.size() > 0:
+		var first_actor = living_actors[0]
+		CombatRootControl.Instance.set_player_index(StoryState.get_player_index_of_actor(first_actor))
+		CombatRootControl.Instance.ui_control.que_input.showing = true
 
 func end_state():
 	#CombatUiControl.Instance.que_input.allow_input(false)

@@ -1,18 +1,34 @@
 [
     {
+        "ItemKey":"BanditCptHelmet",
+        "_ObjectScript": "res://assets/Scripts/Items/Equipment/BaseArmorEquipment.gd",
+        "Details":{
+			"DisplayName": "Bandit Captian Helmet",
+			"SnippetDesc": "A bandit's captian's metal helmet.",
+			"Description": "The same A cheap metal helmet worn by Bandits, but this one has the scarf on top to show off your pretty mug.",
+			"Tags": ["Head"],
+			"LargeIcon":"Sprites/BanditCptHelmet_Icon.png",
+			"SmallIcon":"Sprites/BanditCptHelmet_Icon.png"
+		},
+        "SpriteSheet":"Sprites/BanditCptHelmet_SpriteSheet.png",
+        "EquipSlot":"Head",
+        "Armor": 3,
+        "Ward": 0
+    },
+    {
         "ItemKey":"BanditHelmet",
         "_ObjectScript": "res://assets/Scripts/Items/Equipment/BaseArmorEquipment.gd",
         "Details":{
-			"DisplayName": "Bandit Helm",
+			"DisplayName": "Bandit Helmet",
 			"SnippetDesc": "A bandit's metal helmet.",
 			"Description": "A cheap metal helmet paired with a stylish red scarf for extra annonimity.",
 			"Tags": ["Head"],
-			"LargeIcon":"Sprites/BanditHelment.png",
-			"SmallIcon":"Sprites/BanditHelment.png"
+			"LargeIcon":"Sprites/BanditHelmet_Icon.png",
+			"SmallIcon":"Sprites/BanditHelmet_Icon.png"
 		},
         "SpriteSheet":"Sprites/BanditHelmet_SpriteSheet.png",
         "EquipSlot":"Head",
-        "Armor": 5,
+        "Armor": 3,
         "Ward": 0
     },
     {
@@ -23,12 +39,12 @@
 			"SnippetDesc": "A bandit's metal armor.",
 			"Description": "A cheap leather shirt reinforeced with iron. Prefect protection for robbing innocents of thier livelyhood.",
 			"Tags": ["Body"],
-			"LargeIcon":"Sprites/BanditArmor.png",
-			"SmallIcon":"Sprites/BanditArmor.png"
+			"LargeIcon":"Sprites/BanditArmor_Icon.png",
+			"SmallIcon":"Sprites/BanditArmor_Icon.png"
 		},
         "SpriteSheet":"Sprites/BanditChest_SpriteSheet.png",
         "EquipSlot":"Body",
-        "Armor": 5,
+        "Armor": 3,
         "Ward": 0
     },
     {
@@ -39,12 +55,202 @@
 			"SnippetDesc": "A bandit's old pants.",
 			"Description": "Cheap leather pants reinforecd with iron. Someone probably died in these.",
 			"Tags": ["Feet"],
-			"LargeIcon":"Sprites/BanitPants.png",
-			"SmallIcon":"Sprites/BanitPants.png"
+			"LargeIcon":"Sprites/BanditPants_Icon.png",
+			"SmallIcon":"Sprites/BanditPants_Icon.png"
 		},
         "SpriteSheet":"Sprites/BanditPants_SpriteSheet.png",
         "EquipSlot":"Feet",
-        "Armor": 5,
+        "Armor": 3,
         "Ward": 0
+    },
+
+
+
+
+
+    {
+        "ItemKey":"BanditBycocket",
+        "_ObjectScript": "res://assets/Scripts/Items/Equipment/BaseArmorEquipment.gd",
+        "Details":{
+			"DisplayName": "Bandit Helm",
+			"SnippetDesc": "A bandit's bycocket.",
+			"Description": "A pointy hat commonly seen on archers. Appearently it's called a \"bycocket\".",
+			"Tags": ["Head"],
+			"LargeIcon":"Sprites/BanditBycocket_Icon.png",
+			"SmallIcon":"Sprites/BanditBycocket_Icon.png"
+		},
+        "SpriteSheet":"Sprites/BanditBycocket_SpriteSheet.png",
+        "EquipSlot":"Head",
+        "Armor": 0,
+        "Ward": 0,
+        "StatMods": {
+            "SpeedBonus": {
+                "DisplayName": "Bandit Bycocket",
+                "ModType": "Add",
+                "StatName": "Speed",
+                "Value": 2
+            }
+        }
+    },
+    {
+        "ItemKey":"BanditVest",
+        "_ObjectScript": "res://assets/Scripts/Items/Equipment/BaseArmorEquipment.gd",
+        "Details":{
+			"DisplayName": "Bandit Vest",
+			"SnippetDesc": "A bandit's leather vest.",
+			"Description": "A cheap leather vest. Bad for protection but great for mobility and showing off your guns.",
+			"Tags": ["Body"],
+			"LargeIcon":"Sprites/BanditVest_Icon.png",
+			"SmallIcon":"Sprites/BanditVest_Icon.png"
+		},
+        "SpriteSheet":"Sprites/BanditVest_SpriteSheet.png",
+        "EquipSlot":"Body",
+        "Armor": 0,
+        "Ward": 0,
+        "StatMods": {
+            "SpeedBonus": {
+                "DisplayName": "Bandit Vest",
+                "ModType": "Add",
+                "StatName": "Speed",
+                "Value": 2
+            }
+        }
+    },
+    {
+        "ItemKey":"BanditShorts",
+        "_ObjectScript": "res://assets/Scripts/Items/Equipment/BaseArmorEquipment.gd",
+        "Details":{
+			"DisplayName": "Bandit Shorts",
+			"SnippetDesc": "A bandit's short pants.",
+			"Description": "Cheap shorts with simple leather shoes. Bad for protection but great for mobility and showing off your legs.",
+			"Tags": ["Feet"],
+			"LargeIcon":"Sprites/BanditShorts_Icon.png",
+			"SmallIcon":"Sprites/BanditShorts_Icon.png"
+		},
+        "SpriteSheet":"Sprites/BanditShorts_SpriteSheet.png",
+        "EquipSlot":"Feet",
+        "Armor": 0,
+        "Ward": 0,
+        "StatMods": {
+            "SpeedBonus": {
+                "DisplayName": "Bandit Shorts",
+                "ModType": "Add",
+                "StatName": "Speed",
+                "Value": 2
+            }
+        }
+    },
+
+
+
+    
+    {
+        "ItemKey":"BanditAxe",
+        "_ObjectScript": "res://assets/Scripts/Items/Equipment/BaseWeaponEquipment.gd",
+        "Details":{
+			"DisplayName": "Badit Axe",
+			"SnippetDesc": "A bandit's axe.",
+			"Description": "An old axe once used for cutting wood, now used to cut people.",
+			"Tags": ["Weapon"],
+			"LargeIcon":"Sprites/BanditAxe_Icon.png",
+			"SmallIcon":"Sprites/BanditAxe_Icon.png"
+		},
+        "ItemDetails":
+        {
+            "Rarity": "Mundane",
+            "Value": 50
+        },
+        "Requirments": {
+            "ReqStats": {
+                "Strength": 10
+            }
+        },
+        "StatMods": {
+            "AttackBonus": {
+                "DisplayName": "Bandit Axe",
+                "ModType": "Add",
+                "StatName": "PhyAttack",
+                "Value": 10
+            }
+        },
+        "WeaponSpriteData":{
+            "Offset":[0,0],
+            "SpriteName":"Sprites/BanditAxe",
+            "Rotation":0
+        },
+        "EquipSlot":"Weapon",
+        "CanOffhand":false,
+        "DamageData":{
+            "AtkStat": "PhyAttack",
+            "AtkPower": 100,
+            "DamageEffect": "Slash_DamageEffect",
+            "DamageType": "Slash",
+            "DamageVarient": 0.3,
+            "DefenseType": "Armor"
+        },
+        "TargetParams": {
+            "EffectsAllies": false,
+            "EffectsEnemies": true,
+            "LineOfSight": true,
+            "TargetArea": "[[-1,0],[-1,1],[0,1],[1,1],[1,0]]",
+            "TargetType": "Enemy"
+        },
+        "AttackTags": ["Melee", "Physical"],
+        "WeaponClass": "Medium",
+        "WeaponAnimation": "Swing"
+    },
+    {
+        "ItemKey":"BigMalma",
+        "_ObjectScript": "res://assets/Scripts/Items/Equipment/BaseWeaponEquipment.gd",
+        "Details":{
+			"DisplayName": "Big Mal-Ma",
+			"SnippetDesc": "Big old mal.",
+			"Description": "A crude mal made from bolting a stone slab to a plank. Used to be owned by a Bandit Captain.",
+			"Tags": ["Weapon"],
+			"LargeIcon":"Sprites/BigMalma_Icon.png",
+			"SmallIcon":"Sprites/BigMalma_Icon.png"
+		},
+        "ItemDetails":
+        {
+            "Rarity": "Rare",
+            "Value": 500
+        },
+        "Requirments": {
+            "ReqStats": {
+                "Strength": 12
+            }
+        },
+        "StatMods": {
+            "AttackBonus": {
+                "DisplayName": "Big Mal-Ma",
+                "ModType": "Add",
+                "StatName": "PhyAttack",
+                "Value": 12
+            }
+        },
+        "WeaponSpriteData":{
+            "Offset":[0,0],
+            "SpriteName":"Sprites/BigMalma",
+            "Rotation":-22
+        },
+        "EquipSlot":"Weapon",
+        "DamageData":{
+            "AtkStat": "PhyAttack",
+            "AtkPower": 100,
+            "DamageEffect": "Blunt_DamageEffect",
+            "DamageType": "Blunt",
+            "DamageVarient": 0.4,
+            "DefenseType": "Armor"
+        },
+        "TargetParams": {
+            "EffectsAllies": false,
+            "EffectsEnemies": true,
+            "LineOfSight": true,
+            "TargetArea": "[[-1,1],[0,1],[1,1],[0,2]]",
+            "TargetType": "Actor"
+        },
+        "AttackTags": ["Melee", "Physical"],
+        "WeaponClass": "Heavy",
+        "WeaponAnimation": "Swing"
     }
 ]

@@ -152,43 +152,50 @@ func _set_turn_mapping(gap_or_nots:Array):
 
 func fill_page_ammo(action_key:String=""):
 	if action_key == "":
-		for key in actor.pages.list_action_keys():
+		for key in actor.get_action_key_list():
 			var action = ActionLibrary.get_action(key)
-			var ammo_data = action.get_ammo_data()
-			if ammo_data:
-				_page_ammo_values[key] = ammo_data.get("Clip", 0)
+			var ammo_data = action.get_ammo_data(actor)
+			if not ammo_data:
+				continue
+			var ammo_key = ammo_data['AmmoKey']
+			_page_ammo_values[ammo_key] = ammo_data.get("Clip", 0)
 			ammo_changed.emit(key)
 	else:
-		if not _page_ammo_values.has(action_key):
-			return false
 		var action = ActionLibrary.get_action(action_key)
-		var ammo_data = action.get_ammo_data()
-		if ammo_data:
-			_page_ammo_values[action_key] = ammo_data.get("Clip", 0)
-			ammo_changed.emit(action_key)
+		var ammo_data = action.get_ammo_data(actor)
+		if not ammo_data:
+			return
+		var ammo_key = ammo_data['AmmoKey']
+		_page_ammo_values[ammo_key] = ammo_data.get("Clip", 0)
+		ammo_changed.emit(action_key)
 
 func can_pay_page_ammo(action_key:String)->bool:
-	if not _page_ammo_values.has(action_key):
-		return false
 	var action = ActionLibrary.get_action(action_key)
-	var ammo_data = action.get_ammo_data()
-	if ammo_data:
-		return _page_ammo_values[action_key] >= ammo_data.get("Cost", 0)
-	return true
+	var ammo_data = action.get_ammo_data(actor)
+	if not ammo_data:
+		return true
+	var ammo_key = ammo_data['AmmoKey']
+	if not _page_ammo_values.has(ammo_key):
+		return false
+	return _page_ammo_values[ammo_key] >= ammo_data.get("Cost", 0)
 	
 func get_page_ammo(action_key:String)->int:
-	if not _page_ammo_values.has(action_key):
-		return 0
-	return _page_ammo_values.get(action_key, 0)
+	var action = ActionLibrary.get_action(action_key)
+	var ammo_data = action.get_ammo_data(actor)
+	var ammo_key = action_key
+	if ammo_data:
+		ammo_key = ammo_data['AmmoKey']
+	return _page_ammo_values.get(ammo_key, 0)
 	
 func consume_page_ammo(action_key:String):
-	if not _page_ammo_values.has(action_key):
-		return
 	var action = ActionLibrary.get_action(action_key)
-	var ammo_data = action.get_ammo_data()
+	var ammo_data = action.get_ammo_data(actor)
 	if not ammo_data:
 		return
-	var current = _page_ammo_values[action_key]
+	var ammo_key = ammo_data['AmmoKey']
+	if not _page_ammo_values.has(ammo_key):
+		return
+	var current = _page_ammo_values[ammo_key]
 	var cost = ammo_data.get("Cost", 0)
-	_page_ammo_values[action_key] = max(0, current - cost)
+	_page_ammo_values[ammo_key] = max(0, current - cost)
 	ammo_changed.emit(action_key)

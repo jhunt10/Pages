@@ -46,28 +46,28 @@ func _ready() -> void:
 	var player_1 = StoryState.get_player_actor(0)
 	if player_1: 
 		p1_stat_panel_control.set_actor(player_1)
-		p1_stat_panel_control.button.pressed.connect(set_player_actor_index.bind(0))
+		p1_stat_panel_control.button.pressed.connect(on_player_stat_clicked.bind(0))
 	else: 
 		p1_stat_panel_control.hide()
 		
 	var player_2 = StoryState.get_player_actor(1)
 	if player_2: 
 		p2_stat_panel_control.set_actor(player_2)
-		p2_stat_panel_control.button.pressed.connect(set_player_actor_index.bind(1))
+		p2_stat_panel_control.button.pressed.connect(on_player_stat_clicked.bind(1))
 	else: 
 		p3_stat_panel_control.hide()
 		
 	var player_3 = StoryState.get_player_actor(2)
 	if player_3: 
 		p3_stat_panel_control.set_actor(player_3)
-		p3_stat_panel_control.button.pressed.connect(set_player_actor_index.bind(2))
+		p3_stat_panel_control.button.pressed.connect(on_player_stat_clicked.bind(2))
 	else: 
 		p3_stat_panel_control.hide()
 		
 	var player_4 = StoryState.get_player_actor(3)
 	if player_4: 
 		p4_stat_panel_control.set_actor(player_4)
-		p4_stat_panel_control.button.pressed.connect(set_player_actor_index.bind(3))
+		p4_stat_panel_control.button.pressed.connect(on_player_stat_clicked.bind(3))
 	else: 
 		p4_stat_panel_control.hide()
 	
@@ -82,6 +82,9 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	ui_state_controller.update(delta)
+
+func on_player_stat_clicked(index):
+	CombatRootControl.Instance.set_player_index(index)
 
 func set_player_actor_index(index):
 	var player_actor = StoryState.get_player_actor(index)

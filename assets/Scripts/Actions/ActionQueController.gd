@@ -268,7 +268,7 @@ func _execute_turn_frames(game_state:GameStateData, que:ActionQue, turn_index:in
 	var turn_data = que.QueExecData.TurnDataList[que.turn_to_que_index(turn_index)]
 	 
 	if subaction_index == 0:
-		if action.has_ammo() and not que.can_pay_page_ammo(action.ActionKey):
+		if action.has_ammo(que.actor) and not que.can_pay_page_ammo(action.ActionKey):
 			CombatRootControl.Instance.create_flash_text_on_actor(que.actor, "AMMO", Color.ORANGE)
 			que.fail_turn()
 			return

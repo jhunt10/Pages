@@ -31,7 +31,7 @@ func set_page(actor:BaseActor, action:BaseAction):
 	selection_display.hide()
 	action_key = action.ActionKey
 	page_icon_texture.texture = action.get_large_page_icon(actor)
-	var ammo_data = action.get_ammo_data()
+	var ammo_data = action.get_ammo_data(actor)
 	if !ammo_data:
 		ammo_display.hide()
 	else:

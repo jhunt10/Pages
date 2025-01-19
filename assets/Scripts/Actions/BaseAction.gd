@@ -68,6 +68,12 @@ func get_qued_icon(turn_index:int, actor:BaseActor =  null)->Texture2D:
 		var icon = turn_data.on_que_data.get("OverrideQueIcon", null)
 		if icon:
 			return icon
+	var equip_slot = get_load_val("UseEquipmentIcon", null)
+	if equip_slot:
+		var equipments = actor.equipment.get_equipt_items_of_slot_type(equip_slot)
+		if equipments.size() > 0:
+			var equipment:BaseEquipmentItem = equipments[0]
+			return equipment.get_small_icon()
 	return get_small_page_icon(actor)
 
 func  get_small_page_icon(actor:BaseActor = null)->Texture2D:
@@ -157,11 +163,34 @@ func get_preview_damage_datas(actor:BaseActor=null)->Dictionary:
 	return {}
 
 
-func has_ammo():
-	return get_load_val("AmmoData", {}).size() > 0
+func has_ammo(actor:BaseActor=null):
+	var ammo_data = get_load_val("AmmoData", null)
+	if ammo_data and ammo_data.get("UseWeaponAmmo", false):
+		if actor:
+			var weapon = actor.equipment.get_primary_weapon()
+			var weapon_ammo = weapon.get_ammo_data()
+			if weapon_ammo.size() > 0:
+				return true
+			else:
+				return false
+		else:
+			return false
+	return ammo_data != null
 
-func get_ammo_data():
-	return get_load_val("AmmoData")
+func get_ammo_data(actor:BaseActor=null):
+	var ammo_data = get_load_val("AmmoData", null)
+	if ammo_data and ammo_data.get("UseWeaponAmmo", false):
+		if actor:
+			var weapon = actor.equipment.get_primary_weapon()
+			var weapon_ammo = weapon.get_ammo_data()
+			if weapon_ammo.size() > 0:
+				weapon_ammo['AmmoKey'] = "Weapon"
+				return weapon_ammo
+		return null
+	if ammo_data:
+		ammo_data['AmmoKey'] = ActionKey
+	return ammo_data
+		
 
 func get_on_que_options(actor:BaseActor, game_state:GameStateData):
 	var out_list = []

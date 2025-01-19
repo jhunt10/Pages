@@ -1,7 +1,7 @@
 extends Control
 
 @export var build_ques_button:Button
-@export var show_paths_button:Button
+@export var show_statbars_button:Button
 @onready var timer_label:Label = $VBoxContainer/TimerContainer/Label
 
 @export var dev_map_display:Node2D
@@ -9,7 +9,7 @@ extends Control
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	build_ques_button.pressed.connect(force_build_ques)
-	show_paths_button.pressed.connect(_toggle_dev_map_display)
+	show_statbars_button.pressed.connect(_toggle_stat_bars)
 	
 	pass # Replace with function body.
 
@@ -31,6 +31,9 @@ func _process(delta: float) -> void:
 		timer_label.text = "Pause " + "%d:%02d" % [que_controller.action_index+1, que_controller.sub_action_index]
 	queue_redraw()
 	pass
+
+func _toggle_stat_bars():
+	CombatRootControl.Instance.ui_control.stats_collection_display.visible = !CombatRootControl.Instance.ui_control.stats_collection_display.visible 
 
 func force_build_ques():
 	AiHandler.build_action_ques(true)

@@ -69,7 +69,7 @@ func _find_target_effected_actors(parent_action:BaseAction, subaction_data:Dicti
 	var target_list = TargetingHelper.get_targeted_actors(target_params, targets, source_actor, game_state)
 	return target_list
 
-## Get MapPos Array  of positions that were effected by the selected target key
+## Get MapPos Array of positions that were included by the selected target key
 func _find_target_effected_spots(target_key:String,  metadata:QueExecutionData, game_state:GameStateData, source_actor:BaseActor)->Array:
 	if target_key == "Self":
 		return [game_state.get_actor_pos(source_actor)]

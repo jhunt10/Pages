@@ -140,6 +140,14 @@
                 "Strength": 10
             }
         },
+        "StatMods": {
+            "AttackBonus": {
+                "DisplayName": "Old Sword",
+                "ModType": "Add",
+                "StatName": "PhyAttack",
+                "Value": 10
+            }
+        },
         "WeaponSpriteData":{
             "Offset":[0,0],
             "SpriteName":"Sprites/OldSword",
@@ -155,20 +163,12 @@
             "DamageVarient": 0.1,
             "DefenseType": "Armor"
         },
-        "StatMods": {
-            "AttackBonus": {
-                "DisplayName": "Old Sword",
-                "ModType": "Add",
-                "StatName": "PhyAttack",
-                "Value": 10
-            }
-        },
         "TargetParams": {
             "EffectsAllies": false,
             "EffectsEnemies": true,
             "LineOfSight": true,
             "TargetArea": "[[-1,0],[-1,1],[0,1],[1,1],[1,0]]",
-            "TargetType": "Actor"
+            "TargetType": "Enemy"
         },
         "AttackTags": ["Melee", "Physical"],
         "WeaponClass": "Medium",

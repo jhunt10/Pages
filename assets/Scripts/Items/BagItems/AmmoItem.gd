@@ -6,10 +6,10 @@ enum AmmoTypes {Gen, Phy, Mag, Abn}
 func get_ammo_type()->AmmoTypes:
 	return AmmoTypes.get(get_load_val("AmmoType", "Gen"))
 
-func can_reload_page(action:BaseAction)->bool:
-	if not action.has_ammo():
+func can_reload_page(actor:BaseActor, action:BaseAction)->bool:
+	if not action.has_ammo(actor):
 		return false
-	var ammo_data = action.get_ammo_data()
+	var ammo_data = action.get_ammo_data(actor)
 	var action_ammo_type = AmmoTypes.get(ammo_data.get("AmmoType", "Gen"))
 	var self_ammo_type = get_ammo_type()
 	print("Checking Ammo: %s | %s" % [action_ammo_type, self_ammo_type])

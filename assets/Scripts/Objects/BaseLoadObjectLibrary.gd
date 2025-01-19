@@ -260,11 +260,11 @@ func _load_objects_saved_data(saved_datas:Dictionary, purge_data:bool=true):
 		var save_data = saved_datas[object_id]
 		var object_key = save_data.get(object_key_name, save_data.get("ObjectKey", null))
 		if !object_key:
-			printerr("%sLibrary._load_object_file: No '%s' or 'ObjectKey' found on object '%s' in: %s" % [ get_object_name(), object_key_name, object_id])
+			printerr("%sLibrary._load_object_file: No 'ObjectKey' found on object '%s'" % [ get_object_name(), object_key_name, object_id])
 			continue
 		var object_def = get_object_def(object_key)
 		if !object_def:
-			printerr("%sLibrary._load_object_file: No object def found for '%s' on object '%s' in: %s." % [get_object_name(), object_key_name, object_id])
+			printerr("%sLibrary._load_object_file: No object def found for '%s' on object '%s'" % [get_object_name(), object_key_name, object_id])
 			continue
 		var script_path = get_object_script_path(object_def)
 		var script = load(script_path)

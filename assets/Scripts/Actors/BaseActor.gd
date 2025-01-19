@@ -55,7 +55,6 @@ var spawn_map_layer
 
 var use_ai:bool: 
 	get: return ai_def.size() > 0
-var ai_action_list:Array = []
 var ai_def:Dictionary = {}
 
 var is_player:bool = false
