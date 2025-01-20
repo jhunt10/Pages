@@ -15,7 +15,6 @@ static var story_id
 #static var items:Array = []
 #static var effects:Array = []
 static var _player_ids:Array = [null, null, null, null]
-static var current_player_id 
 static var story_flags:Dictionary = {}
 
 #TODO: Curent set up doesn't account for time spent in the save menu
@@ -30,17 +29,13 @@ static func get_player_index_of_actor(actor:BaseActor)->int:
 	return -1
 
 static func get_player_id(index:int=0):
-	if index < 0 and current_player_id:
-		return current_player_id
 	if index >= 0 and index < 4:
 		var player_id = _player_ids[index]
 		if player_id:
-			return current_player_id
+			return player_id
 	return null
 
-static func get_player_actor(index:int = -1)->BaseActor:
-	if index < 0 and current_player_id:
-		return ActorLibrary.get_actor(current_player_id)
+static func get_player_actor(index:int = 0)->BaseActor:
 	if index >= 0 and index < 4:
 		var player_id = _player_ids[index]
 		if player_id:
@@ -77,7 +72,6 @@ static func start_new_story(starting_class:String):
 		new_player = ActorLibrary.create_actor("TutorialActor", {}, player_id)
 		
 	if new_player:
-		current_player_id = new_player.Id
 		var sprite = new_player.sprite._build_sprite_sheet()
 	PlayerInventory.clear_items()
 	session_start_unix_time = Time.get_unix_time_from_system()
@@ -91,10 +85,9 @@ static func get_runtime_untix_time()->float:
 static func build_save_data()->Dictionary:
 	var out_data = {}
 	out_data['StoryId'] = story_id
-	out_data['PlayerActorId'] = current_player_id
 	out_data['Actors'] = ActorLibrary.Instance.build_save_data()
-	out_data['PlayerInventory'] = PlayerInventory.list_all_held_item_ids()
-	out_data['Items'] = ItemLibrary.Instance.build_save_data()
+	out_data['PlayerInventory'] = PlayerInventory.build_save_data()
+	#out_data['Items'] = ItemLibrary.Instance.build_save_data()
 	out_data['RunTime'] = total_play_time + (Time.get_unix_time_from_system() - session_start_unix_time)
 	out_data['StoryFlags'] = story_flags.duplicate(true)
 	return out_data
@@ -102,10 +95,9 @@ static func build_save_data()->Dictionary:
 static func load_save_data(data:Dictionary):
 	if !Instance: Instance = StoryState.new()
 	story_id = data['StoryId']
-	current_player_id = data['PlayerActorId']
 	story_flags = data.get("StoryFlags", {}).duplicate(true)
 	EffectLibrary.purge_effects()
-	ItemLibrary.load_items(data.get("Items", {}))
+	#ItemLibrary.load_items(data.get("Items", {}))
 	var actors_data = data.get("Actors", {})
 	ActorLibrary.load_actors(actors_data)
 	
@@ -119,8 +111,24 @@ static func load_save_data(data:Dictionary):
 				_player_ids[2] = actor_id
 			if actor_id.begins_with("Player_4:"):
 				_player_ids[3] = actor_id
-	for item_id in data['PlayerInventory']:
-		var item = ItemLibrary.get_item(item_id)
-		PlayerInventory.add_item(item)
+	
+	var inv_data = data['PlayerInventory']
+	if inv_data is Array:
+		for item_id in inv_data:
+			var item = ItemLibrary.get_item(item_id)
+			if item:
+				PlayerInventory.add_item(item)
+			else:
+				printerr("StoryStateData.load_save_data: Failed to find item with id '%s'." % [item_id])
+	elif inv_data is Dictionary:
+		for item_id in inv_data.keys():
+			var item_data = inv_data[item_id]
+			var item_key = item_data.get('ObjectKey')
+			var item = ItemLibrary.get_or_create_item(item_id, item_key, item_data)
+			if item:
+				PlayerInventory.add_item(item, inv_data[item_id].get('StackCount', 1))
+			else:
+				printerr("StoryStateData.load_save_data: Failed to find item with id '%s'." % [item_id])
+		
 	total_play_time = data.get("RunTime", 0)
 	session_start_unix_time = Time.get_unix_time_from_system()

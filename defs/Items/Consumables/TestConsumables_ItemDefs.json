@@ -1,22 +1,5 @@
 [
     {
-        "ItemKey":"TestPotion",
-        "_ObjectScript": "res://assets/Scripts/Items/BagItems/ConsumablePotion.gd",
-        "Details":{
-			"DisplayName": "Test Potion",
-			"SnippetDesc": "An potion made for testing.",
-			"Description": "Description.",
-			"Tags": ["Potion"],
-			"LargeIcon":"TestPotion.png",
-			"SmallIcon":"TestPotion_Small.png"
-		},
-        "CanStack": true,
-        "EffectKey": "TestHealthPotion",
-        "EffectData":{
-            "HealValue": 50
-        }
-    },
-    {
         "ItemKey":"TestBomb",
         "_ObjectScript": "res://assets/Scripts/Items/BagItems/BaseConsumableItem.gd",
         "Details":{

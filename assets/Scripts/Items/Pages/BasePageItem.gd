@@ -47,6 +47,9 @@ func get_effect_def():
 		return EffectLibrary.get_effect_def(effect_key)
 	return null
 
+func get_tags_added_to_actor()->Array:
+	return get_load_val("AddTags", [])
+
 
 func get_rarity_background()->Texture2D:
 	if get_load_val("EffectKey"):

@@ -22,10 +22,6 @@ func _load_slots_sets_data()->Array:
 		}
 	return out_dict.values()
 
-func _load_saved_items()->Array:
-	return _actor.get_load_val("Equipment", [])
-
-
 
 #var _actor:BaseActor
 
@@ -649,18 +645,6 @@ func get_total_equipment_ward()->int:
 		#item.set_equipt_actor(self._actor)
 	#_actor.stats.dirty_stats()
 
-
-func get_all_stat_mods()->Array:
-	var out_list = []
-	var checked_equipments = [] ## For double sloted items (two handing)
-	for equipment_id in _raw_item_slots:
-		if checked_equipments.has(equipment_id):
-			continue
-		if equipment_id and equipment_id != '':
-			var equipment:BaseEquipmentItem = ItemLibrary.get_item(equipment_id)
-			out_list.append_array(equipment.get_stat_mods())
-		checked_equipments.append(equipment_id)
-	return out_list
 
 #func get_weapon_attack_bonus(stat_name:String):
 	#var main_hand_item = get_item_in_slot(EquipmentSlots.Weapon)

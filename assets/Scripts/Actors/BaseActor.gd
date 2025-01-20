@@ -85,8 +85,8 @@ func _init(key:String, load_path:String, def:Dictionary, id:String, data:Diction
 func get_tags(): 
 	var tag_list = []
 	tag_list.append_array(Tags)
-	var effect_tags = effects.get_tags_added_to_actor()
-	for added_tag in effect_tags:
+	var aditional_tags = pages.get_tags_added_to_actor()
+	for added_tag in aditional_tags:
 		if not tag_list.has(added_tag):
 			tag_list.append(added_tag)
 	return tag_list
@@ -130,10 +130,33 @@ func save_me()->bool:
 
 func save_data()->Dictionary:
 	var data = super()
-	data['Pages'] = pages.list_item_ids(true)
-	data['BagItems'] = items.list_item_ids(true)
-	data['Equipment'] = equipment.list_item_ids(true)
+	data['Pages'] = pages.build_save_data()
+	data['BagItems'] = items.build_save_data()
+	data['Equipment'] = equipment.build_save_data()
 	return data
+
+func load_data(data:Dictionary):
+	var equipment_data = data['Equipment']
+	data.erase('Equipment')
+	equipment.load_save_data(equipment_data)
+	
+	var page_data = data['Pages']
+	data.erase('Pages')
+	pages.load_save_data(page_data)
+	var que_item = equipment.get_que_equipment()
+	pages.set_page_que_item(que_item)
+	
+	var bag_data = data['BagItems']
+	data.erase('BagItems')
+	items.load_save_data(bag_data)
+	var bag_item = equipment.get_bag_equipment()
+	items.set_bag_item(bag_item)
+	
+	equipment.validate_items()
+	pages.validate_items()
+	items.validate_items()
+	_data = data
+	stats.dirty_stats()
 
 func on_combat_start():
 	effects.on_combat_start()

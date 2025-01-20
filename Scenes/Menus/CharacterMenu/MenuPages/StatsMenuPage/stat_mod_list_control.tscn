@@ -1,0 +1,42 @@
+[gd_scene load_steps=5 format=3 uid="uid://j4nd2vgct4il"]
+
+[ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/StatsMenuPage/stat_mod_list_control.gd" id="1_0w4sd"]
+[ext_resource type="Script" path="res://Scenes/UiNodes/back_patch_container.gd" id="2_ote2w"]
+[ext_resource type="Texture2D" uid="uid://5hu0ttx4jxuo" path="res://assets/Sprites/UI/BackPatches/PaperPatch_64x92_16.png" id="3_ok1sv"]
+[ext_resource type="Theme" uid="uid://dwinll8pgdjhc" path="res://Scenes/Themes/standard_theme.tres" id="4_52yyb"]
+
+[node name="StatModListControl" type="Control" node_paths=PackedStringArray("container", "label")]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_0w4sd")
+container = NodePath("BackPatchContainer/VBoxContainer")
+label = NodePath("BackPatchContainer/VBoxContainer/NameLabel")
+
+[node name="BackPatchContainer" type="Container" parent="." node_paths=PackedStringArray("background", "inner_container")]
+z_index = 1
+custom_minimum_size = Vector2(56, 30)
+layout_mode = 0
+offset_top = 19.0
+offset_right = 56.0
+offset_bottom = 49.0
+script = ExtResource("2_ote2w")
+background = NodePath("NinePatchRect")
+inner_container = NodePath("VBoxContainer")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="BackPatchContainer"]
+layout_mode = 2
+texture = ExtResource("3_ok1sv")
+patch_margin_left = 6
+patch_margin_top = 5
+patch_margin_right = 5
+patch_margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="BackPatchContainer"]
+layout_mode = 2
+
+[node name="NameLabel" type="Label" parent="BackPatchContainer/VBoxContainer"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("4_52yyb")
+text = "Mods:"
+horizontal_alignment = 1

@@ -132,12 +132,8 @@ func load_init_state(map_scene_path:String):
 			
 	
 	var player_actor = StoryState.get_player_actor()
-	if !player_actor or !GameState.get_actor(player_actor.Id):
-		for actor:BaseActor in GameState._actors.values():
-			if actor.is_player:
-				StoryState.current_player_id = actor.Id
-				player_actor = StoryState.get_player_actor()
-				break
+	# Check that actor in actually in game
+	player_actor = GameState.get_actor(player_actor.Id)
 	if !player_actor:
 		printerr("Player Actor not loaded to GameState")
 	else:

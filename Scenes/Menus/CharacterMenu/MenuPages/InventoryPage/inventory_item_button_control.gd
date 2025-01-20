@@ -36,7 +36,8 @@ func set_item(item:BaseItem, count:int=0):
 	item_icon_rect.texture = item.get_large_icon()
 	if item is BaseEquipmentItem:
 		equipt_icon.visible = (item as BaseEquipmentItem).get_equipt_to_actor_id() != ''
-		(item as BaseEquipmentItem).equipt_actor_change.connect(on_equipt_change)
+		if not (item as BaseEquipmentItem).equipt_actor_change.is_connected(on_equipt_change):
+			(item as BaseEquipmentItem).equipt_actor_change.connect(on_equipt_change)
 	else:
 		equipt_icon.visible = false
 	background.texture = item.get_rarity_background()

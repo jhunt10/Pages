@@ -43,17 +43,20 @@ func _process(delta: float) -> void:
 	
 	var target = null
 	if animation_state == AnimationStates.In:
-		target = offset_control.position.move_toward(Vector2.ZERO, delta * speed)
+		var self_hight = self.get_global_rect().size.y
+		target = offset_control.position.move_toward(Vector2(0, -self_hight), delta * speed)
 	elif animation_state == AnimationStates.Out:
-		target = offset_control.position.move_toward(Vector2(0, self.size.y), delta * speed)
-	if offset_control.position.distance_to(target) < 1:
+		target = offset_control.position.move_toward(Vector2.ZERO, delta * speed)
+	var offset_pos = offset_control.position
+	var dist_to_target = abs(offset_control.position.distance_to(target)) 
+	if dist_to_target < 1:
 		if animation_state == AnimationStates.Out:
 			animation_state = AnimationStates.Hidden
 			self.hide()
 			print("Done Showing")
 			hide_done.emit()
 		else:
-			animation_state == AnimationStates.Showing
+			animation_state = AnimationStates.Showing
 	else:
 		offset_control.position = target
 
@@ -70,7 +73,7 @@ func start_show():
 func start_hide():
 	if animation_state == AnimationStates.Out or animation_state == AnimationStates.Hidden:
 		return
-	offset_control.position.y = 0
+	#offset_control.position.y = 0
 	animation_state = AnimationStates.Out
 
 func set_item(actor:BaseActor, item:BaseItem):

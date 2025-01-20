@@ -71,13 +71,6 @@ func set_equipt_actor(actor:BaseActor, slot:int):
 func get_equipt_to_actor_id():
 	return _equipt_to_actor_id
 
-func get_stat_mods()->Array:
-	var stat_mod_datas:Dictionary = get_load_val("StatMods", {})
-	var out_list = []
-	for mod_data in stat_mod_datas.values():
-		out_list.append(BaseStatMod.create_from_data(Id, mod_data))
-	return out_list
-
 func get_sprite_sheet_file_path():
 	var file_name = get_load_val("SpriteSheet", null)
 	if !file_name:

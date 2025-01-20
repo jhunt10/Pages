@@ -27,21 +27,38 @@ func _init(actor:BaseActor) -> void:
 	self._actor = actor
 	#_build_slots_list()
 
-func load_saved_items():
-	_raw_item_slots = _load_saved_items()
+func build_save_data()->Array:
+	var out_list = []
 	for item_id in _raw_item_slots:
-		if item_id:
+		if !item_id:
+			out_list.append(null)
+		else:
 			var item = ItemLibrary.get_item(item_id)
-			_on_item_loaded(item)
+			var save_data = item.save_data()
+			out_list.append(save_data)
+	return out_list
+
+## Creates items that were slaved to slots. Ignores slot sets for now.
+func load_save_data(data:Array):
+	_raw_item_slots = []
+	for item_data in data:
+		if item_data == null:
+			_raw_item_slots.append(null)
+			continue
+		var item_id = item_data.get('Id')
+		var item_key = item_data.get('ObjectKey')
+		var new_item = ItemLibrary.get_or_create_item(item_id, item_key, item_data)
+		if new_item:
+			_raw_item_slots.append(new_item.Id)
+		else:
+			printerr("BaseItemHolder.load_save_data: Failed to create item for id '%s'." % [item_id])
+			_raw_item_slots.append(null)
 
 func _load_slots_sets_data()->Array:
 	return []
 
 func _on_item_loaded(Item:BaseItem):
 	pass
-
-func _load_saved_items()->Array:
-	return []
 
 func validate_items():
 	if LOGGING: print("Validating Itemes for %s : %s" % [_actor.Id, _debug_name()])
@@ -55,7 +72,8 @@ func validate_items():
 		if not item:
 			_raw_item_slots[slot_index] = null
 		if not _is_item_valid(item):
-			remove_item(item.Id)
+			#remove_item(item.Id)
+			printerr("TODO: INvalid Item")
 
 func _is_item_valid(item:BaseItem)->bool:
 	return true
@@ -223,6 +241,18 @@ func _on_item_added_to_slot(item:BaseItem, index:int):
 	pass
 
 
+
+func get_passive_stat_mods()->Array:
+	var out_list = []
+	var checked_equipments = [] ## For double sloted items (two handing)
+	for equipment_id in _raw_item_slots:
+		if checked_equipments.has(equipment_id):
+			continue
+		if equipment_id and equipment_id != '':
+			var item:BaseItem = ItemLibrary.get_item(equipment_id)
+			out_list.append_array(item.get_passive_stat_mods())
+		checked_equipments.append(equipment_id)
+	return out_list
 
 
 	#for item_tags in _item_tagged_slots.keys():

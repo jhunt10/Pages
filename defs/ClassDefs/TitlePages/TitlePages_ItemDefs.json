@@ -3,15 +3,45 @@
         "ItemKey": "SoldierTitle_PageItem",
         "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
         "CanStack": true,
-        "EffectKey": "Soldier_TitlePage",
-        "Details":{
-            "Tags": ["Title"]
+        "Details": {
+            "Description": "Soldier Dexcription",
+            "DisplayName": "Soldier",
+            "LargeIcon": "Sprites/SoldierIcon.png",
+            "SmallIcon": "Sprites/SoldierIcon.png",
+            "SnippetDesc": "Soldier",
+            "Tags": [
+                "Title"
+            ]
         },
         "ItemDetails":
         {
             "Rarity": "Unique",
             "Value": 50
-        }
+        },
+        "StatMods": {
+            "HealthScale": {
+                "DisplayName": "Soldier",
+                "ModType": "AddStat",
+                "StatName": "BarMax:Health",
+                "DepStatName": "Strength",
+                "Value": 5
+            },
+            "DamgeScale": {
+                "DisplayName": "Soldier",
+                "ModType": "AddStat",
+                "StatName": "PhyAttack",
+                "DepStatName": "Strength",
+                "Value": 1
+            },
+            "MassScale": {
+                "DisplayName": "Soldier",
+                "ModType": "AddStat",
+                "StatName": "Mass",
+                "DepStatName": "Strength",
+                "Value": 0.1
+            }
+        },
+        "AddTags": ["Soldier"]
     },
     {
         "ItemKey": "RogueTitle_PageItem",
@@ -19,40 +49,120 @@
         "CanStack": true,
         "EffectKey": "Rogue_TitlePage",
         "Details":{
-            "Tags": ["Title"]
+            "Description": "Rogue Dexcription",
+            "DisplayName": "Rogue",
+            "LargeIcon": "Sprites/RogueIcon.png",
+            "SmallIcon": "Sprites/RogueIcon.png",
+            "SnippetDesc": "Rogue",
+            "Tags": [
+                "Title"
+            ]
         },
         "ItemDetails":
         {
             "Rarity": "Unique",
             "Value": 50
-        }
+        },
+        "StatMods": {
+            "DamgeScale": {
+                "DisplayName": "Rogue",
+                "ModType": "AddStat",
+                "StatName": "PhyAttack",
+                "DepStatName": "Strength",
+                "Value": 1
+            },
+            "EvasionScale": {
+                "DisplayName": "Rogue",
+                "ModType": "AddStat",
+                "StatName": "Speed",
+                "DepStatName": "Agility",
+                "Value": 0.1
+            },
+            "CritModScale": {
+                "DisplayName": "Rogue",
+                "ModType": "AddStat",
+                "StatName": "CritMod",
+                "DepStatName": "Agility",
+                "Value": 0.01
+            }
+        },
+        "AddTags": ["Rogue"]
     },
     {
         "ItemKey": "MageTitle_PageItem",
         "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
         "CanStack": true,
         "EffectKey": "Mage_TitlePage",
-        "Details":{
-            "Tags": ["Title"]
+        
+        "Details": {
+            "Description": "Mage Dexcription",
+            "DisplayName": "Mage",
+            "LargeIcon": "Sprites/MageIcon.png",
+            "SmallIcon": "Sprites/MageIcon.png",
+            "SnippetDesc": "Mage",
+            "Tags": [
+                "Title"
+            ]
         },
         "ItemDetails":
         {
             "Rarity": "Unique",
             "Value": 50
-        }
+        },
+        "StatMods": {
+            "DamgeScale": {
+                "DisplayName": "Mage",
+                "ModType": "AddStat",
+                "StatName": "MagAttack",
+                "DepStatName": "Intelligence",
+                "Value": 1
+            },
+            "EvasionScale": {
+                "DisplayName": "Mage",
+                "ModType": "AddStat",
+                "StatName": "Potency",
+                "DepStatName": "Intelligence",
+                "Value": 1
+            }
+        },
+        "AddTags": ["Mage"]
     },
     {
         "ItemKey": "PriestTitle_PageItem",
         "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
         "CanStack": true,
         "EffectKey": "Priest_TitlePage",
-        "Details":{
-            "Tags": ["Title"]
+        "Details": {
+            "Description": "Priest Dexcription",
+            "DisplayName": "Priest",
+            "LargeIcon": "Sprites/PriestIcon.png",
+            "SmallIcon": "Sprites/PriestIcon.png",
+            "SnippetDesc": "Priest",
+            "Tags": [
+                "Title"
+            ]
         },
         "ItemDetails":
         {
             "Rarity": "Unique",
             "Value": 50
-        }
+        },
+        "StatMods": {
+            "DamgeScale": {
+                "DisplayName": "Priest",
+                "ModType": "AddStat",
+                "StatName": "MagAttack",
+                "DepStatName": "Intelligence",
+                "Value": 1
+            },
+            "EvasionScale": {
+                "DisplayName": "Priest",
+                "ModType": "AddStat",
+                "StatName": "Protection",
+                "DepStatName": "Wisdom",
+                "Value": 1
+            }
+        },
+        "AddTags": ["Priest"]
     }
 ]

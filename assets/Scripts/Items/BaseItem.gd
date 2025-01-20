@@ -11,7 +11,7 @@ var ItemKey:String:
 
 var can_stack:bool:
 	get:
-		return get_load_val("CanStack", false)
+		return true #get_load_val("CanStack", false)
 
 ## A semi-typed path for the inventory currently holding this item 
 ## Examples: "PlayerInventory", "Actor:TestActor_ID"
@@ -101,3 +101,11 @@ func get_cant_use_reasons(actor:BaseActor):
 				missing_requirements['Equipment'].append(req_tag)
 	return missing_requirements
 	return {}
+
+
+func get_passive_stat_mods()->Array:
+	var stat_mod_datas:Dictionary = get_load_val("StatMods", {})
+	var out_list = []
+	for mod_data in stat_mod_datas.values():
+		out_list.append(BaseStatMod.create_from_data(Id, mod_data))
+	return out_list

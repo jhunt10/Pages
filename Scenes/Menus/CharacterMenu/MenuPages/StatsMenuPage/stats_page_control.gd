@@ -20,8 +20,8 @@ extends Control
 @export var ppr_stat_label:StatLabelContainer
 @export var crash_stat_label:StatLabelContainer
 
-@export var mag_atk_label:Label
-@export var phys_atk_label:Label
+@export var mag_atk_label:StatLabelContainer
+@export var phys_atk_label:StatLabelContainer
 @export var phy_atk_icon:TextureRect
 @export var mag_atk_icon:TextureRect
 @export var accuracy_stat_label:StatLabelContainer
@@ -80,14 +80,16 @@ func _set_stats():
 	crash_stat_label.set_stat_values(_actor)
 	accuracy_stat_label.set_stat_values(_actor)
 	potency_stat_label.set_stat_values(_actor)
+	phys_atk_label.set_stat_values(_actor)
+	mag_atk_label.set_stat_values(_actor)
 	
 	var target_params = _actor.get_default_attack_target_params()
 	
 	var mag_attack = _actor.stats.get_stat(StatHelper.MagAttack)
 	var phy_attack = _actor.stats.get_stat(StatHelper.PhyAttack)
 	range_display.load_area_matrix(target_params.target_area)
-	mag_atk_label.text = str(mag_attack)
-	phys_atk_label.text = str(phy_attack)
+	#mag_atk_label.text = str(mag_attack)
+	#phys_atk_label.text = str(phy_attack)
 	#var primary_weapon = _actor.equipment.get_primary_weapon()
 	#if primary_weapon:
 		#var damage_data = primary_weapon.get_damage_data()

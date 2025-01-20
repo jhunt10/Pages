@@ -114,13 +114,6 @@ func get_stat_mods():
 			out_list.append(mod)
 	return out_list
 
-func get_tags_added_to_actor()->Array:
-	var out_list = []
-	for effect:BaseEffect in list_effects():
-		var added = effect.get_tags_added_to_actor()
-		out_list.append_array(added)
-	return out_list
-
 func trigger_damage_dealt(game_state:GameStateData, damage_event:DamageEvent):
 	for effect:BaseEffect in _effects.values():
 		effect.trigger_on_damage_dealt(game_state, damage_event)

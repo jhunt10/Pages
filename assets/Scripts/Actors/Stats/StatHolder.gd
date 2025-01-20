@@ -155,7 +155,9 @@ func _calc_cache_stats():
 	var key_depends_on_vals = {}
 	var key_is_dependant_of_vals = {}
 	var mods_list = _actor.effects.get_stat_mods()
-	mods_list.append_array(_actor.equipment.get_all_stat_mods())
+	mods_list.append_array(_actor.equipment.get_passive_stat_mods())
+	var pages_mods = _actor.pages.get_passive_stat_mods()
+	mods_list.append_array(pages_mods)
 	for mod:BaseStatMod in mods_list:
 		if LOGGING: print("# Found Mod '", mod.display_name, " for: %s" % _actor.ActorKey)
 		
@@ -166,17 +168,21 @@ func _calc_cache_stats():
 			agg_mods[mod.stat_name][mod.mod_type] = []
 		if not _cached_mods_names.keys().has(mod.stat_name): # Add stat name to mod list
 			_cached_mods_names[mod.stat_name] = []
-			
-		_cached_mods_names[mod.stat_name].append(mod.display_name)
+		
+		
 		if mod.mod_type	 == BaseStatMod.ModTypes.Set:
 			if set_stats.keys().has(mod.stat_name):
 				printerr("StatHolder._calc_cache_stats: Multiple 'Set' mods found on stat '%s'." % [mod.stat_name])
 			set_stats[mod.stat_name] = mod.value
+			agg_mods[mod.stat_name][mod.mod_type].append(mod.value)
+			var display_name = "=" + str(mod.value) + " " + mod.display_name
 		elif mod.mod_type	 == BaseStatMod.ModTypes.Add:
 			if not _base_stats.keys().has(mod.stat_name):
 				if not set_stats.keys().has(mod.stat_name):
 					set_stats[mod.stat_name] = 0
 			agg_mods[mod.stat_name][mod.mod_type].append(mod.value)
+			var display_name = "+" + str(mod.value) + " " + mod.display_name
+			_cached_mods_names[mod.stat_name].append(display_name)
 		elif mod.mod_type == BaseStatMod.ModTypes.AddStat:
 			var dep_stat_name = mod.dep_stat_name
 			if key_depends_on_vals.has(dep_stat_name) and key_depends_on_vals[dep_stat_name].has(mod.stat_name):
@@ -192,8 +198,12 @@ func _calc_cache_stats():
 			if not key_is_dependant_of_vals[dep_stat_name].has(mod.stat_name):
 				key_is_dependant_of_vals[dep_stat_name].append(mod.stat_name)
 			agg_mods[mod.stat_name][mod.mod_type].append({"DepStat": dep_stat_name, "Scale": mod.value})
+			var display_name = "+" + str(dep_stat_name) + "x" + str(mod.value) + " " + mod.display_name
+			_cached_mods_names[mod.stat_name].append(display_name)
 		else:
 			agg_mods[mod.stat_name][mod.mod_type].append(mod.value)
+			var display_name = "x" + str(mod.value) + " " + mod.display_name
+			_cached_mods_names[mod.stat_name].append(display_name)
 		
 	if LOGGING: print("- Found: %s modded stats" % agg_mods.size())
 	

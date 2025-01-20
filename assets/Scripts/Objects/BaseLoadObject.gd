@@ -22,9 +22,6 @@ func _init(key:String, def_load_path:String, def:Dictionary, id:String='', data:
 	self._data = data
 	details = ObjectDetailsData.new(self._def_load_path, self._def.get("Details", {}))
 
-func post_creation():
-	pass
-
 ## Is this class static. Static objects don't use _data and are referenced only by _key
 func is_static():
 	return false
@@ -33,9 +30,15 @@ func save_me()->bool:
 	return false
 
 func save_data()->Dictionary:
-	if !_data.keys().has("ObjectKey"):
-		_data['ObjectKey'] = self._key
-	return _data
+	var data = _data.duplicate()
+	if !data.keys().has("ObjectKey"):
+		data['ObjectKey'] = self._key
+	if !data.keys().has("Id"):
+		data['Id'] = self._id
+	return data
+
+func load_data(data:Dictionary):
+	_data = data
 
 func get_load_path()->String:
 	return _def_load_path

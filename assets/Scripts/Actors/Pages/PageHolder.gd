@@ -15,7 +15,6 @@ func _init(actor) -> void:
 	self._actor.effacts_changed.connect(_build_slots_list)
 
 func _load_slots_sets_data()->Array:
-	
 	if LOGGING: print("--Page Slots Loading" )
 	var out_list = [{
 		"Key":"TitlePage",
@@ -47,9 +46,6 @@ func _load_slots_sets_data()->Array:
 	if LOGGING: print("-Loaded Page Slots: %s" % [JSON.stringify(out_list)])
 	return out_list
 
-func _load_saved_items()->Array:
-	return _actor.get_load_val("Pages", [])
-
 func _on_item_loaded(item:BaseItem):
 	var page = item as BasePageItem
 	if not page:
@@ -65,6 +61,24 @@ func set_page_que_item(page_que:BaseQueEquipment):
 	else:
 		page_que_item_id = null
 	_build_slots_list()
+
+func validate_items():
+	super()
+	for page in list_items():
+		var effect_def = page.get_effect_def()
+		if effect_def:
+			var new_effect = _actor.effects.add_effect(page, page.get_load_val("EffectKey"), effect_def, null)
+			item_id_to_effect_id[page.Id] = new_effect.Id
+	class_page_changed.emit()
+
+
+func get_tags_added_to_actor()->Array:
+	var out_list = []
+	for page:BasePageItem in list_items():
+		var added = page.get_tags_added_to_actor()
+		out_list.append_array(added)
+	return out_list
+
 
 func list_action_keys()->Array:
 	var out_list = []

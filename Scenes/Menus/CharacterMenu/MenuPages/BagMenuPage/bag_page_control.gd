@@ -38,23 +38,26 @@ func set_actor(actor:BaseActor):
 	actor_equipment_changed()
 
 func actor_equipment_changed():
-	var ques = _actor.equipment.get_equipt_items_of_slot_type("Bag")
-	if !ques or ques.size() == 0:
-		name_label.text = "No Bag!"
-		bag_icon.texture = null
+	#var bag = _actor.equipment.get_equipt_items_of_slot_type("Bag")
+	#if !ques or ques.size() == 0:
+		#name_label.text = "No Bag!"
+		#bag_icon.texture = null
+		#_current_bag_item_id = null
+		#return
+	#elif ques.size() > 1:
+		#name_label.text = "2 Bags?"
+		#bag_icon.texture = null
+		#_current_bag_item_id = null
+		#return
+	var bag:BaseBagEquipment = _actor.equipment.get_bag_equipment()
+	if bag:
+		if bag.Id == _current_bag_item_id:
+			return
+			_current_bag_item_id = bag.Id
+		name_label.text = bag.details.display_name
+		bag_icon.texture = bag.get_large_icon()
+	else:
 		_current_bag_item_id = null
-		return
-	elif ques.size() > 1:
-		name_label.text = "2 Bags?"
-		bag_icon.texture = null
-		_current_bag_item_id = null
-		return
-	var bag:BaseBagEquipment = ques[0]
-	if bag.Id == _current_bag_item_id:
-		return
-	_current_bag_item_id = bag.Id
-	name_label.text = bag.details.display_name
-	bag_icon.texture = bag.get_large_icon()
 	build_sub_containers()
 	
 

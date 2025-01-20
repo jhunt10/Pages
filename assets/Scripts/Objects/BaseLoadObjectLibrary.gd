@@ -276,17 +276,16 @@ func _load_objects_saved_data(saved_datas:Dictionary, purge_data:bool=true):
 			#printerr("%sLibrary._load_object_file: Object %s loaded script '%s' is not of type 'BaseLoadObject'." % [get_object_name(), object_key_name, script_path]) 
 			#continue
 		var load_path = _defs_to_load_paths[object_key]
-		var new_object:BaseLoadObject = script.new(object_key, load_path, object_def, object_id, save_data)
+		var new_object:BaseLoadObject = script.new(object_key, load_path, object_def, object_id, {})
 		if _loaded_objects.keys().has(object_id):
 			printerr("%sLibrary._load_object_file: Object with id '%s' already loaded." % [get_object_name(), object_id])
 			continue
 		_loaded_objects[object_id] = new_object
 		if LOGGING: print("# - Loaded Saved Object: %s" % [object_id])
-		new_object.post_creation()
-	_after_loading_saved_objects(saved_datas)
+	for object in _loaded_objects.values():
+		var save_data = saved_datas.get(object.Id, {})
+		object.load_data(save_data)
 
-func _after_loading_saved_objects(saved_data:Dictionary):
-	pass
 
 ## Recursivly search directory for files with object_file_sufix.
 ## Appends full path of found files to out_list.
@@ -312,8 +311,7 @@ static func _merge_defs(child:Dictionary, parent:Dictionary)->Dictionary:
 	for key:String in child.keys():
 		var val = child[key]
 		if val is Dictionary:
-			if not (key == "DropItems"):
-				val = _merge_defs(child[key], parent.get(key, {}))
+			val = _merge_defs(child[key], parent.get(key, {}))
 		if val is Array:
 			# Default to parent on empty list
 			if val.size() == 0:

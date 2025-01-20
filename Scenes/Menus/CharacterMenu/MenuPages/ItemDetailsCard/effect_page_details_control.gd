@@ -22,8 +22,7 @@ func _process(delta: float) -> void:
 func set_action(actor:BaseActor, page:BasePageItem):
 	_actor = actor
 	_item = page
-	var effect_data = page.get_effect_def()
-	var stat_mods = effect_data.get("StatMods", {})
+	var stat_mods = page.get_load_val("StatMods", {})
 	for mod_data in stat_mods.values():
 		var new_mod:StatModLabelContainer = premade_stat_mod_label.duplicate()
 		new_mod.set_mod_data(mod_data)

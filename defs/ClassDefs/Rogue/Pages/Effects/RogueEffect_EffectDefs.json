@@ -96,11 +96,17 @@
         },
         "EffectKey": "BackStab_Page",
         "StatMods": {
-            "StatMod1": {
+            "_StatMod1": {
                 "DisplayName": "BackStab",
                 "ModType": "Set",
                 "StatName": "CritChance:DirAtkBk:Add",
                 "Value": 10
+            },
+            "StatMod1": {
+                "DisplayName": "BackStab",
+                "ModType": "Set",
+                "StatName": "Evasion:DirDefBk",
+                "Value": 100
             }
         },
         "SubEffects": {
