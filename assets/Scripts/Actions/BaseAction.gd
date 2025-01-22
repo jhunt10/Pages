@@ -182,6 +182,8 @@ func get_ammo_data(actor:BaseActor=null):
 	if ammo_data and ammo_data.get("UseWeaponAmmo", false):
 		if actor:
 			var weapon = actor.equipment.get_primary_weapon()
+			if !weapon:
+				return null
 			var weapon_ammo = weapon.get_ammo_data()
 			if weapon_ammo.size() > 0:
 				weapon_ammo['AmmoKey'] = "Weapon"

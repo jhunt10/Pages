@@ -202,3 +202,17 @@ func prune_objects():
 		var actor:BaseActor = ActorLibrary.get_actor(actor_id)
 		if not actor.is_player:
 			ActorLibrary.delete_actor(actor)
+
+func next_quest():
+	if current_scene:
+		current_scene.queue_free()
+	StoryState.start_new_story("Soldier")
+	var combat_scene:CombatRootControl = load("res://Scenes/Combat/combat_scene.tscn").instantiate()
+	combat_scene.load_init_state("res://Scenes/Maps/StoryMaps/2_Cross_Road/crossroad_dialog_map.tscn")
+	current_scene = combat_scene
+	self.add_child(current_scene)
+	
+	var dialog:DialogController = load("res://Scenes/Dialog/dialog_control.tscn").instantiate()
+	dialog.scene_root = combat_scene
+	dialog.load_dialog_script("res://Scenes/Maps/StoryMaps/2_Cross_Road/crossroad_dialog_script.json")
+	combat_scene.camera.canvas_layer.add_child(dialog)

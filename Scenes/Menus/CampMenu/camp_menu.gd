@@ -64,6 +64,7 @@ func _sub_menu_open(name:String):
 
 func _on_quest_button():
 	#MainRootNode.Instance.start_combat()
+	MainRootNode.Instance.next_quest()
 	pass
 
 func _on_explore_button():

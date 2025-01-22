@@ -86,6 +86,7 @@ func load_init_state(map_scene_path:String):
 		MapController.queue_free()
 		
 	MapController = map_scene.instantiate()
+	MapController.name = "MapController"
 	self.add_child(MapController)
 	
 	# Keep Camera last in sceen (prevents flickering)

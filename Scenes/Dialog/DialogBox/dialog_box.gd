@@ -4,7 +4,7 @@ extends Control
 const DEFAULT_LETTER_DELAY:float = 0.01
 const DEFAULT_QUESTION_OPTION_DELAY:float = 0.3
 
-enum EntryTypes {Clear, Delay, Speaker, Text, Flag, Question, WaitToRead, BackTrack, IconImage}
+enum EntryTypes {Clear, Delay, Speaker, Text, Flag, Question, WaitToRead, BackTrack, IconImage, Hide}
 enum STATES {Ready, Printing, Done, Question}
 
 signal finished_printing
@@ -104,6 +104,16 @@ func _handle_entry(entry_data:Dictionary, raw_delta, remaining_delta)->bool:
 		scroll_bar.calc_bar_size()
 		scroll_bar.hide()
 		_delay_timer = -1
+		return true
+		
+	#----------------------------------
+	#          Hide
+	# Options:
+	# 	 "ClearSpeaker": bool (true) | Clear Speaker Namd and Portrait
+	# 	 "ClearText": bool (true) | Clear displayed text
+	#----------------------------------
+	if entry_type == EntryTypes.Hide:
+		self.hide()
 		return true
 	
 	

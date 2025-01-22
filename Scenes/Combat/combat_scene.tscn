@@ -24,12 +24,12 @@
 [ext_resource type="Texture2D" uid="uid://cwsvq3qu6228n" path="res://assets/Sprites/UI/QueInputAndDisplay/page_button.png" id="24_5fn7e"]
 [ext_resource type="Script" path="res://Scenes/Combat/game_over_screen.gd" id="25_byrc6"]
 [ext_resource type="Script" path="res://Scenes/Combat/UiNodes/CameraLock/camera_lock_control.gd" id="25_ig6gl"]
+[ext_resource type="Texture2D" uid="uid://c2rmvgu5ib0nq" path="res://defs/Actions/ItemUsage/Sprites/Potion_Icon.png" id="25_q2xye"]
 [ext_resource type="Script" path="res://Scenes/Combat/game_victory_screen.gd" id="26_1uhkb"]
 [ext_resource type="Texture2D" uid="uid://e0lb1vqlst3i" path="res://Scenes/Combat/UiNodes/CameraLock/CameraLock_Locked.png" id="26_muuhh"]
 [ext_resource type="Theme" uid="uid://cayt153s5ro4a" path="res://Scenes/Themes/standard_theme_red.tres" id="27_3mvka"]
 [ext_resource type="Script" path="res://Scenes/Combat/UiNodes/DropMessages/drop_message_control.gd" id="27_7037i"]
 [ext_resource type="Texture2D" uid="uid://88hhiituab5b" path="res://Scenes/Combat/UiNodes/CameraLock/CameraLock_Unlocked.png" id="27_cweuh"]
-[ext_resource type="Texture2D" path="res://defs/Items/Consumables/BarPotions/HealthPotion_M_L.png" id="27_vsjit"]
 [ext_resource type="Script" path="res://Scenes/Combat/UiNodes/DropMessages/drop_message_card.gd" id="28_lvk4q"]
 [ext_resource type="Texture2D" uid="uid://dx5cq5wifod2g" path="res://Scenes/Combat/UiNodes/CameraLock/CameraLock_Following.png" id="28_mng7g"]
 [ext_resource type="PackedScene" uid="uid://banawprx6et26" path="res://Scenes/Combat/UiNodes/ItemSelectionInput/item_selection_input.tscn" id="29_6pds8"]
@@ -196,6 +196,7 @@ offset_bottom = 97.0
 text = "Stats"
 
 [node name="CombatUiControl" type="Control" parent="MoveableCamera2D/CanvasLayer" node_paths=PackedStringArray("game_over_screen", "victory_screen", "menu_button", "pause_menu", "target_input_display", "p1_stat_panel_control", "p2_stat_panel_control", "p3_stat_panel_control", "p4_stat_panel_control", "que_input", "que_collection_display", "stats_collection_display", "item_select_menu", "drop_message_control")]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -638,7 +639,6 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="GameVictoryScreen" type="Control" parent="MoveableCamera2D/CanvasLayer/CombatUiControl" node_paths=PackedStringArray("camp_button", "premade_pickup_page", "pickup_pages_container", "premade_pickup_item", "pickup_items_container")]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -735,7 +735,7 @@ custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-texture = ExtResource("27_vsjit")
+texture = ExtResource("25_q2xye")
 stretch_mode = 5
 
 [node name="ItemNameLabel" type="Label" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/GameVictoryScreen/CenterContainer/VBoxContainer/PickupPagesContainer/PickupPageContainer"]
@@ -796,7 +796,7 @@ custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-texture = ExtResource("27_vsjit")
+texture = ExtResource("25_q2xye")
 stretch_mode = 5
 
 [node name="ItemNameLabel" type="Label" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/GameVictoryScreen/CenterContainer/VBoxContainer/PickupItemsContainer/PickupItemContainer"]

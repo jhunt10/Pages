@@ -247,11 +247,23 @@ func set_move_destination(map_pos:MapPos, frames_to_reach:int, start_walking_if_
 	pass
 
 var _movement_que:Array
+var _moving_in_loop:bool
 var _is_moving_on_script:bool
 
 func que_scripted_movement(path_pos_data:Array):
+	_moving_in_loop = false
 	if path_pos_data.size() == 0:
 		return
+	for pos in path_pos_data:
+		_movement_que.append(pos)
+	if not is_moving:
+		_start_next_queued_movement()
+
+func set_scripted_movement_loop(path_pos_data:Array):
+	if path_pos_data.size() == 0:
+		return
+	_moving_in_loop = true
+	_movement_que.clear()
 	for pos in path_pos_data:
 		_movement_que.append(pos)
 	if not is_moving:
@@ -276,6 +288,13 @@ func _start_next_queued_movement():
 		return
 	
 	var next_pos_data = _movement_que[0]
+	if not _moving_in_loop and next_pos_data.get("End", false):
+		var index = 0
+		while index < _movement_que.size():
+			if not next_pos_data.get("End", false) and _movement_que[index].get("Looped", false):
+				_movement_que.remove_at(index)
+			else:
+				index += 1
 	if (next_pos_data == null or next_pos_data['Pos'] == cur_map_pos):
 		_scripted_move_finshed()
 		return
@@ -303,17 +322,28 @@ func _start_next_queued_movement():
 		_is_moving_on_script = true
 
 func _scripted_move_finshed():
-	var next_pos_data = _movement_que[0]
-	if LOGGING: print("Script Finished: %s" % [next_pos_data])
+	var current_pos_data = _movement_que[0]
+	if LOGGING: print("Script Finished: %s" % [current_pos_data])
 	_movement_que.remove_at(0)
-	var next_pos = next_pos_data['Pos']
-	if next_pos != cur_map_pos:
-		set_map_pos(next_pos)
-	if _movement_que.size() > 0:
-		_start_next_queued_movement()
-	else:
+	if _moving_in_loop:
+		if _movement_que.size() == 0:
+			printerr("Infanate movement loop due to singe spot")
+		else:
+			current_pos_data['Looped'] = true
+			_movement_que.append(current_pos_data)
+	var reached_pos = current_pos_data['Pos']
+	if reached_pos != cur_map_pos:
+		set_map_pos(reached_pos)
+	
+	# Force end loops when disabled
+	if not _moving_in_loop and current_pos_data.get('End', false):
+		_movement_que.clear()
+	
+	if _movement_que.size() == 0:
 		_is_moving_on_script = false
 		reached_motion_destination.emit()
+	else:
+		_start_next_queued_movement()
 		
 	
 	#while _movement_que.size() > 0 and (next_pos_data == null or next_pos_data['Pos'] == cur_map_pos):

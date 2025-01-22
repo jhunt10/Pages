@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://b07c3300ehfi5"]
+[gd_scene load_steps=10 format=3 uid="uid://b07c3300ehfi5"]
 
 [ext_resource type="Script" path="res://Scenes/VFXs/SpeachBubble/speach_bubble_vfx_node.gd" id="1_3hi8n"]
 [ext_resource type="PackedScene" uid="uid://bicesld0k4p4b" path="res://Scenes/VFXs/BounceText/bounce_text_control.tscn" id="2_plq2c"]
@@ -7,13 +7,14 @@
 [ext_resource type="Texture2D" uid="uid://cs1jnjit3sqvg" path="res://Scenes/VFXs/SpeachBubble/SpeechBubble_Corner_BL.png" id="3_xgluu"]
 [ext_resource type="Texture2D" uid="uid://c2uyb8l6t1k2b" path="res://Scenes/VFXs/SpeachBubble/SpeechBubble_Corner_BC.png" id="4_5g4et"]
 [ext_resource type="Theme" uid="uid://by8t8e4s2str7" path="res://Scenes/VFXs/SpeachBubble/speach_bubble_theme.tres" id="4_27tdc"]
+[ext_resource type="Texture2D" uid="uid://1d4ulucgiknq" path="res://Scenes/VFXs/SpeachBubble/SpeechBubble_Bang.png" id="7_0gghg"]
+[ext_resource type="Texture2D" uid="uid://cvj4pjgf3ec0n" path="res://Scenes/VFXs/SpeachBubble/SpeechBubble_Question.png" id="8_nb7sa"]
 
-[node name="SpeachBubbleVFXNode" type="Node2D" node_paths=PackedStringArray("text_label", "speach_bubble_background", "scale_control", "bounce_text_controller", "corner_spike_bot_left", "corner_spike_bot_center", "corner_spike_bot_right")]
+[node name="SpeachBubbleVFXNode" type="Node2D" node_paths=PackedStringArray("text_label", "speach_bubble_background", "scale_control", "bounce_text_controller", "bang_icon", "question_icon", "corner_spike_bot_left", "corner_spike_bot_center", "corner_spike_bot_right")]
 z_index = 9
 script = ExtResource("1_3hi8n")
 showing = true
-bounce = true
-display_text = "DIE HUMANS!"
+display_text = " "
 grow_direction = 1
 state = 3
 grow_speed = 3.0
@@ -23,6 +24,8 @@ text_label = NodePath("ScaleControl/SpeachBubble/Label")
 speach_bubble_background = NodePath("ScaleControl/SpeachBubble")
 scale_control = NodePath("ScaleControl")
 bounce_text_controller = NodePath("ScaleControl/SpeachBubble/BounceTextControl")
+bang_icon = NodePath("ScaleControl/BangIcon")
+question_icon = NodePath("ScaleControl/QuestionIcon")
 corner_spike_bot_left = NodePath("ScaleControl/SpeachBubble/CornerSpike_BotLeft")
 corner_spike_bot_center = NodePath("ScaleControl/SpeachBubble/CornerSpike_BotCenter")
 corner_spike_bot_right = NodePath("ScaleControl/SpeachBubble/CornerSpike_BotRight")
@@ -46,9 +49,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -55.0
+offset_left = -14.0
 offset_top = -33.0
-offset_right = 55.0
+offset_right = 14.0
 offset_bottom = -5.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -103,7 +106,6 @@ texture = ExtResource("3_xgluu")
 flip_h = true
 
 [node name="Label" type="Label" parent="ScaleControl/SpeachBubble"]
-visible = false
 self_modulate = Color(0, 0, 0, 1)
 layout_mode = 1
 anchors_preset = -1
@@ -111,24 +113,43 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 6.0
 offset_top = 2.0
-offset_right = -5.0
+offset_right = -4.0
 offset_bottom = -2.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("4_27tdc")
 theme_override_constants/line_spacing = -5
-text = "DIE HUMANS!"
+text = " "
 vertical_alignment = 1
 justification_flags = 0
 
 [node name="BounceTextControl" parent="ScaleControl/SpeachBubble" instance=ExtResource("2_plq2c")]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-display_text = "DIE HUMANS!"
+display_text = " "
+
+[node name="BangIcon" type="TextureRect" parent="ScaleControl"]
+visible = false
+layout_mode = 0
+offset_left = -12.5
+offset_top = -30.0
+offset_right = 12.5
+pivot_offset = Vector2(12.5, 30)
+texture = ExtResource("7_0gghg")
+
+[node name="QuestionIcon" type="TextureRect" parent="ScaleControl"]
+visible = false
+layout_mode = 0
+offset_left = -12.5
+offset_top = -30.0
+offset_right = 12.5
+pivot_offset = Vector2(12.5, 30)
+texture = ExtResource("8_nb7sa")
 
 [node name="SpeachBubBotLeft" type="Sprite2D" parent="."]
 visible = false

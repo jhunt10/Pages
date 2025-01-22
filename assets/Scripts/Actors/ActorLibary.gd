@@ -51,6 +51,7 @@ static func create_actor(key:String, data:Dictionary, premade_id:String = '')->B
 	if !actor:
 		printerr("ActorLibrary.create_actor: Failed to make actor '%s'." % [key])
 		return null
+	actor.equipment._build_slots_list()
 	var equipment_list = actor.get_load_val("SpawnEquipmentList", [])
 	for equip in equipment_list:
 		if equip == null:

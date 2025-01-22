@@ -94,7 +94,7 @@ func set_player_actor_index(index):
 func set_player_actor(actor:BaseActor):
 	
 	que_input.set_actor(actor)
-	CombatRootControl.Instance.camera.start_auto_pan_to_actor(actor)
+	#CombatRootControl.Instance.camera.start_auto_pan_to_actor(actor)
 
 
 func _input(event: InputEvent) -> void:

@@ -19,6 +19,8 @@ enum Direction {North, East, South, West}
 			elif facing == Direction.South: sprite.rotation_degrees = 180
 			elif facing == Direction.West: sprite.rotation_degrees = 270
 
+@export var is_loop:bool
+
 @export var map_coor:Vector2i:
 	set(val):
 		map_coor = val

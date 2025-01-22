@@ -5,6 +5,9 @@ extends VfxNode
 enum GrowDirections {Left, Center, Right}
 enum STATES { Hidden, Growing, Printing, Showing, Unprinting, Shrinking}
 
+enum BubbleType {Text, Bang, Question}
+
+
 signal finished_showing
 signal finished_hideing
 
@@ -19,6 +22,25 @@ signal finished_hideing
 				if state == STATES.Growing or state == STATES.Printing or state == STATES.Showing:
 					state = STATES.Unprinting
 
+@export var bubble_type:BubbleType:
+	set(val):
+		bubble_type =  val
+		if (not speach_bubble_background 
+		or not bang_icon or not question_icon):
+			return
+		elif bubble_type == BubbleType.Text:
+			speach_bubble_background.show()
+			bang_icon.hide()
+			question_icon.hide()
+		elif bubble_type == BubbleType.Bang:
+			speach_bubble_background.hide()
+			bang_icon.show()
+			question_icon.hide()
+		elif bubble_type == BubbleType.Question:
+			speach_bubble_background.hide()
+			bang_icon.hide()
+			question_icon.show()
+			
 @export var bounce:bool = false
 @export var display_text:String:
 	set(val):
@@ -110,7 +132,8 @@ signal finished_hideing
 @export var speach_bubble_background:NinePatchRect
 @export var scale_control:Control
 @export var bounce_text_controller:BounceTextControl
-
+@export var bang_icon:TextureRect
+@export var question_icon:TextureRect
 @export var corner_spike_bot_left:TextureRect
 @export var corner_spike_bot_center:TextureRect
 @export var corner_spike_bot_right:TextureRect
@@ -213,6 +236,12 @@ func set_block_data(block_data:Dictionary):
 	var offset = block_data.get("Offset", [0,-8])
 	self.position = Vector2(offset[0],offset[1])
 	display_text = block_data.get("Text", "null")
+	if display_text == "?":
+		self.bubble_type = BubbleType.Question
+	elif display_text == "!":
+		self.bubble_type = BubbleType.Bang
+	else: 
+		self.bubble_type = BubbleType.Text
 	bounce = block_data.get("UseBounceText", false)
 	letter_delay = block_data.get("LetterDelay", letter_delay)
 

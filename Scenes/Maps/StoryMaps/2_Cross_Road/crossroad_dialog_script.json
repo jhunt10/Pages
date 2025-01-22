@@ -1,0 +1,1141 @@
+{
+	"_MetaData_": {
+		"StartPartKey": "Walkin"
+	},
+	"Walkin":{
+		"_NextPartKey": "Dialog1",
+		"WaitForNextButton": true,
+		"#EnsurePoses": {
+			"Player1":"P1",
+			"MysteriousFigure":"M1"
+		},
+		"Blocks":[
+			{
+				"BlockType": "Blackout",
+				"BlackOutState":"Black"
+			},
+            {
+                "BlockType": "Blackout",
+                "WaitToFinish": false,
+                "BlackOutState":"FadeIn"
+            },
+            {
+                "BlockType": "MoveActor",
+                "WaitToFinish": false,
+                "TargetActorId": "Player1",
+                "PathMarkerName": "P1",
+                "FollowActor": true,
+                "SpeedScale": 1
+            },
+            {
+                "BlockType": "MoveActor",
+                "WaitToFinish": false,
+                "TargetActorId": "MysteriousFigure",
+                "PathMarkerName": "M1",
+                "FollowActor": false,
+                "SpeedScale": 1
+            },
+
+
+            {
+                "BlockType": "MoveActor",
+                "WaitToFinish": false,
+                "Loop": true,
+                "TargetActorId": "BanditArcher_1",
+                "PathMarkerName": "Arch1_L",
+                "FollowActor": false,
+                "SpeedScale": 1
+            },
+            {
+                "BlockType": "MoveActor",
+                "WaitToFinish": false,
+                "Loop": true,
+                "TargetActorId": "BanditArcher_2",
+                "PathMarkerName": "Arch2_L",
+                "FollowActor": false,
+                "SpeedScale": 1
+            },
+            {
+                "BlockType": "MoveActor",
+                "WaitToFinish": false,
+                "Loop": true,
+                "TargetActorId": "BanditArmored_1",
+                "PathMarkerName": "Band1_L",
+                "FollowActor": false,
+                "SpeedScale": 1
+            },
+            {
+                "BlockType": "MoveActor",
+                "WaitToFinish": false,
+                "Loop": true,
+                "TargetActorId": "BanditArmored_2",
+                "PathMarkerName": "Band2",
+                "FollowActor": false,
+                "SpeedScale": 1
+            },
+            {
+                "BlockType": "MoveActor",
+                "WaitToFinish": false,
+                "Loop": true,
+                "TargetActorId": "BanditArmored_3",
+                "PathMarkerName": "Band3",
+                "FollowActor": false,
+                "SpeedScale": 1
+            },
+            {
+                "BlockType": "MoveActor",
+                "WaitToFinish": false,
+                "Loop": true,
+                "TargetActorId": "BanditCaptain",
+                "PathMarkerName": "Cpt1",
+                "FollowActor": false,
+                "SpeedScale": 1
+            },
+
+            
+			{
+				"BlockType": "SpeechBox",
+				"WaitToFinish": true,
+				"Entries": [
+					{
+						"EntryType":"Text",
+						"Text": "As the Hero's Party makes thier to The City, they came upon a Crossroad with an unussual sight.",
+                        "LetterDelay":0.015
+					},
+					{
+						"EntryType":"WaitToRead"
+					}
+				]
+            },
+			{
+				"WaitToFinish": false,
+				"WaitForNextButton": false,
+				"BlockType": "PanCamera",
+				"TargetType": "PathMarker",
+				"PathMarkerName": "C1"
+			},
+			{
+				"BlockType": "SpeechBox",
+				"WaitToFinish": true,
+				"Entries": [
+					{
+						"EntryType":"Text",
+						"Text": "A group of Bandits unpacking a Merchant's abondoned cart.",
+                        "LetterDelay":0.015,
+                        "NewLine": true
+					},
+					{
+						"EntryType":"WaitToRead"
+					}
+				]
+            }
+		]
+	},
+	"Dialog1":{
+		"_NextPartKey": "Dialog2",
+		"WaitForNextButton": true,
+		"#EnsurePoses": {
+			"Player1":"P1",
+			"MysteriousFigure":"M1"
+		},
+		"Blocks":[
+			{
+				"BlockType": "SpeechBox",
+				"WaitToFinish": true,
+				"WaitForNextButton": true,
+				"Entries": [ 
+                    {
+                        "EntryType": "Clear"
+                    },
+					{
+						"EntryType": "Speaker",
+						"SpeakerName": "MtFr",
+						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Neutral.png"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "I'm going to guess that the \"Merchant\" cart, doesn't belong to these \"Bandits\", "
+					},
+					{
+						"EntryType":"WaitToRead"
+					},
+					{
+						"EntryType": "Speaker",
+						"SpeakerName": "MtFr",
+						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Squint.png"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "which means",
+						"NewLine": false
+					},
+                    
+					{
+						"EntryType": "Text",
+						"Text": "... ",
+						"LetterDelay": 0.1
+					},
+					{
+						"EntryType": "Delay",
+                        "Delay": 0.5
+					},
+					{
+						"EntryType": "Speaker",
+						"SpeakerName": "MtFr",
+						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Surprize.png"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "this is a robbery!"
+					}
+                ]
+            },
+			{
+				"BlockType": "SpeechBox",
+				"WaitToFinish": true,
+				"WaitForNextButton": true,
+				"Entries": [ 
+                    {
+                        "EntryType": "Clear",
+                        "ClearSpeaker": false
+                    },
+					{
+						"EntryType": "Speaker",
+						"SpeakerName": "MtFr",
+						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Sad.png"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "If only we had gotten here first, ",
+						"NewLine": true
+					},
+					{
+						"EntryType":"WaitToRead"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "then we could have stolen everything for oursevles.",
+						"NewLine": false
+					},
+					{
+						"EntryType":"WaitToRead"
+					},
+					{
+						"EntryType": "Speaker",
+						"SpeakerName": "MtFr",
+						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Happy.png"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "But now we can get some Hero Points by killing these guys!",
+						"NewLine": true
+					},
+					{
+						"EntryType":"WaitToRead"
+					}
+				]
+            },
+            {
+                "BlockType": "MoveActor",
+                "WaitToFinish": false,
+                "TargetActorId": "BanditCaptain",
+                "PathMarkerName": "Cpt2",
+                "FollowActor": false,
+                "SpeedScale": 1.4
+            },
+            {
+                "BlockType": "MoveActor",
+                "WaitToFinish": false,
+                "TargetActorId": "BanditArmored_3",
+                "PathMarkerName": "Band3_2",
+                "FollowActor": false,
+                "SpeedScale": 1.4
+            },
+			{
+				"BlockType": "SpeechBox",
+				"WaitToFinish": false,
+				"WaitForNextButton": false,
+                "Hide": true,
+				"Entries": [ 
+                    {
+                        "EntryType": "Clear",
+                        "ClearSpeaker": false
+                    }
+				]
+            },
+			{
+				"BlockType":"Delay",
+				"Time": 1
+			},
+			{
+				"BlockType": "SpeechBox",
+				"WaitToFinish": false,
+				"WaitForNextButton": false,
+				"Entries": [ 
+                    {
+                        "EntryType": "Clear",
+                        "ClearSpeaker": false
+                    },
+					{
+						"EntryType": "Speaker",
+						"SpeakerName": "MtFr",
+						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Neutral.png"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "By the way, \"Hero Points\" aren't a thing. That was a figure of speech.",
+						"NewLine": true
+					},
+                    {
+                        "EntryType": "Delay",
+                         "Delay": 3.0
+                    },
+                    {
+                        "EntryType": "Hide"
+                    }
+				]
+            },
+            {
+                "BlockType": "MoveActor",
+                "WaitToFinish": true,
+                "TargetActorId": "BanditArmored_3",
+                "PathMarkerName": "Band3_CP",
+                "FollowActor": false,
+                "SpeedScale": 1.4
+            },
+
+
+			{
+				"BlockType": "SpeechBox",
+				"WaitToFinish": true,
+				"WaitForNextButton": false,
+				"TopBox": false,
+                "Hide": true,
+				"Entries": [ 
+                    {
+                        "EntryType": "Clear"
+                    }
+				]
+            },
+
+            {
+                "BlockType": "MoveActor",
+                "WaitToFinish": false,
+                "TargetActorId": "BanditArmored_3",
+                "PathMarkerName": "Band3_3",
+                "FollowActor": false,
+                "SpeedScale": 1.4
+            },
+            {
+                "BlockType": "MoveActor",
+                "WaitToFinish": false,
+                "TargetActorId": "BanditCaptain",
+                "PathMarkerName": "Cpt3",
+                "FollowActor": false,
+                "SpeedScale": 1.4
+            },
+			{
+				"BlockType": "SpeechBox",
+				"WaitToFinish": true,
+				"WaitForNextButton": false,
+				"TopBox": true,
+				"Entries": [ 
+                    {
+                        "EntryType": "Clear",
+                        "ClearSpeaker": false
+                    },
+					{
+						"EntryType": "Speaker",
+						"SpeakerName": "BCpt",
+						"SpeakerPort": "res://defs/Actors/NPCs/Bandits/Sprites/Portraits/BanditCpt_Neutral.png"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "Check the last of those crates, then we're moving out!",
+						"NewLine": true
+					},
+					{
+						"EntryType":"WaitToRead"
+					}
+				]
+            },
+            {
+                "BlockType": "MoveActor",
+                "WaitToFinish": false,
+                "StopLoopingActors": ["BanditArcher_1","BanditArcher_2","BanditArmored_1"]
+            },
+            {
+
+				"BlockType": "SpeechBox",
+				"WaitToFinish": false,
+				"WaitForNextButton": false,
+				"TopBox": true,
+				"Entries": [
+					{
+						"EntryType": "Speaker",
+						"SpeakerName": "BCpt",
+						"SpeakerPort": "res://defs/Actors/NPCs/Bandits/Sprites/Portraits/BanditCpt_Happy.png"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "We got real lucky, gang. ",
+						"NewLine": true
+					},
+					{
+						"EntryType":"WaitToRead"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "Abandoned carts aren't something you find everyday, so appreciate the easy haul.",
+						"NewLine": false
+					},
+					{
+						"EntryType":"WaitToRead"
+					}
+				]
+            },
+            {
+                "BlockType": "MoveActor",
+                "WaitToFinish": true,
+                "TargetActorId": "BanditArmored_2",
+                "PathMarkerName": "Band2_2",
+                "FollowActor": false,
+                "SpeedScale": 1.2
+            },
+			{
+				"WaitToFinish": false,
+				"WaitForNextButton": false,
+				"BlockType": "PanCamera",
+				"TargetType": "PathMarker",
+				"PathMarkerName": "C2"
+			},
+			{
+				"BlockType": "PopUp",
+				"WaitToFinish": true,
+				"Create":"PopUp1",
+				"PopUpType": "SpeechBubble",
+				"TargetActorId": "BanditArmored_2",
+				"GrowDirection": "Center",
+				"Text":"?",
+				"Offset": [0,-21]
+			},
+            {
+
+				"BlockType": "SpeechBox",
+				"WaitToFinish": false,
+				"WaitForNextButton": false,
+				"TopBox": true,
+                "Hide": true,
+				"Entries": [
+					{
+						"EntryType":"Clear"
+					}
+				]
+            },
+			{
+				"BlockType":"Delay",
+				"Time": 1
+			},
+            {
+                "BlockType": "MoveActor",
+                "WaitToFinish": false,
+                "TargetActorId": "BanditArmored_2",
+                "PathMarkerName": "Band2_3",
+                "FollowActor": false,
+                "SpeedScale": 1.2
+            },
+			{
+				"BlockType": "PopUp",
+				"WaitToFinish": false,
+				"Delete":"PopUp1"
+			},
+			{
+				"BlockType": "SpeechBox",
+				"WaitToFinish": true,
+				"WaitForNextButton": false,
+				"TopBox": false,
+				"Entries": [ 
+                    {
+                        "EntryType": "Clear",
+                        "ClearSpeaker": false
+                    },
+					{
+						"EntryType": "Speaker",
+						"SpeakerName": "Bndt",
+						"SpeakerPort": "res://defs/Actors/NPCs/Bandits/Sprites/Portraits/Bandit_Neutral.png"
+					},
+                    
+					{
+						"EntryType": "Text",
+						"Text": "... ",
+						"LetterDelay": 0.1
+					},
+					{
+						"EntryType": "Text",
+						"Text": "Uhh Captain, ",
+						"NewLine": false
+					},
+					{
+						"EntryType":"WaitToRead"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "we've got a Soldier here and",
+						"NewLine": false
+					}
+				]
+            },
+            {
+                "BlockType": "MoveActor",
+                "WaitToFinish": false,
+                "TargetActorId": "BanditArcher_1",
+                "PathMarkerName": "Arch1_South",
+                "FollowActor": false,
+                "SpeedScale": 1
+            },
+            {
+                "BlockType": "MoveActor",
+                "WaitToFinish": false,
+                "TargetActorId": "BanditArcher_2",
+                "PathMarkerName": "Arch2_South",
+                "FollowActor": false,
+                "SpeedScale": 1
+            },
+            {
+                "BlockType": "MoveActor",
+                "WaitToFinish": false,
+                "TargetActorId": "BanditArmored_1",
+                "PathMarkerName": "Band1_South",
+                "FollowActor": false,
+                "SpeedScale": 1
+            },
+			{
+				"BlockType": "SpeechBox",
+				"WaitToFinish": true,
+				"WaitForNextButton": false,
+				"TopBox": false,
+				"Entries": [ 
+                    
+					{
+						"EntryType": "Text",
+						"Text": "... ",
+						"LetterDelay": 0.1
+					},
+					{
+						"EntryType": "Text",
+						"Text": "some kind of Demon Monkey?",
+						"NewLine": true
+					}
+				]
+            }
+            
+		]
+	},
+    
+	"Dialog2":{
+		"_NextPartKey": null,
+		"WaitForNextButton": true,
+		"Inital_BlackOutState": "Clear",
+		"EnsurePoses": {
+			"_Camera":"C2",
+			"Player1":"P1",
+			"MysteriousFigure":"M1",
+            "BanditArcher_1": "Arch1_South",
+            "BanditArcher_2": "Arch2_South",
+            "BanditArmored_1": "Band1_South",
+            "BanditArmored_2": "Band2_3",
+            "BanditArmored_3": "Band3_3",
+            "BanditCaptain": "Cpt3"
+		},
+		"Blocks":[
+			{
+				"BlockType": "SpeechBox",
+				"WaitToFinish": true,
+				"WaitForNextButton": false,
+				"Entries": [ 
+                    {
+                        "EntryType": "Clear"
+                    },
+					{
+						"EntryType": "Speaker",
+						"SpeakerName": "MtFr",
+						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Angry.png"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "Hey! "
+					},
+					{
+						"EntryType":"WaitToRead"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "I'm not a Monkey!"
+					},
+					{
+						"EntryType":"WaitToRead"
+					}
+                ]
+            },
+            {
+                "BlockType":"Delay",
+                "Time":1
+            },
+			{
+				"BlockType": "SpeechBox",
+				"WaitToFinish": true,
+				"WaitForNextButton": true,
+				"TopBox": false,
+				"Entries": [ 
+                    {
+                        "EntryType": "Clear",
+                        "ClearSpeaker": false
+                    },
+					{
+						"EntryType": "Speaker",
+						"SpeakerName": "BCpt",
+						"SpeakerPort": "res://defs/Actors/NPCs/Bandits/Sprites/Portraits/BanditCpt_Laugh.png"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "Ha ",
+						"NewLine": false
+					},
+					{
+						"EntryType":"Delay",
+                        "Delay":0.3
+					},
+					{
+						"EntryType": "Text",
+						"Text": "ha ",
+						"NewLine": false
+					},
+					{
+						"EntryType":"Delay",
+                        "Delay":0.3
+					},
+					{
+						"EntryType": "Text",
+						"Text": "ha ",
+						"NewLine": false
+					},
+					{
+						"EntryType":"Delay",
+                        "Delay":0.3
+					},
+					{
+						"EntryType": "Speaker",
+						"SpeakerName": "BCpt",
+						"SpeakerPort": "res://defs/Actors/NPCs/Bandits/Sprites/Portraits/BanditCpt_Happy.png"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "'course you ain't a monkey, ",
+						"NewLine": false
+					},
+					{
+						"EntryType":"Delay",
+                        "Delay":0.8
+					},
+					{
+						"EntryType": "Speaker",
+						"SpeakerName": "BCpt",
+						"SpeakerPort": "res://defs/Actors/NPCs/Bandits/Sprites/Portraits/BanditCpt_Neutral.png"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "you're a witness. ",
+						"NewLine": false
+					},
+					{
+						"EntryType":"Delay",
+                        "Delay":1
+					},
+					{
+						"EntryType": "Speaker",
+						"SpeakerName": "BCpt",
+						"SpeakerPort": "res://defs/Actors/NPCs/Bandits/Sprites/Portraits/BanditCpt_Angry.png"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "And that's a problem.",
+						"NewLine": true
+					},
+					{
+						"EntryType":"WaitToRead"
+					}
+				]
+            },
+			{
+				"BlockType": "SpeechBox",
+				"WaitToFinish": true,
+				"WaitForNextButton": false,
+				"TopBox": true,
+                "Hide": true,
+				"Entries": [ 
+                    {
+                        "EntryType": "Clear",
+                        "ClearSpeaker": false
+                    }
+				]
+            },
+			{
+				"BlockType": "PopUp",
+				"WaitToFinish": false,
+				"Create":"PopUp2",
+				"PopUpType": "SpeechBubble",
+				"TargetActorId": "BanditArmored_3",
+				"GrowDirection": "Center",
+				"Text":"!",
+				"Offset": [0,-21]
+			},
+			{
+				"BlockType": "AnimateNode",
+                "TargetElement": "MapController/ActorTileMapLayer/RogueInABox",
+                "AnimationName": "open_box",
+                "WaitToFinish": true
+            },
+			{
+				"BlockType": "PopUp",
+				"WaitToFinish": false,
+				"Delete":"PopUp2"
+			},
+            {
+                "BlockType": "MoveActor",
+                "WaitToFinish": false,
+                "TargetActorId": "BanditCaptain",
+                "PathMarkerName": "Cpt_Look",
+                "FollowActor": false,
+                "SpeedScale": 1
+            },
+			{
+				"BlockType": "SpeechBox",
+				"WaitToFinish": true,
+				"WaitForNextButton": true,
+				"TopBox": false,
+				"Entries": [ 
+                    {
+                        "EntryType": "Clear",
+                        "ClearSpeaker": false
+                    },
+					{
+						"EntryType": "Speaker",
+						"SpeakerName": "BCpt",
+						"SpeakerPort": "res://defs/Actors/NPCs/Bandits/Sprites/Portraits/BanditCpt_Angry.png"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "Looks like you're not the only ones either.",
+						"NewLine": false
+					},
+					{
+						"EntryType":"WaitToRead"
+					},
+					{
+						"EntryType": "Speaker",
+						"SpeakerName": "BCpt",
+						"SpeakerPort": "res://defs/Actors/NPCs/Bandits/Sprites/Portraits/BanditCpt_Neutral.png"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "Don't know you were doing in that box, and don't care.",
+						"NewLine": true
+					},
+					{
+						"EntryType":"WaitToRead"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "This haul's our, and you three arn't leaving.",
+						"NewLine": true
+					},
+					{
+						"EntryType":"WaitToRead"
+					}
+				]
+            },
+			{
+				"BlockType": "SpeechBox",
+				"WaitToFinish": true,
+				"WaitForNextButton": true,
+				"TopBox": false,
+				"Entries": [ 
+                    {
+                        "EntryType": "Clear",
+                        "ClearSpeaker": false
+                    },
+					{
+						"EntryType": "Speaker",
+						"SpeakerName": "MtFr",
+						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Neutral.png"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "This might actually be a good opertunity for us.",
+						"NewLine": false
+					},
+					{
+						"EntryType":"WaitToRead"
+					},
+					{
+						"EntryType": "Speaker",
+						"SpeakerName": "MtFr",
+						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Happy.png"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "One man's witness is another's new recruit, as they say.",
+						"NewLine": true
+					},
+					{
+						"EntryType":"WaitToRead"
+					},
+					{
+						"EntryType": "Speaker",
+						"SpeakerName": "MtFr",
+						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Sad.png"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "And we could definiatly use the help.",
+						"NewLine": true
+					},
+					{
+						"EntryType":"WaitToRead"
+					}
+				]
+            },
+			{
+				"BlockType": "SpeechBox",
+				"WaitToFinish": true,
+				"WaitForNextButton": false,
+				"TopBox": false,
+				"Entries": [ 
+                    {
+                        "EntryType": "Clear",
+                        "ClearSpeaker": false
+                    },
+					{
+						"EntryType": "Speaker",
+						"SpeakerName": "MtFr",
+						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Smile.png"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "Hey green guy! ",
+						"NewLine": false
+					},
+					{
+						"EntryType":"WaitToRead"
+					}
+				]
+            },
+			{
+				"BlockType": "PopUp",
+				"WaitToFinish": true,
+				"Create":"PopUp3",
+				"PopUpType": "SpeechBubble",
+				"TargetActorId": "BanditArmored_3",
+				"GrowDirection": "Center",
+				"Text":"?",
+				"Offset": [32,-21]
+			},
+			{
+				"WaitToFinish": true,
+				"WaitForNextButton": false,
+				"BlockType": "PanCamera",
+				"TargetType": "PathMarker",
+				"PathMarkerName": "C3"
+			},
+			{
+				"BlockType": "AnimateNode",
+                "TargetElement": "MapController/ActorTileMapLayer/RogueInABox",
+                "AnimationName": "look_forward",
+                "WaitToFinish": true
+            },
+            {
+                "BlockType": "MoveActor",
+                "WaitToFinish": false,
+                "TargetActorId": "BanditArcher_1",
+                "PathMarkerName": "Arch1_South",
+                "FollowActor": false,
+                "SpeedScale": 1
+            },
+            {
+                "BlockType": "MoveActor",
+                "WaitToFinish": false,
+                "TargetActorId": "BanditArcher_2",
+                "PathMarkerName": "Arch2_South",
+                "FollowActor": false,
+                "SpeedScale": 1
+            },
+            {
+                "BlockType": "MoveActor",
+                "WaitToFinish": false,
+                "TargetActorId": "BanditArmored_1",
+                "PathMarkerName": "Band1_South",
+                "FollowActor": false,
+                "SpeedScale": 1
+            },
+            {
+                "BlockType": "MoveActor",
+                "WaitToFinish": false,
+                "TargetActorId": "BanditArmored_2",
+                "PathMarkerName": "Band2_South",
+                "FollowActor": false,
+                "SpeedScale": 1
+            },
+            {
+                "BlockType": "MoveActor",
+                "WaitToFinish": false,
+                "TargetActorId": "BanditArmored_3",
+                "PathMarkerName": "Band3_South",
+                "FollowActor": false,
+                "SpeedScale": 1
+            },
+            {
+                "BlockType": "MoveActor",
+                "WaitToFinish": false,
+                "TargetActorId": "BanditCaptain",
+                "PathMarkerName": "Cpt_South",
+                "FollowActor": false,
+                "SpeedScale": 1
+            },
+            {
+                "BlockType":"Delay",
+                "Time": 0.8
+            },
+			{
+				"BlockType": "PopUp",
+				"WaitToFinish": false,
+				"Delete":"PopUp3"
+			},
+			{
+				"BlockType": "SpeechBox",
+				"WaitToFinish": true,
+				"WaitForNextButton": true,
+				"TopBox": false,
+				"Entries": [ 
+					{
+						"EntryType": "Speaker",
+						"SpeakerName": "MtFr",
+						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Smile.png"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "Do you want to be a hero?",
+						"NewLine": true
+					},
+					{
+						"EntryType":"WaitToRead"
+					}
+				]
+            },
+			{
+				"BlockType": "AnimateNode",
+                "TargetElement": "MapController/ActorTileMapLayer/RogueInABox",
+                "AnimationName": "look_left",
+                "WaitToFinish": true
+            },
+            {
+                "BlockType":"Delay",
+                "Time": 0.5
+            },
+            {
+                "BlockType": "MoveActor",
+                "WaitToFinish": false,
+                "TargetActorId": "BanditArcher_1",
+                "PathMarkerName": "Arch1_Look",
+                "FollowActor": false,
+                "SpeedScale": 1
+            },
+            {
+                "BlockType": "MoveActor",
+                "WaitToFinish": false,
+                "TargetActorId": "BanditArcher_2",
+                "PathMarkerName": "Arch2_Look",
+                "FollowActor": false,
+                "SpeedScale": 1
+            },
+            {
+                "BlockType": "MoveActor",
+                "WaitToFinish": false,
+                "TargetActorId": "BanditArmored_1",
+                "PathMarkerName": "Band1_Look",
+                "FollowActor": false,
+                "SpeedScale": 1
+            },
+            {
+                "BlockType": "MoveActor",
+                "WaitToFinish": false,
+                "TargetActorId": "BanditArmored_2",
+                "PathMarkerName": "Band2_Look",
+                "FollowActor": false,
+                "SpeedScale": 1
+            },
+            {
+                "BlockType": "MoveActor",
+                "WaitToFinish": false,
+                "TargetActorId": "BanditArmored_3",
+                "PathMarkerName": "Band3_Look",
+                "FollowActor": false,
+                "SpeedScale": 1
+            },
+            {
+                "BlockType": "MoveActor",
+                "WaitToFinish": false,
+                "TargetActorId": "BanditCaptain",
+                "PathMarkerName": "Cpt_Look",
+                "FollowActor": false,
+                "SpeedScale": 1
+            },
+            {
+                "BlockType":"Delay",
+                "Time": 1.5
+            },
+			{
+				"BlockType": "AnimateNode",
+                "TargetElement": "MapController/ActorTileMapLayer/RogueInABox",
+                "AnimationName": "look_forward",
+                "WaitToFinish": true
+            },
+            {
+                "BlockType":"Delay",
+                "Time": 0.8
+            },
+			{
+				"BlockType": "AnimateNode",
+                "TargetElement": "MapController/ActorTileMapLayer/RogueInABox",
+                "AnimationName": "shake_no",
+                "WaitToFinish": true
+            },
+            {
+                "BlockType":"Delay",
+                "Time": 1
+            },
+			{
+				"BlockType": "SpeechBox",
+				"WaitToFinish": true,
+				"WaitForNextButton": true,
+				"TopBox": false,
+				"Entries": [ 
+                    {
+                        "EntryType": "Clear",
+                        "ClearSpeaker":false
+
+                    },
+					{
+						"EntryType": "Speaker",
+						"SpeakerName": "MtFr",
+						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Neutral.png"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "No",
+						"NewLine": true
+					},
+					{
+						"EntryType": "Text",
+						"Text": "... ",
+						"LetterDelay": 0.03
+					},
+					{
+						"EntryType": "Text",
+						"Text": "I meant do you want to join our party.",
+						"NewLine": false
+					},
+					{
+						"EntryType":"WaitToRead"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "When combat starts you'll spawn over here.",
+						"NewLine": true
+					},
+					{
+						"EntryType":"WaitToRead"
+					}
+				]
+            },
+			{
+				"BlockType": "AnimateNode",
+                "TargetElement": "MapController/ActorTileMapLayer/RogueInABox",
+                "AnimationName": "nod_yes",
+                "WaitToFinish": true
+            },
+			{
+				"BlockType": "SpeechBox",
+				"WaitToFinish": true,
+				"WaitForNextButton": true,
+				"TopBox": false,
+				"Entries": [ 
+                    {
+                        "EntryType":"Clear"
+                    },
+					{
+						"EntryType":"Text",
+						"Text": "And so, a Rogue joined the Hero's Party.",
+                        "LetterDelay":0.015
+					},
+					{
+						"EntryType":"WaitToRead"
+					}
+				]
+            },
+			{
+				"BlockType": "SpeechBox",
+				"WaitToFinish": true,
+				"WaitForNextButton": true,
+				"TopBox": false,
+				"Entries": [ 
+                    {
+                        "EntryType": "Clear",
+                        "ClearSpeaker": false
+                    },
+					{
+						"EntryType": "Speaker",
+						"SpeakerName": "BCpt",
+						"SpeakerPort": "res://defs/Actors/NPCs/Bandits/Sprites/Portraits/BanditCpt_Happy.png"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "How cute, ",
+						"NewLine": false
+					},
+					{
+						"EntryType":"WaitToRead"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "now yall can die as a team.",
+						"NewLine": false
+					},
+					{
+						"EntryType":"WaitToRead"
+					},
+					{
+						"EntryType": "Speaker",
+						"SpeakerName": "BCpt",
+						"SpeakerPort": "res://defs/Actors/NPCs/Bandits/Sprites/Portraits/BanditCpt_Angry.png"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "Combat positions, gang!",
+						"NewLine": true
+					},
+					{
+						"EntryType":"WaitToRead"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "Looks like we're working for this after all.",
+						"NewLine": true
+					},
+					{
+						"EntryType":"WaitToRead"
+					}
+				]
+            },
+        ]
+    }
+}

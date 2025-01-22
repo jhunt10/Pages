@@ -15,7 +15,8 @@ enum BlockTypes {
 	SpawnActor,
 	TextInput,
 	ToCamp,
-	CustomBlock
+	CustomBlock,
+	AnimateNode
 }
 
 @export var scene_root:Node
@@ -32,6 +33,7 @@ enum BlockTypes {
 var _condition_flags:Dictionary={}
 var _condition_watcher:BaseDialogConditionWatcher
 var _custom_blocks:Dictionary = {}
+var _animation_players:Dictionary = {}
 
 ## Dialog scripts are divided into "parts" made up of "blocks"
 var _dialog_part_datas:Dictionary
@@ -402,7 +404,7 @@ func _handle_block(block_data:Dictionary)->bool:
 				if not actor_node.reached_motion_destination.is_connected(_on_actor_move_finished):
 					actor_node.reached_motion_destination.connect(_on_actor_move_finished.bind(target_actor_id))
 				return block_data.get("WaitToFinish", false)
-		
+	
 	#----------------------------------
 	#         Pop Up
 	# Options:
@@ -416,6 +418,36 @@ func _handle_block(block_data:Dictionary)->bool:
 		if wait_on_pop_up:
 			return true
 	
+	#----------------------------------
+	#         Animate Node
+	# Options:
+	# 	 "WaitToFinish": Bool(false): Add "[PopUp_Id]" to list of block states
+	# 	 "PopUpType": String (See PopupController for options)
+	# 	 "Create": String : Key for popup to be created
+	# 	 "Delete": String : Key for popup to be deleted
+	#----------------------------------
+	if block_type == BlockTypes.AnimateNode:
+		var target_element_path = block_data.get("TargetElement", null)
+		if not target_element_path:
+			return false
+		var target_element = self.scene_root.get_node(target_element_path)
+		if not target_element:
+			printerr("DialogControler AnimateNode: Failed to find node: %s" % [target_element_path])
+			return false
+		var animation_player = target_element.get_child(0)
+		if not (animation_player is AnimationPlayer):
+			printerr("DialogControler AnimateNode: First child of node is not AnimationPlayer: %s" % [target_element_path])
+			return false
+		var animation_name = block_data.get("AnimationName", "")
+		var wait_to_finish = block_data.get("WaitToFinish", false)
+		if wait_to_finish:
+			var key = target_element_path + ":" + animation_name 
+			(animation_player as AnimationPlayer).animation_finished.connect(_on_animation_finished.bind(key))
+			_block_states[key] = BlockStates.Playing
+			_animation_players[key] = animation_player
+		(animation_player as AnimationPlayer).play(animation_name)
+		return wait_to_finish
+		
 	#----------------------------------
 	#         Clear Que
 	# clears player que
@@ -481,7 +513,6 @@ func _handle_block(block_data:Dictionary)->bool:
 			CombatRootControl.Instance.trigger_end_condition(true)
 			_state = STATES.Finished
 		return false
-	
 	return false
 func load_dialog_script(file_path):
 	var file = FileAccess.open(file_path, FileAccess.READ)
@@ -501,6 +532,14 @@ func load_dialog_script(file_path):
 		return
 	_cur_part_key = start_part_key
 	_start_part(_cur_part_key)
+
+func _on_animation_finished(animation_name:String, key:String):
+	print("Animation Finished: %s" % [animation_name])
+	var animation_player = _animation_players[key]
+	(animation_player as AnimationPlayer).animation_finished.disconnect(_on_animation_finished)
+	_animation_players.erase(key)
+	_block_states[key] = BlockStates.Finished
+	
 
 func _on_speech_box_finished(is_top:bool):
 	print("Speech Box Finished")
@@ -586,7 +625,8 @@ func force_positions(force_pos_data:Dictionary):
 			var actor = game_state.get_actor(actor_id, true, false)
 			if not actor:
 				actor = ActorLibrary.get_actor(actor_id)
-				CombatRootControl.Instance.add_actor(actor, 1, path_marker.get_last_pos())
+				if actor_id:
+					CombatRootControl.Instance.add_actor(actor, 1, path_marker.get_last_pos())
 			else:
 				game_state.set_actor_pos(actor, path_marker.get_last_pos())
 		#var actor_node = CombatRootControl.get_actor_node(actor_id)
@@ -595,8 +635,16 @@ func force_positions(force_pos_data:Dictionary):
 			#return false
 		#actor_node.set_map_pos(path_marker.get_last_pos())
 
-## Returns true if actor fas found and queued for movement
+## Returns true if actor was found and queued for movement
 func _do_move_actor(block_data)->bool:
+	if block_data.has("StopLoopingActors"):
+		for actor_id in block_data.get("StopLoopingActors"):
+			var actor_node = CombatRootControl.get_actor_node(actor_id)
+			if !actor_node:
+				printerr("DialogController: MoveActor failed to find actor_node for Target Actor: %s" %[actor_id])
+			else:
+				actor_node._moving_in_loop = false
+		return false
 	var target_actor_id = block_data.get("TargetActorId", null)
 	if !target_actor_id:
 		printerr("DialogController: No 'TargetActorId' provided on MoveActor block.")
@@ -630,5 +678,10 @@ func _do_move_actor(block_data)->bool:
 			"Speed": block_data.get("Speed", 1)
 		})
 		actor_pos = path_pos
-	actor_node.que_scripted_movement(path_data)
+		
+	if path_marker.is_loop:
+		path_data[-1]['End'] = true
+		actor_node.set_scripted_movement_loop(path_data)
+	else:
+		actor_node.que_scripted_movement(path_data)
 	return true

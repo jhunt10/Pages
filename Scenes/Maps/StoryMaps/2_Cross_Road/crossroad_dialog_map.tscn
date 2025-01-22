@@ -1,30 +1,31 @@
-[gd_scene load_steps=40 format=4 uid="uid://kjmbf8betc6t"]
+[gd_scene load_steps=41 format=4 uid="uid://1qiv70e4durv"]
 
-[ext_resource type="Script" path="res://assets/Scripts/Map/map_controler_node.gd" id="1_xsjmp"]
-[ext_resource type="Texture2D" uid="uid://dxan6lyrg8db3" path="res://assets/Sprites/TileSets/GrassPath_TileSheet.png" id="2_glqif"]
-[ext_resource type="Texture2D" uid="uid://b7ddcxbgkvf57" path="res://assets/Sprites/TileSets/StoneRoadTileSheet.png" id="3_bktfm"]
-[ext_resource type="Texture2D" uid="uid://cws63rlm6rfno" path="res://assets/Sprites/TileSets/TerrainEditingTileSet.png" id="3_lxweh"]
-[ext_resource type="Texture2D" uid="uid://b28kqcwb1e2ke" path="res://assets/Sprites/TileSets/StoneRoadTileSheet2.png" id="4_m6qfl"]
-[ext_resource type="Script" path="res://Scenes/Maps/tile_map_outputer.gd" id="4_ycrw2"]
-[ext_resource type="Texture2D" uid="uid://bbyc1lssrgqcw" path="res://assets/Sprites/TileSets/DisplayTileSet.png" id="5_iduch"]
-[ext_resource type="Texture2D" uid="uid://bt1h7jcc70vkq" path="res://assets/Sprites/TileSets/TreeTileSheet.png" id="6_ptiy4"]
-[ext_resource type="Texture2D" uid="uid://bds8rjmyltjys" path="res://assets/Sprites/TileSets/Decor_TileSet.png" id="7_1r7fq"]
-[ext_resource type="Texture2D" uid="uid://cua25mnwds3kq" path="res://assets/Sprites/TileSets/House_Abandoned_TileSet.png" id="8_eypbx"]
-[ext_resource type="PackedScene" uid="uid://bpurspf6xbf1h" path="res://Scenes/Combat/UiNodes/TargetAreaDisplay/target_area_display_node.tscn" id="9_kyo11"]
-[ext_resource type="Script" path="res://Scenes/Maps/MapEditing/map_path_node.gd" id="10_e1jik"]
-[ext_resource type="Texture2D" uid="uid://d1rfl5p8pk2qv" path="res://Scenes/Maps/MapEditing/MapMarker.png" id="11_kd7w3"]
-[ext_resource type="Texture2D" uid="uid://lfjvqyylrvku" path="res://Scenes/Maps/MapEditing/MapPathMarker.png" id="12_7mwcd"]
-[ext_resource type="Texture2D" uid="uid://dm8yf3o2kpwm8" path="res://defs/Items/Equipment/BanditEquipment/Sprites/BanditHelmet_Icon.png" id="12_txuw0"]
-[ext_resource type="Script" path="res://Scenes/Maps/MapEditing/map_path_point_node.gd" id="13_lplum"]
-[ext_resource type="Texture2D" uid="uid://bfaa4hc68l26m" path="res://defs/Items/Equipment/BanditEquipment/Sprites/BanditCptHelmet_Icon.png" id="14_5wqpq"]
-[ext_resource type="Texture2D" uid="uid://kh2uekpf4sb8" path="res://Scenes/Maps/MapEditing/ActorSpawnSprite.png" id="14_8fo6c"]
-[ext_resource type="Texture2D" uid="uid://cp8nbcft1dg3n" path="res://defs/Items/Equipment/BanditEquipment/Sprites/BanditBycocket_Icon.png" id="15_f8j4w"]
-[ext_resource type="Script" path="res://Scenes/Maps/MapEditing/actor_spawn_node.gd" id="15_w357o"]
-[ext_resource type="Texture2D" uid="uid://ciuklk5v766ab" path="res://defs/Actors/NPCs/MnFg/MysteriousFigure_SpriteSheet.png" id="16_brdvp"]
-[ext_resource type="Texture2D" uid="uid://bqv6yn42oymo" path="res://defs/Actors/NPCs/FishMerch/cart.png" id="23_pqeun"]
+[ext_resource type="Script" path="res://assets/Scripts/Map/map_controler_node.gd" id="1_g8aii"]
+[ext_resource type="Texture2D" uid="uid://dxan6lyrg8db3" path="res://assets/Sprites/TileSets/GrassPath_TileSheet.png" id="2_rlpu8"]
+[ext_resource type="Texture2D" uid="uid://b7ddcxbgkvf57" path="res://assets/Sprites/TileSets/StoneRoadTileSheet.png" id="3_kpyj5"]
+[ext_resource type="Texture2D" uid="uid://b28kqcwb1e2ke" path="res://assets/Sprites/TileSets/StoneRoadTileSheet2.png" id="4_3tbpx"]
+[ext_resource type="Texture2D" uid="uid://bbyc1lssrgqcw" path="res://assets/Sprites/TileSets/DisplayTileSet.png" id="5_2iss0"]
+[ext_resource type="Texture2D" uid="uid://cws63rlm6rfno" path="res://assets/Sprites/TileSets/TerrainEditingTileSet.png" id="6_j3q6m"]
+[ext_resource type="Script" path="res://Scenes/Maps/tile_map_outputer.gd" id="7_h2uoh"]
+[ext_resource type="Texture2D" uid="uid://bt1h7jcc70vkq" path="res://assets/Sprites/TileSets/TreeTileSheet.png" id="8_80knt"]
+[ext_resource type="Texture2D" uid="uid://bds8rjmyltjys" path="res://assets/Sprites/TileSets/Decor_TileSet.png" id="9_tul0j"]
+[ext_resource type="Texture2D" uid="uid://cua25mnwds3kq" path="res://assets/Sprites/TileSets/House_Abandoned_TileSet.png" id="10_e3is2"]
+[ext_resource type="PackedScene" uid="uid://bpurspf6xbf1h" path="res://Scenes/Combat/UiNodes/TargetAreaDisplay/target_area_display_node.tscn" id="11_wfagc"]
+[ext_resource type="PackedScene" uid="uid://ta3dmyoe18lb" path="res://Scenes/Maps/StoryMaps/2_Cross_Road/RogueInABox/rogue_in_a_box.tscn" id="12_45pj5"]
+[ext_resource type="Script" path="res://Scenes/Maps/MapEditing/map_path_node.gd" id="12_w8su4"]
+[ext_resource type="Texture2D" uid="uid://d1rfl5p8pk2qv" path="res://Scenes/Maps/MapEditing/MapMarker.png" id="13_mtfyt"]
+[ext_resource type="Texture2D" uid="uid://lfjvqyylrvku" path="res://Scenes/Maps/MapEditing/MapPathMarker.png" id="14_tl4vc"]
+[ext_resource type="Script" path="res://Scenes/Maps/MapEditing/map_path_point_node.gd" id="15_gtoot"]
+[ext_resource type="Texture2D" uid="uid://kh2uekpf4sb8" path="res://Scenes/Maps/MapEditing/ActorSpawnSprite.png" id="16_cg6jh"]
+[ext_resource type="Script" path="res://Scenes/Maps/MapEditing/actor_spawn_node.gd" id="17_fdm2k"]
+[ext_resource type="Texture2D" uid="uid://bfaa4hc68l26m" path="res://defs/Items/Equipment/BanditEquipment/Sprites/BanditCptHelmet_Icon.png" id="18_6oeij"]
+[ext_resource type="Texture2D" uid="uid://dm8yf3o2kpwm8" path="res://defs/Items/Equipment/BanditEquipment/Sprites/BanditHelmet_Icon.png" id="19_5dcvg"]
+[ext_resource type="Texture2D" uid="uid://cp8nbcft1dg3n" path="res://defs/Items/Equipment/BanditEquipment/Sprites/BanditBycocket_Icon.png" id="20_3csu2"]
+[ext_resource type="Texture2D" uid="uid://ciuklk5v766ab" path="res://defs/Actors/NPCs/MnFg/MysteriousFigure_SpriteSheet.png" id="21_jd8i5"]
+[ext_resource type="Texture2D" uid="uid://bqv6yn42oymo" path="res://defs/Actors/NPCs/FishMerch/cart.png" id="22_26fwc"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lwpvo"]
-texture = ExtResource("2_glqif")
+texture = ExtResource("2_rlpu8")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 1:0/0 = 0
@@ -416,7 +417,7 @@ terrain_set_0/terrain_1/color = Color(0.714138, 0.0121868, 0.724753, 1)
 sources/1 = SubResource("TileSetAtlasSource_lwpvo")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nw3dw"]
-texture = ExtResource("3_bktfm")
+texture = ExtResource("3_kpyj5")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 0:0/0/terrain_set = 0
@@ -751,7 +752,7 @@ texture_region_size = Vector2i(32, 32)
 11:3/0/terrains_peering_bit/top_side = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mvp1k"]
-texture = ExtResource("4_m6qfl")
+texture = ExtResource("4_3tbpx")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 1:0/0 = 0
@@ -807,7 +808,7 @@ sources/0 = SubResource("TileSetAtlasSource_nw3dw")
 sources/1 = SubResource("TileSetAtlasSource_mvp1k")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yyoo6"]
-texture = ExtResource("5_iduch")
+texture = ExtResource("5_2iss0")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 1:0/0 = 0
@@ -831,7 +832,7 @@ tile_size = Vector2i(32, 32)
 sources/1 = SubResource("TileSetAtlasSource_yyoo6")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6gfyt"]
-texture = ExtResource("3_lxweh")
+texture = ExtResource("6_j3q6m")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 1:0/0 = 0
@@ -855,7 +856,7 @@ tile_size = Vector2i(32, 32)
 sources/0 = SubResource("TileSetAtlasSource_6gfyt")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ik6pw"]
-texture = ExtResource("6_ptiy4")
+texture = ExtResource("8_80knt")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 0:0/0/z_index = 10
@@ -1242,7 +1243,7 @@ terrain_set_0/terrain_1/color = Color(0.767167, 0.22471, 0, 1)
 sources/0 = SubResource("TileSetAtlasSource_ik6pw")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ku4ha"]
-texture = ExtResource("7_1r7fq")
+texture = ExtResource("9_tul0j")
 texture_region_size = Vector2i(32, 64)
 0:0/0 = 0
 1:0/0 = 0
@@ -1250,7 +1251,7 @@ texture_region_size = Vector2i(32, 64)
 1:1/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3hxgx"]
-texture = ExtResource("8_eypbx")
+texture = ExtResource("10_e3is2")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 1:0/0 = 0
@@ -1283,7 +1284,7 @@ tile_size = Vector2i(32, 32)
 tile_size = Vector2i(32, 32)
 
 [node name="MapNode" type="Node2D" node_paths=PackedStringArray("actor_tile_map", "item_tile_map", "terrain_path_map", "marker_tile_map")]
-script = ExtResource("1_xsjmp")
+script = ExtResource("1_g8aii")
 actor_tile_map = NodePath("ActorTileMapLayer")
 item_tile_map = NodePath("ItemTileMapLayer")
 terrain_path_map = NodePath("TerrainMap")
@@ -1305,7 +1306,7 @@ tile_set = SubResource("TileSet_6phh7")
 [node name="TerrainMap" type="TileMapLayer" parent="."]
 tile_map_data = PackedByteArray("AAADAAMAAAACAAAAAAADAAQAAAACAAAAAAADAAUAAAACAAAAAAADAAYAAAACAAAAAAADAAcAAAACAAAAAAAEAAEAAAACAAAAAAAEAAQAAAAAAAAAAAAEAAUAAAACAAAAAAAEAAYAAAAAAAAAAAAEAAcAAAAAAAAAAAAFAAEAAAAAAAAAAAAFAAIAAAAAAAAAAAAFAAMAAAAAAAAAAAAFAAQAAAAAAAAAAAAFAAUAAAACAAAAAAAFAAYAAAACAAAAAAAFAAcAAAAAAAAAAAAGAAEAAAAAAAAAAAAGAAIAAAAAAAAAAAAGAAMAAAAAAAAAAAAGAAQAAAACAAAAAAAGAAUAAAACAAAAAAAGAAYAAAAAAAAAAAAGAAcAAAAAAAAAAAABAAQAAAACAAAAAAACAAQAAAAAAAAAAAAHAAQAAAACAAAAAAAIAAQAAAACAAAAAAAJAAQAAAACAAAAAAAKAAQAAAACAAAAAAALAAQAAAAAAAAAAAAMAAQAAAACAAAAAAANAAQAAAACAAAAAAAHAAMAAAAAAAAAAAAHAAUAAAAAAAAAAAAIAAMAAAACAAAAAAAIAAUAAAACAAAAAAAJAAMAAAACAAAAAAAJAAUAAAACAAAAAAAKAAMAAAACAAAAAAAKAAUAAAACAAAAAAALAAMAAAACAAAAAAALAAUAAAAAAAAAAAAMAAMAAAACAAAAAAAMAAUAAAAAAAAAAAANAAMAAAACAAAAAAANAAUAAAAAAAAAAAAHAAIAAAAAAAAAAAAIAAIAAAACAAAAAAAJAAIAAAACAAAAAAAKAAIAAAACAAAAAAALAAIAAAAAAAAAAAAMAAIAAAAAAAAAAAANAAIAAAAAAAAAAAAJAAEAAAACAAAAAAAKAAEAAAACAAAAAAALAAEAAAAAAAAAAAAMAAEAAAAAAAAAAAAOAAMAAAAAAAAAAAAOAAQAAAACAAAAAAACAAMAAAAAAAAAAAACAAUAAAACAAAAAAACAAYAAAACAAAAAAABAAYAAAAAAAAAAAAHAAYAAAAAAAAAAAAIAAYAAAACAAAAAAAJAAYAAAACAAAAAAAHAAcAAAAAAAAAAAAIAAcAAAACAAAAAAALABAAAAACAAAAAAALABEAAAACAAAAAAALABIAAAACAAAAAAALABMAAAACAAAAAAAMABAAAAACAAAAAAAMABEAAAACAAAAAAAMABIAAAACAAAAAAAMABMAAAACAAAAAAAKABEAAAACAAAAAAAKABIAAAACAAAAAAAKABMAAAACAAAAAAANABEAAAACAAAAAAANABIAAAACAAAAAAAGABIAAAAAAAAAAAAHABIAAAAAAAAAAAAIABIAAAAAAAAAAAAJABIAAAAAAAAAAAAGABEAAAAAAAAAAAAHABEAAAAAAAAAAAACAA8AAAACAAAAAAACABAAAAACAAAAAAACABEAAAACAAAAAAACABIAAAACAAAAAAADAA8AAAACAAAAAAADABAAAAACAAAAAAADABEAAAACAAAAAAADABIAAAACAAAAAAABABAAAAAAAAAAAAABABEAAAAAAAAAAAAEABAAAAACAAAAAAAEABEAAAAAAAAAAAAFABAAAAACAAAAAAAFABEAAAAAAAAAAAAGABAAAAACAAAAAAAEAAgAAAAAAAAAAAAEAAwAAAACAAAAAAAEAA0AAAACAAAAAAAEAA4AAAACAAAAAAAEAA8AAAACAAAAAAAFAAgAAAAAAAAAAAAFAAwAAAAAAAAAAAAFAA0AAAAAAAAAAAAFAA4AAAAAAAAAAAAFAA8AAAACAAAAAAAGAAgAAAAAAAAAAAAGAAwAAAABAAAAAAAGAA0AAAAAAAAAAAAGAA4AAAAAAAAAAAAGAA8AAAACAAAAAAAHAAwAAAACAAAAAAAHAA0AAAAAAAAAAAAIAAwAAAACAAAAAAAIAA0AAAAAAAAAAAAJAA0AAAACAAAAAAAHAA4AAAAAAAAAAAALAAcAAAAAAAAAAAALAAgAAAACAAAAAAAMAAcAAAAAAAAAAAAMAAgAAAAAAAAAAAANAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAACAAAAAAAAAAAAAAADAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAFAAAAAAAAAAAAAAAGAAAAAAAAAAAAAAAHAAAAAAAAAAAAAAAIAAAAAAACAAAAAAAJAAAAAAACAAAAAAAKAAAAAAACAAAAAAALAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAANAAAAAAAAAAAAAAAOAAAAAAAAAAAAAAAPAAAAAAAAAAAAAAANAAEAAAAAAAAAAAAOAAEAAAAAAAAAAAAPAAEAAAAAAAAAAAAOAAIAAAAAAAAAAAAPAAIAAAAAAAAAAAAPAAMAAAACAAAAAAAPAAQAAAACAAAAAAAPAAUAAAACAAAAAAAPAAYAAAAAAAAAAAAOAAUAAAAAAAAAAAAOAAYAAAAAAAAAAAAOAAcAAAAAAAAAAAAPAAcAAAAAAAAAAAANAAYAAAAAAAAAAAANAAcAAAAAAAAAAAAKAAYAAAACAAAAAAALAAYAAAAAAAAAAAAMAAYAAAAAAAAAAAABABMAAAAAAAAAAAABABIAAAACAAAAAAAAABIAAAAAAAAAAAAAABEAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA0AAAAAAAAAAAAAAAwAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAAUAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAEAAAAAAAAAAAABAAEAAAAAAAAAAAABAAIAAAAAAAAAAAABAAMAAAAAAAAAAAACAAIAAAAAAAAAAAACAAEAAAAAAAAAAAABAAUAAAACAAAAAAABAAcAAAAAAAAAAAABAAgAAAAAAAAAAAACAAgAAAAAAAAAAAACAAcAAAAAAAAAAAADAAgAAAACAAAAAAABAAwAAAAAAAAAAAABAA0AAAAAAAAAAAABAA4AAAAAAAAAAAABAA8AAAAAAAAAAAACAA4AAAAAAAAAAAACAA0AAAAAAAAAAAACAAwAAAAAAAAAAAADAAwAAAAAAAAAAAADAA0AAAAAAAAAAAADAA4AAAACAAAAAAAAABMAAAAAAAAAAAAAABQAAAAAAAAAAAABABQAAAAAAAAAAAACABQAAAACAAAAAAACABMAAAACAAAAAAADABMAAAACAAAAAAADABQAAAACAAAAAAAEABQAAAACAAAAAAAEABMAAAACAAAAAAAEABIAAAAAAAAAAAAFABIAAAAAAAAAAAAFABMAAAACAAAAAAAFABQAAAACAAAAAAAGABQAAAAAAAAAAAAGABMAAAAAAAAAAAAHABMAAAAAAAAAAAAHABQAAAAAAAAAAAAIABQAAAACAAAAAAAIABMAAAAAAAAAAAAJABMAAAACAAAAAAAJABQAAAACAAAAAAAKABQAAAACAAAAAAALABQAAAACAAAAAAAMABQAAAACAAAAAAANABQAAAACAAAAAAANABMAAAAAAAAAAAAOABMAAAACAAAAAAAOABIAAAACAAAAAAAOABEAAAAAAAAAAAAOABAAAAAAAAAAAAAOAA8AAAAAAAAAAAAOAA4AAAABAAAAAAAOAA0AAAACAAAAAAAOAAwAAAACAAAAAAANAAwAAAACAAAAAAAMAAwAAAACAAAAAAALAAwAAAACAAAAAAAKAAwAAAACAAAAAAAJAAwAAAACAAAAAAAKAA0AAAACAAAAAAAKAA4AAAACAAAAAAAJAA4AAAAAAAAAAAAIAA4AAAAAAAAAAAAIAA8AAAACAAAAAAAHAA8AAAACAAAAAAAHABAAAAAAAAAAAAAIABAAAAAAAAAAAAAIABEAAAAAAAAAAAAJABEAAAAAAAAAAAAJABAAAAACAAAAAAAJAA8AAAACAAAAAAAKAA8AAAACAAAAAAAKABAAAAACAAAAAAALAA8AAAACAAAAAAALAA4AAAACAAAAAAALAA0AAAACAAAAAAAMAA0AAAACAAAAAAAMAA4AAAACAAAAAAAMAA8AAAACAAAAAAANAA8AAAACAAAAAAANAA4AAAACAAAAAAANAA0AAAACAAAAAAANABAAAAACAAAAAAAPAAgAAAAAAAAAAAAOAAgAAAABAAAAAAAPAAwAAAACAAAAAAAPAA0AAAACAAAAAAAPAA4AAAAAAAAAAAAPAA8AAAAAAAAAAAAPABAAAAAAAAAAAAAPABEAAAACAAAAAAAPABIAAAACAAAAAAAPABMAAAACAAAAAAAPABQAAAACAAAAAAAOABQAAAACAAAAAAAJAAgAAAACAAAAAAAJAAcAAAACAAAAAAAKAAcAAAACAAAAAAAKAAgAAAACAAAAAAAIAAgAAAACAAAAAAAHAAgAAAABAAAAAAAHAAEAAAAAAAAAAAAIAAEAAAACAAAAAAADAAEAAAAAAAAAAAADAAIAAAACAAAAAAAEAAIAAAACAAAAAAAEAAMAAAAAAAAAAAAQAA0AAAABAAAAAAAQAAwAAAACAAAAAAAQAAAAAAAAAAAAAAAQAAEAAAAAAAAAAAAQAAIAAAAAAAAAAAAQAAMAAAACAAAAAAAQAAQAAAAAAAAAAAAQAAUAAAACAAAAAAAQAAYAAAAAAAAAAAAQAAcAAAAAAAAAAAAQAAgAAAAAAAAAAAAQAA4AAAAAAAAAAAAQAA8AAAAAAAAAAAAQABAAAAAAAAAAAAAQABEAAAAAAAAAAAAQABIAAAACAAAAAAAQABMAAAACAAAAAAAQABQAAAAAAAAAAAARAAAAAAAAAAAAAAARAAEAAAAAAAAAAAARAAIAAAAAAAAAAAARAAMAAAACAAAAAAARAAQAAAACAAAAAAARAAUAAAACAAAAAAARAAYAAAAAAAAAAAARAAcAAAAAAAAAAAARAAgAAAAAAAAAAAARAAwAAAAAAAAAAAARAA0AAAAAAAAAAAARAA4AAAAAAAAAAAARAA8AAAAAAAAAAAARABAAAAAAAAAAAAARABEAAAAAAAAAAAARABIAAAACAAAAAAARABMAAAAAAAAAAAARABQAAAAAAAAAAAASAAAAAAAAAAAAAAASAAEAAAAAAAAAAAASAAIAAAACAAAAAAASAAMAAAACAAAAAAASAAQAAAACAAAAAAASAAUAAAACAAAAAAASAAYAAAACAAAAAAASAAcAAAACAAAAAAASAAgAAAACAAAAAAASAAwAAAAAAAAAAAASAA0AAAAAAAAAAAASAA4AAAAAAAAAAAASAA8AAAAAAAAAAAASABAAAAACAAAAAAASABEAAAACAAAAAAASABIAAAACAAAAAAASABMAAAAAAAAAAAASABQAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAAoAAAACAAAAAAAAAAsAAAACAAAAAAABAAkAAAAAAAAAAAABAAoAAAACAAAAAAABAAsAAAACAAAAAAACAAkAAAAAAAAAAAACAAoAAAACAAAAAAACAAsAAAACAAAAAAADAAkAAAACAAAAAAADAAoAAAACAAAAAAADAAsAAAACAAAAAAAEAAkAAAAAAAAAAAAEAAoAAAACAAAAAAAEAAsAAAACAAAAAAAFAAkAAAAAAAAAAAAFAAoAAAACAAAAAAAFAAsAAAACAAAAAAAGAAkAAAACAAAAAAAGAAoAAAACAAAAAAAGAAsAAAACAAAAAAAHAAkAAAACAAAAAAAHAAoAAAACAAAAAAAHAAsAAAACAAAAAAAIAAkAAAACAAAAAAAIAAoAAAACAAAAAAAIAAsAAAACAAAAAAAJAAkAAAACAAAAAAAJAAoAAAACAAAAAAAJAAsAAAACAAAAAAAKAAkAAAACAAAAAAAKAAoAAAACAAAAAAAKAAsAAAACAAAAAAALAAkAAAACAAAAAAALAAoAAAACAAAAAAALAAsAAAACAAAAAAAMAAkAAAACAAAAAAAMAAoAAAACAAAAAAAMAAsAAAACAAAAAAANAAkAAAACAAAAAAANAAoAAAACAAAAAAANAAsAAAABAAAAAAAOAAkAAAACAAAAAAAOAAoAAAACAAAAAAAOAAsAAAACAAAAAAAPAAkAAAABAAAAAAAPAAoAAAACAAAAAAAPAAsAAAACAAAAAAAQAAkAAAAAAAAAAAAQAAoAAAACAAAAAAAQAAsAAAACAAAAAAARAAkAAAAAAAAAAAARAAoAAAACAAAAAAARAAsAAAACAAAAAAASAAkAAAACAAAAAAASAAoAAAACAAAAAAASAAsAAAACAAAAAAAGABUAAAACAAAAAAAHABUAAAACAAAAAAAIABUAAAACAAAAAAAAABUAAAAAAAAAAAAAABYAAAAAAAAAAAAAABcAAAAAAAAAAAABABUAAAAAAAAAAAABABYAAAAAAAAAAAABABcAAAAAAAAAAAACABUAAAAAAAAAAAACABYAAAAAAAAAAAACABcAAAAAAAAAAAADABUAAAAAAAAAAAADABYAAAAAAAAAAAADABcAAAAAAAAAAAAEABUAAAAAAAAAAAAEABYAAAAAAAAAAAAEABcAAAAAAAAAAAAFABUAAAACAAAAAAAFABYAAAAAAAAAAAAFABcAAAAAAAAAAAAGABYAAAAAAAAAAAAGABcAAAAAAAAAAAAHABYAAAAAAAAAAAAHABcAAAAAAAAAAAAIABYAAAACAAAAAAAIABcAAAACAAAAAAAJABUAAAACAAAAAAAJABYAAAACAAAAAAAJABcAAAACAAAAAAAKABUAAAACAAAAAAAKABYAAAACAAAAAAAKABcAAAACAAAAAAALABUAAAACAAAAAAALABYAAAACAAAAAAALABcAAAACAAAAAAAMABUAAAAAAAAAAAAMABYAAAAAAAAAAAAMABcAAAAAAAAAAAANABUAAAAAAAAAAAANABYAAAAAAAAAAAANABcAAAAAAAAAAAAOABUAAAACAAAAAAAOABYAAAAAAAAAAAAOABcAAAAAAAAAAAAPABUAAAACAAAAAAAPABYAAAAAAAAAAAAPABcAAAAAAAAAAAAQABUAAAAAAAAAAAAQABYAAAAAAAAAAAAQABcAAAAAAAAAAAARABUAAAAAAAAAAAARABYAAAAAAAAAAAARABcAAAAAAAAAAAASABUAAAAAAAAAAAASABYAAAAAAAAAAAASABcAAAAAAAAAAAATAAAAAAAAAAAAAAATAAEAAAAAAAAAAAATAAIAAAAAAAAAAAATAAMAAAACAAAAAAATAAQAAAACAAAAAAATAAUAAAACAAAAAAATAAYAAAAAAAAAAAATAAcAAAAAAAAAAAATAAgAAAACAAAAAAATAAkAAAACAAAAAAATAAoAAAACAAAAAAATAAsAAAACAAAAAAATAAwAAAACAAAAAAATAA0AAAAAAAAAAAATAA4AAAAAAAAAAAATAA8AAAAAAAAAAAATABAAAAACAAAAAAATABEAAAACAAAAAAATABIAAAACAAAAAAATABMAAAACAAAAAAATABQAAAAAAAAAAAATABUAAAAAAAAAAAATABYAAAAAAAAAAAATABcAAAAAAAAAAAAUAAAAAAAAAAAAAAAUAAEAAAAAAAAAAAAUAAIAAAAAAAAAAAAUAAMAAAACAAAAAAAUAAQAAAACAAAAAAAUAAUAAAAAAAAAAAAUAAYAAAAAAAAAAAAUAAcAAAAAAAAAAAAUAAgAAAAAAAAAAAAUAAkAAAAAAAAAAAAUAAoAAAACAAAAAAAUAAsAAAACAAAAAAAUAAwAAAACAAAAAAAUAA0AAAACAAAAAAAUAA4AAAACAAAAAAAUAA8AAAACAAAAAAAUABAAAAACAAAAAAAUABEAAAACAAAAAAAUABIAAAACAAAAAAAUABMAAAAAAAAAAAAUABQAAAAAAAAAAAAUABUAAAAAAAAAAAAUABYAAAAAAAAAAAAUABcAAAAAAAAAAAAVAAAAAAAAAAAAAAAVAAEAAAAAAAAAAAAVAAIAAAAAAAAAAAAVAAMAAAAAAAAAAAAVAAQAAAAAAAAAAAAVAAUAAAAAAAAAAAAVAAYAAAAAAAAAAAAVAAcAAAAAAAAAAAAVAAgAAAAAAAAAAAAVAAkAAAAAAAAAAAAVAAoAAAAAAAAAAAAVAAsAAAACAAAAAAAVAAwAAAACAAAAAAAVAA0AAAAAAAAAAAAVAA4AAAAAAAAAAAAVAA8AAAAAAAAAAAAVABAAAAAAAAAAAAAVABEAAAACAAAAAAAVABIAAAAAAAAAAAAVABMAAAAAAAAAAAAVABQAAAAAAAAAAAAVABUAAAAAAAAAAAAVABYAAAAAAAAAAAAVABcAAAAAAAAAAAAWAAAAAAAAAAAAAAAWAAEAAAAAAAAAAAAWAAIAAAAAAAAAAAAWAAMAAAAAAAAAAAAWAAQAAAAAAAAAAAAWAAUAAAAAAAAAAAAWAAYAAAAAAAAAAAAWAAcAAAAAAAAAAAAWAAgAAAAAAAAAAAAWAAkAAAAAAAAAAAAWAAoAAAAAAAAAAAAWAAsAAAACAAAAAAAWAAwAAAACAAAAAAAWAA0AAAAAAAAAAAAWAA4AAAAAAAAAAAAWAA8AAAAAAAAAAAAWABAAAAAAAAAAAAAWABEAAAAAAAAAAAAWABIAAAAAAAAAAAAWABMAAAAAAAAAAAAWABQAAAAAAAAAAAAWABUAAAAAAAAAAAAWABYAAAAAAAAAAAAWABcAAAAAAAAAAAA=")
 tile_set = SubResource("TileSet_63me0")
-script = ExtResource("4_ycrw2")
+script = ExtResource("7_h2uoh")
 
 [node name="Tree_TileMapLayer" type="TileMapLayer" parent="."]
 y_sort_enabled = true
@@ -1317,14 +1318,17 @@ visible = false
 tile_map_data = PackedByteArray("AAAMAAsAAAABAAAAAAALAAgAAQACAAIAAAAMAAgAAQADAAIAAAALAAYAAQAAAAAAAAAMAAYAAQABAAAAAAALAAcAAQAAAAIAAAAMAAcAAQABAAIAAAA=")
 tile_set = SubResource("TileSet_i35ih")
 
-[node name="TargetAreaDisplayNode" parent="." instance=ExtResource("9_kyo11")]
+[node name="TargetAreaDisplayNode" parent="." instance=ExtResource("11_wfagc")]
+
+[node name="Decor_TileMapLayer" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray("AAAOAAgAAAABAAAAAAAHAAgAAAAAAAAAAAAPAAkAAAABAAAAAAAOAA4AAAAAAAAAAAAQAA0AAAABAAAAAAAGAAwAAAABAAAAAAA=")
+tile_set = SubResource("TileSet_i35ih")
 
 [node name="ActorTileMapLayer" type="TileMapLayer" parent="."]
 tile_set = SubResource("TileSet_5ipcw")
 
-[node name="Decor_TileMapLayer" type="TileMapLayer" parent="."]
-tile_map_data = PackedByteArray("AAAOAAgAAAABAAAAAAAHAAgAAAAAAAAAAAAPAAkAAAABAAAAAAAOAA4AAAAAAAAAAAAQAA0AAAABAAAAAAAGAAwAAAABAAAAAAANAAsAAAAAAAAAAAA=")
-tile_set = SubResource("TileSet_i35ih")
+[node name="RogueInABox" parent="ActorTileMapLayer" instance=ExtResource("12_45pj5")]
+position = Vector2(432, 357)
 
 [node name="ItemTileMapLayer" type="TileMapLayer" parent="."]
 tile_set = SubResource("TileSet_eodif")
@@ -1334,16 +1338,15 @@ tile_set = SubResource("TileSet_o1yif")
 
 [node name="Path_P1" type="Node2D" parent="MarkerTileMapLayer" node_paths=PackedStringArray("sprite", "label")]
 position = Vector2(368, 592)
-script = ExtResource("10_e1jik")
+script = ExtResource("12_w8su4")
 marker_name = "P1"
-is_loop = null
 map_coor = Vector2i(11, 18)
 sprite = NodePath("PathSprite")
 label = NodePath("PathSprite/Label")
 
 [node name="PathSprite" type="Sprite2D" parent="MarkerTileMapLayer/Path_P1"]
 self_modulate = Color(0, 1, 1, 1)
-texture = ExtResource("11_kd7w3")
+texture = ExtResource("13_mtfyt")
 
 [node name="Label" type="Label" parent="MarkerTileMapLayer/Path_P1/PathSprite"]
 self_modulate = Color(1, 0, 0, 1)
@@ -1366,22 +1369,21 @@ vertical_alignment = 1
 
 [node name="Point1" type="Sprite2D" parent="MarkerTileMapLayer/Path_P1"]
 position = Vector2(0, -96)
-texture = ExtResource("12_7mwcd")
-script = ExtResource("13_lplum")
-map_coor = Vector2i(10, 19)
+texture = ExtResource("14_tl4vc")
+script = ExtResource("15_gtoot")
+map_coor = Vector2i(11, 15)
 
 [node name="Path_M2" type="Node2D" parent="MarkerTileMapLayer" node_paths=PackedStringArray("sprite", "label")]
 position = Vector2(400, 592)
-script = ExtResource("10_e1jik")
+script = ExtResource("12_w8su4")
 marker_name = "M1"
-is_loop = null
 map_coor = Vector2i(12, 18)
 sprite = NodePath("PathSprite")
 label = NodePath("PathSprite/Label")
 
 [node name="PathSprite" type="Sprite2D" parent="MarkerTileMapLayer/Path_M2"]
 self_modulate = Color(0, 1, 1, 1)
-texture = ExtResource("11_kd7w3")
+texture = ExtResource("13_mtfyt")
 
 [node name="Label" type="Label" parent="MarkerTileMapLayer/Path_M2/PathSprite"]
 self_modulate = Color(1, 0, 0, 1)
@@ -1404,22 +1406,21 @@ vertical_alignment = 1
 
 [node name="Point1" type="Sprite2D" parent="MarkerTileMapLayer/Path_M2"]
 position = Vector2(0, -96)
-texture = ExtResource("12_7mwcd")
-script = ExtResource("13_lplum")
-map_coor = Vector2i(11, 15)
+texture = ExtResource("14_tl4vc")
+script = ExtResource("15_gtoot")
+map_coor = Vector2i(12, 15)
 
 [node name="Path_C1" type="Node2D" parent="MarkerTileMapLayer" node_paths=PackedStringArray("sprite", "label")]
 position = Vector2(368, 368)
-script = ExtResource("10_e1jik")
+script = ExtResource("12_w8su4")
 marker_name = "C1"
-is_loop = null
 map_coor = Vector2i(11, 11)
 sprite = NodePath("PathSprite")
 label = NodePath("PathSprite/Label")
 
 [node name="PathSprite" type="Sprite2D" parent="MarkerTileMapLayer/Path_C1"]
 self_modulate = Color(0, 1, 1, 1)
-texture = ExtResource("11_kd7w3")
+texture = ExtResource("13_mtfyt")
 
 [node name="Label" type="Label" parent="MarkerTileMapLayer/Path_C1/PathSprite"]
 self_modulate = Color(1, 0, 0, 1)
@@ -1440,18 +1441,80 @@ text = "C1"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="Path_C2" type="Node2D" parent="MarkerTileMapLayer" node_paths=PackedStringArray("sprite", "label")]
+position = Vector2(368, 400)
+script = ExtResource("12_w8su4")
+marker_name = "C2"
+map_coor = Vector2i(11, 12)
+sprite = NodePath("PathSprite")
+label = NodePath("PathSprite/Label")
+
+[node name="PathSprite" type="Sprite2D" parent="MarkerTileMapLayer/Path_C2"]
+self_modulate = Color(0, 1, 1, 1)
+texture = ExtResource("13_mtfyt")
+
+[node name="Label" type="Label" parent="MarkerTileMapLayer/Path_C2/PathSprite"]
+self_modulate = Color(1, 0, 0, 1)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -36.0
+offset_top = -27.5
+offset_right = 4.0
+offset_bottom = -4.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 12
+text = "C2"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Path_C3" type="Node2D" parent="MarkerTileMapLayer" node_paths=PackedStringArray("sprite", "label")]
+position = Vector2(432, 400)
+script = ExtResource("12_w8su4")
+marker_name = "C3"
+map_coor = Vector2i(13, 12)
+sprite = NodePath("PathSprite")
+label = NodePath("PathSprite/Label")
+
+[node name="PathSprite" type="Sprite2D" parent="MarkerTileMapLayer/Path_C3"]
+self_modulate = Color(0, 1, 1, 1)
+texture = ExtResource("13_mtfyt")
+
+[node name="Label" type="Label" parent="MarkerTileMapLayer/Path_C3/PathSprite"]
+self_modulate = Color(1, 0, 0, 1)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -36.0
+offset_top = -27.5
+offset_right = 4.0
+offset_bottom = -4.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 12
+text = "C3"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Loop_Arch1" type="Node2D" parent="MarkerTileMapLayer" node_paths=PackedStringArray("sprite", "label")]
-position = Vector2(240, 400)
-script = ExtResource("10_e1jik")
+position = Vector2(240, 336)
+script = ExtResource("12_w8su4")
 marker_name = "Arch1_L"
 is_loop = true
-map_coor = Vector2i(7, 12)
+map_coor = Vector2i(7, 10)
 sprite = NodePath("PathSprite")
 label = NodePath("PathSprite/Label")
 
 [node name="PathSprite" type="Sprite2D" parent="MarkerTileMapLayer/Loop_Arch1"]
 self_modulate = Color(0, 1, 1, 1)
-texture = ExtResource("11_kd7w3")
+texture = ExtResource("13_mtfyt")
 
 [node name="Label" type="Label" parent="MarkerTileMapLayer/Loop_Arch1/PathSprite"]
 self_modulate = Color(1, 0, 0, 1)
@@ -1473,53 +1536,134 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Point1" type="Sprite2D" parent="MarkerTileMapLayer/Loop_Arch1"]
-position = Vector2(0, -96)
-texture = ExtResource("12_7mwcd")
-script = ExtResource("13_lplum")
-map_coor = Vector2i(11, 15)
+position = Vector2(0, -32)
+texture = ExtResource("14_tl4vc")
+script = ExtResource("15_gtoot")
+map_coor = Vector2i(7, 9)
 
 [node name="Point2" type="Sprite2D" parent="MarkerTileMapLayer/Loop_Arch1"]
-position = Vector2(0, -96)
+position = Vector2(0, -32)
 rotation = 4.71239
-texture = ExtResource("12_7mwcd")
-script = ExtResource("13_lplum")
+texture = ExtResource("14_tl4vc")
+script = ExtResource("15_gtoot")
 facing = 3
 map_coor = Vector2i(7, 9)
 
 [node name="Point3" type="Sprite2D" parent="MarkerTileMapLayer/Loop_Arch1"]
-position = Vector2(0, -96)
+position = Vector2(0, -32)
 rotation = 3.14159
-texture = ExtResource("12_7mwcd")
-script = ExtResource("13_lplum")
+texture = ExtResource("14_tl4vc")
+script = ExtResource("15_gtoot")
 facing = 2
 map_coor = Vector2i(7, 9)
 
 [node name="Point4" type="Sprite2D" parent="MarkerTileMapLayer/Loop_Arch1"]
+position = Vector2(0, 64)
 rotation = 3.14159
-texture = ExtResource("12_7mwcd")
-script = ExtResource("13_lplum")
+texture = ExtResource("14_tl4vc")
+script = ExtResource("15_gtoot")
 facing = 2
 map_coor = Vector2i(7, 12)
 
 [node name="Point5" type="Sprite2D" parent="MarkerTileMapLayer/Loop_Arch1"]
+position = Vector2(0, 64)
 rotation = 4.71239
-texture = ExtResource("12_7mwcd")
-script = ExtResource("13_lplum")
+texture = ExtResource("14_tl4vc")
+script = ExtResource("15_gtoot")
 facing = 3
 map_coor = Vector2i(7, 12)
 
+[node name="Point6" type="Sprite2D" parent="MarkerTileMapLayer/Loop_Arch1"]
+position = Vector2(0, 64)
+texture = ExtResource("14_tl4vc")
+script = ExtResource("15_gtoot")
+map_coor = Vector2i(7, 12)
+
+[node name="Point7" type="Sprite2D" parent="MarkerTileMapLayer/Loop_Arch1"]
+texture = ExtResource("14_tl4vc")
+script = ExtResource("15_gtoot")
+map_coor = Vector2i(7, 10)
+
+[node name="Path_Archer1_2" type="Node2D" parent="MarkerTileMapLayer" node_paths=PackedStringArray("sprite", "label")]
+position = Vector2(240, 336)
+script = ExtResource("12_w8su4")
+marker_name = "Arch1_South"
+facing = 2
+map_coor = Vector2i(7, 10)
+sprite = NodePath("PathSprite")
+label = NodePath("PathSprite/Label")
+
+[node name="PathSprite" type="Sprite2D" parent="MarkerTileMapLayer/Path_Archer1_2"]
+self_modulate = Color(0, 1, 1, 1)
+rotation = 3.14159
+texture = ExtResource("13_mtfyt")
+
+[node name="Label" type="Label" parent="MarkerTileMapLayer/Path_Archer1_2/PathSprite"]
+self_modulate = Color(1, 0, 0, 1)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -36.0
+offset_top = -27.5
+offset_right = 4.0
+offset_bottom = -4.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 12
+text = "Arch1_South"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Path_Archer1_3" type="Node2D" parent="MarkerTileMapLayer" node_paths=PackedStringArray("sprite", "label")]
+position = Vector2(240, 336)
+script = ExtResource("12_w8su4")
+marker_name = "Arch1_Look"
+facing = 1
+map_coor = Vector2i(7, 10)
+sprite = NodePath("PathSprite")
+label = NodePath("PathSprite/Label")
+
+[node name="PathSprite" type="Sprite2D" parent="MarkerTileMapLayer/Path_Archer1_3"]
+self_modulate = Color(0, 1, 1, 1)
+rotation = 1.5708
+texture = ExtResource("13_mtfyt")
+
+[node name="Label" type="Label" parent="MarkerTileMapLayer/Path_Archer1_3/PathSprite"]
+self_modulate = Color(1, 0, 0, 1)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -36.0
+offset_top = -27.5
+offset_right = 4.0
+offset_bottom = -4.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 12
+text = "Arch1_Look"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Loop_Arch2" type="Node2D" parent="MarkerTileMapLayer" node_paths=PackedStringArray("sprite", "label")]
-position = Vector2(496, 432)
-script = ExtResource("10_e1jik")
+position = Vector2(496, 336)
+script = ExtResource("12_w8su4")
 marker_name = "Arch2_L"
+facing = 2
 is_loop = true
-map_coor = Vector2i(15, 13)
+map_coor = Vector2i(15, 10)
 sprite = NodePath("PathSprite")
 label = NodePath("PathSprite/Label")
 
 [node name="PathSprite" type="Sprite2D" parent="MarkerTileMapLayer/Loop_Arch2"]
 self_modulate = Color(0, 1, 1, 1)
-texture = ExtResource("11_kd7w3")
+rotation = 3.14159
+texture = ExtResource("13_mtfyt")
 
 [node name="Label" type="Label" parent="MarkerTileMapLayer/Loop_Arch2/PathSprite"]
 self_modulate = Color(1, 0, 0, 1)
@@ -1541,44 +1685,101 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Point1" type="Sprite2D" parent="MarkerTileMapLayer/Loop_Arch2"]
-position = Vector2(0, -96)
-texture = ExtResource("12_7mwcd")
-script = ExtResource("13_lplum")
-map_coor = Vector2i(11, 15)
-
-[node name="Point2" type="Sprite2D" parent="MarkerTileMapLayer/Loop_Arch2"]
-position = Vector2(0, -96)
-rotation = 4.71239
-texture = ExtResource("12_7mwcd")
-script = ExtResource("13_lplum")
-facing = 3
-map_coor = Vector2i(15, 10)
-
-[node name="Point3" type="Sprite2D" parent="MarkerTileMapLayer/Loop_Arch2"]
-position = Vector2(0, -96)
+position = Vector2(0, 96)
 rotation = 3.14159
-texture = ExtResource("12_7mwcd")
-script = ExtResource("13_lplum")
-facing = 2
-map_coor = Vector2i(15, 10)
-
-[node name="Point4" type="Sprite2D" parent="MarkerTileMapLayer/Loop_Arch2"]
-rotation = 3.14159
-texture = ExtResource("12_7mwcd")
-script = ExtResource("13_lplum")
+texture = ExtResource("14_tl4vc")
+script = ExtResource("15_gtoot")
 facing = 2
 map_coor = Vector2i(15, 13)
 
-[node name="Point5" type="Sprite2D" parent="MarkerTileMapLayer/Loop_Arch2"]
+[node name="Point2" type="Sprite2D" parent="MarkerTileMapLayer/Loop_Arch2"]
+position = Vector2(0, 96)
 rotation = 1.5708
-texture = ExtResource("12_7mwcd")
-script = ExtResource("13_lplum")
+texture = ExtResource("14_tl4vc")
+script = ExtResource("15_gtoot")
 facing = 1
 map_coor = Vector2i(15, 13)
 
+[node name="Point3" type="Sprite2D" parent="MarkerTileMapLayer/Loop_Arch2"]
+position = Vector2(0, 96)
+texture = ExtResource("14_tl4vc")
+script = ExtResource("15_gtoot")
+map_coor = Vector2i(15, 13)
+
+[node name="Point4" type="Sprite2D" parent="MarkerTileMapLayer/Loop_Arch2"]
+texture = ExtResource("14_tl4vc")
+script = ExtResource("15_gtoot")
+map_coor = Vector2i(15, 10)
+
+[node name="Path_Archer2_2" type="Node2D" parent="MarkerTileMapLayer" node_paths=PackedStringArray("sprite", "label")]
+position = Vector2(496, 336)
+script = ExtResource("12_w8su4")
+marker_name = "Arch2_South"
+facing = 2
+map_coor = Vector2i(15, 10)
+sprite = NodePath("PathSprite")
+label = NodePath("PathSprite/Label")
+
+[node name="PathSprite" type="Sprite2D" parent="MarkerTileMapLayer/Path_Archer2_2"]
+self_modulate = Color(0, 1, 1, 1)
+rotation = 3.14159
+texture = ExtResource("13_mtfyt")
+
+[node name="Label" type="Label" parent="MarkerTileMapLayer/Path_Archer2_2/PathSprite"]
+self_modulate = Color(1, 0, 0, 1)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -36.0
+offset_top = -27.5
+offset_right = 4.0
+offset_bottom = -4.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 12
+text = "Arch2_South"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Path_Archer2_3" type="Node2D" parent="MarkerTileMapLayer" node_paths=PackedStringArray("sprite", "label")]
+position = Vector2(496, 336)
+script = ExtResource("12_w8su4")
+marker_name = "Arch2_Look"
+facing = 3
+map_coor = Vector2i(15, 10)
+sprite = NodePath("PathSprite")
+label = NodePath("PathSprite/Label")
+
+[node name="PathSprite" type="Sprite2D" parent="MarkerTileMapLayer/Path_Archer2_3"]
+self_modulate = Color(0, 1, 1, 1)
+rotation = 4.71239
+texture = ExtResource("13_mtfyt")
+
+[node name="Label" type="Label" parent="MarkerTileMapLayer/Path_Archer2_3/PathSprite"]
+self_modulate = Color(1, 0, 0, 1)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -36.0
+offset_top = -27.5
+offset_right = 4.0
+offset_bottom = -4.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 12
+text = "Arch2_Look"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Loop_Band1" type="Node2D" parent="MarkerTileMapLayer" node_paths=PackedStringArray("sprite", "label")]
 position = Vector2(400, 304)
-script = ExtResource("10_e1jik")
+script = ExtResource("12_w8su4")
 marker_name = "Band1_L"
 facing = 1
 is_loop = true
@@ -1589,7 +1790,7 @@ label = NodePath("PathSprite/Label")
 [node name="PathSprite" type="Sprite2D" parent="MarkerTileMapLayer/Loop_Band1"]
 self_modulate = Color(0, 1, 1, 1)
 rotation = 1.5708
-texture = ExtResource("11_kd7w3")
+texture = ExtResource("13_mtfyt")
 
 [node name="Label" type="Label" parent="MarkerTileMapLayer/Loop_Band1/PathSprite"]
 self_modulate = Color(1, 0, 0, 1)
@@ -1613,50 +1814,114 @@ vertical_alignment = 1
 [node name="Point1" type="Sprite2D" parent="MarkerTileMapLayer/Loop_Band1"]
 position = Vector2(64, 0)
 rotation = 1.5708
-texture = ExtResource("12_7mwcd")
-script = ExtResource("13_lplum")
+texture = ExtResource("14_tl4vc")
+script = ExtResource("15_gtoot")
 facing = 1
 map_coor = Vector2i(14, 9)
 
 [node name="Point2" type="Sprite2D" parent="MarkerTileMapLayer/Loop_Band1"]
 position = Vector2(64, 0)
-texture = ExtResource("12_7mwcd")
-script = ExtResource("13_lplum")
+texture = ExtResource("14_tl4vc")
+script = ExtResource("15_gtoot")
 map_coor = Vector2i(14, 9)
 
 [node name="Point3" type="Sprite2D" parent="MarkerTileMapLayer/Loop_Band1"]
 position = Vector2(64, 0)
 rotation = 4.71239
-texture = ExtResource("12_7mwcd")
-script = ExtResource("13_lplum")
+texture = ExtResource("14_tl4vc")
+script = ExtResource("15_gtoot")
 facing = 3
 map_coor = Vector2i(14, 9)
 
 [node name="Point4" type="Sprite2D" parent="MarkerTileMapLayer/Loop_Band1"]
 rotation = 4.71239
-texture = ExtResource("12_7mwcd")
-script = ExtResource("13_lplum")
+texture = ExtResource("14_tl4vc")
+script = ExtResource("15_gtoot")
 facing = 3
 map_coor = Vector2i(12, 9)
 
 [node name="Point5" type="Sprite2D" parent="MarkerTileMapLayer/Loop_Band1"]
-texture = ExtResource("12_7mwcd")
-script = ExtResource("13_lplum")
+texture = ExtResource("14_tl4vc")
+script = ExtResource("15_gtoot")
 map_coor = Vector2i(12, 9)
 
-[node name="Spot_Band2" type="Node2D" parent="MarkerTileMapLayer" node_paths=PackedStringArray("sprite", "label")]
-position = Vector2(272, 176)
-script = ExtResource("10_e1jik")
-marker_name = "Band2"
+[node name="Path_Band1_2" type="Node2D" parent="MarkerTileMapLayer" node_paths=PackedStringArray("sprite", "label")]
+position = Vector2(400, 304)
+script = ExtResource("12_w8su4")
+marker_name = "Band1_South"
 facing = 2
-map_coor = Vector2i(8, 5)
+map_coor = Vector2i(12, 9)
+sprite = NodePath("PathSprite")
+label = NodePath("PathSprite/Label")
+
+[node name="PathSprite" type="Sprite2D" parent="MarkerTileMapLayer/Path_Band1_2"]
+self_modulate = Color(0, 1, 1, 1)
+rotation = 3.14159
+texture = ExtResource("13_mtfyt")
+
+[node name="Label" type="Label" parent="MarkerTileMapLayer/Path_Band1_2/PathSprite"]
+self_modulate = Color(1, 0, 0, 1)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -36.0
+offset_top = -27.5
+offset_right = 4.0
+offset_bottom = -4.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 12
+text = "Band1_South"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Path_Band1_3" type="Node2D" parent="MarkerTileMapLayer" node_paths=PackedStringArray("sprite", "label")]
+position = Vector2(400, 304)
+script = ExtResource("12_w8su4")
+marker_name = "Band1_Look"
+facing = 1
+map_coor = Vector2i(12, 9)
+sprite = NodePath("PathSprite")
+label = NodePath("PathSprite/Label")
+
+[node name="PathSprite" type="Sprite2D" parent="MarkerTileMapLayer/Path_Band1_3"]
+self_modulate = Color(0, 1, 1, 1)
+rotation = 1.5708
+texture = ExtResource("13_mtfyt")
+
+[node name="Label" type="Label" parent="MarkerTileMapLayer/Path_Band1_3/PathSprite"]
+self_modulate = Color(1, 0, 0, 1)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -36.0
+offset_top = -27.5
+offset_right = 4.0
+offset_bottom = -4.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 12
+text = "Band1_Look"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Spot_Band2" type="Node2D" parent="MarkerTileMapLayer" node_paths=PackedStringArray("sprite", "label")]
+position = Vector2(304, 432)
+script = ExtResource("12_w8su4")
+marker_name = "Band2"
+map_coor = Vector2i(9, 13)
 sprite = NodePath("PathSprite")
 label = NodePath("PathSprite/Label")
 
 [node name="PathSprite" type="Sprite2D" parent="MarkerTileMapLayer/Spot_Band2"]
 self_modulate = Color(0, 1, 1, 1)
-rotation = 3.14159
-texture = ExtResource("11_kd7w3")
+texture = ExtResource("13_mtfyt")
 
 [node name="Label" type="Label" parent="MarkerTileMapLayer/Spot_Band2/PathSprite"]
 self_modulate = Color(1, 0, 0, 1)
@@ -1679,7 +1944,7 @@ vertical_alignment = 1
 
 [node name="Spot_Band3" type="Node2D" parent="MarkerTileMapLayer" node_paths=PackedStringArray("sprite", "label")]
 position = Vector2(336, 176)
-script = ExtResource("10_e1jik")
+script = ExtResource("12_w8su4")
 marker_name = "Band3"
 facing = 2
 map_coor = Vector2i(10, 5)
@@ -1689,7 +1954,7 @@ label = NodePath("PathSprite/Label")
 [node name="PathSprite" type="Sprite2D" parent="MarkerTileMapLayer/Spot_Band3"]
 self_modulate = Color(0, 1, 1, 1)
 rotation = 3.14159
-texture = ExtResource("11_kd7w3")
+texture = ExtResource("13_mtfyt")
 
 [node name="Label" type="Label" parent="MarkerTileMapLayer/Spot_Band3/PathSprite"]
 self_modulate = Color(1, 0, 0, 1)
@@ -1712,7 +1977,7 @@ vertical_alignment = 1
 
 [node name="Spot_Capt" type="Node2D" parent="MarkerTileMapLayer" node_paths=PackedStringArray("sprite", "label")]
 position = Vector2(304, 176)
-script = ExtResource("10_e1jik")
+script = ExtResource("12_w8su4")
 marker_name = "Cpt1"
 facing = 2
 map_coor = Vector2i(9, 5)
@@ -1722,7 +1987,7 @@ label = NodePath("PathSprite/Label")
 [node name="PathSprite" type="Sprite2D" parent="MarkerTileMapLayer/Spot_Capt"]
 self_modulate = Color(0, 1, 1, 1)
 rotation = 3.14159
-texture = ExtResource("11_kd7w3")
+texture = ExtResource("13_mtfyt")
 
 [node name="Label" type="Label" parent="MarkerTileMapLayer/Spot_Capt/PathSprite"]
 self_modulate = Color(1, 0, 0, 1)
@@ -1744,18 +2009,16 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Path_Band2" type="Node2D" parent="MarkerTileMapLayer" node_paths=PackedStringArray("sprite", "label")]
-position = Vector2(272, 176)
-script = ExtResource("10_e1jik")
+position = Vector2(304, 432)
+script = ExtResource("12_w8su4")
 marker_name = "Band2_2"
-facing = 2
-map_coor = Vector2i(8, 5)
+map_coor = Vector2i(9, 13)
 sprite = NodePath("PathSprite")
 label = NodePath("PathSprite/Label")
 
 [node name="PathSprite" type="Sprite2D" parent="MarkerTileMapLayer/Path_Band2"]
 self_modulate = Color(0, 1, 1, 1)
-rotation = 3.14159
-texture = ExtResource("11_kd7w3")
+texture = ExtResource("13_mtfyt")
 
 [node name="Label" type="Label" parent="MarkerTileMapLayer/Path_Band2/PathSprite"]
 self_modulate = Color(1, 0, 0, 1)
@@ -1777,16 +2040,87 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Point1" type="Sprite2D" parent="MarkerTileMapLayer/Path_Band2"]
-position = Vector2(0, 128)
-rotation = 3.14159
-texture = ExtResource("12_7mwcd")
-script = ExtResource("13_lplum")
+rotation = 1.5708
+texture = ExtResource("14_tl4vc")
+script = ExtResource("15_gtoot")
+facing = 1
+map_coor = Vector2i(9, 13)
+
+[node name="Point2" type="Sprite2D" parent="MarkerTileMapLayer/Path_Band2"]
+position = Vector2(96, 0)
+rotation = 1.5708
+texture = ExtResource("14_tl4vc")
+script = ExtResource("15_gtoot")
+facing = 1
+map_coor = Vector2i(12, 13)
+
+[node name="Path_Band2_3" type="Node2D" parent="MarkerTileMapLayer" node_paths=PackedStringArray("sprite", "label")]
+position = Vector2(400, 432)
+script = ExtResource("12_w8su4")
+marker_name = "Band2_3"
 facing = 2
-map_coor = Vector2i(8, 9)
+map_coor = Vector2i(12, 13)
+sprite = NodePath("PathSprite")
+label = NodePath("PathSprite/Label")
+
+[node name="PathSprite" type="Sprite2D" parent="MarkerTileMapLayer/Path_Band2_3"]
+self_modulate = Color(0, 1, 1, 1)
+rotation = 3.14159
+texture = ExtResource("13_mtfyt")
+
+[node name="Label" type="Label" parent="MarkerTileMapLayer/Path_Band2_3/PathSprite"]
+self_modulate = Color(1, 0, 0, 1)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -36.0
+offset_top = -27.5
+offset_right = 4.0
+offset_bottom = -4.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 12
+text = "Band2_3"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Path_Band2_4" type="Node2D" parent="MarkerTileMapLayer" node_paths=PackedStringArray("sprite", "label")]
+position = Vector2(400, 432)
+script = ExtResource("12_w8su4")
+marker_name = "Band2_Look"
+map_coor = Vector2i(12, 13)
+sprite = NodePath("PathSprite")
+label = NodePath("PathSprite/Label")
+
+[node name="PathSprite" type="Sprite2D" parent="MarkerTileMapLayer/Path_Band2_4"]
+self_modulate = Color(0, 1, 1, 1)
+texture = ExtResource("13_mtfyt")
+
+[node name="Label" type="Label" parent="MarkerTileMapLayer/Path_Band2_4/PathSprite"]
+self_modulate = Color(1, 0, 0, 1)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -36.0
+offset_top = -27.5
+offset_right = 4.0
+offset_bottom = -4.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 12
+text = "Band2_Look"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Path_Band3" type="Node2D" parent="MarkerTileMapLayer" node_paths=PackedStringArray("sprite", "label")]
 position = Vector2(336, 176)
-script = ExtResource("10_e1jik")
+script = ExtResource("12_w8su4")
 marker_name = "Band3_2"
 facing = 2
 map_coor = Vector2i(10, 5)
@@ -1796,7 +2130,7 @@ label = NodePath("PathSprite/Label")
 [node name="PathSprite" type="Sprite2D" parent="MarkerTileMapLayer/Path_Band3"]
 self_modulate = Color(0, 1, 1, 1)
 rotation = 3.14159
-texture = ExtResource("11_kd7w3")
+texture = ExtResource("13_mtfyt")
 
 [node name="Label" type="Label" parent="MarkerTileMapLayer/Path_Band3/PathSprite"]
 self_modulate = Color(1, 0, 0, 1)
@@ -1816,18 +2150,53 @@ theme_override_font_sizes/font_size = 12
 text = "Band3_2"
 horizontal_alignment = 1
 vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="Point1" type="Sprite2D" parent="MarkerTileMapLayer/Path_Band3"]
 position = Vector2(0, 128)
 rotation = 3.14159
-texture = ExtResource("12_7mwcd")
-script = ExtResource("13_lplum")
+texture = ExtResource("14_tl4vc")
+script = ExtResource("15_gtoot")
 facing = 2
 map_coor = Vector2i(10, 9)
 
+[node name="CheckPoint_Band3" type="Node2D" parent="MarkerTileMapLayer" node_paths=PackedStringArray("sprite", "label")]
+position = Vector2(336, 304)
+script = ExtResource("12_w8su4")
+marker_name = "Band3_CP"
+facing = 2
+map_coor = Vector2i(10, 9)
+sprite = NodePath("PathSprite")
+label = NodePath("PathSprite/Label")
+
+[node name="PathSprite" type="Sprite2D" parent="MarkerTileMapLayer/CheckPoint_Band3"]
+self_modulate = Color(0, 1, 1, 1)
+rotation = 3.14159
+texture = ExtResource("13_mtfyt")
+
+[node name="Label" type="Label" parent="MarkerTileMapLayer/CheckPoint_Band3/PathSprite"]
+self_modulate = Color(1, 0, 0, 1)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -36.0
+offset_top = -27.5
+offset_right = 4.0
+offset_bottom = -4.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 12
+text = "Band3_CP"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
 [node name="Path_Capt2" type="Node2D" parent="MarkerTileMapLayer" node_paths=PackedStringArray("sprite", "label")]
 position = Vector2(304, 176)
-script = ExtResource("10_e1jik")
+script = ExtResource("12_w8su4")
 marker_name = "Cpt2"
 facing = 2
 map_coor = Vector2i(9, 5)
@@ -1837,7 +2206,7 @@ label = NodePath("PathSprite/Label")
 [node name="PathSprite" type="Sprite2D" parent="MarkerTileMapLayer/Path_Capt2"]
 self_modulate = Color(0, 1, 1, 1)
 rotation = 3.14159
-texture = ExtResource("11_kd7w3")
+texture = ExtResource("13_mtfyt")
 
 [node name="Label" type="Label" parent="MarkerTileMapLayer/Path_Capt2/PathSprite"]
 self_modulate = Color(1, 0, 0, 1)
@@ -1861,17 +2230,247 @@ vertical_alignment = 1
 [node name="Point1" type="Sprite2D" parent="MarkerTileMapLayer/Path_Capt2"]
 position = Vector2(0, 128)
 rotation = 3.14159
-texture = ExtResource("12_7mwcd")
-script = ExtResource("13_lplum")
+texture = ExtResource("14_tl4vc")
+script = ExtResource("15_gtoot")
 facing = 2
 map_coor = Vector2i(9, 9)
+
+[node name="Path_Band3_3" type="Node2D" parent="MarkerTileMapLayer" node_paths=PackedStringArray("sprite", "label")]
+position = Vector2(336, 304)
+script = ExtResource("12_w8su4")
+marker_name = "Band3_3"
+facing = 2
+map_coor = Vector2i(10, 9)
+sprite = NodePath("PathSprite")
+label = NodePath("PathSprite/Label")
+
+[node name="PathSprite" type="Sprite2D" parent="MarkerTileMapLayer/Path_Band3_3"]
+self_modulate = Color(0, 1, 1, 1)
+rotation = 3.14159
+texture = ExtResource("13_mtfyt")
+
+[node name="Label" type="Label" parent="MarkerTileMapLayer/Path_Band3_3/PathSprite"]
+self_modulate = Color(1, 0, 0, 1)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -36.0
+offset_top = -27.5
+offset_right = 4.0
+offset_bottom = -4.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 12
+text = "Band3_3"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Point1" type="Sprite2D" parent="MarkerTileMapLayer/Path_Band3_3"]
+position = Vector2(0, 64)
+rotation = 3.14159
+texture = ExtResource("14_tl4vc")
+script = ExtResource("15_gtoot")
+facing = 2
+map_coor = Vector2i(10, 11)
+
+[node name="Point2" type="Sprite2D" parent="MarkerTileMapLayer/Path_Band3_3"]
+position = Vector2(0, 64)
+rotation = 1.5708
+texture = ExtResource("14_tl4vc")
+script = ExtResource("15_gtoot")
+facing = 1
+map_coor = Vector2i(10, 11)
+
+[node name="Point3" type="Sprite2D" parent="MarkerTileMapLayer/Path_Band3_3"]
+position = Vector2(64, 64)
+rotation = 1.5708
+texture = ExtResource("14_tl4vc")
+script = ExtResource("15_gtoot")
+facing = 1
+map_coor = Vector2i(12, 11)
+
+[node name="Path_Capt3" type="Node2D" parent="MarkerTileMapLayer" node_paths=PackedStringArray("sprite", "label")]
+position = Vector2(304, 304)
+script = ExtResource("12_w8su4")
+marker_name = "Cpt3"
+facing = 2
+map_coor = Vector2i(9, 9)
+sprite = NodePath("PathSprite")
+label = NodePath("PathSprite/Label")
+
+[node name="PathSprite" type="Sprite2D" parent="MarkerTileMapLayer/Path_Capt3"]
+self_modulate = Color(0, 1, 1, 1)
+rotation = 3.14159
+texture = ExtResource("13_mtfyt")
+
+[node name="Label" type="Label" parent="MarkerTileMapLayer/Path_Capt3/PathSprite"]
+self_modulate = Color(1, 0, 0, 1)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -36.0
+offset_top = -27.5
+offset_right = 4.0
+offset_bottom = -4.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 12
+text = "Cpt3"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Point1" type="Sprite2D" parent="MarkerTileMapLayer/Path_Capt3"]
+position = Vector2(0, 64)
+rotation = 3.14159
+texture = ExtResource("14_tl4vc")
+script = ExtResource("15_gtoot")
+facing = 2
+map_coor = Vector2i(9, 11)
+
+[node name="Path_Capt4" type="Node2D" parent="MarkerTileMapLayer" node_paths=PackedStringArray("sprite", "label")]
+position = Vector2(304, 368)
+script = ExtResource("12_w8su4")
+marker_name = "Cpt_Look"
+facing = 1
+map_coor = Vector2i(9, 11)
+sprite = NodePath("PathSprite")
+label = NodePath("PathSprite/Label")
+
+[node name="PathSprite" type="Sprite2D" parent="MarkerTileMapLayer/Path_Capt4"]
+self_modulate = Color(0, 1, 1, 1)
+rotation = 1.5708
+texture = ExtResource("13_mtfyt")
+
+[node name="Label" type="Label" parent="MarkerTileMapLayer/Path_Capt4/PathSprite"]
+self_modulate = Color(1, 0, 0, 1)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -36.0
+offset_top = -27.5
+offset_right = 4.0
+offset_bottom = -4.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 12
+text = "Cpt_Look"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Path_Capt5" type="Node2D" parent="MarkerTileMapLayer" node_paths=PackedStringArray("sprite", "label")]
+position = Vector2(304, 368)
+script = ExtResource("12_w8su4")
+marker_name = "Cpt_South"
+facing = 2
+map_coor = Vector2i(9, 11)
+sprite = NodePath("PathSprite")
+label = NodePath("PathSprite/Label")
+
+[node name="PathSprite" type="Sprite2D" parent="MarkerTileMapLayer/Path_Capt5"]
+self_modulate = Color(0, 1, 1, 1)
+rotation = 3.14159
+texture = ExtResource("13_mtfyt")
+
+[node name="Label" type="Label" parent="MarkerTileMapLayer/Path_Capt5/PathSprite"]
+self_modulate = Color(1, 0, 0, 1)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -36.0
+offset_top = -27.5
+offset_right = 4.0
+offset_bottom = -4.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 12
+text = "Cpt_South"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Path_Band3_4" type="Node2D" parent="MarkerTileMapLayer" node_paths=PackedStringArray("sprite", "label")]
+position = Vector2(400, 368)
+script = ExtResource("12_w8su4")
+marker_name = "Band3_South"
+facing = 2
+map_coor = Vector2i(12, 11)
+sprite = NodePath("PathSprite")
+label = NodePath("PathSprite/Label")
+
+[node name="PathSprite" type="Sprite2D" parent="MarkerTileMapLayer/Path_Band3_4"]
+self_modulate = Color(0, 1, 1, 1)
+rotation = 3.14159
+texture = ExtResource("13_mtfyt")
+
+[node name="Label" type="Label" parent="MarkerTileMapLayer/Path_Band3_4/PathSprite"]
+self_modulate = Color(1, 0, 0, 1)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -36.0
+offset_top = -27.5
+offset_right = 4.0
+offset_bottom = -4.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 12
+text = "Band3_South"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Path_Band3_5" type="Node2D" parent="MarkerTileMapLayer" node_paths=PackedStringArray("sprite", "label")]
+position = Vector2(400, 368)
+script = ExtResource("12_w8su4")
+marker_name = "Band3_Look"
+facing = 1
+map_coor = Vector2i(12, 11)
+sprite = NodePath("PathSprite")
+label = NodePath("PathSprite/Label")
+
+[node name="PathSprite" type="Sprite2D" parent="MarkerTileMapLayer/Path_Band3_5"]
+self_modulate = Color(0, 1, 1, 1)
+rotation = 1.5708
+texture = ExtResource("13_mtfyt")
+
+[node name="Label" type="Label" parent="MarkerTileMapLayer/Path_Band3_5/PathSprite"]
+self_modulate = Color(1, 0, 0, 1)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -36.0
+offset_top = -27.5
+offset_right = 4.0
+offset_bottom = -4.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 12
+text = "Band3_Look"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="SpwanNode_Player" type="Sprite2D" parent="MarkerTileMapLayer"]
 self_modulate = Color(0, 1, 0, 1)
 position = Vector2(368, 592)
 rotation = -3.14159
-texture = ExtResource("14_8fo6c")
-script = ExtResource("15_w357o")
+texture = ExtResource("16_cg6jh")
+script = ExtResource("17_fdm2k")
 spawn_actor_key = "Player1"
 is_player = true
 map_coor = Vector2i(11, 18)
@@ -1881,79 +2480,140 @@ visible = false
 self_modulate = Color(0, 1, 0, 1)
 position = Vector2(400, 528)
 rotation = -3.14159
-texture = ExtResource("14_8fo6c")
-script = ExtResource("15_w357o")
+texture = ExtResource("16_cg6jh")
+script = ExtResource("17_fdm2k")
 spawn_actor_key = "Player2"
 is_player = true
 map_coor = Vector2i(12, 16)
 
-[node name="SpwanNode_CptBandit" type="Sprite2D" parent="MarkerTileMapLayer"]
-position = Vector2(304, 272)
-texture = ExtResource("14_5wqpq")
-script = ExtResource("15_w357o")
-spawn_actor_key = "BanditCaptain"
-spawn_actor_id = "BanditCaptain"
-facing = 2
-map_coor = Vector2i(9, 8)
-
 [node name="SpwanNode_Bandit1" type="Sprite2D" parent="MarkerTileMapLayer"]
 position = Vector2(400, 304)
-texture = ExtResource("12_txuw0")
-script = ExtResource("15_w357o")
+texture = ExtResource("19_5dcvg")
+script = ExtResource("17_fdm2k")
 spawn_actor_key = "BanditArmored"
 spawn_actor_id = "BanditArmored_1"
 facing = 2
 map_coor = Vector2i(12, 9)
 
 [node name="SpwanNode_Bandit2" type="Sprite2D" parent="MarkerTileMapLayer"]
-position = Vector2(336, 368)
-texture = ExtResource("12_txuw0")
-script = ExtResource("15_w357o")
+position = Vector2(304, 432)
+rotation = 3.14159
+texture = ExtResource("19_5dcvg")
+script = ExtResource("17_fdm2k")
 spawn_actor_key = "BanditArmored"
 spawn_actor_id = "BanditArmored_2"
-facing = 2
-map_coor = Vector2i(10, 11)
+map_coor = Vector2i(9, 13)
 
 [node name="SpwanNode_Bandit3" type="Sprite2D" parent="MarkerTileMapLayer"]
-position = Vector2(464, 368)
-texture = ExtResource("12_txuw0")
-script = ExtResource("15_w357o")
+position = Vector2(336, 176)
+texture = ExtResource("19_5dcvg")
+script = ExtResource("17_fdm2k")
 spawn_actor_key = "BanditArmored"
 spawn_actor_id = "BanditArmored_3"
 facing = 2
-map_coor = Vector2i(14, 11)
+map_coor = Vector2i(10, 5)
+
+[node name="SpwanNode_CptBandit" type="Sprite2D" parent="MarkerTileMapLayer"]
+position = Vector2(304, 176)
+texture = ExtResource("18_6oeij")
+script = ExtResource("17_fdm2k")
+spawn_actor_key = "BanditCaptain"
+spawn_actor_id = "BanditCaptain"
+facing = 2
+map_coor = Vector2i(9, 5)
 
 [node name="SpwanNode_Archer1" type="Sprite2D" parent="MarkerTileMapLayer"]
 position = Vector2(240, 336)
-texture = ExtResource("15_f8j4w")
-script = ExtResource("15_w357o")
+texture = ExtResource("20_3csu2")
+script = ExtResource("17_fdm2k")
 spawn_actor_key = "BanditArcher"
 spawn_actor_id = "BanditArcher_1"
 facing = 2
 map_coor = Vector2i(7, 10)
 
 [node name="SpwanNode_Archer2" type="Sprite2D" parent="MarkerTileMapLayer"]
-position = Vector2(496, 336)
-rotation = -1.5708
-texture = ExtResource("15_f8j4w")
-script = ExtResource("15_w357o")
+position = Vector2(496, 432)
+rotation = 4.71239
+texture = ExtResource("20_3csu2")
+script = ExtResource("17_fdm2k")
 spawn_actor_key = "BanditArcher"
 spawn_actor_id = "BanditArcher_2"
 facing = 1
-map_coor = Vector2i(15, 10)
+map_coor = Vector2i(15, 13)
 
 [node name="SpwanNode_MF" type="Sprite2D" parent="MarkerTileMapLayer"]
 position = Vector2(400, 592)
-texture = ExtResource("16_brdvp")
+texture = ExtResource("21_jd8i5")
 offset = Vector2(0, -16)
 hframes = 12
 vframes = 4
 frame = 12
-script = ExtResource("15_w357o")
+script = ExtResource("17_fdm2k")
 spawn_actor_key = "MysteriousFigure"
 spawn_actor_id = "MysteriousFigure"
 map_coor = Vector2i(12, 18)
 
+[node name="CameraRef" type="Sprite2D" parent="MarkerTileMapLayer"]
+visible = false
+position = Vector2(368, 368)
+texture = ExtResource("21_jd8i5")
+offset = Vector2(0, -16)
+hframes = 12
+vframes = 4
+frame = 12
+script = ExtResource("17_fdm2k")
+spawn_actor_key = "MysteriousFigure"
+spawn_actor_id = "MysteriousFigure"
+map_coor = Vector2i(11, 11)
+
+[node name="Control" type="Control" parent="MarkerTileMapLayer/CameraRef"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -312.0
+offset_top = -191.0
+offset_right = 840.0
+offset_bottom = 457.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+
+[node name="ColorRect" type="ColorRect" parent="MarkerTileMapLayer/CameraRef/Control"]
+custom_minimum_size = Vector2(0, 180)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+
+[node name="ColorRect2" type="ColorRect" parent="MarkerTileMapLayer/CameraRef/Control"]
+custom_minimum_size = Vector2(0, 180)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="ColorRect3" type="ColorRect" parent="MarkerTileMapLayer/CameraRef/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
 [node name="Cart" type="Sprite2D" parent="."]
 position = Vector2(416, 258)
-texture = ExtResource("23_pqeun")
+texture = ExtResource("22_26fwc")
+
+[node name="Node2D" type="Node2D" parent="."]
