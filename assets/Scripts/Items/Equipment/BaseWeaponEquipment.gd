@@ -17,6 +17,9 @@ func _init(key:String, def_load_path:String, def:Dictionary, id:String='', data:
 func get_equipment_slot_type()->String:
 	return "Weapon"
 
+func get_item_type()->ItemTypes:
+	return ItemTypes.Weapon
+	
 func get_item_tags()->Array:
 	var tags = super()
 	if !tags.has("Weapon"):

@@ -17,6 +17,9 @@ static var story_id
 static var _player_ids:Array = [null, null, null, null]
 static var story_flags:Dictionary = {}
 
+static var _money:int = 0
+signal money_changed()
+
 #TODO: Curent set up doesn't account for time spent in the save menu
 static var total_play_time
 static var session_start_unix_time
@@ -84,6 +87,7 @@ static func get_runtime_untix_time()->float:
 
 static func build_save_data()->Dictionary:
 	var out_data = {}
+	out_data['Money'] = _money
 	out_data['StoryId'] = story_id
 	out_data['Actors'] = ActorLibrary.Instance.build_save_data()
 	out_data['PlayerInventory'] = PlayerInventory.build_save_data()
@@ -95,6 +99,7 @@ static func build_save_data()->Dictionary:
 static func load_save_data(data:Dictionary):
 	if !Instance: Instance = StoryState.new()
 	story_id = data['StoryId']
+	_money = data.get("Money", 0)
 	story_flags = data.get("StoryFlags", {}).duplicate(true)
 	EffectLibrary.purge_effects()
 	#ItemLibrary.load_items(data.get("Items", {}))
@@ -132,3 +137,10 @@ static func load_save_data(data:Dictionary):
 		
 	total_play_time = data.get("RunTime", 0)
 	session_start_unix_time = Time.get_unix_time_from_system()
+
+static func get_current_money()->int:
+	return _money
+
+static func spend_money(cost:int):
+	_money = max(0, _money - cost)
+	Instance.money_changed.emit()

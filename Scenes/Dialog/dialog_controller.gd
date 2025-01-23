@@ -16,7 +16,8 @@ enum BlockTypes {
 	TextInput,
 	ToCamp,
 	CustomBlock,
-	AnimateNode
+	AnimateNode,
+	StartCombat
 }
 
 @export var scene_root:Node

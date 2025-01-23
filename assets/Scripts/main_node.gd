@@ -116,9 +116,15 @@ func open_camp_menu():
 	
 func open_map_selection_menu():
 	current_scene.queue_free()
-	var camp_scene = load("res://Scenes/Menus/MapSelectionMenu/map_selecction_menu.tscn").instantiate()
-	self.add_child(camp_scene)
-	current_scene = camp_scene
+	var new_scene = load("res://Scenes/Menus/MapSelectionMenu/map_selecction_menu.tscn").instantiate()
+	self.add_child(new_scene)
+	current_scene = new_scene
+	
+func open_shop_menu():
+	current_scene.queue_free()
+	var new_scene = load("res://Scenes/Menus/ShopMenu/shop_menu.tscn").instantiate()
+	self.add_child(new_scene)
+	current_scene = new_scene
 
 func open_character_sheet(_actor:BaseActor=null, parent_node=null)->CharacterMenuControl:
 	var actor = _actor

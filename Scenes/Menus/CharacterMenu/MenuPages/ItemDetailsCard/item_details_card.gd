@@ -1,11 +1,59 @@
+@tool
 class_name ItemDetailsCard
 extends Control
 
 signal exit_button_pressed
 signal hide_done
 
-@export var speed:float
+enum States {Hidden, Growing, Showing, Shrinking}
+
+@export var showing:bool:
+	set(val):
+		showing = val
+		if showing and (state == States.Hidden or state == States.Shrinking):
+			state = States.Growing
+			grow_timer = 0
+		if not showing and (state == States.Showing or state == States.Growing):
+			state = States.Shrinking
+			grow_timer = time_to_show
+
+@export var state:States:
+	set(val):
+		state = val
+		if offset_control and offset_point:
+			if state == States.Hidden:
+				grow_timer = 0
+				offset_control.position = offset_point.position
+			if state == States.Showing:
+				grow_timer = time_to_show
+				offset_control.position = Vector2.ZERO
+			
+@export var buy_mode:bool:
+	set(val):
+		buy_mode = val
+		if buy_controller:
+			if buy_mode:
+				buy_controller.show()
+				equip_button_background.hide()
+			else:
+				buy_controller.hide()
+				equip_button_background.show()
+			
 @export var offset_control:Control
+@export var offset_point:Node2D
+@export var vertical:bool:
+	set(val):
+		vertical = val
+		if offset_point:
+			if vertical:
+				offset_point.position = Vector2(self.size.x,0)
+			else:
+				offset_point.position = Vector2(0,self.size.y)
+
+@export var time_to_show:float
+@export var grow_timer:float
+
+@export var speed:float
 @export var icon:TextureRect
 @export var title_lable:FitScaleLabel
 @export var description_box:RichTextLabel
@@ -26,39 +74,56 @@ signal hide_done
 @export var equip_button:Button
 @export var equip_label:FitScaleLabel
 
-enum AnimationStates {In, Showing, Out, Hidden}
-var animation_state:AnimationStates
+@export var buy_controller:BuyController
+#enum AnimationStates {In, Showing, Out, Hidden}
+#var animation_state:AnimationStates
 var item_id:String
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	exit_button.pressed.connect(_on_exit_button)
+	offset_control.size = self.size
 	#equip_button.pressed.connect(equip_button_pressed)
 	pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if animation_state == AnimationStates.Showing or animation_state == AnimationStates.Hidden:
+	if not self.visible:
 		return
-	
-	var target = null
-	if animation_state == AnimationStates.In:
-		var self_hight = self.get_global_rect().size.y
-		target = offset_control.position.move_toward(Vector2(0, -self_hight), delta * speed)
-	elif animation_state == AnimationStates.Out:
-		target = offset_control.position.move_toward(Vector2.ZERO, delta * speed)
-	var offset_pos = offset_control.position
-	var dist_to_target = abs(offset_control.position.distance_to(target)) 
-	if dist_to_target < 1:
-		if animation_state == AnimationStates.Out:
-			animation_state = AnimationStates.Hidden
-			self.hide()
-			print("Done Showing")
+	if state == States.Hidden or state == States.Showing:
+		return
+	if state == States.Growing:
+		grow_timer = min(time_to_show, grow_timer + delta)
+		var distance = offset_point.position
+		offset_control.position = distance * (1 - (grow_timer / time_to_show))
+		if time_to_show == grow_timer:
+			state = States.Showing
+	if state == States.Shrinking:
+		grow_timer = max(0, grow_timer - delta)
+		var distance = offset_point.position
+		offset_control.position = distance * (1-(grow_timer / time_to_show))
+		if grow_timer == 0:
+			state = States.Hidden
 			hide_done.emit()
-		else:
-			animation_state = AnimationStates.Showing
-	else:
-		offset_control.position = target
+		#
+	#var target = null
+	#if animation_state == AnimationStates.In:
+		#var self_hight = self.get_global_rect().size.y
+		#target = offset_control.position.move_toward(Vector2(0, -self_hight), delta * speed)
+	#elif animation_state == AnimationStates.Out:
+		#target = offset_control.position.move_toward(Vector2.ZERO, delta * speed)
+	#var offset_pos = offset_control.position
+	#var dist_to_target = abs(offset_control.position.distance_to(target)) 
+	#if dist_to_target < 1:
+		#if animation_state == AnimationStates.Out:
+			#animation_state = AnimationStates.Hidden
+			#self.hide()
+			#print("Done Showing")
+			#hide_done.emit()
+		#else:
+			#animation_state = AnimationStates.Showing
+	#else:
+		#offset_control.position = target
 
 func _on_exit_button():
 	exit_button_pressed.emit()
@@ -66,15 +131,17 @@ func _on_exit_button():
 	
 
 func start_show():
-	self.show()
-	offset_control.position.y = self.size.y
-	animation_state = AnimationStates.In
+	showing = true
+	#self.show()
+	#offset_control.position.y = self.size.y
+	#animation_state = AnimationStates.In
 
 func start_hide():
-	if animation_state == AnimationStates.Out or animation_state == AnimationStates.Hidden:
-		return
-	#offset_control.position.y = 0
-	animation_state = AnimationStates.Out
+	showing = false
+	#if animation_state == AnimationStates.Out or animation_state == AnimationStates.Hidden:
+		#return
+	##offset_control.position.y = 0
+	#animation_state = AnimationStates.Out
 
 func set_item(actor:BaseActor, item:BaseItem):
 	item_id = item.Id
@@ -120,10 +187,12 @@ func set_item(actor:BaseActor, item:BaseItem):
 			#button_label.text = "Remove"
 		#else:
 			#button_label.text = "Equipt"
-	
-	var cant_equip_reasons = item.get_cant_use_reasons(actor)
-	set_cant_equip_reason(cant_equip_reasons)
-	self.start_show()
+	if actor:
+		var cant_equip_reasons = item.get_cant_use_reasons(actor)
+		set_cant_equip_reason(cant_equip_reasons)
+		self.start_show()
+	if buy_mode:
+		buy_controller.set_item(item)
 
 func equip_button_pressed():
 	if weapon_details.visible:

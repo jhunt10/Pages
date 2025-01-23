@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cev10u5562peq"]
+[gd_scene load_steps=16 format=3 uid="uid://cev10u5562peq"]
 
 [ext_resource type="Texture2D" uid="uid://bwbvifw2c8wlg" path="res://Scenes/Menus/CampMenu/PaperBackground.png" id="1_b8omp"]
 [ext_resource type="Script" path="res://Scenes/Menus/CampMenu/camp_menu.gd" id="1_yrr0s"]
@@ -13,8 +13,10 @@
 [ext_resource type="Texture2D" uid="uid://567vutk12a12" path="res://Scenes/Menus/CharacterMenu/MenuPages/SlotHighlight.png" id="7_hs7sy"]
 [ext_resource type="Script" path="res://Scenes/Menus/CampMenu/no_shop_pop_up.gd" id="11_o6asw"]
 [ext_resource type="Texture2D" uid="uid://io35wpu802fp" path="res://assets/Sprites/UI/BackPatches/Patch_64_12.png" id="12_j1y8g"]
+[ext_resource type="Script" path="res://Scenes/Menus/money_display.gd" id="14_fdnmj"]
+[ext_resource type="Texture2D" uid="uid://cb8k5gxes3iaj" path="res://assets/Sprites/UI/SymbolIcons/MoneySymbol_White.png" id="15_axj4f"]
 
-[node name="CampMenu" type="Control" node_paths=PackedStringArray("camp_options_container", "system_options_container", "pretty_picture_texure_rect", "quest_button", "shop_button", "character_button", "explort_button", "system_button", "sys_back_button", "sys_save_button", "sys_load_button", "sys_debug_button", "sys_quit_button", "no_shop_pop_up")]
+[node name="CampMenu" type="Control" node_paths=PackedStringArray("camp_options_container", "system_options_container", "pretty_picture_texure_rect", "quest_button", "shop_button", "character_button", "explort_button", "system_button", "sys_back_button", "sys_save_button", "sys_load_button", "sys_debug_button", "sys_quit_button")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -35,7 +37,6 @@ sys_save_button = NodePath("CampOptionsContainer/SystemOptionsContainer/Sys_Save
 sys_load_button = NodePath("CampOptionsContainer/SystemOptionsContainer/Sys_LoadOptionButton")
 sys_debug_button = NodePath("CampOptionsContainer/SystemOptionsContainer/Sys_DebugOptionButton")
 sys_quit_button = NodePath("CampOptionsContainer/SystemOptionsContainer/Sys_QuitOptionButton")
-no_shop_pop_up = NodePath("NoShopPopUp")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="."]
 layout_mode = 1
@@ -751,28 +752,6 @@ offset_bottom = 12.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
-layout_mode = 0
-offset_left = 16.0
-offset_top = 16.0
-offset_right = 274.0
-offset_bottom = 56.0
-theme_override_constants/separation = 2
-
-[node name="TextureRect" type="TextureRect" parent="HBoxContainer"]
-self_modulate = Color(0.498039, 0, 0, 1)
-custom_minimum_size = Vector2(28, 32)
-layout_mode = 2
-texture = ExtResource("4_wh6tp")
-stretch_mode = 4
-
-[node name="TitleLabel" type="Label" parent="HBoxContainer"]
-self_modulate = Color(0.498039, 0, 0, 1)
-layout_mode = 2
-theme = ExtResource("3_ufdhk")
-theme_override_font_sizes/font_size = 32
-text = "ack at Camp..."
-
 [node name="Control" type="Control" parent="."]
 clip_contents = true
 layout_mode = 1
@@ -861,3 +840,51 @@ offset_right = 828.0
 offset_bottom = 280.0
 scale = Vector2(2, 2)
 text = "X"
+
+[node name="TitleContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = -16.0
+offset_bottom = 40.0
+grow_horizontal = 2
+theme_override_constants/separation = 2
+
+[node name="TextureRect" type="TextureRect" parent="TitleContainer"]
+self_modulate = Color(0.498039, 0, 0, 1)
+custom_minimum_size = Vector2(28, 32)
+layout_mode = 2
+texture = ExtResource("4_wh6tp")
+stretch_mode = 4
+
+[node name="TitleLabel" type="Label" parent="TitleContainer"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("3_ufdhk")
+theme_override_font_sizes/font_size = 32
+text = "ack at Camp..."
+
+[node name="VSeparator" type="VSeparator" parent="TitleContainer"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TitleContainer" node_paths=PackedStringArray("label")]
+layout_mode = 2
+script = ExtResource("14_fdnmj")
+label = NodePath("TitleLabel")
+
+[node name="TextureRect" type="TextureRect" parent="TitleContainer/HBoxContainer"]
+self_modulate = Color(0.498039, 0, 0, 1)
+custom_minimum_size = Vector2(28, 32)
+layout_mode = 2
+texture = ExtResource("15_axj4f")
+
+[node name="TitleLabel" type="Label" parent="TitleContainer/HBoxContainer"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("3_ufdhk")
+theme_override_font_sizes/font_size = 32
+text = "100"

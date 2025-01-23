@@ -19,7 +19,7 @@
         "ItemDetails":
         {
             "Rarity": "Common",
-            "Value": 50
+            "Value": 500
         }
     },
     {
@@ -30,7 +30,7 @@
         "ItemDetails":
         {
             "Rarity": "Common",
-            "Value": 50
+            "Value": 500
         }
     },
     {
@@ -41,7 +41,7 @@
         "ItemDetails":
         {
             "Rarity": "Common",
-            "Value": 50
+            "Value": 500
         }
     },
     {
@@ -85,7 +85,18 @@
         "ItemDetails":
         {
             "Rarity": "Common",
-            "Value": 50
+            "Value": 500
+        }
+    },
+    {
+        "ItemKey": "Dash_PageItem",
+        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
+        "CanStack": true,
+        "ActionKey": "Dash",
+        "ItemDetails":
+        {
+            "Rarity": "Rare",
+            "Value": 1000
         }
     }
 ]

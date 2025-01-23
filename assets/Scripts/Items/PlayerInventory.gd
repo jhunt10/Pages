@@ -52,15 +52,54 @@ static func add_item(item:BaseItem, count:int=1):
 		return
 	Instance.inventory_changed.emit()
 
+
+static func add_to_stack(item_key:String, count:int=1):
+	if LOGGING: print("PlayerInventory.add_to_stack: Item: %s | %s" % [item_key, count])
+	if _stacked_item_id_by_key.keys().has(item_key):
+		if LOGGING: print("PlayerInventory.add_to_stack: Added to existing stack")
+		_stacked_item_count_by_key[item_key] += count
+		Instance.inventory_changed.emit()
+		return
+	if LOGGING: print("PlayerInventory.add_to_stack: Creating new stack")
+	var new_item = ItemLibrary.create_item(item_key,{})
+	_stacked_item_id_by_key[item_key] = new_item.Id
+	_stacked_item_count_by_key[item_key] = count
+	Instance.inventory_changed.emit()
+
+static func reduce_stack_count(item_key:String, take_count:int=1):
+	if LOGGING: print("PlayerInventory.reduce_stack_count: Item: %s | %s" % [item_key, take_count])
+	if not _stacked_item_id_by_key.keys().has(item_key):
+		if LOGGING: print("PlayerInventory.reduce_stack_count: Had none")
+		return
+		
+	var have_count = _stacked_item_count_by_key[item_key]
+	if have_count > take_count:
+		_stacked_item_count_by_key[item_key] -= take_count
+		Instance.inventory_changed.emit()
+		if LOGGING: print("PlayerInventory.reduce_stack_count: Had more")
+		return
+		
+	if LOGGING: print("PlayerInventory.reduce_stack_count: Had exact amount")
+	var item_id = _stacked_item_id_by_key[item_key]
+	var item = ItemLibrary.get_item(item_id)
+	ItemLibrary.delete_item(item)
+	_stacked_item_id_by_key.erase(item_key)
+	_stacked_item_count_by_key.erase(item_key)
+	Instance.inventory_changed.emit()
+
 ## Create a new item of key and reduce stack count in Player Inventory
 static func split_item_off_stack(item_key:String)->BaseItem:
 	var count = get_item_stack_count(item_key)
 	if count == 0:
-		print("ItemHelper.split_item_off_stack: 0 items of key '%s' found in PlayerInventory")
+		var unique_item = get_item_by_key(item_key)
+		if unique_item:
+			delete_item_from_inventory(unique_item)
+			return unique_item
+		print("ItemHelper.split_item_off_stack: 0 items of key '%s' found in PlayerInventory" % [item_key])
 		return null
 	var inv_item = get_item_by_key(item_key)
 	if !inv_item:
-		print("ItemHelper.split_item_off_stack: No item of key '%s' found in PlayerInventory")
+		print("ItemHelper.split_item_off_stack: No item of key '%s' found in PlayerInventory" % [item_key])
 		return null
 	if count == 1:
 		delete_item_from_inventory(inv_item)

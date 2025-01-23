@@ -35,38 +35,40 @@ func is_equipped_to_actor(actor:BaseActor=null)->bool:
 		return _equipt_to_actor_id != null
 
 func clear_equipt_actor():
-	var old_actor_id = _equipt_to_actor_id
-	_equipt_to_actor_id = ''
-	_equipt_slot_index = -1
-	if old_actor_id != '':
-		var current_actor = ActorLibrary.get_actor(old_actor_id)
-		current_actor.equipment.remove_equipment(self)
-	equipt_actor_change.emit()
+	pass
+	#var old_actor_id = _equipt_to_actor_id
+	#_equipt_to_actor_id = ''
+	#_equipt_slot_index = -1
+	#if old_actor_id != '':
+		#var current_actor = ActorLibrary.get_actor(old_actor_id)
+		#current_actor.equipment.remove_equipment(self)
+	#equipt_actor_change.emit()
 
 func set_equipt_actor(actor:BaseActor, slot:int):
-	if _equipt_to_actor_id == actor.Id:
-		return
-	
-	# Return if actor can not equipe this item
-	if !actor.equipment.can_equip_item(self):
-		# Unless they alreay think it's equiped
-		if not actor.equipment.has_equipment_in_slot(slot, self):
-			return
-	
-	var old_actor_id = _equipt_to_actor_id
-	
-	_equipt_to_actor_id = actor.Id
-	_equipt_slot_index = slot
-	
-	if old_actor_id != '':
-		var current_actor = ActorLibrary.get_actor(old_actor_id)
-		if current_actor:
-			current_actor.equipment.remove_equipment(self)
-	
-	# Chack if actor know's it's equipped
-	if not actor.equipment.has_equipment_in_slot(slot, self):
-		actor.equipment.equip_item_to_slot(slot, self)
-	equipt_actor_change.emit()
+	pass
+	#if _equipt_to_actor_id == actor.Id:
+		#return
+	#
+	## Return if actor can not equipe this item
+	#if !actor.equipment.can_equip_item(self):
+		## Unless they alreay think it's equiped
+		#if not actor.equipment.has_equipment_in_slot(slot, self):
+			#return
+	#
+	#var old_actor_id = _equipt_to_actor_id
+	#
+	#_equipt_to_actor_id = actor.Id
+	#_equipt_slot_index = slot
+	#
+	#if old_actor_id != '':
+		#var current_actor = ActorLibrary.get_actor(old_actor_id)
+		#if current_actor:
+			#current_actor.equipment.remove_equipment(self)
+	#
+	## Chack if actor know's it's equipped
+	#if not actor.equipment.has_equipment_in_slot(slot, self):
+		#actor.equipment.equip_item_to_slot(slot, self)
+	#equipt_actor_change.emit()
 
 func get_equipt_to_actor_id():
 	return _equipt_to_actor_id

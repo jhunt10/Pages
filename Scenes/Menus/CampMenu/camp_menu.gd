@@ -19,15 +19,12 @@ static var Instance:CampMenu
 @export var sys_debug_button:CampOptionButton
 @export var sys_quit_button:CampOptionButton
 
-@export var no_shop_pop_up:NoShopPopUp
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	Instance = self
-	no_shop_pop_up.hide()
 	character_button.button.pressed.connect(_on_prepare_button)
 	quest_button.button.pressed.connect(_on_quest_button)
-	shop_button.button.pressed.connect(no_shop_pop_up.do_thing)
+	shop_button.button.pressed.connect(_on_shop_button)
 	explort_button.button.pressed.connect(_on_explore_button)
 	system_button.button.pressed.connect(_sub_menu_open.bind("System"))
 	sys_back_button.button.pressed.connect(_sub_menu_open.bind("Main"))
@@ -44,7 +41,7 @@ func _ready() -> void:
 		if pretty_picture:
 			pretty_picture_texure_rect.texture = pretty_picture
 			
-	
+	shop_button.disabled = false
 	_sub_menu_open("Main")
 	pass # Replace with function body.
 
@@ -61,6 +58,9 @@ func _sub_menu_open(name:String):
 	else:
 		camp_options_container.show()
 		system_options_container.hide()
+
+func _on_shop_button():
+	MainRootNode.Instance.open_shop_menu()
 
 func _on_quest_button():
 	#MainRootNode.Instance.start_combat()

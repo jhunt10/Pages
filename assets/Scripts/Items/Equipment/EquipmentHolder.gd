@@ -146,6 +146,9 @@ func remove_item(item_id:String, supress_signal:bool=false):
 		# Remove from both hands
 		_safe_set_slot(main_hand_index, null, true)
 		_safe_set_slot(off_hand_index, null, supress_signal)
+		if _actor.is_player:
+			var item = ItemLibrary.get_item(item_id)
+			PlayerInventory.add_item(item)
 		return
 		
 	# Only in Off Hand: Check if main hand weapon can be two handed
@@ -154,17 +157,29 @@ func remove_item(item_id:String, supress_signal:bool=false):
 		var main_hand_item = get_equipment_in_slot(main_hand_index)
 		if not main_hand_item: # No item in main_hand
 			_safe_set_slot(off_hand_index, null, supress_signal)
+			if _actor.is_player:
+				var item = ItemLibrary.get_item(item_id)
+				PlayerInventory.add_item(item)
 			return
 		var main_hand_weapon = main_hand_item as BaseWeaponEquipment
 		if not main_hand_weapon: # Main Hand item is not weapon?
 			_safe_set_slot(off_hand_index, null, supress_signal)
+			if _actor.is_player:
+				var item = ItemLibrary.get_item(item_id)
+				PlayerInventory.add_item(item)
 			return
 		# Move main hand weapon to both hands
 		if (main_hand_weapon.get_weapon_class() == BaseWeaponEquipment.WeaponClasses.Medium
 			or main_hand_weapon.get_weapon_class() == BaseWeaponEquipment.WeaponClasses.Heavy):
 			_safe_set_slot(off_hand_index, main_hand_weapon, supress_signal)
+			if _actor.is_player:
+				var item = ItemLibrary.get_item(item_id)
+				PlayerInventory.add_item(item)
 		else: # Can't two hand Main Hand
 			_safe_set_slot(off_hand_index, null, supress_signal)
+			if _actor.is_player:
+				var item = ItemLibrary.get_item(item_id)
+				PlayerInventory.add_item(item)
 			return
 			
 	
@@ -174,19 +189,31 @@ func remove_item(item_id:String, supress_signal:bool=false):
 		var off_hand_item = get_equipment_in_slot(off_hand_index)
 		if not off_hand_item: # No item in off_hand
 			_safe_set_slot(main_hand_index, null, supress_signal)
+			if _actor.is_player:
+				var item = ItemLibrary.get_item(item_id)
+				PlayerInventory.add_item(item)
 			return
 		var off_hand_weapon = off_hand_item as BaseWeaponEquipment
 		if not off_hand_weapon: # Off Hand item is not weapon
 			_safe_set_slot(main_hand_index, null, supress_signal)
+			if _actor.is_player:
+				var item = ItemLibrary.get_item(item_id)
+				PlayerInventory.add_item(item)
 			return 
 		# Move off hand weapon to main hands
 		_safe_set_slot(off_hand_index, null, true)
 		_safe_set_slot(main_hand_index, off_hand_weapon, supress_signal)
+		if _actor.is_player:
+			var item = ItemLibrary.get_item(item_id)
+			PlayerInventory.add_item(item)
 	
 	# Isn't in either hand
 	else:
 		var index = _raw_item_slots.find(item_id)
 		_safe_set_slot(index, null, supress_signal)
+		if _actor.is_player:
+			var item = ItemLibrary.get_item(item_id)
+			PlayerInventory.add_item(item)
 	
 
 func remove_equipment(equipment:BaseEquipmentItem, supress_signal:bool = false):
@@ -425,7 +452,7 @@ func try_set_item_in_slot(item:BaseItem, index:int, allow_replace:bool=false)->b
 	var main_hand_index = _slot_set_key_mapping.find("MainHand")
 	var off_hand_index = _slot_set_key_mapping.find("OffHand")
 	var current_primary = get_primary_weapon()
-	var current_offhand = get_offhand_weapon()
+	var current_offhand = get_item_in_slot(off_hand_index)
 	if index != main_hand_index and index != off_hand_index:
 		printerr("EquipmentHolder.try_set_item_in_slot: Attempted to set weapon '%s' in non-hand slot %s." % [item.Id, index])
 		return false

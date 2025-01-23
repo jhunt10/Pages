@@ -47,16 +47,17 @@ static func try_transfer_item_from_inventory_to_holder(item:BaseItem, holder:Bas
 	if not holder.try_set_item_in_slot(inv_item, slot_index, allow_replace):
 		PlayerInventory.add_item(inv_item)
 		return "Set item failed"
-	
-	if old_item:
-		PlayerInventory.add_item(old_item)
+	if not holder is EquipmentHolder:
+		if old_item:
+			PlayerInventory.add_item(old_item)
 	return ""
 
 static func try_transfer_item_from_holder_to_inventory(item:BaseItem, holder:BaseItemHolder)->String:
 	if !holder.has_item(item.Id):
 		return "Item not found"
 	holder.remove_item(item.Id)
-	PlayerInventory.add_item(item)
+	if not holder is EquipmentHolder:
+		PlayerInventory.add_item(item)
 	return ""
 
 static func swap_item_holder_slots(holder:BaseItemHolder, slot_a:int, slot_b:int, return_b_to_inventory:bool=true):

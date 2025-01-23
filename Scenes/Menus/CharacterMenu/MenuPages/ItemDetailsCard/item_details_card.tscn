@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://btr6wpgyitqc0"]
+[gd_scene load_steps=35 format=3 uid="uid://btr6wpgyitqc0"]
 
 [ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/ItemDetailsCard/item_details_card.gd" id="1_vq5a0"]
 [ext_resource type="Texture2D" uid="uid://bqmtfkh0uj2bk" path="res://Scenes/Menus/CharacterMenu/MenuPages/ItemDetailsCard/DetailsCard_Background_working.png" id="2_7ol1j"]
@@ -32,17 +32,22 @@
 [ext_resource type="Texture2D" uid="uid://b10pvly4exem2" path="res://assets/Sprites/UI/SymbolIcons/_S_Symbole.png" id="20_lxkdx"]
 [ext_resource type="Texture2D" uid="uid://bpa7iavvlbhi5" path="res://assets/Sprites/UI/SymbolIcons/PageCountSymbol.png" id="20_mtmo1"]
 [ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/ItemDetailsCard/PageQueDetails/page_set_label.gd" id="21_eimff"]
+[ext_resource type="Texture2D" uid="uid://cb8k5gxes3iaj" path="res://assets/Sprites/UI/SymbolIcons/MoneySymbol_White.png" id="33_era8d"]
+[ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/ItemDetailsCard/buy_controller.gd" id="34_t0s17"]
 
-[node name="ItemDetailsCard" type="Control" node_paths=PackedStringArray("offset_control", "icon", "title_lable", "description_box", "exit_button", "weapon_details", "armor_details", "action_details", "effect_page_details", "page_que_details", "default_details", "tag_label", "equip_button_background", "equip_button", "equip_label")]
-custom_minimum_size = Vector2(300, 200)
+[node name="ItemDetailsCard" type="Control" node_paths=PackedStringArray("offset_control", "offset_point", "icon", "title_lable", "description_box", "exit_button", "weapon_details", "armor_details", "action_details", "effect_page_details", "page_que_details", "default_details", "tag_label", "equip_button_background", "equip_button", "equip_label", "buy_controller")]
+custom_minimum_size = Vector2(300, 260)
 layout_mode = 3
 anchors_preset = 0
 offset_right = 300.0
 offset_bottom = 200.0
 mouse_filter = 1
 script = ExtResource("1_vq5a0")
-speed = 500.0
 offset_control = NodePath("OffsetControl")
+offset_point = NodePath("OffestPoint")
+vertical = true
+time_to_show = 0.3
+speed = 500.0
 icon = NodePath("OffsetControl/NinePatchRect/VBoxContainer/HBoxContainer/IconBackground/Icon")
 title_lable = NodePath("OffsetControl/NinePatchRect/VBoxContainer/HBoxContainer/FitScaleLabel")
 description_box = NodePath("OffsetControl/NinePatchRect/VBoxContainer/WeaponDetailsControl/VBoxContainer/HBoxContainer2/DescriptionBox")
@@ -57,12 +62,17 @@ tag_label = NodePath("OffsetControl/NinePatchRect/VBoxContainer/TagLabel")
 equip_button_background = NodePath("OffsetControl/NinePatchRect/VBoxContainer/EquipButtonBackground")
 equip_button = NodePath("OffsetControl/NinePatchRect/VBoxContainer/EquipButtonBackground/EquipButton")
 equip_label = NodePath("OffsetControl/NinePatchRect/VBoxContainer/EquipButtonBackground/FitScaleLabel")
+buy_controller = NodePath("OffsetControl/NinePatchRect/VBoxContainer/BuyingController")
+
+[node name="OffestPoint" type="Node2D" parent="."]
+position = Vector2(300, 0)
 
 [node name="OffsetControl" type="Control" parent="."]
-custom_minimum_size = Vector2(300, 200)
+custom_minimum_size = Vector2(300, 260)
 anchors_preset = 0
-offset_right = 300.0
-offset_bottom = 256.0
+offset_left = 300.0
+offset_right = 600.0
+offset_bottom = 260.0
 
 [node name="NinePatchRect" type="NinePatchRect" parent="OffsetControl"]
 layout_mode = 1
@@ -752,6 +762,245 @@ text = "Equipe"
 center_x = true
 
 [node name="EquipButton" type="Button" parent="OffsetControl/NinePatchRect/VBoxContainer/EquipButtonBackground"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BuyingController" type="VBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer" node_paths=PackedStringArray("plus_button", "minus_button", "buy_button", "buying_count_label", "owned_count_label", "cost_container", "cost_value_label", "button_label")]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 0
+script = ExtResource("34_t0s17")
+item_price = 100
+buying_count = 1
+plus_button = NodePath("BuyButtonsContainer/PlusButton/PlusButton")
+minus_button = NodePath("BuyButtonsContainer/MinusButton/MinusButton")
+buy_button = NodePath("BuyButtonsContainer/BuyButton/BuyButton")
+buying_count_label = NodePath("BuyCountCostContainer/BuyingCountControl/BuyingValueLabel")
+owned_count_label = NodePath("BuyCountCostContainer/OwnedContainer/OwnValueLabel")
+cost_container = NodePath("BuyCountCostContainer/CostContainer")
+cost_value_label = NodePath("BuyCountCostContainer/CostContainer/CostLabel")
+button_label = NodePath("BuyButtonsContainer/BuyButton/BuyButtonLabel")
+default_cost_color = Color(0.470588, 0, 0, 1)
+invalid_cost_color = Color(0.473976, 0.473976, 0.473976, 1)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/BuyingController"]
+layout_mode = 2
+
+[node name="BuyCountCostContainer" type="HBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/BuyingController"]
+layout_mode = 2
+
+[node name="OwnedContainer" type="VBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/BuyingController/BuyCountCostContainer"]
+custom_minimum_size = Vector2(48, 0)
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="OwnTextLabel" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/BuyingController/BuyCountCostContainer/OwnedContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+theme = ExtResource("18_wsrou")
+theme_override_colors/font_color = Color(0.470588, 0, 0, 1)
+text = "Own:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="OwnValueLabel" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/BuyingController/BuyCountCostContainer/OwnedContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+theme = ExtResource("18_wsrou")
+theme_override_colors/font_color = Color(0.470588, 0, 0, 1)
+text = "10"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BuyingCountControl" type="Control" parent="OffsetControl/NinePatchRect/VBoxContainer/BuyingController/BuyCountCostContainer"]
+custom_minimum_size = Vector2(48, 36)
+layout_mode = 2
+
+[node name="BuyingValueLabel" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/BuyingController/BuyCountCostContainer/BuyingCountControl"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 8
+theme = ExtResource("18_wsrou")
+theme_override_colors/font_color = Color(0.470588, 0, 0, 1)
+theme_override_font_sizes/font_size = 24
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NinePatchRect" type="NinePatchRect" parent="OffsetControl/NinePatchRect/VBoxContainer/BuyingController/BuyCountCostContainer/BuyingCountControl"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_850b7")
+patch_margin_left = 6
+patch_margin_top = 6
+patch_margin_right = 6
+patch_margin_bottom = 6
+
+[node name="VSeparator" type="VSeparator" parent="OffsetControl/NinePatchRect/VBoxContainer/BuyingController/BuyCountCostContainer"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="CostContainer" type="HBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/BuyingController/BuyCountCostContainer"]
+modulate = Color(0.470588, 0, 0, 1)
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="TextureRect" type="TextureRect" parent="OffsetControl/NinePatchRect/VBoxContainer/BuyingController/BuyCountCostContainer/CostContainer"]
+custom_minimum_size = Vector2(28, 32)
+layout_mode = 2
+texture = ExtResource("33_era8d")
+
+[node name="CostLabel" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/BuyingController/BuyCountCostContainer/CostContainer"]
+layout_mode = 2
+theme = ExtResource("4_xmy3g")
+theme_override_font_sizes/font_size = 32
+text = "100"
+
+[node name="VSeparator2" type="VSeparator" parent="OffsetControl/NinePatchRect/VBoxContainer/BuyingController/BuyCountCostContainer"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="BuyButtonsContainer" type="HBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/BuyingController"]
+layout_mode = 2
+
+[node name="MinusButton" type="Control" parent="OffsetControl/NinePatchRect/VBoxContainer/BuyingController/BuyButtonsContainer"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="MinusButtonLabel" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/BuyingController/BuyButtonsContainer/MinusButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_right = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 8
+theme = ExtResource("18_wsrou")
+theme_override_colors/font_color = Color(0.470588, 0, 0, 1)
+theme_override_font_sizes/font_size = 32
+text = "-"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NinePatchRect" type="NinePatchRect" parent="OffsetControl/NinePatchRect/VBoxContainer/BuyingController/BuyButtonsContainer/MinusButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_850b7")
+patch_margin_left = 6
+patch_margin_top = 6
+patch_margin_right = 6
+patch_margin_bottom = 6
+
+[node name="MinusButton" type="Button" parent="OffsetControl/NinePatchRect/VBoxContainer/BuyingController/BuyButtonsContainer/MinusButton"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PlusButton" type="Control" parent="OffsetControl/NinePatchRect/VBoxContainer/BuyingController/BuyButtonsContainer"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="PlusButtonLabel" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/BuyingController/BuyButtonsContainer/PlusButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_right = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 8
+theme = ExtResource("18_wsrou")
+theme_override_colors/font_color = Color(0.470588, 0, 0, 1)
+theme_override_font_sizes/font_size = 32
+text = "+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NinePatchRect" type="NinePatchRect" parent="OffsetControl/NinePatchRect/VBoxContainer/BuyingController/BuyButtonsContainer/PlusButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_850b7")
+patch_margin_left = 6
+patch_margin_top = 6
+patch_margin_right = 6
+patch_margin_bottom = 6
+
+[node name="PlusButton" type="Button" parent="OffsetControl/NinePatchRect/VBoxContainer/BuyingController/BuyButtonsContainer/PlusButton"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BuyButton" type="Control" parent="OffsetControl/NinePatchRect/VBoxContainer/BuyingController/BuyButtonsContainer"]
+custom_minimum_size = Vector2(64, 48)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="BuyButtonLabel" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/BuyingController/BuyButtonsContainer/BuyButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 8
+theme = ExtResource("18_wsrou")
+theme_override_colors/font_color = Color(0.470588, 0, 0, 1)
+theme_override_font_sizes/font_size = 24
+text = "Buy"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NinePatchRect" type="NinePatchRect" parent="OffsetControl/NinePatchRect/VBoxContainer/BuyingController/BuyButtonsContainer/BuyButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_850b7")
+patch_margin_left = 6
+patch_margin_top = 6
+patch_margin_right = 6
+patch_margin_bottom = 6
+
+[node name="BuyButton" type="Button" parent="OffsetControl/NinePatchRect/VBoxContainer/BuyingController/BuyButtonsContainer/BuyButton"]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15

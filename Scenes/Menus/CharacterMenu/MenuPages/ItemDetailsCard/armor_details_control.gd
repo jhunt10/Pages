@@ -35,13 +35,13 @@ func set_armor(actor:BaseActor, armor:BaseArmorEquipment):
 		mag_icon.hide()
 		ward_label.hide()
 	description_box.text = armor.details.description
-	
-	if _actor.equipment.has_item(_item.Id):
-		parent_card_control.equip_label.text = "Remove"	
-	elif _actor.equipment.can_equip_item(_item):
-		parent_card_control.equip_label.text = "Equip"
-	else:
-		parent_card_control.equip_button_background.hide()
+	if _actor:
+		if _actor.equipment.has_item(_item.Id):
+			parent_card_control.equip_label.text = "Remove"	
+		elif _actor.equipment.can_equip_item(_item):
+			parent_card_control.equip_label.text = "Equip"
+		else:
+			parent_card_control.equip_button_background.hide()
 	
 	var stat_mods = armor.get_load_val("StatMods", {})
 	for mod_data in stat_mods.values():

@@ -1,7 +1,7 @@
 class_name BaseItem
 extends BaseLoadObject
 
-enum ItemTypes {KeyItem, Page, Consumable, Ammo, Equipment, Material}
+enum ItemTypes {KeyItem, Page, Consumable, Ammo, Equipment, Weapon, Material}
 enum ItemRarity {Mundane, Common, Rare, Legendary, Unique}
 
 var Id:String: 
@@ -43,6 +43,9 @@ func get_item_rarity()->ItemRarity:
 	else:
 		printerr("BaseItem.get_item_rarity: %s has unknown ItemRarity '%s'." % [ItemKey, type_str])
 	return ItemRarity.Mundane
+
+func get_item_value()->int:
+	return item_details.get("Value", 0)
 
 func get_item_tags()->Array:
 	return details.tags.duplicate()

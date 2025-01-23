@@ -3,7 +3,7 @@ extends BaseItem
 
 
 func get_item_type()->ItemTypes:
-	return ItemTypes.Equipment
+	return ItemTypes.Page
 
 func get_item_tags()->Array:
 	var tags = super()
