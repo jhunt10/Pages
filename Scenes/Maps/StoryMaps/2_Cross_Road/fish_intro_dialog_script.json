@@ -1,0 +1,420 @@
+{
+	"_MetaData_": {
+		"StartPartKey": "Intro"
+	},
+	"Intro":{
+		"_NextPartKey": "Dialog1",
+		"WaitForNextButton": true,
+		"EnsurePoses": {
+		},
+		"Blocks":[
+			{
+				"BlockType": "SpeechBox",
+				"WaitToFinish": true,
+				"WaitForNextButton": true,
+				"Entries": [
+					{
+						"EntryType":"Text",
+						"Text": "Having successfully slain the Bandits and thier Captain, ",
+                        "LetterDelay":0.015
+					},
+					{
+						"EntryType":"WaitToRead"
+					},
+					{
+						"EntryType":"Text",
+						"Text": "the Heroes approarched the Merchant's Cart to see what become of it's owner.",
+                        "LetterDelay":0.015,
+                        "NewLine": true
+					},
+					{
+						"EntryType":"WaitToRead"
+					}
+				]
+            },
+			{
+				"BlockType": "SpeechBox",
+				"WaitToFinish": true,
+				"Entries": [
+                    {
+                        "EntryType": "Clear",
+                        "ClearSpeaker": false
+                    },
+					{
+						"EntryType":"Text",
+						"Text": "Yet they found the Cart empty, ",
+                        "LetterDelay":0.015
+					}
+				]
+            },
+			{
+				"BlockType": "SpeechBox",
+				"WaitToFinish": true,
+                "TopBox": true,
+				"Entries": [
+                    {
+                        "EntryType": "Speaker",
+                        "SpeakerName": "Fish",
+                        "SpeakerPort": "res://defs/Actors/NPCs/FishMerch/Portraits/FishMerch_Sleeping.png"
+                    },
+					{
+						"EntryType":"Text",
+						"Text": ""
+					},
+					{
+						"EntryType":"Delay",
+                        "Delay":0.5
+					}
+				]
+            },
+			{
+				"BlockType": "SpeechBox",
+				"WaitToFinish": true,
+				"WaitForNextButton": true,
+				"Entries": [
+					{
+						"EntryType":"Text",
+						"Text": "save for a single Fish.",
+                        "LetterDelay":0.015
+					},
+					{
+						"EntryType":"WaitToRead"
+					}
+				]
+            },
+			{
+				"BlockType": "SpeechBox",
+				"WaitToFinish": true,
+                "TopBox": true,
+				"Entries": [
+					{
+						"EntryType":"Text",
+						"Text": "... ",
+                        "LetterDelay":0.3
+					}
+				]
+            },
+			{
+				"BlockType": "SpeechBox",
+				"WaitToFinish": true,
+                "TopBox": false,
+				"Entries": [
+					{
+						"EntryType":"Text",
+						"Text": "... ",
+                        "LetterDelay":0.3,
+                        "NewLine": true
+					}
+				]
+            },
+			{
+				"BlockType": "SpeechBox",
+				"WaitToFinish": true,
+                "TopBox": true,
+				"Entries": [
+					{
+						"EntryType":"Text",
+						"Text": "... ",
+                        "LetterDelay":0.3,
+                        "NewLine": true
+					},
+                    {
+                        "EntryType": "Clear",
+                        "ClearSpeaker": false
+                    },
+                    {
+                        "EntryType": "Speaker",
+                        "SpeakerName": "Fish",
+                        "SpeakerPort": "res://defs/Actors/NPCs/FishMerch/Portraits/FishMerch_Neutral.png"
+                    },
+					{
+						"EntryType":"Text",
+						"Text": "Are they gone?"
+					},
+					{
+						"EntryType":"WaitToRead"
+					}
+				]
+            },
+			{
+				"BlockType": "SpeechBox",
+				"WaitToFinish": true,
+                "TopBox": false,
+				"WaitForNextButton": true,
+				"Entries": [
+                    {
+                        "EntryType": "Clear",
+                        "ClearSpeaker": false
+                    },
+					{
+						"EntryType":"Text",
+						"Text": "It spoke?!",
+                        "NewLine": false
+					},
+					{
+						"EntryType":"WaitToRead"
+					},
+					{
+						"EntryType":"Delay",
+                        "Delay":0.5
+					},
+					{
+						"EntryType": "BackTrack",
+						"Text": "?!"
+					},
+					{
+						"EntryType":"Text",
+						"Text": " suddently, ",
+                        "LetterDelay":0.015
+					},
+					{
+						"EntryType":"WaitToRead"
+					},
+					{
+						"EntryType":"Text",
+						"Text": " surprizing everybody except the wise and always cool Scribe.",
+                        "LetterDelay":0.015
+					},
+					{
+						"EntryType":"WaitToRead"
+					}
+				]
+            },
+			{
+				"BlockType": "SpeechBox",
+				"WaitToFinish": true,
+                "TopBox": true,
+                "Hide": true,
+				"Entries": [
+                    {
+                        "EntryType": "Clear",
+                        "ClearSpeaker": false
+                    }
+				]
+            },
+			{
+				"BlockType": "SpeechBox",
+				"WaitToFinish": true,
+                "TopBox": false,
+				"WaitForNextButton": true,
+				"Entries": [
+                    {
+                        "EntryType": "Clear",
+                        "ClearSpeaker": false
+                    },
+                    {
+                        "EntryType": "Speaker",
+                        "SpeakerName": "Fish",
+                        "SpeakerPort": "res://defs/Actors/NPCs/FishMerch/Portraits/FishMerch_Neutral.png"
+                    },
+					{
+						"EntryType":"Text",
+						"Text": "Sorry about that, "
+					},
+					{
+						"EntryType":"WaitToRead"
+					},
+					{
+						"EntryType":"Text",
+						"Text": "this damned fish body has a habit of freezing up on me whenever there's trouble."
+					},
+					{
+						"EntryType":"WaitToRead"
+					}
+                ]
+            },
+			{
+				"BlockType": "SpeechBox",
+				"WaitToFinish": true,
+                "TopBox": false,
+				"WaitForNextButton": true,
+				"Entries": [
+                    {
+                        "EntryType": "Clear",
+                        "ClearSpeaker": false
+                    },
+                    {
+                        "EntryType": "Speaker",
+                        "SpeakerName": "Fish",
+                        "SpeakerPort": "res://defs/Actors/NPCs/FishMerch/Portraits/FishMerch_Sad.png"
+                    },
+					{
+						"EntryType":"Text",
+						"Text": "I thought I was done for, "
+					},
+					{
+						"EntryType":"WaitToRead"
+					},
+                    {
+                        "EntryType": "Speaker",
+                        "SpeakerName": "Fish",
+                        "SpeakerPort": "res://defs/Actors/NPCs/FishMerch/Portraits/FishMerch_Happy.png"
+                    },
+					{
+						"EntryType":"Text",
+						"Text": "then you lot showed up and saved my ass!",
+                        "NewLine": true
+					},
+					{
+						"EntryType":"WaitToRead"
+					},
+					{
+						"EntryType":"Text",
+						"Text": "I really can't thank you enough.",
+                        "NewLine": true
+					},
+					{
+						"EntryType":"WaitToRead"
+					}
+                ]
+            },
+            {
+				"BlockType": "SpeechBox",
+				"WaitToFinish": true,
+                "TopBox": false,
+				"WaitForNextButton": true,
+				"Entries": [
+                    {
+                        "EntryType": "Clear",
+                        "ClearSpeaker": false
+                    },
+                    {
+                        "EntryType": "Speaker",
+                        "SpeakerName": "Fish",
+                        "SpeakerPort": "res://defs/Actors/NPCs/FishMerch/Portraits/FishMerch_Neutral.png"
+                    },
+					{
+						"EntryType":"Text",
+						"Text": "I mean",
+                        "NewLine": true
+					},
+					{
+						"EntryType":"Text",
+						"Text": "... ",
+                        "LetterDelay": 0.1
+					},
+                    {
+                        "EntryType": "Speaker",
+                        "SpeakerName": "Fish",
+                        "SpeakerPort": "res://defs/Actors/NPCs/FishMerch/Portraits/FishMerch_Sad.png"
+                    },
+					{
+						"EntryType":"Text",
+						"Text": "they did still make off most of my inventory",
+                        "NewLine": false
+					},
+					{
+						"EntryType":"WaitToRead"
+					},
+					{
+						"EntryType":"Text",
+						"Text": "... ",
+                        "LetterDelay": 0.1
+					},
+                    {
+                        "EntryType": "Speaker",
+                        "SpeakerName": "Fish",
+                        "SpeakerPort": "res://defs/Actors/NPCs/FishMerch/Portraits/FishMerch_Angry.png"
+                    },
+					{
+						"EntryType":"Text",
+						"Text": "And rob me of almost my entire livelihood!",
+                        "NewLine": true
+					},
+					{
+						"EntryType":"WaitToRead"
+					},
+					{
+						"EntryType":"Delay",
+                        "Delay": 0.5
+					},
+                    {
+                        "EntryType": "Speaker",
+                        "SpeakerName": "Fish",
+                        "SpeakerPort": "res://defs/Actors/NPCs/FishMerch/Portraits/FishMerch_Neutral.png"
+                    },
+					{
+						"EntryType":"Text",
+						"Text": "... ",
+                        "LetterDelay": 0.1,
+                        "NewLine": true
+					},
+					{
+						"EntryType":"Delay",
+                        "Delay": 0.5
+					},
+                    {
+                        "EntryType": "Speaker",
+                        "SpeakerName": "Fish",
+                        "SpeakerPort": "res://defs/Actors/NPCs/FishMerch/Portraits/FishMerch_Happy.png"
+                    },
+					{
+						"EntryType":"Text",
+						"Text": "But I've bounce back from worse!"
+					},
+					{
+						"EntryType":"WaitToRead"
+					}
+				]
+            },
+            {
+				"BlockType": "SpeechBox",
+				"WaitToFinish": true,
+                "TopBox": false,
+				"WaitForNextButton": true,
+				"Entries": [
+                    {
+                        "EntryType": "Clear",
+                        "ClearSpeaker": false
+                    },
+                    {
+                        "EntryType": "Speaker",
+                        "SpeakerName": "Fish",
+                        "SpeakerPort": "res://defs/Actors/NPCs/FishMerch/Portraits/FishMerch_Neutral.png"
+                    },
+					{
+						"EntryType":"Text",
+						"Text": "Tell ya what, ",
+                        "NewLine": true
+					},
+					{
+						"EntryType":"WaitToRead"
+					},
+					{
+						"EntryType":"Text",
+						"Text": "you lot set up camp here."
+					},
+					{
+						"EntryType":"WaitToRead"
+					},
+                    {
+                        "EntryType": "Speaker",
+                        "SpeakerName": "Fish",
+                        "SpeakerPort": "res://defs/Actors/NPCs/FishMerch/Portraits/FishMerch_Angry.png"
+                    },
+					{
+						"EntryType":"Text",
+						"Text": "While I'll check what inventory those bastards left me with.",
+                        "NewLine": true
+					},
+					{
+						"EntryType":"WaitToRead"
+					},
+                    {
+                        "EntryType": "Speaker",
+                        "SpeakerName": "Fish",
+                        "SpeakerPort": "res://defs/Actors/NPCs/FishMerch/Portraits/FishMerch_Happy.png"
+                    },
+					{
+						"EntryType":"Text",
+						"Text": "Then we'll see if we can set you up with something nice.",
+                        "NewLine": true
+					},
+					{
+						"EntryType":"WaitToRead"
+					},
+				]
+            },
+		]
+	}
+}
