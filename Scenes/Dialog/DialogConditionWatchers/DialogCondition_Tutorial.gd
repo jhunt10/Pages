@@ -74,7 +74,7 @@ func _on_que_change(actor:BaseActor):
 func get_next_part_key()->String:
 	var condition_key = _data.get("ConditionKey", null)
 	if condition_key == "SaveTutorial":
-		if StoryState.story_flags.has("LastSaveId"):
+		if StoryState.save_id:
 			return "ScribeTutorialEnd"
 		else:
 			return "NoSave_ScribeTutorialEnd"

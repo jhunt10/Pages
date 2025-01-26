@@ -83,10 +83,10 @@ func load_init_state(map_scene_path:String):
 	if GameState:
 		printerr("Combate Scene already init")
 		return
+	
 	var map_scene = load(map_scene_path)
 	if MapController:
 		MapController.queue_free()
-		
 	MapController = map_scene.instantiate()
 	MapController.name = "MapController"
 	self.add_child(MapController)

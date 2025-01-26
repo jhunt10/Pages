@@ -76,9 +76,7 @@ func _handle_entry(entry_data:Dictionary, raw_delta, remaining_delta)->bool:
 	var conditions = entry_data.get("ConditionFlags", {})
 	for flag_name in conditions.keys():
 		var flag_val = conditions[flag_name]
-		if not StoryState.story_flags.has(flag_name):
-			return true
-		if StoryState.story_flags[flag_name] != flag_val:
+		if StoryState.get_story_flag(flag_name) != flag_val:
 			return true
 	
 	var entry_type_str = entry_data.get("EntryType", '')
@@ -123,8 +121,9 @@ func _handle_entry(entry_data:Dictionary, raw_delta, remaining_delta)->bool:
 	#----------------------------------
 	if entry_type == EntryTypes.Flag:
 		var flag_name = entry_data.get("FlagName")
-		if StoryState.story_flags.has(flag_name):
-			entry_data['Text'] = str(StoryState.story_flags[flag_name])
+		var val = StoryState.get_story_flag(flag_name)
+		if val:
+			entry_data['Text'] = str(val)
 			entry_data['EntryType'] = 'Text'
 			entry_type = EntryTypes.Text
 	

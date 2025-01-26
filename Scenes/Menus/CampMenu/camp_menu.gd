@@ -33,8 +33,7 @@ func _ready() -> void:
 	sys_debug_button.button.pressed.connect(_on_debug_button)
 	sys_quit_button.button.pressed.connect(_on_quit)
 	
-	var flags = StoryState.story_flags
-	var location = StoryState.story_flags.get("CampLocation", "")
+	var location = StoryState.get_location()
 	if location != "":
 		var image_path = "res://Scenes/Menus/CampMenu/PrettyPictures/" + location + ".png"
 		var pretty_picture = SpriteCache.get_sprite(image_path)

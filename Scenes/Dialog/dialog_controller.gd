@@ -187,11 +187,10 @@ func _get_next_part_key():
 			var cases  = next_part_logic.get("Cases", {})
 			if cases.has(flag_val):
 				return cases[flag_val]
-		if StoryState.story_flags.has(flag_name):
-			var flag_val = StoryState.story_flags.get(flag_name)
-			var cases  = next_part_logic.get("Cases", {})
-			if cases.has(flag_val):
-				return cases[flag_val]
+		var flag_val = StoryState.get_story_flag(flag_name)
+		var cases  = next_part_logic.get("Cases", {})
+		if cases.has(flag_val):
+			return cases[flag_val]
 	return _current_part_data.get("_NextPartKey", null)
 
 func _start_part(part_key:String):
@@ -287,7 +286,7 @@ func _handle_block(block_data:Dictionary)->bool:
 			return false
 		var val = block_data.get("Value", null)
 		if block_data.get("IsStoryFlag", false):
-			StoryState.story_flags[flag_name] = val
+			StoryState.set_story_flag(flag_name, val)
 		else:
 			_condition_flags[flag_name] =  val
 		return false
@@ -509,7 +508,7 @@ func _handle_block(block_data:Dictionary)->bool:
 	if block_type == BlockTypes.ToCamp:
 		var camp_dialog = block_data.get("WithDialogScript", null)
 		if camp_dialog:
-			StoryState.story_flags["NextCampDialog"] = camp_dialog
+			StoryState.set_story_flag("NextCampDialog", camp_dialog)
 		if CombatRootControl.Instance:
 			CombatRootControl.Instance.trigger_end_condition(true)
 			_state = STATES.Finished
@@ -602,7 +601,7 @@ func _on_text_input(val:String):
 	_block_states["TextInput"] = BlockStates.Finished
 	var set_flag = _last_block_data.get("SetFlag", null)
 	if set_flag:
-		StoryState.story_flags[set_flag] = val
+		StoryState.set_story_flag(set_flag, val)
 
 func force_positions(force_pos_data:Dictionary):
 	for actor_id in force_pos_data.keys():

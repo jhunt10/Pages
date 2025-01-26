@@ -47,32 +47,20 @@ func handle_block(dialog_control:DialogController, block_data:Dictionary)->bool:
 		
 	if block_data.has("EquipmentItem"):
 		var item_key = block_data.get("EquipmentItem")
-		var item_id = ""
-		for check_id:String in PlayerInventory.list_all_held_item_ids():
-			if check_id.begins_with(item_key):
-				item_id = check_id
-				break
-		var item = ItemLibrary.get_item(item_id, false)
+		var item = PlayerInventory.split_item_off_stack(item_key)
 		if item:
 			var actor = StoryState.get_player_actor()
 			actor.equipment.try_equip_item(item, true)
-			PlayerInventory.remove_item(item)
 		CharacterMenuControl.Instance._current_details_card.start_hide()
 		
 	if block_data.has("EquipPage"):
 		var item_key = block_data.get("EquipPage")
 		var slot_index = block_data.get("EquipPageSlot")
-		var item_id = ""
-		for check_id:String in PlayerInventory.list_all_held_item_ids():
-			if check_id.begins_with(item_key):
-				item_id = check_id
-				break
-		var item = ItemLibrary.get_item(item_id, false)
+		var item = PlayerInventory.split_item_off_stack(item_key)
 		if item:
 			var actor = StoryState.get_player_actor()
 			var current_item = actor.pages.get_item_in_slot(slot_index)
 			actor.pages.try_set_item_in_slot(item, slot_index, true)
-			PlayerInventory.remove_item(item)
 			PlayerInventory.add_item(current_item)
 			if CharacterMenuControl.Instance and CharacterMenuControl.Instance._current_details_card:
 				CharacterMenuControl.Instance._current_details_card.start_hide()

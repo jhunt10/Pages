@@ -1,106 +1,94 @@
 # This class hold the current saveable state of of the entire game, both in and out of combat. 
-class_name StoryState
+extends Node
 
-static var Instance:StoryState
-
-func _init() -> void:
-	if Instance != null:
-		printerr("Multiple StoryState instances created.")
-		return
-	Instance = self
-
-static var story_id
-#static var actor_ids:Array = []
-#static var actors:Array = []
-#static var items:Array = []
-#static var effects:Array = []
-static var _player_ids:Array = [null, null, null, null]
-static var story_flags:Dictionary = {}
-
-static var _money:int = 0
 signal money_changed()
 
-#TODO: Curent set up doesn't account for time spent in the save menu
-static var total_play_time
-static var session_start_unix_time
-static var _cached_save_name
+var story_id
+var save_id
+var _player_ids:Array = [null, null, null, null]
+var _story_stage_index:int
+var _story_flags:Dictionary = {}
 
-static func get_player_index_of_actor(actor:BaseActor)->int:
+var _money:int = 0
+
+#TODO: Curent set up doesn't account for time spent in the save menu
+var _total_play_time
+var _session_start_unix_time
+var _cached_save_name
+
+func get_player_index_of_actor(actor:BaseActor)->int:
 	for index in range(4):
 		if actor.Id == _player_ids[index]:
 			return index
 	return -1
 
-static func get_player_id(index:int=0):
+func get_player_id(index:int=0):
 	if index >= 0 and index < 4:
 		var player_id = _player_ids[index]
 		if player_id:
 			return player_id
 	return null
 
-static func get_player_actor(index:int = 0)->BaseActor:
+func get_player_actor(index:int = 0)->BaseActor:
 	if index >= 0 and index < 4:
 		var player_id = _player_ids[index]
 		if player_id:
 			return ActorLibrary.get_actor(player_id)
 	return null
 
-static func get_player_color(index:int)->Color:
+func get_player_color(index:int)->Color:
 	if index == 0: return Color.BLUE
 	elif index == 1: return Color.DARK_GREEN
 	elif index == 2: return Color.YELLOW
 	elif index == 0: return Color.DARK_RED
 	return Color.WHITE
 
-static func start_new_story(starting_class:String):
-	if !Instance: Instance = StoryState.new()
+func start_new_story():
+	#if !Instance: Instance = StoryState.new()
 	if story_id != null:
 		# TODO: Handle existing story
 		story_id = null
+	save_id = null
+	_story_stage_index = 0
+	_story_flags.clear()
+	_total_play_time = 0
+	
 	story_id = "Story:" + str(ResourceUID.create_id())
 	var player_id = "Player_1:" + str(ResourceUID.create_id())
-	var new_player = null
-	story_flags = {}
-	story_flags['StartClass'] = starting_class
+	var new_player = ActorLibrary.create_actor("SoldierTemplate", {}, player_id)
+	_player_ids = [player_id, null, null, null]
 	
-	if starting_class == "Soldier":
-		new_player = ActorLibrary.create_actor("SoldierTemplate", {}, player_id)
-	if starting_class == "Mage":
-		new_player = ActorLibrary.create_actor("MageTemplate", {}, player_id)
-	if starting_class == "Rogue":
-		new_player = ActorLibrary.create_actor("RogueTemplate", {}, player_id)
-	if starting_class == "Priest":
-		new_player = ActorLibrary.create_actor("PriestTemplate", {}, player_id)
-	if starting_class == "Tutorial":
-		new_player = ActorLibrary.create_actor("TutorialActor", {}, player_id)
-		
-	if new_player:
-		var sprite = new_player.sprite._build_sprite_sheet()
-	PlayerInventory.clear_items()
-	session_start_unix_time = Time.get_unix_time_from_system()
-	total_play_time = 0
+	_session_start_unix_time = Time.get_unix_time_from_system()
 
-static func get_runtime_untix_time()->float:
-	if !Instance: return 0
-	var val = Instance.total_play_time + (Time.get_unix_time_from_system() - Instance.session_start_unix_time)
+func load_next_story_scene():
+	var next_scene_data = StoryStages.get_stage_data(_story_stage_index + 1)
+	if next_scene_data.size() == 0:
+		printerr("Story Over")
+		return
+	_story_stage_index += 1
+	var next_map = next_scene_data.get("MapScene")
+	var next_dialog = next_scene_data.get("DialogScript")
+
+func get_runtime_untix_time()->float:
+	var val = _total_play_time + (Time.get_unix_time_from_system() - _session_start_unix_time)
 	return val
 
-static func build_save_data()->Dictionary:
+func build_save_data()->Dictionary:
 	var out_data = {}
 	out_data['Money'] = _money
 	out_data['StoryId'] = story_id
 	out_data['Actors'] = ActorLibrary.Instance.build_save_data()
 	out_data['PlayerInventory'] = PlayerInventory.build_save_data()
 	#out_data['Items'] = ItemLibrary.Instance.build_save_data()
-	out_data['RunTime'] = total_play_time + (Time.get_unix_time_from_system() - session_start_unix_time)
-	out_data['StoryFlags'] = story_flags.duplicate(true)
+	out_data['RunTime'] = _total_play_time + (Time.get_unix_time_from_system() - _session_start_unix_time)
+	out_data['StoryFlags'] = _story_flags.duplicate(true)
 	return out_data
 
-static func load_save_data(data:Dictionary):
-	if !Instance: Instance = StoryState.new()
+func load_save_data(data:Dictionary):
+	#if !Instance: Instance = StoryState.new()
 	story_id = data['StoryId']
 	_money = data.get("Money", 0)
-	story_flags = data.get("StoryFlags", {}).duplicate(true)
+	_story_flags = data.get("StoryFlags", {}).duplicate(true)
 	EffectLibrary.purge_effects()
 	#ItemLibrary.load_items(data.get("Items", {}))
 	var actors_data = data.get("Actors", {})
@@ -135,12 +123,24 @@ static func load_save_data(data:Dictionary):
 			else:
 				printerr("StoryStateData.load_save_data: Failed to find item with id '%s'." % [item_id])
 		
-	total_play_time = data.get("RunTime", 0)
-	session_start_unix_time = Time.get_unix_time_from_system()
+	_total_play_time = data.get("RunTime", 0)
+	_session_start_unix_time = Time.get_unix_time_from_system()
 
-static func get_current_money()->int:
+func get_location()->String:
+	var data = StoryStages.get_stage_data(_story_stage_index)
+	return data.get("Location", "")
+
+func set_story_flag(key:String, val):
+	_story_flags[key] = val
+
+func get_story_flag(key:String):
+	if _story_flags.keys().has(key):
+		return _story_flags[key]
+	return null
+
+func get_current_money()->int:
 	return _money
 
-static func spend_money(cost:int):
+func spend_money(cost:int):
 	_money = max(0, _money - cost)
-	Instance.money_changed.emit()
+	money_changed.emit()

@@ -72,7 +72,7 @@ func start_game():
 	current_scene = char_select
 
 func _on_start_character_selected(name):
-	StoryState.start_new_story(name)
+	StoryState.start_new_story()
 	if current_scene:
 		current_scene.queue_free()
 	var combat_scene:CombatRootControl = load("res://Scenes/Combat/combat_scene.tscn").instantiate()
@@ -149,7 +149,6 @@ func load_dialog_scene(file_path):
 		current_scene.ui_control.add_child(dialog)
 	else:
 		current_scene.add_child(dialog)
-	StoryState.story_flags["NextCampDialog"] = null
 
 func open_map_selection_menu():
 	current_scene.queue_free()
@@ -203,7 +202,7 @@ func open_effect_editor():
 func open_tutorial():
 	if current_scene:
 		current_scene.queue_free()
-	StoryState.start_new_story("Soldier")
+	StoryState.start_new_story()
 	LoadManager.load_scene("res://Scenes/Menus/CampMenu/camp_menu.tscn")#res://Scenes/Combat/combat_scene.tscn")
 	#var combat_scene:CombatRootControl = load().instantiate()
 	#combat_scene.load_init_state("res://Scenes/Maps/StoryMaps/1_StartingMap/starting_map.tscn")
@@ -248,16 +247,16 @@ func prune_objects():
 		if not actor.is_player:
 			ActorLibrary.delete_actor(actor)
 
-func next_quest():
-	if current_scene:
-		current_scene.queue_free()
-	StoryState.start_new_story("Soldier")
-	var combat_scene:CombatRootControl = load("res://Scenes/Combat/combat_scene.tscn").instantiate()
-	combat_scene.load_init_state("res://Scenes/Maps/StoryMaps/2_Cross_Road/crossroad_dialog_map.tscn")
-	current_scene = combat_scene
-	self.add_child(current_scene)
-	
-	var dialog:DialogController = load("res://Scenes/Dialog/dialog_control.tscn").instantiate()
-	dialog.scene_root = combat_scene
-	dialog.load_dialog_script("res://Scenes/Maps/StoryMaps/2_Cross_Road/crossroad_dialog_script.json")
-	combat_scene.camera.canvas_layer.add_child(dialog)
+#func next_quest():
+	#if current_scene:
+		#current_scene.queue_free()
+	#StoryState.start_new_story("Soldier")
+	#var combat_scene:CombatRootControl = load("res://Scenes/Combat/combat_scene.tscn").instantiate()
+	#combat_scene.load_init_state("res://Scenes/Maps/StoryMaps/2_Cross_Road/crossroad_dialog_map.tscn")
+	#current_scene = combat_scene
+	#self.add_child(current_scene)
+	#
+	#var dialog:DialogController = load("res://Scenes/Dialog/dialog_control.tscn").instantiate()
+	#dialog.scene_root = combat_scene
+	#dialog.load_dialog_script("res://Scenes/Maps/StoryMaps/2_Cross_Road/crossroad_dialog_script.json")
+	#combat_scene.camera.canvas_layer.add_child(dialog)

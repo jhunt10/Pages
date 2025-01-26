@@ -44,7 +44,7 @@ func _ready() -> void:
 	Instance = self
 	premade_save_slot.visible = false
 	if save_mode:
-		set_saving_data(StoryState.Instance)
+		set_saving_data()
 		print("Open Menu in Save Mode")
 		save_slot_new.show()
 		save_slots[NEW_SAVE_KEY] = save_slot_new
@@ -82,8 +82,8 @@ func on_close_menu():
 func _process(delta: float) -> void:
 	pass
 
-func set_saving_data(story_state:StoryState):
-	_saving_data = SaveLoadHandler._build_save_meta_data("New Save", story_state)
+func set_saving_data():
+	_saving_data = SaveLoadHandler._build_save_meta_data("New Save")
 	_cached_save_meta_data[NEW_SAVE_KEY] = _saving_data
 	set_displayed_save_data("New Save", _saving_data)
 
@@ -96,7 +96,7 @@ func _on_message_box_done():
 func _on_save_as_confirmed(save_name):
 	message_box.show_message("Saving Game...", 0.5)
 	_last_save_load_name = save_name
-	SaveLoadHandler.write_save_data(save_name, StoryState.Instance)
+	SaveLoadHandler.write_save_data(save_name)
 	pass
 
 func _on_save_button():
