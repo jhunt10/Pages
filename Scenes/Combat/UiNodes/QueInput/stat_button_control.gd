@@ -40,7 +40,7 @@ func _process(delta: float) -> void:
 		var move = delta * grow_speed
 		if vertical:
 			var button_width = button_texture.size.y
-			print("Width: %s | Pos: %s | Move: %s" % [button_width, button_texture.position.x, move] )
+			#print("Width: %s | Pos: %s | Move: %s" % [button_width, button_texture.position.x, move] )
 			if button_texture.position.y + move > button_width:
 				button_texture.position.y = button_width
 				state = States.Hidden
@@ -48,7 +48,7 @@ func _process(delta: float) -> void:
 				button_texture.position.y += move
 		else:
 			var button_width = button_texture.size.x
-			print("Width: %s | Pos: %s | Move: %s" % [button_width, button_texture.position.x, move] )
+			#print("Width: %s | Pos: %s | Move: %s" % [button_width, button_texture.position.x, move] )
 			if button_texture.position.x - move < 0- button_width:
 				button_texture.position.x = 0 - button_width
 				state = States.Hidden

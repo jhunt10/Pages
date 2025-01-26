@@ -2,6 +2,7 @@ class_name ShopMenuController
 extends Control
 
 enum States {Greeting, Buy, Sell}
+enum SpeakerSubjects {Greating, Buying, Selling, ConfirmBuy, ConfirmSell}
 
 @export var dialog_box:DialogBox
 @export var item_menu_controller:ShopItemMenuController
@@ -50,7 +51,7 @@ func load_greeting():
 			{
 				"EntryType": "Speaker",
 				"SpeakerName": "FMrc",
-				"SpeakerPort": "res://defs/Actors/NPCs/FishMerch/FishMerch_Sleeping.png"
+				"SpeakerPort": "res://defs/Actors/NPCs/FishMerch/Portraits/FishMerch_Sleeping.png"
 			},
 			{
 				"EntryType": "Text",
@@ -72,7 +73,7 @@ func load_items_to_buy():
 			{
 				"EntryType": "Speaker",
 				"SpeakerName": "FMrc",
-				"SpeakerPort": "res://defs/Actors/NPCs/FishMerch/FishMerch_Sleeping.png"
+				"SpeakerPort": "res://defs/Actors/NPCs/FishMerch/Portraits/FishMerch_Angry.png"
 			},
 			{
 				"EntryType": "Text",
@@ -108,7 +109,7 @@ func load_items_to_sell():
 			{
 				"EntryType": "Speaker",
 				"SpeakerName": "FMrc",
-				"SpeakerPort": "res://defs/Actors/NPCs/FishMerch/FishMerch_Sleeping.png"
+				"SpeakerPort": "res://defs/Actors/NPCs/FishMerch/Portraits/FishMerch_Neutral.png"
 			},
 			{
 				"EntryType": "Text",
@@ -193,7 +194,7 @@ func _show_confirm_popup(item_key:String, count:int, cost:int):
 				{
 					"EntryType": "Speaker",
 					"SpeakerName": "FMrc",
-					"SpeakerPort": "res://defs/Actors/NPCs/FishMerch/FishMerch_Sleeping.png"
+					"SpeakerPort": "res://defs/Actors/NPCs/FishMerch/Portraits/FishMerch_Sleeping.png"
 				},
 				{
 					"EntryType": "Text",
@@ -214,7 +215,7 @@ func _show_confirm_popup(item_key:String, count:int, cost:int):
 				{
 					"EntryType": "Speaker",
 					"SpeakerName": "FMrc",
-					"SpeakerPort": "res://defs/Actors/NPCs/FishMerch/FishMerch_Sleeping.png"
+					"SpeakerPort": "res://defs/Actors/NPCs/FishMerch/Portraits/FishMerch_Sleeping.png"
 				},
 				{
 					"EntryType": "Text",

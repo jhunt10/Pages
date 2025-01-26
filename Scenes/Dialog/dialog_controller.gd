@@ -515,11 +515,16 @@ func _handle_block(block_data:Dictionary)->bool:
 			_state = STATES.Finished
 		return false
 	return false
+
 func load_dialog_script(file_path):
 	var file = FileAccess.open(file_path, FileAccess.READ)
 	var text:String = file.get_as_text()
+	var data = JSON.parse_string(text)
+	load_dialog_data(data)
+	
+func load_dialog_data(data:Dictionary):
 	_condition_watcher = null
-	_dialog_part_datas = JSON.parse_string(text)
+	_dialog_part_datas = data
 	if not _dialog_part_datas.keys().has("_MetaData_"):
 		printerr("No _MetaData_ found in dialog script.")
 		_dialog_part_datas.clear()

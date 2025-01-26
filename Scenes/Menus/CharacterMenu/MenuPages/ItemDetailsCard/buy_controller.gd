@@ -39,9 +39,9 @@ signal buy_button_pressed(item_key:String, count:int, cost:int)
 
 @export var owned_count:int
 
-@export var plus_button:Button
-@export var minus_button:Button
-@export var buy_button:Button
+@export var plus_button:PatchButton
+@export var minus_button:PatchButton
+@export var buy_button:PatchButton
 
 @export var buying_count_label:Label
 @export var owned_count_label:Label

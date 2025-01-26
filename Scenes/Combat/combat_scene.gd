@@ -1,6 +1,7 @@
 class_name CombatRootControl
 extends Control
 
+signal loading_actor_progressed(count:int, index:int)
 signal actor_spawned(actor:BaseActor, map_pos:MapPos)
 signal item_spawned(item:BaseItem, map_pos:MapPos)
 
@@ -21,8 +22,8 @@ static var _current_player_index:int = 0
 func _enter_tree() -> void:
 	if !Instance: 
 		Instance = self
-		if !GameState:
-			GameState = GameStateData.new()
+		#if !GameState:
+			#GameState = GameStateData.new()
 	if !QueController:
 		QueController = ActionQueController.new()
 	elif Instance != self: 
@@ -73,6 +74,7 @@ static func get_actor_node(actor_id:String)->ActorNode:
 	return Instance.MapController.actor_nodes.get(actor_id)
 
 func load_init_state(map_scene_path:String):
+	printerr("Loading init state")
 	if !Instance: Instance = self
 	elif Instance != self: 
 		printerr("Multiple CombatRootControls found")
@@ -102,7 +104,8 @@ func load_init_state(map_scene_path:String):
 	
 	QueController = ActionQueController.new()
 	QueController.end_of_round.connect(check_end_conditions)
-	
+	var actor_count = map_data['Actors'].size()
+	var actor_index = 0
 	for actor_info:Dictionary in map_data['Actors']:
 		var new_actor = null
 		var actor_pos = actor_info['Pos']
@@ -130,7 +133,8 @@ func load_init_state(map_scene_path:String):
 				MapController.create_actor_node(new_actor, actor_pos, true)
 			else:
 				add_actor(new_actor, actor_info.get("FactionId", 1), actor_pos)
-			
+		actor_index += 1
+		loading_actor_progressed.emit(actor_count, actor_index)
 	
 	var player_actor = StoryState.get_player_actor()
 	# Check that actor in actually in game

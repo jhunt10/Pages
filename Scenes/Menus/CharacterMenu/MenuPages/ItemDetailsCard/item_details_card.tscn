@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://btr6wpgyitqc0"]
+[gd_scene load_steps=37 format=3 uid="uid://btr6wpgyitqc0"]
 
 [ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/ItemDetailsCard/item_details_card.gd" id="1_vq5a0"]
 [ext_resource type="Texture2D" uid="uid://bqmtfkh0uj2bk" path="res://Scenes/Menus/CharacterMenu/MenuPages/ItemDetailsCard/DetailsCard_Background_working.png" id="2_7ol1j"]
@@ -34,6 +34,8 @@
 [ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/ItemDetailsCard/PageQueDetails/page_set_label.gd" id="21_eimff"]
 [ext_resource type="Texture2D" uid="uid://cb8k5gxes3iaj" path="res://assets/Sprites/UI/SymbolIcons/MoneySymbol_White.png" id="33_era8d"]
 [ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/ItemDetailsCard/buy_controller.gd" id="34_t0s17"]
+[ext_resource type="Script" path="res://Scenes/UiNodes/PatchButton/PatchButton.gd" id="35_416rl"]
+[ext_resource type="Texture2D" uid="uid://bmv0v2cnpvjh4" path="res://Scenes/Menus/CharacterMenu/MenuPages/ItemDetailsCard/ButtonPressed_Patch_32_6.png" id="36_0dsaw"]
 
 [node name="ItemDetailsCard" type="Control" node_paths=PackedStringArray("offset_control", "offset_point", "icon", "title_lable", "description_box", "exit_button", "weapon_details", "armor_details", "action_details", "effect_page_details", "page_que_details", "default_details", "tag_label", "equip_button_background", "equip_button", "equip_label", "buy_controller")]
 custom_minimum_size = Vector2(300, 260)
@@ -771,25 +773,21 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="BuyingController" type="VBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer" node_paths=PackedStringArray("plus_button", "minus_button", "buy_button", "buying_count_label", "owned_count_label", "cost_container", "cost_value_label", "button_label")]
-visible = false
 layout_mode = 2
 theme_override_constants/separation = 0
 script = ExtResource("34_t0s17")
 item_price = 100
 buying_count = 1
-plus_button = NodePath("BuyButtonsContainer/PlusButton/PlusButton")
-minus_button = NodePath("BuyButtonsContainer/MinusButton/MinusButton")
-buy_button = NodePath("BuyButtonsContainer/BuyButton/BuyButton")
+plus_button = NodePath("BuyButtonsContainer/PlusButton")
+minus_button = NodePath("BuyButtonsContainer/MinusButton")
+buy_button = NodePath("BuyButtonsContainer/ConfirmButton")
 buying_count_label = NodePath("BuyCountCostContainer/BuyingCountControl/BuyingValueLabel")
 owned_count_label = NodePath("BuyCountCostContainer/OwnedContainer/OwnValueLabel")
 cost_container = NodePath("BuyCountCostContainer/CostContainer")
 cost_value_label = NodePath("BuyCountCostContainer/CostContainer/CostLabel")
-button_label = NodePath("BuyButtonsContainer/BuyButton/BuyButtonLabel")
+button_label = NodePath("")
 default_cost_color = Color(0.470588, 0, 0, 1)
 invalid_cost_color = Color(0.473976, 0.473976, 0.473976, 1)
-
-[node name="HBoxContainer" type="HBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/BuyingController"]
-layout_mode = 2
 
 [node name="BuyCountCostContainer" type="HBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/BuyingController"]
 layout_mode = 2
@@ -879,23 +877,27 @@ size_flags_horizontal = 3
 [node name="BuyButtonsContainer" type="HBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/BuyingController"]
 layout_mode = 2
 
-[node name="MinusButton" type="Control" parent="OffsetControl/NinePatchRect/VBoxContainer/BuyingController/BuyButtonsContainer"]
+[node name="MinusButton" type="Control" parent="OffsetControl/NinePatchRect/VBoxContainer/BuyingController/BuyButtonsContainer" node_paths=PackedStringArray("label", "background", "button")]
 custom_minimum_size = Vector2(48, 48)
 layout_mode = 2
-size_flags_vertical = 8
+script = ExtResource("35_416rl")
+label = NodePath("Label")
+background = NodePath("NinePatchRect")
+button = NodePath("Button")
+text = "Buy"
+default_texture = ExtResource("7_850b7")
+pressed_texture = ExtResource("36_0dsaw")
 
-[node name="MinusButtonLabel" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/BuyingController/BuyButtonsContainer/MinusButton"]
+[node name="Label" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/BuyingController/BuyButtonsContainer/MinusButton"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 2.0
-offset_right = 2.0
+offset_left = 3.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 8
 theme = ExtResource("18_wsrou")
-theme_override_colors/font_color = Color(0.470588, 0, 0, 1)
 theme_override_font_sizes/font_size = 32
 text = "-"
 horizontal_alignment = 1
@@ -914,7 +916,7 @@ patch_margin_top = 6
 patch_margin_right = 6
 patch_margin_bottom = 6
 
-[node name="MinusButton" type="Button" parent="OffsetControl/NinePatchRect/VBoxContainer/BuyingController/BuyButtonsContainer/MinusButton"]
+[node name="Button" type="Button" parent="OffsetControl/NinePatchRect/VBoxContainer/BuyingController/BuyButtonsContainer/MinusButton"]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -923,23 +925,27 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="PlusButton" type="Control" parent="OffsetControl/NinePatchRect/VBoxContainer/BuyingController/BuyButtonsContainer"]
+[node name="PlusButton" type="Control" parent="OffsetControl/NinePatchRect/VBoxContainer/BuyingController/BuyButtonsContainer" node_paths=PackedStringArray("label", "background", "button")]
 custom_minimum_size = Vector2(48, 48)
 layout_mode = 2
-size_flags_vertical = 8
+script = ExtResource("35_416rl")
+label = NodePath("Label")
+background = NodePath("NinePatchRect")
+button = NodePath("Button")
+text = "Buy"
+default_texture = ExtResource("7_850b7")
+pressed_texture = ExtResource("36_0dsaw")
 
-[node name="PlusButtonLabel" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/BuyingController/BuyButtonsContainer/PlusButton"]
+[node name="Label" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/BuyingController/BuyButtonsContainer/PlusButton"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 2.0
-offset_right = 2.0
+offset_left = 3.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 8
 theme = ExtResource("18_wsrou")
-theme_override_colors/font_color = Color(0.470588, 0, 0, 1)
 theme_override_font_sizes/font_size = 32
 text = "+"
 horizontal_alignment = 1
@@ -958,7 +964,7 @@ patch_margin_top = 6
 patch_margin_right = 6
 patch_margin_bottom = 6
 
-[node name="PlusButton" type="Button" parent="OffsetControl/NinePatchRect/VBoxContainer/BuyingController/BuyButtonsContainer/PlusButton"]
+[node name="Button" type="Button" parent="OffsetControl/NinePatchRect/VBoxContainer/BuyingController/BuyButtonsContainer/PlusButton"]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -967,12 +973,19 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="BuyButton" type="Control" parent="OffsetControl/NinePatchRect/VBoxContainer/BuyingController/BuyButtonsContainer"]
+[node name="ConfirmButton" type="Control" parent="OffsetControl/NinePatchRect/VBoxContainer/BuyingController/BuyButtonsContainer" node_paths=PackedStringArray("label", "background", "button")]
 custom_minimum_size = Vector2(64, 48)
 layout_mode = 2
 size_flags_horizontal = 3
+script = ExtResource("35_416rl")
+label = NodePath("Label")
+background = NodePath("NinePatchRect")
+button = NodePath("Button")
+text = "Buy"
+default_texture = ExtResource("7_850b7")
+pressed_texture = ExtResource("36_0dsaw")
 
-[node name="BuyButtonLabel" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/BuyingController/BuyButtonsContainer/BuyButton"]
+[node name="Label" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/BuyingController/BuyButtonsContainer/ConfirmButton"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -981,13 +994,12 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 8
 theme = ExtResource("18_wsrou")
-theme_override_colors/font_color = Color(0.470588, 0, 0, 1)
 theme_override_font_sizes/font_size = 24
 text = "Buy"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="NinePatchRect" type="NinePatchRect" parent="OffsetControl/NinePatchRect/VBoxContainer/BuyingController/BuyButtonsContainer/BuyButton"]
+[node name="NinePatchRect" type="NinePatchRect" parent="OffsetControl/NinePatchRect/VBoxContainer/BuyingController/BuyButtonsContainer/ConfirmButton"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1000,7 +1012,7 @@ patch_margin_top = 6
 patch_margin_right = 6
 patch_margin_bottom = 6
 
-[node name="BuyButton" type="Button" parent="OffsetControl/NinePatchRect/VBoxContainer/BuyingController/BuyButtonsContainer/BuyButton"]
+[node name="Button" type="Button" parent="OffsetControl/NinePatchRect/VBoxContainer/BuyingController/BuyButtonsContainer/ConfirmButton"]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15

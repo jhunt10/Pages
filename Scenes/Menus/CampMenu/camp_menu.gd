@@ -63,8 +63,8 @@ func _on_shop_button():
 	MainRootNode.Instance.open_shop_menu()
 
 func _on_quest_button():
-	#MainRootNode.Instance.start_combat()
-	MainRootNode.Instance.next_quest()
+	MainRootNode.Instance.start_combat("res://Scenes/Maps/StoryMaps/2_Cross_Road/crossroad_dialog_map.tscn")
+	#MainRootNode.Instance.load_dialog_scene("res://Scenes/Maps/StoryMaps/2_Cross_Road/crossroad_dialog_script.json")
 	pass
 
 func _on_explore_button():

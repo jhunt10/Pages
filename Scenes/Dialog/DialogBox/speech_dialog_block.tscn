@@ -159,6 +159,7 @@ custom_minimum_size = Vector2(32, 0)
 layout_mode = 2
 
 [node name="ScrollBar" parent="SpeechDialogBlock/ScrollBarPlaceHolder" node_paths=PackedStringArray("scroll_container") instance=ExtResource("7_h5ro5")]
+visible = false
 layout_mode = 2
 offset_bottom = 159.0
 scroll_container = NodePath("../../ScrollContainer")
