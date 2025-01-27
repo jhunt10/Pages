@@ -25,9 +25,10 @@ const NEW_SAVE_KEY = "@@NEW_SAVE@@"
 
 @export var message_box:SaveLoadMessageBox
 @export var save_popup:SaveAsBox
-@export var save_button:Button
-@export var save_button_label:Label
-@export var save_button_highlight:NinePatchRect
+@export var save_button:PatchButton
+
+@export var delete_button:PatchButton
+@export var confirm_box:SaveMenu_ConfirmBox
 
 @export var save_mode:bool:
 	set(val):
@@ -42,6 +43,7 @@ var _saving_data
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	Instance = self
+	confirm_box.hide()
 	premade_save_slot.visible = false
 	if save_mode:
 		set_saving_data()
@@ -50,12 +52,12 @@ func _ready() -> void:
 		save_slots[NEW_SAVE_KEY] = save_slot_new
 		save_slot_new.button.pressed.connect(_on_slot_pressed.bind(NEW_SAVE_KEY))
 		menu_title_label.text = "Save Game"
-		save_button_label.text = "Save"
+		save_button.text = "Save"
 	else:
 		print("Open Menu in Load Mode")
 		save_slot_new.hide()
 		menu_title_label.text = "Load Game"
-		save_button_label.text = "Load"
+		save_button.text = "Load"
 		
 	save_popup.hide()
 	message_box.hide()
@@ -66,11 +68,11 @@ func _ready() -> void:
 	elif save_mode:
 		_on_slot_pressed(NEW_SAVE_KEY)
 	close_button.pressed.connect(on_close_menu)
-	save_button.mouse_entered.connect(save_button_highlight.show)
-	save_button.mouse_exited.connect(save_button_highlight.hide)
 	save_button.pressed.connect(_on_save_button)
+	delete_button.pressed.connect(_on_delete_button)
 	save_popup.on_confirmed.connect(_on_save_as_confirmed)
 	message_box.message_done.connect(_on_message_box_done)
+	confirm_box.confirm_button.pressed.connect(_on_confirm_box_confirmed)
 	pass # Replace with function body.
 
 func on_close_menu():
@@ -115,6 +117,18 @@ func _on_save_button():
 		_last_save_load_name = _selected_save_name
 		on_close_menu()
 
+func _on_confirm_box_confirmed():
+	SaveLoadHandler.delete_save(_selected_save_name)
+	save_slots[_selected_save_name].queue_free()
+	save_slots.erase(_selected_save_name)
+	confirm_box.hide()
+
+func _on_delete_button():
+	if not _selected_save_name:
+		return
+	confirm_box.message_label.text = "Delete: " + _selected_save_name
+	confirm_box.show()
+
 func read_existing_saves():
 	for child in slots_container.get_children():
 		if child is SaveSlotContainer and child != premade_save_slot and child != save_slot_new:
@@ -158,7 +172,7 @@ func _on_mouse_exit_slot(save_name):
 			clear_displayed_save_data()
 
 func _on_slot_pressed(save_name):
-	if _selected_save_name != null:
+	if _selected_save_name != null and save_slots.has(_selected_save_name):
 		var old_slot:SaveSlotContainer = save_slots[_selected_save_name]
 		old_slot.highlight.hide()
 	_selected_save_name = save_name
@@ -182,9 +196,9 @@ func set_displayed_save_data(save_name:String, data):
 	sel_save_details_container.show()
 	if save_mode:
 		if save_name != NEW_SAVE_KEY:
-			save_button_label.text = "Overwrite"
+			save_button.text = "Overwrite"
 		else:
-			save_button_label.text = "Save"
+			save_button.text = "Save"
 
 func clear_displayed_save_data():
 	var data = _cached_save_meta_data.get(save_mode, {})

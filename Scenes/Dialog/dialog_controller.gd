@@ -83,6 +83,7 @@ var _part_start_timer:float
 
 func _ready() -> void:
 	next_button.hide()
+	skip_button.button.pressed.connect(_on_skip)
 	next_button.button.pressed.connect(_on_next_button_pressed)
 	top_speech_box.finished_printing.connect(_on_speech_box_finished.bind(true))
 	bot_speech_box.finished_printing.connect(_on_speech_box_finished.bind(false))
@@ -147,7 +148,7 @@ func _process(delta: float) -> void:
 			else:
 				printerr("No Next Part Key Found")
 				_state = STATES.Finished
-				self.queue_free()
+				self.hide()
 
 ## Returns true if any blocks are currently playing
 func _are_blocks_playing():
@@ -234,6 +235,14 @@ func _start_part(part_key:String):
 		_state = STATES.WaitingForCondition
 	else:
 		_state = STATES.Playing
+
+
+func _on_skip():
+	var next_part_key = _get_next_part_key()
+	print("Skipping to part: %s" % [next_part_key])
+	if next_part_key:
+		_start_part(next_part_key)
+	
 
 ## Returns true if block should be waitied on
 func _handle_block(block_data:Dictionary)->bool:
@@ -513,6 +522,19 @@ func _handle_block(block_data:Dictionary)->bool:
 			CombatRootControl.Instance.trigger_end_condition(true)
 			_state = STATES.Finished
 		return false
+	
+	#----------------------------------
+	#          Start COmbat
+	# Options:
+	#----------------------------------
+	if block_type == BlockTypes.StartCombat:
+		if CombatRootControl.Instance:
+			if not CombatRootControl.Instance.start_combat_screen.screen_blacked_out.is_connected(_on_combat_start_blackout):
+				CombatRootControl.Instance.start_combat_screen.screen_blacked_out.connect(_on_combat_start_blackout)
+			CombatRootControl.Instance.start_combat_animation()
+			_block_states["StartCombat"] = BlockStates.Playing
+			return true
+		return false
 	return false
 
 func load_dialog_script(file_path):
@@ -537,6 +559,10 @@ func load_dialog_data(data:Dictionary):
 		return
 	_cur_part_key = start_part_key
 	_start_part(_cur_part_key)
+
+func _on_combat_start_blackout():
+	_block_states["StartCombat"] = BlockStates.Finished
+	pass
 
 func _on_animation_finished(animation_name:String, key:String):
 	print("Animation Finished: %s" % [animation_name])
@@ -607,7 +633,13 @@ func force_positions(force_pos_data:Dictionary):
 	for actor_id in force_pos_data.keys():
 		var path_marker_name = force_pos_data[actor_id]
 		if actor_id == "Player1":
-			actor_id = StoryState.get_player_id()
+			actor_id = StoryState.get_player_id(0)
+		if actor_id == "Player2":
+			actor_id = StoryState.get_player_id(1)
+		if actor_id == "Player3":
+			actor_id = StoryState.get_player_id(2)
+		if actor_id == "Player4":
+			actor_id = StoryState.get_player_id(3)
 		var game_state = CombatRootControl.Instance.GameState
 		
 		if path_marker_name == "_DEAD_":
@@ -630,7 +662,7 @@ func force_positions(force_pos_data:Dictionary):
 			var actor = game_state.get_actor(actor_id, true, false)
 			if not actor:
 				actor = ActorLibrary.get_actor(actor_id)
-				if actor_id:
+				if actor_id :
 					CombatRootControl.Instance.add_actor(actor, 1, path_marker.get_last_pos())
 			else:
 				game_state.set_actor_pos(actor, path_marker.get_last_pos())

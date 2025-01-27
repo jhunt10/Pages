@@ -1,7 +1,7 @@
 class_name StoryStages
 
 static func get_stage_data(index:int)->Dictionary:
-	if index > 0 and index < stages.size():
+	if index >= 0 and index < stages.size():
 		return stages[index]
 	return {}
 
@@ -19,5 +19,11 @@ static var stages:Array = [
 			"Location": "Abandoned Village",
 			"MapScene": null,
 			"DialogScript": "res://Scenes/Maps/StoryMaps/1_StartingMap/camp_tutotial_dialog_script.json"
+		},
+		{
+			"StageKey": "CrossRoadsCombat",
+			"Location": "The Crossroad",
+			"MapScene": "res://Scenes/Maps/StoryMaps/2_Cross_Road/crossroad_dialog_map.tscn",
+			"DialogScript":"res://Scenes/Maps/StoryMaps/2_Cross_Road/crossroad_dialog_script.json"
 		}
 	]

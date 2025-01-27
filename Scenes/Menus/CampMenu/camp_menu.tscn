@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://cev10u5562peq"]
+[gd_scene load_steps=17 format=3 uid="uid://cev10u5562peq"]
 
 [ext_resource type="Texture2D" uid="uid://bwbvifw2c8wlg" path="res://Scenes/Menus/CampMenu/PaperBackground.png" id="1_b8omp"]
 [ext_resource type="Script" path="res://Scenes/Menus/CampMenu/camp_menu.gd" id="1_yrr0s"]
@@ -15,8 +15,9 @@
 [ext_resource type="Texture2D" uid="uid://io35wpu802fp" path="res://assets/Sprites/UI/BackPatches/Patch_64_12.png" id="12_j1y8g"]
 [ext_resource type="Script" path="res://Scenes/Menus/money_display.gd" id="14_fdnmj"]
 [ext_resource type="Texture2D" uid="uid://cb8k5gxes3iaj" path="res://assets/Sprites/UI/SymbolIcons/MoneySymbol_White.png" id="15_axj4f"]
+[ext_resource type="PackedScene" uid="uid://bje0k82nenje6" path="res://Scenes/Dialog/dialog_control.tscn" id="16_q50fv"]
 
-[node name="CampMenu" type="Control" node_paths=PackedStringArray("camp_options_container", "system_options_container", "pretty_picture_texure_rect", "quest_button", "shop_button", "character_button", "explort_button", "system_button", "sys_back_button", "sys_save_button", "sys_load_button", "sys_debug_button", "sys_quit_button")]
+[node name="CampMenu" type="Control" node_paths=PackedStringArray("dialog_control", "camp_options_container", "system_options_container", "pretty_picture_texure_rect", "quest_button", "shop_button", "character_button", "explort_button", "system_button", "sys_back_button", "sys_save_button", "sys_load_button", "sys_debug_button", "sys_quit_button")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -24,6 +25,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_yrr0s")
+dialog_control = NodePath("DialogControl")
 camp_options_container = NodePath("CampOptionsContainer/MainOptionsContainer")
 system_options_container = NodePath("CampOptionsContainer/SystemOptionsContainer")
 pretty_picture_texure_rect = NodePath("Control/PrettyPictureRect")
@@ -888,3 +890,7 @@ layout_mode = 2
 theme = ExtResource("3_ufdhk")
 theme_override_font_sizes/font_size = 32
 text = "100"
+
+[node name="DialogControl" parent="." instance=ExtResource("16_q50fv")]
+visible = false
+layout_mode = 1

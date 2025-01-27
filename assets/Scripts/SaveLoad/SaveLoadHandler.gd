@@ -65,4 +65,14 @@ static func load_save_data(save_id:String, go_to_camp:bool=true):
 	StoryState.load_save_data(data)
 	if go_to_camp:
 		MainRootNode.Instance.open_camp_menu()
+
+static func delete_save(save_name:String):
+	var saves_dic = read_saves_meta_data()
+	if not saves_dic.keys().has(save_name):
+		return
+	saves_dic.erase(save_name)
+	# Save Meta Data
+	var meta_file_path = SAVE_DATA_PATH.path_join("saves.json")
+	var meta_file = FileAccess.open(meta_file_path, FileAccess.WRITE)
+	meta_file.store_string(JSON.stringify(saves_dic))
 	

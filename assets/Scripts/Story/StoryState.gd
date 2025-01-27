@@ -59,6 +59,8 @@ func start_new_story():
 	_player_ids = [player_id, null, null, null]
 	
 	_session_start_unix_time = Time.get_unix_time_from_system()
+	_story_stage_index = -1
+	load_next_story_scene()
 
 func load_next_story_scene():
 	var next_scene_data = StoryStages.get_stage_data(_story_stage_index + 1)
@@ -66,8 +68,13 @@ func load_next_story_scene():
 		printerr("Story Over")
 		return
 	_story_stage_index += 1
-	var next_map = next_scene_data.get("MapScene")
-	var next_dialog = next_scene_data.get("DialogScript")
+	var next_map = next_scene_data.get("MapScene", '')
+	var next_dialog = next_scene_data.get("DialogScript", '')
+	if next_map:
+		LoadManager.load_combat(next_map, next_dialog, true)
+	else:
+		MainRootNode.Instance.open_camp_menu(next_dialog)
+	
 
 func get_runtime_untix_time()->float:
 	var val = _total_play_time + (Time.get_unix_time_from_system() - _session_start_unix_time)
@@ -77,6 +84,7 @@ func build_save_data()->Dictionary:
 	var out_data = {}
 	out_data['Money'] = _money
 	out_data['StoryId'] = story_id
+	out_data['StoryStageIndex'] = _story_stage_index
 	out_data['Actors'] = ActorLibrary.Instance.build_save_data()
 	out_data['PlayerInventory'] = PlayerInventory.build_save_data()
 	#out_data['Items'] = ItemLibrary.Instance.build_save_data()
@@ -87,6 +95,7 @@ func build_save_data()->Dictionary:
 func load_save_data(data:Dictionary):
 	#if !Instance: Instance = StoryState.new()
 	story_id = data['StoryId']
+	_story_stage_index = data.get('StoryStageIndex', 0)
 	_money = data.get("Money", 0)
 	_story_flags = data.get("StoryFlags", {}).duplicate(true)
 	EffectLibrary.purge_effects()

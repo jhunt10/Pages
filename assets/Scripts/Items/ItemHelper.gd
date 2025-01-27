@@ -2,7 +2,10 @@ class_name ItemHelper
 
 static func spawn_item(item_key:String, item_data:Dictionary, pos:MapPos):
 	var item = ItemLibrary.create_item(item_key, item_data)
-	CombatRootControl.Instance.add_item(item, pos)
+	if !item:
+		printerr("ItemHelper: Failed to spawn item with key '%s'." % [item_key])
+	else:
+		CombatRootControl.Instance.add_item(item, pos)
 
 
 static func get_rarity_background(rarity:BaseItem.ItemRarity)->Texture2D:

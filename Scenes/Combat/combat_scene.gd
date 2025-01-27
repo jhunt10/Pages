@@ -7,9 +7,10 @@ signal item_spawned(item:BaseItem, map_pos:MapPos)
 
 @export var ui_control:CombatUiControl
 @export var camera:MoveableCamera2D
+@export var start_combat_screen:StartCombatScreen
 
 @export var MapController:MapControllerNode
-
+@export var dialog_controller:DialogController
 @export var GridCursor:GridCursorNode
 
 static var Instance:CombatRootControl 
@@ -18,6 +19,9 @@ static var QueController:ActionQueController = ActionQueController.new()
 var GameState:GameStateData
 
 static var _current_player_index:int = 0
+
+## If true, will call StoryState.load_next_stage() when battle finishes
+static var is_story_map:bool
 
 func _enter_tree() -> void:
 	if !Instance: 
@@ -45,8 +49,11 @@ func _ready() -> void:
 	#load_map(MapController)
 	
 		#
-	
+	ui_control.hide()
 	ui_control.ui_state_controller.set_ui_state(UiStateController.UiStates.ActionInput)
+	start_combat_screen.hide()
+	start_combat_screen.screen_blacked_out.connect(_on_combat_screen_blackout)
+	start_combat_screen.screen_clear.connect(_on_combat_screen_cleared)
 	#
 	#MapController._build_terrain()
 	for actor:BaseActor in GameState._actors.values():
@@ -73,7 +80,7 @@ static func get_actor_node(actor_id:String)->ActorNode:
 	if !Instance.MapController: return null
 	return Instance.MapController.actor_nodes.get(actor_id)
 
-func load_init_state(map_scene_path:String):
+func load_init_state(sub_scene_data:Dictionary):
 	printerr("Loading init state")
 	if !Instance: Instance = self
 	elif Instance != self: 
@@ -83,7 +90,7 @@ func load_init_state(map_scene_path:String):
 	if GameState:
 		printerr("Combate Scene already init")
 		return
-	
+	var map_scene_path = sub_scene_data.get("MapPath")
 	var map_scene = load(map_scene_path)
 	if MapController:
 		MapController.queue_free()
@@ -147,6 +154,24 @@ func load_init_state(map_scene_path:String):
 		if actor_pos:
 			camera.snap_to_map_pos(actor_pos)
 			camera.zoom = Vector2(2,2)
+	
+	is_story_map = sub_scene_data.get("IsStoryMap", false)
+	var dialog_script = sub_scene_data.get("DialogScript")
+	if dialog_script:
+		dialog_controller.load_dialog_script(dialog_script)
+		dialog_controller.show()
+	else:
+		dialog_controller.queue_free()
+
+func start_combat_animation():
+	start_combat_screen.show()
+	start_combat_screen.start_combat_animation()
+
+func _on_combat_screen_blackout():
+	ui_control.show()
+
+func _on_combat_screen_cleared():
+	start_combat_screen.hide()
 
 func kill_actor(actor:BaseActor):
 	actor.die()

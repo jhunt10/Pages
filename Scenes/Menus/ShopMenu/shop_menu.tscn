@@ -1,14 +1,9 @@
-[gd_scene load_steps=38 format=3 uid="uid://b7sc1vi5e6w5h"]
+[gd_scene load_steps=33 format=3 uid="uid://b7sc1vi5e6w5h"]
 
 [ext_resource type="Texture2D" uid="uid://dipsfxmqeutav" path="res://Scenes/Menus/ShopMenu/wood_background.png" id="1_4e3a3"]
 [ext_resource type="Script" path="res://Scenes/Menus/ShopMenu/shop_menu.gd" id="1_fpa2r"]
-[ext_resource type="Texture2D" uid="uid://dj3aoohuok4yc" path="res://assets/Sprites/UI/BackPatches/FancyBackPatch_Big_128_36.png" id="3_6rhfk"]
-[ext_resource type="Texture2D" uid="uid://b6u5htxioouqh" path="res://Scenes/Dialog/DialogBox/UnknownSpeakerPort.png" id="4_21xro"]
-[ext_resource type="Script" path="res://Scenes/Menus/CampMenu/camp_text_box_control.gd" id="4_gmhd2"]
 [ext_resource type="Theme" uid="uid://dwinll8pgdjhc" path="res://Scenes/Themes/standard_theme.tres" id="5_5483j"]
-[ext_resource type="Texture2D" uid="uid://cdy53ml2tuvc8" path="res://assets/Sprites/UI/BackPatches/FancyBackPatch_Frame_64_18.png" id="5_pogac"]
 [ext_resource type="Script" path="res://Scenes/Menus/CampMenu/camp_options_container.gd" id="6_l23p1"]
-[ext_resource type="Theme" uid="uid://d14wnuq8dl417" path="res://Scenes/Themes/dialog_theme.tres" id="6_xlvb1"]
 [ext_resource type="Script" path="res://Scenes/Menus/CampMenu/camp_option_button.gd" id="7_36qs6"]
 [ext_resource type="Texture2D" uid="uid://c2vu13v8elej6" path="res://Scenes/Menus/ShopMenu/wood_frame_Black_Patch_124_16.png" id="8_6e5du"]
 [ext_resource type="Texture2D" uid="uid://567vutk12a12" path="res://Scenes/Menus/CharacterMenu/MenuPages/SlotHighlight.png" id="8_g50yr"]
@@ -66,74 +61,10 @@ texture = ExtResource("1_4e3a3")
 region_rect = Rect2(0, 0, 300, 200)
 patch_margin_right = 9
 
-[node name="TextBoxBackground" type="NinePatchRect" parent="."]
-layout_mode = 1
-anchors_preset = -1
-anchor_top = 0.7
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 16.0
-offset_top = 4.0
-offset_right = -16.0
-offset_bottom = -16.0
-grow_horizontal = 2
-grow_vertical = 0
-texture = ExtResource("3_6rhfk")
-region_rect = Rect2(0, 0, 128, 128)
-patch_margin_left = 36
-patch_margin_top = 36
-patch_margin_right = 36
-patch_margin_bottom = 36
-axis_stretch_horizontal = 1
-axis_stretch_vertical = 1
-script = ExtResource("4_gmhd2")
-
-[node name="HBoxContainer" type="HBoxContainer" parent="TextBoxBackground"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="SpeakerContainer" type="VBoxContainer" parent="TextBoxBackground/HBoxContainer"]
-layout_mode = 2
-theme_override_constants/separation = 0
-
-[node name="SpeakerRect" type="TextureRect" parent="TextBoxBackground/HBoxContainer/SpeakerContainer"]
-custom_minimum_size = Vector2(96, 96)
-layout_mode = 2
-texture = ExtResource("4_21xro")
-
-[node name="PortraitFrame" type="TextureRect" parent="TextBoxBackground/HBoxContainer/SpeakerContainer/SpeakerRect"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("5_pogac")
-
-[node name="SpeakerLabel" type="Label" parent="TextBoxBackground/HBoxContainer/SpeakerContainer"]
-layout_mode = 2
-theme = ExtResource("6_xlvb1")
-text = "MtFg"
-horizontal_alignment = 1
-
-[node name="ReadTimerLabel" type="Label" parent="TextBoxBackground/HBoxContainer/SpeakerContainer"]
-self_modulate = Color(0, 0, 0, 1)
-layout_mode = 2
-text = "124"
-horizontal_alignment = 1
-
-[node name="RichTextLabel" type="RichTextLabel" parent="TextBoxBackground/HBoxContainer"]
-self_modulate = Color(0.498039, 0, 0, 1)
-layout_mode = 2
-theme = ExtResource("5_5483j")
-theme_override_font_sizes/normal_font_size = 32
-text = "What shall our hero do next?"
-
 [node name="CampOptionsContainer" type="NinePatchRect" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.7
+anchor_left = 0.65
 anchor_right = 1.0
 anchor_bottom = 0.7
 offset_left = 3.60004
@@ -624,16 +555,15 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="ItemMenuContainer" type="NinePatchRect" parent="." node_paths=PackedStringArray("entries_container", "premade_sub_item_list", "back_button")]
-visible = false
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.7
+anchor_left = 0.65
 anchor_right = 1.0
-anchor_bottom = 0.7
+anchor_bottom = 1.0
 offset_left = 3.60004
 offset_top = 64.0
 offset_right = -16.0
-offset_bottom = 178.4
+offset_bottom = -16.0
 grow_horizontal = 0
 grow_vertical = 2
 texture = ExtResource("8_6e5du")
@@ -669,7 +599,7 @@ anchor_bottom = 1.0
 offset_left = 18.0
 offset_top = 18.0
 offset_right = -49.6
-offset_bottom = -45.6
+offset_bottom = -80.0
 horizontal_scroll_mode = 3
 vertical_scroll_mode = 3
 
@@ -679,12 +609,13 @@ size_flags_horizontal = 3
 
 [node name="ShopSubItemList" type="Control" parent="ItemMenuContainer/ScrollContainer/VBoxContainer" node_paths=PackedStringArray("title_button", "title_h_box", "symbole_texture_rect", "title_label", "entries_v_box", "premade_item_button")]
 clip_contents = true
-custom_minimum_size = Vector2(0, 60)
+custom_minimum_size = Vector2(317, 108)
 layout_mode = 2
 script = ExtResource("13_3hu0s")
 showing = true
 title = "Pages"
 state = 2
+set_width = 317
 grow_time = 0.3
 grow_timer = 0.3
 title_button = NodePath("CatagoryButton")
@@ -752,13 +683,14 @@ anchor_bottom = 1.0
 offset_top = 60.0
 grow_horizontal = 2
 
-[node name="ShopItemButton" type="Control" parent="ItemMenuContainer/ScrollContainer/VBoxContainer/ShopSubItemList/SubItemsContainer" node_paths=PackedStringArray("item_background", "item_icon", "item_label", "button")]
+[node name="ShopItemButton" type="Control" parent="ItemMenuContainer/ScrollContainer/VBoxContainer/ShopSubItemList/SubItemsContainer" node_paths=PackedStringArray("item_background", "item_icon", "item_label", "price_label", "button")]
 custom_minimum_size = Vector2(0, 48)
 layout_mode = 2
 script = ExtResource("18_k1elq")
 item_background = NodePath("HBoxContainer/TextureRect")
 item_icon = NodePath("HBoxContainer/TextureRect/TextureRect")
-item_label = NodePath("HBoxContainer/FitScaleLabel")
+item_label = NodePath("HBoxContainer/Label")
+price_label = NodePath("HBoxContainer/Label3")
 button = NodePath("ItemButton")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="ItemMenuContainer/ScrollContainer/VBoxContainer/ShopSubItemList/SubItemsContainer/ShopItemButton"]
@@ -789,24 +721,36 @@ texture = ExtResource("17_loymo")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="FitScaleLabel" type="Control" parent="ItemMenuContainer/ScrollContainer/VBoxContainer/ShopSubItemList/SubItemsContainer/ShopItemButton/HBoxContainer" node_paths=PackedStringArray("label")]
-custom_minimum_size = Vector2(0, 60)
+[node name="Label" type="Label" parent="ItemMenuContainer/ScrollContainer/VBoxContainer/ShopSubItemList/SubItemsContainer/ShopItemButton/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-script = ExtResource("15_mutf0")
-label = NodePath("Label")
-text = "Battle Axe of Something"
-center_x = true
-
-[node name="Label" type="Label" parent="ItemMenuContainer/ScrollContainer/VBoxContainer/ShopSubItemList/SubItemsContainer/ShopItemButton/HBoxContainer/FitScaleLabel"]
-layout_mode = 0
-offset_top = 19.0
-offset_right = 396.0
-offset_bottom = 59.0
-scale = Vector2(0.517677, 0.517677)
 theme = ExtResource("5_5483j")
-theme_override_font_sizes/font_size = 32
-text = "Battle Axe of Something"
+theme_override_font_sizes/font_size = 24
+text = "Battle Axe"
+clip_text = true
+
+[node name="Label2" type="Label" parent="ItemMenuContainer/ScrollContainer/VBoxContainer/ShopSubItemList/SubItemsContainer/ShopItemButton/HBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("5_5483j")
+theme_override_font_sizes/font_size = 24
+text = ".........................."
+clip_text = true
+
+[node name="TextureRect2" type="TextureRect" parent="ItemMenuContainer/ScrollContainer/VBoxContainer/ShopSubItemList/SubItemsContainer/ShopItemButton/HBoxContainer"]
+custom_minimum_size = Vector2(18, 20)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("24_8rhkl")
+stretch_mode = 2
+
+[node name="Label3" type="Label" parent="ItemMenuContainer/ScrollContainer/VBoxContainer/ShopSubItemList/SubItemsContainer/ShopItemButton/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("5_5483j")
+theme_override_font_sizes/font_size = 24
+text = "50"
 
 [node name="ItemButton" type="Button" parent="ItemMenuContainer/ScrollContainer/VBoxContainer/ShopSubItemList/SubItemsContainer/ShopItemButton"]
 self_modulate = Color(1, 1, 1, 0)
@@ -833,9 +777,9 @@ anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_left = 20.0
-offset_top = -49.6
+offset_top = -82.0
 offset_right = 274.0
-offset_bottom = -17.6
+offset_bottom = -18.0
 grow_vertical = 0
 script = ExtResource("7_36qs6")
 button = NodePath("ItemListBackButton")
@@ -858,10 +802,9 @@ texture = ExtResource("8_g50yr")
 
 [node name="TitleLabel" type="Label" parent="ItemMenuContainer/BackOptionButton"]
 self_modulate = Color(0.470588, 0, 0, 1)
-layout_mode = 0
+layout_mode = 1
 offset_right = 144.0
 offset_bottom = 60.0
-scale = Vector2(0.533333, 0.533333)
 theme = ExtResource("5_5483j")
 theme_override_font_sizes/font_size = 48
 text = " Back"
@@ -948,7 +891,7 @@ text = "100"
 [node name="PrettyPictureControl" type="Control" parent="."]
 clip_contents = true
 layout_mode = 1
-anchor_right = 0.7
+anchor_right = 0.65
 anchor_bottom = 0.7
 offset_left = 16.0
 offset_top = 64.0
@@ -988,11 +931,11 @@ axis_stretch_vertical = 1
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 0.7
-anchor_right = 1.0
+anchor_right = 0.65
 anchor_bottom = 1.0
 offset_left = 16.0
 offset_top = -1.60001
-offset_right = -350.0
+offset_right = -4.0
 offset_bottom = -16.0
 grow_horizontal = 2
 grow_vertical = 0
@@ -1002,11 +945,12 @@ unknown_speaker_port = ExtResource("22_lwtp0")
 clip_contents = true
 custom_minimum_size = Vector2(300, 260)
 anchors_preset = 0
-offset_left = 359.0
-offset_top = 64.0
-offset_right = 659.0
-offset_bottom = 444.0
+offset_left = 302.0
+offset_top = 65.0
+offset_right = 602.0
+offset_bottom = 445.0
 scale = Vector2(1.5, 1.5)
+mouse_filter = 1
 
 [node name="ItemDetailsCard" parent="DetaiolCardSpawnPoint" instance=ExtResource("23_gkgvs")]
 visible = false
@@ -1016,6 +960,7 @@ state = 2
 grow_timer = 0.5
 
 [node name="ConfirmPopUp" type="NinePatchRect" parent="." node_paths=PackedStringArray("title_label", "item_background", "item_icon", "item_label", "price_label", "count_label", "total_label", "money_label", "after_label", "cancel_button", "confirm_button")]
+visible = false
 layout_mode = 0
 offset_left = 365.0
 offset_top = 166.0

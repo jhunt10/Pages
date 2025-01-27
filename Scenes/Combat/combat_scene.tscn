@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://dfeilp6hbiuqs"]
+[gd_scene load_steps=47 format=3 uid="uid://dfeilp6hbiuqs"]
 
 [ext_resource type="Script" path="res://Scenes/Combat/combat_scene.gd" id="1_crigy"]
 [ext_resource type="Texture2D" uid="uid://b232xm2ly0peh" path="res://assets/Sprites/UI/GridCursors/GridCursor_Default.png" id="7_7lt4y"]
@@ -40,9 +40,138 @@
 [ext_resource type="Texture2D" uid="uid://io35wpu802fp" path="res://assets/Sprites/UI/BackPatches/Patch_64_12.png" id="32_f81f5"]
 [ext_resource type="Texture2D" uid="uid://bdh4x87ck5hi5" path="res://defs/Items/Consumables/Ammo/Sprites/Gen_Ammo_LIcon.png" id="32_f701a"]
 [ext_resource type="Texture2D" uid="uid://bqv6yn42oymo" path="res://defs/Actors/NPCs/FishMerch/cart.png" id="33_cdw0u"]
+[ext_resource type="Script" path="res://Scenes/Combat/start_combat_screen.gd" id="37_61tl2"]
 [ext_resource type="Script" path="res://Scenes/Combat/dev_map_drawing.gd" id="37_fh4f7"]
+[ext_resource type="PackedScene" uid="uid://bje0k82nenje6" path="res://Scenes/Dialog/dialog_control.tscn" id="37_vv8mm"]
 
-[node name="CombatRootControl" type="Control" node_paths=PackedStringArray("ui_control", "camera", "MapController", "GridCursor")]
+[sub_resource type="Animation" id="Animation_bfqfk"]
+resource_name = "flash_screen"
+length = 2.0
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 1.8, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1), Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ActiveLabel:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.5, 1.5, 1.8),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(437, 311), Vector2(437, 311), Vector2(437, 846)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PageLabel:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5, 1.5, 1.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(226, -175), Vector2(226, 115), Vector2(226, 115), Vector2(226, 650)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("ActiveLabel:self_modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.5, 0.6, 0.7, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.5, 2),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [&"screen_blacked_out"],
+"method": &"emit_signal"
+}, {
+"args": [&"screen_clear"],
+"method": &"emit_signal"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_qr78i"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ActiveLabel:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(437, 311)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PageLabel:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.001),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(226, -175), Vector2(226, -175)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("ActiveLabel:self_modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_o26gi"]
+_data = {
+"RESET": SubResource("Animation_qr78i"),
+"flash_screen": SubResource("Animation_bfqfk")
+}
+
+[node name="CombatRootControl" type="Control" node_paths=PackedStringArray("ui_control", "camera", "start_combat_screen", "MapController", "dialog_controller", "GridCursor")]
 custom_minimum_size = Vector2(1152, 648)
 layout_mode = 3
 anchors_preset = 15
@@ -56,7 +185,9 @@ mouse_filter = 2
 script = ExtResource("1_crigy")
 ui_control = NodePath("MoveableCamera2D/CanvasLayer/CombatUiControl")
 camera = NodePath("MoveableCamera2D")
+start_combat_screen = NodePath("MoveableCamera2D/CanvasLayer/StartCombatScreen")
 MapController = NodePath("MapNode")
+dialog_controller = NodePath("MoveableCamera2D/CanvasLayer/DialogControl")
 GridCursor = NodePath("GridCursor")
 
 [node name="MoveableCamera2D" type="Camera2D" parent="." node_paths=PackedStringArray("canvas_layer")]
@@ -637,7 +768,8 @@ text = "Main Menu"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="GameVictoryScreen" type="Control" parent="MoveableCamera2D/CanvasLayer/CombatUiControl" node_paths=PackedStringArray("camp_button", "premade_pickup_page", "pickup_pages_container", "premade_pickup_item", "pickup_items_container")]
+[node name="GameVictoryScreen" type="Control" parent="MoveableCamera2D/CanvasLayer/CombatUiControl" node_paths=PackedStringArray("camp_button", "camp_button_label", "premade_pickup_page", "pickup_pages_container", "premade_pickup_item", "pickup_items_container")]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -646,6 +778,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("26_1uhkb")
 camp_button = NodePath("CenterContainer/VBoxContainer/CampButton")
+camp_button_label = NodePath("CenterContainer/VBoxContainer/CampButton/NinePatchRect2/Label")
 premade_pickup_page = NodePath("CenterContainer/VBoxContainer/PickupPagesContainer/PickupPageContainer")
 pickup_pages_container = NodePath("CenterContainer/VBoxContainer/PickupPagesContainer")
 premade_pickup_item = NodePath("CenterContainer/VBoxContainer/PickupItemsContainer/PickupItemContainer")
@@ -978,13 +1111,71 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="StartCombatScreen" type="Control" parent="MoveableCamera2D/CanvasLayer" node_paths=PackedStringArray("animation_player")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("37_61tl2")
+animation_player = NodePath("AnimationPlayer")
+
+[node name="ColorRect" type="ColorRect" parent="MoveableCamera2D/CanvasLayer/StartCombatScreen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0)
+
+[node name="PageLabel" type="Label" parent="MoveableCamera2D/CanvasLayer/StartCombatScreen"]
+layout_mode = 0
+offset_left = 226.0
+offset_top = -175.0
+offset_right = 695.0
+theme_override_font_sizes/font_size = 128
+text = "P.A.G.E."
+
+[node name="Label2" type="Label" parent="MoveableCamera2D/CanvasLayer/StartCombatScreen/PageLabel"]
+layout_mode = 0
+offset_left = 489.0
+offset_top = 60.0
+offset_right = 713.0
+offset_bottom = 148.0
+theme_override_font_sizes/font_size = 64
+text = "System"
+
+[node name="ActiveLabel" type="Label" parent="MoveableCamera2D/CanvasLayer/StartCombatScreen"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 437.0
+offset_top = 311.0
+offset_right = 707.0
+offset_bottom = 437.0
+theme_override_font_sizes/font_size = 92
+text = "Active"
+horizontal_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MoveableCamera2D/CanvasLayer/StartCombatScreen"]
+libraries = {
+"": SubResource("AnimationLibrary_o26gi")
+}
+
+[node name="DialogControl" parent="MoveableCamera2D/CanvasLayer" node_paths=PackedStringArray("scene_root") instance=ExtResource("37_vv8mm")]
+visible = false
+scene_root = NodePath("../../..")
+
 [node name="MapNode" parent="." instance=ExtResource("7_ce1oe")]
 
 [node name="Cart" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(386, 226)
 texture = ExtResource("33_cdw0u")
 
 [node name="GridCursor" type="Sprite2D" parent="."]
+visible = false
 texture = ExtResource("7_7lt4y")
 script = ExtResource("8_wf3xb")
 

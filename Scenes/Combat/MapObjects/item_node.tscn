@@ -1,12 +1,11 @@
 [gd_scene load_steps=3 format=3 uid="uid://b2orhuyl0t2yh"]
 
 [ext_resource type="Script" path="res://Scenes/Combat/MapObjects/item_node.gd" id="1_g7pg8"]
-[ext_resource type="Texture2D" uid="uid://7dwk82ocik8t" path="res://defs/Items/Consumables/TestPotion_Small.png" id="2_ry7q1"]
+[ext_resource type="Texture2D" uid="uid://b0pbmi2yblnrv" path="res://defs/Items/Consumables/Money_SIcon.png" id="2_bvd64"]
 
 [node name="ItemNode" type="Node2D" node_paths=PackedStringArray("item_sprite")]
-position = Vector2(178, 233)
 script = ExtResource("1_g7pg8")
 item_sprite = NodePath("Sprite2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_ry7q1")
+texture = ExtResource("2_bvd64")

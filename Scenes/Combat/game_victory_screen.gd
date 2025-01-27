@@ -1,7 +1,9 @@
 class_name GameVictoryScreen
 extends Control
 
+
 @export var camp_button:Button
+@export var camp_button_label:Label
 @export var premade_pickup_page:HBoxContainer
 @export var pickup_pages_container:VBoxContainer
 @export var premade_pickup_item:HBoxContainer
@@ -14,12 +16,17 @@ func _ready() -> void:
 
 func show_game_result():
 	collect_dropped_items()
+	if CombatRootControl.is_story_map:
+		camp_button_label.text = "Continue"
 	self.show()
 	
 
 func _on_camp_button():
 	CombatRootControl.Instance.cleanup_combat()
-	MainRootNode.Instance.open_camp_menu()
+	if CombatRootControl.is_story_map:
+		StoryState.load_next_story_scene()
+	else:
+		MainRootNode.Instance.open_camp_menu()
 
 func collect_dropped_items():
 	var items_datas = {}

@@ -35,6 +35,7 @@ enum States {Hidden, Growing, Showing, Shrinking}
 			self.custom_minimum_size = _get_minimum_size()
 			minimum_size_changed.emit()
 		#item_rect_changed.emit()
+@export var set_width:int = 60
 @export var min_hight:int = 60
 @export var grow_time:float
 @export var grow_timer:float
@@ -83,6 +84,8 @@ func _process(delta: float) -> void:
 
 func _get_minimum_size() -> Vector2:
 	var parent_size = self.get_parent_area_size()
+	## Dumb hack
+	parent_size.x = set_width
 	if !title_h_box or !entries_v_box:
 		return Vector2(parent_size.x, min_hight)
 	if state == States.Showing:

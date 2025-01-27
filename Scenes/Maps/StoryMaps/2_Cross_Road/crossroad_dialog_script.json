@@ -534,13 +534,13 @@
 	},
     
 	"Dialog2":{
-		"_NextPartKey": null,
-		"WaitForNextButton": true,
+		"_NextPartKey": "CombatStart",
+		"WaitForNextButton": false,
 		"Inital_BlackOutState": "Clear",
 		"EnsurePoses": {
 			"_Camera":"C2",
 			"Player1":"P1",
-			"MysteriousFigure":"M1",
+			"MysteriousFigure":"M2",
             "BanditArcher_1": "Arch1_South",
             "BanditArcher_2": "Arch2_South",
             "BanditArmored_1": "Band1_South",
@@ -1137,6 +1137,41 @@
 					}
 				]
             },
+			{
+				"BlockType": "SpeechBox",
+				"WaitToFinish": true,
+				"WaitForNextButton": false,
+				"TopBox": false,
+                "Hide": true,
+				"Entries": [ 
+                    {
+                        "EntryType": "Clear"
+                    }
+				]
+            },
+            {
+                "BlockType":"StartCombat"
+            }
+        ]
+    },
+    "CombatStart":{
+		"_NextPartKey": null,
+		"WaitForNextButton": true,
+		"Inital_BlackOutState": "Clear",
+		"EnsurePoses": {
+			"_Camera":"P1",
+			"Player1":"P1",
+			"Player2":"P2",
+			"MysteriousFigure":"M1",
+            "BanditArcher_1": "Arch1_South",
+            "BanditArcher_2": "Arch2_South",
+            "BanditArmored_1": "Band1_South",
+            "BanditArmored_2": "Band2_3",
+            "BanditArmored_3": "Band3_3",
+            "BanditCaptain": "Cpt3"
+		},
+        "Blocks":[
+
         ]
     }
 }

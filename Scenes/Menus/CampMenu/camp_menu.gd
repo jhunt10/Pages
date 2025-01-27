@@ -3,6 +3,7 @@ extends Control
 
 static var Instance:CampMenu
 
+@export var dialog_control:DialogController
 @export var camp_options_container:CampOptionsContainer
 @export var system_options_container:CampOptionsContainer
 @export var pretty_picture_texure_rect:TextureRect
@@ -44,6 +45,10 @@ func _ready() -> void:
 	_sub_menu_open("Main")
 	pass # Replace with function body.
 
+func load_dialog(dialog_script:String):
+	dialog_control.load_dialog_script(dialog_script)
+	dialog_control.show()
+	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -62,7 +67,8 @@ func _on_shop_button():
 	MainRootNode.Instance.open_shop_menu()
 
 func _on_quest_button():
-	MainRootNode.Instance.start_combat("res://Scenes/Maps/StoryMaps/2_Cross_Road/crossroad_dialog_map.tscn")
+	StoryState.load_next_story_scene()
+	#MainRootNode.Instance.start_combat("res://Scenes/Maps/StoryMaps/2_Cross_Road/crossroad_dialog_map.tscn")
 	#MainRootNode.Instance.load_dialog_scene("res://Scenes/Maps/StoryMaps/2_Cross_Road/crossroad_dialog_script.json")
 	pass
 

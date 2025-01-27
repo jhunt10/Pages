@@ -41,7 +41,7 @@ func _load_test_map():
 	return JSON.parse_string(text)
 
 func set_current_scene(scene):
-	if current_scene:
+	if current_scene and is_instance_valid(current_scene):
 		current_scene.queue_free()
 	current_scene = scene
 	self.add_child(scene)
@@ -60,31 +60,30 @@ func start_combat(map_key):
 	#self.add_child(current_scene)
 
 func start_game():
-	current_scene.queue_free()
 	if !ActionLibrary.Instance: var lib = ActionLibrary.new()
 	if !ItemLibrary.Instance: var lib = ItemLibrary.new()
 	if !EffectLibrary.Instance: var lib = EffectLibrary.new()
 	if !ActorLibrary.Instance: var lib = ActorLibrary.new()
-		
-	var char_select:StartCharacterSelectMenu = load("res://Scenes/Menus/StartCharacterSelectMenu/start_character_select_menu.tscn").instantiate()
-	self.add_child(char_select)
-	char_select.character_selected.connect(_on_start_character_selected)
-	current_scene = char_select
-
-func _on_start_character_selected(name):
 	StoryState.start_new_story()
-	if current_scene:
-		current_scene.queue_free()
-	var combat_scene:CombatRootControl = load("res://Scenes/Combat/combat_scene.tscn").instantiate()
-	combat_scene.load_init_state("res://Scenes/Maps/StoryMaps/1_StartingMap/starting_map.tscn")
-	current_scene = combat_scene
-	self.add_child(current_scene)
-	
-	var dialog:DialogController = load("res://Scenes/Dialog/dialog_control.tscn").instantiate()
-	dialog.scene_root = combat_scene
-	dialog.load_dialog_script("res://Scenes/Maps/StoryMaps/1_StartingMap/start_game_dialog_script.json")
-	combat_scene.camera.canvas_layer.add_child(dialog)
-	#open_camp_menu()
+	#var char_select:StartCharacterSelectMenu = load("res://Scenes/Menus/StartCharacterSelectMenu/start_character_select_menu.tscn").instantiate()
+	#self.add_child(char_select)
+	##char_select.character_selected.connect(_on_start_character_selected)
+	#current_scene = char_select
+
+#func _on_start_character_selected(name):
+	#StoryState.start_new_story()
+	#if current_scene:
+		#current_scene.queue_free()
+	#var combat_scene:CombatRootControl = load("res://Scenes/Combat/combat_scene.tscn").instantiate()
+	#combat_scene.load_init_state("res://Scenes/Maps/StoryMaps/1_StartingMap/starting_map.tscn")
+	#current_scene = combat_scene
+	#self.add_child(current_scene)
+	#
+	#var dialog:DialogController = load("res://Scenes/Dialog/dialog_control.tscn").instantiate()
+	#dialog.scene_root = combat_scene
+	#dialog.load_dialog_script("res://Scenes/Maps/StoryMaps/1_StartingMap/start_game_dialog_script.json")
+	#combat_scene.camera.canvas_layer.add_child(dialog)
+	##open_camp_menu()
 
 func open_save_menu():
 	var save_scene:SaveLoadMenu = load("res://Scenes/Menus/SaveLoadMenu/save_load_menu.tscn").instantiate()
@@ -106,12 +105,15 @@ func open_load_menu():
 		save_scene.scale_control.scale = Vector2(1.5, 1.5)
 	self.add_child(save_scene)
 
-func open_camp_menu():
+func open_camp_menu(dialog_script:String=''):
 	if current_scene is CampMenu:
 		return
 	#current_scene.queue_free()
 	#prune_objects()
-	LoadManager.load_scene("res://Scenes/Menus/CampMenu/camp_menu.tscn")
+	var data = {}
+	if dialog_script != '':
+		data['DialogScript'] = dialog_script
+	LoadManager.load_scene("res://Scenes/Menus/CampMenu/camp_menu.tscn", data)
 	#var camp_scene = load("res://Scenes/Menus/CampMenu/camp_menu.tscn").instantiate()
 	#self.add_child(camp_scene)
 	#current_scene = camp_scene
@@ -132,15 +134,6 @@ func load_dialog_scene(file_path):
 	var file = FileAccess.open(file_path, FileAccess.READ)
 	var text:String = file.get_as_text()
 	var scene_data = JSON.parse_string(text)
-	
-	var map_sceen_path = scene_data.get("_MetaData_", {}).get("MapScene")
-	if not map_sceen_path:
-		open_camp_menu()
-	else:
-		var combat_scene:CombatRootControl = load("res://Scenes/Combat/combat_scene.tscn").instantiate()
-		combat_scene.load_init_state(map_sceen_path)
-		current_scene = combat_scene
-		self.add_child(current_scene)
 	
 	var dialog:DialogController = load("res://Scenes/Dialog/dialog_control.tscn").instantiate()
 	dialog.scene_root = current_scene
@@ -199,21 +192,6 @@ func open_effect_editor():
 	var page_editor = load("res://Scenes/Editors/EffectEditor/effect_editor_control_scene.tscn").instantiate()
 	center_container.add_child(page_editor)
 
-func open_tutorial():
-	if current_scene:
-		current_scene.queue_free()
-	StoryState.start_new_story()
-	LoadManager.load_scene("res://Scenes/Menus/CampMenu/camp_menu.tscn")#res://Scenes/Combat/combat_scene.tscn")
-	#var combat_scene:CombatRootControl = load().instantiate()
-	#combat_scene.load_init_state("res://Scenes/Maps/StoryMaps/1_StartingMap/starting_map.tscn")
-	#current_scene = combat_scene
-	#self.add_child(current_scene)
-	#
-	#var dialog:DialogController = load("res://Scenes/Dialog/dialog_control.tscn").instantiate()
-	#dialog.scene_root = combat_scene
-	#dialog.load_dialog_script("res://Scenes/Maps/StoryMaps/1_StartingMap/start_game_dialog_script.json")
-	#combat_scene.camera.canvas_layer.add_child(dialog)
-	
 var dev_tools_menu
 func open_dev_tools():
 	if dev_tools_menu:

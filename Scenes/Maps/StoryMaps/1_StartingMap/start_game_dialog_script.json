@@ -1,6 +1,6 @@
 {
 	"_MetaData_": {
-		"StartPartKey": "PrologSwitch"
+		"StartPartKey": "Prolog_Soldier"
 	},
 	"PrologSwitch": {
 		"_NextPartLogic": 
@@ -30,75 +30,6 @@
 					{
 						"EntryType":"Text",
 						"Text": "Unable to find their allies and in fear of being branded a deserter, "
-					},
-					{
-						"EntryType":"WaitToRead"
-					}
-				]
-			}
-		]
-	},
-	"Prolog_Rogue":{
-		"_NextPartKey": "Intro_WalkIn",
-		"WaitForNextButton": true,
-		"Blocks":[
-			{
-				"BlockType": "Blackout",
-				"BlackOutState":"Black"
-			},
-			{
-				"BlockType": "SpeechBox",
-				"WaitToFinish": true,
-				"Entries": [
-					{
-						"EntryType":"Text",
-						"Text": "Unable to return home and being hunted by the law, "
-					},
-					{
-						"EntryType":"WaitToRead"
-					}
-				]
-			}
-		]
-	},
-	"Prolog_Mage":{
-		"_NextPartKey": "Intro_WalkIn",
-		"WaitForNextButton": true,
-		"Blocks":[
-			{
-				"BlockType": "Blackout",
-				"BlackOutState":"Black"
-			},
-			{
-				"BlockType": "SpeechBox",
-				"WaitToFinish": true,
-				"Entries": [
-					{
-						"EntryType":"Text",
-						"Text": "Unable to face thier master and where no were else to go, "
-					},
-					{
-						"EntryType":"WaitToRead"
-					}
-				]
-			}
-		]
-	},
-	"Prolog_Priest":{
-		"_NextPartKey": "Intro_WalkIn",
-		"WaitForNextButton": true,
-		"Blocks":[
-			{
-				"BlockType": "Blackout",
-				"BlackOutState":"Black"
-			},
-			{
-				"BlockType": "SpeechBox",
-				"WaitToFinish": true,
-				"Entries": [
-					{
-						"EntryType":"Text",
-						"Text": "Running for thier life and unsure who to turn to, "
 					},
 					{
 						"EntryType":"WaitToRead"
