@@ -57,7 +57,7 @@ func _ready() -> void:
 	inventory_container.item_button_up.connect(on_item_button_up)
 	inventory_container.mouse_enter_item.connect(on_mouse_enter_slot)
 	inventory_container.mouse_exit_item.connect(on_mouse_exit_slot)
-	#
+	
 	page_page.item_button_down.connect(on_item_button_down)
 	page_page.item_button_up.connect(on_item_button_up)
 	page_page.mouse_enter_item.connect(on_mouse_enter_slot)
@@ -69,7 +69,7 @@ func _ready() -> void:
 	bag_page.mouse_exit_item.connect(on_mouse_exit_slot)
 	stop_dragging()
 	on_tab_pressed("Inventory")
-	on_tab_pressed("Equipment")
+	on_tab_pressed("Pages")
 	inventory_tabs_control.on_tab_selected.connect(on_inv_filter_selected)
 	inventory_tabs_control.on_tab_unselected.connect(on_inv_filter_unselected)
 	#if _actor == null:

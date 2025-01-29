@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://bpvy87uagttpr" path="res://Scenes/UiNodes/ScollBar/scroll_bar.tscn" id="7_h5ro5"]
 [ext_resource type="Texture2D" uid="uid://bg2pfkcrb1fj1" path="res://Scenes/Dialog/Icons/OptionIcon_Filled.png" id="8_3a0dq"]
 
-[node name="DialogBox" type="Control" node_paths=PackedStringArray("speaker_container", "speaker_portrait", "speaker_label", "scroll_bar", "entry_contaier", "scroll_contaier", "read_timer_label", "premade_text_label", "premade_question_option")]
+[node name="DialogBox" type="Control" node_paths=PackedStringArray("speaker_container", "speaker_portrait", "speaker_label", "scroll_bar", "entry_contaier", "scroll_contaier", "read_timer_label", "premade_text_label", "premade_compound_label", "premade_question_option")]
 custom_minimum_size = Vector2(640, 180)
 layout_mode = 3
 anchors_preset = 0
@@ -25,6 +25,7 @@ entry_contaier = NodePath("SpeechDialogBlock/ScrollContainer/EntriyContainer")
 scroll_contaier = NodePath("SpeechDialogBlock/ScrollContainer")
 read_timer_label = NodePath("SpeechDialogBlock/SpeakerContainer/ReadTimerLabel")
 premade_text_label = NodePath("SpeechDialogBlock/ScrollContainer/EntriyContainer/PreMade_TextLabel")
+premade_compound_label = NodePath("SpeechDialogBlock/ScrollContainer/EntriyContainer/PreMade_CompoundTextLabel")
 premade_question_option = NodePath("SpeechDialogBlock/ScrollContainer/EntriyContainer/PreMade_QuestionOption")
 unknown_speaker_port = ExtResource("2_vdnsa")
 
@@ -100,6 +101,19 @@ vertical_scroll_mode = 3
 [node name="EntriyContainer" type="VBoxContainer" parent="SpeechDialogBlock/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+
+[node name="PreMade_CompoundTextLabel" type="RichTextLabel" parent="SpeechDialogBlock/ScrollContainer/EntriyContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 0
+theme = ExtResource("4_5vyn8")
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 32
+text = "Some test text"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
 
 [node name="PreMade_TextLabel" type="RichTextLabel" parent="SpeechDialogBlock/ScrollContainer/EntriyContainer"]
 layout_mode = 2

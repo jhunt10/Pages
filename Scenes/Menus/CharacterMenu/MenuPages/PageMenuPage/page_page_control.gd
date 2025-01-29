@@ -112,6 +112,7 @@ func build_sub_containers():
 		_sub_containers[slot_key] = slot_set
 		for index in range(slot_set_data['Count']):
 			var new_button:PageSlotButton = premade_page_button.duplicate()
+			new_button.name = "PageSlotButton"+str(raw_index)
 			new_button.set_key(_actor, _actor.pages.get_item_id_in_slot(raw_index))
 			new_button.button.button_down.connect(_on_item_button_down.bind(raw_index))
 			new_button.button.button_up.connect(_on_item_button_up.bind(raw_index))
@@ -122,8 +123,6 @@ func build_sub_containers():
 			new_button.show()
 			_buttons.append(new_button)
 			raw_index += 1
-	
-
 #func build_sub_containers():
 	#for page in sub_book_pages:
 		#for container in page:

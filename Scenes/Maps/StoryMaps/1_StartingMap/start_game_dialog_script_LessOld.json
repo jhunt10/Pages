@@ -1,6 +1,6 @@
 {
 	"_MetaData_": {
-		"StartPartKey": "PageSystemTutorial"
+		"StartPartKey": "Intro_SaveTheWorld_Question"
 	},
 	"PrologSwitch": {
 		"_NextPartLogic": 
@@ -1063,15 +1063,6 @@
 				]
 			},
 			{
-				"BlockType": "MoveActor",
-				"WaitToFinish": false,
-				"AsyncWaitToFinish": true,
-				"TargetActorId": "MysteriousFigure",
-				"PathMarkerName": "MF_II_1",
-				"FollowActor": false,
-				"Speed": 1
-			},
-			{
 				"BlockType": "SpeechBox",
 				"WaitToFinish": true,
 				"WaitForNextButton": true,
@@ -1083,20 +1074,59 @@
 					},
 					{
 						"EntryType":"Text",
-						"Text": "But before we set out for @Color:Red@The City@Clear@, ",
+						"Text": "Then let’s get introductions out of the way.",
 						"NewLine":true
 					},
 					{
 						"EntryType": "WaitToRead"
+					}			
+				]
+			},
+			{
+				"BlockType": "SpeechBox",
+				"WaitToFinish": true,
+				"WaitForNextButton": true,
+				"Entries": [
+					{
+						"EntryType": "Clear",
+						"ClearSpeaker": false
+					},
+					{
+						"EntryType": "Speaker",
+						"SpeakerName": "MtFr",
+						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Happy.png"
 					},
 					{
 						"EntryType":"Text",
-						"Text": "I'd like to take a look at your @Color:Blue@Page Book@Clear@.",
-						"NewLine":false
+						"Text": "Firstly, "
+					},
+					{
+						"EntryType":"Delay",
+						"Delay":0.5
+					},
+					{
+						"EntryType": "Text",
+						"Text": "are you a boy or a girl?"
+					},
+					{
+						"EntryType": "Question",
+						"Choices": {"Yes": "IsBoyOrGirl:true", "No": "IsBoyOrGirl:false"}
+					}
+				]
+			},
+			{
+				"BlockType": "SpeechBox",
+				"WaitToFinish": true,
+				"WaitForNextButton": true,
+				"Entries": [
+					{
+						"EntryType": "Text",
+						"Text": "Good for you!",
+						"NewLine":true
 					},
 					{
 						"EntryType": "WaitToRead"
-					}			
+					}
 				]
 			},
 			{
@@ -1109,56 +1139,88 @@
 						"ClearSpeaker": false
 					},
 					{
-						"EntryType": "Speaker",
-						"SpeakerName": "MtFr",
-						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Squint.png"
-					},
-					{
-						"EntryType":"Text",
-						"Text": "Hmm"
-					},
-					{
-						"EntryType":"Text",
-						"Text": "... ",
-						"LetterDelay": 0.3
+						"EntryType": "Text",
+						"Text": "And what is your name?"
 					},
 					{
 						"EntryType": "WaitToRead"
-					},
+					}
+				]
+			},
+			{
+				"BlockType": "SpeechBox",
+				"WaitToFinish": false,
+				"WaitForNextButton": false,
+				"Hide": true,
+				"Entries": [
+					{
+						"EntryType": "Clear"
+					}
+				]
+			},
+			{
+				"BlockType": "TextInput",
+				"TitleMessage": "What is the Soldier's name?",
+				"PlaceHolder": "Ben",
+				"SetFlag":"Player1Name",
+				"IsStoryFlag": true
+			},
+			{
+				"BlockType": "SpeechBox",
+				"WaitToFinish": true,
+				"WaitForNextButton": true,
+				"Entries": [
 					{
 						"EntryType": "Speaker",
 						"SpeakerName": "MtFr",
-						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Surprize.png"
+						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Happy.png"
 					},
 					{
 						"EntryType": "Text",
-						"Text": "Wow! "
+						"Text": "Nice to meet you "
+					},
+					{
+						"EntryType": "Flag",
+						"FlagName": "Player1Name"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "."
 					},
 					{
 						"EntryType": "WaitToRead"
+					}
+				]
+			},{
+				"BlockType": "SpeechBox",
+				"WaitToFinish": true,
+				"WaitForNextButton": false,
+				"Entries": [
+					{
+						"EntryType": "Clear",
+						"ClearSpeaker": false
 					},
 					{
 						"EntryType": "Speaker",
 						"SpeakerName": "MtFr",
-						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Neutral.png"
+						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Happy.png"
 					},
 					{
 						"EntryType": "Text",
-						"Text": "Your @Color:Blue@Page Book@Clear@ has barely been used.",
-						"NewLine":true
+						"Text": "Now that I know your name, I'm a Min.."
 					},
 					{
-						"EntryType": "WaitToRead"
+						"EntryType": "Delay",
+						"Delay": 0.5
+
 					},
 					{
-						"EntryType": "Speaker",
-						"SpeakerName": "MtFr",
-						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Neutral.png"
+						"EntryType": "BackTrack",
+						"Text": " a Min.."
 					},
 					{
 						"EntryType": "Text",
-						"Text": "It's like you've done nothing but wondering around for the last six years.",
-						"NewLine":true
+						"Text": " looking forward to working with you!"
 					},
 					{
 						"EntryType": "WaitToRead"
@@ -1180,10 +1242,51 @@
 		"EnsurePoses": {
 			"_Camera":"P1",
 			"Player1":"P1",
-			"MysteriousFigure":"MF_II_1"
+			"MysteriousFigure":"MF5"
 		},
 		"Inital_BlackOutState":"Clear",
 		"Blocks":[
+			{
+				"BlockType": "SpeechBox",
+				"WaitToFinish": true,
+				"WaitForNextButton": true,
+				"Entries": [
+					{
+						"EntryType": "Clear",
+						"ClearSpeaker": false
+					},
+					{
+						"EntryType": "Speaker",
+						"SpeakerName": "MtFr",
+						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Happy.png"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "So Hero, I can tell you've had some training, but your PageBook is looking a bit dusty."
+					},
+					{
+						"EntryType": "WaitToRead"
+					}
+				]
+			},
+			{
+				"BlockType": "SpeechBox",
+				"WaitToFinish": true,
+				"WaitForNextButton": true,
+				"Entries": [
+					{
+						"EntryType": "Clear",
+						"ClearSpeaker": false
+					},
+					{
+						"EntryType": "Text",
+						"Text": "Even the greatest heroes can fall out of practice if they spend all thier time wondering aimlessly."
+					},
+					{
+						"EntryType": "WaitToRead"
+					}
+				]
+			},
 			{
 				"BlockType": "SpeechBox",
 				"WaitToFinish": true,
@@ -1194,20 +1297,8 @@
 						"ClearSpeaker": false
 					},
 					{
-						"EntryType": "Speaker",
-						"SpeakerName": "MtFr",
-						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Neutral.png"
-					},
-					{
 						"EntryType": "Text",
-						"Text": "You didn't forget how to use the @Color:Blue@PAGE@Clear@ System, "
-					},
-					{
-						"EntryType": "WaitToRead"
-					},
-					{
-						"EntryType": "Text",
-						"Text": "did you?"
+						"Text": "Want a quick reminder on how the Page system works?"
 					},
 					{
 						"EntryType": "Question",
@@ -1223,7 +1314,7 @@
 		"EnsurePoses": {
 			"_Camera":"P1",
 			"Player1":"P1",
-			"MysteriousFigure":"MF_II_1"
+			"MysteriousFigure":"MF5"
 		},
 		"Blocks":[
 			{
@@ -1237,14 +1328,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "Good, "
-					},
-					{
-						"EntryType": "WaitToRead"
-					},
-					{
-						"EntryType": "Text",
-						"Text": " then how about a quick demonstration?"
+						"Text": "Well I hope you know what you're doing, "
 					},
 					{
 						"EntryType": "WaitToRead"
@@ -1349,16 +1433,11 @@
 				"Entries": [
 					{
 						"EntryType": "Text",
-						"Text": "These @Color:Red@Squirrels@Clear@ are clearly ready for a fight.",
+						"Text": "because there's a pack of Squirrels up there ready to fight.",
 						"NewLine": true
 					},
 					{
 						"EntryType": "WaitToRead"
-					},
-					{
-						"EntryType": "Text",
-						"Text": "So let's show them what you've got.",
-						"NewLine": true
 					}
 				]
 			},
@@ -1407,386 +1486,19 @@
 						"EntryType":"Clear"
 					}
 				]
-			},
-            {
-                "BlockType":"StartCombat"
-            }
-		]
-	},
-	"StartTutorial": {
-		"_NextPartKey": "PageBookTutorial",
-		"WaitForNextButton": false,
-		"Inital_BlackOutState": "Clear",
-		"EnsurePoses": {
-			"_Camera":"P1",
-			"Player1":"P1",
-			"MysteriousFigure":"MF_II_1"
-		},
-		"Blocks":[
-			{
-				"BlockType": "SpeechBox",
-				"WaitToFinish": true,
-				"WaitForNextButton": false,
-				"Entries": [
-					{
-						"EntryType": "Clear",
-						"ClearSpeaker": false
-					},
-					{
-						"EntryType": "Speaker",
-						"SpeakerName": "MtFr",
-						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Surprize.png"
-					},
-					{
-						"EntryType": "Text",
-						"Text": "Seriously!? "
-					},
-					{
-						"EntryType": "WaitToRead"
-					}
-				]
-			},
-			{
-				"BlockType": "MoveActor",
-				"WaitToFinish": false,
-				"AsyncWaitToFinish": true,
-				"TargetActorId": "MysteriousFigure",
-				"PathMarkerName": "MF_II_2",
-				"FollowActor": false,
-				"Speed": 1
-			},
-			{
-				"BlockType": "SpeechBox",
-				"WaitToFinish": true,
-				"WaitForNextButton": true,
-				"Entries": [
-					{
-						"EntryType": "Speaker",
-						"SpeakerName": "MtFr",
-						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_EyesClosed.png"
-					},
-					{
-						"EntryType": "Text",
-						"Text": "hmm"
-					},
-					{
-						"EntryType":"Text",
-						"Text": "... ",
-						"LetterDelay": 0.3
-					},
-					{
-						"EntryType": "WaitToRead"
-					},
-					{
-						"EntryType": "Text",
-						"Text": "this one's no good",
-						"NewLine": true
-					},
-					{
-						"EntryType":"Text",
-						"Text": "... ",
-						"LetterDelay": 0.3
-					},
-					{
-						"EntryType": "Text",
-						"Text": "but I'm so tired of waiting",
-						"NewLine": true
-					},
-					{
-						"EntryType":"Text",
-						"Text": "... ",
-						"LetterDelay": 0.3
-					},
-					{
-						"EntryType": "WaitToRead"
-					}
-				]
-			},
-			{
-				"BlockType": "MoveActor",
-				"WaitToFinish": false,
-				"AsyncWaitToFinish": false,
-				"TargetActorId": "MysteriousFigure",
-				"PathMarkerName": "MF_I_5",
-				"FollowActor": false,
-				"Speed": 1
-			},
-			{
-				"BlockType": "SpeechBox",
-				"WaitToFinish": true,
-				"WaitForNextButton": true,
-				"Entries": [
-					{
-						"EntryType": "Clear",
-						"ClearSpeaker": false
-					},
-					{
-						"EntryType": "Speaker",
-						"SpeakerName": "MtFr",
-						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Happy.png"
-					},
-					{
-						"EntryType": "Text",
-						"Text": "OK! "
-					},
-					{
-						"EntryType": "WaitToRead"
-					},
-					{
-						"EntryType": "Text",
-						"Text": "I'll just give you a quick @Color:Red@Tutorial@Clear@ on the @Color:Blue@PAGE@Clear@ System.",
-						"NewLine": false
-					},
-					{
-						"EntryType": "WaitToRead"
-					},
-					{
-						"EntryType": "Text",
-						"Text": "I don't know how much you remember, ",
-						"NewLine": true
-					},
-					{
-						"EntryType": "WaitToRead"
-					},
-					{
-						"EntryType": "Text",
-						"Text": "so I'll assume you forgot everything, ",
-						"NewLine": false
-					},
-					{
-						"EntryType": "WaitToRead"
-					},
-					{
-						"EntryType": "Text",
-						"Text": "and explain like you were just generated.",
-						"NewLine": false
-					},
-					{
-						"EntryType": "WaitToRead"
-					}
-				]
-			},
-			{
-				"BlockType": "SpeechBox",
-				"WaitToFinish": true,
-				"WaitForNextButton": true,
-				"Entries": [
-					{
-						"EntryType": "Clear",
-						"ClearSpeaker": false
-					},
-					{
-						"EntryType": "Speaker",
-						"SpeakerName": "MtFr",
-						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Neutral.png"
-					},
-					{
-						"EntryType": "Text",
-						"Text": "To start, "
-					},
-					{
-						"EntryType": "WaitToRead"
-					},
-					{
-						"EntryType": "Text",
-						"Text": "the @Color:Blue@PAGE@Clear@ System is an omnipresent all-powerful force that dictates every aspect of our lives. ",
-						"NewLine": false
-					},
-					{
-						"EntryType": "WaitToRead"
-					},
-					{
-						"EntryType": "Text",
-						"Text": "So it's kind of important.",
-						"NewLine": true
-					},
-					{
-						"EntryType": "WaitToRead"
-					}
-				]
-			},
-			{
-				"BlockType": "SpeechBox",
-				"WaitToFinish": true,
-				"WaitForNextButton": true,
-				"Entries": [
-					{
-						"EntryType": "Clear",
-						"ClearSpeaker": false
-					},
-					{
-						"EntryType": "Speaker",
-						"SpeakerName": "MtFr",
-						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Happy.png"
-					},
-					{
-						"EntryType": "Text",
-						"Text": "Every living creature, "
-					},
-					{
-						"EntryType": "WaitToRead"
-					},
-					{
-						"EntryType": "Text",
-						"Text": "or undead, "
-					},
-					{
-						"EntryType": "WaitToRead"
-					},
-					{
-						"EntryType": "Speaker",
-						"SpeakerName": "MtFr",
-						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Neutral.png"
-					},
-					{
-						"EntryType": "Text",
-						"Text": "or robot"
-					},
-					{
-						"EntryType":"Text",
-						"Text": "... ",
-						"LetterDelay": 0.2
-					},
-					{
-						"EntryType": "Speaker",
-						"SpeakerName": "MtFr",
-						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_EyesClosed.png"
-					},
-					{
-						"EntryType": "WaitToRead"
-					},
-					{
-						"EntryType":"BackTrack",
-						"Text": " living creature, or undead, or robot... ",
-						"LetterDelay": 0.001
-					},
-					{
-						"EntryType": "Speaker",
-						"SpeakerName": "MtFr",
-						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Happy.png"
-					},
-					{
-						"EntryType": "Text",
-						"Text": "thing that moves on it's own "
-					},
-					{
-						"EntryType": "WaitToRead"
-					},
-					{
-						"EntryType": "Text",
-						"Text": "is called @Color:Red@Actor@Clear@."
-					},
-					{
-						"EntryType": "WaitToRead"
-					},
-					{
-						"EntryType": "Speaker",
-						"SpeakerName": "MtFr",
-						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Happy.png"
-					},
-					{
-						"EntryType": "Text",
-						"Text": "To interact with the @Color:Blue@PAGE@Clear@ System, ",
-						"NewLine": true
-					},
-					{
-						"EntryType": "WaitToRead"
-					},
-					{
-						"EntryType": "Text",
-						"Text": "meaning to interact with anything in @Color:Red@The World@Clear@, "
-					},
-					{
-						"EntryType": "WaitToRead"
-					},
-					{
-						"EntryType": "Text",
-						"Text": "an @Color:Red@Actor@Clear@ has to have a @Color:Blue@PageBook@Clear@."
-					},
-					{
-						"EntryType": "WaitToRead"
-					}
-				]
-			},
-			{
-				"BlockType": "SpeechBox",
-				"WaitToFinish": true,
-				"WaitForNextButton": true,
-				"Entries": [
-					{
-						"EntryType": "Clear",
-						"ClearSpeaker": false
-					},
-					{
-						"EntryType": "Speaker",
-						"SpeakerName": "MtFr",
-						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Neutral.png"
-					},
-					{
-						"EntryType": "Text",
-						"Text": "Normally it's impolite to whip it out in public, ",
-						"NewLine": true
-					},
-					{
-						"EntryType": "WaitToRead"
-					},
-					{
-						"EntryType": "Speaker",
-						"SpeakerName": "MtFr",
-						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Happy.png"
-					},
-					{
-						"EntryType": "Text",
-						"Text": "but we're all professionals here, ",
-						"NewLine": true
-					},
-					{
-						"EntryType": "WaitToRead"
-					},
-					{
-						"EntryType": "Text",
-						"Text": "so let's peek at your @Color:Blue@PageBook@Clear@.",
-						"NewLine": true
-					},
-					{
-						"EntryType": "WaitToRead"
-					}
-				]
-			},
-			{
-				"BlockType": "SpeechBox",
-				"WaitToFinish": true,
-				"WaitForNextButton": false,
-				"Hide": true,
-				"Entries": [
-					{
-						"EntryType": "Clear",
-						"ClearSpeaker": false
-					}
-				]
 			}
 		]
 	},
-	
-	"PageBookTutorial": {
-		"_NextPartKey": "PageSystemTutorial",
+	"StartTutorial": {
+		"_NextPartKey": "Tutorial_Walk",
 		"WaitForNextButton": false,
 		"Inital_BlackOutState": "Clear",
 		"EnsurePoses": {
 			"_Camera":"P1",
 			"Player1":"P1",
-			"MysteriousFigure":"MF_I_5"
+			"MysteriousFigure":"MF5"
 		},
 		"Blocks":[
-            {
-				"BlockType":"CustomBlock",
-				"ScriptPath": "res://Scenes/Dialog/CustomDialogBlocks/CampTutorialBlocks.gd",
-				"OpenMenu": "Pages"
-            },
-			{
-				"BlockType":"Delay",
-				"Time":1
-			},
 			{
 				"BlockType": "SpeechBox",
 				"WaitToFinish": true,
@@ -1803,438 +1515,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "As the name implies, "
-					},
-					{
-						"EntryType": "WaitToRead"
-					},
-					{
-						"EntryType": "Text",
-						"Text": "a @Color:Blue@PageBook@Clear@ is a book of @Color:Blue@Pages@Clear@."
-					},
-					{
-						"EntryType": "WaitToRead"
-					},
-					{
-						"EntryType": "Text",
-						"Text": "But the text wouldn't be in color if these were just normal pages. ",
-						"NewLine": true
-					},
-					{
-						"EntryType": "WaitToRead"
-					},
-					{
-						"EntryType": "Text",
-						"Text": "These @Color:Blue@Pages@Clear@ define who you are and what you do."
-					},
-					{
-						"EntryType": "WaitToRead"
-					}
-				]
-			},
-			{
-				"BlockType": "_SpeechBox",
-				"WaitToFinish": true,
-				"WaitForNextButton": true,
-				"Entries": [
-					{
-						"EntryType": "Clear",
-						"ClearSpeaker": false
-					},
-					{
-						"EntryType": "Speaker",
-						"SpeakerName": "MtFr",
-						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Happy.png"
-					},
-					{
-						"EntryType": "Text",
-						"Text": "Your @Color:Blue@Pages@Clear@ aren't bound to your @Color:Blue@PageBook@Clear@."
-					},
-					{
-						"EntryType": "WaitToRead"
-					},
-					{
-						"EntryType": "Text",
-						"Text": "The @Color:Blue@PageBook@Clear@ just provides @Color:Blue@Slots@Clear@ to hold your @Color:Blue@Pages@Clear@.",
-						"NewLine": true
-					},
-					{
-						"EntryType": "WaitToRead"
-					},
-					{
-						"EntryType": "Text",
-						"Text": "The number and types of @Color:Blue@Slots@Clear@ depends on the @Color:Blue@PageBook@Clear@, ",
-						"NewLine": true
-					},
-					{
-						"EntryType": "WaitToRead"
-					},
-					{
-						"EntryType": "Text",
-						"Text": "but which @Color:Blue@Pages@Clear@ you equip is up to you."
-					},
-					{
-						"EntryType": "WaitToRead"
-					}
-				]
-			},
-			{
-				"BlockType": "SpeechBox",
-				"WaitToFinish": true,
-				"WaitForNextButton": false,
-				"Entries": [
-					{
-						"EntryType": "Clear",
-						"ClearSpeaker": false
-					},
-					{
-						"EntryType": "Speaker",
-						"SpeakerName": "MtFr",
-						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Happy.png"
-					},
-					{
-						"EntryType": "Text",
-						"Text": "The first @Color:Blue@Page@Clear@ of every @Color:Blue@PageBook@Clear@ is the @Color:Blue@Title Page@Clear@."
-					},
-					{
-						"EntryType": "WaitToRead"
-					},
-					{
-						"EntryType": "Text",
-						"Text": "Let's take a look at yours by clicking on the picture.",
-						"NewLine": true
-					},
-					{
-						"EntryType": "WaitToRead"
-					}
-				]
-			},
-			{
-				"BlockType": "PopUp",
-				"PopUpType": "Highlight",
-				"WaitToFinish": true,
-				"Create": "ClassPagesPopUp",
-				"TargetElement": "MoveableCamera2D/CanvasLayer/CharacterMenuControl/ScaleControl/PagesPage/VBoxContainer/TitleContainer/PageSlotButton",
-				"PopupControlSript": "res://Scenes/Dialog/PopUps/OutlinePopUp/outline_pop_up_control.tscn",
-				"DarkenScreen": true,
-				"Padding":[-8,8,-8,8],
-                "LineType":"Dotted",
-                "WaitToBeClicked": true,
-                "ShowClick": true,
-                "Color": [1,0,0,1]
-			},
-			{
-				"BlockType": "SpeechBox",
-				"WaitToFinish": true,
-				"WaitForNextButton": false,
-				"Hide": true,
-				"Entries": [
-					{
-						"EntryType": "Clear",
-						"ClearSpeaker": false
-					}
-				]
-			},
-            {
-				"BlockType":"CustomBlock",
-				"ScriptPath": "res://Scenes/Dialog/CustomDialogBlocks/CampTutorialBlocks.gd",
-                "OpenItem": "SoldierTitle_PageItem"
-            },
-			{
-				"BlockType": "PopUp",
-				"PopUpType": "Highlight",
-				"WaitToFinish": true,
-				"Delete": "ClassPagesPopUp"
-			},
-			{
-				"BlockType": "SpeechBox",
-				"WaitToFinish": true,
-				"WaitForNextButton": true,
-				"TopBox": true,
-				"Entries": [
-					{
-						"EntryType": "Speaker",
-						"SpeakerName": "MtFr",
-						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Happy.png"
-					},
-					{
-						"EntryType": "Text",
-						"Text": "Your @Color:Blue@Title Page@Clear@ defines your @Color:Blue@Title@Clear@."
-					},
-					{
-						"EntryType": "Text",
-						"Text": "This is what makes you a @Color:Red@Soldier@Clear@",
-						"NewLine": true
-					},
-					{
-						"EntryType": "WaitToRead"
-					},
-					{
-						"EntryType": "Speaker",
-						"SpeakerName": "MtFr",
-						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Surprize.png"
-					},
-					{
-						"EntryType": "Text",
-						"Text": "and me a @Color:Red@Min-",
-						"NewLine": true,
-						"CompoundLine": true
-					},
-					{
-						"EntryType": "WaitToRead"
-					},
-					{
-						"EntryType": "Delay",
-						"Delay": 0.5
-					},
-					{
-						"EntryType": "BackTrack",
-						"Text": "Min-",
-						"LetterDelay": 0.001,
-						"Color": "Red"
-					},
-					{
-						"EntryType": "Speaker",
-						"SpeakerName": "MtFr",
-						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Happy.png"
-					},
-					{
-						"EntryType": "Text",
-						"Text": "@Color:Red@Mysterious Figure@Color:Clear@."
-					}
-				]
-			},
-            {
-				"BlockType":"CustomBlock",
-				"ScriptPath": "res://Scenes/Dialog/CustomDialogBlocks/CampTutorialBlocks.gd",
-                "CloseMenu": "ItemDetails"
-            },
-			{
-				"BlockType": "SpeechBox",
-				"WaitToFinish": true,
-				"WaitForNextButton": false,
-				"TopBox": true,
-				"Hide": true,
-				"Entries": [
-					{
-						"EntryType": "Clear"
-					}
-				]
-			},
-			{
-				"BlockType": "SpeechBox",
-				"WaitToFinish": true,
-				"WaitForNextButton": true,
-				"Entries": [
-					{
-						"EntryType": "Speaker",
-						"SpeakerName": "MtFr",
-						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Happy.png"
-					},
-					{
-						"EntryType": "Text",
-						"Text": "Every @Color:Blue@PageBook@Clear@ has one @Color:Blue@Slot@Clear@ for a @Color:Blue@Title Page@Clear@. ",
-						"NewLine": true
-					},
-					{
-						"EntryType": "WaitToRead"
-					},
-					{
-						"EntryType": "Text",
-						"Text": "But the rest of the @Color:Blue@Slots@Clear@ change with the @Color:Blue@PageBook@Clear@.",
-						"NewLine": true
-					},
-					{
-						"EntryType": "WaitToRead"
-					},
-					{
-						"EntryType": "Text",
-						"Text": "There are generally two types of @Color:Blue@Page Slots@Clear@.",
-						"NewLine": true
-					},
-					{
-						"EntryType": "WaitToRead"
-					}
-				]
-			},
-			{
-				"BlockType": "PopUp",
-				"PopUpType": "Highlight",
-				"WaitToFinish": true,
-				"Delete": "AllPagesPopUp",
-				"Create": "PassivePagesPopUp",
-				"TargetElement": "MoveableCamera2D/CanvasLayer/CharacterMenuControl/ScaleControl/PagesPage/VBoxContainer/VBoxContainer/PageSlotSetContainer/FlowContainer/PageSlotButton1",
-				"PopupControlSript": "res://Scenes/Dialog/PopUps/OutlinePopUp/outline_pop_up_control.tscn",
-				"DarkenScreen": false,
-				"Padding":[-8,8,-8,8],
-                "LineType":"Solid",
-                "WaitToBeClicked": false,
-                "ShowClick": false,
-                "Color": [1,1,1,1]
-			},
-			{
-				"BlockType": "SpeechBox",
-				"WaitToFinish": true,
-				"WaitForNextButton": true,
-				"Entries": [
-					{
-						"EntryType": "Clear",
-						"ClearSpeaker": false
-					},
-					{
-						"EntryType": "Speaker",
-						"SpeakerName": "MtFr",
-						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Happy.png"
-					},
-					{
-						"EntryType": "Text",
-						"Text": "@Color:Blue@Passive Page@Clear@ go in the @Color:Blue@Slots@Clear@ with a notch in the corner.",
-						"NewLine": true
-					},
-					{
-						"EntryType": "WaitToRead"
-					},
-					{
-						"EntryType": "Text",
-						"Text": "They provide passive @Color:Red@Effects@Clear@ so long as they are in your @Color:Blue@PageBook@Clear@.",
-						"NewLine": true
-					}
-				]
-			},
-			{
-				"BlockType": "PopUp",
-				"PopUpType": "Highlight",
-				"WaitToFinish": true,
-				"Delete": "PassivePagesPopUp",
-				"Create": "ActionPagesPopUp",
-				"TargetElement": "MoveableCamera2D/CanvasLayer/CharacterMenuControl/ScaleControl/PagesPage/VBoxContainer/VBoxContainer/PageSlotSetContainer/FlowContainer/PageSlotButton2",
-				"PopupControlSript": "res://Scenes/Dialog/PopUps/OutlinePopUp/outline_pop_up_control.tscn",
-				"DarkenScreen": false,
-				"Padding":[-8,8,-8,8],
-                "LineType":"Solid",
-                "WaitToBeClicked": false,
-                "ShowClick": false,
-                "Color": [1,1,1,1]
-			},
-			{
-				"BlockType": "SpeechBox",
-				"WaitToFinish": true,
-				"WaitForNextButton": true,
-				"Entries": [
-					{
-						"EntryType": "Clear",
-						"ClearSpeaker": false
-					},
-					{
-						"EntryType": "Speaker",
-						"SpeakerName": "MtFr",
-						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Happy.png"
-					},
-					{
-						"EntryType": "Text",
-						"Text": "The square @Color:Blue@Slots@Clear@ are for @Color:Blue@Action Pages@Clear@.",
-						"NewLine": true
-					},
-					{
-						"EntryType": "WaitToRead"
-					},
-					{
-						"EntryType": "Text",
-						"Text": "They are the @Color:Red@Actions@Clear@ you can take in @Color:Red@Combat@Clear@.",
-						"NewLine": true
-					}
-				]
-			},
-			{
-				"BlockType": "SpeechBox",
-				"WaitToFinish": true,
-				"WaitForNextButton": true,
-				"Entries": [
-					{
-						"EntryType": "Clear",
-						"ClearSpeaker": false
-					},
-					{
-						"EntryType": "Speaker",
-						"SpeakerName": "MtFr",
-						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Neutral.png"
-					},
-					{
-						"EntryType": "Text",
-						"Text": "You see, ",
-						"NewLine": false
-					},
-					{
-						"EntryType": "WaitToRead"
-					},
-					{
-						"EntryType": "Text",
-						"Text": "when one @Color:Red@Actor@Clear@ becomes hostile towards another, ",
-						"NewLine": false
-					},
-					{
-						"EntryType": "WaitToRead"
-					},
-					{
-						"EntryType": "Text",
-						"Text": "the @Color:Blue@PAGE@Clear@ System activates @Color:Red@Combat@Clear@, ",
-						"NewLine": true
-					},
-					{
-						"EntryType": "WaitToRead"
-					},
-					{
-						"EntryType": "Text",
-						"Text": "and things becomes a lot more restrictive.",
-						"NewLine": false
-					},
-					{
-						"EntryType": "WaitToRead"
-					}
-				]
-			},
-			{
-				"BlockType": "SpeechBox",
-				"WaitToFinish": true,
-				"WaitForNextButton": true,
-				"Entries": [
-					{
-						"EntryType": "Clear",
-						"ClearSpeaker": false
-					},
-					{
-						"EntryType": "Speaker",
-						"SpeakerName": "MtFr",
-						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Neutral.png"
-					},
-					{
-						"EntryType": "Text",
-						"Text": "During @Color:Red@Combat@Clear@, ",
-						"NewLine": true
-					},
-					{
-						"EntryType": "WaitToRead"
-					},
-					{
-						"EntryType": "Text",
-						"Text": "time passes in cycles called @Color:Red@Rounds@Clear@.",
-						"NewLine": false
-					},
-					{
-						"EntryType": "WaitToRead"
-					},
-					{
-						"EntryType": "Text",
-						"Text": "All @Color:Red@Actors@Clear@ in the area are forced to move in @Color:Red@Turns@Clear@, ",
-						"NewLine": true
-					},
-					{
-						"EntryType": "WaitToRead"
-					},
-					{
-						"EntryType": "Text",
-						"Text": "and can only preform @Color:Red@Actions@Clear@ by using @Color:Blue@Action Pages@Clear@.",
-						"NewLine": true
+						"Text": "I'll start with the basics then."
 					},
 					{
 						"EntryType": "WaitToRead"
@@ -2244,6 +1525,96 @@
 			{
 				"BlockType": "SpeechBox",
 				"TopBox": false,
+				"Hide": true,
+				"Entries": [
+					{
+						"EntryType": "Clear"
+					}
+				]
+			},
+			{
+				"BlockType": "SpeechBox",
+				"TopBox": true,
+				"WaitToFinish": true,
+				"WaitForNextButton": true,
+				"Entries": [
+					{
+						"EntryType": "Clear",
+						"ClearSpeaker": false
+					},
+					{
+						"EntryType": "Speaker",
+						"SpeakerName": "MtFr",
+						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Happy.png"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "Imagine you're looking down on the world through a magical window called \"the screen\"."
+					},
+					{
+						"EntryType": "WaitToRead"
+					}
+				]
+			},
+			{
+				"BlockType": "SpeechBox",
+				"TopBox": true,
+				"WaitToFinish": true,
+				"WaitForNextButton": true,
+				"Entries": [
+					{
+						"EntryType": "Clear",
+						"ClearSpeaker": false
+					},
+					{
+						"EntryType": "Text",
+						"Text": "At the bottom of \"the screen\" you will see your Pages."
+					},
+					{
+						"EntryType": "WaitToRead"
+					}
+				]
+			},
+			{
+				"BlockType": "PopUp",
+				"PopUpType": "Highlight",
+				"WaitToFinish": false,
+				"Create": "PopUp1",
+				"TargetElement": "MoveableCamera2D/CanvasLayer/CombatUiControl/QueInputControl/BackPatchContainer",
+				"PopupControlSript": "res://Scenes/Dialog/PopUps/OutlinePopUp/outline_pop_up_control.tscn",
+				"DarkenScreen": true
+			},
+			{
+				"BlockType": "SpeechBox",
+				"TopBox": true,
+				"WaitToFinish": true,
+				"WaitForNextButton": true,
+				"Entries": [
+					{
+						"EntryType": "Clear",
+						"ClearSpeaker": false
+					},
+					{
+						"EntryType": "Text",
+						"Text": "These are your Action Pages."
+					},
+					{
+						"EntryType": "Delay",
+						"Delay": 0.3
+					},
+					{
+						"EntryType": "Text",
+						"Text": "They represent all the actions you can preform while the Page System is active.",
+						"NewLine": true
+					},
+					{
+						"EntryType": "WaitToRead"
+					}
+				]
+			},
+			{
+				"BlockType": "SpeechBox",
+				"TopBox": true,
 				"WaitToFinish": true,
 				"WaitForNextButton": true,
 				"Entries": [
@@ -2295,7 +1666,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "shapeshift, summon minions, levy taxes, teleport, oh wait I said that one, buff allies, cull the weak, consume souls, take drugs, make it rain, turn back time, smell what the rock is cooking, contemplate life, kill god, be sexy, do kung fu fighting, call some lightning, punch ghost, dig a hole, throw bombs, play with fire, commune with spirits, create earthquakes, analyze enemies, brew potions, heal the sick, raise the dead, command beast, sing, dance, ",
+						"Text": "shapeshift, summon minions, levy taxes, teleport, oh wait I said that one, buff allies, cull the weak, consume souls, take drugs, make it rain, turn back time, smell what the rock is cooking, contemplate life, kill god, be sexy, do kung fu fighting, call some lightning, punch ghost, dig a hole, throw bombs, play with fire, commune with spirits, create earthquakes, analyze foes, brew potions, heal the sick, raise the dead, command beast, sing, dance, ",
 						"LetterDelay": 0.001
 					},
 					{
@@ -2314,8 +1685,27 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "you have to have a @Color:Blue@Action Pages@Clear@ to do it.",
+						"Text": "you have to have a Page to do it.",
 						"NewLine": false
+					},
+					{
+						"EntryType": "WaitToRead"
+					}
+				]
+			},
+			{
+				"BlockType": "SpeechBox",
+				"TopBox": true,
+				"WaitToFinish": true,
+				"WaitForNextButton": true,
+				"Entries": [
+					{
+						"EntryType": "Clear",
+						"ClearSpeaker": false
+					},
+					{
+						"EntryType": "Text",
+						"Text": "But, how do you uses these Pages?"
 					},
 					{
 						"EntryType": "WaitToRead"
@@ -2325,11 +1715,68 @@
 			{
 				"BlockType": "PopUp",
 				"PopUpType": "Highlight",
-				"WaitToFinish": true,
-				"Delete": "ActionPagesPopUp"
+				"WaitToFinish": false,
+				"Delete": "PopUp1",
+				"Create": "PopUp2",
+				"TargetElement": "MoveableCamera2D/CanvasLayer/CombatUiControl/QueDisplayControl",
+				"PopupControlSript": "res://Scenes/Dialog/PopUps/OutlinePopUp/outline_pop_up_control.tscn",
+				"DarkenScreen": true
 			},
 			{
 				"BlockType": "SpeechBox",
+				"TopBox": true,
+				"WaitToFinish": true,
+				"WaitForNextButton": true,
+				"Entries": [
+					{
+						"EntryType": "Clear",
+						"ClearSpeaker": false
+					},
+					{
+						"EntryType": "Text",
+						"Text": "You put them here in your PageQue."
+					},
+					{
+						"EntryType": "Delay",
+						"Delay": 0.3
+					},
+					{
+						"EntryType": "Text",
+						"Text": "Before each Round, umm",
+						"NewLine":true
+					},
+					{
+						"EntryType": "Speaker",
+						"SpeakerName": "MtFr",
+						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Squint.png"
+					},
+					{
+						"EntryType":"Text",
+						"Text": "... ",
+						"LetterDelay": 0.3
+					},
+					{
+						"EntryType": "Text",
+						"Text": "hold on, I think I have some flash cards for this"
+					},
+					{
+						"EntryType":"Text",
+						"Text": "... ",
+						"LetterDelay": 0.1
+					},
+					{
+						"EntryType": "WaitToRead"
+					}
+				]
+			},
+			{
+				"BlockType": "PopUp",
+				"WaitToFinish": false,
+				"Delete": "PopUp2"
+			},
+			{
+				"BlockType": "SpeechBox",
+				"TopBox": true,
 				"WaitToFinish": true,
 				"WaitForNextButton": true,
 				"Entries": [
@@ -2344,22 +1791,18 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "You'll find new @Color:Blue@Pages@Clear@ and @Color:Blue@PageBooks@Clear@ as we travel,",
-						"NewLine": true
+						"Text": "Yep, here they are!"
 					},
 					{
 						"EntryType": "WaitToRead"
-					},
-					{
-						"EntryType": "Text",
-						"Text": "but for now let's try out the ones you have.",
-						"NewLine": true
 					}
 				]
 			},
 			{
 				"BlockType": "SpeechBox",
-				"TopBox": false,
+				"TopBox": true,
+				"WaitToFinish": false,
+				"WaitForNextButton": false,
 				"Hide": true,
 				"Entries": [
 					{
@@ -2368,159 +1811,12 @@
 				]
 			},
 			{
-				"BlockType":"Delay",
-				"Time": 0.5
-			},
-			{
-				"BlockType": "SpeechBox",
-				"WaitToFinish": true,
-				"WaitForNextButton": false,
-				"Entries": [
-					{
-						"EntryType": "Clear",
-						"ClearSpeaker": false
-					},
-					{
-						"EntryType": "Speaker",
-						"SpeakerName": "MtFr",
-						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Surprize.png"
-					},
-					{
-						"EntryType": "Text",
-						"Text": "Oh ya, "
-					},
-					{
-						"EntryType": "WaitToRead"
-					},
-					{
-						"EntryType": "Delay",
-						"Delay": 0.1
-					}
-				]
-			},
-			{
 				"BlockType": "PopUp",
-				"PopUpType": "Highlight",
 				"WaitToFinish": true,
-				"Create": "EquipmentTabPopUp",
-				"TargetElement": "MoveableCamera2D/CanvasLayer/CharacterMenuControl/ScaleControl/TabsControl/EquipmentTabButton",
-				"PopupControlSript": "res://Scenes/Dialog/PopUps/OutlinePopUp/outline_pop_up_control.tscn",
-				"DarkenScreen": false,
-				"Padding":[-8,8,-8,8],
-                "LineType":"Solid",
-                "WaitToBeClicked": false,
-                "ShowClick": false,
-                "Color": [1,1,1,1]
+				"Create": "TutorialCards_1",
+				"PopUpType":"TutorialCard",
+				"Cards": ["Page Que"]
 			},
-			{
-				"BlockType": "PopUp",
-				"PopUpType": "Highlight",
-				"WaitToFinish": true,
-				"Create": "BagTabPopUp",
-				"TargetElement": "MoveableCamera2D/CanvasLayer/CharacterMenuControl/ScaleControl/TabsControl/BagTabButton2",
-				"PopupControlSript": "res://Scenes/Dialog/PopUps/OutlinePopUp/outline_pop_up_control.tscn",
-				"DarkenScreen": false,
-				"Padding":[-8,8,-8,8],
-                "LineType":"Solid",
-                "WaitToBeClicked": false,
-                "ShowClick": false,
-                "Color": [1,1,1,1]
-			},
-			{
-				"BlockType": "SpeechBox",
-				"WaitToFinish": true,
-				"WaitForNextButton": true,
-				"Entries": [
-					{
-						"EntryType": "Speaker",
-						"SpeakerName": "MtFr",
-						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Happy.png"
-					},
-					{
-						"EntryType": "Text",
-						"Text": "your @Color:Blue@PageBooks@Clear@ also manages your @Color:Red@Equipment@Clear@,",
-						"NewLine": false
-					},
-					{
-						"EntryType": "WaitToRead"
-					},
-					{
-						"EntryType": "Text",
-						"Text": "Like your @Color:Red@Weapons@Clear@, @Color:Red@Shield@Clear@, @Color:Red@Armor@Clear@, and @Color:Red@Backpack@Clear@.",
-						"NewLine": true
-					},
-					{
-						"EntryType": "WaitToRead"
-					},
-					{
-						"EntryType": "Text",
-						"Text": "But I'm assuming you know how to put on clothes.",
-						"NewLine": true
-					},
-					{
-						"EntryType": "WaitToRead"
-					}
-				]
-			},
-			{
-				"BlockType": "PopUp",
-				"PopUpType": "Highlight",
-				"WaitToFinish": true,
-				"Delete": "EquipmentTabPopUp"
-			},
-			{
-				"BlockType": "PopUp",
-				"PopUpType": "Highlight",
-				"WaitToFinish": true,
-				"Delete": "BagTabPopUp"
-			},
-			{
-				"BlockType": "SpeechBox",
-				"WaitToFinish": true,
-				"WaitForNextButton": true,
-				"Entries": [
-					{
-						"EntryType": "Speaker",
-						"SpeakerName": "MtFr",
-						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Happy.png"
-					},
-					{
-						"EntryType": "Clear",
-						"ClearSpeaker": false
-					},
-					{
-						"EntryType": "Speaker",
-						"SpeakerName": "MtFr",
-						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Happy.png"
-					},
-					{
-						"EntryType": "Text",
-						"Text": "You can take a closer look at your @Color:Blue@Pages@Clear@ in private after we set up @Color:Red@Camp@Clear@.",
-						"NewLine": true
-					},
-					{
-						"EntryType": "WaitToRead"
-					}
-				]
-			},
-			
-            {
-				"BlockType":"CustomBlock",
-				"ScriptPath": "res://Scenes/Dialog/CustomDialogBlocks/CampTutorialBlocks.gd",
-				"CloseMenu": "Equipment"
-            }
-		]
-	},
-	"PageSystemTutorial": {
-		"_NextPartKey": "Tutorial_Walk",
-		"WaitForNextButton": false,
-		"Inital_BlackOutState": "Clear",
-		"EnsurePoses": {
-			"_Camera":"P1",
-			"Player1":"P1",
-			"MysteriousFigure":"MF_I_5"
-		},
-		"Blocks":[
 			{
 				"BlockType": "SpeechBox",
 				"TopBox": false,
@@ -2529,13 +1825,16 @@
 				"Hide": false,
 				"Entries": [
 					{
+						"EntryType": "Clear"
+					},
+					{
 						"EntryType": "Speaker",
 						"SpeakerName": "MtFr",
 						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Happy.png"
 					},
 					{
 						"EntryType": "Text",
-						"Text": "For now, let's have a practical demonstration?",
+						"Text": "Now how about a practical demonstration?",
 						"NewLine": true
 					},
 					{
@@ -2576,11 +1875,24 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "See those @Color:Red@Mushrooms@Clear@ over there?",
+						"Text": "See that mushroom over there?",
 						"NewLine": true
 					},
 					{
 						"EntryType": "WaitToRead"
+					}
+				]
+			},
+			{
+				"BlockType": "SpeechBox",
+				"TopBox": false,
+				"WaitToFinish": true,
+				"WaitForNextButton": true,
+				"Hide": false,
+				"Entries": [
+					{
+						"EntryType": "Clear",
+						"ClearSpeaker": false
 					},
 					{
 						"EntryType": "Speaker",
@@ -2589,19 +1901,23 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "@Color:Red@Fungus@Clear@ are really closer to animals than plants, ",
+						"Text": "Let's use it for a little target practice.",
 						"NewLine": true
 					},
 					{
 						"EntryType": "WaitToRead"
-					},
+					}
+				]
+			},
+			{
+				"BlockType": "SpeechBox",
+				"TopBox": false,
+				"WaitToFinish": false,
+				"WaitForNextButton": false,
+				"Hide": true,
+				"Entries": [
 					{
-						"EntryType": "Text",
-						"Text": "so we can treat them like @Color:Red@Enemy Actors@Clear@.",
-						"NewLine": true
-					},
-					{
-						"EntryType": "WaitToRead"
+						"EntryType": "Clear"
 					}
 				]
 			},
@@ -2638,345 +1954,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "Just close your eyes and think hostile thoughts towards the @Color:Red@Mushrooms@Clear@.",
-						"NewLine": true
-					},
-					{
-						"EntryType": "WaitToRead"
-					}
-				]
-			},
-			{
-				"BlockType": "SpeechBox",
-				"TopBox": false,
-				"WaitToFinish": true,
-				"WaitForNextButton": false,
-				"Hide": true,
-				"Entries": [
-					{
-						"EntryType": "Clear",
-						"ClearSpeaker": false
-					}
-				]
-			},
-            {
-                "BlockType":"StartCombat"
-            },
-            {
-                "BlockType":"Delay",
-				"Time": 2.5
-            },
-			{
-				"BlockType": "SpeechBox",
-				"TopBox": false,
-				"WaitToFinish": true,
-				"WaitForNextButton": true,
-				"Hide": false,
-				"Entries": [
-					{
-						"EntryType": "Clear",
-						"ClearSpeaker": false
-					},
-					{
-						"EntryType": "Speaker",
-						"SpeakerName": "MtFr",
-						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Smile.png"
-					},
-					{
-						"EntryType": "Text",
-						"Text": "Ta-da! ",
-						"NewLine": true
-					},
-					{
-						"EntryType": "WaitToRead"
-					},
-					{
-						"EntryType": "Speaker",
-						"SpeakerName": "MtFr",
-						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Happy.png"
-					},
-					{
-						"EntryType": "Text",
-						"Text": "We've entered @Color:Red@Combat@Clear@ with the @Color:Red@Mushrooms@Clear@.",
-						"NewLine": false
-					},
-					{
-						"EntryType": "WaitToRead"
-					}
-				]
-			},
-			{
-				"BlockType": "SpeechBox",
-				"TopBox": false,
-				"WaitToFinish": true,
-				"WaitForNextButton": true,
-				"Hide": false,
-				"Entries": [
-					{
-						"EntryType": "Clear",
-						"ClearSpeaker": false
-					},
-					{
-						"EntryType": "Text",
-						"Text": "Now, ",
-						"NewLine": true
-					},
-					{
-						"EntryType": "WaitToRead"
-					},
-					{
-						"EntryType": "Text",
-						"Text": "imagine you're looking down at yourself through a magical window called @Color:Red@The Screen@Clear@.",
-						"NewLine": false
-					},
-					{
-						"EntryType": "WaitToRead"
-					}
-				]
-			},
-			{
-				"BlockType": "SpeechBox",
-				"TopBox": false,
-				"WaitToFinish": false,
-				"WaitForNextButton": false,
-				"Hide": true,
-				"Entries": [
-					{
-						"EntryType": "Clear"
-					}
-				]
-			},
-			{
-				"BlockType": "SpeechBox",
-				"TopBox": true,
-				"WaitToFinish": true,
-				"WaitForNextButton": false,
-				"Entries": [
-					{
-						"EntryType": "Clear",
-						"ClearSpeaker": false
-					},
-					{
-						"EntryType": "Speaker",
-						"SpeakerName": "MtFr",
-						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Happy.png"
-					},
-					{
-						"EntryType": "Text",
-						"Text": "At the bottom of @Color:Red@The Screen@Clear@, "
-					},
-					{
-						"EntryType": "WaitToRead"
-					}
-				]
-			},
-			{
-				"BlockType": "PopUp",
-				"PopUpType": "Highlight",
-				"WaitToFinish": true,
-				"Create": "QueInputPopUp",
-				"TargetElement": "MoveableCamera2D/CanvasLayer/CombatUiControl/QueInputControl/VBoxContainer/BackPatchContainer2",
-				"PopupControlSript": "res://Scenes/Dialog/PopUps/OutlinePopUp/outline_pop_up_control.tscn",
-				"DarkenScreen": false,
-				"Padding":[-8,8,-8,8],
-                "LineType":"Solid",
-                "WaitToBeClicked": false,
-                "ShowClick": false,
-                "Color": [1,1,1,1]
-			},
-			{
-				"BlockType": "SpeechBox",
-				"TopBox": true,
-				"WaitToFinish": true,
-				"WaitForNextButton": true,
-				"Entries": [
-					{
-						"EntryType": "Text",
-						"Text": "you will see your @Color:Blue@Action Pages@Clear@."
-					},
-					{
-						"EntryType": "WaitToRead"
-					}
-				]
-			},
-			{
-				"BlockType": "SpeechBox",
-				"TopBox": true,
-				"WaitToFinish": true,
-				"WaitForNextButton": false,
-				"Entries": [
-					{
-						"EntryType": "Text",
-						"Text": "Above that, ",
-						"NewLine": true
-					},
-					{
-						"EntryType": "WaitToRead"
-					}
-				]
-			},
-			{
-				"BlockType": "PopUp",
-				"PopUpType": "Highlight",
-				"WaitToFinish": true,
-				"Delete": "QueInputPopUp",
-				"Create": "QueDisplayPopup",
-				"TargetElement": "MoveableCamera2D/CanvasLayer/CombatUiControl/QueInputControl/VBoxContainer/BackPatchContainer",
-				"PopupControlSript": "res://Scenes/Dialog/PopUps/OutlinePopUp/outline_pop_up_control.tscn",
-				"DarkenScreen": false,
-				"Padding":[-8,8,-8,8],
-                "LineType":"Solid",
-                "WaitToBeClicked": false,
-                "ShowClick": false,
-                "Color": [1,1,1,1]
-			},
-			{
-				"BlockType": "SpeechBox",
-				"TopBox": true,
-				"WaitToFinish": true,
-				"WaitForNextButton": true,
-				"Entries": [
-					{
-						"EntryType": "Text",
-						"Text": "is your @Color:Blue@Page Que@Clear@.",
-						"NewLine": false
-					},
-					{
-						"EntryType": "WaitToRead"
-					}
-				]
-			},
-			{
-				"BlockType": "PopUp",
-				"PopUpType": "Highlight",
-				"WaitToFinish": true,
-				"Delete": "QueDisplayPopup"
-			},
-			{
-				"BlockType": "SpeechBox",
-				"TopBox": true,
-				"WaitToFinish": true,
-				"WaitForNextButton": false,
-				"Entries": [
-					{
-						"EntryType": "Clear",
-						"ClearSpeaker": false
-					},
-					{
-						"EntryType": "Text",
-						"Text": "Before each @Color:Red@Round@Clear@, ",
-						"NewLine":true
-					},
-					{
-						"EntryType": "WaitToRead"
-					},
-					{
-						"EntryType": "Text",
-						"Text": "you will, ",
-						"NewLine":false
-					},
-					{
-						"EntryType": "WaitToRead"
-					},
-					{
-						"EntryType": "Speaker",
-						"SpeakerName": "MtFr",
-						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Squint.png"
-					},
-					{
-						"EntryType": "Text",
-						"Text": "umm",
-						"NewLine":false
-					},
-					{
-						"EntryType": "WaitToRead"
-					},
-					{
-						"EntryType":"Text",
-						"Text": "... ",
-						"LetterDelay": 0.3
-					},
-					{
-						"EntryType": "Text",
-						"Text": "hold on, I think I have some @Color:Red@Flash Cards@Clear@ for this"
-					},
-					{
-						"EntryType":"Text",
-						"Text": "... ",
-						"LetterDelay": 0.1
-					},
-					{
-						"EntryType": "WaitToRead"
-					}
-				]
-			},
-			{
-				"BlockType": "SpeechBox",
-				"TopBox": true,
-				"WaitToFinish": true,
-				"WaitForNextButton": true,
-				"Entries": [
-					{
-						"EntryType": "Speaker",
-						"SpeakerName": "MtFr",
-						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Happy.png"
-					},
-					{
-						"EntryType": "Text",
-						"Text": "Yep, ",
-						"NewLine": true
-					},
-					{
-						"EntryType": "WaitToRead"
-					},
-					{
-						"EntryType": "Text",
-						"Text": "here they are!",
-						"NewLine": true
-					},
-					{
-						"EntryType": "WaitToRead"
-					}
-				]
-			},
-			{
-				"BlockType": "SpeechBox",
-				"TopBox": true,
-				"WaitToFinish": false,
-				"WaitForNextButton": false,
-				"Hide": true,
-				"Entries": [
-					{
-						"EntryType": "Clear"
-					}
-				]
-			},
-			{
-				"BlockType": "PopUp",
-				"WaitToFinish": true,
-				"Create": "TutorialCards_1",
-				"PopUpType":"TutorialCard",
-				"Cards": ["Page Que"]
-			},
-			{
-				"BlockType": "SpeechBox",
-				"TopBox": false,
-				"WaitToFinish": true,
-				"WaitForNextButton": true,
-				"Hide": false,
-				"Entries": [
-					{
-						"EntryType": "Clear",
-						"ClearSpeaker": false
-					},
-					{
-						"EntryType": "Speaker",
-						"SpeakerName": "MtFr",
-						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Happy.png"
-					},
-					{
-						"EntryType": "Text",
-						"Text": "Try it out by using the @Color:Blue@PAGE@Clear@ System to walk over to the @Color:Red@Mushroom@Clear@.",
+						"Text": "We'll start by using the Page System to walk over to it.",
 						"NewLine": true
 					},
 					{
@@ -3002,7 +1980,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "Here's another @Color:Red@Flash Card@Clear@ about movement.",
+						"Text": "Here's another flash card about movement.",
 						"NewLine": true
 					},
 					{
@@ -3042,12 +2020,6 @@
 			"MysteriousFigure":"MF5"
 		},
 		"Blocks":[
-			{
-				"BlockType":"SetFlag",
-				"FlagName":"TutorialStage",
-				"Value": "Walk"
-
-			},
 			{
 				"BlockType": "SpeechBox",
 				"TopBox": false,
@@ -3099,12 +2071,12 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "Click the @Color:Blue@Page@Clear@ to add them to your @Color:Blue@PageQue@Clear@.",
+						"Text": "Click the Pages to add them to your PageQue.",
 						"NewLine": true
 					},
 					{
 						"EntryType": "Text",
-						"Text": "Click the @Color:Blue@PageQue@Clear@ to remove a @Color:Blue@Page@Clear@.",
+						"Text": "Click the PageQue to remove a Page.",
 						"NewLine": true
 					}
 				]
@@ -3128,17 +2100,14 @@
 
 	},
 	"Tutorial_Walk_Fail1":{
-		"_NextPartLogic": 
-		{
-			"FlagName": "TutorialStage",
-			"Cases": {
-				"Walk": "Tutorial_Walk",
-				"Attack": "Tutorial_Attack",
-				"Range": "Tutorial_Range"
-			}
-		},
+		"_NextPartKey": "Tutorial_Walk",
 		"WaitForNextButton": true,
 		"Inital_BlackOutState": "Clear",
+		"EnsurePoses": {
+			"_Camera":"P1",
+			"Player1":"P1",
+			"MysteriousFigure":"MF5"
+		},
 		"Blocks":[
 			{
 				"BlockType": "SpeechBox",
@@ -3193,23 +2162,20 @@
 		]
 	},
 	"Tutorial_Walk_Fail2":{
-		"_NextPartLogic": 
-		{
-			"FlagName": "TutorialStage",
-			"Cases": {
-				"Walk": "Tutorial_Walk",
-				"Attack": "Tutorial_Attack",
-				"Range": "Tutorial_Range"
-			}
-		},
+		"_NextPartKey": "Tutorial_Walk",
 		"WaitForNextButton": true,
 		"Inital_BlackOutState": "Clear",
+		"EnsurePoses": {
+			"_Camera":"P1",
+			"Player1":"P1",
+			"MysteriousFigure":"MF5"
+		},
 		"Blocks":[
 			{
 				"BlockType": "SpeechBox",
 				"TopBox": true,
 				"WaitToFinish": true,
-				"WaitForNextButton": false,
+				"WaitForNextButton": true,
 				"Hide": false,
 				"Entries": [
 					{
@@ -3223,20 +2189,11 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "Nope, that's not right either.",
+						"Text": "No, that's not right either.",
 						"NewLine": true
 					},
 					{
 						"EntryType":"WaitToRead"
-					},
-					{
-						"EntryType":"Text",
-						"Text": "... ",
-						"LetterDelay": 0.3
-					},
-					{
-						"EntryType":"Delay",
-						"Delay": 0.5
 					}
 				]
 			},
@@ -3261,32 +2218,8 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "I'm sure what every you're trying to do is perfectly valid. ",
+						"Text": "I'm sure what every you're trying to do is perfectly valid. But, we've got to follow the script. Just humor me for now and you can do your own thing in a couple Rounds.",
 						"NewLine": true
-					},
-					{
-						"EntryType":"WaitToRead"
-					},
-					{
-						"EntryType": "Text",
-						"Text": "But we have to get through this @Color:Red@Tutorial@Clear@.",
-						"NewLine": true
-					},
-					{
-						"EntryType":"WaitToRead"
-					},
-					{
-						"EntryType": "Text",
-						"Text": "Just humor me for now, ",
-						"NewLine": true
-					},
-					{
-						"EntryType":"WaitToRead"
-					},
-					{
-						"EntryType": "Text",
-						"Text": "then you can do your own thing.",
-						"NewLine": false
 					},
 					{
 						"EntryType":"WaitToRead"
@@ -3296,17 +2229,14 @@
 		]
 	},
 	"Tutorial_Walk_Fail3":{
-		"_NextPartLogic": 
-		{
-			"FlagName": "TutorialStage",
-			"Cases": {
-				"Walk": "Tutorial_Walk",
-				"Attack": "Tutorial_Attack",
-				"Range": "Tutorial_Range"
-			}
-		},
+		"_NextPartKey": "Tutorial_Walk",
 		"WaitForNextButton": true,
 		"Inital_BlackOutState": "Clear",
+		"EnsurePoses": {
+			"_Camera":"P1",
+			"Player1":"P1",
+			"MysteriousFigure":"MF5"
+		},
 		"Blocks":[
 			{
 				"BlockType": "SpeechBox",
@@ -3444,17 +2374,14 @@
 		]
 	},
 	"Tutorial_Walk_Fail4":{
-		"_NextPartLogic": 
-		{
-			"FlagName": "TutorialStage",
-			"Cases": {
-				"Walk": "Tutorial_Walk",
-				"Attack": "Tutorial_Attack",
-				"Range": "Tutorial_Range"
-			}
-		},
+		"_NextPartKey": "Tutorial_Walk",
 		"WaitForNextButton": true,
 		"Inital_BlackOutState": "Clear",
+		"EnsurePoses": {
+			"_Camera":"P1",
+			"Player1":"P1",
+			"MysteriousFigure":"MF5"
+		},
 		"Blocks":[
 			{
 				"BlockType": "SpeechBox",
@@ -3533,6 +2460,11 @@
 		"_NextPartKey": null,
 		"WaitForNextButton": false,
 		"Inital_BlackOutState": "Clear",
+		"EnsurePoses": {
+			"_Camera":"P1",
+			"Player1":"P1",
+			"MysteriousFigure":"MF5"
+		},
 		"Blocks":[
 			{
 				"BlockType": "SpeechBox",
@@ -3583,7 +2515,7 @@
 			{
 				"BlockType": "SpeechBox",
 				"TopBox": true,
-				"WaitToFinish": true,
+				"WaitToFinish": false,
 				"WaitForNextButton": false,
 				"Hide": false,
 				"Entries": [
@@ -3597,19 +2529,8 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "Great! ",
+						"Text": "Great! Now we'll start the round and see the amazing Page System in action!",
 						"NewLine": false
-					},
-					{
-						"EntryType":"WaitToRead"
-					},
-					{
-						"EntryType": "Text",
-						"Text": "Now press the @Color:Blue@Start@Clear@ to see the @Color:Blue@PAGE@Clear@ System in action!",
-						"NewLine": false
-					},
-					{
-						"EntryType":"WaitToRead"
 					}
 				]
 			},
@@ -3618,7 +2539,7 @@
 				"PopUpType": "Highlight",
 				"WaitToFinish": true,
 				"Create": "PlayPopUp",
-				"TargetElement": "MoveableCamera2D/CanvasLayer/CombatUiControl/QueInputControl/VBoxContainer/BackPatchContainer2/Control/SideStatButtonControl/TextureRect",
+				"TargetElement": "MoveableCamera2D/CanvasLayer/CombatUiControl/QueInputControl/BackPatchContainer/HBoxContainer/StartButton",
 				"PopupControlSript": "res://Scenes/Dialog/PopUps/OutlinePopUp/outline_pop_up_control.tscn",
 				"DarkenScreen": true,
                 "WaitToBeClicked": true,
@@ -3672,12 +2593,6 @@
 		},
 		"Blocks":[
 			{
-				"BlockType":"SetFlag",
-				"FlagName":"TutorialStage",
-				"Value": "Attack"
-
-			},
-			{
 				"BlockType": "SpeechBox",
 				"TopBox": true,
 				"WaitToFinish": true,
@@ -3694,31 +2609,17 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "Easy enough, ",
+						"Text": "Incredible, isn't it?",
 						"NewLine": false
-					},
-					{
-						"EntryType":"WaitToRead"
-					},
-					{
-						"EntryType": "Text",
-						"Text": "right?",
-						"NewLine": false
-					},
-					{
-						"EntryType":"WaitToRead"
 					},
 					{
 						"EntryType":"Delay",
-						"Delay":0.3
+						"Delay":0.5
 					},
 					{
 						"EntryType": "Text",
 						"Text": "Now for some violence.",
 						"NewLine": true
-					},
-					{
-						"EntryType":"WaitToRead"
 					}
 				]
 			},
@@ -3740,7 +2641,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "To attack the @Color:Red@Mushroom@Clear@, you'll need to move so that it's inside your @Color:Red@Target Range@Clear@. ",
+						"Text": "To attack the mushroom, you'll need to move into range.",
 						"NewLine": false
 					},
 					{
@@ -3749,8 +2650,8 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "I've got a @Color:Red@Flash Card@Clear@ for that.",
-						"NewLine": false
+						"Text": "I've got a flash card for that too.",
+						"NewLine": true
 					},
 					{
 						"EntryType":"WaitToRead"
@@ -3819,7 +2720,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "Queue up these @Color:Blue@Pages@Clear@ :",
+						"Text": "Queue up these Pages:",
 						"NewLine": false
 					},
 					{
@@ -3835,17 +2736,45 @@
 						"Image": "res://data/Actions/Movement/MoveForward.png"
 					},
 					{
+						"ConditionFlags":
+						{
+							"StartClass": "Soldier"
+						},
 						"EntryType": "IconImage",
 						"Image": "res://defs/ClassDefs/Soldier/Items/Equipment/Sprites/OldSword.png"
 					},
 					{
+						"ConditionFlags":
+						{
+							"StartClass": "Rogue"
+						},
+						"EntryType": "IconImage",
+						"Image": "res://defs/ClassDefs/Rogue/Items/Equipment/Sprites/OldDagger.png"
+					},
+					{
+						"ConditionFlags":
+						{
+							"StartClass": "Mage"
+						},
+						"EntryType": "IconImage",
+						"Image": "res://defs/ClassDefs/Mage/Items/Equipment/Sprites/OldWand.png"
+					},
+					{
+						"ConditionFlags":
+						{
+							"StartClass": "Priest"
+						},
+						"EntryType": "IconImage",
+						"Image": "res://defs/ClassDefs/Priest/Items/Equipment/Sprites/OldStaff.png"
+					},
+					{
 						"EntryType": "Text",
-						"Text": "Click the @Color:Blue@Page@Clear@ to add them to your @Color:Blue@PageQue@Clear@.",
+						"Text": "Click the Pages to add them to your PageQue.",
 						"NewLine": true
 					},
 					{
 						"EntryType": "Text",
-						"Text": "Click the @Color:Blue@PageQue@Clear@ to remove a @Color:Blue@Page@Clear@.",
+						"Text": "Click the PageQue to remove a Page.",
 						"NewLine": true
 					}
 				]
@@ -3896,7 +2825,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "Time to pick some @Color:Red@Mushrooms@Clear@!",
+						"Text": "Time to pick some mushrooms!",
 						"NewLine": false
 					}
 				]
@@ -3956,7 +2885,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "The legend of the @Color:Red@Mushroom@Clear@ Slayer is born!",
+						"Text": "The legend of the Mushroom Slayer is born!",
 						"NewLine": false
 					},
 					{
@@ -3969,7 +2898,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "Oh, and it looks like the it dropped an @Color:Red@Item@Clear@.",
+						"Text": "Oh, and it looks like the mushroom dropped an Item.",
 						"NewLine": true
 					},
 					{
@@ -3990,7 +2919,28 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "Good excuse for another @Color:Red@Flash Card@Clear@.",
+						"Text": "To pick up an Item, just move into the same spot and it will be added to your Bag, if you have room.",
+						"NewLine": false
+					},
+					{
+						"EntryType":"WaitToRead"
+					}
+				]
+			},
+			{
+				"BlockType": "SpeechBox",
+				"TopBox": false,
+				"WaitToFinish": true,
+				"WaitForNextButton": true,
+				"Hide": false,
+				"Entries": [
+					{
+						"EntryType": "Clear",
+						"ClearSpeaker": false
+					},
+					{
+						"EntryType": "Text",
+						"Text": "When the Page System deactivates, Items that are left in the area will automatically be added to your Inventory (if you're still alive). So don't worry if you miss something.",
 						"NewLine": false
 					},
 					{
@@ -4011,12 +2961,6 @@
 			"TutorShroom_1": "_DEAD_"
 		},
 		"Blocks":[
-			{
-				"BlockType":"SetFlag",
-				"FlagName":"TutorialStage",
-				"Value": "Range"
-
-			},
 			{
 				"WaitToFinish": false,
 				"WaitForNextButton": false,
@@ -4042,7 +2986,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "Now, see the @Color:Red@Mushroom@Clear@ on the Roof?",
+						"Text": "Now, see the Mushroom on the Roof?",
 						"NewLine": false
 					},
 					{
@@ -4051,15 +2995,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "You won't be able to reach it with a @Color:Red@Weapon Attack@Clear@, ",
-						"NewLine": true
-					},
-					{
-						"EntryType":"WaitToRead"
-					},
-					{
-						"EntryType": "Text",
-						"Text": "so let's learn about @Color:Red@Missiles@Clear@ by throwing a rock at it.",
+						"Text": "You won't be able to reach it with a melee attack, so let's learn about Missile Pages by throwing a rock at it.",
 						"NewLine": true
 					},
 					{
@@ -4085,7 +3021,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "A @Color:Red@Missiles@Clear@ is any projectile that is created by a @Color:Blue@Page@Clear@ . ",
+						"Text": "A \"Missile\" just means any projectile that is created by a Page. ",
 						"NewLine": false
 					},
 					{
@@ -4126,15 +3062,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "I'm replacing your @Color:Red@Basic Weapon Attack@Clear@  with a @Color:Red@Chuck-A-Rock@Clear@ Page, but I'm just letting you borrow it! ",
-						"NewLine": true
-					},
-					{
-						"EntryType":"WaitToRead"
-					},
-					{
-						"EntryType": "Text",
-						"Text": "You have to give it back.",
+						"Text": "I'm replacing your Basic Weapon Attack with a Chuck-A-Rock Page, but I'm just letting you borrow it! You have to give it back.",
 						"NewLine": true
 					},
 					{
@@ -4268,12 +3196,12 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "Click the @Color:Blue@Page@Clear@ to add them to your @Color:Blue@PageQue@Clear@.",
+						"Text": "Click the Pages to add them to your PageQue.",
 						"NewLine": true
 					},
 					{
 						"EntryType": "Text",
-						"Text": "Click the @Color:Blue@PageQue@Clear@ to remove a @Color:Blue@Page@Clear@.",
+						"Text": "Click the PageQue to remove a Page.",
 						"NewLine": true
 					}
 				]

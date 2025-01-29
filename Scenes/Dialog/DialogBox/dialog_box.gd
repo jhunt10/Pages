@@ -4,7 +4,7 @@ extends Control
 const DEFAULT_LETTER_DELAY:float = 0.01
 const DEFAULT_QUESTION_OPTION_DELAY:float = 0.3
 
-enum EntryTypes {Clear, Delay, Speaker, Text, Flag, Question, WaitToRead, BackTrack, IconImage, Hide}
+enum EntryTypes {Clear, Delay, Speaker, Text, Flag, Question, WaitToRead, BackTrack, IconImage, Hide, TextColor}
 enum STATES {Ready, Printing, Done, Question}
 
 signal finished_printing
@@ -20,6 +20,7 @@ signal question_answered(choice:String)
 
 @export var read_timer_label:Label
 @export var premade_text_label:RichTextLabel
+@export var premade_compound_label:RichTextLabel
 @export var premade_question_option:DialogQuestionOption
 @export var unknown_speaker_port:Texture2D
 
@@ -35,6 +36,7 @@ var _reader_timer:float = 0
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	premade_text_label.hide()
+	premade_compound_label.hide()
 	premade_question_option.hide()
 	_clear_speaker()
 
@@ -102,6 +104,7 @@ func _handle_entry(entry_data:Dictionary, raw_delta, remaining_delta)->bool:
 		scroll_bar.calc_bar_size()
 		scroll_bar.hide()
 		_delay_timer = -1
+		_current_text_entry = null
 		return true
 		
 	#----------------------------------
@@ -162,6 +165,18 @@ func _handle_entry(entry_data:Dictionary, raw_delta, remaining_delta)->bool:
 		return true
 	
 	#----------------------------------
+	#          Color
+	# Options:
+	# 	"Color": Array<float> | Color of text
+	#----------------------------------
+	elif entry_type == EntryTypes.TextColor:
+		var color_arr = entry_data.get("Color", [0,0,0,0])
+		var color = Color(color_arr[0],color_arr[1],color_arr[2],color_arr[3])
+		_current_text_entry.push_color(color)
+		return true
+		
+	
+	#----------------------------------
 	#          TEXT
 	# Options:
 	# 	"NewLine": Bool (false) | Start a new RTLabel for the text.
@@ -171,9 +186,10 @@ func _handle_entry(entry_data:Dictionary, raw_delta, remaining_delta)->bool:
 	elif entry_type == EntryTypes.Text:
 		var text = entry_data.get("Text", null)
 		if not text: return true
-		if not _current_text_entry or entry_data.get("NewLine", false):
-			_create_new_text_entry()
+		if not _current_text_entry or entry_data.get("NewLine", false) or entry_data.get("CompoundLine", false):
+			_create_new_text_entry(entry_data.get("CompoundLine", false))
 			entry_data['NewLine'] = false
+			entry_data['CompoundLine'] = false
 		if not entry_data.has("RemainingText"):
 			entry_data['RemainingText'] = text
 			#entry_data['EstimateReadTime'] = _estimate_read_time(text)
@@ -187,6 +203,15 @@ func _handle_entry(entry_data:Dictionary, raw_delta, remaining_delta)->bool:
 			#printerr("Remainging DElta: " + str(remaining_delta))
 			var new_char = remaining_text.substr(0,1)
 			remaining_text = remaining_text.trim_prefix(new_char)
+			if new_char == "@":
+				var next_at = remaining_text.find('@')
+				if next_at > 0:
+					var command = remaining_text.substr(0,next_at)
+					#printerr("\nSpecal Command: %s" % [command])
+					_handle_special_command(command)
+					remaining_text = remaining_text.trim_prefix(command + '@')
+					new_char = remaining_text.substr(0,1)
+					remaining_text = remaining_text.trim_prefix(new_char)
 			entry_data['RemainingText'] = remaining_text
 			_current_text_entry.append_text(new_char)
 			_update_scrolling()
@@ -215,7 +240,8 @@ func _handle_entry(entry_data:Dictionary, raw_delta, remaining_delta)->bool:
 		entry_data['RemainingText'] = remaining_text
 		var cur_text = _current_text_entry.get_parsed_text()
 		cur_text = cur_text.trim_suffix(remove_char)
-		_current_text_entry.text = cur_text
+		_current_text_entry.text = ''
+		_current_text_entry.append_text(cur_text)
 		_update_scrolling()
 		if remaining_text.length() > 0:
 			_delay_timer = entry_data.get("LetterDelay", DEFAULT_LETTER_DELAY) - remaining_delta
@@ -251,7 +277,7 @@ func _handle_entry(entry_data:Dictionary, raw_delta, remaining_delta)->bool:
 	# 	Should only be used at end of block. Othwersize it can not wait for next button.
 	#----------------------------------
 	elif entry_type == EntryTypes.WaitToRead:
-		if not _starting_read:
+		if _current_text_entry and not _starting_read:
 			#printerr("Staring Read Timer: %s | %s" % [_reader_timer, _current_text_entry.get_parsed_text()])
 			#print("Read------------------------------------------------------------------------------------------")
 			_starting_read = true
@@ -267,10 +293,26 @@ func _handle_entry(entry_data:Dictionary, raw_delta, remaining_delta)->bool:
 		_current_text_entry.add_image(image)
 	return true
 
-func _create_new_text_entry():
-	var new_text:RichTextLabel = premade_text_label.duplicate()
-	new_text.text = ''
-	entry_contaier.add_child(new_text)
+func _create_new_text_entry(compound:bool):
+	var new_text:RichTextLabel = null
+	if compound:
+		var line_container = null
+		if _current_text_entry:
+			var parent = _current_text_entry.get_parent()
+			if parent is HBoxContainer:
+				line_container = parent
+		if not line_container:
+			line_container = HBoxContainer.new() 
+			line_container.add_theme_constant_override("seperation", 0)
+			entry_contaier.add_child(line_container)
+		new_text = premade_compound_label.duplicate()
+		new_text.text = ''
+		line_container.add_child(new_text)
+	else:
+		new_text = premade_text_label.duplicate()
+		new_text.text = ''
+		entry_contaier.add_child(new_text)
+		
 	new_text.show()
 	_current_text_entry = new_text
 
@@ -290,7 +332,20 @@ func _clear_speaker():
 	speaker_container.hide()
 
 func _handle_special_command(command:String):
-	printerr("DialogCommand: %s" % [command])
+	#printerr("DialogCommand: %s" % [command])
+	if command.begins_with("Color:"):
+		var tokens = command.split(":")
+		if tokens[1] == "Red":
+			_current_text_entry.push_bold()
+			_current_text_entry.push_color(Color.RED)
+		if tokens[1] == "Blue":
+			_current_text_entry.push_bold()
+			_current_text_entry.push_color(Color.DARK_BLUE)
+		if tokens[1] == "Green":
+			_current_text_entry.push_bold()
+			_current_text_entry.push_color(Color.GREEN)
+	else:
+		_current_text_entry.pop_all()
 	return false
 
 func _update_scrolling():

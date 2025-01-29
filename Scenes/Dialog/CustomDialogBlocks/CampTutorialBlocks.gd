@@ -80,6 +80,11 @@ func handle_block(dialog_control:DialogController, block_data:Dictionary)->bool:
 			if check_id.begins_with(item_key):
 				item_id = check_id
 				break
+		if item_id == "":
+			for check_id:String in CharacterMenuControl.Instance._actor.pages.list_item_ids():
+				if check_id.begins_with(item_key):
+					item_id = check_id
+					break
 		var item = ItemLibrary.get_item(item_id, false)
 		if item:
 			CharacterMenuControl.Instance.create_details_card(item)

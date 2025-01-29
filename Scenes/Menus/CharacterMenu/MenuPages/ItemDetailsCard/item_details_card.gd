@@ -82,6 +82,10 @@ var item_id:String
 func _ready() -> void:
 	exit_button.pressed.connect(_on_exit_button)
 	offset_control.size = self.size
+	if vertical:
+		offset_point.position = Vector2(self.size.x,0)
+	else:
+		offset_point.position = Vector2(0,self.size.y)
 	#equip_button.pressed.connect(equip_button_pressed)
 	pass # Replace with function body.
 
