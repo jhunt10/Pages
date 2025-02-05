@@ -47,7 +47,6 @@ func _ready() -> void:
 		queue_free()
 		return
 	#load_map(MapController)
-	
 		#
 	ui_control.hide()
 	ui_control.ui_state_controller.set_ui_state(UiStateController.UiStates.ActionInput)

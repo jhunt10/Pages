@@ -3,6 +3,7 @@ extends Control
 
 const DEFAULT_LETTER_DELAY:float = 0.01
 const DEFAULT_QUESTION_OPTION_DELAY:float = 0.3
+const WRAP_PADDING:int = 8
 
 enum EntryTypes {Clear, Delay, Speaker, Text, Flag, Question, WaitToRead, BackTrack, IconImage, Hide, TextColor}
 enum STATES {Ready, Printing, Done, Question}
@@ -19,6 +20,7 @@ signal question_answered(choice:String)
 @export var scroll_contaier:ScrollContainer
 
 @export var read_timer_label:Label
+@export var hidden_text_edit:TextEdit
 @export var premade_text_label:RichTextLabel
 @export var premade_compound_label:RichTextLabel
 @export var premade_question_option:DialogQuestionOption
@@ -32,6 +34,9 @@ var _reader_timer:float = 0
 	#set(val):
 		#print("_reader_timer: %s" % [val])
 		#_reader_timer = val
+
+# When true, will check for word wrap on next TextEntry process 
+var _word_is_broken:bool
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -100,7 +105,10 @@ func _handle_entry(entry_data:Dictionary, raw_delta, remaining_delta)->bool:
 			for child in entry_contaier.get_children():
 				if child == premade_text_label: continue
 				if child == premade_question_option: continue
+				if child == hidden_text_edit: continue
 				child.queue_free()
+		hidden_text_edit.clear()
+		_word_is_broken = true
 		scroll_bar.calc_bar_size()
 		scroll_bar.hide()
 		_delay_timer = -1
@@ -185,24 +193,33 @@ func _handle_entry(entry_data:Dictionary, raw_delta, remaining_delta)->bool:
 	#----------------------------------
 	elif entry_type == EntryTypes.Text:
 		var text = entry_data.get("Text", null)
+		var word_break = false
 		if not text: return true
-		if not _current_text_entry or entry_data.get("NewLine", false) or entry_data.get("CompoundLine", false):
-			_create_new_text_entry(entry_data.get("CompoundLine", false))
-			entry_data['NewLine'] = false
-			entry_data['CompoundLine'] = false
 		if not entry_data.has("RemainingText"):
 			entry_data['RemainingText'] = text
-			#entry_data['EstimateReadTime'] = _estimate_read_time(text)
+			_word_is_broken = true
+		
+		# Create new entry if none exist or requested
+		if not _current_text_entry or entry_data.get("NewLine", false) or entry_data.get("CompoundLine", false):
+			var is_compound = entry_data.get("CompoundLine", false)
+			_create_new_text_entry(is_compound)
+			if not is_compound:
+				hidden_text_edit.clear()
+				_word_is_broken = true
+			entry_data['NewLine'] = false
+			entry_data['CompoundLine'] = false
+		
 		var remaining_text:String = entry_data['RemainingText']
+		# Finished with block
 		if remaining_text.length() == 0:
-			#_reader_timer += entry_data['EstimateReadTime']
 			return true
-		#_reader_timer -= delta
+		
 		var letter_delay = entry_data.get("LetterDelay", DEFAULT_LETTER_DELAY)
 		while remaining_delta >= 0 and remaining_text.length() > 0:
-			#printerr("Remainging DElta: " + str(remaining_delta))
 			var new_char = remaining_text.substr(0,1)
 			remaining_text = remaining_text.trim_prefix(new_char)
+			
+			# Chack for command
 			if new_char == "@":
 				var next_at = remaining_text.find('@')
 				if next_at > 0:
@@ -212,6 +229,32 @@ func _handle_entry(entry_data:Dictionary, raw_delta, remaining_delta)->bool:
 					remaining_text = remaining_text.trim_prefix(command + '@')
 					new_char = remaining_text.substr(0,1)
 					remaining_text = remaining_text.trim_prefix(new_char)
+			
+			# Check line wrap
+			if new_char == ' ':
+				_word_is_broken = true
+				if not hidden_text_edit.text.ends_with(' '):
+					hidden_text_edit.text += " "
+			elif _word_is_broken:
+				_word_is_broken = false
+				var tokens = remaining_text.replace(' ', ' #@#').split("#@#")
+				if tokens.size() > 0:
+					var next_word:String = new_char + tokens[0]
+					# Remove command text
+					if next_word.contains('@'):
+						var sub_tokens = next_word.split('@')
+						next_word = sub_tokens[0]
+						if sub_tokens.size() > 2:
+							next_word += sub_tokens[2]
+					hidden_text_edit.text += next_word
+					var line_length = hidden_text_edit.get_line_width(0)
+					#print("Next Word: '%s' | Line Length: %s" % [next_word, line_length])
+					if line_length > entry_contaier.size.x:
+						print("Size Limit: %s" % [(entry_contaier.size.x )])
+						_current_text_entry.append_text('\n')
+						#print("\n Clip Line: '%s' \n" % [hidden_text_edit.text.trim_suffix(next_word)])
+						hidden_text_edit.clear()
+						hidden_text_edit.text = next_word
 			entry_data['RemainingText'] = remaining_text
 			_current_text_entry.append_text(new_char)
 			_update_scrolling()
@@ -232,6 +275,8 @@ func _handle_entry(entry_data:Dictionary, raw_delta, remaining_delta)->bool:
 		if not _current_text_entry: return true
 		if not entry_data.has("RemainingText"):
 			entry_data['RemainingText'] = text
+			hidden_text_edit.text = hidden_text_edit.text.trim_suffix(text)
+			
 		var remaining_text:String = entry_data['RemainingText']
 		if remaining_text.length() == 0:
 			return true

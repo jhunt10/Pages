@@ -69,6 +69,7 @@ offset_right = -16.0
 offset_bottom = -16.0
 grow_horizontal = 2
 grow_vertical = 0
+state = 0
 
 [node name="SpeechDialogBlock_Top" parent="." instance=ExtResource("3_er26g")]
 layout_mode = 1
@@ -81,6 +82,7 @@ offset_right = -16.0
 offset_bottom = 0.0
 grow_horizontal = 2
 grow_vertical = 0
+state = 0
 
 [node name="AutoButton" type="Control" parent="." node_paths=PackedStringArray("check_box_rect", "button")]
 layout_mode = 1

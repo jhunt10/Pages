@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://bpvy87uagttpr" path="res://Scenes/UiNodes/ScollBar/scroll_bar.tscn" id="7_h5ro5"]
 [ext_resource type="Texture2D" uid="uid://bg2pfkcrb1fj1" path="res://Scenes/Dialog/Icons/OptionIcon_Filled.png" id="8_3a0dq"]
 
-[node name="DialogBox" type="Control" node_paths=PackedStringArray("speaker_container", "speaker_portrait", "speaker_label", "scroll_bar", "entry_contaier", "scroll_contaier", "read_timer_label", "premade_text_label", "premade_compound_label", "premade_question_option")]
+[node name="DialogBox" type="Control" node_paths=PackedStringArray("speaker_container", "speaker_portrait", "speaker_label", "scroll_bar", "entry_contaier", "scroll_contaier", "read_timer_label", "hidden_text_edit", "premade_text_label", "premade_compound_label", "premade_question_option")]
 custom_minimum_size = Vector2(640, 180)
 layout_mode = 3
 anchors_preset = 0
@@ -24,6 +24,7 @@ scroll_bar = NodePath("SpeechDialogBlock/ScrollBarPlaceHolder/ScrollBar")
 entry_contaier = NodePath("SpeechDialogBlock/ScrollContainer/EntriyContainer")
 scroll_contaier = NodePath("SpeechDialogBlock/ScrollContainer")
 read_timer_label = NodePath("SpeechDialogBlock/SpeakerContainer/ReadTimerLabel")
+hidden_text_edit = NodePath("SpeechDialogBlock/ScrollContainer/EntriyContainer/HiddenTextEdit")
 premade_text_label = NodePath("SpeechDialogBlock/ScrollContainer/EntriyContainer/PreMade_TextLabel")
 premade_compound_label = NodePath("SpeechDialogBlock/ScrollContainer/EntriyContainer/PreMade_CompoundTextLabel")
 premade_question_option = NodePath("SpeechDialogBlock/ScrollContainer/EntriyContainer/PreMade_QuestionOption")
@@ -50,9 +51,9 @@ anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 16.0
-offset_top = 24.0
+offset_top = 16.0
 offset_right = -16.0
-offset_bottom = -24.0
+offset_bottom = -16.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -81,6 +82,7 @@ text = "MtFg"
 horizontal_alignment = 1
 
 [node name="ReadTimerLabel" type="Label" parent="SpeechDialogBlock/SpeakerContainer"]
+visible = false
 self_modulate = Color(0, 0, 0, 1)
 layout_mode = 2
 text = "124"
@@ -102,6 +104,12 @@ vertical_scroll_mode = 3
 layout_mode = 2
 size_flags_horizontal = 3
 
+[node name="HiddenTextEdit" type="TextEdit" parent="SpeechDialogBlock/ScrollContainer/EntriyContainer"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+theme = ExtResource("4_5vyn8")
+text = "The City headquarters of The Collage and one of this"
+
 [node name="PreMade_CompoundTextLabel" type="RichTextLabel" parent="SpeechDialogBlock/ScrollContainer/EntriyContainer"]
 visible = false
 layout_mode = 2
@@ -121,8 +129,7 @@ size_flags_horizontal = 3
 theme = ExtResource("4_5vyn8")
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/normal_font_size = 32
-text = "Some test text"
+text = "The City headquarters of The Collage and one of this"
 fit_content = true
 scroll_active = false
 
