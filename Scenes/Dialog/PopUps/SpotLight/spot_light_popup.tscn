@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://cqssylhpipkl1"]
+
+[ext_resource type="Script" path="res://Scenes/Dialog/PopUps/SpotLight/spotlight_control.gd" id="1_o87fv"]
+[ext_resource type="Texture2D" uid="uid://bn0rfu7xknipg" path="res://Scenes/Dialog/PopUps/SpotLight/SpotLight_Beam.png" id="2_l206k"]
+[ext_resource type="Texture2D" uid="uid://ciuklk5v766ab" path="res://defs/Actors/NPCs/MnFg/MysteriousFigure_SpriteSheet.png" id="3_ws5ex"]
+
+[node name="SpotLightControl" type="Control" node_paths=PackedStringArray("actor_sprite")]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_left = 409.0
+offset_top = 309.0
+offset_right = 409.0
+offset_bottom = 309.0
+script = ExtResource("1_o87fv")
+actor_sprite = NodePath("ActorSprite")
+
+[node name="SpotLightBeam" type="Sprite2D" parent="."]
+show_behind_parent = true
+position = Vector2(0, -16)
+texture = ExtResource("2_l206k")
+offset = Vector2(0, -32)
+
+[node name="ActorSprite" type="Sprite2D" parent="."]
+texture = ExtResource("3_ws5ex")
+offset = Vector2(0, -16)
+hframes = 12
+vframes = 4

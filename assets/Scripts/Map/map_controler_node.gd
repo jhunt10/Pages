@@ -4,6 +4,9 @@ extends Node2D
 
 const LOGGING = false
 
+var grid_tile_map:TileMapLayer:
+	get:
+		return $GridDisplayLayer
 @export var actor_tile_map:TileMapLayer 
 @export var item_tile_map:TileMapLayer 
 @export var terrain_path_map:TerrainPathingMap

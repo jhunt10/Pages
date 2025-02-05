@@ -375,12 +375,15 @@ func _handle_block(block_data:Dictionary)->bool:
 	# Options:
 	# 	"WaitToFinish": Bool(false): Add "BlackOut" to list of block states
 	# 	"BlackOutState": [ Black | FadeIn | Clear | FadeOut ]
+	# 	 "FadeValue" Float(1): Fade limit for Blackout alpha 
 	#----------------------------------
 	if block_type == BlockTypes.Blackout:
 		var blackout_state = block_data.get("BlackOutState", null)
+		var fade_val = block_data.get("FadeValue", 1)
 		if blackout_state == null:
 			printerr("DialogController: No 'BlackOutState' provided on BlackOut block.")
 			blackout_state = "Clear"
+		blackout_control.fade_limit = fade_val
 		blackout_control.set_state_string(blackout_state)
 		if block_data.get("WaitToFinish", false):
 			if blackout_state == "FadeIn" or blackout_state == "FadeOut":

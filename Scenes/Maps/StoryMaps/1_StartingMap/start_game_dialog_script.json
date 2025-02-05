@@ -1,6 +1,6 @@
 {
 	"_MetaData_": {
-		"StartPartKey": "PageSystemTutorial"
+		"StartPartKey": "Intro_SaveTheWorld_Question"
 	},
 	"PrologSwitch": {
 		"_NextPartLogic": 
@@ -29,7 +29,7 @@
 				"Entries": [
 					{
 						"EntryType":"Text",
-						"Text": "Unable to find their allies and in fear of being branded a deserter, "
+						"Text": "Seperated from @Color:Red@The Military@Clear@ and in fear of being branded a deserter, "
 					},
 					{
 						"EntryType":"WaitToRead"
@@ -52,11 +52,8 @@
 				"WaitToFinish": false,
 				"Entries": [
 					{
-						"EntryType":"Clear"
-					},
-					{
 						"EntryType":"Text",
-						"Text": "Our Hero find themselves wondering aimlessly,"
+						"Text": "a @Color:Red@Soldier@Clear@ find themselves wandering aimlessly,"
 					}
 				]
 			},
@@ -98,7 +95,7 @@
 				"Entries": [
 					{
 						"EntryType":"Text",
-						"Text": "\nwhen they meet a Mysterious Figure."
+						"Text": "\nwhen they meet a @Color:Red@Mysterious Figure@Clear@."
 					},
 					{
 						"EntryType":"WaitToRead"
@@ -151,7 +148,23 @@
 					},
 					{
 						"EntryType":"Text",
-						"Text": "Sorry to interupt your wondering, but I've been looking for someone very special and I think you might be them."
+						"Text": "Sorry to interupt your aimless wandering, "
+					},
+					{
+						"EntryType":"WaitToRead"
+					},
+					{
+						"EntryType":"Text",
+						"Text": "but I've been looking for someone very special, ",
+						"NewLine":true
+					},
+					{
+						"EntryType":"WaitToRead"
+					},
+					{
+						"EntryType":"Text",
+						"Text": "and I've got a good feeling about you.",
+						"NewLine":true
 					},
 					{
 						"EntryType":"WaitToRead"
@@ -178,25 +191,8 @@
 					},
 					{
 						"EntryType":"Text",
-						"Text": "..... ",
+						"Text": "... ",
 						"LetterDelay": 0.3
-					},
-					{
-						"EntryType": "WaitToRead"
-					}
-				]
-			},
-			{
-				"BlockType": "SpeechBox",
-				"WaitToFinish": true,
-				"WaitForNextButton": true,
-				"Entries": [
-					{
-						"EntryType": "Clear"
-					},
-					{
-						"EntryType":"Text",
-						"Text": "The Mysterious Figure leans in a bit too close, looking you up and down."
 					},
 					{
 						"EntryType": "WaitToRead"
@@ -218,7 +214,8 @@
 				"WaitForNextButton": false,
 				"Entries": [
 					{
-						"EntryType": "Clear"
+						"EntryType": "Clear",
+						"ClearSpeaker": false
 					},
 					{
 						"EntryType": "Speaker",
@@ -227,7 +224,8 @@
 					},
 					{
 						"EntryType":"Text",
-						"Text": "Capable"
+						"Text": "Capable",
+						"NewLine": true
 					},
 					{
 						"EntryType":"Text",
@@ -266,17 +264,14 @@
 				"WaitForNextButton": false,
 				"Entries": [
 					{
-						"EntryType": "Clear",
-						"ClearSpeaker": false
-					},
-					{
 						"EntryType": "Speaker",
 						"SpeakerName": "MtFr",
 						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Squint.png"
 					},
 					{
 						"EntryType":"Text",
-						"Text": "Ambitious"
+						"Text": "Ambitious",
+						"NewLine": true
 					},
 					{
 						"EntryType":"Text",
@@ -315,17 +310,14 @@
 				"WaitForNextButton": true,
 				"Entries": [
 					{
-						"EntryType": "Clear",
-						"ClearSpeaker": false
-					},
-					{
 						"EntryType": "Speaker",
 						"SpeakerName": "MtFr",
 						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Squint.png"
 					},
 					{
 						"EntryType":"Text",
-						"Text": "and"
+						"Text": "and",
+						"NewLine": true
 					},
 					{
 						"EntryType":"Text",
@@ -400,21 +392,6 @@
 			{
 				"BlockType": "SpeechBox",
 				"WaitToFinish": true,
-				"WaitForNextButton": true,
-				"Entries": [
-					{
-						"EntryType": "Clear",
-						"ClearSpeaker": false
-					},
-					{
-						"EntryType":"Text",
-						"Text": "PAUSE"
-					}
-				]
-			},
-			{
-				"BlockType": "SpeechBox",
-				"WaitToFinish": true,
 				"WaitForNextButton": false,
 				"Entries": [
 					{
@@ -429,11 +406,31 @@
 					{
 						"EntryType":"Text",
 						"Text": "Ahem, "
-					},
-					{
-						"EntryType":"Delay",
-						"Delay": 0.5
-					},
+					}
+				]
+			},
+			{
+				"BlockType": "Blackout",
+				"BlackOutState": "FadeOut",
+				"FadeValue": 0.5,
+				"WaitToFinish": true
+			},
+			{
+				"BlockType": "Delay",
+				"Time": 0.8
+			},
+			{
+				"BlockType": "PopUp",
+				"PopUpType": "SpotLight",
+				"WaitToFinish": false,
+				"Create": "SpotLight",
+				"ActorId": "MysteriousFigure"
+			},
+			{
+				"BlockType": "SpeechBox",
+				"WaitToFinish": true,
+				"WaitForNextButton": true,
+				"Entries": [
 					{
 						"EntryType": "Speaker",
 						"SpeakerName": "MtFr",
@@ -562,7 +559,7 @@
 					},
 					{
 						"EntryType":"Text",
-						"Text": "But ever since @Color:Red@The Military@Clear@'s humiliating defeat at @Color:Red@The Fort@Clear@ six years ago, ",
+						"Text": "But ever since @Color:Red@The Military@Clear@'s humiliating defeat at @Color:Red@The Fort@Clear@ just @Color:Red@Six Years@Clear@ ago, ",
 						"NewLine":true
 					},
 					{
@@ -644,42 +641,6 @@
 					{
 						"EntryType": "Speaker",
 						"SpeakerName": "MtFr",
-						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Neutral.png"
-					},
-					{
-						"EntryType":"Text",
-						"Text": "Normally, the @Color:Red@The City@Clear@ is protected by a @Color:Red@Seal@Clear@ which blocks any @Color:Red@Monsters@Clear@ from entering it's walls."
-					},
-					{
-						"EntryType": "WaitToRead"
-					},
-					{
-						"EntryType": "Speaker",
-						"SpeakerName": "MtFr",
-						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Squint.png"
-					},
-					{
-						"EntryType":"Text",
-						"Text": "But this dastardly master of evil has devised a way to bring down the @Color:Red@Seal@Clear@ and catch them unaware.",
-						"NewLine":true
-					},
-					{
-						"EntryType": "WaitToRead"
-					}
-				]
-			},
-			{
-				"BlockType": "SpeechBox",
-				"WaitToFinish": true,
-				"WaitForNextButton": true,
-				"Entries": [
-					{
-						"EntryType": "Clear",
-						"ClearSpeaker": false
-					},
-					{
-						"EntryType": "Speaker",
-						"SpeakerName": "MtFr",
 						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Morning.png"
 					},
 					{
@@ -739,7 +700,7 @@
 					},
 					{
 						"EntryType":"Text",
-						"Text": "so ",
+						"Text": "so",
 						"NewLine": true
 					},
 					{
@@ -752,7 +713,7 @@
 					},
 					{
 						"EntryType":"Text",
-						"Text": "umm "
+						"Text": "umm"
 					},
 					{
 						"EntryType": "Speaker",
@@ -778,7 +739,7 @@
 					},
 					{
 						"EntryType":"BackTrack",
-						"Text": "... umm ... aha!",
+						"Text": "... umm... aha!",
 						"LetterDelay":0.001
 					},
 					{
@@ -788,7 +749,7 @@
 					},
 					{
 						"EntryType":"Text",
-						"Text": "it's very popular, ",
+						"Text": " it's very popular, ",
 						"NewLine":false
 					},
 					{
@@ -843,7 +804,7 @@
 					},
 					{
 						"EntryType":"Text",
-						"Text": "who isn't a @Color:Red@Monster@Clear@ and doesn't have social anxiety, ",
+						"Text": "who doesn't have social anxiety, ",
 						"NewLine":false
 					},
 					{
@@ -851,13 +812,42 @@
 					},
 					{
 						"EntryType":"Text",
-						"Text": "can journey to @Color:Red@The City@Clear@, warn them of the @Color:Red@Villian@Clear@, and save @Color:Red@The World@Clear@!",
+						"Text": "can journey to @Color:Red@The City@Clear@, ",
+						"NewLine":true
+					},
+					{
+						"EntryType": "WaitToRead"
+					},
+					{
+						"EntryType":"Text",
+						"Text": "warn them of the @Color:Red@Villian@Clear@, ",
 						"NewLine":false
+					},
+					{
+						"EntryType":"Delay",
+						"Delay":0.5
+					},
+					{
+						"EntryType":"Text",
+						"Text": "and save @Color:Red@The World@Clear@!",
+						"NewLine":true
 					},
 					{
 						"EntryType": "WaitToRead"
 					}	
 				]
+			},
+			{
+				"BlockType": "Blackout",
+				"BlackOutState": "FadeIn",
+				"FadeValue": 0.5,
+				"WaitToFinish": false
+			},
+			{
+				"BlockType": "PopUp",
+				"PopUpType": "SpotLight",
+				"WaitToFinish": false,
+				"Delete": "SpotLight"
 			},
 			{
 				"BlockType": "SpeechBox",
@@ -882,7 +872,7 @@
 					},
 					{
 						"EntryType":"Text",
-						"Text": "will you become @Color:Red@The Hero@Clear@?"
+						"Text": "will you be @Color:Red@The Hero@Clear@?"
 					},
 					{
 						"EntryType": "Question",
@@ -1063,19 +1053,14 @@
 				]
 			},
 			{
-				"BlockType": "MoveActor",
-				"WaitToFinish": false,
-				"AsyncWaitToFinish": true,
-				"TargetActorId": "MysteriousFigure",
-				"PathMarkerName": "MF_II_1",
-				"FollowActor": false,
-				"Speed": 1
-			},
-			{
 				"BlockType": "SpeechBox",
 				"WaitToFinish": true,
 				"WaitForNextButton": true,
 				"Entries": [
+					{
+						"EntryType": "Clear",
+						"ClearSpeaker": false
+					},
 					{
 						"EntryType": "Speaker",
 						"SpeakerName": "MtFr",
@@ -1091,13 +1076,30 @@
 					},
 					{
 						"EntryType":"Text",
-						"Text": "I'd like to take a look at your @Color:Blue@Page Book@Clear@.",
-						"NewLine":false
+						"Text": "I wanna see what I've got to work with.",
+						"NewLine":true
 					},
 					{
 						"EntryType": "WaitToRead"
-					}			
+					},
+					{
+						"EntryType":"Text",
+						"Text": "Let me take peek at your @Color:Blue@Page Book@Clear@.",
+						"NewLine":true
+					},
+					{
+						"EntryType": "WaitToRead"
+					}		
 				]
+			},
+			{
+				"BlockType": "MoveActor",
+				"WaitToFinish": false,
+				"AsyncWaitToFinish": true,
+				"TargetActorId": "MysteriousFigure",
+				"PathMarkerName": "MF_II_1",
+				"FollowActor": false,
+				"Speed": 1
 			},
 			{
 				"BlockType": "SpeechBox",
@@ -1145,7 +1147,7 @@
 					{
 						"EntryType": "Text",
 						"Text": "Your @Color:Blue@Page Book@Clear@ has barely been used.",
-						"NewLine":true
+						"NewLine":false
 					},
 					{
 						"EntryType": "WaitToRead"
@@ -1157,7 +1159,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "It's like you've done nothing but wondering around for the last six years.",
+						"Text": "It's like you've just been wandering aimlessly for the last @Color:Red@Six Years@Clear@.",
 						"NewLine":true
 					},
 					{
@@ -1479,7 +1481,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "this one's no good",
+						"Text": "this one's useless",
 						"NewLine": true
 					},
 					{
@@ -1489,7 +1491,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "but I'm so tired of waiting",
+						"Text": "but I'm tired of waiting",
 						"NewLine": true
 					},
 					{
@@ -1546,19 +1548,8 @@
 						"NewLine": true
 					},
 					{
-						"EntryType": "WaitToRead"
-					},
-					{
 						"EntryType": "Text",
-						"Text": "so I'll assume you forgot everything, ",
-						"NewLine": false
-					},
-					{
-						"EntryType": "WaitToRead"
-					},
-					{
-						"EntryType": "Text",
-						"Text": "and explain like you were just generated.",
+						"Text": "so I'll explain like you just @Color:Blue@Spawned@Clear@.",
 						"NewLine": false
 					},
 					{
@@ -1817,7 +1808,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "But the text wouldn't be in color if these were just normal pages. ",
+						"Text": "But the text wouldn't be blue if these were normal pages. ",
 						"NewLine": true
 					},
 					{
@@ -1825,7 +1816,8 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "These @Color:Blue@Pages@Clear@ define who you are and what you do."
+						"Text": "These @Color:Blue@Pages@Clear@ define who you are and what you do.",
+						"NewLine": true
 					},
 					{
 						"EntryType": "WaitToRead"
@@ -1901,7 +1893,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "Let's take a look at yours by clicking on the picture.",
+						"Text": "Let's take a look at yours by clicking on the picture of you.",
 						"NewLine": true
 					},
 					{
@@ -1976,7 +1968,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "and me a @Color:Red@Min-",
+						"Text": "and me a @Color:Red@Min",
 						"NewLine": true,
 						"CompoundLine": true
 					},
@@ -1989,7 +1981,7 @@
 					},
 					{
 						"EntryType": "BackTrack",
-						"Text": "Min-",
+						"Text": "Min",
 						"LetterDelay": 0.001,
 						"Color": "Red"
 					},
@@ -2352,7 +2344,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "but for now let's try out the ones you have.",
+						"Text": "but for now let's test out the ones you have.",
 						"NewLine": true
 					}
 				]
@@ -2446,7 +2438,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "Like your @Color:Red@Weapons@Clear@, @Color:Red@Shield@Clear@, @Color:Red@Armor@Clear@, and @Color:Red@Backpack@Clear@.",
+						"Text": "Like your @Color:Red@Weapons@Clear@, @Color:Red@Armor@Clear@, @Color:Red@Backpack@Clear@, and such.",
 						"NewLine": true
 					},
 					{
@@ -2495,7 +2487,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "You can take a closer look at your @Color:Blue@Pages@Clear@ in private after we set up @Color:Red@Camp@Clear@.",
+						"Text": "You can take a closer look after we set up @Color:Red@Camp@Clear@.",
 						"NewLine": true
 					},
 					{
@@ -2589,7 +2581,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "@Color:Red@Fungus@Clear@ are really closer to animals than plants, ",
+						"Text": "@Color:Red@Fungus@Clear@ are closer to animals than plants, ",
 						"NewLine": true
 					},
 					{
@@ -2660,6 +2652,10 @@
 				]
 			},
             {
+                "BlockType":"Delay",
+				"Time": 0.8
+            },
+            {
                 "BlockType":"StartCombat"
             },
             {
@@ -2718,7 +2714,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "Now, ",
+						"Text": "Now I'll explain how to actually use the @Color:Blue@PAGE@Clear@ System.",
 						"NewLine": true
 					},
 					{
@@ -2726,8 +2722,8 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "imagine you're looking down at yourself through a magical window called @Color:Red@The Screen@Clear@.",
-						"NewLine": false
+						"Text": "Start by imagining you're looking through a magical window called @Color:Red@The Screen@Clear@.",
+						"NewLine": true
 					},
 					{
 						"EntryType": "WaitToRead"
@@ -2932,7 +2928,7 @@
 					{
 						"EntryType": "Text",
 						"Text": "here they are!",
-						"NewLine": true
+						"NewLine": false
 					},
 					{
 						"EntryType": "WaitToRead"
@@ -2976,29 +2972,11 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "Try it out by using the @Color:Blue@PAGE@Clear@ System to walk over to the @Color:Red@Mushroom@Clear@.",
+						"Text": "Try using the @Color:Blue@PAGE@Clear@ System to walk over to the @Color:Red@Mushroom@Clear@.",
 						"NewLine": true
 					},
 					{
 						"EntryType": "WaitToRead"
-					}
-				]
-			},
-			{
-				"BlockType": "SpeechBox",
-				"TopBox": false,
-				"WaitToFinish": true,
-				"WaitForNextButton": true,
-				"Hide": false,
-				"Entries": [
-					{
-						"EntryType": "Clear",
-						"ClearSpeaker": false
-					},
-					{
-						"EntryType": "Speaker",
-						"SpeakerName": "MtFr",
-						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Happy.png"
 					},
 					{
 						"EntryType": "Text",
@@ -3740,7 +3718,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "To attack the @Color:Red@Mushroom@Clear@, you'll need to move so that it's inside your @Color:Red@Target Range@Clear@. ",
+						"Text": "To attack the @Color:Red@Mushroom@Clear@, you'll need to move so that it's in your @Color:Red@Target Range@Clear@. ",
 						"NewLine": false
 					},
 					{
@@ -3749,7 +3727,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "I've got a @Color:Red@Flash Card@Clear@ for that.",
+						"Text": "I've got a @Color:Red@Flash Card@Clear@ for that too.",
 						"NewLine": false
 					},
 					{
@@ -3882,7 +3860,7 @@
 				"BlockType": "SpeechBox",
 				"TopBox": true,
 				"WaitToFinish": true,
-				"WaitForNextButton": true,
+				"WaitForNextButton": false,
 				"Hide": false,
 				"Entries": [
 					{
@@ -3902,6 +3880,19 @@
 				]
 			},
 			{
+				"BlockType": "PopUp",
+				"PopUpType": "Highlight",
+				"WaitToFinish": true,
+				"Create": "PlayPopUp",
+				"TargetElement": "MoveableCamera2D/CanvasLayer/CombatUiControl/QueInputControl/VBoxContainer/BackPatchContainer2/Control/SideStatButtonControl/TextureRect",
+				"PopupControlSript": "res://Scenes/Dialog/PopUps/OutlinePopUp/outline_pop_up_control.tscn",
+				"DarkenScreen": true,
+                "WaitToBeClicked": true,
+				"Padding":[0,0,0,0],
+                "LineType": "Dotted",
+                "ShowClick": true
+			},
+			{
 				"BlockType": "SpeechBox",
 				"TopBox": true,
 				"WaitToFinish": false,
@@ -3912,6 +3903,12 @@
 						"EntryType": "Clear"
 					}
 				]
+			},
+			{
+				"BlockType": "PopUp",
+				"PopUpType": "Highlight",
+				"WaitToFinish": true,
+				"Delete": "PlayPopUp"
 			}
 		]
 	},
@@ -3974,24 +3971,11 @@
 					},
 					{
 						"EntryType":"WaitToRead"
-					}
-				]
-			},
-			{
-				"BlockType": "SpeechBox",
-				"TopBox": false,
-				"WaitToFinish": true,
-				"WaitForNextButton": true,
-				"Hide": false,
-				"Entries": [
-					{
-						"EntryType": "Clear",
-						"ClearSpeaker": false
 					},
 					{
 						"EntryType": "Text",
 						"Text": "Good excuse for another @Color:Red@Flash Card@Clear@.",
-						"NewLine": false
+						"NewLine": true
 					},
 					{
 						"EntryType":"WaitToRead"

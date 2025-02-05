@@ -13,13 +13,15 @@ signal fade_done
 		if _state != val:
 			_state = val
 			if _state == BLACKOUT_STATE.Black:
-				self.self_modulate.a = 1
+				self.self_modulate.a = fade_limit
 			elif _state == BLACKOUT_STATE.FadeIn:
-				self.self_modulate.a = 1
+				self.self_modulate.a = fade_limit
 			elif _state == BLACKOUT_STATE.Clear:
 				self.self_modulate.a = 0
 			elif _state == BLACKOUT_STATE.FadeOut:
 				self.self_modulate.a = 0
+
+@export var fade_limit:float = 1
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -34,8 +36,8 @@ func _process(delta: float) -> void:
 			_state = BLACKOUT_STATE.Clear
 			fade_done.emit()
 	if _state == BLACKOUT_STATE.FadeOut:
-		self_modulate.a = min(1, self_modulate.a + (delta * fade_speed))
-		if self_modulate.a == 1:
+		self_modulate.a = min(fade_limit, self_modulate.a + (delta * fade_speed))
+		if self_modulate.a == fade_limit:
 			_state = BLACKOUT_STATE.Black
 			fade_done.emit()
 

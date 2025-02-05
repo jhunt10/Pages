@@ -54,6 +54,7 @@ func _ready() -> void:
 	start_combat_screen.hide()
 	start_combat_screen.screen_blacked_out.connect(_on_combat_screen_blackout)
 	start_combat_screen.screen_clear.connect(_on_combat_screen_cleared)
+	MapController.grid_tile_map.hide()
 	#
 	#MapController._build_terrain()
 	for actor:BaseActor in GameState._actors.values():
@@ -169,6 +170,7 @@ func start_combat_animation():
 
 func _on_combat_screen_blackout():
 	ui_control.show()
+	MapController.grid_tile_map.show()
 
 func _on_combat_screen_cleared():
 	start_combat_screen.hide()

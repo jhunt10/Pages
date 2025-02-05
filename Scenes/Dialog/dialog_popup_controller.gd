@@ -1,7 +1,7 @@
 class_name DialogPopUpController
 extends Control
 
-enum PopUpTypes { SpeechBubble, Highlight, TutorialCard, ClickDrag}
+enum PopUpTypes { SpeechBubble, Highlight, TutorialCard, ClickDrag, SpotLight}
 
 @export var parent_dialog_controller:DialogController
 var _popups:Dictionary = {}
@@ -45,6 +45,9 @@ func handle_pop_up(block_data:Dictionary)->bool:
 	
 	if popup_type == PopUpTypes.ClickDrag:
 		return create_click_drag(block_data)
+		
+	if popup_type == PopUpTypes.SpotLight:
+		return create_spotlight(block_data)
 	return false
 
 ## Returns true if block should be waitied on
@@ -149,6 +152,20 @@ func create_tutorial_card(block_data):
 	new_cards.closed.connect(parent_dialog_controller._on_popup_finished.bind(pop_up_key))
 	parent_dialog_controller._block_states[pop_up_key] = DialogController.BlockStates.Playing
 	return true
+
+func create_spotlight(block_data):
+	var pop_up_key = block_data.get("Create", null)
+	if !pop_up_key:
+		printerr("DialogController: No 'PopUpKey' provided on SpeechBubble block.")
+		return false
+	var actor_id = block_data.get("ActorId")
+	if !actor_id:
+		return false
+	var spotlight:SpotLightControl = load("res://Scenes/Dialog/PopUps/SpotLight/spot_light_popup.tscn").instantiate()
+	spotlight.set_actor(actor_id)
+	self.add_child(spotlight)
+	_popups[pop_up_key] = spotlight
+	return false
 
 func create_click_drag(block_data):
 	var pop_up_key = block_data.get("Create", null)
