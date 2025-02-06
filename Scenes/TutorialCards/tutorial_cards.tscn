@@ -39,7 +39,7 @@
 [ext_resource type="Texture2D" uid="uid://cl627unmyivbd" path="res://assets/Sprites/UI/SymbolIcons/DmgSymbol_Poison.png" id="36_ct4tu"]
 [ext_resource type="Texture2D" uid="uid://do85dvxvlf5wk" path="res://defs/Actors/Squirrels/Squirrcerer_IconSmall.png" id="37_16bex"]
 
-[node name="TutorialCardsControl" type="Control" node_paths=PackedStringArray("top_container", "title_label", "back_button", "back_button_background", "next_button", "next_button_background", "done_button", "done_button_background", "page_que_card", "movement_card", "targeting_actor_card", "targeting_spot_card", "ppr_card", "speed_card", "mass_card", "armor_card")]
+[node name="TutorialCardsControl" type="Control" node_paths=PackedStringArray("top_container", "title_label", "count_label", "back_button", "back_button_background", "next_button", "next_button_background", "done_button", "done_button_background", "page_que_card", "movement_card", "targeting_actor_card", "targeting_spot_card", "ppr_card", "speed_card", "mass_card", "armor_card")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -49,12 +49,13 @@ grow_vertical = 2
 script = ExtResource("1_imldm")
 top_container = NodePath("CardControl/TopContainer")
 title_label = NodePath("CardControl/TopContainer/HBoxContainer/TitleLabel")
-back_button = NodePath("CardControl/TopContainer/HBoxContainer/BackButtonControl/BackButton/Button")
-back_button_background = NodePath("CardControl/TopContainer/HBoxContainer/BackButtonControl/BackButton")
-next_button = NodePath("CardControl/TopContainer/HBoxContainer/NextButtonControl/NextButton/Button")
-next_button_background = NodePath("CardControl/TopContainer/HBoxContainer/NextButtonControl/NextButton")
-done_button = NodePath("CardControl/TopContainer/HBoxContainer/NextButtonControl/DonetButton/Button")
-done_button_background = NodePath("CardControl/TopContainer/HBoxContainer/NextButtonControl/DonetButton")
+count_label = NodePath("CardControl/TopContainer/HBoxContainer/CountLabel")
+back_button = NodePath("CardControl/TopContainer/HBoxContainer2/BackButtonControl/BackButton/Button")
+back_button_background = NodePath("CardControl/TopContainer/HBoxContainer2/BackButtonControl/BackButton")
+next_button = NodePath("CardControl/TopContainer/HBoxContainer2/NextButtonControl/NextButton/Button")
+next_button_background = NodePath("CardControl/TopContainer/HBoxContainer2/NextButtonControl/NextButton")
+done_button = NodePath("CardControl/TopContainer/HBoxContainer2/NextButtonControl/DonetButton/Button")
+done_button_background = NodePath("CardControl/TopContainer/HBoxContainer2/NextButtonControl/DonetButton")
 page_que_card = NodePath("CardControl/Page_System")
 movement_card = NodePath("CardControl/Movement")
 targeting_actor_card = NodePath("CardControl/Targeting_Actors")
@@ -72,6 +73,183 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TopContainer" type="VBoxContainer" parent="CardControl"]
+z_index = 2
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = 26.0
+offset_right = -24.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CardControl/TopContainer"]
+layout_mode = 2
+
+[node name="VSeparator" type="VSeparator" parent="CardControl/TopContainer/HBoxContainer"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TitleLabel" type="Label" parent="CardControl/TopContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("5_l4e1i")
+theme_override_colors/font_color = Color(0.470588, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0.470588, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("6_qh3ul")
+theme_override_font_sizes/font_size = 48
+text = "Movement"
+horizontal_alignment = 1
+
+[node name="CountLabel" type="Label" parent="CardControl/TopContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("5_l4e1i")
+theme_override_colors/font_color = Color(0.470588, 0, 0, 1)
+theme_override_font_sizes/font_size = 48
+text = "  1/X  "
+horizontal_alignment = 2
+
+[node name="HSeparator" type="HSeparator" parent="CardControl/TopContainer"]
+self_modulate = Color(1, 1, 1, 0)
+show_behind_parent = true
+z_index = -5
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="CardControl/TopContainer"]
+layout_mode = 2
+
+[node name="BackButtonControl" type="Control" parent="CardControl/TopContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(92, 0)
+layout_mode = 2
+
+[node name="BackButton" type="NinePatchRect" parent="CardControl/TopContainer/HBoxContainer2/BackButtonControl"]
+custom_minimum_size = Vector2(92, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_nxh5l")
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+
+[node name="Label" type="Label" parent="CardControl/TopContainer/HBoxContainer2/BackButtonControl/BackButton"]
+self_modulate = Color(0.498039, 0.4, 0.376471, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_bdbcw")
+theme_override_font_sizes/font_size = 24
+text = "Back"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="CardControl/TopContainer/HBoxContainer2/BackButtonControl/BackButton"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VSeparator" type="VSeparator" parent="CardControl/TopContainer/HBoxContainer2"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="NextButtonControl" type="Control" parent="CardControl/TopContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(92, 0)
+layout_mode = 2
+
+[node name="DonetButton" type="NinePatchRect" parent="CardControl/TopContainer/HBoxContainer2/NextButtonControl"]
+custom_minimum_size = Vector2(92, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_nxh5l")
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+
+[node name="Label" type="Label" parent="CardControl/TopContainer/HBoxContainer2/NextButtonControl/DonetButton"]
+self_modulate = Color(0.498039, 0.4, 0.376471, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_bdbcw")
+theme_override_font_sizes/font_size = 24
+text = "Done"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="CardControl/TopContainer/HBoxContainer2/NextButtonControl/DonetButton"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="NextButton" type="NinePatchRect" parent="CardControl/TopContainer/HBoxContainer2/NextButtonControl"]
+custom_minimum_size = Vector2(92, 0)
+layout_mode = 2
+offset_right = 92.0
+offset_bottom = 48.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_nxh5l")
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+
+[node name="Label" type="Label" parent="CardControl/TopContainer/HBoxContainer2/NextButtonControl/NextButton"]
+self_modulate = Color(0.498039, 0.4, 0.376471, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_bdbcw")
+theme_override_font_sizes/font_size = 24
+text = "Next"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="CardControl/TopContainer/HBoxContainer2/NextButtonControl/NextButton"]
+self_modulate = Color(1, 1, 1, 0)
+z_index = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -93,13 +271,14 @@ visible = false
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+mouse_filter = 2
 
 [node name="MovementImage" type="TextureRect" parent="CardControl/Page_System"]
 layout_mode = 2
 offset_left = 407.0
-offset_top = 214.0
+offset_top = 175.0
 offset_right = 654.0
-offset_bottom = 387.0
+offset_bottom = 348.0
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("9_m3d0h")
 stretch_mode = 3
@@ -123,50 +302,52 @@ offset_bottom = 467.0
 theme = ExtResource("5_l4e1i")
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/normal_font_size = 32
-text = "Before each Round,
-Prepare you PageQue
+bbcode_enabled = true
+text = "Before each [color=#780000]Round[/color],
+prepare you [color=blue]PageQue[/color]
 by filling all slots with 
-Action Pages.
+[color=Blue]Action Pages[/color].
 
-When the Round starts,
-Pages will be executed
+When the [color=#780000]Round[/color] starts,
+[color=blue]Pages[/color] will be executed
 in the order they were 
-added to the PageQue."
+added to the [color=blue]PageQue[/color]."
 scroll_active = false
 
 [node name="ImageCaptionLabel" type="RichTextLabel" parent="CardControl/Page_System"]
 layout_mode = 0
 offset_left = 591.0
-offset_top = 352.0
+offset_top = 317.0
 offset_right = 799.0
-offset_bottom = 484.0
+offset_bottom = 449.0
 theme = ExtResource("5_l4e1i")
 theme_override_colors/default_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/normal_font_size = 24
-text = "Blue arrow shows end position"
+text = "Path Arrow shows end position"
 scroll_active = false
 
 [node name="Movement" type="Control" parent="CardControl"]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="GridContainer" type="GridContainer" parent="CardControl/Movement"]
 layout_mode = 0
 offset_left = 51.0
-offset_top = 76.0
+offset_top = 20.0
 offset_right = 751.0
-offset_bottom = 520.0
+offset_bottom = 440.0
+mouse_filter = 2
 theme_override_constants/h_separation = 20
 theme_override_constants/v_separation = -20
 columns = 3
 
 [node name="MoevDemo_North" type="TextureRect" parent="CardControl/Movement/GridContainer"]
-custom_minimum_size = Vector2(220, 220)
+custom_minimum_size = Vector2(160, 220)
 layout_mode = 2
 texture = ExtResource("7_tm0tf")
 
@@ -181,14 +362,22 @@ custom_minimum_size = Vector2(220, 220)
 layout_mode = 2
 texture = ExtResource("10_vm6ku")
 
-[node name="MoevDemo_South" type="TextureRect" parent="CardControl/Movement/GridContainer"]
+[node name="Control" type="Control" parent="CardControl/Movement/GridContainer"]
+custom_minimum_size = Vector2(220, 200)
+layout_mode = 2
+
+[node name="MoevDemo_South" type="TextureRect" parent="CardControl/Movement/GridContainer/Control"]
 custom_minimum_size = Vector2(220, 220)
 layout_mode = 2
+offset_top = 51.0
+offset_right = 220.0
+offset_bottom = 271.0
 texture = ExtResource("9_mx0pi")
 
 [node name="MoevDemo_East" type="TextureRect" parent="CardControl/Movement/GridContainer"]
 custom_minimum_size = Vector2(220, 220)
 layout_mode = 2
+mouse_filter = 2
 texture = ExtResource("8_2oidn")
 
 [node name="MoveDemo_Pages" type="TextureRect" parent="CardControl/Movement"]
@@ -201,14 +390,16 @@ texture = ExtResource("11_65dks")
 
 [node name="DescriptionLabel2" type="RichTextLabel" parent="CardControl/Movement"]
 layout_mode = 0
-offset_left = 271.0
-offset_top = 83.0
-offset_right = 764.0
-offset_bottom = 270.0
+offset_left = 278.0
+offset_top = 81.0
+offset_right = 771.0
+offset_bottom = 268.0
 theme = ExtResource("5_l4e1i")
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/normal_font_size = 32
-text = "The direction of your moves are relative to which way your Actor is  facing."
+bbcode_enabled = true
+text = "Direction of movement is always relative to which 
+way the [color=#780000]Actor[/color] is facing."
 scroll_active = false
 
 [node name="Targeting_Actors" type="Control" parent="CardControl"]
@@ -219,13 +410,14 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="MoveDemo_Pages" type="TextureRect" parent="CardControl/Targeting_Actors"]
 layout_mode = 0
-offset_left = 510.0
-offset_top = 87.0
-offset_right = 764.0
-offset_bottom = 460.0
+offset_left = 500.0
+offset_top = 44.0
+offset_right = 754.0
+offset_bottom = 417.0
 texture = ExtResource("12_vkq77")
 
 [node name="DescriptionLabel3" type="RichTextLabel" parent="CardControl/Targeting_Actors"]
@@ -243,15 +435,15 @@ scroll_active = false
 
 [node name="ImageCaptionLabel" type="RichTextLabel" parent="CardControl/Targeting_Actors"]
 layout_mode = 0
-offset_left = 524.0
-offset_top = 120.0
-offset_right = 732.0
-offset_bottom = 252.0
+offset_left = 610.0
+offset_top = 143.0
+offset_right = 818.0
+offset_bottom = 275.0
 theme = ExtResource("5_l4e1i")
 theme_override_colors/default_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/normal_font_size = 24
-text = "   Cover
--50% Acc"
+text = "< Cover
+-50% ACC"
 scroll_active = false
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CardControl/Targeting_Actors"]
@@ -259,14 +451,16 @@ layout_mode = 0
 offset_left = 27.0
 offset_top = 92.0
 offset_right = 520.0
-offset_bottom = 472.0
+offset_bottom = 442.0
 
 [node name="DescriptionLabel1" type="RichTextLabel" parent="CardControl/Targeting_Actors/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("5_l4e1i")
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/normal_font_size = 32
-text = "Target Area represents the effective range of a Page."
+bbcode_enabled = true
+text = "[color=#780000]Target Area[/color] represents the effective range of a [color=blue]Page[/color].
+"
 fit_content = true
 scroll_active = false
 
@@ -280,7 +474,8 @@ layout_mode = 2
 theme = ExtResource("5_l4e1i")
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/normal_font_size = 32
-text = "Targets are selected after the Round has started."
+bbcode_enabled = true
+text = "Targets are selected after the [color=#780000]Round[/color] has started. "
 fit_content = true
 scroll_active = false
 
@@ -294,7 +489,8 @@ layout_mode = 2
 theme = ExtResource("5_l4e1i")
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/normal_font_size = 32
-text = "The system will Pause and let you select an Actor in range.
+bbcode_enabled = true
+text = "The system will pause and let you select an [color=#780000]Actor[/color] in range.
 "
 fit_content = true
 scroll_active = false
@@ -309,8 +505,8 @@ layout_mode = 2
 theme = ExtResource("5_l4e1i")
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/normal_font_size = 32
-text = "If only one Actor is in range, 
-it is automatically selected."
+bbcode_enabled = true
+text = "When [color=blue]Auto-Target[/color] is enabled, the [color=#780000]Actor[/color] will be selected for you if only one is in range."
 fit_content = true
 scroll_active = false
 
@@ -327,13 +523,14 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="MoveDemo_Pages" type="TextureRect" parent="CardControl/Targeting_Spots"]
 layout_mode = 0
-offset_left = 510.0
-offset_top = 87.0
-offset_right = 764.0
-offset_bottom = 460.0
+offset_left = 500.0
+offset_top = 44.0
+offset_right = 754.0
+offset_bottom = 417.0
 texture = ExtResource("14_eljgu")
 
 [node name="DescriptionLabel3" type="RichTextLabel" parent="CardControl/Targeting_Spots"]
@@ -349,32 +546,21 @@ theme_override_font_sizes/normal_font_size = 32
 text = "If multiple are in range, the system will Pause and allow you to select one."
 scroll_active = false
 
-[node name="ImageCaptionLabel" type="RichTextLabel" parent="CardControl/Targeting_Spots"]
-layout_mode = 0
-offset_left = 524.0
-offset_top = 120.0
-offset_right = 732.0
-offset_bottom = 252.0
-theme = ExtResource("5_l4e1i")
-theme_override_colors/default_color = Color(1, 1, 1, 1)
-theme_override_font_sizes/normal_font_size = 24
-text = "   Cover
--50% Acc"
-scroll_active = false
-
 [node name="VBoxContainer" type="VBoxContainer" parent="CardControl/Targeting_Spots"]
 layout_mode = 0
 offset_left = 27.0
 offset_top = 92.0
 offset_right = 520.0
-offset_bottom = 472.0
+offset_bottom = 446.0
 
 [node name="DescriptionLabel1" type="RichTextLabel" parent="CardControl/Targeting_Spots/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("5_l4e1i")
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/normal_font_size = 32
-text = "Pages that fire Missiles or have the \"Spot\"  target type aim for a tile on the map instead of a specific Actor."
+bbcode_enabled = true
+text = "[color=blue]Pages[/color] that fire [color=#780000]Missiles[/color] or have the [color=#780000]Spot[/color] target type, 
+target a position on the [color=#780000]Map[/color] instead of a specific [color=#780000]Actor[/color]."
 fit_content = true
 scroll_active = false
 
@@ -384,15 +570,19 @@ layout_mode = 2
 size_flags_vertical = 3
 
 [node name="DescriptionLabel2" type="RichTextLabel" parent="CardControl/Targeting_Spots/VBoxContainer"]
+visible = false
 layout_mode = 2
 theme = ExtResource("5_l4e1i")
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/normal_font_size = 32
-text = "When the Page is executed, you will be asked to select a  tile in the Target Area."
+bbcode_enabled = true
+text = "When the [color=blue]Page[/color] is executed, you will be asked to select 
+a [color=#780000]Spot[/color] in the [color=#780000]Target Area[/color]."
 fit_content = true
 scroll_active = false
 
 [node name="HSeparator2" type="HSeparator" parent="CardControl/Targeting_Spots/VBoxContainer"]
+visible = false
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 size_flags_vertical = 3
@@ -402,8 +592,41 @@ layout_mode = 2
 theme = ExtResource("5_l4e1i")
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/normal_font_size = 32
-text = "Missiles take time to reach the spot, so the Actor you're aiming at might move away. "
+bbcode_enabled = true
+text = "[color=#780000]Missles[/color] take time to reach the spot, so the [color=#780000]Actor[/color] you're aiming at might move away. "
 fit_content = true
+scroll_active = false
+
+[node name="HSeparator3" type="HSeparator" parent="CardControl/Targeting_Spots/VBoxContainer"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="DescriptionLabel5" type="RichTextLabel" parent="CardControl/Targeting_Spots/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("5_l4e1i")
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[color=blue]Auto-Target[/color] does not apply when selecting [color=#780000]Spot[/color] targets."
+fit_content = true
+scroll_active = false
+
+[node name="HSeparator4" type="HSeparator" parent="CardControl/Targeting_Spots/VBoxContainer"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ImageCaptionLabel2" type="RichTextLabel" parent="CardControl/Targeting_Spots"]
+offset_left = 610.0
+offset_top = 143.0
+offset_right = 818.0
+offset_bottom = 275.0
+theme = ExtResource("5_l4e1i")
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/normal_font_size = 24
+text = "< Cover
+-50% ACC"
 scroll_active = false
 
 [node name="PPR" type="Control" parent="CardControl"]
@@ -414,13 +637,33 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CardControl/PPR"]
 layout_mode = 0
 offset_left = 27.0
 offset_top = 84.0
 offset_right = 774.0
-offset_bottom = 484.0
+offset_bottom = 445.0
+
+[node name="DescriptionLabel" type="RichTextLabel" parent="CardControl/PPR/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("5_l4e1i")
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("6_qh3ul")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "Each [color=#780000]Actor[/color] has a [color=#780000]PPR[/color] stat 
+which determines how many 
+[color=blue]Action Pages[/color] they can fit in 
+thier [color=blue]PageQue[/color] each [color=#780000]Round[/color]"
+fit_content = true
+scroll_active = false
+
+[node name="HSeparator2" type="HSeparator" parent="CardControl/PPR/VBoxContainer"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_vertical = 3
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CardControl/PPR/VBoxContainer"]
 layout_mode = 2
@@ -443,56 +686,28 @@ stretch_mode = 5
 [node name="Label2" type="Label" parent="CardControl/PPR/VBoxContainer/HBoxContainer"]
 self_modulate = Color(0, 0, 0, 1)
 layout_mode = 2
-theme = ExtResource("3_bdbcw")
+theme = ExtResource("5_l4e1i")
 theme_override_font_sizes/font_size = 32
 text = ": Pages per Round"
 
-[node name="DescriptionLabel1" type="RichTextLabel" parent="CardControl/PPR/VBoxContainer"]
-visible = false
-layout_mode = 2
-theme = ExtResource("5_l4e1i")
-theme_override_colors/default_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/normal_font_size = 32
-text = "The number of Pages an 
-Actor can use in a Round.
-"
-fit_content = true
-scroll_active = false
-
-[node name="HSeparator" type="HSeparator" parent="CardControl/PPR/VBoxContainer"]
-visible = false
+[node name="HSeparator3" type="HSeparator" parent="CardControl/PPR/VBoxContainer"]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="DescriptionLabel2" type="RichTextLabel" parent="CardControl/PPR/VBoxContainer"]
-visible = false
-layout_mode = 2
-theme = ExtResource("5_l4e1i")
-theme_override_colors/default_color = Color(0.470588, 0, 0, 1)
-theme_override_font_sizes/normal_font_size = 32
-text = "          1 Page = 1 Turn"
-fit_content = true
-scroll_active = false
-
-[node name="HSeparator2" type="HSeparator" parent="CardControl/PPR/VBoxContainer"]
-self_modulate = Color(1, 1, 1, 0)
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="DescriptionLabel3" type="RichTextLabel" parent="CardControl/PPR/VBoxContainer"]
+[node name="DescriptionLabel7" type="RichTextLabel" parent="CardControl/PPR/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("5_l4e1i")
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_fonts/normal_font = ExtResource("6_qh3ul")
 theme_override_font_sizes/normal_font_size = 32
-text = "The number of Turns in 
-a Round is based off the 
-highest PPR of all Actor."
+bbcode_enabled = true
+text = "The number of [color=#780000]Turns[/color] in a [color=#780000]Round[/color] is equal to 
+the highest [color=#780000]PPR[/color] of all [color=#780000]Actors[/color] in [color=#780000]Combat[/color]."
 fit_content = true
 scroll_active = false
 
-[node name="HSeparator3" type="HSeparator" parent="CardControl/PPR/VBoxContainer"]
+[node name="HSeparator7" type="HSeparator" parent="CardControl/PPR/VBoxContainer"]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 size_flags_vertical = 3
@@ -500,7 +715,8 @@ size_flags_vertical = 3
 [node name="DescriptionLabel4" type="RichTextLabel" parent="CardControl/PPR/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("5_l4e1i")
-text = "Gap slots are added to pad out lower PPR."
+bbcode_enabled = true
+text = "[color=#780000]Gap[/color] slots are added to pad out lower [color=#780000]PPR[/color]."
 fit_content = true
 scroll_active = false
 
@@ -510,6 +726,7 @@ layout_mode = 2
 size_flags_vertical = 3
 
 [node name="DescriptionLabel5" type="RichTextLabel" parent="CardControl/PPR/VBoxContainer"]
+visible = false
 layout_mode = 2
 theme = ExtResource("5_l4e1i")
 theme_override_colors/default_color = Color(0, 0, 0, 1)
@@ -520,11 +737,13 @@ fit_content = true
 scroll_active = false
 
 [node name="HSeparator5" type="HSeparator" parent="CardControl/PPR/VBoxContainer"]
+visible = false
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 size_flags_vertical = 3
 
 [node name="DescriptionLabel6" type="RichTextLabel" parent="CardControl/PPR/VBoxContainer"]
+visible = false
 layout_mode = 2
 theme = ExtResource("5_l4e1i")
 theme_override_colors/default_color = Color(0, 0, 0, 1)
@@ -535,6 +754,7 @@ fit_content = true
 scroll_active = false
 
 [node name="HSeparator6" type="HSeparator" parent="CardControl/PPR/VBoxContainer"]
+visible = false
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 size_flags_vertical = 3
@@ -628,84 +848,50 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="CardControl/Speed"]
-layout_mode = 0
-offset_left = 27.0
-offset_top = 75.0
-offset_right = 774.0
-offset_bottom = 484.0
-
-[node name="HSeparator3" type="HSeparator" parent="CardControl/Speed/VBoxContainer"]
-self_modulate = Color(1, 1, 1, 0)
-custom_minimum_size = Vector2(0, 11)
-layout_mode = 2
-
-[node name="HSeparator" type="HSeparator" parent="CardControl/Speed/VBoxContainer"]
-self_modulate = Color(1, 1, 1, 0)
-custom_minimum_size = Vector2(0, 9)
-layout_mode = 2
-
-[node name="DescriptionLabel2" type="RichTextLabel" parent="CardControl/Speed/VBoxContainer"]
-visible = false
-layout_mode = 2
-theme = ExtResource("5_l4e1i")
-theme_override_colors/default_color = Color(0.470588, 0, 0, 1)
-theme_override_font_sizes/normal_font_size = 32
-text = "          1 Page = 1 Turn"
-fit_content = true
-scroll_active = false
-
-[node name="HSeparator2" type="HSeparator" parent="CardControl/Speed/VBoxContainer"]
-self_modulate = Color(1, 1, 1, 0)
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="HSeparator5" type="HSeparator" parent="CardControl/Speed/VBoxContainer"]
-self_modulate = Color(1, 1, 1, 0)
-layout_mode = 2
-size_flags_vertical = 3
+mouse_filter = 2
 
 [node name="PPR_Demo_Image" type="TextureRect" parent="CardControl/Speed"]
 layout_mode = 0
 offset_left = 494.0
-offset_top = 192.0
+offset_top = 154.0
 offset_right = 690.0
-offset_bottom = 308.0
+offset_bottom = 270.0
 texture = ExtResource("20_sydka")
 
 [node name="PPR_Demo_Image2" type="TextureRect" parent="CardControl/Speed"]
 layout_mode = 0
-offset_left = 23.0
-offset_top = 288.0
-offset_right = 126.0
-offset_bottom = 391.0
+offset_left = 50.0
+offset_top = 252.0
+offset_right = 153.0
+offset_bottom = 355.0
 scale = Vector2(2, 2)
+mouse_filter = 2
 texture = ExtResource("21_64d73")
 
 [node name="PPR_Demo_Image3" type="TextureRect" parent="CardControl/Speed"]
 layout_mode = 0
-offset_left = 202.0
-offset_top = 288.0
-offset_right = 305.0
-offset_bottom = 391.0
+offset_left = 229.0
+offset_top = 252.0
+offset_right = 332.0
+offset_bottom = 355.0
 scale = Vector2(2, 2)
 texture = ExtResource("21_6h1lf")
 
 [node name="DescriptionLabel6" type="RichTextLabel" parent="CardControl/Speed"]
 layout_mode = 2
-offset_left = 409.0
-offset_top = 331.0
-offset_right = 1156.0
-offset_bottom = 463.0
+offset_left = 432.0
+offset_top = 295.0
+offset_right = 760.0
+offset_bottom = 429.0
 theme = ExtResource("5_l4e1i")
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_fonts/normal_font = ExtResource("6_qh3ul")
 theme_override_font_sizes/normal_font_size = 32
-text = "If two Actors move 
-into the same spot,
+bbcode_enabled = true
+text = "If two [color=#780000]Actors[/color] move 
+into the same [color=#780000]Spot[/color],
 the one with higher
-SPD will enter it first."
+[color=#780000]SPD[/color] will enter first."
 fit_content = true
 scroll_active = false
 
@@ -713,31 +899,32 @@ scroll_active = false
 layout_mode = 2
 offset_left = 459.0
 offset_top = 83.0
-offset_right = 1206.0
+offset_right = 736.0
 offset_bottom = 215.0
 theme = ExtResource("5_l4e1i")
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_fonts/normal_font = ExtResource("6_qh3ul")
 theme_override_font_sizes/normal_font_size = 32
-text = "Gaps are shifted
-forward or back
-based on Speed."
+bbcode_enabled = true
+text = "[color=#780000]Gaps[/color] are shifted
+    based on [color=#780000]SPD[/color]."
 fit_content = true
 scroll_active = false
 
 [node name="DescriptionLabel1" type="RichTextLabel" parent="CardControl/Speed"]
 layout_mode = 2
 offset_left = 55.0
-offset_top = 147.0
+offset_top = 138.0
 offset_right = 802.0
-offset_bottom = 279.0
+offset_bottom = 270.0
 theme = ExtResource("5_l4e1i")
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/normal_font_size = 32
-text = "During a Turn, Actors
-execute thier Pages 
-simultaneously, but
-in order of Speed."
+bbcode_enabled = true
+text = "All [color=#780000]Turns[/color] are execute 
+simultaneously, but are
+proccessed in order of 
+the [color=#780000]Actor's[/color] [color=#780000]Speed[/color] stat."
 fit_content = true
 scroll_active = false
 
@@ -778,11 +965,12 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CardControl/Mass"]
 layout_mode = 0
 offset_left = 27.0
-offset_top = 85.0
+offset_top = 251.0
 offset_right = 774.0
 offset_bottom = 484.0
 
@@ -797,9 +985,10 @@ theme = ExtResource("5_l4e1i")
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_fonts/normal_font = ExtResource("6_qh3ul")
 theme_override_font_sizes/normal_font_size = 32
-text = "When an Actor tries to 
-enter an occupied spot,
-the two Actors Crash."
+bbcode_enabled = true
+text = "When an [color=#780000]Actor[/color] tries to 
+enter an occupied [color=#780000]Spot[/color],
+a [color=#780000]Crash[/color] occures."
 fit_content = true
 scroll_active = false
 
@@ -853,20 +1042,12 @@ texture = ExtResource("24_i1fp3")
 expand_mode = 3
 stretch_mode = 5
 
-[node name="Label5" type="Label" parent="CardControl/Mass/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2"]
+[node name="Label2" type="Label" parent="CardControl/Mass/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2"]
 self_modulate = Color(0, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("5_l4e1i")
 theme_override_font_sizes/font_size = 32
-text = ": "
-
-[node name="Label4" type="Label" parent="CardControl/Mass/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2"]
-self_modulate = Color(0, 0, 0, 1)
-layout_mode = 2
-theme = ExtResource("5_l4e1i")
-theme_override_font_sizes/font_size = 24
-text = "Crash
-Damage"
+text = ": Crash"
 
 [node name="VSeparator" type="VSeparator" parent="CardControl/Mass/VBoxContainer/HBoxContainer"]
 visible = false
@@ -884,7 +1065,10 @@ theme = ExtResource("5_l4e1i")
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_fonts/normal_font = ExtResource("6_qh3ul")
 theme_override_font_sizes/normal_font_size = 32
-text = "The Actor with greater Mass takes the spot. "
+bbcode_enabled = true
+text = "The [color=#780000]Actors[/color] with greater [color=#780000]MAS[/color] takes the [color=#780000]Spot[/color],
+while the other is pushed or repelled and takes 
+             damage based off the winner's [color=#780000]CRH[/color]."
 fit_content = true
 scroll_active = false
 
@@ -893,6 +1077,7 @@ self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 
 [node name="DescriptionLabel3" type="RichTextLabel" parent="CardControl/Mass/VBoxContainer"]
+visible = false
 layout_mode = 2
 theme = ExtResource("5_l4e1i")
 theme_override_colors/default_color = Color(0, 0, 0, 1)
@@ -905,46 +1090,48 @@ scroll_active = false
 [node name="PPR_Demo_Image2" type="TextureRect" parent="CardControl/Mass"]
 layout_mode = 0
 offset_left = 23.0
-offset_top = 288.0
+offset_top = 57.0
 offset_right = 126.0
-offset_bottom = 391.0
+offset_bottom = 160.0
 scale = Vector2(2, 2)
 texture = ExtResource("21_64d73")
 
 [node name="PPR_Demo_Image3" type="TextureRect" parent="CardControl/Mass"]
 layout_mode = 0
 offset_left = 202.0
-offset_top = 288.0
+offset_top = 57.0
 offset_right = 305.0
-offset_bottom = 391.0
+offset_bottom = 160.0
 scale = Vector2(2, 2)
 texture = ExtResource("25_gdhe2")
 
 [node name="PPR_Demo_Image4" type="TextureRect" parent="CardControl/Mass"]
 layout_mode = 0
 offset_left = 380.0
-offset_top = 288.0
+offset_top = 57.0
 offset_right = 483.0
-offset_bottom = 391.0
+offset_bottom = 160.0
 scale = Vector2(2, 2)
 texture = ExtResource("22_o2dff")
 
 [node name="PPR_Demo_Image5" type="TextureRect" parent="CardControl/Mass"]
 layout_mode = 0
 offset_left = 559.0
-offset_top = 288.0
-offset_right = 662.0
-offset_bottom = 391.0
+offset_top = 57.0
+offset_right = 663.0
+offset_bottom = 161.0
 scale = Vector2(2, 2)
 texture = ExtResource("27_o232v")
 
 [node name="Armor" type="Control" parent="CardControl"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="BoxContainer" type="BoxContainer" parent="CardControl/Armor"]
 layout_mode = 1
@@ -952,9 +1139,9 @@ anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 24.0
-offset_top = 119.0
+offset_top = 84.0
 offset_right = -24.0
-offset_bottom = -24.0
+offset_bottom = -66.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -1190,6 +1377,7 @@ on heavy physical
 fighting Actors."
 
 [node name="HSeparator5" type="HSeparator" parent="CardControl/Armor/BoxContainer/VBoxContainer"]
+visible = false
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 size_flags_vertical = 3
@@ -1426,154 +1614,7 @@ on spell casting
 magical Actors."
 
 [node name="HSeparator5" type="HSeparator" parent="CardControl/Armor/BoxContainer/VBoxContainer2"]
+visible = false
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 size_flags_vertical = 3
-
-[node name="TopContainer" type="VBoxContainer" parent="CardControl"]
-visible = false
-z_index = 1
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 24.0
-offset_top = 26.0
-offset_right = -24.0
-offset_bottom = -16.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="CardControl/TopContainer"]
-layout_mode = 2
-
-[node name="BackButtonControl" type="Control" parent="CardControl/TopContainer/HBoxContainer"]
-custom_minimum_size = Vector2(92, 0)
-layout_mode = 2
-
-[node name="BackButton" type="NinePatchRect" parent="CardControl/TopContainer/HBoxContainer/BackButtonControl"]
-custom_minimum_size = Vector2(92, 0)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("2_nxh5l")
-patch_margin_left = 16
-patch_margin_top = 16
-patch_margin_right = 16
-patch_margin_bottom = 16
-
-[node name="Label" type="Label" parent="CardControl/TopContainer/HBoxContainer/BackButtonControl/BackButton"]
-self_modulate = Color(0.498039, 0.4, 0.376471, 1)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("3_bdbcw")
-theme_override_font_sizes/font_size = 24
-text = "Back"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Button" type="Button" parent="CardControl/TopContainer/HBoxContainer/BackButtonControl/BackButton"]
-self_modulate = Color(1, 1, 1, 0)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="TitleLabel" type="Label" parent="CardControl/TopContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme = ExtResource("5_l4e1i")
-theme_override_colors/font_color = Color(0.470588, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(0.470588, 0, 0, 1)
-theme_override_constants/outline_size = 4
-theme_override_fonts/font = ExtResource("6_qh3ul")
-theme_override_font_sizes/font_size = 48
-text = "Targeting Actors"
-horizontal_alignment = 1
-
-[node name="NextButtonControl" type="Control" parent="CardControl/TopContainer/HBoxContainer"]
-custom_minimum_size = Vector2(92, 0)
-layout_mode = 2
-
-[node name="DonetButton" type="NinePatchRect" parent="CardControl/TopContainer/HBoxContainer/NextButtonControl"]
-custom_minimum_size = Vector2(92, 0)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("2_nxh5l")
-patch_margin_left = 16
-patch_margin_top = 16
-patch_margin_right = 16
-patch_margin_bottom = 16
-
-[node name="Label" type="Label" parent="CardControl/TopContainer/HBoxContainer/NextButtonControl/DonetButton"]
-self_modulate = Color(0.498039, 0.4, 0.376471, 1)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("3_bdbcw")
-theme_override_font_sizes/font_size = 24
-text = "Done"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Button" type="Button" parent="CardControl/TopContainer/HBoxContainer/NextButtonControl/DonetButton"]
-self_modulate = Color(1, 1, 1, 0)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="NextButton" type="NinePatchRect" parent="CardControl/TopContainer/HBoxContainer/NextButtonControl"]
-custom_minimum_size = Vector2(92, 0)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("2_nxh5l")
-patch_margin_left = 16
-patch_margin_top = 16
-patch_margin_right = 16
-patch_margin_bottom = 16
-
-[node name="Label" type="Label" parent="CardControl/TopContainer/HBoxContainer/NextButtonControl/NextButton"]
-self_modulate = Color(0.498039, 0.4, 0.376471, 1)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("3_bdbcw")
-theme_override_font_sizes/font_size = 24
-text = "Next"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Button" type="Button" parent="CardControl/TopContainer/HBoxContainer/NextButtonControl/NextButton"]
-self_modulate = Color(1, 1, 1, 0)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2

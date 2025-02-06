@@ -5,6 +5,7 @@ signal closed
 
 @export var top_container:Control
 @export var title_label:Label
+@export var count_label:Label
 @export var back_button:Button
 @export var back_button_background:NinePatchRect
 @export var next_button:Button
@@ -36,6 +37,7 @@ var card_list:Array = []
 			var cur_card_key = card_list[card_index]
 			title_label.text = cur_card_key
 			cards[cur_card_key].visible = true
+			count_label.text = str(card_index+1) + "/" + str(card_list.size()+1) + "  "
 			if card_index == 0:
 				back_button_background.hide()
 			else:
@@ -52,6 +54,9 @@ var card_list:Array = []
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	if top_container and not top_container.visible:
+		var parent = top_container.get_parent()
+		parent.remove_child(top_container)
+		parent.add_child(top_container)
 		top_container.show()
 	back_button.pressed.connect(_on_back)
 	next_button.pressed.connect(_on_next)

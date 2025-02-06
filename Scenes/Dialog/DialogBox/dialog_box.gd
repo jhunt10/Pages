@@ -3,7 +3,7 @@ extends Control
 
 const DEFAULT_LETTER_DELAY:float = 0.01
 const DEFAULT_QUESTION_OPTION_DELAY:float = 0.3
-const WRAP_PADDING:int = 8
+const LINE_WRAP_PADDING:int = 0
 
 enum EntryTypes {Clear, Delay, Speaker, Text, Flag, Question, WaitToRead, BackTrack, IconImage, Hide, TextColor}
 enum STATES {Ready, Printing, Done, Question}
@@ -249,7 +249,7 @@ func _handle_entry(entry_data:Dictionary, raw_delta, remaining_delta)->bool:
 					hidden_text_edit.text += next_word
 					var line_length = hidden_text_edit.get_line_width(0)
 					#print("Next Word: '%s' | Line Length: %s" % [next_word, line_length])
-					if line_length > entry_contaier.size.x:
+					if line_length > entry_contaier.size.x - LINE_WRAP_PADDING:
 						print("Size Limit: %s" % [(entry_contaier.size.x )])
 						_current_text_entry.append_text('\n')
 						#print("\n Clip Line: '%s' \n" % [hidden_text_edit.text.trim_suffix(next_word)])
