@@ -6,6 +6,7 @@ signal closed
 @export var top_container:Control
 @export var title_label:Label
 @export var count_label:Label
+@export var close_button:Button
 @export var back_button:Button
 @export var back_button_background:NinePatchRect
 @export var next_button:Button
@@ -21,6 +22,9 @@ signal closed
 @export var speed_card:Control
 @export var mass_card:Control
 @export var armor_card:Control
+@export var item_card:Control
+@export var item2_card:Control
+@export var ammo_card:Control
 
 var cards:Dictionary
 
@@ -37,7 +41,7 @@ var card_list:Array = []
 			var cur_card_key = card_list[card_index]
 			title_label.text = cur_card_key
 			cards[cur_card_key].visible = true
-			count_label.text = str(card_index+1) + "/" + str(card_list.size()+1) + "  "
+			count_label.text = " " + str(card_index+1) + "/" + str(card_list.size()) + "  "
 			if card_index == 0:
 				back_button_background.hide()
 			else:
@@ -61,6 +65,7 @@ func _ready() -> void:
 	back_button.pressed.connect(_on_back)
 	next_button.pressed.connect(_on_next)
 	done_button.pressed.connect(_on_done)
+	close_button.pressed.connect(_on_done)
 	cards = {
 		"Page Que": page_que_card,
 		"Movement": movement_card,
@@ -69,7 +74,10 @@ func _ready() -> void:
 		"Turns and Gaps": ppr_card,
 		"Turn Order": speed_card,
 		"Crashing": mass_card,
-		"Armor and Damage": armor_card
+		"Armor and Damage": armor_card,
+		"Items": item_card,
+		"Items 2": item2_card,
+		"Page Ammo": ammo_card
 	}
 	card_list = [
 		"Page Que",
@@ -79,7 +87,10 @@ func _ready() -> void:
 		"Turns and Gaps",
 		"Turn Order",
 		"Crashing",
-		"Armor and Damage"
+		"Armor and Damage",
+		"Items",
+		"Items 2",
+		"Page Ammo"
 	]
 	card_index = card_index
 

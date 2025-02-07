@@ -1,9 +1,10 @@
-[gd_scene load_steps=39 format=3 uid="uid://wa8bgcuurt5n"]
+[gd_scene load_steps=63 format=3 uid="uid://wa8bgcuurt5n"]
 
 [ext_resource type="Texture2D" uid="uid://cgrlfobidw8xl" path="res://assets/Sprites/UI/BackPatches/PaperPatch_Bigger_276x192_48.png" id="1_dsnfm"]
 [ext_resource type="Script" path="res://Scenes/TutorialCards/tutorial_cards.gd" id="1_imldm"]
 [ext_resource type="Texture2D" uid="uid://dgkdwn6nnwtcv" path="res://assets/Sprites/UI/BackPatches/DrawnPatch_64_16.png" id="2_nxh5l"]
 [ext_resource type="Theme" uid="uid://dwinll8pgdjhc" path="res://Scenes/Themes/standard_theme.tres" id="3_bdbcw"]
+[ext_resource type="Texture2D" uid="uid://b7yikap63psbv" path="res://Scenes/Menus/CharacterMenu/MenuPages/ItemDetailsCard/ExitButton.png" id="4_f3x0f"]
 [ext_resource type="Texture2D" uid="uid://io35wpu802fp" path="res://assets/Sprites/UI/BackPatches/Patch_64_12.png" id="4_kjbxh"]
 [ext_resource type="Theme" uid="uid://bfce41la62bs6" path="res://Scenes/Themes/readable_theme.tres" id="5_l4e1i"]
 [ext_resource type="FontFile" uid="uid://cq1gkq6upl513" path="res://assets/Fonts/8bit-2.ttf" id="6_qh3ul"]
@@ -38,8 +39,31 @@
 [ext_resource type="Texture2D" uid="uid://dy16af4tlump0" path="res://assets/Sprites/UI/SymbolIcons/DmgSymbol_Ice.png" id="35_nwj8o"]
 [ext_resource type="Texture2D" uid="uid://cl627unmyivbd" path="res://assets/Sprites/UI/SymbolIcons/DmgSymbol_Poison.png" id="36_ct4tu"]
 [ext_resource type="Texture2D" uid="uid://do85dvxvlf5wk" path="res://defs/Actors/Squirrels/Squirrcerer_IconSmall.png" id="37_16bex"]
+[ext_resource type="Texture2D" uid="uid://x4trgcetlc06" path="res://notes/TutorialImages/Items/Ammos.png" id="39_rqndq"]
+[ext_resource type="Texture2D" uid="uid://uefsvgmbbuyr" path="res://notes/TutorialImages/Items/Potions.png" id="40_n5iy2"]
+[ext_resource type="Texture2D" uid="uid://di5sj5c3horut" path="res://defs/Items/Consumables/TestBomb.png" id="41_kkdq2"]
+[ext_resource type="Texture2D" uid="uid://vwoj75286dbg" path="res://notes/TutorialImages/Items/DrinkPotionPage.png" id="42_3ovgy"]
+[ext_resource type="Texture2D" uid="uid://bmgcqad17mi17" path="res://notes/TutorialImages/Items/ReloadPage.png" id="43_usfrs"]
+[ext_resource type="Texture2D" uid="uid://b0pbmi2yblnrv" path="res://defs/Items/Consumables/Money_SIcon.png" id="44_ds03o"]
+[ext_resource type="Texture2D" uid="uid://cqabsnexmvdw7" path="res://defs/Items/Pages/PageDropItem_Icon.png" id="45_48moo"]
+[ext_resource type="Texture2D" uid="uid://n03pv82oe3f3" path="res://defs/Items/Consumables/Ammo/Sprites/Gen_Ammo_SIcon.png" id="46_2eh5x"]
+[ext_resource type="Texture2D" uid="uid://bd4dgjnsk42ig" path="res://defs/Items/Consumables/HealthPotions/Sprites/HealthPotion_M_S.png" id="47_hefo1"]
+[ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/ItemDetailsCard/cost_container.gd" id="48_qwt0b"]
+[ext_resource type="Texture2D" uid="uid://dhtsefdcfxbg8" path="res://assets/Sprites/UI/SymbolIcons/AmmoSymbol_Gen.png" id="49_yn0in"]
+[ext_resource type="Texture2D" uid="uid://ckym0e60eik1k" path="res://assets/Sprites/UI/SymbolIcons/AmmoSymbol_Phy.png" id="50_34j7i"]
+[ext_resource type="Texture2D" uid="uid://cexlfs7svl17c" path="res://assets/Sprites/UI/SymbolIcons/AmmoSymbol_Mag.png" id="51_5ryoo"]
+[ext_resource type="Texture2D" uid="uid://cyt5q4hutdp6y" path="res://assets/Sprites/UI/SymbolIcons/AmmoSymbol_Abn.png" id="52_jq05t"]
+[ext_resource type="Texture2D" uid="uid://6f4ma46paymr" path="res://notes/TutorialImages/Ammo/AmmoChart.png" id="53_yarh5"]
+[ext_resource type="Texture2D" uid="uid://wlee6qbo16hi" path="res://notes/TutorialImages/Ammo/GenAmmoDemo.png" id="54_dusnf"]
+[ext_resource type="Texture2D" uid="uid://bdh4x87ck5hi5" path="res://defs/Items/Consumables/Ammo/Sprites/Gen_Ammo_LIcon.png" id="55_akuc0"]
+[ext_resource type="Texture2D" uid="uid://ds6ofysnerp6e" path="res://notes/TutorialImages/Ammo/PhyAmmoDemo.png" id="56_3etoq"]
+[ext_resource type="Texture2D" uid="uid://drxnjryltx0mx" path="res://defs/Items/Consumables/Ammo/Sprites/Phy_Ammo_LIcon.png" id="57_n30lr"]
+[ext_resource type="Texture2D" uid="uid://bkow5r3jhgab4" path="res://notes/TutorialImages/Ammo/MageAmmoDemo.png" id="58_arc43"]
+[ext_resource type="Texture2D" uid="uid://djiwkjtfony5y" path="res://defs/Items/Consumables/Ammo/Sprites/Mag_Ammo_LIcon.png" id="59_6efni"]
+[ext_resource type="Texture2D" uid="uid://dsvkalu2jexjd" path="res://notes/TutorialImages/Ammo/DivAmmoDemo.png" id="60_0utij"]
+[ext_resource type="Texture2D" uid="uid://cnbfngclu243n" path="res://defs/Items/Consumables/Ammo/Sprites/Abn_Ammo_LIcon.png" id="61_wf3sy"]
 
-[node name="TutorialCardsControl" type="Control" node_paths=PackedStringArray("top_container", "title_label", "count_label", "back_button", "back_button_background", "next_button", "next_button_background", "done_button", "done_button_background", "page_que_card", "movement_card", "targeting_actor_card", "targeting_spot_card", "ppr_card", "speed_card", "mass_card", "armor_card")]
+[node name="TutorialCardsControl" type="Control" node_paths=PackedStringArray("top_container", "title_label", "count_label", "close_button", "back_button", "back_button_background", "next_button", "next_button_background", "done_button", "done_button_background", "page_que_card", "movement_card", "targeting_actor_card", "targeting_spot_card", "ppr_card", "speed_card", "mass_card", "armor_card", "item_card", "item2_card", "ammo_card")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -48,8 +72,9 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_imldm")
 top_container = NodePath("CardControl/TopContainer")
-title_label = NodePath("CardControl/TopContainer/HBoxContainer/TitleLabel")
-count_label = NodePath("CardControl/TopContainer/HBoxContainer/CountLabel")
+title_label = NodePath("CardControl/TopContainer/TitleLabel")
+count_label = NodePath("CardControl/TopContainer/TitleLabel/HBoxContainer/CountLabel")
+close_button = NodePath("CardControl/TopContainer/TitleLabel/HBoxContainer/ExitButton/Button")
 back_button = NodePath("CardControl/TopContainer/HBoxContainer2/BackButtonControl/BackButton/Button")
 back_button_background = NodePath("CardControl/TopContainer/HBoxContainer2/BackButtonControl/BackButton")
 next_button = NodePath("CardControl/TopContainer/HBoxContainer2/NextButtonControl/NextButton/Button")
@@ -64,6 +89,9 @@ ppr_card = NodePath("CardControl/PPR")
 speed_card = NodePath("CardControl/Speed")
 mass_card = NodePath("CardControl/Mass")
 armor_card = NodePath("CardControl/Armor")
+item_card = NodePath("CardControl/Items")
+item2_card = NodePath("CardControl/Items2")
+ammo_card = NodePath("CardControl/Ammo")
 
 [node name="CardControl" type="Control" parent="."]
 custom_minimum_size = Vector2(800, 500)
@@ -89,15 +117,7 @@ offset_bottom = -16.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CardControl/TopContainer"]
-layout_mode = 2
-
-[node name="VSeparator" type="VSeparator" parent="CardControl/TopContainer/HBoxContainer"]
-self_modulate = Color(1, 1, 1, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="TitleLabel" type="Label" parent="CardControl/TopContainer/HBoxContainer"]
+[node name="TitleLabel" type="Label" parent="CardControl/TopContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("5_l4e1i")
@@ -106,17 +126,38 @@ theme_override_colors/font_outline_color = Color(0.470588, 0, 0, 1)
 theme_override_constants/outline_size = 4
 theme_override_fonts/font = ExtResource("6_qh3ul")
 theme_override_font_sizes/font_size = 48
-text = "Movement"
+text = "Items"
 horizontal_alignment = 1
 
-[node name="CountLabel" type="Label" parent="CardControl/TopContainer/HBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CardControl/TopContainer/TitleLabel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CountLabel" type="Label" parent="CardControl/TopContainer/TitleLabel/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("5_l4e1i")
 theme_override_colors/font_color = Color(0.470588, 0, 0, 1)
 theme_override_font_sizes/font_size = 48
 text = "  1/X  "
-horizontal_alignment = 2
+
+[node name="ExitButton" type="TextureRect" parent="CardControl/TopContainer/TitleLabel/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("4_f3x0f")
+expand_mode = 3
+
+[node name="Button" type="Button" parent="CardControl/TopContainer/TitleLabel/HBoxContainer/ExitButton"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="HSeparator" type="HSeparator" parent="CardControl/TopContainer"]
 self_modulate = Color(1, 1, 1, 0)
@@ -327,6 +368,7 @@ text = "Path Arrow shows end position"
 scroll_active = false
 
 [node name="Movement" type="Control" parent="CardControl"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -656,7 +698,7 @@ bbcode_enabled = true
 text = "Each [color=#780000]Actor[/color] has a [color=#780000]PPR[/color] stat 
 which determines how many 
 [color=blue]Action Pages[/color] they can fit in 
-thier [color=blue]PageQue[/color] each [color=#780000]Round[/color]"
+thier [color=blue]PageQue[/color] each [color=#780000]Round[/color]."
 fit_content = true
 scroll_active = false
 
@@ -754,7 +796,6 @@ fit_content = true
 scroll_active = false
 
 [node name="HSeparator6" type="HSeparator" parent="CardControl/PPR/VBoxContainer"]
-visible = false
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 size_flags_vertical = 3
@@ -970,9 +1011,10 @@ mouse_filter = 2
 [node name="VBoxContainer" type="VBoxContainer" parent="CardControl/Mass"]
 layout_mode = 0
 offset_left = 27.0
-offset_top = 251.0
+offset_top = 81.0
 offset_right = 774.0
-offset_bottom = 484.0
+offset_bottom = 475.0
+mouse_filter = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CardControl/Mass/VBoxContainer"]
 layout_mode = 2
@@ -1058,9 +1100,11 @@ size_flags_horizontal = 3
 [node name="HSeparator" type="HSeparator" parent="CardControl/Mass/VBoxContainer"]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
+size_flags_vertical = 3
 
 [node name="DescriptionLabel2" type="RichTextLabel" parent="CardControl/Mass/VBoxContainer"]
 layout_mode = 2
+mouse_filter = 2
 theme = ExtResource("5_l4e1i")
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_fonts/normal_font = ExtResource("6_qh3ul")
@@ -1075,6 +1119,7 @@ scroll_active = false
 [node name="HSeparator2" type="HSeparator" parent="CardControl/Mass/VBoxContainer"]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
+mouse_filter = 2
 
 [node name="DescriptionLabel3" type="RichTextLabel" parent="CardControl/Mass/VBoxContainer"]
 visible = false
@@ -1090,36 +1135,36 @@ scroll_active = false
 [node name="PPR_Demo_Image2" type="TextureRect" parent="CardControl/Mass"]
 layout_mode = 0
 offset_left = 23.0
-offset_top = 57.0
+offset_top = 168.0
 offset_right = 126.0
-offset_bottom = 160.0
+offset_bottom = 271.0
 scale = Vector2(2, 2)
 texture = ExtResource("21_64d73")
 
 [node name="PPR_Demo_Image3" type="TextureRect" parent="CardControl/Mass"]
 layout_mode = 0
 offset_left = 202.0
-offset_top = 57.0
+offset_top = 168.0
 offset_right = 305.0
-offset_bottom = 160.0
+offset_bottom = 271.0
 scale = Vector2(2, 2)
 texture = ExtResource("25_gdhe2")
 
 [node name="PPR_Demo_Image4" type="TextureRect" parent="CardControl/Mass"]
 layout_mode = 0
 offset_left = 380.0
-offset_top = 57.0
+offset_top = 168.0
 offset_right = 483.0
-offset_bottom = 160.0
+offset_bottom = 271.0
 scale = Vector2(2, 2)
 texture = ExtResource("22_o2dff")
 
 [node name="PPR_Demo_Image5" type="TextureRect" parent="CardControl/Mass"]
 layout_mode = 0
 offset_left = 559.0
-offset_top = 57.0
+offset_top = 168.0
 offset_right = 663.0
-offset_bottom = 161.0
+offset_bottom = 272.0
 scale = Vector2(2, 2)
 texture = ExtResource("27_o232v")
 
@@ -1614,6 +1659,850 @@ on spell casting
 magical Actors."
 
 [node name="HSeparator5" type="HSeparator" parent="CardControl/Armor/BoxContainer/VBoxContainer2"]
+visible = false
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Items" type="Control" parent="CardControl"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="BoxContainer" type="BoxContainer" parent="CardControl/Items"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = 84.0
+offset_right = -24.0
+offset_bottom = -66.0
+grow_horizontal = 2
+grow_vertical = 2
+vertical = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CardControl/Items/BoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CardControl/Items/BoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="DescriptionLabel" type="RichTextLabel" parent="CardControl/Items/BoxContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(438, 0)
+layout_mode = 2
+theme = ExtResource("5_l4e1i")
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("6_qh3ul")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "Each [color=#780000]Actor[/color] is equip with
+a [color=#780000]Bag[/color] that holds a certain
+number of [color=#780000]Items[/color]."
+fit_content = true
+scroll_active = false
+
+[node name="HSeparator" type="HSeparator" parent="CardControl/Items/BoxContainer/HBoxContainer/VBoxContainer"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="DescriptionLabel2" type="RichTextLabel" parent="CardControl/Items/BoxContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(438, 0)
+layout_mode = 2
+theme = ExtResource("5_l4e1i")
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("6_qh3ul")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "Some [color=blue]Pages[/color] comsume [color=#780000]Items[/color] selected from your [color=#780000]Bag[/color] and can only be used with certain [color=#780000]Item Types[/color]."
+fit_content = true
+scroll_active = false
+
+[node name="HSeparator2" type="HSeparator" parent="CardControl/Items/BoxContainer/HBoxContainer/VBoxContainer"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="CardControl/Items/BoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="Label" type="Label" parent="CardControl/Items/BoxContainer/HBoxContainer/VBoxContainer2"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 1
+theme = ExtResource("5_l4e1i")
+theme_override_colors/font_color = Color(0.470588, 0, 0, 1)
+theme_override_font_sizes/font_size = 38
+text = "Item Types"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AmmoContainer" type="HBoxContainer" parent="CardControl/Items/BoxContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CardControl/Items/BoxContainer/HBoxContainer/VBoxContainer2/AmmoContainer"]
+custom_minimum_size = Vector2(128, 64)
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("39_rqndq")
+
+[node name="Label" type="Label" parent="CardControl/Items/BoxContainer/HBoxContainer/VBoxContainer2/AmmoContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+theme = ExtResource("5_l4e1i")
+theme_override_font_sizes/font_size = 32
+text = " Ammo"
+vertical_alignment = 1
+
+[node name="PotionsContainer" type="HBoxContainer" parent="CardControl/Items/BoxContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+
+[node name="PotionS" type="TextureRect" parent="CardControl/Items/BoxContainer/HBoxContainer/VBoxContainer2/PotionsContainer"]
+custom_minimum_size = Vector2(128, 64)
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("40_n5iy2")
+
+[node name="Label" type="Label" parent="CardControl/Items/BoxContainer/HBoxContainer/VBoxContainer2/PotionsContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+theme = ExtResource("5_l4e1i")
+theme_override_font_sizes/font_size = 32
+text = " Potions"
+vertical_alignment = 1
+
+[node name="BombsContainer" type="HBoxContainer" parent="CardControl/Items/BoxContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CardControl/Items/BoxContainer/HBoxContainer/VBoxContainer2/BombsContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("41_kkdq2")
+
+[node name="Label" type="Label" parent="CardControl/Items/BoxContainer/HBoxContainer/VBoxContainer2/BombsContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+theme = ExtResource("5_l4e1i")
+theme_override_font_sizes/font_size = 32
+text = "Bombs #TODO"
+vertical_alignment = 1
+
+[node name="DescriptionLabel3" type="RichTextLabel" parent="CardControl/Items/BoxContainer"]
+visible = false
+custom_minimum_size = Vector2(438, 0)
+layout_mode = 2
+theme = ExtResource("5_l4e1i")
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("6_qh3ul")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "Pick up [color=#780000]Items[/color] by moving an [color=#780000]Actor[/color] into the [color=#780000]Spot[/color] where they were dropped. They will be added to that [color=#780000]Actor's[/color] [color=#780000]Bag[/color] if there is an open slot for it."
+fit_content = true
+scroll_active = false
+
+[node name="HSeparator3" type="HSeparator" parent="CardControl/Items/BoxContainer"]
+visible = false
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="DescriptionLabel4" type="RichTextLabel" parent="CardControl/Items/BoxContainer"]
+visible = false
+custom_minimum_size = Vector2(438, 0)
+layout_mode = 2
+theme = ExtResource("5_l4e1i")
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("6_qh3ul")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "When [color=#780000]Combat[/color] ends, all [color=#780000]Items[/color] left on the [color=#780000]Map[/color] are added to the [color=blue]Party Inventory[/color]."
+fit_content = true
+scroll_active = false
+
+[node name="HSeparator4" type="HSeparator" parent="CardControl/Items/BoxContainer"]
+visible = false
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="CardControl/Items/BoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CardControl/Items/BoxContainer/HBoxContainer2"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="DrinkPotionContainer" type="HBoxContainer" parent="CardControl/Items/BoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TextureRect" type="TextureRect" parent="CardControl/Items/BoxContainer/HBoxContainer2/DrinkPotionContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("42_3ovgy")
+
+[node name="DescriptionLabel" type="RichTextLabel" parent="CardControl/Items/BoxContainer/HBoxContainer2/DrinkPotionContainer"]
+clip_contents = false
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("5_l4e1i")
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("6_qh3ul")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = " [color=blue]\"Drink Potion\"[/color]
+  Consume a [color=#780000]Potion[/color]."
+fit_content = true
+scroll_active = false
+
+[node name="ReloadContainer" type="HBoxContainer" parent="CardControl/Items/BoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TextureRect" type="TextureRect" parent="CardControl/Items/BoxContainer/HBoxContainer2/ReloadContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("43_usfrs")
+
+[node name="DescriptionLabel" type="RichTextLabel" parent="CardControl/Items/BoxContainer/HBoxContainer2/ReloadContainer"]
+clip_contents = false
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme = ExtResource("5_l4e1i")
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("6_qh3ul")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = " [color=blue]\"Reload\"[/color]
+  Fill a [color=blue]Page[/color]'s [color=#780000]Ammo[/color]."
+fit_content = true
+scroll_active = false
+
+[node name="Items2" type="Control" parent="CardControl"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="BoxContainer" type="BoxContainer" parent="CardControl/Items2"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = 84.0
+offset_right = -24.0
+offset_bottom = -66.0
+grow_horizontal = 2
+grow_vertical = 2
+vertical = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CardControl/Items2/BoxContainer"]
+layout_mode = 2
+
+[node name="DescriptionContainer" type="VBoxContainer" parent="CardControl/Items2/BoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="DescriptionLabel3" type="RichTextLabel" parent="CardControl/Items2/BoxContainer/HBoxContainer/DescriptionContainer"]
+layout_mode = 2
+theme = ExtResource("5_l4e1i")
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("6_qh3ul")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[color=#780000]Enemies[/color] will sometimes
+drop an [color=#780000]Item[/color] on death."
+fit_content = true
+scroll_active = false
+
+[node name="HSeparator" type="HSeparator" parent="CardControl/Items2/BoxContainer/HBoxContainer/DescriptionContainer"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="DescriptionLabel4" type="RichTextLabel" parent="CardControl/Items2/BoxContainer/HBoxContainer/DescriptionContainer"]
+layout_mode = 2
+theme = ExtResource("5_l4e1i")
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("6_qh3ul")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[color=#780000]Actors[/color] can pick up [color=#780000]Items[/color] by moving into the [color=#780000]Spot[/color] where it was dropped."
+fit_content = true
+scroll_active = false
+
+[node name="HSeparator2" type="HSeparator" parent="CardControl/Items2/BoxContainer/HBoxContainer/DescriptionContainer"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MoneyPagesVBoxContainer" type="VBoxContainer" parent="CardControl/Items2/BoxContainer/HBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="CardControl/Items2/BoxContainer/HBoxContainer/MoneyPagesVBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 1
+theme = ExtResource("5_l4e1i")
+theme_override_colors/font_color = Color(0.470588, 0, 0, 1)
+theme_override_font_sizes/font_size = 38
+text = "Item Types"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MoneyContainer" type="HBoxContainer" parent="CardControl/Items2/BoxContainer/HBoxContainer/MoneyPagesVBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = -8
+
+[node name="TextureRect" type="TextureRect" parent="CardControl/Items2/BoxContainer/HBoxContainer/MoneyPagesVBoxContainer/MoneyContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("44_ds03o")
+
+[node name="Label" type="Label" parent="CardControl/Items2/BoxContainer/HBoxContainer/MoneyPagesVBoxContainer/MoneyContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+theme = ExtResource("5_l4e1i")
+theme_override_font_sizes/font_size = 32
+text = " Money"
+vertical_alignment = 1
+
+[node name="PagesContainer" type="HBoxContainer" parent="CardControl/Items2/BoxContainer/HBoxContainer/MoneyPagesVBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = -8
+
+[node name="TextureRect" type="TextureRect" parent="CardControl/Items2/BoxContainer/HBoxContainer/MoneyPagesVBoxContainer/PagesContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("45_48moo")
+
+[node name="Label" type="Label" parent="CardControl/Items2/BoxContainer/HBoxContainer/MoneyPagesVBoxContainer/PagesContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+theme = ExtResource("5_l4e1i")
+theme_override_font_sizes/font_size = 32
+text = " Pages"
+vertical_alignment = 1
+
+[node name="AmmoPotionsContainer" type="VBoxContainer" parent="CardControl/Items2/BoxContainer/HBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="CardControl/Items2/BoxContainer/HBoxContainer/AmmoPotionsContainer"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 1
+theme = ExtResource("5_l4e1i")
+theme_override_colors/font_color = Color(0.470588, 0, 0, 1)
+theme_override_font_sizes/font_size = 38
+text = "Item Types"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AmmoContainer" type="HBoxContainer" parent="CardControl/Items2/BoxContainer/HBoxContainer/AmmoPotionsContainer"]
+layout_mode = 2
+theme_override_constants/separation = -8
+
+[node name="TextureRect" type="TextureRect" parent="CardControl/Items2/BoxContainer/HBoxContainer/AmmoPotionsContainer/AmmoContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("46_2eh5x")
+
+[node name="Label" type="Label" parent="CardControl/Items2/BoxContainer/HBoxContainer/AmmoPotionsContainer/AmmoContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+theme = ExtResource("5_l4e1i")
+theme_override_font_sizes/font_size = 32
+text = " Ammo"
+vertical_alignment = 1
+
+[node name="PotionsContainer" type="HBoxContainer" parent="CardControl/Items2/BoxContainer/HBoxContainer/AmmoPotionsContainer"]
+layout_mode = 2
+theme_override_constants/separation = -8
+
+[node name="TextureRect" type="TextureRect" parent="CardControl/Items2/BoxContainer/HBoxContainer/AmmoPotionsContainer/PotionsContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("47_hefo1")
+
+[node name="Label" type="Label" parent="CardControl/Items2/BoxContainer/HBoxContainer/AmmoPotionsContainer/PotionsContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+theme = ExtResource("5_l4e1i")
+theme_override_font_sizes/font_size = 32
+text = " Potion"
+vertical_alignment = 1
+
+[node name="VSeparator" type="VSeparator" parent="CardControl/Items2/BoxContainer/HBoxContainer"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(12, 0)
+layout_mode = 2
+
+[node name="DescriptionLabel5" type="RichTextLabel" parent="CardControl/Items2/BoxContainer"]
+custom_minimum_size = Vector2(438, 0)
+layout_mode = 2
+theme = ExtResource("5_l4e1i")
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("6_qh3ul")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "An [color=#780000]Actor[/color] will only pick up an [color=#780000]Item[/color] if there is an open slot for it in that [color=#780000]Actor[/color]'s [color=#780000]Bag[/color]."
+fit_content = true
+scroll_active = false
+
+[node name="HSeparator3" type="HSeparator" parent="CardControl/Items2/BoxContainer"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="DescriptionLabel4" type="RichTextLabel" parent="CardControl/Items2/BoxContainer"]
+custom_minimum_size = Vector2(438, 0)
+layout_mode = 2
+theme = ExtResource("5_l4e1i")
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("6_qh3ul")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "When [color=#780000]Combat[/color] ends, all [color=#780000]Items[/color] left on the [color=#780000]Map[/color] are added to the [color=blue]Party Inventory[/color] back at [color=#780000]Camp[/color]."
+fit_content = true
+scroll_active = false
+
+[node name="HSeparator4" type="HSeparator" parent="CardControl/Items2/BoxContainer"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Ammo" type="Control" parent="CardControl"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="BoxContainer" type="BoxContainer" parent="CardControl/Ammo"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = 73.0
+offset_right = -24.0
+offset_bottom = -12.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+vertical = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CardControl/Ammo/BoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="DescriptionContainer" type="VBoxContainer" parent="CardControl/Ammo/BoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="DescriptionLabel" type="RichTextLabel" parent="CardControl/Ammo/BoxContainer/HBoxContainer/DescriptionContainer"]
+layout_mode = 2
+theme = ExtResource("5_l4e1i")
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("6_qh3ul")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "Some [color=blue]Action Pages[/color] have one of [color=#780000]4[/color] types of [color=#780000]Ammo[/color] which is comsumed when used."
+fit_content = true
+scroll_active = false
+
+[node name="HSeparator" type="HSeparator" parent="CardControl/Ammo/BoxContainer/HBoxContainer/DescriptionContainer"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="AmmoContainer" type="HBoxContainer" parent="CardControl/Ammo/BoxContainer/HBoxContainer/DescriptionContainer" node_paths=PackedStringArray("count_val_label", "cost_val_label", "clip_val_label", "ammo_icon_rect")]
+layout_mode = 2
+script = ExtResource("48_qwt0b")
+count_val_label = NodePath("HBoxContainer/VBoxContainer/CostLabel/CountLabel")
+cost_val_label = NodePath("HBoxContainer/VBoxContainer/CostLabel/CostLabel")
+clip_val_label = NodePath("HBoxContainer/VBoxContainer/CostLabel/ClipLabel")
+ammo_icon_rect = NodePath("HBoxContainer/VBoxContainer/CostLabel/AmmoIcon")
+gen_ammo_icon = ExtResource("49_yn0in")
+phy_ammo_icon = ExtResource("50_34j7i")
+mag_ammo_icon = ExtResource("51_5ryoo")
+abn_ammo_icon = ExtResource("52_jq05t")
+
+[node name="CostTitle" type="Label" parent="CardControl/Ammo/BoxContainer/HBoxContainer/DescriptionContainer/AmmoContainer"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 8
+theme = ExtResource("5_l4e1i")
+theme_override_colors/font_color = Color(0.470588, 0, 0, 1)
+text = "Ammo:"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CardControl/Ammo/BoxContainer/HBoxContainer/DescriptionContainer/AmmoContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CardControl/Ammo/BoxContainer/HBoxContainer/DescriptionContainer/AmmoContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="CostLabel3" type="Label" parent="CardControl/Ammo/BoxContainer/HBoxContainer/DescriptionContainer/AmmoContainer/HBoxContainer/VBoxContainer"]
+self_modulate = Color(0.31, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("5_l4e1i")
+theme_override_font_sizes/font_size = 32
+text = " Shown As:"
+
+[node name="CostLabel" type="HBoxContainer" parent="CardControl/Ammo/BoxContainer/HBoxContainer/DescriptionContainer/AmmoContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/separation = 1
+
+[node name="AmmoIcon" type="TextureRect" parent="CardControl/Ammo/BoxContainer/HBoxContainer/DescriptionContainer/AmmoContainer/HBoxContainer/VBoxContainer/CostLabel"]
+layout_mode = 2
+texture = ExtResource("49_yn0in")
+expand_mode = 3
+
+[node name="CountLabel" type="Label" parent="CardControl/Ammo/BoxContainer/HBoxContainer/DescriptionContainer/AmmoContainer/HBoxContainer/VBoxContainer/CostLabel"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("3_bdbcw")
+theme_override_font_sizes/font_size = 32
+text = "X"
+
+[node name="Seperator2" type="Label" parent="CardControl/Ammo/BoxContainer/HBoxContainer/DescriptionContainer/AmmoContainer/HBoxContainer/VBoxContainer/CostLabel"]
+self_modulate = Color(0.31, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("3_bdbcw")
+theme_override_font_sizes/font_size = 32
+text = " ("
+
+[node name="CostLabel" type="Label" parent="CardControl/Ammo/BoxContainer/HBoxContainer/DescriptionContainer/AmmoContainer/HBoxContainer/VBoxContainer/CostLabel"]
+self_modulate = Color(0.31, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("3_bdbcw")
+theme_override_font_sizes/font_size = 32
+text = "C"
+
+[node name="Seperator3" type="Label" parent="CardControl/Ammo/BoxContainer/HBoxContainer/DescriptionContainer/AmmoContainer/HBoxContainer/VBoxContainer/CostLabel"]
+self_modulate = Color(0.31, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("3_bdbcw")
+theme_override_font_sizes/font_size = 32
+text = ":"
+
+[node name="ClipLabel" type="Label" parent="CardControl/Ammo/BoxContainer/HBoxContainer/DescriptionContainer/AmmoContainer/HBoxContainer/VBoxContainer/CostLabel"]
+self_modulate = Color(0.31, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("3_bdbcw")
+theme_override_font_sizes/font_size = 32
+text = "M"
+
+[node name="Seperator4" type="Label" parent="CardControl/Ammo/BoxContainer/HBoxContainer/DescriptionContainer/AmmoContainer/HBoxContainer/VBoxContainer/CostLabel"]
+self_modulate = Color(0.31, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("3_bdbcw")
+theme_override_font_sizes/font_size = 32
+text = ")"
+
+[node name="VSeparator" type="VSeparator" parent="CardControl/Ammo/BoxContainer/HBoxContainer/DescriptionContainer/AmmoContainer/HBoxContainer"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(8, 0)
+layout_mode = 2
+
+[node name="DescriptionLabel4" type="RichTextLabel" parent="CardControl/Ammo/BoxContainer/HBoxContainer/DescriptionContainer/AmmoContainer/HBoxContainer"]
+clip_contents = false
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("5_l4e1i")
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("6_qh3ul")
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+text = "X: Number of uses
+C: Cost per use
+M: Max Ammo"
+fit_content = true
+scroll_active = false
+
+[node name="HSeparator2" type="HSeparator" parent="CardControl/Ammo/BoxContainer/HBoxContainer/DescriptionContainer"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="DescriptionLabel3" type="RichTextLabel" parent="CardControl/Ammo/BoxContainer/HBoxContainer/DescriptionContainer"]
+layout_mode = 2
+theme = ExtResource("5_l4e1i")
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("6_qh3ul")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "This [color=#780000]Ammo[/color] can be reloaded with [color=#780000]Items[/color] from your [color=#780000]Bag[/color]."
+fit_content = true
+scroll_active = false
+
+[node name="HSeparator3" type="HSeparator" parent="CardControl/Ammo/BoxContainer/HBoxContainer/DescriptionContainer"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CardControl/Ammo/BoxContainer/HBoxContainer/DescriptionContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="GENDescriptionLabel2" type="RichTextLabel" parent="CardControl/Ammo/BoxContainer/HBoxContainer/DescriptionContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme = ExtResource("5_l4e1i")
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("6_qh3ul")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "Generic [color=#780000]GEN Ammo[/color] 
+can be subistuted 
+               for [color=#780000]MAG[/color] or 
+               [color=#780000]PHY Ammo[/color]."
+fit_content = true
+scroll_active = false
+
+[node name="TextureRect2" type="TextureRect" parent="CardControl/Ammo/BoxContainer/HBoxContainer/DescriptionContainer/HBoxContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("53_yarh5")
+stretch_mode = 3
+
+[node name="VSeparator" type="VSeparator" parent="CardControl/Ammo/BoxContainer/HBoxContainer/DescriptionContainer/HBoxContainer"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(24, 0)
+layout_mode = 2
+
+[node name="MoneyPagesVBoxContainer" type="VBoxContainer" parent="CardControl/Ammo/BoxContainer/HBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="CardControl/Ammo/BoxContainer/HBoxContainer/MoneyPagesVBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 1
+theme = ExtResource("5_l4e1i")
+theme_override_colors/font_color = Color(0.470588, 0, 0, 1)
+theme_override_font_sizes/font_size = 38
+text = "Item Types"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GenContainer" type="HBoxContainer" parent="CardControl/Ammo/BoxContainer/HBoxContainer/MoneyPagesVBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = -8
+
+[node name="TextureRect" type="TextureRect" parent="CardControl/Ammo/BoxContainer/HBoxContainer/MoneyPagesVBoxContainer/GenContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("54_dusnf")
+
+[node name="TextureRect2" type="TextureRect" parent="CardControl/Ammo/BoxContainer/HBoxContainer/MoneyPagesVBoxContainer/GenContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("55_akuc0")
+
+[node name="Label" type="Label" parent="CardControl/Ammo/BoxContainer/HBoxContainer/MoneyPagesVBoxContainer/GenContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+theme = ExtResource("5_l4e1i")
+theme_override_font_sizes/font_size = 32
+text = "GEN Ammo"
+vertical_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="CardControl/Ammo/BoxContainer/HBoxContainer/MoneyPagesVBoxContainer"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="PhyContainer" type="HBoxContainer" parent="CardControl/Ammo/BoxContainer/HBoxContainer/MoneyPagesVBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = -8
+
+[node name="TextureRect" type="TextureRect" parent="CardControl/Ammo/BoxContainer/HBoxContainer/MoneyPagesVBoxContainer/PhyContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("56_3etoq")
+
+[node name="TextureRect2" type="TextureRect" parent="CardControl/Ammo/BoxContainer/HBoxContainer/MoneyPagesVBoxContainer/PhyContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("57_n30lr")
+
+[node name="Label" type="Label" parent="CardControl/Ammo/BoxContainer/HBoxContainer/MoneyPagesVBoxContainer/PhyContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+theme = ExtResource("5_l4e1i")
+theme_override_font_sizes/font_size = 32
+text = "PHY Ammo"
+vertical_alignment = 1
+
+[node name="HSeparator2" type="HSeparator" parent="CardControl/Ammo/BoxContainer/HBoxContainer/MoneyPagesVBoxContainer"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MagContainer" type="HBoxContainer" parent="CardControl/Ammo/BoxContainer/HBoxContainer/MoneyPagesVBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = -8
+
+[node name="TextureRect" type="TextureRect" parent="CardControl/Ammo/BoxContainer/HBoxContainer/MoneyPagesVBoxContainer/MagContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("58_arc43")
+
+[node name="TextureRect2" type="TextureRect" parent="CardControl/Ammo/BoxContainer/HBoxContainer/MoneyPagesVBoxContainer/MagContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("59_6efni")
+
+[node name="Label" type="Label" parent="CardControl/Ammo/BoxContainer/HBoxContainer/MoneyPagesVBoxContainer/MagContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+theme = ExtResource("5_l4e1i")
+theme_override_font_sizes/font_size = 32
+text = "MAG Ammo"
+vertical_alignment = 1
+
+[node name="HSeparator3" type="HSeparator" parent="CardControl/Ammo/BoxContainer/HBoxContainer/MoneyPagesVBoxContainer"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="AbnContainer" type="HBoxContainer" parent="CardControl/Ammo/BoxContainer/HBoxContainer/MoneyPagesVBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = -8
+
+[node name="TextureRect" type="TextureRect" parent="CardControl/Ammo/BoxContainer/HBoxContainer/MoneyPagesVBoxContainer/AbnContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("60_0utij")
+
+[node name="TextureRect2" type="TextureRect" parent="CardControl/Ammo/BoxContainer/HBoxContainer/MoneyPagesVBoxContainer/AbnContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("61_wf3sy")
+
+[node name="Label" type="Label" parent="CardControl/Ammo/BoxContainer/HBoxContainer/MoneyPagesVBoxContainer/AbnContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+theme = ExtResource("5_l4e1i")
+theme_override_font_sizes/font_size = 32
+text = "ABN Ammo"
+vertical_alignment = 1
+
+[node name="HSeparator4" type="HSeparator" parent="CardControl/Ammo/BoxContainer/HBoxContainer/MoneyPagesVBoxContainer"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="VSeparator" type="VSeparator" parent="CardControl/Ammo/BoxContainer/HBoxContainer"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(24, 0)
+layout_mode = 2
+
+[node name="AbnContainer2" type="HBoxContainer" parent="CardControl/Ammo/BoxContainer"]
+visible = false
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CardControl/Ammo/BoxContainer/AbnContainer2"]
+layout_mode = 2
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CardControl/Ammo/BoxContainer/AbnContainer2/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CardControl/Ammo/BoxContainer/AbnContainer2/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("55_akuc0")
+
+[node name="GENDescriptionLabel" type="RichTextLabel" parent="CardControl/Ammo/BoxContainer/AbnContainer2/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(438, 0)
+layout_mode = 2
+theme = ExtResource("5_l4e1i")
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("6_qh3ul")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "Generic [color=#780000]GEN Ammo[/color] can be subistuted for [color=#780000]MAG[/color] or [color=#780000]PHY[/color]."
+fit_content = true
+scroll_active = false
+
+[node name="Label" type="Label" parent="CardControl/Ammo/BoxContainer/AbnContainer2/VBoxContainer/HBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 1
+theme = ExtResource("5_l4e1i")
+theme_override_font_sizes/font_size = 32
+text = "GEN Ammo"
+vertical_alignment = 1
+
+[node name="HSeparator3" type="HSeparator" parent="CardControl/Ammo/BoxContainer"]
+visible = false
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="DescriptionLabel4" type="RichTextLabel" parent="CardControl/Ammo/BoxContainer"]
+visible = false
+custom_minimum_size = Vector2(438, 0)
+layout_mode = 2
+theme = ExtResource("5_l4e1i")
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("6_qh3ul")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "When [color=#780000]Combat[/color] ends, all [color=#780000]Items[/color] left on the [color=#780000]Map[/color] are added to the [color=blue]Party Inventory[/color] back at [color=#780000]Camp[/color]."
+fit_content = true
+scroll_active = false
+
+[node name="HSeparator4" type="HSeparator" parent="CardControl/Ammo/BoxContainer"]
 visible = false
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2

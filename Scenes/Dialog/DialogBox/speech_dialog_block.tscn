@@ -105,6 +105,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="HiddenTextEdit" type="TextEdit" parent="SpeechDialogBlock/ScrollContainer/EntriyContainer"]
+visible = false
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 theme = ExtResource("4_5vyn8")
@@ -129,7 +130,7 @@ size_flags_horizontal = 3
 theme = ExtResource("4_5vyn8")
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-text = "The City headquarters of The Collage and one of this"
+text = "Some Text"
 fit_content = true
 scroll_active = false
 

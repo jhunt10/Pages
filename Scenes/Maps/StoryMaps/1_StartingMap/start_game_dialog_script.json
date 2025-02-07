@@ -1,19 +1,6 @@
 {
 	"_MetaData_": {
-		"StartPartKey": "Intro_SaveTheWorld_Question"
-	},
-	"PrologSwitch": {
-		"_NextPartLogic": 
-		{
-			"FlagName": "StartClass",
-			"Cases": {
-				"Soldier": "Prolog_Soldier",
-				"Rogue": "Prolog_Rogue",
-				"Mage": "Prolog_Mage",
-				"Priest": "Prolog_Priest"
-			}
-		},
-		"WaitForNextButton": false
+		"StartPartKey": "Prolog_Soldier"
 	},
 	"Prolog_Soldier":{
 		"_NextPartKey": "Intro_WalkIn",
@@ -1212,6 +1199,9 @@
 						"Text": "did you?"
 					},
 					{
+						"EntryType": "WaitToRead"
+					},
+					{
 						"EntryType": "Question",
 						"Choices": {"Yes": "Tutorial:true", "No (Skip Tutorial)": "Tutorial:false"}
 					}
@@ -1233,6 +1223,11 @@
 				"WaitToFinish": true,
 				"WaitForNextButton": false,
 				"Entries": [
+					{
+						"EntryType": "Speaker",
+						"SpeakerName": "MtFr",
+						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Happy.png"
+					},
 					{
 						"EntryType": "Clear",
 						"ClearSpeaker": false
