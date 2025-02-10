@@ -1,7 +1,7 @@
 class_name BaseItem
 extends BaseLoadObject
 
-enum ItemTypes {KeyItem, Page, Consumable, Ammo, Equipment, Weapon, Material}
+enum ItemTypes {KeyItem, Page, Consumable, Ammo, Equipment, Weapon, Money}
 enum ItemRarity {Mundane, Common, Rare, Legendary, Unique}
 
 var Id:String: 
@@ -23,7 +23,7 @@ var item_details:Dictionary
 
 func _init(key:String, def_load_path:String, def:Dictionary, id:String='', data:Dictionary={}) -> void:
 	super(key, def_load_path, def, id, data)
-	item_details = get_load_val("ItemDetails", {})
+	item_details = get_load_val("ItemDetails", {}).duplicate()
 
 func save_me()->bool:
 	return true

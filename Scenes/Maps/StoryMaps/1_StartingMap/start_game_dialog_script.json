@@ -1,10 +1,12 @@
 {
 	"_MetaData_": {
-		"StartPartKey": "PageSystemTutorial"
+		"StartPartKey": "OfferTutorial",
+		"Inital_BlackOutState":"Black"
 	},
 	"Prolog_Soldier":{
 		"_NextPartKey": "Intro_WalkIn",
 		"WaitForNextButton": true,
+		"Inital_BlackOutState":"Black",
 		"Blocks":[
 			{
 				"BlockType": "Blackout",

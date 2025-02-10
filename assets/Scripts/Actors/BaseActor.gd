@@ -181,18 +181,24 @@ func die():
 	if map_pos:
 		
 		# Roll for item drop
-		var drop_items = get_load_val("DropItems", {})
+		var drop_items = get_load_val("DropItemsSet", {})
 		var max_val:int = 0
 		for weight in drop_items.values():
 			max_val += weight
 		var roll = randi() % (max_val + 1)
-		for key in drop_items.keys():
+		for key:String in drop_items.keys():
 			if drop_items[key] <= 0:
 				continue
 			roll -= drop_items[key]
 			if roll <= 0:
 				if key != "":
-					ItemHelper.spawn_item(key, {}, map_pos)
+					if key.begins_with("Money"):
+						var tokens = key.split(':')
+						key = "MoneyItem"
+						var item = ItemHelper.spawn_item(key, {}, map_pos)
+						item.item_details['Value'] = int(tokens[1])
+					else:
+						ItemHelper.spawn_item(key, {}, map_pos)
 				break
 		
 	on_death.emit()

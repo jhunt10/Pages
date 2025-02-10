@@ -2,6 +2,9 @@ class_name GameVictoryScreen
 extends Control
 
 
+@export var rounds_label:Label
+@export var enemies_label:Label
+@export var money_label:Label
 @export var camp_button:Button
 @export var camp_button_label:Label
 @export var premade_pickup_page:HBoxContainer
@@ -30,7 +33,16 @@ func _on_camp_button():
 
 func collect_dropped_items():
 	var items_datas = {}
+	var total_money = 0
 	for item:BaseItem in CombatRootControl.Instance.GameState.list_items():
+		
+		print("Collecting Item: " + item.Id)
+		if item.get_item_type() == BaseItem.ItemTypes.Money:
+			total_money += item.get_item_value()
+			CombatRootControl.Instance.GameState.delete_item(item)
+			ItemLibrary.delete_item(item)
+			continue
+		
 		var item_type = "default"
 		if item is BasePageItem:
 			item_type = "Page"
@@ -46,7 +58,22 @@ func collect_dropped_items():
 		else:
 			items_datas[item_type][item_name]['Count'] += 1
 		PlayerInventory.add_item(item)
-		CombatRootControl.Instance.GameState.remove_item(item)
+		CombatRootControl.Instance.GameState.delete_item(item)
+	
+	
+	var enemy_count = 0
+	var actors = CombatRootControl.Instance.GameState.list_actors(true)
+	for actor:BaseActor in actors:
+		if actor.is_dead and actor.FactionIndex != 0:
+			enemy_count += 1
+			var actor_details = actor.get_load_val("ActorDetails", {})
+			var enemy_val = actor_details.get("MoneyValue", 0)
+			total_money += enemy_val
+			
+	enemies_label.text = str(enemy_count)
+	rounds_label.text = str(CombatRootControl.QueController.round_counter)
+	money_label.text = "$"+str(total_money)
+	StoryState.add_money(total_money)
 	
 	if not items_datas.has("Page"):
 		pickup_pages_container.hide()

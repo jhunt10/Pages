@@ -49,10 +49,13 @@ func get_actor(actor_id:String, allow_dead:bool=false, error_if_null:bool=true)-
 		return null
 	return actor
 
+func remove_actor_from_map(actor:BaseActor):
+	map_data.remove_actor(actor)
+
 func delete_actor(actor:BaseActor):
 	if _actors.keys().has(actor.Id):
 		_actors.erase(actor.Id)
-		map_data.remove_actor(actor)
+		remove_actor_from_map(actor)
 		#_actor_poses.erase(actor.Id)
 
 func list_actors(include_dead:bool=false):
@@ -110,10 +113,10 @@ func list_items()->Array:
 	return _items.values()
 
 func delete_item(item:BaseItem):
-	remove_item(item)
+	remove_item_from_map(item)
 	_items.erase(item.Id)
 
-func remove_item(item:BaseItem):
+func remove_item_from_map(item:BaseItem):
 	map_data.remove_item(item)
 
 

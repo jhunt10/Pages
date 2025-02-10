@@ -180,7 +180,7 @@ func _on_combat_screen_cleared():
 func kill_actor(actor:BaseActor):
 	actor.die()
 	QueController.remove_action_que(actor.Que)
-	GameState.delete_actor(actor)
+	GameState.remove_actor_from_map(actor)
 	#if actor.leaves_corpse:
 	#else:
 		#delete_actor(actor)
@@ -221,22 +221,17 @@ func add_item(item:BaseItem, pos:MapPos):
 	item_spawned.emit(item, pos)
 
 func remove_item(item:BaseItem):
-	GameState.remove_item(item)
+	GameState.delete_item(item)
 	MapController.delete_item_node(item)
 
 func _on_actor_pickup_item(actor:BaseActor, items_ids:Array):
 	for item_id in items_ids:
 		var item = ItemLibrary.get_item(item_id)
-		var to_bag = ItemHelper.try_pickup_item(actor, item)
-		var message = item.details.display_name
-		if to_bag:
-			message += " to Bag"
-		else:
-			message += " to Inv"
+		var popup_data = ItemHelper.try_pickup_item(actor, item)
 		ui_control.drop_message_control.add_card(
-			message,
-			item.get_large_icon(),
-			item.get_rarity_background()
+			popup_data['Message'],
+			popup_data['Image'],
+			popup_data['Background']
 		)
 	pass
 

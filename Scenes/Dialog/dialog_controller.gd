@@ -557,13 +557,17 @@ func load_dialog_data(data:Dictionary):
 		_dialog_part_datas.clear()
 		self.queue_free()
 		return
-	var start_part_key = _dialog_part_datas["_MetaData_"].get("StartPartKey", null)
+	var meta_data = _dialog_part_datas["_MetaData_"]
+	var start_part_key = meta_data.get("StartPartKey", null)
 	if !start_part_key:
 		printerr("No 'StartPartKey' found in _MetaData_ of dialog script.")
 		_dialog_part_datas.clear()
 		self.queue_free()
 		return
 	_cur_part_key = start_part_key
+	if meta_data.has("Inital_BlackOutState"):
+		blackout_control.set_state_string(meta_data['Inital_BlackOutState'])
+		
 	_start_part(_cur_part_key)
 
 func _on_load_screen_finshed():

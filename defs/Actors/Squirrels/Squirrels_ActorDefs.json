@@ -9,6 +9,9 @@
 			"LargeIcon":"Squirrel_Icon.png",
 			"SmallIcon":"Squirrel_Icon.png"
 		},
+		"ActorDetails":{
+			"MoneyValue": 15
+		},
 		"SpriteSheet": "Squirrel_SpriteSheet.png",
 		"SpriteFrameWH": [12,4],
 		"SpriteOffset": [0,-20],
@@ -35,7 +38,7 @@
 		},
 		"AutoQue": true,
 		"EquipmentSlots": ["Que"],
-        "SpawnEquipmentList": [],
+        "SpawnEquipmentArr": [],
         "AiData":{
             "ActionsArr":[
 				"MoveForward",
@@ -53,8 +56,10 @@
                 "FilterData":null
             }
         ],
-		"DropItems":{
-            "":65,
+		"DropItemsSet":{
+            "":100,
+			"Money:5":30,
+			"Money:15":30,
 			"HealthPotionS":20,
 			"HealthPotionM":10,
 			"HealthPotionL":5
@@ -71,7 +76,7 @@
 			"LargeIcon":"Squirrel_Icon.png",
 			"SmallIcon":"Squirrel_Icon.png"
 		},
-		"DropItems":{
+		"DropItemsSet":{
 			"ChuckAcorn_PageItem":1
         }
 	},

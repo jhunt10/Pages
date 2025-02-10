@@ -51,6 +51,7 @@ var execution_state:ActionStates = ActionStates.Waiting
 var sub_action_timer = 0
 var sub_action_index = 0
 var sub_sub_action_index = 0
+var round_counter = 0
 var que_index = 0
 var action_index = 0
 var max_que_size = 0
@@ -96,6 +97,7 @@ func _start_round():
 func _end_round():
 	if DEEP_LOGGING: print("QueController: End Round")
 	#label.text = "Waiting"
+	round_counter += 1
 	action_index = 0
 	sub_action_index = 0
 	que_index = 0

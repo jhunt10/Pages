@@ -153,3 +153,7 @@ func get_current_money()->int:
 func spend_money(cost:int):
 	_money = max(0, _money - cost)
 	money_changed.emit()
+
+func add_money(val:int):
+	_money = max(0, _money + val)
+	money_changed.emit()

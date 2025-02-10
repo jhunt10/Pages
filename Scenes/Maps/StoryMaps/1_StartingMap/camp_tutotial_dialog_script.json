@@ -1649,40 +1649,40 @@
                     }
                 ]
             },
-			{
-				"BlockType": "SpeechBox",
-				"TopBox": false,
-				"WaitToFinish": true,
-				"WaitForNextButton": true,
-				"Hide": false,
-				"Entries": [
-					{
-						"EntryType":"Clear",
-                        "ClearSpeaker": false
-					},
-					{
-						"EntryType": "Speaker",
-						"SpeakerName": "MtFr",
-						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Neutral.png"
-					},
-                    {
-                        "EntryType":"Text",
-                        "Text":"Don't just focus on how much damage an attack might do.",
-                        "NewLine": false
-                    },
-                    {
-                        "EntryType":"WaitToRead"
-                    },
-                    {
-                        "EntryType":"Text",
-                        "Text":"Also keep in mind things like Energy Costs or Targeting Area and Type.",
-                        "NewLine": false
-                    },
-                    {
-                        "EntryType":"WaitToRead"
-                    }
-                ]
-            }
+{
+	"BlockType": "SpeechBox",
+	"TopBox": false,
+	"WaitToFinish": true,
+	"WaitForNextButton": true,
+	"Hide": false,
+	"Entries": [
+		{
+			"EntryType":"Clear",
+			"ClearSpeaker": false
+		},
+		{
+			"EntryType": "Speaker",
+			"SpeakerName": "MtFr",
+			"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Neutral.png"
+		},
+		{
+			"EntryType":"Text",
+			"Text":"Don't just focus on how much damage an attack might do.",
+			"NewLine": false
+		},
+		{
+			"EntryType":"WaitToRead"
+		},
+		{
+			"EntryType":"Text",
+			"Text":"Also keep in mind things like Energy Costs or Targeting Area and Type.",
+			"NewLine": false
+		},
+		{
+			"EntryType":"WaitToRead"
+		}
+	]
+}
             
         ]
     },

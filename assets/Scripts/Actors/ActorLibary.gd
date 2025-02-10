@@ -52,7 +52,7 @@ static func create_actor(key:String, data:Dictionary, premade_id:String = '')->B
 		printerr("ActorLibrary.create_actor: Failed to make actor '%s'." % [key])
 		return null
 	actor.equipment._build_slots_list()
-	var equipment_list = actor.get_load_val("SpawnEquipmentList", [])
+	var equipment_list = actor.get_load_val("SpawnEquipmentArr", [])
 	for equip in equipment_list:
 		if equip == null:
 			continue
@@ -61,7 +61,7 @@ static func create_actor(key:String, data:Dictionary, premade_id:String = '')->B
 			if !actor.equipment.try_equip_item(item, false):
 				printerr("ActorLibrary.create_actor: Failed to equip item '%s'." % [equip])
 				
-	var page_list = actor.get_load_val("SpawnPageList", [])
+	var page_list = actor.get_load_val("SpawnPageArr", [])
 	for page_key in page_list:
 		var page = ItemLibrary.create_item(page_key + "_PageItem", {})
 		if page:

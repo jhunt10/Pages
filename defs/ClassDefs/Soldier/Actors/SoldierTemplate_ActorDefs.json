@@ -26,7 +26,7 @@
 		"SpriteOffset": [0,-16],
 		"PortraitRect":[12, 20, 24, 24],
 		"EquipmentSlots": ["Que", "Bag", "Head", "Body", "Feet", "Trinket", "MainHand", "OffHand" ],
-        "SpawnEquipmentList": [
+        "SpawnEquipmentArr": [
             "OldJournal_PageQue",
             "OldBag_ItemBag",
             "OldSoldierHelmet",
@@ -35,16 +35,15 @@
             "OldShield",
             "OldSword"
         ],
-        "SpawnPageList":[
+        "SpawnPageArr":[
 			"SoldierTitle",
 			"HeavyFoot",
             "MoveForward",
             "TurnLeft",
             "TurnRight",
             "BasicWeaponAttack",
-			"TestFireBall",
-			"ThrowJavelin",
-			"ReloadPage"
+			"GuardAction",
+			"UsePotionSelf"
         ]
 	}
 ]

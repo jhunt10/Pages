@@ -256,11 +256,10 @@ func _start_button_pressed():
 			all_ready = false
 	if all_ready:
 		CombatUiControl.ui_state_controller.set_ui_state(UiStateController.UiStates.ExecRound)
-		hide_start_button()
 	else:
 		var next_index = CombatRootControl.Instance.get_next_player_index()
 		CombatRootControl.Instance.set_player_index(next_index)
-		hide_start_button()
+	hide_start_button()
 
 func _round_ends():
 	hide_start_button()

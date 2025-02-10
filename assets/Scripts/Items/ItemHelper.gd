@@ -1,11 +1,13 @@
 class_name ItemHelper
 
-static func spawn_item(item_key:String, item_data:Dictionary, pos:MapPos):
+static func spawn_item(item_key:String, item_data:Dictionary, pos:MapPos)->BaseItem:
 	var item = ItemLibrary.create_item(item_key, item_data)
 	if !item:
 		printerr("ItemHelper: Failed to spawn item with key '%s'." % [item_key])
+		return null
 	else:
 		CombatRootControl.Instance.add_item(item, pos)
+	return item
 
 
 static func get_rarity_background(rarity:BaseItem.ItemRarity)->Texture2D:
@@ -23,15 +25,30 @@ static func get_rarity_background(rarity:BaseItem.ItemRarity)->Texture2D:
 	return SpriteCache.get_sprite("res://assets/Sprites/Paper/Mundane_Background.png")
 	
 
-## Returns true if Item was added to actors bag, otherwise false when added to player inventory
-static func try_pickup_item(actor:BaseActor, item:BaseItem)->bool:
+## Returns a dictionary for popup message
+static func try_pickup_item(actor:BaseActor, item:BaseItem)->Dictionary:
+	print("PickingUpItem: " + item.Id)
+	var popup_data = {
+		"Image": item.get_large_icon(),
+		"Background": item.get_rarity_background(),
+		"Message": item.details.display_name
+	}
+	if item.get_item_type() == BaseItem.ItemTypes.Money:
+		var value = item.get_item_value()
+		StoryState.add_money(value)
+		popup_data['Message'] = "$" + str(value)
+		CombatRootControl.Instance.remove_item(item)
+		ItemLibrary.delete_item(item)
+		return popup_data
+	
 	actor.items.add_item_to_first_valid_slot(item)
 	if actor.items.has_item(item.Id):
-		CombatRootControl.Instance.remove_item(item)
-		return true
-	PlayerInventory.add_item(item)
+		popup_data['Message'] += " to Bag"
+	else:
+		PlayerInventory.add_item(item)
+		popup_data['Message'] += " to Inv"
 	CombatRootControl.Instance.remove_item(item)
-	return false
+	return popup_data
 
 	
 

@@ -29,7 +29,7 @@
 		"SpriteOffset": [0,-16],
 		"PortraitRect":[12, 20, 24, 24],
 		"EquipmentSlots": ["Que", "Bag", "Head", "Body", "Feet", "OffHand", "MainHand" ],
-        "SpawnEquipmentList": [
+        "SpawnEquipmentArr": [
             "TutorialJournal_PageQue",
             "OldBag_ItemBag",
             "OldSoldierHelmet",
@@ -38,7 +38,7 @@
             "OldShield",
             "OldSword"
         ],
-        "SpawnPageList":[
+        "SpawnPageArr":[
             "MoveForward",
             "TurnLeft",
             "TurnRight",
@@ -78,7 +78,7 @@
 			"Speed":0
 		},
 		"DefaultQueSize": 0,
-		"DropItems":{
+		"DropItemsSet":{
 			"HealthPotionL":1
 		}
 	},
@@ -86,9 +86,8 @@
 		"ParentKey": "TutorShroom",
 		"ActorKey": "TutorShroom_Roof",
 		"SpriteSheet": "RoofShroom_SpriteSheet.png",
-		"DropItems":{
-            "":1,
-			"TestPotion":0
+		"DropItemsSet":{
+            "":1
 		},
 		"SpriteOffset": [0,-5]
 	}
