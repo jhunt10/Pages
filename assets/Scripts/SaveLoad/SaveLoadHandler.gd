@@ -56,7 +56,7 @@ static func _build_save_meta_data(save_name:String):
 		"SaveName": save_name,
 		"SaveDate": Time.get_datetime_string_from_system(false, true),
 		"RunTime": Time.get_time_string_from_unix_time(StoryState.get_runtime_untix_time()),
-		"Location": "NEW SAVE",
+		"Location": StoryState.get_location(),
 		"Party":{player_actor.details.display_name: player_actor.stats.level}
 	}
 

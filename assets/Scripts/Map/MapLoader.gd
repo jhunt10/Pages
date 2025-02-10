@@ -27,3 +27,11 @@ static func get_map_datas()->Dictionary:
 static  func get_map_data(key)->Dictionary:
 	if !_loaded: load_maps()
 	return _maps.get(key, {})
+
+static func get_map_path_for_key(key:String)->String:
+	if !_loaded: load_maps()
+	var map = get_map_data(key)
+	if map.size() == 0:
+		return ''
+	return map.get('LoadPath', '').path_join(map.get('MapScene', ''))
+	

@@ -2,6 +2,7 @@ class_name LoadingScreen
 extends Control
 
 signal loading_screen_has_full_coverage
+signal loading_screen_fully_gone
 
 @onready var animation_player:AnimationPlayer = $AnimationPlayer
 @onready var progress_bar:ProgressBar = $ColorRect/ProgressBar
@@ -16,6 +17,7 @@ func _start_outro_animation():
 	animation_player.play("outro_animation")
 	await  Signal(animation_player, 'animation_finished')
 	printerr("Test 3")
+	loading_screen_fully_gone.emit()
 	self.queue_free()
 	LoadManager._load_screen = null
 

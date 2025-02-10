@@ -8,7 +8,7 @@ static func get_stage_data(index:int)->Dictionary:
 static var stages:Array = [
 		{
 			"StageKey": "TutorialCombat",
-			"Location": "Abandoned Village",
+			"Location": "Abandoned Cabin",
 			"MapScene": "res://Scenes/Maps/StoryMaps/1_StartingMap/starting_map.tscn",
 			"DialogScript": "res://Scenes/Maps/StoryMaps/1_StartingMap/start_game_dialog_script.json",
 			# Go to next scene when finished, otherwise go to camp and wait for Quest (Default false)
@@ -16,7 +16,7 @@ static var stages:Array = [
 		},
 		{
 			"StageKey": "TutorialCamp",
-			"Location": "Abandoned Village",
+			"Location": "Abandoned Cabin",
 			"MapScene": null,
 			"DialogScript": "res://Scenes/Maps/StoryMaps/1_StartingMap/camp_tutotial_dialog_script.json"
 		},

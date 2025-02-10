@@ -20,6 +20,7 @@ signal page_special_selected(action_key:String)
 			
 @export var nodes_container:Control
 @export var que_display_control:QueDisplayControl
+@export var que_display_patch:BackPatchContainer
 @export var on_que_options_menu:ItemSelectionInputDisplay
 @export var back_patch:BackPatchContainer
 @export var main_container:HBoxContainer 
@@ -33,7 +34,8 @@ signal page_special_selected(action_key:String)
 	set(val):
 		state = val
 		if nodes_container:
-			nodes_container.position.x = (self.size.x / 2) - (nodes_container.size.x / 2)
+			print(self.get_parent().size)
+			nodes_container.position.x = (self.get_parent().size.x / 2) - (back_patch.size.x / 2)
 			if state == States.Hidden:
 				nodes_container.position.y = 0
 			if state == States.Showing:
@@ -79,7 +81,7 @@ func show_start_button():
 	for player:BaseActor in CombatRootControl.Instance.list_player_actors():
 		if not player.Que.is_ready():
 			all_ready = false
-	var que_display_size = que_display_control.size.x
+	var que_display_size = que_display_patch.size.x
 	var self_size = back_patch.size.x #+ (back_patch.sides_padding * 2)
 	var use_top = (top_start_button.size.x < self_size - que_display_size)
 	printerr("SelfSize: %s | DisSize: %s | UseTop: %s" % [self_size, que_display_size, use_top])
@@ -101,7 +103,7 @@ func show_start_button():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	nodes_container.position.x = (self.size.x / 2) - (nodes_container.size.x / 2)
+	nodes_container.position.x = (self.get_parent().size.x / 2) - (back_patch.size.x / 2)
 	if state == States.Growing:
 		var move = delta * slide_speed
 		if nodes_container.position.y - move < 0 - nodes_container.size.y:

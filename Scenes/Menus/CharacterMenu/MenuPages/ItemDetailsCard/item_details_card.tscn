@@ -50,10 +50,10 @@ offset_point = NodePath("OffestPoint")
 vertical = true
 time_to_show = 0.3
 speed = 500.0
-icon = NodePath("OffsetControl/NinePatchRect/VBoxContainer/HBoxContainer/IconBackground/Icon")
-title_lable = NodePath("OffsetControl/NinePatchRect/VBoxContainer/HBoxContainer/FitScaleLabel")
+icon = NodePath("OffsetControl/NinePatchRect/VBoxContainer/TitleContainer/IconBackground/Icon")
+title_lable = NodePath("OffsetControl/NinePatchRect/VBoxContainer/TitleContainer/FitScaleLabel")
 description_box = NodePath("OffsetControl/NinePatchRect/VBoxContainer/WeaponDetailsControl/VBoxContainer/HBoxContainer2/DescriptionBox")
-exit_button = NodePath("OffsetControl/NinePatchRect/VBoxContainer/HBoxContainer/ExitButton/Button")
+exit_button = NodePath("OffsetControl/NinePatchRect/VBoxContainer/TitleContainer/ExitButton/Button")
 weapon_details = NodePath("OffsetControl/NinePatchRect/VBoxContainer/WeaponDetailsControl")
 armor_details = NodePath("OffsetControl/NinePatchRect/VBoxContainer/ArmorDetailsControl")
 action_details = NodePath("OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsControl")
@@ -101,16 +101,16 @@ offset_bottom = -24.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer"]
+[node name="TitleContainer" type="HBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer"]
 layout_mode = 2
 
-[node name="IconBackground" type="TextureRect" parent="OffsetControl/NinePatchRect/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(32, 32)
+[node name="IconBackground" type="TextureRect" parent="OffsetControl/NinePatchRect/VBoxContainer/TitleContainer"]
+custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 texture = ExtResource("3_1ywch")
 expand_mode = 3
 
-[node name="Icon" type="TextureRect" parent="OffsetControl/NinePatchRect/VBoxContainer/HBoxContainer/IconBackground"]
+[node name="Icon" type="TextureRect" parent="OffsetControl/NinePatchRect/VBoxContainer/TitleContainer/IconBackground"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -119,15 +119,17 @@ grow_horizontal = 2
 grow_vertical = 2
 expand_mode = 1
 
-[node name="FitScaleLabel" parent="OffsetControl/NinePatchRect/VBoxContainer/HBoxContainer" instance=ExtResource("4_34k8o")]
+[node name="FitScaleLabel" parent="OffsetControl/NinePatchRect/VBoxContainer/TitleContainer" instance=ExtResource("4_34k8o")]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="ExitButton" type="TextureRect" parent="OffsetControl/NinePatchRect/VBoxContainer/HBoxContainer"]
+[node name="ExitButton" type="TextureRect" parent="OffsetControl/NinePatchRect/VBoxContainer/TitleContainer"]
 layout_mode = 2
+size_flags_vertical = 0
 texture = ExtResource("6_folnv")
+stretch_mode = 3
 
-[node name="Button" type="Button" parent="OffsetControl/NinePatchRect/VBoxContainer/HBoxContainer/ExitButton"]
+[node name="Button" type="Button" parent="OffsetControl/NinePatchRect/VBoxContainer/TitleContainer/ExitButton"]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15

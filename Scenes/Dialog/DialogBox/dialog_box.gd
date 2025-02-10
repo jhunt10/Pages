@@ -106,6 +106,7 @@ func _handle_entry(entry_data:Dictionary, raw_delta, remaining_delta)->bool:
 				if child == premade_text_label: continue
 				if child == premade_question_option: continue
 				if child == hidden_text_edit: continue
+				if child == premade_compound_label: continue
 				child.queue_free()
 		hidden_text_edit.clear()
 		_word_is_broken = true

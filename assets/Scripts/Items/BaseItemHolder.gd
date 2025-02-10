@@ -228,6 +228,12 @@ func _can_slot_set_accept_item(slot_set_data:Dictionary, item:BaseItem)->bool:
 	return false
 	
 
+func get_first_valid_slot_for_item(item:BaseItem, allow_replace:bool=false)->int:
+	for i in range(_raw_item_slots.size()):
+		if can_set_item_in_slot(item, i, allow_replace):
+			return i
+	return -1
+
 func add_item_to_first_valid_slot(item:BaseItem):
 	for i in range(_raw_item_slots.size()):
 		if try_set_item_in_slot(item, i, false):

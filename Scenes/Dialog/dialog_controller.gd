@@ -540,11 +540,14 @@ func _handle_block(block_data:Dictionary)->bool:
 		return false
 	return false
 
-func load_dialog_script(file_path):
+func load_dialog_script(file_path, wait_for_load_screen:bool=true):
 	var file = FileAccess.open(file_path, FileAccess.READ)
 	var text:String = file.get_as_text()
 	var data = JSON.parse_string(text)
 	load_dialog_data(data)
+	if wait_for_load_screen:
+		_state = STATES.Ready
+		LoadManager._load_screen.loading_screen_fully_gone.connect(_on_load_screen_finshed)
 	
 func load_dialog_data(data:Dictionary):
 	_condition_watcher = null
@@ -562,6 +565,10 @@ func load_dialog_data(data:Dictionary):
 		return
 	_cur_part_key = start_part_key
 	_start_part(_cur_part_key)
+
+func _on_load_screen_finshed():
+	self._state = STATES.Playing
+	LoadManager._load_screen.loading_screen_fully_gone.disconnect(_on_load_screen_finshed)
 
 func _on_combat_start_blackout():
 	_block_states["StartCombat"] = BlockStates.Finished
@@ -656,7 +663,7 @@ func force_positions(force_pos_data:Dictionary):
 				continue
 			
 			## HACK
-			if actor_id.begins_with("@"):
+			if !actor_id or actor_id.begins_with("@"):
 				continue
 			if actor_id == "_Camera":
 				var pos = path_marker.get_last_pos()

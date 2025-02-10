@@ -1,6 +1,6 @@
 {
 	"_MetaData_": {
-		"StartPartKey": "Prolog_Soldier"
+		"StartPartKey": "PageSystemTutorial"
 	},
 	"Prolog_Soldier":{
 		"_NextPartKey": "Intro_WalkIn",
@@ -1081,12 +1081,12 @@
 			},
 			{
 				"BlockType": "MoveActor",
-				"WaitToFinish": false,
+				"WaitToFinish": true,
 				"AsyncWaitToFinish": true,
 				"TargetActorId": "MysteriousFigure",
 				"PathMarkerName": "MF_II_1",
 				"FollowActor": false,
-				"Speed": 1
+				"Speed": 1.5
 			},
 			{
 				"BlockType": "SpeechBox",
@@ -1346,7 +1346,7 @@
 				"Entries": [
 					{
 						"EntryType": "Text",
-						"Text": "These @Color:Red@Squirrels@Clear@ are clearly ready for a fight.",
+						"Text": "These @Color:Red@Squirrels@Clear@ look like they are ready for a fight.",
 						"NewLine": true
 					},
 					{
@@ -1384,7 +1384,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "Good luck, Hero!",
+						"Text": "Good luck, @Color:Red@Hero@Clear@!",
 						"NewLine": false
 					},
 					{
@@ -1476,7 +1476,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "this one's useless",
+						"Text": "this one's no good",
 						"NewLine": true
 					},
 					{
@@ -1531,7 +1531,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "I'll just give you a quick @Color:Red@Tutorial@Clear@ on the @Color:Blue@PAGE@Clear@ System.",
+						"Text": "I'll give you a quick @Color:Red@Tutorial@Clear@ on the @Color:Blue@PAGE@Clear@ System.",
 						"NewLine": false
 					},
 					{
@@ -1544,7 +1544,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "so I'll explain like you just @Color:Blue@Spawned@Clear@.",
+						"Text": "so I'll explain like you just @Color:Red@Spawned@Clear@.",
 						"NewLine": false
 					},
 					{
@@ -1626,7 +1626,14 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "or robot"
+						"Text": "or construct, "
+					},
+					{
+						"EntryType": "WaitToRead"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "or"
 					},
 					{
 						"EntryType":"Text",
@@ -1643,7 +1650,7 @@
 					},
 					{
 						"EntryType":"BackTrack",
-						"Text": " living creature, or undead, or robot... ",
+						"Text": " living creature, or undead, or construct, or... ",
 						"LetterDelay": 0.001
 					},
 					{
@@ -1820,7 +1827,7 @@
 				]
 			},
 			{
-				"BlockType": "_SpeechBox",
+				"BlockType": "SpeechBox",
 				"WaitToFinish": true,
 				"WaitForNextButton": true,
 				"Entries": [
@@ -1835,14 +1842,14 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "Your @Color:Blue@Pages@Clear@ aren't bound to your @Color:Blue@PageBook@Clear@."
+						"Text": "Every @Color:Blue@PageBook@Clear@ has a set number of @Color:Blue@Page Slots@Clear@."
 					},
 					{
 						"EntryType": "WaitToRead"
 					},
 					{
 						"EntryType": "Text",
-						"Text": "The @Color:Blue@PageBook@Clear@ just provides @Color:Blue@Slots@Clear@ to hold your @Color:Blue@Pages@Clear@.",
+						"Text": "These @Color:Blue@Slots@Clear@ can each hold one @Color:Blue@Page@Clear@ of a specific type.",
 						"NewLine": true
 					},
 					{
@@ -1850,7 +1857,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "The number and types of @Color:Blue@Slots@Clear@ depends on the @Color:Blue@PageBook@Clear@, ",
+						"Text": "Your @Color:Blue@PageBook@Clear@ also determines your @Color:Red@PPR@Clear@, ",
 						"NewLine": true
 					},
 					{
@@ -1858,7 +1865,62 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "but which @Color:Blue@Pages@Clear@ you equip is up to you."
+						"Text": "but I'll come back to that.",
+						"NewLine": true
+					},
+					{
+						"EntryType": "WaitToRead"
+					}
+				]
+			},
+			{
+				"BlockType": "SpeechBox",
+				"WaitToFinish": true,
+				"WaitForNextButton": true,
+				"Entries": [
+					{
+						"EntryType": "Clear",
+						"ClearSpeaker": false
+					},
+					{
+						"EntryType": "Speaker",
+						"SpeakerName": "MtFr",
+						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Happy.png"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "As for @Color:Blue@Pages@Clear@, "
+					},
+					{
+						"EntryType": "WaitToRead"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "there are three types:"
+					},
+					{
+						"EntryType": "WaitToRead"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "@Color:Blue@Title Pages@Clear@ define an @Color:Red@Actor@Clear@'s @Color:Blue@Title@Clear@,",
+						"NewLine": true
+					},
+					{
+						"EntryType": "WaitToRead"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "@Color:Blue@Passive Pages@Clear@ provide passive @Color:Red@Effects@Clear@,",
+						"NewLine": true
+					},
+					{
+						"EntryType": "WaitToRead"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "and @Color:Blue@Action Pages@Clear@ enable @Color:Red@Actions@Clear@ in @Color:Red@Combat@Clear@.",
+						"NewLine": true
 					},
 					{
 						"EntryType": "WaitToRead"
@@ -1888,7 +1950,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "Let's take a look at yours by clicking on the picture of you.",
+						"Text": "Let's take a look at yours.",
 						"NewLine": true
 					},
 					{
@@ -1908,7 +1970,7 @@
                 "LineType":"Dotted",
                 "WaitToBeClicked": true,
                 "ShowClick": true,
-                "Color": [1,0,0,1]
+                "Color": [1,1,1,1]
 			},
 			{
 				"BlockType": "SpeechBox",
@@ -1946,15 +2008,71 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "Your @Color:Blue@Title Page@Clear@ defines your @Color:Blue@Title@Clear@."
+						"Text": "Your @Color:Blue@Title@Clear@ influences your @Color:Red@Stats@Clear@ scaling, "
+					},
+					{
+						"EntryType": "WaitToRead"
 					},
 					{
 						"EntryType": "Text",
-						"Text": "This is what makes you a @Color:Red@Soldier@Clear@",
+						"Text": "which is nerd speak for how you grow stronger.",
+						"NewLine": false
+					},
+					{
+						"EntryType": "WaitToRead"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "It also grants access to some resticted @Color:Blue@Pages@Clear@ that can only be used by @Color:Red@Actors@Clear@ with specific @Color:Blue@Titles@Clear@ .",
 						"NewLine": true
 					},
 					{
 						"EntryType": "WaitToRead"
+					}
+				]
+			},
+			{
+				"BlockType": "SpeechBox",
+				"WaitToFinish": true,
+				"WaitForNextButton": true,
+				"TopBox": true,
+				"Entries": [
+					{
+						"EntryType": "Clear",
+						"ClearSpeaker": false
+					},
+					{
+						"EntryType": "Speaker",
+						"SpeakerName": "MtFr",
+						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Happy.png"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "Basically, "
+					},
+					{
+						"EntryType": "WaitToRead"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "your @Color:Blue@Title@Clear@ is what makes you you."
+					},
+					{
+						"EntryType": "WaitToRead"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "It's the reason you're a @Color:Red@Soldier@Clear@",
+						"NewLine": true
+					},
+					{
+						"EntryType": "WaitToRead"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "and I'm a ",
+						"NewLine": true,
+						"CompoundLine": true
 					},
 					{
 						"EntryType": "Speaker",
@@ -1963,8 +2081,8 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "and me a @Color:Red@Min",
-						"NewLine": true,
+						"Text": "@Color:Red@Min",
+						"NewLine": false,
 						"CompoundLine": true
 					},
 					{
@@ -2020,23 +2138,12 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "Every @Color:Blue@PageBook@Clear@ has one @Color:Blue@Slot@Clear@ for a @Color:Blue@Title Page@Clear@. ",
+						"Text": "After your @Color:Blue@Title Page@Clear@ comes @Color:Blue@Slots@Clear@ for your ",
 						"NewLine": true
 					},
 					{
-						"EntryType": "WaitToRead"
-					},
-					{
 						"EntryType": "Text",
-						"Text": "But the rest of the @Color:Blue@Slots@Clear@ change with the @Color:Blue@PageBook@Clear@.",
-						"NewLine": true
-					},
-					{
-						"EntryType": "WaitToRead"
-					},
-					{
-						"EntryType": "Text",
-						"Text": "There are generally two types of @Color:Blue@Page Slots@Clear@.",
+						"Text": "@Color:Blue@Passive Pages@Clear@ and @Color:Blue@Action@Clear@ @Color:Blue@Pages@Clear@.",
 						"NewLine": true
 					},
 					{
@@ -2083,8 +2190,32 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "They provide passive @Color:Red@Effects@Clear@ so long as they are in your @Color:Blue@PageBook@Clear@.",
+						"Text": "They grant @Color:Red@Effects@Clear@ so long as they are in your @Color:Blue@PageBook@Clear@.",
 						"NewLine": true
+					},
+					{
+						"EntryType": "Text",
+						"Text": "They can modifiy your @Color:Red@Stats@Clear@, ",
+						"NewLine": true
+					},
+					{
+						"EntryType": "WaitToRead"
+					},
+					{
+						"EntryType": "Text",
+						"Text": " enhance your @Color:Blue@Action Pages@Clear@, ",
+						"NewLine": false
+					},
+					{
+						"EntryType": "WaitToRead"
+					},
+					{
+						"EntryType": "Text",
+						"Text": " even change what @Color:Red@Equipment@Clear@ you can use.",
+						"NewLine": false
+					},
+					{
+						"EntryType": "WaitToRead"
 					}
 				]
 			},
@@ -2339,7 +2470,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "but for now let's test out the ones you have.",
+						"Text": "but for now let's try out the ones you have.",
 						"NewLine": true
 					}
 				]
@@ -2576,15 +2707,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "@Color:Red@Fungus@Clear@ are closer to animals than plants, ",
-						"NewLine": true
-					},
-					{
-						"EntryType": "WaitToRead"
-					},
-					{
-						"EntryType": "Text",
-						"Text": "so we can treat them like @Color:Red@Enemy Actors@Clear@.",
+						"Text": "They'll make a nice subsitute for @Color:Red@Enemy Actors@Clear@.",
 						"NewLine": true
 					},
 					{
@@ -2625,8 +2748,16 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "Just close your eyes and think hostile thoughts towards the @Color:Red@Mushrooms@Clear@.",
+						"Text": "To start @Color:Red@Combat@Clear@, ",
 						"NewLine": true
+					},
+					{
+						"EntryType": "WaitToRead"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "just close your eyes and think hostile thoughts towards the @Color:Red@Mushrooms@Clear@.",
+						"NewLine": false
 					},
 					{
 						"EntryType": "WaitToRead"
@@ -2709,7 +2840,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "Now I'll explain how to actually use the @Color:Blue@PAGE@Clear@ System.",
+						"Text": "Now let's cover how to actually use the @Color:Blue@PAGE@Clear@ System.",
 						"NewLine": true
 					},
 					{
@@ -2717,7 +2848,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "Start by imagining you're looking through a magical window called @Color:Red@The Screen@Clear@.",
+						"Text": "Start by imagining you're looking down on @Color:Red@The World@Clear@ through a magical window called @Color:Blue@The Screen@Clear@.",
 						"NewLine": true
 					},
 					{
@@ -2754,7 +2885,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "At the bottom of @Color:Red@The Screen@Clear@, "
+						"Text": "At the bottom of @Color:Blue@The Screen@Clear@, "
 					},
 					{
 						"EntryType": "WaitToRead"
@@ -2766,7 +2897,7 @@
 				"PopUpType": "Highlight",
 				"WaitToFinish": true,
 				"Create": "QueInputPopUp",
-				"TargetElement": "MoveableCamera2D/CanvasLayer/CombatUiControl/QueInputControl/VBoxContainer/BackPatchContainer2",
+				"TargetElement": "MoveableCamera2D/CanvasLayer/CombatUiControl/QueInputControl/VBoxContainer/QueInputBackPatchContainer",
 				"PopupControlSript": "res://Scenes/Dialog/PopUps/OutlinePopUp/outline_pop_up_control.tscn",
 				"DarkenScreen": false,
 				"Padding":[-8,8,-8,8],
@@ -2812,7 +2943,7 @@
 				"WaitToFinish": true,
 				"Delete": "QueInputPopUp",
 				"Create": "QueDisplayPopup",
-				"TargetElement": "MoveableCamera2D/CanvasLayer/CombatUiControl/QueInputControl/VBoxContainer/BackPatchContainer",
+				"TargetElement": "MoveableCamera2D/CanvasLayer/CombatUiControl/QueInputControl/VBoxContainer/QueDisplayBackPatchContainer",
 				"PopupControlSript": "res://Scenes/Dialog/PopUps/OutlinePopUp/outline_pop_up_control.tscn",
 				"DarkenScreen": false,
 				"Padding":[-8,8,-8,8],
@@ -2893,8 +3024,8 @@
 					},
 					{
 						"EntryType":"Text",
-						"Text": "... ",
-						"LetterDelay": 0.1
+						"Text": "..... ",
+						"LetterDelay": 0.2
 					},
 					{
 						"EntryType": "WaitToRead"
@@ -3578,7 +3709,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "Now press the @Color:Blue@Start@Clear@ to see the @Color:Blue@PAGE@Clear@ System in action!",
+						"Text": "Now hit @Color:Blue@Start@Clear@ to see the @Color:Blue@PAGE@Clear@ System in action!",
 						"NewLine": false
 					},
 					{
@@ -3591,7 +3722,7 @@
 				"PopUpType": "Highlight",
 				"WaitToFinish": true,
 				"Create": "PlayPopUp",
-				"TargetElement": "MoveableCamera2D/CanvasLayer/CombatUiControl/QueInputControl/VBoxContainer/BackPatchContainer2/Control/SideStatButtonControl/TextureRect",
+				"TargetElement": "MoveableCamera2D/CanvasLayer/CombatUiControl/QueInputControl/VBoxContainer/QueInputBackPatchContainer/Control/TopStatButtonControl/TextureRect",
 				"PopupControlSript": "res://Scenes/Dialog/PopUps/OutlinePopUp/outline_pop_up_control.tscn",
 				"DarkenScreen": true,
                 "WaitToBeClicked": true,
@@ -3879,7 +4010,7 @@
 				"PopUpType": "Highlight",
 				"WaitToFinish": true,
 				"Create": "PlayPopUp",
-				"TargetElement": "MoveableCamera2D/CanvasLayer/CombatUiControl/QueInputControl/VBoxContainer/BackPatchContainer2/Control/SideStatButtonControl/TextureRect",
+				"TargetElement": "MoveableCamera2D/CanvasLayer/CombatUiControl/QueInputControl/VBoxContainer/QueInputBackPatchContainer/Control/TopStatButtonControl/TextureRect",
 				"PopupControlSript": "res://Scenes/Dialog/PopUps/OutlinePopUp/outline_pop_up_control.tscn",
 				"DarkenScreen": true,
                 "WaitToBeClicked": true,

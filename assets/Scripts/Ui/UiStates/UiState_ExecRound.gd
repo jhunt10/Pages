@@ -12,6 +12,7 @@ func start_state():
 	CombatRootControl.QueController.start_or_resume_execution()
 	CombatRootControl.QueController.end_of_round.connect(_on_round_end)
 	CombatRootControl.Instance.ui_control.que_input.showing = false
+	CombatRootControl.Instance.ui_control.que_input.hide_start_button()
 	
 	#CombatRootControl.Instance.camera.lock_to_actor(CombatUiControl.Instance.que_input._actor)
 	pass

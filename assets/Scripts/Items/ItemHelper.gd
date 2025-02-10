@@ -35,8 +35,23 @@ static func try_pickup_item(actor:BaseActor, item:BaseItem)->bool:
 
 	
 
+static func try_transfer_item_from_inventory_to_actor(item:BaseItem, actor:BaseActor, allow_replace:bool = true)->String:
+	var holder:BaseItemHolder = null
+	#var index = -1
+	if item is BaseEquipmentItem:
+		holder = actor.equipment
+		#index = actor.equipment.get_first_valid_slot_for_item(item, allow_replace)
+	elif item is BasePageItem:
+		holder = actor.pages
+	elif item is BaseConsumableItem:
+		holder = actor.items
+	if !holder:
+		return "Unknown ItemType"
+	var index = holder.get_first_valid_slot_for_item(item, true)
+	return try_transfer_item_from_inventory_to_holder(item, holder, index, allow_replace)
+
 static func try_transfer_item_from_inventory_to_holder(item:BaseItem, holder:BaseItemHolder, slot_index:int, allow_replace:bool = true)->String:
-	print("Transer item to holder: %s " % [item.Id])
+	print("Transer item to holder: %s to slot %s " % [item.Id, slot_index])
 	
 	var old_item = holder.get_item_in_slot(slot_index)
 	if old_item and not allow_replace:
@@ -50,10 +65,21 @@ static func try_transfer_item_from_inventory_to_holder(item:BaseItem, holder:Bas
 	if not holder.try_set_item_in_slot(inv_item, slot_index, allow_replace):
 		PlayerInventory.add_item(inv_item)
 		return "Set item failed"
-	if not holder is EquipmentHolder:
-		if old_item:
+	if old_item:
 			PlayerInventory.add_item(old_item)
 	return ""
+
+static func try_transfer_item_from_actor_to_inventory(item:BaseItem, actor:BaseActor)->String:
+	var holder = null
+	if item is BaseEquipmentItem:
+		holder = actor.equipment
+	elif item is BasePageItem:
+		holder = actor.pages
+	elif item is BaseConsumableItem:
+		holder = actor.items
+	if !holder:
+		return "Unknown ItemType"
+	return try_transfer_item_from_holder_to_inventory(item, holder)
 
 static func try_transfer_item_from_holder_to_inventory(item:BaseItem, holder:BaseItemHolder)->String:
 	if !holder.has_item(item.Id):

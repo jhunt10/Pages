@@ -65,4 +65,5 @@ func display_map_details(map_key):
 func _on_explore():
 	if !_selected_map_key:
 		return
-	MainRootNode.Instance.start_combat(_selected_map_key)
+	var path = MapLoader.get_map_path_for_key(_selected_map_key)
+	MainRootNode.Instance.start_combat(path)

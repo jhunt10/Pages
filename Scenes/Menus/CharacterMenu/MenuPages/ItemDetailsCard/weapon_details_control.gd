@@ -40,10 +40,3 @@ func set_weapon(actor:BaseActor, weapon:BaseWeaponEquipment):
 	#else:
 		#parent_card_control.equip_button_background.hide()
 	#
-
-func on_eqiup_button_pressed():
-	if _actor.equipment.has_item(_item.Id):
-		_actor.equipment.remove_equipment(_item)
-	elif _actor.equipment.can_equip_item(_item):
-		_actor.equipment.try_equip_item(_item, true)
-	parent_card_control.start_hide()

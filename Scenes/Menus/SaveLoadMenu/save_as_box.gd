@@ -10,7 +10,7 @@ signal on_confirmed(save_name:String)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	back_button.pressed.connect(self.queue_free)
+	back_button.pressed.connect(self.hide)
 	save_button.pressed.connect(on_save)
 
 func on_save():

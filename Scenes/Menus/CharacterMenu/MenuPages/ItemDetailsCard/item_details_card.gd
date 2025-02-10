@@ -78,6 +78,9 @@ enum States {Hidden, Growing, Showing, Shrinking}
 #enum AnimationStates {In, Showing, Out, Hidden}
 #var animation_state:AnimationStates
 var item_id:String
+var actor_has_item:bool = false
+var _current_card
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	exit_button.pressed.connect(_on_exit_button)
@@ -86,7 +89,7 @@ func _ready() -> void:
 		offset_point.position = Vector2(self.size.x,0)
 	else:
 		offset_point.position = Vector2(0,self.size.y)
-	#equip_button.pressed.connect(equip_button_pressed)
+	equip_button.pressed.connect(equip_button_pressed)
 	pass # Replace with function body.
 
 
@@ -148,6 +151,8 @@ func start_hide():
 	#animation_state = AnimationStates.Out
 
 func set_item(actor:BaseActor, item:BaseItem):
+	actor.equipment.items_changed.connect(start_hide)
+	actor.pages.items_changed.connect(start_hide)
 	item_id = item.Id
 	icon.texture = item.get_small_icon()
 	title_lable.text = item.details.display_name
@@ -163,50 +168,71 @@ func set_item(actor:BaseActor, item:BaseItem):
 	action_details.hide()
 	effect_page_details.hide()
 	page_que_details.hide()
+	
+	actor_has_item = false
 	if item is BaseWeaponEquipment:
 		var weapon = (item as BaseWeaponEquipment)
 		weapon_details.set_weapon(actor, weapon)
+		actor_has_item = actor.equipment.has_item(item_id)
+		_current_card = weapon_details
 		weapon_details.show()
 	elif item is BaseArmorEquipment:
 		var armor = (item as BaseArmorEquipment)
 		armor_details.set_armor(actor, armor)
+		actor_has_item = actor.equipment.has_item(item_id)
+		_current_card = armor_details
 		armor_details.show()
 	elif item is BasePageItem:
 		var page = (item as BasePageItem)
 		if page.get_action_key():
 			action_details.set_action(actor, page)
+			actor_has_item = actor.pages.has_item(item_id)
+			_current_card = action_details
 			action_details.show()
 		else:
 			effect_page_details.set_action(actor, page)
+			actor_has_item = actor.pages.has_item(item_id)
+			_current_card = effect_page_details
 			effect_page_details.show()
 			#default_details.set_item(item)
 			#default_details.show()
 	elif item is BaseQueEquipment:
 		page_que_details.set_item(actor, item)
+		actor_has_item = actor.equipment.has_item(item_id)
+		_current_card = page_que_details
 		page_que_details.show()
 	else:
 		default_details.set_item(item)
+		actor_has_item = actor.equipment.has_item(item_id)
+		_current_card = default_details
 		default_details.show()
 		#if equipment.get_equipt_to_actor_id():
 			#button_label.text = "Remove"
 		#else:
 			#button_label.text = "Equipt"
 	if actor:
-		var cant_equip_reasons = item.get_cant_use_reasons(actor)
-		set_cant_equip_reason(cant_equip_reasons)
+		if actor_has_item:
+			equip_label.text = "Remove"
+		else:
+			var cant_equip_reasons = item.get_cant_use_reasons(actor)
+			set_cant_equip_reason(cant_equip_reasons)
 		self.start_show()
 	if buy_mode:
 		buy_controller.set_item(item)
 
 func equip_button_pressed():
-	if weapon_details.visible:
-		weapon_details.on_eqiup_button_pressed()
-	elif armor_details.visible:
-		armor_details.on_eqiup_button_pressed()
-	elif action_details.visible:
-		action_details.on_eqiup_button_pressed()
-	elif default_details.visible:
-		default_details.on_eqiup_button_pressed()
+	var item = ItemLibrary.get_item(item_id)
+	if not item:
+		return
+	var actor = CharacterMenuControl.Instance._actor
+	if not actor:
+		return
+	if actor_has_item:
+		var fail_reason = ItemHelper.try_transfer_item_from_actor_to_inventory(item, actor)
+		equip_label.text  = fail_reason
+	else:
+		var fail_reason = ItemHelper.try_transfer_item_from_inventory_to_actor(item, actor)
+		equip_label.text  = fail_reason
 
 func set_cant_equip_reason(reasons_data:Dictionary):
 	if reasons_data.size() == 0:

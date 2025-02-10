@@ -55,9 +55,10 @@ patch_margin_right = 9
 patch_margin_bottom = 9
 
 [node name="TextBoxBackground" type="NinePatchRect" parent="."]
+custom_minimum_size = Vector2(0, 180)
 layout_mode = 1
 anchors_preset = -1
-anchor_top = 0.7
+anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 16.0
@@ -97,11 +98,11 @@ layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.7
 anchor_right = 1.0
-anchor_bottom = 0.7
+anchor_bottom = 1.0
 offset_left = 4.0
 offset_top = 64.0
 offset_right = -16.0
-offset_bottom = -4.0
+offset_bottom = -200.0
 grow_horizontal = 0
 grow_vertical = 2
 texture = ExtResource("2_komro")
@@ -205,7 +206,7 @@ self_modulate = Color(0.411765, 0.411765, 0.411765, 1)
 layout_mode = 0
 offset_right = 141.0
 offset_bottom = 60.0
-scale = Vector2(0.933333, 0.933333)
+scale = Vector2(0.916667, 0.916667)
 theme = ExtResource("3_ufdhk")
 theme_override_font_sizes/font_size = 48
 text = "Shop"
@@ -758,11 +759,11 @@ grow_vertical = 2
 clip_contents = true
 layout_mode = 1
 anchor_right = 0.7
-anchor_bottom = 0.7
+anchor_bottom = 1.0
 offset_left = 16.0
 offset_top = 64.0
 offset_right = -4.0
-offset_bottom = -4.0
+offset_bottom = -200.0
 grow_vertical = 2
 
 [node name="PrettyPictureRect" type="TextureRect" parent="Control"]
@@ -773,8 +774,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("5_hjh2a")
-expand_mode = 5
-stretch_mode = 4
+expand_mode = 3
+stretch_mode = 5
 
 [node name="PictureBackground" type="NinePatchRect" parent="Control"]
 custom_minimum_size = Vector2(0, 180)

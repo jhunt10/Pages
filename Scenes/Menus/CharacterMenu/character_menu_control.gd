@@ -128,7 +128,7 @@ func create_details_card(item:BaseItem):
 		_current_details_card.start_hide()
 	_current_details_card = load("res://Scenes/Menus/CharacterMenu/MenuPages/ItemDetailsCard/item_details_card.tscn").instantiate()
 	details_card_spawn_point.add_child(_current_details_card)
-	_current_details_card.vertical = false
+	_current_details_card.vertical = true
 	_current_details_card.hide_done.connect(on_details_card_freed)
 	_current_details_card.set_item(_actor, item)
 	_current_details_card.start_show()

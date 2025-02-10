@@ -55,7 +55,7 @@ func _ready() -> void:
 		p2_stat_panel_control.set_actor(player_2)
 		p2_stat_panel_control.button.pressed.connect(on_player_stat_clicked.bind(1))
 	else: 
-		p3_stat_panel_control.hide()
+		p2_stat_panel_control.hide()
 		
 	var player_3 = StoryState.get_player_actor(2)
 	if player_3: 

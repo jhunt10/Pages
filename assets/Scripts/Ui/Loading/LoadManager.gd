@@ -13,6 +13,7 @@ var _load_screen:LoadingScreen
 var _combat_node:CombatRootControl
 
 var _loading_done:bool
+var _last_scene_was_combat:bool
 
 var use_sub_threads:bool = true
 
@@ -30,7 +31,12 @@ func load_scene(scene_path:String, sub_scene_data:Dictionary = {})->void:
 	_load_screen = _load_screen_script.instantiate()
 	if scene_path.ends_with("combat_scene.tscn"):
 		_load_screen.load_scale = 50
-	get_tree().get_root().add_child(_load_screen)
+	if MainRootNode.Instance.current_scene is CombatRootControl:
+		_last_scene_was_combat = true
+		MainRootNode.Instance.current_scene.camera.canvas_layer.add_child(_load_screen)
+	else:
+		_last_scene_was_combat = false
+		get_tree().get_root().add_child(_load_screen)
 	
 	self.progress_changed.connect(_load_screen._update_progress)
 	self.load_done.connect(_load_screen._start_outro_animation)
@@ -52,9 +58,13 @@ func _process(_delta: float) -> void:
 			_load_screen.get_parent().remove_child(_load_screen)
 			_combat_node.ui_control.add_child(_load_screen)
 			MainRootNode.Instance.set_current_scene(_combat_node)
+			var parent = _load_screen.get_parent()
+			parent.remove_child(_load_screen)
+			_combat_node.camera.canvas_layer.add_child(_load_screen)
 			_combat_node = null
 			_waiting_for_combat = false
 			_done_loading_combat = false
+			_conbat_load_thread.wait_to_finish()
 			_conbat_load_thread = null
 			finish_loading()
 	else:
@@ -83,6 +93,12 @@ func handle_loaded_scene():
 	if new_node is CampMenu:
 		if _sub_scene_data.has("DialogScript"):
 			new_node.load_dialog(_sub_scene_data['DialogScript'])
+	
+	if _last_scene_was_combat:
+		var parent = _load_screen.get_parent()
+		parent.remove_child(_load_screen)
+		get_tree().get_root().add_child(_load_screen)
+		_last_scene_was_combat = false
 	
 	_loading_done = true
 	MainRootNode.Instance.set_current_scene(new_node)

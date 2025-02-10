@@ -36,7 +36,7 @@ func _ready() -> void:
 	
 	var location = StoryState.get_location()
 	if location != "":
-		var image_path = "res://Scenes/Menus/CampMenu/PrettyPictures/" + location + ".png"
+		var image_path = "res://Scenes/Menus/CampMenu/PrettyPictures/" + location.replace(' ', '') + ".png"
 		var pretty_picture = SpriteCache.get_sprite(image_path)
 		if pretty_picture:
 			pretty_picture_texure_rect.texture = pretty_picture

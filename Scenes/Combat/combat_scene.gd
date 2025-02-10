@@ -46,14 +46,15 @@ func _ready() -> void:
 		printerr("Multiple CombatRootControls found")
 		queue_free()
 		return
-	#load_map(MapController)
-		#
-	ui_control.hide()
-	ui_control.ui_state_controller.set_ui_state(UiStateController.UiStates.ActionInput)
+	
 	start_combat_screen.hide()
 	start_combat_screen.screen_blacked_out.connect(_on_combat_screen_blackout)
 	start_combat_screen.screen_clear.connect(_on_combat_screen_cleared)
-	MapController.grid_tile_map.hide()
+	
+	if dialog_controller:
+		ui_control.hide()
+		ui_control.ui_state_controller.set_ui_state(UiStateController.UiStates.ActionInput)
+		MapController.grid_tile_map.hide()
 	#
 	#MapController._build_terrain()
 	for actor:BaseActor in GameState._actors.values():
@@ -162,6 +163,8 @@ func load_init_state(sub_scene_data:Dictionary):
 		dialog_controller.show()
 	else:
 		dialog_controller.queue_free()
+		dialog_controller = null
+		
 
 func start_combat_animation():
 	start_combat_screen.show()
