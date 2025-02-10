@@ -242,7 +242,7 @@ button = NodePath("Button")
 under_line = NodePath("TitleLabel/ColorRect")
 highlight = NodePath("TextureRect")
 label = NodePath("TitleLabel")
-text = "Prepare"
+text = "PageBook"
 
 [node name="TextureRect" type="TextureRect" parent="CampOptionsContainer/MainOptionsContainer/PrepareOptionButton"]
 layout_mode = 1
@@ -258,12 +258,12 @@ texture = ExtResource("7_hs7sy")
 [node name="TitleLabel" type="Label" parent="CampOptionsContainer/MainOptionsContainer/PrepareOptionButton"]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 0
-offset_right = 210.0
+offset_right = 240.0
 offset_bottom = 60.0
 scale = Vector2(0.916667, 0.916667)
 theme = ExtResource("3_ufdhk")
 theme_override_font_sizes/font_size = 48
-text = "Prepare"
+text = "PageBook"
 
 [node name="ColorRect" type="ColorRect" parent="CampOptionsContainer/MainOptionsContainer/PrepareOptionButton/TitleLabel"]
 custom_minimum_size = Vector2(0, 3)
@@ -892,6 +892,7 @@ theme = ExtResource("3_ufdhk")
 theme_override_font_sizes/font_size = 32
 text = "100"
 
-[node name="DialogControl" parent="." instance=ExtResource("16_q50fv")]
+[node name="DialogControl" parent="." node_paths=PackedStringArray("scene_root") instance=ExtResource("16_q50fv")]
 visible = false
 layout_mode = 1
+scene_root = NodePath("..")

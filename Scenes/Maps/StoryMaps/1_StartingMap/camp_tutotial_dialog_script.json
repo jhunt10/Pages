@@ -1,9 +1,16 @@
 {
 	"_MetaData_": {
-		"StartPartKey": "Tutorial1"
+		"StartPartKey": "ScribeIntro"
 	},
-	"Tutorial1":{
-		"_NextPartKey": "ScribeIntro",
+	"IntroWelcome":{
+		"_NextPartLogic": 
+		{
+			"FlagName": "Tutorial",
+			"Cases": {
+				"false": "StartTutorial",
+				"true": "NoTutorial"
+			}
+		},
 		"WaitForNextButton": false,
 		"Inital_BlackOutState": "Clear",
 		"EnsurePoses": {},
@@ -25,7 +32,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "Welcome to Camp!",
+						"Text": "Welcome to @Color:Red@Camp@Clear@!",
 						"NewLine": false
 					},
 					{
@@ -40,7 +47,15 @@
 						"EntryType":"WaitToRead"
 					}
 				]
-			},
+			}
+		]
+	},
+	"NoTutorial":{
+		"_NextPartKey": "ScribeIntro",
+		"WaitForNextButton": false,
+		"Inital_BlackOutState": "Clear",
+		"EnsurePoses": {},
+		"Blocks":[
 			{
 				"BlockType": "SpeechBox",
 				"TopBox": false,
@@ -53,19 +68,40 @@
                         "ClearSpeaker": false
 					},
 					{
+						"EntryType": "Speaker",
+						"SpeakerName": "MtFr",
+						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Happy.png"
+					},
+					{
 						"EntryType": "Text",
-						"Text": "We'll be setting up camp in a lot of differenct places as we travel to save the world, so don't get too attached to this old cabin.",
+						"Text": "You seem to have the hang of things, so I'll skip the grand tour. ",
+						"NewLine": false
+					},
+					{
+						"EntryType":"WaitToRead"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "Just come talk to me when you're ready to set out on our @Color:Red@Quest@Clear@.",
 						"NewLine": false
 					},
 					{
 						"EntryType":"WaitToRead"
 					}
 				]
-			},
+			}
+		]
+	},
+	"StartTutorial":{
+		"_NextPartKey": "ScribeIntro",
+		"WaitForNextButton": false,
+		"Inital_BlackOutState": "Clear",
+		"EnsurePoses": {},
+		"Blocks":[
 			{
 				"BlockType": "SpeechBox",
 				"TopBox": false,
-				"WaitToFinish": false,
+				"WaitToFinish": true,
 				"WaitForNextButton": true,
 				"Hide": false,
 				"Entries": [
@@ -74,17 +110,14 @@
                         "ClearSpeaker": false
 					},
 					{
-						"EntryType": "Text",
-						"Text": "Now that we've got a moment, let's look at your PageBook.",
-						"NewLine": true
-					},
-					{
-						"EntryType":"WaitToRead"
+						"EntryType": "Speaker",
+						"SpeakerName": "MtFr",
+						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Happy.png"
 					},
 					{
 						"EntryType": "Text",
-						"Text": "Click the \"Prepare\" option so look at your Equipment.",
-						"NewLine": true
+						"Text": "We'll be setting up @Color:Red@Camp@Clear@ in a lot of differenct places as we travel to save @Color:Red@The World@Clear@, so don't get too attached to this @Color:Red@Abandoned Cabin@Clear@.",
+						"NewLine": false
 					},
 					{
 						"EntryType":"WaitToRead"
@@ -109,7 +142,15 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "On second thought. The Dev decided to completly redo PageBooks (after making the tutorial). So there is no tutorial now. We're done here.",
+						"Text": "As you can see, ",
+						"NewLine": true
+					},
+					{
+						"EntryType":"WaitToRead"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "we've got a few thing we can do at @Color:Red@Camp@Clear@.",
 						"NewLine": false
 					},
 					{
@@ -118,81 +159,17 @@
 				]
 			},
 			{
-				"BlockType": "_PopUp",
+				"BlockType": "PopUp",
 				"PopUpType": "Highlight",
 				"WaitToFinish": false,
 				"Create": "PopUp1",
 				"TargetElement": "CampOptionsContainer/MainOptionsContainer/PrepareOptionButton",
 				"PopupControlSript": "res://Scenes/Dialog/PopUps/OutlinePopUp/outline_pop_up_control.tscn",
-				"DarkenScreen": true,
+				"DarkenScreen": false,
 				"Padding":[-16,0,0,0],
-                "LineType":"Dotted",
-                "WaitToBeClicked": true,
-                "ShowClick": true
-			}
-		]
-	},
-	"EquipmentTutorial":{
-		"_NextPartKey": "EquipmentTutorial_LookAtBook",
-		"WaitForNextButton": false,
-		"Inital_BlackOutState": "Clear",
-		"EnsurePoses": {},
-		"Blocks":[
-			{
-				"BlockType": "PopUp",
-				"PopUpType": "Highlight",
-				"WaitToFinish": false,
-				"Delete": "PopUp1"
-			},
-            {
-				"BlockType":"CustomBlock",
-				"ScriptPath": "res://Scenes/Dialog/CustomDialogBlocks/CampTutorialBlocks.gd",
-				"OpenMenu": "Equipment"
-            },
-			{
-				"BlockType": "SpeechBox",
-				"TopBox": false,
-				"WaitToFinish": true,
-				"WaitForNextButton": true,
-				"Hide": false,
-				"Entries": [
-					{
-						"EntryType":"Clear",
-                        "ClearSpeaker": false
-					},
-					{
-						"EntryType": "Text",
-						"Text": "This is your PageBook, ",
-						"NewLine": false
-					},
-					{
-						"EntryType":"WaitToRead"
-					},
-					{
-						"EntryType": "Text",
-						"Text": "your interface to the Page System. ",
-						"NewLine": false
-					},
-					{
-						"EntryType": "Text",
-						"Text": "It has a lot of functions, but we should probably start with Party Inventory and Equipment.",
-						"NewLine": true
-					},
-					{
-						"EntryType":"WaitToRead"
-					}
-				]
-			},
-			{
-				"BlockType": "PopUp",
-				"PopUpType": "Highlight",
-				"WaitToFinish": false,
-				"Create": "InventoryPopUp",
-				"TargetElement": "CharacterMenuControl/ScaleControl/InventoryContainer",
-				"PopupControlSript": "res://Scenes/Dialog/PopUps/OutlinePopUp/outline_pop_up_control.tscn",
-				"DarkenScreen": true,
-				"Padding":[0,0,0,0],
-                "LineType": "Dotted"
+                "LineType":"Solid",
+                "WaitToBeClicked": false,
+                "ShowClick": false
 			},
 			{
 				"BlockType": "SpeechBox",
@@ -212,49 +189,32 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "This big empty box on the right is the Party Inventory.",
-						"NewLine": false
-					},
-					{
-						"EntryType": "Text",
-						"Text": "It holds all the Items that have been picked up in your travels.",
+						"Text": "You can take some private time to look at your @Color:Blue@PageBook@Clear@. ",
 						"NewLine": true
 					},
 					{
 						"EntryType":"WaitToRead"
-					}
-				]
-			},
-			{
-				"BlockType": "SpeechBox",
-				"TopBox": false,
-				"WaitToFinish": true,
-				"WaitForNextButton": true,
-				"Hide": false,
-				"Entries": [
-					{
-						"EntryType":"Clear",
-                        "ClearSpeaker": false
-					},
-					{
-						"EntryType": "Speaker",
-						"SpeakerName": "MtFr",
-						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Happy.png"
 					},
 					{
 						"EntryType": "Text",
-						"Text": "It  filters Items baseed on what is open on the left. ",
+						"Text": "In addition to manage your @Color:Blue@Pages@Clear@, ",
+						"NewLine": true
+					},
+					{
+						"EntryType":"WaitToRead"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "you can also check your @Color:Red@Equipment@Clear@, ",
 						"NewLine": false
 					},
 					{
-						"EntryType": "Speaker",
-						"SpeakerName": "MtFr",
-						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Neutral.png"
+						"EntryType":"WaitToRead"
 					},
 					{
 						"EntryType": "Text",
-						"Text": "It would be showing Equipment right now, but you didn't pick up any new equipment since you can't wear squirrel armor.",
-						"NewLine": true
+						"Text": "and look at any @Color:Red@Items@Clear@ you picked up. ",
+						"NewLine": false
 					},
 					{
 						"EntryType":"WaitToRead"
@@ -265,213 +225,16 @@
 				"BlockType": "PopUp",
 				"PopUpType": "Highlight",
 				"WaitToFinish": false,
-                "Delete":"InventoryPopUp",
-				"Create": "EquipmentPopUp",
-				"TargetElement": "CharacterMenuControl/ScaleControl/EquipmentPage",
-				"PopupControlSript": "res://Scenes/Dialog/PopUps/OutlinePopUp/outline_pop_up_control.tscn",
-				"DarkenScreen": true,
-				"Padding":[0,0,0,0],
-                "LineType": "Dotted"
-			},
-			{
-				"BlockType": "SpeechBox",
-				"TopBox": false,
-				"WaitToFinish": true,
-				"WaitForNextButton": true,
-				"Hide": false,
-				"Entries": [
-					{
-						"EntryType":"Clear",
-                        "ClearSpeaker": false
-					},
-					{
-						"EntryType": "Speaker",
-						"SpeakerName": "MtFr",
-						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Happy.png"
-					},
-					{
-						"EntryType": "Text",
-						"Text": "On the left is your Equipment Slots.",
-						"NewLine": false
-					},
-					{
-						"EntryType": "Text",
-						"Text": "You put Equipment here to make sure you're wearing them when you Spawn into the Page System.",
-						"NewLine": true
-					},
-					{
-						"EntryType":"WaitToRead"
-					}
-                ]
-            },
-			{
-				"BlockType": "SpeechBox",
-				"TopBox": false,
-				"WaitToFinish": true,
-				"WaitForNextButton": true,
-				"Hide": false,
-				"Entries": [
-					{
-						"EntryType":"Clear",
-                        "ClearSpeaker": false
-					},
-					{
-						"EntryType": "Text",
-						"Text": "You've got your slots for Head, Body, Feet, so on.",
-						"NewLine": true
-					},
-					{
-						"EntryType":"WaitToRead"
-					},
-					{
-						"EntryType": "Text",
-						"Text": "But, the most important slot is the one for your PageBook, ",
-						"NewLine": true
-					},
-					{
-						"EntryType":"WaitToRead"
-					}
-				]
-			},
-			{
-				"BlockType": "PopUp",
-				"PopUpType": "Highlight",
-				"WaitToFinish": false,
-                "Delete":"EquipmentPopUp",
-				"Create": "BookPopup",
-				"TargetElement": "CharacterMenuControl/ScaleControl/EquipmentPage/EquipmentSlotsControl/RightEquipSlots/BookSlotButton",
-				"PopupControlSript": "res://Scenes/Dialog/PopUps/OutlinePopUp/outline_pop_up_control.tscn",
-				"DarkenScreen": true,
-				"Padding":[0,0,0,0],
-                "LineType": "Dotted"
-			},
-			{
-				"BlockType": "SpeechBox",
-				"TopBox": false,
-				"WaitToFinish": true,
-				"WaitForNextButton": true,
-				"Hide": false,
-				"Entries": [
-					{
-						"EntryType": "Text",
-						"Text": "right here.",
-						"NewLine": false
-					},
-					{
-						"EntryType":"WaitToRead"
-					}
-				]
-			},
-			{
-				"BlockType": "SpeechBox",
-				"TopBox": false,
-				"WaitToFinish": true,
-				"WaitForNextButton": true,
-				"Hide": false,
-				"Entries": [
-					{
-						"EntryType":"Clear",
-                        "ClearSpeaker": false
-					},
-					{
-						"EntryType": "Speaker",
-						"SpeakerName": "MtFr",
-						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Happy.png"
-					},
-					{
-						"EntryType": "Text",
-						"Text": "It's so important in fact, you physically can't close your PageBook if you don't have a PageBook equipt.",
-						"NewLine": false
-					},
-					{
-						"EntryType":"WaitToRead"
-					}
-				]
-			},
-			{
-				"BlockType": "SpeechBox",
-				"TopBox": false,
-				"WaitToFinish": true,
-				"WaitForNextButton": true,
-				"Hide": false,
-				"Entries": [
-					{
-						"EntryType":"Clear",
-                        "ClearSpeaker": false
-					},
-					{
-						"EntryType": "Speaker",
-						"SpeakerName": "MtFr",
-						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Happy.png"
-					},
-					{
-						"EntryType": "Text",
-						"Text": "Give it a try! ",
-						"NewLine": false
-					},
-					{
-						"EntryType":"WaitToRead"
-					},
-					{
-						"EntryType": "Text",
-						"Text": "Unequip your PageBook, then try to close the PageBook.",
-						"NewLine": false
-					},
-					{
-						"EntryType":"WaitToRead"
-					}
-				]
-			},
-			{
-				"BlockType": "SpeechBox",
-				"TopBox": false,
-				"WaitToFinish": false,
-				"WaitForNextButton": false,
-				"Hide": true,
-				"Entries": [
-					{
-						"EntryType":"Clear"
-					}
-				]
-			},
-			{
-				"BlockType": "PopUp",
-				"PopUpType": "ClickDrag",
-				"WaitToFinish": true,
-                "Delete":"BookPopup",
-				"Create": "PopUp1",
-				"ClickTargetPath": "CharacterMenuControl/ScaleControl/EquipmentPage/EquipmentSlotsControl/RightEquipSlots/BookSlotButton",
-				"DragTargetPath": "CharacterMenuControl/ScaleControl/InventoryContainer/BoxBackground",
-                "MimicItemDragData":
-                {
-                    "Context": "Equipment", 
-                    "Index": 0
-                }
-			},
-			{
-				"BlockType": "PopUp",
-				"PopUpType": "Highlight",
-				"WaitToFinish": true,
-				"Create": "ExitPopup",
-				"TargetElement": "CharacterMenuControl/ScaleControl/TabsControl/ExitTabButton",
+				"Delete": "PopUp1",
+				"Create": "PopUp2",
+				"TargetElement": "CampOptionsContainer/MainOptionsContainer/ExplorOptionButton",
 				"PopupControlSript": "res://Scenes/Dialog/PopUps/OutlinePopUp/outline_pop_up_control.tscn",
 				"DarkenScreen": false,
-				"Padding":[0,0,0,0],
-                "LineType":"Dotted",
-                "WaitToBeClicked": true,
-                "ShowClick": true
+				"Padding":[-16,0,0,0],
+                "LineType":"Solid",
+                "WaitToBeClicked": false,
+                "ShowClick": false
 			},
-			{
-				"BlockType": "PopUp",
-				"PopUpType": "Highlight",
-				"WaitToFinish": true,
-				"Delete": "ExitPopup"
-			},
-            {
-				"BlockType":"CustomBlock",
-				"ScriptPath": "res://Scenes/Dialog/CustomDialogBlocks/CampTutorialBlocks.gd",
-				"CloseMenu": "Equipment"
-            },
 			{
 				"BlockType": "SpeechBox",
 				"TopBox": false,
@@ -490,160 +253,40 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "See? ",
-						"NewLine": false
-					},
-					{
-						"EntryType":"WaitToRead"
-					},
-					{
-						"EntryType": "Text",
-						"Text": "It's like a law of the universe.",
-						"NewLine": false
-					},
-					{
-						"EntryType":"WaitToRead"
-					},
-					{
-						"EntryType": "Text",
-						"Text": "The only way to get rid of a PageBook is to equipt a new one.",
+						"Text": "If you haven't had your fill of @Color:Red@Squirrle@Clear@ murder, ",
 						"NewLine": true
 					},
 					{
 						"EntryType":"WaitToRead"
-					}
-				]
-			},
-			{
-				"BlockType": "SpeechBox",
-				"TopBox": false,
-				"WaitToFinish": true,
-				"WaitForNextButton": true,
-				"Hide": false,
-				"Entries": [
-					{
-						"EntryType":"Clear",
-                        "ClearSpeaker": false
-					},
-					{
-						"EntryType": "Speaker",
-						"SpeakerName": "MtFr",
-						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Happy.png"
 					},
 					{
 						"EntryType": "Text",
-						"Text": "Does this mean that every person who's every pickup a PageBook is physically required to carry one with them, at all times, for the rest of thier life?",
+						"Text": "then you can @Color:Blue@Explore@Clear@ some old @Color:Red@Maps@Clear@ and fight @Color:Red@Actors@Clear@ you've beaten before.",
 						"NewLine": false
 					},
 					{
 						"EntryType":"WaitToRead"
 					}
-				]
-			},
-			{
-				"BlockType": "SpeechBox",
-				"TopBox": false,
-				"WaitToFinish": true,
-				"WaitForNextButton": false,
-				"Hide": false,
-				"Entries": [
-					{
-						"EntryType":"Clear",
-                        "ClearSpeaker": false
-					},
-					{
-						"EntryType": "Speaker",
-						"SpeakerName": "MtFr",
-						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Shock.png"
-					},
-					{
-						"EntryType": "Text",
-						"Text": "Yes",
-						"NewLine": false
-					},
-					{
-						"EntryType":"Delay",
-						"Delay": 2
-					}
-				]
-			},
-			{
-				"BlockType": "SpeechBox",
-				"TopBox": false,
-				"WaitToFinish": true,
-				"WaitForNextButton": true,
-				"Hide": false,
-				"Entries": [
-					{
-						"EntryType":"Clear",
-                        "ClearSpeaker": false
-					},
-					{
-						"EntryType": "Speaker",
-						"SpeakerName": "MtFr",
-						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Happy.png"
-					},
-					{
-						"EntryType": "Text",
-						"Text": "But instead of thinking about that, let's look at what PageBook you have. ",
-						"NewLine": false
-					},
-					{
-						"EntryType":"WaitToRead"
-					}
-				]
-			},
-			{
-				"BlockType": "SpeechBox",
-				"TopBox": false,
-				"WaitToFinish": false,
-				"WaitForNextButton": false,
-				"Hide": true,
-				"Entries": [
-					{
-						"EntryType":"Clear"
-					}
+					
 				]
 			},
 			{
 				"BlockType": "PopUp",
 				"PopUpType": "Highlight",
-				"WaitToFinish": true,
-				"Create": "SelectBookPopUp",
-				"TargetElement": "CharacterMenuControl/ScaleControl/InventoryContainer/BoxBackground/ScrollContainer/FlowContainer/InventoryButton_OldJournal_PageQue",
+				"WaitToFinish": false,
+				"Delete": "PopUp2",
+				"Create": "PopUp3",
+				"TargetElement": "CampOptionsContainer/MainOptionsContainer/RecordsOptionButton",
 				"PopupControlSript": "res://Scenes/Dialog/PopUps/OutlinePopUp/outline_pop_up_control.tscn",
 				"DarkenScreen": false,
-				"Padding":[-4,4,-4,4],
-                "LineType":"Dotted",
-                "WaitToBeClicked": true,
-                "ShowClick": true
+				"Padding":[-16,0,0,0],
+                "LineType":"Solid",
+                "WaitToBeClicked": false,
+                "ShowClick": false
 			},
 			{
-				"BlockType": "PopUp",
-				"PopUpType": "Highlight",
-				"WaitToFinish": false,
-				"Delete": "SelectBookPopUp"
-			}
-        ]
-    },
-	"EquipmentTutorial_LookAtBook":{
-		"_NextPartKey": "PagesTutorial",
-		"WaitForNextButton": false,
-		"Inital_BlackOutState": "Clear",
-		"EnsurePoses": {},
-		"Blocks":[
-            
-            {
-				"BlockType":"CustomBlock",
-				"ScriptPath": "res://Scenes/Dialog/CustomDialogBlocks/CampTutorialBlocks.gd",
-				"OpenMenu": "Equipment",
-                "RemoveEquipment": 0,
-                "OpenItem": "OldJournal_PageQue"
-            },
-            
-			{
 				"BlockType": "SpeechBox",
-				"TopBox": true,
+				"TopBox": false,
 				"WaitToFinish": true,
 				"WaitForNextButton": true,
 				"Hide": false,
@@ -659,15 +302,15 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "These handy Detail Cards come with every Item you find. ",
-						"NewLine": false
+						"Text": "I'll also put my amazing @Color:Red@Flash Cards@Clear@ here under @Color:Red@Records@Clear@,  ",
+						"NewLine": true
 					},
 					{
 						"EntryType":"WaitToRead"
 					},
 					{
 						"EntryType": "Text",
-						"Text": "Let's see what it says about your PageBook...",
+						"Text": "in case you wish to bask in thier majesty once more.",
 						"NewLine": true
 					},
 					{
@@ -676,8 +319,14 @@
 				]
 			},
 			{
+				"BlockType": "PopUp",
+				"PopUpType": "Highlight",
+				"WaitToFinish": false,
+				"Delete": "PopUp3"
+			},
+			{
 				"BlockType": "SpeechBox",
-				"TopBox": true,
+				"TopBox": false,
 				"WaitToFinish": true,
 				"WaitForNextButton": true,
 				"Hide": false,
@@ -693,28 +342,23 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "Hmm... ",
-						"LetterDelay": 0.02
+						"Text": "Hmm, ",
+						"NewLine": true
 					},
 					{
 						"EntryType":"WaitToRead"
 					},
 					{
 						"EntryType": "Text",
-						"Text": "Seems to be an old journal from your wandering days. ",
+						"Text": "it looks like there are other options too, ",
 						"NewLine": false
 					},
 					{
 						"EntryType":"WaitToRead"
 					},
 					{
-						"EntryType": "Speaker",
-						"SpeakerName": "MtFr",
-						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Neutral.png"
-					},
-					{
 						"EntryType": "Text",
-						"Text": "It's old, ",
+						"Text": "but they're greyed out.",
 						"NewLine": false
 					},
 					{
@@ -727,33 +371,15 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "but I'd say it still works.",
-						"NewLine": false
+						"Text": "Oh well, ",
+						"NewLine": true
 					},
 					{
 						"EntryType":"WaitToRead"
-					}
-				]
-			},
-			{
-				"BlockType": "SpeechBox",
-				"TopBox": true,
-				"WaitToFinish": true,
-				"WaitForNextButton": false,
-				"Hide": false,
-				"Entries": [
-					{
-						"EntryType":"Clear",
-                        "ClearSpeaker": false
-					},
-					{
-						"EntryType": "Speaker",
-						"SpeakerName": "MtFr",
-						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Happy.png"
 					},
 					{
 						"EntryType": "Text",
-						"Text": "More importantly, take a look at these:",
+						"Text": "we'll probably unlock them later.",
 						"NewLine": false
 					},
 					{
@@ -764,249 +390,19 @@
 			{
 				"BlockType": "PopUp",
 				"PopUpType": "Highlight",
-				"WaitToFinish": true,
-				"Create": "PPRPopUp",
-				"TargetElement": "CharacterMenuControl/ScaleControl/DetailsCardSpawnPoint/ItemDetailsCard/OffsetControl/NinePatchRect/VBoxContainer/PageQueDetailsControl/VBoxContainer/HBoxContainer3/HBoxContainer",
+				"WaitToFinish": false,
+				"Create": "PopUp4",
+				"TargetElement": "CampOptionsContainer/MainOptionsContainer/QuestOptionButton",
 				"PopupControlSript": "res://Scenes/Dialog/PopUps/OutlinePopUp/outline_pop_up_control.tscn",
 				"DarkenScreen": false,
-				"Padding":[-8,8,-8,8],
+				"Padding":[-16,0,0,0],
                 "LineType":"Solid",
                 "WaitToBeClicked": false,
-                "ShowClick": false,
-                "Color": [1,0,0,1]
+                "ShowClick": false
 			},
 			{
 				"BlockType": "SpeechBox",
-				"TopBox": true,
-				"WaitToFinish": true,
-				"WaitForNextButton": true,
-				"Hide": false,
-				"Entries": [
-					{
-						"EntryType": "Text",
-						"Text": "This is your PPR, or Pages per Round, if you forgot.",
-						"NewLine": true
-					},
-					{
-						"EntryType":"WaitToRead"
-					}
-				]
-			},
-			{
-				"BlockType": "PopUp",
-				"PopUpType": "Highlight",
-				"WaitToFinish": true,
-				"Delete": "PPRPopUp",
-				"Create": "PageSlotsPopUp",
-				"TargetElement": "CharacterMenuControl/ScaleControl/DetailsCardSpawnPoint/ItemDetailsCard/OffsetControl/NinePatchRect/VBoxContainer/PageQueDetailsControl/VBoxContainer/HBoxContainer3/HBoxContainer2",
-				"PopupControlSript": "res://Scenes/Dialog/PopUps/OutlinePopUp/outline_pop_up_control.tscn",
-				"DarkenScreen": false,
-				"Padding":[-8,8,-8,8],
-                "LineType":"Solid",
-                "WaitToBeClicked": false,
-                "ShowClick": false,
-                "Color": [1,0,0,1]
-			},
-			{
-				"BlockType": "SpeechBox",
-				"TopBox": true,
-				"WaitToFinish": true,
-				"WaitForNextButton": true,
-				"Hide": false,
-				"Entries": [
-					{
-						"EntryType": "Text",
-						"Text": "And these are your Page Slots. They decide how many and what types of Pages you can equip.",
-						"NewLine": true
-					},
-					{
-						"EntryType":"WaitToRead"
-					}
-				]
-			},
-			{
-				"BlockType": "PopUp",
-				"PopUpType": "Highlight",
-				"WaitToFinish": true,
-				"Delete": "PageSlotsPopUp",
-				"Create": "PageBookStatsPopUp",
-				"TargetElement": "CharacterMenuControl/ScaleControl/DetailsCardSpawnPoint/ItemDetailsCard/OffsetControl/NinePatchRect/VBoxContainer/PageQueDetailsControl/VBoxContainer/HBoxContainer3",
-				"PopupControlSript": "res://Scenes/Dialog/PopUps/OutlinePopUp/outline_pop_up_control.tscn",
-				"DarkenScreen": false,
-				"Padding":[-8,8,-8,8],
-                "LineType":"Solid",
-                "WaitToBeClicked": false,
-                "ShowClick": false,
-                "Color": [1,0,0,1]
-			},
-			{
-				"BlockType": "SpeechBox",
-				"TopBox": true,
-				"WaitToFinish": true,
-				"WaitForNextButton": true,
-				"Hide": false,
-				"Entries": [
-					{
-						"EntryType":"Clear",
-                        "ClearSpeaker": false
-					},
-					{
-						"EntryType": "Text",
-						"Text": "You see, your PageBook controles what Pages you can take into combat, and the number of Pages you can use each Round.",
-						"NewLine": true
-					},
-					{
-						"EntryType":"WaitToRead"
-					}
-				]
-			},
-			{
-				"BlockType": "SpeechBox",
-				"TopBox": true,
-				"WaitToFinish": true,
-				"WaitForNextButton": true,
-				"Hide": false,
-				"Entries": [
-					{
-						"EntryType":"Clear",
-                        "ClearSpeaker": false
-					},
-					{
-						"EntryType": "Text",
-						"Text": "In your case, you can use 4 Pages per Round.",
-						"NewLine": false
-					},
-					{
-						"EntryType":"WaitToRead"
-					},
-					{
-						"EntryType": "Text",
-						"Text": "And you can equip: ",
-						"NewLine": true
-					},
-					{
-						"EntryType":"WaitToRead"
-					},
-					{
-						"EntryType": "Text",
-						"Text": " 1 Bar Page, ",
-						"NewLine": false
-					},
-					{
-						"EntryType":"WaitToRead"
-					},
-					{
-						"EntryType": "Text",
-						"Text": " 1 Class Page,",
-						"NewLine": false
-					},
-					{
-						"EntryType":"WaitToRead"
-					},
-					{
-						"EntryType": "Text",
-						"Text": "and 6 of any type of Action Page.",
-						"NewLine": true
-					},
-					{
-						"EntryType":"WaitToRead"
-					}
-				]
-			},
-			{
-				"BlockType": "PopUp",
-				"PopUpType": "Highlight",
-				"WaitToFinish": true,
-				"Delete": "PageBookStatsPopUp"
-			},
-			{
-				"BlockType": "SpeechBox",
-				"TopBox": true,
-				"WaitToFinish": true,
-				"WaitForNextButton": true,
-				"Hide": false,
-				"Entries": [
-					{
-						"EntryType":"Clear",
-                        "ClearSpeaker": false
-					},
-					{
-						"EntryType": "Text",
-						"Text": "Different Books can have very different numbers.",
-						"NewLine": false
-					},
-					{
-						"EntryType":"WaitToRead"
-					},
-					{
-						"EntryType": "Text",
-						"Text": "Spell Tomes have low PPR, but a lot of slots for Spells.",
-						"NewLine": true
-					},
-					{
-						"EntryType":"WaitToRead"
-					},
-					{
-						"EntryType": "Text",
-						"Text": "A Feild Manual could have high PPR, but fewer Page slots.",
-						"NewLine": true
-					},
-					{
-						"EntryType":"WaitToRead"
-					},
-					{
-						"EntryType": "Text",
-						"Text": "Or you might find a Travel Log with high PPR and extra lots just for Movement Pages.",
-						"NewLine": true
-					},
-					{
-						"EntryType":"WaitToRead"
-					}
-				]
-			},
-			{
-				"BlockType": "SpeechBox",
-				"TopBox": true,
-				"WaitToFinish": true,
-				"WaitForNextButton": true,
-				"Hide": false,
-				"Entries": [
-					{
-						"EntryType":"Clear",
-                        "ClearSpeaker": false
-					},
-					{
-						"EntryType": "Speaker",
-						"SpeakerName": "MtFr",
-						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Smile.png"
-					},
-					{
-						"EntryType": "Text",
-						"Text": "That's why it's important to find the PageBook that's right for you!",
-						"NewLine": false
-					},
-					{
-						"EntryType":"Delay",
-                        "Delay": 1
-					},
-					{
-						"EntryType": "Speaker",
-						"SpeakerName": "MtFr",
-						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Neutral.png"
-					},
-					{
-						"EntryType": "Text",
-						"Text": "But you only have one now, so deal with it.",
-						"NewLine": true
-					},
-					{
-						"EntryType":"WaitToRead"
-					}
-				]
-			},
-			{
-				"BlockType": "SpeechBox",
-				"TopBox": true,
+				"TopBox": false,
 				"WaitToFinish": true,
 				"WaitForNextButton": true,
 				"Hide": false,
@@ -1022,752 +418,31 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "Put your PageBook back on and we'll take a look at what Pages you have.",
+						"Text": "And when you're ready to continue our @Color:Red@Quest@Clear@, ",
 						"NewLine": false
-					}
-				]
-			},
-			{
-				"BlockType": "SpeechBox",
-				"TopBox": true,
-				"WaitToFinish": true,
-				"WaitForNextButton": false,
-				"Hide": true,
-				"Entries": [
+					},
 					{
-						"EntryType":"Clear"
+						"EntryType":"WaitToRead"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "you can find me here under the aptly named @Color:Red@Quest@Clear@ option.",
+						"NewLine": true
+					},
+					{
+						"EntryType":"WaitToRead"
 					}
 				]
 			},
 			{
 				"BlockType": "PopUp",
 				"PopUpType": "Highlight",
-				"WaitToFinish": true,
-				"Create": "EquiptBook",
-				"TargetElement": "CharacterMenuControl/ScaleControl/DetailsCardSpawnPoint/ItemDetailsCard/OffsetControl/NinePatchRect/VBoxContainer/EquipButtonBackground",
-				"PopupControlSript": "res://Scenes/Dialog/PopUps/OutlinePopUp/outline_pop_up_control.tscn",
-				"DarkenScreen": false,
-				"Padding":[-8,8,-8,8],
-                "LineType":"Dotted",
-                "WaitToBeClicked": true,
-                "ShowClick": true,
-                "Color": [1,1,1,1]
-			},
-            {
-				"BlockType":"CustomBlock",
-				"ScriptPath": "res://Scenes/Dialog/CustomDialogBlocks/CampTutorialBlocks.gd",
-                "EquipmentItem": "OldJournal_PageQue"
-            },
-			{
-				"BlockType": "PopUp",
-				"PopUpType": "Highlight",
-				"WaitToFinish": true,
-                "Delete": "EquiptBook",
-				"Create": "OpenPagesPage",
-				"TargetElement": "CharacterMenuControl/ScaleControl/TabsControl/BookTabButton",
-				"PopupControlSript": "res://Scenes/Dialog/PopUps/OutlinePopUp/outline_pop_up_control.tscn",
-				"DarkenScreen": false,
-				"Padding":[-8,8,-8,8],
-                "LineType":"Dotted",
-                "WaitToBeClicked": true,
-                "ShowClick": true,
-                "Color": [1,1,1,1]
-			},
-			{
-				"BlockType": "PopUp",
-				"PopUpType": "Highlight",
-				"WaitToFinish": true,
-                "Delete": "OpenPagesPage"
+				"WaitToFinish": false,
+				"Delete": "PopUp4"
 			}
-        ]
-    },
-	"PagesTutorial":{
-		"_NextPartKey": "TutorialEnd",
-		"WaitForNextButton": true,
-		"Inital_BlackOutState": "Clear",
-		"EnsurePoses": {},
-		"Blocks":[
-            
-            {
-				"BlockType":"CustomBlock",
-				"ScriptPath": "res://Scenes/Dialog/CustomDialogBlocks/CampTutorialBlocks.gd",
-                "AddItemIfNone": "ChuckAcorn_PageItem",
-				"OpenMenu": "Pages"
-            },
-			{
-				"BlockType": "SpeechBox",
-				"TopBox": false,
-				"WaitToFinish": true,
-				"WaitForNextButton": true,
-				"Hide": false,
-				"Entries": [
-					{
-						"EntryType":"Clear",
-                        "ClearSpeaker": false
-					},
-					{
-						"EntryType": "Speaker",
-						"SpeakerName": "MtFr",
-						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Happy.png"
-					},
-					{
-						"EntryType": "Text",
-						"Text": "This is the Page page of your PageBook"
-					},
-                    {
-                        "EntryType":"WaitToRead"
-                    },
-                    {
-                        "EntryType":"Text",
-                        "Text":"... ",
-						"LetterDelay": 0.3
-                    },
-					{
-						"EntryType": "Speaker",
-						"SpeakerName": "MtFr",
-						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Neutral.png"
-					},
-					{
-						"EntryType": "BackTrack",
-						"Text": "page of your PageBook... "
-					},
-					{
-						"EntryType": "Speaker",
-						"SpeakerName": "MtFr",
-						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Happy.png"
-					},
-                    {
-                        "EntryType":"Text",
-                        "Text":"chapter of your"
-                    },
-                    {
-                        "EntryType":"WaitToRead"
-                    },
-					{
-						"EntryType": "Speaker",
-						"SpeakerName": "MtFr",
-						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Sad.png"
-					},
-                    {
-                        "EntryType":"Text",
-                        "Text":"... ",
-						"LetterDelay": 0.3
-                    },
-					{
-						"EntryType": "BackTrack",
-						"Text": "This is the Page chapter of your... "
-					},
-					{
-						"EntryType":"WaitToRead"
-					},
-					{
-						"EntryType": "Speaker",
-						"SpeakerName": "MtFr",
-						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Happy.png"
-					},
-					{
-						"EntryType": "Text",
-						"Text": "These are your Page Slots!"
-					},
-                    {
-                        "EntryType":"WaitToRead"
-                    }
-                ]
-            },
-			{
-				"BlockType": "SpeechBox",
-				"TopBox": false,
-				"WaitToFinish": true,
-				"WaitForNextButton": true,
-				"Hide": false,
-				"Entries": [
-					{
-						"EntryType":"Clear",
-                        "ClearSpeaker": false
-					},
-					{
-						"EntryType": "Speaker",
-						"SpeakerName": "MtFr",
-						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Happy.png"
-					},
-					{
-						"EntryType": "Text",
-						"Text": "You probably recognize most of them as the things you just used to murder a bunch of squirrels, "
-					},
-                    {
-                        "EntryType":"WaitToRead"
-                    },
-                    {
-                        "EntryType":"Text",
-                        "Text":"but there a couple more that you couldn't see in combat."
-                    },
-                    {
-                        "EntryType":"WaitToRead"
-                    }
-                ]
-            },
-			{
-				"BlockType": "PopUp",
-				"PopUpType": "Highlight",
-				"WaitToFinish": true,
-				"Create": "ClassPagesPopUp",
-				"TargetElement": "CharacterMenuControl/ScaleControl/PagesPage/VBoxContainer/FlowContainer/SubContainer_Bar",
-				"PopupControlSript": "res://Scenes/Dialog/PopUps/OutlinePopUp/outline_pop_up_control.tscn",
-				"DarkenScreen": false,
-				"Padding":[-8,-8,-8,8],
-                "HackScale":[3,1],
-                "LineType":"Solid",
-                "WaitToBeClicked": false,
-                "ShowClick": false,
-                "Color": [1,0,0,1]
-			},
-			{
-				"BlockType": "SpeechBox",
-				"TopBox": false,
-				"WaitToFinish": true,
-				"WaitForNextButton": true,
-				"Hide": false,
-				"Entries": [
-					{
-						"EntryType":"Clear",
-                        "ClearSpeaker": false
-					},
-					{
-						"EntryType": "Speaker",
-						"SpeakerName": "MtFr",
-						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Happy.png"
-					},
-					{
-						"EntryType": "Text",
-						"Text": "Namely these, your Class Pages."
-					},
-                    {
-                        "EntryType":"WaitToRead"
-                    },
-                    {
-                        "EntryType":"Text",
-                        "Text":"They provide passive Effects so long as you have them in a Page Slot.",
-                        "NewLine": true
-                    },
-                    {
-                        "EntryType":"WaitToRead"
-                    }
-                ]
-            },
-			{
-				"BlockType": "SpeechBox",
-				"TopBox": false,
-				"WaitToFinish": true,
-				"WaitForNextButton": true,
-				"Hide": false,
-				"Entries": [
-					{
-						"EntryType":"Clear",
-                        "ClearSpeaker": false
-					},
-					{
-						"EntryType": "Speaker",
-						"SpeakerName": "MtFr",
-						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Happy.png"
-					},
-                    {
-                        "EntryType":"Text",
-                        "Text":"Unlike Action Pages, which require a turn to execute, Class Pages are always active.",
-                        "NewLine": false
-                    },
-                    {
-                        "EntryType":"WaitToRead"
-                    },
-                    {
-                        "EntryType":"Text",
-                        "Text":"You don't need to do anything to use them, so they don't show up on your Page Bar while in combat.",
-                        "NewLine": true
-                    },
-                    {
-                        "EntryType":"WaitToRead"
-                    }
-                ]
-            },
-			{
-				"BlockType": "PopUp",
-				"PopUpType": "Highlight",
-				"WaitToFinish": false,
-				"Delete": "ClassPagesPopUp"
-			},
-			{
-				"BlockType": "SpeechBox",
-				"TopBox": false,
-				"WaitToFinish": true,
-				"WaitForNextButton": true,
-				"Hide": false,
-				"Entries": [
-					{
-						"EntryType":"Clear",
-                        "ClearSpeaker": false
-					},
-					{
-						"EntryType": "Speaker",
-						"SpeakerName": "MtFr",
-						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Neutral.png"
-					},
-                    {
-                        "EntryType":"Text",
-                        "Text":"I'd explain more here, but the Dev is still trying to decide how Classes will work, so there's no point writing the script right now.",
-                        "NewLine": false
-                    },
-                    {
-                        "EntryType":"WaitToRead"
-                    }
-                ]
-            },
-			{
-				"BlockType": "SpeechBox",
-				"TopBox": false,
-				"WaitToFinish": true,
-				"WaitForNextButton": true,
-				"Hide": false,
-				"Entries": [
-					{
-						"EntryType":"Clear",
-                        "ClearSpeaker": false
-					},
-					{
-						"EntryType": "Speaker",
-						"SpeakerName": "MtFr",
-						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Happy.png"
-					},
-                    {
-                        "EntryType":"Text",
-                        "Text":"Let's look at the Page you picked up from those squirrles.",
-                        "NewLine": false
-                    },
-                    {
-                        "EntryType":"WaitToRead"
-                    }
-                ]
-            },
-			{
-				"BlockType": "SpeechBox",
-				"TopBox": false,
-				"WaitToFinish": false,
-				"WaitForNextButton": false,
-				"Hide": true,
-				"Entries": [
-					{
-						"EntryType":"Clear"
-                    }
-                ]
-            },
-			{
-				"BlockType": "PopUp",
-				"PopUpType": "Highlight",
-				"WaitToFinish": true,
-				"Create": "SelectPagePopUp",
-				"TargetElement": "CharacterMenuControl/ScaleControl/InventoryContainer/BoxBackground/ScrollContainer/FlowContainer/InventoryButton_ChuckAcorn_PageItem",
-				"PopupControlSript": "res://Scenes/Dialog/PopUps/OutlinePopUp/outline_pop_up_control.tscn",
-				"DarkenScreen": false,
-				"Padding":[-4,4,-4,4],
-                "LineType":"Dotted",
-                "WaitToBeClicked": true,
-                "ShowClick": true
-			},
-            {
-				"BlockType":"CustomBlock",
-				"ScriptPath": "res://Scenes/Dialog/CustomDialogBlocks/CampTutorialBlocks.gd",
-                "OpenItem": "ChuckAcorn_PageItem"
-            },
-			{
-				"BlockType": "PopUp",
-				"PopUpType": "Highlight",
-				"WaitToFinish": false,
-				"Delete": "SelectPagePopUp"
-			},
-			{
-				"BlockType": "SpeechBox",
-				"TopBox": true,
-				"WaitToFinish": true,
-				"WaitForNextButton": true,
-				"Hide": false,
-				"Entries": [
-					{
-						"EntryType":"Clear",
-                        "ClearSpeaker": false
-					},
-					{
-						"EntryType": "Speaker",
-						"SpeakerName": "MtFr",
-						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Happy.png"
-					},
-                    {
-                        "EntryType":"Text",
-                        "Text":"Looks like you got a squirrel's Page for chuching acorns.",
-                        "NewLine": false
-                    },
-                    {
-                        "EntryType":"WaitToRead"
-                    },
-                    {
-                        "EntryType":"Text",
-                        "Text":"You can get Pages from a lot a different sources.",
-                        "NewLine": true
-                    },
-                    {
-                        "EntryType":"WaitToRead"
-                    },
-                    {
-                        "EntryType":"Text",
-                        "Text":"Like finding people who already have a copy and killing them.",
-                        "NewLine": true
-                    },
-                    {
-                        "EntryType":"WaitToRead"
-                    }
-                ]
-            },
-			{
-				"BlockType": "SpeechBox",
-				"TopBox": true,
-				"WaitToFinish": true,
-				"WaitForNextButton": true,
-				"Hide": false,
-				"Entries": [
-					{
-						"EntryType":"Clear",
-                        "ClearSpeaker": false
-					},
-					{
-						"EntryType": "Speaker",
-						"SpeakerName": "MtFr",
-						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Happy.png"
-					},
-                    {
-                        "EntryType":"Text",
-                        "Text":"Let's try equiping it.",
-                        "NewLine": false
-                    },
-                    {
-                        "EntryType":"WaitToRead"
-                    },
-                    {
-                        "EntryType":"Text",
-                        "Text":"Drag it over from the Party Inventory to your Page Slots.",
-                        "NewLine": true
-                    },
-                    {
-                        "EntryType":"WaitToRead"
-                    }
-                ]
-            },
-			{
-				"BlockType": "SpeechBox",
-				"TopBox": true,
-				"WaitToFinish": false,
-				"WaitForNextButton": false,
-				"Hide": true,
-				"Entries": [
-					{
-						"EntryType":"Clear"
-                    }
-                ]
-            },
-			{
-				"BlockType": "PopUp",
-				"PopUpType": "ClickDrag",
-				"WaitToFinish": true,
-				"Create": "EquipAcornPopUp",
-				"ClickTargetPath": "CharacterMenuControl/ScaleControl/InventoryContainer/BoxBackground/ScrollContainer/FlowContainer/InventoryButton_ChuckAcorn_PageItem",
-				"DragTargetPath": "CharacterMenuControl/ScaleControl/PagesPage/VBoxContainer/FlowContainer/SubContainer_Actions/PageRow0/PageSlot2",
-                "MimicItemDragData":
-                {
-                    "Context": "Inventory", 
-                    "ItemKey": "ChuckAcorn_PageItem",
-                    "TargetContext": "Pages",
-                    "EquipPageSlot":4
-                }
-			},
-            {
-				"BlockType":"CustomBlock",
-				"ScriptPath": "res://Scenes/Dialog/CustomDialogBlocks/CampTutorialBlocks.gd",
-                "CloseMenu": "ItemDetails"
-            },
-            
-			{
-				"BlockType": "PopUp",
-				"PopUpType": "Highlight",
-				"WaitToFinish": false,
-				"Delete": "EquipAcornPopUp"
-			},
-			{
-				"BlockType": "SpeechBox",
-				"TopBox": false,
-				"WaitToFinish": true,
-				"WaitForNextButton": true,
-				"Hide": false,
-				"Entries": [
-					{
-						"EntryType":"Clear",
-                        "ClearSpeaker": false
-					},
-					{
-						"EntryType": "Speaker",
-						"SpeakerName": "MtFr",
-						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Smile.png"
-					},
-                    {
-                        "EntryType":"Text",
-                        "Text":"Now you can Chuch Acorns just like the best of squirrels",
-                        "NewLine": false
-                    },
-                    {
-                        "EntryType":"WaitToRead"
-                    },
-					{
-						"EntryType": "Speaker",
-						"SpeakerName": "MtFr",
-						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Happy.png"
-					},
-                    {
-                        "EntryType":"Text",
-                        "Text":"... ",
-                        "LetterDelay": 0.1,
-                        "NewLine": true
-                    },
-					{
-						"EntryType": "Speaker",
-						"SpeakerName": "MtFr",
-						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Neutral.png"
-					},
-                    {
-                        "EntryType":"Text",
-                        "Text":"but you can't Turn Right anymore",
-                        "NewLine": false
-                    },
-                    {
-                        "EntryType":"Text",
-                        "Text":"... ",
-                        "LetterDelay": 0.1
-                    },
-                    {
-                        "EntryType":"WaitToRead"
-                    },
-					{
-						"EntryType": "Speaker",
-						"SpeakerName": "MtFr",
-						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Sad.png"
-					},
-                    {
-                        "EntryType":"Text",
-                        "Text":"that was probably dumb.",
-                        "NewLine": true
-                    },
-                    {
-                        "EntryType":"WaitToRead"
-                    }
-                ]
-            },
-			{
-				"BlockType": "SpeechBox",
-				"TopBox": false,
-				"WaitToFinish": true,
-				"WaitForNextButton": false,
-				"Hide": false,
-				"Entries": [
-					{
-						"EntryType":"Clear",
-                        "ClearSpeaker": false
-					},
-					{
-						"EntryType": "Speaker",
-						"SpeakerName": "MtFr",
-						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Happy.png"
-					},
-                    {
-                        "EntryType":"Text",
-                        "Text":"But it's easy enough to switch back.",
-                        "NewLine": false
-                    },
-                    {
-                        "EntryType":"WaitToRead"
-                    }
-                ]
-            },
-            {
-				"BlockType":"CustomBlock",
-				"ScriptPath": "res://Scenes/Dialog/CustomDialogBlocks/CampTutorialBlocks.gd",
-                "EquipPage": "TurnRight_PageItem",
-                "EquipPageSlot":4
-            },
-			{
-				"BlockType": "SpeechBox",
-				"TopBox": false,
-				"WaitToFinish": true,
-				"WaitForNextButton": true,
-				"Hide": false,
-				"Entries": [
-					{
-						"EntryType":"Clear",
-                        "ClearSpeaker": false
-					},
-					{
-						"EntryType": "Speaker",
-						"SpeakerName": "MtFr",
-						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Happy.png"
-					},
-                    {
-                        "EntryType":"Text",
-                        "Text":"Ta-Da!",
-                        "NewLine": false
-                    },
-                    {
-                        "EntryType":"WaitToRead"
-                    }
-                ]
-            },
-			{
-				"BlockType": "SpeechBox",
-				"TopBox": false,
-				"WaitToFinish": true,
-				"WaitForNextButton": true,
-				"Hide": false,
-				"Entries": [
-					{
-						"EntryType":"Clear",
-                        "ClearSpeaker": false
-					},
-					{
-						"EntryType": "Speaker",
-						"SpeakerName": "MtFr",
-						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Neutral.png"
-					},
-                    {
-                        "EntryType":"Text",
-                        "Text":"It should go without saying that the Pages you choose to take into combat have a huge effect on whether or not you come out of it alive.",
-                        "NewLine": false
-                    },
-                    {
-                        "EntryType":"WaitToRead"
-                    }
-                ]
-            },
-{
-	"BlockType": "SpeechBox",
-	"TopBox": false,
-	"WaitToFinish": true,
-	"WaitForNextButton": true,
-	"Hide": false,
-	"Entries": [
-		{
-			"EntryType":"Clear",
-			"ClearSpeaker": false
-		},
-		{
-			"EntryType": "Speaker",
-			"SpeakerName": "MtFr",
-			"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Neutral.png"
-		},
-		{
-			"EntryType":"Text",
-			"Text":"Don't just focus on how much damage an attack might do.",
-			"NewLine": false
-		},
-		{
-			"EntryType":"WaitToRead"
-		},
-		{
-			"EntryType":"Text",
-			"Text":"Also keep in mind things like Energy Costs or Targeting Area and Type.",
-			"NewLine": false
-		},
-		{
-			"EntryType":"WaitToRead"
-		}
-	]
-}
-            
-        ]
-    },
-	"TutorialEnd":{
-		"_NextPartKey": "ScribeIntro",
-		"WaitForNextButton": true,
-		"Inital_BlackOutState": "Clear",
-		"EnsurePoses": {},
-		"Blocks":[
-            
-            {
-				"BlockType":"CustomBlock",
-				"ScriptPath": "res://Scenes/Dialog/CustomDialogBlocks/CampTutorialBlocks.gd",
-				"CloseMenu": "Equipment"
-            },
-			{
-				"BlockType": "SpeechBox",
-				"TopBox": false,
-				"WaitToFinish": true,
-				"WaitForNextButton": false,
-				"Hide": false,
-				"Entries": [
-					{
-						"EntryType":"Clear",
-                        "ClearSpeaker": false
-					},
-					{
-						"EntryType": "Speaker",
-						"SpeakerName": "MtFr",
-						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Happy.png"
-					},
-                    {
-                        "EntryType":"Text",
-                        "Text":"Well, ",
-                        "NewLine": false
-                    },
-                    {
-                        "EntryType":"WaitToRead"
-                    },
-                    {
-                        "EntryType":"Text",
-                        "Text":"that's all I have to say.",
-                        "NewLine": false
-                    },
-                    {
-                        "EntryType":"WaitToRead"
-                    },
-                    {
-                        "EntryType":"Text",
-                        "Text":"There's probably a lot of stuff I forgot to mention, but to be honest, ",
-                        "NewLine": true
-                    },
-                    {
-                        "EntryType":"WaitToRead"
-                    },
-					{
-						"EntryType": "Speaker",
-						"SpeakerName": "MtFr",
-						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Neutral.png"
-					},
-                    {
-                        "EntryType":"Text",
-                        "Text":"I'm not use to talking this much.",
-                        "NewLine": false
-                    },
-                    {
-                        "EntryType":"WaitToRead"
-                    },{
-						"EntryType": "Speaker",
-						"SpeakerName": "MtFr",
-						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Happy.png"
-					},
-                    {
-                        "EntryType":"Text",
-                        "Text":"These Flash Cards should cover the rest of it.",
-                        "NewLine": true
-                    },
-                    {
-                        "EntryType":"WaitToRead"
-                    }
-                ]
-            }
-        ]
-    },
-
+			
+		]
+	},
 
 
 
@@ -1782,6 +457,67 @@
 		"Inital_BlackOutState": "Clear",
 		"EnsurePoses": {},
 		"Blocks":[
+			{
+				"BlockType": "SpeechBox",
+				"TopBox": false,
+				"WaitToFinish": true,
+				"WaitForNextButton": false,
+				"Hide": false,
+				"Entries": [
+				{
+					"BlockType": "SpeechBox",
+					"TopBox": false,
+					"WaitToFinish": true,
+					"WaitForNextButton": true,
+					"Hide": false,
+					"Entries": [
+						{
+							"EntryType":"Clear",
+							"ClearSpeaker": false
+						},
+						{
+							"EntryType": "Speaker",
+							"SpeakerName": "MtFr",
+							"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Neutral.png"
+						},
+						{
+							"EntryType": "Text",
+							"Text": "But there's one last thing I want to say:",
+							"NewLine": true
+						},
+						{
+							"EntryType":"WaitToRead"
+						},
+						{
+							"EntryType": "Speaker",
+							"SpeakerName": "MtFr",
+							"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Happy.png"
+						},
+						{
+							"EntryType": "Text",
+							"Text": "Thanks for teaming up with me, @Color:Red@Hero@Clear@.",
+							"NewLine": true
+						},
+						{
+							"EntryType":"WaitToRead"
+						},
+						{
+							"EntryType": "Speaker",
+							"SpeakerName": "MtFr",
+							"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Smile.png"
+						},
+						{
+							"EntryType": "Text",
+							"Text": "I know we are going to do some great things together.",
+							"NewLine": true
+						},
+						{
+							"EntryType":"WaitToRead"
+						}
+					]
+				}
+                ]
+            },
 			{
 				"BlockType": "SpeechBox",
 				"TopBox": false,
@@ -1803,7 +539,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "the Mysterious Figuer joined the Hero's Party.",
+						"Text": "the @Color:Red@Mysterious Figuer@Clear@ joined the @Color:Red@Hero's Party@Clear@.",
 						"NewLine": false,
                         "LetterDelay": 0.015
 					},
@@ -1850,7 +586,37 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "With an optomistic smile on thier face, and the thrill of adventure in thier heart, our Hero was ready to fullfil thier destiny and save the world.",
+						"Text": "From the huble begins of @Color:Red@The Abandoned Cabin@Clear@, a new @Color:Blue@Story@Clear@ began.",
+						"NewLine": false,
+                        "LetterDelay": 0.015
+					},
+					{
+						"EntryType":"WaitToRead"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "One that would stur the long dormant tides of fate, ",
+						"NewLine": false,
+                        "LetterDelay": 0.015
+					},
+					{
+						"EntryType":"WaitToRead"
+					},
+					{
+						"EntryType": "Text",
+						"Text": " and progress @Color:Red@The World@Clear@ forward ",
+						"NewLine": false,
+                        "LetterDelay": 0.015
+					},
+					{
+						"EntryType":"WaitToRead"
+					},
+					{
+						"EntryType":"WaitToRead"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "into @Color:Red@The End@Clear@.",
 						"NewLine": false,
                         "LetterDelay": 0.015
 					},
@@ -1902,7 +668,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "It was then that they noticed the stranger sitting in there camp.",
+						"Text": "It was then that they noticed a stranger sitting in the back of @Color:Red@The Abandoned Cabin@Clear@.",
 						"NewLine": false,
                         "LetterDelay": 0.015
 					},
@@ -1954,7 +720,16 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "The stranger did not respond. Instead, they continued to write in the large book that sat upon thier lap.",
+						"Text": "The stranger did not respond. ",
+						"NewLine": false,
+                        "LetterDelay": 0.015
+					},
+					{
+						"EntryType":"WaitToRead"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "Instead, they simply continued to write in @Color:Blue@The Story Book@Clear@ that sat upon thier lap.",
 						"NewLine": false,
                         "LetterDelay": 0.015
 					},
@@ -2007,7 +782,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "They were a fine specimen of a man.",
+						"Text": "They were a fine specimen of a @Color:Red@Man@Clear@. ",
 						"NewLine": false,
                         "LetterDelay": 0.015
 					},
@@ -2034,7 +809,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "What?  ",
+						"Text": "A what? ",
 						"NewLine": false
 					},
 					{
@@ -2051,7 +826,7 @@
 				"Entries": [
 					{
 						"EntryType": "Text",
-						"Text": " As strong as an ox and as virile as a herd of wild stallions.",
+						"Text": "As strong as an @Color:Red@Ox@Clear@ and as virile as a herd of wild @Color:Red@Stallions@Clear@. ",
 						"NewLine": false,
                         "LetterDelay": 0.015
 					},
@@ -2096,7 +871,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": " He stood six foot ten, ",
+						"Text": "He stood six foot ten, ",
 						"NewLine": false,
                         "LetterDelay": 0.015
 					},
@@ -2138,7 +913,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "with the build of a great warrior, ",
+						"Text": "with the build of a great @Color:Red@Warrior@Clear@, ",
 						"NewLine": false,
                         "LetterDelay": 0.015
 					},
@@ -2148,24 +923,8 @@
 				]
 			},
 			{
-				"BlockType": "SpeechBox",
-				"TopBox": false,
-				"WaitToFinish": true,
-				"WaitForNextButton": false,
-				"Hide": false,
-				"Entries": [
-					{
-						"EntryType": "Speaker",
-						"SpeakerName": "SCRB",
-						"SpeakerPort": "res://defs/Actors/NPCs/Scribe/Portraits/ScribePort_Neutral.png"
-					},
-					{
-						"EntryType": "Text",
-						"Text": ".....",
-						"NewLine": false,
-                        "LetterDelay": 0.1
-					}
-				]
+				"BlockType": "Delay",
+				"Time": 1.5
 			},
 			{
 				"BlockType": "SpeechBox",
@@ -2177,14 +936,24 @@
 					{
 						"EntryType": "Clear",
                         "ClearText": false
+					},
+					{
+						"EntryType": "Text",
+						"Text": "and a full head of hair. ",
+						"NewLine": false,
+                        "LetterDelay": 0.015
+					},
+					{
+						"EntryType":"Delay",
+                        "Delay":1
 					}
 				]
 			},
 			{
 				"BlockType": "SpeechBox",
 				"TopBox": true,
-				"WaitToFinish": false,
-				"WaitForNextButton": false,
+				"WaitToFinish": true,
+				"WaitForNextButton": true,
 				"Hide": false,
 				"Entries": [
 					{
@@ -2210,39 +979,11 @@
 				"Hide": false,
 				"Entries": [
 					{
-						"EntryType":"Delay",
-                        "Delay":1
-					},
-					{
-						"EntryType": "BackTrack",
-						"Text": "....."
+						"EntryType": "Clear"
 					},
 					{
 						"EntryType": "Text",
-						"Text": "and a full head of hair. ",
-						"NewLine": false,
-                        "LetterDelay": 0.015
-					},
-					{
-						"EntryType":"Delay",
-                        "Delay":1
-					}
-				]
-			},
-			{
-				"BlockType": "SpeechBox",
-				"TopBox": false,
-				"WaitToFinish": true,
-				"WaitForNextButton": false,
-				"Hide": false,
-				"Entries": [
-					{
-						"EntryType": "Clear",
-                        "ClearText": false
-					},
-					{
-						"EntryType": "Text",
-						"Text": "This stranger was clearly a Scribe",
+						"Text": "This stranger was clearly a @Color:Red@Scribe@Clear@",
 						"NewLine": false,
                         "LetterDelay": 0.03
 					},
@@ -2269,7 +1010,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "Wait, did you say Scribe?",
+						"Text": "Wait, did you say @Color:Red@Scribe@Clear@?",
 						"NewLine": true
 					},
 					{
@@ -2320,7 +1061,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": " we do need a scribe",
+						"Text": " we could really use one of those",
 						"NewLine": false
 					},
 					{
@@ -2346,7 +1087,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "Recognizing the value of such a skilled Scribe, the Hero's party happy greated them and offered to share thier food. ",
+						"Text": "Recognizing the value of such a skilled @Color:Red@Scribe@Clear@, the @Color:Red@Hero's Party@Clear@ happy greated the stranger and offered to share some food. ",
 						"NewLine": false,
                         "LetterDelay": 0.015
 					},
@@ -2355,8 +1096,8 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "The Scribe was very hungry as they had been locked in this cabin for many days hidding from the Squirrels.",
-						"NewLine": false,
+						"Text": "The @Color:Red@Scribe@Clear@ was very hungry as they had been locked in @Color:Red@The Abandoned Cabin@Clear@ for many days hidding from the @Color:Red@Squirrels@Clear@.",
+						"NewLine": true,
                         "LetterDelay": 0.015
 					},
 					{
@@ -2402,7 +1143,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "But stop writing about how attractive you think you are.",
+						"Text": "But stop writing about how attractive you think you are!",
 						"NewLine": true
 					}
 				]
@@ -2440,8 +1181,9 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "the Scribe joined the Hero's Party.",
+						"Text": "the @Color:Red@Scribe@Clear@ joined the @Color:Red@Hero's Party@Clear@.",
 						"NewLine": false,
+						"CompoundLine": true,
                         "LetterDelay": 0.015
 					},
 					{

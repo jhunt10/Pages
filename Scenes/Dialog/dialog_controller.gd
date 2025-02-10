@@ -31,7 +31,9 @@ enum BlockTypes {
 @export var input_blocker:Control
 
 
-var _condition_flags:Dictionary={}
+var _condition_flags:Dictionary:
+	get:
+		return StoryState._story_flags
 var _condition_watcher:BaseDialogConditionWatcher
 var _custom_blocks:Dictionary = {}
 var _animation_players:Dictionary = {}

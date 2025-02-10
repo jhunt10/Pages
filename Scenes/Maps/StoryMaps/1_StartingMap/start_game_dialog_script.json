@@ -15,7 +15,40 @@
 			{
 				"BlockType": "SpeechBox",
 				"WaitToFinish": true,
+				"WaitForNextButton": true,
 				"Entries": [
+					{
+						"EntryType":"Clear"
+					},
+					{
+						"EntryType":"Text",
+						"Text": "Imagine there's a really awesome cut scene here where a bunch of @Color:Red@Soldeier@Clear@ are marching to take back @Color:Red@The Fort@Clear@ from @Color:Red@Monsters@Clear@."
+					},
+					{
+						"EntryType":"WaitToRead"
+					},
+					{
+						"EntryType":"Text",
+						"Text": "But one @Color:Red@Soldeier@Clear@ gets distracted and is left behind.",
+						"NewLine": true
+					},
+					{
+						"EntryType":"WaitToRead"
+					},
+					{
+						"EntryType":"Text",
+						"Text": "*Scene Ends*",
+						"NewLine": true
+					},
+				]
+			},
+			{
+				"BlockType": "SpeechBox",
+				"WaitToFinish": false,
+				"Entries": [
+					{
+						"EntryType":"Clear"
+					},
 					{
 						"EntryType":"Text",
 						"Text": "Seperated from @Color:Red@The Military@Clear@ and in fear of being branded a deserter, "
@@ -418,7 +451,7 @@
 			{
 				"BlockType": "SpeechBox",
 				"WaitToFinish": true,
-				"WaitForNextButton": true,
+				"WaitForNextButton": false,
 				"Entries": [
 					{
 						"EntryType": "Speaker",
@@ -1616,7 +1649,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "or undead, "
+						"Text": "and undead, "
 					},
 					{
 						"EntryType": "WaitToRead"
@@ -1628,14 +1661,14 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "or construct, "
+						"Text": "and constructs, "
 					},
 					{
 						"EntryType": "WaitToRead"
 					},
 					{
 						"EntryType": "Text",
-						"Text": "or"
+						"Text": "and"
 					},
 					{
 						"EntryType":"Text",
@@ -1652,7 +1685,7 @@
 					},
 					{
 						"EntryType":"BackTrack",
-						"Text": " living creature, or undead, or construct, or... ",
+						"Text": " living creature, and undead, and constructs, and... ",
 						"LetterDelay": 0.001
 					},
 					{
@@ -4109,6 +4142,26 @@
 						"EntryType":"WaitToRead"
 					}
 				]
+			},
+			{
+				"BlockType": "SpeechBox",
+				"TopBox": false,
+				"WaitToFinish": true,
+				"WaitForNextButton": false,
+				"Hide": true,
+				"Entries": [
+					{
+						"EntryType": "Clear"
+					}
+				]
+			},
+			{
+				"BlockType": "PopUp",
+				"WaitToFinish": true,
+				"Create": "TutorialCards_1",
+				"PopUpType":"TutorialCard",
+				"Cards": ["Page Que", "Movement", "Targeting Actors", "Items", "Items 2"],
+				"Index": 3
 			}
 		]
 	},
@@ -4238,7 +4291,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "I'm replacing your @Color:Red@Basic Weapon Attack@Clear@  with a @Color:Red@Chuck-A-Rock@Clear@ Page, but I'm just letting you borrow it! ",
+						"Text": "I'm replacing your @Color:Red@Basic Weapon Attack@Clear@ with my @Color:Red@Chuck-A-Rock@Clear@, but I'm just letting you borrow it! ",
 						"NewLine": true
 					},
 					{
@@ -4287,7 +4340,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "FLASH CARD!",
+						"Text": "@Color:Red@Flash Card@Clear@!",
 						"LetterDelay": -1
 					},
 					{
@@ -4313,8 +4366,8 @@
 				"WaitToFinish": true,
 				"Create": "TutorialCards_1",
 				"PopUpType":"TutorialCard",
-				"Cards": ["Page Que", "Movement", "Targeting Actors", "Targeting Spots"],
-				"Index": 3
+				"Cards": ["Page Que", "Movement", "Targeting Actors",  "Items", "Items 2", "Targeting Spots"],
+				"Index": 5
 			}
 		]
 	},
@@ -4449,7 +4502,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "Great! Now we'll start the turn and when the Targeting UI comes up, just select the spot with the mushroom in it.",
+						"Text": "Great! Now we'll start the @Color:Red@Round@Clear@ and when the @Color:Blue@Targeting I@Clear@ comes up, just select the @Color:Red@Spot@Clear@ with the @Color:Red@Mushroom@Clear@ in it.",
 						"NewLine": false
 					}
 				]
@@ -4521,7 +4574,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "You just had to click on the mushroom! ",
+						"Text": "You just had to click on the @Color:Red@Mushroom@Clear@! ",
 						"NewLine": false
 					},
 					{
@@ -4568,7 +4621,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "At least you got the basics of how Missiles work. I'm giving you back your Basic Weapon Attack, but you still owe me a rock.",
+						"Text": "At least you got the basics of how @Color:Red@Missiles@Clear@ work. I'm giving you back your @Color:Red@Basic Weapon Attack@Clear@, but you still owe me a rock.",
 						"NewLine": false
 					},
 					{
@@ -4606,7 +4659,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "Now no mushroom can escape your wrath!",
+						"Text": "Now no @Color:Red@Mushroom@Clear@ can escape your wrath!",
 						"NewLine": false
 					},
 					{
@@ -4639,7 +4692,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "You can have your Basic Weapon Attack back, and thank you for keeping good care of my rock.",
+						"Text": "You can have your @Color:Red@Basic Weapon Attack@Clear@ back, and thank you for keeping good care of my rock.",
 						"NewLine": false
 					},
 					{
@@ -4692,7 +4745,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "Something that you MUST know before going into combat",
+						"Text": "Something that you MUST know before going into @Color:Red@Combat@Clear@",
 						"NewLine": true
 					},
 					{
@@ -4827,7 +4880,7 @@
 				"Entries": [
 					{
 						"EntryType": "Text",
-						"Text": "We've got Squirrels, and they're ready to fight.",
+						"Text": "We've got @Color:Red@Squirrels@Clear@, and they're ready to fight.",
 						"NewLine": true
 					},
 					{
@@ -4853,7 +4906,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "I guess it's time for your first live combat exercise.",
+						"Text": "I guess it's time for your first live @Color:Red@Combat@Clear@ exercise.",
 						"NewLine": false
 					},
 					{
@@ -4887,7 +4940,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "These squirrels are radical political extremists whos views are the exact opposite of whatever you belive in.",
+						"Text": "These @Color:Red@Squirrels@Clear@ are @Color:Red@Radical Political Extremists@Clear@ whos views are the exact opposite of whatever you belive in.",
 						"NewLine": false
 					},
 					{
@@ -5008,7 +5061,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "how the Round works when multiple Actors are on the field.",
+						"Text": "how the @Color:Red@Round@Clear@ works when multiple @Color:Red@Actors@Clear@ are on the @Color:Red@Map@Clear@.",
 						"NewLine": false
 					},
 					{
@@ -5039,7 +5092,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "Actors can have a different number of actions per turn. I think I've got a flash- ",
+						"Text": "@Color:Red@Actors@Clear@ can have a different number of @Color:Red@Actions@Clear@ per @Color:Red@Turn@Clear@. I think I've got a @Color:Red@Flash@Clear@- ",
 						"NewLine": false
 					},
 					{
@@ -5206,7 +5259,7 @@
 				"Entries": [
 					{
 						"EntryType": "Text",
-						"Text": "See theses Squirriors?.",
+						"Text": "See theses @Color:Red@Squirriors@Clear@?.",
 						"NewLine": true
 					}
 				]
@@ -5249,7 +5302,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "Looks like they are wearing heavy Armor, so you'll want to-",
+						"Text": "Looks like they are wearing heavy @Color:Red@Armor@Clear@, so you'll want to-",
 						"NewLine": false
 					}
 				]
@@ -5288,19 +5341,17 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "a",
-						"NewLine": false
-					},
-					{
-						"EntryType": "Text",
 						"Text": "aaaa",
 						"LetterDelay":0.3,
-						"NewLine": false
+						"NewLine": true
 					},
 					{
 						"EntryType": "Text",
-						"Text": "nd they've got some Squirrcerer",
+						"Text": "nd they've got @Color:Red@Squirrcerers@Clear@",
 						"NewLine": false
+					},
+					{
+						"EntryType":"WaitToRead"
 					},
 					{
 						"EntryType": "Text",
@@ -5369,7 +5420,7 @@
 				"Entries": [
 					{
 						"EntryType": "Text",
-						"Text": "you take the rest of the Flash Cards,",
+						"Text": "you take the rest of the @Color:Red@Flash Cards@Clear@,",
 						"NewLine": false
 					},
 					{
@@ -5378,7 +5429,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": " and I'll wait in the safty of this cabin.",
+						"Text": " and I'll wait in the safty of this @Color:Red@Cabin@Clear@.",
 						"NewLine": true
 					}
 
@@ -5402,7 +5453,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "You've got this, Hero.",
+						"Text": "You've got this, @Color:Red@Hero@Clear@.",
 						"NewLine": false
 					},
 					{
@@ -5451,8 +5502,8 @@
 				"WaitToFinish": true,
 				"Create": "TutorialCards_1",
 				"PopUpType":"TutorialCard",
-				"Cards": ["Page Que","Movement","Targeting Actors","Targeting Spots","Turns and Gaps","Turn Order","Crashing","Armor and Damage"],
-				"Index": 4
+				"Cards": ["Page Que","Movement","Targeting Actors","Targeting Spots", "Items", "Items 2", "Turns and Gaps","Turn Order","Crashing","Armor and Damage"],
+				"Index": 6
 			}
 		]
 	},
@@ -5523,7 +5574,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "That's our Hero for you.",
+						"Text": "That's our @Color:Red@Hero@Clear@ for you.",
 						"NewLine": true
 					},
 					{
@@ -5549,15 +5600,15 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "But, don't think the tutorial is over yet!",
-						"NewLine": false
+						"Text": "Since the @Color:Red@Squirrels@Clear@ seem to be dealt with, ",
+						"NewLine": true
 					},
 					{
 						"EntryType":"WaitToRead"
 					},
 					{
 						"EntryType": "Text",
-						"Text": "Since the squirrels seem to be dealt with, let's set up camp here and take a look at your PageBook.",
+						"Text": "let's set up @Color:Red@Camp@Clear@ here and plan our next move.",
 						"NewLine": true
 					},
 					{
