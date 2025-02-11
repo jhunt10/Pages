@@ -194,6 +194,8 @@ func _get_next_part_key():
 		var cases  = next_part_logic.get("Cases", {})
 		if cases.has(flag_val):
 			return cases[flag_val]
+		elif cases.has('@DEFAULT@'):
+			return cases['@DEFAULT@']
 	return _current_part_data.get("_NextPartKey", null)
 
 func _start_part(part_key:String):
@@ -296,10 +298,7 @@ func _handle_block(block_data:Dictionary)->bool:
 		if !flag_name:
 			return false
 		var val = block_data.get("Value", null)
-		if block_data.get("IsStoryFlag", false):
-			StoryState.set_story_flag(flag_name, val)
-		else:
-			_condition_flags[flag_name] =  val
+		StoryState.set_story_flag(flag_name, val)
 		return false
 	
 	#----------------------------------

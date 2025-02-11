@@ -1,20 +1,27 @@
 {
 	"_MetaData_": {
-		"StartPartKey": "ScribeIntro"
+		"StartPartKey": "IntroWelcome"
 	},
 	"IntroWelcome":{
 		"_NextPartLogic": 
 		{
 			"FlagName": "Tutorial",
 			"Cases": {
-				"false": "StartTutorial",
-				"true": "NoTutorial"
+				"@DEFAULT@": "StartTutorial",
+				"true": "StartTutorial",
+				"false": "NoTutorial"
 			}
 		},
 		"WaitForNextButton": false,
 		"Inital_BlackOutState": "Clear",
 		"EnsurePoses": {},
 		"Blocks":[
+			{
+				"BlockType": "SetFlag",
+				"IsStoryFlag": true,
+				"FlagName": "Tutorial",
+				"Value": false
+			},
 			{
 				"BlockType": "SpeechBox",
 				"TopBox": false,
@@ -116,7 +123,15 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "We'll be setting up @Color:Red@Camp@Clear@ in a lot of differenct places as we travel to save @Color:Red@The World@Clear@, so don't get too attached to this @Color:Red@Abandoned Cabin@Clear@.",
+						"Text": "We'll be setting up @Color:Red@Camp@Clear@ in a lot of differenct places as we travel to save @Color:Red@The World@Clear@, ",
+						"NewLine": false
+					},
+					{
+						"EntryType":"WaitToRead"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "so don't get too attached to \n@Color:Red@The Abandoned Cabin@Clear@.",
 						"NewLine": false
 					},
 					{
@@ -358,7 +373,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "but they're greyed out.",
+						"Text": "but they're greyed out. ",
 						"NewLine": false
 					},
 					{
@@ -372,7 +387,7 @@
 					{
 						"EntryType": "Text",
 						"Text": "Oh well, ",
-						"NewLine": true
+						"NewLine": false
 					},
 					{
 						"EntryType":"WaitToRead"
@@ -418,7 +433,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "And when you're ready to continue our @Color:Red@Quest@Clear@, ",
+						"Text": "When you're ready to continue our @Color:Red@Quest@Clear@, ",
 						"NewLine": false
 					},
 					{
@@ -452,7 +467,7 @@
 
     
 	"ScribeIntro":{
-		"_NextPartKey": "ScribeTutorial",
+		"_NextPartKey": "ScribeDescription",
 		"WaitForNextButton": false,
 		"Inital_BlackOutState": "Clear",
 		"EnsurePoses": {},
@@ -461,61 +476,60 @@
 				"BlockType": "SpeechBox",
 				"TopBox": false,
 				"WaitToFinish": true,
-				"WaitForNextButton": false,
+				"WaitForNextButton": true,
 				"Hide": false,
 				"Entries": [
-				{
-					"BlockType": "SpeechBox",
-					"TopBox": false,
-					"WaitToFinish": true,
-					"WaitForNextButton": true,
-					"Hide": false,
-					"Entries": [
-						{
-							"EntryType":"Clear",
-							"ClearSpeaker": false
-						},
-						{
-							"EntryType": "Speaker",
-							"SpeakerName": "MtFr",
-							"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Neutral.png"
-						},
-						{
-							"EntryType": "Text",
-							"Text": "But there's one last thing I want to say:",
-							"NewLine": true
-						},
-						{
-							"EntryType":"WaitToRead"
-						},
-						{
-							"EntryType": "Speaker",
-							"SpeakerName": "MtFr",
-							"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Happy.png"
-						},
-						{
-							"EntryType": "Text",
-							"Text": "Thanks for teaming up with me, @Color:Red@Hero@Clear@.",
-							"NewLine": true
-						},
-						{
-							"EntryType":"WaitToRead"
-						},
-						{
-							"EntryType": "Speaker",
-							"SpeakerName": "MtFr",
-							"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Smile.png"
-						},
-						{
-							"EntryType": "Text",
-							"Text": "I know we are going to do some great things together.",
-							"NewLine": true
-						},
-						{
-							"EntryType":"WaitToRead"
-						}
-					]
-				}
+					{
+						"EntryType":"Clear",
+						"ClearSpeaker": false
+					},
+					{
+						"EntryType": "Speaker",
+						"SpeakerName": "MtFr",
+						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Neutral.png"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "I'll head over to the @Color:Red@Quest@Clear@ option now, ",
+						"NewLine": true
+					},
+					{
+						"EntryType":"WaitToRead"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "but I want to say:",
+						"NewLine": false
+					},
+					{
+						"EntryType":"WaitToRead"
+					},
+					{
+						"EntryType": "Speaker",
+						"SpeakerName": "MtFr",
+						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Happy.png"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "Thanks for teaming up with me, @Color:Red@Hero@Clear@.",
+						"NewLine": true
+					},
+					{
+						"EntryType":"WaitToRead"
+					},
+					{
+						"EntryType": "Speaker",
+						"SpeakerName": "MtFr",
+						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Smile.png"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "I know we are going to do some great things together.",
+						"NewLine": true
+					},
+					{
+						"EntryType":"WaitToRead"
+					}
                 ]
             },
 			{
@@ -586,7 +600,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "From the huble begins of @Color:Red@The Abandoned Cabin@Clear@, a new @Color:Blue@Story@Clear@ began.",
+						"Text": "From the huble begins of @Color:Red@The Abandoned Cabin@Clear@, a new @Color:Blue@Story@Clear@ began. ",
 						"NewLine": false,
                         "LetterDelay": 0.015
 					},
@@ -595,7 +609,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "One that would stur the long dormant tides of fate, ",
+						"Text": "One that would stur the long dormant tides of @Color:Red@Fate@Clear@, ",
 						"NewLine": false,
                         "LetterDelay": 0.015
 					},
@@ -729,7 +743,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "Instead, they simply continued to write in @Color:Blue@The Story Book@Clear@ that sat upon thier lap.",
+						"Text": "They simply continued writing in @Color:Blue@The Story Book@Clear@ that sat upon thier lap.",
 						"NewLine": false,
                         "LetterDelay": 0.015
 					},
@@ -763,7 +777,23 @@
 						"EntryType":"WaitToRead"
 					}
 				]
-			},
+			}
+		]
+	},
+	"ScribeDescription":{
+		"_NextPartLogic": 
+		{
+			"FlagName": "Tutorial",
+			"Cases": {
+				"@DEFAULT@": "ScribeTutorial",
+				"true": "ScribeTutorial",
+				"false": "PostScribeNoTutorial"
+			}
+		},
+		"WaitForNextButton": false,
+		"Inital_BlackOutState": "Clear",
+		"EnsurePoses": {},
+		"Blocks":[
 			{
 				"BlockType": "SpeechBox",
 				"TopBox": false,
@@ -953,7 +983,7 @@
 				"BlockType": "SpeechBox",
 				"TopBox": true,
 				"WaitToFinish": true,
-				"WaitForNextButton": true,
+				"WaitForNextButton": false,
 				"Hide": false,
 				"Entries": [
 					{
@@ -979,13 +1009,10 @@
 				"Hide": false,
 				"Entries": [
 					{
-						"EntryType": "Clear"
-					},
-					{
 						"EntryType": "Text",
 						"Text": "This stranger was clearly a @Color:Red@Scribe@Clear@",
-						"NewLine": false,
-                        "LetterDelay": 0.03
+						"NewLine": true,
+                        "LetterDelay": 0.015
 					},
 					{
 						"EntryType":"WaitToRead"
@@ -1033,7 +1060,7 @@
 						"EntryType": "Text",
 						"Text": ", and a magnificent one at that!",
 						"NewLine": false,
-                        "LetterDelay": 0.03
+                        "LetterDelay": 0.015
 					},
 					{
 						"EntryType": "Delay",
@@ -1055,14 +1082,8 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "...",
-						"NewLine": true,
-                        "LetterDelay": 0.03
-					},
-					{
-						"EntryType": "Text",
-						"Text": " we could really use one of those",
-						"NewLine": false
+						"Text": "We do kind of need a @Color:Red@Scribe@Clear@.",
+						"NewLine": true
 					},
 					{
 						"EntryType": "Text",
@@ -1087,7 +1108,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "Recognizing the value of such a skilled @Color:Red@Scribe@Clear@, the @Color:Red@Hero's Party@Clear@ happy greated the stranger and offered to share some food. ",
+						"Text": "Recognizing the value of such a skilled @Color:Red@Scribe@Clear@, the @Color:Red@Hero's Party@Clear@ happy greeted the stranger and offered to share some food. ",
 						"NewLine": false,
                         "LetterDelay": 0.015
 					},
@@ -1096,7 +1117,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "The @Color:Red@Scribe@Clear@ was very hungry as they had been locked in @Color:Red@The Abandoned Cabin@Clear@ for many days hidding from the @Color:Red@Squirrels@Clear@.",
+						"Text": "The @Color:Red@Scribe@Clear@ was very hungry as they had been locked in @Color:Red@The Abandoned Cabin@Clear@ for many weeks hidding from the @Color:Red@Squirrels@Clear@.",
 						"NewLine": true,
                         "LetterDelay": 0.015
 					},
@@ -1130,7 +1151,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "you can have some food.",
+						"Text": "we'll give you some food if you agree to work for us.",
 						"NewLine": false
 					},
 					{
@@ -1183,15 +1204,24 @@
 						"EntryType": "Text",
 						"Text": "the @Color:Red@Scribe@Clear@ joined the @Color:Red@Hero's Party@Clear@.",
 						"NewLine": false,
-						"CompoundLine": true,
                         "LetterDelay": 0.015
 					},
 					{
 						"EntryType":"WaitToRead"
-					},
+					}
+				]
+			},
+            {
+				"BlockType": "SpeechBox",
+				"TopBox": false,
+				"WaitToFinish": true,
+				"WaitForNextButton": false,
+				"Hide": false,
+				"Entries": [
 					{
 						"EntryType": "BackTrack",
 						"Text": " joined the Hero's Party.",
+						"BaseText": "And so, the [color=red]Scribe[/color]",
 						"NewLine": false,
                         "LetterDelay": 0.01
 					},
@@ -1239,12 +1269,13 @@
 					{
 						"EntryType": "BackTrack",
 						"Text": ", who was clever and funny and really popular, and who had a really b-",
+						"BaseText": "And so, the [color=red]Scribe[/color]",
 						"NewLine": false,
                         "LetterDelay": 0.01
 					},
 					{
 						"EntryType": "Text",
-						"Text": " joined the Hero's Party.",
+						"Text": " joined the @Color:Red@Hero's Party@Clear@.",
 						"NewLine": false,
                         "LetterDelay": 0.015
 					},
@@ -1253,18 +1284,6 @@
 					}
 				]
 			},
-			{
-				"BlockType": "SpeechBox",
-				"TopBox": false,
-				"WaitToFinish": false,
-				"WaitForNextButton": false,
-				"Hide": true,
-				"Entries": [
-                    {
-                        "EntryType":"Clear"
-                    }
-                ]
-            },
 			{
 				"BlockType": "SpeechBox",
 				"TopBox": true,
@@ -1285,11 +1304,6 @@
 		"Inital_BlackOutState": "Clear",
 		"EnsurePoses": {},
 		"Blocks":[
-            {
-				"BlockType":"CustomBlock",
-				"ScriptPath": "res://Scenes/Dialog/CustomDialogBlocks/CampTutorialBlocks.gd",
-				"EnableMenu": "Scribe"
-            },
 			{
 				"BlockType": "SpeechBox",
 				"TopBox": false,
@@ -1308,15 +1322,29 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "Now that we've got one, I might as well explain what a Scribe can do.",
+						"Text": "Now that we've them, I should explain what a @Color:Red@Scribe@Clear@ can do.",
 						"NewLine": false
 					},
 					{
 						"EntryType":"WaitToRead"
-					},
+					}
+				]
+			},
+            {
+				"BlockType":"CustomBlock",
+				"ScriptPath": "res://Scenes/Dialog/CustomDialogBlocks/CampTutorialBlocks.gd",
+				"EnableMenu": "Scribe"
+            },
+			{
+				"BlockType": "SpeechBox",
+				"TopBox": false,
+				"WaitToFinish": true,
+				"WaitForNextButton": false,
+				"Hide": false,
+				"Entries": [
 					{
 						"EntryType": "Text",
-						"Text": "I'm tired of talking so I'll make this quick.",
+						"Text": "The option for them should be unlocked now.",
 						"NewLine": true
 					},
 					{
@@ -1396,7 +1424,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "Scribes can \"Save\" and \"Load\" the state of the world.",
+						"Text": "Scribes can @Color:Blue@Save@Clear@ and @Color:Blue@Load@Clear@ the state of @Color:Red@The World@Clear@.",
 						"NewLine": false
 					},
 					{
@@ -1404,7 +1432,15 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "I'm not going to pretend to know how it works, but it's basically time travel.",
+						"Text": "I won't pretend to understand how it works, ",
+						"NewLine": true
+					},
+					{
+						"EntryType":"WaitToRead"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "but it's basically time travel.",
 						"NewLine": true
 					},
 					{
@@ -1442,7 +1478,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "If every member of the Party dies inside the Page System, ",
+						"Text": "If every member of @Color:Blue@The Party@Clear@ dies during @Color:Red@Combat@Clear@, ",
 						"NewLine": false
 					},
 					{
@@ -1450,7 +1486,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "everything reverts back to your last Save.",
+						"Text": "everything reverts back to the last @Color:Blue@Save@Clear@.",
 						"NewLine": true
 					},
 					{
@@ -1497,8 +1533,11 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "They can also \"Quit\" the world, ",
+						"Text": "They can also @Color:Blue@Quit@Clear@ @Color:Red@The World@Clear@, ",
 						"NewLine": true
+					},
+					{
+						"EntryType":"WaitToRead"
 					},
 					{
 						"EntryType":"WaitToRead"
@@ -1536,7 +1575,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "Somehow our Hero could sense that the Scribe would unlock greater potential as thier journey continued.",
+						"Text": "Somehow our @Color:Red@Hero@Clear@ could sense that the @Color:Red@Scribe@Clear@ would unlock greater potential as thier @Color:Red@Quest@Clear@ continued.",
 						"NewLine": false,
                         "LetterDelay":0.015
 					},
@@ -1563,7 +1602,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "I guess they're done eating.",
+						"Text": "I guess they're done eating. ",
 						"NewLine": false
 					},
 					{
@@ -1576,15 +1615,15 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "Then let's have them make a new Save.",
-						"NewLine": true
+						"Text": "Then let's make a new @Color:Blue@Save@Clear@.",
+						"NewLine": false
 					},
 					{
 						"EntryType":"WaitToRead"
 					},
 					{
 						"EntryType": "Text",
-						"Text": "Just in case you run into something tougher than squirrels.",
+						"Text": "Just in case you run into something tougher than @Color:Red@Squirrels@Clear@.",
 						"NewLine": true
 					}
 				]
@@ -1662,7 +1701,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "Not saving?",
+						"Text": "No @Color:Blue@Save@Clear@?",
 						"NewLine": false
 					},
 					{
@@ -1714,7 +1753,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "Well, we're finally done with the Tutorial.",
+						"Text": "Well, that's all for the Tutorial. ",
 						"NewLine": false
 					},
 					{
@@ -1722,8 +1761,97 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "When you're ready, hit \"Quest\" and meet  me to talk about our mission.",
+						"Text": "When you're ready, ",
 						"NewLine": true
+					},
+					{
+						"EntryType":"WaitToRead"
+					},
+					{
+						"EntryType": "Text",
+						"Text": " hit @Color:Red@Quest@Clear@ to talk about our mission. ",
+						"NewLine": false
+					},
+					{
+						"EntryType":"WaitToRead"
+					},
+					{
+						"EntryType": "Speaker",
+						"SpeakerName": "MtFr",
+						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Neutral.png"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "But give me a minute first. ",
+						"NewLine": true
+					},
+					{
+						"EntryType":"WaitToRead"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "I'm not use to talking this much, ",
+						"NewLine": false
+					},
+					{
+						"EntryType":"WaitToRead"
+					},
+					{
+						"EntryType": "Speaker",
+						"SpeakerName": "MtFr",
+						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Sad.png"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "and I need to rest my voice...",
+						"NewLine": false
+					},
+					{
+						"EntryType":"WaitToRead"
+					}
+				]
+			},
+            {
+				"BlockType":"CustomBlock",
+				"ScriptPath": "res://Scenes/Dialog/CustomDialogBlocks/CampTutorialBlocks.gd",
+				"EnableMenu": "Quest"
+            }
+        ]
+    },
+    "PostScribeNoTutorial":{
+		"_NextPartKey": null,
+		"WaitForNextButton": true,
+		"Inital_BlackOutState": "Clear",
+		"EnsurePoses": {},
+		"Blocks":[
+			{
+				"BlockType": "SpeechBox",
+				"TopBox": false,
+				"WaitToFinish": true,
+				"WaitForNextButton": false,
+				"Hide": false,
+				"Entries": [
+					{
+						"EntryType":"Clear",
+                        "ClearSpeaker": false
+					},
+					{
+						"EntryType": "Speaker",
+						"SpeakerName": "MtFr",
+						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Neutral.png"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "Ok, ",
+						"NewLine": false
+					},
+					{
+						"EntryType":"WaitToRead"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "I assume you'll want to , hit \"Quest\" and meet  me to talk about our mission.",
+						"NewLine": false
 					},
 					{
 						"EntryType":"WaitToRead"
@@ -1763,4 +1891,5 @@
             }
         ]
     }
+	
 }

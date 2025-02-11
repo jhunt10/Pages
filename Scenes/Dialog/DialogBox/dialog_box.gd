@@ -102,18 +102,18 @@ func _handle_entry(entry_data:Dictionary, raw_delta, remaining_delta)->bool:
 			_clear_speaker()
 		_reader_timer = 0.0
 		if entry_data.get("ClearText", true):
+			hidden_text_edit.clear()
+			_word_is_broken = true
+			_current_text_entry = null
 			for child in entry_contaier.get_children():
 				if child == premade_text_label: continue
 				if child == premade_question_option: continue
 				if child == hidden_text_edit: continue
 				if child == premade_compound_label: continue
 				child.queue_free()
-		hidden_text_edit.clear()
-		_word_is_broken = true
 		scroll_bar.calc_bar_size()
 		scroll_bar.hide()
 		_delay_timer = -1
-		_current_text_entry = null
 		return true
 		
 	#----------------------------------
@@ -198,7 +198,7 @@ func _handle_entry(entry_data:Dictionary, raw_delta, remaining_delta)->bool:
 		if not text: return true
 		if not entry_data.has("RemainingText"):
 			entry_data['RemainingText'] = text
-			_word_is_broken = true
+			#_word_is_broken = entry_data.get("")
 		
 		# Create new entry if none exist or requested
 		if not _current_text_entry or entry_data.get("NewLine", false) or entry_data.get("CompoundLine", false):
@@ -284,8 +284,15 @@ func _handle_entry(entry_data:Dictionary, raw_delta, remaining_delta)->bool:
 		var remove_char = remaining_text.substr(remaining_text.length()-1,1)
 		remaining_text = remaining_text.trim_suffix(remove_char)
 		entry_data['RemainingText'] = remaining_text
-		var cur_text = _current_text_entry.get_parsed_text()
-		cur_text = cur_text.trim_suffix(remove_char)
+		var cur_text = ''
+		print("BackTrack Current TExt:" + _current_text_entry.text)
+		if entry_data.has("BaseText"):
+			cur_text = entry_data['BaseText'] + remaining_text
+		else:
+			cur_text = _current_text_entry.get_parsed_text()
+			cur_text = cur_text.trim_suffix(remove_char)
+		if cur_text.ends_with('\n'):
+			cur_text = cur_text.trim_suffix('\n')
 		_current_text_entry.text = ''
 		_current_text_entry.append_text(cur_text)
 		_update_scrolling()

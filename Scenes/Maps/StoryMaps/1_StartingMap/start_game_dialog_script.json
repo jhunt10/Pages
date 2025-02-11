@@ -5647,6 +5647,18 @@
 				"Value": "AbandonedCabin"
 			},
 			{
+				"BlockType":"SetFlag",
+				"FlagName":"CampShopDisabled",
+				"Value": true
+
+			},
+			{
+				"BlockType":"SetFlag",
+				"FlagName":"CampScribeDisabled",
+				"Value": true
+
+			},
+			{
 				"BlockType": "ToCamp",
 				"WithDialogScript": "res://Scenes/Maps/StoryMaps/1_StartingMap/camp_tutotial_dialog_script.json"
 			}

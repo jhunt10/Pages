@@ -34,6 +34,11 @@ func _ready() -> void:
 	sys_debug_button.button.pressed.connect(_on_debug_button)
 	sys_quit_button.button.pressed.connect(_on_quit)
 	
+	if StoryState.get_story_flag("CampShopDisabled"):
+		shop_button.disabled = true
+	if StoryState.get_story_flag("CampScribeDisabled"):
+		system_button.disabled = true
+	
 	var location = StoryState.get_location()
 	if location != "":
 		var image_path = "res://Scenes/Menus/CampMenu/PrettyPictures/" + location.replace(' ', '') + ".png"
@@ -41,7 +46,6 @@ func _ready() -> void:
 		if pretty_picture:
 			pretty_picture_texure_rect.texture = pretty_picture
 			
-	shop_button.disabled = false
 	_sub_menu_open("Main")
 	pass # Replace with function body.
 

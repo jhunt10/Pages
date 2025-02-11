@@ -15,11 +15,6 @@ func _ready() -> void:
 		
 	pass # Replace with function body.
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-
 func set_option_text(text):
 	option_label.text = text
 	option_icon.texture = option_icon_texture_empty
