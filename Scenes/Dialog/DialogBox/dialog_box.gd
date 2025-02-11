@@ -6,7 +6,7 @@ const DEFAULT_QUESTION_OPTION_DELAY:float = 0.3
 const LINE_WRAP_PADDING:int = 0
 
 enum EntryTypes {Clear, Delay, Speaker, Text, Flag, Question, WaitToRead, BackTrack, IconImage, Hide, TextColor}
-enum STATES {Ready, Printing, Done, Question}
+enum STATES {Ready, Printing, Done, Question, ConfirmingQuestion}
 
 signal finished_printing
 signal question_answered(choice:String)
@@ -25,6 +25,7 @@ signal question_answered(choice:String)
 @export var premade_compound_label:RichTextLabel
 @export var premade_question_option:DialogQuestionOption
 @export var unknown_speaker_port:Texture2D
+@export var next_button:DialogControlButton
 
 var _entry_que:Array = []
 var _current_text_entry:RichTextLabel
@@ -43,6 +44,8 @@ func _ready() -> void:
 	premade_text_label.hide()
 	premade_compound_label.hide()
 	premade_question_option.hide()
+	next_button.hide()
+	next_button.button.pressed.connect(on_question_confirmed)
 	_clear_speaker()
 
 var _starting_read:bool = false
@@ -280,6 +283,10 @@ func _handle_entry(entry_data:Dictionary, raw_delta, remaining_delta)->bool:
 			
 		var remaining_text:String = entry_data['RemainingText']
 		if remaining_text.length() == 0:
+			# Dunb hack
+			if entry_data.has("LineSpacingText"):
+				hidden_text_edit.text = entry_data['LineSpacingText']
+			
 			return true
 		var remove_char = remaining_text.substr(remaining_text.length()-1,1)
 		remaining_text = remaining_text.trim_suffix(remove_char)
@@ -318,7 +325,7 @@ func _handle_entry(entry_data:Dictionary, raw_delta, remaining_delta)->bool:
 			entry_contaier.add_child(new_button)
 			new_button.show()
 			_question_options[choice_key] = new_button
-			new_button.button.pressed.connect(_on_question_optioon_pressed.bind(choice_key))
+			new_button.button.pressed.connect(_on_question_option_first_pressed.bind(choice_key))
 			_delay_timer = DEFAULT_QUESTION_OPTION_DELAY
 			return false
 		state = STATES.Question
@@ -411,16 +418,31 @@ func _update_scrolling():
 		scroll_bar.hide()
 		scroll_contaier.scroll_vertical = 0
 
-func _on_question_optioon_pressed(choice_key):
+var _selected_question_key
+func _on_question_option_first_pressed(choice_key):
 	print("Selected Choice: " + choice_key)
+	_selected_question_key = choice_key
 	for option_key in _question_options.keys():
 		var option:DialogQuestionOption = _question_options[option_key]
 		if option_key == choice_key:
-			question_answered.emit(choice_key)
+			option.set_selected(true)
+		else:
+			option.set_selected(false)
+	#
+	next_button.show()
+	state = STATES.ConfirmingQuestion
+
+func on_question_confirmed():
+	question_answered.emit(_selected_question_key)
+	_question_options.clear()
+	for option_key in _question_options.keys():
+		var option:DialogQuestionOption = _question_options[option_key]
+		if option_key == _selected_question_key:
 			option.set_selected(true)
 		else:
 			option.queue_free()
-	_question_options.clear()
+	question_answered.emit(_selected_question_key)
+	next_button.hide()
 	state = STATES.Printing
 
 func _build_test():

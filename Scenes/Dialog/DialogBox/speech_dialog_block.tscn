@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cyi7xhb25f7cs"]
+[gd_scene load_steps=13 format=3 uid="uid://cyi7xhb25f7cs"]
 
 [ext_resource type="Script" path="res://Scenes/Dialog/DialogBox/dialog_box.gd" id="1_s306v"]
 [ext_resource type="Texture2D" uid="uid://cgrlfobidw8xl" path="res://assets/Sprites/UI/BackPatches/PaperPatch_Bigger_276x192_48.png" id="1_x1pkb"]
@@ -9,8 +9,11 @@
 [ext_resource type="Texture2D" uid="uid://6slo2uod40i3" path="res://Scenes/Dialog/Icons/OptionIcon_Empty.png" id="7_2u1ax"]
 [ext_resource type="PackedScene" uid="uid://bpvy87uagttpr" path="res://Scenes/UiNodes/ScollBar/scroll_bar.tscn" id="7_h5ro5"]
 [ext_resource type="Texture2D" uid="uid://bg2pfkcrb1fj1" path="res://Scenes/Dialog/Icons/OptionIcon_Filled.png" id="8_3a0dq"]
+[ext_resource type="Script" path="res://Scenes/Dialog/dialog_control_button.gd" id="10_upa5r"]
+[ext_resource type="Texture2D" uid="uid://ccwj8ucsjhl6w" path="res://assets/Sprites/UI/BackPatches/Patch_64_12_Dark.png" id="11_m1jy4"]
+[ext_resource type="FontFile" uid="uid://0kbg00s43xf0" path="res://assets/Fonts/8bit.ttf" id="12_ad3dp"]
 
-[node name="DialogBox" type="Control" node_paths=PackedStringArray("speaker_container", "speaker_portrait", "speaker_label", "scroll_bar", "entry_contaier", "scroll_contaier", "read_timer_label", "hidden_text_edit", "premade_text_label", "premade_compound_label", "premade_question_option")]
+[node name="DialogBox" type="Control" node_paths=PackedStringArray("speaker_container", "speaker_portrait", "speaker_label", "scroll_bar", "entry_contaier", "scroll_contaier", "read_timer_label", "hidden_text_edit", "premade_text_label", "premade_compound_label", "premade_question_option", "next_button")]
 custom_minimum_size = Vector2(640, 180)
 layout_mode = 3
 anchors_preset = 0
@@ -29,6 +32,7 @@ premade_text_label = NodePath("SpeechDialogBlock/ScrollContainer/EntriyContainer
 premade_compound_label = NodePath("SpeechDialogBlock/ScrollContainer/EntriyContainer/PreMade_CompoundTextLabel")
 premade_question_option = NodePath("SpeechDialogBlock/ScrollContainer/EntriyContainer/PreMade_QuestionOption")
 unknown_speaker_port = ExtResource("2_vdnsa")
+next_button = NodePath("NextButton")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="."]
 layout_mode = 1
@@ -186,3 +190,54 @@ visible = false
 layout_mode = 2
 offset_bottom = 159.0
 scroll_container = NodePath("../../ScrollContainer")
+
+[node name="NextButton" type="Control" parent="." node_paths=PackedStringArray("button")]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -136.0
+offset_top = -69.0
+offset_right = -20.0
+offset_bottom = -21.0
+grow_horizontal = 0
+grow_vertical = 0
+script = ExtResource("10_upa5r")
+button = NodePath("Button")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="NextButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("11_m1jy4")
+patch_margin_left = 12
+patch_margin_top = 12
+patch_margin_right = 12
+patch_margin_bottom = 12
+
+[node name="Label" type="Label" parent="NextButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("12_ad3dp")
+theme_override_font_sizes/font_size = 32
+text = "Next"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="NextButton"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

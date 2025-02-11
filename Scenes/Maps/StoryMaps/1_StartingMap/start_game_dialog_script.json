@@ -1,6 +1,6 @@
 {
 	"_MetaData_": {
-		"StartPartKey": "OfferTutorial",
+		"StartPartKey": "Prolog_Soldier",
 		"Inital_BlackOutState":"Black"
 	},
 	"Prolog_Soldier":{
@@ -39,22 +39,6 @@
 						"EntryType":"Text",
 						"Text": "*Scene Ends*",
 						"NewLine": true
-					},
-				]
-			},
-			{
-				"BlockType": "SpeechBox",
-				"WaitToFinish": false,
-				"Entries": [
-					{
-						"EntryType":"Clear"
-					},
-					{
-						"EntryType":"Text",
-						"Text": "Seperated from @Color:Red@The Military@Clear@ and in fear of being branded a deserter, "
-					},
-					{
-						"EntryType":"WaitToRead"
 					}
 				]
 			}
@@ -74,8 +58,25 @@
 				"WaitToFinish": false,
 				"Entries": [
 					{
+						"EntryType":"Clear"
+					},
+					{
 						"EntryType":"Text",
-						"Text": "a @Color:Red@Soldier@Clear@ find themselves wandering aimlessly,"
+						"Text": "Seperated from @Color:Red@The Military@Clear@ and in fear of being branded a deserter, "
+					},
+					{
+						"EntryType":"WaitToRead"
+					}
+				]
+			},
+			{
+				"BlockType": "SpeechBox",
+				"WaitToFinish": false,
+				"WaitForNextButton":false,
+				"Entries": [
+					{
+						"EntryType":"Text",
+						"Text": "a @Color:Red@Soldier@Clear@ find themselves wandering aimlessly, "
 					}
 				]
 			},
@@ -113,11 +114,11 @@
 			{
 				"BlockType": "SpeechBox",
 				"WaitToFinish": true,
-				"WaitForNextButton": true,
+				"WaitForNextButton":true,
 				"Entries": [
 					{
 						"EntryType":"Text",
-						"Text": "\nwhen they meet a @Color:Red@Mysterious Figure@Clear@."
+						"Text": "when they meet a @Color:Red@Mysterious Figure@Clear@."
 					},
 					{
 						"EntryType":"WaitToRead"
@@ -1106,7 +1107,7 @@
 					},
 					{
 						"EntryType":"Text",
-						"Text": "Let me take peek at your @Color:Blue@Page Book@Clear@.",
+						"Text": "Let me take peek at your @Color:Blue@PageBook@Clear@.",
 						"NewLine":true
 					},
 					{
@@ -1168,7 +1169,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "Your @Color:Blue@Page Book@Clear@ has barely been used.",
+						"Text": "Your @Color:Blue@PageBook@Clear@ has barely been used.",
 						"NewLine":false
 					},
 					{
@@ -1200,7 +1201,7 @@
 				"false": "NoTutorial"
 			}
 		},
-		"WaitForNextButton": true,
+		"WaitForNextButton": false,
 		"EnsurePoses": {
 			"_Camera":"P1",
 			"Player1":"P1",
@@ -1269,14 +1270,14 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "Good, "
+						"Text": "Great, "
 					},
 					{
 						"EntryType": "WaitToRead"
 					},
 					{
 						"EntryType": "Text",
-						"Text": " then how about a quick demonstration?"
+						"Text": "then how about a quick demonstration?"
 					},
 					{
 						"EntryType": "WaitToRead"
@@ -1686,7 +1687,8 @@
 					{
 						"EntryType":"BackTrack",
 						"Text": " living creature, and undead, and constructs, and... ",
-						"LetterDelay": 0.001
+						"LetterDelay": 0.001,
+						"LineSpacingText": "Every"
 					},
 					{
 						"EntryType": "Speaker",
@@ -5514,7 +5516,7 @@
 		"EnsurePoses": {
 			"_Camera":"P8",
 			"Player1":"P8",
-			"MysteriousFigure":"MF9",
+			"MysteriousFigure":"Hidden",
 			"Squirrel_1": "S1",
 			"Squirrel_2": "S2",
 			"Squirrel_3": "S3",

@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bje0k82nenje6"]
+[gd_scene load_steps=16 format=3 uid="uid://bje0k82nenje6"]
 
 [ext_resource type="Script" path="res://Scenes/Dialog/dialog_controller.gd" id="1_17lfl"]
 [ext_resource type="Script" path="res://Scenes/Dialog/black_out_control.gd" id="2_g02yb"]
@@ -9,9 +9,64 @@
 [ext_resource type="Texture2D" uid="uid://cul356gq6n1tw" path="res://Scenes/Dialog/Icons/CheckBox_Off.png" id="9_imyb2"]
 [ext_resource type="Texture2D" uid="uid://ccwj8ucsjhl6w" path="res://assets/Sprites/UI/BackPatches/Patch_64_12_Dark.png" id="10_6rdjr"]
 [ext_resource type="Script" path="res://Scenes/Dialog/dialog_popup_controller.gd" id="10_mbn4m"]
+[ext_resource type="Texture2D" uid="uid://567vutk12a12" path="res://Scenes/Menus/CharacterMenu/MenuPages/SlotHighlight.png" id="11_34lhx"]
 [ext_resource type="Theme" uid="uid://by8t8e4s2str7" path="res://Scenes/VFXs/SpeachBubble/speach_bubble_theme.tres" id="11_bkcx1"]
 [ext_resource type="FontFile" uid="uid://0kbg00s43xf0" path="res://assets/Fonts/8bit.ttf" id="11_sd5id"]
 [ext_resource type="FontFile" uid="uid://cq1gkq6upl513" path="res://assets/Fonts/8bit-2.ttf" id="12_xp3b1"]
+
+[sub_resource type="Animation" id="Animation_1bnbf"]
+length = 1.2
+loop_mode = 1
+step = 0.1
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:self_modulate:r")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TextureRect:self_modulate:g")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("TextureRect:self_modulate:b")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("TextureRect:self_modulate:a")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(0, -0.0005, 0, 0.0005, 0, 0.5, -0.2, 0, 0.2, 0, 0, -0.0005, 0, 0.0005, 0),
+"times": PackedFloat32Array(0.1, 0.6, 1.1)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_15ib3"]
+_data = {
+"RESET": SubResource("Animation_1bnbf")
+}
 
 [node name="DialogControl" type="Control" node_paths=PackedStringArray("next_button", "skip_button", "auto_button", "top_speech_box", "bot_speech_box", "blackout_control", "dialog_popup_controller", "input_blocker")]
 layout_mode = 3
@@ -238,6 +293,21 @@ text = "Next"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="TextureRect" type="TextureRect" parent="NextButton"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = -2.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("11_34lhx")
+expand_mode = 1
+
 [node name="Button" type="Button" parent="NextButton"]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
@@ -246,6 +316,12 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="NextButton"]
+libraries = {
+"": SubResource("AnimationLibrary_15ib3")
+}
+autoplay = "RESET"
 
 [node name="Label" type="Label" parent="."]
 self_modulate = Color(0, 0, 0, 1)

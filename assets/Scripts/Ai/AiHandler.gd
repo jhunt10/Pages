@@ -28,7 +28,8 @@ static func build_action_ques(clear_existing_ques:bool=false):
 		
 		# Disable positions
 		var pos = init_game_state.get_actor_pos(actor)
-		astar.set_pos_disabled(pos, true)
+		if pos:
+			astar.set_pos_disabled(pos, true)
 	
 	for turn in range(turn_count):
 		var turn_state = init_game_state

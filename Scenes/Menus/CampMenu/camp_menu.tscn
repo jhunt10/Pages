@@ -17,7 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://cb8k5gxes3iaj" path="res://assets/Sprites/UI/SymbolIcons/MoneySymbol_White.png" id="15_axj4f"]
 [ext_resource type="PackedScene" uid="uid://bje0k82nenje6" path="res://Scenes/Dialog/dialog_control.tscn" id="16_q50fv"]
 
-[node name="CampMenu" type="Control" node_paths=PackedStringArray("dialog_control", "camp_options_container", "system_options_container", "pretty_picture_texure_rect", "quest_button", "shop_button", "character_button", "explort_button", "system_button", "sys_back_button", "sys_save_button", "sys_load_button", "sys_debug_button", "sys_quit_button")]
+[node name="CampMenu" type="Control" node_paths=PackedStringArray("dialog_control", "camp_options_container", "system_options_container", "pretty_picture_texure_rect", "quest_button", "shop_button", "character_button", "explort_button", "records_button", "system_button", "sys_back_button", "sys_save_button", "sys_load_button", "sys_debug_button", "sys_quit_button")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -33,6 +33,7 @@ quest_button = NodePath("CampOptionsContainer/MainOptionsContainer/QuestOptionBu
 shop_button = NodePath("CampOptionsContainer/MainOptionsContainer/ShopOptionButton")
 character_button = NodePath("CampOptionsContainer/MainOptionsContainer/PrepareOptionButton")
 explort_button = NodePath("CampOptionsContainer/MainOptionsContainer/ExplorOptionButton")
+records_button = NodePath("CampOptionsContainer/MainOptionsContainer/RecordsOptionButton")
 system_button = NodePath("CampOptionsContainer/MainOptionsContainer/ScribeOptionButton")
 sys_back_button = NodePath("CampOptionsContainer/SystemOptionsContainer/Sys_BackOptionButton")
 sys_save_button = NodePath("CampOptionsContainer/SystemOptionsContainer/Sys_SaveOptionButton")
@@ -348,7 +349,6 @@ script = ExtResource("6_5vfat")
 button = NodePath("Button")
 under_line = NodePath("TitleLabel/ColorRect")
 highlight = NodePath("TextureRect")
-disabled = true
 label = NodePath("TitleLabel")
 text = "Records"
 
@@ -364,7 +364,7 @@ grow_vertical = 2
 texture = ExtResource("7_hs7sy")
 
 [node name="TitleLabel" type="Label" parent="CampOptionsContainer/MainOptionsContainer/RecordsOptionButton"]
-self_modulate = Color(0.411765, 0.411765, 0.411765, 1)
+self_modulate = Color(0.470588, 0, 0, 1)
 layout_mode = 0
 offset_right = 210.0
 offset_bottom = 60.0

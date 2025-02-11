@@ -661,6 +661,11 @@ func force_positions(force_pos_data:Dictionary):
 			var actor = game_state.get_actor(actor_id, true)
 			if actor and not actor.is_dead:
 				CombatRootControl.Instance.kill_actor(actor)
+		elif path_marker_name == "Hidden":
+			var actor = game_state.get_actor(actor_id, true)
+			if actor and not actor.is_dead:
+				CombatRootControl.Instance.remove_actor(actor)
+			
 		else:
 			var path_marker = CombatRootControl.Instance.MapController.get_path_marker(path_marker_name)
 			if !path_marker:

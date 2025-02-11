@@ -186,6 +186,15 @@ func kill_actor(actor:BaseActor):
 		#delete_actor(actor)
 
 
+func remove_actor(actor:BaseActor):
+	actor.die()
+	QueController.remove_action_que(actor.Que)
+	GameState.remove_actor_from_map(actor)
+	var actor_node = get_actor_node(actor.Id)
+	if actor_node:
+		actor_node.queue_free()
+
+
 func add_actor(actor:BaseActor, faction_id:int, pos:MapPos):
 	if GameState._actors.keys().has(actor.Id):
 		printerr("Actor '%s' already added" % [actor.Id])

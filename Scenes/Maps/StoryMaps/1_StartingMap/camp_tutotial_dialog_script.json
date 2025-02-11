@@ -17,12 +17,6 @@
 		"EnsurePoses": {},
 		"Blocks":[
 			{
-				"BlockType": "SetFlag",
-				"IsStoryFlag": true,
-				"FlagName": "Tutorial",
-				"Value": false
-			},
-			{
 				"BlockType": "SpeechBox",
 				"TopBox": false,
 				"WaitToFinish": true,
@@ -524,7 +518,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "I know we are going to do some great things together.",
+						"Text": "I know we are going to do great things together.",
 						"NewLine": true
 					},
 					{
@@ -630,7 +624,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "into @Color:Red@The End@Clear@.",
+						"Text": "to @Color:Red@The End@Clear@.",
 						"NewLine": false,
                         "LetterDelay": 0.015
 					},
@@ -812,7 +806,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "They were a fine specimen of a @Color:Red@Man@Clear@. ",
+						"Text": "They were a fine specimen of a man. ",
 						"NewLine": false,
                         "LetterDelay": 0.015
 					},
@@ -1284,6 +1278,17 @@
 					}
 				]
 			},
+            {
+				"BlockType":"CustomBlock",
+				"ScriptPath": "res://Scenes/Dialog/CustomDialogBlocks/CampTutorialBlocks.gd",
+				"EnableMenu": "Scribe"
+            },
+			{
+				"BlockType":"SetFlag",
+				"FlagName":"CampScribeDisabled",
+				"Value": false
+
+			},
 			{
 				"BlockType": "SpeechBox",
 				"TopBox": true,
@@ -1330,11 +1335,6 @@
 					}
 				]
 			},
-            {
-				"BlockType":"CustomBlock",
-				"ScriptPath": "res://Scenes/Dialog/CustomDialogBlocks/CampTutorialBlocks.gd",
-				"EnableMenu": "Scribe"
-            },
 			{
 				"BlockType": "SpeechBox",
 				"TopBox": false,
@@ -1769,7 +1769,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": " hit @Color:Red@Quest@Clear@ to talk about our mission. ",
+						"Text": "hit @Color:Red@Quest@Clear@ to talk about our mission. ",
 						"NewLine": false
 					},
 					{
@@ -1850,33 +1850,23 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "I assume you'll want to , hit \"Quest\" and meet  me to talk about our mission.",
+						"Text": "I assume you'll want to @Color:Red@Save@Clear@ before we go any further.",
 						"NewLine": false
 					},
 					{
 						"EntryType":"WaitToRead"
 					},
 					{
-						"EntryType": "Speaker",
-						"SpeakerName": "MtFr",
-						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Neutral.png"
-					},
-					{
 						"EntryType": "Text",
-						"Text": "But give me a minute first, ",
+						"Text": "Then when you're ready, ",
 						"NewLine": true
 					},
 					{
 						"EntryType":"WaitToRead"
 					},
 					{
-						"EntryType": "Speaker",
-						"SpeakerName": "MtFr",
-						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Sad.png"
-					},
-					{
 						"EntryType": "Text",
-						"Text": "I need to rest my voice...",
+						"Text": "hit @Color:Red@Quest@Clear@ to talk about our mission. ",
 						"NewLine": false
 					},
 					{
