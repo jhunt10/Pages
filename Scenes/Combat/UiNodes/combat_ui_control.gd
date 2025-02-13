@@ -90,6 +90,7 @@ func set_player_actor_index(index):
 	var player_actor = StoryState.get_player_actor(index)
 	if player_actor:
 		set_player_actor(player_actor)
+	CombatRootControl.Instance.camera.start_auto_pan_to_actor(player_actor)
 
 func set_player_actor(actor:BaseActor):
 	

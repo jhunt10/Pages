@@ -53,7 +53,8 @@ func do_thing(parent_action:BaseAction, subaction_data:Dictionary, metadata:QueE
 	CombatUiControl.ui_state_controller.set_ui_state_from_path(
 		"res://assets/Scripts/Ui/UiStates/UiState_SelectPage.gd",
 	{
-		"SelectablePages": page_that_use_ammo 
+		"SelectablePages": page_that_use_ammo,
+		"PlayerActorIndex": StoryState.get_player_index_of_actor(actor)
 	})
 	turn_data.data_cache['ReloadDone'] = true
 	return BaseSubAction.Success

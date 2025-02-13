@@ -1,17 +1,54 @@
-[gd_scene load_steps=13 format=3 uid="uid://cpy0gmuoekexl"]
+[gd_scene load_steps=16 format=3 uid="uid://cpy0gmuoekexl"]
 
 [ext_resource type="Script" path="res://Scenes/Combat/UiNodes/QueInput/que_input_button_control.gd" id="1_duoeh"]
 [ext_resource type="Texture2D" uid="uid://bibqsudhjw4qe" path="res://assets/Sprites/Paper/Mundane_Background.png" id="2_aiqd6"]
 [ext_resource type="Texture2D" uid="uid://cegwhar55vupc" path="res://assets/Sprites/Paper/Common_Background.png" id="3_g56y2"]
 [ext_resource type="Texture2D" uid="uid://du85tsvalwqdr" path="res://assets/Sprites/Paper/Rare_Background.png" id="4_73gup"]
 [ext_resource type="Texture2D" uid="uid://b81lqrxyq30xy" path="res://assets/Sprites/Paper/Legend_Background.png" id="5_era3k"]
+[ext_resource type="Texture2D" uid="uid://yx5nqpwtvayg" path="res://Scenes/Menus/SaveLoadMenu/Highlight_Patch_32_6.png" id="6_smsc3"]
 [ext_resource type="Texture2D" uid="uid://byq6wa2xqa1mt" path="res://defs/Actions/BasicMovement/Sprites/MoveForward.png" id="6_y4tky"]
 [ext_resource type="Script" path="res://Scenes/Combat/UiNodes/QueInput/page_ammo_bar.gd" id="7_p3c1w"]
 [ext_resource type="Texture2D" uid="uid://dpg1sagivl60s" path="res://assets/Sprites/Paper/AmmoBarTop.png" id="8_exy2y"]
 [ext_resource type="Texture2D" uid="uid://bfxeg4r78utqk" path="res://assets/Sprites/Paper/AmmoBarMid.png" id="9_22pny"]
 [ext_resource type="Texture2D" uid="uid://bhtcflrhftv7o" path="res://assets/Sprites/Paper/AmmoBarBot.png" id="10_q7iw8"]
-[ext_resource type="Texture2D" uid="uid://co50bgo6jm2hv" path="res://Scenes/Dialog/PopUps/OutlinePopUp/FancyOutline_BackPatch_Big_128_36.png" id="11_6c5ut"]
 [ext_resource type="Texture2D" uid="uid://8maksp2j3p5c" path="res://assets/Sprites/Paper/AmmoBarSing.png" id="11_a6eaf"]
+
+[sub_resource type="Animation" id="Animation_03c6o"]
+resource_name = "BlinkHighlight"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SelectionDisplay/Highlight:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_0tp6e"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SelectionDisplay/Highlight:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_54fso"]
+_data = {
+"BlinkHighlight": SubResource("Animation_03c6o"),
+"RESET": SubResource("Animation_0tp6e")
+}
 
 [node name="QueInputButtonControl" type="Control" node_paths=PackedStringArray("button", "background_texture", "page_icon_texture", "ammo_display", "selection_display", "selection_button")]
 custom_minimum_size = Vector2(64, 64)
@@ -37,6 +74,45 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_aiqd6")
+
+[node name="SelectionDisplay" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Highlight" type="NinePatchRect" parent="SelectionDisplay"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = -2.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_smsc3")
+
+[node name="ReloadButton" type="Button" parent="SelectionDisplay"]
+self_modulate = Color(1, 1, 1, 0)
+z_index = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="SelectionDisplay"]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_54fso")
+}
+autoplay = "BlinkHighlight"
 
 [node name="PageIconRect" type="TextureRect" parent="."]
 layout_mode = 1
@@ -96,37 +172,6 @@ patch_margin_right = 2
 patch_margin_bottom = 2
 
 [node name="PageButton" type="Button" parent="."]
-self_modulate = Color(1, 1, 1, 0)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="SelectionDisplay" type="Control" parent="."]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="NinePatchRect" type="NinePatchRect" parent="SelectionDisplay"]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -4.0
-offset_top = -4.0
-offset_right = 4.0
-offset_bottom = 4.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("11_6c5ut")
-
-[node name="ReloadButton" type="Button" parent="SelectionDisplay"]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15

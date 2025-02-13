@@ -250,6 +250,8 @@ func _handle_entry(entry_data:Dictionary, raw_delta, remaining_delta)->bool:
 						next_word = sub_tokens[0]
 						if sub_tokens.size() > 2:
 							next_word += sub_tokens[2]
+						if sub_tokens.size() >= 4:
+							next_word += sub_tokens[4]
 					hidden_text_edit.text += next_word
 					var line_length = hidden_text_edit.get_line_width(0)
 					#print("Next Word: '%s' | Line Length: %s" % [next_word, line_length])

@@ -117,6 +117,7 @@ func load_init_state(sub_scene_data:Dictionary):
 	for actor_info:Dictionary in map_data['Actors']:
 		var new_actor = null
 		var actor_pos = actor_info['Pos']
+		var faction_index = 1
 		if actor_info.keys().has("ActorId"):
 			if actor_info.keys().has("ActorKey"):
 				new_actor = ActorLibrary.get_or_create_actor(actor_info['ActorKey'], actor_info['ActorId'])
@@ -128,10 +129,25 @@ func load_init_state(sub_scene_data:Dictionary):
 				new_actor = StoryState.get_player_actor(0)
 			elif actor_key == "Player2":
 				new_actor = StoryState.get_player_actor(1)
+				if not new_actor:
+					var player_id = "Player_2:" + str(ResourceUID.create_id())
+					new_actor = ActorLibrary.create_actor("RogueTemplate", {}, player_id)
+					new_actor.FactionIndex = 0
+					StoryState._player_ids[1] = player_id
 			elif actor_key == "Player3":
 				new_actor = StoryState.get_player_actor(2)
+				if not new_actor:
+					var player_id = "Player_3:" + str(ResourceUID.create_id())
+					new_actor = ActorLibrary.create_actor("PriestTemplate", {}, player_id)
+					new_actor.FactionIndex = 0
+					StoryState._player_ids[2] = player_id
 			elif actor_key == "Player4":
 				new_actor = StoryState.get_player_actor(3)
+				if not new_actor:
+					var player_id = "Player_4:" + str(ResourceUID.create_id())
+					new_actor = ActorLibrary.create_actor("MageTemplate", {}, player_id)
+					new_actor.FactionIndex = 0
+					StoryState._player_ids[3] = player_id
 			else:
 				new_actor = ActorLibrary.create_actor(actor_key, {})
 		
@@ -140,7 +156,10 @@ func load_init_state(sub_scene_data:Dictionary):
 				# Must call without signals because actors are spawned before MapControlNode._ready()
 				MapController.create_actor_node(new_actor, actor_pos, true)
 			else:
-				add_actor(new_actor, actor_info.get("FactionId", 1), actor_pos)
+				var faction_id = 1
+				if new_actor.is_player:
+					faction_id = 0
+				add_actor(new_actor, actor_info.get("FactionId", faction_id), actor_pos)
 		actor_index += 1
 		loading_actor_progressed.emit(actor_count, actor_index)
 	

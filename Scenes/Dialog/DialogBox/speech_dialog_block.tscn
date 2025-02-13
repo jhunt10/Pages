@@ -138,6 +138,7 @@ bbcode_enabled = true
 text = "Some Text"
 fit_content = true
 scroll_active = false
+autowrap_mode = 0
 
 [node name="PreMade_QuestionOption" type="Control" parent="SpeechDialogBlock/ScrollContainer/EntriyContainer" node_paths=PackedStringArray("option_icon", "option_label", "button")]
 custom_minimum_size = Vector2(0, 40)

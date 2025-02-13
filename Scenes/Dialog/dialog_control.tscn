@@ -108,9 +108,12 @@ script = ExtResource("2_g02yb")
 _state = 2
 
 [node name="PopupController" type="Control" parent="." node_paths=PackedStringArray("parent_dialog_controller")]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("10_mbn4m")
 parent_dialog_controller = NodePath("..")
@@ -201,16 +204,15 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="SkipButton" type="Control" parent="." node_paths=PackedStringArray("button")]
-visible = false
 layout_mode = 1
 anchor_left = 1.0
 anchor_top = 0.7
 anchor_right = 1.0
 anchor_bottom = 0.7
 offset_left = -148.0
-offset_top = -56.0
+offset_top = -122.6
 offset_right = -16.0
-offset_bottom = -8.0
+offset_bottom = -74.6
 grow_horizontal = 0
 grow_vertical = 2
 script = ExtResource("9_dcgg0")

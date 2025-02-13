@@ -1,7 +1,7 @@
 class_name DialogPopUpController
 extends Control
 
-enum PopUpTypes { SpeechBubble, Highlight, TutorialCard, ClickDrag, SpotLight}
+enum PopUpTypes {LocationTime, SpeechBubble, Highlight, TutorialCard, ClickDrag, SpotLight}
 
 @export var parent_dialog_controller:DialogController
 var _popups:Dictionary = {}
@@ -27,6 +27,9 @@ func handle_pop_up(block_data:Dictionary)->bool:
 		printerr("Unknown PopUpType: '%s'." % [popup_type_str])
 		return false
 	
+	if popup_type == PopUpTypes.LocationTime:
+		return create_time_location_pop_up(block_data)
+	
 	#----------------------------------
 	#         Speech Bubble
 	# Options:
@@ -49,6 +52,19 @@ func handle_pop_up(block_data:Dictionary)->bool:
 	if popup_type == PopUpTypes.SpotLight:
 		return create_spotlight(block_data)
 	return false
+
+func create_time_location_pop_up(block_data:Dictionary)->bool:
+	var pop_up:TimeLocationPopUpControl = load("res://Scenes/Dialog/PopUps/TimeLocationPopup/time_local_popup.tscn").instantiate()
+	var location = block_data.get("Location", "The Location")
+	var time = block_data.get("Time", "X years ago")
+	pop_up.set_location_and_time(location, time)
+	self.add_child(pop_up)
+	var wait_to_finish = block_data.get("WaitToFinish", true)
+	if wait_to_finish:
+		parent_dialog_controller._block_states["LocationTimePopUp"] = DialogController.BlockStates.Playing
+		pop_up.outro_finished.connect(parent_dialog_controller._on_popup_finished.bind("LocationTimePopUp"))
+	return wait_to_finish
+	
 
 ## Returns true if block should be waitied on
 func create_highlight(block_data:Dictionary)->bool:

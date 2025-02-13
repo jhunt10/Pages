@@ -5,7 +5,6 @@
 [ext_resource type="Texture2D" uid="uid://ciuklk5v766ab" path="res://defs/Actors/NPCs/MnFg/MysteriousFigure_SpriteSheet.png" id="3_ws5ex"]
 
 [node name="SpotLightControl" type="Control" node_paths=PackedStringArray("actor_sprite")]
-visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_left = 409.0
@@ -19,7 +18,7 @@ actor_sprite = NodePath("ActorSprite")
 show_behind_parent = true
 position = Vector2(0, -16)
 texture = ExtResource("2_l206k")
-offset = Vector2(0, -32)
+offset = Vector2(0, -50)
 
 [node name="ActorSprite" type="Sprite2D" parent="."]
 texture = ExtResource("3_ws5ex")

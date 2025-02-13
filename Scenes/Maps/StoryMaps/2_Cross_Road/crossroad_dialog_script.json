@@ -1,9 +1,70 @@
 {
 	"_MetaData_": {
-		"StartPartKey": "Walkin",
+		"StartPartKey": "Prolog_Rogue",
         "MapScene": "res://Scenes/Maps/StoryMaps/2_Cross_Road/crossroad_dialog_map.tscn"
 	},
-	"Walkin":{
+	"Prolog_Rogue":{
+		"_NextPartKey": "Intro_WalkIn",
+		"WaitForNextButton": false,
+		"Inital_BlackOutState":"Black",
+		"Blocks":[
+			{
+				"BlockType": "Blackout",
+				"BlackOutState":"Black"
+			},
+			{
+				"BlockType": "SpeechBox",
+				"WaitToFinish": true,
+				"WaitForNextButton": true,
+				"Entries": [
+					{
+						"EntryType":"Clear"
+					},
+					{
+						"EntryType":"Text",
+						"Text": "Now Imagine a cutscene at @Color:Red@The Port@Clear@ where a @Color:Red@Rogue@Clear@ is running for thier life. "
+					},
+					{
+						"EntryType":"WaitToRead"
+					},
+					{
+						"EntryType":"Text",
+						"Text": "They jump into a crate to hide, ",
+						"NewLine": false
+					},
+					{
+						"EntryType":"WaitToRead"
+					},{
+						"EntryType":"Text",
+						"Text": "but are sealed in and loaded onto a boat. ",
+						"NewLine": false
+					},
+					{
+						"EntryType":"WaitToRead"
+					},
+					{
+						"EntryType":"Text",
+						"Text": "*Scene Ends*",
+						"NewLine": true
+					}
+				]
+			},
+			{
+				"BlockType": "SpeechBox",
+				"WaitToFinish": true,
+				"WaitForNextButton": false,
+				"Entries": [
+					{
+						"EntryType":"Clear"
+					},
+					{
+						"EntryType":"Hide"
+					}
+				]
+			}
+		]
+	},
+	"Intro_WalkIn":{
 		"_NextPartKey": "Dialog1",
 		"WaitForNextButton": true,
 		"#EnsurePoses": {
@@ -93,6 +154,18 @@
                 "SpeedScale": 1
             },
 
+			{
+				"BlockType": "PopUp",
+				"WaitToFinish": false,
+				"Create":"LocationTime",
+				"PopUpType": "LocationTime",
+				"Location": "The Crossroad",
+				"Time": "3 months later"
+			},
+			{
+				"BlockType": "Delay",
+				"Time": 2.5
+			},
             
 			{
 				"BlockType": "SpeechBox",
@@ -100,7 +173,7 @@
 				"Entries": [
 					{
 						"EntryType":"Text",
-						"Text": "As the Hero's Party makes thier to The City, they came upon a Crossroad with an unussual sight.",
+						"Text": "As the @Color:Blue@The Party@Clear@ slowly makes thier way to @Color:Red@The City@Clear@, they reach @Color:Red@The Crossroad@Clear@ discover an unussual sight. ",
                         "LetterDelay":0.015
 					},
 					{
@@ -121,9 +194,9 @@
 				"Entries": [
 					{
 						"EntryType":"Text",
-						"Text": "A group of Bandits unpacking a Merchant's abondoned cart.",
+						"Text": "A group of @Color:Red@Bandits@Clear@ are unpacking a seeming abondoned @Color:Red@Merchant Cart@Clear@.",
                         "LetterDelay":0.015,
-                        "NewLine": true
+                        "NewLine": false
 					},
 					{
 						"EntryType":"WaitToRead"
@@ -155,7 +228,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "I'm going to guess that the \"Merchant\" cart, doesn't belong to these \"Bandits\", "
+						"Text": "I'm going to guess that the \"@Color:Red@Merhant@Clear@\" @Color:Red@Cart@Clear@, doesn't belong to these \"@Color:Red@Bandits@Clear@\", "
 					},
 					{
 						"EntryType":"WaitToRead"
@@ -284,12 +357,20 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "By the way, \"Hero Points\" aren't a thing. That was a figure of speech.",
+						"Text": "By the way, \"Hero Points\" aren't a thing.",
+						"NewLine": true
+					},
+                    {
+                        "EntryType":"WaitToRead"
+                    },
+					{
+						"EntryType": "Text",
+						"Text": "That was a figure of speech.",
 						"NewLine": true
 					},
                     {
                         "EntryType": "Delay",
-                         "Delay": 3.0
+                         "Delay": 2.0
                     },
                     {
                         "EntryType": "Hide"
@@ -379,7 +460,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "We got real lucky, gang. ",
+						"Text": "We got real lucky, @Color:Red@Gang@Clear@. ",
 						"NewLine": true
 					},
 					{
@@ -387,7 +468,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "Abandoned carts aren't something you find everyday, so appreciate the easy haul.",
+						"Text": "Abandoned @Color:Red@Merchant Carts@Clear@ aren't something you find everyday, so appreciate the easy haul.",
 						"NewLine": false
 					},
 					{
@@ -473,7 +554,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "Uhh Captain, ",
+						"Text": "Uhh @Color:Red@Captain@Clear@, ",
 						"NewLine": false
 					},
 					{
@@ -481,7 +562,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "we've got a Soldier here and",
+						"Text": "we've got a @Color:Red@Soldier@Clear@ here and",
 						"NewLine": false
 					}
 				]
@@ -524,7 +605,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "some kind of Demon Monkey?",
+						"Text": "some kind of @Color:Red@Demon Monkey@Clear@?",
 						"NewLine": true
 					}
 				]
@@ -540,7 +621,7 @@
 		"EnsurePoses": {
 			"_Camera":"C2",
 			"Player1":"P1",
-			"MysteriousFigure":"M2",
+			"MysteriousFigure":"M1",
             "BanditArcher_1": "Arch1_South",
             "BanditArcher_2": "Arch2_South",
             "BanditArmored_1": "Band1_South",
@@ -571,7 +652,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "I'm not a Monkey!"
+						"Text": "I'm not a @Color:Red@Monkey@Clear@!"
 					},
 					{
 						"EntryType":"WaitToRead"
@@ -631,7 +712,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "'course you ain't a monkey, ",
+						"Text": "'course you ain't a @Color:Red@Monkey@Clear@, ",
 						"NewLine": false
 					},
 					{
@@ -739,7 +820,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "Don't know you were doing in that box, and don't care.",
+						"Text": "Don't know you were doing in that box, @Color:Red@Rogue@Clear@.",
 						"NewLine": true
 					},
 					{
@@ -747,7 +828,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "This haul's our, and you three arn't leaving.",
+						"Text": "But this haul's our, and you three ain't leaving.",
 						"NewLine": true
 					},
 					{
@@ -924,7 +1005,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "Do you want to be a hero?",
+						"Text": "Do you want to be a @Color:Red@Hero@Clear@?",
 						"NewLine": true
 					},
 					{
@@ -1042,7 +1123,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "I meant do you want to join our party.",
+						"Text": "I meant do you want to join @Color:Blue@The Party@Clear@.",
 						"NewLine": false
 					},
 					{
@@ -1050,7 +1131,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "When combat starts you'll spawn over here.",
+						"Text": "When @Color:Red@Combat@Clear@ starts you'll @Color:Red@Spawn@Clear@ over here.",
 						"NewLine": true
 					},
 					{
@@ -1075,7 +1156,7 @@
                     },
 					{
 						"EntryType":"Text",
-						"Text": "And so, a Rogue joined the Hero's Party.",
+						"Text": "And so, the @Color:Red@Rogue@Clear@ joined the @Color:Blue@The Party@Clear@.",
                         "LetterDelay":0.015
 					},
 					{
@@ -1100,7 +1181,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "How cute, ",
+						"Text": "Good, ",
 						"NewLine": false
 					},
 					{
@@ -1108,7 +1189,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "now yall can die as a team.",
+						"Text": " now we can make this a proper @Color:Blue@TPK@Clear@.",
 						"NewLine": false
 					},
 					{
@@ -1121,15 +1202,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "Combat positions, gang!",
-						"NewLine": true
-					},
-					{
-						"EntryType":"WaitToRead"
-					},
-					{
-						"EntryType": "Text",
-						"Text": "Looks like we're working for this after all.",
+						"Text": "Combat positions, @Color:Red@Gang@Clear@!",
 						"NewLine": true
 					},
 					{
@@ -1151,18 +1224,35 @@
             },
             {
                 "BlockType":"StartCombat"
-            }
+            },
+			{
+				"BlockType": "AnimateNode",
+                "TargetElement": "MapController/ActorTileMapLayer/RogueInABox",
+                "AnimationName": "HIDE",
+                "WaitToFinish": false
+            },
+			{
+				"BlockType":"SpawnActor",
+				"SpawnNodeList": ["SpwanNode_Player2"]
+			}
         ]
     },
     "CombatStart":{
-		"_NextPartKey": null,
-		"WaitForNextButton": true,
+		"_NextPartLogic": 
+		{
+			"FlagName": "Tutorial",
+			"Cases": {
+				"false": "TwoPlayerTutorial",
+				"_false": "Condition_PlayingCombat"
+			}
+		},
+		"WaitForNextButton": false,
 		"Inital_BlackOutState": "Clear",
 		"EnsurePoses": {
 			"_Camera":"P1",
 			"Player1":"P1",
 			"Player2":"P2",
-			"MysteriousFigure":"M1",
+			"MysteriousFigure":"Hidden",
             "BanditArcher_1": "Arch1_South",
             "BanditArcher_2": "Arch2_South",
             "BanditArmored_1": "Band1_South",
@@ -1173,5 +1263,293 @@
         "Blocks":[
 
         ]
-    }
+    },
+    "TwoPlayerTutorial":{
+		"_NextPartKey": "Condition_PlayingCombat",
+		"WaitForNextButton": false,
+		"Inital_BlackOutState": "Clear",
+		"EnsurePoses": {
+			"_Camera":"P1",
+			"Player1":"P1",
+			"Player2":"P2",
+			"MysteriousFigure":"Hidden",
+            "BanditArcher_1": "Arch1_South",
+            "BanditArcher_2": "Arch2_South",
+            "BanditArmored_1": "Band1_South",
+            "BanditArmored_2": "Band2_3",
+            "BanditArmored_3": "Band3_3",
+            "BanditCaptain": "Cpt3"
+		},
+        "Blocks":[
+            {
+                "BlockType":"Delay",
+                "Time": 1.5
+            },
+            {   
+                "BlockType": "SpeechBox",
+                "WaitToFinish": true,
+                "WaitForNextButton": true,
+                "TopBox": false,
+                "Entries": [ 
+                    {
+                        "EntryType":"Clear",
+                        "ClearSpeaker": false
+                    },
+                    {
+                        "EntryType": "Speaker",
+                        "SpeakerName": "MtFr",
+                        "SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Happy.png"
+                    },
+                    {
+                        "EntryType": "Text",
+                        "Text": "Oh ya, ",
+                        "NewLine": true
+                    },
+                    {
+                        "EntryType":"WaitToRead"
+                    },
+                    {
+                        "EntryType": "Text",
+                        "Text": "now that there are two @Color:Red@Actors@Clear@ on our side, ",
+                        "NewLine": false
+                    },
+                    {
+                        "EntryType":"WaitToRead"
+                    },
+                    {
+                        "EntryType": "Text",
+                        "Text": "you'll need to plan out both @Color:Blue@ActionQues@Clear@ before you can start the @Color:Red@Round@Clear@.",
+                        "NewLine": false
+                    },
+                    {
+                        "EntryType":"WaitToRead"
+                    }
+                ]
+            },
+            {   
+                "BlockType": "SpeechBox",
+                "WaitToFinish": false,
+                "WaitForNextButton": false,
+                "TopBox": false,
+                "Entries": [ 
+                    {
+                        "EntryType":"Clear",
+                        "ClearSpeaker": false
+                    },
+                    {
+                        "EntryType": "Speaker",
+                        "SpeakerName": "MtFr",
+                        "SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Happy.png"
+                    },
+                    {
+                        "EntryType": "Text",
+                        "Text": "Click the @Color:Blue@Health Bars@Clear@ at the top of the @Color:Blue@The Screen@Clear@ to switch between @Color:Red@Actors@Clear@.",
+                        "NewLine": true
+                    },
+                    {
+                        "EntryType":"WaitToRead"
+                    }
+                ]
+            },
+			{
+				"BlockType": "PopUp",
+				"PopUpType": "Highlight",
+				"WaitToFinish": true,
+				"Create": "Player2PopUp",
+				"TargetElement": "MoveableCamera2D/CanvasLayer/CombatUiControl/StatPanelsContainer/P2_StatPanelControl2/BackPatchContainer",
+				"PopupControlSript": "res://Scenes/Dialog/PopUps/OutlinePopUp/outline_pop_up_control.tscn",
+				"DarkenScreen": true,
+				"Padding":[-8,8,-8,8],
+                "LineType":"Dotted",
+                "WaitToBeClicked": true,
+                "ShowClick": true,
+                "Color": [1,1,1,1]
+			},
+            {   
+                "BlockType": "SpeechBox",
+                "WaitToFinish": false,
+                "WaitForNextButton": false,
+                "TopBox": false,
+                "Entries": [ 
+                    {
+                        "EntryType":"Clear",
+                        "ClearSpeaker": false
+                    },
+                    {
+                        "EntryType":"Hide"
+                    }
+                ]
+            },
+            {
+				"BlockType":"CustomBlock",
+				"ScriptPath": "res://Scenes/Dialog/CustomDialogBlocks/CampTutorialBlocks.gd",
+                "SwitchToPlayer": 1
+            },
+			{
+				"BlockType": "PopUp",
+				"PopUpType": "Highlight",
+				"WaitToFinish": true,
+				"Delete": "Player2PopUp"
+			},
+            {
+                "BlockType":"Delay",
+                "Time": 0.3
+            },
+            {   
+                "BlockType": "SpeechBox",
+                "WaitToFinish": true,
+                "WaitForNextButton": true,
+                "TopBox": true,
+                "Entries": [ 
+                    {
+                        "EntryType":"Clear",
+                        "ClearSpeaker": false
+                    },
+                    {
+                        "EntryType": "Speaker",
+                        "SpeakerName": "MtFr",
+                        "SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Happy.png"
+                    },
+                    {
+                        "EntryType": "Text",
+                        "Text": "As you can see, ",
+                        "NewLine": true
+                    },
+                    {
+                        "EntryType":"WaitToRead"
+                    },
+                    {
+                        "EntryType": "Text",
+                        "Text": " our new @Color:Red@Rogue@Clear@ came with some @Color:Blue@Pages@Clear@ of thier own.",
+                        "NewLine": false
+                    },
+                    {
+                        "EntryType":"WaitToRead"
+                    }
+                ]
+            },
+            {   
+                "BlockType": "SpeechBox",
+                "WaitToFinish": true,
+                "WaitForNextButton": true,
+                "TopBox": true,
+                "Entries": [ 
+                    {
+                        "EntryType":"Clear",
+                        "ClearSpeaker": false
+                    },
+                    {
+                        "EntryType": "Speaker",
+                        "SpeakerName": "MtFr",
+                        "SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Surprize.png"
+                    },
+                    {
+                        "EntryType": "Text",
+                        "Text": "Oh! ",
+                        "NewLine": true
+                    },
+                    {
+                        "EntryType":"WaitToRead"
+                    },
+                    {
+                        "EntryType": "Speaker",
+                        "SpeakerName": "MtFr",
+                        "SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Happy.png"
+                    },
+                    {
+                        "EntryType": "Text",
+                        "Text": " And one of their @Color:Blue@Pages@Clear@ uses @Color:Red@Ammo@Clear@.",
+                        "NewLine": false
+                    },
+                    {
+                        "EntryType":"WaitToRead"
+                    },
+                    {
+                        "EntryType": "Text",
+                        "Text": "I didn't think I'd get to use my last @Color:Red@Flash Card@Clear@.",
+                        "NewLine": true
+                    },
+                    {
+                        "EntryType":"WaitToRead"
+                    }
+                ]
+            },
+            {   
+                "BlockType": "SpeechBox",
+                "WaitToFinish": false,
+                "WaitForNextButton": false,
+                "TopBox": true,
+                "Entries": [ 
+                    {
+                        "EntryType":"Clear",
+                        "ClearSpeaker": false
+                    },
+                    {
+                        "EntryType":"Hide"
+                    }
+                ]
+            },
+			{
+				"BlockType": "PopUp",
+				"WaitToFinish": true,
+				"Create": "TutorialCards_1",
+				"PopUpType":"TutorialCard",
+				"Cards": ["Page Que","Movement","Targeting Actors","Targeting Spots", "Items", "Items 2", "Turns and Gaps","Turn Order","Crashing","Armor and Damage", "Page Ammo"],
+				"Index": 10
+			},
+            {   
+                "BlockType": "SpeechBox",
+                "WaitToFinish": true,
+                "WaitForNextButton": true,
+                "TopBox": false,
+                "Entries": [ 
+                    {
+                        "EntryType":"Clear",
+                        "ClearSpeaker": false
+                    },
+                    {
+                        "EntryType": "Speaker",
+                        "SpeakerName": "MtFr",
+                        "SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Happy.png"
+                    },
+                    {
+                        "EntryType": "Text",
+                        "Text": "Good luck @Color:Red@Heros@Clear@!",
+                        "NewLine": true
+                    },
+                    {
+                        "EntryType":"WaitToRead"
+                    }
+                ]
+            },
+            {   
+                "BlockType": "SpeechBox",
+                "WaitToFinish": false,
+                "WaitForNextButton": false,
+                "TopBox": false,
+                "Entries": [ 
+                    {
+                        "EntryType":"Clear",
+                        "ClearSpeaker": false
+                    },
+                    {
+                        "EntryType":"Hide"
+                    }
+                ]
+            }
+        ]
+    },
+	"Condition_PlayingCombat":
+	{
+		"_NextPartKey": null,
+		"WaitForNextButton": false,
+		"Inital_BlackOutState": "Clear",
+		"AllowInputThrough": true,
+		"HideDialogUI": true,
+		"ConditionWatcherScript": "res://Scenes/Dialog/DialogConditionWatchers/DialogCondition_Tutorial.gd",
+		"ConditionKey": "PlayingCombat",
+        "Blocks":[
+            
+        ]
+	}
 }

@@ -1,11 +1,11 @@
 {
 	"_MetaData_": {
-		"StartPartKey": "Prolog_Soldier",
+		"StartPartKey": "OfferTutorial",
 		"Inital_BlackOutState":"Black"
 	},
 	"Prolog_Soldier":{
 		"_NextPartKey": "Intro_WalkIn",
-		"WaitForNextButton": true,
+		"WaitForNextButton": false,
 		"Inital_BlackOutState":"Black",
 		"Blocks":[
 			{
@@ -41,6 +41,19 @@
 						"NewLine": true
 					}
 				]
+			},
+			{
+				"BlockType": "SpeechBox",
+				"WaitToFinish": true,
+				"WaitForNextButton": false,
+				"Entries": [
+					{
+						"EntryType":"Clear"
+					},
+					{
+						"EntryType":"Hide"
+					}
+				]
 			}
 		]
 	},
@@ -53,6 +66,32 @@
 		},
 		"Inital_BlackOutState":null,
 		"Blocks":[
+			{
+				"BlockType": "Blackout",
+				"WaitToFinish": false,
+				"BlackOutState":"FadeIn"
+			},
+			{
+				"BlockType": "MoveActor",
+				"WaitToFinish": false,
+				"AsyncWaitToFinish": true,
+				"TargetActorId": "Player1",
+				"PathMarkerName": "P1",
+				"FollowActor": true,
+				"SpeedScale": 1
+			},
+			{
+				"BlockType": "PopUp",
+				"WaitToFinish": false,
+				"Create":"LocationTime",
+				"PopUpType": "LocationTime",
+				"Location": "The Abandoned Village",
+				"Time": "6 years later"
+			},
+			{
+				"BlockType": "Delay",
+				"Time": 2.5
+			},
 			{
 				"BlockType": "SpeechBox",
 				"WaitToFinish": false,
@@ -81,17 +120,7 @@
 				]
 			},
 			{
-				"BlockType": "Blackout",
-				"WaitToFinish": false,
-				"BlackOutState":"FadeIn"
-			},
-			{
-				"BlockType": "MoveActor",
-				"WaitToFinish": true,
-				"TargetActorId": "Player1",
-				"PathMarkerName": "P1",
-				"FollowActor": true,
-				"SpeedScale": 1
+				"BlockType": "WaitForAsync"
 			},
 			{
 				"BlockType": "PopUp",
@@ -118,7 +147,8 @@
 				"Entries": [
 					{
 						"EntryType":"Text",
-						"Text": "when they meet a @Color:Red@Mysterious Figure@Clear@."
+						"Text": "when they meet a @Color:Red@Mysterious Figure@Clear@.",
+						"NewLine": true
 					},
 					{
 						"EntryType":"WaitToRead"
@@ -396,15 +426,8 @@
 		]
 	},
 	"Intro_SaveTheWorld_Question":{
-		"_NextPartLogic": 
-		{
-			"FlagName": "SaveTheWorld",
-			"Cases": {
-				"true": "Introductions",
-				"false": "NoStoryEnding"
-			}
-		},
-		"WaitForNextButton": true,
+		"_NextPartKey": "SaveTheWorld_Question",
+		"WaitForNextButton": false,
 		"EnsurePoses": {
 			"_Camera":"P1",
 			"Player1":"P1",
@@ -492,7 +515,7 @@
 					},
 					{
 						"EntryType":"Text",
-						"Text": "@Color:Red@The Country@Clear@ has been under constant threat of attack by @Color:Red@Villans@Clear@ and @Color:Red@Monsters@Clear@.",
+						"Text": "@Color:Red@The Kingdom@Clear@ has been under constant threat of attack by @Color:Red@Villans@Clear@ and @Color:Red@Monsters@Clear@.",
 						"NewLine":false
 					},
 					{
@@ -564,7 +587,7 @@
 				"TargetActorId": "MysteriousFigure",
 				"PathMarkerName": "MF_I_3",
 				"FollowActor": false,
-				"Speed": 0.8
+				"Speed": 0.5
 			},
 			{
 				"BlockType": "SpeechBox",
@@ -859,22 +882,29 @@
 						"EntryType": "WaitToRead"
 					}	
 				]
-			},
-			{
-				"BlockType": "Blackout",
-				"BlackOutState": "FadeIn",
-				"FadeValue": 0.5,
-				"WaitToFinish": false
-			},
-			{
-				"BlockType": "PopUp",
-				"PopUpType": "SpotLight",
-				"WaitToFinish": false,
-				"Delete": "SpotLight"
-			},
+			}
+		]
+	},
+	"SaveTheWorld_Question":{
+		"_NextPartLogic": 
+		{
+			"FlagName": "SaveTheWorld",
+			"Cases": {
+				"true": "Introductions",
+				"false": "NoStoryEnding"
+			}
+		},
+		"WaitForNextButton": false,
+		"EnsurePoses": {
+			"_Camera":"P1",
+			"Player1":"P1",
+			"MysteriousFigure":"MF5"
+		},
+		"Blocks":[
 			{
 				"BlockType": "SpeechBox",
 				"WaitToFinish": true,
+				"WaitForNextButton": false,
 				"Entries": [
 					{
 						"EntryType": "Clear",
@@ -916,7 +946,7 @@
 			{
 				"BlockType": "SpeechBox",
 				"WaitToFinish": true,
-				"WaitForNextButton": true,
+				"WaitForNextButton": false,
 				"Entries": [
 					{
 						"EntryType": "Clear",
@@ -934,7 +964,26 @@
 					{
 						"EntryType": "Delay",
 						"Delay": 0.5
-					},
+					}
+				]
+			},
+			{
+				"BlockType": "Blackout",
+				"BlackOutState": "FadeIn",
+				"FadeValue": 0.5,
+				"WaitToFinish": false
+			},
+			{
+				"BlockType": "PopUp",
+				"PopUpType": "SpotLight",
+				"WaitToFinish": false,
+				"Delete": "SpotLight"
+			},
+			{
+				"BlockType": "SpeechBox",
+				"WaitToFinish": true,
+				"WaitForNextButton": true,
+				"Entries": [
 					{
 						"EntryType": "Speaker",
 						"SpeakerName": "MtFr",
@@ -1074,6 +1123,18 @@
 						"EntryType": "WaitToRead"
 					}			
 				]
+			},
+			{
+				"BlockType": "Blackout",
+				"BlackOutState": "FadeIn",
+				"FadeValue": 0.5,
+				"WaitToFinish": false
+			},
+			{
+				"BlockType": "PopUp",
+				"PopUpType": "SpotLight",
+				"WaitToFinish": false,
+				"Delete": "SpotLight"
 			},
 			{
 				"BlockType": "SpeechBox",
@@ -1704,7 +1765,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "is called @Color:Red@Actor@Clear@."
+						"Text": "is called an @Color:Red@Actor@Clear@."
 					},
 					{
 						"EntryType": "WaitToRead"
@@ -2601,7 +2662,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "Like your @Color:Red@Weapons@Clear@, @Color:Red@Armor@Clear@, @Color:Red@Backpack@Clear@, and such.",
+						"Text": "like your @Color:Red@Weapons@Clear@, @Color:Red@Armor@Clear@, @Color:Red@Backpack@Clear@, and such.",
 						"NewLine": true
 					},
 					{
@@ -3820,7 +3881,7 @@
 			},
 			{
 				"BlockType": "SpeechBox",
-				"TopBox": true,
+				"TopBox": false,
 				"WaitToFinish": true,
 				"WaitForNextButton": true,
 				"Hide": false,
@@ -3865,7 +3926,7 @@
 			},
 			{
 				"BlockType": "SpeechBox",
-				"TopBox": true,
+				"TopBox": false,
 				"WaitToFinish": true,
 				"WaitForNextButton": true,
 				"Hide": false,
@@ -3900,7 +3961,7 @@
 			},
 			{
 				"BlockType": "SpeechBox",
-				"TopBox": true,
+				"TopBox": false,
 				"WaitToFinish": true,
 				"WaitForNextButton": false,
 				"Hide": true,
@@ -4226,7 +4287,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "so let's learn about @Color:Red@Missiles@Clear@ by throwing a rock at it.",
+						"Text": "so let's learn about @Color:Red@Missiles@Clear@ by throwing a @Color:Red@Rock@Clear@ at it.",
 						"NewLine": true
 					},
 					{
@@ -4260,7 +4321,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "This includes arrows, fireballs, rocks, stuff like that.",
+						"Text": "This includes @Color:Red@Arrows@Clear@, @Color:Red@Fireballs@Clear@, @Color:Red@Rocks@Clear@, stuff like that.",
 						"NewLine": false
 					},
 					{
@@ -4589,7 +4650,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "Well, thanks for wasting my rock I guess,",
+						"Text": "Thanks for wasting my @Color:Red@Rock@Clear@ I guess,",
 						"NewLine": true
 					},
 
@@ -4623,7 +4684,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "At least you got the basics of how @Color:Red@Missiles@Clear@ work. I'm giving you back your @Color:Red@Basic Weapon Attack@Clear@, but you still owe me a rock.",
+						"Text": "At least you got the basics of how @Color:Red@Missiles@Clear@ work. I'm giving you back your @Color:Red@Basic Weapon Attack@Clear@, but you still owe me a @Color:Red@Rock@Clear@.",
 						"NewLine": false
 					},
 					{
@@ -4694,7 +4755,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "You can have your @Color:Red@Basic Weapon Attack@Clear@ back, and thank you for keeping good care of my rock.",
+						"Text": "You can have your @Color:Red@Basic Weapon Attack@Clear@ back, and thank you for keeping good care of my @Color:Red@Rock@Clear@.",
 						"NewLine": false
 					},
 					{
@@ -5005,12 +5066,17 @@
 			{
 				"BlockType": "PopUp",
 				"PopUpType": "Highlight",
-				"WaitToFinish": false,
-				"Create": "PopUp1",
+				"WaitToFinish": true,
+				"Delete": "QueInputPopUp",
+				"Create": "QueDisplayPopup",
 				"TargetElement": "MoveableCamera2D/CanvasLayer/CombatUiControl/QueCollectionDisplayControl",
 				"PopupControlSript": "res://Scenes/Dialog/PopUps/OutlinePopUp/outline_pop_up_control.tscn",
 				"DarkenScreen": true,
-				"Padding":[-8,8,-8,8]
+				"Padding":[-8,8,-8,8],
+                "LineType":"Solid",
+                "WaitToBeClicked": false,
+                "ShowClick": false,
+                "Color": [1,1,1,1]
 			},
 			{
 				"BlockType": "SpeechBox",
@@ -5045,7 +5111,7 @@
 				"Create":"SquirrleBubble1",
 				"PopUpType": "SpeechBubble",
 				"TargetActorId": "Squirrel_1",
-				"Text":"TO ME MY COMRADES!!!",
+				"Text":"TO ME MY KIN!!!",
 				"UseBounceText": true,
 				"LetterDelay": 0.03
 			},
@@ -5096,6 +5162,14 @@
 						"EntryType": "Text",
 						"Text": "@Color:Red@Actors@Clear@ can have a different number of @Color:Red@Actions@Clear@ per @Color:Red@Turn@Clear@. I think I've got a @Color:Red@Flash@Clear@- ",
 						"NewLine": false
+					},
+					{
+						"EntryType":"WaitToRead"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "I think I've got a @Color:Red@Flash@Clear@- ",
+						"NewLine": true
 					},
 					{
 						"EntryType":"WaitToRead"

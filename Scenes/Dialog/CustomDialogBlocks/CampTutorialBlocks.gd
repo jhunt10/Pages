@@ -14,6 +14,10 @@ func handle_block(dialog_control:DialogController, block_data:Dictionary)->bool:
 			var item = ItemLibrary.create_item(item_key, {})
 			PlayerInventory.add_item(item)
 	
+	if block_data.has("SwitchToPlayer"):
+		var player_index = block_data.get("SwitchToPlayer")
+		CombatRootControl.Instance.set_player_index(player_index)
+	
 	if block_data.has("EnableMenu"):
 		var menu = block_data.get("EnableMenu")
 		if menu == "Scribe":

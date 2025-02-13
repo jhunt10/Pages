@@ -4,6 +4,7 @@ extends Control
 enum STATES {Ready, Playing, WaitingForBlocks, WaitingForNextButton, WaitingForCondition, Finished}
 
 enum BlockTypes {
+	WaitForAsync,
 	Delay, 
 	SetFlag, 
 	SpeechBox, 
@@ -60,7 +61,7 @@ var _state:STATES = STATES.Ready:
 
 enum BlockStates {Playing, WaitingForNextButton, Finished}
 ## Mapping of block_id to is_finished
-var _block_states:Dictionary
+var _block_states:Dictionary = {}
 
 ## Data for current part is duplicated from _dialog_part_datas to allow for altering but still replaying
 var _current_part_data:Dictionary
@@ -158,8 +159,8 @@ func _are_blocks_playing():
 	for key in _block_states.keys():
 		if _block_states[key] == BlockStates.Playing:
 			is_playing = true
-		else:
-			_block_states.erase(key)
+		#else:
+			#_block_states.erase(key)
 	return is_playing
 
 ## Returns true if any block is waiting for the "Next" button
@@ -168,8 +169,8 @@ func _are_blocks_waiting_for_next_button():
 	for key in _block_states.keys():
 		if _block_states[key] == BlockStates.WaitingForNextButton:
 			is_playing = true
-		else:
-			_block_states.erase(key)
+		#else:
+			#_block_states.erase(key)
 	return is_playing
 
 ## Returns key for next part of script checking in order:
@@ -277,6 +278,15 @@ func _handle_block(block_data:Dictionary)->bool:
 			_custom_blocks[new_id] = new_block
 			return true
 		return false
+	
+	
+	#----------------------------------
+	#          Wait For Async
+	# Description:
+	# 	Wait for Async blocks which started but didn't stop flow
+	#----------------------------------
+	if block_type == BlockTypes.WaitForAsync:
+		return true
 	
 	#----------------------------------
 	#          Delay
@@ -430,14 +440,13 @@ func _handle_block(block_data:Dictionary)->bool:
 		var wait_on_pop_up = dialog_popup_controller.handle_pop_up(block_data)
 		if wait_on_pop_up:
 			return true
-	
+
 	#----------------------------------
 	#         Animate Node
 	# Options:
 	# 	 "WaitToFinish": Bool(false): Add "[PopUp_Id]" to list of block states
-	# 	 "PopUpType": String (See PopupController for options)
-	# 	 "Create": String : Key for popup to be created
-	# 	 "Delete": String : Key for popup to be deleted
+	# 	 "TargetElement": Path of node with Animation player as first child
+	# 	 "AnimationName": Name of animation to play
 	#----------------------------------
 	if block_type == BlockTypes.AnimateNode:
 		var target_element_path = block_data.get("TargetElement", null)
@@ -453,6 +462,9 @@ func _handle_block(block_data:Dictionary)->bool:
 			return false
 		var animation_name = block_data.get("AnimationName", "")
 		var wait_to_finish = block_data.get("WaitToFinish", false)
+		if animation_name == "HIDE":
+			target_element.hide()
+			return false
 		if wait_to_finish:
 			var key = target_element_path + ":" + animation_name 
 			(animation_player as AnimationPlayer).animation_finished.connect(_on_animation_finished.bind(key))
@@ -491,7 +503,7 @@ func _handle_block(block_data:Dictionary)->bool:
 			var actor_id = spawn_node.spawn_actor_id
 			var actor_pos = spawn_node.get_map_pos()
 			var new_actor = ActorLibrary.get_or_create_actor(actor_key, actor_id)
-			CombatRootControl.Instance.add_actor(new_actor, 1, actor_pos)
+			CombatRootControl.Instance.add_actor(new_actor, new_actor.FactionIndex, actor_pos)
 	
 	
 	
@@ -683,7 +695,7 @@ func force_positions(force_pos_data:Dictionary):
 			if not actor:
 				actor = ActorLibrary.get_actor(actor_id)
 				if actor_id :
-					CombatRootControl.Instance.add_actor(actor, 1, path_marker.get_last_pos())
+					CombatRootControl.Instance.add_actor(actor, actor.FactionIndex, path_marker.get_last_pos())
 			else:
 				game_state.set_actor_pos(actor, path_marker.get_last_pos())
 		#var actor_node = CombatRootControl.get_actor_node(actor_id)

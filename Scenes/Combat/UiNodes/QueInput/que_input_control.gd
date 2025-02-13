@@ -29,6 +29,7 @@ signal page_special_selected(action_key:String)
 @export var side_start_button:QueInput_StartButton
 @export var top_start_button:QueInput_StartButton
 @export var slide_speed:float = 100
+@export var page_Selection_container:HBoxContainer
 
 @export var state:States:
 	set(val):
@@ -55,6 +56,7 @@ func _ready() -> void:
 		return
 	#super()
 	#if Engine.is_editor_hint(): return
+	CombatRootControl.QueController.start_of_round.connect(_round_start)
 	CombatRootControl.QueController.end_of_round.connect(_round_ends)
 	side_start_button.button.pressed.connect(_start_button_pressed)
 	side_start_button.button.disabled = true
@@ -62,6 +64,7 @@ func _ready() -> void:
 	top_start_button.button.disabled = true
 	page_button_prefab.visible = false
 	on_que_options_menu.visible = false
+	page_Selection_container.hide()
 	pass # Replace with function body.
 
 func hide_start_button():
@@ -104,6 +107,7 @@ func show_start_button():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	nodes_container.position.x = (self.get_parent().size.x / 2) - (back_patch.size.x / 2)
+	nodes_container.size.x = back_patch.size.x
 	if state == States.Growing:
 		var move = delta * slide_speed
 		if nodes_container.position.y - move < 0 - nodes_container.size.y:
@@ -114,6 +118,8 @@ func _process(delta: float) -> void:
 		var move = delta * slide_speed
 		if nodes_container.position.y + move > 0:
 			state = States.Hidden
+			if page_Selection_container.visible:
+				page_Selection_container.hide()
 		else:
 			nodes_container.position.y += move
 		
@@ -167,7 +173,7 @@ func _build_buttons():
 				#new_button.mouse_entered.connect(_mouse_entered_page_button.bind(index, action_key))
 				#new_button.mouse_exited.connect(_mouse_exited_action_button.bind(index, action_key))
 		new_button.button.pressed.connect(_page_button_pressed.bind(index, action_key))
-		new_button.selection_button.pressed.connect(_on_page_special_selected.bind(action_key))
+		#new_button.selection_button.pressed.connect(_on_page_special_selected.bind(action_key))
 		
 		_page_buttons[action_key] = new_button
 		index += 1
@@ -177,6 +183,8 @@ func _build_buttons():
 						#main_container.size.y + (2 * PADDING))
 
 func _on_que_change():
+	if CombatRootControl.Instance.QueController.execution_state != ActionQueController.ActionStates.Waiting:
+		return
 	clear_preview_display()
 	if _actor.Que.is_ready():# or CombatRootControl.QueController.SHORTCUT_QUE:
 		show_start_button()
@@ -233,6 +241,8 @@ func _mouse_exited_action_button(_index, _key_name):
 
 func _page_button_pressed(index, key_name):
 	if selecetion_mode:
+		page_special_selected.emit(key_name)
+		hide_page_selection()
 		return
 	var action:BaseAction = ActionLibrary.get_action(key_name)
 	var on_que_options = action.get_on_que_options(_actor, CombatRootControl.Instance.GameState)
@@ -261,8 +271,13 @@ func _start_button_pressed():
 		CombatRootControl.Instance.set_player_index(next_index)
 	hide_start_button()
 
-func _round_ends():
+func _round_start():
 	hide_start_button()
+
+func _round_ends():
+	que_display_patch.show()
+	#hide_start_button()
+	pass
 
 func _on_ammo_change(page_key):
 	if _page_buttons.has(page_key):
@@ -273,6 +288,7 @@ func _on_ammo_change(page_key):
 func hide_page_selection():
 	for button:QueInputButtonControl in _page_buttons.values():
 		button.selection_display.hide()
+		button.modulate = Color.WHITE
 	selecetion_mode = false
 
 func show_page_selection(action_keys:Array):
@@ -282,10 +298,7 @@ func show_page_selection(action_keys:Array):
 			button.selection_display.show()
 		else:
 			button.selection_display.hide()
+			button.modulate = Color.LIGHT_GRAY
 	selecetion_mode = true
-
-func _on_page_special_selected(action_key):
-	if not selecetion_mode:
-		return
-	page_special_selected.emit(action_key)
-	hide_page_selection()
+	page_Selection_container.show()
+	que_display_patch.hide()
