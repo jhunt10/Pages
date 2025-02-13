@@ -124,6 +124,7 @@ func _build_slots():
 		if not is_gap:
 			_real_slots.append(new_button)
 	_resize = true
+	_sync_icons()
 
 func _sync_icons():
 	var index = 0
