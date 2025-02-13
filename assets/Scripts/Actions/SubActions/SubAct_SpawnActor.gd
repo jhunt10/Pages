@@ -20,8 +20,8 @@ func do_thing(parent_action:BaseAction, subaction_data:Dictionary, que_exe_data:
 		return BaseSubAction.Failed
 	var actor_key = subaction_data['ActorKey']
 	var new_actor = ActorLibrary.Instance.create_object(actor_key)
+	new_actor.FactionIndex = actor.FactionIndex
 	CombatRootControl.Instance.add_actor(
 		new_actor,
-		actor.FactionIndex,
 		targets[0])
 	return BaseSubAction.Success

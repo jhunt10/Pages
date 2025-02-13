@@ -22,6 +22,8 @@ static var _current_player_index:int = 0
 
 ## If true, will call StoryState.load_next_stage() when battle finishes
 static var is_story_map:bool
+var combat_started:bool = false
+var combat_finished:bool = false
 
 func _enter_tree() -> void:
 	if !Instance: 
@@ -30,10 +32,10 @@ func _enter_tree() -> void:
 			#GameState = GameStateData.new()
 	if !QueController:
 		QueController = ActionQueController.new()
-	elif Instance != self: 
-		printerr("Multiple CombatRootControls found")
-		queue_free()
-		return
+	#elif Instance != self: 
+		#printerr("Multiple CombatRootControls found")
+		#queue_free()
+		#return
 
 func _exit_tree() -> void:
 	QueController = null
@@ -117,12 +119,12 @@ func load_init_state(sub_scene_data:Dictionary):
 	for actor_info:Dictionary in map_data['Actors']:
 		var new_actor = null
 		var actor_pos = actor_info['Pos']
-		var faction_index = 1
 		if actor_info.keys().has("ActorId"):
 			if actor_info.keys().has("ActorKey"):
 				new_actor = ActorLibrary.get_or_create_actor(actor_info['ActorKey'], actor_info['ActorId'])
 			else:
 				new_actor = ActorLibrary.get_actor(actor_info['ActorId'])
+			new_actor.FactionIndex = 1
 		elif actor_info.keys().has("ActorKey"):
 			var actor_key = actor_info['ActorKey']
 			if actor_key == "Player1":
@@ -150,16 +152,14 @@ func load_init_state(sub_scene_data:Dictionary):
 					StoryState._player_ids[3] = player_id
 			else:
 				new_actor = ActorLibrary.create_actor(actor_key, {})
+				new_actor.FactionIndex = 1
 		
 		if new_actor:
 			if actor_info['WaitToSpawn']:
 				# Must call without signals because actors are spawned before MapControlNode._ready()
 				MapController.create_actor_node(new_actor, actor_pos, true)
 			else:
-				var faction_id = 1
-				if new_actor.is_player:
-					faction_id = 0
-				add_actor(new_actor, actor_info.get("FactionId", faction_id), actor_pos)
+				add_actor(new_actor, actor_pos)
 		actor_index += 1
 		loading_actor_progressed.emit(actor_count, actor_index)
 	
@@ -188,6 +188,7 @@ func load_init_state(sub_scene_data:Dictionary):
 func start_combat_animation():
 	start_combat_screen.show()
 	start_combat_screen.start_combat_animation()
+	combat_started = true
 
 func _on_combat_screen_blackout():
 	ui_control.show()
@@ -214,12 +215,12 @@ func remove_actor(actor:BaseActor):
 		actor_node.queue_free()
 
 
-func add_actor(actor:BaseActor, faction_id:int, pos:MapPos):
+func add_actor(actor:BaseActor, pos:MapPos):
 	if GameState._actors.keys().has(actor.Id):
 		printerr("Actor '%s' already added" % [actor.Id])
 		return
+	print("Adding Actor %s with FactionIndex: %s" % [actor.Id, actor.FactionIndex])
 	# Add actor to GameState and set position
-	actor.FactionIndex = faction_id
 	GameState.add_actor(actor)
 	QueController.add_action_que(actor.Que)
 	
@@ -333,6 +334,7 @@ func check_end_conditions():
 		trigger_end_condition(true)
 
 func trigger_end_condition(victory:bool):
+	combat_finished = true
 	if victory:
 		ui_control.victory_screen.show_game_result()
 	else:

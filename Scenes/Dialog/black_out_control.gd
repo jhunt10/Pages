@@ -2,7 +2,7 @@
 class_name BlackOutControl
 extends ColorRect
 
-enum BLACKOUT_STATE {Black, FadeIn, Clear, FadeOut}
+enum BLACKOUT_STATE {Black, FadeIn, Clear, FadeOut, HalfToClear}
 
 signal fade_done
 

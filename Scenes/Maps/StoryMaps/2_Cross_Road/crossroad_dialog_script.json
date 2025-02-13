@@ -1,6 +1,6 @@
 {
 	"_MetaData_": {
-		"StartPartKey": "Prolog_Rogue",
+		"StartPartKey": "CombatStart",
         "MapScene": "res://Scenes/Maps/StoryMaps/2_Cross_Road/crossroad_dialog_map.tscn"
 	},
 	"Prolog_Rogue":{
@@ -1242,8 +1242,8 @@
 		{
 			"FlagName": "Tutorial",
 			"Cases": {
-				"false": "TwoPlayerTutorial",
-				"_false": "Condition_PlayingCombat"
+				"true": "TwoPlayerTutorial",
+				"false": "Condition_PlayingCombat"
 			}
 		},
 		"WaitForNextButton": false,
@@ -1261,7 +1261,9 @@
             "BanditCaptain": "Cpt3"
 		},
         "Blocks":[
-
+            {
+                "BlockType":"StartCombat"
+            }
         ]
     },
     "TwoPlayerTutorial":{
@@ -1302,15 +1304,7 @@
                     },
                     {
                         "EntryType": "Text",
-                        "Text": "Oh ya, ",
-                        "NewLine": true
-                    },
-                    {
-                        "EntryType":"WaitToRead"
-                    },
-                    {
-                        "EntryType": "Text",
-                        "Text": "now that there are two @Color:Red@Actors@Clear@ on our side, ",
+                        "Text": "Now that there are two @Color:Red@Actors@Clear@ on our side, ",
                         "NewLine": false
                     },
                     {

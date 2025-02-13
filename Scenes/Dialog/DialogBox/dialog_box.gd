@@ -81,6 +81,18 @@ func add_entries(entry_arr:Array):
 	if state == STATES.Ready or state == STATES.Done:
 		state = STATES.Printing
 
+func clear_entries():
+	_entry_que.clear()
+	hidden_text_edit.clear()
+	_word_is_broken = true
+	_current_text_entry = null
+	for child in entry_contaier.get_children():
+		if child == premade_text_label: continue
+		if child == premade_question_option: continue
+		if child == hidden_text_edit: continue
+		if child == premade_compound_label: continue
+		child.queue_free()
+
 ## Returns true if entry is finished
 func _handle_entry(entry_data:Dictionary, raw_delta, remaining_delta)->bool:
 	var conditions = entry_data.get("ConditionFlags", {})

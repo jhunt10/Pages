@@ -461,10 +461,27 @@
 
     
 	"ScribeIntro":{
-		"_NextPartKey": "ScribeDescription",
+		"_NextPartLogic": 
+		{
+			"FlagName": "Tutorial",
+			"Cases": {
+				"@DEFAULT@": "ScribeTutorial",
+				"true": "ScribeTutorial",
+				"false": "PostScribeNoTutorial"
+			}
+		},
 		"WaitForNextButton": false,
 		"Inital_BlackOutState": "Clear",
 		"EnsurePoses": {},
+		"OnSkip":{
+			"Blocks":[
+				{
+					"BlockType":"SetFlag",
+					"FlagName":"CampScribeDisabled",
+					"Value": false
+				}
+			]
+		},
 		"Blocks":[
 			{
 				"BlockType": "SpeechBox",
@@ -771,23 +788,7 @@
 						"EntryType":"WaitToRead"
 					}
 				]
-			}
-		]
-	},
-	"ScribeDescription":{
-		"_NextPartLogic": 
-		{
-			"FlagName": "Tutorial",
-			"Cases": {
-				"@DEFAULT@": "ScribeTutorial",
-				"true": "ScribeTutorial",
-				"false": "PostScribeNoTutorial"
-			}
-		},
-		"WaitForNextButton": false,
-		"Inital_BlackOutState": "Clear",
-		"EnsurePoses": {},
-		"Blocks":[
+			},
 			{
 				"BlockType": "SpeechBox",
 				"TopBox": false,
@@ -1304,10 +1305,20 @@
 		]
 	},
     "ScribeTutorial":{
-		"_NextPartKey": "Condition_SaveTutorial",
+		"_NextPartKey": "MakeSaveTutorial",
 		"WaitForNextButton": false,
 		"Inital_BlackOutState": "Clear",
 		"EnsurePoses": {},
+		"OnSkip":
+		{
+			"Blocks":[
+				{
+					"BlockType":"CustomBlock",
+					"ScriptPath": "res://Scenes/Dialog/CustomDialogBlocks/CampTutorialBlocks.gd",
+					"OpenMenu": "Scribe"
+				}
+			]
+		},
 		"Blocks":[
 			{
 				"BlockType": "SpeechBox",
@@ -1607,7 +1618,24 @@
 					},
 					{
 						"EntryType":"WaitToRead"
-					},
+					}
+				]
+			}
+		]
+	},
+    "MakeSaveTutorial":{
+		"_NextPartKey": "Condition_SaveTutorial",
+		"WaitForNextButton": false,
+		"Inital_BlackOutState": "Clear",
+		"EnsurePoses": {},
+		"Blocks":[
+			{
+				"BlockType": "SpeechBox",
+				"TopBox": false,
+				"WaitToFinish": true,
+				"WaitForNextButton": false,
+				"Hide": false,
+				"Entries": [
 					{
 						"EntryType": "Speaker",
 						"SpeakerName": "MtFr",

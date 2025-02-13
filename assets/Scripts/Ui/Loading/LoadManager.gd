@@ -13,7 +13,7 @@ var _load_screen:LoadingScreen
 var _combat_node:CombatRootControl
 
 var _loading_done:bool
-var _last_scene_was_combat:bool
+#var _last_scene_was_combat:bool
 
 var use_sub_threads:bool = true
 
@@ -29,13 +29,15 @@ func load_scene(scene_path:String, sub_scene_data:Dictionary = {})->void:
 	_sub_scene_data = sub_scene_data
 	_scene_path = scene_path
 	_load_screen = _load_screen_script.instantiate()
+	var last_scene_was_combat = MainRootNode.Instance.current_scene is CombatRootControl
+	
+	var next_scene_is_combat = scene_path.ends_with("combat_scene.tscn")
 	if scene_path.ends_with("combat_scene.tscn"):
 		_load_screen.load_scale = 50
-	if MainRootNode.Instance.current_scene is CombatRootControl:
-		_last_scene_was_combat = true
+		
+	if last_scene_was_combat:
 		MainRootNode.Instance.current_scene.camera.canvas_layer.add_child(_load_screen)
 	else:
-		_last_scene_was_combat = false
 		get_tree().get_root().add_child(_load_screen)
 	
 	self.progress_changed.connect(_load_screen._update_progress)
@@ -43,6 +45,14 @@ func load_scene(scene_path:String, sub_scene_data:Dictionary = {})->void:
 
 	await Signal(_load_screen, "loading_screen_has_full_coverage")
 	
+	# Fake duplicateing screen
+	# Need old CombatScene gone before new one loads
+	if last_scene_was_combat:
+		MainRootNode.Instance.current_scene.camera.canvas_layer.remove_child(_load_screen)
+		get_tree().get_root().add_child(_load_screen)
+		MainRootNode.Instance.current_scene.queue_free()
+		MainRootNode.Instance.current_scene.hide()
+		
 	start_load()
 
 func start_load():
@@ -94,11 +104,11 @@ func handle_loaded_scene():
 		if _sub_scene_data.has("DialogScript"):
 			new_node.load_dialog(_sub_scene_data['DialogScript'])
 	
-	if _last_scene_was_combat:
-		var parent = _load_screen.get_parent()
-		parent.remove_child(_load_screen)
-		get_tree().get_root().add_child(_load_screen)
-		_last_scene_was_combat = false
+	#if _last_scene_was_combat:
+		#var parent = _load_screen.get_parent()
+		#parent.remove_child(_load_screen)
+		#get_tree().get_root().add_child(_load_screen)
+		#_last_scene_was_combat = false
 	
 	_loading_done = true
 	MainRootNode.Instance.set_current_scene(new_node)

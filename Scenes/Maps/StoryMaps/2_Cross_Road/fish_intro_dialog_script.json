@@ -8,6 +8,31 @@
 		"EnsurePoses": {
 		},
 		"Blocks":[
+			
+            {
+                "BlockType": "MoveActor",
+                "WaitToFinish": false,
+                "TargetActorId": "Player1",
+                "PathMarkerName": "P1",
+                "FollowActor": true,
+                "SpeedScale": 1
+            },
+            {
+                "BlockType": "MoveActor",
+                "WaitToFinish": false,
+                "TargetActorId": "Player2",
+                "PathMarkerName": "P2",
+                "FollowActor": true,
+                "SpeedScale": 1
+            },
+            {
+                "BlockType": "MoveActor",
+                "WaitToFinish": false,
+                "TargetActorId": "MysteriousFigure",
+                "PathMarkerName": "M1",
+                "FollowActor": false,
+                "SpeedScale": 1
+            },
 			{
 				"BlockType": "SpeechBox",
 				"WaitToFinish": true,
@@ -412,9 +437,18 @@
 					},
 					{
 						"EntryType":"WaitToRead"
-					},
+					}
 				]
             },
+			{
+				"BlockType":"SetFlag",
+				"FlagName":"CampShopDisabled",
+				"Value": false
+
+			},
+			{
+				"BlockType": "ToCamp"
+			}
 		]
 	}
 }

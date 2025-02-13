@@ -42,7 +42,9 @@ func _on_lsit_selected(index:int):
 		child.queue_free()
 	if index == 0:
 		for actor_id in ActorLibrary.Instance._loaded_objects.keys():
-			add_label(actor_id)
+			var actor = ActorLibrary.get_actor(actor_id)
+			var line = actor_id + ":" + str(actor.FactionIndex)
+			add_label(line)
 	if index == 1:
 		for item_id in ItemLibrary.Instance._loaded_objects.keys():
 			add_label(item_id)

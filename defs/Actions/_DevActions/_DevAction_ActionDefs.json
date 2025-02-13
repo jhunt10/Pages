@@ -296,4 +296,39 @@
         "TargetParams": {},
         "UseWeaponIcons": true
     },
+    {
+        "ActionKey": "Dev_Win",
+        "UseDynamicIcons": true,
+        "CostData": {},
+        "DamageDatas": {
+            "DamageData1": {
+                "AtkPower": 100,
+                "AtkStat": "MagAttack",
+                "FixedBaseDamage": 1000,
+                "DamageEffect": "SmallLightning_DamageEffect",
+                "DamageType": "Electric",
+                "DamageVarient": 0,
+                "DefenseType": null
+            }
+        },
+        "Details": {
+            "Description": "Win",
+            "DisplayName": "Win",
+            "LargeIcon": "DevWinIcon.png",
+            "SmallIcon": "DevWinIcon.png",
+            "SnippetDesc": "Win",
+            "Tags": []
+        },
+        "MissileDatas": {},
+        "Preview": {},
+        "SubActions": {
+            "0": [
+                {
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/DevSubActions/SubAct_DEV_Win.gd"
+                }
+            ]
+        },
+        "TargetParams": {
+        }
+    },
 ]

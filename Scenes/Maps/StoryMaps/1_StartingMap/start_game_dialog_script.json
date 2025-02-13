@@ -1,6 +1,6 @@
 {
 	"_MetaData_": {
-		"StartPartKey": "OfferTutorial",
+		"StartPartKey": "Prolog_Soldier",
 		"Inital_BlackOutState":"Black"
 	},
 	"Prolog_Soldier":{
@@ -900,6 +900,9 @@
 			"Player1":"P1",
 			"MysteriousFigure":"MF5"
 		},
+		"OnSkip":{
+			"CanSkip":false
+		},
 		"Blocks":[
 			{
 				"BlockType": "SpeechBox",
@@ -1099,7 +1102,6 @@
 			"Player1":"P1",
 			"MysteriousFigure":"MF5"
 		},
-		"Inital_BlackOutState":"Clear",
 		"Blocks":[
 			{
 				"BlockType": "SpeechBox",
@@ -1267,6 +1269,9 @@
 			"_Camera":"P1",
 			"Player1":"P1",
 			"MysteriousFigure":"MF_II_1"
+		},
+		"OnSkip":{
+			"CanSkip":false
 		},
 		"Inital_BlackOutState":"Clear",
 		"Blocks":[
@@ -1501,10 +1506,7 @@
 						"EntryType":"Clear"
 					}
 				]
-			},
-            {
-                "BlockType":"StartCombat"
-            }
+			}
 		]
 	},
 	"StartTutorial": {
@@ -1867,6 +1869,16 @@
 			"_Camera":"P1",
 			"Player1":"P1",
 			"MysteriousFigure":"MF_I_5"
+		},
+		"OnSkip":{
+			"Blocks":
+			[
+				{
+					"BlockType":"CustomBlock",
+					"ScriptPath": "res://Scenes/Dialog/CustomDialogBlocks/CampTutorialBlocks.gd",
+					"CloseMenu": "Equipment"
+				}
+			]
 		},
 		"Blocks":[
             {
@@ -2735,6 +2747,13 @@
 			"_Camera":"P1",
 			"Player1":"P1",
 			"MysteriousFigure":"MF_I_5"
+		},
+		"OnSkip":{
+			"Blocks":[
+				{
+					"BlockType":"StartCombat"
+				}
+			]
 		},
 		"Blocks":[
 			{
@@ -4238,6 +4257,17 @@
 			"MysteriousFigure":"MF5",
 			"TutorShroom_1": "_DEAD_"
 		},
+		"OnSkip":{
+			"Blocks":[
+				{
+					"BlockType":"CustomBlock",
+					"ScriptPath": "res://Scenes/Dialog/CustomDialogBlocks/AlterPagesDialogBlock.gd",
+					"SwapPages":{
+						"BasicWeaponAttack": "ThrowStone_PageItem"
+					}
+				}
+			]
+		},
 		"Blocks":[
 			{
 				"BlockType":"SetFlag",
@@ -4313,7 +4343,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "A @Color:Red@Missiles@Clear@ is any projectile that is created by a @Color:Blue@Page@Clear@ . ",
+						"Text": "A @Color:Red@Missiles@Clear@ is any projectile that is created by a @Color:Blue@Page@Clear@. ",
 						"NewLine": false
 					},
 					{
@@ -4322,7 +4352,7 @@
 					{
 						"EntryType": "Text",
 						"Text": "This includes @Color:Red@Arrows@Clear@, @Color:Red@Fireballs@Clear@, @Color:Red@Rocks@Clear@, stuff like that.",
-						"NewLine": false
+						"NewLine": true
 					},
 					{
 						"EntryType":"WaitToRead"
@@ -4531,7 +4561,7 @@
 		"Inital_BlackOutState": "Clear",
 		"EnsurePoses": {
 			"_Camera":"P7",
-			"Player1":"P7",
+			"Player1":"P6",
 			"MysteriousFigure":"MF5",
 			"TutorShroom_1": "_DEAD_"
 		},
@@ -4565,14 +4595,97 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "Great! Now we'll start the @Color:Red@Round@Clear@ and when the @Color:Blue@Targeting I@Clear@ comes up, just select the @Color:Red@Spot@Clear@ with the @Color:Red@Mushroom@Clear@ in it.",
+						"Text": "Great! ",
 						"NewLine": false
+					},
+					{
+						"EntryType":"WaitToRead"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "You've got the @Color:Red@Mushroom@Clear@ in your sights.",
+						"NewLine": false
+					},
+					{
+						"EntryType":"WaitToRead"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "But @Color:Blue@Auto-Target@Clear@ doesn't work when aiming for @Color:Blue@Spots@Clear@, ",
+						"NewLine": true
+					},
+					{
+						"EntryType":"WaitToRead"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "so you'll have to do this one manually.",
+						"NewLine": true
+					},
+					{
+						"EntryType":"WaitToRead"
 					}
 				]
 			},
 			{
 				"BlockType": "SpeechBox",
 				"TopBox": false,
+				"WaitToFinish": true,
+				"WaitForNextButton": false,
+				"Hide": true,
+				"Entries": [
+					{
+						"EntryType": "Clear"
+					}
+				]
+			},
+			{
+				"BlockType": "SpeechBox",
+				"TopBox": true,
+				"WaitToFinish": true,
+				"WaitForNextButton": false,
+				"Hide": false,
+				"Entries": [
+					{
+						"EntryType": "Clear"
+					},
+					{
+						"EntryType": "Speaker",
+						"SpeakerName": "MtFr",
+						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Happy.png"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "@Color:Blue@Start@Clear@ the @Color:Red@Round@Clear@ and when the @Color:Blue@Targeting UI@Clear@ comes up, just select the @Color:Red@Spot@Clear@ with the @Color:Red@Mushroom@Clear@ in it.",
+						"NewLine": true
+					},
+					{
+						"EntryType":"WaitToRead"
+					}
+				]
+			},
+			{
+				"BlockType": "PopUp",
+				"PopUpType": "Highlight",
+				"WaitToFinish": true,
+				"Create": "PlayPopUp",
+				"TargetElement": "MoveableCamera2D/CanvasLayer/CombatUiControl/QueInputControl/VBoxContainer/QueInputBackPatchContainer/Control/TopStatButtonControl/TextureRect",
+				"PopupControlSript": "res://Scenes/Dialog/PopUps/OutlinePopUp/outline_pop_up_control.tscn",
+				"DarkenScreen": true,
+                "WaitToBeClicked": true,
+				"Padding":[0,0,0,0],
+                "LineType": "Dotted",
+                "ShowClick": true
+			},
+			{
+				"BlockType": "PopUp",
+				"PopUpType": "Highlight",
+				"WaitToFinish": true,
+				"Delete": "PlayPopUp"
+			},
+			{
+				"BlockType": "SpeechBox",
+				"TopBox": true,
 				"WaitToFinish": false,
 				"WaitForNextButton": false,
 				"Hide": true,
@@ -5067,8 +5180,7 @@
 				"BlockType": "PopUp",
 				"PopUpType": "Highlight",
 				"WaitToFinish": true,
-				"Delete": "QueInputPopUp",
-				"Create": "QueDisplayPopup",
+				"Create": "QueCollectionPopUp",
 				"TargetElement": "MoveableCamera2D/CanvasLayer/CombatUiControl/QueCollectionDisplayControl",
 				"PopupControlSript": "res://Scenes/Dialog/PopUps/OutlinePopUp/outline_pop_up_control.tscn",
 				"DarkenScreen": true,
@@ -5160,7 +5272,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "@Color:Red@Actors@Clear@ can have a different number of @Color:Red@Actions@Clear@ per @Color:Red@Turn@Clear@. I think I've got a @Color:Red@Flash@Clear@- ",
+						"Text": "@Color:Red@Actors@Clear@ can have a different number of @Color:Red@Actions@Clear@ per @Color:Red@Turn@Clear@. ",
 						"NewLine": false
 					},
 					{
@@ -5294,7 +5406,7 @@
 				"BlockType": "PopUp",
 				"PopUpType": "Highlight",
 				"WaitToFinish": false,
-				"Delete": "PopUp1"
+				"Delete": "QueCollectionPopUp"
 			},
 			{
 				"BlockType": "SpeechBox",
@@ -5599,7 +5711,11 @@
 			"Squirrel_Wiz1": "SA1",
 			"Squirrel_Wiz2": "SA2"
 		},
-		"Blocks":[]
+		"Blocks":[
+            {
+                "BlockType":"StartCombat"
+            }
+		]
 	},
 	"Condition_PlayingCombat":
 	{
@@ -5736,7 +5852,7 @@
 			},
 			{
 				"BlockType": "ToCamp",
-				"WithDialogScript": "res://Scenes/Maps/StoryMaps/1_StartingMap/camp_tutotial_dialog_script.json"
+				"ForceWin": true
 			}
 		]
 	}

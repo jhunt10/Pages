@@ -33,11 +33,12 @@ static var ui_state_controller:UiStateController = UiStateController.new()
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	if !Instance: Instance = self
-	elif Instance != self:
-		printerr(("Multiple UiStateController created."))
-		self.queue_free()
-		return
+	#if !Instance: Instance = self
+	#elif Instance != self:
+		#printerr(("Multiple UiStateController created."))
+		#self.queue_free()
+		#return
+	Instance = self
 	menu_button.pressed.connect(_on_menu_pressed)
 	#test_button.pressed.connect(do_test)
 	target_input_display.visible = false

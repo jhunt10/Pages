@@ -6,6 +6,11 @@ enum PopUpTypes {LocationTime, SpeechBubble, Highlight, TutorialCard, ClickDrag,
 @export var parent_dialog_controller:DialogController
 var _popups:Dictionary = {}
 
+func clear_popups():
+	for popup in _popups.values():
+		popup.queue_free()
+	_popups.clear()
+
 ## Returns true if block should be waitied on
 func handle_pop_up(block_data:Dictionary)->bool:
 	var delete_id  = block_data.get("Delete", null)

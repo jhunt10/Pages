@@ -15,7 +15,7 @@ enum BlockTypes {
 	ClearQue, 
 	SpawnActor,
 	TextInput,
-	ToCamp,
+	NextStory,
 	CustomBlock,
 	AnimateNode,
 	StartCombat
@@ -243,10 +243,31 @@ func _start_part(part_key:String):
 
 
 func _on_skip():
+	# Can't skip watchers
+	if _current_part_data.has("ConditionWatcherScript"):
+		return
+	if _current_part_data.has("OnSkip"):
+		var on_skip_data = _current_part_data.get("OnSkip")
+		if not on_skip_data.get("CanSkip", true):
+			return
+		for block in on_skip_data.get("Blocks", {}):
+			_handle_block(block)
+	if CombatRootControl.Instance:
+		for actor_node:ActorNode in CombatRootControl.Instance.MapController.actor_nodes.values():
+			actor_node.force_finish_movement()
 	var next_part_key = _get_next_part_key()
 	print("Skipping to part: %s" % [next_part_key])
+	top_speech_box.clear_entries()
+	top_speech_box.hide()
+	bot_speech_box.clear_entries()
+	bot_speech_box.hide()
+	dialog_popup_controller.clear_popups()
+	_block_states.clear()
 	if next_part_key:
 		_start_part(next_part_key)
+	else:
+		_state = STATES.Finished
+		self.hide()
 	
 
 ## Returns true if block should be waitied on
@@ -503,7 +524,7 @@ func _handle_block(block_data:Dictionary)->bool:
 			var actor_id = spawn_node.spawn_actor_id
 			var actor_pos = spawn_node.get_map_pos()
 			var new_actor = ActorLibrary.get_or_create_actor(actor_key, actor_id)
-			CombatRootControl.Instance.add_actor(new_actor, new_actor.FactionIndex, actor_pos)
+			CombatRootControl.Instance.add_actor(new_actor, actor_pos)
 	
 	
 	
@@ -525,18 +546,16 @@ func _handle_block(block_data:Dictionary)->bool:
 		return true
 	
 	#----------------------------------
-	#          To Camp
-	# Options:
-	# 	"TitleMessage" String
-	# 	"PlaceHolder" String
+	#          Next Story
+	# Description: Progress to next story stage.
+	# 	Will show Victory screen if in Combat
 	#----------------------------------
-	if block_type == BlockTypes.ToCamp:
-		var camp_dialog = block_data.get("WithDialogScript", null)
-		if camp_dialog:
-			StoryState.set_story_flag("NextCampDialog", camp_dialog)
-		if CombatRootControl.Instance:
+	if block_type == BlockTypes.NextStory:
+		if CombatRootControl.Instance and not CombatRootControl.Instance.combat_finished:
 			CombatRootControl.Instance.trigger_end_condition(true)
-			_state = STATES.Finished
+		else:
+			MainRootNode.Instance.open_camp_menu()
+		_state = STATES.Finished
 		return false
 	
 	#----------------------------------
@@ -544,13 +563,15 @@ func _handle_block(block_data:Dictionary)->bool:
 	# Options:
 	#----------------------------------
 	if block_type == BlockTypes.StartCombat:
-		if CombatRootControl.Instance:
+		if CombatRootControl.Instance and not CombatRootControl.Instance.combat_started:
 			if not CombatRootControl.Instance.start_combat_screen.screen_blacked_out.is_connected(_on_combat_start_blackout):
 				CombatRootControl.Instance.start_combat_screen.screen_blacked_out.connect(_on_combat_start_blackout)
 			CombatRootControl.Instance.start_combat_animation()
 			_block_states["StartCombat"] = BlockStates.Playing
 			return true
 		return false
+	
+	# Unknown Block
 	return false
 
 func load_dialog_script(file_path, wait_for_load_screen:bool=true):
@@ -695,7 +716,7 @@ func force_positions(force_pos_data:Dictionary):
 			if not actor:
 				actor = ActorLibrary.get_actor(actor_id)
 				if actor_id :
-					CombatRootControl.Instance.add_actor(actor, actor.FactionIndex, path_marker.get_last_pos())
+					CombatRootControl.Instance.add_actor(actor, path_marker.get_last_pos())
 			else:
 				game_state.set_actor_pos(actor, path_marker.get_last_pos())
 		#var actor_node = CombatRootControl.get_actor_node(actor_id)

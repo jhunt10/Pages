@@ -21,9 +21,15 @@ static var stages:Array = [
 			"DialogScript": "res://Scenes/Maps/StoryMaps/1_StartingMap/camp_tutotial_dialog_script.json"
 		},
 		{
-			"StageKey": "CrossRoadsCombat",
+			"StageKey": "CrossRoads_Combat",
 			"Location": "The Crossroad",
 			"MapScene": "res://Scenes/Maps/StoryMaps/2_Cross_Road/crossroad_dialog_map.tscn",
 			"DialogScript":"res://Scenes/Maps/StoryMaps/2_Cross_Road/crossroad_dialog_script.json"
+		},
+		{
+			"StageKey": "CrossRoads_PostCombat",
+			"Location": "The Crossroad",
+			"MapScene": "res://Scenes/Maps/StoryMaps/2_Cross_Road/crossroad_after_combat_map.tscn",
+			"DialogScript":"res://Scenes/Maps/StoryMaps/2_Cross_Road/fish_intro_dialog_script.json"
 		}
 	]

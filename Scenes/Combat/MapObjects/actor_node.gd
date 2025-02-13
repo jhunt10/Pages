@@ -250,6 +250,17 @@ var _movement_que:Array
 var _moving_in_loop:bool
 var _is_moving_on_script:bool
 
+func force_finish_movement():
+	if not _is_moving_on_script or _movement_que.size() == 0:
+		return
+	var last_pos = _movement_que[-1].get("Pos", null)
+	_movement_que.clear()
+	_moving_in_loop = false
+	_is_moving_on_script = false
+	is_moving = false
+	if last_pos:
+		set_map_pos(last_pos, false)
+
 func que_scripted_movement(path_pos_data:Array):
 	_moving_in_loop = false
 	if path_pos_data.size() == 0:

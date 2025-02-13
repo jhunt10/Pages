@@ -78,5 +78,21 @@
         },
         "ItemKey": "Dev_SimWeaponAttack_PageItem",
         "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd"
+    },
+    {
+        "ActionKey": "Dev_Win",
+        "CanStack": true,
+        "Details": {
+            "Tags": [
+                "Tactic"
+            ]
+        },
+        "ItemDetails":
+        {
+            "Rarity": "Unique",
+            "Value": -1
+        },
+        "ItemKey": "Dev_Win_PageItem",
+        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd"
     }
 ]
