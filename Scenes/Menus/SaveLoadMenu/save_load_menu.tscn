@@ -802,6 +802,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="ComfirmBox" type="NinePatchRect" parent="ScaleControl" node_paths=PackedStringArray("message_label", "confirm_button", "cancel_button")]
+visible = false
 z_index = 1
 custom_minimum_size = Vector2(300, 150)
 layout_mode = 1

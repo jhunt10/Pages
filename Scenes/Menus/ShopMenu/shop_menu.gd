@@ -2,7 +2,7 @@ class_name ShopMenuController
 extends Control
 
 enum States {Greeting, Buy, Sell}
-enum SpeakerSubjects {Greating, Buying, Selling, ConfirmBuy, ConfirmSell}
+enum SpeakerSubjects {Greeting, Buying, Selling, ConfirmBuy, ConfirmSell}
 
 @export var dialog_box:DialogBox
 @export var item_menu_controller:ShopItemMenuController
@@ -15,6 +15,7 @@ enum SpeakerSubjects {Greating, Buying, Selling, ConfirmBuy, ConfirmSell}
 
 var _current_details_card
 var _state:States
+var _said_greeting = false
 
 ## Items created for shop keyed by ItemKey
 var _loaded_items_by_key:Dictionary
@@ -29,6 +30,9 @@ func _ready() -> void:
 	close_button.pressed.connect(close_menu)
 	sell_button.pressed.connect(load_items_to_sell)
 	buy_button.pressed.connect(load_items_to_buy)
+	LoadManager._load_screen.loading_screen_fully_gone.connect(_on_load_screen_gone)
+
+func _on_load_screen_gone():
 	load_greeting()
 
 func _process(delta: float) -> void:
@@ -42,46 +46,12 @@ func load_greeting():
 	item_menu_controller.hide()
 	if _current_details_card:
 		_current_details_card.start_hide()
-	dialog_box.add_entries(
-		[
-			{
-				"EntryType": "Clear",
-				"ClearSpeaker": false
-			},
-			{
-				"EntryType": "Speaker",
-				"SpeakerName": "FMrc",
-				"SpeakerPort": "res://defs/Actors/NPCs/FishMerch/Portraits/FishMerch_Sleeping.png"
-			},
-			{
-				"EntryType": "Text",
-				"Text": "Buying or selling?!",
-				"NewLine": true
-			},
-		]
-	)
+	_load_text(SpeakerSubjects.Greeting)
 	
 
 func load_items_to_buy():
 	_state = States.Buy
-	dialog_box.add_entries(
-		[
-			{
-				"EntryType": "Clear",
-				"ClearSpeaker": false
-			},
-			{
-				"EntryType": "Speaker",
-				"SpeakerName": "FMrc",
-				"SpeakerPort": "res://defs/Actors/NPCs/FishMerch/Portraits/FishMerch_Angry.png"
-			},
-			{
-				"EntryType": "Text",
-				"Text": "I've got some great stuff instock.",
-				"NewLine": true
-			},
-		]
-	)
+	_load_text(SpeakerSubjects.Buying)
 	var shop_data = get_shop_data()
 	for cat in shop_data.keys():
 		if not _item_ids_by_catagories.has(cat):
@@ -100,24 +70,7 @@ func load_items_to_buy():
 
 func load_items_to_sell():
 	_state = States.Sell
-	dialog_box.add_entries(
-		[
-			{
-				"EntryType": "Clear",
-				"ClearSpeaker": false
-			},
-			{
-				"EntryType": "Speaker",
-				"SpeakerName": "FMrc",
-				"SpeakerPort": "res://defs/Actors/NPCs/FishMerch/Portraits/FishMerch_Neutral.png"
-			},
-			{
-				"EntryType": "Text",
-				"Text": "Let me see what I can take off your hands.",
-				"NewLine": true
-			},
-		]
-	)
+	_load_text(SpeakerSubjects.Selling)
 	var catagories = {}
 	var selling_items_data = {}
 	for item:BaseItem in PlayerInventory.list_all_held_items():
@@ -141,7 +94,7 @@ func get_shop_data()->Dictionary:
 	return {
 		"Ammo": ["Phy_Ammo", "Mag_Ammo", "Gen_Ammo"],
 		"Potions": ["HealthPotionS", "HealthPotionM", "HealthPotionL"],
-		"Pages": ["MoveForward_PageItem","TurnLeft_PageItem","TurnRight_PageItem", "Wait_PageItem", "MoveLeft_PageItem", "MoveRight_PageItem", "TurnAround_PageItem", "Dash_PageItem"],
+		"Pages": ["UsePotionSelf_PageItem", "ReloadPage_PageItem","MoveForward_PageItem","TurnLeft_PageItem","TurnRight_PageItem", "Wait_PageItem", "MoveLeft_PageItem", "MoveRight_PageItem", "TurnAround_PageItem", "Dash_PageItem"],
 	}
 
 func _on_catagory_selected(sub_list:ShopSubItemList):
@@ -185,45 +138,119 @@ func _show_confirm_popup(item_key:String, count:int, cost:int):
 	if _state == States.Buy:
 		var item = _loaded_items_by_key[item_key]
 		confirm_popup.set_item(false, item, count)
-		dialog_box.add_entries(
-			[
-				{
-					"EntryType": "Clear",
-					"ClearSpeaker": false
-				},
-				{
-					"EntryType": "Speaker",
-					"SpeakerName": "FMrc",
-					"SpeakerPort": "res://defs/Actors/NPCs/FishMerch/Portraits/FishMerch_Sleeping.png"
-				},
-				{
-					"EntryType": "Text",
-					"Text": "This what you want?",
-					"NewLine": true
-				},
-			]
-		)
+		_load_text(SpeakerSubjects.ConfirmBuy, item, count)
 	else:
 		var item = PlayerInventory.get_item_by_key(item_key)
 		confirm_popup.set_item(true, item, count)
-		dialog_box.add_entries(
-			[
+		_load_text(SpeakerSubjects.ConfirmSell, item, count)
+	if _current_details_card:
+		_current_details_card.start_hide()
+
+static var _said_lines:Array=[]
+func _load_text(subject:SpeakerSubjects, item:BaseItem=null, count:int=0):
+	if subject == SpeakerSubjects.Greeting:
+		if _said_greeting:
+			_build_dialog_entries([
+				{"SpeakerPort":"Happy"},
+				"Need anything else? "
+			])
+			return
+		_said_greeting = true
+		if not StoryState.get_story_flag("BeenToShop"):
+			StoryState.set_story_flag("BeenToShop", true)
+			_build_dialog_entries([
+				{"SpeakerPort":"VeryHappy"},
+				"Welcome to the @Color:Red@Shop@Clear@!",
+				{"Delay":0.8},
+				{"SpeakerPort":"Happy"},
+				"It ain't what it used to be, ",
+				"but we're still in business. ",
+			])
+		else:
+			_build_dialog_entries([
+				{"SpeakerPort":"VeryHappy"},
+				"Welcome back!",
+				{"Delay":0.8},
+				{"SpeakerPort":"Happy"},
+				"You lookin to @Color:Red@Buy@Clear@ or @Color:Red@Sell@Clear@? "
+			])
+	elif subject == SpeakerSubjects.Buying:
+		if not _said_lines.has("BanditsTook"):
+			_said_lines.append("BanditsTook")
+			_build_dialog_entries([
+				{"SpeakerPort":"Sad"},
+				"@Color:Red@Bandits@Clear@ took most of it.",
+				{"Delay":0.8},
+				{"SpeakerPort":"Happy"},
+				"But I still got some @Color:Red@Potions@Clear@ and @Color:Red@Ammo@Clear@ in stock. "
+			])
+			return
+		else:
+			_build_dialog_entries([
+				{"SpeakerPort":"Happy"},
+				"You lookin for @Color:Red@Potions@Clear@ or @Color:Red@Ammo@Clear@?"
+			])
+			return
+	elif subject == SpeakerSubjects.Selling:
+			_build_dialog_entries([
+				{"SpeakerPort":"Happy"},
+				"Got some @Color:Red@Loot@Clear@ to unload?",
+			])
+			return
+	elif subject == SpeakerSubjects.ConfirmBuy:
+		var item_name = "of these"
+		if item:
+			item_name = "@Color:Red@"+item.details.display_name+"@Clear@"
+		_build_dialog_entries([
+			{"SpeakerPort":"Happy"},
+			"So you want " + str(count) + " " + item_name + "?",
+		])
+	elif subject == SpeakerSubjects.ConfirmBuy:
+		var item_name = "of these"
+		if item:
+			item_name = "@Color:Red@"+item.details.display_name+"@Clear@"
+		_build_dialog_entries([
+			{"SpeakerPort":"Happy"},
+			"So you wanna sell " + str(count) + " " + item_name + "?",
+		])
+		
+
+# Translates an array of simple strings and dicts to dialog box entries
+func _build_dialog_entries(arr:Array):
+	var new_entries = [
+		{
+			"EntryType": "Clear",
+			"ClearSpeaker": false
+		}
+	]
+	for line in arr:
+		if line is Dictionary:
+			if line.has("Delay"):
+				new_entries.append(
 				{
-					"EntryType": "Clear",
-					"ClearSpeaker": false
-				},
+					"EntryType": "Delay",
+					"Delay": line.get("Delay",0)
+				})
+			elif line.has("SpeakerPort"):
+				var emotion = line['SpeakerPort']
+				new_entries.append(
 				{
 					"EntryType": "Speaker",
 					"SpeakerName": "FMrc",
-					"SpeakerPort": "res://defs/Actors/NPCs/FishMerch/Portraits/FishMerch_Sleeping.png"
-				},
+					"SpeakerPort": "res://defs/Actors/NPCs/FishMerch/Portraits/FishMerch_" + emotion + ".png"
+				})
+		elif line is String:
+			if line == "WaitToRead":
+				new_entries.append(
+				{
+					"EntryType": "WaitToRead"
+				})
+			else:
+				new_entries.append(
 				{
 					"EntryType": "Text",
-					"Text": "I guess I could buy it.",
+					"Text": line,
 					"NewLine": true
-				},
-			]
-		)
-	if _current_details_card:
-		_current_details_card.start_hide()
-	
+				})
+	dialog_box.add_entries(new_entries)
+			

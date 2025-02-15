@@ -50,14 +50,18 @@ static func write_save_data(save_name:String):
 	StoryState.save_id = save_id
 
 static func _build_save_meta_data(save_name:String):
-	var player_actor:BaseActor = StoryState.get_player_actor()
+	var party = {}
+	for i in range(4):
+		var player = StoryState.get_player_actor(i)
+		if player:
+			party[player.Id] = [player.details.display_name, player.stats.level]
 	return {
 		"StoryId": StoryState.story_id,
 		"SaveName": save_name,
 		"SaveDate": Time.get_datetime_string_from_system(false, true),
 		"RunTime": Time.get_time_string_from_unix_time(StoryState.get_runtime_untix_time()),
 		"Location": StoryState.get_location(),
-		"Party":{player_actor.details.display_name: player_actor.stats.level}
+		"Party":party
 	}
 
 static func load_save_data(save_id:String, go_to_camp:bool=true):

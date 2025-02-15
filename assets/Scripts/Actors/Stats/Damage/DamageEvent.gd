@@ -71,7 +71,8 @@ func _calc_damage_for_event():
 	var defender = defender
 	
 	# Calc raw damage
-	applied_power = (float(attack_power)/100.0) + randf_range(-damage_variance, damage_variance)
+	var float_power = float(attack_power)/100.0
+	applied_power = (float_power + (float_power * randf_range(-damage_variance, damage_variance)))
 	raw_damage = base_damage * applied_power
 	
 	if LOGGING: print("DamageEvent: AtkPower: %s | Var: %s | Applied: %s | Raw Damage: %s" % [attack_power, damage_variance, applied_power, raw_damage])

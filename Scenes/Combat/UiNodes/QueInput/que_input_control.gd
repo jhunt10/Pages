@@ -47,6 +47,9 @@ var _page_buttons:Dictionary = {}
 var _resize:bool = true
 var _target_display_key
 
+# Don't automatically show start button. Mainly for tutorial
+var supress_start:bool = false
+
 # When selecting pages for something other than queing
 var selecetion_mode:bool
 
@@ -80,6 +83,8 @@ func hide_start_button():
 		side_start_button.state = QueInput_StartButton.States.Shrinking
 
 func show_start_button():
+	if supress_start:
+		return
 	var all_ready = true
 	for player:BaseActor in CombatRootControl.Instance.list_player_actors():
 		if not player.Que.is_ready():
@@ -109,8 +114,9 @@ func _process(delta: float) -> void:
 	nodes_container.position.x = (self.get_parent().size.x / 2) - (back_patch.size.x / 2)
 	nodes_container.size.x = back_patch.size.x
 	if state == States.Growing:
+		var y_size = back_patch.size.y + que_display_patch.size.y + 16
 		var move = delta * slide_speed
-		if nodes_container.position.y - move < 0 - nodes_container.size.y:
+		if nodes_container.position.y - move < 0 - y_size:
 			state = States.Showing
 		else:
 			nodes_container.position.y -= move

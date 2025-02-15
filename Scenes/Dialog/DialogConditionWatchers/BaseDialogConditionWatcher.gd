@@ -17,14 +17,14 @@ func update(delta:float):
 		var game_state = null
 		if CombatRootControl.Instance:
 			game_state = CombatRootControl.Instance.GameState
-		if _is_condition(_data, game_state, delta):
+		if _check_condition(_data, game_state, delta):
 			_is_finished = true
 
 func is_finished()->bool:
 	return _is_finished
 
-func _is_condition(data:Dictionary, game_state:GameStateData, delta:float)->bool:
-	return true
+func _check_condition(data:Dictionary, game_state:GameStateData, delta:float)->bool:
+	return _is_finished
 
 func get_next_part_key()->String:
 	return ''

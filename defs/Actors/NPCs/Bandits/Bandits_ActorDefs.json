@@ -22,6 +22,9 @@
 		"PagesPerRound": 0,
 		"PPR": 3
 	},
+	"ActorDetails":{
+		"MoneyValue": 100
+	},
 	"IsPlayer": false,
 	"SpriteFrameWH": [12,4],
 	"SpriteOffset": [0,-16],
@@ -40,6 +43,9 @@
 			"TurnRight",
 			"BasicWeaponAttack"
 		]
+	},
+	"DropItemsSet":{
+		"BigMalma":1
 	}
 },
     {
@@ -52,6 +58,9 @@
 			"Tags": ["Bandit"],
 			"LargeIcon":"GuyPortrait.png",
 			"SmallIcon":"GuyPortrait.png"
+		},
+		"ActorDetails":{
+			"MoneyValue": 20
 		},
 		"Stats":{
 			"BarMax:Health":50,
@@ -84,7 +93,14 @@
 				"TurnRight",
 				"BasicWeaponAttack"
 			]
-        }
+        },
+		"DropItemsSet":{
+			"":3,
+			"BanditAxe":2,
+			"BanditHelmet":1,
+			"BanditArmor":1,
+			"BanditPants":1
+		}
 	},
 	
     {
@@ -97,6 +113,9 @@
 			"Tags": ["Bandit"],
 			"LargeIcon":"GuyPortrait.png",
 			"SmallIcon":"GuyPortrait.png"
+		},
+		"ActorDetails":{
+			"MoneyValue": 20
 		},
 		"Stats":{
 			"BarMax:Health":50,
@@ -129,6 +148,12 @@
 				"TurnRight",
 				"BasicWeaponAttack"
 			]
-        }
+        },
+		"DropItemsSet":{
+			"":3,
+			"BanditBycocket":1,
+			"BanditVest":1,
+			"BanditShorts":1
+		}
 	}
 ]

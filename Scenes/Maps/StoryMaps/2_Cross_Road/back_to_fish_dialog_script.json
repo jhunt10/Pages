@@ -1,0 +1,103 @@
+{
+	"_MetaData_": {
+		"StartPartKey": "NoShopMessage"
+	},
+	"NoShopMessage":{
+		"_NextPartLogic": 
+		{
+			"FlagName": "BeenToShop",
+			"Cases": {
+				"@DEFAULT@": "DecrementIndex",
+				"true": "NoQuestMessage",
+				"false": "DecrementIndex"
+			}
+		},
+		"WaitForNextButton": true,
+		"Inital_BlackOutState": "Clear",
+		"EnsurePoses": {},
+		"Blocks":[
+			{
+				"BlockType": "SpeechBox",
+				"TopBox": false,
+				"WaitToFinish": true,
+				"WaitForNextButton": false,
+				"Hide": false,
+				"Entries": [
+					{
+						"EntryType":"Clear"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "As the @Color:Red@Heroes@Clear@ started to leave @Color:Red@Camp@Clear@,",
+						"NewLine": false
+					},
+					{
+						"EntryType":"WaitToRead"
+					},
+					{
+						"EntryType": "Text",
+						"Text": " they remembered they need to visit the @Color:Red@Fish Merchant@Clear@.",
+						"NewLine": false
+					},
+					{
+						"EntryType":"WaitToRead"
+					}
+				]
+			}
+		]
+	},
+	"DecrementIndex":{
+		"_NextPartKey": "",
+        "DecrementStoryIndex": true,
+		"WaitForNextButton": false,
+		"Inital_BlackOutState": "Clear",
+		"EnsurePoses": {},
+		"Blocks":[
+			{
+				"BlockType": "SpeechBox",
+				"TopBox": false,
+				"WaitToFinish": true,
+				"WaitForNextButton": false,
+				"Hide": true,
+				"Entries": [
+					{
+						"EntryType": "Clear"
+					}
+				]
+			}
+		]
+	},
+	"NoQuestMessage":{
+		"_NextPartKey": "",
+		"WaitForNextButton": true,
+		"Inital_BlackOutState": "Clear",
+		"EnsurePoses": {},
+		"Blocks":[
+			{
+				"BlockType": "SpeechBox",
+				"TopBox": false,
+				"WaitToFinish": true,
+				"WaitForNextButton": false,
+				"Hide": false,
+				"Entries": [
+					{
+						"EntryType": "Text",
+						"Text": "Which they already have,",
+						"NewLine": true
+					},
+					{
+						"EntryType":"WaitToRead"
+					},
+					{
+						"EntryType": "Text",
+						"Text": " but unfortionatly was no more @Color:Red@Quest@Clear@ for now.",
+						"NewLine": false
+					},
+					{
+						"EntryType":"WaitToRead"
+					}
+				]
+			}
+		]
+	},
+}

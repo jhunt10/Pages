@@ -10,19 +10,18 @@ signal loading_screen_fully_gone
 var load_scale = 100
 
 func _update_progress(new_val:float):
-	print("Load Val: %s" % [new_val])
+	#print("Load Val: %s" % [new_val])
 	progress_bar.set_value_no_signal(new_val * load_scale)
 	
 func _start_outro_animation():
 	animation_player.play("outro_animation")
 	await  Signal(animation_player, 'animation_finished')
-	printerr("Test 3")
 	loading_screen_fully_gone.emit()
 	self.queue_free()
 	LoadManager._load_screen = null
 
-func _combad_actor_loaded(count, index):
+func _combat_actor_loaded(count, index):
 	var val = (float(index) / float(count * 2)) * 100
 	progress_bar.set_value_no_signal(val + load_scale)
 	#await get_tree().process_frame
-	print("Actor Loaded: %s / %s = %s" % [index, count, val])
+	#print("Actor Loaded: %s / %s = %s" % [index, count, val])

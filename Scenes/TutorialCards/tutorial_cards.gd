@@ -22,6 +22,7 @@ signal closed
 @export var speed_card:Control
 @export var mass_card:Control
 @export var armor_card:Control
+@export var block_evade_card:Control
 @export var item_card:Control
 @export var item2_card:Control
 @export var ammo_card:Control
@@ -75,6 +76,7 @@ func _ready() -> void:
 		"Turn Order": speed_card,
 		"Crashing": mass_card,
 		"Armor and Damage": armor_card,
+		"Block and Evade": block_evade_card,
 		"Items": item_card,
 		"Items 2": item2_card,
 		"Page Ammo": ammo_card
@@ -88,6 +90,7 @@ func _ready() -> void:
 		"Turn Order",
 		"Crashing",
 		"Armor and Damage",
+		"Block and Evade",
 		"Items",
 		"Items 2",
 		"Page Ammo"

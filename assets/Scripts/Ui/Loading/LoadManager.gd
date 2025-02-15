@@ -124,6 +124,6 @@ var _conbat_load_thread
 var _waiting_for_combat:bool = false
 var _done_loading_combat:bool = false
 func async_load_combat():
-	_combat_node.loading_actor_progressed.connect(_load_screen._combad_actor_loaded)
+	_combat_node.loading_actor_progressed.connect(_load_screen._combat_actor_loaded)
 	_combat_node.load_init_state(_sub_scene_data)
 	_done_loading_combat = true

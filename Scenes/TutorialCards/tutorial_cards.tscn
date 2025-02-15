@@ -1,4 +1,4 @@
-[gd_scene load_steps=63 format=3 uid="uid://wa8bgcuurt5n"]
+[gd_scene load_steps=66 format=3 uid="uid://wa8bgcuurt5n"]
 
 [ext_resource type="Texture2D" uid="uid://cgrlfobidw8xl" path="res://assets/Sprites/UI/BackPatches/PaperPatch_Bigger_276x192_48.png" id="1_dsnfm"]
 [ext_resource type="Script" path="res://Scenes/TutorialCards/tutorial_cards.gd" id="1_imldm"]
@@ -40,9 +40,12 @@
 [ext_resource type="Texture2D" uid="uid://cl627unmyivbd" path="res://assets/Sprites/UI/SymbolIcons/DmgSymbol_Poison.png" id="36_ct4tu"]
 [ext_resource type="Texture2D" uid="uid://do85dvxvlf5wk" path="res://defs/Actors/Squirrels/Squirrcerer_IconSmall.png" id="37_16bex"]
 [ext_resource type="Texture2D" uid="uid://x4trgcetlc06" path="res://notes/TutorialImages/Items/Ammos.png" id="39_rqndq"]
+[ext_resource type="Texture2D" uid="uid://uarxllb74uai" path="res://assets/Sprites/UI/SymbolIcons/EvasionSymbol.png" id="40_iob2n"]
 [ext_resource type="Texture2D" uid="uid://uefsvgmbbuyr" path="res://notes/TutorialImages/Items/Potions.png" id="40_n5iy2"]
+[ext_resource type="Texture2D" uid="uid://cl7v6htwim8aw" path="res://assets/Sprites/UI/SymbolIcons/BlockSymbol.png" id="41_iyus1"]
 [ext_resource type="Texture2D" uid="uid://di5sj5c3horut" path="res://defs/Items/Consumables/TestBomb.png" id="41_kkdq2"]
 [ext_resource type="Texture2D" uid="uid://vwoj75286dbg" path="res://notes/TutorialImages/Items/DrinkPotionPage.png" id="42_3ovgy"]
+[ext_resource type="Texture2D" uid="uid://d0pn1i5o4fqj5" path="res://assets/Sprites/UI/SymbolIcons/AwarenessSymbol.png" id="42_rbk68"]
 [ext_resource type="Texture2D" uid="uid://bmgcqad17mi17" path="res://notes/TutorialImages/Items/ReloadPage.png" id="43_usfrs"]
 [ext_resource type="Texture2D" uid="uid://b0pbmi2yblnrv" path="res://defs/Items/Consumables/Money/Money_SIcon.png" id="44_ds03o"]
 [ext_resource type="Texture2D" uid="uid://cqabsnexmvdw7" path="res://defs/Items/Pages/PageDropItem_Icon.png" id="45_48moo"]
@@ -63,7 +66,7 @@
 [ext_resource type="Texture2D" uid="uid://dsvkalu2jexjd" path="res://notes/TutorialImages/Ammo/DivAmmoDemo.png" id="60_0utij"]
 [ext_resource type="Texture2D" uid="uid://cnbfngclu243n" path="res://defs/Items/Consumables/Ammo/Sprites/Abn_Ammo_LIcon.png" id="61_wf3sy"]
 
-[node name="TutorialCardsControl" type="Control" node_paths=PackedStringArray("top_container", "title_label", "count_label", "close_button", "back_button", "back_button_background", "next_button", "next_button_background", "done_button", "done_button_background", "page_que_card", "movement_card", "targeting_actor_card", "targeting_spot_card", "ppr_card", "speed_card", "mass_card", "armor_card", "item_card", "item2_card", "ammo_card")]
+[node name="TutorialCardsControl" type="Control" node_paths=PackedStringArray("top_container", "title_label", "count_label", "close_button", "back_button", "back_button_background", "next_button", "next_button_background", "done_button", "done_button_background", "page_que_card", "movement_card", "targeting_actor_card", "targeting_spot_card", "ppr_card", "speed_card", "mass_card", "armor_card", "block_evade_card", "item_card", "item2_card", "ammo_card")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -89,6 +92,7 @@ ppr_card = NodePath("CardControl/PPR")
 speed_card = NodePath("CardControl/Speed")
 mass_card = NodePath("CardControl/Mass")
 armor_card = NodePath("CardControl/Armor")
+block_evade_card = NodePath("CardControl/BlockEvade")
 item_card = NodePath("CardControl/Items")
 item2_card = NodePath("CardControl/Items2")
 ammo_card = NodePath("CardControl/Ammo")
@@ -126,7 +130,7 @@ theme_override_colors/font_outline_color = Color(0.470588, 0, 0, 1)
 theme_override_constants/outline_size = 4
 theme_override_fonts/font = ExtResource("6_qh3ul")
 theme_override_font_sizes/font_size = 48
-text = "Items"
+text = "Movement"
 horizontal_alignment = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CardControl/TopContainer/TitleLabel"]
@@ -377,7 +381,45 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
+[node name="MoevDemo_North" type="TextureRect" parent="CardControl/Movement"]
+custom_minimum_size = Vector2(160, 220)
+layout_mode = 2
+offset_left = 515.0
+offset_top = 20.0
+offset_right = 735.0
+offset_bottom = 240.0
+texture = ExtResource("7_tm0tf")
+
+[node name="MoevDemo_East" type="TextureRect" parent="CardControl/Movement"]
+custom_minimum_size = Vector2(220, 220)
+layout_mode = 2
+offset_left = 517.0
+offset_top = 220.0
+offset_right = 737.0
+offset_bottom = 440.0
+mouse_filter = 2
+texture = ExtResource("8_2oidn")
+
+[node name="MoevDemo_South" type="TextureRect" parent="CardControl/Movement"]
+custom_minimum_size = Vector2(220, 220)
+layout_mode = 2
+offset_left = 291.0
+offset_top = 271.0
+offset_right = 511.0
+offset_bottom = 491.0
+texture = ExtResource("9_mx0pi")
+
+[node name="MoevDemo_West" type="TextureRect" parent="CardControl/Movement"]
+custom_minimum_size = Vector2(220, 220)
+layout_mode = 2
+offset_left = 58.0
+offset_top = 220.0
+offset_right = 278.0
+offset_bottom = 440.0
+texture = ExtResource("10_vm6ku")
+
 [node name="GridContainer" type="GridContainer" parent="CardControl/Movement"]
+visible = false
 layout_mode = 0
 offset_left = 51.0
 offset_top = 20.0
@@ -388,39 +430,19 @@ theme_override_constants/h_separation = 20
 theme_override_constants/v_separation = -20
 columns = 3
 
-[node name="MoevDemo_North" type="TextureRect" parent="CardControl/Movement/GridContainer"]
-custom_minimum_size = Vector2(160, 220)
-layout_mode = 2
-texture = ExtResource("7_tm0tf")
-
 [node name="EmptyControl" type="Control" parent="CardControl/Movement/GridContainer"]
 layout_mode = 2
 
 [node name="EmptyControl2" type="Control" parent="CardControl/Movement/GridContainer"]
+custom_minimum_size = Vector2(0, 220)
 layout_mode = 2
 
-[node name="MoevDemo_West" type="TextureRect" parent="CardControl/Movement/GridContainer"]
-custom_minimum_size = Vector2(220, 220)
+[node name="EmptyControl3" type="Control" parent="CardControl/Movement/GridContainer"]
 layout_mode = 2
-texture = ExtResource("10_vm6ku")
 
 [node name="Control" type="Control" parent="CardControl/Movement/GridContainer"]
 custom_minimum_size = Vector2(220, 200)
 layout_mode = 2
-
-[node name="MoevDemo_South" type="TextureRect" parent="CardControl/Movement/GridContainer/Control"]
-custom_minimum_size = Vector2(220, 220)
-layout_mode = 2
-offset_top = 51.0
-offset_right = 220.0
-offset_bottom = 271.0
-texture = ExtResource("9_mx0pi")
-
-[node name="MoevDemo_East" type="TextureRect" parent="CardControl/Movement/GridContainer"]
-custom_minimum_size = Vector2(220, 220)
-layout_mode = 2
-mouse_filter = 2
-texture = ExtResource("8_2oidn")
 
 [node name="MoveDemo_Pages" type="TextureRect" parent="CardControl/Movement"]
 layout_mode = 0
@@ -432,9 +454,9 @@ texture = ExtResource("11_65dks")
 
 [node name="DescriptionLabel2" type="RichTextLabel" parent="CardControl/Movement"]
 layout_mode = 0
-offset_left = 278.0
+offset_left = 91.0
 offset_top = 81.0
-offset_right = 771.0
+offset_right = 584.0
 offset_bottom = 268.0
 theme = ExtResource("5_l4e1i")
 theme_override_colors/default_color = Color(0, 0, 0, 1)
@@ -660,6 +682,7 @@ layout_mode = 2
 size_flags_vertical = 3
 
 [node name="ImageCaptionLabel2" type="RichTextLabel" parent="CardControl/Targeting_Spots"]
+layout_mode = 0
 offset_left = 610.0
 offset_top = 143.0
 offset_right = 818.0
@@ -1664,6 +1687,374 @@ self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 size_flags_vertical = 3
 
+[node name="BlockEvade" type="Control" parent="CardControl"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="BoxContainer" type="BoxContainer" parent="CardControl/BlockEvade"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = 84.0
+offset_right = -24.0
+offset_bottom = -66.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CardControl/BlockEvade/BoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HSeparator" type="HSeparator" parent="CardControl/BlockEvade/BoxContainer/VBoxContainer"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+
+[node name="DescriptionLabel" type="RichTextLabel" parent="CardControl/BlockEvade/BoxContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("5_l4e1i")
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "Your chance to [color=#780000]Block[/color] or [color=#780000]Evade[/color] is reduced when attacked from your [color=#780000]Flank[/color] and ignored when from your [color=#780000]Back[/color]."
+fit_content = true
+scroll_active = false
+
+[node name="HSeparator2" type="HSeparator" parent="CardControl/BlockEvade/BoxContainer/VBoxContainer"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="DescriptionLabel2" type="RichTextLabel" parent="CardControl/BlockEvade/BoxContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("5_l4e1i")
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[color=#780000]Blocked[/color] damage is shown in [color=#0000f0][outline_size=0]Blue[/outline_size][/color] numbers."
+fit_content = true
+scroll_active = false
+
+[node name="HSeparator3" type="HSeparator" parent="CardControl/BlockEvade/BoxContainer/VBoxContainer"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+
+[node name="DescriptionLabel3" type="RichTextLabel" parent="CardControl/BlockEvade/BoxContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("5_l4e1i")
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[color=#780000]Critical[/color] damage is shown in [color=#e0c000][outline_size=10]Yellow[/outline_size][/color]."
+fit_content = true
+scroll_active = false
+
+[node name="HSeparator4" type="HSeparator" parent="CardControl/BlockEvade/BoxContainer/VBoxContainer"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="CardControl/BlockEvade/BoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+
+[node name="EvadeContainer" type="VBoxContainer" parent="CardControl/BlockEvade/BoxContainer/VBoxContainer2"]
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="CardControl/BlockEvade/BoxContainer/VBoxContainer2/EvadeContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="VSeparator" type="VSeparator" parent="CardControl/BlockEvade/BoxContainer/VBoxContainer2/EvadeContainer/HBoxContainer2"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CardControl/BlockEvade/BoxContainer/VBoxContainer2/EvadeContainer/HBoxContainer2"]
+self_modulate = Color(0.470588, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("3_bdbcw")
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 32
+text = "EVA"
+
+[node name="PPR_Icon" type="TextureRect" parent="CardControl/BlockEvade/BoxContainer/VBoxContainer2/EvadeContainer/HBoxContainer2"]
+layout_mode = 2
+texture = ExtResource("40_iob2n")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="Label2" type="Label" parent="CardControl/BlockEvade/BoxContainer/VBoxContainer2/EvadeContainer/HBoxContainer2"]
+self_modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("5_l4e1i")
+theme_override_font_sizes/font_size = 32
+text = ": Evasion"
+
+[node name="Label3" type="Label" parent="CardControl/BlockEvade/BoxContainer/VBoxContainer2/EvadeContainer"]
+self_modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("5_l4e1i")
+theme_override_font_sizes/font_size = 32
+text = "Low chance to
+negate damage."
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="CardControl/BlockEvade/BoxContainer/VBoxContainer2"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+
+[node name="BlockContainer" type="VBoxContainer" parent="CardControl/BlockEvade/BoxContainer/VBoxContainer2"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CardControl/BlockEvade/BoxContainer/VBoxContainer2/BlockContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="VSeparator" type="VSeparator" parent="CardControl/BlockEvade/BoxContainer/VBoxContainer2/BlockContainer/HBoxContainer"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CardControl/BlockEvade/BoxContainer/VBoxContainer2/BlockContainer/HBoxContainer"]
+self_modulate = Color(0.470588, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("3_bdbcw")
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 32
+text = "BLK"
+
+[node name="PPR_Icon" type="TextureRect" parent="CardControl/BlockEvade/BoxContainer/VBoxContainer2/BlockContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("41_iyus1")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="Label2" type="Label" parent="CardControl/BlockEvade/BoxContainer/VBoxContainer2/BlockContainer/HBoxContainer"]
+self_modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("5_l4e1i")
+theme_override_font_sizes/font_size = 32
+text = ": Block"
+
+[node name="Label2" type="Label" parent="CardControl/BlockEvade/BoxContainer/VBoxContainer2/BlockContainer"]
+self_modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("5_l4e1i")
+theme_override_font_sizes/font_size = 32
+text = "Moderate chance to 
+reduce damage. "
+horizontal_alignment = 1
+
+[node name="HSeparator2" type="HSeparator" parent="CardControl/BlockEvade/BoxContainer/VBoxContainer2"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Awarenessontainer" type="VBoxContainer" parent="CardControl/BlockEvade/BoxContainer/VBoxContainer2"]
+layout_mode = 2
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="CardControl/BlockEvade/BoxContainer/VBoxContainer2/Awarenessontainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="VSeparator" type="VSeparator" parent="CardControl/BlockEvade/BoxContainer/VBoxContainer2/Awarenessontainer/HBoxContainer3"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CardControl/BlockEvade/BoxContainer/VBoxContainer2/Awarenessontainer/HBoxContainer3"]
+self_modulate = Color(0.470588, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("3_bdbcw")
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 32
+text = "AWR"
+
+[node name="PPR_Icon" type="TextureRect" parent="CardControl/BlockEvade/BoxContainer/VBoxContainer2/Awarenessontainer/HBoxContainer3"]
+layout_mode = 2
+texture = ExtResource("42_rbk68")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="Label2" type="Label" parent="CardControl/BlockEvade/BoxContainer/VBoxContainer2/Awarenessontainer/HBoxContainer3"]
+self_modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("5_l4e1i")
+theme_override_font_sizes/font_size = 32
+text = ": Awareness"
+
+[node name="DescriptionLabel" type="RichTextLabel" parent="CardControl/BlockEvade/BoxContainer/VBoxContainer2/Awarenessontainer"]
+layout_mode = 2
+theme = ExtResource("5_l4e1i")
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "Determies size of [color=#780000]Flank[/color] and [color=#780000]BacK[/color] areas."
+fit_content = true
+scroll_active = false
+
+[node name="FireIceContainer" type="HBoxContainer" parent="CardControl/BlockEvade/BoxContainer/VBoxContainer2"]
+visible = false
+layout_mode = 2
+
+[node name="VSeparator" type="VSeparator" parent="CardControl/BlockEvade/BoxContainer/VBoxContainer2/FireIceContainer"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Fire_DamageContainer" type="HBoxContainer" parent="CardControl/BlockEvade/BoxContainer/VBoxContainer2/FireIceContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="CardControl/BlockEvade/BoxContainer/VBoxContainer2/FireIceContainer/Fire_DamageContainer"]
+layout_mode = 2
+texture = ExtResource("33_rxhyn")
+expand_mode = 3
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="CardControl/BlockEvade/BoxContainer/VBoxContainer2/FireIceContainer/Fire_DamageContainer"]
+layout_mode = 2
+theme = ExtResource("5_l4e1i")
+theme_override_colors/font_color = Color(0.796078, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 32
+text = "Fire"
+horizontal_alignment = 1
+
+[node name="VSeparator2" type="VSeparator" parent="CardControl/BlockEvade/BoxContainer/VBoxContainer2/FireIceContainer"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Electric_DamageContainer" type="HBoxContainer" parent="CardControl/BlockEvade/BoxContainer/VBoxContainer2/FireIceContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="CardControl/BlockEvade/BoxContainer/VBoxContainer2/FireIceContainer/Electric_DamageContainer"]
+layout_mode = 2
+texture = ExtResource("34_ju474")
+expand_mode = 3
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="CardControl/BlockEvade/BoxContainer/VBoxContainer2/FireIceContainer/Electric_DamageContainer"]
+layout_mode = 2
+theme = ExtResource("5_l4e1i")
+theme_override_colors/font_color = Color(0.95, 0.855, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 32
+text = "Electric"
+horizontal_alignment = 1
+
+[node name="VSeparator3" type="VSeparator" parent="CardControl/BlockEvade/BoxContainer/VBoxContainer2/FireIceContainer"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HSeparator3" type="HSeparator" parent="CardControl/BlockEvade/BoxContainer/VBoxContainer2"]
+visible = false
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+
+[node name="ElecPoisonContainer" type="HBoxContainer" parent="CardControl/BlockEvade/BoxContainer/VBoxContainer2"]
+visible = false
+layout_mode = 2
+
+[node name="VSeparator" type="VSeparator" parent="CardControl/BlockEvade/BoxContainer/VBoxContainer2/ElecPoisonContainer"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Ice_DamageContainer" type="HBoxContainer" parent="CardControl/BlockEvade/BoxContainer/VBoxContainer2/ElecPoisonContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="CardControl/BlockEvade/BoxContainer/VBoxContainer2/ElecPoisonContainer/Ice_DamageContainer"]
+layout_mode = 2
+texture = ExtResource("35_nwj8o")
+expand_mode = 3
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="CardControl/BlockEvade/BoxContainer/VBoxContainer2/ElecPoisonContainer/Ice_DamageContainer"]
+layout_mode = 2
+theme = ExtResource("5_l4e1i")
+theme_override_colors/font_color = Color(0.394915, 0.756269, 0.936612, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 32
+text = "Ice"
+horizontal_alignment = 1
+
+[node name="VSeparator2" type="VSeparator" parent="CardControl/BlockEvade/BoxContainer/VBoxContainer2/ElecPoisonContainer"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Poison_DamageContainer" type="HBoxContainer" parent="CardControl/BlockEvade/BoxContainer/VBoxContainer2/ElecPoisonContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="CardControl/BlockEvade/BoxContainer/VBoxContainer2/ElecPoisonContainer/Poison_DamageContainer"]
+layout_mode = 2
+texture = ExtResource("36_ct4tu")
+expand_mode = 3
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="CardControl/BlockEvade/BoxContainer/VBoxContainer2/ElecPoisonContainer/Poison_DamageContainer"]
+layout_mode = 2
+theme = ExtResource("5_l4e1i")
+theme_override_colors/font_color = Color(0, 0.64103, 0.331669, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 32
+text = "Poison"
+horizontal_alignment = 1
+
+[node name="VSeparator3" type="VSeparator" parent="CardControl/BlockEvade/BoxContainer/VBoxContainer2/ElecPoisonContainer"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HSeparator4" type="HSeparator" parent="CardControl/BlockEvade/BoxContainer/VBoxContainer2"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="CardControl/BlockEvade/BoxContainer/VBoxContainer2"]
+visible = false
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CardControl/BlockEvade/BoxContainer/VBoxContainer2/HBoxContainer2"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("37_16bex")
+stretch_mode = 5
+
+[node name="Label2" type="Label" parent="CardControl/BlockEvade/BoxContainer/VBoxContainer2/HBoxContainer2"]
+self_modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("5_l4e1i")
+theme_override_font_sizes/font_size = 32
+text = "Ward is common
+on spell casting
+magical Actors."
+
+[node name="HSeparator5" type="HSeparator" parent="CardControl/BlockEvade/BoxContainer/VBoxContainer2"]
+visible = false
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_vertical = 3
+
 [node name="Items" type="Control" parent="CardControl"]
 visible = false
 layout_mode = 1
@@ -2097,6 +2488,7 @@ layout_mode = 2
 size_flags_vertical = 3
 
 [node name="Ammo" type="Control" parent="CardControl"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

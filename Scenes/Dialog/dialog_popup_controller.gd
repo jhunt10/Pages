@@ -8,7 +8,8 @@ var _popups:Dictionary = {}
 
 func clear_popups():
 	for popup in _popups.values():
-		popup.queue_free()
+		if is_instance_valid(popup):
+			popup.queue_free()
 	_popups.clear()
 
 ## Returns true if block should be waitied on
@@ -58,16 +59,23 @@ func handle_pop_up(block_data:Dictionary)->bool:
 		return create_spotlight(block_data)
 	return false
 
+# Popups are responcibale for freeing self
+func _on_popup_finished(popup_key:String):
+	_popups.erase(popup_key)
+	parent_dialog_controller._on_popup_finished(popup_key)
+
 func create_time_location_pop_up(block_data:Dictionary)->bool:
+	var pop_up_key = "LocationTimePopUp"
 	var pop_up:TimeLocationPopUpControl = load("res://Scenes/Dialog/PopUps/TimeLocationPopup/time_local_popup.tscn").instantiate()
 	var location = block_data.get("Location", "The Location")
 	var time = block_data.get("Time", "X years ago")
 	pop_up.set_location_and_time(location, time)
 	self.add_child(pop_up)
+	_popups[pop_up_key] = pop_up
 	var wait_to_finish = block_data.get("WaitToFinish", true)
 	if wait_to_finish:
-		parent_dialog_controller._block_states["LocationTimePopUp"] = DialogController.BlockStates.Playing
-		pop_up.outro_finished.connect(parent_dialog_controller._on_popup_finished.bind("LocationTimePopUp"))
+		parent_dialog_controller._block_states[pop_up_key] = DialogController.BlockStates.Playing
+		pop_up.outro_finished.connect(_on_popup_finished.bind(pop_up_key))
 	return wait_to_finish
 	
 

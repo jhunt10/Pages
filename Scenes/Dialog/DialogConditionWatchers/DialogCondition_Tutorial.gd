@@ -11,6 +11,7 @@ func _on_create():
 			SaveLoadMenu.Instance.menu_closed.connect(_on_save_menu_closed)
 			return
 	if _data.has("RequiredActionQue"):
+		CombatRootControl.Instance.ui_control.que_input.supress_start = true
 		var player_actor = StoryState.get_player_actor()
 		player_actor.Que.action_que_changed.connect(_on_que_change.bind(player_actor))
 		return
@@ -37,7 +38,7 @@ func on_round_finish():
 	
 	
 
-func _is_condition(data:Dictionary, game_state:GameStateData, delta:float)->bool:
+func _check_condition(data:Dictionary, game_state:GameStateData, delta:float)->bool:
 	#var player_actor = StoryState.get_player_actor()
 	#if player_actor.Que.
 	return _is_finished
@@ -67,6 +68,9 @@ func _on_que_change(actor:BaseActor):
 			_dialog_controller._condition_flags['PassedTutorial_Attack'] = true
 		if condition_key == "Condition_RangeInput":
 			_dialog_controller._condition_flags['PassedTutorial_Range'] = true
+		
+		CombatRootControl.Instance.ui_control.que_input.supress_start = false
+		CombatRootControl.Instance.ui_control.que_input.show_start_button()
 			
 	_is_finished = true
 	actor.Que.action_que_changed.disconnect(_on_que_change)

@@ -1,0 +1,314 @@
+{
+	"_MetaData_": {
+		"StartPartKey": "Intro"
+	},
+	"Intro":{
+		"_NextPartKey": "Dialog1",
+		"WaitForNextButton": true,
+		"Inital_BlackOutState": "Clear",
+		"EnsurePoses": {},
+		"Blocks":[
+			{
+				"BlockType": "SpeechBox",
+				"TopBox": false,
+				"WaitToFinish": true,
+				"WaitForNextButton": false,
+				"Hide": false,
+				"Entries": [
+					{
+						"EntryType":"Clear"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "@Color:Blue@Night@Clear@ falls over @Color:Red@The Crossroads@Clear@ as @Color:Blue@The Party@Clear@ sets up @Color:Red@Camp@Clear@. ",
+						"NewLine": false,
+                        "LetterDelay":0.015
+					},
+					{
+						"EntryType":"WaitToRead"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "",
+						"NewLine": false,
+                        "LetterDelay":0.015
+					},
+					{
+						"EntryType":"WaitToRead"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "Meanwhile, the @Color:Red@Fish Merchant@Clear@ finishes surveing thier few remaining goods ",
+						"NewLine": true,
+                        "LetterDelay":0.015
+					},
+					{
+						"EntryType":"WaitToRead"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "and prepares a @Color:Red@Reward@Clear@ for the brave @Color:Red@Heroes@Clear@ that saved them from the @Color:Red@Bandits@Clear@. ",
+						"NewLine": false,
+                        "LetterDelay":0.015
+					},
+					{
+						"EntryType":"WaitToRead"
+					}
+				]
+			},
+            {
+				"BlockType": "SpeechBox",
+				"TopBox": true,
+				"WaitToFinish": true,
+				"WaitForNextButton": false,
+				"Hide": false,
+				"Entries": [
+					{
+						"EntryType":"Clear"
+					},
+                    {
+                        "EntryType": "Speaker",
+                        "SpeakerName": "Fish",
+                        "SpeakerPort": "res://defs/Actors/NPCs/FishMerch/Portraits/FishMerch_Annoyed.png"
+                    },
+					{
+						"EntryType": "Text",
+						"Text": "I never said \"@Color:Red@Reward@Clear@\".",
+						"NewLine": false
+					}
+				]
+			}
+		]
+	},
+	"Dialog1":{
+		"_NextPartKey": "Dialog2",
+		"WaitForNextButton": false,
+		"Inital_BlackOutState": "Clear",
+		"EnsurePoses": {},
+		"Blocks":[
+            {
+				"BlockType": "SpeechBox",
+				"TopBox": true,
+				"WaitToFinish": false,
+				"WaitForNextButton": false,
+				"Hide": true,
+				"Entries": [
+					{
+						"EntryType":"Clear"
+					}
+				]
+			},
+			{
+				"BlockType": "SpeechBox",
+				"TopBox": false,
+				"WaitToFinish": true,
+				"WaitForNextButton": true,
+				"Hide": false,
+				"Entries": [
+					{
+						"EntryType":"Clear",
+                        "ClearSpeaker": false
+					},
+                    {
+                        "EntryType": "Speaker",
+                        "SpeakerName": "Fish",
+                        "SpeakerPort": "res://defs/Actors/NPCs/FishMerch/Portraits/FishMerch_Neutral.png"
+                    },
+					{
+						"EntryType": "Text",
+						"Text": "Well, ",
+						"NewLine": false
+					},
+					{
+						"EntryType":"WaitToRead"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "the bad new is that the @Color:Red@Bandits@Clear@ took everything except my most basic @Color:Red@Items@Clear@ and a few of the common @Color:Blue@Pages@Clear@, ",
+						"NewLine": false
+					},
+					{
+						"EntryType":"WaitToRead"
+					},
+                    {
+                        "EntryType": "Speaker",
+                        "SpeakerName": "Fish",
+                        "SpeakerPort": "res://defs/Actors/NPCs/FishMerch/Portraits/FishMerch_Sad.png"
+                    },
+					{
+						"EntryType":"WaitToRead"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "and there's no good news. ",
+						"NewLine": true
+					},
+					{
+						"EntryType":"WaitToRead"
+					}
+				]
+			},
+			{
+				"BlockType": "SpeechBox",
+				"TopBox": false,
+				"WaitToFinish": true,
+				"WaitForNextButton": true,
+				"Hide": false,
+				"Entries": [
+					{
+						"EntryType":"Clear",
+                        "ClearSpeaker": false
+					},
+                    {
+                        "EntryType": "Speaker",
+                        "SpeakerName": "Fish",
+                        "SpeakerPort": "res://defs/Actors/NPCs/FishMerch/Portraits/FishMerch_Neutral.png"
+                    },
+					{
+						"EntryType": "Text",
+						"Text": "But I do still owe you something for saving me. ",
+						"NewLine": false
+					},
+					{
+						"EntryType":"WaitToRead"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "So tell you what, ",
+						"NewLine": true
+					},
+					{
+						"EntryType":"WaitToRead"
+					},
+                    {
+                        "EntryType": "Speaker",
+                        "SpeakerName": "Fish",
+                        "SpeakerPort": "res://defs/Actors/NPCs/FishMerch/Portraits/FishMerch_VeryHappy.png"
+                    },
+					{
+						"EntryType": "Text",
+						"Text": "the little bit I have left is your! ",
+						"NewLine": false
+					},
+					{
+						"EntryType":"WaitToRead"
+					},
+                    {
+                        "EntryType":"Delay",
+                        "Delay": 0.8
+                    },
+                    {
+                        "EntryType": "Speaker",
+                        "SpeakerName": "Fish",
+                        "SpeakerPort": "res://defs/Actors/NPCs/FishMerch/Portraits/FishMerch_Neutral.png"
+                    },
+					{
+						"EntryType": "BackTrack",
+						"Text": "! "
+					},
+					{
+						"EntryType": "Text",
+						"Text": " at cost, ",
+						"NewLine": false
+					},
+					{
+						"EntryType":"WaitToRead"
+					},
+                    {
+                        "EntryType":"Delay",
+                        "Delay": 0.8
+                    },
+                    {
+                        "EntryType": "Speaker",
+                        "SpeakerName": "Fish",
+                        "SpeakerPort": "res://defs/Actors/NPCs/FishMerch/Portraits/FishMerch_VeryHappy.png"
+                    },
+					{
+						"EntryType": "Text",
+						"Text": " no sales tax!",
+						"NewLine": true
+					},
+					{
+						"EntryType":"WaitToRead"
+					}
+				]
+			}
+		]
+	},
+    
+	"Dialog2":{
+		"_NextPartKey": "",
+		"WaitForNextButton": true,
+		"Inital_BlackOutState": "Clear",
+		"EnsurePoses": {},
+		"OnSkip":{
+			"Blocks":[
+				{
+					"BlockType":"CustomBlock",
+					"ScriptPath": "res://Scenes/Dialog/CustomDialogBlocks/CampTutorialBlocks.gd",
+					"EnableMenu": "Shop"
+				},
+				{
+					"BlockType":"SetFlag",
+					"FlagName":"CampShopDisabled",
+					"Value": false
+				}
+			]
+		},
+		"Blocks":[
+			{
+				"BlockType": "SpeechBox",
+				"TopBox": false,
+				"WaitToFinish": true,
+				"WaitForNextButton": false,
+				"Hide": false,
+				"Entries": [
+					{
+						"EntryType":"Clear",
+                        "ClearSpeaker": false
+					},
+                    {
+                        "EntryType": "Speaker",
+                        "SpeakerName": "Fish",
+                        "SpeakerPort": "res://defs/Actors/NPCs/FishMerch/Portraits/FishMerch_Happy.png"
+                    },
+					{
+						"EntryType": "Text",
+						"Text": "I'll get myself set up under the @Color:Red@Shop@Clear@ option. ",
+						"NewLine": false
+					},
+					{
+						"EntryType":"WaitToRead"
+					}
+				]
+			},
+            {
+                "BlockType":"CustomBlock",
+                "ScriptPath": "res://Scenes/Dialog/CustomDialogBlocks/CampTutorialBlocks.gd",
+                "EnableMenu": "Shop"
+            },
+            {
+                "BlockType":"SetFlag",
+                "FlagName":"CampShopDisabled",
+                "Value": false
+            },
+			{
+				"BlockType": "SpeechBox",
+				"TopBox": false,
+				"WaitToFinish": true,
+				"WaitForNextButton": false,
+				"Hide": false,
+				"Entries": [
+					{
+						"EntryType": "Text",
+						"Text": "So come by and spend some of that @Color:Red@Bounty@Clear@ you got saving me from the @Color:Red@Bandits@Clear@. ",
+						"NewLine": true
+					},
+					{
+						"EntryType":"WaitToRead"
+					}
+				]
+			}
+        ]
+    }
+}

@@ -94,5 +94,21 @@
         },
         "ItemKey": "Dev_Win_PageItem",
         "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd"
+    },
+    {
+        "ActionKey": "Dev_KillAll",
+        "CanStack": true,
+        "Details": {
+            "Tags": [
+                "Tactic"
+            ]
+        },
+        "ItemDetails":
+        {
+            "Rarity": "Unique",
+            "Value": -1
+        },
+        "ItemKey": "Dev_KillAll_PageItem",
+        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd"
     }
 ]

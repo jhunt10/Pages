@@ -90,7 +90,7 @@
         },
         "DamageDatas": {
             "Damage1": {
-                "AtkPower": 20,
+                "AtkPower": 80,
                 "AtkStat": "MagAttack",
                 "BaseDamage": 0,
                 "DamageEffect": "SmallFire_DamageEffect",
@@ -116,13 +116,14 @@
         "MissileDatas": {
             "Missile1": {
                 "DamageDataKey": "Damage1",
-                "FramesPerTile": 6,
+                "FramesPerTile": 12,
                 "MissileVfxData":
                 {
                     "VFXKey": "FlamingAcornMissile",
                     "AnimationName": "8_sprites_250ms_frames_loop",
                     "AnimationSpeed": 2,
                     "SpriteName": "FlamingAcornMissile.png",
+                    "ImpactEffect": "SmallFire_DamageEffect",
                     "SpriteSheetWidth": 2,
                     "SpriteSheetHight": 4,
                     "RandomOffsets": [0, 0]

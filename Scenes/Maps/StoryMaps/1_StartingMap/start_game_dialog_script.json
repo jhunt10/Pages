@@ -5690,7 +5690,7 @@
 				"WaitToFinish": true,
 				"Create": "TutorialCards_1",
 				"PopUpType":"TutorialCard",
-				"Cards": ["Page Que","Movement","Targeting Actors","Targeting Spots", "Items", "Items 2", "Turns and Gaps","Turn Order","Crashing","Armor and Damage"],
+				"Cards": ["Page Que","Movement","Targeting Actors","Targeting Spots", "Items", "Items 2", "Turns and Gaps","Turn Order","Crashing","Armor and Damage", "Block and Evade"],
 				"Index": 6
 			}
 		]
@@ -5719,17 +5719,26 @@
 	},
 	"Condition_PlayingCombat":
 	{
-		"_NextPartKey": null,
+		"_NextPartKey": "AfterCombat",
 		"WaitForNextButton": false,
 		"Inital_BlackOutState": "Clear",
 		"AllowInputThrough": true,
 		"HideDialogUI": true,
-		"ConditionWatcherScript": "res://Scenes/Dialog/DialogConditionWatchers/DialogCondition_Tutorial.gd",
-		"ConditionKey": "PlayingCombat"
+		"ConditionWatcherScript": "res://Scenes/Dialog/DialogConditionWatchers/DialogCondition_WaitForCombat.gd",
+		"IgnoreEnemieIds": ["TutorShroom_1", "RoofShroom_1"],
+		"ShowVictoryScreenOnFinish": true
 
 	},
 	"AfterCombat":{
-		"_NextPartKey": "ToCampTutorial",
+		"_NextPartLogic": 
+		{
+			"FlagName": "Tutorial",
+			"Cases": {
+				"true": "AfterCombat_Tutorial",
+				"false": "AfterCombat_NoTutorial"
+			}
+		},
+		"_NextPartKey": "EndBlock",
 		"WaitForNextButton": true,
 		"Inital_BlackOutState": "Clear",
 		"EnsurePoses": {
@@ -5739,7 +5748,7 @@
 				"BlockType": "SpeechBox",
 				"TopBox": false,
 				"WaitToFinish": true,
-				"WaitForNextButton": true,
+				"WaitForNextButton": false,
 				"Hide": false,
 				"Entries": [
 					{
@@ -5773,7 +5782,294 @@
 						"EntryType":"WaitToRead"
 					}
 				]
+			}
+		]
+	},
+	
+	"AfterCombat_Tutorial":{
+		"_NextPartKey": "AfterCombat_NoTutorial",
+		"WaitForNextButton": true,
+		"Inital_BlackOutState": "Clear",
+		"EnsurePoses": {
+		},
+		"Blocks":[
+			{
+				"BlockType": "SpeechBox",
+				"TopBox": false,
+				"WaitToFinish": true,
+				"WaitForNextButton": true,
+				"Hide": false,
+				"Entries": [
+					{
+						"EntryType":"Clear",
+						"ClearSpeaker":false
+					},
+					{
+						"EntryType": "Speaker",
+						"SpeakerName": "MtFr",
+						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Happy.png"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "This is the @Color:Blue@Victory Screen@Clear@, by the way. ",
+						"NewLine": true
+					},
+					{
+						"EntryType":"WaitToRead"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "It the @Color:Blue@PAGE@Clear@ System's way of saying @Color:Red@Combat@Clear@ is over.",
+						"NewLine": true
+					},
+					{
+						"EntryType":"WaitToRead"
+					}
+				]
 			},
+			{
+				"BlockType": "SpeechBox",
+				"TopBox": false,
+				"WaitToFinish": true,
+				"WaitForNextButton": true,
+				"Hide": false,
+				"Entries": [
+					{
+						"EntryType":"Clear",
+						"ClearSpeaker":false
+					},
+					{
+						"EntryType": "Speaker",
+						"SpeakerName": "MtFr",
+						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Happy.png"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "The @Color:Blue@Victory Screen@Clear@ will total up your score for the fight and show you how well the @Color:Blue@PAGE@Clear@ System thinks you did. ",
+						"NewLine": true
+					},
+					{
+						"EntryType":"WaitToRead"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "It also displays all the @Color:Red@Money@Clear@ and @Color:Red@Items@Clear@ that we found.",
+						"NewLine": true
+					},
+					{
+						"EntryType":"WaitToRead"
+					}
+				]
+			},
+			{
+				"BlockType": "SpeechBox",
+				"TopBox": false,
+				"WaitToFinish": true,
+				"WaitForNextButton": true,
+				"Hide": false,
+				"Entries": [
+					{
+						"EntryType":"Clear",
+						"ClearSpeaker":false
+					},
+					{
+						"EntryType": "Speaker",
+						"SpeakerName": "MtFr",
+						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Happy.png"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "Since we won, ",
+						"NewLine": true
+					},
+					{
+						"EntryType":"WaitToRead"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "all the @Color:Red@Items@Clear@ that were dropped on the @Color:Red@Map@Clear@ are automatically added to our @Color:Blue@Party Inventory@Clear@. ",
+						"NewLine": false
+					},
+					{
+						"EntryType":"WaitToRead"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "We also get a @Color:Red@Bounty@Clear@ for each @Color:Red@Enemy@Clear@ that we beat, ",
+						"NewLine": true
+					},
+					{
+						"EntryType":"WaitToRead"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "on top of any @Color:Red@Money@Clear@ they dropped. ",
+						"NewLine": true
+					},
+					{
+						"EntryType":"WaitToRead"
+					}
+				]
+			},
+			{
+				"BlockType": "SpeechBox",
+				"TopBox": false,
+				"WaitToFinish": true,
+				"WaitForNextButton": true,
+				"Hide": false,
+				"Entries": [
+					{
+						"EntryType":"Clear",
+						"ClearSpeaker":false
+					},
+					{
+						"EntryType": "Speaker",
+						"SpeakerName": "MtFr",
+						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Happy.png"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "The @Color:Blue@PAGE@Clear@ System pays out more for killing tougher @Color:Red@Enemies@Clear@. ",
+						"NewLine": false
+					},
+					{
+						"EntryType":"WaitToRead"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "So if you ever need quick @Color:Red@Money@Clear@, ",
+						"NewLine": true
+					},
+					{
+						"EntryType":"WaitToRead"
+					},
+					{
+						"EntryType": "Speaker",
+						"SpeakerName": "MtFr",
+						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Smile.png"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "just murder someone. ",
+						"NewLine": false
+					},
+					{
+						"EntryType":"WaitToRead"
+					}
+				]
+			},
+			{
+				"BlockType": "SpeechBox",
+				"TopBox": false,
+				"WaitToFinish": true,
+				"WaitForNextButton": false,
+				"Hide": false,
+				"Entries": [
+					{
+						"EntryType":"Clear",
+						"ClearSpeaker":false
+					},
+					{
+						"EntryType": "Speaker",
+						"SpeakerName": "MtFr",
+						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Neutral.png"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "Now that @Color:Red@Combat@Clear@ is finshed, ",
+						"NewLine": false
+					},
+					{
+						"EntryType":"WaitToRead"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "the @Color:Blue@PAGE@Clear@ System will be swtiching over to @Color:Blue@Night@Clear@. ",
+						"NewLine": false
+					},
+					{
+						"EntryType":"WaitToRead"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "So we need to set up @Color:Red@Camp@Clear@. ",
+						"NewLine": false
+					},
+					{
+						"EntryType":"WaitToRead"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "I won't go into the ",
+						"NewLine": true
+					},
+					{
+						"EntryType":"WaitToRead"
+					},
+					{
+						"EntryType": "Speaker",
+						"SpeakerName": "MtFr",
+						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Sad.png"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "horrible ",
+						"NewLine": false
+					},
+					{
+						"EntryType":"WaitToRead"
+					},
+					{
+						"EntryType": "Speaker",
+						"SpeakerName": "MtFr",
+						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Morning.png"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "gruesome ",
+						"NewLine": false
+					},
+					{
+						"EntryType":"WaitToRead"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "details",
+						"NewLine": false
+					},
+					{
+						"EntryType": "Text",
+						"Text": "... ",
+						"NewLine": false,
+						"LetterDelay":0.3
+					},
+					{
+						"EntryType":"WaitToRead"
+					},
+					{
+						"EntryType": "Speaker",
+						"SpeakerName": "MtFr",
+						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Happy.png"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "But stay in @Color:Red@Camp@Clear@ at @Color:Blue@Night@Clear@.",
+						"NewLine": true
+					},
+					{
+						"EntryType":"WaitToRead"
+					}
+				]
+			}
+		]
+	},
+	"AfterCombat_NoTutorial":{
+		"_NextPartKey": "EndBlock",
+		"WaitForNextButton": true,
+		"Inital_BlackOutState": "Clear",
+		"EnsurePoses": {
+		},
+		"Blocks":[
 			{
 				"BlockType": "SpeechBox",
 				"TopBox": false,
@@ -5792,7 +6088,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "Since the @Color:Red@Squirrels@Clear@ seem to be dealt with, ",
+						"Text": "Since the @Color:Red@Squirrels@Clear@ seem to be gone for now, ",
 						"NewLine": true
 					},
 					{
@@ -5800,7 +6096,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "let's set up @Color:Red@Camp@Clear@ here and plan our next move.",
+						"Text": "let's set up @Color:Red@Camp@Clear@ over in @Color:Red@The Abandoned Cabin@Clear@.",
 						"NewLine": true
 					},
 					{
@@ -5810,13 +6106,15 @@
 			}
 		]
 	},
-	"ToCampTutorial":
-	{
+	"EndBlock": {
 		"_NextPartKey": null,
-		"WaitForNextButton": true,
+		"WaitForNextButton": false,
 		"Inital_BlackOutState": "Clear",
 		"AllowInputThrough": true,
 		"HideDialogUI": true,
+		"OnSkip":{
+			"CanSkip":false
+		},
 		"EnsurePoses": {
 		},
 		"Blocks":[
@@ -5849,10 +6147,6 @@
 				"FlagName":"CampScribeDisabled",
 				"Value": true
 
-			},
-			{
-				"BlockType": "ToCamp",
-				"ForceWin": true
 			}
 		]
 	}

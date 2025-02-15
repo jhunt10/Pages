@@ -13,6 +13,7 @@ func get_action_tags(_subaction_data:Dictionary)->Array:
 func get_on_que_options(parent_action:BaseAction, _subaction_data:Dictionary, _actor:BaseActor, _game_state:GameStateData)->Array:
 	var effect_defs = EffectLibrary.list_effect_defs()
 	var options = OnQueOptionsData.new("SelectedEffectKey", "Select Effect:", [], [], [])
+	
 	for effect_def in effect_defs:
 		var effect_key = effect_def['EffectKey']
 		options.options_vals.append(effect_key)

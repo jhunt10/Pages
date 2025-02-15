@@ -331,4 +331,40 @@
         "TargetParams": {
         }
     },
+    {
+        "ActionKey": "Dev_KillAll",
+        "UseDynamicIcons": true,
+        "CostData": {},
+        "DamageDatas": {
+            "DamageData1": {
+                "AtkPower": 100,
+                "AtkStat": "MagAttack",
+                "FixedBaseDamage": 1000,
+                "DamageEffect": "Exploision_DamageEffect",
+                "DamageType": "Test",
+                "DamageVarient": 0,
+                "DefenseType": null
+            }
+        },
+        "Details": {
+            "Description": "Kill All",
+            "DisplayName": "Kill All",
+            "LargeIcon": "DevKillAllIcon.png",
+            "SmallIcon": "DevKillAllIcon.png",
+            "SnippetDesc": "Kill All",
+            "Tags": []
+        },
+        "MissileDatas": {},
+        "Preview": {},
+        "SubActions": {
+            "0": [
+                {
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/DevSubActions/SubAct_DEV_KillAllEnemies.gd",
+                    "DamageKey": "DamageData1"
+                }
+            ]
+        },
+        "TargetParams": {
+        }
+    }
 ]

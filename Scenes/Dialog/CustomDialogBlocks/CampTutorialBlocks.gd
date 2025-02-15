@@ -24,6 +24,8 @@ func handle_block(dialog_control:DialogController, block_data:Dictionary)->bool:
 			CampMenu.Instance.system_button.disabled = false
 		if menu == "Quest":
 			CampMenu.Instance.quest_button.disabled = false
+		if menu == "Shop":
+			CampMenu.Instance.shop_button.disabled = false
 	if block_data.has("OpenMenu"):
 		var menu = block_data.get("OpenMenu")
 		if menu == "Scribe":

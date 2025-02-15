@@ -107,6 +107,7 @@ vertical_scroll_mode = 3
 [node name="EntriyContainer" type="VBoxContainer" parent="SpeechDialogBlock/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_constants/separation = 3
 
 [node name="HiddenTextEdit" type="TextEdit" parent="SpeechDialogBlock/ScrollContainer/EntriyContainer"]
 visible = false
@@ -138,7 +139,7 @@ bbcode_enabled = true
 text = "Some Text"
 fit_content = true
 scroll_active = false
-autowrap_mode = 0
+autowrap_mode = 2
 
 [node name="PreMade_QuestionOption" type="Control" parent="SpeechDialogBlock/ScrollContainer/EntriyContainer" node_paths=PackedStringArray("option_icon", "option_label", "button")]
 custom_minimum_size = Vector2(0, 40)

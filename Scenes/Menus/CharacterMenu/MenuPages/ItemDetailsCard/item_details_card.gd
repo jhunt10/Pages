@@ -151,8 +151,9 @@ func start_hide():
 	#animation_state = AnimationStates.Out
 
 func set_item(actor:BaseActor, item:BaseItem):
-	actor.equipment.items_changed.connect(start_hide)
-	actor.pages.items_changed.connect(start_hide)
+	if actor:
+		actor.equipment.items_changed.connect(start_hide)
+		actor.pages.items_changed.connect(start_hide)
 	item_id = item.Id
 	icon.texture = item.get_small_icon()
 	title_lable.text = item.details.display_name
@@ -179,31 +180,36 @@ func set_item(actor:BaseActor, item:BaseItem):
 	elif item is BaseArmorEquipment:
 		var armor = (item as BaseArmorEquipment)
 		armor_details.set_armor(actor, armor)
-		actor_has_item = actor.equipment.has_item(item_id)
+		if actor:
+			actor_has_item = actor.equipment.has_item(item_id)
 		_current_card = armor_details
 		armor_details.show()
 	elif item is BasePageItem:
 		var page = (item as BasePageItem)
 		if page.get_action_key():
 			action_details.set_action(actor, page)
-			actor_has_item = actor.pages.has_item(item_id)
+			if actor:
+				actor_has_item = actor.pages.has_item(item_id)
 			_current_card = action_details
 			action_details.show()
 		else:
 			effect_page_details.set_action(actor, page)
-			actor_has_item = actor.pages.has_item(item_id)
+			if actor:
+				actor_has_item = actor.pages.has_item(item_id)
 			_current_card = effect_page_details
 			effect_page_details.show()
 			#default_details.set_item(item)
 			#default_details.show()
 	elif item is BaseQueEquipment:
 		page_que_details.set_item(actor, item)
-		actor_has_item = actor.equipment.has_item(item_id)
+		if actor:
+			actor_has_item = actor.equipment.has_item(item_id)
 		_current_card = page_que_details
 		page_que_details.show()
 	else:
 		default_details.set_item(item)
-		actor_has_item = actor.equipment.has_item(item_id)
+		if actor:
+			actor_has_item = actor.equipment.has_item(item_id)
 		_current_card = default_details
 		default_details.show()
 		#if equipment.get_equipt_to_actor_id():

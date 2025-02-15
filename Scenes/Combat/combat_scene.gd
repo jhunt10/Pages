@@ -22,6 +22,7 @@ static var _current_player_index:int = 0
 
 ## If true, will call StoryState.load_next_stage() when battle finishes
 static var is_story_map:bool
+var supress_win_conditions:bool = false
 var combat_started:bool = false
 var combat_finished:bool = false
 
@@ -168,12 +169,17 @@ func load_init_state(sub_scene_data:Dictionary):
 	player_actor = GameState.get_actor(player_actor.Id)
 	if !player_actor:
 		printerr("Player Actor not loaded to GameState")
-	else:
+	
+	
+	camera.zoom = Vector2(2,2)
+	var camera_point = MapController.get_pos_marker("CameraStart")
+	if camera_point:
+		camera.snap_to_map_pos(camera_point)
+	elif player_actor:
 		ui_control.set_player_actor(player_actor)
 		var actor_pos = GameState.get_actor_pos(player_actor)
 		if actor_pos:
 			camera.snap_to_map_pos(actor_pos)
-			camera.zoom = Vector2(2,2)
 	
 	is_story_map = sub_scene_data.get("IsStoryMap", false)
 	var dialog_script = sub_scene_data.get("DialogScript")
@@ -183,6 +189,7 @@ func load_init_state(sub_scene_data:Dictionary):
 	else:
 		dialog_controller.queue_free()
 		dialog_controller = null
+	
 		
 
 func start_combat_animation():
@@ -321,6 +328,9 @@ func add_zone(zone:BaseZone):
 	MapController.add_zone_node(zone, new_node)
 
 func check_end_conditions():
+	if supress_win_conditions:
+		return
+	
 	var living_players = []
 	var living_enimes = []
 	for actor:BaseActor in GameState.list_actors(false):

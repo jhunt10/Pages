@@ -4,7 +4,8 @@
 	},
 	"Intro":{
 		"_NextPartKey": "Dialog1",
-		"WaitForNextButton": true,
+		"WaitForNextButton": false,
+		"Inital_BlackOutState":"Black",
 		"EnsurePoses": {
 		},
 		"Blocks":[
@@ -14,7 +15,7 @@
                 "WaitToFinish": false,
                 "TargetActorId": "Player1",
                 "PathMarkerName": "P1",
-                "FollowActor": true,
+                "FollowActor": false,
                 "SpeedScale": 1
             },
             {
@@ -22,7 +23,7 @@
                 "WaitToFinish": false,
                 "TargetActorId": "Player2",
                 "PathMarkerName": "P2",
-                "FollowActor": true,
+                "FollowActor": false,
                 "SpeedScale": 1
             },
             {
@@ -30,17 +31,24 @@
                 "WaitToFinish": false,
                 "TargetActorId": "MysteriousFigure",
                 "PathMarkerName": "M1",
-                "FollowActor": false,
+                "FollowActor": true,
                 "SpeedScale": 1
             },
+			{
+				"BlockType": "Blackout",
+				"BlackOutState":"FadeIn"
+			},
 			{
 				"BlockType": "SpeechBox",
 				"WaitToFinish": true,
 				"WaitForNextButton": true,
 				"Entries": [
 					{
+						"EntryType":"Clear"
+					},
+					{
 						"EntryType":"Text",
-						"Text": "Having successfully slain the Bandits and thier Captain, ",
+						"Text": "Having successfully slain the @Color:Red@Bandit Captain@Clear@ and thier @Color:Red@Gang@Clear@, ",
                         "LetterDelay":0.015
 					},
 					{
@@ -48,9 +56,18 @@
 					},
 					{
 						"EntryType":"Text",
-						"Text": "the Heroes approarched the Merchant's Cart to see what become of it's owner.",
+						"Text": "@Color:Blue@The Party@Clear@ approarches the @Color:Red@Merchant Cart@Clear@, ",
                         "LetterDelay":0.015,
                         "NewLine": true
+					},
+					{
+						"EntryType":"WaitToRead"
+					},
+					{
+						"EntryType":"Text",
+						"Text": "to see what become of it's owner.",
+                        "LetterDelay":0.015,
+                        "NewLine": false
 					},
 					{
 						"EntryType":"WaitToRead"
@@ -67,7 +84,7 @@
                     },
 					{
 						"EntryType":"Text",
-						"Text": "Yet they found the Cart empty, ",
+						"Text": "Yet they found the @Color:Red@Merchant Cart@Clear@ empty, ",
                         "LetterDelay":0.015
 					}
 				]
@@ -99,7 +116,7 @@
 				"Entries": [
 					{
 						"EntryType":"Text",
-						"Text": "save for a single Fish.",
+						"Text": "save for a single @Color:Red@Fish@Clear@.",
                         "LetterDelay":0.015
 					},
 					{
@@ -114,7 +131,7 @@
 				"Entries": [
 					{
 						"EntryType":"Text",
-						"Text": "... ",
+						"Text": ".... ",
                         "LetterDelay":0.3
 					}
 				]
@@ -126,7 +143,7 @@
 				"Entries": [
 					{
 						"EntryType":"Text",
-						"Text": "... ",
+						"Text": ".... ",
                         "LetterDelay":0.3,
                         "NewLine": true
 					}
@@ -139,7 +156,7 @@
 				"Entries": [
 					{
 						"EntryType":"Text",
-						"Text": "... ",
+						"Text": ".. ",
                         "LetterDelay":0.3,
                         "NewLine": true
 					},
@@ -197,7 +214,7 @@
 					},
 					{
 						"EntryType":"Text",
-						"Text": " surprizing everybody except the wise and always cool Scribe.",
+						"Text": " surprizing everybody except the calm and always cool @Color:Red@Scribe@Clear@.",
                         "LetterDelay":0.015
 					},
 					{
@@ -241,7 +258,7 @@
 					},
 					{
 						"EntryType":"Text",
-						"Text": "this damned fish body has a habit of freezing up on me whenever there's trouble."
+						"Text": "this damned @Color:Red@Fish@Clear@ body has a habit of freezing up on me whenever there's @Color:Red@Combat@Clear@."
 					},
 					{
 						"EntryType":"WaitToRead"
@@ -273,16 +290,21 @@
                     {
                         "EntryType": "Speaker",
                         "SpeakerName": "Fish",
-                        "SpeakerPort": "res://defs/Actors/NPCs/FishMerch/Portraits/FishMerch_Happy.png"
+                        "SpeakerPort": "res://defs/Actors/NPCs/FishMerch/Portraits/FishMerch_VeryHappy.png"
                     },
 					{
 						"EntryType":"Text",
-						"Text": "then you lot showed up and saved my ass!",
-                        "NewLine": true
+						"Text": "then you all saved my ass!",
+                        "NewLine": false
 					},
 					{
 						"EntryType":"WaitToRead"
 					},
+                    {
+                        "EntryType": "Speaker",
+                        "SpeakerName": "Fish",
+                        "SpeakerPort": "res://defs/Actors/NPCs/FishMerch/Portraits/FishMerch_Happy.png"
+                    },
 					{
 						"EntryType":"Text",
 						"Text": "I really can't thank you enough.",
@@ -325,7 +347,7 @@
                     },
 					{
 						"EntryType":"Text",
-						"Text": "they did still make off most of my inventory",
+						"Text": "they did still make off most of my @Color:Blue@Inventory@Clear@",
                         "NewLine": false
 					},
 					{
@@ -343,7 +365,7 @@
                     },
 					{
 						"EntryType":"Text",
-						"Text": "And rob me of almost my entire livelihood!",
+						"Text": "And rob me of my entire livelihood!",
                         "NewLine": true
 					},
 					{
@@ -407,10 +429,8 @@
 					},
 					{
 						"EntryType":"Text",
-						"Text": "you lot set up camp here."
-					},
-					{
-						"EntryType":"WaitToRead"
+						"Text": "give me a couple of hours to check what @Color:Blue@Inventory@Clear@ those ",
+                        "NewLine": false
 					},
                     {
                         "EntryType": "Speaker",
@@ -419,17 +439,23 @@
                     },
 					{
 						"EntryType":"Text",
-						"Text": "While I'll check what inventory those bastards left me with.",
-                        "NewLine": true
-					},
-					{
-						"EntryType":"WaitToRead"
+						"Text": "@Color:Red@Bastards@Clear@ ",
+                        "NewLine": false,
+						"LetterDelay":0.015
 					},
                     {
                         "EntryType": "Speaker",
                         "SpeakerName": "Fish",
                         "SpeakerPort": "res://defs/Actors/NPCs/FishMerch/Portraits/FishMerch_Happy.png"
                     },
+					{
+						"EntryType":"Text",
+						"Text": "left me with. ",
+                        "NewLine": false
+					},
+					{
+						"EntryType":"WaitToRead"
+					},
 					{
 						"EntryType":"Text",
 						"Text": "Then we'll see if we can set you up with something nice.",
@@ -445,9 +471,203 @@
 				"FlagName":"CampShopDisabled",
 				"Value": false
 
+			}
+		]
+	},
+	"Dialog1":
+	{
+		"_NextPartKey": "ToCamp",
+		"WaitForNextButton": true,
+		"Inital_BlackOutState": "Clear",
+		"AllowInputThrough": true,
+		"HideDialogUI": false,
+		"OnSkip":{
+		},
+		"EnsurePoses": {
+		},
+		"Blocks":[
+            {
+                "BlockType": "MoveActor",
+                "WaitToFinish": false,
+                "TargetActorId": "Player1",
+                "PathMarkerName": "P12",
+                "FollowActor": true,
+                "SpeedScale": 1
+            },
+            {
+                "BlockType": "MoveActor",
+                "WaitToFinish": false,
+                "TargetActorId": "Player2",
+                "PathMarkerName": "P22",
+                "FollowActor": false,
+                "SpeedScale": 1
+            },
+            {
+                "BlockType": "MoveActor",
+                "WaitToFinish": true,
+                "TargetActorId": "MysteriousFigure",
+                "PathMarkerName": "M2",
+                "FollowActor": true,
+                "SpeedScale": 1
+            },
+			{
+				"BlockType": "SpeechBox",
+				"TopBox": false,
+				"WaitToFinish": true,
+				"WaitForNextButton": true,
+				"Hide": false,
+				"Entries": [
+					{
+						"EntryType":"Clear",
+						"ClearSpeaker":false
+					},
+					{
+						"EntryType": "Speaker",
+						"SpeakerName": "MtFr",
+						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Neutral.png"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "...",
+						"NewLine": true,
+						"LetterDelay":0.3
+					},
+					{
+						"EntryType": "Speaker",
+						"SpeakerName": "MtFr",
+						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_EyesClosed.png"
+					},
+					{
+						"EntryType":"Delay",
+						"Delay": 0.3
+					},
+					{
+						"EntryType": "Speaker",
+						"SpeakerName": "MtFr",
+						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Neutral.png"
+					},
+					{
+						"EntryType": "Text",
+						"Text": ".. ",
+						"NewLine": false,
+						"LetterDelay":0.3
+					},
+					{
+						"EntryType":"WaitToRead"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "a talking @Color:Red@Fish@Clear@, huh?",
+						"NewLine": false
+					},
+					{
+						"EntryType":"WaitToRead"
+					},
+					{
+						"EntryType":"Delay",
+						"Delay": 0.8
+					},
+					{
+						"EntryType": "Text",
+						"Text": "I wonder if the @Color:Red@Squirrles@Clear@ know about this.",
+						"NewLine": true
+					},
+					{
+						"EntryType":"WaitToRead"
+					}
+				]
 			},
 			{
-				"BlockType": "ToCamp"
+				"BlockType": "SpeechBox",
+				"TopBox": false,
+				"WaitToFinish": true,
+				"WaitForNextButton": false,
+				"Hide": false,
+				"Entries": [
+					{
+						"EntryType":"Clear",
+						"ClearSpeaker":false
+					},
+					{
+						"EntryType": "Speaker",
+						"SpeakerName": "MtFr",
+						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Happy.png"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "Anyway, ",
+						"NewLine": false
+					},
+					{
+						"EntryType":"WaitToRead"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "it will be @Color:Blue@Night@Clear@ soon since we just finished @Color:Red@Combat@Clear@. ",
+						"NewLine": false
+					},
+					{
+						"EntryType":"WaitToRead"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "And our new @Color:Red@Rogue@Clear@ likely wants to check thier @Color:Red@Pagebook@Clear@. ",
+						"NewLine": false
+					},
+					{
+						"EntryType":"WaitToRead"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "Let's set up @Color:Red@Camp@Clear@ here while we wait and see what kind of @Color:Red@Reward@Clear@ the @Color:Red@Fish Merchant@Clear@ has for us. ",
+						"NewLine": false
+					},
+					{
+						"EntryType":"WaitToRead"
+					}
+				]
+			}
+		]
+	},
+	"ToCamp":
+	{
+		"_NextPartKey": null,
+		"WaitForNextButton": false,
+		"Inital_BlackOutState": "Clear",
+		"AllowInputThrough": true,
+		"HideDialogUI": true,
+		"OnSkip":{
+			"CanSkip":false
+		},
+		"EnsurePoses": {
+		},
+		"Blocks":[
+			{
+				"BlockType": "SpeechBox",
+				"TopBox": false,
+				"WaitToFinish": false,
+				"WaitForNextButton": false,
+				"Hide": true,
+				"Entries": [
+					{
+						"EntryType":"Clear"
+					}
+				]
+			},
+			{
+				"BlockType": "SetFlag",
+				"IsStoryFlag": true,
+				"FlagName": "CampLocation",
+				"Value": "The Crossroads"
+			},
+			{
+				"BlockType":"SetFlag",
+				"FlagName":"CampShopDisabled",
+				"Value": true
+
+			},
+			{
+				"BlockType": "NextStory"
 			}
 		]
 	}

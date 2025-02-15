@@ -1,6 +1,6 @@
 {
 	"_MetaData_": {
-		"StartPartKey": "CombatStart",
+		"StartPartKey": "Prolog_Rogue",
         "MapScene": "res://Scenes/Maps/StoryMaps/2_Cross_Road/crossroad_dialog_map.tscn"
 	},
 	"Prolog_Rogue":{
@@ -67,6 +67,7 @@
 	"Intro_WalkIn":{
 		"_NextPartKey": "Dialog1",
 		"WaitForNextButton": true,
+		"Inital_BlackOutState":"Black",
 		"#EnsurePoses": {
 			"Player1":"P1",
 			"MysteriousFigure":"M1"
@@ -97,8 +98,6 @@
                 "FollowActor": false,
                 "SpeedScale": 1
             },
-
-
             {
                 "BlockType": "MoveActor",
                 "WaitToFinish": false,
@@ -171,6 +170,9 @@
 				"BlockType": "SpeechBox",
 				"WaitToFinish": true,
 				"Entries": [
+					{
+						"EntryType":"Clear"
+					},
 					{
 						"EntryType":"Text",
 						"Text": "As the @Color:Blue@The Party@Clear@ slowly makes thier way to @Color:Red@The City@Clear@, they reach @Color:Red@The Crossroad@Clear@ discover an unussual sight. ",
@@ -1488,7 +1490,7 @@
 				"WaitToFinish": true,
 				"Create": "TutorialCards_1",
 				"PopUpType":"TutorialCard",
-				"Cards": ["Page Que","Movement","Targeting Actors","Targeting Spots", "Items", "Items 2", "Turns and Gaps","Turn Order","Crashing","Armor and Damage", "Page Ammo"],
+				"Cards": ["Page Que","Movement","Targeting Actors","Targeting Spots", "Items", "Items 2", "Turns and Gaps","Turn Order","Crashing","Armor and Damage", "Block and Evade", "Page Ammo"],
 				"Index": 10
 			},
             {   
@@ -1535,15 +1537,34 @@
     },
 	"Condition_PlayingCombat":
 	{
+		"_NextPartKey": "EndBlock",
+		"WaitForNextButton": false,
+		"Inital_BlackOutState": "Clear",
+		"AllowInputThrough": true,
+		"HideDialogUI": true,
+		"ConditionWatcherScript": "res://Scenes/Dialog/DialogConditionWatchers/DialogCondition_WaitForCombat.gd",
+		"IgnoreEnemieIds": [],
+		"ShowVictoryScreenOnFinish": true
+
+	},
+	"EndBlock": {
 		"_NextPartKey": null,
 		"WaitForNextButton": false,
 		"Inital_BlackOutState": "Clear",
 		"AllowInputThrough": true,
 		"HideDialogUI": true,
-		"ConditionWatcherScript": "res://Scenes/Dialog/DialogConditionWatchers/DialogCondition_Tutorial.gd",
-		"ConditionKey": "PlayingCombat",
-        "Blocks":[
-            
-        ]
+		"OnSkip":{
+			"CanSkip":false
+		},
+		"EnsurePoses": {
+		},
+		"Blocks":[
+			{
+				"BlockType": "SetFlag",
+				"IsStoryFlag": true,
+				"FlagName": "CampLocation",
+				"Value": "The Crossroad"
+			}
+		]
 	}
 }

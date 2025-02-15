@@ -63,9 +63,10 @@ func start_new_story():
 	load_next_story_scene()
 
 func load_next_story_scene():
-	var next_scene_data = StoryStages.get_stage_data(_story_stage_index + 1)
+	var next_scene_data = StatcStoryStages.get_stage_data(_story_stage_index + 1)
 	if next_scene_data.size() == 0:
 		printerr("Story Over")
+		MainRootNode.Instance.open_camp_menu()
 		return
 	_story_stage_index += 1
 	var next_map = next_scene_data.get("MapScene", '')
@@ -136,7 +137,7 @@ func load_save_data(data:Dictionary):
 	_session_start_unix_time = Time.get_unix_time_from_system()
 
 func get_location()->String:
-	var data = StoryStages.get_stage_data(_story_stage_index)
+	var data = StatcStoryStages.get_stage_data(_story_stage_index)
 	return data.get("Location", "")
 
 func set_story_flag(key:String, val):

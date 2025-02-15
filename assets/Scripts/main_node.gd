@@ -106,7 +106,8 @@ func open_load_menu():
 	self.add_child(save_scene)
 
 func open_camp_menu(dialog_script:String=''):
-	if current_scene is CampMenu:
+	if current_scene is CampMenu and dialog_script == '':
+		
 		return
 	#current_scene.queue_free()
 	#prune_objects()

@@ -18,7 +18,8 @@ enum BlockTypes {
 	NextStory,
 	CustomBlock,
 	AnimateNode,
-	StartCombat
+	StartCombat,
+	DecrementStoryIndex
 }
 
 @export var scene_root:Node
@@ -191,7 +192,7 @@ func _get_next_part_key():
 			var cases  = next_part_logic.get("Cases", {})
 			if cases.has(flag_val):
 				return cases[flag_val]
-		var flag_val = StoryState.get_story_flag(flag_name)
+		var flag_val:String = str(StoryState.get_story_flag(flag_name))
 		var cases  = next_part_logic.get("Cases", {})
 		if cases.has(flag_val):
 			return cases[flag_val]
@@ -212,7 +213,10 @@ func _start_part(part_key:String):
 	_current_part_data = _dialog_part_datas[part_key].duplicate(true)
 	if not _current_part_data.keys().has('Blocks'):
 		_current_part_data['Blocks'] = []
-		
+	
+	if _current_part_data.get("DecrementStoryIndex", false):
+		StoryState._story_stage_index -= 1
+	
 	if _current_part_data.has("EnsurePoses"):
 		var force_poses = _current_part_data['EnsurePoses']
 		force_positions(force_poses)
@@ -381,8 +385,7 @@ func _handle_block(block_data:Dictionary)->bool:
 			target_pos = MapPos.new(map_pos_arr[0], map_pos_arr[1], 0, 0)
 		elif target_type == "Actor":
 			var actor_id = block_data.get("ActorId")
-			if actor_id == "Player1":
-				actor_id = StoryState.get_player_id()
+			actor_id = translate_actor_id(actor_id)
 			var actor_node = CombatRootControl.get_actor_node(actor_id)
 			target_pos = actor_node.cur_map_pos
 		elif target_type == "PathMarker":
@@ -436,8 +439,7 @@ func _handle_block(block_data:Dictionary)->bool:
 	if block_type == BlockTypes.MoveActor:
 		if _do_move_actor(block_data):
 			var target_actor_id = block_data.get("TargetActorId")
-			if target_actor_id == "Player1":
-				target_actor_id = StoryState.get_player_id()
+			target_actor_id = translate_actor_id(target_actor_id)
 			var target_actor = ActorLibrary.get_actor(target_actor_id)
 			if block_data.get("FollowActor", false):
 				CombatRootControl.Instance.camera.lock_to_actor(target_actor)
@@ -548,15 +550,12 @@ func _handle_block(block_data:Dictionary)->bool:
 	#----------------------------------
 	#          Next Story
 	# Description: Progress to next story stage.
-	# 	Will show Victory screen if in Combat
 	#----------------------------------
 	if block_type == BlockTypes.NextStory:
-		if CombatRootControl.Instance and not CombatRootControl.Instance.combat_finished:
-			CombatRootControl.Instance.trigger_end_condition(true)
-		else:
-			MainRootNode.Instance.open_camp_menu()
 		_state = STATES.Finished
-		return false
+		StoryState.load_next_story_scene()
+		_block_states["NextScene"] = BlockStates.Playing
+		return true
 	
 	#----------------------------------
 	#          Start COmbat
@@ -680,14 +679,7 @@ func _on_text_input(val:String):
 func force_positions(force_pos_data:Dictionary):
 	for actor_id in force_pos_data.keys():
 		var path_marker_name = force_pos_data[actor_id]
-		if actor_id == "Player1":
-			actor_id = StoryState.get_player_id(0)
-		if actor_id == "Player2":
-			actor_id = StoryState.get_player_id(1)
-		if actor_id == "Player3":
-			actor_id = StoryState.get_player_id(2)
-		if actor_id == "Player4":
-			actor_id = StoryState.get_player_id(3)
+		actor_id = translate_actor_id(actor_id)
 		var game_state = CombatRootControl.Instance.GameState
 		
 		if path_marker_name == "_DEAD_":
@@ -738,9 +730,8 @@ func _do_move_actor(block_data)->bool:
 	var target_actor_id = block_data.get("TargetActorId", null)
 	if !target_actor_id:
 		printerr("DialogController: No 'TargetActorId' provided on MoveActor block.")
-		return false	
-	if target_actor_id == "Player1":
-		target_actor_id = StoryState.get_player_id()
+		return false
+	target_actor_id = translate_actor_id(target_actor_id)
 
 	var path_marker_name = block_data.get("PathMarkerName", null)
 	if !path_marker_name:
@@ -775,3 +766,14 @@ func _do_move_actor(block_data)->bool:
 	else:
 		actor_node.que_scripted_movement(path_data)
 	return true
+
+func translate_actor_id(actor_id:String)->String:
+	if actor_id == "Player1":
+		actor_id = StoryState.get_player_id(0)
+	elif actor_id == "Player2":
+		actor_id = StoryState.get_player_id(1)
+	elif actor_id == "Player3":
+		actor_id = StoryState.get_player_id(2)
+	elif actor_id == "Player4":
+		actor_id = StoryState.get_player_id(3)
+	return actor_id

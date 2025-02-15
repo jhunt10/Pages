@@ -476,6 +476,11 @@
 		"OnSkip":{
 			"Blocks":[
 				{
+					"BlockType":"CustomBlock",
+					"ScriptPath": "res://Scenes/Dialog/CustomDialogBlocks/CampTutorialBlocks.gd",
+					"EnableMenu": "Scribe"
+				},
+				{
 					"BlockType":"SetFlag",
 					"FlagName":"CampScribeDisabled",
 					"Value": false
@@ -641,7 +646,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "to @Color:Red@The End@Clear@.",
+						"Text": "into @Color:Red@The End@Clear@.",
 						"NewLine": false,
                         "LetterDelay": 0.015
 					},
@@ -1215,7 +1220,7 @@
 				"Entries": [
 					{
 						"EntryType": "BackTrack",
-						"Text": " joined the Hero's Party.",
+						"Text": " joined the The Party.",
 						"BaseText": "And so, the [color=red]Scribe[/color]",
 						"NewLine": false,
                         "LetterDelay": 0.01
@@ -1338,7 +1343,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": "Now that we've them, I should explain what a @Color:Red@Scribe@Clear@ can do.",
+						"Text": "Now that we have them, I should explain what a @Color:Red@Scribe@Clear@ does.",
 						"NewLine": false
 					},
 					{

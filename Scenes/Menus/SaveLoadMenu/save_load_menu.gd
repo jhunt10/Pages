@@ -186,12 +186,23 @@ func _on_slot_pressed(save_name):
 func set_displayed_save_data(save_name:String, data):
 	sel_save_name_label.text = data.get("SaveName", save_name)
 	sel_save_date_label.text = data.get("SaveDate", "")
-	sel_save_loaction_label.text = data.get("Location", "")
+	var location = data.get("Location", "")
+	sel_save_loaction_label.text = location
+	
+	var image_path = "res://Scenes/Menus/CampMenu/PrettyPictures/" + location.replace(' ', '') + ".png"
+	var pretty_picture = SpriteCache.get_sprite(image_path)
+	if pretty_picture:
+		sel_pretty_pic.texture = pretty_picture
+	
 	sel_runtime_label.text = str(data.get("RunTime", 0))
 	sel_party_container.clear()
 	var party = data.get("Party", {})
 	for key in party.keys():
-		sel_party_container.add_row(key, party[key])
+		var val = party[key]
+		if val is int or val is float:
+			sel_party_container.add_row(key, party[key])
+		else:
+			sel_party_container.add_row(val[0], val[1])
 	sel_pretty_pic.show()
 	sel_save_details_container.show()
 	if save_mode:
