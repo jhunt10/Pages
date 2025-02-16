@@ -45,6 +45,7 @@ offset_right = 300.0
 offset_bottom = 200.0
 mouse_filter = 1
 script = ExtResource("1_vq5a0")
+shop_mode = null
 offset_control = NodePath("OffsetControl")
 offset_point = NodePath("OffestPoint")
 vertical = true
@@ -763,7 +764,6 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 text = "Equipe"
-_size_dirty = true
 center_x = true
 
 [node name="EquipButton" type="Button" parent="OffsetControl/NinePatchRect/VBoxContainer/EquipButtonBackground"]
@@ -775,7 +775,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="BuyingController" type="VBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer" node_paths=PackedStringArray("plus_button", "minus_button", "buy_button", "buying_count_label", "owned_count_label", "cost_container", "cost_value_label")]
+[node name="BuyingController" type="VBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer" node_paths=PackedStringArray("plus_button", "minus_button", "buy_button", "buying_count_label", "owned_count_label", "cost_container", "cost_value_label", "button_label")]
 visible = false
 layout_mode = 2
 theme_override_constants/separation = 0
@@ -789,6 +789,7 @@ buying_count_label = NodePath("BuyCountCostContainer/BuyingCountControl/BuyingVa
 owned_count_label = NodePath("BuyCountCostContainer/OwnedContainer/OwnValueLabel")
 cost_container = NodePath("BuyCountCostContainer/CostContainer")
 cost_value_label = NodePath("BuyCountCostContainer/CostContainer/CostLabel")
+button_label = NodePath("BuyButtonsContainer/ConfirmButton/Label")
 default_cost_color = Color(0.470588, 0, 0, 1)
 invalid_cost_color = Color(0.473976, 0.473976, 0.473976, 1)
 

@@ -76,9 +76,9 @@ func _build_sprite_sheet():
 	var sheet_rect = Rect2i(0, 0, sheet_size.x, sheet_size.y)
 	
 	# Maerge Equipment Images
-	for item:BaseEquipmentItem in _get_draw_ordered_equipment():
+	for item in _get_draw_ordered_equipment():
 		# Skip weapons
-		if item.get_equipment_slot_type() == "Weapon":
+		if item is BaseWeaponEquipment:
 			continue
 		var equip_sprite_path = item.get_sprite_sheet_file_path()
 		if !equip_sprite_path:
@@ -134,4 +134,7 @@ func _get_draw_ordered_equipment()->Array:
 			if equip.get_equipment_slot_type() == slot:
 				if equip.get_load_val("SpriteSheet", null):
 					out_list.append(equip)
+	for page:BasePageItem in _actor.pages.list_items():
+		if page.get_sprite_sheet_file_path():
+			out_list.append(page)
 	return out_list

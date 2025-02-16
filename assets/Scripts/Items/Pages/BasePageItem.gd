@@ -32,6 +32,10 @@ func _init(key:String, def_load_path:String, def:Dictionary, id:String='', data:
 		details_data = BaseLoadObjectLibrary._merge_defs(details_data,org_detail_data)
 		details = ObjectDetailsData.new(EffectLibrary.Instance._defs_to_load_paths[effect_key], details_data)
 
+func is_passive_page():
+	var action_key = get_load_val("ActionKey", '')
+	return action_key == null or action_key == ''
+
 func get_action_key():
 	return get_load_val("ActionKey")
 
@@ -52,17 +56,10 @@ func get_tags_added_to_actor()->Array:
 
 
 func get_rarity_background()->Texture2D:
-	if get_load_val("EffectKey"):
-		var rarity = get_item_rarity()
-		
-		if rarity == BaseItem.ItemRarity.Mundane:
-			return SpriteCache.get_sprite("res://assets/Sprites/Paper/Mundane_Background.png")
-		if rarity == BaseItem.ItemRarity.Common:
-			return SpriteCache.get_sprite("res://assets/Sprites/Paper/Common_Clipped_Background.png")
-		if rarity == BaseItem.ItemRarity.Rare:
-			return SpriteCache.get_sprite("res://assets/Sprites/Paper/Rare_Clipped_Background.png")
-		if rarity == BaseItem.ItemRarity.Legendary:
-			return SpriteCache.get_sprite("res://assets/Sprites/Paper/Legend_Clipped_Background.png")
-		if rarity == BaseItem.ItemRarity.Unique:
-			return SpriteCache.get_sprite("res://assets/Sprites/Paper/Unique_Background.png")
-	return ItemHelper.get_rarity_background(self.get_item_rarity())
+	return ItemHelper.get_rarity_background(self.get_item_rarity(), is_passive_page())
+
+func get_sprite_sheet_file_path():
+	var file_name = get_load_val("SpriteSheet", null)
+	if !file_name:
+		return null
+	return _def_load_path.path_join(file_name)

@@ -175,11 +175,6 @@ func load_init_state(sub_scene_data:Dictionary):
 	var camera_point = MapController.get_pos_marker("CameraStart")
 	if camera_point:
 		camera.snap_to_map_pos(camera_point)
-	elif player_actor:
-		ui_control.set_player_actor(player_actor)
-		var actor_pos = GameState.get_actor_pos(player_actor)
-		if actor_pos:
-			camera.snap_to_map_pos(actor_pos)
 	
 	is_story_map = sub_scene_data.get("IsStoryMap", false)
 	var dialog_script = sub_scene_data.get("DialogScript")
@@ -373,9 +368,16 @@ static func list_player_actors()->Array:
 			out_list.append(actor)
 	return out_list
 
-func set_player_index(index:int):
-	_current_player_index = index
-	ui_control.set_player_actor_index(_current_player_index)
+func get_current_player_actor()->BaseActor:
+	return StoryState.get_player_actor(_current_player_index)
+
+func set_player_index(index:int, move_camera:bool=true):
+	if index >= 0 and index < 4 and StoryState._player_ids[index] != null:
+		_current_player_index = index
+		ui_control.set_player_actor_index(_current_player_index)
+		if move_camera:
+			var actor = StoryState.get_player_actor(index)
+			camera.lock_to_actor(actor)
 
 func get_next_player_index()->int:
 	var next_index = (_current_player_index + 1) % 4

@@ -1,0 +1,722 @@
+{
+	"_MetaData_": {
+		"StartPartKey": "StartSwitch"
+	},
+	"StartSwitch":{
+        "_NextPartLogic":{
+            "FlagName": "LeaveAbandonedCabin",
+            "Cases": {
+                "@DEFAULT@": "Intro",
+                "true": "LeaveCamp",
+                "false": "ReadyToGo"
+            }
+        },
+		"WaitForNextButton": false,
+		"Inital_BlackOutState": "Clear",
+		"EnsurePoses": {}
+    },
+	"Intro":{
+        "_NextPartKey":"Dialog1",
+		"WaitForNextButton": false,
+		"Inital_BlackOutState": "Clear",
+		"EnsurePoses": {},
+		"Blocks":[
+			{
+				"BlockType": "SpeechBox",
+				"TopBox": false,
+				"WaitToFinish": true,
+				"WaitForNextButton": true,
+				"Hide": false,
+				"Entries": [
+					{
+						"EntryType":"Clear"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "In the damp and dark interior of @Color:Red@The Abandoned Cabin@Clear@, ",
+						"NewLine": false
+					},
+					{
+						"EntryType":"WaitToRead"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "the lone @Color:Red@Soldier@Clear@ meets with the @Color:Red@Mysterious Figure@Clear@ to hear how the stranger plans to save @Color:Red@The City@Clear@.",
+						"NewLine": true
+					},
+					{
+						"EntryType":"WaitToRead"
+					},
+					{
+						"EntryType":"WaitToRead"
+					}
+				]
+			},
+            {
+				"BlockType": "SpeechBox",
+				"TopBox": false,
+				"WaitToFinish": true,
+				"WaitForNextButton": true,
+				"Hide": false,
+				"Entries": [
+					{
+						"EntryType":"Clear",
+                        "ClearSpeaker": false
+					},
+					{
+						"EntryType": "Speaker",
+						"SpeakerName": "MtFr",
+						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Happy.png"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "Thanks for setting the mood, @Color:Red@Scribe@Clear@.",
+						"NewLine": false
+					},
+					{
+						"EntryType":"WaitToRead"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "Now as I said before, ",
+						"NewLine": true
+					},
+					{
+						"EntryType":"WaitToRead"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "a nefarious @Color:Red@Villian@Clear@ is planning to invade @Color:Red@The City@Clear@ as thier first step in taking over @Color:Red@The World@Clear@.",
+						"NewLine": false
+					},
+					{
+						"EntryType":"WaitToRead"
+					}
+				]
+			}
+        ]
+    },
+	"Dialog1":{
+        "_NextPartKey":"Dialog2",
+		"WaitForNextButton": false,
+		"Inital_BlackOutState": "Clear",
+		"EnsurePoses": {},
+		"Blocks":[
+            {
+				"BlockType": "SpeechBox",
+				"TopBox": false,
+				"WaitToFinish": true,
+				"WaitForNextButton": true,
+				"Hide": false,
+				"Entries": [
+					{
+						"EntryType":"Clear",
+                        "ClearSpeaker": false
+					},
+					{
+						"EntryType": "Speaker",
+						"SpeakerName": "MtFr",
+						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Happy.png"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "Normally @Color:Red@Monsters@Clear@ can't enter @Color:Red@The City@Clear@ because the whole town is protected by a magical barrier called @Color:Red@The Seal@Clear@.",
+						"NewLine": true
+					},
+					{
+						"EntryType":"WaitToRead"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "It repeles @Color:Red@Actors@Clear@ found with blacklisted @Color:Blue@Tags@Clear@ like: ",
+						"NewLine": true
+					},
+					{
+						"EntryType":"WaitToRead"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "@Color:Red@Monster@Clear@, ",
+						"NewLine": true
+					},
+					{
+						"EntryType":"WaitToRead"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "@Color:Red@Demon@Clear@, ",
+						"NewLine": false
+					},
+					{
+						"EntryType":"WaitToRead"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "or @Color:Red@Squirrle@Clear@.",
+						"NewLine": false
+					},
+					{
+						"EntryType":"WaitToRead"
+					}
+				]
+			},
+            {
+				"BlockType": "SpeechBox",
+				"TopBox": false,
+				"WaitToFinish": true,
+				"WaitForNextButton": true,
+				"Hide": false,
+				"Entries": [
+					{
+						"EntryType":"Clear",
+                        "ClearSpeaker": false
+					},
+					{
+						"EntryType": "Speaker",
+						"SpeakerName": "MtFr",
+						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Squint.png"
+					},
+					{
+						"EntryType":"WaitToRead"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "Step one foot inside @Color:Red@The City@Clear@ and @Color:Red@The Seal@Clear@ zaps you with with the worse pain I've ever felt in my life.",
+						"NewLine": true
+					},
+					{
+						"EntryType":"WaitToRead"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "... ",
+						"NewLine": false,
+                        "LetterDelay":0.3
+					},
+					{
+						"EntryType": "Speaker",
+						"SpeakerName": "MtFr",
+						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Surprize.png"
+					},
+					{
+						"EntryType":"Delay",
+                        "Delay": 0.5
+					},
+					{
+						"EntryType": "BackTrack",
+						"Text": "... ",
+						"BaseText": "Step one foot inside [color=red]The City[/color] and [color=red]The Seal[/color] zaps you with with the worse pain I've ever felt in my life."
+					},
+					{
+						"EntryType": "Speaker",
+						"SpeakerName": "MtFr",
+						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Happy.png"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "If you're a @Color:Red@Monster@Clear@ that is. ",
+						"NewLine": true
+					},
+					{
+						"EntryType":"WaitToRead"
+					},
+					{
+						"EntryType":"WaitToRead"
+					},
+					{
+						"EntryType":"WaitToRead"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "Which I'm not.",
+						"NewLine": false
+					},
+					{
+						"EntryType":"WaitToRead"
+					}
+				]
+			},
+            {
+				"BlockType": "SpeechBox",
+				"TopBox": false,
+				"WaitToFinish": true,
+				"WaitForNextButton": true,
+				"Hide": false,
+				"Entries": [
+					{
+						"EntryType":"Clear",
+                        "ClearSpeaker": false
+					},
+					{
+						"EntryType": "Speaker",
+						"SpeakerName": "MtFr",
+						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Sad.png"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "But this @Color:Red@Villian@Clear@ is as cunning as they are nefarious.",
+						"NewLine": false
+					},
+					{
+						"EntryType":"WaitToRead"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "They've found a way to break @Color:Red@The Seal@Clear@ and open the way for countless @Color:Red@Monsters@Clear@ to flood @Color:Red@The City@Clear@.",
+						"NewLine": true
+					},
+					{
+						"EntryType":"WaitToRead"
+					}
+				]
+			},
+            {
+				"BlockType": "SpeechBox",
+				"TopBox": false,
+				"WaitToFinish": true,
+				"WaitForNextButton": true,
+				"Hide": false,
+				"Entries": [
+					{
+						"EntryType":"Clear",
+                        "ClearSpeaker": false
+					},
+					{
+						"EntryType": "Speaker",
+						"SpeakerName": "MtFr",
+						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Happy.png"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "@Color:Red@The City Guards@Clear@ could probably hold off the threat, ",
+						"NewLine": false
+					},
+					{
+						"EntryType":"WaitToRead"
+					},
+					{
+						"EntryType": "Speaker",
+						"SpeakerName": "MtFr",
+						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Sad.png"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "if they knew it was comming. ",
+						"NewLine": false
+					},
+					{
+						"EntryType":"WaitToRead"
+					},
+					{
+						"EntryType":"WaitToRead"
+					},
+					{
+						"EntryType": "Speaker",
+						"SpeakerName": "MtFr",
+						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Happy.png"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "But that's where you come in, @Color:Red@Hero@Clear@!",
+						"NewLine": false
+					},
+					{
+						"EntryType":"WaitToRead"
+					}
+				]
+			},
+            {
+				"BlockType": "SpeechBox",
+				"TopBox": false,
+				"WaitToFinish": true,
+				"WaitForNextButton": true,
+				"Hide": false,
+				"Entries": [
+					{
+						"EntryType":"Clear",
+                        "ClearSpeaker": false
+					},
+					{
+						"EntryType": "Speaker",
+						"SpeakerName": "MtFr",
+						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Happy.png"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "All we have to do is: ",
+						"NewLine": false
+					},
+					{
+						"EntryType":"WaitToRead"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "1) Travel to @Color:Red@The City@Clear@",
+						"NewLine": true
+					},
+					{
+						"EntryType":"WaitToRead"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "2) Break in",
+						"NewLine": true
+					},
+					{
+						"EntryType": "BackTrack",
+						"Text": "Break in",
+                        "BaseText": "2) "
+					},
+					{
+						"EntryType": "Text",
+						"Text": "Get inside",
+						"NewLine": false
+					},
+					{
+						"EntryType":"WaitToRead"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "3) Save @Color:Red@The World@Clear@",
+						"NewLine": true
+					},
+					{
+						"EntryType":"WaitToRead"
+					}
+				]
+			},
+            {
+				"BlockType": "SpeechBox",
+				"TopBox": false,
+				"WaitToFinish": true,
+				"WaitForNextButton": true,
+				"Hide": false,
+				"Entries": [
+					{
+						"EntryType":"Clear",
+                        "ClearSpeaker": false
+					},
+					{
+						"EntryType": "Speaker",
+						"SpeakerName": "MtFr",
+						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Happy.png"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "The path to @Color:Red@The City@Clear@ is a straight shot up @Color:Red@The Road@Clear@.",
+						"NewLine": false
+					},
+					{
+						"EntryType":"WaitToRead"
+					},
+					{
+						"EntryType": "Speaker",
+						"SpeakerName": "MtFr",
+						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Squint.png"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "But that doesn't mean it's going to be a safe and easy trip. ",
+						"NewLine": true
+					},
+					{
+						"EntryType":"WaitToRead"
+					}
+				]
+			},
+            {
+				"BlockType": "SpeechBox",
+				"TopBox": false,
+				"WaitToFinish": true,
+				"WaitForNextButton": true,
+				"Hide": false,
+				"Entries": [
+					{
+						"EntryType":"Clear",
+                        "ClearSpeaker": false
+					},
+					{
+						"EntryType": "Speaker",
+						"SpeakerName": "MtFr",
+						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Neutral.png"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "Ever since @Color:Red@The Millitary@Clear@ lost @Color:Red@The Fort@Clear@ this area has been over run with @Color:Red@Bandits@Clear@, @Color:Red@Monsters@Clear@, and @Color:Red@Squirrles@Clear@.",
+						"NewLine": false
+					},
+					{
+						"EntryType":"WaitToRead"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "You've already survived one @Color:Red@Combat@Clear@, ",
+						"NewLine": true
+					},
+					{
+						"EntryType":"WaitToRead"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "but there's bound to be more. ",
+						"NewLine": false
+					},
+					{
+						"EntryType":"WaitToRead"
+					}
+				]
+			}
+        ]
+    },
+	"Dialog2":{
+        "_NextPartLogic":{
+			"FlagName": "Tutorial",
+			"Cases": {
+				"@DEFAULT@": "Dialog3",
+				"true": "Dialog3",
+				"false": "ReadyToGo"
+			}
+		},
+		"WaitForNextButton": false,
+		"Inital_BlackOutState": "Clear",
+		"EnsurePoses": {},
+		"Blocks":[
+            {
+				"BlockType": "SpeechBox",
+				"TopBox": false,
+				"WaitToFinish": true,
+				"WaitForNextButton": true,
+				"Hide": false,
+				"Entries": [
+					{
+						"EntryType":"Clear",
+                        "ClearSpeaker": false
+					},
+					{
+						"EntryType": "Speaker",
+						"SpeakerName": "MtFr",
+						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Happy.png"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "Not that I doubt your abilities, ",
+						"NewLine": false
+					},
+					{
+						"EntryType":"WaitToRead"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "but one lone @Color:Red@Soldier@Clear@ doesn't make for the most balanced team.",
+						"NewLine": false
+					},
+					{
+						"EntryType":"WaitToRead"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "but one lone @Color:Red@Soldier@Clear@ doesn't make for the most balanced team.",
+						"NewLine": false
+					},
+					{
+						"EntryType":"WaitToRead"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "We should probaly keep an eye out for more @Color:Red@Actors@Clear@ we can add to @Color:Blue@The Party@Clear@.",
+						"NewLine": true
+					},
+					{
+						"EntryType":"WaitToRead"
+					}
+				]
+			}
+        ]
+    },
+	"Dialog3":{
+        "_NextPartKey":"ReadyToGo",
+		"WaitForNextButton": false,
+		"Inital_BlackOutState": "Clear",
+		"EnsurePoses": {},
+		"Blocks":[
+            {
+				"BlockType": "SpeechBox",
+				"TopBox": false,
+				"WaitToFinish": true,
+				"WaitForNextButton": true,
+				"Hide": false,
+				"Entries": [
+					{
+						"EntryType":"Clear",
+                        "ClearSpeaker": false
+					},
+					{
+						"EntryType": "Speaker",
+						"SpeakerName": "MtFr",
+						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Happy.png"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "You'll also probably want to look over your @Color:Blue@PageBook@Clear@ if you haven't already. ",
+						"NewLine": false
+					},
+					{
+						"EntryType":"WaitToRead"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "I think you picked up a @Color:Blue@Page@Clear@ and a @Color:Red@Potion@Clear@ from the @Color:Red@Squirrles@Clear@.",
+						"NewLine": true
+					},
+					{
+						"EntryType":"WaitToRead"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "You should fill up your @Color:Red@Bag@Clear@ if you haven't already.",
+						"NewLine": true
+					},
+					{
+						"EntryType":"WaitToRead"
+					}
+				]
+			}
+		]
+	},
+	"ReadyToGo":{
+        "_NextPartLogic":{
+			"FlagName": "LeaveAbandonedCabin",
+			"Cases": {
+				"@DEFAULT@": "DontLeave",
+				"true": "LeaveCamp",
+				"false": "DontLeave"
+			}
+		},
+		"WaitForNextButton": false,
+		"Inital_BlackOutState": "Clear",
+		"EnsurePoses": {},
+		"Blocks":[
+            {
+				"BlockType": "SpeechBox",
+				"TopBox": false,
+				"WaitToFinish": true,
+				"WaitForNextButton": false,
+				"Hide": false,
+				"Entries": [
+					{
+						"EntryType":"Clear",
+                        "ClearSpeaker": false
+					},
+					{
+						"EntryType": "Speaker",
+						"SpeakerName": "MtFr",
+						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Happy.png"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "Are you ready to start our journey to @Color:Red@The City@Clear@?",
+						"NewLine": false
+					},
+					{
+						"EntryType": "Question",
+						"Choices": {"Yes": "LeaveAbandonedCabin:true", "No": "LeaveAbandonedCabin:false"}
+					}	
+				]
+			}
+		]
+	},
+	"DontLeave":{
+        "_NextPartKey":"",
+		"WaitForNextButton": false,
+		"Inital_BlackOutState": "Clear",
+		"EnsurePoses": {},
+        "DecrementStoryIndex": true,
+		"Blocks":[
+            {
+				"BlockType": "SpeechBox",
+				"TopBox": false,
+				"WaitToFinish": true,
+				"WaitForNextButton": true,
+				"Hide": false,
+				"Entries": [
+					{
+						"EntryType":"Clear",
+                        "ClearSpeaker": false
+					},
+					{
+						"EntryType": "Speaker",
+						"SpeakerName": "MtFr",
+						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Happy.png"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "No problem! ",
+						"NewLine": false
+					},
+					{
+						"EntryType": "WaitToRead"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "I'll be here when you're ready. ",
+						"NewLine": false
+					},
+					{
+						"EntryType": "WaitToRead"
+					}
+				]
+			}
+		]
+	}	,
+	"LeaveCamp":{
+        "_NextPartKey":"",
+		"WaitForNextButton": false,
+		"Inital_BlackOutState": "Clear",
+		"EnsurePoses": {},
+		"Blocks":[
+            {
+				"BlockType": "SpeechBox",
+				"TopBox": false,
+				"WaitToFinish": true,
+				"WaitForNextButton": false,
+				"Hide": false,
+				"Entries": [
+					{
+						"EntryType":"Clear",
+                        "ClearSpeaker": false
+					},
+					{
+						"EntryType": "Speaker",
+						"SpeakerName": "MtFr",
+						"SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Smile.png"
+					},
+					{
+						"EntryType": "Text",
+						"Text": "Ok @Color:Red@Hero@Clear@, ",
+						"NewLine": false
+					},
+					{
+						"EntryType": "WaitToRead"
+					},
+					{
+						"EntryType": "Text",
+						"Text": " let's head out. ",
+						"NewLine": false
+					},
+					{
+						"EntryType": "WaitToRead"
+					},
+					{
+						"EntryType": "WaitToRead"
+					},
+					{
+						"EntryType": "WaitToRead"
+					}
+				]
+			},
+			{
+				"BlockType": "NextStory"
+			}
+		]
+	}	
+}

@@ -18,7 +18,7 @@ signal buy_button_pressed(item_key:String, count:int, cost:int)
 			var total_cost = buying_count * item_price
 			cost_value_label.text = str(total_cost)
 			var cur_money = StoryState.get_current_money()
-			if total_cost > cur_money:
+			if not sell_mode and total_cost > cur_money:
 				cost_container.modulate = invalid_cost_color
 				cost_value_label.text = "("+str(total_cost)+")"
 			else:
@@ -59,6 +59,7 @@ func _ready() -> void:
 	plus_button.pressed.connect(_on_plus_pressed)
 	minus_button.pressed.connect(_on_minus_pressed)
 	buy_button.pressed.connect(_on_buy_pressed)
+	sell_mode = sell_mode
 
 func _on_plus_pressed():
 	if sell_mode:
@@ -76,9 +77,9 @@ func _on_buy_pressed():
 	
 	
 
-func set_item(item:BaseItem):
+func set_item(item:BaseItem, selling:bool):
 	_item_key = item.ItemKey
+	sell_mode = selling
 	item_price = item.get_item_value()
 	owned_count = PlayerInventory.get_item_stack_count(_item_key)
 	owned_count_label.text = str(owned_count)
-	sell_mode = sell_mode

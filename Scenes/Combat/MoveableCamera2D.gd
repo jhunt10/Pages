@@ -14,6 +14,8 @@ var freeze:bool:
 		if freeze: printerr("****** Freezing Camera")
 		else: printerr("****** UNFreezing Camera")
 
+var locked_for_cut_scene:bool = false
+
 var following_actor_node:ActorNode
 
 var is_auto_panning:bool:
@@ -42,7 +44,7 @@ func snap_to_map_pos(pos):
 	var map = CombatRootControl.Instance.MapController
 	var tile_pos = map.actor_tile_map.map_to_local(Vector2i(pos.x, pos.y))
 	var screen_center = self.get_screen_center_position()
-	set_camera_pos(tile_pos)
+	self.position = tile_pos
 	if LOGGING: print("SnapToPos: pos: %s | tile_pos: %s | SelfPos: %s | MapPos: %s" % [pos, tile_pos, self.get_screen_center_position(), map.actor_tile_map.position])
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -70,13 +72,15 @@ func _process(delta: float) -> void:
 	
 	if following_actor_node:
 		if not is_instance_valid(following_actor_node):
-			following_actor_node = null
+			clear_following_actor()
 		else:
 			var move_node = following_actor_node.actor_motion_node
 			if LOGGING: print("Following Actor: " + str(move_node.position))
 			set_camera_pos(move_node.global_position, false)
 			return
 	if freeze:
+		return
+	if locked_for_cut_scene:
 		return
 	var dist = delta * speed
 	if Input.is_key_pressed(KEY_W):
@@ -115,14 +119,18 @@ func _process(delta: float) -> void:
 			#_pinch_last_radius = radius
 	pass
 
+func clear_following_actor():
+	if following_actor_node:
+		following_actor_node = null
+
 func set_camera_pos(pos:Vector2, unfollow:bool=true):
 	self.position = pos
 	if unfollow:
-		following_actor_node = null
+		clear_following_actor()
 
 func start_auto_pan(target_pos:Vector2):
 	_touch_events.clear()
-	following_actor_node = null
+	clear_following_actor()
 	auto_pan_start_pos = self.position
 	auto_pan_target_pos = target_pos
 	auto_pan_velocity = auto_pan_min_velocity
@@ -148,6 +156,8 @@ func force_finish_panning():
 func _input(event: InputEvent) -> void:
 	if freeze or is_auto_panning:
 		return
+	if locked_for_cut_scene:
+		return
 	if event is InputEventMouseButton:
 		var mouse_event = event as InputEventMouseButton
 		var new_zoom = self.zoom
@@ -164,6 +174,8 @@ var _pinch_last_radius:float
 var _pinch_start_zoom:Vector2
 func _unhandled_input(event: InputEvent) -> void:
 	if freeze or is_auto_panning:
+		return
+	if locked_for_cut_scene:
 		return
 	if event is InputEventScreenTouch and event.pressed:
 		if _touch_events.size() == 0:

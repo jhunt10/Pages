@@ -51,6 +51,7 @@ static func create_actor(key:String, data:Dictionary, premade_id:String = '')->B
 	if !actor:
 		printerr("ActorLibrary.create_actor: Failed to make actor '%s'." % [key])
 		return null
+	actor.suppress_equipment_changed = true
 	actor.equipment._build_slots_list()
 	var equipment_list = actor.get_load_val("SpawnEquipmentArr", [])
 	for equip in equipment_list:
@@ -74,7 +75,9 @@ static func create_actor(key:String, data:Dictionary, premade_id:String = '')->B
 		if item:
 			if !actor.items.add_item_to_first_valid_slot(item):
 				printerr("ActorLibrary.create_actor: Failed add Item '%s'." % [item_key])
-		
+	
+	actor.suppress_equipment_changed = false
+	actor.equipment_changed.emit()
 	return actor
 
 #static func save_actors():

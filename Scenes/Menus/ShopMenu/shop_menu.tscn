@@ -555,6 +555,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="ItemMenuContainer" type="NinePatchRect" parent="." node_paths=PackedStringArray("entries_container", "premade_sub_item_list", "back_button")]
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.65
@@ -609,7 +610,7 @@ size_flags_horizontal = 3
 
 [node name="ShopSubItemList" type="Control" parent="ItemMenuContainer/ScrollContainer/VBoxContainer" node_paths=PackedStringArray("title_button", "title_h_box", "symbole_texture_rect", "title_label", "entries_v_box", "premade_item_button")]
 clip_contents = true
-custom_minimum_size = Vector2(317, 108)
+custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 script = ExtResource("13_3hu0s")
 showing = true
@@ -957,6 +958,7 @@ visible = false
 offset_bottom = 379.0
 showing = true
 state = 2
+shop_mode = false
 grow_timer = 0.5
 
 [node name="ConfirmPopUp" type="NinePatchRect" parent="." node_paths=PackedStringArray("title_label", "item_background", "item_icon", "item_label", "price_label", "count_label", "total_label", "money_label", "after_label", "cancel_button", "confirm_button")]

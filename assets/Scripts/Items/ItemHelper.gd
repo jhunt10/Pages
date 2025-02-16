@@ -10,19 +10,33 @@ static func spawn_item(item_key:String, item_data:Dictionary, pos:MapPos)->BaseI
 	return item
 
 
-static func get_rarity_background(rarity:BaseItem.ItemRarity)->Texture2D:
-	if rarity == BaseItem.ItemRarity.Mundane:
-		return SpriteCache.get_sprite("res://assets/Sprites/Paper/Mundane_Background.png")
-	if rarity == BaseItem.ItemRarity.Common:
-		return SpriteCache.get_sprite("res://assets/Sprites/Paper/Common_Background.png")
-	if rarity == BaseItem.ItemRarity.Rare:
-		return SpriteCache.get_sprite("res://assets/Sprites/Paper/Rare_Background.png")
-	if rarity == BaseItem.ItemRarity.Legendary:
-		return SpriteCache.get_sprite("res://assets/Sprites/Paper/Legend_Background.png")
-	if rarity == BaseItem.ItemRarity.Unique:
-		return SpriteCache.get_sprite("res://assets/Sprites/Paper/Unique_Background.png")
-		
-	return SpriteCache.get_sprite("res://assets/Sprites/Paper/Mundane_Background.png")
+static func get_rarity_background(rarity:BaseItem.ItemRarity, is_clipped:bool=false)->Texture2D:
+	if is_clipped:
+		if rarity == BaseItem.ItemRarity.Mundane:
+			return SpriteCache.get_sprite("res://assets/Sprites/Paper/Mundane_Clipped_Background.png")
+		elif rarity == BaseItem.ItemRarity.Common:
+			return SpriteCache.get_sprite("res://assets/Sprites/Paper/Common_Clipped_Background.png")
+		elif rarity == BaseItem.ItemRarity.Rare:
+			return SpriteCache.get_sprite("res://assets/Sprites/Paper/Rare_Clipped_Background.png")
+		elif rarity == BaseItem.ItemRarity.Legendary:
+			return SpriteCache.get_sprite("res://assets/Sprites/Paper/Legend_Clipped_Background.png")
+		elif rarity == BaseItem.ItemRarity.Unique:
+			return SpriteCache.get_sprite("res://assets/Sprites/Paper/Unique_Background.png")
+		else:
+			return SpriteCache.get_sprite("res://assets/Sprites/Paper/Mundane_Clipped_Background.png")
+	else:
+		if rarity == BaseItem.ItemRarity.Mundane:
+			return SpriteCache.get_sprite("res://assets/Sprites/Paper/Mundane_Background.png")
+		elif rarity == BaseItem.ItemRarity.Common:
+			return SpriteCache.get_sprite("res://assets/Sprites/Paper/Common_Background.png")
+		elif rarity == BaseItem.ItemRarity.Rare:
+			return SpriteCache.get_sprite("res://assets/Sprites/Paper/Rare_Background.png")
+		elif rarity == BaseItem.ItemRarity.Legendary:
+			return SpriteCache.get_sprite("res://assets/Sprites/Paper/Legend_Background.png")
+		elif rarity == BaseItem.ItemRarity.Unique:
+			return SpriteCache.get_sprite("res://assets/Sprites/Paper/Unique_Background.png")
+		else:
+			return SpriteCache.get_sprite("res://assets/Sprites/Paper/Mundane_Background.png")
 	
 
 ## Returns a dictionary for popup message

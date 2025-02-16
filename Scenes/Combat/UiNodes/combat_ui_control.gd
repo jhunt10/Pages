@@ -87,18 +87,11 @@ func _process(delta: float) -> void:
 func on_player_stat_clicked(index):
 	CombatRootControl.Instance.set_player_index(index)
 
-func set_player_actor_index(index, move_camera:bool=true):
+# Should only be called by CombatRootControl
+func set_player_actor_index(index):
 	var player_actor = StoryState.get_player_actor(index)
 	if player_actor:
-		set_player_actor(player_actor)
-	if move_camera:
-		CombatRootControl.Instance.camera.start_auto_pan_to_actor(player_actor)
-
-func set_player_actor(actor:BaseActor):
-	
-	que_input.set_actor(actor)
-	#CombatRootControl.Instance.camera.start_auto_pan_to_actor(actor)
-
+		que_input.set_actor(player_actor)
 
 func _input(event: InputEvent) -> void:
 	# Escape Key Pressed

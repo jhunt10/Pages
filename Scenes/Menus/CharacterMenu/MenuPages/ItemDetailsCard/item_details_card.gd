@@ -27,12 +27,13 @@ enum States {Hidden, Growing, Showing, Shrinking}
 			if state == States.Showing:
 				grow_timer = time_to_show
 				offset_control.position = Vector2.ZERO
-			
-@export var buy_mode:bool:
+
+var is_selling:bool = false
+@export var shop_mode:bool:
 	set(val):
-		buy_mode = val
+		shop_mode = val
 		if buy_controller:
-			if buy_mode:
+			if shop_mode:
 				buy_controller.show()
 				equip_button_background.hide()
 			else:
@@ -112,6 +113,7 @@ func _process(delta: float) -> void:
 		if grow_timer == 0:
 			state = States.Hidden
 			hide_done.emit()
+			self.queue_free()
 		#
 	#var target = null
 	#if animation_state == AnimationStates.In:
@@ -174,7 +176,8 @@ func set_item(actor:BaseActor, item:BaseItem):
 	if item is BaseWeaponEquipment:
 		var weapon = (item as BaseWeaponEquipment)
 		weapon_details.set_weapon(actor, weapon)
-		actor_has_item = actor.equipment.has_item(item_id)
+		if actor:
+			actor_has_item = actor.equipment.has_item(item_id)
 		_current_card = weapon_details
 		weapon_details.show()
 	elif item is BaseArmorEquipment:
@@ -223,8 +226,8 @@ func set_item(actor:BaseActor, item:BaseItem):
 			var cant_equip_reasons = item.get_cant_use_reasons(actor)
 			set_cant_equip_reason(cant_equip_reasons)
 		self.start_show()
-	if buy_mode:
-		buy_controller.set_item(item)
+	if shop_mode:
+		buy_controller.set_item(item, is_selling)
 
 func equip_button_pressed():
 	var item = ItemLibrary.get_item(item_id)

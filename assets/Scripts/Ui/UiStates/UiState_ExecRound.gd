@@ -14,7 +14,8 @@ func start_state():
 	CombatRootControl.Instance.ui_control.que_input.showing = false
 	CombatRootControl.Instance.ui_control.que_input.hide_start_button()
 	
-	#CombatRootControl.Instance.camera.lock_to_actor(CombatUiControl.Instance.que_input._actor)
+	var current_actor = CombatRootControl.Instance.get_current_player_actor()
+	CombatRootControl.Instance.camera.lock_to_actor(current_actor)
 	pass
 
 func update(_delta:float):
@@ -22,7 +23,7 @@ func update(_delta:float):
 
 func end_state():
 	CombatRootControl.QueController.end_of_round.disconnect(_on_round_end)
-	CombatRootControl.Instance.camera.following_actor_node = null
+	CombatRootControl.Instance.camera.clear_following_actor()
 	pass
 	
 func _on_round_end():

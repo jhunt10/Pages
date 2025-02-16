@@ -1,6 +1,8 @@
 class_name  ShopConfirmPopUp
 extends NinePatchRect
 
+signal trade_confirmed(accepted:bool)
+
 @export var title_label:Label
 
 @export var item_background:TextureRect
@@ -22,7 +24,7 @@ var _count
 var _cost
 
 func _ready() -> void:
-	cancel_button.pressed.connect(self.hide)
+	cancel_button.pressed.connect(_on_cancel)
 	confirm_button.pressed.connect(_on_confirm)
 
 func set_item(selling:bool, item:BaseItem, count:int):
@@ -60,4 +62,9 @@ func _on_confirm():
 		if PlayerInventory.get_item_stack_count(_item_key) >= _count:
 			PlayerInventory.reduce_stack_count(_item_key, _count)
 			StoryState.spend_money(-_cost)
+	trade_confirmed.emit(true)
+	self.hide()
+
+func _on_cancel():
+	trade_confirmed.emit(false)
 	self.hide()

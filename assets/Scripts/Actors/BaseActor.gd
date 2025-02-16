@@ -92,7 +92,9 @@ func get_tags():
 	return tag_list
 
 func post_creation():
+	suppress_equipment_changed = true
 	equipment.load_saved_items()
+	self.equipment_changed.emit()
 	
 	items.load_saved_items()
 	items.set_bag_item(equipment.get_bag_equipment())
@@ -105,7 +107,11 @@ func post_creation():
 	pages.validate_items()
 	
 	stats.dirty_stats()
+	suppress_equipment_changed = false
+	self.equipment_changed.emit()
+	
 
+var suppress_equipment_changed:bool = false
 func _on_equipment_holder_items_change():
 	var bag = equipment.get_bag_equipment()
 	if not bag and items.bag_item_id != null:
@@ -119,11 +125,14 @@ func _on_equipment_holder_items_change():
 	if page_que and pages.page_que_item_id != page_que.Id:
 		pages.set_page_que_item(page_que)
 	
-	self.equipment_changed.emit()
+	if not suppress_equipment_changed:
+		self.equipment_changed.emit()
 
 func _on_class_page_change():
 	stats.dirty_stats()
 	stats.recache_stats()
+	if not suppress_equipment_changed:
+		self.equipment_changed.emit()
 
 func save_me()->bool:
 	return self.is_player

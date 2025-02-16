@@ -15,7 +15,7 @@ func _init(controler:UiStateController, args:Dictionary) -> void:
 	
 func start_state():
 	if _logging: print("Start UiState: Refill Ammo")
-	CombatRootControl.Instance.ui_control.set_player_actor_index(_actor_index)
+	CombatRootControl.Instance.set_player_index(_actor_index)
 	var que_input = CombatRootControl.Instance.ui_control.que_input
 	que_input.showing = true
 	que_input.show_page_selection(_selectable_action_keys)

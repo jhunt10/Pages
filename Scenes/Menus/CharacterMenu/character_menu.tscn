@@ -474,9 +474,9 @@ grow_vertical = 2
 self_modulate = Color(0.795186, 0.323344, 0.272967, 1)
 layout_mode = 0
 offset_left = -53.0
-offset_top = 33.0
+offset_top = 109.0
 offset_right = 11.0
-offset_bottom = 97.0
+offset_bottom = 173.0
 texture = ExtResource("3_ktt5q")
 script = SubResource("GDScript_rvisf")
 
@@ -539,9 +539,9 @@ grow_vertical = 2
 self_modulate = Color(0.466667, 0.360784, 1, 1)
 layout_mode = 0
 offset_left = -53.0
-offset_top = 109.0
+offset_top = 33.0
 offset_right = 11.0
-offset_bottom = 173.0
+offset_bottom = 97.0
 texture = ExtResource("3_ktt5q")
 script = SubResource("GDScript_rvisf")
 
@@ -1506,7 +1506,7 @@ layout_mode = 2
 size_flags_vertical = 3
 
 [node name="AtkStatsContainer" type="Container" parent="ScaleControl/StatsPage/ContainerControl/StatsMainContainer" node_paths=PackedStringArray("background", "inner_container")]
-custom_minimum_size = Vector2(12, 105)
+custom_minimum_size = Vector2(12, 90)
 layout_mode = 2
 script = ExtResource("16_ep8hk")
 background = NodePath("Background")
@@ -1810,7 +1810,7 @@ layout_mode = 2
 size_flags_vertical = 3
 
 [node name="DefStatsContainer" type="Container" parent="ScaleControl/StatsPage/ContainerControl/StatsMainContainer" node_paths=PackedStringArray("background", "inner_container")]
-custom_minimum_size = Vector2(12, 161)
+custom_minimum_size = Vector2(12, 118)
 layout_mode = 2
 script = ExtResource("16_ep8hk")
 background = NodePath("Background")
@@ -2116,7 +2116,7 @@ self_modulate = Color(0.498039, 0, 0, 1)
 custom_minimum_size = Vector2(34, 0)
 layout_mode = 2
 theme = ExtResource("12_dy5pv")
-text = "Evd:"
+text = "Evs:"
 horizontal_alignment = 1
 
 [node name="IconRect" type="TextureRect" parent="ScaleControl/StatsPage/ContainerControl/StatsMainContainer/DefStatsContainer/BoxContainer/MainContainer/EvadeBlockGrid/EvadeRow"]
@@ -2247,9 +2247,9 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -371.0
+offset_left = -397.0
 offset_top = -130.0
-offset_right = -71.0
+offset_right = -97.0
 offset_bottom = 130.0
 grow_horizontal = 0
 grow_vertical = 2

@@ -1,6 +1,8 @@
 class_name DialogController
 extends Control
 
+const LOGGING = false
+
 enum STATES {Ready, Playing, WaitingForBlocks, WaitingForNextButton, WaitingForCondition, Finished}
 
 enum BlockTypes {
@@ -151,8 +153,7 @@ func _process(delta: float) -> void:
 				_start_part(next_part_key)
 			else:
 				printerr("No Next Part Key Found")
-				_state = STATES.Finished
-				self.hide()
+				_finish_dialog()
 
 ## Returns true if any blocks are currently playing
 func _are_blocks_playing():
@@ -201,18 +202,20 @@ func _get_next_part_key():
 	return _current_part_data.get("_NextPartKey", null)
 
 func _start_part(part_key:String):
-	print("Starting  part: " + part_key)
+	if LOGGING: print("Starting  part: " + part_key)
 	_part_start_timer = 0
 	_cur_part_key = part_key
 	_condition_watcher = null
 	if not _dialog_part_datas.has(part_key):
 		printerr("DialogControl: No script part found with key '%s'." % [part_key])
-		_state = STATES.Finished
-		self.queue_free()
+		_finish_dialog()
 		return
 	_current_part_data = _dialog_part_datas[part_key].duplicate(true)
 	if not _current_part_data.keys().has('Blocks'):
 		_current_part_data['Blocks'] = []
+	
+	if CombatRootControl.Instance:
+		CombatRootControl.Instance.camera.locked_for_cut_scene = _current_part_data.get("LockCamera", true)
 	
 	if _current_part_data.get("DecrementStoryIndex", false):
 		StoryState._story_stage_index -= 1
@@ -245,6 +248,11 @@ func _start_part(part_key:String):
 	else:
 		_state = STATES.Playing
 
+func _finish_dialog():
+		_state = STATES.Finished
+		if CombatRootControl.Instance:
+			CombatRootControl.Instance.camera.locked_for_cut_scene = false
+		self.queue_free()
 
 func _on_skip():
 	# Can't skip watchers
@@ -260,7 +268,7 @@ func _on_skip():
 		for actor_node:ActorNode in CombatRootControl.Instance.MapController.actor_nodes.values():
 			actor_node.force_finish_movement()
 	var next_part_key = _get_next_part_key()
-	print("Skipping to part: %s" % [next_part_key])
+	if LOGGING: print("Skipping to part: %s" % [next_part_key])
 	top_speech_box.clear_entries()
 	top_speech_box.hide()
 	bot_speech_box.clear_entries()
@@ -270,8 +278,7 @@ func _on_skip():
 	if next_part_key:
 		_start_part(next_part_key)
 	else:
-		_state = STATES.Finished
-		self.hide()
+		_finish_dialog()
 	
 
 ## Returns true if block should be waitied on
@@ -280,7 +287,7 @@ func _handle_block(block_data:Dictionary)->bool:
 	if block_type_str == "MainMenu":
 		MainRootNode.Instance.go_to_main_menu()
 		return true
-	print("Handeling Block: " + block_type_str)
+	if LOGGING: print("Handeling Block: " + block_type_str)
 	var block_type = BlockTypes.get(block_type_str)
 	if block_type == null:
 		printerr("Unknown DialogBox BlockType: '%s'." % [block_type_str])
@@ -512,7 +519,7 @@ func _handle_block(block_data:Dictionary)->bool:
 	# 	 "SpawnNodeList": Array of Name of Spawn Node to be triggered.
 	#----------------------------------
 	if block_type == BlockTypes.SpawnActor:
-		print("DialogBlock: Spawing Actor %s" %[Time.get_unix_time_from_system()])
+		if LOGGING: print("DialogBlock: Spawing Actor %s" %[Time.get_unix_time_from_system()])
 		var spawn_node_list = block_data.get("SpawnNodeList", [])
 		var single_name = block_data.get("SpawnNodeName") 
 		if single_name != null:
@@ -555,6 +562,8 @@ func _handle_block(block_data:Dictionary)->bool:
 		_state = STATES.Finished
 		StoryState.load_next_story_scene()
 		_block_states["NextScene"] = BlockStates.Playing
+		if CombatRootControl.Instance:
+			CombatRootControl.Instance.camera.locked_for_cut_scene = false
 		return true
 	
 	#----------------------------------
@@ -612,7 +621,7 @@ func _on_combat_start_blackout():
 	pass
 
 func _on_animation_finished(animation_name:String, key:String):
-	print("Animation Finished: %s" % [animation_name])
+	if LOGGING: print("Animation Finished: %s" % [animation_name])
 	var animation_player = _animation_players[key]
 	(animation_player as AnimationPlayer).animation_finished.disconnect(_on_animation_finished)
 	_animation_players.erase(key)
@@ -620,14 +629,14 @@ func _on_animation_finished(animation_name:String, key:String):
 	
 
 func _on_speech_box_finished(is_top:bool):
-	print("Speech Box Finished")
+	if LOGGING: print("Speech Box Finished")
 	if is_top and _block_states.has("TopSpeech"):
 		_block_states['TopSpeech'] = BlockStates.Finished
 	if not is_top and _block_states.has("BotSpeech"):
 		_block_states['BotSpeech'] = BlockStates.Finished
 
 func _on_blackout_finished():
-	print("BlackOut Finished")
+	if LOGGING: print("BlackOut Finished")
 	if _block_states.has("BlackOut"):
 		_block_states["BlackOut"] = BlockStates.Finished
 
@@ -636,10 +645,13 @@ func _on_actor_move_finished(actor_id):
 	if _block_states.has(move_key):
 		_block_states[move_key] = BlockStates.Finished
 	var camera = CombatRootControl.Instance.camera
-	if (camera.following_actor_node and  camera.following_actor_node.Actor.Id == actor_id):
-		camera.following_actor_node = null
-		var actor_node = CombatRootControl.get_actor_node(actor_id)
-		camera.snap_to_map_pos(actor_node.cur_map_pos)
+	var actor_node = CombatRootControl.get_actor_node(actor_id)
+	if not CombatRootControl.Instance.QueController.is_executing:
+		if (camera.following_actor_node and  camera.following_actor_node.Actor.Id == actor_id):
+			camera.clear_following_actor()
+			camera.snap_to_map_pos(actor_node.cur_map_pos)
+	if actor_node.reached_motion_destination.is_connected(_on_actor_move_finished):
+		actor_node.reached_motion_destination.disconnect(_on_actor_move_finished)
 
 func _on_camera_pan_finish():
 	if _block_states.has("PanCamera"):
@@ -647,12 +659,12 @@ func _on_camera_pan_finish():
 	
 
 func _on_popup_finished(pop_up_key:String):
-	print("PopUp Finished: " + pop_up_key)
+	if LOGGING: print("PopUp Finished: " + pop_up_key)
 	if _block_states.has(pop_up_key):
 		_block_states[pop_up_key] = BlockStates.Finished
 
 func _on_custom_block_finished(block_id:String):
-	print("Custom Block: " + block_id)
+	if LOGGING: print("Custom Block: " + block_id)
 	if _block_states.has(block_id):
 		_block_states[block_id] = BlockStates.Finished
 	if _custom_blocks.has(block_id):
@@ -664,7 +676,7 @@ func _on_next_button_pressed():
 		_state = STATES.Playing
 
 func _on_question_answered(answer_val:String):
-	print("Set Question Flag: %s" % [answer_val] )
+	if LOGGING: print("Set Question Flag: %s" % [answer_val] )
 	var tokens = answer_val.split(":")
 	var flag_name = tokens[0]
 	var flag_val = tokens[1]

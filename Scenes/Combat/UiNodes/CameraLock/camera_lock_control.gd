@@ -12,7 +12,7 @@ var camera_locked:bool
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	camera_locked = camera.freeze
+	camera_locked = camera.freeze or camera.locked_for_cut_scene
 	if can_camera_move():
 		locked_icon.hide()
 		unlocked_icon.show()
@@ -23,7 +23,7 @@ func _ready() -> void:
 	pass # Replace with function body.
 
 func can_camera_move()->bool:
-	return not (camera.freeze or camera.following_actor_node or camera.auto_pan_start_pos)
+	return not (camera.freeze or camera.following_actor_node or camera.auto_pan_start_pos or camera.locked_for_cut_scene)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

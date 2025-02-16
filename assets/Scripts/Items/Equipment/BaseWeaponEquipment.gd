@@ -24,8 +24,17 @@ func get_item_tags()->Array:
 	var tags = super()
 	if !tags.has("Weapon"):
 		tags.append("Weapon")
-	if !tags.has("MainHand"):
-		tags.append("MainHand")
+	if get_weapon_class() == WeaponClasses.Light:
+		if !tags.has("MainHand"):
+			tags.append("MainHand")
+		if !tags.has("OffHand"):
+			tags.append("OffHand")
+	if get_weapon_class() == WeaponClasses.Medium:
+		if !tags.has("MainHand"):
+			tags.append("MainHand")
+	if get_weapon_class() == WeaponClasses.Heavy:
+		if !tags.has("TwoHand"):
+			tags.append("TwoHand")
 	return tags
 
 func get_weapon_class()->WeaponClasses:

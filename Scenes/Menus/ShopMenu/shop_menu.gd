@@ -2,7 +2,7 @@ class_name ShopMenuController
 extends Control
 
 enum States {Greeting, Buy, Sell}
-enum SpeakerSubjects {Greeting, Buying, Selling, ConfirmBuy, ConfirmSell}
+enum SpeakerSubjects {Greeting, Buying, Selling, ConfirmBuy, BuySuccess, BuyCancel, ConfirmSell, SellSuccess, SellCancel}
 
 @export var dialog_box:DialogBox
 @export var item_menu_controller:ShopItemMenuController
@@ -24,6 +24,7 @@ var _item_ids_by_catagories:Dictionary
 
 func _ready() -> void:
 	confirm_popup.hide()
+	item_menu_controller.hide()
 	item_menu_controller.item_button_pressed.connect(_on_item_button_pressed)
 	item_menu_controller.catagory_selected.connect(_on_catagory_selected)
 	item_menu_controller.back_button_pressed.connect(load_greeting)
@@ -128,13 +129,15 @@ func create_details_card(item:BaseItem):
 	print(_current_details_card.custom_minimum_size)
 	details_card_spawn_point.add_child(_current_details_card)
 	_current_details_card.hide_done.connect(on_details_card_freed)
-	_current_details_card.buy_mode = true
-	_current_details_card.buy_controller.sell_mode = _state == States.Sell
+	_current_details_card.shop_mode = true
+	_current_details_card.is_selling = _state == States.Sell
 	_current_details_card.set_item(null, item)
 	_current_details_card.start_show()
 	_current_details_card.buy_controller.buy_button_pressed.connect(_show_confirm_popup)
 
 func _show_confirm_popup(item_key:String, count:int, cost:int):
+	if not confirm_popup.trade_confirmed.is_connected(_on_trade_confirmed):
+		confirm_popup.trade_confirmed.connect(_on_trade_confirmed)
 	if _state == States.Buy:
 		var item = _loaded_items_by_key[item_key]
 		confirm_popup.set_item(false, item, count)
@@ -145,6 +148,18 @@ func _show_confirm_popup(item_key:String, count:int, cost:int):
 		_load_text(SpeakerSubjects.ConfirmSell, item, count)
 	if _current_details_card:
 		_current_details_card.start_hide()
+
+func _on_trade_confirmed(accepted:bool):
+	if _state == States.Buy:
+		if accepted:
+			_load_text(SpeakerSubjects.BuySuccess)
+		else:
+			_load_text(SpeakerSubjects.BuyCancel)
+	else:
+		if accepted:
+			_load_text(SpeakerSubjects.SellSuccess)
+		else:
+			_load_text(SpeakerSubjects.SellCancel)
 
 static var _said_lines:Array=[]
 func _load_text(subject:SpeakerSubjects, item:BaseItem=null, count:int=0):
@@ -205,13 +220,39 @@ func _load_text(subject:SpeakerSubjects, item:BaseItem=null, count:int=0):
 			{"SpeakerPort":"Happy"},
 			"So you want " + str(count) + " " + item_name + "?",
 		])
-	elif subject == SpeakerSubjects.ConfirmBuy:
+	elif subject == SpeakerSubjects.ConfirmSell:
 		var item_name = "of these"
 		if item:
 			item_name = "@Color:Red@"+item.details.display_name+"@Clear@"
 		_build_dialog_entries([
 			{"SpeakerPort":"Happy"},
 			"So you wanna sell " + str(count) + " " + item_name + "?",
+		])
+	elif subject == SpeakerSubjects.BuySuccess or subject == SpeakerSubjects.SellSuccess:
+		var item_name = "of these"
+		if item:
+			item_name = "@Color:Red@"+item.details.display_name+"@Clear@"
+		_build_dialog_entries([
+			{"SpeakerPort":"Happy"},
+			"Pleasure doing business with you.",
+			"WaitToRead",
+			"WaitToRead",
+			"Clear",
+			{"SpeakerPort":"Happy"},
+			"Is there anything else you need?",
+		])
+	elif subject == SpeakerSubjects.BuyCancel or subject == SpeakerSubjects.SellCancel:
+		var item_name = "of these"
+		if item:
+			item_name = "@Color:Red@"+item.details.display_name+"@Clear@"
+		_build_dialog_entries([
+			{"SpeakerPort":"Neutral"},
+			"Too bad.",
+			"WaitToRead",
+			"WaitToRead",
+			"Clear",
+			{"SpeakerPort":"Happy"},
+			"Is there anything else you need?",
 		])
 		
 
@@ -244,6 +285,12 @@ func _build_dialog_entries(arr:Array):
 				new_entries.append(
 				{
 					"EntryType": "WaitToRead"
+				})
+			elif line == "Clear":
+				new_entries.append(
+				{
+					"EntryType": "Clear",
+					"ClearSpeaker": false
 				})
 			else:
 				new_entries.append(

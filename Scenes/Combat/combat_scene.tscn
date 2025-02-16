@@ -569,10 +569,10 @@ grow_vertical = 2
 layout_mode = 2
 
 [node name="GameOverTitleLabel" type="Label" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/GameOverScreen/CenterContainer/VBoxContainer"]
-self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 size_flags_vertical = 1
 theme = ExtResource("22_gl452")
+theme_override_colors/font_color = Color(0.470588, 0, 0, 1)
 theme_override_font_sizes/font_size = 92
 text = "You Dead!"
 vertical_alignment = 2
@@ -806,9 +806,20 @@ vertical_alignment = 1
 [node name="PickupPageContainer" type="HBoxContainer" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/GameVictoryScreen/CenterContainer/VBoxContainer/PickupPagesContainer"]
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/GameVictoryScreen/CenterContainer/VBoxContainer/PickupPagesContainer/PickupPageContainer"]
+[node name="PageBackground" type="TextureRect" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/GameVictoryScreen/CenterContainer/VBoxContainer/PickupPagesContainer/PickupPageContainer"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("31_rn36e")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="PageIcon" type="TextureRect" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/GameVictoryScreen/CenterContainer/VBoxContainer/PickupPagesContainer/PickupPageContainer/PageBackground"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+offset_right = 32.0
+offset_bottom = 32.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource("25_q2xye")

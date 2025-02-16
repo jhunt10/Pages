@@ -54,6 +54,7 @@ func collect_dropped_items():
 		if not items_datas[item_type].has(item_name):
 			items_datas[item_type][item_name] = {}
 			items_datas[item_type][item_name]['Texture'] = item.get_small_icon()
+			items_datas[item_type][item_name]['Background'] = item.get_rarity_background()
 			items_datas[item_type][item_name]['Count'] = 1
 		else:
 			items_datas[item_type][item_name]['Count'] += 1
@@ -80,7 +81,8 @@ func collect_dropped_items():
 	else:
 		for item_name in items_datas["Page"].keys():
 			var new_line = premade_pickup_page.duplicate()
-			new_line.get_child(0).texture = items_datas['Page'][item_name]['Texture']
+			new_line.get_child(0).texture = items_datas['Page'][item_name]['Background']
+			new_line.get_child(0).get_child(0).texture = items_datas['Page'][item_name]['Texture']
 			new_line.get_child(1).text = item_name
 			new_line.get_child(4).text = str(items_datas['Page'][item_name]['Count'])
 			pickup_pages_container.add_child(new_line)

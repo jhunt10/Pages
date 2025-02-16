@@ -1,6 +1,8 @@
 class_name DialogBox
 extends Control
 
+const LOGGING = false
+
 const DEFAULT_LETTER_DELAY:float = 0.01
 const DEFAULT_QUESTION_OPTION_DELAY:float = 0.3
 const LINE_WRAP_PADDING:int = 0
@@ -268,7 +270,7 @@ func _handle_entry(entry_data:Dictionary, raw_delta, remaining_delta)->bool:
 					var line_length = hidden_text_edit.get_line_width(0)
 					#print("Next Word: '%s' | Line Length: %s" % [next_word, line_length])
 					if line_length > entry_contaier.size.x - LINE_WRAP_PADDING:
-						print("Size Limit: %s" % [(entry_contaier.size.x )])
+						if LOGGING: print("Size Limit: %s" % [(entry_contaier.size.x )])
 						_current_text_entry.append_text('\n')
 						#print("\n Clip Line: '%s' \n" % [hidden_text_edit.text.trim_suffix(next_word)])
 						hidden_text_edit.clear()
@@ -306,7 +308,6 @@ func _handle_entry(entry_data:Dictionary, raw_delta, remaining_delta)->bool:
 		remaining_text = remaining_text.trim_suffix(remove_char)
 		entry_data['RemainingText'] = remaining_text
 		var cur_text = ''
-		print("BackTrack Current TExt:" + _current_text_entry.text)
 		if entry_data.has("BaseText"):
 			cur_text = entry_data['BaseText'] + remaining_text
 		else:
@@ -352,8 +353,6 @@ func _handle_entry(entry_data:Dictionary, raw_delta, remaining_delta)->bool:
 	#----------------------------------
 	elif entry_type == EntryTypes.WaitToRead:
 		if _current_text_entry and not _starting_read:
-			#printerr("Staring Read Timer: %s | %s" % [_reader_timer, _current_text_entry.get_parsed_text()])
-			#print("Read------------------------------------------------------------------------------------------")
 			_starting_read = true
 			_reader_timer = _estimate_read_time(_current_text_entry.get_parsed_text())
 		_reader_timer -= raw_delta
@@ -434,7 +433,7 @@ func _update_scrolling():
 
 var _selected_question_key
 func _on_question_option_first_pressed(choice_key):
-	print("Selected Choice: " + choice_key)
+	if LOGGING: print("Selected Choice: " + choice_key)
 	_selected_question_key = choice_key
 	for option_key in _question_options.keys():
 		var option:DialogQuestionOption = _question_options[option_key]

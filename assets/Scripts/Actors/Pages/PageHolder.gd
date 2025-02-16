@@ -123,4 +123,4 @@ func _on_item_added_to_slot(item:BaseItem, index:int):
 	if effect_def:
 		var new_effect = _actor.effects.add_effect(page, page.get_load_val("EffectKey"), effect_def, null)
 		item_id_to_effect_id[item.Id] = new_effect.Id
-		class_page_changed.emit()
+	class_page_changed.emit()

@@ -52,7 +52,7 @@ func on_effect_trigger(effect:BaseEffect, subeffect_data:Dictionary, trigger:Bas
 	if trigger == BaseEffect.EffectTriggers.OnCreate:
 		effect._duration_counter = subeffect_data.get('DurationValue', -1)
 		return
-	printerr("Durration For: %s Trigger: %s Value: %s" % [effect.details.display_name, BaseEffect.EffectTriggers.keys()[trigger], effect._duration_counter])
+	#printerr("Durration For: %s Trigger: %s Value: %s" % [effect.details.display_name, BaseEffect.EffectTriggers.keys()[trigger], effect._duration_counter])
 	var duration_type = DurationTypes.get(subeffect_data['DurationType'])
 	if duration_type == DurationTypes.TurnStart and trigger == BaseEffect.EffectTriggers.OnTurnStart:
 		effect._duration_counter -= 1

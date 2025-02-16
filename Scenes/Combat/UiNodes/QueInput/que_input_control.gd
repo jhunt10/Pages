@@ -40,7 +40,7 @@ signal page_special_selected(action_key:String)
 			if state == States.Hidden:
 				nodes_container.position.y = 0
 			if state == States.Showing:
-				nodes_container.position.y = -(nodes_container.size.y )
+				nodes_container.position.y = -(back_patch.size.y + que_display_patch.size.y + 16)
 
 var _actor:BaseActor
 var _page_buttons:Dictionary = {} 

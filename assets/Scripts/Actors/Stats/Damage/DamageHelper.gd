@@ -132,6 +132,7 @@ static func handle_damage(source, defender:BaseActor, damage_data:Dictionary,
 	var damage_event = DamageEvent.new(damage_data, source, base_damage, defender,source_tag_chain, game_state)
 	
 	var damage = damage_event.final_damage * final_damage_mod
+	print("DamageHelper.hand_damage: Real final applied damage: %s" % [damage])
 	defender.stats.apply_damage(damage_event.final_damage, source)
 	defender.effects.trigger_damage_taken(game_state, damage_event)
 	# TODO: Acccuracy and chance to apply effects

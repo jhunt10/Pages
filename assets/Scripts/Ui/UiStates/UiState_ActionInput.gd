@@ -33,7 +33,9 @@ func handle_input(event):
 		if mouse_over_actors.size() > 0:
 			for actor:BaseActor in mouse_over_actors:
 				if actor.is_player:
-					CombatRootControl.Instance.ui_control.set_player_actor(actor)
+					var index = StoryState.get_player_index_of_actor(actor)
+					if index >= 0:
+						CombatRootControl.Instance.set_player_index(index)
 			#var actor:BaseActor = mouse_over_actors[0]
 			#ui_controller.set_ui_state(UiStateController.UiStates.CharacterSheet, {"ActorId":actor.Id})
 			#

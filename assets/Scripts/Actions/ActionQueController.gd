@@ -48,6 +48,9 @@ enum ActionStates {
 }
 
 var execution_state:ActionStates = ActionStates.Waiting
+var is_executing:bool:
+	get:
+		return execution_state != ActionStates.Waiting
 var sub_action_timer = 0
 var sub_action_index = 0
 var sub_sub_action_index = 0
