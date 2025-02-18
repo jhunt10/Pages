@@ -6,9 +6,8 @@ const LOGGING = false
 
 signal reached_motion_destination
 
-enum FACING_DIRS {North, East, South, West}
-const FACING_ANIMATION:String = 'facing/facing'
-@export var editing_facing_direction:FACING_DIRS:
+#const FACING_ANIMATION:String = 'facing/facing'
+@export var editing_facing_direction:MapPos.Directions:
 	set(val):
 		editing_facing_direction = val
 		if Engine.is_editor_hint():
@@ -30,7 +29,7 @@ const WALK_ANIM_NAME = "move_walk/walk"
 
 var Id:String 
 var Actor:BaseActor 
-var facing_dir
+var facing_dir:MapPos.Directions = MapPos.Directions.North
 var paused:bool = false
 
 var is_dieing:bool
@@ -134,10 +133,7 @@ func _on_movement_failed(cur_pos:MapPos):
 	
 
 func _on_action_failed():
-	if main_hand_node and main_hand_node.animation_is_ready:
-		main_hand_node.cancel_animation()
-	if off_hand_node and off_hand_node.animation_is_ready:
-		off_hand_node.cancel_animation()
+	cancel_weapon_animations()
 
 ## Forces the actor to given position
 func set_map_pos(pos:MapPos, keep_movement_offset:bool=false):
@@ -153,13 +149,10 @@ func set_map_pos(pos:MapPos, keep_movement_offset:bool=false):
 		actor_motion_node.position = Vector2.ZERO
 	cur_map_pos = pos
 
-func set_facing_dir(dir:int):
+func set_facing_dir(dir:MapPos.Directions):
 	if facing_dir == dir:
 		return
 	facing_dir = dir
-	
-	if main_hand_node: main_hand_node.set_facing_dir(facing_dir)
-	if off_hand_node: off_hand_node.set_facing_dir(facing_dir)
 	
 	if actor_sprite: 
 		actor_sprite.direction = facing_dir
@@ -170,18 +163,26 @@ func set_facing_dir(dir:int):
 		actor_sprite.z_index = 4
 		main_hand_node.z_index = 2
 		off_hand_node.z_index = 0
+		main_hand_node.two_hand_z_west_override = false
 	if facing_dir == MapPos.Directions.East:
 		actor_sprite.z_index = 3
 		main_hand_node.z_index = 3
 		off_hand_node.z_index = 0
+		main_hand_node.two_hand_z_west_override = false
 	if facing_dir == MapPos.Directions.South:
 		actor_sprite.z_index = 0
 		main_hand_node.z_index = 2
 		off_hand_node.z_index = 1
+		main_hand_node.two_hand_z_west_override = false
 	if facing_dir == MapPos.Directions.West:
 		actor_sprite.z_index = 3
 		main_hand_node.z_index = 0
 		off_hand_node.z_index = 3
+		main_hand_node.two_hand_z_west_override = true
+	
+	if main_hand_node: main_hand_node.set_facing_dir(facing_dir)
+	if off_hand_node: off_hand_node.set_facing_dir(facing_dir)
+	
 
 var move_timmer = 0
 func _process(delta: float) -> void:
@@ -307,6 +308,7 @@ func _start_next_queued_movement():
 			else:
 				index += 1
 	if (next_pos_data == null or next_pos_data['Pos'] == cur_map_pos):
+		print("MoveActor: Already at pos: %s | %s " % [next_pos_data['Pos'], cur_map_pos])
 		_scripted_move_finshed()
 		return
 	
@@ -327,7 +329,8 @@ func _start_next_queued_movement():
 	movement_speed =  (dist / secs_to_reach) * CombatRootControl.get_time_scale() * speed
 	is_moving = movement_start_position.distance_to(movement_dest_position) > 0.01
 	if not is_moving:
-		_scripted_move_finshed()
+		_is_moving_on_script = true
+		_on_reached_dest()
 	else:
 		start_walk_animation()
 		_is_moving_on_script = true
@@ -412,6 +415,11 @@ func execute_weapon_motion_animation(speed:float=1, off_hand:bool=false):
 	elif main_hand_node:
 		main_hand_node.execute_animation(speed)
 
+func cancel_weapon_animations():
+	if main_hand_node and main_hand_node.animation_is_ready:
+		main_hand_node.cancel_animation()
+	if off_hand_node and off_hand_node.animation_is_ready:
+		off_hand_node.cancel_animation()
 
 func execute_animation_motion():
 	if current_body_animation_action and (current_body_animation_action.begins_with("move_") or current_body_animation_action.begins_with("move_")):
@@ -421,16 +429,17 @@ func execute_animation_motion():
 	elif main_hand_node.readied_animation:
 		main_hand_node.execute_animation()
 
-func cancel_current_animation():
-	if current_body_animation_action.begins_with("weapon_"):
-		if main_hand_node.current_animation.contains("/ready"):
-			main_hand_node.cancel_animation()
-	elif current_body_animation_action.contains("/ready_"):
-		var animation_name = current_body_animation_action.replace("/ready_", "/cancel_")
-		if LOGGING: print("Playing Cancel Animation: " + animation_name)
+#func cancel_current_animation():
+	#if current_body_animation_action:
+		#if current_body_animation_action.begins_with("weapon_"):
+			#if main_hand_node.current_animation.contains("/ready"):
+				#main_hand_node.cancel_animation()
+		#elif current_body_animation_action.contains("/ready_"):
+			#var animation_name = current_body_animation_action.replace("/ready_", "/cancel_")
+			#if LOGGING: print("Playing Cancel Animation: " + animation_name)
 
-func clear_any_animations():
-	main_hand_node.clear_any_animations(_get_animation_dir_sufix())
+#func clear_any_animations():
+	#main_hand_node.clear_any_animations(_get_animation_dir_sufix())
 
 func set_corpse_sprite():
 	actor_sprite.texture = Actor.sprite.get_corpse_sprite()

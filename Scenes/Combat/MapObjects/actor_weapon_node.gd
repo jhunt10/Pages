@@ -4,11 +4,11 @@ extends Node2D
 
 const LOGGING = false
 
-var parent_sprite:Sprite2D:
-	get:
-		if !parent_sprite:
-			parent_sprite =  $".."
-		return parent_sprite
+#var parent_sprite:Sprite2D:
+	#get:
+		#if !parent_sprite:
+			#parent_sprite =  $".."
+		#return parent_sprite
 
 var animation:AnimationPlayer:
 	get: 
@@ -31,31 +31,37 @@ var _lock_position_edit:bool = false
 			main_hand_position = main_hand_position
 			self.flip_sprite = false
 		if hand == ActorHandNode.HANDS.OffHand:
-			off_hand_offset = off_hand_offset
+			#off_hand_offset = off_hand_offset
 			self.flip_sprite = true
 		if hand == ActorHandNode.HANDS.TwoHand:
 			two_hand_offset = two_hand_offset
 			self.flip_sprite = false
+
+# True when:
+#	Offhand - South
+#	MainHand - North
+#	Either Hand - West
 @export var flip_sprite:bool:
 	set(val):
 		flip_sprite = val
 		if overhand_weapon_sprite:
-			if flip_sprite and !unflip_offhand:
+			if flip_sprite:
 				overhand_weapon_sprite.scale = Vector2(-1,1)
 				underhand_weapon_sprite.scale = Vector2(-1,1)
 			else:
 				overhand_weapon_sprite.scale = Vector2(1,1)
 				underhand_weapon_sprite.scale = Vector2(1,1)
-@export var unflip_offhand:bool:
-	set(val):
-		unflip_offhand = val
-		if overhand_weapon_sprite:
-			if flip_sprite and !unflip_offhand:
-				overhand_weapon_sprite.scale = Vector2(-1,1)
-				underhand_weapon_sprite.scale = Vector2(-1,1)
-			else:
-				overhand_weapon_sprite.scale = Vector2(1,1)
-				underhand_weapon_sprite.scale = Vector2(1,1)
+#@export var unflip_offhand:bool:
+	#set(val):
+		##print("SetFlip: ")
+		#unflip_offhand = val
+		#if overhand_weapon_sprite:
+			#if flip_sprite and !unflip_offhand:
+				#overhand_weapon_sprite.scale = Vector2(-1,1)
+				#underhand_weapon_sprite.scale = Vector2(-1,1)
+			#else:
+				#overhand_weapon_sprite.scale = Vector2(1,1)
+				#underhand_weapon_sprite.scale = Vector2(1,1)
 		
 #@export var hand_name:String
 @export var main_hand_position:Vector2:
@@ -66,13 +72,20 @@ var _lock_position_edit:bool = false
 			self.position = main_hand_position
 		elif edit_mode and hand != ActorHandNode.HANDS.MainHand:
 			self.position = main_hand_position
+		elif hand == ActorHandNode.HANDS.OffHand:
+			self.position.y = main_hand_position.y
+			if flip_sprite:
+				self.position.x = -main_hand_position.x
+			else:
+				self.position.x = main_hand_position.x
 			
-@export var off_hand_offset:Vector2:
-	set(val):
-		off_hand_offset = val
-		if hand == ActorHandNode.HANDS.OffHand:
-			if LOGGING: print("Set OffHand Pos: %s | Val: %s | MHPos: %s" % [hand, val, main_hand_position])
-			self.position = main_hand_position + off_hand_offset
+#@export var off_hand_offset:Vector2:
+	#set(val):
+		#off_hand_offset = val
+		##if hand == ActorHandNode.HANDS.OffHand:
+			##if LOGGING: 
+			##print("Set OffHand Pos: %s | Val: %s | MHPos: %s" % [hand, val, main_hand_position])
+			##self.position = main_hand_position + off_hand_offset
 @export var two_hand_offset:Vector2:
 	set(val):
 		if LOGGING: print("Set Two Pos")
@@ -91,13 +104,19 @@ var _lock_position_edit:bool = false
 		rotation_factor = val
 		if self.overhand_weapon_sprite:
 			var rot_degs = self.rotation_degrees
-			if flip_sprite or self.scale.x < 0:
+			var target_rotation:float = 0
+			if flip_sprite:
+				target_rotation = (custom_rotation * (rotation_factor)) - (rot_degs * (1-rotation_factor))
+			elif self.scale.x < 0:
+				target_rotation = (custom_rotation * (rotation_factor)) - (rot_degs * (1-rotation_factor))
 				rot_degs = -rot_degs
-			var target_rotation:float = (custom_rotation - rot_degs) * rotation_factor
+				#target_rotation = ((rot_degs * (1-rotation_factor)) + (custom_rotation * (rotation_factor)) ) 
+			else:
+				target_rotation = (custom_rotation * (rotation_factor)) + (rot_degs * (1-rotation_factor))# (custom_rotation - rot_degs) * rotation_factor
 			if overhand_weapon_sprite.rotation_degrees != target_rotation:
 				if LOGGING: print("Setting Rotation: cur:%s | cust:%s | fact:%s | result: %s " % [self.rotation_degrees, custom_rotation, rotation_factor, target_rotation])
-				self.overhand_weapon_sprite.rotation_degrees = target_rotation
-				self.underhand_weapon_sprite.rotation_degrees = target_rotation
+				self.overhand_weapon_sprite.rotation_degrees = target_rotation - rot_degs
+				self.underhand_weapon_sprite.rotation_degrees = target_rotation- rot_degs
 @export var custom_rotation:int:
 	set(val):  
 		custom_rotation = val
@@ -127,8 +146,8 @@ func _notification(what):
 			if edit_mode:
 				if hand == ActorHandNode.HANDS.MainHand:
 					main_hand_position = self.position
-				elif  hand == ActorHandNode.HANDS.OffHand:
-					off_hand_offset = main_hand_position - self.position
+				#elif  hand == ActorHandNode.HANDS.OffHand:
+					#off_hand_offset = main_hand_position - self.position
 				elif  hand == ActorHandNode.HANDS.TwoHand:
 					two_hand_offset = main_hand_position - self.position
 			#else:

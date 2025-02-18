@@ -203,6 +203,11 @@ func open_dev_tools():
 	else:
 		self.add_child(dev_tools_menu)
 	
+func open_animation_tester():
+	var node = load("res://Scenes/Editors/AnimationTester/animation_tester.tscn").instantiate()
+	self.add_child(node)
+	
+	
 func go_to_main_menu():
 	if ActorLibrary.Instance:
 		ActorLibrary.Instance.purge_actors()

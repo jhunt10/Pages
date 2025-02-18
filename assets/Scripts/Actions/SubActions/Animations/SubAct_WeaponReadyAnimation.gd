@@ -44,11 +44,9 @@ func do_thing(parent_action:BaseAction, subaction_data:Dictionary, metadata:QueE
 	# Play Main Hand animation
 	if subaction_data.get("MainHand", false):
 		if animation == "WEAPON_DEFAULT":
-			var primary_weapon = actor.equipment.get_primary_weapon()
-			if primary_weapon:
-				var weapon_animation = primary_weapon.get_load_val("WeaponAnimation", null)
-				if weapon_animation:
-					actor_node.ready_weapon_animation(weapon_animation, animation_speed)
+			var weapon_animation = get_default_weapon_animation(actor, false)
+			if weapon_animation:
+				actor_node.ready_weapon_animation(weapon_animation, animation_speed)
 		else:
 			actor_node.ready_weapon_animation(animation, animation_speed)
 			
@@ -63,12 +61,23 @@ func do_thing(parent_action:BaseAction, subaction_data:Dictionary, metadata:QueE
 		
 	if play_off_hand:
 		if animation == "WEAPON_DEFAULT":
-			var off_weapon = actor.equipment.get_offhand_weapon()
-			if off_weapon:
-				var weapon_animation = off_weapon.get_load_val("WeaponAnimation", null)
-				if weapon_animation:
-					actor_node.ready_weapon_animation(weapon_animation, animation_speed, true)
+			var weapon_animation = get_default_weapon_animation(actor, true)
+			if weapon_animation:
+				actor_node.ready_weapon_animation(weapon_animation, animation_speed, true)
+			
 		else:
 			actor_node.ready_weapon_animation(animation, animation_speed, true)
 	
 	return BaseSubAction.Success
+
+func get_default_weapon_animation(actor:BaseActor, off_hand:bool):
+	if off_hand:
+		var off_weapon = actor.equipment.get_offhand_weapon()
+		if off_weapon:
+			return off_weapon.get_load_val("WeaponAnimation", null)
+	else:
+		var primary_weapon = actor.equipment.get_primary_weapon()
+		if primary_weapon:
+			return primary_weapon.get_load_val("WeaponAnimation", null)
+	return null
+	

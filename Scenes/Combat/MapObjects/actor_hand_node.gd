@@ -138,9 +138,9 @@ func cancel_animation():
 	readied_animation = null
 	animation_tree.set("parameters/conditions/Cancel", true)
 
-func clear_any_animations(dir_sufix):
-	readied_animation = null
-	animation_tree.set("parameters/conditions/Cancel", true)
+#func clear_any_animations(dir_sufix):
+	#readied_animation = null
+	#animation_tree.set("parameters/conditions/Cancel", true)
 
 func on_animation_started(animation_name):
 	current_animation_name = animation_name
@@ -166,21 +166,27 @@ func set_facing_dir(dir):
 		return # Avoid Stack Overflow
 		
 	if dir == MapPos.Directions.North:
-		if hand == HANDS.MainHand:
+		if hand == HANDS.MainHand or hand == HANDS.TwoHand:
 			hand_z_offset = 0
 			weapon_z_offset = 0
 			weapon_under_hand_z_offset = 1
 			weapon_over_hand_z_offset = -1
+			if weapon_node:
+				weapon_node.flip_sprite = false
 		if hand == HANDS.OffHand:
 			hand_z_offset = 1
 			weapon_z_offset = 0
 			weapon_under_hand_z_offset = 2
 			weapon_over_hand_z_offset = 0
+			if weapon_node:
+				weapon_node.flip_sprite = true
 		if hand_sprite and hand_sprite.vframes == 4:
 			hand_sprite.frame_coords.y = 1
 	
 	if dir == MapPos.Directions.East:
-		if hand == HANDS.MainHand:
+		if weapon_node:
+			weapon_node.flip_sprite = false
+		if hand == HANDS.MainHand or hand == HANDS.TwoHand:
 			hand_z_offset = 1
 			weapon_z_offset = 1
 			weapon_under_hand_z_offset = -1
@@ -194,26 +200,32 @@ func set_facing_dir(dir):
 			hand_sprite.frame_coords.y = 2
 	
 	if dir == MapPos.Directions.South:
-		if hand == HANDS.MainHand:
+		if hand == HANDS.MainHand or hand == HANDS.TwoHand:
 			hand_z_offset = 0
 			weapon_z_offset = 1
 			weapon_under_hand_z_offset = -1
 			weapon_over_hand_z_offset = 1
+			if weapon_node:
+				weapon_node.flip_sprite = false
 		if hand == HANDS.OffHand:
 			hand_z_offset = 0
 			weapon_z_offset = 1
 			weapon_under_hand_z_offset = -1
 			weapon_over_hand_z_offset = 1
+			if weapon_node:
+				weapon_node.flip_sprite = true
 		if hand_sprite and hand_sprite.vframes == 4:
 			hand_sprite.frame_coords.y = 0
 	
 	if dir == MapPos.Directions.West:
+		if weapon_node:
+			weapon_node.flip_sprite = false
 		if hand == HANDS.MainHand:
 			hand_z_offset = 0
 			weapon_z_offset = 1
 			weapon_under_hand_z_offset = -1
 			weapon_over_hand_z_offset = 1
-		if hand == HANDS.OffHand:
+		if hand == HANDS.OffHand or hand == HANDS.TwoHand:
 			hand_z_offset = 0
 			weapon_z_offset = 1
 			weapon_under_hand_z_offset = -1

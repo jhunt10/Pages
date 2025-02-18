@@ -38,6 +38,7 @@ func lock_to_actor(actor:BaseActor):
 		printerr("Camera lock_to_actor: Failed to find node for actor: %s" % [actor.Id])
 	self.snap_to_map_pos(actor_node.cur_map_pos)
 	following_actor_node = actor_node
+	print("Locking Camera to Actor: %s" % [following_actor_node.Actor.Id])
 	
 
 func snap_to_map_pos(pos):
@@ -121,7 +122,10 @@ func _process(delta: float) -> void:
 
 func clear_following_actor():
 	if following_actor_node:
+		print("Unlocking Camera from Actor: %s" % [following_actor_node.Actor.Id])
 		following_actor_node = null
+	else:
+		print("Unlocking Camera from Actor: null")
 
 func set_camera_pos(pos:Vector2, unfollow:bool=true):
 	self.position = pos

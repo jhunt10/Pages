@@ -52,7 +52,7 @@ var _state:STATES = STATES.Ready:
 			_state = val
 			if next_button:
 				if _state == STATES.WaitingForNextButton:
-					printerr("Part TIme: %s" % [_part_start_timer])
+					#printerr("Part TIme: %s" % [_part_start_timer])
 					_part_start_timer = 0
 					if auto_button.is_on:
 						_delay_timer = max(0.5, _delay_timer + 0.5)
@@ -642,16 +642,18 @@ func _on_blackout_finished():
 
 func _on_actor_move_finished(actor_id):
 	var move_key = actor_id+":Move"
-	if _block_states.has(move_key):
+	if _block_states.get(move_key, BlockStates.Finished) == BlockStates.Playing:
+		
+		print("Actor Movement Finished: %s" % [actor_id])
 		_block_states[move_key] = BlockStates.Finished
-	var camera = CombatRootControl.Instance.camera
-	var actor_node = CombatRootControl.get_actor_node(actor_id)
-	if not CombatRootControl.Instance.QueController.is_executing:
-		if (camera.following_actor_node and  camera.following_actor_node.Actor.Id == actor_id):
-			camera.clear_following_actor()
-			camera.snap_to_map_pos(actor_node.cur_map_pos)
-	if actor_node.reached_motion_destination.is_connected(_on_actor_move_finished):
-		actor_node.reached_motion_destination.disconnect(_on_actor_move_finished)
+		var camera = CombatRootControl.Instance.camera
+		var actor_node = CombatRootControl.get_actor_node(actor_id)
+		if not CombatRootControl.Instance.QueController.is_executing:
+			if (camera.following_actor_node and  camera.following_actor_node.Actor.Id == actor_id):
+				camera.clear_following_actor()
+				camera.snap_to_map_pos(actor_node.cur_map_pos)
+		#if actor_node.reached_motion_destination.is_connected(_on_actor_move_finished):
+			#actor_node.reached_motion_destination.disconnect(_on_actor_move_finished)
 
 func _on_camera_pan_finish():
 	if _block_states.has("PanCamera"):

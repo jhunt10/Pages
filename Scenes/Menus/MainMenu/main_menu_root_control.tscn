@@ -132,8 +132,57 @@ text = "More"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="."]
+[node name="QuitContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
+alignment = 1
+
+[node name="QuitButton" type="TextureButton" parent="VBoxContainer/QuitContainer"]
+layout_mode = 2
+texture_normal = ExtResource("1_gojdr")
+texture_pressed = ExtResource("3_78x4c")
+texture_disabled = ExtResource("3_78x4c")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="VBoxContainer/QuitContainer/QuitButton"]
+modulate = Color(0.462291, 0.462291, 0.462291, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 32
+text = "Quit"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="."]
+visible = false
+layout_mode = 2
+
+[node name="AnimationTesterContainer" type="HBoxContainer" parent="VBoxContainer2"]
+layout_mode = 2
+alignment = 1
+
+[node name="AnimationsButton" type="TextureButton" parent="VBoxContainer2/AnimationTesterContainer"]
+layout_mode = 2
+texture_normal = ExtResource("1_gojdr")
+texture_pressed = ExtResource("3_78x4c")
+texture_disabled = ExtResource("3_78x4c")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="VBoxContainer2/AnimationTesterContainer/AnimationsButton"]
+modulate = Color(0.462291, 0.462291, 0.462291, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 32
+text = "Animations"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="PagesContainer" type="HBoxContainer" parent="VBoxContainer2"]
 layout_mode = 2

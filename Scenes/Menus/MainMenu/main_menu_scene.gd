@@ -6,12 +6,14 @@ var root_node:MainRootNode = MainRootNode.Instance
 @onready var start_button:TextureButton = $VBoxContainer/StartContainer/StartButton
 @onready var load_button:TextureButton = $VBoxContainer/LoadContainer/LoadButton
 @onready var more_button:TextureButton = $VBoxContainer/MoreContainer/MoreButton
+@onready var quit_button:TextureButton = $VBoxContainer/QuitContainer/QuitButton
 
 @onready var more_container = $VBoxContainer2
 @onready var back_button:TextureButton = $VBoxContainer2/BackContainer/BackButton
 @onready var page_button:TextureButton = $VBoxContainer2/PagesContainer/PagesButton
 @onready var effects_button:TextureButton = $VBoxContainer2/EffectsContainer/EffectsButton
 @onready var dev_tools_button:TextureButton = $VBoxContainer2/DevToolsContainer/DevToolsButton
+@onready var animation_button:TextureButton = $VBoxContainer2/AnimationTesterContainer/AnimationsButton
 
 func _ready() -> void:
 	#self.size = get_viewport_rect().size
@@ -21,9 +23,15 @@ func _ready() -> void:
 	effects_button.pressed.connect(_open_effect_edit)
 	tutorial_button.pressed.connect(_open_tutorial)
 	dev_tools_button.pressed.connect(_dev_tools)
+	animation_button.pressed.connect(_open_animation_tester)
+	
 	more_button.pressed.connect(show_sub_menu.bind("More"))
 	back_button.pressed.connect(show_sub_menu.bind("Main"))
+	quit_button.pressed.connect(quit_game)
 	show_sub_menu("Main")
+
+func quit_game():
+	get_tree().quit()
 
 func show_sub_menu(name):
 	if name == "More":
@@ -50,3 +58,6 @@ func _open_tutorial():
 
 func _dev_tools():
 	root_node.open_dev_tools()
+
+func _open_animation_tester():
+	root_node.open_animation_tester()
