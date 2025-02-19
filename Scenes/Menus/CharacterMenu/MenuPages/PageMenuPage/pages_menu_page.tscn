@@ -67,10 +67,10 @@ custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Soldier"
-_size_dirty = true
 center_x = true
 
 [node name="Lvl" type="Label" parent="VBoxContainer/TitleContainer/VBoxContainer/HBoxContainer2"]
+visible = false
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 size_flags_vertical = 1
@@ -81,6 +81,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="LevelLabel" type="Label" parent="VBoxContainer/TitleContainer/VBoxContainer/HBoxContainer2"]
+visible = false
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 size_flags_vertical = 1
@@ -103,7 +104,6 @@ texture = ExtResource("7_lnpbr")
 script = ExtResource("8_3ocfe")
 full_rect = NodePath("FullRect")
 color_rect = NodePath("ColorRect")
-percent_full = 0.124
 
 [node name="FullRect" type="Control" parent="VBoxContainer/TitleContainer/VBoxContainer/HBoxContainer/ExpBar"]
 anchors_preset = 0
@@ -118,7 +118,7 @@ z_index = -1
 layout_mode = 0
 offset_left = 8.0
 offset_top = 4.0
-offset_right = 27.716
+offset_right = 8.0
 offset_bottom = 9.0
 
 [node name="VSeparator2" type="VSeparator" parent="VBoxContainer/TitleContainer/VBoxContainer/HBoxContainer"]

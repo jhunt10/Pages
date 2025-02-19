@@ -56,12 +56,13 @@ func _ready() -> void:
 	
 	if dialog_controller:
 		ui_control.hide()
-		ui_control.ui_state_controller.set_ui_state(UiStateController.UiStates.ActionInput)
 		MapController.grid_tile_map.hide()
 	#
 	#MapController._build_terrain()
 	for actor:BaseActor in GameState._actors.values():
 		actor.on_combat_start()
+	
+	ui_control.ui_state_controller.set_ui_state(UiStateController.UiStates.ActionInput)
 	pass # Replace with function body.
 
 func _process(delta: float) -> void:

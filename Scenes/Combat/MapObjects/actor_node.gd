@@ -150,8 +150,8 @@ func set_map_pos(pos:MapPos, keep_movement_offset:bool=false):
 	cur_map_pos = pos
 
 func set_facing_dir(dir:MapPos.Directions):
-	if facing_dir == dir:
-		return
+	#if facing_dir == dir and not force_set:
+		#return
 	facing_dir = dir
 	
 	if actor_sprite: 

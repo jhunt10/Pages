@@ -9,6 +9,7 @@ var camera:MoveableCamera2D:
 @export var victory_screen:GameVictoryScreen
 @export var menu_container:CenterContainer
 @export var menu_button:TextureButton 
+@export var book_button:TextureButton 
 @export var pause_menu:PauseMenuControl 
 
 @export var target_input_display:TargetInputControl
@@ -40,6 +41,7 @@ func _ready() -> void:
 		#return
 	Instance = self
 	menu_button.pressed.connect(_on_menu_pressed)
+	book_button.pressed.connect(_on_book_pressed)
 	#test_button.pressed.connect(do_test)
 	target_input_display.visible = false
 	game_over_screen.hide()
@@ -131,3 +133,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		
 func _on_menu_pressed():
 	ui_state_controller.set_ui_state(UiStateController.UiStates.PauseMenu)
+
+func _on_book_pressed():
+	ui_state_controller.set_ui_state(UiStateController.UiStates.CharacterSheet)
+	

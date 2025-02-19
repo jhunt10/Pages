@@ -38,6 +38,10 @@ var _dragging:bool = false
 var _button_down_pos
 var _drag_dead_zone = 10
 
+var equip_mode:bool:
+	get():
+		return not (MainRootNode.Instance.current_scene is CombatRootControl)
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	Instance = self
@@ -68,10 +72,15 @@ func _ready() -> void:
 	bag_page.mouse_enter_item.connect(on_mouse_enter_slot)
 	bag_page.mouse_exit_item.connect(on_mouse_exit_slot)
 	stop_dragging()
-	on_tab_pressed("Inventory")
 	on_tab_pressed("Pages")
-	inventory_tabs_control.on_tab_selected.connect(on_inv_filter_selected)
-	inventory_tabs_control.on_tab_unselected.connect(on_inv_filter_unselected)
+	if equip_mode:
+		on_tab_pressed("Inventory")
+		inventory_tabs_control.on_tab_selected.connect(on_inv_filter_selected)
+		inventory_tabs_control.on_tab_unselected.connect(on_inv_filter_unselected)
+	else:
+		on_tab_pressed("Stats")
+		stats_tab_rect.hide()
+		inventory_tab_rect.hide()
 	#if _actor == null:
 		#ActorLibrary.new()
 		#var test = ActorLibrary.get_actor("TestActor_ID")
@@ -143,6 +152,8 @@ func context_to_page_control(context):
 	return null
 
 func start_dragging():
+	if not equip_mode:
+		return
 	if _selected_item:
 		_dragging = true
 		mouse_control.set_drag_item(_selected_item)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://dfeilp6hbiuqs"]
+[gd_scene load_steps=46 format=3 uid="uid://dfeilp6hbiuqs"]
 
 [ext_resource type="Script" path="res://Scenes/Combat/combat_scene.gd" id="1_crigy"]
 [ext_resource type="Texture2D" uid="uid://b232xm2ly0peh" path="res://assets/Sprites/UI/GridCursors/GridCursor_Default.png" id="7_7lt4y"]
@@ -17,8 +17,10 @@
 [ext_resource type="Script" path="res://Scenes/Combat/UiNodes/StatsPanel/stat_collection_display_control.gd" id="21_fx1yp"]
 [ext_resource type="Texture2D" uid="uid://b71e02wpy7dij" path="res://assets/Sprites/UI/GearButton.png" id="21_s2qa8"]
 [ext_resource type="Script" path="res://assets/Scripts/DevTools/que_cal_control.gd" id="22_4rk3c"]
+[ext_resource type="Texture2D" uid="uid://ddrmfulpc12f" path="res://assets/Sprites/UI/BookButton.png" id="22_6ebva"]
 [ext_resource type="Texture2D" uid="uid://cen5h0gfhguhg" path="res://assets/Sprites/UI/GearButtonPressed.png" id="22_eoo3l"]
 [ext_resource type="Theme" uid="uid://by8t8e4s2str7" path="res://Scenes/VFXs/SpeachBubble/speach_bubble_theme.tres" id="22_gl452"]
+[ext_resource type="Texture2D" uid="uid://b1hbpqyya4xhs" path="res://assets/Sprites/UI/BookButtonPressed.png" id="23_djd8f"]
 [ext_resource type="Texture2D" uid="uid://cu00gc8hhk0h3" path="res://assets/Sprites/UI/QueInputAndDisplay/page_slot.png" id="23_o55pl"]
 [ext_resource type="Script" path="res://assets/Scripts/DevTools/que_cal_bar_control.gd" id="23_tcvpd"]
 [ext_resource type="Texture2D" uid="uid://cwsvq3qu6228n" path="res://assets/Sprites/UI/QueInputAndDisplay/page_button.png" id="24_5fn7e"]
@@ -199,7 +201,7 @@ offset_right = 91.0
 offset_bottom = 97.0
 text = "Stats"
 
-[node name="CombatUiControl" type="Control" parent="MoveableCamera2D/CanvasLayer" node_paths=PackedStringArray("game_over_screen", "victory_screen", "menu_button", "pause_menu", "target_input_display", "p1_stat_panel_control", "p2_stat_panel_control", "p3_stat_panel_control", "p4_stat_panel_control", "que_input", "que_collection_display", "stats_collection_display", "item_select_menu", "drop_message_control")]
+[node name="CombatUiControl" type="Control" parent="MoveableCamera2D/CanvasLayer" node_paths=PackedStringArray("game_over_screen", "victory_screen", "menu_button", "book_button", "pause_menu", "target_input_display", "p1_stat_panel_control", "p2_stat_panel_control", "p3_stat_panel_control", "p4_stat_panel_control", "que_input", "que_collection_display", "stats_collection_display", "item_select_menu", "drop_message_control")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -213,6 +215,7 @@ script = ExtResource("8_8l3el")
 game_over_screen = NodePath("GameOverScreen")
 victory_screen = NodePath("GameVictoryScreen")
 menu_button = NodePath("MenuButton")
+book_button = NodePath("PageBookButton")
 pause_menu = NodePath("PauseMenuControl")
 target_input_display = NodePath("TargetInputControl")
 p1_stat_panel_control = NodePath("StatPanelsContainer/P1_StatPanelControl")
@@ -356,6 +359,30 @@ text = "Load Game"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="ButtonContainer2" type="HBoxContainer" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/PauseMenuControl/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="ToCampButton" type="TextureButton" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/PauseMenuControl/HBoxContainer/VBoxContainer/ButtonContainer2"]
+layout_mode = 2
+texture_normal = ExtResource("19_u4d2a")
+texture_pressed = ExtResource("20_jcfy7")
+texture_disabled = ExtResource("20_jcfy7")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/PauseMenuControl/HBoxContainer/VBoxContainer/ButtonContainer2/ToCampButton"]
+modulate = Color(0.462291, 0.462291, 0.462291, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 32
+text = "To Camp"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="ButtonContainer" type="HBoxContainer" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/PauseMenuControl/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 alignment = 1
@@ -380,30 +407,6 @@ text = "Main Menu"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ButtonContainer2" type="HBoxContainer" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/PauseMenuControl/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-alignment = 1
-
-[node name="QuitButton" type="TextureButton" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/PauseMenuControl/HBoxContainer/VBoxContainer/ButtonContainer2"]
-layout_mode = 2
-texture_normal = ExtResource("19_u4d2a")
-texture_pressed = ExtResource("20_jcfy7")
-texture_disabled = ExtResource("20_jcfy7")
-stretch_mode = 0
-
-[node name="Label" type="Label" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/PauseMenuControl/HBoxContainer/VBoxContainer/ButtonContainer2/QuitButton"]
-modulate = Color(0.462291, 0.462291, 0.462291, 1)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 32
-text = "Quit Game"
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [node name="ButtonContainer3" type="HBoxContainer" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/PauseMenuControl/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 alignment = 1
@@ -424,7 +427,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 32
-text = "Close Menu"
+text = "Resume"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -537,6 +540,24 @@ texture_pressed = ExtResource("22_eoo3l")
 texture_disabled = ExtResource("22_eoo3l")
 stretch_mode = 0
 
+[node name="PageBookButton" type="TextureButton" parent="MoveableCamera2D/CanvasLayer/CombatUiControl"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -72.0
+offset_top = -142.0
+offset_right = -8.0
+offset_bottom = -78.0
+grow_horizontal = 0
+grow_vertical = 0
+texture_normal = ExtResource("22_6ebva")
+texture_pressed = ExtResource("23_djd8f")
+texture_disabled = ExtResource("23_djd8f")
+stretch_mode = 0
+
 [node name="GameOverScreen" type="Control" parent="MoveableCamera2D/CanvasLayer/CombatUiControl" node_paths=PackedStringArray("main_menu_button")]
 visible = false
 layout_mode = 1
@@ -549,6 +570,7 @@ script = ExtResource("25_byrc6")
 main_menu_button = NodePath("CenterContainer/VBoxContainer/MainMenuButton")
 
 [node name="ColorRect" type="ColorRect" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/GameOverScreen"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -643,6 +665,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="GameVictoryScreen" type="Control" parent="MoveableCamera2D/CanvasLayer/CombatUiControl" node_paths=PackedStringArray("rounds_label", "enemies_label", "money_label", "camp_button", "camp_button_label", "premade_pickup_page", "pickup_pages_container", "premade_pickup_item", "pickup_items_container")]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

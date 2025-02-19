@@ -3,13 +3,8 @@ extends BaseUiState
 
 func _init(controler:UiStateController, args:Dictionary) -> void:
 	super(controler, args)
-	var actor_id = args.get("ActorId", null)
-	if not actor_id:
-		return
-	var actor = CombatRootControl.Instance.GameState.get_actor(actor_id)
-	if not actor:
-		return
-	var menu:CharacterMenuControl = MainRootNode.Instance.open_character_sheet(actor, CombatUiControl.Instance.menu_container)
+	var actor = CombatRootControl.Instance.get_current_player_actor()
+	var menu:CharacterMenuControl = MainRootNode.Instance.open_character_sheet(actor, CombatUiControl.Instance.camera.canvas_layer)
 	menu.close_button.pressed.connect(on_menu_closed)
 	
 	

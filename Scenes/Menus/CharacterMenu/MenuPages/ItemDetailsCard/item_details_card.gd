@@ -32,13 +32,13 @@ var is_selling:bool = false
 @export var shop_mode:bool:
 	set(val):
 		shop_mode = val
-		if buy_controller:
-			if shop_mode:
-				buy_controller.show()
-				equip_button_background.hide()
-			else:
-				buy_controller.hide()
-				equip_button_background.show()
+		#if buy_controller:
+			#if shop_mode:
+				#buy_controller.show()
+				#equip_button_background.hide()
+			#else:
+				#buy_controller.hide()
+				#equip_button_background.show()
 			
 @export var offset_control:Control
 @export var offset_point:Node2D
@@ -226,8 +226,15 @@ func set_item(actor:BaseActor, item:BaseItem):
 			var cant_equip_reasons = item.get_cant_use_reasons(actor)
 			set_cant_equip_reason(cant_equip_reasons)
 		self.start_show()
-	if shop_mode:
+	
+	if MainRootNode.Instance.current_scene is ShopMenuController:
 		buy_controller.set_item(item, is_selling)
+		buy_controller.show()
+		equip_button_background.hide()
+	elif MainRootNode.Instance.current_scene is CombatRootControl:
+		equip_button_background.hide()
+	else:
+		equip_button_background.show()
 
 func equip_button_pressed():
 	var item = ItemLibrary.get_item(item_id)
