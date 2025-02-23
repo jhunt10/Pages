@@ -188,27 +188,17 @@ func die():
 	is_dead = true
 	var map_pos = CombatRootControl.Instance.GameState.get_actor_pos(self)
 	if map_pos:
-		
 		# Roll for item drop
 		var drop_items = get_load_val("DropItemsSet", {})
-		var max_val:int = 0
-		for weight in drop_items.values():
-			max_val += weight
-		var roll = randi() % (max_val + 1)
-		for key:String in drop_items.keys():
-			if drop_items[key] <= 0:
-				continue
-			roll -= drop_items[key]
-			if roll <= 0:
-				if key != "":
-					if key.begins_with("Money"):
-						var tokens = key.split(':')
-						key = "MoneyItem"
-						var item = ItemHelper.spawn_item(key, {}, map_pos)
-						item.item_details['Value'] = int(tokens[1])
-					else:
-						ItemHelper.spawn_item(key, {}, map_pos)
-				break
+		var item_key = RandomHelper.roll_from_set(drop_items)
+		if item_key != "":
+			if item_key.begins_with("Money"):
+				var tokens = item_key.split(':')
+				item_key = "MoneyItem"
+				var item = ItemHelper.spawn_item(item_key, {}, map_pos)
+				item.item_details['Value'] = int(tokens[1])
+			else:
+				ItemHelper.spawn_item(item_key, {}, map_pos)
 		
 	on_death.emit()
 	#node.set_corpse_sprite()

@@ -35,6 +35,7 @@ func _ready() -> void:
 		slot_display.button_up.connect(_on_item_button_up.bind(slot))
 		slot_display.mouse_entered.connect(_on_mouse_enter_item.bind(slot))
 		slot_display.mouse_exited.connect(_on_mouse_exit_item.bind(slot))
+	self.visibility_changed.connect(_sync)
 
 func set_actor(actor:BaseActor):
 	if actor == _actor:
@@ -49,7 +50,7 @@ func set_actor(actor:BaseActor):
 	_sync()
 
 func _sync():
-	armor_lable.text = str(_actor.equipment.get_total_equipment_armor())
+	armor_lable.text = str(_actor.stats.get_stat("Armor", 0))
 	ward_label.text = str(_actor.equipment.get_total_equipment_ward())
 	for index:int in range(slot_displays.size()):
 		var slot_display:EquipmentDisplaySlotButton = slot_displays[index]
@@ -62,6 +63,7 @@ func _sync():
 			slot_display.clear_item()
 	magatk_label.text = str(_actor.stats.get_stat(StatHelper.MagAttack))
 	phyatk_label.text = str(_actor.stats.get_stat(StatHelper.PhyAttack))
+	actor_node.set_facing_dir(MapPos.Directions.South)
 
 func clear_highlights():
 	for slot_display:EquipmentDisplaySlotButton in slot_displays:

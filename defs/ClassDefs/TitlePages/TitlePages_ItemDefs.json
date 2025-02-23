@@ -4,7 +4,7 @@
         "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
         "CanStack": true,
         "Details": {
-            "Description": "Soldier Dexcription",
+            "Description": "A Strong fighter trained by The Military. Soldiers focus on Armor and basic Weapon Attacks.",
             "DisplayName": "Soldier",
             "LargeIcon": "Sprites/SoldierIcon.png",
             "SmallIcon": "Sprites/SoldierIcon.png",
@@ -39,6 +39,12 @@
                 "StatName": "Mass",
                 "DepStatName": "Strength",
                 "Value": 0.1
+            },
+            "ArmorScale": {
+                "DisplayName": "Soldier",
+                "ModType": "Scale",
+                "StatName": "Armor",
+                "Value": 1.2
             }
         },
         "AddTags": ["Soldier"]
@@ -49,7 +55,7 @@
         "CanStack": true,
         "EffectKey": "Rogue_TitlePage",
         "Details":{
-            "Description": "Rogue Dexcription",
+            "Description": "An Agile agent employed by The Guild. Rogues focus on Physcial Attack and Evasion Defense.",
             "DisplayName": "Rogue",
             "LargeIcon": "Sprites/RogueIcon.png",
             "SmallIcon": "Sprites/RogueIcon.png",
@@ -95,7 +101,7 @@
         "EffectKey": "Mage_TitlePage",
         
         "Details": {
-            "Description": "Mage Dexcription",
+            "Description": "An Intelligent caster educated by The Collage. Mages focus Magic Spell Pages but lack Defense.",
             "DisplayName": "Mage",
             "LargeIcon": "Sprites/MageIcon.png",
             "SmallIcon": "Sprites/MageIcon.png",
@@ -133,7 +139,7 @@
         "CanStack": true,
         "EffectKey": "Priest_TitlePage",
         "Details": {
-            "Description": "Priest Dexcription",
+            "Description": "A Wise beliver edify by The Church. Priest focus Support and Ward Defense.",
             "DisplayName": "Priest",
             "LargeIcon": "Sprites/PriestIcon.png",
             "SmallIcon": "Sprites/PriestIcon.png",

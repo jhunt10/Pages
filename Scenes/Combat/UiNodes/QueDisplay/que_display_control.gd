@@ -62,21 +62,6 @@ func _sync():
 	if _target_display_key:
 		CombatRootControl.Instance.MapController.target_area_display.clear_display(_target_display_key)
 		_target_display_key = null
-	if _actor.Que.real_que.size() > 0:
-		show_last_qued_target_area()
-
-func show_last_qued_target_area():
-	# Display last page's target area for mobile
-	if _actor and _actor.Que and _actor.Que.real_que and _actor.Que.real_que.size() > 0:
-		var last_page:BaseAction = _actor.Que.real_que[-1]
-		if last_page.has_preview_target():
-			var target_parms = last_page.get_preview_target_params(_actor)
-			if !target_parms:
-				printerr("QueDisplayControl._sync: %s Failed to find preview TargetParams ." % [last_page.ActionKey])
-			else:
-				var preview_pos = _actor.Que.get_movement_preview_pos()
-				var target_selection_data = TargetSelectionData.new(target_parms, 'Preview', _actor, CombatRootControl.Instance.GameState, [], preview_pos)
-				_target_display_key = CombatRootControl.Instance.MapController.target_area_display.build_from_target_selection_data(target_selection_data)
 
 func clear_preview():
 	if _target_display_key:

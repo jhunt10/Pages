@@ -7,6 +7,7 @@ const LOGGING = false
 var grid_tile_map:TileMapLayer:
 	get:
 		return $GridDisplayLayer
+@export var map_name:String
 @export var actor_tile_map:TileMapLayer 
 @export var item_tile_map:TileMapLayer 
 @export var terrain_path_map:TerrainPathingMap
@@ -45,7 +46,10 @@ func get_map_data()->Dictionary:
 			var pos = MapPos.new(child.map_coor.x, child.map_coor.y, 0, child.facing)
 			var data = {"Pos": pos}
 			if child.spawn_actor_key != '':
-				data["ActorKey"] = child.spawn_actor_key
+				if child.spawn_actor_key == "RandomEnemy":
+					data["ActorKey"] = _get_random_enemy_key()
+				else:
+					data["ActorKey"] = child.spawn_actor_key
 			if child.spawn_actor_id != '':
 				data["ActorId"] = child.spawn_actor_id
 			if child.is_player:
@@ -66,6 +70,16 @@ func get_map_data()->Dictionary:
 	marker_tile_map.hide()
 	map_data['Actors'] = actors
 	return map_data
+
+func _get_random_enemy_key()->String:
+	var map_data = MapLoader.get_map_data(map_name)
+	var enemy_data = map_data.get("EnemySet", {})
+	var enemy_set = {}
+	for enemy_key in enemy_data:
+		enemy_set[enemy_key] = enemy_data[enemy_key].get("Weight", -1)
+	var actor_key = RandomHelper.roll_from_set(enemy_set)
+	return actor_key
+	
 
 func get_pos_marker(marker_name)->MapPos:
 	if _cached_marker_poses.has(marker_name):

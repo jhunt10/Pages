@@ -1,4 +1,4 @@
-[gd_scene load_steps=66 format=3 uid="uid://wa8bgcuurt5n"]
+[gd_scene load_steps=73 format=3 uid="uid://wa8bgcuurt5n"]
 
 [ext_resource type="Texture2D" uid="uid://cgrlfobidw8xl" path="res://assets/Sprites/UI/BackPatches/PaperPatch_Bigger_276x192_48.png" id="1_dsnfm"]
 [ext_resource type="Script" path="res://Scenes/TutorialCards/tutorial_cards.gd" id="1_imldm"]
@@ -65,8 +65,15 @@
 [ext_resource type="Texture2D" uid="uid://djiwkjtfony5y" path="res://defs/Items/Consumables/Ammo/Sprites/Mag_Ammo_LIcon.png" id="59_6efni"]
 [ext_resource type="Texture2D" uid="uid://dsvkalu2jexjd" path="res://notes/TutorialImages/Ammo/DivAmmoDemo.png" id="60_0utij"]
 [ext_resource type="Texture2D" uid="uid://cnbfngclu243n" path="res://defs/Items/Consumables/Ammo/Sprites/Abn_Ammo_LIcon.png" id="61_wf3sy"]
+[ext_resource type="Texture2D" uid="uid://diy8q5lpvpw1u" path="res://assets/Sprites/UI/SymbolIcons/PhyDamageSymbol.png" id="66_hou42"]
+[ext_resource type="Texture2D" uid="uid://bh45syk3fs1wh" path="res://defs/ClassDefs/Soldier/Items/Equipment/Sprites/OldSword.png" id="67_bxh1s"]
+[ext_resource type="Texture2D" uid="uid://dgog12c1b7dnl" path="res://notes/TutorialImages/Weapons/DefaultRangeDisplay.png" id="68_eer4b"]
+[ext_resource type="Texture2D" uid="uid://cioap64cdk8dt" path="res://defs/Items/Equipment/BanditEquipment/Sprites/BigMalma_Icon.png" id="69_jjpgd"]
+[ext_resource type="Texture2D" uid="uid://cqqyhjnm535e7" path="res://notes/TutorialImages/Weapons/HeavyRangeDisplay.png" id="70_duqdi"]
+[ext_resource type="Texture2D" uid="uid://b0xxdbolr32ln" path="res://defs/ClassDefs/Rogue/Items/Equipment/Sprites/OldBow.png" id="71_8w7en"]
+[ext_resource type="Texture2D" uid="uid://du61hnus1c30t" path="res://notes/TutorialImages/Weapons/StaffRangeDisplay.png" id="72_lgair"]
 
-[node name="TutorialCardsControl" type="Control" node_paths=PackedStringArray("top_container", "title_label", "count_label", "close_button", "back_button", "back_button_background", "next_button", "next_button_background", "done_button", "done_button_background", "page_que_card", "movement_card", "targeting_actor_card", "targeting_spot_card", "ppr_card", "speed_card", "mass_card", "armor_card", "block_evade_card", "item_card", "item2_card", "ammo_card")]
+[node name="TutorialCardsControl" type="Control" node_paths=PackedStringArray("top_container", "title_label", "count_label", "close_button", "back_button", "back_button_background", "next_button", "next_button_background", "done_button", "done_button_background", "page_que_card", "movement_card", "targeting_actor_card", "targeting_spot_card", "ppr_card", "speed_card", "mass_card", "armor_card", "block_evade_card", "item_card", "item2_card", "ammo_card", "weapon_card")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -96,6 +103,7 @@ block_evade_card = NodePath("CardControl/BlockEvade")
 item_card = NodePath("CardControl/Items")
 item2_card = NodePath("CardControl/Items2")
 ammo_card = NodePath("CardControl/Ammo")
+weapon_card = NodePath("CardControl/Weapons")
 
 [node name="CardControl" type="Control" parent="."]
 custom_minimum_size = Vector2(800, 500)
@@ -1688,6 +1696,7 @@ layout_mode = 2
 size_flags_vertical = 3
 
 [node name="BlockEvade" type="Control" parent="CardControl"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1752,7 +1761,7 @@ theme = ExtResource("5_l4e1i")
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/normal_font_size = 32
 bbcode_enabled = true
-text = "[color=#780000]Critical[/color] damage is shown in [color=#e0c000][outline_size=10]Yellow[/outline_size][/color]."
+text = "[color=#780000]Critical[/color] damage is shown in [color=#806000]Yellow[/color]."
 fit_content = true
 scroll_active = false
 
@@ -2898,3 +2907,280 @@ visible = false
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 size_flags_vertical = 3
+
+[node name="Weapons" type="Control" parent="CardControl"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="BoxContainer" type="BoxContainer" parent="CardControl/Weapons"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = 85.0
+offset_right = -24.0
+offset_bottom = -65.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+vertical = true
+
+[node name="DescriptionLabel" type="RichTextLabel" parent="CardControl/Weapons/BoxContainer"]
+visible = false
+layout_mode = 2
+theme = ExtResource("5_l4e1i")
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("6_qh3ul")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "Many [color=blue]Action Pages[/color] use the [color=#780000]Actor[/color]'s [color=#780000]Weapon[/color] for [color=#780000]Damage[/color] and [color=#780000]Target Range[/color]."
+fit_content = true
+scroll_active = false
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CardControl/Weapons/BoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="VSeparator" type="VSeparator" parent="CardControl/Weapons/BoxContainer/HBoxContainer"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(24, 0)
+layout_mode = 2
+
+[node name="DescriptionContainer" type="VBoxContainer" parent="CardControl/Weapons/BoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="HSeparator" type="HSeparator" parent="CardControl/Weapons/BoxContainer/HBoxContainer/DescriptionContainer"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="DescriptionLabel5" type="RichTextLabel" parent="CardControl/Weapons/BoxContainer/HBoxContainer/DescriptionContainer"]
+layout_mode = 2
+theme = ExtResource("5_l4e1i")
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("6_qh3ul")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[color=blue]Light Weapons[/color]: 
+Can used in [color=#780000]OffHand[/color] 
+if [color=#780000]MainHand[/color] is also [color=blue]Light[/color]."
+fit_content = true
+scroll_active = false
+
+[node name="HSeparator2" type="HSeparator" parent="CardControl/Weapons/BoxContainer/HBoxContainer/DescriptionContainer"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="DescriptionLabel3" type="RichTextLabel" parent="CardControl/Weapons/BoxContainer/HBoxContainer/DescriptionContainer"]
+layout_mode = 2
+theme = ExtResource("5_l4e1i")
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("6_qh3ul")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[color=blue]Medium Weapons[/color]: 
+Will be used [color=#780000]TwoHanded[/color] 
+if [color=#780000]OffHand[/color] is empty."
+fit_content = true
+scroll_active = false
+
+[node name="HSeparator3" type="HSeparator" parent="CardControl/Weapons/BoxContainer/HBoxContainer/DescriptionContainer"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="DescriptionLabel4" type="RichTextLabel" parent="CardControl/Weapons/BoxContainer/HBoxContainer/DescriptionContainer"]
+layout_mode = 2
+theme = ExtResource("5_l4e1i")
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("6_qh3ul")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[color=blue]Heavy Weapons[/color]: 
+Musts be [color=#780000]TwoHanded[/color]."
+fit_content = true
+scroll_active = false
+
+[node name="HSeparator4" type="HSeparator" parent="CardControl/Weapons/BoxContainer/HBoxContainer/DescriptionContainer"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VSeparator2" type="VSeparator" parent="CardControl/Weapons/BoxContainer/HBoxContainer"]
+visible = false
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(24, 0)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CardControl/Weapons/BoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ModsTitleLabel" type="Label" parent="CardControl/Weapons/BoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("5_l4e1i")
+theme_override_font_sizes/font_size = 32
+text = "Modifiers"
+horizontal_alignment = 1
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="CardControl/Weapons/BoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="ModsTitleContainer" type="VBoxContainer" parent="CardControl/Weapons/BoxContainer/HBoxContainer/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+alignment = 2
+
+[node name="TitleLabel" type="Label" parent="CardControl/Weapons/BoxContainer/HBoxContainer/VBoxContainer/HBoxContainer3/ModsTitleContainer"]
+layout_mode = 2
+theme = ExtResource("5_l4e1i")
+theme_override_colors/font_color = Color(0.470588, 0, 0, 1)
+theme_override_font_sizes/font_size = 32
+text = "OffHand:"
+horizontal_alignment = 2
+
+[node name="TitleLabel2" type="Label" parent="CardControl/Weapons/BoxContainer/HBoxContainer/VBoxContainer/HBoxContainer3/ModsTitleContainer"]
+layout_mode = 2
+theme = ExtResource("5_l4e1i")
+theme_override_colors/font_color = Color(0.470588, 0, 0, 1)
+theme_override_font_sizes/font_size = 32
+text = "TwoHand:"
+horizontal_alignment = 2
+
+[node name="ModValuesContainer" type="VBoxContainer" parent="CardControl/Weapons/BoxContainer/HBoxContainer/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+alignment = 1
+
+[node name="OffHandModContainer" type="VBoxContainer" parent="CardControl/Weapons/BoxContainer/HBoxContainer/VBoxContainer/HBoxContainer3/ModValuesContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CardControl/Weapons/BoxContainer/HBoxContainer/VBoxContainer/HBoxContainer3/ModValuesContainer/OffHandModContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="CardControl/Weapons/BoxContainer/HBoxContainer/VBoxContainer/HBoxContainer3/ModValuesContainer/OffHandModContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("66_hou42")
+expand_mode = 3
+stretch_mode = 4
+
+[node name="ValueLabel" type="Label" parent="CardControl/Weapons/BoxContainer/HBoxContainer/VBoxContainer/HBoxContainer3/ModValuesContainer/OffHandModContainer/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("5_l4e1i")
+theme_override_font_sizes/font_size = 32
+text = "x 0.5"
+
+[node name="TwoHandModContainer" type="HBoxContainer" parent="CardControl/Weapons/BoxContainer/HBoxContainer/VBoxContainer/HBoxContainer3/ModValuesContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="CardControl/Weapons/BoxContainer/HBoxContainer/VBoxContainer/HBoxContainer3/ModValuesContainer/TwoHandModContainer"]
+layout_mode = 2
+texture = ExtResource("66_hou42")
+expand_mode = 3
+
+[node name="ValueLabel" type="Label" parent="CardControl/Weapons/BoxContainer/HBoxContainer/VBoxContainer/HBoxContainer3/ModValuesContainer/TwoHandModContainer"]
+layout_mode = 2
+theme = ExtResource("5_l4e1i")
+theme_override_font_sizes/font_size = 32
+text = "x 1.2"
+
+[node name="HSeparator5" type="HSeparator" parent="CardControl/Weapons/BoxContainer/HBoxContainer/VBoxContainer"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="DescriptionLabel4" type="RichTextLabel" parent="CardControl/Weapons/BoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("5_l4e1i")
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("6_qh3ul")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "  [color=#780000]Target Area[/color] can 
+change per [color=#780000]Weapon[/color]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CardControl/Weapons/BoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CardControl/Weapons/BoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="VSeparator" type="VSeparator" parent="CardControl/Weapons/BoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CardControl/Weapons/BoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect2" type="TextureRect" parent="CardControl/Weapons/BoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("67_bxh1s")
+expand_mode = 5
+
+[node name="TextureRect" type="TextureRect" parent="CardControl/Weapons/BoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("68_eer4b")
+
+[node name="VSeparator2" type="VSeparator" parent="CardControl/Weapons/BoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="CardControl/Weapons/BoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect2" type="TextureRect" parent="CardControl/Weapons/BoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+texture = ExtResource("69_jjpgd")
+expand_mode = 5
+
+[node name="TextureRect" type="TextureRect" parent="CardControl/Weapons/BoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+texture = ExtResource("70_duqdi")
+
+[node name="VSeparator3" type="VSeparator" parent="CardControl/Weapons/BoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="CardControl/Weapons/BoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect2" type="TextureRect" parent="CardControl/Weapons/BoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer3"]
+layout_mode = 2
+texture = ExtResource("71_8w7en")
+expand_mode = 5
+
+[node name="TextureRect" type="TextureRect" parent="CardControl/Weapons/BoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer3"]
+layout_mode = 2
+texture = ExtResource("72_lgair")
+
+[node name="VSeparator4" type="VSeparator" parent="CardControl/Weapons/BoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HSeparator6" type="HSeparator" parent="CardControl/Weapons/BoxContainer/HBoxContainer/VBoxContainer"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VSeparator3" type="VSeparator" parent="CardControl/Weapons/BoxContainer/HBoxContainer"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(24, 0)
+layout_mode = 2

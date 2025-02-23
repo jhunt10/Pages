@@ -56,14 +56,19 @@ func on_que_death(que_id:String):
 	que_display.mark_as_dead()
 
 func _on_frame_start():
+	if _ques.size() == 0:
+		return
 	# set bar position
 	if !color_bar.visible:
 		color_bar.show()
-	var start_x = 38
-	var icon_width = 32
-	var gap = 4
-	var x = start_x - self.global_position.x - (gap / 2)
+	var first_que:QueCollection_QueDisplayContainer  = _ques.values()[0]
+	var icon_width = first_que._slots[0].size.x
+	var gap = first_que.slots_container.get_theme_constant('separation')
+	var start_x = first_que.slots_container.position.x
+	var end_x = first_que.slots_container.position.x + (first_que.slots_container.get_children().size() * (icon_width + gap)) - gap
+	var x = start_x
 	x += (icon_width + gap) * CombatRootControl.Instance.QueController.action_index
 	x += (icon_width+gap) * CombatRootControl.Instance.QueController.sub_action_index / ActionQueController.FRAMES_PER_ACTION
+	#print("QueQueBar: S|W|G: %s|%s|%s   Frame|Turn: %s|%s   X: %s " %[start_x, icon_width, gap, CombatRootControl.Instance.QueController.sub_action_index, CombatRootControl.Instance.QueController.action_index, x])
 	color_bar.position = Vector2i(x, inner_container.position.y)
 	color_bar.size.y = inner_container.size.y

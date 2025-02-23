@@ -2,6 +2,20 @@
     "MapKey": "CrossRoad",
     "MapName":"Cross Road",
     "Description":"A cross road on the way to The City.",
-    "MapScene": "crossroad_map.tscn",
-    "SortOrder": 1
+    "MapScene": "crossroad_explore_map.tscn",
+    "SortOrder": 2,
+    "EnemySet":{
+        "BanditArmored": {
+            "Weight": 30,
+            "IsUnique": false
+        },
+        "BanditArcher": {
+            "Weight": 20,
+            "IsUnique": false
+        },
+        "BanditCaptain": {
+            "Weight": 1,
+            "IsUnique": true
+        }
+    }
 }

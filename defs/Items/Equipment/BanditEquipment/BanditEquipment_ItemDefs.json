@@ -18,7 +18,15 @@
         "SpriteSheet":"Sprites/BanditCptHelmet_SpriteSheet.png",
         "EquipSlot":"Head",
         "Armor": 3,
-        "Ward": 0
+        "Ward": 0,
+        "StatMods": {
+            "ArmorBonus": {
+                "DisplayName": "Bandit Captian Helmet",
+                "ModType": "Add",
+                "StatName": "Armor",
+                "Value": 3
+            }
+        }
     },
     {
         "ItemKey":"BanditHelmet",
@@ -39,7 +47,15 @@
         "SpriteSheet":"Sprites/BanditHelmet_SpriteSheet.png",
         "EquipSlot":"Head",
         "Armor": 3,
-        "Ward": 0
+        "Ward": 0,
+        "StatMods": {
+            "ArmorBonus": {
+                "DisplayName": "Bandit Helmet",
+                "ModType": "Add",
+                "StatName": "Armor",
+                "Value": 3
+            }
+        }
     },
     {
         "ItemKey":"BanditArmor",
@@ -60,7 +76,15 @@
         "SpriteSheet":"Sprites/BanditChest_SpriteSheet.png",
         "EquipSlot":"Body",
         "Armor": 3,
-        "Ward": 0
+        "Ward": 0,
+        "StatMods": {
+            "ArmorBonus": {
+                "DisplayName": "Bandit Armor",
+                "ModType": "Add",
+                "StatName": "Armor",
+                "Value": 3
+            }
+        }
     },
     {
         "ItemKey":"BanditPants",
@@ -81,7 +105,15 @@
         "SpriteSheet":"Sprites/BanditPants_SpriteSheet.png",
         "EquipSlot":"Feet",
         "Armor": 3,
-        "Ward": 0
+        "Ward": 0,
+        "StatMods": {
+            "ArmorBonus": {
+                "DisplayName": "Bandit Pants",
+                "ModType": "Add",
+                "StatName": "Armor",
+                "Value": 3
+            }
+        }
     },
 
 

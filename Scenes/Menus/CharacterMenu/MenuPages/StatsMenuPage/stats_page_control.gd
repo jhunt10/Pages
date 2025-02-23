@@ -94,19 +94,20 @@ func _set_stats():
 	#if primary_weapon:
 		#var damage_data = primary_weapon.get_damage_data()
 		#var damage_var = damage_data.get("DamageVarient",1)
-		
-	for damage_data in _actor.get_default_attack_damage_datas().values():
-		var attack_stat = damage_data.get("AtkStat")
-		var base_damage = _actor.stats.base_damge_from_stat(attack_stat)
-		var damage_var = damage_data.get("DamageVarient",0)
+	
+	var damage_datas = _actor.get_default_attack_damage_datas()
+	
+	if damage_datas.has("WeaponDamage"):
+		var damage_data = damage_datas['WeaponDamage']
+		var min_max = DamageHelper.get_min_max_damage(_actor, damage_data)
 		if damage_data.get("DefenseType", '') == "Ward":
 			phy_atk_icon.hide()
 			mag_atk_icon.show()
 		else:
 			phy_atk_icon.show()
 			mag_atk_icon.hide()
-		main_hand_min_damage_label.text = str(base_damage - (base_damage * damage_var))
-		main_hand_max_damage_label.text = str(base_damage + (base_damage * damage_var))
+		main_hand_min_damage_label.text = str(min_max[0])
+		main_hand_max_damage_label.text = str(min_max[1])
 		main_hand_damage_type.text = damage_data.get("DamageType", "")
 	#else:
 		#main_hand_min_damage_label.text = "--"
@@ -116,8 +117,10 @@ func _set_stats():
 	crit_mod_label.text = str(_actor.stats.get_stat(StatHelper.CritMod))
 	crit_chance_label.text = str(_actor.stats.get_stat(StatHelper.CritChance)) + "%"
 	
-	armor_label.value_label.text = str(_actor.equipment.get_total_equipment_armor())
-	ward_label.value_label.text = str(_actor.equipment.get_total_equipment_ward())
+	armor_label.set_stat_values(_actor)
+	ward_label.set_stat_values(_actor)
+	#armor_label.value_label.text = str(_actor.stats.get_stat("Armor", 0))
+	#ward_label.value_label.text = str(_actor.equipment.get_total_equipment_ward())
 	evasion_stat_label.set_stat_values(_actor)
 	protection_stat_label.set_stat_values(_actor)
 	awareness_stat_label.set_stat_values(_actor)

@@ -59,5 +59,27 @@
                 }
             }
         ]
+    },
+    {
+        "ItemKey":"OldQuiver_ItemBag",
+        "_ObjectScript": "res://assets/Scripts/Items/Equipment/BaseBagEquipment.gd",
+        "Details":{
+			"DisplayName": "Old Quiver",
+			"SnippetDesc": "An old worn quiver.",
+			"Description": "An old worn quiver for carrying 5 PHY Ammo. Old, but still works.",
+			"Tags": ["Bag"],
+			"LargeIcon":"MediumQuiver.png",
+			"SmallIcon":"MediumQuiver.png"
+		},
+        "ItemSlotsData": [
+            {
+                "Key":"Ammo",
+                "DisplayName":"PHY Ammo",
+                "Count": 5,
+                "FilterData":{
+                    "RequiredTags":"Ammo"
+                }
+            }
+        ]
     }
 ]

@@ -46,6 +46,7 @@ var _actor:BaseActor
 var _page_buttons:Dictionary = {} 
 var _resize:bool = true
 var _target_display_key
+var _target_display_action_key
 
 # Don't automatically show start button. Mainly for tutorial
 var supress_start:bool = false
@@ -153,6 +154,8 @@ func set_actor(actor:BaseActor):
 	_actor.Que.action_que_changed.connect(_on_que_change)
 	_actor.Que.ammo_changed.connect(_on_ammo_change)
 	_build_buttons()
+	clear_preview_display()
+	show_last_qued_target_area()
 	que_display_control.set_actor(actor)
 	
 
@@ -192,6 +195,7 @@ func _on_que_change():
 	if CombatRootControl.Instance.QueController.execution_state != ActionQueController.ActionStates.Waiting:
 		return
 	clear_preview_display()
+	show_last_qued_target_area()
 	if _actor.Que.is_ready():# or CombatRootControl.QueController.SHORTCUT_QUE:
 		show_start_button()
 	else:
@@ -200,50 +204,53 @@ func _on_que_change():
 func allow_input(_allow:bool):
 	pass
 
-var que_was_displaying_target:bool = false
 func clear_preview_display():
 	if _target_display_key:
 		CombatRootControl.Instance.MapController.target_area_display.clear_display(_target_display_key, false)
 		_target_display_key = null
-	if que_was_displaying_target:
-		que_display_control.show_last_qued_target_area()
-		que_was_displaying_target = false
+		_target_display_action_key = null
 
 func show_preview_target_area(action:BaseAction):
-	if que_display_control._target_display_key:
-		que_was_displaying_target = true
-		que_display_control.clear_preview()
-	else:
-		que_was_displaying_target = false
+	if _target_display_action_key == action.ActionKey:
+		return
 	var target_parms = action.get_preview_target_params(_actor)
 	if !target_parms:
 		printerr("QueInputControl._mouse_entered_page_button: %s Failed to find preview TargetParams ." % [action.ActionKey])
 	else:
+		clear_preview_display()
 		var preview_pos = _actor.Que.get_movement_preview_pos()
 		if action.PreviewMoveOffset:
 			preview_pos = MoveHandler.relative_pos_to_real(preview_pos, action.PreviewMoveOffset)
 		var target_selection_data = TargetSelectionData.new(target_parms, 'Preview', _actor, CombatRootControl.Instance.GameState, [], preview_pos)
+		_target_display_action_key = action.ActionKey
 		_target_display_key = CombatRootControl.Instance.MapController.target_area_display.build_from_target_selection_data(target_selection_data)
 
-func _mouse_entered_page_button(_index, key_name):
-	if CombatRootControl.Instance.QueController.execution_state != ActionQueController.ActionStates.Waiting:
-		return
-	var action:BaseAction = ActionLibrary.get_action(key_name)
-	if action.PreviewMoveOffset:
-		que_display_control.preview_que_path(action.PreviewMoveOffset)
-	if action.has_preview_target():
-		show_preview_target_area(action)
-	if action.CostData.size() > 0:
-		CombatUiControl.Instance.stat_panel_control.preview_stat_cost(action.CostData)
-	#ui_controler.mouse_entered_action_button(key_name)
-	pass
+func show_last_qued_target_area():
+	# Display last page's target area for mobile
+	if _actor and _actor.Que and _actor.Que.real_que and _actor.Que.real_que.size() > 0:
+		var last_page:BaseAction = _actor.Que.real_que[-1]
+		if last_page.has_preview_target():
+			show_preview_target_area(last_page)
 
-func _mouse_exited_action_button(_index, _key_name):
-	clear_preview_display()
-	CombatUiControl.Instance.stat_panel_control.stop_preview_stat_cost()
-	que_display_control.preview_que_path()
-	#ui_controler.mouse_exited_action_button(key_name)
-	pass
+#func _mouse_entered_page_button(_index, key_name):
+	#if CombatRootControl.Instance.QueController.execution_state != ActionQueController.ActionStates.Waiting:
+		#return
+	#var action:BaseAction = ActionLibrary.get_action(key_name)
+	#if action.PreviewMoveOffset:
+		#que_display_control.preview_que_path(action.PreviewMoveOffset)
+	#if action.has_preview_target():
+		#show_preview_target_area(action)
+	#if action.CostData.size() > 0:
+		#CombatUiControl.Instance.stat_panel_control.preview_stat_cost(action.CostData)
+	##ui_controler.mouse_entered_action_button(key_name)
+	#pass
+#
+#func _mouse_exited_action_button(_index, _key_name):
+	#clear_preview_display()
+	#CombatUiControl.Instance.stat_panel_control.stop_preview_stat_cost()
+	#que_display_control.preview_que_path()
+	##ui_controler.mouse_exited_action_button(key_name)
+	#pass
 
 func _page_button_pressed(index, key_name):
 	if selecetion_mode:
@@ -279,6 +286,7 @@ func _start_button_pressed():
 
 func _round_start():
 	hide_start_button()
+	clear_preview_display()
 
 func _round_ends():
 	que_display_patch.show()

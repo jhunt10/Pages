@@ -34,7 +34,7 @@ func _ready() -> void:
 	scroll_dots.selected_index_changed.connect(show_page)
 	scroll_dots.selected_index = 0
 	
-	title_page_button.button.button_down.connect(_on_item_button_down.bind(0, Vector2i.ZERO))
+	title_page_button.button.button_down.connect(_on_item_button_down.bind(0))
 	title_page_button.button.button_up.connect(_on_item_button_up.bind(0))
 	title_page_button.button.mouse_entered.connect(_on_mouse_enter_item_button.bind(0))
 	title_page_button.button.mouse_exited.connect(_on_mouse_exit_item_button.bind(0))

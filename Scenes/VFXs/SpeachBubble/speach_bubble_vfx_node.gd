@@ -42,8 +42,10 @@ signal finished_hideing
 			question_icon.show()
 			
 @export var bounce:bool = false
+@export var full_text:String
 @export var display_text:String:
 	set(val):
+		#print("Set DisplayText: " + val)
 		if display_text != val:
 			display_text = val
 			if text_label:
@@ -96,7 +98,7 @@ signal finished_hideing
 			if state == STATES.Showing:
 				scale_control.scale = Vector2.ONE
 				#speach_bubble_background.show()
-				text_label.text = display_text
+				#text_label.text = display_text
 				bounce_text_controller.display_text = display_text
 				_sync_size()
 			if state == STATES.Shrinking or state == STATES.Unprinting:
@@ -126,7 +128,7 @@ signal finished_hideing
 			_sync_size()
 @export var padding:Vector2i
 @export var grow_speed:float = 1
-@export var letter_delay:float = 0.1
+@export var letter_delay:float = 0.001
 @export var unprint_speed:float = 1
 @export var text_label:Label
 @export var speach_bubble_background:NinePatchRect
@@ -178,20 +180,26 @@ func _process(delta: float) -> void:
 				#_letter_timer = 0
 				#state = STATES.Printing
 				scale_control.scale.x = 1
-	#if state == STATES.Growing or state == STATES.Printing:
-		_letter_timer -= delta
-		var remaining_text = display_text.trim_prefix(text_label.text)
+	if state == STATES.Growing or state == STATES.Printing:
+		if state == STATES.Printing:
+			_letter_timer -= delta
+		else:
+			_letter_timer = letter_delay
+		var remaining_text = full_text.trim_prefix(text_label.text)
 		if _letter_timer <= 0:
 			var current_text = text_label.text
 			var next_letter = remaining_text.substr(0,1)
-			text_label.text = current_text + next_letter
+			#print("Speach Bubble Nest Letter: %s | %s | %s" % [next_letter, remaining_text, current_text])
+			display_text = current_text + next_letter
 			if bounce:
 				bounce_text_controller.display_text = text_label.text 
 			_sync_size()
 			if remaining_text.length() > 1:
 				_letter_timer = letter_delay
 			
-		if scale_control.scale.x >= 1 and remaining_text.length() == 0:
+		if scale_control.scale.x >= 1:
+			state = STATES.Printing
+		if state == STATES.Printing and remaining_text.length() == 0:
 			state = STATES.Showing
 			finished_showing.emit()
 			return
@@ -235,10 +243,10 @@ func set_block_data(block_data:Dictionary):
 	grow_direction = GrowDirections.keys().find(grow_direction_str)
 	var offset = block_data.get("Offset", [0,-8])
 	self.position = Vector2(offset[0],offset[1])
-	display_text = block_data.get("Text", "null")
-	if display_text == "?":
+	full_text = block_data.get("Text", "null")
+	if full_text == "?":
 		self.bubble_type = BubbleType.Question
-	elif display_text == "!":
+	elif full_text == "!":
 		self.bubble_type = BubbleType.Bang
 	else: 
 		self.bubble_type = BubbleType.Text

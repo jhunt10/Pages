@@ -20,6 +20,12 @@
         "Armor": 5,
         "Ward": 0,
         "StatMods": {
+            "ArmorBonus": {
+                "DisplayName": "Old Helmet",
+                "ModType": "Add",
+                "StatName": "Armor",
+                "Value": 5
+            },
             "MassBonus": {
                 "DisplayName": "Old Helmet",
                 "ModType": "Add",
@@ -60,7 +66,13 @@
         "Armor": 5,
         "Ward": 0,
         "StatMods": {
-            "MassBonus": {
+            "ArmorBonus": {
+                "DisplayName": "Old Armor",
+                "ModType": "Add",
+                "StatName": "Armor",
+                "Value": 5
+            },
+            "MassBonus":{
                 "DisplayName": "Old Armor",
                 "ModType": "Add",
                 "StatName": "Mass",
@@ -100,7 +112,13 @@
         "Armor": 5,
         "Ward": 0,
         "StatMods": {
-            "MassBonus": {
+            "ArmorBonus": {
+                "DisplayName": "Old Boots",
+                "ModType": "Add",
+                "StatName": "Armor",
+                "Value": 5
+            },
+            "MassBonus":{
                 "DisplayName": "Old Boots",
                 "ModType": "Add",
                 "StatName": "Mass",

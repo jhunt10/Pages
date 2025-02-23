@@ -127,13 +127,13 @@ func load_init_state(sub_scene_data:Dictionary):
 			else:
 				new_actor = ActorLibrary.get_actor(actor_info['ActorId'])
 			new_actor.FactionIndex = 1
-		elif actor_info.keys().has("ActorKey"):
+		elif actor_info.keys().has("ActorKey") and actor_info["ActorKey"] != '':
 			var actor_key = actor_info['ActorKey']
 			if actor_key == "Player1":
 				new_actor = StoryState.get_player_actor(0)
-			elif actor_key == "Player2":
+			elif actor_key.begins_with("Player2"):
 				new_actor = StoryState.get_player_actor(1)
-				if not new_actor:
+				if not new_actor and actor_key.ends_with("_Create"):
 					var player_id = "Player_2:" + str(ResourceUID.create_id())
 					new_actor = ActorLibrary.create_actor("RogueTemplate", {}, player_id)
 					new_actor.FactionIndex = 0
@@ -154,7 +154,8 @@ func load_init_state(sub_scene_data:Dictionary):
 					StoryState._player_ids[3] = player_id
 			else:
 				new_actor = ActorLibrary.create_actor(actor_key, {})
-				new_actor.FactionIndex = 1
+				if new_actor:
+					new_actor.FactionIndex = 1
 		
 		if new_actor:
 			if actor_info['WaitToSpawn']:
@@ -185,6 +186,7 @@ func load_init_state(sub_scene_data:Dictionary):
 	else:
 		dialog_controller.queue_free()
 		dialog_controller = null
+		camera.freeze = false
 	
 		
 
@@ -219,6 +221,8 @@ func remove_actor(actor:BaseActor):
 
 
 func add_actor(actor:BaseActor, pos:MapPos):
+	if not actor:
+		return
 	if GameState._actors.keys().has(actor.Id):
 		printerr("Actor '%s' already added" % [actor.Id])
 		return
@@ -378,7 +382,7 @@ func set_player_index(index:int, move_camera:bool=true):
 		ui_control.set_player_actor_index(_current_player_index)
 		if move_camera:
 			var actor = StoryState.get_player_actor(index)
-			camera.lock_to_actor(actor)
+			camera.start_auto_pan_to_actor(actor, false)
 
 func get_next_player_index()->int:
 	var next_index = (_current_player_index + 1) % 4

@@ -1086,7 +1086,59 @@
             },
             {
                 "BlockType":"Delay",
-                "Time": 0.8
+                "Time": 0.5
+            },
+            {
+                "BlockType": "MoveActor",
+                "WaitToFinish": false,
+                "TargetActorId": "BanditArcher_1",
+                "PathMarkerName": "Arch1_South",
+                "FollowActor": false,
+                "SpeedScale": 1
+            },
+            {
+                "BlockType": "MoveActor",
+                "WaitToFinish": false,
+                "TargetActorId": "BanditArcher_2",
+                "PathMarkerName": "Arch2_South",
+                "FollowActor": false,
+                "SpeedScale": 1
+            },
+            {
+                "BlockType": "MoveActor",
+                "WaitToFinish": false,
+                "TargetActorId": "BanditArmored_1",
+                "PathMarkerName": "Band1_South",
+                "FollowActor": false,
+                "SpeedScale": 1
+            },
+            {
+                "BlockType": "MoveActor",
+                "WaitToFinish": false,
+                "TargetActorId": "BanditArmored_2",
+                "PathMarkerName": "Band2_3",
+                "FollowActor": false,
+                "SpeedScale": 1
+            },
+            {
+                "BlockType": "MoveActor",
+                "WaitToFinish": false,
+                "TargetActorId": "BanditArmored_3",
+                "PathMarkerName": "Band3_South",
+                "FollowActor": false,
+                "SpeedScale": 1
+            },
+            {
+                "BlockType": "MoveActor",
+                "WaitToFinish": false,
+                "TargetActorId": "BanditCaptain",
+                "PathMarkerName": "Cpt_South",
+                "FollowActor": false,
+                "SpeedScale": 1
+            },
+            {
+                "BlockType":"Delay",
+                "Time": 0.5
             },
 			{
 				"BlockType": "AnimateNode",
@@ -1192,7 +1244,7 @@
 					},
 					{
 						"EntryType": "Text",
-						"Text": " now we can make this a proper @Color:Blue@TPK@Clear@.",
+						"Text": "now we can make this a proper @Color:Blue@TPK@Clear@.",
 						"NewLine": false
 					},
 					{
@@ -1256,12 +1308,12 @@
 			"Player1":"P1",
 			"Player2":"P2",
 			"MysteriousFigure":"Hidden",
-            "BanditArcher_1": "Arch1_South",
-            "BanditArcher_2": "Arch2_South",
-            "BanditArmored_1": "Band1_South",
-            "BanditArmored_2": "Band2_3",
-            "BanditArmored_3": "Band3_3",
-            "BanditCaptain": "Cpt3"
+            "BanditArcher_1": "BandA1_C",
+            "BanditArcher_2": "BandA2_C",
+            "BanditArmored_1": "Band1_C",
+            "BanditArmored_2": "Band2_C",
+            "BanditArmored_3": "Band3_C",
+            "BanditCaptain": "BandC_C"
 		},
         "Blocks":[
             {
@@ -1278,17 +1330,17 @@
 			"Player1":"P1",
 			"Player2":"P2",
 			"MysteriousFigure":"Hidden",
-            "BanditArcher_1": "Arch1_South",
-            "BanditArcher_2": "Arch2_South",
-            "BanditArmored_1": "Band1_South",
-            "BanditArmored_2": "Band2_3",
-            "BanditArmored_3": "Band3_3",
-            "BanditCaptain": "Cpt3"
+            "BanditArcher_1": "BandA1_C",
+            "BanditArcher_2": "BandA2_C",
+            "BanditArmored_1": "Band1_C",
+            "BanditArmored_2": "Band2_C",
+            "BanditArmored_3": "Band3_C",
+            "BanditCaptain": "BandC_C"
 		},
         "Blocks":[
             {
                 "BlockType":"Delay",
-                "Time": 1.5
+                "Time": 3.5
             },
             {   
                 "BlockType": "SpeechBox",
@@ -1417,7 +1469,7 @@
                     },
                     {
                         "EntryType": "Text",
-                        "Text": " our new @Color:Red@Rogue@Clear@ came with some @Color:Blue@Pages@Clear@ of thier own.",
+                        "Text": "our new @Color:Red@Rogue@Clear@ came with some @Color:Blue@Pages@Clear@ of thier own.",
                         "NewLine": false
                     },
                     {
@@ -1463,7 +1515,7 @@
                     },
                     {
                         "EntryType": "Text",
-                        "Text": "I didn't think I'd get to use my last @Color:Red@Flash Card@Clear@.",
+                        "Text": "I didn't think I'd get to use my last @Color:Red@Flash Cards@Clear@.",
                         "NewLine": true
                     },
                     {
@@ -1492,7 +1544,101 @@
 				"Create": "TutorialCards_1",
 				"PopUpType":"TutorialCard",
 				"Cards": ["Page Que","Movement","Targeting Actors","Targeting Spots", "Items", "Items 2", "Turns and Gaps","Turn Order","Crashing","Armor and Damage", "Block and Evade", "Page Ammo"],
-				"Index": 10
+				"Index": 11
+			},
+			{
+				"WaitToFinish": false,
+				"WaitForNextButton": false,
+				"BlockType": "PanCamera",
+				"TargetType": "PathMarker",
+				"PathMarkerName": "BandC_C"
+			},
+            {   
+                "BlockType": "SpeechBox",
+                "WaitToFinish": true,
+                "WaitForNextButton": true,
+                "TopBox": true,
+                "Entries": [ 
+                    {
+                        "EntryType":"Clear",
+                        "ClearSpeaker": false
+                    },
+                    {
+                        "EntryType": "Speaker",
+                        "SpeakerName": "MtFr",
+                        "SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Neutral.png"
+                    },
+                    {
+                        "EntryType": "Text",
+                        "Text": "I should probably also call out that the  @Color:Red@Bandit Captian@Clear@ is using a @Color:Red@Two-Handed Weapon@Clear@. ",
+                        "NewLine": true
+                    },
+                    {
+                        "EntryType":"WaitToRead"
+                    },
+                    {
+                        "EntryType": "Text",
+                        "Text": "That means they hit harder, ",
+                        "NewLine": false
+                    },
+                    {
+                        "EntryType":"WaitToRead"
+                    },
+                    {
+                        "EntryType": "Text",
+                        "Text": "but also thier @Color:Red@Target Area@Clear@ will reach a little further.",
+                        "NewLine": false
+                    },
+                    {
+                        "EntryType":"WaitToRead"
+                    },
+                    {
+                        "EntryType": "Speaker",
+                        "SpeakerName": "MtFr",
+                        "SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Happy.png"
+                    },
+                    {
+                        "EntryType": "Text",
+                        "Text": "And you know I got a @Color:Red@Flash Card@Clear@ for that too.",
+                        "NewLine": true
+                    },
+                    {
+                        "EntryType":"WaitToRead"
+                    }
+                ]
+            },
+            {   
+                "BlockType": "SpeechBox",
+                "WaitToFinish": false,
+                "WaitForNextButton": false,
+                "TopBox": true,
+				"Hide": true,
+                "Entries": [ 
+                    {
+                        "EntryType":"Clear",
+                        "ClearSpeaker": false
+                    },
+                    {
+                        "EntryType": "Speaker",
+                        "SpeakerName": "MtFr",
+                        "SpeakerPort": "res://defs/Actors/NPCs/MnFg/Sprites/Portraits/MysFig_Neutral.png"
+                    }
+                ]
+            },
+			{
+				"BlockType": "PopUp",
+				"WaitToFinish": true,
+				"Create": "TutorialCards_1",
+				"PopUpType":"TutorialCard",
+				"Cards": ["Page Que","Movement","Targeting Actors","Targeting Spots", "Items", "Items 2", "Turns and Gaps","Turn Order","Crashing","Armor and Damage", "Block and Evade", "Page Ammo", "Weapons"],
+				"Index": 12
+			},
+			{
+				"WaitToFinish": true,
+				"WaitForNextButton": false,
+				"BlockType": "PanCamera",
+				"TargetType": "PathMarker",
+				"PathMarkerName": "P2"
 			},
             {   
                 "BlockType": "SpeechBox",

@@ -38,7 +38,7 @@ func lock_to_actor(actor:BaseActor):
 		printerr("Camera lock_to_actor: Failed to find node for actor: %s" % [actor.Id])
 	self.snap_to_map_pos(actor_node.cur_map_pos)
 	following_actor_node = actor_node
-	print("Locking Camera to Actor: %s" % [following_actor_node.Actor.Id])
+	if LOGGING: print("Locking Camera to Actor: %s" % [following_actor_node.Actor.Id])
 	
 
 func snap_to_map_pos(pos):
@@ -122,14 +122,15 @@ func _process(delta: float) -> void:
 
 func clear_following_actor():
 	if following_actor_node:
-		print("Unlocking Camera from Actor: %s" % [following_actor_node.Actor.Id])
+		if is_instance_valid(following_actor_node):
+			if LOGGING: print("Unlocking Camera from Actor: %s" % [following_actor_node.Actor.Id])
 		following_actor_node = null
 	else:
-		print("Unlocking Camera from Actor: null")
+		if LOGGING: print("Unlocking Camera from Actor: null")
 
 func set_camera_pos(pos:Vector2, unfollow:bool=true):
 	self.position = pos
-	if unfollow:
+	if unfollow and following_actor_node:
 		clear_following_actor()
 
 func start_auto_pan(target_pos:Vector2):
@@ -143,10 +144,11 @@ func start_auto_pan_to_map_pos(map_pos:MapPos):
 	var target_pos = MapHelper.get_map_pos_global_position(map_pos)
 	start_auto_pan(target_pos)
 
-func start_auto_pan_to_actor(actor:BaseActor):
+func start_auto_pan_to_actor(actor:BaseActor, lock_to_actor:bool=true):
 	var target_pos = MapHelper.get_actor_global_position(actor)
 	var actor_node = CombatRootControl.Instance.MapController.actor_nodes.get(actor.Id)
-	following_actor_node = actor_node
+	if lock_to_actor:	
+		following_actor_node = actor_node
 	start_auto_pan(target_pos)
 
 func force_finish_panning():

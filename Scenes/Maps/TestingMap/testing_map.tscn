@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=4 uid="uid://cjlwimeud3tyy"]
+[gd_scene load_steps=27 format=4 uid="uid://cjlwimeud3tyy"]
 
 [ext_resource type="Script" path="res://assets/Scripts/Map/map_controler_node.gd" id="1_mpwod"]
 [ext_resource type="Texture2D" uid="uid://dxan6lyrg8db3" path="res://assets/Sprites/TileSets/GrassPath_TileSheet.png" id="2_2xpuf"]
@@ -14,7 +14,6 @@
 [ext_resource type="Texture2D" uid="uid://b4wgvwtmj44rp" path="res://defs/Actors/TestTarget_SpriteSheet.png" id="12_2qpl1"]
 [ext_resource type="Texture2D" uid="uid://n01mqtjh3c3k" path="res://defs/Actors/TestArmoredTarget_SpriteSheet.png" id="13_rojbo"]
 [ext_resource type="Texture2D" uid="uid://6i16c8toajew" path="res://defs/Actors/TestWardedTarget_SpriteSheet.png" id="14_rkmw3"]
-[ext_resource type="Texture2D" uid="uid://c5q4nksi2sayc" path="res://defs/Actors/Tutorial/TutorShroom_SpriteSheet.png" id="15_173cn"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lwpvo"]
 texture = ExtResource("2_2xpuf")
@@ -911,26 +910,26 @@ tile_set = SubResource("TileSet_5ipcw")
 
 [node name="SpwanNode_Player" type="Sprite2D" parent="MapMarkerMapLayer"]
 self_modulate = Color(0, 1, 0, 1)
-position = Vector2(240, 240)
+position = Vector2(272, 240)
 rotation = 3.14159
 texture = ExtResource("10_361jm")
 script = ExtResource("11_vji11")
 spawn_actor_key = "Player1"
 is_player = true
-map_coor = Vector2i(7, 7)
+map_coor = Vector2i(8, 7)
 
 [node name="SpwanNode_Player2" type="Sprite2D" parent="MapMarkerMapLayer"]
 self_modulate = Color(0, 1, 0, 1)
-position = Vector2(208, 240)
+position = Vector2(240, 240)
+rotation = 3.14159
 texture = ExtResource("10_361jm")
 script = ExtResource("11_vji11")
 spawn_actor_key = "Player2"
 is_player = true
-map_coor = Vector2i(6, 7)
+map_coor = Vector2i(7, 7)
 
 [node name="SpwanNode_MovingTarget" type="Sprite2D" parent="MapMarkerMapLayer"]
-visible = false
-position = Vector2(208, 208)
+position = Vector2(208, 112)
 texture = ExtResource("12_2qpl1")
 offset = Vector2(0, -16)
 hframes = 12
@@ -938,84 +937,9 @@ vframes = 4
 script = ExtResource("11_vji11")
 spawn_actor_key = "MovingTarget"
 facing = 2
-map_coor = Vector2i(6, 6)
-
-[node name="SpwanNode_MovingTarget2" type="Sprite2D" parent="MapMarkerMapLayer"]
-visible = false
-position = Vector2(208, 272)
-texture = ExtResource("12_2qpl1")
-offset = Vector2(0, -16)
-hframes = 12
-vframes = 4
-frame = 24
-script = ExtResource("11_vji11")
-spawn_actor_key = "MovingTarget"
-facing = 1
-map_coor = Vector2i(6, 8)
-
-[node name="SpwanNode_MovingTarget3" type="Sprite2D" parent="MapMarkerMapLayer"]
-visible = false
-position = Vector2(272, 272)
-texture = ExtResource("12_2qpl1")
-offset = Vector2(0, -16)
-hframes = 12
-vframes = 4
-frame = 12
-script = ExtResource("11_vji11")
-spawn_actor_key = "MovingTarget"
-map_coor = Vector2i(8, 8)
-
-[node name="SpwanNode_MovingTarget4" type="Sprite2D" parent="MapMarkerMapLayer"]
-visible = false
-position = Vector2(272, 208)
-texture = ExtResource("12_2qpl1")
-offset = Vector2(0, -16)
-hframes = 12
-vframes = 4
-frame = 36
-script = ExtResource("11_vji11")
-spawn_actor_key = "MovingTarget"
-facing = 3
-map_coor = Vector2i(8, 6)
-
-[node name="SpwanNode_TestTarget2" type="Sprite2D" parent="MapMarkerMapLayer"]
-visible = false
-position = Vector2(272, 144)
-texture = ExtResource("12_2qpl1")
-offset = Vector2(0, -16)
-hframes = 12
-vframes = 4
-script = ExtResource("11_vji11")
-spawn_actor_key = "TestTarget"
-facing = 2
-map_coor = Vector2i(8, 4)
-
-[node name="SpwanNode_TestTarget6" type="Sprite2D" parent="MapMarkerMapLayer"]
-position = Vector2(208, 272)
-texture = ExtResource("12_2qpl1")
-offset = Vector2(0, -16)
-hframes = 12
-vframes = 4
-frame = 24
-script = ExtResource("11_vji11")
-spawn_actor_key = "BanditArcher"
-facing = 1
-map_coor = Vector2i(6, 8)
-
-[node name="SpwanNode_TestTarget7" type="Sprite2D" parent="MapMarkerMapLayer"]
-visible = false
-position = Vector2(208, 144)
-texture = ExtResource("12_2qpl1")
-offset = Vector2(0, -16)
-hframes = 12
-vframes = 4
-script = ExtResource("11_vji11")
-spawn_actor_key = "TestTarget"
-facing = 2
-map_coor = Vector2i(6, 4)
+map_coor = Vector2i(6, 3)
 
 [node name="SpwanNode_TestTarget3" type="Sprite2D" parent="MapMarkerMapLayer"]
-visible = false
 position = Vector2(240, 400)
 texture = ExtResource("12_2qpl1")
 offset = Vector2(0, -16)
@@ -1027,7 +951,6 @@ spawn_actor_key = "TestTarget"
 map_coor = Vector2i(7, 12)
 
 [node name="SpwanNode_TestTarget4" type="Sprite2D" parent="MapMarkerMapLayer"]
-visible = false
 position = Vector2(208, 400)
 texture = ExtResource("12_2qpl1")
 offset = Vector2(0, -16)
@@ -1039,7 +962,6 @@ spawn_actor_key = "TestTarget"
 map_coor = Vector2i(6, 12)
 
 [node name="SpwanNode_TestTarget5" type="Sprite2D" parent="MapMarkerMapLayer"]
-visible = false
 position = Vector2(272, 400)
 texture = ExtResource("12_2qpl1")
 offset = Vector2(0, -16)
@@ -1051,8 +973,7 @@ spawn_actor_key = "TestTarget"
 map_coor = Vector2i(8, 12)
 
 [node name="SpwanNode_TestTarget_Armored" type="Sprite2D" parent="MapMarkerMapLayer"]
-visible = false
-position = Vector2(208, 112)
+position = Vector2(176, 208)
 texture = ExtResource("13_rojbo")
 offset = Vector2(0, -16)
 hframes = 12
@@ -1060,10 +981,9 @@ vframes = 4
 script = ExtResource("11_vji11")
 spawn_actor_key = "TestArmoredTarget"
 facing = 2
-map_coor = Vector2i(6, 3)
+map_coor = Vector2i(5, 6)
 
 [node name="SpwanNode_TestTarget_Armored2" type="Sprite2D" parent="MapMarkerMapLayer"]
-visible = false
 position = Vector2(80, 208)
 texture = ExtResource("13_rojbo")
 offset = Vector2(0, -16)
@@ -1076,7 +996,6 @@ facing = 1
 map_coor = Vector2i(2, 6)
 
 [node name="SpwanNode_TestTarget_Armored3" type="Sprite2D" parent="MapMarkerMapLayer"]
-visible = false
 position = Vector2(80, 240)
 texture = ExtResource("13_rojbo")
 offset = Vector2(0, -16)
@@ -1089,7 +1008,6 @@ facing = 1
 map_coor = Vector2i(2, 7)
 
 [node name="SpwanNode_TestTarget_Armored4" type="Sprite2D" parent="MapMarkerMapLayer"]
-visible = false
 position = Vector2(80, 272)
 texture = ExtResource("13_rojbo")
 offset = Vector2(0, -16)
@@ -1102,8 +1020,7 @@ facing = 1
 map_coor = Vector2i(2, 8)
 
 [node name="SpwanNode_TestTarget_Warded" type="Sprite2D" parent="MapMarkerMapLayer"]
-visible = false
-position = Vector2(272, 112)
+position = Vector2(304, 208)
 texture = ExtResource("14_rkmw3")
 offset = Vector2(0, -16)
 hframes = 12
@@ -1111,10 +1028,9 @@ vframes = 4
 script = ExtResource("11_vji11")
 spawn_actor_key = "TestWardedTarget"
 facing = 2
-map_coor = Vector2i(8, 3)
+map_coor = Vector2i(9, 6)
 
 [node name="SpwanNode_TestTarget_Warded2" type="Sprite2D" parent="MapMarkerMapLayer"]
-visible = false
 position = Vector2(400, 208)
 texture = ExtResource("14_rkmw3")
 offset = Vector2(0, -16)
@@ -1127,7 +1043,6 @@ facing = 3
 map_coor = Vector2i(12, 6)
 
 [node name="SpwanNode_TestTarget_Warded3" type="Sprite2D" parent="MapMarkerMapLayer"]
-visible = false
 position = Vector2(400, 240)
 texture = ExtResource("14_rkmw3")
 offset = Vector2(0, -16)
@@ -1140,7 +1055,6 @@ facing = 3
 map_coor = Vector2i(12, 7)
 
 [node name="SpwanNode_TestTarget_Warded4" type="Sprite2D" parent="MapMarkerMapLayer"]
-visible = false
 position = Vector2(400, 272)
 texture = ExtResource("14_rkmw3")
 offset = Vector2(0, -16)
@@ -1151,48 +1065,3 @@ script = ExtResource("11_vji11")
 spawn_actor_key = "TestWardedTarget"
 facing = 3
 map_coor = Vector2i(12, 8)
-
-[node name="SpwanNode_Mushroom1" type="Sprite2D" parent="MapMarkerMapLayer"]
-visible = false
-position = Vector2(240, 208)
-texture = ExtResource("15_173cn")
-hframes = 12
-vframes = 4
-frame = 12
-script = ExtResource("11_vji11")
-spawn_actor_key = "TutorShroom"
-spawn_actor_id = "TutorShroom_1"
-map_coor = Vector2i(7, 6)
-
-[node name="SpwanNode_Mushroom2" type="Sprite2D" parent="MapMarkerMapLayer"]
-visible = false
-position = Vector2(240, 176)
-texture = ExtResource("15_173cn")
-hframes = 12
-vframes = 4
-frame = 12
-script = ExtResource("11_vji11")
-spawn_actor_key = "TutorShroom"
-map_coor = Vector2i(7, 5)
-
-[node name="SpwanNode_Mushroom3" type="Sprite2D" parent="MapMarkerMapLayer"]
-visible = false
-position = Vector2(240, 144)
-texture = ExtResource("15_173cn")
-hframes = 12
-vframes = 4
-frame = 12
-script = ExtResource("11_vji11")
-spawn_actor_key = "TutorShroom"
-map_coor = Vector2i(7, 4)
-
-[node name="SpwanNode_Mushroom4" type="Sprite2D" parent="MapMarkerMapLayer"]
-visible = false
-position = Vector2(240, 112)
-texture = ExtResource("15_173cn")
-hframes = 12
-vframes = 4
-frame = 12
-script = ExtResource("11_vji11")
-spawn_actor_key = "TutorShroom"
-map_coor = Vector2i(7, 3)

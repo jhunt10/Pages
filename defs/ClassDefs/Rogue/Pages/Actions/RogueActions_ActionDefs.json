@@ -92,13 +92,14 @@
                 "Pierce",
                 "Missile",
                 "Ranged",
-                "Tactic"
+                "Tactic",
+                "Fast"
             ]
         },
         "MissileDatas": {
             "Missile1": {
                 "DamageDataKey": "Damage1",
-                "FramesPerTile": 3,
+                "FramesPerTile": 2,
                 "ImpactVfxKey": "",
                 "MissileVfxKey": "KnifeMissile"
             }
@@ -108,16 +109,14 @@
             "PreviewDamageKey": "Damage1"
         },
         "SubActions": {
-            "10": [
+            "0": [
                 {
                     "AllowAlreadyTargeted": false,
                     "AllowAutoTarget": true,
                     "SetTargetKey": "Target1",
                     "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_GetTarget.gd",
                     "TargetParamKey": "TargetParam1"
-                }
-            ],
-            "11": [
+                },
                 {
                     "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_PayCost.gd"
                 },
@@ -133,10 +132,10 @@
         "TargetParams": {
             "TargetParam1": {
                 "EffectsAllies": false,
-                "EffectsEnemies": false,
+                "EffectsEnemies": true,
                 "LineOfSight": true,
                 "TargetArea": "[[0,1],[1,2],[0,2],[1,1],[-1,1],[-1,2],[1,3],[0,3],[-1,3]]",
-                "TargetType": "Spot"
+                "TargetType": "Enemy"
             }
         }
     }

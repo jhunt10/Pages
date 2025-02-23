@@ -24,7 +24,7 @@ func is_finished()->bool:
 	return _is_finished
 
 func _check_condition(data:Dictionary, game_state:GameStateData, delta:float)->bool:
-	return _is_finished
+	return is_finished()
 
 func get_next_part_key()->String:
 	return ''

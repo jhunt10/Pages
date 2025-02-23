@@ -45,6 +45,8 @@ func set_armor(actor:BaseActor, armor:BaseArmorEquipment):
 	
 	var stat_mods = armor.get_load_val("StatMods", {})
 	for mod_data in stat_mods.values():
+		if mod_data.get("StatName", "") == "Armor" or mod_data.get("StatName", "") == "Ward":
+			continue
 		var new_mod:StatModLabelContainer = premade_stat_mod_label.duplicate()
 		new_mod.set_mod_data(mod_data)
 		stat_mods_container.add_child(new_mod)

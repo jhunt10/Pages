@@ -86,17 +86,23 @@ static func try_transfer_item_from_inventory_to_holder(item:BaseItem, holder:Bas
 	
 	var old_item = holder.get_item_in_slot(slot_index)
 	if old_item and not allow_replace:
+		print("Slot is occupied")
 		return "Slot is occupied"
 	var inv_item = PlayerInventory.split_item_off_stack(item.ItemKey)
 	if !inv_item:
+		print("Item not found")
 		return "Item not found"
 	if not holder.can_set_item_in_slot(inv_item, slot_index, allow_replace):
 		PlayerInventory.add_item(inv_item)
+		print("Invalid Item Slot")
 		return "Invalid Item Slot"
 	if not holder.try_set_item_in_slot(inv_item, slot_index, allow_replace):
 		PlayerInventory.add_item(inv_item)
+		print( "Set item failed")
 		return "Set item failed"
 	if old_item:
+		# EquipmentHolder controls own logic for removing weapons
+		if not (old_item is BaseWeaponEquipment and holder is EquipmentHolder): 
 			PlayerInventory.add_item(old_item)
 	return ""
 

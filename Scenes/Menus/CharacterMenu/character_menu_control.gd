@@ -110,6 +110,9 @@ func set_actor(actor:BaseActor):
 	bag_page.set_actor(actor)
 	stats_page.set_actor(actor)
 	actor_tabs_control.set_selected_actor(actor)
+	if _current_details_card:
+		var item = ItemLibrary.get_item(_current_details_card.item_id)
+		_current_details_card.set_item(actor, item)
 	var finish_time = Time.get_unix_time_from_system()
 	var time_diff = finish_time - start_time
 	print("Finished Set Actor: %s" % Time.get_datetime_string_from_unix_time(finish_time))

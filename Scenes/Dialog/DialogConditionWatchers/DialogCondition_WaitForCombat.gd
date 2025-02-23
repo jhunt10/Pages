@@ -9,6 +9,7 @@ func _on_create():
 		return
 	combat_control.supress_win_conditions = true
 	combat_control.ui_control.que_input.supress_start = false
+	combat_control.camera.locked_for_cut_scene = false
 	if not combat_control.combat_started:
 		combat_control.start_combat_animation()
 	combat_control.QueController.end_of_round_with_state.connect(on_round_finish)

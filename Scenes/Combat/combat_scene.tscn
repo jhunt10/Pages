@@ -214,8 +214,8 @@ mouse_filter = 2
 script = ExtResource("8_8l3el")
 game_over_screen = NodePath("GameOverScreen")
 victory_screen = NodePath("GameVictoryScreen")
-menu_button = NodePath("MenuButton")
-book_button = NodePath("PageBookButton")
+menu_button = NodePath("../MenuButton")
+book_button = NodePath("../PageBookButton")
 pause_menu = NodePath("PauseMenuControl")
 target_input_display = NodePath("TargetInputControl")
 p1_stat_panel_control = NodePath("StatPanelsContainer/P1_StatPanelControl")
@@ -522,42 +522,6 @@ text = "Cancel"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="MenuButton" type="TextureButton" parent="MoveableCamera2D/CanvasLayer/CombatUiControl"]
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -72.0
-offset_top = -72.0
-offset_right = -8.0
-offset_bottom = -8.0
-grow_horizontal = 0
-grow_vertical = 0
-texture_normal = ExtResource("21_s2qa8")
-texture_pressed = ExtResource("22_eoo3l")
-texture_disabled = ExtResource("22_eoo3l")
-stretch_mode = 0
-
-[node name="PageBookButton" type="TextureButton" parent="MoveableCamera2D/CanvasLayer/CombatUiControl"]
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -72.0
-offset_top = -142.0
-offset_right = -8.0
-offset_bottom = -78.0
-grow_horizontal = 0
-grow_vertical = 0
-texture_normal = ExtResource("22_6ebva")
-texture_pressed = ExtResource("23_djd8f")
-texture_disabled = ExtResource("23_djd8f")
-stretch_mode = 0
-
 [node name="GameOverScreen" type="Control" parent="MoveableCamera2D/CanvasLayer/CombatUiControl" node_paths=PackedStringArray("main_menu_button")]
 visible = false
 layout_mode = 1
@@ -570,7 +534,6 @@ script = ExtResource("25_byrc6")
 main_menu_button = NodePath("CenterContainer/VBoxContainer/MainMenuButton")
 
 [node name="ColorRect" type="ColorRect" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/GameOverScreen"]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1091,6 +1054,40 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="MenuButton" type="TextureButton" parent="MoveableCamera2D/CanvasLayer"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -72.0
+offset_top = -72.0
+offset_right = -8.0
+offset_bottom = -8.0
+grow_horizontal = 0
+grow_vertical = 0
+texture_normal = ExtResource("21_s2qa8")
+texture_pressed = ExtResource("22_eoo3l")
+texture_disabled = ExtResource("22_eoo3l")
+stretch_mode = 0
+
+[node name="PageBookButton" type="TextureButton" parent="MoveableCamera2D/CanvasLayer"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -72.0
+offset_top = -142.0
+offset_right = -8.0
+offset_bottom = -78.0
+grow_horizontal = 0
+grow_vertical = 0
+texture_normal = ExtResource("22_6ebva")
+texture_pressed = ExtResource("23_djd8f")
+texture_disabled = ExtResource("23_djd8f")
+stretch_mode = 0
 
 [node name="DialogControl" parent="MoveableCamera2D/CanvasLayer" node_paths=PackedStringArray("scene_root") instance=ExtResource("37_vv8mm")]
 visible = false

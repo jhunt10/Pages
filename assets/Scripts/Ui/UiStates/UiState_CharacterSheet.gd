@@ -19,6 +19,8 @@ func on_menu_closed():
 func end_state():
 	CombatRootControl.Instance.camera.freeze = false
 	CombatUiControl.Instance.que_input.allow_input(false)
+	if CombatRootControl.QueController.execution_state == ActionQueController.ActionStates.Paused:
+		CombatRootControl.Instance.QueController.start_or_resume_execution()
 	pass
 
 func handle_input(event):

@@ -26,6 +26,7 @@ signal closed
 @export var item_card:Control
 @export var item2_card:Control
 @export var ammo_card:Control
+@export var weapon_card:Control
 
 var cards:Dictionary
 
@@ -79,7 +80,8 @@ func _ready() -> void:
 		"Block and Evade": block_evade_card,
 		"Items": item_card,
 		"Items 2": item2_card,
-		"Page Ammo": ammo_card
+		"Page Ammo": ammo_card,
+		"Weapons": weapon_card
 	}
 	card_list = [
 		"Page Que",
@@ -93,7 +95,8 @@ func _ready() -> void:
 		"Block and Evade",
 		"Items",
 		"Items 2",
-		"Page Ammo"
+		"Page Ammo",
+		"Weapons"
 	]
 	card_index = card_index
 

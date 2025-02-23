@@ -47,7 +47,7 @@ func set_action(actor:BaseActor, page:BasePageItem):
 	
 	if action.has_preview_damage():
 		
-		if actor.pages.has_item(page.Id):
+		if actor and actor.pages.has_item(page.Id):
 			var damage_datas = action.get_preview_damage_datas(actor)
 			var dam_label = damage_label
 			for dam_data in damage_datas.values():

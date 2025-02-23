@@ -460,10 +460,10 @@ func try_set_item_in_slot(item:BaseItem, index:int, allow_replace:bool=false)->b
 	if weapon.get_weapon_class() == BaseWeaponEquipment.WeaponClasses.Heavy:
 		if not allow_replace and (current_primary or current_offhand):
 			return false
-		if current_offhand:
-			remove_equipment(current_offhand, true)
 		if current_primary:
 			remove_equipment(current_primary, true)
+		if current_offhand:
+			remove_equipment(current_offhand, true)
 			
 		_safe_set_slot(main_hand_index, item, true)
 		_safe_set_slot(off_hand_index, item, true)
@@ -614,11 +614,11 @@ func get_offhand_weapon()->BaseWeaponEquipment:
 		return item as BaseWeaponEquipment
 	return null
 
-func get_total_equipment_armor()->int:
-	var val = 0
-	for equipment:BaseEquipmentItem in list_equipment():
-		val +=  equipment.get_armor_value()
-	return val
+#func get_total_equipment_armor()->int:
+	#var val = 0
+	#for equipment:BaseEquipmentItem in list_equipment():
+		#val +=  equipment.get_armor_value()
+	#return val
 
 func get_total_equipment_ward()->int:
 	var val = 0

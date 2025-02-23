@@ -7,6 +7,8 @@ func _get_debug_name()->String:
 func _init(controler:UiStateController, args:Dictionary) -> void:
 	super(controler, args)
 
+var _round_ended
+
 func start_state():
 	if _logging: print("Start UiState: Exec Round")
 	CombatRootControl.QueController.start_or_resume_execution()
@@ -22,9 +24,12 @@ func update(_delta:float):
 	pass
 
 func end_state():
+	if not _round_ended:
+		CombatRootControl.QueController.pause_execution()
 	CombatRootControl.QueController.end_of_round.disconnect(_on_round_end)
 	CombatRootControl.Instance.camera.clear_following_actor()
 	pass
 	
 func _on_round_end():
+	_round_ended = true
 	ui_controller.set_ui_state(UiStateController.UiStates.ActionInput)

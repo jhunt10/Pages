@@ -96,8 +96,9 @@
         "SubActions": {
             "0": [
                 {
-                    "Animation": "move_walk_left",
-                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_AnimationInTo.gd"
+                    "RelativePos": "[-1, 0, 0, 0]",
+                    "MovementType": "Walk",
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_StartMoveAnimation.gd"
                 }
             ],
             "12": [
@@ -106,9 +107,6 @@
                     "PlayWalkin": true,
                     "RelativePos": "[-1, 0, 0, 0]",
                     "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_Move.gd"
-                },
-                {
-                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_AnimationFinish.gd"
                 }
             ]
         },
@@ -135,8 +133,9 @@
         "SubActions": {
             "0": [
                 {
-                    "Animation": "move_walk_right",
-                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_AnimationInTo.gd"
+                    "RelativePos": "[1, 0, 0, 0]",
+                    "MovementType": "Walk",
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_StartMoveAnimation.gd"
                 }
             ],
             "12": [
@@ -145,9 +144,6 @@
                     "PlayWalkin": true,
                     "RelativePos": "[1, 0, 0, 0]",
                     "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_Move.gd"
-                },
-                {
-                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_AnimationFinish.gd"
                 }
             ]
         },

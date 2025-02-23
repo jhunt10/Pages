@@ -85,6 +85,8 @@ func _calc_damage_for_event():
 	defense_reduction = DamageHelper.calc_armor_reduction(defense_value)
 	damage_after_armor = raw_damage * defense_reduction
 	
+	if LOGGING: print("DamageEvent: Defense: %s | Value: %s | Reduction: %s" % [DamageEvent.DefenseType.keys()[defense_type], defense_value, defense_reduction])
+	
 	# Get all tags that apply to the attack  and defense
 	var attack_tags = source_tag_chain.get_all_tags()
 	var defend_tags = defender.get_tags()

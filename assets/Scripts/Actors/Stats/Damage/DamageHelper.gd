@@ -15,8 +15,8 @@ static func get_min_max_damage(actor:BaseActor, damage_data:Dictionary)->Array:
 	var attack_power = damage_data.get("AtkPower", 100) / 100
 	var damage_variance = damage_data.get("DamageVarient", 0)
 	var avg_dam = base_damage * attack_power
-	var min_dam = avg_dam * (1 - damage_variance)
-	var max_dam = avg_dam * (1 + damage_variance)
+	var min_dam = ceili(avg_dam * (1 - damage_variance))
+	var max_dam = ceili(avg_dam * (1 + damage_variance))
 	return [min_dam, max_dam]
 	
 
@@ -200,5 +200,5 @@ static func get_relative_attack_direction(attacker_pos:MapPos, defender_pos:MapP
 const ARMOR_STRETCH:float = 30
 const ARMOR_SCALE:float = 80
 static func calc_armor_reduction(armor)->float:
-	var val = (log((armor+ARMOR_STRETCH)/ARMOR_STRETCH) / log(10)) * ARMOR_SCALE
-	return 1-(val/100)
+	#var val = (log((armor+ARMOR_STRETCH)/ARMOR_STRETCH) / log(10)) * ARMOR_SCALE
+	return 1.0-(float(armor)/100.0)

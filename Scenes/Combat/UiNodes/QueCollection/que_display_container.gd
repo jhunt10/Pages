@@ -55,7 +55,7 @@ func set_actor(actor:BaseActor):
 		_delayed_init = true
 
 func hide_ai_slots():
-	print("Hiding Ai slots for : " + _actor.Id)
+	#print("Hiding Ai slots for : " + _actor.Id)
 	for slot:QueMiniSlotIcon in _slots:
 		if not slot.is_gap:
 			slot.unknown_icon.show()

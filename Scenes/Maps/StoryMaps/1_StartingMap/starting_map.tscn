@@ -2595,3 +2595,137 @@ position = Vector2(0, -32)
 texture = ExtResource("17_ohkco")
 script = ExtResource("18_tvogg")
 map_coor = Vector2i(5, 9)
+
+[node name="Path_MF_Long" type="Node2D" parent="MarkerTileMapLayer" node_paths=PackedStringArray("sprite", "label")]
+position = Vector2(176, 304)
+script = ExtResource("16_0ajgq")
+marker_name = "MF_Long"
+facing = 2
+map_coor = Vector2i(5, 9)
+sprite = NodePath("PathSprite")
+label = NodePath("PathSprite/Label")
+
+[node name="PathSprite" type="Sprite2D" parent="MarkerTileMapLayer/Path_MF_Long"]
+self_modulate = Color(0.466667, 0, 1, 1)
+rotation = 3.14159
+texture = ExtResource("13_bfpo1")
+
+[node name="Label" type="Label" parent="MarkerTileMapLayer/Path_MF_Long/PathSprite"]
+self_modulate = Color(1, 0, 0, 1)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -36.0
+offset_top = -27.5
+offset_right = 4.0
+offset_bottom = -4.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 12
+text = "MF_Long"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Point1" type="Sprite2D" parent="MarkerTileMapLayer/Path_MF_Long"]
+position = Vector2(0, 32)
+rotation = 3.14159
+texture = ExtResource("17_ohkco")
+script = ExtResource("18_tvogg")
+facing = 2
+map_coor = Vector2i(5, 10)
+
+[node name="Point2" type="Sprite2D" parent="MarkerTileMapLayer/Path_MF_Long"]
+position = Vector2(0, 32)
+rotation = 1.5708
+texture = ExtResource("17_ohkco")
+script = ExtResource("18_tvogg")
+facing = 1
+map_coor = Vector2i(5, 10)
+
+[node name="Point3" type="Sprite2D" parent="MarkerTileMapLayer/Path_MF_Long"]
+position = Vector2(96, 32)
+rotation = 1.5708
+texture = ExtResource("17_ohkco")
+script = ExtResource("18_tvogg")
+facing = 1
+map_coor = Vector2i(8, 10)
+
+[node name="Path_MF_Long2" type="Node2D" parent="MarkerTileMapLayer" node_paths=PackedStringArray("sprite", "label")]
+position = Vector2(272, 336)
+script = ExtResource("16_0ajgq")
+marker_name = "MF_Long2"
+facing = 1
+map_coor = Vector2i(8, 10)
+sprite = NodePath("PathSprite")
+label = NodePath("PathSprite/Label")
+
+[node name="PathSprite" type="Sprite2D" parent="MarkerTileMapLayer/Path_MF_Long2"]
+self_modulate = Color(0.466667, 0, 1, 1)
+rotation = 1.5708
+texture = ExtResource("13_bfpo1")
+
+[node name="Label" type="Label" parent="MarkerTileMapLayer/Path_MF_Long2/PathSprite"]
+self_modulate = Color(1, 0, 0, 1)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -36.0
+offset_top = -27.5
+offset_right = 4.0
+offset_bottom = -4.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 12
+text = "MF_Long2"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Point1" type="Sprite2D" parent="MarkerTileMapLayer/Path_MF_Long2"]
+position = Vector2(96, 0)
+rotation = 1.5708
+texture = ExtResource("17_ohkco")
+script = ExtResource("18_tvogg")
+facing = 1
+map_coor = Vector2i(11, 10)
+
+[node name="Point2" type="Sprite2D" parent="MarkerTileMapLayer/Path_MF_Long2"]
+position = Vector2(96, 0)
+texture = ExtResource("17_ohkco")
+script = ExtResource("18_tvogg")
+map_coor = Vector2i(11, 10)
+
+[node name="Point3" type="Sprite2D" parent="MarkerTileMapLayer/Path_MF_Long2"]
+position = Vector2(96, -32)
+texture = ExtResource("17_ohkco")
+script = ExtResource("18_tvogg")
+map_coor = Vector2i(11, 9)
+
+[node name="Point4" type="Sprite2D" parent="MarkerTileMapLayer/Path_MF_Long2"]
+position = Vector2(96, -32)
+rotation = 1.5708
+texture = ExtResource("17_ohkco")
+script = ExtResource("18_tvogg")
+facing = 1
+map_coor = Vector2i(11, 9)
+
+[node name="Point5" type="Sprite2D" parent="MarkerTileMapLayer/Path_MF_Long2"]
+position = Vector2(128, -32)
+rotation = 1.5708
+texture = ExtResource("17_ohkco")
+script = ExtResource("18_tvogg")
+facing = 1
+map_coor = Vector2i(12, 9)
+
+[node name="Point6" type="Sprite2D" parent="MarkerTileMapLayer/Path_MF_Long2"]
+position = Vector2(128, -32)
+rotation = 3.14159
+texture = ExtResource("17_ohkco")
+script = ExtResource("18_tvogg")
+facing = 2
+map_coor = Vector2i(12, 9)

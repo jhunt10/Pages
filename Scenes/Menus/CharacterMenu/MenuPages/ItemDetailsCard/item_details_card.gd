@@ -81,6 +81,7 @@ var is_selling:bool = false
 var item_id:String
 var actor_has_item:bool = false
 var _current_card
+var _actor:BaseActor
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -153,6 +154,9 @@ func start_hide():
 	#animation_state = AnimationStates.Out
 
 func set_item(actor:BaseActor, item:BaseItem):
+	if _actor:
+		_actor.equipment.items_changed.disconnect(start_hide)
+		_actor.pages.items_changed.disconnect(start_hide)
 	if actor:
 		actor.equipment.items_changed.connect(start_hide)
 		actor.pages.items_changed.connect(start_hide)
@@ -234,7 +238,10 @@ func set_item(actor:BaseActor, item:BaseItem):
 	elif MainRootNode.Instance.current_scene is CombatRootControl:
 		equip_button_background.hide()
 	else:
-		equip_button_background.show()
+		if item.get_item_tags().has("Title"):
+			equip_button_background.hide()
+		else:
+			equip_button_background.show()
 
 func equip_button_pressed():
 	var item = ItemLibrary.get_item(item_id)

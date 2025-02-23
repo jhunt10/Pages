@@ -21,6 +21,13 @@ static func build_action_ques(clear_existing_ques:bool=false):
 		# Clear Ques
 		if clear_existing_ques and not actor.is_player:
 			actor.Que.clear_que()
+		
+		if actor.ai_def.has("PrebuiltQueArr"):
+			var action_keys_que = actor.ai_def['PrebuiltQueArr']
+			for action_key in action_keys_que:
+				var action = ActionLibrary.get_action(action_key)
+				actor.Que.que_action(action)
+		
 		# Build cost data
 		cost_datas[actor.Id] = {}
 		for stat_name in actor.stats.list_bar_stat_names():
