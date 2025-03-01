@@ -24,6 +24,7 @@ mag_damage_icon = ExtResource("3_00rac")
 [node name="DamageIcon" type="TextureRect" parent="."]
 layout_mode = 2
 texture = ExtResource("2_mm46y")
+expand_mode = 3
 
 [node name="AtkPowerLabel" type="Label" parent="."]
 layout_mode = 2
@@ -38,6 +39,7 @@ theme = ExtResource("5_korun")
 theme_override_colors/font_color = Color(0.470588, 0, 0, 1)
 theme_override_font_sizes/font_size = 17
 text = "@"
+vertical_alignment = 1
 
 [node name="VariantLabel" type="Label" parent="."]
 layout_mode = 2

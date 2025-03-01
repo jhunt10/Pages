@@ -111,6 +111,7 @@ func resize_self_around_child():
 	self.set_size(self_size)
 	self.custom_minimum_size = self_custom_min
 	background.size = self.size
+	background.position = Vector2.ZERO
 	inner_container.set_size(inner_size)
 	inner_container.position = Vector2(margin_val + sides_padding, margin_val)
 	if LOGGING: print("SelfSize: %s | InnerSize: %s" % [self_size, inner_size])

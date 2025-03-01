@@ -43,7 +43,7 @@ func is_valid_in_event(taking_damage:bool, attack_tags:Array, defense_tags:Array
 	else:
 		if not on_deal_damage: return false
 	
-	# Check if any tags are excluded
+	# False if any tags are excluded
 	if exclude_tags.any(attack_tags.has):
 		return false
 	if SourceTagChain.tags_include_any_in_array(exclude_tags, defense_tags):

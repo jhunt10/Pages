@@ -9,6 +9,15 @@ enum DamageTypes {
 	Fire, Ice, Electric, Poison, # Usually negated by Ward
 }
 
+@export var font_size_override:int = -1:
+	set(val):
+		font_size_override = val
+		if font_size_override > 0:
+			if atk_power_label: atk_power_label.add_theme_font_size_override('font_size', font_size_override)
+			if plus_minus_label: plus_minus_label.add_theme_font_size_override('font_size', font_size_override)
+			if percent_label: percent_label.add_theme_font_size_override('font_size', font_size_override)
+			if variant_label: variant_label.add_theme_font_size_override('font_size', font_size_override)
+			if damage_type_label: damage_type_label.add_theme_font_size_override('font_size', font_size_override)
 @export var defense_type:String:
 	set(val):
 		defense_type = val
@@ -102,12 +111,11 @@ func set_damage_data(damage_data:Dictionary, actor:BaseActor = null):
 	else:
 		damage_icon_rect.texture = abb_damage_icon
 	
-	var fixed_base_damage = damage_data.get("FixedBaseDamage")
-	if fixed_base_damage:
+	if damage_data.get("AtkStat") == "Fixed":
 		plus_minus_label.hide()
 		variant_label.hide()
 		percent_label.hide()
-		attack_power = fixed_base_damage
+		attack_power = damage_data.get("BaseDamage")
 	elif actor:
 		var min_max = DamageHelper.get_min_max_damage(actor, damage_data)
 		attack_power = min_max[0]

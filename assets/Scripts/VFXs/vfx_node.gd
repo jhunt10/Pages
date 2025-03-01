@@ -7,6 +7,7 @@ const NO_SPRITE_PATH = "res://assets/Sprites/BadSprite.png"
 @export var animation:AnimationPlayer
 @export var animation_half_way:bool
 var _data:VfxData
+var _actor:BaseActor
 var _bad_sprite = false
 
 var _readyed = false
@@ -49,6 +50,12 @@ func _process(delta: float) -> void:
 	if _flash_text_value and animation_half_way and not _flash_text_shown:
 			CombatRootControl.Instance.create_flash_text(self.get_parent(), _flash_text_value, _flash_text_color)
 			_flash_text_shown = true
+
+func set_actor(actor:BaseActor):
+	_actor = actor
+
+func get_actor()->BaseActor:
+	return _actor
 
 func set_vfx_data(data:VfxData, extra_data:Dictionary):
 	_data = data

@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://fl7uf4k4hb2t"]
+
+[ext_resource type="Script" path="res://assets/Scripts/VFXs/ParticalVfxs/partical_vfx_node.gd" id="1_qfr65"]
+[ext_resource type="Texture2D" uid="uid://dtmqq6bcjo6ib" path="res://defs/Effects/Ailments/Sprites/Shocked_Partical.png" id="2_qvtve"]
+
+[sub_resource type="Curve" id="Curve_mu718"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.5, 0.6), 0.0, 0.0, 0, 0, Vector2(1, 0), -3.55268, 0.0, 0, 0]
+point_count = 3
+
+[node name="VFXNode" type="Node2D" node_paths=PackedStringArray("particals")]
+z_index = 9
+script = ExtResource("1_qfr65")
+particals = NodePath("CPUParticles2D")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+amount = 6
+lifetime = 0.5
+randomness = 1.0
+lifetime_randomness = 0.5
+texture = ExtResource("2_qvtve")
+emission_shape = 3
+emission_rect_extents = Vector2(16, 16)
+gravity = Vector2(0, 0)
+angle_min = -20.0
+angle_max = 20.0
+scale_amount_curve = SubResource("Curve_mu718")

@@ -154,6 +154,7 @@ custom_minimum_size = Vector2(2, 1)
 layout_mode = 2
 
 [node name="WeaponDetailsControl" type="Control" parent="OffsetControl/NinePatchRect/VBoxContainer" node_paths=PackedStringArray("parent_card_control", "weapon_class_label", "phy_damage_icon", "mag_damage_icon", "attack_power_label", "damage_type_label", "description_box", "range_display")]
+visible = false
 layout_mode = 2
 size_flags_vertical = 3
 script = ExtResource("7_sv4xn")
@@ -373,7 +374,6 @@ theme = ExtResource("4_xmy3g")
 text = "Item Description hk hbkhjhl jhlkjl ljlkj"
 
 [node name="EffectPageDetailsControl" type="Control" parent="OffsetControl/NinePatchRect/VBoxContainer" node_paths=PackedStringArray("parent_card_control", "description_box", "stat_mods_container", "premade_stat_mod_label")]
-visible = false
 layout_mode = 2
 size_flags_vertical = 3
 script = ExtResource("16_tp5cp")
@@ -763,7 +763,6 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 text = "Equipe"
-_size_dirty = true
 center_x = true
 
 [node name="EquipButton" type="Button" parent="OffsetControl/NinePatchRect/VBoxContainer/EquipButtonBackground"]

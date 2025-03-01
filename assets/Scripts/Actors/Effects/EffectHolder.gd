@@ -107,7 +107,7 @@ func get_on_take_damage_mods():
 				out_list.append(mod)
 	return out_list
 
-func get_stat_mods():
+func get_stat_mods()->Array:
 	var out_list = []
 	for effect:BaseEffect in _effects.values():
 		for mod in effect.get_active_stat_mods():

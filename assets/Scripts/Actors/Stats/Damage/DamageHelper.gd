@@ -6,10 +6,10 @@ const STAT_BALENCE:int = 100
 
 static func get_min_max_damage(actor:BaseActor, damage_data:Dictionary)->Array:
 	var base_damage = 0
-	if damage_data.keys().has("FixedBaseDamage") and damage_data['FixedBaseDamage'] != null:
-		base_damage = damage_data['FixedBaseDamage']
-	elif damage_data.has("AtkStat"):
-		var attack_stat = damage_data['AtkStat']
+	var attack_stat = damage_data.get("AtkStat")
+	if attack_stat == "Fixed":
+		base_damage = damage_data.get('BaseDamage')
+	else:
 		base_damage = actor.stats.base_damge_from_stat(attack_stat)
 	
 	var attack_power = damage_data.get("AtkPower", 100) / 100
@@ -77,15 +77,6 @@ static func handle_attack(attacker:BaseActor, defender:BaseActor, damage_datas,
 		var attacK_damage_datas = attack_event.get_damage_datas()
 		print("Found %s Damage Datas to apply | Final Damage Mod: %s" % [attacK_damage_datas.size(), attack_event.final_damage_mod])
 		for damage_data in attacK_damage_datas:
-			var base_damage = 0
-			if damage_data.keys().has("FixedBaseDamage") and damage_data['FixedBaseDamage'] != null:
-				base_damage = damage_data['FixedBaseDamage']
-			elif damage_data.has("AtkStat"):
-				var attack_stat = damage_data['AtkStat']
-				base_damage = attacker.stats.base_damge_from_stat(attack_stat)
-			else:
-				printerr("No FixedBaseDamage or AtkStat found on damage data")
-				continue
 			var damage_event = handle_damage(attacker, defender, damage_data, source_tag_chain, game_state, attack_event.final_damage_mod)
 			if damage_event:
 				attack_event.damage_events.append(damage_event)
@@ -121,15 +112,15 @@ static func handle_push_damage(moving_actor:BaseActor, pushed_actor:BaseActor, g
 
 static func handle_damage(source, defender:BaseActor, damage_data:Dictionary, 
 							source_tag_chain:SourceTagChain, game_state:GameStateData, final_damage_mod:float = 1)->DamageEvent:
+	# Need to get base damage before making event because  
 	var base_damage = 0
-	if damage_data.keys().has("FixedBaseDamage") and damage_data['FixedBaseDamage'] != null:
-		base_damage = damage_data['FixedBaseDamage']
-	elif damage_data.has("AtkStat") and source is BaseActor:
-		var attack_stat = damage_data['AtkStat']
+	var attack_stat = damage_data.get("AtkStat")
+	if not attack_stat:
+		printerr("DamageHelper: No AtkStat found on damage data")
+	elif attack_stat.begins_with('@'):
 		base_damage = source.stats.base_damge_from_stat(attack_stat)
-	else:
-		printerr("DamageHelper: No FixedBaseDamage or AtkStat found on damage data")
-	var damage_event = DamageEvent.new(damage_data, source, base_damage, defender,source_tag_chain, game_state)
+	
+	var damage_event = DamageEvent.new(damage_data, source, defender,source_tag_chain, game_state)
 	
 	var damage = damage_event.final_damage * final_damage_mod
 	print("DamageHelper.hand_damage: Real final applied damage: %s" % [damage])

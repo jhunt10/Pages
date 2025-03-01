@@ -6,6 +6,7 @@ enum SourceTypes {Actor, Action, Missile, Effect, }
 var _source_order:Array = []
 # Dictionary of source_id to tags for that source
 var _source_tags:Dictionary = {}
+var source_actor:BaseActor
 
 func _init() -> void:
 	pass
@@ -34,6 +35,13 @@ func append_source(type:SourceTypes, source:Object)->SourceTagChain:
 	if id != '':
 		_source_order.append(id)
 		_source_tags[id] = tags
+		if type == SourceTypes.Actor:
+			if not source is BaseActor:
+				printerr("Non BaseActor source provided with SourceTypes.Actor.")
+			elif source_actor:
+				printerr("Source Actor already set.")
+			else:
+				source_actor = source
 	return self
 
 ## Create a copy of this chain

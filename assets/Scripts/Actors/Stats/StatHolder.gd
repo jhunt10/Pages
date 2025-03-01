@@ -64,6 +64,9 @@ func get_mod_names_for_stat(stat_name:String)->Array:
 	return []
 
 
+func get_attacking_stat(stat_name:String, source_tag_chain:SourceTagChain, default):
+	return default
+
 
 # -----------------------------------------------------------------
 #					Bar Stats
@@ -156,8 +159,7 @@ func _calc_cache_stats():
 	var key_is_dependant_of_vals = {}
 	var mods_list = _actor.effects.get_stat_mods()
 	mods_list.append_array(_actor.equipment.get_passive_stat_mods())
-	var pages_mods = _actor.pages.get_passive_stat_mods()
-	mods_list.append_array(pages_mods)
+	mods_list.append_array(_actor.pages.get_passive_stat_mods())
 	for mod:BaseStatMod in mods_list:
 		if LOGGING: print("# Found Mod '", mod.display_name, " for: %s" % _actor.ActorKey)
 		
