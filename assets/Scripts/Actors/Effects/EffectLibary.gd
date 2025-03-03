@@ -38,6 +38,14 @@ static func create_effect(source, key:String, actor:BaseActor, data:Dictionary, 
 	print("Creating Effect: %s on actor %s" %[key, actor.Id])
 	var effect_def = get_effect_def(key)
 	var effect_data = _merge_defs(data, effect_def)
+	
+	if effect_data.get("CanStack", false):
+		var existing_effects = actor.effects.get_effects_with_key(key)
+		if existing_effects.size() > 0:
+			var existing_effect:BaseEffect = existing_effects[0]
+			existing_effect.merge_new_duplicate_effect_data(source, effect_data)
+			return existing_effect
+	
 	effect_data['EffectedActorId'] = actor.Id
 	if source is BaseActor:
 		effect_data['SourceId'] = (source as BaseActor).Id

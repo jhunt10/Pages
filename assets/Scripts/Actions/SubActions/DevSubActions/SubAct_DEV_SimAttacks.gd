@@ -31,7 +31,7 @@ func do_thing(parent_action:BaseAction, subaction_data:Dictionary, que_exe_data:
 	
 	for target:BaseActor in targets:
 		for i in range(10):
-			var attack_event = DamageHelper.handle_attack(actor, target, damage_data, tag_chain, game_state,target_params)
+			var attack_event = DamageHelper.handle_attack(actor, target, {}, damage_data, [], tag_chain, game_state,target_params)
 			log_attack_event(attack_event)
 	
 	#var offhand_weapon = actor.equipment.get_offhand_weapon()

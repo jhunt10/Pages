@@ -147,6 +147,15 @@ func on_delete():
 	if actor and actor.effects.has_effect(self.Id):
 		actor.effects.remove_effect(self)
 
+func merge_new_duplicate_effect_data(source, data:Dictionary):
+	var dup_subs_datas = data.get('SubEffects', {})
+	for sub_effect_key in dup_subs_datas.keys():
+		var dupl_sub_effect_data = dup_subs_datas[sub_effect_key]
+		var sub_effect_data = SubEffectDatas[sub_effect_key]
+		var sup_sub_effect_data = SubEffectDatas[sub_effect_key]
+		var sub_effect = _get_sub_effect_script(sub_effect_key)
+		sub_effect.merge_new_duplicate_sub_effect_data(self, sub_effect_data, dupl_sub_effect_data)
+
 func trigger_effect(trigger:EffectTriggers, game_state:GameStateData):
 	if TRIGGERS_WITH_ADDITIONAL_DATA.has(trigger):
 		printerr("BaseEffect.trigger_effect: Called with trigger '%s' which requirers it's own method." % [trigger])

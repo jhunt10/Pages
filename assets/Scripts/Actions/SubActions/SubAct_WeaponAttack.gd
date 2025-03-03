@@ -45,7 +45,7 @@ func do_thing(parent_action:BaseAction, subaction_data:Dictionary, que_exe_data:
 		var targets:Array = _find_target_effected_actors(parent_action, subaction_data, target_key, que_exe_data, game_state, actor)
 		for target:BaseActor in targets:
 			for damage_data in damage_datas.values():
-				DamageHelper.handle_attack(actor, target, damage_data, tag_chain, game_state,target_params)
+				DamageHelper.handle_attack(actor, target, {}, damage_data, [], tag_chain, game_state,target_params)
 	
 	#var offhand_weapon = actor.equipment.get_offhand_weapon()
 	#if offhand_weapon:

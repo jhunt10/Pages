@@ -1,6 +1,6 @@
 class_name DamageEvent
 
-const LOGGING = true
+const LOGGING = false
 
 enum DefenseType{None, Armor, Ward}
 

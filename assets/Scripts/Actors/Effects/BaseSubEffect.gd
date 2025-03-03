@@ -72,3 +72,6 @@ func _array_to_trigger_list(arr:Array)->Array:
 		else:
 			printerr("BaseSubEffect._array_to_trigger_list: Unknown EffectTrigger value '%s'." % [trig_val])
 	return out_list
+
+func merge_new_duplicate_sub_effect_data(parent_effect:BaseEffect, own_sub_effect_data:Dictionary, dup_sub_effect_data:Dictionary):
+	pass

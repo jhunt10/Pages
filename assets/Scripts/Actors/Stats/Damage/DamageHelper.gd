@@ -20,10 +20,12 @@ static func get_min_max_damage(actor:BaseActor, damage_data:Dictionary)->Array:
 	return [min_dam, max_dam]
 	
 
-static func handle_attack(attacker:BaseActor, defender:BaseActor, damage_datas, 
+static func handle_attack(attacker:BaseActor, defender:BaseActor, attack_details:Dictionary,
+							damage_datas, effect_datas,
 							source_tag_chain:SourceTagChain, game_state:GameStateData, 
 							target_parameters:TargetParameters,
-							attack_from_spot_override:MapPos = null)->AttackEvent:
+							attack_from_spot_override:MapPos = null,
+							)->AttackEvent:
 	print("################ Attacking #########################")
 	print("Handing Attack: %s to %s " % [attacker.details.display_name, defender.details.display_name])
 	
@@ -51,8 +53,22 @@ static func handle_attack(attacker:BaseActor, defender:BaseActor, damage_datas,
 		else:
 			damage_list = [damage_datas]
 	
+	var effect_list = []
+	if effect_datas is Array:
+		effect_list = effect_datas
+	elif effect_datas is Dictionary and effect_datas.size() > 0:
+		if effect_datas.values()[0] is Dictionary:
+			for e_data_key in effect_datas.keys():
+				var e_data = effect_datas[e_data_key].duplicate()
+				if not e_data.keys().has("EffectDataKey"):
+					e_data['EffectDataKey'] = e_data_key
+				effect_list.append(e_data)
+		else:
+			effect_list = [effect_datas]
+	
+	
 	# TODO:Cover
-	var attack_event = AttackEvent.new(attacker, defender, attack_direction, false, source_tag_chain, damage_list)
+	var attack_event = AttackEvent.new(attacker, defender, attack_details, attack_direction, false, source_tag_chain, damage_list, effect_list)
 	
 	# Apply Pre-Roll effects
 	attacker.effects.trigger_attack(game_state, attack_event)
@@ -80,6 +96,12 @@ static func handle_attack(attacker:BaseActor, defender:BaseActor, damage_datas,
 			var damage_event = handle_damage(attacker, defender, damage_data, source_tag_chain, game_state, attack_event.final_damage_mod)
 			if damage_event:
 				attack_event.damage_events.append(damage_event)
+		
+		attack_event.roll_for_effect()
+		if attack_event.applied_effect:
+			for effect_data in attack_event.effect_datas:
+				var effect_key = effect_data['EffectKey']
+				defender.effects.add_effect(attacker, effect_key, effect_data, game_state)
 		
 	attack_event.attack_stage = AttackEvent.AttackStage.Resolved
 	

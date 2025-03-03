@@ -32,14 +32,16 @@ func add_effect(source, effect_key:String, effect_data:Dictionary, game_state:Ga
 		return _effects[force_id]
 	var effect = EffectLibrary.create_effect(source, effect_key, _actor, effect_data, force_id)
 	if LOGGING: print("EffectHolder.add_effect: Added effect '%s' to actor '%s'." % [effect.Id, _actor.Id])
-	_effects[effect.Id] = effect
-	if not effect.is_instant():
-		for trigger in effect.Triggers:
-			_triggers_to_effect_ids[trigger].append(effect.Id)
-	effect.on_created(game_state)
-	
-	if effect.is_instant():
-		self.remove_effect(effect, suppress_signals)
+	# Stacking effect already existed
+	if not _effects.keys().has(effect.Id):
+		_effects[effect.Id] = effect
+		if not effect.is_instant():
+			for trigger in effect.Triggers:
+				_triggers_to_effect_ids[trigger].append(effect.Id)
+		effect.on_created(game_state)
+		
+		if effect.is_instant():
+			self.remove_effect(effect, suppress_signals)
 	if not suppress_signals:
 		_actor.effacts_changed.emit()
 	return effect

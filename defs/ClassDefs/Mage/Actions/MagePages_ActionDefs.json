@@ -1,13 +1,15 @@
 [
     {
         "ActionKey": "FireBoltSpell",
-        "CostData": {
-            "Mana":20
-        },
         "AmmoData": {
             "Cost": 4,
             "Clip": 36,
             "AmmoType": "Mag"
+        },
+        "AttackDetials":
+        {
+            "AccuracyMod": 1,
+            "PotencyMod": 0.5
         },
         "DamageDatas": {
             "Damage1": {
@@ -19,6 +21,12 @@
                 "DamageVarient": 0,
                 "DefenseType": "Ward"
             }
+        },
+        "EffectDatas":{
+            "BurnEffect": {
+                "EffectKey": "AilmentBurned"
+            }
+
         },
         "Details": {
             "Description": "Shoot a bolt of Fire at Spot.",

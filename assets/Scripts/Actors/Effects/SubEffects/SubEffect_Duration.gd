@@ -20,6 +20,11 @@ func get_prop_enum_values(key:String)->Array:
 		return DurationTypes.keys()
 	return []
 
+
+func merge_new_duplicate_sub_effect_data(parent_effect:BaseEffect, own_sub_effect_data:Dictionary, dup_sub_effect_data:Dictionary):
+	parent_effect._duration_counter += dup_sub_effect_data.get('DurationValue', 0)
+	pass
+
 func get_triggers(effect:BaseEffect, subeffect_data:Dictionary)->Array:
 	var list = super(effect, subeffect_data)
 	
