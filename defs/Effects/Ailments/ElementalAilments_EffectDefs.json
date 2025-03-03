@@ -47,6 +47,10 @@
                 "DurationType": "TurnEnd",
                 "DurationValue": 3,
                 "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_Duration.gd"
+            },
+            "RemoveChilled": {
+                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_RemoveOtherEffect.gd",
+                "RemoveEffectKey": "AilmentChilled"
             }
         }
     },
@@ -95,250 +99,124 @@
         }
     },
     {
-        "DamageDatas": {
-            "DamageData1": {
-                "AtkPower": 100,
-                "AtkStat": "Custom",
-                "BaseDamage": 10,
-                "DamageEffect": "Poison_DamageEffect",
-                "DamageType": "Poison",
-                "DamageVarient": 0,
-                "DefenseType": "None"
-            }
-        },
-        "DamageMods": {},
-        "Details": {
-            "Description": "Take damage on move.",
-            "DisplayName": "Test Bleed",
-            "LargeIcon": "TestBlood.png",
-            "SmallIcon": "TestBlood.png",
-            "SnippetDesc": "Take damag on move",
-            "Tags": []
-        },
-        "EffectKey": "TestBleed",
-        "StatMods": {},
-        "SubEffects": {
-            "ApplyDamage": {
-                "DamageKey": "DamageData1",
-                "OptionalTriggers": [
-                    "OnMove"
-                ],
-                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_ApplyDamage.gd"
-            },
-            "Duration": {
-                "DurationType": "Turn",
-                "DurationValue": 10,
-                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_Duration.gd"
-            }
-        }
-    },
-    {
-        "DamageDatas": {},
-        "DamageMods": {},
-        "Details": {
-            "Description": "Reflect Damage",
-            "DisplayName": "Test Reflect",
-            "LargeIcon": "TestHeart.png",
-            "SmallIcon": "TestHeart.png",
-            "SnippetDesc": "Reflect damage",
-            "Tags": []
-        },
-        "EffectKey": "TestReflect",
-        "StatMods": {},
-        "SubEffects": {
-            "ShareDamage": {
-                "ShareWith": "EffectSource",
-                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_ShareDamage.gd"
-            }
-        }
-    },
-    {
-        "DamageDatas": {
-            "DamageData1": {
-                "AtkPower": 100,
-                "AtkStat": "Custom",
-                "BaseDamage": -50,
-                "DamageEffect": "Heal_DamageEffect",
-                "DamageType": "Healing",
-                "DamageVarient": 0,
-                "DefenseType": "None"
-            }
-        },
-        "DamageMods": {},
-        "Details": {
-            "Description": "Take health potion",
-            "DisplayName": "Test Health potion",
-            "LargeIcon": "TestHeart.png",
-            "SmallIcon": "TestHeart.png",
-            "SnippetDesc": "Take health potion",
-            "Tags": []
-        },
-        "EffectKey": "TestHealthPotion",
-        "StatMods": {},
-        "SubEffects": {
-            "ApplyDamage": {
-                "DamageKey": "DamageData1",
-                "OptionalTriggers": [
-                    "OnCreate"
-                ],
-                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_ApplyDamage.gd"
-            },
-            "Duration": {
-                "DurationType": "Turn",
-                "DurationValue": 1,
-                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_Duration.gd"
-            }
-        }
-    },
-    {
-        "DamageMods": {},
-        "Details": {
-            "Description": "Gain 50 Stamina and regen 10 per Round.",
-            "DisplayName": "Stamina Regen",
-            "LargeIcon": "StaminaRegen.png",
-            "SmallIcon": "StaminaRegen.png",
-            "SnippetDesc": "50 Stamina +10 per Round",
-            "Tags": [
-                "Bar"
-            ]
-        },
-        "EffectKey": "StaminaRegen",
-        "HideInHud": true,
-        "StatMods": {
-            "BaseStatMod1": {
-                "DisplayName": "Base Stamina",
-                "ModType": "Add",
-                "StatName": "BarStat:Stamina",
-                "Value": 50
-            },
-            "MaxStatMod1": {
-                "DisplayName": "Max Stamina",
-                "ModType": "Add",
-                "StatName": "BarMax:Stamina",
-                "Value": 50
-            },
-            "RegenMod1": {
-                "DisplayName": "Regen Stamina",
-                "ModType": "Add",
-                "StatName": "BarRegen:Stamina:Round",
-                "Value": 10
-            }
-        },
-        "SubEffects": {
-            "ApplyBaseStatMod": {
-                "StatModKey": "BaseStatMod1",
-                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_ModStat.gd"
-            },
-            "ApplyMaxStatMod": {
-                "StatModKey": "MaxStatMod1",
-                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_ModStat.gd"
-            },
-            "ApplyRegenMod": {
-                "StatModKey": "RegenMod1",
-                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_ModStat.gd"
-            }
-        }
-    },
-    {
-        "DamageMods": {},
-        "Details": {
-            "Description": "Gain 50 Mana and regen 10 per Round.",
-            "DisplayName": "Mana Regen",
-            "LargeIcon": "ManaRegen.png",
-            "SmallIcon": "ManaRegen.png",
-            "SnippetDesc": "50 Mana +10 per Round",
-            "Tags": [
-                "Bar"
-            ]
-        },
-        "EffectKey": "ManaRegen",
-        "HideInHud": true,
-        "StatMods": {
-            "BaseStatMod1": {
-                "DisplayName": "Base Mana",
-                "ModType": "Add",
-                "StatName": "BarStat:Mana",
-                "Value": 50
-            },
-            "MaxStatMod1": {
-                "DisplayName": "Max Mana",
-                "ModType": "Add",
-                "StatName": "BarMax:Mana",
-                "Value": 50
-            },
-            "RegenMod1": {
-                "DisplayName": "Regen Mana",
-                "ModType": "Add",
-                "StatName": "BarRegen:Mana:Round",
-                "Value": 10
-            }
-        },
-        "SubEffects": {
-            "ApplyBaseStatMod": {
-                "StatModKey": "BaseStatMod1",
-                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_ModStat.gd"
-            },
-            "ApplyMaxStatMod": {
-                "StatModKey": "MaxStatMod1",
-                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_ModStat.gd"
-            },
-            "ApplyRegenMod": {
-                "StatModKey": "RegenMod1",
-                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_ModStat.gd"
-            }
-        }
-    },
-    {
-        "DamageMods": {},
-        "Details": {
-            "Description": "Grants a 100% chance to Crit when attacking from behind the target.",
-            "DisplayName": "Back Stab",
-            "LargeIcon": "BackStab.png",
-            "SmallIcon": "BackStab.png",
-            "SnippetDesc": "Allways Crit when behind target.",
-            "Tags": [
-                "CritChance"
-            ]
-        },
-        "EffectKey": "BackStab",
-        "HideInHud": false,
-        "StatMods": {},
-        "SubEffects": {
-            "SubEffect1": {
-                "CritMod:Back": 1,
-                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_AttackMod.gd"
-            }
-        }
-    },
-    {
-        "DamageDatas": {},
-        "DamageMods": {},
-        "Details": {
-            "Description": "Regen",
-            "DisplayName": "Regen",
-            "LargeIcon": "TestHeart.png",
-            "SmallIcon": "TestHeart.png",
-            "SnippetDesc": "Regen",
-            "Tags": []
-        },
-        "EffectKey": "RegenBarStat",
-        "ShowDuration": false,
+        "EffectKey": "AilmentChilled",
         "ShowInHud": true,
-        "StatMods": {},
+        "ShowCounter": true,
+        "DamageDatas": {},
+        "DamageMods": {},
+        "Details": {
+            "Description": "-50% Speed, Mass, Accuracy, Potency, Evasion, and Block Chance. May Freeze if Chilled again.",
+            "DisplayName": "Chilled",
+            "LargeIcon": "Sprites/ChilledIcon.png",
+            "SmallIcon": "Sprites/ChilledIcon.png",
+            "SnippetDesc": "Reduced Stats and may Freeze if Chilled again.",
+            "Tags": []
+        },
+        "StatMods": {
+            "SpeedMod": {
+                "DisplayName": "Chilled",
+                "ModType": "Scale",
+                "StatName": "Speed",
+                "Value": 0.5
+            },
+            "MassMod": {
+                "DisplayName": "Chilled",
+                "ModType": "Scale",
+                "StatName": "Mass",
+                "Value": 0.5
+            },
+            "AccMod": {
+                "DisplayName": "Chilled",
+                "ModType": "Scale",
+                "StatName": "Accuracy",
+                "Value": 0.5
+            },
+            "PotencyMod": {
+                "DisplayName": "Chilled",
+                "ModType": "Scale",
+                "StatName": "Potency",
+                "Value": 0.5
+            },
+            "EvasionMod": {
+                "DisplayName": "Chilled",
+                "ModType": "Scale",
+                "StatName": "Evasion",
+                "Value": 0.5
+            },
+            "BlockChanceMod": {
+                "DisplayName": "Chilled",
+                "ModType": "Scale",
+                "StatName": "BlockChance",
+                "Value": 0.5
+            }
+        },
         "SubEffects": {
+            "VfxEffect": {
+                "AilmentKey": "Chilled",
+                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_AlimentVfx.gd"
+            },
+            "ApplyMaxStatMod": {
+                "StatModKeys": [
+                    "SpeedMod",
+                    "MassMod",
+                    "AccMod",
+                    "PotencyMod",
+                    "EvasionMod",
+                    "BlockChanceMod"
+                ],
+                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_ModStat.gd"
+            },
             "Duration": {
                 "DurationType": "TurnEnd",
-                "DurationValue": 0,
-                "MaxDuration": 0,
+                "DurationValue": 3,
                 "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_Duration.gd"
             },
-            "RegenStat": {
-                "StatName": "Health",
-                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_RegenStat.gd",
-                "Triggers": [
-                    "OnCreate"
-                ],
+            "RemoveBurned": {
+                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_RemoveOtherEffect.gd",
+                "RemoveEffectKey": "AilmentBurned"
+            }
+        }
+    },
+    {
+        "EffectKey": "AilmentFrozen",
+        "ShowInHud": true,
+        "ShowCounter": true,
+        "DamageDatas": {},
+        "DamageMods": {},
+        "Details": {
+            "Description": "Can not take Actions. +100% Fire Resistance and -100% Blunt Resistance. Ends on any Fire Damage.",
+            "DisplayName": "Frozen",
+            "LargeIcon": "Sprites/FrozenIcon.png",
+            "SmallIcon": "Sprites/FrozenIcon.png",
+            "SnippetDesc": "Can not take Actions.",
+            "Tags": []
+        },
+        "StatMods": {
+            "FrozenPPR": {
+                "DisplayName": "Frozen",
+                "ModType": "Set",
+                "StatName": "PPR",
                 "Value": 0
+            }
+        },
+        "SubEffects": {
+            "VfxEffect": {
+                "AilmentKey": "Frozen",
+                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_AlimentVfx.gd"
+            },
+            "ApplyMaxStatMod": {
+                "StatModKeys": [
+                ],
+                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_ModStat.gd"
+            },
+            "Duration": {
+                "DurationType": "TurnEnd",
+                "DurationValue": 3,
+                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_Duration.gd"
+            },
+            "RemoveBurned": {
+                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_RemoveOtherEffect.gd",
+                "RemoveEffectKey": "AilmentBurned"
             }
         }
     }

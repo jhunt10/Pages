@@ -21,4 +21,4 @@ func on_delete(effect:BaseEffect, subeffect_data:Dictionary):
 	var actor_node = CombatRootControl.get_actor_node(actor.Id)
 	var vfx_node = actor_node.get_node(vfx_path)
 	if vfx_node and is_instance_valid(vfx_node):
-		vfx_node.queue_free()
+		vfx_node.remove()

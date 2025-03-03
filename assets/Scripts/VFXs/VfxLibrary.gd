@@ -52,11 +52,15 @@ func create_vfx_node(vfx_data:VfxData, data:Dictionary={})->VfxNode:
 
 func create_ailment_vfx_node(aliment_key:String, actor:BaseActor)->VfxNode:
 	
-	var new_node:ParticalVfxNode = null
+	var new_node:AilmentVfxNode = null
 	if aliment_key == "Shocked":
 		new_node =  load("res://data/VFXs/AilmentVFXs/shocked_vfx_node.tscn").instantiate()
 	if aliment_key == "Burned":
 		new_node =  load("res://data/VFXs/AilmentVFXs/burned_vfx_node.tscn").instantiate()
+	if aliment_key == "Chilled":
+		new_node =  load("res://data/VFXs/AilmentVFXs/chilled_vfx_node.tscn").instantiate()
+	if aliment_key == "Frozen":
+		new_node =  load("res://data/VFXs/AilmentVFXs/frozen_vfx_node.tscn").instantiate()
 	if !new_node:
 		return null
 	var actor_node = CombatRootControl.get_actor_node(actor.Id)

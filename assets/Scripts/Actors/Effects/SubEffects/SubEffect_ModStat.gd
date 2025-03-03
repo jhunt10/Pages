@@ -13,17 +13,16 @@ func get_triggers(_effect:BaseEffect, _subeffect_data:Dictionary)->Array:
 	return list
 
 func get_active_stat_mods(effect:BaseEffect, subeffect_data:Dictionary)->Array:
-	if subeffect_data.get("AllStatMods", false):
-		var out_list = []
-		for mod_data in effect.get_load_val("StatMods", {}).values():
-			out_list.append(BaseStatMod.create_from_data(effect.Id, mod_data))
-		return out_list
-	else:
-		var stat_mod_key = subeffect_data['StatModKey']
-		var mod_data = effect.StatModDatas.get(stat_mod_key)
-		if mod_data:
-			return [BaseStatMod.create_from_data(effect.Id, mod_data)]
-	return []
+	var stat_mod_keys = []
+	if subeffect_data.has('StatModKey'):
+		stat_mod_keys.append(subeffect_data['StatModKey'])
+	if subeffect_data.has('StatModKeys'):
+		stat_mod_keys.append_array(subeffect_data['StatModKeys'])
+	
+	var out_list = []
+	for mod_data in effect.get_load_val("StatMods", {}).values():
+		out_list.append(BaseStatMod.create_from_data(effect.Id, mod_data))
+	return out_list
 
 func on_effect_trigger(effect:BaseEffect, _subeffect_data:Dictionary, trigger:BaseEffect.EffectTriggers, _game_state:GameStateData):
 	if trigger == BaseEffect.EffectTriggers.OnCreate:

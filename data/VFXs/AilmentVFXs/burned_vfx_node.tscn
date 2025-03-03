@@ -4,22 +4,20 @@
 [ext_resource type="Texture2D" uid="uid://b3atdgr5fajkj" path="res://assets/Sprites/UI/SymbolIcons/DmgSymbol_Fire.png" id="2_c3pdr"]
 
 [sub_resource type="Curve" id="Curve_mu718"]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.502609, 0.304294), 0.0, 0.0, 0, 0, Vector2(1, 0), -3.55268, 0.0, 0, 0]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.236522, 0.292159), 0.697729, 0.697729, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 3
 
 [node name="VFXNode" type="Node2D" node_paths=PackedStringArray("particals")]
 z_index = 9
 script = ExtResource("1_x8cl0")
 particals = NodePath("CPUParticles2D")
+actor_modulate = Color(1, 0.61, 0.61, 1)
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
 amount = 4
 randomness = 0.2
-lifetime_randomness = 0.2
 texture = ExtResource("2_c3pdr")
 emission_shape = 3
 emission_rect_extents = Vector2(16, 16)
-gravity = Vector2(0, 0)
-angle_min = -20.0
-angle_max = 20.0
+gravity = Vector2(0, -20)
 scale_amount_curve = SubResource("Curve_mu718")

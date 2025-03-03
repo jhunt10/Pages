@@ -72,6 +72,7 @@ func set_actor(actor:BaseActor):
 	
 	var offset = actor.get_load_val("SpriteOffset", [0,0])
 	offset_node.position = Vector2i(offset[0], offset[1])
+	vfx_holder.position = Vector2i(offset[0], offset[1])
 	
 	if actor.is_player:
 		var player_index = StoryState.get_player_index_of_actor(actor)
@@ -488,3 +489,10 @@ func _get_animation_dir_sufix()->String:
 	if facing_dir == 2: return "_south"
 	if facing_dir == 3: return "_west"
 	return "_south"
+
+func add_modulate(color:Color):
+	offset_node.modulate = color
+
+func remove_modulate(color:Color):
+	if offset_node.modulate == color:
+		offset_node.modulate = Color.WHITE

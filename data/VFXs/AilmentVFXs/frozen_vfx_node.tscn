@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://c2wc0sjypm6do"]
+
+[ext_resource type="Script" path="res://assets/Scripts/VFXs/ParticalVfxs/partical_vfx_node.gd" id="1_m0e0y"]
+[ext_resource type="Texture2D" uid="uid://rlbiyjubki8t" path="res://defs/Effects/Ailments/Sprites/FrozenSprite.png" id="2_avm0j"]
+
+[node name="VFXNode" type="Node2D" node_paths=PackedStringArray("particals")]
+z_index = 9
+script = ExtResource("1_m0e0y")
+particals = NodePath("")
+actor_modulate = Color(0.611765, 1, 0.968627, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_avm0j")

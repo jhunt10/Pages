@@ -55,6 +55,13 @@ func get_effect(effect_id:String)->BaseEffect:
 		return _effects[effect_id]
 	return null
 
+func get_effects_with_key(effect_key:String)->Array:
+	var out_arr = []
+	for effect:BaseEffect in _effects.values():
+		if effect.EffectKey == effect_key:
+			out_arr.append(effect)
+	return out_arr
+
 var _removing_effect_id
 var _remove_effect_queue = []
 func remove_effect(effect:BaseEffect, supress_signal:bool=false):

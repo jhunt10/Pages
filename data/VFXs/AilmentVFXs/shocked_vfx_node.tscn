@@ -11,6 +11,7 @@ point_count = 3
 z_index = 9
 script = ExtResource("1_gqlbg")
 particals = NodePath("CPUParticles2D")
+actor_modulate = Color(1, 0.980392, 0.611765, 1)
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
 amount = 6
