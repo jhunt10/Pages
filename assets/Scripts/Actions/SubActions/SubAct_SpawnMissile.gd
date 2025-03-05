@@ -45,7 +45,7 @@ func do_thing(parent_action:BaseAction, subaction_data:Dictionary, metadata:QueE
 			.append_source(SourceTagChain.SourceTypes.Actor, actor)\
 			.append_source(SourceTagChain.SourceTypes.Action, parent_action)
 	missile_data['DamageData'] = damage_data
-	missile_data['AttackDetails'] = parent_action.get_load_val("AttackDetials", {})
+	missile_data['AttackDetails'] = parent_action.get_load_val("AttackDetails", {})
 	missile_data['EffectDatas'] = parent_action.get_load_val("EffectDatas", {})
 	var missile = BaseMissile.new(actor, missile_data, tag_chain, target_params,
 									actor_pos, target_spot, parent_action.get_load_path())

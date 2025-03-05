@@ -17,6 +17,15 @@ extends BackPatchContainer
 @export var minus_icon:TextureRect
 @export var plus_icon:TextureRect
 
+@export var target_details_container:BoxContainer
+@export var target_type_label:Label
+@export var mini_range_display:MiniRangeDisplay
+
+@export var acc_pot_container:BoxContainer
+@export var accuracy_label:Label
+@export var potency_label:Label
+@export var effects_label:Label
+
 @export var ammo_label:BoxContainer
 @export var damage_entries_container:VBoxContainer
 
@@ -25,6 +34,7 @@ extends BackPatchContainer
 
 var page:BasePageItem
 var damage_font_size_override:int
+var loaded_details:bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -42,6 +52,8 @@ func toggle_details():
 		details_container.hide()
 		plus_icon.show()
 	else:
+		if not loaded_details:
+			load_details()
 		details_container.show()
 		plus_icon.hide()
 
@@ -75,6 +87,10 @@ func set_page(_page:BasePageItem):
 	else:
 		type_label.text = "Unknown"
 		
+
+func load_details():
+	var page_action = page.get_action()
+	var page_effect_def = page.get_effect_def()
 	description_box.text = page.details.description
 	# Ammo
 	if page_action and page_action.has_ammo(null):
@@ -82,7 +98,32 @@ func set_page(_page:BasePageItem):
 		ammo_label.show()
 	else:
 		ammo_label.hide()
+	
+	if page_action:
+		var attack_details = page_action.get_load_val("AttackDetials", {})
+		accuracy_label.text = str(attack_details.get("AccuracyMod", 1))
+		potency_label.text = str(attack_details.get("PotencyMod", 1))
+		var effects_datas = page_action.get_load_val("EffectDatas", {})
+		if effects_datas.size() == 0:
+			effects_label.text = ''
+		else:
+			var effects_string = ': '
+			for effect_data in effects_datas.values():
+				var effect_key = effect_data.get("EffectKey", "NO_KEY")
+				effects_string += effect_key + ", "
+			effects_label.text = effects_string.trim_suffix(", ")
 		
+		var target_params = page_action.get_preview_target_params(null)
+		if target_params:
+			target_type_label.text = TargetParameters.TargetTypes.keys()[target_params.target_type]
+			mini_range_display.load_area_matrix(target_params.target_area)
+			mini_range_display.show()
+		else:
+			target_details_container.hide()
+	else:
+		acc_pot_container.hide()
+		target_details_container.hide()
+	
 	# Damage Data
 	for child in damage_entries_container.get_children():
 		if child is DamageLabelContainer:
@@ -108,4 +149,5 @@ func set_page(_page:BasePageItem):
 		new_mod.set_mod_data(mod_data)
 		stat_mods_container.add_child(new_mod)
 		new_mod.show()
-		
+	loaded_details = true
+	

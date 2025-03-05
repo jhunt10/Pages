@@ -1,6 +1,6 @@
 class_name DamageEvent
 
-const LOGGING = false
+const LOGGING = true
 
 enum DefenseType{None, Armor, Ward}
 
@@ -8,7 +8,7 @@ enum DamageTypes {
 	Test, RAW, Healing, Percent,
 	Light, Dark, Chaos, Psycic,
 	Pierce, Slash, Blunt, Crash, # Usually negated by Armor
-	Fire, Ice, Electric, Poison, # Usually negated by Ward
+	Fire, Cold, Shock, Poison, # Usually negated by Ward
 }
 
 var _been_calced
@@ -30,6 +30,7 @@ var defense_reduction:float
 var is_successful:bool
 var base_damage:int
 var raw_damage:float
+var damage_after_resistance:float
 var damage_after_armor:float
 var damage_after_attack_mods:float
 var damage_after_defend_mods:float
@@ -51,6 +52,8 @@ func _init(data:Dictionary, source, defender:BaseActor, tag_chain:SourceTagChain
 		self.base_damage = defender.stats.max_health
 		if attack_stat.ends_with("PPR"):
 			self.base_damage = defender.stats.max_health / max(defender.stats.get_stat("PPR"),1)
+	elif source is BaseActor:
+		self.base_damage = source.stats.get_stat(attack_stat, 1)
 	
 	var damage_type = data.get("DamageType", null)
 	if damage_type is String: self.damage_type = DamageTypes.get(damage_type, 0)
@@ -80,10 +83,20 @@ func _calc_damage_for_event():
 	var attack_tags = source_tag_chain.get_all_tags()
 	var defend_tags = defender.get_tags()
 	
+	# --- Damage Calc Order ---
+	# 1) Get applied power from damage_variance
+	# 2) Raw damage = attack_power * applied power
+	# 3) Apply DamageType Resistances
+	# 4) Apply Armor/Ward resuction
+	# 5) Apply Attacker's "OnDealDamage" mods
+	# 6) Apply Defender's "OnTakeDamage" mods
+	
 	# Calc raw damage
 	var float_power = float(attack_power)/100.0
 	applied_power = (float_power + (float_power * randf_range(-damage_variance, damage_variance)))
 	
+	var defender_resistance = defender.stats.get_damage_resistance(damage_type)
+	var resistance_reduction = 1.0 - defender_resistance
 	
 	# Get the defend's Armor or Ward
 	if defense_type == DamageEvent.DefenseType.Armor:
@@ -93,10 +106,10 @@ func _calc_damage_for_event():
 	defense_reduction = DamageHelper.calc_armor_reduction(defense_value)
 	
 	raw_damage = base_damage * applied_power
-	damage_after_armor = raw_damage * defense_reduction
+	damage_after_resistance = raw_damage * resistance_reduction
+	damage_after_armor = damage_after_resistance * defense_reduction
 	
-	# Get and apply all "OnDealDamage" mods from the attacker
-	damage_after_attack_mods = damage_after_armor
+	
 	if source is BaseActor:
 		# Add Ally or Enemy tag
 		var attacker = source as BaseActor
@@ -106,11 +119,15 @@ func _calc_damage_for_event():
 		else:
 			attack_tags.append("Enemy")
 			defend_tags.append("Enemy")
+		# Get and apply all "OnDealDamage" mods from the attacker
+		damage_after_attack_mods = damage_after_armor
 		var attacker_damage_mods = attacker.effects.get_on_deal_damage_mods()
 		attacker_damage_mods = DamageHelper._order_damage_mods(attacker_damage_mods)
 		for mod:BaseDamageMod in attacker_damage_mods:
 			if mod.is_valid_in_case(false, attack_tags, defend_tags, self):
 				damage_after_attack_mods = mod.apply_mod(damage_after_attack_mods, self)
+	else:
+		damage_after_attack_mods = damage_after_armor
 	
 	# Get and apply all "OnTakeDamage" mods from the defender
 	damage_after_defend_mods = damage_after_attack_mods
@@ -118,12 +135,18 @@ func _calc_damage_for_event():
 		if mod.is_valid_in_case(true, attack_tags, defend_tags, self):
 			damage_after_defend_mods = mod.apply_mod(damage_after_defend_mods, self)
 	
-	if LOGGING: 
-		print("DamageEvent: AtkPower: %s | Var: %s | Applied: %s | Raw Damage: %s" % [attack_power, damage_variance, applied_power, raw_damage])
-		print("DamageEvent: Defense: %s | Value: %s | Reduction: %s" % [DamageEvent.DefenseType.keys()[defense_type], defense_value, defense_reduction])
-		print("DamageEvent: base_damage: %s | raw_damage: %s | after_armor: %s" % [base_damage, raw_damage, damage_after_armor])
-	
 	final_damage = damage_after_defend_mods
+	
+	if LOGGING: 
+		print("--- Damage Event: --- ")
+		print("- BaseDamage: %s " % [self.base_damage])
+		print("- AtkPower: %s | Var: %s | Applied Power: %s" % [self.attack_power, self.damage_variance, applied_power])
+		print("- RawDamage: %s " % [raw_damage])
+		print("- Damage Type: %s | Resist: %s | Reduc: %s | After Res: %s " % [DamageEvent.DamageTypes.keys()[damage_type], defender_resistance, resistance_reduction, damage_after_resistance])
+		print("- Defence Type: %s | Value: %s | Reduc: %s |  After Armor: %s " % [DamageEvent.DefenseType.keys()[defense_type], defense_value, defense_reduction, damage_after_armor])
+		print("- Final Damage: %s " % [final_damage])
+		print("--------------------- ")
+	
 
 func _get_percent_damage(data):
 	return 0

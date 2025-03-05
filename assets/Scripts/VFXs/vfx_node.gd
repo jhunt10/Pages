@@ -6,6 +6,7 @@ const NO_SPRITE_PATH = "res://assets/Sprites/BadSprite.png"
 @export var sprite:Sprite2D
 @export var animation:AnimationPlayer
 @export var animation_half_way:bool
+var vfx_id:String
 var _data:VfxData
 var _actor:BaseActor
 var _bad_sprite = false
@@ -46,7 +47,7 @@ func start_vfx():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if _has_animation and !animation.is_playing():
-		self.queue_free()
+		on_delete()
 	if _flash_text_value and animation_half_way and not _flash_text_shown:
 			CombatRootControl.Instance.create_flash_text(self.get_parent(), _flash_text_value, _flash_text_color)
 			_flash_text_shown = true
@@ -86,4 +87,10 @@ func set_vfx_data(data:VfxData, extra_data:Dictionary):
 func add_flash_text(text:String, color:Color):
 	_flash_text_value = text
 	_flash_text_color = color
+
+func on_delete():
+	self.queue_free()
+	var parent = get_parent()
+	if parent is VfxHolder and parent.has_vfx(self.vfx_id):
+		parent.remove_vfx(self.vfx_id)
 	

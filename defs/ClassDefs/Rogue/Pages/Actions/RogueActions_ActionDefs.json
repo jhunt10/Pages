@@ -60,6 +60,11 @@
     },
     {
         "ActionKey": "ThrowKnife",
+        "AttackDetails":
+        {
+            "AccuracyMod": 1,
+            "PotencyMod": 0.5
+        },
         "AmmoData": {
             "Cost": 4,
             "Clip": 36,
@@ -83,7 +88,7 @@
         },
         "Details": {
             "Description": "Throw a knife which deals 100±30% Pierce damage to a creature in the target spot.",
-            "DisplayName": "Throw Knide",
+            "DisplayName": "Throw Knife",
             "LargeIcon": "Sprites/ThrowKnife.png",
             "SmallIcon": "Sprites/ThrowKnife.png",
             "SnippetDesc": "Throw Knife",

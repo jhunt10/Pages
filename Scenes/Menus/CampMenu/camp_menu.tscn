@@ -17,7 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://cb8k5gxes3iaj" path="res://assets/Sprites/UI/SymbolIcons/MoneySymbol_White.png" id="15_axj4f"]
 [ext_resource type="PackedScene" uid="uid://bje0k82nenje6" path="res://Scenes/Dialog/dialog_control.tscn" id="16_q50fv"]
 
-[node name="CampMenu" type="Control" node_paths=PackedStringArray("dialog_control", "camp_options_container", "system_options_container", "pretty_picture_texure_rect", "quest_button", "shop_button", "character_button", "explort_button", "records_button", "system_button", "sys_back_button", "sys_save_button", "sys_load_button", "sys_debug_button", "sys_quit_button")]
+[node name="CampMenu" type="Control" node_paths=PackedStringArray("dialog_control", "camp_options_container", "system_options_container", "records_options_container", "pretty_picture_texure_rect", "quest_button", "shop_button", "character_button", "explort_button", "records_button", "system_button", "sys_back_button", "sys_save_button", "sys_load_button", "sys_debug_button", "sys_quit_button", "rec_back_button", "rec_cards_button", "rec_pages_button")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -28,6 +28,7 @@ script = ExtResource("1_yrr0s")
 dialog_control = NodePath("DialogControl")
 camp_options_container = NodePath("CampOptionsContainer/MainOptionsContainer")
 system_options_container = NodePath("CampOptionsContainer/SystemOptionsContainer")
+records_options_container = NodePath("CampOptionsContainer/RecordsOptionsContainer")
 pretty_picture_texure_rect = NodePath("Control/PrettyPictureRect")
 quest_button = NodePath("CampOptionsContainer/MainOptionsContainer/QuestOptionButton")
 shop_button = NodePath("CampOptionsContainer/MainOptionsContainer/ShopOptionButton")
@@ -40,6 +41,9 @@ sys_save_button = NodePath("CampOptionsContainer/SystemOptionsContainer/Sys_Save
 sys_load_button = NodePath("CampOptionsContainer/SystemOptionsContainer/Sys_LoadOptionButton")
 sys_debug_button = NodePath("CampOptionsContainer/SystemOptionsContainer/Sys_DebugOptionButton")
 sys_quit_button = NodePath("CampOptionsContainer/SystemOptionsContainer/Sys_QuitOptionButton")
+rec_back_button = NodePath("CampOptionsContainer/RecordsOptionsContainer/Sys_BackOptionButton")
+rec_cards_button = NodePath("CampOptionsContainer/RecordsOptionsContainer/Rec_FlashCardsOptionButton")
+rec_pages_button = NodePath("CampOptionsContainer/RecordsOptionsContainer/Rec_PagesOptionButton")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="."]
 layout_mode = 1
@@ -116,6 +120,7 @@ axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
 
 [node name="MainOptionsContainer" type="VBoxContainer" parent="CampOptionsContainer"]
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -744,6 +749,190 @@ grow_vertical = 0
 color = Color(0.498039, 0, 0, 1)
 
 [node name="Button" type="Button" parent="CampOptionsContainer/SystemOptionsContainer/Sys_BackOptionButton"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 4.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RecordsOptionsContainer" type="VBoxContainer" parent="CampOptionsContainer"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = -16.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("4_gjck3")
+
+[node name="HSeparator" type="HSeparator" parent="CampOptionsContainer/RecordsOptionsContainer"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Rec_FlashCardsOptionButton" type="Control" parent="CampOptionsContainer/RecordsOptionsContainer" node_paths=PackedStringArray("button", "under_line", "highlight", "label")]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+script = ExtResource("6_5vfat")
+button = NodePath("Button")
+under_line = NodePath("TitleLabel/ColorRect")
+highlight = NodePath("TextureRect")
+label = NodePath("TitleLabel")
+text = "Flash Cards"
+
+[node name="TextureRect" type="TextureRect" parent="CampOptionsContainer/RecordsOptionsContainer/Rec_FlashCardsOptionButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -32.0
+offset_top = -4.5
+offset_right = 32.0
+offset_bottom = 4.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_hs7sy")
+
+[node name="TitleLabel" type="Label" parent="CampOptionsContainer/RecordsOptionsContainer/Rec_FlashCardsOptionButton"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 0
+offset_right = 294.0
+offset_bottom = 60.0
+scale = Vector2(0.996599, 0.996599)
+theme = ExtResource("3_ufdhk")
+theme_override_font_sizes/font_size = 48
+text = "Flash Cards"
+
+[node name="ColorRect" type="ColorRect" parent="CampOptionsContainer/RecordsOptionsContainer/Rec_FlashCardsOptionButton/TitleLabel"]
+custom_minimum_size = Vector2(0, 3)
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0.498039, 0, 0, 1)
+
+[node name="Button" type="Button" parent="CampOptionsContainer/RecordsOptionsContainer/Rec_FlashCardsOptionButton"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 4.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Rec_PagesOptionButton" type="Control" parent="CampOptionsContainer/RecordsOptionsContainer" node_paths=PackedStringArray("button", "under_line", "highlight", "label")]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+script = ExtResource("6_5vfat")
+button = NodePath("Button")
+under_line = NodePath("TitleLabel/ColorRect")
+highlight = NodePath("TextureRect")
+label = NodePath("TitleLabel")
+text = "Pages"
+
+[node name="TextureRect" type="TextureRect" parent="CampOptionsContainer/RecordsOptionsContainer/Rec_PagesOptionButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -32.0
+offset_top = -4.5
+offset_right = 32.0
+offset_bottom = 4.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_hs7sy")
+
+[node name="TitleLabel" type="Label" parent="CampOptionsContainer/RecordsOptionsContainer/Rec_PagesOptionButton"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 0
+offset_right = 150.0
+offset_bottom = 60.0
+theme = ExtResource("3_ufdhk")
+theme_override_font_sizes/font_size = 48
+text = "Pages"
+
+[node name="ColorRect" type="ColorRect" parent="CampOptionsContainer/RecordsOptionsContainer/Rec_PagesOptionButton/TitleLabel"]
+custom_minimum_size = Vector2(0, 3)
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0.498039, 0, 0, 1)
+
+[node name="Button" type="Button" parent="CampOptionsContainer/RecordsOptionsContainer/Rec_PagesOptionButton"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 4.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Sys_BackOptionButton" type="Control" parent="CampOptionsContainer/RecordsOptionsContainer" node_paths=PackedStringArray("button", "under_line", "highlight", "label")]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+script = ExtResource("6_5vfat")
+button = NodePath("Button")
+under_line = NodePath("TitleLabel/ColorRect")
+highlight = NodePath("TextureRect")
+label = NodePath("TitleLabel")
+text = "Back"
+
+[node name="TextureRect" type="TextureRect" parent="CampOptionsContainer/RecordsOptionsContainer/Sys_BackOptionButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -32.0
+offset_top = -4.5
+offset_right = 32.0
+offset_bottom = 4.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_hs7sy")
+
+[node name="TitleLabel" type="Label" parent="CampOptionsContainer/RecordsOptionsContainer/Sys_BackOptionButton"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 0
+offset_right = 120.0
+offset_bottom = 60.0
+theme = ExtResource("3_ufdhk")
+theme_override_font_sizes/font_size = 48
+text = "Back"
+
+[node name="ColorRect" type="ColorRect" parent="CampOptionsContainer/RecordsOptionsContainer/Sys_BackOptionButton/TitleLabel"]
+custom_minimum_size = Vector2(0, 3)
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0.498039, 0, 0, 1)
+
+[node name="Button" type="Button" parent="CampOptionsContainer/RecordsOptionsContainer/Sys_BackOptionButton"]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15

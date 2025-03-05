@@ -110,7 +110,7 @@ func _on_item_removed_from_slot(item_id:String, index:int):
 		var effect = EffectLibrary.get_effect(item_id_to_effect_id[item_id])
 		_actor.effects.remove_effect(effect)
 		item_id_to_effect_id.erase(item_id)
-		class_page_changed.emit()
+	class_page_changed.emit()
 
 func _on_item_added_to_slot(item:BaseItem, index:int):
 	if item == null:

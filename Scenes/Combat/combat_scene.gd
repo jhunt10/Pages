@@ -295,7 +295,7 @@ func create_damage_effect(target_actor:BaseActor, vfx_key:String, flash_number:i
 	if !vfx_node:
 		printerr("Failed to create VFX node from key '%s'." % [vfx_key])
 		return
-	target_actor_node.vfx_holder.add_child(vfx_node)
+	target_actor_node.vfx_holder.add_vfx(vfx_node.vfx_id, vfx_node)
 	if flash_number >= 0:
 		if flash_number > 0 and vfx_node._data.shake_actor:
 			target_actor_node.play_shake()

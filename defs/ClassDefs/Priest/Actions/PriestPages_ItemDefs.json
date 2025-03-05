@@ -1,0 +1,29 @@
+[
+    {
+        "ActionKey": "LightBoltSpell",
+        "CanStack": true,
+        "Details": {
+            "Tags": [
+                "Spell"
+            ]
+        },
+        "ItemDetails":
+        {
+            "Rarity": "Mundane",
+            "Value": 50
+        },
+        "ItemKey": "LightBoltSpell_PageItem",
+        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd"
+    },
+    {
+        "ActionKey": "LightTouchSpell",
+        "CanStack": true,
+        "ItemDetails":
+        {
+            "Rarity": "Rare",
+            "Value": 50
+        },
+        "ItemKey": "LightTouchSpell_PageItem",
+        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd"
+    }
+]

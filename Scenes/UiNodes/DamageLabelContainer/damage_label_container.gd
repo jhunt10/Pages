@@ -6,7 +6,7 @@ enum DamageTypes {
 	Test, RAW, Healing, Percent,
 	Light, Dark, Chaos, Psycic,
 	Pierce, Slash, Blunt, Crash, # Usually negated by Armor
-	Fire, Ice, Electric, Poison, # Usually negated by Ward
+	Fire, Cold, Shock, Poison, # Usually negated by Ward
 }
 
 @export var font_size_override:int = -1:
@@ -51,16 +51,16 @@ enum DamageTypes {
 			
 			elif damage_type == DamageTypes.Fire:
 				damage_type_label.add_theme_color_override("font_color", Color("cb0000"))
-			elif damage_type == DamageTypes.Ice:
+			elif damage_type == DamageTypes.Cold:
 				damage_type_label.add_theme_color_override("font_color", Color("65c1ef"))
-			elif damage_type == DamageTypes.Electric:
+			elif damage_type == DamageTypes.Shock:
 				damage_type_label.add_theme_color_override("font_color", Color("f2da00"))
 			elif damage_type == DamageTypes.Poison:
 				damage_type_label.add_theme_color_override("font_color", Color("00a355"))
 			else:
 				damage_type_label.add_theme_color_override("font_color", Color("780000"))
 			
-			if damage_type == DamageTypes.Healing:
+			if damage_type == DamageTypes.Light:
 				damage_type_label.add_theme_color_override("font_color", Color("00ff84"))
 				atk_power_label.add_theme_color_override("font_color", Color("00ff84"))
 				variant_label.add_theme_color_override("font_color", Color("00ff84"))
@@ -76,11 +76,11 @@ enum DamageTypes {
 		attack_power = val
 		if atk_power_label: atk_power_label.text = str(attack_power)
 
-@export var attack_variant:int:
+@export var attack_variant:float:
 	set(val):
 		attack_variant = val
 		if variant_label:
-			variant_label.text = str(attack_variant) 
+			variant_label.text = str(floori(attack_variant * 100)) 
 
 @export var damage_icon_rect:TextureRect
 @export var atk_power_label:Label

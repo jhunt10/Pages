@@ -1,0 +1,51 @@
+[
+    {
+        "ActionKey": "LightBoltSpell",
+        "ParentKey": "BaseBoltSpell",
+        "DamageDatas": {
+            "Damage1": {
+                "DamageEffect": "SmallFire_DamageEffect",
+                "DamageType": "Light",
+                "DamageVarient": 0.2,
+                "DefenseType": "None"
+            }
+        },
+        "Details": {
+            "Description": "Shoot a bolt of Light at Spot. Light damage Heals living Actors.",
+            "DisplayName": "Light Bolt",
+            "LargeIcon": "Sprites/LightBolt.png",
+            "SmallIcon": "Sprites/LightBolt.png",
+            "SnippetDesc": "Shoot a bolt of Light",
+            "Tags": [
+                "Light"
+            ]
+        },
+        "MissileDatas": {
+            "Missile1": {
+                "MissileVfxKey": "LightMissile"
+            }
+        }
+    },
+    {
+        "ActionKey": "LightTouchSpell",
+        "ParentKey": "BaseTouchSpell",
+        "DamageDatas": {
+            "Damage1": {
+                "DamageEffect": "SmallFire_DamageEffect",
+                "DamageType": "Light",
+                "DamageVarient": 0.1,
+                "DefenseType": "None"
+            }
+        },
+        "Details": {
+            "Description": "Touch an Actor and apply Light Damage. Light damage Heals living Actors.",
+            "DisplayName": "Light Touch",
+            "LargeIcon": "Sprites/LightTouch.png",
+            "SmallIcon": "Sprites/LightTouch.png",
+            "SnippetDesc": "Touch Actor and apply Light",
+            "Tags": [
+                "Light"
+            ]
+        }
+    }
+]

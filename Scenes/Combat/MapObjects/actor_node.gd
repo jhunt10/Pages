@@ -13,7 +13,7 @@ signal reached_motion_destination
 		if Engine.is_editor_hint():
 			set_facing_dir(val)
 		
-@export var vfx_holder:Node2D
+@export var vfx_holder:VfxHolder
 @export var body_animation:AnimationPlayer
 @export var death_animation:AnimationPlayer
 @export var path_arrow:Sprite2D

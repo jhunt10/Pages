@@ -47,6 +47,7 @@ func create_vfx_node(vfx_data:VfxData, data:Dictionary={})->VfxNode:
 		printerr("VfxLibrary: Null data given to create_vfx_node.")
 		return null
 	var new_node:VfxNode = load("res://Scenes/VFXs/vfx_node.tscn").instantiate()
+	new_node.vfx_id = str(ResourceUID.create_id())
 	new_node.set_vfx_data(vfx_data, data)
 	return new_node
 
@@ -64,7 +65,8 @@ func create_ailment_vfx_node(aliment_key:String, actor:BaseActor)->VfxNode:
 	if !new_node:
 		return null
 	var actor_node = CombatRootControl.get_actor_node(actor.Id)
-	actor_node.vfx_holder.add_child(new_node)
+	new_node.vfx_id = aliment_key
+	actor_node.vfx_holder.add_vfx(new_node.vfx_id, new_node)
 	new_node.set_actor(actor)
 	new_node.start_vfx()
 	return new_node

@@ -101,6 +101,7 @@ static func handle_attack(attacker:BaseActor, defender:BaseActor, attack_details
 		if attack_event.applied_effect:
 			for effect_data in attack_event.effect_datas:
 				var effect_key = effect_data['EffectKey']
+				print("Applying Effect: %s" % [effect_key])
 				defender.effects.add_effect(attacker, effect_key, effect_data, game_state)
 		
 	attack_event.attack_stage = AttackEvent.AttackStage.Resolved

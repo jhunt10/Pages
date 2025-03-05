@@ -74,7 +74,7 @@ func _init(key:String, load_path:String, def:Dictionary, id:String, data:Diction
 	equipment.items_changed.connect(_on_equipment_holder_items_change)
 	items = BagItemHolder.new(self)
 	pages = PageHolder.new(self)
-	pages.class_page_changed.connect(_on_class_page_change)
+	pages.class_page_changed.connect(_on_page_holder_items_change)
 	
 	# Que requires info from Pages and Equipment so must be inited after item validation
 	Que = ActionQue.new(self)
@@ -128,7 +128,7 @@ func _on_equipment_holder_items_change():
 	if not suppress_equipment_changed:
 		self.equipment_changed.emit()
 
-func _on_class_page_change():
+func _on_page_holder_items_change():
 	stats.dirty_stats()
 	stats.recache_stats()
 	if not suppress_equipment_changed:

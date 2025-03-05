@@ -29,7 +29,8 @@ func _init(actor:BaseActor, data:Dictionary) -> void:
 	# Parse Stat Data
 	for key:String in data.keys():
 		_base_stats[key] = data[key]
-	actor.equipment_changed.connect(dirty_stats)
+	# Actor handles signles between item holders
+	#actor.equipment_changed.connect(dirty_stats)
 	actor.turn_starting.connect(_on_actor_turn_start)
 	actor.turn_ended.connect(_on_actor_turn_end)
 	actor.round_ended.connect(_on_actor_round_end)
@@ -66,6 +67,11 @@ func get_mod_names_for_stat(stat_name:String)->Array:
 
 func get_attacking_stat(stat_name:String, source_tag_chain:SourceTagChain, default):
 	return default
+
+func get_damage_resistance(damage_type:DamageEvent.DamageTypes)->float:
+	var type_str = DamageEvent.DamageTypes.keys()[damage_type]
+	var int_val = get_stat("Resistance:" + str(type_str), 0)
+	return float(int_val) / 100.0
 
 
 # -----------------------------------------------------------------
@@ -149,7 +155,8 @@ func _on_actor_round_end():
 
 
 func _calc_cache_stats():
-	if LOGGING: print("#Caching Stats for: %s" % _actor.ActorKey)
+	if LOGGING: 
+		print("#Caching Stats for: %s" % _actor.ActorKey)
 	
 	_cached_mods_names.clear()
 	# Aggregate all the mods together by stat_name, then type

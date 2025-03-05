@@ -156,7 +156,7 @@ func create_speech_bubble(block_data:Dictionary)->bool:
 	var grow_direction = block_data.get("GrowDirection", "Center")
 	var offset = block_data.get("Offset", [0,-8])
 	
-	actor_node.vfx_holder.add_child(new_bubble)
+	actor_node.vfx_holder.add_child("SpeachBubble", new_bubble)
 	new_bubble.set_block_data(block_data)
 	new_bubble.showing = true
 	_popups[pop_up_key] = new_bubble

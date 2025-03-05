@@ -26,6 +26,6 @@ func do_thing(parent_action:BaseAction, subaction_data:Dictionary, que_exe_data:
 	
 	#TODO: Handle attack or just handle damage?
 	for target:BaseActor in targets:
-		DamageHelper.handle_attack(actor, target, {}, damage_data, [], tag_chain, game_state, target_params)
+		DamageHelper.handle_attack(actor, target, parent_action.get_load_val("AttackDetials", {}), damage_data, parent_action.get_load_val("EffectDatas", []), tag_chain, game_state, target_params)
 	
 	return BaseSubAction.Success

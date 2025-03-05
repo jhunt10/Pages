@@ -37,8 +37,8 @@ func set_vfx_data(data:VfxData, extra_data:Dictionary):
 func _process(delta: float) -> void:
 	pass
 
-func remove():
+func on_delete():
 	var actor_node = CombatRootControl.get_actor_node(_actor.Id)
 	actor_node.remove_modulate(actor_modulate)
-	self.queue_free()
+	super()
 	
