@@ -16,4 +16,4 @@ func get_triggers(effect:BaseEffect, subeffect_data:Dictionary)->Array:
 
 func on_effect_trigger(effect:BaseEffect, subeffect_data:Dictionary, trigger:BaseEffect.EffectTriggers, _game_state:GameStateData):
 	var trig_text = BaseEffect.EffectTriggers.keys()[trigger]
-	CombatRootControl.Instance.create_flash_text_on_actor(effect.get_effected_actor(), trig_text, Color.BLUE)
+	CombatRootControl.Instance.create_flash_text_on_actor(effect.get_effected_actor(), trig_text, FlashTextController.FlashTextType.Blocked_Dmg)

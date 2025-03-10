@@ -50,6 +50,8 @@ func set_actor(actor:BaseActor):
 	_sync()
 
 func _sync():
+	if !_actor:
+		return
 	armor_lable.text = str(_actor.stats.get_stat("Armor", 0))
 	ward_label.text = str(_actor.equipment.get_total_equipment_ward())
 	for index:int in range(slot_displays.size()):

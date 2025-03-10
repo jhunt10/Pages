@@ -277,7 +277,7 @@ func _execute_turn_frames(game_state:GameStateData, que:ActionQue, turn_index:in
 	 
 	if subaction_index == 0:
 		if action.has_ammo(que.actor) and not que.can_pay_page_ammo(action.ActionKey):
-			CombatRootControl.Instance.create_flash_text_on_actor(que.actor, "AMMO", Color.ORANGE)
+			CombatRootControl.Instance.create_flash_text_on_actor(que.actor, "AMMO", FlashTextController.FlashTextType.NoAmmo)
 			que.fail_turn()
 			return
 			
@@ -341,17 +341,6 @@ func _get_subaction(script_key:String)->BaseSubAction:
 			printerr("Failed to find subaction script: " + script_key)
 			subaction_script_cache[script_key] = null
 	return subaction_script_cache[script_key]
-
-#func _pay_turn_costs():
-	#for que:ActionQue in get_active_action_ques():
-		#if que.get_max_que_size() > 0:
-			#var actor = que.actor
-			#var turn_data = que.QueExecData.get_current_turn_data()
-			#for stat_name in turn_data.costs.keys():
-				#if not actor.stats.reduce_bar_stat_value(stat_name, turn_data.costs[stat_name], false):
-					#CombatRootControl.Instance.create_flash_text_on_actor(actor, stat_name, Color.ORANGE)
-					#que.fail_turn()
-					#break
 
 func _on_actor_stat_change(actor:BaseActor):
 	var speed = actor.stats.get_stat("Speed", 0)

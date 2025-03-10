@@ -10,8 +10,8 @@ func get_triggers(_effect:BaseEffect, subeffect_data:Dictionary)->Array:
 func on_effect_trigger(effect:BaseEffect, subeffect_data:Dictionary, trigger:BaseEffect.EffectTriggers, game_state:GameStateData):
 	var actor = effect.get_effected_actor()
 	var actor_node = CombatRootControl.get_actor_node(actor.Id)
-	var vfx_node = MainRootNode.vfx_libray.create_ailment_vfx_node(subeffect_data.get("AilmentKey"), actor)
-	subeffect_data['VfxId'] = vfx_node.vfx_id
+	var vfx_node = VfxHelper.create_ailment_vfx_node(subeffect_data.get("AilmentKey"), actor)
+	subeffect_data['VfxId'] = vfx_node.id
 
 func on_delete(effect:BaseEffect, subeffect_data:Dictionary):
 	var actor = effect.get_effected_actor()

@@ -11,15 +11,18 @@
 			"SmallIcon":"GuyPortrait.png"
 		},
 		"Stats":{
-			"BarStat:Health":100,
+			"StartingAttributeLevels":{
+				"Strength": 1,
+				"Agility": 2,
+				"Intelligence": 0,
+				"Wisdom": 0
+			},
 			"BarMax:Health":100,
-			"BarRegen:Health:Round":0,
-			"BarRegen:Health:Turn":0,
 			"Mass":10,
 			"Speed":10,
 			"Level":1,
-			"Strength": 9,
-			"Agility": 10,
+			"Strength": 8,
+			"Agility": 8,
 			"Intelligence": 8,
 			"Wisdom": 8,
 			"PagesPerRound": 0

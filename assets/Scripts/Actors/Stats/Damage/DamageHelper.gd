@@ -81,21 +81,35 @@ static func handle_attack(attacker:BaseActor, defender:BaseActor, attack_details
 	defender.effects.trigger_attack(game_state, attack_event)
 	print("Attack Results: | Hit: %s" % [ attack_event.is_hit])
 	
+	var created_attack_vfx = null
+	if attack_details.has("AttackVfxData"):
+		var attack_data_key = attack_details.get("AttackVfxKey")
+		var attack_vfx_data = attack_details.get("AttackVfxData")
+		if attack_data_key:
+			created_attack_vfx = VfxHelper.create_attack_vfx_node(attacker, defender, attack_data_key, attack_vfx_data)
+	
+	
 	# On Miss
 	if not attack_event.is_hit:
 		if attack_event.is_evade:
-			CombatRootControl.Instance.create_flash_text_on_actor(defender, "Evade", Color.GREEN)
+			CombatRootControl.Instance.create_flash_text_on_actor(defender, "Evade", FlashTextController.FlashTextType.Evade)
 		else:
-			CombatRootControl.Instance.create_flash_text_on_actor(attacker, "Miss", Color.RED)
+			CombatRootControl.Instance.create_flash_text_on_actor(attacker, "Miss", FlashTextController.FlashTextType.Miss)
 	# On Hit
 	else:
 		# Resolve Damage
 		var attacK_damage_datas = attack_event.get_damage_datas()
 		print("Found %s Damage Datas to apply | Final Damage Mod: %s" % [attacK_damage_datas.size(), attack_event.final_damage_mod])
 		for damage_data in attacK_damage_datas:
-			var damage_event = handle_damage(attacker, defender, damage_data, source_tag_chain, game_state, attack_event.final_damage_mod)
+			var create_damage_vfx = (created_attack_vfx == null)
+			var damage_event = handle_damage(attacker, defender, damage_data, source_tag_chain, game_state, attack_event.final_damage_mod, create_damage_vfx)
+			
 			if damage_event:
 				attack_event.damage_events.append(damage_event)
+				if not create_damage_vfx:
+					var damage_vfx_data = build_damage_vfx_data(attack_event, damage_event, damage_data)
+					created_attack_vfx.add_damage_effect(damage_vfx_data)
+					
 		
 		attack_event.roll_for_effect()
 		if attack_event.applied_effect:
@@ -134,7 +148,8 @@ static func handle_push_damage(moving_actor:BaseActor, pushed_actor:BaseActor, g
 	handle_damage(winner, loser, damage_data, tag_chain, game_state)
 
 static func handle_damage(source, defender:BaseActor, damage_data:Dictionary, 
-							source_tag_chain:SourceTagChain, game_state:GameStateData, final_damage_mod:float = 1)->DamageEvent:
+							source_tag_chain:SourceTagChain, game_state:GameStateData, 
+							final_damage_mod:float = 1, create_VFX:bool = true)->DamageEvent:
 	# Need to get base damage before making event because  
 	var base_damage = 0
 	var attack_stat = damage_data.get("AtkStat")
@@ -154,14 +169,25 @@ static func handle_damage(source, defender:BaseActor, damage_data:Dictionary,
 		var source_actor:BaseActor = source as BaseActor
 		source_actor.effects.trigger_damage_dealt(game_state, damage_event)
 	
-	var damage_effect = damage_data.get("DamageEffect", null)
-	if damage_effect:
-		var damage_color = Color.RED
-		if final_damage_mod > 1:
-			damage_color = Color.YELLOW
-		elif final_damage_mod < 1:
-			damage_color = Color.BLUE
-		CombatRootControl.Instance.create_damage_effect(defender, damage_effect, damage, source, damage_color)
+	if create_VFX:
+		var damage_effect = damage_data.get("DamageEffect", null)
+		var damage_effect_data = damage_data.get("DamageEffectData", {})
+		if damage_effect:
+			var damage_color = Color.RED
+			if damage < 0:
+				damage_effect_data['DamageTextType'] = FlashTextController.FlashTextType.Healing_Dmg
+			elif source_tag_chain.has_tag("DOT"):
+				damage_effect_data['DamageTextType'] = FlashTextController.FlashTextType.DOT_Dmg
+			elif final_damage_mod > 1:
+				damage_effect_data['DamageTextType'] = FlashTextController.FlashTextType.Crit_Dmg
+			elif final_damage_mod < 1:
+				damage_effect_data['DamageTextType'] = FlashTextController.FlashTextType.Blocked_Dmg
+			else:
+				damage_effect_data['DamageTextType'] = FlashTextController.FlashTextType.Normal_Dmg
+			if source is BaseActor:
+				damage_effect_data['SourceActorId'] = source.Id
+			damage_effect_data['DamageNumber'] = 0 - damage
+			VfxHelper.create_damage_effect(defender, damage_effect, damage_effect_data)
 	return damage_event
 	
 
@@ -216,3 +242,20 @@ const ARMOR_SCALE:float = 80
 static func calc_armor_reduction(armor)->float:
 	#var val = (log((armor+ARMOR_STRETCH)/ARMOR_STRETCH) / log(10)) * ARMOR_SCALE
 	return 1.0-(float(armor)/100.0)
+
+static func build_damage_vfx_data(attack_event:AttackEvent, damage_event:DamageEvent, damage_data:Dictionary)->Dictionary:
+	var damage_vfx_key = damage_data.get("DamageEffect", null)
+	var damage_vfx_data = damage_data.get("DamageEffectData", {}).duplicate()
+	if damage_vfx_key:
+		damage_vfx_data['VfxKey'] = damage_vfx_key
+		if damage_event.final_damage < 0:
+			damage_vfx_data['DamageTextType'] = FlashTextController.FlashTextType.Healing_Dmg
+		elif attack_event.is_crit and not attack_event.is_blocked:
+			damage_vfx_data['DamageTextType'] = FlashTextController.FlashTextType.Crit_Dmg
+		elif attack_event.is_blocked and not attack_event.is_crit:
+			damage_vfx_data['DamageTextType'] = FlashTextController.FlashTextType.Blocked_Dmg
+		else:
+			damage_vfx_data['DamageTextType'] = FlashTextController.FlashTextType.Normal_Dmg
+		damage_vfx_data['DamageNumber'] = 0 - damage_event.final_damage
+		damage_vfx_data['SourceActorId'] = attack_event.attacker.Id
+	return damage_vfx_data

@@ -45,6 +45,41 @@
                 "ModType": "Scale",
                 "StatName": "Armor",
                 "Value": 1.2
+            },
+            "EvasionScale": {
+                "DisplayName": "Base Stats",
+                "ModType": "AddStat",
+                "StatName": "Evasion",
+                "DepStatName": "Agility",
+                "Value": 0.01
+            },
+            "AccuracyScale": {
+                "DisplayName": "Base Stats",
+                "ModType": "AddStat",
+                "StatName": "Accuracy",
+                "DepStatName": "Agility",
+                "Value": 0.01
+            },
+            "MagAttackScale": {
+                "DisplayName": "Base Stats",
+                "ModType": "AddStat",
+                "StatName": "MagAttack",
+                "DepStatName": "Intelligence",
+                "Value": 1
+            },
+            "PotencyScale": {
+                "DisplayName": "Base Stats",
+                "ModType": "AddStat",
+                "StatName": "Potency",
+                "DepStatName": "Intelligence",
+                "Value": 0.01
+            },
+            "ProtectionScale": {
+                "DisplayName": "Base Stats",
+                "ModType": "AddStat",
+                "StatName": "Protection",
+                "DepStatName": "Wisdom",
+                "Value": 0.01
             }
         },
         "AddTags": ["Soldier"]

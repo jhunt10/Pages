@@ -72,7 +72,7 @@ canvas_layer = NodePath("CanvasLayer")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="MoveableCamera2D"]
 
-[node name="DevDataControl" type="Control" parent="MoveableCamera2D/CanvasLayer" node_paths=PackedStringArray("build_ques_button", "show_statbars_button", "dev_map_display")]
+[node name="DevDataControl" type="Control" parent="MoveableCamera2D/CanvasLayer" node_paths=PackedStringArray("build_ques_button", "show_statbars_button", "fill_ammo_button", "dev_map_display")]
 layout_mode = 3
 anchors_preset = 1
 anchor_left = 1.0
@@ -83,8 +83,9 @@ offset_right = -8.0
 offset_bottom = 138.0
 grow_horizontal = 0
 script = ExtResource("19_yc3tw")
-build_ques_button = NodePath("BuildQuesButton")
-show_statbars_button = NodePath("ShowPathsButton")
+build_ques_button = NodePath("VBoxContainer/BuildQuesButton")
+show_statbars_button = NodePath("VBoxContainer/ShowPathsButton")
+fill_ammo_button = NodePath("VBoxContainer/FillAmmoButton")
 dev_map_display = NodePath("../../../DEV_MapDrawing")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="MoveableCamera2D/CanvasLayer/DevDataControl"]
@@ -121,6 +122,18 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "8:24"
 horizontal_alignment = 2
+
+[node name="BuildQuesButton" type="Button" parent="MoveableCamera2D/CanvasLayer/DevDataControl/VBoxContainer"]
+layout_mode = 2
+text = "BQs"
+
+[node name="ShowPathsButton" type="Button" parent="MoveableCamera2D/CanvasLayer/DevDataControl/VBoxContainer"]
+layout_mode = 2
+text = "Stats"
+
+[node name="FillAmmoButton" type="Button" parent="MoveableCamera2D/CanvasLayer/DevDataControl/VBoxContainer"]
+layout_mode = 2
+text = "Ammo"
 
 [node name="QueCalControl" type="Control" parent="MoveableCamera2D/CanvasLayer/DevDataControl"]
 visible = false
@@ -184,22 +197,6 @@ offset_right = 2.0
 offset_bottom = 120.0
 texture = ExtResource("24_5fn7e")
 expand_mode = 4
-
-[node name="BuildQuesButton" type="Button" parent="MoveableCamera2D/CanvasLayer/DevDataControl"]
-layout_mode = 0
-offset_left = 8.0
-offset_top = 31.0
-offset_right = 91.0
-offset_bottom = 62.0
-text = "BQs"
-
-[node name="ShowPathsButton" type="Button" parent="MoveableCamera2D/CanvasLayer/DevDataControl"]
-layout_mode = 0
-offset_left = 8.0
-offset_top = 66.0
-offset_right = 91.0
-offset_bottom = 97.0
-text = "Stats"
 
 [node name="CombatUiControl" type="Control" parent="MoveableCamera2D/CanvasLayer" node_paths=PackedStringArray("game_over_screen", "victory_screen", "menu_button", "book_button", "pause_menu", "target_input_display", "p1_stat_panel_control", "p2_stat_panel_control", "p3_stat_panel_control", "p4_stat_panel_control", "que_input", "que_collection_display", "stats_collection_display", "item_select_menu", "drop_message_control")]
 layout_mode = 3
@@ -1094,6 +1091,7 @@ visible = false
 scene_root = NodePath("../../..")
 
 [node name="StartCombatScreen" parent="MoveableCamera2D/CanvasLayer" instance=ExtResource("37_2ks4j")]
+visible = false
 
 [node name="MapNode" parent="." instance=ExtResource("7_ce1oe")]
 

@@ -26,6 +26,7 @@ func on_effect_trigger(effect:BaseEffect, subeffect_data:Dictionary, trigger:Bas
 	shared_damage_data['BaseDamage'] = main_damage_event.raw_damage
 	shared_damage_data['AtkPower'] = 100
 	shared_damage_data['DamageVarient'] = 0
-	
+	#shared_damage_data['DamageEffect'] = null
 	for adj_actor in adj_actors:
 		DamageHelper.handle_damage(effect, adj_actor, shared_damage_data, tag_chain, game_state)
+		VfxHelper.create_vfx_on_actor(actor, "LightningChainVfx", {"TargetActorId": adj_actor.Id})

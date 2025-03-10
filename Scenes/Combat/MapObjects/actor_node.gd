@@ -72,7 +72,7 @@ func set_actor(actor:BaseActor):
 	
 	var offset = actor.get_load_val("SpriteOffset", [0,0])
 	offset_node.position = Vector2i(offset[0], offset[1])
-	vfx_holder.position = Vector2i(offset[0], offset[1])
+	#vfx_holder.position = Vector2i(offset[0], offset[1])
 	
 	if actor.is_player:
 		var player_index = StoryState.get_player_index_of_actor(actor)
@@ -184,6 +184,7 @@ func set_facing_dir(dir:MapPos.Directions):
 	if main_hand_node: main_hand_node.set_facing_dir(facing_dir)
 	if off_hand_node: off_hand_node.set_facing_dir(facing_dir)
 	
+	vfx_holder.position = actor_sprite.get_sprite_center() + offset_node.position
 
 var move_timmer = 0
 func _process(delta: float) -> void:

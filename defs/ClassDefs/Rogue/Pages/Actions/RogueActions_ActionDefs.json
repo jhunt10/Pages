@@ -63,7 +63,12 @@
         "AttackDetails":
         {
             "AccuracyMod": 1,
-            "PotencyMod": 0.5
+            "PotencyMod": 0.5,
+            "AttackVfxKey": "KnifeMissile",
+            "AttackVfxData": {
+                "Velocity": 200,
+                "ScenePath": "res://assets/Scripts/VFXs/BulletVfxs/bullet_vfx_node.tscn"
+            }
         },
         "AmmoData": {
             "Cost": 4,
@@ -127,6 +132,14 @@
         "SubActions": {
             "0": [
                 {
+                    "Animation": "Swing",
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponReadyAnimation.gd",
+                    "MainHand": true,
+                    "OffHand": "Never"
+                }
+            ],
+            "5": [
+                {
                     "AllowAlreadyTargeted": false,
                     "AllowAutoTarget": true,
                     "SetTargetKey": "Target1",
@@ -137,11 +150,14 @@
                     "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_PayCost.gd"
                 },
                 {
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_ApplyDamage.gd",
                     "DamageKey": "Damage1",
-                    "MissileKey": "Missile1",
-                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_SpawnMissile.gd",
-                    "TargetKey": "Target1",
-                    "TargetParamKey": "TargetParam1"
+                    "TargetKey": "Target1"
+                },
+                {
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponMotionAnimation.gd",
+                    "MainHand": true,
+                    "OffHand": "Never"
                 }
             ]
         },

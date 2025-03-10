@@ -135,7 +135,11 @@ func _calc_damage_for_event():
 		if mod.is_valid_in_case(true, attack_tags, defend_tags, self):
 			damage_after_defend_mods = mod.apply_mod(damage_after_defend_mods, self)
 	
-	final_damage = damage_after_defend_mods
+	#final_damage = damage_after_defend_mods
+	if damage_after_defend_mods > 0:
+		final_damage = max(1,damage_after_defend_mods)
+	else:
+		final_damage = min(-1,damage_after_defend_mods)
 	
 	if LOGGING: 
 		print("--- Damage Event: --- ")

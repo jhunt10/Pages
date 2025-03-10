@@ -1,6 +1,8 @@
 class_name UiState_Targeting
 extends BaseUiState
 
+const LOGGING = false
+
 var selection_data:TargetSelectionData
 var _target_display_key:String
 var target_area_dislay_node:TargetAreaDisplayNode:
@@ -70,7 +72,7 @@ func handle_input(event):
 		
 	# Mouse in viewport coordinates.
 	if event is InputEventMouseButton and not (event as InputEventMouseButton).pressed:
-		print("Button Pressed")
+		if _logging: print("Button Pressed")
 		var mouse_pos = CombatRootControl.Instance.MapController.actor_tile_map.get_local_mouse_position()
 		var spot = CombatRootControl.Instance.MapController.actor_tile_map.local_to_map(mouse_pos)
 		if selection_data.is_coor_selectable(spot):
@@ -78,7 +80,7 @@ func handle_input(event):
 
 func select_target(coord:Vector2i, confirmed:bool):
 	if (wait_for_confirm and not confirmed) or coord != waiting_selection:
-		print("Started Waiting for comfirm")
+		if _logging: print("Started Waiting for comfirm")
 		is_waiting_for_confirm = true
 		waiting_selection = coord
 		target_area_dislay_node.set_area_effect_coor(_target_display_key, coord)
@@ -106,7 +108,7 @@ func select_target(coord:Vector2i, confirmed:bool):
 	CombatUiControl.ui_state_controller.set_ui_state(UiStateController.UiStates.ExecRound)
 
 func ui_button_pressed():
-	print("Confrim button pressed")
+	if _logging: print("Confrim button pressed")
 	if not is_waiting_for_confirm:
 		selection_data.focused_actor.Que.fail_turn()
 		CombatUiControl.ui_state_controller.set_ui_state(UiStateController.UiStates.ExecRound)

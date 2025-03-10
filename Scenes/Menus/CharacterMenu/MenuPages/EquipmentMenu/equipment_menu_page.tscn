@@ -1,13 +1,18 @@
-[gd_scene load_steps=39 format=3 uid="uid://cbexkor24ce0h"]
+[gd_scene load_steps=45 format=3 uid="uid://cbexkor24ce0h"]
 
 [ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/EquipmentMenu/equipment_page_control.gd" id="1_6pwc2"]
 [ext_resource type="Texture2D" uid="uid://c4yedxpiinlff" path="res://Scenes/Menus/CharacterMenu/MenuPages/outline.png" id="2_5i0tg"]
 [ext_resource type="Theme" uid="uid://dwinll8pgdjhc" path="res://Scenes/Themes/standard_theme.tres" id="3_th70d"]
 [ext_resource type="Texture2D" uid="uid://bvdik5isqdgxf" path="res://Scenes/Menus/CharacterMenu/MenuPages/EquipmentMenu/EquipmentSlotsContainer/EquipmentGrid_Background.png" id="4_cj3ey"]
+[ext_resource type="Texture2D" uid="uid://lv3xit0yhvj2" path="res://Scenes/UiNodes/ExpBar/ExpBar.png" id="4_e3qra"]
 [ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/EquipmentMenu/EquipmentSlotsContainer/equipment_display_container.gd" id="4_p6hdl"]
+[ext_resource type="Script" path="res://Scenes/UiNodes/ExpBar/exp_bar_control.gd" id="5_aga8c"]
 [ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/EquipmentMenu/EquipmentSlotsContainer/equipment_display_slot_button.gd" id="5_pa62e"]
 [ext_resource type="Texture2D" uid="uid://cdxe2v7hg5tuw" path="res://assets/Sprites/UI/CharacterEdit/HeadSlot.png" id="6_tt121"]
+[ext_resource type="Script" path="res://Scenes/UiNodes/back_patch_container.gd" id="6_xuk44"]
 [ext_resource type="Texture2D" uid="uid://567vutk12a12" path="res://Scenes/Menus/CharacterMenu/MenuPages/SlotHighlight.png" id="7_0h3qm"]
+[ext_resource type="Texture2D" uid="uid://5hu0ttx4jxuo" path="res://assets/Sprites/UI/BackPatches/PaperPatch_64x92_16.png" id="7_8jkp8"]
+[ext_resource type="Theme" uid="uid://bfce41la62bs6" path="res://Scenes/Themes/readable_theme.tres" id="8_3y7lt"]
 [ext_resource type="Texture2D" uid="uid://di2sns34ee4ju" path="res://assets/Sprites/UI/CharacterEdit/BodySlot.png" id="8_8qosq"]
 [ext_resource type="Texture2D" uid="uid://djwy03i8oyrfm" path="res://assets/Sprites/UI/CharacterEdit/BootSlot.png" id="9_hj34j"]
 [ext_resource type="Texture2D" uid="uid://jwg5aqbw71la" path="res://assets/Sprites/UI/CharacterEdit/MainHandSlot.png" id="10_4lrdt"]
@@ -35,6 +40,7 @@
 [ext_resource type="Texture2D" uid="uid://m0ss0tg7qqou" path="res://assets/Sprites/UI/SymbolIcons/MassSymbol.png" id="32_ohw0h"]
 [ext_resource type="Texture2D" uid="uid://bujky44hog2jm" path="res://assets/Sprites/UI/SymbolIcons/QueCountSymbol.png" id="33_tgryk"]
 [ext_resource type="Texture2D" uid="uid://den756c067qbk" path="res://assets/Sprites/UI/SymbolIcons/CrashSymbol.png" id="34_giu80"]
+[ext_resource type="Texture2D" uid="uid://ca4v1p3ndhgsy" path="res://Scenes/UiNodes/ExpBar/AttributesIcon.png" id="36_dgi06"]
 
 [sub_resource type="Animation" id="Animation_t6efn"]
 length = 0.001
@@ -73,65 +79,28 @@ _data = {
 "pagebook_warning": SubResource("Animation_peevg")
 }
 
-[node name="EquipmentPage" type="Control" node_paths=PackedStringArray("name_label", "level_label", "equipment_slots_container", "stat_box", "animation_player")]
+[node name="EquipmentPage" type="Control" node_paths=PackedStringArray("name_label", "level_label", "equipment_slots_container", "stat_box", "animation_player", "exp_bar")]
 custom_minimum_size = Vector2(280, 395)
 layout_mode = 3
 anchors_preset = 0
 offset_right = 280.0
 offset_bottom = 395.0
 script = ExtResource("1_6pwc2")
-name_label = NodePath("TitleBox/HBoxContainer/NameLabel")
-level_label = NodePath("TitleBox/HBoxContainer/LevelLabel")
+name_label = NodePath("TitleBox/VBoxContainer/HBoxContainer/NameLabel")
+level_label = NodePath("TitleBox/VBoxContainer/HBoxContainer/LevelLabel")
 equipment_slots_container = NodePath("EquipmentSlotsControl")
 stat_box = NodePath("StatBoxControl")
 animation_player = NodePath("AnimationPlayer")
-
-[node name="TitleBox" type="NinePatchRect" parent="."]
-layout_mode = 0
-offset_left = 12.0
-offset_top = 5.0
-offset_right = 268.0
-offset_bottom = 45.0
-texture = ExtResource("2_5i0tg")
-region_rect = Rect2(0, 0, 64, 64)
-patch_margin_left = 18
-patch_margin_top = 18
-patch_margin_right = 18
-patch_margin_bottom = 18
-
-[node name="HBoxContainer" type="HBoxContainer" parent="TitleBox"]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 12.0
-offset_right = -12.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="NameLabel" type="Label" parent="TitleBox/HBoxContainer"]
-self_modulate = Color(0.498039, 0, 0, 1)
-layout_mode = 2
-size_flags_horizontal = 3
-theme = ExtResource("3_th70d")
-theme_override_font_sizes/font_size = 20
-text = "Character Name"
-
-[node name="LevelLabel" type="Label" parent="TitleBox/HBoxContainer"]
-self_modulate = Color(0.498039, 0, 0, 1)
-layout_mode = 2
-theme = ExtResource("3_th70d")
-theme_override_font_sizes/font_size = 20
-text = "99"
+exp_bar = NodePath("TitleBox/VBoxContainer/HBoxContainer2/ExpBar")
 
 [node name="EquipmentSlotsControl" type="Control" parent="." node_paths=PackedStringArray("actor_node", "armor_lable", "ward_label", "phyatk_label", "magatk_label")]
 custom_minimum_size = Vector2(256, 256)
 layout_mode = 3
 anchors_preset = 0
 offset_left = 12.0
-offset_top = 50.0
+offset_top = 55.0
 offset_right = 268.0
-offset_bottom = 306.0
+offset_bottom = 311.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 script = ExtResource("4_p6hdl")
@@ -266,9 +235,11 @@ anchor_right = 0.75
 anchor_bottom = 0.75
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="Control" type="Control" parent="EquipmentSlotsControl/CenterContainer"]
 layout_mode = 2
+mouse_filter = 2
 
 [node name="Node2D" type="Node2D" parent="EquipmentSlotsControl/CenterContainer/Control"]
 scale = Vector2(3, 3)
@@ -500,9 +471,9 @@ texture = ExtResource("19_vhvqa")
 [node name="StatBoxControl" type="Control" parent="." node_paths=PackedStringArray("stat_labels_container")]
 anchors_preset = 0
 offset_left = 12.0
-offset_top = 312.0
+offset_top = 314.0
 offset_right = 268.0
-offset_bottom = 383.0
+offset_bottom = 385.0
 script = ExtResource("21_8w6l2")
 stat_labels_container = NodePath("VBoxContainer")
 
@@ -1046,6 +1017,197 @@ layout_mode = 2
 theme = ExtResource("3_th70d")
 text = "000"
 horizontal_alignment = 1
+
+[node name="TitleBox" type="NinePatchRect" parent="."]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 5.0
+offset_right = 268.0
+offset_bottom = 53.0
+texture = ExtResource("2_5i0tg")
+region_rect = Rect2(0, 0, 64, 64)
+patch_margin_left = 18
+patch_margin_top = 18
+patch_margin_right = 18
+patch_margin_bottom = 18
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TitleBox"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TitleBox/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="NameLabel" type="Label" parent="TitleBox/VBoxContainer/HBoxContainer"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("3_th70d")
+theme_override_font_sizes/font_size = 20
+text = "Character Name"
+
+[node name="LevelLabel2" type="Label" parent="TitleBox/VBoxContainer/HBoxContainer"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("3_th70d")
+theme_override_font_sizes/font_size = 20
+text = " "
+
+[node name="LevelLabel" type="Label" parent="TitleBox/VBoxContainer/HBoxContainer"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("3_th70d")
+theme_override_font_sizes/font_size = 20
+text = "99"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="TitleBox/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="LevelUpControl" type="Control" parent="TitleBox/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="TitleBox/VBoxContainer/HBoxContainer2/LevelUpControl"]
+z_index = 2
+layout_mode = 0
+offset_left = 6.0
+offset_top = -26.0
+offset_right = 46.0
+offset_bottom = 14.0
+texture = ExtResource("36_dgi06")
+
+[node name="Button" type="Button" parent="TitleBox/VBoxContainer/HBoxContainer2/LevelUpControl/TextureRect"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VSeparator" type="VSeparator" parent="TitleBox/VBoxContainer/HBoxContainer2"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ExpBar" type="TextureRect" parent="TitleBox/VBoxContainer/HBoxContainer2" node_paths=PackedStringArray("full_rect", "color_rect", "level_label", "mouse_over_control", "current_exp_label", "max_exp_label", "level_up_button_control", "level_up_button")]
+z_index = 2
+custom_minimum_size = Vector2(176, 13)
+layout_mode = 2
+script = ExtResource("5_aga8c")
+full_rect = NodePath("FullRect")
+color_rect = NodePath("ColorRect")
+level_label = NodePath("../../HBoxContainer/LevelLabel")
+mouse_over_control = NodePath("Control/BackPatchContainer")
+current_exp_label = NodePath("Control/BackPatchContainer/BoxContainer/CurentLabel")
+max_exp_label = NodePath("Control/BackPatchContainer/BoxContainer/NexrLevelLabel")
+percent_full = 0.5
+level_up_button_control = NodePath("../LevelUpControl")
+level_up_button = NodePath("../LevelUpControl/TextureRect/Button")
+
+[node name="FullRect" type="Control" parent="TitleBox/VBoxContainer/HBoxContainer2/ExpBar"]
+anchors_preset = 0
+offset_left = 9.0
+offset_top = 4.0
+offset_right = 168.0
+offset_bottom = 9.0
+mouse_filter = 2
+
+[node name="ColorRect" type="ColorRect" parent="TitleBox/VBoxContainer/HBoxContainer2/ExpBar"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 4.0
+offset_right = 87.5
+offset_bottom = 9.0
+mouse_filter = 2
+color = Color(0, 1, 1, 1)
+
+[node name="TextureRect" type="TextureRect" parent="TitleBox/VBoxContainer/HBoxContainer2/ExpBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_e3qra")
+
+[node name="Control" type="Control" parent="TitleBox/VBoxContainer/HBoxContainer2/ExpBar"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="BackPatchContainer" type="Container" parent="TitleBox/VBoxContainer/HBoxContainer2/ExpBar/Control" node_paths=PackedStringArray("background", "inner_container")]
+visible = false
+z_index = 1
+custom_minimum_size = Vector2(126, 32)
+layout_mode = 0
+offset_left = 25.0
+offset_right = 151.0
+offset_bottom = 32.0
+script = ExtResource("6_xuk44")
+background = NodePath("NinePatchRect")
+inner_container = NodePath("BoxContainer")
+margin_override = 6
+center_in_parent = true
+
+[node name="NinePatchRect" type="NinePatchRect" parent="TitleBox/VBoxContainer/HBoxContainer2/ExpBar/Control/BackPatchContainer"]
+layout_mode = 2
+texture = ExtResource("7_8jkp8")
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+
+[node name="BoxContainer" type="BoxContainer" parent="TitleBox/VBoxContainer/HBoxContainer2/ExpBar/Control/BackPatchContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="CurentLabel" type="Label" parent="TitleBox/VBoxContainer/HBoxContainer2/ExpBar/Control/BackPatchContainer/BoxContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+theme = ExtResource("8_3y7lt")
+text = "100"
+vertical_alignment = 2
+
+[node name="SlashLabel" type="Label" parent="TitleBox/VBoxContainer/HBoxContainer2/ExpBar/Control/BackPatchContainer/BoxContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+theme = ExtResource("8_3y7lt")
+text = " / "
+vertical_alignment = 2
+
+[node name="NexrLevelLabel" type="Label" parent="TitleBox/VBoxContainer/HBoxContainer2/ExpBar/Control/BackPatchContainer/BoxContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+theme = ExtResource("8_3y7lt")
+text = "1000"
+vertical_alignment = 2
+
+[node name="ExpLabel" type="Label" parent="TitleBox/VBoxContainer/HBoxContainer2/ExpBar/Control/BackPatchContainer/BoxContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+theme = ExtResource("8_3y7lt")
+text = " Exp"
+vertical_alignment = 2
+
+[node name="VSeparator2" type="VSeparator" parent="TitleBox/VBoxContainer/HBoxContainer2"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

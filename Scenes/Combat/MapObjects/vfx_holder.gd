@@ -1,10 +1,18 @@
 class_name VfxHolder
 extends Node2D
 
+@export var actor_node:ActorNode
+@export var flash_text_controller:FlashTextController
+
+# Satalite Node on the ActorSprite for VFXs that follow the Actor
+@export var offset_node:Node2D
+
 var vfx_nodes = {}
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	if not flash_text_controller.visible:
+		flash_text_controller.show()
 	pass # Replace with function body.
 
 
@@ -12,21 +20,25 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 
-func add_vfx(id:String, vfx_node):
-	if vfx_nodes.keys().has(id):
-		var old_vfx = vfx_nodes[id]
+func add_vfx(vfx_node:BaseVfxNode):
+	if vfx_nodes.keys().has(vfx_node.id):
+		var old_vfx:BaseVfxNode = vfx_nodes[vfx_node.id]
 		if old_vfx and is_instance_valid(old_vfx):
-			old_vfx.queue_free()
+			old_vfx.finish()
 	self.add_child(vfx_node)
-	vfx_nodes[id] = vfx_node
+	vfx_node.vfx_holder = self
+	vfx_nodes[vfx_node.id] = vfx_node
 
 func has_vfx(id:String)->bool:
 	return vfx_nodes.keys().has(id)
-	
+
+func get_vfx(id:String)->bool:
+	return vfx_nodes.get(id)
+
 func remove_vfx(id:String):
 	if vfx_nodes.keys().has(id):
-		var old_vfx = vfx_nodes[id]
+		var old_vfx:BaseVfxNode = vfx_nodes[id]
 		vfx_nodes.erase(id)
 		if old_vfx and is_instance_valid(old_vfx):
-			old_vfx.on_delete()
+			old_vfx.finish()
 			old_vfx.queue_free()

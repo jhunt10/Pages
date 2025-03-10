@@ -1,0 +1,800 @@
+[gd_scene load_steps=22 format=3 uid="uid://ralgrl8or0pv"]
+
+[ext_resource type="Script" path="res://Scenes/Menus/LevelUpMenu/level_up_container.gd" id="1_k6wku"]
+[ext_resource type="Texture2D" uid="uid://51dfjr6b84bj" path="res://assets/Sprites/UI/BackPatches/PaperPatch_Big_184x128_32.png" id="2_7ptx0"]
+[ext_resource type="Script" path="res://Scenes/UiNodes/back_patch_container.gd" id="2_ir1q8"]
+[ext_resource type="Texture2D" uid="uid://b7yikap63psbv" path="res://Scenes/Menus/CharacterMenu/MenuPages/ItemDetailsCard/ExitButton.png" id="3_d3hu7"]
+[ext_resource type="Theme" uid="uid://cayt153s5ro4a" path="res://Scenes/Themes/standard_theme_red.tres" id="4_hcvmt"]
+[ext_resource type="Theme" uid="uid://bfce41la62bs6" path="res://Scenes/Themes/readable_theme.tres" id="5_hqymr"]
+[ext_resource type="Script" path="res://Scenes/Menus/LevelUpMenu/levelup_stat_input_container.gd" id="6_ivxcj"]
+[ext_resource type="Texture2D" uid="uid://b10pvly4exem2" path="res://assets/Sprites/UI/SymbolIcons/_S_Symbole.png" id="7_ysvkh"]
+[ext_resource type="Theme" uid="uid://dwinll8pgdjhc" path="res://Scenes/Themes/standard_theme.tres" id="8_m4s56"]
+[ext_resource type="Texture2D" uid="uid://c7owbev44aamu" path="res://Scenes/Menus/LevelUpMenu/MinusButton.png" id="9_rqaak"]
+[ext_resource type="Texture2D" uid="uid://b4s4knvwhpknh" path="res://Scenes/Menus/LevelUpMenu/MinusButton_Pressed.png" id="10_e1k1q"]
+[ext_resource type="Texture2D" uid="uid://dgb4b6cxq2uun" path="res://Scenes/Menus/LevelUpMenu/PlusButton.png" id="11_xm1ku"]
+[ext_resource type="Texture2D" uid="uid://b8lxkocnlxibh" path="res://Scenes/Menus/LevelUpMenu/PlusButton_Pressed.png" id="12_ey7bw"]
+[ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/level_up_stat_change_container.gd" id="13_oj6pj"]
+[ext_resource type="Texture2D" uid="uid://diy8q5lpvpw1u" path="res://assets/Sprites/UI/SymbolIcons/PhyDamageSymbol.png" id="14_bykvb"]
+[ext_resource type="Texture2D" uid="uid://vwiqj7k1flkn" path="res://assets/Sprites/UI/SymbolIcons/_A_Symbole.png" id="15_purgl"]
+[ext_resource type="Texture2D" uid="uid://doywp1shkpnmd" path="res://assets/Sprites/UI/SymbolIcons/_I_Symbole.png" id="16_dt8dp"]
+[ext_resource type="Texture2D" uid="uid://ci3qbej0djsng" path="res://assets/Sprites/UI/SymbolIcons/_W_Symbole.png" id="17_8pem1"]
+[ext_resource type="Script" path="res://Scenes/UiNodes/PatchButton/PatchButton.gd" id="18_vbplr"]
+[ext_resource type="Texture2D" uid="uid://dbag7m6cb83vp" path="res://Scenes/Menus/CharacterMenu/MenuPages/ItemDetailsCard/Button_Patch_32_6.png" id="19_gokup"]
+[ext_resource type="Texture2D" uid="uid://bmv0v2cnpvjh4" path="res://Scenes/Menus/CharacterMenu/MenuPages/ItemDetailsCard/ButtonPressed_Patch_32_6.png" id="20_vv1bt"]
+
+[node name="LevelUpMenu" type="Control" node_paths=PackedStringArray("exit_button", "confirm_button", "current_level_label", "new_level_label", "points_left_label", "points_total_label", "premade_stat_label", "strength_controller", "strength_stats_contaienr", "agility_controller", "agility_stats_contaienr", "intelligence_controller", "intelligence_stats_contaienr", "wisdom_controller", "wisdom_stats_contaienr")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_k6wku")
+exit_button = NodePath("LevelUpContainer/Control/ExitButton/Button")
+confirm_button = NodePath("LevelUpContainer/BoxContainer/HBoxContainer/ConfirmButton")
+current_level_label = NodePath("LevelUpContainer/BoxContainer/HBoxContainer2/Label2")
+new_level_label = NodePath("LevelUpContainer/BoxContainer/HBoxContainer2/Label4")
+points_left_label = NodePath("LevelUpContainer/BoxContainer/PointsContainer/PointsLeftLabel")
+points_total_label = NodePath("LevelUpContainer/BoxContainer/PointsContainer/TotalPointsLabel")
+premade_stat_label = NodePath("LevelUpContainer/BoxContainer/StrengtStatsContainer/StatChangeContainer")
+strength_controller = NodePath("LevelUpContainer/BoxContainer/StrenghtInputContainer")
+strength_stats_contaienr = NodePath("LevelUpContainer/BoxContainer/StrengtStatsContainer")
+agility_controller = NodePath("LevelUpContainer/BoxContainer/AgilityInputContainer")
+agility_stats_contaienr = NodePath("LevelUpContainer/BoxContainer/AgilityStatsContainer")
+intelligence_controller = NodePath("LevelUpContainer/BoxContainer/IntelInputContainer")
+intelligence_stats_contaienr = NodePath("LevelUpContainer/BoxContainer/IntelegenceStatsContainer")
+wisdom_controller = NodePath("LevelUpContainer/BoxContainer/WisdomInputContainer")
+wisdom_stats_contaienr = NodePath("LevelUpContainer/BoxContainer/WisdomStatsContainer")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.501961)
+
+[node name="LevelUpContainer" type="Container" parent="." node_paths=PackedStringArray("background", "inner_container")]
+z_index = 50
+custom_minimum_size = Vector2(536, 477)
+layout_mode = 0
+offset_left = 308.0
+offset_top = 85.0
+offset_right = 844.0
+offset_bottom = 562.0
+script = ExtResource("2_ir1q8")
+background = NodePath("NinePatchRect")
+inner_container = NodePath("BoxContainer")
+margin_override = 16
+center_in_parent = true
+
+[node name="NinePatchRect" type="NinePatchRect" parent="LevelUpContainer"]
+layout_mode = 2
+texture = ExtResource("2_7ptx0")
+patch_margin_left = 32
+patch_margin_top = 32
+patch_margin_right = 32
+patch_margin_bottom = 32
+
+[node name="BoxContainer" type="BoxContainer" parent="LevelUpContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 3
+vertical = true
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="LevelUpContainer/BoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="VSeparator" type="VSeparator" parent="LevelUpContainer/BoxContainer/HBoxContainer2"]
+modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="LevelUpContainer/BoxContainer/HBoxContainer2"]
+layout_mode = 2
+theme = ExtResource("4_hcvmt")
+theme_override_font_sizes/font_size = 48
+text = "Level Up "
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="LevelUpContainer/BoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(72, 0)
+layout_mode = 2
+theme = ExtResource("4_hcvmt")
+theme_override_font_sizes/font_size = 48
+text = "100"
+horizontal_alignment = 1
+
+[node name="Label3" type="Label" parent="LevelUpContainer/BoxContainer/HBoxContainer2"]
+modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("4_hcvmt")
+theme_override_font_sizes/font_size = 32
+text = ">"
+horizontal_alignment = 1
+
+[node name="Label4" type="Label" parent="LevelUpContainer/BoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(72, 0)
+layout_mode = 2
+theme = ExtResource("4_hcvmt")
+theme_override_font_sizes/font_size = 48
+text = "100"
+horizontal_alignment = 1
+
+[node name="VSeparator2" type="VSeparator" parent="LevelUpContainer/BoxContainer/HBoxContainer2"]
+modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+
+[node name="PointsContainer" type="HBoxContainer" parent="LevelUpContainer/BoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="LevelUpContainer/BoxContainer/PointsContainer"]
+layout_mode = 2
+theme = ExtResource("5_hqymr")
+theme_override_font_sizes/font_size = 24
+text = "Points:"
+horizontal_alignment = 1
+
+[node name="PointsLeftLabel" type="Label" parent="LevelUpContainer/BoxContainer/PointsContainer"]
+custom_minimum_size = Vector2(28, 0)
+layout_mode = 2
+theme = ExtResource("5_hqymr")
+theme_override_font_sizes/font_size = 24
+text = "0"
+horizontal_alignment = 1
+
+[node name="SeperatorLabel" type="Label" parent="LevelUpContainer/BoxContainer/PointsContainer"]
+layout_mode = 2
+theme = ExtResource("5_hqymr")
+theme_override_font_sizes/font_size = 24
+text = "/"
+horizontal_alignment = 1
+
+[node name="TotalPointsLabel" type="Label" parent="LevelUpContainer/BoxContainer/PointsContainer"]
+custom_minimum_size = Vector2(28, 0)
+layout_mode = 2
+theme = ExtResource("5_hqymr")
+theme_override_font_sizes/font_size = 24
+text = "0"
+horizontal_alignment = 1
+
+[node name="ColorRect" type="ColorRect" parent="LevelUpContainer/BoxContainer"]
+custom_minimum_size = Vector2(2, 2)
+layout_mode = 2
+color = Color(0.470588, 0, 0, 0.501961)
+
+[node name="HSeparator" type="HSeparator" parent="LevelUpContainer/BoxContainer"]
+modulate = Color(0, 0, 0, 0)
+custom_minimum_size = Vector2(0, 6)
+layout_mode = 2
+
+[node name="StrenghtInputContainer" type="HBoxContainer" parent="LevelUpContainer/BoxContainer" node_paths=PackedStringArray("minus_button", "plus_button", "current_value_lable", "goto_value_lable")]
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+script = ExtResource("6_ivxcj")
+minus_button = NodePath("MinusButtonControl/MinusButton")
+plus_button = NodePath("PlusButtonControl/PlusButton")
+current_value_lable = NodePath("CurValLabel")
+goto_value_lable = NodePath("NewValLabel")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="LevelUpContainer/BoxContainer/StrenghtInputContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="LevelUpContainer/BoxContainer/StrenghtInputContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("7_ysvkh")
+expand_mode = 3
+
+[node name="NameLabel" type="Label" parent="LevelUpContainer/BoxContainer/StrenghtInputContainer/HBoxContainer"]
+self_modulate = Color(0.498039, 0, 0, 1)
+custom_minimum_size = Vector2(44, 0)
+layout_mode = 2
+size_flags_vertical = 1
+theme = ExtResource("8_m4s56")
+theme_override_font_sizes/font_size = 32
+text = "tr:"
+vertical_alignment = 2
+
+[node name="MinusButtonControl" type="Control" parent="LevelUpContainer/BoxContainer/StrenghtInputContainer"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+
+[node name="MinusButton" type="TextureButton" parent="LevelUpContainer/BoxContainer/StrenghtInputContainer/MinusButtonControl"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+offset_right = 40.0
+offset_bottom = 40.0
+texture_normal = ExtResource("9_rqaak")
+texture_pressed = ExtResource("10_e1k1q")
+stretch_mode = 0
+
+[node name="CurValLabel" type="Label" parent="LevelUpContainer/BoxContainer/StrenghtInputContainer"]
+custom_minimum_size = Vector2(56, 0)
+layout_mode = 2
+size_flags_vertical = 1
+theme = ExtResource("8_m4s56")
+theme_override_colors/font_color = Color(0.281187, 0.281187, 0.281187, 1)
+theme_override_font_sizes/font_size = 32
+text = "100"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="ColorRect" type="ColorRect" parent="LevelUpContainer/BoxContainer/StrenghtInputContainer/CurValLabel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -2.0
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0.470588, 0, 0, 1)
+
+[node name="GoesToLabel" type="Label" parent="LevelUpContainer/BoxContainer/StrenghtInputContainer"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+size_flags_vertical = 1
+theme = ExtResource("8_m4s56")
+theme_override_font_sizes/font_size = 32
+text = ">"
+vertical_alignment = 2
+
+[node name="NewValLabel" type="Label" parent="LevelUpContainer/BoxContainer/StrenghtInputContainer"]
+self_modulate = Color(0.498039, 0, 0, 1)
+custom_minimum_size = Vector2(56, 0)
+layout_mode = 2
+size_flags_vertical = 1
+theme = ExtResource("8_m4s56")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 32
+text = "100"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="ColorRect" type="ColorRect" parent="LevelUpContainer/BoxContainer/StrenghtInputContainer/NewValLabel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -2.0
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0.470588, 0, 0, 1)
+
+[node name="PlusButtonControl" type="Control" parent="LevelUpContainer/BoxContainer/StrenghtInputContainer"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+
+[node name="PlusButton" type="TextureButton" parent="LevelUpContainer/BoxContainer/StrenghtInputContainer/PlusButtonControl"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+offset_right = 40.0
+offset_bottom = 40.0
+texture_normal = ExtResource("11_xm1ku")
+texture_pressed = ExtResource("12_ey7bw")
+stretch_mode = 0
+
+[node name="HSeparator2" type="HSeparator" parent="LevelUpContainer/BoxContainer"]
+modulate = Color(0, 0, 0, 0)
+custom_minimum_size = Vector2(0, 6)
+layout_mode = 2
+
+[node name="StrengtStatsContainer" type="FlowContainer" parent="LevelUpContainer/BoxContainer"]
+custom_minimum_size = Vector2(410, 0)
+layout_mode = 2
+theme_override_constants/h_separation = 0
+alignment = 1
+
+[node name="StatChangeContainer" type="BoxContainer" parent="LevelUpContainer/BoxContainer/StrengtStatsContainer" node_paths=PackedStringArray("goto_stat_label", "icon", "value_label")]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+alignment = 1
+script = ExtResource("13_oj6pj")
+goto_stat_label = NodePath("GotoStatLabel")
+icon = NodePath("IconRect")
+value_label = NodePath("CurStatLabel")
+
+[node name="IconRect" type="TextureRect" parent="LevelUpContainer/BoxContainer/StrengtStatsContainer/StatChangeContainer"]
+layout_mode = 2
+texture = ExtResource("14_bykvb")
+expand_mode = 3
+
+[node name="CurStatLabel" type="Label" parent="LevelUpContainer/BoxContainer/StrengtStatsContainer/StatChangeContainer"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+theme = ExtResource("8_m4s56")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 24
+text = "000"
+horizontal_alignment = 1
+
+[node name="SeperatorLabel" type="Label" parent="LevelUpContainer/BoxContainer/StrengtStatsContainer/StatChangeContainer"]
+layout_mode = 2
+theme = ExtResource("8_m4s56")
+theme_override_colors/font_color = Color(0.237539, 0.237539, 0.237539, 1)
+theme_override_font_sizes/font_size = 18
+text = " > "
+horizontal_alignment = 1
+
+[node name="GotoStatLabel" type="Label" parent="LevelUpContainer/BoxContainer/StrengtStatsContainer/StatChangeContainer"]
+modulate = Color(0, 0, 0, 1)
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+theme = ExtResource("8_m4s56")
+theme_override_font_sizes/font_size = 24
+text = "000"
+horizontal_alignment = 1
+
+[node name="ColorRect2" type="ColorRect" parent="LevelUpContainer/BoxContainer"]
+custom_minimum_size = Vector2(2, 2)
+layout_mode = 2
+color = Color(0.470588, 0, 0, 0.501961)
+
+[node name="HSeparator3" type="HSeparator" parent="LevelUpContainer/BoxContainer"]
+modulate = Color(0, 0, 0, 0)
+custom_minimum_size = Vector2(0, 6)
+layout_mode = 2
+
+[node name="AgilityInputContainer" type="HBoxContainer" parent="LevelUpContainer/BoxContainer" node_paths=PackedStringArray("minus_button", "plus_button", "current_value_lable", "goto_value_lable")]
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+script = ExtResource("6_ivxcj")
+minus_button = NodePath("MinusButtonControl/MinusButton")
+plus_button = NodePath("PlusButtonControl/PlusButton")
+current_value_lable = NodePath("CurValLabel")
+goto_value_lable = NodePath("NewValLabel")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="LevelUpContainer/BoxContainer/AgilityInputContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="LevelUpContainer/BoxContainer/AgilityInputContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("15_purgl")
+expand_mode = 3
+
+[node name="NameLabel" type="Label" parent="LevelUpContainer/BoxContainer/AgilityInputContainer/HBoxContainer"]
+self_modulate = Color(0.498039, 0, 0, 1)
+custom_minimum_size = Vector2(44, 0)
+layout_mode = 2
+size_flags_vertical = 1
+theme = ExtResource("8_m4s56")
+theme_override_font_sizes/font_size = 32
+text = "gi :"
+vertical_alignment = 2
+
+[node name="MinusButtonControl" type="Control" parent="LevelUpContainer/BoxContainer/AgilityInputContainer"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+
+[node name="MinusButton" type="TextureButton" parent="LevelUpContainer/BoxContainer/AgilityInputContainer/MinusButtonControl"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+offset_right = 40.0
+offset_bottom = 40.0
+texture_normal = ExtResource("9_rqaak")
+texture_pressed = ExtResource("10_e1k1q")
+stretch_mode = 0
+
+[node name="CurValLabel" type="Label" parent="LevelUpContainer/BoxContainer/AgilityInputContainer"]
+custom_minimum_size = Vector2(56, 0)
+layout_mode = 2
+size_flags_vertical = 1
+theme = ExtResource("8_m4s56")
+theme_override_colors/font_color = Color(0.281187, 0.281187, 0.281187, 1)
+theme_override_font_sizes/font_size = 32
+text = "100"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="ColorRect" type="ColorRect" parent="LevelUpContainer/BoxContainer/AgilityInputContainer/CurValLabel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -2.0
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0.470588, 0, 0, 1)
+
+[node name="GoesToLabel" type="Label" parent="LevelUpContainer/BoxContainer/AgilityInputContainer"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+size_flags_vertical = 1
+theme = ExtResource("8_m4s56")
+theme_override_font_sizes/font_size = 32
+text = ">"
+vertical_alignment = 2
+
+[node name="NewValLabel" type="Label" parent="LevelUpContainer/BoxContainer/AgilityInputContainer"]
+self_modulate = Color(0.498039, 0, 0, 1)
+custom_minimum_size = Vector2(56, 0)
+layout_mode = 2
+size_flags_vertical = 1
+theme = ExtResource("8_m4s56")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 32
+text = "100"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="ColorRect" type="ColorRect" parent="LevelUpContainer/BoxContainer/AgilityInputContainer/NewValLabel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -2.0
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0.470588, 0, 0, 1)
+
+[node name="PlusButtonControl" type="Control" parent="LevelUpContainer/BoxContainer/AgilityInputContainer"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+
+[node name="PlusButton" type="TextureButton" parent="LevelUpContainer/BoxContainer/AgilityInputContainer/PlusButtonControl"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+offset_right = 40.0
+offset_bottom = 40.0
+texture_normal = ExtResource("11_xm1ku")
+texture_pressed = ExtResource("12_ey7bw")
+stretch_mode = 0
+
+[node name="HSeparator4" type="HSeparator" parent="LevelUpContainer/BoxContainer"]
+modulate = Color(0, 0, 0, 0)
+custom_minimum_size = Vector2(0, 6)
+layout_mode = 2
+
+[node name="AgilityStatsContainer" type="FlowContainer" parent="LevelUpContainer/BoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="ColorRect3" type="ColorRect" parent="LevelUpContainer/BoxContainer"]
+custom_minimum_size = Vector2(2, 2)
+layout_mode = 2
+color = Color(0.470588, 0, 0, 0.501961)
+
+[node name="HSeparator6" type="HSeparator" parent="LevelUpContainer/BoxContainer"]
+modulate = Color(0, 0, 0, 0)
+custom_minimum_size = Vector2(0, 6)
+layout_mode = 2
+
+[node name="IntelInputContainer" type="HBoxContainer" parent="LevelUpContainer/BoxContainer" node_paths=PackedStringArray("minus_button", "plus_button", "current_value_lable", "goto_value_lable")]
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+script = ExtResource("6_ivxcj")
+minus_button = NodePath("MinusButtonControl/MinusButton")
+plus_button = NodePath("PlusButtonControl/PlusButton")
+current_value_lable = NodePath("CurValLabel")
+goto_value_lable = NodePath("NewValLabel")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="LevelUpContainer/BoxContainer/IntelInputContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="LevelUpContainer/BoxContainer/IntelInputContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("16_dt8dp")
+expand_mode = 3
+
+[node name="NameLabel" type="Label" parent="LevelUpContainer/BoxContainer/IntelInputContainer/HBoxContainer"]
+self_modulate = Color(0.498039, 0, 0, 1)
+custom_minimum_size = Vector2(44, 0)
+layout_mode = 2
+size_flags_vertical = 1
+theme = ExtResource("8_m4s56")
+theme_override_font_sizes/font_size = 32
+text = "nt:"
+vertical_alignment = 2
+
+[node name="MinusButtonControl" type="Control" parent="LevelUpContainer/BoxContainer/IntelInputContainer"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+
+[node name="MinusButton" type="TextureButton" parent="LevelUpContainer/BoxContainer/IntelInputContainer/MinusButtonControl"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+offset_right = 40.0
+offset_bottom = 40.0
+texture_normal = ExtResource("9_rqaak")
+texture_pressed = ExtResource("10_e1k1q")
+stretch_mode = 0
+
+[node name="CurValLabel" type="Label" parent="LevelUpContainer/BoxContainer/IntelInputContainer"]
+custom_minimum_size = Vector2(56, 0)
+layout_mode = 2
+size_flags_vertical = 1
+theme = ExtResource("8_m4s56")
+theme_override_colors/font_color = Color(0.281187, 0.281187, 0.281187, 1)
+theme_override_font_sizes/font_size = 32
+text = "100"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="ColorRect" type="ColorRect" parent="LevelUpContainer/BoxContainer/IntelInputContainer/CurValLabel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -2.0
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0.470588, 0, 0, 1)
+
+[node name="GoesToLabel" type="Label" parent="LevelUpContainer/BoxContainer/IntelInputContainer"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+size_flags_vertical = 1
+theme = ExtResource("8_m4s56")
+theme_override_font_sizes/font_size = 32
+text = ">"
+vertical_alignment = 2
+
+[node name="NewValLabel" type="Label" parent="LevelUpContainer/BoxContainer/IntelInputContainer"]
+self_modulate = Color(0.498039, 0, 0, 1)
+custom_minimum_size = Vector2(56, 0)
+layout_mode = 2
+size_flags_vertical = 1
+theme = ExtResource("8_m4s56")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 32
+text = "100"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="ColorRect" type="ColorRect" parent="LevelUpContainer/BoxContainer/IntelInputContainer/NewValLabel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -2.0
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0.470588, 0, 0, 1)
+
+[node name="PlusButtonControl" type="Control" parent="LevelUpContainer/BoxContainer/IntelInputContainer"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+
+[node name="PlusButton" type="TextureButton" parent="LevelUpContainer/BoxContainer/IntelInputContainer/PlusButtonControl"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+offset_right = 40.0
+offset_bottom = 40.0
+texture_normal = ExtResource("11_xm1ku")
+texture_pressed = ExtResource("12_ey7bw")
+stretch_mode = 0
+
+[node name="HSeparator5" type="HSeparator" parent="LevelUpContainer/BoxContainer"]
+modulate = Color(0, 0, 0, 0)
+custom_minimum_size = Vector2(0, 6)
+layout_mode = 2
+
+[node name="IntelegenceStatsContainer" type="FlowContainer" parent="LevelUpContainer/BoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="ColorRect4" type="ColorRect" parent="LevelUpContainer/BoxContainer"]
+custom_minimum_size = Vector2(2, 2)
+layout_mode = 2
+color = Color(0.470588, 0, 0, 0.501961)
+
+[node name="HSeparator7" type="HSeparator" parent="LevelUpContainer/BoxContainer"]
+modulate = Color(0, 0, 0, 0)
+custom_minimum_size = Vector2(0, 6)
+layout_mode = 2
+
+[node name="WisdomInputContainer" type="HBoxContainer" parent="LevelUpContainer/BoxContainer" node_paths=PackedStringArray("minus_button", "plus_button", "current_value_lable", "goto_value_lable")]
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+script = ExtResource("6_ivxcj")
+minus_button = NodePath("MinusButtonControl/MinusButton")
+plus_button = NodePath("PlusButtonControl/PlusButton")
+current_value_lable = NodePath("CurValLabel")
+goto_value_lable = NodePath("NewValLabel")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="LevelUpContainer/BoxContainer/WisdomInputContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="LevelUpContainer/BoxContainer/WisdomInputContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("17_8pem1")
+expand_mode = 3
+
+[node name="NameLabel" type="Label" parent="LevelUpContainer/BoxContainer/WisdomInputContainer/HBoxContainer"]
+self_modulate = Color(0.498039, 0, 0, 1)
+custom_minimum_size = Vector2(44, 0)
+layout_mode = 2
+size_flags_vertical = 1
+theme = ExtResource("8_m4s56")
+theme_override_font_sizes/font_size = 32
+text = "is :"
+vertical_alignment = 2
+
+[node name="MinusButtonControl" type="Control" parent="LevelUpContainer/BoxContainer/WisdomInputContainer"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+
+[node name="MinusButton" type="TextureButton" parent="LevelUpContainer/BoxContainer/WisdomInputContainer/MinusButtonControl"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+offset_right = 40.0
+offset_bottom = 40.0
+texture_normal = ExtResource("9_rqaak")
+texture_pressed = ExtResource("10_e1k1q")
+stretch_mode = 0
+
+[node name="CurValLabel" type="Label" parent="LevelUpContainer/BoxContainer/WisdomInputContainer"]
+custom_minimum_size = Vector2(56, 0)
+layout_mode = 2
+size_flags_vertical = 1
+theme = ExtResource("8_m4s56")
+theme_override_colors/font_color = Color(0.281187, 0.281187, 0.281187, 1)
+theme_override_font_sizes/font_size = 32
+text = "100"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="ColorRect" type="ColorRect" parent="LevelUpContainer/BoxContainer/WisdomInputContainer/CurValLabel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -2.0
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0.470588, 0, 0, 1)
+
+[node name="GoesToLabel" type="Label" parent="LevelUpContainer/BoxContainer/WisdomInputContainer"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+size_flags_vertical = 1
+theme = ExtResource("8_m4s56")
+theme_override_font_sizes/font_size = 32
+text = ">"
+vertical_alignment = 2
+
+[node name="NewValLabel" type="Label" parent="LevelUpContainer/BoxContainer/WisdomInputContainer"]
+self_modulate = Color(0.498039, 0, 0, 1)
+custom_minimum_size = Vector2(56, 0)
+layout_mode = 2
+size_flags_vertical = 1
+theme = ExtResource("8_m4s56")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 32
+text = "100"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="ColorRect" type="ColorRect" parent="LevelUpContainer/BoxContainer/WisdomInputContainer/NewValLabel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -2.0
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0.470588, 0, 0, 1)
+
+[node name="PlusButtonControl" type="Control" parent="LevelUpContainer/BoxContainer/WisdomInputContainer"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+
+[node name="PlusButton" type="TextureButton" parent="LevelUpContainer/BoxContainer/WisdomInputContainer/PlusButtonControl"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+offset_right = 40.0
+offset_bottom = 40.0
+texture_normal = ExtResource("11_xm1ku")
+texture_pressed = ExtResource("12_ey7bw")
+stretch_mode = 0
+
+[node name="HSeparator8" type="HSeparator" parent="LevelUpContainer/BoxContainer"]
+modulate = Color(0, 0, 0, 0)
+custom_minimum_size = Vector2(0, 6)
+layout_mode = 2
+
+[node name="WisdomStatsContainer" type="FlowContainer" parent="LevelUpContainer/BoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="LevelUpContainer/BoxContainer"]
+layout_mode = 2
+
+[node name="ConfirmButton" type="Control" parent="LevelUpContainer/BoxContainer/HBoxContainer" node_paths=PackedStringArray("label", "background", "button")]
+custom_minimum_size = Vector2(64, 48)
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("18_vbplr")
+label = NodePath("Label")
+background = NodePath("NinePatchRect")
+button = NodePath("Button")
+text = "Confirm"
+default_texture = ExtResource("19_gokup")
+pressed_texture = ExtResource("20_vv1bt")
+
+[node name="Label" type="Label" parent="LevelUpContainer/BoxContainer/HBoxContainer/ConfirmButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 8
+theme = ExtResource("4_hcvmt")
+theme_override_font_sizes/font_size = 24
+text = "Confirm"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NinePatchRect" type="NinePatchRect" parent="LevelUpContainer/BoxContainer/HBoxContainer/ConfirmButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("19_gokup")
+patch_margin_left = 6
+patch_margin_top = 6
+patch_margin_right = 6
+patch_margin_bottom = 6
+
+[node name="Button" type="Button" parent="LevelUpContainer/BoxContainer/HBoxContainer/ConfirmButton"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" type="Control" parent="LevelUpContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="ExitButton" type="TextureRect" parent="LevelUpContainer/Control"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -60.0
+offset_top = 11.0
+offset_right = -12.0
+offset_bottom = 59.0
+grow_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource("3_d3hu7")
+
+[node name="Button" type="Button" parent="LevelUpContainer/Control/ExitButton"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

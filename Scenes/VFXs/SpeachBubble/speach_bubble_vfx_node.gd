@@ -1,6 +1,6 @@
 @tool
 class_name SpeachBubbleVfxNode
-extends VfxNode
+extends BaseVfxNode
 
 enum GrowDirections {Left, Center, Right}
 enum STATES { Hidden, Growing, Printing, Showing, Unprinting, Shrinking}
@@ -146,6 +146,7 @@ var _letter_timer:float
 func _ready() -> void:
 	if Engine.is_editor_hint():
 		return
+	super()
 	_readyed = true
 	self.state = STATES.Hidden
 	if showing:
@@ -157,8 +158,6 @@ func _ready() -> void:
 		speach_bubble_background.position = Vector2(-28/ 2.0, -speach_bubble_background.size.y-5)
 	if grow_direction == GrowDirections.Right:
 		speach_bubble_background.position = Vector2(-28-3, -speach_bubble_background.size.y-3)
-	if _delayed_start:
-		start_vfx()
 
 func start_vfx():
 	return
@@ -228,15 +227,6 @@ func _process(delta: float) -> void:
 			return
 	if Engine.is_editor_hint():
 		return
-	if _has_animation and !animation.is_playing():
-		self.queue_free()
-	if _flash_text_value and animation_half_way and not _flash_text_shown:
-			CombatRootControl.Instance.create_flash_text(self.get_parent(), _flash_text_value, _flash_text_color)
-			_flash_text_shown = true
-
-func set_vfx_data(data:VfxData, extra_data:Dictionary):
-	
-	pass
 
 func set_block_data(block_data:Dictionary):
 	var grow_direction_str = block_data.get("GrowDirection", "Center")

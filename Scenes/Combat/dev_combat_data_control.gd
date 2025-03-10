@@ -2,6 +2,7 @@ extends Control
 
 @export var build_ques_button:Button
 @export var show_statbars_button:Button
+@export var fill_ammo_button:Button
 @onready var timer_label:Label = $VBoxContainer/TimerContainer/Label
 
 @export var dev_map_display:Node2D
@@ -10,6 +11,7 @@ extends Control
 func _ready() -> void:
 	build_ques_button.pressed.connect(force_build_ques)
 	show_statbars_button.pressed.connect(_toggle_stat_bars)
+	fill_ammo_button.pressed.connect(_fill_ammo)
 	
 	pass # Replace with function body.
 
@@ -41,3 +43,12 @@ func force_build_ques():
 		#var actor = que.actor
 		##if not actor.is_player:
 		#actor.auto_build_que(0)
+
+func _fill_ammo():
+	for actor_id in StoryState._player_ids:
+		if actor_id == null:
+			continue
+		var actor = CombatRootControl.Instance.GameState.get_actor(actor_id)
+		for action_key in actor.pages.list_action_keys():
+			actor.Que.fill_page_ammo(action_key)
+			

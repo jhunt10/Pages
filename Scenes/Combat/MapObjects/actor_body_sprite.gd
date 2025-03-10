@@ -25,6 +25,14 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 
+func get_sprite_center()->Vector2:
+	var sprite_bounds = get_sprite_bounds()
+	var texture_size = self.get_rect().size
+	var center = sprite_bounds.get_center()
+	var center_x = center.x - (texture_size.x / 2)
+	var center_y = center.y - (texture_size.y / 2)
+	return Vector2(center_x, center_y)
+
 func get_sprite_bounds()->Rect2i:
 	var sprite_text = self.texture
 	var size = sprite_text.get_size()

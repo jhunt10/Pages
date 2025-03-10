@@ -10,7 +10,11 @@ var _stats_dirty = true
 var _actor:BaseActor
 var _base_stats:Dictionary = {}
 var _cached_stats:Dictionary = {}
-var _cached_mods_names:Dictionary = {}
+var _cached_mods:Dictionary = {}
+
+# Quick temparary mods with no source (used for level up preview)
+var _temp_stat_mods:Array = []
+var attribute_levels:Dictionary = {}
 
 ## Stats which used as resources (Health, Mana, ...)
 #var _bar_stats:Dictionary = {}
@@ -21,19 +25,39 @@ var current_health:int:
 	get: return get_bar_stat(HealthKey)
 var max_health:int: 
 	get: return get_bar_stat_max(HealthKey)
-var level:int:
-	get: return _cached_stats.get('Level',-1)
 
 func _init(actor:BaseActor, data:Dictionary) -> void:
 	_actor = actor
 	# Parse Stat Data
 	for key:String in data.keys():
-		_base_stats[key] = data[key]
+		if key == 'StartingAttributeLevels':
+			attribute_levels = data[key].duplicate()
+		else:
+			_base_stats[key] = data[key]
 	# Actor handles signles between item holders
 	#actor.equipment_changed.connect(dirty_stats)
 	actor.turn_starting.connect(_on_actor_turn_start)
 	actor.turn_ended.connect(_on_actor_turn_end)
 	actor.round_ended.connect(_on_actor_round_end)
+
+func build_save_data()->Dictionary:
+	var out_dict = {}
+	out_dict[StatHelper.Level] = get_stat(StatHelper.Level)
+	out_dict[StatHelper.Experience] = get_stat(StatHelper.Experience, 0)
+	out_dict['AttributeLevels'] = {
+		StatHelper.Strength: get_stat(StatHelper.Strength),
+		StatHelper.Agility: get_stat(StatHelper.Agility),
+		StatHelper.Intelligence: get_stat(StatHelper.Intelligence),
+		StatHelper.Wisdom: get_stat(StatHelper.Wisdom),
+	}
+	return out_dict
+
+func load_data(stat_data:Dictionary):
+	self._base_stats[StatHelper.Level] = stat_data.get(StatHelper.Level, 0)
+	self._base_stats[StatHelper.Experience] = stat_data.get(StatHelper.Experience, 0)
+	var loaded_attribute_levels = stat_data.get("AttributeLevels", {})
+	for attribute in loaded_attribute_levels.keys():
+		attribute_levels[attribute] = loaded_attribute_levels.get(attribute, 0)
 
 func dirty_stats():
 	if LOGGING: print("Stats Dirty")
@@ -52,6 +76,10 @@ func get_stat(stat_name:String, default:float=0):
 func get_base_stat(stat_name:String, default:int=0):
 	return _base_stats.get(stat_name, default)
 
+func get_leveled_attribute(stat_name:String):
+	var base = _base_stats.get(stat_name, 0)
+	return base + attribute_levels.get(stat_name, 0)
+
 
 func base_damge_from_stat(stat_name):
 	if !stat_name:
@@ -60,10 +88,30 @@ func base_damge_from_stat(stat_name):
 	return base_stat_val
 
 func get_mod_names_for_stat(stat_name:String)->Array:
-	if _cached_mods_names.keys().has(stat_name):
-		return _cached_mods_names[stat_name]
-	return []
+	var out_list = []
+	for mod:BaseStatMod in _cached_mods.get(stat_name, []):
+		var display_name = ''
+		if mod.mod_type	 == BaseStatMod.ModTypes.Set:
+			display_name = "=" + str(mod.value) + " " + mod.display_name
+		elif mod.mod_type	 == BaseStatMod.ModTypes.Add:
+			display_name = "+" + str(mod.value) + " " + mod.display_name
+		elif mod.mod_type == BaseStatMod.ModTypes.AddStat:
+			var short_name = StatHelper.get_stat_abbr(mod.dep_stat_name)
+			display_name = "+" + str(short_name) + "x" + str(mod.value) + " " + mod.display_name
+		else:
+			display_name = mod.display_name
+		if display_name != '':
+			out_list.append(display_name)
+	return out_list
 
+func get_stats_dependant_on_attribute(attribute_name:String)->Array:
+	var out_list = []
+	for stat_name in _cached_mods.keys():
+		for mod:BaseStatMod in _cached_mods[stat_name]:
+			
+			if mod.dep_stat_name == attribute_name:
+				out_list.append(mod.stat_name)
+	return out_list
 
 func get_attacking_stat(stat_name:String, source_tag_chain:SourceTagChain, default):
 	return default
@@ -73,6 +121,52 @@ func get_damage_resistance(damage_type:DamageEvent.DamageTypes)->float:
 	var int_val = get_stat("Resistance:" + str(type_str), 0)
 	return float(int_val) / 100.0
 
+# -----------------------------------------------------------------
+#					Level Up
+# -----------------------------------------------------------------
+
+func add_temp_mod(mod:BaseStatMod):
+	_temp_stat_mods.append(mod)
+
+func clear_temp_mods():
+	_temp_stat_mods.clear()
+	_stats_dirty = true
+
+func add_experiance(value:int):
+	if not _base_stats.has(StatHelper.Experience):
+		_base_stats[StatHelper.Experience] = 0
+	_base_stats[StatHelper.Experience] += value
+	_cached_stats[StatHelper.Experience] = _base_stats[StatHelper.Experience]
+
+func get_exp_to_next_level(current_level:int=-1)->int:
+	if current_level < 0:
+		current_level = get_stat(StatHelper.Level)
+	return 100 + (100 * current_level) + (50 * (current_level - 1))
+
+func can_level_up()->bool:
+	var required = get_exp_to_next_level()
+	if not _base_stats.has(StatHelper.Experience):
+		return false
+	return required < _base_stats[StatHelper.Experience]
+
+func get_level_for_exp(total_exp:int)->int:
+	var remaining = total_exp
+	for level in range(100):
+		var required = get_exp_to_next_level(level)
+		if required > remaining:
+			return level
+		remaining -= required
+	return 100
+
+func apply_level_up(new_level:int, remaining_exp:int, add_att_levels:Dictionary):
+	_base_stats[StatHelper.Level] = new_level
+	_base_stats[StatHelper.Experience] = remaining_exp
+	attribute_levels[StatHelper.Strength] = add_att_levels.get(StatHelper.Strength)
+	attribute_levels[StatHelper.Agility] = add_att_levels.get(StatHelper.Agility)
+	attribute_levels[StatHelper.Intelligence] = add_att_levels.get(StatHelper.Intelligence)
+	attribute_levels[StatHelper.Wisdom] = add_att_levels.get(StatHelper.Wisdom)
+	recache_stats()
+	
 
 # -----------------------------------------------------------------
 #					Bar Stats
@@ -158,15 +252,18 @@ func _calc_cache_stats():
 	if LOGGING: 
 		print("#Caching Stats for: %s" % _actor.ActorKey)
 	
-	_cached_mods_names.clear()
+	_cached_mods.clear()
 	# Aggregate all the mods together by stat_name, then type
 	var agg_mods = {}
 	var set_stats = {}
 	var key_depends_on_vals = {}
 	var key_is_dependant_of_vals = {}
+	
 	var mods_list = _actor.effects.get_stat_mods()
+	mods_list.append_array(_temp_stat_mods)
 	mods_list.append_array(_actor.equipment.get_passive_stat_mods())
 	mods_list.append_array(_actor.pages.get_passive_stat_mods())
+	
 	for mod:BaseStatMod in mods_list:
 		if LOGGING: print("# Found Mod '", mod.display_name, " for: %s" % _actor.ActorKey)
 		
@@ -175,10 +272,11 @@ func _calc_cache_stats():
 			agg_mods[mod.stat_name] = {}
 		if not agg_mods[mod.stat_name].keys().has(mod.mod_type): # Add mod type to agg mods
 			agg_mods[mod.stat_name][mod.mod_type] = []
-		if not _cached_mods_names.keys().has(mod.stat_name): # Add stat name to mod list
-			_cached_mods_names[mod.stat_name] = []
+		if not _cached_mods.keys().has(mod.stat_name): # Add stat name to mod list
+			_cached_mods[mod.stat_name] = []
 		
 		
+		_cached_mods[mod.stat_name].append(mod)
 		if mod.mod_type	 == BaseStatMod.ModTypes.Set:
 			if set_stats.keys().has(mod.stat_name):
 				printerr("StatHolder._calc_cache_stats: Multiple 'Set' mods found on stat '%s'." % [mod.stat_name])
@@ -191,7 +289,6 @@ func _calc_cache_stats():
 					set_stats[mod.stat_name] = 0
 			agg_mods[mod.stat_name][mod.mod_type].append(mod.value)
 			var display_name = "+" + str(mod.value) + " " + mod.display_name
-			_cached_mods_names[mod.stat_name].append(display_name)
 		elif mod.mod_type == BaseStatMod.ModTypes.AddStat:
 			var dep_stat_name = mod.dep_stat_name
 			if key_depends_on_vals.has(dep_stat_name) and key_depends_on_vals[dep_stat_name].has(mod.stat_name):
@@ -208,11 +305,10 @@ func _calc_cache_stats():
 				key_is_dependant_of_vals[dep_stat_name].append(mod.stat_name)
 			agg_mods[mod.stat_name][mod.mod_type].append({"DepStat": dep_stat_name, "Scale": mod.value})
 			var display_name = "+" + str(dep_stat_name) + "x" + str(mod.value) + " " + mod.display_name
-			_cached_mods_names[mod.stat_name].append(display_name)
 		else:
 			agg_mods[mod.stat_name][mod.mod_type].append(mod.value)
 			var display_name = "x" + str(mod.value) + " " + mod.display_name
-			_cached_mods_names[mod.stat_name].append(display_name)
+			
 		
 	if LOGGING: print("- Found: %s modded stats" % agg_mods.size())
 	
@@ -222,6 +318,9 @@ func _calc_cache_stats():
 		temp_stats[base_stat_name] = _base_stats[base_stat_name]
 	for set_stat_name in set_stats.keys():
 		temp_stats[set_stat_name] = set_stats[set_stat_name]
+	for attribute_name in attribute_levels.keys():
+		temp_stats[attribute_name] += attribute_levels[attribute_name]
+		
 	
 	# Add current values for bar stats
 	for stat_name:String in temp_stats.keys():

@@ -275,52 +275,18 @@ func create_new_missile_node(missile):
 	var new_node:MissileNode  = load("res://Scenes/Combat/MapObjects/missile_node.tscn").instantiate()
 	new_node.set_missile_data(missile)
 	MapController.add_missile_node(missile, new_node)
-	
-func create_damage_effect(target_actor:BaseActor, vfx_key:String, flash_number:int, source = null, color:Color=Color.RED):
-	var target_actor_node:ActorNode = MapController.actor_nodes.get(target_actor.Id, null)
-	if !target_actor_node:
-		printerr("Failed to find actor node for: %s" % [target_actor.Id])
-		return
-	var vfx_data = MainRootNode.vfx_libray.get_vfx_data(vfx_key)
-	if !vfx_data:
-		printerr("Failed to VFX with key: %s" % [vfx_key])
-		return
-	
-	var extra_data = {}
-	if vfx_data.match_source_dir and source is BaseActor:
-		var node = MapController.actor_nodes.get(source.Id)
-		if node:
-			extra_data['Direction'] = node.facing_dir
-	var vfx_node = MainRootNode.vfx_libray.create_vfx_node(vfx_data, extra_data)
-	if !vfx_node:
-		printerr("Failed to create VFX node from key '%s'." % [vfx_key])
-		return
-	target_actor_node.vfx_holder.add_vfx(vfx_node.vfx_id, vfx_node)
-	if flash_number >= 0:
-		if flash_number > 0 and vfx_node._data.shake_actor:
-			target_actor_node.play_shake()
-		vfx_node.add_flash_text(str(0-flash_number), color)
-	if flash_number < 0:
-		vfx_node.add_flash_text(str(0-flash_number), Color.GREEN)
-	vfx_node.start_vfx()
-
 
 func create_flash_text_on_actor(actor:BaseActor, value:String, color:Color):
 	var actor_node:ActorNode = MapController.actor_nodes[actor.Id]
-	create_flash_text(actor_node.vfx_holder, value, color)
+	actor_node.vfx_holder.flash_text_controller.add_flash_text(value, FlashTextController.FlashTextType.Normal_Dmg)
+	#create_flash_text(actor_node.vfx_holder, value, color)
 	
 
-func create_flash_text(parent_node:Node, value:String, color:Color):
-	var new_node:FlashTextControl  = load("res://Scenes/Combat/Effects/flash_text_control.tscn").instantiate()
-	new_node.set_values(value, color)
-	parent_node.add_child(new_node)
-
-func create_damage_number(actor:BaseActor, damage:int):
-	if damage < 0:
-		create_flash_text_on_actor(actor, "+"+str(abs(damage)), Color.DARK_GREEN)
-	else:
-		create_flash_text_on_actor(actor, "-"+str(damage), Color.DARK_RED)
-		
+#func create_flash_text(parent_node:Node, value:String, color:Color):
+	#var new_node:FlashTextControl  = load("res://Scenes/Combat/Effects/flash_text_control.tscn").instantiate()
+	#new_node.set_values(value, color)
+	#parent_node.add_child(new_node)
+	
 	
 func add_zone(zone:BaseZone):
 	var new_node:ZoneNode  = load("res://Scenes/zone_node.tscn").instantiate()
@@ -390,5 +356,4 @@ func get_next_player_index()->int:
 	while StoryState.get_player_id(next_index) == null and extra_check < 4:
 		extra_check += 1
 		next_index = (next_index + 1) % 4
-	printerr("GetNextIndex: %s | %s" % [_current_player_index, next_index])
 	return next_index

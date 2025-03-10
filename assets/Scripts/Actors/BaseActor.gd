@@ -142,9 +142,13 @@ func save_data()->Dictionary:
 	data['Pages'] = pages.build_save_data()
 	data['BagItems'] = items.build_save_data()
 	data['Equipment'] = equipment.build_save_data()
+	data['Stats'] = stats.build_dave_data()
 	return data
 
 func load_data(data:Dictionary):
+	var stat_data = data.get('Stats', {})
+	stats.load_data(stat_data)
+	
 	var equipment_data = data['Equipment']
 	data.erase('Equipment')
 	equipment.load_save_data(equipment_data)

@@ -1,9 +1,10 @@
 class_name AiHandler
 
+const LOGGING:bool = false
+
 static var astar:CustAStar
 ## Dictionary ActorKey to action_options_data
 static var cached_move_sets:Dictionary={}
-
 
 static func build_action_ques(clear_existing_ques:bool=false):
 	var init_game_state = CombatRootControl.Instance.GameState.duplicate()
@@ -71,9 +72,9 @@ static func build_action_ques(clear_existing_ques:bool=false):
 					if cost_datas[actor.Id].has(cost_key):
 						cost_datas[actor.Id][cost_key] -= cost_data[cost_key]
 		#last_turn_state = turn_state
-		print("Turn: %s" % [turn])
+		if LOGGING: print("Turn: %s" % [turn])
 		for actor in actors:
-			print("\t\t %s | %s" % [actor.Id, turn_state.get_actor_pos(actor)] )
+			if LOGGING: print("\t\t %s | %s" % [actor.Id, turn_state.get_actor_pos(actor)] )
 	pass
 
 static func _choose_page_for_actor(actor:BaseActor, game_state:GameStateData, bar_stats:Dictionary)->BaseAction:
@@ -88,7 +89,7 @@ static func _choose_page_for_actor(actor:BaseActor, game_state:GameStateData, ba
 		if not can_actor_pay_cost(actor, attack_action.CostData, bar_stats):
 			continue
 		if attack_key == "ThrowStone":
-			print("Test")
+			if LOGGING: print("Test")
 		# Get potential targets for attack Action
 		var attack_params =  attack_action.get_preview_target_params(actor)
 		var potential_targets = TargetingHelper.get_potential_target_actor_ids(attack_params, actor, game_state, [], current_pos) 
@@ -292,7 +293,7 @@ static func path_to_target(actor:BaseActor, start_pos:MapPos, target_pos:MapPos,
 			#continue
 		#if check_pos.to_vector2i() == target_pos.to_vector2i():
 			#continue
-		##print("Disabling Point: %s because %s " % [check_pos, check_actor.Id])
+		##if LOGGING: print("Disabling Point: %s because %s " % [check_pos, check_actor.Id])
 		#var path_index = _pos_to_index(check_pos, game_state)
 		#if astar.has_point(path_index):
 			#astar.set_point_disabled(path_index, true)

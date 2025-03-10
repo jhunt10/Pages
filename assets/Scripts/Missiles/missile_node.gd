@@ -5,8 +5,8 @@ extends Node2D
 #@onready var animation:AnimationPlayer = $AnimationPlayer
 
 var missile:BaseMissile
-var missile_effect_node:VfxNode
-var impact_effect_node:VfxNode
+var missile_effect_node:BaseVfxNode
+var impact_effect_node:BaseVfxNode
 
 func _ready() -> void:
 	if missile_effect_node:
@@ -18,13 +18,13 @@ func _ready() -> void:
 			#anidata.set_sprite_and_animation(missile_sprie, animation)
 
 func set_missile_data(missle):
-	missile = missle
+	self.missile = missle
 	missile.node = self
 	var vfx_data = missile.get_missile_vfx_data()
 	if not vfx_data:
 		printerr("missile_node: No Missile Vfx Data found")
 		return
-	missile_effect_node = MainRootNode.vfx_libray.create_vfx_node(vfx_data)
+	missile_effect_node = VfxHelper.create_missile_vfx_node(vfx_data.get("VfxKey", ""), vfx_data)
 	self.add_child(missile_effect_node)
 
 func sync_pos():
@@ -36,17 +36,19 @@ func sync_pos():
 	var pos = missile.get_position_for_frame(current_frame)
 	if pos:
 		self.position = pos
-		
-	var start_pos:Vector2 = missile._position_per_frame[0]
-	var end_pos:Vector2 = missile._position_per_frame[missile._position_per_frame.size() -1]
-	if missile_effect_node:
-		var angle = start_pos.direction_to(end_pos).angle() + (PI / 2)
-		missile_effect_node.rotation = angle
+	
+	if missile._position_per_frame.size() > 0:
+		var start_pos:Vector2 = missile._position_per_frame[0]
+		var end_pos:Vector2 = missile._position_per_frame[missile._position_per_frame.size() -1]
+		if missile_effect_node:
+			var angle = start_pos.direction_to(end_pos).angle() + (PI / 2)
+			missile_effect_node.rotation = angle
 
 func on_missile_reach_target():
 	if missile.has_impact_vfx():
 		self.position = missile.get_final_position()
-		impact_effect_node = MainRootNode.vfx_libray.create_vfx_node(missile.get_impact_vfx_data())
+		var impact_data = missile.get_impact_vfx_data()
+		impact_effect_node = VfxHelper.create_missile_vfx_node(impact_data.get("VfxKey", ""), impact_data)
 		if not impact_effect_node:
 			printerr("Failed to find impact effect for missile: %s" + missile.Id)
 			self.queue_free()

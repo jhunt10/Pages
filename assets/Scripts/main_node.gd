@@ -178,6 +178,14 @@ func open_character_sheet(_actor:BaseActor=null, parent_node=null)->CharacterMen
 	charsheet.set_actor(actor)
 	return charsheet
 
+
+func open_level_up_menu(actor:BaseActor):
+	var level_up_menu:LevelUpContainer = load("res://Scenes/Menus/LevelUpMenu/level_up_container.tscn").instantiate()
+	self.add_child(level_up_menu)
+	level_up_menu.set_actor(actor)
+	return level_up_menu
+	
+
 func open_page_menu(actor:BaseActor):
 	var page_menu = load("res://Scenes/Menus/PageQueMenu/page_que_menu.tscn").instantiate()
 	center_container.add_child(page_menu)

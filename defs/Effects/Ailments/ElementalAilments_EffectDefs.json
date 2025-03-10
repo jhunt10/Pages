@@ -8,6 +8,9 @@
                 "AtkStat": "Percent:PPR",
                 "BaseDamage": 0,
                 "DamageEffect": "SmallFire_DamageEffect",
+                "DamageEffectData":{
+                    "ShakeActor": false
+                },
                 "DamageType": "Fire",
                 "DamageVarient": 0,
                 "DefenseType": "None"
@@ -20,7 +23,7 @@
             "LargeIcon": "Sprites/BurnedIcon.png",
             "SmallIcon": "Sprites/BurnedIcon.png",
             "SnippetDesc": "Take Fire Damage at the End of Turn.",
-            "Tags": []
+            "Tags": ["DOT"]
         },
         "EffectKey": "AilmentBurned",
         "CanStack": true,
@@ -67,7 +70,7 @@
                 "BaseDamage": 0,
                 "DamageEffect": "SmallLightning_DamageEffect",
                 "DamageType": "Electric",
-                "DamageVarient": 2,
+                "DamageVarient": 0.4,
                 "DefenseType": "None"
             }
         },
@@ -78,7 +81,7 @@
             "LargeIcon": "Sprites/ShockedIcon.png",
             "SmallIcon": "Sprites/ShockedIcon.png",
             "SnippetDesc": "Deal Electric Damage to Self and adjacent Actors at the end of each Turn.",
-            "Tags": []
+            "Tags": ["DOT"]
         },
         "StatMods": {},
         "SubEffects": {
@@ -95,7 +98,7 @@
             },
             "Duration": {
                 "DurationType": "TurnEnd",
-                "DurationValue": 3,
+                "DurationValue": 50,
                 "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_Duration.gd"
             }
         }

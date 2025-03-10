@@ -42,6 +42,34 @@
                 "StatName": "Mass",
                 "DepStatName": "Strength",
                 "Value": 0.1
+            },
+            "EvasionScale": {
+                "DisplayName": "Base Stats",
+                "ModType": "AddStat",
+                "StatName": "Evasion",
+                "DepStatName": "Agility",
+                "Value": 0.01
+            },
+            "AccuracyScale": {
+                "DisplayName": "Base Stats",
+                "ModType": "AddStat",
+                "StatName": "Accuracy",
+                "DepStatName": "Agility",
+                "Value": 0.01
+            },
+            "PotencyScale": {
+                "DisplayName": "Base Stats",
+                "ModType": "AddStat",
+                "StatName": "Potency",
+                "DepStatName": "Intelligence",
+                "Value": 0.01
+            },
+            "ProtectionScale": {
+                "DisplayName": "Base Stats",
+                "ModType": "AddStat",
+                "StatName": "Protection",
+                "DepStatName": "Wisdom",
+                "Value": 0.01
             }
         }
     },
@@ -68,7 +96,7 @@
                 "DepStatName": "Strength",
                 "Value": 1
             },
-            "EvasionScale": {
+            "SpeedScale": {
                 "DisplayName": "Rogue",
                 "ModType": "AddStat",
                 "StatName": "Speed",

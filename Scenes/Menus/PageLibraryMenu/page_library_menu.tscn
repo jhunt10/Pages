@@ -103,7 +103,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="EntryGroupContainer" type="Container" parent="VBoxContainer/ScrollContainer/VBoxContainer" node_paths=PackedStringArray("title_label", "entries_container", "background", "inner_container")]
-custom_minimum_size = Vector2(24, 324)
+custom_minimum_size = Vector2(24, 314)
 layout_mode = 2
 script = ExtResource("5_1qkpm")
 title_label = NodePath("EntryGroupInnerContainer/TitlerLabel")
@@ -134,7 +134,7 @@ text = "Page Name"
 layout_mode = 2
 
 [node name="PageDetailsEntryContainer" type="Container" parent="VBoxContainer/ScrollContainer/VBoxContainer/EntryGroupContainer/EntryGroupInnerContainer/SubEntriesContainer" node_paths=PackedStringArray("icon_background", "icon", "title_label", "tags_label", "type_label", "details_container", "description_box", "plus_minus_button", "minus_icon", "plus_icon", "target_details_container", "target_type_label", "mini_range_display", "acc_pot_container", "accuracy_label", "potency_label", "effects_label", "ammo_label", "damage_entries_container", "stat_mods_container", "premade_stat_mod_label", "background", "inner_container")]
-custom_minimum_size = Vector2(24, 263)
+custom_minimum_size = Vector2(24, 179)
 layout_mode = 2
 script = ExtResource("1_0cs6p")
 icon_background = NodePath("PageInnerContainer/LineContainer/IconBackgroundTextureRect")

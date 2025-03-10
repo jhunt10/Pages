@@ -17,10 +17,13 @@ const BasicStats:Array = [
 	Awareness, CritChance, CritMod, BlockChance, BlockMod,
 	BlocksLOS
 ]
+const Level = "Level"
+const Experience = "Experience"
 const Strength = "Strength"
 const Agility = "Agility"
 const Intelligence = "Intelligence"
 const Wisdom = "Wisdom"
+const HealthMax = "BarMax:Health"
 const Health = "BarStat:Health"
 const Mass = "Mass"
 const Speed = "Speed"
@@ -73,6 +76,8 @@ const stat_abbrs:Dictionary = {
 
 const stat_icon_paths:Dictionary = {
 	"BarStat": "res://assets/Sprites/UI/SymbolIcons/BarStatSymbol.png",
+	Health: "res://assets/Sprites/UI/SymbolIcons/HealthSymbol.png",
+	HealthMax: "res://assets/Sprites/UI/SymbolIcons/HealthSymbol.png",
 	PhyAttack: "res://assets/Sprites/UI/SymbolIcons/PhyDamageSymbol.png",
 	MagAttack: "res://assets/Sprites/UI/SymbolIcons/MagDamageSymbol.png",
 	Strength: "res://assets/Sprites/UI/SymbolIcons/_S_Symbole.png",

@@ -20,7 +20,6 @@ func _init(params:TargetParameters, target_key:String, actor:BaseActor, game_sta
 		actor_pos = game_state.get_actor_pos(focused_actor)
 	exclude_targets = exclude
 	_los_mapping = params.get_valid_target_area(actor_pos)
-	printerr("ActorPoswe: %s" % [actor_pos.dir])
 	_potential_target_dictray = TargetingHelper.get_potential_coor_to_targets(target_params, focused_actor, game_state, exclude_targets, center_override)
 	_potential_target_count = TargetingHelper.dicarry_to_values(_potential_target_dictray).size()
 	
