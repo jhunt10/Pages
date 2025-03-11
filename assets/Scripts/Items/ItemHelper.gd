@@ -104,6 +104,7 @@ static func try_transfer_item_from_inventory_to_holder(item:BaseItem, holder:Bas
 		# EquipmentHolder controls own logic for removing weapons
 		if not (old_item is BaseWeaponEquipment and holder is EquipmentHolder): 
 			PlayerInventory.add_item(old_item)
+	holder._actor._on_equipment_holder_items_change()
 	return ""
 
 static func try_transfer_item_from_actor_to_inventory(item:BaseItem, actor:BaseActor)->String:
@@ -124,6 +125,7 @@ static func try_transfer_item_from_holder_to_inventory(item:BaseItem, holder:Bas
 	holder.remove_item(item.Id)
 	if not holder is EquipmentHolder:
 		PlayerInventory.add_item(item)
+	holder._actor._on_equipment_holder_items_change()
 	return ""
 
 static func swap_item_holder_slots(holder:BaseItemHolder, slot_a:int, slot_b:int, return_b_to_inventory:bool=true):

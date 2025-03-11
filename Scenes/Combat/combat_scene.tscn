@@ -624,8 +624,7 @@ text = "Main Menu"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="GameVictoryScreen" type="Control" parent="MoveableCamera2D/CanvasLayer/CombatUiControl" node_paths=PackedStringArray("rounds_label", "enemies_label", "money_label", "camp_button", "camp_button_label", "premade_pickup_page", "pickup_pages_container", "premade_pickup_item", "pickup_items_container")]
-visible = false
+[node name="GameVictoryScreen" type="Control" parent="MoveableCamera2D/CanvasLayer/CombatUiControl" node_paths=PackedStringArray("rounds_label", "enemies_label", "exp_label", "money_label", "camp_button", "camp_button_label", "premade_pickup_page", "pickup_pages_container", "premade_pickup_item", "pickup_items_container")]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -635,6 +634,7 @@ grow_vertical = 2
 script = ExtResource("26_1uhkb")
 rounds_label = NodePath("CenterContainer/VBoxContainer/HBoxContainer/RoundContainer/RoundValueLabel")
 enemies_label = NodePath("CenterContainer/VBoxContainer/HBoxContainer/EnemiesContainer/EnemiesValueLabel")
+exp_label = NodePath("CenterContainer/VBoxContainer/HBoxContainer/ExpContainer/ExpValueLabel")
 money_label = NodePath("CenterContainer/VBoxContainer/HBoxContainer/MoneyContainer/MoneyValueLabel2")
 camp_button = NodePath("CenterContainer/VBoxContainer/CampButton")
 camp_button_label = NodePath("CenterContainer/VBoxContainer/CampButton/NinePatchRect2/Label")
@@ -753,6 +753,27 @@ text = "8"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="ExpContainer" type="VBoxContainer" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/GameVictoryScreen/CenterContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="ExpTitleLabel" type="Label" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/GameVictoryScreen/CenterContainer/VBoxContainer/HBoxContainer/ExpContainer"]
+layout_mode = 2
+theme = ExtResource("27_3mvka")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 32
+text = "Exp:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ExpValueLabel" type="Label" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/GameVictoryScreen/CenterContainer/VBoxContainer/HBoxContainer/ExpContainer"]
+layout_mode = 2
+theme = ExtResource("27_3mvka")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 32
+text = "8"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="MoneyContainer" type="VBoxContainer" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/GameVictoryScreen/CenterContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 
@@ -787,7 +808,9 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="PickupPageContainer" type="HBoxContainer" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/GameVictoryScreen/CenterContainer/VBoxContainer/PickupPagesContainer"]
+custom_minimum_size = Vector2(384, 0)
 layout_mode = 2
+size_flags_horizontal = 4
 
 [node name="PageBackground" type="TextureRect" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/GameVictoryScreen/CenterContainer/VBoxContainer/PickupPagesContainer/PickupPageContainer"]
 custom_minimum_size = Vector2(32, 32)
@@ -859,7 +882,9 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="PickupItemContainer" type="HBoxContainer" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/GameVictoryScreen/CenterContainer/VBoxContainer/PickupItemsContainer"]
+custom_minimum_size = Vector2(384, 0)
 layout_mode = 2
+size_flags_horizontal = 4
 
 [node name="TextureRect" type="TextureRect" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/GameVictoryScreen/CenterContainer/VBoxContainer/PickupItemsContainer/PickupItemContainer"]
 custom_minimum_size = Vector2(32, 32)

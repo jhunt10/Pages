@@ -20,6 +20,10 @@ config/icon="res://icon.svg"
 LoadManager="*res://assets/Scripts/Ui/Loading/LoadManager.gd"
 StoryState="*res://assets/Scripts/Story/StoryState.gd"
 
+[display]
+
+window/stretch/mode="canvas_items"
+
 [input_devices]
 
 pointing/emulate_touch_from_mouse=true

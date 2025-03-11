@@ -28,7 +28,7 @@ func _init(act) -> void:
 	actor = act
 	actor.Que = self
 	_cache_que_info(true)
-	actor.stats.stats_changed.connect(_cache_que_info)
+	actor.stats_changed.connect(_cache_que_info)
 	QueExecData = QueExecutionData.new(self)
 
 func _cache_que_info(supress_emit:bool=false):

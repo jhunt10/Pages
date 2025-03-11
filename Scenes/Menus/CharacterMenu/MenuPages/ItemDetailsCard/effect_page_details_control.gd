@@ -24,6 +24,8 @@ func set_action(actor:BaseActor, page:BasePageItem):
 	_item = page
 	var stat_mods = page.get_load_val("StatMods", {})
 	for mod_data in stat_mods.values():
+		if mod_data.get("DisplayName", "") == "Base Stats":
+			continue
 		var new_mod:StatModLabelContainer = premade_stat_mod_label.duplicate()
 		new_mod.set_mod_data(mod_data)
 		stat_mods_container.add_child(new_mod)

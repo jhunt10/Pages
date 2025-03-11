@@ -45,10 +45,10 @@ func build_save_data()->Dictionary:
 	out_dict[StatHelper.Level] = get_stat(StatHelper.Level)
 	out_dict[StatHelper.Experience] = get_stat(StatHelper.Experience, 0)
 	out_dict['AttributeLevels'] = {
-		StatHelper.Strength: get_stat(StatHelper.Strength),
-		StatHelper.Agility: get_stat(StatHelper.Agility),
-		StatHelper.Intelligence: get_stat(StatHelper.Intelligence),
-		StatHelper.Wisdom: get_stat(StatHelper.Wisdom),
+		StatHelper.Strength: attribute_levels[StatHelper.Strength],
+		StatHelper.Agility: attribute_levels[StatHelper.Agility],
+		StatHelper.Intelligence: attribute_levels[StatHelper.Intelligence],
+		StatHelper.Wisdom: attribute_levels[StatHelper.Wisdom],
 	}
 	return out_dict
 
@@ -124,13 +124,6 @@ func get_damage_resistance(damage_type:DamageEvent.DamageTypes)->float:
 # -----------------------------------------------------------------
 #					Level Up
 # -----------------------------------------------------------------
-
-func add_temp_mod(mod:BaseStatMod):
-	_temp_stat_mods.append(mod)
-
-func clear_temp_mods():
-	_temp_stat_mods.clear()
-	_stats_dirty = true
 
 func add_experiance(value:int):
 	if not _base_stats.has(StatHelper.Experience):

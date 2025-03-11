@@ -117,6 +117,8 @@ func _create_stat_bar(stat_name):
 	
 func _on_start_round():
 	var actor_node = CombatRootControl.get_actor_node(actor.Id)
+	if ! actor_node:
+		return
 	actor_node.path_arrow.hide()
 	for bar:StatBarControl in _stat_bars.values():
 		bar.set_previewing_mode(false)

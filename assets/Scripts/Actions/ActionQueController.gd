@@ -149,7 +149,7 @@ func add_action_que(new_que:ActionQue):
 	if _action_ques.has(new_que.Id):
 		return
 	_action_ques[new_que.Id] = new_que
-	new_que.actor.stats.stats_changed.connect(_on_actor_stat_change.bind(new_que.actor))
+	new_que.actor.stats_changed.connect(_on_actor_stat_change.bind(new_que.actor))
 	
 	new_que.max_que_size_changed.connect(_organize_ques)
 	_organize_ques()

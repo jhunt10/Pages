@@ -3,6 +3,8 @@ extends Control
 
 const min_attribute_value = 8
 
+signal closed
+
 @export var exit_button:Button
 @export var confirm_button:PatchButton
 @export var current_level_label:Label
@@ -77,11 +79,12 @@ func _on_cancel():
 		_actor.stats.attribute_levels[StatHelper.Wisdom] = starting_values[StatHelper.Wisdom]
 		_actor.stats.recache_stats()
 		_actor = null
+	closed.emit()
 	self.queue_free()
 
 func _on_confirm():
-	_actor.stats.clear_temp_mods()
 	_actor.stats.apply_level_up(next_level, exp_after_level_up, add_values.duplicate())
+	closed.emit()
 	self.queue_free()
 
 func set_actor(actor:BaseActor):
@@ -146,12 +149,14 @@ func set_actor(actor:BaseActor):
 	for attribute in attribute_controller.keys():
 		var modded_stats = actor.stats.get_stats_dependant_on_attribute(attribute)
 		for stat_name in modded_stats:
-			var new_stat_label:LevelUp_StatChangeContainer = premade_stat_label.duplicate()
-			new_stat_label.set_stat_name(stat_name)
-			new_stat_label.set_stat_values(actor)
-			attribute_containers[attribute].add_child(new_stat_label)
-			stat_change_labels[attribute+":"+stat_name] = new_stat_label
-			new_stat_label.show()
+			var stat_label_key = attribute+":"+stat_name
+			if not stat_change_labels.has(stat_label_key):
+				var new_stat_label:LevelUp_StatChangeContainer = premade_stat_label.duplicate()
+				new_stat_label.set_stat_name(stat_name)
+				new_stat_label.set_stat_values(actor)
+				attribute_containers[attribute].add_child(new_stat_label)
+				stat_change_labels[stat_label_key] = new_stat_label
+				new_stat_label.show()
 
 func _spend_point(stat_name:String):
 	if points_left == 0:

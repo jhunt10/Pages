@@ -11,6 +11,7 @@ signal round_starting
 signal round_ended
 signal action_failed
 
+signal stats_changed
 signal equipment_changed
 signal bag_items_changed
 signal effacts_changed
@@ -68,6 +69,7 @@ func _init(key:String, load_path:String, def:Dictionary, id:String, data:Diction
 	ai_def = get_load_val("AiData", {})
 	sprite = ActorSprite.new(self)
 	stats = StatHolder.new(self, stat_data)
+	stats.stats_changed.connect(_on_stat_change)
 	effects = EffectHolder.new(self)
 	details = ObjectDetailsData.new(_def_load_path, _def.get("Details", {}))
 	equipment = EquipmentHolder.new(self)
@@ -109,7 +111,9 @@ func post_creation():
 	stats.dirty_stats()
 	suppress_equipment_changed = false
 	self.equipment_changed.emit()
-	
+
+func _on_stat_change():
+	stats_changed.emit()
 
 var suppress_equipment_changed:bool = false
 func _on_equipment_holder_items_change():
@@ -127,6 +131,7 @@ func _on_equipment_holder_items_change():
 	
 	if not suppress_equipment_changed:
 		self.equipment_changed.emit()
+		self.stats.recache_stats()
 
 func _on_page_holder_items_change():
 	stats.dirty_stats()
@@ -142,7 +147,7 @@ func save_data()->Dictionary:
 	data['Pages'] = pages.build_save_data()
 	data['BagItems'] = items.build_save_data()
 	data['Equipment'] = equipment.build_save_data()
-	data['Stats'] = stats.build_dave_data()
+	data['Stats'] = stats.build_save_data()
 	return data
 
 func load_data(data:Dictionary):

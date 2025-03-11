@@ -17,10 +17,13 @@ extends TextureRect
 
 @export var level_up_button_control:Control
 @export var level_up_button:Button
+@export var level_up_button_animation:AnimationPlayer
 
 var _actor:BaseActor
 var current_exp:float = 0
 var max_exp:float = 1
+var level_up_menu:LevelUpContainer
+var opening_menu:bool = false
 
 func _ready() -> void:
 	if mouse_over_control:
@@ -32,13 +35,22 @@ func _ready() -> void:
 
 func set_actor(actor:BaseActor):
 	if _actor:
-		_actor.stats.stats_changed.disconnect(_sync)
+		_actor.stats_changed.disconnect(_sync)
 	_actor = actor
-	_actor.stats.stats_changed.connect(_sync)
+	_actor.stats_changed.connect(_sync)
 	_sync()
 
 func open_level_up_menu():
-	MainRootNode.Instance.open_level_up_menu(_actor)
+	if level_up_button_animation:
+		level_up_button_animation.play('waiting')
+	opening_menu = true
+	level_up_menu = MainRootNode.Instance.open_level_up_menu(_actor)
+	#opening_menu = false
+	level_up_menu.closed.connect(on_menu_closed)
+
+func on_menu_closed():
+	opening_menu = false
+	_sync()
 
 func _sync():
 	if level_label:
@@ -49,10 +61,12 @@ func _sync():
 	max_exp_label.text = str(max_exp)
 	self.percent_full = current_exp / max_exp
 	if level_up_button_control:
-		if current_exp >= max_exp:
-			level_up_button_control.show()
+		if current_exp >= max_exp and not opening_menu:
+			if level_up_button_animation:
+				level_up_button_animation.play('flashing_animation')
 		else:
-			level_up_button_control.show()
+			if level_up_button_animation:
+				level_up_button_animation.play('waiting')
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventKey and event.is_pressed():

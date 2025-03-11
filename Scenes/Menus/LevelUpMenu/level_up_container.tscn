@@ -291,10 +291,10 @@ layout_mode = 2
 [node name="StrengtStatsContainer" type="FlowContainer" parent="LevelUpContainer/BoxContainer"]
 custom_minimum_size = Vector2(410, 0)
 layout_mode = 2
-theme_override_constants/h_separation = 0
 alignment = 1
 
 [node name="StatChangeContainer" type="BoxContainer" parent="LevelUpContainer/BoxContainer/StrengtStatsContainer" node_paths=PackedStringArray("goto_stat_label", "icon", "value_label")]
+custom_minimum_size = Vector2(140, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 0
@@ -462,6 +462,7 @@ layout_mode = 2
 
 [node name="AgilityStatsContainer" type="FlowContainer" parent="LevelUpContainer/BoxContainer"]
 layout_mode = 2
+theme_override_constants/h_separation = 8
 alignment = 1
 
 [node name="ColorRect3" type="ColorRect" parent="LevelUpContainer/BoxContainer"]

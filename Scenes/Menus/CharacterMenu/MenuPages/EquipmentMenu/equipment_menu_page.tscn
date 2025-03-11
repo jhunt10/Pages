@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://cbexkor24ce0h"]
+[gd_scene load_steps=49 format=3 uid="uid://cbexkor24ce0h"]
 
 [ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/EquipmentMenu/equipment_page_control.gd" id="1_6pwc2"]
 [ext_resource type="Texture2D" uid="uid://c4yedxpiinlff" path="res://Scenes/Menus/CharacterMenu/MenuPages/outline.png" id="2_5i0tg"]
@@ -40,7 +40,75 @@
 [ext_resource type="Texture2D" uid="uid://m0ss0tg7qqou" path="res://assets/Sprites/UI/SymbolIcons/MassSymbol.png" id="32_ohw0h"]
 [ext_resource type="Texture2D" uid="uid://bujky44hog2jm" path="res://assets/Sprites/UI/SymbolIcons/QueCountSymbol.png" id="33_tgryk"]
 [ext_resource type="Texture2D" uid="uid://den756c067qbk" path="res://assets/Sprites/UI/SymbolIcons/CrashSymbol.png" id="34_giu80"]
-[ext_resource type="Texture2D" uid="uid://ca4v1p3ndhgsy" path="res://Scenes/UiNodes/ExpBar/AttributesIcon.png" id="36_dgi06"]
+[ext_resource type="Texture2D" uid="uid://ijuqwfxfdvsh" path="res://Scenes/UiNodes/ExpBar/AttributesIcon_SpriteSheetpdn.png" id="36_fptg3"]
+
+[sub_resource type="Animation" id="Animation_3a6i4"]
+resource_name = "flashing_animation"
+length = 1.5
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(-2.23517e-08, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(1, 0), Vector2i(2, 0), Vector2i(3, 0), Vector2i(4, 0), Vector2i(0, 1), Vector2i(1, 1), Vector2i(2, 1), Vector2i(3, 1), Vector2i(4, 1), Vector2i(0, 2), Vector2i(1, 2), Vector2i(2, 2), Vector2i(3, 2), Vector2i(4, 2), Vector2i(1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_h263m"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_j1ppp"]
+resource_name = "waiting"
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_130x0"]
+_data = {
+"RESET": SubResource("Animation_h263m"),
+"flashing_animation": SubResource("Animation_3a6i4"),
+"waiting": SubResource("Animation_j1ppp")
+}
 
 [sub_resource type="Animation" id="Animation_t6efn"]
 length = 0.001
@@ -1074,21 +1142,26 @@ alignment = 1
 [node name="LevelUpControl" type="Control" parent="TitleBox/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="TitleBox/VBoxContainer/HBoxContainer2/LevelUpControl"]
-z_index = 2
-layout_mode = 0
-offset_left = 6.0
-offset_top = -26.0
-offset_right = 46.0
-offset_bottom = 14.0
-texture = ExtResource("36_dgi06")
+[node name="Sprite2D" type="Sprite2D" parent="TitleBox/VBoxContainer/HBoxContainer2/LevelUpControl"]
+position = Vector2(26, -6)
+texture = ExtResource("36_fptg3")
+hframes = 5
+vframes = 3
 
-[node name="Button" type="Button" parent="TitleBox/VBoxContainer/HBoxContainer2/LevelUpControl/TextureRect"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="TitleBox/VBoxContainer/HBoxContainer2/LevelUpControl/Sprite2D"]
+libraries = {
+"": SubResource("AnimationLibrary_130x0")
+}
+
+[node name="Button" type="Button" parent="TitleBox/VBoxContainer/HBoxContainer2/LevelUpControl/Sprite2D"]
 modulate = Color(1, 1, 1, 0)
-layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = -16.0
+offset_top = -16.0
+offset_right = -16.0
+offset_bottom = -16.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -1097,7 +1170,7 @@ self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="ExpBar" type="TextureRect" parent="TitleBox/VBoxContainer/HBoxContainer2" node_paths=PackedStringArray("full_rect", "color_rect", "level_label", "mouse_over_control", "current_exp_label", "max_exp_label", "level_up_button_control", "level_up_button")]
+[node name="ExpBar" type="TextureRect" parent="TitleBox/VBoxContainer/HBoxContainer2" node_paths=PackedStringArray("full_rect", "color_rect", "level_label", "mouse_over_control", "current_exp_label", "max_exp_label", "level_up_button_control", "level_up_button", "level_up_button_animation")]
 z_index = 2
 custom_minimum_size = Vector2(176, 13)
 layout_mode = 2
@@ -1110,7 +1183,8 @@ current_exp_label = NodePath("Control/BackPatchContainer/BoxContainer/CurentLabe
 max_exp_label = NodePath("Control/BackPatchContainer/BoxContainer/NexrLevelLabel")
 percent_full = 0.5
 level_up_button_control = NodePath("../LevelUpControl")
-level_up_button = NodePath("../LevelUpControl/TextureRect/Button")
+level_up_button = NodePath("../LevelUpControl/Sprite2D/Button")
+level_up_button_animation = NodePath("../LevelUpControl/Sprite2D/AnimationPlayer")
 
 [node name="FullRect" type="Control" parent="TitleBox/VBoxContainer/HBoxContainer2/ExpBar"]
 anchors_preset = 0

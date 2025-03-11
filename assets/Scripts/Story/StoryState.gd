@@ -36,6 +36,14 @@ func get_player_actor(index:int = 0)->BaseActor:
 			return ActorLibrary.get_actor(player_id)
 	return null
 
+func list_player_actor()->Array:
+	var out_list = []
+	for index in range(_player_ids.size()):
+		var player_id = _player_ids[index]
+		if player_id:
+			out_list.append(ActorLibrary.get_actor(player_id))
+	return out_list
+
 func get_player_color(index:int)->Color:
 	if index == 0: return Color.BLUE
 	elif index == 1: return Color.DARK_GREEN

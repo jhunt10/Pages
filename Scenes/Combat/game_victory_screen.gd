@@ -4,6 +4,7 @@ extends Control
 
 @export var rounds_label:Label
 @export var enemies_label:Label
+@export var exp_label:Label
 @export var money_label:Label
 @export var camp_button:Button
 @export var camp_button_label:Label
@@ -64,18 +65,25 @@ func collect_dropped_items():
 	
 	var enemy_count = 0
 	var actors = CombatRootControl.Instance.GameState.list_actors(true)
+	var total_exp = 0
 	for actor:BaseActor in actors:
 		if actor.is_dead and actor.FactionIndex != 0:
 			enemy_count += 1
 			var actor_details = actor.get_load_val("ActorDetails", {})
 			var enemy_val = actor_details.get("MoneyValue", 0)
 			total_money += enemy_val
+			var exp_val = actor_details.get("ExpValue", 0)
+			total_exp += exp_val
 			
 	enemies_label.text = str(enemy_count)
 	rounds_label.text = str(CombatRootControl.QueController.round_counter)
 	money_label.text = "$"+str(total_money)
 	StoryState.add_money(total_money)
 	
+	exp_label.text = str(total_exp)
+	for actor:BaseActor in StoryState.list_player_actor():
+		actor.stats.add_experiance(total_exp)
+		
 	if not items_datas.has("Page"):
 		pickup_pages_container.hide()
 	else:
