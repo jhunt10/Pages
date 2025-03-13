@@ -1,5 +1,88 @@
 [
     {
+        "ActionKey": "BaseApplyEffectSpell",
+        "AmmoData": {
+            "Cost": 4,
+            "Clip": 32,
+            "AmmoType": "Mag"
+        },
+        "AttackDetails":
+        {
+            "AccuracyMod": 1,
+            "PotencyMod": 1
+        },
+        "DamageDatas": {
+        },
+        "EffectDatas":{
+            "Effect1": {
+                "EffectKey": "AilmentShocked",
+                "SubEffects": {
+                    "Duration": {
+                        "DurationValue": 5
+                    }
+                }
+            }
+        },
+        "Details": {
+            "Description": "Apply EFFECT on Actor for X turns.",
+            "DisplayName": "Apply EFFECT",
+            "LargeIcon": "Sprites/ICON.png",
+            "SmallIcon": "Sprites/ICON.png",
+            "SnippetDesc": "Apply EFFECT for X turns.",
+            "Tags": [
+                "Apply",
+                "Spell"
+            ]
+        },
+        "MissileDatas": {},
+        "Preview": {
+            "PreviewTargetKey": "TargetParam1"
+        },
+        "SubActions": {
+            "5": [
+                {
+                    "Animation": "Raise",
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponReadyAnimation.gd",
+                    "MainHand": true,
+                    "OffHand": "Never"
+                }
+            ],
+            "10": [
+                {
+                    "AllowAlreadyTargeted": false,
+                    "AllowAutoTarget": false,
+                    "SetTargetKey": "Target1",
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_GetTarget.gd",
+                    "TargetParamKey": "TargetParam1"
+                }
+            ],
+            "11": [
+                {
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_PayCost.gd"
+                },
+                {
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Effects/SubAct_ApplyEffect.gd",
+                    "TargetKey": "Target1",
+                    "EffectDataKey": "Effect1"
+                },
+                {
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponMotionAnimation.gd",
+                    "MainHand": true,
+                    "OffHand": "Never"
+                }
+            ]
+        },
+        "TargetParams": {
+            "TargetParam1": {
+                "EffectsAllies": true,
+                "EffectsEnemies": true,
+                "LineOfSight": false,
+                "TargetArea": "[[0,2],[-1,1],[0,1],[1,1],[-2,0],[-1,0],[0,0],[1,0],[2,0],[-1,-1],[0,-1],[1,-1],[0,-2]]",
+                "TargetType": "Actor"
+            }
+        }
+    },
+    {
         "ActionKey": "BaseBoltSpell",
         "AmmoData": {
             "Cost": 4,
@@ -32,7 +115,8 @@
             "Tags": [
                 "Attack",
                 "Spell",
-                "Missile"
+                "Missile",
+                "LOS"
             ]
         },
         "MissileDatas": {
@@ -48,6 +132,14 @@
             "PreviewDamageKey": "Damage1"
         },
         "SubActions": {
+            "5": [
+                {
+                    "Animation": "Raise",
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponReadyAnimation.gd",
+                    "MainHand": true,
+                    "OffHand": "Never"
+                }
+            ],
             "10": [
                 {
                     "AllowAlreadyTargeted": false,
@@ -62,20 +154,16 @@
                     "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_PayCost.gd"
                 },
                 {
-                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_AnimationFinish.gd"
-                },
-                {
                     "DamageKey": "Damage1",
                     "MissileKey": "Missile1",
                     "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_SpawnMissile.gd",
                     "TargetKey": "Target1",
                     "TargetParamKey": "TargetParam1"
-                }
-            ],
-            "5": [
+                },
                 {
-                    "Animation": "weapon_raise",
-                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_AnimationInTo.gd"
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponMotionAnimation.gd",
+                    "MainHand": true,
+                    "OffHand": "Never"
                 }
             ]
         },
@@ -152,14 +240,14 @@
                     "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_PayCost.gd"
                 },
                 {
-                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponMotionAnimation.gd",
-                    "MainHand": true,
-                    "OffHand": "OnlyIfDuel"
-                },
-                {
                     "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_ApplyDamage.gd",
                     "DamageKey": "Damage1",
                     "TargetKey": "Target1"
+                },
+                {
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponMotionAnimation.gd",
+                    "MainHand": true,
+                    "OffHand": "OnlyIfDuel"
                 }
             ]
         },

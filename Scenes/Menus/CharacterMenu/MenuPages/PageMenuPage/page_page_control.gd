@@ -50,7 +50,6 @@ func on_show():
 func _process(delta: float) -> void:
 	pass
 
-
 func set_actor(actor:BaseActor):
 	if _actor and _actor != actor:
 		_actor.equipment_changed.disconnect(actor_equipment_changed)

@@ -18,6 +18,7 @@ var effect_area:AreaMatrix
 var include_self_in_aoe:bool
 var include_allies_in_aoe:bool
 var include_enemies_in_aoe:bool
+var required_tags:Array
 
 var _cached_canter_pos:MapPos
 var _cached_target_area:Dictionary
@@ -52,6 +53,7 @@ func _init(target_param_key:String, args:Dictionary) -> void:
 	include_self_in_aoe = args.get("IncludeSelfInAoe", false)
 	include_allies_in_aoe = args.get("IncludeAlliesInAoe", false)
 	include_enemies_in_aoe = args.get("IncludeEnemiesInAoe", false)
+	required_tags = args.get("RequiredTags", [])
 
 func has_area_of_effect()->bool:
 	if effect_area:
@@ -78,6 +80,11 @@ func is_point_in_area(center:MapPos, point)->bool:
 
 ## Returns true if target actor is valid as a selected target
 func is_valid_target_actor(actor:BaseActor, target:BaseActor, game_state:GameStateData)->bool:
+	if required_tags.size() > 0:
+		var target_tags = target.get_tags()
+		for check_tag in required_tags:
+			if not target_tags.has(check_tag):
+				return false
 	if target_type == TargetTypes.Actor:
 		return true
 	if target_type == TargetTypes.Enemy:

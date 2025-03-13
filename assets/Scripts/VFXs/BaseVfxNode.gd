@@ -1,7 +1,7 @@
 class_name BaseVfxNode
 extends Node2D
 
-enum States {Waiting, Playing, Finished}
+enum States {Waiting, Playing, Finished, Errored}
 
 var id:String
 var _data:Dictionary
@@ -15,6 +15,9 @@ var actor_node:ActorNode:
 
 var _readyed:bool=false
 var _start_when_ready:bool=false
+
+func parent_to_offset()->bool:
+	return false
 
 func _ready() -> void:
 	_readyed = true

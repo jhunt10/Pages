@@ -23,9 +23,30 @@ func do_thing(parent_action:BaseAction, subaction_data:Dictionary, que_exe_data:
 	var tag_chain = SourceTagChain.new()\
 			.append_source(SourceTagChain.SourceTypes.Actor, actor)\
 			.append_source(SourceTagChain.SourceTypes.Action, parent_action)
+	var attack_details = parent_action.get_load_val("AttackDetails", {})
+	var override_source_pos = null
+	if attack_details.get("UseTargetAsOrigin", false):
+		var main_target = _get_primary_target(parent_action, subaction_data, target_key, que_exe_data, game_state, actor)
+		if main_target is String:
+			var main_target_actor = game_state.get_actor(main_target)
+			override_source_pos = game_state.get_actor_pos(main_target_actor)
+		elif main_target is MapPos:
+			override_source_pos = main_target
+		else:
+			printerr("Unknown Primary Target")
 	
 	#TODO: Handle attack or just handle damage?
 	for target:BaseActor in targets:
-		DamageHelper.handle_attack(actor, target, parent_action.get_load_val("AttackDetails", {}), damage_data, parent_action.get_load_val("EffectDatas", []), tag_chain, game_state, target_params)
+		DamageHelper.handle_attack(
+			actor, 
+			target, 
+			attack_details, 
+			damage_data, 
+			parent_action.get_load_val("EffectDatas", []), 
+			tag_chain, 
+			game_state, 
+			target_params,
+			override_source_pos
+		)
 	
 	return BaseSubAction.Success

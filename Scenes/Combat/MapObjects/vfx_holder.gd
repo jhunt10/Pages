@@ -25,7 +25,10 @@ func add_vfx(vfx_node:BaseVfxNode):
 		var old_vfx:BaseVfxNode = vfx_nodes[vfx_node.id]
 		if old_vfx and is_instance_valid(old_vfx):
 			old_vfx.finish()
-	self.add_child(vfx_node)
+	if vfx_node.parent_to_offset():
+		offset_node.add_child(vfx_node)
+	else:
+		self.add_child(vfx_node)
 	vfx_node.vfx_holder = self
 	vfx_nodes[vfx_node.id] = vfx_node
 

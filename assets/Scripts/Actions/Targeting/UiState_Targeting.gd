@@ -69,7 +69,6 @@ func handle_input(event):
 			CombatRootControl.Instance.GridCursor.set_cursor(GridCursorNode.Cursors.Default)
 			target_area_dislay_node.hide_area_effect(_target_display_key)
 		target_area_dislay_node.set_area_effect_coor(_target_display_key, spot)
-		
 	# Mouse in viewport coordinates.
 	if event is InputEventMouseButton and not (event as InputEventMouseButton).pressed:
 		if _logging: print("Button Pressed")

@@ -9,6 +9,11 @@ extends Control
 @export var damage_label:DamageLabelContainer
 @export var damage_container:Container
 
+@export var accuracy_icon:TextureRect
+@export var accuracy_label:Label
+@export var potency_icon:TextureRect
+@export var potency_label:Label
+
 var _item:BasePageItem
 var _actor:BaseActor
 
@@ -71,6 +76,25 @@ func set_action(actor:BaseActor, page:BasePageItem):
 	var target_params = action.get_preview_target_params(actor)
 	if target_params:
 		target_type_label.text = TargetParameters.TargetTypes.keys()[target_params.target_type]
+	
+	var attack_details = action.get_load_val("AttackDetails", {})
+	var accuracy_mod = attack_details.get('AccuracyMod', 1)
+	if accuracy_mod == 1:
+		accuracy_icon.hide()
+		accuracy_label.hide()
+	elif _actor:
+		accuracy_label.text = str(accuracy_mod * _actor.stats.get_stat(StatHelper.Accuracy))
+	else:
+		accuracy_label.text = str(accuracy_mod * 100)
+	
+	var potency_mod = attack_details.get('PotencyMod', 1)
+	if potency_mod == 1:
+		potency_icon.hide()
+		potency_label.hide()
+	elif _actor:
+		potency_label.text = str(potency_mod * _actor.stats.get_stat(StatHelper.Potency))
+	else:
+		potency_label.text = str(potency_mod * 100)
 		
 
 #func on_eqiup_button_pressed():

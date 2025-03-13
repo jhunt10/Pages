@@ -1,5 +1,6 @@
 class_name VfxHelper
 
+const FORCE_RELOAD = false
 
 static func create_attack_vfx_node(from_actor:BaseActor, to_actor:BaseActor, bullet_vfx_key:String, vfx_data:Dictionary):
 	var temp_data = vfx_data.duplicate(true)
@@ -8,6 +9,7 @@ static func create_attack_vfx_node(from_actor:BaseActor, to_actor:BaseActor, bul
 	return create_vfx_on_actor(to_actor, bullet_vfx_key, temp_data)
 
 static func create_damage_effect(target_actor:BaseActor, vfx_key:String, vfx_data:Dictionary):
+	if FORCE_RELOAD: MainRootNode.vfx_libray.reload_vfxs()
 	var target_actor_node:ActorNode = CombatRootControl.get_actor_node(target_actor.Id)
 	if !target_actor_node:
 		printerr("Failed to find actor node for: %s" % [target_actor.Id])
@@ -33,7 +35,7 @@ static func create_damage_effect(target_actor:BaseActor, vfx_key:String, vfx_dat
 
 
 static func create_vfx_on_actor(actor:BaseActor, vfx_key:String, vfx_data:Dictionary)->BaseVfxNode:
-	#MainRootNode.vfx_libray.reload_vfxs()
+	if FORCE_RELOAD: MainRootNode.vfx_libray.reload_vfxs()
 	var actor_node = CombatRootControl.get_actor_node(actor.Id)
 	if not actor_node:
 		printerr("VfxHelper.create_vfx_on_actor: No ActorNode found for Actor '%s'." % [actor.Id])
@@ -66,6 +68,7 @@ static func create_vfx_on_actor(actor:BaseActor, vfx_key:String, vfx_data:Dictio
 	return node
 
 static func create_missile_vfx_node(missile_vfx_key:String, vfx_data:Dictionary):
+	if FORCE_RELOAD: MainRootNode.vfx_libray.reload_vfxs()
 	var vfx_def = MainRootNode.vfx_libray.get_vfx_def(missile_vfx_key)
 	var merged_data = BaseLoadObjectLibrary._merge_defs(vfx_data, vfx_def)
 	var would_be_id = missile_vfx_key
@@ -89,6 +92,7 @@ static func create_missile_vfx_node(missile_vfx_key:String, vfx_data:Dictionary)
 	return node
 
 static func create_ailment_vfx_node(ailment_key:String, actor:BaseActor)->BaseVfxNode:
+	if FORCE_RELOAD: MainRootNode.vfx_libray.reload_vfxs()
 	var vfx_key = ''
 	if ailment_key == "Shocked":
 		vfx_key = "AilmentShockedVfx"

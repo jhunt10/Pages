@@ -83,11 +83,18 @@ func _init(key:String, load_path:String, def:Dictionary, id:String, data:Diction
 	if get_load_val("IsPlayer", false):
 		is_player = true
 
+func get_name()->String:
+	if pages:
+		var title_page:BasePageItem = pages.get_item_in_slot(0)
+		if title_page:
+			return title_page.details.display_name
+	return details.display_name
 
 func get_tags(): 
 	var tag_list = []
 	tag_list.append_array(Tags)
 	var aditional_tags = pages.get_tags_added_to_actor()
+	aditional_tags.append_array(effects.get_tags_added_to_actor())
 	for added_tag in aditional_tags:
 		if not tag_list.has(added_tag):
 			tag_list.append(added_tag)

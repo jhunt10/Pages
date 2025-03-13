@@ -86,7 +86,12 @@ static func handle_attack(attacker:BaseActor, defender:BaseActor, attack_details
 		var attack_data_key = attack_details.get("AttackVfxKey")
 		var attack_vfx_data = attack_details.get("AttackVfxData")
 		if attack_data_key:
-			created_attack_vfx = VfxHelper.create_attack_vfx_node(attacker, defender, attack_data_key, attack_vfx_data)
+			var effect_source = attacker
+			if attack_details.get("UseTargetAsOrigin", false) and attack_from_spot_override:
+				var posible_actors = game_state.get_actors_at_pos(attack_from_spot_override)
+				if posible_actors.size() == 1:
+					effect_source = posible_actors[0]
+			created_attack_vfx = VfxHelper.create_attack_vfx_node(effect_source, defender, attack_data_key, attack_vfx_data)
 	
 	
 	# On Miss

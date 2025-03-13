@@ -1,5 +1,21 @@
 [
     {
+        "ActionKey": "ApplyBurnSpell",
+        "CanStack": true,
+        "Details": {
+            "Tags": [
+                "Spell"
+            ]
+        },
+        "ItemDetails":
+        {
+            "Rarity": "Mundane",
+            "Value": 50
+        },
+        "ItemKey": "ApplyBurnSpelll_PageItem",
+        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd"
+    },
+    {
         "ActionKey": "FireTouchSpell",
         "CanStack": true,
         "Details": {
@@ -9,42 +25,10 @@
         },
         "ItemDetails":
         {
-            "Rarity": "Mundane",
+            "Rarity": "Common",
             "Value": 50
         },
         "ItemKey": "FireTouchSpell_PageItem",
-        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd"
-    },
-    {
-        "ActionKey": "ColdTouchSpell",
-        "CanStack": true,
-        "Details": {
-            "Tags": [
-                "Spell"
-            ]
-        },
-        "ItemDetails":
-        {
-            "Rarity": "Mundane",
-            "Value": 50
-        },
-        "ItemKey": "ColdTouchSpell_PageItem",
-        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd"
-    },
-    {
-        "ActionKey": "ShockTouchSpell",
-        "CanStack": true,
-        "Details": {
-            "Tags": [
-                "Spell"
-            ]
-        },
-        "ItemDetails":
-        {
-            "Rarity": "Mundane",
-            "Value": 50
-        },
-        "ItemKey": "ShockTouchSpell_PageItem",
         "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd"
     },
     {
@@ -57,7 +41,7 @@
         },
         "ItemDetails":
         {
-            "Rarity": "Mundane",
+            "Rarity": "Rare",
             "Value": 50
         },
         "ItemKey": "FireBoltSpell_PageItem",
@@ -73,10 +57,154 @@
         },
         "ItemDetails":
         {
-            "Rarity": "Mundane",
+            "Rarity": "Legendary",
             "Value": 50
         },
         "ItemKey": "FireBallSpell_PageItem",
+        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd"
+    },
+    {
+        "ActionKey": "ApplyChillSpell",
+        "CanStack": true,
+        "Details": {
+            "Tags": [
+                "Spell"
+            ]
+        },
+        "ItemDetails":
+        {
+            "Rarity": "Mundane",
+            "Value": 50
+        },
+        "ItemKey": "ApplyChillSpelll_PageItem",
+        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd"
+    },
+    {
+        "ActionKey": "ColdTouchSpell",
+        "CanStack": true,
+        "Details": {
+            "Tags": [
+                "Spell"
+            ]
+        },
+        "ItemDetails":
+        {
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "ItemKey": "ColdTouchSpell_PageItem",
+        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd"
+    },
+    {
+        "ActionKey": "IceBoltSpell",
+        "CanStack": true,
+        "Details": {
+            "Tags": [
+                "Spell"
+            ]
+        },
+        "ItemDetails":
+        {
+            "Rarity": "Rare",
+            "Value": 50
+        },
+        "ItemKey": "IceBoltSpell_PageItem",
+        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd"
+    },
+    {
+        "ActionKey": "IceBallSpell",
+        "CanStack": true,
+        "Details": {
+            "Tags": [
+                "Spell"
+            ]
+        },
+        "ItemDetails":
+        {
+            "Rarity": "Rare",
+            "Value": 50
+        },
+        "ItemKey": "IceBallSpell_PageItem",
+        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd"
+    },
+    {
+        "ActionKey": "ApplyShockSpell",
+        "CanStack": true,
+        "Details": {
+            "Tags": [
+                "Spell"
+            ]
+        },
+        "ItemDetails":
+        {
+            "Rarity": "Mundane",
+            "Value": 50
+        },
+        "ItemKey": "ApplyShockSpelll_PageItem",
+        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd"
+    },
+    {
+        "ActionKey": "ShockTouchSpell",
+        "CanStack": true,
+        "Details": {
+            "Tags": [
+                "Spell"
+            ]
+        },
+        "ItemDetails":
+        {
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "ItemKey": "ShockTouchSpell_PageItem",
+        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd"
+    },
+    {
+        "ActionKey": "DischargeSpell",
+        "CanStack": true,
+        "Details": {
+            "Tags": [
+                "Spell"
+            ]
+        },
+        "ItemDetails":
+        {
+            "Rarity": "Rare",
+            "Value": 50
+        },
+        "ItemKey": "DischargeSpell_PageItem",
+        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd"
+    },
+    {
+        "ActionKey": "LightningBoltSpell",
+        "CanStack": true,
+        "Details": {
+            "Tags": [
+                "Spell"
+            ]
+        },
+        "ItemDetails":
+        {
+            "Rarity": "Rare",
+            "Value": 50
+        },
+        "ItemKey": "LightningBoltSpell_PageItem",
+        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd"
+    },
+    {
+        "ActionKey": "LightningStormSpell",
+        "CanStack": true,
+        "Details": {
+            "Tags": [
+                "Spell"
+            ]
+        },
+        "ItemDetails":
+        {
+            "Rarity": "Legendary",
+            "Value": 50
+        },
+        "ItemKey": "LightningStormSpell_PageItem",
         "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd"
     }
 ]

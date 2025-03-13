@@ -297,7 +297,22 @@ func _execute_turn_frames(game_state:GameStateData, que:ActionQue, turn_index:in
 			sub_sub_action_index = 0
 			return
 		var sub_action_data = sub_action_list[sub_sub_action_index]
-			
+		
+		if sub_action_data.has("RequiredConditions"):
+			var required_conditions = sub_action_data['RequiredConditions']
+			var all_meet = true
+			for condition_key in required_conditions.keys():
+				if turn_data.condition_flags.has(condition_key):
+					var val = turn_data.condition_flags.get(condition_key)
+					if val != required_conditions.get(condition_key):
+						all_meet = false
+				else:
+					all_meet = false
+			if not all_meet:
+				sub_sub_action_index += 1
+				continue
+				
+		
 		var script_key = sub_action_data['SubActionScript']
 		var subaction = _get_subaction(script_key)
 		if !subaction:

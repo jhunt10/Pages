@@ -93,6 +93,9 @@ func get_small_icon():
 func get_large_icon():
 	return SpriteCache.get_sprite(details.large_icon_path)
 
+func get_tags_added_to_actor()->Array:
+	return get_load_val("AddTagsToActor", [])
+
 func get_active_stat_mods():
 	var out_list = []
 	for sub_effect_key in SubEffectDatas.keys():

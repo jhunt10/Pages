@@ -5,6 +5,7 @@ var costs:Dictionary:
 	get: return on_que_data.get("CostData", {})
 var on_que_data:Dictionary = {}
 var data_cache:Dictionary = {}
+var condition_flags:Dictionary = {}
 
 # Mapping of TargetKey to Array<Target_Id> or Array<MapPos>
 var _targets:Dictionary = {}
@@ -35,7 +36,7 @@ func list_targets()->Array:
 	var out_list = []
 	for val in _targets.values():
 		if not out_list.has(val):
-			out_list.append(val)
+			out_list.append_array(val)
 	return out_list
 
 ## Returns Array<Actor_Id> for Array<Coor>

@@ -26,7 +26,7 @@
 [ext_resource type="Texture2D" uid="uid://b10pvly4exem2" path="res://assets/Sprites/UI/SymbolIcons/_S_Symbole.png" id="22_b2icg"]
 [ext_resource type="PackedScene" uid="uid://c1bs8grs7gsc1" path="res://Scenes/UiNodes/MiniRangeDisplay/mini_range_display.tscn" id="25_cn8is"]
 
-[node name="PageLibraryMenu" type="Control" node_paths=PackedStringArray("close_button", "loading_patch", "scroll_ocntainer", "tag_filter", "page_entries_container", "premade_page_entry", "premade_entry_group")]
+[node name="PageLibraryMenu" type="Control" node_paths=PackedStringArray("close_button", "scale_slider", "loading_patch", "scroll_ocntainer", "tag_filter", "page_entries_container", "premade_page_entry", "premade_entry_group")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -35,6 +35,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_fifst")
 close_button = NodePath("VBoxContainer/NinePatchRect/HBoxContainer/CloseButton")
+scale_slider = NodePath("VBoxContainer/NinePatchRect/HBoxContainer/HSlider")
 loading_patch = NodePath("VBoxContainer/LoadingScreenPatch")
 scroll_ocntainer = NodePath("VBoxContainer/ScrollContainer")
 tag_filter = NodePath("VBoxContainer/NinePatchRect/HBoxContainer/LoadedOptionButton")
@@ -85,6 +86,20 @@ script = ExtResource("4_f1xd1")
 allways_show_none = true
 no_option_text = "All"
 
+[node name="TitleLabel3" type="Label" parent="VBoxContainer/NinePatchRect/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("4_4wgxq")
+theme_override_font_sizes/font_size = 32
+text = "  Scale:"
+
+[node name="HSlider" type="HSlider" parent="VBoxContainer/NinePatchRect/HBoxContainer"]
+custom_minimum_size = Vector2(400, 32)
+layout_mode = 2
+min_value = 0.1
+max_value = 5.0
+step = 0.1
+value = 1.0
+
 [node name="VSeparator" type="VSeparator" parent="VBoxContainer/NinePatchRect/HBoxContainer"]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
@@ -103,7 +118,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="EntryGroupContainer" type="Container" parent="VBoxContainer/ScrollContainer/VBoxContainer" node_paths=PackedStringArray("title_label", "entries_container", "background", "inner_container")]
-custom_minimum_size = Vector2(24, 314)
+custom_minimum_size = Vector2(24, 324)
 layout_mode = 2
 script = ExtResource("5_1qkpm")
 title_label = NodePath("EntryGroupInnerContainer/TitlerLabel")
@@ -133,8 +148,8 @@ text = "Page Name"
 [node name="SubEntriesContainer" type="VBoxContainer" parent="VBoxContainer/ScrollContainer/VBoxContainer/EntryGroupContainer/EntryGroupInnerContainer"]
 layout_mode = 2
 
-[node name="PageDetailsEntryContainer" type="Container" parent="VBoxContainer/ScrollContainer/VBoxContainer/EntryGroupContainer/EntryGroupInnerContainer/SubEntriesContainer" node_paths=PackedStringArray("icon_background", "icon", "title_label", "tags_label", "type_label", "details_container", "description_box", "plus_minus_button", "minus_icon", "plus_icon", "target_details_container", "target_type_label", "mini_range_display", "acc_pot_container", "accuracy_label", "potency_label", "effects_label", "ammo_label", "damage_entries_container", "stat_mods_container", "premade_stat_mod_label", "background", "inner_container")]
-custom_minimum_size = Vector2(24, 179)
+[node name="PageDetailsEntryContainer" type="Container" parent="VBoxContainer/ScrollContainer/VBoxContainer/EntryGroupContainer/EntryGroupInnerContainer/SubEntriesContainer" node_paths=PackedStringArray("icon_background", "icon", "title_label", "tags_label", "type_label", "details_container", "description_box", "plus_minus_button", "minus_icon", "plus_icon", "target_details_container", "target_type_label", "mini_range_display", "acc_pot_container", "accuracy_label", "potency_label", "effects_label", "ammo_label", "damage_entries_container", "stat_mods_container", "premade_stat_mod_label", "add_button", "background", "inner_container")]
+custom_minimum_size = Vector2(24, 263)
 layout_mode = 2
 script = ExtResource("1_0cs6p")
 icon_background = NodePath("PageInnerContainer/LineContainer/IconBackgroundTextureRect")
@@ -144,7 +159,7 @@ tags_label = NodePath("PageInnerContainer/LineContainer/TagsLabel")
 type_label = NodePath("PageInnerContainer/LineContainer/TypeLabel")
 details_container = NodePath("PageInnerContainer/DetailsContainer")
 description_box = NodePath("PageInnerContainer/DetailsContainer/DetailsContainer/RichTextLabel")
-plus_minus_button = NodePath("Button")
+plus_minus_button = NodePath("Control/Button")
 minus_icon = NodePath("PageInnerContainer/LineContainer/MinusTextureRect")
 plus_icon = NodePath("PageInnerContainer/LineContainer/MinusTextureRect/PlusTextureRect")
 target_details_container = NodePath("PageInnerContainer/DetailsContainer/DetailsContainer/HBoxContainer/TargetDetailsContainer")
@@ -158,6 +173,7 @@ ammo_label = NodePath("PageInnerContainer/DetailsContainer/DetailsContainer/HBox
 damage_entries_container = NodePath("PageInnerContainer/DetailsContainer/DetailsContainer/HBoxContainer/VBoxContainer/AmmoDamageContainer/DamagesContainer")
 stat_mods_container = NodePath("PageInnerContainer/DetailsContainer/DetailsContainer/HBoxContainer/VBoxContainer/StatModsContainer")
 premade_stat_mod_label = NodePath("PageInnerContainer/DetailsContainer/DetailsContainer/HBoxContainer/VBoxContainer/StatModsContainer/StatModLabel")
+add_button = NodePath("PageInnerContainer/LineContainer/Button")
 background = NodePath("NinePatchRect")
 inner_container = NodePath("PageInnerContainer")
 force_fill_x = true
@@ -232,6 +248,12 @@ text = "Tag1, Tag2, Tag3 ..."
 clip_text = true
 text_overrun_behavior = 4
 ellipsis_char = "+"
+
+[node name="Button" type="Button" parent="VBoxContainer/ScrollContainer/VBoxContainer/EntryGroupContainer/EntryGroupInnerContainer/SubEntriesContainer/PageDetailsEntryContainer/PageInnerContainer/LineContainer"]
+z_index = 5
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Add"
 
 [node name="DetailsContainer" type="HBoxContainer" parent="VBoxContainer/ScrollContainer/VBoxContainer/EntryGroupContainer/EntryGroupInnerContainer/SubEntriesContainer/PageDetailsEntryContainer/PageInnerContainer"]
 layout_mode = 2
@@ -378,7 +400,6 @@ layout_mode = 2
 [node name="DamageContainer" parent="VBoxContainer/ScrollContainer/VBoxContainer/EntryGroupContainer/EntryGroupInnerContainer/SubEntriesContainer/PageDetailsEntryContainer/PageInnerContainer/DetailsContainer/DetailsContainer/HBoxContainer/VBoxContainer/AmmoDamageContainer/DamagesContainer" instance=ExtResource("18_3bbv3")]
 layout_mode = 2
 font_size_override = 32
-attack_variant = 30.0
 
 [node name="StatModsContainer" type="HBoxContainer" parent="VBoxContainer/ScrollContainer/VBoxContainer/EntryGroupContainer/EntryGroupInnerContainer/SubEntriesContainer/PageDetailsEntryContainer/PageInnerContainer/DetailsContainer/DetailsContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
@@ -485,9 +506,15 @@ theme = ExtResource("4_4wgxq")
 text = "Detailed Discription"
 fit_content = true
 
-[node name="Button" type="Button" parent="VBoxContainer/ScrollContainer/VBoxContainer/EntryGroupContainer/EntryGroupInnerContainer/SubEntriesContainer/PageDetailsEntryContainer"]
+[node name="Control" type="Control" parent="VBoxContainer/ScrollContainer/VBoxContainer/EntryGroupContainer/EntryGroupInnerContainer/SubEntriesContainer/PageDetailsEntryContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Button" type="Button" parent="VBoxContainer/ScrollContainer/VBoxContainer/EntryGroupContainer/EntryGroupInnerContainer/SubEntriesContainer/PageDetailsEntryContainer/Control"]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
+offset_right = 1039.0
+offset_bottom = 263.0
 
 [node name="LoadingScreenPatch" type="NinePatchRect" parent="VBoxContainer"]
 visible = false

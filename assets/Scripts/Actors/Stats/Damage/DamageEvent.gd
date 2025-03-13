@@ -50,8 +50,8 @@ func _init(data:Dictionary, source, defender:BaseActor, tag_chain:SourceTagChain
 		self.base_damage = data.get("BaseDamage", 0)
 	elif attack_stat.begins_with("Percent"):
 		self.base_damage = defender.stats.max_health
-		if attack_stat.ends_with("PPR"):
-			self.base_damage = defender.stats.max_health / max(defender.stats.get_stat("PPR"),1)
+		#if attack_stat.ends_with("PPR"):
+			#self.base_damage = defender.stats.max_health / max(defender.stats.get_stat("PPR"),1)
 	elif source is BaseActor:
 		self.base_damage = source.stats.get_stat(attack_stat, 1)
 	

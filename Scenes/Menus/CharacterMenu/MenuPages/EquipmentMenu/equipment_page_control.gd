@@ -31,7 +31,7 @@ func _process(delta: float) -> void:
 
 func set_actor(actor:BaseActor):
 	_actor = actor
-	name_label.text = actor.details.display_name
+	name_label.text = actor.get_name()
 	level_label.text = str(actor.stats.get_stat(StatHelper.Level, 0))
 	equipment_slots_container.set_actor(actor)
 	stat_box.set_actor(actor)

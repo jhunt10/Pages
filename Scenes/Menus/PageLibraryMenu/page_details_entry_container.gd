@@ -32,6 +32,8 @@ extends BackPatchContainer
 @export var stat_mods_container:BoxContainer
 @export var premade_stat_mod_label:HBoxContainer
 
+@export var add_button:Button
+
 var page:BasePageItem
 var damage_font_size_override:int
 var loaded_details:bool = false
@@ -45,6 +47,7 @@ func _ready() -> void:
 	details_container.hide()
 	premade_stat_mod_label.hide()
 	plus_minus_button.pressed.connect(toggle_details)
+	add_button.pressed.connect(_on_add_pressed)
 	pass # Replace with function body.
 
 func toggle_details():
@@ -86,7 +89,15 @@ func set_page(_page:BasePageItem):
 		type_label.text = "Action"
 	else:
 		type_label.text = "Unknown"
-		
+
+func _on_add_pressed():
+	var item_key = page.ItemKey
+	var new_item = ItemLibrary.create_item(item_key, {})
+	if not new_item:
+		printerr("Failed to make new item: " + item_key)
+		return
+	PlayerInventory.add_item(new_item)
+	
 
 func load_details():
 	var page_action = page.get_action()
@@ -100,7 +111,7 @@ func load_details():
 		ammo_label.hide()
 	
 	if page_action:
-		var attack_details = page_action.get_load_val("AttackDetials", {})
+		var attack_details = page_action.get_load_val("AttackDetails", {})
 		accuracy_label.text = str(attack_details.get("AccuracyMod", 1))
 		potency_label.text = str(attack_details.get("PotencyMod", 1))
 		var effects_datas = page_action.get_load_val("EffectDatas", {})

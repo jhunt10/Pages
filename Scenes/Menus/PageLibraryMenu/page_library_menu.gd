@@ -1,6 +1,7 @@
 extends Control
 
 @export var close_button:Button
+@export var scale_slider:Slider
 @export var loading_patch:NinePatchRect
 @export var scroll_ocntainer:ScrollContainer
 @export var tag_filter:LoadedOptionButton
@@ -15,7 +16,7 @@ var page_entries = {}
 var entry_groups = {}
 var loaded = false
 var timer = 0
-
+var starting_content_scale:float
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	close_button.pressed.connect(self.queue_free)
@@ -25,8 +26,14 @@ func _ready() -> void:
 	premade_entry_group.hide()
 	scroll_ocntainer.hide()
 	loading_patch.show()
+	starting_content_scale = get_window().content_scale_factor
+	get_window().content_scale_factor = 0.5
+	#scale_slider.value_changed.connect(_on_scale_change)
 	
-	
+#func _on_scale_change(val:float):
+func _exit_tree() -> void:
+	if starting_content_scale > 0:
+		get_window().content_scale_factor = starting_content_scale
 
 func build_page_entires():
 	if loaded:

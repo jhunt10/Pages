@@ -49,6 +49,13 @@ func add_effect(source, effect_key:String, effect_data:Dictionary, game_state:Ga
 func list_effects()->Array:
 	return _effects.values()
 
+func get_tags_added_to_actor()->Array:
+	var out_list = []
+	for effect:BaseEffect in _effects.values():
+		out_list.append_array(effect.get_tags_added_to_actor())
+	return out_list
+		
+
 func has_effect(effect_id:String)->bool:
 	return _effects.keys().has(effect_id)
 

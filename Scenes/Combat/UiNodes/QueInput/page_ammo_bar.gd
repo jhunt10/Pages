@@ -106,7 +106,7 @@ var bar_parts = []
 
 func set_ammo_data(ammo_data:Dictionary):
 	_suppress_sync = true
-	ammo_type = AmmoItem.AmmoTypes.get(ammo_data.get("AmmoType", "Gen"))
+	ammo_type = AmmoItem.AmmoTypes.get(ammo_data.get("AmmoType", "Gen"), AmmoItem.AmmoTypes.Gen)
 	clip_val = ammo_data.get("Clip", 1)
 	cost_val = ammo_data.get("Cost", 1)
 	_suppress_sync = false

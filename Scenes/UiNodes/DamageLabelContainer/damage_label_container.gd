@@ -80,7 +80,7 @@ enum DamageTypes {
 	set(val):
 		attack_variant = val
 		if variant_label:
-			variant_label.text = str(floori(attack_variant * 100)) 
+			variant_label.text = str(floori(attack_variant)) 
 
 @export var damage_icon_rect:TextureRect
 @export var atk_power_label:Label
@@ -88,6 +88,8 @@ enum DamageTypes {
 @export var percent_label:Label
 @export var variant_label:Label
 @export var damage_type_label:Label
+@export var multiplier_label:Label
+@export var count_label:Label
 
 @export var abb_damage_icon:Texture2D
 @export var phy_damage_icon:Texture2D
@@ -124,10 +126,18 @@ func set_damage_data(damage_data:Dictionary, actor:BaseActor = null):
 		percent_label.hide()
 	else:
 		attack_power = damage_data.get("AtkPower", 0)
-		attack_variant = damage_data.get("DamageVarient", 0)
+		attack_variant = attack_power * damage_data.get("DamageVarient", 0)
 		if attack_variant == 0:
 			variant_label.hide()
 			plus_minus_label.hide()
+	
+	if damage_data.has("PreviewDamageCount"):
+		multiplier_label.show()
+		count_label.text = str(damage_data['PreviewDamageCount'])
+		count_label.show()
+	else:
+		multiplier_label.hide()
+		count_label.hide()
 	
 	defense_type = damage_data.get("DefenseType")
 	var type_string = damage_data.get("DamageType")

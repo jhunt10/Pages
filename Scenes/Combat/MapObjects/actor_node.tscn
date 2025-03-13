@@ -319,6 +319,7 @@ offset_node = NodePath("../ActorSpriteNode/OffsetNode/VFX_OffsetNode")
 [node name="FlashTextController" parent="ActorMotionNode/VFXHolder" instance=ExtResource("7_t0kdx")]
 offset_top = -40.0
 offset_bottom = -16.0
+mouse_filter = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

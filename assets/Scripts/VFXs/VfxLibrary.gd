@@ -24,7 +24,7 @@ static func get_vfx_data(key:String)->VfxData:
 static func get_vfx_def(key:String)->Dictionary:
 	if !loaded:
 		load_vfx_defs()
-	return _vfx_defs.get(key, {})
+	return _vfx_defs.get(key, {}).duplicate()
 #
 #func create_vfx_node_from_key(vfx_key:String, data:Dictionary={})->VfxNode:
 	#var vfx_data = get_vfx_data(vfx_key)

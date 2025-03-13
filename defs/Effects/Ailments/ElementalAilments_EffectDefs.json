@@ -4,7 +4,7 @@
         "ShowCounter": true,
         "DamageDatas": {
             "DamageData1": {
-                "AtkPower": 10,
+                "AtkPower": 2,
                 "AtkStat": "Percent:PPR",
                 "BaseDamage": 0,
                 "DamageEffect": "SmallFire_DamageEffect",
@@ -16,9 +16,10 @@
                 "DefenseType": "None"
             }
         },
+        "AddTagsToActor": ["Burned"],
         "DamageMods": {},
         "Details": {
-            "Description": "Take Fire Damage at the end of each Turn. Damage is roughly equal to 10% Max Health per Round and is not reduced by Ward.",
+            "Description": "Take 2% Max Health as Fire Damage at the end of each Turn. Damage is not reduced by Ward.",
             "DisplayName": "Burned",
             "LargeIcon": "Sprites/BurnedIcon.png",
             "SmallIcon": "Sprites/BurnedIcon.png",
@@ -65,18 +66,19 @@
         "CanStack": true,
         "DamageDatas": {
             "DamageData1": {
-                "AtkPower": 5,
+                "AtkPower": 2,
                 "AtkStat": "Percent:PPR",
                 "BaseDamage": 0,
                 "DamageEffect": "SmallLightning_DamageEffect",
                 "DamageType": "Electric",
-                "DamageVarient": 0.4,
+                "DamageVarient": 0.5,
                 "DefenseType": "None"
             }
         },
+        "AddTagsToActor": ["Shocked"],
         "DamageMods": {},
         "Details": {
-            "Description": "Deal Electric Damage to Self and adjacent Actors at the end of each Turn. Damage is roughly equal to 3%-7% Max Health per Round and is not reduced by Ward.",
+            "Description": "Deal 1% to 3% Max Health as Electric Damage to Self and adjacent Actors at the end of each Turn. Damage is not reduced by Ward.",
             "DisplayName": "Shocked",
             "LargeIcon": "Sprites/ShockedIcon.png",
             "SmallIcon": "Sprites/ShockedIcon.png",
@@ -110,6 +112,7 @@
         "CanStack": true,
         "DamageDatas": {},
         "DamageMods": {},
+        "AddTagsToActor": ["Chilled"],
         "Details": {
             "Description": "-50% Speed, Mass, Accuracy, Potency, Evasion, and Block Chance. May Freeze if Chilled again.",
             "DisplayName": "Chilled",

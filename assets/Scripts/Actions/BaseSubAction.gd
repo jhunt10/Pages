@@ -45,6 +45,29 @@ func _get_target_parameters(parent_action:BaseAction, actor:BaseActor, subaction
 		return null
 	return target_parms
 
+## Selected target mapped to key
+func _get_primary_target(parent_action:BaseAction, subaction_data:Dictionary, target_key:String, 
+					metadata:QueExecutionData, game_state:GameStateData, source_actor:BaseActor):
+	if target_key == "Self":
+		return [source_actor]
+	var turn_data = metadata.get_current_turn_data()
+	var target_param_key = turn_data.get_param_key_for_target(target_key)
+	if !target_param_key or target_param_key == '':
+		printerr("BaseSubAction._find_target_effected_actors: No TargetParamKey found in turn_data.")
+		return []
+	var target_params = parent_action.get_targeting_params(target_param_key, source_actor)
+	if !target_params:
+		printerr("BaseSubAction._find_target_effected_actors: No TargetParam found with key '%s' from TargetingHelper." % [target_param_key])
+		return []
+	
+	var targets = turn_data.get_targets(target_key)
+	if not targets or targets.size() == 0:
+		return null
+	
+	if targets.size() > 1:
+		printerr("BaseSubAction._get_primary_target: Multiple targets found." )
+	
+	return targets[0]
 
 ## Get actors that were effected by the selected target key
 func _find_target_effected_actors(parent_action:BaseAction, subaction_data:Dictionary, target_key:String, 
@@ -65,8 +88,8 @@ func _find_target_effected_actors(parent_action:BaseAction, subaction_data:Dicti
 	if not targets or targets.size() == 0:
 		print("No target with key '%s found." % [target_key])
 		return []
-		
-	var target_list = TargetingHelper.get_targeted_actors(target_params, targets, source_actor, game_state)
+	var ignore_aoe = subaction_data.get("PrimaryTargetOnly", false)
+	var target_list = TargetingHelper.get_targeted_actors(target_params, targets, source_actor, game_state, ignore_aoe)
 	return target_list
 
 ## Get MapPos Array of positions that were included by the selected target key

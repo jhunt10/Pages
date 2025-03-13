@@ -75,6 +75,19 @@
 		"RandomRotation": [-180, 180]
 	},
 	{
+		"VfxKey": "LightningStrike_DamageEffect",
+		"ScenePath": "res://assets/Scripts/VFXs/DamageVfxs/damage_vfx_node.tscn",
+		"AnimationName": "6_sprites_250ms_frames",
+		"AnimationSpeed": 5,
+		"SpriteName": "Lightning/LightningStrikeEffect.png",
+		"SpriteSheetWidth": 3,
+		"SpriteSheetHight": 2,
+		"Scale": 1,
+		"Offset": [0,-8],
+		"RandomOffsets": [0.0, 0.0],
+		"RandomRotation": [0, 0]
+	},
+	{
 		"VfxKey": "Poison_DamageEffect",
 		"ScenePath": "res://assets/Scripts/VFXs/DamageVfxs/damage_vfx_node.tscn",
 		"AnimationName": "6_sprites_250ms_frames",

@@ -42,8 +42,8 @@ func do_thing(parent_action:BaseAction, subaction_data:Dictionary, metadata:QueE
 	
 	# No valid targets
 	if selection_data.get_potential_target_count() == 0:
-		CombatRootControl.Instance.create_flash_text_on_actor(actor, "No Target", FlashTextController.FlashTextType.NoTarget)
-		return BaseSubAction.Failed
+		#CombatRootControl.Instance.create_flash_text_on_actor(actor, "No Target", FlashTextController.FlashTextType.NoTarget)
+		return BaseSubAction.Success
 	var random_index = randi_range(0, selection_data.get_potential_target_count()-1)
 	var target = selection_data.list_potential_targets()[random_index]
 	turn_data.add_target_for_key(setting_target_key, target_params.target_param_key, target)
