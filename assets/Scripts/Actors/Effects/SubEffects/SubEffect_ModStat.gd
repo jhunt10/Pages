@@ -18,6 +18,8 @@ func get_active_stat_mods(effect:BaseEffect, subeffect_data:Dictionary)->Array:
 		stat_mod_keys.append(subeffect_data['StatModKey'])
 	if subeffect_data.has('StatModKeys'):
 		stat_mod_keys.append_array(subeffect_data['StatModKeys'])
+	if subeffect_data.get("AllStatMods", false):
+		stat_mod_keys = effect.get_load_val("StatMods", {}).keys()
 	
 	var out_list = []
 	for mod_data in effect.get_load_val("StatMods", {}).values():

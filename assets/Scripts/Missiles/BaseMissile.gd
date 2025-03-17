@@ -22,6 +22,9 @@ var _start_frame:int
 var _end_frame:int
 var _position_per_frame:Array=[]
 
+var _frames_since_creation:int = 0
+var _real_velocity:float = 1
+
 func _init(source_actor:BaseActor, missile_data:Dictionary, source_tag_chain:SourceTagChain, 
 			target_params:TargetParameters, start_pos:MapPos, target_pos:MapPos, load_path:String) -> void:
 	_source_actor_id = source_actor.Id
@@ -30,8 +33,10 @@ func _init(source_actor:BaseActor, missile_data:Dictionary, source_tag_chain:Sou
 	_target_params = target_params
 	_lob_path = missile_data.get("UseLobPath", false)
 	
-	_frames_per_tile = missile_data['FramesPerTile']
+	_frames_per_tile = missile_data.get('FramesPerTile', 1)
 	_start_frame = CombatRootControl.Instance.QueController.sub_action_index
+	
+	CombatRootControl.Instance.QueController.end_of_frame.connect(_on_frame_end)
 	# Use potition if given, otherwise start at actor position
 	StartSpot = start_pos.to_vector2i()
 	TargetSpot = target_pos.to_vector2i()
@@ -59,11 +64,19 @@ func get_missile_vfx_data()->Dictionary:
 		#return data
 	#return null
 
+func _on_frame_end():
+	_frames_since_creation += 1
+
 func get_position_for_frame(frame:int):
 	var index = frame - _start_frame
 	if index < 0 or index >= _position_per_frame.size():
 		return null
 	return _position_per_frame[index]
+
+func get_current_moveto_position():
+	var cur_frame = min(_position_per_frame.size()-1, _frames_since_creation-1)
+	return _position_per_frame[cur_frame]
+	
 
 func get_final_position():
 	if _position_per_frame.size() == 0:
@@ -74,7 +87,11 @@ func has_reached_target()->bool:
 	return _end_frame == CombatRootControl.Instance.QueController.sub_action_index
 
 func has_impact_vfx()->bool:
-	return _missle_data.has("ImpactVfxKey") or _missle_data.has("ImpactVfxData")
+	if _missle_data.get("ImpactVfxKey", "") != "":
+		return  true
+	if _missle_data.get("ImpactVfxData", {}).size() > 0:
+		return true
+	return false
 	
 func get_impact_vfx_data()->Dictionary:
 	var vfx_key = _missle_data.get("ImpactVfxKey", null)
@@ -103,7 +120,7 @@ func do_thing(game_state:GameStateData):
 
 func _get_actors_in_effect_area(game_state:GameStateData)->Array:
 	var effect_area = [TargetSpot]
-	if _target_params.has_area_of_effect():
+	if _target_params.has_area_of_effect() and not _missle_data.get("IgnoreAOE", false):
 		effect_area = _target_params.get_area_of_effect(MapPos.Vector2i(TargetSpot))
 	
 	var targets = []
@@ -131,10 +148,13 @@ func _calc_positions():
 	
 	# Check if the missile will take more frames to reach the target then there are frames left in turn
 	# If so, log an error and clap the end frame.
-	if  _end_frame > BaseAction.SUB_ACTIONS_PER_ACTION:
+	if  _end_frame >= BaseAction.SUB_ACTIONS_PER_ACTION:
 		_end_frame = BaseAction.SUB_ACTIONS_PER_ACTION - 1
 		frames_till_hit = _end_frame - _start_frame
 		pixels_per_frame = pixel_distance / frames_till_hit
+	
+	_real_velocity = pixel_distance / float(frames_till_hit * CombatRootControl.Instance.QueController.scaled_sub_action_frame_time)
+	
 	# Calculate position per frame upfront
 	_position_per_frame.clear()
 	for n in range(_start_frame, _end_frame + 1):

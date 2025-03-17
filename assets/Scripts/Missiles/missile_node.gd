@@ -27,6 +27,12 @@ func set_missile_data(missle):
 	missile_effect_node = VfxHelper.create_missile_vfx_node(vfx_data.get("VfxKey", ""), vfx_data)
 	self.add_child(missile_effect_node)
 
+func _process(delta: float) -> void:
+	var cur_target_pos = missile.get_current_moveto_position()
+	var new_pos = self.position.move_toward(cur_target_pos, delta * missile._real_velocity)
+	self.position = new_pos
+	pass
+
 func sync_pos():
 	if missile.has_reached_target():
 		self.position = missile.get_final_position()
@@ -45,18 +51,20 @@ func sync_pos():
 			missile_effect_node.rotation = angle
 
 func on_missile_reach_target():
+	var delete_self = true
 	if missile.has_impact_vfx():
 		self.position = missile.get_final_position()
 		var impact_data = missile.get_impact_vfx_data()
-		impact_effect_node = VfxHelper.create_missile_vfx_node(impact_data.get("VfxKey", ""), impact_data)
-		if not impact_effect_node:
-			printerr("Failed to find impact effect for missile: %s" + missile.Id)
-			self.queue_free()
-		else:
-			impact_effect_node.tree_exited.connect(self.queue_free)
-			self.add_child(impact_effect_node)
-			impact_effect_node.start_vfx()
-			if missile_effect_node:
-				missile_effect_node.visible = false
-	else:
+		if impact_data.size() > 0:
+			impact_effect_node = VfxHelper.create_missile_vfx_node(impact_data.get("VfxKey", ""), impact_data)
+			if not impact_effect_node:
+				printerr("Failed to find impact effect for missile: %s" + missile.Id)
+			else:
+				impact_effect_node.finished.connect(_on_impact_effect_finished)
+				self.add_child(impact_effect_node)
+				delete_self = false
+	if delete_self:
 		self.queue_free()
+
+func _on_impact_effect_finished():
+	self.queue_free()

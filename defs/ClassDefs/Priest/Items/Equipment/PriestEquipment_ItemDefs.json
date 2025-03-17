@@ -64,6 +64,14 @@
             "Rotation":0,
             "TwoHandRotation": -30
         },
+        "StatMods": {
+            "AttackBonus": {
+                "DisplayName": "OldStaff",
+                "ModType": "Add",
+                "StatName": "MagAttack",
+                "Value": 10
+            }
+        },
         "EquipSlot":"Weapon",
         "DamageData":{
             "AtkStat": "MagAttack",

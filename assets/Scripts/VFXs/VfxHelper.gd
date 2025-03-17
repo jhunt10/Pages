@@ -67,13 +67,11 @@ static func create_vfx_on_actor(actor:BaseActor, vfx_key:String, vfx_data:Dictio
 	node.start_vfx()
 	return node
 
-static func create_missile_vfx_node(missile_vfx_key:String, vfx_data:Dictionary):
+static func create_missile_vfx_node(missile_vfx_key:String, vfx_data:Dictionary)->BaseVfxNode:
 	if FORCE_RELOAD: MainRootNode.vfx_libray.reload_vfxs()
 	var vfx_def = MainRootNode.vfx_libray.get_vfx_def(missile_vfx_key)
 	var merged_data = BaseLoadObjectLibrary._merge_defs(vfx_data, vfx_def)
-	var would_be_id = missile_vfx_key
-	if merged_data.get("CanStack", true):
-		would_be_id += "_" + str(ResourceUID.create_id())
+	var would_be_id = missile_vfx_key + "_" + str(ResourceUID.create_id())
 	
 	var vfx_scene_path = merged_data.get("ScenePath")
 	if not vfx_scene_path:

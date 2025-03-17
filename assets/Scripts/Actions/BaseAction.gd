@@ -114,7 +114,7 @@ func get_damage_data(actor:BaseActor, subaction_data:Dictionary)->Dictionary:
 			printerr("No Weapon")
 			return {}
 		return (weapon as BaseWeaponEquipment).get_damage_data()
-	return DamageDatas.get(damage_key, subaction_data.get("DamageData", null))
+	return DamageDatas.get(damage_key, subaction_data.get("DamageData", {}))
 
 func get_targeting_params(target_param_key, actor:BaseActor)->TargetParameters:
 	if actor and target_param_key == "Weapon":

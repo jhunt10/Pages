@@ -12,16 +12,14 @@
                 "Fire"
             ]
         },
-        "AttackDetails":
-        {
+        "AttackDetails": {
             "AccuracyMod": 1,
             "PotencyMod": 0.5
         },
-        "EffectDatas":{
+        "EffectDatas": {
             "AilmentEffect": {
                 "EffectKey": "AilmentBurned"
             }
-
         },
         "DamageDatas": {
             "Damage1": {
@@ -45,12 +43,11 @@
                 "Burned"
             ]
         },
-        "AttackDetails":
-        {
+        "AttackDetails": {
             "AccuracyMod": 1,
             "PotencyMod": 1
         },
-        "EffectDatas":{
+        "EffectDatas": {
             "Effect1": {
                 "EffectKey": "AilmentBurned",
                 "SubEffects": {
@@ -74,16 +71,14 @@
                 "Fire"
             ]
         },
-        "AttackDetails":
-        {
+        "AttackDetails": {
             "AccuracyMod": 1,
             "PotencyMod": 0.3
         },
-        "EffectDatas":{
+        "EffectDatas": {
             "BurnEffect": {
                 "EffectKey": "AilmentBurned"
             }
-
         },
         "DamageDatas": {
             "Damage1": {
@@ -131,16 +126,14 @@
                 "Attack"
             ]
         },
-        "AttackDetails":
-        {
+        "AttackDetails": {
             "AccuracyMod": 1,
             "PotencyMod": 0.3
         },
-        "EffectDatas":{
+        "EffectDatas": {
             "BurnEffect": {
                 "EffectKey": "AilmentBurned"
             }
-
         },
         "MissileDatas": {
             "Missile1": {
@@ -192,7 +185,7 @@
                 "EffectsAllies": false,
                 "EffectsEnemies": false,
                 "LineOfSight": true,
-                "TargetArea": "[[-1,4],[0,4],[1,4],[-1,3],[0,3],[1,3],[-1,2],[0,2],[1,2]]",
+                "TargetArea": "[[0,4],[-1,3],[0,3],[1,3],[0,2]]",
                 "TargetType": "Spot"
             }
         }
@@ -210,16 +203,14 @@
                 "Cold"
             ]
         },
-        "AttackDetails":
-        {
+        "AttackDetails": {
             "AccuracyMod": 1,
             "PotencyMod": 0.5
         },
-        "EffectDatas":{
+        "EffectDatas": {
             "AilmentEffect": {
                 "EffectKey": "AilmentChilled"
             }
-
         },
         "DamageDatas": {
             "Damage1": {
@@ -243,12 +234,11 @@
                 "Chilled"
             ]
         },
-        "AttackDetails":
-        {
+        "AttackDetails": {
             "AccuracyMod": 1,
             "PotencyMod": 1
         },
-        "EffectDatas":{
+        "EffectDatas": {
             "Effect1": {
                 "EffectKey": "AilmentChilled",
                 "SubEffects": {
@@ -272,16 +262,14 @@
                 "Cold"
             ]
         },
-        "AttackDetails":
-        {
+        "AttackDetails": {
             "AccuracyMod": 1,
             "PotencyMod": 0.2
         },
-        "EffectDatas":{
+        "EffectDatas": {
             "BurnEffect": {
                 "EffectKey": "AilmentChilled"
             }
-
         },
         "DamageDatas": {
             "Damage1": {
@@ -313,6 +301,15 @@
                 "DamageType": "Cold",
                 "DamageVarient": 0.1,
                 "DefenseType": "Ward"
+            },
+            "Damage2": {
+                "AtkPower": 80,
+                "AtkStat": "MagAttack",
+                "BaseDamage": 0,
+                "DamageEffect": "SmallIce_DamageEffect",
+                "DamageType": "Cold",
+                "DamageVarient": 0.1,
+                "DefenseType": "Ward"
             }
         },
         "Details": {
@@ -330,9 +327,20 @@
         },
         "MissileDatas": {
             "Missile1": {
+                "MissileScriptPath": "res://assets/Scripts/Missiles/CustomMissiles/IceBallMissile.gd",
                 "DamageDataKey": "Damage1",
                 "FramesPerTile": 3,
+                "ImpactVfxKey": "IceBall_ImpactEffect",
+                "IgnoreAOE": true,
+                "MissileVfxKey": "IceBallMissile",
+                "SubMissileKey": "Missile2",
+                "SubMissileDamageKey": "Damage2"
+            },
+            "Missile2": {
+                "DamageDataKey": "Damage2",
+                "FramesPerTile": 3,
                 "ImpactVfxKey": "",
+                "IgnoreAOE": true,
                 "MissileVfxKey": "IceMissile"
             }
         },
@@ -362,7 +370,8 @@
                     "MissileKey": "Missile1",
                     "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_SpawnMissile.gd",
                     "TargetKey": "Target1",
-                    "TargetParamKey": "TargetParam1"
+                    "TargetParamKey": "TargetParam1",
+                    "SubMissileKey": "Missile2"
                 }
             ],
             "5": [
@@ -374,12 +383,83 @@
         },
         "TargetParams": {
             "TargetParam1": {
-                "EffectArea": "[[-1,1],[0,1],[1,1],[1,0],[1,-1],[0,-1],[-1,-1],[-1,0],[0,0]]",
+                "EffectArea": "[[-1,1],[0,1],[1,1],[1,0],[1,-1],[0,-1],[-1,-1],[-1,0]]",
                 "EffectsAllies": false,
                 "EffectsEnemies": false,
                 "LineOfSight": true,
-                "TargetArea": "[[-1,4],[0,4],[1,4],[-1,3],[0,3],[1,3],[-1,2],[0,2],[1,2]]",
+                "TargetArea": "[[0,4],[-1,3],[0,3],[1,3],[0,2]]",
                 "TargetType": "Spot"
+            }
+        }
+    },
+    {
+        "ActionKey": "WaterBeamSpell",
+        "Details": {
+            "Description": "Spawn a Piercing Beam of Water which hits all Actors in a line.",
+            "DisplayName": "Water Beam",
+            "LargeIcon": "Sprites/WaterBeam.png",
+            "SmallIcon": "Sprites/WaterBeam.png",
+            "SnippetDesc": "Spawn Piercing Beam of Water.",
+            "Tags": [
+                "Beam",
+                "Pierce",
+                "Piercing"
+            ]
+        },
+        "Preview": {
+            "PreviewTargetKey": "TargetParam1",
+            "PreviewDamageKey": "Damage1"
+        },
+        "AttackDetails": {
+            "AccuracyMod": 1,
+            "PotencyMod": 1
+        },
+        "EffectDatas": {},
+        "DamageDatas": {
+            "Damage1": {
+                "DamageEffect": "Pierce_Large_DamageEffect",
+                "DamageType": "Pierce",
+                "DamageVarient": 0.1,
+                "DefenseType": "Armor",
+                "AtkPower": 50,
+                "AtkStat":"MagAttack"
+            }
+        },
+        "SubActions": {
+            "0": [
+                {
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_PayCost.gd"
+                },
+                {
+                    "Animation": "Raise",
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponReadyAnimation.gd",
+                    "MainHand": true,
+                    "OffHand": "Never"
+                }
+            ],
+            "6": [
+                {
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Spawning/SubAct_SpawnBeamNode.gd",
+                    "TargetParamKey": "TargetParam1",
+                    "DamageKey": "Damage1"
+                }
+            ],
+            "17": [
+                {
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponMotionAnimation.gd",
+                    "MainHand": true,
+                    "OffHand": "Never"
+                }
+            ]
+        },
+        "TargetParams": {
+            "TargetParam1": {
+                "IncludeAlliesInAoe": true,
+                "IncludeEnemiesInAoe": true,
+                "IncludeSelfInAoe": true,
+                "LineOfSight": false,
+                "TargetArea": "[[0,1],[0,2],[0,3],[0,4],[0,5]]",
+                "TargetType": "Actor"
             }
         }
     },
@@ -396,16 +476,14 @@
                 "Shock"
             ]
         },
-        "AttackDetails":
-        {
+        "AttackDetails": {
             "AccuracyMod": 1,
             "PotencyMod": 0.5
         },
-        "EffectDatas":{
+        "EffectDatas": {
             "AilmentEffect": {
                 "EffectKey": "AilmentShocked"
             }
-
         },
         "DamageDatas": {
             "Damage1": {
@@ -429,12 +507,11 @@
                 "Shock"
             ]
         },
-        "AttackDetails":
-        {
+        "AttackDetails": {
             "AccuracyMod": 1,
             "PotencyMod": 1
         },
-        "EffectDatas":{
+        "EffectDatas": {
             "Effect1": {
                 "EffectKey": "AilmentShocked",
                 "SubEffects": {
@@ -458,12 +535,11 @@
                 "Burst"
             ]
         },
-        "Preview":{
-            "PreviewTargetKey":"TargetParam1",
-            "PreviewDamageKey":"Damage1"
+        "Preview": {
+            "PreviewTargetKey": "TargetParam1",
+            "PreviewDamageKey": "Damage1"
         },
-        "AttackDetails":
-        {
+        "AttackDetails": {
             "AccuracyMod": 1,
             "PotencyMod": 1,
             "AttackVfxKey": "LightningChainVfx",
@@ -473,7 +549,7 @@
                 "ScenePath": "res://data/VFXs/DamageVFXs/Lightning/lightning_chain_vfx_node.tscn"
             }
         },
-        "DamageDatas":{
+        "DamageDatas": {
             "Damage1": {
                 "DamageEffect": "SmallLightning_DamageEffect",
                 "DamageType": "Shock",
@@ -491,7 +567,7 @@
                 "DefenseType": "Ward"
             }
         },
-        "EffectDatas":{},
+        "EffectDatas": {},
         "SubActions": {
             "10": [
                 {
@@ -515,20 +591,20 @@
                     "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_AnimationFinish.gd"
                 },
                 {
-                    "RequiredConditions":{
+                    "RequiredConditions": {
                         "TargetWasShocked": false
                     },
                     "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_ApplyDamage.gd",
-                    "TargetKey":"Target1",
-                    "DamageKey":"Damage1"
+                    "TargetKey": "Target1",
+                    "DamageKey": "Damage1"
                 },
                 {
-                    "RequiredConditions":{
+                    "RequiredConditions": {
                         "TargetWasShocked": true
                     },
                     "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_ApplyDamage.gd",
-                    "TargetKey":"Target1",
-                    "DamageKey":"BoostedDamage"
+                    "TargetKey": "Target1",
+                    "DamageKey": "BoostedDamage"
                 },
                 {
                     "SubActionScript": "res://assets/Scripts/Actions/SubActions/Effects/SubAct_RemoveEffect.gd",
@@ -560,7 +636,9 @@
                 "EffectArea": "[[-1,1],[0,1],[1,1],[1,0],[1,-1],[0,-1],[-1,-1],[-1,0],[0,0]]",
                 "TargetArea": "[[0,2],[-1,1],[0,1],[1,1],[-2,0],[-1,0],[0,0],[1,0],[2,0],[-1,-1],[0,-1],[1,-1],[0,-2]]",
                 "TargetType": "Actor",
-                "RequiredTags": ["Shocked"]
+                "RequiredTags": [
+                    "Shocked"
+                ]
             }
         }
     },
@@ -576,16 +654,15 @@
                 "Shock"
             ]
         },
-        "AttackDetails":
-        {
+        "AttackDetails": {
             "AccuracyMod": 1,
             "PotencyMod": 0.1
         },
-        "Preview":{
-            "PreviewTargetKey":"TargetParam1",
-            "PreviewDamageKey":"Damage1"
+        "Preview": {
+            "PreviewTargetKey": "TargetParam1",
+            "PreviewDamageKey": "Damage1"
         },
-        "DamageDatas":{
+        "DamageDatas": {
             "Damage1": {
                 "DamageEffect": "LightningStrike_DamageEffect",
                 "DamageType": "Shock",
@@ -595,7 +672,7 @@
                 "DefenseType": "Ward"
             }
         },
-        "EffectDatas":{
+        "EffectDatas": {
             "Effect1": {
                 "EffectKey": "AilmentShocked",
                 "SubEffects": {
@@ -629,8 +706,8 @@
                 },
                 {
                     "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_ApplyDamage.gd",
-                    "TargetKey":"Target1",
-                    "DamageKey":"Damage1"
+                    "TargetKey": "Target1",
+                    "DamageKey": "Damage1"
                 },
                 {
                     "SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponMotionAnimation.gd",
@@ -663,16 +740,15 @@
                 "AOE"
             ]
         },
-        "AttackDetails":
-        {
+        "AttackDetails": {
             "AccuracyMod": 1,
             "PotencyMod": 0.1
         },
-        "Preview":{
-            "PreviewTargetKey":"TargetParam1",
-            "PreviewDamageKey":"Damage1"
+        "Preview": {
+            "PreviewTargetKey": "TargetParam1",
+            "PreviewDamageKey": "Damage1"
         },
-        "DamageDatas":{
+        "DamageDatas": {
             "Damage1": {
                 "DamageEffect": "LightningStrike_DamageEffect",
                 "DamageType": "Shock",
@@ -683,7 +759,7 @@
                 "PreviewDamageCount": 3
             }
         },
-        "EffectDatas":{
+        "EffectDatas": {
             "Effect1": {
                 "EffectKey": "AilmentShocked",
                 "SubEffects": {
@@ -721,22 +797,22 @@
             "7": [
                 {
                     "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_ApplyDamage.gd",
-                    "TargetKey":"Target1",
-                    "DamageKey":"Damage1"
+                    "TargetKey": "Target1",
+                    "DamageKey": "Damage1"
                 }
             ],
             "14": [
                 {
                     "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_ApplyDamage.gd",
-                    "TargetKey":"Target2",
-                    "DamageKey":"Damage1"
+                    "TargetKey": "Target2",
+                    "DamageKey": "Damage1"
                 }
             ],
             "21": [
                 {
                     "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_ApplyDamage.gd",
-                    "TargetKey":"Target3",
-                    "DamageKey":"Damage1"
+                    "TargetKey": "Target3",
+                    "DamageKey": "Damage1"
                 },
                 {
                     "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_AnimationFinish.gd"

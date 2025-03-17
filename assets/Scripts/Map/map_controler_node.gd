@@ -181,7 +181,7 @@ func _sync_positions():
 	if Engine.is_editor_hint(): return
 	#_build_terrain()
 	#_sync_actor_positions()
-	_sync_missile_positions()
+	#_sync_missile_positions()
 
 #func _sync_actor_positions():
 	#if Engine.is_editor_hint(): return

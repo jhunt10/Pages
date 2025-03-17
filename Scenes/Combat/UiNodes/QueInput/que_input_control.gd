@@ -93,7 +93,7 @@ func show_start_button():
 	var que_display_size = que_display_patch.size.x
 	var self_size = back_patch.size.x #+ (back_patch.sides_padding * 2)
 	var use_top = (top_start_button.size.x < self_size - que_display_size)
-	printerr("SelfSize: %s | DisSize: %s | UseTop: %s" % [self_size, que_display_size, use_top])
+	#printerr("SelfSize: %s | DisSize: %s | UseTop: %s" % [self_size, que_display_size, use_top])
 	if use_top:
 		if all_ready:
 			top_start_button.label.text = "Start"

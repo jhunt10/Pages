@@ -44,7 +44,7 @@ static func handle_attack(attacker:BaseActor, defender:BaseActor, attack_details
 	if damage_datas is Array:
 		damage_list = damage_datas
 	elif damage_datas is Dictionary:
-		if damage_datas.values()[0] is Dictionary:
+		if damage_datas.values().size() > 0 and damage_datas.values()[0] is Dictionary:
 			for d_data_key in damage_datas.keys():
 				var d_data = damage_datas[d_data_key].duplicate()
 				if not d_data.keys().has("DamageDataKey"):

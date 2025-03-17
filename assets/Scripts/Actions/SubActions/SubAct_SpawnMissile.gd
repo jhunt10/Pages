@@ -47,7 +47,12 @@ func do_thing(parent_action:BaseAction, subaction_data:Dictionary, metadata:QueE
 	missile_data['DamageData'] = damage_data
 	missile_data['AttackDetails'] = parent_action.get_load_val("AttackDetails", {})
 	missile_data['EffectDatas'] = parent_action.get_load_val("EffectDatas", {})
-	var missile = BaseMissile.new(actor, missile_data, tag_chain, target_params,
+	var missile_script_path = missile_data.get("MissileScriptPath", "res://assets/Scripts/Missiles/BaseMissile.gd")
+	var missile_script =  load(missile_script_path)
+	if not missile_script:
+		printerr("SubAct_SpawnMissile: Failed to load scene: %s" % [missile_script_path])
+		return BaseSubAction.Failed
+	var missile = missile_script.new(actor, missile_data, tag_chain, target_params,
 									actor_pos, target_spot, parent_action.get_load_path())
 	CombatRootControl.Instance.create_new_missile_node(missile)
 	return BaseSubAction.Success

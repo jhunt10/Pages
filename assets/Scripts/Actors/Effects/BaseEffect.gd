@@ -96,7 +96,7 @@ func get_large_icon():
 func get_tags_added_to_actor()->Array:
 	return get_load_val("AddTagsToActor", [])
 
-func get_active_stat_mods():
+func get_active_stat_mods()->Array:
 	var out_list = []
 	for sub_effect_key in SubEffectDatas.keys():
 		var sub_effect_data = SubEffectDatas[sub_effect_key]
@@ -115,6 +115,9 @@ func get_active_damage_mods():
 	return out_list
 
 func _get_sub_effect_script(sub_effect_key:String):
+	var subeffects = SubEffectDatas
+	if not subeffects.has(sub_effect_key):
+		return null
 	return EffectLibrary.get_sub_effect_script(SubEffectDatas[sub_effect_key]['SubEffectScript'])
 
 func _cache_triggers():

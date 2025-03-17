@@ -1,6 +1,8 @@
 class_name BaseVfxNode
 extends Node2D
 
+signal finished
+
 enum States {Waiting, Playing, Finished, Errored}
 
 var id:String
@@ -49,6 +51,7 @@ func finish():
 	_on_delete()
 	if vfx_holder and vfx_holder.has_vfx(self.id):
 		vfx_holder.remove_vfx(self.id)
+	finished.emit()
 
 func _on_delete():
 	pass

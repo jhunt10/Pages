@@ -15,6 +15,8 @@ func _on_start():
 	if _data.has("Offset"):
 		var offset = _data['Offset']
 		sprite.position = Vector2(offset[0], offset[1])
+	if _data.has("Rotation"):
+		sprite.rotation_degrees = _data['Rotation']
 	if _data.has("RandomOffsets"):
 		var random_offset_range = _data.get("RandomOffsets", [0,0])
 		var sprite_size = sprite.get_rect().size

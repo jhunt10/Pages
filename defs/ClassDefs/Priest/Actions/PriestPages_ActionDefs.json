@@ -47,5 +47,274 @@
                 "Light"
             ]
         }
+    },
+    
+    {
+        "ActionKey": "BaseBlessing",
+        "ParentKey": "BaseApplyEffectSpell",
+        "Details": {
+            "Description": "Grant ZZZZ XXXX Blessing to Ally for 5 Turns.",
+            "DisplayName": "Pebbel Blessing",
+            "LargeIcon": "Sprites/XXXXBuff_YYYY.png",
+            "SmallIcon": "Sprites/XXXXBuff_YYYY.png",
+            "SnippetDesc": "Grant ZZZZ XXXX Blessing",
+            "Tags": [
+                "Blessing"
+            ]
+        },
+        "AttackDetails":
+        {
+            "AccuracyMod": 1,
+            "PotencyMod": 1
+        },
+        "EffectDatas":{
+            "Effect1": {
+                "EffectKey": "AilmentChilled",
+                "SubEffects": {
+                    "Duration": {
+                        "DurationValue": 5
+                    }
+                }
+            }
+        },
+
+        "TargetParams": {
+            "TargetParam1": {
+                "EffectsAllies": true,
+                "EffectsEnemies": true,
+                "LineOfSight": false,
+                "AllowAutoTarget": false,
+                "TargetArea": "[[0,0],[-1,1],[0,1],[1,1],[-1,2],[0,2],[1,2],[-1,3],[0,3],[1,3]]",
+                "TargetType": "Ally"
+            }
+        }
+    },
+    {
+        "ActionKey": "ApplyBlessing_EarthSmall",
+        "ParentKey": "BaseBlessing",
+        "Details": {
+            "Description": "Grant Weak Earth Blessing to Ally for 5 Turns.",
+            "DisplayName": "Pebbel Blessing",
+            "LargeIcon": "Sprites/EarthBuff_Small.png",
+            "SmallIcon": "Sprites/EarthBuff_Small.png",
+            "SnippetDesc": "Grant Weak Earth Blessing",
+            "Tags": [
+                "Blessing"
+            ]
+        },
+        "EffectDatas":{
+            "Effect1": {
+                "EffectKey": "BlessingEarth_Small"
+            }
+        }
+    },
+    {
+        "ActionKey": "ApplyBlessing_EarthMedium",
+        "ParentKey": "BaseBlessing",
+        "Details": {
+            "Description": "Grant Medium Earth Blessing to Ally for 5 Turns.",
+            "DisplayName": "Stone Blessing",
+            "LargeIcon": "Sprites/EarthBuff_Medium.png",
+            "SmallIcon": "Sprites/EarthBuff_Medium.png",
+            "SnippetDesc": "Grant Medium Earth Blessing",
+            "Tags": [
+                "Blessing"
+            ]
+        },
+        "EffectDatas":{
+            "Effect1": {
+                "EffectKey": "BlessingEarth_Medium"
+            }
+        }
+    },
+    {
+        "ActionKey": "ApplyBlessing_EarthLarge",
+        "ParentKey": "BaseBlessing",
+        "Details": {
+            "Description": "Grant Strong Earth Blessing to Ally for 5 Turns.",
+            "DisplayName": "Moutain Blessing",
+            "LargeIcon": "Sprites/EarthBuff_Large.png",
+            "SmallIcon": "Sprites/EarthBuff_Large.png",
+            "SnippetDesc": "Grant Strong Earth Blessing",
+            "Tags": [
+                "Blessing"
+            ]
+        },
+        "EffectDatas":{
+            "Effect1": {
+                "EffectKey": "BlessingEarth_Large"
+            }
+        }
+    },
+    {
+        "ActionKey": "ApplyBlessing_AirSmall",
+        "ParentKey": "BaseBlessing",
+        "Details": {
+            "Description": "Grant Weak Air Blessing to Ally for 5 Turns.",
+            "DisplayName": "Breeze Blessing",
+            "LargeIcon": "Sprites/AirBuff_Small.png",
+            "SmallIcon": "Sprites/AirBuff_Small.png",
+            "SnippetDesc": "Grant Weak Air Blessing",
+            "Tags": [
+                "Blessing"
+            ]
+        },
+        "EffectDatas":{
+            "Effect1": {
+                "EffectKey": "BlessingAir_Small"
+            }
+        }
+    },
+    {
+        "ActionKey": "ApplyBlessing_AirMedium",
+        "ParentKey": "BaseBlessing",
+        "Details": {
+            "Description": "Grant Medium Air Blessing to Ally for 5 Turns.",
+            "DisplayName": "Gust Blessing",
+            "LargeIcon": "Sprites/AirBuff_Medium.png",
+            "SmallIcon": "Sprites/AirBuff_Medium.png",
+            "SnippetDesc": "Grant Medium Air Blessing",
+            "Tags": [
+                "Blessing"
+            ]
+        },
+        "EffectDatas":{
+            "Effect1": {
+                "EffectKey": "BlessingAir_Medium"
+            }
+        }
+    },
+    {
+        "ActionKey": "ApplyBlessing_AirLarge",
+        "ParentKey": "BaseBlessing",
+        "Details": {
+            "Description": "Grant Strong Air Blessing to Ally for 5 Turns.",
+            "DisplayName": "Storm Blessing",
+            "LargeIcon": "Sprites/AirBuff_Large.png",
+            "SmallIcon": "Sprites/AirBuff_Large.png",
+            "SnippetDesc": "Grant Strong Air Blessing",
+            "Tags": [
+                "Blessing"
+            ]
+        },
+        "EffectDatas":{
+            "Effect1": {
+                "EffectKey": "BlessingAir_Large"
+            }
+        }
+    },
+    {
+        "ActionKey": "ApplyBlessing_WaterSmall",
+        "ParentKey": "BaseBlessing",
+        "Details": {
+            "Description": "Grant Weak Water Blessing to Ally for 5 Turns.",
+            "DisplayName": "Puddle Blessing",
+            "LargeIcon": "Sprites/WaterBuff_Small.png",
+            "SmallIcon": "Sprites/WaterBuff_Small.png",
+            "SnippetDesc": "Grant Weak Water Blessing",
+            "Tags": [
+                "Blessing"
+            ]
+        },
+        "EffectDatas":{
+            "Effect1": {
+                "EffectKey": "BlessingWater_Small"
+            }
+        }
+    },
+    {
+        "ActionKey": "ApplyBlessing_WaterMedium",
+        "ParentKey": "BaseBlessing",
+        "Details": {
+            "Description": "Grant Medium Water Blessing to Ally for 5 Turns.",
+            "DisplayName": "Stream Blessing",
+            "LargeIcon": "Sprites/WaterBuff_Medium.png",
+            "SmallIcon": "Sprites/WaterBuff_Medium.png",
+            "SnippetDesc": "Grant Medium Water Blessing",
+            "Tags": [
+                "Blessing"
+            ]
+        },
+        "EffectDatas":{
+            "Effect1": {
+                "EffectKey": "BlessingWater_Medium"
+            }
+        }
+    },
+    {
+        "ActionKey": "ApplyBlessing_WaterLarge",
+        "ParentKey": "BaseBlessing",
+        "Details": {
+            "Description": "Grant Strong Water Blessing to Ally for 5 Turns.",
+            "DisplayName": "Torrent Blessing",
+            "LargeIcon": "Sprites/WaterBuff_Large.png",
+            "SmallIcon": "Sprites/WaterBuff_Large.png",
+            "SnippetDesc": "Grant Strong Water Blessing",
+            "Tags": [
+                "Blessing"
+            ]
+        },
+        "EffectDatas":{
+            "Effect1": {
+                "EffectKey": "BlessingWater_Large"
+            }
+        }
+    },
+    {
+        "ActionKey": "ApplyBlessing_FireSmall",
+        "ParentKey": "BaseBlessing",
+        "Details": {
+            "Description": "Grant Weak Fire Blessing to Ally for 5 Turns.",
+            "DisplayName": "Ember Blessing",
+            "LargeIcon": "Sprites/FireBuff_Small.png",
+            "SmallIcon": "Sprites/FireBuff_Small.png",
+            "SnippetDesc": "Grant Weak Fire Blessing",
+            "Tags": [
+                "Blessing"
+            ]
+        },
+        "EffectDatas":{
+            "Effect1": {
+                "EffectKey": "BlessingFire_Small"
+            }
+        }
+    },
+    {
+        "ActionKey": "ApplyBlessing_FireMedium",
+        "ParentKey": "BaseBlessing",
+        "Details": {
+            "Description": "Grant Medium Fire Blessing to Ally for 5 Turns.",
+            "DisplayName": "Flame Blessing",
+            "LargeIcon": "Sprites/FireBuff_Medium.png",
+            "SmallIcon": "Sprites/FireBuff_Medium.png",
+            "SnippetDesc": "Grant Medium Fire Blessing",
+            "Tags": [
+                "Blessing"
+            ]
+        },
+        "EffectDatas":{
+            "Effect1": {
+                "EffectKey": "BlessingFire_Medium"
+            }
+        }
+    },
+    {
+        "ActionKey": "ApplyBlessing_FireLarge",
+        "ParentKey": "BaseBlessing",
+        "Details": {
+            "Description": "Grant Strong Fire Blessing to Ally for 5 Turns.",
+            "DisplayName": "Inferno Blessing",
+            "LargeIcon": "Sprites/FireBuff_Large.png",
+            "SmallIcon": "Sprites/FireBuff_Large.png",
+            "SnippetDesc": "Grant Strong Fire Blessing",
+            "Tags": [
+                "Blessing"
+            ]
+        },
+        "EffectDatas":{
+            "Effect1": {
+                "EffectKey": "BlessingFire_Large"
+            }
+        }
     }
 ]

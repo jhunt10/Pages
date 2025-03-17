@@ -1,6 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://dvjfvxtimn18q"]
+[gd_scene load_steps=3 format=3 uid="uid://dvjfvxtimn18q"]
 
 [ext_resource type="Script" path="res://assets/Scripts/Missiles/missile_node.gd" id="1_xf7o2"]
+[ext_resource type="Script" path="res://Scenes/Combat/MapObjects/vfx_holder.gd" id="2_xloje"]
 
 [node name="MissileNode" type="Node2D"]
 script = ExtResource("1_xf7o2")
+
+[node name="Node2D" type="Node2D" parent="."]
+script = ExtResource("2_xloje")

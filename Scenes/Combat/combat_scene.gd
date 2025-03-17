@@ -75,6 +75,7 @@ func _process(delta: float) -> void:
 
 static func get_time_scale()->float:
 	return 1.5
+
 static func get_remaining_frames_for_turn()->int:
 	if Instance:
 		if Instance.QueController and Instance.QueController.execution_state != ActionQueController.ActionStates.Waiting:
@@ -272,7 +273,7 @@ func _on_actor_pickup_item(actor:BaseActor, items_ids:Array):
 	pass
 
 func create_new_missile_node(missile):
-	var new_node:MissileNode  = load("res://Scenes/Combat/MapObjects/missile_node.tscn").instantiate()
+	var new_node  = load("res://Scenes/Combat/MapObjects/missile_node.tscn").instantiate()
 	new_node.set_missile_data(missile)
 	MapController.add_missile_node(missile, new_node)
 

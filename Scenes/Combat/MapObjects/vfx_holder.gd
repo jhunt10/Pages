@@ -11,8 +11,9 @@ var vfx_nodes = {}
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	if not flash_text_controller.visible:
-		flash_text_controller.show()
+	if flash_text_controller:
+		if not flash_text_controller.visible:
+			flash_text_controller.show()
 	pass # Replace with function body.
 
 

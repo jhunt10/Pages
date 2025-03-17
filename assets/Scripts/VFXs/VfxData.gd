@@ -15,7 +15,7 @@ var match_source_dir:bool=false
 var shake_actor:bool
 
 func _init(data:Dictionary, load_path:String) -> void:
-	VFXKey = data.get("VFXKey", "")
+	VFXKey = data.get("VfxKey", "")
 	if VFXKey == '':
 		printerr("VfxData created without VFXKey")
 		return

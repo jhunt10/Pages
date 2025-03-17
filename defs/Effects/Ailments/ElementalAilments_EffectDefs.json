@@ -76,7 +76,27 @@
             }
         },
         "AddTagsToActor": ["Shocked"],
-        "DamageMods": {},
+        "DamageMods": {
+            "DamageMod1": {
+                "Conditions": {
+                    "ExcludeDamageTags": [],
+                    "ExcludeSourceTags": [],
+                    "LimitDamageTags": [
+                        "Attack"
+                    ],
+                    "LimitSourceTags": [
+                        "Enemy",
+                        "Page"
+                    ]
+                },
+                "DamageModKey": "DamageMod1",
+                "DisplayName": "",
+                "ModType": "Scale",
+                "OnDealDamage": true,
+                "OnTakeDamage": false,
+                "Value": 1.1
+            }
+        },
         "Details": {
             "Description": "Deal 1% to 3% Max Health as Electric Damage to Self and adjacent Actors at the end of each Turn. Damage is not reduced by Ward.",
             "DisplayName": "Shocked",
@@ -165,14 +185,7 @@
                 "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_AlimentVfx.gd"
             },
             "ApplyMaxStatMod": {
-                "StatModKeys": [
-                    "SpeedMod",
-                    "MassMod",
-                    "AccMod",
-                    "PotencyMod",
-                    "EvasionMod",
-                    "BlockChanceMod"
-                ],
+                "AllStatMods": true,
                 "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_ModStat.gd"
             },
             "Duration": {

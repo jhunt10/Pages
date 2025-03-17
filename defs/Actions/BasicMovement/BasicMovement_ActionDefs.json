@@ -168,22 +168,12 @@
             "PreviewMoveOffset": "[0, 0, 0, 3]"
         },
         "SubActions": {
-            "0": [
-                {
-                    "Animation": "move_turn_left",
-                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_AnimationInTo.gd"
-                }
-            ],
             "12": [
                 {
                     "MovementType": "Walk",
                     "PlayWalkin": true,
                     "RelativePos": "[0, 0, 0, 3]",
                     "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_Move.gd"
-                },
-                {
-                    "Reset": true,
-                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_AnimationFinish.gd"
                 }
             ]
         },
@@ -208,22 +198,12 @@
             "PreviewMoveOffset": "[0, 0, 0, 1]"
         },
         "SubActions": {
-            "0": [
-                {
-                    "Animation": "move_turn_right",
-                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_AnimationInTo.gd"
-                }
-            ],
             "12": [
                 {
                     "MovementType": "Walk",
                     "PlayWalkin": true,
                     "RelativePos": "[0, 0, 0, 1]",
                     "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_Move.gd"
-                },
-                {
-                    "Reset": true,
-                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_AnimationFinish.gd"
                 }
             ]
         },
