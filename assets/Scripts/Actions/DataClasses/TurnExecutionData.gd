@@ -39,7 +39,7 @@ func list_targets()->Array:
 			out_list.append_array(val)
 	return out_list
 
-## Returns Array<Actor_Id> for Array<Coor>
+## Returns Array<Actor_Id> or Array<Coor>
 func get_targets(target_key:String):
 	if target_key == "Self":
 		return _actor.Id

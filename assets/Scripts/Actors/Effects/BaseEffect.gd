@@ -2,6 +2,8 @@ class_name BaseEffect
 extends BaseLoadObject
 # An "Effect" is any Buff, Debuff, or modifier on an actor. 
 
+signal effect_ended
+
 enum EffectTriggers { 
 	OnCreate, OnDurationEnds,
 	OnTurnStart, OnTurnEnd, 
@@ -12,7 +14,7 @@ enum EffectTriggers {
 	OnAttacking, OnDefending, 
 	OnDeath, OnKill,
 	OnUseItem
-	}
+}
 
 ## Triggers which require additional information. They have thier own methods and can not be called from trigger_effect()
 const TRIGGERS_WITH_ADDITIONAL_DATA = [
@@ -53,6 +55,14 @@ var RemainingDuration:int:
 
 var source_id:String:
 	get: return get_load_val("SourceId")
+
+var applied_potency:float:
+	get:
+		if applied_potency < 1:
+			var pot = get_load_val("AppliedPotency", 1)
+			applied_potency = pot
+		return applied_potency
+
 var _source
 var _enabled:bool = true
 var _deleted:bool = false
@@ -114,6 +124,13 @@ func get_active_damage_mods():
 			out_list.append(mod)
 	return out_list
 
+func get_limited_effect_type()->EffectHelper.LimitedEffectTypes:
+	var limited_effect_str = get_load_val("LimitedEffectType", "None")
+	var key_index = EffectHelper.LimitedEffectTypes.keys().find(limited_effect_str)
+	if key_index >= 0:
+		return key_index
+	return EffectHelper.LimitedEffectTypes.None
+
 func _get_sub_effect_script(sub_effect_key:String):
 	var subeffects = SubEffectDatas
 	if not subeffects.has(sub_effect_key):
@@ -152,6 +169,7 @@ func on_delete():
 	var actor = get_effected_actor()
 	if actor and actor.effects.has_effect(self.Id):
 		actor.effects.remove_effect(self)
+	effect_ended.emit()
 
 func merge_new_duplicate_effect_data(source, data:Dictionary):
 	var dup_subs_datas = data.get('SubEffects', {})

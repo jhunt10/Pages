@@ -4,8 +4,11 @@
         "EffectKey": "BaseBlessing",
         "ShowInHud": true,
         "ShowCounter": true,
+        "CanStack": true,
+        "LimitedEffectType": "Blessing",
         "DamageDatas": {},
         "DamageMods": {},
+        "AddTagsToActor": ["Blessed"],
         "Details": {
             "DisplayName": "Weak XXX Blessing",
             "Description": "Weak Blessing of the XXX.",
@@ -23,7 +26,6 @@
             },
             "Duration": {
                 "DurationType": "TurnEnd",
-                "DurationValue": 5,
                 "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_Duration.gd"
             }
         }

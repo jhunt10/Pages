@@ -30,14 +30,21 @@ func _init() -> void:
 	Instance = self
 	Instance.init_load()
 
+func erase_object(object_id:String):
+	super(object_id)
+
 static func purge_effects():
 	if !Instance: Instance = EffectLibrary.new()
 	Instance.purge_objects()
 
 static func create_effect(source, key:String, actor:BaseActor, data:Dictionary, force_id:String='')->BaseEffect:
+	if not EffectHelper.is_creating_effect:
+		printerr("\n\nDepreciated: Effect created outside of EffectHelper!\n\n")
 	print("Creating Effect: %s on actor %s" %[key, actor.Id])
-	var effect_def = get_effect_def(key)
-	var effect_data = _merge_defs(data, effect_def)
+	var effect_data = data
+	if not effect_data.get("BeenMerged", false):
+		var effect_def = get_effect_def(key)
+		effect_data = _merge_defs(data, effect_def)
 	
 	if effect_data.get("CanStack", false):
 		var existing_effects = actor.effects.get_effects_with_key(key)
@@ -61,10 +68,16 @@ static func create_effect(source, key:String, actor:BaseActor, data:Dictionary, 
 		return null
 	# Make Id Unique to actor
 	if force_id == '': force_id = key + str(ResourceUID.create_id())
-	var effect_id = actor.Id + ":" + force_id
-	var effect = Instance.create_object(key, effect_id, effect_data)
+	var effect_id = force_id + ":" + actor.Id
+	var effect:BaseEffect = Instance.create_object(key, effect_id, effect_data)
 	if !effect:
 		printerr("EffectLibrary.create_effect: Failed to make effect '%s'." % [key])
+		return null
+	
+	if effect.get_limited_effect_type() != EffectHelper.LimitedEffectTypes.None:
+		if source is BaseActor:
+			source.effects.host_limited_effect(effect)
+	
 	return effect
 
 static func list_effect_defs()->Array:
@@ -78,6 +91,13 @@ static func list_all_effects_keys()->Array:
 static func get_effect_def(key:String)->Dictionary:
 	if !Instance: Instance = EffectLibrary.new()
 	return Instance.get_object_def(key)
+
+static func get_merged_effect_def(key:String, data:Dictionary)->Dictionary:
+	if !Instance: Instance = EffectLibrary.new()
+	var effect_def = get_effect_def(key)
+	var effect_data = _merge_defs(data, effect_def)
+	effect_data['BeenMerged'] = true
+	return effect_data
 	
 static func get_effect(effect_key:String)->BaseEffect:
 	var effect = Instance.get_object(effect_key)

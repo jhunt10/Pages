@@ -32,7 +32,7 @@ var _loaded_objects:Dictionary = {}
 
 func get_object_def(key:String):
 	if _object_defs.has(key):
-		return _object_defs[key]
+		return _object_defs[key].duplicate(true)
 	return {}
 
 func get_object_def_load_path(key:String):

@@ -22,7 +22,10 @@ func get_prop_enum_values(key:String)->Array:
 
 
 func merge_new_duplicate_sub_effect_data(parent_effect:BaseEffect, own_sub_effect_data:Dictionary, dup_sub_effect_data:Dictionary):
-	parent_effect._duration_counter += dup_sub_effect_data.get('DurationValue', 0)
+	var base_duration = dup_sub_effect_data.get('DurationValue', -1)
+	if base_duration < 0:
+		base_duration = parent_effect.get_load_val("Duration", -1)
+	parent_effect._duration_counter = max(parent_effect._duration_counter, base_duration)
 	pass
 
 func get_triggers(effect:BaseEffect, subeffect_data:Dictionary)->Array:
@@ -55,7 +58,10 @@ func get_triggers(effect:BaseEffect, subeffect_data:Dictionary)->Array:
 
 func on_effect_trigger(effect:BaseEffect, subeffect_data:Dictionary, trigger:BaseEffect.EffectTriggers, _game_state:GameStateData):
 	if trigger == BaseEffect.EffectTriggers.OnCreate:
-		effect._duration_counter = subeffect_data.get('DurationValue', -1)
+		var duration = subeffect_data.get('DurationValue', -1)
+		if duration < 0:
+			duration = effect.get_load_val("Duration", -1)
+		effect._duration_counter = duration
 		return
 	#printerr("Durration For: %s Trigger: %s Value: %s" % [effect.details.display_name, BaseEffect.EffectTriggers.keys()[trigger], effect._duration_counter])
 	var duration_type = DurationTypes.get(subeffect_data['DurationType'])

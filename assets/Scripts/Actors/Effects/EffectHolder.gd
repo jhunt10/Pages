@@ -106,7 +106,82 @@ func remove_effect(effect:BaseEffect, supress_signal:bool=false):
 	_actor.stats.dirty_stats()
 	if not supress_signal:
 		_actor.effacts_changed.emit()
+
+
+# --------------------------------------------------
+#		Limited Effect (Cureses, Blessings, ...)
+#		Host = Source of Effect
+#		Holding = Target of effeect
+# --------------------------------------------------
+
+# Dictionary of LimitedEffectTypes to Array of applied Effect data
+# _hosted_limited_effects:
+#	Key - LimitedEffectTypes:
+#		Value - Dictionary:
+#			EffectId
+#			EffectedActorId
+var _hosted_limited_effects:Dictionary
+
+func host_limited_effect(effect:BaseEffect):
+	var limit_type = effect.get_limited_effect_type()
+	if limit_type == EffectHelper.LimitedEffectTypes.None:
+		return
+	if not _hosted_limited_effects.has(limit_type):
+		_hosted_limited_effects[limit_type] = []
+	_hosted_limited_effects[limit_type].append({
+		"EffectId": effect.Id,
+		"EffectedActorId": effect.get_effected_actor().Id
+	})
+	effect.effect_ended.connect(_on_hosted_effect_ends.bind(limit_type, effect.Id))
+
+
+func _on_hosted_effect_ends(limit_type:EffectHelper.LimitedEffectTypes, effect_id:String):
+	var limited_effects_list:Array = _hosted_limited_effects.get(limit_type, [])
+	var index = 0
+	while index < limited_effects_list.size():
+		if limited_effects_list[index]["EffectId"] == effect_id:
+			limited_effects_list.remove_at(index)
+		else:
+			index += 1
+	var t = true
+
+func get_count_limit_for_limited_effect(type:EffectHelper.LimitedEffectTypes)->int:
+	var str_type = EffectHelper.LimitedEffectTypes.keys()[type]
+	var stat_name = str_type + ":CountLimit"
+	return _actor.stats.get_stat(stat_name, 1)
+func get_per_actor_limit_for_limited_effect(type:EffectHelper.LimitedEffectTypes)->int:
+	var str_type = EffectHelper.LimitedEffectTypes.keys()[type]
+	var stat_name = str_type + ":PerActorLimit"
+	return _actor.stats.get_stat(stat_name, 1)
+
+# Get total number of limited effects of type HOSTED by this actor
+func get_count_of_hosted_limited_effect(type:EffectHelper.LimitedEffectTypes)->int:
+	if not _hosted_limited_effects.keys().has(type):
+		return 0
+	return _hosted_limited_effects[type].size()
+
+func get_oldest_hosted_limited_effect_id(type:EffectHelper.LimitedEffectTypes):
+	if not _hosted_limited_effects.keys().has(type):
+		return null
+	var effect_list = _hosted_limited_effects[type]
+	if effect_list.size() == 0:
+		return null
+	var last_effect_data = effect_list[-1]
+	return last_effect_data['EffectId']
+
+# Get total number of limited effects of type HELD by this actor
+func get_count_of_holding_limited_effect(type:EffectHelper.LimitedEffectTypes)->int:
+	var list = list_holding_limited_effect(type)
+	return list.size()
 	
+# Get limited effects of type HELD by this actor
+func list_holding_limited_effect(type:EffectHelper.LimitedEffectTypes)->Array:
+	var out_list = []
+	for effect:BaseEffect in _effects.values():
+		if effect.get_limited_effect_type() == type:
+			out_list.append(effect)
+	return out_list
+
 func get_on_deal_damage_mods():
 	var out_list = []
 	for effect:BaseEffect in _effects.values():

@@ -50,6 +50,39 @@
     },
     
     {
+        "ActionKey": "SustainBlessing",
+        "Details": {
+            "Description": "Refresh the Duration of a Blessing you applied last Turn.",
+            "DisplayName": "Sustain Blessing",
+            "LargeIcon": "Sprites/XXXXBuff_YYYY.png",
+            "SmallIcon": "Sprites/XXXXBuff_YYYY.png",
+            "SnippetDesc": "Refresh Last Turn Blessing",
+            "Tags": [
+            ]
+        },
+        "AttackDetails":
+        {
+            "AccuracyMod": 1,
+            "PotencyMod": 1
+        },
+        "EffectDatas":{
+        },
+        "TargetParams": {
+        },
+        "SubActions": {
+            "11": [
+                {
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_SustainLastAction.gd"
+                },
+                {
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponMotionAnimation.gd",
+                    "MainHand": true,
+                    "OffHand": "Never"
+                }
+            ]
+        }
+    },
+    {
         "ActionKey": "BaseBlessing",
         "ParentKey": "BaseApplyEffectSpell",
         "Details": {
@@ -69,15 +102,14 @@
         },
         "EffectDatas":{
             "Effect1": {
-                "EffectKey": "AilmentChilled",
-                "SubEffects": {
-                    "Duration": {
-                        "DurationValue": 5
-                    }
-                }
+                "EffectKey": "BlessingEarth_Small",
+                "Duration": 10
             }
         },
-
+        "SustainData":{
+            "SustainEffectDataKey": "Effect1",
+            "SustainTargetKey": "Target1"
+        },
         "TargetParams": {
             "TargetParam1": {
                 "EffectsAllies": true,

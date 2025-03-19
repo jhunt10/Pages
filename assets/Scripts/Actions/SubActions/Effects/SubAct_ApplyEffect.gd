@@ -29,5 +29,5 @@ func do_thing(parent_action:BaseAction, subaction_data:Dictionary, que_exe_data:
 	if subaction_data.has('EffectData'):
 		effect_data = subaction_data['EffectData']
 	for target:BaseActor in targets:
-		target.effects.add_effect(actor, effect_key, effect_data, game_state)
+		EffectHelper.create_effect(target, actor, effect_key, effect_data, game_state)
 	return BaseSubAction.Success

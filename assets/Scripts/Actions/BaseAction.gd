@@ -203,4 +203,17 @@ func get_on_que_options(actor:BaseActor, game_state:GameStateData):
 			continue
 		out_list.append_array(sub_action.get_on_que_options(self, sub_action_data, actor, game_state))
 	return out_list
-		
+
+func get_effect_data(effect_data_key:String)->Dictionary:
+	var effect_datas = get_load_val("EffectDatas", {})
+	if effect_datas.has(effect_data_key):
+		return effect_datas[effect_data_key]
+	return {}
+
+func has_sustain_data()->bool:
+	var sustain_data = get_load_val("SustainData", {})
+	return sustain_data.size() > 0
+	
+func get_sustain_data()->Dictionary:
+	var sustain_data = get_load_val("SustainData", {})
+	return sustain_data
