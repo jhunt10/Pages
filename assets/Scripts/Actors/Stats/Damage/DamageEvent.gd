@@ -83,6 +83,16 @@ func _calc_damage_for_event():
 	var attack_tags = source_tag_chain.get_all_tags()
 	var defend_tags = defender.get_tags()
 	
+	if attacker.FactionIndex == defender.FactionIndex:
+		attack_tags.append("Ally")
+		defend_tags.append("Ally")
+	else:
+		attack_tags.append("Enemy")
+		defend_tags.append("Enemy")
+	
+	var applied_damage_mods = _get_applied_damage_mods(attack_tags, defend_tags)
+	
+	
 	# --- Damage Calc Order ---
 	# 1) Get applied power from damage_variance
 	# 2) Raw damage = attack_power * applied power
@@ -95,8 +105,11 @@ func _calc_damage_for_event():
 	var float_power = float(attack_power)/100.0
 	applied_power = (float_power + (float_power * randf_range(-damage_variance, damage_variance)))
 	
+	# Get Damage Resistance
 	var defender_resistance = defender.stats.get_damage_resistance(damage_type)
-	var resistance_reduction = 1.0 - defender_resistance
+	var resistance_mods = applied_damage_mods.get("Resistance", [])
+	defender_resistance = _apply_mods_to_value(defender_resistance, resistance_mods)
+	var resistance_reduction = 1.0 - (defender_resistance / 100)
 	
 	# Get the defend's Armor or Ward
 	if defense_type == DamageEvent.DefenseType.Armor:
@@ -110,28 +123,19 @@ func _calc_damage_for_event():
 	damage_after_armor = damage_after_resistance * defense_reduction
 	
 	
-	if source is BaseActor:
-		# Add Ally or Enemy tag
-		var attacker = source as BaseActor
-		if source.FactionIndex == defender.FactionIndex:
-			attack_tags.append("Ally")
-			defend_tags.append("Ally")
-		else:
-			attack_tags.append("Enemy")
-			defend_tags.append("Enemy")
-		# Get and apply all "OnDealDamage" mods from the attacker
-		damage_after_attack_mods = damage_after_armor
-		var attacker_damage_mods = attacker.effects.get_on_deal_damage_mods()
-		attacker_damage_mods = DamageHelper._order_damage_mods(attacker_damage_mods)
-		for mod:BaseDamageMod in attacker_damage_mods:
-			if mod.is_valid_in_case(false, attack_tags, defend_tags, self):
-				damage_after_attack_mods = mod.apply_mod(damage_after_attack_mods, self)
-	else:
-		damage_after_attack_mods = damage_after_armor
+	#if source is BaseActor:
+		## Get and apply all "OnDealDamage" mods from the attacker
+		#damage_after_attack_mods = damage_after_armor
+		#attacker_damage_mods = DamageHelper._order_damage_mods(attacker_damage_mods)
+		#for mod in attacker_damage_mods:
+			#if mod.is_valid_in_case(false, attack_tags, defend_tags, self):
+				#damage_after_attack_mods = mod.apply_mod(damage_after_attack_mods, self)
+	#else:
+	damage_after_attack_mods = damage_after_armor
 	
 	# Get and apply all "OnTakeDamage" mods from the defender
 	damage_after_defend_mods = damage_after_attack_mods
-	for mod:BaseDamageMod in DamageHelper._order_damage_mods(defender.effects.get_on_take_damage_mods()):
+	for mod in DamageHelper._order_damage_mods(defender.effects.get_on_take_damage_mods()):
 		if mod.is_valid_in_case(true, attack_tags, defend_tags, self):
 			damage_after_defend_mods = mod.apply_mod(damage_after_defend_mods, self)
 	
@@ -154,3 +158,47 @@ func _calc_damage_for_event():
 
 func _get_percent_damage(data):
 	return 0
+
+
+func _get_applied_damage_mods(attack_tags, defend_tags)->Dictionary:
+	var all_damage_mods = []
+	all_damage_mods.append_array(defender.get_damage_mods(true))
+	all_damage_mods.append_array(attacker.get_damage_mods(false))
+	var applied_damage_mods = {}
+	for mod_data in all_damage_mods:
+		var condition_data = mod_data.get("Conditions")
+		if condition_data.has("DamageType"):
+			if condition_data['DamageType'] != DamageTypes.keys()[damage_type]:
+				continue
+		if condition_data.has("LimitSourceTags"):
+			var required_tags = condition_data['LimitSourceTags']
+			if not SourceTagChain.tags_include_all_in_array(required_tags, attack_tags):
+				continue
+		if condition_data.has("ExcludeSourceTags"):
+			var forbidden_tags = condition_data['ExcludeSourceTags']
+			if SourceTagChain.tags_include_any_in_array(forbidden_tags, attack_tags):
+				continue
+		if condition_data.has("LimitDefenderTags"):
+			var required_tags = condition_data['LimitDefenderTags']
+			if not SourceTagChain.tags_include_all_in_array(required_tags, defend_tags):
+				continue
+		if condition_data.has("ExcludeDefenderTags"):
+			var forbidden_tags = condition_data['ExcludeDefenderTags']
+			if SourceTagChain.tags_include_any_in_array(forbidden_tags, defend_tags):
+				continue
+		var mod_prop = mod_data.get("ModProperty", "")
+		if not applied_damage_mods.keys().has(mod_prop):
+			applied_damage_mods[mod_prop] = []
+		applied_damage_mods[mod_prop].append(mod_data)
+	return applied_damage_mods
+
+func _apply_mods_to_value(base_value:float, mods:Array)->float:
+	var add_to = 0.0
+	var scale_by = 1.0
+	for mod in mods:
+		if mod.get("ModType") == "Add":
+			add_to += mod.get("Value", 0)
+		if mod.get("ModType") == "Scale":
+			scale_by *= mod.get("Value", 1)
+	return (base_value + add_to) * scale_by
+	

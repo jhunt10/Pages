@@ -128,6 +128,19 @@ func get_targeting_params(target_param_key, actor:BaseActor)->TargetParameters:
 	var params = _target_params.get(target_param_key, null)
 	if !params:
 		printerr("No Params")
+	if actor:
+		var targeting_mods = actor.get_targeting_mods()
+		var self_tags = self.get_tags()
+		for mod in targeting_mods:
+			var required_tags = mod.get('RequiredActionTags', [])
+			var can_use = true
+			for required in required_tags:
+				if not self_tags.has(required):
+					can_use = false
+					break
+			if can_use:
+				params = params.apply_target_mod(mod)
+		
 	return params
 
 func has_preview_target()->bool:

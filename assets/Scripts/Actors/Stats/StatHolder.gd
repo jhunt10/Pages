@@ -119,7 +119,7 @@ func get_attacking_stat(stat_name:String, source_tag_chain:SourceTagChain, defau
 func get_damage_resistance(damage_type:DamageEvent.DamageTypes)->float:
 	var type_str = DamageEvent.DamageTypes.keys()[damage_type]
 	var int_val = get_stat("Resistance:" + str(type_str), 0)
-	return float(int_val) / 100.0
+	return float(int_val)
 
 # -----------------------------------------------------------------
 #					Level Up

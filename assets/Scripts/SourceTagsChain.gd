@@ -76,3 +76,12 @@ static func tags_include_any_in_array(check_for:Array, tags:Array)->bool:
 		if tags.has(check):
 			return true
 	return false
+
+## Returns true if all String values in check_for appears in the tag list.
+static func tags_include_all_in_array(check_for:Array, tags:Array)->bool:
+	var is_valid = true
+	for check in check_for:
+		if not tags.has(check):
+			is_valid = false
+			break
+	return is_valid

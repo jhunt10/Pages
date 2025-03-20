@@ -260,6 +260,30 @@ func get_passive_stat_mods()->Array:
 		checked_equipments.append(equipment_id)
 	return out_list
 
+func get_targeting_mods()->Array:
+	var out_list = []
+	var checked_equipments = [] ## For double sloted items (two handing)
+	for equipment_id in _raw_item_slots:
+		if checked_equipments.has(equipment_id):
+			continue
+		if equipment_id and equipment_id != '':
+			var item:BaseItem = ItemLibrary.get_item(equipment_id)
+			out_list.append_array(item.get_target_mods())
+		checked_equipments.append(equipment_id)
+	return out_list
+
+func get_damage_mods(taking_damage:bool)->Array:
+	var out_list = []
+	var checked_equipments = [] ## For double sloted items (two handing)
+	for equipment_id in _raw_item_slots:
+		if checked_equipments.has(equipment_id):
+			continue
+		if equipment_id and equipment_id != '':
+			var item:BaseItem = ItemLibrary.get_item(equipment_id)
+			out_list.append_array(item.get_damage_mods(taking_damage))
+		checked_equipments.append(equipment_id)
+	return out_list
+
 
 	#for item_tags in _item_tagged_slots.keys():
 		#if _does_item_match_tags(item_tags, item):

@@ -11,6 +11,7 @@ static var SelfTargetParams:TargetParameters = TargetParameters.new(
 enum TargetTypes {Self, FullArea, Spot, OpenSpot, Actor, Ally, Enemy, Corpse}
 
 var target_param_key:String
+var raw_args:Dictionary
 var target_type:TargetTypes
 var line_of_sight:bool
 var target_area:AreaMatrix
@@ -23,10 +24,17 @@ var required_tags:Array
 var _cached_canter_pos:MapPos
 var _cached_target_area:Dictionary
 
+func apply_target_mod(mod_data:Dictionary)->TargetParameters:
+	var new_args = raw_args.duplicate()
+	var override_props = mod_data.get("OverrideProps", {})
+	for prop_name in override_props.keys():
+		new_args[prop_name] = override_props[prop_name]
+	return TargetParameters.new(self.target_param_key, new_args)
+
 func _init(target_param_key:String, args:Dictionary) -> void:
 	# Assign Target Key
 	self.target_param_key = target_param_key
-	
+	self.raw_args = args
 	# Get Target Type
 	var target_type_val = args.get('TargetType', null)
 	if target_type_val is int:

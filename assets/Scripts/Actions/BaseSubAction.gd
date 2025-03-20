@@ -43,6 +43,7 @@ func _get_target_parameters(parent_action:BaseAction, actor:BaseActor, subaction
 	if !target_parms:
 		printerr("BaseSubAction._get_target_parameters: No TargetParam found in subaction_data.")
 		return null
+	var actor_targeting_mods = actor.effects.get_stat_mods()
 	return target_parms
 
 ## Selected target mapped to key

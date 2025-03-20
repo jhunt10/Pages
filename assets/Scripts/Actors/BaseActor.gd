@@ -283,4 +283,17 @@ func get_weapon_damage_datas()->Dictionary:
 				off_hand_data['AtkPower'] = off_hand_data['AtkPower'] * off_hand_mod
 				out_dict['OffHandDamage'] = off_hand_data
 	return out_dict
-	
+
+func get_targeting_mods()->Array:
+	var out_list = []
+	out_list.append_array(pages.get_targeting_mods())
+	return out_list
+
+func get_damage_mods(taking_damage:bool)->Array:
+	var out_list = []
+	if taking_damage:
+		out_list.append_array(effects.get_on_take_damage_mods())
+	else:
+		out_list.append_array(effects.get_on_deal_damage_mods())
+	out_list.append_array(pages.get_damage_mods(taking_damage))
+	return out_list

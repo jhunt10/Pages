@@ -23,7 +23,8 @@ func get_active_stat_mods(_effect:BaseEffect, _subeffect_data:Dictionary)->Array
 	return []
 	
 func get_active_damage_mods(_effect:BaseEffect, _subeffect_data:Dictionary)->Array:
-	return []
+	var mods = _subeffect_data.get("DamageMods", {})
+	return mods.values()
 
 func on_delete(_effect:BaseEffect, _subeffect_data:Dictionary):
 	pass

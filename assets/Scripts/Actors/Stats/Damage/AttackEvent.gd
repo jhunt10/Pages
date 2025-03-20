@@ -1,6 +1,6 @@
 class_name AttackEvent
 
-const LOGGING = false
+const LOGGING = true
 
 enum AttackDirection {Front, Flank, Back, AOE}
 enum AttackStage {

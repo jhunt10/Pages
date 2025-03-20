@@ -44,7 +44,7 @@ static func create_effect(
 				return existing_same
 		# Check Per Actor Limit: how many Effects one Actor can have
 		var source_per_actor_limit = source_actor.effects.get_per_actor_limit_for_limited_effect(limited_effect_type)
-		var target_per_actor_limit = target.effects.get_per_actor_limit_for_limited_effect(limited_effect_type)
+		var target_per_actor_limit = target.effects.get_on_self_limit_for_limited_effect(limited_effect_type)
 		var per_actor_limit = max(source_per_actor_limit, target_per_actor_limit)
 		var existing_effects_on_target = target.effects.list_holding_limited_effect(limited_effect_type)
 		# Over the limit for number of effects on one actor

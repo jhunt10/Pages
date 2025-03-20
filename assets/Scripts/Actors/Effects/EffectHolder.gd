@@ -153,6 +153,10 @@ func get_per_actor_limit_for_limited_effect(type:EffectHelper.LimitedEffectTypes
 	var str_type = EffectHelper.LimitedEffectTypes.keys()[type]
 	var stat_name = str_type + ":PerActorLimit"
 	return _actor.stats.get_stat(stat_name, 1)
+func get_on_self_limit_for_limited_effect(type:EffectHelper.LimitedEffectTypes)->int:
+	var str_type = EffectHelper.LimitedEffectTypes.keys()[type]
+	var stat_name = str_type + ":OnSelfLimit"
+	return _actor.stats.get_stat(stat_name, 1)
 
 # Get total number of limited effects of type HOSTED by this actor
 func get_count_of_hosted_limited_effect(type:EffectHelper.LimitedEffectTypes)->int:
@@ -166,7 +170,7 @@ func get_oldest_hosted_limited_effect_id(type:EffectHelper.LimitedEffectTypes):
 	var effect_list = _hosted_limited_effects[type]
 	if effect_list.size() == 0:
 		return null
-	var last_effect_data = effect_list[-1]
+	var last_effect_data = effect_list[0]
 	return last_effect_data['EffectId']
 
 # Get total number of limited effects of type HELD by this actor
@@ -185,16 +189,16 @@ func list_holding_limited_effect(type:EffectHelper.LimitedEffectTypes)->Array:
 func get_on_deal_damage_mods():
 	var out_list = []
 	for effect:BaseEffect in _effects.values():
-		for mod:BaseDamageMod in effect.get_active_damage_mods():
-			if mod.on_deal_damage:
+		for mod:Dictionary in effect.get_active_damage_mods():
+			if mod.get("OnDealDamage", false):
 				out_list.append(mod)
 	return out_list
 	
 func get_on_take_damage_mods():
 	var out_list = []
 	for effect:BaseEffect in _effects.values():
-		for mod:BaseDamageMod in effect.get_active_damage_mods():
-			if mod.on_take_damage:
+		for mod:Dictionary in effect.get_active_damage_mods():
+			if mod.get("OnTakeDamage", false):
 				out_list.append(mod)
 	return out_list
 

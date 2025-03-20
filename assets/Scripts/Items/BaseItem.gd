@@ -112,3 +112,22 @@ func get_passive_stat_mods()->Array:
 	for mod_data in stat_mod_datas.values():
 		out_list.append(BaseStatMod.create_from_data(Id, mod_data))
 	return out_list
+
+func get_target_mods()->Array:
+	var stat_mod_datas:Dictionary = get_load_val("TargetMods", {})
+	var out_list = []
+	for mod_data in stat_mod_datas.values():
+		out_list.append(mod_data.duplicate())
+	return out_list
+
+func get_damage_mods(taking_damage:bool)->Array:
+	var stat_mod_datas:Dictionary = get_load_val("DamageMods", {})
+	var out_list = []
+	for mod_data in stat_mod_datas.values():
+		if taking_damage: 
+			if mod_data.get("OnTakeDamage", false):
+				out_list.append(mod_data.duplicate())
+		else:
+			if mod_data.get("OnDealDamage", false):
+				out_list.append(mod_data.duplicate())
+	return out_list

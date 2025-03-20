@@ -24,4 +24,4 @@ func get_key_to_input_mapping()->Dictionary:
 	}
 
 func get_mod_types():
-	return BaseDamageMod.ModTypes.keys()
+	return []
