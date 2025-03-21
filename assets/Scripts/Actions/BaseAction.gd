@@ -14,8 +14,15 @@ var CostData:Dictionary:
 		get: return get_load_val('CostData', {})
 var DamageDatas:Dictionary:
 		get: return get_load_val('DamageDatas', {})
+var _missile_data
 var MissileDatas:Dictionary:
-		get: return get_load_val('MissileDatas', {})
+		get:
+			if _missile_data == null:
+				_missile_data = get_load_val('MissileDatas', {})
+				for key in _missile_data.keys():
+					if not _missile_data[key].has("DisplayName"):
+						_missile_data[key]['DisplayName'] = details.display_name + " Missile"
+			return _missile_data
 
 var OnQueUiState:String:
 	get: return get_load_val("OnQueUiState", "")

@@ -52,6 +52,7 @@ func _ready() -> void:
 func set_actor(actor:BaseActor):
 	Id = actor.Id
 	Actor = actor
+	self.name = actor.Id
 	if not actor.equipment_changed.is_connected(sync_sprites):
 		actor.equipment_changed.connect(sync_sprites)
 		actor.on_move_failed.connect(_on_movement_failed)

@@ -23,6 +23,8 @@ func parent_to_offset()->bool:
 
 func _ready() -> void:
 	_readyed = true
+	if _start_when_ready:
+		start_vfx()
 
 func _process(delta: float) -> void:
 	pass

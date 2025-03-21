@@ -1582,6 +1582,44 @@
         <mxCell id="lVHUBqTj8paGKEQDthTG-186" value="Mag Ammo: 4 / 20" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=12;" vertex="1" parent="lVHUBqTj8paGKEQDthTG-178">
           <mxGeometry y="90" width="160" height="30" as="geometry" />
         </mxCell>
+        <mxCell id="lVHUBqTj8paGKEQDthTG-187" value="" style="group;fontColor=none;noLabel=1;" vertex="1" connectable="0" parent="1">
+          <mxGeometry x="526" y="690" width="164" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="lVHUBqTj8paGKEQDthTG-188" value="Light Ball" style="swimlane;whiteSpace=wrap;html=1;fillColor=#FFFF99;strokeColor=#FFFFFF;fontColor=#080808;" vertex="1" parent="lVHUBqTj8paGKEQDthTG-187">
+          <mxGeometry width="164" height="170" as="geometry">
+            <mxRectangle width="70" height="30" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="lVHUBqTj8paGKEQDthTG-189" value="Spel; AOE, Light" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="lVHUBqTj8paGKEQDthTG-188">
+          <mxGeometry x="40" y="63" width="120" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="lVHUBqTj8paGKEQDthTG-190" value="Action" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="lVHUBqTj8paGKEQDthTG-188">
+          <mxGeometry x="40" y="30.5" width="120" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="lVHUBqTj8paGKEQDthTG-191" value="" style="endArrow=none;html=1;rounded=0;" edge="1" parent="lVHUBqTj8paGKEQDthTG-188">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint y="63" as="sourcePoint" />
+            <mxPoint x="160" y="63" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="lVHUBqTj8paGKEQDthTG-192" value="Tags:" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=12;" vertex="1" parent="lVHUBqTj8paGKEQDthTG-188">
+          <mxGeometry y="64" width="40" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="lVHUBqTj8paGKEQDthTG-193" value="Touch an Actor for 80%&amp;nbsp;&lt;div&gt;Light Damage.&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=12;" vertex="1" parent="lVHUBqTj8paGKEQDthTG-188">
+          <mxGeometry y="120" width="160" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="lVHUBqTj8paGKEQDthTG-194" value="" style="endArrow=none;html=1;rounded=0;exitX=0;exitY=0;exitDx=0;exitDy=0;entryX=1;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="lVHUBqTj8paGKEQDthTG-188">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint y="90" as="sourcePoint" />
+            <mxPoint x="160" y="90" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="lVHUBqTj8paGKEQDthTG-195" value="" style="shape=image;verticalLabelPosition=bottom;labelBackgroundColor=default;verticalAlign=top;aspect=fixed;imageAspect=0;image=data:image/png,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAMUExURc7Oqf//z////wAAAI8alYsAAAAEdFJOU////wBAKqn0AAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAGHRFWHRTb2Z0d2FyZQBQYWludC5ORVQgNS4xLjOMuzMgAAAAtmVYSWZJSSoACAAAAAUAGgEFAAEAAABKAAAAGwEFAAEAAABSAAAAKAEDAAEAAAACAAAAMQECABAAAABaAAAAaYcEAAEAAABqAAAAAAAAAGAAAAABAAAAYAAAAAEAAABQYWludC5ORVQgNS4xLjMAAwAAkAcABAAAADAyMzABoAMAAQAAAAEAAAAFoAQAAQAAAJQAAAAAAAAAAgABAAIABAAAAFI5OAACAAcABAAAADAxMDAAAAAADpoXY7zLg/IAAABkSURBVDhP3ZBBEoAwCAMJ/v/PjvZg2aC99WBuWTKhNI6FgoD6ZSAiSKqTJKBilJlZE7MZcyQ2B5aPXJ+p8VGamdepYY9kpLPvK64JO8yg0rywAYH7go9/sL4O1QVNgIDetCFwAh1RCzphOE4XAAAAAElFTkSuQmCC;" vertex="1" parent="lVHUBqTj8paGKEQDthTG-188">
+          <mxGeometry x="4" y="27" width="32" height="32" as="geometry" />
+        </mxCell>
+        <mxCell id="lVHUBqTj8paGKEQDthTG-196" value="Mag Ammo: 3 / 18" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=12;" vertex="1" parent="lVHUBqTj8paGKEQDthTG-188">
+          <mxGeometry y="90" width="160" height="30" as="geometry" />
+        </mxCell>
       </root>
     </mxGraphModel>
   </diagram>

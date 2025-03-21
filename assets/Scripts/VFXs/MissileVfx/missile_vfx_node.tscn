@@ -1,7 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://ukr3q0j2b7ps"]
+[gd_scene load_steps=10 format=3 uid="uid://cjyfxt7ut73b4"]
 
-[ext_resource type="Script" path="res://assets/Scripts/VFXs/DamageVfxs/damage_vfx_node.gd" id="1_5qt1g"]
-[ext_resource type="Texture2D" uid="uid://26rrlc3hiro5" path="res://data/VFXs/DamageVFXs/SmokeEffect.png" id="2_535dp"]
+[ext_resource type="Script" path="res://assets/Scripts/VFXs/MissileVfx/missile_vfx_node.gd" id="1_6v3x6"]
+[ext_resource type="Texture2D" uid="uid://26rrlc3hiro5" path="res://data/VFXs/DamageVFXs/SmokeEffect.png" id="2_jy1ys"]
 
 [sub_resource type="Animation" id="Animation_wtg8w"]
 resource_name = "4_sprites_250ms_frames"
@@ -162,15 +162,15 @@ _data = {
 "RESET": SubResource("Animation_lwwt5")
 }
 
-[node name="DamageVfxNode" type="Node2D" node_paths=PackedStringArray("sprite", "animation")]
+[node name="MissileVfxNode" type="Node2D" node_paths=PackedStringArray("sprite", "animation")]
 z_index = 9
-script = ExtResource("1_5qt1g")
+script = ExtResource("1_6v3x6")
 sprite = NodePath("Sprite2D")
 animation = NodePath("AnimationPlayer")
 animation_half_way = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_535dp")
+texture = ExtResource("2_jy1ys")
 hframes = 2
 vframes = 3
 

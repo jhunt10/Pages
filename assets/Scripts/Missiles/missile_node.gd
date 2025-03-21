@@ -19,6 +19,7 @@ func _ready() -> void:
 
 func set_missile_data(missle):
 	self.missile = missle
+	self.name = missile._missle_data.get("DisplayName", "Missile") +  "_" + missile.Id
 	missile.node = self
 	var vfx_data = missile.get_missile_vfx_data()
 	if not vfx_data:
