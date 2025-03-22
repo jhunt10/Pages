@@ -3,7 +3,7 @@
         "ActionKey": "BaseApplyEffectSpell",
         "AmmoData": {
             "Cost": 4,
-            "Clip": 32,
+            "Clip": 16,
             "AmmoType": "Mag"
         },
         "AttackDetails":
@@ -73,7 +73,7 @@
                 "EffectsAllies": true,
                 "EffectsEnemies": true,
                 "LineOfSight": false,
-                "TargetArea": "[[0,2],[-1,1],[0,1],[1,1],[-2,0],[-1,0],[0,0],[1,0],[2,0],[-1,-1],[0,-1],[1,-1],[0,-2]]",
+                "TargetArea": "[[-1,2],[0,2],[1,2],[-1,1],[0,1],[1,1],[-1,0],[0,0],[1,0]]",
                 "TargetType": "Actor"
             }
         }

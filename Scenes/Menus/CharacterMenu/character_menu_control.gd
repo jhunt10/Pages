@@ -4,6 +4,7 @@ extends Control
 const LOGGING = false
 
 static var Instance:CharacterMenuControl
+static var last_tab_pressed:String = ''
 
 @export var inventory_tabs_control:ItemFilterTabsControl
 @export var details_card_spawn_point:Control
@@ -72,7 +73,10 @@ func _ready() -> void:
 	bag_page.mouse_enter_item.connect(on_mouse_enter_slot)
 	bag_page.mouse_exit_item.connect(on_mouse_exit_slot)
 	stop_dragging()
-	on_tab_pressed("Pages")
+	if last_tab_pressed != '':
+		on_tab_pressed(last_tab_pressed)
+	else:
+		on_tab_pressed("Pages")
 	if equip_mode:
 		on_tab_pressed("Inventory")
 		inventory_tabs_control.on_tab_selected.connect(on_inv_filter_selected)
@@ -275,6 +279,7 @@ func on_tab_pressed(tab_name:String):
 		return
 	
 	_left_page_context = tab_name
+	last_tab_pressed = tab_name
 	
 	if _left_page_context == "Equipment":
 		equipment_page.visible = true

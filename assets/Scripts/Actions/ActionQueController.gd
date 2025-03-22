@@ -265,6 +265,11 @@ func _execute_turn_frames(game_state:GameStateData, que:ActionQue, turn_index:in
 	if _dead_ques.has(que.Id):
 		if DEEP_LOGGING: print("\t\tQue is dead")
 		return
+	
+	if not que.actor.can_act():
+		if DEEP_LOGGING: print("\t\tActor can't Act")
+		return
+		
 		
 	# Get the action for this turn
 	var action:BaseAction = que.get_action_for_turn(turn_index)

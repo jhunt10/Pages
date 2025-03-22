@@ -9,6 +9,8 @@ extends Control
 @export var premade_page_entry:PageDetailsEntryContainer
 @export var premade_entry_group:EntryGroupContainer
 
+@export var load_time_label:Label
+
 var _loading_entries_thread
 
 var known_tags = []
@@ -38,6 +40,7 @@ func _exit_tree() -> void:
 func build_page_entires():
 	if loaded:
 		return
+	var page_entry_scene = load("res://Scenes/Menus/PageLibraryMenu/page_details_entry_container.tscn")
 	for page:BasePageItem in get_page_items():
 		var load_path = page.get_load_path()
 		if not entry_groups.keys().has(load_path):
@@ -46,7 +49,8 @@ func build_page_entires():
 			new_group.show()
 			page_entries_container.add_child(new_group)
 			entry_groups[load_path] = new_group
-		var new_entry:PageDetailsEntryContainer = premade_page_entry.duplicate()
+		var new_entry:PageDetailsEntryContainer = page_entry_scene.instantiate()
+		#var new_entry:PageDetailsEntryContainer = premade_page_entry.duplicate()
 		new_entry.set_page(page)
 		entry_groups[load_path].add_entry(new_entry)
 		new_entry.show()
@@ -65,7 +69,10 @@ func _process(delta: float) -> void:
 		first_pass = false
 		printerr(str(delta))
 	elif not loaded:
+		var start_time = Time.get_unix_time_from_system()
 		build_page_entires()
+		var end_time = Time.get_unix_time_from_system()
+		load_time_label.text = str(end_time - start_time)
 	#if timer < 5:
 		#timer += delta
 	#if not loaded:

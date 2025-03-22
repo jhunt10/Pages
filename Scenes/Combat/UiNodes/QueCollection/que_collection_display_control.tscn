@@ -68,13 +68,13 @@ offset_right = 40.0
 offset_bottom = 23.0
 text = "ActorName"
 
-[node name="PageSlotPrefab" type="Control" parent="VBoxContainer/QueContainer" node_paths=PackedStringArray("background", "gap_icon", "page_icon", "highlight", "dead_icon", "unknown_icon")]
+[node name="PageSlotPrefab" type="Control" parent="VBoxContainer/QueContainer" node_paths=PackedStringArray("background", "gap_icon", "_page_icon", "highlight", "dead_icon", "unknown_icon")]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 script = ExtResource("4_kcteh")
 background = NodePath("PageSlot")
 gap_icon = NodePath("GapTextureRect")
-page_icon = NodePath("Icon")
+_page_icon = NodePath("Icon")
 highlight = NodePath("Highlight")
 dead_icon = NodePath("DeadIcon")
 unknown_icon = NodePath("UnknownIcon")

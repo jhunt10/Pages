@@ -52,6 +52,12 @@ var SubEffectDatas:Dictionary:
 	get: return get_load_val("SubEffects", {})
 var RemainingDuration:int:
 	get: return _duration_counter
+var DurationType:String:
+	get:
+		for sub in SubEffectDatas.values():
+			if sub.has("DurationType"):
+				return sub['DurationType']
+		return ''
 
 var source_id:String:
 	get: return get_load_val("SourceId")
@@ -81,6 +87,11 @@ func get_source_actor()->BaseActor:
 	else:
 		printerr("BaseEffect.get_source_actor: TODO")
 		return null
+
+func is_bad()->bool:
+	return get_load_val("IsBad", false)
+func is_good()->bool:
+	return get_load_val("IsGood", false)
 
 func get_effected_actor()->BaseActor:
 	var actor_id = get_load_val("EffectedActorId", null)

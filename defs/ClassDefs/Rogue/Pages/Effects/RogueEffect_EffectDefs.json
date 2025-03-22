@@ -115,5 +115,57 @@
                 "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_ModStat.gd"
             }
         }
+    },
+
+
+    
+    {
+        "DamageDatas": {},
+        "DamageMods": {},
+        "Details": {
+            "Description": "Increase Awareness by 1 and increase Evasion by +80.",
+            "DisplayName": "Dodge",
+            "LargeIcon": "Sprites/Dodge.png",
+            "SmallIcon": "Sprites/Dodge.png",
+            "SnippetDesc": "+1 Awareness. +1.5 x Block Chance and Mod",
+            "Tags": []
+        },
+        "EffectKey": "DodgeEffect",
+        "ShowDuration": false,
+        "ShowInHud": true,
+        "StatMods": {
+            "StatMod1": {
+                "DisplayName": "Dodge",
+                "ModType": "Add",
+                "StatName": "Evasion",
+                "Value": 80
+            },
+            "StatMod3": {
+                "DisplayName": "Dodge",
+                "ModType": "Add",
+                "StatName": "Awareness",
+                "Value": 1
+            }
+        },
+        "SubEffects": {
+            "Duration": {
+                "DurationType": "ActionStart",
+                "DurationValue": 1,
+                "MaxDuration": 1,
+                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_Duration.gd"
+            },
+            "ModStat": {
+                "StatModKey": "StatMod1",
+                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_ModStat.gd"
+            },
+            "ModStat1": {
+                "StatModKey": "StatMod2",
+                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_ModStat.gd"
+            },
+            "ModStat2": {
+                "StatModKey": "StatMod3",
+                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_ModStat.gd"
+            }
+        }
     }
 ]

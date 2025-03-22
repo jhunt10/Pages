@@ -1,12 +1,17 @@
-[gd_scene load_steps=8 format=3 uid="uid://cyakkk5i1nreg"]
+[gd_scene load_steps=13 format=3 uid="uid://cyakkk5i1nreg"]
 
 [ext_resource type="Script" path="res://Scenes/Combat/UiNodes/StatsPanel/stat_panel_control.gd" id="1_mnhn6"]
 [ext_resource type="Script" path="res://Scenes/UiNodes/back_patch_container.gd" id="2_or0gt"]
 [ext_resource type="Texture2D" uid="uid://bg625rwa6bewf" path="res://data/Actors/TestActorSprite.png" id="3_f6mh4"]
 [ext_resource type="Texture2D" uid="uid://io35wpu802fp" path="res://assets/Sprites/UI/BackPatches/Patch_64_12.png" id="3_mbhkk"]
 [ext_resource type="PackedScene" uid="uid://cfxkaxrmekifh" path="res://Scenes/Combat/UiNodes/StatsPanel/stat_bar_control.tscn" id="5_x5tep"]
-[ext_resource type="Texture2D" uid="uid://b3v2ga86mbxn8" path="res://data/Actions/Attack/TestHeart.png" id="7_k56th"]
+[ext_resource type="Texture2D" uid="uid://dj6l261cuh2hj" path="res://Scenes/Combat/UiNodes/StatsPanel/BuffBackground.png" id="7_ow4ab"]
 [ext_resource type="Theme" uid="uid://dwinll8pgdjhc" path="res://Scenes/Themes/standard_theme.tres" id="7_xlcc4"]
+[ext_resource type="Script" path="res://Scenes/Combat/UiNodes/StatsPanel/effect_icon_control.gd" id="8_6sy3m"]
+[ext_resource type="Texture2D" uid="uid://c56f4fi1dxjyo" path="res://Scenes/Combat/UiNodes/StatsPanel/BaneBackground.png" id="8_ayfcx"]
+[ext_resource type="Texture2D" uid="uid://cmqlh7kaay8qg" path="res://Scenes/Combat/UiNodes/StatsPanel/EffectBackground.png" id="9_ejl1u"]
+[ext_resource type="Script" path="res://Scenes/Combat/UiNodes/StatsPanel/effect_description_box.gd" id="10_7hami"]
+[ext_resource type="Theme" uid="uid://bfce41la62bs6" path="res://Scenes/Themes/readable_theme.tres" id="11_ptagv"]
 
 [node name="StatPanelControl" type="VBoxContainer" node_paths=PackedStringArray("button", "portrait_texture_rect", "main_container", "health_bar", "bars_container", "effect_icon_box", "premade_effect_icon")]
 offset_right = 40.0
@@ -19,7 +24,7 @@ main_container = NodePath("BackPatchContainer/VBoxContainer")
 health_bar = NodePath("BackPatchContainer/VBoxContainer/HBoxContainer/StatBarContainer/HealthBarControl")
 bars_container = NodePath("BackPatchContainer/VBoxContainer/HBoxContainer/StatBarContainer")
 effect_icon_box = NodePath("IconBoxContainer")
-premade_effect_icon = NodePath("EffectIcon")
+premade_effect_icon = NodePath("EffectIconControl")
 
 [node name="BackPatchContainer" type="Container" parent="." node_paths=PackedStringArray("background", "inner_container")]
 custom_minimum_size = Vector2(176, 44)
@@ -62,28 +67,114 @@ layout_mode = 2
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 
-[node name="EffectIcon" type="TextureRect" parent="."]
-z_as_relative = false
+[node name="EffectIconControl" type="Control" parent="." node_paths=PackedStringArray("background", "effect_icon", "count_label", "description_box")]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
-texture = ExtResource("7_k56th")
-expand_mode = 1
+script = ExtResource("8_6sy3m")
+background = NodePath("Background")
+effect_icon = NodePath("Icon")
+count_label = NodePath("Label")
+description_box = NodePath("Icon/DescriptionBox")
+buff_background_texture = ExtResource("7_ow4ab")
+bane_background_texture = ExtResource("8_ayfcx")
 
-[node name="Label" type="Label" parent="EffectIcon"]
+[node name="Background" type="TextureRect" parent="EffectIconControl"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("9_ejl1u")
+
+[node name="Icon" type="TextureRect" parent="EffectIconControl"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("9_ejl1u")
+
+[node name="DescriptionBox" type="Container" parent="EffectIconControl/Icon" node_paths=PackedStringArray("name_label", "duration_label", "duration_type_label", "description_label", "background", "inner_container")]
+visible = false
+z_index = 25
+custom_minimum_size = Vector2(199, 79)
+layout_mode = 2
+offset_top = 34.0
+offset_right = 199.0
+offset_bottom = 113.0
+script = ExtResource("10_7hami")
+name_label = NodePath("BoxContainer/HBoxContainer/NameLabel")
+duration_label = NodePath("BoxContainer/HBoxContainer/DurationLabel")
+duration_type_label = NodePath("BoxContainer/HBoxContainer/DurationTypeLabel")
+description_label = NodePath("BoxContainer/RichTextLabel")
+background = NodePath("Background")
+inner_container = NodePath("BoxContainer")
+
+[node name="Background" type="NinePatchRect" parent="EffectIconControl/Icon/DescriptionBox"]
+layout_mode = 2
+texture = ExtResource("3_mbhkk")
+region_rect = Rect2(0, 0, 64, 64)
+patch_margin_left = 12
+patch_margin_top = 12
+patch_margin_right = 12
+patch_margin_bottom = 12
+
+[node name="BoxContainer" type="BoxContainer" parent="EffectIconControl/Icon/DescriptionBox"]
+layout_mode = 2
+vertical = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="EffectIconControl/Icon/DescriptionBox/BoxContainer"]
+layout_mode = 2
+
+[node name="NameLabel" type="Label" parent="EffectIconControl/Icon/DescriptionBox/BoxContainer/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("11_ptagv")
+text = "Buff Name"
+
+[node name="SpacerLabel" type="Label" parent="EffectIconControl/Icon/DescriptionBox/BoxContainer/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("11_ptagv")
+text = ":  "
+
+[node name="DurationLabel" type="Label" parent="EffectIconControl/Icon/DescriptionBox/BoxContainer/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("11_ptagv")
+text = "XX"
+
+[node name="DurationTypeLabel" type="Label" parent="EffectIconControl/Icon/DescriptionBox/BoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(19, 17)
+layout_mode = 2
+theme = ExtResource("11_ptagv")
+text = "Turns"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="EffectIconControl/Icon/DescriptionBox/BoxContainer"]
+custom_minimum_size = Vector2(152, 0)
+layout_mode = 2
+theme = ExtResource("11_ptagv")
+theme_override_font_sizes/normal_font_size = 16
+text = "Buff Effect Description Deal"
+fit_content = true
+
+[node name="Label" type="Label" parent="EffectIconControl"]
 self_modulate = Color(0, 0, 0, 1)
 z_index = 1
 z_as_relative = false
+custom_minimum_size = Vector2(20, 0)
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -8.0
+offset_left = -13.0
 offset_top = -11.0
-offset_right = 4.0
+offset_right = 7.0
 offset_bottom = 9.0
 grow_horizontal = 0
 grow_vertical = 0
@@ -92,18 +183,7 @@ theme = ExtResource("7_xlcc4")
 text = "0"
 horizontal_alignment = 2
 vertical_alignment = 2
-
-[node name="ColorRect" type="ColorRect" parent="EffectIcon/Label"]
-z_as_relative = false
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = 2.0
-offset_bottom = -2.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.439049, 0.439049, 0.439049, 1)
+justification_flags = 128
 
 [node name="IconBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 2

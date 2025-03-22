@@ -238,7 +238,13 @@ func die():
 			#Que.que_action(action)
 		#else:
 			#printerr("Quied Page %s not found" % [action_name])
-			
+
+
+func can_act()->bool:
+	if stats.get_stat('Frozen', -1) > 0:
+		return false
+	return true
+
 func get_action_key_list()->Array:
 	var list = pages.list_action_keys()
 	if list.size() > 0:

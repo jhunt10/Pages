@@ -80,7 +80,6 @@ func get_leveled_attribute(stat_name:String):
 	var base = _base_stats.get(stat_name, 0)
 	return base + attribute_levels.get(stat_name, 0)
 
-
 func base_damge_from_stat(stat_name):
 	if !stat_name:
 		return 1

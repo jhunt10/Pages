@@ -27,6 +27,7 @@ var que_display:QueDisplayControl:
 @export var stats_collection_display:StatCollectionDisplayControl
 @export var item_select_menu:ItemSelectionInputDisplay
 @export var drop_message_control:DropMessageControl
+@export var actor_placer_control:ActorPlacerControl
 
 
 static var Instance:CombatUiControl

@@ -32,6 +32,9 @@ func add_effect(source, effect_key:String, effect_data:Dictionary, game_state:Ga
 		return _effects[force_id]
 	var effect = EffectLibrary.create_effect(source, effect_key, _actor, effect_data, force_id)
 	if LOGGING: print("EffectHolder.add_effect: Added effect '%s' to actor '%s'." % [effect.Id, _actor.Id])
+	if not effect:
+		printerr("Failed to create effect with key '%s'." % [effect_key])
+		return null
 	# Stacking effect already existed
 	if not _effects.keys().has(effect.Id):
 		_effects[effect.Id] = effect

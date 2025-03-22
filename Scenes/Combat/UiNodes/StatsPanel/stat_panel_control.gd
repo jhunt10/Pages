@@ -9,7 +9,7 @@ const BoxPadding:int = 4
 @export var health_bar:StatBarControl
 @export var bars_container:VBoxContainer
 @export var effect_icon_box:HBoxContainer
-@export var premade_effect_icon:TextureRect
+@export var premade_effect_icon:EffectIconControl
 
 var actor:BaseActor
 var effect_icons:Dictionary
@@ -70,17 +70,17 @@ func _sync_icons():
 	for effect:BaseEffect in actor.effects.list_effects():
 		if effect_icons.has(effect.Id):
 			if effect._duration_counter >= 0:
-				_set_duration_text(effect.Id, effect.RemainingDuration)
+				effect_icons[effect.Id].set_effect(effect)
 			continue
 		if not effect.show_in_hud():
 			continue
-		var new_icon = premade_effect_icon.duplicate()
-		new_icon.texture = effect.get_small_icon()
+		var new_icon:EffectIconControl = premade_effect_icon.duplicate()
+		new_icon.set_effect(effect)
 		new_icon.visible = true
-		if effect.show_counter():
-			_set_duration_text(effect.Id, effect.RemainingDuration)
-		else:
-			new_icon.get_child(0).hide()
+		#if effect.show_counter():
+			#_set_duration_text(effect.Id, effect.RemainingDuration)
+		#else:
+			#new_icon.get_child(0).hide()
 		effect_icon_box.add_child(new_icon)
 		effect_icons[effect.Id] = new_icon
 	for id in effect_icons.keys():

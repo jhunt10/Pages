@@ -392,7 +392,39 @@ func finsh_walk_animation():
 func fail_movement():
 	if LOGGING: printerr("Movment Failed")
 	if LOGGING: print("After_PlayConnecnd")
-	
+	set_map_pos(cur_map_pos)
+	movement_start_position = self.position
+	movement_dest_position = self.position
+	finsh_walk_animation()
+	is_moving = false
+	_is_moving_on_script = false
+
+#func freeze_animations():
+	#body_animation.pause()
+	#if main_hand_node:
+		#var anima_path = main_hand_node.animation_tree.get_animation_player()
+		#var anim:AnimationPlayer = get_node(anima_path)
+		#if anim:
+			#anim.pause()
+	#if off_hand_node:
+		#var anima_path = off_hand_node.animation_tree.get_animation_player()
+		#var anim:AnimationPlayer = get_node(anima_path)
+		#if anim:
+			#anim.pause()
+#
+#func unfreeze_animations():
+	#body_animation.play()
+	#if main_hand_node:
+		#var anima_path = main_hand_node.animation_tree.get_animation_player()
+		#var anim:AnimationPlayer = get_node(anima_path)
+		#if anim:
+			#anim.play()
+	#if off_hand_node:
+		#var anima_path = off_hand_node.animation_tree.get_animation_player()
+		#var anim:AnimationPlayer = get_node(anima_path)
+		#if anim:
+			#anim.play()
+
 
 func play_shake():
 	body_animation.play("shake_effect")

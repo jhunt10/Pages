@@ -1,13 +1,24 @@
 [gd_scene load_steps=3 format=3 uid="uid://c2wc0sjypm6do"]
 
 [ext_resource type="Script" path="res://assets/Scripts/VFXs/ParticalVfxs/partical_vfx_node.gd" id="1_m0e0y"]
-[ext_resource type="Texture2D" uid="uid://rlbiyjubki8t" path="res://defs/Effects/Ailments/Sprites/FrozenSprite.png" id="2_avm0j"]
+[ext_resource type="Texture2D" uid="uid://br5o2y7ga8sgq" path="res://defs/Effects/Ailments/Sprites/FrozenPatchSprite.png" id="2_r8w2x"]
 
-[node name="VFXNode" type="Node2D" node_paths=PackedStringArray("particals")]
+[node name="VFXNode" type="Node2D" node_paths=PackedStringArray("patch_sprite")]
 z_index = 9
 script = ExtResource("1_m0e0y")
-particals = NodePath("")
 actor_modulate = Color(0.611765, 1, 0.968627, 1)
+patch_sprite = NodePath("NinePatchRect")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_avm0j")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+offset_top = -10.0
+offset_right = 52.0
+offset_bottom = 40.0
+texture = ExtResource("2_r8w2x")
+region_rect = Rect2(0, 0, 34, 34)
+patch_margin_left = 9
+patch_margin_top = 9
+patch_margin_right = 9
+patch_margin_bottom = 9
+axis_stretch_horizontal = 1

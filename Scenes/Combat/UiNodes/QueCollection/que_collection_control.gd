@@ -30,21 +30,23 @@ func _build_que_displays():
 		ques_container.remove_child(old_que)
 		old_ques[que_id] = old_que
 	_ques.clear()
+	
 	for que_id in CombatRootControl.QueController._que_order:
 		var que:ActionQue = CombatRootControl.QueController._action_ques[que_id]
 		if que.get_max_que_size() == 0:
 			continue
 		var new_display:QueCollection_QueDisplayContainer = null
-		if old_ques.has(que_id):
-			new_display = old_ques[que_id]
-			old_ques.erase(que_id)
-		else:
-			new_display = premade_que_container.duplicate()
-			new_display.set_actor(que.actor)
+		#if old_ques.has(que_id):
+			#new_display = old_ques[que_id]
+			#old_ques.erase(que_id)
+		#else:
+		new_display = premade_que_container.duplicate()
+		new_display.set_actor(que.actor)
+		new_display.show()
 			
 		ques_container.add_child(new_display)
 		_ques[que.Id] = new_display
-		new_display.show()
+		_ques[que.Id]._sync_que()
 	
 	for old_que in old_ques.values():
 		old_que.queue_free()

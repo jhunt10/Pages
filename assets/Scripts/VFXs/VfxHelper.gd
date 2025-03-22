@@ -98,6 +98,8 @@ static func create_ailment_vfx_node(ailment_key:String, actor:BaseActor)->BaseVf
 		vfx_key = "AilmentBurnedVfx"
 	elif ailment_key == "Chilled":
 		vfx_key = "AilmentChilledVfx"
+	elif ailment_key == "Frozen":
+		vfx_key = "AilmentFrozenVfx"
 	else:
 		printerr("VfxHelper.create_ailment_vfx_node: Unknown AilmentKey '%s'." % [ailment_key])
 		return null

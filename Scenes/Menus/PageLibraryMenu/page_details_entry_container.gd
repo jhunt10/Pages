@@ -67,11 +67,12 @@ func _process(delta: float) -> void:
 
 func set_page(_page:BasePageItem):
 	page = _page
+	title_label.text = page.details.display_name
+	
 	var page_action = page.get_action()
 	var page_effect_def = page.get_effect_def()
-	
-	title_label.text = page.details.display_name
 	var tags:Array = []
+	
 	tags = page.get_item_tags()
 	tags_label.text = ", ".join(tags)
 	

@@ -1,7 +1,10 @@
 [
     {
+        "EffectKey": "AilmentBurned",
+        "CanStack": true,
         "ShowInHud": true,
         "ShowCounter": true,
+        "IsBad": true,
         "DamageDatas": {
             "DamageData1": {
                 "AtkPower": 2,
@@ -26,8 +29,6 @@
             "SnippetDesc": "Take Fire Damage at the End of Turn.",
             "Tags": ["DOT"]
         },
-        "EffectKey": "AilmentBurned",
-        "CanStack": true,
         "StatMods": {
             "BurnedColdRes": {
                 "DisplayName": "Burning",
@@ -50,12 +51,11 @@
             },
             "Duration": {
                 "DurationType": "TurnEnd",
-                "DurationValue": 3,
                 "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_Duration.gd"
             },
             "RemoveChilled": {
                 "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_RemoveOtherEffect.gd",
-                "RemoveEffectKey": "AilmentChilled"
+                "RemoveEffectKeys": ["AilmentChilled", "AilmentFrozen"]
             }
         }
     },
@@ -64,6 +64,7 @@
         "ShowInHud": true,
         "ShowCounter": true,
         "CanStack": true,
+        "IsBad": true,
         "DamageDatas": {
             "DamageData1": {
                 "AtkPower": 2,
@@ -102,7 +103,7 @@
             "DisplayName": "Shocked",
             "LargeIcon": "Sprites/ShockedIcon.png",
             "SmallIcon": "Sprites/ShockedIcon.png",
-            "SnippetDesc": "Deal Electric Damage to Self and adjacent Actors at the end of each Turn.",
+            "SnippetDesc": "Deal Shock Damage to adjacent Actors and Self at the end of Turn.",
             "Tags": ["DOT"]
         },
         "StatMods": {},
@@ -120,7 +121,6 @@
             },
             "Duration": {
                 "DurationType": "TurnEnd",
-                "DurationValue": 50,
                 "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_Duration.gd"
             }
         }
@@ -130,6 +130,7 @@
         "ShowInHud": true,
         "ShowCounter": true,
         "CanStack": true,
+        "IsBad": true,
         "DamageDatas": {},
         "DamageMods": {},
         "AddTagsToActor": ["Chilled"],
@@ -184,18 +185,17 @@
                 "AilmentKey": "Chilled",
                 "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_AlimentVfx.gd"
             },
-            "ApplyMaxStatMod": {
+            "ApplyStatMod": {
                 "AllStatMods": true,
                 "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_ModStat.gd"
             },
             "Duration": {
                 "DurationType": "TurnEnd",
-                "DurationValue": 3,
                 "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_Duration.gd"
             },
             "RemoveBurned": {
                 "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_RemoveOtherEffect.gd",
-                "RemoveEffectKey": "AilmentBurned"
+                "RemoveEffectKeys": ["AilmentBurned"]
             }
         }
     },
@@ -204,6 +204,7 @@
         "ShowInHud": true,
         "ShowCounter": true,
         "CanStack": true,
+        "IsBad": true,
         "DamageDatas": {},
         "DamageMods": {},
         "Details": {
@@ -215,10 +216,16 @@
             "Tags": []
         },
         "StatMods": {
-            "FrozenPPR": {
+            "Frozen": {
                 "DisplayName": "Frozen",
                 "ModType": "Set",
-                "StatName": "PPR",
+                "StatName": "Frozen",
+                "Value": 1
+            },
+            "SpeedScale": {
+                "DisplayName": "Frozen",
+                "ModType": "Scale",
+                "StatName": "Speed",
                 "Value": 0
             }
         },
@@ -227,19 +234,20 @@
                 "AilmentKey": "Frozen",
                 "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_AlimentVfx.gd"
             },
-            "ApplyMaxStatMod": {
-                "StatModKeys": [
-                ],
+            "ApplyStatMod": {
+                "AllStatMods": true,
                 "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_ModStat.gd"
             },
             "Duration": {
                 "DurationType": "TurnEnd",
-                "DurationValue": 3,
                 "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_Duration.gd"
             },
-            "RemoveBurned": {
+            "RemoveChilled": {
                 "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_RemoveOtherEffect.gd",
-                "RemoveEffectKey": "AilmentBurned"
+                "RemoveEffectKeys": ["AilmentChilled", "AilmentBurned"]
+            },
+            "CancelActions": {
+                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_Freeze.gd"
             }
         }
     }
