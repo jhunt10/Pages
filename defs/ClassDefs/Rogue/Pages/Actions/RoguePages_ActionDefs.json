@@ -1,0 +1,306 @@
+[
+
+    {
+        "ActionKey": "BaseSelfBuff",
+        "CostData": {},
+        "DamageDatas": {},
+        "Details": {
+            "Description": "Apply BUFF to self",
+            "DisplayName": "SelfBuff",
+            "LargeIcon": "Sprites/SelfBuff.png",
+            "SmallIcon": "Sprites/SelfBuff.png",
+            "SnippetDesc": "Apply BUFF to self",
+            "Tags": [
+                "Effect"
+            ]
+        },
+        "EffectDatas":{
+            "Effect1": {
+                "EffectKey": "AilmentShocked",
+                "Duration": 3,
+                "IsGood": true
+            }
+        },
+        "MissileDatas": {},
+        "Preview": {},
+        "SubActions": {
+            "5": [
+                {
+                    "Animation": "Raise",
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponReadyAnimation.gd",
+                    "MainHand": true,
+                    "OffHand": "Never"
+                }
+            ],
+            "11": [
+                {
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_PayCost.gd"
+                },
+                {
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Effects/SubAct_ApplyEffect.gd",
+                    "TargetKey": "Self",
+                    "EffectDataKey": "Effect1"
+                },
+                {
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponMotionAnimation.gd",
+                    "MainHand": true,
+                    "OffHand": "Never"
+                }
+            ]
+        },
+        "TargetParams": {}
+    },
+    {
+        "ActionKey":"BeNimbleSelfBuff",
+        "ParentKey": "BaseSelfBuff",
+        "Details": {
+            "Description": "Apply Be Nimble to self for 3 Rounds.\nBe Nimble: +50 to Evasion.",
+            "DisplayName": "Be Nimble",
+            "LargeIcon": "Sprites/BeNimble.png",
+            "SmallIcon": "Sprites/BeNimble.png",
+            "SnippetDesc": "+50 Evasion for 5 Rounds",
+            "Tags": [
+                "Gambit"
+            ]
+        },
+        "EffectDatas":{
+            "Effect1":{
+                "EffectKey": "BeNimbleBuff",
+                "Duration": 3
+            }
+        }
+    },
+    {
+        "ActionKey":"BeQuickSelfBuff",
+        "ParentKey": "BaseSelfBuff",
+        "Details": {
+            "Description": "Apply Be Quick to self for 3 Rounds.\nBe Quick: +50 to Speed.",
+            "DisplayName": "Be Quick",
+            "LargeIcon": "Sprites/BeQuick.png",
+            "SmallIcon": "Sprites/BeQuick.png",
+            "SnippetDesc": "+50 Speed for 5 Rounds",
+            "Tags": [
+                "Gambit"
+            ]
+        },
+        "EffectDatas":{
+            "Effect1":{
+                "EffectKey": "BeQuickBuff",
+                "Duration": 3
+            }
+        }
+    },
+    {
+        "ActionKey":"BePreciseSelfBuff",
+        "ParentKey": "BaseSelfBuff",
+        "Details": {
+            "Description": "Apply Be Precise to self for 3 Rounds.\nBe Precise: +50 to Accuracy.",
+            "DisplayName": "Be Precise",
+            "LargeIcon": "Sprites/BePrecise.png",
+            "SmallIcon": "Sprites/BePrecise.png",
+            "SnippetDesc": "+50 Accuracy for 5 Rounds",
+            "Tags": [
+                "Gambit"
+            ]
+        },
+        "EffectDatas":{
+            "Effect1":{
+                "EffectKey": "BePreciseBuff",
+                "Duration": 3
+            }
+        }
+    },
+    {
+        "ActionKey":"BeDeadlySelfBuff",
+        "ParentKey": "BaseSelfBuff",
+        "Details": {
+            "Description": "Apply Be Deadly to self for 3 Rounds.\nBe Deadly: +50 to Crit Chance.",
+            "DisplayName": "Be Deadly",
+            "LargeIcon": "Sprites/BeDeadly.png",
+            "SmallIcon": "Sprites/BeDeadly.png",
+            "SnippetDesc": "+50 Crit Chance for 5 Rounds",
+            "Tags": [
+                "Gambit"
+            ]
+        },
+        "EffectDatas":{
+            "Effect1":{
+                "EffectKey": "BeDeadlyBuff",
+                "Duration": 3
+            }
+        }
+    },
+
+    {
+        "ActionKey": "BehindYou",
+        "AmmoData": {
+            "Cost": 1,
+            "Clip": 2,
+            "AmmoType": "Abn"
+        },
+        "DamageDatas": {},
+        "Details": {
+            "Description": "Teleport behind the target and facing them. -\"It's nothing personnel\"",
+            "DisplayName": "Behind",
+            "LargeIcon": "Sprites/Behind.png",
+            "SmallIcon": "Sprites/Behind.png",
+            "SnippetDesc": "Teleport behind the target",
+            "Tags": [
+                "Teleport"
+            ]
+        },
+        "ItemDetails":
+        {
+            "Rarity": "Rare",
+            "Value": 50
+        },
+        "MissileDatas": {},
+        "Preview": {
+            "PreviewTargetKey": "TargetParam"
+        },
+        "SubActions": {
+            "10": [
+                {
+                    "AllowAlreadyTargeted": false,
+                    "AllowAutoTarget": true,
+                    "SetTargetKey": "TargetSpot",
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_GetTarget.gd",
+                    "TargetParamKey": "TargetParam"
+                }
+            ],
+            "11": [
+                {
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_PayCost.gd"
+                },
+                {
+                    "DestRelativePos": "[0, 1, 0, 0]",
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_Teleport.gd",
+                    "TargetActorKey": "",
+                    "TargetDestKey": "TargetSpot"
+                }
+            ]
+        },
+        "TargetParams": {
+            "TargetParam": {
+                "EffectsAllies": false,
+                "EffectsEnemies": false,
+                "LineOfSight": true,
+                "TargetArea": "[[0,1],[1,2],[0,2],[-1,2],[0,3],[-1,3],[1,0],[1,0],[1,1],[1,0],[-1,1],[-1,2],[-1,0],[1,3],[0,3],[-1,3]]",
+                "TargetType": "Actor"
+            }
+        }
+    },
+    {
+        "ActionKey": "ThrowKnife",
+        "AttackDetails":
+        {
+            "AccuracyMod": 1,
+            "PotencyMod": 0.5,
+            "AttackVfxKey": "KnifeMissile",
+            "AttackVfxData": {
+                "Velocity": 200,
+                "ScenePath": "res://assets/Scripts/VFXs/BulletVfxs/bullet_vfx_node.tscn"
+            }
+        },
+        "AmmoData": {
+            "Cost": 4,
+            "Clip": 36,
+            "AmmoType": "Phy"
+        },
+        "DamageDatas": {
+            "Damage1": {
+                "AtkPower": 100,
+                "AtkStat": "PhyAttack",
+                "BaseDamage": 0,
+                "DamageEffect": "Pierce_DamageEffect",
+                "DamageType": "Pierce",
+                "DamageVarient": 0.3,
+                "DefenseType": "Armor"
+            }
+        },
+        "ItemDetails":
+        {
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "Details": {
+            "Description": "Throw a knife which deals 100±30% Pierce damage to a creature in the target spot.",
+            "DisplayName": "Throw Knife",
+            "LargeIcon": "Sprites/ThrowKnife.png",
+            "SmallIcon": "Sprites/ThrowKnife.png",
+            "SnippetDesc": "Throw Knife",
+            "Tags": [
+                "Attack",
+                "Pierce",
+                "Missile",
+                "Ranged",
+                "Tactic",
+                "Fast"
+            ]
+        },
+        
+
+
+"EffectDatas":{
+    "BurnEffect": {
+        "EffectKey": "AilmentBurned"
+    }
+},
+
+
+
+        "MissileDatas": {
+            "Missile1": {
+                "DamageDataKey": "Damage1",
+                "FramesPerTile": 2,
+                "ImpactVfxKey": "",
+                "MissileVfxKey": "KnifeMissile"
+            }
+        },
+        "Preview": {
+            "PreviewTargetKey": "TargetParam1",
+            "PreviewDamageKey": "Damage1"
+        },
+        "SubActions": {
+            "0": [
+                {
+                    "Animation": "Swing",
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponReadyAnimation.gd",
+                    "MainHand": true,
+                    "OffHand": "Never"
+                }
+            ],
+            "5": [
+                {
+                    "AllowAlreadyTargeted": false,
+                    "AllowAutoTarget": true,
+                    "SetTargetKey": "Target1",
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_GetTarget.gd",
+                    "TargetParamKey": "TargetParam1"
+                },
+                {
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_PayCost.gd"
+                },
+                {
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_ApplyDamage.gd",
+                    "DamageKey": "Damage1",
+                    "TargetKey": "Target1"
+                },
+                {
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponMotionAnimation.gd",
+                    "MainHand": true,
+                    "OffHand": "Never"
+                }
+            ]
+        },
+        "TargetParams": {
+            "TargetParam1": {
+                "EffectsAllies": false,
+                "EffectsEnemies": true,
+                "LineOfSight": true,
+                "TargetArea": "[[0,1],[1,2],[0,2],[1,1],[-1,1],[-1,2],[1,3],[0,3],[-1,3]]",
+                "TargetType": "Enemy"
+            }
+        }
+    }
+]
