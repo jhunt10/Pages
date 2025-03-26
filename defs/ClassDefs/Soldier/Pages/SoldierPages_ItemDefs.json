@@ -22,6 +22,22 @@
         }
     },
     {
+        "ActionKey": "TauntEnemy",
+        "CanStack": true,
+        "Details": {
+            "Tags": [
+                "Tactic"
+            ]
+        },
+        "ItemDetails":
+        {
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "ItemKey": "TauntEnemy_PageItem",
+        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd"
+    },
+    {
         "ActionKey": "ThrowJavelin",
         "CanStack": true,
         "Details": {

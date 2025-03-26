@@ -3,6 +3,7 @@ extends Control
 @export var build_ques_button:Button
 @export var show_statbars_button:Button
 @export var fill_ammo_button:Button
+@export var draw_button:Button
 @onready var timer_label:Label = $VBoxContainer/TimerContainer/Label
 
 @export var dev_map_display:Node2D
@@ -12,12 +13,13 @@ func _ready() -> void:
 	build_ques_button.pressed.connect(force_build_ques)
 	show_statbars_button.pressed.connect(_toggle_stat_bars)
 	fill_ammo_button.pressed.connect(_fill_ammo)
+	draw_button.pressed.connect(_toggle_dev_map_display)
 	
 	pass # Replace with function body.
 
 func _toggle_dev_map_display():
 	dev_map_display.visible = not dev_map_display.visible
-	CombatRootControl.Instance.ui_control.drop_message_control.add_card("Test Message")
+	#CombatRootControl.Instance.ui_control.drop_message_control.add_card("Test Message")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

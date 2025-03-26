@@ -31,12 +31,12 @@ func set_is_gap(val:bool):
 		
 func set_action(index:int, actor:BaseActor, action:BaseAction):
 	if action:
-		print("QueMiniSlotIcon: Setting Action: %s | %s" % [action.ActionKey, index])
+		#print("QueMiniSlotIcon: Setting Action: %s | %s" % [action.ActionKey, index])
 		acttion_key = action.ActionKey
 		_page_icon.show()
 		_page_icon.texture = action.get_qued_icon(index, actor)
 	else:
-		print("QueMiniSlotIcon: Setting Action: 'NULL' | %s" % [index])
+		#print("QueMiniSlotIcon: Setting Action: 'NULL' | %s" % [index])
 		acttion_key = 'Null'
 		_page_icon.visible = false
 		_page_icon.texture = null

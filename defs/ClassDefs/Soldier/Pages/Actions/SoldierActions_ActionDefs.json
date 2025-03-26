@@ -110,6 +110,72 @@
         }
     },
     {
+        "ActionKey": "TauntEnemy",
+        "AmmoData": {
+        },
+        "AttackDetails":
+        {
+            "AccuracyMod": 1,
+            "PotencyMod": 1
+        },
+        "DamageDatas": {
+        },
+        "Details": {
+            "Description": "Force an Enemy Actor to see you as the highest Threat. They will focus their attacks on you until another actor generates more Threat.",
+            "DisplayName": "Taunt Enemy",
+            "LargeIcon": "Sprites/TauntEnemy.png",
+            "SmallIcon": "Sprites/TauntEnemy.png",
+            "SnippetDesc": "Force an Enemy Actor to see you as the highest Threat.",
+            "Tags": [
+                "HighThreat"
+            ]
+        },
+        "MissileDatas": {},
+        "Preview": {
+            "PreviewTargetKey": "TargetParam1"
+        },
+        "SubActions": {
+            "5": [
+                {
+                    "Animation": "Raise",
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponReadyAnimation.gd",
+                    "MainHand": true,
+                    "OffHand": "Never"
+                }
+            ],
+            "10": [
+                {
+                    "AllowAlreadyTargeted": false,
+                    "AllowAutoTarget": false,
+                    "SetTargetKey": "Target1",
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_GetTarget.gd",
+                    "TargetParamKey": "TargetParam1"
+                }
+            ],
+            "11": [
+                {
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_ApplyAggro.gd",
+                    "TargetKey": "Target1",
+                    "ChangeType": "ToHighestThreat"
+                },
+                {
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponMotionAnimation.gd",
+                    "MainHand": true,
+                    "OffHand": "Never"
+                }
+            ]
+        },
+        "TargetParams": {
+            "TargetParam1": {
+                "EffectsAllies": false,
+                "EffectsEnemies": true,
+                "LineOfSight": false,
+                "TargetArea": "[[-1,2],[0,2],[1,2],[-1,1],[0,1],[1,1],[-1,0],[0,0],[1,0]]",
+                "TargetType": "Actor"
+            }
+        }
+    },
+    {
         "ActionKey": "ChargeAttack",
         "CostData": {},
         "DamageDatas": {},

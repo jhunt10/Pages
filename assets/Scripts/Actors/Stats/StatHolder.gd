@@ -181,7 +181,7 @@ func fill_bar_stats():
 		var max_val = get_bar_stat_max(stat_name)
 		_cached_stats["BarStat:"+stat_name] = max_val
 
-func apply_damage(damage, _source):
+func apply_damage(damage, source):
 	_cached_stats["BarStat:"+HealthKey] = max(min(_cached_stats["BarStat:"+HealthKey] - damage, max_health), 0)
 	if current_health <= 0:
 		CombatRootControl.Instance.kill_actor(_actor)

@@ -110,6 +110,8 @@ func get_passive_stat_mods()->Array:
 	var stat_mod_datas:Dictionary = get_load_val("StatMods", {})
 	var out_list = []
 	for mod_data in stat_mod_datas.values():
+		if not mod_data.has("DisplayName"):
+			mod_data['DisplayName'] = self.details.display_name
 		out_list.append(BaseStatMod.create_from_data(Id, mod_data))
 	return out_list
 
@@ -124,6 +126,8 @@ func get_damage_mods(taking_damage:bool)->Array:
 	var stat_mod_datas:Dictionary = get_load_val("DamageMods", {})
 	var out_list = []
 	for mod_data in stat_mod_datas.values():
+		if not mod_data.has("DisplayName"):
+			mod_data['DisplayName'] = self.details.display_name
 		if taking_damage: 
 			if mod_data.get("OnTakeDamage", false):
 				out_list.append(mod_data.duplicate())

@@ -322,6 +322,7 @@ func _execute_turn_frames(game_state:GameStateData, que:ActionQue, turn_index:in
 		var subaction = _get_subaction(script_key)
 		if !subaction:
 			printerr("No script found for subaction " + script_key)
+			que.fail_turn()
 			return
 		
 		if DEEP_LOGGING: print("\t\tExecuting SubAction: " + script_key)

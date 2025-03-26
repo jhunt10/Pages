@@ -1,4 +1,33 @@
 [
+
+    {
+        "ItemKey": "LowAggro_PageItem",
+        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
+        "CanStack": true,
+        "Details":{
+            "Description": "Generate less Threat causing Enemies will be less likely to prioritise you as a Target.",
+            "DisplayName": "LowAggro",
+            "LargeIcon": "Sprites/AggroDown.png",
+            "SmallIcon": "Sprites/AggroDown.png",
+            "SnippetDesc": "Generate less Threat.",
+            "Tags": ["ClassPage"]
+        },
+        "ItemDetails":
+        {
+            "Rarity": "Common",
+            "Value": 50
+        },
+        
+        "StatMods": {
+            "StatMod1": {
+                "ModType": "Add",
+                "StatName": "AggroMod",
+                "Value": 0.7
+            }
+        }
+    },
+
+    
     {
         "ItemKey": "BeNimble_PageItem",
         "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",

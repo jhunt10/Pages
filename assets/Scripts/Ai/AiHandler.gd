@@ -17,7 +17,6 @@ static func build_action_ques(clear_existing_ques:bool=false):
 	astar.enable_all_points()
 	
 	# Pre-Pass on Actors
-	var cost_datas = {}
 	for actor:BaseActor in actors:
 		# Clear Ques
 		if clear_existing_ques and not actor.is_player:
@@ -28,11 +27,6 @@ static func build_action_ques(clear_existing_ques:bool=false):
 			for action_key in action_keys_que:
 				var action = ActionLibrary.get_action(action_key)
 				actor.Que.que_action(action)
-		
-		# Build cost data
-		cost_datas[actor.Id] = {}
-		for stat_name in actor.stats.list_bar_stat_names():
-			cost_datas[actor.Id][stat_name] = actor.stats.get_bar_stat(stat_name)
 		
 		# Disable positions
 		var pos = init_game_state.get_actor_pos(actor)
@@ -51,7 +45,7 @@ static func build_action_ques(clear_existing_ques:bool=false):
 			# Enable current Actor's Position for Pathing
 			astar.set_pos_disabled(current_pos, false)
 			
-			var action = _choose_page_for_actor(actor, turn_state, cost_datas[actor.Id])
+			var action = _choose_page_for_actor(actor, turn_state)
 			if action == null:
 				printerr("AiHandler: No Action found for '%s' on turn %s." % [actor.Id, turn])
 				continue
@@ -66,48 +60,54 @@ static func build_action_ques(clear_existing_ques:bool=false):
 				if new_pos != current_pos:
 					astar.set_pos_disabled(current_pos, false)
 					astar.set_pos_disabled(new_pos, true)
-			if action.CostData.size() > 0:
-				var cost_data = action.CostData
-				for cost_key in cost_data:
-					if cost_datas[actor.Id].has(cost_key):
-						cost_datas[actor.Id][cost_key] -= cost_data[cost_key]
 		#last_turn_state = turn_state
 		if LOGGING: print("Turn: %s" % [turn])
 		for actor in actors:
 			if LOGGING: print("\t\t %s | %s" % [actor.Id, turn_state.get_actor_pos(actor)] )
 	pass
 
-static func _choose_page_for_actor(actor:BaseActor, game_state:GameStateData, bar_stats:Dictionary)->BaseAction:
+static func _choose_page_for_actor(actor:BaseActor, game_state:GameStateData)->BaseAction:
 	var current_action = actor.Que.get_action_for_turn(game_state.current_turn_index)
 	if current_action:
 		return current_action
+	
+	var aggroed_actor_id = actor.aggro.get_current_aggroed_actor_id()
 	var current_pos = game_state.get_actor_pos(actor)
 	var options = _get_actor_action_options_data(actor)
 	var attack_actions = []
 	for attack_key in options['Attacks']:
 		var attack_action = ActionLibrary.get_action(attack_key)
-		if not can_actor_pay_cost(actor, attack_action.CostData, bar_stats):
-			continue
-		if attack_key == "ThrowStone":
-			if LOGGING: print("Test")
 		# Get potential targets for attack Action
 		var attack_params =  attack_action.get_preview_target_params(actor)
 		var potential_targets = TargetingHelper.get_potential_target_actor_ids(attack_params, actor, game_state, [], current_pos) 
 		if potential_targets.size() == 0:
 			continue
 		var attack_has_enemy_target = false
+		var aggroed_actor_in_target = false
 		# Validate that targets are not allies
 		for pot_targ in potential_targets:
+			if pot_targ == aggroed_actor_id:
+				aggroed_actor_in_target = true
 			var pot_actor = game_state.get_actor(pot_targ)
 			if pot_actor.FactionIndex != actor.FactionIndex:
 				attack_has_enemy_target = true
 		if not attack_has_enemy_target:
 			continue
+		if aggroed_actor_id != '' and not aggroed_actor_in_target:
+			continue
 		#TODO: Attack Weights
 		return attack_action
-	
+	if actor.Id.begins_with("Player"):
+		var temp = true
 	# Get target
-	var target_enemy = get_closest_enemy(actor, game_state)
+	var target_enemy = null
+	if aggroed_actor_id == '' or actor.aggro.get_threat_from_actor(aggroed_actor_id) == 0:
+		target_enemy = get_closest_enemy(actor, game_state)
+		if target_enemy:
+			actor.aggro.add_threat_from_actor(target_enemy, 0)
+	else:
+		target_enemy = game_state.get_actor(aggroed_actor_id)
+	
 	if not target_enemy:
 		printerr("No enemies found for actor: %s" % [actor.Id])
 		return null
@@ -137,6 +137,9 @@ static func _get_actor_action_options_data(actor:BaseActor)->Dictionary:
 	var action_list = actor.get_action_key_list()
 	for action_key in action_list:
 		var action = ActionLibrary.get_action(action_key)
+		if action.has_ammo(actor):
+			if not actor.Que.can_pay_page_ammo(action_key):
+				continue
 		if action.PreviewMoveOffset:
 			data['Moves'].append(action_key)
 		var damage_data = get_damage_data_of_action(action, actor)
@@ -144,72 +147,11 @@ static func _get_actor_action_options_data(actor:BaseActor)->Dictionary:
 			data['Attacks'].append(action_key)
 	cached_move_sets[actor.ActorKey] = data
 	return data
-			
 
-static func build_action_que(actor:BaseActor, game_state:GameStateData)->Array:
-	var enimes = []# get_enemy_actors(actor, game_state)
-	if enimes.size() == 0:
-		return []
-		
-	# TODO: Pick a target
-	var target_enemy = enimes[0]
-	
-	# get possible attack ranges
-	var attack_target_params = {}
-	var attack_costs_data = {}
-	for action:BaseAction in actor.pages.list_actions():
-		if action.has_preview_target():
-			attack_target_params[action.ActionKey] = action.get_preview_target_params(actor)
-			attack_costs_data[action.ActionKey] = action.CostData
-	
-	# Find Path
-	var target_pos = game_state.get_actor_pos(target_enemy)
-	var start_pos = game_state.get_actor_pos(actor)
-	var path = path_to_target(actor, start_pos, target_pos, game_state)
-	
-	
-	var action_list = []
-	var curr_pos = start_pos
-	var path_index = 0
-	var try_count = 0
-	var running_costs = {}
-	while try_count < 50 and action_list.size() < actor.Que.get_max_que_size():
-		var attack_page = null
-		for attack_name in attack_target_params.keys():
-			# Remove attack as option if we can't pay it's cost
-			if not can_actor_pay_cost(actor, attack_costs_data.get(attack_name, {}), running_costs):
-				attack_target_params.erase(attack_name)
-				continue
-			var attack_params =  attack_target_params[attack_name]
-			var potential_targets = TargetingHelper.get_potential_target_actor_ids(attack_params, actor, game_state, [], curr_pos) 
-			if potential_targets.has(target_enemy.Id):
-				attack_page = attack_name
-		if attack_page:
-			action_list.append(attack_page)
-			# Record cost of action as payed
-			for cost_key in attack_costs_data.get(attack_page, {}).keys():
-				if not running_costs.has(cost_key):
-					running_costs[cost_key] = 0
-				running_costs[cost_key] += attack_costs_data[attack_page][cost_key]
-		elif path.get("Moves", []).size() > path_index:
-			action_list.append(path['Moves'][path_index])
-			curr_pos = path['Poses'][path_index]
-			path_index += 1
-		try_count += 1
-	if try_count >= action_list.size():
-		printerr("Qued %s pages in %s tries" % [action_list.size(), try_count])
-		
-	return action_list
-
-static func can_actor_pay_cost(actor:BaseActor, cost_data:Dictionary, bar_stats:Dictionary)->bool:
-	for cost_key in cost_data.keys():
-		if not bar_stats.has(cost_key):
-			return false
-		if cost_data[cost_key] > bar_stats[cost_key]:
-			return false
-	return true
 
 static func get_closest_enemy(actor:BaseActor, game_state:GameStateData)->BaseActor:
+	if actor.Id.begins_with("Player"):
+		var temp = true
 	var actor_pos = game_state.get_actor_pos(actor)
 	var min_dist = 10000
 	var closest_actor = null
@@ -217,8 +159,10 @@ static func get_closest_enemy(actor:BaseActor, game_state:GameStateData)->BaseAc
 		if enemy.FactionIndex == actor.FactionIndex:
 			continue
 		var enemy_pos = game_state.get_actor_pos(enemy)
-		var dist = astar.get_cost_to_pos(actor_pos, enemy_pos)
-		if min_dist > dist:
+		#var path = path_to_target(actor, actor_pos, enemy_pos, game_state)
+		#var dist = path.get('Moves', []).size()
+		var dist = abs(actor_pos.x - enemy_pos.x) + abs(actor_pos.y - enemy_pos.y)
+		if dist < min_dist:
 			min_dist = dist
 			closest_actor = enemy
 	return closest_actor
@@ -256,18 +200,42 @@ static func try_handle_get_target_sub_action(actor:BaseActor, selection_data:Tar
 			pp_actor = ActorLibrary.get_actor(p_actor)
 		if pp_actor.FactionIndex != actor.FactionIndex:
 			enemy_actors.append(pp_actor)
-			
-	var selected_target = null
-	if enemy_actors.size() > 0:
-		if selection_data.target_params.is_spot_target_type():
-			turndata.add_target_for_key(selection_data.setting_target_key, 
-					selection_data.target_params.target_param_key, coor_to_actor[enemy_actors[0].Id])
-		elif selection_data.target_params.is_actor_target_type():
-			turndata.add_target_for_key(selection_data.setting_target_key, selection_data.target_params.target_param_key, enemy_actors[0].Id)
-		return true
-	else:
+	# TODO: Be smart about AOE
+	var targeted_enemy_id = pick_between_enemies(actor, enemy_actors)
+	if targeted_enemy_id == '':
 		return false
-	
+	elif selection_data.target_params.is_spot_target_type():
+		turndata.add_target_for_key(
+			selection_data.setting_target_key, 
+			selection_data.target_params.target_param_key, 
+			coor_to_actor[targeted_enemy_id])
+	elif selection_data.target_params.is_actor_target_type():
+		turndata.add_target_for_key(
+			selection_data.setting_target_key, 
+			selection_data.target_params.target_param_key, 
+			targeted_enemy_id)
+	return true
+
+# Take a list of enemy Actors and return Id of best choice to atttack
+static func pick_between_enemies(actor:BaseActor, enemies:Array)->String:
+	if enemies.size() == 0:
+		return ''
+	var aggroed_enemy_id = actor.aggro.get_current_aggroed_actor_id()
+	var threat_weights = {}
+	var total_threat = 0
+	for enemy:BaseActor in enemies:
+		if enemy.Id == aggroed_enemy_id:
+			return enemy.Id
+		var threat = actor.aggro.get_threat_from_actor(enemy.Id)
+		threat_weights[enemy.Id] = threat
+		total_threat += threat
+	var roll = randf() % total_threat
+	for key in threat_weights.keys():
+		roll -= threat_weights[key]
+		if roll < 0:
+			return key
+	printerr("AiHandler.pick_between_enemies: Roll did not return value")
+	return ''
 
 static func path_to_target(actor:BaseActor, start_pos:MapPos, target_pos:MapPos, game_state:GameStateData)->Dictionary:
 	if !astar:

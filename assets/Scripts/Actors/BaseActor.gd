@@ -31,6 +31,8 @@ var items:BagItemHolder
 var equipment:EquipmentHolder
 var pages:PageHolder
 
+var aggro:AggroHandler
+
 var Id : String:
 	get: return _id
 var ActorKey : String:
@@ -67,6 +69,7 @@ func _init(key:String, load_path:String, def:Dictionary, id:String, data:Diction
 	
 	var stat_data = _def["Stats"]
 	ai_def = get_load_val("AiData", {})
+	aggro = AggroHandler.new(self)
 	sprite = ActorSprite.new(self)
 	stats = StatHolder.new(self, stat_data)
 	stats.stats_changed.connect(_on_stat_change)
@@ -215,30 +218,7 @@ func die():
 				item.item_details['Value'] = int(tokens[1])
 			else:
 				ItemHelper.spawn_item(item_key, {}, map_pos)
-		
 	on_death.emit()
-	#node.set_corpse_sprite()
-	#node.queue_death()
-	
-#func auto_build_que(current_turn:int=0):
-	#var ai_data = ai_def
-	#if !ai_data:
-		#ai_data = pages.list_action_keys()
-	#
-	#var action_keys_que = []
-	#if ai_data.has("PrebuiltQueArr"):
-		#action_keys_que = ai_data['PrebuiltQueArr']
-	#else:
-		#action_keys_que = AiHandler.build_action_que(self, CombatRootControl.Instance.GameState)
-		#
-	#for action_name in action_keys_que:
-		#var action = ActionLibrary.get_action(action_name)
-		#if action:
-			##print("Queing Page: " + action_name)
-			#Que.que_action(action)
-		#else:
-			#printerr("Quied Page %s not found" % [action_name])
-
 
 func can_act()->bool:
 	if stats.get_stat('Frozen', -1) > 0:

@@ -173,6 +173,7 @@ static func handle_damage(source, defender:BaseActor, damage_data:Dictionary,
 	if source is BaseActor:
 		var source_actor:BaseActor = source as BaseActor
 		source_actor.effects.trigger_damage_dealt(game_state, damage_event)
+		defender.aggro.add_threat_from_actor(source_actor, damage_event.final_damage)
 	
 	if create_VFX:
 		var damage_effect = damage_data.get("DamageEffect", null)

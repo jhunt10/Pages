@@ -81,7 +81,7 @@ canvas_layer = NodePath("CanvasLayer")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="MoveableCamera2D"]
 
-[node name="DevDataControl" type="Control" parent="MoveableCamera2D/CanvasLayer" node_paths=PackedStringArray("build_ques_button", "show_statbars_button", "fill_ammo_button", "dev_map_display")]
+[node name="DevDataControl" type="Control" parent="MoveableCamera2D/CanvasLayer" node_paths=PackedStringArray("build_ques_button", "show_statbars_button", "fill_ammo_button", "draw_button", "dev_map_display")]
 layout_mode = 3
 anchors_preset = 1
 anchor_left = 1.0
@@ -89,12 +89,13 @@ anchor_right = 1.0
 offset_left = -108.0
 offset_top = 8.0
 offset_right = -8.0
-offset_bottom = 138.0
+offset_bottom = 191.0
 grow_horizontal = 0
 script = ExtResource("19_yc3tw")
 build_ques_button = NodePath("VBoxContainer/BuildQuesButton")
 show_statbars_button = NodePath("VBoxContainer/ShowPathsButton")
 fill_ammo_button = NodePath("VBoxContainer/FillAmmoButton")
+draw_button = NodePath("VBoxContainer/DrawButton")
 dev_map_display = NodePath("../../../DEV_MapDrawing")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="MoveableCamera2D/CanvasLayer/DevDataControl"]
@@ -143,6 +144,10 @@ text = "Stats"
 [node name="FillAmmoButton" type="Button" parent="MoveableCamera2D/CanvasLayer/DevDataControl/VBoxContainer"]
 layout_mode = 2
 text = "Ammo"
+
+[node name="DrawButton" type="Button" parent="MoveableCamera2D/CanvasLayer/DevDataControl/VBoxContainer"]
+layout_mode = 2
+text = "Draw"
 
 [node name="QueCalControl" type="Control" parent="MoveableCamera2D/CanvasLayer/DevDataControl"]
 visible = false

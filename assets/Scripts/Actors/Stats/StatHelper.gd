@@ -50,6 +50,7 @@ const OffHandMod = "OffHandMod"
 const TwoHandMod = "TwoHandMod"
 
 const BlocksLOS = "BlocksLOS"
+const AggroMod = "AggroMod"
 
 const stat_abbrs:Dictionary = {
 	PhyAttack: "PHY",

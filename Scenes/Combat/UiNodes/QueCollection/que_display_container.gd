@@ -1,6 +1,7 @@
 class_name QueCollection_QueDisplayContainer
 extends BoxContainer
 
+const LOGGING = false
 const PADDING = 8
 
 @export var portrait:TextureRect
@@ -85,7 +86,7 @@ func _build_slots():
 		hide_ai_slots()
 
 func _sync_icons():
-	print("\nSync Icons for " + _actor.ActorKey + " " + self.name)
+	if LOGGING: print("\nSync Icons for " + _actor.ActorKey + " " + self.name)
 	var index = 0
 	for action:BaseAction in _actor.Que.list_qued_actions():
 		if _slots.size() <= index:
@@ -99,12 +100,12 @@ func _sync_icons():
 				slot = null
 		if slot:
 			slot.set_action(index, _actor, action)
-		print("Set SLot Page: %s | %s " % [index, action.ActionKey])
+		if LOGGING: print("Set SLot Page: %s | %s " % [index, action.ActionKey])
 		index += 1
 		
 	for n in range(index, _slots.size()+1):
 		if n < _slots.size():
-			print("Set SLot Page: %s | NULL " % [index])
+			if LOGGING: print("Set SLot Page: %s | NULL " % [index])
 			var slot:QueMiniSlotIcon = _slots[n]
 			slot.set_action(n, _actor, null)
-	print("\n")
+	if LOGGING: print("\n")
