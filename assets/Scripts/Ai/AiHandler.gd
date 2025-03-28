@@ -229,7 +229,7 @@ static func pick_between_enemies(actor:BaseActor, enemies:Array)->String:
 		var threat = actor.aggro.get_threat_from_actor(enemy.Id)
 		threat_weights[enemy.Id] = threat
 		total_threat += threat
-	var roll = randf() % total_threat
+	var roll = randf_range(0, total_threat-1)
 	for key in threat_weights.keys():
 		roll -= threat_weights[key]
 		if roll < 0:

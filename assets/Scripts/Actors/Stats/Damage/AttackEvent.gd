@@ -46,7 +46,7 @@ var defender_protection:int
 var final_damage_mod:float
 var damage_events:Array = []
 var effect_datas:Array = []
-var applied_effect:bool = false
+var applied_effect_datas:Array = []
 
 func _init( attacking_actor:BaseActor, 
 			defending_actor:BaseActor, 
@@ -114,12 +114,22 @@ func roll_for_hit():
 	self.attack_stage = AttackStage.PostAttackRoll
 
 
-func roll_for_effect():
-	var attack_potency_mod = attack_details.get("PotencyMod", 1)
-	var net_protection = max(0, defender_protection + (100 - (attacker_potency * attack_potency_mod)))
-	var hit_chance = DamageHelper.calc_armor_reduction(net_protection)
-	var roll = randf()
-	applied_effect = roll > 1 - hit_chance
+func roll_for_effects():
+	for effect_data in effect_datas:
+		var effect_key = effect_data.get('EffectKey')
+		if not effect_key:
+			continue
+		var application_chance = effect_data.get('ApplicationChance', 1)
+		var application_roll = randf()
+		# Chance to apply effect was triggered
+		if application_roll > 1 - application_chance:
+			var attack_potency_mod = attack_details.get("PotencyMod", 1)
+			var net_protection = max(0, defender_protection + (100 - (attacker_potency * attack_potency_mod)))
+			var hit_chance = DamageHelper.calc_armor_reduction(net_protection)
+			var roll = randf()
+			var applied = roll > 1 - hit_chance
+			if applied:
+				applied_effect_datas.append(effect_datas)
 	self.attack_stage = AttackStage.PostEffectRoll
 
 func get_damage_datas():

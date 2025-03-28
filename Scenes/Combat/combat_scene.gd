@@ -25,6 +25,7 @@ static var is_story_map:bool
 var supress_win_conditions:bool = false
 var combat_started:bool = false
 var combat_finished:bool = false
+var combat_cleaned:bool = false
 
 func _enter_tree() -> void:
 	if !Instance: 
@@ -39,6 +40,8 @@ func _enter_tree() -> void:
 		#return
 
 func _exit_tree() -> void:
+	if not combat_cleaned:
+		cleanup_combat()
 	QueController = null
 	Instance = null
 
@@ -320,8 +323,10 @@ func trigger_end_condition(victory:bool):
 func cleanup_combat():
 	for actor:BaseActor in GameState.list_actors(true):
 		if actor.is_player:
-			continue
-		ActorLibrary.delete_actor(actor)
+			actor.effects.purge_combat_efffects()
+			actor.Que.clear_que()
+		else:
+			ActorLibrary.delete_actor(actor)
 
 func list_actors_by_order()->Array:
 	var out_list = []

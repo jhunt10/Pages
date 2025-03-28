@@ -26,7 +26,14 @@ func on_combat_start():
 		CombatRootControl.Instance.QueController.end_of_round_with_state.connect(_on_round_end)
 	else:
 		printerr("EffectHolder.on_combat_start: No CombatRootControl found")
-	
+
+# Delete all temorary effects that only apply durring combat
+func purge_combat_efffects():
+	for effect_key in _effects.keys():
+		var effect:BaseEffect = effect_key
+		if effect.RemainingDuration < 0:
+			remove_effect(effect)
+
 func add_effect(source, effect_key:String, effect_data:Dictionary, game_state:GameStateData=null, force_id:String='', suppress_signals:bool = false)->BaseEffect:
 	if _effects.keys().has(force_id):
 		return _effects[force_id]

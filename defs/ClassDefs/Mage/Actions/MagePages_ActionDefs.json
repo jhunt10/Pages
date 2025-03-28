@@ -14,11 +14,12 @@
         },
         "AttackDetails": {
             "AccuracyMod": 1,
-            "PotencyMod": 0.5
+            "PotencyMod": 1
         },
         "EffectDatas": {
             "AilmentEffect": {
-                "EffectKey": "AilmentBurned"
+                "EffectKey": "AilmentBurned",
+                "ApplicationChance": 0.5
             }
         },
         "DamageDatas": {
@@ -50,7 +51,8 @@
         "EffectDatas": {
             "Effect1": {
                 "EffectKey": "AilmentBurned",
-                "Duration": 5
+                "Duration": 5,
+                "ApplicationChance": 1
             }
         }
     },
@@ -69,11 +71,12 @@
         },
         "AttackDetails": {
             "AccuracyMod": 1,
-            "PotencyMod": 0.3
+            "PotencyMod": 1
         },
         "EffectDatas": {
             "BurnEffect": {
-                "EffectKey": "AilmentBurned"
+                "EffectKey": "AilmentBurned",
+                "ApplicationChance": 0.3
             }
         },
         "DamageDatas": {
@@ -124,11 +127,12 @@
         },
         "AttackDetails": {
             "AccuracyMod": 1,
-            "PotencyMod": 0.3
+            "PotencyMod": 1
         },
         "EffectDatas": {
             "BurnEffect": {
-                "EffectKey": "AilmentBurned"
+                "EffectKey": "AilmentBurned",
+                "ApplicationChance": 0.3
             }
         },
         "MissileDatas": {
@@ -201,11 +205,12 @@
         },
         "AttackDetails": {
             "AccuracyMod": 1,
-            "PotencyMod": 0.5
+            "PotencyMod": 1
         },
         "EffectDatas": {
             "AilmentEffect": {
-                "EffectKey": "AilmentChilled"
+                "EffectKey": "AilmentChilled",
+                "ApplicationChance": 0.3
             }
         },
         "DamageDatas": {
@@ -237,7 +242,8 @@
         "EffectDatas": {
             "Effect1": {
                 "EffectKey": "AilmentFrozen",
-                "Duration": 5
+                "Duration": 5,
+                "ApplicationChance": 0.3
             }
         }
     },
@@ -256,11 +262,12 @@
         },
         "AttackDetails": {
             "AccuracyMod": 1,
-            "PotencyMod": 0.2
+            "PotencyMod": 1
         },
         "EffectDatas": {
             "BurnEffect": {
-                "EffectKey": "AilmentChilled"
+                "EffectKey": "AilmentChilled",
+                "ApplicationChance": 0.2
             }
         },
         "DamageDatas": {
@@ -470,11 +477,12 @@
         },
         "AttackDetails": {
             "AccuracyMod": 1,
-            "PotencyMod": 0.5
+            "PotencyMod": 1
         },
         "EffectDatas": {
             "AilmentEffect": {
-                "EffectKey": "AilmentShocked"
+                "EffectKey": "AilmentShocked",
+                "ApplicationChance": 0.5
             }
         },
         "DamageDatas": {
@@ -633,7 +641,7 @@
     {
         "ActionKey": "LightningBoltSpell",
         "Details": {
-            "Description": "Deal Shock Damage to up to 3 Random Actors in range. 10% chance to apply Shocked.",
+            "Description": "Deal Shock Damage to up to 3 Random Actors in range. 20% chance to apply Shocked.",
             "DisplayName": "Lightning Bolt",
             "LargeIcon": "Sprites/ShockBolt.png",
             "SmallIcon": "Sprites/ShockBolt.png",
@@ -644,7 +652,7 @@
         },
         "AttackDetails": {
             "AccuracyMod": 1,
-            "PotencyMod": 0.1
+            "PotencyMod": 1
         },
         "Preview": {
             "PreviewTargetKey": "TargetParam1",
@@ -663,7 +671,8 @@
         "EffectDatas": {
             "Effect1": {
                 "EffectKey": "AilmentShocked",
-                "Duration": 5
+                "Duration": 5,
+                "ApplicationChance": 0.2
             }
         },
         "SubActions": {
@@ -713,7 +722,7 @@
     {
         "ActionKey": "LightningStormSpell",
         "Details": {
-            "Description": "Deal Shock Damage to up to 3 Random Actors in range. 10% chance to apply Shocked.",
+            "Description": "Deal Shock Damage to up to 3 Random Actors in range. 20% chance to apply Shocked.",
             "DisplayName": "Lightning Storm",
             "LargeIcon": "Sprites/ShockStorm.png",
             "SmallIcon": "Sprites/ShockStorm.png",
@@ -726,7 +735,7 @@
         },
         "AttackDetails": {
             "AccuracyMod": 1,
-            "PotencyMod": 0.1
+            "PotencyMod": 1
         },
         "Preview": {
             "PreviewTargetKey": "TargetParam1",
@@ -746,7 +755,8 @@
         "EffectDatas": {
             "Effect1": {
                 "EffectKey": "AilmentShocked",
-                "Duration": 5
+                "Duration": 5,
+                "ApplicationChance": 0.2
             }
         },
         "SubActions": {

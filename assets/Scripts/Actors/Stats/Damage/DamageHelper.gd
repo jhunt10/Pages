@@ -68,7 +68,16 @@ static func handle_attack(attacker:BaseActor, defender:BaseActor, attack_details
 	
 	
 	# TODO:Cover
-	var attack_event = AttackEvent.new(attacker, defender, attack_details, attack_direction, false, source_tag_chain, damage_list, effect_list)
+	var attack_event = AttackEvent.new(
+		attacker, 
+		defender, 
+		attack_details, 
+		attack_direction, 
+		false, 
+		source_tag_chain, 
+		damage_list, 
+		effect_list
+	)
 	
 	# Apply Pre-Roll effects
 	attacker.effects.trigger_attack(game_state, attack_event)
@@ -117,11 +126,11 @@ static func handle_attack(attacker:BaseActor, defender:BaseActor, attack_details
 					
 		
 		attack_event.roll_for_effect()
-		if attack_event.applied_effect:
-			for effect_data in attack_event.effect_datas:
-				var effect_key = effect_data['EffectKey']
-				print("Applying Effect: %s" % [effect_key])
-				EffectHelper.create_effect(defender, attacker, effect_key, effect_data, game_state)
+		# TODO: Add a "Resist" flash text for effects that triggered but failed to apply
+		for effect_data in attack_event.applied_effect_datas:
+			var effect_key = effect_data['EffectKey']
+			print("Applying Effect: %s" % [effect_key])
+			EffectHelper.create_effect(defender, attacker, effect_key, effect_data, game_state)
 		
 	attack_event.attack_stage = AttackEvent.AttackStage.Resolved
 	
