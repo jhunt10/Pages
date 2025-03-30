@@ -92,11 +92,11 @@ func set_actor_pos(actor:BaseActor, pos:MapPos, suppress_signal:bool=false):
 	for old_zone_id in old_zones:
 		if not current_zones.has(old_zone_id):
 			var zone:BaseZone = _zones[old_zone_id]
-			zone.on_actor_exit(actor)
+			zone.on_actor_exit(actor, self)
 	for current_zone_id in current_zones:
 		if not old_zones.has(current_zone_id):
 			var zone:BaseZone = _zones[current_zone_id]
-			zone.on_actor_enter(actor)
+			zone.on_actor_enter(actor, self)
 	
 func get_actor_pos(actor:BaseActor)->MapPos:
 	return map_data.get_actor_pos(actor)
@@ -157,7 +157,7 @@ func add_zone(zone:BaseZone):
 	map_data.add_zone(zone)
 	for actor_id in map_data.get_actors_in_zone(zone.Id):
 		var actor = get_actor(actor_id)
-		zone.on_actor_enter(actor)
+		zone.on_actor_enter(actor, self)
 
 func delete_zone(zone_id:String):
 	if _zones.has(zone_id):
@@ -173,9 +173,9 @@ func update_zone_pos(zone:BaseZone, pos:MapPos, ignore_actor_ids:Array=[]):
 		if ignore_actor_ids.has(old.Id):
 			continue
 		if not current_actors.has(old):
-			zone.on_actor_exit(old)
+			zone.on_actor_exit(old, self)
 	for cur in current_actors:
 		if ignore_actor_ids.has(cur.Id):
 			continue
 		if not old_actors.has(cur):
-			zone.on_actor_enter(cur)
+			zone.on_actor_enter(cur, self)

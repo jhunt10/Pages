@@ -2,6 +2,7 @@ class_name ZoneNode
 extends Node2D
 
 @onready var area_tile_map:TileMapLayer = $AreaTileMap
+@onready var tile_sprite:Sprite2D = $Sprite2D
 
 var _zone:BaseZone
 
@@ -15,12 +16,19 @@ func _ready() -> void:
 
 func _build_zone_area():
 	self.visible = true
-	#var texture = load("res://assets/Sprites/UI/Targeting/TestAreaTiles.png")
-	#area_tile_map.tile_set.add_source(texture, 0)
-	#if _zone.is_aura:
 	var pos = _zone.get_pos()
 	var arr = _zone._area_matrix.to_map_spots(MapPos.new(0,0,pos.z))
-	area_tile_map.set_cells_terrain_connect(arr,0,0)
-	#else:
-		#area_tile_map.set_cells_terrain_connect(_zone.get_area(),0,0)
+	if arr.size() == 1 and arr[0] == Vector2i.ZERO:
+		var texture = _zone.get_zone_texture()
+		if texture:
+			tile_sprite.texture = texture
+		tile_sprite.show()
+		area_tile_map.hide()
+	else:
+		var texture = _zone.get_zone_texture()
+		if texture:
+			area_tile_map.tile_set.get_source(1).texture = texture
+		area_tile_map.set_cells_terrain_connect(arr,0,0)
+		tile_sprite.hide()
+		area_tile_map.show()
 	

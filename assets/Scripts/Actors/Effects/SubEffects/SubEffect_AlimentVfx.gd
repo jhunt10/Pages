@@ -19,4 +19,5 @@ func on_delete(effect:BaseEffect, subeffect_data:Dictionary):
 	if not vfx_id:
 		return
 	var actor_node = CombatRootControl.get_actor_node(actor.Id)
-	actor_node.vfx_holder.remove_vfx(vfx_id)
+	if actor_node:
+		actor_node.vfx_holder.remove_vfx(vfx_id)

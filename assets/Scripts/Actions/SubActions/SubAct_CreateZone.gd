@@ -4,7 +4,7 @@ extends BaseSubAction
 func do_thing(parent_action:BaseAction, subaction_data:Dictionary, que_exe_data:QueExecutionData,
 				game_state:GameStateData, actor:BaseActor)->bool:
 	var zone_data_key = subaction_data.get("ZoneDataKey")
-	var zone_data = parent_action.ZoneDatas.get(zone_data_key)
+	var zone_data = parent_action.ZoneDatas.get(zone_data_key).duplicate()
 	if not zone_data:
 		printerr("SubAct_CreateZone: Failed to find Zone Data with key '%s'." % [zone_data_key])
 		return BaseSubAction.Failed
@@ -37,7 +37,18 @@ func do_thing(parent_action:BaseAction, subaction_data:Dictionary, que_exe_data:
 	var source_chain = SourceTagChain.new()\
 		.append_source(SourceTagChain.SourceTypes.Actor, actor)\
 		.append_source(SourceTagChain.SourceTypes.Action, parent_action)
-	var zone = BaseZone.new(source_chain, zone_data, target_spot, area_effect)
+	
+	var damage_data_key = subaction_data.get("DamageKey")
+	if damage_data_key:
+		zone_data['DamageData'] =  parent_action.get_damage_data(actor, subaction_data)
+	
+	zone_data['LoadPath'] = parent_action.get_load_path()
+	var zone_script_path = zone_data.get("ZoneScript")
+	if !zone_script_path:
+		printerr("SubAct_CreateZone: No Zone Script provied.")
+		return BaseSubAction.Failed
+	var zone_script = load(zone_script_path)
+	var zone = zone_script.new(source_chain, zone_data, target_spot, area_effect)
 	if not zone.is_active:
 		printerr("SubAct_CreateZone: Zone failed to 'new'.")
 		return BaseSubAction.Failed

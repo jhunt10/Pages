@@ -223,8 +223,59 @@
             "Zone1": {
                 "ZoneKey":"Zone1",
                 "InZoneEffectDataKey": "Effect1",
-                "Duration": 5,
-                "DurationType": "Turn"
+                "Duration": 20,
+                "DurationType": "Turn",
+                "TileSprite":"Sprites/FireZone_TileSheet.png"
+            }
+        }
+    },
+    {
+        "ActionKey":"FireTrapSpell",
+        "ParentKey":"BaseTrapSpell",
+        "Details": {
+            "Description": "Create a Trap of Fire",
+            "DisplayName": "Fire Trap",
+            "LargeIcon": "Sprites/FireTrap.png",
+            "SmallIcon": "Sprites/FireTrap.png",
+            "SnippetDesc": "Create a Trap of Fire",
+            "Tags": [
+                "Fire"
+            ]
+        },
+        "AttackDetails": {
+            "AccuracyMod": 1,
+            "PotencyMod": 1
+        },
+        "DamageDatas":{
+            "Damage1": {
+                "AtkPower": 80,
+                "AtkStat": "MagAttack",
+                "BaseDamage": 0,
+                "DamageEffect": "Exploision_DamageEffect",
+                "DamageType": "Fire",
+                "DamageVarient": 0.2,
+                "DefenseType": "Ward"
+            }
+        },
+        "EffectDatas": {
+            "Effect1": {
+                "EffectKey": "AilmentBurned",
+                "ShowCounter": false,
+                "ApplicationChance": 1,
+                "SubEffects":{
+                    "Duration":{
+                        "DurationType": "Trigger"
+                    }
+                }
+            }
+        },
+        "ZoneDatas":{
+            "Zone1": {
+                "ZoneScenePath": "res://Scenes/Combat/MapObjects/Zones/zone_trap_node.tscn",
+                "ZoneKey":"Zone1",
+                "Duration": 1,
+                "DurationType": "Trigger",
+                "TileSprite":"Sprites/FireTrap_Tile.png"
             }
         }
     },
