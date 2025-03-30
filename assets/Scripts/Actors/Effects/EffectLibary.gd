@@ -63,6 +63,9 @@ static func create_effect(source, key:String, actor:BaseActor, data:Dictionary, 
 	elif source is BaseEffect:
 		effect_data['SourceId'] = (source as BaseEffect).Id
 		effect_data['SourceType'] = 'Effect'
+	elif source is BaseZone:
+		effect_data['SourceId'] = (source as BaseZone).Id
+		effect_data['SourceType'] = 'Zone'
 	else:
 		printerr("EffectLibrary.create_effect: Unknown source type: %s" % [source])
 		return null

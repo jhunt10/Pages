@@ -14,6 +14,8 @@ var CostData:Dictionary:
 		get: return get_load_val('CostData', {})
 var DamageDatas:Dictionary:
 		get: return get_load_val('DamageDatas', {})
+var ZoneDatas:Dictionary:
+		get: return get_load_val('ZoneDatas', {})
 var _missile_data
 var MissileDatas:Dictionary:
 		get:
@@ -227,7 +229,7 @@ func get_on_que_options(actor:BaseActor, game_state:GameStateData):
 func get_effect_data(effect_data_key:String)->Dictionary:
 	var effect_datas = get_load_val("EffectDatas", {})
 	if effect_datas.has(effect_data_key):
-		return effect_datas[effect_data_key]
+		return effect_datas[effect_data_key].duplicate()
 	return {}
 
 func has_sustain_data()->bool:

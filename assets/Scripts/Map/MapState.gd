@@ -7,8 +7,13 @@ const DEFAULT_ACTOR_LAYER = MapLayers.Default
 enum MapLayers {Default, Corpse, Totem}
 
 var _game_state
+# Actor.Id to MapPos
 var _actor_pos_cache:Dictionary = {}
+# Item.Id to MapPos
 var _item_pos_cache:Dictionary = {}
+# Zone.Id to Array<MapPos>
+var _zone_poses_cache:Dictionary = {}
+# Array of MapSpot index by coor
 var _position_data:Array = []
 var terrain_data:Array
 var max_width = 0
@@ -125,6 +130,8 @@ func set_actor_layer(actor:BaseActor, layer:MapLayers):
 		return
 	set_actor_pos(actor, current_pos, layer)
 
+
+# Does not handle logic items or zones
 func set_actor_pos(actor:BaseActor, pos:MapPos, supress_signal:bool=false):
 	if LOGGING: print("Set Actor Pos")
 	if pos.x < 0 or pos.x >= max_width or pos.y < 0 or pos.y >= max_hight:
@@ -142,7 +149,6 @@ func set_actor_pos(actor:BaseActor, pos:MapPos, supress_signal:bool=false):
 		# Delete old position data and cached position
 		old_pos = _actor_pos_cache[actor.Id]
 		var old_spot = get_map_spot(old_pos)
-		#on_actor_exit_spot(actor, old_pos, old_spot, pos)
 		old_spot.remove_actor(actor)
 		_actor_pos_cache.erase(actor.Id)
 		
@@ -151,10 +157,9 @@ func set_actor_pos(actor:BaseActor, pos:MapPos, supress_signal:bool=false):
 	new_spot.add_actor(actor, null)
 	_actor_pos_cache[actor.Id] = pos
 	
-	if LOGGING: printerr("Emit Move: " + str(old_pos) + " | " + str(pos))
 	if not supress_signal:
+		if LOGGING: printerr("Emit Move: " + str(old_pos) + " | " + str(pos))
 		actor.on_move.emit(old_pos, pos, {"MoveType": "Test", "MovedBy":null})
-	#on_actor_enter_spot(actor, pos, new_spot)
 
 func remove_actor(actor:BaseActor):
 	if _actor_pos_cache.has(actor.Id):
@@ -162,19 +167,6 @@ func remove_actor(actor:BaseActor):
 		var old_spot = get_map_spot(old_pos)
 		old_spot.remove_actor(actor)
 		_actor_pos_cache.erase(actor.Id)
-
-### Holds all logic that triggers when an actor enters a map spot
-#func on_actor_enter_spot(actor:BaseActor, map_pos:MapPos, map_spot:MapSpot):
-	#if actor.is_player:
-		#var items = map_spot.get_items()
-		#for item in items:
-			#if ItemHelper.try_pickup_item(actor, item):
-				#printerr("\nPicked Up Item: %s\n" % [item.Id])
-#
-### Holds all logic that triggers when an actor enters a map spot
-#func on_actor_exit_spot(actor:BaseActor, map_pos:MapPos, map_spot:MapSpot, moving_to_pos:MapPos):
-	#pass
-	
 
 # ----------------------------- Items -----------------------------
 
@@ -210,25 +202,59 @@ func get_item_pos(item:BaseItem):
 	return _item_pos_cache.get(item.Id, null)
 
 # ----------------------------- Zones -----------------------------
-func _handle_enter_exit_zone(actor:BaseActor, old_pos:MapPos, new_pos:MapPos):
-	var old_zones = get_map_spot(old_pos).get_zones()
-	var new_zones = get_map_spot(new_pos).get_zones()
-	
-	var exiting_zones = []
-	var entering_zones = []
-	for z in old_zones:
-		if !new_zones.has(z):
-			exiting_zones.append(z)
-	for z in new_zones:
-		if !old_zones.has(z):
-			entering_zones.append(z)
-	for z:BaseZone in exiting_zones:
-		z.on_actor_exit(actor)
-	for z:BaseZone in entering_zones:
-		z.on_actor_enter(actor)
-	
 func add_zone(zone:BaseZone):
+	if _zone_poses_cache.has(zone.Id):
+		printerr("MapState.add_zone: Zone already added: %s" % [zone.Id])
+		return
+	_zone_poses_cache[zone.Id] = []
 	for p in zone.get_area():
 		var spot = get_map_spot(p)
 		spot.add_zone(zone)
-	zone.on_create(self)
+		_zone_poses_cache[zone.Id].append(p)
+
+# Updates spots and recaches poses to current zone.get_area().
+# Does not handle logic for actors entering/exiting Zone 
+func update_zone_pos(zone:BaseZone):
+	if not _zone_poses_cache.has(zone.Id):
+		printerr("MapState.update_zone_pos: Unknown Zone: %s" % [zone.Id])
+		return
+	var old_poses = _zone_poses_cache[zone.Id] 
+	var new_poses = zone.get_area()
+	
+	for pos in old_poses:
+		if not new_poses.has(pos):
+			var spot = get_map_spot(pos)
+			spot.remove_zone(zone.Id)
+	_zone_poses_cache[zone.Id].clear()
+	for pos in new_poses:
+		if not old_poses.has(pos):
+			var spot = get_map_spot(pos)
+			spot.add_zone(zone)
+			_zone_poses_cache[zone.Id].append(pos)
+
+func remove_zone(zone_id):
+	if not _zone_poses_cache.has(zone_id):
+		printerr("MapState.delete_zone: Unknown Zone: %s" % [zone_id])
+		return
+	for p in _zone_poses_cache[zone_id]:
+		var spot = get_map_spot(p)
+		spot.remove_zone(zone_id)
+	_zone_poses_cache[zone_id].clear()
+
+func get_zones_ids_at_pos(pos)->Array:
+	if not pos:
+		return []
+	var spot = get_map_spot(pos)
+	return spot.get_zones()
+
+func get_actors_in_zone(zone_id:String)->Array:
+	if not _zone_poses_cache.has(zone_id):
+		printerr("MapState.get_actor_ids_in_zone: Unknown Zone.Id: %s" % [zone_id])
+		return []
+	var zone_poses = _zone_poses_cache[zone_id]
+	var out_list = []
+	for pos in zone_poses:
+		var actors = get_actors_at_pos(pos)
+		out_list.append_array(out_list)
+	return out_list
+		

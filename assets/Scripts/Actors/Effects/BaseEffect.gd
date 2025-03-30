@@ -84,8 +84,10 @@ func get_source_actor()->BaseActor:
 	var source_type = get_load_val('SourceType')
 	if source_type == "Actor":
 		return ActorLibrary.get_actor(source_id)
+	elif _source.has("get_source_actor"):
+		return _source.get_source_actor()
 	else:
-		printerr("BaseEffect.get_source_actor: TODO")
+		printerr("BaseEffect.get_source_actor: #TODO")
 		return null
 
 func is_bad()->bool:

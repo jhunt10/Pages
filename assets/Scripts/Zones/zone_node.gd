@@ -17,10 +17,10 @@ func _build_zone_area():
 	self.visible = true
 	#var texture = load("res://assets/Sprites/UI/Targeting/TestAreaTiles.png")
 	#area_tile_map.tile_set.add_source(texture, 0)
-	if _zone.is_aura:
-		var pos = _zone._get_pos()
-		var arr = _zone.area_matrix.to_map_spots(MapPos.new(0,0,pos.z))
-		area_tile_map.set_cells_terrain_connect(arr,0,0)
-	else:
-		area_tile_map.set_cells_terrain_connect(_zone.get_area(),0,0)
+	#if _zone.is_aura:
+	var pos = _zone.get_pos()
+	var arr = _zone._area_matrix.to_map_spots(MapPos.new(0,0,pos.z))
+	area_tile_map.set_cells_terrain_connect(arr,0,0)
+	#else:
+		#area_tile_map.set_cells_terrain_connect(_zone.get_area(),0,0)
 	

@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=4 uid="uid://kjmbf8betc6t"]
+[gd_scene load_steps=41 format=4 uid="uid://kjmbf8betc6t"]
 
 [ext_resource type="Script" path="res://assets/Scripts/Map/map_controler_node.gd" id="1_xsjmp"]
 [ext_resource type="Texture2D" uid="uid://dxan6lyrg8db3" path="res://assets/Sprites/TileSets/GrassPath_TileSheet.png" id="2_glqif"]
@@ -1273,6 +1273,9 @@ tile_size = Vector2i(32, 32)
 sources/0 = SubResource("TileSetAtlasSource_ku4ha")
 sources/1 = SubResource("TileSetAtlasSource_3hxgx")
 
+[sub_resource type="TileSet" id="TileSet_62evo"]
+tile_size = Vector2i(32, 32)
+
 [sub_resource type="TileSet" id="TileSet_5ipcw"]
 tile_size = Vector2i(32, 32)
 
@@ -1282,8 +1285,9 @@ tile_size = Vector2i(32, 32)
 [sub_resource type="TileSet" id="TileSet_o1yif"]
 tile_size = Vector2i(32, 32)
 
-[node name="MapNode" type="Node2D" node_paths=PackedStringArray("actor_tile_map", "item_tile_map", "terrain_path_map", "marker_tile_map")]
+[node name="MapNode" type="Node2D" node_paths=PackedStringArray("zone_tile_map", "actor_tile_map", "item_tile_map", "terrain_path_map", "marker_tile_map")]
 script = ExtResource("1_xsjmp")
+zone_tile_map = NodePath("ZoneTileMapLayer")
 actor_tile_map = NodePath("ActorTileMapLayer")
 item_tile_map = NodePath("ItemTileMapLayer")
 terrain_path_map = NodePath("TerrainMap")
@@ -1317,6 +1321,9 @@ visible = false
 tile_map_data = PackedByteArray("AAAMAAsAAAABAAAAAAALAAgAAQACAAIAAAAMAAgAAQADAAIAAAALAAYAAQAAAAAAAAAMAAYAAQABAAAAAAALAAcAAQAAAAIAAAAMAAcAAQABAAIAAAA=")
 tile_set = SubResource("TileSet_i35ih")
 
+[node name="ZoneTileMapLayer" type="TileMapLayer" parent="."]
+tile_set = SubResource("TileSet_62evo")
+
 [node name="TargetAreaDisplayNode" parent="." instance=ExtResource("9_kyo11")]
 
 [node name="ActorTileMapLayer" type="TileMapLayer" parent="."]
@@ -1336,7 +1343,6 @@ tile_set = SubResource("TileSet_o1yif")
 position = Vector2(368, 592)
 script = ExtResource("10_e1jik")
 marker_name = "P1"
-is_loop = null
 map_coor = Vector2i(11, 18)
 sprite = NodePath("PathSprite")
 label = NodePath("PathSprite/Label")
@@ -1374,7 +1380,6 @@ map_coor = Vector2i(10, 19)
 position = Vector2(400, 592)
 script = ExtResource("10_e1jik")
 marker_name = "M1"
-is_loop = null
 map_coor = Vector2i(12, 18)
 sprite = NodePath("PathSprite")
 label = NodePath("PathSprite/Label")
@@ -1412,7 +1417,6 @@ map_coor = Vector2i(11, 15)
 position = Vector2(368, 368)
 script = ExtResource("10_e1jik")
 marker_name = "C1"
-is_loop = null
 map_coor = Vector2i(11, 11)
 sprite = NodePath("PathSprite")
 label = NodePath("PathSprite/Label")
@@ -1934,7 +1938,7 @@ map_coor = Vector2i(7, 10)
 
 [node name="SpwanNode_Archer2" type="Sprite2D" parent="MarkerTileMapLayer"]
 position = Vector2(496, 336)
-rotation = -1.5708
+rotation = 4.71239
 texture = ExtResource("15_f8j4w")
 script = ExtResource("15_w357o")
 spawn_actor_key = "BanditArcher"

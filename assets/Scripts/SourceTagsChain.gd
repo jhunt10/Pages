@@ -70,6 +70,9 @@ func has_tag(tag):
 				return true
 	return false
 
+func get_source_actor()->BaseActor:
+	return source_actor
+
 ## Returns true if any String value in check_for appears in the tag list.
 static func tags_include_any_in_array(check_for:Array, tags:Array)->bool:
 	for check in check_for:

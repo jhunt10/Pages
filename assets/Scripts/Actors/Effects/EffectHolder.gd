@@ -30,8 +30,8 @@ func on_combat_start():
 # Delete all temorary effects that only apply durring combat
 func purge_combat_efffects():
 	for effect_key in _effects.keys():
-		var effect:BaseEffect = effect_key
-		if effect.RemainingDuration < 0:
+		var effect:BaseEffect = _effects.get(effect_key)
+		if effect.RemainingDuration > 0:
 			remove_effect(effect)
 
 func add_effect(source, effect_key:String, effect_data:Dictionary, game_state:GameStateData=null, force_id:String='', suppress_signals:bool = false)->BaseEffect:
@@ -218,6 +218,9 @@ func get_stat_mods()->Array:
 		for mod in effect.get_active_stat_mods():
 			out_list.append(mod)
 	return out_list
+
+func get_aura_effect()->Array:
+	return []
 
 func trigger_damage_dealt(game_state:GameStateData, damage_event:DamageEvent):
 	for effect:BaseEffect in _effects.values():

@@ -88,13 +88,9 @@ func add_zone(zone:BaseZone):
 		return
 	_zone_ids.append(zone.Id)
 
-func remove_zone(zone:BaseZone):
-	if _zone_ids.has(zone.Id):
-		_zone_ids.erase(zone.Id)
+func remove_zone(zone_id:String):
+	_zone_ids.erase(zone_id)
 
 func get_zones()->Array:
-	var out_list = []
-	for z in _zone_ids:
-		out_list.append(parent_map._game_state.Zones[z])
-	return out_list
+	return _zone_ids
 		

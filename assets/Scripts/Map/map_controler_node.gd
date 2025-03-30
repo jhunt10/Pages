@@ -8,6 +8,7 @@ var grid_tile_map:TileMapLayer:
 	get:
 		return $GridDisplayLayer
 @export var map_name:String
+@export var zone_tile_map:TileMapLayer 
 @export var actor_tile_map:TileMapLayer 
 @export var item_tile_map:TileMapLayer 
 @export var terrain_path_map:TerrainPathingMap
@@ -163,20 +164,27 @@ func add_missile_node(missile:BaseMissile, node:MissileNode):
 func add_zone_node(zone:BaseZone, node:ZoneNode):
 	if Engine.is_editor_hint(): return
 	zone_nodes[zone.Id] = node
-	game_state.add_zone(zone)
 	# Set node parent if not already set
 	var current_partent = node.get_parent()
 	if current_partent != actor_tile_map and current_partent != null:
 		current_partent.remove_child(node)
-		
-	#var pos = zone._get_pos()
+	
 	if zone.is_aura:
 		var actor_node:ActorNode = actor_nodes[zone._source_actor.Id]
-		actor_node.add_child(node)
-		node.position = actor_tile_map.map_to_local(Vector2i(-1,-1))
+		actor_node.aura_holder.add_aura(node)
 	else:
-		actor_tile_map.add_child(node)
-		
+		zone_tile_map.add_child(node)
+		node.position = actor_tile_map.map_to_local(zone.get_pos().to_vector2i())
+
+func delete_zone_node(zone:BaseZone):
+	if Engine.is_editor_hint(): return
+	var node:ZoneNode = zone_nodes.get(zone.Id, null)
+	if !node:
+		return
+	node.queue_free()
+	zone_nodes.erase(zone.Id)
+
+
 func _sync_positions():
 	if Engine.is_editor_hint(): return
 	#_build_terrain()

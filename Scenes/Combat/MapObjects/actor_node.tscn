@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://uo60871y6t54"]
+[gd_scene load_steps=23 format=3 uid="uid://uo60871y6t54"]
 
 [ext_resource type="Script" path="res://Scenes/Combat/MapObjects/actor_node.gd" id="1_wfbib"]
 [ext_resource type="Texture2D" uid="uid://cp2wc5s8ju613" path="res://defs/Actors/Template_SpriteSheet.png" id="2_g31ob"]
@@ -17,6 +17,7 @@
 [ext_resource type="AnimationLibrary" uid="uid://5r01u3xg2eii" path="res://animations/move_walk_right.tres" id="10_88tvj"]
 [ext_resource type="Texture2D" uid="uid://dj76get1aahli" path="res://Scenes/Menus/SaveLoadMenu/Button_Patch_32_6.png" id="14_6kv2p"]
 [ext_resource type="Texture2D" uid="uid://dgfxtmtdjfgey" path="res://assets/Sprites/UI/QuePathArrow.png" id="14_38ite"]
+[ext_resource type="Script" path="res://Scenes/Combat/MapObjects/aura_holder.gd" id="18_4ue2w"]
 
 [sub_resource type="Animation" id="Animation_y5og4"]
 resource_name = "RESET"
@@ -255,11 +256,12 @@ _data = {
 "death_effect": ExtResource("6_lp0y8")
 }
 
-[node name="ActorNode" type="Node2D" node_paths=PackedStringArray("vfx_holder", "body_animation", "death_animation", "path_arrow", "offset_node", "actor_sprite", "main_hand_node", "off_hand_node", "actor_motion_node")]
+[node name="ActorNode" type="Node2D" node_paths=PackedStringArray("vfx_holder", "aura_holder", "body_animation", "death_animation", "path_arrow", "offset_node", "actor_sprite", "main_hand_node", "off_hand_node", "actor_motion_node")]
 y_sort_enabled = true
 script = ExtResource("1_wfbib")
 editing_facing_direction = 2
 vfx_holder = NodePath("ActorMotionNode/VFXHolder")
+aura_holder = NodePath("AuraHolder")
 body_animation = NodePath("AnimationPlayer")
 death_animation = NodePath("DeathAnimationPlayer")
 path_arrow = NodePath("PathArrow")
@@ -343,3 +345,6 @@ texture = ExtResource("14_38ite")
 libraries = {
 "": SubResource("AnimationLibrary_5bj6a")
 }
+
+[node name="AuraHolder" type="Node2D" parent="."]
+script = ExtResource("18_4ue2w")

@@ -9,7 +9,7 @@ var _actors:Dictionary = {}
 #var _actor_poses:Dictionary = {}
 var _items:Dictionary = {}
 var Missiles:Dictionary = {}
-var Zones:Dictionary = {}
+var _zones:Dictionary = {}
 
 var current_turn_index:int = 0
 
@@ -23,7 +23,7 @@ func duplicate()->GameStateData:
 	new_state._actors = _actors.duplicate()
 	new_state._items = _items.duplicate()
 	new_state.Missiles = Missiles.duplicate()
-	new_state.Zones = Zones.duplicate()
+	new_state._zones = _zones.duplicate()
 	new_state.map_data = map_data.duplicate(new_state)
 	new_state.map_width = new_state.map_data.max_width
 	new_state.map_hight = new_state.map_data.max_hight
@@ -65,18 +65,40 @@ func list_actors(include_dead:bool=false):
 			out_list.append(actor)
 	return out_list
 
-
+# TODO: This class shouldn't really hold logic... 
+#	but zone stuff needs map_data to know which actors to apply to
+#	and I can't trust everything to go through MapHelper
 func set_actor_pos(actor:BaseActor, pos:MapPos, suppress_signal:bool=false):
+	var old_pos = map_data.get_actor_pos(actor)
+	
 	map_data.set_actor_pos(actor, pos, suppress_signal)
+	
+	if suppress_signal:
+		return
+	
 	if actor.is_player:
 		var items = map_data.get_items_at_pos(pos)
 		if items.size() > 0:
 			actor_entered_item_spot.emit(actor, items)
-			
-	#_actor_poses[actor.Id] = pos
+	
+	var auras = actor.effects.get_aura_effect()
+	for aura:BaseZone in auras:
+		update_zone_pos(aura, pos, [actor.Id])
+	
+	var old_zones = []
+	if old_pos:
+		old_zones = map_data.get_zones_ids_at_pos(old_pos)
+	var current_zones = map_data.get_zones_ids_at_pos(pos)
+	for old_zone_id in old_zones:
+		if not current_zones.has(old_zone_id):
+			var zone:BaseZone = _zones[old_zone_id]
+			zone.on_actor_exit(actor)
+	for current_zone_id in current_zones:
+		if not old_zones.has(current_zone_id):
+			var zone:BaseZone = _zones[current_zone_id]
+			zone.on_actor_enter(actor)
 	
 func get_actor_pos(actor:BaseActor)->MapPos:
-	#return _actor_poses.get(actor.Id)
 	return map_data.get_actor_pos(actor)
 
 func get_actors_at_pos(pos)->Array:
@@ -128,5 +150,32 @@ func delete_missile(missile:BaseMissile):
 	Missiles.erase(missile.Id)
 
 func add_zone(zone:BaseZone):
-	Zones[zone.Id] = zone
+	if _zones.has(zone.Id):
+		printerr("GameStateData.add_zone: Zone already exists: %s" % [zone.Id])
+		return
+	_zones[zone.Id] = zone
 	map_data.add_zone(zone)
+	for actor_id in map_data.get_actors_in_zone(zone.Id):
+		var actor = get_actor(actor_id)
+		zone.on_actor_enter(actor)
+
+func delete_zone(zone_id:String):
+	if _zones.has(zone_id):
+		map_data.remove_zone(zone_id)
+		_zones.erase(zone_id)
+
+func update_zone_pos(zone:BaseZone, pos:MapPos, ignore_actor_ids:Array=[]):
+	zone._center_pos = pos
+	var old_actors = map_data.get_actors_in_zone(zone.Id)
+	map_data.update_zone_pos(zone)
+	var current_actors = map_data.get_actors_in_zone(zone.Id)
+	for old in old_actors:
+		if ignore_actor_ids.has(old.Id):
+			continue
+		if not current_actors.has(old):
+			zone.on_actor_exit(old)
+	for cur in current_actors:
+		if ignore_actor_ids.has(cur.Id):
+			continue
+		if not old_actors.has(cur):
+			zone.on_actor_enter(cur)

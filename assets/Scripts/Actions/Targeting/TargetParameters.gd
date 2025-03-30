@@ -67,8 +67,9 @@ func has_area_of_effect()->bool:
 	if effect_area:
 		return true
 	return false
-
-func get_area_of_effect(center:MapPos):
+	
+# Returns Array of Vector2i points for Area of Effect
+func get_area_of_effect(center:MapPos)->Array:
 	return effect_area.to_map_spots(center)
 
 func is_spot_target_type()->bool:

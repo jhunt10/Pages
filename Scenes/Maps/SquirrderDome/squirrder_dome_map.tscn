@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=4 uid="uid://b5mglr34pxb1o"]
+[gd_scene load_steps=28 format=4 uid="uid://b5mglr34pxb1o"]
 
 [ext_resource type="Script" path="res://assets/Scripts/Map/map_controler_node.gd" id="1_37oqj"]
 [ext_resource type="Texture2D" uid="uid://dxan6lyrg8db3" path="res://assets/Sprites/TileSets/GrassPath_TileSheet.png" id="2_otaqg"]
@@ -1020,11 +1020,15 @@ sources/0 = SubResource("TileSetAtlasSource_jyrfs")
 [sub_resource type="TileSet" id="TileSet_r8ipj"]
 tile_size = Vector2i(32, 32)
 
+[sub_resource type="TileSet" id="TileSet_q5fl3"]
+tile_size = Vector2i(32, 32)
+
 [sub_resource type="TileSet" id="TileSet_5ipcw"]
 tile_size = Vector2i(32, 32)
 
-[node name="MapNode" type="Node2D" node_paths=PackedStringArray("actor_tile_map", "item_tile_map", "terrain_path_map", "marker_tile_map")]
+[node name="MapNode" type="Node2D" node_paths=PackedStringArray("zone_tile_map", "actor_tile_map", "item_tile_map", "terrain_path_map", "marker_tile_map")]
 script = ExtResource("1_37oqj")
+zone_tile_map = NodePath("ZoneTileMapLayer")
 actor_tile_map = NodePath("ActorTileMapLayer")
 item_tile_map = NodePath("ItemTileMapLayer")
 terrain_path_map = NodePath("TerrainMap")
@@ -1065,6 +1069,9 @@ tile_set = SubResource("TileSet_63me0")
 script = ExtResource("9_8rtge")
 map_controller = NodePath("..")
 terrain_map = NodePath("../TerrainMap")
+
+[node name="ZoneTileMapLayer" type="TileMapLayer" parent="."]
+tile_set = SubResource("TileSet_q5fl3")
 
 [node name="ActorTileMapLayer" type="TileMapLayer" parent="."]
 tile_set = SubResource("TileSet_5ipcw")

@@ -191,6 +191,44 @@
         }
     },
     {
+        "ActionKey":"FireZoneSpell",
+        "ParentKey":"BaseZoneSpell",
+        "Details": {
+            "Description": "Create a Zone of Fire",
+            "DisplayName": "Fire Zone",
+            "LargeIcon": "Sprites/FireZone.png",
+            "SmallIcon": "Sprites/FireZone.png",
+            "SnippetDesc": "Create a Zone of Fire",
+            "Tags": [
+                "Fire"
+            ]
+        },
+        "AttackDetails": {
+            "AccuracyMod": 1,
+            "PotencyMod": 1
+        },
+        "EffectDatas": {
+            "Effect1": {
+                "EffectKey": "AilmentBurned",
+                "ShowCounter": false,
+                "ApplicationChance": 1,
+                "SubEffects":{
+                    "Duration":{
+                        "DurationType": "Trigger"
+                    }
+                }
+            }
+        },
+        "ZoneDatas":{
+            "Zone1": {
+                "ZoneKey":"Zone1",
+                "InZoneEffectDataKey": "Effect1",
+                "Duration": 5,
+                "DurationType": "Turn"
+            }
+        }
+    },
+    {
         "ActionKey": "ColdTouchSpell",
         "ParentKey": "BaseTouchSpell",
         "Details": {

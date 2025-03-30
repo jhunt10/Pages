@@ -14,6 +14,7 @@ signal reached_motion_destination
 			set_facing_dir(val)
 		
 @export var vfx_holder:VfxHolder
+@export var aura_holder:AuraHolder
 @export var body_animation:AnimationPlayer
 @export var death_animation:AnimationPlayer
 @export var path_arrow:Sprite2D

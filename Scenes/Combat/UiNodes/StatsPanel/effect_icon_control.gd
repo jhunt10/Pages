@@ -31,9 +31,13 @@ func _process(delta: float) -> void:
 func set_effect(effect:BaseEffect):
 	effect_id = effect.Id
 	effect_icon.texture = effect.get_small_icon()
+	
 	if effect.show_counter():
 		count_label.show()
 		count_label.text = str(effect.RemainingDuration)
+	else:
+		count_label.hide()
+		
 	if effect.is_good():
 		background.texture = buff_background_texture
 	if effect.is_bad():

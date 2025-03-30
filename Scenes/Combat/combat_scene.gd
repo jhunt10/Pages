@@ -293,9 +293,17 @@ func create_flash_text_on_actor(actor:BaseActor, value:String, color:Color):
 	
 	
 func add_zone(zone:BaseZone):
-	var new_node:ZoneNode  = load("res://Scenes/zone_node.tscn").instantiate()
+	var new_node:ZoneNode  = load("res://Scenes/Combat/MapObjects/zone_node.tscn").instantiate()
 	new_node._zone = zone
+	GameState.add_zone(zone)
 	MapController.add_zone_node(zone, new_node)
+	for spot in zone.get_area():
+		for actor in GameState.get_actors_at_pos(spot):
+			zone.on_actor_enter(actor)
+
+func remove_zone(zone:BaseZone):
+	GameState.delete_zone(zone.Id)
+	MapController.delete_zone_node(zone)
 
 func check_end_conditions():
 	if supress_win_conditions:

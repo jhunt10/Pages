@@ -125,7 +125,7 @@ static func handle_attack(attacker:BaseActor, defender:BaseActor, attack_details
 					created_attack_vfx.add_damage_effect(damage_vfx_data)
 					
 		
-		attack_event.roll_for_effect()
+		attack_event.roll_for_effects()
 		# TODO: Add a "Resist" flash text for effects that triggered but failed to apply
 		for effect_data in attack_event.applied_effect_datas:
 			var effect_key = effect_data['EffectKey']

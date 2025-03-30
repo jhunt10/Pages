@@ -18,6 +18,7 @@ func _init(points):
 		printerr("Non-Distinct Area Matrix loaded.")
 		relative_points = distinct
 
+# Returns Array of Vector2i points in AreaMatrix
 func to_map_spots(pos:MapPos)->Array:
 	var out_arr = []
 	for p in relative_points:
