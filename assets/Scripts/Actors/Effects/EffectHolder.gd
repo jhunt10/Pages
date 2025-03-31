@@ -220,7 +220,11 @@ func get_stat_mods()->Array:
 	return out_list
 
 func get_aura_effect()->Array:
-	return []
+	var out_list = []
+	for effect:BaseEffect in _effects.values():
+		if effect.has_aura_zone():
+			out_list.append(effect)
+	return out_list
 
 func trigger_damage_dealt(game_state:GameStateData, damage_event:DamageEvent):
 	for effect:BaseEffect in _effects.values():

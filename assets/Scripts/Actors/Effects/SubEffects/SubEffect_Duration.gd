@@ -34,24 +34,24 @@ func get_triggers(effect:BaseEffect, subeffect_data:Dictionary)->Array:
 	if !list.has(BaseEffect.EffectTriggers.OnCreate):
 		list.append(BaseEffect.EffectTriggers.OnCreate)
 	var duration_type = DurationTypes.get(subeffect_data['DurationType'])
-	if true or duration_type == DurationTypes.TurnStart:
+	if duration_type == DurationTypes.TurnStart:
 		list.append(BaseEffect.EffectTriggers.OnTurnStart)
 	if true or duration_type == DurationTypes.TurnEnd:
 		list.append(BaseEffect.EffectTriggers.OnTurnEnd)
 		
-	if true or duration_type == DurationTypes.RoundStart:
+	if duration_type == DurationTypes.RoundStart:
 		list.append(BaseEffect.EffectTriggers.OnRoundStart)
 	if true or duration_type == DurationTypes.RoundEnd:
 		list.append(BaseEffect.EffectTriggers.OnRoundEnd)
 		
-	if true or duration_type == DurationTypes.ActionStart:
+	if duration_type == DurationTypes.ActionStart:
 		list.append(BaseEffect.EffectTriggers.OnActionStart)
-	if true or duration_type == DurationTypes.ActionEnd:
+	if  duration_type == DurationTypes.ActionEnd:
 		list.append(BaseEffect.EffectTriggers.OnActionEnd)
 		
-	if true or duration_type == DurationTypes.GapStart:
+	if duration_type == DurationTypes.GapStart:
 		list.append(BaseEffect.EffectTriggers.OnGapTurnStart)
-	if true or duration_type == DurationTypes.GapEnd:
+	if duration_type == DurationTypes.GapEnd:
 		list.append(BaseEffect.EffectTriggers.OnGapTurnEnd)
 	return list
 	

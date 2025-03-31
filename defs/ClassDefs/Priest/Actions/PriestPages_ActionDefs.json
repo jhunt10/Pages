@@ -349,5 +349,79 @@
                 "EffectKey": "BlessingFire_Large"
             }
         }
+    },
+    {
+        "ActionKey": "LightAuraSpell",
+        "AmmoData": {
+            "Cost": 4,
+            "Clip": 16,
+            "AmmoType": "Mag"
+        },
+        "AttackDetails":
+        {
+            "AccuracyMod": 1,
+            "PotencyMod": 1
+        },
+        "DamageDatas": {
+        },
+        "EffectDatas":{
+            "Effect1": {
+                "EffectKey": "LightAuraEffect",
+                "Duration": 5
+            }
+        },
+        "Details": {
+            "Description": "Aura of Light.",
+            "DisplayName": "Aura of Light",
+            "LargeIcon": "Sprites/LightAura.png",
+            "SmallIcon": "Sprites/LightAura.png",
+            "SnippetDesc": "Aura of Light.",
+            "Tags": [
+                "Aura",
+                "Light",
+                "Spell"
+            ]
+        },
+        "MissileDatas": {},
+        "Preview": {
+            "PreviewTargetKey": "PreviewTarget"
+        },
+        "SubActions": {
+            "5": [
+                {
+                    "Animation": "Raise",
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponReadyAnimation.gd",
+                    "MainHand": true,
+                    "OffHand": "Never"
+                }
+            ],
+            "10": [
+                {
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_PayCost.gd"
+                },
+                {
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Effects/SubAct_ApplyEffect.gd",
+                    "TargetKey": "Self",
+                    "EffectDataKey": "Effect1"
+                }
+            ],
+            "11": [
+                {
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponMotionAnimation.gd",
+                    "MainHand": true,
+                    "OffHand": "Never"
+                }
+            ]
+        },
+        "TargetParams": {
+            "PreviewTarget": {
+                "EffectArea": "[[-1,-1],[0,-1],[1,-1],[-1,0],[1,0],[-1,1],[0,1],[1,1]]",
+                "EffectsAllies": true,
+                "EffectsEnemies": true,
+                "LineOfSight": false,
+                "TargetArea": "[[-1,-1],[0,-1],[1,-1],[-1,0],[1,0],[-1,1],[0,1],[1,1]]",
+                "TargetType": "Spot"
+            }
+        }
     }
 ]

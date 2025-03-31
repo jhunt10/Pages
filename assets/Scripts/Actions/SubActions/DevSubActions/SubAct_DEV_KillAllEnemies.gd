@@ -20,7 +20,7 @@ func do_thing(parent_action:BaseAction, subaction_data:Dictionary, que_exe_data:
 			.append_source(SourceTagChain.SourceTypes.Actor, actor)\
 			.append_source(SourceTagChain.SourceTypes.Action, parent_action)
 	
-	var damage_data = parent_action.get_damage_data(actor, subaction_data)
+	var damage_data = parent_action.get_damage_data_for_subaction(actor, subaction_data)
 	var target_params = parent_action.get_targeting_params("Self", actor)
 	
 	for target:BaseActor in targets:

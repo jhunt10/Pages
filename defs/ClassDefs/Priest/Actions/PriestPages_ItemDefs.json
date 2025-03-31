@@ -181,8 +181,24 @@
         }
     },
 
+    
 
-
+    {
+        "ActionKey": "LightAuraSpell",
+        "CanStack": true,
+        "Details": {
+            "Tags": [
+                "Spell"
+            ]
+        },
+        "ItemDetails":
+        {
+            "Rarity": "Mundane",
+            "Value": 50
+        },
+        "ItemKey": "LightAuraSpell_PageItem",
+        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd"
+    },
     {
         "ActionKey": "LightBoltSpell",
         "CanStack": true,

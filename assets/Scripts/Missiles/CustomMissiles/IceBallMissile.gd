@@ -15,7 +15,7 @@ func do_thing(game_state:GameStateData):
 	
 	
 	var sub_missile_damage_key = _missle_data.get("SubMissileDamageKey", "IceBallSpell")
-	var sub_missile_damage = parent_action.get_damage_data(source_actor, {"DamageKey": sub_missile_damage_key})
+	var sub_missile_damage = parent_action.get_damage_data_for_subaction(source_actor, {"DamageKey": sub_missile_damage_key})
 	
 	
 	for target_actor in game_state.get_actors_at_pos(TargetSpot):

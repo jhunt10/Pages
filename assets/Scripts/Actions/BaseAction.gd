@@ -14,8 +14,6 @@ var CostData:Dictionary:
 		get: return get_load_val('CostData', {})
 var DamageDatas:Dictionary:
 		get: return get_load_val('DamageDatas', {})
-var ZoneDatas:Dictionary:
-		get: return get_load_val('ZoneDatas', {})
 var _missile_data
 var MissileDatas:Dictionary:
 		get:
@@ -113,14 +111,17 @@ func list_sub_action_datas()->Array:
 				out_list.append(data)
 	return out_list
 
-func get_damage_data(actor:BaseActor, subaction_data:Dictionary)->Dictionary:
+func get_damage_data_for_subaction(actor:BaseActor, subaction_data:Dictionary)->Dictionary:
 	var damage_key = subaction_data.get("DamageKey", "")
 	if damage_key == null or damage_key == '':
 		return {}
 	if damage_key == "Weapon":
+		if actor == null:
+			printerr("BaseAction.get_damage_data_for_subaction: Null Actor when asking for Weapon damage.")
+			return {}
 		var weapon = actor.equipment.get_primary_weapon()
 		if !weapon:
-			printerr("No Weapon")
+			printerr("BaseAction.get_damage_data_for_subaction: No Weapon when asking for Weapon damage.")
 			return {}
 		return (weapon as BaseWeaponEquipment).get_damage_data()
 	return DamageDatas.get(damage_key, subaction_data.get("DamageData", {}))
@@ -219,12 +220,27 @@ func get_ammo_data(actor:BaseActor=null):
 func get_on_que_options(actor:BaseActor, game_state:GameStateData):
 	var out_list = []
 	for sub_action_data in list_sub_action_datas():
-		var sub_action:BaseSubAction = ActionLibrary.get_sub_action_script(sub_action_data['SubActionScript'])
+		var sub_action = ActionLibrary.get_sub_action_script(sub_action_data['SubActionScript'])
 		if !sub_action:
 			printerr("BaseAction.get_on_que_options: Failed to find SubActionScript '%s'." % [sub_action_data['SubActionScript']])
 			continue
 		out_list.append_array(sub_action.get_on_que_options(self, sub_action_data, actor, game_state))
 	return out_list
+
+func get_damage_data(damage_data_key:String, actor:BaseActor=null)->Dictionary:
+	if damage_data_key == "Weapon":
+		if actor == null:
+			printerr("BaseAction.get_damage_data: Null Actor when asking for Weapon damage.")
+			return {}
+		var weapon = actor.equipment.get_primary_weapon()
+		if !weapon:
+			printerr("BaseAction.get_damage_data: No Weapon when asking for Weapon damage.")
+			return {}
+		return weapon.get_damage_data()
+	var damage_datas = get_load_val("DamageDatas", {})
+	if damage_datas.has(damage_data_key):
+		return damage_datas[damage_data_key].duplicate()
+	return {}
 
 func get_effect_data(effect_data_key:String)->Dictionary:
 	var effect_datas = get_load_val("EffectDatas", {})
@@ -239,3 +255,9 @@ func has_sustain_data()->bool:
 func get_sustain_data()->Dictionary:
 	var sustain_data = get_load_val("SustainData", {})
 	return sustain_data
+
+func get_zone_data(zone_data_key:String)->Dictionary:
+	var zone_datas = get_load_val("ZoneDatas", {})
+	if zone_datas.has(zone_data_key):
+		return zone_datas[zone_data_key].duplicate()
+	return {}

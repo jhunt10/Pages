@@ -81,9 +81,10 @@ func set_actor_pos(actor:BaseActor, pos:MapPos, suppress_signal:bool=false):
 		if items.size() > 0:
 			actor_entered_item_spot.emit(actor, items)
 	
-	var auras = actor.effects.get_aura_effect()
-	for aura:BaseZone in auras:
-		update_zone_pos(aura, pos, [actor.Id])
+	var aura_effects = actor.effects.get_aura_effect()
+	for effect:BaseEffect in aura_effects:
+		var aura_zone = effect.get_aura_zone(self)
+		update_zone_pos(aura_zone, pos, [actor.Id])
 	
 	var old_zones = []
 	if old_pos:
@@ -155,9 +156,11 @@ func add_zone(zone:BaseZone):
 		return
 	_zones[zone.Id] = zone
 	map_data.add_zone(zone)
-	for actor_id in map_data.get_actors_in_zone(zone.Id):
-		var actor = get_actor(actor_id)
+	for actor in map_data.get_actors_in_zone(zone.Id):
 		zone.on_actor_enter(actor, self)
+
+func get_zone(zone_id:String)->BaseZone:
+	return _zones.get(zone_id)
 
 func delete_zone(zone_id:String):
 	if _zones.has(zone_id):

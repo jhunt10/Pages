@@ -302,7 +302,14 @@ func add_zone(zone:BaseZone):
 		for actor in GameState.get_actors_at_pos(spot):
 			zone.on_actor_enter(actor, GameState)
 
-func remove_zone(zone:BaseZone):
+func get_zone(zone_id:String)->BaseZone:
+	return GameState._zones.get(zone_id)
+
+func remove_zone(zone):
+	if zone is String:
+		zone = GameState._zones.get(zone)
+	if !zone:
+		return
 	GameState.delete_zone(zone.Id)
 	MapController.delete_zone_node(zone)
 

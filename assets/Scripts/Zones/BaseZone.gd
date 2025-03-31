@@ -6,7 +6,10 @@ var ZoneKey:String
 var Id:String = str(ResourceUID.create_id())
 var node:ZoneNode
 
-var is_aura:bool
+var is_aura:bool:
+	get():
+		return _aura_actor_id != ''
+var _aura_actor_id:String = ''
 var apply_to_source:bool
 var is_active:bool
 
@@ -25,20 +28,23 @@ func _init(source:SourceTagChain, data:Dictionary, center:MapPos, area:AreaMatri
 	_area_matrix = area
 	is_active = true
 	
+	_aura_actor_id = _data.get("AuraActorId", "")
+	
 	_duration = _data.get("Duration")
 	_duration_type = _data.get("DurationType")
 	if _duration_type == "Turn":
 		CombatRootControl.Instance.QueController.end_of_turn.connect(_on_duration_tick)
 	elif _duration_type == "Round":
 		CombatRootControl.Instance.QueController.end_of_round.connect(_on_duration_tick)
-	elif _duration_type == "Trigger":
-		var t = true
-	else:
-		printerr("BaseZone: Created without DurationType.")
-		is_active = false
 
 func get_source_actor()->BaseActor:
 	return _source.get_source_actor()
+
+func get_aura_actor()->BaseActor:
+	if _aura_actor_id == "":
+		return null
+	var aura_actor = ActorLibrary.get_actor(_aura_actor_id)
+	return aura_actor
 
 func get_zone_scene_path()->String:
 	return _data.get("ZoneScenePath", "res://Scenes/Combat/MapObjects/Zones/zone_node.tscn")

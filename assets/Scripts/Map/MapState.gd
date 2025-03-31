@@ -255,6 +255,6 @@ func get_actors_in_zone(zone_id:String)->Array:
 	var out_list = []
 	for pos in zone_poses:
 		var actors = get_actors_at_pos(pos)
-		out_list.append_array(out_list)
+		out_list.append_array(actors)
 	return out_list
 		

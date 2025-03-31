@@ -1,7 +1,7 @@
 class_name StatHolder
 
 const HealthKey:String = "Health"
-const LOGGING = true
+const LOGGING = false
 
 signal stats_changed
 signal bar_stat_changed

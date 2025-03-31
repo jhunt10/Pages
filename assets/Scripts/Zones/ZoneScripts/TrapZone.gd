@@ -1,6 +1,7 @@
 class_name TrapZone
 extends BaseZone
 
+# Triggers and Deals Damage when Actor enters Area. Destories self after triggering X times.
 
 var _actor_ids_to_inzone_effect_ids:Dictionary = {}
 var _inzone_effect_key:String

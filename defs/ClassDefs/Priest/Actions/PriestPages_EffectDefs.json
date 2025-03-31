@@ -1,6 +1,105 @@
 [
     
     {
+        "EffectKey": "LightAuraEffect",
+        "ShowInHud": true,
+        "ShowCounter": true,
+        "CanStack": true,
+        "IsGood": true,
+        "LimitedEffectType": "Aura",
+        "DamageDatas": {},
+        "DamageMods": {},
+        "AddTagsToActor": ["Aura"],
+        "Details": {
+            "DisplayName": "Aura of Light",
+            "Description": "Aura of Light.",
+            "LargeIcon": "Sprites/LightAura.png",
+            "SmallIcon": "Sprites/LightAura.png",
+            "SnippetDesc": "Aura of Light",
+            "Tags": []
+        },
+        "StatMods": {
+        },
+        "SubEffects": {
+            "Aura": {
+                "ZoneDataKey": "LightAura",
+                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_CreateAura.gd"
+            },
+            "Duration": {
+                "DurationType": "TurnEnd",
+                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_Duration.gd"
+            }
+        },
+        "NestedEffectDatas": {
+            "Effect1": {
+                "EffectKey": "LightAura_InZoneEffect",
+                "ShowCounter": false,
+                "ApplicationChance": 1,
+                "SubEffects":{
+                    "Duration":{
+                        "DurationType": "Trigger"
+                    }
+                }
+            }
+        },
+        "ZoneDatas":{
+            "LightAura": {
+                "ZoneKey":"LightAura",
+                "ZoneScript": "res://assets/Scripts/Zones/ZoneScripts/EffectZone.gd",
+                "InZoneEffectDataKey": "Effect1",
+                "Duration": 1,
+                "DurationType": "Aura",
+                "TileSetSprite":"Sprites/FireZone_TileSheet.png"
+            }
+        }
+    },
+    {
+        "EffectKey": "LightAura_InZoneEffect",
+        "CanStack": true,
+        "ShowInHud": true,
+        "ShowCounter": true,
+        "IsGood": true,
+        "DamageDatas": {
+            "DamageData1": {
+                "AtkPower": 5,
+                "AtkStat": "Percent",
+                "BaseDamage": 0,
+                "DamageEffect": "SmallFire_DamageEffect",
+                "DamageEffectData":{
+                    "ShakeActor": false
+                },
+                "DamageType": "Light",
+                "DamageVarient": 0,
+                "DefenseType": "None"
+            }
+        },
+        "AddTagsToActor": [],
+        "DamageMods": {},
+        "Details": {
+            "Description": "Take 5% Max Health as Light Damage at the end of each Turn.",
+            "DisplayName": "In Aura of Light",
+            "LargeIcon": "Sprites/LightAura.png",
+            "SmallIcon": "Sprites/LightAura.png",
+            "SnippetDesc": "Take Light Damage at the End of Turn.",
+            "Tags": ["Light", "DOT"]
+        },
+        "StatMods": {
+        },
+        "SubEffects": {
+            "ApplyDamage": {
+                "DamageKey": "DamageData1",
+                "OptionalTriggers": [
+                    "OnTurnEnd"
+                ],
+                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_ApplyDamage.gd"
+            }
+        }
+    },
+
+
+
+
+    {
         "EffectKey": "BaseBlessing",
         "ShowInHud": true,
         "ShowCounter": true,

@@ -169,12 +169,8 @@ func add_zone_node(zone:BaseZone, node:ZoneNode):
 	if current_partent != actor_tile_map and current_partent != null:
 		current_partent.remove_child(node)
 	
-	if zone.is_aura:
-		var actor_node:ActorNode = actor_nodes[zone._source_actor.Id]
-		actor_node.aura_holder.add_aura(node)
-	else:
-		zone_tile_map.add_child(node)
-		node.position = actor_tile_map.map_to_local(zone.get_pos().to_vector2i())
+	zone_tile_map.add_child(node)
+	node.position = actor_tile_map.map_to_local(zone.get_pos().to_vector2i())
 
 func delete_zone_node(zone:BaseZone):
 	if Engine.is_editor_hint(): return

@@ -3,7 +3,7 @@ class_name EffectHelper
 # Types of effects that have special logic 
 #  for both number of effects on one actor
 #  and number of other actors one can apply to
-enum LimitedEffectTypes {None, Blessing, Curse, WarCry, Dance, Song}
+enum LimitedEffectTypes {None, Blessing, Curse, Aura, WarCry, Dance, Song}
 
 static var is_creating_effect:bool = false
 

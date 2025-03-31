@@ -3,6 +3,9 @@ class_name AreaMatrix
 # List of Vec2i points relative to center
 var relative_points:Array = []
 
+# Takes: 
+#	Array of Int[2]
+#	OR String of "[[X,Y],...]"
 func _init(points):
 	if points is String:
 		points = JSON.parse_string(points)

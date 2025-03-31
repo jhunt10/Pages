@@ -5,6 +5,7 @@ extends Node2D
 @onready var tile_sprite:Sprite2D = $Sprite2D
 
 var _zone:BaseZone
+var _aura_actor_node:ActorNode
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -14,8 +15,16 @@ func _ready() -> void:
 	else:
 		_build_zone_area()
 
+func _process(delta: float) -> void:
+	if _aura_actor_node:
+		self.global_position = _aura_actor_node.actor_motion_node.global_position
+
 func _build_zone_area():
 	self.visible = true
+	var aura_actor = _zone.get_aura_actor()
+	if aura_actor != null:
+		_aura_actor_node = CombatRootControl.get_actor_node(aura_actor.Id)
+	
 	var pos = _zone.get_pos()
 	var arr = _zone._area_matrix.to_map_spots(MapPos.new(0,0,pos.z))
 	if arr.size() == 1 and arr[0] == Vector2i.ZERO:
@@ -25,6 +34,7 @@ func _build_zone_area():
 		tile_sprite.show()
 		area_tile_map.hide()
 	else:
+		area_tile_map.clear()
 		var texture = _zone.get_zone_texture()
 		if texture:
 			area_tile_map.tile_set.get_source(1).texture = texture
