@@ -31,7 +31,7 @@ static func handle_attack(attacker:BaseActor, defender:BaseActor, attack_details
 	
 	
 	var attack_direction = null
-	if target_parameters.has_area_of_effect():
+	if target_parameters and target_parameters.has_area_of_effect():
 		attack_direction = AttackEvent.AttackDirection.AOE
 	else:
 		var attacker_pos = attack_from_spot_override

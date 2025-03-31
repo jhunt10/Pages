@@ -25,19 +25,18 @@ func _build_zone_area():
 	if aura_actor != null:
 		_aura_actor_node = CombatRootControl.get_actor_node(aura_actor.Id)
 	
-	var pos = _zone.get_pos()
-	var arr = _zone._area_matrix.to_map_spots(MapPos.new(0,0,pos.z))
-	if arr.size() == 1 and arr[0] == Vector2i.ZERO:
-		var texture = _zone.get_zone_texture()
-		if texture:
-			tile_sprite.texture = texture
+	var tile_sprite_texture = _zone.get_zone_tile_sprite()
+	if tile_sprite:
+		tile_sprite.texture = tile_sprite_texture
 		tile_sprite.show()
 		area_tile_map.hide()
 	else:
+		var pos = _zone.get_pos()
+		var arr = _zone._area_matrix.to_map_spots(MapPos.new(0,0,pos.z))
 		area_tile_map.clear()
-		var texture = _zone.get_zone_texture()
-		if texture:
-			area_tile_map.tile_set.get_source(1).texture = texture
+		var tile_set = _zone.get_zone_tile_set()
+		if tile_set:
+			area_tile_map.tile_set.get_source(1).texture = tile_set
 		area_tile_map.set_cells_terrain_connect(arr,0,0)
 		tile_sprite.hide()
 		area_tile_map.show()

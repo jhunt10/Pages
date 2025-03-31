@@ -3,11 +3,11 @@ extends ZoneNode
 
 @onready var animation_player:AnimationPlayer = $AnimationPlayer
 @onready var base_sprite:Sprite2D = $BaseSprite2D
-@onready var glow_sprite:Sprite2D = $BaseSprite2D
+@onready var glow_sprite:Sprite2D = $GlowSprite2D
 
 func _build_zone_area():
 	self.visible = true
-	var texture = _zone.get_zone_texture()
+	var texture = _zone.get_zone_tile_sprite()
 	if texture:
 		base_sprite.texture = texture
 		glow_sprite.texture = texture

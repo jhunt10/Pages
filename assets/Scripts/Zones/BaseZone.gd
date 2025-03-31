@@ -49,7 +49,17 @@ func get_aura_actor()->BaseActor:
 func get_zone_scene_path()->String:
 	return _data.get("ZoneScenePath", "res://Scenes/Combat/MapObjects/Zones/zone_node.tscn")
 
-func get_zone_texture()->Texture2D:
+func get_zone_tile_set()->Texture2D:
+	if not _data.has('TileSet'):
+		return null
+	var load_path = _data.get('LoadPath', '')
+	var tile_set = _data.get('TileSet', '')
+	var path = load_path.path_join(tile_set)
+	return SpriteCache.get_sprite(path, true)
+
+func get_zone_tile_sprite()->Texture2D:
+	if not _data.has('TileSprite'):
+		return null
 	var load_path = _data.get('LoadPath', '')
 	var tile_set = _data.get('TileSprite', '')
 	var path = load_path.path_join(tile_set)

@@ -80,22 +80,6 @@
         "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd"
     },
     {
-        "ActionKey": "FireTrapSpell",
-        "CanStack": true,
-        "Details": {
-            "Tags": [
-                "Spell"
-            ]
-        },
-        "ItemDetails":
-        {
-            "Rarity": "Legendary",
-            "Value": 50
-        },
-        "ItemKey": "FireTrapSpell_PageItem",
-        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd"
-    },
-    {
         "ActionKey": "ApplyChillSpell",
         "CanStack": true,
         "Details": {
@@ -253,6 +237,56 @@
             "Value": 50
         },
         "ItemKey": "LightningStormSpell_PageItem",
+        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd"
+    },
+
+    
+    {
+        "ActionKey": "FireTrapSpell",
+        "CanStack": true,
+        "Details": {
+            "Tags": [
+                "Spell"
+            ]
+        },
+        "ItemDetails":
+        {
+            "Rarity": "Legendary",
+            "Value": 50
+        },
+        "ItemKey": "FireTrapSpell_PageItem",
+        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd"
+    },
+    {
+        "ActionKey": "IceTrapSpell",
+        "CanStack": true,
+        "Details": {
+            "Tags": [
+                "Spell"
+            ]
+        },
+        "ItemDetails":
+        {
+            "Rarity": "Legendary",
+            "Value": 50
+        },
+        "ItemKey": "IceTrapSpell_PageItem",
+        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd"
+    },
+    {
+        "ActionKey": "ShockTrapSpell",
+        "CanStack": true,
+        "Details": {
+            "Tags": [
+                "Spell"
+            ]
+        },
+        "ItemDetails":
+        {
+            "Rarity": "Legendary",
+            "Value": 50
+        },
+        "ItemKey": "ShockTrapSpell_PageItem",
         "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd"
     }
 ]

@@ -348,7 +348,8 @@ sources/1 = SubResource("TileSetAtlasSource_2ibvb")
 
 [sub_resource type="Animation" id="Animation_8y05x"]
 resource_name = "arm_animation"
-step = 0.01
+length = 1.1
+step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -356,10 +357,10 @@ tracks/0/path = NodePath("GlowSprite2D:self_modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5, 0.75, 1),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.5, 0.7, 0.9, 1.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0.501961), Color(1, 1, 1, 1)]
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0.501961), Color(1, 1, 1, 0.12549), Color(1, 1, 1, 0.501961), Color(1, 1, 1, 0.12549)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -368,10 +369,10 @@ tracks/1/path = NodePath("BaseSprite2D:self_modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.5, 0.51),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+"values": [Color(0.187176, 0.187176, 0.187176, 1), Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_gwpq3"]
@@ -398,11 +399,12 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Color(1, 1, 1, 1)]
+"values": [Color(0.187176, 0.187176, 0.187176, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_i2pm0"]
 resource_name = "idle_animation"
+length = 2.0
 loop_mode = 1
 step = 0.1
 tracks/0/type = "value"
@@ -412,10 +414,10 @@ tracks/0/path = NodePath("GlowSprite2D:self_modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5, 1),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0, 1, 2, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0.501961), Color(1, 1, 1, 1)]
+"values": [Color(1, 1, 1, 0.12549), Color(1, 1, 1, 0.376471), Color(1, 1, 1, 0.12549), Color(1, 1, 1, 0.376471)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -427,7 +429,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Color(1, 1, 1, 0)]
+"values": [Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_x5cnh"]
@@ -446,17 +448,16 @@ position = Vector2(-16, -16)
 tile_map_data = PackedByteArray(0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 3, 0, 0, 0)
 tile_set = SubResource("TileSet_hpguw")
 
-[node name="BaseSprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("3_kfsre")
-hframes = 2
-vframes = 2
-
 [node name="GlowSprite2D" type="Sprite2D" parent="."]
 self_modulate = Color(1, 1, 1, 0)
 texture = ExtResource("3_kfsre")
 hframes = 2
-vframes = 2
 frame = 1
+
+[node name="BaseSprite2D" type="Sprite2D" parent="."]
+self_modulate = Color(0.187176, 0.187176, 0.187176, 1)
+texture = ExtResource("3_kfsre")
+hframes = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

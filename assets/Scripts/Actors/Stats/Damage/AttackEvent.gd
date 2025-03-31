@@ -129,7 +129,7 @@ func roll_for_effects():
 			var roll = randf()
 			var applied = roll > 1 - hit_chance
 			if applied:
-				applied_effect_datas.append(effect_datas)
+				applied_effect_datas.append(effect_data)
 	self.attack_stage = AttackStage.PostEffectRoll
 
 func get_damage_datas():

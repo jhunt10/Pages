@@ -225,7 +225,7 @@
                 "InZoneEffectDataKey": "Effect1",
                 "Duration": 20,
                 "DurationType": "Turn",
-                "TileSprite":"Sprites/FireZone_TileSheet.png"
+                "TileSet":"Sprites/FireZone_TileSheet.png"
             }
         }
     },
@@ -233,11 +233,11 @@
         "ActionKey":"FireTrapSpell",
         "ParentKey":"BaseTrapSpell",
         "Details": {
-            "Description": "Create a Trap of Fire",
+            "Description": "Create a Fire Trap which deals Fire Damage when stepped on. Traps do not arm themselves until the end of Round. Damage from Traps can not be Blocked or Evaded.",
             "DisplayName": "Fire Trap",
             "LargeIcon": "Sprites/FireTrap.png",
             "SmallIcon": "Sprites/FireTrap.png",
-            "SnippetDesc": "Create a Trap of Fire",
+            "SnippetDesc": "Create a Fire Trap.",
             "Tags": [
                 "Fire"
             ]
@@ -248,7 +248,7 @@
         },
         "DamageDatas":{
             "Damage1": {
-                "AtkPower": 80,
+                "AtkPower": 100,
                 "AtkStat": "MagAttack",
                 "BaseDamage": 0,
                 "DamageEffect": "Exploision_DamageEffect",
@@ -258,15 +258,10 @@
             }
         },
         "EffectDatas": {
-            "Effect1": {
+            "BurnEffect": {
                 "EffectKey": "AilmentBurned",
-                "ShowCounter": false,
-                "ApplicationChance": 1,
-                "SubEffects":{
-                    "Duration":{
-                        "DurationType": "Trigger"
-                    }
-                }
+                "ApplicationChance": 0.3,
+                "Duration": 5
             }
         },
         "ZoneDatas":{
@@ -477,6 +472,56 @@
                 "LineOfSight": true,
                 "TargetArea": "[[0,4],[-1,3],[0,3],[1,3],[0,2]]",
                 "TargetType": "Spot"
+            }
+        }
+    },
+    {
+        "ActionKey":"IceTrapSpell",
+        "ParentKey":"BaseTrapSpell",
+        "Details": {
+            "Description": "Create a Trap of Ice",
+            "DisplayName": "Ice Trap",
+            "LargeIcon": "Sprites/IceTrap.png",
+            "SmallIcon": "Sprites/IceTrap.png",
+            "SnippetDesc": "Create a Trap of Ice",
+            "Tags": [
+                "Ice"
+            ]
+        },
+        "AttackDetails": {
+            "AccuracyMod": 1,
+            "PotencyMod": 1
+        },
+        "DamageDatas":{
+            "Damage1": {
+                "AtkPower": 80,
+                "AtkStat": "MagAttack",
+                "BaseDamage": 0,
+                "DamageEffect": "Exploision_DamageEffect",
+                "DamageType": "Cold",
+                "DamageVarient": 0.2,
+                "DefenseType": "Ward"
+            }
+        },
+        "EffectDatas": {
+            "Effect1": {
+                "EffectKey": "AilmentBurned",
+                "ShowCounter": false,
+                "ApplicationChance": 1,
+                "SubEffects":{
+                    "Duration":{
+                        "DurationType": "Trigger"
+                    }
+                }
+            }
+        },
+        "ZoneDatas":{
+            "Zone1": {
+                "ZoneScenePath": "res://Scenes/Combat/MapObjects/Zones/zone_trap_node.tscn",
+                "ZoneKey":"Zone1",
+                "Duration": 1,
+                "DurationType": "Trigger",
+                "TileSprite":"Sprites/IceTrap_Tile.png"
             }
         }
     },
@@ -805,6 +850,56 @@
                 "LineOfSight": true,
                 "TargetArea": "[[-1,4],[0,4],[1,4],[-1,3],[0,3],[1,3],[-1,2],[0,2],[1,2]]",
                 "TargetType": "Enemy"
+            }
+        }
+    },
+    {
+        "ActionKey":"ShockTrapSpell",
+        "ParentKey":"BaseTrapSpell",
+        "Details": {
+            "Description": "Create a Trap of Shock",
+            "DisplayName": "Shock Trap",
+            "LargeIcon": "Sprites/ShockTrap.png",
+            "SmallIcon": "Sprites/ShockTrap.png",
+            "SnippetDesc": "Create a Trap of Shock",
+            "Tags": [
+                "Shock"
+            ]
+        },
+        "AttackDetails": {
+            "AccuracyMod": 1,
+            "PotencyMod": 1
+        },
+        "DamageDatas":{
+            "Damage1": {
+                "AtkPower": 80,
+                "AtkStat": "MagAttack",
+                "BaseDamage": 0,
+                "DamageEffect": "LightningStrike_DamageEffect",
+                "DamageType": "Shock",
+                "DamageVarient": 0.2,
+                "DefenseType": "Ward"
+            }
+        },
+        "EffectDatas": {
+            "Effect1": {
+                "EffectKey": "AilmentBurned",
+                "ShowCounter": false,
+                "ApplicationChance": 1,
+                "SubEffects":{
+                    "Duration":{
+                        "DurationType": "Trigger"
+                    }
+                }
+            }
+        },
+        "ZoneDatas":{
+            "Zone1": {
+                "ZoneScenePath": "res://Scenes/Combat/MapObjects/Zones/zone_trap_node.tscn",
+                "ZoneKey":"Zone1",
+                "Duration": 1,
+                "DurationType": "Trigger",
+                "TileSprite":"Sprites/ShockTrap_Tile.png"
             }
         }
     },

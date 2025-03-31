@@ -40,8 +40,10 @@ func do_thing(parent_action:BaseAction, subaction_data:Dictionary, que_exe_data:
 	
 	var damage_data_key = subaction_data.get("DamageKey")
 	if damage_data_key:
-		zone_data['DamageData'] =  parent_action.get_damage_data_for_subaction(actor, subaction_data)
+		zone_data['DamageDatas'] =  [parent_action.get_damage_data_for_subaction(actor, subaction_data)]
 	
+	zone_data['AttackDetails'] = parent_action.get_load_val("AttackDetails", {})
+	zone_data['EffectDatas'] = parent_action.get_load_val("EffectDatas", {})
 	zone_data['LoadPath'] = parent_action.get_load_path()
 	var zone_script_path = zone_data.get("ZoneScript")
 	if !zone_script_path:

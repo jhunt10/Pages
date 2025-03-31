@@ -371,7 +371,7 @@
         },
         "DamageDatas": {
             "Damage1": {
-                "AtkPower": 80,
+                "AtkPower": 100,
                 "AtkStat": "MagAttack",
                 "BaseDamage": 0,
                 "DamageEffect": "SmallFire_DamageEffect",
@@ -381,19 +381,14 @@
             }
         },
         "EffectDatas":{
-            "Effect1": {
-                "EffectKey": "AilmentShocked",
-                "Duration": 5
-            }
         },
         "Details": {
-            "Description": "Create a Trap  which deals DAMAGE_TYPE Damage when stepped on.",
+            "Description": "Create a Trap  which deals DAMAGE_TYPE Damage when stepped on. Traps do not arm until the end of Round. Damage from Traps can not be Blocked or Evaded.",
             "DisplayName": "DAMAGE_TYPE Bolt",
             "LargeIcon": "Sprites/ICON.png",
             "SmallIcon": "Sprites/ICON.png",
             "SnippetDesc": "Create a Trap  of DAMAGE_TYPE Damage.",
             "Tags": [
-                "Attack",
                 "Spell",
                 "Trap"
             ]
@@ -453,6 +448,7 @@
                 "ZoneKey":"Zone1",
                 "ZoneScript": "res://assets/Scripts/Zones/ZoneScripts/TrapZone.gd",
                 "Duration": 1,
+                "TileSprite":"",
                 "DurationType": "Trigger"
             }
         }
