@@ -1,6 +1,6 @@
 class_name UiStateController
 
-enum UiStates {ActionInput, ExecRound, PauseMenu, SelectItem, CharacterSheet}
+enum UiStates {ActionInput, ExecRound, PauseMenu, SelectItem, CharacterSheet, PlaceActors}
 
 var _state_scripts = {
 	UiStates.ActionInput: "res://assets/Scripts/Ui/UiStates/UiState_ActionInput.gd",
@@ -8,6 +8,7 @@ var _state_scripts = {
 	UiStates.PauseMenu: "res://assets/Scripts/Ui/UiStates/UiState_PauseMenu.gd",
 	UiStates.SelectItem: "res://assets/Scripts/Ui/UiStates/UiState_ItemSelection.gd",
 	UiStates.CharacterSheet: "res://assets/Scripts/Ui/UiStates/UiState_CharacterSheet.gd",
+	UiStates.PlaceActors: "res://assets/Scripts/Ui/UiStates/UiState_PlaceActors.gd"
 }
 
 var current_ui_state:BaseUiState
@@ -56,3 +57,8 @@ func back_to_last_state():
 	current_ui_state = last_state
 	state_stack.remove_at(state_stack.size()-1)
 	current_ui_state.start_state()
+
+func clear_states():
+	state_stack.clear()
+	current_ui_state = null
+	

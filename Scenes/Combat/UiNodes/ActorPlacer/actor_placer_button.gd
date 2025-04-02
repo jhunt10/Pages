@@ -3,6 +3,7 @@ extends Node
 
 signal pressed
 
+@export var highlight:TextureRect
 @export var actor_icon:TextureRect
 @export var button:Button
 var actor_id:String = ''

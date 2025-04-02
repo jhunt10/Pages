@@ -65,7 +65,7 @@ func _ready() -> void:
 	for actor:BaseActor in GameState._actors.values():
 		actor.on_combat_start()
 	
-	ui_control.ui_state_controller.set_ui_state(UiStateController.UiStates.ActionInput)
+	#ui_control.ui_state_controller.set_ui_state(UiStateController.UiStates.ActionInput)
 	pass # Replace with function body.
 
 func _process(delta: float) -> void:
@@ -87,7 +87,8 @@ static func get_remaining_frames_for_turn()->int:
 static func get_actor_node(actor_id:String)->ActorNode:
 	if !Instance: return null
 	if !Instance.MapController: return null
-	return Instance.MapController.actor_nodes.get(actor_id)
+	var actor_nodes = Instance.MapController.actor_nodes
+	return actor_nodes.get(actor_id)
 
 func load_init_state(sub_scene_data:Dictionary):
 	printerr("Loading init state")
@@ -133,29 +134,31 @@ func load_init_state(sub_scene_data:Dictionary):
 			new_actor.FactionIndex = 1
 		elif actor_info.keys().has("ActorKey") and actor_info["ActorKey"] != '':
 			var actor_key = actor_info['ActorKey']
-			if actor_key == "Player1":
-				new_actor = StoryState.get_player_actor(0)
-			elif actor_key.begins_with("Player2"):
-				new_actor = StoryState.get_player_actor(1)
-				if not new_actor and actor_key.ends_with("_Create"):
-					var player_id = "Player_2:" + str(ResourceUID.create_id())
-					new_actor = ActorLibrary.create_actor("RogueTemplate", {}, player_id)
-					new_actor.FactionIndex = 0
-					StoryState._player_ids[1] = player_id
-			elif actor_key == "Player3":
-				new_actor = StoryState.get_player_actor(2)
-				if not new_actor:
-					var player_id = "Player_3:" + str(ResourceUID.create_id())
-					new_actor = ActorLibrary.create_actor("PriestTemplate", {}, player_id)
-					new_actor.FactionIndex = 0
-					StoryState._player_ids[2] = player_id
-			elif actor_key == "Player4":
-				new_actor = StoryState.get_player_actor(3)
-				if not new_actor:
-					var player_id = "Player_4:" + str(ResourceUID.create_id())
-					new_actor = ActorLibrary.create_actor("MageTemplate", {}, player_id)
-					new_actor.FactionIndex = 0
-					StoryState._player_ids[3] = player_id
+			#if actor_key == "Player1":
+				#new_actor = StoryState.get_player_actor(0)
+			#elif actor_key.begins_with("Player2"):
+				#new_actor = StoryState.get_player_actor(1)
+				#if not new_actor and actor_key.ends_with("_Create"):
+					#var player_id = "Player_2:" + str(ResourceUID.create_id())
+					#new_actor = ActorLibrary.create_actor("RogueTemplate", {}, player_id)
+					#new_actor.FactionIndex = 0
+					#StoryState._player_ids[1] = player_id
+			#elif actor_key == "Player3":
+				#new_actor = StoryState.get_player_actor(2)
+				#if not new_actor:
+					#var player_id = "Player_3:" + str(ResourceUID.create_id())
+					#new_actor = ActorLibrary.create_actor("PriestTemplate", {}, player_id)
+					#new_actor.FactionIndex = 0
+					#StoryState._player_ids[2] = player_id
+			#elif actor_key == "Player4":
+				#new_actor = StoryState.get_player_actor(3)
+				#if not new_actor:
+					#var player_id = "Player_4:" + str(ResourceUID.create_id())
+					#new_actor = ActorLibrary.create_actor("MageTemplate", {}, player_id)
+					#new_actor.FactionIndex = 0
+					#StoryState._player_ids[3] = player_id
+			if actor_key.begins_with("Player"):
+				continue
 			else:
 				new_actor = ActorLibrary.create_actor(actor_key, {})
 				if new_actor:
@@ -169,7 +172,8 @@ func load_init_state(sub_scene_data:Dictionary):
 				add_actor(new_actor, actor_pos)
 		actor_index += 1
 		loading_actor_progressed.emit(actor_count, actor_index)
-	
+	for player_actor in StoryState.list_player_actor():
+		MapController.create_actor_node(player_actor, MapPos.new(0,0,0,0), true)
 	var player_actor = StoryState.get_player_actor()
 	# Check that actor in actually in game
 	player_actor = GameState.get_actor(player_actor.Id)
@@ -191,6 +195,10 @@ func load_init_state(sub_scene_data:Dictionary):
 		dialog_controller.queue_free()
 		dialog_controller = null
 		camera.freeze = false
+	var ui_state_data = {
+		"SpawnArea" = map_data.get("SpawnArea")
+	}
+	ui_control.ui_state_controller.set_ui_state(UiStateController.UiStates.PlaceActors, ui_state_data)
 	
 		
 
@@ -240,6 +248,9 @@ func add_actor(actor:BaseActor, pos:MapPos):
 		# Must call without signals because actors are spawned before MapControlNode._ready()
 		actor_node  = MapController.create_actor_node(actor, pos)
 	actor_node.visible = true
+	actor_node.reparent(MapController.actor_tile_map)
+	if not MapController.actor_nodes.has(actor.Id):
+		MapController.actor_nodes[actor.Id] = actor_node
 	GameState.set_actor_pos(actor, pos)
 	#actor.Que.clear_que()
 	actor.stats.fill_bar_stats()
@@ -343,6 +354,7 @@ func cleanup_combat():
 			actor.Que.clear_que()
 		else:
 			ActorLibrary.delete_actor(actor)
+	ui_control.ui_state_controller.clear_states()
 
 func list_actors_by_order()->Array:
 	var out_list = []

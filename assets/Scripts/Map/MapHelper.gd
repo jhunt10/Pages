@@ -46,3 +46,17 @@ static func get_adjacent_poses(pos:MapPos)->Array:
 			var new_pos = MapPos.new(pos.x + x, pos.y + y, pos.z, pos.dir)
 			out_arr.append(new_pos)
 	return out_arr
+
+static func get_center_of_points(array:Array)->Vector2i:
+	if !array or array.size() == 0:
+		return Vector2i.ZERO
+	var min_x = array[0].x
+	var max_x = array[0].x
+	var min_y = array[0].y
+	var max_y = array[0].y
+	for spot in array:
+		if spot.x > max_x: max_x = spot.x
+		if spot.x < min_x: min_x = spot.x
+		if spot.y > max_y: max_y = spot.y
+		if spot.y < min_y: min_y = spot.y
+	return Vector2i((max_x + min_x) / 2, (max_y + min_y) / 2)

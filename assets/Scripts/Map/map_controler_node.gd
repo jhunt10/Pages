@@ -13,6 +13,7 @@ var grid_tile_map:TileMapLayer:
 @export var item_tile_map:TileMapLayer 
 @export var terrain_path_map:TerrainPathingMap
 @export var marker_tile_map:TileMapLayer
+@export var player_spawn_area_tile_map:TileMapLayer
 @onready var target_area_display:TargetAreaDisplayNode = $TargetAreaDisplayNode
 
 static var game_state:GameStateData:
@@ -70,6 +71,7 @@ func get_map_data()->Dictionary:
 			_cached_marker_paths[marker_name] = child
 	marker_tile_map.hide()
 	map_data['Actors'] = actors
+	map_data['SpawnArea'] = get_player_spawn_area()
 	return map_data
 
 func _get_random_enemy_key()->String:
@@ -96,6 +98,17 @@ func get_spawn_node(marker_name)->ActorSpawnNode:
 	if _cached_spawn_nodes.has(marker_name):
 		return _cached_spawn_nodes[marker_name]
 	return null
+
+var cached_spawn_area
+func get_player_spawn_area()->Array[Vector2i]:
+	if !cached_spawn_area:
+		if player_spawn_area_tile_map:
+			cached_spawn_area = player_spawn_area_tile_map.get_used_cells()
+		else:
+			printerr("MapControlNode: No Player Spawn Area")
+			cached_spawn_area = [Vector2i.ZERO]
+	return cached_spawn_area
+	
 
 func create_actor_node(actor:BaseActor, map_pos:MapPos, wait_to_show:bool=false)->ActorNode:
 	if Engine.is_editor_hint(): return
