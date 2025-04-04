@@ -12,7 +12,7 @@ func _debug_name()->String:
 
 func _init(actor) -> void:
 	super(actor)
-	self._actor.effacts_changed.connect(_build_slots_list)
+	self._actor.effacts_changed.connect(validate_items)
 
 func _load_slots_sets_data()->Array:
 	if LOGGING: print("--Page Slots Loading" )
@@ -28,8 +28,7 @@ func _load_slots_sets_data()->Array:
 		if LOGGING: print("--PageItemQue: %s" % [page_que_item_id])
 		var page_que = ItemLibrary.get_item(page_que_item_id)
 		if page_que:
-			var page_que_slots = page_que.get_load_val("ItemSlotsData", [])
-			out_list.append_array(page_que_slots)
+			out_list = page_que.get_page_slot_data()
 		else:
 			if LOGGING: print("--PageItemQue not found")
 	for effect:BaseEffect in _actor.effects.list_effects():
@@ -60,7 +59,7 @@ func set_page_que_item(page_que:BaseQueEquipment):
 		page_que_item_id = page_que.Id
 	else:
 		page_que_item_id = null
-	_build_slots_list()
+	validate_items()
 
 func validate_items():
 	super()

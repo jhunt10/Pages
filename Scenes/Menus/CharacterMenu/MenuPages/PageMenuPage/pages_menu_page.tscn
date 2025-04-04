@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://c4bhs27nmviba"]
+[gd_scene load_steps=15 format=3 uid="uid://c4bhs27nmviba"]
 
 [ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/PageMenuPage/page_page_control.gd" id="1_1k8ki"]
 [ext_resource type="Texture2D" uid="uid://mpwjrtfjnbth" path="res://Scenes/Menus/CharacterMenu/BookBackground.png" id="2_24rjq"]
@@ -10,8 +10,12 @@
 [ext_resource type="Script" path="res://Scenes/UiNodes/ExpBar/exp_bar_control.gd" id="8_3ocfe"]
 [ext_resource type="PackedScene" uid="uid://b6a64dt8gveex" path="res://Scenes/Menus/CharacterMenu/MenuPages/PageMenuPage/page_slot_button.tscn" id="8_ey4v2"]
 [ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/PageMenuPage/page_slot_set_container.gd" id="8_mwf3u"]
+[ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/PageMenuPage/action_input_preview_container.gd" id="9_l0o1k"]
+[ext_resource type="Texture2D" uid="uid://b1cxya7rtggyh" path="res://assets/Sprites/UI/CharacterEdit/EditIcon.png" id="10_wy4fh"]
+[ext_resource type="Texture2D" uid="uid://cg1yo6bhpalea" path="res://assets/Sprites/UI/QueInputAndDisplay/mini_page_slot.png" id="11_ip8im"]
+[ext_resource type="Texture2D" uid="uid://byq6wa2xqa1mt" path="res://defs/Actions/BasicMovement/Sprites/MoveForward.png" id="12_xhx26"]
 
-[node name="PagePage" type="Control" node_paths=PackedStringArray("title_label", "title_page_button", "premade_page_set", "sets_container", "premade_page_button", "scroll_dots")]
+[node name="PagePage" type="Control" node_paths=PackedStringArray("title_label", "title_page_button", "action_input_preview", "premade_page_set", "sets_container", "premade_page_button", "scroll_dots")]
 custom_minimum_size = Vector2(280, 395)
 layout_mode = 3
 anchors_preset = 0
@@ -20,8 +24,9 @@ offset_bottom = 395.0
 script = ExtResource("1_1k8ki")
 title_label = NodePath("VBoxContainer/TitleContainer/VBoxContainer/HBoxContainer2/FitScaleLabel")
 title_page_button = NodePath("VBoxContainer/TitleContainer/PageSlotButton")
+action_input_preview = NodePath("VBoxContainer/ActionInputPreview")
 premade_page_set = NodePath("VBoxContainer/PageSlotSetContainer")
-sets_container = NodePath("VBoxContainer/VBoxContainer")
+sets_container = NodePath("VBoxContainer/SlotSetsContainer")
 premade_page_button = NodePath("VBoxContainer/PageSlotSetContainer/FlowContainer/PageSlotButton")
 slot_width = 4
 scroll_dots = NodePath("VBoxContainer/HDotScrollBarControl")
@@ -67,7 +72,6 @@ custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Soldier"
-_size_dirty = true
 center_x = true
 
 [node name="Lvl" type="Label" parent="VBoxContainer/TitleContainer/VBoxContainer/HBoxContainer2"]
@@ -126,9 +130,56 @@ offset_bottom = 9.0
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 
+[node name="ColorRect" type="ColorRect" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+color = Color(0.470588, 0, 0, 1)
+
+[node name="ActionInputPreview" type="HBoxContainer" parent="VBoxContainer" node_paths=PackedStringArray("edit_button", "spacer", "premade_page_icon")]
+layout_mode = 2
+script = ExtResource("9_l0o1k")
+edit_button = NodePath("EditButton")
+spacer = NodePath("VSeparator")
+premade_page_icon = NodePath("TextureRect")
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/ActionInputPreview"]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+texture = ExtResource("11_ip8im")
+expand_mode = 1
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/ActionInputPreview/TextureRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("12_xhx26")
+expand_mode = 1
+
+[node name="VSeparator" type="VSeparator" parent="VBoxContainer/ActionInputPreview"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="EditButton" type="TextureRect" parent="VBoxContainer/ActionInputPreview"]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+texture = ExtResource("10_wy4fh")
+expand_mode = 1
+stretch_mode = 3
+
+[node name="ColorRect2" type="ColorRect" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+color = Color(0.470588, 0, 0, 1)
+
 [node name="PageSlotSetContainer" type="VBoxContainer" parent="VBoxContainer" node_paths=PackedStringArray("title_label", "buttons_container")]
+visible = false
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_constants/separation = 0
 script = ExtResource("8_mwf3u")
 title_label = NodePath("Label")
 buttons_container = NodePath("FlowContainer")
@@ -143,16 +194,16 @@ horizontal_alignment = 1
 
 [node name="FlowContainer" type="FlowContainer" parent="VBoxContainer/PageSlotSetContainer"]
 layout_mode = 2
-size_flags_vertical = 3
 theme_override_constants/h_separation = 0
 theme_override_constants/v_separation = 0
 
 [node name="PageSlotButton" parent="VBoxContainer/PageSlotSetContainer/FlowContainer" instance=ExtResource("8_ey4v2")]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer"]
+[node name="SlotSetsContainer" type="VBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_constants/separation = 0
 
 [node name="HDotScrollBarControl" parent="VBoxContainer" instance=ExtResource("7_f7tj7")]
 layout_mode = 2

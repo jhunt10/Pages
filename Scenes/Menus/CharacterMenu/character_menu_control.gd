@@ -295,7 +295,7 @@ func on_tab_pressed(tab_name:String):
 		bag_page.visible = false
 		inventory_container.clear_forced_filters(false)
 		inventory_container.add_forced_filter("Page")
-		inventory_tabs_control.set_tabs(["ClassPage", "Bar", "Movement", "Tactic", "Spell"])
+		inventory_tabs_control.set_tabs(["Passive", "Action", "Movement", "Tactic", "Spell"])
 		
 	if _left_page_context == "Bag":
 		equipment_page.visible = false

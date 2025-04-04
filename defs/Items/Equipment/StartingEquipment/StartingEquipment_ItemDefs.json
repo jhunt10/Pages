@@ -1,44 +1,5 @@
 [
     {
-        "ItemKey":"OldJournal_PageQue",
-        "_ObjectScript": "res://assets/Scripts/Items/Equipment/BaseQueEquipment.gd",
-        "Details":{
-			"DisplayName": "Old Journal",
-			"SnippetDesc": "Our Hero's old journal.",
-			"Description": "An old journal from our Hero's wandering days. Old, but still works.",
-			"Tags": ["Que"],
-			"LargeIcon":"TestBook.png",
-			"SmallIcon":"TestBook.png"
-		},
-        "PagesPerRound": 4,
-        "StatMods": {
-            "PPR": {
-                "DisplayName": "Old Journal",
-                "ModType": "Set",
-                "StatName": "PPR",
-                "Value": 4
-            }
-        },
-        "ItemSlotsData": [
-            {
-                "Key":"Passive",
-                "DisplayName":"",
-                "Count": 1,
-                "FilterData":{
-                    "RequiredTags":"ClassPage"
-                }
-            },
-            {
-                "Key":"Actions",
-                "DisplayName":"",
-                "Count": 6,
-                "FilterData":{
-                    "RequiredTags":"Action"
-                }
-            }
-        ]
-    },
-    {
         "ItemKey":"OldBag_ItemBag",
         "_ObjectScript": "res://assets/Scripts/Items/Equipment/BaseBagEquipment.gd",
         "Details":{

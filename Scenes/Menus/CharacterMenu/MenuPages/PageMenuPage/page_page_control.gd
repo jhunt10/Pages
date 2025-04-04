@@ -11,6 +11,7 @@ signal mouse_exit_item(context, item_key, index)
 @export var title_icon:TextureRect
 @export var title_page_button:PageSlotButton
 
+@export var action_input_preview:ActionInputPreviewContainer
 @export var premade_page_set:PageSlotSetContainer
 @export var sets_container:VBoxContainer
 @export var premade_page_button:PageSlotButton
@@ -25,6 +26,9 @@ var _sub_containers:Dictionary = {}
 var sub_book_pages:Array = []
 var max_hight = 278
 var _buttons:Array = []
+
+var _current_dot_index:int = 0
+var _dot_index_to_set_containers:Dictionary = {}
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -61,6 +65,7 @@ func set_actor(actor:BaseActor):
 	actor_equipment_changed()
 
 func actor_equipment_changed():
+	action_input_preview.set_actor(_actor)
 	#var ques = _actor.equipment.get_equipt_items_of_slot_type("Que")
 	#if !ques or ques.size() == 0:
 		#tit.text = "No Book!"
@@ -92,22 +97,37 @@ func build_sub_containers():
 		title_page_button.set_key(_actor, title_page.Id)
 	_buttons.append(title_page_button)
 	
+	#premade_page_set.hide()
+	var slot_sets_container_hight = 241#sets_container.size.y
+	
 	var slot_set:PageSlotSetContainer = null
 	var last_display_name = ''
 	var raw_index = 1
+	var slot_set_datas = _actor.pages.slot_sets_data
 	for slot_set_data in _actor.pages.slot_sets_data:
 		var slot_key = slot_set_data['Key']
 		if slot_key == "TitlePage":
 			continue
 		var display_name = slot_set_data['DisplayName']
+		# Skip labels if it's just bases and no extra sets yet
+		if slot_key == 'BaseActions' or slot_key == "BasePassives":
+			if last_display_name == '':
+				display_name = ''
+				
+		var req_tags = slot_set_data.get("FilterData", {}).get("RequiredTags", [])
+		if req_tags is String:
+			req_tags = [req_tags]
+			
 		if slot_set == null or last_display_name != display_name:
 			slot_set = premade_page_set.duplicate()
-			slot_set.title_label.text = slot_set_data['DisplayName']
-			if slot_set_data['DisplayName'] == '':
+			slot_set.title_label.text = display_name
+			if display_name == '':
 				slot_set.title_label.hide()
 			slot_set.buttons_container.get_child(0).queue_free()
 			self.sets_container.add_child(slot_set)
 			slot_set.show()
+			
+		last_display_name = display_name
 		_sub_containers[slot_key] = slot_set
 		for index in range(slot_set_data['Count']):
 			var new_button:PageSlotButton = premade_page_button.duplicate()
@@ -118,92 +138,50 @@ func build_sub_containers():
 			new_button.button.mouse_entered.connect(_on_mouse_enter_item_button.bind(raw_index))
 			new_button.button.mouse_exited.connect(_on_mouse_exit_item_button.bind(raw_index))
 			slot_set.buttons_container.add_child(new_button)
-			new_button.is_clipped = slot_key == "Passive"
+			new_button.is_clipped = req_tags.has("Passive")
 			new_button.show()
 			_buttons.append(new_button)
 			raw_index += 1
-#func build_sub_containers():
-	#for page in sub_book_pages:
-		#for container in page:
-			#for child in container.get_children():
-				#child.queue_free()
-			#container.queue_free()
-	#sub_book_pages.clear()
-	#_sub_containers.clear()
-	#
-	#var title_page:BasePageItem = _actor.pages.get_item_in_slot(0)
-	#if title_page:
-		#title_label.text = title_page.details.display_name
-		#title_icon.texture = title_page.get_large_icon()
-	#
-	#var current_hight = 0
-	#var current_width = 0
-	#var current_page_index = 0
-	#sub_book_pages.clear()
-	#sub_book_pages.append([])
-	#var last_title = ""
-	#var sub = null
-	#for slot_set_data in _actor.pages.slot_sets_data:
-		#var slot_key = slot_set_data['Key']
-		#if slot_key == "TitlePage":
-			#continue
-		#var slot_count = slot_set_data['Count']
-		#if !sub or slot_set_data['DisplayName'] != last_title:
-			#sub = _create_sub_container(slot_set_data)
-		#
-		#var estimated_hight = sub.estimate_hight()
-		#
-		#if current_width > 0 and current_width + slot_count <= 4:
-			#current_width += slot_count
-			#sub_book_pages[current_page_index].append(sub)
-			#continue
-			#
-		#if current_hight + estimated_hight > max_hight:
-			#sub_book_pages.append([])
-			#current_page_index += 1
-			#current_width = 0
-			#current_hight = estimated_hight
-		#else:
-			#current_hight += estimated_hight
-			#if slot_count < 4:
-				#current_width += slot_count
-			#else:
-				#current_width = 0
-		#sub_book_pages[current_page_index].append(sub)
-	#show_page(scroll_dots.selected_index)
-	#var page_count = sub_book_pages.size()
-	#scroll_dots.dot_count = sub_book_pages.size()
-	#if page_count < 2:
-		#scroll_dots.hide()
-	#else:
-		#scroll_dots.show()
-
-func show_page(index):
-	
-	for sub_index in range(sub_book_pages.size()):
-		var subs = sub_book_pages[sub_index]
-		for sub in subs:
-			sub.visible = sub_index == index
+	var dot_index = 0
+	var total_hight = 0
+	_dot_index_to_set_containers.clear()
+	for sub_container:PageSlotSetContainer in self.sets_container.get_children():
+		if sub_container.is_queued_for_deletion():
+			continue
+		var has_label = sub_container.title_label.visible
+		var button_count = sub_container.buttons_container.get_child_count() - 1 #Premade
+		var button_rows = ceili(float(button_count) / 4.0)
+		var hight = button_rows * 64
+		if has_label: hight += 30
+		if hight + total_hight > slot_sets_container_hight:
+			dot_index += 1
+		if dot_index > 0:
+			sub_container.hide()
+		if not _dot_index_to_set_containers.has(dot_index):
+			_dot_index_to_set_containers[dot_index] = []
+		_dot_index_to_set_containers[dot_index].append(sub_container)
+		total_hight += hight
+	scroll_dots.dot_count = dot_index + 1
+	_current_dot_index = -1
+	show_page(0)
+	if scroll_dots.dot_count < 2:
+		scroll_dots.hide()
+	else:
+		scroll_dots.show()
 		
-#func _create_sub_container(slot_set_data:Dictionary)->SubBookContainer:
-	#var slot_key = slot_set_data['Key']
-	#var new_sub:SubBookContainer = premade_sub_container.duplicate()
-	#new_sub.set_slot_set_data(_actor, _actor.pages, slot_set_data)
-	#sub_container.add_child(new_sub)
-	#_sub_containers[slot_key] = new_sub
-	#new_sub.item_button_down.connect(_on_item_button_down)
-	#new_sub.item_button_up.connect(_on_item_button_up)
-	#new_sub.mouse_enter_item.connect(_on_mouse_enter_item_button)
-	#new_sub.mouse_exit_item.connect(_on_mouse_exit_item_button)
-	#new_sub.name = "SubContainer_" + slot_key
-	#return new_sub
-
-#func create_page_slot_set(slot_set_data:Dictionary)->PageSlotSetContainer:
-	#var slot_key = slot_set_data['Key'] SubBookContainer
-	#var new_set:PageSlotSetContainer = premade_page_set.duplicate()
-	#_sub_containers[slot_key] = new_set
-	#return new_set
-
+func show_page(dot_index):
+	if _current_dot_index == dot_index:
+		return
+	if _dot_index_to_set_containers.has(dot_index):
+		if _dot_index_to_set_containers.has(_current_dot_index):
+			for sub_container:PageSlotSetContainer in _dot_index_to_set_containers[_current_dot_index]:
+				sub_container.hide()
+		for sub_container:PageSlotSetContainer in _dot_index_to_set_containers[dot_index]:
+			sub_container.show()
+		_current_dot_index = dot_index
+		
+	
+		
 func clear_highlights():
 	for button in _buttons:
 		button.hide_highlight()

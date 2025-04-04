@@ -64,18 +64,32 @@ func validate_items():
 	if LOGGING: print("Validating Itemes for %s : %s" % [_actor.Id, _debug_name()])
 		
 	_build_slots_list()
-	for slot_index in range(_raw_item_slots.size()):
-		var item_id = _raw_item_slots[slot_index]
+	var invalid_items = []
+	var backup_slots = _raw_item_slots.duplicate()
+	_raw_item_slots.fill(null)
+	for old_slot_index in range(backup_slots.size()):
+		var item_id = backup_slots[old_slot_index]
 		if not item_id:
 			continue
 		var item = ItemLibrary.get_item(item_id, false)
-		if not item:
-			_raw_item_slots[slot_index] = null
-		if not _is_item_valid(item):
-			#remove_item(item.Id)
-			printerr("TODO: INvalid Item")
+		var slot = get_first_valid_slot_for_item(item, false)
+		if slot >= 0:
+			_raw_item_slots[slot] = item.Id
+		else:
+			remove_item(item.Id)
+		## Remove missing Items
+		#if not item:
+			#_raw_item_slots[slot_index] = null
+		#else:
+			#var valid_res = _is_item_valid_in_slot(slot_index, item)
+			#if valid_res is String:
+				#invalid_items.append(item)
+				#printerr("validate_items: Item '%s' invalid in slot %s." % [item.Id, slot_index])
+			#else:
+				#_raw_item_slots[slot_index] = 54
 
-func _is_item_valid(item:BaseItem)->bool:
+# Returns true if valid or String message of why the item is not valid.
+func _is_item_valid_in_slot(slot_index, item:BaseItem):
 	return true
 
 func _build_slots_list():
