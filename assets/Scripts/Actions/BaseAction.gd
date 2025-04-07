@@ -84,10 +84,13 @@ func get_qued_icon(turn_index:int, actor:BaseActor =  null)->Texture2D:
 	return get_small_page_icon(actor)
 
 func  get_small_page_icon(actor:BaseActor = null)->Texture2D:
-	if actor and self.get_load_val("UseWeaponIcons", false):
-		var main_weapon:BaseWeaponEquipment = actor.equipment.get_primary_weapon()
-		if main_weapon:
-			return load(main_weapon.details.small_icon_path)
+	if actor:
+		var equip_slot = get_load_val("UseEquipmentIcon", null)
+		if equip_slot:
+			var equipments = actor.equipment.get_equipt_items_of_slot_type(equip_slot)
+			if equipments.size() > 0:
+				var equipment:BaseEquipmentItem = equipments[0]
+				return equipment.get_large_icon()
 	return SpriteCache.get_sprite(details.small_icon_path)
 
 func use_equipment_icon()->bool:

@@ -5,7 +5,7 @@ extends BaseEquipmentItem
 var _cached_slots_data:Array[Dictionary] = []
 
 func get_equipment_slot_type()->String:
-	return "Que"
+	return "Book"
 
 func _init(key:String, def_load_path:String, def:Dictionary, id:String='', data:Dictionary={}) -> void:
 	super(key, def_load_path, def, id, data)
@@ -19,6 +19,11 @@ func get_max_page_count()->int:
 
 func get_pages_per_round()->int:
 	return get_load_val("PagesPerRound", 0)
+
+func get_base_passive_page_limit()->int:
+	return get_load_val("BasePassiveCount", 0)
+func get_base_action_page_limit()->int:
+	return get_load_val("BaseActionCount", 0)
 
 func get_passive_stat_mods()->Array:
 	var ppr_mod = BaseStatMod.new(_id, "PPR", self.details.display_name, BaseStatMod.ModTypes.Set, get_pages_per_round())

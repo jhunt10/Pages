@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://btr6wpgyitqc0"]
+[gd_scene load_steps=40 format=3 uid="uid://btr6wpgyitqc0"]
 
 [ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/ItemDetailsCard/item_details_card.gd" id="1_vq5a0"]
 [ext_resource type="Texture2D" uid="uid://bqmtfkh0uj2bk" path="res://Scenes/Menus/CharacterMenu/MenuPages/ItemDetailsCard/DetailsCard_Background_working.png" id="2_7ol1j"]
@@ -34,6 +34,7 @@
 [ext_resource type="Texture2D" uid="uid://bpa7iavvlbhi5" path="res://assets/Sprites/UI/SymbolIcons/PageCountSymbol.png" id="20_mtmo1"]
 [ext_resource type="Texture2D" uid="uid://dgxwfm0wf7rhw" path="res://assets/Sprites/UI/SymbolIcons/PotencySymbol.png" id="20_nedqy"]
 [ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/ItemDetailsCard/PageQueDetails/page_set_label.gd" id="21_eimff"]
+[ext_resource type="Texture2D" uid="uid://ftpk6w0gsf0c" path="res://assets/Sprites/UI/SymbolIcons/PagePassiveSymbol.png" id="31_y1gd7"]
 [ext_resource type="Texture2D" uid="uid://cb8k5gxes3iaj" path="res://assets/Sprites/UI/SymbolIcons/MoneySymbol_White.png" id="33_era8d"]
 [ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/ItemDetailsCard/buy_controller.gd" id="34_t0s17"]
 [ext_resource type="Script" path="res://Scenes/UiNodes/PatchButton/PatchButton.gd" id="35_416rl"]
@@ -246,6 +247,7 @@ theme = ExtResource("4_xmy3g")
 text = "Item Description hk hbkhjhl jhlkjl ljlkj"
 
 [node name="ActionPageDetailsControl" type="Control" parent="OffsetControl/NinePatchRect/VBoxContainer" node_paths=PackedStringArray("parent_card_control", "description_box", "target_type_label", "cost_container", "range_display", "damage_label", "damage_container", "accuracy_icon", "accuracy_label", "potency_icon", "potency_label")]
+visible = false
 layout_mode = 2
 size_flags_vertical = 3
 script = ExtResource("12_fd6vk")
@@ -677,13 +679,14 @@ size_flags_horizontal = 3
 theme = ExtResource("4_xmy3g")
 text = "Item Description"
 
-[node name="PageQueDetailsControl" type="Control" parent="OffsetControl/NinePatchRect/VBoxContainer" node_paths=PackedStringArray("parent_card_control", "ppr_label", "page_sets_container", "premade_page_set_label", "description_box")]
-visible = false
+[node name="PageQueDetailsControl" type="Control" parent="OffsetControl/NinePatchRect/VBoxContainer" node_paths=PackedStringArray("parent_card_control", "ppr_label", "passive_count_label", "action_count_label", "page_sets_container", "premade_page_set_label", "description_box")]
 layout_mode = 2
 size_flags_vertical = 3
 script = ExtResource("18_oic72")
 parent_card_control = NodePath("../../../..")
-ppr_label = NodePath("VBoxContainer/HBoxContainer3/HBoxContainer/PPRLabel")
+ppr_label = NodePath("VBoxContainer/HBoxContainer3/PPRContainer/PPRLabel")
+passive_count_label = NodePath("VBoxContainer/HBoxContainer3/PassiveCountContainer/PassiveCountLabel")
+action_count_label = NodePath("VBoxContainer/HBoxContainer3/ActionCountContainer/ActionCountLabel")
 page_sets_container = NodePath("VBoxContainer/HBoxContainer3/HBoxContainer2")
 premade_page_set_label = NodePath("VBoxContainer/HBoxContainer3/HBoxContainer2/PageSetLabel")
 description_box = NodePath("VBoxContainer/HBoxContainer2/DescriptionBox")
@@ -699,14 +702,40 @@ grow_vertical = 2
 [node name="HBoxContainer3" type="HBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/PageQueDetailsControl/VBoxContainer"]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/PageQueDetailsControl/VBoxContainer/HBoxContainer3"]
+[node name="PPRContainer" type="HBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/PageQueDetailsControl/VBoxContainer/HBoxContainer3"]
 layout_mode = 2
 
-[node name="PPRIcon" type="TextureRect" parent="OffsetControl/NinePatchRect/VBoxContainer/PageQueDetailsControl/VBoxContainer/HBoxContainer3/HBoxContainer"]
+[node name="PPRIcon" type="TextureRect" parent="OffsetControl/NinePatchRect/VBoxContainer/PageQueDetailsControl/VBoxContainer/HBoxContainer3/PPRContainer"]
 layout_mode = 2
 texture = ExtResource("19_aca8o")
 
-[node name="PPRLabel" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/PageQueDetailsControl/VBoxContainer/HBoxContainer3/HBoxContainer"]
+[node name="PPRLabel" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/PageQueDetailsControl/VBoxContainer/HBoxContainer3/PPRContainer"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("4_xmy3g")
+text = "5"
+
+[node name="PassiveCountContainer" type="HBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/PageQueDetailsControl/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+
+[node name="PageCountIcon" type="TextureRect" parent="OffsetControl/NinePatchRect/VBoxContainer/PageQueDetailsControl/VBoxContainer/HBoxContainer3/PassiveCountContainer"]
+layout_mode = 2
+texture = ExtResource("31_y1gd7")
+
+[node name="PassiveCountLabel" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/PageQueDetailsControl/VBoxContainer/HBoxContainer3/PassiveCountContainer"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("4_xmy3g")
+text = "5"
+
+[node name="ActionCountContainer" type="HBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/PageQueDetailsControl/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+
+[node name="PageCountIcon" type="TextureRect" parent="OffsetControl/NinePatchRect/VBoxContainer/PageQueDetailsControl/VBoxContainer/HBoxContainer3/ActionCountContainer"]
+layout_mode = 2
+texture = ExtResource("20_mtmo1")
+
+[node name="ActionCountLabel" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/PageQueDetailsControl/VBoxContainer/HBoxContainer3/ActionCountContainer"]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("4_xmy3g")
@@ -715,10 +744,6 @@ text = "5"
 [node name="HBoxContainer2" type="HBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/PageQueDetailsControl/VBoxContainer/HBoxContainer3"]
 layout_mode = 2
 
-[node name="PageCountIcon" type="TextureRect" parent="OffsetControl/NinePatchRect/VBoxContainer/PageQueDetailsControl/VBoxContainer/HBoxContainer3/HBoxContainer2"]
-layout_mode = 2
-texture = ExtResource("20_mtmo1")
-
 [node name="PageSetLabel" type="HBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/PageQueDetailsControl/VBoxContainer/HBoxContainer3/HBoxContainer2" node_paths=PackedStringArray("tag_label", "count_label")]
 layout_mode = 2
 theme_override_constants/separation = 1
@@ -726,18 +751,11 @@ script = ExtResource("21_eimff")
 tag_label = NodePath("TagLabel")
 count_label = NodePath("CountLabel")
 
-[node name="TagLabel" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/PageQueDetailsControl/VBoxContainer/HBoxContainer3/HBoxContainer2/PageSetLabel"]
-self_modulate = Color(0.498039, 0, 0, 1)
-layout_mode = 2
-theme = ExtResource("4_xmy3g")
-theme_override_font_sizes/font_size = 12
-text = "Tag"
-
 [node name="Seperator" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/PageQueDetailsControl/VBoxContainer/HBoxContainer3/HBoxContainer2/PageSetLabel"]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("4_xmy3g")
-text = ":"
+text = " +"
 
 [node name="CountLabel" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/PageQueDetailsControl/VBoxContainer/HBoxContainer3/HBoxContainer2/PageSetLabel"]
 self_modulate = Color(0.498039, 0, 0, 1)
@@ -745,10 +763,18 @@ layout_mode = 2
 theme = ExtResource("4_xmy3g")
 text = "3"
 
-[node name="ColorRect" type="ColorRect" parent="OffsetControl/NinePatchRect/VBoxContainer/PageQueDetailsControl/VBoxContainer/HBoxContainer3/HBoxContainer2/PageSetLabel"]
-custom_minimum_size = Vector2(2, 2)
+[node name="Seperator2" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/PageQueDetailsControl/VBoxContainer/HBoxContainer3/HBoxContainer2/PageSetLabel"]
+self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
-color = Color(0.647059, 0.298039, 0.219608, 1)
+theme = ExtResource("4_xmy3g")
+text = ":"
+
+[node name="TagLabel" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/PageQueDetailsControl/VBoxContainer/HBoxContainer3/HBoxContainer2/PageSetLabel"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("4_xmy3g")
+theme_override_font_sizes/font_size = 12
+text = "Tag"
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/PageQueDetailsControl/VBoxContainer"]
 layout_mode = 2

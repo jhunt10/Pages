@@ -94,6 +94,10 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	if first_frame_time == null:
+		first_frame_time = Time.get_ticks_msec()
+		var time_diff = first_frame_time - load_start_time
+		printerr("CharacterPage Load Time: %s | Delta: %s" % [time_diff, delta])
 	if not _dragging and _button_down_pos:
 		var mouse_pos = scale_control.get_local_mouse_position()
 		if mouse_pos.distance_to(_button_down_pos) > _drag_dead_zone:
@@ -105,7 +109,12 @@ func _process(delta: float) -> void:
 		#if event.is_released():
 			#stop_dragging()
 
+var load_start_time
+var first_frame_time
 func set_actor(actor:BaseActor):
+	load_start_time = Time.get_ticks_msec()
+	first_frame_time = null
+	
 	var start_time = Time.get_unix_time_from_system()
 	print("Starting Set Actor: %s" % Time.get_datetime_string_from_unix_time(start_time))
 	_actor = actor
@@ -123,12 +132,14 @@ func set_actor(actor:BaseActor):
 	print("RunTime: %s" % Time.get_time_string_from_unix_time(time_diff))
 
 func close_menu():
-	var page_que = _actor.equipment.get_que_equipment()
-	if not page_que:
-		equipment_page.play_pagebook_warning_animation()
-	else:
-		self.queue_free()
-		Instance = null
+	if _actor:
+		var page_que = _actor.equipment.get_que_equipment()
+		if not page_que:
+			equipment_page.play_pagebook_warning_animation()
+			return
+	
+	self.queue_free()
+	Instance = null
 	
 
 func on_details_card_freed():

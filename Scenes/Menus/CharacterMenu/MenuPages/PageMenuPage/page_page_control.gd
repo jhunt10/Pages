@@ -104,21 +104,25 @@ func build_sub_containers():
 	var last_display_name = ''
 	var raw_index = 1
 	var slot_set_datas = _actor.pages.slot_sets_data
+	var has_extra_slots = slot_set_datas.size() > 3
 	for slot_set_data in _actor.pages.slot_sets_data:
 		var slot_key = slot_set_data['Key']
 		if slot_key == "TitlePage":
 			continue
 		var display_name = slot_set_data['DisplayName']
 		# Skip labels if it's just bases and no extra sets yet
-		if slot_key == 'BaseActions' or slot_key == "BasePassives":
-			if last_display_name == '':
-				display_name = ''
+		if has_extra_slots:
+			if slot_key == 'BaseActions' or slot_key == "BasePassives":
+				if last_display_name == '':
+					display_name = ''
+		elif slot_key == "BasePassives":
+			display_name = ''
 				
 		var req_tags = slot_set_data.get("FilterData", {}).get("RequiredTags", [])
 		if req_tags is String:
 			req_tags = [req_tags]
 			
-		if slot_set == null or last_display_name != display_name:
+		if slot_set == null or last_display_name != display_name or  slot_set_datas.size() == 3:
 			slot_set = premade_page_set.duplicate()
 			slot_set.title_label.text = display_name
 			if display_name == '':

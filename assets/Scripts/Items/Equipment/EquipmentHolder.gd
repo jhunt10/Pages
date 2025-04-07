@@ -23,6 +23,9 @@ func _load_slots_sets_data()->Array:
 	return out_dict.values()
 
 
+func validate_items():
+	_build_slots_list()
+
 #var _actor:BaseActor
 
 #var _slot_equipment_types:Array:
@@ -580,11 +583,6 @@ func get_que_equipment()->BaseQueEquipment:
 	for item in list_equipment():
 		if item is BaseQueEquipment:
 			return item
-	#var bag = _get_single_equipment_of_type("Que")
-	#if bag: 
-		#if bag is BaseQueEquipment:
-			#return bag as BaseQueEquipment
-		#printerr("EquipmentHolder.get_bag_equipment: Equipt Item '%s' is not of type 'BaseQueEquipment'." % [bag.Id])
 	return null
 
 func is_two_handing()->bool:

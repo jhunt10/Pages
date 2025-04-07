@@ -3,6 +3,8 @@ extends Control
 
 @export var parent_card_control:ItemDetailsCard
 @export var ppr_label:Label
+@export var passive_count_label:Label
+@export var action_count_label:Label
 @export var page_sets_container:HBoxContainer
 @export var premade_page_set_label:ItemCard_PageSetLabel
 @export var description_box:RichTextLabel
@@ -17,8 +19,9 @@ func set_item(actor:BaseActor, que:BaseQueEquipment):
 	_actor = actor
 	_item = que
 	description_box.text = que.details.description
-	
 	ppr_label.text = str(que.get_pages_per_round())
+	passive_count_label.text = str(que.get_base_passive_page_limit())
+	action_count_label.text = str(que.get_base_action_page_limit())
 	for page_set in que.get_load_val("ItemSlotsData", []):
 		var new_label:ItemCard_PageSetLabel = premade_page_set_label.duplicate()
 		new_label.tag_label.text = page_set['DisplayName']
