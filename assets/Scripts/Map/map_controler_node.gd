@@ -32,11 +32,12 @@ var _cached_spawn_nodes:Dictionary = {}
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	if Engine.is_editor_hint(): return
+	if not CombatRootControl.Instance:
+		return
 	terrain_path_map.hide()
 	if LOGGING: print("Readying MapCont: Inst:%s" % [CombatRootControl.Instance])
 	CombatRootControl.Instance.actor_spawned.connect(create_actor_node)
 	CombatRootControl.QueController.end_of_frame.connect(_sync_positions)
-	pass # Replace with function body.
 
 func get_map_data()->Dictionary:
 	var map_data = terrain_path_map.get_map_data()
@@ -106,7 +107,8 @@ func get_player_spawn_area()->Array[Vector2i]:
 			cached_spawn_area = player_spawn_area_tile_map.get_used_cells()
 		else:
 			printerr("MapControlNode: No Player Spawn Area")
-			cached_spawn_area = [Vector2i.ZERO]
+			cached_spawn_area = Array([], TYPE_VECTOR2I, "", null)
+			cached_spawn_area.append(Vector2i.ZERO)
 	return cached_spawn_area
 	
 

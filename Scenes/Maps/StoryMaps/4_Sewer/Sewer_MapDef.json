@@ -1,0 +1,21 @@
+{
+    "MapKey": "Sewer",
+    "MapName":"City Sewers",
+    "Description":"A dark and grimy labyrinth of tunnels running beneath The City. Don't swim in the \"water\".",
+    "MapScene": "sewer_map.tscn",
+    "SortOrder": 4,
+    "EnemySet":{
+        "BanditArmored": {
+            "Weight": 30,
+            "IsUnique": false
+        },
+        "BanditArcher": {
+            "Weight": 20,
+            "IsUnique": false
+        },
+        "BanditCaptain": {
+            "Weight": 1,
+            "IsUnique": true
+        }
+    }
+}
