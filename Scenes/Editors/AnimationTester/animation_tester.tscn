@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://Scenes/Editors/AnimationTester/animation_tester.gd" id="1_s85d4"]
 [ext_resource type="Texture2D" uid="uid://io35wpu802fp" path="res://assets/Sprites/UI/BackPatches/Patch_64_12.png" id="2_bq1st"]
 [ext_resource type="Texture2D" uid="uid://ccwj8ucsjhl6w" path="res://assets/Sprites/UI/BackPatches/Patch_64_12_Dark.png" id="3_brxtl"]
-[ext_resource type="PackedScene" uid="uid://uo60871y6t54" path="res://Scenes/Combat/MapObjects/actor_node.tscn" id="4_5aa4s"]
+[ext_resource type="PackedScene" uid="uid://uo60871y6t54" path="res://Scenes/Combat/MapObjects/Actors/ComplexActorNode/complex_actor_node.tscn" id="4_5aa4s"]
 [ext_resource type="Script" path="res://Scenes/UiNodes/loaded_option_button.gd" id="5_a6a08"]
 
 [node name="AnimationTester" type="Control" node_paths=PackedStringArray("actor_node", "load_actor_option_button", "animation_option_button", "ready_button", "execute_button", "cancel_button", "off_hand_box", "rotate_clock_button", "rotate_count_button", "direction_option_button", "exit_button")]

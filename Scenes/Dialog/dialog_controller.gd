@@ -265,7 +265,7 @@ func _on_skip():
 		for block in on_skip_data.get("Blocks", {}):
 			_handle_block(block)
 	if CombatRootControl.Instance:
-		for actor_node:ActorNode in CombatRootControl.Instance.MapController.actor_nodes.values():
+		for actor_node:BaseActorNode in CombatRootControl.Instance.MapController.actor_nodes.values():
 			actor_node.force_finish_movement()
 	var next_part_key = _get_next_part_key()
 	if LOGGING: print("Skipping to part: %s" % [next_part_key])

@@ -84,7 +84,7 @@ static func get_remaining_frames_for_turn()->int:
 		if Instance.QueController and Instance.QueController.execution_state != ActionQueController.ActionStates.Waiting:
 			return ActionQueController.FRAMES_PER_ACTION - Instance.QueController.sub_action_index
 	return 0
-static func get_actor_node(actor_id:String)->ActorNode:
+static func get_actor_node(actor_id:String)->BaseActorNode:
 	if !Instance: return null
 	if !Instance.MapController: return null
 	var actor_nodes = Instance.MapController.actor_nodes
@@ -292,7 +292,7 @@ func create_new_missile_node(missile):
 	MapController.add_missile_node(missile, new_node)
 
 func create_flash_text_on_actor(actor:BaseActor, value:String, color:Color):
-	var actor_node:ActorNode = MapController.actor_nodes[actor.Id]
+	var actor_node:BaseActorNode = MapController.actor_nodes[actor.Id]
 	actor_node.vfx_holder.flash_text_controller.add_flash_text(value, FlashTextController.FlashTextType.Normal_Dmg)
 	#create_flash_text(actor_node.vfx_holder, value, color)
 	

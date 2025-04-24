@@ -1,23 +1,25 @@
 [gd_scene load_steps=23 format=3 uid="uid://uo60871y6t54"]
 
-[ext_resource type="Script" path="res://Scenes/Combat/MapObjects/actor_node.gd" id="1_wfbib"]
+[ext_resource type="Script" path="res://Scenes/Combat/MapObjects/Actors/ComplexActorNode/complex_actor_node.gd" id="1_wfbib"]
 [ext_resource type="Texture2D" uid="uid://cp2wc5s8ju613" path="res://defs/Actors/Template_SpriteSheet.png" id="2_g31ob"]
-[ext_resource type="PackedScene" uid="uid://dooeg4ake0jdk" path="res://Scenes/Combat/MapObjects/actor_hand_node.tscn" id="3_dpgwv"]
-[ext_resource type="Script" path="res://Scenes/Combat/MapObjects/actor_body_sprite.gd" id="3_ltbfj"]
+[ext_resource type="PackedScene" uid="uid://dooeg4ake0jdk" path="res://Scenes/Combat/MapObjects/Actors/ComplexActorNode/actor_hand_node.tscn" id="3_dpgwv"]
+[ext_resource type="Script" path="res://Scenes/Combat/MapObjects/Actors/ComplexActorNode/actor_body_sprite.gd" id="3_ltbfj"]
 [ext_resource type="AnimationLibrary" uid="uid://b5jo3ljcsi13k" path="res://animations/facing.tres" id="4_fix78"]
 [ext_resource type="AnimationLibrary" uid="uid://dgn4snawpxnvc" path="res://animations/move_turn_left.tres" id="5_dtvap"]
 [ext_resource type="Script" path="res://Scenes/Combat/MapObjects/vfx_holder.gd" id="6_eul5e"]
-[ext_resource type="Animation" uid="uid://rgtphnvb7x0w" path="res://animations/death_effect.res" id="6_lp0y8"]
 [ext_resource type="AnimationLibrary" uid="uid://cgmk38o40y6ri" path="res://animations/move_turn_right.tres" id="6_ub6w0"]
 [ext_resource type="AnimationLibrary" uid="uid://k2vqtcfqwwvq" path="res://animations/move_walk.tres" id="7_0nd28"]
 [ext_resource type="AnimationLibrary" uid="uid://bw7ib64yurx24" path="res://animations/move_walk_back.tres" id="7_7k4lr"]
 [ext_resource type="PackedScene" uid="uid://eox4g5msr5a" path="res://Scenes/Combat/Effects/flash_text_controller.tscn" id="7_t0kdx"]
 [ext_resource type="AnimationLibrary" uid="uid://wha54qyt851d" path="res://animations/move_walk_forward.tres" id="8_h2r8d"]
+[ext_resource type="Animation" uid="uid://drf4n1t1ononj" path="res://Scenes/Combat/MapObjects/Actors/death_effect_animation.res" id="8_nfimc"]
+[ext_resource type="Animation" uid="uid://bch7n8vavthc6" path="res://Scenes/Combat/MapObjects/Actors/shake_effect_animation.res" id="9_co1y3"]
 [ext_resource type="AnimationLibrary" uid="uid://p5lde56584bj" path="res://animations/move_walk_left.tres" id="9_h7joc"]
 [ext_resource type="AnimationLibrary" uid="uid://5r01u3xg2eii" path="res://animations/move_walk_right.tres" id="10_88tvj"]
 [ext_resource type="Texture2D" uid="uid://dj76get1aahli" path="res://Scenes/Menus/SaveLoadMenu/Button_Patch_32_6.png" id="14_6kv2p"]
 [ext_resource type="Texture2D" uid="uid://dgfxtmtdjfgey" path="res://assets/Sprites/UI/QuePathArrow.png" id="14_38ite"]
 [ext_resource type="Script" path="res://Scenes/Combat/MapObjects/aura_holder.gd" id="18_4ue2w"]
+[ext_resource type="AnimationLibrary" uid="uid://dx31wifagmnpk" path="res://Scenes/Combat/MapObjects/Actors/damage_animation_library.res" id="19_bp28d"]
 
 [sub_resource type="Animation" id="Animation_y5og4"]
 resource_name = "RESET"
@@ -227,49 +229,27 @@ tracks/16/keys = {
 "values": [0]
 }
 
-[sub_resource type="Animation" id="Animation_d7ja8"]
-resource_name = "shake_effect"
-length = 0.75
-step = 0.15
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("ActorMotionNode/ActorSpriteNode:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.15, 0.3, 0.45, 0.6, 0.75),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [Vector2(0, 0), Vector2(-3, 0), Vector2(3, 0), Vector2(-2, 0), Vector2(1, 0), Vector2(0, 0)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_yjxky"]
 _data = {
 "RESET": SubResource("Animation_y5og4"),
-"death_effect": ExtResource("6_lp0y8"),
-"shake_effect": SubResource("Animation_d7ja8")
+"death_effect": ExtResource("8_nfimc"),
+"shake_effect": ExtResource("9_co1y3")
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_5bj6a"]
-_data = {
-"death_effect": ExtResource("6_lp0y8")
-}
-
-[node name="ActorNode" type="Node2D" node_paths=PackedStringArray("vfx_holder", "aura_holder", "body_animation", "death_animation", "path_arrow", "offset_node", "actor_sprite", "main_hand_node", "off_hand_node", "actor_motion_node")]
+[node name="ActorNode" type="Node2D" node_paths=PackedStringArray("main_hand_node", "off_hand_node", "body_animation", "vfx_holder", "aura_holder", "actor_sprite", "path_arrow", "actor_motion_node", "offset_node", "damage_animation_player")]
 y_sort_enabled = true
 script = ExtResource("1_wfbib")
 editing_facing_direction = 2
-vfx_holder = NodePath("ActorMotionNode/VFXHolder")
-aura_holder = NodePath("AuraHolder")
-body_animation = NodePath("AnimationPlayer")
-death_animation = NodePath("DeathAnimationPlayer")
-path_arrow = NodePath("PathArrow")
-offset_node = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode")
-actor_sprite = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/ActorSprite")
 main_hand_node = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/MainHandNode")
 off_hand_node = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/OffHandNode")
+body_animation = NodePath("AnimationPlayer")
+vfx_holder = NodePath("ActorMotionNode/VFXHolder")
+aura_holder = NodePath("AuraHolder")
+actor_sprite = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/ActorSprite")
+path_arrow = NodePath("PathArrow")
 actor_motion_node = NodePath("ActorMotionNode")
+offset_node = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode")
+damage_animation_player = NodePath("DamageAnimationPlayer")
 metadata/_edit_horizontal_guides_ = [-40.0]
 
 [node name="ColorRect" type="ColorRect" parent="."]
@@ -341,9 +321,9 @@ visible = false
 z_index = 8
 texture = ExtResource("14_38ite")
 
-[node name="DeathAnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="DamageAnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_5bj6a")
+"DamageAnimations": ExtResource("19_bp28d")
 }
 
 [node name="AuraHolder" type="Node2D" parent="."]

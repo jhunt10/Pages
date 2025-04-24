@@ -5,7 +5,7 @@ extends Node2D
 @onready var tile_sprite:Sprite2D = $Sprite2D
 
 var _zone:BaseZone
-var _aura_actor_node:ActorNode
+var _aura_actor_node:BaseActorNode
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

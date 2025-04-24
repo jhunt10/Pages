@@ -16,15 +16,6 @@ extends Sprite2D
 		frame_index = max(0, min(self.hframes-1, val))
 		self.frame_coords.x = frame_index
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-
 func get_sprite_center()->Vector2:
 	var sprite_bounds = get_sprite_bounds()
 	var texture_size = self.get_rect().size

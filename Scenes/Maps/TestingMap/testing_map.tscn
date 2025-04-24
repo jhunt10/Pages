@@ -1202,6 +1202,7 @@ tile_size = Vector2i(32, 32)
 
 [node name="MapNode" type="Node2D" node_paths=PackedStringArray("zone_tile_map", "actor_tile_map", "item_tile_map", "terrain_path_map", "marker_tile_map", "player_spawn_area_tile_map")]
 script = ExtResource("1_mpwod")
+map_name = ""
 zone_tile_map = NodePath("ZoneTileMapLayer")
 actor_tile_map = NodePath("ActorTileMapLayer")
 item_tile_map = NodePath("ItemTileMapLayer")

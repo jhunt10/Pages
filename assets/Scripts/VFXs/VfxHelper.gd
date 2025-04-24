@@ -10,7 +10,7 @@ static func create_attack_vfx_node(from_actor:BaseActor, to_actor:BaseActor, bul
 
 static func create_damage_effect(target_actor:BaseActor, vfx_key:String, vfx_data:Dictionary):
 	if FORCE_RELOAD: MainRootNode.vfx_libray.reload_vfxs()
-	var target_actor_node:ActorNode = CombatRootControl.get_actor_node(target_actor.Id)
+	var target_actor_node:BaseActorNode = CombatRootControl.get_actor_node(target_actor.Id)
 	if !target_actor_node:
 		printerr("Failed to find actor node for: %s" % [target_actor.Id])
 		return
@@ -29,8 +29,7 @@ static func create_damage_effect(target_actor:BaseActor, vfx_key:String, vfx_dat
 		return
 	#target_actor_node.vfx_holder.add_vfx(vfx_node)
 	var damage_number = vfx_data.get("DamageNumber", 0)
-	if damage_number >= 0:
-		if damage_number > 0 and vfx_node._data.get("ShakeActor", true):
+	if damage_number <= 0 and vfx_node._data.get("ShakeActor", true):
 			target_actor_node.play_shake()
 
 
@@ -38,7 +37,7 @@ static func create_vfx_on_actor(actor:BaseActor, vfx_key:String, vfx_data:Dictio
 	if FORCE_RELOAD: MainRootNode.vfx_libray.reload_vfxs()
 	var actor_node = CombatRootControl.get_actor_node(actor.Id)
 	if not actor_node:
-		printerr("VfxHelper.create_vfx_on_actor: No ActorNode found for Actor '%s'." % [actor.Id])
+		printerr("VfxHelper.create_vfx_on_actor: No BaseActorNode found for Actor '%s'." % [actor.Id])
 		return null
 	
 	var vfx_def = MainRootNode.vfx_libray.get_vfx_def(vfx_key)

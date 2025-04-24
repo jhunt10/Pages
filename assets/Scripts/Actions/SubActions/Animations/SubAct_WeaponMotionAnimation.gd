@@ -21,7 +21,7 @@ func get_prop_enum_values(prop_key:String)->Array:
 
 func do_thing(parent_action:BaseAction, subaction_data:Dictionary, metadata:QueExecutionData,
 				game_state:GameStateData, actor:BaseActor)->bool:
-	var actor_node:ActorNode = CombatRootControl.get_actor_node(actor.Id)
+	var actor_node:BaseActorNode = CombatRootControl.get_actor_node(actor.Id)
 	if !actor_node:
 		return BaseSubAction.Success
 	

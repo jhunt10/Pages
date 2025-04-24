@@ -37,7 +37,7 @@ func do_thing(parent_action:BaseAction, subaction_data:Dictionary, metadata:QueE
 	#if subaction_data.keys().has("AnimationSpeed"):
 		#animation_speed = subaction_data.get("AnimationSpeed", 1.0)
 	#print("SubAct Animation: " + animation)
-	#var actor_node:ActorNode = CombatRootControl.Instance.MapController.actor_nodes.get(actor.Id)
+	#var actor_node:BaseActorNode = CombatRootControl.Instance.MapController.actor_nodes.get(actor.Id)
 	#if actor_node and animation:
 		#if animation.begins_with("move_"):
 			#var actor_pos = game_state.get_actor_pos(actor)

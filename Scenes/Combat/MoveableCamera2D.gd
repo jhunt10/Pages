@@ -16,7 +16,7 @@ var freeze:bool:
 
 var locked_for_cut_scene:bool = false
 
-var following_actor_node:ActorNode
+var following_actor_node:BaseActorNode
 
 var is_auto_panning:bool:
 	get: return auto_pan_start_pos != null

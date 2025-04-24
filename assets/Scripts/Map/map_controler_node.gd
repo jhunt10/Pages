@@ -112,13 +112,14 @@ func get_player_spawn_area()->Array[Vector2i]:
 	return cached_spawn_area
 	
 
-func create_actor_node(actor:BaseActor, map_pos:MapPos, wait_to_show:bool=false)->ActorNode:
+func create_actor_node(actor:BaseActor, map_pos:MapPos, wait_to_show:bool=false)->BaseActorNode:
 	if Engine.is_editor_hint(): return
 	if LOGGING: print("MapControllerNode: Creating Actor Node: %s" % [actor.Id])
 	if actor_nodes.keys().has(actor.Id):
 		return actor_nodes[actor.Id]
 	
-	var new_node:ActorNode = load("res://Scenes/Combat/MapObjects/actor_node.tscn").instantiate()
+	var actor_node_path = actor.get_load_val("ScenePath", "res://Scenes/Combat/MapObjects/Actors/SimpleActorNode/simple_actor_node.tscn")
+	var new_node:BaseActorNode = load(actor_node_path).instantiate()
 	actor_nodes[actor.Id] = new_node
 	actor_tile_map.add_child(new_node)
 	new_node.position = actor_tile_map.map_to_local(map_pos.to_vector2i())
@@ -135,7 +136,7 @@ func _on_actor_node_leave_tree(actor_id):
 
 func delete_actor_node(actor:BaseActor):
 	if Engine.is_editor_hint(): return
-	var node:ActorNode = actor_nodes.get(actor.Id, null)
+	var node:BaseActorNode = actor_nodes.get(actor.Id, null)
 	if !node:
 		return
 	node.queue_free()
@@ -204,7 +205,7 @@ func _sync_positions():
 
 #func _sync_actor_positions():
 	#if Engine.is_editor_hint(): return
-	#for node:ActorNode in actor_nodes.values():
+	#for node:BaseActorNode in actor_nodes.values():
 		#var actor = game_state.get_actor(node.Actor.Id, true)
 		#if !node:
 			#if LOGGING: printerr("Failed to find node for actor: ", actor.Id)

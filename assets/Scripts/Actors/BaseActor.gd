@@ -23,8 +23,8 @@ signal on_death()
 signal sprite_changed()
 
 var Que:ActionQue
-#var node:ActorNode
-var sprite:ActorSprite
+#var node:BaseActorNode
+var sprite:ActorSpriteHolder
 var stats:StatHolder
 var effects:EffectHolder
 var items:BagItemHolder
@@ -70,7 +70,7 @@ func _init(key:String, load_path:String, def:Dictionary, id:String, data:Diction
 	var stat_data = _def["Stats"]
 	ai_def = get_load_val("AiData", {})
 	aggro = AggroHandler.new(self)
-	sprite = ActorSprite.new(self)
+	sprite = ActorSpriteHolder.new(self)
 	stats = StatHolder.new(self, stat_data)
 	stats.stats_changed.connect(_on_stat_change)
 	effects = EffectHolder.new(self)

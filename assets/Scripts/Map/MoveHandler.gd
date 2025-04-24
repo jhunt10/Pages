@@ -74,7 +74,7 @@ static func handle_movement(game_state:GameStateData, moving_actor:BaseActor,
 			if LOGGING: print("\t\tPush success")
 			if not simulated:
 				DamageHelper.handle_push_damage(moving_actor, blocking_actor, game_state)
-				var blocking_node:ActorNode = CombatRootControl.Instance.MapController.actor_nodes.get(blocking_actor.Id)
+				var blocking_node:BaseActorNode = CombatRootControl.Instance.MapController.actor_nodes.get(blocking_actor.Id)
 				blocking_node.set_move_destination(push_res, 24, false)
 			game_state.set_actor_pos(blocking_actor, push_res, simulated)
 		else:

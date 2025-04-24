@@ -3,7 +3,7 @@ extends Control
 
 @export var actor_sprite:Sprite2D
 
-var actor_node:ActorNode
+var actor_node:BaseActorNode
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

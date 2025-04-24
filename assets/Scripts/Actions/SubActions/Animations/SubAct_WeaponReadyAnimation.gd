@@ -33,7 +33,7 @@ func do_thing(parent_action:BaseAction, subaction_data:Dictionary, metadata:QueE
 	if animation == "":
 		return BaseSubAction.Success
 	
-	var actor_node:ActorNode = CombatRootControl.get_actor_node(actor.Id)
+	var actor_node:BaseActorNode = CombatRootControl.get_actor_node(actor.Id)
 	if !actor_node:
 		return BaseSubAction.Success
 	

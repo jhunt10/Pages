@@ -1,7 +1,7 @@
 class_name AnimationTester
 extends Control
 
-@export var actor_node:ActorNode
+@export var actor_node:BaseActorNode
 @export var load_actor_option_button:LoadedOptionButton
 @export var animation_option_button:LoadedOptionButton
 @export var ready_button:Button

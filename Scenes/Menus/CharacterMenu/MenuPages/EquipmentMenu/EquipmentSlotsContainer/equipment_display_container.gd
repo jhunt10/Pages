@@ -6,7 +6,7 @@ signal item_button_up(item_id, index)
 signal mouse_enter_item(item_id, index)
 signal mouse_exit_item(item_id, index)
 
-@export var actor_node:ActorNode
+@export var actor_node:BaseActorNode
 @export var armor_lable:Label
 @export var ward_label:Label
 @export var phyatk_label:Label

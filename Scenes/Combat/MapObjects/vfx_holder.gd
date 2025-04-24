@@ -1,7 +1,7 @@
 class_name VfxHolder
 extends Node2D
 
-@export var actor_node:ActorNode
+@export var actor_node:BaseActorNode
 @export var flash_text_controller:FlashTextController
 
 # Satalite Node on the ActorSprite for VFXs that follow the Actor

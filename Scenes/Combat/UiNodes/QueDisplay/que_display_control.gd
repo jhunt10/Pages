@@ -13,7 +13,7 @@ const PADDING = 8
 @export var show_gaps:bool
 
 var _actor:BaseActor
-var _actor_node:ActorNode:
+var _actor_node:BaseActorNode:
 	get: return CombatRootControl.Instance.MapController.actor_nodes.get(_actor.Id)
 var _slot_buttons = []
 var _real_slots = []
@@ -24,13 +24,8 @@ var _delayed_init = false
 
 func _ready():
 	premade_que_button.visible = false
-	#if !show_preview_movement:
-		#que_path_arrow.visible = false
 	CombatRootControl.QueController.que_ordering_changed.connect(_build_slots)
 	CombatRootControl.QueController.start_of_round.connect(_hide_preview)
-	#CombatRootControl.QueController.end_of_round.connect(_show_preview_path)
-	#CombatRootControl.QueController.start_of_turn.connect(_set_action_highlight)
-	#CombatRootControl.QueController.end_of_turn.connect(_hide_action_highlight)
 	
 	if _delayed_init:
 		portrait.texture = _actor.sprite.get_portrait_sprite()
@@ -128,15 +123,12 @@ func _slot_pressed(index:int):
 	_actor.Que.delete_at_index(index)
 
 func _hide_preview():
-	_actor_node.hide_path_arrow()
 	if _target_display_key:
 		CombatRootControl.Instance.MapController.target_area_display.clear_display(_target_display_key)
 
 func preview_que_path(add_movement:MapPos=null):
 	if !_actor or !_actor_node:
 		return
-	#if not show_preview_movement or !que_path_arrow:
-		#return
 	var actor_pos = CombatRootControl.Instance.GameState.get_actor_pos(_actor)
 	var preview_pos = _actor.Que.get_movement_preview_pos()
 	if add_movement:

@@ -5,7 +5,7 @@ extends BaseVfxNode
 @export var animation_player:AnimationPlayer
 
 var source_actor_id:String
-var source_actor_node:ActorNode
+var source_actor_node:BaseActorNode
 var origin_position
 var damage_vfx_datas = []
 

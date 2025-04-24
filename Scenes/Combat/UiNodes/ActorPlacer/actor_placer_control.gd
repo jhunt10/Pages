@@ -114,7 +114,7 @@ func _on_actor_button_pressed(actor_id):
 	actor_selected.emit(actor_id)
 
 func put_actor_in_spot(actor_id, spot, is_valid:bool = true):
-	var actor_node:ActorNode = _actor_id_to_actor_node.get(actor_id)
+	var actor_node:BaseActorNode = _actor_id_to_actor_node.get(actor_id)
 	actor_node.reparent(_spawn_tile_map)
 	if actor_node:
 		actor_node.position = _spawn_tile_map.map_to_local(spot)
@@ -125,11 +125,11 @@ func put_actor_in_spot(actor_id, spot, is_valid:bool = true):
 		actor_node.modulate = Color.RED
 
 func set_actor_rotation(placing_actor_id, direction):
-	var actor_node:ActorNode = _actor_id_to_actor_node.get(placing_actor_id)
+	var actor_node:BaseActorNode = _actor_id_to_actor_node.get(placing_actor_id)
 	if actor_node:
 		actor_node.set_facing_dir(direction)
 
 func unplace_actor(actor_id):
-	var actor_node:ActorNode = _actor_id_to_actor_node.get(actor_id)
+	var actor_node:BaseActorNode = _actor_id_to_actor_node.get(actor_id)
 	actor_node.hide()
 	_actor_id_to_buttons[actor_id].actor_icon.self_modulate = Color.WHITE

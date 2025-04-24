@@ -1508,6 +1508,7 @@ scene_root = NodePath("../../..")
 visible = false
 
 [node name="MapNode" parent="." instance=ExtResource("7_ce1oe")]
+map_name = ""
 
 [node name="Cart" type="Sprite2D" parent="."]
 visible = false

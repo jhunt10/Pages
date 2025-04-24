@@ -1,4 +1,4 @@
-class_name ActorSprite
+class_name ActorSpriteHolder
 
 var _actor:BaseActor
 var _cached_body_sprite:Texture2D

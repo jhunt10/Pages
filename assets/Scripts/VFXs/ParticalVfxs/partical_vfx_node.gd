@@ -8,6 +8,9 @@ extends BaseVfxNode
 func _on_start():
 	if vfx_holder:
 		var actor_node = vfx_holder.actor_node
+		if not actor_node:
+			printerr("AilmentVfxNode: vfx_holder.actor_node is null")
+			return
 		var sprite_bounds = actor_node.actor_sprite.get_sprite_bounds()
 		
 		if actor_modulate != Color.WHITE:

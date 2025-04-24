@@ -21,7 +21,7 @@ func do_thing(parent_action:BaseAction, subaction_data:Dictionary, metadata:QueE
 	var actor_pos = game_state.get_actor_pos(actor)
 	var dest_pos =  MoveHandler.relative_pos_to_real(actor_pos, move)
 	
-	var actor_node:ActorNode = CombatRootControl.get_actor_node(actor.Id)
+	var actor_node:BaseActorNode = CombatRootControl.get_actor_node(actor.Id)
 	if actor_node:
 		var animation_frames = subaction_data.get("AnimationFrames", CombatRootControl.get_remaining_frames_for_turn())
 		actor_node.set_move_destination(dest_pos, animation_frames, true)

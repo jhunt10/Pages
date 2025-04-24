@@ -9,7 +9,7 @@ var id:String
 var _data:Dictionary
 var _state:States = States.Waiting
 var vfx_holder:VfxHolder
-var actor_node:ActorNode:
+var actor_node:BaseActorNode:
 	get():
 		if vfx_holder:
 			return vfx_holder.actor_node
