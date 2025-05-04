@@ -125,12 +125,19 @@ static func handle_attack(
 	# Apply damage and create effects
 	for defender:BaseActor in defenders:
 		var sub_event:AttackSubEvent = attack_event.sub_events[defender.Id]
+		var defender_node = CombatRootControl.get_actor_node(defender.Id)
+		
+		var flash_text_numbers = []
+		var resisted_effect = false
+		
 		# Apply damage 
 		for damage_event:DamageEvent in sub_event.damage_events:
 			defender.stats.apply_damage(damage_event.final_damage)
 			
-			var defender_node = CombatRootControl.get_actor_node(defender.Id)
-			defender_node.vfx_holder.flash_text_controller.add_flash_text(str(damage_event.final_damage), FlashTextController.FlashTextType.Normal_Dmg)
+			flash_text_numbers.append({
+				"Value":damage_event.final_damage,
+				"Type": FlashTextController.FlashTextType.Normal_Dmg
+			})
 			
 			damage_event.was_applied = true
 			if defender.is_dead:
@@ -141,13 +148,19 @@ static func handle_attack(
 		for effect_data_key:String in attack_event.effect_datas.keys():
 			# TODO: Add a "Resist" flash text for effects that triggered but failed to apply
 			var effect_details:Dictionary = attack_event.effect_datas[effect_data_key]
-			var effect_result:Dictionary = sub_event.applied_effect_datas.get("effect_data_key", {})
-			if not effect_result.get("WasApplied", false):
-				continue
-			var effect_key = effect_details.get("EffectKey")
-			var effect_data = effect_details.get("EffectData")
-			var effect = EffectHelper.create_effect(defender, attacker, effect_key, effect_data, game_state)
-			
+			var effect_result:Dictionary = sub_event.applied_effect_datas.get(effect_data_key, {})
+			if effect_result.get("WasApplied", false):
+				var effect_key = effect_details.get("EffectKey")
+				var effect_data = effect_details.get("EffectData", {})
+				var effect = EffectHelper.create_effect(defender, attacker, effect_key, effect_data, game_state)
+			else:
+				resisted_effect = true
+				
+		# Hack Damage Numbers
+		if resisted_effect:
+			defender_node.vfx_holder.flash_text_controller.add_flash_text("Resist", FlashTextController.FlashTextType.Blocked_Dmg)
+		for flash_text in flash_text_numbers:
+			defender_node.vfx_holder.flash_text_controller.add_flash_text(str(flash_text['Value']), flash_text['Type'])
 		
 	attack_event.attack_stage = AttackStage.Resolved
 	
@@ -228,20 +241,21 @@ static func _roll_for_effects(attacker:BaseActor, defender:BaseActor, attack_eve
 		# Effect does not apply to defender
 		if not _can_effect_apply(attack_effect_data, attacker, defender, attack_event, sub_event ):
 			continue
-		var chance_to_apply = attack_effect_data.get("ChanceOnHit")
+		var chance_to_apply = attack_effect_data.get("ApplicationChance", 1)
 		var application_chance = (float(net_protection * chance_to_apply)/100.0)
 		var roll = randf()
 		var applied = roll < application_chance
 		sub_event.applied_effect_datas[attack_effect_key] = {
 			'WasApplied': applied,
 			'ApplicationRoll': roll,
+			'ApplicationChance': application_chance,
 			'NetProtection': net_protection
 		}
 
 static func  _can_effect_apply(attack_effect_data:Dictionary, attacker:BaseActor, defender:BaseActor, attack_event:AttackEvent, sub_event:AttackSubEvent):
 	var conditions = attack_effect_data.get("Conditions", {})
 	var faction_filter = conditions.get("DefenderFactionFilters", [])
-	if not FilterHelper.check_faction_filter(attack_event.attacker.Id, attack_event.attacker.FactionIndex, faction_filter, defender):
+	if not FilterHelper.check_faction_filter(attack_event.attacker_id, attack_event.attacker_faction, faction_filter, defender):
 		return false
 	var source_tag_filters = conditions.get("DefenderTagFilters", [])
 	for source_tag_filter in source_tag_filters:

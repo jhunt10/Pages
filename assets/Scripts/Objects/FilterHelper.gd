@@ -8,6 +8,8 @@ static func check_faction_filter(
 	faction_filters:Array, 
 	checking_actor:BaseActor
 )->bool:
+	if faction_filters.size() == 0:
+		return true
 	for fact_filter in faction_filters:
 		if fact_filter == "Self":
 			if source_actor_id == checking_actor.Id:

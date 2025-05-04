@@ -275,7 +275,7 @@ func trigger_on_damage_dealt(game_state:GameStateData, damage_event:DamageEvent)
 			sub_effect.on_damage_dealt(self, sub_effect_data, game_state, damage_event)
 
 func trigger_on_attack(attack_event:AttackEvent, game_state:GameStateData):
-	var is_attacking = attack_event.attacker.Id == get_load_val("EffectedActorId", null)
+	var is_attacking = attack_event.attacker_id == get_load_val("EffectedActorId", null)
 	var is_defending = attack_event.defender_ids.has(get_load_val("EffectedActorId", null))
 	#
 	#var attacking_trigger = null

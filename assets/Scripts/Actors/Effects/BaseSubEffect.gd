@@ -22,9 +22,9 @@ func get_triggers(_effect:BaseEffect, subeffect_data:Dictionary)->Array:
 func get_active_stat_mods(_effect:BaseEffect, _subeffect_data:Dictionary)->Array:
 	return []
 	
-func get_active_damage_mods(_effect:BaseEffect, _subeffect_data:Dictionary)->Array:
+func get_active_damage_mods(_effect:BaseEffect, _subeffect_data:Dictionary)->Dictionary:
 	var mods = _subeffect_data.get("DamageMods", {}).duplicate(true)
-	return mods.values()
+	return mods
 
 func get_active_attack_mods(_effect:BaseEffect, _subeffect_data:Dictionary)->Dictionary:
 	var mods = _subeffect_data.get("AttackMods", {}).duplicate(true)
