@@ -47,6 +47,7 @@ func load_and_show(min_actors:int=1, max_actors:int=4):
 	var actors = StoryState.list_player_actor()
 	var buttons = actor_buttons_container.get_children()
 	_spawn_tile_map = CombatRootControl.Instance.MapController.player_spawn_area_tile_map
+	var first_actor_id = ''
 	var index = 0
 	for button in buttons:
 		if not button is ActorPlacerButton:
@@ -55,6 +56,8 @@ func load_and_show(min_actors:int=1, max_actors:int=4):
 			button.hide()
 		else:
 			var actor = actors[index]
+			if first_actor_id == '':
+				first_actor_id = actor.Id
 			button.actor_icon.texture = actor.sprite.get_portrait_sprite()
 			button.highlight.hide()
 			button.pressed.connect(_on_actor_button_pressed.bind(actor.Id))
@@ -82,6 +85,7 @@ func load_and_show(min_actors:int=1, max_actors:int=4):
 	else:
 		min_max_actor_label.text = str(min_actor_count) + "-" + str(max_actor_count)
 	set_placed_actor_count(0)
+	_on_actor_button_pressed(first_actor_id)
 
 func set_placed_actor_count(count:int):
 	placed_actor_label.text = str(count)

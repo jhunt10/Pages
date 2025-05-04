@@ -122,16 +122,32 @@ func get_target_mods()->Array:
 		out_list.append(mod_data.duplicate())
 	return out_list
 
-func get_damage_mods(taking_damage:bool)->Array:
-	var stat_mod_datas:Dictionary = get_load_val("DamageMods", {})
-	var out_list = []
-	for mod_data in stat_mod_datas.values():
+func get_damage_mods()->Dictionary:
+	var mod_datas:Dictionary = get_load_val("DamageMods", {})
+	var out_dict = {}
+	for mod_key in mod_datas.keys():
+		var mod_data = mod_datas[mod_key]
+		if mod_data.has("DamageModKey"):
+			mod_key = mod_data['DamageModKey']
+		else:
+			mod_data['DamageModKey'] = mod_key
 		if not mod_data.has("DisplayName"):
 			mod_data['DisplayName'] = self.details.display_name
-		if taking_damage: 
-			if mod_data.get("OnTakeDamage", false):
-				out_list.append(mod_data.duplicate())
+		
+		out_dict[mod_key] = mod_data
+	return out_dict
+
+func get_attack_mods()->Dictionary:
+	var mod_datas:Dictionary = get_load_val("AttackMods", {})
+	var out_dict = {}
+	for mod_key in mod_datas.keys():
+		var mod_data = mod_datas[mod_key]
+		if mod_data.has("AttackModKey"):
+			mod_key = mod_data['AttackModKey']
 		else:
-			if mod_data.get("OnDealDamage", false):
-				out_list.append(mod_data.duplicate())
-	return out_list
+			mod_data['AttackModKey'] = mod_key
+		if not mod_data.has("DisplayName"):
+			mod_data['DisplayName'] = self.details.display_name
+		
+		out_dict[mod_key] = mod_data
+	return out_dict

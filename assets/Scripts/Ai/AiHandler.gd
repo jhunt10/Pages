@@ -1,6 +1,6 @@
 class_name AiHandler
 
-const LOGGING:bool = false
+const LOGGING:bool = true
 
 static var astar:CustAStar
 ## Dictionary ActorKey to action_options_data
@@ -142,8 +142,7 @@ static func _get_actor_action_options_data(actor:BaseActor)->Dictionary:
 				continue
 		if action.PreviewMoveOffset:
 			data['Moves'].append(action_key)
-		var damage_data = get_damage_data_of_action(action, actor)
-		if action.has_preview_target() and damage_data.size() > 0:
+		if action.is_attack(actor):
 			data['Attacks'].append(action_key)
 	cached_move_sets[actor.ActorKey] = data
 	return data
@@ -171,6 +170,7 @@ static func get_damage_data_of_action(action:BaseAction, actor:BaseActor)->Dicti
 	var damage_data = action.DamageDatas
 	if damage_data.size() > 0:
 		return damage_data
+	var preview_damage_data_key = action.get_preview_damage_datas(actor)
 	# TODO: Better
 	if action.ActionKey == "BasicWeaponAttack":
 		var weapon = actor.equipment.get_primary_weapon()

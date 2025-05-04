@@ -90,16 +90,5 @@ static func create_missile_vfx_node(missile_vfx_key:String, vfx_data:Dictionary)
 
 static func create_ailment_vfx_node(ailment_key:String, actor:BaseActor)->BaseVfxNode:
 	if FORCE_RELOAD: MainRootNode.vfx_libray.reload_vfxs()
-	var vfx_key = ''
-	if ailment_key == "Shocked":
-		vfx_key = "AilmentShockedVfx"
-	elif ailment_key == "Burned":
-		vfx_key = "AilmentBurnedVfx"
-	elif ailment_key == "Chilled":
-		vfx_key = "AilmentChilledVfx"
-	elif ailment_key == "Frozen":
-		vfx_key = "AilmentFrozenVfx"
-	else:
-		printerr("VfxHelper.create_ailment_vfx_node: Unknown AilmentKey '%s'." % [ailment_key])
-		return null
+	var vfx_key = "Ailment" + ailment_key + "Vfx"
 	return create_vfx_on_actor(actor, vfx_key, {})

@@ -11,7 +11,6 @@ extends BaseActorNode
 		
 @export var main_hand_node:ActorHandNode
 @export var off_hand_node:ActorHandNode
-@export var body_animation:AnimationPlayer
 
 var current_main_weapon_animation_action
 var current_off_weapon_animation_action
@@ -106,7 +105,7 @@ func set_facing_dir(dir:MapPos.Directions):
 	vfx_holder.position = actor_sprite.get_sprite_center() + offset_node.position
 
 ####################################################
-#			BODY ANIMATIONS
+#			Weapon ANIMATIONS
 ####################################################
 func _on_pause_animations():
 	super()
@@ -117,24 +116,26 @@ func _on_resume_animations():
 	if current_body_animation_action:
 		body_animation.play()
 
-func start_move_animation():
-	super()
-	if LOGGING: print("Walk Animation Starting. Cur: %s" % [current_body_animation_action])
-	if is_animated_moveing:
-		return
-	current_body_animation_action = WALK_ANIM_NAME
-	body_animation.speed_scale = CombatRootControl.get_time_scale()
-	body_animation.play(current_body_animation_action)
+func ready_action_animation(action_name:String, speed:float=1, off_hand:bool=false):
+	var weapon_animation = ''
+	if action_name == "Default:Weapon":
+		weapon_animation = 'WEAPON_DEFAULT'
+	if action_name == "Default:Self":
+		weapon_animation = 'Raise'
+	if action_name == "Default:Forward":
+		weapon_animation = 'Stab'
+	if action_name == "Default:Forward:Arch":
+		weapon_animation = 'Swing'
+	if weapon_animation != '':
+		ready_weapon_animation(weapon_animation, speed, off_hand)
 
-func finish_move_animation():
-	super()
-	if LOGGING: print("Walk Animation Finished. Cur: %s" % [current_body_animation_action])
-	if not is_animated_moveing:
-		return
-	body_animation.stop()
-	actor_sprite.frame_coords.x = 0
-	current_body_animation_action = null
+func execute_action_motion_animation(speed:float=1, off_hand:bool=false):
+	execute_weapon_motion_animation(speed, off_hand)
+	pass
 
+func cancel_action_animations():
+	cancel_weapon_animations()
+	
 func ready_weapon_animation(action_name:String, speed:float=1, off_hand:bool=false):
 	var animation_name = action_name + "/ready" + _get_animation_dir_sufix()
 	if off_hand and off_hand_node:
@@ -179,10 +180,3 @@ func set_corpse_sprite():
 	actor_sprite.vframes = 1
 	actor_sprite.hframes = 1
 	actor_sprite.offset = Vector2i.ZERO
-
-func _get_animation_dir_sufix()->String:
-	if facing_dir == 0: return "_north"
-	if facing_dir == 1: return "_east"
-	if facing_dir == 2: return "_south"
-	if facing_dir == 3: return "_west"
-	return "_south"

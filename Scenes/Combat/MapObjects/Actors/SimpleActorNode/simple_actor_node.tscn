@@ -1,34 +1,285 @@
-[gd_scene load_steps=7 format=3 uid="uid://bs2y0o6uhl0sb"]
+[gd_scene load_steps=20 format=3 uid="uid://bs2y0o6uhl0sb"]
 
-[ext_resource type="Texture2D" uid="uid://cp2wc5s8ju613" path="res://defs/Actors/Template_SpriteSheet.png" id="1_87d1n"]
 [ext_resource type="Script" path="res://Scenes/Combat/MapObjects/Actors/SimpleActorNode/simple_actor_node.gd" id="1_bln3d"]
 [ext_resource type="Script" path="res://Scenes/Combat/MapObjects/Actors/ComplexActorNode/actor_body_sprite.gd" id="2_e6ypm"]
+[ext_resource type="Texture2D" uid="uid://pa3umwoo5lxu" path="res://defs/Actors/Tutorial/ShroomGolem_SpriteSheet.png" id="2_kcbhi"]
 [ext_resource type="Script" path="res://Scenes/Combat/MapObjects/vfx_holder.gd" id="3_soxfk"]
 [ext_resource type="PackedScene" uid="uid://eox4g5msr5a" path="res://Scenes/Combat/Effects/flash_text_controller.tscn" id="4_4be7m"]
 [ext_resource type="Script" path="res://Scenes/Combat/MapObjects/aura_holder.gd" id="6_mn18x"]
+[ext_resource type="Texture2D" uid="uid://dgfxtmtdjfgey" path="res://assets/Sprites/UI/QuePathArrow.png" id="7_3yvo2"]
 
-[node name="SimpleActorNode" type="Node2D" node_paths=PackedStringArray("vfx_holder", "aura_holder", "actor_sprite", "actor_motion_node", "offset_node", "damage_animation_player")]
+[sub_resource type="Animation" id="Animation_7nc3g"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/ActorSprite:frame_index")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [5]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/ActorSprite:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_klmv0"]
+resource_name = "ShroomShake"
+length = 0.8
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/ActorSprite:frame_index")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [5, 6, 5, 7, 5, 6, 5, 7, 5]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = false
+tracks/1/path = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/ActorSprite:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-1, 0), Vector2(0, 0), Vector2(1, 0), Vector2(0, 0), Vector2(-1, 0), Vector2(0, 0), Vector2(1, 0), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_5tl4v"]
+resource_name = "ShroomBash"
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/ActorSprite:frame_index")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.3, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [5, 6, 5, 7, 5]
+}
+
+[sub_resource type="Animation" id="Animation_7wosw"]
+resource_name = "ForwardAnimation_ready"
+length = 0.2
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/ActorSprite:frame_index")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [8, 9]
+}
+
+[sub_resource type="Animation" id="Animation_ifd0m"]
+resource_name = "ForwardAnimation_motion"
+length = 0.6
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/ActorSprite:frame_index")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [9, 8, 10, 8, 0]
+}
+
+[sub_resource type="Animation" id="Animation_x1sws"]
+resource_name = "ForwardAnimation_cancel"
+length = 0.1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/ActorSprite:frame_index")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [5]
+}
+
+[sub_resource type="Animation" id="Animation_1h1i4"]
+resource_name = "SelfAnimation_ready"
+length = 0.1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/ActorSprite:frame_index")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [5]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = false
+tracks/1/path = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/ActorSprite:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_cwpo0"]
+resource_name = "SelfAnimation_motion"
+length = 0.8
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/ActorSprite:frame_index")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [5, 6, 5, 7, 5, 6, 5, 7, 5]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = false
+tracks/1/path = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/ActorSprite:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-1, 0), Vector2(0, 0), Vector2(1, 0), Vector2(0, 0), Vector2(-1, 0), Vector2(0, 0), Vector2(1, 0), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_dmehm"]
+resource_name = "SelfAnimation_cancel"
+length = 0.1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/ActorSprite:frame_index")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [5]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = false
+tracks/1/path = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/ActorSprite:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hyh3n"]
+_data = {
+"ForwardAnimation": SubResource("Animation_5tl4v"),
+"ForwardAnimation_cancel": SubResource("Animation_x1sws"),
+"ForwardAnimation_motion": SubResource("Animation_ifd0m"),
+"ForwardAnimation_ready": SubResource("Animation_7wosw"),
+"RESET": SubResource("Animation_7nc3g"),
+"SelfAnimation": SubResource("Animation_klmv0"),
+"SelfAnimation_cancel": SubResource("Animation_dmehm"),
+"SelfAnimation_motion": SubResource("Animation_cwpo0"),
+"SelfAnimation_ready": SubResource("Animation_1h1i4")
+}
+
+[sub_resource type="Animation" id="Animation_8a46c"]
+resource_name = "walk"
+length = 1.2
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/ActorSprite:frame_index")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [1, 3, 2, 0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6rfh0"]
+_data = {
+"walk": SubResource("Animation_8a46c")
+}
+
+[node name="SimpleActorNode" type="Node2D" node_paths=PackedStringArray("vfx_holder", "aura_holder", "actor_sprite", "path_arrow", "actor_motion_node", "offset_node", "damage_animation_player", "body_animation")]
 script = ExtResource("1_bln3d")
 vfx_holder = NodePath("ActorMotionNode/VFXHolder")
 aura_holder = NodePath("AuraHolder")
 actor_sprite = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/ActorSprite")
+path_arrow = NodePath("PathArrow")
 actor_motion_node = NodePath("ActorMotionNode")
 offset_node = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode")
 damage_animation_player = NodePath("DamageAnimationPlayer")
+body_animation = NodePath("BodyAnimationPlayer")
 
 [node name="ActorMotionNode" type="Node2D" parent="."]
 
 [node name="ActorSpriteNode" type="Node2D" parent="ActorMotionNode"]
 
 [node name="OffsetNode" type="Node2D" parent="ActorMotionNode/ActorSpriteNode"]
-position = Vector2(0, -16)
 
 [node name="ActorSprite" type="Sprite2D" parent="ActorMotionNode/ActorSpriteNode/OffsetNode"]
-texture = ExtResource("1_87d1n")
+texture = ExtResource("2_kcbhi")
 hframes = 12
 vframes = 4
+frame = 17
 script = ExtResource("2_e6ypm")
-direction = 2
+frame_index = 5
 
 [node name="VFX_OffsetNode" type="Node2D" parent="ActorMotionNode/ActorSpriteNode/OffsetNode"]
 
@@ -47,4 +298,15 @@ mouse_filter = 2
 [node name="AuraHolder" type="Node2D" parent="."]
 script = ExtResource("6_mn18x")
 
+[node name="PathArrow" type="Sprite2D" parent="."]
+visible = false
+z_index = 8
+texture = ExtResource("7_3yvo2")
+
 [node name="DamageAnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="BodyAnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_hyh3n"),
+"move_walk": SubResource("AnimationLibrary_6rfh0")
+}

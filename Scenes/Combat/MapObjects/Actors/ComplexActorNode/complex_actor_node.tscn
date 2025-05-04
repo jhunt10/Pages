@@ -236,13 +236,12 @@ _data = {
 "shake_effect": ExtResource("9_co1y3")
 }
 
-[node name="ActorNode" type="Node2D" node_paths=PackedStringArray("main_hand_node", "off_hand_node", "body_animation", "vfx_holder", "aura_holder", "actor_sprite", "path_arrow", "actor_motion_node", "offset_node", "damage_animation_player")]
+[node name="ActorNode" type="Node2D" node_paths=PackedStringArray("main_hand_node", "off_hand_node", "vfx_holder", "aura_holder", "actor_sprite", "path_arrow", "actor_motion_node", "offset_node", "damage_animation_player", "body_animation")]
 y_sort_enabled = true
 script = ExtResource("1_wfbib")
 editing_facing_direction = 2
 main_hand_node = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/MainHandNode")
 off_hand_node = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/OffHandNode")
-body_animation = NodePath("AnimationPlayer")
 vfx_holder = NodePath("ActorMotionNode/VFXHolder")
 aura_holder = NodePath("AuraHolder")
 actor_sprite = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/ActorSprite")
@@ -250,6 +249,7 @@ path_arrow = NodePath("PathArrow")
 actor_motion_node = NodePath("ActorMotionNode")
 offset_node = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode")
 damage_animation_player = NodePath("DamageAnimationPlayer")
+body_animation = NodePath("AnimationPlayer")
 metadata/_edit_horizontal_guides_ = [-40.0]
 
 [node name="ColorRect" type="ColorRect" parent="."]

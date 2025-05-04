@@ -1,0 +1,116 @@
+[
+    {
+        "ActionKey": "BasicMeleeAttack",
+        "DamageDatas": {},
+        "Details": {
+            "Description": "Preform an Attack against one enemy in range.",
+            "DisplayName": "Basic Attack",
+            "LargeIcon": "Sprites/BasicAttack.png",
+            "SmallIcon": "Sprites/BasicAttack.png",
+            "SnippetDesc": "Make an Attack",
+            "Tags": [
+                "Attack",
+                "Weapon"
+            ]
+        },
+        "MissileDatas": {},
+        "Preview": {
+            "PreviewTargetKey": "TargetParam1",
+            "PreviewDamageKey": "Default"
+        },
+        "SubActions": {
+            "5": [
+                {
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_Animation_Ready.gd",
+                    "Animation":"Default:Forward",
+                    "AnimationSpeed":1
+                }
+            ],
+            "10": [
+                {
+                    "AllowAlreadyTargeted": false,
+                    "AllowAutoTarget": true,
+                    "SetTargetKey": "Target1",
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_GetTarget.gd",
+                    "TargetParamKey": "TargetParam1"
+                }
+            ],
+            "11": [
+                {
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_Animation_Motion.gd"
+                },
+                {
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Attacks/SubAct_Attack.gd",
+                    "TargetKey": "Target1",
+                    "DamageKey": "Default"
+                }
+            ]
+        },
+        "TargetParams": {
+            "TargetParam1": {
+                "EffectsAllies": false,
+                "EffectsEnemies": false,
+                "LineOfSight": true,
+                "TargetArea": "[[-1,1],[0,1],[1,1]]",
+                "TargetType": "Actor"
+            }
+        }
+    },
+    {
+        "ActionKey": "AllAdjacentAttack",
+        "DamageDatas": {},
+        "Details": {
+            "Description": "Preform an Attack against all adjacent enemy in range.",
+            "DisplayName": "All Adjacent Attack",
+            "LargeIcon": "Sprites/BasicAttack.png",
+            "SmallIcon": "Sprites/BasicAttack.png",
+            "SnippetDesc": "Make an Attack",
+            "Tags": [
+                "Attack",
+                "Weapon"
+            ]
+        },
+        "MissileDatas": {},
+        "Preview": {
+            "PreviewTargetKey": "TargetParam1",
+            "PreviewDamageKey": "Default"
+        },
+        "SubActions": {
+            "5": [
+                {
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_Animation_Ready.gd",
+                    "Animation":"Default:Self",
+                    "AnimationSpeed":1
+                }
+            ],
+            "10": [
+                {
+                    "AllowAlreadyTargeted": false,
+                    "AllowAutoTarget": true,
+                    "SetTargetKey": "Target1",
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_GetTargetAllInArea.gd",
+                    "TargetParamKey": "TargetParam1"
+                }
+            ],
+            "11": [
+                {
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_Animation_Motion.gd"
+                },
+                {
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Attacks/SubAct_Attack.gd",
+                    "TargetKey": "Target1",
+                    "DamageKey": "Default"
+                }
+            ]
+        },
+        "TargetParams": {
+            "TargetParam1": {
+                "EffectsAllies": false,
+                "EffectsEnemies": false,
+                "LineOfSight": true,
+                "TargetArea": "[[-1,1],[0,1],[1,1],[-1,0],[1,0],[-1,-1],[0,-1],[1,-1]]",
+                "TargetType": "Actor"
+            }
+        }
+    }
+]

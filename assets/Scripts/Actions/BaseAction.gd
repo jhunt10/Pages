@@ -114,6 +114,21 @@ func list_sub_action_datas()->Array:
 				out_list.append(data)
 	return out_list
 
+func get_damage_data(damage_data_key:String, actor:BaseActor=null)->Dictionary:
+	if damage_data_key == "Weapon":
+		if actor == null:
+			printerr("BaseAction.get_damage_data: Null Actor when asking for Weapon damage.")
+			return {}
+		var weapon = actor.equipment.get_primary_weapon()
+		if !weapon:
+			printerr("BaseAction.get_damage_data: No Weapon when asking for Weapon damage.")
+			return {}
+		return weapon.get_damage_data()
+	var damage_datas = get_load_val("DamageDatas", {})
+	if damage_datas.has(damage_data_key):
+		return damage_datas[damage_data_key].duplicate()
+	return {}
+
 func get_damage_data_for_subaction(actor:BaseActor, subaction_data:Dictionary)->Dictionary:
 	var damage_key = subaction_data.get("DamageKey", "")
 	if damage_key == null or damage_key == '':
@@ -182,6 +197,8 @@ func get_preview_damage_datas(actor:BaseActor=null)->Dictionary:
 		return {}
 	if preview_key == "Weapon" and actor:
 		return actor.get_weapon_damage_datas()
+	if preview_key == "Default" and actor:
+		return actor.get_default_attack_damage_datas()
 	var damage_datas = get_load_val("DamageDatas", {})
 	var preview_damage = damage_datas.get(preview_key)
 	if preview_damage: 
@@ -230,21 +247,6 @@ func get_on_que_options(actor:BaseActor, game_state:GameStateData):
 		out_list.append_array(sub_action.get_on_que_options(self, sub_action_data, actor, game_state))
 	return out_list
 
-func get_damage_data(damage_data_key:String, actor:BaseActor=null)->Dictionary:
-	if damage_data_key == "Weapon":
-		if actor == null:
-			printerr("BaseAction.get_damage_data: Null Actor when asking for Weapon damage.")
-			return {}
-		var weapon = actor.equipment.get_primary_weapon()
-		if !weapon:
-			printerr("BaseAction.get_damage_data: No Weapon when asking for Weapon damage.")
-			return {}
-		return weapon.get_damage_data()
-	var damage_datas = get_load_val("DamageDatas", {})
-	if damage_datas.has(damage_data_key):
-		return damage_datas[damage_data_key].duplicate()
-	return {}
-
 func get_effect_data(effect_data_key:String)->Dictionary:
 	var effect_datas = get_load_val("EffectDatas", {})
 	if effect_datas.has(effect_data_key):
@@ -264,3 +266,14 @@ func get_zone_data(zone_data_key:String)->Dictionary:
 	if zone_datas.has(zone_data_key):
 		return zone_datas[zone_data_key].duplicate()
 	return {}
+
+###################################
+##		AI Info
+###################################
+func is_attack(actor:BaseActor)->bool:
+	var damage_data = get_preview_damage_datas(actor)
+	if has_preview_target() and damage_data.size() > 0:
+		return true
+	if get_load_val("AiInfo",{"IsAttack":false})['IsAttack']:
+		return true
+	return false

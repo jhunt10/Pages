@@ -18,6 +18,8 @@ signal reached_motion_destination
 
 ## Player for death and on damage (shake) animations. Requires: "death_effect" and "shake_effect"
 @export var damage_animation_player:AnimationPlayer
+## Player for movement animations
+@export var body_animation:AnimationPlayer
 
 
 var Id:String 
@@ -92,6 +94,7 @@ func set_actor(actor:BaseActor):
 
 func set_facing_dir(dir:MapPos.Directions):
 	facing_dir = dir
+	actor_sprite.direction = dir
 
 ## Forces the actor to given position
 func set_map_pos(pos:MapPos, keep_movement_offset:bool=false):
@@ -267,9 +270,20 @@ func play_shake():
 	pass
 
 func start_move_animation():
-	pass
+	if LOGGING: print("Walk Animation Starting. Cur: %s" % [current_body_animation_action])
+	if is_animated_moveing:
+		return
+	current_body_animation_action = WALK_ANIM_NAME
+	body_animation.speed_scale = CombatRootControl.get_time_scale()
+	body_animation.play(current_body_animation_action)
+
 func finish_move_animation():
-	pass
+	if LOGGING: print("Walk Animation Finished. Cur: %s" % [current_body_animation_action])
+	if not is_animated_moveing:
+		return
+	body_animation.stop()
+	actor_sprite.frame_coords.x = 0
+	current_body_animation_action = null
 
 func add_modulate(color:Color):
 	offset_node.modulate = color
@@ -277,6 +291,22 @@ func add_modulate(color:Color):
 func remove_modulate(color:Color):
 	if offset_node.modulate == color:
 		offset_node.modulate = Color.WHITE
+
+func ready_action_animation(action_name:String, speed:float=1, off_hand:bool=false):
+	pass
+
+func execute_action_motion_animation(speed:float=1, off_hand:bool=false):
+	pass
+
+func cancel_action_animations():
+	pass
+
+func _get_animation_dir_sufix()->String:
+	if facing_dir == 0: return "_north"
+	if facing_dir == 1: return "_east"
+	if facing_dir == 2: return "_south"
+	if facing_dir == 3: return "_west"
+	return "_south"
 
 
 ##############################

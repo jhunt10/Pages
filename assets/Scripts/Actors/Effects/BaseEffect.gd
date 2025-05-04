@@ -11,7 +11,8 @@ enum EffectTriggers {
 	OnGapTurnStart, OnGapTurnEnd,
 	OnRoundStart, OnRoundEnd,
 	OnMove, OnDamageTaken, OnDamagDealt,
-	OnAttacking, OnDefending, 
+	OnAttacking_PreAttackRoll, OnAttacking_PostAttackRoll, OnAttacking_PostEffectRoll, OnAttacking_PostDamageRoll, OnAttacking_AfterAttack,
+	OnDefending_PreAttackRoll, OnDefending_PostAttackRoll, OnDefending_PostEffectRoll, OnDefending_PostDamageRoll, OnDefending_AfterAttack,
 	OnDeath, OnKill,
 	OnUseItem
 }
@@ -22,8 +23,10 @@ const TRIGGERS_WITH_ADDITIONAL_DATA = [
 	EffectTriggers.OnDamagDealt, 
 	EffectTriggers.OnDamageTaken, 
 	EffectTriggers.OnKill,
-	EffectTriggers.OnAttacking,
-	EffectTriggers.OnDefending
+	EffectTriggers.OnAttacking_PreAttackRoll, EffectTriggers.OnAttacking_PostAttackRoll,
+	EffectTriggers.OnAttacking_PostDamageRoll, EffectTriggers.OnAttacking_PostEffectRoll, EffectTriggers.OnAttacking_AfterAttack,
+	EffectTriggers.OnDefending_PreAttackRoll, EffectTriggers.OnDefending_PostAttackRoll,
+	EffectTriggers.OnDefending_PostDamageRoll, EffectTriggers.OnDefending_PostEffectRoll, EffectTriggers.OnDefending_AfterAttack,
 ]
 
 func get_tagable_id(): return Id
@@ -134,16 +137,39 @@ func get_active_stat_mods()->Array:
 			out_list.append(mod)
 	return out_list
 
-func get_active_damage_mods():
-	var out_list = []
+func get_active_damage_mods()->Dictionary:
+	var out_dict = {}
 	for sub_effect_key in _sub_effects_data.keys():
 		var sub_effect_data = _sub_effects_data[sub_effect_key]
 		var sub_effect = _get_sub_effect_script(sub_effect_key)
 		if not sub_effect:
 			continue
-		for mod in sub_effect.get_active_damage_mods(self, sub_effect_data):
-			out_list.append(mod)
-	return out_list
+		var mods = sub_effect.get_active_damage_mods(self, sub_effect_data)
+		for mod_key in mods.keys():
+			var mod_data = mods[mod_key]
+			if mod_data.has("DamageModKey"):
+				mod_key = mod_data['DamageModKey']
+			else:
+				mod_data['DamageModKey'] = mod_key
+			out_dict[mod_key] = mod_data
+	return out_dict
+
+func get_active_attack_mods()->Dictionary:
+	var out_dict = {}
+	for sub_effect_key in _sub_effects_data.keys():
+		var sub_effect_data = _sub_effects_data[sub_effect_key]
+		var sub_effect = _get_sub_effect_script(sub_effect_key)
+		if not sub_effect:
+			continue
+		var mods = sub_effect.get_active_attack_mods(self, sub_effect_data)
+		for mod_key in mods.keys():
+			var mod_data = mods[mod_key]
+			if mod_data.has("AttackModKey"):
+				mod_key = mod_data['AttackModKey']
+			else:
+				mod_data['AttackModKey'] = mod_key
+			out_dict[mod_key] = mod_data
+	return out_dict
 
 func get_limited_effect_type()->EffectHelper.LimitedEffectTypes:
 	var limited_effect_str = get_load_val("LimitedEffectType", "None")
@@ -248,19 +274,63 @@ func trigger_on_damage_dealt(game_state:GameStateData, damage_event:DamageEvent)
 		if sub_effect:
 			sub_effect.on_damage_dealt(self, sub_effect_data, game_state, damage_event)
 
-func trigger_on_attack(game_state:GameStateData, attack_event:AttackEvent):
-	if attack_event.attacker.Id == get_load_val("EffectedActorId", null):
-		for sub_effect_key in _triggers_to_sub_effect_keys.get(EffectTriggers.OnAttacking, []):
-			var sub_effect_data = _sub_effects_data[sub_effect_key]
-			var sub_effect = _get_sub_effect_script(sub_effect_key)
-			if sub_effect:
-				sub_effect.on_attacking(self, sub_effect_data, game_state, attack_event)
-	if attack_event.defender.Id == get_load_val("EffectedActorId", null):
-		for sub_effect_key in _triggers_to_sub_effect_keys.get(EffectTriggers.OnDefending, []):
-			var sub_effect_data = _sub_effects_data[sub_effect_key]
-			var sub_effect = _get_sub_effect_script(sub_effect_key)
-			if sub_effect:
-				sub_effect.on_defending(self, sub_effect_data, game_state, attack_event)
+func trigger_on_attack(attack_event:AttackEvent, game_state:GameStateData):
+	var is_attacking = attack_event.attacker.Id == get_load_val("EffectedActorId", null)
+	var is_defending = attack_event.defender_ids.has(get_load_val("EffectedActorId", null))
+	#
+	#var attacking_trigger = null
+	#var defending_trigger = null
+	#if attack_event.attack_stage == AttackHandler.AttackStage.Created:
+		#if is_attacking: attacking_trigger = EffectTriggers.OnAttacking_PreAttackRoll
+		#if is_defending: defending_trigger = EffectTriggers.OnDefending_PreAttackRoll
+	#elif attack_event.attack_stage == AttackHandler.AttackStage.RolledForHit:
+		#if is_attacking: attacking_trigger = EffectTriggers.OnAttacking_PreEffectRoll
+		#if is_defending: defending_trigger = EffectTriggers.OnDefending_PreEffectRoll
+		#
+	
+	if attack_event.attack_stage == AttackHandler.AttackStage.Created:
+		if is_attacking: _trigger_on_atk(EffectTriggers.OnAttacking_PreAttackRoll, attack_event, game_state)
+		if is_defending: _trigger_on_atk(EffectTriggers.OnDefending_PreAttackRoll, attack_event, game_state)
+	elif attack_event.attack_stage == AttackHandler.AttackStage.RolledForHit:
+		if is_attacking: _trigger_on_atk(EffectTriggers.OnAttacking_PostAttackRoll, attack_event, game_state)
+		if is_defending: _trigger_on_atk(EffectTriggers.OnDefending_PostAttackRoll, attack_event, game_state)
+	elif attack_event.attack_stage == AttackHandler.AttackStage.RolledForDamage:
+		if is_attacking: _trigger_on_atk(EffectTriggers.OnAttacking_PostDamageRoll, attack_event, game_state)
+		if is_defending: _trigger_on_atk(EffectTriggers.OnDefending_PostDamageRoll, attack_event, game_state)
+	elif attack_event.attack_stage == AttackHandler.AttackStage.RolledForEffects:
+		if is_attacking: _trigger_on_atk(EffectTriggers.OnAttacking_PostEffectRoll, attack_event, game_state)
+		if is_defending: _trigger_on_atk(EffectTriggers.OnDefending_PostEffectRoll, attack_event, game_state)
+	elif attack_event.attack_stage == AttackHandler.AttackStage.Resolved:
+		if is_attacking: _trigger_on_atk(EffectTriggers.OnAttacking_AfterAttack, attack_event, game_state)
+		if is_defending: _trigger_on_atk(EffectTriggers.OnDefending_AfterAttack, attack_event, game_state)
+
+## Helper function to cleanup trigger_on_attack 
+func _trigger_on_atk(sub_trigger:EffectTriggers, attack_event:AttackEvent, game_state:GameStateData):
+	for sub_effect_key in _triggers_to_sub_effect_keys.get(sub_trigger, []):
+		var sub_effect_data = _sub_effects_data[sub_effect_key]
+		var sub_effect = _get_sub_effect_script(sub_effect_key)
+		if sub_effect:
+			if sub_trigger == EffectTriggers.OnAttacking_PreAttackRoll:
+				sub_effect.on_attacking_pre_attack_roll(self, sub_effect_data, game_state, attack_event)
+			elif sub_trigger == EffectTriggers.OnAttacking_PostAttackRoll:
+				sub_effect.on_attacking_post_attack_roll(self, sub_effect_data, game_state, attack_event)
+			elif sub_trigger == EffectTriggers.OnAttacking_PostDamageRoll:
+				sub_effect.on_attacking_post_damage_roll(self, sub_effect_data, game_state, attack_event)
+			elif sub_trigger == EffectTriggers.OnAttacking_PostEffectRoll:
+				sub_effect.on_attacking_post_effect_roll(self, sub_effect_data, game_state, attack_event)
+			elif sub_trigger == EffectTriggers.OnAttacking_AfterAttack:
+				sub_effect.on_attacking_after_attack(self, sub_effect_data, game_state, attack_event)
+				
+			elif sub_trigger == EffectTriggers.OnDefending_PreAttackRoll:
+				sub_effect.on_defending_pre_attack_roll(self, sub_effect_data, game_state, attack_event)
+			elif sub_trigger == EffectTriggers.OnDefending_PostAttackRoll:
+				sub_effect.on_defending_post_attack_roll(self, sub_effect_data, game_state, attack_event)
+			elif sub_trigger == EffectTriggers.OnDefending_PostDamageRoll:
+				sub_effect.on_defending_post_damage_roll(self, sub_effect_data, game_state, attack_event)
+			elif sub_trigger == EffectTriggers.OnDefending_PostEffectRoll:
+				sub_effect.on_defending_post_effect_roll(self, sub_effect_data, game_state, attack_event)
+			elif sub_trigger == EffectTriggers.OnDefending_AfterAttack:
+				sub_effect.on_defending_after_attack(self, sub_effect_data, game_state, attack_event)
 
 func get_damage_data(damage_data_key:String, actor:BaseActor=null)->Dictionary:
 	if damage_data_key == "Weapon":

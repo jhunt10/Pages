@@ -1,0 +1,67 @@
+[
+    {
+        "ActionKey": "SpreadSpores",
+        "DamageDatas": {},
+        "AiInfo":{
+            "IsAttack": true
+        },
+        "Details": {
+            "Description": "Spread poisonus spores to all adjacent Actors.",
+            "DisplayName": "Spread Spores",
+            "LargeIcon": "Sprites/BasicAttack.png",
+            "SmallIcon": "Sprites/BasicAttack.png",
+            "SnippetDesc": "Poison adjacent Actors",
+            "Tags": [
+            ]
+        },
+        "MissileDatas": {},
+        "Preview": {
+            "PreviewTargetKey": "TargetParam1"
+        },
+        "EffectDatas":{
+            "Effect1": {
+                "EffectKey": "AilmentPoisoned",
+                "Duration": 5
+            }
+        },
+        "SubActions": {
+            "1": [
+                {
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_Animation_Ready.gd",
+                    "Animation":"Default:Self",
+                    "AnimationSpeed":1
+                }
+            ],
+            "3": [
+                {
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_Animation_Motion.gd"
+                }
+            ],
+            "11": [
+                {
+                    "AllowAlreadyTargeted": false,
+                    "AllowAutoTarget": true,
+                    "SetTargetKey": "Target1",
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_GetTargetAllInArea.gd",
+                    "TargetParamKey": "TargetParam1"
+                }
+            ],
+            "15":[
+                {
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Effects/SubAct_ApplyEffect.gd",
+                    "TargetKey": "Target1",
+                    "EffectDataKey": "Effect1"
+                }
+            ]
+        },
+        "TargetParams": {
+            "TargetParam1": {
+                "EffectsAllies": false,
+                "EffectsEnemies": false,
+                "LineOfSight": true,
+                "TargetArea": "[[-1,1],[0,1],[1,1],[-1,0],[1,0],[-1,-1],[0,-1],[1,-1]]",
+                "TargetType": "Actor"
+            }
+        }
+    }
+]

@@ -71,6 +71,7 @@ func _get_primary_target(parent_action:BaseAction, subaction_data:Dictionary, ta
 	return targets[0]
 
 ## Get actors that were effected by the selected target key
+## Only use when you haven't already pulled out Target Parames and Selected Targets
 func _find_target_effected_actors(parent_action:BaseAction, subaction_data:Dictionary, target_key:String, 
 					metadata:QueExecutionData, 	game_state:GameStateData, source_actor:BaseActor)->Array:
 	if target_key == "Self":

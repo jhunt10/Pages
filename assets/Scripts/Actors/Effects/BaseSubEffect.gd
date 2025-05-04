@@ -23,8 +23,12 @@ func get_active_stat_mods(_effect:BaseEffect, _subeffect_data:Dictionary)->Array
 	return []
 	
 func get_active_damage_mods(_effect:BaseEffect, _subeffect_data:Dictionary)->Array:
-	var mods = _subeffect_data.get("DamageMods", {})
+	var mods = _subeffect_data.get("DamageMods", {}).duplicate(true)
 	return mods.values()
+
+func get_active_attack_mods(_effect:BaseEffect, _subeffect_data:Dictionary)->Dictionary:
+	var mods = _subeffect_data.get("AttackMods", {}).duplicate(true)
+	return mods
 
 func on_delete(_effect:BaseEffect, _subeffect_data:Dictionary):
 	pass
@@ -43,13 +47,53 @@ func on_damage_taken(_effect:BaseEffect, _subeffect_data:Dictionary,
 	on_effect_trigger(_effect, _subeffect_data, BaseEffect.EffectTriggers.OnDamageTaken, _game_state)
 	pass
 
-func on_attacking(_effect:BaseEffect, _subeffect_data:Dictionary, _game_state:GameStateData, _attack_event:AttackEvent):
-	on_effect_trigger(_effect, _subeffect_data, BaseEffect.EffectTriggers.OnAttacking, _game_state)
+
+
+# Attack/Defend function to make logic more distinct
+
+func on_attacking_pre_attack_roll(_effect:BaseEffect, _subeffect_data:Dictionary, _game_state:GameStateData, _attack_event:AttackEvent):
+	on_effect_trigger(_effect, _subeffect_data, BaseEffect.EffectTriggers.OnAttacking_PreAttackRoll, _game_state)
 	pass
 
-func on_defending(_effect:BaseEffect, _subeffect_data:Dictionary, _game_state:GameStateData, _attack_event:AttackEvent):
-	on_effect_trigger(_effect, _subeffect_data, BaseEffect.EffectTriggers.OnDefending, _game_state)
+func on_attacking_post_attack_roll(_effect:BaseEffect, _subeffect_data:Dictionary, _game_state:GameStateData, _attack_event:AttackEvent):
+	on_effect_trigger(_effect, _subeffect_data, BaseEffect.EffectTriggers.OnAttacking_PreAttackRoll, _game_state)
 	pass
+
+func on_attacking_post_effect_roll(_effect:BaseEffect, _subeffect_data:Dictionary, _game_state:GameStateData, _attack_event:AttackEvent):
+	on_effect_trigger(_effect, _subeffect_data, BaseEffect.EffectTriggers.OnAttacking_PreAttackRoll, _game_state)
+	pass
+
+func on_attacking_post_damage_roll(_effect:BaseEffect, _subeffect_data:Dictionary, _game_state:GameStateData, _attack_event:AttackEvent):
+	on_effect_trigger(_effect, _subeffect_data, BaseEffect.EffectTriggers.OnAttacking_PreAttackRoll, _game_state)
+	pass
+
+func on_attacking_after_attack(_effect:BaseEffect, _subeffect_data:Dictionary, _game_state:GameStateData, _attack_event:AttackEvent):
+	on_effect_trigger(_effect, _subeffect_data, BaseEffect.EffectTriggers.OnAttacking_PreAttackRoll, _game_state)
+	pass
+
+func on_defending_pre_attack_roll(_effect:BaseEffect, _subeffect_data:Dictionary, _game_state:GameStateData, _attack_event:AttackEvent):
+	on_effect_trigger(_effect, _subeffect_data, BaseEffect.EffectTriggers.OnAttacking_PreAttackRoll, _game_state)
+	pass
+
+func on_defending_post_attack_roll(_effect:BaseEffect, _subeffect_data:Dictionary, _game_state:GameStateData, _attack_event:AttackEvent):
+	on_effect_trigger(_effect, _subeffect_data, BaseEffect.EffectTriggers.OnAttacking_PreAttackRoll, _game_state)
+	pass
+
+func on_defending_post_effect_roll(_effect:BaseEffect, _subeffect_data:Dictionary, _game_state:GameStateData, _attack_event:AttackEvent):
+	on_effect_trigger(_effect, _subeffect_data, BaseEffect.EffectTriggers.OnAttacking_PreAttackRoll, _game_state)
+	pass
+
+func on_defending_post_damage_roll(_effect:BaseEffect, _subeffect_data:Dictionary, _game_state:GameStateData, _attack_event:AttackEvent):
+	on_effect_trigger(_effect, _subeffect_data, BaseEffect.EffectTriggers.OnAttacking_PreAttackRoll, _game_state)
+	pass
+
+func on_defending_after_attack(_effect:BaseEffect, _subeffect_data:Dictionary, _game_state:GameStateData, _attack_event:AttackEvent):
+	on_effect_trigger(_effect, _subeffect_data, BaseEffect.EffectTriggers.OnAttacking_PreAttackRoll, _game_state)
+	pass
+
+
+
+
 
 func on_move(_effect:BaseEffect, _subeffect_data:Dictionary,
 			_game_state:GameStateData, _old_pos:MapPos, _new_pos:MapPos, _move_type:String, _moved_by:BaseActor):

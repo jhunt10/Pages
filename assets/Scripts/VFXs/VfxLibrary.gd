@@ -1,5 +1,6 @@
 class_name VfxLibrary
 
+const LOGGING = false
 const VfxDir = "res://data/VFXs"
 
 static var _vfx_defs:Dictionary
@@ -29,13 +30,13 @@ static func get_vfx_def(key:String)->Dictionary:
 #func create_vfx_node_from_key(vfx_key:String, data:Dictionary={})->VfxNode:
 	#var vfx_data = get_vfx_data(vfx_key)
 	#if !vfx_data:
-		#printerr("VfxLibrary.create_vfx_node: No VFX found with key '%s'." % [vfx_key])
+		#if LOGGING: printerr("VfxLibrary.create_vfx_node: No VFX found with key '%s'." % [vfx_key])
 		#return null
 	#return create_vfx_node(vfx_data, data)
 #
 #func create_vfx_node(vfx_data:VfxData, data:Dictionary={})->VfxNode:
 	#if not vfx_data:
-		#printerr("VfxLibrary: Null data given to create_vfx_node.")
+		#if LOGGING: printerr("VfxLibrary: Null data given to create_vfx_node.")
 		#return null
 	#var new_node:VfxNode = load("res://Scenes/VFXs/vfx_node.tscn").instantiate()
 	#new_node.vfx_id = str(ResourceUID.create_id())
@@ -57,14 +58,14 @@ static func get_vfx_def(key:String)->Dictionary:
 static func load_vfx_defs():
 	if loaded:
 		return
-	print("### Loading VFXs")
+	if LOGGING: print("### Loading VFXs")
 	for file in search_for_vfx_files():
-		print('# Checking File: ' + file)
+		if LOGGING: print('# Checking File: ' + file)
 		var vfx_data_dicts = parse_vfx_datas_from_file(file)
 		for key in vfx_data_dicts.keys():
 			_vfx_datas[key] = vfx_data_dicts[key]
-			print("# -Loaded VFX: " + key)
-	print("### Done Loading VFXs")
+			if LOGGING: print("# -Loaded VFX: " + key)
+	if LOGGING: print("### Done Loading VFXs")
 	loaded = true
 
 static func search_for_vfx_files()->Array:
@@ -75,7 +76,7 @@ static func search_for_vfx_files()->Array:
 static func _rec_search_for_vfx(path:String, list:Array, limit:int=1000):
 	var dir = DirAccess.open(path)
 	if limit == 0:
-		printerr("VfxLibrary._rec_search_for_vfx: Search limit reached!")
+		if LOGGING: printerr("VfxLibrary._rec_search_for_vfx: Search limit reached!")
 		return
 	if dir:
 		dir.list_dir_begin()
@@ -88,7 +89,7 @@ static func _rec_search_for_vfx(path:String, list:Array, limit:int=1000):
 				list.append(full_path)
 			file_name = dir.get_next()
 	else:
-		print("An error occurred when trying to access the path: %s" % [path])
+		if LOGGING: print("An error occurred when trying to access the path: %s" % [path])
 
 static func parse_vfx_datas_from_file(path:String)->Dictionary:
 	var file = FileAccess.open(path, FileAccess.READ)
@@ -102,7 +103,7 @@ static func parse_vfx_datas_from_file(path:String)->Dictionary:
 	for vfx_data in vfx_datas:
 		var key = vfx_data.get("VfxKey")
 		if not key:
-			printerr("VfxLibrary.parse_vfx_datas_from_file: Keyless def found on file: %s" % [path])
+			if LOGGING: printerr("VfxLibrary.parse_vfx_datas_from_file: Keyless def found on file: %s" % [path])
 		elif !dict.has(key):
 			_vfx_defs[key] = vfx_data.duplicate(true)
 			_vfx_defs[key]['LoadPath'] = path.get_base_dir()

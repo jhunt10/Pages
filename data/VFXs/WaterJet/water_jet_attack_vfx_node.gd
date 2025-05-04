@@ -66,6 +66,8 @@ func _sync():
 		child.visible = child_index < tiles_traveled
 		child.frame = sprite_frame
 	
+	#TODO: This is calling DamageHelper.handle_attack and altering GameState
+	#	    outside of the main update thread (not good?)
 	if frame % frames_per_tile == 0:
 		if not _emited_for.has(tiles_traveled):
 			do_thing(tiles_traveled)

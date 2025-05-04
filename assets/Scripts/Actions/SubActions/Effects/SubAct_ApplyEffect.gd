@@ -25,7 +25,7 @@ func do_thing(parent_action:BaseAction, subaction_data:Dictionary, que_exe_data:
 		effect_key = effect_data.get("EffectKey", '')
 	if effect_key == '':
 		effect_key = subaction_data.get('EffectKey')
-	
+	#TODO: Resist chance
 	if subaction_data.has('EffectData'):
 		effect_data = subaction_data['EffectData']
 	for target:BaseActor in targets:

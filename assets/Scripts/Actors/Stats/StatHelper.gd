@@ -123,13 +123,13 @@ const DirectionalAttackSufix_Flank = "DirAtkFl"
 ## Added to stat_name ("StatName:SUFIX") to mod value when attacking from Back
 const DirectionalAttackSufix_Back = "DirAtkBk"
 
-static func get_defense_stat_for_attack_direction(actor:BaseActor, attack_dir:AttackEvent.AttackDirection, stat_name:String, default:int=0)->float:
+static func get_defense_stat_for_attack_direction(actor:BaseActor, attack_dir, stat_name:String, default:int=0)->float:
 	var sufix = ""
-	if attack_dir == AttackEvent.AttackDirection.Front:
+	if attack_dir == AttackHandler.AttackDirection.Front:
 		sufix = StatHelper.DirectionalDefenseSufix_Front
-	elif attack_dir == AttackEvent.AttackDirection.Flank:
+	elif attack_dir == AttackHandler.AttackDirection.Flank:
 		sufix = StatHelper.DirectionalDefenseSufix_Flank
-	elif attack_dir == AttackEvent.AttackDirection.Back:
+	elif attack_dir == AttackHandler.AttackDirection.Back:
 		sufix = StatHelper.DirectionalDefenseSufix_Back
 	
 	var directional_mod = 1.0
@@ -141,24 +141,25 @@ static func get_defense_stat_for_attack_direction(actor:BaseActor, attack_dir:At
 	var raw_val = actor.stats.get_stat(stat_name, default)
 	return (raw_val * directional_mod) + add_val
 
-## Returns stat for when actor is attacking from the target's [Front / Flank / Back]
-static func get_attack_stat_for_attack_direction(actor:BaseActor, attack_dir:AttackEvent.AttackDirection, stat_name:String, default:int=0)->float:
-	var sufix = ""
-	if attack_dir == AttackEvent.AttackDirection.Front:
-		sufix = StatHelper.DirectionalAttackSufix_Front
-	elif attack_dir == AttackEvent.AttackDirection.Flank:
-		sufix = StatHelper.DirectionalAttackSufix_Flank
-	elif attack_dir == AttackEvent.AttackDirection.Back:
-		sufix = StatHelper.DirectionalAttackSufix_Back
-	
-	var directional_mod = 1.0
-	var add_val = 0.0
-	if sufix != "":
-		var full_stat_name = stat_name + ":" + sufix
-		directional_mod = actor.stats.get_stat(full_stat_name, get_default_directional_mod(full_stat_name))
-		add_val = actor.stats.get_stat(full_stat_name + ":Add")
-	var raw_val = actor.stats.get_stat(stat_name, default) 
-	return (raw_val * directional_mod) + add_val
+# This old idea depreciated because an AttackEvent can involve mutiple directions
+### Returns stat for when actor is attacking from the target's [Front / Flank / Back]
+#static func get_attack_stat_for_attack_direction(actor:BaseActor, attack_dir:AttackHandler.AttackDirection, stat_name:String, default:int=0)->float:
+	#var sufix = ""
+	#if attack_dir == AttackHandler.AttackDirection.Front:
+		#sufix = StatHelper.DirectionalAttackSufix_Front
+	#elif attack_dir == AttackHandler.AttackDirection.Flank:
+		#sufix = StatHelper.DirectionalAttackSufix_Flank
+	#elif attack_dir == AttackHandler.AttackDirection.Back:
+		#sufix = StatHelper.DirectionalAttackSufix_Back
+	#
+	#var directional_mod = 1.0
+	#var add_val = 0.0
+	#if sufix != "":
+		#var full_stat_name = stat_name + ":" + sufix
+		#directional_mod = actor.stats.get_stat(full_stat_name, get_default_directional_mod(full_stat_name))
+		#add_val = actor.stats.get_stat(full_stat_name + ":Add")
+	#var raw_val = actor.stats.get_stat(stat_name, default) 
+	#return (raw_val * directional_mod) + add_val
 
 static func get_default_directional_mod(full_stat_name:String)->float:
 	var tokens = full_stat_name.split(":")

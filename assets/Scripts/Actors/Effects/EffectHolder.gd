@@ -196,21 +196,23 @@ func list_holding_limited_effect(type:EffectHelper.LimitedEffectTypes)->Array:
 			out_list.append(effect)
 	return out_list
 
-func get_on_deal_damage_mods():
-	var out_list = []
+func get_damage_mods()->Dictionary:
+	var out_dict = {}
 	for effect:BaseEffect in _effects.values():
-		for mod:Dictionary in effect.get_active_damage_mods():
-			if mod.get("OnDealDamage", false):
-				out_list.append(mod)
-	return out_list
-	
-func get_on_take_damage_mods():
-	var out_list = []
+		var mods = effect.get_active_damage_mods()
+		for mod_key:String in mods.keys():
+			out_dict[mod_key] = mods[mod_key]
+	return out_dict
+
+func get_attack_mods()->Dictionary:
+	var out_dict = {}
 	for effect:BaseEffect in _effects.values():
-		for mod:Dictionary in effect.get_active_damage_mods():
-			if mod.get("OnTakeDamage", false):
-				out_list.append(mod)
-	return out_list
+		var mods = effect.get_active_attack_mods()
+		for mod_key:String in mods.keys():
+			# Effects already cleaned up keys
+			# And actor will add SourceActor info
+			out_dict[mod_key] = mods[mod_key]
+	return out_dict
 
 func get_stat_mods()->Array:
 	var out_list = []
@@ -234,9 +236,9 @@ func trigger_damage_taken(game_state:GameStateData, damage_event:DamageEvent):
 	for effect:BaseEffect in _effects.values():
 		effect.trigger_on_damage_taken(game_state, damage_event)
 
-func trigger_attack(game_state:GameStateData, attack_event:AttackEvent):
+func trigger_attack(attack_event:AttackEvent, game_state:GameStateData):
 	for effect:BaseEffect in _effects.values():
-		effect.trigger_on_attack(game_state, attack_event)
+		effect.trigger_on_attack(attack_event, game_state)
 
 func _trigger_effects(trigger:BaseEffect.EffectTriggers, game_state:GameStateData):
 	if LOGGING: print("Triggering Effect Trigger '%s' for actor:%s." % [BaseEffect.EffectTriggers.keys()[trigger], _actor.Id])

@@ -1,0 +1,150 @@
+[
+    {
+		"ActorKey": "BlueSlime",
+		"ScenePath": "res://defs/Actors/Enemies/Slimes/slime_actor_node.tscn",
+		"Details":{
+			"DisplayName": "Slime",
+			"SnippetDesc": "Slime",
+			"Description": "A gelatinous blob of Mag mass with no blood, organs, or need for sustenance. While once a topic of fierce debate, researchers have recently been able to prove that Slimes do die if you stab them enough and thus, meet the scientific definition of “Life”..",
+			"Tags": ["Slime"],
+			"LargeIcon":"GuyPortrait.png",
+			"SmallIcon":"GuyPortrait.png"
+		},
+		"Stats":{
+			"BlocksLOS":0,
+			"Level":0,
+			"BarMax:Health":100,
+			"Mass":20,
+			"Speed":15,
+			"PPR":4,
+            "CrashPower":20,
+			"Strength": 10,
+			"Agility": 10,
+			"Intelligence": 10,
+			"Wisdom": 10,
+			"PhyAttack":10,
+			"MagAttack":10,
+			"Awareness":0,
+			"Accuracy":100,
+			"Evasion":1,
+			"Potency":100,
+			"Protection":1,
+			"CritChance":5,
+			"CritMod":1.5,
+			"OffHandMod": 0.5,
+			"TwoHandMod": 1.2,
+			"Resistance:Light": 0,
+			"Resistance:Poison": 150
+		},
+		"IsPlayer": false,
+		"SpriteSheet": "Sprites/BlueSlime_SpriteSheet.png",
+		"SpriteFrameWH": [12,4],
+		"SpriteOffset": [0,0],
+		"PortraitRect":[0,0,32,32],
+		"EquipmentSlots": [],
+        "DefaultAttackData":
+        {
+            "TargetParams": {
+                "EffectsAllies": true,
+                "EffectsEnemies": true,
+                "LineOfSight": true,
+                "TargetArea": "[[-1,0],[-1,1],[0,1],[1,1],[1,0]]",
+                "TargetType": "Actor"
+            },
+            "DamageDatas":{
+                "DefaultDamage": {
+                    "AtkPower": 100,
+                    "AtkStat": "PhyAttack",
+                    "FixedBaseDamage": null,
+                    "DamageEffect": "Pierce_DamageEffect",
+                    "DamageType": "Pierce",
+                    "DamageVarient": 0.5,
+                    "DefenseType": "Ward"
+                }
+            }
+        },
+        "AiData":{
+            "ActionsArr":[
+				"MoveForward",
+				"MoveLeft",
+				"MoveRight",
+				"MoveBack",
+				"AllAdjacentAttack"
+			]
+        }
+	},
+    {
+		"ActorKey": "OrangeSlime",
+		"ScenePath": "res://defs/Actors/Enemies/Slimes/slime_actor_node.tscn",
+		"Details":{
+			"DisplayName": "Slime",
+			"SnippetDesc": "Slime",
+			"Description": "A gelatinous blob of Phy mass with no blood, organs, or need for sustenance. While once a topic of fierce debate, researchers have recently been able to prove that Slimes do die if you stab them enough and thus, meet the scientific definition of “Life”..",
+			"Tags": ["Slime"],
+			"LargeIcon":"GuyPortrait.png",
+			"SmallIcon":"GuyPortrait.png"
+		},
+		"Stats":{
+			"BlocksLOS":0,
+			"Level":0,
+			"BarMax:Health":100,
+			"Mass":20,
+			"Speed":15,
+			"PPR":4,
+            "CrashPower":20,
+			"Strength": 10,
+			"Agility": 10,
+			"Intelligence": 10,
+			"Wisdom": 10,
+			"PhyAttack":10,
+			"MagAttack":10,
+			"Awareness":0,
+			"Accuracy":100,
+			"Evasion":1,
+			"Potency":100,
+			"Protection":1,
+			"CritChance":5,
+			"CritMod":1.5,
+			"OffHandMod": 0.5,
+			"TwoHandMod": 1.2,
+			"Resistance:Light": 0,
+			"Resistance:Poison": 150
+		},
+		"IsPlayer": false,
+		"SpriteSheet": "Sprites/OrangeSlime_SpriteSheet.png",
+		"SpriteFrameWH": [12,4],
+		"SpriteOffset": [0,0],
+		"PortraitRect":[0,0,32,32],
+		"EquipmentSlots": [],
+        "DefaultAttackData":
+        {
+            "TargetParams": {
+                "EffectsAllies": true,
+                "EffectsEnemies": true,
+                "LineOfSight": true,
+                "TargetArea": "[[-1,0],[-1,1],[0,1],[1,1],[1,0]]",
+                "TargetType": "Actor"
+            },
+            "DamageDatas":{
+                "DefaultDamage": {
+                    "AtkPower": 100,
+                    "AtkStat": "PhyAttack",
+                    "FixedBaseDamage": null,
+                    "DamageEffect": "Pierce_DamageEffect",
+                    "DamageType": "Pierce",
+                    "DamageVarient": 0.5,
+                    "DefenseType": "Armor"
+                }
+            }
+        },
+        "AiData":{
+            "ActionsArr":[
+				"MoveForward",
+				"MoveLeft",
+				"MoveRight",
+				"MoveBack",
+				"AllAdjacentAttack"
+			]
+        }
+	}
+]

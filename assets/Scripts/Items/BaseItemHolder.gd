@@ -278,18 +278,31 @@ func get_targeting_mods()->Array:
 		checked_equipments.append(equipment_id)
 	return out_list
 
-func get_damage_mods(taking_damage:bool)->Array:
-	var out_list = []
+func get_damage_mods()->Dictionary:
+	var out_dict = {}
 	var checked_equipments = [] ## For double sloted items (two handing)
 	for equipment_id in _raw_item_slots:
 		if checked_equipments.has(equipment_id):
 			continue
 		if equipment_id and equipment_id != '':
 			var item:BaseItem = ItemLibrary.get_item(equipment_id)
-			out_list.append_array(item.get_damage_mods(taking_damage))
-		checked_equipments.append(equipment_id)
-	return out_list
+			var mods = item.get_damage_mods()
+			for mod_key in mods.keys():
+				out_dict[mod_key] = mods[mod_key]
+	return out_dict
 
+func get_attack_mods()->Dictionary:
+	var out_dict = {}
+	var checked_equipments = [] ## For double sloted items (two handing)
+	for equipment_id in _raw_item_slots:
+		if checked_equipments.has(equipment_id):
+			continue
+		if equipment_id and equipment_id != '':
+			var item:BaseItem = ItemLibrary.get_item(equipment_id)
+			var mods = item.get_attack_mods()
+			for mod_key in mods.keys():
+				out_dict[mod_key] = mods[mod_key]
+	return out_dict
 
 	#for item_tags in _item_tagged_slots.keys():
 		#if _does_item_match_tags(item_tags, item):

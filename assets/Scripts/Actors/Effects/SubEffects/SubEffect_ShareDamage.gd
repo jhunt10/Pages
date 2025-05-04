@@ -23,7 +23,7 @@ func on_damage_taken(effect:BaseEffect, subeffect_data:Dictionary,
 		if !attacker:
 			printerr("SubEffect_ShareDamage.on_damage_taken: Damage source '%s' is not BaseActor.")
 			return
-		attacker.stats.apply_damage(damage_event.final_damage, effect)
+		attacker.stats.apply_damage(damage_event.final_damage)
 		CombatRootControl.Instance.create_flash_text_on_actor(attacker, str(damage_event.final_damage), FlashTextController.FlashTextType.DOT_Dmg)
 		return
 	if share_with == "EffectSource":
@@ -31,7 +31,7 @@ func on_damage_taken(effect:BaseEffect, subeffect_data:Dictionary,
 		if !source_actor:
 			printerr("SubEffect_ShareDamage.on_damage_taken: Effect source '%s' is not BaseActor.")
 			return
-		source_actor.stats.apply_damage(damage_event.final_damage, effect)
+		source_actor.stats.apply_damage(damage_event.final_damage)
 		CombatRootControl.Instance.create_flash_text_on_actor(source_actor, str(damage_event.final_damage), FlashTextController.FlashTextType.DOT_Dmg)
 		return
 	pass

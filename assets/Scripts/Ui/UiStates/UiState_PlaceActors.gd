@@ -157,5 +157,6 @@ func _on_placement_confirmed():
 		var actor = ActorLibrary.get_actor(actor_id)
 		var pos = actor_positions[actor_id]
 		CombatRootControl.Instance.add_actor(actor, pos)
+		actor.on_combat_start()
 	CombatRootControl.Instance.ui_control.ui_state_controller.set_ui_state(UiStateController.UiStates.ActionInput)
 	

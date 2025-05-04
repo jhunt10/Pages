@@ -275,11 +275,44 @@ func get_targeting_mods()->Array:
 	out_list.append_array(pages.get_targeting_mods())
 	return out_list
 
-func get_damage_mods(taking_damage:bool)->Array:
-	var out_list = []
-	if taking_damage:
-		out_list.append_array(effects.get_on_take_damage_mods())
-	else:
-		out_list.append_array(effects.get_on_deal_damage_mods())
-	out_list.append_array(pages.get_damage_mods(taking_damage))
-	return out_list
+func get_damage_mods()->Dictionary:
+	var out_dict = {}
+	var mods_list = []
+	mods_list.append_array(effects.get_damage_mods().values())
+	mods_list.append_array(pages.get_damage_mods().values())
+	for mod_data in mods_list:
+		var mod_key = mod_data['DamageModKey']
+		var mod_id = mod_key 
+		if mod_data.get("CanStack", false):
+			mod_id = mod_key + ":" + Id
+		mod_data['DamageModId'] = mod_id
+		mod_data['SourceActorId'] = Id
+		mod_data['SourceActorFaction'] = FactionIndex
+		out_dict[mod_id] = mod_data
+	return out_dict
+
+func get_attack_mods()->Dictionary:
+	var out_dict = {}
+	var mods_list = []
+	mods_list.append_array(effects.get_attack_mods().values())
+	mods_list.append_array(pages.get_attack_mods().values())
+	for mod_data in mods_list:
+		var mod_key = mod_data['AttackModKey']
+		var mod_id = mod_key 
+		if mod_data.get("CanStack", false):
+			mod_id = mod_key + ":" + Id
+		mod_data['AttackModId'] = mod_id
+		mod_data['SourceActorId'] = Id
+		mod_data['SourceActorFaction'] = FactionIndex
+		
+		for damage_mod_key in mod_data.get('DamageMods', {}).keys():
+			var damage_mod = mod_data['DamageMods'][damage_mod_key]
+			damage_mod['DamageModKey'] = damage_mod_key
+			damage_mod['DamageModId'] = damage_mod_key
+			damage_mod['SourceActorId'] = Id
+			damage_mod['SourceActorFaction'] = FactionIndex
+			if not damage_mod.has("DisplayName"):
+				damage_mod['DisplayName'] = mod_data.get("DisplayName", "")
+		
+		out_dict[mod_id] = mod_data
+	return out_dict

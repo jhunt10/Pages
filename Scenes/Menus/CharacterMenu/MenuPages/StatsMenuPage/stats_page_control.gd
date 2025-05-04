@@ -132,17 +132,17 @@ func _set_stats():
 	else:
 		block_chance_label.text = "--%"
 		block_mod_label.text = "1.0"
-	var evd_front_val = StatHelper.get_defense_stat_for_attack_direction(_actor, AttackEvent.AttackDirection.Front, StatHelper.Evasion)
+	var evd_front_val = StatHelper.get_defense_stat_for_attack_direction(_actor, AttackHandler.AttackDirection.Front, StatHelper.Evasion)
 	evade_front_chance_label.text = str(evd_front_val)
-	var evd_flank_val = StatHelper.get_defense_stat_for_attack_direction(_actor, AttackEvent.AttackDirection.Flank, StatHelper.Evasion)
+	var evd_flank_val = StatHelper.get_defense_stat_for_attack_direction(_actor, AttackHandler.AttackDirection.Flank, StatHelper.Evasion)
 	evade_flank_chance_label.text = str(evd_flank_val)
-	var evd_back_val = StatHelper.get_defense_stat_for_attack_direction(_actor, AttackEvent.AttackDirection.Back, StatHelper.Evasion)
+	var evd_back_val = StatHelper.get_defense_stat_for_attack_direction(_actor, AttackHandler.AttackDirection.Back, StatHelper.Evasion)
 	evade_back_chance_label.text = str(evd_back_val)
 	
-	var blk_front_val = StatHelper.get_defense_stat_for_attack_direction(_actor, AttackEvent.AttackDirection.Front, StatHelper.BlockChance)
+	var blk_front_val = StatHelper.get_defense_stat_for_attack_direction(_actor, AttackHandler.AttackDirection.Front, StatHelper.BlockChance)
 	block_front_chance_label.text = str(blk_front_val)
-	var blk_flank_val = StatHelper.get_defense_stat_for_attack_direction(_actor, AttackEvent.AttackDirection.Flank, StatHelper.BlockChance)
+	var blk_flank_val = StatHelper.get_defense_stat_for_attack_direction(_actor, AttackHandler.AttackDirection.Flank, StatHelper.BlockChance)
 	block_flank_chance_label.text = str(blk_flank_val)
-	var val = StatHelper.get_defense_stat_for_attack_direction(_actor, AttackEvent.AttackDirection.Back, StatHelper.BlockChance)
+	var val = StatHelper.get_defense_stat_for_attack_direction(_actor, AttackHandler.AttackDirection.Back, StatHelper.BlockChance)
 	block_back_chance_label.text = str(val)
 	

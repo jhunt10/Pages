@@ -46,6 +46,9 @@ func get_weapon_class()->WeaponClasses:
 func get_damage_data()->Dictionary:
 	return get_load_val("DamageData", {})
 
+func get_effect_on_attack_data()->Dictionary:
+	return get_load_val("ApplyEffectOnAttack", {})
+
 func get_ammo_data()->Dictionary:
 	return get_load_val("AmmoData", {})
 

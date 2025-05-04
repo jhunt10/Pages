@@ -88,3 +88,22 @@ static func tags_include_all_in_array(check_for:Array, tags:Array)->bool:
 			is_valid = false
 			break
 	return is_valid
+
+static func filters_accept_tags(tag_filter:Dictionary, tags:Array)->bool:
+	if tag_filter.has("RequireAllTags"):
+		var require_tags = tag_filter.get('RequireAllTags')
+		if not tags_include_all_in_array(require_tags, tags):
+			return false
+	if tag_filter.has("RequireAnyTags"):
+		var require_tags = tag_filter.get('RequireAnyTags')
+		if not tags_include_any_in_array(require_tags, tags):
+			return false
+	if tag_filter.has("ExcludeAllTags"):
+		var exclude_tags = tag_filter.get('ExcludeAllTags')
+		if tags_include_all_in_array(exclude_tags, tags):
+			return false
+	if tag_filter.has("ExcludeAnyTags"):
+		var exclude_tags = tag_filter.get('ExcludeAnyTags')
+		if tags_include_any_in_array(exclude_tags, tags):
+			return false
+	return true

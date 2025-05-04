@@ -586,13 +586,17 @@ func get_que_equipment()->BaseQueEquipment:
 	return null
 
 func is_two_handing()->bool:
-	var primary = get_primary_weapon()
-	if !primary:
+	var main_hand_slot_index = _slot_set_key_mapping.find("MainHand")
+	if main_hand_slot_index < 0:
 		return false
-	var off_hand = get_offhand_weapon()
-	if !off_hand:
+	var off_hand_slot_index = _slot_set_key_mapping.find("OffHand")
+	if off_hand_slot_index < 0:
 		return false
-	return primary.Id == off_hand.Id
+	var main_hand_item_id = get_item_id_in_slot(main_hand_slot_index)
+	var off_hand_item_id = get_item_id_in_slot(off_hand_slot_index)
+	if main_hand_item_id == null or off_hand_item_id == null:
+		return false
+	return main_hand_item_id == off_hand_item_id
 
 func get_primary_weapon()->BaseWeaponEquipment:
 	var main_hand_slot_index = _slot_set_key_mapping.find("MainHand")
@@ -604,10 +608,12 @@ func get_primary_weapon()->BaseWeaponEquipment:
 	return null
 
 func get_offhand_weapon()->BaseWeaponEquipment:
-	var main_hand_slot_index = _slot_set_key_mapping.find("OffHand")
-	if main_hand_slot_index < 0:
+	if is_two_handing():
 		return null
-	var item = get_equipment_in_slot(main_hand_slot_index)
+	var off_hand_slot_index = _slot_set_key_mapping.find("OffHand")
+	if off_hand_slot_index < 0:
+		return null
+	var item = get_equipment_in_slot(off_hand_slot_index)
 	if item is BaseWeaponEquipment:
 		return item as BaseWeaponEquipment
 	return null

@@ -250,5 +250,55 @@
                 "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_Freeze.gd"
             }
         }
-    }
+    },
+    {
+        "EffectKey": "AilmentPoisoned",
+        "CanStack": true,
+        "ShowInHud": true,
+        "ShowCounter": true,
+        "IsBad": true,
+        "DamageDatas": {
+            "DamageData1": {
+                "AtkPower": 2,
+                "AtkStat": "Fixed",
+                "BaseDamage": 100,
+                "DamageEffect": "Poison_DamageEffect",
+                "DamageEffectData":{
+                    "ShakeActor": false
+                },
+                "DamageType": "Poison",
+                "DamageVarient": 0,
+                "DefenseType": "None"
+            }
+        },
+        "AddTagsToActor": ["Poisoned"],
+        "DamageMods": {},
+        "Details": {
+            "Description": "Take Poison Damage equal to the remaining duration at the end of each Turn. Damage is not reduced by Ward.",
+            "DisplayName": "Poisoned",
+            "LargeIcon": "Sprites/PoisonedIcon.png",
+            "SmallIcon": "Sprites/PoisonedIcon.png",
+            "SnippetDesc": "Take Poison Damage at the End of Turn.",
+            "Tags": ["DOT"]
+        },
+        "StatMods": {
+        },
+        "SubEffects": {
+            "VfxEffect": {
+                "AilmentKey": "Poisoned",
+                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_AlimentVfx.gd"
+            },
+            "ApplyDamage": {
+                "DamageKey": "DamageData1",
+                "OptionalTriggers": [
+                    "OnTurnEnd"
+                ],
+                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_ApplyDamage.gd"
+            },
+            "Duration": {
+                "DurationType": "TurnEnd",
+                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_Duration.gd"
+            }
+        }
+    },
 ]

@@ -1,137 +1,86 @@
 class_name AttackEvent
 
 const LOGGING = true
-
-enum AttackDirection {Front, Flank, Back, AOE}
-enum AttackStage {
+enum AttackStage 
+{
 	## Attack Event has just been created
-	PreAttackRoll,
-	## Attack Event has rolled for Hit / Miss / Evade / Crit / Block
-	PostAttackRoll,
-	## Attack Event has rolled for Effect to be applied or not
-	PostEffectRoll,
-	## Attack Event has applied damage and is done
+	Created,
+	## Attack Event has rolled for Hit / Miss / Evade / Crit / Block 
+	RolledForHit,
+	## Attack Event has calculated/rolled Damage
+	RolledForDamage,
+	## Attack Event has rolled Effect Application
+	RolledForEffects,
+	## Attack Event has applied Damage and Effects
 	Resolved
 }
 
-
-var attacker:BaseActor
-var defender:BaseActor
+var attacker_id:String
+var attacker_faction:int
 var source_tag_chain:SourceTagChain
+var attack_details:Dictionary
 var attack_stage:AttackStage
 
-var attack_direction:AttackDirection
-var defender_has_cover:bool
-var is_aoe:bool:
-	get: return attack_direction == AttackDirection.AOE
+var defender_ids:Array:
+	get: return sub_events.keys()
+var sub_events:Dictionary = {}
 
-var is_hit:bool
-var is_evade:bool
-var is_crit:bool
-var is_blocked:bool
-
-var damage_data_arr:Array
-var attack_details:Dictionary
+var attack_mods:Dictionary
+var damage_datas:Dictionary
+var effect_datas:Dictionary
 
 var attacker_accuracy:int
 var attacker_crit_chance:float
 var attcker_crit_mod:float
 var attacker_potency:int
 
-var defender_evasion:int
-var defender_block_chance:float
-var defender_block_mod:float
-var defender_protection:int
-
-var final_damage_mod:float
-var damage_events:Array = []
-var effect_datas:Array = []
-var applied_effect_datas:Array = []
-
 func _init( attacking_actor:BaseActor, 
-			defending_actor:BaseActor, 
+			defending_actors:Array,
+			defenders_dir_and_cover_data:Dictionary,
 			attack_details:Dictionary,
-			direction_of_attack:AttackDirection, 
-			defender_is_under_cover:bool, 
 			tag_chain:SourceTagChain, 
-			damage_datas:Array,
-			effect_datas:Array) -> void:
-	attacker = attacking_actor
-	defender = defending_actor
-	source_tag_chain = tag_chain
-	damage_data_arr = damage_datas
-	attack_stage = AttackStage.PreAttackRoll
-	
-	attack_direction = direction_of_attack
-	defender_has_cover = defender_is_under_cover
-	self.effect_datas = effect_datas
+			damage_datas:Dictionary,
+			effect_datas:Dictionary,
+			attack_mods:Dictionary) -> void:
+	attacker_id = attacking_actor.Id
+	attacker_faction = attacking_actor.FactionIndex
 	self.attack_details = attack_details
+	source_tag_chain = tag_chain
+	self.damage_datas = damage_datas
+	self.effect_datas = effect_datas
+	self.attack_mods = attack_mods
+	attack_stage = AttackStage.Created
 	
-	attacker_accuracy = StatHelper.get_attack_stat_for_attack_direction(attacker, attack_direction, StatHelper.Accuracy, 100)
-	attacker_crit_chance =  StatHelper.get_attack_stat_for_attack_direction(attacker, attack_direction, StatHelper.CritChance, 0) / 100.0
-	attcker_crit_mod = StatHelper.get_attack_stat_for_attack_direction(attacker, attack_direction, StatHelper.CritMod, 1.5)
-	attacker_potency = StatHelper.get_attack_stat_for_attack_direction(attacker, attack_direction, StatHelper.Potency, 1)
+	# StatMods from AttackMods should already have been applied to Attacker and Defenders
+	attacker_accuracy = attacking_actor.stats.get_stat(StatHelper.Accuracy, 100)
+	attacker_potency = attacking_actor.stats.get_stat(StatHelper.Potency, 100)
+	attacker_crit_chance = attacking_actor.stats.get_stat(StatHelper.CritChance, 0) / 100.0
+	attcker_crit_mod = attacking_actor.stats.get_stat(StatHelper.CritMod, 0)
 	
+	for defender:BaseActor in defending_actors:
+		var dir = defenders_dir_and_cover_data[defender.Id]['AttackDirection']
+		var has_cover = defenders_dir_and_cover_data[defender.Id]['HasCover']
+		sub_events[defender.Id] = AttackSubEvent.new(self, defender,dir, has_cover)
 	
-	defender_evasion = StatHelper.get_defense_stat_for_attack_direction(defender, attack_direction, StatHelper.Evasion, 0)
-	defender_block_chance = (StatHelper.get_defense_stat_for_attack_direction(defender, attack_direction, StatHelper.BlockChance, 0) / 100.0)
-	defender_block_mod = StatHelper.get_defense_stat_for_attack_direction(defender, attack_direction, StatHelper.BlockMod, 0.25)
-	defender_protection = StatHelper.get_defense_stat_for_attack_direction(defender, attack_direction, StatHelper.BlockMod, 0)
-
-func roll_for_hit():
-	if attack_direction == AttackDirection.Front:
-		if LOGGING: print("Attacking from FRONT")
-	if attack_direction == AttackDirection.Flank:
-		if LOGGING: print("Attacking from Flank")
-	if attack_direction == AttackDirection.Back:
-		if LOGGING: print("Attacking from Back")
-	if attack_direction == AttackDirection.AOE:
-		if LOGGING: print("Attacking from AOE")
-	var attack_accuracy_mod = attack_details.get("AccuracyMod", 1)
-	var net_evasion = max(0, defender_evasion + (100 - (attacker_accuracy * attack_accuracy_mod)))
+func serialize_self()->String:
+	var data = {
+	"attacker_id": attacker_id,
+	"attacker_faction": attacker_faction,
+	"source_tag_chain": source_tag_chain.get_all_tags(),
+	"attack_details": attack_details,
+	"attack_stage": attack_stage,
+	"defender_ids": defender_ids,
 	
-	var hit_chance = DamageHelper.calc_armor_reduction(net_evasion)
-	var roll = randf()
-	is_hit = roll > 1 - hit_chance
-	is_evade = defender_evasion > 100 - attacker_accuracy
-	is_crit = roll > 1 - attacker_crit_chance
-	
-	var block_roll = randf()
-	is_blocked = block_roll >  1 - defender_block_chance
-	
-	if LOGGING: print("Accuracy: %s | Evasion: %s | Net: %s" % [attacker_accuracy, defender_evasion, net_evasion])
-	if LOGGING: print("Attack Roll: %s | Hit Chance: %s | Crit Chance: %s | Is Hit: %s | Is Crit: %s"%
-		[roll, hit_chance, attacker_crit_chance, is_hit, is_crit])
-	if LOGGING: print("Block Roll: %s | Block Chance: %s | Is Block: %s | Block Mod: %s" % [block_roll, defender_block_chance, is_blocked, defender_block_mod])
-	
-	final_damage_mod = 1.0
-	if is_hit and attack_direction != AttackDirection.AOE:
-		if is_crit and not is_blocked:
-			final_damage_mod = attcker_crit_mod
-		elif is_blocked and not is_crit:
-			final_damage_mod = defender_block_mod
-			
-	self.attack_stage = AttackStage.PostAttackRoll
-
-
-func roll_for_effects():
-	for effect_data in effect_datas:
-		var effect_key = effect_data.get('EffectKey')
-		if not effect_key:
-			continue
-		var application_chance = effect_data.get('ApplicationChance', 1)
-		var application_roll = randf()
-		# Chance to apply effect was triggered
-		if application_roll > 1 - application_chance:
-			var attack_potency_mod = attack_details.get("PotencyMod", 1)
-			var net_protection = max(0, defender_protection + (100 - (attacker_potency * attack_potency_mod)))
-			var hit_chance = DamageHelper.calc_armor_reduction(net_protection)
-			var roll = randf()
-			var applied = roll > 1 - hit_chance
-			if applied:
-				applied_effect_datas.append(effect_data)
-	self.attack_stage = AttackStage.PostEffectRoll
-
-func get_damage_datas():
-	return damage_data_arr
-	
+	"attack_mods": attack_mods,
+	"damage_datas": damage_datas,
+	"effect_datas": effect_datas,
+	"attacker_accuracy": attacker_accuracy,
+	"attacker_crit_chance": attacker_crit_chance,
+	"attcker_crit_mod": attcker_crit_mod,
+	"attacker_potency": attacker_potency,
+	"sub_events": {}
+	}
+	for defender_id in defender_ids:
+		var sub_event:AttackSubEvent = sub_events[defender_id]
+		data['sub_events'][defender_id] = sub_event.dictialize_self()
+	return JSON.stringify(data)

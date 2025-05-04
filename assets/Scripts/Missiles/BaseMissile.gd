@@ -109,13 +109,14 @@ func do_thing(game_state:GameStateData):
 	var effected_actors = _get_actors_in_effect_area(game_state)
 	if LOGGING: print("Found %s effected actors" % [effected_actors.size()])
 	
-	for target_actor in effected_actors:
-		#if _target_params.is_valid_target_actor(source_actor, target_actor, game_state):
-		DamageHelper.handle_attack(source_actor, target_actor, 
-								_missle_data.get("AttackDetails", {}), _missle_data['DamageData'], 
-								_missle_data.get("EffectDatas", []),
-								_source_target_chain, CombatRootControl.Instance.GameState,
-								_target_params, MapPos.Vector2i(StartSpot))
+	#TODO: ATTACK
+	#for target_actor in effected_actors:
+		##if _target_params.is_valid_target_actor(source_actor, target_actor, game_state):
+		#DamageHelper.handle_attack(source_actor, target_actor, 
+								#_missle_data.get("AttackDetails", {}), _missle_data['DamageData'], 
+								#_missle_data.get("EffectDatas", []),
+								#_source_target_chain, CombatRootControl.Instance.GameState,
+								#_target_params, MapPos.Vector2i(StartSpot))
 	node.on_missile_reach_target()
 
 func _get_actors_in_effect_area(game_state:GameStateData)->Array:
