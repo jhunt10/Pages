@@ -4,7 +4,7 @@
 #		"AtkPower": 100,
 #		"AtkStat": "Strength",
 #		"BaseDamage": 30, -- Optional when overriding character's damage
-#		"DamageEffect": "Slash_DamageEffect",
+#		"DamageVfxKey": "Slash_DamageEffect",
 #		"DamageType": "Slash",
 #		"DamageVarient": 0.1,
 #		"DefenseType": "Armor"

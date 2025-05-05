@@ -62,6 +62,9 @@ func _init( attacking_actor:BaseActor,
 		var has_cover = defenders_dir_and_cover_data[defender.Id]['HasCover']
 		sub_events[defender.Id] = AttackSubEvent.new(self, defender,dir, has_cover)
 	
+	for damage_data_key in self.damage_datas.keys():
+		self.damage_datas[damage_data_key]['DamageDataKey'] = damage_data_key
+	
 func serialize_self()->String:
 	var data = {
 	"attacker_id": attacker_id,

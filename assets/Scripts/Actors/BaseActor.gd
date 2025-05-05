@@ -188,6 +188,7 @@ func load_data(data:Dictionary):
 
 func on_combat_start():
 	effects.on_combat_start()
+	self.is_dead = false
 
 func on_delete():
 	if is_deleted:

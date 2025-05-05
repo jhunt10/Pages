@@ -13,7 +13,7 @@ func parent_to_offset()->bool:
 	return true
 
 func _on_start():
-	if _data.get("SourceActorId", '') == _data.get("TargetActorId", ''):
+	if _data.get("SourceActorId", '') == _data.get("HostActorId", ''):
 		sprite.hide()
 		animation_player.speed_scale = 10
 		#_create_damage_effect()

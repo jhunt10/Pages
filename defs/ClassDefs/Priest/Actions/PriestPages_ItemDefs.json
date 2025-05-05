@@ -157,28 +157,7 @@
             "Rarity": "Common",
             "Value": 50
         },
-        "DamageMods": {
-            "DamageMod1": {
-                "Conditions": {
-                    "ExcludeDefenderTags": [],
-                    "LimitDefenderTags": [
-                        "Enemy"
-                    ],
-                    "ExcludeSourceTags": [],
-                    "LimitSourceTags": [
-                        "Attack"
-                    ],
-                    "DamageType": "Light"
-                },
-                "DamageModKey": "DamageMod1",
-                "DisplayName": "Harming Light",
-                "ModProperty": "Resistance",
-                "ModType": "Add",
-                "OnDealDamage": true,
-                "OnTakeDamage": false,
-                "Value": -75
-            }
-        }
+        "DamageMods": {}
     },
 
     

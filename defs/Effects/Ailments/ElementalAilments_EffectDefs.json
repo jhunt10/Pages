@@ -10,8 +10,8 @@
                 "AtkPower": 2,
                 "AtkStat": "Percent:PPR",
                 "BaseDamage": 0,
-                "DamageEffect": "SmallFire_DamageEffect",
-                "DamageEffectData":{
+                "DamageVfxKey": "SmallFire_DamageEffect",
+                "DamageVfxData":{
                     "ShakeActor": false
                 },
                 "DamageType": "Fire",
@@ -70,7 +70,7 @@
                 "AtkPower": 2,
                 "AtkStat": "Percent:PPR",
                 "BaseDamage": 0,
-                "DamageEffect": "SmallLightning_DamageEffect",
+                "DamageVfxKey": "SmallLightning_DamageEffect",
                 "DamageType": "Electric",
                 "DamageVarient": 0.5,
                 "DefenseType": "None"
@@ -262,8 +262,8 @@
                 "AtkPower": 2,
                 "AtkStat": "Fixed",
                 "BaseDamage": 100,
-                "DamageEffect": "Poison_DamageEffect",
-                "DamageEffectData":{
+                "DamageVfxKey": "Poison_DamageEffect",
+                "DamageVfxData":{
                     "ShakeActor": false
                 },
                 "DamageType": "Poison",
@@ -300,5 +300,5 @@
                 "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_Duration.gd"
             }
         }
-    },
+    }
 ]

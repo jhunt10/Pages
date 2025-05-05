@@ -127,14 +127,14 @@ func do_thing(tiles_traveled:int):
 			if _already_hit_actor_ids.has(target.Id):
 				continue
 			_already_hit_actor_ids.append(target.Id)
-			DamageHelper.handle_attack(
+			AttackHandler.handle_attack(
 				actor, 
-				target, 
+				[target], 
 				attack_details, 
-				damage_data, 
+				{"Damage1":damage_data}, 
 				effect_data, 
 				tag_chain, 
-				game_state, 
 				_target_params,
+				game_state, 
 				center_pos
 			)

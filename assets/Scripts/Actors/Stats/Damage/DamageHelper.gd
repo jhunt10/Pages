@@ -31,7 +31,7 @@ static func handle_push_damage(moving_actor:BaseActor, pushed_actor:BaseActor, g
 		"AtkPower": 10,
 		"AtkStat": "Strength",
 		"BaseDamage": base_damage,
-		"DamageEffect": "Blunt_DamageEffect",
+		"DamageVfxKey": "Blunt_DamageEffect",
 		"DamageType": "Crash",
 		"DamageVarient": 0,
 		"DefenseType": "Armor"
@@ -46,7 +46,6 @@ static func handle_push_damage(moving_actor:BaseActor, pushed_actor:BaseActor, g
 static func roll_for_damage(damage_data:Dictionary, attacker:BaseActor, defender:BaseActor, source_tag_chain:SourceTagChain, damage_mods:Dictionary)->DamageEvent:
 	var damage_event = DamageEvent.new(damage_data, attacker, defender, source_tag_chain)
 	# Apply Damage mods
-	var applied_mods = []
 	for damage_mod_key in damage_mods.keys():
 		var damage_mod:Dictionary = damage_mods[damage_mod_key]
 		if does_damage_mod_apply(damage_mod, attacker, defender, damage_data, source_tag_chain):
@@ -66,7 +65,7 @@ static func roll_for_damage(damage_data:Dictionary, attacker:BaseActor, defender
 	
 	# Get Damage Resistance
 	damage_event.defender_resistance = defender.stats.get_damage_resistance(damage_event.damage_type)
-	var resistance_reduction = 1.0 - (damage_event.defender_resistance / 100)
+	var resistance_reduction = 1.0 - (float(damage_event.defender_resistance) / 100.0)
 	
 	
 	# Get the defend's Armor or Ward
@@ -74,7 +73,7 @@ static func roll_for_damage(damage_data:Dictionary, attacker:BaseActor, defender
 		damage_event.defense_value = defender.stats.get_stat('Armor')
 	if damage_event.defense_type == DamageEvent.DefenseType.Ward:
 		damage_event.defense_value = defender.stats.get_stat('Ward')
-	damage_event.defense_reduction = 1.0 - (damage_event.defense_value / 100)
+	damage_event.defense_reduction = 1.0 - (float(damage_event.defense_value) / 100.0)
 	
 	# Raw Damage
 	var working_damage = damage_event.base_damage * damage_event.applied_power
@@ -87,7 +86,7 @@ static func roll_for_damage(damage_data:Dictionary, attacker:BaseActor, defender
 	# Apply mods
 	var add_to = 0.0
 	var scale_by = 1.0
-	for mod in applied_mods:
+	for mod in damage_event.damage_mods.values():
 		if mod.get("ModType") == "Add":
 			add_to += mod.get("Value", 0)
 		if mod.get("ModType") == "Scale":
@@ -114,6 +113,11 @@ static func does_damage_mod_apply(damage_mod:Dictionary, attacker:BaseActor, def
 	if damage_filter.size() > 0 and not damage_filter.has(damage_type):
 		return false
 	
+	# Check Defender Faction Filters
+	var defender_faction_filters = conditions.get("DefenderFactionFilters", [])
+	if not FilterHelper.check_faction_filter(mod_source_actor, mod_source_faction, defender_faction_filters, defender):
+		return false
+			
 	# Check Attacker Faction Filters
 	if attacker:
 		var attack_faction_filters = conditions.get("AttackerFactionFilters", [])
@@ -179,8 +183,8 @@ static func handle_damage(source, defender:BaseActor, damage_data:Dictionary,
 		defender.aggro.add_threat_from_actor(source_actor, damage_event.final_damage)
 	
 	if create_VFX:
-		var damage_effect = damage_data.get("DamageEffect", null)
-		var damage_effect_data = damage_data.get("DamageEffectData", {})
+		var damage_effect = damage_data.get("DamageVfxKey", null)
+		var damage_effect_data = damage_data.get("DamageVfxData", {})
 		if damage_effect:
 			if damage_event.final_damage < 0:
 				damage_effect_data['DamageTextType'] = FlashTextController.FlashTextType.Healing_Dmg
@@ -252,8 +256,8 @@ static func calc_armor_reduction(armor)->float:
 	return 1.0-(float(armor)/100.0)
 
 static func build_damage_vfx_data(attack_event:AttackEvent, damage_event:DamageEvent, damage_data:Dictionary)->Dictionary:
-	var damage_vfx_key = damage_data.get("DamageEffect", null)
-	var damage_vfx_data = damage_data.get("DamageEffectData", {}).duplicate()
+	var damage_vfx_key = damage_data.get("DamageVfxKey", null)
+	var damage_vfx_data = damage_data.get("DamageVfxData", {}).duplicate()
 	if damage_vfx_key:
 		damage_vfx_data['VfxKey'] = damage_vfx_key
 		if damage_event.final_damage < 0:

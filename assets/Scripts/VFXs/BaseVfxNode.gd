@@ -32,6 +32,8 @@ func _process(delta: float) -> void:
 func set_vfx_data(new_id:String, data:Dictionary):
 	id = new_id
 	_data = data
+	if not _data.has("ChainVfxDatas"):
+		_data['ChainVfxDatas'] = {}
 
 func start_vfx():
 	if not _readyed:
@@ -49,6 +51,13 @@ func _on_start():
 func finish():
 	if _state == States.Finished:
 		return
+	
+	var chain_vfx_datas = _data.get("ChainVfxDatas", {})
+	var source_actor = null
+	if _data.has("SourceActorId"): source_actor = ActorLibrary.get_actor(_data['SourceActorId'])
+	for vfx_key in chain_vfx_datas.keys():
+		VfxHelper.create_vfx_on_actor(self.actor_node.Actor, vfx_key, chain_vfx_datas[vfx_key], source_actor)
+		
 	_state = States.Finished
 	_on_delete()
 	if vfx_holder and vfx_holder.has_vfx(self.id):
@@ -57,3 +66,6 @@ func finish():
 
 func _on_delete():
 	pass
+
+func add_chained_vfx(chain_key:String, chain_data:Dictionary):
+	_data['ChainVfxDatas'][chain_key] = chain_data

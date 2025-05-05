@@ -1302,7 +1302,7 @@ facing = 2
 map_coor = Vector2i(7, 5)
 
 [node name="SpwanNode_MovingTarget" type="Sprite2D" parent="MapMarkerMapLayer"]
-position = Vector2(240, 176)
+position = Vector2(176, 240)
 texture = ExtResource("12_2qpl1")
 offset = Vector2(0, -16)
 hframes = 12
@@ -1310,7 +1310,7 @@ vframes = 4
 script = ExtResource("11_vji11")
 spawn_actor_key = "TestTarget"
 facing = 2
-map_coor = Vector2i(7, 5)
+map_coor = Vector2i(5, 7)
 
 [node name="SpwanNode_TestTarget3" type="Sprite2D" parent="MapMarkerMapLayer"]
 visible = false
@@ -1360,7 +1360,6 @@ facing = 2
 map_coor = Vector2i(5, 6)
 
 [node name="SpwanNode_TestTarget_Armored2" type="Sprite2D" parent="MapMarkerMapLayer"]
-visible = false
 position = Vector2(80, 208)
 texture = ExtResource("13_rojbo")
 offset = Vector2(0, -16)
@@ -1373,7 +1372,6 @@ facing = 1
 map_coor = Vector2i(2, 6)
 
 [node name="SpwanNode_TestTarget_Armored3" type="Sprite2D" parent="MapMarkerMapLayer"]
-visible = false
 position = Vector2(80, 240)
 texture = ExtResource("13_rojbo")
 offset = Vector2(0, -16)
@@ -1386,7 +1384,6 @@ facing = 1
 map_coor = Vector2i(2, 7)
 
 [node name="SpwanNode_TestTarget_Armored4" type="Sprite2D" parent="MapMarkerMapLayer"]
-visible = false
 position = Vector2(80, 272)
 texture = ExtResource("13_rojbo")
 offset = Vector2(0, -16)

@@ -40,7 +40,7 @@ func get_key_to_input_mapping()->Dictionary:
 		"AtkStat": $InnerContainer/StatContainer/StatOptionButton,
 		"DamageType": $InnerContainer/TypeSDefenseContainer/TypeOptionButton,
 		"DefenseType": $InnerContainer/TypeSDefenseContainer/DefenseOptionButton,
-		"DamageEffect": $InnerContainer/VFXContainer/VFXOptionButton,
+		"DamageVfxKey": $InnerContainer/VFXContainer/VFXOptionButton,
 		"DamageVarient": $InnerContainer/PowerStatContainer/VarientSpinBox,
 		"FixedBaseDamage": $InnerContainer/BaseDamageContainer/BaseDamageSpinBox
 	}

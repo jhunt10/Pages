@@ -12,6 +12,7 @@ enum DamageTypes {
 }
 
 var source
+var damage_data_key:String
 var attacker:BaseActor
 var defender:BaseActor
 var source_tag_chain:SourceTagChain
@@ -44,6 +45,7 @@ func _init(data:Dictionary, source, defender:BaseActor, tag_chain:SourceTagChain
 	self.defender = defender
 	self.source_tag_chain = tag_chain
 	self.is_successful = true
+	self.damage_data_key = data.get("DamageDataKey", "NOKEY")
 	self.attack_stat = data.get("AtkStat", "Fixed")
 	self.attack_power = data.get("AtkPower", 100)
 	self.damage_variance = data.get("DamageVarient", 0)
@@ -81,6 +83,7 @@ func get_source_actor()->BaseActor:
 
 func dictialize_self()->Dictionary:
 	return {
+		"_DamageDataKey": damage_data_key,
 		"attacker": attacker.Id,
 		"defender": defender.Id,
 		"source_tag_chain": source_tag_chain.get_all_tags(),

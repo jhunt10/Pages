@@ -95,7 +95,7 @@
                 "AtkPower": 80,
                 "AtkStat": "MagAttack",
                 "BaseDamage": 0,
-                "DamageEffect": "SmallDAMAGE_TYPE_DamageEffect",
+                "DamageVfxKey": "SmallDAMAGE_TYPE_DamageEffect",
                 "DamageType": "DAMAGE_TYPE",
                 "DamageVarient": 0.2,
                 "DefenseType": "Ward"
@@ -190,7 +190,7 @@
                 "AtkPower": 100,
                 "AtkStat": "MagAttack",
                 "BaseDamage": 0,
-                "DamageEffect": "SmallDAMAGE_TYPE_DamageEffect",
+                "DamageVfxKey": "SmallDAMAGE_TYPE_DamageEffect",
                 "DamageType": "DAMAGE_TYPE",
                 "DamageVarient": 0.1,
                 "DefenseType": "Ward"
@@ -237,8 +237,8 @@
                 },
                 {
                     "SubActionScript": "res://assets/Scripts/Actions/SubActions/Attacks/SubAct_Attack.gd",
-                    "DamageKey": "Damage1",
-                    "TargetKey": "Target1"
+                    "TargetKey": "Target1",
+                    "DamageKey": "Damage1"
                 },
                 {
                     "SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponMotionAnimation.gd",
@@ -274,7 +274,7 @@
                 "AtkPower": 100,
                 "AtkStat": "MagAttack",
                 "BaseDamage": 0,
-                "DamageEffect": "SmallDAMAGE_TYPE_DamageEffect",
+                "DamageVfxKey": "SmallDAMAGE_TYPE_DamageEffect",
                 "DamageType": "DAMAGE_TYPE",
                 "DamageVarient": 0.1,
                 "DefenseType": "Ward"
@@ -374,7 +374,7 @@
                 "AtkPower": 100,
                 "AtkStat": "MagAttack",
                 "BaseDamage": 0,
-                "DamageEffect": "SmallFire_DamageEffect",
+                "DamageVfxKey": "SmallFire_DamageEffect",
                 "DamageType": "Fire",
                 "DamageVarient": 0.2,
                 "DefenseType": "Ward"

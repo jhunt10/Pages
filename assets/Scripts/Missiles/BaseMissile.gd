@@ -109,6 +109,22 @@ func do_thing(game_state:GameStateData):
 	var effected_actors = _get_actors_in_effect_area(game_state)
 	if LOGGING: print("Found %s effected actors" % [effected_actors.size()])
 	
+	var attack_event = AttackHandler.handle_attack(
+		source_actor, 
+		effected_actors, 
+		_missle_data.get("AttackDetails", {}),
+		{"MissileDamage":_missle_data['DamageData']},
+		_missle_data.get("EffectDatas", []),
+		_source_target_chain,
+		_target_params,
+		game_state,
+		MapPos.Vector2i(StartSpot)
+		)
+	
+	print("\n---------------------------")
+	print(attack_event.serialize_self())
+	print("---------------------------\n")
+	
 	#TODO: ATTACK
 	#for target_actor in effected_actors:
 		##if _target_params.is_valid_target_actor(source_actor, target_actor, game_state):

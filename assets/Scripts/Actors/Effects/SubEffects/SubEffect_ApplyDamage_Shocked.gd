@@ -29,7 +29,7 @@ func on_effect_trigger(effect:BaseEffect, subeffect_data:Dictionary, trigger:Bas
 	#shared_damage_data['DamageEffect'] = null
 	for adj_actor in adj_actors:
 		var damage_event = DamageHelper.handle_damage(effect, adj_actor, shared_damage_data, tag_chain, game_state, null, false)
-		var vfx_node = VfxHelper.create_vfx_on_actor(adj_actor, "LightningChainVfx", {"SourceActorId": actor.Id, "TargetActorId": adj_actor.Id})
+		var vfx_node = VfxHelper.create_vfx_on_actor(adj_actor, "LightningChainVfx", {"SourceActorId": actor.Id, "HostActorId": adj_actor.Id})
 		var damage_effect_data = VfxLibrary.get_vfx_def("SmallLightning_DamageEffect")
 		damage_effect_data['DamageTextType'] = FlashTextController.FlashTextType.DOT_Dmg
 		damage_effect_data['DamageNumber'] = 0 - damage_event.final_damage

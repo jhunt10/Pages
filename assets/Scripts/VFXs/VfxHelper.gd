@@ -2,11 +2,11 @@ class_name VfxHelper
 
 const FORCE_RELOAD = false
 
-static func create_attack_vfx_node(from_actor:BaseActor, to_actor:BaseActor, bullet_vfx_key:String, vfx_data:Dictionary):
-	var temp_data = vfx_data.duplicate(true)
-	temp_data['SourceActorId'] = from_actor.Id
-	temp_data['TargetActorId'] = to_actor.Id
-	return create_vfx_on_actor(to_actor, bullet_vfx_key, temp_data)
+#static func create_attack_vfx_node(from_actor:BaseActor, to_actor:BaseActor, bullet_vfx_key:String, vfx_data:Dictionary):
+	#var temp_data = vfx_data.duplicate(true)
+	#temp_data['SourceActorId'] = from_actor.Id
+	#temp_data['HostActorId'] = to_actor.Id
+	#return create_vfx_on_actor(to_actor, bullet_vfx_key, temp_data)
 
 static func create_damage_effect(target_actor:BaseActor, vfx_key:String, vfx_data:Dictionary):
 	if FORCE_RELOAD: MainRootNode.vfx_libray.reload_vfxs()
@@ -33,15 +33,22 @@ static func create_damage_effect(target_actor:BaseActor, vfx_key:String, vfx_dat
 			target_actor_node.play_shake()
 
 
-static func create_vfx_on_actor(actor:BaseActor, vfx_key:String, vfx_data:Dictionary)->BaseVfxNode:
+static func create_vfx_on_actor(host_actor:BaseActor, vfx_key:String, vfx_data:Dictionary, source_actor:BaseActor=null)->BaseVfxNode:
 	if FORCE_RELOAD: MainRootNode.vfx_libray.reload_vfxs()
-	var actor_node = CombatRootControl.get_actor_node(actor.Id)
+	var actor_node = CombatRootControl.get_actor_node(host_actor.Id)
 	if not actor_node:
-		printerr("VfxHelper.create_vfx_on_actor: No BaseActorNode found for Actor '%s'." % [actor.Id])
+		printerr("VfxHelper.create_vfx_on_actor: No BaseActorNode found for Actor '%s'." % [host_actor.Id])
 		return null
 	
 	var vfx_def = MainRootNode.vfx_libray.get_vfx_def(vfx_key)
 	var merged_data = BaseLoadObjectLibrary._merge_defs(vfx_data, vfx_def)
+	
+	# Set Host and Source actors
+	merged_data['HostActorId'] = host_actor.Id
+	if source_actor and not merged_data.has("SourceActorId"):
+		merged_data['SourceActorId'] = source_actor.Id
+	
+	# Determin Id
 	var would_be_id = vfx_key
 	if merged_data.get("CanStack", true):
 		would_be_id += "_" + str(ResourceUID.create_id())

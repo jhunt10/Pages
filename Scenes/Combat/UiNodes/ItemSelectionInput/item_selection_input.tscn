@@ -20,23 +20,22 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ipwux")
 titile_label = NodePath("BackPatchContainer/BoxContainer/HBoxContainer/Label")
-options_container = NodePath("BackPatchContainer/BoxContainer/VBoxContainer")
+options_container = NodePath("BackPatchContainer/BoxContainer/ScrollContainer/OptionEntriesContainer")
 premade_item_button = NodePath("BackPatchContainer/BoxContainer/ItemSelectionButton")
 cancel_button = NodePath("BackPatchContainer/BoxContainer/Cancel Button/Button")
 menu_container = NodePath("BackPatchContainer")
 
 [node name="BackPatchContainer" type="Container" parent="." node_paths=PackedStringArray("background", "inner_container")]
-custom_minimum_size = Vector2(352, 185)
+custom_minimum_size = Vector2(352, 585)
 layout_mode = 2
 offset_left = 400.0
-offset_top = 231.0
+offset_top = 31.0
 offset_right = 752.0
-offset_bottom = 416.0
+offset_bottom = 616.0
 script = ExtResource("1_dkmqq")
 background = NodePath("NinePatchRect")
 inner_container = NodePath("BoxContainer")
 margin_override = 16
-sides_padding = null
 center_in_parent = true
 
 [node name="NinePatchRect" type="NinePatchRect" parent="BackPatchContainer"]
@@ -121,7 +120,12 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="BackPatchContainer/BoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="BackPatchContainer/BoxContainer"]
+custom_minimum_size = Vector2(0, 400)
+layout_mode = 2
+horizontal_scroll_mode = 0
+
+[node name="OptionEntriesContainer" type="VBoxContainer" parent="BackPatchContainer/BoxContainer/ScrollContainer"]
 layout_mode = 2
 
 [node name="Cancel Button" type="Control" parent="BackPatchContainer/BoxContainer" node_paths=PackedStringArray("button")]

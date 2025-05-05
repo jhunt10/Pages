@@ -24,7 +24,7 @@
         },
         "DamageDatas": {
             "Damage1": {
-                "DamageEffect": "SmallFire_DamageEffect",
+                "DamageVfxKey": "SmallFire_DamageEffect",
                 "DamageType": "Fire",
                 "DamageVarient": 0.2,
                 "DefenseType": "Ward"
@@ -81,7 +81,7 @@
         },
         "DamageDatas": {
             "Damage1": {
-                "DamageEffect": "SmallFire_DamageEffect",
+                "DamageVfxKey": "SmallFire_DamageEffect",
                 "DamageType": "Fire",
                 "DamageVarient": 0.2,
                 "DefenseType": "Ward"
@@ -103,9 +103,9 @@
         "DamageDatas": {
             "Damage1": {
                 "AtkPower": 80,
-                "AtkStat": "MagAttack",
-                "BaseDamage": 0,
-                "DamageEffect": "SmallFire_DamageEffect",
+                "AtkStat": "Fixed",
+                "BaseDamage": 100,
+                "DamageVfxKey": "SmallFire_DamageEffect",
                 "DamageType": "Fire",
                 "DamageVarient": 0.2,
                 "DefenseType": "Ward"
@@ -251,7 +251,7 @@
                 "AtkPower": 100,
                 "AtkStat": "MagAttack",
                 "BaseDamage": 0,
-                "DamageEffect": "Exploision_DamageEffect",
+                "DamageVfxKey": "Exploision_DamageEffect",
                 "DamageType": "Fire",
                 "DamageVarient": 0.2,
                 "DefenseType": "Ward"
@@ -299,7 +299,7 @@
         },
         "DamageDatas": {
             "Damage1": {
-                "DamageEffect": "SmallIce_DamageEffect",
+                "DamageVfxKey": "SmallIce_DamageEffect",
                 "DamageType": "Cold",
                 "DamageVarient": 0.1,
                 "DefenseType": "Ward"
@@ -356,7 +356,7 @@
         },
         "DamageDatas": {
             "Damage1": {
-                "DamageEffect": "SmallIce_DamageEffect",
+                "DamageVfxKey": "SmallIce_DamageEffect",
                 "DamageType": "Cold",
                 "DamageVarient": 0.1,
                 "DefenseType": "Ward"
@@ -380,7 +380,7 @@
                 "AtkPower": 80,
                 "AtkStat": "MagAttack",
                 "BaseDamage": 0,
-                "DamageEffect": "SmallIce_DamageEffect",
+                "DamageVfxKey": "SmallIce_DamageEffect",
                 "DamageType": "Cold",
                 "DamageVarient": 0.1,
                 "DefenseType": "Ward"
@@ -389,7 +389,7 @@
                 "AtkPower": 80,
                 "AtkStat": "MagAttack",
                 "BaseDamage": 0,
-                "DamageEffect": "SmallIce_DamageEffect",
+                "DamageVfxKey": "SmallIce_DamageEffect",
                 "DamageType": "Cold",
                 "DamageVarient": 0.1,
                 "DefenseType": "Ward"
@@ -497,7 +497,7 @@
                 "AtkPower": 80,
                 "AtkStat": "MagAttack",
                 "BaseDamage": 0,
-                "DamageEffect": "Exploision_DamageEffect",
+                "DamageVfxKey": "Exploision_DamageEffect",
                 "DamageType": "Cold",
                 "DamageVarient": 0.2,
                 "DefenseType": "Ward"
@@ -550,7 +550,7 @@
         "EffectDatas": {},
         "DamageDatas": {
             "Damage1": {
-                "DamageEffect": "Pierce_Large_DamageEffect",
+                "DamageVfxKey": "Pierce_Large_DamageEffect",
                 "DamageType": "Pierce",
                 "DamageVarient": 0.1,
                 "DefenseType": "Armor",
@@ -621,7 +621,7 @@
         },
         "DamageDatas": {
             "Damage1": {
-                "DamageEffect": "LightningStrike_DamageEffect",
+                "DamageVfxKey": "LightningStrike_DamageEffect",
                 "DamageType": "Shock",
                 "DamageVarient": 0.3,
                 "DefenseType": "Ward"
@@ -681,7 +681,7 @@
         },
         "DamageDatas": {
             "Damage1": {
-                "DamageEffect": "SmallLightning_DamageEffect",
+                "DamageVfxKey": "SmallLightning_DamageEffect",
                 "DamageType": "Shock",
                 "AtkPower": 30,
                 "AtkStat": "MagAttack",
@@ -689,7 +689,7 @@
                 "DefenseType": "Ward"
             },
             "BoostedDamage": {
-                "DamageEffect": "SmallLightning_DamageEffect",
+                "DamageVfxKey": "SmallLightning_DamageEffect",
                 "DamageType": "Shock",
                 "AtkPower": 60,
                 "AtkStat": "MagAttack",
@@ -721,20 +721,23 @@
                     "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_AnimationFinish.gd"
                 },
                 {
+                    "!!!Note!!!": "This makes no sense. Only Shocked target should have been allowed",
                     "RequiredConditions": {
                         "TargetWasShocked": false
                     },
-                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_ApplyDamage.gd",
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Attacks/SubAct_Attack.gd",
                     "TargetKey": "Target1",
-                    "DamageKey": "Damage1"
+                    "DamageKey": "Damage1",
+                    "TargetMustBeInRange": false
                 },
                 {
                     "RequiredConditions": {
                         "TargetWasShocked": true
                     },
-                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_ApplyDamage.gd",
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Attacks/SubAct_Attack.gd",
                     "TargetKey": "Target1",
-                    "DamageKey": "BoostedDamage"
+                    "DamageKey": "BoostedDamage",
+                    "TargetMustBeInRange": false
                 },
                 {
                     "SubActionScript": "res://assets/Scripts/Actions/SubActions/Effects/SubAct_RemoveEffect.gd",
@@ -794,7 +797,7 @@
         },
         "DamageDatas": {
             "Damage1": {
-                "DamageEffect": "LightningStrike_DamageEffect",
+                "DamageVfxKey": "LightningStrike_DamageEffect",
                 "DamageType": "Shock",
                 "AtkPower": 80,
                 "AtkStat": "MagAttack",
@@ -875,7 +878,7 @@
                 "AtkPower": 80,
                 "AtkStat": "MagAttack",
                 "BaseDamage": 0,
-                "DamageEffect": "LightningStrike_DamageEffect",
+                "DamageVfxKey": "LightningStrike_DamageEffect",
                 "DamageType": "Shock",
                 "DamageVarient": 0.2,
                 "DefenseType": "Ward"
@@ -927,7 +930,7 @@
         },
         "DamageDatas": {
             "Damage1": {
-                "DamageEffect": "LightningStrike_DamageEffect",
+                "DamageVfxKey": "LightningStrike_DamageEffect",
                 "DamageType": "Shock",
                 "AtkPower": 5,
                 "AtkStat": "MagAttack",

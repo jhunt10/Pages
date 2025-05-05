@@ -118,6 +118,8 @@ static func handle_attack(
 		_roll_for_effects(attacker, defender, attack_event)
 	attack_event.attack_stage = AttackStage.RolledForEffects
 	
+	var vfx_data_cache = {}
+	
 	# Trigger Post Effect Roll Effects
 	for actor in all_actors:
 		actor.effects.trigger_attack(attack_event, game_state)
@@ -127,44 +129,74 @@ static func handle_attack(
 		var sub_event:AttackSubEvent = attack_event.sub_events[defender.Id]
 		var defender_node = CombatRootControl.get_actor_node(defender.Id)
 		
-		var flash_text_numbers = []
+		var damage_vfx_cache = []
 		var resisted_effect = false
 		
 		# Apply damage 
 		for damage_event:DamageEvent in sub_event.damage_events:
 			defender.stats.apply_damage(damage_event.final_damage)
-			
-			flash_text_numbers.append({
-				"Value":damage_event.final_damage,
-				"Type": FlashTextController.FlashTextType.Normal_Dmg
-			})
-			
 			damage_event.was_applied = true
+			
+			# Get Damage Vfx Data
+			var damage_key = damage_event.damage_data_key
+			var damage_data = attack_event.damage_datas[damage_key]
+			damage_vfx_cache.append(_tranlate_damage_vfx_data(attacker.Id, sub_event, damage_event, damage_data))
+			
+			# Ignore rest of damage if defender died
 			if defender.is_dead:
 				break
-		if defender.is_dead:
-			continue
-		# Create Effects
-		for effect_data_key:String in attack_event.effect_datas.keys():
-			# TODO: Add a "Resist" flash text for effects that triggered but failed to apply
-			var effect_details:Dictionary = attack_event.effect_datas[effect_data_key]
-			var effect_result:Dictionary = sub_event.applied_effect_datas.get(effect_data_key, {})
-			if effect_result.get("WasApplied", false):
-				var effect_key = effect_details.get("EffectKey")
-				var effect_data = effect_details.get("EffectData", {})
-				var effect = EffectHelper.create_effect(defender, attacker, effect_key, effect_data, game_state)
-			else:
-				resisted_effect = true
-				
-		# Hack Damage Numbers
-		if resisted_effect:
-			defender_node.vfx_holder.flash_text_controller.add_flash_text("Resist", FlashTextController.FlashTextType.Blocked_Dmg)
-		for flash_text in flash_text_numbers:
-			defender_node.vfx_holder.flash_text_controller.add_flash_text(str(flash_text['Value']), flash_text['Type'])
 		
+		# Create Effects
+		# Skip effects if defender died
+		if not defender.is_dead:
+			for effect_data_key:String in attack_event.effect_datas.keys():
+				# TODO: Add a "Resist" flash text for effects that triggered but failed to apply
+				var effect_details:Dictionary = attack_event.effect_datas[effect_data_key]
+				var effect_result:Dictionary = sub_event.applied_effect_datas.get(effect_data_key, {})
+				if effect_result.get("WasApplied", false):
+					var effect_key = effect_details.get("EffectKey")
+					var effect_data = effect_details.get("EffectData", {})
+					var effect = EffectHelper.create_effect(defender, attacker, effect_key, effect_data, game_state)
+				else:
+					resisted_effect = true
+		
+		vfx_data_cache[defender.Id] = {
+			"Resisted": resisted_effect,
+			"DamageVFXDatas": damage_vfx_cache
+		}
+				
 	attack_event.attack_stage = AttackStage.Resolved
 	
-	# Create Vfx
+	# Create Vfxs
+	var attack_data_key = attack_details.get("AttackVfxKey")
+	var attack_vfx_data = attack_details.get("AttackVfxData")
+	for defender:BaseActor in defenders:
+		var sub_event:AttackSubEvent = attack_event.sub_events[defender.Id]
+		var defender_node = CombatRootControl.get_actor_node(defender.Id)
+		var vfx_cache = vfx_data_cache[defender.Id]
+		
+		# Create "Resist" text for resisted efects
+		if vfx_cache['Resisted']:
+			defender_node.vfx_holder.flash_text_controller.add_flash_text("Resist", FlashTextController.FlashTextType.Blocked_Dmg)
+		
+		if attack_data_key:
+			var vfx_source = attacker
+			if attack_from_spot_override:
+				var posible_actors = game_state.get_actors_at_pos(attack_from_spot_override)
+				if posible_actors.size() == 1:
+					vfx_source = posible_actors[0]
+			var vfx_node = VfxHelper.create_vfx_on_actor(defender, attack_data_key, attack_vfx_data, vfx_source)
+			for damage_vfx_cache in vfx_cache['DamageVFXDatas']:
+				var damage_vfx_key = damage_vfx_cache['DamageVfxKey']
+				var damage_vfx_data = damage_vfx_cache['DamageVfxData']
+				vfx_node.add_chained_vfx(damage_vfx_key, damage_vfx_data)
+		else:
+			for damage_vfx_cache in vfx_cache['DamageVFXDatas']:
+				var damage_vfx_key = damage_vfx_cache['DamageVfxKey']
+				var damage_vfx_data = damage_vfx_cache['DamageVfxData']
+				VfxHelper.create_damage_effect(defender, damage_vfx_key, damage_vfx_data)
+		
+		
 	#if attack_details.has("AttackVfxData"):
 		#var attack_data_key = attack_details.get("AttackVfxKey")
 		#var attack_vfx_data = attack_details.get("AttackVfxData")
@@ -203,7 +235,7 @@ static func _roll_damage_for_attack_event( attack_event:AttackEvent, attacker:Ba
 		return
 	# Get damage mods from AttackMods and passive mods from Attacker and Defender
 	var damage_mods = {}
-	for attack_mod in attack_event.attack_mods:
+	for attack_mod in attack_event.attack_mods.values():
 		damage_mods.merge(attack_mod.get("DamageMods", {}))
 	damage_mods.merge(attacker.get_damage_mods())
 	damage_mods.merge(defender.get_damage_mods())
@@ -242,7 +274,7 @@ static func _roll_for_effects(attacker:BaseActor, defender:BaseActor, attack_eve
 		if not _can_effect_apply(attack_effect_data, attacker, defender, attack_event, sub_event ):
 			continue
 		var chance_to_apply = attack_effect_data.get("ApplicationChance", 1)
-		var application_chance = (float(net_protection * chance_to_apply)/100.0)
+		var application_chance = (1-float(net_protection)/100.0) * chance_to_apply
 		var roll = randf()
 		var applied = roll < application_chance
 		sub_event.applied_effect_datas[attack_effect_key] = {
@@ -329,6 +361,23 @@ static func _does_attack_mod_apply(attack_mod, attacker, defenders, source_tag_c
 	# All checkes passed
 	return true
 
+static func _tranlate_damage_vfx_data(attacker_id:String, sub_event:AttackSubEvent, damage_event:DamageEvent, damage_data:Dictionary )->Dictionary:
+	var damage_vfx_key = damage_data.get("DamageVfxKey", null)
+	var damage_vfx_data = damage_data.get("DamageVfxData", {}).duplicate()
+	if damage_event.final_damage < 0:
+		damage_vfx_data['DamageTextType'] = FlashTextController.FlashTextType.Healing_Dmg
+	elif sub_event.is_crit and not sub_event.is_blocked:
+		damage_vfx_data['DamageTextType'] = FlashTextController.FlashTextType.Crit_Dmg
+	elif sub_event.is_blocked and not sub_event.is_crit:
+		damage_vfx_data['DamageTextType'] = FlashTextController.FlashTextType.Blocked_Dmg
+	else:
+		damage_vfx_data['DamageTextType'] = FlashTextController.FlashTextType.Normal_Dmg
+	damage_vfx_data['SourceActorId'] = attacker_id
+	damage_vfx_data['DamageNumber'] = 0 - damage_event.final_damage
+	return {
+		"DamageVfxKey": damage_data.get("DamageVfxKey", null),
+		"DamageVfxData": damage_vfx_data
+	}
 
 ## Get AttackEvent.AttackDirection between Attacker and Defender
 static func get_relative_attack_direction(attacker_pos:MapPos, defender_pos:MapPos)->AttackDirection:
