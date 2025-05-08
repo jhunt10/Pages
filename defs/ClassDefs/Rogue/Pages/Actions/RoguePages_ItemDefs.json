@@ -26,6 +26,62 @@
             }
         }
     },
+    {
+        "ItemKey": "BackStab_PageItem",
+        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
+        "CanStack": true,
+        "Details":{
+            "Description": "Gain +100 Crit Chance when attacking Target from Behind.",
+            "DisplayName": "Back Stab",
+            "LargeIcon": "Sprites/BackStab.png",
+            "SmallIcon": "Sprites/BackStab.png",
+            "SnippetDesc": "+100 Crit Chance attacking from Behind",
+            "Tags": ["Passive"]
+        },
+        "ItemDetails":
+        {
+            "Rarity": "Common",
+            "Value": 50
+        },
+        
+        "AttackMods": {
+            "BackStabAtkMod": {
+                "DisplayName": "Back Stab",
+                "AttackModKey": "BackStabAtkMod",
+                "CanStack": false,
+                "Conditions": {
+                    "AttackerFactionFilters": [
+                        "Self"
+                    ],
+                    "DefendersConditions": [
+                        {
+                            "AttackDirections": ["Back"]
+                        }
+                    ],
+                    "AttackSourceTagFilters": [
+                        {
+                            "RequireAnyTags": [
+                                "Attack"
+                            ]
+                        }
+                    ]
+                },
+                "StatMods": {
+                    "BackStabStatMod": {
+                        "Conditions": {
+                            "CanStack": false, 			   
+                            "HostFactionFilters": ["Self"],  
+                            "HostTagFilters": []
+                        },
+                        "ModType": "Add",
+                        "StatName": "CritChance",
+                        "Value": 100
+                    }
+                },
+                "DamageMods": {}
+            }
+        }
+    },
 
     
     {
@@ -167,20 +223,6 @@
         "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
         "CanStack": true,
         "EffectKey": "AgileCrit_Page",
-        "Details":{
-            "Tags": ["Passive"]
-        },
-        "ItemDetails":
-        {
-            "Rarity": "Common",
-            "Value": 50
-        }
-    },
-    {
-        "ItemKey": "BackStab_PageItem",
-        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
-        "CanStack": true,
-        "EffectKey": "BackStab_Page",
         "Details":{
             "Tags": ["Passive"]
         },

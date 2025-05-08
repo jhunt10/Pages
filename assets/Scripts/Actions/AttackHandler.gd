@@ -35,43 +35,59 @@ static func handle_attack(
 		attacker_pos = game_state.get_actor_pos(attacker)
 	
 	var attack_mods = {}
+	var stat_mods = {}
 	
 	# get unique list of all Actors involed in attack
 	var attacker_included_in_defenders = false
-	var all_actors = [attacker] # Attacker might be includeded in defenders
+	var all_unique_actors = [attacker] # Attacker might be includeded in defenders
 	for defender in defenders:  # A Defender may be includeded multiple times
 		if defender == attacker:
 			attacker_included_in_defenders = true
-		if not all_actors.has(defender): 
-			all_actors.append(defender)
+		if not all_unique_actors.has(defender): 
+			all_unique_actors.append(defender)
 	
-	# Get all attack mods and attack direction for each defender
-	for actor:BaseActor in all_actors:
+	# Get attack direction for each defender
+	for actor:BaseActor in all_unique_actors:
+		if actor == attacker and not attacker_included_in_defenders:
+			continue
+		# Cache Attack Directions and cover for all defenders
+		var attack_direction = AttackHandler.AttackDirection.Front
+		if actor != attacker or attacker_included_in_defenders:
+			attack_posision_data [actor.Id] = {}
+			# TODO: Cover
+			attack_posision_data[actor.Id]['HasCover'] = false
+			# Has AOE area 
+			#TODO: Decide what defines is_AOE
+			if target_parameters and target_parameters.has_area_of_effect():
+				attack_direction = AttackHandler.AttackDirection.AOE
+			else:
+				var defender_pos = game_state.get_actor_pos(actor)
+				attack_direction = get_relative_attack_direction(attacker_pos, defender_pos)
+			attack_posision_data[actor.Id]['AttackDirection'] = attack_direction
+		
+	for actor:BaseActor in all_unique_actors:
 		var actor_attack_mods = actor.get_attack_mods()
 		for actor_attack_mod_key in actor_attack_mods.keys():
 			var attack_mod = actor_attack_mods[actor_attack_mod_key]
 			# Check if mod applies to attack
-			if _does_attack_mod_apply(attack_mod, attacker, defenders, source_tag_chain):
+			if _does_attack_mod_apply(attack_mod, attacker, defenders, source_tag_chain, attack_posision_data):
 				var mod_id = attack_mod['AttackModId']
 				attack_mods[mod_id] = attack_mod
+				# Cache Stat Mods now to avoid another loop
+				var sub_stat_mods = _get_stat_mods_from_attack_mod(attack_mod)
+				for sub_stat_mod_key in sub_stat_mods.keys():
+					stat_mods[sub_stat_mod_key] = sub_stat_mods[sub_stat_mod_key]
 		# Done with attacker
-		if actor == attacker and not attacker_included_in_defenders:
 			continue
 			
-		# Prepare Attack Directions, while we're looping anyway
-		attack_posision_data [actor.Id] = {}
-		# TODO: Cover
-		attack_posision_data[actor.Id]['HasCover'] = false
-		if target_parameters and target_parameters.has_area_of_effect():
-			attack_posision_data[actor.Id]['AttackDirection'] = AttackHandler.AttackDirection.AOE
-		else:
-			var defender_pos = game_state.get_actor_pos(actor)
-			attack_posision_data[actor.Id]['AttackDirection'] = get_relative_attack_direction(attacker_pos, defender_pos)
 	
-	# Apply Stat mods to Attacker and appropiate Defenders 
-	for mod in attack_mods:
-		#TODO
-		pass
+	# Apply Stat mods to appropiate Actors 
+	for actor:BaseActor in all_unique_actors:
+		for stat_mod_id in stat_mods.keys():
+			var stat_mod = stat_mods[stat_mod_id]
+			if _does_attack_stat_mod_apply_to_actor(stat_mod, actor, source_tag_chain):
+				actor.stats.add_temp_stat_mod(stat_mod_id, stat_mod, false)
+		actor.stats.apply_temp_stat_mods()
 	
 	var attack_event = AttackEvent.new(
 		attacker, 
@@ -92,7 +108,7 @@ static func handle_attack(
 	# 5. Create Vfxs
 	
 	# Trigger Pre Attack Roll Effects
-	for actor in all_actors:
+	for actor in all_unique_actors:
 		actor.effects.trigger_attack(attack_event, game_state)
 	
 	# Loop through each Defender preform roles
@@ -101,7 +117,7 @@ static func handle_attack(
 	attack_event.attack_stage = AttackStage.RolledForHit
 	
 	# Trigger Post Attack Roll Effects
-	for actor in all_actors:
+	for actor in all_unique_actors:
 		actor.effects.trigger_attack(attack_event, game_state)
 	
 	# Calculate Damage
@@ -110,7 +126,7 @@ static func handle_attack(
 	attack_event.attack_stage = AttackStage.RolledForDamage
 	
 	# Trigger Post Damage Roll Effects
-	for actor in all_actors:
+	for actor in all_unique_actors:
 		actor.effects.trigger_attack(attack_event, game_state)
 	
 	# Roll for Effects on each defender
@@ -121,7 +137,7 @@ static func handle_attack(
 	var vfx_data_cache = {}
 	
 	# Trigger Post Effect Roll Effects
-	for actor in all_actors:
+	for actor in all_unique_actors:
 		actor.effects.trigger_attack(attack_event, game_state)
 	
 	# Apply damage and create effects
@@ -167,6 +183,10 @@ static func handle_attack(
 				
 	attack_event.attack_stage = AttackStage.Resolved
 	
+	# Clear Temp Stat Mods from Actors
+	for actor:BaseActor in all_unique_actors:
+		actor.stats.clear_temp_stat_mods()
+	
 	# Create Vfxs
 	var attack_data_key = attack_details.get("AttackVfxKey")
 	var attack_vfx_data = attack_details.get("AttackVfxData")
@@ -196,20 +216,8 @@ static func handle_attack(
 				var damage_vfx_data = damage_vfx_cache['DamageVfxData']
 				VfxHelper.create_damage_effect(defender, damage_vfx_key, damage_vfx_data)
 		
-		
-	#if attack_details.has("AttackVfxData"):
-		#var attack_data_key = attack_details.get("AttackVfxKey")
-		#var attack_vfx_data = attack_details.get("AttackVfxData")
-		#if attack_data_key:
-			#var effect_source = attacker
-			#if attack_details.get("UseTargetAsOrigin", false) and attack_from_spot_override:
-				#var posible_actors = game_state.get_actors_at_pos(attack_from_spot_override)
-				#if posible_actors.size() == 1:
-					#effect_source = posible_actors[0]
-			#created_attack_vfx = VfxHelper.create_attack_vfx_node(effect_source, defender, attack_data_key, attack_vfx_data)
-	
 	# Trigger After Attack Effects
-	for actor in all_actors:
+	for actor in all_unique_actors:
 		actor.effects.trigger_attack(attack_event, game_state)
 	
 	return attack_event
@@ -297,7 +305,7 @@ static func  _can_effect_apply(attack_effect_data:Dictionary, attacker:BaseActor
 
 
 ## Returns true if Attacker, Defenders, and SourceTagChain meet all requirements of Conditions
-static func _does_attack_mod_apply(attack_mod, attacker, defenders, source_tag_chain:SourceTagChain)->bool:
+static func _does_attack_mod_apply(attack_mod, attacker, defenders, source_tag_chain:SourceTagChain, attack_posision_data:Dictionary)->bool:
 	var mod_key = attack_mod['AttackModKey']
 	var conditions = attack_mod.get('Conditions', null)
 	var mod_source_actor = attack_mod.get('SourceActorId', null)
@@ -311,6 +319,7 @@ static func _does_attack_mod_apply(attack_mod, attacker, defenders, source_tag_c
 	if mod_source_faction == null:
 		printerr("AttackHandler: AttackMod '%s' missing SourceActorFaction" % [mod_key])
 		return false
+	
 	
 	# Check Attacker Faction Filters
 	var attack_faction_filters = conditions.get("AttackerFactionFilters", [])
@@ -329,12 +338,25 @@ static func _does_attack_mod_apply(attack_mod, attacker, defenders, source_tag_c
 		var require_all_defenders = defender_condition.get("RequiresAllDefenders", false)
 		var faction_filter = defender_condition.get("DefenderFactionFilters", [])
 		var tag_filters = defender_condition.get("DefenderTagFilters", [])
+		var attack_directions_filters = defender_condition.get("AttackDirections", [])
 		
 		# Check each defender
 		var all_defenders_are_valid = true
 		var any_defenders_are_valid = false
 		for defender:BaseActor in defenders:
+			var position_data = attack_posision_data[defender.Id]
 			var condition_is_valid_for_defender = true
+			
+			# Check Direction Filters
+			if attack_directions_filters.size() > 0:
+				var str_direction = AttackDirection.keys()[position_data['AttackDirection']]
+				if not attack_directions_filters.has(str_direction):
+					all_defenders_are_valid = false
+					if require_all_defenders:
+						break
+					else:
+						continue
+			
 			# Defender is valid faction
 			if not FilterHelper.check_faction_filter(mod_source_actor, mod_source_faction, faction_filter, defender):
 				all_defenders_are_valid = false
@@ -359,6 +381,49 @@ static func _does_attack_mod_apply(attack_mod, attacker, defenders, source_tag_c
 		elif not any_defenders_are_valid:
 			return false
 	# All checkes passed
+	return true
+
+static func _get_stat_mods_from_attack_mod(attack_mod:Dictionary)->Dictionary:
+	var out_dict = {}
+	for mod_key:String in attack_mod.get("StatMods", {}):
+		var mod_data:Dictionary = attack_mod['StatMods'][mod_key]
+		var can_stack = mod_data.get("Conditions", {}).get("CanStack", false)
+		mod_data['SourceActorId'] = attack_mod.get("SourceActorId", null)
+		mod_data['SourceActorFaction'] = attack_mod.get("SourceActorFaction", null)
+		mod_data['DisplayName'] = attack_mod.get("DisplayName", "")
+		var mod_id = mod_key
+		if not can_stack:
+			mod_id = mod_key + ":" + attack_mod.get("AttackModId")
+		mod_data['StatModId'] = mod_id
+		out_dict[mod_id] = BaseStatMod.create_from_data(mod_data['SourceActorId'], mod_data)
+	return out_dict
+
+static func _does_attack_stat_mod_apply_to_actor(stat_mod:BaseStatMod, actor:BaseActor, attack_source_tag_chain:SourceTagChain)->bool:
+	if !stat_mod:
+		return false
+	var conditions = stat_mod.condition_data
+	var mod_source_actor = stat_mod.source_id
+	var mod_source_faction = stat_mod.source_faction
+	if not conditions:
+		return true
+	
+	# Check Faction Filters
+	var faction_filters = conditions.get("HostFactionFilters", [])
+	if not FilterHelper.check_faction_filter(mod_source_actor, mod_source_faction, faction_filters, actor):
+		return false
+			
+	# Check Defender Tag Filters
+	var host_tag_filters = conditions.get("HostTagFilters", [])
+	for tag_filter in host_tag_filters:
+		if not SourceTagChain.filters_accept_tags(tag_filter, actor.get_tags()):
+			return false
+			
+	# Check Source Tag Filters
+	var source_tag_filters = conditions.get("SourceTagFilters", [])
+	for source_tag_filter in source_tag_filters:
+		if not SourceTagChain.filters_accept_tags(source_tag_filter, attack_source_tag_chain.get_all_tags()):
+			return false
+	
 	return true
 
 static func _tranlate_damage_vfx_data(attacker_id:String, sub_event:AttackSubEvent, damage_event:DamageEvent, damage_data:Dictionary )->Dictionary:

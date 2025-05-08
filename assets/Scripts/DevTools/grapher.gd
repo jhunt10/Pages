@@ -3,21 +3,23 @@ extends Control
 
 @export var do_test:bool:
 	set(val):
-		var fake_pos = MapPos.new(25, 65, 0, 3)
-		print(str(fake_pos))
-		var pos_index = fake_pos.x
-		pos_index = pos_index << 8
-		pos_index += fake_pos.y
-		pos_index = pos_index << 2
-		pos_index += fake_pos.dir
-		print(String.num_int64(pos_index, 2))
-		var decode_pos = MapPos.new(0,0,0,0)
-		decode_pos.dir = pos_index % 4
-		pos_index = pos_index >> 2
-		decode_pos.y = pos_index % 256
-		pos_index = pos_index >> 8
-		decode_pos.x = pos_index
-		print(str(decode_pos))
+		FileStructureBuilder.create_class_def_files("Soldier")
+		pass
+		#var fake_pos = MapPos.new(25, 65, 0, 3)
+		#print(str(fake_pos))
+		#var pos_index = fake_pos.x
+		#pos_index = pos_index << 8
+		#pos_index += fake_pos.y
+		#pos_index = pos_index << 2
+		#pos_index += fake_pos.dir
+		#print(String.num_int64(pos_index, 2))
+		#var decode_pos = MapPos.new(0,0,0,0)
+		#decode_pos.dir = pos_index % 4
+		#pos_index = pos_index >> 2
+		#decode_pos.y = pos_index % 256
+		#pos_index = pos_index >> 8
+		#decode_pos.x = pos_index
+		#print(str(decode_pos))
 
 @export var min_x:int = 0
 @export var max_x:int = 255

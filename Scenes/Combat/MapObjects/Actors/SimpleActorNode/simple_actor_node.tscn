@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://bs2y0o6uhl0sb"]
+[gd_scene load_steps=24 format=3 uid="uid://bs2y0o6uhl0sb"]
 
 [ext_resource type="Script" path="res://Scenes/Combat/MapObjects/Actors/SimpleActorNode/simple_actor_node.gd" id="1_bln3d"]
 [ext_resource type="Script" path="res://Scenes/Combat/MapObjects/Actors/ComplexActorNode/actor_body_sprite.gd" id="2_e6ypm"]
@@ -7,6 +7,76 @@
 [ext_resource type="PackedScene" uid="uid://eox4g5msr5a" path="res://Scenes/Combat/Effects/flash_text_controller.tscn" id="4_4be7m"]
 [ext_resource type="Script" path="res://Scenes/Combat/MapObjects/aura_holder.gd" id="6_mn18x"]
 [ext_resource type="Texture2D" uid="uid://dgfxtmtdjfgey" path="res://assets/Sprites/UI/QuePathArrow.png" id="7_3yvo2"]
+[ext_resource type="Script" path="res://Scenes/Combat/MapObjects/Actors/awareness_display_node.gd" id="8_2sjxt"]
+[ext_resource type="Texture2D" uid="uid://bjo761ym76mti" path="res://assets/Sprites/TileSets/AwarenessTileSet.png" id="9_88pjr"]
+
+[sub_resource type="Animation" id="Animation_5tl4v"]
+resource_name = "ShroomBash"
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/ActorSprite:frame_index")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.3, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [5, 6, 5, 7, 5]
+}
+
+[sub_resource type="Animation" id="Animation_x1sws"]
+resource_name = "ForwardAnimation_cancel"
+length = 0.1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/ActorSprite:frame_index")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [5]
+}
+
+[sub_resource type="Animation" id="Animation_ifd0m"]
+resource_name = "ForwardAnimation_motion"
+length = 0.6
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/ActorSprite:frame_index")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [9, 8, 10, 8, 0]
+}
+
+[sub_resource type="Animation" id="Animation_7wosw"]
+resource_name = "ForwardAnimation_ready"
+length = 0.2
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/ActorSprite:frame_index")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [8, 9]
+}
 
 [sub_resource type="Animation" id="Animation_7nc3g"]
 length = 0.001
@@ -65,76 +135,8 @@ tracks/1/keys = {
 "values": [Vector2(0, 0), Vector2(-1, 0), Vector2(0, 0), Vector2(1, 0), Vector2(0, 0), Vector2(-1, 0), Vector2(0, 0), Vector2(1, 0), Vector2(0, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_5tl4v"]
-resource_name = "ShroomBash"
-loop_mode = 1
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/ActorSprite:frame_index")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.3, 0.4, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 1,
-"values": [5, 6, 5, 7, 5]
-}
-
-[sub_resource type="Animation" id="Animation_7wosw"]
-resource_name = "ForwardAnimation_ready"
-length = 0.2
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/ActorSprite:frame_index")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [8, 9]
-}
-
-[sub_resource type="Animation" id="Animation_ifd0m"]
-resource_name = "ForwardAnimation_motion"
-length = 0.6
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/ActorSprite:frame_index")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.3, 0.5, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 1,
-"values": [9, 8, 10, 8, 0]
-}
-
-[sub_resource type="Animation" id="Animation_x1sws"]
-resource_name = "ForwardAnimation_cancel"
-length = 0.1
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/ActorSprite:frame_index")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [5]
-}
-
-[sub_resource type="Animation" id="Animation_1h1i4"]
-resource_name = "SelfAnimation_ready"
+[sub_resource type="Animation" id="Animation_dmehm"]
+resource_name = "SelfAnimation_cancel"
 length = 0.1
 step = 0.1
 tracks/0/type = "value"
@@ -191,8 +193,8 @@ tracks/1/keys = {
 "values": [Vector2(0, 0), Vector2(-1, 0), Vector2(0, 0), Vector2(1, 0), Vector2(0, 0), Vector2(-1, 0), Vector2(0, 0), Vector2(1, 0), Vector2(0, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_dmehm"]
-resource_name = "SelfAnimation_cancel"
+[sub_resource type="Animation" id="Animation_1h1i4"]
+resource_name = "SelfAnimation_ready"
 length = 0.1
 step = 0.1
 tracks/0/type = "value"
@@ -256,6 +258,18 @@ _data = {
 "walk": SubResource("Animation_8a46c")
 }
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_67fhg"]
+texture = ExtResource("9_88pjr")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+1:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_yydd4"]
+tile_size = Vector2i(32, 32)
+sources/0 = SubResource("TileSetAtlasSource_67fhg")
+
 [node name="SimpleActorNode" type="Node2D" node_paths=PackedStringArray("vfx_holder", "aura_holder", "actor_sprite", "path_arrow", "actor_motion_node", "offset_node", "damage_animation_player", "body_animation")]
 script = ExtResource("1_bln3d")
 vfx_holder = NodePath("ActorMotionNode/VFXHolder")
@@ -310,3 +324,13 @@ libraries = {
 "": SubResource("AnimationLibrary_hyh3n"),
 "move_walk": SubResource("AnimationLibrary_6rfh0")
 }
+
+[node name="AwarenessDisplayNode" type="Node2D" parent="." node_paths=PackedStringArray("actor_node", "tile_map")]
+visible = false
+script = ExtResource("8_2sjxt")
+actor_node = NodePath("..")
+tile_map = NodePath("TileMapLayer")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="AwarenessDisplayNode"]
+position = Vector2(-16, -16)
+tile_set = SubResource("TileSet_yydd4")

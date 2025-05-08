@@ -618,18 +618,6 @@ func get_offhand_weapon()->BaseWeaponEquipment:
 		return item as BaseWeaponEquipment
 	return null
 
-#func get_total_equipment_armor()->int:
-	#var val = 0
-	#for equipment:BaseEquipmentItem in list_equipment():
-		#val +=  equipment.get_armor_value()
-	#return val
-
-func get_total_equipment_ward()->int:
-	var val = 0
-	for equipment:BaseEquipmentItem in list_equipment():
-		val +=  equipment.get_ward_value()
-	return val
-
 #func _get_first_or_open_slot_of_type(slot_type:String)->int:
 	#var slot_index = get_index_of_slot_with_type(slot_type)
 	#var first_found_slot = -1

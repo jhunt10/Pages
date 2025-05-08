@@ -22,11 +22,6 @@ func get_item_tags()->Array:
 func get_equipment_slot_type()->String:
 	return self.get_load_val("EquipSlot", "UNSET")
 
-func get_armor_value()->int:
-	return self.get_load_val("Armor", 0)
-func get_ward_value()->int:
-	return self.get_load_val("Ward", 0)
-
 ## Returns true if this item is equipped to provided actor, or any actor if none is provided
 func is_equipped_to_actor(actor:BaseActor=null)->bool:
 	if actor:

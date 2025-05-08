@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://uo60871y6t54"]
+[gd_scene load_steps=27 format=3 uid="uid://uo60871y6t54"]
 
 [ext_resource type="Script" path="res://Scenes/Combat/MapObjects/Actors/ComplexActorNode/complex_actor_node.gd" id="1_wfbib"]
 [ext_resource type="Texture2D" uid="uid://cp2wc5s8ju613" path="res://defs/Actors/Template_SpriteSheet.png" id="2_g31ob"]
@@ -20,6 +20,8 @@
 [ext_resource type="Texture2D" uid="uid://dgfxtmtdjfgey" path="res://assets/Sprites/UI/QuePathArrow.png" id="14_38ite"]
 [ext_resource type="Script" path="res://Scenes/Combat/MapObjects/aura_holder.gd" id="18_4ue2w"]
 [ext_resource type="AnimationLibrary" uid="uid://dx31wifagmnpk" path="res://Scenes/Combat/MapObjects/Actors/damage_animation_library.res" id="19_bp28d"]
+[ext_resource type="Script" path="res://Scenes/Combat/MapObjects/Actors/awareness_display_node.gd" id="21_fagl5"]
+[ext_resource type="Texture2D" uid="uid://bjo761ym76mti" path="res://assets/Sprites/TileSets/AwarenessTileSet.png" id="22_xdlor"]
 
 [sub_resource type="Animation" id="Animation_y5og4"]
 resource_name = "RESET"
@@ -236,6 +238,18 @@ _data = {
 "shake_effect": ExtResource("9_co1y3")
 }
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_87ioo"]
+texture = ExtResource("22_xdlor")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+1:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_l1f0r"]
+tile_size = Vector2i(32, 32)
+sources/0 = SubResource("TileSetAtlasSource_87ioo")
+
 [node name="ActorNode" type="Node2D" node_paths=PackedStringArray("main_hand_node", "off_hand_node", "vfx_holder", "aura_holder", "actor_sprite", "path_arrow", "actor_motion_node", "offset_node", "damage_animation_player", "body_animation")]
 y_sort_enabled = true
 script = ExtResource("1_wfbib")
@@ -328,3 +342,13 @@ libraries = {
 
 [node name="AuraHolder" type="Node2D" parent="."]
 script = ExtResource("18_4ue2w")
+
+[node name="AwarenessDisplayNode" type="Node2D" parent="." node_paths=PackedStringArray("actor_node", "tile_map")]
+visible = false
+script = ExtResource("21_fagl5")
+actor_node = NodePath("..")
+tile_map = NodePath("TileMapLayer")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="AwarenessDisplayNode"]
+position = Vector2(-16, -16)
+tile_set = SubResource("TileSet_l1f0r")

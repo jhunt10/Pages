@@ -53,7 +53,7 @@ func _sync():
 	if !_actor:
 		return
 	armor_lable.text = str(_actor.stats.get_stat("Armor", 0))
-	ward_label.text = str(_actor.equipment.get_total_equipment_ward())
+	ward_label.text = str(_actor.stats.get_stat("Ward", 0))
 	for index:int in range(slot_displays.size()):
 		var slot_display:EquipmentDisplaySlotButton = slot_displays[index]
 		var slot_type = _actor.equipment.get_slot_equipment_type(index)

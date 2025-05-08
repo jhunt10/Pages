@@ -73,4 +73,3 @@ func items_to_inventory():
 			else:
 				PlayerInventory.add_item(new_item)
 			
-			

@@ -12,8 +12,8 @@ var _base_stats:Dictionary = {}
 var _cached_stats:Dictionary = {}
 var _cached_mods:Dictionary = {}
 
-# Quick temparary mods with no source (used for level up preview)
-var _temp_stat_mods:Array = []
+# Temparary mods applied for single event (used for AttackMods and Level Up preview)
+var _temp_stat_mods:Dictionary = {}
 var attribute_levels:Dictionary = {}
 
 ## Stats which used as resources (Health, Mana, ...)
@@ -63,9 +63,9 @@ func dirty_stats():
 	if LOGGING: print("Stats Dirty")
 	_stats_dirty = true
 
-func recache_stats():
+func recache_stats(emit_signal:bool=true):
 	if LOGGING: printerr("Recaching Stats")
-	_calc_cache_stats()
+	_calc_cache_stats(emit_signal)
 
 func get_stat(stat_name:String, default:float=0):
 	var full_stat_name = stat_name
@@ -231,13 +231,28 @@ func _on_actor_round_end():
 		if regen != 0:
 			add_to_bar_stat(stat_name, regen)
 
+# -----------------------------------------------------------------
+#					Stat Mods
+# -----------------------------------------------------------------
 
+func add_temp_stat_mod(stat_mod_id:String, stat_mod:BaseStatMod, reache_now:bool=true):
+	_temp_stat_mods[stat_mod_id] = stat_mod
+	if reache_now:
+		recache_stats(false)
 
+func apply_temp_stat_mods():
+	if _temp_stat_mods.size() == 0:
+		return
+	recache_stats(false)
 
+func clear_temp_stat_mods(reache_now:bool=true):
+	if _temp_stat_mods.size() == 0:
+		return
+	_temp_stat_mods.clear()
+	if reache_now:
+		recache_stats(false)
 
-
-
-func _calc_cache_stats():
+func _calc_cache_stats(emit_signal:bool=true):
 	if LOGGING: 
 		print("#Caching Stats for: %s" % _actor.ActorKey)
 	
@@ -249,7 +264,7 @@ func _calc_cache_stats():
 	var key_is_dependant_of_vals = {}
 	
 	var mods_list = _actor.effects.get_stat_mods()
-	mods_list.append_array(_temp_stat_mods)
+	mods_list.append_array(_temp_stat_mods.values())
 	mods_list.append_array(_actor.equipment.get_passive_stat_mods())
 	mods_list.append_array(_actor.pages.get_passive_stat_mods())
 	
@@ -357,4 +372,5 @@ func _calc_cache_stats():
 	if safety_limit <= 0:
 		printerr("Stat Caching Failed wth to many dependancies!")
 	_stats_dirty = false
-	stats_changed.emit()
+	if emit_signal:
+		stats_changed.emit()
