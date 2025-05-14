@@ -31,6 +31,7 @@ func _init(key:String, def_load_path:String, def:Dictionary, id:String='', data:
 			org_detail_data['Tags'].append("Passive")
 		details_data = BaseLoadObjectLibrary._merge_defs(details_data,org_detail_data)
 		details = ObjectDetailsData.new(EffectLibrary.Instance._defs_to_load_paths[effect_key], details_data)
+	#self._data['ItemDetails'] = details_data
 
 func is_passive_page():
 	var action_key = get_load_val("ActionKey", '')

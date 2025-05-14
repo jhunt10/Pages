@@ -232,43 +232,67 @@ func get_action_key_list()->Array:
 		return list
 	return get_load_val("AiData", {}).get("ActionsArr", [])
 
-func get_default_attack_target_params()->TargetParameters:
+func get_weapon_attack_target_params()->TargetParameters:
 	var weapon = equipment.get_primary_weapon()
 	if weapon:
 		return TargetParameters.new("Default", weapon.get_load_val("TargetParams"))
-	var default_attack_data = get_load_val("DefaultAttackData", {})
+	var default_attack_data = get_load_val("UnarmedAttackData", {})
 	var default = TargetParameters.new("Default", default_attack_data.get("TargetParams", {}))
 	return default
 
-func get_default_attack_damage_datas()->Dictionary:
-	var out_dict = get_weapon_damage_datas()
-	if out_dict.size() == 0:
-		var default_attack_data = get_load_val("DefaultAttackData", {}).duplicate()
-		var default_damage_datas = default_attack_data.get("DamageDatas", {})
-		for d_data_key in default_damage_datas.keys():
-			var d_data = default_damage_datas[d_data_key]
-			if not d_data.keys().has("DamageDataKey"):
-				d_data["DamageDataKey"] = d_data_key
-			out_dict[d_data_key] = d_data.duplicate()
-	return out_dict
-
-func get_weapon_damage_datas()->Dictionary:
+## Get damage data for equippted weapon(s)
+## If no weapons are equipt, default to Unarmed Damage Data from Actor Def
+##  damage_params filters which weapons are returned
+##  	Weapon:[Melee|Ranged]:Tags
+##			Just 'Weapon' will return MainHand and only include OffHand if Range/Melee matches MainHand
+##			[Melee or Ranged] Limit to just Melee or just Ranged Weapons.
+##			[Off] Always 
+##		Ex. "Weapon" Returns MainHand and includes OffHand if Range/Melee matches MainHand
+##			"Weapon:Main" for just MainHand weapon
+##			"Weapon:Melee:Off" for OffHand weapon if it's Melee
+##			"Weapon:Range" for Ranged weapons regardless of hand
+##			"Weapon:Range:Melee" for Main Weapon regardless of Ranged or Melee
+## When one of "Melee" or "Ranged" is included, the other will be excluded. 
+## When neither are included, Offhand will only be added if Range/Melee matches MainHand
+## When one of "Main" or "Off" is included, the other will be excluded. 
+func get_weapon_damage_datas(weapon_filter)->Dictionary:
 	var out_dict = {}
-	var weapon = equipment.get_primary_weapon()
-	if weapon:
-		var main_hand_data = weapon.get_damage_data().duplicate()
-		if equipment.is_two_handing():
-			var two_hand_mod = stats.get_stat(StatHelper.TwoHandMod)
-			main_hand_data['AtkPower'] = main_hand_data['AtkPower'] * two_hand_mod
-			out_dict['WeaponDamage'] = main_hand_data
-		else:
-			out_dict['WeaponDamage'] = main_hand_data
-			var off_hand_weapon = equipment.get_offhand_weapon()
-			if off_hand_weapon:
-				var off_hand_data = off_hand_weapon.get_damage_data().duplicate()
-				var off_hand_mod = stats.get_stat(StatHelper.OffHandMod)
-				off_hand_data['AtkPower'] = off_hand_data['AtkPower'] * off_hand_mod
-				out_dict['OffHandDamage'] = off_hand_data
+	
+	var fall_back_to_unarmed = weapon_filter.get("FallbackToUnarmed", true)
+	var range_melee_filter = weapon_filter.get("LimitRangeMelee", "MatchPrimary")
+	var include_ranged = range_melee_filter == "Range" or range_melee_filter == "Either"
+	var include_melee = range_melee_filter == "Melee" or range_melee_filter == "Either"
+	var primary_weapon = equipment.get_primary_weapon()
+	if range_melee_filter == "MatchPrimary":
+		if not primary_weapon:
+			range_melee_filter = "Unarmed"
+		include_ranged = primary_weapon.is_ranged_weapon()
+		include_melee = primary_weapon.is_melee_weapon()
+	
+	var included_weapon_ids = []
+	var index = 0
+	for slot in weapon_filter.get("IncludeSlots", []):
+		if slot == "Primary":
+			slot = "Weapon"
+		for weapon in equipment.get_equipt_items_of_slot_type(slot):
+			if weapon is BaseWeaponEquipment:
+				if included_weapon_ids.has(weapon.Id):
+					continue
+				if not ( # Match Ranged or Melee requirement
+					(include_ranged and weapon.is_ranged_weapon()) 
+					or (include_melee and weapon.is_melee_weapon())
+				):
+					continue
+				included_weapon_ids.append(weapon.Id)
+				var weapon_damage = weapon.get_damage_datas()
+				for key in weapon_damage.keys():
+					var sub_key = slot + str(index) + ":" + key
+					out_dict[sub_key] = weapon_damage[key]
+				index += 1
+	if range_melee_filter == "Unarmed" or (out_dict.size() == 0 and fall_back_to_unarmed):
+		var unarmed_attack_data = get_load_val("UnarmedAttackData", {})
+		out_dict = unarmed_attack_data.get("DamageDatas")
+		
 	return out_dict
 
 func get_targeting_mods()->Array:

@@ -19,11 +19,12 @@ var inventory_path:String:
 	get:
 		return get_load_val("InventoryPath", "")
 
-var item_details:Dictionary
+var item_details:Dictionary:
+	get:
+		return _def.get("ItemDetails", {})
 
 func _init(key:String, def_load_path:String, def:Dictionary, id:String='', data:Dictionary={}) -> void:
 	super(key, def_load_path, def, id, data)
-	item_details = get_load_val("ItemDetails", {}).duplicate()
 
 func save_me()->bool:
 	return true
@@ -57,12 +58,6 @@ func get_small_icon()->Texture2D:
 
 func get_rarity_background()->Texture2D:
 	return ItemHelper.get_rarity_background(self.get_item_rarity())
-#func use_on_actor(actor:BaseActor):
-	#var effect_key = ItemData['EffectKey']
-	#var effect_data = {}
-	#if ItemData.has('EffectData'):
-		#effect_data = ItemData['EffectData']
-	#actor.effects.add_effect(effect_key, effect_data)
 
 ## Returns a diction of failed requirements, mapped by requirment type 
 func get_cant_use_reasons(actor:BaseActor):
@@ -104,7 +99,6 @@ func get_cant_use_reasons(actor:BaseActor):
 				missing_requirements['Equipment'].append(req_tag)
 	return missing_requirements
 	return {}
-
 
 func get_passive_stat_mods()->Array:
 	var stat_mod_datas:Dictionary = get_load_val("StatMods", {})

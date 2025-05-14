@@ -130,6 +130,7 @@ func get_damage_data(damage_data_key:String, actor:BaseActor=null)->Dictionary:
 	return {}
 
 func get_damage_data_for_subaction(actor:BaseActor, subaction_data:Dictionary)->Dictionary:
+	printerr("get_damage_data_for_subaction is obsoleet. Use get_damage_datas")
 	var damage_key = subaction_data.get("DamageKey", "")
 	if damage_key == null or damage_key == '':
 		return {}
@@ -144,18 +145,39 @@ func get_damage_data_for_subaction(actor:BaseActor, subaction_data:Dictionary)->
 		return (weapon as BaseWeaponEquipment).get_damage_data()
 	return DamageDatas.get(damage_key, subaction_data.get("DamageData", {}))
 
+func get_damage_datas(actor:BaseActor, damage_keys)->Dictionary:
+	var out_dict = {}
+	if damage_keys is String:
+		damage_keys = [damage_keys]
+	for key in damage_keys:
+		var damage_data = DamageDatas.get(key, null)
+		if !damage_data:
+			printerr("%s.get_targeting_params: No Damage Data found for key '%s'." % [self.ActionKey, key])
+			continue
+		if damage_data.has("WeaponFilters"):
+			var weapon_filters:Array = damage_data['WeaponFilters']
+			var override_data = damage_data.duplicate()
+			override_data.erase("WeaponFilters")
+			var weapon_damage_datas = actor.get_weapon_damage_datas(weapon_filters)
+			for weapon_damage_key in weapon_damage_datas.keys():
+				var sub_key = key + ":" + weapon_damage_key
+				out_dict[sub_key] = BaseLoadObjectLibrary._merge_defs(damage_data, weapon_damage_datas[weapon_damage_key])
+		else:
+			out_dict[key] = damage_data
+	return out_dict
+
 func get_targeting_params(target_param_key, actor:BaseActor)->TargetParameters:
-	if actor and target_param_key == "Weapon":
-		var weapon = actor.equipment.get_primary_weapon()
-		if !weapon:
-			printerr("No Weapon")
-			return null
-		return (weapon as BaseWeaponEquipment).target_parmas
+	var params = null
 	if target_param_key == "Self":
-		return TargetParameters.SelfTargetParams
-	var params = _target_params.get(target_param_key, null)
+		params = TargetParameters.SelfTargetParams
+	elif target_param_key == "Weapon":
+		if actor:
+			params = actor.get_weapon_attack_target_params()
+	else:
+		params = _target_params.get(target_param_key, null)
 	if !params:
-		printerr("No Params")
+		printerr("%s.get_targeting_params: No Target Params found for key '%s'." % [self.ActionKey, target_param_key])
+		return null
 	if actor:
 		var targeting_mods = actor.get_targeting_mods()
 		var self_tags = self.get_tags()
@@ -196,7 +218,7 @@ func get_preview_damage_datas(actor:BaseActor=null)->Dictionary:
 		printerr("No preview key")
 		return {}
 	if preview_key == "Weapon" and actor:
-		return actor.get_weapon_damage_datas()
+		return actor.get_weapon_damage_datas({"IncludeSlots": "All"})
 	if preview_key == "Default" and actor:
 		return actor.get_default_attack_damage_datas()
 	var damage_datas = get_load_val("DamageDatas", {})
@@ -208,16 +230,16 @@ func get_preview_damage_datas(actor:BaseActor=null)->Dictionary:
 
 func has_ammo(actor:BaseActor=null):
 	var ammo_data = get_load_val("AmmoData", null)
-	if ammo_data and ammo_data.get("UseWeaponAmmo", false):
-		if actor:
-			var weapon = actor.equipment.get_primary_weapon()
-			var weapon_ammo = weapon.get_ammo_data()
-			if weapon_ammo.size() > 0:
-				return true
-			else:
-				return false
-		else:
-			return false
+	#if ammo_data and ammo_data.get("UseWeaponAmmo", false):
+		#if actor:
+			#var weapon = actor.equipment.get_primary_weapon()
+			#var weapon_ammo = weapon.get_ammo_data()
+			#if weapon_ammo.size() > 0:
+				#return true
+			#else:
+				#return false
+		#else:
+			#return false
 	return ammo_data != null
 
 func get_ammo_data(actor:BaseActor=null):

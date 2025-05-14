@@ -41,7 +41,7 @@
 		"SpriteOffset": [0,-16],
 		"PortraitRect":[12, 20, 24, 24],
 		"EquipmentSlots": [],
-        "DefaultAttackData":
+        "UnarmedAttackData":
         {
             "TargetParams": {
                 "EffectsAllies": true,
@@ -51,7 +51,8 @@
                 "TargetType": "Actor"
             },
             "DamageDatas":{
-                "DefaultDamage": {
+                "UnarmedDamage": {
+					"DisplayName": "Punch",
                     "AtkPower": 20,
                     "AtkStat": "PhyAttack",
                     "FixedBaseDamage": null,

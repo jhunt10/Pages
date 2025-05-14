@@ -57,23 +57,12 @@ func do_thing(parent_action:BaseAction, subaction_data:Dictionary, que_exe_data:
 	for damage_key:String in damage_keys:
 		# Get Weapon Damage
 		if damage_key.begins_with("Weapon"):
-			var main_hand_weapon:BaseWeaponEquipment = actor.equipment.get_primary_weapon()
-			if main_hand_weapon and (damage_key == "Weapon" or damage_key == "Weapon:Main"):
-				damage_datas['Weapon:Main'] = main_hand_weapon.get_damage_data()
-				# Add weapon effect (if exists)
-				var weapon_effect_data = main_hand_weapon.get_effect_on_attack_data()
-				if weapon_effect_data.has("EffectKey"):
-					effect_datas['Weapon:Main'] = weapon_effect_data
-			var off_hand_weapon:BaseWeaponEquipment = actor.equipment.get_offhand_weapon()
-			if off_hand_weapon and (damage_key == "Weapon" or damage_key == "Weapon:Off"):
-				damage_datas['Weapon:Off'] = (off_hand_weapon as BaseWeaponEquipment).get_damage_data()
-				# Add weapon effect (if exists)
-				var weapon_effect_data = off_hand_weapon.get_effect_on_attack_data()
-				if weapon_effect_data.has("EffectKey"):
-					effect_datas['Weapon:Off'] = weapon_effect_data
-		# Get Default Damage
-		elif damage_key == "Default":
-			damage_datas['Default'] = actor.get_default_attack_damage_datas()
+			var weapon_damage_datas = actor.get_weapon_damage_datas(damage_key)
+			for weapon_damage_key in weapon_damage_datas:
+				damage_datas[weapon_damage_key] = weapon_damage_datas[weapon_damage_key]
+			var weapon_effect_datas = actor.get_weapon_effects_datas(damage_key)
+			for weapon_effect_key in weapon_effect_datas:
+				damage_datas[weapon_effect_key] = weapon_effect_datas[weapon_effect_key]
 		# Get Damage from Parent Action
 		else:
 			damage_datas[damage_key] = parent_action.get_damage_data(damage_key, actor)
