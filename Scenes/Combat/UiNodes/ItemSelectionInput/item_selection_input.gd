@@ -33,7 +33,7 @@ func load_options(action_key:String, options:Array, on_finish_func:Callable):
 
 
 func _build_option_buttons(option_data):
-	var button_count = 0
+	#var button_count = 0
 	for child in options_container.get_children():
 		if child != premade_item_button:
 			child.queue_free()
@@ -50,7 +50,7 @@ func _build_option_buttons(option_data):
 		if _current_option_data.disable_options.size() > 0 and _current_option_data.disable_options[index]:
 			button.disable()
 		options_container.add_child(button)
-		button_count += 1
+		#button_count += 1
 		button.show()
 
 func on_option_selectec(key, value):

@@ -87,7 +87,7 @@ func show_start_button():
 	if supress_start:
 		return
 	var all_ready = true
-	for player:BaseActor in CombatRootControl.Instance.list_player_actors():
+	for player:BaseActor in CombatRootControl.list_player_actors():
 		if not player.Que.is_ready():
 			all_ready = false
 	var que_display_size = que_display_patch.size.x
@@ -252,7 +252,7 @@ func show_last_qued_target_area():
 	##ui_controler.mouse_exited_action_button(key_name)
 	#pass
 
-func _page_button_pressed(index, key_name):
+func _page_button_pressed(_index, key_name):
 	if selecetion_mode:
 		page_special_selected.emit(key_name)
 		hide_page_selection()
@@ -268,13 +268,13 @@ func _page_button_pressed(index, key_name):
 		_actor.Que.que_action(action)
 
 func _on_all_que_options_selected(action_key:String, options_data:Dictionary):
-	var action:BaseAction = MainRootNode.action_library.get_action(action_key)
+	var action:BaseAction = ActionLibrary.get_action(action_key)
 	_actor.Que.que_action(action, options_data)
 	on_que_options_menu.visible = false
 
 func _start_button_pressed():
 	var all_ready = true
-	for player:BaseActor in CombatRootControl.Instance.list_player_actors():
+	for player:BaseActor in CombatRootControl.list_player_actors():
 		if not player.Que.is_ready():
 			all_ready = false
 	if all_ready:

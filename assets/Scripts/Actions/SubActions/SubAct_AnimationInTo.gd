@@ -32,7 +32,7 @@ func do_thing(parent_action:BaseAction, subaction_data:Dictionary, metadata:QueE
 	#if animation == "WEAPON_DEFAULT":
 		#var primary_weapon = actor.equipment.get_primary_weapon()
 		#if primary_weapon:
-			#animation = primary_weapon.get_load_val("WeaponAnimation", null)
+			#animation = primary_weapon.get_default_weapon_animation_name()
 	#var animation_speed = 1.0
 	#if subaction_data.keys().has("AnimationSpeed"):
 		#animation_speed = subaction_data.get("AnimationSpeed", 1.0)

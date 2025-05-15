@@ -150,20 +150,20 @@ func get_damage_datas(actor:BaseActor, damage_keys)->Dictionary:
 	if damage_keys is String:
 		damage_keys = [damage_keys]
 	for key in damage_keys:
-		var damage_data = DamageDatas.get(key, null)
-		if !damage_data:
-			printerr("%s.get_targeting_params: No Damage Data found for key '%s'." % [self.ActionKey, key])
-			continue
-		if damage_data.has("WeaponFilters"):
-			var weapon_filters:Array = damage_data['WeaponFilters']
+		var damage_data = DamageDatas.get(key, {})
+		if damage_data.has("WeaponFilter"):
+			var weapon_filter = damage_data['WeaponFilter']
 			var override_data = damage_data.duplicate()
-			override_data.erase("WeaponFilters")
-			var weapon_damage_datas = actor.get_weapon_damage_datas(weapon_filters)
+			override_data.erase("WeaponFilter")
+			var weapon_damage_datas = actor.get_weapon_damage_datas(weapon_filter)
 			for weapon_damage_key in weapon_damage_datas.keys():
 				var sub_key = key + ":" + weapon_damage_key
 				out_dict[sub_key] = BaseLoadObjectLibrary._merge_defs(damage_data, weapon_damage_datas[weapon_damage_key])
-		else:
+		elif damage_data.size() > 0:
 			out_dict[key] = damage_data
+		else:
+			printerr("%s.get_targeting_params: No Damage Data found for key '%s'." % [self.ActionKey, key])
+			continue
 	return out_dict
 
 func get_targeting_params(target_param_key, actor:BaseActor)->TargetParameters:
@@ -172,7 +172,7 @@ func get_targeting_params(target_param_key, actor:BaseActor)->TargetParameters:
 		params = TargetParameters.SelfTargetParams
 	elif target_param_key == "Weapon":
 		if actor:
-			params = actor.get_weapon_attack_target_params()
+			params = actor.get_weapon_attack_target_params(target_param_key)
 	else:
 		params = _target_params.get(target_param_key, null)
 	if !params:

@@ -1,7 +1,6 @@
 [
     {
         "ActionKey": "BasicMeleeAttack",
-        "DamageDatas": {},
         "Details": {
             "Description": "Preform an Attack against one enemy in range.",
             "DisplayName": "Basic Attack",
@@ -42,7 +41,7 @@
                 {
                     "SubActionScript": "res://assets/Scripts/Actions/SubActions/Attacks/SubAct_Attack.gd",
                     "TargetKey": "Target1",
-                    "DamageKey": "Default"
+                    "DamageKeys": ["WeaponDamage"]
                 }
             ]
         },
@@ -54,8 +53,18 @@
                 "TargetArea": "[[-1,1],[0,1],[1,1]]",
                 "TargetType": "Actor"
             }
+        },
+        "DamageDatas":{
+            "WeaponDamage": {
+                "WeaponFilter": { 
+                    "IncludeSlots": [ "Primary", "OffHand" ],
+                    "FallbackToUnarmed": true, 
+                    "LimitRangeMelee": "MatchPrimary"
+                }
+            }
         }
     },
+    
     {
         "ActionKey": "AllAdjacentAttack",
         "DamageDatas": {},

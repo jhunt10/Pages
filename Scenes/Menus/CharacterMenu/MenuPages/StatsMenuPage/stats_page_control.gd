@@ -83,7 +83,7 @@ func _set_stats():
 	phys_atk_label.set_stat_values(_actor)
 	mag_atk_label.set_stat_values(_actor)
 	
-	var target_params = _actor.get_default_attack_target_params()
+	var target_params = _actor.get_weapon_attack_target_params("Weapon")
 	
 	var mag_attack = _actor.stats.get_stat(StatHelper.MagAttack)
 	var phy_attack = _actor.stats.get_stat(StatHelper.PhyAttack)
@@ -95,7 +95,12 @@ func _set_stats():
 		#var damage_data = primary_weapon.get_damage_data()
 		#var damage_var = damage_data.get("DamageVarient",1)
 	
-	var damage_datas = _actor.get_default_attack_damage_datas()
+	var damage_datas = _actor.get_weapon_damage_datas(
+		{
+			"IncludeSlots": [ "Primary", "OffHand" ],
+			"FallbackToUnarmed": true, 
+			"LimitRangeMelee": "Either"
+	})
 	
 	if damage_datas.has("WeaponDamage"):
 		var damage_data = damage_datas['WeaponDamage']

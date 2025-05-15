@@ -59,6 +59,9 @@ func get_tags_added_to_actor()->Array:
 func get_rarity_background()->Texture2D:
 	return ItemHelper.get_rarity_background(self.get_item_rarity(), is_passive_page())
 
+func has_spite_sheet()->bool:
+	return get_load_val("SpriteSheet", null) != null
+
 func get_sprite_sheet_file_path():
 	var file_name = get_load_val("SpriteSheet", null)
 	if !file_name:

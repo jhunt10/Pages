@@ -16,7 +16,6 @@ var animation:AnimationPlayer:
 			animation = $"../AnimationPlayer"
 		return animation
 
-var _lock_position_edit:bool = false
 @export var edit_mode:bool:
 	set(val):
 		edit_mode = val
@@ -158,7 +157,7 @@ func _notification(what):
 			
 
 func set_weapon(weapon:BaseWeaponEquipment):
-	var sprite_data:Dictionary = weapon.get_load_val("WeaponSpriteData", {})
+	var sprite_data:Dictionary = weapon.weapon_details.get("WeaponSpriteData", {})
 	if sprite_data.size() == 0:
 		self.visible = false
 		return

@@ -14,7 +14,7 @@ var _money:int = 0
 #TODO: Curent set up doesn't account for time spent in the save menu
 var _total_play_time
 var _session_start_unix_time
-var _cached_save_name
+#var _cached_save_name
 
 func get_player_index_of_actor(actor:BaseActor)->int:
 	for index in range(4):
@@ -63,7 +63,7 @@ func start_new_story():
 	
 	story_id = "Story:" + str(ResourceUID.create_id())
 	var player_id = "Player_1:" + str(ResourceUID.create_id())
-	var new_player = ActorLibrary.create_actor("SoldierTemplate", {}, player_id)
+	var _new_player = ActorLibrary.create_actor("SoldierTemplate", {}, player_id)
 	_player_ids = [player_id, null, null, null]
 	
 	_session_start_unix_time = Time.get_unix_time_from_system()

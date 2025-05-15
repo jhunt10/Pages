@@ -44,7 +44,7 @@ func set_actor(act:BaseActor):
 	if is_node_ready():
 		_sync_values()
 	
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if _resize:
 		self.size = Vector2i(main_container.size.x + (2*BoxPadding),
 							bars_container.size.y + (2*BoxPadding))

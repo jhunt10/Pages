@@ -15,31 +15,34 @@
             "Rarity": "Mundane",
             "Value": -1
         },
-        "SpriteSheet":"Sprites/OldHelm_SpriteSheet.png",
-        "EquipSlot":"Head",
-        "StatMods": {
-            "ArmorBonus": {
-                "DisplayName": "Old Helmet",
-                "ModType": "Add",
-                "StatName": "Armor",
-                "Value": 5
+        "EquipmentDetails":
+        {
+            "SpriteSheet":"Sprites/OldHelm_SpriteSheet.png",
+            "EquipSlot":"Head",
+            "StatMods": {
+                "ArmorBonus": {
+                    "DisplayName": "Old Helmet",
+                    "ModType": "Add",
+                    "StatName": "Armor",
+                    "Value": 5
+                },
+                "MassBonus": {
+                    "DisplayName": "Old Helmet",
+                    "ModType": "Add",
+                    "StatName": "Mass",
+                    "Value": 1
+                },
+                "SpeedPen": {
+                    "DisplayName": "Old Helmet",
+                    "ModType": "Add",
+                    "StatName": "Speed",
+                    "Value": -1
+                }
             },
-            "MassBonus": {
-                "DisplayName": "Old Helmet",
-                "ModType": "Add",
-                "StatName": "Mass",
-                "Value": 1
-            },
-            "SpeedPen": {
-                "DisplayName": "Old Helmet",
-                "ModType": "Add",
-                "StatName": "Speed",
-                "Value": -1
-            }
-        },
-        "Requirments": {
-            "ReqStats": {
-                "Strength": 10
+            "Requirments": {
+                "ReqStats": {
+                    "Strength": 10
+                }
             }
         }
     },
@@ -59,31 +62,34 @@
             "Rarity": "Mundane",
             "Value": 50
         },
-        "SpriteSheet":"Sprites/OldArmor_SpriteSheet.png",
-        "EquipSlot":"Body",
-        "StatMods": {
-            "ArmorBonus": {
-                "DisplayName": "Old Armor",
-                "ModType": "Add",
-                "StatName": "Armor",
-                "Value": 5
+        "EquipmentDetails":
+        {
+            "SpriteSheet":"Sprites/OldArmor_SpriteSheet.png",
+            "EquipSlot":"Body",
+            "StatMods": {
+                "ArmorBonus": {
+                    "DisplayName": "Old Armor",
+                    "ModType": "Add",
+                    "StatName": "Armor",
+                    "Value": 5
+                },
+                "MassBonus":{
+                    "DisplayName": "Old Armor",
+                    "ModType": "Add",
+                    "StatName": "Mass",
+                    "Value": 1
+                },
+                "SpeedPen": {
+                    "DisplayName": "Old Armor",
+                    "ModType": "Add",
+                    "StatName": "Speed",
+                    "Value": -1
+                }
             },
-            "MassBonus":{
-                "DisplayName": "Old Armor",
-                "ModType": "Add",
-                "StatName": "Mass",
-                "Value": 1
-            },
-            "SpeedPen": {
-                "DisplayName": "Old Armor",
-                "ModType": "Add",
-                "StatName": "Speed",
-                "Value": -1
-            }
-        },
-        "Requirments": {
-            "ReqStats": {
-                "Strength": 10
+            "Requirments": {
+                "ReqStats": {
+                    "Strength": 10
+                }
             }
         }
     },
@@ -103,31 +109,34 @@
             "Rarity": "Mundane",
             "Value": 50
         },
-        "SpriteSheet":"Sprites/OldBoots_SpriteSheet.png",
-        "EquipSlot":"Feet",
-        "StatMods": {
-            "ArmorBonus": {
-                "DisplayName": "Old Boots",
-                "ModType": "Add",
-                "StatName": "Armor",
-                "Value": 5
+        "EquipmentDetails":
+        {
+            "SpriteSheet":"Sprites/OldBoots_SpriteSheet.png",
+            "EquipSlot":"Feet",
+            "StatMods": {
+                "ArmorBonus": {
+                    "DisplayName": "Old Boots",
+                    "ModType": "Add",
+                    "StatName": "Armor",
+                    "Value": 5
+                },
+                "MassBonus":{
+                    "DisplayName": "Old Boots",
+                    "ModType": "Add",
+                    "StatName": "Mass",
+                    "Value": 1
+                },
+                "SpeedPen": {
+                    "DisplayName": "Old Boots",
+                    "ModType": "Add",
+                    "StatName": "Speed",
+                    "Value": -1
+                }
             },
-            "MassBonus":{
-                "DisplayName": "Old Boots",
-                "ModType": "Add",
-                "StatName": "Mass",
-                "Value": 1
-            },
-            "SpeedPen": {
-                "DisplayName": "Old Boots",
-                "ModType": "Add",
-                "StatName": "Speed",
-                "Value": -1
-            }
-        },
-        "Requirments": {
-            "ReqStats": {
-                "Strength": 10
+            "Requirments": {
+                "ReqStats": {
+                    "Strength": 10
+                }
             }
         }
     },
@@ -147,32 +156,32 @@
             "Rarity": "Mundane",
             "Value": 50
         },
-        "Requirments": {
-            "ReqStats": {
-                "Strength": 10
-            }
-        },
-        "StatMods":{
-            "ArmorBonus": {
-                "DisplayName": "Old Shield",
-                "ModType": "Add",
-                "StatName": "Armor",
-                "Value": 5
+        "EquipmentDetails":
+        {
+            "Requirments": {
+                "ReqStats": {
+                    "Strength": 10
+                }
             },
-			"StatMod1": { 
-				"StatName": "BlockChance",
-				"DisplayName": "Old Shield",
-				"ModType":"Set", 
-				"Value":45
-			},
-			"StatMod2": { 
-				"StatName": "BlockMod",
-				"DisplayName": "Old Shield",
-				"ModType":"Set", 
-				"Value":0.5
-			}
-        },
-        "SpriteSheet":"Sprites/OldShield_SpriteSheet.png",
-        "EquipSlot":"OffHand"
+            "StatMods":{
+                "ArmorBonus": {
+                    "ModType": "Add",
+                    "StatName": "Armor",
+                    "Value": 5
+                },
+                "StatMod1": { 
+                    "StatName": "BlockChance",
+                    "ModType":"Set", 
+                    "Value":45
+                },
+                "StatMod2": { 
+                    "StatName": "BlockMod",
+                    "ModType":"Set", 
+                    "Value":0.5
+                }
+            },
+            "SpriteSheet":"Sprites/OldShield_SpriteSheet.png",
+            "EquipSlot":"OffHand"
+        }
     }
 ]

@@ -10,7 +10,12 @@ static var SelfTargetParams:TargetParameters = TargetParameters.new(
 
 enum TargetTypes {Self, FullArea, Spot, OpenSpot, Actor, Ally, Enemy, Corpse}
 
-var target_param_key:String
+var _target_param_key
+var target_param_key:String:
+	get:
+		return _target_param_key
+	set(val):
+		_target_param_key = val
 var raw_args:Dictionary
 var target_type:TargetTypes
 var line_of_sight:bool

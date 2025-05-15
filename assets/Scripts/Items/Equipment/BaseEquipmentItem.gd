@@ -16,10 +16,12 @@ func get_item_tags()->Array:
 	return tags
 
 func get_equipment_slot_type()->String:
-	return get_load_val("EquipSlot", "UNSET")
+	return equipment_details.get("EquipSlot", "UNSET")
 
+func has_spite_sheet()->bool:
+	return equipment_details.has('SpriteSheet')
 func get_sprite_sheet_file_path():
-	var file_name = get_load_val("SpriteSheet", null)
+	var file_name = equipment_details.get('SpriteSheet', null)
 	if !file_name:
 		return null
 	return _def_load_path.path_join(file_name)

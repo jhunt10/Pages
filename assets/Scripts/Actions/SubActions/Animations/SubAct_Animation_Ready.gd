@@ -39,10 +39,10 @@ func get_default_weapon_animation(actor:BaseActor, off_hand:bool):
 	if off_hand:
 		var off_weapon = actor.equipment.get_offhand_weapon()
 		if off_weapon:
-			return off_weapon.get_load_val("WeaponAnimation", null)
+			return off_weapon.get_default_weapon_animation_name()
 	else:
 		var primary_weapon = actor.equipment.get_primary_weapon()
 		if primary_weapon:
-			return primary_weapon.get_load_val("WeaponAnimation", null)
+			return primary_weapon.get_default_weapon_animation_name()
 	return null
 	

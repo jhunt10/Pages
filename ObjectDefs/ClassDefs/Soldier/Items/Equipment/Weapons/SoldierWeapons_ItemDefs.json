@@ -6,7 +6,7 @@
 			"DisplayName": "Old Sword",
 			"SnippetDesc": "A soldier's old sword.",
 			"Description": "A old sword dulled from years of practice but no combat. Old, but still works.",
-			"Tags": ["Weapon", "Sword"],
+			"Tags": ["Weapon"],
 			"LargeIcon":"Sprites/OldSword.png",
 			"SmallIcon":"Sprites/OldSword.png"
 		},
@@ -15,43 +15,59 @@
             "Rarity": "Mundane",
             "Value": 50
         },
-        "Requirments": {
-            "ReqStats": {
-                "Strength": 10
+        "EquipmentDetails":
+        {
+            "EquipSlot":"Weapon",
+            "Requirments": {
+                "ReqStats": {
+                    "Strength": 10
+                }
+            },
+            "StatMods": {
+                "AttackBonus": {
+                    "ModType": "Add",
+                    "StatName": "PhyAttack",
+                    "Value": 10
+                }
+            },
+            "DamageMods": {},
+            "TargetMods": {},
+            "AttackMods": {}
+        },
+        "WeaponDetails": {
+            "WeaponClass": "Medium",
+            "IsRanged": false,
+            "WeaponSpriteData":{
+                "Offset":[0,0],
+                "SpriteName":"Sprites/OldSword",
+                "Rotation":0,
+                "WeaponAnimation": "Swing"
+            },
+            "AttackData":{
+                "AttackTags": ["Weapon","Melee","Physical"],
+                "AttackDetails": {
+                    "AccuracyMod": 1,
+                    "PotencyMod": 1
+                },
+                "DamageDatas":{
+                    "WeaponDamage": {
+                        "AtkStat": "PhyAttack",
+                        "AtkPower": 100,
+                        "DamageVfxKey": "Slash_DamageEffect",
+                        "DamageType": "Slash",
+                        "DamageVarient": 0.1,
+                        "DefenseType": "Armor"
+                    }
+                },
+                "EffectDatas":{ },
+                "TargetParams": {
+                    "EffectsAllies": false,
+                    "EffectsEnemies": true,
+                    "LineOfSight": true,
+                    "TargetArea": "[[-1,0],[-1,1],[0,1],[1,1],[1,0]]",
+                    "TargetType": "Enemy"
+                }
             }
-        },
-        "StatMods": {
-            "AttackBonus": {
-                "DisplayName": "Old Sword",
-                "ModType": "Add",
-                "StatName": "PhyAttack",
-                "Value": 10
-            }
-        },
-        "WeaponSpriteData":{
-            "Offset":[0,0],
-            "SpriteName":"Sprites/OldSword",
-            "Rotation":0
-        },
-        "EquipSlot":"Weapon",
-        "CanOffhand":false,
-        "DamageData":{
-            "AtkStat": "PhyAttack",
-            "AtkPower": 100,
-            "DamageVfxKey": "Slash_DamageEffect",
-            "DamageType": "Slash",
-            "DamageVarient": 0.1,
-            "DefenseType": "Armor"
-        },
-        "TargetParams": {
-            "EffectsAllies": false,
-            "EffectsEnemies": true,
-            "LineOfSight": true,
-            "TargetArea": "[[-1,0],[-1,1],[0,1],[1,1],[1,0]]",
-            "TargetType": "Enemy"
-        },
-        "AttackTags": ["Melee", "Physical"],
-        "WeaponClass": "Medium",
-        "WeaponAnimation": "Swing"
+        }
     }
 ]

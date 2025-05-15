@@ -99,7 +99,7 @@ var min_bar_size:int:
 var _actor:BaseActor
 var _stat_name:String
 
-var _cached_stat_value:int = 1
+#var _cached_stat_value:int = 1
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -208,7 +208,7 @@ func _sync():
 	if _actor and LOGGING:
 		print("Syncing: %s for '%s' | PreviewMod: %s" % [_stat_name, _actor.Id, _preview_mode])
 		print("MaxVal: %s | Current Val: %s" % [max_value, current_value])
-	var max = max_value
+	var max_2 = max_value
 	var new_val = current_value
 	if not preview_mode:
 		if animation.is_playing():
@@ -216,11 +216,11 @@ func _sync():
 		if blink_value_bar.visible:
 			blink_value_bar.visible = false
 		_change_timer = change_delay
-		_target_display_bar_width = _vals_to_bar_size(new_val, max)
+		_target_display_bar_width = _vals_to_bar_size(new_val, max_2)
 		if _last_display_bar_width < 0:
 			_last_display_bar_width = colored_value_bar.size.x
 		was_changing = true
-		mid_label.text = str(new_val) + " / " + str(max)
+		mid_label.text = str(new_val) + " / " + str(max_2)
 		left_label.text = ''
 		
 		var net_change = _last_synced_value - _last_display_bar_value
@@ -247,9 +247,9 @@ func _sync():
 			blink_value_bar.visible = true
 		var predicted_val = predicted_value
 		if LOGGING: print("Set Preive Mode stuff: Real: %s | Pred: %s | Cost: %s " % [new_val, predicted_val, preview_cost])
-		dark_value_bar.size.x = _vals_to_bar_size(new_val, max)
-		blink_value_bar.size.x = _vals_to_bar_size(predicted_val, max)
-		colored_value_bar.size.x = _vals_to_bar_size(predicted_val - preview_cost, max)
+		dark_value_bar.size.x = _vals_to_bar_size(new_val, max_2)
+		blink_value_bar.size.x = _vals_to_bar_size(predicted_val, max_2)
+		colored_value_bar.size.x = _vals_to_bar_size(predicted_val - preview_cost, max_2)
 		
 		mid_label.text = str(predicted_val) + " / " + str(max)
 		#left_label.text = "(%s)" % [(predicted_val)]

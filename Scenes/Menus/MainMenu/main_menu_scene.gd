@@ -33,8 +33,8 @@ func _ready() -> void:
 func quit_game():
 	get_tree().quit()
 
-func show_sub_menu(name):
-	if name == "More":
+func show_sub_menu(menu_name):
+	if menu_name == "More":
 		more_container.show()
 		main_container.hide()
 	else:

@@ -13,7 +13,7 @@ func _ready() -> void:
 	#CombatRootControl.Instance.actor_spawned.connect(on_new_actor)
 	CombatRootControl.Instance.QueController.que_ordering_changed.connect(_build_displays)
 
-func on_new_actor(actor:BaseActor, pos):
+func on_new_actor(_actor:BaseActor, _pos):
 	_build_displays()
 	
 func _build_displays():

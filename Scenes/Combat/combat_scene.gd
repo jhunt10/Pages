@@ -291,7 +291,7 @@ func create_new_missile_node(missile):
 	new_node.set_missile_data(missile)
 	MapController.add_missile_node(missile, new_node)
 
-func create_flash_text_on_actor(actor:BaseActor, value:String, color:Color):
+func create_flash_text_on_actor(actor:BaseActor, value:String, _color:Color):
 	var actor_node:BaseActorNode = MapController.actor_nodes[actor.Id]
 	actor_node.vfx_holder.flash_text_controller.add_flash_text(value, FlashTextController.FlashTextType.Normal_Dmg)
 	#create_flash_text(actor_node.vfx_holder, value, color)

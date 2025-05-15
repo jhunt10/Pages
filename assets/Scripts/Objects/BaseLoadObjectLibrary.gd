@@ -167,15 +167,17 @@ func reload():
 
 func _load_object_defs():
 	var delayed_defs = {}
+	var paths = [OBJECTS_DEFS_DIR, 'res://ObjectDefs/']
 	# Load Defs
-	for def_file in _search_for_files(OBJECTS_DEFS_DIR, get_def_file_sufix()):
-		if LOGGING: print("# Loading Def file: %s" % [def_file])
-		var delayed = _load_object_def_file(def_file)
-		for parent_key in delayed.keys():
-			if not delayed_defs.keys().has(parent_key):
-				delayed_defs[parent_key] = {}
-			for child_key in delayed[parent_key]:
-				delayed_defs[parent_key][child_key] = delayed[parent_key][child_key]
+	for path in paths:
+		for def_file in _search_for_files(path, get_def_file_sufix()):
+			if LOGGING: print("# Loading Def file: %s" % [def_file])
+			var delayed = _load_object_def_file(def_file)
+			for parent_key in delayed.keys():
+				if not delayed_defs.keys().has(parent_key):
+					delayed_defs[parent_key] = {}
+				for child_key in delayed[parent_key]:
+					delayed_defs[parent_key][child_key] = delayed[parent_key][child_key]
 	
 	var safety_limit = 100
 	var safety_index = 0

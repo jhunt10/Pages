@@ -54,19 +54,7 @@ func do_thing(parent_action:BaseAction, subaction_data:Dictionary, que_exe_data:
 		var damage_key = subaction_data.get("DamageKey")
 		if not damage_keys.has(damage_key):
 			damage_keys.append(damage_key)
-	for damage_key:String in damage_keys:
-		# Get Weapon Damage
-		if damage_key.begins_with("Weapon"):
-			var weapon_damage_datas = actor.get_weapon_damage_datas(damage_key)
-			for weapon_damage_key in weapon_damage_datas:
-				damage_datas[weapon_damage_key] = weapon_damage_datas[weapon_damage_key]
-			var weapon_effect_datas = actor.get_weapon_effects_datas(damage_key)
-			for weapon_effect_key in weapon_effect_datas:
-				damage_datas[weapon_effect_key] = weapon_effect_datas[weapon_effect_key]
-		# Get Damage from Parent Action
-		else:
-			damage_datas[damage_key] = parent_action.get_damage_data(damage_key, actor)
-	
+	damage_datas = parent_action.get_damage_datas(actor, damage_keys)
 	var actor_pos = game_state.get_actor_pos(actor)
 	
 	# Handle special weapon logic 

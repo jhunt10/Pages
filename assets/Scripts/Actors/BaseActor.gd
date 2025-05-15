@@ -146,8 +146,8 @@ func _on_equipment_holder_items_change():
 func _on_page_holder_items_change():
 	stats.dirty_stats()
 	stats.recache_stats()
-	if not suppress_equipment_changed:
-		self.equipment_changed.emit()
+	#if not suppress_equipment_changed:
+		#self.equipment_changed.emit()
 
 func save_me()->bool:
 	return self.is_player
@@ -161,6 +161,8 @@ func save_data()->Dictionary:
 	return data
 
 func load_data(data:Dictionary):
+	_data = data
+	suppress_equipment_changed = true
 	var stat_data = data.get('Stats', {})
 	stats.load_data(stat_data)
 	
@@ -180,10 +182,10 @@ func load_data(data:Dictionary):
 	var bag_item = equipment.get_bag_equipment()
 	items.set_bag_item(bag_item)
 	
+	suppress_equipment_changed = false
 	equipment.validate_items()
 	pages.validate_items()
 	items.validate_items()
-	_data = data
 	stats.dirty_stats()
 
 func on_combat_start():
@@ -232,12 +234,12 @@ func get_action_key_list()->Array:
 		return list
 	return get_load_val("AiData", {}).get("ActionsArr", [])
 
-func get_weapon_attack_target_params()->TargetParameters:
+func get_weapon_attack_target_params(target_param_key)->TargetParameters:
 	var weapon = equipment.get_primary_weapon()
 	if weapon:
-		return TargetParameters.new("Default", weapon.get_load_val("TargetParams"))
+		return weapon.target_parmas
 	var default_attack_data = get_load_val("UnarmedAttackData", {})
-	var default = TargetParameters.new("Default", default_attack_data.get("TargetParams", {}))
+	var default = TargetParameters.new(target_param_key, default_attack_data.get("TargetParams", {}))
 	return default
 
 ## Get damage data for equippted weapon(s)

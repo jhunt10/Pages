@@ -54,7 +54,9 @@ func get_item_tags()->Array:
 	return tags
 
 func get_weapon_class()->WeaponClasses:
-	var val = get_load_val("WeaponClass", '')
+	var val = weapon_details.get("WeaponClass", null)
+	if !val: # TODO: Obsoleate
+		val = get_load_val("WeaponClass", '')
 	if WeaponClasses.keys().has(val):
 		return WeaponClasses.get(val)
 	return WeaponClasses.Medium
@@ -73,3 +75,6 @@ func get_effect_on_attack_data()->Dictionary:
 
 func get_misile_data()->Dictionary:
 	return get_load_val("MissileData", {})
+
+func get_default_weapon_animation_name()->String:
+	return weapon_details.get("WeaponSpriteData", {}).get("WeaponAnimation", "")

@@ -40,7 +40,7 @@ func _on_confirm_button_up():
 	confirm_pressed.emit()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	pass
 
 func load_and_show(min_actors:int=1, max_actors:int=4):

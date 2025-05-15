@@ -67,7 +67,7 @@ func _on_frame_start():
 	var icon_width = first_que._slots[0].size.x
 	var gap = first_que.slots_container.get_theme_constant('separation')
 	var start_x = first_que.slots_container.position.x
-	var end_x = first_que.slots_container.position.x + (first_que.slots_container.get_children().size() * (icon_width + gap)) - gap
+	#var end_x = first_que.slots_container.position.x + (first_que.slots_container.get_children().size() * (icon_width + gap)) - gap
 	var x = start_x
 	x += (icon_width + gap) * CombatRootControl.Instance.QueController.action_index
 	x += (icon_width+gap) * CombatRootControl.Instance.QueController.sub_action_index / ActionQueController.FRAMES_PER_ACTION

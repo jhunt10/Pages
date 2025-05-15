@@ -136,8 +136,7 @@ func execute_action_motion_animation(speed:float=1, off_hand:bool=false):
 func cancel_action_animations():
 	cancel_weapon_animations()
 	
-func ready_weapon_animation(action_name:String, speed:float=1, off_hand:bool=false):
-	var animation_name = action_name + "/ready" + _get_animation_dir_sufix()
+func ready_weapon_animation(action_name:String, _speed:float=1, off_hand:bool=false):
 	if off_hand and off_hand_node:
 		off_hand_node.ready_arnimation(action_name)
 	elif main_hand_node:

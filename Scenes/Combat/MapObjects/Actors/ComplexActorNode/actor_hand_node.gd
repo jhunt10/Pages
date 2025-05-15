@@ -107,20 +107,20 @@ func set_weapon(weapon:BaseWeaponEquipment):
 func hide_weapon():
 	weapon_node.visible = false
 
-func ready_arnimation(name, speed:float=1.0):
+func ready_arnimation(animationn_name, speed:float=1.0):
 	animation_tree.set("parameters/conditions/Cancel", false)
 	animation_tree.set("parameters/conditions/PlayMotion", false)
-	if name == "Swing":
+	if animationn_name == "Swing":
 		animation_tree.set("parameters/conditions/Swing", true)
-		readied_animation = name
+		readied_animation = animationn_name
 		animation_speed = speed
-	if name == "Stab":
+	if animationn_name == "Stab":
 		animation_tree.set("parameters/conditions/Stab", true)
-		readied_animation = name
+		readied_animation = animationn_name
 		animation_speed = speed
-	if name == "Raise":
+	if animationn_name == "Raise":
 		animation_tree.set("parameters/conditions/Raise", true)
-		readied_animation = name
+		readied_animation = animationn_name
 		animation_speed = speed
 
 func execute_animation(speed:float=1.0):

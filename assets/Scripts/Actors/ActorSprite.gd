@@ -50,7 +50,10 @@ func _build_sprite_sheet():
 		_cached_portrait = SpriteCache.get_sprite(_actor.details.large_icon_path)
 		return
 	
-	var sprite_path = _actor.get_load_path().path_join(sprite_sheet_file).trim_suffix(".png")
+	#var old_version = sprite_sheet_file.ends_with(".png")
+	#var sprite_path = ''
+	#if old_version:
+	var sprite_path =_actor.get_load_path().path_join(sprite_sheet_file).trim_suffix(".png")
 	var body_texture:Texture2D = SpriteCache.get_sprite(sprite_path+".png", true)
 	if !body_texture:
 		printerr("Failed to find boday texture: %s" % [sprite_path])
@@ -132,9 +135,9 @@ func _get_draw_ordered_equipment()->Array:
 	for slot in draw_order:
 		for equip:BaseEquipmentItem in all_equipment:
 			if equip.get_equipment_slot_type() == slot:
-				if equip.get_load_val("SpriteSheet", null):
+				if equip.has_spite_sheet():
 					out_list.append(equip)
 	for page:BasePageItem in _actor.pages.list_items():
-		if page.get_sprite_sheet_file_path():
+		if page.has_spite_sheet():
 			out_list.append(page)
 	return out_list

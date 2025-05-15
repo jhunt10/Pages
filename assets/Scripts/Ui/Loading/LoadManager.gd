@@ -31,7 +31,6 @@ func load_scene(scene_path:String, sub_scene_data:Dictionary = {})->void:
 	_load_screen = _load_screen_script.instantiate()
 	var last_scene_was_combat = MainRootNode.Instance.current_scene is CombatRootControl
 	
-	var next_scene_is_combat = scene_path.ends_with("combat_scene.tscn")
 	if scene_path.ends_with("combat_scene.tscn"):
 		_load_screen.load_scale = 50
 		
