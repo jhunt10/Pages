@@ -2,6 +2,10 @@ class_name BasePageItem
 extends BaseItem
 
 
+var page_details:Dictionary:
+	get:
+		return _def.get("PageDetails", {})
+
 func get_item_type()->ItemTypes:
 	return ItemTypes.Page
 
@@ -67,3 +71,13 @@ func get_sprite_sheet_file_path():
 	if !file_name:
 		return null
 	return _def_load_path.path_join(file_name)
+
+
+func get_passive_stat_mods()->Array:
+	var stat_mod_datas:Dictionary = page_details.get("StatMods", {})
+	var out_list = []
+	for mod_data in stat_mod_datas.values():
+		if not mod_data.has("DisplayName"):
+			mod_data['DisplayName'] = self.details.display_name
+		out_list.append(BaseStatMod.create_from_data(Id, mod_data))
+	return out_list

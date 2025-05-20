@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=3 uid="uid://ciah50qt3htui"]
+[gd_scene load_steps=57 format=3 uid="uid://ciah50qt3htui"]
 
 [ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/character_menu_control.gd" id="1_b43ae"]
 [ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/player_tab_butotn.gd" id="2_758lj"]
@@ -50,6 +50,7 @@
 [ext_resource type="Texture2D" uid="uid://diy8q5lpvpw1u" path="res://assets/Sprites/UI/SymbolIcons/PhyDamageSymbol.png" id="34_vfo8p"]
 [ext_resource type="PackedScene" uid="uid://c1bs8grs7gsc1" path="res://Scenes/UiNodes/MiniRangeDisplay/mini_range_display.tscn" id="34_ywo5i"]
 [ext_resource type="Texture2D" uid="uid://b201kpuib7q5k" path="res://assets/Sprites/UI/SymbolIcons/MagDamageSymbol.png" id="35_2rf2x"]
+[ext_resource type="PackedScene" uid="uid://bqi05unl37q0p" path="res://Scenes/UiNodes/DamageLabelContainer/damage_label_container.tscn" id="42_hsufi"]
 [ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/inv_filter_tabs_control.gd" id="43_ercvn"]
 [ext_resource type="Texture2D" uid="uid://7lffl3feh6kl" path="res://Scenes/Menus/CharacterMenu/TabBackground_Small.png" id="43_gi4es"]
 [ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/InventoryPage/sub_inventory_tab.gd" id="44_vhgyr"]
@@ -902,7 +903,7 @@ offset_bottom = -12.0
 grow_horizontal = 0
 grow_vertical = 2
 
-[node name="StatsPage" type="Control" parent="ScaleControl" node_paths=PackedStringArray("strength_label", "agility_label", "intelligence_label", "wisdom_label", "bar_stats_container", "speed_stat_label", "mass_stat_label", "ppr_stat_label", "crash_stat_label", "mag_atk_label", "phys_atk_label", "phy_atk_icon", "mag_atk_icon", "accuracy_stat_label", "potency_stat_label", "range_display", "main_hand_min_damage_label", "main_hand_max_damage_label", "main_hand_damage_type", "crit_mod_label", "crit_chance_label", "armor_label", "ward_label", "evasion_stat_label", "protection_stat_label", "awareness_stat_label", "awareness_display", "block_chance_label", "block_mod_label", "evade_front_chance_label", "evade_flank_chance_label", "evade_back_chance_label", "block_front_chance_label", "block_flank_chance_label", "block_back_chance_label")]
+[node name="StatsPage" type="Control" parent="ScaleControl" node_paths=PackedStringArray("strength_label", "agility_label", "intelligence_label", "wisdom_label", "bar_stats_container", "speed_stat_label", "mass_stat_label", "ppr_stat_label", "crash_stat_label", "mag_atk_label", "phys_atk_label", "phy_atk_icon", "mag_atk_icon", "accuracy_stat_label", "potency_stat_label", "range_display", "main_hand_damage_label", "crit_mod_label", "crit_chance_label", "armor_label", "ward_label", "evasion_stat_label", "protection_stat_label", "awareness_stat_label", "awareness_display", "block_chance_label", "block_mod_label", "evade_front_chance_label", "evade_flank_chance_label", "evade_back_chance_label", "block_front_chance_label", "block_flank_chance_label", "block_back_chance_label")]
 custom_minimum_size = Vector2(280, 395)
 anchors_preset = 0
 offset_left = 303.0
@@ -927,9 +928,7 @@ mag_atk_icon = NodePath("ContainerControl/StatsMainContainer/AtkStatsContainer/B
 accuracy_stat_label = NodePath("ContainerControl/StatsMainContainer/AtkStatsContainer/BoxContainer/PhyMagDamageContainer/AccurcyContainer")
 potency_stat_label = NodePath("ContainerControl/StatsMainContainer/AtkStatsContainer/BoxContainer/PhyMagDamageContainer/PotencyContainer")
 range_display = NodePath("ContainerControl/StatsMainContainer/AtkStatsContainer/BoxContainer/RangeDamageContainer/VBoxContainer/MiniRangeDisplay")
-main_hand_min_damage_label = NodePath("ContainerControl/StatsMainContainer/AtkStatsContainer/BoxContainer/RangeDamageContainer/DamageDatasContainer/MainHandDamageRow/MinDamageLabel")
-main_hand_max_damage_label = NodePath("ContainerControl/StatsMainContainer/AtkStatsContainer/BoxContainer/RangeDamageContainer/DamageDatasContainer/MainHandDamageRow/MaxDamageLabel")
-main_hand_damage_type = NodePath("ContainerControl/StatsMainContainer/AtkStatsContainer/BoxContainer/RangeDamageContainer/DamageDatasContainer/MainHandDamageRow/DamageType")
+main_hand_damage_label = NodePath("ContainerControl/StatsMainContainer/AtkStatsContainer/BoxContainer/RangeDamageContainer/DamageDatasContainer/MainHandDamageContainer")
 crit_mod_label = NodePath("ContainerControl/StatsMainContainer/AtkStatsContainer/BoxContainer/RangeDamageContainer/DamageDatasContainer/CritContainer/ModValLabel")
 crit_chance_label = NodePath("ContainerControl/StatsMainContainer/AtkStatsContainer/BoxContainer/RangeDamageContainer/DamageDatasContainer/CritContainer/ChanceLabel")
 armor_label = NodePath("ContainerControl/StatsMainContainer/DefStatsContainer/BoxContainer/ArmorWardContainer/ArmorContainer")
@@ -938,8 +937,8 @@ evasion_stat_label = NodePath("ContainerControl/StatsMainContainer/DefStatsConta
 protection_stat_label = NodePath("ContainerControl/StatsMainContainer/DefStatsContainer/BoxContainer/ArmorWardContainer/ProtectionContainer")
 awareness_stat_label = NodePath("ContainerControl/StatsMainContainer/DefStatsContainer/BoxContainer/MainContainer/EvadeBlockGrid/AwarenessChancesContainer/AwarenessContainer")
 awareness_display = NodePath("ContainerControl/StatsMainContainer/DefStatsContainer/BoxContainer/MainContainer/MiniAwarnessDisplay")
-block_chance_label = NodePath("ContainerControl/StatsMainContainer/DefStatsContainer/BoxContainer/BlockContainer/ChanceLabel")
-block_mod_label = NodePath("ContainerControl/StatsMainContainer/DefStatsContainer/BoxContainer/BlockContainer/ModValLabel")
+block_chance_label = NodePath("ContainerControl/StatsMainContainer/DefStatsContainer/BoxContainer/BlockContainer/BlockChanceContainer")
+block_mod_label = NodePath("ContainerControl/StatsMainContainer/DefStatsContainer/BoxContainer/BlockContainer/BlockModContainer")
 evade_front_chance_label = NodePath("ContainerControl/StatsMainContainer/DefStatsContainer/BoxContainer/MainContainer/EvadeBlockGrid/EvadeRow/FrontValLabel")
 evade_flank_chance_label = NodePath("ContainerControl/StatsMainContainer/DefStatsContainer/BoxContainer/MainContainer/EvadeBlockGrid/EvadeRow/FlankValLabel")
 evade_back_chance_label = NodePath("ContainerControl/StatsMainContainer/DefStatsContainer/BoxContainer/MainContainer/EvadeBlockGrid/EvadeRow/BackValLabel")
@@ -1695,19 +1694,27 @@ size_flags_horizontal = 3
 theme_override_constants/separation = 0
 alignment = 1
 
+[node name="MainHandDamageContainer" parent="ScaleControl/StatsPage/ContainerControl/StatsMainContainer/AtkStatsContainer/BoxContainer/RangeDamageContainer/DamageDatasContainer" instance=ExtResource("42_hsufi")]
+layout_mode = 2
+attack_scale = null
+
 [node name="MainHandDamageRow" type="HBoxContainer" parent="ScaleControl/StatsPage/ContainerControl/StatsMainContainer/AtkStatsContainer/BoxContainer/RangeDamageContainer/DamageDatasContainer"]
+visible = false
 layout_mode = 2
 theme_override_constants/separation = 0
 
 [node name="PhyAttackIcon" type="TextureRect" parent="ScaleControl/StatsPage/ContainerControl/StatsMainContainer/AtkStatsContainer/BoxContainer/RangeDamageContainer/DamageDatasContainer/MainHandDamageRow"]
+visible = false
 layout_mode = 2
 texture = ExtResource("34_vfo8p")
 
 [node name="MagAttackIcon2" type="TextureRect" parent="ScaleControl/StatsPage/ContainerControl/StatsMainContainer/AtkStatsContainer/BoxContainer/RangeDamageContainer/DamageDatasContainer/MainHandDamageRow"]
+visible = false
 layout_mode = 2
 texture = ExtResource("35_2rf2x")
 
 [node name="MinDamageLabel" type="Label" parent="ScaleControl/StatsPage/ContainerControl/StatsMainContainer/AtkStatsContainer/BoxContainer/RangeDamageContainer/DamageDatasContainer/MainHandDamageRow"]
+visible = false
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("12_dy5pv")
@@ -1715,6 +1722,7 @@ text = "70"
 horizontal_alignment = 1
 
 [node name="Dash" type="Label" parent="ScaleControl/StatsPage/ContainerControl/StatsMainContainer/AtkStatsContainer/BoxContainer/RangeDamageContainer/DamageDatasContainer/MainHandDamageRow"]
+visible = false
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("12_dy5pv")
@@ -1722,6 +1730,7 @@ text = "-"
 horizontal_alignment = 1
 
 [node name="MaxDamageLabel" type="Label" parent="ScaleControl/StatsPage/ContainerControl/StatsMainContainer/AtkStatsContainer/BoxContainer/RangeDamageContainer/DamageDatasContainer/MainHandDamageRow"]
+visible = false
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("12_dy5pv")
@@ -1729,6 +1738,7 @@ text = "130"
 horizontal_alignment = 1
 
 [node name="Spacer" type="Label" parent="ScaleControl/StatsPage/ContainerControl/StatsMainContainer/AtkStatsContainer/BoxContainer/RangeDamageContainer/DamageDatasContainer/MainHandDamageRow"]
+visible = false
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("12_dy5pv")
@@ -1736,6 +1746,7 @@ text = "  "
 horizontal_alignment = 1
 
 [node name="DamageType" type="Label" parent="ScaleControl/StatsPage/ContainerControl/StatsMainContainer/AtkStatsContainer/BoxContainer/RangeDamageContainer/DamageDatasContainer/MainHandDamageRow"]
+visible = false
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("12_dy5pv")
@@ -1993,16 +2004,42 @@ theme = ExtResource("12_dy5pv")
 text = "Block: "
 horizontal_alignment = 2
 
-[node name="IconRect" type="TextureRect" parent="ScaleControl/StatsPage/ContainerControl/StatsMainContainer/DefStatsContainer/BoxContainer/BlockContainer"]
+[node name="BlockChanceContainer" type="BoxContainer" parent="ScaleControl/StatsPage/ContainerControl/StatsMainContainer/DefStatsContainer/BoxContainer/BlockContainer" node_paths=PackedStringArray("name_label", "icon", "value_label")]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+alignment = 1
+script = ExtResource("23_dhe1p")
+stat_name = "BlockChance"
+name_label = NodePath("NameLabel")
+icon = NodePath("IconRect")
+value_label = NodePath("StatLabel")
+
+[node name="NameLabel" type="Label" parent="ScaleControl/StatsPage/ContainerControl/StatsMainContainer/DefStatsContainer/BoxContainer/BlockContainer/BlockChanceContainer"]
+visible = false
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("12_dy5pv")
+text = "Pro:"
+horizontal_alignment = 1
+
+[node name="IconRect" type="TextureRect" parent="ScaleControl/StatsPage/ContainerControl/StatsMainContainer/DefStatsContainer/BoxContainer/BlockContainer/BlockChanceContainer"]
 layout_mode = 2
 texture = ExtResource("30_0ruo6")
 
-[node name="ChanceLabel" type="Label" parent="ScaleControl/StatsPage/ContainerControl/StatsMainContainer/DefStatsContainer/BoxContainer/BlockContainer"]
+[node name="StatLabel" type="Label" parent="ScaleControl/StatsPage/ContainerControl/StatsMainContainer/DefStatsContainer/BoxContainer/BlockContainer/BlockChanceContainer"]
 self_modulate = Color(0.498039, 0, 0, 1)
-custom_minimum_size = Vector2(46, 0)
+custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 theme = ExtResource("12_dy5pv")
-text = "50%"
+text = "000"
+horizontal_alignment = 1
+
+[node name="DividerLabel" type="Label" parent="ScaleControl/StatsPage/ContainerControl/StatsMainContainer/DefStatsContainer/BoxContainer/BlockContainer/BlockChanceContainer"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("12_dy5pv")
+text = "%"
 horizontal_alignment = 1
 
 [node name="DividerLabel2" type="Label" parent="ScaleControl/StatsPage/ContainerControl/StatsMainContainer/DefStatsContainer/BoxContainer/BlockContainer"]
@@ -2013,23 +2050,47 @@ theme = ExtResource("12_dy5pv")
 text = "="
 horizontal_alignment = 1
 
-[node name="PhyAttackIcon" type="TextureRect" parent="ScaleControl/StatsPage/ContainerControl/StatsMainContainer/DefStatsContainer/BoxContainer/BlockContainer"]
+[node name="BlockModContainer" type="BoxContainer" parent="ScaleControl/StatsPage/ContainerControl/StatsMainContainer/DefStatsContainer/BoxContainer/BlockContainer" node_paths=PackedStringArray("name_label", "icon", "value_label")]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+alignment = 1
+script = ExtResource("23_dhe1p")
+stat_name = "BlockMod"
+name_label = NodePath("NameLabel")
+icon = NodePath("IconRect")
+value_label = NodePath("StatLabel")
+
+[node name="NameLabel" type="Label" parent="ScaleControl/StatsPage/ContainerControl/StatsMainContainer/DefStatsContainer/BoxContainer/BlockContainer/BlockModContainer"]
+visible = false
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("12_dy5pv")
+text = "Pro:"
+horizontal_alignment = 1
+
+[node name="PhyAttackIcon" type="TextureRect" parent="ScaleControl/StatsPage/ContainerControl/StatsMainContainer/DefStatsContainer/BoxContainer/BlockContainer/BlockModContainer"]
 layout_mode = 2
 texture = ExtResource("34_vfo8p")
 
-[node name="DividerLabel" type="Label" parent="ScaleControl/StatsPage/ContainerControl/StatsMainContainer/DefStatsContainer/BoxContainer/BlockContainer"]
+[node name="DividerLabel" type="Label" parent="ScaleControl/StatsPage/ContainerControl/StatsMainContainer/DefStatsContainer/BoxContainer/BlockContainer/BlockModContainer"]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("12_dy5pv")
 text = "x"
 horizontal_alignment = 1
 
-[node name="ModValLabel" type="Label" parent="ScaleControl/StatsPage/ContainerControl/StatsMainContainer/DefStatsContainer/BoxContainer/BlockContainer"]
+[node name="IconRect" type="TextureRect" parent="ScaleControl/StatsPage/ContainerControl/StatsMainContainer/DefStatsContainer/BoxContainer/BlockContainer/BlockModContainer"]
+visible = false
+layout_mode = 2
+texture = ExtResource("30_0ruo6")
+
+[node name="StatLabel" type="Label" parent="ScaleControl/StatsPage/ContainerControl/StatsMainContainer/DefStatsContainer/BoxContainer/BlockContainer/BlockModContainer"]
 self_modulate = Color(0.498039, 0, 0, 1)
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 theme = ExtResource("12_dy5pv")
-text = "0.5"
+text = "000"
 horizontal_alignment = 1
 
 [node name="VSeparator2" type="VSeparator" parent="ScaleControl/StatsPage/ContainerControl/StatsMainContainer/DefStatsContainer/BoxContainer/BlockContainer"]

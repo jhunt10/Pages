@@ -82,7 +82,7 @@ func _draw() -> void:
 		var next_x = (self.size.x / (max_x-min_x)) * (i+1)
 		var val = calc_val(x)
 		_draw_corrected_line(val, Vector2(next_x, val.y), Color.GREEN, 1.0)
-		print(str(val))
+		#print(str(val))
 
 func _draw_corrected_line(a:Vector2, b:Vector2, color:Color, width:float):
 	var real_a = Vector2(a.x, self.size.y - a.y)

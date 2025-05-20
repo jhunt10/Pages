@@ -30,61 +30,6 @@
         "DamageDatas": {},
         "DamageMods": {},
         "Details": {
-            "Description": "Increase Awareness by 1 and increase Block Chance and Block Mod by 50%.",
-            "DisplayName": "Guard",
-            "LargeIcon": "Sprites/Gaurd.png",
-            "SmallIcon": "Sprites/Gaurd.png",
-            "SnippetDesc": "+1 Awareness. +1.5 x Block Chance and Mod",
-            "Tags": []
-        },
-        "EffectKey": "GuardEffect",
-        "ShowDuration": false,
-        "ShowInHud": true,
-        "StatMods": {
-            "StatMod1": {
-                "DisplayName": "Guard",
-                "ModType": "Add",
-                "StatName": "BlockChance",
-                "Value": 100
-            },
-            "StatMod2": {
-                "DisplayName": "Guard",
-                "ModType": "Add",
-                "StatName": "BlockMod",
-                "Value": 0
-            },
-            "StatMod3": {
-                "DisplayName": "Gaurd",
-                "ModType": "Add",
-                "StatName": "Awareness",
-                "Value": 1
-            }
-        },
-        "SubEffects": {
-            "Duration": {
-                "DurationType": "ActionStart",
-                "DurationValue": 1,
-                "MaxDuration": 1,
-                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_Duration.gd"
-            },
-            "ModStat": {
-                "StatModKey": "StatMod1",
-                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_ModStat.gd"
-            },
-            "ModStat1": {
-                "StatModKey": "StatMod2",
-                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_ModStat.gd"
-            },
-            "ModStat2": {
-                "StatModKey": "StatMod3",
-                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_ModStat.gd"
-            }
-        }
-    },
-    {
-        "DamageDatas": {},
-        "DamageMods": {},
-        "Details": {
             "Description": "On a Gap Turn, gain Guard: +1 Awareness and + 1.5 x Block Chance and Block Mod.",
             "DisplayName": "Passive Guard",
             "LargeIcon": "Sprites/PassiveGaurd.png",

@@ -43,7 +43,9 @@ func show_sub_menu(menu_name):
 	pass
 
 func start_combat():
-	root_node.start_game()
+	var new_cards = load("res://Scenes/Menus/PageLibraryMenu/page_library_menu.tscn").instantiate()
+	root_node.add_child(new_cards)
+	
 
 func _open_load_menu():
 	root_node.open_load_menu()

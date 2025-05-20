@@ -10,7 +10,8 @@ func get_required_props()->Dictionary:
 		# The target must still be within range at time of attack, or "Miss"
 		"TargetMustBeInRange": BaseSubAction.SubActionPropTypes.BoolVal,
 		# Ignore Aoe area and only attack directly selected targets
-		"PrimaryTargetOnly": BaseSubAction.SubActionPropTypes.BoolVal
+		"PrimaryTargetOnly": BaseSubAction.SubActionPropTypes.BoolVal,
+		"FailOnNoTarget": BaseSubAction.SubActionPropTypes.BoolVal,
 	}
 ## Returns Tags that are automatically added to the parent Action's Tags
 func get_action_tags(_subaction_data:Dictionary)->Array:
@@ -31,6 +32,11 @@ func do_thing(parent_action:BaseAction, subaction_data:Dictionary, que_exe_data:
 	if !target_key:
 		printerr("SubAct_Attack: No 'TargetKey' on subaction in %s." % [parent_action.details.display_name])
 		return Failed
+	if not turn_data.has_target(target_key):
+		if subaction_data.get("FailOnNoTarget", true):
+			return BaseSubAction.Failed
+		else:
+			return BaseSubAction.Success
 	var target_param_key = turn_data.get_param_key_for_target(target_key)
 	var target_params = parent_action.get_targeting_params(target_param_key, actor)
 	var targets_selected = turn_data.get_targets(target_key)

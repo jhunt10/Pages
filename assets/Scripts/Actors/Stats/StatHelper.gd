@@ -46,6 +46,7 @@ const CritMod = "CritMod"
 const BlockChance = "BlockChance"
 const BlockMod = "BlockMod"
 
+
 const OffHandMod = "OffHandMod"
 const TwoHandMod = "TwoHandMod"
 
@@ -110,36 +111,47 @@ static func get_stat_icon(stat_name:String)->Texture2D:
 
 
 
-## Added to stat_name ("StatName:SUFIX") to mod value when defending against attack from Front
-const DirectionalDefenseSufix_Front = "DirDefFr"
-## Added to stat_name ("StatName:SUFIX") to mod value when defending against attack from Flank
-const DirectionalDefenseSufix_Flank = "DirDefFl"
-## Added to stat_name ("StatName:SUFIX") to mod value when defending against attack from Back
-const DirectionalDefenseSufix_Back = "DirDefBk"
-## Added to stat_name ("StatName:SUFIX") to mod value when attacking from Front
-const DirectionalAttackSufix_Front = "DirAtkFr"
-## Added to stat_name ("StatName:SUFIX") to mod value when attacking from Flank
-const DirectionalAttackSufix_Flank = "DirAtkFl"
-## Added to stat_name ("StatName:SUFIX") to mod value when attacking from Back
-const DirectionalAttackSufix_Back = "DirAtkBk"
+### Added to stat_name ("StatName:SUFIX") to mod value when defending against attack from Front
+#const DirectionalDefenseSufix_Front = "DirDefFr"
+### Added to stat_name ("StatName:SUFIX") to mod value when defending against attack from Flank
+#const DirectionalDefenseSufix_Flank = "DirDefFl"
+### Added to stat_name ("StatName:SUFIX") to mod value when defending against attack from Back
+#const DirectionalDefenseSufix_Back = "DirDefBk"
+### Added to stat_name ("StatName:SUFIX") to mod value when attacking from Front
+#const DirectionalAttackSufix_Front = "DirAtkFr"
+### Added to stat_name ("StatName:SUFIX") to mod value when attacking from Flank
+#const DirectionalAttackSufix_Flank = "DirAtkFl"
+### Added to stat_name ("StatName:SUFIX") to mod value when attacking from Back
+#const DirectionalAttackSufix_Back = "DirAtkBk"
 
-static func get_defense_stat_for_attack_direction(actor:BaseActor, attack_dir, stat_name:String, default:int=0)->float:
-	var sufix = ""
-	if attack_dir == AttackHandler.AttackDirection.Front:
-		sufix = StatHelper.DirectionalDefenseSufix_Front
-	elif attack_dir == AttackHandler.AttackDirection.Flank:
-		sufix = StatHelper.DirectionalDefenseSufix_Flank
-	elif attack_dir == AttackHandler.AttackDirection.Back:
-		sufix = StatHelper.DirectionalDefenseSufix_Back
+const DirectionalMod_Front = "DirMod_Front"
+const DirectionalMod_Flank = "DirMod_Flank"
+const DirectionalMod_Back = "DirMod_Back"
+
+## Directionaly modded Stats are in form of "DirMod_Flank:STATNAME". 
+## If no cached stat is found with exact name, default DirMod_ stats are used to scale STATNAME
+static func get_defense_stat_for_attack_direction(actor:BaseActor, attack_dir, stat_name:String)->float:
 	
-	var directional_mod = 1.0
-	var add_val = 0.0
-	if sufix != "":
-		var full_stat_name = stat_name + ":" + sufix
-		directional_mod = actor.stats.get_stat(full_stat_name, get_default_directional_mod(full_stat_name))
-		add_val = actor.stats.get_stat(full_stat_name + ":Add")
-	var raw_val = actor.stats.get_stat(stat_name, default)
-	return (raw_val * directional_mod) + add_val
+	var dir_prefix = DirectionalMod_Front
+	var default_mod = 1.0
+	if attack_dir == AttackHandler.AttackDirection.Flank:
+		dir_prefix = DirectionalMod_Flank
+		default_mod = 0.5
+	elif attack_dir == AttackHandler.AttackDirection.Back:
+		dir_prefix = DirectionalMod_Back
+		default_mod = 0.0
+	
+	var full_stat_name = dir_prefix + ":" + stat_name
+	var mod_val = 1
+	
+	if actor.stats.has_stat(full_stat_name):
+		mod_val = actor.stats.get_stat(full_stat_name)
+	else:
+		mod_val = actor.stats.get_stat(dir_prefix, default_mod)
+	
+	var raw_val = actor.stats.get_stat(stat_name, 0)
+	
+	return (raw_val * mod_val)
 
 # This old idea depreciated because an AttackEvent can involve mutiple directions
 ### Returns stat for when actor is attacking from the target's [Front / Flank / Back]
@@ -161,21 +173,21 @@ static func get_defense_stat_for_attack_direction(actor:BaseActor, attack_dir, s
 	#var raw_val = actor.stats.get_stat(stat_name, default) 
 	#return (raw_val * directional_mod) + add_val
 
-static func get_default_directional_mod(full_stat_name:String)->float:
-	var tokens = full_stat_name.split(":")
-	if tokens.size() != 2:
-		printerr("StatHelper.get_default_directional_mod: Invalid direction stat_name: %s" % [full_stat_name])
-		return 1
-	var stat_name = tokens[0]
-	var sufix = tokens[1]
-	if sufix == DirectionalDefenseSufix_Flank:
-		if stat_name == Evasion:
-			return 0.5
-		elif stat_name == BlockChance:
-			return 0.5
-	elif sufix == DirectionalDefenseSufix_Back:
-		if stat_name == Evasion:
-			return 0
-		elif stat_name == BlockChance:
-			return 0
-	return 1
+#static func get_default_directional_mod(full_stat_name:String)->float:
+	#var tokens = full_stat_name.split(":")
+	#if tokens.size() != 2:
+		#printerr("StatHelper.get_default_directional_mod: Invalid direction stat_name: %s" % [full_stat_name])
+		#return 1
+	#var stat_name = tokens[0]
+	#var sufix = tokens[1]
+	#if sufix == DirectionalDefenseSufix_Flank:
+		#if stat_name == Evasion:
+			#return 0.5
+		#elif stat_name == BlockChance:
+			#return 0.5
+	#elif sufix == DirectionalDefenseSufix_Back:
+		#if stat_name == Evasion:
+			#return 0
+		#elif stat_name == BlockChance:
+			#return 0
+	#return 1

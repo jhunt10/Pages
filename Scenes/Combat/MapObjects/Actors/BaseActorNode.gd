@@ -1,7 +1,7 @@
 class_name BaseActorNode
 extends Node2D
 
-const LOGGING = false
+const LOGGING = true
 const WALK_ANIM_NAME = "move_walk/walk"
 
 signal reached_motion_destination
@@ -92,7 +92,7 @@ func set_actor(actor:BaseActor):
 ##		Positioning
 ##############################
 
-func set_facing_dir(dir:MapPos.Directions):
+func set_facing_dir(dir):
 	facing_dir = dir
 	actor_sprite.direction = dir
 
@@ -118,14 +118,15 @@ var move_timmer = 0
 var cur_map_pos:MapPos
 var movement_start_position:Vector2
 var movement_dest_position:Vector2
-var movement_speed:float
+var movemen_speed_scale:float = 1
+var movement_speed:float = 1
 
 var is_moving:bool
 var is_animated_moveing:bool:
 	get: return current_body_animation_action == WALK_ANIM_NAME
 
 ## Set the MapPosition the Actor is moving towards.
-func set_move_destination(map_pos:MapPos, frames_to_reach:int, start_walking_if_not:bool=true, speed_scale:float=1):
+func set_move_destination(map_pos:MapPos, frames_to_reach:int, start_walking_if_not:bool=true, speed_scale:float=movemen_speed_scale):
 	if _is_moving_on_script:
 		printerr("BaseActorNode: Attemped set_move_destination while scripted movevment is active.")
 		return
@@ -137,6 +138,7 @@ func set_move_destination(map_pos:MapPos, frames_to_reach:int, start_walking_if_
 	movement_dest_position = tile_map.map_to_local(map_pos.to_vector2i())  - self.position
 	var secs_to_reach = (frames_to_reach * ActionQueController.SUB_ACTION_FRAME_TIME) 
 	var dist = movement_start_position.distance_to(movement_dest_position)
+	movemen_speed_scale = speed_scale
 	movement_speed =  (dist / secs_to_reach) * CombatRootControl.get_time_scale() * speed_scale
 	is_moving = movement_start_position.distance_to(movement_dest_position) > 0.01
 	if LOGGING: print("Starting Movement: FtR: %s | TtR: %s | Dist: %s | MS: %s " % [frames_to_reach, secs_to_reach,dist, movement_speed ])
@@ -266,8 +268,12 @@ func _scripted_move_finshed():
 ##############################
 
 func play_shake():
-	damage_animation_player.play("DamageAnimations/shake_effect")
+	if damage_animation_player.current_animation != "DamageAnimations/death_effect":
+		damage_animation_player.play("DamageAnimations/shake_effect")
 	pass
+
+func start_death_animation():
+	damage_animation_player.play("DamageAnimations/death_effect")
 
 func start_move_animation():
 	if LOGGING: print("Walk Animation Starting. Cur: %s" % [current_body_animation_action])
@@ -348,7 +354,7 @@ func _on_actor_death():
 	if is_dieing:
 		return
 	if LOGGING: print("########################## Que Dieing")
-	damage_animation_player.play("DamageAnimations/death_effect")
+	start_death_animation()
 	is_dieing = true
 
 

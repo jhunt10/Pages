@@ -4,8 +4,7 @@ extends BaseSubAction
 func get_required_props()->Dictionary:
 	return {
 		"RelativePos": BaseSubAction.SubActionPropTypes.MoveValue,
-		"MovementType": BaseSubAction.SubActionPropTypes.StringVal,
-		"PlayWalkin": BaseSubAction.SubActionPropTypes.BoolVal
+		"MovementType": BaseSubAction.SubActionPropTypes.StringVal
 	}
 ## Returns Tags that are automatically added to the parent Action's Tags
 func get_action_tags(_subaction_data:Dictionary)->Array:

@@ -219,8 +219,8 @@ func show_preview_target_area(action:BaseAction):
 	else:
 		clear_preview_display()
 		var preview_pos = _actor.Que.get_movement_preview_pos()
-		if action.PreviewMoveOffset:
-			preview_pos = MoveHandler.relative_pos_to_real(preview_pos, action.PreviewMoveOffset)
+		#if action.PreviewMoveOffset:
+			#preview_pos = MoveHandler.relative_pos_to_real(preview_pos, action.PreviewMoveOffset)
 		var target_selection_data = TargetSelectionData.new(target_parms, 'Preview', _actor, CombatRootControl.Instance.GameState, [], preview_pos)
 		_target_display_action_key = action.ActionKey
 		_target_display_key = CombatRootControl.Instance.MapController.target_area_display.build_from_target_selection_data(target_selection_data)

@@ -1,0 +1,47 @@
+[
+    {
+        "EffectKey": "GuardEffect",
+        "Details": {
+            "Description": "Gain @@#StatMod:AwrStatMod@@ and @@#StatMod:BlcStatMod@@.",
+            "DisplayName": "Guard",
+            "LargeIcon": "Sprites/Guard.png",
+            "SmallIcon": "Sprites/Guard.png",
+            "SnippetDesc": "Increase Awareness and Block Chance",
+            "Tags": []
+        },
+        "EffectDetails":{
+            "IsGood": true,
+            "IsBad": false,
+            "ShowInHud": true,
+            "ShowDuration": false,
+            "CanStack": false,
+            "LimitedEffectType": "Stance"
+        },
+        "StatMods": {
+            "AwrStatMod": {
+                "ModType": "Add",
+                "StatName": "Awareness",
+                "Value": 1
+            },
+            "BlcStatMod": {
+                "ModType": "Add",
+                "StatName": "BlockChance",
+                "Value": 50
+            }
+        },
+        "SubEffects": {
+            "Duration": {
+                "DurationType": "ActionStart",
+                "DurationValue": 1,
+                "MaxDuration": 1,
+                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_Duration.gd"
+            },
+            "ModStat": {
+                "StatModKeys": ["AwrStatMod", "BlcStatMod"],
+                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_ModStat.gd"
+            }
+        },
+        "DamageDatas": {},
+        "DamageMods": {}
+    }
+]

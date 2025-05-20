@@ -112,7 +112,7 @@
             }
         },
         "Details": {
-            "Description": "Shoot a Fire Ball Missile that deals AOE Fire Damage to all Actors in Area. 30% chance to apply Burned.",
+            "Description": "Shoot a Fire Ball Missile at @@#TrgParm:TargetParam1:TargetType@@ to deal @@#DmgData:Damage1@@ to all Actors in AOE. @@#EftData:BurnEffect:AplChc@@ chance to apply @@#EftData:BurnEffect:Name@@.\n@@#EftData:BurnEffect:Description@@",
             "DisplayName": "Fire Ball",
             "LargeIcon": "Sprites/FireBall.png",
             "SmallIcon": "Sprites/FireBall.png",

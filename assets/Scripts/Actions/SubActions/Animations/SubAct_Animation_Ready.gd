@@ -28,11 +28,12 @@ func do_thing(parent_action:BaseAction, subaction_data:Dictionary, metadata:QueE
 	var animation_speed = 1.0
 	if subaction_data.keys().has("AnimationSpeed"):
 		animation_speed = subaction_data.get("AnimationSpeed", 1.0)
+	var off_hand = subaction_data.get("OffHand", false)
 	
 	var animation_name:String = subaction_data.get('Animation', "")
 	if animation_name == "":
 		return BaseSubAction.Success
-	actor_node.ready_action_animation(animation_name)
+	actor_node.ready_action_animation(animation_name, animation_speed, off_hand)
 	return BaseSubAction.Success
 
 func get_default_weapon_animation(actor:BaseActor, off_hand:bool):

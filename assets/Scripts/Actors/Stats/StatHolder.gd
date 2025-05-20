@@ -67,6 +67,11 @@ func recache_stats(emit_signal:bool=true):
 	if LOGGING: printerr("Recaching Stats")
 	_calc_cache_stats(emit_signal)
 
+func has_stat(stat_name:String)->bool:
+	if _stats_dirty:
+		_calc_cache_stats()
+	return _cached_stats.has(stat_name)
+
 func get_stat(stat_name:String, default:float=0):
 	var full_stat_name = stat_name
 	if _stats_dirty:
@@ -97,6 +102,8 @@ func get_mod_names_for_stat(stat_name:String)->Array:
 		elif mod.mod_type == BaseStatMod.ModTypes.AddStat:
 			var short_name = StatHelper.get_stat_abbr(mod.dep_stat_name)
 			display_name = "+" + str(short_name) + "x" + str(mod.value) + " " + mod.display_name
+		elif mod.mod_type == BaseStatMod.ModTypes.Scale:
+			display_name = "x" + str(mod.value) + " " + mod.display_name
 		else:
 			display_name = mod.display_name
 		if display_name != '':

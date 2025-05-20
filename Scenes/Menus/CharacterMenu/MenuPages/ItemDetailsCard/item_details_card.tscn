@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://btr6wpgyitqc0"]
+[gd_scene load_steps=43 format=3 uid="uid://btr6wpgyitqc0"]
 
 [ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/ItemDetailsCard/item_details_card.gd" id="1_vq5a0"]
 [ext_resource type="Texture2D" uid="uid://bqmtfkh0uj2bk" path="res://Scenes/Menus/CharacterMenu/MenuPages/ItemDetailsCard/DetailsCard_Background_working.png" id="2_7ol1j"]
@@ -34,6 +34,9 @@
 [ext_resource type="Texture2D" uid="uid://bpa7iavvlbhi5" path="res://assets/Sprites/UI/SymbolIcons/PageCountSymbol.png" id="20_mtmo1"]
 [ext_resource type="Texture2D" uid="uid://dgxwfm0wf7rhw" path="res://assets/Sprites/UI/SymbolIcons/PotencySymbol.png" id="20_nedqy"]
 [ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/ItemDetailsCard/PageQueDetails/page_set_label.gd" id="21_eimff"]
+[ext_resource type="Script" path="res://Scenes/UiNodes/DescriptionBox/description_box.gd" id="22_pm1ag"]
+[ext_resource type="Script" path="res://Scenes/UiNodes/back_patch_container.gd" id="23_dhm1x"]
+[ext_resource type="Texture2D" uid="uid://io35wpu802fp" path="res://assets/Sprites/UI/BackPatches/Patch_64_12.png" id="24_lf2cw"]
 [ext_resource type="Texture2D" uid="uid://ftpk6w0gsf0c" path="res://assets/Sprites/UI/SymbolIcons/PagePassiveSymbol.png" id="31_y1gd7"]
 [ext_resource type="Texture2D" uid="uid://cb8k5gxes3iaj" path="res://assets/Sprites/UI/SymbolIcons/MoneySymbol_White.png" id="33_era8d"]
 [ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/ItemDetailsCard/buy_controller.gd" id="34_t0s17"]
@@ -247,7 +250,6 @@ theme = ExtResource("4_xmy3g")
 text = "Item Description hk hbkhjhl jhlkjl ljlkj"
 
 [node name="ActionPageDetailsControl" type="Control" parent="OffsetControl/NinePatchRect/VBoxContainer" node_paths=PackedStringArray("parent_card_control", "description_box", "target_type_label", "cost_container", "range_display", "damage_label", "damage_container", "accuracy_icon", "accuracy_label", "potency_icon", "potency_label")]
-visible = false
 layout_mode = 2
 size_flags_vertical = 3
 script = ExtResource("12_fd6vk")
@@ -396,6 +398,7 @@ vertical_alignment = 1
 layout_mode = 2
 defense_type = "Armor"
 damage_type = 7
+attack_scale = null
 
 [node name="MiniRangeDisplay" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsControl/VBoxContainer/HBoxContainer2" instance=ExtResource("5_jmtol")]
 layout_mode = 2
@@ -405,13 +408,45 @@ size_flags_vertical = 0
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="DescriptionBox" type="RichTextLabel" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsControl/VBoxContainer/HBoxContainer"]
-self_modulate = Color(0.498039, 0, 0, 1)
+[node name="DescriptionBox" type="RichTextLabel" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsControl/VBoxContainer/HBoxContainer" node_paths=PackedStringArray("popup_container", "popup_message")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource("4_xmy3g")
+theme_override_colors/default_color = Color(0.470588, 0, 0, 1)
 text = "Item Description hk hbkhjhl jhlkjl ljlkj"
+script = ExtResource("22_pm1ag")
+popup_container = NodePath("PopupContainer")
+popup_message = NodePath("PopupContainer/BoxContainer/RichTextLabel")
+
+[node name="PopupContainer" type="Container" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsControl/VBoxContainer/HBoxContainer/DescriptionBox" node_paths=PackedStringArray("background", "inner_container")]
+custom_minimum_size = Vector2(47, 41)
+layout_mode = 0
+offset_right = 47.0
+offset_bottom = 41.0
+script = ExtResource("23_dhm1x")
+background = NodePath("NinePatchRect")
+inner_container = NodePath("BoxContainer")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsControl/VBoxContainer/HBoxContainer/DescriptionBox/PopupContainer"]
+layout_mode = 2
+texture = ExtResource("24_lf2cw")
+region_rect = Rect2(1, 1, 64, 64)
+patch_margin_left = 12
+patch_margin_top = 12
+patch_margin_right = 12
+patch_margin_bottom = 12
+
+[node name="BoxContainer" type="BoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsControl/VBoxContainer/HBoxContainer/DescriptionBox/PopupContainer"]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsControl/VBoxContainer/HBoxContainer/DescriptionBox/PopupContainer/BoxContainer"]
+layout_mode = 2
+theme = ExtResource("4_xmy3g")
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+text = "Bla"
+fit_content = true
+autowrap_mode = 0
 
 [node name="EffectPageDetailsControl" type="Control" parent="OffsetControl/NinePatchRect/VBoxContainer" node_paths=PackedStringArray("parent_card_control", "description_box", "stat_mods_container", "premade_stat_mod_label")]
 visible = false
@@ -519,6 +554,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource("4_xmy3g")
 text = "Item Description hk hbkhjhl jhlkjl ljlkj"
+script = ExtResource("22_pm1ag")
 
 [node name="ArmorDetailsControl" type="Control" parent="OffsetControl/NinePatchRect/VBoxContainer" node_paths=PackedStringArray("parent_card_control", "slot_label", "phy_icon", "mag_icon", "armor_label", "ward_label", "description_box", "stat_mods_container", "premade_stat_mod_label")]
 visible = false
@@ -680,6 +716,7 @@ theme = ExtResource("4_xmy3g")
 text = "Item Description"
 
 [node name="PageQueDetailsControl" type="Control" parent="OffsetControl/NinePatchRect/VBoxContainer" node_paths=PackedStringArray("parent_card_control", "ppr_label", "passive_count_label", "action_count_label", "page_sets_container", "premade_page_set_label", "description_box")]
+visible = false
 layout_mode = 2
 size_flags_vertical = 3
 script = ExtResource("18_oic72")
@@ -786,6 +823,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("4_xmy3g")
 text = "Item Description"
+script = ExtResource("22_pm1ag")
 
 [node name="DefaultDetailsControl" type="Control" parent="OffsetControl/NinePatchRect/VBoxContainer" node_paths=PackedStringArray("description_box")]
 visible = false

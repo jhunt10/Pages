@@ -27,9 +27,11 @@ extends Control
 @export var accuracy_stat_label:StatLabelContainer
 @export var potency_stat_label:StatLabelContainer
 @export var range_display:MiniRangeDisplay
-@export var main_hand_min_damage_label:Label
-@export var main_hand_max_damage_label:Label
-@export var main_hand_damage_type:Label
+
+@export var main_hand_damage_label:DamageLabelContainer
+#@export var main_hand_min_damage_label:Label
+#@export var main_hand_max_damage_label:Label
+#@export var main_hand_damage_type:Label
 
 @export var off_hand_damage_container:Container
 @export var off_hand_min_damage_label:Label
@@ -45,8 +47,8 @@ extends Control
 @export var protection_stat_label:StatLabelContainer
 @export var awareness_stat_label:StatLabelContainer
 @export var awareness_display:MiniAwarenessDisplay
-@export var block_chance_label:Label
-@export var block_mod_label:Label
+@export var block_chance_label:StatLabelContainer
+@export var block_mod_label:StatLabelContainer
 @export var evade_front_chance_label:Label
 @export var evade_flank_chance_label:Label
 @export var evade_back_chance_label:Label
@@ -93,7 +95,7 @@ func _set_stats():
 	#var primary_weapon = _actor.equipment.get_primary_weapon()
 	#if primary_weapon:
 		#var damage_data = primary_weapon.get_damage_data()
-		#var damage_var = damage_data.get("DamageVarient",1)
+		#var damage_var = damage_data.get("AtkPwrRange",1)
 	
 	var damage_datas = _actor.get_weapon_damage_datas(
 		{
@@ -102,18 +104,19 @@ func _set_stats():
 			"LimitRangeMelee": "Either"
 	})
 	
-	if damage_datas.has("WeaponDamage"):
-		var damage_data = damage_datas['WeaponDamage']
-		var min_max = DamageHelper.get_min_max_damage(_actor, damage_data)
-		if damage_data.get("DefenseType", '') == "Ward":
-			phy_atk_icon.hide()
-			mag_atk_icon.show()
-		else:
-			phy_atk_icon.show()
-			mag_atk_icon.hide()
-		main_hand_min_damage_label.text = str(min_max[0])
-		main_hand_max_damage_label.text = str(min_max[1])
-		main_hand_damage_type.text = damage_data.get("DamageType", "")
+	if damage_datas.has("Weapon0:WeaponDamage"):
+		var damage_data = damage_datas['Weapon0:WeaponDamage']
+		main_hand_damage_label.set_damage_data(damage_data, _actor)
+		#var min_max = DamageHelper.get_min_max_damage(_actor, damage_data)
+		#if damage_data.get("DefenseType", '') == "Ward":
+			#phy_atk_icon.hide()
+			#mag_atk_icon.show()
+		#else:
+			#phy_atk_icon.show()
+			#mag_atk_icon.hide()
+		#main_hand_min_damage_label.text = str(min_max[0])
+		#main_hand_max_damage_label.text = str(min_max[1])
+		#main_hand_damage_type.text = damage_data.get("DamageType", "")
 	#else:
 		#main_hand_min_damage_label.text = "--"
 		#main_hand_max_damage_label.text = "--"
@@ -130,13 +133,16 @@ func _set_stats():
 	protection_stat_label.set_stat_values(_actor)
 	awareness_stat_label.set_stat_values(_actor)
 	awareness_display.awareness = _actor.stats.get_stat(StatHelper.Awareness)
-	var block_chc = _actor.stats.get_stat(StatHelper.BlockChance)
-	if block_chc > 0:
-		block_chance_label.text = str(block_chc) +"%"
-		block_mod_label.text = str(_actor.stats.get_stat(StatHelper.BlockMod, 1))
-	else:
-		block_chance_label.text = "--%"
-		block_mod_label.text = "1.0"
+	
+	block_chance_label.set_stat_values(_actor)
+	block_mod_label.set_stat_values(_actor)
+	#var block_chc = _actor.stats.get_stat(StatHelper.BlockChance)
+	#if block_chc > 0:
+		#block_chance_label.text = str(block_chc) +"%"
+		#block_mod_label.text = str(_actor.stats.get_stat(StatHelper.BlockMod, 1))
+	#else:
+		#block_chance_label.text = "--%"
+		#block_mod_label.text = "1.0"
 	var evd_front_val = StatHelper.get_defense_stat_for_attack_direction(_actor, AttackHandler.AttackDirection.Front, StatHelper.Evasion)
 	evade_front_chance_label.text = str(evd_front_val)
 	var evd_flank_val = StatHelper.get_defense_stat_for_attack_direction(_actor, AttackHandler.AttackDirection.Flank, StatHelper.Evasion)

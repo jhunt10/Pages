@@ -69,6 +69,8 @@ func _init(key:String, def_load_path:String, def:Dictionary, id:String='', data:
 				pre_move_arr = JSON.parse_string(preview_data['PreviewMoveOffset'])
 			PreviewMoveOffset = MapPos.new(pre_move_arr[0],pre_move_arr[1],pre_move_arr[2],pre_move_arr[3])
 
+
+
 func get_qued_icon(turn_index:int, actor:BaseActor =  null)->Texture2D:
 	if self.get_load_val("UseDynamicIcons", false):
 		var turn_data = actor.Que.QueExecData.get_data_for_turn(turn_index)
@@ -114,20 +116,20 @@ func list_sub_action_datas()->Array:
 				out_list.append(data)
 	return out_list
 
-func get_damage_data(damage_data_key:String, actor:BaseActor=null)->Dictionary:
-	if damage_data_key == "Weapon":
-		if actor == null:
-			printerr("BaseAction.get_damage_data: Null Actor when asking for Weapon damage.")
-			return {}
-		var weapon = actor.equipment.get_primary_weapon()
-		if !weapon:
-			printerr("BaseAction.get_damage_data: No Weapon when asking for Weapon damage.")
-			return {}
-		return weapon.get_damage_data()
-	var damage_datas = get_load_val("DamageDatas", {})
-	if damage_datas.has(damage_data_key):
-		return damage_datas[damage_data_key].duplicate()
-	return {}
+#func get_damage_data(damage_data_key:String, actor:BaseActor=null)->Dictionary:
+	#if damage_data_key == "Weapon":
+		#if actor == null:
+			#printerr("BaseAction.get_damage_data: Null Actor when asking for Weapon damage.")
+			#return {}
+		#var weapon = actor.equipment.get_primary_weapon()
+		#if !weapon:
+			#printerr("BaseAction.get_damage_data: No Weapon when asking for Weapon damage.")
+			#return {}
+		#return weapon.get_damage_data()
+	#var damage_datas = get_load_val("DamageDatas", {})
+	#if damage_datas.has(damage_data_key):
+		#return damage_datas[damage_data_key].duplicate()
+	#return {}
 
 func get_damage_data_for_subaction(actor:BaseActor, subaction_data:Dictionary)->Dictionary:
 	printerr("get_damage_data_for_subaction is obsoleet. Use get_damage_datas")
@@ -152,13 +154,17 @@ func get_damage_datas(actor:BaseActor, damage_keys)->Dictionary:
 	for key in damage_keys:
 		var damage_data = DamageDatas.get(key, {})
 		if damage_data.has("WeaponFilter"):
-			var weapon_filter = damage_data['WeaponFilter']
-			var override_data = damage_data.duplicate()
-			override_data.erase("WeaponFilter")
-			var weapon_damage_datas = actor.get_weapon_damage_datas(weapon_filter)
-			for weapon_damage_key in weapon_damage_datas.keys():
-				var sub_key = key + ":" + weapon_damage_key
-				out_dict[sub_key] = BaseLoadObjectLibrary._merge_defs(damage_data, weapon_damage_datas[weapon_damage_key])
+			if actor:
+				var weapon_filter = damage_data['WeaponFilter']
+				var override_data = damage_data.duplicate()
+				override_data.erase("WeaponFilter")
+				var weapon_damage_datas = actor.get_weapon_damage_datas(weapon_filter)
+				for weapon_damage_key in weapon_damage_datas.keys():
+					var sub_key = key + ":" + weapon_damage_key
+					out_dict[sub_key] = BaseLoadObjectLibrary._merge_defs(damage_data, weapon_damage_datas[weapon_damage_key])
+			else:
+				damage_data['ActorlessWeapon'] = true
+				out_dict[key] = damage_data
 		elif damage_data.size() > 0:
 			out_dict[key] = damage_data
 		else:
@@ -215,17 +221,18 @@ func get_preview_damage_datas(actor:BaseActor=null)->Dictionary:
 	var preview_data:Dictionary = get_load_val("Preview", {})
 	var preview_key = preview_data.get("PreviewDamageKey", null)
 	if not preview_key or preview_key == '':
-		printerr("No preview key")
+		printerr("%s.get_preview_damage_datas: No preview key" % [self.ActionKey])
 		return {}
-	if preview_key == "Weapon" and actor:
-		return actor.get_weapon_damage_datas({"IncludeSlots": "All"})
-	if preview_key == "Default" and actor:
-		return actor.get_default_attack_damage_datas()
-	var damage_datas = get_load_val("DamageDatas", {})
-	var preview_damage = damage_datas.get(preview_key)
-	if preview_damage: 
-		return {"Preview": preview_damage}
-	return {}
+	return get_damage_datas(actor, preview_key)
+	#if preview_key == "Weapon" and actor:
+		#return actor.get_weapon_damage_datas({"IncludeSlots": "All"})
+	#if preview_key == "Default" and actor:
+		#return actor.get_default_attack_damage_datas()
+	#var damage_datas = get_load_val("DamageDatas", {})
+	#var preview_damage = damage_datas.get(preview_key)
+	#if preview_damage: 
+		#return {"Preview": preview_damage}
+	#return {}
 
 
 func has_ammo(actor:BaseActor=null):

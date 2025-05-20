@@ -2,7 +2,7 @@
     {
         "ActionKey": "BasicMeleeAttack",
         "Details": {
-            "Description": "Preform an Attack against one enemy in range.",
+            "Description": "Preform an Attack against one Enemy for @@#DmgData:WeaponDamage@@",
             "DisplayName": "Basic Attack",
             "LargeIcon": "Sprites/BasicAttack.png",
             "SmallIcon": "Sprites/BasicAttack.png",
@@ -64,7 +64,7 @@
             }
         }
     },
-    
+
     {
         "ActionKey": "AllAdjacentAttack",
         "DamageDatas": {},

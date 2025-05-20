@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://xjhbo48tdbhr"]
+[gd_scene load_steps=23 format=3 uid="uid://xjhbo48tdbhr"]
 
 [ext_resource type="Script" path="res://Scenes/Menus/PageLibraryMenu/page_details_entry_container.gd" id="1_rx8b1"]
 [ext_resource type="Texture2D" uid="uid://io35wpu802fp" path="res://assets/Sprites/UI/BackPatches/Patch_64_12.png" id="2_gntg0"]
@@ -21,9 +21,12 @@
 [ext_resource type="Texture2D" uid="uid://cnhd7e5hwrxoy" path="res://assets/Sprites/UI/SymbolIcons/AbnormDamageSymbol.png" id="19_ujpc6"]
 [ext_resource type="Texture2D" uid="uid://b10pvly4exem2" path="res://assets/Sprites/UI/SymbolIcons/_S_Symbole.png" id="20_xmmjh"]
 [ext_resource type="PackedScene" uid="uid://c1bs8grs7gsc1" path="res://Scenes/UiNodes/MiniRangeDisplay/mini_range_display.tscn" id="21_r03se"]
+[ext_resource type="Script" path="res://Scenes/UiNodes/DescriptionBox/description_box.gd" id="22_bd2iy"]
 
 [node name="PageDetailsEntryContainer" type="Container" node_paths=PackedStringArray("icon_background", "icon", "title_label", "tags_label", "type_label", "details_container", "description_box", "plus_minus_button", "minus_icon", "plus_icon", "target_details_container", "target_type_label", "mini_range_display", "acc_pot_container", "accuracy_label", "potency_label", "effects_label", "ammo_label", "damage_entries_container", "stat_mods_container", "premade_stat_mod_label", "add_button", "background", "inner_container")]
-custom_minimum_size = Vector2(24, 263)
+custom_minimum_size = Vector2(837, 263)
+offset_right = 837.0
+offset_bottom = 263.0
 script = ExtResource("1_rx8b1")
 icon_background = NodePath("PageInnerContainer/LineContainer/IconBackgroundTextureRect")
 icon = NodePath("PageInnerContainer/LineContainer/IconBackgroundTextureRect/IconTextureRect")
@@ -273,6 +276,7 @@ layout_mode = 2
 [node name="DamageContainer" parent="PageInnerContainer/DetailsContainer/DetailsContainer/HBoxContainer/VBoxContainer/AmmoDamageContainer/DamagesContainer" instance=ExtResource("17_0oup6")]
 layout_mode = 2
 font_size_override = 32
+attack_scale = null
 
 [node name="StatModsContainer" type="HBoxContainer" parent="PageInnerContainer/DetailsContainer/DetailsContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
@@ -378,6 +382,7 @@ layout_mode = 2
 theme = ExtResource("7_4grnp")
 text = "Detailed Discription"
 fit_content = true
+script = ExtResource("22_bd2iy")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 2

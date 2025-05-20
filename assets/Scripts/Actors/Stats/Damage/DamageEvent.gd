@@ -20,7 +20,8 @@ var damage_mods:Dictionary
 
 var attack_stat:String
 var attack_power:int
-var damage_variance:float
+var attack_power_range:int
+var attack_power_scale:float
 var applied_power:float
 
 var damage_type:DamageTypes
@@ -47,8 +48,11 @@ func _init(data:Dictionary, source, defender:BaseActor, tag_chain:SourceTagChain
 	self.is_successful = true
 	self.damage_data_key = data.get("DamageDataKey", "NOKEY")
 	self.attack_stat = data.get("AtkStat", "Fixed")
-	self.attack_power = data.get("AtkPower", 100)
-	self.damage_variance = data.get("DamageVarient", 0)
+	self.attack_power = data.get("AtkPwrBase", 100)
+	if data.has("AtkPwrStat") and source is BaseActor:
+		self.attack_power = self.attack_power * source.stats.get_stat(data["AtkPwrStat"], 1)
+	self.attack_power_scale = data.get("AtkPwrScale", 1)
+	self.attack_power_range = data.get("AtkPwrRange", 0)
 	
 	if attack_stat == "Fixed" or attack_stat == "":
 		self.base_damage = data.get("BaseDamage", 0)
@@ -90,7 +94,8 @@ func dictialize_self()->Dictionary:
 		"damage_mods": damage_mods,
 		"attack_stat": attack_stat,
 		"attack_power": attack_power,
-		"damage_variance": damage_variance,
+		"attack_power_range": attack_power_range,
+		"attack_power_scale": attack_power_scale,
 		"applied_power": applied_power,
 		"damage_type": damage_type,
 		"defense_type": defense_type,

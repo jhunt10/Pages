@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://bs2y0o6uhl0sb"]
+[gd_scene load_steps=27 format=3 uid="uid://bs2y0o6uhl0sb"]
 
 [ext_resource type="Script" path="res://Scenes/Combat/MapObjects/Actors/SimpleActorNode/simple_actor_node.gd" id="1_bln3d"]
 [ext_resource type="Script" path="res://Scenes/Combat/MapObjects/Actors/ComplexActorNode/actor_body_sprite.gd" id="2_e6ypm"]
@@ -8,7 +8,28 @@
 [ext_resource type="Script" path="res://Scenes/Combat/MapObjects/aura_holder.gd" id="6_mn18x"]
 [ext_resource type="Texture2D" uid="uid://dgfxtmtdjfgey" path="res://assets/Sprites/UI/QuePathArrow.png" id="7_3yvo2"]
 [ext_resource type="Script" path="res://Scenes/Combat/MapObjects/Actors/awareness_display_node.gd" id="8_2sjxt"]
+[ext_resource type="AnimationLibrary" uid="uid://dx31wifagmnpk" path="res://Scenes/Combat/MapObjects/Actors/damage_animation_library.res" id="8_mm6ep"]
 [ext_resource type="Texture2D" uid="uid://bjo761ym76mti" path="res://assets/Sprites/TileSets/AwarenessTileSet.png" id="9_88pjr"]
+
+[sub_resource type="Animation" id="Animation_hcvlo"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ActorMotionNode/ActorSpriteNode:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wwvql"]
+_data = {
+"RESET": SubResource("Animation_hcvlo")
+}
 
 [sub_resource type="Animation" id="Animation_5tl4v"]
 resource_name = "ShroomBash"
@@ -258,7 +279,7 @@ _data = {
 "walk": SubResource("Animation_8a46c")
 }
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_67fhg"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3o8la"]
 texture = ExtResource("9_88pjr")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
@@ -268,7 +289,7 @@ texture_region_size = Vector2i(32, 32)
 
 [sub_resource type="TileSet" id="TileSet_yydd4"]
 tile_size = Vector2i(32, 32)
-sources/0 = SubResource("TileSetAtlasSource_67fhg")
+sources/0 = SubResource("TileSetAtlasSource_3o8la")
 
 [node name="SimpleActorNode" type="Node2D" node_paths=PackedStringArray("vfx_holder", "aura_holder", "actor_sprite", "path_arrow", "actor_motion_node", "offset_node", "damage_animation_player", "body_animation")]
 script = ExtResource("1_bln3d")
@@ -318,6 +339,10 @@ z_index = 8
 texture = ExtResource("7_3yvo2")
 
 [node name="DamageAnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_wwvql"),
+"DamageAnimations": ExtResource("8_mm6ep")
+}
 
 [node name="BodyAnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

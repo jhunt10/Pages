@@ -20,5 +20,6 @@ func do_thing(parent_action:BaseAction, subaction_data:Dictionary, metadata:QueE
 	var animation_speed = 1.0
 	if subaction_data.keys().has("AnimationSpeed"):
 		animation_speed = subaction_data.get("AnimationSpeed", 1.0)
-	actor_node.execute_action_motion_animation(animation_speed)
+	var off_hand = subaction_data.get("OffHand", false)
+	actor_node.execute_action_motion_animation(animation_speed, off_hand)
 	return BaseSubAction.Success

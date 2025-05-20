@@ -13,66 +13,69 @@
                 "Title"
             ]
         },
-        "ItemDetails":
-        {
+        "ItemDetails": {
             "Rarity": "Unique",
             "Value": 50
         },
-        "StatMods": {
-            "HealthScale": {
-                "DisplayName": "Base Stats",
-                "ModType": "AddStat",
-                "StatName": "BarMax:Health",
-                "DepStatName": "Strength",
-                "Value": 5
+        "PageDetails": {
+            "StatMods": {
+                "HealthScale": {
+                    "DisplayName": "Base Stats",
+                    "ModType": "AddStat",
+                    "StatName": "BarMax:Health",
+                    "DepStatName": "Strength",
+                    "Value": 5
+                },
+                "PhyAttackScale": {
+                    "DisplayName": "Base Stats",
+                    "ModType": "AddStat",
+                    "StatName": "PhyAttack",
+                    "DepStatName": "Strength",
+                    "Value": 0.5
+                },
+                "EvasionScale": {
+                    "DisplayName": "Base Stats",
+                    "ModType": "AddStat",
+                    "StatName": "Evasion",
+                    "DepStatName": "Agility",
+                    "Value": 0.1
+                },
+                "AccuracyScale": {
+                    "DisplayName": "Base Stats",
+                    "ModType": "AddStat",
+                    "StatName": "Accuracy",
+                    "DepStatName": "Agility",
+                    "Value": 0.1
+                },
+                "MagAttackScale": {
+                    "DisplayName": "Base Stats",
+                    "ModType": "AddStat",
+                    "StatName": "MagAttack",
+                    "DepStatName": "Intelligence",
+                    "Value": 0.5
+                },
+                "PotencyScale": {
+                    "DisplayName": "Base Stats",
+                    "ModType": "AddStat",
+                    "StatName": "Potency",
+                    "DepStatName": "Intelligence",
+                    "Value": 0.1
+                },
+                "ProtectionScale": {
+                    "DisplayName": "Base Stats",
+                    "ModType": "AddStat",
+                    "StatName": "Protection",
+                    "DepStatName": "Wisdom",
+                    "Value": 0.1
+                }
             },
-            "PhyAttackScale": {
-                "DisplayName": "Base Stats",
-                "ModType": "AddStat",
-                "StatName": "PhyAttack",
-                "DepStatName": "Strength",
-                "Value": 0.5
-            },
-            "EvasionScale": {
-                "DisplayName": "Base Stats",
-                "ModType": "AddStat",
-                "StatName": "Evasion",
-                "DepStatName": "Agility",
-                "Value": 0.1
-            },
-            "AccuracyScale": {
-                "DisplayName": "Base Stats",
-                "ModType": "AddStat",
-                "StatName": "Accuracy",
-                "DepStatName": "Agility",
-                "Value": 0.1
-            },
-            "MagAttackScale": {
-                "DisplayName": "Base Stats",
-                "ModType": "AddStat",
-                "StatName": "MagAttack",
-                "DepStatName": "Intelligence",
-                "Value": 0.5
-            },
-            "PotencyScale": {
-                "DisplayName": "Base Stats",
-                "ModType": "AddStat",
-                "StatName": "Potency",
-                "DepStatName": "Intelligence",
-                "Value": 0.1
-            },
-            "ProtectionScale": {
-                "DisplayName": "Base Stats",
-                "ModType": "AddStat",
-                "StatName": "Protection",
-                "DepStatName": "Wisdom",
-                "Value": 0.1
-            }
-        },
-        "AddTags": ["Soldier"]
+            "AddTags": [
+                "Soldier"
+            ]
+        }
     },
     {
-        "ParentKey":"BaseTitle_PageItem",
+        "ParentKey": "BaseTitle_PageItem",
         "ItemKey": "SoldierTitle_PageItem",
         "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
         "CanStack": true,
@@ -86,48 +89,51 @@
                 "Title"
             ]
         },
-        "ItemDetails":
-        {
+        "ItemDetails": {
             "Rarity": "Unique",
             "Value": 50
         },
-        "StatMods": {
-            "ArmorScale": {
-                "DisplayName": "Soldier",
-                "ModType": "Scale",
-                "StatName": "Armor",
-                "Value": 1.2
+        "PageDetails": {
+            "StatMods": {
+                "ArmorScale": {
+                    "DisplayName": "Soldier",
+                    "ModType": "Scale",
+                    "StatName": "Armor",
+                    "Value": 1.2
+                },
+                "HealthScale": {
+                    "DisplayName": "Soldier",
+                    "ModType": "AddStat",
+                    "StatName": "BarMax:Health",
+                    "DepStatName": "Strength",
+                    "Value": 8
+                },
+                "PhyAttackScale": {
+                    "DisplayName": "Soldier",
+                    "ModType": "AddStat",
+                    "StatName": "PhyAttack",
+                    "DepStatName": "Strength",
+                    "Value": 1
+                },
+                "MassScale": {
+                    "DisplayName": "Soldier",
+                    "ModType": "AddStat",
+                    "StatName": "Mass",
+                    "DepStatName": "Strength",
+                    "Value": 0.1
+                }
             },
-            "HealthScale": {
-                "DisplayName": "Soldier",
-                "ModType": "AddStat",
-                "StatName": "BarMax:Health",
-                "DepStatName": "Strength",
-                "Value": 8
-            },
-            "PhyAttackScale": {
-                "DisplayName": "Soldier",
-                "ModType": "AddStat",
-                "StatName": "PhyAttack",
-                "DepStatName": "Strength",
-                "Value": 1
-            },
-            "MassScale": {
-                "DisplayName": "Soldier",
-                "ModType": "AddStat",
-                "StatName": "Mass",
-                "DepStatName": "Strength",
-                "Value": 0.1
-            }
-        },
-        "AddTags": ["Soldier"]
+            "AddTags": [
+                "Soldier"
+            ]
+        }
     },
     {
-        "ParentKey":"BaseTitle_PageItem",
+        "ParentKey": "BaseTitle_PageItem",
         "ItemKey": "RogueTitle_PageItem",
         "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
         "CanStack": true,
-        "Details":{
+        "Details": {
             "Description": "An Agile agent employed by The Guild. Rogues focus on Physcial Attack and Evasion Defense.",
             "DisplayName": "Rogue",
             "LargeIcon": "Sprites/RogueIcon.png",
@@ -137,45 +143,48 @@
                 "Title"
             ]
         },
-        "ItemDetails":
-        {
+        "ItemDetails": {
             "Rarity": "Unique",
             "Value": 50
         },
-        "StatMods": {
-            "HealthScale": {
-                "DisplayName": "Rogue",
-                "ModType": "AddStat",
-                "StatName": "BarMax:Health",
-                "DepStatName": "Strength",
-                "Value": 3
+        "PageDetails": {
+            "StatMods": {
+                "HealthScale": {
+                    "DisplayName": "Rogue",
+                    "ModType": "AddStat",
+                    "StatName": "BarMax:Health",
+                    "DepStatName": "Strength",
+                    "Value": 3
+                },
+                "PhyAttackScale": {
+                    "DisplayName": "Rogue",
+                    "ModType": "AddStat",
+                    "StatName": "PhyAttack",
+                    "DepStatName": "Strength",
+                    "Value": 0.5
+                },
+                "PhyAttackScale2": {
+                    "DisplayName": "Rogue",
+                    "ModType": "AddStat",
+                    "StatName": "PhyAttack",
+                    "DepStatName": "Agility",
+                    "Value": 0.5
+                },
+                "EvasionScale": {
+                    "DisplayName": "Rogue",
+                    "ModType": "AddStat",
+                    "StatName": "Evasion",
+                    "DepStatName": "Agility",
+                    "Value": 0.5
+                }
             },
-            "PhyAttackScale": {
-                "DisplayName": "Rogue",
-                "ModType": "AddStat",
-                "StatName": "PhyAttack",
-                "DepStatName": "Strength",
-                "Value": 0.5
-            },
-            "PhyAttackScale2": {
-                "DisplayName": "Rogue",
-                "ModType": "AddStat",
-                "StatName": "PhyAttack",
-                "DepStatName": "Agility",
-                "Value": 0.5
-            },
-            "EvasionScale": {
-                "DisplayName": "Rogue",
-                "ModType": "AddStat",
-                "StatName": "Evasion",
-                "DepStatName": "Agility",
-                "Value": 0.5
-            }
-        },
-        "AddTags": ["Rogue"]
+            "AddTags": [
+                "Rogue"
+            ]
+        }
     },
     {
-        "ParentKey":"BaseTitle_PageItem",
+        "ParentKey": "BaseTitle_PageItem",
         "ItemKey": "MageTitle_PageItem",
         "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
         "CanStack": true,
@@ -189,38 +198,41 @@
                 "Title"
             ]
         },
-        "ItemDetails":
-        {
+        "ItemDetails": {
             "Rarity": "Unique",
             "Value": 50
         },
-        "StatMods": {
-            "HealthScale": {
-                "DisplayName": "Mage",
-                "ModType": "AddStat",
-                "StatName": "BarMax:Health",
-                "DepStatName": "Strength",
-                "Value": 1
+        "PageDetails": {
+            "StatMods": {
+                "HealthScale": {
+                    "DisplayName": "Mage",
+                    "ModType": "AddStat",
+                    "StatName": "BarMax:Health",
+                    "DepStatName": "Strength",
+                    "Value": 1
+                },
+                "MagAttackScale": {
+                    "DisplayName": "Mage",
+                    "ModType": "AddStat",
+                    "StatName": "MagAttack",
+                    "DepStatName": "Intelligence",
+                    "Value": 1
+                },
+                "PotencyScale": {
+                    "DisplayName": "Mage",
+                    "ModType": "AddStat",
+                    "StatName": "Potency",
+                    "DepStatName": "Intelligence",
+                    "Value": 0.5
+                }
             },
-            "MagAttackScale": {
-                "DisplayName": "Mage",
-                "ModType": "AddStat",
-                "StatName": "MagAttack",
-                "DepStatName": "Intelligence",
-                "Value": 1
-            },
-            "PotencyScale": {
-                "DisplayName": "Mage",
-                "ModType": "AddStat",
-                "StatName": "Potency",
-                "DepStatName": "Intelligence",
-                "Value": 0.5
-            }
-        },
-        "AddTags": ["Mage"]
+            "AddTags": [
+                "Mage"
+            ]
+        }
     },
     {
-        "ParentKey":"BaseTitle_PageItem",
+        "ParentKey": "BaseTitle_PageItem",
         "ItemKey": "PriestTitle_PageItem",
         "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
         "CanStack": true,
@@ -234,41 +246,44 @@
                 "Title"
             ]
         },
-        "ItemDetails":
-        {
+        "ItemDetails": {
             "Rarity": "Unique",
             "Value": 50
         },
-        "StatMods": {
-            "MagAttackScale": {
-                "DisplayName": "Priest",
-                "ModType": "AddStat",
-                "StatName": "MagAttack",
-                "DepStatName": "Intelligence",
-                "Value": 0.5
+        "PageDetails": {
+            "StatMods": {
+                "MagAttackScale": {
+                    "DisplayName": "Priest",
+                    "ModType": "AddStat",
+                    "StatName": "MagAttack",
+                    "DepStatName": "Intelligence",
+                    "Value": 0.5
+                },
+                "MagAttackScale2": {
+                    "DisplayName": "Priest",
+                    "ModType": "AddStat",
+                    "StatName": "MagAttack",
+                    "DepStatName": "Wisdom",
+                    "Value": 0.5
+                },
+                "ProtectionScale": {
+                    "DisplayName": "Priest",
+                    "ModType": "AddStat",
+                    "StatName": "Protection",
+                    "DepStatName": "Wisdom",
+                    "Value": 0.5
+                },
+                "PotencyScale": {
+                    "DisplayName": "Priest",
+                    "ModType": "AddStat",
+                    "StatName": "Potency",
+                    "DepStatName": "Intelligence",
+                    "Value": 0.5
+                }
             },
-            "MagAttackScale2": {
-                "DisplayName": "Priest",
-                "ModType": "AddStat",
-                "StatName": "MagAttack",
-                "DepStatName": "Wisdom",
-                "Value": 0.5
-            },
-            "ProtectionScale": {
-                "DisplayName": "Priest",
-                "ModType": "AddStat",
-                "StatName": "Protection",
-                "DepStatName": "Wisdom",
-                "Value": 0.5
-            },
-            "PotencyScale": {
-                "DisplayName": "Priest",
-                "ModType": "AddStat",
-                "StatName": "Potency",
-                "DepStatName": "Intelligence",
-                "Value": 0.5
-            }
-        },
-        "AddTags": ["Priest"]
+            "AddTags": [
+                "Priest"
+            ]
+        }
     }
 ]

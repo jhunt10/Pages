@@ -82,6 +82,8 @@ enum DamageTypes {
 		if variant_label:
 			variant_label.text = str(floori(attack_variant)) 
 
+@export var attack_scale:float
+	
 @export var damage_icon_rect:TextureRect
 @export var atk_power_label:Label
 @export var plus_minus_label:Label
@@ -95,16 +97,43 @@ enum DamageTypes {
 @export var phy_damage_icon:Texture2D
 @export var mag_damage_icon:Texture2D
 
+@export var popup_container:BackPatchContainer
+@export var popup_message:RichTextLabel
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	if popup_container:
+		popup_container.hide()
+		self.mouse_entered.connect(_on_mouse_enter)
+		self.mouse_exited.connect(_on_mouse_exit)
 	pass # Replace with function body.
 
+
+func _on_mouse_enter():
+	popup_container.show()
+
+func _on_mouse_exit():
+	popup_container.hide()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
 
 func set_damage_data(damage_data:Dictionary, actor:BaseActor = null):
+	
+	if damage_data.get("ActorlessWeapon", false):
+		var attack_scale = damage_data.get("AtkPwrScale", 1)
+		damage_icon_rect.hide()
+		atk_power_label.hide()
+		plus_minus_label.hide()
+		variant_label.hide()
+		percent_label.hide()
+		damage_type_label.text = "Weapon Damage"
+		if attack_scale != 1:
+			damage_type_label.text += " X " + str(attack_scale)
+		multiplier_label.hide()
+		count_label.hide()
+		return
 	var defense_type = damage_data.get("DefenseType", null)
 	if defense_type == "Ward":
 		damage_icon_rect.texture = mag_damage_icon
@@ -112,6 +141,17 @@ func set_damage_data(damage_data:Dictionary, actor:BaseActor = null):
 		damage_icon_rect.texture = phy_damage_icon
 	else:
 		damage_icon_rect.texture = abb_damage_icon
+	
+	
+	var attack_stat = damage_data.get("AtkStat")
+	attack_power = damage_data.get("AtkPwrBase", 0)
+	attack_variant = damage_data.get("AtkPwrRange", 0)
+	var attack_scale = damage_data.get("AtkPwrScale", 1)
+	if popup_message:
+		var line = attack_stat + " X " + str(attack_power) + " @ " + str(attack_variant)
+		if attack_scale != 1:
+			line = line + " X " + str(attack_scale)
+		popup_message.text = line
 	
 	if damage_data.get("AtkStat") == "Fixed":
 		plus_minus_label.hide()
@@ -125,8 +165,6 @@ func set_damage_data(damage_data:Dictionary, actor:BaseActor = null):
 		plus_minus_label.text = " - "
 		percent_label.hide()
 	else:
-		attack_power = damage_data.get("AtkPower", 0)
-		attack_variant = attack_power * damage_data.get("DamageVarient", 0)
 		if attack_variant == 0:
 			variant_label.hide()
 			plus_minus_label.hide()

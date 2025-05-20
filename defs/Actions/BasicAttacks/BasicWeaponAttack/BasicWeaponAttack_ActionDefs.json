@@ -2,7 +2,7 @@
     {
         "ActionKey": "BasicWeaponAttack",
         "Details": {
-            "Description": "Preform a Weapon Attack against one enemy in range.",
+            "Description": "Preform an Attack against one Enemy for @@#DmgData:WeaponDamage@@",
             "DisplayName": "Basic Attack",
             "LargeIcon": "Sprites/BasicWeaponAttack.png",
             "SmallIcon": "Sprites/BasicWeaponAttack.png",
@@ -15,7 +15,7 @@
         "MissileDatas": {},
         "Preview": {
             "PreviewTargetKey": "Weapon",
-            "PreviewDamageKey": "Weapon"
+            "PreviewDamageKey": "WeaponDamage"
         },
         "DamageDatas":{
             "WeaponDamage": {

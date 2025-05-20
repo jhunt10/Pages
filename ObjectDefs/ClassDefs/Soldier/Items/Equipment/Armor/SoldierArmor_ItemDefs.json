@@ -17,8 +17,10 @@
         },
         "EquipmentDetails":
         {
-            "SpriteSheet":"Sprites/OldHelm_SpriteSheet.png",
             "EquipSlot":"Head",
+            "SpriteData": {
+                "SpriteSheet":"Sprites/OldHelm_SpriteSheet.png"
+            },
             "StatMods": {
                 "ArmorBonus": {
                     "DisplayName": "Old Helmet",
@@ -64,8 +66,10 @@
         },
         "EquipmentDetails":
         {
-            "SpriteSheet":"Sprites/OldArmor_SpriteSheet.png",
             "EquipSlot":"Body",
+            "SpriteData": {
+                "SpriteSheet":"Sprites/OldArmor_SpriteSheet.png"
+            },
             "StatMods": {
                 "ArmorBonus": {
                     "DisplayName": "Old Armor",
@@ -111,8 +115,10 @@
         },
         "EquipmentDetails":
         {
-            "SpriteSheet":"Sprites/OldBoots_SpriteSheet.png",
             "EquipSlot":"Feet",
+            "SpriteData": {
+                "SpriteSheet":"Sprites/OldBoots_SpriteSheet.png"
+            },
             "StatMods": {
                 "ArmorBonus": {
                     "DisplayName": "Old Boots",
@@ -158,6 +164,10 @@
         },
         "EquipmentDetails":
         {
+            "EquipSlot":"OffHand",
+            "SpriteData": {
+                "SpriteSheet":"Sprites/OldShield_SpriteSheet.png"
+            },
             "Requirments": {
                 "ReqStats": {
                     "Strength": 10
@@ -179,9 +189,7 @@
                     "ModType":"Set", 
                     "Value":0.5
                 }
-            },
-            "SpriteSheet":"Sprites/OldShield_SpriteSheet.png",
-            "EquipSlot":"OffHand"
+            }
         }
     }
 ]

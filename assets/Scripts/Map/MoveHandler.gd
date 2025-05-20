@@ -75,7 +75,8 @@ static func handle_movement(game_state:GameStateData, moving_actor:BaseActor,
 			if not simulated:
 				DamageHelper.handle_push_damage(moving_actor, blocking_actor, game_state)
 				var blocking_node:BaseActorNode = CombatRootControl.Instance.MapController.actor_nodes.get(blocking_actor.Id)
-				blocking_node.set_move_destination(push_res, 24, false)
+				var mover_node:BaseActorNode = CombatRootControl.Instance.MapController.actor_nodes.get(blocking_actor.Id)
+				blocking_node.set_move_destination(push_res, 24, false, mover_node.movement_speed)
 			game_state.set_actor_pos(blocking_actor, push_res, simulated)
 		else:
 			if LOGGING: print("\t\tPush Failed")
@@ -93,7 +94,6 @@ static func handle_movement(game_state:GameStateData, moving_actor:BaseActor,
 
 # Returns new pos for pushed_actor if the pushed_actor can be pushed
 static func _try_push(game_state:GameStateData, moving_actor:BaseActor, pushed_actor:BaseActor, relative_movemnt:MapPos)->MapPos:
-	
 	if moving_actor.stats.get_stat("Mass") < pushed_actor.stats.get_stat("Mass"):
 		return null
 	

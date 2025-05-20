@@ -259,42 +259,14 @@ func get_weapon_attack_target_params(target_param_key)->TargetParameters:
 ## When one of "Main" or "Off" is included, the other will be excluded. 
 func get_weapon_damage_datas(weapon_filter)->Dictionary:
 	var out_dict = {}
-	
-	var fall_back_to_unarmed = weapon_filter.get("FallbackToUnarmed", true)
-	var range_melee_filter = weapon_filter.get("LimitRangeMelee", "MatchPrimary")
-	var include_ranged = range_melee_filter == "Range" or range_melee_filter == "Either"
-	var include_melee = range_melee_filter == "Melee" or range_melee_filter == "Either"
-	var primary_weapon = equipment.get_primary_weapon()
-	if range_melee_filter == "MatchPrimary":
-		if not primary_weapon:
-			range_melee_filter = "Unarmed"
-		include_ranged = primary_weapon.is_ranged_weapon()
-		include_melee = primary_weapon.is_melee_weapon()
-	
-	var included_weapon_ids = []
+	var weapons = equipment.get_filtered_weapons(weapon_filter)
 	var index = 0
-	for slot in weapon_filter.get("IncludeSlots", []):
-		if slot == "Primary":
-			slot = "Weapon"
-		for weapon in equipment.get_equipt_items_of_slot_type(slot):
-			if weapon is BaseWeaponEquipment:
-				if included_weapon_ids.has(weapon.Id):
-					continue
-				if not ( # Match Ranged or Melee requirement
-					(include_ranged and weapon.is_ranged_weapon()) 
-					or (include_melee and weapon.is_melee_weapon())
-				):
-					continue
-				included_weapon_ids.append(weapon.Id)
-				var weapon_damage = weapon.get_damage_datas()
-				for key in weapon_damage.keys():
-					var sub_key = slot + str(index) + ":" + key
-					out_dict[sub_key] = weapon_damage[key]
-				index += 1
-	if range_melee_filter == "Unarmed" or (out_dict.size() == 0 and fall_back_to_unarmed):
-		var unarmed_attack_data = get_load_val("UnarmedAttackData", {})
-		out_dict = unarmed_attack_data.get("DamageDatas")
-		
+	for weapon:BaseWeaponEquipment in weapons:
+			var weapon_damage = weapon.get_damage_datas()
+			for key in weapon_damage.keys():
+				var sub_key = "Weapon" + str(index) + ":" + key
+				out_dict[sub_key] = weapon_damage[key]
+			index += 1
 	return out_dict
 
 func get_targeting_mods()->Array:

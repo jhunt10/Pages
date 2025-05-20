@@ -6,7 +6,9 @@ func get_required_props()->Dictionary:
 	return {
 		"TargetParamKey": BaseSubAction.SubActionPropTypes.TargetParamKey,
 		"SetTargetKey": BaseSubAction.SubActionPropTypes.SetTargetKey,
-		"AllowDeadTargets": BaseSubAction.SubActionPropTypes.BoolVal
+		"AllowDeadTargets": BaseSubAction.SubActionPropTypes.BoolVal,
+		"FailOnNoTarget": BaseSubAction.SubActionPropTypes.BoolVal,
+		"MessageOnNoTarget": BaseSubAction.SubActionPropTypes.BoolVal
 	}
 ## Returns Tags that are automatically added to the parent Action's Tags
 func get_action_tags(_subaction_data:Dictionary)->Array:
@@ -39,6 +41,14 @@ func do_thing(parent_action:BaseAction, subaction_data:Dictionary, metadata:QueE
 		
 	var selection_data = TargetSelectionData.new(target_params, setting_target_key, actor, game_state, exclude_targets)
 	var potential_targets = selection_data.list_potential_targets()
+	if potential_targets.size() == 0:
+		if subaction_data.get("MessageOnNoTarget", true):
+			CombatRootControl.Instance.create_flash_text_on_actor(actor, "No Target", FlashTextController.FlashTextType.NoTarget)
+		if subaction_data.get("FailOnNoTarget", true):
+			return BaseSubAction.Failed
+		else:
+			return BaseSubAction.Success
+		
 	for target in potential_targets:
 		turn_data.add_target_for_key(setting_target_key, target_params.target_param_key, target)
 	return BaseSubAction.Success

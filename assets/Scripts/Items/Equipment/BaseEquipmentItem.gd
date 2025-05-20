@@ -19,9 +19,9 @@ func get_equipment_slot_type()->String:
 	return equipment_details.get("EquipSlot", "UNSET")
 
 func has_spite_sheet()->bool:
-	return equipment_details.has('SpriteSheet')
+	return equipment_details.get("SpriteData", {}).has('SpriteSheet')
 func get_sprite_sheet_file_path():
-	var file_name = equipment_details.get('SpriteSheet', null)
+	var file_name = equipment_details.get("SpriteData", {}).get('SpriteSheet', null)
 	if !file_name:
 		return null
 	return _def_load_path.path_join(file_name)

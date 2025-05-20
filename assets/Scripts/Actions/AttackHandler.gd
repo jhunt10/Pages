@@ -199,6 +199,12 @@ static func handle_attack(
 		if vfx_cache['Resisted']:
 			defender_node.vfx_holder.flash_text_controller.add_flash_text("Resist", FlashTextController.FlashTextType.Blocked_Dmg)
 		
+		if sub_event.is_evade:
+			defender_node.vfx_holder.flash_text_controller.add_flash_text("Evade", FlashTextController.FlashTextType.Blocked_Dmg)
+			
+		if sub_event.is_miss:
+			defender_node.vfx_holder.flash_text_controller.add_flash_text("Miss", FlashTextController.FlashTextType.Blocked_Dmg)
+		
 		if attack_data_key:
 			var vfx_source = attacker
 			if attack_from_spot_override:
@@ -445,7 +451,7 @@ static func _tranlate_damage_vfx_data(attacker_id:String, sub_event:AttackSubEve
 	}
 
 ## Get AttackEvent.AttackDirection between Attacker and Defender
-static func get_relative_attack_direction(attacker_pos:MapPos, defender_pos:MapPos)->AttackDirection:
+static func get_relative_attack_direction(attacker_pos:MapPos, defender_pos:MapPos, awareness:int=0)->AttackDirection:
 	if defender_pos == null:
 		#TODO: Missiles from dead actors
 		printerr("Defender posision not provided")
@@ -471,10 +477,65 @@ static func get_relative_attack_direction(attacker_pos:MapPos, defender_pos:MapP
 		front_back_change = x_change
 		right_left_change = y_change
 	
-	if abs(front_back_change) >= abs(right_left_change):
-		if front_back_change >= 0:
-			return AttackDirection.Front
+	var is_side = abs(front_back_change) < abs(right_left_change)
+	var is_diaginal = abs(front_back_change) == abs(right_left_change)
+	var is_forward = not is_side and front_back_change >= 0
+	var is_back = not is_side and front_back_change <= 0
+	if awareness <= -4:
+		return AttackDirection.Back
+	elif awareness == -3:
+		if is_forward and not is_diaginal:
+			return AttackDirection.Flank
 		else:
 			return AttackDirection.Back
+	elif awareness == -2:
+		if is_forward and not is_diaginal:
+			return AttackDirection.Front
+		elif front_back_change > 0:
+			return AttackDirection.Flank
+		else:
+			return AttackDirection.Back
+	elif awareness == -1:
+		if is_forward and not is_diaginal:
+			return AttackDirection.Front
+		elif is_back:
+			return AttackDirection.Back
+		else:
+			return AttackDirection.Flank
+	elif awareness == 0:
+		if is_forward:
+			return AttackDirection.Front
+		elif is_side:
+			return AttackDirection.Flank
+		else:
+			return AttackDirection.Back
+	elif awareness == 1:
+		if is_forward:
+			return AttackDirection.Front
+		elif is_side or is_diaginal:
+			return AttackDirection.Flank
+		else:
+			return AttackDirection.Back
+	elif awareness == 2:
+		if is_back and not is_diaginal:
+			return AttackDirection.Back
+		elif front_back_change < 0:
+			return AttackDirection.Flank
+		else:
+			return AttackDirection.Front
+	elif awareness == 3:
+		if is_back and not is_diaginal:
+			return AttackDirection.Flank
+		else:
+			return AttackDirection.Front
 	else:
-		return AttackDirection.Flank
+		return AttackDirection.Front
+			
+	
+	#if abs(front_back_change) >= abs(right_left_change):
+		#if front_back_change >= 0:
+			#return AttackDirection.Front
+		#else:
+			#return AttackDirection.Back
+	#else:
+		#return AttackDirection.Flank

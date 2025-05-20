@@ -7,7 +7,6 @@ func get_required_props()->Dictionary:
 	return {
 		RELATIVE_POS_KEY: BaseSubAction.SubActionPropTypes.MoveValue,
 		"MovementType": BaseSubAction.SubActionPropTypes.StringVal,
-		"PlayWalkin": BaseSubAction.SubActionPropTypes.BoolVal,
 		"TargetKey": BaseSubAction.SubActionPropTypes.StringVal,
 		"UseTargetsDirection": BaseSubAction.SubActionPropTypes.BoolVal,
 	}

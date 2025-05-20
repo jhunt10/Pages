@@ -12,11 +12,15 @@ static func get_min_max_damage(actor:BaseActor, damage_data:Dictionary)->Array:
 	else:
 		base_damage = actor.stats.base_damge_from_stat(attack_stat)
 	
-	var attack_power = damage_data.get("AtkPower", 100) / 100
-	var damage_variance = damage_data.get("DamageVarient", 0)
-	var avg_dam = base_damage * attack_power
-	var min_dam = ceili(avg_dam * (1 - damage_variance))
-	var max_dam = ceili(avg_dam * (1 + damage_variance))
+	var attack_power:float = damage_data.get("AtkPwrBase", 100) / 100.0
+	if damage_data.has("AtkPwrStat"):
+		attack_power = actor.stats.get_stat(damage_data["AtkPwrStat"], 1)
+	var attack_power_range:float = damage_data.get("AtkPwrRange", 0) / 100.0
+	var attack_power_scale :float= damage_data.get("AtkPwrScale", 1)
+	var min_power = attack_power - attack_power_range
+	var max_power = attack_power + attack_power_range
+	var min_dam = ceili(float(base_damage) * min_power * attack_power_scale)
+	var max_dam = ceili(float(base_damage) * max_power * attack_power_scale)
 	return [min_dam, max_dam]
 
 static func handle_push_damage(moving_actor:BaseActor, pushed_actor:BaseActor, game_state:GameStateData):
@@ -28,12 +32,12 @@ static func handle_push_damage(moving_actor:BaseActor, pushed_actor:BaseActor, g
 		winner = pushed_actor
 		base_damage = winner.stats.get_stat("Strength", 0) / 2
 	var damage_data = {
-		"AtkPower": 10,
+		"AtkPwrBase": 10,
+		"AtkPwrRange": 0,
 		"AtkStat": "Strength",
 		"BaseDamage": base_damage,
 		"DamageVfxKey": "Blunt_DamageEffect",
 		"DamageType": "Crash",
-		"DamageVarient": 0,
 		"DefenseType": "Armor"
 	}
 	var tag_chain = SourceTagChain.new().append_source(SourceTagChain.SourceTypes.Actor, winner)
@@ -52,7 +56,7 @@ static func roll_for_damage(damage_data:Dictionary, attacker:BaseActor, defender
 			damage_event.add_damage_mod(damage_mod)
 	
 	# --- Damage Calc Order ---
-	# 1) Get applied power from damage_variance
+	# 1) Get applied power
 	# 2) Raw damage = attack_power * applied power
 	# 3) Apply Armor/Ward resuction
 	# 4) Apply Damage MOds
@@ -60,8 +64,9 @@ static func roll_for_damage(damage_data:Dictionary, attacker:BaseActor, defender
 	# 5) Resolve Crit and Block
 	
 	# Calc raw damage
-	var float_power = float(damage_event.attack_power)/100.0
-	damage_event.applied_power = (float_power + (float_power * randf_range(-damage_event.damage_variance, damage_event.damage_variance)))
+	var max_power = float(damage_event.attack_power + damage_event.attack_power_range) / 100.0
+	var min_power = float(damage_event.attack_power - damage_event.attack_power_range) / 100.0
+	damage_event.applied_power = randf_range(min_power, max_power) * damage_event.attack_power_scale
 	
 	# Get Damage Resistance
 	damage_event.defender_resistance = defender.stats.get_damage_resistance(damage_event.damage_type)
@@ -186,16 +191,16 @@ static func handle_damage(source, defender:BaseActor, damage_data:Dictionary,
 		var damage_effect = damage_data.get("DamageVfxKey", null)
 		var damage_effect_data = damage_data.get("DamageVfxData", {})
 		if damage_effect:
-			if damage_event.final_damage < 0:
-				damage_effect_data['DamageTextType'] = FlashTextController.FlashTextType.Healing_Dmg
-			elif source_tag_chain.has_tag("DOT"):
-				damage_effect_data['DamageTextType'] = FlashTextController.FlashTextType.DOT_Dmg
-			elif attack_event.final_damage_mod > 1:
-				damage_effect_data['DamageTextType'] = FlashTextController.FlashTextType.Crit_Dmg
-			elif attack_event.final_damage_mod < 1:
-				damage_effect_data['DamageTextType'] = FlashTextController.FlashTextType.Blocked_Dmg
-			else:
-				damage_effect_data['DamageTextType'] = FlashTextController.FlashTextType.Normal_Dmg
+			#if damage_event.final_damage < 0:
+				#damage_effect_data['DamageTextType'] = FlashTextController.FlashTextType.Healing_Dmg
+			#elif source_tag_chain.has_tag("DOT"):
+				#damage_effect_data['DamageTextType'] = FlashTextController.FlashTextType.DOT_Dmg
+			#elif attack_event.sub_events.cri > 1:
+				#damage_effect_data['DamageTextType'] = FlashTextController.FlashTextType.Crit_Dmg
+			#elif attack_event.final_damage_mod < 1:
+				#damage_effect_data['DamageTextType'] = FlashTextController.FlashTextType.Blocked_Dmg
+			#else:
+			damage_effect_data['DamageTextType'] = FlashTextController.FlashTextType.Normal_Dmg
 			if source is BaseActor:
 				damage_effect_data['SourceActorId'] = source.Id
 			damage_effect_data['DamageNumber'] = 0 - damage_event.final_damage

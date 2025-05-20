@@ -24,8 +24,8 @@ func on_effect_trigger(effect:BaseEffect, subeffect_data:Dictionary, trigger:Bas
 	var shared_damage_data = damage_data.duplicate(true)
 	shared_damage_data['AtkStat'] = "Fixed"
 	shared_damage_data['BaseDamage'] = main_damage_event.raw_damage
-	shared_damage_data['AtkPower'] = 100
-	shared_damage_data['DamageVarient'] = 0
+	shared_damage_data['AtkPwrBase'] = 100
+	shared_damage_data['AtkPwrRange'] = 0
 	#shared_damage_data['DamageEffect'] = null
 	for adj_actor in adj_actors:
 		var damage_event = DamageHelper.handle_damage(effect, adj_actor, shared_damage_data, tag_chain, game_state, null, false)

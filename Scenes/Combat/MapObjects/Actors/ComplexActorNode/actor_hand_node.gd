@@ -2,7 +2,7 @@
 class_name ActorHandNode
 extends Node2D
 
-const LOGGING = false
+const LOGGING = true
 
 enum HANDS {MainHand, OffHand, TwoHand}
 enum ANIMATIONS {None, Swing, Stab}
@@ -142,22 +142,37 @@ func cancel_animation():
 	#readied_animation = null
 	#animation_tree.set("parameters/conditions/Cancel", true)
 
+var last_tick = 0
 func on_animation_started(animation_name):
 	current_animation_name = animation_name
 	if animation_name.contains("facing"):
 		animation_speed = 1
-	if LOGGING: printerr("HandAnimation Started: %s | Cancel:%s | PlayMotion: %s" % [
-		animation_name, 
-		animation_tree.get("parameters/conditions/Cancel"), 
-		animation_tree.get("parameters/conditions/PlayMotion")])
+	if LOGGING: 
+		if !last_tick:
+			last_tick = 0
+		var tick = Time.get_ticks_msec()
+		var tick_diff = last_tick - tick
+		last_tick = tick
+		printerr("HandAnimation Started: %s | Cancel:%s | PlayMotion: %s | %s" % [
+			animation_name, 
+			animation_tree.get("parameters/conditions/Cancel"), 
+			animation_tree.get("parameters/conditions/PlayMotion"),
+			tick_diff])
 	
 func on_animation_finished(animation_name):
 	current_animation_name = null
 	last_animation_name = animation_name
-	if LOGGING: printerr("HandAnimation Finished: %s | Cancel:%s | PlayMotion: %s" % [
-		animation_name, 
-		animation_tree.get("parameters/conditions/Cancel"), 
-		animation_tree.get("parameters/conditions/PlayMotion")])
+	if LOGGING:
+		if !last_tick:
+			last_tick = 0
+		var tick = Time.get_ticks_msec()
+		var tick_diff = last_tick - tick
+		last_tick = tick
+		printerr("HandAnimation Finished: %s | Cancel:%s | PlayMotion: %s | %s" % [
+			animation_name, 
+			animation_tree.get("parameters/conditions/Cancel"), 
+			animation_tree.get("parameters/conditions/PlayMotion"),
+			tick_diff])
 
 
 func set_facing_dir(dir):

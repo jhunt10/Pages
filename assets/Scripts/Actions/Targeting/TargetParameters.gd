@@ -122,6 +122,7 @@ func get_valid_target_area(center:MapPos)->Dictionary:
 		return _cached_target_area
 		
 	var spots =  target_area.to_map_spots(center)
+	printerr("fhdfhsne: " + str(spots))
 	var los_dict = {}
 	for spot in spots:
 		if line_of_sight:

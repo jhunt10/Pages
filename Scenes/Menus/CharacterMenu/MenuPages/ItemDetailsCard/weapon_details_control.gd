@@ -17,7 +17,8 @@ func set_weapon(actor:BaseActor, weapon:BaseWeaponEquipment):
 	_actor = actor
 	_item = weapon
 	weapon_class_label.text = BaseWeaponEquipment.WeaponClasses.keys()[weapon.get_weapon_class()]
-	var damage_data = weapon.get_damage_data()
+	var damage_data = weapon.get_damage_datas()
+	damage_data =damage_data.values()[0]
 	var defense_type = damage_data.get("DefenseType", null)
 	if defense_type == "Ward":
 		mag_damage_icon.show()
@@ -25,9 +26,12 @@ func set_weapon(actor:BaseActor, weapon:BaseWeaponEquipment):
 	else:
 		phy_damage_icon.show()
 		mag_damage_icon.hide()
-	var base_damage = damage_data.get("AtkPower", 0)
-	var damage_var = damage_data.get("DamageVarient", 0)
-	attack_power_label.text = ("%s±%s" % [base_damage, (damage_var * base_damage)]) + "%"
+	var base_power = damage_data.get("AtkPwrBase", 0)
+	var power_range = damage_data.get("AtkPwrRange", 0)
+	var power_scale = damage_data.get("AtkPwrScale", 1)
+	base_power = base_power * power_scale
+	power_range = power_range * power_scale
+	attack_power_label.text = ("%s±%s" % [base_power, (power_range)]) + "%"
 	var damage_type = damage_data.get("DamageType")
 	damage_type_label.text = damage_type
 	description_box.text = weapon.details.description

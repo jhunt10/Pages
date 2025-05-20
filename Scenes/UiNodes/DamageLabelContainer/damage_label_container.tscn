@@ -1,16 +1,19 @@
-[gd_scene load_steps=7 format=3 uid="uid://bqi05unl37q0p"]
+[gd_scene load_steps=9 format=3 uid="uid://bqi05unl37q0p"]
 
 [ext_resource type="Script" path="res://Scenes/UiNodes/DamageLabelContainer/damage_label_container.gd" id="1_rhguf"]
 [ext_resource type="Texture2D" uid="uid://diy8q5lpvpw1u" path="res://assets/Sprites/UI/SymbolIcons/PhyDamageSymbol.png" id="2_3erjx"]
 [ext_resource type="Texture2D" uid="uid://cnhd7e5hwrxoy" path="res://assets/Sprites/UI/SymbolIcons/AbnormDamageSymbol.png" id="2_mm46y"]
 [ext_resource type="Texture2D" uid="uid://b201kpuib7q5k" path="res://assets/Sprites/UI/SymbolIcons/MagDamageSymbol.png" id="3_00rac"]
 [ext_resource type="Theme" uid="uid://dwinll8pgdjhc" path="res://Scenes/Themes/standard_theme.tres" id="4_xveyi"]
+[ext_resource type="Script" path="res://Scenes/UiNodes/back_patch_container.gd" id="5_caaw7"]
 [ext_resource type="Theme" uid="uid://bfce41la62bs6" path="res://Scenes/Themes/readable_theme.tres" id="5_korun"]
+[ext_resource type="Texture2D" uid="uid://io35wpu802fp" path="res://assets/Sprites/UI/BackPatches/Patch_64_12.png" id="6_be6gi"]
 
-[node name="DamageContainer" type="HBoxContainer" node_paths=PackedStringArray("damage_icon_rect", "atk_power_label", "plus_minus_label", "percent_label", "variant_label", "damage_type_label", "multiplier_label", "count_label")]
+[node name="DamageContainer" type="HBoxContainer" node_paths=PackedStringArray("damage_icon_rect", "atk_power_label", "plus_minus_label", "percent_label", "variant_label", "damage_type_label", "multiplier_label", "count_label", "popup_container", "popup_message")]
 script = ExtResource("1_rhguf")
 attack_power = 100
 attack_variant = 30.0
+attack_scale = null
 damage_icon_rect = NodePath("DamageIcon")
 atk_power_label = NodePath("AtkPowerLabel")
 plus_minus_label = NodePath("PlusMinusLabel")
@@ -22,6 +25,42 @@ count_label = NodePath("CountLabel")
 abb_damage_icon = ExtResource("2_mm46y")
 phy_damage_icon = ExtResource("2_3erjx")
 mag_damage_icon = ExtResource("3_00rac")
+popup_container = NodePath("Control/PopupContainer")
+popup_message = NodePath("Control/PopupContainer/BoxContainer/RichTextLabel")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 2
+
+[node name="PopupContainer" type="Container" parent="Control" node_paths=PackedStringArray("background", "inner_container")]
+custom_minimum_size = Vector2(133, 29)
+offset_top = -34.0
+offset_right = 133.0
+offset_bottom = -5.0
+script = ExtResource("5_caaw7")
+background = NodePath("NinePatchRect")
+inner_container = NodePath("BoxContainer")
+margin_override = 6
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Control/PopupContainer"]
+layout_mode = 2
+texture = ExtResource("6_be6gi")
+region_rect = Rect2(1, 1, 64, 64)
+patch_margin_left = 12
+patch_margin_top = 12
+patch_margin_right = 12
+patch_margin_bottom = 12
+
+[node name="BoxContainer" type="BoxContainer" parent="Control/PopupContainer"]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Control/PopupContainer/BoxContainer"]
+layout_mode = 2
+theme = ExtResource("5_korun")
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 16
+text = "Physical Attack"
+fit_content = true
+autowrap_mode = 0
 
 [node name="DamageIcon" type="TextureRect" parent="."]
 layout_mode = 2
@@ -63,12 +102,14 @@ theme_override_constants/outline_size = 4
 text = "Test Dmg"
 
 [node name="MultiplierLabel" type="Label" parent="."]
+visible = false
 layout_mode = 2
 theme = ExtResource("4_xveyi")
 theme_override_colors/font_color = Color(0.470588, 0, 0, 1)
 text = "x"
 
 [node name="CountLabel" type="Label" parent="."]
+visible = false
 layout_mode = 2
 theme = ExtResource("4_xveyi")
 theme_override_colors/font_color = Color(0.470588, 0, 0, 1)

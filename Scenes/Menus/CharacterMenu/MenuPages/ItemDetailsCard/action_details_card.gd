@@ -2,7 +2,7 @@ class_name ActionDetailsControl
 extends Control
 
 @export var parent_card_control:ItemDetailsCard
-@export var description_box:RichTextLabel
+@export var description_box:DescriptionBox
 @export var target_type_label:Label
 @export var cost_container:PageDetailsCard_CostContaienr
 @export var range_display:MiniRangeDisplay
@@ -30,8 +30,7 @@ func set_action(actor:BaseActor, page:BasePageItem):
 	_actor = actor
 	_item = page
 	var action = page.get_action()
-	description_box.text = action.details.description
-	
+	description_box.set_page_item(page, actor)
 	if action.has_preview_target():
 		var target_params = action.get_preview_target_params(_actor)
 		if target_params:

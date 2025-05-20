@@ -10,7 +10,7 @@ extends BackPatchContainer
 
 
 @export var details_container:BoxContainer
-@export var description_box:RichTextLabel
+@export var description_box:DescriptionBox
 
 
 @export var plus_minus_button:Button
@@ -55,8 +55,8 @@ func toggle_details():
 		details_container.hide()
 		plus_icon.show()
 	else:
-		if not loaded_details:
-			load_details()
+		#if not loaded_details:
+		load_details()
 		details_container.show()
 		plus_icon.hide()
 
@@ -103,7 +103,7 @@ func _on_add_pressed():
 func load_details():
 	var page_action = page.get_action()
 	var page_effect_def = page.get_effect_def()
-	description_box.text = page.details.description
+	description_box.set_page_item(page)
 	# Ammo
 	if page_action and page_action.has_ammo(null):
 		ammo_label.set_data(page_action.get_ammo_data(null))

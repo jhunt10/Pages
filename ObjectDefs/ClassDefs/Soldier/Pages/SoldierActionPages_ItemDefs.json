@@ -1,3 +1,182 @@
 [
-
+    {
+        "ItemKey": "Charge_PageItem",
+        "ActionKey": "Charge",
+        "CanStack": true,
+        "Details": {
+            "Tags": [
+                "Tactic"
+            ]
+        },
+        "ItemDetails":
+        {
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd"
+    },
+    {
+        "ItemKey": "Cleave_PageItem",
+        "ActionKey": "Cleave",
+        "CanStack": true,
+        "Details": {
+            "Tags": [
+                "Tactic"
+            ]
+        },
+        "ItemDetails":
+        {
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
+        "Requirments": {
+            "ReqTags": ["Soldier"],
+            "ReqEquip": {
+                "WeaponFilters":[
+                    { 
+                        "IncludeSlots": [ "TwoHand"],
+                        "FallbackToUnarmed": false, 
+                        "LimitClasses": ["Medium", "Heavy"],
+                        "LimitRangeMelee": "Melee"
+                    }
+                ]
+            }
+        }
+    },
+    {
+        "ItemKey": "GuardAction_PageItem",
+        "ActionKey": "GuardAction",
+        "CanStack": true,
+        "Details": {
+            "Tags": [
+                "Tactic"
+            ]
+        },
+        "ItemDetails":
+        {
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
+        "Requirments": {
+            "ReqTags": ["Soldier"],
+            "ReqEquip": {
+                "OffHand": "Shield"
+            }
+        }
+    },
+    {
+        "ItemKey": "FaceFoe_PageItem",
+        "ActionKey": "FaceFoe",
+        "CanStack": true,
+        "Details": {
+            "Tags": [
+                "Tactic", "Movement"
+            ]
+        },
+        "ItemDetails":
+        {
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
+        "Requirments": {
+            "ReqTags": ["Soldier"]
+        }
+    },
+    
+    {
+        "ItemKey": "PowerAttack_PageItem",
+        "ActionKey": "PowerAttack",
+        "CanStack": true,
+        "Details": {
+            "Tags": [
+                "Tactic"
+            ]
+        },
+        "ItemDetails":
+        {
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
+        "Requirments": {
+            "ReqTags": ["Soldier"],
+            "ReqEquip": {
+                "WeaponFilters":[
+                    { 
+                        "IncludeSlots": [ "TwoHand"],
+                        "FallbackToUnarmed": false, 
+                        "LimitClasses": ["Medium", "Heavy"],
+                        "LimitRangeMelee": "Melee"
+                    }
+                ]
+            }
+        }
+    },
+    {
+        "ItemKey": "TauntEnemy_PageItem",
+        "ActionKey": "TauntEnemy",
+        "CanStack": true,
+        "Details": {
+            "Tags": [
+                "Tactic"
+            ]
+        },
+        "ItemDetails":
+        {
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd"
+    },
+    {
+        "ItemKey": "ThrowJavelin_PageItem",
+        "ActionKey": "ThrowJavelin",
+        "CanStack": true,
+        "Details": {
+            "Tags": [
+                "Tactic"
+            ]
+        },
+        "ItemDetails":
+        {
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd"
+    },
+    {
+        "ItemKey": "ShieldBash_PageItem",
+        "ActionKey": "ShieldBash",
+        "CanStack": true,
+        "Details": {
+            "Tags": [
+                "Tactic"
+            ]
+        },
+        "ItemDetails":
+        {
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd"
+    },
+    {
+        "ItemKey": "WildSwing_PageItem",
+        "ActionKey": "WildSwing",
+        "CanStack": true,
+        "Details": {
+            "Tags": [
+                "Tactic"
+            ]
+        },
+        "ItemDetails":
+        {
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd"
+    },
 ]

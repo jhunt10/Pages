@@ -1,3 +1,153 @@
 [
 
+    {
+        "ItemKey": "HeavyFoot_PageItem",
+        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
+        "CanStack": true,
+        "Details":{
+            "Description": "Thanks to a special diet and an unholy curse you are heavier but slower. @@#StatMod:MassMod@@ and @@#StatMod:SpeedMod@@",
+            "DisplayName": "Heavy Foot",
+            "LargeIcon": "Sprites/HeavyFoot.png",
+            "SmallIcon": "Sprites/HeavyFoot.png",
+            "SnippetDesc": "Gain Mass, Loose Speed",
+            "Tags": ["Passive"]
+        },
+        "ItemDetails":
+        {
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "PageDetails": {
+            "StatMods": {
+                "MassMod": {
+                    "ModType": "Scale",
+                    "StatName": "Mass",
+                    "Value": 1.10
+                },
+                "SpeedMod": {
+                    "ModType": "Scale",
+                    "StatName": "Speed",
+                    "Value": 0.90
+                }
+            }
+        }
+    },
+    {
+        "ItemKey": "ShieldTraining_PageItem",
+        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
+        "CanStack": true,
+        "Details":{
+            "Description": "Formal training allows you to use a Shield to full effect.\n\n@@#StatMod:BlkChcMod@@ and @@#StatMod:SpeedMod@@",
+            "DisplayName": "Heavy Foot",
+            "LargeIcon": "Sprites/HeavyFoot.png",
+            "SmallIcon": "Sprites/HeavyFoot.png",
+            "SnippetDesc": "Gain Mass, Loose Speed",
+            "Tags": ["Passive", "Block", "StatMod"]
+        },
+        "ItemDetails":
+        {
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "PageDetails": {
+            "StatMods": {
+                "BlkChcMod": {
+                    "ModType": "Scale",
+                    "StatName": "BlockChance",
+                    "Value": 2
+                }
+            }
+        }
+    },
+    {
+        "ItemKey": "ShieldTraining_PageItem",
+        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
+        "CanStack": true,
+        "Details":{
+            "Description": "Formal training allows you to use a Shield to full effect.\n\n@@#StatMod:BlockModMod@@",
+            "DisplayName": "Shield Trainging",
+            "LargeIcon": "Sprites/ShieldTraining.png",
+            "SmallIcon": "Sprites/ShieldTraining.png",
+            "SnippetDesc": "Improve Block Mod",
+            "Tags": ["Passive", "Block", "StatMod"]
+        },
+        "ItemDetails":
+        {
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "PageDetails": {
+            "StatMods": {
+                "BlockModMod": {
+                    "ModType": "Scale",
+                    "StatName": "BlockMod",
+                    "Value": 2
+                }
+            }
+        }
+    },
+    {
+        "ItemKey": "ShieldTutoring_PageItem",
+        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
+        "CanStack": true,
+        "Details":{
+            "Description": "Formal training allows you to use a Shield to full effect.\n\n@@#StatMod:BlockModMod@@",
+            "DisplayName": "Shield Tutoring",
+            "LargeIcon": "Sprites/ShieldTutor.png",
+            "SmallIcon": "Sprites/ShieldTutor.png",
+            "SnippetDesc": "Gain Mass, Loose Speed",
+            "Tags": ["Passive", "Block", "StatMod", "Shared"]
+        },
+        "ItemDetails":
+        {
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "PageDetails": {
+            "StatMods": {
+                "BlockModMod": {
+                    "ModType": "Scale",
+                    "StatName": "BlockMod",
+                    "Value": 1.5
+                }
+            }
+        }
+    },
+    {
+        "ItemKey": "WideGuard_PageItem",
+        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
+        "CanStack": true,
+        "Details": {
+            "Description": "You've learned to keep a wide view of the battle field. @@#StatMod:AwrMod@@ and increase amount of Block Chance applied when attack from [color=#460000]Flank 50% => [/color]@@#StatMod:FlankBlockMod:ValuePercent@@ and [color=#460000]Back 0% => [/color]@@#StatMod:BackBlockMod:ValuePercent@@.",
+            "DisplayName": "Wide Gaurd",
+            "LargeIcon": "Sprites/WideGuard.png",
+            "SmallIcon": "Sprites/WideGuard.png",
+            "SnippetDesc": "+1 Awareness ",
+            "Tags": ["Passive"]
+        },
+        "ItemDetails":
+        {
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "PageDetails": {
+            "StatMods": {
+                "AwrMod": {
+                    "ModType": "Add",
+                    "StatName": "Awareness",
+                    "Value": 1
+                },
+                "FlankBlockMod": {
+                    "ModType": "Set",
+                    "StatName": "DirMod_Flank:BlockChance",
+                    "Value": 0.60
+                },
+                "BackBlockMod": {
+                    "ModType": "Set",
+                    "StatName": "DirMod_Back:BlockChance",
+                    "Value": 0.25
+                }
+            }
+        }
+    }
 ]

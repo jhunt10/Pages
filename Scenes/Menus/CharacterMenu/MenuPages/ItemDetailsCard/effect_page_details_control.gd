@@ -2,7 +2,7 @@ class_name EffectPageDetailsControl
 extends Control
 
 @export var parent_card_control:ItemDetailsCard
-@export var description_box:RichTextLabel
+@export var description_box:DescriptionBox
 @export var stat_mods_container:Container
 @export var premade_stat_mod_label:StatModLabelContainer
 
@@ -30,5 +30,6 @@ func set_action(actor:BaseActor, page:BasePageItem):
 		new_mod.set_mod_data(mod_data)
 		stat_mods_container.add_child(new_mod)
 		new_mod.show()
-	description_box.text = page.details.description
+	
+	description_box.set_page_item(page)
 	

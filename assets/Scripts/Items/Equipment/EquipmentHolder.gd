@@ -439,52 +439,40 @@ func get_offhand_weapon()->BaseWeaponEquipment:
 		return item as BaseWeaponEquipment
 	return null
 
-#func _get_first_or_open_slot_of_type(slot_type:String)->int:
-	#var slot_index = get_index_of_slot_with_type(slot_type)
-	#var first_found_slot = -1
-	#for index in range(_slot_set_key_mapping.size()):
-		#var check_type = _slot_equipment_types[index]
-		#if check_type == slot_type:
-			#if not has_equipment_in_slot(index):
-				#return index
-			#elif first_found_slot < 0:
-				#first_found_slot = index
-	#return first_found_slot
-
-
-#func equipt_que(que:BaseQueEquipment):
-	#_set_equipment(BaseEquipmentItem.EquipmentSlots.Que, que)
-#
-#func equipt_bag(bag:BaseBagEquipment):
-	#_set_equipment(BaseEquipmentItem.EquipmentSlots.Bag, bag)
-#
-#func equipt_armor(armor:BaseArmorEquipment):
-	#var slot = armor.get_equip_slot()
-	#_set_equipment(slot, armor)
-#
-#func equipt_trinket(armor:BaseArmorEquipment):
-	#var slot = armor.get_equip_slot()
-	#_set_equipment(slot, armor)
-#
-#func equipt_weapon(weapon:BaseWeaponEquipment, offhand:bool = false):
-	#_set_equipment(BaseEquipmentItem.EquipmentSlots.Weapon, weapon)
-#
-#func _set_equipment(slot:BaseEquipmentItem.EquipmentSlots, item:BaseEquipmentItem):
-	#if not _equipment_slot_to_item_id.keys().has(slot):
-		#printerr("EquipmentHolder.set_equipment: Actor '%s' does not have slot of type '%s'." % [_actor.Id, slot])
-		#return
-	## Check if has an item in the slot
-	#var current_item = get_item_in_slot(slot) 
-	#if current_item and current_item.get_equipt_to_actor_id() == _actor.Id: 
-		#current_item.clear_equipt_actor()
-	#
-	#_equipment_slot_to_item_id[slot] = item.Id
-	#
-	## Check if item has another owner
-	#if item.get_equipt_to_actor_id() != self._actor.Id:
-		#item.set_equipt_actor(self._actor)
-	#_actor.stats.dirty_stats()
-
-
-#func get_weapon_attack_bonus(stat_name:String):
-	#var main_hand_item = get_item_in_slot(EquipmentSlots.Weapon)
+func get_filtered_weapons(weapon_filter)->Array:
+	var out_arr = []
+	
+	var fall_back_to_unarmed = weapon_filter.get("FallbackToUnarmed", true)
+	var range_melee_filter = weapon_filter.get("LimitRangeMelee", "MatchPrimary")
+	var include_ranged = range_melee_filter == "Range" or range_melee_filter == "Either"
+	var include_melee = range_melee_filter == "Melee" or range_melee_filter == "Either"
+	var primary_weapon = self.get_primary_weapon()
+	if range_melee_filter == "MatchPrimary":
+		if not primary_weapon:
+			return []
+		include_ranged = primary_weapon.is_ranged_weapon()
+		include_melee = primary_weapon.is_melee_weapon()
+	
+	var included_weapon_ids = []
+	var index = 0
+	for slot in weapon_filter.get("IncludeSlots", []):
+		if slot == "Primary":
+			slot = "Weapon"
+		if slot == "TwoHand":
+			if self.is_two_handing():
+				slot = "Weapon"
+			else:
+				continue
+		for weapon in self.get_equipt_items_of_slot_type(slot):
+			if weapon is BaseWeaponEquipment:
+				if included_weapon_ids.has(weapon.Id):
+					continue
+				if not ( # Match Ranged or Melee requirement
+					(include_ranged and weapon.is_ranged_weapon()) 
+					or (include_melee and weapon.is_melee_weapon())
+				):
+					continue
+				out_arr.append(weapon)
+				included_weapon_ids.append(weapon.Id)
+				index += 1
+	return out_arr

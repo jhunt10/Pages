@@ -73,6 +73,7 @@ func _on_action_failed():
 
 func set_facing_dir(dir:MapPos.Directions):
 	super(dir)
+	print("Setting Complex Actor Dir: %s" % [dir])
 	if actor_sprite: 
 		actor_sprite.direction = facing_dir
 	else:
@@ -120,12 +121,15 @@ func ready_action_animation(action_name:String, speed:float=1, off_hand:bool=fal
 	var weapon_animation = ''
 	if action_name == "Default:Weapon":
 		weapon_animation = 'WEAPON_DEFAULT'
-	if action_name == "Default:Self":
+	elif action_name == "Default:Self":
 		weapon_animation = 'Raise'
-	if action_name == "Default:Forward":
+	elif action_name == "Default:Forward":
 		weapon_animation = 'Stab'
-	if action_name == "Default:Forward:Arch":
+	elif action_name == "Default:Forward:Arch":
 		weapon_animation = 'Swing'
+	elif ['Swing', 'Raise', 'Stab'].has(action_name):
+		weapon_animation = action_name
+		
 	if weapon_animation != '':
 		ready_weapon_animation(weapon_animation, speed, off_hand)
 
@@ -136,11 +140,11 @@ func execute_action_motion_animation(speed:float=1, off_hand:bool=false):
 func cancel_action_animations():
 	cancel_weapon_animations()
 	
-func ready_weapon_animation(action_name:String, _speed:float=1, off_hand:bool=false):
+func ready_weapon_animation(action_name:String, speed:float=1, off_hand:bool=false):
 	if off_hand and off_hand_node:
-		off_hand_node.ready_arnimation(action_name)
+		off_hand_node.ready_arnimation(action_name, speed)
 	elif main_hand_node:
-		main_hand_node.ready_arnimation(action_name)
+		main_hand_node.ready_arnimation(action_name, speed)
 
 func execute_weapon_motion_animation(speed:float=1, off_hand:bool=false):
 	if off_hand and off_hand_node:

@@ -7,7 +7,7 @@ extends Control
 @export var action_count_label:Label
 @export var page_sets_container:HBoxContainer
 @export var premade_page_set_label:ItemCard_PageSetLabel
-@export var description_box:RichTextLabel
+@export var description_box:DescriptionBox
 
 var _item:BaseQueEquipment
 var _actor:BaseActor

@@ -1,7 +1,9 @@
 # This is not a real class because Dictionaries are more effient to work with.
-# This is an example of what DamageData includes
+# OLD - This is an example of what DamageData includes
+# See Notion notes
 
-#		"AtkPower": 100,
+#		"AtkPwrBase": 100,
+#		"AtkPwrRange": 10,
 #		"AtkStat": "Strength",
 #		"BaseDamage": 30, -- Optional when overriding character's damage
 #		"DamageVfxKey": "Slash_DamageEffect",

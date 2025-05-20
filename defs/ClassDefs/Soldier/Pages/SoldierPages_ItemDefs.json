@@ -1,59 +1,5 @@
 [
     {
-        "ActionKey": "GuardAction",
-        "CanStack": true,
-        "Details": {
-            "Tags": [
-                "Tactic"
-            ]
-        },
-        "ItemDetails":
-        {
-            "Rarity": "Common",
-            "Value": 50
-        },
-        "ItemKey": "GuardAction_PageItem",
-        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
-        "Requirments": {
-            "ReqTags": ["Soldier"],
-            "ReqEquip": {
-                "OffHand": "Shield"
-            }
-        }
-    },
-    {
-        "ActionKey": "TauntEnemy",
-        "CanStack": true,
-        "Details": {
-            "Tags": [
-                "Tactic"
-            ]
-        },
-        "ItemDetails":
-        {
-            "Rarity": "Common",
-            "Value": 50
-        },
-        "ItemKey": "TauntEnemy_PageItem",
-        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd"
-    },
-    {
-        "ActionKey": "ThrowJavelin",
-        "CanStack": true,
-        "Details": {
-            "Tags": [
-                "Tactic"
-            ]
-        },
-        "ItemDetails":
-        {
-            "Rarity": "Common",
-            "Value": 50
-        },
-        "ItemKey": "ThrowJavelin_PageItem",
-        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd"
-    },
-    {
         "ActionKey": "ChargeAttack",
         "CanStack": true,
         "Details": {
@@ -67,22 +13,6 @@
             "Value": 50
         },
         "ItemKey": "ChargeAttack_PageItem",
-        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd"
-    },
-    {
-        "ActionKey": "Cleave",
-        "CanStack": true,
-        "Details": {
-            "Tags": [
-                "Tactic"
-            ]
-        },
-        "ItemDetails":
-        {
-            "Rarity": "Common",
-            "Value": 50
-        },
-        "ItemKey": "Cleave_PageItem",
         "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd"
     },
     {
@@ -101,22 +31,6 @@
         "ItemKey": "FullAssault_PageItem",
         "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd"
     },
-    {
-        "ActionKey": "FaceFoe",
-        "CanStack": true,
-        "Details": {
-            "Tags": [
-                "Tactic"
-            ]
-        },
-        "ItemDetails":
-        {
-            "Rarity": "Common",
-            "Value": 50
-        },
-        "ItemKey": "FaceFoe_PageItem",
-        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd"
-    },
 
 
 
@@ -124,7 +38,7 @@
 
 
     {
-        "ItemKey": "WideGuard_PageItem",
+        "ItemKey": "WideGuard_PageItem_Old",
         "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
         "CanStack": true,
         "EffectKey": "WideGuard_Page",
@@ -138,7 +52,7 @@
         }
     },
     {
-        "ItemKey": "HeavyFoot_PageItem",
+        "ItemKey": "HeavyFoot_PageItem_old",
         "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
         "CanStack": true,
         "Details":{

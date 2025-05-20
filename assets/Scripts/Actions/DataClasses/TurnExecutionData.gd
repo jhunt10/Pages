@@ -39,6 +39,11 @@ func list_targets()->Array:
 			out_list.append_array(val)
 	return out_list
 
+func has_targets(target_key:String)->bool:
+	if target_key == "Self":
+		return true
+	return _targets.has(target_key)
+
 ## Returns Array<Actor_Id> or Array<Coor>
 func get_targets(target_key:String):
 	if target_key == "Self":
