@@ -1302,6 +1302,7 @@ facing = 2
 map_coor = Vector2i(7, 5)
 
 [node name="SpwanNode_MovingTarget" type="Sprite2D" parent="MapMarkerMapLayer"]
+visible = false
 position = Vector2(240, 208)
 texture = ExtResource("12_2qpl1")
 offset = Vector2(0, -16)
@@ -1349,6 +1350,7 @@ spawn_actor_key = "TestTarget"
 map_coor = Vector2i(8, 12)
 
 [node name="SpwanNode_TestTarget_Armored" type="Sprite2D" parent="MapMarkerMapLayer"]
+visible = false
 position = Vector2(240, 272)
 texture = ExtResource("13_rojbo")
 offset = Vector2(0, -16)
@@ -1360,6 +1362,7 @@ facing = 2
 map_coor = Vector2i(7, 8)
 
 [node name="SpwanNode_TestTarget_Armored2" type="Sprite2D" parent="MapMarkerMapLayer"]
+visible = false
 position = Vector2(208, 208)
 texture = ExtResource("13_rojbo")
 offset = Vector2(0, -16)
@@ -1372,6 +1375,7 @@ facing = 1
 map_coor = Vector2i(6, 6)
 
 [node name="SpwanNode_TestTarget_Armored3" type="Sprite2D" parent="MapMarkerMapLayer"]
+visible = false
 position = Vector2(208, 240)
 texture = ExtResource("13_rojbo")
 offset = Vector2(0, -16)
@@ -1384,6 +1388,7 @@ facing = 1
 map_coor = Vector2i(6, 7)
 
 [node name="SpwanNode_TestTarget_Armored4" type="Sprite2D" parent="MapMarkerMapLayer"]
+visible = false
 position = Vector2(208, 272)
 texture = ExtResource("13_rojbo")
 offset = Vector2(0, -16)
@@ -1396,6 +1401,7 @@ facing = 1
 map_coor = Vector2i(6, 8)
 
 [node name="SpwanNode_TestTarget_Armored5" type="Sprite2D" parent="MapMarkerMapLayer"]
+visible = false
 position = Vector2(272, 208)
 texture = ExtResource("13_rojbo")
 offset = Vector2(0, -16)
@@ -1408,6 +1414,7 @@ facing = 1
 map_coor = Vector2i(8, 6)
 
 [node name="SpwanNode_TestTarget_Armored6" type="Sprite2D" parent="MapMarkerMapLayer"]
+visible = false
 position = Vector2(272, 240)
 texture = ExtResource("13_rojbo")
 offset = Vector2(0, -16)
@@ -1420,6 +1427,7 @@ facing = 1
 map_coor = Vector2i(8, 7)
 
 [node name="SpwanNode_TestTarget_Armored7" type="Sprite2D" parent="MapMarkerMapLayer"]
+visible = false
 position = Vector2(272, 272)
 texture = ExtResource("13_rojbo")
 offset = Vector2(0, -16)

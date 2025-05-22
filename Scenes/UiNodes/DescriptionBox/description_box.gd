@@ -57,6 +57,9 @@ func _build_bbcode_array(object_def:Dictionary, object_inst:BaseLoadObject, acto
 			continue
 		var sub_tokens = token.split(":")
 		match sub_tokens[0]:
+			'#Color': 
+				var color = sub_tokens[1]
+				out_line += "[color=#460000]" + sub_tokens[2] + "[/color]"
 			"#AccMod":
 				var attack_details = object_def.get("AttackDetails", {})
 				var acc_mod = attack_details.get("AccuracyMod", 1)
@@ -175,7 +178,28 @@ func _build_bbcode_array(object_def:Dictionary, object_inst:BaseLoadObject, acto
 						out_line += "[color=#460000]" + str(value*100) + "%[/color]"
 					elif mod_data.has(sub_tokens[2]):
 						out_line += str(mod_data.get(sub_tokens[2], ''))
-					
+			'#DmgMod':
+				var mod_data = {}
+				if object_def.has("DamageMods"):
+					mod_data = object_def.get("DamageMods",{}).get(sub_tokens[1],{})
+				elif object_def.has("PageDetails"):
+					mod_data = object_def.get("PageDetails").get("DamageMods",{}).get(sub_tokens[1],{})
+				if sub_tokens[2] == 'Value':
+					var mod_type = mod_data.get("ModType")
+					var mod_value = mod_data.get("Value")
+					if mod_type == "Scale":
+						mod_value = (mod_value-1) * 100
+						if mod_value > 0:
+							out_line +=  "[color=#460000]+" + str(mod_value) + "%[/color]"
+						else:
+							out_line +=  "[color=#460000]" + str(mod_value) + "%[/color]"
+					elif  mod_type == "Add":
+						if mod_value > 0:
+							out_line +=  "[color=#460000]+" + str(mod_value) + "[/color]"
+						else:
+							out_line +=  "[color=#460000]" + str(mod_value) + "[/color]"
+					else:
+						out_line +=  "[color=#460000]" + str(mod_value) + "[/color]"
 	if out_line != '':
 		out_arr.append(out_line)
 	return out_arr

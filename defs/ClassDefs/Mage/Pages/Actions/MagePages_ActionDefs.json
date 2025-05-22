@@ -104,10 +104,10 @@
             "Damage1": {
                 "AtkPower": 80,
                 "AtkStat": "Fixed",
-                "BaseDamage": 100,
+                "BaseDamage": 10,
                 "DamageVfxKey": "SmallFire_DamageEffect",
                 "DamageType": "Fire",
-                "DamageVarient": 0.2,
+                "DamageVarient": 20,
                 "DefenseType": "Ward"
             }
         },
@@ -185,7 +185,7 @@
                 "EffectsAllies": false,
                 "EffectsEnemies": false,
                 "LineOfSight": true,
-                "TargetArea": "[[0,4],[-1,3],[0,3],[1,3],[0,2]]",
+                "TargetArea": "[[0,4],[-1,3],[0,3],[1,3],[0,2],[0,1]]",
                 "TargetType": "Spot"
             }
         }

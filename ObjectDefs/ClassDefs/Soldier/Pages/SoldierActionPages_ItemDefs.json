@@ -129,7 +129,29 @@
             "Rarity": "Common",
             "Value": 50
         },
-        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd"
+        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
+        "Requirments": {
+            "ReqTags": ["Soldier"]
+        }
+    },
+    {
+        "ItemKey": "MassTauntEnemy_PageItem",
+        "ActionKey": "MassTauntEnemy",
+        "CanStack": true,
+        "Details": {
+            "Tags": [
+                "Tactic"
+            ]
+        },
+        "ItemDetails":
+        {
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
+        "Requirments": {
+            "ReqTags": ["Soldier"]
+        }
     },
     {
         "ItemKey": "ThrowJavelin_PageItem",
@@ -161,7 +183,13 @@
             "Rarity": "Common",
             "Value": 50
         },
-        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd"
+        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
+        "Requirments": {
+            "ReqTags": ["Soldier"],
+            "ReqEquip": {
+                "OffHand": "Shield"
+            }
+        }
     },
     {
         "ItemKey": "WildSwing_PageItem",
@@ -177,6 +205,19 @@
             "Rarity": "Common",
             "Value": 50
         },
-        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd"
+        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
+        "Requirments": {
+            "ReqTags": ["Soldier"],
+            "ReqEquip": {
+                "WeaponFilters":[
+                    { 
+                        "IncludeSlots": ["Primary"],
+                        "FallbackToUnarmed": false, 
+                        "LimitClasses": ["Medium", "Heavy"],
+                        "LimitRangeMelee": "Melee"
+                    }
+                ]
+            }
+        }
     },
 ]

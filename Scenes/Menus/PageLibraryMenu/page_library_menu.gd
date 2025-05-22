@@ -100,4 +100,5 @@ func get_page_items()->Array:
 			for tag in page.get_item_tags():
 				if not known_tags.has(tag):
 					known_tags.append(tag)
+	printerr("\n\nFound %s Pages Items\n\n" % [pages.size()])
 	return pages

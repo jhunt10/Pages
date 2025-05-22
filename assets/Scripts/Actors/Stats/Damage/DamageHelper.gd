@@ -23,28 +23,6 @@ static func get_min_max_damage(actor:BaseActor, damage_data:Dictionary)->Array:
 	var max_dam = ceili(float(base_damage) * max_power * attack_power_scale)
 	return [min_dam, max_dam]
 
-static func handle_push_damage(moving_actor:BaseActor, pushed_actor:BaseActor, game_state:GameStateData):
-	var winner = moving_actor
-	var loser = pushed_actor
-	var base_damage = winner.stats.get_stat("Strength", 0)
-	if moving_actor.stats.get_stat("Mass") < pushed_actor.stats.get_stat("Mass"):
-		loser = moving_actor
-		winner = pushed_actor
-		base_damage = winner.stats.get_stat("Strength", 0) / 2
-	var damage_data = {
-		"AtkPwrBase": 10,
-		"AtkPwrRange": 0,
-		"AtkStat": "Strength",
-		"BaseDamage": base_damage,
-		"DamageVfxKey": "Blunt_DamageEffect",
-		"DamageType": "Crash",
-		"DefenseType": "Armor"
-	}
-	var tag_chain = SourceTagChain.new().append_source(SourceTagChain.SourceTypes.Actor, winner)
-	handle_damage(winner, loser, damage_data, tag_chain, game_state)
-
-
-
 
 
 static func roll_for_damage(damage_data:Dictionary, attacker:BaseActor, defender:BaseActor, source_tag_chain:SourceTagChain, damage_mods:Dictionary)->DamageEvent:

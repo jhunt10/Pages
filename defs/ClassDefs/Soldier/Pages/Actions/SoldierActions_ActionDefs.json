@@ -149,61 +149,6 @@
         }
     },
     {
-        "ActionKey": "ChargeAttack",
-        "CostData": {},
-        "DamageDatas": {},
-        "Details": {
-            "Description": "Move Forward one spot and make a Weapon Attack.",
-            "DisplayName": "Charge Attack",
-            "LargeIcon": "Sprites/ForwardCharge.png",
-            "SmallIcon": "Sprites/ForwardCharge.png",
-            "SnippetDesc": "Move Forward and make Weapon Attack",
-            "Tags": [
-                "Tactic"
-            ]
-        },
-        "MissileDatas": {},
-        "Preview": {
-            "PreviewMoveOffset": "[0, -1, 0, 0]",
-            "PreviewTargetKey": "Weapon"
-        },
-        "SubActions": {
-            "0": [
-                {
-                    "Animation": "move_walk_forward",
-                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_AnimationInTo.gd"
-                }
-            ],
-            "11": [
-                {
-                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_AnimationFinish.gd"
-                },
-                {
-                    "MovementType": "Walk",
-                    "PlayWalkin": true,
-                    "RelativePos": "[0, -1, 0, 0]",
-                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_Move.gd"
-                }
-            ],
-            "12": [
-                {
-                    "AllowAlreadyTargeted": false,
-                    "AllowAutoTarget": true,
-                    "SetTargetKey": "Target1",
-                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_GetTarget.gd",
-                    "TargetParamKey": "Weapon"
-                }
-            ],
-            "13": [
-                {
-                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_WeaponAttack.gd",
-                    "TargetKey": "Target1"
-                }
-            ]
-        },
-        "TargetParams": {}
-    },
-    {
         "ActionKey": "FullAssault",
         "CostData": {},
         "DamageDatas": {},

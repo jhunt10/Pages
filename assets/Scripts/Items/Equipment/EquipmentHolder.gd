@@ -443,6 +443,9 @@ func get_filtered_weapons(weapon_filter)->Array:
 	var out_arr = []
 	
 	var fall_back_to_unarmed = weapon_filter.get("FallbackToUnarmed", true)
+	var include_classes = weapon_filter.get("LimitClasses", [])
+	if include_classes.size() == 0:
+		include_classes = ["Light", "Medium", "Heavy"]
 	var range_melee_filter = weapon_filter.get("LimitRangeMelee", "MatchPrimary")
 	var include_ranged = range_melee_filter == "Range" or range_melee_filter == "Either"
 	var include_melee = range_melee_filter == "Melee" or range_melee_filter == "Either"
@@ -471,6 +474,10 @@ func get_filtered_weapons(weapon_filter)->Array:
 					(include_ranged and weapon.is_ranged_weapon()) 
 					or (include_melee and weapon.is_melee_weapon())
 				):
+					continue
+				var wpn_class = weapon.get_weapon_class()
+				var wpn_class_str = BaseWeaponEquipment.WeaponClasses.keys()[wpn_class]
+				if not include_classes.has(wpn_class_str):
 					continue
 				out_arr.append(weapon)
 				included_weapon_ids.append(weapon.Id)

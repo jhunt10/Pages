@@ -81,3 +81,18 @@ func get_passive_stat_mods()->Array:
 			mod_data['DisplayName'] = self.details.display_name
 		out_list.append(BaseStatMod.create_from_data(Id, mod_data))
 	return out_list
+
+func get_damage_mods()->Dictionary:
+	var mod_datas:Dictionary = page_details.get("DamageMods", {})
+	var out_dict = {}
+	for mod_key in mod_datas.keys():
+		var mod_data = mod_datas[mod_key]
+		if mod_data.has("DamageModKey"):
+			mod_key = mod_data['DamageModKey']
+		else:
+			mod_data['DamageModKey'] = mod_key
+		if not mod_data.has("DisplayName"):
+			mod_data['DisplayName'] = self.details.display_name
+		
+		out_dict[mod_key] = mod_data
+	return out_dict

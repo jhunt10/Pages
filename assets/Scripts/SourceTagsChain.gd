@@ -11,6 +11,14 @@ var source_actor:BaseActor
 func _init() -> void:
 	pass
 
+func force_add_tag(tags):
+	if tags is String:
+		tags = [tags]
+	if not _source_tags.has("LooseList"):
+		_source_tags['LooseList'] = []
+	_source_tags['LooseList'].append_array(tags)
+	return self
+
 ## Add a new source to the end of this chain
 func append_source(type:SourceTypes, source:Object)->SourceTagChain:
 	var tags = [SourceTypes.keys()[type]]
@@ -58,7 +66,7 @@ func copy_and_append(type:SourceTypes, source:Object)->SourceTagChain:
 	return new_chain
 
 func get_all_tags()->Array:
-	var out_list = []
+	var out_list = _source_tags.get("LooseList", [])
 	for id in _source_order:
 		out_list.append_array(_source_tags[id])
 	return out_list
@@ -90,19 +98,19 @@ static func tags_include_all_in_array(check_for:Array, tags:Array)->bool:
 	return is_valid
 
 static func filters_accept_tags(tag_filter:Dictionary, tags:Array)->bool:
-	if tag_filter.has("RequireAllTags"):
+	if tag_filter.get("RequireAllTags", []).size() > 0:
 		var require_tags = tag_filter.get('RequireAllTags')
 		if not tags_include_all_in_array(require_tags, tags):
 			return false
-	if tag_filter.has("RequireAnyTags"):
+	if tag_filter.get("RequireAnyTags", []).size() > 0:
 		var require_tags = tag_filter.get('RequireAnyTags')
 		if not tags_include_any_in_array(require_tags, tags):
 			return false
-	if tag_filter.has("ExcludeAllTags"):
+	if tag_filter.get("ExcludeAllTags", []).size() > 0:
 		var exclude_tags = tag_filter.get('ExcludeAllTags')
 		if tags_include_all_in_array(exclude_tags, tags):
 			return false
-	if tag_filter.has("ExcludeAnyTags"):
+	if tag_filter.get("ExcludeAnyTags", []).size() > 0:
 		var exclude_tags = tag_filter.get('ExcludeAnyTags')
 		if tags_include_any_in_array(exclude_tags, tags):
 			return false

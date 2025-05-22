@@ -67,22 +67,23 @@ static func handle_movement(game_state:GameStateData, moving_actor:BaseActor,
 			printerr("!!!Simulated Push!!!")
 		if not PushableMovement.has(move_type):
 			if LOGGING: print("\t\tPush NotAllowed")
-			game_state.set_actor_pos(moving_actor, actor_pos, simulated)
+			#game_state.set_actor_pos(moving_actor, actor_pos, simulated)
 			return false
-		var push_res = _try_push(game_state, moving_actor, blocking_actor, relative_movement)
-		if push_res:
-			if LOGGING: print("\t\tPush success")
-			if not simulated:
-				DamageHelper.handle_push_damage(moving_actor, blocking_actor, game_state)
-				var blocking_node:BaseActorNode = CombatRootControl.Instance.MapController.actor_nodes.get(blocking_actor.Id)
-				var mover_node:BaseActorNode = CombatRootControl.Instance.MapController.actor_nodes.get(blocking_actor.Id)
-				blocking_node.set_move_destination(push_res, 24, false, mover_node.movement_speed)
-			game_state.set_actor_pos(blocking_actor, push_res, simulated)
+		var collision = AttackHandler.handle_colision(moving_actor, blocking_actor, game_state, simulated)
+		# Move won push
+		if collision.winner_id == moving_actor.Id:
+			if not blocking_actor.is_dead:
+				var push_res = _find_push_to_spot(game_state, moving_actor, blocking_actor, relative_movement)
+				if push_res:
+					if LOGGING: print("\t\tPush success")
+					if not simulated:
+						var blocking_node:BaseActorNode = CombatRootControl.Instance.MapController.actor_nodes.get(blocking_actor.Id)
+						var mover_node:BaseActorNode = CombatRootControl.Instance.MapController.actor_nodes.get(moving_actor.Id)
+						blocking_node.set_move_destination(push_res, 24, false, mover_node.movement_speed)
+					game_state.set_actor_pos(blocking_actor, push_res, simulated)
 		else:
 			if LOGGING: print("\t\tPush Failed")
-			if not simulated:
-				DamageHelper.handle_push_damage(blocking_actor, moving_actor, game_state)
-			game_state.set_actor_pos(moving_actor, actor_pos, simulated)
+			#game_state.set_actor_pos(moving_actor, actor_pos, simulated)
 			return false
 	
 	if LOGGING:
@@ -93,10 +94,7 @@ static func handle_movement(game_state:GameStateData, moving_actor:BaseActor,
 	return true
 
 # Returns new pos for pushed_actor if the pushed_actor can be pushed
-static func _try_push(game_state:GameStateData, moving_actor:BaseActor, pushed_actor:BaseActor, relative_movemnt:MapPos)->MapPos:
-	if moving_actor.stats.get_stat("Mass") < pushed_actor.stats.get_stat("Mass"):
-		return null
-	
+static func _find_push_to_spot(game_state:GameStateData, moving_actor:BaseActor, pushed_actor:BaseActor, relative_movemnt:MapPos)->MapPos:
 	var current_mover_pos:MapPos = game_state.get_actor_pos(moving_actor)
 	var current_pushed_pos:MapPos = game_state.get_actor_pos(pushed_actor)
 	# Need to use pushed's pos but mover's direction. Also ignore dir change of move

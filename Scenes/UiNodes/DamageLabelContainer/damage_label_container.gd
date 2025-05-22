@@ -143,7 +143,7 @@ func set_damage_data(damage_data:Dictionary, actor:BaseActor = null):
 		damage_icon_rect.texture = abb_damage_icon
 	
 	
-	var attack_stat = damage_data.get("AtkStat")
+	var attack_stat = damage_data.get("AtkStat", "Weapon")
 	attack_power = damage_data.get("AtkPwrBase", 0)
 	attack_variant = damage_data.get("AtkPwrRange", 0)
 	var attack_scale = damage_data.get("AtkPwrScale", 1)

@@ -127,10 +127,18 @@ static func get_stat_icon(stat_name:String)->Texture2D:
 const DirectionalMod_Front = "DirMod_Front"
 const DirectionalMod_Flank = "DirMod_Flank"
 const DirectionalMod_Back = "DirMod_Back"
+const DirectionalMod_Aoe = "DirMod_Aoe"
+const DirectionalSubsitute_Aoe = "DirSub_Aoe"
 
 ## Directionaly modded Stats are in form of "DirMod_Flank:STATNAME". 
 ## If no cached stat is found with exact name, default DirMod_ stats are used to scale STATNAME
 static func get_defense_stat_for_attack_direction(actor:BaseActor, attack_dir, stat_name:String)->float:
+	
+	if attack_dir == AttackHandler.AttackDirection.AOE:
+		var subsitute_enum:int = floori(actor.stats.get_stat(DirectionalSubsitute_Aoe + ":" + stat_name, -1))
+		if subsitute_enum >= 0:
+			attack_dir = subsitute_enum
+			
 	
 	var dir_prefix = DirectionalMod_Front
 	var default_mod = 1.0
@@ -140,6 +148,10 @@ static func get_defense_stat_for_attack_direction(actor:BaseActor, attack_dir, s
 	elif attack_dir == AttackHandler.AttackDirection.Back:
 		dir_prefix = DirectionalMod_Back
 		default_mod = 0.0
+	elif attack_dir == AttackHandler.AttackDirection.AOE:
+		dir_prefix = DirectionalMod_Aoe
+		default_mod = 0.0
+	
 	
 	var full_stat_name = dir_prefix + ":" + stat_name
 	var mod_val = 1

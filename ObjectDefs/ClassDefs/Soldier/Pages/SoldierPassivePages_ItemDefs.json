@@ -1,19 +1,179 @@
 [
-
+    {
+        "ItemKey": "BlockAoe_PageItem",
+        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
+        "CanStack": true,
+        "Details": {
+            "Description": "You've somehow learned to use a single Shield against Attacks that completely surround you.\n\nYou can now block @@#Color:Red:AOE@@ attacks as if they were from your @@#Color:Red:Flank@@.",
+            "DisplayName": "Block AOE",
+            "LargeIcon": "Sprites/BlockAoe.png",
+            "SmallIcon": "Sprites/BlockAoe.png",
+            "SnippetDesc": "Block AOE as if Flank.",
+            "Tags": [
+                "Passive"
+            ]
+        },
+        "ItemDetails": {
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "PageDetails": {
+            "StatMods": {
+                "BlockAoeMod": {
+                    "ModType": "Set",
+                    "StatName": "DirSub_Aoe:BlockChance",
+                    "Value": 1
+                }
+            }
+        }
+    },
+    {
+        "ItemKey": "CrashGentle_PageItem",
+        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
+        "CanStack": true,
+        "Details": {
+            "Description": "You've learned to be gentler with your less massive teammates.\n\nYou deal @@#DmgMod:GentleDgmMod:Value@@ @@#Color:Red:Crash Damage@@ on Collision with @@#Color:Red:Allies@@.",
+            "DisplayName": "Gentle",
+            "LargeIcon": "Sprites/CrashAllyDown.png",
+            "SmallIcon": "Sprites/CrashAllyDown.png",
+            "SnippetDesc": "Reduce Crash Damage to Allies.",
+            "Tags": [
+                "Passive",
+                "AtkMod",
+                "Crash",
+                "DmgMod"
+            ]
+        },
+        "ItemDetails": {
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "PageDetails": {
+            "StatMods": {},
+            "DamageMods": {
+                "GentleDgmMod": {
+                    "DisplayName": "Gentle",
+                    "DamageModKey": "GentleDgmMod",
+                    "Conditions": {
+                        "DamageTypes": ["Crash"],
+                        "SourceFactionFilters": ["Self"],
+                        "DefenderFactionFilters": ["Ally"],
+                        "DefenderTagFilters": [
+                            {
+                                "RequireAnyTags": []
+                            }
+                        ],
+                        "SourceTagFilters": [
+                            {
+                                "RequireAnyTags": [
+                                    "Collision"
+                                ]
+                            }
+                        ]
+                    },
+                    "ModType": "Scale",
+                    "OnDealDamage": true,
+                    "OnTakeDamage": false,
+                    "Value": 0.5
+                }
+            }
+        }
+    },
+    {
+        "ItemKey": "CrashRough_PageItem",
+        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
+        "CanStack": true,
+        "Details": {
+            "Description": "You've learned to be rougher with your less massive foes.\n\nYou deal @@#DmgMod:RoughDgmMod:Value@@ @@#Color:Red:Crash Damage@@ on Collision with @@#Color:Red:Enemies@@.",
+            "DisplayName": "Rough",
+            "LargeIcon": "Sprites/CrashEnemyUp.png",
+            "SmallIcon": "Sprites/CrashEnemyUp.png",
+            "SnippetDesc": "Increase Crash Damage on Collision with Enemy.",
+            "Tags": [
+                "Passive",
+                "AtkMod",
+                "Crash",
+                "DmgMod"
+            ]
+        },
+        "ItemDetails": {
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "PageDetails": {
+            "StatMods": {},
+            "DamageMods": {
+                "RoughDgmMod": {
+                    "DisplayName": "Rough",
+                    "DamageModKey": "RoughDgmMod",
+                    "Conditions": {
+                        "DamageTypes": ["Crash"],
+                        "SourceFactionFilters": ["Self"],
+                        "DefenderFactionFilters": ["Enemy"],
+                        "DefenderTagFilters": [
+                            {
+                                "RequireAnyTags": []
+                            }
+                        ],
+                        "SourceTagFilters": [
+                            {
+                                "RequireAnyTags": [
+                                    "Collision"
+                                ]
+                            }
+                        ]
+                    },
+                    "ModType": "Scale",
+                    "OnDealDamage": true,
+                    "OnTakeDamage": false,
+                    "Value": 1.5
+                }
+            }
+        }
+    },
+    {
+        "ItemKey": "ShieldWall_PageItem",
+        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
+        "CanStack": true,
+        "Details": {
+            "Description": "You've somehow learned to use a single Shield against Attacks that completely surround you.\n\nYou can now block @@#Color:Red:AOE@@ attacks as if they were from your @@#Color:Red:Flank@@.",
+            "DisplayName": "Wall",
+            "LargeIcon": "Sprites/BlockLos.png",
+            "SmallIcon": "Sprites/BlockLos.png",
+            "SnippetDesc": "Block AOE as if Flank.",
+            "Tags": [
+                "Passive"
+            ]
+        },
+        "ItemDetails": {
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "PageDetails": {
+            "StatMods": {
+                "BlockAoeMod": {
+                    "ModType": "Set",
+                    "StatName": "DirSub_Aoe:BlockChance",
+                    "Value": 1
+                }
+            }
+        }
+    },
     {
         "ItemKey": "HeavyFoot_PageItem",
         "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
         "CanStack": true,
-        "Details":{
+        "Details": {
             "Description": "Thanks to a special diet and an unholy curse you are heavier but slower. @@#StatMod:MassMod@@ and @@#StatMod:SpeedMod@@",
             "DisplayName": "Heavy Foot",
             "LargeIcon": "Sprites/HeavyFoot.png",
             "SmallIcon": "Sprites/HeavyFoot.png",
             "SnippetDesc": "Gain Mass, Loose Speed",
-            "Tags": ["Passive"]
+            "Tags": [
+                "Passive"
+            ]
         },
-        "ItemDetails":
-        {
+        "ItemDetails": {
             "Rarity": "Common",
             "Value": 50
         },
@@ -36,43 +196,19 @@
         "ItemKey": "ShieldTraining_PageItem",
         "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
         "CanStack": true,
-        "Details":{
-            "Description": "Formal training allows you to use a Shield to full effect.\n\n@@#StatMod:BlkChcMod@@ and @@#StatMod:SpeedMod@@",
-            "DisplayName": "Heavy Foot",
-            "LargeIcon": "Sprites/HeavyFoot.png",
-            "SmallIcon": "Sprites/HeavyFoot.png",
-            "SnippetDesc": "Gain Mass, Loose Speed",
-            "Tags": ["Passive", "Block", "StatMod"]
-        },
-        "ItemDetails":
-        {
-            "Rarity": "Common",
-            "Value": 50
-        },
-        "PageDetails": {
-            "StatMods": {
-                "BlkChcMod": {
-                    "ModType": "Scale",
-                    "StatName": "BlockChance",
-                    "Value": 2
-                }
-            }
-        }
-    },
-    {
-        "ItemKey": "ShieldTraining_PageItem",
-        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
-        "CanStack": true,
-        "Details":{
+        "Details": {
             "Description": "Formal training allows you to use a Shield to full effect.\n\n@@#StatMod:BlockModMod@@",
             "DisplayName": "Shield Trainging",
             "LargeIcon": "Sprites/ShieldTraining.png",
             "SmallIcon": "Sprites/ShieldTraining.png",
             "SnippetDesc": "Improve Block Mod",
-            "Tags": ["Passive", "Block", "StatMod"]
+            "Tags": [
+                "Passive",
+                "Block",
+                "StatMod"
+            ]
         },
-        "ItemDetails":
-        {
+        "ItemDetails": {
             "Rarity": "Common",
             "Value": 50
         },
@@ -90,16 +226,20 @@
         "ItemKey": "ShieldTutoring_PageItem",
         "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
         "CanStack": true,
-        "Details":{
+        "Details": {
             "Description": "Formal training allows you to use a Shield to full effect.\n\n@@#StatMod:BlockModMod@@",
             "DisplayName": "Shield Tutoring",
             "LargeIcon": "Sprites/ShieldTutor.png",
             "SmallIcon": "Sprites/ShieldTutor.png",
             "SnippetDesc": "Gain Mass, Loose Speed",
-            "Tags": ["Passive", "Block", "StatMod", "Shared"]
+            "Tags": [
+                "Passive",
+                "Block",
+                "StatMod",
+                "Shared"
+            ]
         },
-        "ItemDetails":
-        {
+        "ItemDetails": {
             "Rarity": "Common",
             "Value": 50
         },
@@ -123,10 +263,11 @@
             "LargeIcon": "Sprites/WideGuard.png",
             "SmallIcon": "Sprites/WideGuard.png",
             "SnippetDesc": "+1 Awareness ",
-            "Tags": ["Passive"]
+            "Tags": [
+                "Passive"
+            ]
         },
-        "ItemDetails":
-        {
+        "ItemDetails": {
             "Rarity": "Common",
             "Value": 50
         },

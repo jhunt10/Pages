@@ -539,3 +539,130 @@ static func get_relative_attack_direction(attacker_pos:MapPos, defender_pos:MapP
 			#return AttackDirection.Back
 	#else:
 		#return AttackDirection.Flank
+
+
+
+
+
+
+
+
+
+
+
+
+
+static func handle_colision(
+	moving_actor:BaseActor, 
+	blocking_actor:BaseActor,
+	game_state:GameStateData,
+	simulated:bool=false # Simulated collisions do not apply damage
+)->CollisionEvent:
+	
+	printerr("\n%s crash into %s" % [moving_actor.details.display_name, blocking_actor.details.display_name])
+	var attack_mods = {}
+	var stat_mods = {}
+	
+	var damage_data = {
+		"AtkPwrBase": 100, 
+		"AtkPwrRange": 30, 
+		"AtkPwrScale": 1, 
+		"AtkStat": "Mass",
+		"DamageType": "Crash",
+		"DefenseType": "Armor",
+		"DamageVfxKey": "Blunt_DamageEffect",
+		"DamageVfxData":{
+			"ShakeActor":false
+		},
+	}
+	
+	var source_tag_chain = SourceTagChain.new()\
+	.append_source(SourceTagChain.SourceTypes.Actor, moving_actor)\
+	.force_add_tag("Collision")
+	
+	var all_tags = source_tag_chain.get_all_tags()
+	
+	var all_unique_actors = [moving_actor, blocking_actor]
+	var attack_posision_data = {}
+	var attacker_pos = game_state.get_actor_pos(moving_actor)
+	var defender_pos = game_state.get_actor_pos(blocking_actor)
+	attack_posision_data[blocking_actor.Id] = {}
+	attack_posision_data[blocking_actor.Id]['AttackDirection'] = get_relative_attack_direction(attacker_pos, defender_pos)
+	attack_posision_data[blocking_actor.Id]['HasCover'] = false
+		
+	# Get Applicable Stat Mods
+	for actor:BaseActor in all_unique_actors:
+		var actor_attack_mods = actor.get_attack_mods()
+		for actor_attack_mod_key in actor_attack_mods.keys():
+			var attack_mod = actor_attack_mods[actor_attack_mod_key]
+			# Check if mod applies to attack
+			if _does_attack_mod_apply(attack_mod, moving_actor, [blocking_actor], source_tag_chain, attack_posision_data):
+				var mod_id = attack_mod['AttackModId']
+				attack_mods[mod_id] = attack_mod
+				# Cache Stat Mods now to avoid another loop
+				var sub_stat_mods = _get_stat_mods_from_attack_mod(attack_mod)
+				for sub_stat_mod_key in sub_stat_mods.keys():
+					stat_mods[sub_stat_mod_key] = sub_stat_mods[sub_stat_mod_key]
+			
+	
+	# Apply Stat mods to appropiate Actors 
+	for actor:BaseActor in all_unique_actors:
+		for stat_mod_id in stat_mods.keys():
+			var stat_mod = stat_mods[stat_mod_id]
+			if _does_attack_stat_mod_apply_to_actor(stat_mod, actor, source_tag_chain):
+				actor.stats.add_temp_stat_mod(stat_mod_id, stat_mod, false)
+		actor.stats.apply_temp_stat_mods()
+	
+	var mover_mass = moving_actor.stats.get_stat(StatHelper.Mass)
+	var blocker_mass = blocking_actor.stats.get_stat(StatHelper.Mass)
+	
+	# Mover wins if Mass is >= Blocker Mass
+	var winner = moving_actor
+	var loser = blocking_actor 
+	if mover_mass < blocker_mass:
+		winner = blocking_actor
+		loser = moving_actor
+		
+	damage_data['AtkPwrScale'] = 1.0 - (maxf(minf(mover_mass, blocker_mass),1) / maxf(mover_mass, blocker_mass))
+	
+	var damage_event:DamageEvent = null
+	if not simulated:
+		# Get damage mods from AttackMods and passive mods from Attacker and Defender
+		var damage_mods = {}
+		for attack_mod in attack_mods.values():
+			var sub_damage_mods = attack_mod.get("DamageMods", {})
+			for sub_key in sub_damage_mods.keys():
+				var sub_mod = sub_damage_mods[sub_key]
+				# Damage mods already filtered inside of DamageHelper.roll_for_damage
+				# if DamageHelper.does_damage_mod_apply(sub_mod, winner,  loser, damage_data, source_tag_chain):
+				var mod_id = damage_mods.get("DamageModId", "NO_ID")
+				damage_mods[mod_id] = sub_mod
+		
+		# Who is Attacker and Defender when Mover / Blocker doesn't match winner / loser
+		
+		damage_mods.merge(loser.get_damage_mods())
+		damage_mods.merge(winner.get_damage_mods())
+	
+		# Calculate Damage
+		damage_event = DamageHelper.roll_for_damage(damage_data, winner, loser, source_tag_chain, damage_mods)
+		
+		# Apply damage 
+		loser.stats.apply_damage(damage_event.final_damage)
+		damage_event.was_applied = true
+		
+		var damage_effect = damage_data.get("DamageVfxKey", "Blunt_DamageEffect")
+		var damage_effect_data = damage_data.get("DamageVfxData", {})
+		damage_effect_data['DamageTextType'] = FlashTextController.FlashTextType.DOT_Dmg
+		damage_effect_data['SourceActorId'] = winner.Id
+		damage_effect_data['DamageNumber'] = 0 - damage_event.final_damage
+		VfxHelper.create_damage_effect(loser, damage_effect, damage_effect_data)
+		
+	# Clear Temp Stat Mods from Actors
+	for actor:BaseActor in all_unique_actors:
+		actor.stats.clear_temp_stat_mods()
+	
+	printerr("And %s won" % [winner.details.display_name])
+	if damage_event:
+		print(damage_event.dictialize_self())
+	
+	return CollisionEvent.new(moving_actor, blocking_actor, winner, damage_event, attack_mods)

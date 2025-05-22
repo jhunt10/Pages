@@ -38,8 +38,8 @@ func _init( parent:AttackEvent,
 	
 	defender_evasion = StatHelper.get_defense_stat_for_attack_direction(defending_actor, attack_direction, StatHelper.Evasion)
 	defender_block_chance = (StatHelper.get_defense_stat_for_attack_direction(defending_actor, attack_direction, StatHelper.BlockChance) / 100.0)
-	defender_block_mod = StatHelper.get_defense_stat_for_attack_direction(defending_actor, attack_direction, StatHelper.BlockMod)
-	defender_protection = StatHelper.get_defense_stat_for_attack_direction(defending_actor, attack_direction, StatHelper.Protection)
+	defender_block_mod = defending_actor.stats.get_stat(StatHelper.BlockMod, 0) #StatHelper.get_defense_stat_for_attack_direction(defending_actor, attack_direction, StatHelper.BlockMod)
+	defender_protection = defending_actor.stats.get_stat(StatHelper.Protection, 0) #StatHelper.get_defense_stat_for_attack_direction(defending_actor, attack_direction, StatHelper.Protection)
 
 
 func dictialize_self()->Dictionary:
