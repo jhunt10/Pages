@@ -193,12 +193,60 @@
         }
     },
     {
+        "ItemKey": "UnMovable_PageItem",
+        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
+        "CanStack": true,
+        "Details": {
+            "Description": "You stand your ground, even against more massive foes.\n\nAt the start of your turn, gain @@#EftData:NestedEffectData:Name@@.\n\n@@#EftData:NestedEffectData:Description@@",
+            "DisplayName": "Immoveable",
+            "LargeIcon": "Sprites/Unmovable.png",
+            "SmallIcon": "Sprites/Unmovable.png",
+            "SnippetDesc": "Add STR to MAS until you Move.",
+            "Tags": [
+                "Passive", "Effect"
+            ]
+        },
+        "ItemDetails": {
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "PageDetails": {
+            "EffectData": {
+                "EffectKey": "Unmoveable_Effect"
+            }
+        }
+    },
+    {
+        "ItemKey": "UnStopable_PageItem",
+        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
+        "CanStack": true,
+        "Details": {
+            "Description": "You push forward, even against more massive foes.\n\nOn Move, gain @@#EftData:NestedEffectData:Name@@ until then end of Turn.\n\n@@#EftData:NestedEffectData:Description@@",
+            "DisplayName": "Unstoppable",
+            "LargeIcon": "Sprites/Unstoppable.png",
+            "SmallIcon": "Sprites/Unstoppable.png",
+            "SnippetDesc": "Add STR to MAS on Move.",
+            "Tags": [
+                "Passive", "Effect"
+            ]
+        },
+        "ItemDetails": {
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "PageDetails": {
+            "EffectData": {
+                "EffectKey": "UnStoppable_Effect"
+            }
+        }
+    },
+    {
         "ItemKey": "ShieldTraining_PageItem",
         "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
         "CanStack": true,
         "Details": {
             "Description": "Formal training allows you to use a Shield to full effect.\n\n@@#StatMod:BlockModMod@@",
-            "DisplayName": "Shield Trainging",
+            "DisplayName": "Shield Training",
             "LargeIcon": "Sprites/ShieldTraining.png",
             "SmallIcon": "Sprites/ShieldTraining.png",
             "SnippetDesc": "Improve Block Mod",

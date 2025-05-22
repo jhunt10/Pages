@@ -51,6 +51,9 @@ static func handle_movement(game_state:GameStateData, moving_actor:BaseActor,
 		game_state.set_actor_pos(moving_actor, actor_pos, simulated)
 		return false
 	
+	if not simulated:
+		moving_actor.effects.trigger_before_actor_moved(actor_pos, new_pos, {"MoveType":move_type}, game_state)
+	
 	# Get actor in same z layer as where we are going
 	var occupying_actors:Array = game_state.get_actors_at_pos(Vector2i(new_pos.x, new_pos.y))
 	var blocking_actor:BaseActor = null
@@ -80,6 +83,7 @@ static func handle_movement(game_state:GameStateData, moving_actor:BaseActor,
 						var blocking_node:BaseActorNode = CombatRootControl.Instance.MapController.actor_nodes.get(blocking_actor.Id)
 						var mover_node:BaseActorNode = CombatRootControl.Instance.MapController.actor_nodes.get(moving_actor.Id)
 						blocking_node.set_move_destination(push_res, 24, false, mover_node.movement_speed)
+					handle_movement(game_state, blocking_actor, relative_movement, "Push", simulated)
 					game_state.set_actor_pos(blocking_actor, push_res, simulated)
 		else:
 			if LOGGING: print("\t\tPush Failed")

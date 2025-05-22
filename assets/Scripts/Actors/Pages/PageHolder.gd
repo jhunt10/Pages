@@ -12,7 +12,7 @@ func _debug_name()->String:
 
 func _init(actor) -> void:
 	super(actor)
-	self._actor.effacts_changed.connect(validate_items)
+	#self._actor.effacts_changed.connect(validate_items)
 
 func _load_slots_sets_data()->Array:
 	if LOGGING: print("--Page Slots Loading" )
@@ -51,7 +51,8 @@ func _on_item_loaded(item:BaseItem):
 		return
 	var effect_def = page.get_effect_def()
 	if effect_def:
-		var new_effect = _actor.effects.add_effect(page, page.get_load_val("EffectKey"), effect_def, null, '', true)
+		var effect_key = effect_def.get("EffectKey")
+		var new_effect = EffectHelper.create_effect(_actor, page, effect_key, effect_def)
 		item_id_to_effect_id[item.Id] = new_effect.Id
 
 func set_page_que_item(page_que:BaseQueEquipment):
@@ -63,13 +64,22 @@ func set_page_que_item(page_que:BaseQueEquipment):
 
 func validate_items():
 	super()
-	#for page in list_items():
-		#var effect_def = page.get_effect_def()
-		#if effect_def:
-			#var new_effect = _actor.effects.add_effect(page, page.get_load_val("EffectKey"), effect_def, null)
-			#item_id_to_effect_id[page.Id] = new_effect.Id
 	class_page_changed.emit()
 
+func build_effects():
+	for page_id in item_id_to_effect_id.keys():
+		var effect_id = item_id_to_effect_id[page_id]
+		if not _actor.effects.has_effect(effect_id):
+			item_id_to_effect_id.erase(page_id)
+	for page in list_items():
+		var effect_def = page.get_effect_def()
+		if effect_def:
+			var existing_id = item_id_to_effect_id.get(page.Id)
+			if existing_id:
+				continue
+			var effect_key = effect_def.get("EffectKey")
+			var new_effect = EffectHelper.create_effect(_actor, page, effect_key, effect_def, null, '', true)
+			item_id_to_effect_id[page.Id] = new_effect.Id
 
 func get_tags_added_to_actor()->Array:
 	var out_list = []
@@ -120,6 +130,7 @@ func _on_item_added_to_slot(item:BaseItem, index:int):
 		return
 	var effect_def = page.get_effect_def()
 	if effect_def:
-		var new_effect = _actor.effects.add_effect(page, page.get_load_val("EffectKey"), effect_def, null)
+		var effect_key = effect_def.get("EffectKey")
+		var new_effect = EffectHelper.create_effect(_actor, page, effect_key, effect_def)
 		item_id_to_effect_id[item.Id] = new_effect.Id
 	class_page_changed.emit()

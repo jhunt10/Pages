@@ -6,11 +6,13 @@ signal effect_ended
 
 enum EffectTriggers { 
 	OnCreate, OnDurationEnds,
+	OnCombatStart, OnCombatEnd,
 	OnTurnStart, OnTurnEnd, 
 	OnActionStart, OnActionEnd, 
 	OnGapTurnStart, OnGapTurnEnd,
 	OnRoundStart, OnRoundEnd,
-	OnMove, OnDamageTaken, OnDamagDealt,
+	PreMove, PostMove, OnCollision,
+	OnDamageTaken, OnDamagDealt,
 	OnAttacking_PreAttackRoll, OnAttacking_PostAttackRoll, OnAttacking_PostEffectRoll, OnAttacking_PostDamageRoll, OnAttacking_AfterAttack,
 	OnDefending_PreAttackRoll, OnDefending_PostAttackRoll, OnDefending_PostEffectRoll, OnDefending_PostDamageRoll, OnDefending_AfterAttack,
 	OnDeath, OnKill,
@@ -19,8 +21,9 @@ enum EffectTriggers {
 
 ## Triggers which require additional information. They have thier own methods and can not be called from trigger_effect()
 const TRIGGERS_WITH_ADDITIONAL_DATA = [
-	EffectTriggers.OnMove, 
-	EffectTriggers.OnDamagDealt, 
+	EffectTriggers.PreMove, 
+	EffectTriggers.PostMove, 
+	EffectTriggers.OnCollision,
 	EffectTriggers.OnDamageTaken, 
 	EffectTriggers.OnKill,
 	EffectTriggers.OnAttacking_PreAttackRoll, EffectTriggers.OnAttacking_PostAttackRoll,
@@ -37,6 +40,9 @@ var Id:String:
 	get: return self._id
 var EffectKey:String:
 	get: return self._key
+
+var effect_details:Dictionary:
+	get: return get_load_val("EffectDetails", {})
 
 # Triggers added by the system an not config, like OnTurnEnds for TurnDuration
 var system_triggers:Array = []
@@ -98,9 +104,9 @@ func get_source_actor()->BaseActor:
 		return null
 
 func is_bad()->bool:
-	return get_load_val("IsBad", false)
+	return effect_details.get("IsBad", false)
 func is_good()->bool:
-	return get_load_val("IsGood", false)
+	return effect_details.get("IsGood", false)
 
 func get_effected_actor()->BaseActor:
 	var actor_id = get_load_val("EffectedActorId", null)
@@ -110,13 +116,16 @@ func get_effected_actor()->BaseActor:
 	return ActorLibrary.get_actor(actor_id)
 
 func show_in_hud()->bool:
-	return get_load_val("ShowInHud", false)
+	return effect_details.get("ShowInHud", false)
 
 func show_counter()->bool:
-	return get_load_val("ShowCounter", false)
+	return effect_details.get("ShowCounter", false)
+## Will be deleted after combat
+func delete_after_combat()->bool:
+	return effect_details.get("DeleteAfterCombat", false)
 
 func is_instant()->bool:
-	return get_load_val("IsInstant", false)
+	return effect_details.get("IsInstant", false)
 
 func get_small_icon():
 	return SpriteCache.get_sprite(details.small_icon_path)
@@ -253,12 +262,25 @@ func trigger_effect(trigger:EffectTriggers, game_state:GameStateData):
 		if actor:
 			actor.effects.remove_effect(self)
 
-func trigger_on_move(game_state:GameStateData, old_pos:MapPos, new_pos:MapPos, move_type:String, moved_by_actor:BaseActor):
-	for sub_effect_key in _triggers_to_sub_effect_keys.get(EffectTriggers.OnMove, []):
+func trigger_pre_move(game_state:GameStateData, old_pos:MapPos, new_pos:MapPos, move_type:String, moved_by_actor:BaseActor):
+	for sub_effect_key in _triggers_to_sub_effect_keys.get(EffectTriggers.PreMove, []):
 		var sub_effect_data = _sub_effects_data[sub_effect_key]
 		var sub_effect = _get_sub_effect_script(sub_effect_key)
 		if sub_effect:
-			sub_effect.on_move(self, sub_effect_data, game_state, old_pos, new_pos, move_type, moved_by_actor)
+			sub_effect.before_move(self, sub_effect_data, game_state, old_pos, new_pos, move_type, moved_by_actor)
+func trigger_post_move(game_state:GameStateData, old_pos:MapPos, new_pos:MapPos, move_type:String, moved_by_actor:BaseActor):
+	for sub_effect_key in _triggers_to_sub_effect_keys.get(EffectTriggers.PostMove, []):
+		var sub_effect_data = _sub_effects_data[sub_effect_key]
+		var sub_effect = _get_sub_effect_script(sub_effect_key)
+		if sub_effect:
+			sub_effect.after_move(self, sub_effect_data, game_state, old_pos, new_pos, move_type, moved_by_actor)
+func trigger_collision(game_state:GameStateData, collision_event:CollisionEvent):
+	for sub_effect_key in _triggers_to_sub_effect_keys.get(EffectTriggers.PostMove, []):
+		var sub_effect_data = _sub_effects_data[sub_effect_key]
+		var sub_effect = _get_sub_effect_script(sub_effect_key)
+		if sub_effect:
+			sub_effect.on_collision(self, sub_effect_data, collision_event, game_state)
+
 
 func trigger_on_damage_taken(game_state:GameStateData, damage_event:DamageEvent):
 	for sub_effect_key in _triggers_to_sub_effect_keys.get(EffectTriggers.OnDamageTaken, []):

@@ -39,7 +39,7 @@ static func purge_effects():
 
 static func create_effect(source, key:String, actor:BaseActor, data:Dictionary, force_id:String='')->BaseEffect:
 	if not EffectHelper.is_creating_effect:
-		printerr("\n\nDepreciated: Effect created outside of EffectHelper!\n\n")
+		printerr("\n\nDepreciated: Effect created outside of EffectHelper! Use EffectHelper.create_effect instead.\n\n")
 	print("Creating Effect: %s on actor %s" %[key, actor.Id])
 	var effect_data = data
 	if not effect_data.get("BeenMerged", false):
@@ -70,8 +70,11 @@ static func create_effect(source, key:String, actor:BaseActor, data:Dictionary, 
 		printerr("EffectLibrary.create_effect: Unknown source type: %s" % [source])
 		return null
 	# Make Id Unique to actor
-	if force_id == '': force_id = key + str(ResourceUID.create_id())
-	var effect_id = force_id + ":" + actor.Id
+	if force_id == '': 
+		force_id = key + str(ResourceUID.create_id())
+	var effect_id = force_id
+	if not effect_id.ends_with(":" + actor.Id):
+		effect_id += ":" + actor.Id
 	var effect:BaseEffect = Instance.create_object(key, effect_id, effect_data)
 	if !effect:
 		printerr("EffectLibrary.create_effect: Failed to make effect '%s'." % [key])

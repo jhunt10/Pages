@@ -24,14 +24,18 @@ func on_combat_start():
 		CombatRootControl.Instance.QueController.end_of_turn_with_state.connect(_on_turn_end)
 		CombatRootControl.Instance.QueController.start_of_round_with_state.connect(_on_round_start)
 		CombatRootControl.Instance.QueController.end_of_round_with_state.connect(_on_round_end)
+		self._trigger_effects(BaseEffect.EffectTriggers.OnCombatStart, CombatRootControl.Instance.GameState)
 	else:
 		printerr("EffectHolder.on_combat_start: No CombatRootControl found")
+
+func on_combat_end(game_state):
+	self._trigger_effects(BaseEffect.EffectTriggers.OnCombatEnd, game_state)
 
 # Delete all temorary effects that only apply durring combat
 func purge_combat_efffects():
 	for effect_key in _effects.keys():
 		var effect:BaseEffect = _effects.get(effect_key)
-		if effect.RemainingDuration > 0:
+		if effect.RemainingDuration > 0 or effect.delete_after_combat():
 			remove_effect(effect)
 
 func add_effect(source, effect_key:String, effect_data:Dictionary, game_state:GameStateData=null, force_id:String='', suppress_signals:bool = false)->BaseEffect:
@@ -67,9 +71,13 @@ func get_tags_added_to_actor()->Array:
 		
 
 func has_effect(effect_id:String)->bool:
+	if not effect_id.ends_with(":"+_actor.Id):
+		effect_id += ":"+_actor.Id
 	return _effects.keys().has(effect_id)
 
 func get_effect(effect_id:String)->BaseEffect:
+	if not effect_id.ends_with(":"+_actor.Id):
+		effect_id += ":"+_actor.Id
 	if _effects.keys().has(effect_id):
 		return _effects[effect_id]
 	return null
@@ -273,10 +281,20 @@ func _on_round_start(game_state:GameStateData):
 func _on_round_end(game_state:GameStateData):
 	_trigger_effects(BaseEffect.EffectTriggers.OnRoundEnd, game_state)
 		
-func _on_actor_moved(old_pos:MapPos, new_pos:MapPos, move_data:Dictionary):
-	for id in _triggers_to_effect_ids[BaseEffect.EffectTriggers.OnMove]:
-		_effects[id].trigger_on_move(CombatRootControl.Instance.GameState, old_pos, new_pos, move_data.get("MoveType"), move_data.get("MovedBy"))
+func trigger_before_actor_moved(old_pos:MapPos, new_pos:MapPos, move_data:Dictionary, game_stat:GameStateData):
+	for id in _triggers_to_effect_ids[BaseEffect.EffectTriggers.PreMove]:
+		_effects[id].trigger_pre_move(game_stat, old_pos, new_pos, move_data.get("MoveType"), move_data.get("MovedBy"))
 	
+func _on_actor_moved(old_pos:MapPos, new_pos:MapPos, move_data:Dictionary):
+	for id in _triggers_to_effect_ids[BaseEffect.EffectTriggers.PostMove]:
+		_effects[id].trigger_post_move(CombatRootControl.Instance.GameState, old_pos, new_pos, move_data.get("MoveType"), move_data.get("MovedBy"))
+
+func trigger_on_collision(collision_event:CollisionEvent, game_state:GameStateData):
+	for id in _triggers_to_effect_ids[BaseEffect.EffectTriggers.PostMove]:
+		_effects[id].trigger_collision(game_state, collision_event)
+
+	
+
 func _on_actor_death():
 	if LOGGING: print("EffectHolder: Actor Death")
 	var game_state = CombatRootControl.Instance.GameState

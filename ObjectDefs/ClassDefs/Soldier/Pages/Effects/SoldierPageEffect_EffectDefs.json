@@ -43,5 +43,124 @@
         },
         "DamageDatas": {},
         "DamageMods": {}
+    },
+    {
+        "EffectKey": "StrMass_Nested_Effect",
+        "Details": {
+            "Description": "@@#StatMod:MassStatMod@@",
+            "DisplayName": "Strong Mass",
+            "LargeIcon": "Sprites/MassUp.png",
+            "SmallIcon": "Sprites/MassUp.png",
+            "SnippetDesc": "Add STR to MAS",
+            "Tags": []
+        },
+        "EffectDetails":{
+            "IsGood": true,
+            "IsBad": false,
+            "IsTemporary": true,
+            "ShowInHud": true,
+            "ShowDuration": false,
+            "CanStack": false
+        },
+        "StatMods": {
+            "MassStatMod": {
+                "ModType": "AddStat",
+                "StatName": "Mass",
+                "DepStatName": "Strength",
+                "Value": 1
+            }
+        },
+        "SubEffects": {
+            "ModStat": {
+                "StatModKeys": ["MassStatMod"],
+                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_ModStat.gd"
+            }
+        },
+        "DamageDatas": {},
+        "DamageMods": {}
+    },
+    {
+        "EffectKey": "Unmoveable_Effect",
+        "Details": {
+            "Description": "Add @@#Color:Red:STR@@ to @@#Color:Red:MAS@@ until you move.",
+            "DisplayName": "Immoveable",
+            "LargeIcon": "Sprites/MassUp.png",
+            "SmallIcon": "Sprites/MassUp.png",
+            "SnippetDesc": "Add STR to MAS",
+            "Tags": []
+        },
+        "EffectDetails":{
+            "IsGood": true,
+            "IsBad": false,
+            "IsTemporary": false,
+            "ShowInHud": false,
+            "ShowDuration": false,
+            "CanStack": false
+        },
+        "StatMods": {
+        },
+        "SubEffects": {
+            "AddChild": {
+                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/NestedEffects/SubEffect_AddNestedEffect.gd",
+                "OptionalTriggers": ["OnCombatStart","OnTurnStart"],
+                "UniqueChildEffectId": "Immoveable_StrMass_Nested",
+                "ChildEffectKey": "StrMass_Nested_Effect",
+                "ChildEffectData": {
+                    "Details": {
+                        "DisplayName": "Immoveable"
+                    }
+                },
+                "DeleteChildOnDelete": true
+            },
+            "RemoveChild":{
+                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/NestedEffects/SubEffect_RemoveNestedEffect.gd",
+                "OptionalTriggers": ["PreMove"],
+                "UniqueChildEffectId": "Immoveable_StrMass_Nested"
+            }
+        },
+        "DamageDatas": {},
+        "DamageMods": {}
+    },
+    {
+        "EffectKey": "UnStoppable_Effect",
+        "Details": {
+            "Description": "Add @@#Color:Red:STR@@ to @@#Color:Red:MAS@@ when you move.",
+            "DisplayName": "Unstopable",
+            "LargeIcon": "Sprites/MassUp.png",
+            "SmallIcon": "Sprites/MassUp.png",
+            "SnippetDesc": "Add STR to MAS",
+            "Tags": []
+        },
+        "EffectDetails":{
+            "IsGood": true,
+            "IsBad": false,
+            "IsTemporary": false,
+            "ShowInHud": false,
+            "ShowDuration": false,
+            "CanStack": false
+        },
+        "StatMods": {
+        },
+        "SubEffects": {
+            "AddChild": {
+                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/NestedEffects/SubEffect_AddNestedEffect.gd",
+                "OptionalTriggers": ["PreMove"],
+                "UniqueChildEffectId": "ImStoppable_StrMass_Nested",
+                "ChildEffectKey": "StrMass_Nested_Effect",
+                "ChildEffectData": {
+                    "Details": {
+                        "DisplayName": "Unstopable"
+                    }
+                },
+                "DeleteChildOnDelete": true
+            },
+            "RemoveChild":{
+                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/NestedEffects/SubEffect_RemoveNestedEffect.gd",
+                "OptionalTriggers": ["OnTurnEnd"],
+                "UniqueChildEffectId": "ImStoppable_StrMass_Nested"
+            }
+        },
+        "DamageDatas": {},
+        "DamageMods": {}
     }
 ]

@@ -661,8 +661,12 @@ static func handle_colision(
 	for actor:BaseActor in all_unique_actors:
 		actor.stats.clear_temp_stat_mods()
 	
+	
 	printerr("And %s won" % [winner.details.display_name])
 	if damage_event:
 		print(damage_event.dictialize_self())
 	
-	return CollisionEvent.new(moving_actor, blocking_actor, winner, damage_event, attack_mods)
+	var event = CollisionEvent.new(moving_actor, blocking_actor, winner, damage_event, attack_mods)
+	winner.effects.trigger_on_collision(event, game_state)
+	loser.effects.trigger_on_collision(event, game_state)
+	return event

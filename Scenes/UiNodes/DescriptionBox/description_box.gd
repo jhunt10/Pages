@@ -116,7 +116,11 @@ func _build_bbcode_array(object_def:Dictionary, object_inst:BaseLoadObject, acto
 					else:
 						out_line += "[color=#460000]" + sub_line + "[/color]"
 			'#EftData':
-				var effect_data = object_def.get("EffectDatas", {}).get(sub_tokens[1], null)
+				var effect_data = {}
+				if object_def.has("EffectDatas"):
+					effect_data = object_def.get("EffectDatas", {}).get(sub_tokens[1], null)
+				elif object_def.has("PageDetails"):
+					effect_data = object_def['PageDetails'].get("EffectData", null)
 				if not effect_data:
 					continue
 				if sub_tokens[2] == 'AplChc':

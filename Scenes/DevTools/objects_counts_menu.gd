@@ -48,6 +48,9 @@ func _on_lsit_selected(index:int):
 	if index == 1:
 		for item_id in ItemLibrary.Instance._loaded_objects.keys():
 			add_label(item_id)
+	if index == 2:
+		for item_id in EffectLibrary.Instance._loaded_objects.keys():
+			add_label(item_id)
 
 func add_label(text):
 	var new_label = Label.new()

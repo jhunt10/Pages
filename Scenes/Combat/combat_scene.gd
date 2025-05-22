@@ -349,6 +349,7 @@ func trigger_end_condition(victory:bool):
 
 func cleanup_combat():
 	for actor:BaseActor in GameState.list_actors(true):
+		actor.effects.on_combat_end(GameState)
 		if actor.is_player:
 			actor.effects.purge_combat_efffects()
 			actor.Que.clear_que()

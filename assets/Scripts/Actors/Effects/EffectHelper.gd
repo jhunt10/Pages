@@ -24,10 +24,21 @@ static func create_effect(
 		
 	
 	var effect_def = EffectLibrary.get_merged_effect_def(effect_key, effect_data)
+	var effect_details = effect_def.get("EffectDetails", {})
 	var effect_potency = effect_def.get("AppliedPotency", 1)
 	
+	var can_stack = effect_details.get("CanStack", true)
+	if not can_stack:
+		if force_id == '':
+			force_id = effect_key + ":" + target.Id
+		var existing = target.effects.get_effect(force_id)
+		if existing:
+			existing.merge_new_duplicate_effect_data(source, effect_data)
+			return existing
+	
+	
 	# Check and handle Limited Effect logic
-	var limited_effect_type_str = effect_def.get("LimitedEffectType", "None")
+	var limited_effect_type_str = effect_details.get("LimitedEffectType", "None")
 	var limited_effect_type = LimitedEffectTypes.get(limited_effect_type_str)
 	if limited_effect_type:
 		if not source is BaseActor:

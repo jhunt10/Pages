@@ -1,6 +1,6 @@
 class_name BaseSubEffect
 
-enum SubEffectPropTypes {Triggers, StatModKey, DamageModKey, DamageKey, SubEffectKey, EnumVal, StringVal, IntVal}
+enum SubEffectPropTypes {Triggers, StatModKey, DamageModKey, DamageKey, SubEffectKey, EnumVal, StringVal, IntVal, DictVal, BoolVal}
 
 # Returns a Dictionary of {Property Name, Property Type} for what properties this subeffect
 # 	exspects to find in it's subeffect_data (Mostly for Effect Editor)
@@ -95,10 +95,18 @@ func on_defending_after_attack(_effect:BaseEffect, _subeffect_data:Dictionary, _
 
 
 
-func on_move(_effect:BaseEffect, _subeffect_data:Dictionary,
+func before_move(_effect:BaseEffect, _subeffect_data:Dictionary,
 			_game_state:GameStateData, _old_pos:MapPos, _new_pos:MapPos, _move_type:String, _moved_by:BaseActor):
-	on_effect_trigger(_effect, _subeffect_data, BaseEffect.EffectTriggers.OnMove, _game_state)
+	on_effect_trigger(_effect, _subeffect_data, BaseEffect.EffectTriggers.PostMove, _game_state)
 	pass
+
+func after_move(_effect:BaseEffect, _subeffect_data:Dictionary,
+			_game_state:GameStateData, _old_pos:MapPos, _new_pos:MapPos, _move_type:String, _moved_by:BaseActor):
+	on_effect_trigger(_effect, _subeffect_data, BaseEffect.EffectTriggers.PostMove, _game_state)
+	pass
+
+func on_collision(_effect:BaseEffect, _subeffect_data:Dictionary, collision_event:CollisionEvent, _game_state:GameStateData):
+	on_effect_trigger(_effect, _subeffect_data, BaseEffect.EffectTriggers.OnCollision, _game_state)
 
 func on_use_item(_effect:BaseEffect, _subeffect_data:Dictionary,
 				_game_state:GameStateData, _item, _target):

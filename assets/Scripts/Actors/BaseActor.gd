@@ -103,24 +103,26 @@ func get_tags():
 			tag_list.append(added_tag)
 	return tag_list
 
-func post_creation():
-	suppress_equipment_changed = true
-	equipment.load_saved_items()
-	self.equipment_changed.emit()
-	
-	items.load_saved_items()
-	items.set_bag_item(equipment.get_bag_equipment())
-	
-	pages.load_saved_items()
-	pages.set_page_que_item(equipment.get_que_equipment())
-	
-	equipment.validate_items()
-	items.validate_items()
-	pages.validate_items()
-	
-	stats.dirty_stats()
-	suppress_equipment_changed = false
-	self.equipment_changed.emit()
+# Use load_data
+#func post_creation():
+	#suppress_equipment_changed = true
+	#equipment.load_saved_items()
+	#self.equipment_changed.emit()
+	#
+	#items.load_saved_items()
+	#items.set_bag_item(equipment.get_bag_equipment())
+	#
+	#pages.load_saved_items()
+	#pages.set_page_que_item(equipment.get_que_equipment())
+	#pages.build_effects()
+	#
+	#equipment.validate_items()
+	#items.validate_items()
+	#pages.validate_items()
+	#
+	#stats.dirty_stats()
+	#suppress_equipment_changed = false
+	#self.equipment_changed.emit()
 
 func _on_stat_change():
 	stats_changed.emit()
@@ -181,6 +183,8 @@ func load_data(data:Dictionary):
 	items.load_save_data(bag_data)
 	var bag_item = equipment.get_bag_equipment()
 	items.set_bag_item(bag_item)
+	
+	pages.build_effects()
 	
 	suppress_equipment_changed = false
 	equipment.validate_items()

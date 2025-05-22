@@ -336,10 +336,12 @@ text = "Recount"
 
 [node name="OptionButton" type="OptionButton" parent="ObjectsCountsMenu/BackPatch/BoxContainer"]
 layout_mode = 2
-item_count = 2
+item_count = 3
 popup/item_0/text = "Actors"
 popup/item_1/text = "Items"
 popup/item_1/id = 1
+popup/item_2/text = "Effects"
+popup/item_2/id = 2
 
 [node name="ScrollContainer" type="ScrollContainer" parent="ObjectsCountsMenu/BackPatch/BoxContainer"]
 custom_minimum_size = Vector2(0, 200)

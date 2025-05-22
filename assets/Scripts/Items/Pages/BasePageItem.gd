@@ -51,9 +51,12 @@ func get_action()->BaseAction:
 	return null
 
 func get_effect_def():
-	var effect_key = get_load_val("EffectKey")
+	var effect_data:Dictionary = page_details.get("EffectDatas", {})
+	var effect_key = effect_data.get("EffectKey", null)
+	if !effect_key:
+		var effect_datas = effect_data
 	if effect_key:
-		return EffectLibrary.get_effect_def(effect_key)
+		return EffectLibrary.get_merged_effect_def(effect_key, effect_data)
 	return null
 
 func get_tags_added_to_actor()->Array:
