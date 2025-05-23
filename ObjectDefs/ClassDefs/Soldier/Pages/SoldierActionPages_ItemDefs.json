@@ -87,6 +87,35 @@
     },
     
     {
+        "ItemKey": "Pommel_PageItem",
+        "ActionKey": "Pommel",
+        "CanStack": true,
+        "Details": {
+            "Tags": [
+                "Tactic"
+            ]
+        },
+        "ItemDetails":
+        {
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
+        "Requirments": {
+            "ReqTags": ["Soldier"],
+            "ReqEquip": {
+                "WeaponFilters":[
+                    { 
+                        "IncludeSlots": [ "Primary"],
+                        "FallbackToUnarmed": false, 
+                        "LimitClasses": [],
+                        "LimitRangeMelee": "Melee"
+                    }
+                ]
+            }
+        }
+    },
+    {
         "ItemKey": "PowerAttack_PageItem",
         "ActionKey": "PowerAttack",
         "CanStack": true,
@@ -219,5 +248,5 @@
                 ]
             }
         }
-    },
+    }
 ]

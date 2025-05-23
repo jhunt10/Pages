@@ -1,6 +1,7 @@
 extends Control
 
 @export var close_button:Button
+@export var reload_pages_button:Button
 @export var scale_slider:Slider
 @export var loading_patch:NinePatchRect
 @export var scroll_ocntainer:ScrollContainer
@@ -29,7 +30,9 @@ func _ready() -> void:
 	scroll_ocntainer.hide()
 	loading_patch.show()
 	starting_content_scale = get_window().content_scale_factor
-	get_window().content_scale_factor = 0.5
+	reload_pages_button.pressed.connect(_reload_pages)
+	
+	#get_window().content_scale_factor = 0.5
 	#scale_slider.value_changed.connect(_on_scale_change)
 	
 #func _on_scale_change(val:float):
@@ -37,9 +40,18 @@ func _exit_tree() -> void:
 	if starting_content_scale > 0:
 		get_window().content_scale_factor = starting_content_scale
 
+func _reload_pages():
+	ActionLibrary.Instance.reload()
+	ItemLibrary.Instance.reload()
+	loaded = false
+	build_page_entires()
+
 func build_page_entires():
 	if loaded:
 		return
+	for page_entry:PageDetailsEntryContainer in page_entries.values():
+		page_entry.queue_free()
+	page_entries.clear()
 	var page_entry_scene = load("res://Scenes/Menus/PageLibraryMenu/page_details_entry_container.tscn")
 	for page:BasePageItem in get_page_items():
 		var load_path = page.get_load_path()

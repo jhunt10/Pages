@@ -99,3 +99,18 @@ func get_damage_mods()->Dictionary:
 		
 		out_dict[mod_key] = mod_data
 	return out_dict
+
+func get_attack_mods()->Dictionary:
+	var mod_datas:Dictionary = page_details.get("AttackMods", {})
+	var out_dict = {}
+	for mod_key in mod_datas.keys():
+		var mod_data = mod_datas[mod_key]
+		if mod_data.has("AttackModKey"):
+			mod_key = mod_data['AttackModKey']
+		else:
+			mod_data['AttackModKey'] = mod_key
+		if not mod_data.has("DisplayName"):
+			mod_data['DisplayName'] = self.details.display_name
+		
+		out_dict[mod_key] = mod_data
+	return out_dict

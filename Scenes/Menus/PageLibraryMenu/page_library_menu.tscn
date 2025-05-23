@@ -8,7 +8,7 @@
 [ext_resource type="Script" path="res://Scenes/Menus/PageLibraryMenu/entry_group_container.gd" id="5_1qkpm"]
 [ext_resource type="PackedScene" uid="uid://xjhbo48tdbhr" path="res://Scenes/Menus/PageLibraryMenu/page_details_entry_container.tscn" id="7_ykmfd"]
 
-[node name="PageLibraryMenu" type="Control" node_paths=PackedStringArray("close_button", "scale_slider", "loading_patch", "scroll_ocntainer", "tag_filter", "page_entries_container", "premade_page_entry", "premade_entry_group", "load_time_label")]
+[node name="PageLibraryMenu" type="Control" node_paths=PackedStringArray("close_button", "reload_pages_button", "scale_slider", "loading_patch", "scroll_ocntainer", "tag_filter", "page_entries_container", "premade_page_entry", "premade_entry_group", "load_time_label")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -17,6 +17,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_fifst")
 close_button = NodePath("VBoxContainer/NinePatchRect/HBoxContainer/CloseButton")
+reload_pages_button = NodePath("VBoxContainer/NinePatchRect/HBoxContainer/ReloadButton")
 scale_slider = NodePath("VBoxContainer/NinePatchRect/HBoxContainer/HSlider")
 loading_patch = NodePath("VBoxContainer/LoadingScreenPatch")
 scroll_ocntainer = NodePath("VBoxContainer/ScrollContainer")
@@ -69,6 +70,10 @@ script = ExtResource("4_f1xd1")
 allways_show_none = true
 no_option_text = "All"
 
+[node name="ReloadButton" type="Button" parent="VBoxContainer/NinePatchRect/HBoxContainer"]
+layout_mode = 2
+text = "Reload"
+
 [node name="TitleLabel3" type="Label" parent="VBoxContainer/NinePatchRect/HBoxContainer"]
 layout_mode = 2
 theme = ExtResource("4_4wgxq")
@@ -109,7 +114,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="EntryGroupContainer" type="Container" parent="VBoxContainer/ScrollContainer/VBoxContainer" node_paths=PackedStringArray("title_label", "entries_container", "background", "inner_container")]
-custom_minimum_size = Vector2(24, 314)
+custom_minimum_size = Vector2(24, 324)
 layout_mode = 2
 script = ExtResource("5_1qkpm")
 title_label = NodePath("EntryGroupInnerContainer/TitlerLabel")

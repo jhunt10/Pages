@@ -85,6 +85,9 @@ static func roll_for_damage(damage_data:Dictionary, attacker:BaseActor, defender
 	return damage_event
 
 static func does_damage_mod_apply(damage_mod:Dictionary, attacker:BaseActor, defender:BaseActor, damage_data:Dictionary, source_tag_chain:SourceTagChain)->bool:
+	var defender_id = defender.Id # For Debugging
+	var attacker_id = attacker.Id
+	
 	var conditions = damage_mod.get('Conditions', null)
 	var mod_source_actor = damage_mod.get('SourceActorId', null)
 	var mod_source_faction = damage_mod.get('SourceActorFaction', null)

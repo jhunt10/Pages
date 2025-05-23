@@ -188,22 +188,37 @@ func _build_bbcode_array(object_def:Dictionary, object_inst:BaseLoadObject, acto
 					mod_data = object_def.get("DamageMods",{}).get(sub_tokens[1],{})
 				elif object_def.has("PageDetails"):
 					mod_data = object_def.get("PageDetails").get("DamageMods",{}).get(sub_tokens[1],{})
-				if sub_tokens[2] == 'Value':
-					var mod_type = mod_data.get("ModType")
-					var mod_value = mod_data.get("Value")
-					if mod_type == "Scale":
-						mod_value = (mod_value-1) * 100
-						if mod_value > 0:
-							out_line +=  "[color=#460000]+" + str(mod_value) + "%[/color]"
-						else:
-							out_line +=  "[color=#460000]" + str(mod_value) + "%[/color]"
-					elif  mod_type == "Add":
-						if mod_value > 0:
-							out_line +=  "[color=#460000]+" + str(mod_value) + "[/color]"
-						else:
-							out_line +=  "[color=#460000]" + str(mod_value) + "[/color]"
-					else:
-						out_line +=  "[color=#460000]" + str(mod_value) + "[/color]"
+				out_line += _parse_damage_mod(sub_tokens[2], mod_data)
+			'#AtkMod':
+				var mod_data = {}
+				if object_def.has("AttackMods"):
+					mod_data = object_def.get("AttackMods",{}).get(sub_tokens[1],{})
+				elif object_def.has("PageDetails"):
+					mod_data = object_def.get("PageDetails").get("AttackMods",{}).get(sub_tokens[1],{})
+				if sub_tokens[2] == 'DmgMod':
+					var dmg_mod = mod_data.get("DamageMods", {}).get(sub_tokens[3], {})
+					out_line += _parse_damage_mod(sub_tokens[4], dmg_mod)
+				
 	if out_line != '':
 		out_arr.append(out_line)
 	return out_arr
+
+func _parse_damage_mod(parse_type:String, mod_data:Dictionary)->String:
+	var out_line = ''
+	if parse_type == 'Value':
+		var mod_type = mod_data.get("ModType")
+		var mod_value = mod_data.get("Value")
+		if mod_type == "Scale":
+			mod_value = (mod_value-1) * 100
+			if mod_value > 0:
+				out_line +=  "[color=#460000]+" + str(mod_value) + "%[/color]"
+			else:
+				out_line +=  "[color=#460000]" + str(mod_value) + "%[/color]"
+		elif  mod_type == "Add":
+			if mod_value > 0:
+				out_line +=  "[color=#460000]+" + str(mod_value) + "[/color]"
+			else:
+				out_line +=  "[color=#460000]" + str(mod_value) + "[/color]"
+		else:
+			out_line +=  "[color=#460000]" + str(mod_value) + "[/color]"
+	return out_line

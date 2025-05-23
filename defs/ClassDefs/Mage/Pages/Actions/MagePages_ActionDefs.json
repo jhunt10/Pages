@@ -162,7 +162,9 @@
                     "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_PayCost.gd"
                 },
                 {
-                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_AnimationFinish.gd"
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponMotionAnimation.gd",
+                    "MainHand": true,
+                    "OffHand": "Never"
                 },
                 {
                     "DamageKey": "Damage1",
@@ -174,8 +176,10 @@
             ],
             "5": [
                 {
-                    "Animation": "weapon_raise",
-                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_AnimationInTo.gd"
+                    "Animation": "Raise",
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponReadyAnimation.gd",
+                    "MainHand": true,
+                    "OffHand": "Never"
                 }
             ]
         },

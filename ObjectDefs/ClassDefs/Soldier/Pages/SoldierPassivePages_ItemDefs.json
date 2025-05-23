@@ -55,9 +55,15 @@
                     "DisplayName": "Gentle",
                     "DamageModKey": "GentleDgmMod",
                     "Conditions": {
-                        "DamageTypes": ["Crash"],
-                        "SourceFactionFilters": ["Self"],
-                        "DefenderFactionFilters": ["Ally"],
+                        "DamageTypes": [
+                            "Crash"
+                        ],
+                        "SourceFactionFilters": [
+                            "Self"
+                        ],
+                        "DefenderFactionFilters": [
+                            "Ally"
+                        ],
                         "DefenderTagFilters": [
                             {
                                 "RequireAnyTags": []
@@ -107,9 +113,15 @@
                     "DisplayName": "Rough",
                     "DamageModKey": "RoughDgmMod",
                     "Conditions": {
-                        "DamageTypes": ["Crash"],
-                        "SourceFactionFilters": ["Self"],
-                        "DefenderFactionFilters": ["Enemy"],
+                        "DamageTypes": [
+                            "Crash"
+                        ],
+                        "SourceFactionFilters": [
+                            "Self"
+                        ],
+                        "DefenderFactionFilters": [
+                            "Enemy"
+                        ],
                         "DefenderTagFilters": [
                             {
                                 "RequireAnyTags": []
@@ -203,7 +215,8 @@
             "SmallIcon": "Sprites/Unmovable.png",
             "SnippetDesc": "Add STR to MAS until you Move.",
             "Tags": [
-                "Passive", "Effect"
+                "Passive",
+                "Effect"
             ]
         },
         "ItemDetails": {
@@ -227,7 +240,8 @@
             "SmallIcon": "Sprites/Unstoppable.png",
             "SnippetDesc": "Add STR to MAS on Move.",
             "Tags": [
-                "Passive", "Effect"
+                "Passive",
+                "Effect"
             ]
         },
         "ItemDetails": {
@@ -297,6 +311,70 @@
                     "ModType": "Scale",
                     "StatName": "BlockMod",
                     "Value": 1.5
+                }
+            }
+        }
+    },
+    {
+        "ItemKey": "TakeBrunt_PageItem",
+        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
+        "CanStack": true,
+        "Details": {
+            "Description": "You are willing to sacrifice your self for the safety of your team.\n\nWhen included in the same @@#Color:Red:AOE Attack@@ you take @@#AtkMod:BruntAtkMod:DmgMod:BruntSelfDmgMod:Value@@ damage, but your @@#Color:Red:Allies@@ take @@#AtkMod:BruntAtkMod:DmgMod:BruntAllyDmgMod:Value@@",
+            "DisplayName": "Take Brunt",
+            "LargeIcon": "Sprites/TakeBrunt.png",
+            "SmallIcon": "Sprites/TakeBrunt.png",
+            "SnippetDesc": "Take most the damge from AOE",
+            "Tags": [
+                "Passive",
+                "Block",
+                "StatMod",
+                "Shared"
+            ]
+        },
+        "ItemDetails": {
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "PageDetails": {
+            "AttackMods": {
+                "BruntAtkMod": {
+                    "AttackModKey": "BruntAtkMod",
+                    "CanStack": false,
+                    "Conditions": {
+                        "AttackerFactionFilters": ["Self","Other"],
+                        "DefendersConditions": [
+                            {
+                                "RequiresAllDefenders": false,
+                                "DefenderFactionFilters": ["Ally"]
+                            },
+                            {
+                                "RequiresAllDefenders": false,
+                                "DefenderFactionFilters": ["Self"]
+                            }
+                        ],
+                        "AttackSourceTagFilters": [
+                            {
+                                "RequireAnyTags": ["Attack","AOE"]
+                            }
+                        ]
+                    },
+                    "DamageMods": {
+                        "BruntSelfDmgMod": {
+                            "Conditions": {
+                                "DefenderFactionFilters": ["Self"]
+                            },
+                            "ModType": "Scale",
+                            "Value": 1.5
+                        },
+                        "BruntAllyDmgMod": {
+                            "Conditions": {
+                                "DefenderFactionFilters": ["Ally"]
+                            },
+                            "ModType": "Scale",
+                            "Value": 0.5
+                        }
+                    }
                 }
             }
         }

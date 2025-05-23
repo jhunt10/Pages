@@ -3,16 +3,12 @@ class_name MapHelper
 static func rotate_relative_pos(pos, direction) -> Vector2i:
 	match direction:
 		0: # North
-			printerr("fhdfhsne: (%s,%s) x %s => %s" % [pos.x, pos.y, direction, Vector2i(pos.x, pos.y)])
 			return Vector2i(pos.x, pos.y)
 		1: # East
-			printerr("fhdfhsne: (%s,%s) x %s => %s" % [pos.x, pos.y, direction, Vector2i(-pos.y, pos.x)])
 			return Vector2i(-pos.y, pos.x)
 		2: # South
-			printerr("fhdfhsne: (%s,%s) x %s => %s" % [pos.x, pos.y, direction, Vector2i(-pos.x, -pos.y)])
 			return Vector2i(-pos.x, -pos.y)
 		3: # West
-			printerr("fhdfhsne: (%s,%s) x %s => %s" % [pos.x, pos.y, direction, Vector2i(pos.y, -pos.x)])
 			return Vector2i(pos.y, -pos.x)
 	return Vector2i(pos.x, pos.y)
 

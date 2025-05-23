@@ -339,6 +339,85 @@
     },
     
     {
+        "ActionKey": "Pommel",
+        "AttackDetails":
+        {
+            "AccuracyMod": 1,
+            "PotencyMod": 1
+        },
+        "Details": {
+            "Description": "Stike an enemy with the pommel of your weapon for @@#DmgData:Damage1@@.",
+            "DisplayName": "Pommel",
+            "LargeIcon": "Sprites/Pommel.png",
+            "SmallIcon": "Sprites/Pommel.png",
+            "SnippetDesc": "Stike the pommel of your weapon.",
+            "Tags": [
+                "Attack",
+                "Weapon"
+            ]
+        },
+        "MissileDatas": {},
+        "Preview": {
+            "PreviewTargetKey": "TargetParams1",
+            "PreviewDamageKey": "WeaponDamage"
+        },
+        "DamageDatas":{
+            "Damage1": {
+                "AtkPwrBase": 80,
+                "AtkPwrRange": 10,
+                "AtkStat": "PhyAttack",
+                "BaseDamage": 0,
+                "DamageVfxKey": "Blunt_DamageEffect",
+                "DamageType": "Blunt",
+                "DefenseType": "Armor"
+            }
+        },
+        "SubActions": {
+            "5": [
+                {
+                    "Animation": "Raise",
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponReadyAnimation.gd",
+                    "MainHand": true,
+                    "OffHand": "Never"
+                }
+            ],
+            "10": [
+                {
+                    "AllowAlreadyTargeted": false,
+                    "AllowAutoTarget": true,
+                    "SetTargetKey": "Target1",
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_GetTarget.gd",
+                    "TargetParamKey": "TargetParams1"
+                }
+            ],
+            "11": [
+                {
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_PayCost.gd"
+                },
+                {
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponMotionAnimation.gd",
+                    "MainHand": true,
+                    "OffHand": "Never",
+                    "AnimationSpeed": 4
+                },
+                {
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Attacks/SubAct_Attack.gd",
+                    "TargetKey": "Target1",
+                    "DamageKey": "Damage1"
+                }
+            ]
+        },
+        "TargetParams": {
+            "TargetParams1": {
+                "EffectsAllies": false,
+                "EffectsEnemies": true,
+                "LineOfSight": false,
+                "TargetArea": "[[-1,0],[-1,1],[0,1],[1,1],[1,0]]",
+                "TargetType": "Actor"
+            }
+        }
+    },
+    {
         "ActionKey": "PowerAttack",
         "AttackDetails":
         {
@@ -369,9 +448,9 @@
         "DamageDatas":{
             "WeaponDamage": {
                 "WeaponFilter": { 
-                    "IncludeSlots": [ "Primary" ],
+                    "IncludeSlots": [ "TwoHand" ],
                     "FallbackToUnarmed": false, 
-                    "LimitRangeMelee": "MatchPrimary"
+                    "LimitRangeMelee": "Melee"
                 },
                 "AtkPwrScale": 1.5
             }
