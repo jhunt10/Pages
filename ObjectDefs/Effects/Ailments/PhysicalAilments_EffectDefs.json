@@ -1,0 +1,261 @@
+[
+    {
+        "EffectKey": "AilmentBlind",
+        "Details": {
+            "Description": "-50% Accuracy and -2 Awareness.",
+            "DisplayName": "Blind",
+            "LargeIcon": "Sprites/BlindIcon.png",
+            "SmallIcon": "Sprites/BlindIcon.png",
+            "SnippetDesc": "-50% Accuracy and -2 Awareness",
+            "Tags": ["Ailment", "Phy"]
+        },
+        "EffectDetails":{
+            "IsGood": false,
+            "IsBad": true,
+            "DeleteAfterCombat": true,
+            "ShowInHud": true,
+            "ShowCounter": true,
+            "CanStack": false,
+            "AddTagsToActor": ["Blinded"],
+            "DurationData":{
+                "BaseDuration":1,
+                "DurationType": "TurnEnd"
+            }
+        },
+        "StatMods": {
+            "BlindAccMod": {
+                "ModType": "Scale",
+                "StatName": "Accuracy",
+                "Value": 0.5
+            },
+            "BlindAwrMod": {
+                "ModType": "Add",
+                "StatName": "Awareness",
+                "Value": -2
+            }
+        },
+        "SubEffects": {
+            "Duration": {
+                "DurationType": "TurnEnd",
+                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_Duration.gd"
+            },
+            "ApplyStatMod": {
+                "AllStatMods": true,
+                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_ModStat.gd"
+            }
+        }
+    },
+    {
+        "EffectKey": "AilmentBleed",
+        "Details": {
+            "Description": "Take @@#DmgData:BleedDamage@@ after each @@#Color:Red:Action@@.",
+            "DisplayName": "Bleed",
+            "LargeIcon": "Sprites/BleedIcon.png",
+            "SmallIcon": "Sprites/BleedIcon.png",
+            "SnippetDesc": "Lose 3-5% Max Health after each Action",
+            "Tags": ["Ailment", "Phy", "DOT"]
+        },
+        "EffectDetails":{
+            "IsGood": false,
+            "IsBad": true,
+            "DeleteAfterCombat": true,
+            "ShowInHud": true,
+            "ShowCounter": true,
+            "CanStack": false,
+            "AddTagsToActor": ["Bleeding"],
+            "DurationData":{
+                "BaseDuration":1,
+                "DurationType": "TurnEnd"
+            }
+        },
+        "StatMods": {
+        },
+        "DamageDatas": {
+            "BleedDamage": {
+                "AtkStat": "Percent:HP",
+                "AtkPwrBase": 4,
+                "AtkPwrRange": 1,
+                "AtkPwrScale": 1,
+                "DefenseType": "None",
+                "DamageType": "RAW"
+            }
+        },
+        "SubEffects": {
+            "Duration": {
+                "DurationType": "TurnEnd",
+                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_Duration.gd"
+            },
+            "ApplyDamage": {
+                "DamageKey": "DamageData1",
+                "OptionalTriggers": [
+                    "OnActionEnd"
+                ],
+                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_ApplyDamage.gd"
+            }
+        }
+    },
+    {
+        "EffectKey": "AilmentDazed",
+        "Details": {
+            "Description": "@@#StatMod:MultiMods:-50% to most Stats@@, and can not @@#Color:Red:Block@@ or @@#Color:Red:Evade@@.\nLasts for @@#Color:Red:1 Turn@@ and can only apply @@#Color:Red:Once per Round@@.",
+            "DisplayName": "Dazed",
+            "LargeIcon": "Sprites/DazedIcon.png",
+            "SmallIcon": "Sprites/DazedIcon.png",
+            "SnippetDesc": "Servery Reduce most stats and can't React. ",
+            "Tags": ["Ailment", "Phy"]
+        },
+        "EffectDetails":{
+            "IsGood": false,
+            "IsBad": true,
+            "DeleteAfterCombat": true,
+            "ShowInHud": true,
+            "ShowCounter": true,
+            "CanStack": false,
+            "AddTagsToActor": ["Dazed"],
+            "DurationData":{
+                "BaseDuration":1,
+                "DurationType": "TurnEnd"
+            }
+        },
+        "StatMods": {
+            "SpeedMod": {
+                "ModType": "Scale",
+                "StatName": "Speed",
+                "Value": 0.5
+            },
+            "PhyAtkMod": {
+                "ModType": "Scale",
+                "StatName": "PhyAttack",
+                "Value": 0.5
+            },
+            "MagAtkMod": {
+                "ModType": "Scale",
+                "StatName": "MagAttack",
+                "Value": 0.5
+            },
+            "AccMod": {
+                "ModType": "Scale",
+                "StatName": "Accuracy",
+                "Value": 0.5
+            },
+            "PotencyMod": {
+                "ModType": "Scale",
+                "StatName": "Potency",
+                "Value": 0.5
+            },
+            "EvasionMod": {
+                "ModType": "Scale",
+                "StatName": "Evasion",
+                "Value": 0.5
+            },
+            "BlockChanceMod": {
+                "ModType": "Scale",
+                "StatName": "BlockChance",
+                "Value": 0.5
+            }
+        },
+        "DamageDatas": {
+        },
+        "SubEffects": {
+            "Duration": {
+                "DurationType": "TurnEnd",
+                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_Duration.gd"
+            },
+            "ApplyDamage": {
+                "DamageKey": "DamageData1",
+                "OptionalTriggers": [
+                    "OnActionEnd"
+                ],
+                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_ApplyDamage.gd"
+            }
+        }
+    },
+    {
+        "EffectKey": "AilmentDazed_Immune",
+        "Details": {
+            "Description": "You were @@#Color:Blue:Dazed@@ once this @@#Color:Red:Round@@ and are now immune until @@#Color:Red:End of Round@@ .",
+            "DisplayName": "Daze Immune",
+            "LargeIcon": "Sprites/DazedIcon.png",
+            "SmallIcon": "Sprites/DazedIcon.png",
+            "SnippetDesc": "Immune to Dazed until End of Round.",
+            "Tags": ["Ailment", "Phy"]
+        },
+        "EffectDetails":{
+            "IsGood": true,
+            "IsBad": false,
+            "DeleteAfterCombat": true,
+            "ShowInHud": true,
+            "ShowCounter": true,
+            "CanStack": false,
+            "AddTagsToActor": ["DazeImmune"],
+            "AddEffectImmunity": ["AilmentDazed"],
+            "DurationData":{
+                "BaseDuration":1,
+                "DurationType": "RoundEnd"
+            }
+        },
+        "StatMods": {
+        },
+        "DamageDatas": {
+        },
+        "SubEffects": {
+            "Duration": {
+                "DurationType": "TurnEnd",
+                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_Duration.gd"
+            },
+            "ApplyDamage": {
+                "DamageKey": "DamageData1",
+                "OptionalTriggers": [
+                    "OnActionEnd"
+                ],
+                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_ApplyDamage.gd"
+            }
+        }
+    },
+    {
+        "EffectKey": "AilmentGreased",
+        "Details": {
+            "Description": "@@#StatMod:MassMod@@ and vulerable to other Magic Aliments.",
+            "DisplayName": "Greased",
+            "LargeIcon": "Sprites/GreasedIcon.png",
+            "SmallIcon": "Sprites/DazedGreasedIconIcon.png",
+            "SnippetDesc": "Slippery, conductive, easy to refrigerate, and highly flamable!",
+            "Tags": ["Ailment", "Phy"]
+        },
+        "EffectDetails":{
+            "IsGood": false,
+            "IsBad": true,
+            "DeleteAfterCombat": true,
+            "ShowInHud": true,
+            "ShowCounter": true,
+            "CanStack": false,
+            "AddTagsToActor": ["Greased"],
+            "DurationData":{
+                "BaseDuration":1,
+                "DurationType": "TurnEnd"
+            }
+        },
+        "StatMods": {
+            "MassMod": {
+                "ModType": "Scale",
+                "StatName": "Mass",
+                "Value": 0.30
+            }
+        },
+        "DamageDatas": {
+        },
+        "SubEffects": {
+            "Duration": {
+                "DurationType": "TurnEnd",
+                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_Duration.gd"
+            },
+            "ApplyDamage": {
+                "DamageKey": "DamageData1",
+                "OptionalTriggers": [
+                    "OnActionEnd"
+                ],
+                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_ApplyDamage.gd"
+            }
+        }
+    }
+]

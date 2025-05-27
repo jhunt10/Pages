@@ -59,14 +59,22 @@ var StatModDatas:Dictionary:
 	get: return get_load_val("StatMods", {})
 var DamageModDatas:Dictionary:
 	get: return get_load_val("DamageMods", {})
+
+
+var _duration_counter:int = -1
 var RemainingDuration:int:
 	get: return _duration_counter
+var DurationBase:int:
+	get:
+		var dets = get_load_val("EffectDetails", {}) 
+		var duration_data = dets.get("DurationData", {})
+		return duration_data.get("BaseDuration", -1)
 var DurationType:String:
 	get:
-		for sub in _sub_effects_data.values():
-			if sub.has("DurationType"):
-				return sub['DurationType']
-		return ''
+		var dets = get_load_val("EffectDetails", {})
+		var duration_data = dets.get("DurationData", {})
+		var val =  duration_data.get("DurationType", '')
+		return val
 
 var source_id:String:
 	get: return get_load_val("SourceId")
@@ -83,7 +91,6 @@ var _enabled:bool = true
 var _deleted:bool = false
 var _sub_effects_data:Dictionary={}
 var _triggers_to_sub_effect_keys:Dictionary={}
-var _duration_counter:int = -1
 
 # TODO: Merge with SubEffectData?
 var _cached_data:Dictionary = {}
@@ -135,6 +142,9 @@ func get_large_icon():
 func get_tags_added_to_actor()->Array:
 	return get_load_val("AddTagsToActor", [])
 
+func get_effect_immunities():
+	return get_load_val("AddEffectImmunity", [])
+
 func get_active_stat_mods()->Array:
 	var out_list = []
 	for sub_effect_key in _sub_effects_data.keys():
@@ -181,7 +191,7 @@ func get_active_attack_mods()->Dictionary:
 	return out_dict
 
 func get_limited_effect_type()->EffectHelper.LimitedEffectTypes:
-	var limited_effect_str = get_load_val("LimitedEffectType", "None")
+	var limited_effect_str = effect_details.get("LimitedEffectType", "None")
 	var key_index = EffectHelper.LimitedEffectTypes.keys().find(limited_effect_str)
 	if key_index >= 0:
 		return key_index
@@ -241,7 +251,7 @@ func merge_new_duplicate_effect_data(source, data:Dictionary):
 		var sup_sub_effect_data = _sub_effects_data[sub_effect_key]
 		var sub_effect = _get_sub_effect_script(sub_effect_key)
 		if sub_effect:
-			sub_effect.merge_new_duplicate_sub_effect_data(self, sub_effect_data, dupl_sub_effect_data)
+			sub_effect.merge_new_duplicate_sub_effect_data(self, sub_effect_data, data, dupl_sub_effect_data)
 
 func trigger_effect(trigger:EffectTriggers, game_state:GameStateData):
 	if TRIGGERS_WITH_ADDITIONAL_DATA.has(trigger):

@@ -30,7 +30,6 @@ var effects:EffectHolder
 var items:BagItemHolder
 var equipment:EquipmentHolder
 var pages:PageHolder
-
 var aggro:AggroHandler
 
 var Id : String:
@@ -38,6 +37,10 @@ var Id : String:
 var ActorKey : String:
 	get: return _key
 func get_tagable_id(): return Id
+
+var actor_details:Dictionary:
+	get:
+		return get_load_val("ActorDetails", {})
 
 var FactionIndex : int
 
@@ -273,11 +276,18 @@ func get_weapon_damage_datas(weapon_filter)->Dictionary:
 			index += 1
 	return out_dict
 
+func get_effect_immunity()->Array:
+	var immunities = actor_details.get("ImmuneToEffects", [])
+	immunities.append_array(effects.get_effect_immunities())
+	return immunities
+
 func get_targeting_mods()->Array:
 	var out_list = []
 	out_list.append_array(pages.get_targeting_mods())
 	return out_list
 
+## Returns All direct DamageMods from Effects and Pages.
+## DamageMods from Attack Mods are not included.
 func get_damage_mods()->Dictionary:
 	var out_dict = {}
 	var mods_list = []

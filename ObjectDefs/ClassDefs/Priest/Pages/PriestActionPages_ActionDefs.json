@@ -1,0 +1,142 @@
+[
+    {
+        "ActionKey": "_BaseApplyBuffSpell",
+        "AmmoData": {
+            "Cost": 4,
+            "Clip": 16,
+            "AmmoType": "Mag"
+        },
+        "AttackDetails":
+        {
+            "AccuracyMod": 1,
+            "PotencyMod": 1
+        },
+        "DamageDatas": {
+        },
+        "EffectDatas":{
+            "BuffEffect1": {
+                "EffectKey": "_BaseBlessingEffect",
+                "EffectDetails":{
+                    "DurationData":{
+                        "BaseDuration": 3
+                    }
+                }
+            }
+        },
+        "Details": {
+            "Description": "Grant @@#EftData:BuffEffect1:Name@@ to one @@#TrgParm:TargetParam1:TargetType@@ for @@#EftData:BuffEffect1:Duration@@.\n\n@@#EftData:BuffEffect1@@",
+            "DisplayName": "Apply Buff",
+            "LargeIcon": "Sprites/ICON.png",
+            "SmallIcon": "Sprites/ICON.png",
+            "SnippetDesc": "Apply @@#EftData:BuffEffect1:Name@@ for @@#EftData:BuffEffect1:Duration@@.",
+            "Tags": [
+                "Buff",
+                "Spell"
+            ]
+        },
+        "MissileDatas": {},
+        "Preview": {
+            "PreviewTargetKey": "TargetParam1"
+        },
+        "SubActions": {
+            "5": [
+                {
+                    "Animation": "Raise",
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponReadyAnimation.gd",
+                    "MainHand": true,
+                    "OffHand": "Never"
+                }
+            ],
+            "10": [
+                {
+                    "AllowAlreadyTargeted": false,
+                    "AllowAutoTarget": false,
+                    "SetTargetKey": "Target1",
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_GetTarget.gd",
+                    "TargetParamKey": "TargetParam1"
+                }
+            ],
+            "11": [
+                {
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_PayCost.gd"
+                },
+                {
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Effects/SubAct_ApplyEffect.gd",
+                    "TargetKey": "Target1",
+                    "EffectDataKey": "BuffEffect1"
+                },
+                {
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponMotionAnimation.gd",
+                    "MainHand": true,
+                    "OffHand": "Never"
+                }
+            ]
+        },
+        "TargetParams": {
+            "TargetParam1": {
+                "EffectsAllies": true,
+                "EffectsEnemies": true,
+                "LineOfSight": false,
+                "TargetArea": "[[-1,2],[0,2],[1,2],[-2,1],[-1,1],[0,1],[1,1],[2,1],[-2,0],[-1,0],[0,0],[1,0],[2,0],[-2,-1],[-1,-1],[0,-1],[1,-1],[2,-1],[-1,-2],[0,-2],[1,-2]]",
+                "TargetType": "Ally"
+            }
+        }
+    },
+    {
+        "ActionKey": "ApplyBlessing_Air",
+        "ParentKey": "_BaseApplyBuffSpell",
+        "Details": {
+            "DisplayName": "Blessing of Air",
+            "LargeIcon": "Effects/Sprites/Blessing_Air.png",
+            "SmallIcon": "Effects/Sprites/Blessing_Air.png"
+        },
+        "EffectDatas":{
+            "BuffEffect1": {
+                "EffectKey": "Blessing_Air"
+            }
+        }
+    },
+    {
+        "ActionKey": "ApplyBlessing_Earth",
+        "ParentKey": "_BaseApplyBuffSpell",
+        "Details": {
+            "DisplayName": "Blessing of Earth",
+            "LargeIcon": "Sprites/Cleanse.png",
+            "SmallIcon": "Sprites/Cleanse.png"
+        },
+        "EffectDatas":{
+            "BuffEffect1": {
+                "EffectKey": "Blessing_Earth"
+            }
+        }
+    },
+    {
+        "ActionKey": "ApplyBlessing_Fire",
+        "ParentKey": "_BaseApplyBuffSpell",
+        "Details": {
+            "DisplayName": "Blessing of Fire",
+            "LargeIcon": "Sprites/RemoveCurse.png",
+            "SmallIcon": "Sprites/RemoveCurse.png"
+        },
+        "EffectDatas":{
+            "BuffEffect1": {
+                "EffectKey": "Blessing_Fire"
+            }
+        }
+    },
+    {
+        "ActionKey": "ApplyBlessing_Water",
+        "ParentKey": "_BaseApplyBuffSpell",
+        "Details": {
+            "DisplayName": "Blessing of Water",
+            "LargeIcon": "Effects/Sprites/Blessing_Water.png",
+            "SmallIcon": "Effects/Sprites/Blessing_Water.png"
+        },
+        "EffectDatas":{
+            "BuffEffect1": {
+                "EffectKey": "Blessing_Water"
+            }
+        }
+    }
+
+]

@@ -38,27 +38,21 @@ func purge_combat_efffects():
 		if effect.RemainingDuration > 0 or effect.delete_after_combat():
 			remove_effect(effect)
 
-func add_effect(source, effect_key:String, effect_data:Dictionary, game_state:GameStateData=null, force_id:String='', suppress_signals:bool = false)->BaseEffect:
-	if _effects.keys().has(force_id):
-		return _effects[force_id]
-	var effect = EffectLibrary.create_effect(source, effect_key, _actor, effect_data, force_id)
-	if LOGGING: print("EffectHolder.add_effect: Added effect '%s' to actor '%s'." % [effect.Id, _actor.Id])
-	if not effect:
-		printerr("Failed to create effect with key '%s'." % [effect_key])
-		return null
-	# Stacking effect already existed
-	if not _effects.keys().has(effect.Id):
-		_effects[effect.Id] = effect
-		if not effect.is_instant():
-			for trigger in effect.Triggers:
-				_triggers_to_effect_ids[trigger].append(effect.Id)
-		effect.on_created(game_state)
+## Should only be called by EffectLibrary.create_effect
+func __add_new_effect(effect:BaseEffect, suppress_signals:bool = false):
+	if LOGGING: print("BaseActor.__add_new_effect: Added effect '%s' to actor '%s'." % [effect.Id, _actor.Id])
+	
+	#Should not happen. EffectHelper should check for this.
+	if _effects.keys().has(effect.Id):
+		printerr("BaseActor.__add_new_effect: Effect '%s' already exist on Actor '%s'." % [effect.Id, _actor.Id])
 		
-		if effect.is_instant():
-			self.remove_effect(effect, suppress_signals)
+	_effects[effect.Id] = effect
+	if not effect.is_instant():
+		for trigger in effect.Triggers:
+			_triggers_to_effect_ids[trigger].append(effect.Id)
+	
 	if not suppress_signals:
 		_actor.effacts_changed.emit()
-	return effect
 		
 func list_effects()->Array:
 	return _effects.values()
@@ -202,6 +196,12 @@ func list_holding_limited_effect(type:EffectHelper.LimitedEffectTypes)->Array:
 	for effect:BaseEffect in _effects.values():
 		if effect.get_limited_effect_type() == type:
 			out_list.append(effect)
+	return out_list
+
+func get_effect_immunities():
+	var out_list = []
+	for effect:BaseEffect in _effects.values():
+		out_list.append(effect.get_effect_immunities())
 	return out_list
 
 func get_damage_mods()->Dictionary:

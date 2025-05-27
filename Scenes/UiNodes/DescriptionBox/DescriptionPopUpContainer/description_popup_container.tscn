@@ -1,0 +1,52 @@
+[gd_scene load_steps=5 format=3 uid="uid://ukoix7m7xspo"]
+
+[ext_resource type="Script" path="res://Scenes/UiNodes/back_patch_container.gd" id="1_3wnk0"]
+[ext_resource type="Script" path="res://Scenes/UiNodes/DescriptionBox/DescriptionPopUpContainer/description_popup_container.gd" id="1_ghp6n"]
+[ext_resource type="Texture2D" uid="uid://io35wpu802fp" path="res://assets/Sprites/UI/BackPatches/Patch_64_12.png" id="2_4h46i"]
+[ext_resource type="Theme" uid="uid://dwinll8pgdjhc" path="res://Scenes/Themes/standard_theme.tres" id="3_rwuh1"]
+
+[node name="PopupContainer" type="Control" node_paths=PackedStringArray("back_patch", "message_box")]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_ghp6n")
+back_patch = NodePath("BackPatch")
+message_box = NodePath("BackPatch/BoxContainer/MessageBox")
+
+[node name="BackPatch" type="Container" parent="." node_paths=PackedStringArray("background", "inner_container")]
+z_index = 1
+custom_minimum_size = Vector2(47, 41)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -23.5
+offset_top = -41.0
+offset_right = 23.5
+grow_horizontal = 2
+grow_vertical = 0
+script = ExtResource("1_3wnk0")
+background = NodePath("NinePatchRect")
+inner_container = NodePath("BoxContainer")
+center_in_parent = true
+
+[node name="NinePatchRect" type="NinePatchRect" parent="BackPatch"]
+layout_mode = 2
+texture = ExtResource("2_4h46i")
+region_rect = Rect2(1, 1, 64, 64)
+patch_margin_left = 12
+patch_margin_top = 12
+patch_margin_right = 12
+patch_margin_bottom = 12
+
+[node name="BoxContainer" type="BoxContainer" parent="BackPatch"]
+layout_mode = 2
+
+[node name="MessageBox" type="RichTextLabel" parent="BackPatch/BoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_rwuh1")
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+text = "Bla"
+fit_content = true
+autowrap_mode = 0

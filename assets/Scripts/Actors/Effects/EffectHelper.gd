@@ -17,24 +17,33 @@ static func create_effect(
 		suppress_signals:bool = false
 	)->BaseEffect:
 	is_creating_effect = true
+	
 	var source_actor:BaseActor = null
 	if source is BaseActor:
 		source_actor = source
 		effect_data['AppliedPotency'] = source_actor.stats.get_stat(StatHelper.Potency, 1)
-		
+	
+	var effect_immunities = target.get_effect_immunity()
+	if effect_immunities.has(effect_key):
+		printerr("EffectHelper.create_effect: Attempted to apply '%s' to '%s' who is immune.")
+		return null
 	
 	var effect_def = EffectLibrary.get_merged_effect_def(effect_key, effect_data)
 	var effect_details = effect_def.get("EffectDetails", {})
 	var effect_potency = effect_def.get("AppliedPotency", 1)
 	
-	var can_stack = effect_details.get("CanStack", true)
-	if not can_stack:
-		if force_id == '':
+	# Build Id
+	if force_id == '':
+		if effect_details.get("CanHaveMultiple", false):
+			force_id = effect_key + str(ResourceUID.create_id()) + ":" + target.Id
+		else:
 			force_id = effect_key + ":" + target.Id
-		var existing = target.effects.get_effect(force_id)
-		if existing:
-			existing.merge_new_duplicate_effect_data(source, effect_data)
-			return existing
+	
+	# Check if effect exists
+	var existing = target.effects.get_effect(force_id)
+	if existing:
+		existing.merge_new_duplicate_effect_data(source, effect_data)
+		return existing
 	
 	
 	# Check and handle Limited Effect logic
@@ -90,12 +99,11 @@ static func create_effect(
 				var oldest_effect = EffectLibrary.get_effect(rm_count_limit_effect_id)
 				var oldest_actor = oldest_effect.get_effected_actor()
 				oldest_actor.effects.remove_effect(oldest_effect)
-		
-		
-		
 	
-	var effect = target.effects.add_effect(source, effect_key, effect_def, game_state, force_id, suppress_signals)
-	
+	var effect = EffectLibrary._create_effect(source, target, effect_key, effect_data, force_id, game_state, suppress_signals)
+	effect.on_created(game_state)
+	if effect.is_instant():
+		target.remove_effect(effect, suppress_signals)
 	
 	is_creating_effect = false
 	return effect

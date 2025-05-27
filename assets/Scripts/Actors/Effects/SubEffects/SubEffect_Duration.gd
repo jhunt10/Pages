@@ -2,8 +2,8 @@ class_name SubEffect_Duration
 extends BaseSubEffect
 
 enum DurationTypes {
-	TurnStart, TurnEnd, 
 	RoundStart, RoundEnd,
+	TurnStart, TurnEnd, 
 	ActionStart, ActionEnd,  
 	GapStart, GapEnd,
 	Trigger}
@@ -21,11 +21,13 @@ func get_prop_enum_values(key:String)->Array:
 	return []
 
 
-func merge_new_duplicate_sub_effect_data(parent_effect:BaseEffect, own_sub_effect_data:Dictionary, dup_sub_effect_data:Dictionary):
-	var base_duration = dup_sub_effect_data.get('DurationValue', -1)
-	if base_duration < 0:
-		base_duration = parent_effect.get_load_val("Duration", -1)
-	parent_effect._duration_counter = max(parent_effect._duration_counter, base_duration)
+func merge_new_duplicate_sub_effect_data(parent_effect:BaseEffect, own_sub_effect_data:Dictionary, dup_effect_data:Dictionary, dup_sub_effect_data:Dictionary):
+	var dup_duration_data = dup_effect_data.get("EffectDetails", {}).get("DurationData", {})
+	var dup_base_duration = dup_duration_data.get('DurationValue', -1)
+	var own_duration_data = parent_effect.effect_details.get("DurationData", {})
+	var own_base_duration = own_duration_data.get('DurationValue', -1)
+	var new_base_duration = max(own_base_duration, dup_base_duration)
+	parent_effect._duration_counter = max(parent_effect._duration_counter, new_base_duration)
 	pass
 
 func get_triggers(effect:BaseEffect, subeffect_data:Dictionary)->Array:
@@ -33,7 +35,7 @@ func get_triggers(effect:BaseEffect, subeffect_data:Dictionary)->Array:
 	
 	if !list.has(BaseEffect.EffectTriggers.OnCreate):
 		list.append(BaseEffect.EffectTriggers.OnCreate)
-	var duration_type = DurationTypes.get(subeffect_data['DurationType'])
+	var duration_type = DurationTypes.get(effect.DurationType)
 	if duration_type == DurationTypes.TurnStart:
 		list.append(BaseEffect.EffectTriggers.OnTurnStart)
 	if true or duration_type == DurationTypes.TurnEnd:
@@ -60,11 +62,11 @@ func on_effect_trigger(effect:BaseEffect, subeffect_data:Dictionary, trigger:Bas
 	if trigger == BaseEffect.EffectTriggers.OnCreate:
 		var duration = subeffect_data.get('DurationValue', -1)
 		if duration < 0:
-			duration = effect.get_load_val("Duration", -1)
+			duration = effect.DurationBase
 		effect._duration_counter = duration
 		return
 	#printerr("Durration For: %s Trigger: %s Value: %s" % [effect.details.display_name, BaseEffect.EffectTriggers.keys()[trigger], effect._duration_counter])
-	var duration_type = DurationTypes.get(subeffect_data['DurationType'])
+	var duration_type = DurationTypes.get(effect.DurationType)
 	if duration_type == DurationTypes.TurnStart and trigger == BaseEffect.EffectTriggers.OnTurnStart:
 		effect._duration_counter -= 1
 	if duration_type == DurationTypes.TurnEnd and trigger == BaseEffect.EffectTriggers.OnTurnEnd:

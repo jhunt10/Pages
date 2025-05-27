@@ -1,0 +1,326 @@
+[
+    {
+        "EffectKey": "AilmentBurned",
+        "Details": {
+            "Description": "Take @@#DmgData:BurnDamage@@ at the end of each @@#Color:Red:Turn@@. Damage is not reduced by Ward.",
+            "DisplayName": "Burned",
+            "LargeIcon": "Sprites/BurnedIcon.png",
+            "SmallIcon": "Sprites/BurnedIcon.png",
+            "SnippetDesc": "Take Fire Damage at the End of Turn.",
+            "Tags": ["Ailment", "Mag", "DOT", "Effect"]
+        },
+        "EffectDetails":{
+            "IsGood": false,
+            "IsBad": true,
+            "DeleteAfterCombat": true,
+            "ShowInHud": true,
+            "ShowCounter": true,
+            "CanStack": false,
+            "AddTagsToActor": ["Burned"],
+            "DurationData":{
+                "BaseDuration":1,
+                "DurationType": "TurnEnd"
+            }
+        },
+        "StatMods": {
+            "BurnedColdRes": {
+                "DisplayName": "I'M ON FIRE!",
+                "ModType": "Add",
+                "StatName": "Resistance:Cold",
+                "Value": 50
+            }
+        },
+        "SubEffects": {
+            "VfxEffect": {
+                "AilmentKey": "Burned",
+                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_AlimentVfx.gd"
+            },
+            "ApplyDamage": {
+                "DamageKey": "DamageData1",
+                "OptionalTriggers": [
+                    "OnTurnEnd"
+                ],
+                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_ApplyDamage.gd"
+            },
+            "Duration": {
+                "DurationType": "TurnEnd",
+                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_Duration.gd"
+            },
+            "RemoveChilled": {
+                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_RemoveOtherEffect.gd",
+                "RemoveEffectKeys": ["AilmentChilled", "AilmentFrozen"]
+            }
+        },
+        "ApplyStatMod": {
+            "AllStatMods": true,
+            "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_ModStat.gd"
+        },
+        "DamageDatas": {
+            "BurnDamage": {
+                "AtkStat": "Percent:HP",
+                "AtkPwrBase": 3,
+                "AtkPwrRange": 0,
+                "AtkPwrScale": 1,
+                "DefenseType": "None",
+                "DamageType": "Fire",
+                "DamageVfxKey": "SmallFire_DamageEffect",
+                "DamageVfxData":{
+                    "ShakeActor": false
+                }
+            }
+        }
+    },
+    {
+        "EffectKey": "AilmentChilled",
+        "Details": {
+            "Description": "@@#StatMod:MultiMods:-20% to most Stats@@. May Freeze if Chilled again.",
+            "DisplayName": "Chilled",
+            "LargeIcon": "Sprites/ChilledIcon.png",
+            "SmallIcon": "Sprites/ChilledIcon.png",
+            "SnippetDesc": "Reduced Stats and may Freeze if Chilled again.",
+            "Tags": ["Ailment", "Mag", "Effect"]
+        },
+        "EffectDetails":{
+            "IsGood": false,
+            "IsBad": true,
+            "DeleteAfterCombat": true,
+            "ShowInHud": true,
+            "ShowCounter": true,
+            "CanStack": false,
+            "AddTagsToActor": ["Chilled"],
+            "DurationData":{
+                "BaseDuration":1,
+                "DurationType": "TurnEnd"
+            }
+        },
+        "StatMods": {
+            "SpeedMod": {
+                "ModType": "Scale",
+                "StatName": "Speed",
+                "Value": 0.9
+            },
+            "PhyAtkMod": {
+                "ModType": "Scale",
+                "StatName": "PhyAttack",
+                "Value": 0.9
+            },
+            "MagAtkMod": {
+                "ModType": "Scale",
+                "StatName": "MagAttack",
+                "Value": 0.9
+            },
+            "AccMod": {
+                "ModType": "Scale",
+                "StatName": "Accuracy",
+                "Value": 0.9
+            },
+            "PotencyMod": {
+                "ModType": "Scale",
+                "StatName": "Potency",
+                "Value": 0.9
+            },
+            "EvasionMod": {
+                "ModType": "Scale",
+                "StatName": "Evasion",
+                "Value": 0.9
+            },
+            "BlockChanceMod": {
+                "ModType": "Scale",
+                "StatName": "BlockChance",
+                "Value": 0.9
+            }
+        },
+        "SubEffects": {
+            "VfxEffect": {
+                "AilmentKey": "Chilled",
+                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_AlimentVfx.gd"
+            },
+            "ApplyStatMod": {
+                "AllStatMods": true,
+                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_ModStat.gd"
+            },
+            "Duration": {
+                "DurationType": "TurnEnd",
+                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_Duration.gd"
+            },
+            "RemoveBurned": {
+                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_RemoveOtherEffect.gd",
+                "RemoveEffectKeys": ["AilmentBurned"]
+            }
+        }
+    },
+    {
+        "EffectKey": "AilmentFrozen",
+        "Details": {
+            "Description": "Can not take Actions. +100% Fire Resistance and -100% Blunt Resistance. Ends on any Fire Damage.",
+            "DisplayName": "Frozen",
+            "LargeIcon": "Sprites/FrozenIcon.png",
+            "SmallIcon": "Sprites/FrozenIcon.png",
+            "SnippetDesc": "Can not take Actions.",
+            "Tags": ["Ailment", "Mag", "Effect"]
+        },
+        "EffectDetails":{
+            "IsGood": false,
+            "IsBad": true,
+            "DeleteAfterCombat": true,
+            "ShowInHud": true,
+            "ShowCounter": true,
+            "CanStack": false,
+            "AddTagsToActor": ["Frozen"],
+            "DurationData":{
+                "BaseDuration":1,
+                "DurationType": "TurnEnd"
+            }
+        },
+        "StatMods": {
+            "Frozen": {
+                "DisplayName": "Frozen",
+                "ModType": "Set",
+                "StatName": "Frozen",
+                "Value": 1
+            },
+            "SpeedScale": {
+                "DisplayName": "Frozen",
+                "ModType": "Scale",
+                "StatName": "Speed",
+                "Value": 0
+            }
+        },
+        "SubEffects": {
+            "VfxEffect": {
+                "AilmentKey": "Frozen",
+                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_AlimentVfx.gd"
+            },
+            "ApplyStatMod": {
+                "AllStatMods": true,
+                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_ModStat.gd"
+            },
+            "Duration": {
+                "DurationType": "TurnEnd",
+                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_Duration.gd"
+            },
+            "RemoveChilled": {
+                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_RemoveOtherEffect.gd",
+                "RemoveEffectKeys": ["AilmentChilled", "AilmentBurned"]
+            },
+            "CancelActions": {
+                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_Freeze.gd"
+            }
+        }
+    },
+    {
+        "EffectKey": "AilmentPoisoned",
+        "DamageDatas": {
+            "DamageData1": {
+                "AtkStat": "Fixed",
+                "AtkPwrBase": 100,
+                "AtkPwrRange": 0,
+                "AtkPwrScale": 1,
+                "BaseDamage": 1,
+                "DefenseType": "None",
+                "DamageType": "Poison",
+                "DamageVfxKey": "Poison_DamageEffect",
+                "DamageVfxData":{
+                    "ShakeActor": false
+                }
+            }
+        },
+        "Details": {
+            "Description": "Take Poison Damage equal to the remaining duration at the end of each @@#Color:Red:Turn@@. Damage is not reduced by Ward.",
+            "DisplayName": "Poisoned",
+            "LargeIcon": "Sprites/PoisonedIcon.png",
+            "SmallIcon": "Sprites/PoisonedIcon.png",
+            "SnippetDesc": "Take Poison Damage at the End of Turn.",
+            "Tags": ["Ailment", "Mag", "DOT", "Effect"]
+        },
+        "EffectDetails":{
+            "IsGood": false,
+            "IsBad": true,
+            "DeleteAfterCombat": true,
+            "ShowInHud": true,
+            "ShowCounter": true,
+            "CanStack": false,
+            "AddTagsToActor": ["Poisoned"],
+            "DurationData":{
+                "BaseDuration":1,
+                "DurationType": "TurnEnd"
+            }
+        },
+        "StatMods": {
+        },
+        "SubEffects": {
+            "VfxEffect": {
+                "AilmentKey": "Poisoned",
+                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_AlimentVfx.gd"
+            },
+            "ApplyDamage": {
+                "DamageKey": "DamageData1",
+                "OptionalTriggers": [
+                    "OnTurnEnd"
+                ],
+                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_ApplyDamage.gd"
+            },
+            "Duration": {
+                "DurationType": "TurnEnd",
+                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_Duration.gd"
+            }
+        }
+    },
+    {
+        "EffectKey": "AilmentShocked",
+        "Details": {
+            "Description": "Deal @@#DmgData:ShockedDamage@@ to @@#Color:Red:Self@@ and @@#Color:Red:Adjacent Actors@@ at the end of each @@#Color:Red:Turn@@. Damage is not reduced by Ward.",
+            "DisplayName": "Shocked",
+            "LargeIcon": "Sprites/ShockedIcon.png",
+            "SmallIcon": "Sprites/ShockedIcon.png",
+            "SnippetDesc": "Deal Shock Damage to Self and Adjacent Actors at the end of Turn.",
+            "Tags": ["Ailment", "Mag", "DOT", "Effect"]
+        },
+        "EffectDetails":{
+            "IsGood": false,
+            "IsBad": true,
+            "DeleteAfterCombat": true,
+            "ShowInHud": true,
+            "ShowCounter": true,
+            "CanStack": false,
+            "AddTagsToActor": ["Shocked"],
+            "DurationData":{
+                "BaseDuration":1,
+                "DurationType": "TurnEnd"
+            }
+        },
+        "DamageDatas": {
+            "ShockedDamage": {
+                "AtkStat": "Percent:HP",
+                "AtkPwrBase": 2,
+                "AtkPwrRange": 1,
+                "AtkPwrScale": 1,
+                "DefenseType": "None",
+                "DamageType": "Shock",
+                "DamageVfxKey": "SmallLightning_DamageEffect",
+                "DamageVfxData":{
+                    "ShakeActor": false
+                }
+            }
+        },
+        "DamageMods": {},
+        "StatMods": {},
+        "SubEffects": {
+            "VfxEffect": {
+                "AilmentKey": "Shocked",
+                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_AlimentVfx.gd"
+            },
+            "ApplyDamage": {
+                "DamageKey": "DamageData1",
+                "OptionalTriggers": [
+                    "OnTurnEnd"
+                ],
+                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_ApplyDamage_Shocked.gd"
+            },
+            "Duration": {
+                "DurationType": "TurnEnd",
+                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_Duration.gd"
+            }
+        }
+    }
+]

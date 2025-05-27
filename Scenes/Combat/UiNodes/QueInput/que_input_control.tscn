@@ -17,7 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://dq2fpuokt1s5r" path="res://Scenes/Combat/UiNodes/QueDisplay/SlotBackground.png" id="19_gjejj"]
 [ext_resource type="Texture2D" uid="uid://bu1v4w3d6hau" path="res://Scenes/Combat/UiNodes/QueDisplay/FilledSlotBackground.png" id="20_k35kq"]
 
-[node name="QueInputControl" type="Control" node_paths=PackedStringArray("nodes_container", "que_display_control", "que_display_patch", "back_patch", "main_container", "page_button_prefab", "start_label", "side_start_button", "top_start_button", "page_Selection_container")]
+[node name="QueInputControl" type="Control" node_paths=PackedStringArray("_fill_button", "nodes_container", "que_display_control", "que_display_patch", "back_patch", "main_container", "page_button_prefab", "start_label", "side_start_button", "top_start_button", "page_Selection_container")]
 custom_minimum_size = Vector2(124, 0)
 layout_mode = 3
 anchors_preset = 12
@@ -28,6 +28,7 @@ grow_horizontal = 2
 grow_vertical = 0
 script = ExtResource("1_bqb47")
 showing = true
+_fill_button = NodePath("VBoxContainer/QueInputBackPatchContainer/Background/FillQueButton")
 nodes_container = NodePath("VBoxContainer")
 que_display_control = NodePath("QueDisplayControl")
 que_display_patch = NodePath("VBoxContainer/QueDisplayBackPatchContainer")
@@ -54,9 +55,9 @@ show_gaps = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 0
-offset_left = 747.0
+offset_left = 633.0
 offset_top = -172.0
-offset_right = 867.0
+offset_right = 753.0
 offset_bottom = 68.0
 
 [node name="TopPadding" type="Control" parent="VBoxContainer"]
@@ -303,6 +304,14 @@ patch_margin_left = 21
 patch_margin_top = 8
 patch_margin_right = 21
 patch_margin_bottom = 8
+
+[node name="FillQueButton" type="Button" parent="VBoxContainer/QueInputBackPatchContainer/Background"]
+layout_mode = 0
+offset_left = 270.0
+offset_top = -63.0
+offset_right = 309.0
+offset_bottom = -32.0
+text = " Fill "
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/QueInputBackPatchContainer"]
 custom_minimum_size = Vector2(64, 64)

@@ -146,7 +146,6 @@ static func handle_attack(
 		var defender_node = CombatRootControl.get_actor_node(defender.Id)
 		
 		var damage_vfx_cache = []
-		var resisted_effect = false
 		
 		# Apply damage 
 		for damage_event:DamageEvent in sub_event.damage_events:
@@ -164,22 +163,25 @@ static func handle_attack(
 		
 		# Create Effects
 		# Skip effects if defender died
+		vfx_data_cache[defender.Id] = {
+			"ResistedAtLeastOnce": false,
+			"DamageVFXDatas": damage_vfx_cache
+		}
 		if not defender.is_dead:
+			var effect_immunities = defender.get_effect_immunity()
 			for effect_data_key:String in attack_event.effect_datas.keys():
-				# TODO: Add a "Resist" flash text for effects that triggered but failed to apply
 				var effect_details:Dictionary = attack_event.effect_datas[effect_data_key]
 				var effect_result:Dictionary = sub_event.applied_effect_datas.get(effect_data_key, {})
-				if effect_result.get("WasApplied", false):
-					var effect_key = effect_details.get("EffectKey")
+				var effect_key = effect_details.get("EffectKey")
+				# Is immune
+				if effect_immunities.has(effect_key):
+					vfx_data_cache[defender.Id]['WasImmuneToEffect'] = true
+				elif effect_result.get("WasApplied", false):
 					var effect_data = effect_details.get("EffectData", {})
 					var effect = EffectHelper.create_effect(defender, attacker, effect_key, effect_data, game_state)
 				else:
-					resisted_effect = true
+					vfx_data_cache[defender.Id]['ResistedAtLeastOnce'] = true
 		
-		vfx_data_cache[defender.Id] = {
-			"Resisted": resisted_effect,
-			"DamageVFXDatas": damage_vfx_cache
-		}
 				
 	attack_event.attack_stage = AttackStage.Resolved
 	
@@ -196,8 +198,12 @@ static func handle_attack(
 		var vfx_cache = vfx_data_cache[defender.Id]
 		
 		# Create "Resist" text for resisted efects
-		if vfx_cache['Resisted']:
+		if vfx_cache.get('ResistedAtLeastOnce', false):
 			defender_node.vfx_holder.flash_text_controller.add_flash_text("Resist", FlashTextController.FlashTextType.Blocked_Dmg)
+		
+		# Create "Immune" text for immune efects
+		if vfx_cache.get('WasImmuneToEffect', false):
+			defender_node.vfx_holder.flash_text_controller.add_flash_text("Immune", FlashTextController.FlashTextType.Blocked_Dmg)
 		
 		if sub_event.is_evade:
 			defender_node.vfx_holder.flash_text_controller.add_flash_text("Evade", FlashTextController.FlashTextType.Blocked_Dmg)
@@ -237,15 +243,17 @@ static func _roll_for_hit(attack_event:AttackEvent, sub_event:AttackSubEvent):
 	sub_event.hit_chance = net_accuracy / 100.0
 	sub_event.hit_roll = randf()
 	# sub_event.is_miss = [Was invaild Target]
-	sub_event.is_evade = sub_event.hit_roll > sub_event.hit_chance
-	sub_event.is_crit = sub_event.hit_roll < attack_event.attacker_crit_chance
+	sub_event.rolled_evade = sub_event.hit_roll > sub_event.hit_chance
+	sub_event.rolled_crit = sub_event.hit_roll < attack_event.attacker_crit_chance
 	
 	var block_roll = randf()
-	sub_event.is_blocked = block_roll < sub_event.defender_block_chance
+	sub_event.rolled_blocked = block_roll < sub_event.defender_block_chance
 
+## Roll for damage and add DamageEvents to AttackSubEvent for defender.
+## Will alter can_evade/can_block of AttackSubEvent to account for Healing damage
 static func _roll_damage_for_attack_event( attack_event:AttackEvent, attacker:BaseActor, defender:BaseActor):
-	var sub_event:AttackSubEvent = attack_event.sub_events[defender.Id]
-	if sub_event.is_miss or sub_event.is_evade:
+	var atk_sub_event:AttackSubEvent = attack_event.sub_events[defender.Id]
+	if atk_sub_event.is_miss:
 		return
 	# Get damage mods from AttackMods and passive mods from Attacker and Defender
 	var damage_mods = {}
@@ -255,16 +263,26 @@ static func _roll_damage_for_attack_event( attack_event:AttackEvent, attacker:Ba
 	damage_mods.merge(defender.get_damage_mods())
 	for damage_key in attack_event.damage_datas.keys():
 		var damage_data = attack_event.damage_datas[damage_key]
-		var damage_event = DamageHelper.roll_for_damage(damage_data, attacker, defender, attack_event.source_tag_chain, damage_mods)
+		var damage_event = DamageHelper.roll_for_damage(damage_data, attacker, defender, attack_event.source_tag_chain, damage_mods, true)
+		
+		# Damage turned out to be healing
+		if damage_event.final_damage < 0:
+			# Never block or evade damage that would heal you
+			atk_sub_event.can_evade = false
+			atk_sub_event.can_block = false
+		
+		# Do not add DamageEvent if evaded (we just needed to see if it would heal)
+		if atk_sub_event.is_evade:
+			continue
 		# Was Blocked
-		if sub_event.is_blocked and not sub_event.is_crit:
-			damage_event.final_damage = damage_event.damage_after_resistance * sub_event.defender_block_mod
+		elif atk_sub_event.is_blocked:
+			damage_event.final_damage = damage_event.damage_after_resistance * atk_sub_event.defender_block_mod
 		# Was Crit
-		elif sub_event.is_crit and not sub_event.is_blocked:
+		elif atk_sub_event.is_crit:
 			damage_event.final_damage = damage_event.damage_after_resistance * attack_event.attcker_crit_mod
 		else:
 			damage_event.final_damage = damage_event.damage_after_resistance
-		sub_event.damage_events.append(damage_event)
+		atk_sub_event.damage_events.append(damage_event)
 
 ## Roll for each Attack Effect for defender. 
 ## Results of rolls are added to sub_event.applied_effect_datas.
@@ -634,17 +652,14 @@ static func handle_colision(
 			for sub_key in sub_damage_mods.keys():
 				var sub_mod = sub_damage_mods[sub_key]
 				# Damage mods already filtered inside of DamageHelper.roll_for_damage
-				# if DamageHelper.does_damage_mod_apply(sub_mod, winner,  loser, damage_data, source_tag_chain):
 				var mod_id = damage_mods.get("DamageModId", "NO_ID")
 				damage_mods[mod_id] = sub_mod
-		
-		# Who is Attacker and Defender when Mover / Blocker doesn't match winner / loser
 		
 		damage_mods.merge(loser.get_damage_mods())
 		damage_mods.merge(winner.get_damage_mods())
 	
 		# Calculate Damage
-		damage_event = DamageHelper.roll_for_damage(damage_data, winner, loser, source_tag_chain, damage_mods)
+		damage_event = DamageHelper.roll_for_damage(damage_data, winner, loser, source_tag_chain, damage_mods, true)
 		
 		# Apply damage 
 		loser.stats.apply_damage(damage_event.final_damage)

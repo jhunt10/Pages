@@ -14,10 +14,14 @@ func _ready() -> void:
 	create_page_items_button.pressed.connect(create_page_items)
 	items_to_inventory_button.pressed.connect(items_to_inventory)
 	add_item_menu_button.pressed.connect(add_item_menu.show)
+	if CombatRootControl.Instance:
+		CombatRootControl.Instance.camera.freeze = true
 	pass # Replace with function body.
 
 func close_menu():
 	self.queue_free()
+	if CombatRootControl.Instance:
+		CombatRootControl.Instance.camera.freeze = false
 	MainRootNode.Instance.dev_tools_menu = null
 
 func create_page_items():

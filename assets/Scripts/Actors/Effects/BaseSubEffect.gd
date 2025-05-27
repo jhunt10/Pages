@@ -1,6 +1,6 @@
 class_name BaseSubEffect
 
-enum SubEffectPropTypes {Triggers, StatModKey, DamageModKey, DamageKey, SubEffectKey, EnumVal, StringVal, IntVal, DictVal, BoolVal}
+enum SubEffectPropTypes {Triggers, StatModKey, DamageModKey, DamageKey, SubEffectKey, EnumVal, StringVal, IntVal, DictVal, BoolVal, ListVal}
 
 # Returns a Dictionary of {Property Name, Property Type} for what properties this subeffect
 # 	exspects to find in it's subeffect_data (Mostly for Effect Editor)
@@ -126,5 +126,5 @@ func _array_to_trigger_list(arr:Array)->Array:
 			printerr("BaseSubEffect._array_to_trigger_list: Unknown EffectTrigger value '%s'." % [trig_val])
 	return out_list
 
-func merge_new_duplicate_sub_effect_data(parent_effect:BaseEffect, own_sub_effect_data:Dictionary, dup_sub_effect_data:Dictionary):
+func merge_new_duplicate_sub_effect_data(parent_effect:BaseEffect, own_sub_effect_data:Dictionary, dup_effect_data:Dictionary, dup_sub_effect_data:Dictionary):
 	pass

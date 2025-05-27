@@ -6,9 +6,9 @@
 [ext_resource type="Theme" uid="uid://bfce41la62bs6" path="res://Scenes/Themes/readable_theme.tres" id="4_4wgxq"]
 [ext_resource type="Script" path="res://Scenes/UiNodes/loaded_option_button.gd" id="4_f1xd1"]
 [ext_resource type="Script" path="res://Scenes/Menus/PageLibraryMenu/entry_group_container.gd" id="5_1qkpm"]
-[ext_resource type="PackedScene" uid="uid://xjhbo48tdbhr" path="res://Scenes/Menus/PageLibraryMenu/page_details_entry_container.tscn" id="7_ykmfd"]
+[ext_resource type="PackedScene" uid="uid://xjhbo48tdbhr" path="res://Scenes/Menus/PageLibraryMenu/PageDetails/page_details_entry_container.tscn" id="7_ykmfd"]
 
-[node name="PageLibraryMenu" type="Control" node_paths=PackedStringArray("close_button", "reload_pages_button", "scale_slider", "loading_patch", "scroll_ocntainer", "tag_filter", "page_entries_container", "premade_page_entry", "premade_entry_group", "load_time_label")]
+[node name="PageLibraryMenu" type="Control" node_paths=PackedStringArray("close_button", "reload_pages_button", "scale_slider", "loading_patch", "scroll_ocntainer", "tag_filter", "page_entries_container", "premade_entry_group", "example_page_entry", "load_time_label")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -23,8 +23,8 @@ loading_patch = NodePath("VBoxContainer/LoadingScreenPatch")
 scroll_ocntainer = NodePath("VBoxContainer/ScrollContainer")
 tag_filter = NodePath("VBoxContainer/NinePatchRect/HBoxContainer/LoadedOptionButton")
 page_entries_container = NodePath("VBoxContainer/ScrollContainer/VBoxContainer")
-premade_page_entry = NodePath("VBoxContainer/ScrollContainer/VBoxContainer/EntryGroupContainer/EntryGroupInnerContainer/SubEntriesContainer/PageDetailsEntryContainer")
 premade_entry_group = NodePath("VBoxContainer/ScrollContainer/VBoxContainer/EntryGroupContainer")
+example_page_entry = NodePath("VBoxContainer/ScrollContainer/VBoxContainer/EntryGroupContainer/EntryGroupInnerContainer/SubEntriesContainer/PageDetailsEntryContainer")
 load_time_label = NodePath("VBoxContainer/NinePatchRect/HBoxContainer/LoadTimeLabel")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]

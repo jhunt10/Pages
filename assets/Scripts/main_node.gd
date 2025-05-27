@@ -229,7 +229,7 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.is_pressed():
 		if event.keycode == KEY_U:
 			if dev_tools_menu:
-				dev_tools_menu.queue_free()
+				dev_tools_menu.close_menu()
 				dev_tools_menu = null
 			else:
 				open_dev_tools()

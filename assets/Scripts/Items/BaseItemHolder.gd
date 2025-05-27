@@ -260,10 +260,13 @@ func get_passive_stat_mods()->Array:
 	for equipment_id in _raw_item_slots:
 		if checked_equipments.has(equipment_id):
 			continue
+		checked_equipments.append(equipment_id)
 		if equipment_id and equipment_id != '':
 			var item:BaseItem = ItemLibrary.get_item(equipment_id)
+			if not item:
+				printerr("BaseItemHolder.get_passive_stat_mods: ItemLibrary missing item with id '%s'." % [equipment_id])
+				continue
 			out_list.append_array(item.get_passive_stat_mods())
-		checked_equipments.append(equipment_id)
 	return out_list
 
 func get_targeting_mods()->Array:

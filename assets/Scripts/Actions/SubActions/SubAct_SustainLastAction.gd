@@ -38,7 +38,7 @@ func do_thing(parent_action:BaseAction, subaction_data:Dictionary, que_exe_data:
 		var last_actor = game_state.get_actor(last_actor_id)
 		if not last_actor:
 			continue
-		last_actor.effects.add_effect(actor, sustain_effect_key, sustain_effect_data, game_state)
+		EffectHelper.create_effect(last_actor, actor, sustain_effect_key, sustain_effect_data, game_state)
 	
 	var turn_data = que_exe_data.get_current_turn_data()
 	return BaseSubAction.Success

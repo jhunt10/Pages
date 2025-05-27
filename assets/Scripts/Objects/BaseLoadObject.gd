@@ -46,9 +46,13 @@ func get_load_path()->String:
 # TODO: Better name and description
 ## Returns the value of given key if found in _data or _def in that order
 func get_load_val(key:String, default=null):
-	var val = _data.get(key, _def.get(key, default))
+	var val = _data.get(key, null)
 	if val is Dictionary:
-		return val.duplicate(true)
+		val = val.duplicate(true)
+		if _def.has(key):
+			val = BaseLoadObjectLibrary._merge_defs(val, _def.get(key, {}))
+	if !val:
+		val = _def.get(key, default)
 	return val
 
 func on_delete():

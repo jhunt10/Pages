@@ -24,12 +24,15 @@ static func get_min_max_damage(actor:BaseActor, damage_data:Dictionary)->Array:
 	return [min_dam, max_dam]
 
 
-
-static func roll_for_damage(damage_data:Dictionary, attacker:BaseActor, defender:BaseActor, source_tag_chain:SourceTagChain, damage_mods:Dictionary)->DamageEvent:
+## Roll damage and return a DamageEvent. 
+## Damage mods from Actors will be appllied (by default), but those from Attack Mods must be provided 
+static func roll_for_damage(damage_data:Dictionary, attacker:BaseActor, defender:BaseActor, source_tag_chain:SourceTagChain, 
+		extra_damage_mods:Dictionary = {},
+		actor_atk_mods_provided:bool=false)->DamageEvent:
 	var damage_event = DamageEvent.new(damage_data, attacker, defender, source_tag_chain)
 	# Apply Damage mods
-	for damage_mod_key in damage_mods.keys():
-		var damage_mod:Dictionary = damage_mods[damage_mod_key]
+	for damage_mod_key in extra_damage_mods.keys():
+		var damage_mod:Dictionary = extra_damage_mods[damage_mod_key]
 		if does_damage_mod_apply(damage_mod, attacker, defender, damage_data, source_tag_chain):
 			damage_event.add_damage_mod(damage_mod)
 	
@@ -85,9 +88,6 @@ static func roll_for_damage(damage_data:Dictionary, attacker:BaseActor, defender
 	return damage_event
 
 static func does_damage_mod_apply(damage_mod:Dictionary, attacker:BaseActor, defender:BaseActor, damage_data:Dictionary, source_tag_chain:SourceTagChain)->bool:
-	var defender_id = defender.Id # For Debugging
-	var attacker_id = attacker.Id
-	
 	var conditions = damage_mod.get('Conditions', null)
 	var mod_source_actor = damage_mod.get('SourceActorId', null)
 	var mod_source_faction = damage_mod.get('SourceActorFaction', null)

@@ -8,6 +8,7 @@ extends Control
 @export var list_container:VBoxContainer
 @export var recount_button:Button
 @export var list_button:OptionButton
+@export var def_data_menu:DefDataMenu
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -43,16 +44,28 @@ func _on_lsit_selected(index:int):
 	if index == 0:
 		for actor_id in ActorLibrary.Instance._loaded_objects.keys():
 			var actor = ActorLibrary.get_actor(actor_id)
-			var line = actor_id + ":" + str(actor.FactionIndex)
-			add_label(line)
+			var line = actor_id 
+			add_label("Actor", line)
 	if index == 1:
 		for item_id in ItemLibrary.Instance._loaded_objects.keys():
-			add_label(item_id)
+			add_label("Item", item_id)
 	if index == 2:
 		for item_id in EffectLibrary.Instance._loaded_objects.keys():
-			add_label(item_id)
+			add_label("Effect", item_id)
 
-func add_label(text):
-	var new_label = Label.new()
-	new_label.text = text
-	list_container.add_child(new_label)
+func add_label(type, text):
+	var new_button = Button.new()
+	new_button.text = text
+	list_container.add_child(new_button)
+	new_button.pressed.connect(_on_searched_item_selected.bind(type, text))
+
+func _on_searched_item_selected(type, id):
+	var thing = null
+	if type == "Actor":
+		thing = ActorLibrary.get_actor(id)
+	if type == "Item":
+		thing = ItemLibrary.get_item(id)
+	if type == "Effect":
+		thing = EffectLibrary.get_effect(id)
+	if thing:
+		def_data_menu.set_object(thing)

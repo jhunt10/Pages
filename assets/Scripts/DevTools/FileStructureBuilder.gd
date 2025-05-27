@@ -36,6 +36,17 @@ static func create_class_def_files(thing_name:String):
 		var spites_dir_path = main_dir_path.path_join("Sprites")
 		DirAccess.make_dir_absolute(spites_dir_path)
 	
+	# Effects Dir (Under Pages so they can share Icons)
+	if true:
+		var main_dir_path = class_dir_path.path_join("Pages").path_join("Effects")
+		DirAccess.make_dir_absolute(main_dir_path)
+		var def_file_path = main_dir_path.path_join(thing_name + "PagesEffects_EffectDefs.json")
+		var def_file = FileAccess.open(def_file_path, FileAccess.WRITE)
+		def_file.store_string("[\n\n]")
+		def_file.close()
+		var spites_dir_path = main_dir_path.path_join("Sprites")
+		DirAccess.make_dir_absolute(spites_dir_path)
+
 	
 	var items_dir_path = class_dir_path.path_join("Items")
 	DirAccess.make_dir_absolute(items_dir_path)
@@ -76,3 +87,4 @@ static func create_class_def_files(thing_name:String):
 		def_file.close()
 		var spites_dir_path = main_dir_path.path_join("Sprites")
 		DirAccess.make_dir_absolute(spites_dir_path)
+		

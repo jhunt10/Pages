@@ -1,0 +1,162 @@
+[
+    {
+        "EffectKey": "_BaseBlessing",
+        "ShowInHud": true,
+        "ShowCounter": true,
+        "CanStack": true,
+        "IsGood": true,
+        "DamageDatas": {},
+        "DamageMods": {},
+        "AddTagsToActor": ["Blessed"],
+        "Details": {
+            "DisplayName": "Weak XXX Blessing",
+            "Description": "Weak Blessing of the XXX.",
+            "LargeIcon": "Sprites/EarthBuff_Small.png",
+            "SmallIcon": "Sprites/EarthBuff_Small.png",
+            "SnippetDesc": "Weak Blessing",
+            "Tags": []
+        },
+        "StatMods": {
+        },
+        "SubEffects": {
+            "ModStat": {
+                "AllStatMods": true,
+                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_ModStat.gd"
+            },
+            "Duration": {
+                "DurationType": "TurnEnd",
+                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_Duration.gd"
+            }
+        }
+    },
+    {
+        "EffectKey": "_BaseBlessingEffect",
+        "Details": {
+            "Description": "Gain @@#StatMod:BlessMod1@@ and @@#StatMod:BlessMod2@@.",
+            "DisplayName": "Base Blessing",
+            "LargeIcon": "Sprites/MassUp.png",
+            "SmallIcon": "Sprites/MassUp.png",
+            "SnippetDesc": "Gain @@#StatMod:BlessMod1@@ and @@#StatMod:BlessMod2@@.",
+            "Tags": []
+        },
+        "EffectDetails":{
+            "IsGood": true,
+            "IsBad": false,
+            "DeleteAfterCombat": true,
+            "ShowInHud": true,
+            "ShowCounter": true,
+            "CanStack": false,
+            "LimitedEffectType": "Blessing",
+            "AddTagsToActor": ["Blessed"],
+            "DurationData":{
+                "BaseDuration":2,
+                "DurationType": "RoundEnd"
+            }
+        },
+        "StatMods": {
+            "BlessMod1": {
+                "ModType": "Scale",
+                "StatName": "Speed",
+                "Value": 1.2
+            },
+            "BlessMod2": {
+                "ModType": "Add",
+                "StatName": "Evasion",
+                "Value": 10
+            }
+        },
+        "SubEffects": {
+            "ModStat": {
+                "AllStatMods": true,
+                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_ModStat.gd"
+            },
+            "Duration": {
+                "DurationType": "TurnEnd",
+                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_Duration.gd"
+            }
+        }
+    },
+    {
+        "EffectKey": "Blessing_Air",
+        "ParentKey": "_BaseBlessingEffect",
+        "Details": {
+            "DisplayName": "Air Blessing",
+            "LargeIcon": "Sprites/Blessing_Air.png",
+            "SmallIcon": "Sprites/Blessing_Air.png"
+        },
+        "StatMods": {
+            "BlessMod1": {
+                "ModType": "Scale",
+                "StatName": "Speed",
+                "Value": 1.2
+            },
+            "BlessMod2": {
+                "ModType": "Add",
+                "StatName": "Evasion",
+                "Value": 10
+            }
+        }
+    },
+    {
+        "EffectKey": "Blessing_Earth",
+        "ParentKey": "_BaseBlessingEffect",
+        "Details": {
+            "DisplayName": "Earth Blessing",
+            "LargeIcon": "Sprites/Blessing_Earth.png",
+            "SmallIcon": "Sprites/Blessing_Earth.png"
+        },
+        "StatMods": {
+            "BlessMod1": {
+                "ModType": "Scale",
+                "StatName": "Mass",
+                "Value": 1.2
+            },
+            "BlessMod2": {
+                "ModType": "Add",
+                "StatName": "Armor",
+                "Value": 15
+            }
+        }
+    },
+    {
+        "EffectKey": "Blessing_Fire",
+        "ParentKey": "_BaseBlessingEffect",
+        "Details": {
+            "DisplayName": "Fire Blessing",
+            "LargeIcon": "Sprites/Blessing_Fire.png",
+            "SmallIcon": "Sprites/Blessing_Fire.png"
+        },
+        "StatMods": {
+            "BlessMod1": {
+                "ModType": "Scale",
+                "StatName": "Potency",
+                "Value": 1.2
+            },
+            "BlessMod2": {
+                "ModType": "Add",
+                "StatName": "CritChance",
+                "Value": 10
+            }
+        }
+    },
+    {
+        "EffectKey": "Blessing_Water",
+        "Details": {
+            "DisplayName": "Water Blessing",
+            "LargeIcon": "Sprites/Blessing_Water.png",
+            "SmallIcon": "Sprites/Blessing_Water.png"
+        },
+        "StatMods": {
+            "BlessMod1": {
+                "ModType": "Scale",
+                "StatName": "Protection",
+                "Value": 1.2
+            },
+            "BlessMod2": {
+                "ModType": "Add",
+                "StatName": "Ward",
+                "Value": 15
+            }
+        }
+    }
+]

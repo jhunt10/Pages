@@ -47,17 +47,23 @@ func _init(data:Dictionary, source, defender:BaseActor, tag_chain:SourceTagChain
 	self.source_tag_chain = tag_chain
 	self.is_successful = true
 	self.damage_data_key = data.get("DamageDataKey", "NOKEY")
+	
+	
 	self.attack_stat = data.get("AtkStat", "Fixed")
 	self.attack_power = data.get("AtkPwrBase", 100)
-	if data.has("AtkPwrStat") and source is BaseActor:
-		self.attack_power = self.attack_power * source.stats.get_stat(data["AtkPwrStat"], 1)
 	self.attack_power_scale = data.get("AtkPwrScale", 1)
 	self.attack_power_range = data.get("AtkPwrRange", 0)
+	if data.has("AtkPwrStat") and source is BaseActor:
+		self.attack_power = self.attack_power * source.stats.get_stat(data["AtkPwrStat"], 1)
 	
+	# Determine Base Damage from attack_stat
+	# Fixed Damage or no Attack Stat
 	if attack_stat == "Fixed" or attack_stat == "":
 		self.base_damage = data.get("BaseDamage", 0)
+	# Percent of Target's Health
 	elif attack_stat.begins_with("Percent"):
 		self.base_damage = defender.stats.max_health
+	
 	elif source is BaseActor:
 		self.base_damage = source.stats.get_stat(attack_stat, 1)
 	

@@ -16,7 +16,8 @@ signal page_special_selected(action_key:String)
 		else:
 			if state == States.Showing or state == States.Growing:
 				state = States.Shrinking
-			
+
+@export var _fill_button:Button
 			
 @export var nodes_container:Control
 @export var que_display_control:QueDisplayControl
@@ -69,7 +70,13 @@ func _ready() -> void:
 	page_button_prefab.visible = false
 	on_que_options_menu.visible = false
 	page_Selection_container.hide()
+	_fill_button.pressed.connect(_fill_que_with_wait)
 	pass # Replace with function body.
+
+func _fill_que_with_wait():
+	var wait = ActionLibrary.get_action("Wait")
+	while not _actor.Que.is_ready():
+		_actor.Que.que_action(wait)
 
 func hide_start_button():
 	#var que_display_size = que_display_control.size.x

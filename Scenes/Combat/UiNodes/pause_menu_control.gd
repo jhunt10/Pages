@@ -19,6 +19,7 @@ func _on_main_menu_pressed():
 	MainRootNode.Instance.go_to_main_menu()
 
 func _on_to_camp():
+	CombatRootControl.Instance.cleanup_combat()
 	MainRootNode.Instance.open_camp_menu()
 
 func _on_close_menu():

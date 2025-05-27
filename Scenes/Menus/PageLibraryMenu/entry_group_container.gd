@@ -16,6 +16,6 @@ func _process(delta: float) -> void:
 	super(delta)
 	pass
 
-func add_entry(entry:PageDetailsEntryContainer):
+func add_entry(entry:BaseObjectDetailsEntryContainer):
 	entries_container.add_child(entry)
 	pass

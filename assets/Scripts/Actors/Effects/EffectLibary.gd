@@ -37,20 +37,20 @@ static func purge_effects():
 	if !Instance: Instance = EffectLibrary.new()
 	Instance.purge_objects()
 
-static func create_effect(source, key:String, actor:BaseActor, data:Dictionary, force_id:String='')->BaseEffect:
+## Should only be called by Effect Helper
+static func _create_effect(source, actor:BaseActor, key:String, data:Dictionary, force_id:String='', game_state:GameStateData=null, suppress_signals:bool = false)->BaseEffect:
 	if not EffectHelper.is_creating_effect:
 		printerr("\n\nDepreciated: Effect created outside of EffectHelper! Use EffectHelper.create_effect instead.\n\n")
 	print("Creating Effect: %s on actor %s" %[key, actor.Id])
-	var effect_data = data
-	if not effect_data.get("BeenMerged", false):
-		var effect_def = get_effect_def(key)
-		effect_data = _merge_defs(data, effect_def)
 	
-	if effect_data.get("CanStack", false):
+	var effect_data = data.duplicate()
+	
+	var merged_effect_data = get_merged_effect_def(key, data)
+	if merged_effect_data.get("CanStack", false):
 		var existing_effects = actor.effects.get_effects_with_key(key)
 		if existing_effects.size() > 0:
 			var existing_effect:BaseEffect = existing_effects[0]
-			existing_effect.merge_new_duplicate_effect_data(source, effect_data)
+			existing_effect.merge_new_duplicate_effect_data(source, merged_effect_data)
 			return existing_effect
 	
 	effect_data['EffectedActorId'] = actor.Id
@@ -70,20 +70,26 @@ static func create_effect(source, key:String, actor:BaseActor, data:Dictionary, 
 		printerr("EffectLibrary.create_effect: Unknown source type: %s" % [source])
 		return null
 	# Make Id Unique to actor
-	if force_id == '': 
-		force_id = key + str(ResourceUID.create_id())
 	var effect_id = force_id
+	if effect_id == '': 
+		effect_id = key + str(ResourceUID.create_id())
 	if not effect_id.ends_with(":" + actor.Id):
 		effect_id += ":" + actor.Id
+	
 	var effect:BaseEffect = Instance.create_object(key, effect_id, effect_data)
 	if !effect:
 		printerr("EffectLibrary.create_effect: Failed to make effect '%s'." % [key])
 		return null
 	
+	actor.effects.__add_new_effect(effect, suppress_signals)
+	
 	if effect.get_limited_effect_type() != EffectHelper.LimitedEffectTypes.None:
 		if source is BaseActor:
 			source.effects.host_limited_effect(effect)
 	
+	effect.on_created(game_state)
+	if effect.is_instant():
+		actor.remove_effect(effect, suppress_signals)
 	return effect
 
 static func list_effect_defs()->Array:
