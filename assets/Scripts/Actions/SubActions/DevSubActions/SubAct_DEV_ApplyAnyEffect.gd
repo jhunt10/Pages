@@ -31,9 +31,12 @@ func do_thing(parent_action:BaseAction, subaction_data:Dictionary, que_exe_data:
 	var targets:Array = _find_target_effected_actors(parent_action, subaction_data, target_key, que_exe_data, game_state, actor)
 	
 	var effect_key = turn_data.on_que_data['SelectedEffectKey']
-	var effect_data = {}
+	var effect_data = EffectLibrary.get_effect_def(effect_key)
 	if subaction_data.has('EffectData'):
 		effect_data = subaction_data['EffectData']
+	var effect_details = effect_data.get('EffectDetails', {})
+	if effect_details.has("DurationData"):
+		effect_data['EffectDetails']['DurationData']['BaseDuration'] = 5
 	for target:BaseActor in targets:
 		EffectHelper.create_effect(target, actor, effect_key, effect_data, game_state)
 	return BaseSubAction.Success

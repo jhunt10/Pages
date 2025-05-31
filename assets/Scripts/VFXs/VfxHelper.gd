@@ -2,11 +2,24 @@ class_name VfxHelper
 
 const FORCE_RELOAD = false
 
+enum FlashTextType {
+	Normal_Dmg, Blocked_Dmg, Crit_Dmg, Healing_Dmg, DOT_Dmg,
+	NoAmmo, NoTarget, Miss, Evade, Protect}
+
 #static func create_attack_vfx_node(from_actor:BaseActor, to_actor:BaseActor, bullet_vfx_key:String, vfx_data:Dictionary):
 	#var temp_data = vfx_data.duplicate(true)
 	#temp_data['SourceActorId'] = from_actor.Id
 	#temp_data['HostActorId'] = to_actor.Id
 	#return create_vfx_on_actor(to_actor, bullet_vfx_key, temp_data)
+
+static func create_flash_text(actor, value, flash_text_type:FlashTextType):
+	var actor_node:BaseActorNode = null
+	if actor is BaseActorNode:
+		actor_node = actor
+	elif actor is BaseActor:
+		actor_node = CombatRootControl.get_actor_node(actor.Id)
+	var text_value = str(value)
+	actor_node.vfx_holder.flash_text_controller.add_flash_text(text_value, flash_text_type)
 
 static func create_damage_effect(target_actor:BaseActor, vfx_key:String, vfx_data:Dictionary):
 	if FORCE_RELOAD: MainRootNode.vfx_libray.reload_vfxs()
@@ -59,6 +72,10 @@ static func create_vfx_on_actor(host_actor:BaseActor, vfx_key:String, vfx_data:D
 	var vfx_scene_path = merged_data.get("ScenePath")
 	if not vfx_scene_path:
 		printerr("VfxHelper.create_vfx_on_actor: vfx_data is missing 'ScenePath'.")
+		return null
+	var scene = load(vfx_scene_path)
+	if not scene:
+		printerr("VfxHelper.create_vfx_on_actor: No scene ound at %s" % [vfx_scene_path])
 		return null
 	var new_node =  load(vfx_scene_path).instantiate()
 	if not new_node:

@@ -72,11 +72,11 @@ static func handle_movement(game_state:GameStateData, moving_actor:BaseActor,
 			if LOGGING: print("\t\tPush NotAllowed")
 			#game_state.set_actor_pos(moving_actor, actor_pos, simulated)
 			return false
+		var push_res = _find_push_to_spot(game_state, moving_actor, blocking_actor, relative_movement)
 		var collision = AttackHandler.handle_colision(moving_actor, blocking_actor, game_state, simulated)
-		# Move won push
-		if collision.winner_id == moving_actor.Id:
+		# Mover won push and has open spot to push blocker into
+		if collision.winner_id == moving_actor.Id and push_res != null:
 			if not blocking_actor.is_dead:
-				var push_res = _find_push_to_spot(game_state, moving_actor, blocking_actor, relative_movement)
 				if push_res:
 					if LOGGING: print("\t\tPush success")
 					if not simulated:

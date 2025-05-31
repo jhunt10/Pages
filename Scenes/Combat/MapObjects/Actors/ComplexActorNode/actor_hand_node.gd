@@ -2,7 +2,7 @@
 class_name ActorHandNode
 extends Node2D
 
-const LOGGING = true
+const LOGGING = false
 
 enum HANDS {MainHand, OffHand, TwoHand}
 enum ANIMATIONS {None, Swing, Stab}

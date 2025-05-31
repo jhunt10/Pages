@@ -53,7 +53,12 @@ func __add_new_effect(effect:BaseEffect, suppress_signals:bool = false):
 	
 	if not suppress_signals:
 		_actor.effacts_changed.emit()
-		
+
+func trigger_new_effect_to_be_added(game_state:GameStateData, added_effect:BaseEffect, meta_data:Dictionary):
+	for effect:BaseEffect in _effects.values():
+		effect.trigger_other_effect_to_be_added(game_state, added_effect, meta_data)
+
+
 func list_effects()->Array:
 	return _effects.values()
 
@@ -159,16 +164,18 @@ func _on_hosted_effect_ends(limit_type:EffectHelper.LimitedEffectTypes, effect_i
 
 func get_count_limit_for_limited_effect(type:EffectHelper.LimitedEffectTypes)->int:
 	var str_type = EffectHelper.LimitedEffectTypes.keys()[type]
-	var stat_name = str_type + ":CountLimit"
+	var stat_name = "LmtEftCount" + ":" + str_type
 	return _actor.stats.get_stat(stat_name, 1)
 func get_per_actor_limit_for_limited_effect(type:EffectHelper.LimitedEffectTypes)->int:
-	var str_type = EffectHelper.LimitedEffectTypes.keys()[type]
-	var stat_name = str_type + ":PerActorLimit"
-	return _actor.stats.get_stat(stat_name, 1)
+	return 99
+	#var str_type = EffectHelper.LimitedEffectTypes.keys()[type]
+	#var stat_name = str_type + ":PerActorLimit"
+	#return _actor.stats.get_stat(stat_name, 1)
 func get_on_self_limit_for_limited_effect(type:EffectHelper.LimitedEffectTypes)->int:
-	var str_type = EffectHelper.LimitedEffectTypes.keys()[type]
-	var stat_name = str_type + ":OnSelfLimit"
-	return _actor.stats.get_stat(stat_name, 1)
+	return 99
+	#var str_type = EffectHelper.LimitedEffectTypes.keys()[type]
+	#var stat_name = str_type + ":OnSelfLimit"
+	#return _actor.stats.get_stat(stat_name, 1)
 
 # Get total number of limited effects of type HOSTED by this actor
 func get_count_of_hosted_limited_effect(type:EffectHelper.LimitedEffectTypes)->int:

@@ -100,7 +100,7 @@ func do_thing(parent_action:BaseAction, subaction_data:Dictionary, que_exe_data:
 		null)
 	
 	if missed_moved_actor and not hit_any_actor:
-		CombatRootControl.Instance.create_flash_text_on_actor(actor, "Miss", FlashTextController.FlashTextType.Miss)
+		VfxHelper.create_flash_text(actor, "Miss", VfxHelper.FlashTextType.Miss)
 	
 	print("\n---------------------------")
 	print(attack_event.serialize_self())

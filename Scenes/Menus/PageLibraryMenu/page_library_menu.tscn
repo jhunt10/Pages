@@ -66,6 +66,7 @@ text = "Tag:"
 [node name="LoadedOptionButton" type="OptionButton" parent="VBoxContainer/NinePatchRect/HBoxContainer"]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
+allow_reselect = true
 script = ExtResource("4_f1xd1")
 allways_show_none = true
 no_option_text = "All"

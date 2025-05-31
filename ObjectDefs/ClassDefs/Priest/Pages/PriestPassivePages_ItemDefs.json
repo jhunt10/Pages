@@ -1,3 +1,200 @@
 [
+    {
+        "ItemKey": "HarmingLight_PageItem",
+        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
+        "Details":{
+            "Description": "You understand the harsh wrath of @@#Color:DmgColor:Light@@ and know how best to weild it against your foes.\n\n@@#AtkMod:HarmLightAtkMod:DefFacFil@@ have @@#AtkMod:HarmLightAtkMod:StatMod:HarmLightStatMod@@ against your @@#AtkMod:HarmLightAtkMod:AtkSrcFil@@.",
+            "DisplayName": "Harming Light",
+            "LargeIcon": "Sprites/HurtingLight.png",
+            "SmallIcon": "Sprites/HurtingLight.png",
+            "SnippetDesc": "Enemies lose -75% Light Damage Resistance",
+            "Tags": ["Passive"]
+        },
+        "ItemDetails":
+        {
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "DamageMods": {},
+        "PageDetails": {
+            "AttackMods": {
+                "HarmLightAtkMod": {
+                    "AttackModKey": "HarmingLightAtkMod",
+                    "CanStack": false,
+                    "Conditions": {
+                        "AttackerFactionFilters": [ "Self" ],
+                        "DefendersConditions": [
+                            {
+                                "RequiresAllDefenders": false,
+                                "DefenderFactionFilters": ["Enemy"]
+                            }
+                        ],
+                        "AttackSourceTagFilters": [
+                            {
+                                "RequireAnyTags": ["Spells"]
+                            }
+                        ]
+                    },
+                    "AttackerStatMods": {},
+                    "DefenderStatMods": {},
+                    "DamageMods": {},
+                    "StatMods": {
+                        "HarmLightStatMod": {
+                            "Conditions": {
+                                "CanStack": false, 			   
+                                "FactionFilters": ["Enemy"],  
+                                "TagFilters": []
+                            },
+                            "ModType": "Add",
+                            "StatName": "Resistance:Light",
+                            "Value": -75
+                        }
+                    }
+                }
+            }
+        }
+    },
+    {
+        "ItemKey": "HealingLight_PageItem",
+        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
+        "Details":{
+            "Description": "You belive in the gentle warmth of @@#Color:DmgColor:Light@@ and know how best to bestow it upon your flock.\n\n@@#AtkMod:HealLightAtkMod:DefFacFil@@ have @@#AtkMod:HealLightAtkMod:StatMod:HealLightStatMod@@ against your @@#AtkMod:HealLightAtkMod:AtkSrcFil@@.\n\n@@#Color:DmgColor:Fire@@ @@#Color:DmgColor:Cold@@ @@#Color:DmgColor:Shock@@ @@#Color:DmgColor:Poison@@ @@#Color:DmgColor:Slash@@ @@#Color:DmgColor:Blunt@@ @@#Color:DmgColor:Pierce@@ @@#Color:DmgColor:Crash@@ @@#Color:DmgColor:Light@@ @@#Color:DmgColor:Dark@@",
+            "DisplayName": "Healing Light",
+            "LargeIcon": "Sprites/HealingLight.png",
+            "SmallIcon": "Sprites/HealingLight.png",
+            "SnippetDesc": "Allies gain +50% Light Damage Resistance",
+            "Tags": ["Passive"]
+        },
+        "ItemDetails":
+        {
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "PageDetails": {
+            "AttackMods": {
+                "HealLightAtkMod": {
+                    "AttackModKey": "HealingLightAtkMod",
+                    "CanStack": false,
+                    "Conditions": {
+                        "AttackerFactionFilters": [ "Self" ],
+                        "DefendersConditions": [
+                            {
+                                "RequiresAllDefenders": false,
+                                "DefenderFactionFilters": [ "Ally"]
+                            }
+                        ],
+                        "AttackSourceTagFilters": [
+                            {
+                                "RequireAnyTags": ["Spells"]
+                            }
+                        ]
+                    },
+                    "AttackerStatMods": {},
+                    "DefenderStatMods": {},
+                    "DamageMods": {},
+                    "StatMods": {
+                        "HealLightStatMod": {
+                            "Conditions": {
+                                "CanStack": false, 			   
+                                "FactionFilters": ["Ally"],  
+                                "TagFilters": []
+                            },
+                            "ModType": "Add",
+                            "StatName": "Resistance:Light",
+                            "Value": 50
+                        }
+                    }
+                }
+            }
+        }
+    },
+    
+    {
+        "ItemKey": "BlessedLimit1_PageItem",
+        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
+        "Details":{
+            "Description": "@@#StatMod:BlessCountMod@@\nYou may have a limited number of @@#Color:Blue:Blessing@@ active (default 1). If you exceed this limit, the oldest one ends.",
+            "DisplayName": "Blessed",
+            "LargeIcon": "Sprites/MoreBlessing.png",
+            "SmallIcon": "Sprites/MoreBlessing.png",
+            "SnippetDesc": "+2 Max Blessing",
+            "Tags": ["Passive"]
+        },
+        "ItemDetails":
+        {
+            "Rarity": "Common",
+            "Value": 50
+        },
+        
+        "StatMods": {
+            "BlessCountMod": {
+                "ModType": "Add",
+                "StatName": "LmtEftCount:Blessing",
+                "Value": 2
+            }
+        }
+    },
+    {
+        "ItemKey": "BlessedLimit2_PageItem",
+        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
+        "Details":{
+            "Description": "@@#StatMod:BlessCountMod@@\nYou may have a limited number of @@#Color:Blue:Blessing@@ active (default 1). If you exceed this limit, the oldest one ends.",
+            "DisplayName": "More Blessed",
+            "LargeIcon": "Sprites/MoreBlessing2.png",
+            "SmallIcon": "Sprites/MoreBlessing2.png",
+            "SnippetDesc": "+2 Max Blessing",
+            "Tags": ["Passive"]
+        },
+        "ItemDetails":
+        {
+            "Rarity": "Rare",
+            "Value": 50
+        },
+        
+        "StatMods": {
+            "BlessCountMod": {
+                "ModType": "Add",
+                "StatName": "LmtEftCount:Blessing",
+                "Value": 4
+            }
+        }
+    },
+    {
+        "ItemKey": "BlessedMass_PageItem",
+        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
+        "Details":{
+            "Description": "@@#StatMod:BlessCountMod@@ and Blessings now apply to all Allies in Target Area.",
+            "DisplayName": "Mass Bless",
+            "LargeIcon": "Sprites/MassBlessing.png",
+            "SmallIcon": "Sprites/MassBlessing.png",
+            "SnippetDesc": "Blessings apply to all Allies in Range.",
+            "Tags": ["Passive"]
+        },
+        "ItemDetails":
+        {
+            "Rarity": "Common",
+            "Value": 50
+        },
+        
+        "StatMods": {
+            "StatMods": {
+                "BlessCountMod": {
+                    "ModType": "Add",
+                    "StatName": "LmtEftCount:Blessing",
+                    "Value": 3
+                }
+            }
+        },
+        "TargetMods":{
+            "AoeBlessing":{
+                "RequiredActionTags":[
+                    "Blessing"
+                ],
+                "OverrideProps":{
+                    "TargetType": "FullArea"
+                }
 
+            }
+        }
+    }
 ]

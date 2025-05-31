@@ -1,6 +1,6 @@
 class_name BaseSubEffect
 
-enum SubEffectPropTypes {Triggers, StatModKey, DamageModKey, DamageKey, SubEffectKey, EnumVal, StringVal, IntVal, DictVal, BoolVal, ListVal}
+enum SubEffectPropTypes {Triggers, StatModKey, DamageModKey, DamageKey, SubEffectKey, EnumVal, StringVal, IntVal, DictVal, BoolVal, ListVal, FloatVal}
 
 # Returns a Dictionary of {Property Name, Property Type} for what properties this subeffect
 # 	exspects to find in it's subeffect_data (Mostly for Effect Editor)
@@ -47,7 +47,9 @@ func on_damage_taken(_effect:BaseEffect, _subeffect_data:Dictionary,
 	on_effect_trigger(_effect, _subeffect_data, BaseEffect.EffectTriggers.OnDamageTaken, _game_state)
 	pass
 
-
+func other_effect_to_be_added(parent_effect:BaseEffect, _subeffect_data:Dictionary,
+					_game_state:GameStateData, other_effect:BaseEffect, meta_data:Dictionary):
+	on_effect_trigger(parent_effect, _subeffect_data, BaseEffect.EffectTriggers.OnOtherEffectToBeAdded, _game_state)
 
 # Attack/Defend function to make logic more distinct
 
@@ -56,39 +58,40 @@ func on_attacking_pre_attack_roll(_effect:BaseEffect, _subeffect_data:Dictionary
 	pass
 
 func on_attacking_post_attack_roll(_effect:BaseEffect, _subeffect_data:Dictionary, _game_state:GameStateData, _attack_event:AttackEvent):
-	on_effect_trigger(_effect, _subeffect_data, BaseEffect.EffectTriggers.OnAttacking_PreAttackRoll, _game_state)
+	on_effect_trigger(_effect, _subeffect_data, BaseEffect.EffectTriggers.OnDefending_PostAttackRoll, _game_state)
+	pass
+	
+## After damage has been rolled for, but before it's been applied
+func on_attacking_post_damage_roll(_effect:BaseEffect, _subeffect_data:Dictionary, _game_state:GameStateData, _attack_event:AttackEvent):
+	on_effect_trigger(_effect, _subeffect_data, BaseEffect.EffectTriggers.OnAttacking_PostDamageRoll, _game_state)
 	pass
 
 func on_attacking_post_effect_roll(_effect:BaseEffect, _subeffect_data:Dictionary, _game_state:GameStateData, _attack_event:AttackEvent):
-	on_effect_trigger(_effect, _subeffect_data, BaseEffect.EffectTriggers.OnAttacking_PreAttackRoll, _game_state)
-	pass
-
-func on_attacking_post_damage_roll(_effect:BaseEffect, _subeffect_data:Dictionary, _game_state:GameStateData, _attack_event:AttackEvent):
-	on_effect_trigger(_effect, _subeffect_data, BaseEffect.EffectTriggers.OnAttacking_PreAttackRoll, _game_state)
+	on_effect_trigger(_effect, _subeffect_data, BaseEffect.EffectTriggers.OnAttacking_PostEffectRoll, _game_state)
 	pass
 
 func on_attacking_after_attack(_effect:BaseEffect, _subeffect_data:Dictionary, _game_state:GameStateData, _attack_event:AttackEvent):
-	on_effect_trigger(_effect, _subeffect_data, BaseEffect.EffectTriggers.OnAttacking_PreAttackRoll, _game_state)
+	on_effect_trigger(_effect, _subeffect_data, BaseEffect.EffectTriggers.OnAttacking_AfterAttack, _game_state)
 	pass
 
 func on_defending_pre_attack_roll(_effect:BaseEffect, _subeffect_data:Dictionary, _game_state:GameStateData, _attack_event:AttackEvent):
-	on_effect_trigger(_effect, _subeffect_data, BaseEffect.EffectTriggers.OnAttacking_PreAttackRoll, _game_state)
+	on_effect_trigger(_effect, _subeffect_data, BaseEffect.EffectTriggers.OnDefending_PreAttackRoll, _game_state)
 	pass
 
 func on_defending_post_attack_roll(_effect:BaseEffect, _subeffect_data:Dictionary, _game_state:GameStateData, _attack_event:AttackEvent):
-	on_effect_trigger(_effect, _subeffect_data, BaseEffect.EffectTriggers.OnAttacking_PreAttackRoll, _game_state)
+	on_effect_trigger(_effect, _subeffect_data, BaseEffect.EffectTriggers.OnDefending_PostAttackRoll, _game_state)
 	pass
 
 func on_defending_post_effect_roll(_effect:BaseEffect, _subeffect_data:Dictionary, _game_state:GameStateData, _attack_event:AttackEvent):
-	on_effect_trigger(_effect, _subeffect_data, BaseEffect.EffectTriggers.OnAttacking_PreAttackRoll, _game_state)
+	on_effect_trigger(_effect, _subeffect_data, BaseEffect.EffectTriggers.OnDefending_PostEffectRoll, _game_state)
 	pass
 
 func on_defending_post_damage_roll(_effect:BaseEffect, _subeffect_data:Dictionary, _game_state:GameStateData, _attack_event:AttackEvent):
-	on_effect_trigger(_effect, _subeffect_data, BaseEffect.EffectTriggers.OnAttacking_PreAttackRoll, _game_state)
+	on_effect_trigger(_effect, _subeffect_data, BaseEffect.EffectTriggers.OnDefending_PostDamageRoll, _game_state)
 	pass
 
 func on_defending_after_attack(_effect:BaseEffect, _subeffect_data:Dictionary, _game_state:GameStateData, _attack_event:AttackEvent):
-	on_effect_trigger(_effect, _subeffect_data, BaseEffect.EffectTriggers.OnAttacking_PreAttackRoll, _game_state)
+	on_effect_trigger(_effect, _subeffect_data, BaseEffect.EffectTriggers.OnDefending_AfterAttack, _game_state)
 	pass
 
 

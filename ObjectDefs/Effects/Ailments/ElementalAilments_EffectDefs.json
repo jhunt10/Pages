@@ -36,18 +36,18 @@
                 "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_AlimentVfx.gd"
             },
             "ApplyDamage": {
-                "DamageKey": "DamageData1",
+                "DamageKey": "BurnDamage",
                 "OptionalTriggers": [
                     "OnTurnEnd"
                 ],
-                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_ApplyDamage.gd"
+                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/Damage/SubEffect_ApplyDotDamage.gd"
             },
             "Duration": {
                 "DurationType": "TurnEnd",
                 "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_Duration.gd"
             },
             "RemoveChilled": {
-                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_RemoveOtherEffect.gd",
+                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/OtherEffects/SubEffect_RemoveOtherEffect.gd",
                 "RemoveEffectKeys": ["AilmentChilled", "AilmentFrozen"]
             }
         },
@@ -144,7 +144,7 @@
                 "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_Duration.gd"
             },
             "RemoveBurned": {
-                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_RemoveOtherEffect.gd",
+                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/OtherEffects/SubEffect_RemoveOtherEffect.gd",
                 "RemoveEffectKeys": ["AilmentBurned"]
             }
         }
@@ -200,7 +200,7 @@
                 "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_Duration.gd"
             },
             "RemoveChilled": {
-                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_RemoveOtherEffect.gd",
+                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/OtherEffects/SubEffect_RemoveOtherEffect.gd",
                 "RemoveEffectKeys": ["AilmentChilled", "AilmentBurned"]
             },
             "CancelActions": {
@@ -258,7 +258,7 @@
                 "OptionalTriggers": [
                     "OnTurnEnd"
                 ],
-                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_ApplyDamage.gd"
+                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/Damage/SubEffect_ApplyDotDamage.gd"
             },
             "Duration": {
                 "DurationType": "TurnEnd",
@@ -311,7 +311,7 @@
                 "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_AlimentVfx.gd"
             },
             "ApplyDamage": {
-                "DamageKey": "DamageData1",
+                "DamageKey": "ShockedDamage",
                 "OptionalTriggers": [
                     "OnTurnEnd"
                 ],

@@ -86,11 +86,11 @@
                 "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_Duration.gd"
             },
             "ApplyDamage": {
-                "DamageKey": "DamageData1",
+                "DamageKey": "BleedDamage",
                 "OptionalTriggers": [
                     "OnActionEnd"
                 ],
-                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_ApplyDamage.gd"
+                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/Damage/SubEffect_ApplyDotDamage.gd"
             }
         }
     },
@@ -113,7 +113,9 @@
             "CanStack": false,
             "AddTagsToActor": ["Dazed"],
             "DurationData":{
-                "BaseDuration":1,
+                "BaseDuration":2,
+                "MinInitDuration": 2,
+                "MaxDuration": 2,
                 "DurationType": "TurnEnd"
             }
         },
@@ -161,24 +163,29 @@
                 "DurationType": "TurnEnd",
                 "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_Duration.gd"
             },
-            "ApplyDamage": {
-                "DamageKey": "DamageData1",
+            "ApplyStatMod": {
+                "AllStatMods": true,
+                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_ModStat.gd"
+            },
+            "ApplyDazeImune": {
+                "ApplyEffectKey": "DazedImmune",
                 "OptionalTriggers": [
-                    "OnActionEnd"
+                    "OnGapTurnStart"
                 ],
-                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_ApplyDamage.gd"
+                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/OtherEffects/SubEffect_ApplyEffect.gd",
+                "UniqueEffectId": "DazeImmune"
             }
         }
     },
     {
-        "EffectKey": "AilmentDazed_Immune",
+        "EffectKey": "DazedImmune",
         "Details": {
             "Description": "You were @@#Color:Blue:Dazed@@ once this @@#Color:Red:Round@@ and are now immune until @@#Color:Red:End of Round@@ .",
             "DisplayName": "Daze Immune",
-            "LargeIcon": "Sprites/DazedIcon.png",
-            "SmallIcon": "Sprites/DazedIcon.png",
+            "LargeIcon": "Sprites/DazedImmuneIcon.png",
+            "SmallIcon": "Sprites/DazedImmuneIcon.png",
             "SnippetDesc": "Immune to Dazed until End of Round.",
-            "Tags": ["Ailment", "Phy"]
+            "Tags": []
         },
         "EffectDetails":{
             "IsGood": true,
@@ -202,13 +209,6 @@
             "Duration": {
                 "DurationType": "TurnEnd",
                 "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_Duration.gd"
-            },
-            "ApplyDamage": {
-                "DamageKey": "DamageData1",
-                "OptionalTriggers": [
-                    "OnActionEnd"
-                ],
-                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_ApplyDamage.gd"
             }
         }
     },
@@ -249,12 +249,9 @@
                 "DurationType": "TurnEnd",
                 "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_Duration.gd"
             },
-            "ApplyDamage": {
-                "DamageKey": "DamageData1",
-                "OptionalTriggers": [
-                    "OnActionEnd"
-                ],
-                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_ApplyDamage.gd"
+            "ApplyStatMod": {
+                "AllStatMods": true,
+                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_ModStat.gd"
             }
         }
     }

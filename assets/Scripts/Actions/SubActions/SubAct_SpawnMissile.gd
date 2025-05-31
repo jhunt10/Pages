@@ -15,14 +15,10 @@ func get_action_tags(_subaction_data:Dictionary)->Array:
 
 func do_thing(parent_action:BaseAction, subaction_data:Dictionary, metadata:QueExecutionData,
 				game_state:GameStateData, actor:BaseActor)->bool:
-	var target_params = _get_target_parameters(parent_action, actor, subaction_data)
 	var target_key = subaction_data['TargetKey']
 	var damage_key = subaction_data['DamageKey']
 	var missile_key = subaction_data['MissileKey']
 	var turn_data:TurnExecutionData = metadata.get_current_turn_data()
-	if !target_params:
-		printerr("SubAct_SpawnMissile.get_target_spt_of_missile: No TargetParams found for: %s " % [subaction_data.get("TargetParamKey")])
-		return BaseSubAction.Failed
 	if !turn_data.has_target(target_key):
 		printerr("SubAct_SpawnMissile.get_target_spt_of_missile: No TargetData found for : ", target_key)
 		return BaseSubAction.Failed
@@ -36,6 +32,12 @@ func do_thing(parent_action:BaseAction, subaction_data:Dictionary, metadata:QueE
 	var target_spot = get_target_spot_of_missile(target_key, metadata, game_state)
 	if not target_spot:
 		printerr("SubAct_SpawnMissile.get_target_spt_of_missile: No target found for : ", target_key)
+		return BaseSubAction.Failed
+	
+	var target_param_key = turn_data.get_param_key_for_target(target_key)
+	var target_params = parent_action.get_targeting_params(target_param_key, actor)
+	if !target_params:
+		printerr("SubAct_SpawnMissile.get_target_spt_of_missile: No TargetParams found for: %s " % [subaction_data.get("TargetParamKey")])
 		return BaseSubAction.Failed
 	
 	var damage_data = (parent_action.DamageDatas[damage_key] as Dictionary).duplicate(true)

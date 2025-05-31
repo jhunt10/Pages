@@ -152,6 +152,9 @@ func fill_page_ammo(action_key:String=""):
 	if action_key == "":
 		for key in actor.get_action_key_list():
 			var action = ActionLibrary.get_action(key)
+			if not action:
+				printerr("ActionQue.fill_ammo: Failed to find Action '%s'." %[key])
+				continue
 			var ammo_data = action.get_ammo_data(actor)
 			if not ammo_data:
 				continue

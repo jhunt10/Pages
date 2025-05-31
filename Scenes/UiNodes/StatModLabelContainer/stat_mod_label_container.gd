@@ -9,7 +9,11 @@ extends HBoxContainer
 @export var plus_label:Label
 @export var times_label:Label
 
-func set_mod_data(mod_data:Dictionary):
+func set_mod_data(mod_data):
+	if mod_data is BaseStatMod:
+		mod_data = mod_data.get_as_data()
+	if not mod_data is Dictionary:
+		return
 	var stat_name:String = mod_data.get("StatName", "")
 	if stat_name.begins_with("Bar"):
 		var display_stat_name = stat_name

@@ -37,7 +37,7 @@ var defender_block_mod:float
 var defender_protection:int
 
 var final_damage_mod:float
-var damage_events:Array = []
+var damage_events:Dictionary = {}
 var applied_effect_datas:Dictionary = {}
 
 func _init( parent:AttackEvent,
@@ -80,8 +80,8 @@ func dictialize_self()->Dictionary:
 		"final_damage_mod": final_damage_mod,
 		"applied_effect_datas": applied_effect_datas,
 		
-		"damage_events": [],
+		"damage_events": {},
 	}
-	for damage_event in damage_events:
-		data["damage_events"].append(damage_event.dictialize_self())
+	for damage_event_key in damage_events.keys():
+		data["damage_events"][damage_event_key] = damage_events[damage_event_key].dictialize_self()
 	return data

@@ -54,8 +54,8 @@ const BlocksLOS = "BlocksLOS"
 const AggroMod = "AggroMod"
 
 const stat_abbrs:Dictionary = {
-	PhyAttack: "PHY",
-	MagAttack: "MAG",
+	PhyAttack: "PHY ATK",
+	MagAttack: "MAG ATK",
 	Strength: "STR",
 	Agility: "AGL",
 	Intelligence: "INT",
@@ -101,6 +101,12 @@ const stat_icon_paths:Dictionary = {
 }
 
 static func get_stat_abbr(stat_name:String)->String:
+	if stat_name.begins_with("Resistance:"):
+		var damage_type = stat_name.trim_prefix("Resistance:")
+		return damage_type + " Dmg Resist"
+	if stat_name.begins_with("LmtEftCount:"):
+		var limited_effect_type = stat_name.trim_prefix("LmtEftCount:")
+		return "Max " + limited_effect_type + " Count"
 	return stat_abbrs.get(stat_name, stat_name)
 
 static func get_stat_icon(stat_name:String)->Texture2D:

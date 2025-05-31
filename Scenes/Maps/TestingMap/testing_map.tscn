@@ -1302,16 +1302,15 @@ facing = 2
 map_coor = Vector2i(7, 5)
 
 [node name="SpwanNode_MovingTarget" type="Sprite2D" parent="MapMarkerMapLayer"]
-visible = false
-position = Vector2(240, 208)
+position = Vector2(208, 112)
 texture = ExtResource("12_2qpl1")
 offset = Vector2(0, -16)
 hframes = 12
 vframes = 4
 script = ExtResource("11_vji11")
-spawn_actor_key = "TestTarget"
+spawn_actor_key = "MovingTarget"
 facing = 2
-map_coor = Vector2i(7, 6)
+map_coor = Vector2i(6, 3)
 
 [node name="SpwanNode_TestTarget3" type="Sprite2D" parent="MapMarkerMapLayer"]
 visible = false

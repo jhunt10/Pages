@@ -4,6 +4,26 @@ const LOGGING = true
 
 const STAT_BALENCE:int = 100
 
+static func get_damage_color(damage_type, as_text = false):
+	if damage_type is String:
+		damage_type = DamageEvent.DamageTypes.get(damage_type)
+	var color_text = "000000"
+	match damage_type:
+		DamageEvent.DamageTypes.Slash: color_text = "8c4f4f"
+		DamageEvent.DamageTypes.Blunt: color_text = "597882"
+		DamageEvent.DamageTypes.Pierce: color_text = "b4b991"
+		DamageEvent.DamageTypes.Crash: color_text = "377A59"
+		DamageEvent.DamageTypes.Fire: color_text = "cb0000"
+		DamageEvent.DamageTypes.Cold: color_text = "65c1ef"
+		DamageEvent.DamageTypes.Shock: color_text = "f2da00"
+		DamageEvent.DamageTypes.Poison: color_text = "00a355"
+		DamageEvent.DamageTypes.Light: color_text = "FFFFCF"
+		DamageEvent.DamageTypes.Dark: color_text = "500050"
+	if as_text:
+		return color_text
+	return Color(color_text)
+
+
 static func get_min_max_damage(actor:BaseActor, damage_data:Dictionary)->Array:
 	var base_damage = 0
 	var attack_stat = damage_data.get("AtkStat")
@@ -23,14 +43,86 @@ static func get_min_max_damage(actor:BaseActor, damage_data:Dictionary)->Array:
 	var max_dam = ceili(float(base_damage) * max_power * attack_power_scale)
 	return [min_dam, max_dam]
 
+# Made for Bonus Damage, holding off on that idea
+#static func create_and_roll_for_damage_events(
+		#damage_data:Dictionary, 
+		#attacker:BaseActor, 
+		#defender:BaseActor, 
+		#source_tag_chain:SourceTagChain, 
+		#extra_damage_mods:Dictionary = {},
+		#actor_atk_mods_provided:bool=false
+	#)->Array:
+	#var out_list = []
+	## Add Damage mods from Actors if not provided 
+	#if not actor_atk_mods_provided:
+		#var attacker_mods = attacker.get_damage_mods()
+		#for mod_key:String in attacker_mods.keys():
+			#if not extra_damage_mods.has(mod_key):
+				#extra_damage_mods[mod_key] = attacker_mods[mod_key]
+		#var defender_mods = attacker.get_damage_mods()
+		#for mod_key:String in defender_mods.keys():
+			#if not extra_damage_mods.has(mod_key):
+				#extra_damage_mods[mod_key] = defender_mods[mod_key]
+	#var damage_mods = {}
+	#var bonus_damage_datas = {}
+	#
+	## Find Bonus Damage mods that apply, and cache the rest
+	#for damage_mod_key in extra_damage_mods.keys():
+		#var damage_mod:Dictionary = extra_damage_mods[damage_mod_key]
+		#if damage_mod.get("ModType", '') == "BonusDamage":
+			#if does_damage_mod_apply(damage_mod, attacker, defender, damage_data, source_tag_chain):
+				#bonus_damage_datas[damage_mod_key] = BaseLoadObjectLibrary._merge_defs(damage_mod.get("DamageData", {}), damage_data)
+			#else:
+				#damage_mods[damage_mod_key] = damage_mod
+	#
+	#
+	#
+	## Create Base DamageEvent
+	#var damage_event = roll_for_damage(damage_data, attacker, defender, source_tag_chain, damage_mods, true)
+	#out_list.append(damage_event)
+	#
+	## Handle Bonus Damage
+	#for bonus_key in bonus_damage_datas.keys():
+		#var bonus_damage_data = bonus_damage_datas[bonus_key]
+		#var mods_for_bonus_damage = {}
+		##Check with mods will apply
+		#for damage_mod_key in damage_mods.keys():
+			#var damage_mod:Dictionary = damage_mods[damage_mod_key]
+			## Skip mods that were already applied to base damage
+			#if damage_event.damage_mods.keys().has(damage_mod_key):
+				#continue
+			#if does_damage_mod_apply(damage_mod, attacker, defender, damage_data, source_tag_chain):
+				#mods_for_bonus_damage[damage_mod_key] = damage_mod
+		#var bonus_damage_event = roll_for_damage(bonus_damage_data, attacker, defender, source_tag_chain, mods_for_bonus_damage, true)
+		#out_list.append(bonus_damage_event)
+		#
+	#return out_list
 
 ## Roll damage and return a DamageEvent. 
 ## Damage mods from Actors will be appllied (by default), but those from Attack Mods must be provided 
-static func roll_for_damage(damage_data:Dictionary, attacker:BaseActor, defender:BaseActor, source_tag_chain:SourceTagChain, 
+static func roll_for_damage(
+		damage_data:Dictionary, 
+		attacker:BaseActor, 
+		defender:BaseActor, 
+		source_tag_chain:SourceTagChain, 
 		extra_damage_mods:Dictionary = {},
-		actor_atk_mods_provided:bool=false)->DamageEvent:
+		actor_atk_mods_provided:bool=false
+	)->DamageEvent:
+	# Add Damage mods from Actors if not provided 
+	if not actor_atk_mods_provided:
+		var attacker_mods = attacker.get_damage_mods()
+		for mod_key:String in attacker_mods.keys():
+			if not extra_damage_mods.has(mod_key):
+				extra_damage_mods[mod_key] = attacker_mods[mod_key]
+		var defender_mods = attacker.get_damage_mods()
+		for mod_key:String in defender_mods.keys():
+			if not extra_damage_mods.has(mod_key):
+				extra_damage_mods[mod_key] = defender_mods[mod_key]
+	
+	# Create DamageEvent
 	var damage_event = DamageEvent.new(damage_data, attacker, defender, source_tag_chain)
-	# Apply Damage mods
+	
+	# Add applicable Damage Mods
 	for damage_mod_key in extra_damage_mods.keys():
 		var damage_mod:Dictionary = extra_damage_mods[damage_mod_key]
 		if does_damage_mod_apply(damage_mod, attacker, defender, damage_data, source_tag_chain):
@@ -72,11 +164,13 @@ static func roll_for_damage(damage_data:Dictionary, attacker:BaseActor, defender
 	# Apply mods
 	var add_to = 0.0
 	var scale_by = 1.0
+	var type_ratios
 	for mod in damage_event.damage_mods.values():
 		if mod.get("ModType") == "Add":
 			add_to += mod.get("Value", 0)
 		if mod.get("ModType") == "Scale":
 			scale_by *= mod.get("Value", 1)
+		
 	working_damage  = (working_damage + add_to) * scale_by
 	damage_event.damage_after_mods = working_damage
 	
@@ -173,15 +267,15 @@ static func handle_damage(source, defender:BaseActor, damage_data:Dictionary,
 		var damage_effect_data = damage_data.get("DamageVfxData", {})
 		if damage_effect:
 			#if damage_event.final_damage < 0:
-				#damage_effect_data['DamageTextType'] = FlashTextController.FlashTextType.Healing_Dmg
+				#damage_effect_data['DamageTextType'] = VfxHelper.FlashTextType.Healing_Dmg
 			#elif source_tag_chain.has_tag("DOT"):
-				#damage_effect_data['DamageTextType'] = FlashTextController.FlashTextType.DOT_Dmg
+				#damage_effect_data['DamageTextType'] = VfxHelper.FlashTextType.DOT_Dmg
 			#elif attack_event.sub_events.cri > 1:
-				#damage_effect_data['DamageTextType'] = FlashTextController.FlashTextType.Crit_Dmg
+				#damage_effect_data['DamageTextType'] = VfxHelper.FlashTextType.Crit_Dmg
 			#elif attack_event.final_damage_mod < 1:
-				#damage_effect_data['DamageTextType'] = FlashTextController.FlashTextType.Blocked_Dmg
+				#damage_effect_data['DamageTextType'] = VfxHelper.FlashTextType.Blocked_Dmg
 			#else:
-			damage_effect_data['DamageTextType'] = FlashTextController.FlashTextType.Normal_Dmg
+			damage_effect_data['DamageTextType'] = VfxHelper.FlashTextType.Normal_Dmg
 			if source is BaseActor:
 				damage_effect_data['SourceActorId'] = source.Id
 			damage_effect_data['DamageNumber'] = 0 - damage_event.final_damage
@@ -247,13 +341,13 @@ static func build_damage_vfx_data(attack_event:AttackEvent, damage_event:DamageE
 	if damage_vfx_key:
 		damage_vfx_data['VfxKey'] = damage_vfx_key
 		if damage_event.final_damage < 0:
-			damage_vfx_data['DamageTextType'] = FlashTextController.FlashTextType.Healing_Dmg
+			damage_vfx_data['DamageTextType'] = VfxHelper.FlashTextType.Healing_Dmg
 		elif attack_event.is_crit and not attack_event.is_blocked:
-			damage_vfx_data['DamageTextType'] = FlashTextController.FlashTextType.Crit_Dmg
+			damage_vfx_data['DamageTextType'] = VfxHelper.FlashTextType.Crit_Dmg
 		elif attack_event.is_blocked and not attack_event.is_crit:
-			damage_vfx_data['DamageTextType'] = FlashTextController.FlashTextType.Blocked_Dmg
+			damage_vfx_data['DamageTextType'] = VfxHelper.FlashTextType.Blocked_Dmg
 		else:
-			damage_vfx_data['DamageTextType'] = FlashTextController.FlashTextType.Normal_Dmg
+			damage_vfx_data['DamageTextType'] = VfxHelper.FlashTextType.Normal_Dmg
 		damage_vfx_data['DamageNumber'] = 0 - damage_event.final_damage
 		damage_vfx_data['SourceActorId'] = attack_event.attacker.Id
 	return damage_vfx_data

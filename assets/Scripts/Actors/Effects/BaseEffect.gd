@@ -16,7 +16,8 @@ enum EffectTriggers {
 	OnAttacking_PreAttackRoll, OnAttacking_PostAttackRoll, OnAttacking_PostEffectRoll, OnAttacking_PostDamageRoll, OnAttacking_AfterAttack,
 	OnDefending_PreAttackRoll, OnDefending_PostAttackRoll, OnDefending_PostEffectRoll, OnDefending_PostDamageRoll, OnDefending_AfterAttack,
 	OnDeath, OnKill,
-	OnUseItem
+	OnUseItem,
+	OnOtherEffectToBeAdded, # When a different effect is added
 }
 
 ## Triggers which require additional information. They have thier own methods and can not be called from trigger_effect()
@@ -61,6 +62,7 @@ var DamageModDatas:Dictionary:
 	get: return get_load_val("DamageMods", {})
 
 
+var _inital_duration:int = 0
 var _duration_counter:int = -1
 var RemainingDuration:int:
 	get: return _duration_counter
@@ -271,6 +273,14 @@ func trigger_effect(trigger:EffectTriggers, game_state:GameStateData):
 		var actor = get_effected_actor()
 		if actor:
 			actor.effects.remove_effect(self)
+
+func trigger_other_effect_to_be_added(game_state:GameStateData, other_effect:BaseEffect, meta_data:Dictionary):
+	for sub_effect_key in _triggers_to_sub_effect_keys.get(EffectTriggers.OnOtherEffectToBeAdded, []):
+		var sub_effect_data = _sub_effects_data[sub_effect_key]
+		var sub_effect = _get_sub_effect_script(sub_effect_key)
+		if sub_effect:
+			sub_effect.other_effect_to_be_added(self, sub_effect_data, game_state, other_effect, meta_data)
+	
 
 func trigger_pre_move(game_state:GameStateData, old_pos:MapPos, new_pos:MapPos, move_type:String, moved_by_actor:BaseActor):
 	for sub_effect_key in _triggers_to_sub_effect_keys.get(EffectTriggers.PreMove, []):

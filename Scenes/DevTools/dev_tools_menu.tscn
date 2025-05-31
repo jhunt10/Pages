@@ -9,7 +9,7 @@
 [ext_resource type="Script" path="res://Scenes/DevTools/objects_counts_menu.gd" id="6_8b7ua"]
 [ext_resource type="Script" path="res://Scenes/DevTools/aggro_menu.gd" id="6_sbyrl"]
 
-[node name="DevToolsMenu" type="Control" node_paths=PackedStringArray("close_button", "create_page_items_button", "items_to_inventory_button", "add_item_menu_button", "add_item_menu")]
+[node name="DevToolsMenu" type="Control" node_paths=PackedStringArray("close_button", "reload_stuff_button", "create_page_items_button", "items_to_inventory_button", "add_item_menu_button", "add_item_menu")]
 z_index = 999
 z_as_relative = false
 layout_mode = 3
@@ -20,16 +20,17 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_mof5q")
 close_button = NodePath("BackPatchContainer/BoxContainer/TitleContainer/ExitButton")
+reload_stuff_button = NodePath("BackPatchContainer/BoxContainer/ReloadStuffButton")
 create_page_items_button = NodePath("BackPatchContainer/BoxContainer/MakeActionPagesButton")
 items_to_inventory_button = NodePath("BackPatchContainer/BoxContainer/AddItemsToInventoryButton")
 add_item_menu_button = NodePath("BackPatchContainer/BoxContainer/AddItemMenuButton")
 add_item_menu = NodePath("AddItemMenu")
 
 [node name="BackPatchContainer" type="Container" parent="." node_paths=PackedStringArray("background", "inner_container")]
-custom_minimum_size = Vector2(302, 161)
+custom_minimum_size = Vector2(302, 196)
 layout_mode = 0
 offset_right = 302.0
-offset_bottom = 161.0
+offset_bottom = 196.0
 script = ExtResource("2_fwuqo")
 background = NodePath("NinePatchRect")
 inner_container = NodePath("BoxContainer")
@@ -58,6 +59,10 @@ text = "Dev Tools"
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 text = "X"
+
+[node name="ReloadStuffButton" type="Button" parent="BackPatchContainer/BoxContainer"]
+layout_mode = 2
+text = "Reload Stuff"
 
 [node name="MakeActionPagesButton" type="Button" parent="BackPatchContainer/BoxContainer"]
 layout_mode = 2
@@ -398,12 +403,14 @@ text = "Recount"
 
 [node name="OptionButton" type="OptionButton" parent="ObjectsCountsMenu/BackPatch/BoxContainer"]
 layout_mode = 2
-item_count = 3
+item_count = 4
 popup/item_0/text = "Actors"
 popup/item_1/text = "Items"
 popup/item_1/id = 1
 popup/item_2/text = "Effects"
 popup/item_2/id = 2
+popup/item_3/text = "Action"
+popup/item_3/id = 3
 
 [node name="ScrollContainer" type="ScrollContainer" parent="ObjectsCountsMenu/BackPatch/BoxContainer"]
 custom_minimum_size = Vector2(0, 200)
@@ -419,3 +426,4 @@ text = "Some Item"
 [node name="Button" type="Button" parent="ObjectsCountsMenu/BackPatch/BoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 text = "Some Item"
+alignment = 0

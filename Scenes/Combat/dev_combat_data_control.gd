@@ -37,7 +37,6 @@ func _process(delta: float) -> void:
 	pass
 
 func _toggle_stat_bars():
-	ActionLibrary.Instance.reload()
 	CombatRootControl.Instance.ui_control.stats_collection_display.visible = !CombatRootControl.Instance.ui_control.stats_collection_display.visible 
 
 func force_build_ques():

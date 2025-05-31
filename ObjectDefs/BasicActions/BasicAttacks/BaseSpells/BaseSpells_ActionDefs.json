@@ -1,6 +1,6 @@
 [
     {
-        "ActionKey": "BaseApplyEffectSpell",
+        "ActionKey": "_BaseApplyEffectSpell",
         "AmmoData": {
             "Cost": 4,
             "Clip": 16,
@@ -9,22 +9,27 @@
         "AttackDetails":
         {
             "AccuracyMod": 1,
-            "PotencyMod": 1
+            "PotencyMod": 1,
+            "AutoApplyEffect": false
         },
         "DamageDatas": {
         },
         "EffectDatas":{
-            "Effect1": {
-                "EffectKey": "AilmentShocked",
-                "Duration": 5
+            "ApplyEffect": {
+                "EffectKey": "AilmentBurned",
+                "EffectDetails":{
+                    "DurationData":{
+                        "BaseDuration": 3
+                    }
+                }
             }
         },
         "Details": {
-            "Description": "Apply EFFECT on Actor for X turns.",
-            "DisplayName": "Apply EFFECT",
+            "Description": "Attempt to apply @@#EftData:ApplyEffect:Name@@ to one @@#TrgParm:TargetParam:TargetType@@ for @@#EftData:ApplyEffect:Duration@@.\n\n@@#EftData:ApplyEffect@@",
+            "DisplayName": "Apply Effect",
             "LargeIcon": "Sprites/ICON.png",
             "SmallIcon": "Sprites/ICON.png",
-            "SnippetDesc": "Apply EFFECT for X turns.",
+            "SnippetDesc": "Apply @@#EftData:ApplyEffect:Name@@ for @@#EftData:ApplyEffect:Duration@@.",
             "Tags": [
                 "Apply",
                 "Spell"
@@ -32,7 +37,7 @@
         },
         "MissileDatas": {},
         "Preview": {
-            "PreviewTargetKey": "TargetParam1"
+            "PreviewTargetKey": "TargetParam"
         },
         "SubActions": {
             "5": [
@@ -49,7 +54,7 @@
                     "AllowAutoTarget": false,
                     "SetTargetKey": "Target1",
                     "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_GetTarget.gd",
-                    "TargetParamKey": "TargetParam1"
+                    "TargetParamKey": "TargetParam"
                 }
             ],
             "11": [
@@ -59,7 +64,7 @@
                 {
                     "SubActionScript": "res://assets/Scripts/Actions/SubActions/Effects/SubAct_ApplyEffect.gd",
                     "TargetKey": "Target1",
-                    "EffectDataKey": "Effect1"
+                    "EffectDataKey": "ApplyEffect"
                 },
                 {
                     "SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponMotionAnimation.gd",
@@ -69,17 +74,117 @@
             ]
         },
         "TargetParams": {
-            "TargetParam1": {
-                "EffectsAllies": true,
-                "EffectsEnemies": true,
-                "LineOfSight": false,
+            "TargetParam": {
+                "LineOfSight": true,
                 "TargetArea": "[[-1,2],[0,2],[1,2],[-1,1],[0,1],[1,1],[-1,0],[0,0],[1,0]]",
                 "TargetType": "Actor"
             }
         }
     },
     {
-        "ActionKey": "BaseBoltSpell",
+        "ActionKey":"_BaseApplyBuffSpell",
+        "ParentKey":"_BaseApplyEffectSpell",
+        "Details": {
+            "Description": "Grant @@#EftData:ApplyEffect:Name@@ to one @@#TrgParm:TargetParam:TargetType@@ for @@#EftData:ApplyEffect:Duration@@.\n\n@@#EftData:ApplyEffect@@",
+            "DisplayName": "Apply Effect",
+            "LargeIcon": "Sprites/ICON.png",
+            "SmallIcon": "Sprites/ICON.png",
+            "SnippetDesc": "Apply @@#EftData:ApplyEffect:Name@@ for @@#EftData:ApplyEffect:Duration@@.",
+            "Tags": [
+                "Buff"
+            ]
+        },
+        "AttackDetails":{
+            "AutoApplyEffect": true
+        }
+    },
+    {
+        "ActionKey": "BaseRangedSpell",
+        "AmmoData": {
+            "Cost": 4,
+            "Clip": 24,
+            "AmmoType": "Mag"
+        },
+        "AttackDetails":
+        {
+            "AccuracyMod": 1,
+            "PotencyMod": 1,
+            "AttackVfxKey": "FireMissile",
+            "AttackVfxData": {}
+        },
+        "DamageDatas": {
+            "RangedSpellDamage": {
+                "AtkPwrBase": 80,
+                "AtkPwrRange": 20,
+                "AtkPwrScale": 1,
+                "AtkStat": "MagAttack",
+                "BaseDamage": 0,
+                "DamageVfxKey": "SmallDAMAGE_TYPE_DamageEffect",
+                "DamageType": "DAMAGE_TYPE",
+                "DefenseType": "Ward"
+            }
+        },
+        "EffectDatas":{},
+        "Details": {
+            "Description": "Make a @@#Color:Red:Ranged Spell Attack@@ against an @@#TrgParm:TargetParam:TargetType@@ in range, dealing @@#DmgData:RangedSpellDamage@@ on hit.",
+            "DisplayName": "DAMAGE_TYPE Bolt",
+            "LargeIcon": "Sprites/ICON.png",
+            "SmallIcon": "Sprites/ICON.png",
+            "SnippetDesc": "Shoot a bolt of DAMAGE_TYPE",
+            "Tags": [
+                "Attack",
+                "Spell",
+                "Ranged",
+                "LOS"
+            ]
+        },
+        "Preview": {
+            "PreviewTargetKey": "TargetParam",
+            "PreviewDamageKey": "RangedSpellDamage"
+        },
+        "SubActions": {
+            "0": [
+                {
+                    "Animation": "Raise",
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponReadyAnimation.gd",
+                    "MainHand": true,
+                    "OffHand": "Never"
+                }
+            ],
+            "12": [
+                {
+                    "AllowAlreadyTargeted": false,
+                    "AllowAutoTarget": true,
+                    "SetTargetKey": "Target1",
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_GetTarget.gd",
+                    "TargetParamKey": "TargetParam"
+                },
+                {
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_PayCost.gd"
+                },
+                {
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Attacks/SubAct_Attack.gd",
+                    "TargetKey": "Target1",
+                    "DamageKey": "RangedSpellDamage"
+                    
+                },
+                {
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponMotionAnimation.gd",
+                    "MainHand": true,
+                    "OffHand": "Never"
+                }
+            ]
+        },
+        "TargetParams": {
+            "TargetParam": {
+                "LineOfSight": true,
+                "TargetArea": "[[-1,3],[0,3],[1,3],[-1,2],[0,2],[1,2],[0,1]]",
+                "TargetType": "Actor"
+            }
+        }
+    },
+    {
+        "ActionKey": "BaseMissileSpell",
         "AmmoData": {
             "Cost": 4,
             "Clip": 24,
@@ -91,23 +196,24 @@
             "PotencyMod": 1
         },
         "DamageDatas": {
-            "Damage1": {
-                "AtkPower": 80,
+            "MissleSpellDamage": {
+                "AtkPwrBase": 100,
+                "AtkPwrRange": 20,
+                "AtkPwrScale": 1,
                 "AtkStat": "MagAttack",
                 "BaseDamage": 0,
                 "DamageVfxKey": "SmallDAMAGE_TYPE_DamageEffect",
                 "DamageType": "DAMAGE_TYPE",
-                "DamageVarient": 0.2,
                 "DefenseType": "Ward"
             }
         },
         "EffectDatas":{},
         "Details": {
-            "Description": "Shoot a bolt of DAMAGE_TYPE at Spot.",
-            "DisplayName": "DAMAGE_TYPE Bolt",
+            "Description": "Shoot a @@#Color:Missle@@ at @@#TrgParm:TargetParam:TargetType@@ in range, dealing @@#DmgData:MissleSpellDamage@@ to any @@#Color:Red:Actor@@ it hits.",
+            "DisplayName": "DAMAGE_TYPE Missile",
             "LargeIcon": "Sprites/ICON.png",
             "SmallIcon": "Sprites/ICON.png",
-            "SnippetDesc": "Shoot a bolt of DAMAGE_TYPE",
+            "SnippetDesc": "Shoot a Missle of DAMAGE_TYPE",
             "Tags": [
                 "Attack",
                 "Spell",
@@ -116,16 +222,16 @@
             ]
         },
         "MissileDatas": {
-            "Missile1": {
-                "DamageDataKey": "Damage1",
+            "SpellMissile": {
+                "DamageDataKey": "MissleSpellDamage",
                 "FramesPerTile": 3,
                 "ImpactVfxKey": null,
                 "MissileVfxKey": "DAMAGE_TYPEMissile"
             }
         },
         "Preview": {
-            "PreviewTargetKey": "TargetParam1",
-            "PreviewDamageKey": "Damage1"
+            "PreviewTargetKey": "TargetParam",
+            "PreviewDamageKey": "MissleSpellDamage"
         },
         "SubActions": {
             "5": [
@@ -142,19 +248,16 @@
                     "AllowAutoTarget": false,
                     "SetTargetKey": "Target1",
                     "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_GetTarget.gd",
-                    "TargetParamKey": "TargetParam1"
-                }
-            ],
-            "11": [
+                    "TargetParamKey": "TargetParam"
+                },
                 {
                     "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_PayCost.gd"
                 },
                 {
-                    "DamageKey": "Damage1",
-                    "MissileKey": "Missile1",
+                    "DamageKey": "MissleSpellDamage",
+                    "MissileKey": "SpellMissile",
                     "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_SpawnMissile.gd",
-                    "TargetKey": "Target1",
-                    "TargetParamKey": "TargetParam1"
+                    "TargetKey": "Target1"
                 },
                 {
                     "SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponMotionAnimation.gd",
@@ -164,17 +267,17 @@
             ]
         },
         "TargetParams": {
-            "TargetParam1": {
+            "TargetParam": {
                 "EffectsAllies": false,
                 "EffectsEnemies": true,
                 "LineOfSight": true,
-                "TargetArea": "[[-1,4],[0,4],[1,4],[-1,3],[0,3],[1,3],[-1,2],[0,2],[1,2]]",
-                "TargetType": "Actor"
+                "TargetArea": "[[-1,4],[0,4],[1,4],[-2,3],[-1,3],[0,3],[1,3],[2,3],[-1,2],[0,2],[1,2]]",
+                "TargetType": "Spot"
             }
         }
     },
     {
-        "ActionKey": "BaseTouchSpell",
+        "ActionKey": "BaseMeleeSpell",
         "AmmoData": {
             "Cost": 4,
             "Clip": 24,
@@ -186,19 +289,20 @@
             "PotencyMod": 1
         },
         "DamageDatas": {
-            "Damage1": {
-                "AtkPower": 100,
+            "MeleeSpellDamage": {
+                "AtkPwrBase": 100,
+                "AtkPwrRange": 10,
+                "AtkPwrScale": 1,
                 "AtkStat": "MagAttack",
                 "BaseDamage": 0,
                 "DamageVfxKey": "SmallDAMAGE_TYPE_DamageEffect",
                 "DamageType": "DAMAGE_TYPE",
-                "DamageVarient": 0.1,
                 "DefenseType": "Ward"
             }
         },
         "EffectDatas":{},
         "Details": {
-            "Description": "Touch an Actor and apply DAMAGE_TYPE damage.",
+            "Description": "Make a @@#Color:Red:Melee Spell Attack@@ against an @@#TrgParm:TargetParam:TargetType@@ dealing @@#DmgData:MeleeSpellDamage@@ on hit.",
             "DisplayName": "DAMAGE_TYPE Bolt",
             "LargeIcon": "Sprites/ICON.png",
             "SmallIcon": "Sprites/ICON.png",
@@ -206,12 +310,12 @@
             "Tags": [
                 "Attack",
                 "Spell",
-                "Touch"
+                "Melee"
             ]
         },
         "Preview": {
             "PreviewTargetKey": "TargetParam",
-            "PreviewDamageKey": "Damage1"
+            "PreviewDamageKey": "MeleeSpellDamage"
         },
         "SubActions": {
             "5": [
@@ -238,7 +342,7 @@
                 {
                     "SubActionScript": "res://assets/Scripts/Actions/SubActions/Attacks/SubAct_Attack.gd",
                     "TargetKey": "Target1",
-                    "DamageKey": "Damage1"
+                    "DamageKey": "MeleeSpellDamage"
                 },
                 {
                     "SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponMotionAnimation.gd",
@@ -249,8 +353,6 @@
         },
         "TargetParams": {
             "TargetParam": {
-                "EffectsAllies": false,
-                "EffectsEnemies": true,
                 "LineOfSight": true,
                 "TargetArea": "[[-1,0],[1,0],[-1,1],[0,1],[1,1]]",
                 "TargetType": "Actor"
@@ -271,13 +373,14 @@
         },
         "DamageDatas": {
             "Damage1": {
-                "AtkPower": 100,
+                "AtkPwrBase": 100,
+                "AtkPwrRange": 10,
+                "AtkPwrScale": 1,
                 "AtkStat": "MagAttack",
                 "BaseDamage": 0,
                 "DamageVfxKey": "SmallDAMAGE_TYPE_DamageEffect",
                 "DamageType": "DAMAGE_TYPE",
-                "DamageVarient": 0.1,
-                "DefenseType": "Ward"
+                "DefenseType": "None"
             }
         },
         "EffectDatas":{
@@ -371,12 +474,13 @@
         },
         "DamageDatas": {
             "Damage1": {
-                "AtkPower": 100,
+                "AtkPwrBase": 100,
+                "AtkPwrRange": 20,
+                "AtkPwrScale": 1,
                 "AtkStat": "MagAttack",
                 "BaseDamage": 0,
                 "DamageVfxKey": "SmallFire_DamageEffect",
                 "DamageType": "Fire",
-                "DamageVarient": 0.2,
                 "DefenseType": "Ward"
             }
         },

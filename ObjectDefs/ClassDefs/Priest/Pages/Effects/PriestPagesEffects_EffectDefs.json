@@ -1,35 +1,5 @@
 [
     {
-        "EffectKey": "_BaseBlessing",
-        "ShowInHud": true,
-        "ShowCounter": true,
-        "CanStack": true,
-        "IsGood": true,
-        "DamageDatas": {},
-        "DamageMods": {},
-        "AddTagsToActor": ["Blessed"],
-        "Details": {
-            "DisplayName": "Weak XXX Blessing",
-            "Description": "Weak Blessing of the XXX.",
-            "LargeIcon": "Sprites/EarthBuff_Small.png",
-            "SmallIcon": "Sprites/EarthBuff_Small.png",
-            "SnippetDesc": "Weak Blessing",
-            "Tags": []
-        },
-        "StatMods": {
-        },
-        "SubEffects": {
-            "ModStat": {
-                "AllStatMods": true,
-                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_ModStat.gd"
-            },
-            "Duration": {
-                "DurationType": "TurnEnd",
-                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_Duration.gd"
-            }
-        }
-    },
-    {
         "EffectKey": "_BaseBlessingEffect",
         "Details": {
             "Description": "Gain @@#StatMod:BlessMod1@@ and @@#StatMod:BlessMod2@@.",
@@ -156,6 +126,190 @@
                 "ModType": "Add",
                 "StatName": "Ward",
                 "Value": 15
+            }
+        }
+    },
+
+    {
+        "EffectKey": "NegateAilmentEffect",
+        "Details": {
+            "Description": "Negate the next Ailment you would recive.",
+            "DisplayName": "Negate Ailment",
+            "LargeIcon": "Sprites/AilmentGuard.png",
+            "SmallIcon": "Sprites/AilmentGuard.png",
+            "SnippetDesc": "Negate next Ailment",
+            "Tags": []
+        },
+        "EffectDetails":{
+            "IsGood": true,
+            "IsBad": false,
+            "DeleteAfterCombat": true,
+            "ShowInHud": true,
+            "ShowCounter": true,
+            "CanStack": false,
+            "AddTagsToActor": [],
+            "DurationData":{
+                "BaseDuration":1,
+                "DurationType": "RoundEnd"
+            }
+        },
+        "AttackMods": {
+        },
+        "SubEffects": {
+            "ModStat": {
+                "AllStatMods": true,
+                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_ModStat.gd"
+            },
+            "Duration": {
+                "DurationType": "TurnEnd",
+                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_Duration.gd"
+            },
+            "NegateAilment":{
+                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/OtherEffects/SubEffect_NegateOtherEffect.gd",
+                "OtherEffectTagFilters": [
+                    {
+                        "RequireAnyTags": ["Ailment"]
+                    }
+                ]
+            }
+        }
+    },
+
+
+
+
+    {
+        "EffectKey": "HolyWeaponEffect",
+        "Details": {
+            "Description": "Gain @@#AtkMod:HolyWeaponBaseAtkMod:DmgMod:HolyWeaponDmgMod@@ on @@#Color:Red:Weapon Attacks@@ against @@#Color:Red:Enemies@@. If the Enemy has the @@#Color:DmgColor:Dark@@ Tag, this damage is added as @@#Color:DmgColor:Light Damage@@ instead.",
+            "DisplayName": "Holy Weapon",
+            "LargeIcon": "Sprites/MassUp.png",
+            "SmallIcon": "Sprites/MassUp.png",
+            "SnippetDesc": "Gain @@#StatMod:BlessMod1@@ and @@#StatMod:BlessMod2@@.",
+            "Tags": []
+        },
+        "EffectDetails":{
+            "IsGood": true,
+            "IsBad": false,
+            "DeleteAfterCombat": true,
+            "ShowInHud": true,
+            "ShowCounter": true,
+            "CanStack": false,
+            "AddTagsToActor": ["HolyWeapon"],
+            "DurationData":{
+                "BaseDuration":2,
+                "DurationType": "RoundEnd"
+            }
+        },
+        "AttackMods": {
+            "HolyWeaponBaseAtkMod": {
+                "AttackModKey": "HolyWeaponAtkMod",
+                "CanStack": false,
+                "Conditions": {
+                    "AttackerFactionFilters": [ "Self" ],
+                    "DefendersConditions": [
+                        {
+                            "RequiresAllDefenders": false,
+                            "DefenderFactionFilters": [ "Enemy"],
+                            "DefenderTagFilters": [
+                                {
+                                    "ExcludeAnyTags": ["Dark"]
+                                }
+                            ]
+                        }
+                    ],
+                    "AttackSourceTagFilters": [
+                        {
+                            "RequireAnyTags": ["Weapon"]
+                        }
+                    ]
+                },
+                "AttackerStatMods": {},
+                "DefenderStatMods": {},
+                "DamageMods": {
+                    "HolyWeaponDmgMod": {
+                        "DamageModKey": "HolyWeaponDmgMod",
+                        "Conditions": {
+                            "DamageTypes": [], 
+                            "SourceFactionFilters": ["Self"],
+                            "DefenderFactionFilters": ["Enemy"],
+                            "DefenderTagFilters": [
+                                {
+                                    "ExcludeAnyTags": ["Dark"]
+                                }
+                            ],
+                            "SourceTagFilters": [
+                                {
+                                    "RequireAnyTags": ["Weapon"]
+                                }
+                            ]
+                        },
+                        "ModType": "Scale",
+                        "Value": 0.2
+                    }
+                },
+                "AddedDamageDatas":{
+                    "HolyWeaponAddedDamage": {
+                        "Conditions": {
+                            "DamageTypes": [], 
+                            "SourceFactionFilters": ["Self"],
+                            "DefenderFactionFilters": ["Enemy"],
+                            "DefenderTagFilters": [
+                                {
+                                    "RequireAnyTags": ["Dark"]
+                                }
+                            ],
+                            "SourceTagFilters": [
+                                {
+                                    "RequireAnyTags": ["Weapon"]
+                                }
+                            ]
+                        },
+                        "DamageDatas":{
+                            "HolyWeaponAddedDamage":{
+                                "AtkPwrBase": 100,
+                                "AtkPwrRange": 0,
+                                "AtkPwrScale": 0.2,
+                                "AtkStat": "",
+                                "BaseDamage": 0,
+                                "DamageVfxKey": "SmallDAMAGE_TYPE_DamageEffect",
+                                "DamageType": "DAMAGE_TYPE",
+                                "DefenseType": "Ward"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "SubEffects": {
+            "ModStat": {
+                "AllStatMods": true,
+                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_ModStat.gd"
+            },
+            "Duration": {
+                "DurationType": "TurnEnd",
+                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_Duration.gd"
+            },
+            "AddedDamage": {
+                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_Duration.gd",
+                "DamageModConditions": {
+                    "DamageTypes": [], 
+                    "SourceFactionFilters": ["Self"],
+                    "DefenderFactionFilters": ["Enemy"],
+                    "DefenderTagFilters": [
+                        {
+                            "RequireAnyTags": ["Dark"]
+                        }
+                    ],
+                    "SourceTagFilters": [
+                        {
+                            "RequireAnyTags": ["Weapon"]
+                        }
+                    ]
+                },
+                "AddForEachDamageEvent": true,
+                "AddedDamageType": "Light",
+                "AddedDamageScale": 0.2
             }
         }
     }

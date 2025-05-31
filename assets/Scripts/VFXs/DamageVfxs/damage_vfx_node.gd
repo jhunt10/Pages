@@ -20,7 +20,7 @@ func _process(delta: float) -> void:
 func show_flash_text():
 	var damage_number = _data.get("DamageNumber", 0)
 	var damage_color = _data.get("DamageColor", Color.WHITE)
-	var damage_text_type = _data.get("DamageTextType", FlashTextController.FlashTextType.Normal_Dmg)
+	var damage_text_type = _data.get("DamageTextType", VfxHelper.FlashTextType.Normal_Dmg)
 	var damage_string = str(damage_number)
-	vfx_holder.flash_text_controller.add_flash_text(damage_string, damage_text_type)
+	VfxHelper.create_flash_text(vfx_holder.actor_node, damage_string, damage_text_type)
 	_flash_text_shown = true

@@ -42,11 +42,20 @@
 		"RandomOffsets": [0, 0]
 	},
 	{
-		"VfxKey": "LightMissile",
+		"VfxKey": "LightBolt",
+        "ScenePath": "res://assets/Scripts/VFXs/BulletVfxs/bullet_vfx_node.tscn",
+		"SpriteName": "LightBolt.png",
+		"SpriteSheetWidth": 1,
+		"SpriteSheetHight": 1,
+		"RandomOffsets": [0, 0],
+		"Velocity": 400
+	},
+	{
+		"VfxKey": "LightBall",
 		"ScenePath": "res://assets/Scripts/VFXs/MissileVfx/missile_vfx_node.tscn",
 		"AnimationName": "4_sprites_250ms_frames_loop",
 		"AnimationSpeed": 3,
-		"SpriteName": "LightMissile.png",
+		"SpriteName": "LightBall.png",
 		"SpriteSheetWidth": 2,
 		"SpriteSheetHight": 2,
 		"RandomOffsets": [0, 0]

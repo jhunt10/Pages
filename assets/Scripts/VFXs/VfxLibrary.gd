@@ -8,7 +8,7 @@ static var _vfx_datas:Dictionary = {}
 
 static var loaded = false
 
-func reload_vfxs():
+static func reload_vfxs():
 	_vfx_datas.clear()
 	_vfx_defs.clear()
 	loaded = false

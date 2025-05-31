@@ -2,6 +2,8 @@ class_name DescriptionBox
 extends RichTextLabel
 
 const pop_up_container_path = "res://Scenes/UiNodes/DescriptionBox/DescriptionPopUpContainer/description_popup_container.tscn"
+const RED_TEXT = "[color=#460000]"
+
 
 @export var popup_container:DecscriptionPopUpContainer
 
@@ -51,7 +53,18 @@ func set_object(object_def:Dictionary, object_inst:BaseLoadObject, actor:BaseAct
 			#var font_size := get_theme_default_font_size()
 			#var font_hight = font.get_height(font_size)
 			self.add_image(line, 0, 0, Color(1,1,1,1), INLINE_ALIGNMENT_BOTTOM)
-			
+	
+func get_damage_colored_text(damage_type)->String:
+	if damage_type is String and DamageEvent.DamageTypes.keys().has(damage_type):
+		damage_type = DamageEvent.DamageTypes.get(damage_type)
+	if not DamageEvent.DamageTypes.values().has(damage_type):
+		return str(damage_type)
+	var color_code = DamageHelper.get_damage_color(damage_type, true) 
+	var start_tag =  "[color=#" + color_code + "][outline_size=4][outline_color=#000000]"
+	var mid_value =  DamageEvent.DamageTypes.keys()[damage_type]
+	var end_tag = "[/outline_color][/outline_size][/color]"
+	return start_tag + mid_value + end_tag
+		
 
 func _build_bbcode_array(object_def:Dictionary, object_inst:BaseLoadObject, actor:BaseActor)->Array:
 	var out_arr = []
@@ -67,17 +80,28 @@ func _build_bbcode_array(object_def:Dictionary, object_inst:BaseLoadObject, acto
 		var sub_tokens = token.split(":")
 		match sub_tokens[0]:
 			'#Color': 
-				var color = sub_tokens[1]
-				out_line += "[color=#460000]" + sub_tokens[2] + "[/color]"
+				var start_tag = RED_TEXT
+				var mid_value = ''
+				var end_tag = "[/color]"
+				if sub_tokens.size() == 2:
+					mid_value = sub_tokens[1]
+				elif sub_tokens[1] == "DmgColor":
+					var color_code = DamageHelper.get_damage_color(sub_tokens[2], true) 
+					start_tag = "[color=#" + color_code + "][outline_size=4][outline_color=#000000]"
+					end_tag = "[/outline_color][/outline_size][/color]"
+				else:
+					mid_value = sub_tokens[2]
+				out_line += start_tag + mid_value + end_tag
+				
 			"#AccMod":
 				var attack_details = object_def.get("AttackDetails", {})
 				var acc_mod = attack_details.get("AccuracyMod", 1)
-				out_line += "[color=#460000]" + str(acc_mod * 100) + "% Accuracy[/color]"
+				out_line += RED_TEXT + str(acc_mod * 100) + "% Accuracy[/color]"
 			"#TrgParm":
 				var target_params_datas = object_def.get("TargetParams", {})
 				var param_data = target_params_datas.get(sub_tokens[1], {})
 				if param_data.has(sub_tokens[2]):
-					out_line += "[color=#460000]" + str(param_data[sub_tokens[2]]) + "[/color]"
+					out_line += RED_TEXT + str(param_data[sub_tokens[2]]) + "[/color]"
 			"#DmgData":
 				var damage_data = {}
 				var damage_key = sub_tokens[1]
@@ -93,6 +117,7 @@ func _build_bbcode_array(object_def:Dictionary, object_inst:BaseLoadObject, acto
 					damage_data = object_def.get("DamageDatas", {}).get(damage_key, {})
 				if damage_data.size() == 0:
 					continue
+				var damage_type = damage_data.get("DamageType", "???")
 				var hover_line = ''
 				var sub_line = ''
 				var is_percent_hp_damage = false
@@ -105,7 +130,6 @@ func _build_bbcode_array(object_def:Dictionary, object_inst:BaseLoadObject, acto
 					else:
 						sub_line += str(atk_scale * 100) + "% Weapon Damage"
 				else:
-					var damage_type = damage_data.get("DamageType", "???")
 					var atk_power = damage_data.get("AtkPwrBase", 0)
 					if damage_data.has("AtkPwrStat") and actor:
 						atk_power = actor.stats.get_stat(damage_data["AtkPwrStat"], 1)
@@ -119,22 +143,22 @@ func _build_bbcode_array(object_def:Dictionary, object_inst:BaseLoadObject, acto
 						is_percent_hp_damage = true
 						sub_line = val_line + "% Max HP as " + damage_type + " Damage" 
 					else:
-						sub_line = val_line + "% " + damage_type + " Damage" 
+						sub_line = val_line + "% " + StatHelper.get_stat_abbr(atk_stat) + " as " + damage_type + " Damage" 
 					
 				if actor and not is_percent_hp_damage:
 					hover_line = sub_line
 					var min_max = DamageHelper.get_min_max_damage(actor, damage_data)
-					var damage_type = damage_data.get("DamageType", "???")
 					if min_max[0] == min_max[1]:
 						sub_line = str(min_max[0]) + damage_type + " Damage"
 					else:
 						sub_line = str(min_max[0]) + " - " + str(min_max[1]) + " " + damage_type + " Damage" 
 				
 				if sub_line != '':
+					sub_line = sub_line.replace(damage_type, "[/color]" + get_damage_colored_text(damage_type) + RED_TEXT)
 					if hover_line != '':
-						out_line += "[color=#460000]" + "[url={\"data\":\"" + hover_line+ "\"}]" + sub_line + "[/url]"+ "[/color]"
+						out_line += "[url={\"data\":\"" + hover_line+ "\"}]" + RED_TEXT + sub_line + "[/color]" + "[/url]"
 					else:
-						out_line += "[color=#460000]" + sub_line + "[/color]"
+						out_line += RED_TEXT + sub_line + "[/color]"
 			'#EftData':
 				var effect_data = {}
 				if object_def.has("EffectDatas"):
@@ -164,96 +188,20 @@ func _build_bbcode_array(object_def:Dictionary, object_inst:BaseLoadObject, acto
 					var type_str = type.replace("End", '').replace("Start", '')
 					if value > 1:
 						type_str += "s"
-					out_line += "[color=#460000]" + str(value) + " " + type_str+ "[/color]"
+					out_line += RED_TEXT + str(value) + " " + type_str+ "[/color]"
 					
 			'#StatMod':
 				
-				if sub_tokens[1] == "MultiMods":
-					var mod_datas = {}
-					if object_def.has("StatMods"):
-						mod_datas = object_def.get("StatMods",{})
-					elif object_def.has("PageDetails"):
-						mod_datas = object_def.get("PageDetails").get("StatMods",{})
-					var mods_by_type_value = {}
-					for mod_data in mod_datas.values():
-						var type = mod_data.get("ModType", "")
-						var val = mod_data.get("Value", 0)
-						var stat = mod_data.get("StatName", "")
-						if not mods_by_type_value.has(type):
-							mods_by_type_value[type] = {}
-						if not mods_by_type_value[type].has(val):
-							mods_by_type_value[type][val] = []
-						mods_by_type_value[type][val].append(stat)
-					var multi_stat_line = ""
-					for mod_type in mods_by_type_value.keys():
-						for value in mods_by_type_value[mod_type].keys():
-							if not multi_stat_line == "":
-								multi_stat_line += "\n"
-							var str_val = str(value)
-							if mod_type == "Add" and value > 0:
-								multi_stat_line = "+" + str_val
-							if mod_type == "Scale":
-								multi_stat_line = "x" + str_val
-							multi_stat_line += " " + ", ".join(mods_by_type_value[mod_type][value])
-					if sub_tokens.size() > 2:
-						var show_line = sub_tokens[2]
-						out_line += "[color=#460000]" + "[url={\"data\":\"" + multi_stat_line+ "\"}]" + show_line + "[/url]"+ "[/color]"
-					else:
-						out_line += multi_stat_line
-							
-				else:
-					var mod_data = {}
-					if object_def.has("StatMods"):
-						mod_data = object_def.get("StatMods",{}).get(sub_tokens[1],{})
-					elif object_def.has("PageDetails"):
-						mod_data = object_def.get("PageDetails").get("StatMods",{}).get(sub_tokens[1],{})
-					if sub_tokens.size() == 2: # Give whole desription
-						var stat_name = mod_data['StatName']
-						var value = mod_data['Value']
-						var dep_stat_name = mod_data.get("DepStatName", "")
-						var mod_type = mod_data.get("ModType", "")
-						var abrev = StatHelper.get_stat_abbr(stat_name)
-						var str_val = str(value)
-						if mod_type == "Add" and value > 0:
-							str_val = "+" + str_val
-						if mod_type == "Scale":
-							str_val = "x" + str_val
-						if mod_type == "AddStat":
-							if actor:
-								value = actor.stats.get_stat(dep_stat_name, 0)
-								str_val = "+"+str(value)+"["+StatHelper.get_stat_abbr(dep_stat_name)+"] to "
-							else:
-								str_val = "+"+StatHelper.get_stat_abbr(dep_stat_name)+" to "
-						out_line += "[color=#460000]" + str_val + "[/color]"
-						
-						var icon = StatHelper.get_stat_icon(stat_name)
-						if icon: 
-							out_arr.append(out_line)
-							out_arr.append(icon)
-							out_line = ""
-						else:
-							out_line += " "
-						out_line +=  "[color=#460000]" + abrev + "[/color]"
-						
-					else:
-						if sub_tokens[2] == "Icon":
-							var stat_name = mod_data['StatName']
-							var icon = StatHelper.get_stat_icon(stat_name)
-							if icon:
-								out_arr.append(out_line)
-								out_line = ''
-								out_arr.append(icon)
-						elif sub_tokens[2] == "StatName":
-							var stat_name = mod_data['StatName']
-							out_line += "[color=#460000]" + StatHelper.get_stat_abbr(stat_name) + "[/color]"
-						elif sub_tokens[2] == "Value":
-							var value = mod_data['Value']
-							out_line += "[color=#460000]" + str(value) + "[/color]"
-						elif sub_tokens[2] == "ValuePercent":
-							var value = mod_data['Value']
-							out_line += "[color=#460000]" + str(value*100) + "%[/color]"
-						elif mod_data.has(sub_tokens[2]):
-							out_line += str(mod_data.get(sub_tokens[2], ''))
+				var mod_data = {}
+				if object_def.has("StatMods"):
+					mod_data = object_def.get("StatMods",{}).get(sub_tokens[1],{})
+				elif object_def.has("PageDetails"):
+					mod_data = object_def.get("PageDetails").get("StatMods",{}).get(sub_tokens[1],{})
+				var parsed_lines = _parse_stat_mod(mod_data, object_def, object_inst, actor, sub_tokens)
+				out_arr.append(out_line)
+				out_arr.append_array(parsed_lines)
+				out_line = ''
+				
 			'#DmgMod':
 				var mod_data = {}
 				if object_def.has("DamageMods"):
@@ -270,6 +218,36 @@ func _build_bbcode_array(object_def:Dictionary, object_inst:BaseLoadObject, acto
 				if sub_tokens[2] == 'DmgMod':
 					var dmg_mod = mod_data.get("DamageMods", {}).get(sub_tokens[3], {})
 					out_line += _parse_damage_mod(sub_tokens[4], dmg_mod)
+				# Defender Faction Filter
+				if sub_tokens[2] == 'DefFacFil':
+					var factions = []
+					for def_con in mod_data.get("Conditions", {}).get("DefendersConditions", []):
+						for filter:String in def_con.get("DefenderFactionFilters", []):
+							if not factions.has(filter):
+								# TODO: Obviously bad for translations
+								if filter.ends_with("y"):
+									filter = filter.trim_suffix("y") + "ies"
+								factions.append(filter)
+					out_line += RED_TEXT + ", ".join(factions) + "[/color]"
+				if sub_tokens[2] == 'StatMod':
+					var mod_key = sub_tokens[3]
+					var stat_mod_data = mod_data.get("StatMods", {}).get(mod_key, {})
+					var sub_sub_tokens = sub_tokens.duplicate() 
+					sub_sub_tokens.remove_at(0)
+					sub_sub_tokens.remove_at(0)
+					var parsed_lines = _parse_stat_mod(stat_mod_data, object_def, object_inst, actor, sub_sub_tokens)
+					out_arr.append(out_line)
+					out_arr.append_array(parsed_lines)
+					out_line = ''
+				if sub_tokens[2] == 'AtkSrcFil':
+					var what_ever_tags = []
+					var tag_filters = mod_data.get("Conditions", {}).get("AttackSourceTagFilters", [])
+					for filter:Dictionary in tag_filters:
+						what_ever_tags.append_array(filter.get("RequireAnyTags", []))
+					out_line += RED_TEXT + ", ".join(what_ever_tags) + "[/color]"
+					
+					
+					
 				
 	if out_line != '':
 		out_arr.append(out_line)
@@ -285,12 +263,108 @@ func _parse_damage_mod(parse_type:String, mod_data:Dictionary)->String:
 			if mod_value > 0:
 				out_line +=  "[color=#460000]+" + str(mod_value) + "%[/color]"
 			else:
-				out_line +=  "[color=#460000]" + str(mod_value) + "%[/color]"
+				out_line +=  RED_TEXT + str(mod_value) + "%[/color]"
 		elif  mod_type == "Add":
 			if mod_value > 0:
 				out_line +=  "[color=#460000]+" + str(mod_value) + "[/color]"
 			else:
-				out_line +=  "[color=#460000]" + str(mod_value) + "[/color]"
+				out_line +=  RED_TEXT + str(mod_value) + "[/color]"
 		else:
-			out_line +=  "[color=#460000]" + str(mod_value) + "[/color]"
+			out_line +=  RED_TEXT + str(mod_value) + "[/color]"
+	return out_line
+
+func _parse_stat_mod(mod_data:Dictionary, object_def:Dictionary, object_inst:BaseLoadObject, actor:BaseActor, sub_tokens:Array)->Array:
+	var out_arr = []
+	var out_line = ''
+	# Multiple mods compressed into one line
+	if sub_tokens[1] == "MultiMods":
+		return [_parse_stat_mod_multi(object_def, object_inst, actor, sub_tokens)]
+	
+	if sub_tokens.size() == 2: # Give whole desription
+		var stat_name:String = mod_data.get('StatName', "???")
+		var value = mod_data.get('Value', 0)
+		var dep_stat_name = mod_data.get("DepStatName", "")
+		var mod_type = mod_data.get("ModType", "")
+		
+		
+		var display_stat_name = StatHelper.get_stat_abbr(stat_name)
+		var str_val = str(value)
+		if mod_type == "Add" and value > 0:
+			str_val = "+" + str_val
+		if mod_type == "Scale":
+			str_val = "x" + str_val
+		if mod_type == "AddStat":
+			if actor:
+				value = actor.stats.get_stat(dep_stat_name, 0)
+				str_val = "+"+str(value)+"["+StatHelper.get_stat_abbr(dep_stat_name)+"] to "
+			else:
+				str_val = "+"+StatHelper.get_stat_abbr(dep_stat_name)+" to "
+		if stat_name.begins_with("Resistance"):
+			str_val += "%"
+		out_line += RED_TEXT + str_val + "[/color]"
+		
+		var icon = StatHelper.get_stat_icon(stat_name)
+		if icon: 
+			out_arr.append(out_line)
+			out_arr.append(icon)
+			out_line = ""
+		else:
+			out_line += " "
+		out_line +=  RED_TEXT + display_stat_name + "[/color]"
+		
+	else:
+		if sub_tokens[2] == "Icon":
+			var stat_name = mod_data['StatName']
+			var icon = StatHelper.get_stat_icon(stat_name)
+			if icon:
+				out_arr.append(out_line)
+				out_line = ''
+				out_arr.append(icon)
+		elif sub_tokens[2] == "StatName":
+			var stat_name = mod_data['StatName']
+			out_line += RED_TEXT + StatHelper.get_stat_abbr(stat_name) + "[/color]"
+		elif sub_tokens[2] == "Value":
+			var value = mod_data['Value']
+			out_line += RED_TEXT + str(value) + "[/color]"
+		elif sub_tokens[2] == "ValuePercent":
+			var value = mod_data['Value']
+			out_line += RED_TEXT + str(value*100) + "%[/color]"
+		elif mod_data.has(sub_tokens[2]):
+			out_line += str(mod_data.get(sub_tokens[2], ''))
+	out_arr.append(out_line)
+	return out_arr
+
+func _parse_stat_mod_multi(object_def:Dictionary, object_inst:BaseLoadObject, actor:BaseActor, sub_tokens:Array)->String:
+	var out_line = ''
+	var mod_datas = {}
+	if object_def.has("StatMods"):
+		mod_datas = object_def.get("StatMods",{})
+	elif object_def.has("PageDetails"):
+		mod_datas = object_def.get("PageDetails").get("StatMods",{})
+	var mods_by_type_value = {}
+	for mod_data in mod_datas.values():
+		var type = mod_data.get("ModType", "")
+		var val = mod_data.get("Value", 0)
+		var stat = mod_data.get("StatName", "")
+		if not mods_by_type_value.has(type):
+			mods_by_type_value[type] = {}
+		if not mods_by_type_value[type].has(val):
+			mods_by_type_value[type][val] = []
+		mods_by_type_value[type][val].append(stat)
+	var multi_stat_line = ""
+	for mod_type in mods_by_type_value.keys():
+		for value in mods_by_type_value[mod_type].keys():
+			if not multi_stat_line == "":
+				multi_stat_line += "\n"
+			var str_val = str(value)
+			if mod_type == "Add" and value > 0:
+				multi_stat_line = "+" + str_val
+			if mod_type == "Scale":
+				multi_stat_line = "x" + str_val
+			multi_stat_line += " " + ", ".join(mods_by_type_value[mod_type][value])
+	if sub_tokens.size() > 2:
+		var show_line = sub_tokens[2]
+		out_line += RED_TEXT + "[url={\"data\":\"" + multi_stat_line+ "\"}]" + show_line + "[/url]"+ "[/color]"
+	else:
+		out_line += multi_stat_line
 	return out_line

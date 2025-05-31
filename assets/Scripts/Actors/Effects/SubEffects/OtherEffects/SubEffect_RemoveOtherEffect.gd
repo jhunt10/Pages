@@ -7,6 +7,7 @@ func get_required_props()->Dictionary:
 func get_triggers(_effect:BaseEffect, subeffect_data:Dictionary)->Array:
 	return [BaseEffect.EffectTriggers.OnCreate]
 
+## Remove an existing Effect when this one is created
 func on_effect_trigger(effect:BaseEffect, subeffect_data:Dictionary, trigger:BaseEffect.EffectTriggers, game_state:GameStateData):
 	var actor = effect.get_effected_actor()
 	var other_effect_keys = subeffect_data.get("RemoveEffectKeys", [])

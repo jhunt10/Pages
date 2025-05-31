@@ -43,7 +43,7 @@ func do_thing(parent_action:BaseAction, subaction_data:Dictionary, metadata:QueE
 	var potential_targets = selection_data.list_potential_targets()
 	if potential_targets.size() == 0:
 		if subaction_data.get("MessageOnNoTarget", true):
-			CombatRootControl.Instance.create_flash_text_on_actor(actor, "No Target", FlashTextController.FlashTextType.NoTarget)
+			VfxHelper.create_flash_text(actor, "No Target", VfxHelper.FlashTextType.NoTarget)
 		if subaction_data.get("FailOnNoTarget", true):
 			return BaseSubAction.Failed
 		else:

@@ -47,6 +47,16 @@ static func create_from_data(source_id:String, data:Dictionary) -> BaseStatMod:
 		stat_mod.condition_data = data['Conditions']
 	return stat_mod
 
+func get_as_data()->Dictionary:
+	return {
+		"SourceActorId": "ActorId",
+		"SourceActorFaction": 0,
+		"DisplayName": self.display_name,
+		"ModType": ModTypes.keys()[self.mod_type],
+		"StatName": self.stat_name,
+		"Value": self.value
+	}
+
 func _init(source_id:String, stat_name:String, display_name:String, mod_type:ModTypes, value, dep_stat=null):
 	# TODO: CanStack Id Logic for all Stat Mods (like I just did for Damage and Attack Mods)
 	self.source_id = source_id

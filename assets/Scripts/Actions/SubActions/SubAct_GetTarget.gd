@@ -44,7 +44,7 @@ func do_thing(parent_action:BaseAction, subaction_data:Dictionary, metadata:QueE
 	
 	# No valid targets
 	if selection_data.get_potential_target_count() == 0:
-		CombatRootControl.Instance.create_flash_text_on_actor(actor, "No Target", FlashTextController.FlashTextType.NoTarget)
+		VfxHelper.create_flash_text(actor, "No Target", VfxHelper.FlashTextType.NoTarget)
 		return BaseSubAction.Failed
 	
 	if not actor.is_player:

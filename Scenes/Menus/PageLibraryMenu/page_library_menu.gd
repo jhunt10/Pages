@@ -42,6 +42,7 @@ func _exit_tree() -> void:
 		get_window().content_scale_factor = starting_content_scale
 
 func _reload_pages():
+	#SpriteCache._cached_sprites.clear()
 	ActionLibrary.Instance.reload()
 	ItemLibrary.Instance.reload()
 	loaded = false
@@ -50,8 +51,8 @@ func _reload_pages():
 func build_page_entires():
 	if loaded:
 		return
-	for page_entry:PageDetailsEntryContainer in page_entries.values():
-		page_entry.queue_free()
+	for entry in page_entries.values():
+		entry.queue_free()
 	page_entries.clear()
 	
 	for page:BasePageItem in get_page_items():

@@ -9,9 +9,9 @@ var Id:String:
 var ItemKey:String:
 	get: return self._key
 
-var can_stack:bool:
-	get:
-		return true #get_load_val("CanStack", false)
+#var can_stack:bool:
+	#get:
+		#return true #get_load_val("CanStack", false)
 
 ## A semi-typed path for the inventory currently holding this item 
 ## Examples: "PlayerInventory", "Actor:TestActor_ID"

@@ -30,26 +30,26 @@ static func has_item_id(item_id:String):
 	return false
 
 static func has_item(item:BaseItem):
-	if item.can_stack:
-		return _stacked_item_count_by_key.keys().has(item.ItemKey)
-	return _held_unique_items_ids.has(item.Id)
+	#if item.can_stack:
+	return _stacked_item_count_by_key.keys().has(item.ItemKey)
+	#return _held_unique_items_ids.has(item.Id)
 
 static func add_item(item:BaseItem, count:int=1):
 	if LOGGING: print("PlayerInventory.AddItem: Item: %s" % [item.Id])
-	if item.can_stack:
-		if not _stacked_item_count_by_key.keys().has(item.ItemKey):
-			if LOGGING: print("-- New Stacking Item")
-			_stacked_item_count_by_key[item.ItemKey] = count
-			_stacked_item_id_by_key[item.ItemKey] = item.Id
-		else:
-			_stacked_item_count_by_key[item.ItemKey] += count
-	elif !_held_unique_items_ids.has(item.Id):
-		if LOGGING: print("-- New Unique Item")
-		_held_unique_items_ids.append(item.Id)
+	#if item.can_stack:
+	if not _stacked_item_count_by_key.keys().has(item.ItemKey):
+		if LOGGING: print("-- New Stacking Item")
+		_stacked_item_count_by_key[item.ItemKey] = count
 		_stacked_item_id_by_key[item.ItemKey] = item.Id
 	else:
-		if LOGGING: print("-- Has Unique Item")
-		return
+		_stacked_item_count_by_key[item.ItemKey] += count
+	#elif !_held_unique_items_ids.has(item.Id):
+		#if LOGGING: print("-- New Unique Item")
+		#_held_unique_items_ids.append(item.Id)
+		#_stacked_item_id_by_key[item.ItemKey] = item.Id
+	#else:
+		#if LOGGING: print("-- Has Unique Item")
+		#return
 	Instance.inventory_changed.emit()
 
 
@@ -110,16 +110,16 @@ static func split_item_off_stack(item_key:String)->BaseItem:
 	return new_item
 
 static func delete_item_from_inventory(item:BaseItem):
-	if item.can_stack:
-		if not _stacked_item_id_by_key.values().has(item.Id):
-			return
-		_stacked_item_id_by_key.erase(item.ItemKey)
-		_stacked_item_count_by_key.erase(item.ItemKey)
-	else:
-		var index = _held_unique_items_ids.find(item.Id)
-		if index < 0:
-			return
-		_held_unique_items_ids.remove_at(index)
+	#if item.can_stack:
+	if not _stacked_item_id_by_key.values().has(item.Id):
+		return
+	_stacked_item_id_by_key.erase(item.ItemKey)
+	_stacked_item_count_by_key.erase(item.ItemKey)
+	#else:
+		#var index = _held_unique_items_ids.find(item.Id)
+		#if index < 0:
+			#return
+		#_held_unique_items_ids.remove_at(index)
 	Instance.inventory_changed.emit()
 
 ## For removing item when only the Id is available. Use remove_item when possible. 

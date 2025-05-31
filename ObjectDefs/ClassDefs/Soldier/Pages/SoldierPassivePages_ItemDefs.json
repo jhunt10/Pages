@@ -2,7 +2,6 @@
     {
         "ItemKey": "BlockAoe_PageItem",
         "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
-        "CanStack": true,
         "Details": {
             "Description": "You've somehow learned to use a single Shield against Attacks that completely surround you.\n\nYou can now block @@#Color:Red:AOE@@ attacks as if they were from your @@#Color:Red:Flank@@.",
             "DisplayName": "Block AOE",
@@ -30,7 +29,6 @@
     {
         "ItemKey": "CrashGentle_PageItem",
         "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
-        "CanStack": true,
         "Details": {
             "Description": "You've learned to be gentler with your less massive teammates.\n\nYou deal @@#DmgMod:GentleDgmMod:Value@@ @@#Color:Red:Crash Damage@@ on Collision with @@#Color:Red:Allies@@.",
             "DisplayName": "Gentle",
@@ -88,7 +86,6 @@
     {
         "ItemKey": "CrashRough_PageItem",
         "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
-        "CanStack": true,
         "Details": {
             "Description": "You've learned to be rougher with your less massive foes.\n\nYou deal @@#DmgMod:RoughDgmMod:Value@@ @@#Color:Red:Crash Damage@@ on Collision with @@#Color:Red:Enemies@@.",
             "DisplayName": "Rough",
@@ -146,7 +143,6 @@
     {
         "ItemKey": "ShieldWall_PageItem",
         "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
-        "CanStack": true,
         "Details": {
             "Description": "You've somehow learned to use a single Shield against Attacks that completely surround you.\n\nYou can now block @@#Color:Red:AOE@@ attacks as if they were from your @@#Color:Red:Flank@@.",
             "DisplayName": "Wall",
@@ -174,7 +170,6 @@
     {
         "ItemKey": "HeavyFoot_PageItem",
         "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
-        "CanStack": true,
         "Details": {
             "Description": "Thanks to a special diet and an unholy curse you are heavier but slower. @@#StatMod:MassMod@@ and @@#StatMod:SpeedMod@@",
             "DisplayName": "Heavy Foot",
@@ -207,7 +202,6 @@
     {
         "ItemKey": "UnMovable_PageItem",
         "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
-        "CanStack": true,
         "Details": {
             "Description": "You stand your ground, even against more massive foes.\n\nAt the start of your turn, gain @@#EftData:NestedEffectData:Name@@.\n\n@@#EftData:NestedEffectData:Description@@",
             "DisplayName": "Immoveable",
@@ -232,7 +226,6 @@
     {
         "ItemKey": "UnStopable_PageItem",
         "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
-        "CanStack": true,
         "Details": {
             "Description": "You push forward, even against more massive foes.\n\nOn Move, gain @@#EftData:NestedEffectData:Name@@ until then end of Turn.\n\n@@#EftData:NestedEffectData:Description@@",
             "DisplayName": "Unstoppable",
@@ -257,7 +250,6 @@
     {
         "ItemKey": "ShieldTraining_PageItem",
         "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
-        "CanStack": true,
         "Details": {
             "Description": "Formal training allows you to use a Shield to full effect.\n\n@@#StatMod:BlockModMod@@",
             "DisplayName": "Shield Training",
@@ -287,7 +279,6 @@
     {
         "ItemKey": "ShieldTutoring_PageItem",
         "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
-        "CanStack": true,
         "Details": {
             "Description": "Formal training allows you to use a Shield to full effect.\n\n@@#StatMod:BlockModMod@@",
             "DisplayName": "Shield Tutoring",
@@ -318,7 +309,6 @@
     {
         "ItemKey": "TakeBrunt_PageItem",
         "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
-        "CanStack": true,
         "Details": {
             "Description": "You are willing to sacrifice your self for the safety of your team.\n\nWhen included in the same @@#Color:Red:AOE Attack@@ you take @@#AtkMod:BruntAtkMod:DmgMod:BruntSelfDmgMod:Value@@ damage, but your @@#Color:Red:Allies@@ take @@#AtkMod:BruntAtkMod:DmgMod:BruntAllyDmgMod:Value@@",
             "DisplayName": "Take Brunt",
@@ -382,7 +372,6 @@
     {
         "ItemKey": "WideGuard_PageItem",
         "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
-        "CanStack": true,
         "Details": {
             "Description": "You've learned to keep a wide view of the battle field. @@#StatMod:AwrMod@@ and increase amount of Block Chance applied when attack from [color=#460000]Flank 50% => [/color]@@#StatMod:FlankBlockMod:ValuePercent@@ and [color=#460000]Back 0% => [/color]@@#StatMod:BackBlockMod:ValuePercent@@.",
             "DisplayName": "Wide Gaurd",

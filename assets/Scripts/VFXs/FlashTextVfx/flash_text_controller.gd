@@ -1,10 +1,6 @@
 class_name FlashTextController
 extends Control
 
-enum FlashTextType {
-	Normal_Dmg, Blocked_Dmg, Crit_Dmg, Healing_Dmg, DOT_Dmg,
-	NoAmmo, NoTarget, Miss, Evade, Protect}
-
 @onready var premade_label:FlashTextNode = $PremadeDamageLabel
 
 @export var normal_damage_color:Color
@@ -24,7 +20,7 @@ func _ready():
 func _process(delta):
 	pass
 
-func add_flash_text(val:String, flash_text_type:FlashTextType):
+func add_flash_text(val:String, flash_text_type:VfxHelper.FlashTextType):
 	var new_text:FlashTextNode = premade_label.duplicate()
 	new_text.id = str(ResourceUID.create_id())
 	
@@ -33,22 +29,22 @@ func add_flash_text(val:String, flash_text_type:FlashTextType):
 	var outline_size = 4
 	var text_value = val
 	match flash_text_type:
-		FlashTextType.Normal_Dmg:
+		VfxHelper.FlashTextType.Normal_Dmg:
 			color = normal_damage_color
 		
-		FlashTextType.Blocked_Dmg:
+		VfxHelper.FlashTextType.Blocked_Dmg:
 			color = blocked_damage_color
 		
-		FlashTextType.Crit_Dmg:
+		VfxHelper.FlashTextType.Crit_Dmg:
 			color = crit_damage_color
 		
-		FlashTextType.Healing_Dmg:
+		VfxHelper.FlashTextType.Healing_Dmg:
 			color = healing_damage_color
 			if not text_value.begins_with("+"):
 				text_value = "+" + text_value
 			
 		
-		FlashTextType.DOT_Dmg:
+		VfxHelper.FlashTextType.DOT_Dmg:
 			color = dot_damage_color
 			#font_size = font_size - 1
 			outline_size = 2

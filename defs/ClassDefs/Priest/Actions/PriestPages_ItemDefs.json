@@ -32,133 +32,9 @@
             }
         }
     },
-    {
-        "ItemKey": "BlessedPlusOne_PageItem",
-        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
-        "CanStack": true,
-        "Details":{
-            "Description": "Add +1 to the Maxium number of Blessings this Actor can have on them.",
-            "DisplayName": "Add Bless",
-            "LargeIcon": "Sprites/BlessingPlusOne.png",
-            "SmallIcon": "Sprites/BlessingPlusOne.png",
-            "SnippetDesc": "Up to 2 Blessing with 1 per Actor.",
-            "Tags": ["Passive"]
-        },
-        "ItemDetails":
-        {
-            "Rarity": "Common",
-            "Value": 50
-        },
-        
-        "StatMods": {
-            "StatMod1": {
-                "DisplayName": "Add Bless",
-                "ModType": "Add",
-                "StatName": "Blessing:OnSelfLimit",
-                "Value": 2
-            }
-        }
-    },
-    {
-        "ItemKey": "MassBlessing_PageItem",
-        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
-        "CanStack": true,
-        "Details":{
-            "Description": "Blessings apply to all Allies in Target Area. You may apply up to 4 Blessings at a time.",
-            "DisplayName": "Mass Bless",
-            "LargeIcon": "Sprites/MassBlessing.png",
-            "SmallIcon": "Sprites/MassBlessing.png",
-            "SnippetDesc": "Blessings apply to all Allies in Range.",
-            "Tags": ["Passive"]
-        },
-        "ItemDetails":
-        {
-            "Rarity": "Common",
-            "Value": 50
-        },
-        
-        "StatMods": {
-            "StatMod1": {
-                "DisplayName": "Mass Blessing",
-                "ModType": "Add",
-                "StatName": "Blessing:CountLimit",
-                "Value": 4
-            }
-        },
-        "TargetMods":{
-            "AoeBlessing":{
-                "RequiredActionTags":[
-                    "Blessing"
-                ],
-                "OverrideProps":{
-                    "TargetType": "FullArea"
-                }
-
-            }
-        }
-    },
 
 
 
-    {
-        "ItemKey": "HealingLight_PageItem",
-        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
-        "CanStack": true,
-        "Details":{
-            "Description": "Allies gain +50% Light Damage Resistance against your Attacks.",
-            "DisplayName": "Healing Light",
-            "LargeIcon": "Sprites/HealingLight.png",
-            "SmallIcon": "Sprites/HealingLight.png",
-            "SnippetDesc": "Allies gain +50% Light Damage Resistance",
-            "Tags": ["Passive"]
-        },
-        "ItemDetails":
-        {
-            "Rarity": "Common",
-            "Value": 50
-        },
-        "DamageMods": {
-            "DamageMod1": {
-                "Conditions": {
-                    "ExcludeDefenderTags": [],
-                    "LimitDefenderTags": [
-                        "Ally"
-                    ],
-                    "ExcludeSourceTags": [],
-                    "LimitSourceTags": [
-                        "Attack"
-                    ],
-                    "DamageType": "Light"
-                },
-                "DamageModKey": "DamageMod1",
-                "DisplayName": "Healing Light",
-                "ModProperty": "Resistance",
-                "ModType": "Add",
-                "OnDealDamage": true,
-                "OnTakeDamage": false,
-                "Value": 50
-            }
-        }
-    },
-    {
-        "ItemKey": "HarmingLight_PageItem",
-        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
-        "CanStack": true,
-        "Details":{
-            "Description": "Enemies lose -75% Light Damage Resistance against your Attacks.",
-            "DisplayName": "Harming Light",
-            "LargeIcon": "Sprites/HurtingLight.png",
-            "SmallIcon": "Sprites/HurtingLight.png",
-            "SnippetDesc": "Enemies lose -75% Light Damage Resistance",
-            "Tags": ["Passive"]
-        },
-        "ItemDetails":
-        {
-            "Rarity": "Common",
-            "Value": 50
-        },
-        "DamageMods": {}
-    },
 
     
 
@@ -192,17 +68,6 @@
             "Value": 50
         },
         "ItemKey": "LightBoltSpell_PageItem",
-        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd"
-    },
-    {
-        "ActionKey": "LightTouchSpell",
-        "CanStack": true,
-        "ItemDetails":
-        {
-            "Rarity": "Rare",
-            "Value": 50
-        },
-        "ItemKey": "LightTouchSpell_PageItem",
         "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd"
     },
 

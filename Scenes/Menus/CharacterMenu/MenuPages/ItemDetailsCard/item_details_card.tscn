@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://btr6wpgyitqc0"]
+[gd_scene load_steps=41 format=3 uid="uid://btr6wpgyitqc0"]
 
 [ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/ItemDetailsCard/item_details_card.gd" id="1_vq5a0"]
 [ext_resource type="Texture2D" uid="uid://bqmtfkh0uj2bk" path="res://Scenes/Menus/CharacterMenu/MenuPages/ItemDetailsCard/DetailsCard_Background_working.png" id="2_7ol1j"]
@@ -35,7 +35,6 @@
 [ext_resource type="Texture2D" uid="uid://dgxwfm0wf7rhw" path="res://assets/Sprites/UI/SymbolIcons/PotencySymbol.png" id="20_nedqy"]
 [ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/ItemDetailsCard/PageQueDetails/page_set_label.gd" id="21_eimff"]
 [ext_resource type="Script" path="res://Scenes/UiNodes/DescriptionBox/description_box.gd" id="22_pm1ag"]
-[ext_resource type="PackedScene" uid="uid://ukoix7m7xspo" path="res://Scenes/UiNodes/DescriptionBox/DescriptionPopUpContainer/description_popup_container.tscn" id="23_xa58v"]
 [ext_resource type="Texture2D" uid="uid://ftpk6w0gsf0c" path="res://assets/Sprites/UI/SymbolIcons/PagePassiveSymbol.png" id="31_y1gd7"]
 [ext_resource type="Texture2D" uid="uid://cb8k5gxes3iaj" path="res://assets/Sprites/UI/SymbolIcons/MoneySymbol_White.png" id="33_era8d"]
 [ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/ItemDetailsCard/buy_controller.gd" id="34_t0s17"]
@@ -408,6 +407,7 @@ layout_mode = 2
 size_flags_vertical = 3
 
 [node name="DescriptionBox" type="RichTextLabel" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsControl/VBoxContainer/HBoxContainer"]
+clip_contents = false
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -415,9 +415,6 @@ theme = ExtResource("4_xmy3g")
 theme_override_colors/default_color = Color(0.470588, 0, 0, 1)
 text = "Item Description hk hbkhjhl jhlkjl ljlkj"
 script = ExtResource("22_pm1ag")
-
-[node name="PopupContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsControl/VBoxContainer/HBoxContainer/DescriptionBox" instance=ExtResource("23_xa58v")]
-layout_mode = 0
 
 [node name="EffectPageDetailsControl" type="Control" parent="OffsetControl/NinePatchRect/VBoxContainer" node_paths=PackedStringArray("parent_card_control", "description_box", "stat_mods_container", "premade_stat_mod_label")]
 visible = false
@@ -520,6 +517,7 @@ size_flags_vertical = 3
 
 [node name="DescriptionBox" type="RichTextLabel" parent="OffsetControl/NinePatchRect/VBoxContainer/EffectPageDetailsControl/VBoxContainer/HBoxContainer"]
 self_modulate = Color(0.498039, 0, 0, 1)
+clip_contents = false
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3

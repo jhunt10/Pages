@@ -106,6 +106,8 @@ func _load_full_details():
 		
 	# Stat Mods
 	var stat_mods = page.get_passive_stat_mods()
+	for child in stat_mods_container.get_children():
+		child.queue_free()
 	if page_effect_def:
 		stat_mods = page_effect_def.get("StatMods", {})
 	if stat_mods is Dictionary:

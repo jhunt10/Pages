@@ -26,28 +26,6 @@
             }
         }
     },
-    {
-        "ActionKey": "LightTouchSpell",
-        "ParentKey": "BaseTouchSpell",
-        "DamageDatas": {
-            "Damage1": {
-                "DamageVfxKey": "SmallFire_DamageEffect",
-                "DamageType": "Light",
-                "DamageVarient": 0.1,
-                "DefenseType": "None"
-            }
-        },
-        "Details": {
-            "Description": "Touch an Actor and apply Light Damage. Light damage Heals living Actors.",
-            "DisplayName": "Light Touch",
-            "LargeIcon": "Sprites/LightTouch.png",
-            "SmallIcon": "Sprites/LightTouch.png",
-            "SnippetDesc": "Touch Actor and apply Light",
-            "Tags": [
-                "Light"
-            ]
-        }
-    },
     
     {
         "ActionKey": "SustainBlessing",

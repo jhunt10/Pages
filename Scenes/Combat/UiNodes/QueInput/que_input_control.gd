@@ -175,11 +175,14 @@ func _build_buttons():
 	for action_key in _actor.get_action_key_list():
 		if action_key == null:
 			continue
+		var action = ActionLibrary.get_action(action_key)
+		if !action:
+			printerr("que_input_control._build_buttons: Failed to find Action '%s'." % [action_key])
+			continue
 		var new_button:QueInputButtonControl = page_button_prefab.duplicate()
 		new_button.name = "PageSlot" + str(index)
 		page_button_prefab.get_parent().add_child(new_button)
 		new_button.visible = true
-		var action = ActionLibrary.get_action(action_key)
 		new_button.set_page(_actor, action)
 		#if action == null:
 			#new_button.get_child(0).texture = load(ActionLibrary.NO_ICON_SPRITE)

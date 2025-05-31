@@ -325,7 +325,8 @@ func _on_pause_animations():
 func _on_resume_animations():
 	paused = false
 	if current_body_animation_action:
-		damage_animation_player.play()
+		if damage_animation_player.current_animation:
+			damage_animation_player.play()
 
 func _on_actor_moved(old_pos:MapPos, new_pos:MapPos, move_data:Dictionary):
 	if LOGGING: print("BaseActorNode: OnActorMoved: Actor: %s | old_pos: %s | new_pos: %s" % [Actor.Id, old_pos, new_pos])

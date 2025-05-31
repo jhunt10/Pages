@@ -1,19 +1,46 @@
 [
     {
-        "ItemKey": "LightTouch_PageItem",
-        "_ActionKey": "LightTouch",
+        "ItemKey": "LightMeleeSpell_PageItem",
+        "ActionKey": "LightMeleeSpell",
+        "ItemDetails":
+        {
+            "CanStack": true,
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd"
+    },
+    {
+        "ItemKey": "LightRangedSpell_PageItem",
+        "ActionKey": "LightRangedSpell",
+        "ItemDetails":
+        {
+            "CanStack": true,
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd"
+    },
+    {
+        "ItemKey": "LightMissileSpell_PageItem",
+        "ActionKey": "LightMissileSpell",
+        "ItemDetails":
+        {
+            "CanStack": true,
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd"
+    },
+
+
+
+
+
+    {
+        "ItemKey": "TestApplyBurning_PageItem",
+        "ActionKey": "TestApplyBurning",
         "Details": {
-            "Description": "Formal training allows you to use a Shield to full effect.\n\n@@#StatMod:BlockModMod@@",
-            "DisplayName": "Light Touch",
-            "LargeIcon": "Sprites/LightTouch.png",
-            "SmallIcon": "Sprites/LightTouch.png",
-            "SnippetDesc": "Gain Mass, Loose Speed",
-            "Tags": [
-                "Attack",
-                "Spell",
-                "Touch",
-                "Light"
-            ]
         },
         "ItemDetails":
         {
@@ -24,21 +51,9 @@
         "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd"
     },
     {
-        "ItemKey": "LightShot_PageItem",
-        "_ActionKey": "LightShot",
+        "ItemKey": "ApplyPreemtive_PageItem",
+        "ActionKey": "ApplyPreemtive",
         "Details": {
-            "Description": "Formal training allows you to use a Shield to full effect.\n\n@@#StatMod:BlockModMod@@",
-            "DisplayName": "Light Shot",
-            "LargeIcon": "Sprites/LightBullet.png",
-            "SmallIcon": "Sprites/LightBullet.png",
-            "SnippetDesc": "Gain Mass, Loose Speed",
-            "Tags": [
-                "Attack",
-                "Spell",
-                "Range",
-                "Bullet",
-                "Light"
-            ]
         },
         "ItemDetails":
         {
@@ -48,31 +63,11 @@
         },
         "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd"
     },
-    {
-        "ItemKey": "LightMissile_PageItem",
-        "_ActionKey": "LightMissile",
-        "Details": {
-            "Description": "Formal training allows you to use a Shield to full effect.\n\n@@#StatMod:BlockModMod@@",
-            "DisplayName": "Light Missile",
-            "LargeIcon": "Sprites/LightMissile.png",
-            "SmallIcon": "Sprites/LightMissile.png",
-            "SnippetDesc": "Gain Mass, Loose Speed",
-            "Tags": [
-                "Attack",
-                "Spell",
-                "Range",
-                "Bullet",
-                "Light"
-            ]
-        },
-        "ItemDetails":
-        {
-            "CanStack": true,
-            "Rarity": "Common",
-            "Value": 50
-        },
-        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd"
-    },
+
+
+
+
+
     {
         "ItemKey": "ApplyBlessing_Air_PageItem",
         "ActionKey": "ApplyBlessing_Air",
@@ -125,4 +120,56 @@
         },
         "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd"
     },
+    {
+        "ItemKey": "HealSmallSpell_PageItem",
+        "ActionKey": "HealSmallSpell",
+        "Details": {
+        },
+        "ItemDetails":
+        {
+            "CanStack": true,
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd"
+    },
+    {
+        "ItemKey": "HealMediumSpell_PageItem",
+        "ActionKey": "HealMediumSpell",
+        "Details": {
+        },
+        "ItemDetails":
+        {
+            "CanStack": true,
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd"
+    },
+    {
+        "ItemKey": "HealLargeSpell_PageItem",
+        "ActionKey": "HealLargeSpell",
+        "Details": {
+        },
+        "ItemDetails":
+        {
+            "CanStack": true,
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd"
+    },
+    {
+        "ItemKey": "ReviveSpell_PageItem",
+        "ActionKey": "ReviveSpell",
+        "Details": {
+        },
+        "ItemDetails":
+        {
+            "CanStack": true,
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd"
+    }
 ]

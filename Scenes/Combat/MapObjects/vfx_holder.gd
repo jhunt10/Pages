@@ -36,7 +36,7 @@ func add_vfx(vfx_node:BaseVfxNode):
 func has_vfx(id:String)->bool:
 	return vfx_nodes.keys().has(id)
 
-func get_vfx(id:String)->bool:
+func get_vfx(id:String)->BaseVfxNode:
 	return vfx_nodes.get(id)
 
 func remove_vfx(id:String):

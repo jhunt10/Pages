@@ -52,10 +52,14 @@ func _on_lsit_selected(index:int):
 	if index == 2:
 		for item_id in EffectLibrary.Instance._loaded_objects.keys():
 			add_label("Effect", item_id)
+	if index == 3:
+		for item_id in ActionLibrary.Instance._static_objects.keys():
+			add_label("Action", item_id)
 
 func add_label(type, text):
 	var new_button = Button.new()
 	new_button.text = text
+	new_button.alignment = HORIZONTAL_ALIGNMENT_LEFT
 	list_container.add_child(new_button)
 	new_button.pressed.connect(_on_searched_item_selected.bind(type, text))
 
@@ -67,5 +71,7 @@ func _on_searched_item_selected(type, id):
 		thing = ItemLibrary.get_item(id)
 	if type == "Effect":
 		thing = EffectLibrary.get_effect(id)
+	if type == "Action":
+		thing = ActionLibrary.get_action(id)
 	if thing:
 		def_data_menu.set_object(thing)

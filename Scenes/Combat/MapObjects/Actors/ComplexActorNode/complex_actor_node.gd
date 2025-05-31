@@ -73,7 +73,7 @@ func _on_action_failed():
 
 func set_facing_dir(dir:MapPos.Directions):
 	super(dir)
-	print("Setting Complex Actor Dir: %s" % [dir])
+	if LOGGING: print("Setting Complex Actor Dir: %s" % [dir])
 	if actor_sprite: 
 		actor_sprite.direction = facing_dir
 	else:

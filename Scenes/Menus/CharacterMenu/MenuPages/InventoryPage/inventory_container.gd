@@ -95,8 +95,10 @@ func build_item_list():
 		if !button:
 			button = _build_button(item)
 		items_container.add_child(button)
-		if item.can_stack:
-			button.set_item(item, PlayerInventory.get_item_stack_count(item.ItemKey))
+		
+		#if item.can_stack:
+		button.set_item(item, PlayerInventory.get_item_stack_count(item.ItemKey))
+		
 		button.visible = should_item_be_visible(item)
 		
 	await get_tree().process_frame
@@ -105,8 +107,10 @@ func build_item_list():
 func _build_button(item:BaseItem)->InventoryItemButton:
 	var new_button:InventoryItemButton = premade_item_button.duplicate()
 	var count = 0
-	if item.can_stack:
-		count = PlayerInventory.get_item_stack_count(item.ItemKey)
+	
+	#if item.can_stack:
+	count = PlayerInventory.get_item_stack_count(item.ItemKey)
+		
 	new_button.set_item(item, count)
 	new_button.button.button_down.connect(_on_item_button_down.bind(new_button))
 	new_button.button.button_up.connect(_on_item_button_up.bind(new_button))

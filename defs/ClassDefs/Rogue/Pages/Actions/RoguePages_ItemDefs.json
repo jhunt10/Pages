@@ -5,7 +5,7 @@
         "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
         "CanStack": true,
         "Details":{
-            "Description": "Generate less Threat causing Enemies will be less likely to prioritise you as a Target.",
+            "Description": "Generate less Threat causing Enemies to be less likely to prioritise you as a Target.",
             "DisplayName": "LowAggro",
             "LargeIcon": "Sprites/AggroDown.png",
             "SmallIcon": "Sprites/AggroDown.png",
@@ -70,8 +70,8 @@
                     "BackStabStatMod": {
                         "Conditions": {
                             "CanStack": false, 			   
-                            "HostFactionFilters": ["Self"],  
-                            "HostTagFilters": []
+                            "FactionFilters": ["Self"],  
+                            "TagFilters": []
                         },
                         "ModType": "Add",
                         "StatName": "CritChance",

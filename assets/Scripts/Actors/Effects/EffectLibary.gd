@@ -45,6 +45,7 @@ static func _create_effect(source, actor:BaseActor, key:String, data:Dictionary,
 	
 	var effect_data = data.duplicate()
 	
+	# Check if CanStack
 	var merged_effect_data = get_merged_effect_def(key, data)
 	if merged_effect_data.get("CanStack", false):
 		var existing_effects = actor.effects.get_effects_with_key(key)
@@ -53,6 +54,7 @@ static func _create_effect(source, actor:BaseActor, key:String, data:Dictionary,
 			existing_effect.merge_new_duplicate_effect_data(source, merged_effect_data)
 			return existing_effect
 	
+	# Set Source and other run-time data
 	effect_data['EffectedActorId'] = actor.Id
 	if source is BaseActor:
 		effect_data['SourceId'] = (source as BaseActor).Id
@@ -69,6 +71,7 @@ static func _create_effect(source, actor:BaseActor, key:String, data:Dictionary,
 	else:
 		printerr("EffectLibrary.create_effect: Unknown source type: %s" % [source])
 		return null
+	
 	# Make Id Unique to actor
 	var effect_id = force_id
 	if effect_id == '': 
@@ -81,15 +84,6 @@ static func _create_effect(source, actor:BaseActor, key:String, data:Dictionary,
 		printerr("EffectLibrary.create_effect: Failed to make effect '%s'." % [key])
 		return null
 	
-	actor.effects.__add_new_effect(effect, suppress_signals)
-	
-	if effect.get_limited_effect_type() != EffectHelper.LimitedEffectTypes.None:
-		if source is BaseActor:
-			source.effects.host_limited_effect(effect)
-	
-	effect.on_created(game_state)
-	if effect.is_instant():
-		actor.remove_effect(effect, suppress_signals)
 	return effect
 
 static func list_effect_defs()->Array:
