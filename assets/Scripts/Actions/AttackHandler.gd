@@ -149,7 +149,7 @@ static func handle_attack(
 		
 		# Apply damage 
 		for damage_event:DamageEvent in sub_event.damage_events.values():
-			defender.stats.apply_damage(damage_event.final_damage)
+			defender.stats.apply_damage_event(damage_event, true, game_state)
 			damage_event.was_applied = true
 			
 			# Get Damage Vfx Data
@@ -161,12 +161,14 @@ static func handle_attack(
 			if defender.is_dead:
 				break
 		
-		# Create Effects
-		# Skip effects if defender died
+		# Cache VFX data
 		vfx_data_cache[defender.Id] = {
 			"ResistedAtLeastOnce": false,
 			"DamageVFXDatas": damage_vfx_cache
 		}
+		
+		# Create Effects
+		# Skip effects if defender died
 		if not defender.is_dead:
 			var effect_immunities = defender.get_effect_immunity()
 			for effect_data_key:String in attack_event.effect_datas.keys():
@@ -198,8 +200,8 @@ static func handle_attack(
 		var vfx_cache = vfx_data_cache[defender.Id]
 		
 		# Create "Resist" text for resisted efects
-		if vfx_cache.get('ResistedAtLeastOnce', false):
-			defender_node.vfx_holder.flash_text_controller.add_flash_text("Resist", VfxHelper.FlashTextType.Blocked_Dmg)
+		#if vfx_cache.get('ResistedAtLeastOnce', false):
+			#defender_node.vfx_holder.flash_text_controller.add_flash_text("Resist", VfxHelper.FlashTextType.Blocked_Dmg)
 		
 		# Create "Immune" text for immune efects
 		if vfx_cache.get('WasImmuneToEffect', false):
@@ -663,7 +665,7 @@ static func handle_colision(
 		damage_event = DamageHelper.roll_for_damage(damage_data, winner, loser, source_tag_chain, damage_mods, true)
 		
 		# Apply damage 
-		loser.stats.apply_damage(damage_event.final_damage)
+		loser.stats.apply_damage_event(damage_event, true, game_state)
 		damage_event.was_applied = true
 		
 		var damage_effect = damage_data.get("DamageVfxKey", "Blunt_DamageEffect")

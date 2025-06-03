@@ -166,40 +166,92 @@ func reload():
 	init_load()
 
 func _load_object_defs():
-	var delayed_defs = {}
+	var parent_to_child_mapping = {}
+	var child_to_parent_mapping = {}
 	var paths = [OBJECTS_DEFS_DIR, 'res://ObjectDefs/']
-	# Load Defs
+	
+	# Load Defs all defs into temp dict
+	var temp_defs = {}
 	for path in paths:
 		for def_file in _search_for_files(path, get_def_file_sufix()):
 			if LOGGING: print("# Loading Def file: %s" % [def_file])
-			var delayed = _load_object_def_file(def_file)
-			for parent_key in delayed.keys():
-				if not delayed_defs.keys().has(parent_key):
-					delayed_defs[parent_key] = {}
-				for child_key in delayed[parent_key]:
-					delayed_defs[parent_key][child_key] = delayed[parent_key][child_key]
+			var loading_defs = _load_object_def_file(def_file)
+			for loading_key in loading_defs.keys():
+				if temp_defs.has(loading_key):
+					printerr("%sLibrary.load_object_defs: Duplicate LoadObjects found with key '%s'. " % [get_object_name(), loading_key])
+					continue
+				temp_defs[loading_key] = loading_defs[loading_key]
+				var parent_key = loading_defs[loading_key].get("ParentKey", "")
+				child_to_parent_mapping[loading_key] = parent_key
 	
-	var safety_limit = 100
-	var safety_index = 0
-	while delayed_defs.size() > 0 and safety_index <= safety_limit:
-		for parent_key in delayed_defs.keys():
-			if not _object_defs.keys().has(parent_key):
-				print("Parent Def: %s not found" % [parent_key])
-				continue
-			var parent_def = _object_defs[parent_key]
-			for child_key in delayed_defs[parent_key].keys():
-				_object_defs[child_key] = _merge_defs(delayed_defs[parent_key][child_key], parent_def)
-			delayed_defs.erase(parent_key)
-		safety_index += 1
-	if delayed_defs.size() > 0:
-		printerr("Failed to load all inherited defs defs")
+	# With all defs in temp_defs, build chain from child to base 
+	var def_to_family_chain = {} # DefKey mapped to Array of keys from parent to base
+	for def_key in temp_defs.keys():
+		print("Checking def_to_family_chain for def: " + def_key)
+		var parent_key = temp_defs[def_key].get("ParentKey", "")
+		if parent_key == "":
+			def_to_family_chain[def_key] = []
+		else:
+			var family_chain = _rec_find_parent_of_parent(def_key, child_to_parent_mapping)
+			if family_chain == null:
+				printerr("%sLibrary.load_object_defs: Invalid Parent/Child mapping found on def '%s'." % [get_object_name(), def_key])
+			else:
+				def_to_family_chain[def_key] = family_chain
+	
+	# Another pass to remove defs with broken chains and build parent_to_child (now what we know what parents are/aren't valid)
+	var check_def_keys = def_to_family_chain.keys()
+	for def_key in check_def_keys:
+		var chain_is_valid = true
+		for check_key in def_to_family_chain[def_key]:
+			if not def_to_family_chain.keys().has(check_key):
+				chain_is_valid = false
+				break
+		if chain_is_valid:
+			var parent_key = child_to_parent_mapping.get(def_key, "")
+			if not parent_to_child_mapping.keys().has(parent_key):
+				parent_to_child_mapping[parent_key] = []
+			parent_to_child_mapping[parent_key].append(def_key)
+		else:
+			printerr("%sLibrary.load_object_defs: Broken Parent/Child chain found on def '%s'->%s." % [get_object_name(), def_key, ("->".join(def_to_family_chain[def_key]))])
+			def_to_family_chain.erase(def_key)
+	
+	# Start with def who have no parent
+	for def_key in parent_to_child_mapping.get("", []):
+		_rec_add_defs_to_loaded_defs(def_key, parent_to_child_mapping, temp_defs)
+	
 			
+static func _rec_find_parent_of_parent(child_key:String, child_to_parent_mapping:Dictionary, family_chain:Array=[], deepth_count:int=0):
+	if deepth_count >= 50:
+		printerr("_rec_find_parent_of_parent: Max Depth reached on '%s': %s" % [child_key, family_chain])
+		return null
+	var parent_key = child_to_parent_mapping.get(child_key, "")
+	if family_chain.has(parent_key):
+		printerr("_rec_find_parent_of_parent: Circular loop found on: " + "->".join(family_chain))
+		return null
+	if parent_key != "":
+		family_chain.append(parent_key)
+		family_chain.append_array(_rec_find_parent_of_parent(parent_key, child_to_parent_mapping, family_chain, deepth_count + 1))
+	return family_chain
 
-## Parse json def file and load to _object_defs and returns nest dicionaries of  parent key to child key to defs for child defs with non-loaded parents
+func _rec_add_defs_to_loaded_defs(def_key:String, parent_to_child_mapping:Dictionary, temp_defs:Dictionary):
+	if not _object_defs.keys().has(def_key):
+		_object_defs[def_key] = temp_defs[def_key]
+	var child_defs = parent_to_child_mapping.get(def_key, [])
+	for child_def_key in child_defs: 
+		if not temp_defs.has(child_def_key):
+			printerr("%sLibrary._rec_add_defs_to_loaded_defs: Child '%s' of parent '%s' not found.'->." % [get_object_name(), def_key, child_def_key])
+			continue
+		var child_def = temp_defs.get(child_def_key, {})
+		_object_defs[child_def_key] = _merge_defs(child_def, _object_defs[def_key])
+		_rec_add_defs_to_loaded_defs(child_def_key, parent_to_child_mapping, temp_defs)
+	
+
+## Parse Defs.json file into dicionaries of raw Def data. 
+##	Dose NOT load data for Parent/Child Defs
 func _load_object_def_file(file_path:String)->Dictionary:
 	var file = FileAccess.open(file_path, FileAccess.READ)
 	var text:String = file.get_as_text()
-	var delayed_dic = {}
+	var out_dict = {}
 	# Wrap in brackets and parse as Array to support multiple objects in same file
 	if !text.begins_with("["):
 		text = "[" + text + "]" 
@@ -210,21 +262,20 @@ func _load_object_def_file(file_path:String)->Dictionary:
 			printerr("No '%s' found on object in %s." % [object_key_name, file_path])
 			continue
 		var object_key = def[object_key_name]
-		var parent_key = def.get("ParentKey", null)
 		_defs_to_load_paths[object_key] = file_path.get_base_dir()
-		if object_key == "TestChaser2":
-			var t = true
-		# Check if needs to wait for parent to be loaded
-		if parent_key == null:
-			_object_defs[object_key] = def
-			if LOGGING: print("# - Loaded Object Def: %s" % [object_key])
-		elif _object_defs.keys().has(parent_key):
-			_object_defs[object_key] = _merge_defs(def, _object_defs[parent_key])
-		else:
-			if !delayed_dic.keys().has(parent_key):
-				delayed_dic[parent_key] = {}
-			delayed_dic[parent_key][object_key] = def
-	return delayed_dic
+		out_dict[object_key] = def
+		## Check if needs to wait for parent to be loaded
+		#var parent_key = def.get("ParentKey", null)
+		#if parent_key == null:
+			#_object_defs[object_key] = def
+			#if LOGGING: print("# - Loaded Object Def: %s" % [object_key])
+		#elif _object_defs.keys().has(parent_key):
+			#_object_defs[object_key] = _merge_defs(def, _object_defs[parent_key])
+		#else:
+			#if !delayed_dic.keys().has(parent_key):
+				#delayed_dic[parent_key] = {}
+			#delayed_dic[parent_key][object_key] = def
+	return out_dict
 
 ## Search _object_defs and load static objects to _static_objects
 func _load_static_objects():
@@ -335,3 +386,7 @@ static func _merge_defs(child:Dictionary, parent:Dictionary)->Dictionary:
 				val = val
 		new_data[key] = val
 	return new_data
+
+## Returns a string explaining why object is invalid, otherwise ''
+static func validate_object(object:BaseLoadObject)->String:
+	return ''

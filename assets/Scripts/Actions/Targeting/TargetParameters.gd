@@ -49,7 +49,7 @@ func _init(target_param_key:String, args:Dictionary) -> void:
 		if temp_type >= 0:
 			target_type = temp_type
 	else: 
-		printerr("Unknown Target Type: " + args.get("TargetType", "NULL"))
+		printerr("TargetParameters.new: '%s' Unknown Target Type: '%s'." % [target_param_key, args.get("TargetType", "NULL")])
 		target_type = TargetTypes.Self
 	
 	# Requires Line of Sight

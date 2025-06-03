@@ -119,7 +119,9 @@ func remove_effect(effect:BaseEffect, supress_signal:bool=false):
 		while _remove_effect_queue.size() > 0:
 			var qued_effect_id = _remove_effect_queue[0]
 			_remove_effect_queue.erase(qued_effect_id)
-			remove_effect(qued_effect_id, true)
+			if _effects.has(qued_effect_id):
+				var rm_effect = _effects[qued_effect_id]
+				remove_effect(rm_effect, true)
 	_actor.stats.dirty_stats()
 	if not supress_signal:
 		_actor.effacts_changed.emit()
@@ -208,7 +210,7 @@ func list_holding_limited_effect(type:EffectHelper.LimitedEffectTypes)->Array:
 func get_effect_immunities():
 	var out_list = []
 	for effect:BaseEffect in _effects.values():
-		out_list.append(effect.get_effect_immunities())
+		out_list.append_array(effect.get_effect_immunities())
 	return out_list
 
 func get_damage_mods()->Dictionary:

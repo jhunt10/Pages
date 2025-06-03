@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3 uid="uid://pvi5htfmced7"]
+
+[ext_resource type="Script" path="res://assets/Scripts/VFXs/ParticalVfxs/partical_vfx_node.gd" id="1_r3818"]
+[ext_resource type="Texture2D" uid="uid://dbidsbq0fuknv" path="res://data/VFXs/AilmentVFXs/GreaseAilmentVfx/GreasePartical.png" id="2_b7nfe"]
+
+[sub_resource type="Curve" id="Curve_tfdxx"]
+max_value = 100.0
+_data = [Vector2(0, 100), 0.0, 0.0, 0, 0, Vector2(0.196532, 99.2647), 0.0, 0.0, 0, 0, Vector2(0.283237, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="Curve" id="Curve_mu718"]
+_data = [Vector2(0, 0), 0.0, 2.15502, 0, 0, Vector2(0.315029, 0.492647), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_2ux43"]
+offsets = PackedFloat32Array(0, 0.86478, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[node name="VFXNode" type="Node2D" node_paths=PackedStringArray("particals")]
+z_index = 9
+script = ExtResource("1_r3818")
+particals = NodePath("CPUParticles2D")
+actor_modulate = Color(0.611765, 1, 0.611765, 1)
+y_scale = 0.3
+top_of_head = true
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+clip_children = 2
+amount = 2
+lifetime = 2.5
+texture = ExtResource("2_b7nfe")
+emission_shape = 3
+emission_rect_extents = Vector2(16, 16)
+gravity = Vector2(0, 10)
+damping_max = 1.0
+damping_curve = SubResource("Curve_tfdxx")
+scale_amount_curve = SubResource("Curve_mu718")
+color_ramp = SubResource("Gradient_2ux43")

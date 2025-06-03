@@ -99,6 +99,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("9_ejl1u")
+expand_mode = 1
 
 [node name="DescriptionBox" type="Container" parent="EffectIconControl/Icon" node_paths=PackedStringArray("name_label", "duration_label", "duration_type_label", "description_label", "background", "inner_container")]
 visible = false

@@ -113,7 +113,7 @@
         "ItemKey": "BlessedLimit1_PageItem",
         "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
         "Details":{
-            "Description": "@@#StatMod:BlessCountMod@@\nYou may have a limited number of @@#Color:Blue:Blessing@@ active (default 1). If you exceed this limit, the oldest one ends.",
+            "Description": "@@#StatMod:BlessCountMod@@\nYou may have a limited number of @@#Color:Blue:Blessing@@ active at once (default 1). If you exceed this limit, your oldest active @@#Color:Blue:Blessing@@ ends.",
             "DisplayName": "Blessed",
             "LargeIcon": "Sprites/MoreBlessing.png",
             "SmallIcon": "Sprites/MoreBlessing.png",
@@ -138,7 +138,7 @@
         "ItemKey": "BlessedLimit2_PageItem",
         "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
         "Details":{
-            "Description": "@@#StatMod:BlessCountMod@@\nYou may have a limited number of @@#Color:Blue:Blessing@@ active (default 1). If you exceed this limit, the oldest one ends.",
+            "Description": "@@#StatMod:BlessCountMod@@\nYou may have a limited number of @@#Color:Blue:Blessing@@ active at once (default 1). If you exceed this limit, your oldest active @@#Color:Blue:Blessing@@ ends.",
             "DisplayName": "More Blessed",
             "LargeIcon": "Sprites/MoreBlessing2.png",
             "SmallIcon": "Sprites/MoreBlessing2.png",
@@ -163,7 +163,7 @@
         "ItemKey": "BlessedMass_PageItem",
         "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
         "Details":{
-            "Description": "@@#StatMod:BlessCountMod@@ and Blessings now apply to all Allies in Target Area.",
+            "Description": "@@#StatMod:BlessCountMod@@ and @@#Color:Blue:Blessing@@ now apply to all Allies in Target Area.",
             "DisplayName": "Mass Bless",
             "LargeIcon": "Sprites/MassBlessing.png",
             "SmallIcon": "Sprites/MassBlessing.png",
@@ -177,12 +177,10 @@
         },
         
         "StatMods": {
-            "StatMods": {
-                "BlessCountMod": {
-                    "ModType": "Add",
-                    "StatName": "LmtEftCount:Blessing",
-                    "Value": 3
-                }
+            "BlessCountMod": {
+                "ModType": "Add",
+                "StatName": "LmtEftCount:Blessing",
+                "Value": 3
             }
         },
         "TargetMods":{

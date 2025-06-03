@@ -5,6 +5,7 @@ func get_required_props()->Dictionary:
 	return {
 		"DamageKey": BaseSubEffect.SubEffectPropTypes.DamageKey,
 		"DamageKeys": BaseSubEffect.SubEffectPropTypes.ListVal,
+		"DoesDamageTriggerEffects": BaseSubEffect.SubEffectPropTypes.BoolVal,
 		"OptionalTriggers": BaseSubEffect.SubEffectPropTypes.Triggers}
 
 func on_effect_trigger(effect:BaseEffect, subeffect_data:Dictionary, trigger:BaseEffect.EffectTriggers, game_state:GameStateData):
@@ -22,13 +23,16 @@ func on_effect_trigger(effect:BaseEffect, subeffect_data:Dictionary, trigger:Bas
 	if subeffect_data.has("DamageKeys"):
 		damage_keys.append_array(subeffect_data['DamageKeys'])
 	
+	var damage_triggers_effects = subeffect_data.get("DoesDamageTriggerEffects", false)
+	
 	for damage_key in damage_keys:
 		var damage_data = effect.DamageDatas.get(damage_key, {})
 		damage_data['DamageDataKey'] = damage_key
 		var damage_event = DamageHelper.roll_for_damage(damage_data, source_actor, actor, source_tag_chain, {})
-		actor.stats.apply_damage(damage_event.final_damage)
+		actor.stats.apply_damage_event(damage_event, true, game_state)
 		damage_event.was_applied = true
-		actor.effects.trigger_damage_taken(game_state, damage_event)
+		if source_actor:
+			source_actor.effects.trigger_damage_dealt(game_state, damage_event)
 		
 		# Create Damage VFX 
 		var damage_effect = damage_data.get("DamageVfxKey", null)
@@ -42,8 +46,6 @@ func on_effect_trigger(effect:BaseEffect, subeffect_data:Dictionary, trigger:Bas
 			if damage_event.final_damage < 0:
 				damage_effect_data['DamageTextType'] = VfxHelper.FlashTextType.Healing_Dmg
 			VfxHelper.create_damage_effect(actor, damage_effect, damage_effect_data)
-		if source_actor:
-			source_actor.effects.trigger_damage_dealt(game_state, damage_event)
 		if actor.is_dead:
 			break
 	

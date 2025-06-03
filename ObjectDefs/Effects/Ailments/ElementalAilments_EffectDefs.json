@@ -18,8 +18,8 @@
             "CanStack": false,
             "AddTagsToActor": ["Burned"],
             "DurationData":{
-                "BaseDuration":1,
-                "DurationType": "TurnEnd"
+                "BaseDuration":5,
+                "DurationTrigger": "OnTurnEnd"
             }
         },
         "StatMods": {
@@ -33,7 +33,7 @@
         "SubEffects": {
             "VfxEffect": {
                 "AilmentKey": "Burned",
-                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_AlimentVfx.gd"
+                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/Ailments/SubEffect_AlimentVfx.gd"
             },
             "ApplyDamage": {
                 "DamageKey": "BurnDamage",
@@ -89,8 +89,8 @@
             "CanStack": false,
             "AddTagsToActor": ["Chilled"],
             "DurationData":{
-                "BaseDuration":1,
-                "DurationType": "TurnEnd"
+                "BaseDuration":5,
+                "DurationTrigger": "OnTurnEnd"
             }
         },
         "StatMods": {
@@ -133,7 +133,7 @@
         "SubEffects": {
             "VfxEffect": {
                 "AilmentKey": "Chilled",
-                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_AlimentVfx.gd"
+                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/Ailments/SubEffect_AlimentVfx.gd"
             },
             "ApplyStatMod": {
                 "AllStatMods": true,
@@ -168,8 +168,8 @@
             "CanStack": false,
             "AddTagsToActor": ["Frozen"],
             "DurationData":{
-                "BaseDuration":1,
-                "DurationType": "TurnEnd"
+                "BaseDuration":5,
+                "DurationTrigger": "OnTurnEnd"
             }
         },
         "StatMods": {
@@ -189,7 +189,7 @@
         "SubEffects": {
             "VfxEffect": {
                 "AilmentKey": "Frozen",
-                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_AlimentVfx.gd"
+                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/Ailments/SubEffect_AlimentVfx.gd"
             },
             "ApplyStatMod": {
                 "AllStatMods": true,
@@ -204,7 +204,7 @@
                 "RemoveEffectKeys": ["AilmentChilled", "AilmentBurned"]
             },
             "CancelActions": {
-                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_Freeze.gd"
+                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/Ailments/SubEffect_Frozen.gd"
             }
         }
     },
@@ -242,8 +242,8 @@
             "CanStack": false,
             "AddTagsToActor": ["Poisoned"],
             "DurationData":{
-                "BaseDuration":1,
-                "DurationType": "TurnEnd"
+                "BaseDuration":5,
+                "DurationTrigger": "OnTurnEnd"
             }
         },
         "StatMods": {
@@ -251,7 +251,7 @@
         "SubEffects": {
             "VfxEffect": {
                 "AilmentKey": "Poisoned",
-                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_AlimentVfx.gd"
+                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/Ailments/SubEffect_AlimentVfx.gd"
             },
             "ApplyDamage": {
                 "DamageKey": "DamageData1",
@@ -285,8 +285,8 @@
             "CanStack": false,
             "AddTagsToActor": ["Shocked"],
             "DurationData":{
-                "BaseDuration":1,
-                "DurationType": "TurnEnd"
+                "BaseDuration":5,
+                "DurationTrigger": "OnTurnEnd"
             }
         },
         "DamageDatas": {
@@ -308,14 +308,14 @@
         "SubEffects": {
             "VfxEffect": {
                 "AilmentKey": "Shocked",
-                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_AlimentVfx.gd"
+                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/Ailments/SubEffect_AlimentVfx.gd"
             },
             "ApplyDamage": {
                 "DamageKey": "ShockedDamage",
                 "OptionalTriggers": [
                     "OnTurnEnd"
                 ],
-                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_ApplyDamage_Shocked.gd"
+                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/Ailments/SubEffect_Shocked.gd"
             },
             "Duration": {
                 "DurationType": "TurnEnd",

@@ -52,6 +52,5 @@ func _fill_ammo():
 			continue
 		var actor = CombatRootControl.Instance.GameState.get_actor(actor_id)
 		if actor:
-			for action_key in actor.pages.list_action_keys():
-				actor.Que.fill_page_ammo(action_key)
+			actor.Que.fill_page_ammo()
 			

@@ -27,11 +27,11 @@ static func create_from_data(source_id:String, data:Dictionary) -> BaseStatMod:
 	if type != null:
 		set_mode_type = type
 	else:
-		printerr("Stat Mod: '%s' Unknown Stat Mod Type: %s" % [data.get("DisplayName", "NO NAME"), type_key])
+		printerr("Stat Mod: '%s' Unknown Stat Mod Type: %s" % [data.get("DisplayName", "NO Mod NAME"), type_key])
 		set_mode_type = ModTypes.Add
 	if set_mode_type == ModTypes.AddStat:
 		if not data.has("DepStatName"):
-			printerr("Stat Mod: '%s' set to AddStat but is missing 'DepStatName'." % [data.get("DisplayName", "NO NAME")])
+			printerr("Stat Mod: '%s' set to AddStat but is missing 'DepStatName'." % [data.get("DisplayName", "NO Mod NAME")])
 			set_mode_type = ModTypes.Add
 	var stat_mod = BaseStatMod.new(
 		source_id, 

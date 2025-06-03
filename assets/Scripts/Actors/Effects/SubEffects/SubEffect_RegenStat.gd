@@ -24,4 +24,4 @@ func on_effect_trigger(effect:BaseEffect, subeffect_data:Dictionary, trigger:Bas
 	if subeffect_data.get("AsPercent", false):
 		var max_val = actor.stats.get_bar_stat_max(stat_name)
 		val = max_val * (val / 100)
-	actor.stats.add_to_bar_stat(stat_name, val)
+	#actor.stats.add_to_bar_stat(stat_name, val)

@@ -64,7 +64,7 @@ func set_thing(def:Dictionary, inst:BaseLoadObject, load_path:String):
 	thing_inst = inst
 	thing_load_path = load_path
 	var details = thing_def.get("Details", {"DisplayName": "#No Details#"})
-	title_label.text = details.get("DisplayName", "#No Name#")
+	title_label.text = details.get("DisplayName", "["+def.get("EffectKey", "")+"]")
 	thing_tags = details.get("Tags", [])
 	tags_label.text = ", ".join(thing_tags)
 	

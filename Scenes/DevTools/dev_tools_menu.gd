@@ -29,6 +29,7 @@ func close_menu():
 func reload_stuff():
 	#SpriteCache._cached_sprites.clear()
 	ActionLibrary.Instance.reload()
+	EffectLibrary.Instance.reload()
 	VfxLibrary.reload_vfxs()
 
 func create_page_items():

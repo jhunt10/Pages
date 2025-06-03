@@ -67,6 +67,7 @@ static func _build_save_meta_data(save_name:String):
 static func load_save_data(save_id:String, go_to_camp:bool=true):
 	var data = read_save_data(save_id)
 	StoryState.load_save_data(data)
+	
 	if go_to_camp:
 		MainRootNode.Instance.open_camp_menu()
 

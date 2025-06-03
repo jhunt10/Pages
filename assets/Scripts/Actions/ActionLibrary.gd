@@ -42,7 +42,7 @@ static func get_action(action_key:String)->BaseAction:
 	if !Instance: Instance = ActionLibrary.new()
 	var action = Instance.get_object(action_key)
 	if !action:
-		printerr("ActionLibrary.get_action: No item found with id '%s'." % [action_key])
+		printerr("ActionLibrary.get_action: No Action found with id '%s'." % [action_key])
 	return action
 
 #static func get_action_icon(file_path:String)->Texture2D:

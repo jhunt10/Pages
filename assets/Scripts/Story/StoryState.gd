@@ -124,22 +124,18 @@ func load_save_data(data:Dictionary):
 				_player_ids[3] = actor_id
 	
 	var inv_data = data['PlayerInventory']
-	if inv_data is Array:
-		for item_id in inv_data:
-			var item = ItemLibrary.get_item(item_id)
-			if item:
-				PlayerInventory.add_item(item)
-			else:
-				printerr("StoryStateData.load_save_data: Failed to find item with id '%s'." % [item_id])
-	elif inv_data is Dictionary:
-		for item_id in inv_data.keys():
-			var item_data = inv_data[item_id]
-			var item_key = item_data.get('ObjectKey')
-			var item = ItemLibrary.get_or_create_item(item_id, item_key, item_data)
-			if item:
-				PlayerInventory.add_item(item, inv_data[item_id].get('StackCount', 1))
-			else:
-				printerr("StoryStateData.load_save_data: Failed to find item with id '%s'." % [item_id])
+	for item_id in inv_data.keys():
+		var item_data = inv_data[item_id]
+		var item_key = item_data.get('ObjectKey')
+		var item = ItemLibrary.get_or_create_item(item_id, item_key, item_data)
+		var invalid_reason = ItemLibrary.validate_object(item)
+		if invalid_reason != '':
+			printerr("StoryStateData.load_save_data: Item with id '%s' is invalid: %s" % [item_id, invalid_reason])
+			continue
+		if item:
+			PlayerInventory.add_item(item, inv_data[item_id].get('StackCount', 1))
+		else:
+			printerr("StoryStateData.load_save_data: Failed to find item with id '%s'." % [item_id])
 		
 	_total_play_time = data.get("RunTime", 0)
 	_session_start_unix_time = Time.get_unix_time_from_system()

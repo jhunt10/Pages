@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://du85tsvalwqdr" path="res://assets/Sprites/Paper/Rare_Background.png" id="4_73gup"]
 [ext_resource type="Texture2D" uid="uid://b81lqrxyq30xy" path="res://assets/Sprites/Paper/Legend_Background.png" id="5_era3k"]
 [ext_resource type="Texture2D" uid="uid://yx5nqpwtvayg" path="res://Scenes/Menus/SaveLoadMenu/Highlight_Patch_32_6.png" id="6_smsc3"]
-[ext_resource type="Texture2D" uid="uid://byq6wa2xqa1mt" path="res://defs/Actions/BasicMovement/Sprites/MoveForward.png" id="6_y4tky"]
+[ext_resource type="Texture2D" uid="uid://byq6wa2xqa1mt" path="res://ObjectDefs/BasicActions/BasicMovement/Sprites/MoveForward.png" id="6_y4tky"]
 [ext_resource type="Script" path="res://Scenes/Combat/UiNodes/QueInput/page_ammo_bar.gd" id="7_p3c1w"]
 [ext_resource type="Texture2D" uid="uid://dpg1sagivl60s" path="res://assets/Sprites/Paper/AmmoBarTop.png" id="8_exy2y"]
 [ext_resource type="Texture2D" uid="uid://bfxeg4r78utqk" path="res://assets/Sprites/Paper/AmmoBarMid.png" id="9_22pny"]
@@ -122,6 +122,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("6_y4tky")
+expand_mode = 1
 
 [node name="AmmoDisplay" type="VBoxContainer" parent="." node_paths=PackedStringArray("premade_bar")]
 custom_minimum_size = Vector2(0, 56)

@@ -30,6 +30,12 @@ static func create_damage_effect(target_actor:BaseActor, vfx_key:String, vfx_dat
 	var vfx_def = MainRootNode.vfx_libray.get_vfx_data(vfx_key)
 	if !vfx_def:
 		printerr("Failed to VFX with key: %s" % [vfx_key])
+		if vfx_data.has("DamageTextType"):
+			var damage_number = vfx_data.get("DamageNumber", 0)
+			var damage_color = vfx_data.get("DamageColor", Color.WHITE)
+			var damage_text_type = vfx_data.get("DamageTextType", VfxHelper.FlashTextType.Normal_Dmg)
+			var damage_string = str(damage_number)
+			VfxHelper.create_flash_text(target_actor, damage_string, damage_text_type)
 		return
 	
 	if vfx_data.get("MatchSourceDir", false) and vfx_data.has("SourceActorId"):

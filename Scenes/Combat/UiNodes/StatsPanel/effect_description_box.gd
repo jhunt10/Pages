@@ -20,7 +20,9 @@ func set_effect(effect:BaseEffect):
 	if effect.show_counter():
 		var dur_val = effect.RemainingDuration
 		duration_label.text = str(dur_val)
-		var duration_type = effect.DurationType
+		var duration_type = ''
+		if effect.duration_trigger:
+			duration_type = BaseEffect.EffectTriggers.keys()[effect.duration_trigger]
 		if duration_type != '':
 			var dur_str = duration_type.replace("End", "")
 			if dur_val > 1:

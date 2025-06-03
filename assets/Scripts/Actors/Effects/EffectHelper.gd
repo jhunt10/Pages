@@ -43,7 +43,7 @@ static func create_effect(
 	# Check if effect exists
 	var existing = actor.effects.get_effect(force_id)
 	if existing:
-		existing.merge_new_duplicate_effect_data(source, effect_data)
+		existing.merge_duplicate_effect(source, effect_def)
 		is_creating_effect = false
 		return existing
 	

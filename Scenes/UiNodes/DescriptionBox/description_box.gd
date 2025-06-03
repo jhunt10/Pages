@@ -25,7 +25,19 @@ func _show_pop_up(data_str):
 	popup_container.show()
 	popup_container.global_position = self.get_global_mouse_position()
 	popup_container.message_box.clear()
-	popup_container.message_box.add_text(data.get("data"))
+	if data:
+		if data.has("data"):
+			var line = data.get("data", "")
+			line = line.replace("|>|", "]").replace("|<|", "[")
+			popup_container.message_box.append_text(line)
+		elif data.has("EffectKey"):
+			var effect_def = EffectLibrary.get_effect_def(data['EffectKey'])
+			var lines = _build_bbcode_array(effect_def, null, null)
+			for line in lines:
+				if line is String:
+					popup_container.message_box.append_text(line)
+				if line is Texture2D:
+					popup_container.message_box.add_image(line, 0, 0, Color(1,1,1,1), INLINE_ALIGNMENT_BOTTOM)
 	var content_scale = get_window().content_scale_factor
 	popup_container.scale  = Vector2.ONE
 	#if content_scale != 1:
@@ -81,13 +93,14 @@ func _build_bbcode_array(object_def:Dictionary, object_inst:BaseLoadObject, acto
 		match sub_tokens[0]:
 			'#Color': 
 				var start_tag = RED_TEXT
-				var mid_value = ''
+				var mid_value = sub_tokens[1]
 				var end_tag = "[/color]"
 				if sub_tokens.size() == 2:
 					mid_value = sub_tokens[1]
 				elif sub_tokens[1] == "DmgColor":
 					var color_code = DamageHelper.get_damage_color(sub_tokens[2], true) 
 					start_tag = "[color=#" + color_code + "][outline_size=4][outline_color=#000000]"
+					mid_value = sub_tokens[2]
 					end_tag = "[/outline_color][/outline_size][/color]"
 				else:
 					mid_value = sub_tokens[2]
@@ -167,28 +180,25 @@ func _build_bbcode_array(object_def:Dictionary, object_inst:BaseLoadObject, acto
 					effect_data = object_def['PageDetails'].get("EffectData", null)
 				if not effect_data:
 					continue
-				var effect_def = EffectLibrary.get_merged_effect_def(effect_data['EffectKey'], effect_data)
-				if sub_tokens.size() == 2 or sub_tokens[2] == 'Description':
-					var sub_lines = _build_bbcode_array(effect_def, null, actor)
-					var display_name = effect_def.get("Details", {}).get("DisplayName", "???")
-					out_line += "[color=blue]" + display_name + ". [/color]"
-					out_arr.append(out_line)
-					out_line = ''
-					for line in sub_lines:
-						out_arr.append(line)
-				elif sub_tokens[2] == 'AplChc':
-					out_line += str(effect_data.get("ApplicationChance", 0) * 100) + "%"
-				elif sub_tokens[2] == 'Name':
-					
-					out_line += "[color=blue]" + effect_def.get("Details", {}).get("DisplayName", "???") + "[/color]"
-				elif sub_tokens[2] == 'Duration':
-					var duration_data = effect_def.get("EffectDetails", {}).get("DurationData", {})
-					var value = duration_data.get("BaseDuration", 0)
-					var type = duration_data.get("DurationType", '')
-					var type_str = type.replace("End", '').replace("Start", '')
-					if value > 1:
-						type_str += "s"
-					out_line += RED_TEXT + str(value) + " " + type_str+ "[/color]"
+				var effect_key = effect_data.get("EffectKey", "")
+				var prop_key = ''
+				if sub_tokens.size() > 2:
+					prop_key = sub_tokens[2]
+				out_arr.append(out_line)
+				out_line = ''
+				var sub_lines = _parse_effect(effect_key, effect_data, prop_key, actor)
+				out_arr.append_array(sub_lines)
+			'#EftDef':
+				var effect_data = {}
+				var effect_key = sub_tokens[1]
+				var prop_key = 'Link'
+				if sub_tokens.size() > 2:
+					prop_key = sub_tokens[2]
+				out_arr.append(out_line)
+				out_line = ''
+				var sub_lines = _parse_effect(effect_key, effect_data, prop_key, actor)
+				
+				out_arr.append_array(sub_lines)
 					
 			'#StatMod':
 				
@@ -224,10 +234,7 @@ func _build_bbcode_array(object_def:Dictionary, object_inst:BaseLoadObject, acto
 					for def_con in mod_data.get("Conditions", {}).get("DefendersConditions", []):
 						for filter:String in def_con.get("DefenderFactionFilters", []):
 							if not factions.has(filter):
-								# TODO: Obviously bad for translations
-								if filter.ends_with("y"):
-									filter = filter.trim_suffix("y") + "ies"
-								factions.append(filter)
+								factions.append(_get_title_specific_faction_name(actor, filter, true))
 					out_line += RED_TEXT + ", ".join(factions) + "[/color]"
 				if sub_tokens[2] == 'StatMod':
 					var mod_key = sub_tokens[3]
@@ -252,6 +259,16 @@ func _build_bbcode_array(object_def:Dictionary, object_inst:BaseLoadObject, acto
 	if out_line != '':
 		out_arr.append(out_line)
 	return out_arr
+
+func _get_title_specific_faction_name(actor:BaseActor, faction_name:String, force_plur:bool=false)->String:
+	var val = faction_name
+	if force_plur:
+		# TODO: Obviously bad for translations
+		if val.ends_with("y"):
+			val = val.trim_suffix("y") + "ies"
+		elif not val.ends_with("s"):
+			val += "s"
+	return val
 
 func _parse_damage_mod(parse_type:String, mod_data:Dictionary)->String:
 	var out_line = ''
@@ -368,3 +385,41 @@ func _parse_stat_mod_multi(object_def:Dictionary, object_inst:BaseLoadObject, ac
 	else:
 		out_line += multi_stat_line
 	return out_line
+
+func _parse_effect(effect_key:String, effect_data:Dictionary, prop_key:String, actor:BaseActor=null)->Array:
+	var out_arr = []
+	var out_line = ''
+	var effect_def = EffectLibrary.get_merged_effect_def(effect_key, effect_data)
+	if prop_key == '' or prop_key == 'Description':
+		var sub_lines = _build_bbcode_array(effect_def, null, actor)
+		var display_name = effect_def.get("Details", {}).get("DisplayName", "???")
+		out_line += "[color=blue]" + display_name + ". [/color]"
+		out_arr.append(out_line)
+		out_line = ''
+		for line in sub_lines:
+			out_arr.append(line)
+	elif prop_key == 'AplChc':
+		out_line += str(effect_data.get("ApplicationChance", 0) * 100) + "%"
+	elif prop_key == 'Name':
+		
+		out_line += "[color=blue]" + effect_def.get("Details", {}).get("DisplayName", "???") + "[/color]"
+	elif prop_key == 'Duration':
+		var duration_data = effect_def.get("EffectDetails", {}).get("DurationData", {})
+		var value = duration_data.get("BaseDuration", 0)
+		var type = duration_data.get("DurationTrigger", '')
+		var type_str = type.replace("End", '').replace("Start", '')
+		if value > 1:
+			type_str += "s"
+		out_line += RED_TEXT + str(value) + " " + type_str+ "[/color]"
+	elif prop_key == "Link":
+		#var sub_lines = _build_bbcode_array(effect_def, null, actor)
+		#var url_line = ''
+		#for lin in sub_lines:
+			#if lin is String:
+				#url_line += lin
+		##url_line = "Test"
+		#url_line = url_line.replace("[", "|<|").replace("]", "|>|")
+		out_line += "[color=blue]" + "[url={\"EffectKey\":\"" + effect_key + "\"}]" +  effect_def.get("Details", {}).get("DisplayName", "???") + "[/url][/color]"
+		
+	out_arr.append(out_line)
+	return out_arr

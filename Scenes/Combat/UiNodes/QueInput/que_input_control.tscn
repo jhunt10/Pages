@@ -55,9 +55,9 @@ show_gaps = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 0
-offset_left = 633.0
+offset_left = 690.0
 offset_top = -172.0
-offset_right = 753.0
+offset_right = 810.0
 offset_bottom = 68.0
 
 [node name="TopPadding" type="Control" parent="VBoxContainer"]
@@ -183,6 +183,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+expand_mode = 1
 
 [node name="Button" type="Button" parent="VBoxContainer/QueDisplayBackPatchContainer/HBoxContainer/SlotsContainer/QueDisplayButton"]
 self_modulate = Color(1, 1, 1, 0)

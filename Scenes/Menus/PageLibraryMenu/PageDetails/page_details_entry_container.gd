@@ -33,6 +33,8 @@ func _process(delta: float) -> void:
 func _load_mini_details():
 	
 	title_label.text = page.details.display_name
+	if title_label.text == "":
+		title_label.text = "["+page._key+"}"
 	thing_tags = page.get_item_tags()
 	tags_label.text = ", ".join(thing_tags)
 	

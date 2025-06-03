@@ -73,3 +73,14 @@ static func delete_item(item:BaseItem):
 static func load_items(data:Dictionary):
 	if !Instance: Instance = ItemLibrary.new()
 	Instance._load_objects_saved_data(data)
+
+
+## Returns a string explaining why object is invalid, otherwise ''
+static func validate_object(object:BaseLoadObject)->String:
+	var reason = super(object)
+	if object is BasePageItem:
+		var action_key = object.get_action_key()
+		if action_key:
+			if not ActionLibrary.Instance._object_defs.has(action_key):
+				reason = "No Action found with key '%s'." % [action_key]
+	return reason

@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://uo60871y6t54"]
+[gd_scene load_steps=29 format=3 uid="uid://uo60871y6t54"]
 
 [ext_resource type="Script" path="res://Scenes/Combat/MapObjects/Actors/ComplexActorNode/complex_actor_node.gd" id="1_wfbib"]
 [ext_resource type="Texture2D" uid="uid://cp2wc5s8ju613" path="res://defs/Actors/Template_SpriteSheet.png" id="2_g31ob"]
@@ -22,6 +22,8 @@
 [ext_resource type="AnimationLibrary" uid="uid://dx31wifagmnpk" path="res://Scenes/Combat/MapObjects/Actors/damage_animation_library.res" id="19_bp28d"]
 [ext_resource type="Script" path="res://Scenes/Combat/MapObjects/Actors/awareness_display_node.gd" id="21_fagl5"]
 [ext_resource type="Texture2D" uid="uid://bjo761ym76mti" path="res://assets/Sprites/TileSets/AwarenessTileSet.png" id="22_xdlor"]
+[ext_resource type="Texture2D" uid="uid://cvrkeauko0uqp" path="res://Scenes/Combat/MapObjects/Actors/ComplexActorNode/TombStone.png" id="23_qplh7"]
+[ext_resource type="Texture2D" uid="uid://bbs3uvepyto08" path="res://defs/ClassDefs/TitlePages/Sprites/SoldierIcon.png" id="24_brgje"]
 
 [sub_resource type="Animation" id="Animation_y5og4"]
 resource_name = "RESET"
@@ -352,3 +354,13 @@ tile_map = NodePath("TileMapLayer")
 [node name="TileMapLayer" type="TileMapLayer" parent="AwarenessDisplayNode"]
 position = Vector2(-16, -16)
 tile_set = SubResource("TileSet_l1f0r")
+
+[node name="TombStoneSprite" type="Sprite2D" parent="."]
+top_level = true
+position = Vector2(0, -6)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("23_qplh7")
+
+[node name="TombStinePortrait" type="Sprite2D" parent="TombStoneSprite"]
+position = Vector2(0, -6)
+texture = ExtResource("24_brgje")

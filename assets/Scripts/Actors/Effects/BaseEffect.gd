@@ -5,6 +5,7 @@ extends BaseLoadObject
 signal effect_ended
 
 enum EffectTriggers { 
+	None,
 	OnCreate, OnDurationEnds,
 	OnCombatStart, OnCombatEnd,
 	OnTurnStart, OnTurnEnd, 
@@ -63,20 +64,17 @@ var DamageModDatas:Dictionary:
 
 
 var _inital_duration:int = 0
+var _max_duration:int = -1
+# Ignore, Reset, Replace, Add
+var _duration_merge_type = "Replace"
 var _duration_counter:int = -1
-var RemainingDuration:int:
-	get: return _duration_counter
-var DurationBase:int:
+var duration_trigger:EffectTriggers = EffectTriggers.None
+var DurationData:Dictionary:
 	get:
 		var dets = get_load_val("EffectDetails", {}) 
-		var duration_data = dets.get("DurationData", {})
-		return duration_data.get("BaseDuration", -1)
-var DurationType:String:
-	get:
-		var dets = get_load_val("EffectDetails", {})
-		var duration_data = dets.get("DurationData", {})
-		var val =  duration_data.get("DurationType", '')
-		return val
+		return dets.get("DurationData", {})
+var RemainingDuration:int:
+	get: return _duration_counter
 
 var source_id:String:
 	get: return get_load_val("SourceId")
@@ -100,7 +98,65 @@ var _cached_data:Dictionary = {}
 func _init(key:String, def_load_path:String, def:Dictionary, id:String='', data:Dictionary={}) -> void:
 	super(key, def_load_path, def, id, data)
 	_sub_effects_data = get_load_val('SubEffects')
+	var duration_data = DurationData
+	if duration_data.size() > 0:
+		_duration_merge_type = duration_data.get("MergeType", "Replace")
+		var duration_trigger_str = DurationData.get("DurationTrigger", "")
+		if BaseEffect.EffectTriggers.keys().has(duration_trigger_str):
+			_inital_duration = duration_data.get("BaseDuration", 0)
+			_max_duration = duration_data.get("MaxDuration", -1)
+			if _max_duration > 0:
+				_inital_duration = min(_inital_duration, _max_duration)
+			_duration_counter = _inital_duration
+			duration_trigger = EffectTriggers.get(duration_trigger_str)
+		else:
+			printerr("BaseEffect._init: No DurationTrigger found on '%s'." %[key])
 	_cache_triggers()
+
+func merge_duplicate_effect(source, dup_effect_def:Dictionary):
+	var dup_details = dup_effect_def.get("EffectDetails", {})
+	var dup_duration_data = dup_details.get("DurationData", {})
+	if dup_duration_data.size() > 0:
+		var dup_trigger_str = dup_duration_data.get("DurationTrigger", "")
+		var dup_trigger = EffectTriggers.get(dup_trigger_str)
+		var dup_max_duration = dup_duration_data.get("MaxDuration", -1)
+		var dup_duration = dup_duration_data.get("BaseDuration", -1)
+		var dup_merge_type = dup_duration_data.get("MergeType", "Add")
+		
+		if dup_trigger != duration_trigger:
+			printerr("%s.merge_duplicate_effect_data: Mismatched DurationTrigger: %s / %s" % [self.EffectKey, EffectTriggers.keys()[duration_trigger], dup_trigger_str])
+		else:
+			if _duration_merge_type == "Ignore":
+				var t = true
+			elif _duration_merge_type == "Reset":
+				if dup_duration != self._inital_duration:
+					print("%s.merge_duplicate_effect_data: Mismatched BaseDuratio on Reset merge: %s / %s" % [self.EffectKey, self._inital_duration, dup_duration])
+				self._duration_counter = self._inital_duration
+			elif _duration_merge_type == "Replace":
+				self._max_duration = dup_max_duration
+				self._inital_duration = dup_duration
+				if self._max_duration > 0:
+					self._inital_duration = min(self._inital_duration, self._max_duration)
+				self._duration_counter = self._inital_duration
+			elif _duration_merge_type == "Add":
+				if dup_max_duration < 0:
+					self._max_duration = dup_max_duration
+					self._inital_duration = self._inital_duration + dup_duration
+					self._duration_counter = self._duration_counter + dup_duration
+				else:
+					self._max_duration = max(self._max_duration, dup_max_duration)
+					self._inital_duration = min(self._inital_duration + dup_duration, self._max_duration)
+					self._duration_counter = min(self._duration_counter + dup_duration, self._max_duration)
+	
+	# Merge Sub Effects
+	var dup_subs_datas = dup_effect_def.get('SubEffects', {})
+	for sub_effect_key in dup_subs_datas.keys():
+		var dupl_sub_effect_data = dup_subs_datas[sub_effect_key]
+		var sub_effect_data = _sub_effects_data[sub_effect_key]
+		var sup_sub_effect_data = _sub_effects_data[sub_effect_key]
+		var sub_effect = _get_sub_effect_script(sub_effect_key)
+		if sub_effect:
+			sub_effect.merge_new_duplicate_sub_effect_data(self, sub_effect_data, dup_effect_def, dupl_sub_effect_data)
 
 func get_source_actor()->BaseActor:
 	var source_type = get_load_val('SourceType')
@@ -145,7 +201,7 @@ func get_tags_added_to_actor()->Array:
 	return get_load_val("AddTagsToActor", [])
 
 func get_effect_immunities():
-	return get_load_val("AddEffectImmunity", [])
+	return effect_details.get("AddEffectImmunity", [])
 
 func get_active_stat_mods()->Array:
 	var out_list = []
@@ -222,10 +278,15 @@ func _cache_triggers():
 				continue
 			var trigger_list = sub_effect.get_triggers(self, sub_effect_data)
 			for trig:EffectTriggers in trigger_list:
+				if trig == EffectTriggers.None:
+					continue
 				if not _triggers_to_sub_effect_keys.keys().has(trig):
 					_triggers_to_sub_effect_keys[trig] = []
 				if not _triggers_to_sub_effect_keys[trig].has(sub_effect_key):
 					_triggers_to_sub_effect_keys[trig].append(sub_effect_key)
+	if duration_trigger != EffectTriggers.None:
+		if !_triggers_to_sub_effect_keys.has(duration_trigger):
+			_triggers_to_sub_effect_keys[duration_trigger] = []
 
 func on_created(game_state:GameStateData=null):
 	trigger_effect(EffectTriggers.OnCreate, game_state)
@@ -245,16 +306,6 @@ func on_delete():
 		actor.effects.remove_effect(self)
 	effect_ended.emit()
 
-func merge_new_duplicate_effect_data(source, data:Dictionary):
-	var dup_subs_datas = data.get('SubEffects', {})
-	for sub_effect_key in dup_subs_datas.keys():
-		var dupl_sub_effect_data = dup_subs_datas[sub_effect_key]
-		var sub_effect_data = _sub_effects_data[sub_effect_key]
-		var sup_sub_effect_data = _sub_effects_data[sub_effect_key]
-		var sub_effect = _get_sub_effect_script(sub_effect_key)
-		if sub_effect:
-			sub_effect.merge_new_duplicate_sub_effect_data(self, sub_effect_data, data, dupl_sub_effect_data)
-
 func trigger_effect(trigger:EffectTriggers, game_state:GameStateData):
 	if TRIGGERS_WITH_ADDITIONAL_DATA.has(trigger):
 		printerr("BaseEffect.trigger_effect: Called with trigger '%s' which requirers it's own method." % [trigger])
@@ -265,6 +316,8 @@ func trigger_effect(trigger:EffectTriggers, game_state:GameStateData):
 		var sub_effect = _get_sub_effect_script(sub_effect_key)
 		if sub_effect:
 			sub_effect.on_effect_trigger(self, sub_effect_data, trigger, game_state)
+	if trigger == duration_trigger and _duration_counter > 0:
+		_duration_counter -= 1
 	# Check if durration has ended and remove self if so
 	#printerr("trigger_effect:Check Duration: %s" % _duration_counter)
 	if _enabled and _duration_counter == 0 and trigger != EffectTriggers.OnDurationEnds:

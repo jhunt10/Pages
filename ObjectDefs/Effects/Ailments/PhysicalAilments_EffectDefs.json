@@ -18,8 +18,8 @@
             "CanStack": false,
             "AddTagsToActor": ["Blinded"],
             "DurationData":{
-                "BaseDuration":1,
-                "DurationType": "TurnEnd"
+                "BaseDuration":5,
+                "DurationTrigger": "OnTurnEnd"
             }
         },
         "StatMods": {
@@ -64,8 +64,8 @@
             "CanStack": false,
             "AddTagsToActor": ["Bleeding"],
             "DurationData":{
-                "BaseDuration":1,
-                "DurationType": "TurnEnd"
+                "BaseDuration":5,
+                "DurationTrigger": "OnTurnEnd"
             }
         },
         "StatMods": {
@@ -97,7 +97,7 @@
     {
         "EffectKey": "AilmentDazed",
         "Details": {
-            "Description": "@@#StatMod:MultiMods:-50% to most Stats@@, and can not @@#Color:Red:Block@@ or @@#Color:Red:Evade@@.\nLasts for @@#Color:Red:1 Turn@@ and can only apply @@#Color:Red:Once per Round@@.",
+            "Description": "@@#StatMod:MultiMods:-50% to most Stats@@, and can not @@#Color:Red:Block@@ or @@#Color:Red:Evade@@.\nLasts for @@#Color:Red:2 Turn@@ and can only apply @@#Color:Red:Once per Round@@.",
             "DisplayName": "Dazed",
             "LargeIcon": "Sprites/DazedIcon.png",
             "SmallIcon": "Sprites/DazedIcon.png",
@@ -114,9 +114,8 @@
             "AddTagsToActor": ["Dazed"],
             "DurationData":{
                 "BaseDuration":2,
-                "MinInitDuration": 2,
                 "MaxDuration": 2,
-                "DurationType": "TurnEnd"
+                "DurationTrigger": "OnTurnEnd"
             }
         },
         "StatMods": {
@@ -148,20 +147,20 @@
             "EvasionMod": {
                 "ModType": "Scale",
                 "StatName": "Evasion",
-                "Value": 0.5
+                "Value": 0
             },
             "BlockChanceMod": {
                 "ModType": "Scale",
                 "StatName": "BlockChance",
-                "Value": 0.5
+                "Value": 0
             }
         },
         "DamageDatas": {
         },
         "SubEffects": {
-            "Duration": {
-                "DurationType": "TurnEnd",
-                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_Duration.gd"
+            "VfxEffect": {
+                "AilmentKey": "Dazed",
+                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/Ailments/SubEffect_AlimentVfx.gd"
             },
             "ApplyStatMod": {
                 "AllStatMods": true,
@@ -170,7 +169,7 @@
             "ApplyDazeImune": {
                 "ApplyEffectKey": "DazedImmune",
                 "OptionalTriggers": [
-                    "OnGapTurnStart"
+                    "OnDurationEnds"
                 ],
                 "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/OtherEffects/SubEffect_ApplyEffect.gd",
                 "UniqueEffectId": "DazeImmune"
@@ -198,7 +197,8 @@
             "AddEffectImmunity": ["AilmentDazed"],
             "DurationData":{
                 "BaseDuration":1,
-                "DurationType": "RoundEnd"
+                "MaxDuration": 1,
+                "DurationTrigger": "OnRoundEnd"
             }
         },
         "StatMods": {
@@ -215,10 +215,10 @@
     {
         "EffectKey": "AilmentGreased",
         "Details": {
-            "Description": "@@#StatMod:MassMod@@ and vulerable to other Magic Aliments.",
+            "Description": "It's slippery! It's conductive! Easy to refrigerate and highly flamable! It's Page Greace - Keep those Pages turning!\n\n@@#StatMod:MassMod@@. Ends on taking @@#Color:DmgColor:Fire@@, @@#Color:DmgColor:Cold@@, or @@#Color:DmgColor:Shock@@ Damage and applies @@#EftDef:AilmentBurned@@, @@#EftDef:AilmentChilled@@, or @@#EftDef:AilmentShocked@@ respectivly.",
             "DisplayName": "Greased",
             "LargeIcon": "Sprites/GreasedIcon.png",
-            "SmallIcon": "Sprites/DazedGreasedIconIcon.png",
+            "SmallIcon": "Sprites/GreasedIcon.png",
             "SnippetDesc": "Slippery, conductive, easy to refrigerate, and highly flamable!",
             "Tags": ["Ailment", "Phy"]
         },
@@ -231,8 +231,8 @@
             "CanStack": false,
             "AddTagsToActor": ["Greased"],
             "DurationData":{
-                "BaseDuration":1,
-                "DurationType": "TurnEnd"
+                "BaseDuration":5,
+                "DurationTrigger": "OnTurnEnd"
             }
         },
         "StatMods": {
@@ -245,6 +245,10 @@
         "DamageDatas": {
         },
         "SubEffects": {
+            "VfxEffect": {
+                "AilmentKey": "Greased",
+                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/Ailments/SubEffect_AlimentVfx.gd"
+            },
             "Duration": {
                 "DurationType": "TurnEnd",
                 "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_Duration.gd"
@@ -252,6 +256,9 @@
             "ApplyStatMod": {
                 "AllStatMods": true,
                 "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_ModStat.gd"
+            },
+            "GreaseEffect": {
+                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/Ailments/SubEffect_Greased.gd"
             }
         }
     }

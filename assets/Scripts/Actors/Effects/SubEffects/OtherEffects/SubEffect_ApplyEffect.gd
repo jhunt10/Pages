@@ -20,7 +20,8 @@ func on_effect_trigger(effect:BaseEffect, _subeffect_data:Dictionary, trigger:Ba
 	var new_effect = EffectHelper.create_effect(actor, effect, effect_key, {}, game_state, effect_id)
 
 func on_delete(effect:BaseEffect, _subeffect_data:Dictionary):
-	var actor = effect.get_effected_actor()
-	for other_effect:BaseEffect in actor.effects.list_effects():
-		if other_effect.source_id == effect.Id:
-			actor.effects.remove_effect(other_effect)
+	if _subeffect_data.get("DeleteOtherEffectOnDelete", false):
+		var actor = effect.get_effected_actor()
+		for other_effect:BaseEffect in actor.effects.list_effects():
+			if other_effect.source_id == effect.Id:
+				actor.effects.remove_effect(other_effect)

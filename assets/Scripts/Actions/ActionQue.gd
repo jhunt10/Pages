@@ -163,6 +163,8 @@ func fill_page_ammo(action_key:String=""):
 			ammo_changed.emit(key)
 	else:
 		var action = ActionLibrary.get_action(action_key)
+		if not action:
+			return
 		var ammo_data = action.get_ammo_data(actor)
 		if not ammo_data:
 			return

@@ -1,7 +1,7 @@
 [
     {
         "ActionKey": "FireTouchSpell",
-        "ParentKey": "BaseTouchSpell",
+        "ParentKey": "BaseMeleeSpell",
         "Details": {
             "Description": "Touch an Actor and deal Fire Damage. 50% chance to apply Burned.",
             "DisplayName": "Fire Touch",
@@ -23,7 +23,7 @@
             }
         },
         "DamageDatas": {
-            "Damage1": {
+            "MeleeSpellDamage": {
                 "DamageVfxKey": "SmallFire_DamageEffect",
                 "DamageType": "Fire",
                 "DamageVarient": 0.2,
@@ -280,7 +280,7 @@
     },
     {
         "ActionKey": "ColdTouchSpell",
-        "ParentKey": "BaseTouchSpell",
+        "ParentKey": "BaseMeleeSpell",
         "Details": {
             "Description": "Touch an Actor and deal Cold Damage. 50% chance to apply Chilled.",
             "DisplayName": "Cold Touch",
@@ -302,7 +302,7 @@
             }
         },
         "DamageDatas": {
-            "Damage1": {
+            "MeleeSpellDamage": {
                 "DamageVfxKey": "SmallIce_DamageEffect",
                 "DamageType": "Cold",
                 "DamageVarient": 0.1,
@@ -602,7 +602,7 @@
     },
     {
         "ActionKey": "ShockTouchSpell",
-        "ParentKey": "BaseTouchSpell",
+        "ParentKey": "BaseMeleeSpell",
         "Details": {
             "Description": "Touch an Actor and deal Shock Damage. 50% chance to apply Shocked.",
             "DisplayName": "Shock Touch",
@@ -624,7 +624,7 @@
             }
         },
         "DamageDatas": {
-            "Damage1": {
+            "MeleeSpellDamage": {
                 "DamageVfxKey": "LightningStrike_DamageEffect",
                 "DamageType": "Shock",
                 "DamageVarient": 0.3,
