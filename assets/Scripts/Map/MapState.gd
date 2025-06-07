@@ -2,8 +2,6 @@ class_name MapStateData
 
 const LOGGING = false
 
-const DEFAULT_ACTOR_LAYER = MapLayers.Default
-
 enum MapLayers {Default, Corpse, Totem}
 
 var _game_state
@@ -103,9 +101,9 @@ func is_spot_open(pos, ignore_actor_ids:Array=[])->bool:
 
 func get_actors_at_pos(pos, layer=null, include_dead:bool=false)->Array:
 	var spot:MapSpot = get_map_spot(pos)
+	if layer == MapLayers.Corpse and include_dead == false:
+		include_dead = true
 	if spot:
-		if pos.x == 7 and pos.y == 6:
-			print("Found 77 SPot: %s" % [spot])
 		return spot.get_actors(layer, include_dead)
 	return []
 		
@@ -128,11 +126,11 @@ func set_actor_layer(actor:BaseActor, layer:MapLayers):
 	if not current_pos:
 		printerr("MapStateData.set_actor_layer: Failed to MapPos for actor '%s'." % [actor.Id])
 		return
-	set_actor_pos(actor, current_pos, layer)
+	set_actor_map_pos(actor, current_pos, true, layer)
 
 
 # Does not handle logic items or zones
-func set_actor_pos(actor:BaseActor, pos:MapPos, supress_signal:bool=false):
+func set_actor_map_pos(actor:BaseActor, pos:MapPos, supress_signal:bool=false, layer:MapLayers=MapLayers.Default):
 	if LOGGING: print("Set Actor Pos")
 	if pos.x < 0 or pos.x >= max_width or pos.y < 0 or pos.y >= max_hight:
 		printerr("set_actor_pos: Invalid Actor Position: " + str(pos))
@@ -154,7 +152,7 @@ func set_actor_pos(actor:BaseActor, pos:MapPos, supress_signal:bool=false):
 		
 	# Set new position (Actor.DisplayPos is updated after frame)
 	var new_spot = get_map_spot(pos)
-	new_spot.add_actor(actor, null)
+	new_spot.add_actor(actor, layer)
 	_actor_pos_cache[actor.Id] = pos
 	
 	if not supress_signal:

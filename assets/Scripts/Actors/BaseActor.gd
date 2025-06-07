@@ -15,11 +15,13 @@ signal stats_changed
 signal equipment_changed
 signal bag_items_changed
 signal effacts_changed
+signal health_changed
 
 # Actor holds no references to the current map state so this method is called by set_actor_pos()
 signal on_move(old_pos:MapPos, new_pos:MapPos, move_data:Dictionary)
 signal on_move_failed(cur_pos:MapPos)
 signal on_death()
+signal on_revive()
 signal sprite_changed()
 
 var Que:ActionQue
@@ -75,7 +77,8 @@ func _init(key:String, load_path:String, def:Dictionary, id:String, data:Diction
 	aggro = AggroHandler.new(self)
 	sprite = ActorSpriteHolder.new(self)
 	stats = StatHolder.new(self, stat_data)
-	stats.stats_changed.connect(_on_stat_change)
+	stats.held_stats_changed.connect(_on_stat_change)
+	stats.bar_stat_changed.connect(_on_health_change)
 	effects = EffectHolder.new(self)
 	details = ObjectDetailsData.new(_def_load_path, _def.get("Details", {}))
 	equipment = EquipmentHolder.new(self)
@@ -130,6 +133,9 @@ func get_tags():
 func _on_stat_change():
 	stats_changed.emit()
 
+func _on_health_change():
+	health_changed.emit()
+
 var suppress_equipment_changed:bool = false
 func _on_equipment_holder_items_change():
 	var bag = equipment.get_bag_equipment()
@@ -147,10 +153,12 @@ func _on_equipment_holder_items_change():
 	if not suppress_equipment_changed:
 		self.equipment_changed.emit()
 		self.stats.recache_stats()
+		Que.rechache_page_ammo()
 
 func _on_page_holder_items_change():
 	stats.dirty_stats()
 	stats.recache_stats()
+	Que.rechache_page_ammo()
 	#if not suppress_equipment_changed:
 		#self.equipment_changed.emit()
 
@@ -195,9 +203,13 @@ func load_data(data:Dictionary):
 	items.validate_items()
 	stats.dirty_stats()
 
+func prep_for_combat():
+	self.is_dead = false
+	stats.fill_bar_stats()
+	
+
 func on_combat_start():
 	effects.on_combat_start()
-	self.is_dead = false
 
 func on_delete():
 	if is_deleted:
@@ -210,6 +222,9 @@ func on_delete():
 		if !PlayerInventory.has_item(equip_item):
 			ItemLibrary.delete_item(equip_item)
 	super()
+
+func leaves_corpse()->bool:
+	return is_player
 
 func die():
 	if is_dead:
@@ -229,6 +244,10 @@ func die():
 			else:
 				ItemHelper.spawn_item(item_key, {}, map_pos)
 	on_death.emit()
+
+func revive():
+	is_dead = false
+	on_revive.emit()
 
 func can_act()->bool:
 	if stats.get_stat('Frozen', -1) > 0:
@@ -302,6 +321,12 @@ func get_damage_mods()->Dictionary:
 		mod_data['SourceActorId'] = Id
 		mod_data['SourceActorFaction'] = FactionIndex
 		out_dict[mod_id] = mod_data
+	return out_dict
+
+func get_ammo_mods()->Dictionary:
+	var out_dict = {}
+	out_dict.merge(effects.get_ammo_mods())
+	out_dict.merge(pages.get_ammo_mods())
 	return out_dict
 
 func get_attack_mods()->Dictionary:

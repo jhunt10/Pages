@@ -66,16 +66,21 @@ func set_object(object_def:Dictionary, object_inst:BaseLoadObject, actor:BaseAct
 			#var font_hight = font.get_height(font_size)
 			self.add_image(line, 0, 0, Color(1,1,1,1), INLINE_ALIGNMENT_BOTTOM)
 	
-func get_damage_colored_text(damage_type)->String:
+func get_damage_colored_text(damage_type, text_value='')->String:
 	if damage_type is String and DamageEvent.DamageTypes.keys().has(damage_type):
 		damage_type = DamageEvent.DamageTypes.get(damage_type)
 	if not DamageEvent.DamageTypes.values().has(damage_type):
 		return str(damage_type)
+	
+	if text_value == '':
+		text_value = DamageEvent.DamageTypes.keys()[damage_type]
 	var color_code = DamageHelper.get_damage_color(damage_type, true) 
-	var start_tag =  "[color=#" + color_code + "][outline_size=4][outline_color=#000000]"
-	var mid_value =  DamageEvent.DamageTypes.keys()[damage_type]
+	var out_line_color = "#000000"
+	if damage_type == DamageEvent.DamageTypes.Dark:
+		out_line_color = "#808080"
+	var start_tag =  "[color=#" + color_code + "][outline_size=4][outline_color="+out_line_color+"]"
 	var end_tag = "[/outline_color][/outline_size][/color]"
-	return start_tag + mid_value + end_tag
+	return start_tag + text_value + end_tag
 		
 
 func _build_bbcode_array(object_def:Dictionary, object_inst:BaseLoadObject, actor:BaseActor)->Array:
@@ -338,8 +343,25 @@ func _parse_stat_mod(mod_data:Dictionary, object_def:Dictionary, object_inst:Bas
 				out_line = ''
 				out_arr.append(icon)
 		elif sub_tokens[2] == "StatName":
+			var stat_name:String = mod_data['StatName']
+			if stat_name.begins_with("Resistance:"):
+				var damage_type = stat_name.trim_prefix("Resistance:")
+				out_line += get_damage_colored_text(damage_type, damage_type + " Res")
+			else:
+				out_line += RED_TEXT + StatHelper.get_stat_abbr(stat_name) + "[/color]"
+		
+		elif sub_tokens[2] == "Stat":
 			var stat_name = mod_data['StatName']
-			out_line += RED_TEXT + StatHelper.get_stat_abbr(stat_name) + "[/color]"
+			var icon = StatHelper.get_stat_icon(stat_name)
+			if icon:
+				out_arr.append(out_line)
+				out_line = ''
+				out_arr.append(icon)
+			if stat_name.begins_with("Resistance:"):
+				var damage_type = stat_name.trim_prefix("Resistance:")
+				out_line += get_damage_colored_text(damage_type, damage_type + " Res")
+			else:
+				out_line += RED_TEXT + StatHelper.get_stat_abbr(stat_name) + "[/color]"
 		elif sub_tokens[2] == "Value":
 			var value = mod_data['Value']
 			out_line += RED_TEXT + str(value) + "[/color]"
@@ -407,7 +429,7 @@ func _parse_effect(effect_key:String, effect_data:Dictionary, prop_key:String, a
 		var duration_data = effect_def.get("EffectDetails", {}).get("DurationData", {})
 		var value = duration_data.get("BaseDuration", 0)
 		var type = duration_data.get("DurationTrigger", '')
-		var type_str = type.replace("End", '').replace("Start", '')
+		var type_str = type.replace("End", '').replace("Start", '').trim_prefix("On")
 		if value > 1:
 			type_str += "s"
 		out_line += RED_TEXT + str(value) + " " + type_str+ "[/color]"

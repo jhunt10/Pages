@@ -60,7 +60,7 @@ func _load_full_details():
 	description_box.set_page_item(page)
 	# Ammo
 	if page_action and page_action.has_ammo(null):
-		ammo_label.set_data(page_action.get_ammo_data(null))
+		ammo_label.set_data(page_action.get_ammo_data())
 		ammo_label.show()
 	else:
 		ammo_label.hide()

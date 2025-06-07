@@ -18,7 +18,7 @@ static func get_targeted_actors(target_params:TargetParameters, targets:Array, s
 			if target is not String:
 				printerr("TargetingHelper.get_targeted_actors: TargetParams exspect Actor but provided target '%s' is not String." % [target])
 				return []
-			var target_actor:BaseActor = game_state.get_actor(target)
+			var target_actor:BaseActor = game_state.get_actor(target, target_params.target_type == TargetParameters.TargetTypes.Corpse)
 			if not target_actor:
 				printerr("TargetingHelper.get_targeted_actors: Failed to find target Actor with id '%s'." % [target])
 				return []
@@ -94,14 +94,20 @@ static func get_potential_coor_to_targets(target_params:TargetParameters, actor:
 	if target_params.target_type == TargetParameters.TargetTypes.FullArea:
 		return {actor_pos: [actor]}
 	
+	#if target_params.target_type == TargetParameters.TargetTypes.Corpse:
+		
+		
+	
 	for spot:Vector2i in target_area.keys():
 		var spot_los:LOS_VALUE = target_area[spot]
 		
 		if spot_los == LOS_VALUE.Blocked:
 			continue
-			
+		
+		var include_dead_actors = target_params.target_type == TargetParameters.TargetTypes.Corpse
 		if target_params.is_actor_target_type():
-			for target:BaseActor in game_state.get_actors_at_pos(spot):
+			var actors_in_spot:Array = game_state.get_actors_at_pos(spot, include_dead_actors)
+			for target:BaseActor in actors_in_spot:
 				if (target_params.target_type == TargetParameters.TargetTypes.Enemy and
 						actor.FactionIndex == target.FactionIndex):
 							continue
@@ -110,7 +116,9 @@ static func get_potential_coor_to_targets(target_params:TargetParameters, actor:
 							continue
 				if target.is_dead and not (target_params.target_type == TargetParameters.TargetTypes.Corpse):
 							continue
-				if target_params.target_type == TargetParameters.TargetTypes.Corpse and not target.is_dead:
+				if (target_params.target_type == TargetParameters.TargetTypes.Corpse 
+					# Cprse Target must dead and in open spot 
+					and not (target.is_dead or actors_in_spot.size() >= 1)):
 							continue
 				if target_params.is_valid_target_actor(actor, target, game_state):
 					if not potential_targets.has(target.Id) and not exclude_targets.has(target.Id):

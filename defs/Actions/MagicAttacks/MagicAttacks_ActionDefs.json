@@ -39,7 +39,7 @@
                     "AllowAlreadyTargeted": false,
                     "AllowAutoTarget": false,
                     "SetTargetKey": "ConeTarget",
-                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_GetTarget.gd",
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Targeting/SubAct_GetTarget.gd",
                     "TargetParamKey": "ConeArea"
                 },
                 {
@@ -118,14 +118,14 @@
                     "AllowAlreadyTargeted": false,
                     "AllowDeadTargets": false,
                     "SetTargetKey": "Random2",
-                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_GetTargetRandom.gd",
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Targeting/SubAct_GetTargetRandom.gd",
                     "TargetParamKey": "TargetParamA"
                 },
                 {
                     "AllowAlreadyTargeted": false,
                     "AllowDeadTargets": false,
                     "SetTargetKey": "Random1",
-                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_GetTargetRandom.gd",
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Targeting/SubAct_GetTargetRandom.gd",
                     "TargetParamKey": "TargetParamA"
                 }
             ],
@@ -176,7 +176,7 @@
                     "AllowAlreadyTargeted": false,
                     "AllowAutoTarget": true,
                     "SetTargetKey": "Target1",
-                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_GetTarget.gd",
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Targeting/SubAct_GetTarget.gd",
                     "TargetParamKey": "TargetParams1"
                 }
             ],
@@ -223,12 +223,12 @@
             "10": [
                 {
                     "SetTargetKey": "TargetActor",
-                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_GetTarget.gd",
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Targeting/SubAct_GetTarget.gd",
                     "TargetParamKey": "TargetActorParams"
                 },
                 {
                     "SetTargetKey": "TargetSpot",
-                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_GetTarget.gd",
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Targeting/SubAct_GetTarget.gd",
                     "TargetParamKey": "TargetParam"
                 }
             ],
@@ -284,13 +284,13 @@
                 {
                     "AllowAlreadyTargeted": false,
                     "SetTargetKey": "TargetActorA",
-                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_GetTarget.gd",
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Targeting/SubAct_GetTarget.gd",
                     "TargetParamKey": "TargetParamA"
                 },
                 {
                     "AllowAlreadyTargeted": false,
                     "SetTargetKey": "TargetActorB",
-                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_GetTarget.gd",
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Targeting/SubAct_GetTarget.gd",
                     "TargetParamKey": "TargetParamsB"
                 }
             ],
@@ -345,12 +345,12 @@
             "10": [
                 {
                     "SetTargetKey": "TargetActor",
-                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_GetTarget.gd",
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Targeting/SubAct_GetTarget.gd",
                     "TargetParamKey": "Self"
                 },
                 {
                     "SetTargetKey": "TargetSpot",
-                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_GetTarget.gd",
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Targeting/SubAct_GetTarget.gd",
                     "TargetParamKey": "TargetParam"
                 }
             ],
@@ -405,12 +405,12 @@
             "10": [
                 {
                     "SetTargetKey": "TargetActorA",
-                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_GetTarget.gd",
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Targeting/SubAct_GetTarget.gd",
                     "TargetParamKey": "TargetParamA"
                 },
                 {
                     "SetTargetKey": "TargetActorB",
-                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_GetTarget.gd",
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Targeting/SubAct_GetTarget.gd",
                     "TargetParamKey": "Self"
                 }
             ],

@@ -22,7 +22,7 @@ signal page_special_selected(action_key:String)
 @export var nodes_container:Control
 @export var que_display_control:QueDisplayControl
 @export var que_display_patch:BackPatchContainer
-@export var on_que_options_menu:ItemSelectionInputDisplay
+#@export var on_que_options_menu:OptionSelectMenu
 @export var back_patch:BackPatchContainer
 @export var main_container:HBoxContainer 
 @export var page_button_prefab:QueInputButtonControl
@@ -68,7 +68,7 @@ func _ready() -> void:
 	top_start_button.button.pressed.connect(_start_button_pressed)
 	top_start_button.button.disabled = true
 	page_button_prefab.visible = false
-	on_que_options_menu.visible = false
+	#on_que_options_menu.visible = false
 	page_Selection_container.hide()
 	_fill_button.pressed.connect(_fill_que_with_wait)
 	pass # Replace with function body.
@@ -270,17 +270,18 @@ func _page_button_pressed(_index, key_name):
 	var action:BaseAction = ActionLibrary.get_action(key_name)
 	var on_que_options = action.get_on_que_options(_actor, CombatRootControl.Instance.GameState)
 	if on_que_options.size() > 0:
-		on_que_options_menu.visible = true
-		#on_que_options_menu.position = get_local_mouse_position()# _buttons[index].position + Vector2(_buttons[index].size.x,0)
-		for opt:OnQueOptionsData in on_que_options:
-			on_que_options_menu.load_options(key_name, on_que_options, _on_all_que_options_selected)
+		CombatUiControl.Instance.ui_state_controller.open_options_menu(_actor, "OnQueOption", on_que_options, action.ActionKey)
+		#on_que_options_menu.visible = true
+		##on_que_options_menu.position = get_local_mouse_position()# _buttons[index].position + Vector2(_buttons[index].size.x,0)
+		#for opt:OnQueOptionsData in on_que_options:
+			#on_que_options_menu.set_options(key_name, on_que_options, _on_all_que_options_selected)
 	else:
 		_actor.Que.que_action(action)
 
-func _on_all_que_options_selected(action_key:String, options_data:Dictionary):
-	var action:BaseAction = ActionLibrary.get_action(action_key)
-	_actor.Que.que_action(action, options_data)
-	on_que_options_menu.visible = false
+#func _on_all_que_options_selected(action_key:String, options_data:Dictionary):
+	#var action:BaseAction = ActionLibrary.get_action(action_key)
+	#_actor.Que.que_action(action, options_data)
+	#on_que_options_menu.visible = false
 
 func _start_button_pressed():
 	var all_ready = true
@@ -306,7 +307,7 @@ func _round_ends():
 func _on_ammo_change(page_key):
 	if _page_buttons.has(page_key):
 		var button:QueInputButtonControl = _page_buttons[page_key]
-		button.ammo_display.current_val = _actor.Que.get_page_ammo(page_key)
+		button.ammo_display.current_val = _actor.Que.get_page_ammo_current_value(page_key)
 	pass
 
 func hide_page_selection():

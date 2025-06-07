@@ -20,7 +20,7 @@
             "AddTagsToActor": ["Blessed"],
             "DurationData":{
                 "BaseDuration":2,
-                "DurationType": "OnRoundEnd"
+                "DurationTrigger": "OnRoundEnd"
             }
         },
         "StatMods": {
@@ -111,6 +111,7 @@
     },
     {
         "EffectKey": "Blessing_Water",
+        "ParentKey": "_BaseBlessingEffect",
         "Details": {
             "DisplayName": "Water Blessing",
             "LargeIcon": "Sprites/Blessing_Water.png",
@@ -150,7 +151,7 @@
             "AddTagsToActor": [],
             "DurationData":{
                 "BaseDuration":1,
-                "DurationType": "OnRoundEnd"
+                "DurationTrigger": "OnRoundEnd"
             }
         },
         "AttackMods": {
@@ -179,6 +180,111 @@
 
 
     {
+        "EffectKey": "HolyArmorEffect",
+        "Details": {
+            "Description": "Gain @@#StatMod:HolyArmorArmorMod:Value@@ @@#StatMod:HolyArmorArmorMod:Stat@@ and @@#StatMod:HolyArmorWardMod:Stat@@, @@#StatMod:HolyArmorProtectionMod@@, and @@#StatMod:HolyArmorDarkResMod:Value@@ @@#StatMod:HolyArmorDarkResMod:Stat@@ and @@#StatMod:HolyArmorLightResMod:Stat@@",
+            "DisplayName": "Holy Armor",
+            "LargeIcon": "Sprites/HolyArmor.png",
+            "SmallIcon": "Sprites/HolyArmor.png",
+            "SnippetDesc": "",
+            "Tags": []
+        },
+        "EffectDetails":{
+            "IsGood": true,
+            "IsBad": false,
+            "DeleteAfterCombat": true,
+            "ShowInHud": true,
+            "ShowCounter": true,
+            "CanStack": false,
+            "AddTagsToActor": [],
+            "DurationData":{
+                "BaseDuration":6,
+                "DurationTrigger": "OnTurnEnd"
+            }
+        },
+        "StatMods": {
+            "HolyArmorArmorMod": {
+                "ModType": "Add",
+                "StatName": "Armor",
+                "Value": 10
+            },
+            "HolyArmorWardMod": {
+                "ModType": "Add",
+                "StatName": "Ward",
+                "Value": 10
+            },
+            "HolyArmorProtectionMod": {
+                "ModType": "Add",
+                "StatName": "Protection",
+                "Value": 20
+            },
+            "HolyArmorDarkResMod": {
+                "ModType": "Add",
+                "StatName": "Resistance:Dark",
+                "Value": 20
+            },
+            "HolyArmorLightResMod": {
+                "ModType": "Add",
+                "StatName": "Resistance:Light",
+                "Value": 20
+            }
+        },
+        "SubEffects": {
+            "ModStat": {
+                "AllStatMods": true,
+                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_ModStat.gd"
+            },
+            "Duration": {
+                "DurationType": "TurnEnd",
+                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_Duration.gd"
+            }
+        }
+    },
+    {
+        "EffectKey": "HolyBookEffect",
+        "Details": {
+            "Description": "Gain @@#StatMod:BlessMod1@@ and @@#StatMod:BlessMod2@@.",
+            "DisplayName": "Holy Book",
+            "LargeIcon": "Sprites/HolyBook.png",
+            "SmallIcon": "Sprites/HolyBook.png",
+            "SnippetDesc": "-25% Mag Ammo Cost of non-Dark Spell Pages.",
+            "Tags": []
+        },
+        "EffectDetails":{
+            "IsGood": true,
+            "IsBad": false,
+            "DeleteAfterCombat": true,
+            "ShowInHud": true,
+            "ShowCounter": true,
+            "CanStack": false,
+            "AddTagsToActor": [],
+            "DurationData":{
+                "BaseDuration":6,
+                "DurationTrigger": "OnTurnEnd"
+            }
+        },
+        "AmmoMods": {
+            "HolyBookAmmoMod": {
+                "Conditions": { 
+                    "AmmoTypes": ["Mag"], 
+                    "ActionTagFilters": [
+                        {
+                            "RequireAnyTags": ["Spell"],
+                            "ExcludeAnyTags": ["Dark"]
+                        }
+                    ]
+                },
+                "ModType": "ScaleCost",
+                "Value": 0.75
+            }
+        },
+        "SubEffects": {
+            "AmmoModSubEffect":{
+                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/Mods/SubEffect_AmmoMod.gd"
+            }
+        }
+    },
+    {
         "EffectKey": "HolyWeaponEffect",
         "Details": {
             "Description": "Gain @@#AtkMod:HolyWeaponBaseAtkMod:DmgMod:HolyWeaponDmgMod@@ on @@#Color:Red:Weapon Attacks@@ against @@#Color:Red:Enemies@@. If the Enemy has the @@#Color:DmgColor:Dark@@ Tag, this damage is added as @@#Color:DmgColor:Light Damage@@ instead.",
@@ -198,7 +304,7 @@
             "AddTagsToActor": ["HolyWeapon"],
             "DurationData":{
                 "BaseDuration":2,
-                "DurationType": "OnRoundEnd"
+                "DurationTrigger": "OnRoundEnd"
             }
         },
         "AttackMods": {
@@ -310,6 +416,106 @@
                 "AddForEachDamageEvent": true,
                 "AddedDamageType": "Light",
                 "AddedDamageScale": 0.2
+            }
+        }
+    },
+
+
+    
+    {
+        "EffectKey": "LightAuraEffect",
+        "Details": {
+            "DisplayName": "Aura of Light",
+            "Description": "Aura of Light.",
+            "LargeIcon": "Sprites/LightAura.png",
+            "SmallIcon": "Sprites/LightAura.png",
+            "SnippetDesc": "Aura of Light",
+            "Tags": []
+        },
+        "EffectDetails":{
+            "IsGood": true,
+            "IsBad": false,
+            "DeleteAfterCombat": true,
+            "ShowInHud": true,
+            "ShowCounter": true,
+            "CanStack": false,
+            "AddTagsToActor": [],
+            "DurationData":{
+                "BaseDuration":2,
+                "DurationTrigger": "OnRoundEnd"
+            }
+        },
+        "StatMods": {
+        },
+        "SubEffects": {
+            "Aura": {
+                "ZoneDataKey": "LightAura",
+                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_CreateAura.gd"
+            }
+        },
+        "NestedEffectDatas": {
+            "Effect1": {
+                "EffectKey": "LightAura_InZoneEffect",
+                "ShowCounter": false,
+                "ApplicationChance": 1
+            }
+        },
+        "ZoneDatas":{
+            "LightAura": {
+                "ZoneKey":"LightAura",
+                "ZoneScript": "res://assets/Scripts/Zones/ZoneScripts/EffectZone.gd",
+                "InZoneEffectDataKey": "Effect1",
+                "Duration": 1,
+                "DurationType": "Aura",
+                "TileSprite":"ZoneTileSets/LightAura_Tile.png"
+            }
+        }
+    },
+    {
+        "EffectKey": "LightAura_InZoneEffect",
+        "DamageDatas": {
+            "DamageData1": {
+                "AtkPower": 5,
+                "AtkStat": "Percent",
+                "BaseDamage": 0,
+                "DamageVfxKey": "SmallFire_DamageEffect",
+                "DamageVfxData":{
+                    "ShakeActor": false
+                },
+                "DamageType": "Light",
+                "DamageVarient": 0,
+                "DefenseType": "None"
+            }
+        },
+        "EffectDetails":{
+            "IsGood": true,
+            "IsBad": false,
+            "DeleteAfterCombat": true,
+            "ShowInHud": true,
+            "ShowCounter": false,
+            "CanStack": false,
+            "AddTagsToActor": [],
+            "DurationData":{
+                "BaseDuration":1,
+                "DurationTrigger": "Trigger"
+            }
+        },
+        "DamageMods": {},
+        "Details": {
+            "Description": "Take 5% Max Health as Light Damage at the end of each Turn.",
+            "DisplayName": "In Aura of Light",
+            "LargeIcon": "Sprites/LightAura.png",
+            "SmallIcon": "Sprites/LightAura.png",
+            "SnippetDesc": "Take Light Damage at the End of Turn.",
+            "Tags": ["Light", "DOT"]
+        },
+        "SubEffects": {
+            "ApplyDamage": {
+                "DamageKey": "DamageData1",
+                "OptionalTriggers": [
+                    "OnTurnEnd"
+                ],
+                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/Damage/SubEffect_ApplyDotDamage.gd"
             }
         }
     }

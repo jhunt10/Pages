@@ -194,5 +194,45 @@
 
             }
         }
+    },
+    {
+        "ItemKey": "RemoveSelect_PageItem",
+        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
+        "Details":{
+            "Description": "On using a @@#Color:Blue:Remove@@ @@#Color:Red:Action@@, you select which @@#Color:Red:Effect@@ is removed.",
+            "DisplayName": "Remove Select",
+            "LargeIcon": "Sprites/RemoveSelect.png",
+            "SmallIcon": "Sprites/RemoveSelect.png",
+            "SnippetDesc": "Select Effects on Remove.",
+            "Tags": ["Passive"]
+        },
+        "ItemDetails":
+        {
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "PageDetails": {
+            "AddTags": ["RemoveSelect"]
+        }
+    },
+    {
+        "ItemKey": "RemoveMore_PageItem",
+        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
+        "Details":{
+            "Description": "On using a @@#Color:Blue:Remove@@ @@#Color:Red:Action@@, you can remove up to @@#Color:Red:2 Effect@@.",
+            "DisplayName": "Remove More",
+            "LargeIcon": "Sprites/RemoveMore.png",
+            "SmallIcon": "Sprites/RemoveMore.png",
+            "SnippetDesc": "Remove 2 Effects on Remove.",
+            "Tags": ["Passive"]
+        },
+        "ItemDetails":
+        {
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "PageDetails": {
+            "AddTags": ["RemoveMore"]
+        }
     }
 ]

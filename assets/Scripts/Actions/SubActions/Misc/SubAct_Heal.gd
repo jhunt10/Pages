@@ -22,7 +22,7 @@ func do_thing(parent_action:BaseAction, subaction_data:Dictionary, que_exe_data:
 		var current_hp = target.stats.current_health
 		var heal_ammount = min(ceili(max_hp * (heal_value / 100.0)), max_hp - current_hp)
 		if heal_ammount > 0:
-			target.stats.apply_damage(-heal_ammount)
+			target.stats.apply_healing(heal_ammount, false)
 			VfxHelper.create_flash_text(target, heal_ammount, VfxHelper.FlashTextType.Healing_Dmg)
 		
 	return BaseSubAction.Success

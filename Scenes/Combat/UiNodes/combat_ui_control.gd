@@ -25,7 +25,7 @@ var que_display:QueDisplayControl:
 		return null
 @export var que_collection_display:QueCollectionControl
 @export var stats_collection_display:StatCollectionDisplayControl
-@export var item_select_menu:ItemSelectionInputDisplay
+@export var option_select_menu:OptionSelectMenu
 @export var drop_message_control:DropMessageControl
 @export var actor_placer_control:ActorPlacerControl
 
@@ -74,8 +74,6 @@ func _ready() -> void:
 		p4_stat_panel_control.button.pressed.connect(on_player_stat_clicked.bind(3))
 	else: 
 		p4_stat_panel_control.hide()
-	
-	pass # Replace with function body.
 
 #func do_test():
 	#var current_actor_id = stat_panel_control.actor.Id

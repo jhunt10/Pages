@@ -187,7 +187,7 @@ func _load_object_defs():
 	# With all defs in temp_defs, build chain from child to base 
 	var def_to_family_chain = {} # DefKey mapped to Array of keys from parent to base
 	for def_key in temp_defs.keys():
-		print("Checking def_to_family_chain for def: " + def_key)
+		#print("Checking def_to_family_chain for def: " + def_key)
 		var parent_key = temp_defs[def_key].get("ParentKey", "")
 		if parent_key == "":
 			def_to_family_chain[def_key] = []

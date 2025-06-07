@@ -57,17 +57,23 @@ static func _create_effect(source, actor:BaseActor, key:String, data:Dictionary,
 	# Set Source and other run-time data
 	effect_data['EffectedActorId'] = actor.Id
 	if source is BaseActor:
-		effect_data['SourceId'] = (source as BaseActor).Id
 		effect_data['SourceType'] = 'Actor'
+		effect_data['SourceId'] = (source as BaseActor).Id
+		effect_data['SourceActorId'] = (source as BaseActor).Id
 	elif source is BasePageItem:
-		effect_data['SourceId'] = (source as BasePageItem).Id
 		effect_data['SourceType'] = 'Page'
+		effect_data['SourceId'] = (source as BasePageItem).Id
+		effect_data['SourceActorId'] = actor.Id
 	elif source is BaseEffect:
-		effect_data['SourceId'] = (source as BaseEffect).Id
 		effect_data['SourceType'] = 'Effect'
+		effect_data['SourceId'] = (source as BaseEffect).Id
+		var sact = (source as BaseEffect).get_source_actor()
+		if sact: effect_data['SourceActorId'] = sact.Id
 	elif source is BaseZone:
-		effect_data['SourceId'] = (source as BaseZone).Id
 		effect_data['SourceType'] = 'Zone'
+		effect_data['SourceId'] = (source as BaseZone).Id
+		var sact = (source as BaseZone).get_source_actor()
+		if sact: effect_data['SourceActorId'] = sact.Id
 	else:
 		printerr("EffectLibrary.create_effect: Unknown source type: %s" % [source])
 		return null
@@ -83,7 +89,8 @@ static func _create_effect(source, actor:BaseActor, key:String, data:Dictionary,
 	if !effect:
 		printerr("EffectLibrary.create_effect: Failed to make effect '%s'." % [key])
 		return null
-	
+	# TODO: I'm coming in late and don't know why this isnt in init()
+	effect._source = source
 	return effect
 
 static func list_effect_defs()->Array:

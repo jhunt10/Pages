@@ -99,14 +99,16 @@ var _suppress_sync = false
 					bar_parts[reverse_index].modulate = phy_ammo_color
 				elif ammo_type == AmmoItem.AmmoTypes.Abn:
 					bar_parts[reverse_index].modulate = abn_ammo_color
+				else:
+					bar_parts[reverse_index].modulate = abn_ammo_color
 			temp_val -= cost_val
 
 
 var bar_parts = []
 
-func set_ammo_data(ammo_data:Dictionary):
+func set_ammo_data(actor:BaseActor, action_key:String):
 	_suppress_sync = true
-	ammo_type = AmmoItem.AmmoTypes.get(ammo_data.get("AmmoType", "Gen"), AmmoItem.AmmoTypes.Gen)
-	clip_val = ammo_data.get("Clip", 1)
-	cost_val = ammo_data.get("Cost", 1)
+	ammo_type = actor.Que.get_page_ammo_type(action_key)
+	clip_val = actor.Que.get_page_ammo_max_clip(action_key)
+	cost_val = actor.Que.get_page_ammo_cost_per_use(action_key)
 	_suppress_sync = false

@@ -11,7 +11,16 @@ var actor:BaseActor
 var real_que : Array = []
 var _cached_max_que_size:int = -1
 
-var _page_ammo_values:Dictionary = {}
+# Keyed off ActionKey, contains:
+#		"Cost": per use
+#		"Clip": max value
+#		"Value": Current Value of Clip
+#		"AmmoType": AmmoItem.AmmoType
+#		"FreeChance": Chance to not consume ammo
+#		"PreviewUses": Number of times it's qued
+var _page_ammo_datas:Dictionary = {}
+var _cached_ammo_mods:Dictionary
+var _ammo_mod_dirty:bool=true
 
 ## Mapping from turn index to real_que index to account for padding
 # Positive numbers denote real_que index offset by 1	Example: 3 padded to 6 [1,-1,2,-2,3,-3]
@@ -82,8 +91,6 @@ func get_action_for_turn(turn_index : int)->BaseAction:
 func que_action(action:BaseAction, data:Dictionary={}):
 	if real_que.size() < get_max_que_size():
 		real_que.append(action)
-		if action.CostData.size() > 0:
-			data["CostData"] = action.CostData
 		QueExecData.que_data(data)
 		action_que_changed.emit()
 		
@@ -126,16 +133,6 @@ func get_movement_preview_path()->Array:
 			#print("Before: " + str(befor) + " | Prev: " + str(action.PreviewMoveOffset) + " | After: " + str(current_pos))
 	return path
 
-func get_total_preview_costs():
-	var costs = {}
-	for action:BaseAction in real_que:
-		for key in action.CostData.keys():
-			if !costs.keys().has(key):
-				costs[key] = action.CostData[key]
-			else:
-				costs[key] += action.CostData[key]
-	return costs
-
 # Called by ActionQurControl._calc_turn_padding()
 func _set_turn_mapping(gap_or_nots:Array):
 	_turn_mapping.clear()
@@ -147,58 +144,195 @@ func _set_turn_mapping(gap_or_nots:Array):
 		else:
 			_turn_mapping.append(-last_index)
 
+func dirty_ammo_mods():
+	_ammo_mod_dirty = true
 
-func fill_page_ammo(action_key:String=""):
+func rechache_page_ammo():
+	_cache_page_ammo()
+
+func _cache_page_ammo():
+	# Backup current ammo values before we wipe the list
+	var current_values = {}
+	for key in _page_ammo_datas.keys():
+		current_values[key] = _page_ammo_datas[key]["Value"]
+	_page_ammo_datas.clear()
+	
+	var _cached_ammo_mods = actor.get_ammo_mods()
+	var ammo_mods = {}
+	var type_mods = {}
+	for mod_key in _cached_ammo_mods.keys():
+		var mod_data = _cached_ammo_mods[mod_key]
+		var mod_type = mod_data.get("ModType", "")
+		if mod_type == "ChangeType":
+			type_mods[mod_key] = mod_data
+		elif mod_type != '':
+			ammo_mods[mod_key] = mod_data
+	
+	for action:BaseAction in actor.pages.list_actions():
+		if not action.has_ammo():
+			continue
+		var key = action.ActionKey
+		var ammo_data = action.get_ammo_data().duplicate()
+		var cost = ammo_data.get("Cost", 1)
+		var clip = ammo_data.get("Clip", 1)
+		var ammo_type_str =  ammo_data.get("AmmoType", "NOT SET")
+		var free_chance =  ammo_data.get("FreeChance", 0)
+		var ammo_type = AmmoItem.AmmoTypes.get(ammo_type_str)
+		if ammo_type < 0:
+			_page_ammo_datas[key] = {
+				"Cost": 1,
+				"Clip": 1,
+				"Value": 0,
+				"AmmoType": AmmoItem.AmmoTypes.Abn,
+				"FreeChance": 0,
+				"PreviewUses": 0,
+				"ModKeys": []
+			}
+			printerr("ActionQue._cache_page_ammo: Action '%s' has unknown AmmoType '%s'." % [key, ammo_type_str])
+			continue
+		
+		var appply_mods_keys = []
+		# Check which type changing mods apply
+		if type_mods.size() > 0:
+			var apply_type_mods = {}
+			for mod_key in type_mods.keys:
+				var mod_data = ammo_mods[mod_key]
+				if _does_ammo_mod_apply_to_action(mod_data, ammo_data, action, actor):
+					apply_type_mods[key] = mod_data
+			# If multiple mods are found, apply none
+			if apply_type_mods.size() > 1:
+				printerr("ActionQue._cache_page_ammo: Multiple AmmoTypeMods found for '%s' '%s': %s" % [actor.Id, action.ActionKey, apply_type_mods.keys()])
+			elif apply_type_mods.size() == 1:
+				var new_ammo_type_str = apply_type_mods.values()[0]["Value"]
+				var new_ammo_type = AmmoItem.AmmoTypes.get(new_ammo_type_str)
+				if ammo_type < 0:
+					printerr("ActionQue._cache_page_ammo: Ammo Mod '%s' has unknown AmmoType '%s'." % [apply_type_mods.keys()[0], new_ammo_type_str])
+				else:
+					appply_mods_keys.append(apply_type_mods.keys()[0])
+					ammo_data["AmmoType"] = new_ammo_type_str
+					ammo_type_str = new_ammo_type_str
+					ammo_type = new_ammo_type
+		
+		for mod_key in ammo_mods.keys():
+			var mod_data = ammo_mods[mod_key]
+			var mod_type = mod_data.get("ModType", "")
+			var default = 1
+			if mod_type == "NoCostChance": default = 0
+			var mod_value = mod_data.get("Value", default)
+			if not _does_ammo_mod_apply_to_action(mod_data, ammo_data, action, actor):
+				continue
+			
+			if mod_type == "ScaleClip":
+				clip = clip * mod_value
+			elif mod_type == "ScaleCost":
+				cost = cost * mod_value
+			elif mod_type == "FreeChance":
+				free_chance += mod_value
+			appply_mods_keys.append(mod_key)
+		
+		_page_ammo_datas[key] = {
+			"Cost": cost,
+			"Clip": clip,
+			"Value": current_values.get(key, clip),
+			"AmmoType": ammo_type,
+			"FreeChance": free_chance,
+			"PreviewUses": 0,
+			"ModKeys": appply_mods_keys
+		}
+	_ammo_mod_dirty = false
+	for key in _page_ammo_datas.keys():
+		ammo_changed.emit(key)
+
+func _does_ammo_mod_apply_to_action(mod_data:Dictionary, ammo_data:Dictionary, action:BaseAction, actor)->bool:
+	if not action.has_ammo():
+		return false
+	
+	var conditions = mod_data.get("Conditions", null)
+	if not conditions:
+		return true
+	
+	var ammo_types = mod_data.get("AmmoTypes", [])
+	if ammo_types.size() > 0:
+		var ammo_type = ammo_data.get("AmmoType", "NOTSET")
+		if not ammo_types.has(ammo_type):
+			return false
+	
+	var tag_filters = mod_data.get("ActionTagFilters", [])
+	for filter in tag_filters:
+		if not SourceTagChain.filters_accept_tags(filter, action.get_tags()):
+			return false
+	
+	return true
+
+func fill_page_ammo(action_key:String="", supress_signal:bool=false):
+	if _ammo_mod_dirty:
+		_cache_page_ammo()
 	if action_key == "":
-		for key in actor.get_action_key_list():
-			var action = ActionLibrary.get_action(key)
-			if not action:
-				printerr("ActionQue.fill_ammo: Failed to find Action '%s'." %[key])
-				continue
-			var ammo_data = action.get_ammo_data(actor)
-			if not ammo_data:
-				continue
-			var ammo_key = ammo_data['AmmoKey']
-			_page_ammo_values[ammo_key] = ammo_data.get("Clip", 0)
-			ammo_changed.emit(key)
+		for key in _page_ammo_datas.keys():
+			fill_page_ammo(key, true)
+			if not supress_signal:
+				ammo_changed.emit(key)
 	else:
-		var action = ActionLibrary.get_action(action_key)
-		if not action:
-			return
-		var ammo_data = action.get_ammo_data(actor)
+		var ammo_data = _page_ammo_datas.get(action_key, null)
 		if not ammo_data:
 			return
-		var ammo_key = ammo_data['AmmoKey']
-		_page_ammo_values[ammo_key] = ammo_data.get("Clip", 0)
-		ammo_changed.emit(action_key)
+		ammo_data["Value"] = ammo_data["Clip"]
+		if not supress_signal:
+			ammo_changed.emit(action_key)
+
+func get_page_ammo_type(action_key:String)->AmmoItem.AmmoTypes:
+	if _ammo_mod_dirty:
+		_cache_page_ammo()
+	var ammo_data = _page_ammo_datas.get(action_key, null)
+	if not ammo_data:
+		return AmmoItem.AmmoTypes.Limit
+	return ammo_data["AmmoType"]
+
+func get_page_ammo_max_clip(action_key:String)->int:
+	if _ammo_mod_dirty:
+		_cache_page_ammo()
+	var ammo_data = _page_ammo_datas.get(action_key, null)
+	if not ammo_data:
+		return 0
+	return ceilf(ammo_data["Clip"])
+
+func get_page_ammo_cost_per_use(action_key:String)->int:
+	if _ammo_mod_dirty:
+		_cache_page_ammo()
+	var ammo_data = _page_ammo_datas.get(action_key, null)
+	if not ammo_data:
+		return 0
+	return ceilf(ammo_data["Cost"])
+
+func get_page_ammo_current_value(action_key:String)->int:
+	if _ammo_mod_dirty:
+		_cache_page_ammo()
+	var ammo_data = _page_ammo_datas.get(action_key, null)
+	if not ammo_data:
+		return 0
+	return ceilf(ammo_data["Value"])
 
 func can_pay_page_ammo(action_key:String)->bool:
-	var action = ActionLibrary.get_action(action_key)
-	var ammo_data = action.get_ammo_data(actor)
+	if _ammo_mod_dirty:
+		_cache_page_ammo()
+	var ammo_data = _page_ammo_datas.get(action_key, null)
 	if not ammo_data:
 		return true
-	var ammo_key = ammo_data['AmmoKey']
-	if not _page_ammo_values.has(ammo_key):
-		return false
-	return _page_ammo_values[ammo_key] >= ammo_data.get("Cost", 0)
-	
-func get_page_ammo(action_key:String)->int:
-	var action = ActionLibrary.get_action(action_key)
-	var ammo_data = action.get_ammo_data(actor)
-	var ammo_key = action_key
-	if ammo_data:
-		ammo_key = ammo_data['AmmoKey']
-	return _page_ammo_values.get(ammo_key, 0)
-	
-func consume_page_ammo(action_key:String):
-	var action = ActionLibrary.get_action(action_key)
-	var ammo_data = action.get_ammo_data(actor)
+	return ammo_data["Value"] >= ammo_data["Cost"]
+
+func try_consume_page_ammo(action_key:String)->bool:
+	if _ammo_mod_dirty:
+		_cache_page_ammo()
+	var ammo_data = _page_ammo_datas.get(action_key, null)
 	if not ammo_data:
-		return
-	var ammo_key = ammo_data['AmmoKey']
-	if not _page_ammo_values.has(ammo_key):
-		return
-	var current = _page_ammo_values[ammo_key]
-	var cost = ammo_data.get("Cost", 0)
-	_page_ammo_values[ammo_key] = max(0, current - cost)
+		return true
+	if ammo_data["Value"] < ammo_data["Cost"]:
+		return false
+	var free_chance = ammo_data.get("FreeChance", 0)
+	if free_chance > 0:
+		var roll = RandomHelper.roll()
+		if roll <= free_chance:
+			return true
+	ammo_data["Value"] = max(ammo_data["Value"] - ammo_data["Cost"], 0)
 	ammo_changed.emit(action_key)
+	return true

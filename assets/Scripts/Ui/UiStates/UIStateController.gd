@@ -1,12 +1,11 @@
 class_name UiStateController
 
-enum UiStates {ActionInput, ExecRound, PauseMenu, SelectItem, CharacterSheet, PlaceActors}
+enum UiStates {ActionInput, ExecRound, PauseMenu, CharacterSheet, PlaceActors}
 
 var _state_scripts = {
 	UiStates.ActionInput: "res://assets/Scripts/Ui/UiStates/UiState_ActionInput.gd",
 	UiStates.ExecRound: "res://assets/Scripts/Ui/UiStates/UiState_ExecRound.gd",
 	UiStates.PauseMenu: "res://assets/Scripts/Ui/UiStates/UiState_PauseMenu.gd",
-	UiStates.SelectItem: "res://assets/Scripts/Ui/UiStates/UiState_ItemSelection.gd",
 	UiStates.CharacterSheet: "res://assets/Scripts/Ui/UiStates/UiState_CharacterSheet.gd",
 	UiStates.PlaceActors: "res://assets/Scripts/Ui/UiStates/UiState_PlaceActors.gd"
 }
@@ -61,4 +60,18 @@ func back_to_last_state():
 func clear_states():
 	state_stack.clear()
 	current_ui_state = null
+	
+func open_options_menu(actor:BaseActor, selecting_key:String, option_sets, queing_action_key:String=''):
+	if option_sets is Dictionary:
+		option_sets = option_sets.values()
+	if not option_sets is Array:
+		option_sets = [option_sets]
+	var args = {
+		"ActorId": actor.Id,
+		"SelectionKey": selecting_key,
+		"OptionSets": option_sets
+	}
+	if queing_action_key != '':
+		args['ActionKey'] = queing_action_key
+	set_ui_state_from_path("res://assets/Scripts/Ui/UiStates/UiState_SelectActionOption.gd", args)
 	

@@ -153,7 +153,7 @@
                     "AllowAlreadyTargeted": false,
                     "AllowAutoTarget": false,
                     "SetTargetKey": "Target1",
-                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_GetTarget.gd",
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Targeting/SubAct_GetTarget.gd",
                     "TargetParamKey": "TargetParam1"
                 }
             ],
@@ -441,7 +441,7 @@
                     "AllowAlreadyTargeted": false,
                     "AllowAutoTarget": false,
                     "SetTargetKey": "Target1",
-                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_GetTarget.gd",
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Targeting/SubAct_GetTarget.gd",
                     "TargetParamKey": "TargetParam1"
                 }
             ],
@@ -708,7 +708,7 @@
                     "AllowAlreadyTargeted": false,
                     "AllowAutoTarget": false,
                     "SetTargetKey": "Target1",
-                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_GetTarget.gd",
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Targeting/SubAct_GetTarget.gd",
                     "TargetParamKey": "TargetParam1"
                 },
                 {
@@ -729,7 +729,7 @@
                     "RequiredConditions": {
                         "TargetWasShocked": false
                     },
-                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Attacks/SubAct_Attack.gd",
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Attacks/Targeting/SubAct_Attack.gd",
                     "TargetKey": "Target1",
                     "DamageKey": "Damage1",
                     "TargetMustBeInRange": false
@@ -738,7 +738,7 @@
                     "RequiredConditions": {
                         "TargetWasShocked": true
                     },
-                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Attacks/SubAct_Attack.gd",
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Attacks/Targeting/SubAct_Attack.gd",
                     "TargetKey": "Target1",
                     "DamageKey": "BoostedDamage",
                     "TargetMustBeInRange": false
@@ -830,7 +830,7 @@
                     "AllowAlreadyTargeted": false,
                     "AllowAutoTarget": true,
                     "SetTargetKey": "Target1",
-                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_GetTarget.gd",
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Targeting/SubAct_GetTarget.gd",
                     "TargetParamKey": "TargetParam1"
                 }
             ],
@@ -957,19 +957,19 @@
                     "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_AnimationInTo.gd"
                 },
                 {
-                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_GetTargetRandom.gd",
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Targeting/SubAct_GetTargetRandom.gd",
                     "TargetParamKey": "TargetParam1",
                     "SetTargetKey": "Target1",
                     "AllowAlreadyTargeted": false
                 },
                 {
-                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_GetTargetRandom.gd",
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Targeting/SubAct_GetTargetRandom.gd",
                     "TargetParamKey": "TargetParam1",
                     "SetTargetKey": "Target2",
                     "AllowAlreadyTargeted": false
                 },
                 {
-                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_GetTargetRandom.gd",
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Targeting/SubAct_GetTargetRandom.gd",
                     "TargetParamKey": "TargetParam1",
                     "SetTargetKey": "Target3",
                     "AllowAlreadyTargeted": false

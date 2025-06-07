@@ -1,5 +1,8 @@
 class_name RandomHelper
 
+static func roll()->float:
+	return randf()
+
 # Takes a dictionary of <Key, Weight> and returns a weighted random key
 static func roll_from_set(data_set:Dictionary)->String:
 	var max_val:int = 0

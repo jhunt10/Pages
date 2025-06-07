@@ -31,10 +31,9 @@ func set_page(actor:BaseActor, action:BaseAction):
 	selection_display.hide()
 	action_key = action.ActionKey
 	page_icon_texture.texture = action.get_large_page_icon(actor)
-	var ammo_data = action.get_ammo_data(actor)
-	if !ammo_data:
+	if !action.has_ammo():
 		ammo_display.hide()
 	else:
-		ammo_display.set_ammo_data(ammo_data)
-		var ammo_val = actor.Que.get_page_ammo(action.ActionKey)
+		ammo_display.set_ammo_data(actor, action.ActionKey)
+		var ammo_val = actor.Que.get_page_ammo_current_value(action.ActionKey)
 		ammo_display.current_val = ammo_val

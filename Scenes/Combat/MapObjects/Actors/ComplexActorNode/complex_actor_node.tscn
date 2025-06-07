@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://uo60871y6t54"]
+[gd_scene load_steps=31 format=3 uid="uid://uo60871y6t54"]
 
 [ext_resource type="Script" path="res://Scenes/Combat/MapObjects/Actors/ComplexActorNode/complex_actor_node.gd" id="1_wfbib"]
 [ext_resource type="Texture2D" uid="uid://cp2wc5s8ju613" path="res://defs/Actors/Template_SpriteSheet.png" id="2_g31ob"]
@@ -240,6 +240,14 @@ _data = {
 "shake_effect": ExtResource("9_co1y3")
 }
 
+[sub_resource type="Animation" id="Animation_fneeu"]
+length = 0.001
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_eolao"]
+_data = {
+"RESET": SubResource("Animation_fneeu")
+}
+
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_87ioo"]
 texture = ExtResource("22_xdlor")
 texture_region_size = Vector2i(32, 32)
@@ -252,12 +260,14 @@ texture_region_size = Vector2i(32, 32)
 tile_size = Vector2i(32, 32)
 sources/0 = SubResource("TileSetAtlasSource_87ioo")
 
-[node name="ActorNode" type="Node2D" node_paths=PackedStringArray("main_hand_node", "off_hand_node", "vfx_holder", "aura_holder", "actor_sprite", "path_arrow", "actor_motion_node", "offset_node", "damage_animation_player", "body_animation")]
+[node name="ActorNode" type="Node2D" node_paths=PackedStringArray("main_hand_node", "off_hand_node", "tombstone_sprite", "tombstone_portrait_sprite", "vfx_holder", "aura_holder", "actor_sprite", "path_arrow", "actor_motion_node", "offset_node", "damage_animation_player", "body_animation")]
 y_sort_enabled = true
 script = ExtResource("1_wfbib")
 editing_facing_direction = 2
 main_hand_node = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/MainHandNode")
 off_hand_node = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/OffHandNode")
+tombstone_sprite = NodePath("TombStoneSprite")
+tombstone_portrait_sprite = NodePath("TombStoneSprite/TombStinePortrait")
 vfx_holder = NodePath("ActorMotionNode/VFXHolder")
 aura_holder = NodePath("AuraHolder")
 actor_sprite = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/ActorSprite")
@@ -339,6 +349,7 @@ texture = ExtResource("14_38ite")
 
 [node name="DamageAnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
+"": SubResource("AnimationLibrary_eolao"),
 "DamageAnimations": ExtResource("19_bp28d")
 }
 
@@ -356,11 +367,11 @@ position = Vector2(-16, -16)
 tile_set = SubResource("TileSet_l1f0r")
 
 [node name="TombStoneSprite" type="Sprite2D" parent="."]
-top_level = true
+visible = false
 position = Vector2(0, -6)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("23_qplh7")
 
 [node name="TombStinePortrait" type="Sprite2D" parent="TombStoneSprite"]
-position = Vector2(0, -6)
+position = Vector2(0, -8)
 texture = ExtResource("24_brgje")

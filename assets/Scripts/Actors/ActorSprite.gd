@@ -141,3 +141,19 @@ func _get_draw_ordered_equipment()->Array:
 		if page.has_spite_sheet():
 			out_list.append(page)
 	return out_list
+
+func get_black_and_white_portrait()->Texture2D:
+	var port:Texture2D = get_portrait_sprite()
+	var org_image = port.get_image()
+	var new_image = Image.create(org_image.get_width(), org_image.get_height(), false, org_image.get_format())
+	new_image.decompress()
+	for y in org_image.get_size().y:
+		for x in org_image.get_size().x:
+			var color = org_image.get_pixel(x, y)
+			var max_val = max(color.r, color.b, color.g)
+			var min_val = min(color.r, color.b, color.g)
+			var value = (color.r + color.b + color.g) / 3.0
+			var new_color = Color(value, value, value, color.a)
+			new_image.set_pixel(x, y, new_color)
+	var new_port = ImageTexture.create_from_image(new_image)
+	return new_port

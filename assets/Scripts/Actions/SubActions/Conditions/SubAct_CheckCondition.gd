@@ -26,10 +26,10 @@ func do_thing(parent_action:BaseAction, subaction_data:Dictionary, que_exe_data:
 	if condition_type == "TargetHasTag":
 		var required_tag = subaction_data['RequiredTag']
 		var target_key = subaction_data['TargetKey']
-		var targets:Array = _find_target_effected_actors(parent_action, subaction_data, target_key, que_exe_data, game_state, actor)
+		var check_actors = _find_target_effected_actors(parent_action, subaction_data, target_key, que_exe_data, game_state, actor)
 		var found_any = false
 		var found_all = true
-		for target:BaseActor in targets:
+		for target:BaseActor in check_actors:
 			if target.get_tags().has(required_tag):
 				found_any = true
 			else:

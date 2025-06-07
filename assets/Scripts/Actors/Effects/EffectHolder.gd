@@ -221,6 +221,14 @@ func get_damage_mods()->Dictionary:
 			out_dict[mod_key] = mods[mod_key]
 	return out_dict
 
+func get_ammo_mods()->Dictionary:
+	var out_dict = {}
+	for effect:BaseEffect in _effects.values():
+		var mods = effect.get_active_ammo_mods()
+		for mod_key:String in mods.keys():
+			out_dict[mod_key] = mods[mod_key]
+	return out_dict
+
 func get_attack_mods()->Dictionary:
 	var out_dict = {}
 	for effect:BaseEffect in _effects.values():

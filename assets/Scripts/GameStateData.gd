@@ -52,6 +52,12 @@ func get_actor(actor_id:String, allow_dead:bool=false, error_if_null:bool=true)-
 func remove_actor_from_map(actor:BaseActor):
 	map_data.remove_actor(actor)
 
+func move_actor_to_corpse_layer(actor:BaseActor):
+	map_data.set_actor_layer(actor, MapStateData.MapLayers.Corpse)
+
+func move_actor_to_default_layer(actor:BaseActor):
+	map_data.set_actor_layer(actor, MapStateData.MapLayers.Default)
+
 func delete_actor(actor:BaseActor):
 	if _actors.keys().has(actor.Id):
 		_actors.erase(actor.Id)
@@ -71,7 +77,7 @@ func list_actors(include_dead:bool=false):
 func set_actor_pos(actor:BaseActor, pos:MapPos, suppress_signal:bool=false):
 	var old_pos = map_data.get_actor_pos(actor)
 	
-	map_data.set_actor_pos(actor, pos, suppress_signal)
+	map_data.set_actor_map_pos(actor, pos, suppress_signal)
 	
 	if suppress_signal:
 		return
@@ -102,17 +108,8 @@ func set_actor_pos(actor:BaseActor, pos:MapPos, suppress_signal:bool=false):
 func get_actor_pos(actor:BaseActor)->MapPos:
 	return map_data.get_actor_pos(actor)
 
-func get_actors_at_pos(pos)->Array:
-	#var out_list = []
-	#for actor_id in _actor_poses.keys():
-		#var actor_pos = _actor_poses[actor_id]
-		#if actor_pos.x == pos.x and actor_pos.y == pos.y:
-			#out_list.append(_actors[actor_id])
-	#return out_list
-	return map_data.get_actors_at_pos(pos)
-
-
-
+func get_actors_at_pos(pos, include_dead:bool=false)->Array:
+	return map_data.get_actors_at_pos(pos, null, include_dead)
 
 func is_spot_open(pos, ignore_actor_ids:Array=[])->bool:
 	return map_data.is_spot_open(pos, ignore_actor_ids)

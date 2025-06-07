@@ -63,7 +63,7 @@ func get_zone_tile_sprite()->Texture2D:
 	var load_path = _data.get('LoadPath', '')
 	var tile_set = _data.get('TileSprite', '')
 	var path = load_path.path_join(tile_set)
-	return SpriteCache.get_sprite(path, true)
+	return SpriteCache.get_sprite(path, false)
 
 func get_pos()->MapPos:
 	return _center_pos

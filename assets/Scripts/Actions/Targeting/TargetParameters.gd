@@ -101,10 +101,13 @@ func is_valid_target_actor(actor:BaseActor, target:BaseActor, game_state:GameSta
 				return false
 	if target_type == TargetTypes.Actor:
 		return true
+	if target_type == TargetTypes.Corpse:
+		return target.is_dead
 	if target_type == TargetTypes.Enemy:
 		return actor.FactionIndex != target.FactionIndex
 	if target_type == TargetTypes.Ally:
 		return actor.FactionIndex == target.FactionIndex
+	
 	return false
 
 func is_actor_effected_by_aoe(actor:BaseActor, target:BaseActor, game_state:GameStateData)->bool:

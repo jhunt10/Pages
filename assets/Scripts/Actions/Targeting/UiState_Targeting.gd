@@ -97,11 +97,13 @@ func select_target(coord:Vector2i, confirmed:bool):
 		var map_spot = MapPos.new(coord.x, coord.y, selection_data.actor_pos.z, selection_data.actor_pos.dir)
 		turndata.add_target_for_key(selection_data.setting_target_key, selection_data.target_params.target_param_key, map_spot)
 	elif selection_data.target_params.is_actor_target_type():
-		var actors = CombatRootControl.Instance.GameState.get_actors_at_pos(coord)
+		var include_dead = selection_data.target_params.target_type == TargetParameters.TargetTypes.Corpse
+		var actors = CombatRootControl.Instance.GameState.get_actors_at_pos(coord, include_dead)
 		if actors.size() > 1:
 			printerr("Multiple Actors on targeted spot not supported")
 			return
 		if actors.size() == 0:
+			printerr("No Actors on targeted spot when looking for Actor target")
 			return
 		turndata.add_target_for_key(selection_data.setting_target_key, selection_data.target_params.target_param_key, actors[0].Id)
 	CombatUiControl.ui_state_controller.set_ui_state(UiStateController.UiStates.ExecRound)

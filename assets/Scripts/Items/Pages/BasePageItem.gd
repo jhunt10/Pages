@@ -60,7 +60,7 @@ func get_effect_def():
 	return null
 
 func get_tags_added_to_actor()->Array:
-	return get_load_val("AddTags", [])
+	return page_details.get("AddTags", [])
 
 
 func get_rarity_background()->Texture2D:

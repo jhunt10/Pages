@@ -3,7 +3,7 @@ class_name StatHolder
 const HealthKey:String = "Health"
 const LOGGING = false
 
-signal stats_changed
+signal held_stats_changed
 signal bar_stat_changed
 
 var _stats_dirty = true
@@ -194,16 +194,27 @@ func apply_damage_event(damage_event:DamageEvent, trigger_effect:bool=false, gam
 	var damage = damage_event.final_damage
 	var health_key = "BarStat:"+HealthKey
 	_cached_stats[health_key] = max(min(_cached_stats[health_key] - damage, max_health), 0)
-	if current_health <= 0:
+	if current_health <= 0 and CombatRootControl.Instance:
 		CombatRootControl.Instance.kill_actor(_actor)
 	bar_stat_changed.emit()
 	
 
 func apply_damage(damage):
 	_cached_stats["BarStat:"+HealthKey] = max(min(_cached_stats["BarStat:"+HealthKey] - damage, max_health), 0)
-	if current_health <= 0:
+	if current_health <= 0 and CombatRootControl.Instance:
 		CombatRootControl.Instance.kill_actor(_actor)
 	bar_stat_changed.emit()
+
+func apply_healing(value:int, can_revive:bool=false):
+	var health_key = "BarStat:"+HealthKey
+	if _actor.is_dead and not can_revive:
+		return
+	_cached_stats[health_key] = max(min(_cached_stats[health_key] + value, max_health), 0)
+	if _actor.is_dead and _cached_stats[health_key] > 0:
+		if CombatRootControl.Instance:
+			CombatRootControl.Instance.revive_actor(_actor)
+	bar_stat_changed.emit()
+	
 
 ## Reduce current value of bar stat by given val and return true if cost was be paied
 func reduce_bar_stat_value(stat_name:String, val:int, allow_partial:bool=true) -> bool:
@@ -394,4 +405,4 @@ func _calc_cache_stats(emit_signal:bool=true):
 		printerr("Stat Caching Failed wth to many dependancies!")
 	_stats_dirty = false
 	if emit_signal:
-		stats_changed.emit()
+		held_stats_changed.emit()

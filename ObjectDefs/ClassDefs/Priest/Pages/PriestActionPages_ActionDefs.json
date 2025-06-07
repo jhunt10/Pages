@@ -1,15 +1,30 @@
 [
     {
-        "ActionKey":"TestApplyBurning",
-        "ParentKey":"_BaseApplyEffectSpell",
+        "ActionKey":"ApplyHolyArmorAction",
+        "ParentKey":"_BaseApplyBuffSpell",
         "Details": {
-            "DisplayName": "Test Burn",
-            "LargeIcon": "Effects/Sprites/TestAilment.png",
-            "SmallIcon": "Effects/Sprites/TestAilment.png"
+            "DisplayName": "Holy Armor",
+            "LargeIcon": "Effects/Sprites/HolyArmor.png",
+            "SmallIcon": "Effects/Sprites/HolyArmor.png"
         },
         "EffectDatas":{
             "ApplyEffect": {
-                "EffectKey": "AilmentBurned"
+                "EffectKey": "HolyArmorEffect"
+            }
+        }
+
+    },
+    {
+        "ActionKey":"ApplyHolyBookAction",
+        "ParentKey":"_BaseApplyBuffSpell",
+        "Details": {
+            "DisplayName": "Holy Book",
+            "LargeIcon": "Effects/Sprites/HolyBook.png",
+            "SmallIcon": "Effects/Sprites/HolyBook.png"
+        },
+        "EffectDatas":{
+            "ApplyEffect": {
+                "EffectKey": "HolyBookEffect"
             }
         }
 
@@ -29,7 +44,21 @@
         }
 
     },
+    {
+        "ActionKey":"ApplyLightAuraAction",
+        "ParentKey":"_BaseApplyBuffSpell",
+        "Details": {
+            "DisplayName": "Light Aura",
+            "LargeIcon": "Effects/Sprites/LightAura.png",
+            "SmallIcon": "Effects/Sprites/LightAura.png"
+        },
+        "EffectDatas":{
+            "ApplyEffect": {
+                "EffectKey": "LightAuraEffect"
+            }
+        }
 
+    },
     {
         "ActionKey": "ApplyBlessing_Air",
         "ParentKey": "_BaseApplyBuffSpell",
@@ -194,7 +223,6 @@
         }
     },
 
-
     {
         "ActionKey": "_BaseHealSpell",
         "AmmoData": {
@@ -236,7 +264,7 @@
                     "AllowAlreadyTargeted": false,
                     "AllowAutoTarget": false,
                     "SetTargetKey": "Target1",
-                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_GetTarget.gd",
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Targeting/SubAct_GetTarget.gd",
                     "TargetParamKey": "TargetParam"
                 }
             ],
@@ -296,7 +324,7 @@
                     "AllowAlreadyTargeted": false,
                     "AllowAutoTarget": false,
                     "SetTargetKey": "Target1",
-                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_GetTarget.gd",
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Targeting/SubAct_GetTarget.gd",
                     "TargetParamKey": "TargetParam"
                 }
             ],
@@ -343,7 +371,7 @@
             ]
         },
         "SubActions": {
-            "5": [
+            "0": [
                 {
                     "Animation": "Raise",
                     "SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponReadyAnimation.gd",
@@ -356,7 +384,7 @@
                     "AllowAlreadyTargeted": false,
                     "AllowAutoTarget": false,
                     "SetTargetKey": "Target1",
-                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_GetTarget.gd",
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Targeting/SubAct_GetTarget.gd",
                     "TargetParamKey": "TargetParam"
                 }
             ],
@@ -368,7 +396,9 @@
                     "SubActionScript": "res://assets/Scripts/Actions/SubActions/Misc/SubAct_Heal.gd",
                     "TargetKey": "Target1",
                     "Value": 50
-                },
+                }
+            ],
+            "16":[
                 {
                     "SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponMotionAnimation.gd",
                     "MainHand": true,
@@ -438,11 +468,36 @@
             ]
         },
         "SubActions": {
+            "5": [
+                {
+                    "Animation": "Raise",
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponReadyAnimation.gd",
+                    "MainHand": true,
+                    "OffHand": "Never"
+                }
+            ],
+            "10": [
+                {
+                    "AllowAlreadyTargeted": false,
+                    "AllowAutoTarget": false,
+                    "SetTargetKey": "Target1",
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Targeting/SubAct_GetTarget.gd",
+                    "TargetParamKey": "TargetParam"
+                }
+            ],
             "11": [
                 {
-                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Misc/SubAct_Heal.gd",
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_PayCost.gd"
+                },
+                {
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Misc/SubAct_ReviveDeadActor.gd",
                     "TargetKey": "Target1",
-                    "Value": 100
+                    "Value": 50
+                },
+                {
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponMotionAnimation.gd",
+                    "MainHand": true,
+                    "OffHand": "Never"
                 }
             ]
         },
@@ -450,6 +505,124 @@
             "TargetParam": {
                 "LineOfSight": true,
                 "TargetArea": "[[0,1]]",
+                "TargetType": "Corpse"
+            }
+        }
+    },
+    {
+        "ActionKey": "RemoveAilmentSpell",
+        "AmmoData": {
+            "Cost": 4,
+            "Clip": 16,
+            "AmmoType": "Mag"
+        },
+        "AttackDetails":
+        {
+            "AccuracyMod": 1,
+            "PotencyMod": 1
+        },
+        "Details": {
+            "Description": "Select an @@#TrgParm:TargetParam:TargetType@@ and remove one @@#Color:Red:Ailment Effect@@ from them.",
+            "DisplayName": "Remove Ailment",
+            "LargeIcon": "Sprites/RemoveAilment.png",
+            "SmallIcon": "Sprites/RemoveAilment.png",
+            "SnippetDesc": "Remove an Ailment from Actor",
+            "Tags": [
+                "Remove",
+                "Spell"
+            ]
+        },
+        "MissileDatas": {},
+        "Preview": {
+            "PreviewTargetKey": "TargetParam"
+        },
+        "SubActions": {
+            "0": [
+                {
+                    "Animation": "Raise",
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponReadyAnimation.gd",
+                    "MainHand": true,
+                    "OffHand": "Never"
+                },
+                {
+                    "TargetKey": "Self",
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Conditions/SubAct_CheckCondition.gd",
+                    "ConditionFlag": "ActorHasExtraRemove",
+                    "ConditionType": "TargetHasTag",
+                    "RequiredTag": "RemoveMore",
+                    "PrimaryTargetOnly": true
+                },
+                {
+                    "TargetKey": "Self",
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Conditions/SubAct_CheckCondition.gd",
+                    "ConditionFlag": "ActorHasSelectRemove",
+                    "ConditionType": "TargetHasTag",
+                    "RequiredTag": "RemoveSelect",
+                    "PrimaryTargetOnly": true
+                }
+            ],
+            "10": [
+                {
+                    "AllowAlreadyTargeted": false,
+                    "AllowAutoTarget": false,
+                    "SetTargetKey": "Target1",
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Targeting/SubAct_GetTarget.gd",
+                    "TargetParamKey": "TargetParam"
+                },
+                {
+                    "RequiredConditions": {
+                        "ActorHasSelectRemove": true
+                    },
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Targeting/SubAct_SelectEffectOnTarget.gd",
+                    "SelectionKey": "EffectToRemove",
+                    "TargetKey": "Target1"
+                }
+            ],
+            "11": [
+                {
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_PayCost.gd"
+                },
+                {
+                    "RequiredConditions": {
+                        "ActorHasExtraRemove": false
+                    },
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Effects/SubAct_RemoveEffect.gd",
+                    "TargetKey": "Target1",
+                    "RemoveCount": 1,
+                    "EffectTagFilters": [
+                        {
+                            "RequireAllTags": ["Ailment"]
+                        }
+                    ],
+                    "RemoveSelectionKey": "EffectToRemove"
+                },
+                {
+                    "RequiredConditions": {
+                        "ActorHasExtraRemove": true
+                    },
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Effects/SubAct_RemoveEffect.gd",
+                    "TargetKey": "Target1",
+                    "RemoveCount": 2,
+                    "EffectTagFilters": [
+                        {
+                            "RequireAllTags": ["Ailment"]
+                        }
+                    ],
+                    "RemoveSelectionKey": "EffectToRemove"
+                }
+            ],
+            "16":[
+                {
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponMotionAnimation.gd",
+                    "MainHand": true,
+                    "OffHand": "Never"
+                }
+            ]
+        },
+        "TargetParams": {
+            "TargetParam": {
+                "LineOfSight": true,
+                "TargetArea": "[[-1,2],[0,2],[1,2],[-1,1],[0,1],[1,1],[-1,0],[1,0]]",
                 "TargetType": "Actor"
             }
         }

@@ -159,14 +159,10 @@ func merge_duplicate_effect(source, dup_effect_def:Dictionary):
 			sub_effect.merge_new_duplicate_sub_effect_data(self, sub_effect_data, dup_effect_def, dupl_sub_effect_data)
 
 func get_source_actor()->BaseActor:
-	var source_type = get_load_val('SourceType')
-	if source_type == "Actor":
-		return ActorLibrary.get_actor(source_id)
-	elif _source.has("get_source_actor"):
-		return _source.get_source_actor()
-	else:
-		printerr("BaseEffect.get_source_actor: #TODO")
-		return null
+	var source_actor_id = get_load_val('SourceActorId', '')
+	if source_actor_id != "Actor":
+		return ActorLibrary.get_actor(source_actor_id)
+	return null
 
 func is_bad()->bool:
 	return effect_details.get("IsBad", false)
@@ -213,6 +209,16 @@ func get_active_stat_mods()->Array:
 		for mod in sub_effect.get_active_stat_mods(self, sub_effect_data):
 			out_list.append(mod)
 	return out_list
+
+func get_active_ammo_mods()->Dictionary:
+	var out_dict = {}
+	var mods_dataa = get_load_val("AmmoMods", {})
+	for mod_key in mods_dataa.keys():
+		var mod_data = mods_dataa[mod_key]
+		if not mod_data.has("AmmoModKey"):
+			mod_data["AmmoModKey"] = mod_key
+		out_dict[mod_key] = mod_data
+	return out_dict
 
 func get_active_damage_mods()->Dictionary:
 	var out_dict = {}

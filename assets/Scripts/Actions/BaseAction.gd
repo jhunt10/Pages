@@ -249,32 +249,24 @@ func has_ammo(actor:BaseActor=null):
 			#return false
 	return ammo_data != null
 
-func get_ammo_data(actor:BaseActor=null):
+func get_ammo_data():
 	var ammo_data = get_load_val("AmmoData", null)
-	if ammo_data and ammo_data.get("UseWeaponAmmo", false):
-		if actor:
-			var weapon = actor.equipment.get_primary_weapon()
-			if !weapon:
-				return null
-			var weapon_ammo = weapon.get_ammo_data()
-			if weapon_ammo.size() > 0:
-				weapon_ammo['AmmoKey'] = "Weapon"
-				return weapon_ammo
-		return null
 	if ammo_data:
 		ammo_data['AmmoKey'] = ActionKey
 	return ammo_data
 		
 
 func get_on_que_options(actor:BaseActor, game_state:GameStateData):
-	var out_list = []
+	var out_dict = {}
 	for sub_action_data in list_sub_action_datas():
 		var sub_action = ActionLibrary.get_sub_action_script(sub_action_data['SubActionScript'])
 		if !sub_action:
 			printerr("BaseAction.get_on_que_options: Failed to find SubActionScript '%s'." % [sub_action_data['SubActionScript']])
 			continue
-		out_list.append_array(sub_action.get_on_que_options(self, sub_action_data, actor, game_state))
-	return out_list
+		var options = sub_action.get_on_que_options(self, sub_action_data, actor, game_state)
+		for option:OnQueOptionsData in options:
+			out_dict[option.option_key] = option
+	return out_dict
 
 func get_effect_data(effect_data_key:String)->Dictionary:
 	var effect_datas = get_load_val("EffectDatas", {})

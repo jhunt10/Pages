@@ -34,8 +34,6 @@ static func handle_attack(
 	if !attacker_pos:
 		attacker_pos = game_state.get_actor_pos(attacker)
 	
-	var attack_mods = {}
-	var stat_mods = {}
 	
 	# get unique list of all Actors involed in attack
 	var attacker_included_in_defenders = false
@@ -64,7 +62,10 @@ static func handle_attack(
 				var defender_pos = game_state.get_actor_pos(actor)
 				attack_direction = get_relative_attack_direction(attacker_pos, defender_pos)
 			attack_posision_data[actor.Id]['AttackDirection'] = attack_direction
-		
+	
+	# Gather up attack mods
+	var attack_mods = {}
+	var stat_mods = {}
 	for actor:BaseActor in all_unique_actors:
 		var actor_attack_mods = actor.get_attack_mods()
 		for actor_attack_mod_key in actor_attack_mods.keys():
@@ -121,8 +122,7 @@ static func handle_attack(
 		actor.effects.trigger_attack(attack_event, game_state)
 	
 	# Calculate Damage
-	for defender:BaseActor in defenders:
-		_roll_damage_for_attack_event(attack_event, attacker, defender)
+	_roll_damage_for_attack_event(attack_event, game_state)
 	attack_event.attack_stage = AttackStage.RolledForDamage
 	
 	# Trigger Post Damage Roll Effects
@@ -252,40 +252,47 @@ static func _roll_for_hit(attack_event:AttackEvent, sub_event:AttackSubEvent):
 
 ## Roll for damage and add DamageEvents to AttackSubEvent for defender.
 ## Will alter can_evade/can_block of AttackSubEvent to account for Healing damage
-static func _roll_damage_for_attack_event( attack_event:AttackEvent, attacker:BaseActor, defender:BaseActor):
-	var atk_sub_event:AttackSubEvent = attack_event.sub_events[defender.Id]
-	if atk_sub_event.is_miss:
-		return
+static func _roll_damage_for_attack_event( attack_event:AttackEvent, game_state:GameStateData):
+	var attacker = game_state.get_actor(attack_event.attacker_id)
 	# Get damage mods from AttackMods and passive mods from Attacker and Defender
-	var damage_mods = {}
+	var attack_damage_mods = {}
 	for attack_mod in attack_event.attack_mods.values():
-		damage_mods.merge(attack_mod.get("DamageMods", {}))
-	damage_mods.merge(attacker.get_damage_mods())
-	damage_mods.merge(defender.get_damage_mods())
+		attack_damage_mods.merge(attack_mod.get("DamageMods", {}))
+	attack_damage_mods.merge(attacker.get_damage_mods())
 	
-	# Roll for each Damage Data
-	for damage_key in attack_event.damage_datas.keys():
-		var damage_data = attack_event.damage_datas[damage_key]
-		var damage_event = DamageHelper.roll_for_damage(damage_data, attacker, defender, attack_event.source_tag_chain, damage_mods, true)
+	for defedner_id in attack_event.defender_ids:
+		var defender:BaseActor = game_state.get_actor(defedner_id)
+		var atk_sub_event:AttackSubEvent = attack_event.sub_events[defedner_id]
+		if atk_sub_event.is_miss:
+			return
+		# Add damage mods that don't come from AttackMods
+		var damage_mods = {}
+		damage_mods.merge(attack_damage_mods)
+		damage_mods.merge(defender.get_damage_mods())
 		
-		# Damage turned out to be healing
-		if damage_event.final_damage < 0:
-			# Never block or evade damage that would heal you
-			atk_sub_event.can_evade = false
-			atk_sub_event.can_block = false
-		
-		# Do not add DamageEvent if evaded (we just needed to see if it would heal)
-		if atk_sub_event.is_evade:
-			continue
-		# Was Blocked
-		elif atk_sub_event.is_blocked:
-			damage_event.final_damage = damage_event.final_damage * atk_sub_event.defender_block_mod
-		# Was Crit
-		elif atk_sub_event.is_crit:
-			damage_event.final_damage = damage_event.final_damage * attack_event.attcker_crit_mod
-		else:
-			damage_event.final_damage = damage_event.final_damage
-		atk_sub_event.damage_events[damage_key] = damage_event
+		# Roll for each Damage Data
+		for damage_key in attack_event.damage_datas.keys():
+			var damage_data = attack_event.damage_datas[damage_key]
+			var damage_event = DamageHelper.roll_for_damage(damage_data, attacker, defender, attack_event.source_tag_chain, damage_mods, true)
+			
+			# Damage turned out to be healing
+			if damage_event.final_damage < 0:
+				# Never block or evade damage that would heal you
+				atk_sub_event.can_evade = false
+				atk_sub_event.can_block = false
+			
+			# Do not add DamageEvent if evaded (we just needed to see if it would heal)
+			if atk_sub_event.is_evade:
+				continue
+			# Was Blocked
+			elif atk_sub_event.is_blocked:
+				damage_event.final_damage = damage_event.final_damage * atk_sub_event.defender_block_mod
+			# Was Crit
+			elif atk_sub_event.is_crit:
+				damage_event.final_damage = damage_event.final_damage * attack_event.attcker_crit_mod
+			else:
+				damage_event.final_damage = damage_event.final_damage
+			atk_sub_event.damage_events[damage_key] = damage_event
 
 ## Roll for each Attack Effect for defender. 
 ## Results of rolls are added to sub_event.applied_effect_datas.

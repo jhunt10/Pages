@@ -27,7 +27,7 @@
 [ext_resource type="Texture2D" uid="uid://cwsvq3qu6228n" path="res://assets/Sprites/UI/QueInputAndDisplay/page_button.png" id="24_5fn7e"]
 [ext_resource type="Script" path="res://Scenes/Combat/game_over_screen.gd" id="25_byrc6"]
 [ext_resource type="Script" path="res://Scenes/Combat/UiNodes/CameraLock/camera_lock_control.gd" id="25_ig6gl"]
-[ext_resource type="Texture2D" uid="uid://c2rmvgu5ib0nq" path="res://defs/Actions/ItemUsage/Sprites/Potion_Icon.png" id="25_q2xye"]
+[ext_resource type="Texture2D" uid="uid://c2rmvgu5ib0nq" path="res://ObjectDefs/BasicActions/ItemUsage/Sprites/Potion_Icon.png" id="25_q2xye"]
 [ext_resource type="Script" path="res://Scenes/Combat/game_victory_screen.gd" id="26_1uhkb"]
 [ext_resource type="Texture2D" uid="uid://e0lb1vqlst3i" path="res://Scenes/Combat/UiNodes/CameraLock/CameraLock_Locked.png" id="26_muuhh"]
 [ext_resource type="Theme" uid="uid://cayt153s5ro4a" path="res://Scenes/Themes/standard_theme_red.tres" id="27_3mvka"]
@@ -35,7 +35,6 @@
 [ext_resource type="Texture2D" uid="uid://88hhiituab5b" path="res://Scenes/Combat/UiNodes/CameraLock/CameraLock_Unlocked.png" id="27_cweuh"]
 [ext_resource type="Script" path="res://Scenes/Combat/UiNodes/DropMessages/drop_message_card.gd" id="28_lvk4q"]
 [ext_resource type="Texture2D" uid="uid://dx5cq5wifod2g" path="res://Scenes/Combat/UiNodes/CameraLock/CameraLock_Following.png" id="28_mng7g"]
-[ext_resource type="PackedScene" uid="uid://banawprx6et26" path="res://Scenes/Combat/UiNodes/ItemSelectionInput/item_selection_input.tscn" id="29_6pds8"]
 [ext_resource type="Script" path="res://Scenes/UiNodes/back_patch_container.gd" id="29_vvabq"]
 [ext_resource type="Texture2D" uid="uid://5hu0ttx4jxuo" path="res://assets/Sprites/UI/BackPatches/PaperPatch_64x92_16.png" id="30_emljn"]
 [ext_resource type="Script" path="res://Scenes/Combat/UiNodes/ActorPlacer/actor_placer_control.gd" id="31_i5f6p"]
@@ -47,6 +46,7 @@
 [ext_resource type="Texture2D" uid="uid://bbs3uvepyto08" path="res://defs/ClassDefs/TitlePages/Sprites/SoldierIcon.png" id="33_0bnqe"]
 [ext_resource type="Texture2D" uid="uid://bqv6yn42oymo" path="res://defs/Actors/NPCs/FishMerch/cart.png" id="33_cdw0u"]
 [ext_resource type="Script" path="res://Scenes/Combat/UiNodes/ActorPlacer/actor_placer_button.gd" id="33_lhmsf"]
+[ext_resource type="PackedScene" uid="uid://dqruidykupjgt" path="res://Scenes/Combat/UiNodes/OptionSelectMenu/option_select_menu.tscn" id="34_6y7uw"]
 [ext_resource type="Texture2D" uid="uid://c4yedxpiinlff" path="res://Scenes/Menus/CharacterMenu/MenuPages/outline.png" id="34_wuopp"]
 [ext_resource type="PackedScene" uid="uid://bh3p8kqb34n5r" path="res://Scenes/Combat/StartCombatScreen/start_combat_screen.tscn" id="37_2ks4j"]
 [ext_resource type="Script" path="res://Scenes/Combat/dev_map_drawing.gd" id="37_fh4f7"]
@@ -211,6 +211,7 @@ texture = ExtResource("24_5fn7e")
 expand_mode = 4
 
 [node name="ActorPlacerControl" type="Control" parent="MoveableCamera2D/CanvasLayer" node_paths=PackedStringArray("placed_actor_label", "min_max_actor_label", "confirm_button_label", "confirm_button", "actor_buttons_container", "player1_button_control", "player2_button_control", "player3_button_control", "player4_button_control")]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -584,8 +585,7 @@ offset_bottom = 40.0
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 
-[node name="CombatUiControl" type="Control" parent="MoveableCamera2D/CanvasLayer" node_paths=PackedStringArray("game_over_screen", "victory_screen", "menu_button", "book_button", "pause_menu", "target_input_display", "p1_stat_panel_control", "p2_stat_panel_control", "p3_stat_panel_control", "p4_stat_panel_control", "que_input", "que_collection_display", "stats_collection_display", "item_select_menu", "drop_message_control", "actor_placer_control")]
-visible = false
+[node name="CombatUiControl" type="Control" parent="MoveableCamera2D/CanvasLayer" node_paths=PackedStringArray("game_over_screen", "victory_screen", "menu_button", "book_button", "pause_menu", "target_input_display", "p1_stat_panel_control", "p2_stat_panel_control", "p3_stat_panel_control", "p4_stat_panel_control", "que_input", "que_collection_display", "stats_collection_display", "option_select_menu", "drop_message_control", "actor_placer_control")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -609,7 +609,7 @@ p4_stat_panel_control = NodePath("StatPanelsContainer/P4_StatPanelControl4")
 que_input = NodePath("QueInputControl")
 que_collection_display = NodePath("QueCollectionDisplayControl")
 stats_collection_display = NodePath("StatCollectionDisplayControl")
-item_select_menu = NodePath("ItemSelectionInput")
+option_select_menu = NodePath("OptionSelectMenu")
 drop_message_control = NodePath("DropMessageControl")
 actor_placer_control = NodePath("../ActorPlacerControl")
 
@@ -669,11 +669,10 @@ layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="QueInputControl" parent="MoveableCamera2D/CanvasLayer/CombatUiControl" node_paths=PackedStringArray("on_que_options_menu") instance=ExtResource("14_atc5n")]
+[node name="QueInputControl" parent="MoveableCamera2D/CanvasLayer/CombatUiControl" instance=ExtResource("14_atc5n")]
 custom_minimum_size = Vector2(0, 0)
 layout_mode = 1
 anchors_preset = -1
-on_que_options_menu = NodePath("../ItemSelectionInput")
 slide_speed = 500.0
 
 [node name="NextActorButton" type="Button" parent="MoveableCamera2D/CanvasLayer/CombatUiControl"]
@@ -1223,10 +1222,6 @@ text = "Back to Camp"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ItemSelectionInput" parent="MoveableCamera2D/CanvasLayer/CombatUiControl" instance=ExtResource("29_6pds8")]
-visible = false
-layout_mode = 1
-
 [node name="DropMessageControl" type="Control" parent="MoveableCamera2D/CanvasLayer/CombatUiControl" node_paths=PackedStringArray("premade_drop_card")]
 layout_mode = 1
 anchors_preset = 5
@@ -1291,6 +1286,10 @@ expand_mode = 1
 layout_mode = 2
 theme = ExtResource("27_3mvka")
 text = "Item Name +1"
+
+[node name="OptionSelectMenu" parent="MoveableCamera2D/CanvasLayer/CombatUiControl" instance=ExtResource("34_6y7uw")]
+visible = false
+layout_mode = 1
 
 [node name="PauseMenuControl" type="Control" parent="MoveableCamera2D/CanvasLayer"]
 visible = false

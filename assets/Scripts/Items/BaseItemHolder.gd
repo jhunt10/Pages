@@ -294,6 +294,19 @@ func get_damage_mods()->Dictionary:
 				out_dict[mod_key] = mods[mod_key]
 	return out_dict
 
+func get_ammo_mods()->Dictionary:
+	var out_dict = {}
+	var checked_equipments = [] ## For double sloted items (two handing)
+	for equipment_id in _raw_item_slots:
+		if checked_equipments.has(equipment_id):
+			continue
+		if equipment_id and equipment_id != '':
+			var item:BaseItem = ItemLibrary.get_item(equipment_id)
+			var mods = item.get_ammo_mods()
+			for mod_key in mods.keys():
+				out_dict[mod_key] = mods[mod_key]
+	return out_dict
+
 func get_attack_mods()->Dictionary:
 	var out_dict = {}
 	var checked_equipments = [] ## For double sloted items (two handing)

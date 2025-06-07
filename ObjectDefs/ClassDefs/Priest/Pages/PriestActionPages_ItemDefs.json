@@ -35,11 +35,22 @@
 
 
 
-
-
     {
-        "ItemKey": "TestApplyBurning_PageItem",
-        "ActionKey": "TestApplyBurning",
+        "ItemKey": "ApplyHolyArmor_PageItem",
+        "ActionKey": "ApplyHolyArmorAction",
+        "Details": {
+        },
+        "ItemDetails":
+        {
+            "CanStack": true,
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd"
+    },
+    {
+        "ItemKey": "ApplyHolyBook_PageItem",
+        "ActionKey": "ApplyHolyBookAction",
         "Details": {
         },
         "ItemDetails":
@@ -63,9 +74,22 @@
         },
         "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd"
     },
+    {
+        "ItemKey": "ApplyLightAura_PageItem",
+        "ActionKey": "ApplyLightAuraAction",
+        "Details": {
+        },
+        "ItemDetails":
+        {
+            "CanStack": true,
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd"
+    },
 
 
-
+    
 
 
     {
@@ -162,6 +186,19 @@
     {
         "ItemKey": "ReviveSpell_PageItem",
         "ActionKey": "ReviveSpell",
+        "Details": {
+        },
+        "ItemDetails":
+        {
+            "CanStack": true,
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd"
+    },
+    {
+        "ItemKey": "RemoveAilmentSpell_PageItem",
+        "ActionKey": "RemoveAilmentSpell",
         "Details": {
         },
         "ItemDetails":

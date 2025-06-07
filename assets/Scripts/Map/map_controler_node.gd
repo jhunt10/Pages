@@ -36,7 +36,7 @@ func _ready() -> void:
 		return
 	terrain_path_map.hide()
 	if LOGGING: print("Readying MapCont: Inst:%s" % [CombatRootControl.Instance])
-	CombatRootControl.Instance.actor_spawned.connect(create_actor_node)
+	#CombatRootControl.Instance.actor_spawned.connect(create_actor_node)
 	CombatRootControl.QueController.end_of_frame.connect(_sync_positions)
 
 func get_map_data()->Dictionary:
@@ -112,7 +112,7 @@ func get_player_spawn_area()->Array[Vector2i]:
 	return cached_spawn_area
 	
 
-func create_actor_node(actor:BaseActor, map_pos:MapPos, wait_to_show:bool=false)->BaseActorNode:
+func get_or_create_actor_node(actor:BaseActor, map_pos:MapPos, wait_to_show:bool=false)->BaseActorNode:
 	if Engine.is_editor_hint(): return
 	if LOGGING: print("MapControllerNode: Creating Actor Node: %s" % [actor.Id])
 	if actor_nodes.keys().has(actor.Id):

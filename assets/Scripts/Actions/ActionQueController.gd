@@ -311,7 +311,7 @@ func _execute_turn_frames(game_state:GameStateData, que:ActionQue, turn_index:in
 					var val = turn_data.condition_flags.get(condition_key)
 					if val != required_conditions.get(condition_key):
 						all_meet = false
-				else:
+				elif required_conditions[condition_key] != null:
 					all_meet = false
 			if not all_meet:
 				sub_sub_action_index += 1

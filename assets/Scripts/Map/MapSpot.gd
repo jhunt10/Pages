@@ -28,7 +28,7 @@ func _init(x:int, y:int, terrain_index:int, parent:MapStateData) -> void:
 	Y = y
 	self.terrain_index = terrain_index
 	
-func add_actor(actor:BaseActor, layer=MapStateData.DEFAULT_ACTOR_LAYER):
+func add_actor(actor:BaseActor, layer=MapStateData.MapLayers.Default):
 	if LOGGING: print("Adding actor '%s' (%s, %s) %s" % [actor.ActorKey, X, Y, layer])
 	if not _layer_to_actor_ids.keys().has(layer):
 		_layer_to_actor_ids[layer] = []
@@ -51,6 +51,8 @@ func get_actors(layer=null, include_dead:bool=false)->Array:
 				out_list.append(actor)
 	else:
 		for l in _layer_to_actor_ids.keys():
+			if not include_dead and l == MapStateData.MapLayers.Corpse:
+				continue
 			for id in _layer_to_actor_ids.get(l, []):
 				var actor:BaseActor = parent_map._game_state.get_actor(id, true)
 				if include_dead or not actor.is_dead:
@@ -62,7 +64,7 @@ func get_actor_layer(actor:BaseActor)->MapStateData.MapLayers:
 		if _layer_to_actor_ids[layer].has(actor.Id):
 			return layer
 	printerr("MapSpot.get_actor_layer: Failed to find actor '%s'." % [actor.Id])
-	return MapStateData.DEFAULT_ACTOR_LAYER
+	return MapStateData.MapLayers.Default
 
 func add_item(item:BaseItem):
 	if item_ids.has(item.Id):

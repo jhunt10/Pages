@@ -18,7 +18,8 @@ func _init(source:SourceTagChain, data:Dictionary, center:MapPos, area:AreaMatri
 func _on_duration_end():
 	for actor_id in _actor_ids_to_inzone_effect_ids.keys():
 		var actor = ActorLibrary.get_actor(actor_id)
-		on_actor_exit(actor, null)
+		if actor:
+			on_actor_exit(actor, null)
 	_actor_ids_to_inzone_effect_ids.clear()
 	super()
 
@@ -27,7 +28,7 @@ func _apply_inzone_effect(actor:BaseActor, game_state:GameStateData):
 		push_warning("Actor ", actor.Id, " already has effect")
 		return
 	var inzone_effect_data = _data.get("InZoneEffectData", {})
-	var effect = EffectHelper.create_effect(actor, _source, _inzone_effect_key, inzone_effect_data, game_state)
+	var effect = EffectHelper.create_effect(actor, self, _inzone_effect_key, inzone_effect_data, game_state)
 	if effect:
 		_actor_ids_to_inzone_effect_ids[actor.Id] = effect.Id
 	else:

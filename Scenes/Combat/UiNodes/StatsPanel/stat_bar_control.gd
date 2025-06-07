@@ -45,8 +45,8 @@ var _current_value:int = 1
 var _predicted_value:int = 1
 @export var predicted_value:int:
 	get:
-		if _actor: 
-			_predicted_value = _current_value - _actor.Que.get_total_preview_costs().get(_stat_name, 0)
+		#if _actor: 
+			#_predicted_value = _current_value - _actor.Que.get_total_preview_costs().get(_stat_name, 0)
 		return _predicted_value
 	set(val):
 		if val != _predicted_value:

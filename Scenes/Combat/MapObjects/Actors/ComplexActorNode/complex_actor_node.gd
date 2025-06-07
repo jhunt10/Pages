@@ -25,6 +25,7 @@ func _ready() -> void:
 
 func set_actor(actor:BaseActor):
 	super(actor)
+	actor.health_changed.connect(show_hide_tomb_stone)
 	if not actor.equipment_changed.is_connected(_sync_sprites):
 		actor.equipment_changed.connect(_sync_sprites)
 	main_hand_node.hand_sprite.hframes = actor_sprite.hframes
@@ -43,7 +44,8 @@ func _sync_sprites():
 		main_hand_node.visible = false
 		off_hand_node.visible = false
 		return
-		
+	if tombstone_portrait_sprite:
+		tombstone_portrait_sprite.texture = Actor.sprite.get_black_and_white_portrait()
 	main_hand_node.main_hand_sprite_sheet = Actor.sprite.get_main_hand_sprite()
 	main_hand_node.two_hand_sprite_sheet = Actor.sprite.get_two_hand_sprite()
 	off_hand_node.off_hand_sprite_sheet = Actor.sprite.get_off_hand_sprite()
@@ -68,15 +70,51 @@ func _sync_sprites():
 		off_hand_node.set_weapon(off_hand_weapon)
 	else:
 		off_hand_node.hide_weapon()
+	
+	if Actor.is_dead:
+		if tombstone_sprite:
+			tombstone_sprite.show()
+		actor_motion_node.hide()
+	else:
+		if tombstone_sprite:
+			tombstone_sprite.hide()
+		actor_motion_node.show()
+		
 
 func _on_action_failed():
 	super()
 	cancel_weapon_animations()
 
+#Called when actor is added to combat_scene
+func prep_for_combat():
+	show_hide_tomb_stone()
+
+func show_hide_tomb_stone():
+	if tombstone_sprite:
+		if self.is_dieing and damage_animation_player.is_playing():
+			return
+			
+		if Actor.is_dead:
+			if tombstone_sprite:
+				tombstone_sprite.show()
+			if tombstone_portrait_sprite:
+				tombstone_portrait_sprite.texture = Actor.sprite.get_black_and_white_portrait()
+			actor_motion_node.hide()
+		else:
+			if tombstone_sprite:
+				tombstone_sprite.hide()
+			actor_motion_node.show()
+
+func on_death_animation_finished(animation_name:String):
+	show_hide_tomb_stone()
+
+func _on_actor_revive():
+	is_dieing = false
+	damage_animation_player.play("DamageAnimations/revive_effect")
 
 func set_facing_dir(dir:MapPos.Directions):
 	super(dir)
-	if LOGGING: print("Setting Complex Actor Dir: %s" % [dir])
+	#if LOGGING: print("Setting Complex Actor Dir: %s" % [dir])
 	if actor_sprite: 
 		actor_sprite.direction = facing_dir
 	else:
@@ -180,9 +218,3 @@ func execute_animation_motion():
 
 #func clear_any_animations():
 	#main_hand_node.clear_any_animations(_get_animation_dir_sufix())
-
-func set_corpse_sprite():
-	actor_sprite.texture = Actor.sprite.get_corpse_sprite()
-	actor_sprite.vframes = 1
-	actor_sprite.hframes = 1
-	actor_sprite.offset = Vector2i.ZERO

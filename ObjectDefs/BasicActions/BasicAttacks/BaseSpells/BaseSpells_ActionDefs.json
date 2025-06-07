@@ -16,12 +16,7 @@
         },
         "EffectDatas":{
             "ApplyEffect": {
-                "EffectKey": "AilmentBurned",
-                "EffectDetails":{
-                    "DurationData":{
-                        "BaseDuration": 3
-                    }
-                }
+                "EffectKey": "AilmentBurned"
             }
         },
         "Details": {
@@ -53,7 +48,7 @@
                     "AllowAlreadyTargeted": false,
                     "AllowAutoTarget": false,
                     "SetTargetKey": "Target1",
-                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_GetTarget.gd",
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Targeting/SubAct_GetTarget.gd",
                     "TargetParamKey": "TargetParam"
                 }
             ],
@@ -156,7 +151,7 @@
                     "AllowAlreadyTargeted": false,
                     "AllowAutoTarget": true,
                     "SetTargetKey": "Target1",
-                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_GetTarget.gd",
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Targeting/SubAct_GetTarget.gd",
                     "TargetParamKey": "TargetParam"
                 },
                 {
@@ -247,7 +242,7 @@
                     "AllowAlreadyTargeted": false,
                     "AllowAutoTarget": false,
                     "SetTargetKey": "Target1",
-                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_GetTarget.gd",
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Targeting/SubAct_GetTarget.gd",
                     "TargetParamKey": "TargetParam"
                 },
                 {
@@ -331,7 +326,7 @@
                     "AllowAlreadyTargeted": false,
                     "AllowAutoTarget": true,
                     "SetTargetKey": "Target1",
-                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_GetTarget.gd",
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Targeting/SubAct_GetTarget.gd",
                     "TargetParamKey": "TargetParam"
                 }
             ],
@@ -419,7 +414,7 @@
                     "AllowAlreadyTargeted": false,
                     "AllowAutoTarget": true,
                     "SetTargetKey": "Target1",
-                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_GetTarget.gd",
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Targeting/SubAct_GetTarget.gd",
                     "TargetParamKey": "TargetParam"
                 }
             ],
@@ -515,7 +510,7 @@
                     "AllowAlreadyTargeted": false,
                     "AllowAutoTarget": true,
                     "SetTargetKey": "Target1",
-                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_GetTarget.gd",
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Targeting/SubAct_GetTarget.gd",
                     "TargetParamKey": "TargetParam"
                 }
             ],

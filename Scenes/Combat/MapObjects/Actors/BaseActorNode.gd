@@ -1,7 +1,7 @@
 class_name BaseActorNode
 extends Node2D
 
-const LOGGING = true
+const LOGGING = false
 const WALK_ANIM_NAME = "move_walk/walk"
 
 signal reached_motion_destination
@@ -20,7 +20,6 @@ signal reached_motion_destination
 @export var damage_animation_player:AnimationPlayer
 ## Player for movement animations
 @export var body_animation:AnimationPlayer
-
 
 var Id:String 
 var Actor:BaseActor 
@@ -78,6 +77,7 @@ func set_actor(actor:BaseActor):
 		actor.action_failed.connect(_on_action_failed)
 		actor.on_move.connect(_on_actor_moved)
 		actor.on_death.connect(_on_actor_death)
+		actor.on_revive.connect(_on_actor_revive)
 		
 	var frames = actor.get_load_val("SpriteFrameWH", [1,1])
 	actor_sprite.hframes = frames[0]
@@ -87,6 +87,10 @@ func set_actor(actor:BaseActor):
 	offset_node.position = Vector2i(offset[0], offset[1])
 	
 	actor_sprite.texture = Actor.sprite.get_body_sprite()
+
+#Called when actor is added to combat_scene
+func prep_for_combat():
+	pass
 
 ###############################
 ##		Positioning
@@ -274,6 +278,7 @@ func play_shake():
 
 func start_death_animation():
 	damage_animation_player.play("DamageAnimations/death_effect")
+	damage_animation_player.animation_finished.connect(on_death_animation_finished)
 
 func start_move_animation():
 	if LOGGING: print("Walk Animation Starting. Cur: %s" % [current_body_animation_action])
@@ -358,6 +363,12 @@ func _on_actor_death():
 	start_death_animation()
 	is_dieing = true
 
+func _on_actor_revive():
+	is_dieing = false
+	damage_animation_player.play("DamageAnimations/revive_effect")
+
+func on_death_animation_finished(animation_name:String):
+	pass
 
 ##############################
 ##		Path Arrow

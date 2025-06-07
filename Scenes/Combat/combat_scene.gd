@@ -134,29 +134,6 @@ func load_init_state(sub_scene_data:Dictionary):
 			new_actor.FactionIndex = 1
 		elif actor_info.keys().has("ActorKey") and actor_info["ActorKey"] != '':
 			var actor_key = actor_info['ActorKey']
-			#if actor_key == "Player1":
-				#new_actor = StoryState.get_player_actor(0)
-			#elif actor_key.begins_with("Player2"):
-				#new_actor = StoryState.get_player_actor(1)
-				#if not new_actor and actor_key.ends_with("_Create"):
-					#var player_id = "Player_2:" + str(ResourceUID.create_id())
-					#new_actor = ActorLibrary.create_actor("RogueTemplate", {}, player_id)
-					#new_actor.FactionIndex = 0
-					#StoryState._player_ids[1] = player_id
-			#elif actor_key == "Player3":
-				#new_actor = StoryState.get_player_actor(2)
-				#if not new_actor:
-					#var player_id = "Player_3:" + str(ResourceUID.create_id())
-					#new_actor = ActorLibrary.create_actor("PriestTemplate", {}, player_id)
-					#new_actor.FactionIndex = 0
-					#StoryState._player_ids[2] = player_id
-			#elif actor_key == "Player4":
-				#new_actor = StoryState.get_player_actor(3)
-				#if not new_actor:
-					#var player_id = "Player_4:" + str(ResourceUID.create_id())
-					#new_actor = ActorLibrary.create_actor("MageTemplate", {}, player_id)
-					#new_actor.FactionIndex = 0
-					#StoryState._player_ids[3] = player_id
 			if actor_key.begins_with("Player"):
 				continue
 			else:
@@ -167,18 +144,23 @@ func load_init_state(sub_scene_data:Dictionary):
 		if new_actor:
 			if actor_info['WaitToSpawn']:
 				# Must call without signals because actors are spawned before MapControlNode._ready()
-				MapController.create_actor_node(new_actor, actor_pos, true)
+				MapController.get_or_create_actor_node(new_actor, actor_pos, true)
 			else:
 				add_actor(new_actor, actor_pos)
 		actor_index += 1
 		loading_actor_progressed.emit(actor_count, actor_index)
-	for player_actor in StoryState.list_player_actor():
-		MapController.create_actor_node(player_actor, MapPos.new(0,0,0,0), true)
-	var player_actor = StoryState.get_player_actor()
-	# Check that actor in actually in game
-	player_actor = GameState.get_actor(player_actor.Id)
-	if !player_actor:
-		printerr("Player Actor not loaded to GameState")
+	
+	# Make Nodes for each player actor, but hide them until they are placed
+	for player_actor:BaseActor in StoryState.list_player_actor():
+		player_actor.prep_for_combat()
+		var player_actor_node = MapController.get_or_create_actor_node(player_actor, MapPos.new(0,0,0,0), true)
+		player_actor_node.prep_for_combat()
+		player_actor_node.hide()
+	#var player_actor = StoryState.get_player_actor()
+	## Check that actor in actually in game
+	#player_actor = GameState.get_actor(player_actor.Id)
+	#if !player_actor:
+		#printerr("Player Actor not loaded to GameState")
 	
 	
 	camera.zoom = Vector2(2,2)
@@ -217,19 +199,27 @@ func _on_combat_screen_cleared():
 func kill_actor(actor:BaseActor):
 	actor.die()
 	QueController.remove_action_que(actor.Que)
-	GameState.remove_actor_from_map(actor)
-	#if actor.leaves_corpse:
-	#else:
+	if actor.leaves_corpse():
+		GameState.move_actor_to_corpse_layer(actor)
+	else:
+		GameState.remove_actor_from_map(actor)
 		#delete_actor(actor)
 
+func revive_actor(actor:BaseActor):
+	actor.revive()
+	QueController.add_action_que(actor.Que)
+	if GameState.get_actor(actor.Id):
+		GameState.move_actor_to_default_layer(actor)
+	else:
+		printerr("Revived Actor '%s' no longer exists in GameState." % [actor.Id])
 
-func remove_actor(actor:BaseActor):
-	actor.die()
-	QueController.remove_action_que(actor.Que)
-	GameState.remove_actor_from_map(actor)
-	var actor_node = get_actor_node(actor.Id)
-	if actor_node:
-		actor_node.queue_free()
+#func remove_actor(actor:BaseActor):
+	#actor.die()
+	#QueController.remove_action_que(actor.Que)
+	#GameState.remove_actor_from_map(actor)
+	#var actor_node = get_actor_node(actor.Id)
+	#if actor_node:
+		#actor_node.queue_free()
 
 
 func add_actor(actor:BaseActor, pos:MapPos):
@@ -243,23 +233,14 @@ func add_actor(actor:BaseActor, pos:MapPos):
 	GameState.add_actor(actor)
 	QueController.add_action_que(actor.Que)
 	
-	var actor_node = get_actor_node(actor.Id)
-	if !actor_node:
-		# Must call without signals because actors are spawned before MapControlNode._ready()
-		actor_node  = MapController.create_actor_node(actor, pos)
+	var actor_node = MapController.get_or_create_actor_node(actor, pos)
 	actor_node.visible = true
 	actor_node.reparent(MapController.actor_tile_map)
 	if not MapController.actor_nodes.has(actor.Id):
 		MapController.actor_nodes[actor.Id] = actor_node
 	GameState.set_actor_pos(actor, pos)
-	#actor.Que.clear_que()
 	actor.stats.fill_bar_stats()
 	actor.Que.fill_page_ammo()
-	#if actor.use_ai:
-		#actor.auto_build_que(QueController.action_index)
-		#if QueController.execution_state == ActionQueController.ActionStates.Running:
-			#actor.Que.fail_turn()
-	#actor_spawned.emit(actor, pos)
 
 func add_item(item:BaseItem, pos:MapPos):
 	if GameState._items.keys().has(item.Id):

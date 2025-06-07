@@ -60,7 +60,8 @@ func _sync():
 		slot_display.set_slot_type(slot_type)
 		if _actor.equipment.has_equipment_in_slot(index):
 			var item:BaseEquipmentItem = _actor.equipment.get_equipment_in_slot(index)
-			slot_display.set_item(item)
+			if item:
+				slot_display.set_item(item)
 		else:
 			slot_display.clear_item()
 	magatk_label.text = str(_actor.stats.get_stat(StatHelper.MagAttack))
