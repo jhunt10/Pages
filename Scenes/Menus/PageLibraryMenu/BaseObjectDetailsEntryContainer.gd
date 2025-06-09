@@ -67,6 +67,10 @@ func set_thing(def:Dictionary, inst:BaseLoadObject, load_path:String):
 	title_label.text = details.get("DisplayName", "["+def.get("EffectKey", "")+"]")
 	thing_tags = details.get("Tags", [])
 	tags_label.text = ", ".join(thing_tags)
+	if def.has("ItemKey"):
+		type_label.text = "Item"
+	if def.has("ActorKey"):
+		type_label.text = "Actor"
 	
 	if not thing_inst is BaseItem:
 		if add_item_button:

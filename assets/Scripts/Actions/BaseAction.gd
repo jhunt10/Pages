@@ -46,18 +46,18 @@ func _init(key:String, def_load_path:String, def:Dictionary, id:String='', data:
 		
 	# Load SubAction Data, missing indexes are left null
 	# The ActionQueController will create the subaction on demand
-	SubActionData = []
-	for index in range(SUB_ACTIONS_PER_ACTION):
-		var subData = def.get('SubActions', {}).get(str(index), null)
-		if not subData:
-			SubActionData.append(null)
-		elif subData is Dictionary:
-			if subData.has('SubActionScript'):
-				SubActionData.append([subData])
-		elif subData is Array:
-			SubActionData.append(subData)
-		else:
-			printerr("Uknown SubActionType: " + str(subData))
+	#SubActionData = []
+	#for index in range(SUB_ACTIONS_PER_ACTION):
+		#var subData = def.get('SubActions', {}).get(str(index), null)
+		#if not subData:
+			#SubActionData.append(null)
+		#elif subData is Dictionary:
+			#if subData.has('SubActionScript'):
+				#SubActionData.append([subData])
+		#elif subData is Array:
+			#SubActionData.append(subData)
+		#else:
+			#printerr("Uknown SubActionType: " + str(subData))
 	
 	if def.keys().has("Preview"):
 		var preview_data = def.get("Preview", {})
@@ -133,7 +133,7 @@ func  get_large_page_icon(actor:BaseActor = null)->Texture2D:
 
 func list_sub_action_datas()->Array:
 	var out_list = []
-	for frame_sub_actions in SubActionData:
+	for frame_sub_actions in get_load_val("SubActions", {}):
 		if frame_sub_actions and frame_sub_actions is Array:
 			for data in frame_sub_actions:
 				out_list.append(data)

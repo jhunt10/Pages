@@ -97,6 +97,10 @@ static func purge_actors():
 	if !Instance: Instance = ActorLibrary.new()
 	Instance.purge_objects()
 
+static func list_all_actor_keys()->Array:
+	if !Instance: Instance = ActorLibrary.new()
+	return Instance._object_defs.keys()
+
 #func _search_for_actors(path:String, list:Array):
 	#var dir = DirAccess.open(path)
 	#if dir:

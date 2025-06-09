@@ -8,7 +8,7 @@
 [ext_resource type="Script" path="res://Scenes/Menus/PageLibraryMenu/entry_group_container.gd" id="5_1qkpm"]
 [ext_resource type="PackedScene" uid="uid://xjhbo48tdbhr" path="res://Scenes/Menus/PageLibraryMenu/PageDetails/page_details_entry_container.tscn" id="7_ykmfd"]
 
-[node name="PageLibraryMenu" type="Control" node_paths=PackedStringArray("close_button", "reload_pages_button", "scale_slider", "loading_patch", "scroll_ocntainer", "tag_filter", "page_entries_container", "premade_entry_group", "example_page_entry", "load_time_label")]
+[node name="PageLibraryMenu" type="Control" node_paths=PackedStringArray("close_button", "reload_pages_button", "scale_slider", "loading_patch", "scroll_ocntainer", "tag_filter", "page_entries_container", "premade_entry_group", "example_page_entry", "load_time_label", "action_check_box", "actor_check_box", "effect_check_box", "item_check_box")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -26,6 +26,10 @@ page_entries_container = NodePath("VBoxContainer/ScrollContainer/VBoxContainer")
 premade_entry_group = NodePath("VBoxContainer/ScrollContainer/VBoxContainer/EntryGroupContainer")
 example_page_entry = NodePath("VBoxContainer/ScrollContainer/VBoxContainer/EntryGroupContainer/EntryGroupInnerContainer/SubEntriesContainer/PageDetailsEntryContainer")
 load_time_label = NodePath("VBoxContainer/NinePatchRect/HBoxContainer/LoadTimeLabel")
+action_check_box = NodePath("VBoxContainer/NinePatchRect/HBoxContainer/HBoxContainer/ActionsCheckBox")
+actor_check_box = NodePath("VBoxContainer/NinePatchRect/HBoxContainer/HBoxContainer/ActorsCheckBox")
+effect_check_box = NodePath("VBoxContainer/NinePatchRect/HBoxContainer/HBoxContainer/EffectsCheckBox")
+item_check_box = NodePath("VBoxContainer/NinePatchRect/HBoxContainer/HBoxContainer/ItemsCheckBox")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -75,13 +79,34 @@ no_option_text = "All"
 layout_mode = 2
 text = "Reload"
 
-[node name="TitleLabel3" type="Label" parent="VBoxContainer/NinePatchRect/HBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/NinePatchRect/HBoxContainer"]
+layout_mode = 2
+
+[node name="ActionsCheckBox" type="CheckBox" parent="VBoxContainer/NinePatchRect/HBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Actions"
+
+[node name="ActorsCheckBox" type="CheckBox" parent="VBoxContainer/NinePatchRect/HBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Actors"
+
+[node name="EffectsCheckBox" type="CheckBox" parent="VBoxContainer/NinePatchRect/HBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Effects"
+
+[node name="ItemsCheckBox" type="CheckBox" parent="VBoxContainer/NinePatchRect/HBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Items"
+
+[node name="ScaleLabel3" type="Label" parent="VBoxContainer/NinePatchRect/HBoxContainer"]
+visible = false
 layout_mode = 2
 theme = ExtResource("4_4wgxq")
 theme_override_font_sizes/font_size = 32
 text = "  Scale:"
 
 [node name="HSlider" type="HSlider" parent="VBoxContainer/NinePatchRect/HBoxContainer"]
+visible = false
 custom_minimum_size = Vector2(400, 32)
 layout_mode = 2
 min_value = 0.1
@@ -90,10 +115,12 @@ step = 0.1
 value = 1.0
 
 [node name="Label" type="Label" parent="VBoxContainer/NinePatchRect/HBoxContainer"]
+visible = false
 layout_mode = 2
 text = " Load TIme:"
 
 [node name="LoadTimeLabel" type="Label" parent="VBoxContainer/NinePatchRect/HBoxContainer"]
+visible = false
 layout_mode = 2
 text = "XXXXX"
 

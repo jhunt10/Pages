@@ -1,7 +1,7 @@
 class_name BaseLoadObjectLibrary
 
 const LOGGING = true
-const OBJECTS_DEFS_DIR = "res://defs/"
+const OBJECTS_DEFS_DIR = "res://ObjectDefs/"
 const OBJECTS_DATA_DIR = "res://saves/"
 
 func get_object_name()->String:
@@ -15,7 +15,7 @@ func get_data_file_sufix()->String:
 func is_object_static(object_def:Dictionary)->bool:
 	return object_def.get("IsStatic", false)
 func get_object_script_path(object_def:Dictionary)->String:
-	return object_def.get("!ObjectScript", "")
+	return object_def.get("!ObjectScript", object_def.get("_ObjectScript", ""))
 
 var loaded = false
 # Dictionary of object's base data config
@@ -168,7 +168,7 @@ func reload():
 func _load_object_defs():
 	var parent_to_child_mapping = {}
 	var child_to_parent_mapping = {}
-	var paths = [OBJECTS_DEFS_DIR, 'res://ObjectDefs/']
+	var paths = [OBJECTS_DEFS_DIR]#, 'res://defs/']
 	
 	# Load Defs all defs into temp dict
 	var temp_defs = {}
@@ -252,11 +252,20 @@ func _load_object_def_file(file_path:String)->Dictionary:
 	var file = FileAccess.open(file_path, FileAccess.READ)
 	var text:String = file.get_as_text()
 	var out_dict = {}
-	# Wrap in brackets and parse as Array to support multiple objects in same file
-	if !text.begins_with("["):
-		text = "[" + text + "]" 
+	## Wrap in brackets and parse as Array to support multiple objects in same file
+	#if !text.begins_with("["):
+		#text = "[" + text + "]" 
 	var object_key_name = get_object_key_name()
-	var object_defs:Array = JSON.parse_string(text)
+	var object_defs = JSON.parse_string(text)
+	if object_defs is Array:
+		pass
+	elif object_defs is Dictionary:
+		var check = object_defs.values()[0]
+		if check is Dictionary and not check.keys().has("Details"):
+			for key in object_defs.keys():
+				object_defs[key][object_key_name] = key
+		object_defs = object_defs.values()
+			
 	for def:Dictionary in object_defs:
 		if !def.keys().has(object_key_name):
 			printerr("No '%s' found on object in %s." % [object_key_name, file_path])

@@ -12,11 +12,18 @@ extends Control
 
 @export var load_time_label:Label
 
+
+
+@export var action_check_box:CheckBox
+@export var actor_check_box:CheckBox
+@export var effect_check_box:CheckBox
+@export var item_check_box:CheckBox
 var _loading_entries_thread
 
 var known_tags = []
 var page_entries = {}
 var entry_groups = {}
+var group_to_entry_keys:Dictionary = {}
 var loaded = false
 var timer = 0
 var starting_content_scale:float
@@ -31,6 +38,11 @@ func _ready() -> void:
 	scroll_ocntainer.hide()
 	loading_patch.show()
 	reload_pages_button.pressed.connect(_reload_pages)
+	
+	action_check_box.pressed.connect(_on_cat_button_pressed)
+	actor_check_box.pressed.connect(_on_cat_button_pressed)
+	effect_check_box.pressed.connect(_on_cat_button_pressed)
+	item_check_box.pressed.connect(_on_cat_button_pressed)
 	
 	starting_content_scale = get_window().content_scale_factor
 	get_window().content_scale_factor = set_content_scale
@@ -55,15 +67,29 @@ func build_page_entires():
 		entry.queue_free()
 	page_entries.clear()
 	
-	for page:BasePageItem in get_page_items():
+	var page_item_keys= []
+	for page:BaseItem in get_page_items():
 		var def = page._def
 		var inst = page
 		var load_path = page.get_load_path()
+		page_item_keys.append(page.ItemKey)
 		_build_object_entry(def, inst, load_path)
 	for effect_key in EffectLibrary.list_all_effects_keys():
 		var def = EffectLibrary.get_effect_def(effect_key)
 		var inst = null
 		var load_path = EffectLibrary.Instance.get_object_def_load_path(effect_key)
+		_build_object_entry(def, inst, load_path)
+	for actor_key in ActorLibrary.list_all_actor_keys():
+		var def = ActorLibrary.get_actor_def(actor_key)
+		var inst = null
+		var load_path = ActorLibrary.Instance.get_object_def_load_path(actor_key)
+		_build_object_entry(def, inst, load_path)
+	for item_key in ItemLibrary.list_all_item_keys():
+		if page_item_keys.has(item_key):
+			continue
+		var def = ItemLibrary.get_item_def(item_key)
+		var inst = null
+		var load_path = ItemLibrary.Instance.get_object_def_load_path(item_key)
 		_build_object_entry(def, inst, load_path)
 	
 	scroll_ocntainer.show()
@@ -82,6 +108,14 @@ func _get_object_entry_scene(object_type):
 		var entry_scene = load("res://Scenes/Menus/PageLibraryMenu/EffectDetails/effect_details_entry_container.tscn")
 		entry_scenes["Effect"] = entry_scene
 		return entry_scene
+	if object_type == "Actor":
+		var entry_scene = load("res://Scenes/Menus/PageLibraryMenu/ActorDetails/actor_details_entry_container.tscn")
+		entry_scenes["Actor"] = entry_scene
+		return entry_scene
+	if object_type == "Item":
+		var entry_scene = load("res://Scenes/Menus/PageLibraryMenu/ActorDetails/actor_details_entry_container.tscn")
+		entry_scenes["Item"] = entry_scene
+		return entry_scene
 
 func _build_object_entry(obj_def:Dictionary, obj_inst:BaseLoadObject, load_path:String)->BaseObjectDetailsEntryContainer:
 	if not entry_groups.keys().has(load_path):
@@ -90,19 +124,30 @@ func _build_object_entry(obj_def:Dictionary, obj_inst:BaseLoadObject, load_path:
 		new_group.show()
 		page_entries_container.add_child(new_group)
 		entry_groups[load_path] = new_group
+		group_to_entry_keys[load_path] = []
 	
 	var entry_scene = null
 	var key = ""
-	if obj_def.has("EffectKey"):
-		key = obj_def.get("EffectKey")
-		entry_scene = _get_object_entry_scene("Effect")
+	if obj_def.has("ActorKey"):
+		key = obj_def.get("ActorKey")
+		entry_scene = _get_object_entry_scene("Actor")
 	elif obj_inst is BasePageItem:
 		key = obj_def.get("ItemKey")
 		entry_scene = _get_object_entry_scene("Page")
+	elif obj_def.has("ItemKey"):
+		key = obj_def.get("ItemKey")
+		entry_scene = _get_object_entry_scene("Item")
+	elif obj_def.has("EffectKey"):
+		key = obj_def.get("EffectKey")
+		entry_scene = _get_object_entry_scene("Effect")
+	
+	if not entry_scene:
+		return null
 	var new_entry:BaseObjectDetailsEntryContainer = entry_scene.instantiate()
 	new_entry.set_thing(obj_def, obj_inst, load_path)
 	entry_groups[load_path].add_entry(new_entry)
 	page_entries[key] = new_entry
+	group_to_entry_keys[load_path].append(key)
 	
 	for tag in new_entry.thing_tags:
 		if not known_tags.has(tag):
@@ -132,6 +177,7 @@ func get_tags()->Array:
 	known_tags.sort()
 	return known_tags
 
+
 func on_tag_filter_selected(index:int):
 	var tag = tag_filter.get_current_option_text()
 	for entry:BaseObjectDetailsEntryContainer in page_entries.values():
@@ -139,6 +185,39 @@ func on_tag_filter_selected(index:int):
 			entry.show()
 		else:
 			entry.hide()
+
+
+func _on_cat_button_pressed():
+	for load_path in group_to_entry_keys.keys():
+		var any_showing = false
+		var entry_keys = group_to_entry_keys[load_path]
+		for entry_key in entry_keys:
+			var entry:BaseObjectDetailsEntryContainer = page_entries.get(entry_key)
+			if not entry:
+				continue
+				
+			if entry.thing_def.has("ActorKey"):
+				if not actor_check_box.button_pressed:
+					entry.hide()
+					continue
+			if entry.thing_def.get("ItemKey", "").ends_with("_PageItem"):
+				if not action_check_box.button_pressed:
+					entry.hide()
+					continue
+			elif entry.thing_def.has("ItemKey"):
+				if not item_check_box.button_pressed:
+					entry.hide()
+					continue
+			elif entry.thing_def.has("EffectKey"):
+				if not effect_check_box.button_pressed:
+					entry.hide()
+					continue
+			entry.show()
+			any_showing = true
+		if any_showing:
+			entry_groups[load_path].show()
+		else:
+			entry_groups[load_path].hide()
 
 func get_page_items()->Array:
 	var pages = [] 

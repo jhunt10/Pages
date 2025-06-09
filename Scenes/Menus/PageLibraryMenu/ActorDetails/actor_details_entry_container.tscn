@@ -1,0 +1,230 @@
+[gd_scene load_steps=13 format=3 uid="uid://d01g38d41ldb4"]
+
+[ext_resource type="Script" path="res://Scenes/Menus/PageLibraryMenu/ActorDetails/actor_details_entry_container.gd" id="1_mah4l"]
+[ext_resource type="Texture2D" uid="uid://io35wpu802fp" path="res://assets/Sprites/UI/BackPatches/Patch_64_12.png" id="4_6a68i"]
+[ext_resource type="Texture2D" uid="uid://crfa2hjirevj7" path="res://Scenes/Menus/ShopMenu/MinusIcon.png" id="5_50i36"]
+[ext_resource type="Texture2D" uid="uid://c6e4ut3id7itv" path="res://Scenes/Menus/ShopMenu/PlusIcon.png" id="6_d0tnk"]
+[ext_resource type="Texture2D" uid="uid://cmqlh7kaay8qg" path="res://Scenes/Combat/UiNodes/StatsPanel/EffectBackground.png" id="7_2gwpm"]
+[ext_resource type="Texture2D" uid="uid://bpa7iavvlbhi5" path="res://assets/Sprites/UI/SymbolIcons/PageCountSymbol.png" id="8_ks5si"]
+[ext_resource type="Theme" uid="uid://bfce41la62bs6" path="res://Scenes/Themes/readable_theme.tres" id="9_00hw4"]
+[ext_resource type="Script" path="res://Scenes/UiNodes/StatModLabelContainer/stat_mod_label_container.gd" id="10_x1nii"]
+[ext_resource type="Texture2D" uid="uid://cnhd7e5hwrxoy" path="res://assets/Sprites/UI/SymbolIcons/AbnormDamageSymbol.png" id="11_cmdyb"]
+[ext_resource type="Theme" uid="uid://cayt153s5ro4a" path="res://Scenes/Themes/standard_theme_red.tres" id="12_rj8x4"]
+[ext_resource type="Texture2D" uid="uid://b10pvly4exem2" path="res://assets/Sprites/UI/SymbolIcons/_S_Symbole.png" id="13_eyt7q"]
+[ext_resource type="Script" path="res://Scenes/UiNodes/DescriptionBox/description_box.gd" id="14_0tkye"]
+
+[node name="ActorDetailsEntryContainer" type="Container" node_paths=PackedStringArray("icon_background", "icon", "title_label", "tags_label", "type_label", "details_container", "description_box", "plus_minus_button", "minus_icon", "plus_icon", "stat_mods_container", "premade_stat_mod_label", "background", "inner_container")]
+custom_minimum_size = Vector2(749, 179)
+offset_right = 749.0
+offset_bottom = 179.0
+size_flags_horizontal = 3
+script = ExtResource("1_mah4l")
+icon_background = NodePath("InnerContainer/LineContainer/IconBackgroundTextureRect")
+icon = NodePath("InnerContainer/LineContainer/IconBackgroundTextureRect/IconTextureRect")
+title_label = NodePath("InnerContainer/LineContainer/TitleLabel")
+tags_label = NodePath("InnerContainer/LineContainer/TagsLabel")
+type_label = NodePath("InnerContainer/LineContainer/TypeLabel")
+details_container = NodePath("InnerContainer/DetailsContainer")
+description_box = NodePath("InnerContainer/DetailsContainer/DetailsContainer/RichTextLabel")
+plus_minus_button = NodePath("InnerContainer/Control/Button")
+minus_icon = NodePath("InnerContainer/LineContainer/MinusTextureRect")
+plus_icon = NodePath("InnerContainer/LineContainer/MinusTextureRect/PlusTextureRect")
+stat_mods_container = NodePath("InnerContainer/DetailsContainer/DetailsContainer/HBoxContainer/VBoxContainer/StatModsContainer")
+premade_stat_mod_label = NodePath("InnerContainer/DetailsContainer/DetailsContainer/HBoxContainer/VBoxContainer/StatModsContainer/StatModLabel")
+background = NodePath("NinePatchRect")
+inner_container = NodePath("InnerContainer")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+layout_mode = 2
+texture = ExtResource("4_6a68i")
+patch_margin_left = 12
+patch_margin_top = 12
+patch_margin_right = 12
+patch_margin_bottom = 12
+
+[node name="InnerContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="LineContainer" type="HBoxContainer" parent="InnerContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="MinusTextureRect" type="TextureRect" parent="InnerContainer/LineContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("5_50i36")
+
+[node name="PlusTextureRect" type="TextureRect" parent="InnerContainer/LineContainer/MinusTextureRect"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+offset_right = 64.0
+offset_bottom = 64.0
+texture = ExtResource("6_d0tnk")
+
+[node name="IconBackgroundTextureRect" type="TextureRect" parent="InnerContainer/LineContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("7_2gwpm")
+
+[node name="IconTextureRect" type="TextureRect" parent="InnerContainer/LineContainer/IconBackgroundTextureRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("8_ks5si")
+
+[node name="TitleLabel" type="Label" parent="InnerContainer/LineContainer"]
+custom_minimum_size = Vector2(420, 0)
+layout_mode = 2
+theme = ExtResource("9_00hw4")
+theme_override_font_sizes/font_size = 32
+text = "Effect Name"
+
+[node name="VSeparator" type="VSeparator" parent="InnerContainer/LineContainer"]
+layout_mode = 2
+
+[node name="TypeLabel" type="Label" parent="InnerContainer/LineContainer"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+theme = ExtResource("9_00hw4")
+theme_override_font_sizes/font_size = 32
+text = "Actor"
+
+[node name="VSeparator2" type="VSeparator" parent="InnerContainer/LineContainer"]
+layout_mode = 2
+
+[node name="TagsLabel" type="Label" parent="InnerContainer/LineContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("9_00hw4")
+theme_override_font_sizes/font_size = 32
+text = "Tag1, Tag2, Tag3 ..."
+clip_text = true
+text_overrun_behavior = 4
+ellipsis_char = "+"
+
+[node name="Control" type="Control" parent="InnerContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Button" type="Button" parent="InnerContainer/Control"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+offset_top = -76.0
+grow_horizontal = 2
+
+[node name="DetailsContainer" type="HBoxContainer" parent="InnerContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="SpacerTextureRect" type="TextureRect" parent="InnerContainer/DetailsContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+
+[node name="DetailsContainer" type="VBoxContainer" parent="InnerContainer/DetailsContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ColorRect" type="ColorRect" parent="InnerContainer/DetailsContainer/DetailsContainer"]
+custom_minimum_size = Vector2(2, 2)
+layout_mode = 2
+color = Color(0, 0, 0, 1)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="InnerContainer/DetailsContainer/DetailsContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="InnerContainer/DetailsContainer/DetailsContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="StatModsContainer" type="HBoxContainer" parent="InnerContainer/DetailsContainer/DetailsContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 32
+
+[node name="StatModLabel" type="HBoxContainer" parent="InnerContainer/DetailsContainer/DetailsContainer/HBoxContainer/VBoxContainer/StatModsContainer" node_paths=PackedStringArray("modded_stat_icon", "modded_stat_name_label", "mod_value_label", "dep_stat_label", "dep_stat_icon", "plus_label", "times_label")]
+layout_mode = 2
+theme_override_constants/separation = 0
+script = ExtResource("10_x1nii")
+modded_stat_icon = NodePath("ModdedStatIcon")
+modded_stat_name_label = NodePath("ModdedStatNameLabel")
+mod_value_label = NodePath("ModValueLabel")
+dep_stat_label = NodePath("HBoxContainer/DepStatNameLabel")
+dep_stat_icon = NodePath("HBoxContainer/DepStatIcon")
+plus_label = NodePath("SignLabel")
+times_label = NodePath("SignLabel2")
+
+[node name="ModdedStatIcon" type="TextureRect" parent="InnerContainer/DetailsContainer/DetailsContainer/HBoxContainer/VBoxContainer/StatModsContainer/StatModLabel"]
+layout_mode = 2
+texture = ExtResource("11_cmdyb")
+expand_mode = 3
+
+[node name="ModdedStatNameLabel" type="Label" parent="InnerContainer/DetailsContainer/DetailsContainer/HBoxContainer/VBoxContainer/StatModsContainer/StatModLabel"]
+layout_mode = 2
+size_flags_vertical = 8
+theme = ExtResource("12_rj8x4")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 32
+text = "STR"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="SignLabel" type="Label" parent="InnerContainer/DetailsContainer/DetailsContainer/HBoxContainer/VBoxContainer/StatModsContainer/StatModLabel"]
+layout_mode = 2
+size_flags_vertical = 8
+theme = ExtResource("12_rj8x4")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 32
+text = "+"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="InnerContainer/DetailsContainer/DetailsContainer/HBoxContainer/VBoxContainer/StatModsContainer/StatModLabel"]
+layout_mode = 2
+theme_override_constants/separation = -2
+
+[node name="DepStatIcon" type="TextureRect" parent="InnerContainer/DetailsContainer/DetailsContainer/HBoxContainer/VBoxContainer/StatModsContainer/StatModLabel/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("13_eyt7q")
+expand_mode = 3
+
+[node name="DepStatNameLabel" type="Label" parent="InnerContainer/DetailsContainer/DetailsContainer/HBoxContainer/VBoxContainer/StatModsContainer/StatModLabel/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+theme = ExtResource("12_rj8x4")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 32
+text = "TR"
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="SignLabel2" type="Label" parent="InnerContainer/DetailsContainer/DetailsContainer/HBoxContainer/VBoxContainer/StatModsContainer/StatModLabel"]
+layout_mode = 2
+size_flags_vertical = 8
+theme = ExtResource("12_rj8x4")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 32
+text = "x"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="ModValueLabel" type="Label" parent="InnerContainer/DetailsContainer/DetailsContainer/HBoxContainer/VBoxContainer/StatModsContainer/StatModLabel"]
+layout_mode = 2
+size_flags_vertical = 8
+theme = ExtResource("12_rj8x4")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 32
+text = "1.2"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="InnerContainer/DetailsContainer/DetailsContainer"]
+clip_contents = false
+layout_mode = 2
+theme = ExtResource("9_00hw4")
+text = "Detailed Discription"
+fit_content = true
+script = ExtResource("14_0tkye")

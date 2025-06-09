@@ -48,7 +48,6 @@ func load_save_data(data:Array):
 		var item_id = item_data.get('Id')
 		var item_key = item_data.get('ObjectKey')
 		var new_item = ItemLibrary.get_or_create_item(item_id, item_key, item_data)
-		var new_id = new_item.Id 
 		if new_item:
 			_raw_item_slots.append(new_item.Id)
 		else:
