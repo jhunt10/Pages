@@ -46,19 +46,6 @@ var actor_details:Dictionary:
 
 var FactionIndex : int
 
-var LoadPath:String:
-	get: return _def_load_path
-var DisplayName:String:
-	get: return _data.get("DisplayName", details.display_name)
-	set(val): _data["DisplayName"] = val
-var SnippetDesc:String:
-	get: return details.snippet
-var Description:String:
-	get: return details.description
-var Tags:Array:
-	get:
-		return details.tags
-
 var spawn_map_layer
 
 var use_ai:bool: 
@@ -96,12 +83,12 @@ func get_name()->String:
 	if pages:
 		var title_page:BasePageItem = pages.get_item_in_slot(0)
 		if title_page:
-			return title_page.details.display_name
-	return details.display_name
+			return title_page.get_display_name()
+	return get_display_name()
 
 func get_tags(): 
 	var tag_list = []
-	tag_list.append_array(Tags)
+	tag_list.append_array(get_tags())
 	var aditional_tags = pages.get_tags_added_to_actor()
 	aditional_tags.append_array(effects.get_tags_added_to_actor())
 	for added_tag in aditional_tags:

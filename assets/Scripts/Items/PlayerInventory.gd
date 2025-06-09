@@ -193,7 +193,7 @@ static func get_sorted_items()->Array:
 static func sort_item(item_a:BaseItem, item_b:BaseItem)->bool:
 	if !item_a: return true
 	if !item_b: return false
-	if item_a.details.display_name.naturalnocasecmp_to(item_b.details.display_name) < 0:
+	if item_a.get_display_name().naturalnocasecmp_to(item_b.get_display_name()) < 0:
 		return true
 	return false
 

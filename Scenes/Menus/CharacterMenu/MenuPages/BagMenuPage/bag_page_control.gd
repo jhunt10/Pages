@@ -54,7 +54,7 @@ func actor_equipment_changed():
 		if bag.Id == _current_bag_item_id:
 			return
 			_current_bag_item_id = bag.Id
-		name_label.text = bag.details.display_name
+		name_label.text = bag.get_display_name()
 		bag_icon.texture = bag.get_large_icon()
 	else:
 		_current_bag_item_id = null

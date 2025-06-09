@@ -49,12 +49,7 @@ func get_item_value()->int:
 	return item_details.get("Value", 0)
 
 func get_item_tags()->Array:
-	return details.tags.duplicate()
-
-func get_large_icon()->Texture2D:
-	return SpriteCache.get_sprite(details.large_icon_path)
-func get_small_icon()->Texture2D:
-	return SpriteCache.get_sprite(details.small_icon_path)
+	return get_tags()
 
 func get_rarity_background()->Texture2D:
 	return ItemHelper.get_rarity_background(self.get_item_rarity())
@@ -115,7 +110,7 @@ func get_passive_stat_mods()->Array:
 	var out_list = []
 	for mod_data in stat_mod_datas.values():
 		if not mod_data.has("DisplayName"):
-			mod_data['DisplayName'] = self.details.display_name
+			mod_data['DisplayName'] = self.get_display_name()
 		out_list.append(BaseStatMod.create_from_data(Id, mod_data))
 	return out_list
 
@@ -136,7 +131,7 @@ func get_damage_mods()->Dictionary:
 		else:
 			mod_data['DamageModKey'] = mod_key
 		if not mod_data.has("DisplayName"):
-			mod_data['DisplayName'] = self.details.display_name
+			mod_data['DisplayName'] = self.get_display_name()
 		
 		out_dict[mod_key] = mod_data
 	return out_dict
@@ -151,7 +146,7 @@ func get_ammo_mods()->Dictionary:
 		else:
 			mod_data['AmmoModKey'] = mod_key
 		if not mod_data.has("DisplayName"):
-			mod_data['DisplayName'] = self.details.display_name
+			mod_data['DisplayName'] = self.get_display_name()
 		
 		out_dict[mod_key] = mod_data
 	return out_dict
@@ -166,7 +161,7 @@ func get_attack_mods()->Dictionary:
 		else:
 			mod_data['AttackModKey'] = mod_key
 		if not mod_data.has("DisplayName"):
-			mod_data['DisplayName'] = self.details.display_name
+			mod_data['DisplayName'] = self.get_display_name()
 		
 		out_dict[mod_key] = mod_data
 	return out_dict

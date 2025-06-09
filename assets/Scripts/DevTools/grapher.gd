@@ -3,7 +3,8 @@ extends Control
 
 @export var do_test:bool:
 	set(val):
-		FileStructureBuilder.create_class_def_files("Priest")
+		#FileStructureBuilder.create_class_def_files("Priest")
+		FileStructureBuilder.DoThing()
 		pass
 		#var fake_pos = MapPos.new(25, 65, 0, 3)
 		#print(str(fake_pos))

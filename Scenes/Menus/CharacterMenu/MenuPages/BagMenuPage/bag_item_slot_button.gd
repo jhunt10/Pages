@@ -27,7 +27,7 @@ func set_item_id(item_id, background_type):
 		var item = ItemLibrary.get_item(_item_id)
 		if item:
 			item_icon.texture = item.get_small_icon()
-			label.text = item.details.display_name
+			label.text = item.get_display_name()
 	if background_type == "Single":
 		background.texture = bg_texture_single
 	if background_type == "Top":

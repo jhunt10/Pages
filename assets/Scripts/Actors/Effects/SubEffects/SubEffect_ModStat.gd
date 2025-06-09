@@ -26,7 +26,7 @@ func get_active_stat_mods(effect:BaseEffect, subeffect_data:Dictionary)->Array:
 		if stat_mods_datas.has(mod_key):
 			var mod_data = stat_mods_datas[mod_key]
 			if not mod_data.has("DisplayName"):
-				mod_data['DisplayName'] = effect.details.display_name
+				mod_data['DisplayName'] = effect.get_display_name()
 			out_list.append(BaseStatMod.create_from_data(effect.Id, mod_data))
 	return out_list
 

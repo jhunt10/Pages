@@ -216,7 +216,7 @@ func _load_text(subject:SpeakerSubjects, item:BaseItem=null, count:int=0):
 	elif subject == SpeakerSubjects.ConfirmBuy:
 		var item_name = "of these"
 		if item:
-			item_name = "@Color:Red@"+item.details.display_name+"@Clear@"
+			item_name = "@Color:Red@"+item.get_display_name()+"@Clear@"
 		_build_dialog_entries([
 			{"SpeakerPort":"Happy"},
 			"So you want " + str(count) + " " + item_name + "?",
@@ -224,7 +224,7 @@ func _load_text(subject:SpeakerSubjects, item:BaseItem=null, count:int=0):
 	elif subject == SpeakerSubjects.ConfirmSell:
 		var item_name = "of these"
 		if item:
-			item_name = "@Color:Red@"+item.details.display_name+"@Clear@"
+			item_name = "@Color:Red@"+item.get_display_name()+"@Clear@"
 		_build_dialog_entries([
 			{"SpeakerPort":"Happy"},
 			"So you wanna sell " + str(count) + " " + item_name + "?",
@@ -232,7 +232,7 @@ func _load_text(subject:SpeakerSubjects, item:BaseItem=null, count:int=0):
 	elif subject == SpeakerSubjects.BuySuccess or subject == SpeakerSubjects.SellSuccess:
 		var item_name = "of these"
 		if item:
-			item_name = "@Color:Red@"+item.details.display_name+"@Clear@"
+			item_name = "@Color:Red@"+item.get_display_name()+"@Clear@"
 		_build_dialog_entries([
 			{"SpeakerPort":"Happy"},
 			"Pleasure doing business with you.",
@@ -245,7 +245,7 @@ func _load_text(subject:SpeakerSubjects, item:BaseItem=null, count:int=0):
 	elif subject == SpeakerSubjects.BuyCancel or subject == SpeakerSubjects.SellCancel:
 		var item_name = "of these"
 		if item:
-			item_name = "@Color:Red@"+item.details.display_name+"@Clear@"
+			item_name = "@Color:Red@"+item.get_display_name()+"@Clear@"
 		_build_dialog_entries([
 			{"SpeakerPort":"Neutral"},
 			"Too bad.",

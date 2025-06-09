@@ -18,7 +18,7 @@ func _ready() -> void:
 func set_item(actor:BaseActor, que:BaseQueEquipment):
 	_actor = actor
 	_item = que
-	description_box.text = que.details.description
+	description_box.text = que.get_description()
 	ppr_label.text = str(que.get_pages_per_round())
 	passive_count_label.text = str(que.get_base_passive_page_limit())
 	action_count_label.text = str(que.get_base_action_page_limit())

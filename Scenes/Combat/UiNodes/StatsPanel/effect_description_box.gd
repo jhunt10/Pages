@@ -16,7 +16,7 @@ func _process(delta: float) -> void:
 	super(delta)
 
 func set_effect(effect:BaseEffect):
-	name_label.text = effect.details.display_name
+	name_label.text = effect.get_display_name()
 	if effect.show_counter():
 		var dur_val = effect.RemainingDuration
 		duration_label.text = str(dur_val)
@@ -32,4 +32,4 @@ func set_effect(effect:BaseEffect):
 			duration_type_label.hide()
 	else:
 		duration_label.text = ''
-	description_label.text = effect.details.snippet
+	description_label.text = effect.get_snippet()

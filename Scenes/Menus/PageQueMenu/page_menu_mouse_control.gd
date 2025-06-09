@@ -25,7 +25,7 @@ func set_hover_page(page:BaseAction):
 	if drag_page_control.visible:
 		return
 	mouse_over_message_container.visible = true
-	mouse_over_label.text = page.details.display_name + "\n" + page.details.snippet
+	mouse_over_label.text = page.details.display_name + "\n" + page.get_snippet()
 
 func clear_message():
 	mouse_over_message_container.visible = false

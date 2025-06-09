@@ -8,6 +8,9 @@ var _data:Dictionary
 var is_deleted:bool = false
 
 var details:ObjectDetailsData
+var object_details:Dictionary:
+	get:
+		return get_load_val("Details", {}, false)
 
 func _init(key:String, def_load_path:String, def:Dictionary, id:String='', data:Dictionary={}) -> void:
 	if is_static():
@@ -26,6 +29,25 @@ func _init(key:String, def_load_path:String, def:Dictionary, id:String='', data:
 func is_static():
 	return false
 
+####################
+## Object Details ##
+####################
+func get_display_name()->String:
+	return object_details.get("DisplayName", _id)
+func get_description()->String:
+	return object_details.get("DisplayName", _id)
+func get_snippet()->String:
+	return object_details.get("DisplayName", _id)
+	return object_details.get("DisplayName", _id)
+func get_large_icon()->Texture2D:
+	var icon_path = _def_load_path.path_join(object_details.get("LargeIcon", ""))
+	return SpriteCache.get_sprite(icon_path)
+func get_small_icon()->Texture2D:
+	var icon_path = _def_load_path.path_join(object_details.get("SmallIcon", ""))
+	return SpriteCache.get_sprite(icon_path)
+func get_tags()->Array:
+	return object_details.get("Tags", [])
+
 func save_me()->bool:
 	return false
 
@@ -43,12 +65,11 @@ func load_data(data:Dictionary):
 func get_load_path()->String:
 	return _def_load_path
 
-# TODO: Better name and description
-## Returns the value of given key if found in _data or _def in that order
-func get_load_val(key:String, default=null):
+## Return value from  _data  ->  _def  ->  default
+func get_load_val(key:String, default=null, duplicate_dict:bool=true):
 	var val = _data.get(key, null)
 	if val is Dictionary:
-		val = val.duplicate(true)
+		val = val.duplicate(duplicate_dict)
 		if _def.has(key):
 			val = BaseLoadObjectLibrary._merge_defs(val, _def.get(key, {}))
 	if !val:

@@ -5,4 +5,4 @@ extends Control
 
 func set_item(item:BaseItem):
 	if item:
-		description_box.text = item.details.description
+		description_box.text = item.get_description()

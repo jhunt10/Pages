@@ -32,7 +32,7 @@ func _process(delta: float) -> void:
 ## Load the top level details displayed while entry is minimized
 func _load_mini_details():
 	
-	title_label.text = page.details.display_name
+	title_label.text = page.get_display_name()
 	if title_label.text == "":
 		title_label.text = "["+page._key+"}"
 	thing_tags = page.get_item_tags()

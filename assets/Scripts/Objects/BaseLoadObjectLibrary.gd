@@ -15,7 +15,7 @@ func get_data_file_sufix()->String:
 func is_object_static(object_def:Dictionary)->bool:
 	return object_def.get("IsStatic", false)
 func get_object_script_path(object_def:Dictionary)->String:
-	return object_def.get("_ObjectScript", "")
+	return object_def.get("!ObjectScript", "")
 
 var loaded = false
 # Dictionary of object's base data config

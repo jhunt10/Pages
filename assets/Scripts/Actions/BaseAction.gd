@@ -8,7 +8,9 @@ const SUB_ACTIONS_PER_ACTION = 24
 var ActionKey:String:
 	get: return self._key
 
-var SubActionData:Array = []
+var action_details:Dictionary:
+	get:
+		return get_load_val("ActionDetails", {})
 
 var CostData:Dictionary:
 		get: return get_load_val('CostData', {})
@@ -21,7 +23,7 @@ var MissileDatas:Dictionary:
 				_missile_data = get_load_val('MissileDatas', {})
 				for key in _missile_data.keys():
 					if not _missile_data[key].has("DisplayName"):
-						_missile_data[key]['DisplayName'] = details.display_name + " Missile"
+						_missile_data[key]['DisplayName'] = get_display_name() + " Missile"
 			return _missile_data
 
 var OnQueUiState:String:
@@ -29,8 +31,6 @@ var OnQueUiState:String:
 var _target_params:Dictionary
 
 func get_tagable_id(): return ActionKey
-func get_tags(): return details.tags
-
 var PreviewMoveOffset:MapPos
 
 func _init(key:String, def_load_path:String, def:Dictionary, id:String='', data:Dictionary={}) -> void:
@@ -69,7 +69,30 @@ func _init(key:String, def_load_path:String, def:Dictionary, id:String='', data:
 				pre_move_arr = JSON.parse_string(preview_data['PreviewMoveOffset'])
 			PreviewMoveOffset = MapPos.new(pre_move_arr[0],pre_move_arr[1],pre_move_arr[2],pre_move_arr[3])
 
+## Returns raw Dictionary of SubAction data
+func get_sub_action_data()->Dictionary:
+	return action_details.get("SubActions", {})
 
+func get_sub_action_datas_for_frame(frame_index:int)->Array:
+	var out_list = []
+	var sub_actions_data = get_sub_action_data()
+	for key in sub_actions_data.keys():
+		var data = sub_actions_data[key]
+		if data.get("FrameIndex", -1) == frame_index:
+			out_list.append(data)
+	out_list.sort_custom(sort_subacts_ascending)
+	return out_list
+	
+func sort_subacts_ascending(a, b):
+	if a.get("SubFramIndex", 0) < b.get("SubFramIndex", 0):
+		return true
+	return false
+
+func get_tags()->Array:
+	var tags = super()
+	if not tags.has("Action"):
+		tags.append("Action")
+	return tags
 
 func get_qued_icon(turn_index:int, actor:BaseActor =  null)->Texture2D:
 	if self.get_load_val("UseDynamicIcons", false):
@@ -93,7 +116,7 @@ func  get_small_page_icon(actor:BaseActor = null)->Texture2D:
 			if equipments.size() > 0:
 				var equipment:BaseEquipmentItem = equipments[0]
 				return equipment.get_large_icon()
-	return SpriteCache.get_sprite(details.small_icon_path)
+	return get_small_icon()
 
 func use_equipment_icon()->bool:
 	return get_load_val("UseEquipmentIcon", null) != null
@@ -106,7 +129,7 @@ func  get_large_page_icon(actor:BaseActor = null)->Texture2D:
 			if equipments.size() > 0:
 				var equipment:BaseEquipmentItem = equipments[0]
 				return equipment.get_large_icon()
-	return SpriteCache.get_sprite(details.large_icon_path)
+	return get_large_icon()
 
 func list_sub_action_datas()->Array:
 	var out_list = []

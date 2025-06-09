@@ -34,7 +34,7 @@ func set_armor(actor:BaseActor, armor:BaseArmorEquipment):
 	#else:
 		#mag_icon.hide()
 		#ward_label.hide()
-	description_box.text = armor.details.description
+	description_box.text = armor.get_description()
 	if _actor:
 		if _actor.equipment.has_item(_item.Id):
 			parent_card_control.equip_label.text = "Remove"	

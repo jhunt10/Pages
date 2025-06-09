@@ -288,7 +288,7 @@ func _execute_turn_frames(game_state:GameStateData, que:ActionQue, turn_index:in
 			
 	
 	# Get subaction for this frame
-	var sub_action_list = action.SubActionData[subaction_index]
+	var sub_action_list = action.get_sub_action_datas_for_frame(subaction_index)
 	if !sub_action_list:
 		if DEEP_LOGGING: print("\t\tNo SubAction List on action: %s" % [action.ActionKey])
 		return

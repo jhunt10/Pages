@@ -22,7 +22,7 @@ func do_thing(parent_action:BaseAction, subaction_data:Dictionary, que_exe_data:
 	
 	var turn_data = que_exe_data.get_current_turn_data()
 	var attack_details = parent_action.get_load_val("AttackDetails", {})
-	attack_details['DisplayName'] = parent_action.details.display_name
+	attack_details['DisplayName'] = parent_action.get_display_name()
 	var tag_chain = SourceTagChain.new()\
 			.append_source(SourceTagChain.SourceTypes.Actor, actor)\
 			.append_source(SourceTagChain.SourceTypes.Action, parent_action)
@@ -30,7 +30,7 @@ func do_thing(parent_action:BaseAction, subaction_data:Dictionary, que_exe_data:
 	# Get Target info
 	var target_key = subaction_data.get('TargetKey')
 	if !target_key:
-		printerr("SubAct_Attack: No 'TargetKey' on subaction in %s." % [parent_action.details.display_name])
+		printerr("SubAct_Attack: No 'TargetKey' on subaction in %s." % [parent_action.get_display_name()])
 		return Failed
 	if not turn_data.has_target(target_key):
 		if subaction_data.get("FailOnNoTarget", true):

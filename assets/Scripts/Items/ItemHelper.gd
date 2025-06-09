@@ -45,7 +45,7 @@ static func try_pickup_item(actor:BaseActor, item:BaseItem)->Dictionary:
 	var popup_data = {
 		"Image": item.get_large_icon(),
 		"Background": item.get_rarity_background(),
-		"Message": item.details.display_name
+		"Message": item.get_display_name()
 	}
 	if item.get_item_type() == BaseItem.ItemTypes.Money:
 		var value = item.get_item_value()

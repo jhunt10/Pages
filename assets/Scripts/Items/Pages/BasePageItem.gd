@@ -1,6 +1,7 @@
 class_name BasePageItem
 extends BaseItem
 
+var has_action:bool = false
 
 var page_details:Dictionary:
 	get:
@@ -9,18 +10,13 @@ var page_details:Dictionary:
 func get_item_type()->ItemTypes:
 	return ItemTypes.Page
 
-func get_item_tags()->Array:
-	var tags = super()
-	if !tags.has("Page"):
-		tags.append("Page")
-	return tags
-
 func _init(key:String, def_load_path:String, def:Dictionary, id:String='', data:Dictionary={}) -> void:
 	super(key, def_load_path, def, id, data)
 	var details_data = def.get("Details", {})
 	var action_key = def.get("ActionKey")
 	var effect_key = def.get("EffectKey")
 	if action_key and not effect_key:
+		has_action = true
 		var action_def = ActionLibrary.get_action_def(action_key)
 		var org_detail_data =  action_def.get("Details", {"Tags":[]})
 		if not org_detail_data['Tags'].has("Action"):
@@ -59,6 +55,49 @@ func get_effect_def():
 		return EffectLibrary.get_merged_effect_def(effect_key, effect_data)
 	return null
 
+
+func get_item_tags()->Array:
+	var tags = []
+	if has_action: 
+		var action = get_action()
+		if action: 
+			tags = action.get_tags()
+	else:
+		tags = super()
+	if not tags.has("Page"):
+		tags.append("Page")
+	return tags
+func get_display_name()->String:
+	if has_action: 
+		var action = get_action()
+		if action: return action.get_display_name()
+	return super()
+func get_description()->String:
+	if has_action: 
+		var action = get_action()
+		if action: return action.get_description()
+	return super()
+func get_snippet()->String:
+	if has_action: 
+		var action = get_action()
+		if action: return action.get_snippet()
+	return super()
+func get_large_icon()->Texture2D:
+	if has_action: 
+		var action = get_action()
+		if action: return action.get_large_icon()
+	return super()
+func get_small_icon()->Texture2D:
+	if has_action: 
+		var action = get_action()
+		if action: return action.get_small_icon()
+	return super()
+func get_tags()->Array:
+	if has_action: 
+		var action = get_action()
+		if action: return action.get_tags()
+	return super()
+
 func get_tags_added_to_actor()->Array:
 	return page_details.get("AddTags", [])
 
@@ -81,7 +120,7 @@ func get_passive_stat_mods()->Array:
 	var out_list = []
 	for mod_data in stat_mod_datas.values():
 		if not mod_data.has("DisplayName"):
-			mod_data['DisplayName'] = self.details.display_name
+			mod_data['DisplayName'] = self.get_display_name()
 		out_list.append(BaseStatMod.create_from_data(Id, mod_data))
 	return out_list
 
@@ -95,7 +134,7 @@ func get_damage_mods()->Dictionary:
 		else:
 			mod_data['DamageModKey'] = mod_key
 		if not mod_data.has("DisplayName"):
-			mod_data['DisplayName'] = self.details.display_name
+			mod_data['DisplayName'] = self.get_display_name()
 		
 		out_dict[mod_key] = mod_data
 	return out_dict
@@ -110,7 +149,7 @@ func get_attack_mods()->Dictionary:
 		else:
 			mod_data['AttackModKey'] = mod_key
 		if not mod_data.has("DisplayName"):
-			mod_data['DisplayName'] = self.details.display_name
+			mod_data['DisplayName'] = self.get_display_name()
 		
 		out_dict[mod_key] = mod_data
 	return out_dict

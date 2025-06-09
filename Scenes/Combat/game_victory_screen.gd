@@ -51,7 +51,7 @@ func collect_dropped_items():
 		if not items_datas.has(item_type):
 			items_datas[item_type] = {}
 			
-		var item_name = item.details.display_name
+		var item_name = item.get_display_name()
 		if not items_datas[item_type].has(item_name):
 			items_datas[item_type][item_name] = {}
 			items_datas[item_type][item_name]['Texture'] = item.get_small_icon()

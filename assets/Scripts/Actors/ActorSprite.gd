@@ -46,8 +46,8 @@ func _build_sprite_sheet():
 	var first_cache = (_cached_body_sprite == null)
 	var sprite_sheet_file = _actor.get_load_val("SpriteSheet", null)
 	if !sprite_sheet_file:
-		_cached_body_sprite = SpriteCache.get_sprite(_actor.details.large_icon_path)
-		_cached_portrait = SpriteCache.get_sprite(_actor.details.large_icon_path)
+		_cached_body_sprite = _actor.get_large_icon()
+		_cached_portrait = _actor.get_large_icon()
 		return
 	
 	#var old_version = sprite_sheet_file.ends_with(".png")
@@ -120,7 +120,7 @@ func _build_sprite_sheet():
 	
 	var port_rect = _actor.get_load_val("PortraitRect", null)
 	if !port_rect:
-		_cached_portrait = SpriteCache.get_sprite(_actor.details.small_icon_path)
+		_cached_portrait = _actor.get_small_icon()
 	else:
 		var rect = Rect2i(port_rect[0], port_rect[1], port_rect[2], port_rect[3])
 		var port_image = body_image.get_region(rect)

@@ -34,7 +34,7 @@ func set_weapon(actor:BaseActor, weapon:BaseWeaponEquipment):
 	attack_power_label.text = ("%s±%s" % [base_power, (power_range)]) + "%"
 	var damage_type = damage_data.get("DamageType")
 	damage_type_label.text = damage_type
-	description_box.text = weapon.details.description
+	description_box.text = weapon.get_description()
 	range_display.load_area_matrix(weapon.target_parmas.target_area)
 	
 	#if _actor.equipment.has_item(_item.Id):

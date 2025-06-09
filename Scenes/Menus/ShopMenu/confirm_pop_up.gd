@@ -37,7 +37,7 @@ func set_item(selling:bool, item:BaseItem, count:int):
 	else:
 		title_label.text = "Purchase"
 		confirm_button.text = "Buy"
-	item_label.text = item.details.display_name
+	item_label.text = item.get_display_name()
 	item_background.texture = item.get_rarity_background()
 	item_icon.texture = item.get_small_icon()
 	var cost = item.get_item_value()

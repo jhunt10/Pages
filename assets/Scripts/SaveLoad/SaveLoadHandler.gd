@@ -54,7 +54,7 @@ static func _build_save_meta_data(save_name:String):
 	for i in range(4):
 		var player = StoryState.get_player_actor(i)
 		if player:
-			party[player.Id] = [player.details.display_name, player.stats.get_stat(StatHelper.Level)]
+			party[player.Id] = [player.get_display_name(), player.stats.get_stat(StatHelper.Level)]
 	return {
 		"StoryId": StoryState.story_id,
 		"SaveName": save_name,

@@ -50,6 +50,7 @@ func set_key(actor:BaseActor, key):
 			else:
 				invalid_icon.hide()
 		else:
+			printerr("PageSlotButton: No Page Item found for '%s'." % [key])
 			page_icon.texture = SpriteCache._get_no_sprite()
 
 func _on_equipment_changed(actor_id, action_key):

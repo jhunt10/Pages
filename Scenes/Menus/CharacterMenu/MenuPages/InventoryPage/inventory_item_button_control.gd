@@ -32,7 +32,7 @@ func set_item(item:BaseItem, count:int=0):
 	if !name_label:
 		name_label = $NinePatchRect/FitScaleLabel
 	_item_id = item.Id
-	name_label.text = item.details.display_name
+	name_label.text = item.get_display_name()
 	item_icon_rect.texture = item.get_large_icon()
 	equipt_icon.visible = false
 	background.texture = item.get_rarity_background()

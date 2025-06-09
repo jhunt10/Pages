@@ -88,9 +88,85 @@ static func create_class_def_files(thing_name:String):
 		var spites_dir_path = main_dir_path.path_join("Sprites")
 		DirAccess.make_dir_absolute(spites_dir_path)
 		
+static func DoThing():
+	update_def_files()
+
+static func update_def_files():
+	var files = BaseLoadObjectLibrary._search_for_files("res://ObjectDefs/ClassDefs/", "_ActionDefs.json")
+	files.append_array(BaseLoadObjectLibrary._search_for_files("res://defs/", "_ActionDefs.json"))
+	for file in files:
+		print(file)
 
 
-
-
-static func update_def_file(file_path):
+static func update_def_file(object_key_name, file_path):
+	var file = FileAccess.open(file_path, FileAccess.READ)
+	var text:String = file.get_as_text()
 	
+	var backup_file_path = file_path.replace(".json", "_new.json")
+	var backup_file = FileAccess.open(backup_file_path, FileAccess.WRITE)
+	backup_file.store_string(text)
+	backup_file.close()
+	
+	var old_defs = {}
+	if text.begins_with("["):
+		var index = 0
+		var old_arr:Array = JSON.parse_string(text)
+		for val:Dictionary in old_arr:
+			var key = val.get(object_key_name, '')
+			if key == '':
+				printerr("Failed to find '%s' on a def.")
+				old_defs['NoKey' + str(index)] = val
+				index += 1
+			else:
+				old_defs[key] = val
+	
+	# Order of Chars for Json Keys  !  #  $  %  &  (  )  *  +  ,  -  .  /  <  =  >  ?  @  ObjectName  _  |
+	
+	var new_defs = {}
+	for key in old_defs.keys():
+		var object_key = ''
+		var old_def = old_defs[key].duplicate(true)
+		var new_def = {}
+		if old_def.keys().has("SubActions"):
+			new_def["ActionDetails"] = {}
+			new_def["!ObjectScript"] = "res://assets/Scripts/Actions/BaseAction.gd"
+		for prop_key in old_def.keys():
+			var new_prop_key = prop_key
+			## Skip old "ActionKey"
+			if prop_key == object_key_name:
+				continue
+			if prop_key == "ParentKey":
+				new_prop_key = "!ParentKey"
+			if prop_key == "Details":
+				new_prop_key = "#ObjDetails"
+			
+			
+			if prop_key == "SubActions":
+				var old_subacts = old_def[prop_key]
+				var new_subacts = {}
+				for frame_index in range(24):
+					var arr = old_subacts.get(str(frame_index), [])
+					var sub_index = 0
+					for subact in arr:
+						var sub_act_script = subact.get("SubActionScript", "????")
+						var tokens = sub_act_script.split("/")
+						var new_key:String = tokens[tokens.size()-1]
+						new_key = new_key.trim_prefix("SubAct_").trim_suffix(".gd")
+						if new_subacts.keys().has(new_key):
+							new_key = new_key + str(frame_index) + str(sub_index)
+						#subact.erase("SubActionScript")
+						new_subacts[new_key] = subact
+						new_subacts[new_key]["!SubActionScript"] = sub_act_script
+						new_subacts[new_key]["#FrameIndex"] = frame_index
+						new_subacts[new_key]["#SubIndex"] = sub_index
+						sub_index += 1
+				new_def[prop_key] = new_subacts
+				#print("SubActs: %s" % [new_subacts])
+			else:
+				#print("Not Sub Acts: %s" % [new_prop_key])
+				new_def[new_prop_key] = old_def[prop_key]
+		new_defs[key] = new_def
+	var new_file_path = file_path#.replace(".json", "_new.json")
+	var meta_file = FileAccess.open(new_file_path, FileAccess.WRITE)
+	meta_file.store_string(JSON.stringify(new_defs))
+	meta_file.close()

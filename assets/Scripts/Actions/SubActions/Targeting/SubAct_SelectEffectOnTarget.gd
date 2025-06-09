@@ -50,7 +50,7 @@ func _get_effect_que_options(actor:BaseActor, selection_key:String, effect_filte
 				is_valid = false
 				break
 		options.options_vals.append(effect.Id)
-		options.option_texts.append(effect.details.display_name)
+		options.option_texts.append(effect.get_display_name())
 		options.option_icons.append(effect.get_small_icon())
 		options.disable_options.append(not is_valid)
 	return options

@@ -28,7 +28,7 @@ func on_round_finish():
 		var squirrel_left = false
 		var living_actors = CombatRootControl.Instance.GameState.list_actors(false)
 		for actor:BaseActor in living_actors:
-			if actor.Tags.has("Squirrel") and actor.FactionIndex != 0:
+			if actor.get_tags().has("Squirrel") and actor.FactionIndex != 0:
 				squirrel_left = true
 		if not squirrel_left:
 			_is_finished = true

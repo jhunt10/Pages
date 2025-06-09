@@ -4,7 +4,7 @@ class_name BaseItemHolder
 # Use Actor.bag_items_changed
 #signal items_changed
 
-const LOGGING = false
+const LOGGING = true
 
 signal items_changed
 
@@ -48,6 +48,7 @@ func load_save_data(data:Array):
 		var item_id = item_data.get('Id')
 		var item_key = item_data.get('ObjectKey')
 		var new_item = ItemLibrary.get_or_create_item(item_id, item_key, item_data)
+		var new_id = new_item.Id 
 		if new_item:
 			_raw_item_slots.append(new_item.Id)
 		else:
@@ -71,9 +72,12 @@ func validate_items():
 		if not item_id:
 			continue
 		var item = ItemLibrary.get_item(item_id, false)
+		# Get the first slot item could go in
 		var slot = get_first_valid_slot_for_item(item, false)
+		# if found, put it there
 		if slot >= 0:
 			_raw_item_slots[slot] = item.Id
+		# else remove
 		else:
 			remove_item(item.Id)
 			if _actor.is_player:
@@ -111,7 +115,7 @@ func _build_slots_list():
 		slot_set_index += 1
 	
 	if LOGGING: print("- Final Raw Index: %s" % [raw_index])
-	if LOGGING: print("- Backup Slots: %s" % [_backup_slots])
+	if LOGGING: print("- Backup Slots: %s\n" % [_backup_slots])
 	while raw_index < _backup_slots.size():
 		if _backup_slots[raw_index] and _actor.is_player:
 			var item = ItemLibrary.get_item(_backup_slots[raw_index], false)
@@ -196,11 +200,13 @@ func remove_item(item_id:String, supress_signal:bool=false):
 
 func can_set_item_in_slot(item:BaseItem, index:int, allow_replace:bool=false)->bool:
 	if index < 0 or index >= _raw_item_slots.size():
+		printerr("ItemHolder.can_set_item_in_slot: Index '%s' outside of range '%s'." % [index, _raw_item_slots.size()])
 		return false
 	if not allow_replace and _raw_item_slots.has(item.Id):
 		return false
-	var slot_set_data = get_slot_set_data_for_index(index)
-	if not _can_slot_set_accept_item(slot_set_data, item):
+	var check_slot_set_data = get_slot_set_data_for_index(index)
+	printerr("ItemHolder.can_set_item_in_slot: _can_slot_set_accept_item: Index '%s' | %s" % [index, check_slot_set_data])
+	if not _can_slot_set_accept_item(check_slot_set_data, item):
 		return false
 	if not allow_replace and _raw_item_slots[index] != null:
 		return false
@@ -216,8 +222,8 @@ func try_set_item_in_slot(item:BaseItem, index:int, allow_replace:bool=false)->b
 	items_changed.emit()
 	return true
 
-func _can_slot_set_accept_item(slot_set_data:Dictionary, item:BaseItem)->bool:
-	var filter_data = slot_set_data.get("FilterData")
+func _can_slot_set_accept_item(check_slot_set_data:Dictionary, item:BaseItem)->bool:
+	var filter_data = check_slot_set_data.get("FilterData")
 	var item_tags = item.get_item_tags()
 	if filter_data:
 		var required_tags = filter_data.get("RequiredTags")
@@ -231,6 +237,7 @@ func _can_slot_set_accept_item(slot_set_data:Dictionary, item:BaseItem)->bool:
 			return true
 	else:
 		return true
+	print("_can_slot_set_accept_item: %s | %s" % [item_tags, filter_data])
 	return false
 	
 

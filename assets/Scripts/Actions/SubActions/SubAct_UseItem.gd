@@ -11,7 +11,7 @@ func get_on_que_options(parent_action:BaseAction, _subaction_data:Dictionary, _a
 	var options = OnQueOptionsData.new("SelectedItemId", "Select Item to use:", [], [], [])
 	for item:BaseItem in items:
 		options.options_vals.append(item.Id)
-		options.option_texts.append(item.details.display_name)
+		options.option_texts.append(item.get_display_name())
 		options.option_icons.append(item.get_small_icon())
 	return [options]
 

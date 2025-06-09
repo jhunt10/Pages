@@ -32,7 +32,7 @@ func _load_slots_sets_data()->Array:
 		else:
 			if LOGGING: print("--PageItemQue not found")
 	for effect:BaseEffect in _actor.effects.list_effects():
-		if LOGGING: print("Checking Effect: %s" % [effect.details.display_name] )
+		if LOGGING: print("Checking Effect: %s" % [effect.get_display_name()] )
 		var extra_pages_data = effect.get_load_val("ExtraPageSlotsData", [])
 		if extra_pages_data.size() > 0:
 			out_list.append_array(extra_pages_data)

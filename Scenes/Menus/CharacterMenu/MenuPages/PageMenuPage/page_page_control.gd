@@ -81,7 +81,7 @@ func actor_equipment_changed():
 	#if que.Id == _current_que_item_id:
 		#return
 	#_current_que_item_id = que.Id
-	#name_label.text = que.details.display_name
+	#name_label.text = que.get_display_name()
 	#book_icon.texture = que.get_large_icon()
 	build_sub_containers()
 
@@ -93,7 +93,7 @@ func build_sub_containers():
 	
 	var title_page:BasePageItem = _actor.pages.get_item_in_slot(0)
 	if title_page:
-		title_label.text = title_page.details.display_name
+		title_label.text = title_page.get_display_name()
 		title_page_button.set_key(_actor, title_page.Id)
 	_buttons.append(title_page_button)
 	

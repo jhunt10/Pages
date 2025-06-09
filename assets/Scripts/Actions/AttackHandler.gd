@@ -587,7 +587,7 @@ static func handle_colision(
 	simulated:bool=false # Simulated collisions do not apply damage
 )->CollisionEvent:
 	
-	printerr("\n%s crash into %s" % [moving_actor.details.display_name, blocking_actor.details.display_name])
+	printerr("\n%s crash into %s" % [moving_actor.get_display_name(), blocking_actor.get_display_name()])
 	var attack_mods = {}
 	var stat_mods = {}
 	
@@ -687,7 +687,7 @@ static func handle_colision(
 		actor.stats.clear_temp_stat_mods()
 	
 	
-	printerr("And %s won" % [winner.details.display_name])
+	printerr("And %s won" % [winner.get_display_name()])
 	if damage_event:
 		print(damage_event.dictialize_self())
 	

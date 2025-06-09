@@ -162,8 +162,8 @@ func set_item(actor:BaseActor, item:BaseItem):
 		actor.pages.items_changed.connect(start_hide)
 	item_id = item.Id
 	icon.texture = item.get_small_icon()
-	title_lable.text = item.details.display_name
-	description_box.text = item.details.description
+	title_lable.text = item.get_display_name()
+	description_box.text = item.get_description()
 	var tag_string = ''
 	for tag in item.get_item_tags():
 		tag_string += ", " + tag

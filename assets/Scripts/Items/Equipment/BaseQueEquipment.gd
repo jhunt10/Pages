@@ -26,7 +26,7 @@ func get_base_action_page_limit()->int:
 	return get_load_val("BaseActionCount", 0)
 
 func get_passive_stat_mods()->Array:
-	var ppr_mod = BaseStatMod.new(_id, "PPR", self.details.display_name, BaseStatMod.ModTypes.Set, get_pages_per_round())
+	var ppr_mod = BaseStatMod.new(_id, "PPR", self.get_display_name(), BaseStatMod.ModTypes.Set, get_pages_per_round())
 	var mod_list = [ppr_mod]
 	mod_list.append_array(super())
 	return mod_list

@@ -8,12 +8,12 @@ extends BackPatchContainer
 @export var range_display:MiniRangeDisplay
 
 func set_page(page:BaseAction):
-	name_label.text = page.details.display_name
+	name_label.text = page.get_display_name()
 	var tags_string = ''
 	for tag in page.details.tags:
 		tags_string += tag + ", "
 	tags_label.text = "Tags: " + tags_string.trim_suffix(", ")
-	description_label.text = page.details.description
+	description_label.text = page.get_description()
 	range_display.visible = false
 	if page.has_preview_target():
 		var preview_params = page.get_preview_target_params(null)

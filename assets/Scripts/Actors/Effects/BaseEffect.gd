@@ -188,11 +188,6 @@ func delete_after_combat()->bool:
 func is_instant()->bool:
 	return effect_details.get("IsInstant", false)
 
-func get_small_icon():
-	return SpriteCache.get_sprite(details.small_icon_path)
-func get_large_icon():
-	return SpriteCache.get_sprite(details.large_icon_path)
-
 func get_tags_added_to_actor()->Array:
 	return get_load_val("AddTagsToActor", [])
 
