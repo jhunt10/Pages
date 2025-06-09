@@ -88,3 +88,9 @@ static func create_class_def_files(thing_name:String):
 		var spites_dir_path = main_dir_path.path_join("Sprites")
 		DirAccess.make_dir_absolute(spites_dir_path)
 		
+
+
+
+
+static func update_def_file(file_path):
+	
