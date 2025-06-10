@@ -11,9 +11,9 @@ var _off_hand_sprite:Texture2D
 var _two_hand_sprite:Texture2D
 
 
-var weapon_details:Dictionary:
+var weapon_data:Dictionary:
 	get:
-		return _def.get("WeaponDetails", {})
+		return _def.get("WeaponData", {})
 
 var weapon_attack_data:Dictionary:
 	get:
@@ -22,7 +22,7 @@ var weapon_attack_data:Dictionary:
 
 func _init(key:String, def_load_path:String, def:Dictionary, id:String='', data:Dictionary={}) -> void:
 	super(key, def_load_path, def, id, data)
-	target_parmas = TargetParameters.new("Weapon", weapon_details.get("AttackData", {}).get("TargetParams", {}))
+	target_parmas = TargetParameters.new("Weapon", weapon_data.get("AttackData", {}).get("TargetParams", {}))
 	for damage_data_key in weapon_attack_data.get("DamageDatas", {}).keys():
 		weapon_attack_data['DamageDatas'][damage_data_key]['DamageDataKey'] = damage_data_key
 		weapon_attack_data['DamageDatas'][damage_data_key]['DisplayName'] = self.get_display_name()
@@ -54,7 +54,7 @@ func get_item_tags()->Array:
 	return tags
 
 func get_weapon_class()->WeaponClasses:
-	var val = weapon_details.get("WeaponClass", null)
+	var val = weapon_data.get("WeaponClass", null)
 	if !val: # TODO: Obsoleate
 		val = get_load_val("WeaponClass", '')
 	if WeaponClasses.keys().has(val):
@@ -62,10 +62,10 @@ func get_weapon_class()->WeaponClasses:
 	return WeaponClasses.Medium
 
 func is_ranged_weapon()->bool:
-	return weapon_details.get("IsRanged", false)
+	return weapon_data.get("IsRanged", false)
 	
 func is_melee_weapon()->bool:
-	return not weapon_details.get("IsRanged", false)
+	return not weapon_data.get("IsRanged", false)
 
 func get_damage_datas()->Dictionary:
 	return weapon_attack_data.get("DamageDatas", {})
@@ -77,4 +77,4 @@ func get_misile_data()->Dictionary:
 	return get_load_val("MissileData", {})
 
 func get_default_weapon_animation_name()->String:
-	return weapon_details.get("WeaponSpriteData", {}).get("WeaponAnimation", "")
+	return weapon_data.get("WeaponSpriteData", {}).get("WeaponAnimation", "")

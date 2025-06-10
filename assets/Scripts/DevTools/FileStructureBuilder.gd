@@ -102,8 +102,9 @@ static func update_def_files():
 		#update_def_file("ActionKey", file)
 		#break
 
+const DefVersion = "1"
 
-static func update_def_file(object_key_name, file_path):
+static func update_def_file(object_type:String, file_path):
 	var file = FileAccess.open(file_path, FileAccess.READ)
 	var text:String = file.get_as_text()
 	
@@ -111,6 +112,21 @@ static func update_def_file(object_key_name, file_path):
 	var backup_file = FileAccess.open(backup_file_path, FileAccess.WRITE)
 	backup_file.store_string(text)
 	backup_file.close()
+	
+	var object_key_name = ''
+	if object_type == 'Action':
+		object_key_name = 'ActionKey'
+	if object_type == 'Actor':
+		object_key_name = 'ActorKey'
+	elif object_type == 'Page':
+		object_key_name = 'ItemKey'
+	elif object_type == 'Page':
+		object_key_name = 'ItemKey'
+	elif object_type == 'Item':
+		object_key_name = 'ItemKey'
+	else:
+		printerr("Unknown Object Type: " + object_type)
+	
 	
 	var old_defs = {}
 	if text.begins_with("["):
@@ -132,9 +148,12 @@ static func update_def_file(object_key_name, file_path):
 		var object_key = ''
 		var old_def = old_defs[key].duplicate(true)
 		var new_def = {}
-		if old_def.keys().has("SubActions"):
+		if object_type == 'Action':
 			new_def["ActionDetails"] = {}
-			new_def["_ObjectScript"] = "res://assets/Scripts/Actions/BaseAction.gd"
+			old_def["_ObjectScript"] = "res://assets/Scripts/Actions/BaseAction.gd"
+		if object_type == 'Page':
+			new_def["ActionDetails"] = {}
+			old_def["_ObjectScript"] = "res://assets/Scripts/Items/Pages/BasePageItem.gd"
 		for prop_key in old_def.keys():
 			var new_prop_key = prop_key
 			## Skip old "ActionKey"
@@ -144,6 +163,15 @@ static func update_def_file(object_key_name, file_path):
 				new_prop_key = "!ParentKey"
 			if prop_key == "Details":
 				new_prop_key = "#ObjDetails"
+			if prop_key == "_ObjectScript":
+				new_prop_key = "!ObjectScript"
+			
+			if prop_key == "WeaponDetails":
+				new_prop_key = "WeaponData"
+			if prop_key == "EquipmentDetails":
+				new_prop_key = "EquipmentData"
+			if prop_key == "PageDetails":
+				new_prop_key = "PageData"
 			
 			
 			if prop_key == "SubActions":
@@ -170,6 +198,22 @@ static func update_def_file(object_key_name, file_path):
 			else:
 				#print("Not Sub Acts: %s" % [new_prop_key])
 				new_def[new_prop_key] = old_def[prop_key]
+			
+			if object_type == "Action":
+				var move_props = ["AttackDetails", "AmmoData", "DamageDatas", "EffectDatas", "MissileDatas", "Preview", "SubActions", "TargetParams"]
+				var action_data = {}
+				for prop in move_props:
+					action_data[prop] = new_def[prop]
+					new_def.erase(prop)
+				new_def['ActionData'] = action_data
+			elif object_type == "Page":
+				new_def['PageData']['ActionKey'] = new_def['ActionKey']
+				new_def.erase("ActionKey")
+				new_def['PageData']['EffectKey'] = new_def['EffectKey']
+				new_def.erase("EffectKey")
+			
+
+		new_def['_DefVersion'] = DefVersion
 		new_defs[key] = new_def
 	var new_file_path = file_path#.replace(".json", "_new.json")
 	print("Writing to: " + new_file_path)

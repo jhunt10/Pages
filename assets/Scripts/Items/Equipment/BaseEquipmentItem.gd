@@ -2,9 +2,9 @@ class_name BaseEquipmentItem
 extends BaseItem
 
 
-var equipment_details:Dictionary:
+var equipment_data:Dictionary:
 	get:
-		return _def.get("EquipmentDetails", {})
+		return _def.get("EquipmentData", {})
 
 func get_item_type()->ItemTypes:
 	return ItemTypes.Equipment
@@ -16,18 +16,18 @@ func get_item_tags()->Array:
 	return tags
 
 func get_equipment_slot_type()->String:
-	return equipment_details.get("EquipSlot", "UNSET")
+	return equipment_data.get("EquipSlot", "UNSET")
 
 func has_spite_sheet()->bool:
-	return equipment_details.get("SpriteData", {}).has('SpriteSheet')
+	return equipment_data.get("SpriteData", {}).has('SpriteSheet')
 func get_sprite_sheet_file_path():
-	var file_name = equipment_details.get("SpriteData", {}).get('SpriteSheet', null)
+	var file_name = equipment_data.get("SpriteData", {}).get('SpriteSheet', null)
 	if !file_name:
 		return null
 	return _def_load_path.path_join(file_name)
 
 func get_passive_stat_mods()->Array:
-	var stat_mod_datas:Dictionary = equipment_details.get("StatMods", {})
+	var stat_mod_datas:Dictionary = equipment_data.get("StatMods", {})
 	var out_list = []
 	for mod_data in stat_mod_datas.values():
 		if not mod_data.has("DisplayName"):
@@ -36,14 +36,14 @@ func get_passive_stat_mods()->Array:
 	return out_list
 
 func get_target_mods()->Array:
-	var stat_mod_datas:Dictionary = equipment_details.get("TargetMods", {})
+	var stat_mod_datas:Dictionary = equipment_data.get("TargetMods", {})
 	var out_list = []
 	for mod_data in stat_mod_datas.values():
 		out_list.append(mod_data.duplicate())
 	return out_list
 
 func get_damage_mods()->Dictionary:
-	var mod_datas:Dictionary = equipment_details.get("DamageMods", {})
+	var mod_datas:Dictionary = equipment_data.get("DamageMods", {})
 	var out_dict = {}
 	for mod_key in mod_datas.keys():
 		var mod_data = mod_datas[mod_key]
@@ -58,7 +58,7 @@ func get_damage_mods()->Dictionary:
 	return out_dict
 
 func get_attack_mods()->Dictionary:
-	var mod_datas:Dictionary = equipment_details.get("AttackMods", {})
+	var mod_datas:Dictionary = equipment_data.get("AttackMods", {})
 	var out_dict = {}
 	for mod_key in mod_datas.keys():
 		var mod_data = mod_datas[mod_key]

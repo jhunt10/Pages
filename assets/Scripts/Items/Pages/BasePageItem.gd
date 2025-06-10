@@ -3,9 +3,9 @@ extends BaseItem
 
 var has_action:bool = false
 
-var page_details:Dictionary:
+var page_data:Dictionary:
 	get:
-		return _def.get("PageDetails", {})
+		return _def.get("PageData", {})
 
 func get_item_type()->ItemTypes:
 	return ItemTypes.Page
@@ -13,8 +13,9 @@ func get_item_type()->ItemTypes:
 func _init(key:String, def_load_path:String, def:Dictionary, id:String='', data:Dictionary={}) -> void:
 	super(key, def_load_path, def, id, data)
 	var details_data = def.get("Details", {})
-	var action_key = def.get("ActionKey")
-	var effect_key = def.get("EffectKey")
+	var page_data = def.get("PageData", {})
+	var action_key = page_data.get("ActionKey")
+	var effect_key = page_data.get("EffectKey")
 	if action_key and not effect_key:
 		has_action = true
 		var action_def = ActionLibrary.get_action_def(action_key)
@@ -47,7 +48,7 @@ func get_action()->BaseAction:
 	return null
 
 func get_effect_def():
-	var effect_data:Dictionary = page_details.get("EffectDatas", {})
+	var effect_data:Dictionary = page_data.get("EffectDatas", {})
 	var effect_key = effect_data.get("EffectKey", null)
 	if !effect_key:
 		var effect_datas = effect_data
@@ -99,7 +100,7 @@ func get_tags()->Array:
 	return super()
 
 func get_tags_added_to_actor()->Array:
-	return page_details.get("AddTags", [])
+	return page_data.get("AddTags", [])
 
 
 func get_rarity_background()->Texture2D:
@@ -116,7 +117,7 @@ func get_sprite_sheet_file_path():
 
 
 func get_passive_stat_mods()->Array:
-	var stat_mod_datas:Dictionary = page_details.get("StatMods", {})
+	var stat_mod_datas:Dictionary = page_data.get("StatMods", {})
 	var out_list = []
 	for mod_data in stat_mod_datas.values():
 		if not mod_data.has("DisplayName"):
@@ -125,7 +126,7 @@ func get_passive_stat_mods()->Array:
 	return out_list
 
 func get_damage_mods()->Dictionary:
-	var mod_datas:Dictionary = page_details.get("DamageMods", {})
+	var mod_datas:Dictionary = page_data.get("DamageMods", {})
 	var out_dict = {}
 	for mod_key in mod_datas.keys():
 		var mod_data = mod_datas[mod_key]
@@ -140,7 +141,7 @@ func get_damage_mods()->Dictionary:
 	return out_dict
 
 func get_attack_mods()->Dictionary:
-	var mod_datas:Dictionary = page_details.get("AttackMods", {})
+	var mod_datas:Dictionary = page_data.get("AttackMods", {})
 	var out_dict = {}
 	for mod_key in mod_datas.keys():
 		var mod_data = mod_datas[mod_key]
