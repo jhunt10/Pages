@@ -94,8 +94,8 @@ static func DoThing():
 static func update_def_files():
 	var files = []
 	files.append_array(BaseLoadObjectLibrary._search_for_files("res://ObjectDefs/", "Defs.json"))
-	files.append_array(BaseLoadObjectLibrary._search_for_files("res://defs/", "Defs.json"))
-	files.append_array(BaseLoadObjectLibrary._search_for_files("res://data/", "Defs.json"))
+	#files.append_array(BaseLoadObjectLibrary._search_for_files("res://defs/", "Defs.json"))
+	#files.append_array(BaseLoadObjectLibrary._search_for_files("res://data/", "Defs.json"))
 	for file:String in files:
 		var file_name = file.get_file()
 		print("FileName: " + file_name)

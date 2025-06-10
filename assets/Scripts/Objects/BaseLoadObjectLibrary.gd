@@ -168,7 +168,9 @@ func reload():
 func _load_object_defs():
 	var parent_to_child_mapping = {}
 	var child_to_parent_mapping = {}
-	var paths = [OBJECTS_DEFS_DIR]#, 'res://defs/']
+	var paths =[]
+	#paths.append('res://defs/')
+	paths.append(OBJECTS_DEFS_DIR)
 	
 	# Load Defs all defs into temp dict
 	var temp_defs = {}

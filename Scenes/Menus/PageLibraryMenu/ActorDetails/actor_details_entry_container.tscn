@@ -141,9 +141,8 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="StatModsContainer" type="HBoxContainer" parent="InnerContainer/DetailsContainer/DetailsContainer/HBoxContainer/VBoxContainer"]
+[node name="StatModsContainer" type="FlowContainer" parent="InnerContainer/DetailsContainer/DetailsContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_constants/separation = 32
 
 [node name="StatModLabel" type="HBoxContainer" parent="InnerContainer/DetailsContainer/DetailsContainer/HBoxContainer/VBoxContainer/StatModsContainer" node_paths=PackedStringArray("modded_stat_icon", "modded_stat_name_label", "mod_value_label", "dep_stat_label", "dep_stat_icon", "plus_label", "times_label")]
 layout_mode = 2

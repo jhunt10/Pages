@@ -10,7 +10,13 @@ static func spawn_item(item_key:String, item_data:Dictionary, pos:MapPos)->BaseI
 	return item
 
 
-static func get_rarity_background(rarity:BaseItem.ItemRarity, is_clipped:bool=false)->Texture2D:
+static func get_rarity_background(rarity, is_clipped:bool=false)->Texture2D:
+	if rarity is BaseItem.ItemRarity:
+		pass
+	elif rarity is String:
+		rarity = BaseItem.ItemRarity.get(rarity)
+	else:
+		return null
 	if is_clipped:
 		if rarity == BaseItem.ItemRarity.Mundane:
 			return SpriteCache.get_sprite("res://assets/Sprites/Paper/Mundane_Clipped_Background.png")

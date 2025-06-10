@@ -17,6 +17,17 @@ func _load_mini_details():
 ## Load full details displayed when entry is exspanded
 func _load_full_details():
 	super()
+	var stats = thing_def.get("Stats", {})
+	for stat_name in stats.keys():
+		var stat_val = stats[stat_name]
+		var new_mod:StatModLabelContainer = premade_stat_mod_label.duplicate()
+		new_mod.set_mod_data({
+			"StatName":stat_name,
+			"ModType": "Add",
+			"Value": stat_val
+			})
+		stat_mods_container.add_child(new_mod)
+		new_mod.show()
 	
 	## Stat Mods
 	#var stat_mods = page.get_passive_stat_mods()

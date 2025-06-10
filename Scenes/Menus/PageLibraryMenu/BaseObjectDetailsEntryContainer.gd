@@ -17,7 +17,7 @@ extends BackPatchContainer
 @export var minus_icon:TextureRect
 @export var plus_icon:TextureRect
 
-@export var stat_mods_container:BoxContainer
+@export var stat_mods_container:Container
 @export var premade_stat_mod_label:HBoxContainer
 
 @export var add_item_button:Button
@@ -94,6 +94,10 @@ func _load_mini_details():
 	var icon_path = thing_def.get("Details", {}).get("LargeIcon", "")
 	var icon_sprite = SpriteCache.get_sprite(thing_load_path.path_join(icon_path), false)
 	icon.texture = icon_sprite
+	
+	var type_str = thing_def.get("ItemDetails", {}).get("Rarity", null)
+	if type_str and BaseItem.ItemRarity.keys().has(type_str):
+		icon_background.texture = ItemHelper.get_rarity_background(type_str)
 
 ## Load full details displayed when entry is exspanded
 func _load_full_details():
