@@ -89,6 +89,10 @@ static func create_class_def_files(thing_name:String):
 		DirAccess.make_dir_absolute(spites_dir_path)
 		
 static func DoThing():
+	print("\nWait.")
+	print("\nWait..")
+	print("\nWait...")
+	print("\nGo")
 	update_def_files()
 
 
@@ -123,7 +127,7 @@ static func update_def_files():
 		var file_name = file.get_file()
 		var obj_type = get_def_class_type(file_name, files)
 		print("%s \t|\tFileName: %s" % [obj_type, file_name])
-		update_def_file("ActionKey", file)
+		update_def_file(obj_type, file)
 		#break
 
 const DefVersion = "1"
@@ -140,8 +144,10 @@ static func update_def_file(object_type:String, file_path):
 	var object_key_name = ''
 	if object_type == 'Action':
 		object_key_name = 'ActionKey'
-	if object_type == 'Actor':
+	elif object_type == 'Actor':
 		object_key_name = 'ActorKey'
+	elif object_type == 'Effect':
+		object_key_name = 'EffectKey'
 	elif object_type == 'Page':
 		object_key_name = 'ItemKey'
 	elif object_type == 'Page':
@@ -227,7 +233,9 @@ static func update_def_file(object_type:String, file_path):
 				var move_props = ["AttackDetails", "AmmoData", "DamageDatas", "EffectDatas", "MissileDatas", "Preview", "SubActions", "TargetParams"]
 				var action_data = {}
 				for prop in move_props:
-					action_data[prop] = new_def[prop]
+					var val = new_def.get(prop, null)
+					if val:
+						action_data[prop] = val
 					new_def.erase(prop)
 				new_def['ActionData'] = action_data
 			elif object_type == "Page":
@@ -239,7 +247,7 @@ static func update_def_file(object_type:String, file_path):
 
 		new_def['_DefVersion'] = DefVersion
 		new_defs[key] = new_def
-	var new_file_path = file_path#.replace(".json", "_new.json")
+	var new_file_path = file_path.replace(".json", ".def")#.replace(".json", "_new.json")
 	print("Writing to: " + new_file_path)
 	var meta_file = FileAccess.open(new_file_path, FileAccess.WRITE)
 	meta_file.store_string(JSON.stringify(new_defs))
