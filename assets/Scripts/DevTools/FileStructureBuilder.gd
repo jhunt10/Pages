@@ -91,15 +91,39 @@ static func create_class_def_files(thing_name:String):
 static func DoThing():
 	update_def_files()
 
+
+static func get_def_class_type(file_name, other_files)->String:
+	var obj_type = ''
+	if file_name.contains("_ActorDefs.json"):
+		obj_type = "Actor"
+	elif file_name.contains("_EffectDefs.json"):
+		obj_type = "Effect"
+	elif file_name.contains("_ActionDefs.json"):
+		obj_type = "Action"
+	elif file_name.contains("_ItemDefs.json"):
+		var would_be_action_name = file_name.replace("ItemDefs", "ActionDefs")
+		var match_actions =  ''
+		for f:String in other_files:
+			if f.get_file() == would_be_action_name:
+				match_actions = f
+				break
+		if match_actions != '' or file_name.contains("PassivePages"):
+			obj_type = 'Page'
+		else: 
+			obj_type = 'Item'
+	return obj_type
+
 static func update_def_files():
 	var files = []
+	print("\n Updating Files:")
 	files.append_array(BaseLoadObjectLibrary._search_for_files("res://ObjectDefs/", "Defs.json"))
 	#files.append_array(BaseLoadObjectLibrary._search_for_files("res://defs/", "Defs.json"))
 	#files.append_array(BaseLoadObjectLibrary._search_for_files("res://data/", "Defs.json"))
 	for file:String in files:
 		var file_name = file.get_file()
-		print("FileName: " + file_name)
-		#update_def_file("ActionKey", file)
+		var obj_type = get_def_class_type(file_name, files)
+		print("%s \t|\tFileName: %s" % [obj_type, file_name])
+		update_def_file("ActionKey", file)
 		#break
 
 const DefVersion = "1"
@@ -108,10 +132,10 @@ static func update_def_file(object_type:String, file_path):
 	var file = FileAccess.open(file_path, FileAccess.READ)
 	var text:String = file.get_as_text()
 	
-	var backup_file_path = file_path.replace(".json", "_backup.json")
-	var backup_file = FileAccess.open(backup_file_path, FileAccess.WRITE)
-	backup_file.store_string(text)
-	backup_file.close()
+	#var backup_file_path = file_path.replace(".json", "_backup.json")
+	#var backup_file = FileAccess.open(backup_file_path, FileAccess.WRITE)
+	#backup_file.store_string(text)
+	#backup_file.close()
 	
 	var object_key_name = ''
 	if object_type == 'Action':
