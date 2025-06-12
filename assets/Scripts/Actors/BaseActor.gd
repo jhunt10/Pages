@@ -40,9 +40,9 @@ var ActorKey : String:
 	get: return _key
 func get_tagable_id(): return Id
 
-var actor_details:Dictionary:
+var actor_data:Dictionary:
 	get:
-		return get_load_val("ActorDetails", {})
+		return get_load_val("ActorData", {})
 
 var FactionIndex : int
 
@@ -283,7 +283,7 @@ func get_weapon_damage_datas(weapon_filter)->Dictionary:
 	return out_dict
 
 func get_effect_immunity()->Array:
-	var immunities = actor_details.get("ImmuneToEffects", [])
+	var immunities = actor_data.get("ImmuneToEffects", [])
 	immunities.append_array(effects.get_effect_immunities())
 	return immunities
 

@@ -14,9 +14,9 @@ func _debug_name()->String:
 func _load_slots_sets_data()->Array:
 	if bag_item_id:
 		var bag_item = ItemLibrary.get_item(bag_item_id)
-		if bag_item:
-			return bag_item.get_load_val("ItemSlotsData", [])
-	var defaults = _actor.get_load_val("DefaultBagItemSlotSet")
+		if bag_item and bag_item is BaseBagEquipment:
+			return bag_item.equipment_data.get("ItemSlotsData", [])
+	var defaults = _actor.actor_data.get("DefaultBagItemSlotSet", [])
 	if defaults:
 		return defaults
 	return []

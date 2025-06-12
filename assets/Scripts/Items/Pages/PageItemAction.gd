@@ -58,12 +58,12 @@ func sort_subacts_ascending(a, b):
 ##    Icons  Data     ##
 ########################
 func get_qued_icon(turn_index:int, actor:BaseActor =  null)->Texture2D:
-	if self.action_data.get("UseDynamicIcons", false):
+	if action_data.get("Preview", {}).get("UseDynamicIcons", false):
 		var turn_data = actor.Que.QueExecData.get_data_for_turn(turn_index)
 		var icon = turn_data.on_que_data.get("OverrideQueIcon", null)
 		if icon:
 			return icon
-	var equip_slot = action_data.get("UseEquipmentIcon", null)
+	var equip_slot = action_data.get("Preview", {}).get("UseEquipmentIcon", null)
 	if equip_slot:
 		var equipments = actor.equipment.get_equipt_items_of_slot_type(equip_slot)
 		if equipments.size() > 0:

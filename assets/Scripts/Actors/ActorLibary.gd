@@ -75,6 +75,7 @@ static func create_actor(key:String, data:Dictionary, premade_id:String = '')->B
 		if item:
 			if !actor.items.add_item_to_first_valid_slot(item):
 				printerr("ActorLibrary.create_actor: Failed add Item '%s'." % [item_key])
+				ItemLibrary.delete_item(item)
 	
 	actor.suppress_equipment_changed = false
 	actor.equipment_changed.emit()
