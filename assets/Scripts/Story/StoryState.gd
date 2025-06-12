@@ -68,7 +68,8 @@ func start_new_story():
 	
 	_session_start_unix_time = Time.get_unix_time_from_system()
 	_story_stage_index = -1
-	load_next_story_scene()
+	#load_next_story_scene()
+	MainRootNode.Instance.open_camp_menu()
 
 func load_next_story_scene():
 	var next_scene_data = StatcStoryStages.get_stage_data(_story_stage_index + 1)

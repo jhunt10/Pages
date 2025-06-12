@@ -64,7 +64,7 @@ static func create_actor(key:String, data:Dictionary, premade_id:String = '')->B
 	
 	var page_list = actor.get_load_val("SpawnPageArr", [])
 	for page_key in page_list:
-		var page = ItemLibrary.create_item(page_key + "_PageItem", {})
+		var page = ItemLibrary.get_or_create_item(page_key, page_key, {})
 		if page:
 			if !actor.pages.add_item_to_first_valid_slot(page):
 				printerr("ActorLibrary.create_actor: Failed add Page '%s'." % [page_key])

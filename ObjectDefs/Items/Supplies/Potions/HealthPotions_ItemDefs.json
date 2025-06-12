@@ -17,21 +17,22 @@
             "Rarity": "Legendary",
             "Value": 500
         },
-        "CanStack": true,
-        "EffectKey": "RegenBarStat",
-        "EffectData": {
-            "Details": {
-                "DisplayName": "Health L",
-                "SnippetDesc": "Regen 100% Health",
-                "Description": "A powerful potion that heals for 100% Health.",
-                "LargeIcon": "Sprites/HealthPotion_L_L.png",
-                "SmallIcon": "Sprites/HealthPotion_L_S.png"
-            },
-            "SubEffects": {
-                "RegenStat": {
-                    "StatName": "Health",
-                    "Value": 100,
-                    "AsPercent": true
+        "SuppliesData": {
+            "EffectKey": "RegenBarStat",
+            "EffectData": {
+                "Details": {
+                    "DisplayName": "Health L",
+                    "SnippetDesc": "Regen 100% Health",
+                    "Description": "A powerful potion that heals for 100% Health.",
+                    "LargeIcon": "Sprites/HealthPotion_L_L.png",
+                    "SmallIcon": "Sprites/HealthPotion_L_S.png"
+                },
+                "SubEffects": {
+                    "RegenStat": {
+                        "StatName": "Health",
+                        "Value": 100,
+                        "AsPercent": true
+                    }
                 }
             }
         }
@@ -54,24 +55,25 @@
             "Rarity": "Rare",
             "Value": 100
         },
-        "CanStack": true,
-        "EffectKey": "RegenBarStat",
-        "EffectData": {
-            "Details": {
-                "DisplayName": "Health M",
-                "SnippetDesc": "Regen 50% Health",
-                "Description": "A strong potion that heals for 50% Health.",
-                "Tags": [
-                    "Potion"
-                ],
-                "LargeIcon": "Sprites/HealthPotion_M_L.png",
-                "SmallIcon": "Sprites/HealthPotion_M_S.png"
-            },
-            "SubEffects": {
-                "RegenStat": {
-                    "StatName": "Health",
-                    "Value": 50,
-                    "AsPercent": true
+        "SuppliesData": {
+            "EffectKey": "RegenBarStat",
+            "EffectData": {
+                "Details": {
+                    "DisplayName": "Health M",
+                    "SnippetDesc": "Regen 50% Health",
+                    "Description": "A strong potion that heals for 50% Health.",
+                    "Tags": [
+                        "Potion"
+                    ],
+                    "LargeIcon": "Sprites/HealthPotion_M_L.png",
+                    "SmallIcon": "Sprites/HealthPotion_M_S.png"
+                },
+                "SubEffects": {
+                    "RegenStat": {
+                        "StatName": "Health",
+                        "Value": 50,
+                        "AsPercent": true
+                    }
                 }
             }
         }
@@ -94,24 +96,25 @@
             "Rarity": "Common",
             "Value": 20
         },
-        "CanStack": true,
-        "EffectKey": "RegenBarStat",
-        "EffectData": {
-            "Details": {
-                "DisplayName": "Health S",
-                "SnippetDesc": "Regen 25% Health",
-                "Description": "A common potion that heals for a 25% Health.",
-                "Tags": [
-                    "Potion"
-                ],
-                "LargeIcon": "Sprites/HealthPotion_S_L.png",
-                "SmallIcon": "Sprites/HealthPotion_S_S.png"
-            },
-            "SubEffects": {
-                "RegenStat": {
-                    "StatName": "Health",
-                    "Value": 25,
-                    "AsPercent": true
+        "SuppliesData": {
+            "EffectKey": "RegenBarStat",
+            "EffectData": {
+                "Details": {
+                    "DisplayName": "Health S",
+                    "SnippetDesc": "Regen 25% Health",
+                    "Description": "A common potion that heals for a 25% Health.",
+                    "Tags": [
+                        "Potion"
+                    ],
+                    "LargeIcon": "Sprites/HealthPotion_S_L.png",
+                    "SmallIcon": "Sprites/HealthPotion_S_S.png"
+                },
+                "SubEffects": {
+                    "RegenStat": {
+                        "StatName": "Health",
+                        "Value": 25,
+                        "AsPercent": true
+                    }
                 }
             }
         }

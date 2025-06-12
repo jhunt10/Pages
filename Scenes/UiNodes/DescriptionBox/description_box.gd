@@ -48,11 +48,7 @@ func _hide_pop_up(data):
 		popup_container.hide()
 
 func set_page_item(page:BasePageItem, actor:BaseActor=null):
-	if page.get_action_key():
-		var action = page.get_action()
-		set_object(action._def, action, actor)
-	else:
-		set_object(page._def, page, actor)
+	set_object(page._def, page, actor)
 
 func set_object(object_def:Dictionary, object_inst:BaseLoadObject, actor:BaseActor):
 	self.clear()
@@ -85,7 +81,7 @@ func get_damage_colored_text(damage_type, text_value='')->String:
 
 func _build_bbcode_array(object_def:Dictionary, object_inst:BaseLoadObject, actor:BaseActor)->Array:
 	var out_arr = []
-	var raw_description = object_def.get("Details", {}).get("Description", "")
+	var raw_description = object_def.get("#ObjDetails", {}).get("Description", "")
 	var tokens = raw_description.split("@@")
 	var out_line = ''
 	for token:String in tokens:
@@ -105,18 +101,37 @@ func _build_bbcode_array(object_def:Dictionary, object_inst:BaseLoadObject, acto
 				elif sub_tokens[1] == "DmgColor":
 					var color_code = DamageHelper.get_damage_color(sub_tokens[2], true) 
 					start_tag = "[color=#" + color_code + "][outline_size=4][outline_color=#000000]"
-					mid_value = sub_tokens[2]
+					if sub_tokens.size() == 4:
+						mid_value = sub_tokens[3]
+					else:
+						mid_value = sub_tokens[2]
 					end_tag = "[/outline_color][/outline_size][/color]"
+				elif sub_tokens[1] == "Ammo":
+					var ammo_type = sub_tokens[2]
+					if ammo_type == "Mag":
+						start_tag = "[color=#A0A0FF][outline_size=4][outline_color=#30304C]"
+					elif ammo_type == "Phy":
+						start_tag = "[color=#FFD093][outline_size=4][outline_color=#7F5F00]"
+					elif ammo_type == "Abn":
+						start_tag = "[color=#FFFFFF][outline_size=4][outline_color=#000000]"
+					else:
+						start_tag = "[color=#262626][outline_size=4][outline_color=#5E5E5E]"
+					
+					mid_value = sub_tokens[3]
+					end_tag = "[/outline_color][/outline_size][/color]"
+				elif sub_tokens.size() == 3 and sub_tokens[1] == "Blue":
+					start_tag = "[color=#000046]"
+					mid_value = sub_tokens[2]
 				else:
 					mid_value = sub_tokens[2]
 				out_line += start_tag + mid_value + end_tag
 				
 			"#AccMod":
-				var attack_details = object_def.get("AttackDetails", {})
+				var attack_details = object_def.get("ActionData", {}).get("AttackDetails", {})
 				var acc_mod = attack_details.get("AccuracyMod", 1)
 				out_line += RED_TEXT + str(acc_mod * 100) + "% Accuracy[/color]"
 			"#TrgParm":
-				var target_params_datas = object_def.get("TargetParams", {})
+				var target_params_datas = object_def.get("ActionData", {}).get("TargetParams", {})
 				var param_data = target_params_datas.get(sub_tokens[1], {})
 				if param_data.has(sub_tokens[2]):
 					out_line += RED_TEXT + str(param_data[sub_tokens[2]]) + "[/color]"
@@ -126,11 +141,15 @@ func _build_bbcode_array(object_def:Dictionary, object_inst:BaseLoadObject, acto
 				var no_actor_text = ''
 				if sub_tokens.size() > 2:
 					no_actor_text = sub_tokens[2]
-				if object_inst is BaseAction:
+				if object_inst is PageItemAction:
 					var damage_datas = object_inst.get_damage_datas(actor, damage_key)
 					for data_key:String in damage_datas.keys():
 						if data_key.begins_with(damage_key):
 							damage_data = damage_datas[data_key]
+				elif object_def.has("ActionData"):
+					damage_data = object_def.get("ActionData", {}).get("DamageDatas", {}).get(damage_key, {})
+				elif object_def.has("EffectData"):
+					damage_data = object_def.get("EffectData", {}).get("DamageDatas", {}).get(damage_key, {})
 				elif object_def.has("DamageDatas"):
 					damage_data = object_def.get("DamageDatas", {}).get(damage_key, {})
 				if damage_data.size() == 0:
@@ -181,8 +200,8 @@ func _build_bbcode_array(object_def:Dictionary, object_inst:BaseLoadObject, acto
 				var effect_data = {}
 				if object_def.has("EffectDatas"):
 					effect_data = object_def.get("EffectDatas", {}).get(sub_tokens[1], null)
-				elif object_def.has("PageDetails"):
-					effect_data = object_def['PageDetails'].get("EffectData", null)
+				elif object_def.has("ActionData"):
+					effect_data = object_def['ActionData'].get("EffectDatas", null).get(sub_tokens[1], null)
 				if not effect_data:
 					continue
 				var effect_key = effect_data.get("EffectKey", "")
@@ -210,8 +229,10 @@ func _build_bbcode_array(object_def:Dictionary, object_inst:BaseLoadObject, acto
 				var mod_data = {}
 				if object_def.has("StatMods"):
 					mod_data = object_def.get("StatMods",{}).get(sub_tokens[1],{})
-				elif object_def.has("PageDetails"):
-					mod_data = object_def.get("PageDetails").get("StatMods",{}).get(sub_tokens[1],{})
+				elif object_def.has("EquipmentData"):
+					mod_data = object_def.get("EquipmentData").get("StatMods",{}).get(sub_tokens[1],{})
+				elif object_def.has("EffectData"):
+					mod_data = object_def.get("EffectData").get("StatMods",{}).get(sub_tokens[1],{})
 				var parsed_lines = _parse_stat_mod(mod_data, object_def, object_inst, actor, sub_tokens)
 				out_arr.append(out_line)
 				out_arr.append_array(parsed_lines)
@@ -221,15 +242,15 @@ func _build_bbcode_array(object_def:Dictionary, object_inst:BaseLoadObject, acto
 				var mod_data = {}
 				if object_def.has("DamageMods"):
 					mod_data = object_def.get("DamageMods",{}).get(sub_tokens[1],{})
-				elif object_def.has("PageDetails"):
-					mod_data = object_def.get("PageDetails").get("DamageMods",{}).get(sub_tokens[1],{})
+				elif object_def.has("EquipmentData"):
+					mod_data = object_def.get("EquipmentData").get("DamageMods",{}).get(sub_tokens[1],{})
 				out_line += _parse_damage_mod(sub_tokens[2], mod_data)
 			'#AtkMod':
 				var mod_data = {}
 				if object_def.has("AttackMods"):
 					mod_data = object_def.get("AttackMods",{}).get(sub_tokens[1],{})
-				elif object_def.has("PageDetails"):
-					mod_data = object_def.get("PageDetails").get("AttackMods",{}).get(sub_tokens[1],{})
+				elif object_def.has("EquipmentData"):
+					mod_data = object_def.get("EquipmentData").get("AttackMods",{}).get(sub_tokens[1],{})
 				if sub_tokens[2] == 'DmgMod':
 					var dmg_mod = mod_data.get("DamageMods", {}).get(sub_tokens[3], {})
 					out_line += _parse_damage_mod(sub_tokens[4], dmg_mod)
@@ -298,6 +319,8 @@ func _parse_damage_mod(parse_type:String, mod_data:Dictionary)->String:
 func _parse_stat_mod(mod_data:Dictionary, object_def:Dictionary, object_inst:BaseLoadObject, actor:BaseActor, sub_tokens:Array)->Array:
 	var out_arr = []
 	var out_line = ''
+	if mod_data.size() == 0:
+		return ["No Mod"]
 	# Multiple mods compressed into one line
 	if sub_tokens[1] == "MultiMods":
 		return [_parse_stat_mod_multi(object_def, object_inst, actor, sub_tokens)]
@@ -414,7 +437,7 @@ func _parse_effect(effect_key:String, effect_data:Dictionary, prop_key:String, a
 	var effect_def = EffectLibrary.get_merged_effect_def(effect_key, effect_data)
 	if prop_key == '' or prop_key == 'Description':
 		var sub_lines = _build_bbcode_array(effect_def, null, actor)
-		var display_name = effect_def.get("Details", {}).get("DisplayName", "???")
+		var display_name = effect_def.get("#ObjDetails", {}).get("DisplayName", "???")
 		out_line += "[color=blue]" + display_name + ". [/color]"
 		out_arr.append(out_line)
 		out_line = ''
@@ -424,9 +447,9 @@ func _parse_effect(effect_key:String, effect_data:Dictionary, prop_key:String, a
 		out_line += str(effect_data.get("ApplicationChance", 0) * 100) + "%"
 	elif prop_key == 'Name':
 		
-		out_line += "[color=blue]" + effect_def.get("Details", {}).get("DisplayName", "???") + "[/color]"
+		out_line += "[color=blue]" + effect_def.get("#ObjDetails", {}).get("DisplayName", "???") + "[/color]"
 	elif prop_key == 'Duration':
-		var duration_data = effect_def.get("EffectDetails", {}).get("DurationData", {})
+		var duration_data = effect_def.get("EffectData", {}).get("EffectDetails", {}).get("DurationData", {})
 		var value = duration_data.get("BaseDuration", 0)
 		var type = duration_data.get("DurationTrigger", '')
 		var type_str = type.replace("End", '').replace("Start", '').trim_prefix("On")
@@ -441,7 +464,7 @@ func _parse_effect(effect_key:String, effect_data:Dictionary, prop_key:String, a
 				#url_line += lin
 		##url_line = "Test"
 		#url_line = url_line.replace("[", "|<|").replace("]", "|>|")
-		out_line += "[color=blue]" + "[url={\"EffectKey\":\"" + effect_key + "\"}]" +  effect_def.get("Details", {}).get("DisplayName", "???") + "[/url][/color]"
+		out_line += "[color=blue]" + "[url={\"EffectKey\":\"" + effect_key + "\"}]" +  effect_def.get("#ObjDetails", {}).get("DisplayName", "???") + "[/url][/color]"
 		
 	out_arr.append(out_line)
 	return out_arr

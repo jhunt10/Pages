@@ -3,6 +3,7 @@ extends VBoxContainer
 var root_node:MainRootNode = MainRootNode.Instance
 @onready var main_container = $VBoxContainer
 @onready var tutorial_button:TextureButton = $VBoxContainer/TutorialContainer/TutorialButton
+@onready var pages_button:TextureButton = $VBoxContainer/PagesContainer/PagesButton
 @onready var start_button:TextureButton = $VBoxContainer/StartContainer/StartButton
 @onready var load_button:TextureButton = $VBoxContainer/LoadContainer/LoadButton
 @onready var more_button:TextureButton = $VBoxContainer/MoreContainer/MoreButton
@@ -24,7 +25,7 @@ func _ready() -> void:
 	tutorial_button.pressed.connect(_open_tutorial)
 	dev_tools_button.pressed.connect(_dev_tools)
 	animation_button.pressed.connect(_open_animation_tester)
-	
+	pages_button.pressed.connect(_open_pages_menu)
 	more_button.pressed.connect(show_sub_menu.bind("More"))
 	back_button.pressed.connect(show_sub_menu.bind("Main"))
 	quit_button.pressed.connect(quit_game)
@@ -43,6 +44,9 @@ func show_sub_menu(menu_name):
 	pass
 
 func start_combat():
+	StoryState.start_new_story()
+
+func _open_pages_menu():
 	var new_cards = load("res://Scenes/Menus/PageLibraryMenu/page_library_menu.tscn").instantiate()
 	root_node.add_child(new_cards)
 	

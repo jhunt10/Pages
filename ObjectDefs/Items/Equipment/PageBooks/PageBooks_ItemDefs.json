@@ -20,9 +20,7 @@
         "BasePassiveCount": 1,
         "BaseActionCount": 7,
         "ItemSlotsData": [
-        ],
-        "StatMods": {
-        }
+        ]
     },
     {
         "ItemKey":"BasePageBook_Common",
@@ -44,9 +42,7 @@
         "BasePassiveCount": 2,
         "BaseActionCount": 8,
         "ItemSlotsData": [
-        ],
-        "StatMods": {
-        }
+        ]
     },
     {
         "ItemKey":"BasePageBook_Rare",
@@ -68,9 +64,7 @@
         "BasePassiveCount": 3,
         "BaseActionCount": 9,
         "ItemSlotsData": [
-        ],
-        "StatMods": {
-        }
+        ]
     },
     {
         "ItemKey":"BasePageBook_Legendary",
@@ -92,13 +86,28 @@
         "BasePassiveCount": 4,
         "BaseActionCount": 10,
         "ItemSlotsData": [
-        ],
-        "StatMods": {
-        }
+        ]
     },
 
 
 
+    {
+        "ItemKey":"DoctorNote_PageBook",
+        "ParentKey": "BasePageBook_Mundane",
+        "_ObjectScript": "res://assets/Scripts/Items/Equipment/BaseQueEquipment.gd",
+        "Details":{
+			"DisplayName": "Docter's Note",
+			"SnippetDesc": "I got a note from my doctor.",
+			"Description": "@@#Color:Blue:Actor@@ is medicaly exhempted from doing @@#Color:Red:Combat@@ because they are very sick.\n-From, My Docter",
+			"Tags": ["Book"],
+			"LargeIcon":"Sprites/DoctorNote.png",
+			"SmallIcon":"Sprites/DoctorNote.png"
+		},
+        "BasePassiveCount": 0,
+        "BaseActionCount": 0,
+        "ItemSlotsData": [
+        ]
+    },
 
     {
         "ItemKey":"OldJournal_PageBook",
@@ -128,9 +137,7 @@
         "BasePassiveCount": 2,
         "BaseActionCount": 6,
         "ItemSlotsData": [
-        ],
-        "StatMods": {
-        }
+        ]
     },
     {
         "ItemKey":"Bandit_PageBook",
@@ -156,9 +163,7 @@
                     "RequiredTags":"Attack"
                 }
             }
-        ],
-        "StatMods": {
-        }
+        ]
     },
 
 
@@ -188,9 +193,7 @@
                     "RequiredTags":"Movement"
                 }
             }
-        ],
-        "StatMods": {
-        }
+        ]
     },
     {
         "ItemKey":"LittleBlack_PageBook",
@@ -208,9 +211,7 @@
         "BasePassiveCount": 3,
         "BaseActionCount": 7,
         "ItemSlotsData": [
-        ],
-        "StatMods": {
-        }
+        ]
     },
     {
         "ItemKey":"MageNoteBook_PageBook",
@@ -227,8 +228,6 @@
         "PagesPerRound": 5,
         "BasePassiveCount": 2,
         "BaseActionCount": 6,
-        "StatMods": {
-        },
         "ItemSlotsData": [
             {
                 "Key":"Spells",

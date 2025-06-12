@@ -72,14 +72,15 @@ func build_effects():
 		if not _actor.effects.has_effect(effect_id):
 			item_id_to_effect_id.erase(page_id)
 	for page in list_items():
-		var effect_def = page.get_effect_def()
-		if effect_def:
-			var existing_id = item_id_to_effect_id.get(page.Id)
-			if existing_id:
-				continue
-			var effect_key = effect_def.get("EffectKey")
-			var new_effect = EffectHelper.create_effect(_actor, page, effect_key, effect_def, null, '', true)
-			item_id_to_effect_id[page.Id] = new_effect.Id
+		if page is PageItemPassive:
+			var effect_def = page.get_effect_def()
+			if effect_def:
+				var existing_id = item_id_to_effect_id.get(page.Id)
+				if existing_id:
+					continue
+				var effect_key = effect_def.get("EffectKey")
+				var new_effect = EffectHelper.create_effect(_actor, page, effect_key, effect_def, null, '', true)
+				item_id_to_effect_id[page.Id] = new_effect.Id
 
 func get_tags_added_to_actor()->Array:
 	var out_list = []
@@ -92,27 +93,17 @@ func get_tags_added_to_actor()->Array:
 func list_action_keys()->Array:
 	var out_list = []
 	for item in list_items():
-		var key = item.get_action_key()
-		if key:
-			out_list.append(key)
+		if item is PageItemAction:
+			out_list.append(item.Id)
 	return out_list
 
 func list_actions()->Array:
 	var out_list = []
 	for item in list_items():
-		var action_key = item.get_action_key()
-		if not action_key:
-			continue
-		var action = ActionLibrary.get_action(item.get_action_key())
-		if action:
-			out_list.append(action)
+		if item is PageItemAction:
+			out_list.append(item)
 	return out_list
 
-func get_page_item_for_action_key(action_key:String)->BasePageItem:
-	for page:BasePageItem in list_items():
-		if page.get_action_key() == action_key:
-			return page
-	return null
 
 func _on_item_removed_from_slot(item_id:String, index:int):
 	if item_id_to_effect_id.keys().has(item_id):
@@ -128,9 +119,10 @@ func _on_item_added_to_slot(item:BaseItem, index:int):
 	if not page:
 		printerr("PageHolder._on_item_added_to_slot: Item '%s' is not of type BasePageItem." % [item.Id])
 		return
-	var effect_def = page.get_effect_def()
-	if effect_def:
-		var effect_key = effect_def.get("EffectKey")
-		var new_effect = EffectHelper.create_effect(_actor, page, effect_key, effect_def)
-		item_id_to_effect_id[item.Id] = new_effect.Id
+	if item is PageItemPassive:
+		var effect_def = page.get_effect_def()
+		if effect_def:
+			var effect_key = effect_def.get("EffectKey")
+			var new_effect = EffectHelper.create_effect(_actor, page, effect_key, effect_def)
+			item_id_to_effect_id[item.Id] = new_effect.Id
 	class_page_changed.emit()

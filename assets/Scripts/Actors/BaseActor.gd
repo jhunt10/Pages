@@ -67,7 +67,7 @@ func _init(key:String, load_path:String, def:Dictionary, id:String, data:Diction
 	stats.held_stats_changed.connect(_on_stat_change)
 	stats.bar_stat_changed.connect(_on_health_change)
 	effects = EffectHolder.new(self)
-	details = ObjectDetailsData.new(_def_load_path, _def.get("Details", {}))
+	details = ObjectDetailsData.new(_def_load_path, _def.get("#ObjDetails", {}))
 	equipment = EquipmentHolder.new(self)
 	equipment.items_changed.connect(_on_equipment_holder_items_change)
 	items = BagItemHolder.new(self)
@@ -88,7 +88,7 @@ func get_name()->String:
 
 func get_tags(): 
 	var tag_list = []
-	tag_list.append_array(get_tags())
+	tag_list.append_array(super())
 	var aditional_tags = pages.get_tags_added_to_actor()
 	aditional_tags.append_array(effects.get_tags_added_to_actor())
 	for added_tag in aditional_tags:

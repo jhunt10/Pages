@@ -56,7 +56,7 @@ func clear():
 
 func get_keys_to_subeditor_mapping()->Dictionary:
 	return {
-		"Details": details_editor_control
+		"#ObjDetails": details_editor_control
 	}
 
 ## Returns the property keys of a subeditor. Used to get things like DamageDatas.

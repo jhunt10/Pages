@@ -20,30 +20,33 @@ func get_data_file_sufix()->String:
 	return "_ActionDefs.json"
 func is_object_static(object_def:Dictionary)->bool:
 	return true
-func get_object_script_path(object_def:Dictionary)->String:
-	return "res://assets/Scripts/Actions/BaseAction.gd"
+#func get_object_script_path(object_def:Dictionary)->String:
+	#return "res://assets/Scripts/Actions/PageItemAction.gd"
 
 func _init() -> void:
 	if Instance != null:
 		printerr("Multiple ActionLibrarys created.")
 		return
 	Instance = self
-	Instance.init_load()
+	#Instance.init_load()
 
 static func list_all_actions()->Array:
-	if !Instance: Instance = ActionLibrary.new()
-	return Instance._static_objects.values()
+	return []
+	#if !Instance: Instance = ActionLibrary.new()
+	#return Instance._static_objects.values()
 
 static func get_action_def(key:String)->Dictionary:
-	if !Instance: Instance = ActionLibrary.new()
-	return Instance.get_object_def(key)
+	return {}
+	#if !Instance: Instance = ActionLibrary.new()
+	#return Instance.get_object_def(key)
 	
-static func get_action(action_key:String)->BaseAction:
-	if !Instance: Instance = ActionLibrary.new()
-	var action = Instance.get_object(action_key)
-	if !action:
-		printerr("ActionLibrary.get_action: No Action found with id '%s'." % [action_key])
-	return action
+static func get_action(action_key:String)->PageItemAction:
+	return null
+	#if !Instance: Instance = ActionLibrary.new()
+	#var action = Instance.get_object(action_key)
+	#if !action:
+		#printerr("ActionLibrary.get_action: No Action found with id '%s'." % [action_key])
+	#return action
 
 #static func get_action_icon(file_path:String)->Texture2D:
 	##return SpriteCache.get_sprite(file_path)

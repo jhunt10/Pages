@@ -10,10 +10,25 @@
 			"LargeIcon":"Sprites/HolyHat.png",
 			"SmallIcon":"Sprites/HolyHat.png"
 		},
-        "SpriteSheet":"Sprites/HolyHat_SpriteSheet.png",
-        "EquipSlot":"Head",
-        "Armor": 0,
-        "Ward": 5
+        "EquipmentDetails":
+        {
+            "EquipSlot":"Head",
+            "SpriteData": {
+                "SpriteSheet":"Sprites/HolyHat_SpriteSheet.png"
+            },
+            "StatMods": {
+                "ArmorBonus": {
+                    "ModType": "Add",
+                    "StatName": "Ward",
+                    "Value": 5
+                }
+            },
+            "Requirments": {
+                "ReqStats": {
+                    "Wisdom": 10
+                }
+            }
+        }
     },
     {
         "ItemKey":"OldPriestArmor",
@@ -26,10 +41,25 @@
 			"LargeIcon":"Sprites/HolyRobes.png",
 			"SmallIcon":"Sprites/HolyRobes.png"
 		},
-        "SpriteSheet":"Sprites/HolyRobes_SpriteSheet.png",
-        "EquipSlot":"Body",
-        "Armor": 0,
-        "Ward": 5
+        "EquipmentDetails":
+        {
+            "EquipSlot":"Body",
+            "SpriteData": {
+                "SpriteSheet":"Sprites/HolyRobes_SpriteSheet.png"
+            },
+            "StatMods": {
+                "ArmorBonus": {
+                    "ModType": "Add",
+                    "StatName": "Ward",
+                    "Value": 5
+                }
+            },
+            "Requirments": {
+                "ReqStats": {
+                    "Wisdom": 10
+                }
+            }
+        }
     },
     {
         "ItemKey":"OldPriestBoots",
@@ -42,9 +72,24 @@
 			"LargeIcon":"Sprites/HolyBoots.png",
 			"SmallIcon":"Sprites/HolyBoots.png"
 		},
-        "SpriteSheet":"Sprites/HolyBoots_SpriteSheet.png",
-        "EquipSlot":"Feet",
-        "Armor": 0,
-        "Ward": 5
+        "EquipmentDetails":
+        {
+            "EquipSlot":"Feet",
+            "SpriteData": {
+                "SpriteSheet":"Sprites/HolyBoots_SpriteSheet.png"
+            },
+            "StatMods": {
+                "ArmorBonus": {
+                    "ModType": "Add",
+                    "StatName": "Ward",
+                    "Value": 5
+                }
+            },
+            "Requirments": {
+                "ReqStats": {
+                    "Wisdom": 10
+                }
+            }
+        }
     }
 ]

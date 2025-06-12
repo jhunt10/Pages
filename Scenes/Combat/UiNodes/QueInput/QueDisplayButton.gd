@@ -27,7 +27,7 @@ func set_is_gap(val:bool):
 		page_icon.hide()
 		button.hide()
 		
-func set_action(index:int, actor:BaseActor, action:BaseAction):
+func set_action(index:int, actor:BaseActor, action:PageItemAction):
 	if action and not is_gap:
 		page_icon.visible = true
 		background.texture = filled_background_texture

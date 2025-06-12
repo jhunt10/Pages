@@ -25,7 +25,7 @@ static func build_action_ques(clear_existing_ques:bool=false):
 		if actor.ai_def.has("PrebuiltQueArr"):
 			var action_keys_que = actor.ai_def['PrebuiltQueArr']
 			for action_key in action_keys_que:
-				var action = ActionLibrary.get_action(action_key)
+				var action = ItemLibrary.get_item(action_key)
 				actor.Que.que_action(action)
 		
 		# Disable positions
@@ -54,8 +54,8 @@ static func build_action_ques(clear_existing_ques:bool=false):
 			# Re-Disnable current Actor's Position for Pathing
 			astar.set_pos_disabled(current_pos, true)
 			
-			if action.PreviewMoveOffset:
-				MoveHandler.handle_movement(turn_state, actor, action.PreviewMoveOffset, "", true)
+			if action.has_preview_move_offset():
+				MoveHandler.handle_movement(turn_state, actor, action.get_preview_move_offset(), "", true)
 				var new_pos = turn_state.get_actor_pos(actor)
 				if new_pos != current_pos:
 					astar.set_pos_disabled(current_pos, false)
@@ -66,7 +66,7 @@ static func build_action_ques(clear_existing_ques:bool=false):
 			if LOGGING: print("\t\t %s | %s" % [actor.Id, turn_state.get_actor_pos(actor)] )
 	pass
 
-static func _choose_page_for_actor(actor:BaseActor, game_state:GameStateData)->BaseAction:
+static func _choose_page_for_actor(actor:BaseActor, game_state:GameStateData)->PageItemAction:
 	var current_action = actor.Que.get_action_for_turn(game_state.current_turn_index)
 	if current_action:
 		return current_action
@@ -122,8 +122,9 @@ static func _choose_page_for_actor(actor:BaseActor, game_state:GameStateData)->B
 			return move_action
 	else:
 		printerr("No Path found for actor: %s" % [actor.Id])
-		
-	return ActionLibrary.get_action("Wait")
+	
+	var wait_action = ItemLibrary.get_item("Wait")
+	return wait_action
 	
 	pass
 
@@ -137,10 +138,12 @@ static func _get_actor_action_options_data(actor:BaseActor)->Dictionary:
 	var action_list = actor.get_action_key_list()
 	for action_key in action_list:
 		var action = ActionLibrary.get_action(action_key)
+		if not action:
+			continue
 		if action.has_ammo(actor):
 			if not actor.Que.can_pay_page_ammo(action_key):
 				continue
-		if action.PreviewMoveOffset:
+		if action.has_preview_move_offset():
 			data['Moves'].append(action_key)
 		if action.is_attack(actor):
 			data['Attacks'].append(action_key)
@@ -166,7 +169,7 @@ static func get_closest_enemy(actor:BaseActor, game_state:GameStateData)->BaseAc
 			closest_actor = enemy
 	return closest_actor
 
-static func get_damage_data_of_action(action:BaseAction, actor:BaseActor)->Dictionary:
+static func get_damage_data_of_action(action:PageItemAction, actor:BaseActor)->Dictionary:
 	var damage_data = action.DamageDatas
 	if damage_data.size() > 0:
 		return damage_data
@@ -179,7 +182,7 @@ static func get_damage_data_of_action(action:BaseAction, actor:BaseActor)->Dicti
 	return {}
 		
 
-static func try_handle_get_target_sub_action(actor:BaseActor, selection_data:TargetSelectionData, action:BaseAction, game_state:GameStateData)->bool:
+static func try_handle_get_target_sub_action(actor:BaseActor, selection_data:TargetSelectionData, action:PageItemAction, game_state:GameStateData)->bool:
 	var turndata = selection_data.focused_actor.Que.QueExecData.get_current_turn_data()
 	var potentail_actors = []
 	var coor_to_actor = {}

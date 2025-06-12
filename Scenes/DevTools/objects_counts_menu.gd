@@ -72,6 +72,6 @@ func _on_searched_item_selected(type, id):
 	if type == "Effect":
 		thing = EffectLibrary.get_effect(id)
 	if type == "Action":
-		thing = ActionLibrary.get_action(id)
+		thing = ItemLibrary.get_item(id)
 	if thing:
 		def_data_menu.set_object(thing)

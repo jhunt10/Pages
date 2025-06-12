@@ -13,7 +13,7 @@ func get_action_tags(_subaction_data:Dictionary)->Array:
 	return ["SpawnMissile"]
 
 
-func do_thing(parent_action:BaseAction, subaction_data:Dictionary, que_exe_data:QueExecutionData,
+func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, que_exe_data:QueExecutionData,
 				game_state:GameStateData, actor:BaseActor)->bool:
 	var target_params = _get_target_parameters(parent_action, actor, subaction_data)
 	var damage_data = parent_action.get_damage_data_for_subaction(actor, subaction_data)

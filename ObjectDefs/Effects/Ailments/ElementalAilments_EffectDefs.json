@@ -49,16 +49,16 @@
             "RemoveChilled": {
                 "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/OtherEffects/SubEffect_RemoveOtherEffect.gd",
                 "RemoveEffectKeys": ["AilmentChilled", "AilmentFrozen"]
+            },
+            "ApplyStatMod": {
+                "AllStatMods": true,
+                "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_ModStat.gd"
             }
-        },
-        "ApplyStatMod": {
-            "AllStatMods": true,
-            "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_ModStat.gd"
         },
         "DamageDatas": {
             "BurnDamage": {
                 "AtkStat": "Percent:HP",
-                "AtkPwrBase": 50,
+                "AtkPwrBase": 3,
                 "AtkPwrRange": 0,
                 "AtkPwrScale": 1,
                 "DefenseType": "None",

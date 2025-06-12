@@ -74,9 +74,12 @@ func _ready() -> void:
 	pass # Replace with function body.
 
 func _fill_que_with_wait():
-	var wait = ActionLibrary.get_action("Wait")
-	while not _actor.Que.is_ready():
-		_actor.Que.que_action(wait)
+	var wait = ItemLibrary.get_item("Wait")
+	if wait:
+		for r in range(_actor.Que.get_max_que_size()):
+			_actor.Que.que_action(wait)
+			if _actor.Que.is_ready():
+				break
 
 func hide_start_button():
 	#var que_display_size = que_display_control.size.x
@@ -172,10 +175,11 @@ func _build_buttons():
 			but.queue_free()
 		_page_buttons.clear()
 	var index = 0
-	for action_key in _actor.get_action_key_list():
+	var action_keys = _actor.get_action_key_list()
+	for action_key in action_keys:
 		if action_key == null:
 			continue
-		var action = ActionLibrary.get_action(action_key)
+		var action = ItemLibrary.get_item(action_key)
 		if !action:
 			printerr("que_input_control._build_buttons: Failed to find Action '%s'." % [action_key])
 			continue
@@ -220,7 +224,7 @@ func clear_preview_display():
 		_target_display_key = null
 		_target_display_action_key = null
 
-func show_preview_target_area(action:BaseAction):
+func show_preview_target_area(action:PageItemAction):
 	if _target_display_action_key == action.ActionKey:
 		return
 	var target_parms = action.get_preview_target_params(_actor)
@@ -238,14 +242,14 @@ func show_preview_target_area(action:BaseAction):
 func show_last_qued_target_area():
 	# Display last page's target area for mobile
 	if _actor and _actor.Que and _actor.Que.real_que and _actor.Que.real_que.size() > 0:
-		var last_page:BaseAction = _actor.Que.real_que[-1]
+		var last_page:PageItemAction = _actor.Que.real_que[-1]
 		if last_page.has_preview_target():
 			show_preview_target_area(last_page)
 
 #func _mouse_entered_page_button(_index, key_name):
 	#if CombatRootControl.Instance.QueController.execution_state != ActionQueController.ActionStates.Waiting:
 		#return
-	#var action:BaseAction = ActionLibrary.get_action(key_name)
+	#var action:PageItemAction = ItemLibrary.get_item(key_name)
 	#if action.PreviewMoveOffset:
 		#que_display_control.preview_que_path(action.PreviewMoveOffset)
 	#if action.has_preview_target():
@@ -267,7 +271,7 @@ func _page_button_pressed(_index, key_name):
 		page_special_selected.emit(key_name)
 		hide_page_selection()
 		return
-	var action:BaseAction = ActionLibrary.get_action(key_name)
+	var action:PageItemAction = ItemLibrary.get_item(key_name)
 	var on_que_options = action.get_on_que_options(_actor, CombatRootControl.Instance.GameState)
 	if on_que_options.size() > 0:
 		CombatUiControl.Instance.ui_state_controller.open_options_menu(_actor, "OnQueOption", on_que_options, action.ActionKey)
@@ -279,7 +283,7 @@ func _page_button_pressed(_index, key_name):
 		_actor.Que.que_action(action)
 
 #func _on_all_que_options_selected(action_key:String, options_data:Dictionary):
-	#var action:BaseAction = ActionLibrary.get_action(action_key)
+	#var action:PageItemAction = ItemLibrary.get_item(action_key)
 	#_actor.Que.que_action(action, options_data)
 	#on_que_options_menu.visible = false
 

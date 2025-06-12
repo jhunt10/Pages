@@ -79,7 +79,7 @@ func _build_slots():
 func _sync_icons():
 	#print("Sync Icons for " + _actor.ActorKey)
 	var index = 0
-	for action:BaseAction in _actor.Que.list_qued_actions():
+	for action:PageItemAction in _actor.Que.list_qued_actions():
 		if _slots.size() <= index:
 			break
 		var slot:QueMiniSlotIcon = _slots[index]

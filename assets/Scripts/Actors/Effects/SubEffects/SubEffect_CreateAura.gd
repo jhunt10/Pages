@@ -21,7 +21,7 @@ func on_effect_trigger(effect:BaseEffect, subeffect_data:Dictionary, trigger:Bas
 	var source_actor = effect.get_source_actor()
 	var effected_actor = effect.get_effected_actor()
 	var zone_data_key = subeffect_data.get("ZoneDataKey")
-	var zone_data = effect.ZoneDatas.get(zone_data_key).duplicate()
+	var zone_data = effect.get_zone_data(zone_data_key)
 	if not zone_data:
 		printerr("SubAct_CreateZone: Failed to find Zone Data with key '%s'." % [zone_data_key])
 		return BaseSubAction.Failed

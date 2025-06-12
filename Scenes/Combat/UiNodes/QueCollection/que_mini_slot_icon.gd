@@ -29,7 +29,7 @@ func set_is_gap(val:bool):
 		#page_icon.texture = null
 		unknown_icon.visible = false
 		
-func set_action(index:int, actor:BaseActor, action:BaseAction):
+func set_action(index:int, actor:BaseActor, action:PageItemAction):
 	if action:
 		#print("QueMiniSlotIcon: Setting Action: %s | %s" % [action.ActionKey, index])
 		acttion_key = action.ActionKey

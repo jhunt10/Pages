@@ -35,16 +35,16 @@ const TRIGGERS_WITH_ADDITIONAL_DATA = [
 ]
 
 func get_tagable_id(): return Id
-func get_tags(): return details.tags
-
 
 var Id:String:
 	get: return self._id
 var EffectKey:String:
 	get: return self._key
 
+var effect_data:Dictionary:
+	get: return get_load_val("EffectData", {})
 var effect_details:Dictionary:
-	get: return get_load_val("EffectDetails", {})
+	get: return effect_data.get("EffectDetails", {})
 
 # Triggers added by the system an not config, like OnTurnEnds for TurnDuration
 var system_triggers:Array = []
@@ -53,14 +53,6 @@ var _icon_sprite:String
 
 var Triggers:Array:
 	get: return _triggers_to_sub_effect_keys.keys()
-var DamageDatas:Dictionary:
-	get: return get_load_val("DamageDatas", {})
-var ZoneDatas:Dictionary:
-	get: return get_load_val("ZoneDatas", {})
-var StatModDatas:Dictionary:
-	get: return get_load_val("StatMods", {})
-var DamageModDatas:Dictionary:
-	get: return get_load_val("DamageMods", {})
 
 
 var _inital_duration:int = 0
@@ -71,7 +63,7 @@ var _duration_counter:int = -1
 var duration_trigger:EffectTriggers = EffectTriggers.None
 var DurationData:Dictionary:
 	get:
-		var dets = get_load_val("EffectDetails", {}) 
+		var dets = effect_details
 		return dets.get("DurationData", {})
 var RemainingDuration:int:
 	get: return _duration_counter
@@ -97,7 +89,7 @@ var _cached_data:Dictionary = {}
 
 func _init(key:String, def_load_path:String, def:Dictionary, id:String='', data:Dictionary={}) -> void:
 	super(key, def_load_path, def, id, data)
-	_sub_effects_data = get_load_val('SubEffects')
+	_sub_effects_data = effect_data.get('SubEffects', {})
 	var duration_data = DurationData
 	if duration_data.size() > 0:
 		_duration_merge_type = duration_data.get("MergeType", "Replace")
@@ -114,7 +106,8 @@ func _init(key:String, def_load_path:String, def:Dictionary, id:String='', data:
 	_cache_triggers()
 
 func merge_duplicate_effect(source, dup_effect_def:Dictionary):
-	var dup_details = dup_effect_def.get("EffectDetails", {})
+	var dup_data = dup_effect_def.get("EffectData", {})
+	var dup_details = dup_data.get("EffectDetails", {})
 	var dup_duration_data = dup_details.get("DurationData", {})
 	if dup_duration_data.size() > 0:
 		var dup_trigger_str = dup_duration_data.get("DurationTrigger", "")
@@ -149,7 +142,7 @@ func merge_duplicate_effect(source, dup_effect_def:Dictionary):
 					self._duration_counter = min(self._duration_counter + dup_duration, self._max_duration)
 	
 	# Merge Sub Effects
-	var dup_subs_datas = dup_effect_def.get('SubEffects', {})
+	var dup_subs_datas = dup_data.get('SubEffects', {})
 	for sub_effect_key in dup_subs_datas.keys():
 		var dupl_sub_effect_data = dup_subs_datas[sub_effect_key]
 		var sub_effect_data = _sub_effects_data[sub_effect_key]
@@ -189,7 +182,7 @@ func is_instant()->bool:
 	return effect_details.get("IsInstant", false)
 
 func get_tags_added_to_actor()->Array:
-	return get_load_val("AddTagsToActor", [])
+	return effect_details.get("AddTagsToActor", [])
 
 func get_effect_immunities():
 	return effect_details.get("AddEffectImmunity", [])
@@ -207,7 +200,7 @@ func get_active_stat_mods()->Array:
 
 func get_active_ammo_mods()->Dictionary:
 	var out_dict = {}
-	var mods_dataa = get_load_val("AmmoMods", {})
+	var mods_dataa = effect_data.get("AmmoMods", {})
 	for mod_key in mods_dataa.keys():
 		var mod_data = mods_dataa[mod_key]
 		if not mod_data.has("AmmoModKey"):
@@ -431,26 +424,26 @@ func _trigger_on_atk(sub_trigger:EffectTriggers, attack_event:AttackEvent, game_
 func get_damage_data(damage_data_key:String, actor:BaseActor=null)->Dictionary:
 	if damage_data_key == "Weapon":
 		if actor == null:
-			printerr("BaseAction.get_damage_data: Null Actor when asking for Weapon damage.")
+			printerr("PageItemAction.get_damage_data: Null Actor when asking for Weapon damage.")
 			return {}
 		var weapon = actor.equipment.get_primary_weapon()
 		if !weapon:
-			printerr("BaseAction.get_damage_data: No Weapon when asking for Weapon damage.")
+			printerr("PageItemAction.get_damage_data: No Weapon when asking for Weapon damage.")
 			return {}
 		return weapon.get_damage_data()
-	var damage_datas = get_load_val("DamageDatas", {})
+	var damage_datas = effect_data.get("DamageDatas", {})
 	if damage_datas.has(damage_data_key):
 		return damage_datas[damage_data_key].duplicate()
 	return {}
 
 func get_nested_effect_data(effect_data_key:String)->Dictionary:
-	var effect_datas = get_load_val("NestedEffectDatas", {})
+	var effect_datas = effect_data.get("NestedEffectDatas", {})
 	if effect_datas.has(effect_data_key):
 		return effect_datas[effect_data_key].duplicate()
 	return {}
 
 func get_zone_data(zone_data_key:String)->Dictionary:
-	var zone_datas = get_load_val("ZoneDatas", {})
+	var zone_datas = effect_data.get("ZoneDatas", {})
 	if zone_datas.has(zone_data_key):
 		return zone_datas[zone_data_key].duplicate()
 	return {}

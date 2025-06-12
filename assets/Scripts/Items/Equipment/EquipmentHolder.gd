@@ -415,7 +415,7 @@ func is_two_handing()->bool:
 		return false
 	var main_hand_item_id = get_item_id_in_slot(main_hand_slot_index)
 	var off_hand_item_id = get_item_id_in_slot(off_hand_slot_index)
-	if main_hand_item_id == null or off_hand_item_id == null:
+	if !main_hand_item_id or !off_hand_item_id:
 		return false
 	return main_hand_item_id == off_hand_item_id
 

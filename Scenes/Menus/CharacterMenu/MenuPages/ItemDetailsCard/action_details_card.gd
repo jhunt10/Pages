@@ -29,7 +29,7 @@ func _process(delta: float) -> void:
 func set_action(actor:BaseActor, page:BasePageItem):
 	_actor = actor
 	_item = page
-	var action = page.get_action()
+	var action = page as PageItemAction
 	description_box.set_page_item(page, actor)
 	if action.has_preview_target():
 		var target_params = action.get_preview_target_params(_actor)

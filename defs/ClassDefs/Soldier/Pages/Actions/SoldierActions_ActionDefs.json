@@ -36,7 +36,8 @@
                 "DamageDataKey": "Damage1",
                 "FramesPerTile": 6,
                 "MissileVfxData": {
-                    "VFXKey": "JavelinMissile",
+                    "VfxKey": "BaseMissile",
+                    "ScenePath":"res://assets/Scripts/VFXs/MissileVfx/missile_vfx_node.tscn",
                     "SpriteName": "Sprites/JavelinMissile.png",
                     "SpriteSheetWidth": 1,
                     "SpriteSheetHight": 1,
@@ -61,12 +62,12 @@
             ],
             "5": [
                 {
-                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_PayCost.gd"
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Misc/SubAct_PayCost.gd"
                 },
                 {
                     "DamageKey": "Damage1",
                     "MissileKey": "Missile1",
-                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_SpawnMissile.gd",
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Spawning/SubAct_SpawnMissile.gd",
                     "TargetKey": "Target1",
                     "TargetParamKey": "TargetParam"
                 }

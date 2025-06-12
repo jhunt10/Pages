@@ -36,7 +36,7 @@
                 "ImpactVfxKey": "Blunt_DamageEffect",
                 "MissileVfxData":
                 {
-                    "VFXKey": "AcornMissile",
+                    "VfxKey": "AcornMissile",
                     "AnimationName": "8_sprites_250ms_frames_loop",
                     "AnimationSpeed": 2,
                     "SpriteName": "AcornMissile.png",
@@ -63,7 +63,7 @@
             ],
             "4": [
                 {
-                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_PayCost.gd"
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Misc/SubAct_PayCost.gd"
                 },
                 {
                     "DamageKey": "Damage1",
@@ -120,7 +120,7 @@
                 "FramesPerTile": 12,
                 "MissileVfxData":
                 {
-                    "VFXKey": "FlamingAcornMissile",
+                    "VfxKey": "FlamingAcornMissile",
                     "AnimationName": "8_sprites_250ms_frames_loop",
                     "AnimationSpeed": 2,
                     "SpriteName": "FlamingAcornMissile.png",
@@ -148,7 +148,7 @@
             ],
             "4": [
                 {
-                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_PayCost.gd"
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Misc/SubAct_PayCost.gd"
                 },
                 {
                     "DamageKey": "Damage1",

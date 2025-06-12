@@ -28,7 +28,7 @@ func start_state():
 func _on_all_que_options_selected(selection_key:String, options_data:Dictionary):
 	var actor = ActorLibrary.get_actor(_selecting_for_actor_id)
 	if _queing_action_key:
-		var action = ActionLibrary.get_action(_queing_action_key)
+		var action = ItemLibrary.get_item(_queing_action_key)
 		actor.Que.que_action(action, options_data)
 	else:
 		var turn_data:TurnExecutionData = actor.Que.QueExecData.get_current_turn_data()

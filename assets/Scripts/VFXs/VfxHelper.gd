@@ -99,9 +99,15 @@ static func create_vfx_on_actor(host_actor:BaseActor, vfx_key:String, vfx_data:D
 static func create_missile_vfx_node(missile_vfx_key:String, vfx_data:Dictionary)->BaseVfxNode:
 	if FORCE_RELOAD: MainRootNode.vfx_libray.reload_vfxs()
 	var vfx_def = MainRootNode.vfx_libray.get_vfx_def(missile_vfx_key)
+	var override_load_path = (vfx_data.has("SpriteName") and vfx_data.get("SpriteName") != vfx_def.get("SpriteName"))
+	
 	var merged_data = BaseLoadObjectLibrary._merge_defs(vfx_data, vfx_def)
 	var would_be_id = missile_vfx_key + "_" + str(ResourceUID.create_id())
-	
+	if override_load_path:
+		merged_data['LoadPath'] = vfx_data.get('LoadPath', merged_data['LoadPath'])
+	else:
+		merged_data['LoadPath'] = vfx_def['LoadPath']
+		
 	var vfx_scene_path = merged_data.get("ScenePath")
 	if not vfx_scene_path:
 		printerr("VfxHelper.create_vfx_on_actor: vfx_data is missing 'ScenePath'.")

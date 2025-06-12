@@ -152,6 +152,8 @@ func load_init_state(sub_scene_data:Dictionary):
 	
 	# Make Nodes for each player actor, but hide them until they are placed
 	for player_actor:BaseActor in StoryState.list_player_actor():
+		if not player_actor:
+			continue
 		player_actor.prep_for_combat()
 		var player_actor_node = MapController.get_or_create_actor_node(player_actor, MapPos.new(0,0,0,0), true)
 		player_actor_node.prep_for_combat()

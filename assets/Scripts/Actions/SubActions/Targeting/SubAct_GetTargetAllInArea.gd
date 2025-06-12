@@ -14,7 +14,7 @@ func get_required_props()->Dictionary:
 func get_action_tags(_subaction_data:Dictionary)->Array:
 	return ["Targeting"]
 
-func do_thing(parent_action:BaseAction, subaction_data:Dictionary, metadata:QueExecutionData,
+func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, metadata:QueExecutionData,
 				game_state:GameStateData, actor:BaseActor)->bool:
 	# Check if Target is already set
 	var setting_target_key = subaction_data['SetTargetKey']

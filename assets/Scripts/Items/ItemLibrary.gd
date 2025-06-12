@@ -13,6 +13,11 @@ func get_def_file_sufix()->String:
 	return "_ItemDefs.json"
 func get_data_file_sufix()->String:
 	return "_ItemSave.json"
+func is_object_static(object_def:Dictionary)->bool:
+	if object_def.keys().has("ActionData"):
+		return true
+	return object_def.get("IsStatic", false)
+	
 func get_object_script_path(object_def:Dictionary)->String:
 	var script = super(object_def)
 	if script != '':
@@ -73,14 +78,9 @@ static func delete_item(item:BaseItem):
 static func load_items(data:Dictionary):
 	if !Instance: Instance = ItemLibrary.new()
 	Instance._load_objects_saved_data(data)
-
+	
 
 ## Returns a string explaining why object is invalid, otherwise ''
 static func validate_object(object:BaseLoadObject)->String:
 	var reason = super(object)
-	if object is BasePageItem:
-		var action_key = object.get_action_key()
-		if action_key:
-			if not ActionLibrary.Instance._object_defs.has(action_key):
-				reason = "No Action found with key '%s'." % [action_key]
 	return reason

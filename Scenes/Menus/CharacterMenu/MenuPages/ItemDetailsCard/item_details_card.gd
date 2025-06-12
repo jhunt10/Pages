@@ -193,7 +193,7 @@ func set_item(actor:BaseActor, item:BaseItem):
 		armor_details.show()
 	elif item is BasePageItem:
 		var page = (item as BasePageItem)
-		if page.get_action_key():
+		if item is PageItemAction:
 			action_details.set_action(actor, page)
 			if actor:
 				actor_has_item = actor.pages.has_item(item_id)

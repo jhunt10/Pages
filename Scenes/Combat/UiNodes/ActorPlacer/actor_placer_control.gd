@@ -56,6 +56,9 @@ func load_and_show(min_actors:int=1, max_actors:int=4):
 			button.hide()
 		else:
 			var actor = actors[index]
+			if !actor:
+				index += 1
+				continue
 			if first_actor_id == '':
 				first_actor_id = actor.Id
 			button.actor_icon.texture = actor.sprite.get_portrait_sprite()

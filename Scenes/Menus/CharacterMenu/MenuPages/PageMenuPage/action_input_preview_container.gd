@@ -13,7 +13,7 @@ func set_actor(actor:BaseActor):
 		child.queue_free()
 	premade_page_icon.hide()
 	var slot_count = 0
-	for action:BaseAction in actor.pages.list_actions():
+	for action:PageItemAction in actor.pages.list_actions():
 		var new_icon = premade_page_icon.duplicate()
 		new_icon.get_child(0).texture = action.get_small_page_icon(actor)
 		new_icon.show()

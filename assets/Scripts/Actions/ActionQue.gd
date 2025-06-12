@@ -82,14 +82,14 @@ func turn_to_que_index(turn_index:int)->int:
 func is_ready()->bool:
 	return real_que.size() ==  get_max_que_size()
 
-func get_action_for_turn(turn_index : int)->BaseAction:
+func get_action_for_turn(turn_index : int)->PageItemAction:
 	var real_index = turn_to_que_index(turn_index)
 	if real_index < 0 or real_index >= real_que.size():
 		return null
 	return real_que[real_index]
 	
-func que_action(action:BaseAction, data:Dictionary={}):
-	if real_que.size() < get_max_que_size():
+func que_action(action:PageItemAction, data:Dictionary={}):
+	if real_que.size() < get_max_que_size() and action != null:
 		real_que.append(action)
 		QueExecData.que_data(data)
 		action_que_changed.emit()
@@ -119,9 +119,9 @@ func get_movement_preview_path()->Array:
 	if !current_pos:
 		return []
 	var path = [current_pos]
-	for action:BaseAction in real_que:
-		if action.PreviewMoveOffset:
-			var next_pos = MoveHandler.relative_pos_to_real(current_pos, action.PreviewMoveOffset)
+	for action:PageItemAction in real_que:
+		if action.has_preview_move_offset():
+			var next_pos = MoveHandler.relative_pos_to_real(current_pos, action.get_preview_move_offset())
 			# Position not changeing (turning)
 			if current_pos.x == next_pos.x and current_pos.y == next_pos.y:
 				current_pos = next_pos
@@ -130,7 +130,7 @@ func get_movement_preview_path()->Array:
 			elif MoveHandler.is_spot_traversable(CombatRootControl.Instance.GameState, next_pos, actor):
 				current_pos = next_pos
 				path.append(current_pos)
-			#print("Before: " + str(befor) + " | Prev: " + str(action.PreviewMoveOffset) + " | After: " + str(current_pos))
+			#print("Before: " + str(befor) + " | Prev: " + str(action.get_preview_move_offset() + " | After: " + str(current_pos))
 	return path
 
 # Called by ActionQurControl._calc_turn_padding()
@@ -168,7 +168,7 @@ func _cache_page_ammo():
 		elif mod_type != '':
 			ammo_mods[mod_key] = mod_data
 	
-	for action:BaseAction in actor.pages.list_actions():
+	for action:PageItemAction in actor.pages.list_actions():
 		if not action.has_ammo():
 			continue
 		var key = action.ActionKey
@@ -243,7 +243,7 @@ func _cache_page_ammo():
 	for key in _page_ammo_datas.keys():
 		ammo_changed.emit(key)
 
-func _does_ammo_mod_apply_to_action(mod_data:Dictionary, ammo_data:Dictionary, action:BaseAction, actor)->bool:
+func _does_ammo_mod_apply_to_action(mod_data:Dictionary, ammo_data:Dictionary, action:PageItemAction, actor)->bool:
 	if not action.has_ammo():
 		return false
 	

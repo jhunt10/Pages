@@ -178,8 +178,10 @@ func has_item(item_id:String):
 
 func get_item_id_in_slot(index:int):
 	if index >= 0 and index < _raw_item_slots.size():
-		return _raw_item_slots[index]
-	return null
+		var item_id = _raw_item_slots[index]
+		if item_id:
+			return item_id
+	return ''
 
 func get_item_in_slot(index:int)->BaseItem:
 	if index >= 0 and index < _raw_item_slots.size():
@@ -236,7 +238,7 @@ func _can_slot_set_accept_item(check_slot_set_data:Dictionary, item:BaseItem)->b
 			return true
 	else:
 		return true
-	print("_can_slot_set_accept_item: %s | %s" % [item_tags, filter_data])
+	print("_can_slot_set_accept_item: %s: %s | %s" % [item.Id, item_tags, filter_data])
 	return false
 	
 
@@ -282,8 +284,9 @@ func get_targeting_mods()->Array:
 		if checked_equipments.has(equipment_id):
 			continue
 		if equipment_id and equipment_id != '':
-			var item:BaseItem = ItemLibrary.get_item(equipment_id)
-			out_list.append_array(item.get_target_mods())
+			var item:BaseEquipmentItem = ItemLibrary.get_item(equipment_id)
+			if item:
+				out_list.append_array(item.get_target_mods())
 		checked_equipments.append(equipment_id)
 	return out_list
 
@@ -294,10 +297,11 @@ func get_damage_mods()->Dictionary:
 		if checked_equipments.has(equipment_id):
 			continue
 		if equipment_id and equipment_id != '':
-			var item:BaseItem = ItemLibrary.get_item(equipment_id)
-			var mods = item.get_damage_mods()
-			for mod_key in mods.keys():
-				out_dict[mod_key] = mods[mod_key]
+			var item:BaseEquipmentItem = ItemLibrary.get_item(equipment_id)
+			if item:
+				var mods = item.get_damage_mods()
+				for mod_key in mods.keys():
+					out_dict[mod_key] = mods[mod_key]
 	return out_dict
 
 func get_ammo_mods()->Dictionary:
@@ -307,10 +311,11 @@ func get_ammo_mods()->Dictionary:
 		if checked_equipments.has(equipment_id):
 			continue
 		if equipment_id and equipment_id != '':
-			var item:BaseItem = ItemLibrary.get_item(equipment_id)
-			var mods = item.get_ammo_mods()
-			for mod_key in mods.keys():
-				out_dict[mod_key] = mods[mod_key]
+			var item:BaseEquipmentItem = ItemLibrary.get_item(equipment_id)
+			if item:
+				var mods = item.get_ammo_mods()
+				for mod_key in mods.keys():
+					out_dict[mod_key] = mods[mod_key]
 	return out_dict
 
 func get_attack_mods()->Dictionary:
@@ -320,10 +325,11 @@ func get_attack_mods()->Dictionary:
 		if checked_equipments.has(equipment_id):
 			continue
 		if equipment_id and equipment_id != '':
-			var item:BaseItem = ItemLibrary.get_item(equipment_id)
-			var mods = item.get_attack_mods()
-			for mod_key in mods.keys():
-				out_dict[mod_key] = mods[mod_key]
+			var item:BaseEquipmentItem = ItemLibrary.get_item(equipment_id)
+			if item:
+				var mods = item.get_attack_mods()
+				for mod_key in mods.keys():
+					out_dict[mod_key] = mods[mod_key]
 	return out_dict
 
 	#for item_tags in _item_tagged_slots.keys():

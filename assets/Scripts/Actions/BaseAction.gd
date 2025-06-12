@@ -1,4 +1,4 @@
-class_name BaseAction
+class_name Base_Action
 extends BaseLoadObject
 
 #const TargetParameters = preload("res://assets/Scripts/Targeting/TargetParameters.gd")
@@ -8,9 +8,9 @@ const SUB_ACTIONS_PER_ACTION = 24
 var ActionKey:String:
 	get: return self._key
 
-var action_details:Dictionary:
+var action_data:Dictionary:
 	get:
-		return get_load_val("ActionDetails", {})
+		return get_load_val("ActionData", {})
 
 var CostData:Dictionary:
 		get: return get_load_val('CostData', {})
@@ -36,14 +36,6 @@ var PreviewMoveOffset:MapPos
 func _init(key:String, def_load_path:String, def:Dictionary, id:String='', data:Dictionary={}) -> void:
 	super(key, def_load_path, def, id, data)
 	# Load Targeting Parameters
-	if def.has('TargetParams'):
-		if def['TargetParams'] is Array:
-			for tparm in def['TargetParams']:
-				_target_params[tparm['TargetKey']] = TargetParameters.new(tparm['TargetKey'], tparm)
-		if def['TargetParams'] is Dictionary:
-			for tparm_key in def['TargetParams'].keys():
-				_target_params[tparm_key] = TargetParameters.new(tparm_key, def['TargetParams'][tparm_key])
-		
 	# Load SubAction Data, missing indexes are left null
 	# The ActionQueController will create the subaction on demand
 	#SubActionData = []
@@ -59,8 +51,8 @@ func _init(key:String, def_load_path:String, def:Dictionary, id:String='', data:
 		#else:
 			#printerr("Uknown SubActionType: " + str(subData))
 	
-	if def.keys().has("Preview"):
-		var preview_data = def.get("Preview", {})
+	if action_data.keys().has("Preview"):
+		var preview_data = action_data.get("Preview", {})
 		if preview_data.keys().has("PreviewMoveOffset"):
 			var pre_move_arr = []
 			if preview_data['PreviewMoveOffset'] is Array:
@@ -69,24 +61,24 @@ func _init(key:String, def_load_path:String, def:Dictionary, id:String='', data:
 				pre_move_arr = JSON.parse_string(preview_data['PreviewMoveOffset'])
 			PreviewMoveOffset = MapPos.new(pre_move_arr[0],pre_move_arr[1],pre_move_arr[2],pre_move_arr[3])
 
-## Returns raw Dictionary of SubAction data
-func get_sub_action_data()->Dictionary:
-	return action_details.get("SubActions", {})
-
-func get_sub_action_datas_for_frame(frame_index:int)->Array:
-	var out_list = []
-	var sub_actions_data = get_sub_action_data()
-	for key in sub_actions_data.keys():
-		var data = sub_actions_data[key]
-		if data.get("FrameIndex", -1) == frame_index:
-			out_list.append(data)
-	out_list.sort_custom(sort_subacts_ascending)
-	return out_list
-	
-func sort_subacts_ascending(a, b):
-	if a.get("SubFramIndex", 0) < b.get("SubFramIndex", 0):
-		return true
-	return false
+### Returns raw Dictionary of SubAction data
+#func get_sub_action_data()->Dictionary:
+	#return action_data.get("SubActions", {})
+#
+#func get_sub_action_datas_for_frame(frame_index:int)->Array:
+	#var out_list = []
+	#var sub_actions_data = get_sub_action_data()
+	#for key in sub_actions_data.keys():
+		#var data = sub_actions_data[key]
+		#if data.get("#FrameIndex", -1) == frame_index:
+			#out_list.append(data)
+	#out_list.sort_custom(sort_subacts_ascending)
+	#return out_list
+	#
+#func sort_subacts_ascending(a, b):
+	#if a.get("#SubIndex", 0) < b.get("#SubIndex", 0):
+		#return true
+	#return false
 
 func get_tags()->Array:
 	var tags = super()
@@ -142,11 +134,11 @@ func list_sub_action_datas()->Array:
 #func get_damage_data(damage_data_key:String, actor:BaseActor=null)->Dictionary:
 	#if damage_data_key == "Weapon":
 		#if actor == null:
-			#printerr("BaseAction.get_damage_data: Null Actor when asking for Weapon damage.")
+			#printerr("Base_Action.get_damage_data: Null Actor when asking for Weapon damage.")
 			#return {}
 		#var weapon = actor.equipment.get_primary_weapon()
 		#if !weapon:
-			#printerr("BaseAction.get_damage_data: No Weapon when asking for Weapon damage.")
+			#printerr("Base_Action.get_damage_data: No Weapon when asking for Weapon damage.")
 			#return {}
 		#return weapon.get_damage_data()
 	#var damage_datas = get_load_val("DamageDatas", {})
@@ -161,11 +153,11 @@ func get_damage_data_for_subaction(actor:BaseActor, subaction_data:Dictionary)->
 		return {}
 	if damage_key == "Weapon":
 		if actor == null:
-			printerr("BaseAction.get_damage_data_for_subaction: Null Actor when asking for Weapon damage.")
+			printerr("Base_Action.get_damage_data_for_subaction: Null Actor when asking for Weapon damage.")
 			return {}
 		var weapon = actor.equipment.get_primary_weapon()
 		if !weapon:
-			printerr("BaseAction.get_damage_data_for_subaction: No Weapon when asking for Weapon damage.")
+			printerr("Base_Action.get_damage_data_for_subaction: No Weapon when asking for Weapon damage.")
 			return {}
 		return (weapon as BaseWeaponEquipment).get_damage_data()
 	return DamageDatas.get(damage_key, subaction_data.get("DamageData", {}))
@@ -219,16 +211,15 @@ func get_targeting_params(target_param_key, actor:BaseActor)->TargetParameters:
 					break
 			if can_use:
 				params = params.apply_target_mod(mod)
-		
 	return params
 
 func has_preview_target()->bool:
-	var preview_data:Dictionary = get_load_val("Preview", {})
+	var preview_data:Dictionary = action_data.get("Preview", {})
 	var preview_key = preview_data.get("PreviewTargetKey", null)
 	return preview_key and preview_key != ''
 
 func get_preview_target_params(actor:BaseActor)->TargetParameters:
-	var preview_data:Dictionary = get_load_val("Preview", {})
+	var preview_data:Dictionary = action_data.get("Preview", {})
 	var preview_key = preview_data.get("PreviewTargetKey", null)
 	if not preview_key or preview_key == '':
 		printerr("No preview key")
@@ -236,12 +227,12 @@ func get_preview_target_params(actor:BaseActor)->TargetParameters:
 	return get_targeting_params(preview_key, actor)
 
 func has_preview_damage()->bool:
-	var preview_data:Dictionary = get_load_val("Preview", {})
+	var preview_data:Dictionary = action_data.get("Preview", {})
 	var preview_key = preview_data.get("PreviewDamageKey", null)
 	return preview_key and preview_key != ''
 
 func get_preview_damage_datas(actor:BaseActor=null)->Dictionary:
-	var preview_data:Dictionary = get_load_val("Preview", {})
+	var preview_data:Dictionary = action_data.get("Preview", {})
 	var preview_key = preview_data.get("PreviewDamageKey", null)
 	if not preview_key or preview_key == '':
 		printerr("%s.get_preview_damage_datas: No preview key" % [self.ActionKey])
@@ -282,9 +273,9 @@ func get_ammo_data():
 func get_on_que_options(actor:BaseActor, game_state:GameStateData):
 	var out_dict = {}
 	for sub_action_data in list_sub_action_datas():
-		var sub_action = ActionLibrary.get_sub_action_script(sub_action_data['SubActionScript'])
+		var sub_action = ActionLibrary.get_sub_action_script(sub_action_data['!SubActionScript'])
 		if !sub_action:
-			printerr("BaseAction.get_on_que_options: Failed to find SubActionScript '%s'." % [sub_action_data['SubActionScript']])
+			printerr("Base_Action.get_on_que_options: Failed to find SubActionScript '%s'." % [sub_action_data['!SubActionScript']])
 			continue
 		var options = sub_action.get_on_que_options(self, sub_action_data, actor, game_state)
 		for option:OnQueOptionsData in options:

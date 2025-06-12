@@ -26,6 +26,9 @@ func get_sprite_sheet_file_path():
 		return null
 	return _def_load_path.path_join(file_name)
 
+func get_tags_added_to_actor()->Array:
+	return equipment_data.get("AddTags", [])
+
 func get_passive_stat_mods()->Array:
 	var stat_mod_datas:Dictionary = equipment_data.get("StatMods", {})
 	var out_list = []

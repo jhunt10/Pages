@@ -17,7 +17,7 @@ var weapon_data:Dictionary:
 
 var weapon_attack_data:Dictionary:
 	get:
-		return _def.get("WeaponDetails", {}).get("AttackData", {})
+		return _def.get("WeaponData", {}).get("AttackData", {})
 
 
 func _init(key:String, def_load_path:String, def:Dictionary, id:String='', data:Dictionary={}) -> void:

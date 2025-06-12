@@ -51,7 +51,7 @@
                     "MovementType": "Walk",
                     "PlayWalkin": true,
                     "RelativePos": "[0, -1, 0, 0]",
-                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_Move.gd"
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Movement/SubAct_Move.gd"
                 }
             ],
             "10": [
@@ -212,7 +212,7 @@
         },
         "AmmoData": {
             "Cost": 1,
-            "Clip": 4,
+            "Clip": 3,
             "AmmoType": "Phy"
         },
         "DamageDatas": {
@@ -243,9 +243,9 @@
         "MissileDatas": {
             "Missile1": {
                 "DamageDataKey": "Damage1",
-                "FramesPerTile": 6,
+                "FramesPerTile": 4,
                 "MissileVfxData": {
-                    "VFXKey": "JavelinMissile",
+                    "VfxKey": "BaseMissile",
                     "SpriteName": "Sprites/JavelinMissile.png",
                     "SpriteSheetWidth": 1,
                     "SpriteSheetHight": 1,
@@ -270,12 +270,12 @@
             ],
             "5": [
                 {
-                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_PayCost.gd"
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Misc/SubAct_PayCost.gd"
                 },
                 {
                     "DamageKey": "Damage1",
                     "MissileKey": "Missile1",
-                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_SpawnMissile.gd",
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Spawning/SubAct_SpawnMissile.gd",
                     "TargetKey": "Target1",
                     "TargetParamKey": "TargetParam"
                 }
@@ -392,7 +392,7 @@
             ],
             "11": [
                 {
-                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_PayCost.gd"
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Misc/SubAct_PayCost.gd"
                 },
                 {
                     "SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponMotionAnimation.gd",
@@ -475,7 +475,7 @@
             ],
             "11": [
                 {
-                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_PayCost.gd"
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Misc/SubAct_PayCost.gd"
                 },
                 {
                     "SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponMotionAnimation.gd",
@@ -689,7 +689,7 @@
             ],
             "11": [
                 {
-                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_PayCost.gd"
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Misc/SubAct_PayCost.gd"
                 },
                 {
                     "SubActionScript": "res://assets/Scripts/Actions/SubActions/Attacks/SubAct_Attack.gd",
@@ -708,7 +708,7 @@
                     "MovementType": "Push",
                     "PlayWalkin": false,
                     "RelativePos": "[0, -1, 0, 0]",
-                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_MoveTarget.gd",
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Movement/SubAct_MoveTarget.gd",
                     "TargetKey": "Target1",
                     "UseTargetsDirection": false
                 }
@@ -763,7 +763,7 @@
         "SubActions": {
             "0": [
                 {
-                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_PayCost.gd"
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Misc/SubAct_PayCost.gd"
                 },
                 {
                     "Animation": "Swing",
@@ -816,7 +816,7 @@
                     "MovementType": "Walk",
                     "PlayWalkin": true,
                     "RelativePos": "[0, 0, 0, 1]",
-                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_Move.gd"
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Movement/SubAct_Move.gd"
                 },
                 {
                     "Animation": "Swing",
@@ -869,7 +869,7 @@
                     "MovementType": "Walk",
                     "PlayWalkin": true,
                     "RelativePos": "[0, 0, 0, 1]",
-                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_Move.gd"
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Movement/SubAct_Move.gd"
                 },
                 {
                     "Animation": "Swing",
@@ -922,7 +922,7 @@
                     "MovementType": "Walk",
                     "PlayWalkin": true,
                     "RelativePos": "[0, 0, 0, 1]",
-                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_Move.gd"
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Movement/SubAct_Move.gd"
                 },
                 {
                     "Animation": "Swing",
@@ -975,45 +975,7 @@
                     "MovementType": "Walk",
                     "PlayWalkin": true,
                     "RelativePos": "[0, 0, 0, 1]",
-                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_Move.gd"
-                }
-            ]
-        },
-        "SubActsBackUp":{
-            
-            "5":[
-                {
-                    "AllowDeadTargets": false,
-                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Targeting/SubAct_GetTargetAllInArea.gd",
-                    "TargetParamKey": "SegmentTargetParams1",
-                    "FailOnNoTarget": false,
-                    "MessageOnNoTarget": false,
-                    "SetTargetKey": "Target1"
-                },
-                {
-                    "TargetKey": "Target1",
-                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Attacks/SubAct_Attack.gd",
-                    "DamageKeys": ["WeaponDmgData"],
-                    "TargetMustBeInRange": true,
-                    "FailOnNoTarget": false
-                }
-            ],
-            "11": [
-            ],
-            "15":[
-                {
-                    "MovementType": "Walk",
-                    "PlayWalkin": true,
-                    "RelativePos": "[0, 0, 0, 1]",
-                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/_SubAct_Move.gd"
-                }
-            ],
-            "20":[
-                {
-                    "MovementType": "Walk",
-                    "PlayWalkin": true,
-                    "RelativePos": "[0, 0, 0, 1]",
-                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/_SubAct_Move.gd"
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Movement/SubAct_Move.gd"
                 }
             ]
         },

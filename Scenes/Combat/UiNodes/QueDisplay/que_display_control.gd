@@ -108,7 +108,7 @@ func _build_slots():
 
 func _sync_icons():
 	var index = 0
-	for action:BaseAction in _actor.Que.list_qued_actions():
+	for action:PageItemAction in _actor.Que.list_qued_actions():
 		if _real_slots.size() > index:
 			var slot:QueDisplayButton = _real_slots[index]
 			slot.set_action(index, _actor, action)

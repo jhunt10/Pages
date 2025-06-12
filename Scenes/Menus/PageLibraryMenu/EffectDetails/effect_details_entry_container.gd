@@ -28,7 +28,7 @@ func _load_mini_details():
 	elif effect_details.get("IsBad", false):
 		icon_background.texture = bad_effect_icon
 	
-	var icon_path = thing_def.get("Details", {}).get("LargeIcon", "")
+	var icon_path = thing_def.get("#ObjDetails", {}).get("LargeIcon", "")
 	var icon_sprite = SpriteCache.get_sprite(thing_load_path.path_join(icon_path), false)
 	icon.texture = icon_sprite
 	

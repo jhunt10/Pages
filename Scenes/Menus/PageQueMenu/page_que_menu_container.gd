@@ -8,7 +8,7 @@ extends BackPatchContainer
 @export var page_inventory_container:PageInventoryContainer
 @export var mouse_over_control:PageMenuMouseControl
 
-var _dragging_page:BaseAction
+var _dragging_page:PageItemAction
 var _drag_icon_offset:Vector2 = Vector2.ZERO
 
 var _actor:BaseActor
@@ -48,7 +48,7 @@ func clear_drag_item():
 	mouse_over_control.set_dragging_page(null)
 	#page_que_slots_container.clear_highlights()
 
-func set_dragging_page(page:BaseAction, button:InventoryPageButton):
+func set_dragging_page(page:PageItemAction, button:InventoryPageButton):
 	_dragging_page = page
 	details_container.set_page(_dragging_page)
 	mouse_over_control.set_dragging_page(_dragging_page)
@@ -68,11 +68,11 @@ func dragging_item_released():
 func on_page_slot_pressed(page_tags:String, index:int):
 	_actor.pages.set_page_for_slot(page_tags,index,null)
 
-func on_page_inventory_button_entered(page:BaseAction):
+func on_page_inventory_button_entered(page:PageItemAction):
 	if !_dragging_page:
 		details_container.set_page(page)
 
-func on_page_inventory_button_pressed(page:BaseAction):
+func on_page_inventory_button_pressed(page:PageItemAction):
 	print("Inventory Page Button Pressed:  " + page.ActionKey)
 	if _actor.pages.has_page(page.ActionKey):
 		_actor.pages.remove_page(page.ActionKey)

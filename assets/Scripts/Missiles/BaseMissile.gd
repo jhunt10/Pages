@@ -50,7 +50,9 @@ func get_missile_vfx_data()->Dictionary:
 	var missile_vfx_key = _missle_data.get("MissileVfxKey", null)
 	if missile_vfx_key:
 		return MainRootNode.vfx_libray.get_vfx_def(missile_vfx_key)
-	return _missle_data.get("MissileVfxData", {})
+	var data = _missle_data.get("MissileVfxData", {})
+	data['LoadPath'] = _load_path
+	return data
 	#var vfx_def = _missle_data.get("MissileVfxData", null)
 	#if vfx_def:
 		#var vfx_data = VfxData.new(vfx_def, _load_path)
@@ -113,7 +115,7 @@ func do_thing(game_state:GameStateData):
 		source_actor, 
 		effected_actors, 
 		_missle_data.get("AttackDetails", {}),
-		{"MissileDamage":_missle_data['DamageData']},
+		{"MissileDamage":_missle_data['DamageData'].values()[0]},
 		_missle_data.get("EffectDatas", []),
 		_source_target_chain,
 		_target_params,
@@ -165,8 +167,8 @@ func _calc_positions():
 	
 	# Check if the missile will take more frames to reach the target then there are frames left in turn
 	# If so, log an error and clap the end frame.
-	if  _end_frame >= BaseAction.SUB_ACTIONS_PER_ACTION:
-		_end_frame = BaseAction.SUB_ACTIONS_PER_ACTION - 1
+	if  _end_frame >= PageItemAction.SUB_ACTIONS_PER_ACTION:
+		_end_frame = PageItemAction.SUB_ACTIONS_PER_ACTION - 1
 		frames_till_hit = _end_frame - _start_frame
 		pixels_per_frame = pixel_distance / frames_till_hit
 	

@@ -5,7 +5,7 @@
         "Details": {
             "DisplayName": "P.Ammo",
             "SnippetDesc": "Reload Phy Ammo",
-            "Description": "Ammo use to reload Phy Pages.",
+            "Description": "Ammo use to reload @@#Color:Ammo:Phy:Phy@@ Page Ammo.",
             "Tags": [
                 "Ammo"
             ],
@@ -18,8 +18,9 @@
             "Rarity": "Mundane",
             "Value": 20
         },
-        "CanStack": true,
-        "AmmoType":"Phy"
+        "SuppliesData":{
+            "AmmoType":"Phy"
+        }
     },
     {
         "ItemKey": "Mag_Ammo",
@@ -27,7 +28,7 @@
         "Details": {
             "DisplayName": "M.Ammo",
             "SnippetDesc": "Reload Mag Ammo",
-            "Description": "Ammo use to reload Mag Pages.",
+            "Description": "Ammo use to reload @@#Color:Ammo:Mag:Mag@@ Page Ammo .",
             "Tags": [
                 "Ammo"
             ],
@@ -40,8 +41,9 @@
             "Rarity": "Mundane",
             "Value": 20
         },
-        "CanStack": true,
-        "AmmoType":"Mag"
+        "SuppliesData":{
+            "AmmoType":"Mag"
+        }
     },
     {
         "ItemKey": "Gen_Ammo",
@@ -49,7 +51,7 @@
         "Details": {
             "DisplayName": "G.Ammo",
             "SnippetDesc": "Reload Generic Ammo",
-            "Description": "Generic ammo use to reload Phy and Mag Pages.",
+            "Description": "Generic ammo use to reload @@#Color:Ammo:Phy:Phy@@ and @@#Color:Ammo:Mag:Mag@@ Page Ammo.",
             "Tags": [
                 "Ammo"
             ],
@@ -62,8 +64,9 @@
             "Rarity": "Common",
             "Value": 50
         },
-        "CanStack": true,
-        "AmmoType":"Gen"
+        "SuppliesData":{
+            "AmmoType":"Gen"
+        }
     },
     {
         "ItemKey": "Abn_Ammo",
@@ -71,7 +74,7 @@
         "Details": {
             "DisplayName": "A.Ammo",
             "SnippetDesc": "Reload Abn Ammo",
-            "Description": "Rare ammo use to reload Abn Pages.",
+            "Description": "Rare ammo use to reload @@#Color:Ammo:Abn:Abn@@ Page Ammo.",
             "Tags": [
                 "Ammo"
             ],
@@ -84,7 +87,8 @@
             "Rarity": "Rare",
             "Value": 100
         },
-        "CanStack": true,
-        "AmmoType":"Abn"
+        "SuppliesData":{
+            "AmmoType":"Abn"
+        }
     }
 ]

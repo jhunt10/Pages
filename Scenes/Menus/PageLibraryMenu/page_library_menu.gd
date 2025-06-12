@@ -55,8 +55,9 @@ func _exit_tree() -> void:
 
 func _reload_pages():
 	#SpriteCache._cached_sprites.clear()
-	ActionLibrary.Instance.reload()
+	#ActionLibrary.Instance.reload()
 	ItemLibrary.Instance.reload()
+	EffectLibrary.Instance.reload()
 	loaded = false
 	build_page_entires()
 
@@ -68,12 +69,12 @@ func build_page_entires():
 	page_entries.clear()
 	
 	var page_item_keys= []
-	for page:BaseItem in get_page_items():
-		var def = page._def
-		var inst = page
-		var load_path = page.get_load_path()
-		page_item_keys.append(page.ItemKey)
-		_build_object_entry(def, inst, load_path)
+	#for page:BaseItem in get_page_items():
+		#var def = page._def
+		#var inst = page
+		#var load_path = page.get_load_path()
+		#page_item_keys.append(page.ItemKey)
+		#_build_object_entry(def, inst, load_path)
 	for effect_key in EffectLibrary.list_all_effects_keys():
 		var def = EffectLibrary.get_effect_def(effect_key)
 		var inst = null
@@ -131,7 +132,7 @@ func _build_object_entry(obj_def:Dictionary, obj_inst:BaseLoadObject, load_path:
 	if obj_def.has("ActorKey"):
 		key = obj_def.get("ActorKey")
 		entry_scene = _get_object_entry_scene("Actor")
-	elif obj_inst is BasePageItem:
+	elif obj_def.has("ActionData"):
 		key = obj_def.get("ItemKey")
 		entry_scene = _get_object_entry_scene("Page")
 	elif obj_def.has("ItemKey"):
@@ -200,7 +201,7 @@ func _on_cat_button_pressed():
 				if not actor_check_box.button_pressed:
 					entry.hide()
 					continue
-			if entry.thing_def.get("ItemKey", "").ends_with("_PageItem"):
+			if entry.thing_def.get("ItemDetails", {}).get("ItemType", "") == "Page":
 				if not action_check_box.button_pressed:
 					entry.hide()
 					continue

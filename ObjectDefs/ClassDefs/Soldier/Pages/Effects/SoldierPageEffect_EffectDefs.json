@@ -13,9 +13,13 @@
             "IsGood": true,
             "IsBad": false,
             "ShowInHud": true,
-            "ShowDuration": false,
+            "ShowDuration": true,
             "CanStack": false,
-            "LimitedEffectType": "Stance"
+            "LimitedEffectType": "Stance",
+            "DurationData":{
+                "BaseDuration":1,
+                "DurationTrigger": "OnActionStart"
+            }
         },
         "StatMods": {
             "AwrStatMod": {

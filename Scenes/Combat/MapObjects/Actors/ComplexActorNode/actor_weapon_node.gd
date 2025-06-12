@@ -157,7 +157,7 @@ func _notification(what):
 			
 
 func set_weapon(weapon:BaseWeaponEquipment):
-	var sprite_data:Dictionary = weapon.weapon_details.get("WeaponSpriteData", {})
+	var sprite_data:Dictionary = weapon.weapon_data.get("WeaponSpriteData", {})
 	if sprite_data.size() == 0:
 		self.visible = false
 		return

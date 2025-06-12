@@ -240,23 +240,23 @@ func _sync():
 		# Dark bar never animates going up, it jumps to highest value
 		if _last_display_bar_value < new_val:
 			dark_value_bar.size.x = _target_display_bar_width
-	if preview_mode:
-		if !animation.is_playing():
-			animation.play('blink_preview')
-		if !blink_value_bar.visible:
-			blink_value_bar.visible = true
-		var predicted_val = predicted_value
-		if LOGGING: print("Set Preive Mode stuff: Real: %s | Pred: %s | Cost: %s " % [new_val, predicted_val, preview_cost])
-		dark_value_bar.size.x = _vals_to_bar_size(new_val, max_2)
-		blink_value_bar.size.x = _vals_to_bar_size(predicted_val, max_2)
-		colored_value_bar.size.x = _vals_to_bar_size(predicted_val - preview_cost, max_2)
-		
-		mid_label.text = str(predicted_val) + " / " + str(max)
-		#left_label.text = "(%s)" % [(predicted_val)]
-		if preview_cost > 0:
-			right_label.text = "-%s" % [preview_cost]
-		else:
-			right_label.text = ''
+	#if preview_mode:
+		#if !animation.is_playing():
+			#animation.play('blink_preview')
+		#if !blink_value_bar.visible:
+			#blink_value_bar.visible = true
+		#var predicted_val = predicted_value
+		#if LOGGING: print("Set Preive Mode stuff: Real: %s | Pred: %s | Cost: %s " % [new_val, predicted_val, preview_cost])
+		#dark_value_bar.size.x = _vals_to_bar_size(new_val, max_2)
+		#blink_value_bar.size.x = _vals_to_bar_size(predicted_val, max_2)
+		#colored_value_bar.size.x = _vals_to_bar_size(predicted_val - preview_cost, max_2)
+		#
+		#mid_label.text = str(predicted_val) + " / " + str(max_2)
+		##left_label.text = "(%s)" % [(predicted_val)]
+		#if preview_cost > 0:
+			#right_label.text = "-%s" % [preview_cost]
+		#else:
+			#right_label.text = ''
 		
 	_last_synced_value = new_val
 

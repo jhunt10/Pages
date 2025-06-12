@@ -21,7 +21,7 @@
         },
         "Details": {
             "Description": "Attempt to apply @@#EftData:ApplyEffect:Name@@ to one @@#TrgParm:TargetParam:TargetType@@ for @@#EftData:ApplyEffect:Duration@@.\n\n@@#EftData:ApplyEffect@@",
-            "DisplayName": "Apply Effect",
+            "DisplayName": "#Base Apply Effect",
             "LargeIcon": "Sprites/ICON.png",
             "SmallIcon": "Sprites/ICON.png",
             "SnippetDesc": "Apply @@#EftData:ApplyEffect:Name@@ for @@#EftData:ApplyEffect:Duration@@.",
@@ -54,7 +54,7 @@
             ],
             "11": [
                 {
-                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_PayCost.gd"
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Misc/SubAct_PayCost.gd"
                 },
                 {
                     "SubActionScript": "res://assets/Scripts/Actions/SubActions/Effects/SubAct_ApplyEffect.gd",
@@ -81,7 +81,7 @@
         "ParentKey":"_BaseApplyEffectSpell",
         "Details": {
             "Description": "Grant @@#EftData:ApplyEffect:Name@@ to one @@#TrgParm:TargetParam:TargetType@@ for @@#EftData:ApplyEffect:Duration@@.\n\n@@#EftData:ApplyEffect@@",
-            "DisplayName": "Apply Effect",
+            "DisplayName": "#Base Apply Buff",
             "LargeIcon": "Sprites/ICON.png",
             "SmallIcon": "Sprites/ICON.png",
             "SnippetDesc": "Apply @@#EftData:ApplyEffect:Name@@ for @@#EftData:ApplyEffect:Duration@@.",
@@ -122,7 +122,7 @@
         "EffectDatas":{},
         "Details": {
             "Description": "Make a @@#Color:Red:Ranged Spell Attack@@ against an @@#TrgParm:TargetParam:TargetType@@ in range, dealing @@#DmgData:RangedSpellDamage@@ on hit.",
-            "DisplayName": "DAMAGE_TYPE Bolt",
+            "DisplayName": "#Base Range Spell",
             "LargeIcon": "Sprites/ICON.png",
             "SmallIcon": "Sprites/ICON.png",
             "SnippetDesc": "Shoot a bolt of DAMAGE_TYPE",
@@ -155,7 +155,7 @@
                     "TargetParamKey": "TargetParam"
                 },
                 {
-                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_PayCost.gd"
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Misc/SubAct_PayCost.gd"
                 },
                 {
                     "SubActionScript": "res://assets/Scripts/Actions/SubActions/Attacks/SubAct_Attack.gd",
@@ -205,7 +205,7 @@
         "EffectDatas":{},
         "Details": {
             "Description": "Shoot a @@#Color:Missle@@ at @@#TrgParm:TargetParam:TargetType@@ in range, dealing @@#DmgData:MissleSpellDamage@@ to any @@#Color:Red:Actor@@ it hits.",
-            "DisplayName": "DAMAGE_TYPE Missile",
+            "DisplayName": "#Base Missile Spell",
             "LargeIcon": "Sprites/ICON.png",
             "SmallIcon": "Sprites/ICON.png",
             "SnippetDesc": "Shoot a Missle of DAMAGE_TYPE",
@@ -246,7 +246,7 @@
                     "TargetParamKey": "TargetParam"
                 },
                 {
-                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_PayCost.gd"
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Misc/SubAct_PayCost.gd"
                 },
                 {
                     "DamageKey": "MissleSpellDamage",
@@ -298,7 +298,7 @@
         "EffectDatas":{},
         "Details": {
             "Description": "Make a @@#Color:Red:Melee Spell Attack@@ against an @@#TrgParm:TargetParam:TargetType@@ dealing @@#DmgData:MeleeSpellDamage@@ on hit.",
-            "DisplayName": "DAMAGE_TYPE Bolt",
+            "DisplayName": "#Base Melee Spell",
             "LargeIcon": "Sprites/ICON.png",
             "SmallIcon": "Sprites/ICON.png",
             "SnippetDesc": "Touch Actor for DAMAGE_TYPE damage.",
@@ -332,7 +332,7 @@
             ],
             "11": [
                 {
-                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_PayCost.gd"
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Misc/SubAct_PayCost.gd"
                 },
                 {
                     "SubActionScript": "res://assets/Scripts/Actions/SubActions/Attacks/SubAct_Attack.gd",
@@ -386,7 +386,7 @@
         },
         "Details": {
             "Description": "Create a Zone which deals DAMAGE_TYPE Damage at the end of Turn for 3 Turns.",
-            "DisplayName": "DAMAGE_TYPE Bolt",
+            "DisplayName": "#Base Zone Spell",
             "LargeIcon": "Sprites/ICON.png",
             "SmallIcon": "Sprites/ICON.png",
             "SnippetDesc": "Create a Zone of DAMAGE_TYPE Damage.",
@@ -420,7 +420,7 @@
             ],
             "11": [
                 {
-                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_PayCost.gd"
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Misc/SubAct_PayCost.gd"
                 },
                 {
                     "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_CreateZone.gd",
@@ -483,7 +483,7 @@
         },
         "Details": {
             "Description": "Create a Trap  which deals DAMAGE_TYPE Damage when stepped on. Traps do not arm until the end of Round. Damage from Traps can not be Blocked or Evaded.",
-            "DisplayName": "DAMAGE_TYPE Bolt",
+            "DisplayName": "#Base Trap Spell",
             "LargeIcon": "Sprites/ICON.png",
             "SmallIcon": "Sprites/ICON.png",
             "SnippetDesc": "Create a Trap  of DAMAGE_TYPE Damage.",
@@ -516,7 +516,7 @@
             ],
             "11": [
                 {
-                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_PayCost.gd"
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Misc/SubAct_PayCost.gd"
                 },
                 {
                     "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_CreateZone.gd",

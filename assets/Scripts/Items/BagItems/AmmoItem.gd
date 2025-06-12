@@ -4,9 +4,9 @@ extends BaseConsumableItem
 enum AmmoTypes {Gen, Phy, Mag, Abn, Limit}
 
 func get_ammo_type()->AmmoTypes:
-	return AmmoTypes.get(get_load_val("AmmoType", "Gen"))
+	return AmmoTypes.get(get_load_val("AmmoData", {}).get("AmmoType", "Gen"))
 
-func can_reload_page(actor:BaseActor, action:BaseAction)->bool:
+func can_reload_page(actor:BaseActor, action:PageItemAction)->bool:
 	if not action.has_ammo(actor):
 		return false
 	var ammo_data = action.get_ammo_data()

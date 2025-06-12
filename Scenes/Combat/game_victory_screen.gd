@@ -82,7 +82,8 @@ func collect_dropped_items():
 	
 	exp_label.text = str(total_exp)
 	for actor:BaseActor in StoryState.list_player_actor():
-		actor.stats.add_experiance(total_exp)
+		if actor:
+			actor.stats.add_experiance(total_exp)
 		
 	if not items_datas.has("Page"):
 		pickup_pages_container.hide()

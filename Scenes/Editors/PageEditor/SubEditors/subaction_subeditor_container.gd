@@ -78,7 +78,7 @@ func on_add_option_selected(val):
 	if script_name == add_option_button.no_option_text:
 		return
 	add_option_button.selected = 0
-	var data = {"SubActionScript": _subaction_scripts[script_name]}
+	var data = {"!SubActionScript": _subaction_scripts[script_name]}
 	create_new_subaction_entry(0, data)
 	_order_entries()
 

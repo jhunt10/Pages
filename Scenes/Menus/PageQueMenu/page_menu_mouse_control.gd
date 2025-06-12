@@ -10,7 +10,7 @@ func _ready() -> void:
 	mouse_over_message_container.visible = false
 	drag_page_control.visible = false
 
-func set_dragging_page(page:BaseAction):
+func set_dragging_page(page:PageItemAction):
 	if !page:
 		drag_page_control.visible = false
 		drag_icon_texture_rect.texture = null
@@ -21,7 +21,7 @@ func set_dragging_page(page:BaseAction):
 	if mouse_over_message_container.visible:
 		clear_message()
 	
-func set_hover_page(page:BaseAction):
+func set_hover_page(page:PageItemAction):
 	if drag_page_control.visible:
 		return
 	mouse_over_message_container.visible = true

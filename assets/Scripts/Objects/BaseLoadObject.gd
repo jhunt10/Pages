@@ -10,7 +10,7 @@ var is_deleted:bool = false
 var details:ObjectDetailsData
 var object_details:Dictionary:
 	get:
-		return get_load_val("Details", {}, false)
+		return get_load_val("#ObjDetails", {}, false)
 
 func _init(key:String, def_load_path:String, def:Dictionary, id:String='', data:Dictionary={}) -> void:
 	if is_static():
@@ -23,7 +23,7 @@ func _init(key:String, def_load_path:String, def:Dictionary, id:String='', data:
 	self._def_load_path = def_load_path
 	self._def = def
 	self._data = data
-	details = ObjectDetailsData.new(self._def_load_path, self._def.get("Details", {}))
+	details = ObjectDetailsData.new(self._def_load_path, self._def.get("#ObjDetails", {}))
 
 ## Is this class static. Static objects don't use _data and are referenced only by _key
 func is_static():
@@ -32,18 +32,23 @@ func is_static():
 ####################
 ## Object Details ##
 ####################
+func get_object_details()->Dictionary:
+	var dets = _def.get("#ObjDetails", {})
+	if _data.has("#ObjDetails"):
+		dets = BaseLoadObjectLibrary._merge_defs(_data.get("#ObjDetails", {}), dets)
+	return dets
 func get_display_name()->String:
-	return object_details.get("DisplayName", _id)
+	var dets = get_object_details()
+	return dets.get("DisplayName", _id)
 func get_description()->String:
-	return object_details.get("DisplayName", _id)
+	return get_object_details().get("Description", _id)
 func get_snippet()->String:
-	return object_details.get("DisplayName", _id)
-	return object_details.get("DisplayName", _id)
+	return get_object_details().get("SnippetDesc", _id)
 func get_large_icon()->Texture2D:
-	var icon_path = _def_load_path.path_join(object_details.get("LargeIcon", ""))
+	var icon_path = _def_load_path.path_join(get_object_details().get("LargeIcon", ""))
 	return SpriteCache.get_sprite(icon_path)
 func get_small_icon()->Texture2D:
-	var icon_path = _def_load_path.path_join(object_details.get("SmallIcon", ""))
+	var icon_path = _def_load_path.path_join(get_object_details().get("SmallIcon", ""))
 	return SpriteCache.get_sprite(icon_path)
 func get_tags()->Array:
 	return object_details.get("Tags", [])

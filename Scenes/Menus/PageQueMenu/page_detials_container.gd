@@ -7,7 +7,7 @@ extends BackPatchContainer
 @export var description_label:RichTextLabel
 @export var range_display:MiniRangeDisplay
 
-func set_page(page:BaseAction):
+func set_page(page:PageItemAction):
 	name_label.text = page.get_display_name()
 	var tags_string = ''
 	for tag in page.details.tags:

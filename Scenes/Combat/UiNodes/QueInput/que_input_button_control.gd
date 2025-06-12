@@ -27,7 +27,7 @@ enum Rarity {Common, Uncommon, Rare, Epic}
 
 var action_key:String
 
-func set_page(actor:BaseActor, action:BaseAction):
+func set_page(actor:BaseActor, action:PageItemAction):
 	selection_display.hide()
 	action_key = action.ActionKey
 	page_icon_texture.texture = action.get_large_page_icon(actor)

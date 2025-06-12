@@ -28,8 +28,9 @@ func close_menu():
 
 func reload_stuff():
 	#SpriteCache._cached_sprites.clear()
-	ActionLibrary.Instance.reload()
+	#ActionLibrary.Instance.reload()
 	EffectLibrary.Instance.reload()
+	ItemLibrary.Instance.reload()
 	VfxLibrary.reload_vfxs()
 
 func create_page_items():
@@ -65,7 +66,7 @@ func __create_page_items_actions_selected(path:String):
 			"_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
 			"CanStack": true,
 			"ActionKey": action_key,
-			"Details":{
+			"#ObjDetails":{
 				"Tags": ["Tactic"]
 			}
 		})

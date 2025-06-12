@@ -14,7 +14,7 @@ func get_prop_enum_values(prop_key:String)->Array:
 		]
 	return []
 
-func do_thing(parent_action:BaseAction, subaction_data:Dictionary, que_exe_data:QueExecutionData,
+func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, que_exe_data:QueExecutionData,
 				game_state:GameStateData, actor:BaseActor)->bool:
 	
 	var turn_data = que_exe_data.get_current_turn_data()

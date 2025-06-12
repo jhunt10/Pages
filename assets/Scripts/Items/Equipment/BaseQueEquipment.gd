@@ -3,6 +3,10 @@ class_name BaseQueEquipment
 extends BaseEquipmentItem
 
 var _cached_slots_data:Array[Dictionary] = []
+var book_data:Dictionary:
+	get:
+		return _def.get("BookData", {})
+
 
 func get_equipment_slot_type()->String:
 	return "Book"
@@ -18,12 +22,12 @@ func get_max_page_count()->int:
 	return count
 
 func get_pages_per_round()->int:
-	return get_load_val("PagesPerRound", 0)
+	return book_data.get("PagesPerRound", 0)
 
 func get_base_passive_page_limit()->int:
-	return get_load_val("BasePassiveCount", 0)
+	return book_data.get("BasePassiveCount", 0)
 func get_base_action_page_limit()->int:
-	return get_load_val("BaseActionCount", 0)
+	return book_data.get("BaseActionCount", 0)
 
 func get_passive_stat_mods()->Array:
 	var ppr_mod = BaseStatMod.new(_id, "PPR", self.get_display_name(), BaseStatMod.ModTypes.Set, get_pages_per_round())
@@ -45,7 +49,7 @@ func get_page_slot_data()->Array[Dictionary]:
 			{
 				"Key":"BasePassives",
 				"DisplayName":"Passives",
-				"Count": get_load_val("BasePassiveCount", 0),
+				"Count": book_data.get("BasePassiveCount", 0),
 				"FilterData":{
 					"RequiredTags":["Passive"]
 				}
@@ -53,13 +57,13 @@ func get_page_slot_data()->Array[Dictionary]:
 			{
 				"Key":"BaseActions",
 				"DisplayName":"Actions",
-				"Count": get_load_val("BaseActionCount", 0),
+				"Count": book_data.get("BaseActionCount", 0),
 				"FilterData":{
 					"RequiredTags":["Action"]
 				}
 			}
 		]
-		for extra_slot in get_load_val("ItemSlotsData", []):
+		for extra_slot in equipment_data.get("ItemSlotsData", []):
 			_cached_slots_data.append(extra_slot)
 	return _cached_slots_data
 	

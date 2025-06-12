@@ -31,14 +31,14 @@ func _create_new_page_tags_entry(page_tags:String, pages:Array):
 	new_slot_entry.visible = true
 	new_slot_entry.title.text = page_tags
 	for index in range(pages.size()):
-		var page:BaseAction = null
+		var page:PageItemAction = null
 		if pages[index]:
-			page = ActionLibrary.get_action(pages[index])
+			page = ItemLibrary.get_item(pages[index])
 		var new_slot = _create_page_slots(page_tags, index,page)
 		new_slot_entry.page_slots_container.add_child(new_slot)
 	page_tag_slots_entries_container.add_child(new_slot_entry)
 
-func _create_page_slots(page_tags:String, index:int, page:BaseAction):
+func _create_page_slots(page_tags:String, index:int, page:PageItemAction):
 	var new_slot:PageQueSlotButton = premade_page_slot_button.duplicate()
 	new_slot.visible = true
 	if page:

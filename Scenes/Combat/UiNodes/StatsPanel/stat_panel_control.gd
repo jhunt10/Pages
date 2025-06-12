@@ -72,7 +72,7 @@ func _sync_icons():
 			if effect._duration_counter >= 0:
 				effect_icons[effect.Id].set_effect(effect)
 			continue
-		if not effect.show_counter():
+		if not effect.show_in_hud():
 			continue
 		var new_icon:EffectIconControl = premade_effect_icon.duplicate()
 		new_icon.set_effect(effect)

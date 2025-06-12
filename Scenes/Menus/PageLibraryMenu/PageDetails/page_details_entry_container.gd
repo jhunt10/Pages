@@ -14,9 +14,6 @@ extends BaseObjectDetailsEntryContainer
 @export var ammo_label:BoxContainer
 @export var damage_entries_container:VBoxContainer
 
-var page:BasePageItem:
-	get:
-		return thing_inst as BasePageItem
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -31,7 +28,8 @@ func _process(delta: float) -> void:
 
 ## Load the top level details displayed while entry is minimized
 func _load_mini_details():
-	
+	var page_key = thing_def.get("ItemKey", "")
+	var page = ItemLibrary.get_item(page_key)
 	title_label.text = page.get_display_name()
 	if title_label.text == "":
 		title_label.text = "["+page._key+"}"
@@ -46,30 +44,31 @@ func _load_mini_details():
 	
 	if thing_tags.has("Title"):
 		type_label.text = "Title"
-	elif page.is_passive_page():
+	elif page is PageItemPassive:
 		type_label.text = "Passive"
-	elif page.get_action() != null:
+	elif page is PageItemAction:
 		type_label.text = "Action"
 	else:
 		type_label.text = "Unknown"
 
 ## Load full details displayed when entry is exspanded
 func _load_full_details():
-	var page_action = page.get_action()
-	var page_effect_def = page.get_effect_def()
+	var page_key = thing_def.get("ItemKey", "")
+	var page = ItemLibrary.get_item(page_key)
+	var page_effect_def = {}#page.get_effect_def()
 	description_box.set_page_item(page)
 	# Ammo
-	if page_action and page_action.has_ammo(null):
-		ammo_label.set_data(page_action.get_ammo_data())
+	if page and page.has_ammo(null):
+		ammo_label.set_data(page.get_ammo_data())
 		ammo_label.show()
 	else:
 		ammo_label.hide()
 	
-	if page_action:
-		var attack_details = page_action.get_load_val("AttackDetails", {})
+	if page:
+		var attack_details = page.get_load_val("AttackDetails", {})
 		accuracy_label.text = str(attack_details.get("AccuracyMod", 1))
 		potency_label.text = str(attack_details.get("PotencyMod", 1))
-		var effects_datas = page_action.get_load_val("EffectDatas", {})
+		var effects_datas = page.get_load_val("EffectDatas", {})
 		if effects_datas.size() == 0:
 			effects_label.text = ''
 		else:
@@ -79,7 +78,7 @@ func _load_full_details():
 				effects_string += effect_key + ", "
 			effects_label.text = effects_string.trim_suffix(", ")
 		
-		var target_params = page_action.get_preview_target_params(null)
+		var target_params = page.get_preview_target_params(null)
 		if target_params:
 			target_type_label.text = TargetParameters.TargetTypes.keys()[target_params.target_type]
 			mini_range_display.load_area_matrix(target_params.target_area)
@@ -96,8 +95,8 @@ func _load_full_details():
 			damage_font_size_override = child.font_size_override
 		child.queue_free()
 	var damage_datas = {}
-	if page_action:
-		damage_datas = page_action.get_load_val("DamageDatas", {})
+	if page:
+		damage_datas = page.get_load_val("DamageDatas", {})
 	elif page_effect_def:
 		damage_datas = page_effect_def.get("DamageDatas", {})
 	for damage_data in damage_datas.values():
@@ -109,15 +108,18 @@ func _load_full_details():
 	# Stat Mods
 	var stat_mods = page.get_passive_stat_mods()
 	for child in stat_mods_container.get_children():
+		if child == premade_stat_mod_label:
+			continue
 		child.queue_free()
 	if page_effect_def:
 		stat_mods = page_effect_def.get("StatMods", {})
 	if stat_mods is Dictionary:
 		stat_mods = stat_mods.values()
-	for mod_data in stat_mods:
-		var new_mod:StatModLabelContainer = premade_stat_mod_label.duplicate()
-		new_mod.set_mod_data(mod_data)
-		stat_mods_container.add_child(new_mod)
-		new_mod.show()
+	if premade_stat_mod_label:
+		for mod_data in stat_mods:
+			var new_mod:StatModLabelContainer = premade_stat_mod_label.duplicate()
+			new_mod.set_mod_data(mod_data)
+			stat_mods_container.add_child(new_mod)
+			new_mod.show()
 	loaded_details = true
 	

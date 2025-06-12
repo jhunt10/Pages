@@ -63,7 +63,7 @@ func set_thing(def:Dictionary, inst:BaseLoadObject, load_path:String):
 	thing_def = def
 	thing_inst = inst
 	thing_load_path = load_path
-	var details = thing_def.get("Details", {"DisplayName": "#No Details#"})
+	var details = thing_def.get("#ObjDetails", {"DisplayName": "#No Details#"})
 	title_label.text = details.get("DisplayName", "["+def.get("EffectKey", "")+"]")
 	thing_tags = details.get("Tags", [])
 	tags_label.text = ", ".join(thing_tags)
@@ -72,14 +72,14 @@ func set_thing(def:Dictionary, inst:BaseLoadObject, load_path:String):
 	if def.has("ActorKey"):
 		type_label.text = "Actor"
 	
-	if not thing_inst is BaseItem:
+	if not thing_def.has("ItemKey"):
 		if add_item_button:
 			add_item_button.hide()
 	_load_mini_details()
 	
 func _on_add_pressed():
-	if thing_inst is BaseItem:
-		var item_key = thing_inst.ItemKey
+	if thing_def.has("ItemKey"):
+		var item_key = thing_def.get("ItemKey", "")
 		var new_item = ItemLibrary.create_item(item_key, {})
 		if not new_item:
 			printerr("Failed to make new item: " + item_key)
@@ -91,7 +91,7 @@ func _get_thing_key()->String:
 
 ## Load the top level details displayed while entry is minimized
 func _load_mini_details():
-	var icon_path = thing_def.get("Details", {}).get("LargeIcon", "")
+	var icon_path = thing_def.get("#ObjDetails", {}).get("LargeIcon", "")
 	var icon_sprite = SpriteCache.get_sprite(thing_load_path.path_join(icon_path), false)
 	icon.texture = icon_sprite
 	

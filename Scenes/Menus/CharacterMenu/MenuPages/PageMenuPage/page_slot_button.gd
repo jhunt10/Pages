@@ -29,34 +29,34 @@ func _ready() -> void:
 	invalid_label.hide()
 
 func set_key(actor:BaseActor, key):
+	item_key = key
 	if key:
-		var page:BasePageItem = ItemLibrary.get_item(key)
-		if page:
-			if page.get_action_key():
-				var action = ActionLibrary.get_action(page.get_action_key())
-				if action and action.use_equipment_icon():
-					page_icon.texture = action.get_large_page_icon(actor)
-					actor.equipment_changed.connect(_on_equipment_changed.bind(actor.Id, action.ActionKey))
-				else:
-					var icon_texture = page.get_large_icon()
-					page_icon.texture = icon_texture
+		var page = ItemLibrary.get_item(key)
+		if page is PageItemAction:
+			if page.use_equipment_icon():
+				page_icon.texture = page.get_large_page_icon(actor)
+				actor.equipment_changed.connect(_on_equipment_changed.bind(actor.Id, page.ItemKey))
 			else:
-				page_icon.texture = page.get_large_icon()
-			page_background.texture = page.get_rarity_background()
-			var cant_equip_reasons = page.get_cant_use_reasons(actor)
-			if cant_equip_reasons.size() > 0:
-				invalid_label.text = ItemHelper.cant_equip_reasons_to_string(cant_equip_reasons)
-				invalid_icon.show()
-			else:
-				invalid_icon.hide()
+				var icon_texture = page.get_large_icon()
+				page_icon.texture = icon_texture
 		else:
-			printerr("PageSlotButton: No Page Item found for '%s'." % [key])
-			page_icon.texture = SpriteCache._get_no_sprite()
+			page_icon.texture = page.get_large_icon()
+		page_background.texture = page.get_rarity_background()
+		var cant_equip_reasons = page.get_cant_use_reasons(actor)
+		if cant_equip_reasons.size() > 0:
+			invalid_label.text = ItemHelper.cant_equip_reasons_to_string(cant_equip_reasons)
+			invalid_icon.show()
+		else:
+			invalid_icon.hide()
+	else:
+		invalid_icon.hide()
+		page_icon.hide()
+		page_background.hide()# = SpriteCache._get_no_sprite()
 
 func _on_equipment_changed(actor_id, action_key):
 	var actor = ActorLibrary.get_actor(actor_id)
-	var action = ActionLibrary.get_action(action_key)
-	#icon.texture = action.get_large_page_icon(actor)
+	var page = ItemLibrary.get_item(item_key)
+	page_icon.texture = page.get_large_page_icon(actor)
 
 func show_highlight():
 	highlight.show()

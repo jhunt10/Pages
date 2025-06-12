@@ -119,6 +119,31 @@ func _end_round():
 	_clear_ques()
 	after_round.emit()
 
+func _on_turn_start(game_state):
+	game_state.current_turn_index = action_index
+	start_of_turn.emit()
+	start_of_turn_with_state.emit(game_state)
+	#_pay_turn_costs()
+	# Emit start of turn for actors
+	for que_id in _que_order:
+		var que:ActionQue = _action_ques[que_id]
+		if not que.is_turn_gap(action_index):
+			que.actor.turn_starting.emit()
+
+func _on_turn_end(game_state):
+	end_of_turn.emit()
+	end_of_turn_with_state.emit(game_state)
+	# Emit end of turn for actors
+	for que_id in _que_order:
+		var que:ActionQue = _action_ques[que_id]
+		if not que.is_turn_gap(action_index):
+			que.actor.turn_ended.emit()
+
+	while _to_add_actor_ques.size() > 0:
+		var que = _to_add_actor_ques[0]
+		add_action_que(que, false)
+		_to_add_actor_ques.remove_at(0)
+
 func start_or_resume_execution():
 	if execution_state == ActionStates.Waiting:
 		_start_round()
@@ -143,16 +168,21 @@ func get_active_action_ques()->Array:
 	return out_list
 
 # Add an action que to the controller
-func add_action_que(new_que:ActionQue):
+var _to_add_actor_ques = []
+func add_action_que(new_que:ActionQue, delay_if_running:bool=true):
 	#TODO: Remvoe Hack
 	SHORTCUT_QUE = true
 	if _action_ques.has(new_que.Id):
+		return
+	if delay_if_running and execution_state != ActionStates.Waiting:
+		_to_add_actor_ques.append(new_que)
 		return
 	_action_ques[new_que.Id] = new_que
 	new_que.actor.stats_changed.connect(_on_actor_stat_change.bind(new_que.actor))
 	
 	new_que.max_que_size_changed.connect(_organize_ques)
 	_organize_ques()
+
 
 func remove_action_que(que:ActionQue):
 	if not _dead_ques.has(que.Id):
@@ -175,15 +205,7 @@ func update(delta: float) -> void:
 			
 			# Emit starting signals
 			if sub_action_index == 0:
-				game_state.current_turn_index = action_index
-				start_of_turn.emit()
-				start_of_turn_with_state.emit(game_state)
-				#_pay_turn_costs()
-				# Emit start of turn for actors
-				for que_id in _que_order:
-					var que:ActionQue = _action_ques[que_id]
-					if not que.is_turn_gap(action_index):
-						que.actor.turn_starting.emit()
+				_on_turn_start(game_state)
 			
 			# Start Frame
 			start_of_frame.emit()
@@ -213,14 +235,8 @@ func update(delta: float) -> void:
 			sub_action_index += 1
 			
 			# All subactions for turn have finished
-			if sub_action_index >= BaseAction.SUB_ACTIONS_PER_ACTION:
-				end_of_turn.emit()
-				end_of_turn_with_state.emit(game_state)
-				# Emit end of turn for actors
-				for que_id in _que_order:
-					var que:ActionQue = _action_ques[que_id]
-					if not que.is_turn_gap(action_index):
-						que.actor.turn_ended.emit()
+			if sub_action_index >= PageItemAction.SUB_ACTIONS_PER_ACTION:
+				_on_turn_end(game_state)
 						
 				# Reset / Increment values
 				sub_action_index = 0
@@ -272,7 +288,7 @@ func _execute_turn_frames(game_state:GameStateData, que:ActionQue, turn_index:in
 		
 		
 	# Get the action for this turn
-	var action:BaseAction = que.get_action_for_turn(turn_index)
+	var action:PageItemAction = que.get_action_for_turn(turn_index)
 	# If no action, skip. Ussually caused by smaller ques.
 	if !action:
 		if DEEP_LOGGING: print("\t\tNo action")
@@ -318,7 +334,7 @@ func _execute_turn_frames(game_state:GameStateData, que:ActionQue, turn_index:in
 				continue
 				
 		
-		var script_key = sub_action_data['SubActionScript']
+		var script_key = sub_action_data['!SubActionScript']
 		var subaction = _get_subaction(script_key)
 		if !subaction:
 			printerr("No script found for subaction " + script_key)

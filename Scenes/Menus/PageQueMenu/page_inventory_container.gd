@@ -2,11 +2,11 @@
 class_name PageInventoryContainer
 extends BackPatchContainer
 
-signal page_button_down(page:BaseAction, button:InventoryPageButton)
-signal page_button_enter(page:BaseAction)
-signal page_button_hover(page:BaseAction)
+signal page_button_down(page:PageItemAction, button:InventoryPageButton)
+signal page_button_enter(page:PageItemAction)
+signal page_button_hover(page:PageItemAction)
 signal page_button_hover_end
-signal page_button_clicked(page:BaseAction)
+signal page_button_clicked(page:PageItemAction)
 
 @export var tab_bar:TabBar
 @export var pages_container:FlowContainer
@@ -36,7 +36,7 @@ func _process(delta: float) -> void:
 	if _mouse_in_button and _hover_timer > 0:
 		_hover_timer -= delta
 		if _hover_timer < 0:
-			var page = ActionLibrary.get_action(_mouse_in_button._action_key)
+			var page = ItemLibrary.get_item(_mouse_in_button._item_key)
 			if page:
 				page_button_hover.emit(page)
 	if _click_timer > 0:
@@ -58,12 +58,12 @@ func build_page_list():
 	for button in _page_buttons.values():
 		button.queue_free()
 	_page_buttons.clear()
-	for page:BaseAction in ActionLibrary.list_all_actions():
+	for page:PageItemAction in ActionLibrary.list_all_actions():
 		if page.details.tags.has("private"):
 			continue
 		_build_button(page)
 
-func _build_button(page:BaseAction):
+func _build_button(page:PageItemAction):
 	var new_button:InventoryPageButton = premade_page_button.duplicate()
 	pages_container.add_child(new_button)
 	new_button.set_page(page)

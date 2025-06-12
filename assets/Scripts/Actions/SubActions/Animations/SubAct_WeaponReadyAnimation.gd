@@ -27,7 +27,7 @@ func get_prop_enum_values(prop_key:String)->Array:
 	return []
 
 
-func do_thing(parent_action:BaseAction, subaction_data:Dictionary, metadata:QueExecutionData,
+func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, metadata:QueExecutionData,
 				game_state:GameStateData, actor:BaseActor)->bool:
 	var animation:String = subaction_data.get('Animation', "")
 	if animation == "":

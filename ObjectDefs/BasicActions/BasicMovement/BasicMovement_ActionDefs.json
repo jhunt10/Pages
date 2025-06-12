@@ -13,6 +13,11 @@
                 "Movement"
             ]
         },
+        "ItemDetails":
+        {
+            "Rarity": "Mundane",
+            "Value": 50
+        },
         "MissileDatas": {},
         "Preview": {
             "PreviewMoveOffset": "[0, -1, 0, 0]"
@@ -30,7 +35,7 @@
                     "MovementType": "Walk",
                     "PlayWalkin": true,
                     "RelativePos": "[0, -1, 0, 0]",
-                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_Move.gd"
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Movement/SubAct_Move.gd"
                 }
             ]
         },
@@ -50,6 +55,11 @@
                 "Movement"
             ]
         },
+        "ItemDetails":
+        {
+            "Rarity": "Mundane",
+            "Value": 50
+        },
         "MissileDatas": {},
         "Preview": {
             "PreviewMoveOffset": "[0, 1, 0, 0]"
@@ -66,7 +76,7 @@
                     "MovementType": "Walk",
                     "PlayWalkin": true,
                     "RelativePos": "[0, 1, 0, 0]",
-                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_Move.gd"
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Movement/SubAct_Move.gd"
                 },
                 {
                     "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_AnimationFinish.gd"
@@ -89,6 +99,11 @@
                 "Movement"
             ]
         },
+        "ItemDetails":
+        {
+            "Rarity": "Mundane",
+            "Value": 50
+        },
         "MissileDatas": {},
         "Preview": {
             "PreviewMoveOffset": "[-1, 0, 0, 0]"
@@ -106,7 +121,7 @@
                     "MovementType": "Walk",
                     "PlayWalkin": true,
                     "RelativePos": "[-1, 0, 0, 0]",
-                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_Move.gd"
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Movement/SubAct_Move.gd"
                 }
             ]
         },
@@ -126,6 +141,11 @@
                 "Movement"
             ]
         },
+        "ItemDetails":
+        {
+            "Rarity": "Mundane",
+            "Value": 50
+        },
         "MissileDatas": {},
         "Preview": {
             "PreviewMoveOffset": "[1, 0, 0, 0]"
@@ -143,7 +163,7 @@
                     "MovementType": "Walk",
                     "PlayWalkin": true,
                     "RelativePos": "[1, 0, 0, 0]",
-                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_Move.gd"
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Movement/SubAct_Move.gd"
                 }
             ]
         },
@@ -163,6 +183,11 @@
                 "Movement"
             ]
         },
+        "ItemDetails":
+        {
+            "Rarity": "Mundane",
+            "Value": 50
+        },
         "MissileDatas": {},
         "Preview": {
             "PreviewMoveOffset": "[0, 0, 0, 3]"
@@ -173,7 +198,7 @@
                     "MovementType": "Walk",
                     "PlayWalkin": true,
                     "RelativePos": "[0, 0, 0, 3]",
-                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_Move.gd"
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Movement/SubAct_Move.gd"
                 }
             ]
         },
@@ -193,6 +218,11 @@
                 "Movement"
             ]
         },
+        "ItemDetails":
+        {
+            "Rarity": "Mundane",
+            "Value": 50
+        },
         "MissileDatas": {},
         "Preview": {
             "PreviewMoveOffset": "[0, 0, 0, 1]"
@@ -203,7 +233,7 @@
                     "MovementType": "Walk",
                     "PlayWalkin": true,
                     "RelativePos": "[0, 0, 0, 1]",
-                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_Move.gd"
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Movement/SubAct_Move.gd"
                 }
             ]
         },
@@ -225,6 +255,11 @@
         "Preview": {
             "PreviewMoveOffset": "[0, 0, 0, 0]"
         },
+        "ItemDetails":
+        {
+            "Rarity": "Mundane",
+            "Value": 50
+        },
         "SubActions": {},
         "TargetParams": {}
     },
@@ -242,6 +277,11 @@
                 "Movement"
             ]
         },
+        "ItemDetails":
+        {
+            "Rarity": "Common",
+            "Value": 50
+        },
         "MissileDatas": {},
         "Preview": {
             "PreviewMoveOffset": "[0, 0, 0, 2]"
@@ -251,14 +291,14 @@
                 {
                     "MovementType": "Walk",
                     "RelativePos": "[0, 0, 0, 3]",
-                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_Move.gd"
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Movement/SubAct_Move.gd"
                 }
             ],
             "8": [
                 {
                     "MovementType": "Walk",
                     "RelativePos": "[0, 0, 0, 3]",
-                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_Move.gd"
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Movement/SubAct_Move.gd"
                 }
             ]
         },
@@ -277,6 +317,11 @@
             "Tags": [
                 "Movement"
             ]
+        },
+        "ItemDetails":
+        {
+            "Rarity": "Common",
+            "Value": 50
         },
         "MissileDatas": {},
         "Preview": {
@@ -302,7 +347,7 @@
                     "MovementType": "Walk",
                     "PlayWalkin": true,
                     "RelativePos": "[0, -1, 0, 0]",
-                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_Move.gd"
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Movement/SubAct_Move.gd"
                 },
                 {
                     "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_AnimationFinish.gd"
@@ -313,7 +358,7 @@
                     "MovementType": "Walk",
                     "PlayWalkin": true,
                     "RelativePos": "[0, -1, 0, 0]",
-                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_Move.gd"
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Movement/SubAct_Move.gd"
                 },
                 {
                     "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_AnimationFinish.gd"

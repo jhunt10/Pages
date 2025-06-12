@@ -1,6 +1,6 @@
 [
     {
-        "ItemKey": "HarmingLight_PageItem",
+        "ItemKey": "HarmingLightPage",
         "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
         "Details":{
             "Description": "You understand the harsh wrath of @@#Color:DmgColor:Light@@ and know how best to weild it against your foes.\n\n@@#AtkMod:HarmLightAtkMod:DefFacFil@@ have @@#AtkMod:HarmLightAtkMod:StatMod:HarmLightStatMod@@ against your @@#AtkMod:HarmLightAtkMod:AtkSrcFil@@.",
@@ -15,7 +15,6 @@
             "Rarity": "Common",
             "Value": 50
         },
-        "DamageMods": {},
         "PageDetails": {
             "AttackMods": {
                 "HarmLightAtkMod": {
@@ -55,7 +54,7 @@
         }
     },
     {
-        "ItemKey": "HealingLight_PageItem",
+        "ItemKey": "HealingLightPage",
         "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
         "Details":{
             "Description": "You belive in the gentle warmth of @@#Color:DmgColor:Light@@ and know how best to bestow it upon your flock.\n\n@@#AtkMod:HealLightAtkMod:DefFacFil@@ have @@#AtkMod:HealLightAtkMod:StatMod:HealLightStatMod@@ against your @@#AtkMod:HealLightAtkMod:AtkSrcFil@@.\n\n@@#Color:DmgColor:Fire@@ @@#Color:DmgColor:Cold@@ @@#Color:DmgColor:Shock@@ @@#Color:DmgColor:Poison@@ @@#Color:DmgColor:Slash@@ @@#Color:DmgColor:Blunt@@ @@#Color:DmgColor:Pierce@@ @@#Color:DmgColor:Crash@@ @@#Color:DmgColor:Light@@ @@#Color:DmgColor:Dark@@",
@@ -110,7 +109,7 @@
     },
     
     {
-        "ItemKey": "BlessedLimit1_PageItem",
+        "ItemKey": "BlessedLimit1Page",
         "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
         "Details":{
             "Description": "@@#StatMod:BlessCountMod@@\nYou may have a limited number of @@#Color:Blue:Blessing@@ active at once (default 1). If you exceed this limit, your oldest active @@#Color:Blue:Blessing@@ ends.",
@@ -135,7 +134,7 @@
         }
     },
     {
-        "ItemKey": "BlessedLimit2_PageItem",
+        "ItemKey": "BlessedLimit2Page",
         "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
         "Details":{
             "Description": "@@#StatMod:BlessCountMod@@\nYou may have a limited number of @@#Color:Blue:Blessing@@ active at once (default 1). If you exceed this limit, your oldest active @@#Color:Blue:Blessing@@ ends.",
@@ -160,7 +159,7 @@
         }
     },
     {
-        "ItemKey": "BlessedMass_PageItem",
+        "ItemKey": "BlessedMassPage",
         "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
         "Details":{
             "Description": "@@#StatMod:BlessCountMod@@ and @@#Color:Blue:Blessing@@ now apply to all Allies in Target Area.",
@@ -196,7 +195,7 @@
         }
     },
     {
-        "ItemKey": "RemoveSelect_PageItem",
+        "ItemKey": "RemoveSelectPage",
         "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
         "Details":{
             "Description": "On using a @@#Color:Blue:Remove@@ @@#Color:Red:Action@@, you select which @@#Color:Red:Effect@@ is removed.",
@@ -216,7 +215,7 @@
         }
     },
     {
-        "ItemKey": "RemoveMore_PageItem",
+        "ItemKey": "RemoveMorePage",
         "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
         "Details":{
             "Description": "On using a @@#Color:Blue:Remove@@ @@#Color:Red:Action@@, you can remove up to @@#Color:Red:2 Effect@@.",

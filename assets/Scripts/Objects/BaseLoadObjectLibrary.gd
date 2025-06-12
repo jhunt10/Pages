@@ -60,13 +60,16 @@ func get_static_object(key:String)->BaseLoadObject:
 	return _static_objects[key]
 
 func create_object(object_key:String, id:String='', data:Dictionary={})->BaseLoadObject:
-	if id != '' and _loaded_objects.keys().has(id):
-		printerr("%sLibrary.create_object: %s with id '%s' already exists.: " % [get_object_name(), id, object_key])
-		return _loaded_objects[id]
 	var object_def = _object_defs.get(object_key, null)
 	if !object_def:
 		printerr("%sLibrary.create_object: No ObjectDef found with key '%s'.: " % [get_object_name(), object_key])
 		return null
+	if is_object_static(object_def):
+		if _static_objects.keys().has(object_key):
+			return _static_objects[object_key]
+	if id != '' and _loaded_objects.keys().has(id):
+		printerr("%sLibrary.create_object: %s with id '%s' already exists.: " % [get_object_name(), id, object_key])
+		return _loaded_objects[id]
 	var script_path = get_object_script_path(object_def)
 	if script_path == '':
 		printerr("%sLibrary.get_object: No object script found on '%s'." % [get_object_name(), object_key])
@@ -165,17 +168,22 @@ func reload():
 	_loaded_objects.clear()
 	init_load()
 
-func _load_object_defs():
+func _load_object_defs(file_sufix = ''):
 	var parent_to_child_mapping = {}
 	var child_to_parent_mapping = {}
 	var paths =[]
 	#paths.append('res://defs/')
 	paths.append(OBJECTS_DEFS_DIR)
-	
+	# TODO: Remove Hack
+	if file_sufix == '':
+		file_sufix = get_def_file_sufix().replace(".json", ".def")
+	else:
+		var t = true
 	# Load Defs all defs into temp dict
 	var temp_defs = {}
 	for path in paths:
-		for def_file in _search_for_files(path, get_def_file_sufix()):
+		# TODO: Remove Def/Json swap
+		for def_file in _search_for_files(path, file_sufix):
 			if LOGGING: print("# Loading Def file: %s" % [def_file])
 			var loading_defs = _load_object_def_file(def_file)
 			for loading_key in loading_defs.keys():
@@ -183,14 +191,14 @@ func _load_object_defs():
 					printerr("%sLibrary.load_object_defs: Duplicate LoadObjects found with key '%s'. " % [get_object_name(), loading_key])
 					continue
 				temp_defs[loading_key] = loading_defs[loading_key]
-				var parent_key = loading_defs[loading_key].get("ParentKey", "")
+				var parent_key = loading_defs[loading_key].get("!ParentKey", "")
 				child_to_parent_mapping[loading_key] = parent_key
 	
 	# With all defs in temp_defs, build chain from child to base 
 	var def_to_family_chain = {} # DefKey mapped to Array of keys from parent to base
 	for def_key in temp_defs.keys():
 		#print("Checking def_to_family_chain for def: " + def_key)
-		var parent_key = temp_defs[def_key].get("ParentKey", "")
+		var parent_key = temp_defs[def_key].get("!ParentKey", "")
 		if parent_key == "":
 			def_to_family_chain[def_key] = []
 		else:
@@ -262,12 +270,32 @@ func _load_object_def_file(file_path:String)->Dictionary:
 	if object_defs is Array:
 		pass
 	elif object_defs is Dictionary:
-		var check = object_defs.values()[0]
-		if check is Dictionary and not check.keys().has("Details"):
-			for key in object_defs.keys():
-				object_defs[key][object_key_name] = key
-		object_defs = object_defs.values()
-			
+		if object_defs.size() == 0:
+			object_defs = []
+		else:
+			var check = object_defs.values()[0]
+			if check is Dictionary:
+				for key in object_defs.keys():
+					object_defs[key][object_key_name] = key
+			object_defs = object_defs.values()
+	
+	# TODO: Remove Hack
+	if file_path.contains("ActionDefs.") and get_object_name() == "Item":
+		for def:Dictionary in object_defs:
+			if not def.has("PageData"):
+				def["PageData"] = {}
+			var key = def.get(object_key_name)
+			def['PageData']['ActionKey'] = key
+			key += "_PageItem"
+			def["ItemKey"] = key
+			def['!ObjectScript'] = "res://assets/Scripts/Items/Pages/BasePageItem.gd"
+			if not def['#ObjDetails'].keys().has("Tags"):
+				def['#ObjDetails']['Tags'] = []
+			def['#ObjDetails']['Tags'].append("Page")
+			def['#ObjDetails']['Tags'].append("Action")
+	
+	
+	
 	for def:Dictionary in object_defs:
 		if !def.keys().has(object_key_name):
 			printerr("No '%s' found on object in %s." % [object_key_name, file_path])
@@ -276,7 +304,7 @@ func _load_object_def_file(file_path:String)->Dictionary:
 		_defs_to_load_paths[object_key] = file_path.get_base_dir()
 		out_dict[object_key] = def
 		## Check if needs to wait for parent to be loaded
-		#var parent_key = def.get("ParentKey", null)
+		#var parent_key = def.get("!ParentKey", null)
 		#if parent_key == null:
 			#_object_defs[object_key] = def
 			#if LOGGING: print("# - Loaded Object Def: %s" % [object_key])

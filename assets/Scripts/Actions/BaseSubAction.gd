@@ -24,17 +24,17 @@ func get_action_tags(_subaction_data:Dictionary)->Array:
 	return []
 
 ## Return a of OnQueOptionsData to select the parent action is qued. 
-func get_on_que_options(parent_action:BaseAction, _subaction_data:Dictionary, _actor:BaseActor, _game_state:GameStateData)->Array:
+func get_on_que_options(parent_action:PageItemAction, _subaction_data:Dictionary, _actor:BaseActor, _game_state:GameStateData)->Array:
 	#var example = OnQueOptionsData.new("SelectedItemId", "Select Item to use:", _actor.items._items.keys())
 	return []
 
 ## Execute this sub_action. Returns true if the sub_action was successful. If false is returned, no further sub_actions will be executed this turn.
-func do_thing(_parent_action:BaseAction, _subaction_data:Dictionary, _metadata:QueExecutionData,
+func do_thing(_parent_action:PageItemAction, _subaction_data:Dictionary, _metadata:QueExecutionData,
 				_game_state:GameStateData, _actor:BaseActor)->bool:
 	printerr("BaseSubAction.do_thing: No Override.")
 	return false
 
-func _get_target_parameters(parent_action:BaseAction, actor:BaseActor, subaction_data:Dictionary)->TargetParameters:
+func _get_target_parameters(parent_action:PageItemAction, actor:BaseActor, subaction_data:Dictionary)->TargetParameters:
 	var target_param_key = subaction_data.get("TargetParamKey", null)
 	if !target_param_key or target_param_key == '':
 		printerr("BaseSubAction._get_target_parameters: No TargetParamKey found in subaction_data.")
@@ -47,7 +47,7 @@ func _get_target_parameters(parent_action:BaseAction, actor:BaseActor, subaction
 	return target_parms
 
 ## Selected target mapped to key
-func _get_primary_target(parent_action:BaseAction, subaction_data:Dictionary, target_key:String, 
+func _get_primary_target(parent_action:PageItemAction, subaction_data:Dictionary, target_key:String, 
 					metadata:QueExecutionData, game_state:GameStateData, source_actor:BaseActor):
 	if target_key == "Self":
 		return [source_actor]
@@ -72,7 +72,7 @@ func _get_primary_target(parent_action:BaseAction, subaction_data:Dictionary, ta
 
 ## Get actors that were effected by the selected target key
 ## Only use when you haven't already pulled out Target Parames and Selected Targets
-func _find_target_effected_actors(parent_action:BaseAction, subaction_data:Dictionary, target_key:String, 
+func _find_target_effected_actors(parent_action:PageItemAction, subaction_data:Dictionary, target_key:String, 
 					metadata:QueExecutionData, 	game_state:GameStateData, source_actor:BaseActor)->Array:
 	if target_key == "Self":
 		return [source_actor]

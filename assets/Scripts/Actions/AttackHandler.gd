@@ -226,7 +226,7 @@ static func handle_attack(
 			var damage_vfx_data = damage_vfx_cache['DamageVfxData']
 			if attack_vfx:
 				attack_vfx.add_chained_vfx(damage_vfx_key, damage_vfx_data)
-			else:
+			elif damage_vfx_key:
 				VfxHelper.create_damage_effect(defender, damage_vfx_key, damage_vfx_data)
 		
 	# Trigger After Attack Effects
