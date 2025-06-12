@@ -6,7 +6,7 @@
 			"DisplayName": "Old Sword",
 			"SnippetDesc": "A soldier's old sword.",
 			"Description": "A old sword dulled from years of practice but no combat. Old, but still works.",
-			"Tags": ["Weapon"],
+			"Tags": ["Weapon", "Sword"],
 			"LargeIcon":"Sprites/OldSword.png",
 			"SmallIcon":"Sprites/OldSword.png"
 		},
@@ -61,8 +61,6 @@
                 },
                 "EffectDatas":{ },
                 "TargetParams": {
-                    "EffectsAllies": false,
-                    "EffectsEnemies": true,
                     "LineOfSight": true,
                     "TargetArea": "[[-1,0],[-1,1],[0,1],[1,1],[1,0]]",
                     "TargetType": "Enemy"

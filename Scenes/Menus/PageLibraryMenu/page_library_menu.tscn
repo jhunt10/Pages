@@ -8,7 +8,7 @@
 [ext_resource type="Script" path="res://Scenes/Menus/PageLibraryMenu/entry_group_container.gd" id="5_1qkpm"]
 [ext_resource type="PackedScene" uid="uid://xjhbo48tdbhr" path="res://Scenes/Menus/PageLibraryMenu/PageDetails/page_details_entry_container.tscn" id="7_ykmfd"]
 
-[node name="PageLibraryMenu" type="Control" node_paths=PackedStringArray("close_button", "reload_pages_button", "scale_slider", "loading_patch", "scroll_ocntainer", "tag_filter", "page_entries_container", "premade_entry_group", "example_page_entry", "load_time_label", "action_check_box", "actor_check_box", "effect_check_box", "item_check_box")]
+[node name="PageLibraryMenu" type="Control" node_paths=PackedStringArray("close_button", "reload_pages_button", "scale_slider", "loading_patch", "scroll_ocntainer", "tag_filter", "page_entries_container", "premade_entry_group", "example_page_entry", "load_time_label", "showing_label", "action_check_box", "actor_check_box", "effect_check_box", "item_check_box")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -26,6 +26,7 @@ page_entries_container = NodePath("VBoxContainer/ScrollContainer/VBoxContainer")
 premade_entry_group = NodePath("VBoxContainer/ScrollContainer/VBoxContainer/EntryGroupContainer")
 example_page_entry = NodePath("VBoxContainer/ScrollContainer/VBoxContainer/EntryGroupContainer/EntryGroupInnerContainer/SubEntriesContainer/PageDetailsEntryContainer")
 load_time_label = NodePath("VBoxContainer/NinePatchRect/HBoxContainer/LoadTimeLabel")
+showing_label = NodePath("VBoxContainer/NinePatchRect/HBoxContainer/HBoxContainer/ShowingValue")
 action_check_box = NodePath("VBoxContainer/NinePatchRect/HBoxContainer/HBoxContainer/ActionsCheckBox")
 actor_check_box = NodePath("VBoxContainer/NinePatchRect/HBoxContainer/HBoxContainer/ActorsCheckBox")
 effect_check_box = NodePath("VBoxContainer/NinePatchRect/HBoxContainer/HBoxContainer/EffectsCheckBox")
@@ -97,6 +98,14 @@ text = "Effects"
 [node name="ItemsCheckBox" type="CheckBox" parent="VBoxContainer/NinePatchRect/HBoxContainer/HBoxContainer"]
 layout_mode = 2
 text = "Items"
+
+[node name="ShowingLabel" type="Label" parent="VBoxContainer/NinePatchRect/HBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Showing:"
+
+[node name="ShowingValue" type="Label" parent="VBoxContainer/NinePatchRect/HBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "00"
 
 [node name="ScaleLabel3" type="Label" parent="VBoxContainer/NinePatchRect/HBoxContainer"]
 visible = false

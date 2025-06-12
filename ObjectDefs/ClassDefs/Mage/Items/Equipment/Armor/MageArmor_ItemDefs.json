@@ -1,0 +1,146 @@
+[
+    {
+        "ItemKey":"OldMageHelmet",
+        "_ObjectScript": "res://assets/Scripts/Items/Equipment/BaseArmorEquipment.gd",
+        "Details":{
+			"DisplayName": "Old Hat",
+			"SnippetDesc": "A mage's old Helmet.",
+			"Description": "A common design of hat worn by many new mages. Old, but still works.",
+			"Tags": ["Equipment", "Armor", "Head"],
+			"LargeIcon":"Sprites/RedHat.png",
+			"SmallIcon":"Sprites/RedHat.png"
+		},
+        "ItemDetails":
+        {
+            "Rarity": "Mundane",
+            "Value": 50
+        },
+        "EquipmentDetails":
+        {
+            "EquipSlot":"Head",
+            "SpriteData": {
+                "SpriteSheet":"Sprites/RedHat_SpriteSheet.png"
+            },
+            "StatMods": {
+                "WardBonus": {
+                    "ModType": "Add",
+                    "StatName": "Ward",
+                    "Value": 2
+                }
+            },
+            "Requirments": {
+                "ReqStats": {
+                    "Intelligence": 10
+                }
+            }
+        }
+    },
+    {
+        "ItemKey":"OldMageArmor",
+        "_ObjectScript": "res://assets/Scripts/Items/Equipment/BaseArmorEquipment.gd",
+        "Details":{
+			"DisplayName": "Old Red Robes",
+			"SnippetDesc": "A mage's old Robes.",
+			"Description": "A common design of robes worn by many new mages. Old, but still works.",
+			"Tags": ["Equipment", "Armor", "Body"],
+			"LargeIcon":"Sprites/RedRobes.png",
+			"SmallIcon":"Sprites/RedRobes.png"
+		},
+        "ItemDetails":
+        {
+            "Rarity": "Mundane",
+            "Value": 50
+        },
+        "EquipmentDetails":
+        {
+            "EquipSlot":"Body",
+            "SpriteData": {
+                "SpriteSheet":"Sprites/RedRobes_SpriteSheet.png"
+            },
+            "StatMods": {
+                "WardBonus": {
+                    "ModType": "Add",
+                    "StatName": "Ward",
+                    "Value": 2
+                }
+            },
+            "Requirments": {
+                "ReqStats": {
+                    "Intelligence": 10
+                }
+            }
+        }
+    },
+    {
+        "ItemKey":"OldMageBoots",
+        "_ObjectScript": "res://assets/Scripts/Items/Equipment/BaseArmorEquipment.gd",
+        "Details":{
+			"DisplayName": "Old Red Shoes",
+			"SnippetDesc": "A mage's old Shoes.",
+			"Description": "A common design of shoes worn by many new mages. Old, but still works.",
+			"Tags": ["Equipment", "Armor", "Feet"],
+			"LargeIcon":"Sprites/RedBoots.png",
+			"SmallIcon":"Sprites/RedBoots.png"
+		},
+        "ItemDetails":
+        {
+            "Rarity": "Mundane",
+            "Value": 50
+        },
+        "EquipmentDetails":
+        {
+            "EquipSlot":"Feet",
+            "SpriteData": {
+                "SpriteSheet":"Sprites/RedBoots_SpriteSheet.png"
+            },
+            "StatMods": {
+                "WardBonus": {
+                    "ModType": "Add",
+                    "StatName": "Ward",
+                    "Value": 2
+                }
+            },
+            "Requirments": {
+                "ReqStats": {
+                    "Intelligence": 10
+                }
+            }
+        }
+    },
+    {
+        "ItemKey":"OldMageOrb",
+        "_ObjectScript": "res://assets/Scripts/Items/Equipment/BaseArmorEquipment.gd",
+        "Details":{
+			"DisplayName": "Old Orb",
+			"SnippetDesc": "A mage's old focusing Orb.",
+			"Description": "A common tool used by many new mages for focsing magic. Old, but still works.",
+			"Tags": ["Equipment", "OffHand","Orb"],
+			"LargeIcon":"Sprites/OldOrb.png",
+			"SmallIcon":"Sprites/OldOrb.png"
+		},
+        "ItemDetails":
+        {
+            "Rarity": "Mundane",
+            "Value": 50
+        },
+        "EquipmentDetails":
+        {
+            "EquipSlot":"OffHand",
+            "SpriteData": {
+                "SpriteSheet":"Sprites/OldOrb_SpriteSheet.png"
+            },
+            "StatMods": {
+                "IntelligenceBonus": {
+                    "ModType": "Add",
+                    "StatName": "Intelligence",
+                    "Value": 1
+                }
+            },
+            "Requirments": {
+                "ReqStats": {
+                    "Intelligence": 10
+                }
+            }
+        }
+    }
+]

@@ -1,11 +1,11 @@
 [
     {
-        "EffectKey": "_BaseBlessingEffect",
+        "EffectKey": "#BaseBlessingEffect",
         "Details": {
             "Description": "Gain @@#StatMod:BlessMod1@@ and @@#StatMod:BlessMod2@@.",
             "DisplayName": "Base Blessing",
-            "LargeIcon": "Sprites/MassUp.png",
-            "SmallIcon": "Sprites/MassUp.png",
+            "LargeIcon": "Sprites/Blessing_Base.png",
+            "SmallIcon": "Sprites/Blessing_Base.png",
             "SnippetDesc": "Gain @@#StatMod:BlessMod1@@ and @@#StatMod:BlessMod2@@.",
             "Tags": []
         },
@@ -48,7 +48,7 @@
     },
     {
         "EffectKey": "Blessing_Air",
-        "ParentKey": "_BaseBlessingEffect",
+        "ParentKey": "#BaseBlessingEffect",
         "Details": {
             "DisplayName": "Air Blessing",
             "LargeIcon": "Sprites/Blessing_Air.png",
@@ -69,7 +69,7 @@
     },
     {
         "EffectKey": "Blessing_Earth",
-        "ParentKey": "_BaseBlessingEffect",
+        "ParentKey": "#BaseBlessingEffect",
         "Details": {
             "DisplayName": "Earth Blessing",
             "LargeIcon": "Sprites/Blessing_Earth.png",
@@ -90,7 +90,7 @@
     },
     {
         "EffectKey": "Blessing_Fire",
-        "ParentKey": "_BaseBlessingEffect",
+        "ParentKey": "#BaseBlessingEffect",
         "Details": {
             "DisplayName": "Fire Blessing",
             "LargeIcon": "Sprites/Blessing_Fire.png",
@@ -111,7 +111,7 @@
     },
     {
         "EffectKey": "Blessing_Water",
-        "ParentKey": "_BaseBlessingEffect",
+        "ParentKey": "#BaseBlessingEffect",
         "Details": {
             "DisplayName": "Water Blessing",
             "LargeIcon": "Sprites/Blessing_Water.png",
@@ -289,8 +289,8 @@
         "Details": {
             "Description": "Gain @@#AtkMod:HolyWeaponBaseAtkMod:DmgMod:HolyWeaponDmgMod@@ on @@#Color:Red:Weapon Attacks@@ against @@#Color:Red:Enemies@@. If the Enemy has the @@#Color:DmgColor:Dark@@ Tag, this damage is added as @@#Color:DmgColor:Light Damage@@ instead.",
             "DisplayName": "Holy Weapon",
-            "LargeIcon": "Sprites/MassUp.png",
-            "SmallIcon": "Sprites/MassUp.png",
+            "LargeIcon": "Sprites/HolyWeapon.png",
+            "SmallIcon": "Sprites/HolyWeapon.png",
             "SnippetDesc": "Gain @@#StatMod:BlessMod1@@ and @@#StatMod:BlessMod2@@.",
             "Tags": []
         },

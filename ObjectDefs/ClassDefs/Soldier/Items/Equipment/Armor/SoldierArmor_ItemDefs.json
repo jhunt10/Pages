@@ -6,7 +6,7 @@
 			"DisplayName": "Old Helmet",
 			"SnippetDesc": "A soldier's old Helmet.",
 			"Description": "Standard issue helmet provided by The Military. Old, but still works.",
-			"Tags": ["Head"],
+			"Tags": ["Equipment", "Armor","Head"],
 			"LargeIcon":"Sprites/OldHelm.png",
 			"SmallIcon":"Sprites/OldHelm.png"
 		},
@@ -23,19 +23,16 @@
             },
             "StatMods": {
                 "ArmorBonus": {
-                    "DisplayName": "Old Helmet",
                     "ModType": "Add",
                     "StatName": "Armor",
                     "Value": 5
                 },
                 "MassBonus": {
-                    "DisplayName": "Old Helmet",
                     "ModType": "Add",
                     "StatName": "Mass",
                     "Value": 1
                 },
                 "SpeedPen": {
-                    "DisplayName": "Old Helmet",
                     "ModType": "Add",
                     "StatName": "Speed",
                     "Value": -1
@@ -55,7 +52,7 @@
 			"DisplayName": "Old Armor",
 			"SnippetDesc": "A soldier's old Armor.",
 			"Description": "Standard issue armor provided by The Military. Old, but still works.",
-			"Tags": ["Body"],
+			"Tags": ["Equipment", "Armor","Body"],
 			"LargeIcon":"Sprites/OldArmor.png",
 			"SmallIcon":"Sprites/OldArmor.png"
 		},
@@ -72,19 +69,16 @@
             },
             "StatMods": {
                 "ArmorBonus": {
-                    "DisplayName": "Old Armor",
                     "ModType": "Add",
                     "StatName": "Armor",
                     "Value": 5
                 },
                 "MassBonus":{
-                    "DisplayName": "Old Armor",
                     "ModType": "Add",
                     "StatName": "Mass",
                     "Value": 1
                 },
                 "SpeedPen": {
-                    "DisplayName": "Old Armor",
                     "ModType": "Add",
                     "StatName": "Speed",
                     "Value": -1
@@ -104,7 +98,7 @@
 			"DisplayName": "Old Boots",
 			"SnippetDesc": "A soldier's old Boots.",
 			"Description": "Standard issue boots provided by The Military. Old, but still works.",
-			"Tags": ["Feet"],
+			"Tags": ["Equipment", "Armor","Feet"],
 			"LargeIcon":"Sprites/OldBoots.png",
 			"SmallIcon":"Sprites/OldBoots.png"
 		},
@@ -121,19 +115,16 @@
             },
             "StatMods": {
                 "ArmorBonus": {
-                    "DisplayName": "Old Boots",
                     "ModType": "Add",
                     "StatName": "Armor",
                     "Value": 5
                 },
                 "MassBonus":{
-                    "DisplayName": "Old Boots",
                     "ModType": "Add",
                     "StatName": "Mass",
                     "Value": 1
                 },
                 "SpeedPen": {
-                    "DisplayName": "Old Boots",
                     "ModType": "Add",
                     "StatName": "Speed",
                     "Value": -1
@@ -153,7 +144,7 @@
 			"DisplayName": "Old Shield",
 			"SnippetDesc": "A soldier's old Shield.",
 			"Description": "Standard issue shield provided by The Military. Old, but still works.",
-			"Tags": ["OffHand","Shield"],
+			"Tags": ["Equipment","OffHand","Shield"],
 			"LargeIcon":"Sprites/OldShield.png",
 			"SmallIcon":"Sprites/OldShield.png"
 		},

@@ -114,8 +114,8 @@
         "Details":{
             "Description": "@@#StatMod:BlessCountMod@@\nYou may have a limited number of @@#Color:Blue:Blessing@@ active at once (default 1). If you exceed this limit, your oldest active @@#Color:Blue:Blessing@@ ends.",
             "DisplayName": "Blessed",
-            "LargeIcon": "Sprites/MoreBlessing.png",
-            "SmallIcon": "Sprites/MoreBlessing.png",
+            "LargeIcon": "Sprites/MoreBlessing1.png",
+            "SmallIcon": "Sprites/MoreBlessing1.png",
             "SnippetDesc": "+2 Max Blessing",
             "Tags": ["Passive"]
         },
@@ -129,7 +129,7 @@
             "BlessCountMod": {
                 "ModType": "Add",
                 "StatName": "LmtEftCount:Blessing",
-                "Value": 2
+                "Value": 1
             }
         }
     },
@@ -141,6 +141,31 @@
             "DisplayName": "More Blessed",
             "LargeIcon": "Sprites/MoreBlessing2.png",
             "SmallIcon": "Sprites/MoreBlessing2.png",
+            "SnippetDesc": "+2 Max Blessing",
+            "Tags": ["Passive"]
+        },
+        "ItemDetails":
+        {
+            "Rarity": "Rare",
+            "Value": 50
+        },
+        
+        "StatMods": {
+            "BlessCountMod": {
+                "ModType": "Add",
+                "StatName": "LmtEftCount:Blessing",
+                "Value": 2
+            }
+        }
+    },
+    {
+        "ItemKey": "BlessedLimit3Page",
+        "_ObjectScript": "res://assets/Scripts/Items/Pages/BasePageItem.gd",
+        "Details":{
+            "Description": "@@#StatMod:BlessCountMod@@\nYou may have a limited number of @@#Color:Blue:Blessing@@ active at once (default 1). If you exceed this limit, your oldest active @@#Color:Blue:Blessing@@ ends.",
+            "DisplayName": "Even Blesseder",
+            "LargeIcon": "Sprites/MoreBlessing4.png",
+            "SmallIcon": "Sprites/MoreBlessing4.png",
             "SnippetDesc": "+2 Max Blessing",
             "Tags": ["Passive"]
         },

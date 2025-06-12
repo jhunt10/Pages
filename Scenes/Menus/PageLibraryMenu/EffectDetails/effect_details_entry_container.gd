@@ -22,7 +22,8 @@ func _process(delta: float) -> void:
 
 ## Load the top level details displayed while entry is minimized
 func _load_mini_details():
-	var effect_details = thing_def.get("EffectDetails", {})
+	var effect_data = thing_def.get("EffectData", {})
+	var effect_details = effect_data.get("EffectDetails", {})
 	if effect_details.get("IsGood", false):
 		icon_background.texture = good_effect_icon
 	elif effect_details.get("IsBad", false):

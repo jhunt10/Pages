@@ -1,0 +1,126 @@
+[
+    {
+        "ItemKey":"OldRogueHelmet",
+        "_ObjectScript": "res://assets/Scripts/Items/Equipment/BaseArmorEquipment.gd",
+        "Details":{
+			"DisplayName": "Old Green Hood",
+			"SnippetDesc": "A rogue's old Hood.",
+			"Description": "A cheap hood sold by The Guild. Old, but still works.",
+			"Tags": ["Equipment","Armor","Head"],
+			"LargeIcon":"Sprites/GreenHood.png",
+			"SmallIcon":"Sprites/GreenHood.png"
+		},
+        "ItemDetails":
+        {
+            "Rarity": "Mundane",
+            "Value": 50
+        },
+        "EquipmentDetails":
+        {
+            "EquipSlot":"Head",
+            "SpriteData": {
+                "SpriteSheet":"Sprites/GreenHood_SpriteSheet.png"
+            },
+            "StatMods": {
+                "ArmorBonus": {
+                    "ModType": "Add",
+                    "StatName": "Armor",
+                    "Value": 1
+                },
+                "SpeedBonus": {
+                    "ModType": "Add",
+                    "StatName": "Speed",
+                    "Value": 1
+                }
+            },
+            "Requirments": {
+                "ReqStats": {
+                    "Agility": 10
+                }
+            }
+        }
+    },
+    {
+        "ItemKey":"OldRogueArmor",
+        "_ObjectScript": "res://assets/Scripts/Items/Equipment/BaseArmorEquipment.gd",
+        "Details":{
+			"DisplayName": "Old Shirt",
+			"SnippetDesc": "A rogue's old Robes.",
+			"Description": "A cheap padded shirt sold by The Guild. Old, but still works.",
+			"Tags": ["Equipment","Armor","Body"],
+			"LargeIcon":"Sprites/GreenShirt.png",
+			"SmallIcon":"Sprites/GreenShirt.png"
+		},
+        "ItemDetails":
+        {
+            "Rarity": "Mundane",
+            "Value": 50
+        },
+        "EquipmentDetails":
+        {
+            "EquipSlot":"Body",
+            "SpriteData": {
+                "SpriteSheet":"Sprites/GreenShirt_SpriteSheet.png"
+            },
+            "StatMods": {
+                "ArmorBonus": {
+                    "ModType": "Add",
+                    "StatName": "Armor",
+                    "Value": 1
+                },
+                "SpeedBonus": {
+                    "ModType": "Add",
+                    "StatName": "Speed",
+                    "Value": 1
+                }
+            },
+            "Requirments": {
+                "ReqStats": {
+                    "Agility": 10
+                }
+            }
+        }
+    },
+    {
+        "ItemKey":"OldRogueBoots",
+        "_ObjectScript": "res://assets/Scripts/Items/Equipment/BaseArmorEquipment.gd",
+        "Details":{
+			"DisplayName": "Old Boots",
+			"SnippetDesc": "A rogue's old Boots.",
+			"Description": "A cheap pair of leather boots sold by The Guild. Old, but still works.",
+			"Tags": ["Equipment","Armor","Feet"],
+			"LargeIcon":"Sprites/LeatherBoots.png",
+			"SmallIcon":"Sprites/LeatherBoots.png"
+		},
+        "ItemDetails":
+        {
+            "Rarity": "Mundane",
+            "Value": 50
+        },
+        "EquipmentDetails":
+        {
+            "EquipSlot":"Feet",
+            "SpriteData": {
+                "SpriteSheet":"Sprites/LeatherBoots_SpriteSheet.png"
+            },
+            "StatMods": {
+                "ArmorBonus": {
+                    "ModType": "Add",
+                    "StatName": "Armor",
+                    "Value": 1
+                },
+                "SpeedBonus": {
+                    "ModType": "Add",
+                    "StatName": "Speed",
+                    "Value": 1
+                }
+            },
+            "Requirments": {
+                "ReqStats": {
+                    "Agility": 10
+                }
+            }
+        }
+    }
+
+]

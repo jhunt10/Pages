@@ -25,10 +25,12 @@ static func create_class_def_files(thing_name:String):
 		var def_file = FileAccess.open(def_file_path, FileAccess.WRITE)
 		def_file.store_string("[\n\n]")
 		def_file.close()
-		def_file_path = main_dir_path.path_join(thing_name + "ActionPages_ItemDefs.json")
-		def_file = FileAccess.open(def_file_path, FileAccess.WRITE)
-		def_file.store_string("[\n\n]")
-		def_file.close()
+		
+		#def_file_path = main_dir_path.path_join(thing_name + "ActionPages_ItemDefs.json")
+		#def_file = FileAccess.open(def_file_path, FileAccess.WRITE)
+		#def_file.store_string("[\n\n]")
+		#def_file.close()
+		
 		def_file_path = main_dir_path.path_join(thing_name + "PassivePages_ItemDefs.json")
 		def_file = FileAccess.open(def_file_path, FileAccess.WRITE)
 		def_file.store_string("[\n\n]")
@@ -95,6 +97,7 @@ static func DoThing():
 	print("\nGo")
 	update_def_files()
 	#scan_def_props()
+	#create_class_def_files("Rogue")
 
 static func get_def_class_type(file_name, other_files)->String:
 	var obj_type = ''

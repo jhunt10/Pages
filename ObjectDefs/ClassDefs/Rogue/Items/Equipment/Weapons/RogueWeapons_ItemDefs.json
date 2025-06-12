@@ -1,0 +1,206 @@
+[
+    {
+        "ItemKey":"OldDagger",
+        "_ObjectScript": "res://assets/Scripts/Items/Equipment/BaseWeaponEquipment.gd",
+        "Details":{
+			"DisplayName": "Old Dagger",
+			"SnippetDesc": "A rogue's old dagger.",
+			"Description": "A simple dagger dulled from years of various uses. Old, but still works.",
+			"Tags": ["Weapon","OffHand","Dagger"],
+			"LargeIcon":"Sprites/OldDagger.png",
+			"SmallIcon":"Sprites/OldDagger.png"
+		},
+        "ItemDetails":
+        {
+            "Rarity": "Mundane",
+            "Value": 50
+        },
+        "EquipmentDetails":
+        {
+            "EquipSlot":"Weapon",
+            "Requirments": {
+                "ReqStats": {
+                    "Agility": 10
+                }
+            },
+            "StatMods": {
+                "AttackBonus": {
+                    "ModType": "Add",
+                    "StatName": "PhyAttack",
+                    "Value": 10
+                }
+            }
+        },
+        "WeaponDetails": {
+            "WeaponClass": "Light",
+            "IsRanged": true,
+            "WeaponSpriteData":{
+                "Offset":[0,0],
+                "SpriteName":"Sprites/OldDagger",
+                "Rotation":0,
+                "WeaponAnimation": "Stab"
+            },
+            "AttackData":{
+                "AttackTags": ["Weapon","Melee","Physical"],
+                "AttackDetails": {
+                    "AccuracyMod": 1,
+                    "PotencyMod": 1
+                },
+                "DamageDatas":{
+                    "WeaponDamage": {
+                        "AtkStat": "PhyAttack",
+                        "AtkPwrBase": 100,
+                        "AtkPwrRange": 10,
+                        "DamageVfxKey": "Pierce_DamageEffect",
+                        "DamageType": "Pierce",
+                        "DefenseType": "Armor"
+                    }
+                },
+                "EffectDatas":{ },
+                "TargetParams": {
+                    "LineOfSight": true,
+                    "TargetArea": "[[-1,0],[-1,1],[0,1],[1,1],[1,0]]",
+                    "TargetType": "Enemy"
+                }
+            }
+        }
+    },
+    {
+        "ItemKey":"BlackJack",
+        "_ObjectScript": "res://assets/Scripts/Items/Equipment/BaseWeaponEquipment.gd",
+        "Details":{
+			"DisplayName": "Black Jack",
+			"SnippetDesc": "Small hand club.",
+			"Description": "A small club great for knocking poeple out cold.",
+			"Tags": ["Weapon","OffHand", "Club"],
+			"LargeIcon":"Sprites/BlackJack.png",
+			"SmallIcon":"Sprites/BlackJack.png"
+		},
+        "ItemDetails":
+        {
+            "Rarity": "Mundane",
+            "Value": 50
+        },
+        "EquipmentDetails":
+        {
+            "EquipSlot":"Weapon",
+            "Requirments": {
+                "ReqStats": {
+                    "Agility": 10
+                }
+            },
+            "StatMods": {
+                "AttackBonus": {
+                    "ModType": "Add",
+                    "StatName": "PhyAttack",
+                    "Value": 10
+                }
+            }
+        },
+        "WeaponDetails": {
+            "WeaponClass": "Light",
+            "IsRanged": true,
+            "WeaponSpriteData":{
+                "Offset":[0,0],
+                "SpriteName":"Sprites/BlackJack",
+                "Rotation":0,
+                "WeaponAnimation": "Swing"
+            },
+            "AttackData":{
+                "AttackTags": ["Weapon","Melee","Physical"],
+                "AttackDetails": {
+                    "AccuracyMod": 1,
+                    "PotencyMod": 1
+                },
+                "DamageDatas":{
+                    "WeaponDamage": {
+                        "AtkStat": "PhyAttack",
+                        "AtkPwrBase": 100,
+                        "AtkPwrRange": 20,
+                        "DamageVfxKey": "Blunt_DamageEffect",
+                        "DamageType": "Blunt",
+                        "DefenseType": "Armor"
+                    }
+                },
+                "EffectDatas":{ },
+                "TargetParams": {
+                    "LineOfSight": true,
+                    "TargetArea": "[[-1,0],[-1,1],[0,1],[1,1],[1,0]]",
+                    "TargetType": "Enemy"
+                }
+            }
+        }
+    },
+    {
+        "ItemKey":"OldBow",
+        "_ObjectScript": "res://assets/Scripts/Items/Equipment/BaseWeaponEquipment.gd",
+        "Details":{
+			"DisplayName": "Old Bow",
+			"SnippetDesc": "A rogue's old bow.",
+			"Description": "A simple dagger dulled from years of various uses. Old, but still works.",
+			"Tags": ["Weapon","OffHand"],
+			"LargeIcon":"Sprites/OldBow.png",
+			"SmallIcon":"Sprites/OldBow.png"
+		},
+        "ItemDetails":
+        {
+            "Rarity": "Mundane",
+            "Value": 50
+        },
+        "EquipmentDetails":
+        {
+            "EquipSlot":"Weapon",
+            "Requirments": {
+                "ReqStats": {
+                    "Agility": 10
+                }
+            },
+            "StatMods": {
+                "AttackBonus": {
+                    "ModType": "Add",
+                    "StatName": "PhyAttack",
+                    "Value": 10
+                }
+            }
+        },
+        "WeaponDetails": {
+            "WeaponClass": "Light",
+            "IsRanged": true,
+            
+        "MissileData": {
+            "FramesPerTile": 3,
+            "ImpactVfxKey": "Blunt_DamageEffect",
+            "MissileVfxKey": "BasicArrowMissile"
+        },
+            "WeaponSpriteData":{
+                "Offset":[0,0],
+                "SpriteName":"Sprites/OldBow",
+                "Rotation":30,
+                "WeaponAnimation": "Raise"
+            },
+            "AttackData":{
+                "AttackTags": ["Weapon","Melee","Physical"],
+                "AttackDetails": {
+                    "AccuracyMod": 1,
+                    "PotencyMod": 1
+                },
+                "DamageDatas":{
+                    "WeaponDamage": {
+                        "AtkStat": "PhyAttack",
+                        "AtkPwrBase": 80,
+                        "AtkPwrRange": 20,
+                        "DamageVfxKey": "Pierce_DamageEffect",
+                        "DamageType": "Pierce",
+                        "DefenseType": "Armor"
+                    }
+                },
+                "EffectDatas":{ },
+                "TargetParams": {
+                    "LineOfSight": true,
+                    "TargetArea": "[[0,1],[-1,2],[0,2],[1,2],[-2,3],[-1,3],[0,3],[1,3],[2,3],[-1,4],[0,4],[1,4],[0,5]]",
+                    "TargetType": "Spot"
+                }
+            }
+        }
+    }
+]

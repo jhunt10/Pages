@@ -14,6 +14,7 @@ extends Control
 
 
 
+@export var showing_label:Label
 @export var action_check_box:CheckBox
 @export var actor_check_box:CheckBox
 @export var effect_check_box:CheckBox
@@ -189,6 +190,7 @@ func on_tag_filter_selected(index:int):
 
 
 func _on_cat_button_pressed():
+	var show_count = 0
 	for load_path in group_to_entry_keys.keys():
 		var any_showing = false
 		var entry_keys = group_to_entry_keys[load_path]
@@ -214,11 +216,13 @@ func _on_cat_button_pressed():
 					entry.hide()
 					continue
 			entry.show()
+			show_count += 1
 			any_showing = true
 		if any_showing:
 			entry_groups[load_path].show()
 		else:
 			entry_groups[load_path].hide()
+	showing_label.text = str(show_count)
 
 func get_page_items()->Array:
 	var pages = [] 

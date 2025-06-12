@@ -1,0 +1,72 @@
+[
+    {
+        "ItemKey":"OldWand",
+        "_ObjectScript": "res://assets/Scripts/Items/Equipment/BaseWeaponEquipment.gd",
+        "Details":{
+			"DisplayName": "Old Wand",
+			"SnippetDesc": "A mage's old Wand.",
+			"Description": "A training wand made for practice and well used. Old, but still works.",
+			"Tags": ["Weapon","OffHand", "Wand"],
+			"LargeIcon":"Sprites/OldWand.png",
+			"SmallIcon":"Sprites/OldWand.png"
+		},
+        "ItemDetails":
+        {
+            "Rarity": "Mundane",
+            "Value": 50
+        },
+        "EquipmentDetails":
+        {
+            "EquipSlot":"Weapon",
+            "Requirments": {
+                "ReqStats": {
+                    "Intelligence": 10
+                }
+            },
+            "StatMods": {
+                "AttackBonus": {
+                    "ModType": "Add",
+                    "StatName": "MagAttack",
+                    "Value": 10
+                }
+            },
+            "DamageMods": {},
+            "TargetMods": {},
+            "AttackMods": {}
+        },
+        "WeaponDetails": {
+            "WeaponClass": "Light",
+            "IsRanged": true,
+            "WeaponSpriteData":{
+                "Offset":[0,0],
+                "SpriteName":"Sprites/OldWand",
+                "Rotation":-45,
+                "WeaponAnimation": "Raise"
+            },
+            "AttackData":{
+                "AttackTags": ["Weapon","Range","Magic"],
+                "AttackDetails": {
+                    "AccuracyMod": 1,
+                    "PotencyMod": 1
+                },
+                "DamageDatas":{
+                    "WeaponDamage": {
+                        "AtkStat": "MagAttack",
+                        "AtkPwrBase": 100,
+                        "AtkPwrRange": 10,
+                        "DamageVfxKey": "SmallFire_DamageEffect",
+                        "DamageType": "Fire",
+                        "DefenseType": "Ward"
+                    }
+                },
+                "EffectDatas":{ },
+                "TargetParams": {
+                    "LineOfSight": true,
+                    "TargetArea": "[[-1,1],[0,1],[1,1],[-1,2],[0,2],[1,2]]",
+                    "TargetType": "Enemy"
+                }
+            }
+        }
+    }
+
+]
