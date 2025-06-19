@@ -1,3 +1,138 @@
 [
+    {
+        "ActionKey":"BeNimbleSelfBuff",
+        "ParentKey": "#BaseApplySelfBuffAction",
+        "Details": {
+            "DisplayName": "Be Nimble",
+            "LargeIcon": "Effects/Sprites/BeNimble_Icon.png",
+            "SmallIcon": "Effects/Sprites/BeNimble_Icon.png",
+            "SnippetDesc": "Jack be Nimble",
+            "Tags": [
+                "Gambit"
+            ]
+        },
+        "EffectDatas":{
+            "ApplyEffect":{
+                "EffectKey": "BeNimbleBuff",
+                "EffectData": {
+                    "EffectDetails":{
+                        "DurationData":{
+                            "BaseDuration":2
+                        }
+                    }
+                }
+            }
+        }
+    },
+    {
+        "ActionKey":"BeQuickSelfBuff",
+        "ParentKey": "#BaseApplySelfBuffAction",
+        "Details": {
+            "DisplayName": "Be Quick",
+            "LargeIcon": "Effects/Sprites/BeQuick_Icon.png",
+            "SmallIcon": "Effects/Sprites/BeQuick_Icon.png",
+            "SnippetDesc": "Jack be Quick",
+            "Tags": [
+                "Gambit"
+            ]
+        },
+        "EffectDatas":{
+            "ApplyEffect":{
+                "EffectKey": "BeQuickBuff",
+                "EffectData": {
+                    "EffectDetails":{
+                        "DurationData":{
+                            "BaseDuration":2
+                        }
+                    }
+                }
+            }
+        }
+    },
+    {
+        "ActionKey":"BeDeadlySelfBuff",
+        "ParentKey": "#BaseApplySelfBuffAction",
+        "Details": {
+            "DisplayName": "Be Deadly",
+            "LargeIcon": "Effects/Sprites/BeDeadly_Icon.png",
+            "SmallIcon": "Effects/Sprites/BeDeadly_Icon.png",
+            "SnippetDesc": "Jack be dead",
+            "Tags": [
+                "Gambit"
+            ]
+        },
+        "EffectDatas":{
+            "ApplyEffect":{
+                "EffectKey": "BeDeadlyBuff",
+                "EffectData": {
+                    "EffectDetails":{
+                        "DurationData":{
+                            "BaseDuration":2
+                        }
+                    }
+                }
+            }
+        }
+    },
+
+
+
+    
+    {
+        "ActionKey": "ThrowKnifeAction",
+        "ParentKey": "#BaseRangedAttack",
+        "AmmoData": {
+            "Cost": 4,
+            "Clip": 32,
+            "AmmoType": "Phy"
+        },
+        "AttackDetails":
+        {
+            "AttackVfxData": {
+                "SpriteName": "SpriteSheets/ThrowKnife_Missile.png",
+                "Scale": 2
+            }
+        },
+        "DamageDatas": {
+            "RangedDamage": {
+                "AtkPwrBase": 80,
+                "AtkPwrRange": 20,
+                "AtkPwrScale": 1,
+                "AtkStat": "PhyAttack",
+                "BaseDamage": 0,
+                "DamageVfxKey": "AUTO",
+                "DamageType": "Pierce",
+                "DefenseType": "AUTO"
+            }
+        },
+        "EffectDatas":{},
+        "Details": {
+            "Description": "Thow a small knife making a @@#Color:Red:Ranged Attack@@ against an @@#TrgParm:TargetParam:TargetType@@ in range, and dealing @@#DmgData:RangedDamage@@ on hit.",
+            "DisplayName": "Thow Knife",
+            "LargeIcon": "Sprites/ThrowKnife_Icon.png",
+            "SmallIcon": "Sprites/ThrowKnife_Icon.png",
+            "SnippetDesc": "Shoot a knife.",
+            "Tags": [
+                "Gambit"
+            ]
+        },
+        "SubActions": {
+            "5": [
+                {
+                    "Animation": "WEAPON_DEFAULT",
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponReadyAnimation.gd",
+                    "MainHand": true,
+                    "OffHand": "OnlyIfDuel"
+                }
+            ],
+            "11": [
+                {
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponMotionAnimation.gd",
+                    "MainHand": true,
+                    "OffHand": "OnlyIfDuel"
+                }
+            ]
+        }
+    }
 
 ]

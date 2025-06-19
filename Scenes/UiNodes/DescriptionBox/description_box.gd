@@ -3,6 +3,7 @@ extends RichTextLabel
 
 const pop_up_container_path = "res://Scenes/UiNodes/DescriptionBox/DescriptionPopUpContainer/description_popup_container.tscn"
 const RED_TEXT = "[color=#460000]"
+const BLUE_TEXT = "[color=#000046]"
 
 
 @export var popup_container:DecscriptionPopUpContainer
@@ -142,10 +143,7 @@ func _build_bbcode_array(object_def:Dictionary, object_inst:BaseLoadObject, acto
 				if sub_tokens.size() > 2:
 					no_actor_text = sub_tokens[2]
 				if object_inst is PageItemAction:
-					var damage_datas = object_inst.get_damage_datas(actor, damage_key)
-					for data_key:String in damage_datas.keys():
-						if data_key.begins_with(damage_key):
-							damage_data = damage_datas[data_key]
+					damage_data = object_inst.get_damage_data_single(actor, damage_key)
 				elif object_def.has("ActionData"):
 					damage_data = object_def.get("ActionData", {}).get("DamageDatas", {}).get(damage_key, {})
 				elif object_def.has("EffectData"):
@@ -244,7 +242,10 @@ func _build_bbcode_array(object_def:Dictionary, object_inst:BaseLoadObject, acto
 					mod_data = object_def.get("DamageMods",{}).get(sub_tokens[1],{})
 				elif object_def.has("EquipmentData"):
 					mod_data = object_def.get("EquipmentData").get("DamageMods",{}).get(sub_tokens[1],{})
-				out_line += _parse_damage_mod(sub_tokens[2], mod_data)
+				var sub_line = _parse_damage_mod(sub_tokens[2], mod_data)
+				if sub_tokens.size() >= 4:
+					sub_line = sub_line.replace("[/color]", sub_tokens[3] + "[/color]")
+				out_line += sub_line
 			'#AtkMod':
 				var mod_data = {}
 				if object_def.has("AttackMods"):
@@ -253,14 +254,17 @@ func _build_bbcode_array(object_def:Dictionary, object_inst:BaseLoadObject, acto
 					mod_data = object_def.get("EquipmentData").get("AttackMods",{}).get(sub_tokens[1],{})
 				if sub_tokens[2] == 'DmgMod':
 					var dmg_mod = mod_data.get("DamageMods", {}).get(sub_tokens[3], {})
-					out_line += _parse_damage_mod(sub_tokens[4], dmg_mod)
+					var sub_line = _parse_damage_mod(sub_tokens[4], dmg_mod)
+					if sub_tokens.size() >= 6:
+						sub_line = sub_line.replace("[/color]", sub_tokens[5] + "[/color]")
+					out_line += sub_line
 				# Defender Faction Filter
-				if sub_tokens[2] == 'DefFacFil':
+				if sub_tokens[2].begins_with('DefFacFil'):
 					var factions = []
 					for def_con in mod_data.get("Conditions", {}).get("DefendersConditions", []):
 						for filter:String in def_con.get("DefenderFactionFilters", []):
 							if not factions.has(filter):
-								factions.append(_get_title_specific_faction_name(actor, filter, true))
+								factions.append(_get_title_specific_faction_name(actor, filter, sub_tokens[2].contains("|Plr")))
 					out_line += RED_TEXT + ", ".join(factions) + "[/color]"
 				if sub_tokens[2] == 'StatMod':
 					var mod_key = sub_tokens[3]
@@ -277,7 +281,10 @@ func _build_bbcode_array(object_def:Dictionary, object_inst:BaseLoadObject, acto
 					var tag_filters = mod_data.get("Conditions", {}).get("AttackSourceTagFilters", [])
 					for filter:Dictionary in tag_filters:
 						what_ever_tags.append_array(filter.get("RequireAnyTags", []))
-					out_line += RED_TEXT + ", ".join(what_ever_tags) + "[/color]"
+					var sub_line = BLUE_TEXT + " ".join(what_ever_tags) + "[/color]"
+					if sub_tokens.size() >= 4:
+						sub_line = sub_line.replace("[/color]", sub_tokens[3] + "[/color]")
+					out_line += sub_line
 					
 					
 					
@@ -298,7 +305,7 @@ func _get_title_specific_faction_name(actor:BaseActor, faction_name:String, forc
 
 func _parse_damage_mod(parse_type:String, mod_data:Dictionary)->String:
 	var out_line = ''
-	if parse_type == 'Value':
+	if parse_type.begins_with('Value'):
 		var mod_type = mod_data.get("ModType")
 		var mod_value = mod_data.get("Value")
 		if mod_type == "Scale":
@@ -314,6 +321,26 @@ func _parse_damage_mod(parse_type:String, mod_data:Dictionary)->String:
 				out_line +=  RED_TEXT + str(mod_value) + "[/color]"
 		else:
 			out_line +=  RED_TEXT + str(mod_value) + "[/color]"
+	elif parse_type.begins_with('Filters'):
+		var filters = []
+		var filter_arry = mod_data.get("Conditions", {}).get("SourceTagFilters", [])
+		for filt in filter_arry:
+			var reqired = filt.get("RequireAnyTags", [])
+			for req in reqired:
+				if not filters.has(req):
+					filters.append(req)
+		out_line +=  BLUE_TEXT + (" ".join(filters)) + "[/color]"
+	elif parse_type.begins_with('DefFacFil'):
+		var filters = []
+		var faction_arry = mod_data.get("Conditions", {}).get("DefenderFactionFilters", [])
+		for faction:String in faction_arry:
+			if parse_type.contains("|Plr"):
+				if faction.ends_with("y"):
+					faction = faction.trim_suffix("y")
+					faction += "ies"
+			if not filters.has(faction):
+				filters.append(faction)
+		out_line +=  RED_TEXT + (" ".join(filters)) + "[/color]"
 	return out_line
 
 func _parse_stat_mod(mod_data:Dictionary, object_def:Dictionary, object_inst:BaseLoadObject, actor:BaseActor, sub_tokens:Array)->Array:
@@ -434,6 +461,8 @@ func _parse_stat_mod_multi(object_def:Dictionary, object_inst:BaseLoadObject, ac
 func _parse_effect(effect_key:String, effect_data:Dictionary, prop_key:String, actor:BaseActor=null)->Array:
 	var out_arr = []
 	var out_line = ''
+	if not EffectLibrary.has_effect_key(effect_key):
+		return [RED_TEXT + 'Eff Not Found' + "[/color]"]
 	var effect_def = EffectLibrary.get_merged_effect_def(effect_key, effect_data)
 	if prop_key == '' or prop_key == 'Description':
 		var sub_lines = _build_bbcode_array(effect_def, null, actor)

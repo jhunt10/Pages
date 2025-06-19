@@ -47,24 +47,24 @@ func get_source_actor()->BaseActor:
 	return ActorLibrary.get_actor(_source_actor_id)
 
 func get_missile_vfx_data()->Dictionary:
-	var missile_vfx_key = _missle_data.get("MissileVfxKey", null)
-	if missile_vfx_key:
-		return MainRootNode.vfx_libray.get_vfx_def(missile_vfx_key)
-	var data = _missle_data.get("MissileVfxData", {})
-	data['LoadPath'] = _load_path
+	var vfx_key = _missle_data.get("MissileVfxKey", '')
+	var vfx_data = _missle_data.get("MissileVfxData", {})
+	var data = VfxLibrary.get_vfx_def(vfx_key, vfx_data, null, _load_path)
 	return data
-	#var vfx_def = _missle_data.get("MissileVfxData", null)
-	#if vfx_def:
-		#var vfx_data = VfxData.new(vfx_def, _load_path)
-		#return vfx_data
-	#var missile_key = _missle_data.get("MissileVfxKey", null)
-	#if missile_key:
-		#var data = MainRootNode.vfx_libray.get_vfx_data(missile_key)
-		#if not data:
-			#printerr("BasMissile.get_missile_vfx_data: No Vfx Data found for key: %s" % [missile_key])
-			#return null
-		#return data
-	#return null
+
+func has_impact_vfx()->bool:
+	if _missle_data.get("ImpactVfxKey", "") != "":
+		return  true
+	if _missle_data.get("ImpactVfxData", {}).size() > 0:
+		return true
+	return false
+	
+func get_impact_vfx_data()->Dictionary:
+	var vfx_key = _missle_data.get("ImpactVfxKey", '')
+	var vfx_data = _missle_data.get("ImpactVfxData", {})
+	var data = VfxLibrary.get_vfx_def(vfx_key, vfx_data, null, _load_path)
+	return data
+
 
 func _on_frame_end():
 	_frames_since_creation += 1
@@ -88,19 +88,6 @@ func get_final_position():
 func has_reached_target()->bool:
 	return _end_frame == CombatRootControl.Instance.QueController.sub_action_index
 
-func has_impact_vfx()->bool:
-	if _missle_data.get("ImpactVfxKey", "") != "":
-		return  true
-	if _missle_data.get("ImpactVfxData", {}).size() > 0:
-		return true
-	return false
-	
-func get_impact_vfx_data()->Dictionary:
-	var vfx_key = _missle_data.get("ImpactVfxKey", null)
-	if vfx_key:
-		return MainRootNode.vfx_libray.get_vfx_def(vfx_key)
-	return _missle_data.get("ImpactVfxData", {})
-
 func do_thing(game_state:GameStateData):
 	if LOGGING: 
 		print('Missile ' + str(Id) + " has done thing.")
@@ -111,30 +98,23 @@ func do_thing(game_state:GameStateData):
 	var effected_actors = _get_actors_in_effect_area(game_state)
 	if LOGGING: print("Found %s effected actors" % [effected_actors.size()])
 	
-	var attack_event = AttackHandler.handle_attack(
-		source_actor, 
-		effected_actors, 
-		_missle_data.get("AttackDetails", {}),
-		{"MissileDamage":_missle_data['DamageData'].values()[0]},
-		_missle_data.get("EffectDatas", []),
-		_source_target_chain,
-		_target_params,
-		game_state,
-		MapPos.Vector2i(StartSpot)
-		)
-	
-	print("\n---------------------------")
-	print(attack_event.serialize_self())
-	print("---------------------------\n")
-	
-	#TODO: ATTACK
-	#for target_actor in effected_actors:
-		##if _target_params.is_valid_target_actor(source_actor, target_actor, game_state):
-		#DamageHelper.handle_attack(source_actor, target_actor, 
-								#_missle_data.get("AttackDetails", {}), _missle_data['DamageData'], 
-								#_missle_data.get("EffectDatas", []),
-								#_source_target_chain, CombatRootControl.Instance.GameState,
-								#_target_params, MapPos.Vector2i(StartSpot))
+	if effected_actors.size() > 0:
+		var attack_event = AttackHandler.handle_attack(
+			source_actor, 
+			effected_actors, 
+			_missle_data.get("AttackDetails", {}),
+			{"MissileDamage":_missle_data['DamageData']},
+			_missle_data.get("EffectDatas", []),
+			_source_target_chain,
+			_target_params,
+			game_state,
+			MapPos.Vector2i(StartSpot)
+			)
+		
+		print("\n---------------------------")
+		print(attack_event.serialize_self())
+		print("---------------------------\n")
+		
 	node.on_missile_reach_target()
 
 func _get_actors_in_effect_area(game_state:GameStateData)->Array:

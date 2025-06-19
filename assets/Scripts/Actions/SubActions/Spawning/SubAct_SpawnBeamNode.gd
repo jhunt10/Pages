@@ -16,12 +16,13 @@ func get_action_tags(_subaction_data:Dictionary)->Array:
 func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, que_exe_data:QueExecutionData,
 				game_state:GameStateData, actor:BaseActor)->bool:
 	var target_params = _get_target_parameters(parent_action, actor, subaction_data)
-	var damage_data = parent_action.get_damage_data_for_subaction(actor, subaction_data)
+	var damage_data_key = subaction_data.get("DamageKey", "")
+	var damage_data = parent_action.get_damage_data_single(actor, damage_data_key)
 	
 	var tag_chain = SourceTagChain.new()\
 			.append_source(SourceTagChain.SourceTypes.Actor, actor)\
 			.append_source(SourceTagChain.SourceTypes.Action, parent_action)
-	var attack_details = parent_action.get_load_val("AttackDetails", {})
+	var attack_details = parent_action.get_attack_details()
 	
 	var actor_node = CombatRootControl.get_actor_node(actor.Id)
 	var script_path = "res://data/VFXs/WaterJet/WaterJet_VfxNode.tscn"

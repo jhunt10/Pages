@@ -28,7 +28,10 @@ func _on_start():
 		self.rotation_degrees = randf_range(rot_range[0], rot_range[1])
 	if _data.has("Scale"):
 		var scale = _data.get("Scale", 1)
-		sprite.scale = Vector2(scale, scale)
+		if scale is Array:
+			sprite.scale = Vector2(scale[0], scale[1])
+		else:
+			sprite.scale = Vector2(scale, scale)
 			
 	var animation_name = _data.get("AnimationName")
 	if animation_name:

@@ -145,7 +145,7 @@ func get_preview_damage_datas(actor:BaseActor=null)->Dictionary:
 	if not preview_key or preview_key == '':
 		printerr("%s.get_preview_damage_datas: No preview key" % [self.ActionKey])
 		return {}
-	return get_damage_datas(actor, preview_key)
+	return get_damage_datas(actor, [preview_key])
 
 
 ########################
@@ -176,6 +176,10 @@ func get_targeting_params(target_param_key, actor:BaseActor)->TargetParameters:
 			if can_use:
 				params = params.apply_target_mod(mod)
 	return params
+
+func get_damage_data_single(actor:BaseActor, damage_key:String)->Dictionary:
+	var datas = get_damage_datas(actor, [damage_key])
+	return datas.get(damage_key, {})
 
 func get_damage_datas(actor:BaseActor, damage_keys)->Dictionary:
 	var out_dict = {}
@@ -238,3 +242,14 @@ func get_missile_data(missile_key:String)->Dictionary:
 		data['LoadPath'] = _def_load_path
 		return data
 	return {}
+
+func get_attack_details()->Dictionary:
+	return action_data.get("AttackDetails", {})
+
+func get_attack_vfx_data():
+	var attack_details = action_data.get("AttackDetails", {})
+	var vfx_key = attack_details.get("AttackVfxKey")
+	var vfx_data = attack_details.get("AttackVfxData", {})
+	var vfx_def = VfxLibrary.get_vfx_def(vfx_key, vfx_data, self)
+	return vfx_def
+		

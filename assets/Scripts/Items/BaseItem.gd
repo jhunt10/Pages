@@ -106,62 +106,67 @@ func get_cant_use_reasons(actor:BaseActor):
 	return {}
 
 func get_passive_stat_mods()->Array:
-	var stat_mod_datas:Dictionary = get_load_val("StatMods", {})
-	var out_list = []
-	for mod_data in stat_mod_datas.values():
-		if not mod_data.has("DisplayName"):
-			mod_data['DisplayName'] = self.get_display_name()
-		out_list.append(BaseStatMod.create_from_data(Id, mod_data))
-	return out_list
+	return []
+	#var stat_mod_datas:Dictionary = get_load_val("StatMods", {})
+	#var out_list = []
+	#for mod_data in stat_mod_datas.values():
+		#if not mod_data.has("DisplayName"):
+			#mod_data['DisplayName'] = self.get_display_name()
+		#out_list.append(BaseStatMod.create_from_data(Id, mod_data))
+	#return out_list
 
 func get_target_mods()->Array:
-	var stat_mod_datas:Dictionary = get_load_val("TargetMods", {})
-	var out_list = []
-	for mod_data in stat_mod_datas.values():
-		out_list.append(mod_data.duplicate())
-	return out_list
+	return []
+	#var stat_mod_datas:Dictionary = get_load_val("TargetMods", {})
+	#var out_list = []
+	#for mod_data in stat_mod_datas.values():
+		#out_list.append(mod_data.duplicate())
+	#return out_list
 
 func get_damage_mods()->Dictionary:
-	var mod_datas:Dictionary = get_load_val("DamageMods", {})
-	var out_dict = {}
-	for mod_key in mod_datas.keys():
-		var mod_data = mod_datas[mod_key]
-		if mod_data.has("DamageModKey"):
-			mod_key = mod_data['DamageModKey']
-		else:
-			mod_data['DamageModKey'] = mod_key
-		if not mod_data.has("DisplayName"):
-			mod_data['DisplayName'] = self.get_display_name()
-		
-		out_dict[mod_key] = mod_data
-	return out_dict
+	return {}
+	#var mod_datas:Dictionary = get_load_val("DamageMods", {})
+	#var out_dict = {}
+	#for mod_key in mod_datas.keys():
+		#var mod_data = mod_datas[mod_key]
+		#if mod_data.has("DamageModKey"):
+			#mod_key = mod_data['DamageModKey']
+		#else:
+			#mod_data['DamageModKey'] = mod_key
+		#if not mod_data.has("DisplayName"):
+			#mod_data['DisplayName'] = self.get_display_name()
+		#
+		#out_dict[mod_key] = mod_data
+	#return out_dict
 
 func get_ammo_mods()->Dictionary:
-	var mod_datas:Dictionary = get_load_val("AmmoMods", {})
-	var out_dict = {}
-	for mod_key in mod_datas.keys():
-		var mod_data = mod_datas[mod_key]
-		if mod_data.has("AmmoModKey"):
-			mod_key = mod_data['AmmoModKey']
-		else:
-			mod_data['AmmoModKey'] = mod_key
-		if not mod_data.has("DisplayName"):
-			mod_data['DisplayName'] = self.get_display_name()
-		
-		out_dict[mod_key] = mod_data
-	return out_dict
+	return {}
+	#var mod_datas:Dictionary = get_load_val("AmmoMods", {})
+	#var out_dict = {}
+	#for mod_key in mod_datas.keys():
+		#var mod_data = mod_datas[mod_key]
+		#if mod_data.has("AmmoModKey"):
+			#mod_key = mod_data['AmmoModKey']
+		#else:
+			#mod_data['AmmoModKey'] = mod_key
+		#if not mod_data.has("DisplayName"):
+			#mod_data['DisplayName'] = self.get_display_name()
+		#
+		#out_dict[mod_key] = mod_data
+	#return out_dict
 
 func get_attack_mods()->Dictionary:
-	var mod_datas:Dictionary = get_load_val("AttackMods", {})
-	var out_dict = {}
-	for mod_key in mod_datas.keys():
-		var mod_data = mod_datas[mod_key]
-		if mod_data.has("AttackModKey"):
-			mod_key = mod_data['AttackModKey']
-		else:
-			mod_data['AttackModKey'] = mod_key
-		if not mod_data.has("DisplayName"):
-			mod_data['DisplayName'] = self.get_display_name()
-		
-		out_dict[mod_key] = mod_data
-	return out_dict
+	return {}
+	#var mod_datas:Dictionary = get_load_val("AttackMods", {})
+	#var out_dict = {}
+	#for mod_key in mod_datas.keys():
+		#var mod_data = mod_datas[mod_key]
+		#if mod_data.has("AttackModKey"):
+			#mod_key = mod_data['AttackModKey']
+		#else:
+			#mod_data['AttackModKey'] = mod_key
+		#if not mod_data.has("DisplayName"):
+			#mod_data['DisplayName'] = self.get_display_name()
+		#
+		#out_dict[mod_key] = mod_data
+	#return out_dict

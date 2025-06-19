@@ -412,7 +412,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource("4_xmy3g")
-theme_override_colors/default_color = Color(0.470588, 0, 0, 1)
+bbcode_enabled = true
 text = "Item Description hk hbkhjhl jhlkjl ljlkj"
 script = ExtResource("22_pm1ag")
 
@@ -516,12 +516,12 @@ layout_mode = 2
 size_flags_vertical = 3
 
 [node name="DescriptionBox" type="RichTextLabel" parent="OffsetControl/NinePatchRect/VBoxContainer/EffectPageDetailsControl/VBoxContainer/HBoxContainer"]
-self_modulate = Color(0.498039, 0, 0, 1)
 clip_contents = false
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource("4_xmy3g")
+bbcode_enabled = true
 text = "Item Description hk hbkhjhl jhlkjl ljlkj"
 script = ExtResource("22_pm1ag")
 
@@ -835,6 +835,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 text = "Equipe"
+_size_dirty = true
 center_x = true
 
 [node name="EquipButton" type="Button" parent="OffsetControl/NinePatchRect/VBoxContainer/EquipButtonBackground"]

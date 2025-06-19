@@ -20,6 +20,16 @@ func set_weapon(actor:BaseActor, weapon:BaseWeaponEquipment):
 	var damage_data = weapon.get_damage_datas()
 	damage_data =damage_data.values()[0]
 	var defense_type = damage_data.get("DefenseType", null)
+	
+	var damage_type = damage_data.get("DamageType")
+	if defense_type == "AUTO":
+		if DamageHelper.ElementalDamageTypes_Strings.has(damage_type):
+			defense_type = "Ward"
+		elif DamageHelper.PhysicalDamageTypes_Strings.has(damage_type):
+			defense_type = "Armor"
+		else:
+			defense_type = "None"
+		
 	if defense_type == "Ward":
 		mag_damage_icon.show()
 		phy_damage_icon.hide()
@@ -32,7 +42,6 @@ func set_weapon(actor:BaseActor, weapon:BaseWeaponEquipment):
 	base_power = base_power * power_scale
 	power_range = power_range * power_scale
 	attack_power_label.text = ("%s±%s" % [base_power, (power_range)]) + "%"
-	var damage_type = damage_data.get("DamageType")
 	damage_type_label.text = damage_type
 	description_box.text = weapon.get_description()
 	range_display.load_area_matrix(weapon.target_parmas.target_area)

@@ -4,6 +4,32 @@ const LOGGING = true
 
 const STAT_BALENCE:int = 100
 
+const ElementalDamageTypes:Array = [
+	DamageEvent.DamageTypes.Fire,
+	DamageEvent.DamageTypes.Cold,
+	DamageEvent.DamageTypes.Shock,
+	DamageEvent.DamageTypes.Poison
+]
+
+const ElementalDamageTypes_Strings:Array = [
+	"Fire",
+	"Cold",
+	"Shock",
+	"Poison"
+]
+const PhysicalDamageTypes:Array = [
+	DamageEvent.DamageTypes.Slash,
+	DamageEvent.DamageTypes.Blunt,
+	DamageEvent.DamageTypes.Pierce,
+	DamageEvent.DamageTypes.Crash
+]
+const PhysicalDamageTypes_Strings:Array = [
+	"Slash",
+	"Blunt",
+	"Pierce",
+	"Crash"
+]
+
 static func get_damage_color(damage_type, as_text = false):
 	if damage_type is String:
 		damage_type = DamageEvent.DamageTypes.get(damage_type)
@@ -23,6 +49,24 @@ static func get_damage_color(damage_type, as_text = false):
 		return color_text
 	return Color(color_text)
 
+static func get_damage_icon(damage_type)->Texture2D:
+	if damage_type is String:
+		damage_type = DamageEvent.DamageTypes.get(damage_type)
+	var damage_icon = "res://assets/Sprites/UI/SymbolIcons/PhyDamageSymbol.png"
+	match damage_type:
+		DamageEvent.DamageTypes.Slash: damage_icon = "res://assets/Sprites/UI/SymbolIcons/DmgSymbol_Slash.png"
+		DamageEvent.DamageTypes.Blunt: damage_icon = "res://assets/Sprites/UI/SymbolIcons/DmgSymbol_Blunt.png"
+		DamageEvent.DamageTypes.Pierce: damage_icon = "res://assets/Sprites/UI/SymbolIcons/DmgSymbol_Pierce.png"
+		DamageEvent.DamageTypes.Crash: damage_icon = "res://assets/Sprites/UI/SymbolIcons/DmgSymbol_Crash.png"
+		DamageEvent.DamageTypes.Fire: damage_icon = "res://assets/Sprites/UI/SymbolIcons/DmgSymbol_Fire.png"
+		DamageEvent.DamageTypes.Cold: damage_icon = "res://assets/Sprites/UI/SymbolIcons/DmgSymbol_Cold.png"
+		DamageEvent.DamageTypes.Shock: damage_icon = "res://assets/Sprites/UI/SymbolIcons/DmgSymbol_Shock.png"
+		DamageEvent.DamageTypes.Poison: damage_icon = "res://assets/Sprites/UI/SymbolIcons/DmgSymbol_Poison.png"
+		DamageEvent.DamageTypes.Light: damage_icon = "res://assets/Sprites/UI/SymbolIcons/DmgSymbol_Light.png"
+		DamageEvent.DamageTypes.Dark: damage_icon = "res://assets/Sprites/UI/SymbolIcons/DmgSymbol_Dark.png"
+		DamageEvent.DamageTypes.Chaos: damage_icon = "res://assets/Sprites/UI/SymbolIcons/DmgSymbol_Chaos.png"
+		DamageEvent.DamageTypes.Psycic: damage_icon = "res://assets/Sprites/UI/SymbolIcons/DmgSymbol_Psycic.png"
+	return SpriteCache.get_sprite(damage_icon)
 
 static func get_min_max_damage(actor:BaseActor, damage_data:Dictionary)->Array:
 	var base_damage = 0
@@ -98,6 +142,26 @@ static func get_min_max_damage(actor:BaseActor, damage_data:Dictionary)->Array:
 		#
 	#return out_list
 
+## Roll damage and return a DamageEvent. 
+## Damage mods from Actors will be appllied (by default), but those from Attack Mods must be provided 
+static func roll_and_apply_damage(
+		damage_data:Dictionary, 
+		attacker:BaseActor, 
+		defender:BaseActor, 
+		source_tag_chain:SourceTagChain, 
+		extra_damage_mods:Dictionary = {},
+		actor_atk_mods_provided:bool=false
+	)->DamageEvent:
+	var damage_event = roll_for_damage(damage_data, attacker, defender, source_tag_chain, extra_damage_mods, actor_atk_mods_provided)
+	
+	defender.stats.apply_damage(damage_event)
+	
+	var vfx_data = AttackHandler.build_damage_vfx_data(attacker.Id, damage_event, damage_data, null)
+	var damage_vfx_key = vfx_data.get('DamageVfxKey', '')
+	var damage_vfx_data = vfx_data.get('DamageVfxData', {})
+	if damage_vfx_key or damage_vfx_data.size() > 0:
+		VfxHelper.create_damage_effect(defender, damage_vfx_key, damage_vfx_data)
+	return damage_event
 ## Roll damage and return a DamageEvent. 
 ## Damage mods from Actors will be appllied (by default), but those from Attack Mods must be provided 
 static func roll_for_damage(
@@ -226,62 +290,62 @@ static func does_damage_mod_apply(damage_mod:Dictionary, attacker:BaseActor, def
 
 
 
-static func handle_damage(source, defender:BaseActor, damage_data:Dictionary, 
-							source_tag_chain:SourceTagChain, game_state:GameStateData, 
-							attack_event:AttackEvent=null, create_VFX:bool = true)->DamageEvent:
-	## Need to get base damage before making event because  (BECAUSE WHY? Thanks old me)
-	#var base_damage = 0
-	#var attack_stat = damage_data.get("AtkStat")
-	#if not attack_stat:
-		#printerr("DamageHelper: No AtkStat found on damage data")
-	#elif attack_stat.begins_with('@'):
-		#base_damage = source.stats.base_damge_from_stat(attack_stat)
-	
-	var damage_event = DamageEvent.new(damage_data, source, defender,source_tag_chain)
-	
-	if attack_event:
-		if attack_event.is_evade:
-			printerr("DamageHelper.handle_damage: Called on Evaded attack")
-			return damage_event
-		# Appy Crit Mod
-		if attack_event.is_crit and not attack_event.is_blocked:
-			damage_event.final_damage = damage_event.final_damage * attack_event.attcker_crit_mod
-		# Apply Block Mod
-		if attack_event.is_blocked and not attack_event.is_crit:
-			# Don't apply Block if damage would heal
-			if damage_event.final_damage > 0:
-				damage_event.final_damage = damage_event.final_damage * attack_event.defender_block_mod
-	
-	print("DamageHelper.hand_damage: Real final applied damage: %s" % [damage_event.final_damage])
-	defender.stats.apply_damage(damage_event.final_damage)
-	damage_event.was_applied = true
-	defender.effects.trigger_damage_taken(game_state, damage_event)
-	
-	if source is BaseActor:
-		var source_actor:BaseActor = source as BaseActor
-		source_actor.effects.trigger_damage_dealt(game_state, damage_event)
-		defender.aggro.add_threat_from_actor(source_actor, damage_event.final_damage)
-	
-	if create_VFX:
-		var damage_effect = damage_data.get("DamageVfxKey", null)
-		var damage_effect_data = damage_data.get("DamageVfxData", {})
-		if damage_effect:
-			#if damage_event.final_damage < 0:
-				#damage_effect_data['DamageTextType'] = VfxHelper.FlashTextType.Healing_Dmg
-			#elif source_tag_chain.has_tag("DOT"):
-				#damage_effect_data['DamageTextType'] = VfxHelper.FlashTextType.DOT_Dmg
-			#elif attack_event.sub_events.cri > 1:
-				#damage_effect_data['DamageTextType'] = VfxHelper.FlashTextType.Crit_Dmg
-			#elif attack_event.final_damage_mod < 1:
-				#damage_effect_data['DamageTextType'] = VfxHelper.FlashTextType.Blocked_Dmg
-			#else:
-			damage_effect_data['DamageTextType'] = VfxHelper.FlashTextType.Normal_Dmg
-			if source is BaseActor:
-				damage_effect_data['SourceActorId'] = source.Id
-			damage_effect_data['DamageNumber'] = 0 - damage_event.final_damage
-			VfxHelper.create_damage_effect(defender, damage_effect, damage_effect_data)
-	return damage_event
-	
+#static func handle_damage(source, defender:BaseActor, damage_data:Dictionary, 
+							#source_tag_chain:SourceTagChain, game_state:GameStateData, 
+							#attack_event:AttackEvent=null, create_VFX:bool = true)->DamageEvent:
+	### Need to get base damage before making event because  (BECAUSE WHY? Thanks old me)
+	##var base_damage = 0
+	##var attack_stat = damage_data.get("AtkStat")
+	##if not attack_stat:
+		##printerr("DamageHelper: No AtkStat found on damage data")
+	##elif attack_stat.begins_with('@'):
+		##base_damage = source.stats.base_damge_from_stat(attack_stat)
+	#
+	#var damage_event = DamageEvent.new(damage_data, source, defender,source_tag_chain)
+	#
+	#if attack_event:
+		#if attack_event.is_evade:
+			#printerr("DamageHelper.handle_damage: Called on Evaded attack")
+			#return damage_event
+		## Appy Crit Mod
+		#if attack_event.is_crit and not attack_event.is_blocked:
+			#damage_event.final_damage = damage_event.final_damage * attack_event.attcker_crit_mod
+		## Apply Block Mod
+		#if attack_event.is_blocked and not attack_event.is_crit:
+			## Don't apply Block if damage would heal
+			#if damage_event.final_damage > 0:
+				#damage_event.final_damage = damage_event.final_damage * attack_event.defender_block_mod
+	#
+	#print("DamageHelper.hand_damage: Real final applied damage: %s" % [damage_event.final_damage])
+	#defender.stats.apply_damage(damage_event.final_damage)
+	#damage_event.was_applied = true
+	#defender.effects.trigger_damage_taken(game_state, damage_event)
+	#
+	#if source is BaseActor:
+		#var source_actor:BaseActor = source as BaseActor
+		#source_actor.effects.trigger_damage_dealt(game_state, damage_event)
+		#defender.aggro.add_threat_from_actor(source_actor, damage_event.final_damage)
+	#
+	#if create_VFX:
+		#var damage_effect = damage_data.get("DamageVfxKey", null)
+		#var damage_effect_data = damage_data.get("DamageVfxData", {})
+		#if damage_effect:
+			##if damage_event.final_damage < 0:
+				##damage_effect_data['DamageTextType'] = VfxHelper.FlashTextType.Healing_Dmg
+			##elif source_tag_chain.has_tag("DOT"):
+				##damage_effect_data['DamageTextType'] = VfxHelper.FlashTextType.DOT_Dmg
+			##elif attack_event.sub_events.cri > 1:
+				##damage_effect_data['DamageTextType'] = VfxHelper.FlashTextType.Crit_Dmg
+			##elif attack_event.final_damage_mod < 1:
+				##damage_effect_data['DamageTextType'] = VfxHelper.FlashTextType.Blocked_Dmg
+			##else:
+			#damage_effect_data['DamageTextType'] = VfxHelper.FlashTextType.Normal_Dmg
+			#if source is BaseActor:
+				#damage_effect_data['SourceActorId'] = source.Id
+			#damage_effect_data['DamageNumber'] = 0 - damage_event.final_damage
+			#VfxHelper.create_damage_effect(defender, damage_effect, damage_effect_data)
+	#return damage_event
+	#
 
 static func _order_damage_mods(mods:Array):
 	var add_list = []

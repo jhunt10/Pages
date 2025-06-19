@@ -23,6 +23,8 @@ func _on_start():
 	sprite.position = starting_offset
 	var sprite_scale = _data.get('Scale', null)
 	if sprite_scale:
+		if sprite_scale is float or sprite_scale is int:
+			sprite_scale = [sprite_scale,sprite_scale]
 		sprite.scale = Vector2(sprite_scale[0], sprite_scale[1])
 	rotation_offset = deg_to_rad(_data.get("Rotation", 0))
 	sprite.rotation = rad_to_deg(source_actor_node.global_position.angle_to(self.global_position)) + rotation_offset

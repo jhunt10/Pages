@@ -23,7 +23,7 @@ func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, metadata:
 		printerr("SubAct_SpawnMissile.get_target_spt_of_missile: No TargetData found for : ", target_key)
 		return BaseSubAction.Failed
 	
-	var damage_data = parent_action.get_damage_datas(actor, damage_key)
+	var damage_data = parent_action.get_damage_data_single(actor, damage_key)
 	if !damage_data or damage_data.size() == 0:
 		printerr("SubAct_SpawnMissile.get_target_spt_of_missile: No DamageData found for : ", damage_key)
 		return BaseSubAction.Failed

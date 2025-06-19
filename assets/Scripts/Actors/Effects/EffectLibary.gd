@@ -101,6 +101,10 @@ static func list_all_effects_keys()->Array:
 	if !Instance: Instance = EffectLibrary.new()
 	return Instance._object_defs.keys()
 
+static func has_effect_key(key:String)->bool:
+	if !Instance: Instance = EffectLibrary.new()
+	return Instance._object_defs.keys().has(key)
+	
 static func get_effect_def(key:String)->Dictionary:
 	if !Instance: Instance = EffectLibrary.new()
 	return Instance.get_object_def(key)

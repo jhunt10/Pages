@@ -4,7 +4,7 @@ class_name BaseItemHolder
 # Use Actor.bag_items_changed
 #signal items_changed
 
-const LOGGING = true
+const LOGGING = false
 
 signal items_changed
 
@@ -206,7 +206,7 @@ func can_set_item_in_slot(item:BaseItem, index:int, allow_replace:bool=false)->b
 	if not allow_replace and _raw_item_slots.has(item.Id):
 		return false
 	var check_slot_set_data = get_slot_set_data_for_index(index)
-	printerr("ItemHolder.can_set_item_in_slot: _can_slot_set_accept_item: Index '%s' | %s" % [index, check_slot_set_data])
+	if LOGGING: print("ItemHolder.can_set_item_in_slot: _can_slot_set_accept_item: Index '%s' | %s" % [index, check_slot_set_data])
 	if not _can_slot_set_accept_item(check_slot_set_data, item):
 		return false
 	if not allow_replace and _raw_item_slots[index] != null:
@@ -238,7 +238,7 @@ func _can_slot_set_accept_item(check_slot_set_data:Dictionary, item:BaseItem)->b
 			return true
 	else:
 		return true
-	print("_can_slot_set_accept_item: %s: %s | %s" % [item.Id, item_tags, filter_data])
+	if LOGGING: print("_can_slot_set_accept_item: %s: %s | %s" % [item.Id, item_tags, filter_data])
 	return false
 	
 

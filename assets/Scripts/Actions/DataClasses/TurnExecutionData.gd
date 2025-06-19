@@ -17,6 +17,8 @@ func _init(actor:BaseActor, on_que:Dictionary) -> void:
 	on_que_data = on_que
 
 func add_target_for_key(target_key:String, from_target_param_key:String, value):
+	if value is BaseActor:
+		value = value.Id
 	if value is String or value is MapPos:
 		if not _targets.keys().has(target_key):
 			_targets[target_key] = [] 
@@ -24,6 +26,21 @@ func add_target_for_key(target_key:String, from_target_param_key:String, value):
 		_targets_from_params[target_key] = from_target_param_key
 	else:
 		printerr("TurnExecutionData.set_target_key: Invalid object '%s' for key '%s'." % [value, target_key])
+
+func replace_target_for_key(target_key:String, from_target_param_key:String, old_value, new_value):
+	if old_value is BaseActor:
+		old_value = old_value.Id
+	if new_value is BaseActor:
+		new_value = new_value.Id
+	if new_value is String or new_value is MapPos:
+		if not _targets.keys().has(target_key):
+			return
+		var arr = []
+		var current_index = arr.find(old_value)
+		_targets[target_key][current_index] = new_value
+		_targets_from_params[target_key] = from_target_param_key
+	else:
+		printerr("TurnExecutionData.set_target_key: Invalid object '%s' for key '%s'." % [new_value, target_key])
 
 func has_target(target_key:String)->bool:
 	return _targets.keys().has(target_key)

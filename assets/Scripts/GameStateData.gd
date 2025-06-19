@@ -105,7 +105,7 @@ func set_actor_pos(actor:BaseActor, pos:MapPos, suppress_signal:bool=false):
 			var zone:BaseZone = _zones[current_zone_id]
 			zone.on_actor_enter(actor, self)
 	
-func get_actor_pos(actor:BaseActor)->MapPos:
+func get_actor_pos(actor)->MapPos:
 	return map_data.get_actor_pos(actor)
 
 func get_actors_at_pos(pos, include_dead:bool=false)->Array:

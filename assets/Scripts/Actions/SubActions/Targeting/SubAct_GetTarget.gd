@@ -54,7 +54,6 @@ func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, metadata:
 			return BaseSubAction.Failed 
 	
 	if allow_auto and selection_data.get_potential_target_count() == 1:
-		var target_param_ket = target_params.target_param_key
 		turn_data.add_target_for_key(setting_target_key, target_param_key, selection_data.list_potential_targets()[0])
 		return BaseSubAction.Success
 	

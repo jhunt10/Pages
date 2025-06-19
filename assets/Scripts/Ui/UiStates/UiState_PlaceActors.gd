@@ -159,4 +159,5 @@ func _on_placement_confirmed():
 		CombatRootControl.Instance.add_actor(actor, pos)
 		actor.on_combat_start()
 	CombatRootControl.Instance.ui_control.ui_state_controller.set_ui_state(UiStateController.UiStates.ActionInput)
+	CombatRootControl.Instance.start_combat_animation()
 	

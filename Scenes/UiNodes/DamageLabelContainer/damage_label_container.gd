@@ -134,14 +134,6 @@ func set_damage_data(damage_data:Dictionary, actor:BaseActor = null):
 		multiplier_label.hide()
 		count_label.hide()
 		return
-	var defense_type = damage_data.get("DefenseType", null)
-	if defense_type == "Ward":
-		damage_icon_rect.texture = mag_damage_icon
-	elif defense_type == "Armor":
-		damage_icon_rect.texture = phy_damage_icon
-	else:
-		damage_icon_rect.texture = abb_damage_icon
-	
 	
 	var attack_stat = damage_data.get("AtkStat", "Weapon")
 	attack_power = damage_data.get("AtkPwrBase", 0)
@@ -177,9 +169,27 @@ func set_damage_data(damage_data:Dictionary, actor:BaseActor = null):
 		multiplier_label.hide()
 		count_label.hide()
 	
-	defense_type = damage_data.get("DefenseType")
 	var type_string = damage_data.get("DamageType")
 	var type = DamageTypes.get(type_string)
 	if type == null:
 		type = DamageTypes.Test
 	damage_type = type
+	
+	var def_type_val = damage_data.get("DefenseType")
+	if def_type_val == "AUTO":
+		if DamageHelper.ElementalDamageTypes_Strings.has(type_string):
+			defense_type = "Ward"
+		elif DamageHelper.PhysicalDamageTypes_Strings.has(type_string):
+			defense_type = "Armor"
+		else:
+			defense_type = "None"
+	else:
+		defense_type = def_type_val
+		
+	if defense_type == "Ward":
+		damage_icon_rect.texture = mag_damage_icon
+	elif defense_type == "Armor":
+		damage_icon_rect.texture = phy_damage_icon
+	else:
+		damage_icon_rect.texture = abb_damage_icon
+	

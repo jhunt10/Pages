@@ -27,6 +27,8 @@ static func relative_pos_to_real(current_pos:MapPos, relative_pos:MapPos) -> Map
 
 static func handle_movement(game_state:GameStateData, moving_actor:BaseActor, 
 		relative_movement:MapPos, move_type:String, simulated:bool=false) -> bool:
+	if not simulated:
+		var test = true
 	var actor_pos:MapPos = game_state.get_actor_pos(moving_actor)
 	var new_pos = relative_pos_to_real(actor_pos, relative_movement)
 	if (new_pos.x < 0 or new_pos.x >= game_state.map_width 

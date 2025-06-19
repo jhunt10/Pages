@@ -58,13 +58,13 @@ func _load_full_details():
 	var page_effect_def = {}#page.get_effect_def()
 	description_box.set_page_item(page)
 	# Ammo
-	if page and page.has_ammo(null):
-		ammo_label.set_data(page.get_ammo_data())
+	if page and page is PageItemAction and page.has_ammo(null):
+		ammo_label.set_data(page, null)
 		ammo_label.show()
 	else:
 		ammo_label.hide()
 	
-	if page:
+	if page is PageItemAction:
 		var attack_details = page.get_load_val("AttackDetails", {})
 		accuracy_label.text = str(attack_details.get("AccuracyMod", 1))
 		potency_label.text = str(attack_details.get("PotencyMod", 1))

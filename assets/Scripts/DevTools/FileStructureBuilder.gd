@@ -188,7 +188,7 @@ static func update_def_file(object_type:String, file_path):
 		for val:Dictionary in old_arr:
 			var key = val.get(object_key_name, '')
 			if key == '':
-				printerr("Failed to find '%s' on a def.")
+				printerr("Failed to find '%s' on a def in %s." % [key, file_path])
 				old_defs['NoKey' + str(index)] = val
 				index += 1
 			else:
@@ -289,19 +289,14 @@ static func update_def_file(object_type:String, file_path):
 			new_def['ItemDetails']['ItemType'] = "Page"
 		
 		elif object_type == "Page":
-			if not new_def.keys().has("PageData"):
-				new_def['PageData'] = {}
-			if new_def.keys().has("ActionKey"):
-				new_def['PageData']['ActionKey'] = new_def['ActionKey']
-				new_def.erase("ActionKey")
+			if not new_def.keys().has("PassiveData"):
+				new_def['PassiveData'] = {}
 			if new_def.keys().has("EffectKey"):
-				new_def['PageData']['EffectKey'] = new_def['EffectKey']
+				new_def['PassiveData']['EffectKey'] = new_def['EffectKey']
 				new_def.erase("EffectKey")
-			#
-			var move_props = ["Requirments", "StatMods", "TargetMods", "DamageMods"]
+			
+			var move_props = ["Requirments", "StatMods", "TargetMods", "DamageMods", "AmmoMods"]
 			var page_data = new_def.get("PageData", {})
-			#if page_data.size() > 0:
-				#print("\n%s: %s\n" % [key, page_data])
 			for prop in move_props:
 				var val = new_def.get(prop, null)
 				if val and page_data.has(prop):
@@ -310,6 +305,8 @@ static func update_def_file(object_type:String, file_path):
 					page_data[prop] = val
 				new_def.erase(prop)
 			new_def['EquipmentData'] = page_data
+			if new_def.keys().has("PageData"):
+				new_def.erase("PageData")
 			new_def['ItemDetails']['ItemType'] = "Page"
 		
 		

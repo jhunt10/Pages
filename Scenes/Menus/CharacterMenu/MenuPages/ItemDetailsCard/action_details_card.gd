@@ -44,7 +44,7 @@ func set_action(actor:BaseActor, page:BasePageItem):
 		target_type_label.hide()
 	
 	if action.has_ammo(actor):
-		cost_container.set_data(action.get_ammo_data())
+		cost_container.set_data(action, actor)
 		cost_container.show()
 	else:
 		cost_container.hide()

@@ -44,6 +44,9 @@ func start_vfx():
 		return
 	_state = States.Playing
 	_on_start()
+	if _data.get("ShakeActor", false):
+		if vfx_holder and vfx_holder.actor_node:
+			vfx_holder.actor_node.play_shake()
 
 func _on_start(): 
 	pass
@@ -56,7 +59,13 @@ func finish():
 	var source_actor = null
 	if _data.has("SourceActorId"): source_actor = ActorLibrary.get_actor(_data['SourceActorId'])
 	for vfx_key in chain_vfx_datas.keys():
-		VfxHelper.create_vfx_on_actor(self.actor_node.Actor, vfx_key, chain_vfx_datas[vfx_key], source_actor)
+		var data = chain_vfx_datas[vfx_key]
+		if data.has("ScenePath"):
+			VfxHelper.create_vfx_on_actor(self.actor_node.Actor, vfx_key, chain_vfx_datas[vfx_key], source_actor)
+		elif data.has("DamageNumber"):
+			var damage_string = str(data.get("DamageNumber", 0))
+			var damage_text_type = _data.get("DamageTextType", VfxHelper.FlashTextType.Normal_Dmg)
+			VfxHelper.create_flash_text(self.actor_node.Actor, damage_string, damage_text_type)
 		
 	_state = States.Finished
 	_on_delete()

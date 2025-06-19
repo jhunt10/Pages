@@ -1,10 +1,6 @@
 class_name BasePageItem
 extends BaseEquipmentItem
 
-var page_data:Dictionary:
-	get:
-		return _def.get("PageData", {})
-
 func get_item_type()->ItemTypes:
 	return ItemTypes.Page
 

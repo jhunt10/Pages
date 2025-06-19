@@ -21,8 +21,10 @@ func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, que_exe_d
 				game_state:GameStateData, actor:BaseActor)->bool:
 	
 	var turn_data = que_exe_data.get_current_turn_data()
-	var attack_details = parent_action.get_load_val("AttackDetails", {})
+	var attack_details = parent_action.action_data.get("AttackDetails", {})
 	attack_details['DisplayName'] = parent_action.get_display_name()
+	# TODO: This is redundant in many ways (get_attack_vfx_data to VfxLib stuff and AttackVfxData already on details)
+	attack_details['AttackVfxData'] = parent_action.get_attack_vfx_data()
 	var tag_chain = SourceTagChain.new()\
 			.append_source(SourceTagChain.SourceTypes.Actor, actor)\
 			.append_source(SourceTagChain.SourceTypes.Action, parent_action)
@@ -50,8 +52,17 @@ func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, que_exe_d
 			ignore_aoe
 		)
 	
+	var primary_target = null
+	if targets_selected.size() > 0:
+		primary_target = targets_selected[0]
+	
 	# Get Effect Datas
-	var effect_datas = parent_action.get_load_val("EffectDatas", {})
+	var effect_keys = subaction_data.get("EffectKeys", [])
+	var effect_datas = {}
+	for key in effect_keys:
+		var eff_data = parent_action.get_effect_data(key)
+		if eff_data.size() > 0:
+			effect_datas[key] = eff_data
 	
 	# Get Damage info
 	var damage_datas = {}
@@ -87,7 +98,14 @@ func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, que_exe_d
 		else:
 			hit_any_actor = true
 		hittable_actors.append(target)
-			
+	
+	var override_origin_pos = null
+	if subaction_data.get("UsePrimaryTargetAsOrigin", false):
+		if primary_target is BaseActor or primary_target is String:
+			override_origin_pos = game_state.get_actor_pos(primary_target)
+		if primary_target is MapPos:
+			override_origin_pos = primary_target
+	
 	var attack_event = AttackHandler.handle_attack(
 		actor, 
 		hittable_actors,
@@ -97,7 +115,7 @@ func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, que_exe_d
 		tag_chain, 
 		target_params,
 		game_state,
-		null)
+		override_origin_pos)
 	
 	if missed_moved_actor and not hit_any_actor:
 		VfxHelper.create_flash_text(actor, "Miss", VfxHelper.FlashTextType.Miss)

@@ -87,3 +87,8 @@ func serialize_self()->String:
 		var sub_event:AttackSubEvent = sub_events[defender_id]
 		data['sub_events'][defender_id] = sub_event.dictialize_self()
 	return JSON.stringify(data)
+
+func get_sub_event_for_defender(defender_or_id)->AttackSubEvent:
+	if defender_or_id is BaseActor:
+		defender_or_id = defender_or_id.Id
+	return sub_events.get(defender_or_id) 

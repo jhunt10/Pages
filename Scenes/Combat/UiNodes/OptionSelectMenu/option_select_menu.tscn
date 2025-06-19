@@ -7,7 +7,7 @@
 [ext_resource type="Script" path="res://Scenes/Combat/UiNodes/ItemSelectionInput/item_selection_button.gd" id="5_b66pi"]
 [ext_resource type="Script" path="res://Scenes/Combat/UiNodes/OptionSelectMenu/option_select_button.gd" id="5_tb60f"]
 [ext_resource type="Texture2D" uid="uid://567vutk12a12" path="res://Scenes/Menus/CharacterMenu/MenuPages/SlotHighlight.png" id="6_k6fh0"]
-[ext_resource type="Texture2D" uid="uid://bdh4x87ck5hi5" path="res://defs/Items/Consumables/Ammo/Sprites/Gen_Ammo_LIcon.png" id="7_5rhdv"]
+[ext_resource type="Texture2D" uid="uid://d041ymvcqbc8f" path="res://notes/TemplatePageIcon.png" id="7_k3rnn"]
 [ext_resource type="Script" path="res://Scenes/UiNodes/FitScaleLabel/fit_scale_label.gd" id="8_axjxe"]
 [ext_resource type="Theme" uid="uid://dwinll8pgdjhc" path="res://Scenes/Themes/standard_theme.tres" id="9_8tr2b"]
 [ext_resource type="Texture2D" uid="uid://dbag7m6cb83vp" path="res://Scenes/Menus/CharacterMenu/MenuPages/ItemDetailsCard/Button_Patch_32_6.png" id="10_c4jt8"]
@@ -85,7 +85,7 @@ texture = ExtResource("6_k6fh0")
 [node name="Icon" type="TextureRect" parent="BackPatchContainer/BoxContainer/OptionButton"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 0
-texture = ExtResource("7_5rhdv")
+texture = ExtResource("7_k3rnn")
 
 [node name="FitScaleLabel" type="Control" parent="BackPatchContainer/BoxContainer/OptionButton" node_paths=PackedStringArray("label")]
 layout_mode = 1

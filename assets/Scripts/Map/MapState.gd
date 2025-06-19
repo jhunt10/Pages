@@ -25,11 +25,11 @@ func duplicate(new_game_state)->MapStateData:
 	}
 	var new_map = MapStateData.new(new_game_state, map_data, true)
 	for spot:MapSpot in _position_data:
-		if spot.X == 7 and spot.Y == 7:
-			print("Had 77 Had: %s" % [spot])
-		var new_spot = spot.duplicate(new_map)
-		if new_spot.X == 7 and new_spot.Y == 7:
-			print("Dupped 77 SPot: %s to %s" % [spot, new_spot])
+		#if spot.X == 7 and spot.Y == 7:
+			#print("Had 77 Had: %s" % [spot])
+		#var new_spot = spot.duplicate(new_map)
+		#if new_spot.X == 7 and new_spot.Y == 7:
+			#print("Dupped 77 SPot: %s to %s" % [spot, new_spot])
 		new_map._position_data.append(spot.duplicate(new_map))
 	new_map._actor_pos_cache = _actor_pos_cache.duplicate(true)
 	new_map._item_pos_cache = _item_pos_cache.duplicate(true)
@@ -107,8 +107,10 @@ func get_actors_at_pos(pos, layer=null, include_dead:bool=false)->Array:
 		return spot.get_actors(layer, include_dead)
 	return []
 		
-func get_actor_pos(actor:BaseActor)->MapPos:
-	return _actor_pos_cache.get(actor.Id, null)
+func get_actor_pos(actor)->MapPos:
+	if actor is BaseActor:
+		actor = actor.Id
+	return _actor_pos_cache.get(actor, null)
 
 func get_actor_layer(actor:BaseActor)->MapLayers:
 	var pos = get_actor_pos(actor)

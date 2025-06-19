@@ -20,8 +20,9 @@ func get_on_que_options(parent_action:PageItemAction, _subaction_data:Dictionary
 		var load_path = ActorLibrary.Instance.get_object_def_load_path(actor_key)
 		var sprite_name = actor_def.get("#ObjDetails", {}).get("SmallIcon", '')
 		options.option_icons.append(SpriteCache.get_sprite(load_path.path_join(sprite_name)))
-	var options2 = OnQueOptionsData.new("SelectedDirection", "Select Direction:", ["North", "East", "South", "West"], [], [])
-	return [options, options2]
+	var out_list = [options]
+	#out_list.append(OnQueOptionsData.new("SelectedDirection", "Select Direction:", ["North", "East", "South", "West"], [], []))
+	return out_list
 
 func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, que_exe_data:QueExecutionData,
 				game_state:GameStateData, actor:BaseActor)->bool:
@@ -31,7 +32,7 @@ func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, que_exe_d
 	var targets:Array = _find_target_effected_spots(target_key, que_exe_data, game_state, actor)
 	
 	var actor_key = turn_data.on_que_data['SelectedActorKey']
-	var direction = turn_data.on_que_data['SelectedDirection']
+	var direction = turn_data.on_que_data.get('SelectedDirection', "South")
 	var pos:MapPos = targets[0]
 	pos.dir = MapPos.Directions.get(direction)
 	var new_actor = ActorLibrary.create_actor(actor_key, {}, '')

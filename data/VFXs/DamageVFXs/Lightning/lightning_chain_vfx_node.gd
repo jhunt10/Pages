@@ -59,5 +59,5 @@ func add_damage_effect(vfx_data:Dictionary):
 func _create_damage_effect():
 	var actor = self.actor_node.Actor
 	for damage_vfx_data in damage_vfx_datas:
-		var vfx_key = damage_vfx_data['VfxKey']
+		var vfx_key = damage_vfx_data.get('VfxKey', "")
 		VfxHelper.create_damage_effect(actor, vfx_key, damage_vfx_data)

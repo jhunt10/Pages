@@ -22,11 +22,27 @@ static func get_vfx_data(key:String)->VfxData:
 		return _vfx_datas[key]
 	return null
 
-static func get_vfx_def(key:String)->Dictionary:
+static func get_vfx_def(key, data:Dictionary={}, parent:BaseLoadObject=null, optional_load_path:String='')->Dictionary:
 	if !loaded:
 		load_vfx_defs()
-	var vfxs = _vfx_defs.duplicate()
-	return _vfx_defs.get(key, {}).duplicate()
+	if key == null:
+		key = ""
+	var vfx_def = {}
+	if _vfx_defs.keys().has(key):
+		vfx_def = _vfx_defs[key]
+	
+	var load_path = vfx_def.get("LoadPath", "")
+	if data.keys().has("SpriteName"):
+		if optional_load_path:
+			load_path = optional_load_path
+		elif parent:
+			load_path = parent.get_load_path()
+		elif data.has("LoadPath"):
+			load_path = data['LoadPath'] 
+	
+	var merged_datas = BaseLoadObjectLibrary._merge_defs(data, vfx_def)
+	merged_datas['LoadPath'] = load_path
+	return merged_datas
 #
 #func create_vfx_node_from_key(vfx_key:String, data:Dictionary={})->VfxNode:
 	#var vfx_data = get_vfx_data(vfx_key)

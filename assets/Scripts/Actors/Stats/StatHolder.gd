@@ -200,6 +200,8 @@ func apply_damage_event(damage_event:DamageEvent, trigger_effect:bool=false, gam
 	
 
 func apply_damage(damage):
+	if damage is DamageEvent:
+		damage = damage.final_damage
 	_cached_stats["BarStat:"+HealthKey] = max(min(_cached_stats["BarStat:"+HealthKey] - damage, max_health), 0)
 	if current_health <= 0 and CombatRootControl.Instance:
 		CombatRootControl.Instance.kill_actor(_actor)

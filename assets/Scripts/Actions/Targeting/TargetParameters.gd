@@ -107,7 +107,8 @@ func is_valid_target_actor(actor:BaseActor, target:BaseActor, game_state:GameSta
 		return actor.FactionIndex != target.FactionIndex
 	if target_type == TargetTypes.Ally:
 		return actor.FactionIndex == target.FactionIndex
-	
+	if target_type == TargetTypes.Spot or target_type == TargetTypes.FullArea:
+		return true
 	return false
 
 func is_actor_effected_by_aoe(actor:BaseActor, target:BaseActor, game_state:GameStateData)->bool:

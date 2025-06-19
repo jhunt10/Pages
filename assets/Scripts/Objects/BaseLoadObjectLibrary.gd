@@ -279,20 +279,20 @@ func _load_object_def_file(file_path:String)->Dictionary:
 					object_defs[key][object_key_name] = key
 			object_defs = object_defs.values()
 	
-	# TODO: Remove Hack
-	if file_path.contains("ActionDefs.") and get_object_name() == "Item":
-		for def:Dictionary in object_defs:
-			if not def.has("PageData"):
-				def["PageData"] = {}
-			var key = def.get(object_key_name)
-			def['PageData']['ActionKey'] = key
-			key += "_PageItem"
-			def["ItemKey"] = key
-			def['!ObjectScript'] = "res://assets/Scripts/Items/Pages/BasePageItem.gd"
-			if not def['#ObjDetails'].keys().has("Tags"):
-				def['#ObjDetails']['Tags'] = []
-			def['#ObjDetails']['Tags'].append("Page")
-			def['#ObjDetails']['Tags'].append("Action")
+	## TODO: Remove Hack
+	#if file_path.contains("ActionDefs.") and get_object_name() == "Item":
+		#for def:Dictionary in object_defs:
+			#if not def.has("PageData"):
+				#def["PageData"] = {}
+			#var key = def.get(object_key_name)
+			#def['PageData']['ActionKey'] = key
+			#key += "_PageItem"
+			#def["ItemKey"] = key
+			#def['!ObjectScript'] = "res://assets/Scripts/Items/Pages/BasePageItem.gd"
+			#if not def['#ObjDetails'].keys().has("Tags"):
+				#def['#ObjDetails']['Tags'] = []
+			#def['#ObjDetails']['Tags'].append("Page")
+			#def['#ObjDetails']['Tags'].append("Action")
 	
 	
 	

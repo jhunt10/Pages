@@ -132,7 +132,7 @@ func do_thing(tiles_traveled:int):
 				[target], 
 				attack_details, 
 				{"Damage1":damage_data}, 
-				effect_data, 
+				{}, 
 				tag_chain, 
 				_target_params,
 				game_state, 

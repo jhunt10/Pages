@@ -23,8 +23,8 @@ func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, que_exe_d
 	var damage_data = parent_action.get_damage_data_for_subaction(actor, subaction_data)
 	var target_params = parent_action.get_targeting_params("Self", actor)
 	
-	for target:BaseActor in targets:
-		DamageHelper.handle_attack(actor, target, {}, damage_data, [], tag_chain, game_state, target_params)
+	#for target:BaseActor in targets:
+		#DamageHelper.handle_attack(actor, target, {}, damage_data, [], tag_chain, game_state, target_params)
 	
 	#for target:BaseActor in targets:
 		#DamageHelper.handle_attack(actor, target, damage_data, tag_chain, game_state)

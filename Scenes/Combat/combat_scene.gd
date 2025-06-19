@@ -243,6 +243,10 @@ func add_actor(actor:BaseActor, pos:MapPos):
 	GameState.set_actor_pos(actor, pos)
 	actor.stats.fill_bar_stats()
 	actor.Que.fill_page_ammo()
+	
+	if combat_started:
+		actor.on_combat_start()
+	
 
 func add_item(item:BaseItem, pos:MapPos):
 	if GameState._items.keys().has(item.Id):

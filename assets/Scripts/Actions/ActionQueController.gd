@@ -219,6 +219,7 @@ func update(delta: float) -> void:
 				
 				# Check if the last action stopped execution
 				if execution_state != ActionStates.Running:
+					que_index = q_index
 					end_of_frame.emit()
 					end_of_frame_with_state.emit(game_state)
 					return

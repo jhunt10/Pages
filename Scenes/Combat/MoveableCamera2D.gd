@@ -26,6 +26,9 @@ var auto_pan_velocity:float
 var auto_pan_max_velocity:float = 500
 var auto_pan_min_velocity:float = 100
 
+# For ignoring scrolling
+@export var message_box:Control
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.
@@ -164,14 +167,6 @@ func _input(event: InputEvent) -> void:
 		return
 	if locked_for_cut_scene:
 		return
-	if event is InputEventMouseButton:
-		var mouse_event = event as InputEventMouseButton
-		var new_zoom = self.zoom
-		if mouse_event.button_index == MOUSE_BUTTON_WHEEL_UP:
-			new_zoom += Vector2(0.1, 0.1)
-		if mouse_event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
-			new_zoom -= Vector2(0.1, 0.1)
-		self.zoom = Vector2(max(1, new_zoom.x), max(1, new_zoom.y))
 
 var _touch_events:Dictionary = {}
 var _drag_start_camera_pos:Vector2
@@ -197,4 +192,22 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventScreenDrag:
 		if _touch_events.keys().has(event.index):
 			_touch_events[event.index]["current"] = event
+	if event is InputEventMouseButton:
+		var mouse_event = event as InputEventMouseButton
+		
+		var can_scroll = true
+		if message_box:
+			var mouse_pos = message_box.back_patch.get_local_mouse_position()
+			var no_touch = message_box.back_patch.get_global_rect()
+			no_touch.position.x = 0
+			no_touch.position.y = 0
+			if no_touch.has_point(mouse_pos):
+				can_scroll = false
+		if can_scroll:
+			var new_zoom = self.zoom
+			if mouse_event.button_index == MOUSE_BUTTON_WHEEL_UP:
+				new_zoom += Vector2(0.1, 0.1)
+			if mouse_event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
+				new_zoom -= Vector2(0.1, 0.1)
+			self.zoom = Vector2(max(1, new_zoom.x), max(1, new_zoom.y))
 		

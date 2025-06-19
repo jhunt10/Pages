@@ -251,13 +251,13 @@ func _does_ammo_mod_apply_to_action(mod_data:Dictionary, ammo_data:Dictionary, a
 	if not conditions:
 		return true
 	
-	var ammo_types = mod_data.get("AmmoTypes", [])
+	var ammo_types = conditions.get("AmmoTypes", [])
 	if ammo_types.size() > 0:
 		var ammo_type = ammo_data.get("AmmoType", "NOTSET")
 		if not ammo_types.has(ammo_type):
 			return false
 	
-	var tag_filters = mod_data.get("ActionTagFilters", [])
+	var tag_filters = conditions.get("ActionTagFilters", [])
 	for filter in tag_filters:
 		if not SourceTagChain.filters_accept_tags(filter, action.get_tags()):
 			return false
@@ -289,7 +289,7 @@ func get_page_ammo_type(action_key:String)->AmmoItem.AmmoTypes:
 	return ammo_data["AmmoType"]
 
 func get_page_ammo_max_clip(action_key:String)->int:
-	if _ammo_mod_dirty:
+	if true or _ammo_mod_dirty:
 		_cache_page_ammo()
 	var ammo_data = _page_ammo_datas.get(action_key, null)
 	if not ammo_data:

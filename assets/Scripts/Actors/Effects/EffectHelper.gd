@@ -30,7 +30,8 @@ static func create_effect(
 		return null
 	
 	var effect_def = EffectLibrary.get_merged_effect_def(effect_key, effect_data)
-	var effect_details = effect_def.get("EffectDetails", {})
+	var eff_data = effect_def.get("EffectData", {}) 
+	var effect_details = eff_data.get("EffectDetails", {})
 	var effect_potency = effect_def.get("AppliedPotency", 1)
 	
 	# Build Id

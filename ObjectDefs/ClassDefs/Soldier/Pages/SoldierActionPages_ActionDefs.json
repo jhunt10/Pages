@@ -148,8 +148,6 @@
         },
         "TargetParams": {
             "TargetParams1": {
-                "EffectsAllies": false,
-                "EffectsEnemies": false,
                 "LineOfSight": false,
                 "TargetArea": "[[-1,1],[0,1],[1,1]]",
                 "TargetType": "Actor"
@@ -283,8 +281,6 @@
         },   
         "TargetParams": {
             "TargetParam": {
-                "EffectsAllies": false,
-                "EffectsEnemies": true,
                 "LineOfSight": true,
                 "TargetArea": "[[0,2],[0,3],[0,4],[-1,3],[1,3]]",
                 "TargetType": "Spot"
@@ -322,17 +318,15 @@
             ],
             "5": [
                 {
-                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_TurnToFace.gd",
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Movement/SubAct_TurnToTarget.gd",
                     "TargetKey": "Target1"
                 }
             ]
         },
         "TargetParams": {
             "TargetParams1": {
-                "EffectsAllies": false,
-                "EffectsEnemies": false,
                 "LineOfSight": false,
-                "TargetArea": "[[-1,1],[-1,0],[0,1],[1,1],[1,0],[1,-1],[0,-1],[-1,-1],[-2,-1],[-2,0],[-2,1],[-2,2],[-1,2],[0,2],[1,2],[2,2],[2,1],[2,0],[2,-1],[2,-2],[1,-2],[0,-2],[-1,-2],[-2,-2],[-1,-3],[0,-3],[1,-3],[3,-1],[3,0],[3,1],[-3,-1],[-3,0],[-3,1],[-1,3],[0,3],[1,3],[-1,4],[-1,3],[-1,4],[0,4],[1,4],[2,3],[3,2],[4,1],[4,0],[4,-1],[3,-2],[2,-3],[1,-4],[0,-4],[-1,-4],[-2,-3],[-3,-2],[-4,-1],[-4,0],[-4,1],[-3,2],[-2,3],[2,4],[4,2],[3,3],[-2,4],[-3,3],[-4,2],[-4,-2],[-3,-3],[-2,-4],[2,-4],[3,-3],[4,-2]]",
+                "TargetArea": "[[-2,-4],[-1,-4],[0,-4],[1,-4],[2,-4],[-3,-3],[-2,-3],[-1,-3],[0,-3],[1,-3],[2,-3],[3,-3],[-4,-2],[-3,-2],[-2,-2],[-1,-2],[0,-2],[1,-2],[2,-2],[3,-2],[4,-2],[-4,-1],[-3,-1],[-2,-1],[-1,-1],[0,-1],[1,-1],[2,-1],[3,-1],[4,-1],[-4,0],[-3,0],[-2,0],[-1,0],[0,0],[1,0],[2,0],[3,0],[4,0],[-4,1],[-3,1],[-2,1],[-1,1],[0,1],[1,1],[2,1],[3,1],[4,1],[-4,2],[-3,2],[-2,2],[-1,2],[0,2],[1,2],[2,2],[3,2],[4,2],[-3,3],[-2,3],[-1,3],[0,3],[1,3],[2,3],[3,3],[-2,4],[-1,4],[0,4],[1,4],[2,4]]",
                 "TargetType": "Enemy"
             }
         }
@@ -409,8 +403,6 @@
         },
         "TargetParams": {
             "TargetParams1": {
-                "EffectsAllies": false,
-                "EffectsEnemies": true,
                 "LineOfSight": false,
                 "TargetArea": "[[-1,0],[-1,1],[0,1],[1,1],[1,0]]",
                 "TargetType": "Actor"
@@ -491,8 +483,6 @@
         },
         "TargetParams": {
             "TargetParams1": {
-                "EffectsAllies": false,
-                "EffectsEnemies": true,
                 "LineOfSight": false,
                 "TargetArea": "[[-1,1],[0,1],[1,1]]",
                 "TargetType": "Actor"
@@ -557,8 +547,6 @@
         },
         "TargetParams": {
             "TargetParam1": {
-                "EffectsAllies": false,
-                "EffectsEnemies": true,
                 "LineOfSight": false,
                 "TargetArea": "[[-1,3],[0,3],[1,3],[-2,2],[-1,2],[0,2],[1,2],[2,2],[-3,1],[-2,1],[-1,1],[0,1],[1,1],[2,1],[3,1],[-3,0],[-2,0],[-1,0],[1,0],[2,0],[3,0],[-3,-1],[-2,-1],[-1,-1],[0,-1],[1,-1],[2,-1],[3,-1],[-2,-2],[-1,-2],[0,-2],[1,-2],[2,-2],[-1,-3],[0,-3],[1,-3]]",
                 "TargetType": "Enemy"
@@ -623,8 +611,6 @@
         },
         "TargetParams": {
             "TargetParam1": {
-                "EffectsAllies": false,
-                "EffectsEnemies": true,
                 "LineOfSight": false,
                 "TargetArea": "[[-1,3],[0,3],[1,3],[-2,2],[-1,2],[0,2],[1,2],[2,2],[-3,1],[-2,1],[-1,1],[0,1],[1,1],[2,1],[3,1],[-3,0],[-2,0],[-1,0],[1,0],[2,0],[3,0],[-3,-1],[-2,-1],[-1,-1],[0,-1],[1,-1],[2,-1],[3,-1],[-2,-2],[-1,-2],[0,-2],[1,-2],[2,-2],[-1,-3],[0,-3],[1,-3]]",
                 "TargetType": "FullArea"
@@ -716,8 +702,6 @@
         },
         "TargetParams": {
             "TargetParams1": {
-                "EffectsAllies": false,
-                "EffectsEnemies": false,
                 "LineOfSight": true,
                 "TargetArea": "[[-1,1],[0,1],[1,1]]",
                 "TargetType": "Enemy"
@@ -981,22 +965,16 @@
         },
         "TargetParams": {
             "DisplayTargetParams": {
-                "EffectsAllies": false,
-                "EffectsEnemies": false,
                 "LineOfSight": false,
                 "TargetArea": "[[-1,1],[0,1],[1,1],[-1,0],[1,0],[-1,-1],[0,-1],[1,-1]]",
                 "TargetType": "Actor"
             },
             "SegmentTargetParams1": {
-                "EffectsAllies": false,
-                "EffectsEnemies": false,
                 "LineOfSight": false,
                 "TargetArea": "[[-1,1]]",
                 "TargetType": "Actor"
             },
             "SegmentTargetParams2": {
-                "EffectsAllies": false,
-                "EffectsEnemies": false,
                 "LineOfSight": false,
                 "TargetArea": "[[0,1]]",
                 "TargetType": "Actor"

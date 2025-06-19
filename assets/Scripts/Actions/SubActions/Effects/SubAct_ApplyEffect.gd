@@ -20,8 +20,7 @@ func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, que_exe_d
 	var effect_key = ''
 	var effect_data = {}
 	if subaction_data.has("EffectDataKey"):
-		var effect_datas = parent_action.get_load_val("EffectDatas", {})
-		effect_data = effect_datas.get(subaction_data['EffectDataKey'], {})
+		effect_data = parent_action.get_effect_data(subaction_data['EffectDataKey'])
 		effect_key = effect_data.get("EffectKey", '')
 	if effect_key == '':
 		effect_key = subaction_data.get('EffectKey')

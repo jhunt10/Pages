@@ -1,0 +1,85 @@
+[
+	{
+		"VfxKey": "Slash_DamageEffect",
+		"ScenePath": "res://assets/Scripts/VFXs/DamageVfxs/damage_vfx_node.tscn",
+		"AnimationName": "6_sprites_250ms_frames",
+		"AnimationSpeed": 2,
+		"SpriteName": "Sprites/SlashEffect.png",
+		"SpriteSheetWidth": 2,
+		"SpriteSheetHight": 3,
+		"RandomOffsets": [0, 0],
+		"ShakeActor": true,
+		"MatchSourceDir": true
+	},
+	{
+		"VfxKey": "Pierce_DamageEffect",
+		"ScenePath": "res://assets/Scripts/VFXs/DamageVfxs/damage_vfx_node.tscn",
+		"AnimationName": "4_sprites_250ms_frames",
+		"AnimationSpeed": 2,
+		"SpriteName": "Sprites/ShotEffect.png",
+		"SpriteSheetWidth": 2,
+		"SpriteSheetHight": 2,
+		"ShakeActor": true,
+		"RandomOffsets": [0.5, 0.5]
+	},
+	{
+		"VfxKey": "Blunt_DamageEffect",
+		"ScenePath": "res://assets/Scripts/VFXs/DamageVfxs/damage_vfx_node.tscn",
+		"AnimationName": "6_sprites_250ms_frames",
+		"AnimationSpeed": 2,
+		"SpriteName": "Sprites/SlamEffect.png",
+		"SpriteSheetWidth": 2,
+		"SpriteSheetHight": 3,
+		"ShakeActor": true,
+		"RandomOffsets": [0, 0]
+	},
+	{
+		"VfxKey": "Cold_DamageEffect",
+		"ScenePath": "res://assets/Scripts/VFXs/DamageVfxs/damage_vfx_node.tscn",
+		"AnimationName": "6_sprites_250ms_frames",
+		"AnimationSpeed": 2,
+		"SpriteName": "Sprites/IceSmallEffect.png",
+		"SpriteSheetWidth": 2,
+		"SpriteSheetHight": 3,
+		"Scale": 1,
+		"ShakeActor": true,
+		"RandomOffsets": [0.25, 0.25]
+	},
+	{
+		"VfxKey": "Fire_DamageEffect",
+		"ScenePath": "res://assets/Scripts/VFXs/DamageVfxs/damage_vfx_node.tscn",
+		"AnimationName": "6_sprites_250ms_frames",
+		"AnimationSpeed": 2.5,
+		"SpriteName": "Sprites/FireSmallEffect.png",
+		"SpriteSheetWidth": 2,
+		"SpriteSheetHight": 3,
+		"Scale": 1,
+		"ShakeActor": true,
+		"RandomOffsets": [0.25, 0.25]
+	},
+	{
+		"VfxKey": "Shock_DamageEffect",
+		"ScenePath": "res://assets/Scripts/VFXs/DamageVfxs/damage_vfx_node.tscn",
+		"AnimationName": "6_sprites_250ms_frames",
+		"AnimationSpeed": 2.5,
+		"SpriteName": "Sprites/LightningSmallEffect.png",
+		"SpriteSheetWidth": 2,
+		"SpriteSheetHight": 3,
+		"Scale": 1,
+		"ShakeActor": true,
+		"RandomOffsets": [0.0, 0.0],
+		"RandomRotation": [-180, 180]
+	},
+	{
+		"VfxKey": "Poison_DamageEffect",
+		"ScenePath": "res://assets/Scripts/VFXs/DamageVfxs/damage_vfx_node.tscn",
+		"AnimationName": "6_sprites_250ms_frames",
+		"AnimationSpeed": 1,
+		"SpriteName": "Sprites/PoisonEffect.png",
+		"ShakeActor": false,
+		"SpriteSheetWidth": 2,
+		"SpriteSheetHight": 3,
+		"RandomOffsets": [0.5, 0.0],
+		"FixedOffset": [0,-16]
+	}
+]

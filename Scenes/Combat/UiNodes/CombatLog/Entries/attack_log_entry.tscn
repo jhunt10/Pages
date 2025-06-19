@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://cm4vu5ofvo3cp"]
+
+[ext_resource type="Script" path="res://Scenes/Combat/UiNodes/CombatLog/Entries/attack_log_entry.gd" id="1_7oa6d"]
+[ext_resource type="Theme" uid="uid://bfce41la62bs6" path="res://Scenes/Themes/readable_theme.tres" id="2_h0iy3"]
+
+[node name="AttackLogEntry" type="RichTextLabel"]
+custom_minimum_size = Vector2(240, 0)
+offset_right = 1.0
+theme = ExtResource("2_h0iy3")
+theme_override_font_sizes/normal_font_size = 17
+bbcode_enabled = true
+text = "Actor hit Actor for 50 Blunt"
+fit_content = true
+scroll_active = false
+script = ExtResource("1_7oa6d")

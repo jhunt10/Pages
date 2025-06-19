@@ -4,7 +4,7 @@
         "ParentKey": "BaseBoltSpell",
         "DamageDatas": {
             "Damage1": {
-                "DamageVfxKey": "SmallFire_DamageEffect",
+                "DamageVfxKey": "Fire_DamageEffect",
                 "DamageType": "Light",
                 "DamageVarient": 0.2,
                 "DefenseType": "None"
@@ -61,11 +61,11 @@
         }
     },
     {
-        "ActionKey": "BaseBlessing",
-        "ParentKey": "BaseApplyEffectSpell",
+        "ActionKey": "#BaseBlessing",
+        "ParentKey": "#BaseApplyBuffSpell",
         "Details": {
             "Description": "Grant ZZZZ XXXX Blessing to Ally for 5 Turns.",
-            "DisplayName": "Pebbel Blessing",
+            "DisplayName": "#Base Blessing",
             "LargeIcon": "Sprites/XXXXBuff_YYYY.png",
             "SmallIcon": "Sprites/XXXXBuff_YYYY.png",
             "SnippetDesc": "Grant ZZZZ XXXX Blessing",

@@ -101,6 +101,10 @@ static func handle_attack(
 		attack_mods # Can probably filter down to Damage mods since StatMods have been applied
 	)
 	
+	if defenders.size() == 0:
+		printerr("Defenderless Attack Event!")
+		return attack_event
+	
 	#### Steps #####
 	# 1. Roll for Hit
 	# 2. Roll for Damage
@@ -155,7 +159,7 @@ static func handle_attack(
 			# Get Damage Vfx Data
 			var damage_key = damage_event.damage_data_key
 			var damage_data = attack_event.damage_datas[damage_key]
-			damage_vfx_cache.append(_tranlate_damage_vfx_data(attacker.Id, sub_event, damage_event, damage_data))
+			damage_vfx_cache.append(build_damage_vfx_data(attacker.Id, damage_event, damage_data, sub_event))
 			
 			# Ignore rest of damage if defender died
 			if defender.is_dead:
@@ -181,6 +185,8 @@ static func handle_attack(
 				elif effect_result.get("WasApplied", false):
 					var effect_data = effect_details.get("EffectData", {})
 					var effect = EffectHelper.create_effect(defender, attacker, effect_key, effect_data, game_state)
+					if effect:
+						effect_result['AppliedEffectId'] = effect.Id
 				else:
 					vfx_data_cache[defender.Id]['ResistedAtLeastOnce'] = true
 		
@@ -192,8 +198,8 @@ static func handle_attack(
 		actor.stats.clear_temp_stat_mods()
 	
 	# Create Vfxs
-	var attack_vfx_key = attack_details.get("AttackVfxKey")
-	var attack_vfx_data = attack_details.get("AttackVfxData")
+	var attack_vfx_key = attack_details.get("AttackVfxKey", "")
+	var attack_vfx_data = attack_details.get("AttackVfxData", {})
 	for defender:BaseActor in defenders:
 		var sub_event:AttackSubEvent = attack_event.sub_events[defender.Id]
 		var defender_node = CombatRootControl.get_actor_node(defender.Id)
@@ -214,7 +220,7 @@ static func handle_attack(
 			defender_node.vfx_holder.flash_text_controller.add_flash_text("Miss", VfxHelper.FlashTextType.Blocked_Dmg)
 		
 		var attack_vfx = null
-		if attack_vfx_key:
+		if attack_vfx_key or attack_vfx_data.size() > 0:
 			var vfx_source = attacker
 			if attack_from_spot_override:
 				var posible_actors = game_state.get_actors_at_pos(attack_from_spot_override)
@@ -232,6 +238,8 @@ static func handle_attack(
 	# Trigger After Attack Effects
 	for actor in all_unique_actors:
 		actor.effects.trigger_attack(attack_event, game_state)
+	
+	CombatLogController.log_event(attack_event)
 	
 	return attack_event
 
@@ -460,21 +468,28 @@ static func _does_attack_stat_mod_apply_to_actor(stat_mod:BaseStatMod, actor:Bas
 	
 	return true
 
-static func _tranlate_damage_vfx_data(attacker_id:String, sub_event:AttackSubEvent, damage_event:DamageEvent, damage_data:Dictionary )->Dictionary:
-	var damage_vfx_key = damage_data.get("DamageVfxKey", null)
+static func build_damage_vfx_data(attacker_id:String, damage_event:DamageEvent, damage_data:Dictionary, attack_sub_event:AttackSubEvent=null)->Dictionary:
+	var damage_vfx_key = damage_data.get("DamageVfxKey", '')
 	var damage_vfx_data = damage_data.get("DamageVfxData", {}).duplicate()
+	
+	if damage_vfx_key == "AUTO":
+		var damage_type = DamageEvent.DamageTypes.keys()[damage_event.damage_type]
+		damage_vfx_key = damage_type + "_DamageEffect"
+	damage_vfx_data['VfxKey'] = damage_vfx_key
+	
 	if damage_event.final_damage < 0:
 		damage_vfx_data['DamageTextType'] = VfxHelper.FlashTextType.Healing_Dmg
-	elif sub_event.is_crit and not sub_event.is_blocked:
-		damage_vfx_data['DamageTextType'] = VfxHelper.FlashTextType.Crit_Dmg
-	elif sub_event.is_blocked and not sub_event.is_crit:
-		damage_vfx_data['DamageTextType'] = VfxHelper.FlashTextType.Blocked_Dmg
+	elif attack_sub_event:
+		if attack_sub_event.is_crit and not attack_sub_event.is_blocked:
+			damage_vfx_data['DamageTextType'] = VfxHelper.FlashTextType.Crit_Dmg
+		elif attack_sub_event.is_blocked and not attack_sub_event.is_crit:
+			damage_vfx_data['DamageTextType'] = VfxHelper.FlashTextType.Blocked_Dmg
 	else:
 		damage_vfx_data['DamageTextType'] = VfxHelper.FlashTextType.Normal_Dmg
 	damage_vfx_data['SourceActorId'] = attacker_id
 	damage_vfx_data['DamageNumber'] = 0 - damage_event.final_damage
 	return {
-		"DamageVfxKey": damage_data.get("DamageVfxKey", null),
+		"DamageVfxKey": damage_vfx_key,
 		"DamageVfxData": damage_vfx_data
 	}
 

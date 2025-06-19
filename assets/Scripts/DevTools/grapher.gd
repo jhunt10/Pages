@@ -5,6 +5,13 @@ extends Control
 	set(val):
 		#FileStructureBuilder.create_class_def_files("Priest")
 		FileStructureBuilder.DoThing()
+		#var arr = []
+		#for y in range(-4,5):
+			#for x in range(-4,5):
+				#if abs(x) + abs(y) <= 6:
+					#arr.append([x,y])
+		#print(arr)
+				
 		pass
 		#var fake_pos = MapPos.new(25, 65, 0, 3)
 		#print(str(fake_pos))

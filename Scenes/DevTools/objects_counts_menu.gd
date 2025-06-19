@@ -53,7 +53,7 @@ func _on_lsit_selected(index:int):
 		for item_id in EffectLibrary.Instance._loaded_objects.keys():
 			add_label("Effect", item_id)
 	if index == 3:
-		for item_id in ActionLibrary.Instance._static_objects.keys():
+		for item_id in ItemLibrary.Instance._static_objects.keys():
 			add_label("Action", item_id)
 
 func add_label(type, text):

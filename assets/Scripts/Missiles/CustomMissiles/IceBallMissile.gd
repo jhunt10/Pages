@@ -10,27 +10,34 @@ func do_thing(game_state:GameStateData):
 		printerr("BaseMissile.do_thing: No Source Actor found with id '%s'." % [_source_actor_id])
 		return
 		
-	var parent_action_key = _missle_data.get("ParentActionKey", "IceBallSpell")
-	var parent_action = ActionLibrary.get_action(parent_action_key)
+	var parent_action_key = _missle_data.get("ParentActionKey", "WaterBallSpell")
+	var parent_action = ItemLibrary.get_item(parent_action_key) as PageItemAction
+	
+	var damage_data = _missle_data['DamageData']
+	var damage_datas = {"MissileDamage": damage_data}
 	
 	
-	var sub_missile_damage_key = _missle_data.get("SubMissileDamageKey", "IceBallSpell")
-	var sub_missile_damage = parent_action.get_damage_data_for_subaction(source_actor, {"DamageKey": sub_missile_damage_key})
-	
-	
-	for target_actor in game_state.get_actors_at_pos(TargetSpot):
+	var targets = game_state.get_actors_at_pos(TargetSpot)
 		#if _target_params.is_valid_target_actor(source_actor, target_actor, game_state):
-		DamageHelper.handle_attack(source_actor, target_actor, 
-								_missle_data.get("AttackDetails", {}), _missle_data['DamageData'], 
-								_missle_data.get("EffectDatas", []),
-								_source_target_chain, CombatRootControl.Instance.GameState,
-								_target_params, MapPos.Vector2i(StartSpot))
+	if targets.size() > 0:
+		AttackHandler.handle_attack(
+			source_actor,
+			targets,
+			_missle_data.get("AttackDetails", {}),
+			damage_datas, 
+			_missle_data.get("EffectDatas", []),
+			_source_target_chain,
+			_target_params,
+			CombatRootControl.Instance.GameState,
+			MapPos.Vector2i(StartSpot)
+		)
 	
 	var effect_area = [TargetSpot]
 	if _target_params.has_area_of_effect():
 		effect_area = _target_params.get_area_of_effect(MapPos.Vector2i(TargetSpot))
-	var sub_missile_key = _missle_data.get("SubMissileKey", "")
-	var sub_missile_data = parent_action.MissileDatas.get(sub_missile_key, {})
+	var sub_missile_data = parent_action.get_missile_data("SubMissile")
+	var sub_missile_damage = parent_action.get_damage_data_single(source_actor, "SubMissileDamage")
+	
 	for spot in effect_area:
 		if spot == TargetSpot:
 			continue

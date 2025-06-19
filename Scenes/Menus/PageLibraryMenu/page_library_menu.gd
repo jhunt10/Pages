@@ -133,7 +133,7 @@ func _build_object_entry(obj_def:Dictionary, obj_inst:BaseLoadObject, load_path:
 	if obj_def.has("ActorKey"):
 		key = obj_def.get("ActorKey")
 		entry_scene = _get_object_entry_scene("Actor")
-	elif obj_def.has("ActionData"):
+	elif obj_def.get("ItemDetails", {}).get("ItemType") == "Page":
 		key = obj_def.get("ItemKey")
 		entry_scene = _get_object_entry_scene("Page")
 	elif obj_def.has("ItemKey"):
@@ -176,8 +176,14 @@ func _process(delta: float) -> void:
 
 
 func get_tags()->Array:
-	known_tags.sort()
-	return known_tags
+	var tags = []
+	for entry:BaseObjectDetailsEntryContainer in page_entries.values():
+		if entry.is_visible_in_tree():
+			for tag in entry.thing_tags:
+				if not tags.has(tag):
+					tags.append(tag)
+	tags.sort()
+	return tags
 
 
 func on_tag_filter_selected(index:int):

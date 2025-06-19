@@ -1,7 +1,7 @@
 [
     {
         "ActionKey":"ApplyHolyArmorAction",
-        "ParentKey":"_BaseApplyBuffSpell",
+        "ParentKey":"#BaseApplyBuffSpell",
         "Details": {
             "DisplayName": "Holy Armor",
             "LargeIcon": "Effects/Sprites/HolyArmor.png",
@@ -16,7 +16,7 @@
     },
     {
         "ActionKey":"ApplyHolyBookAction",
-        "ParentKey":"_BaseApplyBuffSpell",
+        "ParentKey":"#BaseApplyBuffSpell",
         "Details": {
             "DisplayName": "Holy Book",
             "LargeIcon": "Effects/Sprites/HolyBook.png",
@@ -31,7 +31,7 @@
     },
     {
         "ActionKey":"ApplyPreemtive",
-        "ParentKey":"_BaseApplyBuffSpell",
+        "ParentKey":"#BaseApplyBuffSpell",
         "Details": {
             "DisplayName": "Preemtive",
             "LargeIcon": "Effects/Sprites/AilmentGuard.png",
@@ -46,7 +46,7 @@
     },
     {
         "ActionKey":"ApplyLightAuraAction",
-        "ParentKey":"_BaseApplyBuffSpell",
+        "ParentKey":"#BaseApplyBuffSpell",
         "Details": {
             "DisplayName": "Light Aura",
             "LargeIcon": "Effects/Sprites/LightAura.png",
@@ -61,7 +61,7 @@
     },
     {
         "ActionKey": "ApplyBlessing_Air",
-        "ParentKey": "_BaseApplyBuffSpell",
+        "ParentKey": "#BaseApplyBuffSpell",
         "Details": {
             "DisplayName": "Blessing of Air",
             "LargeIcon": "Effects/Sprites/Blessing_Air.png",
@@ -82,7 +82,7 @@
     },
     {
         "ActionKey": "ApplyBlessing_Earth",
-        "ParentKey": "_BaseApplyBuffSpell",
+        "ParentKey": "#BaseApplyBuffSpell",
         "Details": {
             "DisplayName": "Blessing of Earth",
             "LargeIcon": "Effects/Sprites/Blessing_Earth.png",
@@ -103,7 +103,7 @@
     },
     {
         "ActionKey": "ApplyBlessing_Fire",
-        "ParentKey": "_BaseApplyBuffSpell",
+        "ParentKey": "#BaseApplyBuffSpell",
         "Details": {
             "DisplayName": "Blessing of Fire",
             "LargeIcon": "Effects/Sprites/Blessing_Fire.png",
@@ -124,7 +124,7 @@
     },
     {
         "ActionKey": "ApplyBlessing_Water",
-        "ParentKey": "_BaseApplyBuffSpell",
+        "ParentKey": "#BaseApplyBuffSpell",
         "Details": {
             "DisplayName": "Blessing of Water",
             "LargeIcon": "Effects/Sprites/Blessing_Water.png",
@@ -145,10 +145,10 @@
     },
     {
         "ActionKey": "LightMeleeSpell",
-        "ParentKey": "BaseMeleeSpell",
+        "ParentKey": "#BaseMeleeSpell",
         "DamageDatas": {
-            "MeleeSpellDamage": {
-                "DamageVfxKey": "SmallFire_DamageEffect",
+            "MeleeDamage": {
+                "DamageVfxKey": "Fire_DamageEffect",
                 "DamageType": "Light",
                 "DefenseType": "None"
             }
@@ -165,7 +165,7 @@
     },
     {
         "ActionKey": "LightRangedSpell",
-        "ParentKey": "BaseRangedSpell",
+        "ParentKey": "#BaseRangedSpell",
         "AttackDetails":
         {
             "AccuracyMod": 1,
@@ -174,8 +174,8 @@
             "AttackVfxData": {}
         },
         "DamageDatas": {
-            "RangedSpellDamage": {
-                "DamageVfxKey": "SmallFire_DamageEffect",
+            "RangedDamage": {
+                "DamageVfxKey": "Fire_DamageEffect",
                 "DamageType": "Light",
                 "DefenseType": "None"
             }
@@ -192,15 +192,15 @@
     },
     {
         "ActionKey": "LightMissileSpell",
-        "ParentKey": "BaseMissileSpell",
+        "ParentKey": "#BaseMissileSpell",
         "AttackDetails":
         {
             "AccuracyMod": 1,
             "PotencyMod": 1
         },
         "DamageDatas": {
-            "MissileSpellDamage": {
-                "DamageVfxKey": "SmallFire_DamageEffect",
+            "MissileDamage": {
+                "DamageVfxKey": "Fire_DamageEffect",
                 "DamageType": "Light",
                 "DefenseType": "None"
             }
@@ -216,7 +216,7 @@
         },
         "MissileDatas": {
             "SpellMissile": {
-                "DamageDataKey": "MissileSpellDamage",
+                "DamageDataKey": "MissileDamage",
                 "FramesPerTile": 3,
                 "MissileVfxKey": "LightBall"
             }

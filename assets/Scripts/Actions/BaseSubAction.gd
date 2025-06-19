@@ -85,7 +85,9 @@ func _find_target_effected_actors(parent_action:PageItemAction, subaction_data:D
 	if !target_params:
 		printerr("BaseSubAction._find_target_effected_actors: No TargetParam found with key '%s' from TargetingHelper." % [target_param_key])
 		return []
-	
+	if target_params.target_type == TargetParameters.TargetTypes.Self:
+		return [source_actor]
+		
 	var targets = turn_data.get_targets(target_key)
 	if not targets or targets.size() == 0:
 		print("No target with key '%s found." % [target_key])

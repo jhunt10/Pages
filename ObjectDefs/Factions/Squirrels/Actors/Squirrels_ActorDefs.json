@@ -1,0 +1,184 @@
+[
+	{
+		"ParentKey": "#BaseActor",
+		"ActorKey": "Squirrel",
+		"ScenePath":"res://Scenes/Combat/MapObjects/Actors/SimpleActorNode/simple_actor_node.tscn",
+		"Details":{
+			"DisplayName": "Squirrel",
+			"SnippetDesc": "A squirrel.",
+			"Description": "Dangerous political extremist who will commit any atrocity to see their new squirreld order come to light.",
+			"Tags": ["Squirrel","Living","Creature"],
+			"LargeIcon":"Sprites/SquirrelIcon.png",
+			"SmallIcon":"Sprites/SquirrelIcon.png"
+		},
+		"ActorDetails":{
+			"MoneyValue": 15,
+			"ExpValue": 10
+		},
+		"SpriteSheet": "Sprites/Squirrel_SpriteSheet.png",
+		"SpriteFrameWH": [12,4],
+		"SpriteOffset": [0,-20],
+		"CorpseSprite": null,
+		"AutoQueing": false,
+		"LeavesCorpse": true,
+		"Stats":{
+			"BarStat:Health":12,
+			"BarMax:Health":12,
+			"BarRegen:Health:Round":0,
+			"BarRegen:Health:Turn":0,
+			"BarMax:Stamina":10,
+			"BarRegen:Stamina:Round":5,
+			"BarRegen:Stamina:Turn":0,
+			"Mass":10,
+			"Speed":50,
+			"PhyAttack": 10,
+			"MagAttack": 0,
+			"Strength": 10,
+			"Agility": 10,
+			"Intelligence": 5,
+			"Wisdom": 5,
+			"Armor": 0,
+			"Evasion":10,
+			"PPR":3
+		},
+		"AutoQue": true,
+		"EquipmentSlots": ["Que"],
+        "SpawnEquipmentArr": [],
+        "AiData":{
+            "ActionsArr":[
+				"MoveForward",
+				"TurnLeft",
+				"TurnRight",
+				"BasicMelee",
+				"ChuckAcorn"
+			]
+        },
+		"DefaultPageSlotSet": [
+            {
+                "Key":"Any",
+                "DisplayName":"Any Page",
+                "Count": 6,
+                "FilterData":null
+            }
+        ],
+		"DropItemsSet":{
+            "":100,
+			"Money:5":30,
+			"Money:15":30,
+			"HealthPotionS":20,
+			"HealthPotionM":10,
+			"HealthPotionL":5
+        }
+	},
+	{
+		"ParentKey": "Squirrel",
+		"ActorKey": "FirstSquirrel",
+		"Details":{
+			"DisplayName": "Squirrel",
+			"SnippetDesc": "A squirrel.",
+			"Description": "Dangerous political extremist who will commit any atrocity to see their new squirreld order come to light.",
+			"Tags": ["Squirrel"],
+			"LargeIcon":"Squirrel_Icon.png",
+			"SmallIcon":"Squirrel_Icon.png"
+		},
+		"DropItemsSet":{
+			"SquirrelSpeed_PageItem":1
+        }
+	},
+	{
+		"ParentKey": "Squirrel",
+		"ActorKey": "SecondSquirrel",
+		"Details":{
+			"DisplayName": "Squirrel",
+			"SnippetDesc": "A squirrel.",
+			"Description": "Dangerous political extremist who will commit any atrocity to see their new squirreld order come to light.",
+			"Tags": ["Squirrel"],
+			"LargeIcon":"Sprites/SquirrelIcon.png",
+			"SmallIcon":"Sprites/SquirrelIcon.png"
+		},
+		"DropItemsSet":{
+			"HealthPotionM":1
+        }
+	},
+	{
+		"ParentKey": "Squirrel",
+		"ActorKey": "Squirrcerer",
+		"SpriteSheet": "Sprites/Squirrcerer_SpriteSheet.png",
+		"Details":{
+			"DisplayName": "Squirrel",
+			"SnippetDesc": "A squirrel.",
+			"Description": "Dangerous political extremist who will commit any atrocity to see their new squirreld order come to light.",
+			"Tags": ["Squirrel"],
+			"LargeIcon":"Sprites/SquirrcererIcon.png",
+			"SmallIcon":"Sprites/SquirrcererIcon.png"
+		},
+		"Stats":{
+			"BarStat:Health":12,
+			"BarMax:Health":12,
+			"BarRegen:Health:Round":0,
+			"BarRegen:Health:Turn":0,
+			"BarMax:Mana":20,
+			"BarRegen:Mana:Round":20,
+			"BarRegen:Mana:Turn":0,
+			"PhyAttack": 0,
+			"MagAttack": 10,
+			"Mass":10,
+			"Speed":50,
+			"Strength": 5,
+			"Agility": 10,
+			"Intelligence": 10,
+			"Wisdom": 5,
+			"Ward": 30,
+			"Evasion":0,
+			"PPR":2
+		},
+        "AiData":{
+            "ActionsArr":[
+				"MoveForward",
+				"TurnLeft",
+				"TurnRight",
+				"SquirrleMagic"
+			]
+        }
+	},
+	{
+		"ParentKey": "Squirrel",
+		"ActorKey": "Squirrior",
+		"SpriteSheet": "Sprites/Squirrior_SpriteSheet.png",
+		"Details":{
+			"DisplayName": "Squirrel",
+			"SnippetDesc": "A squirrel.",
+			"Description": "Dangerous political extremist who will commit any atrocity to see their new squirreld order come to light.",
+			"Tags": ["Squirrel"],
+			"LargeIcon":"Sprites/SquirriorIcon.png",
+			"SmallIcon":"Sprites/SquirriorIcon.png"
+		},
+		
+		"Stats":{
+			"BarStat:Health":12,
+			"BarMax:Health":12,
+			"BarRegen:Health:Round":0,
+			"BarRegen:Health:Turn":0,
+			"BarMax:Stamina":30,
+			"BarRegen:Stamina:Round":10,
+			"BarRegen:Stamina:Turn":0,
+			"Mass":10,
+			"Speed":0,
+			"Strength": 10,
+			"Agility": 10,
+			"Intelligence": 5,
+			"Wisdom": 5,
+			"Armor": 50,
+			"Evasion":0,
+			"PPR":3
+		},
+        "AiData":{
+            "ActionsArr":[
+				"MoveForward",
+				"TurnLeft",
+				"TurnRight",
+				"BasicMelee"
+			]
+        }
+	}
+]

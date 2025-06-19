@@ -67,14 +67,23 @@ func _init(data:Dictionary, source, defender:BaseActor, tag_chain:SourceTagChain
 	elif source is BaseActor:
 		self.base_damage = source.stats.get_stat(attack_stat, 1)
 	
-	var damage_type = data.get("DamageType", null)
-	if damage_type is String: self.damage_type = DamageTypes.get(damage_type, 0)
-	elif damage_type is int and DamageTypes.has(damage_type): self.damage_type = damage_type
+	var damage_type_val = data.get("DamageType", null)
+	if damage_type_val is String: self.damage_type = DamageTypes.get(damage_type_val, 0)
+	elif damage_type_val is int and DamageTypes.has(damage_type_val): self.damage_type = damage_type_val
 	else: printerr("DamageEvent: Unknown DamageTypes type")
 	
-	var defense_type = data.get("DefenseType", null)
-	if defense_type is String: self.defense_type = DefenseType.get(defense_type, 0)
-	elif defense_type is int and DefenseType.has(defense_type): self.defense_type = defense_type
+	var defense_type_val = data.get("DefenseType", null)
+	if defense_type_val == "AUTO":
+		if DamageHelper.ElementalDamageTypes.has(self.damage_type):
+			self.defense_type = DamageEvent.DefenseType.Ward
+		elif DamageHelper.PhysicalDamageTypes.has(self.damage_type):
+			self.defense_type = DamageEvent.DefenseType.Armor
+		else:
+			self.defense_type = DamageEvent.DefenseType.None
+	elif defense_type_val is String:
+		self.defense_type = DefenseType.get(defense_type_val, 0)
+	elif defense_type_val is int and DefenseType.has(defense_type_val): 
+		self.defense_type = defense_type_val
 	else: printerr("DamageEvent: Unknown DefenseType type")
 	
 	#_calc_damage_for_event()
