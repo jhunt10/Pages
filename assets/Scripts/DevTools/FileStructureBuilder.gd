@@ -160,7 +160,7 @@ const DefVersion = "1"
 static func update_def_file(object_type:String, file_path):
 	var file = FileAccess.open(file_path, FileAccess.READ)
 	var text:String = file.get_as_text()
-	
+	file.close()
 	#var backup_file_path = file_path.replace(".json", "_backup.json")
 	#var backup_file = FileAccess.open(backup_file_path, FileAccess.WRITE)
 	#backup_file.store_string(text)
@@ -346,6 +346,7 @@ static func update_def_file(object_type:String, file_path):
 	var meta_file = FileAccess.open(new_file_path, FileAccess.WRITE)
 	meta_file.store_string(JSON.stringify(new_defs))
 	meta_file.close()
+	DirAccess.remove_absolute(file_path)
 
 static func scan_props(file_path)->Array:
 	var file = FileAccess.open(file_path, FileAccess.READ)
