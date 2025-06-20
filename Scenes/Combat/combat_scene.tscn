@@ -1,8 +1,7 @@
-[gd_scene load_steps=54 format=3 uid="uid://dfeilp6hbiuqs"]
+[gd_scene load_steps=53 format=3 uid="uid://dfeilp6hbiuqs"]
 
 [ext_resource type="Script" path="res://Scenes/Combat/combat_scene.gd" id="1_crigy"]
 [ext_resource type="Texture2D" uid="uid://b232xm2ly0peh" path="res://assets/Sprites/UI/GridCursors/GridCursor_Default.png" id="7_7lt4y"]
-[ext_resource type="PackedScene" uid="uid://dcan2k534n88q" path="res://Scenes/Maps/working_map.tscn" id="7_ce1oe"]
 [ext_resource type="Script" path="res://Scenes/Combat/UiNodes/combat_ui_control.gd" id="8_8l3el"]
 [ext_resource type="Script" path="res://Scenes/Combat/UiNodes/grid_cursor_node.gd" id="8_wf3xb"]
 [ext_resource type="Texture2D" uid="uid://567vutk12a12" path="res://Scenes/Menus/CharacterMenu/MenuPages/SlotHighlight.png" id="13_j87d7"]
@@ -44,7 +43,6 @@
 [ext_resource type="Texture2D" uid="uid://ccwj8ucsjhl6w" path="res://assets/Sprites/UI/BackPatches/Patch_64_12_Dark.png" id="32_h43dd"]
 [ext_resource type="Texture2D" uid="uid://bbs3uvepyto08" path="res://ObjectDefs/ClassDefs/TitlePages/Sprites/SoldierIcon.png" id="33_0bnqe"]
 [ext_resource type="Texture2D" uid="uid://d041ymvcqbc8f" path="res://notes/TemplatePageIcon.png" id="33_a1r5m"]
-[ext_resource type="Texture2D" uid="uid://bqv6yn42oymo" path="res://defs/Actors/NPCs/FishMerch/cart.png" id="33_cdw0u"]
 [ext_resource type="Script" path="res://Scenes/Combat/UiNodes/ActorPlacer/actor_placer_button.gd" id="33_lhmsf"]
 [ext_resource type="PackedScene" uid="uid://dqruidykupjgt" path="res://Scenes/Combat/UiNodes/OptionSelectMenu/option_select_menu.tscn" id="34_6y7uw"]
 [ext_resource type="Texture2D" uid="uid://c4yedxpiinlff" path="res://Scenes/Menus/CharacterMenu/MenuPages/outline.png" id="34_wuopp"]
@@ -53,6 +51,7 @@
 [ext_resource type="Script" path="res://Scenes/Combat/dev_map_drawing.gd" id="37_fh4f7"]
 [ext_resource type="PackedScene" uid="uid://bje0k82nenje6" path="res://Scenes/Dialog/dialog_control.tscn" id="37_vv8mm"]
 [ext_resource type="Theme" uid="uid://bfce41la62bs6" path="res://Scenes/Themes/readable_theme.tres" id="38_waysr"]
+[ext_resource type="PackedScene" uid="uid://cjlwimeud3tyy" path="res://Scenes/Maps/TestingMap/testing_map.tscn" id="49_lque7"]
 
 [node name="CombatRootControl" type="Control" node_paths=PackedStringArray("ui_control", "camera", "start_combat_screen", "MapController", "dialog_controller", "GridCursor")]
 custom_minimum_size = Vector2(1152, 648)
@@ -1555,12 +1554,7 @@ scene_root = NodePath("../../..")
 [node name="StartCombatScreen" parent="MoveableCamera2D/CanvasLayer" instance=ExtResource("37_2ks4j")]
 visible = false
 
-[node name="MapNode" parent="." instance=ExtResource("7_ce1oe")]
-
-[node name="Cart" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(386, 226)
-texture = ExtResource("33_cdw0u")
+[node name="MapNode" parent="." instance=ExtResource("49_lque7")]
 
 [node name="GridCursor" type="Sprite2D" parent="."]
 visible = false

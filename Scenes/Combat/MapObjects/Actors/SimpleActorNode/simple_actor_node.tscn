@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scenes/Combat/MapObjects/Actors/SimpleActorNode/simple_actor_node.gd" id="1_bln3d"]
 [ext_resource type="Script" path="res://Scenes/Combat/MapObjects/Actors/ComplexActorNode/actor_body_sprite.gd" id="2_e6ypm"]
-[ext_resource type="Texture2D" uid="uid://pa3umwoo5lxu" path="res://defs/Actors/Tutorial/ShroomGolem_SpriteSheet.png" id="2_kcbhi"]
+[ext_resource type="Texture2D" uid="uid://cbwt78yyiiubn" path="res://Scenes/Combat/MapObjects/Actors/SimpleActorNode/SimpleTemplate_SpriteSheet.png" id="2_ljklk"]
 [ext_resource type="Script" path="res://Scenes/Combat/MapObjects/vfx_holder.gd" id="3_soxfk"]
 [ext_resource type="PackedScene" uid="uid://eox4g5msr5a" path="res://Scenes/Combat/Effects/flash_text_controller.tscn" id="4_4be7m"]
 [ext_resource type="Script" path="res://Scenes/Combat/MapObjects/aura_holder.gd" id="6_mn18x"]
@@ -309,10 +309,10 @@ body_animation = NodePath("BodyAnimationPlayer")
 [node name="OffsetNode" type="Node2D" parent="ActorMotionNode/ActorSpriteNode"]
 
 [node name="ActorSprite" type="Sprite2D" parent="ActorMotionNode/ActorSpriteNode/OffsetNode"]
-texture = ExtResource("2_kcbhi")
+texture = ExtResource("2_ljklk")
 hframes = 12
 vframes = 4
-frame = 17
+frame = 5
 script = ExtResource("2_e6ypm")
 frame_index = 5
 

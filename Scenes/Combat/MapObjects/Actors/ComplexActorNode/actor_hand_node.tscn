@@ -1,15 +1,15 @@
 [gd_scene load_steps=81 format=3 uid="uid://dooeg4ake0jdk"]
 
 [ext_resource type="Script" path="res://Scenes/Combat/MapObjects/Actors/ComplexActorNode/actor_hand_node.gd" id="1_dwep3"]
-[ext_resource type="Texture2D" uid="uid://bvdyspj30c1k1" path="res://defs/Actors/Template_SpriteSheet_MainHand.png" id="1_h8dad"]
+[ext_resource type="Texture2D" uid="uid://chus4frv66mrd" path="res://Scenes/Combat/MapObjects/Actors/ComplexActorNode/Sprites/BaseActor_SpriteSheet_MainHand.png" id="2_3tedl"]
 [ext_resource type="Script" path="res://Scenes/Combat/MapObjects/Actors/ComplexActorNode/actor_weapon_node.gd" id="2_ga04f"]
-[ext_resource type="Texture2D" uid="uid://clqv3gafyrfqv" path="res://defs/Actors/Template_SpriteSheet_OffHand.png" id="3_6v6cl"]
-[ext_resource type="Texture2D" uid="uid://biqv7gysaynst" path="res://defs/Actors/Template_SpriteSheet_TwoHand.png" id="4_osigu"]
+[ext_resource type="Texture2D" uid="uid://cox0yputmlu1o" path="res://Scenes/Combat/MapObjects/Actors/ComplexActorNode/Sprites/BaseActor_SpriteSheet_OffHand.png" id="3_gcbji"]
+[ext_resource type="Texture2D" uid="uid://cwp0r0ds4kcf1" path="res://Scenes/Combat/MapObjects/Actors/ComplexActorNode/Sprites/BaseActor_SpriteSheet_TwoHand.png" id="4_g18fh"]
 [ext_resource type="AnimationLibrary" uid="uid://ccngkcn1vievo" path="res://animations/AttackAnimations/weapon_facing.tres" id="5_8cigs"]
 [ext_resource type="AnimationLibrary" uid="uid://b6fh00go4jw6l" path="res://animations/AttackAnimations/weapon_raise.tres" id="6_oogit"]
 [ext_resource type="AnimationLibrary" uid="uid://bncx65ubhxgcv" path="res://animations/AttackAnimations/weapon_stab.tres" id="7_qybst"]
 [ext_resource type="AnimationLibrary" uid="uid://m4qmirmpwwfa" path="res://animations/AttackAnimations/weapon_swing.tres" id="8_1q6ng"]
-[ext_resource type="Texture2D" uid="uid://bk65cfmwj7ua7" path="res://Scenes/Combat/MapObjects/Actors/ComplexActorNode/TestWeapon_WeaponSprite.png" id="10_cnorf"]
+[ext_resource type="Texture2D" uid="uid://dapkhw3nprono" path="res://Scenes/Combat/MapObjects/Actors/ComplexActorNode/Sprites/TestWeapon_WeaponSprite.png" id="10_c1uko"]
 
 [sub_resource type="Animation" id="Animation_5vfo0"]
 length = 0.001
@@ -533,9 +533,9 @@ graph_offset = Vector2(0, -108.949)
 script = ExtResource("1_dwep3")
 hand = 2
 animation_is_ready = true
-main_hand_sprite_sheet = ExtResource("1_h8dad")
-off_hand_sprite_sheet = ExtResource("3_6v6cl")
-two_hand_sprite_sheet = ExtResource("4_osigu")
+main_hand_sprite_sheet = ExtResource("2_3tedl")
+off_hand_sprite_sheet = ExtResource("3_gcbji")
+two_hand_sprite_sheet = ExtResource("4_g18fh")
 animation_tree = NodePath("AnimationTree")
 hand_sprite = NodePath("HandSprite")
 weapon_node = NodePath("WeaponNode")
@@ -564,24 +564,23 @@ two_hand_offset = Vector2(-4, 0)
 overhand_weapon_sprite = NodePath("WeaponOverHandSprite")
 underhand_weapon_sprite = NodePath("WeaponUnderHandSprite")
 rotation_factor = 1.0
-weapon_texture = ExtResource("10_cnorf")
 
 [node name="WeaponUnderHandSprite" type="Sprite2D" parent="WeaponNode"]
 z_index = -1
-texture = ExtResource("10_cnorf")
+texture = ExtResource("10_c1uko")
 hframes = 2
 vframes = 2
 frame = 2
 
 [node name="WeaponOverHandSprite" type="Sprite2D" parent="WeaponNode"]
 z_index = 1
-texture = ExtResource("10_cnorf")
+texture = ExtResource("10_c1uko")
 hframes = 2
 vframes = 2
 frame = 1
 
 [node name="HandSprite" type="Sprite2D" parent="."]
-texture = ExtResource("4_osigu")
+texture = ExtResource("4_g18fh")
 hframes = 12
 vframes = 4
 
