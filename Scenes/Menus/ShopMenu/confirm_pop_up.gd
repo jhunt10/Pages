@@ -57,7 +57,7 @@ func _on_confirm():
 	if not _selling:
 		if StoryState.get_current_money() >= _cost:
 			StoryState.spend_money(_cost)
-			PlayerInventory.add_to_stack(_item_key, _count)
+			PlayerInventory.add_item(_item_key, _count)
 	else:
 		if PlayerInventory.get_item_stack_count(_item_key) >= _count:
 			PlayerInventory.reduce_stack_count(_item_key, _count)

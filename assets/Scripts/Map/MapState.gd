@@ -179,7 +179,7 @@ func list_items()->Array:
 	return out_list
 
 func set_item_pos(item:BaseItem, pos):
-	remove_item(item)
+	remove_item(item.Id)
 	var map_spot = get_map_spot(pos)
 	if !map_spot:
 		return
@@ -187,12 +187,14 @@ func set_item_pos(item:BaseItem, pos):
 	var safe_pos = MapPos.new(pos.x, pos.y, 0, 0)
 	_item_pos_cache[item.Id] = safe_pos
 
-func remove_item(item:BaseItem):
-	var old_pos = _item_pos_cache.get(item.Id, null)
+func remove_item(item_id):
+	if item_id is BaseItem:
+		item_id = item_id.Id
+	var old_pos = _item_pos_cache.get(item_id, null)
 	if old_pos:
 		var old_spot = get_map_spot(old_pos)
-		old_spot.remove_item(item)
-		_item_pos_cache.erase(item.Id)
+		old_spot.remove_item(item_id)
+		_item_pos_cache.erase(item_id)
 
 func get_items_at_pos(pos)->Array:
 	var map_spot = get_map_spot(pos)

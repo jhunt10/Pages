@@ -109,7 +109,7 @@ func load_save_data(data:Dictionary):
 	_money = data.get("Money", 0)
 	_story_flags = data.get("StoryFlags", {}).duplicate(true)
 	EffectLibrary.purge_effects()
-	#ItemLibrary.load_items(data.get("Items", {}))
+	ItemLibrary.load_items(data.get("Items", {}))
 	var actors_data = data.get("Actors", {})
 	ActorLibrary.load_actors(actors_data)
 	

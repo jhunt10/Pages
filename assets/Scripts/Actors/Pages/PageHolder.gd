@@ -55,12 +55,13 @@ func _on_item_loaded(item:BaseItem):
 		var new_effect = EffectHelper.create_effect(_actor, page, effect_key, effect_def)
 		item_id_to_effect_id[item.Id] = new_effect.Id
 
-func set_page_que_item(page_que:BaseQueEquipment):
+func set_page_que_item(page_que:BaseQueEquipment, validate_items:bool=true):
 	if page_que:
 		page_que_item_id = page_que.Id
 	else:
 		page_que_item_id = null
-	validate_items()
+	if validate_items:
+		validate_items()
 
 func validate_items():
 	super()
@@ -94,7 +95,7 @@ func list_action_keys()->Array:
 	var out_list = []
 	for item in list_items():
 		if item is PageItemAction:
-			out_list.append(item.Id)
+			out_list.append(item.ActionKey)
 	return out_list
 
 func list_actions()->Array:
@@ -103,6 +104,12 @@ func list_actions()->Array:
 		if item is PageItemAction:
 			out_list.append(item)
 	return out_list
+
+func get_action_page(action_key:String)->PageItemAction:
+	for item in list_items():
+		if item is PageItemAction and item.ActionKey == action_key:
+			return item
+	return null
 
 
 func _on_item_removed_from_slot(item_id:String, index:int):
@@ -120,9 +127,9 @@ func _on_item_added_to_slot(item:BaseItem, index:int):
 		printerr("PageHolder._on_item_added_to_slot: Item '%s' is not of type BasePageItem." % [item.Id])
 		return
 	if item is PageItemPassive:
-		var effect_def = page.get_effect_def()
+		var effect_def = item.get_effect_def()
 		if effect_def:
 			var effect_key = effect_def.get("EffectKey")
-			var new_effect = EffectHelper.create_effect(_actor, page, effect_key, effect_def)
+			var new_effect = EffectHelper.create_effect(_actor, item, effect_key, effect_def)
 			item_id_to_effect_id[item.Id] = new_effect.Id
 	class_page_changed.emit()

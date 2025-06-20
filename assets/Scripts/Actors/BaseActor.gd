@@ -160,24 +160,24 @@ func save_data()->Dictionary:
 	data['Stats'] = stats.build_save_data()
 	return data
 
-func load_data(data:Dictionary):
-	_data = data
+func load_data(loading_data:Dictionary):
+	_data = loading_data
 	suppress_equipment_changed = true
-	var stat_data = data.get('Stats', {})
+	var stat_data = loading_data.get('Stats', {})
 	stats.load_data(stat_data)
 	
-	var equipment_data = data['Equipment']
-	data.erase('Equipment')
+	var equipment_data = loading_data['Equipment']
+	loading_data.erase('Equipment')
 	equipment.load_save_data(equipment_data)
 	
-	var page_data = data['Pages']
-	data.erase('Pages')
+	var page_data = loading_data['Pages']
+	loading_data.erase('Pages')
 	pages.load_save_data(page_data)
 	var que_item = equipment.get_que_equipment()
-	pages.set_page_que_item(que_item)
+	pages.set_page_que_item(que_item, false)
 	
-	var bag_data = data['BagItems']
-	data.erase('BagItems')
+	var bag_data = loading_data['BagItems']
+	loading_data.erase('BagItems')
 	items.load_save_data(bag_data)
 	var bag_item = equipment.get_bag_equipment()
 	items.set_bag_item(bag_item)

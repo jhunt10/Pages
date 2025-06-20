@@ -295,7 +295,7 @@ static func update_def_file(object_type:String, file_path):
 				new_def['PassiveData']['EffectKey'] = new_def['EffectKey']
 				new_def.erase("EffectKey")
 			
-			var move_props = ["Requirments", "StatMods", "TargetMods", "DamageMods", "AmmoMods"]
+			var move_props = ["Requirments", "StatMods", "TargetMods", "DamageMods", "AmmoMods", "AttackMods"]
 			var page_data = new_def.get("PageData", {})
 			for prop in move_props:
 				var val = new_def.get(prop, null)

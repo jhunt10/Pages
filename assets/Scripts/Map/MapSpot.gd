@@ -81,9 +81,9 @@ func get_items()->Array:
 			out_list.append(item)
 	return out_list
 
-func remove_item(item:BaseItem):
-	if item_ids.has(item.Id):
-		item_ids.erase(item.Id)
+func remove_item(item_id:String):
+	if item_ids.has(item_id):
+		item_ids.erase(item_id)
 
 func add_zone(zone:BaseZone):
 	if _zone_ids.has(zone.Id):

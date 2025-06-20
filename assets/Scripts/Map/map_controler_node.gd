@@ -156,13 +156,15 @@ func create_item_node(item:BaseItem, map_pos:MapPos):
 	new_node.visible = true
 	if LOGGING: print("MapControllerNode: Created item Node: %s" % [item.Id])
 
-func delete_item_node(item:BaseItem):
+func delete_item_node(item_id):
+	if item_id is BaseItem:
+		item_id = item_id.Id
 	if Engine.is_editor_hint(): return
-	var node:ItemNode = item_nodes.get(item.Id, null)
+	var node:ItemNode = item_nodes.get(item_id, null)
 	if !node:
 		return
 	node.queue_free()
-	item_nodes.erase(item.Id)
+	item_nodes.erase(item_id)
 
 func add_missile_node(missile:BaseMissile, node:MissileNode):
 	if Engine.is_editor_hint(): return

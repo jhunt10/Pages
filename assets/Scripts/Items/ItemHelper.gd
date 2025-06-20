@@ -60,14 +60,14 @@ static func try_pickup_item(actor:BaseActor, item:BaseItem)->Dictionary:
 		CombatRootControl.Instance.remove_item(item)
 		ItemLibrary.delete_item(item)
 		return popup_data
-	
+	var item_id = item.Id
 	actor.items.add_item_to_first_valid_slot(item)
 	if actor.items.has_item(item.Id):
 		popup_data['Message'] += " to Bag"
 	else:
 		PlayerInventory.add_item(item)
 		popup_data['Message'] += " to Inv"
-	CombatRootControl.Instance.remove_item(item)
+	CombatRootControl.Instance.remove_item(item_id)
 	return popup_data
 
 	
@@ -107,7 +107,7 @@ static func try_transfer_item_from_inventory_to_holder(item:BaseItem, holder:Bas
 		print( "Set item failed")
 		return "Set item failed"
 	if old_item:
-		# EquipmentHolder controls own logic for removing weapons
+		# EquipmentHolder controls own logic for replacing weapons
 		if not (old_item is BaseWeaponEquipment and holder is EquipmentHolder): 
 			PlayerInventory.add_item(old_item)
 	holder._actor._on_equipment_holder_items_change()

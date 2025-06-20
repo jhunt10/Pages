@@ -132,11 +132,15 @@ func get_item(item_id:String):
 func list_items()->Array:
 	return _items.values()
 
-func delete_item(item:BaseItem):
+func delete_item(item):
+	if item is BaseItem:
+		item = item.Id
 	remove_item_from_map(item)
 	_items.erase(item.Id)
 
-func remove_item_from_map(item:BaseItem):
+func remove_item_from_map(item):
+	if item is BaseItem:
+		item = item.Id
 	map_data.remove_item(item)
 
 

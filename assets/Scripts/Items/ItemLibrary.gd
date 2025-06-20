@@ -14,10 +14,16 @@ func get_def_file_sufix()->String:
 func get_data_file_sufix()->String:
 	return "_ItemSave.json"
 func is_object_static(object_def:Dictionary)->bool:
-	if object_def.get("ItemDetails", {}).get("ItemType", "") == "Page":
-		return true
+	#if object_def.get("ItemDetails", {}).get("ItemType", "") == "Page":
+		#return true
 	return object_def.get("IsStatic", false)
-	
+
+func _get_staticly_loaded_object_keys()->Array:
+	var out_list = []
+	for object_key in _object_defs.keys():
+		out_list.append(object_key)
+	return out_list
+
 func get_object_script_path(object_def:Dictionary)->String:
 	var script = super(object_def)
 	if script != '':
@@ -64,6 +70,11 @@ static func create_item(key:String, data:Dictionary, force_id:String='')->BaseIt
 		printerr("ItemLibrary.create_item: Failed to make item '%s'." % [key])
 	return item
 
+static func get_static_inst_of_item(item_key:String)->BaseItem:
+	if !Instance: Instance = ItemLibrary.new()
+	if not Instance._static_objects.has(item_key):
+		Instance._static_objects[item_key] = create_item(item_key, {}, item_key)
+	return Instance._static_objects[item_key]
 
 static func purge_items():
 	if !Instance: Instance = ItemLibrary.new()

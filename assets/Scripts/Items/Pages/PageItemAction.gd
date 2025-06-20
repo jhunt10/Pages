@@ -6,7 +6,6 @@ const SUB_ACTIONS_PER_ACTION = 24
 var action_data:Dictionary:
 	get:
 		return get_load_val("ActionData", {})
-
 var ActionKey:String:
 	get:
 		return _key

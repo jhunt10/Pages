@@ -133,6 +133,61 @@
                 }
             ]
         }
+    },
+
+    
+    {
+        "ActionKey": "GetBehindAction",
+        "AmmoData": {
+            "Cost": 1,
+            "Clip": 2,
+            "AmmoType": "Abn"
+        },
+        "DamageDatas": {},
+        "Details": {
+            "Description": "Select an @@#Color:Red:Actor@@ and @@#Color:Red:Teleport@@ to the @@#Color:Red:Spot@@ behind them.\n\n-\"It's nothing personnel\"",
+            "DisplayName": "Get Behind",
+            "LargeIcon": "Sprites/Behind_Icon.png",
+            "SmallIcon": "Sprites/Behind_Icon.png",
+            "SnippetDesc": "Teleport behind the target",
+            "Tags": [
+                "Teleport"
+            ]
+        },
+        "ItemDetails":
+        {
+            "Rarity": "Rare",
+            "Value": 50
+        },
+        "MissileDatas": {},
+        "Preview": {
+            "PreviewTargetKey": "TargetParam"
+        },
+        "SubActions": {
+            "11": [
+                {
+                    "AllowAutoTarget": false,
+                    "SetTargetKey": "Target1",
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Targeting/SubAct_GetTarget.gd",
+                    "TargetParamKey": "TargetParam"
+                },
+                {
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Misc/SubAct_PayCost.gd"
+                },
+                {
+                    "DestRelativePos": "[0, 1, 0, 0]",
+                    "SubActionScript": "res://assets/Scripts/Actions/SubActions/Movement/SubAct_Teleport.gd",
+                    "TargetDestKey": "Target1"
+                }
+            ]
+        },
+        "TargetParams": {
+            "TargetParam": {
+                "LineOfSight": true,
+                "TargetArea": "[[-1,2],[0,2],[1,2],[-1,1],[0,1],[1,1]]",
+                "TargetType": "Actor"
+            }
+        }
     }
 
 ]

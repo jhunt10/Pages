@@ -36,35 +36,29 @@ static func has_item(item:BaseItem):
 
 static func add_item(item:BaseItem, count:int=1):
 	if LOGGING: print("PlayerInventory.AddItem: Item: %s" % [item.Id])
-	#if item.can_stack:
 	if not _stacked_item_count_by_key.keys().has(item.ItemKey):
+		var inv_item = ItemLibrary.get_static_inst_of_item(item.ItemKey)
 		if LOGGING: print("-- New Stacking Item")
 		_stacked_item_count_by_key[item.ItemKey] = count
-		_stacked_item_id_by_key[item.ItemKey] = item.Id
+		_stacked_item_id_by_key[item.ItemKey] = inv_item.Id
 	else:
 		_stacked_item_count_by_key[item.ItemKey] += count
-	#elif !_held_unique_items_ids.has(item.Id):
-		#if LOGGING: print("-- New Unique Item")
-		#_held_unique_items_ids.append(item.Id)
-		#_stacked_item_id_by_key[item.ItemKey] = item.Id
-	#else:
-		#if LOGGING: print("-- Has Unique Item")
+	ItemLibrary.delete_item(item)
+	Instance.inventory_changed.emit()
+
+
+#static func add_to_stack(item_key:String, count:int=1):
+	#if LOGGING: print("PlayerInventory.add_to_stack: Item: %s | %s" % [item_key, count])
+	#if _stacked_item_id_by_key.keys().has(item_key):
+		#if LOGGING: print("PlayerInventory.add_to_stack: Added to existing stack")
+		#_stacked_item_count_by_key[item_key] += count
+		#Instance.inventory_changed.emit()
 		#return
-	Instance.inventory_changed.emit()
-
-
-static func add_to_stack(item_key:String, count:int=1):
-	if LOGGING: print("PlayerInventory.add_to_stack: Item: %s | %s" % [item_key, count])
-	if _stacked_item_id_by_key.keys().has(item_key):
-		if LOGGING: print("PlayerInventory.add_to_stack: Added to existing stack")
-		_stacked_item_count_by_key[item_key] += count
-		Instance.inventory_changed.emit()
-		return
-	if LOGGING: print("PlayerInventory.add_to_stack: Creating new stack")
-	var new_item = ItemLibrary.create_item(item_key,{})
-	_stacked_item_id_by_key[item_key] = new_item.Id
-	_stacked_item_count_by_key[item_key] = count
-	Instance.inventory_changed.emit()
+	#if LOGGING: print("PlayerInventory.add_to_stack: Creating new stack")
+	#var new_item = ItemLibrary.create_item(item_key,{})
+	#_stacked_item_id_by_key[item_key] = new_item.Id
+	#_stacked_item_count_by_key[item_key] = count
+	#Instance.inventory_changed.emit()
 
 static func reduce_stack_count(item_key:String, take_count:int=1):
 	if LOGGING: print("PlayerInventory.reduce_stack_count: Item: %s | %s" % [item_key, take_count])
@@ -101,12 +95,15 @@ static func split_item_off_stack(item_key:String)->BaseItem:
 	if !inv_item:
 		print("ItemHelper.split_item_off_stack: No item of key '%s' found in PlayerInventory" % [item_key])
 		return null
+	var new_item = ItemLibrary.create_item(item_key, {})
+	if !new_item:
+		print("ItemHelper.split_item_off_stack: Failed to create new item '%s'." % [item_key])
+		return null
 	if count == 1:
 		delete_item_from_inventory(inv_item)
-		return inv_item
-	var new_item = ItemLibrary.create_item(item_key, inv_item._data)
-	_stacked_item_count_by_key[item_key] -= 1
-	Instance.inventory_changed.emit()
+	else:
+		_stacked_item_count_by_key[item_key] -= 1
+		Instance.inventory_changed.emit()
 	return new_item
 
 static func delete_item_from_inventory(item:BaseItem):

@@ -70,12 +70,6 @@ func build_page_entires():
 	page_entries.clear()
 	
 	var page_item_keys= []
-	#for page:BaseItem in get_page_items():
-		#var def = page._def
-		#var inst = page
-		#var load_path = page.get_load_path()
-		#page_item_keys.append(page.ItemKey)
-		#_build_object_entry(def, inst, load_path)
 	for effect_key in EffectLibrary.list_all_effects_keys():
 		var def = EffectLibrary.get_effect_def(effect_key)
 		var inst = null
@@ -229,12 +223,3 @@ func _on_cat_button_pressed():
 		else:
 			entry_groups[load_path].hide()
 	showing_label.text = str(show_count)
-
-func get_page_items()->Array:
-	var pages = [] 
-	for item_key:String in ItemLibrary.list_all_item_keys():
-		if item_key.ends_with("_PageItem"):
-			var page = ItemLibrary.get_or_create_item(item_key+"_STATIC", item_key, {})
-			pages.append(page)
-	printerr("\n\nFound %s Pages Items\n\n" % [pages.size()])
-	return pages

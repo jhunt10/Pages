@@ -13,21 +13,15 @@ var object_details:Dictionary:
 		return get_load_val("#ObjDetails", {}, false)
 
 func _init(key:String, def_load_path:String, def:Dictionary, id:String='', data:Dictionary={}) -> void:
-	if is_static():
-		self._id = key
-	elif id != '':
+	if id != '':
 		self._id = id
 	else:
-		self._id = key + str(ResourceUID.create_id())
+		self._id = key +":"+ str(ResourceUID.create_id())
 	self._key = key
 	self._def_load_path = def_load_path
 	self._def = def
 	self._data = data
 	details = ObjectDetailsData.new(self._def_load_path, self._def.get("#ObjDetails", {}))
-
-## Is this class static. Static objects don't use _data and are referenced only by _key
-func is_static():
-	return false
 
 ####################
 ## Object Details ##
@@ -58,10 +52,8 @@ func save_me()->bool:
 
 func save_data()->Dictionary:
 	var data = _data.duplicate()
-	if !data.keys().has("ObjectKey"):
-		data['ObjectKey'] = self._key
-	if !data.keys().has("Id"):
-		data['Id'] = self._id
+	data['ObjectKey'] = self._key
+	data['Id'] = self._id
 	return data
 
 func load_data(data:Dictionary):

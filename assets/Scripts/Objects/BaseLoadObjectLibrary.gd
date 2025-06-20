@@ -53,9 +53,6 @@ func get_static_object(key:String)->BaseLoadObject:
 		if !new_object:
 			printerr("%sLibrary.get_static_object: Failed to create object '%s'." % [get_object_name(), key])
 			return null
-		if !new_object.is_static():
-			printerr("%sLibrary.get_static_object: '%s' is not a staic object." % [get_object_name(), key])
-			return null
 		_static_objects[key] = new_object
 	return _static_objects[key]
 
@@ -70,6 +67,8 @@ func create_object(object_key:String, id:String='', data:Dictionary={})->BaseLoa
 	if id != '' and _loaded_objects.keys().has(id):
 		printerr("%sLibrary.create_object: %s with id '%s' already exists.: " % [get_object_name(), id, object_key])
 		return _loaded_objects[id]
+	if data.has("Id"):
+		data.erase("Id")
 	var script_path = get_object_script_path(object_def)
 	if script_path == '':
 		printerr("%sLibrary.get_object: No object script found on '%s'." % [get_object_name(), object_key])
@@ -80,8 +79,7 @@ func create_object(object_key:String, id:String='', data:Dictionary={})->BaseLoa
 		return null
 	var load_path = _defs_to_load_paths[object_key]
 	var new_object:BaseLoadObject = script.new(object_key, load_path, object_def, id, data)
-	if !new_object.is_static():
-		_loaded_objects[new_object._id] = new_object
+	_loaded_objects[new_object._id] = new_object
 	return new_object
 
 ## Delete all loaded objects
@@ -316,29 +314,31 @@ func _load_object_def_file(file_path:String)->Dictionary:
 			#delayed_dic[parent_key][object_key] = def
 	return out_dict
 
-## Search _object_defs and load static objects to _static_objects
-func _load_static_objects():
+func _get_staticly_loaded_object_keys()->Array:
+	var out_list = []
 	for object_key in _object_defs.keys():
 		var object_def:Dictionary = _object_defs[object_key]
 		if is_object_static(object_def):
-			var script_path = get_object_script_path(object_def)
-			var script = load(script_path)
-			if !script:
-				printerr("%sLibrary._load_static_objects: %s Failed to find object script '%s'. " % [get_object_name(), object_key, script_path])
-				continue
-			#if not script is BaseLoadObject:
-				#printerr("%sLibrary._load_static_objects: Object %s loaded script '%s' is not of type 'BaseLoadObject'." % [get_object_name(), object_key, script_path]) 
-				#continue
-			#if not (script as BaseLoadObject).is_static():
-				#printerr("%sLibrary._load_static_objects: Object %s is_static method returned false." % [get_object_name(), object_key]) 
-				#continue
-			var load_path = _defs_to_load_paths[object_key]
-			var new_object:BaseLoadObject = script.new(object_key, load_path, object_def, object_key)
-			if _static_objects.keys().has(object_key):
-				printerr("%sLibrary._load_static_objects: Object %s already loaded." % [get_object_name(), object_key]) 
-				continue
-			_static_objects[object_key] = new_object
-			if LOGGING: print("# - Loaded Static Object: %s" % [new_object._id])
+			out_list.append(object_key)
+	return out_list
+	
+
+## Search _object_defs and load static objects to _static_objects
+func _load_static_objects():
+	for object_key in _get_staticly_loaded_object_keys():
+		var object_def:Dictionary = _object_defs[object_key]
+		var script_path = get_object_script_path(object_def)
+		var script = load(script_path)
+		if !script:
+			printerr("%sLibrary._load_static_objects: %s Failed to find object script '%s'. " % [get_object_name(), object_key, script_path])
+			continue
+		var load_path = _defs_to_load_paths[object_key]
+		var new_object:BaseLoadObject = script.new(object_key, load_path, object_def, object_key)
+		if _static_objects.keys().has(object_key):
+			printerr("%sLibrary._load_static_objects: Object %s already loaded." % [get_object_name(), object_key]) 
+			continue
+		_static_objects[object_key] = new_object
+		if LOGGING: print("# - Loaded Static Object: %s" % [new_object._id])
 
 ## Parse json save file and load to _loaded_objects
 func _load_objects_saved_data(saved_datas:Dictionary, purge_data:bool=true):

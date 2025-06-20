@@ -271,7 +271,7 @@ func _page_button_pressed(_index, key_name):
 		page_special_selected.emit(key_name)
 		hide_page_selection()
 		return
-	var action:PageItemAction = ItemLibrary.get_item(key_name)
+	var action:PageItemAction = _actor.pages.get_action_page(key_name)
 	var on_que_options = action.get_on_que_options(_actor, CombatRootControl.Instance.GameState)
 	if on_que_options.size() > 0:
 		CombatUiControl.Instance.ui_state_controller.open_options_menu(_actor, "OnQueOption", on_que_options, action.ActionKey)

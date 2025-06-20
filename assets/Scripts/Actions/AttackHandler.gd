@@ -220,7 +220,7 @@ static func handle_attack(
 			defender_node.vfx_holder.flash_text_controller.add_flash_text("Miss", VfxHelper.FlashTextType.Blocked_Dmg)
 		
 		var attack_vfx = null
-		if attack_vfx_key or attack_vfx_data.size() > 0:
+		if attack_vfx_key or attack_vfx_data.get("ScenePath", null):
 			var vfx_source = attacker
 			if attack_from_spot_override:
 				var posible_actors = game_state.get_actors_at_pos(attack_from_spot_override)

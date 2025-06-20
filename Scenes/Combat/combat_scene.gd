@@ -258,9 +258,11 @@ func add_item(item:BaseItem, pos:MapPos):
 	MapController.create_item_node(item, pos)
 	item_spawned.emit(item, pos)
 
-func remove_item(item:BaseItem):
-	GameState.delete_item(item)
-	MapController.delete_item_node(item)
+func remove_item(item_id):
+	if item_id is BaseItem:
+		item_id = item_id.Id
+	GameState.delete_item(item_id)
+	MapController.delete_item_node(item_id)
 
 func _on_actor_pickup_item(actor:BaseActor, items_ids:Array):
 	for item_id in items_ids:
