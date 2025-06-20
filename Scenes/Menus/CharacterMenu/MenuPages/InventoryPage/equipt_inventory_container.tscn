@@ -8,12 +8,12 @@
 [ext_resource type="Texture2D" uid="uid://bibqsudhjw4qe" path="res://assets/Sprites/Paper/Mundane_Background.png" id="7_bemus"]
 [ext_resource type="Texture2D" uid="uid://cm3afo1rfa56g" path="res://assets/Sprites/Paper/PaperButton_64.png" id="7_bit48"]
 [ext_resource type="Texture2D" uid="uid://cegwhar55vupc" path="res://assets/Sprites/Paper/Common_Background.png" id="8_7dlh3"]
-[ext_resource type="Texture2D" uid="uid://cbv0i5ukubx6w" path="res://defs/Items/Equipment/TestWeapons/TestAxe.png" id="8_do01t"]
 [ext_resource type="Texture2D" uid="uid://du85tsvalwqdr" path="res://assets/Sprites/Paper/Rare_Background.png" id="9_4duyt"]
 [ext_resource type="Texture2D" uid="uid://bkjy2j6ra337v" path="res://assets/Sprites/UI/SymbolIcons/EquiptIcon.png" id="9_a4qxi"]
 [ext_resource type="Texture2D" uid="uid://b81lqrxyq30xy" path="res://assets/Sprites/Paper/Legend_Background.png" id="10_a6hxn"]
 [ext_resource type="Texture2D" uid="uid://0wkhsf2kgce1" path="res://assets/Sprites/UI/BackPatches/Patch_12_4_Dark.png" id="10_nckkb"]
 [ext_resource type="Script" path="res://Scenes/UiNodes/FitScaleLabel/fit_scale_label.gd" id="12_3jefk"]
+[ext_resource type="Texture2D" uid="uid://d28r048mh6136" path="res://assets/Sprites/UnknownSprite.png" id="12_iktx4"]
 [ext_resource type="Texture2D" uid="uid://w8cgm1tj35ld" path="res://Scenes/Menus/CharacterMenu/MenuPages/InventoryPage/HoleOutline.png" id="12_qpq5w"]
 [ext_resource type="Script" path="res://Scenes/UiNodes/loaded_option_button.gd" id="13_32pmb"]
 [ext_resource type="Texture2D" uid="uid://3ncohf5a6kf7" path="res://Scenes/Menus/CharacterMenu/HoleBackground.png" id="13_pu80u"]
@@ -158,7 +158,7 @@ anchor_bottom = 1.0
 offset_bottom = -16.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("8_do01t")
+texture = ExtResource("12_iktx4")
 
 [node name="EquiptIcon" type="TextureRect" parent="BoxBackground/ScrollContainer/FlowContainer/InventoryItemButton"]
 layout_mode = 1

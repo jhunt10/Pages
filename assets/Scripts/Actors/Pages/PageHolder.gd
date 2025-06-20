@@ -45,16 +45,6 @@ func _load_slots_sets_data()->Array:
 	if LOGGING: print("-Loaded Page Slots: %s" % [JSON.stringify(out_list)])
 	return out_list
 
-func _on_item_loaded(item:BaseItem):
-	var page = item as BasePageItem
-	if not page:
-		return
-	var effect_def = page.get_effect_def()
-	if effect_def:
-		var effect_key = effect_def.get("EffectKey")
-		var new_effect = EffectHelper.create_effect(_actor, page, effect_key, effect_def)
-		item_id_to_effect_id[item.Id] = new_effect.Id
-
 func set_page_que_item(page_que:BaseQueEquipment, validate_items:bool=true):
 	if page_que:
 		page_que_item_id = page_que.Id
@@ -112,12 +102,15 @@ func get_action_page(action_key:String)->PageItemAction:
 	return null
 
 
-func _on_item_removed_from_slot(item_id:String, index:int):
-	if item_id_to_effect_id.keys().has(item_id):
-		var effect = EffectLibrary.get_effect(item_id_to_effect_id[item_id])
-		_actor.effects.remove_effect(effect)
-		item_id_to_effect_id.erase(item_id)
-	class_page_changed.emit()
+func _on_item_loaded(item:BaseItem):
+	var page = item as BasePageItem
+	if not page:
+		return
+	var effect_def = page.get_effect_def()
+	if effect_def:
+		var effect_key = effect_def.get("EffectKey")
+		var new_effect = EffectHelper.create_effect(_actor, page, effect_key, effect_def)
+		item_id_to_effect_id[item.Id] = new_effect.Id
 
 func _on_item_added_to_slot(item:BaseItem, index:int):
 	if item == null:
@@ -132,4 +125,11 @@ func _on_item_added_to_slot(item:BaseItem, index:int):
 			var effect_key = effect_def.get("EffectKey")
 			var new_effect = EffectHelper.create_effect(_actor, item, effect_key, effect_def)
 			item_id_to_effect_id[item.Id] = new_effect.Id
+	class_page_changed.emit()
+
+func _on_item_removed_from_slot(item_id:String, index:int):
+	if item_id_to_effect_id.keys().has(item_id):
+		var effect = EffectLibrary.get_effect(item_id_to_effect_id[item_id])
+		_actor.effects.remove_effect(effect)
+		item_id_to_effect_id.erase(item_id)
 	class_page_changed.emit()

@@ -55,8 +55,9 @@ func set_key(actor:BaseActor, key):
 
 func _on_equipment_changed(actor_id, action_key):
 	var actor = ActorLibrary.get_actor(actor_id)
-	var page = ItemLibrary.get_item(item_key)
-	page_icon.texture = page.get_large_page_icon(actor)
+	var page = ItemLibrary.get_item(item_key, false)
+	if page:
+		page_icon.texture = page.get_large_page_icon(actor)
 
 func show_highlight():
 	highlight.show()

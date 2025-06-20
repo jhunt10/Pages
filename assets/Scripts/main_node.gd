@@ -24,7 +24,7 @@ static var is_mobile:bool:
 
 func _ready() -> void:
 	printerr("\n")
-	printerr(OS.get_data_dir())
+	printerr(OS.get_data_dir() + "Godot/app_userdata/Pages/saves")
 	printerr("\n")
 	if MainRootNode.Instance:
 		printerr("MainRootNode already exists.")

@@ -1,1 +1,783 @@
-{"ApplyBlessing_Air":{"!ObjectScript":"res://assets/Scripts/Items/Pages/PageItemAction.gd","!ParentKey":"#BaseApplyBuffSpell","#ObjDetails":{"DisplayName":"Blessing of Air","LargeIcon":"Effects/Sprites/Blessing_Air.png","SmallIcon":"Effects/Sprites/Blessing_Air.png"},"ActionData":{"EffectDatas":{"ApplyEffect":{"EffectKey":"Blessing_Air"}},"TargetParams":{"TargetParam":{"LineOfSight":true,"TargetArea":"[[-1,2],[0,2],[1,2],[-2,1],[-1,1],[0,1],[1,1],[2,1],[-2,0],[-1,0],[0,0],[1,0],[2,0],[-2,-1],[-1,-1],[0,-1],[1,-1],[2,-1],[-1,-2],[0,-2],[1,-2]]","TargetType":"Ally"}}},"ItemDetails":{"ItemType":"Page","Rarity":"Common","Value":50},"_DefVersion":"1"},"ApplyBlessing_Earth":{"!ObjectScript":"res://assets/Scripts/Items/Pages/PageItemAction.gd","!ParentKey":"#BaseApplyBuffSpell","#ObjDetails":{"DisplayName":"Blessing of Earth","LargeIcon":"Effects/Sprites/Blessing_Earth.png","SmallIcon":"Effects/Sprites/Blessing_Earth.png"},"ActionData":{"EffectDatas":{"ApplyEffect":{"EffectKey":"Blessing_Earth"}},"TargetParams":{"TargetParam":{"LineOfSight":true,"TargetArea":"[[-1,2],[0,2],[1,2],[-2,1],[-1,1],[0,1],[1,1],[2,1],[-2,0],[-1,0],[0,0],[1,0],[2,0],[-2,-1],[-1,-1],[0,-1],[1,-1],[2,-1],[-1,-2],[0,-2],[1,-2]]","TargetType":"Ally"}}},"ItemDetails":{"ItemType":"Page","Rarity":"Common","Value":50},"_DefVersion":"1"},"ApplyBlessing_Fire":{"!ObjectScript":"res://assets/Scripts/Items/Pages/PageItemAction.gd","!ParentKey":"#BaseApplyBuffSpell","#ObjDetails":{"DisplayName":"Blessing of Fire","LargeIcon":"Effects/Sprites/Blessing_Fire.png","SmallIcon":"Effects/Sprites/Blessing_Fire.png"},"ActionData":{"EffectDatas":{"ApplyEffect":{"EffectKey":"Blessing_Fire"}},"TargetParams":{"TargetParam":{"LineOfSight":true,"TargetArea":"[[-1,2],[0,2],[1,2],[-2,1],[-1,1],[0,1],[1,1],[2,1],[-2,0],[-1,0],[0,0],[1,0],[2,0],[-2,-1],[-1,-1],[0,-1],[1,-1],[2,-1],[-1,-2],[0,-2],[1,-2]]","TargetType":"Ally"}}},"ItemDetails":{"ItemType":"Page","Rarity":"Common","Value":50},"_DefVersion":"1"},"ApplyBlessing_Water":{"!ObjectScript":"res://assets/Scripts/Items/Pages/PageItemAction.gd","!ParentKey":"#BaseApplyBuffSpell","#ObjDetails":{"DisplayName":"Blessing of Water","LargeIcon":"Effects/Sprites/Blessing_Water.png","SmallIcon":"Effects/Sprites/Blessing_Water.png"},"ActionData":{"EffectDatas":{"ApplyEffect":{"EffectKey":"Blessing_Water"}},"TargetParams":{"TargetParam":{"LineOfSight":true,"TargetArea":"[[-1,2],[0,2],[1,2],[-2,1],[-1,1],[0,1],[1,1],[2,1],[-2,0],[-1,0],[0,0],[1,0],[2,0],[-2,-1],[-1,-1],[0,-1],[1,-1],[2,-1],[-1,-2],[0,-2],[1,-2]]","TargetType":"Ally"}}},"ItemDetails":{"ItemType":"Page","Rarity":"Common","Value":50},"_DefVersion":"1"},"ApplyHolyArmorAction":{"!ObjectScript":"res://assets/Scripts/Items/Pages/PageItemAction.gd","!ParentKey":"#BaseApplyBuffSpell","#ObjDetails":{"DisplayName":"Holy Armor","LargeIcon":"Effects/Sprites/HolyArmor.png","SmallIcon":"Effects/Sprites/HolyArmor.png"},"ActionData":{"EffectDatas":{"ApplyEffect":{"EffectKey":"HolyArmorEffect"}}},"ItemDetails":{"ItemType":"Page","Rarity":"Common","Value":50},"_DefVersion":"1"},"ApplyHolyBookAction":{"!ObjectScript":"res://assets/Scripts/Items/Pages/PageItemAction.gd","!ParentKey":"#BaseApplyBuffSpell","#ObjDetails":{"DisplayName":"Holy Book","LargeIcon":"Effects/Sprites/HolyBook.png","SmallIcon":"Effects/Sprites/HolyBook.png"},"ActionData":{"EffectDatas":{"ApplyEffect":{"EffectKey":"HolyBookEffect"}}},"ItemDetails":{"ItemType":"Page","Rarity":"Common","Value":50},"_DefVersion":"1"},"ApplyLightAuraAction":{"!ObjectScript":"res://assets/Scripts/Items/Pages/PageItemAction.gd","!ParentKey":"#BaseApplyBuffSpell","#ObjDetails":{"DisplayName":"Light Aura","LargeIcon":"Effects/Sprites/LightAura.png","SmallIcon":"Effects/Sprites/LightAura.png"},"ActionData":{"EffectDatas":{"ApplyEffect":{"EffectKey":"LightAuraEffect"}}},"ItemDetails":{"ItemType":"Page","Rarity":"Common","Value":50},"_DefVersion":"1"},"ApplyPreemtive":{"!ObjectScript":"res://assets/Scripts/Items/Pages/PageItemAction.gd","!ParentKey":"#BaseApplyBuffSpell","#ObjDetails":{"DisplayName":"Preemtive","LargeIcon":"Effects/Sprites/AilmentGuard.png","SmallIcon":"Effects/Sprites/AilmentGuard.png"},"ActionData":{"EffectDatas":{"ApplyEffect":{"EffectKey":"NegateAilmentEffect"}}},"ItemDetails":{"ItemType":"Page","Rarity":"Common","Value":50},"_DefVersion":"1"},"HealLargeSpell":{"!ObjectScript":"res://assets/Scripts/Items/Pages/PageItemAction.gd","#ObjDetails":{"Description":"Heal an @@#TrgParm:TargetParam:TargetType@@ for @@#Color:Red:100% Max Hp@@.","DisplayName":"Restore","LargeIcon":"Sprites/Heal3.png","SmallIcon":"Sprites/Heal3.png","SnippetDesc":"Restore 100% of Max Hp","Tags":["Heal","Spell"]},"ActionData":{"AmmoData":{"AmmoType":"Abn","Clip":1,"Cost":1},"SubActions":{"Heal":{"!SubActionScript":"res://assets/Scripts/Actions/SubActions/Misc/SubAct_Heal.gd","#FrameIndex":11,"#SubIndex":0,"TargetKey":"Target1","Value":100}},"TargetParams":{"TargetParam":{"LineOfSight":true,"TargetArea":"[[-1,1],[0,1],[1,1]]","TargetType":"Actor"}}},"ItemDetails":{"ItemType":"Page","Rarity":"Common","Value":50},"_DefVersion":"1"},"HealMediumSpell":{"!ObjectScript":"res://assets/Scripts/Items/Pages/PageItemAction.gd","#ObjDetails":{"Description":"Heal an @@#TrgParm:TargetParam:TargetType@@ for @@#Color:Red:50% Max Hp@@.","DisplayName":"Relieve","LargeIcon":"Sprites/Heal2.png","SmallIcon":"Sprites/Heal2.png","SnippetDesc":"Restore 50% of Max Hp","Tags":["Heal","Spell"]},"ActionData":{"AmmoData":{"AmmoType":"Abn","Clip":2,"Cost":1},"SubActions":{"GetTarget":{"!SubActionScript":"res://assets/Scripts/Actions/SubActions/Targeting/SubAct_GetTarget.gd","#FrameIndex":10,"#SubIndex":0,"AllowAlreadyTargeted":false,"AllowAutoTarget":false,"SetTargetKey":"Target1","TargetParamKey":"TargetParam"},"Heal":{"!SubActionScript":"res://assets/Scripts/Actions/SubActions/Misc/SubAct_Heal.gd","#FrameIndex":11,"#SubIndex":1,"TargetKey":"Target1","Value":50},"PayCost":{"!SubActionScript":"res://assets/Scripts/Actions/SubActions/Misc/SubAct_PayCost.gd","#FrameIndex":11,"#SubIndex":0},"WeaponMotionAnimation":{"!SubActionScript":"res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponMotionAnimation.gd","#FrameIndex":16,"#SubIndex":0,"MainHand":true,"OffHand":"Never"},"WeaponReadyAnimation":{"!SubActionScript":"res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponReadyAnimation.gd","#FrameIndex":0,"#SubIndex":0,"Animation":"Raise","MainHand":true,"OffHand":"Never"}},"TargetParams":{"TargetParam":{"LineOfSight":true,"TargetArea":"[[-1,1],[0,1],[1,1],[-1,0],[1,0]]","TargetType":"Actor"}}},"ItemDetails":{"ItemType":"Page","Rarity":"Common","Value":50},"_DefVersion":"1"},"HealSmallSpell":{"!ObjectScript":"res://assets/Scripts/Items/Pages/PageItemAction.gd","#ObjDetails":{"Description":"Heal an @@#TrgParm:TargetParam:TargetType@@ for @@#Color:Red:25% Max Hp@@.","DisplayName":"Refresh","LargeIcon":"Sprites/Heal1.png","SmallIcon":"Sprites/Heal1.png","SnippetDesc":"Restore 25% of Max Hp","Tags":["Heal","Spell"]},"ActionData":{"AmmoData":{"AmmoType":"Abn","Clip":4,"Cost":1},"SubActions":{"GetTarget":{"!SubActionScript":"res://assets/Scripts/Actions/SubActions/Targeting/SubAct_GetTarget.gd","#FrameIndex":10,"#SubIndex":0,"AllowAlreadyTargeted":false,"AllowAutoTarget":false,"SetTargetKey":"Target1","TargetParamKey":"TargetParam"},"Heal":{"!SubActionScript":"res://assets/Scripts/Actions/SubActions/Misc/SubAct_Heal.gd","#FrameIndex":11,"#SubIndex":1,"TargetKey":"Target1","Value":25},"PayCost":{"!SubActionScript":"res://assets/Scripts/Actions/SubActions/Misc/SubAct_PayCost.gd","#FrameIndex":11,"#SubIndex":0},"WeaponMotionAnimation":{"!SubActionScript":"res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponMotionAnimation.gd","#FrameIndex":11,"#SubIndex":2,"MainHand":true,"OffHand":"Never"},"WeaponReadyAnimation":{"!SubActionScript":"res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponReadyAnimation.gd","#FrameIndex":5,"#SubIndex":0,"Animation":"Raise","MainHand":true,"OffHand":"Never"}},"TargetParams":{"TargetParam":{"LineOfSight":true,"TargetArea":"[[-1,2],[0,2],[1,2],[-1,1],[0,1],[1,1],[-1,0],[1,0]]","TargetType":"Actor"}}},"ItemDetails":{"ItemType":"Page","Rarity":"Common","Value":50},"_DefVersion":"1"},"LightMeleeSpell":{"!ObjectScript":"res://assets/Scripts/Items/Pages/PageItemAction.gd","!ParentKey":"#BaseMeleeSpell","#ObjDetails":{"DisplayName":"Light Touch","LargeIcon":"Sprites/LightTouch.png","SmallIcon":"Sprites/LightTouch.png","SnippetDesc":"Touch Actor dealing Light Damage","Tags":["Light"]},"ActionData":{"DamageDatas":{"MeleeDamage":{"DamageType":"Light","DamageVfxKey":"Fire_DamageEffect","DefenseType":"None"}}},"ItemDetails":{"ItemType":"Page","Rarity":"Common","Value":50},"_DefVersion":"1"},"LightMissileSpell":{"!ObjectScript":"res://assets/Scripts/Items/Pages/PageItemAction.gd","!ParentKey":"#BaseMissileSpell","#ObjDetails":{"DisplayName":"Light Missile","LargeIcon":"Sprites/LightMissile.png","SmallIcon":"Sprites/LightMissile.png","SnippetDesc":"Make a Ranged Spell Attack dealing Light Damage","Tags":["Light"]},"ActionData":{"AttackDetails":{"AccuracyMod":1,"PotencyMod":1},"DamageDatas":{"MissileDamage":{"DamageType":"Light","DamageVfxKey":"Fire_DamageEffect","DefenseType":"None"}},"MissileDatas":{"SpellMissile":{"DamageDataKey":"MissileDamage","FramesPerTile":3,"MissileVfxKey":"LightBall"}}},"ItemDetails":{"ItemType":"Page","Rarity":"Common","Value":50},"_DefVersion":"1"},"LightRangedSpell":{"!ObjectScript":"res://assets/Scripts/Items/Pages/PageItemAction.gd","!ParentKey":"#BaseRangedSpell","#ObjDetails":{"DisplayName":"Light Bullet","LargeIcon":"Sprites/LightBullet.png","SmallIcon":"Sprites/LightBullet.png","SnippetDesc":"Make a Ranged Spell Attack dealing Light Damage","Tags":["Light"]},"ActionData":{"AttackDetails":{"AccuracyMod":1,"AttackVfxData":{},"AttackVfxKey":"LightBolt","PotencyMod":1},"DamageDatas":{"RangedDamage":{"DamageType":"Light","DamageVfxKey":"Fire_DamageEffect","DefenseType":"None"}}},"ItemDetails":{"ItemType":"Page","Rarity":"Common","Value":50},"_DefVersion":"1"},"RemoveAilmentSpell":{"!ObjectScript":"res://assets/Scripts/Items/Pages/PageItemAction.gd","#ObjDetails":{"Description":"Select an @@#TrgParm:TargetParam:TargetType@@ and remove one @@#Color:Red:Ailment Effect@@ from them.","DisplayName":"Remove Ailment","LargeIcon":"Sprites/RemoveAilment.png","SmallIcon":"Sprites/RemoveAilment.png","SnippetDesc":"Remove an Ailment from Actor","Tags":["Remove","Spell"]},"ActionData":{"AmmoData":{"AmmoType":"Mag","Clip":16,"Cost":4},"AttackDetails":{"AccuracyMod":1,"PotencyMod":1},"Preview":{"PreviewTargetKey":"TargetParam"},"SubActions":{"CheckCondition":{"!SubActionScript":"res://assets/Scripts/Actions/SubActions/Conditions/SubAct_CheckCondition.gd","#FrameIndex":0,"#SubIndex":1,"ConditionFlag":"ActorHasExtraRemove","ConditionType":"TargetHasTag","PrimaryTargetOnly":true,"RequiredTag":"RemoveMore","TargetKey":"Self"},"CheckCondition02":{"!SubActionScript":"res://assets/Scripts/Actions/SubActions/Conditions/SubAct_CheckCondition.gd","#FrameIndex":0,"#SubIndex":2,"ConditionFlag":"ActorHasSelectRemove","ConditionType":"TargetHasTag","PrimaryTargetOnly":true,"RequiredTag":"RemoveSelect","TargetKey":"Self"},"GetTarget":{"!SubActionScript":"res://assets/Scripts/Actions/SubActions/Targeting/SubAct_GetTarget.gd","#FrameIndex":10,"#SubIndex":0,"AllowAlreadyTargeted":false,"AllowAutoTarget":false,"SetTargetKey":"Target1","TargetParamKey":"TargetParam"},"PayCost":{"!SubActionScript":"res://assets/Scripts/Actions/SubActions/Misc/SubAct_PayCost.gd","#FrameIndex":11,"#SubIndex":0},"RemoveEffect":{"!SubActionScript":"res://assets/Scripts/Actions/SubActions/Effects/SubAct_RemoveEffect.gd","#FrameIndex":11,"#SubIndex":1,"EffectTagFilters":[{"RequireAllTags":["Ailment"]}],"RemoveCount":1,"RemoveSelectionKey":"EffectToRemove","RequiredConditions":{"ActorHasExtraRemove":false},"TargetKey":"Target1"},"RemoveEffect112":{"!SubActionScript":"res://assets/Scripts/Actions/SubActions/Effects/SubAct_RemoveEffect.gd","#FrameIndex":11,"#SubIndex":2,"EffectTagFilters":[{"RequireAllTags":["Ailment"]}],"RemoveCount":2,"RemoveSelectionKey":"EffectToRemove","RequiredConditions":{"ActorHasExtraRemove":true},"TargetKey":"Target1"},"SelectEffectOnTarget":{"!SubActionScript":"res://assets/Scripts/Actions/SubActions/Targeting/SubAct_SelectEffectOnTarget.gd","#FrameIndex":10,"#SubIndex":1,"RequiredConditions":{"ActorHasSelectRemove":true},"SelectionKey":"EffectToRemove","TargetKey":"Target1"},"WeaponMotionAnimation":{"!SubActionScript":"res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponMotionAnimation.gd","#FrameIndex":16,"#SubIndex":0,"MainHand":true,"OffHand":"Never"},"WeaponReadyAnimation":{"!SubActionScript":"res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponReadyAnimation.gd","#FrameIndex":0,"#SubIndex":0,"Animation":"Raise","MainHand":true,"OffHand":"Never"}},"TargetParams":{"TargetParam":{"LineOfSight":true,"TargetArea":"[[-1,2],[0,2],[1,2],[-1,1],[0,1],[1,1],[-1,0],[1,0]]","TargetType":"Actor"}}},"ItemDetails":{"ItemType":"Page","Rarity":"Common","Value":50},"_DefVersion":"1"},"ReviveSpell":{"!ObjectScript":"res://assets/Scripts/Items/Pages/PageItemAction.gd","#ObjDetails":{"Description":"Revive a dead @@#TrgParm:TargetParam:TargetType@@ with @@#Color:Red:50% Max Hp@@.","DisplayName":"Revive","LargeIcon":"Sprites/Heal4.png","SmallIcon":"Sprites/Heal4.png","SnippetDesc":"Revive a dead Actor","Tags":["Revive","Spell"]},"ActionData":{"AmmoData":{"AmmoType":"Abn","Clip":1,"Cost":1},"SubActions":{"GetTarget":{"!SubActionScript":"res://assets/Scripts/Actions/SubActions/Targeting/SubAct_GetTarget.gd","#FrameIndex":10,"#SubIndex":0,"AllowAlreadyTargeted":false,"AllowAutoTarget":false,"SetTargetKey":"Target1","TargetParamKey":"TargetParam"},"PayCost":{"!SubActionScript":"res://assets/Scripts/Actions/SubActions/Misc/SubAct_PayCost.gd","#FrameIndex":11,"#SubIndex":0},"ReviveDeadActor":{"!SubActionScript":"res://assets/Scripts/Actions/SubActions/Misc/SubAct_ReviveDeadActor.gd","#FrameIndex":11,"#SubIndex":1,"TargetKey":"Target1","Value":50},"WeaponMotionAnimation":{"!SubActionScript":"res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponMotionAnimation.gd","#FrameIndex":11,"#SubIndex":2,"MainHand":true,"OffHand":"Never"},"WeaponReadyAnimation":{"!SubActionScript":"res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponReadyAnimation.gd","#FrameIndex":5,"#SubIndex":0,"Animation":"Raise","MainHand":true,"OffHand":"Never"}},"TargetParams":{"TargetParam":{"LineOfSight":true,"TargetArea":"[[0,1]]","TargetType":"Corpse"}}},"ItemDetails":{"ItemType":"Page","Rarity":"Common","Value":50},"_DefVersion":"1"},"_BaseHealSpell":{"!ObjectScript":"res://assets/Scripts/Items/Pages/PageItemAction.gd","#ObjDetails":{"Description":"Heal an @@#TrgParm:TargetParam:TargetType@@ for @@#Color:Red:25% Max Hp@@.","DisplayName":"Base Heal","LargeIcon":"Sprites/Heal1.png","SmallIcon":"Sprites/Heal1.png","SnippetDesc":"Restore 25% of Max Hp","Tags":["Heal","Spell"]},"ActionData":{"AmmoData":{"AmmoType":"Mag","Clip":16,"Cost":4},"AttackDetails":{"AccuracyMod":1,"PotencyMod":1},"Preview":{"PreviewTargetKey":"TargetParam"},"SubActions":{"GetTarget":{"!SubActionScript":"res://assets/Scripts/Actions/SubActions/Targeting/SubAct_GetTarget.gd","#FrameIndex":10,"#SubIndex":0,"AllowAlreadyTargeted":false,"AllowAutoTarget":false,"SetTargetKey":"Target1","TargetParamKey":"TargetParam"},"Heal":{"!SubActionScript":"res://assets/Scripts/Actions/SubActions/Misc/SubAct_Heal.gd","#FrameIndex":11,"#SubIndex":1,"TargetKey":"Target1","Value":25},"PayCost":{"!SubActionScript":"res://assets/Scripts/Actions/SubActions/Misc/SubAct_PayCost.gd","#FrameIndex":11,"#SubIndex":0},"WeaponMotionAnimation":{"!SubActionScript":"res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponMotionAnimation.gd","#FrameIndex":11,"#SubIndex":2,"MainHand":true,"OffHand":"Never"},"WeaponReadyAnimation":{"!SubActionScript":"res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponReadyAnimation.gd","#FrameIndex":5,"#SubIndex":0,"Animation":"Raise","MainHand":true,"OffHand":"Never"}},"TargetParams":{"TargetParam":{"LineOfSight":true,"TargetArea":"[[-1,2],[0,2],[1,2],[-1,1],[0,1],[1,1],[-1,0],[1,0]]","TargetType":"Actor"}}},"ItemDetails":{"ItemType":"Page","Rarity":"Common","Value":50},"_DefVersion":"1"}}
+{
+    "ApplyBlessing_Air": {
+        "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
+        "!ParentKey": "#BaseApplyBuffAction",
+        "#ObjDetails": {
+            "DisplayName": "Blessing of Air",
+            "LargeIcon": "Effects/Sprites/Blessing_Air.png",
+            "SmallIcon": "Effects/Sprites/Blessing_Air.png"
+        },
+        "ActionData": {
+            "EffectDatas": {
+                "ApplyEffect": {
+                    "EffectKey": "Blessing_Air"
+                }
+            },
+            "TargetParams": {
+                "TargetParam": {
+                    "LineOfSight": true,
+                    "TargetArea": "[[-1,2],[0,2],[1,2],[-2,1],[-1,1],[0,1],[1,1],[2,1],[-2,0],[-1,0],[0,0],[1,0],[2,0],[-2,-1],[-1,-1],[0,-1],[1,-1],[2,-1],[-1,-2],[0,-2],[1,-2]]",
+                    "TargetType": "Ally"
+                }
+            }
+        },
+        "ItemDetails": {
+            "ItemType": "Page",
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "_DefVersion": "1"
+    },
+    "ApplyBlessing_Earth": {
+        "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
+        "!ParentKey": "#BaseApplyBuffAction",
+        "#ObjDetails": {
+            "DisplayName": "Blessing of Earth",
+            "LargeIcon": "Effects/Sprites/Blessing_Earth.png",
+            "SmallIcon": "Effects/Sprites/Blessing_Earth.png"
+        },
+        "ActionData": {
+            "EffectDatas": {
+                "ApplyEffect": {
+                    "EffectKey": "Blessing_Earth"
+                }
+            },
+            "TargetParams": {
+                "TargetParam": {
+                    "LineOfSight": true,
+                    "TargetArea": "[[-1,2],[0,2],[1,2],[-2,1],[-1,1],[0,1],[1,1],[2,1],[-2,0],[-1,0],[0,0],[1,0],[2,0],[-2,-1],[-1,-1],[0,-1],[1,-1],[2,-1],[-1,-2],[0,-2],[1,-2]]",
+                    "TargetType": "Ally"
+                }
+            }
+        },
+        "ItemDetails": {
+            "ItemType": "Page",
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "_DefVersion": "1"
+    },
+    "ApplyBlessing_Fire": {
+        "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
+        "!ParentKey": "#BaseApplyBuffAction",
+        "#ObjDetails": {
+            "DisplayName": "Blessing of Fire",
+            "LargeIcon": "Effects/Sprites/Blessing_Fire.png",
+            "SmallIcon": "Effects/Sprites/Blessing_Fire.png"
+        },
+        "ActionData": {
+            "EffectDatas": {
+                "ApplyEffect": {
+                    "EffectKey": "Blessing_Fire"
+                }
+            },
+            "TargetParams": {
+                "TargetParam": {
+                    "LineOfSight": true,
+                    "TargetArea": "[[-1,2],[0,2],[1,2],[-2,1],[-1,1],[0,1],[1,1],[2,1],[-2,0],[-1,0],[0,0],[1,0],[2,0],[-2,-1],[-1,-1],[0,-1],[1,-1],[2,-1],[-1,-2],[0,-2],[1,-2]]",
+                    "TargetType": "Ally"
+                }
+            }
+        },
+        "ItemDetails": {
+            "ItemType": "Page",
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "_DefVersion": "1"
+    },
+    "ApplyBlessing_Water": {
+        "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
+        "!ParentKey": "#BaseApplyBuffAction",
+        "#ObjDetails": {
+            "DisplayName": "Blessing of Water",
+            "LargeIcon": "Effects/Sprites/Blessing_Water.png",
+            "SmallIcon": "Effects/Sprites/Blessing_Water.png"
+        },
+        "ActionData": {
+            "EffectDatas": {
+                "ApplyEffect": {
+                    "EffectKey": "Blessing_Water"
+                }
+            },
+            "TargetParams": {
+                "TargetParam": {
+                    "LineOfSight": true,
+                    "TargetArea": "[[-1,2],[0,2],[1,2],[-2,1],[-1,1],[0,1],[1,1],[2,1],[-2,0],[-1,0],[0,0],[1,0],[2,0],[-2,-1],[-1,-1],[0,-1],[1,-1],[2,-1],[-1,-2],[0,-2],[1,-2]]",
+                    "TargetType": "Ally"
+                }
+            }
+        },
+        "ItemDetails": {
+            "ItemType": "Page",
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "_DefVersion": "1"
+    },
+    "ApplyHolyArmorAction": {
+        "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
+        "!ParentKey": "#BaseApplyBuffAction",
+        "#ObjDetails": {
+            "DisplayName": "Holy Armor",
+            "LargeIcon": "Effects/Sprites/HolyArmor.png",
+            "SmallIcon": "Effects/Sprites/HolyArmor.png"
+        },
+        "ActionData": {
+            "EffectDatas": {
+                "ApplyEffect": {
+                    "EffectKey": "HolyArmorEffect"
+                }
+            }
+        },
+        "ItemDetails": {
+            "ItemType": "Page",
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "_DefVersion": "1"
+    },
+    "ApplyHolyBookAction": {
+        "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
+        "!ParentKey": "#BaseApplyBuffAction",
+        "#ObjDetails": {
+            "DisplayName": "Holy Book",
+            "LargeIcon": "Effects/Sprites/HolyBook.png",
+            "SmallIcon": "Effects/Sprites/HolyBook.png"
+        },
+        "ActionData": {
+            "EffectDatas": {
+                "ApplyEffect": {
+                    "EffectKey": "HolyBookEffect"
+                }
+            }
+        },
+        "ItemDetails": {
+            "ItemType": "Page",
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "_DefVersion": "1"
+    },
+    "ApplyLightAuraAction": {
+        "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
+        "!ParentKey": "#BaseApplyBuffAction",
+        "#ObjDetails": {
+            "DisplayName": "Light Aura",
+            "LargeIcon": "Effects/Sprites/LightAura.png",
+            "SmallIcon": "Effects/Sprites/LightAura.png"
+        },
+        "ActionData": {
+            "EffectDatas": {
+                "ApplyEffect": {
+                    "EffectKey": "LightAuraEffect"
+                }
+            }
+        },
+        "ItemDetails": {
+            "ItemType": "Page",
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "_DefVersion": "1"
+    },
+    "ApplyPreemtive": {
+        "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
+        "!ParentKey": "#BaseApplyBuffAction",
+        "#ObjDetails": {
+            "DisplayName": "Preemtive",
+            "LargeIcon": "Effects/Sprites/AilmentGuard.png",
+            "SmallIcon": "Effects/Sprites/AilmentGuard.png"
+        },
+        "ActionData": {
+            "EffectDatas": {
+                "ApplyEffect": {
+                    "EffectKey": "NegateAilmentEffect"
+                }
+            }
+        },
+        "ItemDetails": {
+            "ItemType": "Page",
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "_DefVersion": "1"
+    },
+    "HealLargeSpell": {
+        "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
+        "#ObjDetails": {
+            "Description": "Heal an @@#TrgParm:TargetParam:TargetType@@ for @@#Color:Red:100% Max Hp@@.",
+            "DisplayName": "Restore",
+            "LargeIcon": "Sprites/Heal3.png",
+            "SmallIcon": "Sprites/Heal3.png",
+            "SnippetDesc": "Restore 100% of Max Hp",
+            "Tags": [
+                "Heal",
+                "Spell"
+            ]
+        },
+        "ActionData": {
+            "AmmoData": {
+                "AmmoType": "Abn",
+                "Clip": 1,
+                "Cost": 1
+            },
+            "SubActions": {
+                "Heal": {
+                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Misc/SubAct_Heal.gd",
+                    "#FrameIndex": 11,
+                    "#SubIndex": 0,
+                    "TargetKey": "Target1",
+                    "Value": 100
+                }
+            },
+            "TargetParams": {
+                "TargetParam": {
+                    "LineOfSight": true,
+                    "TargetArea": "[[-1,1],[0,1],[1,1]]",
+                    "TargetType": "Actor"
+                }
+            }
+        },
+        "ItemDetails": {
+            "ItemType": "Page",
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "_DefVersion": "1"
+    },
+    "HealMediumSpell": {
+        "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
+        "#ObjDetails": {
+            "Description": "Heal an @@#TrgParm:TargetParam:TargetType@@ for @@#Color:Red:50% Max Hp@@.",
+            "DisplayName": "Relieve",
+            "LargeIcon": "Sprites/Heal2.png",
+            "SmallIcon": "Sprites/Heal2.png",
+            "SnippetDesc": "Restore 50% of Max Hp",
+            "Tags": [
+                "Heal",
+                "Spell"
+            ]
+        },
+        "ActionData": {
+            "AmmoData": {
+                "AmmoType": "Abn",
+                "Clip": 2,
+                "Cost": 1
+            },
+            "SubActions": {
+                "GetTarget": {
+                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Targeting/SubAct_GetTarget.gd",
+                    "#FrameIndex": 10,
+                    "#SubIndex": 0,
+                    "AllowAlreadyTargeted": false,
+                    "AllowAutoTarget": false,
+                    "SetTargetKey": "Target1",
+                    "TargetParamKey": "TargetParam"
+                },
+                "Heal": {
+                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Misc/SubAct_Heal.gd",
+                    "#FrameIndex": 11,
+                    "#SubIndex": 1,
+                    "TargetKey": "Target1",
+                    "Value": 50
+                },
+                "PayCost": {
+                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Misc/SubAct_PayCost.gd",
+                    "#FrameIndex": 11,
+                    "#SubIndex": 0
+                },
+                "WeaponMotionAnimation": {
+                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponMotionAnimation.gd",
+                    "#FrameIndex": 16,
+                    "#SubIndex": 0,
+                    "MainHand": true,
+                    "OffHand": "Never"
+                },
+                "WeaponReadyAnimation": {
+                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponReadyAnimation.gd",
+                    "#FrameIndex": 0,
+                    "#SubIndex": 0,
+                    "Animation": "Raise",
+                    "MainHand": true,
+                    "OffHand": "Never"
+                }
+            },
+            "TargetParams": {
+                "TargetParam": {
+                    "LineOfSight": true,
+                    "TargetArea": "[[-1,1],[0,1],[1,1],[-1,0],[1,0]]",
+                    "TargetType": "Actor"
+                }
+            }
+        },
+        "ItemDetails": {
+            "ItemType": "Page",
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "_DefVersion": "1"
+    },
+    "HealSmallSpell": {
+        "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
+        "#ObjDetails": {
+            "Description": "Heal an @@#TrgParm:TargetParam:TargetType@@ for @@#Color:Red:25% Max Hp@@.",
+            "DisplayName": "Refresh",
+            "LargeIcon": "Sprites/Heal1.png",
+            "SmallIcon": "Sprites/Heal1.png",
+            "SnippetDesc": "Restore 25% of Max Hp",
+            "Tags": [
+                "Heal",
+                "Spell"
+            ]
+        },
+        "ActionData": {
+            "AmmoData": {
+                "AmmoType": "Abn",
+                "Clip": 4,
+                "Cost": 1
+            },
+            "SubActions": {
+                "GetTarget": {
+                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Targeting/SubAct_GetTarget.gd",
+                    "#FrameIndex": 10,
+                    "#SubIndex": 0,
+                    "AllowAlreadyTargeted": false,
+                    "AllowAutoTarget": false,
+                    "SetTargetKey": "Target1",
+                    "TargetParamKey": "TargetParam"
+                },
+                "Heal": {
+                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Misc/SubAct_Heal.gd",
+                    "#FrameIndex": 11,
+                    "#SubIndex": 1,
+                    "TargetKey": "Target1",
+                    "Value": 25
+                },
+                "PayCost": {
+                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Misc/SubAct_PayCost.gd",
+                    "#FrameIndex": 11,
+                    "#SubIndex": 0
+                },
+                "WeaponMotionAnimation": {
+                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponMotionAnimation.gd",
+                    "#FrameIndex": 11,
+                    "#SubIndex": 2,
+                    "MainHand": true,
+                    "OffHand": "Never"
+                },
+                "WeaponReadyAnimation": {
+                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponReadyAnimation.gd",
+                    "#FrameIndex": 5,
+                    "#SubIndex": 0,
+                    "Animation": "Raise",
+                    "MainHand": true,
+                    "OffHand": "Never"
+                }
+            },
+            "TargetParams": {
+                "TargetParam": {
+                    "LineOfSight": true,
+                    "TargetArea": "[[-1,2],[0,2],[1,2],[-1,1],[0,1],[1,1],[-1,0],[1,0]]",
+                    "TargetType": "Actor"
+                }
+            }
+        },
+        "ItemDetails": {
+            "ItemType": "Page",
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "_DefVersion": "1"
+    },
+    "LightMeleeSpell": {
+        "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
+        "!ParentKey": "#BaseMeleeSpell",
+        "#ObjDetails": {
+            "DisplayName": "Light Touch",
+            "LargeIcon": "Sprites/LightTouch.png",
+            "SmallIcon": "Sprites/LightTouch.png",
+            "SnippetDesc": "Touch Actor dealing Light Damage",
+            "Tags": [
+                "Light"
+            ]
+        },
+        "ActionData": {
+            "DamageDatas": {
+                "MeleeDamage": {
+                    "DamageType": "Light",
+                    "DamageVfxKey": "Fire_DamageEffect",
+                    "DefenseType": "None"
+                }
+            }
+        },
+        "ItemDetails": {
+            "ItemType": "Page",
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "_DefVersion": "1"
+    },
+    "LightMissileSpell": {
+        "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
+        "!ParentKey": "#BaseMissileSpell",
+        "#ObjDetails": {
+            "DisplayName": "Light Missile",
+            "LargeIcon": "Sprites/LightMissile.png",
+            "SmallIcon": "Sprites/LightMissile.png",
+            "SnippetDesc": "Make a Ranged Spell Attack dealing Light Damage",
+            "Tags": [
+                "Light"
+            ]
+        },
+        "ActionData": {
+            "AttackDetails": {
+                "AccuracyMod": 1,
+                "PotencyMod": 1
+            },
+            "DamageDatas": {
+                "MissileDamage": {
+                    "DamageType": "Light",
+                    "DamageVfxKey": "Fire_DamageEffect",
+                    "DefenseType": "None"
+                }
+            },
+            "MissileDatas": {
+                "SpellMissile": {
+                    "DamageDataKey": "MissileDamage",
+                    "FramesPerTile": 3,
+                    "MissileVfxKey": "LightBall"
+                }
+            }
+        },
+        "ItemDetails": {
+            "ItemType": "Page",
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "_DefVersion": "1"
+    },
+    "LightRangedSpell": {
+        "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
+        "!ParentKey": "#BaseRangedSpell",
+        "#ObjDetails": {
+            "DisplayName": "Light Bullet",
+            "LargeIcon": "Sprites/LightBullet.png",
+            "SmallIcon": "Sprites/LightBullet.png",
+            "SnippetDesc": "Make a Ranged Spell Attack dealing Light Damage",
+            "Tags": [
+                "Light"
+            ]
+        },
+        "ActionData": {
+            "AttackDetails": {
+                "AccuracyMod": 1,
+                "AttackVfxData": {},
+                "AttackVfxKey": "LightBolt",
+                "PotencyMod": 1
+            },
+            "DamageDatas": {
+                "RangedDamage": {
+                    "DamageType": "Light",
+                    "DamageVfxKey": "Fire_DamageEffect",
+                    "DefenseType": "None"
+                }
+            }
+        },
+        "ItemDetails": {
+            "ItemType": "Page",
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "_DefVersion": "1"
+    },
+    "RemoveAilmentSpell": {
+        "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
+        "#ObjDetails": {
+            "Description": "Select an @@#TrgParm:TargetParam:TargetType@@ and remove one @@#Color:Red:Ailment Effect@@ from them.",
+            "DisplayName": "Remove Ailment",
+            "LargeIcon": "Sprites/RemoveAilment.png",
+            "SmallIcon": "Sprites/RemoveAilment.png",
+            "SnippetDesc": "Remove an Ailment from Actor",
+            "Tags": [
+                "Remove",
+                "Spell"
+            ]
+        },
+        "ActionData": {
+            "AmmoData": {
+                "AmmoType": "Mag",
+                "Clip": 16,
+                "Cost": 4
+            },
+            "AttackDetails": {
+                "AccuracyMod": 1,
+                "PotencyMod": 1
+            },
+            "Preview": {
+                "PreviewTargetKey": "TargetParam"
+            },
+            "SubActions": {
+                "CheckCondition": {
+                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Conditions/SubAct_CheckCondition.gd",
+                    "#FrameIndex": 0,
+                    "#SubIndex": 1,
+                    "ConditionFlag": "ActorHasExtraRemove",
+                    "ConditionType": "TargetHasTag",
+                    "PrimaryTargetOnly": true,
+                    "RequiredTag": "RemoveMore",
+                    "TargetKey": "Self"
+                },
+                "CheckCondition02": {
+                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Conditions/SubAct_CheckCondition.gd",
+                    "#FrameIndex": 0,
+                    "#SubIndex": 2,
+                    "ConditionFlag": "ActorHasSelectRemove",
+                    "ConditionType": "TargetHasTag",
+                    "PrimaryTargetOnly": true,
+                    "RequiredTag": "RemoveSelect",
+                    "TargetKey": "Self"
+                },
+                "GetTarget": {
+                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Targeting/SubAct_GetTarget.gd",
+                    "#FrameIndex": 10,
+                    "#SubIndex": 0,
+                    "AllowAlreadyTargeted": false,
+                    "AllowAutoTarget": false,
+                    "SetTargetKey": "Target1",
+                    "TargetParamKey": "TargetParam"
+                },
+                "PayCost": {
+                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Misc/SubAct_PayCost.gd",
+                    "#FrameIndex": 11,
+                    "#SubIndex": 0
+                },
+                "RemoveEffect": {
+                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Effects/SubAct_RemoveEffect.gd",
+                    "#FrameIndex": 11,
+                    "#SubIndex": 1,
+                    "EffectTagFilters": [
+                        {
+                            "RequireAllTags": [
+                                "Ailment"
+                            ]
+                        }
+                    ],
+                    "RemoveCount": 1,
+                    "RemoveSelectionKey": "EffectToRemove",
+                    "RequiredConditions": {
+                        "ActorHasExtraRemove": false
+                    },
+                    "TargetKey": "Target1"
+                },
+                "RemoveEffect112": {
+                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Effects/SubAct_RemoveEffect.gd",
+                    "#FrameIndex": 11,
+                    "#SubIndex": 2,
+                    "EffectTagFilters": [
+                        {
+                            "RequireAllTags": [
+                                "Ailment"
+                            ]
+                        }
+                    ],
+                    "RemoveCount": 2,
+                    "RemoveSelectionKey": "EffectToRemove",
+                    "RequiredConditions": {
+                        "ActorHasExtraRemove": true
+                    },
+                    "TargetKey": "Target1"
+                },
+                "SelectEffectOnTarget": {
+                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Targeting/SubAct_SelectEffectOnTarget.gd",
+                    "#FrameIndex": 10,
+                    "#SubIndex": 1,
+                    "RequiredConditions": {
+                        "ActorHasSelectRemove": true
+                    },
+                    "SelectionKey": "EffectToRemove",
+                    "TargetKey": "Target1"
+                },
+                "WeaponMotionAnimation": {
+                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponMotionAnimation.gd",
+                    "#FrameIndex": 16,
+                    "#SubIndex": 0,
+                    "MainHand": true,
+                    "OffHand": "Never"
+                },
+                "WeaponReadyAnimation": {
+                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponReadyAnimation.gd",
+                    "#FrameIndex": 0,
+                    "#SubIndex": 0,
+                    "Animation": "Raise",
+                    "MainHand": true,
+                    "OffHand": "Never"
+                }
+            },
+            "TargetParams": {
+                "TargetParam": {
+                    "LineOfSight": true,
+                    "TargetArea": "[[-1,2],[0,2],[1,2],[-1,1],[0,1],[1,1],[-1,0],[1,0]]",
+                    "TargetType": "Actor"
+                }
+            }
+        },
+        "ItemDetails": {
+            "ItemType": "Page",
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "_DefVersion": "1"
+    },
+    "ReviveSpell": {
+        "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
+        "#ObjDetails": {
+            "Description": "Revive a dead @@#TrgParm:TargetParam:TargetType@@ with @@#Color:Red:50% Max Hp@@.",
+            "DisplayName": "Revive",
+            "LargeIcon": "Sprites/Heal4.png",
+            "SmallIcon": "Sprites/Heal4.png",
+            "SnippetDesc": "Revive a dead Actor",
+            "Tags": [
+                "Revive",
+                "Spell"
+            ]
+        },
+        "ActionData": {
+            "AmmoData": {
+                "AmmoType": "Abn",
+                "Clip": 1,
+                "Cost": 1
+            },
+            "SubActions": {
+                "GetTarget": {
+                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Targeting/SubAct_GetTarget.gd",
+                    "#FrameIndex": 10,
+                    "#SubIndex": 0,
+                    "AllowAlreadyTargeted": false,
+                    "AllowAutoTarget": false,
+                    "SetTargetKey": "Target1",
+                    "TargetParamKey": "TargetParam"
+                },
+                "PayCost": {
+                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Misc/SubAct_PayCost.gd",
+                    "#FrameIndex": 11,
+                    "#SubIndex": 0
+                },
+                "ReviveDeadActor": {
+                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Misc/SubAct_ReviveDeadActor.gd",
+                    "#FrameIndex": 11,
+                    "#SubIndex": 1,
+                    "TargetKey": "Target1",
+                    "Value": 50
+                },
+                "WeaponMotionAnimation": {
+                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponMotionAnimation.gd",
+                    "#FrameIndex": 11,
+                    "#SubIndex": 2,
+                    "MainHand": true,
+                    "OffHand": "Never"
+                },
+                "WeaponReadyAnimation": {
+                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponReadyAnimation.gd",
+                    "#FrameIndex": 5,
+                    "#SubIndex": 0,
+                    "Animation": "Raise",
+                    "MainHand": true,
+                    "OffHand": "Never"
+                }
+            },
+            "TargetParams": {
+                "TargetParam": {
+                    "LineOfSight": true,
+                    "TargetArea": "[[0,1]]",
+                    "TargetType": "Corpse"
+                }
+            }
+        },
+        "ItemDetails": {
+            "ItemType": "Page",
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "_DefVersion": "1"
+    },
+    "_BaseHealSpell": {
+        "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
+        "#ObjDetails": {
+            "Description": "Heal an @@#TrgParm:TargetParam:TargetType@@ for @@#Color:Red:25% Max Hp@@.",
+            "DisplayName": "Base Heal",
+            "LargeIcon": "Sprites/Heal1.png",
+            "SmallIcon": "Sprites/Heal1.png",
+            "SnippetDesc": "Restore 25% of Max Hp",
+            "Tags": [
+                "Heal",
+                "Spell"
+            ]
+        },
+        "ActionData": {
+            "AmmoData": {
+                "AmmoType": "Mag",
+                "Clip": 16,
+                "Cost": 4
+            },
+            "AttackDetails": {
+                "AccuracyMod": 1,
+                "PotencyMod": 1
+            },
+            "Preview": {
+                "PreviewTargetKey": "TargetParam"
+            },
+            "SubActions": {
+                "GetTarget": {
+                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Targeting/SubAct_GetTarget.gd",
+                    "#FrameIndex": 10,
+                    "#SubIndex": 0,
+                    "AllowAlreadyTargeted": false,
+                    "AllowAutoTarget": false,
+                    "SetTargetKey": "Target1",
+                    "TargetParamKey": "TargetParam"
+                },
+                "Heal": {
+                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Misc/SubAct_Heal.gd",
+                    "#FrameIndex": 11,
+                    "#SubIndex": 1,
+                    "TargetKey": "Target1",
+                    "Value": 25
+                },
+                "PayCost": {
+                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Misc/SubAct_PayCost.gd",
+                    "#FrameIndex": 11,
+                    "#SubIndex": 0
+                },
+                "WeaponMotionAnimation": {
+                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponMotionAnimation.gd",
+                    "#FrameIndex": 11,
+                    "#SubIndex": 2,
+                    "MainHand": true,
+                    "OffHand": "Never"
+                },
+                "WeaponReadyAnimation": {
+                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponReadyAnimation.gd",
+                    "#FrameIndex": 5,
+                    "#SubIndex": 0,
+                    "Animation": "Raise",
+                    "MainHand": true,
+                    "OffHand": "Never"
+                }
+            },
+            "TargetParams": {
+                "TargetParam": {
+                    "LineOfSight": true,
+                    "TargetArea": "[[-1,2],[0,2],[1,2],[-1,1],[0,1],[1,1],[-1,0],[1,0]]",
+                    "TargetType": "Actor"
+                }
+            }
+        },
+        "ItemDetails": {
+            "ItemType": "Page",
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "_DefVersion": "1"
+    }
+}

@@ -62,28 +62,12 @@ func set_actor(actor:BaseActor):
 		actor.equipment_changed.connect(actor_equipment_changed)
 		actor.pages.items_changed.connect(build_sub_containers)
 	_actor = actor
-	actor_equipment_changed()
+	action_input_preview.set_actor(_actor)
+	build_sub_containers()
 
 func actor_equipment_changed():
+	_sync_page_slots()
 	action_input_preview.set_actor(_actor)
-	#var ques = _actor.equipment.get_equipt_items_of_slot_type("Que")
-	#if !ques or ques.size() == 0:
-		#tit.text = "No Book!"
-		#book_icon.texture = null
-		#_current_que_item_id = null
-		#return
-	#elif ques.size() > 1:
-		#name_label.text = "2 Books?"
-		#book_icon.texture = null
-		#_current_que_item_id = null
-		#return
-	#var que:BaseQueEquipment = ques[0]
-	#if que.Id == _current_que_item_id:
-		#return
-	#_current_que_item_id = que.Id
-	#name_label.text = que.get_display_name()
-	#book_icon.texture = que.get_large_icon()
-	build_sub_containers()
 
 func build_sub_containers():
 	for container in _sub_containers.values():
@@ -172,7 +156,15 @@ func build_sub_containers():
 		scroll_dots.hide()
 	else:
 		scroll_dots.show()
-		
+
+func _sync_page_slots():
+	for index in range(_actor.pages._raw_item_slots.size()):
+		var page:BasePageItem = _actor.pages.get_item_in_slot(index)
+		if _buttons.size() > index:
+			var page_button:PageSlotButton = _buttons[index]
+			page_button.set_key(_actor, page.ItemKey)
+	pass
+
 func show_page(dot_index):
 	if _current_dot_index == dot_index:
 		return

@@ -62,6 +62,8 @@ func _sync_position():
 	var map_controller = CombatRootControl.Instance.MapController
 	if !map_controller or !map_controller.actor_tile_map:
 		return
+	if !get_viewport():
+		return
 	var mouse_pos = map_controller.get_local_mouse_position()
 	mouse_spot = map_controller.actor_tile_map.local_to_map(mouse_pos)
 	if lock_position:
