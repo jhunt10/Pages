@@ -29,13 +29,16 @@ func _ready() -> void:
 	invalid_label.hide()
 
 func set_key(actor:BaseActor, key):
-	item_key = key
+	if item_key == key:
+		return
 	if key:
+		item_key = key
 		var page = ItemLibrary.get_item(key)
 		if page is PageItemAction:
 			if page.use_equipment_icon():
 				page_icon.texture = page.get_large_page_icon(actor)
-				actor.equipment_changed.connect(_on_equipment_changed.bind(actor.Id, page.ItemKey))
+				if not actor.equipment_changed.is_connected(_on_equipment_changed):
+					actor.equipment_changed.connect(_on_equipment_changed.bind(actor.Id, page.ItemKey))
 			else:
 				var icon_texture = page.get_large_icon()
 				page_icon.texture = icon_texture
@@ -49,6 +52,7 @@ func set_key(actor:BaseActor, key):
 		else:
 			invalid_icon.hide()
 	else:
+		item_key = ''
 		invalid_icon.hide()
 		page_icon.hide()
 		page_background.hide()# = SpriteCache._get_no_sprite()

@@ -247,7 +247,7 @@ size_flags_horizontal = 3
 theme = ExtResource("4_xmy3g")
 text = "Item Description hk hbkhjhl jhlkjl ljlkj"
 
-[node name="ActionPageDetailsControl" type="Control" parent="OffsetControl/NinePatchRect/VBoxContainer" node_paths=PackedStringArray("parent_card_control", "description_box", "target_type_label", "cost_container", "range_display", "damage_label", "damage_container", "accuracy_icon", "accuracy_label", "potency_icon", "potency_label")]
+[node name="ActionPageDetailsControl" type="Control" parent="OffsetControl/NinePatchRect/VBoxContainer" node_paths=PackedStringArray("parent_card_control", "description_box", "target_type_label", "cost_container", "range_display", "damage_label", "damage_container", "accuracy_icon", "accuracy_label", "potency_icon", "potency_label", "modded_by_container", "modded_by_label")]
 layout_mode = 2
 size_flags_vertical = 3
 script = ExtResource("12_fd6vk")
@@ -262,6 +262,8 @@ accuracy_icon = NodePath("VBoxContainer/HBoxContainer2/AmmoDamageContainer/HBoxC
 accuracy_label = NodePath("VBoxContainer/HBoxContainer2/AmmoDamageContainer/HBoxContainer/AccLabel")
 potency_icon = NodePath("VBoxContainer/HBoxContainer2/AmmoDamageContainer/HBoxContainer/PotIcon")
 potency_label = NodePath("VBoxContainer/HBoxContainer2/AmmoDamageContainer/HBoxContainer/PotLabel")
+modded_by_container = NodePath("VBoxContainer/HBoxContainer2/AmmoDamageContainer/ModdedByContainer")
+modded_by_label = NodePath("VBoxContainer/HBoxContainer2/AmmoDamageContainer/ModdedByContainer/ModdedBy_SubContainer/ModdedByValueLabel")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsControl"]
 layout_mode = 1
@@ -279,6 +281,39 @@ theme_override_constants/separation = 0
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 0
+
+[node name="ModdedByContainer" type="VBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsControl/VBoxContainer/HBoxContainer2/AmmoDamageContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="ModdedBy_SubContainer" type="HBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsControl/VBoxContainer/HBoxContainer2/AmmoDamageContainer/ModdedByContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="ModdedByTitleLabel" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsControl/VBoxContainer/HBoxContainer2/AmmoDamageContainer/ModdedByContainer/ModdedBy_SubContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+theme = ExtResource("6_do8nn")
+theme_override_colors/font_color = Color(0.197937, 0.197937, 0.197937, 1)
+theme_override_font_sizes/font_size = 12
+text = "Modded By:"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="ModdedByValueLabel" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsControl/VBoxContainer/HBoxContainer2/AmmoDamageContainer/ModdedByContainer/ModdedBy_SubContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+theme = ExtResource("6_do8nn")
+theme_override_colors/font_color = Color(0.196078, 0.196078, 0.196078, 1)
+theme_override_font_sizes/font_size = 12
+text = "Modded Page Name"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="ColorRect" type="ColorRect" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsControl/VBoxContainer/HBoxContainer2/AmmoDamageContainer/ModdedByContainer"]
+self_modulate = Color(0.470588, 0, 0, 1)
+custom_minimum_size = Vector2(2, 1)
+layout_mode = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsControl/VBoxContainer/HBoxContainer2/AmmoDamageContainer"]
 layout_mode = 2
@@ -407,7 +442,6 @@ layout_mode = 2
 size_flags_vertical = 3
 
 [node name="DescriptionBox" type="RichTextLabel" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsControl/VBoxContainer/HBoxContainer"]
-clip_contents = false
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -835,7 +869,6 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 text = "Equipe"
-_size_dirty = true
 center_x = true
 
 [node name="EquipButton" type="Button" parent="OffsetControl/NinePatchRect/VBoxContainer/EquipButtonBackground"]

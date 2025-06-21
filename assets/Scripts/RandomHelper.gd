@@ -19,7 +19,14 @@ static func get_random_actor_from_list(actor_list, want_to_be_selected=false)->B
 			actor_weights[actor.Id] = 1
 	var selected_id = roll_from_set(actor_weights)
 	return actors[selected_id]
-	
+
+static func select_random_target(parent_action:PageItemAction, actor:BaseActor, selection_data:TargetSelectionData, want_to_be_selected:bool=false):
+	var options = selection_data.list_potential_targets()
+	var count = options.size()
+	if count == 0:
+		return null
+	var roll = randi() % count
+	return options[roll]
 
 # Takes a dictionary of <Key, Weight> and returns a weighted random key
 static func roll_from_set(data_set:Dictionary)->String:

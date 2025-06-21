@@ -27,3 +27,11 @@ func get_item_tags()->Array:
 	if not tags.has("Passive"):
 		tags.append("Passive")
 	return tags
+
+func get_action_mods()->Dictionary:
+	var mods = passive_data.get("ActionMods", {})
+	for key in mods.keys():
+		mods[key]["ModKey"] = key
+		mods[key]["DisplayName"] = self.get_display_name()
+		mods[key]["SourceItemId"] = self._id
+	return mods

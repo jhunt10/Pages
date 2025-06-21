@@ -5,9 +5,15 @@
         "#ObjDetails": {
             "DisplayName": "Blessing of Air",
             "LargeIcon": "Effects/Sprites/Blessing_Air.png",
-            "SmallIcon": "Effects/Sprites/Blessing_Air.png"
+            "SmallIcon": "Effects/Sprites/Blessing_Air.png",
+            "Tags":["Blessing"]
         },
         "ActionData": {
+            "AmmoData": {
+                "AmmoType": "Mag",
+                "Clip": 8,
+                "Cost": 1
+            },
             "EffectDatas": {
                 "ApplyEffect": {
                     "EffectKey": "Blessing_Air"
@@ -34,9 +40,15 @@
         "#ObjDetails": {
             "DisplayName": "Blessing of Earth",
             "LargeIcon": "Effects/Sprites/Blessing_Earth.png",
-            "SmallIcon": "Effects/Sprites/Blessing_Earth.png"
+            "SmallIcon": "Effects/Sprites/Blessing_Earth.png",
+            "Tags":["Blessing"]
         },
         "ActionData": {
+            "AmmoData": {
+                "AmmoType": "Mag",
+                "Clip": 8,
+                "Cost": 1
+            },
             "EffectDatas": {
                 "ApplyEffect": {
                     "EffectKey": "Blessing_Earth"
@@ -63,9 +75,15 @@
         "#ObjDetails": {
             "DisplayName": "Blessing of Fire",
             "LargeIcon": "Effects/Sprites/Blessing_Fire.png",
-            "SmallIcon": "Effects/Sprites/Blessing_Fire.png"
+            "SmallIcon": "Effects/Sprites/Blessing_Fire.png",
+            "Tags":["Blessing"]
         },
         "ActionData": {
+            "AmmoData": {
+                "AmmoType": "Mag",
+                "Clip": 8,
+                "Cost": 1
+            },
             "EffectDatas": {
                 "ApplyEffect": {
                     "EffectKey": "Blessing_Fire"
@@ -92,9 +110,15 @@
         "#ObjDetails": {
             "DisplayName": "Blessing of Water",
             "LargeIcon": "Effects/Sprites/Blessing_Water.png",
-            "SmallIcon": "Effects/Sprites/Blessing_Water.png"
+            "SmallIcon": "Effects/Sprites/Blessing_Water.png",
+            "Tags":["Blessing"]
         },
         "ActionData": {
+            "AmmoData": {
+                "AmmoType": "Mag",
+                "Clip": 8,
+                "Cost": 1
+            },
             "EffectDatas": {
                 "ApplyEffect": {
                     "EffectKey": "Blessing_Water"
@@ -124,6 +148,11 @@
             "SmallIcon": "Effects/Sprites/HolyArmor.png"
         },
         "ActionData": {
+            "AmmoData": {
+                "AmmoType": "Mag",
+                "Clip": 8,
+                "Cost": 1
+            },
             "EffectDatas": {
                 "ApplyEffect": {
                     "EffectKey": "HolyArmorEffect"
@@ -168,6 +197,11 @@
             "SmallIcon": "Effects/Sprites/LightAura.png"
         },
         "ActionData": {
+            "AmmoData": {
+                "AmmoType": "Mag",
+                "Clip": 8,
+                "Cost": 4
+            },
             "EffectDatas": {
                 "ApplyEffect": {
                     "EffectKey": "LightAuraEffect"
@@ -190,6 +224,11 @@
             "SmallIcon": "Effects/Sprites/AilmentGuard.png"
         },
         "ActionData": {
+            "AmmoData": {
+                "AmmoType": "Mag",
+                "Clip": 25,
+                "Cost": 4
+            },
             "EffectDatas": {
                 "ApplyEffect": {
                     "EffectKey": "NegateAilmentEffect"

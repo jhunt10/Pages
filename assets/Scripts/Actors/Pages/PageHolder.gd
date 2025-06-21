@@ -55,6 +55,7 @@ func set_page_que_item(page_que:BaseQueEquipment, validate_items:bool=true):
 
 func validate_items():
 	super()
+	_cache_action_mods()
 	class_page_changed.emit()
 
 func build_effects():
@@ -95,12 +96,60 @@ func list_actions()->Array:
 			out_list.append(item)
 	return out_list
 
-func get_action_page(action_key:String)->PageItemAction:
+func has_action(action_key:String)->bool:
+	for item_id in _raw_item_slots:
+		if item_id and item_id.begins_with(action_key + ":"):
+			return true
+	return false
+
+func list_passives()->Array:
+	var out_list = []
 	for item in list_items():
-		if item is PageItemAction and item.ActionKey == action_key:
-			return item
+		if item is PageItemPassive:
+			out_list.append(item)
+	return out_list
+
+func get_action_page(action_key:String)->PageItemAction:
+	for item_id in _raw_item_slots:
+		if item_id and item_id.begins_with(action_key):
+			var item = ItemLibrary.get_item(item_id)
+			if item is PageItemAction and item.ActionKey == action_key:
+				return item
 	return null
 
+func _cache_action_mods():
+	var actions = list_actions()
+	var passives = list_passives()
+	# Loop through Passive Pages to clear old mods
+	for action:PageItemAction in actions:
+		action.clear_action_mods()
+	
+	# Loop through Passive Pages to look for mods
+	for passive:PageItemPassive in passives:
+		var action_mods = passive.get_action_mods()
+		if action_mods.size() == 0:
+			continue
+		# Loop through mods
+		for mod_key:String in action_mods.keys():
+			var mod_data = action_mods[mod_key]
+			var conditions = mod_data.get("Conditions", {})
+			var item_keys = conditions.get("ItemKeys", [])
+			var item_tag_filters = conditions.get("TagFilters", [])
+			# Loop through actions to apply mods
+			for action:PageItemAction in actions:
+				var does_mod_apply = true
+				if item_keys.has(action.ItemKey):
+					does_mod_apply = true
+				else:
+					var action_tags = action.get_tags()
+					for filter in item_tag_filters:
+						if not SourceTagChain.filters_accept_tags(filter, action_tags):
+							does_mod_apply = false
+							break
+				# Apply Mod
+				if does_mod_apply:
+					action.add_action_mod(mod_data)
+					
 
 func _on_item_loaded(item:BaseItem):
 	var page = item as BasePageItem
@@ -125,6 +174,7 @@ func _on_item_added_to_slot(item:BaseItem, index:int):
 			var effect_key = effect_def.get("EffectKey")
 			var new_effect = EffectHelper.create_effect(_actor, item, effect_key, effect_def)
 			item_id_to_effect_id[item.Id] = new_effect.Id
+	_cache_action_mods()
 	class_page_changed.emit()
 
 func _on_item_removed_from_slot(item_id:String, index:int):
@@ -132,4 +182,5 @@ func _on_item_removed_from_slot(item_id:String, index:int):
 		var effect = EffectLibrary.get_effect(item_id_to_effect_id[item_id])
 		_actor.effects.remove_effect(effect)
 		item_id_to_effect_id.erase(item_id)
+	_cache_action_mods()
 	class_page_changed.emit()

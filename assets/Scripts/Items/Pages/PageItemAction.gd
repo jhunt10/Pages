@@ -11,16 +11,17 @@ var ActionKey:String:
 		return _key
 
 var _target_params:Dictionary
+var _init_data:Dictionary
+var _action_mods_cache:Dictionary
 
 func _init(key:String, def_load_path:String, def:Dictionary, id:String='', data:Dictionary={}) -> void:
 	super(key, def_load_path, def, id, data)
+	_init_data = data.duplicate(true)
 	# Build Target Params
 	if def.get("ActionData", {}).has('TargetParams'):
 		var targ_parms = def.get("ActionData", {}).get('TargetParams')
 		for tparm_key in targ_parms.keys():
 			_target_params[tparm_key] = TargetParameters.new(tparm_key, targ_parms[tparm_key])
-
-
 
 func get_item_tags()->Array:
 	var tags = []
@@ -28,6 +29,52 @@ func get_item_tags()->Array:
 	if not tags.has("Action"):
 		tags.append("Action")
 	return tags
+
+func save_data()->Dictionary:
+	var data = _init_data.duplicate()
+	data['ObjectKey'] = self._key
+	data['Id'] = self._id
+	return data
+
+#######################
+##   Actions Mods    ##
+#######################
+func get_action_mods_meta_data()->Dictionary:
+	return _action_mods_cache
+
+func add_action_mod(mod_data:Dictionary):
+	var mod_key = mod_data.get("ModKey")
+	if !mod_key:
+		printerr("PageItemAction.add_action_mod: No 'ModKey' found on mod_data.")
+		return
+	# Mod already added
+	if _action_mods_cache.keys().has(mod_key):
+		return
+	var mod_def_data = mod_data.get("ModdedDefData", {})
+	_action_mods_cache[mod_key] = {
+		"ModKey": mod_key,
+		"DisplayName": mod_data.get("DisplayName", mod_key),
+		"SourceItemId": mod_data.get("SourceItemId", "")
+	}
+	self._data = BaseLoadObjectLibrary._merge_defs(mod_def_data, self._data)
+	# Build Target Params
+	if mod_def_data.get("ActionData", {}).has('TargetParams'):
+		_target_params.clear()
+		var targ_parms = action_data.get('TargetParams')
+		for tparm_key in targ_parms.keys():
+			_target_params[tparm_key] = TargetParameters.new(tparm_key, targ_parms[tparm_key])
+
+func clear_action_mods():
+	var rebuild_targets = _action_mods_cache.size() > 0
+	_action_mods_cache.clear()
+	self._data = self._init_data.duplicate(true)
+	if rebuild_targets:
+		_target_params.clear()
+		var targ_parms = action_data.get('TargetParams')
+		for tparm_key in targ_parms.keys():
+			_target_params[tparm_key] = TargetParameters.new(tparm_key, targ_parms[tparm_key])
+	
+	
 
 #######################
 ##    Sub Actions    ##

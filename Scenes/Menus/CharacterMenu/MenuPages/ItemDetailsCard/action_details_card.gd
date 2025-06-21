@@ -14,6 +14,9 @@ extends Control
 @export var potency_icon:TextureRect
 @export var potency_label:Label
 
+@export var modded_by_container:Container
+@export var modded_by_label:Label
+
 var _item:BasePageItem
 var _actor:BaseActor
 
@@ -26,11 +29,13 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 
-func set_action(actor:BaseActor, page:BasePageItem):
+func set_action(actor:BaseActor, page_item:BasePageItem):
 	_actor = actor
-	_item = page
-	var action = page as PageItemAction
-	description_box.set_page_item(page, actor)
+	_item = page_item
+	var action = page_item as PageItemAction
+	if actor.pages.has_action(action.ActionKey):
+		action = actor.pages.get_action_page(action.ActionKey)
+	description_box.set_page_item(action, actor)
 	if action.has_preview_target():
 		var target_params = action.get_preview_target_params(_actor)
 		if target_params:
@@ -51,7 +56,7 @@ func set_action(actor:BaseActor, page:BasePageItem):
 	
 	if action.has_preview_damage():
 		
-		if actor and actor.pages.has_item(page.Id):
+		if actor and actor.pages.has_action(action.ActionKey):
 			var damage_datas = action.get_preview_damage_datas(actor)
 			var dam_label = damage_label
 			for dam_data in damage_datas.values():
@@ -94,6 +99,18 @@ func set_action(actor:BaseActor, page:BasePageItem):
 		potency_label.text = str(potency_mod * _actor.stats.get_stat(StatHelper.Potency))
 	else:
 		potency_label.text = str(potency_mod * 100)
+	
+	var mods_data = action.get_action_mods_meta_data()
+	if mods_data.size() > 0:
+		modded_by_container.show()
+		var display_names = []
+		for mod_data in mods_data.values():
+			var name = mod_data.get("DisplayName", "")
+			if name:
+				display_names.append(name)
+		modded_by_label.text = ", ".join(display_names)
+	else:
+		modded_by_container.hide()
 		
 
 #func on_eqiup_button_pressed():

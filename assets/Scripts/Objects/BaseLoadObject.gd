@@ -7,7 +7,6 @@ var _def:Dictionary
 var _data:Dictionary
 var is_deleted:bool = false
 
-var details:ObjectDetailsData
 var object_details:Dictionary:
 	get:
 		return get_load_val("#ObjDetails", {}, false)
@@ -21,7 +20,6 @@ func _init(key:String, def_load_path:String, def:Dictionary, id:String='', data:
 	self._def_load_path = def_load_path
 	self._def = def
 	self._data = data
-	details = ObjectDetailsData.new(self._def_load_path, self._def.get("#ObjDetails", {}))
 
 ####################
 ## Object Details ##
@@ -65,6 +63,8 @@ func get_load_path()->String:
 ## Return value from  _data  ->  _def  ->  default
 func get_load_val(key:String, default=null, duplicate_dict:bool=true):
 	var val = _data.get(key, null)
+	if self._id.begins_with("ApplyBlessing") and key == "#ObjDetails":
+		var t = true
 	if val is Dictionary:
 		val = val.duplicate(duplicate_dict)
 		if _def.has(key):

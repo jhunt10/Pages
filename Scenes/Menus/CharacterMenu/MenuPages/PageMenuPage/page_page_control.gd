@@ -162,7 +162,10 @@ func _sync_page_slots():
 		var page:BasePageItem = _actor.pages.get_item_in_slot(index)
 		if _buttons.size() > index:
 			var page_button:PageSlotButton = _buttons[index]
-			page_button.set_key(_actor, page.ItemKey)
+			if page:
+				page_button.set_key(_actor, page.ItemKey)
+			else:
+				page_button.set_key(_actor, null)
 	pass
 
 func show_page(dot_index):

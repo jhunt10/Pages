@@ -41,9 +41,9 @@ func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, metadata:
 		exclude_targets = turn_data.list_targets()
 		
 	var selection_data = TargetSelectionData.new(target_params, setting_target_key, actor, game_state, exclude_targets)
-	
+	var potential_target_count = selection_data.get_potential_target_count()
 	# No valid targets
-	if selection_data.get_potential_target_count() == 0:
+	if potential_target_count == 0:
 		VfxHelper.create_flash_text(actor, "No Target", VfxHelper.FlashTextType.NoTarget)
 		return BaseSubAction.Failed
 	
@@ -53,7 +53,7 @@ func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, metadata:
 		else:
 			return BaseSubAction.Failed 
 	
-	if allow_auto and selection_data.get_potential_target_count() == 1:
+	if allow_auto and potential_target_count == 1:
 		turn_data.add_target_for_key(setting_target_key, target_param_key, selection_data.list_potential_targets()[0])
 		return BaseSubAction.Success
 	

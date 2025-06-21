@@ -104,6 +104,107 @@
         },
         "_DefVersion": "1"
     },
+    "ChainShockSpell": {
+        "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
+        "#ObjDetails": {
+            "Description": "Send out a jolt of electrical energy modified to arch across multiple targets.\n\nMake a @@#Color:Red:Ranged Spell Attack@@ against an @@#TrgParm:TargetParam:TargetType@@ in range, dealing @@#DmgData:RangedDamage@@ on hit and @@Color:Blue:Chain@@ up to @@Color:Red:3@@ @@#Color:Red:Adj Actor@@.  20% chance to target an @@#Color:Red:Adj Actor@@ instead.",
+            "DisplayName": "Chain Shock",
+            "LargeIcon": "Sprites/ChainShock_Icon.png",
+            "SmallIcon": "Sprites/ChainShock_Icon.png",
+            "SnippetDesc": "Unleash a chain of Shock energy.",
+            "Tags": [
+                "Shock",
+                "Chain"
+            ]
+        },
+        "ActionData": {
+            "AttackDetails": {
+                "AccuracyMod": 1,
+                "AttackVfxData": {
+                    "InvertLightning": true,
+                    "ScenePath": "res://data/VFXs/DamageVFXs/Lightning/lightning_chain_vfx_node.tscn"
+                },
+                "AttackVfxKey": "LightningChainVfx",
+                "PotencyMod": 1,
+                "UseTargetAsOrigin": true
+            },
+            "DamageDatas": {
+                "RangedDamage": {
+                    "AtkPwrBase": 80,
+                    "AtkPwrRange": 30,
+                    "AtkPwrScale": 1,
+                    "AtkStat": "MagAttack",
+                    "BaseDamage": 0,
+                    "DamageType": "Shock",
+                    "DamageVfxKey": "LightningStrike_DamageEffect",
+                    "DefenseType": "AUTO"
+                }
+            },
+            "EffectDatas": {
+                "Effect1": {
+                    "ApplicationChance": 0.2,
+                    "Duration": 5,
+                    "EffectKey": "AilmentShocked"
+                }
+            },
+            "Preview": {
+                "PreviewDamageKey": "RangedDamage",
+                "PreviewTargetKey": "TargetParam"
+            },
+            "SubActions": {
+                "Attack_Chain": {
+                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Attacks/SubAct_Attack_Chain.gd",
+                    "#FrameIndex": 11,
+                    "#SubIndex": 1,
+                    "DamageKey": "RangedDamage",
+                    "TargetKey": "Target1"
+                },
+                "GetTarget_Chain": {
+                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Targeting/SubAct_GetTarget_Chain.gd",
+                    "#FrameIndex": 10,
+                    "#SubIndex": 0,
+                    "AllowAutoTarget": false,
+                    "SetTargetKey": "Target1",
+                    "TargetParamKey": "TargetParam",
+                    "AllowSelectingChain": false,
+                    "MaxChainCount": 3
+                },
+                "PayCost": {
+                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Misc/SubAct_PayCost.gd",
+                    "#FrameIndex": 11,
+                    "#SubIndex": 0
+                },
+                "WeaponMotionAnimation": {
+                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponMotionAnimation.gd",
+                    "#FrameIndex": 11,
+                    "#SubIndex": 2,
+                    "MainHand": true,
+                    "OffHand": "Never"
+                },
+                "WeaponReadyAnimation": {
+                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponReadyAnimation.gd",
+                    "#FrameIndex": 5,
+                    "#SubIndex": 0,
+                    "Animation": "Raise",
+                    "MainHand": true,
+                    "OffHand": "Never"
+                }
+            },
+            "TargetParams": {
+                "TargetParam": {
+                    "LineOfSight": true,
+                    "TargetArea": "[[-1,4],[0,4],[1,4],[-1,3],[0,3],[1,3],[-1,2],[0,2],[1,2]]",
+                    "TargetType": "Actor"
+                }
+            }
+        },
+        "ItemDetails": {
+            "ItemType": "Page",
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "_DefVersion": "1"
+    },
     "DischargeSpell": {
         "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
         "#ObjDetails": {
@@ -397,7 +498,7 @@
                     "TargetKey": "Target3"
                 },
                 "GetTargetRandom": {
-                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Targeting/SubAct_GetTargetRandom.gd",
+                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Targeting/SubAct_GetTarget_Random.gd",
                     "#FrameIndex": 1,
                     "#SubIndex": 1,
                     "AllowAlreadyTargeted": false,
@@ -405,7 +506,7 @@
                     "TargetParamKey": "TargetParam"
                 },
                 "GetTargetRandom12": {
-                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Targeting/SubAct_GetTargetRandom.gd",
+                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Targeting/SubAct_GetTarget_Random.gd",
                     "#FrameIndex": 1,
                     "#SubIndex": 2,
                     "AllowAlreadyTargeted": false,
@@ -413,7 +514,7 @@
                     "TargetParamKey": "TargetParam"
                 },
                 "GetTargetRandom13": {
-                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Targeting/SubAct_GetTargetRandom.gd",
+                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Targeting/SubAct_GetTarget_Random.gd",
                     "#FrameIndex": 1,
                     "#SubIndex": 3,
                     "AllowAlreadyTargeted": false,

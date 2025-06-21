@@ -49,7 +49,8 @@ func _hide_pop_up(data):
 		popup_container.hide()
 
 func set_page_item(page:BasePageItem, actor:BaseActor=null):
-	set_object(page._def, page, actor)
+	var merged_def = BaseLoadObjectLibrary._merge_defs(page._data, page._def)
+	set_object(merged_def, page, actor)
 
 func set_object(object_def:Dictionary, object_inst:BaseLoadObject, actor:BaseActor):
 	self.clear()

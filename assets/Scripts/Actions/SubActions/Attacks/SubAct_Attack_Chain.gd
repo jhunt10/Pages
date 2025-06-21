@@ -1,4 +1,4 @@
-class_name SubAct_Attack
+class_name SubAct_Attack_Chain
 extends BaseSubAction
 
 func get_required_props()->Dictionary:
@@ -7,10 +7,6 @@ func get_required_props()->Dictionary:
 		"DamageKey": BaseSubAction.SubActionPropTypes.DamageKey,
 		"DamageKeys": BaseSubAction.SubActionPropTypes.StringVal,
 		"EffectKeys": BaseSubAction.SubActionPropTypes.StringVal,
-		# The target must still be within range at time of attack, or "Miss"
-		"TargetMustBeInRange": BaseSubAction.SubActionPropTypes.BoolVal,
-		# Ignore Aoe area and only attack directly selected targets
-		"PrimaryTargetOnly": BaseSubAction.SubActionPropTypes.BoolVal,
 		"FailOnNoTarget": BaseSubAction.SubActionPropTypes.BoolVal,
 	}
 ## Returns Tags that are automatically added to the parent Action's Tags
@@ -32,7 +28,7 @@ func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, que_exe_d
 	# Get Target info
 	var target_key = subaction_data.get('TargetKey')
 	if !target_key:
-		printerr("SubAct_Attack: No 'TargetKey' on subaction in %s." % [parent_action.ItemKey])
+		printerr("SubAct_Attack_Chain: No 'TargetKey' on subaction in %s." % [parent_action.ItemKey])
 		return BaseSubAction.Failed
 	if not turn_data.has_target(target_key):
 		if subaction_data.get("FailOnNoTarget", true):
@@ -42,22 +38,22 @@ func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, que_exe_d
 	var target_param_key = turn_data.get_param_key_for_target(target_key)
 	var target_params = parent_action.get_targeting_params(target_param_key, actor)
 	if !target_params:
-		printerr("SubAct_Attack: Failed to find TargetParams for key %s on page %s." % [target_param_key, parent_action.ItemKey])
+		printerr("SubAct_Attack_Chain: Failed to find TargetParams for key %s on page %s." % [target_param_key, parent_action.ItemKey])
 		return BaseSubAction.Failed
+	
 	var targets_selected = turn_data.get_targets(target_key)
-	var target_must_be_in_range = subaction_data.get("TargetMustBeInRange", true)
-	var ignore_aoe = subaction_data.get("PrimaryTargetOnly", false)
 	var targets = TargetingHelper.get_targeted_actors(
 			target_params, 
 			targets_selected, 
 			actor, 
 			game_state, 
-			ignore_aoe
+			true
 		)
 	
-	var primary_target = null
-	if targets_selected.size() > 0:
-		primary_target = targets_selected[0]
+	if targets.size() == 0:
+		printerr("SubAct_Attack_Chain: No Targets found (should have failed earlier)." )
+		return BaseSubAction.Failed
+		
 	
 	# Get Effect Datas
 	var effect_keys = subaction_data.get("EffectKeys", [])
@@ -77,55 +73,41 @@ func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, que_exe_d
 	damage_datas = parent_action.get_damage_datas(actor, damage_keys)
 	var actor_pos = game_state.get_actor_pos(actor)
 	
-	# Handle special weapon logic 
-	if "damage_key" == "Weapon":
-		var weapon = actor.equipment.get_primary_weapon()
-		# Create missile for ranged weapons
-		var missile_data = (weapon as BaseWeaponEquipment).get_misile_data()
-		if missile_data:
-			_create_weapon_missile()
-			return BaseSubAction.Success
-	
 	var missed_moved_actor = false
 	var hit_any_actor = false
 	var hittable_actors = []
 	
-	for target:BaseActor in targets:
-		# Check if target is still in range since being selecting target
-		if target_must_be_in_range:
-			var target_pos = game_state.get_actor_pos(target)
-			var still_in_range = target_params.is_point_in_area(actor_pos, target_pos)
-			if not still_in_range:
-				missed_moved_actor = true
-				continue
-		else:
-			hit_any_actor = true
-		hittable_actors.append(target)
+	## Check if target is still in range since being selecting target
+	#if target_must_be_in_range:
+		#var target_pos = game_state.get_actor_pos(target)
+		#var still_in_range = target_params.is_point_in_area(actor_pos, target_pos)
+		#if not still_in_range:
+			#missed_moved_actor = true
+	#else:
+		#hit_any_actor = true
 	
+	var last_target:BaseActor = null
 	var override_origin_pos = null
-	if subaction_data.get("UsePrimaryTargetAsOrigin", false):
-		if primary_target is BaseActor or primary_target is String:
-			override_origin_pos = game_state.get_actor_pos(primary_target)
-		if primary_target is MapPos:
-			override_origin_pos = primary_target
+	for target:BaseActor in targets:
+		
+		if last_target:
+			override_origin_pos = game_state.get_actor_pos(last_target)
+		
+		var attack_event = AttackHandler.handle_attack(
+			actor, 
+			[target],
+			attack_details, 
+			damage_datas, 
+			effect_datas, 
+			tag_chain, 
+			target_params,
+			game_state,
+			override_origin_pos)
+		last_target = target
 	
-	var attack_event = AttackHandler.handle_attack(
-		actor, 
-		hittable_actors,
-		attack_details, 
-		damage_datas, 
-		effect_datas, 
-		tag_chain, 
-		target_params,
-		game_state,
-		override_origin_pos)
-	
-	if missed_moved_actor and not hit_any_actor:
-		VfxHelper.create_flash_text(actor, "Miss", VfxHelper.FlashTextType.Miss)
-	
-	print("\n---------------------------")
-	print(attack_event.serialize_self())
-	print("---------------------------\n")
+		print("\n---------------------------")
+		print(attack_event.serialize_self())
+		print("---------------------------\n")
 	
 	return BaseSubAction.Success
 	
