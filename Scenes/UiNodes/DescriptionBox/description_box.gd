@@ -222,7 +222,23 @@ func _build_bbcode_array(object_def:Dictionary, object_inst:BaseLoadObject, acto
 				var sub_lines = _parse_effect(effect_key, effect_data, prop_key, actor)
 				
 				out_arr.append_array(sub_lines)
+			'#EffLine':
+				var effect_key_data = sub_tokens[1]
+				var apply_effect_data = object_def.get("ActionData", {}).get("EffectDatas", {}).get(effect_key_data)
+				if apply_effect_data:
+					var apply_chance = apply_effect_data.get("ApplicationChance", 0)
+					var duration = apply_effect_data.get("Duration", 0)
+					out_line += str(apply_chance * 100) + "% chance to apply "
+					out_arr.append(out_line)
+					out_line = ''
 					
+					var effect_data = {}
+					var prop_key = 'Link'
+					var effect_key = apply_effect_data.get("EffectKey", "NoEffKey")
+					var sub_lines = _parse_effect(effect_key, effect_data, prop_key, actor)
+					out_arr.append_array(sub_lines)
+					out_line += " for " + str(duration) + " on hit."
+				
 			'#StatMod':
 				
 				var mod_data = {}
@@ -463,7 +479,7 @@ func _parse_effect(effect_key:String, effect_data:Dictionary, prop_key:String, a
 	var out_arr = []
 	var out_line = ''
 	if not EffectLibrary.has_effect_key(effect_key):
-		return [RED_TEXT + 'Eff Not Found' + "[/color]"]
+		return [RED_TEXT + "'" + effect_key + "' Not Found"+ "[/color]"]
 	var effect_def = EffectLibrary.get_merged_effect_def(effect_key, effect_data)
 	if prop_key == '' or prop_key == 'Description':
 		var sub_lines = _build_bbcode_array(effect_def, null, actor)

@@ -1,5 +1,5 @@
 class_name ConsumablePotion
-extends BaseConsumableItem
+extends BaseSupplyItem
 
 
 func use_in_combat(actor:BaseActor, target, game_state:GameStateData):

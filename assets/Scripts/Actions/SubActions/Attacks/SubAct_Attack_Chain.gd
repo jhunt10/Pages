@@ -88,10 +88,13 @@ func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, que_exe_d
 	
 	var last_target:BaseActor = null
 	var override_origin_pos = null
+	var target_mappings = turn_data.data_cache.get("TargetChainMaping", {})
 	for target:BaseActor in targets:
 		
-		if last_target:
-			override_origin_pos = game_state.get_actor_pos(last_target)
+		if target_mappings.keys().has(target.Id):
+			var from_actor_id = target_mappings.get(target.Id)
+			if from_actor_id:
+				override_origin_pos = game_state.get_actor_pos(from_actor_id)
 		
 		var attack_event = AttackHandler.handle_attack(
 			actor, 

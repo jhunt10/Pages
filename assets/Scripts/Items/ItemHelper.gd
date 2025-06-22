@@ -80,7 +80,7 @@ static func try_transfer_item_from_inventory_to_actor(item:BaseItem, actor:BaseA
 		#index = actor.equipment.get_first_valid_slot_for_item(item, allow_replace)
 	elif item is BasePageItem:
 		holder = actor.pages
-	elif item is BaseConsumableItem:
+	elif item is BaseSupplyItem:
 		holder = actor.items
 	if !holder:
 		return "Unknown ItemType"
@@ -119,7 +119,7 @@ static func try_transfer_item_from_actor_to_inventory(item:BaseItem, actor:BaseA
 		holder = actor.equipment
 	elif item is BasePageItem:
 		holder = actor.pages
-	elif item is BaseConsumableItem:
+	elif item is BaseSupplyItem:
 		holder = actor.items
 	if !holder:
 		return "Unknown ItemType"

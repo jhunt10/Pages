@@ -1,5 +1,5 @@
 class_name AmmoItem
-extends BaseConsumableItem
+extends BaseSupplyItem
 
 enum AmmoTypes {Gen, Phy, Mag, Abn, Limit}
 

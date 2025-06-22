@@ -2,7 +2,7 @@
     "CallShockSpell": {
         "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
         "#ObjDetails": {
-            "Description": "Release a powerful strike of electrical energy down upon your target... hopefully.\n\nMake a @@#Color:Red:Ranged Spell Attack@@ against an @@#TrgParm:TargetParam:TargetType@@ in range, dealing @@#DmgData:RangedDamage@@ on hit. 20% chance to target an @@#Color:Red:Adj Actor@@ instead.",
+            "Description": "Gather ambient energy in the @@#Color:Blue:Air@@ and release a powerful strike down upon your target or, you know, something in that general vicinity.\n\nMake a @@#Color:Red:Ranged Spell Attack@@ against an @@#TrgParm:TargetParam:TargetType@@ in range, dealing @@#DmgData:RangedDamage@@ on hit.\n\n@@#EffLine:Effect1@@\n20% chance to target an @@#Color:Red:Adj Actor@@ instead.",
             "DisplayName": "Call Shock",
             "LargeIcon": "Sprites/CallShock_Icon.png",
             "SmallIcon": "Sprites/CallShock_Icon.png",
@@ -330,6 +330,9 @@
             },
             "DamageDatas": {
                 "MissileDamage": {
+                    "AtkPwrBase": 60,
+                    "AtkPwrRange": 10,
+                    "AtkPwrScale": 1,
                     "DamageType": "Fire"
                 }
             },
@@ -559,7 +562,7 @@
         "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
         "!ParentKey": "#BaseMissileSpell",
         "#ObjDetails": {
-            "Description": "Launch a @@#Color:Iceball Missile@@ at @@#TrgParm:TargetParam:TargetType@@ in range, dealing @@#DmgData:MissileDamage@@ to @@#Color:Red:Actor@@ in @@#Color:Red:Spot@@. On impact the ball shatters launching more @@#Color:Missiles@@ at @@#Color:Red:Adj Spots@@, dealing @@#DmgData:SubMissileDamage@@ on hit.",
+            "Description": "Launch a @@#Color:Iceball Missile@@ at @@#TrgParm:TargetParam:TargetType@@ in range, dealing @@#DmgData:MissileDamage@@ to @@#Color:Red:Actor@@ in @@#Color:Red:Spot@@. On impact the ball shatters launching more @@#Color:Missiles@@ at @@#Color:Red:Adj Spots@@, dealing @@#DmgData:SubMissileDamage@@ on hit.\n\n-One of many spells banned from all professional water balloon fighting tournaments.",
             "DisplayName": "Water Ball",
             "LargeIcon": "Sprites/WaterBall_Icon.png",
             "SmallIcon": "Sprites/WaterBall_Icon.png",
@@ -673,7 +676,7 @@
     "WaterBeamSpell": {
         "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
         "#ObjDetails": {
-            "Description": "Spawn a @@#Color:Piercing Beam@@ of water in a line in front of you, dealing @@#DmgData:WaterBeamDamage@@ to @@#Color:Red:Actors@@ in range.",
+            "Description": "Spawn a @@#Color:Beam@@ of water, hitting @@#Color:Red:All Actors@@ in a @@#Color:Red:Line@@ in front of you and dealing @@#DmgData:WaterBeamDamage@@.\n\n-Also great for power washing off the blood left behind from power washing enemies.",
             "DisplayName": "Water Beam",
             "LargeIcon": "Sprites/WaterBeam.png",
             "SmallIcon": "Sprites/WaterBeam.png",

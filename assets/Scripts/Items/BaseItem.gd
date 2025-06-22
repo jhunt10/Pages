@@ -59,12 +59,12 @@ func get_cant_use_reasons(actor:BaseActor):
 	var requirment_data = get_load_val("Requirments", {})
 	var missing_requirements = {}
 	
-	#for tag in requirment_data.get("ReqTags", []):
-		#if not actor.get_tags().has(tag):
-			#if not missing_requirements.has("Tags"):
-				#missing_requirements['Tags'] = []
-			#missing_requirements['Tags'].append(tag)
-	#
+	for tag in requirment_data.get("ReqTags", []):
+		if not actor.get_tags().has(tag):
+			if not missing_requirements.has("Tags"):
+				missing_requirements['Tags'] = []
+			missing_requirements['Tags'].append(tag)
+	
 	var req_stat_data = requirment_data.get("ReqStats", {})
 	for stat_name in req_stat_data.keys():
 		var req_val = req_stat_data[stat_name]

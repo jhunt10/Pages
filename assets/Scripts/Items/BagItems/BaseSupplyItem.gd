@@ -1,4 +1,4 @@
-class_name BaseConsumableItem
+class_name BaseSupplyItem
 extends BaseItem
 
 func get_item_tags()->Array:

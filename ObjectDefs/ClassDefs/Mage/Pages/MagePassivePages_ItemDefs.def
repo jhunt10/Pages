@@ -2,20 +2,53 @@
     "ChainExtendPage": {
         "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemPassive.gd",
         "#ObjDetails": {
-            "Description": "@@#Color:Red:Chain Attacks@@ chain to @@#StatMod:MaxChainMod:Value@@ additional @@#Color:Red:Actors@@.",
+            "Description": "Through lengthy experimentaion with your @@#Color:Blue:Chain Spells@@, you've found a reliable way to channel more enery and hit more targets, without totaly vaporizing the one unlucky enough to be first in the chain.\n\n@@#Color:Red:Chain Attacks@@ can chain up to @@#StatMod:MaxChainMod:Value@@ additional @@#Color:Red:Actors@@ per use.",
             "DisplayName": "Chain Longer",
             "LargeIcon": "Sprites/ChainPlus2_Icon.png",
             "SmallIcon": "Sprites/ChainPlus2_Icon.png",
             "SnippetDesc": "+2 to Attack Chain length.",
             "Tags": [
-                "Passive"
+                "Passive",
+                "Chaining"
             ]
         },
         "EquipmentData": {
             "StatMods": {
                 "MaxChainMod": {
                     "ModType": "Add",
-                    "StatName": "MaxChainBonus",
+                    "StatName": "ChainLengthBonus",
+                    "Value": 2
+                }
+            }
+        },
+        "ItemDetails": {
+            "ItemType": "Page",
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "PassiveData": {
+        },
+        "_DefVersion": "1"
+    },
+    "ChainForkPage": {
+        "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemPassive.gd",
+        "#ObjDetails": {
+            "Description": "While reading an artical about something called \"Breadth First Search\", you were suddenly struck with a fork that someone stabbed in your back. And that gave you an idea...\n\n@@#Color:Red:Chain Attacks@@ can @@#Color:Blue:Fork@@, spliting and hitting @@#Color:Red:up to@@ @@#StatMod:MaxForkMod:Value@@ @@#Color:Red:Adj Actor@@ when adding to the @@#Color:Blue:Chain@@. This can make it easier to hit more @@#Color:Red:Actors@@, but will not increase the maximum number of @@#Color:Red:Actors@@ in the @@#Color:Blue:Chain@@.",
+            "DisplayName": "Chain Fork",
+            "LargeIcon": "Sprites/ChainFork_Icon.png",
+            "SmallIcon": "Sprites/ChainFork_Icon.png",
+            "SnippetDesc": "Chain Attacks can Fork to 2 Adj Actors.",
+            "Tags": [
+                "Passive",
+                "Chaining",
+                "Fork"
+            ]
+        },
+        "EquipmentData": {
+            "StatMods": {
+                "MaxForkMod": {
+                    "ModType": "Add",
+                    "StatName": "ChainFrokBonus",
                     "Value": 2
                 }
             }
@@ -32,7 +65,7 @@
     "ChainSelectPage": {
         "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemPassive.gd",
         "#ObjDetails": {
-            "Description": "On using a @@#Color:Red:Chain Attacks@@ you may select each @@#Color:Red:Actor@@ in the @@#Color:Red:Chain@@.",
+            "Description": "In life, we must often accept the fact that there are forces out of our control, things we will never know, and events we can never predict... unless your a mother fuck'n Wizard, bitch!\n\nOn using a @@#Color:Red:Chain Attacks@@ you may select each @@#Color:Red:Actor@@ in the @@#Color:Red:Chain@@.",
             "DisplayName": "Chain Choice",
             "LargeIcon": "Sprites/ChainSelect_Icon.png",
             "SmallIcon": "Sprites/ChainSelect_Icon.png",

@@ -22,7 +22,11 @@ func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, metadata:
 	var turn_data:TurnExecutionData = metadata.get_current_turn_data()
 	
 	var max_chain_count = subaction_data.get("MaxChainCount", 1)
-	max_chain_count += actor.stats.get_stat("MaxChainBonus", 0)
+	max_chain_count += actor.stats.get_stat("ChainLengthBonus", 0)
+	max_chain_count = 5
+	var fork_count = subaction_data.get("ForkCount", 1)
+	fork_count = 2
+	fork_count += actor.stats.get_stat("ChainForkBonus", 0)
 	var current_target_count = 0
 	
 	# Check if Target is already set
@@ -49,15 +53,6 @@ func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, metadata:
 		return BaseSubAction.Failed
 		
 	var actor_pos = game_state.get_actor_pos(actor)
-	# Override target params for chained targets
-	if current_target_count > 0:
-		target_params = TargetParameters.new(target_param_key, {
-			"LineOfSight": true,
-			"TargetArea": "[[-1,1],[0,1],[1,1],[-1,0],[1,0],[-1,-1],[0,-1],[1,-1]]",
-			"TargetType": "Actor"
-		})
-		var last_target = targets[current_target_count-1]
-		actor_pos = game_state.get_actor_pos(last_target)
 	var allow_dups = subaction_data.get("AllowAlreadyTargeted", false)
 	var allow_auto = subaction_data.get("AllowAutoTarget", false)
 	var allow_select_chain = subaction_data.get("AllowSelectingChain", false)
@@ -66,7 +61,14 @@ func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, metadata:
 	if not allow_dups:
 		exclude_targets = targets
 		
-	var selection_data = TargetSelectionData.new(target_params, setting_target_key, actor, game_state, exclude_targets, actor_pos)
+	var selection_data = TargetSelectionData.new(
+		target_params, 
+		setting_target_key, 
+		actor, 
+		game_state, 
+		exclude_targets, 
+		actor_pos
+	)
 	var potential_target_count = selection_data.get_potential_target_count()
 	# No valid targets
 	if potential_target_count == 0:
@@ -78,20 +80,39 @@ func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, metadata:
 	# Randomly select next target
 	if not allow_select_chain:
 		if current_target_count > 0:
-			# No-one to chain to
-			if potential_target_count == 0:
-				return BaseSubAction.Success
-			# Reached max chain length
-			elif current_target_count >= max_chain_count:
-				return BaseSubAction.Success
-			else:
-				var target = RandomHelper.select_random_target(parent_action, actor, selection_data)
-				if not target:
-					printerr("SubAct_GetTarget_Chain: Failed to select random target")
-					return BaseSubAction.Failed
-				turn_data.add_target_for_key(setting_target_key, target_param_key, target)
-				# Call recursive
-				return do_thing(parent_action, subaction_data, metadata, game_state, actor)
+			if not turn_data.data_cache.keys().has("TargetChainMaping"):
+				turn_data.data_cache['TargetChainMaping'] = {}
+			var target_chain = _get_target_chain(
+				parent_action, 
+				actor, 
+				targets[0], 
+				target_param_key, 
+				setting_target_key, 
+				max_chain_count, 
+				fork_count, 
+				game_state
+			)
+			for targeted_actor in target_chain.keys():
+				var from_other_target = target_chain[targeted_actor]
+				if targeted_actor == targets[0]:
+					continue
+				turn_data.add_target_for_key(setting_target_key, target_param_key, targeted_actor)
+				turn_data.data_cache["TargetChainMaping"][targeted_actor] = from_other_target
+			return BaseSubAction.Success
+			## No-one to chain to
+			#if potential_target_count == 0:
+				#return BaseSubAction.Success
+			## Reached max chain length
+			#elif current_target_count >= max_chain_count:
+				#return BaseSubAction.Success
+			#else:
+				#var possible_targets = RandomHelper.select_random_targets(parent_action, actor, selection_data, fork_count)
+				#if not possible_targets.size() == 0:
+					#printerr("SubAct_GetTarget_Chain: Failed to select random target")
+					#return BaseSubAction.Failed
+				#turn_data.add_target_for_key(setting_target_key, target_param_key, target)
+				## Call recursive
+				#return do_thing(parent_action, subaction_data, metadata, game_state, actor)
 					
 	
 	# Handle Ai
@@ -113,3 +134,30 @@ func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, metadata:
 		"TargetSelectionData": selection_data
 	})
 	return BaseSubAction.Success
+
+static func _get_target_chain(parent_action, attacker, start_actor, target_param_key, set_target_key, max_count, fork_count, game_state)->Dictionary:
+	var target_params = TargetParameters.new(target_param_key, {
+		"LineOfSight": true,
+		"TargetArea": "[[-1,1],[0,1],[1,1],[-1,0],[1,0],[-1,-1],[0,-1],[1,-1]]",
+		"TargetType": "Actor"
+	})
+	var working_targets = [start_actor]
+	var selected_targets = {start_actor: null}
+	while (working_targets.size() > 0 and selected_targets.size() < max_count):
+		var checking = working_targets[0]
+		working_targets.remove_at(0)
+		var override_pos = game_state.get_actor_pos(checking)
+		var selection_data = TargetSelectionData.new(
+			target_params, 
+			set_target_key, 
+			attacker, 
+			game_state, 
+			selected_targets.values(), 
+			override_pos
+		)
+		var next_targets = RandomHelper.select_random_targets(parent_action, attacker, selection_data, fork_count, false)
+		for next_targ in next_targets:
+			working_targets.append(next_targ)
+			if selected_targets.size() < max_count:
+				selected_targets[next_targ] = checking
+	return selected_targets

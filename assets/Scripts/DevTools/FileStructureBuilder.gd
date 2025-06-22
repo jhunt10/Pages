@@ -132,7 +132,7 @@ static func update_def_files():
 			continue
 		var obj_type = get_def_class_type(file_name, files)
 		print("%s \t|\tFileName: %s" % [obj_type, file_name])
-		update_def_file(obj_type, file)
+		update_def_file(file)
 		#break
 static func scan_def_props():
 	var files = []
@@ -157,7 +157,77 @@ static func scan_def_props():
 
 const DefVersion = "1"
 
-static func update_def_file(object_type:String, file_path):
+
+static func update_def_file(file_path):
+	var file = FileAccess.open(file_path, FileAccess.READ)
+	var text:String = file.get_as_text()
+	file.close()
+	
+	var new_defs = {}
+	var old_defs:Dictionary = JSON.parse_string(text)
+	for old_def_key in old_defs.keys():
+		var key_and_def = update_def(old_def_key, old_defs[old_def_key])
+		var new_key = key_and_def[0]
+		var new_def = key_and_def[1]
+		new_defs[new_key] = new_def
+		
+	#var save_file = FileAccess.open(file_path, FileAccess.WRITE)
+	#save_file.store_string(JSON.stringify(new_defs))
+	#save_file.close()
+
+static func update_def(def_key:String, def:Dictionary)->Array:
+	var object_details = def.get("#ObjectDetails", {})
+	var object_script = def.get("_ObjectScript", "")
+	if !object_script:
+		printerr("Missing Object Srcipt on '%s'" % [def_key])
+	# [Actor, Effect, Item] 
+	var object_type = ''
+	var leaf_type = ''
+	match object_script:
+		"res://assets/Scripts/Actors/BaseActor.gd":
+			object_type = "Actor"
+			leaf_type = "Actor"
+		"res://assets/Scripts/Actors/Effects/BaseEffect.gd":
+			object_type = "Effect"
+			leaf_type = "Effect"
+		"res://assets/Scripts/Items/BaseItem.gd":
+			object_type = "Item"
+			leaf_type = "Item"
+		"res://assets/Scripts/Items/BagItems/BaseSupplyItem.gd":
+			object_type = "Item"
+			leaf_type = "Supply"
+		"res://assets/Scripts/Items/Equipment/BaseEquipmentItem.gd":
+			object_type = "Item"
+			leaf_type = "Equipment"
+		"res://assets/Scripts/Items/Equipment/BaseArmorEquipment.gd":
+			object_type = "Item"
+			leaf_type = "Armor"
+		"res://assets/Scripts/Items/Equipment/BaseBagEquipment.gd":
+			object_type = "Item"
+			leaf_type = "Bag"
+		"res://assets/Scripts/Items/Equipment/BaseQueEquipment.gd":
+			object_type = "Item"
+			leaf_type = "Que"
+		"res://assets/Scripts/Items/Equipment/BaseWeaponEquipment.gd":
+			object_type = "Item"
+			leaf_type = "Weapon"
+		"res://assets/Scripts/Items/Pages/BasePageItem.gd":
+			object_type = "Item"
+			leaf_type = "Page"
+		"res://assets/Scripts/Items/Pages/PageItemAction.gd":
+			object_type = "Item"
+			leaf_type = "Action"
+		"res://assets/Scripts/Items/Pages/PageItemPassive.gd":
+			object_type = "Item"
+			leaf_type = "Passive"
+	if !object_type or !leaf_type:
+		printerr("Unknown Script Type for '%s': %s" % [def_key, object_script])
+	
+	return [def_key, def]
+
+
+# First update function
+static func update_def_json_file(object_type:String, file_path):
 	var file = FileAccess.open(file_path, FileAccess.READ)
 	var text:String = file.get_as_text()
 	file.close()
@@ -346,7 +416,7 @@ static func update_def_file(object_type:String, file_path):
 	var meta_file = FileAccess.open(new_file_path, FileAccess.WRITE)
 	meta_file.store_string(JSON.stringify(new_defs))
 	meta_file.close()
-	DirAccess.remove_absolute(file_path)
+	#DirAccess.remove_absolute(file_path)
 
 static func scan_props(file_path)->Array:
 	var file = FileAccess.open(file_path, FileAccess.READ)

@@ -20,12 +20,27 @@ static func get_random_actor_from_list(actor_list, want_to_be_selected=false)->B
 	var selected_id = roll_from_set(actor_weights)
 	return actors[selected_id]
 
-static func select_random_target(parent_action:PageItemAction, actor:BaseActor, selection_data:TargetSelectionData, want_to_be_selected:bool=false):
+static func select_random_targets(parent_action:PageItemAction, actor:BaseActor, selection_data:TargetSelectionData, select_count:int, want_to_be_selected:bool=false)->Array:
+	var out_array = []
 	var options = selection_data.list_potential_targets()
-	var count = options.size()
-	if count == 0:
-		return null
-	var roll = randi() % count
+	if options.size() == 0:
+		return out_array
+	while out_array.size() < select_count and options.size() > 0:
+		var roll = randi() % options.size()
+		out_array.append(options[roll])
+		options.remove_at(roll)
+	return out_array
+	
+
+static func select_random_target(parent_action:PageItemAction, actor:BaseActor, selection_data:TargetSelectionData, want_to_be_selected:bool=false):
+	var out_array = []
+	var options = selection_data.list_potential_targets()
+	if options.size() == 0:
+		return null#out_array
+	#while out_array.size() < select_count and options.size() > 0:
+	var roll = randi() % options.size()
+		#out_array.append(options[roll])
+		#options.remove_at(roll)
 	return options[roll]
 
 # Takes a dictionary of <Key, Weight> and returns a weighted random key
