@@ -37,7 +37,7 @@ func _load_mini_details():
 	tags_label.text = ", ".join(thing_tags)
 	
 	# Set Icon (validate rareaty
-	var type_str = page.item_details.get("Rarity", null)
+	var type_str = page.item_data.get("Rarity", null)
 	if type_str and BaseItem.ItemRarity.keys().has(type_str):
 		icon_background.texture = page.get_rarity_background()
 	icon.texture = page.get_large_icon()

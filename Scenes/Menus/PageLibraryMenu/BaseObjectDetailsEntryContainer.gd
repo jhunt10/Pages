@@ -95,7 +95,7 @@ func _load_mini_details():
 	var icon_sprite = SpriteCache.get_sprite(thing_load_path.path_join(icon_path), false)
 	icon.texture = icon_sprite
 	
-	var type_str = thing_def.get("ItemDetails", {}).get("Rarity", null)
+	var type_str = thing_def.get("ItemData", {}).get("Rarity", null)
 	if type_str and BaseItem.ItemRarity.keys().has(type_str):
 		icon_background.texture = ItemHelper.get_rarity_background(type_str)
 

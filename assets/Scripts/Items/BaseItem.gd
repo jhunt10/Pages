@@ -19,9 +19,9 @@ var inventory_path:String:
 	get:
 		return get_load_val("InventoryPath", "")
 
-var item_details:Dictionary:
+var item_data:Dictionary:
 	get:
-		return _def.get("ItemDetails", {})
+		return _def.get("ItemData", {})
 
 func _init(key:String, def_load_path:String, def:Dictionary, id:String='', data:Dictionary={}) -> void:
 	super(key, def_load_path, def, id, data)
@@ -30,7 +30,7 @@ func save_me()->bool:
 	return true
 
 func get_item_type()->ItemTypes:
-	var item_type_str = item_details.get("ItemType", null)
+	var item_type_str = item_data.get("ItemType", null)
 	if item_type_str and ItemTypes.keys().has(item_type_str):
 		return ItemTypes.get(item_type_str)
 	else:
@@ -38,7 +38,7 @@ func get_item_type()->ItemTypes:
 	return ItemTypes.KeyItem
 
 func get_item_rarity()->ItemRarity:
-	var type_str = item_details.get("Rarity", null)
+	var type_str = item_data.get("Rarity", null)
 	if type_str and ItemRarity.keys().has(type_str):
 		return ItemRarity.get(type_str)
 	else:
@@ -46,7 +46,7 @@ func get_item_rarity()->ItemRarity:
 	return ItemRarity.Mundane
 
 func get_item_value()->int:
-	return item_details.get("Value", 0)
+	return item_data.get("Value", 0)
 
 func get_item_tags()->Array:
 	return get_tags()
@@ -56,54 +56,9 @@ func get_rarity_background()->Texture2D:
 
 ## Returns a diction of failed requirements, mapped by requirment type 
 func get_cant_use_reasons(actor:BaseActor):
-	var requirment_data = get_load_val("Requirments", {})
 	var missing_requirements = {}
 	
-	for tag in requirment_data.get("ReqTags", []):
-		if not actor.get_tags().has(tag):
-			if not missing_requirements.has("Tags"):
-				missing_requirements['Tags'] = []
-			missing_requirements['Tags'].append(tag)
-	
-	var req_stat_data = requirment_data.get("ReqStats", {})
-	for stat_name in req_stat_data.keys():
-		var req_val = req_stat_data[stat_name]
-		var stat_val = actor.stats.get_stat(stat_name)
-		if stat_val < req_val:
-			if not missing_requirements.has("Stats"):
-				missing_requirements['Stats'] = {}
-			missing_requirements['Stats'][stat_name] = req_val
-	
-	var req_equipment_data = requirment_data.get("ReqEquip", {})
-	for weapon_filter in req_equipment_data.get("WeaponFilters", []):
-		var weapons = actor.equipment.get_filtered_weapons(weapon_filter)
-		if weapons.size() == 0:
-			if not missing_requirements.has("Equipment"):
-				missing_requirements['Equipment'] = []
-			var weapon_slots = weapon_filter.get("IncludeSlots", [])
-			if weapon_slots.size() == 1:
-				missing_requirements['Equipment'].append(weapon_slots[0] + " Weapon")
-			else:
-				missing_requirements['Equipment'].append("Weapon")
-	for slot_name in req_equipment_data.get("SlotToTag", {}).keys():
-		var req_tag = req_equipment_data[slot_name]
-		var equipt_items = actor.equipment.get_equipt_items_of_slot_type(slot_name)
-		if req_tag == "Any" and equipt_items.size() > 0:
-			continue
-		var has_tag = false
-		for equipt_item:BaseEquipmentItem in equipt_items:
-			if equipt_item.get_item_tags().has(req_tag):
-				has_tag = true
-				break
-		if not has_tag:
-			if not missing_requirements.has("Equipment"):
-				missing_requirements['Equipment'] = []
-			if req_tag == "Any":
-				missing_requirements['Equipment'].append(slot_name)
-			else:
-				missing_requirements['Equipment'].append(req_tag)
 	return missing_requirements
-	return {}
 
 func get_passive_stat_mods()->Array:
 	return []

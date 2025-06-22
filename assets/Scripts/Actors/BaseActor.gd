@@ -227,7 +227,7 @@ func die():
 				var tokens = item_key.split(':')
 				item_key = "MoneyItem"
 				var item = ItemHelper.spawn_item(item_key, {}, map_pos)
-				item.item_details['Value'] = int(tokens[1])
+				item.item_data['Value'] = int(tokens[1])
 			else:
 				ItemHelper.spawn_item(item_key, {}, map_pos)
 	on_death.emit()

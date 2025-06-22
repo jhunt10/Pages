@@ -55,7 +55,7 @@ func _on_lsit_selected(index:int):
 	if index == 3:
 		for item_id in ItemLibrary.Instance._static_objects.keys():
 			var item = ItemLibrary.get_item(item_id)
-			if item.item_details.get("ItemType", "") == "Page":
+			if item.item_data.get("ItemType", "") == "Page":
 				add_label("Action", item_id)
 
 func add_label(type, text):

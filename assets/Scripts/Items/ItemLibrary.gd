@@ -14,7 +14,7 @@ func get_def_file_sufix()->String:
 func get_data_file_sufix()->String:
 	return "_ItemSave.json"
 func is_object_static(object_def:Dictionary)->bool:
-	#if object_def.get("ItemDetails", {}).get("ItemType", "") == "Page":
+	#if object_def.get("ItemData", {}).get("ItemType", "") == "Page":
 		#return true
 	return object_def.get("IsStatic", false)
 

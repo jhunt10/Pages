@@ -171,12 +171,11 @@ static func update_def_file(file_path):
 		var new_def = key_and_def[1]
 		new_defs[new_key] = new_def
 		
-	#var save_file = FileAccess.open(file_path, FileAccess.WRITE)
-	#save_file.store_string(JSON.stringify(new_defs))
-	#save_file.close()
+	var save_file = FileAccess.open(file_path, FileAccess.WRITE)
+	save_file.store_string(JSON.stringify(new_defs))
+	save_file.close()
 
 static func update_def(file_path:String, def_key:String, def:Dictionary)->Array:
-	var object_details = def.get("#ObjectDetails", {})
 	var object_script = def.get("!ObjectScript", "")
 	# [Actor, Effect, Item] 
 	var object_type = ''
@@ -229,7 +228,7 @@ static func update_def(file_path:String, def_key:String, def:Dictionary)->Array:
 			taxonomy = ["Item", "Equipment", "Page", "Action"]
 		"res://assets/Scripts/Items/Pages/PageItemPassive.gd":
 			object_type = "Item"
-			taxonomy = ["Item", "Equipment", "Passive"]
+			taxonomy = ["Item", "Equipment", "Page", "Passive"]
 			
 	if file_path.ends_with("EffectDefs.def"):
 		object_type = "Effect"
@@ -244,11 +243,41 @@ static func update_def(file_path:String, def_key:String, def:Dictionary)->Array:
 		printerr("Missing Object Srcipt on '%s'>'%s' : %s" % [def_key, file_path])
 	if !object_type or taxonomy.size() == 0:
 		printerr("Unknown Script Type for '%s'>'%s': %s : %s" % [def_key, object_script, file_path])
-	
+	var object_details = def.get("#ObjDetails", {})
 	object_details["ObjectType"] = object_type
 	object_details["Taxonomy"] = taxonomy
 	if not def.has("!ObjectScript"):
 		def["!ObjectScript"] = object_script
+	if def.has("ItemDetails"):
+		def['ItemData'] = def['ItemDetails']
+		def.erase("ItemDetails")
+	def.erase('#ObjectDetails')
+	
+	if taxonomy.has("Page"):
+		var title = ''
+		if file_path.contains("ClassDef/Mage/"):
+			title = "Mage"
+		elif file_path.contains("ClassDef/Priest/"):
+			title = "Priest"
+		elif file_path.contains("ClassDef/Rogue/"):
+			title = "Rogue"
+		elif file_path.contains("ClassDef/Soldier/"):
+			title = "Soldier"
+		
+		var title_req = ''
+		if title:
+			title_req = 'Match'
+		
+		var page_data = {
+			"SourceTitle": title,
+			"Requirments": {
+				# [''(No Req) | Same | Inherate | Shared ]
+				"TitleReq": title_req,
+				"IncompatiblePages": [],
+				"ConflictingPages": []
+			}
+		}
+	
 	#print(def_key)
 	return [def_key, def]
 

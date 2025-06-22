@@ -127,7 +127,7 @@ func _build_object_entry(obj_def:Dictionary, obj_inst:BaseLoadObject, load_path:
 	if obj_def.has("ActorKey"):
 		key = obj_def.get("ActorKey")
 		entry_scene = _get_object_entry_scene("Actor")
-	elif obj_def.get("ItemDetails", {}).get("ItemType") == "Page":
+	elif obj_def.get("ItemData", {}).get("ItemType") == "Page":
 		key = obj_def.get("ItemKey")
 		entry_scene = _get_object_entry_scene("Page")
 	elif obj_def.has("ItemKey"):
@@ -203,7 +203,7 @@ func _on_cat_button_pressed():
 				if not actor_check_box.button_pressed:
 					entry.hide()
 					continue
-			if entry.thing_def.get("ItemDetails", {}).get("ItemType", "") == "Page":
+			if entry.thing_def.get("ItemData", {}).get("ItemType", "") == "Page":
 				if not action_check_box.button_pressed:
 					entry.hide()
 					continue

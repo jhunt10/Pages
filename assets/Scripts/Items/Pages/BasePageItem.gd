@@ -20,12 +20,30 @@ func get_item_tags()->Array:
 
 ## Returns a diction of failed requirements, mapped by requirment type 
 func get_cant_use_reasons(actor:BaseActor):
-	var requirment_data = get_load_val("Requirments", {})
+	var requirment_data = page_data.get("Requirments", {})
 	var missing_requirements = super(actor)
 	
-	for tag in requirment_data.get("ReqTags", []):
-		if not actor.get_tags().has(tag):
+	var title_req = requirment_data.get("TitleReq", '')
+	var source_title = page_data.get("SourceTitle", '')
+	if source_title != '' and title_req == "Match":
+		if !actor.get_tags().has(source_title):
 			if not missing_requirements.has("Tags"):
 				missing_requirements['Tags'] = []
-			missing_requirements['Tags'].append(tag)
+			missing_requirements['Tags'].append(source_title)
 	
+	# Conflicting pages are not allowed to be used together
+	for other_page_key in requirment_data.get("ConflictingPages", []):
+		if actor.pages.has_item(other_page_key):
+			if not missing_requirements.has("Conflict"):
+				missing_requirements['Conflict'] = []
+			missing_requirements['Conflict'].append(other_page_key)
+	
+	# Incompatible pages will break if both used together
+	for other_page_key in requirment_data.get("IncompatiblePages", []):
+		if actor.pages.has_item(other_page_key):
+			if not missing_requirements.has("Conflict"):
+				missing_requirements['Conflict'] = []
+			missing_requirements['Conflict'].append(other_page_key)
+	
+	return missing_requirements
+			
