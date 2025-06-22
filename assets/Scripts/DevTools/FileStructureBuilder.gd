@@ -123,16 +123,16 @@ static func get_def_class_type(file_name, other_files)->String:
 static func update_def_files():
 	var files = []
 	print("\n Updating Files:")
-	files.append_array(BaseLoadObjectLibrary._search_for_files("res://ObjectDefs/", "Defs.json"))
+	files.append_array(BaseLoadObjectLibrary._search_for_files("res://ObjectDefs/", "Defs.def"))
 	#files.append_array(BaseLoadObjectLibrary._search_for_files("res://defs/", "Defs.json"))
 	#files.append_array(BaseLoadObjectLibrary._search_for_files("res://data/", "Defs.json"))
 	for file:String in files:
-		var file_name = file.get_file()
-		if file_name.contains("ActionPages_ItemDefs.json"):
-			continue
-		var obj_type = get_def_class_type(file_name, files)
-		print("%s \t|\tFileName: %s" % [obj_type, file_name])
 		update_def_file(file)
+		#var file_name = file.get_file()
+		#if file_name.contains("ActionPages_ItemDefs.json"):
+			#continue
+		#var obj_type = get_def_class_type(file_name, files)
+		#print("%s \t|\tFileName: %s" % [obj_type, file_name])
 		#break
 static func scan_def_props():
 	var files = []
@@ -166,7 +166,7 @@ static func update_def_file(file_path):
 	var new_defs = {}
 	var old_defs:Dictionary = JSON.parse_string(text)
 	for old_def_key in old_defs.keys():
-		var key_and_def = update_def(old_def_key, old_defs[old_def_key])
+		var key_and_def = update_def(file_path, old_def_key, old_defs[old_def_key])
 		var new_key = key_and_def[0]
 		var new_def = key_and_def[1]
 		new_defs[new_key] = new_def
@@ -175,54 +175,81 @@ static func update_def_file(file_path):
 	#save_file.store_string(JSON.stringify(new_defs))
 	#save_file.close()
 
-static func update_def(def_key:String, def:Dictionary)->Array:
+static func update_def(file_path:String, def_key:String, def:Dictionary)->Array:
 	var object_details = def.get("#ObjectDetails", {})
-	var object_script = def.get("_ObjectScript", "")
-	if !object_script:
-		printerr("Missing Object Srcipt on '%s'" % [def_key])
+	var object_script = def.get("!ObjectScript", "")
 	# [Actor, Effect, Item] 
 	var object_type = ''
-	var leaf_type = ''
+	var taxonomy = []
 	match object_script:
 		"res://assets/Scripts/Actors/BaseActor.gd":
 			object_type = "Actor"
-			leaf_type = "Actor"
+			taxonomy = ["Actor"]
+			
 		"res://assets/Scripts/Actors/Effects/BaseEffect.gd":
 			object_type = "Effect"
-			leaf_type = "Effect"
+			taxonomy = ["Effect"]
+			
 		"res://assets/Scripts/Items/BaseItem.gd":
 			object_type = "Item"
-			leaf_type = "Item"
+			taxonomy = ["Item"]
+			
 		"res://assets/Scripts/Items/BagItems/BaseSupplyItem.gd":
 			object_type = "Item"
-			leaf_type = "Supply"
+			taxonomy = ["Item", "Supply"]
+			
+		"res://assets/Scripts/Items/BagItems/AmmoItem.gd":
+			object_type = "Item"
+			taxonomy = ["Item", "Supply", "Ammo"]
+			
+		"res://assets/Scripts/Items/BagItems/ConsumablePotion.gd":
+			object_type = "Item"
+			taxonomy = ["Item", "Supply", "Potion"]
+			
 		"res://assets/Scripts/Items/Equipment/BaseEquipmentItem.gd":
 			object_type = "Item"
-			leaf_type = "Equipment"
+			taxonomy = ["Item", "Equipment"]
 		"res://assets/Scripts/Items/Equipment/BaseArmorEquipment.gd":
 			object_type = "Item"
-			leaf_type = "Armor"
+			taxonomy = ["Item", "Equipment", "Armor"]
 		"res://assets/Scripts/Items/Equipment/BaseBagEquipment.gd":
 			object_type = "Item"
-			leaf_type = "Bag"
+			taxonomy = ["Item", "Equipment", "Bag"]
 		"res://assets/Scripts/Items/Equipment/BaseQueEquipment.gd":
 			object_type = "Item"
-			leaf_type = "Que"
+			taxonomy = ["Item", "Equipment", "Book"]
 		"res://assets/Scripts/Items/Equipment/BaseWeaponEquipment.gd":
 			object_type = "Item"
-			leaf_type = "Weapon"
+			taxonomy = ["Item", "Equipment", "Weapon"]
 		"res://assets/Scripts/Items/Pages/BasePageItem.gd":
 			object_type = "Item"
-			leaf_type = "Page"
+			taxonomy = ["Item", "Equipment", "Page"]
 		"res://assets/Scripts/Items/Pages/PageItemAction.gd":
 			object_type = "Item"
-			leaf_type = "Action"
+			taxonomy = ["Item", "Equipment", "Page", "Action"]
 		"res://assets/Scripts/Items/Pages/PageItemPassive.gd":
 			object_type = "Item"
-			leaf_type = "Passive"
-	if !object_type or !leaf_type:
-		printerr("Unknown Script Type for '%s': %s" % [def_key, object_script])
+			taxonomy = ["Item", "Equipment", "Passive"]
+			
+	if file_path.ends_with("EffectDefs.def"):
+		object_type = "Effect"
+		taxonomy = ["Effect"]
+		object_script = "res://assets/Scripts/Actors/Effects/BaseEffect.gd"
+	if file_path.ends_with("ActorDefs.def"):
+		object_type = "Actor"
+		taxonomy = ["Actor"]
+		object_script = "res://assets/Scripts/Actors/BaseActor.gd"
+		
+	if !object_script:
+		printerr("Missing Object Srcipt on '%s'>'%s' : %s" % [def_key, file_path])
+	if !object_type or taxonomy.size() == 0:
+		printerr("Unknown Script Type for '%s'>'%s': %s : %s" % [def_key, object_script, file_path])
 	
+	object_details["ObjectType"] = object_type
+	object_details["Taxonomy"] = taxonomy
+	if not def.has("!ObjectScript"):
+		def["!ObjectScript"] = object_script
+	#print(def_key)
 	return [def_key, def]
 
 
