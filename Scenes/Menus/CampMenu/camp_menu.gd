@@ -98,9 +98,7 @@ func _on_explore_button():
 	MainRootNode.Instance.open_map_selection_menu()
 
 func _on_prepare_button():
-	var actor = StoryState.get_player_actor()
-	if actor:
-		MainRootNode.Instance.open_character_sheet(actor)
+	MainRootNode.Instance.open_character_sheet()
 
 func _on_records():
 	var new_cards:TutorialCardsController = load("res://Scenes/TutorialCards/tutorial_cards.tscn").instantiate()

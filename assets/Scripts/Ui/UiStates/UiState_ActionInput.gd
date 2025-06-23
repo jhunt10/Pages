@@ -19,7 +19,7 @@ func start_state():
 	if first_actor_index < 0:
 		var living_actors =CombatRootControl.list_player_actors()
 		if living_actors.size() > 0:
-			first_actor_index = StoryState.get_player_index_of_actor(living_actors[0])
+			first_actor_index = CombatRootControl.Instance.get_player_index_of_actor(living_actors[0])
 			CombatRootControl.Instance.set_player_index(first_actor_index)
 			CombatRootControl.Instance.ui_control.que_input.showing = true
 
@@ -36,7 +36,7 @@ func handle_input(event):
 		if mouse_over_actors.size() > 0:
 			for actor:BaseActor in mouse_over_actors:
 				if actor.is_player:
-					var index = StoryState.get_player_index_of_actor(actor)
+					var index = CombatRootControl.Instance.get_player_index_of_actor(actor)
 					if index >= 0:
 						CombatRootControl.Instance.set_player_index(index)
 			#var actor:BaseActor = mouse_over_actors[0]

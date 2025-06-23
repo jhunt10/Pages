@@ -1,16 +1,13 @@
-[gd_scene load_steps=57 format=3 uid="uid://ciah50qt3htui"]
+[gd_scene load_steps=54 format=3 uid="uid://ib08wcyrqims"]
 
 [ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/character_menu_control.gd" id="1_b43ae"]
-[ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/player_tab_butotn.gd" id="2_758lj"]
 [ext_resource type="Texture2D" uid="uid://mpwjrtfjnbth" path="res://Scenes/Menus/CharacterMenu/BookBackground.png" id="2_ny2th"]
 [ext_resource type="Texture2D" uid="uid://c46ah48rf6j3w" path="res://Scenes/Menus/CharacterMenu/TabBackground.png" id="3_ktt5q"]
-[ext_resource type="Texture2D" uid="uid://cqg0xisf2en6e" path="res://Scenes/Menus/CharacterMenu/ActorTabBackground.png" id="4_tyxgi"]
+[ext_resource type="PackedScene" uid="uid://lby2lub0vv8s" path="res://Scenes/Menus/CharacterMenu/PlayerTabs/player_tab_button.tscn" id="3_pmhjk"]
 [ext_resource type="Texture2D" uid="uid://jwg5aqbw71la" path="res://assets/Sprites/UI/CharacterEdit/MainHandSlot.png" id="4_xk513"]
-[ext_resource type="Script" path="res://Scenes/UiNodes/FitScaleLabel/fit_scale_label.gd" id="5_am84p"]
 [ext_resource type="Texture2D" uid="uid://bkps664mkkmfn" path="res://assets/Sprites/UI/DevTools/small_x.png" id="5_o0bpc"]
 [ext_resource type="Texture2D" uid="uid://bof4jswuf8op1" path="res://Scenes/Menus/CharacterMenu/InventoryTabIcon.png" id="6_4s47y"]
 [ext_resource type="Texture2D" uid="uid://wu75tejgoo7m" path="res://assets/Sprites/UI/CharacterEdit/BookSlot.png" id="6_qgkgg"]
-[ext_resource type="Texture2D" uid="uid://f5dyomv4wwn1" path="res://assets/Sprites/UI/SymbolIcons/InvalidEquipmentIcon.png" id="6_reois"]
 [ext_resource type="Texture2D" uid="uid://dufhnrnqg20hj" path="res://Scenes/Menus/CharacterMenu/StatsTabIcon.png" id="7_es420"]
 [ext_resource type="Texture2D" uid="uid://co33b1qq2uef7" path="res://assets/Sprites/UI/CharacterEdit/BagSlot.png" id="7_t340l"]
 [ext_resource type="PackedScene" uid="uid://dmlpvjyai521d" path="res://Scenes/Menus/CharacterMenu/MenuPages/InventoryPage/equipt_inventory_container.tscn" id="8_6gqbj"]
@@ -54,7 +51,7 @@
 [ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/inv_filter_tabs_control.gd" id="43_ercvn"]
 [ext_resource type="Texture2D" uid="uid://7lffl3feh6kl" path="res://Scenes/Menus/CharacterMenu/TabBackground_Small.png" id="43_gi4es"]
 [ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/InventoryPage/sub_inventory_tab.gd" id="44_vhgyr"]
-[ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/actor_selector_control.gd" id="50_wjl1b"]
+[ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/PlayerTabs/actor_selector_control.gd" id="50_wjl1b"]
 
 [sub_resource type="GDScript" id="GDScript_rvisf"]
 script/source = "extends TextureRect
@@ -125,15 +122,12 @@ grow_vertical = 2
 pivot_offset = Vector2(300, 210)
 mouse_filter = 1
 
-[node name="ActorSelectorControl" type="Control" parent="ScaleControl" node_paths=PackedStringArray("actor_1_button", "actor_2_button", "actor_3_button", "actor_4_button")]
+[node name="ActorSelectorControl" type="Control" parent="ScaleControl" node_paths=PackedStringArray("buttons_container")]
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("50_wjl1b")
-actor_1_button = NodePath("HBoxContainer/PlayerTabButton")
-actor_2_button = NodePath("HBoxContainer/PlayerTabButton2")
-actor_3_button = NodePath("HBoxContainer/PlayerTabButton3")
-actor_4_button = NodePath("HBoxContainer/PlayerTabButton4")
+buttons_container = NodePath("HBoxContainer")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="ScaleControl/ActorSelectorControl"]
 layout_mode = 0
@@ -142,297 +136,8 @@ offset_top = -22.0
 offset_right = 285.0
 offset_bottom = 26.0
 
-[node name="PlayerTabButton" type="Control" parent="ScaleControl/ActorSelectorControl/HBoxContainer" node_paths=PackedStringArray("button_texture", "button_label", "button", "invalid_icon")]
-custom_minimum_size = Vector2(64, 0)
+[node name="PlayerTabButton" parent="ScaleControl/ActorSelectorControl/HBoxContainer" instance=ExtResource("3_pmhjk")]
 layout_mode = 2
-script = ExtResource("2_758lj")
-top_hight = 8
-button_texture = NodePath("PTabButton")
-button_label = NodePath("PTabButton/HBoxContainer/FitScaleLabel")
-button = NodePath("PTabButton/Button")
-invalid_icon = NodePath("PTabButton/HBoxContainer/IconControl")
-
-[node name="PTabButton" type="TextureRect" parent="ScaleControl/ActorSelectorControl/HBoxContainer/PlayerTabButton"]
-self_modulate = Color(0.466667, 0.360784, 1, 1)
-layout_mode = 2
-offset_right = 64.0
-offset_bottom = 48.0
-theme = ExtResource("12_dy5pv")
-texture = ExtResource("4_tyxgi")
-
-[node name="HBoxContainer" type="HBoxContainer" parent="ScaleControl/ActorSelectorControl/HBoxContainer/PlayerTabButton/PTabButton"]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-offset_left = 4.0
-offset_top = 4.0
-offset_right = -4.0
-offset_bottom = 20.0
-grow_horizontal = 2
-theme_override_constants/separation = -1
-
-[node name="FitScaleLabel" type="Control" parent="ScaleControl/ActorSelectorControl/HBoxContainer/PlayerTabButton/PTabButton/HBoxContainer" node_paths=PackedStringArray("label")]
-layout_mode = 2
-size_flags_horizontal = 3
-script = ExtResource("5_am84p")
-label = NodePath("Label")
-text = "Soldier"
-center_x = true
-
-[node name="Label" type="Label" parent="ScaleControl/ActorSelectorControl/HBoxContainer/PlayerTabButton/PTabButton/HBoxContainer/FitScaleLabel"]
-layout_mode = 0
-offset_left = 4.0
-offset_right = 62.0
-offset_bottom = 20.0
-scale = Vector2(0.8, 0.8)
-text = "Soldier"
-horizontal_alignment = 1
-
-[node name="IconControl" type="Control" parent="ScaleControl/ActorSelectorControl/HBoxContainer/PlayerTabButton/PTabButton/HBoxContainer"]
-visible = false
-custom_minimum_size = Vector2(8, 16)
-layout_mode = 2
-
-[node name="InvalidIcon" type="TextureRect" parent="ScaleControl/ActorSelectorControl/HBoxContainer/PlayerTabButton/PTabButton/HBoxContainer/IconControl"]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = 2.0
-offset_right = -2.0
-offset_bottom = -2.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("6_reois")
-expand_mode = 3
-
-[node name="Button" type="Button" parent="ScaleControl/ActorSelectorControl/HBoxContainer/PlayerTabButton/PTabButton"]
-self_modulate = Color(1, 1, 1, 0)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="PlayerTabButton2" type="Control" parent="ScaleControl/ActorSelectorControl/HBoxContainer" node_paths=PackedStringArray("button_texture", "button_label", "button", "invalid_icon")]
-custom_minimum_size = Vector2(64, 0)
-layout_mode = 2
-script = ExtResource("2_758lj")
-top_hight = 8
-button_texture = NodePath("PTabButton")
-button_label = NodePath("PTabButton/HBoxContainer/FitScaleLabel")
-button = NodePath("PTabButton/Button")
-invalid_icon = NodePath("PTabButton/HBoxContainer/IconControl")
-
-[node name="PTabButton" type="TextureRect" parent="ScaleControl/ActorSelectorControl/HBoxContainer/PlayerTabButton2"]
-self_modulate = Color(0.466667, 0.360784, 1, 1)
-layout_mode = 2
-offset_right = 64.0
-offset_bottom = 48.0
-theme = ExtResource("12_dy5pv")
-texture = ExtResource("4_tyxgi")
-
-[node name="HBoxContainer" type="HBoxContainer" parent="ScaleControl/ActorSelectorControl/HBoxContainer/PlayerTabButton2/PTabButton"]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-offset_left = 4.0
-offset_top = 4.0
-offset_right = -4.0
-offset_bottom = 20.0
-grow_horizontal = 2
-theme_override_constants/separation = -1
-
-[node name="FitScaleLabel" type="Control" parent="ScaleControl/ActorSelectorControl/HBoxContainer/PlayerTabButton2/PTabButton/HBoxContainer" node_paths=PackedStringArray("label")]
-layout_mode = 2
-size_flags_horizontal = 3
-script = ExtResource("5_am84p")
-label = NodePath("Label")
-text = "Soldier"
-center_x = true
-
-[node name="Label" type="Label" parent="ScaleControl/ActorSelectorControl/HBoxContainer/PlayerTabButton2/PTabButton/HBoxContainer/FitScaleLabel"]
-layout_mode = 0
-offset_left = 4.0
-offset_right = 62.0
-offset_bottom = 20.0
-scale = Vector2(0.8, 0.8)
-text = "Soldier"
-horizontal_alignment = 1
-
-[node name="IconControl" type="Control" parent="ScaleControl/ActorSelectorControl/HBoxContainer/PlayerTabButton2/PTabButton/HBoxContainer"]
-visible = false
-custom_minimum_size = Vector2(8, 16)
-layout_mode = 2
-
-[node name="InvalidIcon" type="TextureRect" parent="ScaleControl/ActorSelectorControl/HBoxContainer/PlayerTabButton2/PTabButton/HBoxContainer/IconControl"]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = 2.0
-offset_right = -2.0
-offset_bottom = -2.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("6_reois")
-expand_mode = 3
-
-[node name="Button" type="Button" parent="ScaleControl/ActorSelectorControl/HBoxContainer/PlayerTabButton2/PTabButton"]
-self_modulate = Color(1, 1, 1, 0)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="PlayerTabButton3" type="Control" parent="ScaleControl/ActorSelectorControl/HBoxContainer" node_paths=PackedStringArray("button_texture", "button_label", "button", "invalid_icon")]
-custom_minimum_size = Vector2(64, 0)
-layout_mode = 2
-script = ExtResource("2_758lj")
-top_hight = 8
-button_texture = NodePath("PTabButton")
-button_label = NodePath("PTabButton/HBoxContainer/FitScaleLabel")
-button = NodePath("PTabButton/Button")
-invalid_icon = NodePath("PTabButton/HBoxContainer/IconControl")
-
-[node name="PTabButton" type="TextureRect" parent="ScaleControl/ActorSelectorControl/HBoxContainer/PlayerTabButton3"]
-self_modulate = Color(0.466667, 0.360784, 1, 1)
-layout_mode = 2
-offset_right = 64.0
-offset_bottom = 48.0
-theme = ExtResource("12_dy5pv")
-texture = ExtResource("4_tyxgi")
-
-[node name="HBoxContainer" type="HBoxContainer" parent="ScaleControl/ActorSelectorControl/HBoxContainer/PlayerTabButton3/PTabButton"]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-offset_left = 4.0
-offset_top = 4.0
-offset_right = -4.0
-offset_bottom = 20.0
-grow_horizontal = 2
-theme_override_constants/separation = -1
-
-[node name="FitScaleLabel" type="Control" parent="ScaleControl/ActorSelectorControl/HBoxContainer/PlayerTabButton3/PTabButton/HBoxContainer" node_paths=PackedStringArray("label")]
-layout_mode = 2
-size_flags_horizontal = 3
-script = ExtResource("5_am84p")
-label = NodePath("Label")
-text = "Soldier"
-center_x = true
-
-[node name="Label" type="Label" parent="ScaleControl/ActorSelectorControl/HBoxContainer/PlayerTabButton3/PTabButton/HBoxContainer/FitScaleLabel"]
-layout_mode = 0
-offset_left = 4.0
-offset_right = 62.0
-offset_bottom = 20.0
-scale = Vector2(0.8, 0.8)
-text = "Soldier"
-horizontal_alignment = 1
-
-[node name="IconControl" type="Control" parent="ScaleControl/ActorSelectorControl/HBoxContainer/PlayerTabButton3/PTabButton/HBoxContainer"]
-visible = false
-custom_minimum_size = Vector2(8, 16)
-layout_mode = 2
-
-[node name="InvalidIcon" type="TextureRect" parent="ScaleControl/ActorSelectorControl/HBoxContainer/PlayerTabButton3/PTabButton/HBoxContainer/IconControl"]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = 2.0
-offset_right = -2.0
-offset_bottom = -2.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("6_reois")
-expand_mode = 3
-
-[node name="Button" type="Button" parent="ScaleControl/ActorSelectorControl/HBoxContainer/PlayerTabButton3/PTabButton"]
-self_modulate = Color(1, 1, 1, 0)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="PlayerTabButton4" type="Control" parent="ScaleControl/ActorSelectorControl/HBoxContainer" node_paths=PackedStringArray("button_texture", "button_label", "button", "invalid_icon")]
-custom_minimum_size = Vector2(64, 0)
-layout_mode = 2
-script = ExtResource("2_758lj")
-top_hight = 8
-button_texture = NodePath("PTabButton")
-button_label = NodePath("PTabButton/HBoxContainer/FitScaleLabel")
-button = NodePath("PTabButton/Button")
-invalid_icon = NodePath("PTabButton/HBoxContainer/IconControl")
-
-[node name="PTabButton" type="TextureRect" parent="ScaleControl/ActorSelectorControl/HBoxContainer/PlayerTabButton4"]
-self_modulate = Color(0.466667, 0.360784, 1, 1)
-layout_mode = 2
-offset_right = 64.0
-offset_bottom = 48.0
-theme = ExtResource("12_dy5pv")
-texture = ExtResource("4_tyxgi")
-
-[node name="HBoxContainer" type="HBoxContainer" parent="ScaleControl/ActorSelectorControl/HBoxContainer/PlayerTabButton4/PTabButton"]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-offset_left = 4.0
-offset_top = 4.0
-offset_right = -4.0
-offset_bottom = 20.0
-grow_horizontal = 2
-theme_override_constants/separation = -1
-
-[node name="FitScaleLabel" type="Control" parent="ScaleControl/ActorSelectorControl/HBoxContainer/PlayerTabButton4/PTabButton/HBoxContainer" node_paths=PackedStringArray("label")]
-layout_mode = 2
-size_flags_horizontal = 3
-script = ExtResource("5_am84p")
-label = NodePath("Label")
-text = "Soldier"
-center_x = true
-
-[node name="Label" type="Label" parent="ScaleControl/ActorSelectorControl/HBoxContainer/PlayerTabButton4/PTabButton/HBoxContainer/FitScaleLabel"]
-layout_mode = 0
-offset_left = 4.0
-offset_right = 62.0
-offset_bottom = 20.0
-scale = Vector2(0.8, 0.8)
-text = "Soldier"
-horizontal_alignment = 1
-
-[node name="IconControl" type="Control" parent="ScaleControl/ActorSelectorControl/HBoxContainer/PlayerTabButton4/PTabButton/HBoxContainer"]
-visible = false
-custom_minimum_size = Vector2(8, 16)
-layout_mode = 2
-
-[node name="InvalidIcon" type="TextureRect" parent="ScaleControl/ActorSelectorControl/HBoxContainer/PlayerTabButton4/PTabButton/HBoxContainer/IconControl"]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = 2.0
-offset_right = -2.0
-offset_bottom = -2.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("6_reois")
-expand_mode = 3
-
-[node name="Button" type="Button" parent="ScaleControl/ActorSelectorControl/HBoxContainer/PlayerTabButton4/PTabButton"]
-self_modulate = Color(1, 1, 1, 0)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
 
 [node name="ActorTabs" type="Control" parent="ScaleControl"]
 anchors_preset = 0
@@ -1696,7 +1401,7 @@ alignment = 1
 
 [node name="MainHandDamageContainer" parent="ScaleControl/StatsPage/ContainerControl/StatsMainContainer/AtkStatsContainer/BoxContainer/RangeDamageContainer/DamageDatasContainer" instance=ExtResource("42_hsufi")]
 layout_mode = 2
-attack_scale = null
+attack_scale = 0.0
 
 [node name="MainHandDamageRow" type="HBoxContainer" parent="ScaleControl/StatsPage/ContainerControl/StatsMainContainer/AtkStatsContainer/BoxContainer/RangeDamageContainer/DamageDatasContainer"]
 visible = false

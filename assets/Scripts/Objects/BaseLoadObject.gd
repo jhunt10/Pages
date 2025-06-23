@@ -21,6 +21,10 @@ func _init(key:String, def_load_path:String, def:Dictionary, id:String='', data:
 	self._def = def
 	self._data = data
 
+func reload_def(load_path:String, def:Dictionary):
+	self._def_load_path = load_path
+	self._def = def
+
 ####################
 ## Object Details ##
 ####################

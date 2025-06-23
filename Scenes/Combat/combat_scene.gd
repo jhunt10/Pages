@@ -19,6 +19,14 @@ static var QueController:ActionQueController = ActionQueController.new()
 var GameState:GameStateData
 
 static var _current_player_index:int = 0
+static var _player_actor_ids:Array = []
+
+static func get_player_index_of_actor(actor:BaseActor)->int:
+	for index in range(_player_actor_ids.size()):
+		if actor.Id == _player_actor_ids[index]:
+			return index
+	return -1
+
 
 ## If true, will call StoryState.load_next_stage() when battle finishes
 static var is_story_map:bool
@@ -150,14 +158,13 @@ func load_init_state(sub_scene_data:Dictionary):
 		actor_index += 1
 		loading_actor_progressed.emit(actor_count, actor_index)
 	
-	# Make Nodes for each player actor, but hide them until they are placed
-	for player_actor:BaseActor in StoryState.list_player_actor():
-		if not player_actor:
-			continue
-		player_actor.prep_for_combat()
-		var player_actor_node = MapController.get_or_create_actor_node(player_actor, MapPos.new(0,0,0,0), true)
-		player_actor_node.prep_for_combat()
-		player_actor_node.hide()
+	## Make Nodes for each player actor, but hide them until they are placed
+	#for player_actor:BaseActor in StoryState.list_party_actors():
+		#if not player_actor:
+			#continue
+		#var player_actor_node = MapController.get_or_create_actor_node(player_actor, MapPos.new(0,0,0,0), true)
+		##player_actor_node.prep_for_combat()
+		#player_actor_node.hide()
 	#var player_actor = StoryState.get_player_actor()
 	## Check that actor in actually in game
 	#player_actor = GameState.get_actor(player_actor.Id)
@@ -189,6 +196,8 @@ func load_init_state(sub_scene_data:Dictionary):
 func start_combat_animation():
 	start_combat_screen.show()
 	start_combat_screen.start_combat_animation()
+	
+	ui_control.build_player_stats_panels()
 	combat_started = true
 
 func _on_combat_screen_blackout():
@@ -224,7 +233,7 @@ func revive_actor(actor:BaseActor):
 		#actor_node.queue_free()
 
 
-func add_actor(actor:BaseActor, pos:MapPos):
+func add_actor(actor:BaseActor, pos:MapPos, is_player:bool=false):
 	if not actor:
 		return
 	if GameState._actors.keys().has(actor.Id):
@@ -234,6 +243,9 @@ func add_actor(actor:BaseActor, pos:MapPos):
 	# Add actor to GameState and set position
 	GameState.add_actor(actor)
 	QueController.add_action_que(actor.Que)
+	if is_player:
+		if not _player_actor_ids.has(actor.Id):
+			_player_actor_ids.append(actor.Id)
 	
 	var actor_node = MapController.get_or_create_actor_node(actor, pos)
 	actor_node.visible = true
@@ -347,31 +359,46 @@ func list_actors_by_order()->Array:
 		out_list.append(que.actor)
 	return out_list
 		
-		
-static func list_player_actors()->Array:
+
+static func list_player_actor_ids()->Array:
 	var out_list = []
 	for que_id in CombatRootControl.Instance.QueController._que_order:
 		var que:ActionQue = CombatRootControl.Instance.QueController._action_ques[que_id]
 		var actor = que.actor
-		if StoryState._player_ids.has(actor.Id):
-			out_list.append(actor)
+		if _player_actor_ids.has(actor.Id):
+			out_list.append(actor.Id)
+	return out_list
+
+static func list_player_actors()->Array:
+	var out_list = []
+	for id in list_player_actor_ids():
+		var actor = ActorLibrary.get_actor(id)
+		out_list.append(actor)
 	return out_list
 
 func get_current_player_actor()->BaseActor:
-	return StoryState.get_player_actor(_current_player_index)
+	return get_player_actor(_current_player_index)
 
 func set_player_index(index:int, move_camera:bool=true):
-	if index >= 0 and index < 4 and StoryState._player_ids[index] != null:
+	if index >= 0 and index < _player_actor_ids.size():
 		_current_player_index = index
 		ui_control.set_player_actor_index(_current_player_index)
 		if move_camera:
-			var actor = StoryState.get_player_actor(index)
+			var actor = get_player_actor(index)
 			camera.start_auto_pan_to_actor(actor, false)
 
+
+func get_player_actor(index:int = _current_player_index)->BaseActor:
+	if index >= 0 and index < _player_actor_ids.size():
+		var player_id = _player_actor_ids[index]
+		if player_id:
+			return ActorLibrary.get_actor(player_id)
+	return null
+
 func get_next_player_index()->int:
-	var next_index = (_current_player_index + 1) % 4
+	var next_index = (_current_player_index + 1) % _player_actor_ids.size()
 	var extra_check = 0
-	while StoryState.get_player_id(next_index) == null and extra_check < 4:
-		extra_check += 1
-		next_index = (next_index + 1) % 4
+	#while StoryState.get_player_id(next_index) == null and extra_check < 4:
+		#extra_check += 1
+		#next_index = (next_index + 1) % 4
 	return next_index

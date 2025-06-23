@@ -244,6 +244,12 @@ static func update_def(file_path:String, def_key:String, def:Dictionary)->Array:
 	if !object_type or taxonomy.size() == 0:
 		printerr("Unknown Script Type for '%s'>'%s': %s : %s" % [def_key, object_script, file_path])
 	var object_details = def.get("#ObjDetails", {})
+	
+	
+	if object_details.get("Tags", []).has("Title"):
+		taxonomy = ["Item", "Equipment", "Page", "Title"]
+	
+	
 	object_details["ObjectType"] = object_type
 	object_details["Taxonomy"] = taxonomy
 	if not def.has("!ObjectScript"):
@@ -255,28 +261,32 @@ static func update_def(file_path:String, def_key:String, def:Dictionary)->Array:
 	
 	if taxonomy.has("Page"):
 		var title = ''
-		if file_path.contains("ClassDef/Mage/"):
+		if file_path.contains("ClassDefs/Mage/"):
 			title = "Mage"
-		elif file_path.contains("ClassDef/Priest/"):
+		elif file_path.contains("ClassDefs/Priest/"):
 			title = "Priest"
-		elif file_path.contains("ClassDef/Rogue/"):
+		elif file_path.contains("ClassDefs/Rogue/"):
 			title = "Rogue"
-		elif file_path.contains("ClassDef/Soldier/"):
+		elif file_path.contains("ClassDefs/Soldier/"):
 			title = "Soldier"
 		
-		var title_req = ''
+		var title_req = 'None'
 		if title:
 			title_req = 'Match'
 		
+		if def_key.ends_with("TitlePage"):
+			title = def_key.trim_suffix("TitlePage")
+			title_req = "None"
 		var page_data = {
 			"SourceTitle": title,
 			"Requirments": {
-				# [''(No Req) | Same | Inherate | Shared ]
+				# [ None | Same | Inherate | Shared ]
 				"TitleReq": title_req,
 				"IncompatiblePages": [],
 				"ConflictingPages": []
 			}
 		}
+		def['PageData'] = page_data
 	
 	#print(def_key)
 	return [def_key, def]

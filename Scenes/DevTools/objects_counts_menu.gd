@@ -57,6 +57,10 @@ func _on_lsit_selected(index:int):
 			var item = ItemLibrary.get_item(item_id)
 			if item.item_data.get("ItemType", "") == "Page":
 				add_label("Action", item_id)
+		for item_id in ItemLibrary.Instance._loaded_objects.keys():
+			var item = ItemLibrary.get_item(item_id)
+			if item.item_data.get("ItemType", "") == "Page":
+				add_label("Action", item_id)
 
 func add_label(type, text):
 	var new_button = Button.new()

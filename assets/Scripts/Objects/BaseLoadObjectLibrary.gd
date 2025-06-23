@@ -162,9 +162,23 @@ func reload():
 	loaded = false
 	_object_defs.clear()
 	_defs_to_load_paths.clear()
-	_static_objects.clear()
-	_loaded_objects.clear()
-	init_load()
+	
+	_load_object_defs()
+	var all_objs = []
+	all_objs.append_array(_static_objects.values())
+	all_objs.append_array(_loaded_objects.values())
+	for obj:BaseLoadObject in all_objs:
+		var obj_key = obj._key
+		var def = get_object_def(obj_key)
+		var load_path = get_object_def_load_path(obj_key)
+		if !def or def.size() == 0:
+			printerr("BaseLibrary.reload: Lost %s Def with key '%s'." % [get_object_name(), obj_key])
+		else:
+			obj.reload_def(load_path, def)
+	
+	#_static_objects.clear()
+	#_loaded_objects.clear()
+	#init_load()
 
 func _load_object_defs(file_sufix = ''):
 	var parent_to_child_mapping = {}

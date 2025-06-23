@@ -34,8 +34,7 @@ func set_actor(actor:BaseActor):
 	off_hand_node.hand_sprite.vframes = actor_sprite.vframes
 	
 	if actor.is_player:
-		var player_index = StoryState.get_player_index_of_actor(actor)
-		path_arrow.modulate = StoryState.get_player_color(player_index)
+		path_arrow.modulate = StoryState.get_player_color(actor)
 	_sync_sprites()
 
 func _sync_sprites():

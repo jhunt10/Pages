@@ -25,11 +25,25 @@ func get_cant_use_reasons(actor:BaseActor):
 	
 	var title_req = requirment_data.get("TitleReq", '')
 	var source_title = page_data.get("SourceTitle", '')
-	if source_title != '' and title_req == "Match":
-		if !actor.get_tags().has(source_title):
-			if not missing_requirements.has("Tags"):
-				missing_requirements['Tags'] = []
-			missing_requirements['Tags'].append(source_title)
+	if source_title != '' and title_req != 'None':
+		match title_req:
+			"Match":
+				if actor.get_title() != source_title:
+					if not missing_requirements.has("Title"):
+						missing_requirements['Title'] = []
+					missing_requirements['Title'].append("Match:"+source_title)
+			"Inherit":
+				if !actor.get_tags().has(source_title):
+					if not missing_requirements.has("Title"):
+						missing_requirements['Title'] = []
+					missing_requirements['Title'].append("Inherit:"+source_title)
+			"Shared":
+				if actor.get_title() == source_title:
+					if not missing_requirements.has("Title"):
+						missing_requirements['Title'] = []
+					missing_requirements['Title'].append("Shared:"+source_title)
+				
+		
 	
 	# Conflicting pages are not allowed to be used together
 	for other_page_key in requirment_data.get("ConflictingPages", []):

@@ -782,12 +782,12 @@ func _do_move_actor(block_data)->bool:
 	return true
 
 func translate_actor_id(actor_id:String)->String:
-	if actor_id == "Player1":
-		actor_id = StoryState.get_player_id(0)
-	elif actor_id == "Player2":
-		actor_id = StoryState.get_player_id(1)
-	elif actor_id == "Player3":
-		actor_id = StoryState.get_player_id(2)
-	elif actor_id == "Player4":
-		actor_id = StoryState.get_player_id(3)
-	return actor_id
+	#if actor_id == "Player1":
+		#actor_id = StoryState.get_player_id(0)
+	#elif actor_id == "Player2":
+		#actor_id = StoryState.get_player_id(1)
+	#elif actor_id == "Player3":
+		#actor_id = StoryState.get_player_id(2)
+	#elif actor_id == "Player4":
+		#actor_id = StoryState.get_player_id(3)
+	return "dialog_controller.translate_actor_id"

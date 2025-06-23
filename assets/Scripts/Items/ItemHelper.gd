@@ -176,4 +176,15 @@ static func cant_equip_reasons_to_string(reasons_data:Dictionary)->String:
 		var missing_equipment = reasons_data['Equipment']
 		for tag in missing_equipment:
 			missing_string += tag + ", "
+	if reasons_data.has("Title"):
+		var missing_titles = reasons_data['Title']
+		for tit in missing_titles:
+			tit = tit.split(":")[1]
+			missing_string += tit
+	if reasons_data.has("Conflict"):
+		var conflicts = reasons_data['Conflict']
+		missing_string = "Conflicts with "
+		for key in conflicts:
+			missing_string += key
+		
 	return missing_string.trim_suffix(", ")

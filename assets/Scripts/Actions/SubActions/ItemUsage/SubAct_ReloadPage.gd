@@ -54,7 +54,7 @@ func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, metadata:
 		"res://assets/Scripts/Ui/UiStates/UiState_SelectPage.gd",
 	{
 		"SelectablePages": page_that_use_ammo,
-		"PlayerActorIndex": StoryState.get_player_index_of_actor(actor)
+		"PlayerActorIndex": CombatRootControl.get_player_index_of_actor(actor)
 	})
 	turn_data.data_cache['ReloadDone'] = true
 	return BaseSubAction.Success

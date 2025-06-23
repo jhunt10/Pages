@@ -13,6 +13,7 @@ var camera:MoveableCamera2D:
 @export var pause_menu:PauseMenuControl 
 
 @export var target_input_display:TargetInputControl
+@export var player_stats_panels_container:BoxContainer
 @export var p1_stat_panel_control:StatPanelControl
 @export var p2_stat_panel_control:StatPanelControl
 @export var p3_stat_panel_control:StatPanelControl
@@ -32,6 +33,7 @@ var que_display:QueDisplayControl:
 
 static var Instance:CombatUiControl
 static var ui_state_controller:UiStateController = UiStateController.new()
+var actor_ids_to_stat_panels:Dictionary={}
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -47,31 +49,30 @@ func _ready() -> void:
 	target_input_display.visible = false
 	game_over_screen.hide()
 	victory_screen.hide()
-	var player_1 = StoryState.get_player_actor(0)
+	var player_1 = CombatRootControl.Instance.get_player_actor(0)
 	if player_1: 
 		p1_stat_panel_control.set_actor(player_1)
 		p1_stat_panel_control.button.pressed.connect(on_player_stat_clicked.bind(0))
 	else: 
 		p1_stat_panel_control.hide()
 		
-	var player_2 = StoryState.get_player_actor(1)
+	var player_2 = CombatRootControl.Instance.get_player_actor(1)
 	if player_2: 
 		p2_stat_panel_control.set_actor(player_2)
 		p2_stat_panel_control.button.pressed.connect(on_player_stat_clicked.bind(1))
 	else: 
 		p2_stat_panel_control.hide()
 		
-	var player_3 = StoryState.get_player_actor(2)
+	var player_3 = CombatRootControl.Instance.get_player_actor(2)
 	if player_3: 
 		p3_stat_panel_control.set_actor(player_3)
 		p3_stat_panel_control.button.pressed.connect(on_player_stat_clicked.bind(2))
 	else: 
 		p3_stat_panel_control.hide()
 		
-	var player_4 = StoryState.get_player_actor(3)
+	var player_4 = CombatRootControl.Instance.get_player_actor(3)
 	if player_4: 
 		p4_stat_panel_control.set_actor(player_4)
-		p4_stat_panel_control.button.pressed.connect(on_player_stat_clicked.bind(3))
 	else: 
 		p4_stat_panel_control.hide()
 
@@ -80,6 +81,25 @@ func _ready() -> void:
 	#var cur_index = CombatRootControl.Instance.GameState._actors.keys().find(current_actor_id)
 	#var next_index = (cur_index + 1) % CombatRootControl.Instance.GameState._actors.size()
 	#set_player_actor(CombatRootControl.Instance.GameState._actors.values()[next_index])
+
+func build_player_stats_panels():
+	var player_ids = CombatRootControl.Instance.list_player_actor_ids()
+	for child in player_stats_panels_container.get_children():
+		if child is StatPanelControl:
+			if actor_ids_to_stat_panels.values().has(actor_ids_to_stat_panels):
+				if player_ids.has((child as StatPanelControl).actor.Id):
+					continue
+		child.queue_free()
+	
+	for actor in CombatRootControl.Instance.list_player_actors():
+		var index = CombatRootControl.Instance.get_player_index_of_actor(actor)
+		if actor_ids_to_stat_panels.keys().has(actor.Id):
+			continue
+		var new_panel:StatPanelControl = load("res://Scenes/Combat/UiNodes/StatsPanel/combat_stat_panel_control.tscn").instantiate()
+		new_panel.set_actor(actor)
+		player_stats_panels_container.add_child(new_panel)
+		new_panel.button.pressed.connect(on_player_stat_clicked.bind(index))
+		
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -90,7 +110,7 @@ func on_player_stat_clicked(index):
 
 # Should only be called by CombatRootControl
 func set_player_actor_index(index):
-	var player_actor = StoryState.get_player_actor(index)
+	var player_actor = CombatRootControl.Instance.get_player_actor(index)
 	if player_actor:
 		que_input.set_actor(player_actor)
 

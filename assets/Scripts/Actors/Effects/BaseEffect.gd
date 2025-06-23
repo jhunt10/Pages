@@ -45,6 +45,8 @@ var effect_data:Dictionary:
 	get: return get_load_val("EffectData", {})
 var effect_details:Dictionary:
 	get: return effect_data.get("EffectDetails", {})
+var _sub_effects_data:Dictionary:
+	get: return effect_data.get('SubEffects', {})
 
 # Triggers added by the system an not config, like OnTurnEnds for TurnDuration
 var system_triggers:Array = []
@@ -61,10 +63,8 @@ var _max_duration:int = -1
 var _duration_merge_type = "Replace"
 var _duration_counter:int = -1
 var duration_trigger:EffectTriggers = EffectTriggers.None
-var DurationData:Dictionary:
-	get:
-		var dets = effect_details
-		return dets.get("DurationData", {})
+var duration_data:Dictionary:
+	get: return effect_details.get("DurationData", {})
 var RemainingDuration:int:
 	get: return _duration_counter
 
@@ -81,7 +81,6 @@ var applied_potency:float:
 var _source
 var _enabled:bool = true
 var _deleted:bool = false
-var _sub_effects_data:Dictionary={}
 var _triggers_to_sub_effect_keys:Dictionary={}
 
 # TODO: Merge with SubEffectData?
@@ -89,11 +88,9 @@ var _cached_data:Dictionary = {}
 
 func _init(key:String, def_load_path:String, def:Dictionary, id:String='', data:Dictionary={}) -> void:
 	super(key, def_load_path, def, id, data)
-	_sub_effects_data = effect_data.get('SubEffects', {})
-	var duration_data = DurationData
 	if duration_data.size() > 0:
 		_duration_merge_type = duration_data.get("MergeType", "Replace")
-		var duration_trigger_str = DurationData.get("DurationTrigger", "")
+		var duration_trigger_str = duration_data.get("DurationTrigger", "")
 		if BaseEffect.EffectTriggers.keys().has(duration_trigger_str):
 			_inital_duration = duration_data.get("BaseDuration", 0)
 			_max_duration = duration_data.get("MaxDuration", -1)
@@ -102,7 +99,14 @@ func _init(key:String, def_load_path:String, def:Dictionary, id:String='', data:
 			_duration_counter = _inital_duration
 			duration_trigger = EffectTriggers.get(duration_trigger_str)
 		else:
-			printerr("BaseEffect._init: No DurationTrigger found on '%s'." %[key])
+			printerr("BaseEffect._init: No DurationTrigger found on '%s'." %[_key])
+	_cache_after_loading_def()
+
+func reload_def(load_path:String, def:Dictionary):
+	super(load_path, def)
+	_cache_after_loading_def()
+
+func _cache_after_loading_def():
 	_cache_triggers()
 
 func merge_duplicate_effect(source, dup_effect_def:Dictionary):

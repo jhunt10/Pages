@@ -75,7 +75,7 @@ func _ready() -> void:
 
 func _fill_que_with_wait():
 	var wait = ItemLibrary.get_item("Wait")
-	if wait:
+	if wait and _actor:
 		for r in range(_actor.Que.get_max_que_size()):
 			_actor.Que.que_action(wait)
 			if _actor.Que.is_ready():

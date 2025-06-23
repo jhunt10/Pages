@@ -81,7 +81,7 @@ func collect_dropped_items():
 	StoryState.add_money(total_money)
 	
 	exp_label.text = str(total_exp)
-	for actor:BaseActor in StoryState.list_player_actor():
+	for actor:BaseActor in CombatRootControl.list_player_actors():
 		if actor:
 			actor.stats.add_experiance(total_exp)
 		

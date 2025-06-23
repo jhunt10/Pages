@@ -160,7 +160,7 @@ func open_shop_menu():
 func open_character_sheet(_actor:BaseActor=null, parent_node=null)->CharacterMenuControl:
 	var actor = _actor
 	if not actor:
-		actor = ActorLibrary.get_or_create_actor("TestActor", "TestActor_ID")
+		actor = StoryState.get_party_actor_by_index(0)
 		#actor = ActorLibrary.create_actor("TestActor", {})
 	var charsheet:CharacterMenuControl = load("res://Scenes/Menus/CharacterMenu/character_menu.tscn").instantiate()
 	var screen_size = self.size

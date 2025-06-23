@@ -14,6 +14,17 @@ func _process(delta: float) -> void:
 func _load_mini_details():
 	super()
 
+func _should_show_add_button()->bool:
+	var story_id = StoryState.story_id
+	return StoryState.story_id != null and StoryState.story_id != ''
+	
+func _on_add_pressed():
+	print("\n\n asdsafv StoryId:%s\n\n" %[StoryState.story_id])
+	if StoryState.story_id:
+		if thing_def.has("ActorKey"):
+			var key = thing_def.get("ActorKey", "")
+			StoryState.add_actor_to_party(key)
+
 ## Load full details displayed when entry is exspanded
 func _load_full_details():
 	super()

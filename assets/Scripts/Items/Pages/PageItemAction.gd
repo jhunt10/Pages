@@ -17,9 +17,16 @@ var _action_mods_cache:Dictionary
 func _init(key:String, def_load_path:String, def:Dictionary, id:String='', data:Dictionary={}) -> void:
 	super(key, def_load_path, def, id, data)
 	_init_data = data.duplicate(true)
+	_cache_after_loading_def()
+
+func reload_def(load_path:String, def:Dictionary):
+	super(load_path, def)
+	_cache_after_loading_def()
+
+func _cache_after_loading_def():
 	# Build Target Params
-	if def.get("ActionData", {}).has('TargetParams'):
-		var targ_parms = def.get("ActionData", {}).get('TargetParams')
+	if _def.get("ActionData", {}).has('TargetParams'):
+		var targ_parms = _def.get("ActionData", {}).get('TargetParams')
 		for tparm_key in targ_parms.keys():
 			_target_params[tparm_key] = TargetParameters.new(tparm_key, targ_parms[tparm_key])
 

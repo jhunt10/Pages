@@ -211,7 +211,7 @@ offset_bottom = 120.0
 texture = ExtResource("24_5fn7e")
 expand_mode = 4
 
-[node name="ActorPlacerControl" type="Control" parent="MoveableCamera2D/CanvasLayer" node_paths=PackedStringArray("placed_actor_label", "min_max_actor_label", "confirm_button_label", "confirm_button", "actor_buttons_container", "player1_button_control", "player2_button_control", "player3_button_control", "player4_button_control")]
+[node name="ActorPlacerControl" type="Control" parent="MoveableCamera2D/CanvasLayer" node_paths=PackedStringArray("placed_actor_label", "min_max_actor_label", "confirm_button_label", "confirm_button", "actor_buttons_container", "premade_actor_button")]
 visible = false
 layout_mode = 3
 anchors_preset = 15
@@ -225,11 +225,8 @@ placed_actor_label = NodePath("VBoxContainer/BottomPanelControl/BackPatchContain
 min_max_actor_label = NodePath("VBoxContainer/BottomPanelControl/BackPatchContainer/BoxContainer/NinePatchRect/HBoxContainer/PlacedActorsLabel4")
 confirm_button_label = NodePath("VBoxContainer/BottomPanelControl/BackPatchContainer/BoxContainer/Button/NinePatchRect2/Label")
 confirm_button = NodePath("VBoxContainer/BottomPanelControl/BackPatchContainer/BoxContainer/Button")
-actor_buttons_container = NodePath("VBoxContainer/TopPanelControl/BackPatchContainer/BoxContainer/HBoxContainer")
-player1_button_control = NodePath("VBoxContainer/TopPanelControl/BackPatchContainer/BoxContainer/HBoxContainer/ActorPlacerButton")
-player2_button_control = NodePath("VBoxContainer/TopPanelControl/BackPatchContainer/BoxContainer/HBoxContainer/ActorPlacerButton2")
-player3_button_control = NodePath("VBoxContainer/TopPanelControl/BackPatchContainer/BoxContainer/HBoxContainer/ActorPlacerButton3")
-player4_button_control = NodePath("VBoxContainer/TopPanelControl/BackPatchContainer/BoxContainer/HBoxContainer/ActorPlacerButton4")
+actor_buttons_container = NodePath("VBoxContainer/TopPanelControl/BackPatchContainer/BoxContainer/ButtonsContainer")
+premade_actor_button = NodePath("VBoxContainer/TopPanelControl/BackPatchContainer/BoxContainer/ActorPlacerButton")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MoveableCamera2D/CanvasLayer/ActorPlacerControl"]
 layout_mode = 1
@@ -249,12 +246,11 @@ custom_minimum_size = Vector2(0, 128)
 layout_mode = 2
 
 [node name="BackPatchContainer" type="Container" parent="MoveableCamera2D/CanvasLayer/ActorPlacerControl/VBoxContainer/TopPanelControl" node_paths=PackedStringArray("background", "inner_container")]
-custom_minimum_size = Vector2(356, 125)
+custom_minimum_size = Vector2(318, 129)
 layout_mode = 2
-offset_left = -178.0
-offset_top = 1.0
-offset_right = 178.0
-offset_bottom = 126.0
+offset_left = -159.0
+offset_right = 159.0
+offset_bottom = 129.0
 script = ExtResource("29_vvabq")
 background = NodePath("NinePatchRect")
 inner_container = NodePath("BoxContainer")
@@ -272,18 +268,17 @@ patch_margin_bottom = 12
 layout_mode = 2
 vertical = true
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MoveableCamera2D/CanvasLayer/ActorPlacerControl/VBoxContainer/TopPanelControl/BackPatchContainer/BoxContainer"]
-layout_mode = 2
-
-[node name="ActorPlacerButton" type="Control" parent="MoveableCamera2D/CanvasLayer/ActorPlacerControl/VBoxContainer/TopPanelControl/BackPatchContainer/BoxContainer/HBoxContainer" node_paths=PackedStringArray("highlight", "actor_icon", "button")]
+[node name="ActorPlacerButton" type="Control" parent="MoveableCamera2D/CanvasLayer/ActorPlacerControl/VBoxContainer/TopPanelControl/BackPatchContainer/BoxContainer" node_paths=PackedStringArray("highlight", "actor_icon", "button")]
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 script = ExtResource("33_lhmsf")
 highlight = NodePath("Hightlight")
 actor_icon = NodePath("Icon")
 button = NodePath("Button")
 
-[node name="Hightlight" type="TextureRect" parent="MoveableCamera2D/CanvasLayer/ActorPlacerControl/VBoxContainer/TopPanelControl/BackPatchContainer/BoxContainer/HBoxContainer/ActorPlacerButton"]
+[node name="Hightlight" type="TextureRect" parent="MoveableCamera2D/CanvasLayer/ActorPlacerControl/VBoxContainer/TopPanelControl/BackPatchContainer/BoxContainer/ActorPlacerButton"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -292,7 +287,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("13_j87d7")
 
-[node name="Icon" type="TextureRect" parent="MoveableCamera2D/CanvasLayer/ActorPlacerControl/VBoxContainer/TopPanelControl/BackPatchContainer/BoxContainer/HBoxContainer/ActorPlacerButton"]
+[node name="Icon" type="TextureRect" parent="MoveableCamera2D/CanvasLayer/ActorPlacerControl/VBoxContainer/TopPanelControl/BackPatchContainer/BoxContainer/ActorPlacerButton"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -301,7 +296,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("33_0bnqe")
 
-[node name="Frame" type="TextureRect" parent="MoveableCamera2D/CanvasLayer/ActorPlacerControl/VBoxContainer/TopPanelControl/BackPatchContainer/BoxContainer/HBoxContainer/ActorPlacerButton"]
+[node name="Frame" type="TextureRect" parent="MoveableCamera2D/CanvasLayer/ActorPlacerControl/VBoxContainer/TopPanelControl/BackPatchContainer/BoxContainer/ActorPlacerButton"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -310,7 +305,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("34_wuopp")
 
-[node name="Button" type="Button" parent="MoveableCamera2D/CanvasLayer/ActorPlacerControl/VBoxContainer/TopPanelControl/BackPatchContainer/BoxContainer/HBoxContainer/ActorPlacerButton"]
+[node name="Button" type="Button" parent="MoveableCamera2D/CanvasLayer/ActorPlacerControl/VBoxContainer/TopPanelControl/BackPatchContainer/BoxContainer/ActorPlacerButton"]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -319,141 +314,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ActorPlacerButton2" type="Control" parent="MoveableCamera2D/CanvasLayer/ActorPlacerControl/VBoxContainer/TopPanelControl/BackPatchContainer/BoxContainer/HBoxContainer" node_paths=PackedStringArray("highlight", "actor_icon", "button")]
-custom_minimum_size = Vector2(80, 80)
+[node name="ButtonsContainer" type="HBoxContainer" parent="MoveableCamera2D/CanvasLayer/ActorPlacerControl/VBoxContainer/TopPanelControl/BackPatchContainer/BoxContainer"]
 layout_mode = 2
-script = ExtResource("33_lhmsf")
-highlight = NodePath("Hightlight")
-actor_icon = NodePath("Icon")
-button = NodePath("Button")
-
-[node name="Hightlight" type="TextureRect" parent="MoveableCamera2D/CanvasLayer/ActorPlacerControl/VBoxContainer/TopPanelControl/BackPatchContainer/BoxContainer/HBoxContainer/ActorPlacerButton2"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("13_j87d7")
-
-[node name="Icon" type="TextureRect" parent="MoveableCamera2D/CanvasLayer/ActorPlacerControl/VBoxContainer/TopPanelControl/BackPatchContainer/BoxContainer/HBoxContainer/ActorPlacerButton2"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("33_0bnqe")
-
-[node name="Frame" type="TextureRect" parent="MoveableCamera2D/CanvasLayer/ActorPlacerControl/VBoxContainer/TopPanelControl/BackPatchContainer/BoxContainer/HBoxContainer/ActorPlacerButton2"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("34_wuopp")
-
-[node name="Button" type="Button" parent="MoveableCamera2D/CanvasLayer/ActorPlacerControl/VBoxContainer/TopPanelControl/BackPatchContainer/BoxContainer/HBoxContainer/ActorPlacerButton2"]
-self_modulate = Color(1, 1, 1, 0)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="ActorPlacerButton3" type="Control" parent="MoveableCamera2D/CanvasLayer/ActorPlacerControl/VBoxContainer/TopPanelControl/BackPatchContainer/BoxContainer/HBoxContainer" node_paths=PackedStringArray("highlight", "actor_icon", "button")]
-custom_minimum_size = Vector2(80, 80)
-layout_mode = 2
-script = ExtResource("33_lhmsf")
-highlight = NodePath("Hightlight")
-actor_icon = NodePath("Icon")
-button = NodePath("Button")
-
-[node name="Hightlight" type="TextureRect" parent="MoveableCamera2D/CanvasLayer/ActorPlacerControl/VBoxContainer/TopPanelControl/BackPatchContainer/BoxContainer/HBoxContainer/ActorPlacerButton3"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("13_j87d7")
-
-[node name="Icon" type="TextureRect" parent="MoveableCamera2D/CanvasLayer/ActorPlacerControl/VBoxContainer/TopPanelControl/BackPatchContainer/BoxContainer/HBoxContainer/ActorPlacerButton3"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("33_0bnqe")
-
-[node name="Frame" type="TextureRect" parent="MoveableCamera2D/CanvasLayer/ActorPlacerControl/VBoxContainer/TopPanelControl/BackPatchContainer/BoxContainer/HBoxContainer/ActorPlacerButton3"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("34_wuopp")
-
-[node name="Button" type="Button" parent="MoveableCamera2D/CanvasLayer/ActorPlacerControl/VBoxContainer/TopPanelControl/BackPatchContainer/BoxContainer/HBoxContainer/ActorPlacerButton3"]
-self_modulate = Color(1, 1, 1, 0)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="ActorPlacerButton4" type="Control" parent="MoveableCamera2D/CanvasLayer/ActorPlacerControl/VBoxContainer/TopPanelControl/BackPatchContainer/BoxContainer/HBoxContainer" node_paths=PackedStringArray("highlight", "actor_icon", "button")]
-custom_minimum_size = Vector2(80, 80)
-layout_mode = 2
-script = ExtResource("33_lhmsf")
-highlight = NodePath("Hightlight")
-actor_icon = NodePath("Icon")
-button = NodePath("Button")
-
-[node name="Hightlight" type="TextureRect" parent="MoveableCamera2D/CanvasLayer/ActorPlacerControl/VBoxContainer/TopPanelControl/BackPatchContainer/BoxContainer/HBoxContainer/ActorPlacerButton4"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("13_j87d7")
-
-[node name="Icon" type="TextureRect" parent="MoveableCamera2D/CanvasLayer/ActorPlacerControl/VBoxContainer/TopPanelControl/BackPatchContainer/BoxContainer/HBoxContainer/ActorPlacerButton4"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("33_0bnqe")
-
-[node name="Frame" type="TextureRect" parent="MoveableCamera2D/CanvasLayer/ActorPlacerControl/VBoxContainer/TopPanelControl/BackPatchContainer/BoxContainer/HBoxContainer/ActorPlacerButton4"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("34_wuopp")
-
-[node name="Button" type="Button" parent="MoveableCamera2D/CanvasLayer/ActorPlacerControl/VBoxContainer/TopPanelControl/BackPatchContainer/BoxContainer/HBoxContainer/ActorPlacerButton4"]
-self_modulate = Color(1, 1, 1, 0)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="HBoxContainer2" type="HBoxContainer" parent="MoveableCamera2D/CanvasLayer/ActorPlacerControl/VBoxContainer/TopPanelControl/BackPatchContainer/BoxContainer"]
-visible = false
-layout_mode = 2
+alignment = 1
 
 [node name="Label" type="Label" parent="MoveableCamera2D/CanvasLayer/ActorPlacerControl/VBoxContainer/TopPanelControl/BackPatchContainer/BoxContainer"]
 layout_mode = 2
@@ -586,7 +449,7 @@ offset_bottom = 40.0
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 
-[node name="CombatUiControl" type="Control" parent="MoveableCamera2D/CanvasLayer" node_paths=PackedStringArray("game_over_screen", "victory_screen", "menu_button", "book_button", "pause_menu", "target_input_display", "p1_stat_panel_control", "p2_stat_panel_control", "p3_stat_panel_control", "p4_stat_panel_control", "que_input", "que_collection_display", "stats_collection_display", "option_select_menu", "drop_message_control", "actor_placer_control")]
+[node name="CombatUiControl" type="Control" parent="MoveableCamera2D/CanvasLayer" node_paths=PackedStringArray("game_over_screen", "victory_screen", "menu_button", "book_button", "pause_menu", "target_input_display", "player_stats_panels_container", "p1_stat_panel_control", "p2_stat_panel_control", "p3_stat_panel_control", "p4_stat_panel_control", "que_input", "que_collection_display", "stats_collection_display", "option_select_menu", "drop_message_control", "actor_placer_control")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -603,6 +466,7 @@ menu_button = NodePath("../MenuButton")
 book_button = NodePath("../PageBookButton")
 pause_menu = NodePath("../PauseMenuControl")
 target_input_display = NodePath("TargetInputControl")
+player_stats_panels_container = NodePath("StatPanelsContainer")
 p1_stat_panel_control = NodePath("StatPanelsContainer/P1_StatPanelControl")
 p2_stat_panel_control = NodePath("StatPanelsContainer/P2_StatPanelControl2")
 p3_stat_panel_control = NodePath("StatPanelsContainer/P3_StatPanelControl3")

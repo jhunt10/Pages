@@ -118,14 +118,15 @@ func set_actor(actor:BaseActor):
 	var start_time = Time.get_unix_time_from_system()
 	print("Starting Set Actor: %s" % Time.get_datetime_string_from_unix_time(start_time))
 	_actor = actor
-	equipment_page.set_actor(actor)
-	page_page.set_actor(actor)
-	bag_page.set_actor(actor)
-	stats_page.set_actor(actor)
-	actor_tabs_control.set_selected_actor(actor)
-	if _current_details_card:
-		var item = ItemLibrary.get_item(_current_details_card.item_id)
-		_current_details_card.set_item(actor, item)
+	if _actor:
+		equipment_page.set_actor(_actor)
+		page_page.set_actor(_actor)
+		bag_page.set_actor(_actor)
+		stats_page.set_actor(_actor)
+		actor_tabs_control.set_selected_actor(_actor)
+		if _current_details_card:
+			var item = ItemLibrary.get_item(_current_details_card.item_id)
+			_current_details_card.set_item(actor, item)
 	var finish_time = Time.get_unix_time_from_system()
 	var time_diff = finish_time - start_time
 	print("Finished Set Actor: %s" % Time.get_datetime_string_from_unix_time(finish_time))

@@ -22,10 +22,18 @@ var weapon_attack_data:Dictionary:
 
 func _init(key:String, def_load_path:String, def:Dictionary, id:String='', data:Dictionary={}) -> void:
 	super(key, def_load_path, def, id, data)
+	_cache_after_loading_def()
+
+func reload_def(load_path:String, def:Dictionary):
+	super(load_path, def)
+	_cache_after_loading_def()
+
+func _cache_after_loading_def():
 	target_parmas = TargetParameters.new("Weapon", weapon_data.get("AttackData", {}).get("TargetParams", {}))
 	for damage_data_key in weapon_attack_data.get("DamageDatas", {}).keys():
 		weapon_attack_data['DamageDatas'][damage_data_key]['DamageDataKey'] = damage_data_key
 		weapon_attack_data['DamageDatas'][damage_data_key]['DisplayName'] = self.get_display_name()
+
 
 func get_equipment_slot_type()->String:
 	return "Weapon"

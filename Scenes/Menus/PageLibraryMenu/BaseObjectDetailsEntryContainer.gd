@@ -72,11 +72,14 @@ func set_thing(def:Dictionary, inst:BaseLoadObject, load_path:String):
 	if def.has("ActorKey"):
 		type_label.text = "Actor"
 	
-	if not thing_def.has("ItemKey"):
+	if not _should_show_add_button():
 		if add_item_button:
 			add_item_button.hide()
 	_load_mini_details()
-	
+
+func _should_show_add_button()->bool:
+	return thing_def.has("ItemKey")
+
 func _on_add_pressed():
 	if thing_def.has("ItemKey"):
 		var item_key = thing_def.get("ItemKey", "")

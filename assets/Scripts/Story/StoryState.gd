@@ -5,7 +5,7 @@ signal money_changed()
 
 var story_id
 var save_id
-var _player_ids:Array = [null, null, null, null]
+var _party_actor_ids:Array = []
 var _story_stage_index:int
 var _story_flags:Dictionary = {}
 
@@ -16,35 +16,46 @@ var _total_play_time
 var _session_start_unix_time
 #var _cached_save_name
 
-func get_player_index_of_actor(actor:BaseActor)->int:
-	for index in range(4):
-		if actor.Id == _player_ids[index]:
+func add_actor_to_party(actor):
+	if actor is String:
+		var existing_actor = ActorLibrary.get_actor(actor)
+		if existing_actor:
+			actor = existing_actor
+		else:
+			var actor_def = ActorLibrary.get_actor_def(actor)
+			if actor_def.size() > 0:
+				var player_id = "Player_" + str(_party_actor_ids.size()) + ":" + str(ResourceUID.create_id())
+				actor = ActorLibrary.create_actor(actor, {}, player_id)
+	if actor and actor is BaseActor:
+		_party_actor_ids.append(actor.Id)
+	else:
+		printerr("StoryState.add_actor_to_party: Invalid / Fail to find Actor from: %s" % [actor])
+
+func get_party_index_of_actor(actor)->int:
+	if actor is String:
+		actor = ActorLibrary.get_actor(actor)
+	for index in range(_party_actor_ids.size()):
+		if actor.Id == _party_actor_ids[index]:
 			return index
 	return -1
 
-func get_player_id(index:int=0):
-	if index >= 0 and index < 4:
-		var player_id = _player_ids[index]
-		if player_id:
-			return player_id
+func get_party_actor_by_index(index:int)->BaseActor:
+	if index >= 0 and index < _party_actor_ids.size():
+		var actor_id = _party_actor_ids[index]
+		return ActorLibrary.get_actor(actor_id)
 	return null
 
-func get_player_actor(index:int = 0)->BaseActor:
-	if index >= 0 and index < 4:
-		var player_id = _player_ids[index]
-		if player_id:
-			return ActorLibrary.get_actor(player_id)
-	return null
 
-func list_player_actor()->Array:
+func list_party_actors()->Array:
 	var out_list = []
-	for index in range(_player_ids.size()):
-		var player_id = _player_ids[index]
+	for index in range(_party_actor_ids.size()):
+		var player_id = _party_actor_ids[index]
 		if player_id:
 			out_list.append(ActorLibrary.get_actor(player_id))
 	return out_list
 
-func get_player_color(index:int)->Color:
+func get_player_color(actor:BaseActor)->Color:
+	var index = 2
 	if index == 0: return Color.BLUE
 	elif index == 1: return Color.DARK_GREEN
 	elif index == 2: return Color.YELLOW
@@ -64,7 +75,7 @@ func start_new_story():
 	story_id = "Story:" + str(ResourceUID.create_id())
 	var player_id = "Player_1:" + str(ResourceUID.create_id())
 	var _new_player = ActorLibrary.create_actor("SoldierTemplate", {}, player_id)
-	_player_ids = [player_id, null, null, null]
+	_party_actor_ids = [player_id]
 	
 	_session_start_unix_time = Time.get_unix_time_from_system()
 	_story_stage_index = -1
@@ -96,6 +107,7 @@ func build_save_data()->Dictionary:
 	out_data['StoryId'] = story_id
 	out_data['StoryStageIndex'] = _story_stage_index
 	out_data['Actors'] = ActorLibrary.Instance.build_save_data()
+	out_data['PartyActors'] = _party_actor_ids
 	out_data['PlayerInventory'] = PlayerInventory.build_save_data()
 	#out_data['Items'] = ItemLibrary.Instance.build_save_data()
 	out_data['RunTime'] = _total_play_time + (Time.get_unix_time_from_system() - _session_start_unix_time)
@@ -110,19 +122,11 @@ func load_save_data(data:Dictionary):
 	_story_flags = data.get("StoryFlags", {}).duplicate(true)
 	EffectLibrary.purge_effects()
 	ItemLibrary.load_items(data.get("Items", {}))
+	
+	
+	_party_actor_ids = data.get("PartyActors", [])
 	var actors_data = data.get("Actors", {})
 	ActorLibrary.load_actors(actors_data)
-	
-	for actor_id:String in actors_data.keys():
-		if actor_id.begins_with("Player_"):
-			if actor_id.begins_with("Player_1:"):
-				_player_ids[0] = actor_id
-			if actor_id.begins_with("Player_2:"):
-				_player_ids[1] = actor_id
-			if actor_id.begins_with("Player_3:"):
-				_player_ids[2] = actor_id
-			if actor_id.begins_with("Player_4:"):
-				_player_ids[3] = actor_id
 	
 	var inv_data = data['PlayerInventory']
 	for item_id in inv_data.keys():

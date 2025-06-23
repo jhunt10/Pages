@@ -9,10 +9,7 @@ signal confirm_pressed
 @export var confirm_button:Button
 
 @export var actor_buttons_container:Container
-@export var player1_button_control:ActorPlacerButton
-@export var player2_button_control:ActorPlacerButton
-@export var player3_button_control:ActorPlacerButton
-@export var player4_button_control:ActorPlacerButton
+@export var premade_actor_button:ActorPlacerButton
 
 
 var _actor_id_to_buttons:Dictionary = {}
@@ -27,6 +24,7 @@ var max_actor_count:int = 4
 func _ready() -> void:
 	confirm_button.button_down.connect(_on_confirm_button_down)
 	confirm_button.button_up.connect(_on_confirm_button_up)
+	premade_actor_button.hide()
 	#player1_button_control.pressed.connect(_on_actor_button_pressed.bind(player1_button_control))
 	#player2_button_control.pressed.connect(_on_actor_button_pressed.bind(player2_button_control))
 	#player3_button_control.pressed.connect(_on_actor_button_pressed.bind(player3_button_control))
@@ -44,43 +42,34 @@ func _process(_delta: float) -> void:
 	pass
 
 func load_and_show(min_actors:int=1, max_actors:int=4):
-	var actors = StoryState.list_player_actor()
-	var buttons = actor_buttons_container.get_children()
+	var actors = StoryState.list_party_actors()
+	for child in actor_buttons_container.get_children():
+		child.queue_free()
 	_spawn_tile_map = CombatRootControl.Instance.MapController.player_spawn_area_tile_map
 	var first_actor_id = ''
-	var index = 0
-	for button in buttons:
-		if not button is ActorPlacerButton:
+	for actor in StoryState.list_party_actors():
+		if !actor:
 			continue
-		if actors.size() <= index:
-			button.hide()
+		if first_actor_id == '':
+			first_actor_id = actor.Id
+		var button = premade_actor_button.duplicate()
+		actor_buttons_container.add_child(button)
+		button.actor_icon.texture = actor.sprite.get_portrait_sprite()
+		button.highlight.hide()
+		button.pressed.connect(_on_actor_button_pressed.bind(actor.Id))
+		button.actor_id = actor.Id
+		button.show()
+		var actor_node = CombatRootControl.Instance.MapController.get_or_create_actor_node(actor, MapPos.new(0,0,0,0), true)
+		if not actor_node:
+			printerr("ActorPlacerControl.load_and_show: No Actor Node found for Actor: '%s'." % [actor.Id])
+			continue
+		if actor_node.get_parent() != _spawn_tile_map:
+			actor_node.reparent(_spawn_tile_map)
 		else:
-			var actor = actors[index]
-			if !actor:
-				index += 1
-				continue
-			if first_actor_id == '':
-				first_actor_id = actor.Id
-			button.actor_icon.texture = actor.sprite.get_portrait_sprite()
-			button.highlight.hide()
-			button.pressed.connect(_on_actor_button_pressed.bind(actor.Id))
-			button.actor_id = actor.Id
-			var actor_node = CombatRootControl.get_actor_node(actor.Id)
-			if not actor_node:
-				printerr("ActorPlacerControl.load_and_show: No Actor Node found for Actor: '%s'." % [actor.Id])
-				continue
-			if actor_node.get_parent() != _spawn_tile_map:
-				actor_node.reparent(_spawn_tile_map)
-			else:
-				_spawn_tile_map.add_child(actor_node)
-			actor_node.hide()
-			_actor_id_to_buttons[actor.Id] = button
-			_actor_id_to_actor_node[actor.Id] = actor_node
-		index += 1
-	if index < buttons.size():
-		for left_over in range(index, 4):
-			var button:ActorPlacerButton = buttons[index]
-			button.hide()
+			_spawn_tile_map.add_child(actor_node)
+		actor_node.hide()
+		_actor_id_to_buttons[actor.Id] = button
+		_actor_id_to_actor_node[actor.Id] = actor_node
 	max_actor_count = max_actors
 	min_actor_count = min_actors
 	if min_actors == max_actors:

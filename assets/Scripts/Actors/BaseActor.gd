@@ -78,12 +78,27 @@ func _init(key:String, load_path:String, def:Dictionary, id:String, data:Diction
 	Que = ActionQue.new(self)
 	if get_load_val("IsPlayer", false):
 		is_player = true
+	_cache_after_loading_def()
+
+func reload_def(load_path:String, def:Dictionary):
+	super(load_path, def)
+	_cache_after_loading_def()
+
+func _cache_after_loading_def():
+	stats.dirty_stats()
 
 func get_name()->String:
 	if pages:
 		var title_page:BasePageItem = pages.get_item_in_slot(0)
 		if title_page:
 			return title_page.get_display_name()
+	return get_display_name()
+
+func get_title()->String:
+	if pages:
+		var title_page = pages.get_title_page()
+		if title_page:
+			return title_page.get_title_key()
 	return get_display_name()
 
 func get_tags(): 
