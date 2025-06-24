@@ -1,9 +1,10 @@
-[gd_scene load_steps=18 format=3 uid="uid://dmlpvjyai521d"]
+[gd_scene load_steps=19 format=3 uid="uid://dmlpvjyai521d"]
 
 [ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/InventoryPage/inventory_container.gd" id="1_j4lhh"]
 [ext_resource type="Texture2D" uid="uid://gxk1dw0hkyuj" path="res://Scenes/Menus/CharacterMenu/MenuPages/InventoryPage/InvBoxBackground_working.png" id="2_e5pw5"]
 [ext_resource type="Theme" uid="uid://dwinll8pgdjhc" path="res://Scenes/Themes/standard_theme.tres" id="3_e4t5p"]
 [ext_resource type="PackedScene" uid="uid://bpvy87uagttpr" path="res://Scenes/UiNodes/ScollBar/scroll_bar.tscn" id="5_0hjxr"]
+[ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/InventoryPage/sub_group_container.gd" id="6_5pha8"]
 [ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/InventoryPage/inventory_item_button_control.gd" id="7_1h41b"]
 [ext_resource type="Texture2D" uid="uid://bibqsudhjw4qe" path="res://assets/Sprites/Paper/Mundane_Background.png" id="7_bemus"]
 [ext_resource type="Texture2D" uid="uid://cm3afo1rfa56g" path="res://assets/Sprites/Paper/PaperButton_64.png" id="7_bit48"]
@@ -18,7 +19,7 @@
 [ext_resource type="Script" path="res://Scenes/UiNodes/loaded_option_button.gd" id="13_32pmb"]
 [ext_resource type="Texture2D" uid="uid://3ncohf5a6kf7" path="res://Scenes/Menus/CharacterMenu/HoleBackground.png" id="13_pu80u"]
 
-[node name="InventoryPage" type="Control" node_paths=PackedStringArray("scroll_container", "items_container", "premade_item_button", "scroll_bar", "inventory_box_highlight", "filter_option_button")]
+[node name="InventoryPage" type="Control" node_paths=PackedStringArray("scroll_container", "items_container", "scroll_bar", "inventory_box_highlight", "filter_option_button", "premade_inventory_sub_group", "premade_item_button")]
 custom_minimum_size = Vector2(280, 395)
 layout_mode = 3
 anchors_preset = 0
@@ -29,11 +30,12 @@ script = ExtResource("1_j4lhh")
 min_button_size = Vector2i(64, 64)
 max_button_size = Vector2i(96, 96)
 scroll_container = NodePath("BoxBackground/ScrollContainer")
-items_container = NodePath("BoxBackground/ScrollContainer/FlowContainer")
-premade_item_button = NodePath("BoxBackground/ScrollContainer/FlowContainer/InventoryItemButton")
+items_container = NodePath("BoxBackground/ScrollContainer/VBoxContainer")
 scroll_bar = NodePath("ScrollBar")
 inventory_box_highlight = NodePath("BoxBackground/NinePatchRect")
 filter_option_button = NodePath("FilterOptionButton")
+premade_inventory_sub_group = NodePath("BoxBackground/ScrollContainer/VBoxContainer/SubGroupContainer")
+premade_item_button = NodePath("BoxBackground/ScrollContainer/VBoxContainer/SubGroupContainer/FlowContainer/InventoryItemButton")
 
 [node name="Background" type="NinePatchRect" parent="."]
 visible = false
@@ -114,7 +116,24 @@ size_flags_vertical = 3
 horizontal_scroll_mode = 0
 vertical_scroll_mode = 3
 
-[node name="FlowContainer" type="FlowContainer" parent="BoxBackground/ScrollContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="BoxBackground/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SubGroupContainer" type="VBoxContainer" parent="BoxBackground/ScrollContainer/VBoxContainer" node_paths=PackedStringArray("label", "inner_container")]
+layout_mode = 2
+script = ExtResource("6_5pha8")
+label = NodePath("SubGroupLabel")
+inner_container = NodePath("FlowContainer")
+
+[node name="SubGroupLabel" type="Label" parent="BoxBackground/ScrollContainer/VBoxContainer/SubGroupContainer"]
+layout_mode = 2
+theme = ExtResource("3_e4t5p")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 22
+text = "Passives"
+
+[node name="FlowContainer" type="FlowContainer" parent="BoxBackground/ScrollContainer/VBoxContainer/SubGroupContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -123,7 +142,7 @@ theme_override_constants/v_separation = 6
 alignment = 1
 last_wrap_alignment = 1
 
-[node name="InventoryItemButton" type="Control" parent="BoxBackground/ScrollContainer/FlowContainer" node_paths=PackedStringArray("item_icon_rect", "equipt_icon", "count_label", "button", "name_label", "background")]
+[node name="InventoryItemButton" type="Control" parent="BoxBackground/ScrollContainer/VBoxContainer/SubGroupContainer/FlowContainer" node_paths=PackedStringArray("item_icon_rect", "equipt_icon", "count_label", "button", "name_label", "background")]
 custom_minimum_size = Vector2(68, 84)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -140,7 +159,7 @@ common_background = ExtResource("8_7dlh3")
 rare_background = ExtResource("9_4duyt")
 legend_background = ExtResource("10_a6hxn")
 
-[node name="Background" type="TextureRect" parent="BoxBackground/ScrollContainer/FlowContainer/InventoryItemButton"]
+[node name="Background" type="TextureRect" parent="BoxBackground/ScrollContainer/VBoxContainer/SubGroupContainer/FlowContainer/InventoryItemButton"]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -150,7 +169,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("7_bit48")
 
-[node name="ItemIcon" type="TextureRect" parent="BoxBackground/ScrollContainer/FlowContainer/InventoryItemButton"]
+[node name="ItemIcon" type="TextureRect" parent="BoxBackground/ScrollContainer/VBoxContainer/SubGroupContainer/FlowContainer/InventoryItemButton"]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -160,7 +179,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("12_iktx4")
 
-[node name="EquiptIcon" type="TextureRect" parent="BoxBackground/ScrollContainer/FlowContainer/InventoryItemButton"]
+[node name="EquiptIcon" type="TextureRect" parent="BoxBackground/ScrollContainer/VBoxContainer/SubGroupContainer/FlowContainer/InventoryItemButton"]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -172,7 +191,7 @@ offset_bottom = 70.0
 grow_horizontal = 0
 texture = ExtResource("9_a4qxi")
 
-[node name="CountLabel" type="Label" parent="BoxBackground/ScrollContainer/FlowContainer/InventoryItemButton"]
+[node name="CountLabel" type="Label" parent="BoxBackground/ScrollContainer/VBoxContainer/SubGroupContainer/FlowContainer/InventoryItemButton"]
 layout_direction = 3
 layout_mode = 0
 offset_left = 3.0
@@ -183,7 +202,7 @@ theme = ExtResource("3_e4t5p")
 text = "1"
 horizontal_alignment = 1
 
-[node name="NinePatchRect" type="NinePatchRect" parent="BoxBackground/ScrollContainer/FlowContainer/InventoryItemButton/CountLabel"]
+[node name="NinePatchRect" type="NinePatchRect" parent="BoxBackground/ScrollContainer/VBoxContainer/SubGroupContainer/FlowContainer/InventoryItemButton/CountLabel"]
 show_behind_parent = true
 layout_mode = 1
 anchors_preset = -1
@@ -199,7 +218,7 @@ patch_margin_top = 4
 patch_margin_right = 4
 patch_margin_bottom = 4
 
-[node name="NinePatchRect" type="NinePatchRect" parent="BoxBackground/ScrollContainer/FlowContainer/InventoryItemButton"]
+[node name="NinePatchRect" type="NinePatchRect" parent="BoxBackground/ScrollContainer/VBoxContainer/SubGroupContainer/FlowContainer/InventoryItemButton"]
 custom_minimum_size = Vector2(64, 18)
 layout_mode = 1
 anchors_preset = 12
@@ -216,7 +235,7 @@ patch_margin_top = 5
 patch_margin_right = 5
 patch_margin_bottom = 5
 
-[node name="FitScaleLabel" type="Control" parent="BoxBackground/ScrollContainer/FlowContainer/InventoryItemButton/NinePatchRect" node_paths=PackedStringArray("label")]
+[node name="FitScaleLabel" type="Control" parent="BoxBackground/ScrollContainer/VBoxContainer/SubGroupContainer/FlowContainer/InventoryItemButton/NinePatchRect" node_paths=PackedStringArray("label")]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -232,7 +251,7 @@ label = NodePath("Label")
 text = "Test THing"
 center_x = true
 
-[node name="Label" type="Label" parent="BoxBackground/ScrollContainer/FlowContainer/InventoryItemButton/NinePatchRect/FitScaleLabel"]
+[node name="Label" type="Label" parent="BoxBackground/ScrollContainer/VBoxContainer/SubGroupContainer/FlowContainer/InventoryItemButton/NinePatchRect/FitScaleLabel"]
 layout_mode = 0
 offset_left = 505.0
 offset_top = 306.0
@@ -244,7 +263,7 @@ text = "Test THing"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Button" type="Button" parent="BoxBackground/ScrollContainer/FlowContainer/InventoryItemButton"]
+[node name="Button" type="Button" parent="BoxBackground/ScrollContainer/VBoxContainer/SubGroupContainer/FlowContainer/InventoryItemButton"]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -252,6 +271,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="SubGroupControl" type="Control" parent="BoxBackground/ScrollContainer/VBoxContainer"]
+layout_mode = 2
 
 [node name="FilterOptionButton" type="OptionButton" parent="."]
 visible = false

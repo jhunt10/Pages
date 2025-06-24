@@ -15,7 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://crfa2hjirevj7" path="res://Scenes/Menus/ShopMenu/MinusIcon.png" id="15_dwkrx"]
 [ext_resource type="Script" path="res://Scenes/UiNodes/FitScaleLabel/fit_scale_label.gd" id="15_mutf0"]
 [ext_resource type="Texture2D" uid="uid://bibqsudhjw4qe" path="res://assets/Sprites/Paper/Mundane_Background.png" id="16_3hl53"]
-[ext_resource type="Texture2D" uid="uid://c2rmvgu5ib0nq" path="res://defs/Actions/ItemUsage/Sprites/Potion_Icon.png" id="17_loymo"]
+[ext_resource type="Texture2D" uid="uid://c2rmvgu5ib0nq" path="res://ObjectDefs/Actions/ItemUsage/Sprites/Potion_Icon.png" id="17_loymo"]
 [ext_resource type="Texture2D" uid="uid://7x0clyrtcupf" path="res://assets/Sprites/UI/BackPatches/FancyBackPatch_64_18.png" id="18_f0yo1"]
 [ext_resource type="Script" path="res://Scenes/Menus/ShopMenu/shop_item_button.gd" id="18_k1elq"]
 [ext_resource type="Texture2D" uid="uid://d378fa2vw8581" path="res://Scenes/Menus/ShopMenu/CartImage.png" id="19_o7uny"]
@@ -555,7 +555,6 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="ItemMenuContainer" type="NinePatchRect" parent="." node_paths=PackedStringArray("entries_container", "premade_sub_item_list", "back_button")]
-visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.65

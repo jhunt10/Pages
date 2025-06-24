@@ -16,14 +16,17 @@ signal mouse_exit_item(context, item_key, index)
 @export var max_button_size:Vector2i
 #@export var tab_bar:TabBar
 @export var scroll_container:ScrollContainer
-@export var items_container:FlowContainer
-@export var premade_item_button:InventoryItemButton
+@export var items_container:Container
 @export var scroll_bar:CustScrollBar
 @export var inventory_box_highlight:NinePatchRect
 @export var filter_option_button:LoadedOptionButton
 
+@export var premade_inventory_sub_group:InventorySubGroupContainer
+@export var premade_item_button:InventoryItemButton
+
 var _mouse_in_button:InventoryItemButton
 var _item_buttons:Dictionary = {}
+var _item_groups:Dictionary = {}
 var _hover_delay:float = 0.3
 var _hover_timer:float
 var _click_delay:float = 0.4
@@ -49,6 +52,8 @@ func _ready() -> void:
 		if !ItemLibrary.Instance:
 			ItemLibrary.new()
 		delayed_build = true
+	if premade_inventory_sub_group:
+		premade_inventory_sub_group.hide()
 	inventory_box_highlight.hide()
 	scroll_container.mouse_entered.connect(on_mouse_enter_inventory_box)
 	scroll_container.mouse_exited.connect(on_mouse_exit_inventory_box)
@@ -85,26 +90,43 @@ func calc_button_size():
 func build_item_list():
 	for item_id in _item_buttons.keys():
 		if not PlayerInventory.has_item_id(item_id):
-			_item_buttons[item_id].queue_free()
-			_item_buttons.erase(item_id)
-		elif _item_buttons[item_id].get_parent() == items_container:
-			items_container.remove_child(_item_buttons[item_id])
+			_item_buttons[item_id].hide()
+			#_item_buttons.erase(item_id)
+		#elif _item_buttons[item_id].get_parent() == items_container:
+			#items_container.remove_child(_item_buttons[item_id])
 	
 	for item:BaseItem in PlayerInventory.get_sorted_items():
-		var button = _item_buttons.get(item.Id)
-		if !button:
-			button = _build_button(item)
-		items_container.add_child(button)
+		var sub_group_key = _get_sub_group_key(item)
+		var button = _get_button(item)
+		var group = _get_sub_group_container(sub_group_key)
+		if not group.get_children().has(button):
+			group.get_inner_container().add_child(button)
+		#items_container.add_child(button)
 		
 		#if item.can_stack:
 		button.set_item(item, PlayerInventory.get_item_stack_count(item.ItemKey))
 		
 		button.visible = should_item_be_visible(item)
-		
+	var sort_order = ["Title","Passive", "Action"]
+	for sub_group_key in _item_groups.keys():
+		if not sort_order.has(sub_group_key):
+			sort_order.append(sub_group_key)
+		items_container.remove_child(_item_groups[sub_group_key])
+	for sub_group_key in sort_order:
+		if _item_groups.keys().has(sub_group_key):
+			items_container.add_child(_item_groups[sub_group_key])
 	await get_tree().process_frame
 	scroll_bar.calc_bar_size()
 
-func _build_button(item:BaseItem)->InventoryItemButton:
+func _get_sub_group_key(item:BaseItem)->String:
+	var tax = item.get_taxonomy()
+	if tax.size() > 0:
+		return tax[tax.size()-1]
+	return "Unkown"
+
+func _get_button(item:BaseItem)->InventoryItemButton:
+	if _item_buttons.keys().has(item.Id):
+		return _item_buttons[item.Id]
 	var new_button:InventoryItemButton = premade_item_button.duplicate()
 	var count = 0
 	
@@ -119,6 +141,17 @@ func _build_button(item:BaseItem)->InventoryItemButton:
 	new_button.name = "InventoryButton_" + item.ItemKey
 	_item_buttons[item.Id] = new_button
 	return new_button
+
+func _get_sub_group_container(key)->InventorySubGroupContainer:
+	if _item_groups.keys().has(key):
+		return _item_groups[key]
+	var new_group:InventorySubGroupContainer = premade_inventory_sub_group.duplicate()
+	new_group.label.text = key
+	items_container.add_child(new_group)
+	new_group.show()
+	_item_groups[key] = new_group
+	return new_group
+	
 
 func on_player_inventory_changed():
 	#var greater_filter = filter_option_button.get_current_option_text()
@@ -156,18 +189,21 @@ func clear_forced_filters(refilter:bool=true):
 		filter_option_button.load_options("All")
 		_refilter()
 
-func add_forced_filter(tag, refilter:bool=true):
-	if !_forced_filters.has(tag):
-		_forced_filters.append(tag)
-		var valid_filters = get_filter_options()
-		for sub in _sub_filters:
-			if not valid_filters.has(sub):
-				_sub_filters.erase(sub)
-		var current_filter = filter_option_button.get_current_option_text()
-		if current_filter != 'All' and not valid_filters.has(current_filter):
-			filter_option_button.load_options("All")
-		if refilter:
-			_refilter()
+func add_forced_filter(tags, refilter:bool=true):
+	if tags is String:
+		tags = [tags]
+	for tag in tags:
+		if !_forced_filters.has(tag):
+			_forced_filters.append(tag)
+			var valid_filters = get_filter_options()
+			for sub in _sub_filters:
+				if not valid_filters.has(sub):
+					_sub_filters.erase(sub)
+			var current_filter = filter_option_button.get_current_option_text()
+			if current_filter != 'All' and not valid_filters.has(current_filter):
+				filter_option_button.load_options("All")
+	if refilter:
+		_refilter()
 
 func _refilter():
 	for button:InventoryItemButton in _item_buttons.values():
@@ -180,7 +216,10 @@ func _refilter():
 func should_item_be_visible(item:BaseItem):
 	var tags = item.get_item_tags()
 	for f_filter in _forced_filters:
-		if not tags.has(f_filter):
+		if f_filter.begins_with("Not:"):
+			if tags.has(f_filter.trim_prefix("Not:")):
+				return false
+		elif not tags.has(f_filter):
 			return false
 	if _sub_filters.size() == 0:
 		return true

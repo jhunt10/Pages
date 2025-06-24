@@ -48,6 +48,8 @@ func get_small_icon()->Texture2D:
 	return SpriteCache.get_sprite(icon_path)
 func get_tags()->Array:
 	return object_details.get("Tags", [])
+func get_taxonomy()->Array:
+	return object_details.get("Taxonomy", [])
 
 func save_me()->bool:
 	return false

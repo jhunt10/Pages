@@ -30,7 +30,7 @@ func sync_labels():
 		new_button.button.pressed.connect(actor_pressed.bind(actor.Id))
 		new_button.show()
 		buttons_container.add_child(new_button)
-			#buttons[index].button_texture.self_modulate = StoryState.get_player_color(index)
+		new_button.button_texture.self_modulate = StoryState.get_player_color(actor)
 
 func set_selected_actor(actor):
 	var player_index = StoryState.get_party_index_of_actor(actor)

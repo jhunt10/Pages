@@ -54,12 +54,17 @@ func list_party_actors()->Array:
 			out_list.append(ActorLibrary.get_actor(player_id))
 	return out_list
 
-func get_player_color(actor:BaseActor)->Color:
-	var index = 2
-	if index == 0: return Color.BLUE
-	elif index == 1: return Color.DARK_GREEN
-	elif index == 2: return Color.YELLOW
-	elif index == 0: return Color.DARK_RED
+func get_player_color(actor)->Color:
+	if actor is String:
+		actor = ActorLibrary.get_actor(actor)
+	
+	var title = actor.pages.get_title_page()
+	if title:
+		return title.get_player_color()
+	#if index == 0: return Color.BLUE
+	#elif index == 1: return Color.DARK_GREEN
+	#elif index == 2: return Color.YELLOW
+	#elif index == 0: return Color.DARK_RED
 	return Color.WHITE
 
 func start_new_story():

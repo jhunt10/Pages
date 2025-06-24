@@ -21,3 +21,7 @@ func get_item_tags()->Array:
 
 func get_title_key()->String:
 	return page_data.get("SourceTitle", "")
+
+func get_player_color():
+	var color_code = page_data.get("TitleColor", "FFFFFF")
+	return Color.from_string(color_code, Color.WHITE)
