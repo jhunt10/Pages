@@ -27,13 +27,14 @@ func _show_pop_up(data_str):
 	popup_container.global_position = self.get_global_mouse_position()
 	popup_container.message_box.clear()
 	if data:
-		if data.has("data"):
-			var line = data.get("data", "")
+		if data.has("text"):
+			var line = data.get("text", "")
 			line = line.replace("|>|", "]").replace("|<|", "[")
-			popup_container.message_box.append_text(line)
+			popup_container.set_text(line)
 		elif data.has("EffectKey"):
 			var effect_def = EffectLibrary.get_effect_def(data['EffectKey'])
-			var lines = _build_bbcode_array(effect_def, null, null)
+			var effect_description = effect_def.get("#ObjDetails", {}).get("Description", "")
+			var lines = _build_bbcode_array(effect_description, effect_def, null, null)
 			for line in lines:
 				if line is String:
 					popup_container.message_box.append_text(line)
@@ -54,7 +55,8 @@ func set_page_item(page:BasePageItem, actor:BaseActor=null):
 
 func set_object(object_def:Dictionary, object_inst:BaseLoadObject, actor:BaseActor):
 	self.clear()
-	var lines = _build_bbcode_array(object_def, object_inst, actor)
+	var raw_description = object_def.get("#ObjDetails", {}).get("Description", "")
+	var lines = _build_bbcode_array(raw_description, object_def, object_inst, actor)
 	for line in lines:
 		if line is String:
 			self.append_text(line)
@@ -81,9 +83,8 @@ func get_damage_colored_text(damage_type, text_value='')->String:
 	return start_tag + text_value + end_tag
 		
 
-func _build_bbcode_array(object_def:Dictionary, object_inst:BaseLoadObject, actor:BaseActor)->Array:
+func _build_bbcode_array(raw_description:String, object_def:Dictionary, object_inst:BaseLoadObject, actor:BaseActor)->Array:
 	var out_arr = []
-	var raw_description = object_def.get("#ObjDetails", {}).get("Description", "")
 	var tokens = raw_description.split("@@")
 	var out_line = ''
 	for token:String in tokens:
@@ -127,7 +128,25 @@ func _build_bbcode_array(object_def:Dictionary, object_inst:BaseLoadObject, acto
 				else:
 					mid_value = sub_tokens[2]
 				out_line += start_tag + mid_value + end_tag
-				
+			
+			"#Stat":
+				var stat_name = sub_tokens[1]
+				var display_stat_name = StatHelper.get_stat_abbr(stat_name)
+				var icon = StatHelper.get_stat_icon(stat_name)
+				if icon: 
+					out_arr.append(out_line)
+					out_arr.append(icon)
+					out_line = ""
+				else:
+					out_line += " "
+				out_line +=  RED_TEXT + display_stat_name + "[/color]"
+			
+			"#Tag":
+				out_arr.append(out_line)
+				out_line = ''
+				var sub_lines = _parse_tag_info(sub_tokens)
+				out_arr.append_array(sub_lines)
+			
 			"#AccMod":
 				var attack_details = object_def.get("ActionData", {}).get("AttackDetails", {})
 				var acc_mod = attack_details.get("AccuracyMod", 1)
@@ -138,63 +157,8 @@ func _build_bbcode_array(object_def:Dictionary, object_inst:BaseLoadObject, acto
 				if param_data.has(sub_tokens[2]):
 					out_line += RED_TEXT + str(param_data[sub_tokens[2]]) + "[/color]"
 			"#DmgData":
-				var damage_data = {}
-				var damage_key = sub_tokens[1]
-				var no_actor_text = ''
-				if sub_tokens.size() > 2:
-					no_actor_text = sub_tokens[2]
-				if object_inst is PageItemAction:
-					damage_data = object_inst.get_damage_data_single(actor, damage_key)
-				elif object_def.has("ActionData"):
-					damage_data = object_def.get("ActionData", {}).get("DamageDatas", {}).get(damage_key, {})
-				elif object_def.has("EffectData"):
-					damage_data = object_def.get("EffectData", {}).get("DamageDatas", {}).get(damage_key, {})
-				elif object_def.has("DamageDatas"):
-					damage_data = object_def.get("DamageDatas", {}).get(damage_key, {})
-				if damage_data.size() == 0:
-					continue
-				var damage_type = damage_data.get("DamageType", "???")
-				var hover_line = ''
-				var sub_line = ''
-				var is_percent_hp_damage = false
-				if no_actor_text != '':
-					sub_line = no_actor_text
-				elif damage_data.has("WeaponFilter"):
-					var atk_scale = damage_data.get("AtkPwrScale", 1)
-					if atk_scale == 1:
-						sub_line += "Weapon Damage"
-					else:
-						sub_line += str(atk_scale * 100) + "% Weapon Damage"
-				else:
-					var atk_power = damage_data.get("AtkPwrBase", 0)
-					if damage_data.has("AtkPwrStat") and actor:
-						atk_power = actor.stats.get_stat(damage_data["AtkPwrStat"], 1)
-					var atk_varient = damage_data.get("AtkPwrRange", 0)
-					var atk_scale = damage_data.get("AtkPwrScale", 1)
-					var atk_stat:String = damage_data.get("AtkStat", "")
-					var val_line = str(atk_power)
-					if atk_varient > 0:
-						val_line += "@" + str(atk_varient)
-					if atk_stat.begins_with("Percent"):
-						is_percent_hp_damage = true
-						sub_line = val_line + "% Max HP as " + damage_type + " Damage" 
-					else:
-						sub_line = val_line + "% " + StatHelper.get_stat_abbr(atk_stat) + " as " + damage_type + " Damage" 
-					
-				if actor and not is_percent_hp_damage:
-					hover_line = sub_line
-					var min_max = DamageHelper.get_min_max_damage(actor, damage_data)
-					if min_max[0] == min_max[1]:
-						sub_line = str(min_max[0]) + damage_type + " Damage"
-					else:
-						sub_line = str(min_max[0]) + " - " + str(min_max[1]) + " " + damage_type + " Damage" 
+				out_line += _parse_damage_data(sub_tokens, object_def, object_inst, actor)
 				
-				if sub_line != '':
-					sub_line = sub_line.replace(damage_type, "[/color]" + get_damage_colored_text(damage_type) + RED_TEXT)
-					if hover_line != '':
-						out_line += "[url={\"data\":\"" + hover_line+ "\"}]" + RED_TEXT + sub_line + "[/color]" + "[/url]"
-					else:
-						out_line += RED_TEXT + sub_line + "[/color]"
 			'#EftData':
 				var effect_data = {}
 				if object_def.has("EffectDatas"):
@@ -319,6 +283,129 @@ func _get_title_specific_faction_name(actor:BaseActor, faction_name:String, forc
 		elif not val.ends_with("s"):
 			val += "s"
 	return val
+
+func _parse_tag_info(tokens:Array)->Array:
+	var tag = tokens[1]
+	var parse_type = 'Hint'
+	if tokens.size() >= 3:
+		parse_type = tokens[2]
+	var out_line = ''
+	var out_arr = []
+	match  parse_type:
+		"Desc":
+			var tag_desc = TagsLibrary.get_tag_description(tag)
+			out_arr.append(out_line)
+			out_line = ""
+			out_arr.append_array(_build_bbcode_array(tag_desc, {}, null, null))
+		"Hint":
+			var text = tag
+			if tokens.size() >= 4:
+				text = tokens[3]
+			var hint_text = ''
+			var hint_lines = _parse_tag_info(["#Tag", tag, "Desc"])
+			for line in hint_lines:
+				if line is String:
+					hint_text += line.replace("]", "|>|").replace("[", "|<|")
+			out_line += ('[color=blue][url={"text":"' + hint_text + '"}]' +  text + "[/url][/color]")
+	if out_line != '':
+		out_arr.append(out_line)
+	return out_arr
+
+
+func _parse_damage_data(tokens:Array, object_def:Dictionary, object_inst:BaseLoadObject, actor:BaseActor, in_damage_data={})->String:
+	var out_line = ''
+	var damage_data = in_damage_data
+	var damage_key = tokens[1]
+	var extra_damage_datas = []
+	var no_actor_text = ''
+	if tokens.size() > 2:
+		no_actor_text = tokens[2]
+	# Get damage data if not provided
+	if damage_data.size() == 0:
+		if object_inst is PageItemAction:
+			var damage_datas = object_inst.get_damage_datas(actor, damage_key)
+			if damage_datas.keys().has(damage_key):
+				damage_data = damage_datas[damage_key]
+			elif damage_datas.size() > 0:
+				extra_damage_datas = damage_datas.values()
+				damage_data = extra_damage_datas[0]
+				extra_damage_datas.remove_at(0)
+				
+		elif object_def.has("ActionData"):
+			damage_data = object_def.get("ActionData", {}).get("DamageDatas", {}).get(damage_key, {})
+		elif object_def.has("EffectData"):
+			damage_data = object_def.get("EffectData", {}).get("DamageDatas", {}).get(damage_key, {})
+		elif object_def.has("DamageDatas"):
+			damage_data = object_def.get("DamageDatas", {}).get(damage_key, {})
+	if damage_data.size() == 0:
+		return ''
+	var damage_type = damage_data.get("DamageType", "???")
+	var hover_line = ''
+	var description_line = ''
+	var is_percent_hp_damage = false
+	# A description line was given (aka no actor text)
+	if no_actor_text != '':
+		description_line = no_actor_text
+	# Using Weapon damage, so default to X% Weapon Damage
+	elif damage_data.has("WeaponFilter"):
+		var atk_scale = damage_data.get("AtkPwrScale", 1)
+		if atk_scale == 1:
+			description_line += "Weapon Damage"
+		else:
+			description_line += str(atk_scale) + " x Weapon Damage"
+	# Parse actual "100+10% Mag Attack as Fire Damage"
+	else:
+		var atk_power = damage_data.get("AtkPwrBase", 0)
+		if damage_data.has("AtkPwrStat") and actor:
+			atk_power = actor.stats.get_stat(damage_data["AtkPwrStat"], 1)
+		var atk_varient = damage_data.get("AtkPwrRange", 0)
+		var atk_scale = damage_data.get("AtkPwrScale", 1)
+		var atk_stat:String = damage_data.get("AtkStat", "")
+		var val_line = str(atk_power)
+		if atk_varient > 0:
+			val_line += "@" + str(atk_varient)
+		if atk_stat.begins_with("Percent"):
+			is_percent_hp_damage = true
+			description_line = val_line + "% Max HP as " + damage_type + " Damage" 
+		else:
+			description_line = val_line + "% " + StatHelper.get_stat_abbr(atk_stat) + " as " + damage_type + " Damage" 
+		
+	if actor and not is_percent_hp_damage:
+		hover_line = description_line
+		description_line = ''
+		var min_max = DamageHelper.get_min_max_damage(actor, damage_data)
+		if min_max[0] == min_max[1]:
+			description_line = str(min_max[0]) + damage_type# + " Damage"
+		else:
+			description_line = str(min_max[0]) + " - " + str(min_max[1]) + " " + damage_type# + " Damage" 
+	
+	if description_line != '':
+		#description_line = description_line.replace(damage_type, "[/color]" + get_damage_colored_text(damage_type) + RED_TEXT)
+		if hover_line != '':
+			out_line += "[url={\"text\":\"" + hover_line+ "\"}]" + get_damage_colored_text(damage_type, description_line) + "[/url]"
+		else:
+			out_line += get_damage_colored_text(damage_type, description_line) 
+	
+	if extra_damage_datas.size() == 0:
+		return out_line
+	
+	var line_matches = {out_line: 1}
+	for extra in extra_damage_datas:
+		var other_line = _parse_damage_data(tokens, object_def, object_inst, actor, extra)
+		if not line_matches.keys().has(other_line):
+			line_matches[other_line] = 0
+		line_matches[other_line] += 1
+	
+	var merged_lines = []
+	for line_val in line_matches.keys():
+		var match_count = line_matches[line_val]
+		if match_count > 1:
+			merged_lines.append(RED_TEXT + str(match_count) + " x " + line_val.trim_prefix(RED_TEXT))
+		else:
+			merged_lines.append(line_val)
+			
+	return " and ".join(merged_lines)
+
 
 func _parse_damage_mod(parse_type:String, mod_data:Dictionary)->String:
 	var out_line = ''
@@ -470,7 +557,7 @@ func _parse_stat_mod_multi(object_def:Dictionary, object_inst:BaseLoadObject, ac
 			multi_stat_line += " " + ", ".join(mods_by_type_value[mod_type][value])
 	if sub_tokens.size() > 2:
 		var show_line = sub_tokens[2]
-		out_line += RED_TEXT + "[url={\"data\":\"" + multi_stat_line+ "\"}]" + show_line + "[/url]"+ "[/color]"
+		out_line += RED_TEXT + "[url={\"text\":\"" + multi_stat_line+ "\"}]" + show_line + "[/url]"+ "[/color]"
 	else:
 		out_line += multi_stat_line
 	return out_line
@@ -482,7 +569,8 @@ func _parse_effect(effect_key:String, effect_data:Dictionary, prop_key:String, a
 		return [RED_TEXT + "'" + effect_key + "' Not Found"+ "[/color]"]
 	var effect_def = EffectLibrary.get_merged_effect_def(effect_key, effect_data)
 	if prop_key == '' or prop_key == 'Description':
-		var sub_lines = _build_bbcode_array(effect_def, null, actor)
+		var effect_description = effect_def.get("#ObjDetails", {}).get("Description", "")
+		var sub_lines = _build_bbcode_array(effect_description, effect_def, null, actor)
 		var display_name = effect_def.get("#ObjDetails", {}).get("DisplayName", "???")
 		out_line += "[color=blue]" + display_name + ". [/color]"
 		out_arr.append(out_line)

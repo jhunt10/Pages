@@ -53,6 +53,7 @@ add_item_button = NodePath("PageInnerContainer/LineContainer/AddButton")
 background = NodePath("NinePatchRect")
 inner_container = NodePath("PageInnerContainer")
 force_fill_x = true
+center_from = null
 
 [node name="NinePatchRect" type="NinePatchRect" parent="."]
 layout_mode = 2
@@ -378,6 +379,8 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 
 [node name="RichTextLabel" type="RichTextLabel" parent="PageInnerContainer/DetailsContainer/DetailsContainer"]
+z_index = 1
+clip_contents = false
 layout_mode = 2
 theme = ExtResource("7_4grnp")
 text = "Detailed Discription"
@@ -389,7 +392,8 @@ layout_mode = 2
 mouse_filter = 2
 
 [node name="Button" type="Button" parent="Control"]
+visible = false
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 offset_right = 1039.0
-offset_bottom = 263.0
+offset_bottom = 80.0

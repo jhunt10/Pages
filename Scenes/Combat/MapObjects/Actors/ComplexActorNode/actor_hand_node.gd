@@ -2,7 +2,7 @@
 class_name ActorHandNode
 extends Node2D
 
-const LOGGING = false
+const LOGGING = true
 
 enum HANDS {MainHand, OffHand, TwoHand}
 enum ANIMATIONS {None, Swing, Stab}
@@ -107,7 +107,18 @@ func set_weapon(weapon:BaseWeaponEquipment):
 func hide_weapon():
 	weapon_node.visible = false
 
+var animation_que = []
+
 func ready_arnimation(animationn_name, speed:float=1.0):
+	print("HandAnimationg Readying: %s" % [animationn_name])
+	if current_animation_name != null:
+		printerr("!!!ActorHandNodeHand.ready_animation: Animation Overlap: %s > %s" % [current_animation_name, animationn_name])
+		animation_que.append({
+			"AnimationKey": animationn_name,
+			"Speed": speed,
+			"Readied": false,
+			"Executed": false
+		})
 	animation_tree.set("parameters/conditions/Cancel", false)
 	animation_tree.set("parameters/conditions/PlayMotion", false)
 	if animationn_name == "Swing":
@@ -125,7 +136,7 @@ func ready_arnimation(animationn_name, speed:float=1.0):
 
 func execute_animation(speed:float=1.0):
 	if not readied_animation:
-		printerr("ActorHandNode.execute_animation: Called with no readied_animation.")
+		printerr("!!!ActorHandNode.execute_animation: Called with no readied_animation.")
 		return
 	animation_speed = speed
 	readied_animation = null
@@ -144,6 +155,7 @@ func cancel_animation():
 
 var last_tick = 0
 func on_animation_started(animation_name):
+	print("HandAnimation Started Was: %s | Is: %s" % [current_animation_name, animation_name])
 	current_animation_name = animation_name
 	if animation_name.contains("facing"):
 		animation_speed = 1
@@ -153,29 +165,44 @@ func on_animation_started(animation_name):
 		var tick = Time.get_ticks_msec()
 		var tick_diff = last_tick - tick
 		last_tick = tick
-		printerr("HandAnimation Started: %s | Cancel:%s | PlayMotion: %s | %s" % [
+		printerr("HandAnimation Started: %s | Cancel:%s | PlayMotion: %s | %s | %s" % [
 			animation_name, 
 			animation_tree.get("parameters/conditions/Cancel"), 
 			animation_tree.get("parameters/conditions/PlayMotion"),
-			tick_diff])
+			tick_diff,
+			self.name])
 	
 func on_animation_finished(animation_name):
+	print("-HandAnimation Finished Was: %s | Is: %s" % [current_animation_name, animation_name])
 	current_animation_name = null
 	last_animation_name = animation_name
+	if animation_que.size() > 0:
+		var qued_ani_data = animation_que[0]
+		if not qued_ani_data.get("Readied", false):
+			qued_ani_data['Readied'] = true
+			ready_arnimation(qued_ani_data['AnimationKey'], qued_ani_data['Speed'])
+		elif qued_ani_data.get("Executed", false):
+			qued_ani_data['Executed'] = true
+			execute_animation(qued_ani_data['Speed'])
+			animation_que.remove_at(0)
+		else:
+			animation_que.remove_at(0)
 	if LOGGING:
 		if !last_tick:
 			last_tick = 0
 		var tick = Time.get_ticks_msec()
 		var tick_diff = last_tick - tick
 		last_tick = tick
-		printerr("HandAnimation Finished: %s | Cancel:%s | PlayMotion: %s | %s" % [
+		printerr("HandAnimation Finished: %s | Cancel:%s | PlayMotion: %s | %s | %s" % [
 			animation_name, 
 			animation_tree.get("parameters/conditions/Cancel"), 
 			animation_tree.get("parameters/conditions/PlayMotion"),
-			tick_diff])
+			tick_diff,
+			self.name])
 
 
 func set_facing_dir(dir):
+	print("Set Hand Direction: %s" % [dir])
 	if dir != facing_dir:
 		facing_dir = dir
 		return # Avoid Stack Overflow

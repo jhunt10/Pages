@@ -12,6 +12,7 @@ extends Control
 @export var rotate_clock_button:Button
 @export var rotate_count_button:Button
 @export var direction_option_button:OptionButton
+@export var speed_spinner:SpinBox
 @export var exit_button:Button
 
 var current_actor:BaseActor
@@ -60,16 +61,19 @@ func on_animation_selected(index):
 	var aniname = animation_option_button.get_item_text(index)
 	if aniname == 'WEAPON_DEFAULT' and actor_node.Actor:
 		aniname = get_default_weapon_animation(actor_node.Actor, false)
-	actor_node.ready_weapon_animation(aniname, 1, off_hand_box.button_pressed)
+	var speed = speed_spinner.value
+	actor_node.ready_weapon_animation(aniname, speed, off_hand_box.button_pressed)
 
 func on_ready_animation():
 	if animation_option_button and animation_option_button.selected >= 0:
 		var aniname = animation_option_button.get_current_option_text()
 		if aniname == 'WEAPON_DEFAULT' and actor_node.Actor:
 			aniname = get_default_weapon_animation(actor_node.Actor, false)
-		actor_node.ready_weapon_animation(aniname, 1, off_hand_box.button_pressed)
+		var speed = speed_spinner.value
+		actor_node.ready_weapon_animation(aniname, speed, off_hand_box.button_pressed)
 func on_execute_animation():
-	actor_node.execute_weapon_motion_animation(1, off_hand_box.button_pressed)
+	var speed = speed_spinner.value
+	actor_node.execute_weapon_motion_animation(speed, off_hand_box.button_pressed)
 func on_cancel_animation():
 	actor_node.cancel_weapon_animations()
 

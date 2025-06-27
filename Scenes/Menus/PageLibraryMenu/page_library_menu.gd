@@ -109,7 +109,7 @@ func _get_object_entry_scene(object_type):
 		entry_scenes["Actor"] = entry_scene
 		return entry_scene
 	if object_type == "Item":
-		var entry_scene = load("res://Scenes/Menus/PageLibraryMenu/ActorDetails/actor_details_entry_container.tscn")
+		var entry_scene = load("res://Scenes/Menus/PageLibraryMenu/ItemDetails/item_details_entry_container.tscn")
 		entry_scenes["Item"] = entry_scene
 		return entry_scene
 

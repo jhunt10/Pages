@@ -14,23 +14,23 @@ message_box = NodePath("BackPatch/BoxContainer/MessageBox")
 
 [node name="BackPatch" type="Container" parent="." node_paths=PackedStringArray("background", "inner_container")]
 z_index = 1
-custom_minimum_size = Vector2(47, 41)
+custom_minimum_size = Vector2(274, 109)
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -23.0
-offset_top = -20.0
-offset_right = 24.0
-offset_bottom = 21.0
+offset_left = -137.0
+offset_top = -109.0
+offset_right = 137.0
 grow_horizontal = 2
 grow_vertical = 0
 script = ExtResource("1_3wnk0")
 background = NodePath("NinePatchRect")
 inner_container = NodePath("BoxContainer")
 center_in_parent = true
+center_from = 1
 
 [node name="NinePatchRect" type="NinePatchRect" parent="BackPatch"]
 layout_mode = 2
@@ -45,10 +45,11 @@ patch_margin_bottom = 12
 layout_mode = 2
 
 [node name="MessageBox" type="RichTextLabel" parent="BackPatch/BoxContainer"]
+custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 theme = ExtResource("3_rwuh1")
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 bbcode_enabled = true
-text = "Bla"
+text = "[color=#460000]Fast Actions[/color] are preformed sooner in the [color=#460000]Turn[/color] than most other [color=#460000]Actions[/color] regardless of [color=#460000]SPD[/color], usually before other [color=#460000]Actors[/color] move."
 fit_content = true
-autowrap_mode = 0
+autowrap_mode = 2

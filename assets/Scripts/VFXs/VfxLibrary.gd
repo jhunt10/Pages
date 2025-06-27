@@ -1,7 +1,7 @@
 class_name VfxLibrary
 
 const LOGGING = false
-const VfxDir = "res://data/VFXs"
+const VfxDir = "res://ObjectDefs/Data/VFXs"
 
 static var _vfx_defs:Dictionary
 static var _vfx_datas:Dictionary = {}
@@ -13,7 +13,7 @@ static func reload_vfxs():
 	_vfx_defs.clear()
 	loaded = false
 	load_vfx_defs()
-
+	
 # Get a static instance of the action
 static func get_vfx_data(key:String)->VfxData:
 	if !loaded:

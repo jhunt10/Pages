@@ -14,8 +14,10 @@ enum EffectTriggers {
 	OnRoundStart, OnRoundEnd,
 	PreMove, PostMove, OnCollision,
 	OnDamageTaken, OnDamagDealt,
-	OnAttacking_PreAttackRoll, OnAttacking_PostAttackRoll, OnAttacking_PostEffectRoll, OnAttacking_PostDamageRoll, OnAttacking_AfterAttack,
-	OnDefending_PreAttackRoll, OnDefending_PostAttackRoll, OnDefending_PostEffectRoll, OnDefending_PostDamageRoll, OnDefending_AfterAttack,
+	OnAttacking_PreAttackRoll, OnAttacking_PostAttackRoll, 
+	OnAttacking_PostEffectRoll, OnAttacking_PostDamageRoll, OnAttacking_AfterAttack,
+	OnDefending_PreAttackRoll, OnDefending_PostAttackRoll, 
+	OnDefending_PostEffectRoll, OnDefending_PostDamageRoll, OnDefending_AfterAttack,
 	OnDeath, OnKill,
 	OnUseItem,
 	OnOtherEffectToBeAdded, # When a different effect is added

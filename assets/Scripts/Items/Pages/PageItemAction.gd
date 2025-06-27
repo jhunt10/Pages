@@ -121,7 +121,11 @@ func get_qued_icon(turn_index:int, actor:BaseActor =  null)->Texture2D:
 		var equipments = actor.equipment.get_equipt_items_of_slot_type(equip_slot)
 		if equipments.size() > 0:
 			var equipment:BaseEquipmentItem = equipments[0]
-			return equipment.get_small_icon()
+			var overlay_sprite = action_data.get("Preview", {}).get("OverlaySprite", '')
+			if overlay_sprite and overlay_sprite != '':
+				return SpriteCache.get_item_overlay_sprite(equipment, get_load_path().path_join(overlay_sprite))
+			else:
+				return equipment.get_small_icon()
 	return get_small_page_icon(actor)
 
 func use_equipment_icon()->bool:
@@ -134,7 +138,11 @@ func  get_small_page_icon(actor:BaseActor = null)->Texture2D:
 			var equipments = actor.equipment.get_equipt_items_of_slot_type(equip_slot)
 			if equipments.size() > 0:
 				var equipment:BaseEquipmentItem = equipments[0]
-				return equipment.get_large_icon()
+				var overlay_sprite = action_data.get("Preview", {}).get("OverlaySprite", '')
+				if overlay_sprite and overlay_sprite != '':
+					return SpriteCache.get_item_overlay_sprite(equipment, get_load_path().path_join(overlay_sprite))
+				else:
+					return equipment.get_large_icon()
 	return get_small_icon()
 
 func  get_large_page_icon(actor:BaseActor = null)->Texture2D:
@@ -144,7 +152,11 @@ func  get_large_page_icon(actor:BaseActor = null)->Texture2D:
 			var equipments = actor.equipment.get_equipt_items_of_slot_type(equip_slot)
 			if equipments.size() > 0:
 				var equipment:BaseEquipmentItem = equipments[0]
-				return equipment.get_large_icon()
+				var overlay_sprite = action_data.get("Preview", {}).get("OverlaySprite", '')
+				if overlay_sprite and overlay_sprite != '':
+					return SpriteCache.get_item_overlay_sprite(equipment, get_load_path().path_join(overlay_sprite))
+				else:
+					return equipment.get_large_icon()
 	return get_large_icon()
 
 
@@ -190,15 +202,21 @@ func get_preview_target_params(actor:BaseActor)->TargetParameters:
 func has_preview_damage()->bool:
 	var preview_data:Dictionary = action_data.get("Preview", {})
 	var preview_key = preview_data.get("PreviewDamageKey", null)
-	return preview_key and preview_key != ''
+	if preview_key and preview_key != '':
+		return true
+	var preview_keys = preview_data.get("PreviewDamageKeys", [])
+	return preview_keys.size() > 0
 
 func get_preview_damage_datas(actor:BaseActor=null)->Dictionary:
 	var preview_data:Dictionary = action_data.get("Preview", {})
 	var preview_key = preview_data.get("PreviewDamageKey", null)
-	if not preview_key or preview_key == '':
-		printerr("%s.get_preview_damage_datas: No preview key" % [self.ActionKey])
-		return {}
-	return get_damage_datas(actor, [preview_key])
+	var preview_keys = preview_data.get("PreviewDamageKeys", [])
+	if preview_key and preview_key != '' and not preview_keys.has(preview_key):
+		preview_keys.append(preview_key)
+	#if not preview_key or preview_key == '':
+		#printerr("%s.get_preview_damage_datas: No preview key" % [self.ActionKey])
+		#return {}
+	return get_damage_datas(actor, preview_keys)
 
 
 ########################
@@ -232,6 +250,8 @@ func get_targeting_params(target_param_key, actor:BaseActor)->TargetParameters:
 
 func get_damage_data_single(actor:BaseActor, damage_key:String)->Dictionary:
 	var datas = get_damage_datas(actor, [damage_key])
+	if damage_key.contains("Weapon"):
+		printerr("PageItemAction.get_damage_data_single probably used on Weapon Damage Data (which is sometimes not single)")
 	return datas.get(damage_key, {})
 
 func get_damage_datas(actor:BaseActor, damage_keys)->Dictionary:
@@ -239,9 +259,10 @@ func get_damage_datas(actor:BaseActor, damage_keys)->Dictionary:
 	if damage_keys is String:
 		damage_keys = [damage_keys]
 	for key in damage_keys:
-		var damage_data = action_data.get("DamageDatas", {}).get(key, {})
+		var damage_data = action_data.get("DamageDatas", {}).get(key, {}).duplicate(true)
 		if damage_data.has("WeaponFilter"):
 			if actor:
+				damage_data['ActorlessWeapon'] = false
 				var weapon_filter = damage_data['WeaponFilter']
 				var override_data = damage_data.duplicate()
 				override_data.erase("WeaponFilter")

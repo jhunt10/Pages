@@ -19,7 +19,6 @@ func _should_show_add_button()->bool:
 	return StoryState.story_id != null and StoryState.story_id != ''
 	
 func _on_add_pressed():
-	print("\n\n asdsafv StoryId:%s\n\n" %[StoryState.story_id])
 	if StoryState.story_id:
 		if thing_def.has("ActorKey"):
 			var key = thing_def.get("ActorKey", "")

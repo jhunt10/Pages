@@ -61,9 +61,9 @@ static func build_action_ques(clear_existing_ques:bool=false):
 					astar.set_pos_disabled(current_pos, false)
 					astar.set_pos_disabled(new_pos, true)
 		#last_turn_state = turn_state
-		if LOGGING: print("Turn: %s" % [turn])
-		for actor in actors:
-			if LOGGING: print("\t\t %s | %s" % [actor.Id, turn_state.get_actor_pos(actor)] )
+		#if LOGGING: print("Turn: %s" % [turn])
+		#for actor in actors:
+			#if LOGGING: print("\t\t %s | %s" % [actor.Id, turn_state.get_actor_pos(actor)] )
 	pass
 
 static func _choose_page_for_actor(actor:BaseActor, game_state:GameStateData)->PageItemAction:

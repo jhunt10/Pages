@@ -51,8 +51,7 @@ static func write_save_data(save_name:String):
 
 static func _build_save_meta_data(save_name:String):
 	var party = {}
-	for i in range(4):
-		var player = StoryState.get_player_actor(i)
+	for player in StoryState.list_party_actors():
 		if player:
 			party[player.Id] = [player.get_display_name(), player.stats.get_stat(StatHelper.Level)]
 	return {

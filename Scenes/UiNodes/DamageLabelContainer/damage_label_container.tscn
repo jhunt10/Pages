@@ -13,7 +13,6 @@
 script = ExtResource("1_rhguf")
 attack_power = 100
 attack_variant = 30.0
-attack_scale = null
 damage_icon_rect = NodePath("DamageIcon")
 atk_power_label = NodePath("AtkPowerLabel")
 plus_minus_label = NodePath("PlusMinusLabel")
@@ -32,7 +31,9 @@ popup_message = NodePath("Control/PopupContainer/BoxContainer/RichTextLabel")
 layout_mode = 2
 
 [node name="PopupContainer" type="Container" parent="Control" node_paths=PackedStringArray("background", "inner_container")]
+visible = false
 custom_minimum_size = Vector2(133, 29)
+layout_mode = 0
 offset_top = -34.0
 offset_right = 133.0
 offset_bottom = -5.0
@@ -61,6 +62,13 @@ theme_override_font_sizes/normal_font_size = 16
 text = "Physical Attack"
 fit_content = true
 autowrap_mode = 0
+
+[node name="CountLabel" type="Label" parent="."]
+visible = false
+layout_mode = 2
+theme = ExtResource("4_xveyi")
+theme_override_colors/font_color = Color(0.470588, 0, 0, 1)
+text = "3"
 
 [node name="DamageIcon" type="TextureRect" parent="."]
 layout_mode = 2
@@ -107,10 +115,3 @@ layout_mode = 2
 theme = ExtResource("4_xveyi")
 theme_override_colors/font_color = Color(0.470588, 0, 0, 1)
 text = "x"
-
-[node name="CountLabel" type="Label" parent="."]
-visible = false
-layout_mode = 2
-theme = ExtResource("4_xveyi")
-theme_override_colors/font_color = Color(0.470588, 0, 0, 1)
-text = "3"

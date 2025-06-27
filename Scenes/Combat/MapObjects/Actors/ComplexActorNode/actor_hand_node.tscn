@@ -5,10 +5,10 @@
 [ext_resource type="Script" path="res://Scenes/Combat/MapObjects/Actors/ComplexActorNode/actor_weapon_node.gd" id="2_ga04f"]
 [ext_resource type="Texture2D" uid="uid://cox0yputmlu1o" path="res://Scenes/Combat/MapObjects/Actors/ComplexActorNode/Sprites/BaseActor_SpriteSheet_OffHand.png" id="3_gcbji"]
 [ext_resource type="Texture2D" uid="uid://cwp0r0ds4kcf1" path="res://Scenes/Combat/MapObjects/Actors/ComplexActorNode/Sprites/BaseActor_SpriteSheet_TwoHand.png" id="4_g18fh"]
-[ext_resource type="AnimationLibrary" uid="uid://ccngkcn1vievo" path="res://animations/AttackAnimations/weapon_facing.tres" id="5_8cigs"]
-[ext_resource type="AnimationLibrary" uid="uid://b6fh00go4jw6l" path="res://animations/AttackAnimations/weapon_raise.tres" id="6_oogit"]
-[ext_resource type="AnimationLibrary" uid="uid://bncx65ubhxgcv" path="res://animations/AttackAnimations/weapon_stab.tres" id="7_qybst"]
-[ext_resource type="AnimationLibrary" uid="uid://m4qmirmpwwfa" path="res://animations/AttackAnimations/weapon_swing.tres" id="8_1q6ng"]
+[ext_resource type="AnimationLibrary" uid="uid://ikwvokh0b3hm" path="res://animations/AttackAnimations/weapon_facing.tres" id="5_8cigs"]
+[ext_resource type="AnimationLibrary" uid="uid://bc00iv6edxdop" path="res://animations/AttackAnimations/weapon_raise.tres" id="6_oogit"]
+[ext_resource type="AnimationLibrary" uid="uid://bqwi1sg2wlke" path="res://animations/AttackAnimations/weapon_stab.tres" id="7_qybst"]
+[ext_resource type="AnimationLibrary" uid="uid://d14ri04rlw3r4" path="res://animations/AttackAnimations/weapon_swing.tres" id="8_1q6ng"]
 [ext_resource type="Texture2D" uid="uid://dapkhw3nprono" path="res://Scenes/Combat/MapObjects/Actors/ComplexActorNode/Sprites/TestWeapon_WeaponSprite.png" id="10_c1uko"]
 
 [sub_resource type="Animation" id="Animation_5vfo0"]
@@ -531,7 +531,7 @@ graph_offset = Vector2(0, -108.949)
 
 [node name="HandNode" type="Node2D" node_paths=PackedStringArray("animation_tree", "hand_sprite", "weapon_node")]
 script = ExtResource("1_dwep3")
-hand = 2
+facing_dir = 2
 animation_is_ready = true
 main_hand_sprite_sheet = ExtResource("2_3tedl")
 off_hand_sprite_sheet = ExtResource("3_gcbji")
@@ -553,12 +553,12 @@ libraries = {
 "weapon_stab": ExtResource("7_qybst"),
 "weapon_swing": ExtResource("8_1q6ng")
 }
+speed_scale = 0.1
 
 [node name="WeaponNode" type="Node2D" parent="." node_paths=PackedStringArray("overhand_weapon_sprite", "underhand_weapon_sprite")]
 z_index = 1
-position = Vector2(0, 14)
+position = Vector2(-4, 14)
 script = ExtResource("2_ga04f")
-hand = 2
 main_hand_position = Vector2(-4, 14)
 two_hand_offset = Vector2(-4, 0)
 overhand_weapon_sprite = NodePath("WeaponOverHandSprite")
@@ -580,7 +580,7 @@ vframes = 2
 frame = 1
 
 [node name="HandSprite" type="Sprite2D" parent="."]
-texture = ExtResource("4_g18fh")
+texture = ExtResource("2_3tedl")
 hframes = 12
 vframes = 4
 
@@ -590,17 +590,17 @@ callback_mode_process = 2
 tree_root = SubResource("AnimationNodeStateMachine_dl25k")
 anim_player = NodePath("../AnimationPlayer")
 parameters/conditions/Cancel = false
-parameters/conditions/PlayMotion = false
+parameters/conditions/PlayMotion = true
 parameters/conditions/Raise = false
 parameters/conditions/Stab = false
 parameters/conditions/Swing = false
-parameters/Idel/blend_position = 0
-parameters/RaiseCancel/blend_position = 0
-parameters/RaiseMotion/blend_position = 0
-parameters/RaiseReady/blend_position = 0
-parameters/StabCancel/blend_position = 0
-parameters/StabMotion/blend_position = 0
-parameters/StabReady/blend_position = 0
-parameters/SwingCancel/blend_position = 0
-parameters/SwingMotion/blend_position = 0
-parameters/SwingReady/blend_position = 1.08264
+parameters/Idel/blend_position = 2
+parameters/RaiseCancel/blend_position = 2
+parameters/RaiseMotion/blend_position = 2
+parameters/RaiseReady/blend_position = 2
+parameters/StabCancel/blend_position = 2
+parameters/StabMotion/blend_position = 2
+parameters/StabReady/blend_position = 2
+parameters/SwingCancel/blend_position = 2
+parameters/SwingMotion/blend_position = 2
+parameters/SwingReady/blend_position = 2

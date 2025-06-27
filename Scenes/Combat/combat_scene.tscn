@@ -255,6 +255,7 @@ script = ExtResource("29_vvabq")
 background = NodePath("NinePatchRect")
 inner_container = NodePath("BoxContainer")
 center_in_parent = true
+center_from = null
 
 [node name="NinePatchRect" type="NinePatchRect" parent="MoveableCamera2D/CanvasLayer/ActorPlacerControl/VBoxContainer/TopPanelControl/BackPatchContainer"]
 layout_mode = 2
@@ -344,6 +345,7 @@ script = ExtResource("29_vvabq")
 background = NodePath("NinePatchRect")
 inner_container = NodePath("BoxContainer")
 center_in_parent = true
+center_from = null
 
 [node name="NinePatchRect" type="NinePatchRect" parent="MoveableCamera2D/CanvasLayer/ActorPlacerControl/VBoxContainer/BottomPanelControl/BackPatchContainer"]
 layout_mode = 2
@@ -1118,6 +1120,7 @@ script = ExtResource("29_vvabq")
 background = NodePath("NinePatchRect")
 inner_container = NodePath("HBoxContainer")
 center_in_parent = true
+center_from = null
 
 [node name="NinePatchRect" type="NinePatchRect" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/DropMessageControl/DropMessageCard/BackPatchContainer"]
 layout_mode = 2
@@ -1176,6 +1179,7 @@ offset_bottom = 144.0
 script = ExtResource("29_vvabq")
 background = NodePath("NinePatchRect")
 inner_container = NodePath("BoxContainer")
+center_from = null
 
 [node name="NinePatchRect" type="NinePatchRect" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/CombatLogBox/BackPatchContainer"]
 layout_mode = 2

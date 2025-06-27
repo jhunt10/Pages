@@ -34,6 +34,7 @@ offset_bottom = 196.0
 script = ExtResource("2_fwuqo")
 background = NodePath("NinePatchRect")
 inner_container = NodePath("BoxContainer")
+center_from = null
 
 [node name="NinePatchRect" type="NinePatchRect" parent="BackPatchContainer"]
 layout_mode = 2
@@ -96,6 +97,7 @@ offset_bottom = 135.0
 script = ExtResource("2_fwuqo")
 background = NodePath("NinePatchRect")
 inner_container = NodePath("BoxContainer")
+center_from = null
 
 [node name="NinePatchRect" type="NinePatchRect" parent="AddItemMenu/BackPatch"]
 layout_mode = 2
@@ -157,6 +159,7 @@ offset_bottom = 629.0
 script = ExtResource("2_fwuqo")
 background = NodePath("NinePatchRect")
 inner_container = NodePath("BoxContainer")
+center_from = null
 
 [node name="NinePatchRect" type="NinePatchRect" parent="DefDataMenu/BackPatch"]
 layout_mode = 2
@@ -219,6 +222,7 @@ offset_bottom = 131.0
 script = ExtResource("2_fwuqo")
 background = NodePath("NinePatchRect")
 inner_container = NodePath("BoxContainer")
+center_from = null
 
 [node name="NinePatchRect" type="NinePatchRect" parent="AggroMenu/BackPatch"]
 layout_mode = 2
@@ -281,6 +285,7 @@ offset_bottom = 411.0
 script = ExtResource("2_fwuqo")
 background = NodePath("NinePatchRect")
 inner_container = NodePath("BoxContainer")
+center_from = null
 
 [node name="NinePatchRect" type="NinePatchRect" parent="ObjectsCountsMenu/BackPatch"]
 layout_mode = 2

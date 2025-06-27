@@ -2,6 +2,8 @@
 class_name BackPatchContainer
 extends Container
 
+enum CENTER_FROM {Center, Bottom}
+
 static var global_refresh_list:Array = []
 
 const LOGGING = false
@@ -19,6 +21,8 @@ signal custom_resized
 @export var force_fill_y:bool = false
 @export var force_dimintions:Vector2i
 @export var center_in_parent:bool = false
+# Only used when center_in_parent is true
+@export var center_from:CENTER_FROM = CENTER_FROM.Center
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -126,4 +130,7 @@ func resize_self_around_child():
 		var parent = get_parent()
 		if parent:
 			var parent_size = parent.size
-			self.position = Vector2i((parent_size.x / 2) - (self_size.x / 2), (parent_size.y / 2) - (self_size.y / 2))
+			if center_from == null or center_from == CENTER_FROM.Center:
+				self.position = Vector2i((parent_size.x / 2) - (self_size.x / 2), (parent_size.y / 2) - (self_size.y / 2))
+			elif center_from == CENTER_FROM.Bottom:
+				self.position = Vector2i((parent_size.x / 2) - (self_size.x / 2), 0 - (self_size.y))

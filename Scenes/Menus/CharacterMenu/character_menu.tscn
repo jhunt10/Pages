@@ -946,6 +946,7 @@ background = NodePath("Background")
 inner_container = NodePath("BoxContainer")
 margin_override = 6
 force_fill_x = true
+center_from = null
 
 [node name="Background" type="NinePatchRect" parent="ScaleControl/StatsPage/ContainerControl/StatsMainContainer/MiscStatsContainer"]
 layout_mode = 2
@@ -1127,6 +1128,7 @@ divider = NodePath("BoxContainer/ColorRect")
 background = NodePath("Background")
 inner_container = NodePath("BoxContainer")
 margin_override = 6
+center_from = null
 
 [node name="Background" type="NinePatchRect" parent="ScaleControl/StatsPage/ContainerControl/StatsMainContainer/BarStatsDisplayContainer"]
 layout_mode = 2
@@ -1210,13 +1212,14 @@ layout_mode = 2
 size_flags_vertical = 3
 
 [node name="AtkStatsContainer" type="Container" parent="ScaleControl/StatsPage/ContainerControl/StatsMainContainer" node_paths=PackedStringArray("background", "inner_container")]
-custom_minimum_size = Vector2(12, 90)
+custom_minimum_size = Vector2(12, 105)
 layout_mode = 2
 script = ExtResource("16_ep8hk")
 background = NodePath("Background")
 inner_container = NodePath("BoxContainer")
 margin_override = 6
 force_fill_x = true
+center_from = null
 
 [node name="Background" type="NinePatchRect" parent="ScaleControl/StatsPage/ContainerControl/StatsMainContainer/AtkStatsContainer"]
 layout_mode = 2
@@ -1526,13 +1529,14 @@ layout_mode = 2
 size_flags_vertical = 3
 
 [node name="DefStatsContainer" type="Container" parent="ScaleControl/StatsPage/ContainerControl/StatsMainContainer" node_paths=PackedStringArray("background", "inner_container")]
-custom_minimum_size = Vector2(12, 118)
+custom_minimum_size = Vector2(12, 161)
 layout_mode = 2
 script = ExtResource("16_ep8hk")
 background = NodePath("Background")
 inner_container = NodePath("BoxContainer")
 margin_override = 6
 force_fill_x = true
+center_from = null
 
 [node name="Background" type="NinePatchRect" parent="ScaleControl/StatsPage/ContainerControl/StatsMainContainer/DefStatsContainer"]
 layout_mode = 2

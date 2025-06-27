@@ -83,7 +83,7 @@ enum DamageTypes {
 			variant_label.text = str(floori(attack_variant)) 
 
 @export var attack_scale:float
-	
+
 @export var damage_icon_rect:TextureRect
 @export var atk_power_label:Label
 @export var plus_minus_label:Label
@@ -119,7 +119,7 @@ func _on_mouse_exit():
 func _process(delta: float) -> void:
 	pass
 
-func set_damage_data(damage_data:Dictionary, actor:BaseActor = null):
+func set_damage_data(damage_data:Dictionary, actor:BaseActor = null,  count = 1):
 	
 	if damage_data.get("ActorlessWeapon", false):
 		var attack_scale = damage_data.get("AtkPwrScale", 1)
@@ -145,6 +145,12 @@ func set_damage_data(damage_data:Dictionary, actor:BaseActor = null):
 			line = line + " X " + str(attack_scale)
 		popup_message.text = line
 	
+	if count > 1:
+		count_label.text = str(count) + "x"
+		count_label.show()
+	else:
+		count_label.hide()
+	
 	if damage_data.get("AtkStat") == "Fixed":
 		plus_minus_label.hide()
 		variant_label.hide()
@@ -160,14 +166,6 @@ func set_damage_data(damage_data:Dictionary, actor:BaseActor = null):
 		if attack_variant == 0:
 			variant_label.hide()
 			plus_minus_label.hide()
-	
-	if damage_data.has("PreviewDamageCount"):
-		multiplier_label.show()
-		count_label.text = str(damage_data['PreviewDamageCount'])
-		count_label.show()
-	else:
-		multiplier_label.hide()
-		count_label.hide()
 	
 	var type_string = damage_data.get("DamageType")
 	var type = DamageTypes.get(type_string)
