@@ -99,7 +99,7 @@ func build_item_list():
 		var sub_group_key = _get_sub_group_key(item)
 		var button = _get_button(item)
 		var group = _get_sub_group_container(sub_group_key)
-		if not group.get_children().has(button):
+		if not group.get_inner_container().get_children().has(button):
 			group.get_inner_container().add_child(button)
 		#items_container.add_child(button)
 		
@@ -214,6 +214,9 @@ func _refilter():
 	#filter_option_button.load_options()
 
 func should_item_be_visible(item:BaseItem):
+	var count = PlayerInventory.get_item_stack_count(item.ItemKey)
+	if count == 0:
+		return false
 	var tags = item.get_item_tags()
 	for f_filter in _forced_filters:
 		if f_filter.begins_with("Not:"):

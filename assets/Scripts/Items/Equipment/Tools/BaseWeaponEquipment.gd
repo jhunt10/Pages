@@ -1,5 +1,5 @@
 class_name BaseWeaponEquipment
-extends BaseEquipmentItem
+extends BaseToolEquipment
 
 enum WeaponClasses {Light, Medium, Heavy}
 
@@ -24,6 +24,15 @@ func _init(key:String, def_load_path:String, def:Dictionary, id:String='', data:
 	super(key, def_load_path, def, id, data)
 	_cache_after_loading_def()
 
+func can_main_hand()->bool:
+	return true
+	
+func can_off_hand()->bool:
+	return get_weapon_class() == WeaponClasses.Light
+
+func can_two_hand()->bool:
+	return get_weapon_class() != WeaponClasses.Light
+
 func reload_def(load_path:String, def:Dictionary):
 	super(load_path, def)
 	_cache_after_loading_def()
@@ -33,10 +42,6 @@ func _cache_after_loading_def():
 	for damage_data_key in weapon_attack_data.get("DamageDatas", {}).keys():
 		weapon_attack_data['DamageDatas'][damage_data_key]['DamageDataKey'] = damage_data_key
 		weapon_attack_data['DamageDatas'][damage_data_key]['DisplayName'] = self.get_display_name()
-
-
-func get_equipment_slot_type()->String:
-	return "Weapon"
 
 func get_item_type()->ItemTypes:
 	return ItemTypes.Weapon

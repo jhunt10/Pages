@@ -47,8 +47,7 @@ func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, metadata:
 	if page_that_use_ammo.size() == 0:
 		printerr("SubAct_ReloadPage: No pages could use Ammo '%s'" % [item_id])
 		return Failed
-	actor.items.remove_item(item_id)
-	ItemLibrary.delete_item(ammo_item)
+	actor.items.consume_item(item_id)
 	CombatRootControl.Instance.QueController.pause_execution()
 	CombatUiControl.ui_state_controller.set_ui_state_from_path(
 		"res://assets/Scripts/Ui/UiStates/UiState_SelectPage.gd",

@@ -58,10 +58,9 @@ func _sync():
 		var slot_display:EquipmentDisplaySlotButton = slot_displays[index]
 		var slot_type = _actor.equipment.get_slot_equipment_type(index)
 		slot_display.set_slot_type(slot_type)
-		if _actor.equipment.has_equipment_in_slot(index):
-			var item:BaseEquipmentItem = _actor.equipment.get_equipment_in_slot(index)
-			if item:
-				slot_display.set_item(item)
+		var item:BaseEquipmentItem = _actor.equipment.get_item_in_slot(index)
+		if item:
+			slot_display.set_item(item)
 		else:
 			slot_display.clear_item()
 	magatk_label.text = str(_actor.stats.get_stat(StatHelper.MagAttack))
@@ -90,18 +89,18 @@ func get_mouse_over_slot_index()->int:
 func _on_item_button_down(index):
 	var button = slot_displays[index]
 	var offset = button.get_local_mouse_position()
-	var item = _actor.equipment.get_equipment_in_slot(index)
+	var item = _actor.equipment.get_item_in_slot(index)
 	if item: item_button_down.emit(item.Id, index, offset)
 	else: item_button_down.emit(null, index, offset)
 func _on_item_button_up(index):
-	var item = _actor.equipment.get_equipment_in_slot(index)
+	var item = _actor.equipment.get_item_in_slot(index)
 	if item: item_button_up.emit(item.Id, index)
 	else: item_button_up.emit(null, index)
 func _on_mouse_enter_item(index):
-	var item = _actor.equipment.get_equipment_in_slot(index)
+	var item = _actor.equipment.get_item_in_slot(index)
 	if item: mouse_enter_item.emit(item.Id, index)
 	else: mouse_enter_item.emit(null, index)
 func _on_mouse_exit_item(index):
-	var item = _actor.equipment.get_equipment_in_slot(index)
+	var item = _actor.equipment.get_item_in_slot(index)
 	if item: mouse_exit_item.emit(item.Id, index)
 	else: mouse_exit_item.emit(null, index)

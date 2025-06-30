@@ -1,1 +1,79 @@
-{"PriestTemplate":{"!ObjectScript":"res://assets/Scripts/Actors/BaseActor.gd","!ParentKey":"#BaseActor","#ObjDetails":{"Description":"The hero of our story.","DisplayName":"Priest","LargeIcon":"Sprites/PriestIcon.png","ObjectType":"Actor","SmallIcon":"Sprites/PriestIcon.png","SnippetDesc":"The hero of our story.","Tags":["Player"],"Taxonomy":["Actor"]},"EquipmentSlots":["Book","Bag","Head","Body","Feet","Trinket","MainHand","OffHand"],"IsPlayer":true,"PortraitRect":[12,20,24,24],"SpawnEquipmentArr":["OldJournal_PageBook","OldBag_ItemBag","OldPriestHelmet","OldPriestArmor","OldPriestBoots","OldShield","OldSword"],"SpawnItemArr":["Mag_Ammo","Mag_Ammo","HealthPotionM"],"SpawnPageArr":["PriestTitlePage","BlessedLimit1Page","MoveForward","TurnLeft","TurnRight","BasicWeaponAttack","LightRangedSpell","ApplyBlessing_Water","LightRangedSpell"],"SpriteFrameWH":[12,4],"SpriteOffset":[0,-16],"SpriteSheet":"Sprites/Template_SpriteSheet","Stats":{"Agility":8,"BarMax:Health":100,"Intelligence":8,"Level":1,"Mass":10,"PagesPerRound":0,"Speed":10,"StartingAttributeLevels":{"Agility":0,"Intelligence":0,"Strength":1,"Wisdom":2},"Strength":8,"Wisdom":8},"_DefVersion":"1"}}
+{
+    "PriestTemplate": {
+        "!ObjectScript": "res://assets/Scripts/Actors/BaseActor.gd",
+        "!ParentKey": "#BaseHumanoid",
+        "#ObjDetails": {
+            "Description": "The hero of our story.",
+            "DisplayName": "Priest",
+            "LargeIcon": "Sprites/PriestIcon.png",
+            "ObjectType": "Actor",
+            "SmallIcon": "Sprites/PriestIcon.png",
+            "SnippetDesc": "The hero of our story.",
+            "Tags": [
+                "Player"
+            ],
+            "Taxonomy": [
+                "Actor"
+            ]
+        },
+        "IsPlayer": true,
+        "PortraitRect": [
+            12,
+            20,
+            24,
+            24
+        ],
+        "SpawnEquipmentArr": [
+            "OldJournal_PageBook",
+            "OldBag_ItemBag",
+            "OldPriestHelmet",
+            "OldPriestArmor",
+            "OldPriestBoots",
+            "OldShield",
+            "OldSword"
+        ],
+        "SpawnItemArr": [
+            "Mag_Ammo",
+            "Mag_Ammo",
+            "HealthPotionM"
+        ],
+        "SpawnPageArr": [
+            "PriestTitlePage",
+            "BlessedLimit1Page",
+            "MoveForward",
+            "TurnLeft",
+            "TurnRight",
+            "BasicWeaponAttack",
+            "LightRangedSpell",
+            "ApplyBlessing_Water",
+            "LightRangedSpell"
+        ],
+        "SpriteFrameWH": [
+            12,
+            4
+        ],
+        "SpriteOffset": [
+            0,
+            -16
+        ],
+        "SpriteSheet": "Sprites/Template_SpriteSheet",
+        "Stats": {
+            "Agility": 8,
+            "BarMax:Health": 100,
+            "Intelligence": 8,
+            "Level": 1,
+            "Mass": 10,
+            "PagesPerRound": 0,
+            "Speed": 10,
+            "StartingAttributeLevels": {
+                "Agility": 0,
+                "Intelligence": 0,
+                "Strength": 1,
+                "Wisdom": 2
+            },
+            "Strength": 8,
+            "Wisdom": 8
+        },
+        "_DefVersion": "1"
+    }
+}

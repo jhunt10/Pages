@@ -118,11 +118,3 @@ func set_action(actor:BaseActor, page_item:BasePageItem):
 		modded_by_label.text = ", ".join(display_names)
 	else:
 		modded_by_container.hide()
-		
-
-#func on_eqiup_button_pressed():
-	#if _actor.equipment.has_item(_item.Id):
-		#_actor.equipment.remove_equipment(_item)
-	#elif _actor.equipment.can_equip_item(_item):
-		#_actor.equipment.try_equip_item(_item, true)
-	#parent_card_control.start_hide()

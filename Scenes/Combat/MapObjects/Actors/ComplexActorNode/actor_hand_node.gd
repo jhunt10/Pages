@@ -2,7 +2,7 @@
 class_name ActorHandNode
 extends Node2D
 
-const LOGGING = true
+const LOGGING = false
 
 enum HANDS {MainHand, OffHand, TwoHand}
 enum ANIMATIONS {None, Swing, Stab}
@@ -110,7 +110,7 @@ func hide_weapon():
 var animation_que = []
 
 func ready_arnimation(animationn_name, speed:float=1.0):
-	print("HandAnimationg Readying: %s" % [animationn_name])
+	if LOGGING: print("HandAnimationg Readying: %s" % [animationn_name])
 	if current_animation_name != null:
 		printerr("!!!ActorHandNodeHand.ready_animation: Animation Overlap: %s > %s" % [current_animation_name, animationn_name])
 		animation_que.append({
@@ -141,8 +141,8 @@ func execute_animation(speed:float=1.0):
 	animation_speed = speed
 	readied_animation = null
 	animation_tree.set("parameters/conditions/PlayMotion", true)
-	printerr("Set Motion")
-	printerr("HandAnimation Executing: Cancel:%s | PlayMotion: %s" % 
+	if LOGGING: printerr("Set Motion")
+	if LOGGING: printerr("HandAnimation Executing: Cancel:%s | PlayMotion: %s" % 
 	[animation_tree.get("parameters/conditions/Cancel"), animation_tree.get("parameters/conditions/PlayMotion")])
 
 func cancel_animation():
@@ -155,7 +155,7 @@ func cancel_animation():
 
 var last_tick = 0
 func on_animation_started(animation_name):
-	print("HandAnimation Started Was: %s | Is: %s" % [current_animation_name, animation_name])
+	if LOGGING: print("HandAnimation Started Was: %s | Is: %s" % [current_animation_name, animation_name])
 	current_animation_name = animation_name
 	if animation_name.contains("facing"):
 		animation_speed = 1
@@ -173,7 +173,7 @@ func on_animation_started(animation_name):
 			self.name])
 	
 func on_animation_finished(animation_name):
-	print("-HandAnimation Finished Was: %s | Is: %s" % [current_animation_name, animation_name])
+	if LOGGING: print("-HandAnimation Finished Was: %s | Is: %s" % [current_animation_name, animation_name])
 	current_animation_name = null
 	last_animation_name = animation_name
 	if animation_que.size() > 0:
@@ -202,7 +202,7 @@ func on_animation_finished(animation_name):
 
 
 func set_facing_dir(dir):
-	print("Set Hand Direction: %s" % [dir])
+	if LOGGING: print("Set Hand Direction: %s" % [dir])
 	if dir != facing_dir:
 		facing_dir = dir
 		return # Avoid Stack Overflow

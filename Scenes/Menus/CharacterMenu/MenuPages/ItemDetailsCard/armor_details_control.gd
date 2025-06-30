@@ -38,10 +38,11 @@ func set_armor(actor:BaseActor, armor:BaseArmorEquipment):
 	if _actor:
 		if _actor.equipment.has_item(_item.Id):
 			parent_card_control.equip_label.text = "Remove"	
-		elif _actor.equipment.can_equip_item(_item):
-			parent_card_control.equip_label.text = "Equip"
+		#elif _actor.equipment.can_equip_item(_item):
 		else:
-			parent_card_control.equip_button_background.hide()
+			parent_card_control.equip_label.text = "Equip"
+		#else:
+			#parent_card_control.equip_button_background.hide()
 	
 	var stat_mods = armor.get_load_val("StatMods", {})
 	for mod_data in stat_mods.values():
@@ -54,7 +55,6 @@ func set_armor(actor:BaseActor, armor:BaseArmorEquipment):
 
 func on_eqiup_button_pressed():
 	if _actor.equipment.has_item(_item.Id):
-		_actor.equipment.remove_equipment(_item)
-	elif _actor.equipment.can_equip_item(_item):
-		_actor.equipment.try_equip_item(_item, true)
-	parent_card_control.start_hide()
+		ItemHelper.try_transfer_item_from_actor_to_inventory(_item, _actor)
+	elif ItemHelper.try_transfer_item_from_inventory_to_actor(_item, _actor) == "":
+		parent_card_control.start_hide()

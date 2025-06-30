@@ -54,14 +54,7 @@ func _on_mouse_exit_item(item_key, index):
 
 func can_place_item_in_slot(item:BaseItem, index:int):
 	if item is BaseEquipmentItem:
-		return _actor.equipment.can_equip_item(item)
-		var page = item as BasePageItem
-		if _actor.pages.can_set_item_in_slot(page, index, true):
-			print("Can Place")
-			return true
-		else:
-			print("Can't Place")
-	print("Item Not Page Item")
+		return _actor.equipment.can_set_item_in_slot(item, index)
 	return false
 func remove_item_from_slot(item:BaseItem, index:int):
 	ItemHelper.try_transfer_item_from_holder_to_inventory(item, _actor.equipment)

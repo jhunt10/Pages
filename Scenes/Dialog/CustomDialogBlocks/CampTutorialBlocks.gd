@@ -56,7 +56,7 @@ func handle_block(dialog_control:DialogController, block_data:Dictionary)->bool:
 		var item = PlayerInventory.split_item_off_stack(item_key)
 		if item:
 			var actor = StoryState.get_player_actor()
-			actor.equipment.try_equip_item(item, true)
+			actor.equipment.add_item_to_first_valid_slot(item)
 		CharacterMenuControl.Instance._current_details_card.start_hide()
 		
 	if block_data.has("EquipPage"):
@@ -76,7 +76,7 @@ func handle_block(dialog_control:DialogController, block_data:Dictionary)->bool:
 		var actor = StoryState.get_player_actor()
 		var item = actor.equipment.get_item_in_slot(index)
 		if item:
-			actor.equipment.remove_equipment(item)
+			actor.equipment.remove_item(item)
 			PlayerInventory.add_item(item)
 	
 	if block_data.has("OpenItem"):

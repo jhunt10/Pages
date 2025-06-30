@@ -295,7 +295,6 @@ func _calc_cache_stats(emit_signal:bool=true):
 	var agg_mods = {}
 	var set_stats = {}
 	var key_depends_on_vals = {}
-	var key_is_dependant_of_vals = {}
 	
 	var mods_list = _actor.effects.get_stat_mods()
 	mods_list.append_array(_temp_stat_mods.values())
@@ -329,6 +328,7 @@ func _calc_cache_stats(emit_signal:bool=true):
 			var display_name = "+" + str(mod.value) + " " + mod.display_name
 		elif mod.mod_type == BaseStatMod.ModTypes.AddStat:
 			var dep_stat_name = mod.dep_stat_name
+			
 			if key_depends_on_vals.has(dep_stat_name) and key_depends_on_vals[dep_stat_name].has(mod.stat_name):
 				printerr("StatHolder._calc_cache_stats: Circular dependancy found for stats %s <-> %s. Rejecting mod: %s" % [mod.stat_name, dep_stat_name, mod.display_name] )
 				continue
@@ -337,10 +337,6 @@ func _calc_cache_stats(emit_signal:bool=true):
 			if not key_depends_on_vals[mod.stat_name].has(dep_stat_name):
 				key_depends_on_vals[mod.stat_name].append(dep_stat_name)
 				
-			if not key_is_dependant_of_vals.has(dep_stat_name):
-				key_is_dependant_of_vals[dep_stat_name] = []
-			if not key_is_dependant_of_vals[dep_stat_name].has(mod.stat_name):
-				key_is_dependant_of_vals[dep_stat_name].append(mod.stat_name)
 			agg_mods[mod.stat_name][mod.mod_type].append({"DepStat": dep_stat_name, "Scale": mod.value})
 			var display_name = "+" + str(dep_stat_name) + "x" + str(mod.value) + " " + mod.display_name
 		else:
@@ -358,6 +354,9 @@ func _calc_cache_stats(emit_signal:bool=true):
 		temp_stats[set_stat_name] = set_stats[set_stat_name]
 	for attribute_name in attribute_levels.keys():
 		temp_stats[attribute_name] += attribute_levels[attribute_name]
+	for added_stat in key_depends_on_vals.keys():
+		if not temp_stats.keys().has(added_stat):
+			temp_stats[added_stat] = 0
 		
 	
 	# Add current values for bar stats
@@ -375,12 +374,16 @@ func _calc_cache_stats(emit_signal:bool=true):
 	while (first_pass or key_depends_on_vals.size() > 0) and safety_limit > 0:
 		safety_limit -= 1
 		first_pass = false
-		for stat_name:String in temp_stats.keys():
+		# Loop through each stat we haven't cached so far
+		var remaining = temp_stats.keys()
+		for stat_name:String in remaining:
+			# Check if this stat depends on others
 			if key_depends_on_vals.keys().has(stat_name):
-				var still_waiting = false
 				for dep_stat in key_depends_on_vals[stat_name]:
+					# If dependednt stat has been cached, remove from list
 					if _cached_stats.has(dep_stat):
 						key_depends_on_vals[stat_name].erase(dep_stat)
+				# If still waiting on dependancies, skip for now
 				if key_depends_on_vals[stat_name].size() > 0:
 					continue
 				else:
@@ -401,6 +404,8 @@ func _calc_cache_stats(emit_signal:bool=true):
 					for val in agg_stat[BaseStatMod.ModTypes.Scale]:
 						temp_val = temp_val * val
 			_cached_stats[stat_name] = temp_val
+			# Remove from temp_stats as we cache them
+			temp_stats.erase(stat_name)
 	
 	if LOGGING: print("--- Done Caching Stats")
 	if safety_limit <= 0:

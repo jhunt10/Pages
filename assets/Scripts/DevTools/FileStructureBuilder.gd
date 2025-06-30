@@ -217,7 +217,7 @@ static func update_def(file_path:String, def_key:String, def:Dictionary)->Array:
 		"res://assets/Scripts/Items/Equipment/BaseQueEquipment.gd":
 			object_type = "Item"
 			taxonomy = ["Item", "Equipment", "Book"]
-		"res://assets/Scripts/Items/Equipment/BaseWeaponEquipment.gd":
+		"res://assets/Scripts/Items/Equipment/Tools/BaseWeaponEquipment.gd":
 			object_type = "Item"
 			taxonomy = ["Item", "Equipment", "Weapon"]
 		"res://assets/Scripts/Items/Pages/BasePageItem.gd":

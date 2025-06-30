@@ -27,3 +27,12 @@ func set_bag_item(bag_item:BaseBagEquipment):
 	else:
 		bag_item_id = null
 	_build_slots_list()
+
+
+func consume_item(item_id:String):
+	if !_raw_item_slots.has(item_id):
+		return
+	remove_item(item_id, false)
+	var item = ItemLibrary.get_item(item_id, false)
+	if item:
+		ItemLibrary.delete_item(item)

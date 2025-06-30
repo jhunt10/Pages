@@ -14,9 +14,12 @@ var slot_sets_data:Array:
 
 ## Def of each slot set. Using Array to preserve order.
 var _item_slot_sets_datas:Array=[]
-## Ordered Array of slot set keyes
+## Key of each SlotSet, in Array to preserve order
 var _slot_set_key_mapping:Array=[]
+## Array of ItemIds for that item slot
 var _raw_item_slots:Array=[]
+## Array of Dictionaries holding slot set meta data for that item slot 
+## {"SlotSetIndex":slot_set_index, "SlotSetKey":slot_key, "SubIndex":sub_index}
 var _raw_to_slot_set_mapping:Array=[]
 var _actor:BaseActor
 
@@ -71,6 +74,9 @@ func validate_items():
 		if not item_id:
 			continue
 		var item = ItemLibrary.get_item(item_id, false)
+		if not item:
+			printerr("%s.validate_items: No item found with id '%s'." % [_debug_name(), item_id])
+			continue
 		# Get the first slot item could go in
 		var slot = get_first_valid_slot_for_item(item, false)
 		# if found, put it there
@@ -192,10 +198,12 @@ func get_item_in_slot(index:int)->BaseItem:
 
 func remove_item(item_id:String, supress_signal:bool=false):
 	print("Remove Item: %s" % [item_id])
+	if not ItemHelper.transering_items.has(item_id):
+		printerr("Transfering Item outside of ItemHelper: %s | %s " % [item_id, _actor.Id])
 	var index = _raw_item_slots.find(item_id)
 	if index >= 0:
 		_raw_item_slots[index] = null
-		_on_item_removed_from_slot(item_id, index)
+		_on_item_removed_from_slot(item_id, index, supress_signal)
 		if not supress_signal:
 			items_changed.emit()
 
@@ -213,11 +221,22 @@ func can_set_item_in_slot(item:BaseItem, index:int, allow_replace:bool=false)->b
 		return false
 	return true
 
+## Directly set an Item into given slot index without any checks or signals.
+## Should only be used by ItemHelper
+func _direct_set_item_in_slot(item:BaseItem, index:int):
+	if index >= 0 and index <= _raw_item_slots.size():
+		_raw_item_slots[index] = item.Id
+
 func try_set_item_in_slot(item:BaseItem, index:int, allow_replace:bool=false)->bool:
+	if not ItemHelper.transering_items.has(item.Id):
+		printerr("Transfering Item outside of ItemHelper: %s | %s " % [item.Id, _actor.Id])
 	if not can_set_item_in_slot(item, index, allow_replace):
 		return false
 	if _raw_item_slots[index] != null:
-		remove_item(_raw_item_slots[index], true)
+		if allow_replace:
+			remove_item(_raw_item_slots[index], true)
+		else:
+			return false
 	_raw_item_slots[index] = item.Id
 	_on_item_added_to_slot(item, index)
 	items_changed.emit()
@@ -254,7 +273,7 @@ func add_item_to_first_valid_slot(item:BaseItem):
 			return true
 	return false
 
-func _on_item_removed_from_slot(item_id:String, index:int):
+func _on_item_removed_from_slot(item_id:String, index:int, supressing_signals:bool):
 	pass
 
 func _on_item_added_to_slot(item:BaseItem, index:int):

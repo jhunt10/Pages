@@ -23,7 +23,7 @@ func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, que_exe_d
 	var item:BaseItem = ItemLibrary.get_item(item_id)
 	if item is BaseSupplyItem:
 		item.use_in_combat(actor, actor, game_state)
-		actor.items.remove_item(item_id)
+		actor.items.consume_item(item_id)
 		return BaseSubAction.Success
 	else:
 		printerr('SubAct_UseItem.do_thing: Failed to find selected item with id: %s' % [item_id])

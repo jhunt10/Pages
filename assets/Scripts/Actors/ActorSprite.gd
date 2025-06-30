@@ -131,7 +131,7 @@ func _build_sprite_sheet():
 func _get_draw_ordered_equipment()->Array:
 	var out_list = []
 	var all_equipment = _actor.equipment.list_equipment()
-	var draw_order = ["Feet", "Body", "Head", "OffHand", "MainHand" ]
+	var draw_order = ["Feet", "Body", "Head", "Hand"]
 	for slot in draw_order:
 		for equip:BaseEquipmentItem in all_equipment:
 			if equip.get_equipment_slot_type() == slot:

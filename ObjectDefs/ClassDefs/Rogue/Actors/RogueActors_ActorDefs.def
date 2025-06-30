@@ -1,1 +1,75 @@
-{"RogueTemplate":{"!ObjectScript":"res://assets/Scripts/Actors/BaseActor.gd","!ParentKey":"#BaseActor","#ObjDetails":{"Description":"The hero of our story.","DisplayName":"Rogue","LargeIcon":"Sprites/RogueIcon.png","ObjectType":"Actor","SmallIcon":"Sprites/RogueIcon.png","SnippetDesc":"The hero of our story.","Tags":["Player"],"Taxonomy":["Actor"]},"EquipmentSlots":["Book","Bag","Head","Body","Feet","Trinket","MainHand","OffHand"],"IsPlayer":true,"PortraitRect":[12,20,24,24],"SpawnEquipmentArr":["OldJournal_PageBook","OldBag_ItemBag","OldRogueHelmet","OldRogueArmor","OldRogueBoots","OldWand","OldOrb"],"SpawnItemArr":["HealthPotionM","HealthPotionM",""],"SpawnPageArr":["RogueTitlePage","MoveForward","TurnLeft","TurnRight","BasicWeaponAttack"],"SpriteFrameWH":[12,4],"SpriteOffset":[0,-16],"SpriteSheet":"Sprites/Template_SpriteSheet","Stats":{"Agility":8,"BarMax:Health":100,"Intelligence":8,"Level":1,"Mass":10,"PagesPerRound":0,"Speed":10,"StartingAttributeLevels":{"Agility":0,"Intelligence":2,"Strength":0,"Wisdom":1},"Strength":8,"Wisdom":8},"_DefVersion":"1"}}
+{
+    "RogueTemplate": {
+        "!ObjectScript": "res://assets/Scripts/Actors/BaseActor.gd",
+        "!ParentKey": "#BaseHumanoid",
+        "#ObjDetails": {
+            "Description": "The hero of our story.",
+            "DisplayName": "Rogue",
+            "LargeIcon": "Sprites/RogueIcon.png",
+            "ObjectType": "Actor",
+            "SmallIcon": "Sprites/RogueIcon.png",
+            "SnippetDesc": "The hero of our story.",
+            "Tags": [
+                "Player"
+            ],
+            "Taxonomy": [
+                "Actor"
+            ]
+        },
+        "IsPlayer": true,
+        "PortraitRect": [
+            12,
+            20,
+            24,
+            24
+        ],
+        "SpawnEquipmentArr": [
+            "OldJournal_PageBook",
+            "OldBag_ItemBag",
+            "OldRogueHelmet",
+            "OldRogueArmor",
+            "OldRogueBoots",
+            "OldWand",
+            "OldOrb"
+        ],
+        "SpawnItemArr": [
+            "HealthPotionM",
+            "HealthPotionM",
+            ""
+        ],
+        "SpawnPageArr": [
+            "RogueTitlePage",
+            "MoveForward",
+            "TurnLeft",
+            "TurnRight",
+            "BasicWeaponAttack"
+        ],
+        "SpriteFrameWH": [
+            12,
+            4
+        ],
+        "SpriteOffset": [
+            0,
+            -16
+        ],
+        "SpriteSheet": "Sprites/Template_SpriteSheet",
+        "Stats": {
+            "Agility": 8,
+            "BarMax:Health": 100,
+            "Intelligence": 8,
+            "Level": 1,
+            "Mass": 10,
+            "PagesPerRound": 0,
+            "Speed": 10,
+            "StartingAttributeLevels": {
+                "Agility": 0,
+                "Intelligence": 2,
+                "Strength": 0,
+                "Wisdom": 1
+            },
+            "Strength": 8,
+            "Wisdom": 8
+        },
+        "_DefVersion": "1"
+    }
+}

@@ -428,15 +428,15 @@ func _trigger_on_atk(sub_trigger:EffectTriggers, attack_event:AttackEvent, game_
 				sub_effect.on_defending_after_attack(self, sub_effect_data, game_state, attack_event)
 
 func get_damage_data(damage_data_key:String, actor:BaseActor=null)->Dictionary:
-	if damage_data_key == "Weapon":
-		if actor == null:
-			printerr("PageItemAction.get_damage_data: Null Actor when asking for Weapon damage.")
-			return {}
-		var weapon = actor.equipment.get_primary_weapon()
-		if !weapon:
-			printerr("PageItemAction.get_damage_data: No Weapon when asking for Weapon damage.")
-			return {}
-		return weapon.get_damage_data()
+	#if damage_data_key == "Weapon":
+		#if actor == null:
+			#printerr("PageItemAction.get_damage_data: Null Actor when asking for Weapon damage.")
+			#return {}
+		#var weapon = actor.equipment.get_primary_weapon()
+		#if !weapon:
+			#printerr("PageItemAction.get_damage_data: No Weapon when asking for Weapon damage.")
+			#return {}
+		#return weapon.get_damage_data()
 	var damage_datas = effect_data.get("DamageDatas", {})
 	if damage_datas.has(damage_data_key):
 		return damage_datas[damage_data_key].duplicate()

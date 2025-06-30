@@ -1,5 +1,7 @@
 class_name ItemHelper
 
+const LOGGING = true
+
 static func spawn_item(item_key:String, item_data:Dictionary, pos:MapPos)->BaseItem:
 	var item = ItemLibrary.create_item(item_key, item_data)
 	if !item:
@@ -70,7 +72,7 @@ static func try_pickup_item(actor:BaseActor, item:BaseItem)->Dictionary:
 	CombatRootControl.Instance.remove_item(item_id)
 	return popup_data
 
-	
+static var transering_items = []
 
 static func try_transfer_item_from_inventory_to_actor(item:BaseItem, actor:BaseActor, allow_replace:bool = true)->String:
 	var holder:BaseItemHolder = null
@@ -84,17 +86,35 @@ static func try_transfer_item_from_inventory_to_actor(item:BaseItem, actor:BaseA
 		holder = actor.items
 	if !holder:
 		return "Unknown ItemType"
+	
 	var index = holder.get_first_valid_slot_for_item(item, true)
+	if LOGGING: print("ItemHlp: Transfer %s from INV to %s" % [item.ItemKey, holder._actor.Id])
 	return try_transfer_item_from_inventory_to_holder(item, holder, index, allow_replace)
 
-static func try_transfer_item_from_inventory_to_holder(item:BaseItem, holder:BaseItemHolder, slot_index:int, allow_replace:bool = true)->String:
-	print("Transer item to holder: %s to slot %s " % [item.Id, slot_index])
+static func try_transfer_item_from_inventory_to_holder(source_item:BaseItem, holder:BaseItemHolder, slot_index:int, allow_replace:bool = true)->String:
+	if LOGGING: print("ItemHlp: Transfer %s from INV to slot %s on %s" % [source_item.ItemKey, slot_index, holder._actor.Id])
+	
+	## Tools require special logic since they can auto-switch hands
+	if holder is EquipmentHolder and (holder as EquipmentHolder).list_all_hand_indexes().has(slot_index):
+		slot_index = (holder as EquipmentHolder).get_auto_hand_index(source_item, slot_index, allow_replace)
+		#var inv_weapon = PlayerInventory.split_item_off_stack(item.ItemKey)
+		#if !inv_weapon:
+			#print("Item not found")
+			#return "Item not found"
+		#transering_items.append(inv_weapon.Id)
+		#if not holder.try_equip_tool(inv_weapon, slot_index, allow_replace, true):
+			#PlayerInventory.add_item(inv_weapon)
+			#transering_items.remove_at(transering_items.find(inv_weapon.Id))
+			#return "Set item failed"
+		#return ""
+			
+		
 	
 	var old_item = holder.get_item_in_slot(slot_index)
 	if old_item and not allow_replace:
 		print("Slot is occupied")
 		return "Slot is occupied"
-	var inv_item = PlayerInventory.split_item_off_stack(item.ItemKey)
+	var inv_item = PlayerInventory.split_item_off_stack(source_item.ItemKey)
 	if !inv_item:
 		print("Item not found")
 		return "Item not found"
@@ -102,15 +122,24 @@ static func try_transfer_item_from_inventory_to_holder(item:BaseItem, holder:Bas
 		PlayerInventory.add_item(inv_item)
 		print("Invalid Item Slot")
 		return "Invalid Item Slot"
-	if not holder.try_set_item_in_slot(inv_item, slot_index, allow_replace):
+	
+	# Dirrectly set the item into slot
+	holder._direct_set_item_in_slot(inv_item, slot_index)
+		
+	if not holder.has_item(inv_item.Id):
 		PlayerInventory.add_item(inv_item)
+		# Check if old item was lost, add to inv if so (very bad state)
+		if old_item and not holder.has_item(old_item.Id):
+			PlayerInventory.add_item(old_item)
 		print( "Set item failed")
 		return "Set item failed"
-	if old_item:
-		# EquipmentHolder controls own logic for replacing weapons
-		if not (old_item is BaseWeaponEquipment and holder is EquipmentHolder): 
-			PlayerInventory.add_item(old_item)
+	if old_item and not holder.has_item(old_item.Id):
+		## EquipmentHolder controls own logic for replacing weapons
+		#if not (old_item is BaseWeaponEquipment and holder is EquipmentHolder): 
+		PlayerInventory.add_item(old_item)
+	holder._on_item_added_to_slot(inv_item, slot_index)
 	holder._actor._on_equipment_holder_items_change()
+	transering_items.remove_at(transering_items.find(inv_item.Id))
 	return ""
 
 static func try_transfer_item_from_actor_to_inventory(item:BaseItem, actor:BaseActor)->String:
@@ -123,15 +152,18 @@ static func try_transfer_item_from_actor_to_inventory(item:BaseItem, actor:BaseA
 		holder = actor.items
 	if !holder:
 		return "Unknown ItemType"
+	
 	return try_transfer_item_from_holder_to_inventory(item, holder)
 
 static func try_transfer_item_from_holder_to_inventory(item:BaseItem, holder:BaseItemHolder)->String:
+	if LOGGING: print("ItemHlp: Transfer %s from %s to INV" % [item.ItemKey, holder._actor.Id])
 	if !holder.has_item(item.Id):
 		return "Item not found"
+	transering_items.append(item.Id)
 	holder.remove_item(item.Id)
-	if not holder is EquipmentHolder:
-		PlayerInventory.add_item(item)
+	PlayerInventory.add_item(item)
 	holder._actor._on_equipment_holder_items_change()
+	transering_items.remove_at(transering_items.find(item.Id))
 	return ""
 
 static func swap_item_holder_slots(holder:BaseItemHolder, slot_a:int, slot_b:int, return_b_to_inventory:bool=true):

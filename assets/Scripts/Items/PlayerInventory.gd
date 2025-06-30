@@ -119,21 +119,13 @@ static func delete_item_from_inventory(item:BaseItem):
 		#_held_unique_items_ids.remove_at(index)
 	Instance.inventory_changed.emit()
 
-## For removing item when only the Id is available. Use remove_item when possible. 
-static func _erase_item_id(item_id:String):
-	#_held_unique_items_ids.erase(item_id)
-	#for key in _stacked_item_ids_by_keys.keys():
-		#var ids:Array = _stacked_item_ids_by_keys[key]
-		#ids.erase(item_id)
-		#if ids.size() == 0:
-			#_stacked_item_ids_by_keys.erase(key)
-	pass
-
 static  func list_all_held_item_ids()->Array:
 	var out_list = []
 	out_list.append_array(_held_unique_items_ids)
-	for item_id in _stacked_item_id_by_key.values():
-		out_list.append(item_id)
+	for item_key in _stacked_item_id_by_key.keys():
+		if _stacked_item_count_by_key.get(item_key, 0) > 0:
+			var item_id = _stacked_item_id_by_key[item_key]
+			out_list.append(item_id)
 	return out_list
 
 static  func list_all_held_items()->Array:
@@ -144,27 +136,6 @@ static  func list_all_held_items()->Array:
 		if item:
 			out_list.append(item)
 	return out_list
-
-### Returns all unique items and the first instance of each stackable item
-#static func list_held_item_stacks()->Array:
-	#var out_list = []
-	#for item_id in _held_unique_items_ids:
-		#var item = ItemLibrary.get_item(item_id)
-		#if item:
-			#out_list.append(item)
-		#else:
-			#_erase_item_id(item_id)
-	#for item_id in _stacked_item_ids_by_keys.values():
-		#if item_stack.size() == 0:
-			#_stacked_item_ids_by_keys.erase(item_stack)
-			#continue
-		#var first_id = item_stack[0]
-		#var item = ItemLibrary.get_item(first_id)
-		#if item:
-			#out_list.append(item)
-		#else:
-			#_erase_item_id(first_id)
-	#return out_list
 
 static func get_item_stack_count(item_key:String):
 	return _stacked_item_count_by_key.get(item_key, 0)

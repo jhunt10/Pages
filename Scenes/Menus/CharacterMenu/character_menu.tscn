@@ -946,7 +946,6 @@ background = NodePath("Background")
 inner_container = NodePath("BoxContainer")
 margin_override = 6
 force_fill_x = true
-center_from = null
 
 [node name="Background" type="NinePatchRect" parent="ScaleControl/StatsPage/ContainerControl/StatsMainContainer/MiscStatsContainer"]
 layout_mode = 2
@@ -1212,14 +1211,13 @@ layout_mode = 2
 size_flags_vertical = 3
 
 [node name="AtkStatsContainer" type="Container" parent="ScaleControl/StatsPage/ContainerControl/StatsMainContainer" node_paths=PackedStringArray("background", "inner_container")]
-custom_minimum_size = Vector2(12, 105)
+custom_minimum_size = Vector2(12, 90)
 layout_mode = 2
 script = ExtResource("16_ep8hk")
 background = NodePath("Background")
 inner_container = NodePath("BoxContainer")
 margin_override = 6
 force_fill_x = true
-center_from = null
 
 [node name="Background" type="NinePatchRect" parent="ScaleControl/StatsPage/ContainerControl/StatsMainContainer/AtkStatsContainer"]
 layout_mode = 2
@@ -1404,7 +1402,6 @@ alignment = 1
 
 [node name="MainHandDamageContainer" parent="ScaleControl/StatsPage/ContainerControl/StatsMainContainer/AtkStatsContainer/BoxContainer/RangeDamageContainer/DamageDatasContainer" instance=ExtResource("42_hsufi")]
 layout_mode = 2
-attack_scale = 0.0
 
 [node name="MainHandDamageRow" type="HBoxContainer" parent="ScaleControl/StatsPage/ContainerControl/StatsMainContainer/AtkStatsContainer/BoxContainer/RangeDamageContainer/DamageDatasContainer"]
 visible = false
@@ -1529,14 +1526,13 @@ layout_mode = 2
 size_flags_vertical = 3
 
 [node name="DefStatsContainer" type="Container" parent="ScaleControl/StatsPage/ContainerControl/StatsMainContainer" node_paths=PackedStringArray("background", "inner_container")]
-custom_minimum_size = Vector2(12, 161)
+custom_minimum_size = Vector2(12, 118)
 layout_mode = 2
 script = ExtResource("16_ep8hk")
 background = NodePath("Background")
 inner_container = NodePath("BoxContainer")
 margin_override = 6
 force_fill_x = true
-center_from = null
 
 [node name="Background" type="NinePatchRect" parent="ScaleControl/StatsPage/ContainerControl/StatsMainContainer/DefStatsContainer"]
 layout_mode = 2

@@ -174,11 +174,6 @@ static func get_damage_data_of_action(action:PageItemAction, actor:BaseActor)->D
 	if damage_data.size() > 0:
 		return damage_data
 	var preview_damage_data_key = action.get_preview_damage_datas(actor)
-	# TODO: Better
-	if action.ActionKey == "BasicWeaponAttack":
-		var weapon = actor.equipment.get_primary_weapon()
-		if weapon:
-			return (weapon as BaseWeaponEquipment).get_damage_data()
 	return {}
 		
 
