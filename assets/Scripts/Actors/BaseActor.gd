@@ -106,6 +106,7 @@ func get_tags():
 	tag_list.append_array(super())
 	var aditional_tags = pages.get_tags_added_to_actor()
 	aditional_tags.append_array(effects.get_tags_added_to_actor())
+	aditional_tags.append_array(equipment.get_tags_added_to_actor())
 	for added_tag in aditional_tags:
 		if not tag_list.has(added_tag):
 			tag_list.append(added_tag)
@@ -356,3 +357,19 @@ func get_attack_mods()->Dictionary:
 		
 		out_dict[mod_id] = mod_data
 	return out_dict
+
+
+func get_hands_conditions_for_tool(tool:BaseToolEquipment)->Dictionary:
+	var equipment_data = actor_data.get("EquipmentData", {})
+	var hand_conditions = []
+	for page:PageItemPassive in pages.list_passives():
+		hand_conditions.append_array(page.get_hand_mods())
+	var default_hand_conditions = equipment_data.get("HandConditions", [])
+	hand_conditions.append_array(default_hand_conditions)
+		
+	for condition in hand_conditions:
+		if TagHelper.check_tag_filters("ToolTagFilters", condition, tool):
+			return condition
+	
+	printerr("BaseActor.get_hand_condition: No Conditions found for Tool: '%s" % [tool.Id])
+	return {}

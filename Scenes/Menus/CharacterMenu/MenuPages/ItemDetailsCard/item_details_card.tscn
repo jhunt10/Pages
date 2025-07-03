@@ -49,10 +49,14 @@ offset_right = 300.0
 offset_bottom = 300.0
 mouse_filter = 1
 script = ExtResource("1_vq5a0")
+showing = false
+state = 0
+shop_mode = false
 offset_control = NodePath("OffsetControl")
 offset_point = NodePath("OffestPoint")
 vertical = true
 time_to_show = 0.3
+grow_timer = 0.0
 speed = 500.0
 icon = NodePath("OffsetControl/NinePatchRect/VBoxContainer/TitleContainer/IconBackground/Icon")
 title_lable = NodePath("OffsetControl/NinePatchRect/VBoxContainer/TitleContainer/FitScaleLabel")
@@ -429,6 +433,7 @@ vertical_alignment = 1
 
 [node name="DamageContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsControl/VBoxContainer/HBoxContainer2/AmmoDamageContainer" instance=ExtResource("15_idu7k")]
 layout_mode = 2
+font_size_override = -1
 defense_type = "Armor"
 damage_type = 7
 attack_scale = 0.0
@@ -870,6 +875,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 text = "Equipe"
+_size_dirty = true
 center_x = true
 
 [node name="EquipButton" type="Button" parent="OffsetControl/NinePatchRect/VBoxContainer/EquipButtonBackground"]

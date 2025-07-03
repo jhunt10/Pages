@@ -19,10 +19,29 @@ var weapon_attack_data:Dictionary:
 	get:
 		return _def.get("WeaponData", {}).get("AttackData", {})
 
+func get_tool_size_str()->String:
+	return  weapon_data.get("WeaponClass", "Medium")
 
 func _init(key:String, def_load_path:String, def:Dictionary, id:String='', data:Dictionary={}) -> void:
 	super(key, def_load_path, def, id, data)
 	_cache_after_loading_def()
+	
+func get_tags()->Array:
+	var tags = super()
+	if not tags.has("Weapon"):
+		tags.append("Weapon")
+	var wpn_class = get_weapon_class()
+	match wpn_class:
+		WeaponClasses.Light:
+			if not tags.has("LightWpn"):
+				tags.append("LightWpn")
+		WeaponClasses.Medium:
+			if not tags.has("MediumWpn"):
+				tags.append("MediumWpn")
+		WeaponClasses.Heavy:
+			if not tags.has("HeavyWpn"):
+				tags.append("HeavyWpn")
+	return tags
 
 func can_main_hand()->bool:
 	return true
@@ -30,6 +49,9 @@ func can_main_hand()->bool:
 func can_off_hand()->bool:
 	return get_weapon_class() == WeaponClasses.Light
 
+func can_one_hand()->bool:
+	return get_weapon_class() != WeaponClasses.Heavy
+	
 func can_two_hand()->bool:
 	return get_weapon_class() != WeaponClasses.Light
 

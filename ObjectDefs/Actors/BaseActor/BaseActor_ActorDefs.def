@@ -13,10 +13,10 @@
                 "Actor"
             ]
         },
-        "ActorData":{
-            "EquipmentData":{
-                "EquipmentSlots":[],
-                "HandCount":2
+        "ActorData": {
+            "EquipmentData": {
+                "EquipmentSlots": [],
+                "HandCount": 2
             }
         },
         "IsPlayer": false,
@@ -83,7 +83,7 @@
         },
         "_DefVersion": "1"
     },
-    "#BaseHumanoid":{
+    "#BaseHumanoid": {
         "#ObjDetails": {
             "Description": "Description.",
             "DisplayName": "Base Actor",
@@ -91,17 +91,96 @@
             "ObjectType": "Actor",
             "SmallIcon": "Sprites/BaseActor.png",
             "SnippetDesc": "An actor made for baseing.",
-            "Tags": ["Biped"],
+            "Tags": [
+                "Biped"
+            ],
             "Taxonomy": [
                 "Actor"
             ]
         },
-        "ActorData":{
-            "EquipmentData":{
-                "EquipmentSlots":["Book","Bag","Head","Body","Feet","Trinket"],
-                "HandCount":2
+        "ActorData": {
+            "EquipmentData": {
+                "EquipmentSlots": [
+                    "Book",
+                    "Bag",
+                    "Head",
+                    "Body",
+                    "Feet",
+                    "Trinket"
+                ],
+                "HandCount": 2,
+                "HandConditions": [
+                    {
+                        "ConditionName": "Light Weapon",
+                        "CanMainHand": true,
+                        "CanOffHand": true,
+                        "CanOneHand": true,
+                        "CanTwoHand": false,
+                        "ToolTagFiltersReqAll": true,
+                        "ToolTagFilters": [
+                            {
+                                "RequireAllTags": [
+                                    "LightWpn"
+                                ]
+                            }
+                        ],
+                        "OffHandReq": [
+                            {
+                                "MainHandTagFiltersReqAll": true,
+                                "MainHandTagFilters": [
+                                    {
+                                        "RequireAllTags": [
+                                            "LightWpn"
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "ConditionName": "Heavy Weapon",
+                        "CanMainHand": true,
+                        "CanOffHand": false,
+                        "CanOneHand": false,
+                        "CanTwoHand": true,
+                        "ToolTagFiltersReqAll": true,
+                        "ToolTagFilters": [
+                            {
+                                "RequireAllTags": [
+                                    "HeavyWpn"
+                                ]
+                            }
+                        ],
+                        "OffHandReq": []
+                    },
+                    {
+                        "ConditionName": "Default Weapon",
+                        "CanMainHand": true,
+                        "CanOffHand": false,
+                        "CanOneHand": true,
+                        "CanTwoHand": false,
+                        "ToolTagFiltersReqAll": true,
+                        "ToolTagFilters": [
+                            {
+                                "RequireAllTags": [
+                                    "Weapon"
+                                ]
+                            }
+                        ],
+                        "OffHandReq": []
+                    },
+                    {
+                        "ConditionName": "Default Tool",
+                        "CanMainHand": false,
+                        "CanOffHand": true,
+                        "CanOneHand": true,
+                        "CanTwoHand": false,
+                        "ToolTagFiltersReqAll": false,
+                        "ToolTagFilters": [],
+                        "OffHandReq": []
+                    }
+                ]
             }
         }
-
     }
 }

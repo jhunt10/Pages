@@ -185,7 +185,7 @@ func _on_item_added_to_slot(item:BaseItem, index:int):
 	_cache_action_mods()
 	class_page_changed.emit()
 
-func _on_item_removed_from_slot(item_id:String, index:int, supressing_signals:bool):
+func _on_item_removed(item_id:String, supressing_signals:bool):
 	if item_id_to_effect_id.keys().has(item_id):
 		var effect = EffectLibrary.get_effect(item_id_to_effect_id[item_id])
 		_actor.effects.remove_effect(effect)

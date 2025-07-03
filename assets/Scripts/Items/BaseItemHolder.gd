@@ -172,11 +172,16 @@ func list_item_ids(include_nulls:bool=false)->Array:
 ## Returns all items in slots. Does not include nulls for empty slots.
 func list_items()->Array:
 	var out_list=[]
-	for id in _raw_item_slots:
-		if id == null: continue
-		var item = ItemLibrary.get_item(id)
+	for index in range(_raw_item_slots.size()):
+		var item_id = _raw_item_slots[index]
+		if item_id == null: continue
+		var item = ItemLibrary.get_item(item_id, false)
 		if item:
 			out_list.append(item)
+		else:
+			printerr("%s.list_items: Lost Item in slot '%s': '%s'" % [_debug_name(), index, item_id])
+			_raw_item_slots[index] = null
+			
 	return out_list
 
 func has_item(item_id:String):
@@ -193,7 +198,12 @@ func get_item_in_slot(index:int)->BaseItem:
 	if index >= 0 and index < _raw_item_slots.size():
 		var item_id =  _raw_item_slots[index]
 		if item_id:
-			return ItemLibrary.get_item(item_id)
+			var item = ItemLibrary.get_item(item_id, false)
+			if item:
+				return item
+			else:
+				printerr("%s.get_item_in_slot: Lost Item in slot '%s': '%s'" % [_debug_name(), index, item_id])
+				_raw_item_slots[index] = null
 	return null
 
 func remove_item(item_id:String, supress_signal:bool=false):
@@ -203,7 +213,7 @@ func remove_item(item_id:String, supress_signal:bool=false):
 	var index = _raw_item_slots.find(item_id)
 	if index >= 0:
 		_raw_item_slots[index] = null
-		_on_item_removed_from_slot(item_id, index, supress_signal)
+		_on_item_removed(item_id, supress_signal)
 		if not supress_signal:
 			items_changed.emit()
 
@@ -223,9 +233,17 @@ func can_set_item_in_slot(item:BaseItem, index:int, allow_replace:bool=false)->b
 
 ## Directly set an Item into given slot index without any checks or signals.
 ## Should only be used by ItemHelper
-func _direct_set_item_in_slot(item:BaseItem, index:int):
-	if index >= 0 and index <= _raw_item_slots.size():
-		_raw_item_slots[index] = item.Id
+func _direct_set_item_in_slot(slot_index:int, item:BaseItem):
+	if slot_index >= 0 and slot_index <= _raw_item_slots.size():
+		_raw_item_slots[slot_index] = item.Id
+
+## Get Items that will be removed if current item is added to slot.
+## Should only be used by ItemHelper
+func _get_items_removed_if_new_item_added(slot_index:int, item:BaseItem)->Array:
+	var current_item = get_item_in_slot(slot_index)
+	if current_item:
+		return [current_item]
+	return []
 
 func try_set_item_in_slot(item:BaseItem, index:int, allow_replace:bool=false)->bool:
 	if not ItemHelper.transering_items.has(item.Id):
@@ -273,7 +291,7 @@ func add_item_to_first_valid_slot(item:BaseItem):
 			return true
 	return false
 
-func _on_item_removed_from_slot(item_id:String, index:int, supressing_signals:bool):
+func _on_item_removed(item_id:String, supressing_signals:bool):
 	pass
 
 func _on_item_added_to_slot(item:BaseItem, index:int):

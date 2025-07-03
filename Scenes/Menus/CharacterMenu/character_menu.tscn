@@ -1124,10 +1124,17 @@ layout_mode = 2
 script = ExtResource("22_nfk1x")
 health_bar_container = NodePath("BoxContainer/HealthContainer")
 divider = NodePath("BoxContainer/ColorRect")
+global_refresh = false
+refresh = false
 background = NodePath("Background")
 inner_container = NodePath("BoxContainer")
 margin_override = 6
-center_from = null
+sides_padding = 0
+force_fill_x = false
+force_fill_y = false
+force_dimintions = Vector2i(0, 0)
+center_in_parent = false
+center_from = 0
 
 [node name="Background" type="NinePatchRect" parent="ScaleControl/StatsPage/ContainerControl/StatsMainContainer/BarStatsDisplayContainer"]
 layout_mode = 2
@@ -1402,6 +1409,10 @@ alignment = 1
 
 [node name="MainHandDamageContainer" parent="ScaleControl/StatsPage/ContainerControl/StatsMainContainer/AtkStatsContainer/BoxContainer/RangeDamageContainer/DamageDatasContainer" instance=ExtResource("42_hsufi")]
 layout_mode = 2
+font_size_override = -1
+defense_type = ""
+damage_type = 0
+attack_scale = 0.0
 
 [node name="MainHandDamageRow" type="HBoxContainer" parent="ScaleControl/StatsPage/ContainerControl/StatsMainContainer/AtkStatsContainer/BoxContainer/RangeDamageContainer/DamageDatasContainer"]
 visible = false

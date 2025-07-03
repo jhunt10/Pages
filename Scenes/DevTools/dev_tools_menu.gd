@@ -12,7 +12,7 @@ extends Control
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	close_button.pressed.connect(close_menu)
-	create_page_items_button.pressed.connect(create_page_items)
+	create_page_items_button.pressed.connect(do_the_thing)
 	items_to_inventory_button.pressed.connect(items_to_inventory)
 	add_item_menu_button.pressed.connect(add_item_menu.show)
 	reload_stuff_button.pressed.connect(reload_stuff)
@@ -34,16 +34,13 @@ func reload_stuff():
 	ItemLibrary.Instance.reload()
 	VfxLibrary.reload_vfxs()
 
-func create_page_items():
-	var file_dialog:FileDialog = FileDialog.new()
-	file_dialog.file_mode = FileDialog.FILE_MODE_OPEN_FILE
-	file_dialog.title = "Select Action Defs file"
-	file_dialog.add_filter("*_ActionDefs.json")
-	file_dialog.file_selected.connect(__create_page_items_actions_selected)
-	self.add_child(file_dialog)
-	file_dialog.popup_centered_ratio()
-	file_dialog.show()
-	pass
+func do_the_thing():
+	# Create weapons in inventory
+	var items = ["BigMalma", "OldSword", "OldDagger", "BlackJack", "OldShield"]
+	var requested = 1
+	for item_key in items:
+		if PlayerInventory.get_item_stack_count(item_key) < requested:
+			PlayerInventory.spawn_item(item_key, requested)
 
 func __create_page_items_actions_selected(path:String):
 	var action_keys = []

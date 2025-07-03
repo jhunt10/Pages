@@ -337,7 +337,7 @@ static func _roll_for_effects(attacker:BaseActor, defender:BaseActor, attack_eve
 static func  _can_effect_apply(attack_effect_data:Dictionary, attacker:BaseActor, defender:BaseActor, attack_event:AttackEvent, sub_event:AttackSubEvent):
 	var conditions = attack_effect_data.get("Conditions", {})
 	var faction_filter = conditions.get("DefenderFactionFilters", [])
-	if not FilterHelper.check_faction_filter(attack_event.attacker_id, attack_event.attacker_faction, faction_filter, defender):
+	if not TagHelper.check_faction_filter(attack_event.attacker_id, attack_event.attacker_faction, faction_filter, defender):
 		return false
 	var source_tag_filters = conditions.get("DefenderTagFilters", [])
 	for source_tag_filter in source_tag_filters:
@@ -365,7 +365,7 @@ static func _does_attack_mod_apply(attack_mod, attacker, defenders, source_tag_c
 	
 	# Check Attacker Faction Filters
 	var attack_faction_filters = conditions.get("AttackerFactionFilters", [])
-	if not FilterHelper.check_faction_filter(mod_source_actor, mod_source_faction, attack_faction_filters, attacker):
+	if not TagHelper.check_faction_filter(mod_source_actor, mod_source_faction, attack_faction_filters, attacker):
 		return false
 	
 	# Check Source Tag Filters
@@ -400,7 +400,7 @@ static func _does_attack_mod_apply(attack_mod, attacker, defenders, source_tag_c
 						continue
 			
 			# Defender is valid faction
-			if not FilterHelper.check_faction_filter(mod_source_actor, mod_source_faction, faction_filter, defender):
+			if not TagHelper.check_faction_filter(mod_source_actor, mod_source_faction, faction_filter, defender):
 				all_defenders_are_valid = false
 				if require_all_defenders:
 					break
@@ -451,7 +451,7 @@ static func _does_attack_stat_mod_apply_to_actor(stat_mod:BaseStatMod, actor:Bas
 	
 	# Check Faction Filters
 	var faction_filters = conditions.get("FactionFilters", [])
-	if not FilterHelper.check_faction_filter(mod_source_actor, mod_source_faction, faction_filters, actor):
+	if not TagHelper.check_faction_filter(mod_source_actor, mod_source_faction, faction_filters, actor):
 		return false
 			
 	# Check Defender Tag Filters

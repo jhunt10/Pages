@@ -21,7 +21,7 @@ grow_vertical = 2
 script = ExtResource("1_mof5q")
 close_button = NodePath("BackPatchContainer/BoxContainer/TitleContainer/ExitButton")
 reload_stuff_button = NodePath("BackPatchContainer/BoxContainer/ReloadStuffButton")
-create_page_items_button = NodePath("BackPatchContainer/BoxContainer/MakeActionPagesButton")
+create_page_items_button = NodePath("BackPatchContainer/BoxContainer/DoThingButton")
 items_to_inventory_button = NodePath("BackPatchContainer/BoxContainer/AddItemsToInventoryButton")
 add_item_menu_button = NodePath("BackPatchContainer/BoxContainer/AddItemMenuButton")
 add_item_menu = NodePath("AddItemMenu")
@@ -34,7 +34,6 @@ offset_bottom = 196.0
 script = ExtResource("2_fwuqo")
 background = NodePath("NinePatchRect")
 inner_container = NodePath("BoxContainer")
-center_from = null
 
 [node name="NinePatchRect" type="NinePatchRect" parent="BackPatchContainer"]
 layout_mode = 2
@@ -65,9 +64,9 @@ text = "X"
 layout_mode = 2
 text = "Reload Stuff"
 
-[node name="MakeActionPagesButton" type="Button" parent="BackPatchContainer/BoxContainer"]
+[node name="DoThingButton" type="Button" parent="BackPatchContainer/BoxContainer"]
 layout_mode = 2
-text = "Build pages For all Actions in file..."
+text = "Do the Thing"
 
 [node name="AddItemsToInventoryButton" type="Button" parent="BackPatchContainer/BoxContainer"]
 layout_mode = 2
@@ -97,7 +96,6 @@ offset_bottom = 135.0
 script = ExtResource("2_fwuqo")
 background = NodePath("NinePatchRect")
 inner_container = NodePath("BoxContainer")
-center_from = null
 
 [node name="NinePatchRect" type="NinePatchRect" parent="AddItemMenu/BackPatch"]
 layout_mode = 2
@@ -159,7 +157,6 @@ offset_bottom = 629.0
 script = ExtResource("2_fwuqo")
 background = NodePath("NinePatchRect")
 inner_container = NodePath("BoxContainer")
-center_from = null
 
 [node name="NinePatchRect" type="NinePatchRect" parent="DefDataMenu/BackPatch"]
 layout_mode = 2
@@ -222,7 +219,6 @@ offset_bottom = 131.0
 script = ExtResource("2_fwuqo")
 background = NodePath("NinePatchRect")
 inner_container = NodePath("BoxContainer")
-center_from = null
 
 [node name="NinePatchRect" type="NinePatchRect" parent="AggroMenu/BackPatch"]
 layout_mode = 2
@@ -285,7 +281,6 @@ offset_bottom = 411.0
 script = ExtResource("2_fwuqo")
 background = NodePath("NinePatchRect")
 inner_container = NodePath("BoxContainer")
-center_from = null
 
 [node name="NinePatchRect" type="NinePatchRect" parent="ObjectsCountsMenu/BackPatch"]
 layout_mode = 2

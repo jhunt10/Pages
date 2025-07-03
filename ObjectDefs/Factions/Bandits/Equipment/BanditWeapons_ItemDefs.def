@@ -1,0 +1,78 @@
+{
+    "BigMalma": {
+        "!ObjectScript": "res://assets/Scripts/Items/Equipment/Tools/BaseWeaponEquipment.gd",
+        "#ObjDetails":{
+			"DisplayName": "Big Mal-Ma",
+			"SnippetDesc": "Big old mal.",
+			"Description": "A crude Mal made from bolting a stone slab to a plank. Used to be owned by a Bandit Captain.",
+			"Tags": ["Weapon", "Hammer"],
+			"LargeIcon":"Sprites/BigMalma_Icon.png",
+			"SmallIcon":"Sprites/BigMalma_Icon.png",
+            "Taxonomy": [
+                "Item",
+                "Equipment",
+                "Weapon"
+            ]
+		},
+        "EquipmentData": {
+            "AttackMods": {},
+            "DamageMods": {},
+            "EquipSlot": "Weapon",
+            "Requirments": {
+                "ReqStats": {
+                    "Strength": 10
+                }
+            },
+            "StatMods": {
+                "AttackBonus": {
+                    "ModType": "Add",
+                    "StatName": "PhyAttack",
+                    "Value": 12
+                }
+            },
+            "TargetMods": {}
+        },
+        "ItemData": {
+            "Rarity": "Rare",
+            "Value": 50
+        },
+        "WeaponData": {
+            "AttackData": {
+                "AttackDetails": {
+                    "AccuracyMod": 1,
+                    "PotencyMod": 1
+                },
+                "AttackTags": [
+                    "Weapon",
+                    "Melee",
+                    "Physical"
+                ],
+                "DamageDatas": {
+                    "WeaponDamage": {
+                        "AtkPwrBase": 120,
+                        "AtkPwrRange": 10,
+                        "AtkStat": "PhyAttack",
+                        "DamageType": "Blunt",
+                        "DamageVfxKey": "AUTO",
+                        "DefenseType": "AUTO"
+                    }
+                },
+                "EffectDatas": {},
+                "TargetParams": {
+                    "LineOfSight": true,
+                    "TargetArea": "[[-1,1],[0,1],[1,1]]",
+                    "TargetType": "Enemy"
+                }
+            },
+            "IsRanged": false,
+            "WeaponClass": "Heavy",
+            "WeaponSpriteData": {
+                "Offset":[0,0],
+                "SpriteName":"Sprites/BigMalma",
+                "Rotation":22,
+                "WeaponAnimation": "Swing"
+            }
+        },
+        "_DefVersion": "1"
+    }
+}

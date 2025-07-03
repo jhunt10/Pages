@@ -35,3 +35,10 @@ func get_action_mods()->Dictionary:
 		mods[key]["DisplayName"] = self.get_display_name()
 		mods[key]["SourceItemId"] = self._id
 	return mods
+
+func get_hand_mods()->Array:
+	var tdata = page_data.duplicate()
+	var mods = page_data.get("HandConditionMods", [])
+	return mods
+	
+	

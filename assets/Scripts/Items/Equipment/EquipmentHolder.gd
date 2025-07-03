@@ -3,11 +3,24 @@ extends BaseItemHolder
 
 var _hand_count = 0
 
+var _is_two_handing:bool = false
+var _is_dual_handing:bool = false
+
 func _debug_name()->String:
 	return "EquipmentHolder"
 
 func _init(actor) -> void:
 	super(actor)
+
+
+func get_tags_added_to_actor()->Array:
+	var out_list = []
+	if _is_two_handing:
+		out_list.append("TwoHand")
+	if _is_dual_handing:
+		out_list.append("DualHand")
+	return out_list
+		
 
 func _load_slots_sets_data()->Array:
 	var equipment_data = _actor.actor_data.get("EquipmentData", {})
@@ -70,37 +83,49 @@ func get_slot_equipment_type(index:int)->String:
 		return ''
 	var slot_set_ref = _raw_to_slot_set_mapping[index]
 	return slot_set_ref['SlotSetKey']
-#
-### Try to equip the item to the first open slot for it's type. If no open slots are found, replace first if allowed
-#func try_equip_item(equipment:BaseEquipmentItem, replace:bool=false)->bool:
-	#var slot_type = equipment.get_equipment_slot_type()
-	#if slot_type == "Weapon":
-		#var weapon = equipment as BaseWeaponEquipment
-		#slot_type = "MainHand"
-		#if weapon.get_weapon_class() == BaseWeaponEquipment.WeaponClasses.Light:
-			#var have_weapon = get_primary_weapon()
-			#if have_weapon and have_weapon.get_weapon_class() == BaseWeaponEquipment.WeaponClasses.Light:
-				#slot_type = "OffHand"
-			#
-	#if not _slot_set_key_mapping.has(slot_type):
-		## No slot for item
-		#return false
-	#var index = _slot_set_key_mapping.find(slot_type)
-	#return try_set_item_in_slot(equipment, index, replace)
 
+########################
+##     Hand Logic     ##
+########################
 func get_first_hand_index()->int:
 	var index = _slot_set_key_mapping.find("Hands")
 	if index < 0:
 		return -1
 	return  _item_slot_sets_datas[index].get("IndexOffset", -1)
 
+func get_first_hand_tool()->BaseToolEquipment:
+	var slot_set_index = _slot_set_key_mapping.find("Hands")
+	if slot_set_index < 0:
+		return null
+	var slot_index =  _item_slot_sets_datas[slot_set_index].get("IndexOffset", -1)
+	var item = get_item_in_slot(slot_index)
+	if not item is BaseToolEquipment:
+		return null
+	return item
+
 func list_all_hand_indexes()->Array:
 	var mainhand_index = get_first_hand_index()
 	return range(mainhand_index, mainhand_index + _hand_count)
 
+func list_all_tools_in_hands()->Array:
+	var out_list = []
+	for i in list_all_hand_indexes():
+		var item = get_item_in_slot(i)
+		if item and not out_list.has(item):
+			out_list.append(item)
+	return out_list
+
 func list_offhand_indexes()->Array:
 	var mainhand_index = get_first_hand_index()
 	return range(mainhand_index+1, mainhand_index + _hand_count)
+
+func list_tools_in_offhands()->Array:
+	var out_list = []
+	for i in list_offhand_indexes():
+		var item = get_item_in_slot(i)
+		if item and not out_list.has(item):
+			out_list.append(item)
+	return out_list
 
 # For Ease of Life, tools can be drop in any hand slot 
 func get_auto_hand_index(item:BaseItem, requested_slot_index:int, allow_replace:bool = true)->int:
@@ -117,9 +142,9 @@ func get_auto_hand_index(item:BaseItem, requested_slot_index:int, allow_replace:
 	if is_going_to_mainhand:
 		if ( 
 			# Non-MainHand Tool, push to OffHand
-			not _can_use_item_in_mainhand(tool) 
+			not _can_use_tool_in_mainhand(tool) 
 			# Could Off and MainHand is full - Prevent setting single Dualable weapon
-			#or (_can_use_item_in_mainhand(tool) and _raw_item_slots[firsthand_index] == null)
+			#or (_can_use_tool_in_mainhand(tool) and _raw_item_slots[firsthand_index] == null)
 		):
 			# TODO: Assuming 2hands
 			if _hand_count > 1:
@@ -127,15 +152,33 @@ func get_auto_hand_index(item:BaseItem, requested_slot_index:int, allow_replace:
 				is_going_to_mainhand = false
 		
 	else: # Requested OffHand slot
-		if ( 
-			# Non-OffHand Tool, push to MainHand
-			not _can_use_item_in_offhand(tool)
-			# Could MainHand and MainHand is empty
-			or (_can_use_item_in_mainhand(tool) and _raw_item_slots[firsthand_index] == null)
+		if (# Non-OffHand Tool, push to MainHand
+			not _can_use_tool_in_offhand(tool)
+			# Could MainHand and MainHand is empty, push to MainHand
+			or (_can_use_tool_in_mainhand(tool) and _raw_item_slots[firsthand_index] == null)
 		):
-			slot_index = firsthand_index
-			is_going_to_mainhand = true
+			return firsthand_index
+		# We are 2Hand and current tool can't be 1hand, Push to main
+		if is_two_handing():
+			var main_hand_item = get_item_in_slot(firsthand_index)
+			if main_hand_item and not _can_use_tool_in_one_hands(main_hand_item):
+				# Check that new tool can go to main - No, Auto Swap will fix it later
+				# and we need to make sure current MainHand is removed
+				#if _can_use_tool_in_mainhand(tool):
+				return firsthand_index
+				
+			
 	return slot_index
+
+## Get Items that will be removed if current item is added to slot.
+## Should only be used by ItemHelper
+func _get_items_removed_if_new_item_added(slot_index:int, item:BaseItem)->Array:
+	# Only Hands require special logic
+	if get_slot_set_key_for_index(slot_index) != "Hands":
+		return super(slot_index, item)
+		
+	return list_all_tools_in_hands()
+
 
 func can_set_item_in_slot(item:BaseItem, index:int, allow_replace:bool=false)->bool:
 	# Only Hands require special logic
@@ -151,148 +194,123 @@ func can_set_item_in_slot(item:BaseItem, index:int, allow_replace:bool=false)->b
 		return _raw_item_slots[index] == null
 	return true
 
-
-#func try_set_item_in_slot(item:BaseItem, index:int, allow_replace:bool=false)->bool:
-	#if get_slot_set_key_for_index(index) != "Hands":
-		#super(item, index, allow_replace)
-	#
-	#if not ItemHelper.transering_items.has(item.Id):
-		#printerr("Transfering Item outside of ItemHelper: %s | %s " % [item.Id, _actor.Id])
-	## Check that item can go in slot
-	#if not can_set_item_in_slot(item, index, allow_replace):
-		#return false
-	## Check that item is Tool
-	#var tool = item as BaseToolEquipment
-	#if !tool:
-		#printerr("EquipmentHolder.can_set_item_in_slot: Non-Tool Item attempted to go in HandSlot")
-		#return false
-	#
-	#var slot_index = index
-	#var firsthand_index = get_first_hand_index()
-	#var is_going_to_mainhand = index == firsthand_index
-	#
-	## For Ease of Life, tools can be drop in any hand slot 
-	## If the Tool is exclusive to Main|Off Hand, swap it now  
-	#
-	#if is_going_to_mainhand:
-		#if ( 
-			## Non-MainHand Tool, push to OffHand
-			#not _can_use_item_in_mainhand(tool) 
-			## Could Off and MainHand is full - Prevent setting single Dualable weapon
-			##or (_can_use_item_in_mainhand(tool) and _raw_item_slots[firsthand_index] == null)
-		#):
-			## TODO: Assuming 2hands
-			#if _hand_count > 1:
-				#slot_index = firsthand_index + 1
-				#is_going_to_mainhand = false
-		#
-	#else: # Requested OffHand slot
-		#if ( 
-			## Non-OffHand Tool, push to MainHand
-			#not _can_use_item_in_offhand(tool)
-			## Could MainHand and MainHand is empty
-			#or (_can_use_item_in_mainhand(tool) and _raw_item_slots[firsthand_index] == null)
-		#):
-			#slot_index = firsthand_index
-			#is_going_to_mainhand = true
-	#
-	#if _raw_item_slots[index] != null:
-		#if allow_replace:
-			#remove_item(_raw_item_slots[index], true)
-		#else:
-			#return false
-	#_raw_item_slots[index] = item.Id
-	#_on_item_added_to_slot(item, index)
-	#items_changed.emit()
-	#return true
-
-
-
 func _on_item_added_to_slot(item:BaseItem, index:int):
 	auto_order_hand_items()
 
-func _on_item_removed_from_slot(item_id:String, index:int, supressing_signals:bool):
-	var hand_indexes = list_all_hand_indexes()
-	# Item was in a hand slot
-	if hand_indexes.has(index):
-		# If the item still shows up in other hands, purge it
-		if _raw_item_slots.has(item_id):
-			for i in hand_indexes:
-				_raw_item_slots[i] = null
-		
+func _on_item_removed(item_id:String, supressing_signals:bool):
 	# Skip hand logic when mid transaction
 	if supressing_signals:
 		return
 	auto_order_hand_items()
 
-func auto_order_hand_items():
+# Correct for toosl in hands and set HandStates after some change
+func auto_order_hand_items(): 
+	# Skip Logic if one/no hands
+	if _hand_count <= 1:
+		return
+	
 	var hand_indexes = list_all_hand_indexes()
 	var mainhand_index = get_first_hand_index()
 	var mainhand_item = get_item_in_slot(mainhand_index)
 	
-	# When MainHand is empy, OffHand weapons need to be moved over to MainHand
+	# Check that MainHand is Valid
 	if mainhand_item == null:
+		# When MainHand is empy, OffHand weapons need to be moved over to MainHand
 		for i in list_offhand_indexes():
 			var item_in_offhand = get_item_in_slot(i)
 			if item_in_offhand and item_in_offhand is BaseToolEquipment:
-				if _can_use_item_in_mainhand(item_in_offhand):
+				if _can_use_tool_in_mainhand(item_in_offhand):
 					# Move fist found/valid OffHand item to MainHand
 					_raw_item_slots[mainhand_index] = _raw_item_slots[i]
+					#TODO: Instea of nulling out _raw_slots, do an invaid items cache
 					_raw_item_slots[i] = null
 					break
-	# When MainHand can be Two Handed, look for open hand slot and set to MainHand
-	elif (_hand_count > 1
-		and not is_two_handing() 
-		and _can_use_item_in_two_hands(mainhand_item)
-	):
+	# MainHand Item should not be in MainHand
+	elif not _can_use_tool_in_mainhand(mainhand_item):
+		# Move to offhand
+		#TODO: Assuming 2Hand
 		for i in list_offhand_indexes():
-			var item_in_offhand = get_item_in_slot(i)
-			if item_in_offhand == null:
-				_raw_item_slots[i] = mainhand_item.Id
-				break
-		
-		
-			
-
-
-
-func _can_use_item_in_mainhand(item:BaseItem):
-	if item is BaseToolEquipment:
-		return item.can_main_hand()
-	return false
-func _can_use_item_in_offhand(item:BaseItem):
-	if item is BaseToolEquipment:
-		return item.can_off_hand()
-	return false
-
-func _can_use_item_in_two_hands(item:BaseItem):
-	if item is BaseToolEquipment:
-		return item.can_two_hand()
-	return false
-
-
-
-
+			_raw_item_slots[i] = mainhand_item.Id
+			_raw_item_slots[mainhand_index] = null
+			break
 	
+	# Check OffHands are valid
+	for offhand_index in list_offhand_indexes():
+		var offhand_item = get_item_in_slot(offhand_index)
+		if offhand_item and not _can_use_tool_in_offhand(offhand_item):
+			#TODO: Instea of nulling out _raw_slots, do an invaid items cache
+			_raw_item_slots[offhand_index] = null
 	
+	# Clear out HandStates
+	_is_two_handing = false
+	_is_dual_handing = false
+	
+	# Check 2 Handing conditions
+	if mainhand_item:
+		# MainHand Item must be two handed
+		if not _can_use_tool_in_one_hands(mainhand_item):
+			#TODO: Assuming 2Hands
+			# Clear any offhands
+			for offhand_index in list_offhand_indexes():
+				#TODO: Instea of nulling out _raw_slots, do an invaid items cache
+				_raw_item_slots[offhand_index] = null
+			_is_two_handing = true
+		
+		# MainHand Item could be two handed
+		elif _can_use_tool_in_two_hands(mainhand_item):
+			# Check for open offhands
+			var open_offhand = false
+			for offhand_index in list_offhand_indexes():
+				if _raw_item_slots[offhand_index] == null:
+					open_offhand = true
+					break
+			_is_two_handing = open_offhand
+	
+	# Check Dual Handing conditions
+	if mainhand_item and mainhand_item is BaseWeaponEquipment:
+		var offhand_weapon = get_offhand_weapon()
+		if (offhand_weapon and 
+			(offhand_weapon.is_melee_weapon() == mainhand_item.is_melee_weapon()
+			or offhand_weapon.is_ranged_weapon() == mainhand_item.is_ranged_weapon())):
+				_is_dual_handing = true
 
-func is_two_handing()->bool:
-	var prime = get_primary_weapon()
-	var off = get_offhand_weapon()
-	if prime and off and prime.Id == off.Id:
+
+func _can_use_tool_in_mainhand(item:BaseToolEquipment):
+	var hand_conditions = _actor.get_hands_conditions_for_tool(item)
+	if hand_conditions.size() == 0:
+		return false
+	return hand_conditions.get("CanMainHand", false)
+	
+func _can_use_tool_in_offhand(item:BaseToolEquipment):
+	var hand_conditions = _actor.get_hands_conditions_for_tool(item)
+	if hand_conditions.size() == 0:
 		return true
+	if not hand_conditions.get("CanOffHand", false):
+		return false
+	
+	var main_hand_tool = get_first_hand_tool()
+	for offhand_req in hand_conditions.get("OffHandReq", []):
+		if TagHelper.check_tag_filters("MainHandTagFilters", offhand_req, main_hand_tool):
+			return true
 	return false
-	#var main_hand_slot_index = _slot_set_key_mapping.find("MainHand")
-	#if main_hand_slot_index < 0:
-		#return false
-	#var off_hand_slot_index = _slot_set_key_mapping.find("OffHand")
-	#if off_hand_slot_index < 0:
-		#return false
-	#var main_hand_item_id = get_item_id_in_slot(main_hand_slot_index)
-	#var off_hand_item_id = get_item_id_in_slot(off_hand_slot_index)
-	#if !main_hand_item_id or !off_hand_item_id:
-		#return false
-	#return main_hand_item_id == off_hand_item_id
+
+func _can_use_tool_in_one_hands(item:BaseToolEquipment):
+	var hand_conditions = _actor.get_hands_conditions_for_tool(item)
+	if hand_conditions.size() == 0:
+		return true
+	return hand_conditions.get("CanOneHand", false)
+	
+func _can_use_tool_in_two_hands(item:BaseToolEquipment):
+	var hand_conditions = _actor.get_hands_conditions_for_tool(item)
+	if hand_conditions.size() == 0:
+		return false
+	return hand_conditions.get("CanTwoHand", false)
+
+########################
+##      Weapons       ##
+########################
+func is_two_handing()->bool:
+	return _is_two_handing
 
 func get_primary_weapon()->BaseWeaponEquipment:
 	var mainhand_slot_index = get_first_hand_index()
@@ -304,6 +322,8 @@ func get_primary_weapon()->BaseWeaponEquipment:
 	return null
 
 func get_offhand_weapon()->BaseWeaponEquipment:
+	if is_two_handing():
+		return get_primary_weapon()
 	var offhands = list_offhand_indexes()
 	if offhands.size() == 0:
 		return null

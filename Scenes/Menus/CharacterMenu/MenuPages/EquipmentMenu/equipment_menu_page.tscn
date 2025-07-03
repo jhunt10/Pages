@@ -42,24 +42,6 @@
 [ext_resource type="Texture2D" uid="uid://den756c067qbk" path="res://assets/Sprites/UI/SymbolIcons/CrashSymbol.png" id="34_giu80"]
 [ext_resource type="Texture2D" uid="uid://ijuqwfxfdvsh" path="res://Scenes/UiNodes/ExpBar/AttributesIcon_SpriteSheetpdn.png" id="36_fptg3"]
 
-[sub_resource type="Animation" id="Animation_3a6i4"]
-resource_name = "flashing_animation"
-length = 1.5
-loop_mode = 1
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame_coords")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(-2.23517e-08, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [Vector2i(1, 0), Vector2i(2, 0), Vector2i(3, 0), Vector2i(4, 0), Vector2i(0, 1), Vector2i(1, 1), Vector2i(2, 1), Vector2i(3, 1), Vector2i(4, 1), Vector2i(0, 2), Vector2i(1, 2), Vector2i(2, 2), Vector2i(3, 2), Vector2i(4, 2), Vector2i(1, 0)]
-}
-
 [sub_resource type="Animation" id="Animation_h263m"]
 length = 0.001
 tracks/0/type = "value"
@@ -85,6 +67,24 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_3a6i4"]
+resource_name = "flashing_animation"
+length = 1.5
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(-2.23517e-08, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(1, 0), Vector2i(2, 0), Vector2i(3, 0), Vector2i(4, 0), Vector2i(0, 1), Vector2i(1, 1), Vector2i(2, 1), Vector2i(3, 1), Vector2i(4, 1), Vector2i(0, 2), Vector2i(1, 2), Vector2i(2, 2), Vector2i(3, 2), Vector2i(4, 2), Vector2i(1, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_j1ppp"]
@@ -147,7 +147,7 @@ _data = {
 "pagebook_warning": SubResource("Animation_peevg")
 }
 
-[node name="EquipmentPage" type="Control" node_paths=PackedStringArray("name_label", "level_label", "equipment_slots_container", "stat_box", "animation_player", "exp_bar")]
+[node name="EquipmentPage" type="Control" node_paths=PackedStringArray("name_label", "level_label", "equipment_slots_container", "stat_box", "animation_player", "exp_bar", "tags_box")]
 custom_minimum_size = Vector2(280, 395)
 layout_mode = 3
 anchors_preset = 0
@@ -160,6 +160,7 @@ equipment_slots_container = NodePath("EquipmentSlotsControl")
 stat_box = NodePath("StatBoxControl")
 animation_player = NodePath("AnimationPlayer")
 exp_bar = NodePath("TitleBox/VBoxContainer/HBoxContainer2/ExpBar")
+tags_box = NodePath("StatBoxControl/TagsBox")
 
 [node name="EquipmentSlotsControl" type="Control" parent="." node_paths=PackedStringArray("actor_node", "armor_lable", "ward_label", "phyatk_label", "magatk_label")]
 custom_minimum_size = Vector2(256, 256)
@@ -560,6 +561,7 @@ patch_margin_right = 18
 patch_margin_bottom = 18
 
 [node name="VBoxContainer" type="VBoxContainer" parent="StatBoxControl"]
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -1085,6 +1087,20 @@ layout_mode = 2
 theme = ExtResource("3_th70d")
 text = "000"
 horizontal_alignment = 1
+
+[node name="TagsBox" type="RichTextLabel" parent="StatBoxControl"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = 8.0
+offset_right = -16.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_th70d")
+text = "Tag, Tag, Tag"
 
 [node name="TitleBox" type="NinePatchRect" parent="."]
 layout_mode = 0

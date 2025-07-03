@@ -259,13 +259,13 @@ static func does_damage_mod_apply(damage_mod:Dictionary, attacker:BaseActor, def
 	
 	# Check Defender Faction Filters
 	var defender_faction_filters = conditions.get("DefenderFactionFilters", [])
-	if not FilterHelper.check_faction_filter(mod_source_actor, mod_source_faction, defender_faction_filters, defender):
+	if not TagHelper.check_faction_filter(mod_source_actor, mod_source_faction, defender_faction_filters, defender):
 		return false
 			
 	# Check Attacker Faction Filters
 	if attacker:
 		var attack_faction_filters = conditions.get("AttackerFactionFilters", [])
-		if not FilterHelper.check_faction_filter(mod_source_actor, mod_source_faction, attack_faction_filters, attacker):
+		if not TagHelper.check_faction_filter(mod_source_actor, mod_source_faction, attack_faction_filters, attacker):
 			return false
 	
 	# Check Defender Tag Filters

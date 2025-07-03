@@ -34,6 +34,11 @@ static func has_item(item:BaseItem):
 	return _stacked_item_count_by_key.keys().has(item.ItemKey)
 	#return _held_unique_items_ids.has(item.Id)
 
+static func spawn_item(item_key:String, count):
+	var item = ItemLibrary.get_static_inst_of_item(item_key)
+	if item:
+		add_item(item, count)
+
 static func add_item(item:BaseItem, count:int=1):
 	if LOGGING: print("PlayerInventory.AddItem: Item: %s" % [item.Id])
 	if not _stacked_item_count_by_key.keys().has(item.ItemKey):

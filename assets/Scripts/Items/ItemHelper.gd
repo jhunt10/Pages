@@ -92,26 +92,15 @@ static func try_transfer_item_from_inventory_to_actor(item:BaseItem, actor:BaseA
 	return try_transfer_item_from_inventory_to_holder(item, holder, index, allow_replace)
 
 static func try_transfer_item_from_inventory_to_holder(source_item:BaseItem, holder:BaseItemHolder, slot_index:int, allow_replace:bool = true)->String:
-	if LOGGING: print("ItemHlp: Transfer %s from INV to slot %s on %s" % [source_item.ItemKey, slot_index, holder._actor.Id])
+	if LOGGING: 
+		print("ItemHlp: Transfer %s from INV to slot %s on %s" % [source_item.ItemKey, slot_index, holder._actor.Id])
 	
 	## Tools require special logic since they can auto-switch hands
 	if holder is EquipmentHolder and (holder as EquipmentHolder).list_all_hand_indexes().has(slot_index):
 		slot_index = (holder as EquipmentHolder).get_auto_hand_index(source_item, slot_index, allow_replace)
-		#var inv_weapon = PlayerInventory.split_item_off_stack(item.ItemKey)
-		#if !inv_weapon:
-			#print("Item not found")
-			#return "Item not found"
-		#transering_items.append(inv_weapon.Id)
-		#if not holder.try_equip_tool(inv_weapon, slot_index, allow_replace, true):
-			#PlayerInventory.add_item(inv_weapon)
-			#transering_items.remove_at(transering_items.find(inv_weapon.Id))
-			#return "Set item failed"
-		#return ""
-			
-		
 	
-	var old_item = holder.get_item_in_slot(slot_index)
-	if old_item and not allow_replace:
+	var old_items = holder._get_items_removed_if_new_item_added(slot_index, source_item)
+	if old_items.size() > 0 and not allow_replace:
 		print("Slot is occupied")
 		return "Slot is occupied"
 	var inv_item = PlayerInventory.split_item_off_stack(source_item.ItemKey)
@@ -124,22 +113,29 @@ static func try_transfer_item_from_inventory_to_holder(source_item:BaseItem, hol
 		return "Invalid Item Slot"
 	
 	# Dirrectly set the item into slot
-	holder._direct_set_item_in_slot(inv_item, slot_index)
+	holder._direct_set_item_in_slot(slot_index, inv_item)
 		
 	if not holder.has_item(inv_item.Id):
 		PlayerInventory.add_item(inv_item)
 		# Check if old item was lost, add to inv if so (very bad state)
-		if old_item and not holder.has_item(old_item.Id):
-			PlayerInventory.add_item(old_item)
+		for old_item in old_items:
+			if old_item and not holder.has_item(old_item.Id):
+				PlayerInventory.add_item(old_item)
 		print( "Set item failed")
 		return "Set item failed"
-	if old_item and not holder.has_item(old_item.Id):
-		## EquipmentHolder controls own logic for replacing weapons
-		#if not (old_item is BaseWeaponEquipment and holder is EquipmentHolder): 
-		PlayerInventory.add_item(old_item)
+	
 	holder._on_item_added_to_slot(inv_item, slot_index)
+	for old_item in old_items:
+		if old_item and not holder.has_item(old_item.Id):
+			holder._on_item_removed(old_item.Id, true)
+			PlayerInventory.add_item(old_item)
+	
 	holder._actor._on_equipment_holder_items_change()
-	transering_items.remove_at(transering_items.find(inv_item.Id))
+	var transering_item_index = transering_items.find(inv_item.Id)
+	if transering_item_index >= 0:
+		transering_items.remove_at(transering_item_index)
+	else:
+		printerr("Lost Transfering Item?")
 	return ""
 
 static func try_transfer_item_from_actor_to_inventory(item:BaseItem, actor:BaseActor)->String:

@@ -13,6 +13,7 @@ signal mouse_exit_item(context, item_key, index)
 @export var stat_box:StatBoxControl
 @export var animation_player:AnimationPlayer
 @export var exp_bar:ExpBarControl
+@export var tags_box:RichTextLabel
 var _actor:BaseActor
 
 # Called when the node enters the scene tree for the first time.
@@ -30,12 +31,20 @@ func _process(delta: float) -> void:
 
 
 func set_actor(actor:BaseActor):
+	if _actor and actor != _actor:
+		_actor.equipment_changed.disconnect(set_tags)
 	_actor = actor
 	name_label.text = actor.get_name()
 	level_label.text = str(actor.stats.get_stat(StatHelper.Level, 0))
 	equipment_slots_container.set_actor(actor)
 	stat_box.set_actor(actor)
 	exp_bar.set_actor(actor)
+	_actor.equipment_changed.connect(set_tags)
+	set_tags()
+
+func set_tags():
+	tags_box.text = ", ".join(_actor.get_tags())
+	
 
 func clear_highlights():
 	equipment_slots_container.clear_highlights()
