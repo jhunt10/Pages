@@ -41,6 +41,11 @@ func get_tags()->Array:
 		WeaponClasses.Heavy:
 			if not tags.has("HeavyWpn"):
 				tags.append("HeavyWpn")
+	if not (tags.has("MeleeWpn") or tags.has("RangeWpn")):
+		if is_melee_weapon():
+			tags.append("MeleeWpn")
+		if is_ranged_weapon():
+			tags.append("RangeWpn")
 	return tags
 
 func can_main_hand()->bool:

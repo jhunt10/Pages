@@ -1199,7 +1199,6 @@ tile_size = Vector2i(32, 32)
 
 [node name="MapNode" type="Node2D" node_paths=PackedStringArray("zone_tile_map", "actor_tile_map", "item_tile_map", "terrain_path_map", "marker_tile_map", "player_spawn_area_tile_map")]
 script = ExtResource("1_mpwod")
-map_name = ""
 zone_tile_map = NodePath("ZoneTileMapLayer")
 actor_tile_map = NodePath("ActorTileMapLayer")
 item_tile_map = NodePath("ItemTileMapLayer")
@@ -1245,7 +1244,6 @@ tile_set = SubResource("TileSet_63me0")
 script = ExtResource("9_lqmyq")
 map_controller = NodePath("..")
 terrain_map = NodePath("../TerrainMap")
-test = false
 
 [node name="ActorTileMapLayer" type="TileMapLayer" parent="."]
 tile_set = SubResource("TileSet_5ipcw")
@@ -1258,6 +1256,7 @@ tile_set = SubResource("TileSet_5ipcw")
 tile_set = SubResource("TileSet_5ipcw")
 
 [node name="SpwanNode_MovingTarget" type="Sprite2D" parent="MapMarkerMapLayer"]
+visible = false
 modulate = Color(1, 0.172549, 0.239216, 1)
 position = Vector2(208, 112)
 texture = ExtResource("10_361jm")
@@ -1267,6 +1266,7 @@ facing = 2
 map_coor = Vector2i(6, 3)
 
 [node name="SpwanNode_TestTarget_Armored" type="Sprite2D" parent="MapMarkerMapLayer"]
+visible = false
 modulate = Color(0.303233, 0.303233, 0.303233, 1)
 position = Vector2(176, 208)
 texture = ExtResource("10_361jm")
@@ -1277,6 +1277,7 @@ facing = 2
 map_coor = Vector2i(5, 6)
 
 [node name="SpwanNode_TestTarget_Armored2" type="Sprite2D" parent="MapMarkerMapLayer"]
+visible = false
 modulate = Color(0.303233, 0.303233, 0.303233, 1)
 position = Vector2(144, 208)
 texture = ExtResource("10_361jm")
@@ -1287,6 +1288,7 @@ facing = 2
 map_coor = Vector2i(4, 6)
 
 [node name="SpwanNode_TestTarget_Armored3" type="Sprite2D" parent="MapMarkerMapLayer"]
+visible = false
 modulate = Color(0.303233, 0.303233, 0.303233, 1)
 position = Vector2(112, 208)
 texture = ExtResource("10_361jm")
@@ -1297,6 +1299,7 @@ facing = 2
 map_coor = Vector2i(3, 6)
 
 [node name="SpwanNode_TestTarget_Armored4" type="Sprite2D" parent="MapMarkerMapLayer"]
+visible = false
 modulate = Color(0.303233, 0.303233, 0.303233, 1)
 position = Vector2(144, 240)
 texture = ExtResource("10_361jm")
@@ -1307,6 +1310,7 @@ facing = 2
 map_coor = Vector2i(4, 7)
 
 [node name="SpwanNode_TestTarget_Warded" type="Sprite2D" parent="MapMarkerMapLayer"]
+visible = false
 modulate = Color(0.152941, 1, 1, 1)
 position = Vector2(304, 208)
 texture = ExtResource("10_361jm")

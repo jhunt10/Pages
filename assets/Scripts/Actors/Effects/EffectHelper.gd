@@ -18,10 +18,10 @@ static func create_effect(
 	)->BaseEffect:
 	is_creating_effect = true
 	
-	var source_actor:BaseActor = null
-	if source is BaseActor:
-		source_actor = source
-		effect_data['AppliedPotency'] = source_actor.stats.get_stat(StatHelper.Potency, 1)
+	var source_actor:BaseActor = get_source_actor_from_source(source, actor)
+	#if source is BaseActor:
+		#source_actor = source
+		#effect_data['AppliedPotency'] = source_actor.stats.get_stat(StatHelper.Potency, 1)
 	
 	var effect_immunities = actor.get_effect_immunity()
 	if effect_immunities.has(effect_key):
@@ -129,3 +129,19 @@ static func create_effect(
 	
 	is_creating_effect = false
 	return effect
+
+
+static func get_source_actor_from_source(source, an_actor:BaseActor)->BaseActor:
+	if source is BaseActor:
+		return source
+	elif source is BasePageItem:
+		# TODO
+		return an_actor
+	elif source is BaseEffect:
+		return (source as BaseEffect).get_source_actor()
+	elif source is BaseZone:
+		return (source as BaseZone).get_source_actor()
+	elif source is BaseSupplyItem:
+		return (source as BaseSupplyItem).get_using_actor()
+	return null
+	

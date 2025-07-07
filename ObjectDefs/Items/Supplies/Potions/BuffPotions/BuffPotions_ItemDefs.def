@@ -1,0 +1,42 @@
+{
+    "RegenPotionItem": {
+        "!ObjectScript": "res://assets/Scripts/Items/Supplies/Potions/BasePotionSupplyItem.gd",
+        "#ObjDetails": {
+            "Description": "A refreshing drink made from sugar, spice, and a big old dose of MSG. Drink to gain @@#EftData:DrinkEffect:Name@@ for @@#EftData:DrinkEffect:Duration@@.\n\n@@#EftData:DrinkEffect@@",
+            "DisplayName": "Regen Potion",
+            "LargeIcon": "Sprites/RegenPotionItem_Icon.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/RegenPotionItem_Icon.png",
+            "SnippetDesc": "Regen 100% Health",
+            "Tags": [
+                "Potion"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Supply",
+                "Potion"
+            ]
+        },
+        "ItemData": {
+            "Rarity": "Legendary",
+            "Value": 500
+        },
+        "ActionData": {
+        },
+        "SuppliesData": {
+            "EffectDatas": {
+                "DrinkEffect": {
+                    "EffectData": {
+                        "EffectDetails": {
+                            "DurationData": {
+                                "BaseDuration": 2
+                            }
+                        }
+                    },
+                    "EffectKey": "RegenPotionEffect"
+                }
+            }
+        },
+        "_DefVersion": "1"
+    }
+}

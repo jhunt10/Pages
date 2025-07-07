@@ -164,7 +164,9 @@ func _build_bbcode_array(raw_description:String, object_def:Dictionary, object_i
 				if object_def.has("EffectDatas"):
 					effect_data = object_def.get("EffectDatas", {}).get(sub_tokens[1], null)
 				elif object_def.has("ActionData"):
-					effect_data = object_def['ActionData'].get("EffectDatas", null).get(sub_tokens[1], null)
+					effect_data = object_def['ActionData'].get("EffectDatas", {}).get(sub_tokens[1], null)
+				if object_def.has("SuppliesData"):
+					effect_data = object_def['SuppliesData'].get("EffectDatas", {}).get(sub_tokens[1], null)
 				if not effect_data:
 					continue
 				var effect_key = effect_data.get("EffectKey", "")
@@ -566,6 +568,7 @@ func _parse_effect(effect_key:String, effect_data:Dictionary, prop_key:String, a
 	var out_arr = []
 	var out_line = ''
 	if not EffectLibrary.has_effect_key(effect_key):
+		# Might be because you used #EftDef instead of #EFtData
 		return [RED_TEXT + "'" + effect_key + "' Not Found"+ "[/color]"]
 	var effect_def = EffectLibrary.get_merged_effect_def(effect_key, effect_data)
 	if prop_key == '' or prop_key == 'Description':

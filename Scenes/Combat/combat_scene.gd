@@ -253,7 +253,7 @@ func add_actor(actor:BaseActor, pos:MapPos, is_player:bool=false):
 	if not MapController.actor_nodes.has(actor.Id):
 		MapController.actor_nodes[actor.Id] = actor_node
 	GameState.set_actor_pos(actor, pos)
-	actor.stats.fill_bar_stats()
+	actor.stats.prep_for_combat()
 	actor.Que.fill_page_ammo()
 	
 	if combat_started:

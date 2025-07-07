@@ -1,1 +1,86 @@
-{"OldWand":{"!ObjectScript":"res://assets/Scripts/Items/Equipment/Tools/BaseWeaponEquipment.gd","#ObjDetails":{"Description":"A training wand made for practice and well used. Old, but still works.","DisplayName":"Old Wand","LargeIcon":"Sprites/OldWand.png","ObjectType":"Item","SmallIcon":"Sprites/OldWand.png","SnippetDesc":"A mage's old Wand.","Tags":["Weapon","OffHand","Wand"],"Taxonomy":["Item","Equipment","Weapon"]},"EquipmentData":{"AttackMods":{},"DamageMods":{},"EquipSlot":"Weapon","Requirments":{"ReqStats":{"Intelligence":10}},"StatMods":{"AttackBonus":{"ModType":"Add","StatName":"MagAttack","Value":10}},"TargetMods":{}},"ItemData":{"Rarity":"Mundane","Value":50},"WeaponData":{"AttackData":{"AttackDetails":{"AccuracyMod":1,"PotencyMod":1},"AttackTags":["Weapon","Range","Magic"],"DamageDatas":{"WeaponDamage":{"AtkPwrBase":100,"AtkPwrRange":10,"AtkStat":"MagAttack","DamageType":"Fire","DamageVfxKey":"Fire_DamageEffect","DefenseType":"Ward"}},"EffectDatas":{},"TargetParams":{"LineOfSight":true,"TargetArea":"[[-1,1],[0,1],[1,1],[-1,2],[0,2],[1,2]]","TargetType":"Enemy"}},"IsRanged":true,"WeaponClass":"Light","WeaponSpriteData":{"Offset":[0,0],"Rotation":-45,"SpriteName":"Sprites/OldWand","WeaponAnimation":"Raise"}},"_DefVersion":"1"}}
+{
+    "OldWand": {
+        "!ObjectScript": "res://assets/Scripts/Items/Equipment/Tools/BaseWeaponEquipment.gd",
+        "#ObjDetails": {
+            "Description": "A training wand made for practice and well used. Old, but still works.",
+            "DisplayName": "Old Wand",
+            "LargeIcon": "Sprites/OldWand.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/OldWand.png",
+            "SnippetDesc": "A mage's old Wand.",
+            "Tags": [
+                "Weapon",
+                "Wand"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Equipment",
+                "Tool",
+                "Weapon"
+            ]
+        },
+        "EquipmentData": {
+            "AttackMods": {},
+            "DamageMods": {},
+            "EquipSlot": "Weapon",
+            "Requirments": {
+                "ReqStats": {
+                    "Intelligence": 10
+                }
+            },
+            "StatMods": {
+                "AttackBonus": {
+                    "ModType": "Add",
+                    "StatName": "MagAttack",
+                    "Value": 10
+                }
+            },
+            "TargetMods": {}
+        },
+        "ItemData": {
+            "Rarity": "Mundane",
+            "Value": 50
+        },
+        "WeaponData": {
+            "AttackData": {
+                "AttackDetails": {
+                    "AccuracyMod": 1,
+                    "PotencyMod": 1
+                },
+                "AttackTags": [
+                    "Weapon",
+                    "Range",
+                    "Magic"
+                ],
+                "DamageDatas": {
+                    "WeaponDamage": {
+                        "AtkPwrBase": 100,
+                        "AtkPwrRange": 10,
+                        "AtkStat": "MagAttack",
+                        "DamageType": "Fire",
+                        "DamageVfxKey": "Fire_DamageEffect",
+                        "DefenseType": "Ward"
+                    }
+                },
+                "EffectDatas": {},
+                "TargetParams": {
+                    "LineOfSight": true,
+                    "TargetArea": "[[-1,1],[0,1],[1,1],[-1,2],[0,2],[1,2]]",
+                    "TargetType": "Enemy"
+                }
+            },
+            "IsRanged": true,
+            "WeaponClass": "Light",
+            "WeaponSpriteData": {
+                "Offset": [
+                    0,
+                    0
+                ],
+                "Rotation": -45,
+                "SpriteName": "Sprites/OldWand",
+                "WeaponAnimation": "Raise"
+            }
+        },
+        "_DefVersion": "1"
+    }
+}

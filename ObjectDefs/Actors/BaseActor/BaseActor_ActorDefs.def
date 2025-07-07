@@ -41,7 +41,7 @@
             "AggroMod": 1,
             "Agility": 0,
             "Awareness": 0,
-            "BarMax:Health": 100,
+            "HealthMax": 100,
             "BlocksLOS": 0,
             "CrashPower": 20,
             "CritChance": 5,
@@ -84,6 +84,7 @@
         "_DefVersion": "1"
     },
     "#BaseHumanoid": {
+        "ScenePath": "res://Scenes/Combat/MapObjects/Actors/ComplexActorNode/complex_actor_node.tscn",
         "#ObjDetails": {
             "Description": "Description.",
             "DisplayName": "Base Actor",

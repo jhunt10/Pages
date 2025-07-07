@@ -16,6 +16,7 @@
             "Taxonomy": [
                 "Item",
                 "Equipment",
+                "Tool",
                 "Weapon"
             ]
         },
@@ -30,7 +31,7 @@
                 "AttackBonus": {
                     "ModType": "Add",
                     "StatName": "PhyAttack",
-                    "Value": 10
+                    "Value": 5
                 }
             }
         },
@@ -91,11 +92,12 @@
             "SnippetDesc": "A rogue's old bow.",
             "Tags": [
                 "Weapon",
-                "OffHand"
+                "Bow"
             ],
             "Taxonomy": [
                 "Item",
                 "Equipment",
+                "Tool",
                 "Weapon"
             ]
         },
@@ -126,7 +128,7 @@
                 },
                 "AttackTags": [
                     "Weapon",
-                    "Melee",
+                    "Ranged",
                     "Physical"
                 ],
                 "DamageDatas": {
@@ -152,7 +154,7 @@
                 "ImpactVfxKey": "Blunt_DamageEffect",
                 "MissileVfxKey": "BasicArrowMissile"
             },
-            "WeaponClass": "Light",
+            "WeaponClass": "Heavy",
             "WeaponSpriteData": {
                 "Offset": [
                     0,
@@ -182,6 +184,7 @@
             "Taxonomy": [
                 "Item",
                 "Equipment",
+                "Tool",
                 "Weapon"
             ]
         },

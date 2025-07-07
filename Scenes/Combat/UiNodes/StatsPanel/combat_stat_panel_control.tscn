@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://Scenes/UiNodes/back_patch_container.gd" id="2_or0gt"]
 [ext_resource type="Texture2D" uid="uid://bg625rwa6bewf" path="res://data/Actors/TestActorSprite.png" id="3_f6mh4"]
 [ext_resource type="Texture2D" uid="uid://io35wpu802fp" path="res://assets/Sprites/UI/BackPatches/Patch_64_12.png" id="3_mbhkk"]
-[ext_resource type="PackedScene" uid="uid://cfxkaxrmekifh" path="res://Scenes/Combat/UiNodes/StatsPanel/stat_bar_control.tscn" id="5_x5tep"]
+[ext_resource type="PackedScene" uid="uid://cjfwi0pnjh7y6" path="res://Scenes/Combat/UiNodes/StatsPanel/health_bar_control.tscn" id="5_iao52"]
 [ext_resource type="Texture2D" uid="uid://dj6l261cuh2hj" path="res://Scenes/Combat/UiNodes/StatsPanel/BuffBackground.png" id="7_ow4ab"]
 [ext_resource type="Theme" uid="uid://dwinll8pgdjhc" path="res://Scenes/Themes/standard_theme.tres" id="7_xlcc4"]
 [ext_resource type="Script" path="res://Scenes/Combat/UiNodes/StatsPanel/effect_icon_control.gd" id="8_6sy3m"]
@@ -60,7 +60,7 @@ stretch_mode = 2
 custom_minimum_size = Vector2(128, 0)
 layout_mode = 2
 
-[node name="HealthBarControl" parent="BackPatchContainer/VBoxContainer/HBoxContainer/StatBarContainer" instance=ExtResource("5_x5tep")]
+[node name="HealthBarControl" parent="BackPatchContainer/VBoxContainer/HBoxContainer/StatBarContainer" instance=ExtResource("5_iao52")]
 layout_mode = 2
 
 [node name="Button" type="Button" parent="BackPatchContainer"]

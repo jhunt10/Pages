@@ -14,10 +14,6 @@ var camera:MoveableCamera2D:
 
 @export var target_input_display:TargetInputControl
 @export var player_stats_panels_container:BoxContainer
-@export var p1_stat_panel_control:StatPanelControl
-@export var p2_stat_panel_control:StatPanelControl
-@export var p3_stat_panel_control:StatPanelControl
-@export var p4_stat_panel_control:StatPanelControl
 @export var que_input:QueInputControl
 var que_display:QueDisplayControl:
 	get:
@@ -49,32 +45,6 @@ func _ready() -> void:
 	target_input_display.visible = false
 	game_over_screen.hide()
 	victory_screen.hide()
-	var player_1 = CombatRootControl.Instance.get_player_actor(0)
-	if player_1: 
-		p1_stat_panel_control.set_actor(player_1)
-		p1_stat_panel_control.button.pressed.connect(on_player_stat_clicked.bind(0))
-	else: 
-		p1_stat_panel_control.hide()
-		
-	var player_2 = CombatRootControl.Instance.get_player_actor(1)
-	if player_2: 
-		p2_stat_panel_control.set_actor(player_2)
-		p2_stat_panel_control.button.pressed.connect(on_player_stat_clicked.bind(1))
-	else: 
-		p2_stat_panel_control.hide()
-		
-	var player_3 = CombatRootControl.Instance.get_player_actor(2)
-	if player_3: 
-		p3_stat_panel_control.set_actor(player_3)
-		p3_stat_panel_control.button.pressed.connect(on_player_stat_clicked.bind(2))
-	else: 
-		p3_stat_panel_control.hide()
-		
-	var player_4 = CombatRootControl.Instance.get_player_actor(3)
-	if player_4: 
-		p4_stat_panel_control.set_actor(player_4)
-	else: 
-		p4_stat_panel_control.hide()
 
 #func do_test():
 	#var current_actor_id = stat_panel_control.actor.Id

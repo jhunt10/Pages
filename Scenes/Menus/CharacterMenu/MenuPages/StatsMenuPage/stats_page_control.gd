@@ -18,7 +18,7 @@ extends Control
 @export var speed_stat_label:StatLabelContainer
 @export var mass_stat_label:StatLabelContainer
 @export var ppr_stat_label:StatLabelContainer
-@export var crash_stat_label:StatLabelContainer
+@export var health_stat_label:StatLabelContainer
 
 @export var mag_atk_label:StatLabelContainer
 @export var phys_atk_label:StatLabelContainer
@@ -29,14 +29,7 @@ extends Control
 @export var range_display:MiniRangeDisplay
 
 @export var main_hand_damage_label:DamageLabelContainer
-#@export var main_hand_min_damage_label:Label
-#@export var main_hand_max_damage_label:Label
-#@export var main_hand_damage_type:Label
-
-@export var off_hand_damage_container:Container
-@export var off_hand_min_damage_label:Label
-@export var off_hand_max_damage_label:Label
-@export var off_hand_damage_type:Label
+@export var other_hand_damage_label:DamageLabelContainer
 
 @export var crit_mod_label:Label
 @export var crit_chance_label:Label
@@ -56,7 +49,7 @@ extends Control
 @export var block_flank_chance_label:Label
 @export var block_back_chance_label:Label
 
-
+@export var full_stat_display:FullStatDisplayControl
 
 var _actor:BaseActor
 
@@ -66,6 +59,8 @@ func set_actor(actor:BaseActor):
 	if actor != _actor:
 		actor.stats_changed.connect(_set_stats)
 	_actor = actor
+	if full_stat_display:
+		full_stat_display.set_actor(_actor)
 	_set_stats()
 #
 func _set_stats():
@@ -74,12 +69,12 @@ func _set_stats():
 	intelligence_label.text = str(_actor.stats.get_stat(StatHelper.Intelligence, 0))
 	wisdom_label.text = str(_actor.stats.get_stat(StatHelper.Wisdom, 0))
 	
-	bar_stats_container.set_actor(_actor)
+	#bar_stats_container.set_actor(_actor)
 	
 	speed_stat_label.set_stat_values(_actor)
 	mass_stat_label.set_stat_values(_actor)
 	ppr_stat_label.set_stat_values(_actor)
-	crash_stat_label.set_stat_values(_actor)
+	health_stat_label.set_stat_values(_actor)
 	accuracy_stat_label.set_stat_values(_actor)
 	potency_stat_label.set_stat_values(_actor)
 	phys_atk_label.set_stat_values(_actor)
@@ -103,25 +98,20 @@ func _set_stats():
 			"FallbackToUnarmed": true, 
 			"LimitRangeMelee": "Either"
 	})
-	
-	if damage_datas.has("Weapon0:WeaponDamage"):
-		var damage_data = damage_datas['Weapon0:WeaponDamage']
-		main_hand_damage_label.set_damage_data(damage_data, _actor)
-		#var min_max = DamageHelper.get_min_max_damage(_actor, damage_data)
-		#if damage_data.get("DefenseType", '') == "Ward":
-			#phy_atk_icon.hide()
-			#mag_atk_icon.show()
-		#else:
-			#phy_atk_icon.show()
-			#mag_atk_icon.hide()
-		#main_hand_min_damage_label.text = str(min_max[0])
-		#main_hand_max_damage_label.text = str(min_max[1])
-		#main_hand_damage_type.text = damage_data.get("DamageType", "")
-	#else:
-		#main_hand_min_damage_label.text = "--"
-		#main_hand_max_damage_label.text = "--"
-		#main_hand_damage_type.text = ""
-	
+	if damage_datas.keys().size() > 0:
+		main_hand_damage_label.set_damage_data(damage_datas.values()[0], _actor)
+		if not main_hand_damage_label.visible:
+			main_hand_damage_label.hide()
+	else:
+		main_hand_damage_label.hide()
+		
+	if damage_datas.keys().size() > 1:
+		other_hand_damage_label.set_damage_data(damage_datas.values()[1], _actor)
+		if not other_hand_damage_label.visible:
+			other_hand_damage_label.hide()
+	else:
+		other_hand_damage_label.hide()
+		
 	crit_mod_label.text = str(_actor.stats.get_stat(StatHelper.CritMod))
 	crit_chance_label.text = str(_actor.stats.get_stat(StatHelper.CritChance)) + "%"
 	

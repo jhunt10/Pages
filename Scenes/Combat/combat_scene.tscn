@@ -449,7 +449,7 @@ offset_bottom = 40.0
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 
-[node name="CombatUiControl" type="Control" parent="MoveableCamera2D/CanvasLayer" node_paths=PackedStringArray("game_over_screen", "victory_screen", "menu_button", "book_button", "pause_menu", "target_input_display", "player_stats_panels_container", "p1_stat_panel_control", "p2_stat_panel_control", "p3_stat_panel_control", "p4_stat_panel_control", "que_input", "que_collection_display", "stats_collection_display", "option_select_menu", "drop_message_control", "actor_placer_control")]
+[node name="CombatUiControl" type="Control" parent="MoveableCamera2D/CanvasLayer" node_paths=PackedStringArray("game_over_screen", "victory_screen", "menu_button", "book_button", "pause_menu", "target_input_display", "player_stats_panels_container", "que_input", "que_collection_display", "stats_collection_display", "option_select_menu", "drop_message_control", "actor_placer_control")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -467,10 +467,6 @@ book_button = NodePath("../PageBookButton")
 pause_menu = NodePath("../PauseMenuControl")
 target_input_display = NodePath("TargetInputControl")
 player_stats_panels_container = NodePath("StatPanelsContainer")
-p1_stat_panel_control = NodePath("StatPanelsContainer/P1_StatPanelControl")
-p2_stat_panel_control = NodePath("StatPanelsContainer/P2_StatPanelControl2")
-p3_stat_panel_control = NodePath("StatPanelsContainer/P3_StatPanelControl3")
-p4_stat_panel_control = NodePath("StatPanelsContainer/P4_StatPanelControl4")
 que_input = NodePath("QueInputControl")
 que_collection_display = NodePath("QueCollectionDisplayControl")
 stats_collection_display = NodePath("StatCollectionDisplayControl")
@@ -509,7 +505,6 @@ offset_bottom = -184.0
 grow_vertical = 2
 
 [node name="StatCollectionDisplayControl" type="Control" parent="MoveableCamera2D/CanvasLayer/CombatUiControl"]
-visible = false
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -1419,7 +1414,6 @@ scene_root = NodePath("../../..")
 visible = false
 
 [node name="MapNode" parent="." instance=ExtResource("49_lque7")]
-map_name = ""
 
 [node name="GridCursor" type="Sprite2D" parent="."]
 visible = false

@@ -1,1 +1,114 @@
-{"Abn_Ammo":{"!ObjectScript":"res://assets/Scripts/Items/BagItems/AmmoItem.gd","#ObjDetails":{"Description":"Rare ammo use to reload @@#Color:Ammo:Abn:Abn@@ Page Ammo.","DisplayName":"A.Ammo","LargeIcon":"Sprites/Abn_Ammo_LIcon.png","ObjectType":"Item","SmallIcon":"Sprites/Abn_Ammo_SIcon.png","SnippetDesc":"Reload Abn Ammo","Tags":["Ammo"],"Taxonomy":["Item","Supply","Ammo"]},"ItemData":{"ItemType":"Ammo","Rarity":"Rare","Value":100},"SuppliesData":{"AmmoType":"Abn"},"_DefVersion":"1"},"Gen_Ammo":{"!ObjectScript":"res://assets/Scripts/Items/BagItems/AmmoItem.gd","#ObjDetails":{"Description":"Generic ammo use to reload @@#Color:Ammo:Phy:Phy@@ and @@#Color:Ammo:Mag:Mag@@ Page Ammo.","DisplayName":"G.Ammo","LargeIcon":"Sprites/Gen_Ammo_LIcon.png","ObjectType":"Item","SmallIcon":"Sprites/Gen_Ammo_SIcon.png","SnippetDesc":"Reload Generic Ammo","Tags":["Ammo"],"Taxonomy":["Item","Supply","Ammo"]},"ItemData":{"ItemType":"Ammo","Rarity":"Common","Value":50},"SuppliesData":{"AmmoType":"Gen"},"_DefVersion":"1"},"Mag_Ammo":{"!ObjectScript":"res://assets/Scripts/Items/BagItems/AmmoItem.gd","#ObjDetails":{"Description":"Ammo use to reload @@#Color:Ammo:Mag:Mag@@ Page Ammo .","DisplayName":"M.Ammo","LargeIcon":"Sprites/Mag_Ammo_LIcon.png","ObjectType":"Item","SmallIcon":"Sprites/Mag_Ammo_SIcon.png","SnippetDesc":"Reload Mag Ammo","Tags":["Ammo"],"Taxonomy":["Item","Supply","Ammo"]},"ItemData":{"ItemType":"Ammo","Rarity":"Mundane","Value":20},"SuppliesData":{"AmmoType":"Mag"},"_DefVersion":"1"},"Phy_Ammo":{"!ObjectScript":"res://assets/Scripts/Items/BagItems/AmmoItem.gd","#ObjDetails":{"Description":"Ammo use to reload @@#Color:Ammo:Phy:Phy@@ Page Ammo.","DisplayName":"P.Ammo","LargeIcon":"Sprites/Phy_Ammo_LIcon.png","ObjectType":"Item","SmallIcon":"Sprites/Phy_Ammo_SIcon.png","SnippetDesc":"Reload Phy Ammo","Tags":["Ammo"],"Taxonomy":["Item","Supply","Ammo"]},"ItemData":{"ItemType":"Ammo","Rarity":"Mundane","Value":20},"SuppliesData":{"AmmoType":"Phy"},"_DefVersion":"1"}}
+{
+    "Abn_Ammo": {
+        "!ObjectScript": "res://assets/Scripts/Items/Supplies/AmmoItem.gd",
+        "#ObjDetails": {
+            "Description": "Rare ammo use to reload @@#Color:Ammo:Abn:Abn@@ Page Ammo.",
+            "DisplayName": "A.Ammo",
+            "LargeIcon": "Sprites/Abn_Ammo_LIcon.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/Abn_Ammo_SIcon.png",
+            "SnippetDesc": "Reload Abn Ammo",
+            "Tags": [
+                "Ammo"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Supply",
+                "Ammo"
+            ]
+        },
+        "ItemData": {
+            "ItemType": "Ammo",
+            "Rarity": "Rare",
+            "Value": 100
+        },
+        "SuppliesData": {
+            "AmmoType": "Abn"
+        },
+        "_DefVersion": "1"
+    },
+    "Gen_Ammo": {
+        "!ObjectScript": "res://assets/Scripts/Items/Supplies/AmmoItem.gd",
+        "#ObjDetails": {
+            "Description": "Generic ammo use to reload @@#Color:Ammo:Phy:Phy@@ and @@#Color:Ammo:Mag:Mag@@ Page Ammo.",
+            "DisplayName": "G.Ammo",
+            "LargeIcon": "Sprites/Gen_Ammo_LIcon.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/Gen_Ammo_SIcon.png",
+            "SnippetDesc": "Reload Generic Ammo",
+            "Tags": [
+                "Ammo"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Supply",
+                "Ammo"
+            ]
+        },
+        "ItemData": {
+            "ItemType": "Ammo",
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "SuppliesData": {
+            "AmmoType": "Gen"
+        },
+        "_DefVersion": "1"
+    },
+    "Mag_Ammo": {
+        "!ObjectScript": "res://assets/Scripts/Items/Supplies/AmmoItem.gd",
+        "#ObjDetails": {
+            "Description": "Ammo use to reload @@#Color:Ammo:Mag:Mag@@ Page Ammo .",
+            "DisplayName": "M.Ammo",
+            "LargeIcon": "Sprites/Mag_Ammo_LIcon.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/Mag_Ammo_SIcon.png",
+            "SnippetDesc": "Reload Mag Ammo",
+            "Tags": [
+                "Ammo"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Supply",
+                "Ammo"
+            ]
+        },
+        "ItemData": {
+            "ItemType": "Ammo",
+            "Rarity": "Mundane",
+            "Value": 20
+        },
+        "SuppliesData": {
+            "AmmoType": "Mag"
+        },
+        "_DefVersion": "1"
+    },
+    "Phy_Ammo": {
+        "!ObjectScript": "res://assets/Scripts/Items/Supplies/AmmoItem.gd",
+        "#ObjDetails": {
+            "Description": "Ammo use to reload @@#Color:Ammo:Phy:Phy@@ Page Ammo.",
+            "DisplayName": "P.Ammo",
+            "LargeIcon": "Sprites/Phy_Ammo_LIcon.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/Phy_Ammo_SIcon.png",
+            "SnippetDesc": "Reload Phy Ammo",
+            "Tags": [
+                "Ammo"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Supply",
+                "Ammo"
+            ]
+        },
+        "ItemData": {
+            "ItemType": "Ammo",
+            "Rarity": "Mundane",
+            "Value": 20
+        },
+        "SuppliesData": {
+            "AmmoType": "Phy"
+        },
+        "_DefVersion": "1"
+    }
+}

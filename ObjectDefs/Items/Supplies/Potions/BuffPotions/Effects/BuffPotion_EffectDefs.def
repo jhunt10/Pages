@@ -1,0 +1,59 @@
+{
+    "RegenPotionEffect": {
+        "!ObjectScript": "res://assets/Scripts/Actors/Effects/BaseEffect.gd",
+        "#ObjDetails": {
+            "Description": "Heal 5% Max Health at the end of each Turn.",
+            "DisplayName": "Regen Potion",
+            "LargeIcon": "Sprites/RegenPotionEffect_Icon.png",
+            "ObjectType": "Effect",
+            "SmallIcon": "Sprites/RegenPotionEffect_Icon.png",
+            "SnippetDesc": "Heal 5% Max Health at the end of each Turn.",
+            "Tags": [
+                "Regen"
+            ],
+            "Taxonomy": [
+                "Effect",
+                "Buff"
+            ]
+        },
+        "EffectData": {
+            "DamageDatas": {
+                "DamageData1": {
+                    "AtkPwrBase": -5,
+                    "AtkPwrRange": 0,
+                    "AtkPwrScale": 0.2,
+                    "AtkStat": "Percent",
+                    "DamageType": "Heal",
+                    "DamageVfxKey": "Heal_DamageEffect",
+                    "DefenseType": "Npne",
+                    "DamageVfxData": {
+                        "ShakeActor": false
+                    }
+                }
+            },
+            "EffectDetails": {
+                "AddTagsToActor": [],
+                "CanStack": false,
+                "DeleteAfterCombat": true,
+                "DurationData": {
+                    "BaseDuration": 1,
+                    "DurationTrigger": "OnRoundEnd"
+                },
+                "IsBad": false,
+                "IsGood": true,
+                "ShowCounter": false,
+                "ShowInHud": true
+            },
+            "SubEffects": {
+                "ApplyDamage": {
+                    "DamageKey": "DamageData1",
+                    "OptionalTriggers": [
+                        "OnTurnEnd"
+                    ],
+                    "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/Damage/SubEffect_ApplyDotDamage.gd"
+                }
+            }
+        },
+        "_DefVersion": "1"
+    }
+}

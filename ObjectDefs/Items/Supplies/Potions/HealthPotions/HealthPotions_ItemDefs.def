@@ -1,0 +1,182 @@
+{
+    "HealthPotionL": {
+        "!ObjectScript": "res://assets/Scripts/Items/Supplies/Potions/HealthPotionSupplyItem.gd",
+        "#ObjDetails": {
+            "Description": "A powerful potion that heals for 100% Health.",
+            "DisplayName": "Heal L",
+            "LargeIcon": "Sprites/HealthPotion_L_L.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/HealthPotion_L_S.png",
+            "SnippetDesc": "Regen 100% Health",
+            "Tags": [
+                "Potion"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Supply",
+                "Potion"
+            ]
+        },
+        "ItemData": {
+            "Rarity": "Legendary",
+            "Value": 500
+        },
+        "SuppliesData": {
+            "HealData":{
+                "HealValue": 1,
+                "IsPercent": true
+            }
+        },
+        "_DefVersion": "1"
+    },
+    "HealthPotionM": {
+        "!ObjectScript": "res://assets/Scripts/Items/Supplies/Potions/HealthPotionSupplyItem.gd",
+        "#ObjDetails": {
+            "Description": "A moderate potion that heals for 50% Health.",
+            "DisplayName": "Heal M",
+            "LargeIcon": "Sprites/HealthPotion_M_L.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/HealthPotion_M_S.png",
+            "SnippetDesc": "Regen 50% Health",
+            "Tags": [
+                "Potion"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Supply",
+                "Potion"
+            ]
+        },
+        "ItemData": {
+            "Rarity": "Rare",
+            "Value": 100
+        },
+        "SuppliesData": {
+            "HealData":{
+                "HealValue": 0.5,
+                "IsPercent": true
+            }
+        },
+        "_DefVersion": "1"
+    },
+    "HealthPotionS": {
+        "!ObjectScript": "res://assets/Scripts/Items/Supplies/Potions/HealthPotionSupplyItem.gd",
+        "#ObjDetails": {
+            "Description": "A weak potion that heals for 25% Health.",
+            "DisplayName": "Heal S",
+            "LargeIcon": "Sprites/HealthPotion_S_L.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/HealthPotion_S_S.png",
+            "SnippetDesc": "Regen 25% Health",
+            "Tags": [
+                "Potion"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Supply",
+                "Potion"
+            ]
+        },
+        "ItemData": {
+            "Rarity": "Common",
+            "Value": 20
+        },
+        "SuppliesData": {
+            "HealData":{
+                "HealValue": 0.25,
+                "IsPercent": true
+            }
+        },
+        "_DefVersion": "1"
+    },
+    "HurtPotionL": {
+        "!ObjectScript": "res://assets/Scripts/Items/Supplies/Potions/HealthPotionSupplyItem.gd",
+        "#ObjDetails": {
+            "Description": "A powerful potion that \"heals\" for -100% Health. Usefully for dying.",
+            "DisplayName": "Hurt L",
+            "LargeIcon": "Sprites/HurtPotion_L_L.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/HurtPotion_L_S.png",
+            "SnippetDesc": "Lose 100% Health",
+            "Tags": [
+                "Potion"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Supply",
+                "Potion"
+            ]
+        },
+        "ItemData": {
+            "Rarity": "Legendary",
+            "Value": 500
+        },
+        "SuppliesData": {
+            "HealData":{
+                "HealValue": -1,
+                "IsPercent": true
+            }
+        },
+        "_DefVersion": "1"
+    },
+    "HurtPotionM": {
+        "!ObjectScript": "res://assets/Scripts/Items/Supplies/Potions/HealthPotionSupplyItem.gd",
+        "#ObjDetails": {
+            "Description": "A moderate potion that \"heals\" for -50% Health. Usefully for exsperimentation.",
+            "DisplayName": "Hurt M",
+            "LargeIcon": "Sprites/HurtPotion_M_L.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/HurtPotion_M_S.png",
+            "SnippetDesc": "Lose 50% Health",
+            "Tags": [
+                "Potion"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Supply",
+                "Potion"
+            ]
+        },
+        "ItemData": {
+            "Rarity": "Rare",
+            "Value": 100
+        },
+        "SuppliesData": {
+            "HealData":{
+                "HealValue": -0.5,
+                "IsPercent": true
+            }
+        },
+        "_DefVersion": "1"
+    },
+    "HurtPotionS": {
+        "!ObjectScript": "res://assets/Scripts/Items/Supplies/Potions/HealthPotionSupplyItem.gd",
+        "#ObjDetails": {
+            "Description": "A weak potion that \"heals\" for -25% Health. Usefully for exsperimentation.",
+            "DisplayName": "Hurt S",
+            "LargeIcon": "Sprites/HurtPotion_S_L.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/HurtPotion_S_S.png",
+            "SnippetDesc": "Lose 25% Health",
+            "Tags": [
+                "Potion"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Supply",
+                "Potion"
+            ]
+        },
+        "ItemData": {
+            "Rarity": "Common",
+            "Value": 20
+        },
+        "SuppliesData": {
+            "HealData":{
+                "HealValue": -0.25,
+                "IsPercent": true
+            }
+        },
+        "_DefVersion": "1"
+    }
+}

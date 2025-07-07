@@ -65,7 +65,7 @@ func _init(key:String, load_path:String, def:Dictionary, id:String, data:Diction
 	sprite = ActorSpriteHolder.new(self)
 	stats = StatHolder.new(self, stat_data)
 	stats.held_stats_changed.connect(_on_stat_change)
-	stats.bar_stat_changed.connect(_on_health_change)
+	stats.health_changed.connect(_on_health_change)
 	effects = EffectHolder.new(self)
 	#details = ObjectDetailsData.new(_def_load_path, _def.get("#ObjDetails", {}))
 	equipment = EquipmentHolder.new(self)
@@ -208,8 +208,7 @@ func load_data(loading_data:Dictionary):
 
 func prep_for_combat():
 	self.is_dead = false
-	stats.fill_bar_stats()
-	
+	stats.prep_for_combat()
 
 func on_combat_start():
 	effects.on_combat_start()

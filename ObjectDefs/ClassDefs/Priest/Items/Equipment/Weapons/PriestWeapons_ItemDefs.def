@@ -1,1 +1,87 @@
-{"OldStaff":{"!ObjectScript":"res://assets/Scripts/Items/Equipment/Tools/BaseWeaponEquipment.gd","#ObjDetails":{"Description":"A simple staff kept clean dispite it's years of use. Old, but still works.","DisplayName":"Old Staff","LargeIcon":"Sprites/OldStaff.png","ObjectType":"Item","SmallIcon":"Sprites/OldStaff.png","SnippetDesc":"A priest's old staff.","Tags":["Weapon","Staff"],"Taxonomy":["Item","Equipment","Weapon"]},"EquipmentData":{"AttackMods":{},"DamageMods":{},"EquipSlot":"Weapon","Requirments":{"ReqStats":{"Strength":10}},"StatMods":{"AttackBonus":{"ModType":"Add","StatName":"MagAttack","Value":10}},"TargetMods":{}},"ItemData":{"Rarity":"Mundane","Value":-1},"WeaponData":{"AttackData":{"AttackDetails":{"AccuracyMod":1,"PotencyMod":1},"AttackTags":["Weapon","Ranged","Magic"],"DamageDatas":{"WeaponDamage":{"AtkPwrBase":100,"AtkPwrRange":10,"AtkStat":"MagAttack","DamageType":"Fire","DamageVfxKey":"Fire_DamageEffect","DefenseType":"Ward"}},"EffectDatas":{},"TargetParams":{"LineOfSight":true,"TargetArea":"[[-1,1],[0,1],[1,1],[-1,2],[0,2],[1,2]]","TargetType":"Actor"}},"IsRanged":false,"WeaponClass":"Medium","WeaponSpriteData":{"Offset":[0,0],"Rotation":0,"SpriteName":"Sprites/OldStaff","TwoHandRotation":-30,"WeaponAnimation":"Raise"}},"_DefVersion":"1"}}
+{
+    "OldStaff": {
+        "!ObjectScript": "res://assets/Scripts/Items/Equipment/Tools/BaseWeaponEquipment.gd",
+        "#ObjDetails": {
+            "Description": "A simple staff kept clean dispite it's years of use. Old, but still works.",
+            "DisplayName": "Old Staff",
+            "LargeIcon": "Sprites/OldStaff.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/OldStaff.png",
+            "SnippetDesc": "A priest's old staff.",
+            "Tags": [
+                "Weapon",
+                "Staff"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Equipment",
+                "Tool",
+                "Weapon"
+            ]
+        },
+        "EquipmentData": {
+            "AttackMods": {},
+            "DamageMods": {},
+            "EquipSlot": "Weapon",
+            "Requirments": {
+                "ReqStats": {
+                    "Strength": 10
+                }
+            },
+            "StatMods": {
+                "AttackBonus": {
+                    "ModType": "Add",
+                    "StatName": "MagAttack",
+                    "Value": 10
+                }
+            },
+            "TargetMods": {}
+        },
+        "ItemData": {
+            "Rarity": "Mundane",
+            "Value": -1
+        },
+        "WeaponData": {
+            "AttackData": {
+                "AttackDetails": {
+                    "AccuracyMod": 1,
+                    "PotencyMod": 1
+                },
+                "AttackTags": [
+                    "Weapon",
+                    "Ranged",
+                    "Magic"
+                ],
+                "DamageDatas": {
+                    "WeaponDamage": {
+                        "AtkPwrBase": 100,
+                        "AtkPwrRange": 10,
+                        "AtkStat": "MagAttack",
+                        "DamageType": "Fire",
+                        "DamageVfxKey": "Fire_DamageEffect",
+                        "DefenseType": "Ward"
+                    }
+                },
+                "EffectDatas": {},
+                "TargetParams": {
+                    "LineOfSight": true,
+                    "TargetArea": "[[-1,1],[0,1],[1,1],[-1,2],[0,2],[1,2]]",
+                    "TargetType": "Actor"
+                }
+            },
+            "IsRanged": false,
+            "WeaponClass": "Medium",
+            "WeaponSpriteData": {
+                "Offset": [
+                    0,
+                    0
+                ],
+                "Rotation": 0,
+                "SpriteName": "Sprites/OldStaff",
+                "TwoHandRotation": -30,
+                "WeaponAnimation": "Raise"
+            }
+        },
+        "_DefVersion": "1"
+    }
+}

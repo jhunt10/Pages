@@ -1,0 +1,111 @@
+[gd_scene load_steps=5 format=3 uid="uid://cjfwi0pnjh7y6"]
+
+[ext_resource type="Script" path="res://Scenes/Combat/UiNodes/StatsPanel/health_bar_control.gd" id="1_q5jf8"]
+[ext_resource type="Texture2D" uid="uid://ccygr5mnjfwq1" path="res://assets/Sprites/UI/StatPanel/full_bar_background.png" id="2_81dpe"]
+[ext_resource type="Texture2D" uid="uid://bxdvfksha7bq5" path="res://assets/Sprites/UI/StatPanel/value_bar_texture.png" id="3_qdbmy"]
+[ext_resource type="FontFile" uid="uid://0kbg00s43xf0" path="res://assets/Fonts/8bit.ttf" id="4_gx0kf"]
+
+[node name="HealthBarControl" type="Control" node_paths=PackedStringArray("full_bar", "bar_holder", "dark_value_bar", "colored_value_bar", "blink_value_bar", "left_label", "mid_label", "right_label")]
+custom_minimum_size = Vector2(128, 16)
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_q5jf8")
+full_bar = NodePath("FullBarRect")
+bar_holder = NodePath("BarHolder")
+dark_value_bar = NodePath("BarHolder/BackValueRect")
+colored_value_bar = NodePath("BarHolder/ColorValueRect")
+blink_value_bar = NodePath("BarHolder/BlinkValueRect")
+left_label = NodePath("HBoxContainer/Left_Label")
+mid_label = NodePath("HBoxContainer/Mid_Label")
+right_label = NodePath("HBoxContainer/Right_Label")
+
+[node name="FullBarRect" type="NinePatchRect" parent="."]
+modulate = Color(0.252028, 0.252028, 0.252028, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_81dpe")
+region_rect = Rect2(0, 0, 32, 32)
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+
+[node name="BarHolder" type="Control" parent="."]
+modulate = Color(1, 0, 0, 1)
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="BlinkValueRect" type="NinePatchRect" parent="BarHolder"]
+visible = false
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_right = 128.0
+offset_bottom = 24.0
+texture = ExtResource("3_qdbmy")
+region_rect = Rect2(0, 0, 32, 32)
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+
+[node name="BackValueRect" type="NinePatchRect" parent="BarHolder"]
+modulate = Color(0.374139, 0.374139, 0.374139, 1)
+layout_mode = 0
+offset_right = 128.0
+offset_bottom = 24.0
+texture = ExtResource("3_qdbmy")
+region_rect = Rect2(0, 0, 32, 32)
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+
+[node name="ColorValueRect" type="NinePatchRect" parent="BarHolder"]
+layout_mode = 0
+offset_right = 128.0
+offset_bottom = 24.0
+texture = ExtResource("3_qdbmy")
+region_rect = Rect2(0, 0, 32, 32)
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 2.0
+offset_bottom = 6.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Left_Label" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 14
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Mid_Label" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("4_gx0kf")
+theme_override_font_sizes/font_size = 16
+text = "100 / 100"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Right_Label" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 10
+vertical_alignment = 1

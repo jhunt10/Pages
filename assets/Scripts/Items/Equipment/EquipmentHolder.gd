@@ -3,6 +3,7 @@ extends BaseItemHolder
 
 var _hand_count = 0
 
+var _is_unarmed:bool = false
 var _is_two_handing:bool = false
 var _is_dual_handing:bool = false
 
@@ -15,6 +16,8 @@ func _init(actor) -> void:
 
 func get_tags_added_to_actor()->Array:
 	var out_list = []
+	if _is_unarmed:
+		out_list.append("Unarmed")
 	if _is_two_handing:
 		out_list.append("TwoHand")
 	if _is_dual_handing:
@@ -51,6 +54,7 @@ func _load_slots_sets_data()->Array:
 
 func validate_items():
 	_build_slots_list()
+	auto_order_hand_items()
 
 func list_equipment()->Array:
 	return list_items()
@@ -242,8 +246,13 @@ func auto_order_hand_items():
 			_raw_item_slots[offhand_index] = null
 	
 	# Clear out HandStates
+	_is_unarmed = false
 	_is_two_handing = false
 	_is_dual_handing = false
+	
+	# Check if Unarmed
+	if not mainhand_item or not mainhand_item is BaseWeaponEquipment:
+		_is_unarmed = true
 	
 	# Check 2 Handing conditions
 	if mainhand_item:
@@ -273,7 +282,6 @@ func auto_order_hand_items():
 			(offhand_weapon.is_melee_weapon() == mainhand_item.is_melee_weapon()
 			or offhand_weapon.is_ranged_weapon() == mainhand_item.is_ranged_weapon())):
 				_is_dual_handing = true
-
 
 func _can_use_tool_in_mainhand(item:BaseToolEquipment):
 	var hand_conditions = _actor.get_hands_conditions_for_tool(item)
@@ -310,7 +318,7 @@ func _can_use_tool_in_two_hands(item:BaseToolEquipment):
 ##      Weapons       ##
 ########################
 func is_two_handing()->bool:
-	return _is_two_handing
+	return _actor.get_tags().has("TwoHand")
 
 func get_primary_weapon()->BaseWeaponEquipment:
 	var mainhand_slot_index = get_first_hand_index()
@@ -323,7 +331,7 @@ func get_primary_weapon()->BaseWeaponEquipment:
 
 func get_offhand_weapon()->BaseWeaponEquipment:
 	if is_two_handing():
-		return get_primary_weapon()
+		return null# get_primary_weapon()
 	var offhands = list_offhand_indexes()
 	if offhands.size() == 0:
 		return null

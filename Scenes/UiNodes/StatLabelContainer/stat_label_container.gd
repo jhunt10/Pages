@@ -7,6 +7,8 @@ extends BoxContainer
 @export var value_label:Label
 @export var percent_value:Label
 
+@export var mouse_over_parent:Control
+
 var mod_list_control
 
 
@@ -15,6 +17,18 @@ var _actor:BaseActor
 func _ready() -> void:
 	self.mouse_entered.connect(_on_mouse_enter)
 	self.mouse_exited.connect(_on_mouse_exit)
+
+func set_values(stat_name:String, actor:BaseActor):
+	self.stat_name = stat_name
+	name_label.show()
+	self.name_label.text = StatHelper.get_stat_abbr(stat_name)
+	var icon_texture = StatHelper.get_stat_icon(stat_name)
+	if icon_texture:
+		self.icon.texture = icon_texture
+		self.icon.show()
+	else:
+		self.icon.hide()
+	set_stat_values(actor)
 
 func set_stat_values(actor:BaseActor):
 	var stat_val = actor.stats.get_stat(stat_name, 0)
@@ -29,7 +43,11 @@ func _on_mouse_enter():
 		return
 	mod_list_control = load("res://Scenes/Menus/CharacterMenu/MenuPages/StatsMenuPage/stat_mod_list_control.tscn").instantiate()
 	if mod_list_control:
-		self.add_child(mod_list_control)
+		if mouse_over_parent:
+			mouse_over_parent.add_child(mod_list_control)
+			mod_list_control.global_position = self.global_position
+		else:
+			self.add_child(mod_list_control)
 		var mods = _actor.stats.get_mod_names_for_stat(stat_name)
 		mod_list_control.set_mod_list(mods)
 

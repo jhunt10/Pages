@@ -38,7 +38,15 @@ static func purge_effects():
 	Instance.purge_objects()
 
 ## Should only be called by Effect Helper
-static func _create_effect(source, actor:BaseActor, key:String, data:Dictionary, force_id:String='', game_state:GameStateData=null, suppress_signals:bool = false)->BaseEffect:
+static func _create_effect(
+		source, 
+		actor:BaseActor, 
+		key:String, 
+		data:Dictionary, 
+		force_id:String='', 
+		game_state:GameStateData=null, 
+		suppress_signals:bool = false
+	)->BaseEffect:
 	if not EffectHelper.is_creating_effect:
 		printerr("\n\nDepreciated: Effect created outside of EffectHelper! Use EffectHelper.create_effect instead.\n\n")
 	print("Creating Effect: %s on actor %s" %[key, actor.Id])
@@ -74,6 +82,10 @@ static func _create_effect(source, actor:BaseActor, key:String, data:Dictionary,
 		effect_data['SourceId'] = (source as BaseZone).Id
 		var sact = (source as BaseZone).get_source_actor()
 		if sact: effect_data['SourceActorId'] = sact.Id
+	elif source is BaseSupplyItem:
+		effect_data['SourceType'] = 'Item'
+		effect_data['SourceId'] = (source as BaseSupplyItem).ItemKey # Item would be deleted
+		effect_data['SourceActorId'] = (source as BaseSupplyItem).using_actor_id
 	else:
 		printerr("EffectLibrary.create_effect: Unknown source type: %s" % [source])
 		return null

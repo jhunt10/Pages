@@ -29,7 +29,7 @@ func _build_displays():
 			continue
 		if panels.has(actor.Id):
 			continue
-		var new_display:StatPanelControl = premade_stat_panel.duplicate()
+		var new_display:StatPanelControl = load("res://Scenes/Combat/UiNodes/StatsPanel/combat_stat_panel_control.tscn").instantiate()
 		new_display.visible = true
 		new_display.set_actor(actor)
 		panels_container.add_child(new_display)

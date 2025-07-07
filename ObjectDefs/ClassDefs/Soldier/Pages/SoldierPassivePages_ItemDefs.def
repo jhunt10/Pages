@@ -578,7 +578,8 @@
                         {
                             "RequireAnyTags": [
                                 "LightWpn", "MediumWpn"
-                            ]
+                            ],
+                            "RequireAllTags":["MeleeWpn"]
                         }
                     ],
                     "OffHandReq": [
@@ -589,6 +590,146 @@
                                     "RequireAnyTags": [
                                         "LightWpn", "MediumWpn"
                                     ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        "PassiveData": {},
+        "_DefVersion": "1"
+    },
+    "HeavyWeaponDualHandPage": {
+        "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemPassive.gd",
+        "#ObjDetails": {
+            "Description": "You can DualHand Heavy Melee Weapons.",
+            "DisplayName": "DualHand Medium",
+            "LargeIcon": "Sprites/HeavyWeaponDualHandPage_Icon.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/HeavyWeaponDualHandPage_Icon.png",
+            "SnippetDesc": "You can DualHand Heavy Melee Weapons",
+            "Tags": [
+                "Passive",
+                "HandMod"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Equipment",
+                "Page",
+                "Passive"
+            ]
+        },
+        "EquipmentData": {
+            "AttackMods": {
+            }
+        },
+        "ItemData": {
+            "ItemType": "Page",
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "PageData": {
+            "Requirments": {
+                "ConflictingPages": [],
+                "IncompatiblePages": [],
+                "TitleReq": "Match"
+            },
+            "SourceTitle": "Soldier",
+            "HandConditionMods": [
+                {
+                    "ConditionName": "DualHand Heavy Weapon",
+                    "CanMainHand": true,
+                    "CanOffHand": true,
+                    "CanOneHand": true,
+                    "CanTwoHand": true,
+                    "ToolTagFiltersReqAll": true,
+                    "ToolTagFilters": [
+                        {
+                            "RequireAnyTags": [
+                                "HeavyWpn", "MeleeWpn"
+                            ]
+                        }
+                    ],
+                    "OffHandReq": [
+                        {
+                            "MainHandTagFiltersReqAll": true,
+                            "MainHandTagFilters": [
+                                {
+                                    "RequireAnyTags": [
+                                        "HeavyWpn", "MeleeWpn"
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        "PassiveData": {},
+        "_DefVersion": "1"
+    },
+    "MeleeRangeDualHandPage": {
+        "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemPassive.gd",
+        "#ObjDetails": {
+            "Description": "You can equip a Heavy Range Weapon to OffHand when you have a Light or Medium Melee Weapon in your MainHand.",
+            "DisplayName": "DualHand Medium",
+            "LargeIcon": "Sprites/MeleeRangeWeaponDualHandPage_Icon.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/MeleeRangeWeaponDualHandPage_Icon.png",
+            "SnippetDesc": "You can DualHand Heavy Melee Weapons",
+            "Tags": [
+                "Passive",
+                "HandMod"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Equipment",
+                "Page",
+                "Passive"
+            ]
+        },
+        "EquipmentData": {
+            "AddTags": [
+                "TwoHand"
+            ]
+        },
+        "ItemData": {
+            "ItemType": "Page",
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "PageData": {
+            "Requirments": {
+                "ConflictingPages": [],
+                "IncompatiblePages": [],
+                "TitleReq": "Match"
+            },
+            "SourceTitle": "Soldier",
+            "HandConditionMods": [
+                {
+                    "ConditionName": "OffHand Heavy Ranged Weapon",
+                    "CanMainHand": true,
+                    "CanOffHand": true,
+                    "CanOneHand": true,
+                    "CanTwoHand": true,
+                    "ToolTagFiltersReqAll": true,
+                    "ToolTagFilters": [
+                        {
+                            "RequireAllTags": [
+                                "HeavyWpn", "RangedWpn"
+                            ]
+                        }
+                    ],
+                    "OffHandReq": [
+                        {
+                            "MainHandTagFiltersReqAll": true,
+                            "MainHandTagFilters": [
+                                {
+                                    "RequireAnyTags": [
+                                        "MediumWpn", "LightWpn"
+                                    ],
+                                    "RequireAllTags": ["MeleeWpn"]
                                 }
                             ]
                         }
