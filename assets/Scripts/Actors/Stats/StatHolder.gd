@@ -302,6 +302,10 @@ func _calc_cache_stats(emit_signal:bool=true):
 	if LOGGING: 
 		print("#Caching Stats for: %s" % _actor.ActorKey)
 	
+	var health_before_caching = null
+	if _cached_stats.keys().has(StatHelper.HealthCurrent):
+		health_before_caching = _cached_stats[StatHelper.HealthCurrent]
+	
 	_cached_mods.clear()
 	# Aggregate all the mods together by stat_name, then type
 	var agg_mods = {}
@@ -369,16 +373,20 @@ func _calc_cache_stats(emit_signal:bool=true):
 	for added_stat in key_depends_on_vals.keys():
 		if not temp_stats.keys().has(added_stat):
 			temp_stats[added_stat] = 0
+	
+	# Add current health in the form of a mod
+	if health_before_caching is int:
+		temp_stats[StatHelper.HealthCurrent] = health_before_caching
 		
 	
-	# Add current values for bar stats
-	for stat_name:String in temp_stats.keys():
-		if stat_name.begins_with("BarStat:") and _cached_stats.keys().has(stat_name):
-				temp_stats[stat_name] = _cached_stats.get(stat_name, 0)
-		elif stat_name.begins_with("BarMax:"):
-			var bar_stat_name = stat_name.replace("BarMax:","BarStat:")
-			if not temp_stats.keys().has(bar_stat_name):
-				temp_stats[bar_stat_name] = _cached_stats.get(bar_stat_name, temp_stats[stat_name])
+	## Add current values for bar stats
+	#for stat_name:String in temp_stats.keys():
+		#if stat_name.begins_with("BarStat:") and _cached_stats.keys().has(stat_name):
+				#temp_stats[stat_name] = _cached_stats.get(stat_name, 0)
+		#elif stat_name.begins_with("BarMax:"):
+			#var bar_stat_name = stat_name.replace("BarMax:","BarStat:")
+			#if not temp_stats.keys().has(bar_stat_name):
+				#temp_stats[bar_stat_name] = _cached_stats.get(bar_stat_name, temp_stats[stat_name])
 	
 	_cached_stats.clear()
 	var safety_limit = 10
@@ -416,8 +424,16 @@ func _calc_cache_stats(emit_signal:bool=true):
 					for val in agg_stat[BaseStatMod.ModTypes.Scale]:
 						temp_val = temp_val * val
 			_cached_stats[stat_name] = temp_val
+			# Health Logic - Set Current Health if not previously set
+			if stat_name == StatHelper.HealthMax:
+				if not (temp_stats.keys().has(StatHelper.HealthCurrent) 
+						or _cached_stats.keys().has(StatHelper.HealthCurrent)):
+							_cached_stats[StatHelper.HealthCurrent] = temp_val
+				
 			# Remove from temp_stats as we cache them
 			temp_stats.erase(stat_name)
+	
+	
 	
 	if LOGGING: print("--- Done Caching Stats")
 	if safety_limit <= 0:

@@ -43,15 +43,14 @@ func set_actor(actor:BaseActor):
 	if !actor:
 		return
 	if _actor:
-		if _actor.Que.turn_ended.is_connected(on_turn_end):
-			_actor.Que.turn_ended.disconnect(_sync)
-		if _actor.stats.health_changed.is_connected(on_turn_end):
-			_actor.stats.health_changed.disconnect(_sync)
+		printerr("Health Bar: Actor already set.")
+		return
 	_actor = actor
 	if full_bar:
 		_sync()
 	_actor.stats.health_changed.connect(_sync)
-	_actor.turn_ended.connect(on_turn_end)
+	#_actor.turn_ended.connect(on_turn_end)
+	CombatRootControl.Instance.QueController.end_of_turn.connect(on_turn_end)
 	
 func _process(delta: float) -> void:
 	if !full_bar or !_actor:
@@ -159,6 +158,7 @@ func _sync():
 		dark_value_bar.size.x = _target_display_bar_width
 	
 	_last_synced_value = new_val
+	_hold_for_change = true
 	print("Last Sync Value: " + str(_last_synced_value))
 
 func set_color(color:Color):

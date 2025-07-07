@@ -10,11 +10,12 @@ func get_triggers(_effect:BaseEffect, _subeffect_data:Dictionary)->Array:
 	return [BaseEffect.EffectTriggers.OnCreate]
 
 func on_delete(effect:BaseEffect, _subeffect_data:Dictionary):
-	var zone = CombatRootControl.Instance.get_zone(effect._cached_data.get("AuraZoneId", ""))
-	if !zone:
-		printerr("Effect '%s' Lost Aura Zone!")
-		return
-	zone._on_duration_end()
+	if CombatRootControl.is_valid():
+		var zone = CombatRootControl.Instance.GameState.get_zone(effect._cached_data.get("AuraZoneId", ""))
+		if !zone:
+			printerr("Effect '%s' Lost Aura Zone!")
+			return
+		zone._on_duration_end()
 	
 
 func on_effect_trigger(effect:BaseEffect, subeffect_data:Dictionary, trigger:BaseEffect.EffectTriggers, game_state:GameStateData):

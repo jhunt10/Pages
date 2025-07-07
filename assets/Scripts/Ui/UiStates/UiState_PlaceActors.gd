@@ -42,7 +42,7 @@ func start_state():
 func end_state():
 	if _logging: print("End UiState: PlaceActors")
 	actor_placer_control.hide()
-	CombatRootControl.Instance.ui_control.show()
+	#CombatRootControl.Instance.ui_control.show()
 	CombatRootControl.Instance.MapController.player_spawn_area_tile_map.hide()
 	
 func handle_input(event):

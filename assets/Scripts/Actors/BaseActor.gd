@@ -206,8 +206,9 @@ func load_data(loading_data:Dictionary):
 	items.validate_items()
 	stats.dirty_stats()
 
-func prep_for_combat():
+func clean_state():
 	self.is_dead = false
+	Que.fill_page_ammo()
 	stats.prep_for_combat()
 
 func on_combat_start():

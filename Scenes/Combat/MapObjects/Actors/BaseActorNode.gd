@@ -98,7 +98,8 @@ func prep_for_combat():
 
 func set_facing_dir(dir):
 	facing_dir = dir
-	actor_sprite.direction = dir
+	if actor_sprite:
+		actor_sprite.direction = dir
 
 ## Forces the actor to given position
 func set_map_pos(pos:MapPos, keep_movement_offset:bool=false):

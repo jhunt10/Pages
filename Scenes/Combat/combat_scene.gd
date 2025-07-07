@@ -21,6 +21,9 @@ var GameState:GameStateData
 static var _current_player_index:int = 0
 static var _player_actor_ids:Array = []
 
+static func is_valid()->bool:
+	return is_instance_valid(Instance)
+
 static func get_player_index_of_actor(actor:BaseActor)->int:
 	for index in range(_player_actor_ids.size()):
 		if actor.Id == _player_actor_ids[index]:
@@ -134,12 +137,14 @@ func load_init_state(sub_scene_data:Dictionary):
 	for actor_info:Dictionary in map_data['Actors']:
 		var new_actor = null
 		var actor_pos = actor_info['Pos']
+		# Specific Actor Id was provided
 		if actor_info.keys().has("ActorId"):
 			if actor_info.keys().has("ActorKey"):
 				new_actor = ActorLibrary.get_or_create_actor(actor_info['ActorKey'], actor_info['ActorId'])
 			else:
 				new_actor = ActorLibrary.get_actor(actor_info['ActorId'])
 			new_actor.FactionIndex = 1
+		# Only Actor Key was provided
 		elif actor_info.keys().has("ActorKey") and actor_info["ActorKey"] != '':
 			var actor_key = actor_info['ActorKey']
 			if actor_key.begins_with("Player"):
@@ -197,12 +202,12 @@ func start_combat_animation():
 	start_combat_screen.show()
 	start_combat_screen.start_combat_animation()
 	
-	ui_control.build_player_stats_panels()
 	combat_started = true
 
 func _on_combat_screen_blackout():
 	ui_control.show()
 	MapController.grid_tile_map.show()
+	ui_control.build_player_stats_panels()
 
 func _on_combat_screen_cleared():
 	start_combat_screen.hide()
@@ -240,23 +245,22 @@ func add_actor(actor:BaseActor, pos:MapPos, is_player:bool=false):
 		printerr("Actor '%s' already added" % [actor.Id])
 		return
 	print("Adding Actor %s with FactionIndex: %s" % [actor.Id, actor.FactionIndex])
-	# Add actor to GameState and set position
-	GameState.add_actor(actor)
-	QueController.add_action_que(actor.Que)
-	if is_player:
-		if not _player_actor_ids.has(actor.Id):
-			_player_actor_ids.append(actor.Id)
 	
 	var actor_node = MapController.get_or_create_actor_node(actor, pos)
 	actor_node.visible = true
-	actor_node.reparent(MapController.actor_tile_map)
-	if not MapController.actor_nodes.has(actor.Id):
-		MapController.actor_nodes[actor.Id] = actor_node
+	MapController.reparent_actor_node_to_actor_tile_map(actor_node)
+	
+	# Add actor to GameState and set position
+	GameState.add_actor(actor)
+	QueController.add_action_que(actor.Que)
 	GameState.set_actor_pos(actor, pos)
-	actor.stats.prep_for_combat()
-	actor.Que.fill_page_ammo()
+	
+	# Add to player list if player
+	if is_player and not _player_actor_ids.has(actor.Id):
+			_player_actor_ids.append(actor.Id)
 	
 	if combat_started:
+		actor.clean_state()
 		actor.on_combat_start()
 	
 
@@ -292,12 +296,6 @@ func create_new_missile_node(missile):
 	new_node.set_missile_data(missile)
 	MapController.add_missile_node(missile, new_node)
 
-#func create_flash_text(parent_node:Node, value:String, color:Color):
-	#var new_node:FlashTextControl  = load("res://Scenes/Combat/Effects/flash_text_control.tscn").instantiate()
-	#new_node.set_values(value, color)
-	#parent_node.add_child(new_node)
-	
-	
 func add_zone(zone:BaseZone):
 	var new_node:ZoneNode  = load(zone.get_zone_scene_path()).instantiate()
 	new_node._zone = zone
@@ -307,9 +305,6 @@ func add_zone(zone:BaseZone):
 	for spot in zone.get_area():
 		for actor in GameState.get_actors_at_pos(spot):
 			zone.on_actor_enter(actor, GameState)
-
-func get_zone(zone_id:String)->BaseZone:
-	return GameState._zones.get(zone_id)
 
 func remove_zone(zone):
 	if zone is String:

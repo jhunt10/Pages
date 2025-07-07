@@ -20,6 +20,8 @@ func _build_displays():
 	#for child in panels_container.get_children():
 		#child.queue_free()
 	for actor:BaseActor in CombatRootControl.Instance.GameState.list_actors(true):
+		if actor.is_player:
+			continue
 		if actor.get_load_val("HideInHud", false):
 			continue
 		if actor.is_dead:

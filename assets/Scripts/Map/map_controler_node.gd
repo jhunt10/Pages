@@ -130,6 +130,12 @@ func get_or_create_actor_node(actor:BaseActor, map_pos:MapPos, wait_to_show:bool
 	if LOGGING: print("MapControllerNode: Created Actor Node: %s" % [actor.Id])
 	return new_node
 
+func reparent_actor_node_to_actor_tile_map(actor_node:BaseActorNode):
+	actor_node.reparent(self.actor_tile_map)
+	# Readd actor because _on_actor_node_leave_tree just removed it
+	var actor_id = actor_node.Actor.Id
+	actor_nodes[actor_id] = actor_node
+
 func _on_actor_node_leave_tree(actor_id):
 	if actor_nodes.has(actor_id):
 		actor_nodes.erase(actor_id)

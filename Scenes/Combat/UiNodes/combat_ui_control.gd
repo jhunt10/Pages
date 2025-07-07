@@ -41,8 +41,7 @@ func _ready() -> void:
 	Instance = self
 	menu_button.pressed.connect(_on_menu_pressed)
 	book_button.pressed.connect(_on_book_pressed)
-	#test_button.pressed.connect(do_test)
-	target_input_display.visible = false
+	target_input_display.hide()
 	game_over_screen.hide()
 	victory_screen.hide()
 

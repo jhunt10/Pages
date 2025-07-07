@@ -466,31 +466,31 @@ menu_button = NodePath("../MenuButton")
 book_button = NodePath("../PageBookButton")
 pause_menu = NodePath("../PauseMenuControl")
 target_input_display = NodePath("TargetInputControl")
-player_stats_panels_container = NodePath("StatPanelsContainer")
+player_stats_panels_container = NodePath("PlayerStatPanelsContainer")
 que_input = NodePath("QueInputControl")
 que_collection_display = NodePath("QueCollectionDisplayControl")
-stats_collection_display = NodePath("StatCollectionDisplayControl")
+stats_collection_display = NodePath("EnemyStatPanelsContainer")
 option_select_menu = NodePath("OptionSelectMenu")
 drop_message_control = NodePath("DropMessageControl")
 actor_placer_control = NodePath("../ActorPlacerControl")
 
-[node name="StatPanelsContainer" type="HBoxContainer" parent="MoveableCamera2D/CanvasLayer/CombatUiControl"]
+[node name="PlayerStatPanelsContainer" type="HBoxContainer" parent="MoveableCamera2D/CanvasLayer/CombatUiControl"]
 layout_mode = 0
 offset_left = 8.0
 offset_top = 8.0
 offset_right = 184.0
 offset_bottom = 86.0
 
-[node name="P1_StatPanelControl" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/StatPanelsContainer" instance=ExtResource("16_jsy0k")]
+[node name="P1_StatPanelControl" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/PlayerStatPanelsContainer" instance=ExtResource("16_jsy0k")]
 layout_mode = 2
 
-[node name="P2_StatPanelControl2" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/StatPanelsContainer" instance=ExtResource("16_jsy0k")]
+[node name="P2_StatPanelControl2" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/PlayerStatPanelsContainer" instance=ExtResource("16_jsy0k")]
 layout_mode = 2
 
-[node name="P3_StatPanelControl3" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/StatPanelsContainer" instance=ExtResource("16_jsy0k")]
+[node name="P3_StatPanelControl3" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/PlayerStatPanelsContainer" instance=ExtResource("16_jsy0k")]
 layout_mode = 2
 
-[node name="P4_StatPanelControl4" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/StatPanelsContainer" instance=ExtResource("16_jsy0k")]
+[node name="P4_StatPanelControl4" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/PlayerStatPanelsContainer" instance=ExtResource("16_jsy0k")]
 layout_mode = 2
 
 [node name="QueCollectionDisplayControl" parent="MoveableCamera2D/CanvasLayer/CombatUiControl" instance=ExtResource("19_t74bn")]
@@ -504,7 +504,7 @@ offset_right = 48.0
 offset_bottom = -184.0
 grow_vertical = 2
 
-[node name="StatCollectionDisplayControl" type="Control" parent="MoveableCamera2D/CanvasLayer/CombatUiControl"]
+[node name="EnemyStatPanelsContainer" type="Control" parent="MoveableCamera2D/CanvasLayer/CombatUiControl"]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -519,12 +519,12 @@ grow_horizontal = 0
 grow_vertical = 2
 script = ExtResource("21_fx1yp")
 
-[node name="PremadePanelControl" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/StatCollectionDisplayControl" instance=ExtResource("16_jsy0k")]
+[node name="PremadePanelControl" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/EnemyStatPanelsContainer" instance=ExtResource("16_jsy0k")]
 layout_mode = 2
 offset_right = 180.0
 offset_bottom = 82.0
 
-[node name="PanelsContainer" type="VBoxContainer" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/StatCollectionDisplayControl"]
+[node name="PanelsContainer" type="VBoxContainer" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/EnemyStatPanelsContainer"]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0

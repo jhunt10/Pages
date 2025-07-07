@@ -48,11 +48,15 @@ func _sync():
 	
 	for stat_name in ordered_stats:
 		var new_entry = premade_entry.duplicate()
-		var label:Label = new_entry.get_child(0)
-		label.text = stat_name
-		var stat_label:StatLabelContainer = new_entry.get_child(1)
-		stat_label.stat_name = stat_name
-		stat_label.set_values(stat_name, _actor)
+		var name_label:Label = new_entry.get_child(0)
+		name_label.text = stat_name
+		var next_child = new_entry.get_child(1)
+		if next_child is Label:
+			next_child.text = str(_actor.stats._base_stats.get(stat_name, ''))
+			next_child = new_entry.get_child(2)
+		if next_child is StatLabelContainer:
+			next_child.stat_name = stat_name
+			next_child.set_values(stat_name, _actor)
 		entries_container.add_child(new_entry)
 		entries[stat_name] = new_entry
 		new_entry.show()

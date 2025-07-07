@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cxyi2xhtt1gqa"]
+[gd_scene load_steps=14 format=3 uid="uid://cxyi2xhtt1gqa"]
 
 [ext_resource type="Script" path="res://Scenes/DevTools/dev_tools_menu.gd" id="1_mof5q"]
 [ext_resource type="Script" path="res://Scenes/UiNodes/back_patch_container.gd" id="2_fwuqo"]
@@ -8,6 +8,11 @@
 [ext_resource type="Script" path="res://Scenes/DevTools/def_data_menu.gd" id="6_4bb3b"]
 [ext_resource type="Script" path="res://Scenes/DevTools/objects_counts_menu.gd" id="6_8b7ua"]
 [ext_resource type="Script" path="res://Scenes/DevTools/aggro_menu.gd" id="6_sbyrl"]
+[ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/full_stat_display_control.gd" id="7_0vmvo"]
+[ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/StatsMenuPage/stat_entry_container.gd" id="8_i3k5e"]
+[ext_resource type="Texture2D" uid="uid://51dfjr6b84bj" path="res://assets/Sprites/UI/BackPatches/PaperPatch_Big_184x128_32.png" id="8_o0se7"]
+[ext_resource type="Theme" uid="uid://dwinll8pgdjhc" path="res://Scenes/Themes/standard_theme.tres" id="9_deqg2"]
+[ext_resource type="PackedScene" uid="uid://ybkww8wk3awm" path="res://Scenes/UiNodes/StatLabelContainer/stat_label_container.tscn" id="10_vneaf"]
 
 [node name="DevToolsMenu" type="Control" node_paths=PackedStringArray("close_button", "reload_stuff_button", "create_page_items_button", "items_to_inventory_button", "add_item_menu_button", "add_item_menu")]
 z_index = 999
@@ -139,21 +144,22 @@ value = 1.0
 layout_mode = 2
 text = "Add Item"
 
-[node name="DefDataMenu" type="Control" parent="." node_paths=PackedStringArray("def_box", "data_box")]
+[node name="DefDataMenu" type="Control" parent="." node_paths=PackedStringArray("instance_selector_button", "def_box", "data_box", "stats_box")]
 anchors_preset = 0
 offset_left = 300.0
-offset_top = 9.0
 offset_right = 340.0
-offset_bottom = 49.0
+offset_bottom = 40.0
 script = ExtResource("6_4bb3b")
-def_box = NodePath("BackPatch/BoxContainer/DefRichTextLabel")
-data_box = NodePath("BackPatch/BoxContainer/DataRichTextLabel")
+instance_selector_button = NodePath("BackPatch/BoxContainer/HBoxContainer/LoadedOptionButton")
+def_box = NodePath("BackPatch/BoxContainer/TabContainer/Def")
+data_box = NodePath("BackPatch/BoxContainer/TabContainer/Data")
+stats_box = NodePath("BackPatch/BoxContainer/TabContainer/Stats")
 
 [node name="BackPatch" type="Container" parent="DefDataMenu" node_paths=PackedStringArray("background", "inner_container")]
-custom_minimum_size = Vector2(524, 629)
+custom_minimum_size = Vector2(524, 624)
 layout_mode = 0
 offset_right = 524.0
-offset_bottom = 629.0
+offset_bottom = 624.0
 script = ExtResource("2_fwuqo")
 background = NodePath("NinePatchRect")
 inner_container = NodePath("BoxContainer")
@@ -167,37 +173,113 @@ patch_margin_right = 12
 patch_margin_bottom = 12
 
 [node name="BoxContainer" type="BoxContainer" parent="DefDataMenu/BackPatch"]
+custom_minimum_size = Vector2(500, 600)
 layout_mode = 2
-theme_override_constants/separation = 0
+theme_override_constants/separation = 10
 vertical = true
 
-[node name="TitleContainer" type="HBoxContainer" parent="DefDataMenu/BackPatch/BoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="DefDataMenu/BackPatch/BoxContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="DefDataMenu/BackPatch/BoxContainer/TitleContainer"]
+[node name="LoadedOptionButton" type="OptionButton" parent="DefDataMenu/BackPatch/BoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Def"
+selected = 0
+item_count = 1
+popup/item_0/text = "Object_Key:ObjectResourceId"
+script = ExtResource("5_jorv4")
 
-[node name="ExitButton" type="Button" parent="DefDataMenu/BackPatch/BoxContainer/TitleContainer"]
+[node name="VSeparator" type="VSeparator" parent="DefDataMenu/BackPatch/BoxContainer/HBoxContainer"]
+visible = false
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ExitButton" type="Button" parent="DefDataMenu/BackPatch/BoxContainer/HBoxContainer"]
+visible = false
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 text = "X"
 
-[node name="DefRichTextLabel" type="RichTextLabel" parent="DefDataMenu/BackPatch/BoxContainer"]
+[node name="TabContainer" type="TabContainer" parent="DefDataMenu/BackPatch/BoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+current_tab = 2
+
+[node name="Def" type="RichTextLabel" parent="DefDataMenu/BackPatch/BoxContainer/TabContainer"]
+visible = false
 custom_minimum_size = Vector2(500, 275)
 layout_mode = 2
 autowrap_mode = 0
+metadata/_tab_index = 0
 
-[node name="Label2" type="Label" parent="DefDataMenu/BackPatch/BoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Data"
-
-[node name="DataRichTextLabel" type="RichTextLabel" parent="DefDataMenu/BackPatch/BoxContainer"]
+[node name="Data" type="RichTextLabel" parent="DefDataMenu/BackPatch/BoxContainer/TabContainer"]
+visible = false
 custom_minimum_size = Vector2(400, 275)
 layout_mode = 2
 autowrap_mode = 0
+metadata/_tab_index = 1
+
+[node name="Stats" type="Control" parent="DefDataMenu/BackPatch/BoxContainer/TabContainer" node_paths=PackedStringArray("entries_container", "premade_entry")]
+layout_mode = 2
+size_flags_vertical = 3
+script = ExtResource("7_0vmvo")
+entries_container = NodePath("ScrollContainer/VBoxContainer")
+premade_entry = NodePath("ScrollContainer/VBoxContainer/StatEntryContainer")
+metadata/_tab_index = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="DefDataMenu/BackPatch/BoxContainer/TabContainer/Stats"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("8_o0se7")
+patch_margin_left = 32
+patch_margin_top = 32
+patch_margin_right = 32
+patch_margin_bottom = 32
+
+[node name="ScrollContainer" type="ScrollContainer" parent="DefDataMenu/BackPatch/BoxContainer/TabContainer/Stats"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = -16.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="DefDataMenu/BackPatch/BoxContainer/TabContainer/Stats/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="StatEntryContainer" type="HBoxContainer" parent="DefDataMenu/BackPatch/BoxContainer/TabContainer/Stats/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+script = ExtResource("8_i3k5e")
+
+[node name="StatNameLabel" type="Label" parent="DefDataMenu/BackPatch/BoxContainer/TabContainer/Stats/ScrollContainer/VBoxContainer/StatEntryContainer"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("9_deqg2")
+text = "STAT_NAME"
+
+[node name="BaseValLabel" type="Label" parent="DefDataMenu/BackPatch/BoxContainer/TabContainer/Stats/ScrollContainer/VBoxContainer/StatEntryContainer"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("9_deqg2")
+text = "STAT_NAME"
+
+[node name="StatLabelContainer" parent="DefDataMenu/BackPatch/BoxContainer/TabContainer/Stats/ScrollContainer/VBoxContainer/StatEntryContainer" node_paths=PackedStringArray("mouse_over_parent") instance=ExtResource("10_vneaf")]
+layout_mode = 2
+mouse_over_parent = NodePath("../../../..")
 
 [node name="AggroMenu" type="Control" parent="." node_paths=PackedStringArray("close_button", "actors_options_button", "list_container", "premade_label")]
 anchors_preset = 0
