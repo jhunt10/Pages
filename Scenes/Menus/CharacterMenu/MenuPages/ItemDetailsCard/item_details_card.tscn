@@ -49,14 +49,10 @@ offset_right = 300.0
 offset_bottom = 300.0
 mouse_filter = 1
 script = ExtResource("1_vq5a0")
-showing = false
-state = 0
-shop_mode = false
 offset_control = NodePath("OffsetControl")
 offset_point = NodePath("OffestPoint")
 vertical = true
 time_to_show = 0.3
-grow_timer = 0.0
 speed = 500.0
 icon = NodePath("OffsetControl/NinePatchRect/VBoxContainer/TitleContainer/IconBackground/Icon")
 title_lable = NodePath("OffsetControl/NinePatchRect/VBoxContainer/TitleContainer/FitScaleLabel")
@@ -153,7 +149,7 @@ theme_override_colors/font_color = Color(0.470588, 0, 0, 1)
 theme_override_font_sizes/font_size = 14
 text = "Tag 1 Tag 2 Tage3asd asdas"
 vertical_alignment = 1
-text_overrun_behavior = 4
+text_overrun_behavior = 3
 ellipsis_char = "+"
 
 [node name="ColorRect" type="ColorRect" parent="OffsetControl/NinePatchRect/VBoxContainer"]
@@ -433,10 +429,8 @@ vertical_alignment = 1
 
 [node name="DamageContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsControl/VBoxContainer/HBoxContainer2/AmmoDamageContainer" instance=ExtResource("15_idu7k")]
 layout_mode = 2
-font_size_override = -1
 defense_type = "Armor"
 damage_type = 7
-attack_scale = 0.0
 
 [node name="MiniRangeDisplay" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsControl/VBoxContainer/HBoxContainer2" instance=ExtResource("5_jmtol")]
 layout_mode = 2
@@ -875,7 +869,6 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 text = "Equipe"
-_size_dirty = true
 center_x = true
 
 [node name="EquipButton" type="Button" parent="OffsetControl/NinePatchRect/VBoxContainer/EquipButtonBackground"]

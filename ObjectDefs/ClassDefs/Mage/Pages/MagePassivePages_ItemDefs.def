@@ -1,1 +1,689 @@
-{"ChainExtendPage":{"!ObjectScript":"res://assets/Scripts/Items/Pages/PageItemPassive.gd","#ObjDetails":{"Description":"Through lengthy experimentaion with your @@#Color:Blue:Chain Spells@@, you've found a reliable way to channel more enery and hit more targets, without totaly vaporizing the one unlucky enough to be first in the chain.\n\n@@#Color:Red:Chain Attacks@@ can chain up to @@#StatMod:MaxChainMod:Value@@ additional @@#Color:Red:Actors@@ per use.","DisplayName":"Chain Longer","LargeIcon":"Sprites/ChainPlus2_Icon.png","ObjectType":"Item","SmallIcon":"Sprites/ChainPlus2_Icon.png","SnippetDesc":"+2 to Attack Chain length.","Tags":["Passive","Chaining"],"Taxonomy":["Item","Equipment","Page","Passive"]},"EquipmentData":{"StatMods":{"MaxChainMod":{"ModType":"Add","StatName":"ChainLengthBonus","Value":2}}},"ItemData":{"ItemType":"Page","Rarity":"Common","Value":50},"PageData":{"Requirments":{"ConflictingPages":[],"IncompatiblePages":[],"TitleReq":"Match"},"SourceTitle":"Mage"},"PassiveData":{},"_DefVersion":"1"},"ChainForkPage":{"!ObjectScript":"res://assets/Scripts/Items/Pages/PageItemPassive.gd","#ObjDetails":{"Description":"While reading an artical about something called \"Breadth First Search\", you were suddenly struck with a fork that someone stabbed in your back. And that gave you an idea...\n\n@@#Color:Red:Chain Attacks@@ can @@#Color:Blue:Fork@@, spliting and hitting @@#Color:Red:up to@@ @@#StatMod:MaxForkMod:Value@@ @@#Color:Red:Adj Actor@@ when adding to the @@#Color:Blue:Chain@@. This can make it easier to hit more @@#Color:Red:Actors@@, but will not increase the maximum number of @@#Color:Red:Actors@@ in the @@#Color:Blue:Chain@@.","DisplayName":"Chain Fork","LargeIcon":"Sprites/ChainFork_Icon.png","ObjectType":"Item","SmallIcon":"Sprites/ChainFork_Icon.png","SnippetDesc":"Chain Attacks can Fork to 2 Adj Actors.","Tags":["Passive","Chaining","Fork"],"Taxonomy":["Item","Equipment","Page","Passive"]},"EquipmentData":{"StatMods":{"MaxForkMod":{"ModType":"Add","StatName":"ChainFrokBonus","Value":2}}},"ItemData":{"ItemType":"Page","Rarity":"Common","Value":50},"PageData":{"Requirments":{"ConflictingPages":[],"IncompatiblePages":[],"TitleReq":"Match"},"SourceTitle":"Mage"},"PassiveData":{},"_DefVersion":"1"},"ChainSelectPage":{"!ObjectScript":"res://assets/Scripts/Items/Pages/PageItemPassive.gd","#ObjDetails":{"Description":"In life, we must often accept the fact that there are forces out of our control, things we will never know, and events we can never predict... unless your a mother fuck'n Wizard, bitch!\n\nOn using a @@#Color:Red:Chain Attacks@@ you may select each @@#Color:Red:Actor@@ in the @@#Color:Red:Chain@@.","DisplayName":"Chain Choice","LargeIcon":"Sprites/ChainSelect_Icon.png","ObjectType":"Item","SmallIcon":"Sprites/ChainSelect_Icon.png","SnippetDesc":"Select Actors on Chain Attacks.","Tags":["Passive"],"Taxonomy":["Item","Equipment","Page","Passive"]},"EquipmentData":{},"ItemData":{"ItemType":"Page","Rarity":"Common","Value":50},"PageData":{"Requirments":{"ConflictingPages":[],"IncompatiblePages":[],"TitleReq":"Match"},"SourceTitle":"Mage"},"PassiveData":{"ActionMods":{"AttackMod1":{"Conditions":{"ItemKeys":[],"TagFilters":[{"RequireAllTags":["Chain"]}]},"ModdedDefData":{"ActionData":{"SubActions":{"GetTarget_Chain":{"AllowSelectingChain":true}}}}}}},"_DefVersion":"1"},"HazardSafetyPage":{"!ObjectScript":"res://assets/Scripts/Items/Pages/PageItemPassive.gd","#ObjDetails":{"Description":"You've learned to adjust your distibution of @@#Color:Blue:Mag@@ energy within a set area, making it safer to cast large @@#Color:Blue:Spells@@ around your team mates.\n\n@@#DmgMod:HazardSafetyDmgMod:Value: Damage@@ on @@#DmgMod:HazardSafetyDmgMod:Filters:s@@ against @@#DmgMod:HazardSafetyDmgMod:DefFacFil|Plr@@.","DisplayName":"Hazard Saftey","LargeIcon":"Sprites/HazardSafety_Icon.png","ObjectType":"Item","SmallIcon":"Sprites/HazardSafety_Icon.png","SnippetDesc":"Deal -50% AOE Spell Damage to Allies","Tags":["Passive"],"Taxonomy":["Item","Equipment","Page","Passive"]},"EquipmentData":{"DamageMods":{"HazardSafetyDmgMod":{"Conditions":{"DamageTypes":[],"DefenderFactionFilters":["Ally"],"DefenderTagFilters":[],"SourceFactionFilters":["Self"],"SourceTagFilters":[{"RequireAnyTags":["AOE","Spell","Attack"]}]},"DamageModKey":"HazardSafetyDmgMod","DisplayName":"Hazard Safety","ModType":"Scale","Value":0.5}}},"ItemData":{"ItemType":"Page","Rarity":"Rare","Value":50},"PageData":{"Requirments":{"ConflictingPages":[],"IncompatiblePages":[],"TitleReq":"Match"},"SourceTitle":"Mage"},"PassiveData":{},"_DefVersion":"1"},"MagBoostPage":{"!ObjectScript":"res://assets/Scripts/Items/Pages/PageItemPassive.gd","#ObjDetails":{"Description":"The first thing @@#Color:Blue:The Collage@@ teaches every new @@#Color:Blue:Mage@@ is how to optomize @@#Color:Blue:Mag Ammo@@ ussage. This leads to more efficient @@#Color:Blue:Spell@@ casting, and frankly saves a ton of @@#Color:Blue:Money@@.\n\n@@#Color:Red:+100% Max@@ @@#Color:Ammo:Mag:Mag Ammo@@ on @@#Color:Blue:Spell Pages@@.","DisplayName":"Mag Boost","LargeIcon":"Sprites/MagAmmoBoost_Icon.png","ObjectType":"Item","SmallIcon":"Sprites/MagAmmoBoost_Icon.png","SnippetDesc":"+100% Max Mag Ammo on Spells","Tags":["Passive","AmmoMod"],"Taxonomy":["Item","Equipment","Page","Passive"]},"EquipmentData":{"AmmoMods":{"MagBoostAmmoMod":{"Conditions":{"ActionTagFilters":[{"RequireAnyTags":["Spell"]}],"AmmoTypes":["Mag"]},"ModType":"ScaleClip","Value":2}}},"ItemData":{"ItemType":"Page","Rarity":"Common","Value":50},"PageData":{"Requirments":{"ConflictingPages":[],"IncompatiblePages":[],"TitleReq":"Match"},"SourceTitle":"Mage"},"PassiveData":{},"_DefVersion":"1"},"SafteyHazardPage":{"!ObjectScript":"res://assets/Scripts/Items/Pages/PageItemPassive.gd","#ObjDetails":{"Description":"You've learned to use your teammates as a point of reference for optomizing the energy output of your @@#Color:Blue:Spells@@... or maybe it's just fun to blow them up.\n\n@@#AtkMod:SafteyHazardAtkMod:DmgMod:SafetyHazardDmgMod:Value: Damage@@ on @@#AtkMod:SafteyHazardAtkMod:AtkSrcFil:s@@ that include an @@#AtkMod:SafteyHazardAtkMod:DefFacFil@@ in @@#Color:Red:Area of Effect@@.","DisplayName":"Saftey Hazard","LargeIcon":"Sprites/SafetyHazard_Icon.png","ObjectType":"Item","SmallIcon":"Sprites/SafetyHazard_Icon.png","SnippetDesc":"Deal +50% AOE Spell Damage if Ally's included.","Tags":["Passive"],"Taxonomy":["Item","Equipment","Page","Passive"]},"EquipmentData":{"AttackMods":{"SafteyHazardAtkMod":{"AttackModKey":"SafetyHazardAtkMod","AttackerStatMods":{},"CanStack":false,"Conditions":{"AttackSourceTagFilters":[{"RequireAnyTags":["AOE","Spell","Attack"]}],"AttackerFactionFilters":["Self"],"DefendersConditions":[{"DefenderFactionFilters":["Ally"],"DefenderTagFilters":[{"RequireAnyTags":[]}],"RequiresAllDefenders":false}]},"DamageMods":{"SafetyHazardDmgMod":{"Conditions":{"DamageTypes":[],"DefenderFactionFilters":["Ally"],"DefenderTagFilters":[],"SourceFactionFilters":["Self"],"SourceTagFilters":[]},"DamageModKey":"SafetyHazardDmgMod","DisplayName":"Safety Hazard","ModType":"Scale","Value":1.5}},"DefenderStatMods":{},"DisplayName":"Safety Hazard"}}},"ItemData":{"ItemType":"Page","Rarity":"Rare","Value":50},"PageData":{"Requirments":{"ConflictingPages":[],"IncompatiblePages":[],"TitleReq":"Match"},"SourceTitle":"Mage"},"PassiveData":{},"_DefVersion":"1"}}
+{
+    "MagWeaponOverride_Cold_PageItem": {
+        "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemPassive.gd",
+        "#ObjDetails": {
+            "Description": "@@#Color:Blue:Scepters@@, @@#Color:Blue:Staffs@@, and @@#Color:Blue:Wands@@ deal @@#Color:DmgColor:Cold:Cold Damage@@ on @@#Color:Red:Weapon Attacks@@.",
+            "DisplayName": "Cold Override",
+            "LargeIcon": "Sprites/MagWeapon_Cold_Icon.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/MagWeapon_Cold_Icon.png",
+            "SnippetDesc": "Scepters, Staffs, and Wands deal Cold Damage",
+            "Tags": [
+                "Passive",
+                "WpnMod"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Equipment",
+                "Page",
+                "Passive"
+            ]
+        },
+        "EquipmentData": {
+            "WeaponMods": {
+                "DualLightBonus": {
+                    "DisplayName": "Ambidualtrous",
+                    "Conditions": {
+                    },
+                    "WeaponMods": {
+                        "DamageVfxMod": {
+                            "Conditions": {
+                                "TagFiltersReqAll": true,
+                                "TagFilters": [
+                                    {
+                                        "RequireAnyTags": [
+                                            "Scepter",
+                                            "Staff",
+                                            "Wand"
+                                        ]
+                                    }
+                                ]
+                            },
+                            "ModProperty": "DamageVfxKey",
+                            "ModType": "Set",
+                            "ModValue": "Auto"
+                        },
+                        "DamageTypeMod": {
+                            "Conditions": {
+                                "TagFiltersReqAll": true,
+                                "TagFilters": [
+                                    {
+                                        "RequireAnyTags": [
+                                            "Scepter",
+                                            "Staff",
+                                            "Wand"
+                                        ]
+                                    }
+                                ]
+                            },
+                            "ModProperty": "DamageType",
+                            "ModType": "Set",
+                            "ModValue": "Cold"
+                        }
+                    }
+                }
+            }
+        },
+        "ItemData": {
+            "ItemType": "Page",
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "PageData": {
+            "PageRequirements": {
+                "ConflictingPages": [],
+                "IncompatiblePages": [],
+                "TitleReq": "Match"
+            },
+            "_SourceTitle": "Rogue"
+        },
+        "PassiveData": {},
+        "_DefVersion": "1"
+    },
+    "MagWeaponOverride_Fire_PageItem": {
+        "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemPassive.gd",
+        "#ObjDetails": {
+            "Description": "@@#Color:Blue:Scepters@@, @@#Color:Blue:Staffs@@, and @@#Color:Blue:Wands@@ deal @@#Color:DmgColor:Fire:Fire Damage@@ on @@#Color:Red:Weapon Attacks@@.",
+            "DisplayName": "Fire Override",
+            "LargeIcon": "Sprites/MagWeapon_Fire_Icon.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/MagWeapon_Fire_Icon.png",
+            "SnippetDesc": "Scepters, Staffs, and Wands deal Fire Damage",
+            "Tags": [
+                "Passive",
+                "WpnMod"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Equipment",
+                "Page",
+                "Passive"
+            ]
+        },
+        "EquipmentData": {
+            "WeaponMods": {
+                "DualLightBonus": {
+                    "DisplayName": "Ambidualtrous",
+                    "Conditions": {
+                    },
+                    "WeaponMods": {
+                        "DamageVfxMod": {
+                            "Conditions": {
+                                "TagFiltersReqAll": true,
+                                "TagFilters": [
+                                    {
+                                        "RequireAnyTags": [
+                                            "Scepter",
+                                            "Staff",
+                                            "Wand"
+                                        ]
+                                    }
+                                ]
+                            },
+                            "ModProperty": "DamageVfxKey",
+                            "ModType": "Set",
+                            "ModValue": "Auto"
+                        },
+                        "DamageTypeMod": {
+                            "Conditions": {
+                                "TagFiltersReqAll": true,
+                                "TagFilters": [
+                                    {
+                                        "RequireAnyTags": [
+                                            "Scepter",
+                                            "Staff",
+                                            "Wand"
+                                        ]
+                                    }
+                                ]
+                            },
+                            "ModProperty": "DamageType",
+                            "ModType": "Set",
+                            "ModValue": "Fire"
+                        }
+                    }
+                }
+            }
+        },
+        "ItemData": {
+            "ItemType": "Page",
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "PageData": {
+            "PageRequirements": {
+                "ConflictingPages": [],
+                "IncompatiblePages": [],
+                "TitleReq": "Match"
+            },
+            "_SourceTitle": "Rogue"
+        },
+        "PassiveData": {},
+        "_DefVersion": "1"
+    },
+    "MagWeaponOverride_Shock_PageItem": {
+        "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemPassive.gd",
+        "#ObjDetails": {
+            "Description": "@@#Color:Blue:Scepters@@, @@#Color:Blue:Staffs@@, and @@#Color:Blue:Wands@@ deal @@#Color:DmgColor:Shock:Shock Damage@@ on @@#Color:Red:Weapon Attacks@@.",
+            "DisplayName": "Shock Override",
+            "LargeIcon": "Sprites/MagWeapon_Shock_Icon.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/MagWeapon_Shock_Icon.png",
+            "SnippetDesc": "Scepters, Staffs, and Wands deal Shock Damage",
+            "Tags": [
+                "Passive",
+                "WpnMod"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Equipment",
+                "Page",
+                "Passive"
+            ]
+        },
+        "EquipmentData": {
+            "WeaponMods": {
+                "DualLightBonus": {
+                    "DisplayName": "Ambidualtrous",
+                    "Conditions": {
+                    },
+                    "WeaponMods": {
+                        "DamageVfxMod": {
+                            "Conditions": {
+                                "TagFiltersReqAll": true,
+                                "TagFilters": [
+                                    {
+                                        "RequireAnyTags": [
+                                            "Scepter",
+                                            "Staff",
+                                            "Wand"
+                                        ]
+                                    }
+                                ]
+                            },
+                            "ModProperty": "DamageVfxKey",
+                            "ModType": "Set",
+                            "ModValue": "Auto"
+                        },
+                        "DamageTypeMod": {
+                            "Conditions": {
+                                "TagFiltersReqAll": true,
+                                "TagFilters": [
+                                    {
+                                        "RequireAnyTags": [
+                                            "Scepter",
+                                            "Staff",
+                                            "Wand"
+                                        ]
+                                    }
+                                ]
+                            },
+                            "ModProperty": "DamageType",
+                            "ModType": "Set",
+                            "ModValue": "Shock"
+                        }
+                    }
+                }
+            }
+        },
+        "ItemData": {
+            "ItemType": "Page",
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "PageData": {
+            "PageRequirements": {
+                "ConflictingPages": [],
+                "IncompatiblePages": [],
+                "TitleReq": "Match"
+            },
+            "_SourceTitle": "Rogue"
+        },
+        "PassiveData": {},
+        "_DefVersion": "1"
+    },
+    "MagWeaponOverride_Poison_PageItem": {
+        "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemPassive.gd",
+        "#ObjDetails": {
+            "Description": "@@#Color:Blue:Scepters@@, @@#Color:Blue:Staffs@@, and @@#Color:Blue:Wands@@ deal @@#Color:DmgColor:Poison:Poison Damage@@ on @@#Color:Red:Weapon Attacks@@.",
+            "DisplayName": "Poison Override",
+            "LargeIcon": "Sprites/MagWeapon_Poison_Icon.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/MagWeapon_Poison_Icon.png",
+            "SnippetDesc": "Scepters, Staffs, and Wands deal Poison Damage",
+            "Tags": [
+                "Passive",
+                "WpnMod"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Equipment",
+                "Page",
+                "Passive"
+            ]
+        },
+        "EquipmentData": {
+            "WeaponMods": {
+                "DualLightBonus": {
+                    "DisplayName": "Ambidualtrous",
+                    "Conditions": {
+                    },
+                    "WeaponMods": {
+                        "DamageVfxMod": {
+                            "Conditions": {
+                                "TagFiltersReqAll": true,
+                                "TagFilters": [
+                                    {
+                                        "RequireAnyTags": [
+                                            "Scepter",
+                                            "Staff",
+                                            "Wand"
+                                        ]
+                                    }
+                                ]
+                            },
+                            "ModProperty": "DamageVfxKey",
+                            "ModType": "Set",
+                            "ModValue": "Auto"
+                        },
+                        "DamageTypeMod": {
+                            "Conditions": {
+                                "TagFiltersReqAll": true,
+                                "TagFilters": [
+                                    {
+                                        "RequireAnyTags": [
+                                            "Scepter",
+                                            "Staff",
+                                            "Wand"
+                                        ]
+                                    }
+                                ]
+                            },
+                            "ModProperty": "DamageType",
+                            "ModType": "Set",
+                            "ModValue": "Poison"
+                        }
+                    }
+                }
+            }
+        },
+        "ItemData": {
+            "ItemType": "Page",
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "PageData": {
+            "PageRequirements": {
+                "ConflictingPages": [],
+                "IncompatiblePages": [],
+                "TitleReq": "Match"
+            },
+            "_SourceTitle": "Rogue"
+        },
+        "PassiveData": {},
+        "_DefVersion": "1"
+    },
+    "ChainExtendPage": {
+        "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemPassive.gd",
+        "#ObjDetails": {
+            "Description": "Through lengthy experimentaion with your @@#Color:Blue:Chain Spells@@, you've found a reliable way to channel more enery and hit more targets, without totaly vaporizing the one unlucky enough to be first in the chain.\n\n@@#Color:Red:Chain Attacks@@ can chain up to @@#StatMod:MaxChainMod:Value@@ additional @@#Color:Red:Actors@@ per use.",
+            "DisplayName": "Chain Longer",
+            "LargeIcon": "Sprites/ChainPlus2_Icon.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/ChainPlus2_Icon.png",
+            "SnippetDesc": "+2 to Attack Chain length.",
+            "Tags": [
+                "Passive",
+                "Chaining"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Equipment",
+                "Page",
+                "Passive"
+            ]
+        },
+        "EquipmentData": {
+            "StatMods": {
+                "MaxChainMod": {
+                    "ModType": "Add",
+                    "StatName": "ChainLengthBonus",
+                    "Value": 2
+                }
+            }
+        },
+        "ItemData": {
+            "ItemType": "Page",
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "PageData": {
+            "PageRequirements": {
+                "ConflictingPages": [],
+                "IncompatiblePages": [],
+                "TitleReq": "Match"
+            },
+            "SourceTitle": "Mage"
+        },
+        "PassiveData": {},
+        "_DefVersion": "1"
+    },
+    "ChainForkPage": {
+        "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemPassive.gd",
+        "#ObjDetails": {
+            "Description": "While reading an artical about something called \"Breadth First Search\", you were suddenly struck with a fork that someone stabbed in your back. And that gave you an idea...\n\n@@#Color:Red:Chain Attacks@@ can @@#Color:Blue:Fork@@, spliting and hitting @@#Color:Red:up to@@ @@#StatMod:MaxForkMod:Value@@ @@#Color:Red:Adj Actor@@ when adding to the @@#Color:Blue:Chain@@. This can make it easier to hit more @@#Color:Red:Actors@@, but will not increase the maximum number of @@#Color:Red:Actors@@ in the @@#Color:Blue:Chain@@.",
+            "DisplayName": "Chain Fork",
+            "LargeIcon": "Sprites/ChainFork_Icon.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/ChainFork_Icon.png",
+            "SnippetDesc": "Chain Attacks can Fork to 2 Adj Actors.",
+            "Tags": [
+                "Passive",
+                "Chaining",
+                "Fork"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Equipment",
+                "Page",
+                "Passive"
+            ]
+        },
+        "EquipmentData": {
+            "StatMods": {
+                "MaxForkMod": {
+                    "ModType": "Add",
+                    "StatName": "ChainFrokBonus",
+                    "Value": 2
+                }
+            }
+        },
+        "ItemData": {
+            "ItemType": "Page",
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "PageData": {
+            "PageRequirements": {
+                "ConflictingPages": [],
+                "IncompatiblePages": [],
+                "TitleReq": "Match"
+            },
+            "SourceTitle": "Mage"
+        },
+        "PassiveData": {},
+        "_DefVersion": "1"
+    },
+    "ChainSelectPage": {
+        "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemPassive.gd",
+        "#ObjDetails": {
+            "Description": "In life, we must often accept the fact that there are forces out of our control, things we will never know, and events we can never predict... unless your a mother fuck'n Wizard, bitch!\n\nOn using a @@#Color:Red:Chain Attacks@@ you may select each @@#Color:Red:Actor@@ in the @@#Color:Red:Chain@@.",
+            "DisplayName": "Chain Choice",
+            "LargeIcon": "Sprites/ChainSelect_Icon.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/ChainSelect_Icon.png",
+            "SnippetDesc": "Select Actors on Chain Attacks.",
+            "Tags": [
+                "Passive"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Equipment",
+                "Page",
+                "Passive"
+            ]
+        },
+        "EquipmentData": {},
+        "ItemData": {
+            "ItemType": "Page",
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "PageData": {
+            "PageRequirements": {
+                "ConflictingPages": [],
+                "IncompatiblePages": [],
+                "TitleReq": "Match"
+            },
+            "SourceTitle": "Mage"
+        },
+        "PassiveData": {
+            "ActionMods": {
+                "AttackMod1": {
+                    "Conditions": {
+                        "ItemKeys": [],
+                        "TagFilters": [
+                            {
+                                "RequireAllTags": [
+                                    "Chain"
+                                ]
+                            }
+                        ]
+                    },
+                    "ModdedDefData": {
+                        "ActionData": {
+                            "SubActions": {
+                                "GetTarget_Chain": {
+                                    "AllowSelectingChain": true
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "_DefVersion": "1"
+    },
+    "HazardSafetyPage": {
+        "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemPassive.gd",
+        "#ObjDetails": {
+            "Description": "You've learned to adjust your distibution of @@#Color:Blue:Mag@@ energy within a set area, making it safer to cast large @@#Color:Blue:Spells@@ around your teammates.\n\n@@#DmgMod:HazardSafetyDmgMod:Value: Damage@@ on @@#DmgMod:HazardSafetyDmgMod:Filters:s@@ against @@#DmgMod:HazardSafetyDmgMod:DefFacFil|Plr@@.",
+            "DisplayName": "Hazard Saftey",
+            "LargeIcon": "Sprites/HazardSafety_Icon.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/HazardSafety_Icon.png",
+            "SnippetDesc": "Deal -50% AOE Spell Damage to Allies",
+            "Tags": [
+                "Passive"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Equipment",
+                "Page",
+                "Passive"
+            ]
+        },
+        "EquipmentData": {
+            "DamageMods": {
+                "HazardSafetyDmgMod": {
+                    "Conditions": {
+                        "DamageTypes": [],
+                        "DefenderFactionFilters": [
+                            "Ally"
+                        ],
+                        "DefenderTagFilters": [],
+                        "SourceFactionFilters": [
+                            "Self"
+                        ],
+                        "SourceTagFilters": [
+                            {
+                                "RequireAnyTags": [
+                                    "AOE",
+                                    "Spell",
+                                    "Attack"
+                                ]
+                            }
+                        ]
+                    },
+                    "DamageModKey": "HazardSafetyDmgMod",
+                    "DisplayName": "Hazard Safety",
+                    "ModType": "Scale",
+                    "Value": 0.5
+                }
+            }
+        },
+        "ItemData": {
+            "ItemType": "Page",
+            "Rarity": "Rare",
+            "Value": 50
+        },
+        "PageData": {
+            "PageRequirements": {
+                "ConflictingPages": [],
+                "IncompatiblePages": [],
+                "TitleReq": "Match"
+            },
+            "SourceTitle": "Mage"
+        },
+        "PassiveData": {},
+        "_DefVersion": "1"
+    },
+    "MagBoostPage": {
+        "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemPassive.gd",
+        "#ObjDetails": {
+            "Description": "The first thing @@#Color:Blue:The Collage@@ teaches every new @@#Color:Blue:Mage@@ is how to optomize @@#Color:Blue:Mag Ammo@@ ussage. This leads to more efficient @@#Color:Blue:Spell@@ casting, and frankly saves a ton of @@#Color:Blue:Money@@.\n\n@@#Color:Red:+100% Max@@ @@#Color:Ammo:Mag:Mag Ammo@@ on @@#Color:Blue:Spell Pages@@.",
+            "DisplayName": "Mag Boost",
+            "LargeIcon": "Sprites/MagAmmoBoost_Icon.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/MagAmmoBoost_Icon.png",
+            "SnippetDesc": "+100% Max Mag Ammo on Spells",
+            "Tags": [
+                "Passive",
+                "AmmoMod"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Equipment",
+                "Page",
+                "Passive"
+            ]
+        },
+        "EquipmentData": {
+            "AmmoMods": {
+                "MagBoostAmmoMod": {
+                    "Conditions": {
+                        "ActionTagFilters": [
+                            {
+                                "RequireAnyTags": [
+                                    "Spell"
+                                ]
+                            }
+                        ],
+                        "AmmoTypes": [
+                            "Mag"
+                        ]
+                    },
+                    "ModType": "ScaleClip",
+                    "Value": 2
+                }
+            }
+        },
+        "ItemData": {
+            "ItemType": "Page",
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "PageData": {
+            "PageRequirements": {
+                "ConflictingPages": [],
+                "IncompatiblePages": [],
+                "TitleReq": "Match"
+            },
+            "SourceTitle": "Mage"
+        },
+        "PassiveData": {},
+        "_DefVersion": "1"
+    },
+    "SafteyHazardPage": {
+        "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemPassive.gd",
+        "#ObjDetails": {
+            "Description": "You know a technique optomizing the energy output of large area @@#Color:Blue:Spells@@, but it requires a familiar point of reference. A teammate should work nicely.\n\n@@#AtkMod:SafteyHazardAtkMod:DmgMod:SafetyHazardDmgMod:Value: Damage@@ on @@#AtkMod:SafteyHazardAtkMod:AtkSrcFil:s@@ that include a @@#AtkMod:SafteyHazardAtkMod:DefTagsFil@@ @@#AtkMod:SafteyHazardAtkMod:DefFacFil@@ in @@#Color:Red:Area of Effect@@.",
+            "DisplayName": "Saftey Hazard",
+            "LargeIcon": "Sprites/SafetyHazard_Icon.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/SafetyHazard_Icon.png",
+            "SnippetDesc": "Deal +50% AOE Spell Damage if an Ally is included.",
+            "Tags": [
+                "Passive"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Equipment",
+                "Page",
+                "Passive"
+            ]
+        },
+        "EquipmentData": {
+            "AttackMods": {
+                "SafteyHazardAtkMod": {
+                    "AttackModKey": "SafetyHazardAtkMod",
+                    "AttackerStatMods": {},
+                    "CanStack": false,
+                    "Conditions": {
+                        "AttackSourceTagFilters": [
+                            {
+                                "RequireAnyTags": [
+                                    "AOE",
+                                    "Spell",
+                                    "Attack"
+                                ]
+                            }
+                        ],
+                        "AttackerFactionFilters": [
+                            "Self"
+                        ],
+                        "DefendersConditions": [
+                            {
+                                "DefenderFactionFilters": [
+                                    "Ally"
+                                ],
+                                "DefenderTagFilters": [
+                                    {
+                                        "RequireAnyTags": ["Player"]
+                                    }
+                                ],
+                                "RequiresAllDefenders": false
+                            }
+                        ]
+                    },
+                    "DamageMods": {
+                        "SafetyHazardDmgMod": {
+                            "Conditions": {
+                                "DamageTypes": [],
+                                "DefenderFactionFilters": [
+                                    "Ally"
+                                ],
+                                "DefenderTagFilters": [],
+                                "SourceFactionFilters": [
+                                    "Self"
+                                ],
+                                "SourceTagFilters": []
+                            },
+                            "DamageModKey": "SafetyHazardDmgMod",
+                            "DisplayName": "Safety Hazard",
+                            "ModType": "Scale",
+                            "Value": 1.5
+                        }
+                    },
+                    "DefenderStatMods": {},
+                    "DisplayName": "Safety Hazard"
+                }
+            }
+        },
+        "ItemData": {
+            "ItemType": "Page",
+            "Rarity": "Rare",
+            "Value": 50
+        },
+        "PageData": {
+            "PageRequirements": {
+                "ConflictingPages": [],
+                "IncompatiblePages": [],
+                "TitleReq": "Match"
+            },
+            "SourceTitle": "Mage"
+        },
+        "PassiveData": {},
+        "_DefVersion": "1"
+    }
+}

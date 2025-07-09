@@ -11,16 +11,19 @@ func get_item_type()->ItemTypes:
 func _init(key:String, def_load_path:String, def:Dictionary, id:String='', data:Dictionary={}) -> void:
 	super(key, def_load_path, def, id, data)
 
-func get_item_tags()->Array:
+func get_tags()->Array:
 	var tags = []
 	tags = super()
 	if not tags.has("Page"):
 		tags.append("Page")
+	var source_title = page_data.get("SourceTitle", '')
+	if source_title and not tags.has(source_title+"Page"):
+		tags.append(source_title+"Page")
 	return tags
 
 ## Returns a diction of failed requirements, mapped by requirment type 
 func get_cant_use_reasons(actor:BaseActor):
-	var requirment_data = page_data.get("Requirments", {})
+	var requirment_data = page_data.get("PageRequirements", {})
 	var missing_requirements = super(actor)
 	
 	var title_req = requirment_data.get("TitleReq", '')

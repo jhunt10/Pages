@@ -262,7 +262,7 @@ func try_set_item_in_slot(item:BaseItem, index:int, allow_replace:bool=false)->b
 
 func _can_slot_set_accept_item(check_slot_set_data:Dictionary, item:BaseItem)->bool:
 	var filter_data = check_slot_set_data.get("FilterData")
-	var item_tags = item.get_item_tags()
+	var item_tags = item.get_tags()
 	if filter_data:
 		var required_tags = filter_data.get("RequiredTags")
 		if required_tags is String:
@@ -301,73 +301,47 @@ func _on_item_added_to_slot(item:BaseItem, index:int):
 
 func get_passive_stat_mods()->Array:
 	var out_list = []
-	var checked_equipments = [] ## For double sloted items (two handing)
-	for equipment_id in _raw_item_slots:
-		if checked_equipments.has(equipment_id):
+	var checked_items = [] ## For double sloted items (two handing)
+	for item_id in _raw_item_slots:
+		if checked_items.has(item_id):
 			continue
-		checked_equipments.append(equipment_id)
-		if equipment_id and equipment_id != '':
-			var item:BaseItem = ItemLibrary.get_item(equipment_id)
+		checked_items.append(item_id)
+		if item_id and item_id != '':
+			var item:BaseItem = ItemLibrary.get_item(item_id)
 			if not item:
-				printerr("BaseItemHolder.get_passive_stat_mods: ItemLibrary missing item with id '%s'." % [equipment_id])
+				printerr("BaseItemHolder.get_passive_stat_mods: ItemLibrary missing item with id '%s'." % [item_id])
 				continue
 			out_list.append_array(item.get_passive_stat_mods())
 	return out_list
 
-func get_targeting_mods()->Array:
-	var out_list = []
-	var checked_equipments = [] ## For double sloted items (two handing)
-	for equipment_id in _raw_item_slots:
-		if checked_equipments.has(equipment_id):
-			continue
-		if equipment_id and equipment_id != '':
-			var item:BaseEquipmentItem = ItemLibrary.get_item(equipment_id)
-			if item:
-				out_list.append_array(item.get_target_mods())
-		checked_equipments.append(equipment_id)
-	return out_list
-
-func get_damage_mods()->Dictionary:
+func _get__mods(mod_prefix:String)->Dictionary:
 	var out_dict = {}
-	var checked_equipments = [] ## For double sloted items (two handing)
-	for equipment_id in _raw_item_slots:
-		if checked_equipments.has(equipment_id):
+	var checked_items = [] ## For double sloted items (two handing)
+	for item_id in _raw_item_slots:
+		if checked_items.has(item_id):
 			continue
-		if equipment_id and equipment_id != '':
-			var item:BaseEquipmentItem = ItemLibrary.get_item(equipment_id)
+		if item_id and item_id != '':
+			var item:BaseItem = ItemLibrary.get_item(item_id)
 			if item:
-				var mods = item.get_damage_mods()
+				var mods = item._get__mods(mod_prefix)
 				for mod_key in mods.keys():
 					out_dict[mod_key] = mods[mod_key]
 	return out_dict
+
+func get_targeting_mods()->Array:
+	return _get__mods("Target").values()
 
 func get_ammo_mods()->Dictionary:
-	var out_dict = {}
-	var checked_equipments = [] ## For double sloted items (two handing)
-	for equipment_id in _raw_item_slots:
-		if checked_equipments.has(equipment_id):
-			continue
-		if equipment_id and equipment_id != '':
-			var item:BaseEquipmentItem = ItemLibrary.get_item(equipment_id)
-			if item:
-				var mods = item.get_ammo_mods()
-				for mod_key in mods.keys():
-					out_dict[mod_key] = mods[mod_key]
-	return out_dict
-
+	return _get__mods("Ammo")
+	
 func get_attack_mods()->Dictionary:
-	var out_dict = {}
-	var checked_equipments = [] ## For double sloted items (two handing)
-	for equipment_id in _raw_item_slots:
-		if checked_equipments.has(equipment_id):
-			continue
-		if equipment_id and equipment_id != '':
-			var item:BaseEquipmentItem = ItemLibrary.get_item(equipment_id)
-			if item:
-				var mods = item.get_attack_mods()
-				for mod_key in mods.keys():
-					out_dict[mod_key] = mods[mod_key]
-	return out_dict
+	return _get__mods("Attack")
+	
+func get_damage_mods()->Dictionary:
+	return _get__mods("Damage")
+	
+func get_weapon_mods()->Dictionary:
+	return _get__mods("Weapon")
 
 	#for item_tags in _item_tagged_slots.keys():
 		#if _does_item_match_tags(item_tags, item):

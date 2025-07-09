@@ -165,7 +165,7 @@ func set_item(actor:BaseActor, item:BaseItem):
 	title_lable.text = item.get_display_name()
 	description_box.text = item.get_description()
 	var tag_string = ''
-	for tag in item.get_item_tags():
+	for tag in item.get_tags():
 		tag_string += ", " + tag
 	#var tag_label_text = ("[%s]: %s" % [item.ItemKey, tag_string.trim_prefix(", ")])
 	tag_label.text = tag_string.trim_prefix(", ")
@@ -238,7 +238,7 @@ func set_item(actor:BaseActor, item:BaseItem):
 	elif MainRootNode.Instance.current_scene is CombatRootControl:
 		equip_button_background.hide()
 	else:
-		if item.get_item_tags().has("Title"):
+		if item.get_tags().has("Title"):
 			equip_button_background.hide()
 		else:
 			equip_button_background.show()

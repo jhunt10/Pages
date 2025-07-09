@@ -1,7 +1,7 @@
 class_name BasePotionSupplyItem
 extends BaseSupplyItem
 
-func get_item_tags()->Array:
+func get_tags()->Array:
 	var tags = super()
 	if not tags.has("Drink"):
 		tags.append("Drink")

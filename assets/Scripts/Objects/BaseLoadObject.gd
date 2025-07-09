@@ -47,9 +47,9 @@ func get_small_icon()->Texture2D:
 	var icon_path = _def_load_path.path_join(get_object_details().get("SmallIcon", ""))
 	return SpriteCache.get_sprite(icon_path)
 func get_tags()->Array:
-	return object_details.get("Tags", [])
+	return object_details.get("Tags", []).duplicate()
 func get_taxonomy()->Array:
-	return object_details.get("Taxonomy", [])
+	return object_details.get("Taxonomy", []).duplicate()
 
 func save_me()->bool:
 	return false

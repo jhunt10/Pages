@@ -33,7 +33,7 @@ func _load_mini_details():
 	title_label.text = page.get_display_name()
 	if title_label.text == "":
 		title_label.text = "["+page._key+"}"
-	thing_tags = page.get_item_tags()
+	thing_tags = page.get_tags()
 	tags_label.text = ", ".join(thing_tags)
 	
 	# Set Icon (validate rareaty

@@ -29,7 +29,7 @@ func _show_pop_up(data_str):
 	if data:
 		if data.has("text"):
 			var line = data.get("text", "")
-			line = line.replace("|>|", "]").replace("|<|", "[")
+			line = line.replace("|>|", "]").replace("|<|", "[").replace('\\"', '"')
 			popup_container.set_text(line)
 		elif data.has("EffectKey"):
 			var effect_def = EffectLibrary.get_effect_def(data['EffectKey'])
@@ -249,6 +249,16 @@ func _build_bbcode_array(raw_description:String, object_def:Dictionary, object_i
 							if not factions.has(filter):
 								factions.append(_get_title_specific_faction_name(actor, filter, sub_tokens[2].contains("|Plr")))
 					out_line += RED_TEXT + ", ".join(factions) + "[/color]"
+				# Defender Tags Filter
+				elif sub_tokens[2].begins_with('DefTagsFil'):
+					var tags = []
+					for def_con in mod_data.get("Conditions", {}).get("DefendersConditions", []):
+						for filter:Dictionary in def_con.get("DefenderTagFilters", {}):
+							var all_tags = filter.get("RequireAllTags", [])
+							var any_tags = filter.get("RequireAnyTags", [])
+							tags.append_array(all_tags)
+							tags.append_array(any_tags)
+					out_line += RED_TEXT + " ".join(tags) + "[/color]"
 				if sub_tokens[2] == 'StatMod':
 					var mod_key = sub_tokens[3]
 					var stat_mod_data = mod_data.get("StatMods", {}).get(mod_key, {})
@@ -307,7 +317,7 @@ func _parse_tag_info(tokens:Array)->Array:
 			var hint_lines = _parse_tag_info(["#Tag", tag, "Desc"])
 			for line in hint_lines:
 				if line is String:
-					hint_text += line.replace("]", "|>|").replace("[", "|<|")
+					hint_text += line.replace("]", "|>|").replace("[", "|<|").replace('"', '\\"')
 			out_line += ('[color=blue][url={"text":"' + hint_text + '"}]' +  text + "[/url][/color]")
 	if out_line != '':
 		out_arr.append(out_line)

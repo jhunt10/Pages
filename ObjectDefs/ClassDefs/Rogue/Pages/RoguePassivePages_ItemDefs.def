@@ -1,4 +1,82 @@
 {
+    "DualHander_PageItem": {
+        "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemPassive.gd",
+        "#ObjDetails": {
+            "Description": "When @@#Color:Blue:DualHand@@ with two @@#Color:Blue:Light Weapons@@, thier @@#Color:Red:Base Attack Power@@ is inceased to @@#Color:Red:60%@@ from the default 50%.",
+            "DisplayName": "Ambidualtrous",
+            "LargeIcon": "Sprites/DualDagger_Icon.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/DualDagger_Icon.png",
+            "SnippetDesc": "60% Base Attack Power for DualHand Light Weapons",
+            "Tags": [
+                "Passive",
+                "WpnMod"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Equipment",
+                "Page",
+                "Passive"
+            ]
+        },
+        "EquipmentData": {
+            "WeaponMods": {
+                "DualLightBonus": {
+                    "DisplayName": "Ambidualtrous",
+                    "Conditions": {
+                        "ActorTagFiltersReqAll": true,
+                        "ActorTagFilters": [
+                            {
+                                "RequireAllTags": [
+                                    "DualHand"
+                                ]
+                            }
+                        ],
+                        "RequireMainHand": "Equipt",
+                        "MainHandTagFiltersReqAll": true,
+                        "MainHandTagFilters": [
+                            {
+                                "RequireAnyTags": [
+                                    "LightWpn"
+                                ]
+                            }
+                        ],
+                        "RequireOffHand": "Equipt",
+                        "OffHandTagFiltersReqAll": true,
+                        "OffHandTagFilters": [
+                            {
+                                "RequireAnyTags": [
+                                    "LightWpn"
+                                ]
+                            }
+                        ]
+                    },
+                    "WeaponMods": {
+                        "AtkPwrMod": {
+                            "ModProperty": "AtkPwrBase",
+                            "ModType": "Set",
+                            "ModValue": 60
+                        }
+                    }
+                }
+            }
+        },
+        "ItemData": {
+            "ItemType": "Page",
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "PageData": {
+            "PageRequirements": {
+                "ConflictingPages": [],
+                "IncompatiblePages": [],
+                "TitleReq": "Match"
+            },
+            "_SourceTitle": "Rogue"
+        },
+        "PassiveData": {},
+        "_DefVersion": "1"
+    },
     "BackStab_PageItem": {
         "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemPassive.gd",
         "#ObjDetails": {
@@ -67,7 +145,7 @@
             "Value": 50
         },
         "PageData": {
-            "Requirments": {
+            "PageRequirements": {
                 "ConflictingPages": [],
                 "IncompatiblePages": [],
                 "TitleReq": "Match"
@@ -111,7 +189,7 @@
             "Value": 50
         },
         "PageData": {
-            "Requirments": {
+            "PageRequirements": {
                 "ConflictingPages": [],
                 "IncompatiblePages": [],
                 "TitleReq": "Match"

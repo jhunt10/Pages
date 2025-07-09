@@ -1,1 +1,450 @@
-{"#BaseMeleeSpell":{"!ObjectScript":"res://assets/Scripts/Items/Pages/PageItemAction.gd","!ParentKey":"#BaseMeleeAttack","#ObjDetails":{"Description":"Make a @@#Color:Red:Melee Spell Attack@@ against an @@#TrgParm:TargetParam:TargetType@@ dealing @@#DmgData:MeleeDamage@@ on hit.","DisplayName":"#Base Melee Spell","LargeIcon":"Sprites/BaseTouch.png","ObjectType":"Item","SmallIcon":"Sprites/BaseTouch.png","SnippetDesc":"Touch Actor for DAMAGE_TYPE damage.","Tags":["Spell"],"Taxonomy":["Item","Equipment","Page","Action"]},"ActionData":{"AmmoData":{"AmmoType":"Mag","Clip":24,"Cost":4},"AttackDetails":{"AccuracyMod":1,"PotencyMod":1},"DamageDatas":{"MeleeDamage":{"AtkPwrBase":100,"AtkPwrRange":10,"AtkPwrScale":1,"AtkStat":"MagAttack","BaseDamage":0,"DamageType":"RAW","DamageVfxKey":"AUTO","DefenseType":"AUTO"}},"SubActions":{"WeaponMotionAnimation":{"!SubActionScript":"res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponMotionAnimation.gd","#FrameIndex":11,"#SubIndex":0,"MainHand":true,"OffHand":"OnlyIfDuel"},"WeaponReadyAnimation":{"!SubActionScript":"res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponReadyAnimation.gd","#FrameIndex":5,"#SubIndex":0,"Animation":"WEAPON_DEFAULT","MainHand":true,"OffHand":"OnlyIfDuel"}}},"ItemData":{"ItemType":"Page","Rarity":"Common","Value":50},"PageData":{"Requirments":{"ConflictingPages":[],"IncompatiblePages":[],"TitleReq":"None"},"SourceTitle":""},"_DefVersion":"1"},"#BaseMissileSpell":{"!ObjectScript":"res://assets/Scripts/Items/Pages/PageItemAction.gd","!ParentKey":"#BaseMissileAttack","#ObjDetails":{"Description":"Launch a @@#Color:Magical Missile@@ at @@#TrgParm:TargetParam:TargetType@@ in range, dealing @@#DmgData:MissileDamage@@ to any @@#Color:Red:Actor@@ it hits.","DisplayName":"#Base Missile Spell","LargeIcon":"Sprites/BaseMissile.png","ObjectType":"Item","SmallIcon":"Sprites/BaseMissile.png","SnippetDesc":"Launch a Missile of DAMAGE_TYPE","Tags":["Spell"],"Taxonomy":["Item","Equipment","Page","Action"]},"ActionData":{"AmmoData":{"AmmoType":"Mag","Clip":6,"Cost":2},"DamageDatas":{"MissileDamage":{"AtkPwrBase":100,"AtkPwrRange":20,"AtkPwrScale":1,"AtkStat":"MagAttack","BaseDamage":0,"DamageType":"RAW","DamageVfxKey":"AUTO","DefenseType":"AUTO"}},"MissileDatas":{"Missile1":{"DamageDataKey":"MissileDamage","FramesPerTile":3,"ImpactVfxKey":"","MissileVfxData":{"AnimationName":"4_sprites_250ms_frames_loop","AnimationSpeed":1,"RandomOffsets":[0,0],"RandomRotation":[0,0],"Scale":[1,1],"ScenePath":"res://assets/Scripts/VFXs/MissileVfx/missile_vfx_node.tscn","SpriteName":"Missiles/BaseMissile_Missile.png","SpriteSheetHight":2,"SpriteSheetWidth":2},"MissileVfxKey":""}},"SubActions":{"WeaponMotionAnimation":{"!SubActionScript":"res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponMotionAnimation.gd","#FrameIndex":5,"#SubIndex":0,"MainHand":true,"OffHand":"Never"},"WeaponReadyAnimation":{"!SubActionScript":"res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponReadyAnimation.gd","#FrameIndex":0,"#SubIndex":0,"Animation":"Raise","MainHand":true,"OffHand":"Never"}}},"ItemData":{"ItemType":"Page","Rarity":"Common","Value":50},"PageData":{"Requirments":{"ConflictingPages":[],"IncompatiblePages":[],"TitleReq":"None"},"SourceTitle":""},"_DefVersion":"1"},"#BaseRangedSpell":{"!ObjectScript":"res://assets/Scripts/Items/Pages/PageItemAction.gd","!ParentKey":"#BaseRangedAttack","#ObjDetails":{"Description":"Make a @@#Color:Red:Ranged Spell Attack@@ against an @@#TrgParm:TargetParam:TargetType@@ in range, dealing @@#DmgData:RangedDamage@@ on hit.","DisplayName":"#Base Range Action","LargeIcon":"Sprites/BaseBullet.png","ObjectType":"Item","SmallIcon":"Sprites/BaseBullet.png","SnippetDesc":"Shoot a bolt of DAMAGE_TYPE","Tags":["Spell"],"Taxonomy":["Item","Equipment","Page","Action"]},"ActionData":{"AmmoData":{"AmmoType":"Mag","Clip":16,"Cost":4},"AttackDetails":{"AccuracyMod":1,"AttackVfxData":{"RandomOffsets":[0,0],"ScenePath":"res://assets/Scripts/VFXs/BulletVfxs/bullet_vfx_node.tscn","SpriteName":"Missiles/BaseBullet_Missile.png","SpriteSheetHight":1,"SpriteSheetWidth":1,"Velocity":400},"AttackVfxKey":"","PotencyMod":1},"DamageDatas":{"RangedDamage":{"AtkPwrBase":80,"AtkPwrRange":20,"AtkPwrScale":1,"AtkStat":"MagAttack","BaseDamage":0,"DamageType":"RAW","DamageVfxKey":"AUTO","DefenseType":"AUTO"}},"SubActions":{"WeaponMotionAnimation":{"!SubActionScript":"res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponMotionAnimation.gd","#FrameIndex":11,"#SubIndex":0,"MainHand":true,"OffHand":"OnlyIfDuel"},"WeaponReadyAnimation":{"!SubActionScript":"res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponReadyAnimation.gd","#FrameIndex":5,"#SubIndex":0,"Animation":"WEAPON_DEFAULT","MainHand":true,"OffHand":"OnlyIfDuel"}}},"ItemData":{"ItemType":"Page","Rarity":"Common","Value":50},"PageData":{"Requirments":{"ConflictingPages":[],"IncompatiblePages":[],"TitleReq":"None"},"SourceTitle":""},"_DefVersion":"1"},"#BaseTrapSpell":{"!ObjectScript":"res://assets/Scripts/Items/Pages/PageItemAction.gd","!ParentKey":"#BaseTrapAttack","#ObjDetails":{"Description":"Create a Trap which deals @@#DmgData:TrapDamage@@ when stepped on. Traps arms on End of Round and trigger on first Actor to enter Spot. Damage from Traps can not be Blocked or Evaded.","DisplayName":"#Base Trap Action","LargeIcon":"Sprites/BaseTrap.png","ObjectType":"Item","SmallIcon":"Sprites/BaseTrap.png","SnippetDesc":"Create a Trap  of DAMAGE_TYPE Damage.","Tags":["Spell"],"Taxonomy":["Item","Equipment","Page","Action"]},"ActionData":{"AmmoData":{"AmmoType":"Mag","Clip":24,"Cost":4},"DamageDatas":{"TrapDamage":{"AtkPwrBase":100,"AtkPwrRange":20,"AtkPwrScale":1,"AtkStat":"MagAttack","BaseDamage":0,"DamageType":"RAW","DamageVfxKey":"AUTO","DefenseType":"AUTO"}},"ZoneDatas":{"Zone1":{"Duration":1,"DurationType":"Trigger","TileSprite":"","ZoneKey":"Zone1","ZoneScript":"res://assets/Scripts/Zones/ZoneScripts/TrapZone.gd"}}},"ItemData":{"ItemType":"Page","Rarity":"Common","Value":50},"PageData":{"Requirments":{"ConflictingPages":[],"IncompatiblePages":[],"TitleReq":"None"},"SourceTitle":""},"_DefVersion":"1"},"#BaseZoneSpell":{"!ObjectScript":"res://assets/Scripts/Items/Pages/PageItemAction.gd","#ObjDetails":{"Description":"Create a Zone which deals DAMAGE_TYPE Damage at the end of Turn for 3 Turns.","DisplayName":"#Base Zone Action","LargeIcon":"Sprites/BaseSpell.png","ObjectType":"Item","SmallIcon":"Sprites/BaseSpell.png","SnippetDesc":"Create a Zone of DAMAGE_TYPE Damage.","Tags":["Attack","Zone"],"Taxonomy":["Item","Equipment","Page","Action"]},"ActionData":{"AmmoData":{"AmmoType":"Mag","Clip":24,"Cost":4},"AttackDetails":{"AccuracyMod":1,"PotencyMod":1},"DamageDatas":{"Damage1":{"AtkPwrBase":100,"AtkPwrRange":10,"AtkPwrScale":1,"AtkStat":"MagAttack","BaseDamage":0,"DamageType":"RAW","DamageVfxKey":"AUTO","DefenseType":"AUTO"}},"EffectDatas":{"Effect1":{"Duration":5,"EffectKey":"AilmentShocked"}},"Preview":{"PreviewDamageKey":"Damage1","PreviewTargetKey":"TargetParam"},"SubActions":{"CreateZone":{"!SubActionScript":"res://assets/Scripts/Actions/SubActions/SubAct_CreateZone.gd","#FrameIndex":11,"#SubIndex":1,"AreaTargetParamKey":"TargetParam","TargetKey":"Target1","ZoneDataKey":"Zone1"},"GetTarget":{"!SubActionScript":"res://assets/Scripts/Actions/SubActions/Targeting/SubAct_GetTarget.gd","#FrameIndex":10,"#SubIndex":0,"AllowAlreadyTargeted":false,"AllowAutoTarget":true,"SetTargetKey":"Target1","TargetParamKey":"TargetParam"},"PayCost":{"!SubActionScript":"res://assets/Scripts/Actions/SubActions/Misc/SubAct_PayCost.gd","#FrameIndex":11,"#SubIndex":0},"WeaponMotionAnimation":{"!SubActionScript":"res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponMotionAnimation.gd","#FrameIndex":11,"#SubIndex":2,"MainHand":true,"OffHand":"OnlyIfDuel"},"WeaponReadyAnimation":{"!SubActionScript":"res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponReadyAnimation.gd","#FrameIndex":5,"#SubIndex":0,"Animation":"WEAPON_DEFAULT","MainHand":true,"OffHand":"OnlyIfDuel"}},"TargetParams":{"TargetParam":{"EffectArea":"[[-1,1],[0,1],[1,1],[1,0],[1,-1],[0,-1],[-1,-1],[-1,0],[0,0]]","LineOfSight":true,"TargetArea":"[[-1,4],[0,4],[1,4],[-1,3],[0,3],[1,3],[-1,2],[0,2],[1,2]]","TargetType":"Spot"}},"ZoneDatas":{"Zone1":{"Duration":8,"DurationType":"Turn","InZoneEffectDataKey":"Effect1","ZoneKey":"Zone1","ZoneScript":"res://assets/Scripts/Zones/ZoneScripts/EffectZone.gd"}}},"ItemData":{"ItemType":"Page","Rarity":"Common","Value":50},"PageData":{"Requirments":{"ConflictingPages":[],"IncompatiblePages":[],"TitleReq":"None"},"SourceTitle":""},"_DefVersion":"1"}}
+{
+    "#BaseMeleeSpell": {
+        "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
+        "!ParentKey": "#BaseMeleeAttack",
+        "#ObjDetails": {
+            "Description": "Make a @@#Color:Red:Melee Spell Attack@@ against an @@#TrgParm:TargetParam:TargetType@@ dealing @@#DmgData:MeleeDamage@@ on hit.",
+            "DisplayName": "#Base Melee Spell",
+            "LargeIcon": "Sprites/BaseTouch.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/BaseTouch.png",
+            "SnippetDesc": "Touch Actor for DAMAGE_TYPE damage.",
+            "Tags": [
+                "Spell"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Equipment",
+                "Page",
+                "Action"
+            ]
+        },
+        "ActionData": {
+            "AmmoData": {
+                "AmmoType": "Mag",
+                "Clip": 24,
+                "Cost": 4
+            },
+            "AttackDetails": {
+                "AccuracyMod": 1,
+                "PotencyMod": 1
+            },
+            "DamageDatas": {
+                "MeleeDamage": {
+                    "AtkPwrBase": 100,
+                    "AtkPwrRange": 10,
+                    "AtkPwrScale": 1,
+                    "AtkStat": "MagAttack",
+                    "BaseDamage": 0,
+                    "DamageType": "RAW",
+                    "DamageVfxKey": "AUTO",
+                    "DefenseType": "AUTO"
+                }
+            },
+            "SubActions": {
+                "WeaponMotionAnimation": {
+                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponMotionAnimation.gd",
+                    "#FrameIndex": 11,
+                    "#SubIndex": 0,
+                    "MainHand": true,
+                    "OffHand": "OnlyIfDuel"
+                },
+                "WeaponReadyAnimation": {
+                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponReadyAnimation.gd",
+                    "#FrameIndex": 5,
+                    "#SubIndex": 0,
+                    "Animation": "WEAPON_DEFAULT",
+                    "MainHand": true,
+                    "OffHand": "OnlyIfDuel"
+                }
+            }
+        },
+        "ItemData": {
+            "ItemType": "Page",
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "PageData": {
+            "PageRequirements": {
+                "ConflictingPages": [],
+                "IncompatiblePages": [],
+                "TitleReq": "None"
+            },
+            "SourceTitle": ""
+        },
+        "_DefVersion": "1"
+    },
+    "#BaseMissileSpell": {
+        "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
+        "!ParentKey": "#BaseMissileAttack",
+        "#ObjDetails": {
+            "Description": "Launch a @@#Color:Magical Missile@@ at @@#TrgParm:TargetParam:TargetType@@ in range, dealing @@#DmgData:MissileDamage@@ to any @@#Color:Red:Actor@@ it hits.",
+            "DisplayName": "#Base Missile Spell",
+            "LargeIcon": "Sprites/BaseMissile.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/BaseMissile.png",
+            "SnippetDesc": "Launch a Missile of DAMAGE_TYPE",
+            "Tags": [
+                "Spell"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Equipment",
+                "Page",
+                "Action"
+            ]
+        },
+        "ActionData": {
+            "AmmoData": {
+                "AmmoType": "Mag",
+                "Clip": 6,
+                "Cost": 2
+            },
+            "DamageDatas": {
+                "MissileDamage": {
+                    "AtkPwrBase": 100,
+                    "AtkPwrRange": 20,
+                    "AtkPwrScale": 1,
+                    "AtkStat": "MagAttack",
+                    "BaseDamage": 0,
+                    "DamageType": "RAW",
+                    "DamageVfxKey": "AUTO",
+                    "DefenseType": "AUTO"
+                }
+            },
+            "MissileDatas": {
+                "Missile1": {
+                    "DamageDataKey": "MissileDamage",
+                    "FramesPerTile": 3,
+                    "ImpactVfxKey": "",
+                    "MissileVfxData": {
+                        "AnimationName": "4_sprites_250ms_frames_loop",
+                        "AnimationSpeed": 1,
+                        "RandomOffsets": [
+                            0,
+                            0
+                        ],
+                        "RandomRotation": [
+                            0,
+                            0
+                        ],
+                        "Scale": [
+                            1,
+                            1
+                        ],
+                        "ScenePath": "res://assets/Scripts/VFXs/MissileVfx/missile_vfx_node.tscn",
+                        "SpriteName": "Missiles/BaseMissile_Missile.png",
+                        "SpriteSheetHight": 2,
+                        "SpriteSheetWidth": 2
+                    },
+                    "MissileVfxKey": ""
+                }
+            },
+            "SubActions": {
+                "WeaponMotionAnimation": {
+                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponMotionAnimation.gd",
+                    "#FrameIndex": 5,
+                    "#SubIndex": 0,
+                    "MainHand": true,
+                    "OffHand": "Never"
+                },
+                "WeaponReadyAnimation": {
+                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponReadyAnimation.gd",
+                    "#FrameIndex": 0,
+                    "#SubIndex": 0,
+                    "Animation": "Raise",
+                    "MainHand": true,
+                    "OffHand": "Never"
+                }
+            }
+        },
+        "ItemData": {
+            "ItemType": "Page",
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "PageData": {
+            "PageRequirements": {
+                "ConflictingPages": [],
+                "IncompatiblePages": [],
+                "TitleReq": "None"
+            },
+            "SourceTitle": ""
+        },
+        "_DefVersion": "1"
+    },
+    "#BaseRangedSpell": {
+        "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
+        "!ParentKey": "#BaseRangedAttack",
+        "#ObjDetails": {
+            "Description": "Make a @@#Tag:Ranged@@ @@#Tag:Melee@@ @@#Tag:Tactic@@ @@#Tag:Physical@@ @@#Tag:Magical@@ @@#Tag:Spell@@ Attack@@ against an @@#TrgParm:TargetParam:TargetType@@ in range, dealing @@#DmgData:RangedDamage@@ on hit.",
+            "DisplayName": "#Base Range Action",
+            "LargeIcon": "Sprites/BaseBullet.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/BaseBullet.png",
+            "SnippetDesc": "Shoot a bolt of DAMAGE_TYPE",
+            "Tags": [
+                "Spell"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Equipment",
+                "Page",
+                "Action"
+            ]
+        },
+        "ActionData": {
+            "AmmoData": {
+                "AmmoType": "Mag",
+                "Clip": 16,
+                "Cost": 4
+            },
+            "AttackDetails": {
+                "AccuracyMod": 1,
+                "AttackVfxData": {
+                    "RandomOffsets": [
+                        0,
+                        0
+                    ],
+                    "ScenePath": "res://assets/Scripts/VFXs/BulletVfxs/bullet_vfx_node.tscn",
+                    "SpriteName": "Missiles/BaseBullet_Missile.png",
+                    "SpriteSheetHight": 1,
+                    "SpriteSheetWidth": 1,
+                    "Velocity": 400
+                },
+                "AttackVfxKey": "",
+                "PotencyMod": 1
+            },
+            "DamageDatas": {
+                "RangedDamage": {
+                    "AtkPwrBase": 80,
+                    "AtkPwrRange": 20,
+                    "AtkPwrScale": 1,
+                    "AtkStat": "MagAttack",
+                    "BaseDamage": 0,
+                    "DamageType": "RAW",
+                    "DamageVfxKey": "AUTO",
+                    "DefenseType": "AUTO"
+                }
+            },
+            "SubActions": {
+                "WeaponMotionAnimation": {
+                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponMotionAnimation.gd",
+                    "#FrameIndex": 11,
+                    "#SubIndex": 0,
+                    "MainHand": true,
+                    "OffHand": "OnlyIfDuel"
+                },
+                "WeaponReadyAnimation": {
+                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponReadyAnimation.gd",
+                    "#FrameIndex": 5,
+                    "#SubIndex": 0,
+                    "Animation": "WEAPON_DEFAULT",
+                    "MainHand": true,
+                    "OffHand": "OnlyIfDuel"
+                }
+            }
+        },
+        "ItemData": {
+            "ItemType": "Page",
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "PageData": {
+            "PageRequirements": {
+                "ConflictingPages": [],
+                "IncompatiblePages": [],
+                "TitleReq": "None"
+            },
+            "SourceTitle": ""
+        },
+        "_DefVersion": "1"
+    },
+    "#BaseTrapSpell": {
+        "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
+        "!ParentKey": "#BaseTrapAttack",
+        "#ObjDetails": {
+            "Description": "Create a Trap which deals @@#DmgData:TrapDamage@@ when stepped on. Traps arms on End of Round and trigger on first Actor to enter Spot. Damage from Traps can not be Blocked or Evaded.",
+            "DisplayName": "#Base Trap Action",
+            "LargeIcon": "Sprites/BaseTrap.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/BaseTrap.png",
+            "SnippetDesc": "Create a Trap  of DAMAGE_TYPE Damage.",
+            "Tags": [
+                "Spell"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Equipment",
+                "Page",
+                "Action"
+            ]
+        },
+        "ActionData": {
+            "AmmoData": {
+                "AmmoType": "Mag",
+                "Clip": 24,
+                "Cost": 4
+            },
+            "DamageDatas": {
+                "TrapDamage": {
+                    "AtkPwrBase": 100,
+                    "AtkPwrRange": 20,
+                    "AtkPwrScale": 1,
+                    "AtkStat": "MagAttack",
+                    "BaseDamage": 0,
+                    "DamageType": "RAW",
+                    "DamageVfxKey": "AUTO",
+                    "DefenseType": "AUTO"
+                }
+            },
+            "ZoneDatas": {
+                "Zone1": {
+                    "Duration": 1,
+                    "DurationType": "Trigger",
+                    "TileSprite": "",
+                    "ZoneKey": "Zone1",
+                    "ZoneScript": "res://assets/Scripts/Zones/ZoneScripts/TrapZone.gd"
+                }
+            }
+        },
+        "ItemData": {
+            "ItemType": "Page",
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "PageData": {
+            "PageRequirements": {
+                "ConflictingPages": [],
+                "IncompatiblePages": [],
+                "TitleReq": "None"
+            },
+            "SourceTitle": ""
+        },
+        "_DefVersion": "1"
+    },
+    "#BaseZoneSpell": {
+        "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
+        "#ObjDetails": {
+            "Description": "Create a Zone which deals DAMAGE_TYPE Damage at the end of Turn for 3 Turns.",
+            "DisplayName": "#Base Zone Action",
+            "LargeIcon": "Sprites/BaseSpell.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/BaseSpell.png",
+            "SnippetDesc": "Create a Zone of DAMAGE_TYPE Damage.",
+            "Tags": [
+                "Attack",
+                "Zone"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Equipment",
+                "Page",
+                "Action"
+            ]
+        },
+        "ActionData": {
+            "AmmoData": {
+                "AmmoType": "Mag",
+                "Clip": 24,
+                "Cost": 4
+            },
+            "AttackDetails": {
+                "AccuracyMod": 1,
+                "PotencyMod": 1
+            },
+            "DamageDatas": {
+                "Damage1": {
+                    "AtkPwrBase": 100,
+                    "AtkPwrRange": 10,
+                    "AtkPwrScale": 1,
+                    "AtkStat": "MagAttack",
+                    "BaseDamage": 0,
+                    "DamageType": "RAW",
+                    "DamageVfxKey": "AUTO",
+                    "DefenseType": "AUTO"
+                }
+            },
+            "EffectDatas": {
+                "Effect1": {
+                    "Duration": 5,
+                    "EffectKey": "AilmentShocked"
+                }
+            },
+            "Preview": {
+                "PreviewDamageKey": "Damage1",
+                "PreviewTargetKey": "TargetParam"
+            },
+            "SubActions": {
+                "CreateZone": {
+                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/SubAct_CreateZone.gd",
+                    "#FrameIndex": 11,
+                    "#SubIndex": 1,
+                    "AreaTargetParamKey": "TargetParam",
+                    "TargetKey": "Target1",
+                    "ZoneDataKey": "Zone1"
+                },
+                "GetTarget": {
+                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Targeting/SubAct_GetTarget.gd",
+                    "#FrameIndex": 10,
+                    "#SubIndex": 0,
+                    "AllowAlreadyTargeted": false,
+                    "AllowAutoTarget": true,
+                    "SetTargetKey": "Target1",
+                    "TargetParamKey": "TargetParam"
+                },
+                "PayCost": {
+                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Misc/SubAct_PayCost.gd",
+                    "#FrameIndex": 11,
+                    "#SubIndex": 0
+                },
+                "WeaponMotionAnimation": {
+                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponMotionAnimation.gd",
+                    "#FrameIndex": 11,
+                    "#SubIndex": 2,
+                    "MainHand": true,
+                    "OffHand": "OnlyIfDuel"
+                },
+                "WeaponReadyAnimation": {
+                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponReadyAnimation.gd",
+                    "#FrameIndex": 5,
+                    "#SubIndex": 0,
+                    "Animation": "WEAPON_DEFAULT",
+                    "MainHand": true,
+                    "OffHand": "OnlyIfDuel"
+                }
+            },
+            "TargetParams": {
+                "TargetParam": {
+                    "EffectArea": "[[-1,1],[0,1],[1,1],[1,0],[1,-1],[0,-1],[-1,-1],[-1,0],[0,0]]",
+                    "LineOfSight": true,
+                    "TargetArea": "[[-1,4],[0,4],[1,4],[-1,3],[0,3],[1,3],[-1,2],[0,2],[1,2]]",
+                    "TargetType": "Spot"
+                }
+            },
+            "ZoneDatas": {
+                "Zone1": {
+                    "Duration": 8,
+                    "DurationType": "Turn",
+                    "InZoneEffectDataKey": "Effect1",
+                    "ZoneKey": "Zone1",
+                    "ZoneScript": "res://assets/Scripts/Zones/ZoneScripts/EffectZone.gd"
+                }
+            }
+        },
+        "ItemData": {
+            "ItemType": "Page",
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "PageData": {
+            "PageRequirements": {
+                "ConflictingPages": [],
+                "IncompatiblePages": [],
+                "TitleReq": "None"
+            },
+            "SourceTitle": ""
+        },
+        "_DefVersion": "1"
+    }
+}

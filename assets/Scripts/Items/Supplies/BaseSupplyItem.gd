@@ -7,7 +7,7 @@ var supply_item_data:Dictionary:
 	get:
 		return get_load_val("SuppliesData", {})
 
-func get_item_tags()->Array:
+func get_tags()->Array:
 	var tags = super()
 	tags.append("Consumable")
 	return tags

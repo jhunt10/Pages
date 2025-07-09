@@ -1,0 +1,68 @@
+{
+    "UnarmedMaster_PageItem": {
+        "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemPassive.gd",
+        "#ObjDetails": {
+            "Description": "When @@#Color:Blue:Unarmed@@ and using no @@#Color:Blue:OffHand@@, your default @@#Color:Red:Unarmed Attack@@ deals @@#DmgData:Damage1@@ and you are considered to be @@#Color:Blue:DualHand@@ and @@#Color:Blue:TwoHand@@.",
+            "DisplayName": "Two Hander",
+            "LargeIcon": "Sprites/TwoHandBonus_Icon.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/TwoHandBonus_Icon.png",
+            "SnippetDesc": "120% Base Attack Power for TwoHand Melee Weapons",
+            "Tags": [
+                "Passive",
+                "WpnMod"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Equipment",
+                "Page",
+                "Passive"
+            ]
+        },
+        "EquipmentData": {
+            "WeaponMods": {
+                "TwoHanderBonus": {
+                    "DisplayName": "Unarmed Master",
+                    "Conditions": {
+                        "ActorTagFiltersReqAll": true,
+                        "ActorTagFilters": [
+                            {
+                                "RequireAllTags": [
+                                    "Unarmed"
+                                ]
+                            }
+                        ],
+                        "RequireMainHand": "Empty",
+                        "MainHandTagFiltersReqAll": false,
+                        "MainHandTagFilters": [],
+                        "RequireOffHand": "Empty",
+                        "OffHandTagFiltersReqAll": false,
+                        "OffHandTagFilters": []
+                    },
+                    "WeaponMods": {
+                        "AtkPwrMod": {
+                            "ModProperty": "AtkPwrBase",
+                            "ModType": "Set",
+                            "ModValue": 120
+                        }
+                    }
+                }
+            }
+        },
+        "ItemData": {
+            "ItemType": "Page",
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "PageData": {
+            "PageRequirements": {
+                "ConflictingPages": [],
+                "IncompatiblePages": [],
+                "TitleReq": "Match"
+            },
+            "SourceTitle": "Soldier"
+        },
+        "PassiveData": {},
+        "_DefVersion": "1"
+    }
+}

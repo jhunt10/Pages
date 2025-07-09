@@ -72,26 +72,6 @@ func _cache_after_loading_def():
 
 func get_item_type()->ItemTypes:
 	return ItemTypes.Weapon
-	
-func get_item_tags()->Array:
-	var tags = super()
-	if !tags.has("Weapon"):
-		tags.append("Weapon")
-	var weapon_class = get_weapon_class()
-	if weapon_class == WeaponClasses.Light:
-		if !tags.has("LightWpn"):
-			tags.append("LightWpn")
-	elif weapon_class == WeaponClasses.Medium:
-		if !tags.has("MediumWpn"):
-			tags.append("MediumWpn")
-	elif weapon_class == WeaponClasses.Heavy:
-		if !tags.has("HeavyWpn"):
-			tags.append("HeavyWpn")
-	if is_ranged_weapon():
-		if !tags.has("RangedWpn"):
-			tags.append("RangedWpn")
-		
-	return tags
 
 func get_weapon_class()->WeaponClasses:
 	var val = weapon_data.get("WeaponClass", null)

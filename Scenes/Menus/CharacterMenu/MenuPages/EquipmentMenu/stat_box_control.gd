@@ -21,6 +21,8 @@ func set_actor(actor:BaseActor):
 	_sync_stats()
 
 func _sync_stats():
+	if not self.is_visible_in_tree():
+		return
 	var stat_lables = []
 	_get_stat_labels(stat_labels_container, stat_lables)
 	for child in stat_lables:

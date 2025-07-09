@@ -1,4 +1,70 @@
 {
+    "TwoHandBonus_PageItem": {
+        "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemPassive.gd",
+        "#ObjDetails": {
+            "Description": "When @@#Color:Blue:TwoHand@@ with a @@#Color:Blue:Melee Weapons@@, it's @@#Color:Red:Base Attack Power@@ is inceased to @@#Color:Red:120%@@ from the default 100%.",
+            "DisplayName": "Two Hander",
+            "LargeIcon": "Sprites/TwoHandBonus_Icon.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/TwoHandBonus_Icon.png",
+            "SnippetDesc": "120% Base Attack Power for TwoHand Melee Weapons",
+            "Tags": [
+                "Passive",
+                "WpnMod"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Equipment",
+                "Page",
+                "Passive"
+            ]
+        },
+        "EquipmentData": {
+            "WeaponMods": {
+                "TwoHanderBonus": {
+                    "DisplayName": "TwoHander",
+                    "Conditions": {
+                        "ActorTagFiltersReqAll": true,
+                        "ActorTagFilters": [
+                            {
+                                "RequireAllTags": [
+                                    "TwoHand"
+                                ]
+                            }
+                        ],
+                        "RequireMainHand": "Ignore",
+                        "MainHandTagFiltersReqAll": false,
+                        "MainHandTagFilters": [],
+                        "RequireOffHand": "Ignore",
+                        "OffHandTagFiltersReqAll": false,
+                        "OffHandTagFilters": []
+                    },
+                    "WeaponMods": {
+                        "AtkPwrMod": {
+                            "ModProperty": "AtkPwrBase",
+                            "ModType": "Set",
+                            "ModValue": 120
+                        }
+                    }
+                }
+            }
+        },
+        "ItemData": {
+            "ItemType": "Page",
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "PageData": {
+            "PageRequirements": {
+                "ConflictingPages": [],
+                "IncompatiblePages": [],
+                "TitleReq": "Match"
+            },
+            "SourceTitle": "Soldier"
+        },
+        "PassiveData": {},
+        "_DefVersion": "1"
+    },
     "BlockAoePage": {
         "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemPassive.gd",
         "#ObjDetails": {
@@ -33,7 +99,7 @@
             "Value": 50
         },
         "PageData": {
-            "Requirments": {
+            "PageRequirements": {
                 "ConflictingPages": [],
                 "IncompatiblePages": [],
                 "TitleReq": "Match"
@@ -107,7 +173,7 @@
             "Value": 50
         },
         "PageData": {
-            "Requirments": {
+            "PageRequirements": {
                 "ConflictingPages": [],
                 "IncompatiblePages": [],
                 "TitleReq": "Match"
@@ -181,7 +247,7 @@
             "Value": 50
         },
         "PageData": {
-            "Requirments": {
+            "PageRequirements": {
                 "ConflictingPages": [],
                 "IncompatiblePages": [],
                 "TitleReq": "Match"
@@ -230,7 +296,7 @@
             "Value": 50
         },
         "PageData": {
-            "Requirments": {
+            "PageRequirements": {
                 "ConflictingPages": [],
                 "IncompatiblePages": [],
                 "TitleReq": "Match"
@@ -276,7 +342,7 @@
             "Value": 50
         },
         "PageData": {
-            "Requirments": {
+            "PageRequirements": {
                 "ConflictingPages": [],
                 "IncompatiblePages": [],
                 "TitleReq": "Match"
@@ -323,7 +389,7 @@
             "Value": 50
         },
         "PageData": {
-            "Requirments": {
+            "PageRequirements": {
                 "ConflictingPages": [],
                 "IncompatiblePages": [],
                 "TitleReq": "Match"
@@ -367,7 +433,7 @@
             "Value": 50
         },
         "PageData": {
-            "Requirments": {
+            "PageRequirements": {
                 "ConflictingPages": [],
                 "IncompatiblePages": [],
                 "TitleReq": "Match"
@@ -461,7 +527,7 @@
             "Value": 50
         },
         "PageData": {
-            "Requirments": {
+            "PageRequirements": {
                 "ConflictingPages": [],
                 "IncompatiblePages": [],
                 "TitleReq": "Match"
@@ -501,7 +567,7 @@
             "Value": 50
         },
         "PageData": {
-            "Requirments": {
+            "PageRequirements": {
                 "ConflictingPages": [],
                 "IncompatiblePages": [],
                 "TitleReq": "Match"
@@ -560,7 +626,7 @@
             "Value": 50
         },
         "PageData": {
-            "Requirments": {
+            "PageRequirements": {
                 "ConflictingPages": [],
                 "IncompatiblePages": [],
                 "TitleReq": "Match"
@@ -630,7 +696,7 @@
             "Value": 50
         },
         "PageData": {
-            "Requirments": {
+            "PageRequirements": {
                 "ConflictingPages": [],
                 "IncompatiblePages": [],
                 "TitleReq": "Match"
@@ -700,7 +766,7 @@
             "Value": 50
         },
         "PageData": {
-            "Requirments": {
+            "PageRequirements": {
                 "ConflictingPages": [],
                 "IncompatiblePages": [],
                 "TitleReq": "Match"
@@ -771,7 +837,7 @@
             "Value": 50
         },
         "PageData": {
-            "Requirments": {
+            "PageRequirements": {
                 "ConflictingPages": [],
                 "IncompatiblePages": [],
                 "TitleReq": "Match"
@@ -812,7 +878,7 @@
             "Value": 50
         },
         "PageData": {
-            "Requirments": {
+            "PageRequirements": {
                 "ConflictingPages": [],
                 "IncompatiblePages": [],
                 "TitleReq": "Match"
@@ -866,7 +932,7 @@
             "Value": 50
         },
         "PageData": {
-            "Requirments": {
+            "PageRequirements": {
                 "ConflictingPages": [],
                 "IncompatiblePages": [],
                 "TitleReq": "Match"

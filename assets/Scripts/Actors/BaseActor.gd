@@ -263,6 +263,16 @@ func get_action_key_list()->Array:
 		return list
 	return get_load_val("AiData", {}).get("ActionsArr", [])
 
+
+func get_effect_immunity()->Array:
+	var immunities = actor_data.get("ImmuneToEffects", [])
+	immunities.append_array(effects.get_effect_immunities())
+	return immunities
+
+
+########################
+##      Weapons       ##
+########################
 func get_weapon_attack_target_params(target_param_key)->TargetParameters:
 	var weapon = equipment.get_primary_weapon()
 	if weapon:
@@ -290,18 +300,30 @@ func get_weapon_damage_datas(weapon_filter)->Dictionary:
 	var out_dict = {}
 	var weapons = equipment.get_filtered_weapons(weapon_filter)
 	var index = 0
+	var weapon_mods = get_wepaon_mods()
 	for weapon:BaseWeaponEquipment in weapons:
-			var weapon_damage = weapon.get_damage_datas()
-			for key in weapon_damage.keys():
-				var sub_key = "Weapon" + str(index) + ":" + key
-				out_dict[sub_key] = weapon_damage[key]
-			index += 1
+		var weapon_damage = weapon.get_damage_datas()
+		var applicable_mods = weapon_mods.get(weapon.Id, {})
+		for damage_data_key in weapon_damage.keys():
+			var sub_key = "Weapon" + str(index) + ":" + damage_data_key
+			var damage_data = weapon_damage[damage_data_key].duplicate(true)
+			for weapon_mod in applicable_mods.values():
+				var mod_datas = weapon_mod.get("WeaponMods", {})
+				for mod_data in mod_datas.values():
+					var prop_key = mod_data.get("ModProperty", "")
+					if !prop_key:
+						continue
+					var new_prop_val = mod_data.get("ModValue")
+					var org_prop_val = damage_data.get(prop_key)
+					var mod_type = mod_data.get("ModType", "")
+					if mod_type != "Set":
+						printerr("Unsuported WeaponMod Type: " + str(mod_type))
+						continue
+					damage_data[prop_key] = new_prop_val
+			out_dict[sub_key] = damage_data
+			
+		index += 1
 	return out_dict
-
-func get_effect_immunity()->Array:
-	var immunities = actor_data.get("ImmuneToEffects", [])
-	immunities.append_array(effects.get_effect_immunities())
-	return immunities
 
 func get_targeting_mods()->Array:
 	var out_list = []
@@ -337,6 +359,7 @@ func get_attack_mods()->Dictionary:
 	var mods_list = []
 	mods_list.append_array(effects.get_attack_mods().values())
 	mods_list.append_array(pages.get_attack_mods().values())
+	mods_list.append_array(equipment.get_attack_mods().values())
 	for mod_data in mods_list:
 		var mod_key = mod_data['AttackModKey']
 		var mod_id = mod_key 
@@ -358,6 +381,93 @@ func get_attack_mods()->Dictionary:
 		out_dict[mod_id] = mod_data
 	return out_dict
 
+## Returns nested Dic of "Weapon_Id": { "WepaonModId": { Mod data } }
+func get_wepaon_mods()->Dictionary:
+	var out_dict = {}
+	var mods_list = []
+	#mods_list.append_array(effects.get_weapon_mods().values())
+	mods_list.append_array(pages.get_weapon_mods().values())
+	
+	var all_hand_items = equipment.list_all_tools_in_hands()
+	
+	for mod_data in mods_list:
+		# Check if mod applies
+		if not _does_weapon_mod_apply_to_actor(mod_data):
+			continue
+		
+		var mod_key = mod_data['WeaponModKey']
+		var mod_id = mod_key 
+		if mod_data.get("CanStack", false):
+			mod_id = mod_key + ":" + Id
+		mod_data['WeaponModId'] = mod_id
+		mod_data['SourceActorId'] = Id
+		
+		for tool:BaseToolEquipment in all_hand_items:
+			if not _does_weapon_mod_apply_to_item(mod_data, tool):
+				continue
+			if not out_dict.has(tool.Id):
+				out_dict[tool.Id] = {}
+			out_dict[tool.Id][mod_id] = mod_data.duplicate()
+		
+	return out_dict
+
+func _does_weapon_mod_apply_to_actor(mod_data:Dictionary)->bool:
+	var conditions:Dictionary = mod_data.get("Conditions", {})
+	# No Conditions
+	if conditions.size() == 0:
+		return true
+	# Check Actor Tag Requirements
+	if conditions.has("ActorTagFilters"):
+		if not TagHelper.check_tag_filters("ActorTagFilters", conditions, self):
+			return false
+	
+	# Check MainHand Requirements
+	var main_hand_req = conditions.get("RequireMainHand", "Ignore")
+	var primary_weapon = equipment.get_primary_weapon()
+	
+	if main_hand_req == "Empty" and primary_weapon:
+		return false
+	elif main_hand_req == "Require" and not primary_weapon:
+		return false
+	if conditions.has("MainHandTagFilters"):
+		if not TagHelper.check_tag_filters("MainHandTagFilters", conditions, primary_weapon):
+			return false
+	
+	# Check OffHand Requirements
+	var off_hand_req = conditions.get("RequireOffHand", "Ignore")
+	var offhand_items = equipment.list_tools_in_offhands()
+	
+	if off_hand_req == "Empty" and offhand_items.size() > 0:
+		return false
+	elif (off_hand_req == "All" or off_hand_req == "Any") and offhand_items.size() == 0:
+		return false
+		
+	if conditions.has("OffHandTagFilters"):
+		var require_all = off_hand_req == "Any"
+		var offhands_valid = not require_all # All: True until false | Any: False until true
+		for off_hand_item in offhand_items:
+			# Item is match
+			if TagHelper.check_tag_filters("OffHandTagFilters", conditions, off_hand_item):
+				# All needed to match
+				if not require_all:
+					offhands_valid = true
+					break
+			# Only one needed to match
+			elif require_all:
+				offhands_valid = false
+		if not offhands_valid:
+			return false
+	return true
+
+func _does_weapon_mod_apply_to_item(mod_data:Dictionary, item:BaseToolEquipment)->bool:
+	var conditions:Dictionary = mod_data.get("Conditions", {})
+	# No Conditions
+	if conditions.size() == 0:
+		return true
+	if conditions.has("TagFilters"):
+		if not TagHelper.check_tag_filters("TagFilters", conditions, item):
+			return false
+	return true
 
 func get_hands_conditions_for_tool(tool:BaseToolEquipment)->Dictionary:
 	var equipment_data = actor_data.get("EquipmentData", {})

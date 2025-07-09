@@ -156,11 +156,11 @@ func get_auto_hand_index(item:BaseItem, requested_slot_index:int, allow_replace:
 				is_going_to_mainhand = false
 		
 	else: # Requested OffHand slot
-		if (# Non-OffHand Tool, push to MainHand
-			not _can_use_tool_in_offhand(tool)
-			# Could MainHand and MainHand is empty, push to MainHand
-			or (_can_use_tool_in_mainhand(tool) and _raw_item_slots[firsthand_index] == null)
-		):
+		# Non-OffHand Tool, push to MainHand
+		if not _can_use_tool_in_offhand(tool):
+			return firsthand_index
+		# Could MainHand and MainHand is empty, push to MainHand
+		if _can_use_tool_in_mainhand(tool) and _raw_item_slots[firsthand_index] == null:
 			return firsthand_index
 		# We are 2Hand and current tool can't be 1hand, Push to main
 		if is_two_handing():
@@ -298,9 +298,9 @@ func _can_use_tool_in_offhand(item:BaseToolEquipment):
 	
 	var main_hand_tool = get_first_hand_tool()
 	for offhand_req in hand_conditions.get("OffHandReq", []):
-		if TagHelper.check_tag_filters("MainHandTagFilters", offhand_req, main_hand_tool):
-			return true
-	return false
+		if not TagHelper.check_tag_filters("MainHandTagFilters", offhand_req, main_hand_tool):
+			return false
+	return true
 
 func _can_use_tool_in_one_hands(item:BaseToolEquipment):
 	var hand_conditions = _actor.get_hands_conditions_for_tool(item)

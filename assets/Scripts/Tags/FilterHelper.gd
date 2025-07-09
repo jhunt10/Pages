@@ -41,6 +41,8 @@ static func check_tag_filters(propname:String, condition_data:Dictionary, object
 	if not object:
 		printerr("TagHelper.check_tag_filters: Null Object provided")
 		return false
+	if filters.size() == 0:
+		return true
 	var obj_tags = object.get_tags()
 	for filter:Dictionary in filters:
 		var is_match = filters_accept_tags(filter, obj_tags)

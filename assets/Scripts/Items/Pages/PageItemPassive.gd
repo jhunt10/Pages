@@ -21,7 +21,7 @@ func get_effect_def():
 		return EffectLibrary.get_merged_effect_def(effect_key, effect_data)
 	return null
 
-func get_item_tags()->Array:
+func get_tags()->Array:
 	var tags = []
 	tags = super()
 	if not tags.has("Passive"):

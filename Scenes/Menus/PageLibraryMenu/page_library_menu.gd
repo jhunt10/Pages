@@ -182,11 +182,14 @@ func get_tags()->Array:
 
 func on_tag_filter_selected(index:int):
 	var tag = tag_filter.get_current_option_text()
+	var show_count = 0
 	for entry:BaseObjectDetailsEntryContainer in page_entries.values():
 		if tag == "All" or entry.thing_tags.has(tag):
 			entry.show()
+			show_count += 1
 		else:
 			entry.hide()
+	showing_label.text = str(show_count)
 
 
 func _on_cat_button_pressed():

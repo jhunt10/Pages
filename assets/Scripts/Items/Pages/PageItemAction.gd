@@ -30,7 +30,7 @@ func _cache_after_loading_def():
 		for tparm_key in targ_parms.keys():
 			_target_params[tparm_key] = TargetParameters.new(tparm_key, targ_parms[tparm_key])
 
-func get_item_tags()->Array:
+func get_tags()->Array:
 	var tags = []
 	tags = super()
 	if not tags.has("Action"):

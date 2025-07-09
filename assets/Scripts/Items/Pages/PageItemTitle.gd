@@ -12,7 +12,7 @@ func _init(key:String, def_load_path:String, def:Dictionary, id:String='', data:
 func get_rarity_background()->Texture2D:
 	return ItemHelper.get_rarity_background(BaseItem.ItemRarity.Unique, false)
 
-func get_item_tags()->Array:
+func get_tags()->Array:
 	var tags = []
 	tags = super()
 	if not tags.has("Title"):

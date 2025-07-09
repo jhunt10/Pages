@@ -217,7 +217,7 @@ func should_item_be_visible(item:BaseItem):
 	var count = PlayerInventory.get_item_stack_count(item.ItemKey)
 	if count == 0:
 		return false
-	var tags = item.get_item_tags()
+	var tags = item.get_tags()
 	for f_filter in _forced_filters:
 		if f_filter.begins_with("Not:"):
 			if tags.has(f_filter.trim_prefix("Not:")):

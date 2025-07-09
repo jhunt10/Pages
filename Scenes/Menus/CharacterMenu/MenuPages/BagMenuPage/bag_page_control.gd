@@ -29,15 +29,17 @@ func _process(delta: float) -> void:
 
 func set_actor(actor:BaseActor):
 	if _actor and _actor != actor:
-		_actor.items.items_changed.disconnect(build_sub_containers)
-		_actor.equipment_changed.disconnect(actor_equipment_changed)
+		_actor.items.items_changed.disconnect(_sync)
+		_actor.equipment_changed.disconnect(_sync)
 	if actor != _actor:
-		actor.items.items_changed.connect(build_sub_containers)
-		actor.equipment_changed.connect(actor_equipment_changed)
+		actor.items.items_changed.connect(_sync)
+		actor.equipment_changed.connect(_sync)
 	_actor = actor
-	actor_equipment_changed()
+	_sync()
 
-func actor_equipment_changed():
+func _sync():
+	if not self.is_visible_in_tree():
+		return
 	#var bag = _actor.equipment.get_equipt_items_of_slot_type("Bag")
 	#if !ques or ques.size() == 0:
 		#name_label.text = "No Bag!"
