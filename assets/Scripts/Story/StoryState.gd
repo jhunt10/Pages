@@ -78,9 +78,11 @@ func start_new_story():
 	_total_play_time = 0
 	
 	story_id = "Story:" + str(ResourceUID.create_id())
-	var player_id = "Player_1:" + str(ResourceUID.create_id())
-	var _new_player = ActorLibrary.create_actor("SoldierTemplate", {}, player_id)
-	_party_actor_ids = [player_id]
+	var player_actor_keys = ["SoldierTemplate", "RogueTemplate", "MageTemplate", "PriestTemplate"]
+	for i in range(player_actor_keys.size()):
+		var player_id = "Player_" + str(i) + ":" + str(ResourceUID.create_id())
+		var _new_player = ActorLibrary.create_actor(player_actor_keys[i], {}, player_id)
+		_party_actor_ids = [player_id]
 	
 	_session_start_unix_time = Time.get_unix_time_from_system()
 	_story_stage_index = -1

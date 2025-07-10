@@ -91,10 +91,8 @@ static func create_class_def_files(thing_name:String):
 		DirAccess.make_dir_absolute(spites_dir_path)
 		
 static func DoThing():
-	print("\nWait.")
-	print("\nWait..")
-	print("\nWait...")
-	print("\nGo")
+	print("\nSanity Check")
+	SAVE_DEF_UPDATE = true
 	update_def_files()
 	#scan_def_props()
 	#create_class_def_files("Rogue")
@@ -120,20 +118,8 @@ static func get_def_class_type(file_name, other_files)->String:
 			obj_type = 'Item'
 	return obj_type
 
-static func update_def_files():
-	var files = []
-	print("\n Updating Files:")
-	files.append_array(BaseLoadObjectLibrary._search_for_files("res://ObjectDefs/", "Defs.def"))
-	#files.append_array(BaseLoadObjectLibrary._search_for_files("res://defs/", "Defs.json"))
-	#files.append_array(BaseLoadObjectLibrary._search_for_files("res://data/", "Defs.json"))
-	for file:String in files:
-		update_def_file(file)
-		#var file_name = file.get_file()
-		#if file_name.contains("ActionPages_ItemDefs.json"):
-			#continue
-		#var obj_type = get_def_class_type(file_name, files)
-		#print("%s \t|\tFileName: %s" % [obj_type, file_name])
-		#break
+
+
 static func scan_def_props():
 	var files = []
 	files.append_array(BaseLoadObjectLibrary._search_for_files("res://ObjectDefs/", "Defs.def"))
@@ -157,25 +143,111 @@ static func scan_def_props():
 
 const DefVersion = "1"
 
+# Throw stuff in here to be printed after the update (or while deving update)
+static var print_data_cache:Dictionary = {}
 
-static func update_def_file(file_path):
+# Dynamic Func for applying update_def(..)
+static func update_def_files():
+	var files = []
+	if SAVE_DEF_UPDATE:
+		print("\n Updating Files:")
+	else:
+		print("\n (NOT) Updating Files:")
+	print_data_cache.clear()
+	files.append_array(BaseLoadObjectLibrary._search_for_files("res://ObjectDefs/", "_ItemDefs.def"))
+	for file:String in files:
+		update_def_file(file)
+	print(print_data_cache)
+
+# Dynamic Func for applying update_def(..)
+static func update_def_file(file_path:String):
 	var file = FileAccess.open(file_path, FileAccess.READ)
 	var text:String = file.get_as_text()
 	file.close()
-	
 	var new_defs = {}
 	var old_defs:Dictionary = JSON.parse_string(text)
+	
+	if not should_update(file_path, old_defs):
+		return
+	var new_file_name = file_path.get_file()
+	new_file_name = update_file_path(file_path, new_file_name, old_defs)
+	#print(file_path)
+	var path = file_path.get_base_dir()
 	for old_def_key in old_defs.keys():
 		var key_and_def = update_def(file_path, old_def_key, old_defs[old_def_key])
 		var new_key = key_and_def[0]
 		var new_def = key_and_def[1]
+		if key_and_def.size() > 2:
+			new_file_name = key_and_def[2]
 		new_defs[new_key] = new_def
-		
-	var save_file = FileAccess.open(file_path, FileAccess.WRITE)
-	save_file.store_string(JSON.stringify(new_defs))
-	save_file.close()
+	var save_path = path.path_join(new_file_name)
+	if SAVE_DEF_UPDATE:
+		var save_file = FileAccess.open(save_path, FileAccess.WRITE)
+		print("Saving File: " + save_path)
+		save_file.store_string(JSON.stringify(new_defs))
+		save_file.close()
+		if save_path != file_path:
+			print("Deleting File: " + file_path)
+			DirAccess.remove_absolute(file_path)
+	else:
+		var old_file_name = file_path.get_file()
+		print(old_file_name + "\t>\t" +save_path)
 
+static var SAVE_DEF_UPDATE = true
+
+
+static func should_update(old_file_path:String, defs:Dictionary)->bool:
+	var is_pages = false
+	for def in defs.values():
+		var object_script = def.get("!ObjectScript", "")
+		if (object_script == "res://assets/Scripts/Items/Pages/PageItemAction.gd"
+			or object_script == "res://assets/Scripts/Items/Pages/PageItemPassive.gd"):
+				is_pages = true
+	return is_pages
+
+# Template
+static func _update_def(file_path:String, def_key:String, def:Dictionary)->Array:
+	var object_script = def.get("!ObjectScript", "")
+	if not (object_script == "res://assets/Scripts/Items/Pages/PageItemAction.gd"
+		or object_script == "res://assets/Scripts/Items/Pages/PageItemPassive.gd"):
+			return [def_key, def]
+	return [def_key, def]
+
+
+static func update_file_path(old_file_path:String, old_file_name:String, defs:Dictionary)->String:
+	var base_file_name = old_file_name.replace("Pages", "").replace("_ItemDefs.def", "")
+	if old_file_path.contains("ClassDefs") and (base_file_name.ends_with("Passive") or base_file_name.ends_with("Action")):
+		base_file_name += "s"
+	return base_file_name + "_PageDefs.def"
+		
+
+# Rebasing Pages to BaseItem (not Equipment), moving EquipmentData under PageData
 static func update_def(file_path:String, def_key:String, def:Dictionary)->Array:
+	return [def_key, def]
+	var object_script = def.get("!ObjectScript", "")
+	if not (object_script == "res://assets/Scripts/Items/Pages/PageItemAction.gd"
+		or object_script == "res://assets/Scripts/Items/Pages/PageItemPassive.gd"):
+			#print("Skipping " + def_key)
+			return [def_key, def]
+	
+	var equipment_data = def.get("EquipmentData", {})
+	if not print_data_cache.keys().has("EquipDataProps"):
+		print_data_cache['EquipDataProps'] = []
+	
+	for key in equipment_data.keys():
+		if not print_data_cache['EquipDataProps'].has(key):
+			print_data_cache['EquipDataProps'].append(key)
+	
+	var page_data = def.get("PageData", {})
+	if not print_data_cache.keys().has("PageDataProps"):
+		print_data_cache['PageDataProps'] = []
+	for key in page_data.keys():
+		if not print_data_cache['PageDataProps'].has(key):
+			print_data_cache['PageDataProps'].append(key)
+	return [def_key, def]
+
+
+static func update_def__old_taxonomy(file_path:String, def_key:String, def:Dictionary)->Array:
 	var object_script = def.get("!ObjectScript", "")
 	# [Actor, Effect, Item] 
 	var object_type = ''

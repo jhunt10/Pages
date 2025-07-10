@@ -3,15 +3,15 @@ class_name BaseLoadObjectLibrary
 const LOGGING = true
 const OBJECTS_DEFS_DIR = "res://ObjectDefs/"
 const OBJECTS_DATA_DIR = "res://saves/"
-
+const DEF_FILE_EXTENTION = ".def"
 func get_object_name()->String:
 	return 'Object'
 func get_object_key_name()->String:
 	return "ObjectKey"
-func get_def_file_sufix()->String:
-	return "_Object.json"
+func get_def_file_sufixes()->Array:
+	return ["_Object"]
 func get_data_file_sufix()->String:
-	return "_Object.json"
+	return "_Object"
 func is_object_static(object_def:Dictionary)->bool:
 	return object_def.get("IsStatic", false)
 func get_object_script_path(object_def:Dictionary)->String:
@@ -180,31 +180,41 @@ func reload():
 	#_loaded_objects.clear()
 	#init_load()
 
-func _load_object_defs(file_sufix = ''):
+func _load_object_defs(file_sufixes=null):
 	var parent_to_child_mapping = {}
 	var child_to_parent_mapping = {}
 	var paths =[]
 	#paths.append('res://defs/')
 	paths.append(OBJECTS_DEFS_DIR)
-	# TODO: Remove Hack
-	if file_sufix == '':
-		file_sufix = get_def_file_sufix().replace(".json", ".def")
+	
+	if file_sufixes:
+		if file_sufixes is String:
+			if file_sufixes != '':
+				file_sufixes = [file_sufixes]
+			else:
+				printerr("No File Sufix")
+				return
 	else:
-		var t = true
+		file_sufixes = get_def_file_sufixes()
 	# Load Defs all defs into temp dict
 	var temp_defs = {}
+	var found_files = []
 	for path in paths:
-		# TODO: Remove Def/Json swap
-		for def_file in _search_for_files(path, file_sufix):
-			if LOGGING: print("# Loading Def file: %s" % [def_file])
-			var loading_defs = _load_object_def_file(def_file)
-			for loading_key in loading_defs.keys():
-				if temp_defs.has(loading_key):
-					printerr("%sLibrary.load_object_defs: Duplicate LoadObjects found with key '%s'. " % [get_object_name(), loading_key])
-					continue
-				temp_defs[loading_key] = loading_defs[loading_key]
-				var parent_key = loading_defs[loading_key].get("!ParentKey", "")
-				child_to_parent_mapping[loading_key] = parent_key
+		for sufix in file_sufixes:
+			for file in _search_for_files(path, sufix + DEF_FILE_EXTENTION):
+				if not found_files.has(file):
+					found_files.append(file)
+	
+	for def_file in found_files:
+		if LOGGING: print("# Loading Def file: %s" % [def_file])
+		var loading_defs = _load_object_def_file(def_file)
+		for loading_key in loading_defs.keys():
+			if temp_defs.has(loading_key):
+				printerr("%sLibrary.load_object_defs: Duplicate LoadObjects found with key '%s'. " % [get_object_name(), loading_key])
+				continue
+			temp_defs[loading_key] = loading_defs[loading_key]
+			var parent_key = loading_defs[loading_key].get("!ParentKey", "")
+			child_to_parent_mapping[loading_key] = parent_key
 	
 	# With all defs in temp_defs, build chain from child to base 
 	var def_to_family_chain = {} # DefKey mapped to Array of keys from parent to base

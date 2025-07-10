@@ -3,6 +3,7 @@ class_name InventoryContainer
 extends Control
 
 var event_context = "Inventory"
+var selection_context:String = "Pages"
 signal item_button_down(context, item_key, index, offset)
 signal item_button_up(context, item_key, index)
 signal mouse_enter_item(context, item_key, index)

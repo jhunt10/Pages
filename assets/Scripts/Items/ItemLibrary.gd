@@ -9,10 +9,10 @@ func get_object_name()->String:
 	return 'Item'
 func get_object_key_name()->String:
 	return "ItemKey"
-func get_def_file_sufix()->String:
-	return "_ItemDefs.json"
+func get_def_file_sufixes()->Array:
+	return ["_ItemDefs", "_PageDefs"]
 func get_data_file_sufix()->String:
-	return "_ItemSave.json"
+	return "_ItemSave"
 func is_object_static(object_def:Dictionary)->bool:
 	#if object_def.get("ItemData", {}).get("ItemType", "") == "Page":
 		#return true

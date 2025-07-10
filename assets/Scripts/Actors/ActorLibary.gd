@@ -9,10 +9,10 @@ func get_object_name()->String:
 	return 'Actor'
 func get_object_key_name()->String:
 	return "ActorKey"
-func get_def_file_sufix()->String:
-	return "_ActorDefs.json"
+func get_def_file_sufixes()->Array:
+	return ["_ActorDefs"]
 func get_data_file_sufix()->String:
-	return "_ActorSave.json"
+	return "_ActorSave"
 func get_object_script_path(object_def:Dictionary)->String:
 	return "res://assets/Scripts/Actors/BaseActor.gd"
 

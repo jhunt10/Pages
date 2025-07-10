@@ -14,10 +14,10 @@ func get_object_name()->String:
 	return 'Effect'
 func get_object_key_name()->String:
 	return "EffectKey"
-func get_def_file_sufix()->String:
-	return "_EffectDefs.json"
+func get_def_file_sufixes()->Array:
+	return ["_EffectDefs"]
 func get_data_file_sufix()->String:
-	return "_EffectsSave.json"
+	return "_EffectsSave"
 func is_object_static(object_def:Dictionary)->bool:
 	return false
 func get_object_script_path(object_def:Dictionary)->String:

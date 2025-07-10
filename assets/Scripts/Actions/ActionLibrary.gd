@@ -14,10 +14,10 @@ func get_object_name()->String:
 	return 'Action'
 func get_object_key_name()->String:
 	return "ActionKey"
-func get_def_file_sufix()->String:
-	return "_ActionDefs.json"
+func get_def_file_sufixes()->Array:
+	return ["_ActionDefs"]
 func get_data_file_sufix()->String:
-	return "_ActionDefs.json"
+	return "_ActionDefs"
 func is_object_static(object_def:Dictionary)->bool:
 	return true
 #func get_object_script_path(object_def:Dictionary)->String:
