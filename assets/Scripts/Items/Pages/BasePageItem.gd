@@ -1,5 +1,5 @@
 class_name BasePageItem
-extends BaseEquipmentItem
+extends BaseItem
 
 var page_data:Dictionary:
 	get:
@@ -11,6 +11,10 @@ func get_item_type()->ItemTypes:
 func _init(key:String, def_load_path:String, def:Dictionary, id:String='', data:Dictionary={}) -> void:
 	super(key, def_load_path, def, id, data)
 
+## Returns what sub data has Mods
+func get_data_containing_mods()->Dictionary:
+	return page_data
+
 func get_tags()->Array:
 	var tags = []
 	tags = super()
@@ -20,6 +24,17 @@ func get_tags()->Array:
 	if source_title and not tags.has(source_title+"Page"):
 		tags.append(source_title+"Page")
 	return tags
+
+func has_spite_sheet()->bool:
+	return page_data.get("SpriteData", {}).has('SpriteSheet')
+func get_sprite_sheet_file_path():
+	var file_name = page_data.get("SpriteData", {}).get('SpriteSheet', null)
+	if !file_name:
+		return null
+	return _def_load_path.path_join(file_name)
+
+func get_tags_added_to_actor()->Array:
+	return page_data.get("AddTags", [])
 
 ## Returns a diction of failed requirements, mapped by requirment type 
 func get_cant_use_reasons(actor:BaseActor):
