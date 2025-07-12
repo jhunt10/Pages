@@ -30,6 +30,8 @@ var _buttons:Array = []
 var _current_dot_index:int = 0
 var _dot_index_to_set_containers:Dictionary = {}
 
+var _que_rebuild:bool = false
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	#premade_sub_container.visible = false
@@ -58,12 +60,17 @@ func set_actor(actor:BaseActor):
 	if _actor and _actor != actor:
 		_actor.equipment_changed.disconnect(actor_equipment_changed)
 		_actor.pages.items_changed.disconnect(build_sub_containers)
+		_actor.pages.item_slots_rebuilt.disconnect(actor_slots_rebuild)
 	if actor != _actor:
 		actor.equipment_changed.connect(actor_equipment_changed)
 		actor.pages.items_changed.connect(build_sub_containers)
+		actor.pages.item_slots_rebuilt.connect(actor_slots_rebuild)
 	_actor = actor
 	action_input_preview.set_actor(_actor)
 	build_sub_containers()
+
+func actor_slots_rebuild():
+	_que_rebuild = true
 
 func actor_equipment_changed():
 	_sync_page_slots()
@@ -88,7 +95,11 @@ func build_sub_containers():
 	var last_display_name = ''
 	var raw_index = 1
 	var slot_set_datas = _actor.pages.slot_sets_data
-	var has_extra_slots = slot_set_datas.size() > 3
+	var set_names = []
+	for slot_set_data in slot_set_datas:
+		if not set_names.has(slot_set_data.get("DisplayName", "")):
+			set_names.append(slot_set_data.get("DisplayName", ""))
+	var has_extra_slots = set_names.size() > 3
 	for slot_set_data in _actor.pages.slot_sets_data:
 		var slot_key = slot_set_data['Key']
 		if slot_key == "TitlePage":
@@ -158,8 +169,19 @@ func build_sub_containers():
 		scroll_dots.show()
 
 func _sync_page_slots():
+	if _que_rebuild:
+		build_sub_containers()
+		_que_rebuild = false
+	var slot_count = _actor.pages._raw_item_slots.size()
+	print("_sync_page_slots: Slot Count: %s | Buttons: %s" % [slot_count, _buttons.size()])
 	for index in range(_actor.pages._raw_item_slots.size()):
 		var page:BasePageItem = _actor.pages.get_item_in_slot(index)
+		if page:
+			print("%s: %s" % [index, page.Id])
+		else:
+			print("%s: %s" % [index, "NULL"])
+		if index == 9:
+			var t = true
 		if _buttons.size() > index:
 			var page_button:PageSlotButton = _buttons[index]
 			if page:

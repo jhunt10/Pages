@@ -8,9 +8,11 @@ extends Node2D
 @export var offset_node:Node2D
 
 var vfx_nodes = {}
+var self_id
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	self_id =  str(ResourceUID.create_id())
 	if flash_text_controller:
 		if not flash_text_controller.visible:
 			flash_text_controller.show()
@@ -20,6 +22,10 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
+func get_host_id()->String:
+	if actor_node and actor_node.Actor:
+		return actor_node.Actor.Id
+	return self_id
 
 func add_vfx(vfx_node:BaseVfxNode):
 	if vfx_nodes.keys().has(vfx_node.id):

@@ -2,12 +2,12 @@
     "HealthPotionL": {
         "!ObjectScript": "res://assets/Scripts/Items/Supplies/Potions/HealthPotionSupplyItem.gd",
         "#ObjDetails": {
-            "Description": "A powerful potion that heals for 100% Health.",
+            "Description": "A powerful potion that heals for @@#Color:Red:100% Max Health@@.",
             "DisplayName": "Heal L",
             "LargeIcon": "Sprites/HealthPotion_L_L.png",
             "ObjectType": "Item",
             "SmallIcon": "Sprites/HealthPotion_L_S.png",
-            "SnippetDesc": "Regen 100% Health",
+            "SnippetDesc": "Heal 100% Max Health",
             "Tags": [
                 "Potion"
             ],
@@ -32,12 +32,12 @@
     "HealthPotionM": {
         "!ObjectScript": "res://assets/Scripts/Items/Supplies/Potions/HealthPotionSupplyItem.gd",
         "#ObjDetails": {
-            "Description": "A moderate potion that heals for 50% Health.",
+            "Description": "A moderate potion that heals for @@#Color:Red:50% Max Health@@.",
             "DisplayName": "Heal M",
             "LargeIcon": "Sprites/HealthPotion_M_L.png",
             "ObjectType": "Item",
             "SmallIcon": "Sprites/HealthPotion_M_S.png",
-            "SnippetDesc": "Regen 50% Health",
+            "SnippetDesc": "Heal 50% Max Health",
             "Tags": [
                 "Potion"
             ],
@@ -62,12 +62,12 @@
     "HealthPotionS": {
         "!ObjectScript": "res://assets/Scripts/Items/Supplies/Potions/HealthPotionSupplyItem.gd",
         "#ObjDetails": {
-            "Description": "A weak potion that heals for 25% Health.",
+            "Description": "A weak potion that heals for @@#Color:Red:25% Max Health@@.",
             "DisplayName": "Heal S",
             "LargeIcon": "Sprites/HealthPotion_S_L.png",
             "ObjectType": "Item",
             "SmallIcon": "Sprites/HealthPotion_S_S.png",
-            "SnippetDesc": "Regen 25% Health",
+            "SnippetDesc": "Heal 25% Max Health",
             "Tags": [
                 "Potion"
             ],
@@ -92,7 +92,7 @@
     "HurtPotionL": {
         "!ObjectScript": "res://assets/Scripts/Items/Supplies/Potions/HealthPotionSupplyItem.gd",
         "#ObjDetails": {
-            "Description": "A powerful potion that \"heals\" for -100% Health. Usefully for dying.",
+            "Description": "A powerful potion that \"heals\" for @@#Color:Red:-100% Max Health@@. Usefully for dying.",
             "DisplayName": "Hurt L",
             "LargeIcon": "Sprites/HurtPotion_L_L.png",
             "ObjectType": "Item",
@@ -122,7 +122,7 @@
     "HurtPotionM": {
         "!ObjectScript": "res://assets/Scripts/Items/Supplies/Potions/HealthPotionSupplyItem.gd",
         "#ObjDetails": {
-            "Description": "A moderate potion that \"heals\" for -50% Health. Usefully for exsperimentation.",
+            "Description": "A moderate potion that \"heals\" for @@#Color:Red:-50% Max Health@@. Usefully for testing.",
             "DisplayName": "Hurt M",
             "LargeIcon": "Sprites/HurtPotion_M_L.png",
             "ObjectType": "Item",
@@ -152,7 +152,7 @@
     "HurtPotionS": {
         "!ObjectScript": "res://assets/Scripts/Items/Supplies/Potions/HealthPotionSupplyItem.gd",
         "#ObjDetails": {
-            "Description": "A weak potion that \"heals\" for -25% Health. Usefully for exsperimentation.",
+            "Description": "A weak potion that \"heals\" for @@#Color:Red:-25% Max Health@@. Usefully for testing.",
             "DisplayName": "Hurt S",
             "LargeIcon": "Sprites/HurtPotion_S_L.png",
             "ObjectType": "Item",

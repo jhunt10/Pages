@@ -1,1 +1,203 @@
-{"ReloadPage":{"!ObjectScript":"res://assets/Scripts/Items/Pages/PageItemAction.gd","#ObjDetails":{"Description":"Select Ammo from your Bag and use it to Reload one Page.","DisplayName":"Reload","LargeIcon":"Sprites/ReloadIcon.png","ObjectType":"Item","SmallIcon":"Sprites/ReloadIcon.png","SnippetDesc":"Reload a Page","Tags":[],"Taxonomy":["Item","Page","Action"]},"ActionData":{"Preview":{"UseDynamicIcons":true},"SubActions":{"ReloadPage":{"!SubActionScript":"res://assets/Scripts/Actions/SubActions/ItemUsage/SubAct_ReloadPage.gd","#FrameIndex":0,"#SubIndex":0}}},"ItemData":{"ItemType":"Page","Rarity":"Mundane","Value":50},"PageData":{"PageRequirements":{"ConflictingPages":[],"IncompatiblePages":[],"TitleReq":"None"},"SourceTitle":""},"_DefVersion":"1"},"UseItemSelf":{"!ObjectScript":"res://assets/Scripts/Items/Pages/PageItemAction.gd","#ObjDetails":{"Description":"Select an item from your bag and use it on yourself.","DisplayName":"Use Item","LargeIcon":"Sprites/UseItemIcon.png","ObjectType":"Item","SmallIcon":"Sprites/UseItemIcon.png","SnippetDesc":"Use item on self","Tags":[],"Taxonomy":["Item","Page","Action"]},"ActionData":{"Preview":{"PreviewTargetKey":"Self","UseEquipmentIcon":"Bag"},"SubActions":{"UseItem":{"!SubActionScript":"res://assets/Scripts/Actions/SubActions/ItemUsage/SubAct_UseItem.gd","#FrameIndex":11,"#SubIndex":0}}},"ItemData":{"ItemType":"Page","Rarity":"Mundane","Value":50},"PageData":{"PageRequirements":{"ConflictingPages":[],"IncompatiblePages":[],"TitleReq":"None"},"SourceTitle":""},"_DefVersion":"1"},"UsePotionSelf":{"!ObjectScript":"res://assets/Scripts/Items/Pages/PageItemAction.gd","#ObjDetails":{"Description":"Select one Potion from your Bag and drink it for yourself.","DisplayName":"Drink Potion","LargeIcon":"Sprites/Potion_Icon.png","ObjectType":"Item","SmallIcon":"Sprites/Potion_Icon.png","SnippetDesc":"Drink a Potion from your bag.","Tags":[],"Taxonomy":["Item","Page","Action"]},"ActionData":{"Preview":{"UseDynamicIcons":true},"SubActions":{"UseItem":{"!SubActionScript":"res://assets/Scripts/Actions/SubActions/ItemUsage/SubAct_UseItem.gd","#FrameIndex":11,"#SubIndex":0}}},"ItemData":{"ItemType":"Page","Rarity":"Mundane","Value":50},"PageData":{"PageRequirements":{"ConflictingPages":[],"IncompatiblePages":[],"TitleReq":"None"},"SourceTitle":""},"_DefVersion":"1"}}
+{
+    "ReloadPage": {
+        "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
+        "#ObjDetails": {
+            "Description": "Select Ammo from your Bag and use it to Reload one Page.",
+            "DisplayName": "Reload",
+            "LargeIcon": "Sprites/ReloadIcon.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/ReloadIcon.png",
+            "SnippetDesc": "Reload a Page",
+            "Tags": [],
+            "Taxonomy": [
+                "Item",
+                "Page",
+                "Action"
+            ]
+        },
+        "ActionData": {
+            "Preview": {
+                "UseDynamicIcons": true
+            },
+            "SubActions": {
+                "ReloadPage": {
+                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/ItemUsage/SubAct_ReloadPage.gd",
+                    "#FrameIndex": 0,
+                    "#SubIndex": 0
+                }
+            }
+        },
+        "ItemData": {
+            "ItemType": "Page",
+            "Rarity": "Mundane",
+            "Value": 50
+        },
+        "PageData": {
+            "PageRequirements": {
+                "ConflictingPages": [],
+                "IncompatiblePages": [],
+                "TitleReq": "None"
+            },
+            "SourceTitle": ""
+        },
+        "_DefVersion": "1"
+    },
+    "#UseItemSelf": {
+        "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
+        "#ObjDetails": {
+            "Description": "Select an item from your bag and use it on yourself.",
+            "DisplayName": "Use Item",
+            "LargeIcon": "Sprites/UseItemIcon.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/UseItemIcon.png",
+            "SnippetDesc": "Use item on self",
+            "Tags": [],
+            "Taxonomy": [
+                "Item",
+                "Page",
+                "Action"
+            ]
+        },
+        "ActionData": {
+            "Preview": {
+                "PreviewTargetKey": "Self",
+                "UseEquipmentIcon": "Bag"
+            },
+            "SubActions": {
+                "UseItem": {
+                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/ItemUsage/SubAct_UseItem.gd",
+                    "#FrameIndex": 11,
+                    "#SubIndex": 0
+                }
+            }
+        },
+        "ItemData": {
+            "ItemType": "Page",
+            "Rarity": "Mundane",
+            "Value": 50
+        },
+        "PageData": {
+            "PageRequirements": {
+                "ConflictingPages": [],
+                "IncompatiblePages": [],
+                "TitleReq": "None"
+            },
+            "SourceTitle": ""
+        },
+        "_DefVersion": "1"
+    },
+    "UsePotionSelf": {
+        "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
+        "#ObjDetails": {
+            "Description": "Select one Potion from your Bag and drink it for yourself.",
+            "DisplayName": "Drink Potion",
+            "LargeIcon": "Sprites/Potion_Icon.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/Potion_Icon.png",
+            "SnippetDesc": "Drink a Potion from your bag.",
+            "Tags": [],
+            "Taxonomy": [
+                "Item",
+                "Page",
+                "Action"
+            ]
+        },
+        "ActionData": {
+            "Preview": {
+                "UseDynamicIcons": true
+            },
+            "SubActions": {
+                "UseItem": {
+                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/ItemUsage/SubAct_UseItem.gd",
+                    "#FrameIndex": 11,
+                    "#SubIndex": 0
+                }
+            }
+        },
+        "ItemData": {
+            "ItemType": "Page",
+            "Rarity": "Mundane",
+            "Value": 50
+        },
+        "PageData": {
+            "PageRequirements": {
+                "ConflictingPages": [],
+                "IncompatiblePages": [],
+                "TitleReq": "None"
+            },
+            "SourceTitle": ""
+        },
+        "_DefVersion": "1"
+    },
+    
+    "ThrowItemPage": {
+        "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
+        "#ObjDetails": {
+            "Description": "Launch a @@#Color:Magical Missile@@ at @@#TrgParm:TargetParam:TargetType@@ in range, dealing @@#DmgData:MissileDamage@@ to any @@#Color:Red:Actor@@ it hits.",
+            "DisplayName": "#Base Missile Spell",
+            "LargeIcon": "Sprites/ThrowItem_Icon.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/ThrowItem_Icon.png",
+            "SnippetDesc": "Launch a Missile of DAMAGE_TYPE",
+            "Tags": [
+                "Throw"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Page",
+                "Action"
+            ]
+        },
+        "ActionData": {
+            "MissileDatas": {
+                "ThrownItemMissile": {
+                    "FramesPerTile": 3
+                }
+            },
+            "Preview": {
+                "PreviewTargetKey": "TargetParam",
+                "UseDynamicIcons": true
+            },
+            "SubActions": {
+                "GetTarget": {
+                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Targeting/SubAct_GetTarget.gd",
+                    "#FrameIndex": 5,
+                    "#SubIndex": 0,
+                    "AllowAlreadyTargeted": false,
+                    "AllowAutoTarget": false,
+                    "SetTargetKey": "Target1",
+                    "TargetParamKey": "TargetParam"
+                },
+                "SpawnItemMissile": {
+                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/ItemUsage/SubAct_SpawnThrowItemMissile.gd",
+                    "#FrameIndex": 5,
+                    "#SubIndex": 2,
+                    "MissileKey": "ThrownItemMissile",
+                    "TargetKey": "Target1"
+                }
+            },
+            "TargetParams": {
+                "TargetParam": {
+                    "EffectsEnemies": true,
+                    "LineOfSight": true,
+                    "TargetArea": "[[-1,4],[0,4],[1,4],[-2,3],[-1,3],[0,3],[1,3],[2,3],[-1,2],[0,2],[1,2]]",
+                    "TargetType": "Spot"
+                }
+            }
+        },
+        "ItemData": {
+            "ItemType": "Page",
+            "Rarity": "Mundane",
+            "Value": 50
+        },
+        "PageData": {
+            "PageRequirements": {
+                "ConflictingPages": [],
+                "IncompatiblePages": [],
+                "TitleReq": "None"
+            },
+            "SourceTitle": ""
+        },
+        "_DefVersion": "1"
+    },
+}

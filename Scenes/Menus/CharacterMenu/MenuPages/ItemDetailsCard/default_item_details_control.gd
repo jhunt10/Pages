@@ -1,8 +1,8 @@
 class_name DefaultItemDetailsControl
 extends Control
 
-@export var description_box:RichTextLabel
+@export var description_box:DescriptionBox
 
 func set_item(item:BaseItem):
 	if item:
-		description_box.text = item.get_description()
+		description_box.set_object(item._def, item, null)

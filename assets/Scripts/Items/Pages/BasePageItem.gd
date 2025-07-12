@@ -33,8 +33,19 @@ func get_sprite_sheet_file_path():
 		return null
 	return _def_load_path.path_join(file_name)
 
+func get_source_title()->String:
+	return page_data.get("SourceTitle", '')
+
+func is_shareble()->bool:
+	var requirment_data = page_data.get("PageRequirements", {})
+	var title_req = requirment_data.get("TitleReq", '')
+	return title_req == "Shared"
+
 func get_tags_added_to_actor()->Array:
 	return page_data.get("AddTags", [])
+
+func get_extra_page_slots()->Dictionary:
+	return page_data.get("ExtraPageSlots", {})
 
 ## Returns a diction of failed requirements, mapped by requirment type 
 func get_cant_use_reasons(actor:BaseActor):

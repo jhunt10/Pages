@@ -131,6 +131,8 @@ func set_actor(actor:BaseActor):
 	var time_diff = finish_time - start_time
 	print("Finished Set Actor: %s" % Time.get_datetime_string_from_unix_time(finish_time))
 	print("RunTime: %s" % Time.get_time_string_from_unix_time(time_diff))
+	if inventory_container.visible:
+		inventory_container._refilter()
 
 func close_menu():
 	if _actor:
@@ -298,7 +300,7 @@ func on_tab_pressed(tab_name:String):
 		page_page.visible = false
 		bag_page.visible = false
 		inventory_container.clear_forced_filters(false)
-		inventory_container.add_forced_filter(["Equipment", "Not:Page"])
+		inventory_container.set_character_menu_context("Equipment")
 		inventory_tabs_control.set_tabs(["Que", "Bag", "Helm", "Body", "Feet", "Weapon", "OffHand", "Trinket"])
 		
 	if _left_page_context == "Pages":
@@ -306,7 +308,7 @@ func on_tab_pressed(tab_name:String):
 		page_page.visible = true
 		bag_page.visible = false
 		inventory_container.clear_forced_filters(false)
-		inventory_container.add_forced_filter("Page")
+		inventory_container.set_character_menu_context("Page")
 		inventory_tabs_control.set_tabs(["Passive", "Action", "Movement", "Tactic", "Spell"])
 		
 	if _left_page_context == "Bag":
@@ -314,5 +316,5 @@ func on_tab_pressed(tab_name:String):
 		page_page.visible = false
 		bag_page.visible = true
 		inventory_container.clear_forced_filters(false)
-		inventory_container.add_forced_filter("Consumable")
+		inventory_container.set_character_menu_context("Supplies")
 		inventory_tabs_control.set_tabs(["Potion", "Bomb"])

@@ -1,5 +1,5 @@
 {
-    "BaseTitlePage": {
+    "#BaseTitlePage": {
         "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemTitle.gd",
         "#ObjDetails": {
             "Description": "Base Title Page",
@@ -13,12 +13,11 @@
             ],
             "Taxonomy": [
                 "Item",
-                "Equipment",
                 "Page",
                 "Title"
             ]
         },
-        "EquipmentData": {
+        "PageData": {
             "AddTags": [
                 "Soldier"
             ],
@@ -72,14 +71,7 @@
                     "StatName": "Protection",
                     "Value": 0.1
                 }
-            }
-        },
-        "ItemData": {
-            "ItemType": "Page",
-            "Rarity": "Unique",
-            "Value": 50
-        },
-        "PageData": {
+            },
             "PageRequirements": {
                 "ConflictingPages": [],
                 "IncompatiblePages": [],
@@ -87,12 +79,17 @@
             },
             "SourceTitle": "Base"
         },
+        "ItemData": {
+            "ItemType": "Page",
+            "Rarity": "Unique",
+            "Value": 50
+        },
         "PassiveData": {},
         "_DefVersion": "1"
     },
     "MageTitlePage": {
         "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemTitle.gd",
-        "!ParentKey": "BaseTitlePage",
+        "!ParentKey": "#BaseTitlePage",
         "#ObjDetails": {
             "Description": "An Intelligent caster educated by The Collage. Mages focus Magic Spell Pages but lack Defense.",
             "DisplayName": "Mage",
@@ -105,12 +102,11 @@
             ],
             "Taxonomy": [
                 "Item",
-                "Equipment",
                 "Page",
                 "Title"
             ]
         },
-        "EquipmentData": {
+        "PageData": {
             "AddTags": [
                 "Mage"
             ],
@@ -136,14 +132,7 @@
                     "StatName": "Potency",
                     "Value": 0.5
                 }
-            }
-        },
-        "ItemData": {
-            "ItemType": "Page",
-            "Rarity": "Unique",
-            "Value": 50
-        },
-        "PageData": {
+            },
             "PageRequirements": {
                 "ConflictingPages": [],
                 "IncompatiblePages": [],
@@ -152,12 +141,17 @@
             "SourceTitle": "Mage",
             "TitleColor": "FF0000"
         },
+        "ItemData": {
+            "ItemType": "Page",
+            "Rarity": "Unique",
+            "Value": 50
+        },
         "PassiveData": {},
         "_DefVersion": "1"
     },
     "PriestTitlePage": {
         "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemTitle.gd",
-        "!ParentKey": "BaseTitlePage",
+        "!ParentKey": "#BaseTitlePage",
         "#ObjDetails": {
             "Description": "A Wise beliver edify by The Church. Priest focus Support and Ward Defense.",
             "DisplayName": "Priest",
@@ -170,12 +164,16 @@
             ],
             "Taxonomy": [
                 "Item",
-                "Equipment",
                 "Page",
                 "Title"
             ]
         },
-        "EquipmentData": {
+        "ItemData": {
+            "ItemType": "Page",
+            "Rarity": "Unique",
+            "Value": 50
+        },
+        "PageData": {
             "AddTags": [
                 "Priest"
             ],
@@ -208,14 +206,7 @@
                     "StatName": "Protection",
                     "Value": 0.5
                 }
-            }
-        },
-        "ItemData": {
-            "ItemType": "Page",
-            "Rarity": "Unique",
-            "Value": 50
-        },
-        "PageData": {
+            },
             "PageRequirements": {
                 "ConflictingPages": [],
                 "IncompatiblePages": [],
@@ -229,7 +220,7 @@
     },
     "RogueTitlePage": {
         "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemTitle.gd",
-        "!ParentKey": "BaseTitlePage",
+        "!ParentKey": "#BaseTitlePage",
         "#ObjDetails": {
             "Description": "An Agile agent employed by The Guild. Rogues focus on Physcial Attack and Evasion Defense.",
             "DisplayName": "Rogue",
@@ -242,12 +233,16 @@
             ],
             "Taxonomy": [
                 "Item",
-                "Equipment",
                 "Page",
                 "Title"
             ]
         },
-        "EquipmentData": {
+        "ItemData": {
+            "ItemType": "Page",
+            "Rarity": "Unique",
+            "Value": 50
+        },
+        "PageData": {
             "AddTags": [
                 "Rogue"
             ],
@@ -280,14 +275,7 @@
                     "StatName": "PhyAttack",
                     "Value": 0.5
                 }
-            }
-        },
-        "ItemData": {
-            "ItemType": "Page",
-            "Rarity": "Unique",
-            "Value": 50
-        },
-        "PageData": {
+            },
             "PageRequirements": {
                 "ConflictingPages": [],
                 "IncompatiblePages": [],
@@ -301,7 +289,7 @@
     },
     "SoldierTitlePage": {
         "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemTitle.gd",
-        "!ParentKey": "BaseTitlePage",
+        "!ParentKey": "#BaseTitlePage",
         "#ObjDetails": {
             "Description": "A Strong fighter trained by The Military. Soldiers focus on Armor and basic Weapon Attacks.",
             "DisplayName": "Soldier",
@@ -314,12 +302,16 @@
             ],
             "Taxonomy": [
                 "Item",
-                "Equipment",
                 "Page",
                 "Title"
             ]
         },
-        "EquipmentData": {
+        "ItemData": {
+            "ItemType": "Page",
+            "Rarity": "Unique",
+            "Value": 50
+        },
+        "PageData": {
             "AddTags": [
                 "Soldier"
             ],
@@ -351,14 +343,7 @@
                     "StatName": "PhyAttack",
                     "Value": 1
                 }
-            }
-        },
-        "ItemData": {
-            "ItemType": "Page",
-            "Rarity": "Unique",
-            "Value": 50
-        },
-        "PageData": {
+            },
             "PageRequirements": {
                 "ConflictingPages": [],
                 "IncompatiblePages": [],

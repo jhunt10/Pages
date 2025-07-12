@@ -2,7 +2,7 @@
     "RegenPotionItem": {
         "!ObjectScript": "res://assets/Scripts/Items/Supplies/Potions/BasePotionSupplyItem.gd",
         "#ObjDetails": {
-            "Description": "A refreshing drink made from sugar, spice, and a big old dose of MSG. Drink to gain @@#EftData:DrinkEffect:Name@@ for @@#EftData:DrinkEffect:Duration@@.\n\n@@#EftData:DrinkEffect@@",
+            "Description": "A sweet drink made from sugar, spice, and a big ol' dose of MSG. Drink to gain @@#EftData:DrinkEffect:Name@@ for @@#EftData:DrinkEffect:Duration@@.\n\n@@#EftData:DrinkEffect@@",
             "DisplayName": "Regen Potion",
             "LargeIcon": "Sprites/RegenPotionItem_Icon.png",
             "ObjectType": "Item",
@@ -18,7 +18,7 @@
             ]
         },
         "ItemData": {
-            "Rarity": "Legendary",
+            "Rarity": "Rare",
             "Value": 500
         },
         "ActionData": {
@@ -34,6 +34,86 @@
                         }
                     },
                     "EffectKey": "RegenPotionEffect"
+                }
+            }
+        },
+        "_DefVersion": "1"
+    },
+    "ArmorPotionItem": {
+        "!ObjectScript": "res://assets/Scripts/Items/Supplies/Potions/BasePotionSupplyItem.gd",
+        "#ObjDetails": {
+            "Description": "An oily metalic drink made from things that probably shouldn't be in a drink.\n\nDrink to gain @@#EftData:DrinkEffect@@ for @@#EftData:DrinkEffect:Duration@@.",
+            "DisplayName": "Armor Potion",
+            "LargeIcon": "Effects/Sprites/ArmorPotionEffect_Icon.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Effects/Sprites/ArmorPotionEffect_Icon.png",
+            "SnippetDesc": "+20 Armor for 5 Rounds",
+            "Tags": [
+                "Potion"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Supply",
+                "Potion"
+            ]
+        },
+        "ItemData": {
+            "Rarity": "Common",
+            "Value": 500
+        },
+        "ActionData": {
+        },
+        "SuppliesData": {
+            "EffectDatas": {
+                "DrinkEffect": {
+                    "EffectData": {
+                        "EffectDetails": {
+                            "DurationData": {
+                                "BaseDuration": 5
+                            }
+                        }
+                    },
+                    "EffectKey": "ArmorPotionEffect"
+                }
+            }
+        },
+        "_DefVersion": "1"
+    },
+    "WardPotionItem": {
+        "!ObjectScript": "res://assets/Scripts/Items/Supplies/Potions/BasePotionSupplyItem.gd",
+        "#ObjDetails": {
+            "Description": "A refreshing drink made from a rare berry called \"Eye of Newt\" and also actual eyes from actual newts. @@#Color:Red:Not Vegan Friendly!@@\n\nDrink to gain @@#EftData:DrinkEffect@@ for @@#EftData:DrinkEffect:Duration@@.",
+            "DisplayName": "Ward Potion",
+            "LargeIcon": "Effects/Sprites/WardPotionEffect_Icon.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Effects/Sprites/WardPotionEffect_Icon.png",
+            "SnippetDesc": "+20 Ward for 5 Rounds",
+            "Tags": [
+                "Potion"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Supply",
+                "Potion"
+            ]
+        },
+        "ItemData": {
+            "Rarity": "Common",
+            "Value": 500
+        },
+        "ActionData": {
+        },
+        "SuppliesData": {
+            "EffectDatas": {
+                "DrinkEffect": {
+                    "EffectData": {
+                        "EffectDetails": {
+                            "DurationData": {
+                                "BaseDuration": 5
+                            }
+                        }
+                    },
+                    "EffectKey": "WardPotionEffect"
                 }
             }
         },

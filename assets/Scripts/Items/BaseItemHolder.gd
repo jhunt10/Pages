@@ -7,6 +7,7 @@ class_name BaseItemHolder
 const LOGGING = false
 
 signal items_changed
+signal item_slots_rebuilt
 
 var slot_sets_data:Array:
 	get:
@@ -127,6 +128,7 @@ func _build_slots_list():
 			if item:
 				PlayerInventory.add_item(item)
 		raw_index += 1
+	item_slots_rebuilt.emit()
 
 func get_raw_slot_index_of_item(item:BaseItem):
 	return _raw_item_slots.find(item.Id)
@@ -286,9 +288,12 @@ func get_first_valid_slot_for_item(item:BaseItem, allow_replace:bool=false)->int
 	return -1
 
 func add_item_to_first_valid_slot(item:BaseItem):
+	ItemHelper.transering_items.append(item.Id)
 	for i in range(_raw_item_slots.size()):
 		if try_set_item_in_slot(item, i, false):
+			ItemHelper.transering_items.erase(item.Id)
 			return true
+	ItemHelper.transering_items.erase(item.Id)
 	return false
 
 func _on_item_removed(item_id:String, supressing_signals:bool):

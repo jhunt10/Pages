@@ -1,0 +1,71 @@
+{
+    "BombItem": {
+        "!ObjectScript": "res://assets/Scripts/Items/Supplies/AttackSupplies/BaseAttackSupplyIyem.gd",
+        "#ObjDetails": {
+            "Description": "A completly safe and reliable explosive device guaranteed* not to kill the user or your money back!\n\nDeals [Bomb Damage]\n\n*All claims must be filed by individual user at time of incident.",
+            "DisplayName": "Bomb",
+            "LargeIcon": "Sprites/BasicBomb_Large.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/BasicBomb_Small.png",
+            "SnippetDesc": "Basic Bomb",
+            "Tags": [
+                "Potion"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Supply",
+                "Potion"
+            ]
+        },
+        "ItemData": {
+            "Rarity": "Rare",
+            "Value": 500
+        },
+        "ActionData": {},
+        "SuppliesData": {
+            "ThrownItemMissileData":{
+                "MissileVfxData": {
+                    "OffSet": [0,-1]
+                }
+            },
+            "AttackData": {
+                "AttackDetails": {
+                    "AccuracyMod": 1,
+                    "PotencyMod": 1
+                },
+                "DamageDatas": {
+                    "Damage1": {
+                        "AtkPwrBase": 100,
+                        "AtkPwrRange": 10,
+                        "AtkPwrScale": 1,
+                        "AtkStat": "Fixed",
+                        "BaseDamage": 50,
+                        "DamageType": "Crash",
+                        "DamageVfxKey": "AUTO",
+                        "DefenseType": "AUTO"
+                    }
+                },
+                "OnUseVfxData": {
+                    "VfxKey": "BombVfx",
+                    "AnimationName": "6_sprites_250ms_frames",
+                    "AnimationSpeed": 2,
+                    "RandomOffsets": [
+                        0,
+                        0
+                    ],
+                    "ScenePath": "res://assets/Scripts/VFXs/DamageVfxs/damage_vfx_node.tscn",
+                    "SpriteName": "SpriteSheets/FireBall_Impact.png",
+                    "SpriteSheetHight": 3,
+                    "SpriteSheetWidth": 2
+                },
+                "TargetParams":{
+                    "EffectArea": "[[-1,1],[0,1],[1,1],[1,0],[1,-1],[0,-1],[-1,-1],[-1,0],[0,0]]",
+                    "LineOfSight": true,
+                    "TargetArea": "[[0,0]]",
+                    "TargetType": "Spot"
+                }
+            }
+        },
+        "_DefVersion": "1"
+    }
+}

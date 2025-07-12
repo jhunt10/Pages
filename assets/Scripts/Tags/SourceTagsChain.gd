@@ -1,6 +1,6 @@
 class_name SourceTagChain
 
-enum SourceTypes {Actor, Action, Missile, Effect, }
+enum SourceTypes {Actor, Action, Missile, Effect, Item}
 
 # Array of source ids in order of parent to child
 var _source_order:Array = []

@@ -1,24 +1,20 @@
-[gd_scene load_steps=34 format=3 uid="uid://uo60871y6t54"]
+[gd_scene load_steps=30 format=3 uid="uid://uo60871y6t54"]
 
 [ext_resource type="Script" path="res://Scenes/Combat/MapObjects/Actors/ComplexActorNode/complex_actor_node.gd" id="1_wfbib"]
 [ext_resource type="Texture2D" uid="uid://dcl5xlxf1t6ad" path="res://Scenes/Combat/MapObjects/Actors/ComplexActorNode/Sprites/BaseActor_SpriteSheet.png" id="3_bgyq5"]
 [ext_resource type="PackedScene" uid="uid://dooeg4ake0jdk" path="res://Scenes/Combat/MapObjects/Actors/ComplexActorNode/actor_hand_node.tscn" id="3_dpgwv"]
 [ext_resource type="Script" path="res://Scenes/Combat/MapObjects/Actors/ComplexActorNode/actor_body_sprite.gd" id="3_ltbfj"]
-[ext_resource type="AnimationLibrary" uid="uid://b5jo3ljcsi13k" path="res://animations/facing.tres" id="4_fix78"]
-[ext_resource type="AnimationLibrary" uid="uid://dgn4snawpxnvc" path="res://animations/move_turn_left.tres" id="5_dtvap"]
-[ext_resource type="Script" path="res://Scenes/Combat/MapObjects/vfx_holder.gd" id="6_eul5e"]
-[ext_resource type="Texture2D" uid="uid://chus4frv66mrd" path="res://Scenes/Combat/MapObjects/Actors/ComplexActorNode/Sprites/BaseActor_SpriteSheet_MainHand.png" id="6_hijn7"]
-[ext_resource type="AnimationLibrary" uid="uid://cgmk38o40y6ri" path="res://animations/move_turn_right.tres" id="6_ub6w0"]
-[ext_resource type="AnimationLibrary" uid="uid://k2vqtcfqwwvq" path="res://animations/move_walk.tres" id="7_0nd28"]
-[ext_resource type="Texture2D" uid="uid://cox0yputmlu1o" path="res://Scenes/Combat/MapObjects/Actors/ComplexActorNode/Sprites/BaseActor_SpriteSheet_OffHand.png" id="7_03xgn"]
-[ext_resource type="AnimationLibrary" uid="uid://bw7ib64yurx24" path="res://animations/move_walk_back.tres" id="7_7k4lr"]
-[ext_resource type="PackedScene" uid="uid://eox4g5msr5a" path="res://Scenes/Combat/Effects/flash_text_controller.tscn" id="7_t0kdx"]
-[ext_resource type="Texture2D" uid="uid://cwp0r0ds4kcf1" path="res://Scenes/Combat/MapObjects/Actors/ComplexActorNode/Sprites/BaseActor_SpriteSheet_TwoHand.png" id="8_56kah"]
-[ext_resource type="AnimationLibrary" uid="uid://wha54qyt851d" path="res://animations/move_walk_forward.tres" id="8_h2r8d"]
+[ext_resource type="AnimationLibrary" uid="uid://cj67fkp70yoc2" path="res://animations/facing.tres" id="4_fix78"]
+[ext_resource type="AnimationLibrary" uid="uid://bcm068oq8y7le" path="res://animations/move_turn_left.tres" id="5_dtvap"]
+[ext_resource type="AnimationLibrary" uid="uid://bwrepgkkp4h6a" path="res://animations/move_turn_right.tres" id="6_ub6w0"]
+[ext_resource type="PackedScene" uid="uid://mrvyqp2bvng4" path="res://Scenes/VFXs/vfx_holder.tscn" id="6_x8vrl"]
+[ext_resource type="AnimationLibrary" uid="uid://dapqc0nh3gfpp" path="res://animations/move_walk.tres" id="7_0nd28"]
+[ext_resource type="AnimationLibrary" uid="uid://bpgn1ij3tgmvs" path="res://animations/move_walk_back.tres" id="7_7k4lr"]
+[ext_resource type="AnimationLibrary" uid="uid://b7g5ggf00gpvq" path="res://animations/move_walk_forward.tres" id="8_h2r8d"]
 [ext_resource type="Animation" uid="uid://drf4n1t1ononj" path="res://Scenes/Combat/MapObjects/Actors/death_effect_animation.res" id="8_nfimc"]
 [ext_resource type="Animation" uid="uid://bch7n8vavthc6" path="res://Scenes/Combat/MapObjects/Actors/shake_effect_animation.res" id="9_co1y3"]
-[ext_resource type="AnimationLibrary" uid="uid://p5lde56584bj" path="res://animations/move_walk_left.tres" id="9_h7joc"]
-[ext_resource type="AnimationLibrary" uid="uid://5r01u3xg2eii" path="res://animations/move_walk_right.tres" id="10_88tvj"]
+[ext_resource type="AnimationLibrary" uid="uid://b1vnwkfqo4oga" path="res://animations/move_walk_left.tres" id="9_h7joc"]
+[ext_resource type="AnimationLibrary" uid="uid://da4n7rh5w3uck" path="res://animations/move_walk_right.tres" id="10_88tvj"]
 [ext_resource type="Texture2D" uid="uid://dj76get1aahli" path="res://Scenes/Menus/SaveLoadMenu/Button_Patch_32_6.png" id="14_6kv2p"]
 [ext_resource type="Texture2D" uid="uid://dgfxtmtdjfgey" path="res://assets/Sprites/UI/QuePathArrow.png" id="14_38ite"]
 [ext_resource type="Script" path="res://Scenes/Combat/MapObjects/aura_holder.gd" id="18_4ue2w"]
@@ -308,35 +304,17 @@ direction = 2
 
 [node name="MainHandNode" parent="ActorMotionNode/ActorSpriteNode/OffsetNode" instance=ExtResource("3_dpgwv")]
 z_index = 3
-facing_dir = 2
-main_hand_sprite_sheet = ExtResource("6_hijn7")
-off_hand_sprite_sheet = ExtResource("7_03xgn")
-two_hand_sprite_sheet = ExtResource("8_56kah")
 weapon_z_offset = 0
 
 [node name="OffHandNode" parent="ActorMotionNode/ActorSpriteNode/OffsetNode" instance=ExtResource("3_dpgwv")]
 visible = false
 z_index = 1
 hand = 1
-facing_dir = 2
-main_hand_sprite_sheet = ExtResource("6_hijn7")
-off_hand_sprite_sheet = ExtResource("7_03xgn")
-two_hand_sprite_sheet = ExtResource("8_56kah")
 weapon_z_offset = 0
 
 [node name="VFX_OffsetNode" type="Node2D" parent="ActorMotionNode/ActorSpriteNode/OffsetNode"]
 
-[node name="VFXHolder" type="Node2D" parent="ActorMotionNode" node_paths=PackedStringArray("actor_node", "flash_text_controller", "offset_node")]
-z_index = 3
-script = ExtResource("6_eul5e")
-actor_node = NodePath("../..")
-flash_text_controller = NodePath("FlashTextController")
-offset_node = NodePath("../ActorSpriteNode/OffsetNode/VFX_OffsetNode")
-
-[node name="FlashTextController" parent="ActorMotionNode/VFXHolder" instance=ExtResource("7_t0kdx")]
-offset_top = -40.0
-offset_bottom = -16.0
-mouse_filter = 2
+[node name="VFXHolder" parent="ActorMotionNode" instance=ExtResource("6_x8vrl")]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

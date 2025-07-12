@@ -41,6 +41,20 @@ static func list_all_item_keys()->Array:
 	if !Instance: Instance = ItemLibrary.new()
 	return Instance._object_defs.keys()
 
+static func get_item_keys_with_tag(tag)->Array:
+	var out_list = []
+	var tag_filter = tag
+	if tag_filter is String:
+		tag_filter = {"RequireAnyTags": [tag]}
+	elif tag_filter is Array:
+		tag_filter = {"RequireAllTags": [tag]}
+	var defs = Instance._object_defs.keys()
+	for item_key in Instance._object_defs.keys():
+		var tags = Instance._object_defs[item_key].get("#ObjDetails", {}).get("Taxonomy", [])
+		if SourceTagChain.filters_accept_tags(tag_filter, tags):
+			out_list.append(item_key)
+	return out_list
+
 static func list_all_items()->Array:
 	if !Instance: Instance = ItemLibrary.new()
 	return Instance._loaded_objects.values()

@@ -227,7 +227,7 @@ func update(delta: float) -> void:
 			# Resolve all missiles that have reached thier target
 			for missile:BaseMissile in game_state.Missiles.values():
 				if missile.has_reached_target():
-					missile.do_thing(game_state)
+					missile.execute_on_reach_target(game_state)
 					game_state.delete_missile(missile)
 			
 			end_of_frame.emit()

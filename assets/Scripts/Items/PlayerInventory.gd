@@ -39,16 +39,21 @@ static func spawn_item(item_key:String, count):
 	if item:
 		add_item(item, count)
 
-static func add_item(item:BaseItem, count:int=1):
-	if LOGGING: print("PlayerInventory.AddItem: Item: %s" % [item.Id])
-	if not _stacked_item_count_by_key.keys().has(item.ItemKey):
-		var inv_item = ItemLibrary.get_static_inst_of_item(item.ItemKey)
+static func add_item(item, count:int=1):
+	var item_key = item
+	if item is BaseItem:
+		item_key = item.ItemKey
+	
+	if LOGGING: print("PlayerInventory.AddItem: Item: %s" % [item_key])
+	if not _stacked_item_count_by_key.keys().has(item_key):
+		var inv_item = ItemLibrary.get_static_inst_of_item(item_key)
 		if LOGGING: print("-- New Stacking Item")
-		_stacked_item_count_by_key[item.ItemKey] = count
-		_stacked_item_id_by_key[item.ItemKey] = inv_item.Id
+		_stacked_item_count_by_key[item_key] = count
+		_stacked_item_id_by_key[item_key] = inv_item.Id
 	else:
-		_stacked_item_count_by_key[item.ItemKey] += count
-	ItemLibrary.delete_item(item)
+		_stacked_item_count_by_key[item_key] += count
+	if item is BaseItem:
+		ItemLibrary.delete_item(item)
 	Instance.inventory_changed.emit()
 
 

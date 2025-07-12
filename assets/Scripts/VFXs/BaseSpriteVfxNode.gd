@@ -59,10 +59,10 @@ func set_vfx_data(new_id:String, data:Dictionary):
 			sprite.hframes = _data.get("SpriteSheetWidth", 1)
 			sprite.vframes = _data.get("SpriteSheetHight", 1)
 		else:
-			printerr("VfxNode.set_vfx_data: Failed to find file '%s'." % [sprite_path])
+			printerr("BaseSpriteVfxNode.set_vfx_data: Failed to find file '%s'." % [sprite_path])
 			_bad_sprite = true
 	else:
-		printerr("VfxNode.set_vfx_data: VFXData '%s' has no sprite." % [_data.get("VfxKey")])
+		printerr("BaseSpriteVfxNode.set_vfx_data: VFXData '%s' has no sprite." % [_data.get("VfxKey")])
 		_bad_sprite = true
 	
 	if _bad_sprite:

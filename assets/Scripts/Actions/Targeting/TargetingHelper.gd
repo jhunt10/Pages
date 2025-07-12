@@ -10,18 +10,18 @@ static func get_targeted_actors(target_params:TargetParameters, targets:Array, s
 	for target in targets:
 		if not (target is String or target is MapPos):
 			printerr("TargetingHelper.get_targeted_actors: Provided target '%s' is neither String nor MapPos." % [target])
-			return []
+			continue
 		
 		
 		# Targeting an actor
 		if target_params.is_actor_target_type():
 			if target is not String:
 				printerr("TargetingHelper.get_targeted_actors: TargetParams exspect Actor but provided target '%s' is not String." % [target])
-				return []
+				continue
 			var target_actor:BaseActor = game_state.get_actor(target, target_params.target_type == TargetParameters.TargetTypes.Corpse)
 			if not target_actor:
 				printerr("TargetingHelper.get_targeted_actors: Failed to find target Actor with id '%s'." % [target])
-				return []
+				continue
 			if target_params.is_valid_target_actor(source_actor, target_actor, game_state):
 				if target_params.has_area_of_effect() and not ignore_aoe:
 					area_of_effect = target_params.get_area_of_effect(game_state.get_actor_pos(target_actor))
@@ -32,7 +32,7 @@ static func get_targeted_actors(target_params:TargetParameters, targets:Array, s
 		if target_params.is_spot_target_type():
 			if target is not MapPos:
 				printerr("TargetingHelper.get_targeted_actors: TargetParams exspect Actor but provided target '%s' is not MapPos." % [target])
-				return []
+				continue
 			if target_params.has_area_of_effect() and not ignore_aoe:
 				area_of_effect = target_params.get_area_of_effect(target)
 			else:

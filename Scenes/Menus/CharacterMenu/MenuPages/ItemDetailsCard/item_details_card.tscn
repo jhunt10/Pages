@@ -248,6 +248,7 @@ theme = ExtResource("4_xmy3g")
 text = "Item Description hk hbkhjhl jhlkjl ljlkj"
 
 [node name="ActionPageDetailsControl" type="Control" parent="OffsetControl/NinePatchRect/VBoxContainer" node_paths=PackedStringArray("parent_card_control", "description_box", "target_type_label", "cost_container", "range_display", "damage_label", "damage_container", "accuracy_icon", "accuracy_label", "potency_icon", "potency_label", "modded_by_container", "modded_by_label")]
+visible = false
 layout_mode = 2
 size_flags_vertical = 3
 script = ExtResource("12_fd6vk")
@@ -829,14 +830,13 @@ text = "Item Description"
 script = ExtResource("22_pm1ag")
 
 [node name="DefaultDetailsControl" type="Control" parent="OffsetControl/NinePatchRect/VBoxContainer" node_paths=PackedStringArray("description_box")]
-visible = false
 layout_mode = 2
 size_flags_vertical = 3
 script = ExtResource("12_gvhwc")
 description_box = NodePath("DescriptionBox")
 
 [node name="DescriptionBox" type="RichTextLabel" parent="OffsetControl/NinePatchRect/VBoxContainer/DefaultDetailsControl"]
-self_modulate = Color(0.498039, 0, 0, 1)
+clip_contents = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -844,8 +844,11 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
+size_flags_vertical = 3
 theme = ExtResource("4_xmy3g")
-text = "Item Description"
+bbcode_enabled = true
+text = "Item Description hk hbkhjhl jhlkjl ljlkj"
+script = ExtResource("22_pm1ag")
 
 [node name="EquipButtonBackground" type="NinePatchRect" parent="OffsetControl/NinePatchRect/VBoxContainer"]
 custom_minimum_size = Vector2(0, 32)
@@ -869,7 +872,6 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 text = "Equipe"
-_size_dirty = true
 center_x = true
 
 [node name="EquipButton" type="Button" parent="OffsetControl/NinePatchRect/VBoxContainer/EquipButtonBackground"]

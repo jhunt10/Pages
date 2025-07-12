@@ -45,6 +45,8 @@ func set_key(actor:BaseActor, key):
 		else:
 			page_icon.texture = page.get_large_icon()
 		page_background.texture = page.get_rarity_background()
+		page_icon.show()
+		page_background.show()
 		var cant_equip_reasons = page.get_cant_use_reasons(actor)
 		if cant_equip_reasons.size() > 0:
 			invalid_label.text = ItemHelper.cant_equip_reasons_to_string(cant_equip_reasons)

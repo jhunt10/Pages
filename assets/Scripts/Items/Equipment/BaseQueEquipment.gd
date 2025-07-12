@@ -65,5 +65,5 @@ func get_page_slot_data()->Array[Dictionary]:
 		]
 		for extra_slot in equipment_data.get("ItemSlotsData", []):
 			_cached_slots_data.append(extra_slot)
-	return _cached_slots_data
+	return _cached_slots_data.duplicate()
 	

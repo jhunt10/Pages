@@ -34,6 +34,7 @@ var _click_delay:float = 0.4
 var _click_timer:float
 
 var _forced_filters:Array=[]
+var _menu_context:String='Page'
 var _sub_filters:Array = []
 
 var _cached_size
@@ -101,29 +102,83 @@ func build_item_list():
 		var button = _get_button(item)
 		var group = _get_sub_group_container(sub_group_key)
 		if not group.get_inner_container().get_children().has(button):
-			group.get_inner_container().add_child(button)
+			group.add_item_button(button)
 		#items_container.add_child(button)
 		
 		#if item.can_stack:
 		button.set_item(item, PlayerInventory.get_item_stack_count(item.ItemKey))
 		
-		button.visible = should_item_be_visible(item)
-	var sort_order = ["Title","Passive", "Action"]
+		button.visible = should_item_be_visible(item, '')
+		
 	for sub_group_key in _item_groups.keys():
-		if not sort_order.has(sub_group_key):
-			sort_order.append(sub_group_key)
 		items_container.remove_child(_item_groups[sub_group_key])
-	for sub_group_key in sort_order:
+	for sub_group_key in get_sorted_sub_group_keys():
 		if _item_groups.keys().has(sub_group_key):
 			items_container.add_child(_item_groups[sub_group_key])
 	await get_tree().process_frame
 	scroll_bar.calc_bar_size()
+	_refilter()
+
+func get_sorted_sub_group_keys()->Array:
+	var out_list = _item_groups.keys()
+	out_list.sort_custom(sort_subacts_ascending)
+	return out_list
+
+# True when a comes before b
+func sort_subacts_ascending(a:String, b:String):
+	var a_score = 0
+	var b_score = 0
+	
+	if a.contains("Title Page"):
+		a_score += 1000
+	if b.contains("Title Page"):
+		b_score += 1000
+		
+	if a.contains("TitleLocked"):
+		a_score -= 200
+	if b.contains("TitleLocked"):
+		b_score -= 200
+	
+	if a.contains("Shared"):
+		a_score -= 100
+	if b.contains("Shared"):
+		b_score -= 100
+	
+	if a.contains("Passive"):
+		a_score -= 10
+	if b.contains("Passive"):
+		b_score -= 10
+	
+	if a_score != b_score:
+		return a_score < b_score
+	if a < b:
+		return true
+	return false
 
 func _get_sub_group_key(item:BaseItem)->String:
-	var tax = item.get_taxonomy()
-	if tax.size() > 0:
-		return tax[tax.size()-1]
-	return "Unkown"
+	var group_keys = []
+	if item is BaseEquipmentItem:
+		group_keys.append("Equipment")
+	elif item is BasePageItem:
+		if item is PageItemTitle:
+			group_keys.append("Page")
+			group_keys.append("Title Page")
+			return ":".join(group_keys)
+		else:
+			group_keys.append("Page")
+			var source_title = item.get_source_title()
+			if source_title:
+				if item.is_shareble():
+					group_keys.append("Shared")
+				else:
+					group_keys.append("TitleLocked")
+				group_keys.append(source_title)
+	if item is BaseSupplyItem:
+		group_keys.append("Supplies")
+	var tax_leaf = item.get_taxonomy_leaf()
+	if tax_leaf:
+		group_keys.append(tax_leaf)
+	return ":".join(group_keys)
 
 func _get_button(item:BaseItem)->InventoryItemButton:
 	if _item_buttons.keys().has(item.Id):
@@ -147,12 +202,18 @@ func _get_sub_group_container(key)->InventorySubGroupContainer:
 	if _item_groups.keys().has(key):
 		return _item_groups[key]
 	var new_group:InventorySubGroupContainer = premade_inventory_sub_group.duplicate()
-	new_group.label.text = key
+	new_group.set_group_key(key)
 	items_container.add_child(new_group)
 	new_group.show()
 	_item_groups[key] = new_group
 	return new_group
-	
+
+func list_sub_group_containers()->Array[InventorySubGroupContainer]:
+	var out_list:Array[InventorySubGroupContainer] = []
+	for key in _item_groups.keys():
+		var group:InventorySubGroupContainer = _item_groups[key]
+		out_list.append(group)
+	return out_list
 
 func on_player_inventory_changed():
 	#var greater_filter = filter_option_button.get_current_option_text()
@@ -190,6 +251,12 @@ func clear_forced_filters(refilter:bool=true):
 		filter_option_button.load_options("All")
 		_refilter()
 
+# Set the current context of the character menu (Pages, Equipment, Supplies)
+func set_character_menu_context(context:String, refilter:bool=true):
+	_menu_context = context
+	if refilter:
+		_refilter()
+
 func add_forced_filter(tags, refilter:bool=true):
 	if tags is String:
 		tags = [tags]
@@ -207,17 +274,52 @@ func add_forced_filter(tags, refilter:bool=true):
 		_refilter()
 
 func _refilter():
-	for button:InventoryItemButton in _item_buttons.values():
-		var item = button.get_item()
-		button.visible = should_item_be_visible(item)
+	var cur_actor = CharacterMenuControl.Instance._actor
+	var cur_title = ''
+	if cur_actor:
+		cur_title = cur_actor.get_title()
+	for group_key in _item_groups.keys():
+		var group:InventorySubGroupContainer = _item_groups[group_key]
+		if not should_group_be_visible(group_key, group, cur_title):
+			group.hide()
+			continue
+		var any_buttons_visible = false
+		for button:InventoryItemButton in group.buttons.values():
+			var item = button.get_item()
+			if should_item_be_visible(item, cur_title):
+				if not button.visible:
+					button.show()
+				any_buttons_visible = true
+			else:
+				button.hide()
+		if any_buttons_visible:
+			group.show()
+		else:
+			group.hide()
 	await get_tree().process_frame
 	scroll_bar.calc_bar_size()
 	#filter_option_button.load_options()
 
-func should_item_be_visible(item:BaseItem):
+func should_group_be_visible(group_key:String, group:InventorySubGroupContainer, cur_title:String)->bool:
+	var tokens = group_key.split(":")
+	if not tokens.has(_menu_context):
+		return false
+	if tokens.has("Page"):
+		if tokens.has("TitleLocked") and (cur_title != '' and not tokens.has(cur_title)):
+			return false
+			
+	return true
+
+func should_item_be_visible(item:BaseItem, cur_title:String):
 	var count = PlayerInventory.get_item_stack_count(item.ItemKey)
 	if count == 0:
 		return false
+	if item is BasePageItem:
+		if item.is_shareble():
+			var source_title = item.get_source_title()
+			if source_title == cur_title and source_title != '':
+				return false
+			
 	var tags = item.get_tags()
 	for f_filter in _forced_filters:
 		if f_filter.begins_with("Not:"):

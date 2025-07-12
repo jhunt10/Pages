@@ -292,6 +292,7 @@ func _on_actor_pickup_item(actor:BaseActor, items_ids:Array):
 	pass
 
 func create_new_missile_node(missile):
+	GameState.add_missile(missile)
 	var new_node  = load("res://Scenes/Combat/MapObjects/missile_node.tscn").instantiate()
 	new_node.set_missile_data(missile)
 	MapController.add_missile_node(missile, new_node)

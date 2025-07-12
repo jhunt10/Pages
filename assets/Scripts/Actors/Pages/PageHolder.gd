@@ -5,6 +5,7 @@ signal class_page_changed
 
 var page_que_item_id
 var item_id_to_effect_id:Dictionary = {}
+var _page_id_to_extra_slots:Dictionary = {}
 
 
 func _debug_name()->String:
@@ -31,11 +32,18 @@ func _load_slots_sets_data()->Array:
 			out_list = page_que.get_page_slot_data()
 		else:
 			if LOGGING: print("--PageItemQue not found")
-	for effect:BaseEffect in _actor.effects.list_effects():
-		if LOGGING: print("Checking Effect: %s" % [effect.get_display_name()] )
-		var extra_pages_data = effect.get_load_val("ExtraPageSlotsData", [])
-		if extra_pages_data.size() > 0:
-			out_list.append_array(extra_pages_data)
+	_page_id_to_extra_slots.clear()
+	for page:BasePageItem in list_items():
+		var extra_page_slots = page.get_extra_page_slots()
+		if extra_page_slots.values().size() > 0:
+			out_list.append_array(extra_page_slots.values())
+			_page_id_to_extra_slots[page.Id] = extra_page_slots
+		
+	#for effect:BaseEffect in _actor.effects.list_effects():
+		#if LOGGING: print("Checking Effect: %s" % [effect.get_display_name()] )
+		#var extra_pages_data = effect.get_load_val("ExtraPageSlotsData", [])
+		#if extra_pages_data.size() > 0:
+			#out_list.append_array(extra_pages_data)
 	if out_list.size() == 0:
 		
 		if LOGGING: print("--No Slots, Checking Actor Def Default")
@@ -89,6 +97,12 @@ func get_title_page()->PageItemTitle:
 		if item is PageItemTitle:
 			return item
 	return null
+
+func list_page_keys()->Array:
+	var out_list = []
+	for item in list_items():
+		out_list.append(item.ItemKey)
+	return out_list
 
 func list_action_keys()->Array:
 	var out_list = []
@@ -176,12 +190,15 @@ func _on_item_added_to_slot(item:BaseItem, index:int):
 	if not page:
 		printerr("PageHolder._on_item_added_to_slot: Item '%s' is not of type BasePageItem." % [item.Id])
 		return
+		
 	if item is PageItemPassive:
 		var effect_def = item.get_effect_def()
 		if effect_def:
 			var effect_key = effect_def.get("EffectKey")
 			var new_effect = EffectHelper.create_effect(_actor, item, effect_key, effect_def)
 			item_id_to_effect_id[item.Id] = new_effect.Id
+	if page.get_extra_page_slots().size() > 0:
+		_build_slots_list()
 	_cache_action_mods()
 	class_page_changed.emit()
 
@@ -190,5 +207,7 @@ func _on_item_removed(item_id:String, supressing_signals:bool):
 		var effect = EffectLibrary.get_effect(item_id_to_effect_id[item_id])
 		_actor.effects.remove_effect(effect)
 		item_id_to_effect_id.erase(item_id)
+	if _page_id_to_extra_slots.keys().has(item_id):
+		_build_slots_list()
 	_cache_action_mods()
 	class_page_changed.emit()

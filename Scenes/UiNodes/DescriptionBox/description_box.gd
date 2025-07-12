@@ -212,6 +212,8 @@ func _build_bbcode_array(raw_description:String, object_def:Dictionary, object_i
 					mod_data = object_def.get("StatMods",{}).get(sub_tokens[1],{})
 				elif object_def.has("EquipmentData"):
 					mod_data = object_def.get("EquipmentData").get("StatMods",{}).get(sub_tokens[1],{})
+				elif object_def.has("PageData"):
+					mod_data = object_def.get("PageData").get("StatMods",{}).get(sub_tokens[1],{})
 				elif object_def.has("EffectData"):
 					mod_data = object_def.get("EffectData").get("StatMods",{}).get(sub_tokens[1],{})
 				var parsed_lines = _parse_stat_mod(mod_data, object_def, object_inst, actor, sub_tokens)
@@ -225,6 +227,8 @@ func _build_bbcode_array(raw_description:String, object_def:Dictionary, object_i
 					mod_data = object_def.get("DamageMods",{}).get(sub_tokens[1],{})
 				elif object_def.has("EquipmentData"):
 					mod_data = object_def.get("EquipmentData").get("DamageMods",{}).get(sub_tokens[1],{})
+				elif object_def.has("PageData"):
+					mod_data = object_def.get("PageData").get("DamageMods",{}).get(sub_tokens[1],{})
 				var sub_line = _parse_damage_mod(sub_tokens[2], mod_data)
 				if sub_tokens.size() >= 4:
 					sub_line = sub_line.replace("[/color]", sub_tokens[3] + "[/color]")
@@ -235,6 +239,8 @@ func _build_bbcode_array(raw_description:String, object_def:Dictionary, object_i
 					mod_data = object_def.get("AttackMods",{}).get(sub_tokens[1],{})
 				elif object_def.has("EquipmentData"):
 					mod_data = object_def.get("EquipmentData").get("AttackMods",{}).get(sub_tokens[1],{})
+				elif object_def.has("PageData"):
+					mod_data = object_def.get("PageData").get("AttackMods",{}).get(sub_tokens[1],{})
 				if sub_tokens[2] == 'DmgMod':
 					var dmg_mod = mod_data.get("DamageMods", {}).get(sub_tokens[3], {})
 					var sub_line = _parse_damage_mod(sub_tokens[4], dmg_mod)

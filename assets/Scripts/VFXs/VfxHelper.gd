@@ -51,15 +51,33 @@ static func create_damage_effect(target_actor:BaseActor, vfx_key:String, vfx_dat
 	if damage_number <= 0 and vfx_node._data.get("ShakeActor", true):
 			target_actor_node.play_shake()
 
+static func create_vfx_at_pos(pos:MapPos, vfx_key, vfx_data:Dictionary, source_actor:BaseActor=null)->BaseVfxNode:
+	var combat_control = CombatRootControl.Instance
+	if not is_instance_valid(combat_control):
+		return null
+	var map_controller:MapControllerNode = combat_control.MapController
+	var vfx_node = map_controller.create_vfx_holder(pos)
+	if not vfx_node:
+		printerr("VfxHelper.create_vfx_at_pos: Failed to create VfxHolder")
+		return null
+	return _create_vfx_on_holder(vfx_node, vfx_key, vfx_data, source_actor)
+	
 
 static func create_vfx_on_actor(host_actor:BaseActor, vfx_key, vfx_data:Dictionary, source_actor:BaseActor=null)->BaseVfxNode:
-	if vfx_key == null or vfx_key == "":
-		vfx_key = vfx_data.get("VfxKey", '')
-	if FORCE_RELOAD: MainRootNode.vfx_libray.reload_vfxs()
 	var actor_node = CombatRootControl.get_actor_node(host_actor.Id)
 	if not actor_node:
 		printerr("VfxHelper.create_vfx_on_actor: No BaseActorNode found for Actor '%s'." % [host_actor.Id])
 		return null
+	var vfx_holder = actor_node.vfx_holder
+	if not vfx_holder:
+		printerr("VfxHelper.create_vfx_on_actor: No VfxHolder found on ActorNode for '%s'." % [host_actor.Id])
+		return null
+	return _create_vfx_on_holder(actor_node.vfx_holder, vfx_key, vfx_data, source_actor)
+
+static func _create_vfx_on_holder(vfx_holder:VfxHolder, vfx_key, vfx_data:Dictionary, source_actor:BaseActor=null)->BaseVfxNode:
+	if vfx_key == null or vfx_key == "":
+		vfx_key = vfx_data.get("VfxKey", '')
+	if FORCE_RELOAD: MainRootNode.vfx_libray.reload_vfxs()
 	
 	var vfx_def = {}
 	if vfx_key and not vfx_data.get("BeenMerged", false): 
@@ -67,7 +85,7 @@ static func create_vfx_on_actor(host_actor:BaseActor, vfx_key, vfx_data:Dictiona
 	var merged_data = BaseLoadObjectLibrary._merge_defs(vfx_data, vfx_def)
 	
 	# Set Host and Source actors
-	merged_data['HostActorId'] = host_actor.Id
+	merged_data['HostActorId'] = vfx_holder.get_host_id()
 	if source_actor and not merged_data.has("SourceActorId"):
 		merged_data['SourceActorId'] = source_actor.Id
 	
@@ -76,8 +94,8 @@ static func create_vfx_on_actor(host_actor:BaseActor, vfx_key, vfx_data:Dictiona
 	if merged_data.get("CanStack", true):
 		would_be_id += "_" + str(ResourceUID.create_id())
 	
-	if actor_node.vfx_holder.has_vfx(would_be_id):
-		return actor_node.vfx_holder.get_vfx(would_be_id)
+	if vfx_holder.has_vfx(would_be_id):
+		return vfx_holder.get_vfx(would_be_id)
 	
 	var vfx_scene_path = merged_data.get("ScenePath")
 	if not vfx_scene_path:
@@ -96,7 +114,7 @@ static func create_vfx_on_actor(host_actor:BaseActor, vfx_key, vfx_data:Dictiona
 		return null
 	var node:BaseVfxNode = new_node
 	node.set_vfx_data(would_be_id, merged_data)
-	actor_node.vfx_holder.add_vfx(node)
+	vfx_holder.add_vfx(node)
 	node.start_vfx()
 	return node
 

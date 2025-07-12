@@ -9,7 +9,8 @@
             "SmallIcon": "Sprites/RegenPotionEffect_Icon.png",
             "SnippetDesc": "Heal 5% Max Health at the end of each Turn.",
             "Tags": [
-                "Regen"
+                "Regen",
+                "Potion"
             ],
             "Taxonomy": [
                 "Effect",
@@ -41,7 +42,7 @@
                 },
                 "IsBad": false,
                 "IsGood": true,
-                "ShowCounter": false,
+                "ShowCounter": true,
                 "ShowInHud": true
             },
             "SubEffects": {
@@ -51,6 +52,88 @@
                         "OnTurnEnd"
                     ],
                     "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/Damage/SubEffect_ApplyDotDamage.gd"
+                }
+            }
+        },
+        "_DefVersion": "1"
+    },
+    "ArmorPotionEffect": {
+        "!ObjectScript": "res://assets/Scripts/Actors/Effects/BaseEffect.gd",
+        "#ObjDetails": {
+            "Description": "+20 Armor",
+            "DisplayName": "Armor Potion",
+            "LargeIcon": "Sprites/ArmorPotionEffect_Icon.png",
+            "ObjectType": "Effect",
+            "SmallIcon": "Sprites/ArmorPotionEffect_Icon.png",
+            "SnippetDesc": "+20 Armor",
+            "Tags": [
+                "Potion"
+            ],
+            "Taxonomy": [
+                "Effect",
+                "Buff"
+            ]
+        },
+        "EffectData": {
+            "EffectDetails": {
+                "AddTagsToActor": [],
+                "CanStack": false,
+                "DeleteAfterCombat": true,
+                "DurationData": {
+                    "BaseDuration": 5,
+                    "DurationTrigger": "OnRoundEnd"
+                },
+                "IsBad": false,
+                "IsGood": true,
+                "ShowCounter": true,
+                "ShowInHud": true
+            },
+            "StatMods": {
+                "ArmorMod": {
+                    "ModType": "Add",
+                    "StatName": "Armor",
+                    "Value": 20
+                }
+            }
+        },
+        "_DefVersion": "1"
+    },
+    "WardPotionEffect": {
+        "!ObjectScript": "res://assets/Scripts/Actors/Effects/BaseEffect.gd",
+        "#ObjDetails": {
+            "Description": "+20 Ward",
+            "DisplayName": "Ward Potion",
+            "LargeIcon": "Sprites/WardPotionEffect_Icon.png",
+            "ObjectType": "Effect",
+            "SmallIcon": "Sprites/WardPotionEffect_Icon.png",
+            "SnippetDesc": "+20 Ward",
+            "Tags": [
+                "Potion"
+            ],
+            "Taxonomy": [
+                "Effect",
+                "Buff"
+            ]
+        },
+        "EffectData": {
+            "EffectDetails": {
+                "AddTagsToActor": [],
+                "CanStack": false,
+                "DeleteAfterCombat": true,
+                "DurationData": {
+                    "BaseDuration": 5,
+                    "DurationTrigger": "OnRoundEnd"
+                },
+                "IsBad": false,
+                "IsGood": true,
+                "ShowCounter": true,
+                "ShowInHud": true
+            },
+            "StatMods": {
+                "ArmorMod": {
+                    "ModType": "Add",
+                    "StatName": "Ward",
+                    "Value": 20
                 }
             }
         },

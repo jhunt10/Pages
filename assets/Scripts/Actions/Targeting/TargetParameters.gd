@@ -63,9 +63,9 @@ func _init(target_param_key:String, args:Dictionary) -> void:
 	else:
 		effect_area = null
 	
-	include_self_in_aoe = args.get("IncludeSelfInAoe", false)
-	include_allies_in_aoe = args.get("IncludeAlliesInAoe", false)
-	include_enemies_in_aoe = args.get("IncludeEnemiesInAoe", false)
+	include_self_in_aoe = args.get("IncludeSelfInAoe", true)
+	include_allies_in_aoe = args.get("IncludeAlliesInAoe", true)
+	include_enemies_in_aoe = args.get("IncludeEnemiesInAoe", true)
 	required_tags = args.get("RequiredTags", [])
 
 func has_area_of_effect()->bool:

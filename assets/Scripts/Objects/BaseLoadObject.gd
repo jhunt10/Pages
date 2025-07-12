@@ -43,6 +43,10 @@ func get_snippet()->String:
 func get_large_icon()->Texture2D:
 	var icon_path = _def_load_path.path_join(get_object_details().get("LargeIcon", ""))
 	return SpriteCache.get_sprite(icon_path)
+	
+func get_small_icon_path()->String:
+	var icon_path = _def_load_path.path_join(get_object_details().get("SmallIcon", ""))
+	return icon_path
 func get_small_icon()->Texture2D:
 	var icon_path = _def_load_path.path_join(get_object_details().get("SmallIcon", ""))
 	return SpriteCache.get_sprite(icon_path)
@@ -50,6 +54,11 @@ func get_tags()->Array:
 	return object_details.get("Tags", []).duplicate()
 func get_taxonomy()->Array:
 	return object_details.get("Taxonomy", []).duplicate()
+func get_taxonomy_leaf()->String:
+	var tax = object_details.get("Taxonomy", [])
+	if tax.size() > 0:
+		return tax[tax.size()-1]
+	return ''
 
 func save_me()->bool:
 	return false

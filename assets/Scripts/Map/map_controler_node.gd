@@ -130,6 +130,13 @@ func get_or_create_actor_node(actor:BaseActor, map_pos:MapPos, wait_to_show:bool
 	if LOGGING: print("MapControllerNode: Created Actor Node: %s" % [actor.Id])
 	return new_node
 
+func create_vfx_holder(map_pos:MapPos)->VfxHolder:
+	var vfx_holder_path = "res://Scenes/VFXs/vfx_holder.tscn"
+	var new_node:VfxHolder = load(vfx_holder_path).instantiate()
+	actor_tile_map.add_child(new_node)
+	new_node.position = actor_tile_map.map_to_local(map_pos.to_vector2i())
+	return new_node
+
 func reparent_actor_node_to_actor_tile_map(actor_node:BaseActorNode):
 	actor_node.reparent(self.actor_tile_map)
 	# Readd actor because _on_actor_node_leave_tree just removed it
@@ -175,7 +182,6 @@ func delete_item_node(item_id):
 func add_missile_node(missile:BaseMissile, node:MissileNode):
 	if Engine.is_editor_hint(): return
 	missile_nodes[missile.Id] = node
-	game_state.add_missile(missile)
 	# Set missile parent if not already set
 	var current_partent = node.get_parent()
 	if current_partent != actor_tile_map and current_partent != null:

@@ -60,7 +60,12 @@ func list_equipment()->Array:
 	return list_items()
 
 func get_equipt_items_of_slot_type(slot_type:String)->Array:
-	if slot_type == "Weapon":
+	if slot_type == "MainHand":
+		var weapons = []
+		var main_hand = get_primary_weapon()
+		if main_hand: weapons.append(main_hand)
+		return weapons
+	elif slot_type == "Weapon":
 		var weapons = []
 		var main_hand = get_primary_weapon()
 		if main_hand: weapons.append(main_hand)

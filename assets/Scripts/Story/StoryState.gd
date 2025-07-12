@@ -77,12 +77,29 @@ func start_new_story():
 	_story_flags.clear()
 	_total_play_time = 0
 	
+	_party_actor_ids = []
 	story_id = "Story:" + str(ResourceUID.create_id())
 	var player_actor_keys = ["SoldierTemplate", "RogueTemplate", "MageTemplate", "PriestTemplate"]
 	for i in range(player_actor_keys.size()):
 		var player_id = "Player_" + str(i) + ":" + str(ResourceUID.create_id())
 		var _new_player = ActorLibrary.create_actor(player_actor_keys[i], {}, player_id)
-		_party_actor_ids = [player_id]
+		_party_actor_ids.append(player_id)
+	
+	# Add all pages
+	var has_pages = []
+	for actor:BaseActor in list_party_actors():
+		has_pages.append_array(actor.pages.list_page_keys())
+	for item_key:String in ItemLibrary.Instance._static_objects.keys():
+		if has_pages.has(item_key):
+			continue
+		var item = ItemLibrary.get_item(item_key)
+		if item is BasePageItem and not item_key.begins_with("#"):
+			PlayerInventory.add_item(item, 1)
+	
+	# Add Supplies
+	for item_key in ItemLibrary.get_item_keys_with_tag("Supply"):
+		PlayerInventory.add_item(item_key, 10)
+		
 	
 	_session_start_unix_time = Time.get_unix_time_from_system()
 	_story_stage_index = -1

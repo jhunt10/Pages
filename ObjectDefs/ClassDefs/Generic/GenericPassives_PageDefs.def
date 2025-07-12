@@ -1,1 +1,872 @@
-{"UnarmedMaster_PageItem":{"!ObjectScript":"res://assets/Scripts/Items/Pages/PageItemPassive.gd","#ObjDetails":{"Description":"When @@#Color:Blue:Unarmed@@ and using no @@#Color:Blue:OffHand@@, your default @@#Color:Red:Unarmed Attack@@ deals @@#DmgData:Damage1@@ and you are considered to be @@#Color:Blue:DualHand@@ and @@#Color:Blue:TwoHand@@.","DisplayName":"Two Hander","LargeIcon":"Sprites/TwoHandBonus_Icon.png","ObjectType":"Item","SmallIcon":"Sprites/TwoHandBonus_Icon.png","SnippetDesc":"120% Base Attack Power for TwoHand Melee Weapons","Tags":["Passive","WpnMod"],"Taxonomy":["Item","Page","Passive"]},"ItemData":{"ItemType":"Page","Rarity":"Common","Value":50},"PageData":{"PageRequirements":{"ConflictingPages":[],"IncompatiblePages":[],"TitleReq":"Match"},"SourceTitle":"Soldier","WeaponMods":{"TwoHanderBonus":{"Conditions":{"ActorTagFilters":[{"RequireAllTags":["Unarmed"]}],"ActorTagFiltersReqAll":true,"MainHandTagFilters":[],"MainHandTagFiltersReqAll":false,"OffHandTagFilters":[],"OffHandTagFiltersReqAll":false,"RequireMainHand":"Empty","RequireOffHand":"Empty"},"DisplayName":"Unarmed Master","WeaponMods":{"AtkPwrMod":{"ModProperty":"AtkPwrBase","ModType":"Set","ModValue":120}}}}},"PassiveData":{},"_DefVersion":"1"}}
+{
+    "UnarmedMaster_PageItem": {
+        "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemPassive.gd",
+        "#ObjDetails": {
+            "Description": "Your hands are literally @@#Color:Red:Weapons@@.",
+            "DisplayName": "Unarmed Master",
+            "LargeIcon": "Sprites/Unarmed_Icon.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/Unarmed_Icon.png",
+            "SnippetDesc": "Your fists are Weapons",
+            "Tags": [
+                "Passive",
+                "WpnMod"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Page",
+                "Passive"
+            ]
+        },
+        "ItemData": {
+            "ItemType": "Page",
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "PageData": {
+            "PageRequirements": {
+                "ConflictingPages": [],
+                "IncompatiblePages": [],
+                "TitleReq": "None"
+            },
+            "WeaponMods": {
+                "TwoHanderBonus": {
+                    "Conditions": {
+                        "ActorTagFilters": [
+                            {
+                                "RequireAllTags": [
+                                    "Unarmed"
+                                ]
+                            }
+                        ],
+                        "ActorTagFiltersReqAll": true,
+                        "MainHandTagFilters": [],
+                        "MainHandTagFiltersReqAll": false,
+                        "OffHandTagFilters": [],
+                        "OffHandTagFiltersReqAll": false,
+                        "RequireMainHand": "Empty",
+                        "RequireOffHand": "Empty"
+                    },
+                    "DisplayName": "Unarmed Master",
+                    "WeaponMods": {
+                        "AtkPwrMod": {
+                            "ModProperty": "AtkPwrBase",
+                            "ModType": "Set",
+                            "ModValue": 120
+                        }
+                    }
+                }
+            }
+        },
+        "PassiveData": {},
+        "_DefVersion": "1"
+    },
+    "MediumWeaponTwoHandPage": {
+        "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemPassive.gd",
+        "#ObjDetails": {
+            "Description": "You can TwoHand Medium Melee Weapons",
+            "DisplayName": "TwoHand Medium",
+            "LargeIcon": "Sprites/MediumWeaponTwoHandPage_Icon.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/MediumWeaponTwoHandPage_Icon.png",
+            "SnippetDesc": "You can TwoHand Medium Melee Weapons",
+            "Tags": [
+                "Passive",
+                "HandMod"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Page",
+                "Passive"
+            ]
+        },
+        "ItemData": {
+            "ItemType": "Page",
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "PageData": {
+            "AttackMods": {},
+            "HandConditionMods": [
+                {
+                    "CanMainHand": true,
+                    "CanOffHand": false,
+                    "CanOneHand": true,
+                    "CanTwoHand": true,
+                    "ConditionName": "TwoHand Medium Weapon",
+                    "OffHandReq": [],
+                    "ToolTagFilters": [
+                        {
+                            "RequireAllTags": [
+                                "MediumWpn"
+                            ]
+                        }
+                    ],
+                    "ToolTagFiltersReqAll": true
+                }
+            ],
+            "PageRequirements": {
+                "ConflictingPages": [],
+                "IncompatiblePages": [],
+                "TitleReq": "None"
+            }
+        },
+        "PassiveData": {},
+        "_DefVersion": "1"
+    },
+    "TwoHandBonus_PageItem": {
+        "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemPassive.gd",
+        "#ObjDetails": {
+            "Description": "When @@#Color:Blue:TwoHand@@ with a @@#Color:Blue:Melee Weapons@@, it's @@#Color:Red:Base Attack Power@@ is inceased to @@#Color:Red:120%@@ from the default 100%.",
+            "DisplayName": "Two Hander",
+            "LargeIcon": "Sprites/TwoHandBonus_Icon.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/TwoHandBonus_Icon.png",
+            "SnippetDesc": "120% Base Attack Power for TwoHand Melee Weapons",
+            "Tags": [
+                "Passive",
+                "WpnMod"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Page",
+                "Passive"
+            ]
+        },
+        "ItemData": {
+            "ItemType": "Page",
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "PageData": {
+            "PageRequirements": {
+                "ConflictingPages": [],
+                "IncompatiblePages": [],
+                "TitleReq": "None"
+            },
+            "WeaponMods": {
+                "TwoHanderBonus": {
+                    "Conditions": {
+                        "ActorTagFilters": [
+                            {
+                                "RequireAllTags": [
+                                    "TwoHand"
+                                ]
+                            }
+                        ],
+                        "ActorTagFiltersReqAll": true,
+                        "MainHandTagFilters": [],
+                        "MainHandTagFiltersReqAll": false,
+                        "OffHandTagFilters": [],
+                        "OffHandTagFiltersReqAll": false,
+                        "RequireMainHand": "Ignore",
+                        "RequireOffHand": "Ignore"
+                    },
+                    "DisplayName": "TwoHander",
+                    "WeaponMods": {
+                        "AtkPwrMod": {
+                            "ModProperty": "AtkPwrBase",
+                            "ModType": "Set",
+                            "ModValue": 120
+                        }
+                    }
+                }
+            }
+        },
+        "PassiveData": {},
+        "_DefVersion": "1"
+    },
+
+
+
+
+
+    
+    "MeleeRangeDualHandPage": {
+        "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemPassive.gd",
+        "#ObjDetails": {
+            "Description": "You can equip a Heavy Range Weapon to OffHand when you have a Light or Medium Melee Weapon in your MainHand.",
+            "DisplayName": "OffHand Ranged",
+            "LargeIcon": "Sprites/MeleeRangeWeaponDualHandPage_Icon.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/MeleeRangeWeaponDualHandPage_Icon.png",
+            "SnippetDesc": "You can DualHand Heavy Melee Weapons",
+            "Tags": [
+                "Passive",
+                "HandMod"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Page",
+                "Passive"
+            ]
+        },
+        "ItemData": {
+            "ItemType": "Page",
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "PageData": {
+            "AddTags": [
+                "TwoHand"
+            ],
+            "HandConditionMods": [
+                {
+                    "CanMainHand": true,
+                    "CanOffHand": true,
+                    "CanOneHand": true,
+                    "CanTwoHand": true,
+                    "ConditionName": "OffHand Heavy Ranged Weapon",
+                    "OffHandReq": [
+                        {
+                            "MainHandTagFilters": [
+                                {
+                                    "RequireAllTags": [
+                                        "MeleeWpn"
+                                    ],
+                                    "RequireAnyTags": [
+                                        "MediumWpn",
+                                        "LightWpn"
+                                    ]
+                                }
+                            ],
+                            "MainHandTagFiltersReqAll": true
+                        }
+                    ],
+                    "ToolTagFilters": [
+                        {
+                            "RequireAllTags": [
+                                "HeavyWpn",
+                                "RangedWpn"
+                            ]
+                        }
+                    ],
+                    "ToolTagFiltersReqAll": true
+                }
+            ],
+            "PageRequirements": {
+                "ConflictingPages": [],
+                "IncompatiblePages": [],
+                "TitleReq": "None"
+            }
+        },
+        "PassiveData": {},
+        "_DefVersion": "1"
+    },
+    "HeavyWeaponDualHandPage": {
+        "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemPassive.gd",
+        "#ObjDetails": {
+            "Description": "You can DualHand Heavy Melee Weapons.",
+            "DisplayName": "Dual Heavy",
+            "LargeIcon": "Sprites/HeavyWeaponDualHandPage_Icon.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/HeavyWeaponDualHandPage_Icon.png",
+            "SnippetDesc": "You can DualHand Heavy Melee Weapons",
+            "Tags": [
+                "Passive",
+                "HandMod"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Page",
+                "Passive"
+            ]
+        },
+        "ItemData": {
+            "ItemType": "Page",
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "PageData": {
+            "AttackMods": {},
+            "HandConditionMods": [
+                {
+                    "CanMainHand": true,
+                    "CanOffHand": true,
+                    "CanOneHand": true,
+                    "CanTwoHand": true,
+                    "ConditionName": "DualHand Heavy Weapon",
+                    "OffHandReq": [
+                        {
+                            "MainHandTagFilters": [
+                                {
+                                    "RequireAnyTags": [
+                                        "HeavyWpn",
+                                        "MeleeWpn"
+                                    ]
+                                }
+                            ],
+                            "MainHandTagFiltersReqAll": true
+                        }
+                    ],
+                    "ToolTagFilters": [
+                        {
+                            "RequireAnyTags": [
+                                "HeavyWpn",
+                                "MeleeWpn"
+                            ]
+                        }
+                    ],
+                    "ToolTagFiltersReqAll": true
+                }
+            ],
+            "PageRequirements": {
+                "ConflictingPages": [],
+                "IncompatiblePages": [],
+                "TitleReq": "None"
+            }
+        },
+        "PassiveData": {},
+        "_DefVersion": "1"
+    },
+    "MediumWeaponDualHandPage": {
+        "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemPassive.gd",
+        "#ObjDetails": {
+            "Description": "You can DualHand Medium Melee Weapons",
+            "DisplayName": "Dual Medium",
+            "LargeIcon": "Sprites/MediumWeaponDualHandPage_Icon.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/MediumWeaponDualHandPage_Icon.png",
+            "SnippetDesc": "You can DualHand Medium Melee Weapons",
+            "Tags": [
+                "Passive",
+                "HandMod"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Page",
+                "Passive"
+            ]
+        },
+        "ItemData": {
+            "ItemType": "Page",
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "PageData": {
+            "AttackMods": {},
+            "HandConditionMods": [
+                {
+                    "CanMainHand": true,
+                    "CanOffHand": true,
+                    "CanOneHand": true,
+                    "CanTwoHand": false,
+                    "ConditionName": "DualHand Medium Weapon",
+                    "OffHandReq": [
+                        {
+                            "MainHandTagFilters": [
+                                {
+                                    "RequireAnyTags": [
+                                        "LightWpn",
+                                        "MediumWpn"
+                                    ]
+                                }
+                            ],
+                            "MainHandTagFiltersReqAll": true
+                        }
+                    ],
+                    "ToolTagFilters": [
+                        {
+                            "RequireAllTags": [
+                                "MeleeWpn"
+                            ],
+                            "RequireAnyTags": [
+                                "LightWpn",
+                                "MediumWpn"
+                            ]
+                        }
+                    ],
+                    "ToolTagFiltersReqAll": true
+                }
+            ],
+            "PageRequirements": {
+                "ConflictingPages": [],
+                "IncompatiblePages": [],
+                "TitleReq": "None"
+            }
+        },
+        "PassiveData": {},
+        "_DefVersion": "1"
+    },
+
+
+
+    
+    "MagWeaponOverride_Cold_PageItem": {
+        "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemPassive.gd",
+        "#ObjDetails": {
+            "Description": "@@#Color:Blue:Scepters@@, @@#Color:Blue:Staffs@@, and @@#Color:Blue:Wands@@ deal @@#Color:DmgColor:Cold:Cold Damage@@ on @@#Color:Red:Weapon Attacks@@.",
+            "DisplayName": "Override: Cold ",
+            "LargeIcon": "Sprites/MagWeapon_Cold_Icon.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/MagWeapon_Cold_Icon.png",
+            "SnippetDesc": "Scepters, Staffs, and Wands deal Cold Damage",
+            "Tags": [
+                "Passive",
+                "WpnMod"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Page",
+                "Passive"
+            ]
+        },
+        "ItemData": {
+            "ItemType": "Page",
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "PageData": {
+            "PageRequirements": {
+                "ConflictingPages": [],
+                "IncompatiblePages": [],
+                "TitleReq": "None"
+            },
+            "WeaponMods": {
+                "DualLightBonus": {
+                    "Conditions": {},
+                    "DisplayName": "Ambidualtrous",
+                    "WeaponMods": {
+                        "DamageTypeMod": {
+                            "Conditions": {
+                                "TagFilters": [
+                                    {
+                                        "RequireAnyTags": [
+                                            "Scepter",
+                                            "Staff",
+                                            "Wand"
+                                        ]
+                                    }
+                                ],
+                                "TagFiltersReqAll": true
+                            },
+                            "ModProperty": "DamageType",
+                            "ModType": "Set",
+                            "ModValue": "Cold"
+                        },
+                        "DamageVfxMod": {
+                            "Conditions": {
+                                "TagFilters": [
+                                    {
+                                        "RequireAnyTags": [
+                                            "Scepter",
+                                            "Staff",
+                                            "Wand"
+                                        ]
+                                    }
+                                ],
+                                "TagFiltersReqAll": true
+                            },
+                            "ModProperty": "DamageVfxKey",
+                            "ModType": "Set",
+                            "ModValue": "Auto"
+                        }
+                    }
+                }
+            }
+        },
+        "PassiveData": {},
+        "_DefVersion": "1"
+    },
+    "MagWeaponOverride_Fire_PageItem": {
+        "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemPassive.gd",
+        "#ObjDetails": {
+            "Description": "@@#Color:Blue:Scepters@@, @@#Color:Blue:Staffs@@, and @@#Color:Blue:Wands@@ deal @@#Color:DmgColor:Fire:Fire Damage@@ on @@#Color:Red:Weapon Attacks@@.",
+            "DisplayName": "Override: Fire ",
+            "LargeIcon": "Sprites/MagWeapon_Fire_Icon.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/MagWeapon_Fire_Icon.png",
+            "SnippetDesc": "Scepters, Staffs, and Wands deal Fire Damage",
+            "Tags": [
+                "Passive",
+                "WpnMod"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Page",
+                "Passive"
+            ]
+        },
+        "ItemData": {
+            "ItemType": "Page",
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "PageData": {
+            "PageRequirements": {
+                "ConflictingPages": [],
+                "IncompatiblePages": [],
+                "TitleReq": "None"
+            },
+            "WeaponMods": {
+                "DualLightBonus": {
+                    "Conditions": {},
+                    "DisplayName": "Ambidualtrous",
+                    "WeaponMods": {
+                        "DamageTypeMod": {
+                            "Conditions": {
+                                "TagFilters": [
+                                    {
+                                        "RequireAnyTags": [
+                                            "Scepter",
+                                            "Staff",
+                                            "Wand"
+                                        ]
+                                    }
+                                ],
+                                "TagFiltersReqAll": true
+                            },
+                            "ModProperty": "DamageType",
+                            "ModType": "Set",
+                            "ModValue": "Fire"
+                        },
+                        "DamageVfxMod": {
+                            "Conditions": {
+                                "TagFilters": [
+                                    {
+                                        "RequireAnyTags": [
+                                            "Scepter",
+                                            "Staff",
+                                            "Wand"
+                                        ]
+                                    }
+                                ],
+                                "TagFiltersReqAll": true
+                            },
+                            "ModProperty": "DamageVfxKey",
+                            "ModType": "Set",
+                            "ModValue": "Auto"
+                        }
+                    }
+                }
+            }
+        },
+        "PassiveData": {},
+        "_DefVersion": "1"
+    },
+    "MagWeaponOverride_Poison_PageItem": {
+        "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemPassive.gd",
+        "#ObjDetails": {
+            "Description": "@@#Color:Blue:Scepters@@, @@#Color:Blue:Staffs@@, and @@#Color:Blue:Wands@@ deal @@#Color:DmgColor:Poison:Poison Damage@@ on @@#Color:Red:Weapon Attacks@@.",
+            "DisplayName": "Override: Poison ",
+            "LargeIcon": "Sprites/MagWeapon_Poison_Icon.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/MagWeapon_Poison_Icon.png",
+            "SnippetDesc": "Scepters, Staffs, and Wands deal Poison Damage",
+            "Tags": [
+                "Passive",
+                "WpnMod"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Page",
+                "Passive"
+            ]
+        },
+        "ItemData": {
+            "ItemType": "Page",
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "PageData": {
+            "PageRequirements": {
+                "ConflictingPages": [],
+                "IncompatiblePages": [],
+                "TitleReq": "None"
+            },
+            "WeaponMods": {
+                "DualLightBonus": {
+                    "Conditions": {},
+                    "DisplayName": "Ambidualtrous",
+                    "WeaponMods": {
+                        "DamageTypeMod": {
+                            "Conditions": {
+                                "TagFilters": [
+                                    {
+                                        "RequireAnyTags": [
+                                            "Scepter",
+                                            "Staff",
+                                            "Wand"
+                                        ]
+                                    }
+                                ],
+                                "TagFiltersReqAll": true
+                            },
+                            "ModProperty": "DamageType",
+                            "ModType": "Set",
+                            "ModValue": "Poison"
+                        },
+                        "DamageVfxMod": {
+                            "Conditions": {
+                                "TagFilters": [
+                                    {
+                                        "RequireAnyTags": [
+                                            "Scepter",
+                                            "Staff",
+                                            "Wand"
+                                        ]
+                                    }
+                                ],
+                                "TagFiltersReqAll": true
+                            },
+                            "ModProperty": "DamageVfxKey",
+                            "ModType": "Set",
+                            "ModValue": "Auto"
+                        }
+                    }
+                }
+            }
+        },
+        "PassiveData": {},
+        "_DefVersion": "1"
+    },
+    "MagWeaponOverride_Shock_PageItem": {
+        "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemPassive.gd",
+        "#ObjDetails": {
+            "Description": "@@#Color:Blue:Scepters@@, @@#Color:Blue:Staffs@@, and @@#Color:Blue:Wands@@ deal @@#Color:DmgColor:Shock:Shock Damage@@ on @@#Color:Red:Weapon Attacks@@.",
+            "DisplayName": "Override: Shock ",
+            "LargeIcon": "Sprites/MagWeapon_Shock_Icon.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/MagWeapon_Shock_Icon.png",
+            "SnippetDesc": "Scepters, Staffs, and Wands deal Shock Damage",
+            "Tags": [
+                "Passive",
+                "WpnMod"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Page",
+                "Passive"
+            ]
+        },
+        "ItemData": {
+            "ItemType": "Page",
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "PageData": {
+            "PageRequirements": {
+                "ConflictingPages": [],
+                "IncompatiblePages": [],
+                "TitleReq": "None"
+            },
+            "WeaponMods": {
+                "DualLightBonus": {
+                    "Conditions": {},
+                    "DisplayName": "Ambidualtrous",
+                    "WeaponMods": {
+                        "DamageTypeMod": {
+                            "Conditions": {
+                                "TagFilters": [
+                                    {
+                                        "RequireAnyTags": [
+                                            "Scepter",
+                                            "Staff",
+                                            "Wand"
+                                        ]
+                                    }
+                                ],
+                                "TagFiltersReqAll": true
+                            },
+                            "ModProperty": "DamageType",
+                            "ModType": "Set",
+                            "ModValue": "Shock"
+                        },
+                        "DamageVfxMod": {
+                            "Conditions": {
+                                "TagFilters": [
+                                    {
+                                        "RequireAnyTags": [
+                                            "Scepter",
+                                            "Staff",
+                                            "Wand"
+                                        ]
+                                    }
+                                ],
+                                "TagFiltersReqAll": true
+                            },
+                            "ModProperty": "DamageVfxKey",
+                            "ModType": "Set",
+                            "ModValue": "Auto"
+                        }
+                    }
+                }
+            }
+        },
+        "PassiveData": {},
+        "_DefVersion": "1"
+    },
+
+
+    
+    "PPRPlus_PageItem": {
+        "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemPassive.gd",
+        "#ObjDetails": {
+            "Description": "Gain @@#StatMod:PPRMod@@.",
+            "DisplayName": "PPR Plus",
+            "LargeIcon": "Sprites/PPRPlus_Icon.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/PPRPlus_Icon.png",
+            "SnippetDesc": "+1 PPR",
+            "Tags": [
+                "Passive",
+                "StatMod"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Page",
+                "Passive"
+            ]
+        },
+        "ItemData": {
+            "ItemType": "Page",
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "PageData": {
+            "PageRequirements": {
+                "ConflictingPages": [],
+                "IncompatiblePages": [],
+                "TitleReq": "None"
+            },
+            "StatMods":{
+                "PPRMod": {
+                    "ModType": "Add",
+                    "StatName": "PPR",
+                    "Value": 1
+                }
+            }
+        },
+        "PassiveData": {},
+        "_DefVersion": "1"
+    },
+    "Active_PageItem": {
+        "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemPassive.gd",
+        "#ObjDetails": {
+            "Description": "Gain @@#StatMod:PPRMod@@.",
+            "DisplayName": "Active",
+            "LargeIcon": "Sprites/ActionPlus_Icon.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/ActionPlus_Icon.png",
+            "SnippetDesc": "+1 PPR",
+            "Tags": [
+                "Passive",
+                "StatMod"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Page",
+                "Passive"
+            ]
+        },
+        "ItemData": {
+            "ItemType": "Page",
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "PageData": {
+            "PageRequirements": {
+                "ConflictingPages": [],
+                "IncompatiblePages": [],
+                "TitleReq": "None"
+            },
+            "ExtraPageSlots":{
+                "ExtraAction": {
+                    "Key":"ActiveExtraAction",
+                    "DisplayName":"Actions",
+                    "Count": 1,
+                    "FilterData":{
+                        "RequiredTags":"Action"
+                    }
+                }
+            }
+        },
+        "PassiveData": {},
+        "_DefVersion": "1"
+    },
+    "Redundant_PageItem": {
+        "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemPassive.gd",
+        "#ObjDetails": {
+            "Description": "Gain @@#StatMod:PPRMod@@.",
+            "DisplayName": "Redundant",
+            "LargeIcon": "Sprites/PassivePlus_Icon.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/PassivePlus_Icon.png",
+            "SnippetDesc": "+1 PPR",
+            "Tags": [
+                "Passive",
+                "StatMod"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Page",
+                "Passive"
+            ]
+        },
+        "ItemData": {
+            "ItemType": "Page",
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "PageData": {
+            "PageRequirements": {
+                "ConflictingPages": [],
+                "IncompatiblePages": [],
+                "TitleReq": "None"
+            },
+            "ExtraPageSlots":{
+                "ExtraPassive": {
+                    "Key":"RedundantExtraPassive",
+                    "DisplayName":"Passives",
+                    "Count": 1,
+                    "FilterData":{
+                        "RequiredTags":"Passive"
+                    }
+                }
+            }
+        },
+        "PassiveData": {},
+        "_DefVersion": "1"
+    },
+    "Strategic_PageItem": {
+        "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemPassive.gd",
+        "#ObjDetails": {
+            "Description": "Gain @@#StatMod:PPRMod@@.",
+            "DisplayName": "Strategic",
+            "LargeIcon": "Sprites/Strategic_Icon.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/Strategic_Icon.png",
+            "SnippetDesc": "+1 PPR",
+            "Tags": [
+                "Passive",
+                "StatMod"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Page",
+                "Passive"
+            ]
+        },
+        "ItemData": {
+            "ItemType": "Page",
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "PageData": {
+            "PageRequirements": {
+                "ConflictingPages": [],
+                "IncompatiblePages": [],
+                "TitleReq": "None"
+            },
+            "StatMods":{
+                "PPRMod": {
+                    "ModType": "Add",
+                    "StatName": "PPR",
+                    "Value": 1
+                }
+            }
+        },
+        "PassiveData": {},
+        "_DefVersion": "1"
+    },
+}
