@@ -100,6 +100,15 @@ func start_new_story():
 	for item_key in ItemLibrary.get_item_keys_with_tag("Supply"):
 		PlayerInventory.add_item(item_key, 10)
 		
+	# Add all Equipment
+	var has_equipment = []
+	for actor:BaseActor in list_party_actors():
+		for equip:BaseEquipmentItem in actor.equipment.list_items():
+			has_equipment.append(equip.ItemKey)
+	for item_key:String in ItemLibrary.Instance.get_item_keys_with_tag("Equipment"):
+		if has_equipment.has(item_key):
+			continue
+		PlayerInventory.add_item(item_key, 1)
 	
 	_session_start_unix_time = Time.get_unix_time_from_system()
 	_story_stage_index = -1

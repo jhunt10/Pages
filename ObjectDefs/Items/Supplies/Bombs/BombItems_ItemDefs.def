@@ -1,5 +1,5 @@
 {
-    "BombItem": {
+    "BombBasicItem": {
         "!ObjectScript": "res://assets/Scripts/Items/Supplies/AttackSupplies/BaseAttackSupplyIyem.gd",
         "#ObjDetails": {
             "Description": "A completly safe and reliable explosive device guaranteed* not to kill the user or your money back!\n\nDeals [Bomb Damage]\n\n*All claims must be filed by individual user at time of incident.",
@@ -9,19 +9,20 @@
             "SmallIcon": "Sprites/BasicBomb_Small.png",
             "SnippetDesc": "Basic Bomb",
             "Tags": [
-                "Potion"
+                "Throwable",
+                "Bomb"
             ],
             "Taxonomy": [
                 "Item",
                 "Supply",
-                "Potion"
+                "Throwable",
+                "Bomb"
             ]
         },
         "ItemData": {
             "Rarity": "Rare",
             "Value": 500
         },
-        "ActionData": {},
         "SuppliesData": {
             "ThrownItemMissileData":{
                 "MissileVfxData": {
@@ -63,6 +64,101 @@
                     "LineOfSight": true,
                     "TargetArea": "[[0,0]]",
                     "TargetType": "Spot"
+                }
+            }
+        },
+        "_DefVersion": "1"
+    },
+    "BombColdItem": {
+        "!ObjectScript": "res://assets/Scripts/Items/Supplies/AttackSupplies/BaseAttackSupplyIyem.gd",
+        "!ParentKey": "BombBasicItem",
+        "#ObjDetails": {
+            "DisplayName": "Cold Bomb",
+            "LargeIcon": "Sprites/BasicBombCold_Large.png",
+            "SmallIcon": "Sprites/BasicBombCold_Small.png"
+        },
+        "SuppliesData": {
+            "AttackData": {
+                "DamageDatas": {
+                    "Damage1": {
+                        "DamageType": "Cold"
+                    }
+                }
+            }
+        },
+        "_DefVersion": "1"
+    },
+    "BombFireItem": {
+        "!ObjectScript": "res://assets/Scripts/Items/Supplies/AttackSupplies/BaseAttackSupplyIyem.gd",
+        "!ParentKey": "BombBasicItem",
+        "#ObjDetails": {
+            "DisplayName": "Fire Bomb",
+            "LargeIcon": "Sprites/BasicBombFire_Large.png",
+            "SmallIcon": "Sprites/BasicBombFire_Small.png"
+        },
+        "SuppliesData": {
+            "AttackData": {
+                "DamageDatas": {
+                    "Damage1": {
+                        "DamageType": "Fire"
+                    }
+                }
+            }
+        },
+        "_DefVersion": "1"
+    },
+    "BombShockItem": {
+        "!ObjectScript": "res://assets/Scripts/Items/Supplies/AttackSupplies/BaseAttackSupplyIyem.gd",
+        "!ParentKey": "BombBasicItem",
+        "#ObjDetails": {
+            "DisplayName": "Shock Bomb",
+            "LargeIcon": "Sprites/BasicBombShock_Large.png",
+            "SmallIcon": "Sprites/BasicBombShock_Small.png"
+        },
+        "SuppliesData": {
+            "AttackData": {
+                "DamageDatas": {
+                    "Damage1": {
+                        "DamageType": "Shock"
+                    }
+                }
+            }
+        },
+        "_DefVersion": "1"
+    },
+    "BombPoisonItem": {
+        "!ObjectScript": "res://assets/Scripts/Items/Supplies/AttackSupplies/BaseAttackSupplyIyem.gd",
+        "!ParentKey": "BombBasicItem",
+        "#ObjDetails": {
+            "DisplayName": "Poison Bomb",
+            "LargeIcon": "Sprites/BasicBombPoison_Large.png",
+            "SmallIcon": "Sprites/BasicBombPoison_Small.png"
+        },
+        "SuppliesData": {
+            "AttackData": {
+                "DamageDatas": {
+                    "Damage1": {
+                        "DamageType": "Poison"
+                    }
+                }
+            }
+        },
+        "_DefVersion": "1"
+    },
+    "BombGreaseItem": {
+        "!ObjectScript": "res://assets/Scripts/Items/Supplies/AttackSupplies/BaseAttackSupplyIyem.gd",
+        "!ParentKey": "BombBasicItem",
+        "#ObjDetails": {
+            "DisplayName": "Grease Bomb",
+            "LargeIcon": "Sprites/BasicBombGrease_Large.png",
+            "SmallIcon": "Sprites/BasicBombGrease_Small.png"
+        },
+        "SuppliesData": {
+            "AttackData": {
+                "DamageDatas": {
+                    "Damage1": {
+                        "DamageType": "Grease"
+                    }
                 }
             }
         },

@@ -597,6 +597,7 @@ vertical_alignment = 1
 text_overrun_behavior = 1
 
 [node name="InventoryContainer" parent="ScaleControl" instance=ExtResource("8_6gqbj")]
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
@@ -608,7 +609,6 @@ grow_horizontal = 0
 grow_vertical = 2
 
 [node name="StatsPage" type="Control" parent="ScaleControl" node_paths=PackedStringArray("strength_label", "agility_label", "intelligence_label", "wisdom_label", "bar_stats_container", "speed_stat_label", "mass_stat_label", "ppr_stat_label", "health_stat_label", "mag_atk_label", "phys_atk_label", "accuracy_stat_label", "potency_stat_label", "range_display", "main_hand_damage_label", "other_hand_damage_label", "crit_mod_label", "crit_chance_label", "armor_label", "ward_label", "evasion_stat_label", "protection_stat_label", "awareness_stat_label", "awareness_display", "block_chance_label", "block_mod_label", "evade_front_chance_label", "evade_flank_chance_label", "evade_back_chance_label", "block_front_chance_label", "block_flank_chance_label", "block_back_chance_label", "full_stat_display")]
-visible = false
 custom_minimum_size = Vector2(280, 395)
 anchors_preset = 0
 offset_left = 303.0
@@ -1350,7 +1350,6 @@ layout_mode = 2
 size_flags_vertical = 3
 
 [node name="DefStatsContainer" type="Container" parent="ScaleControl/StatsPage/ContainerControl/StatsMainContainer" node_paths=PackedStringArray("background", "inner_container")]
-visible = false
 custom_minimum_size = Vector2(12, 118)
 layout_mode = 2
 script = ExtResource("16_ep8hk")
@@ -1685,7 +1684,7 @@ self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("12_dy5pv")
-text = " Chances"
+text = "Fwd / Flk / Bck"
 horizontal_alignment = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ScaleControl/StatsPage/ContainerControl/StatsMainContainer/DefStatsContainer/BoxContainer/MainContainer/EvadeBlockGrid"]

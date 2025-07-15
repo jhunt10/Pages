@@ -130,15 +130,15 @@
         "_DefVersion": "1"
     },
     
-    "ThrowItemPage": {
+    "#BaseThrowItemPage": {
         "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
         "#ObjDetails": {
-            "Description": "Launch a @@#Color:Magical Missile@@ at @@#TrgParm:TargetParam:TargetType@@ in range, dealing @@#DmgData:MissileDamage@@ to any @@#Color:Red:Actor@@ it hits.",
-            "DisplayName": "#Base Missile Spell",
+            "Description": "Select a @@#Tag:Item@@ from your bag and throw it like a @@#Color:Missile@@ at @@#TrgParm:TargetParam:TargetType@@ in range.",
+            "DisplayName": "Throw Bomb",
             "LargeIcon": "Sprites/ThrowItem_Icon.png",
             "ObjectType": "Item",
             "SmallIcon": "Sprites/ThrowItem_Icon.png",
-            "SnippetDesc": "Launch a Missile of DAMAGE_TYPE",
+            "SnippetDesc": "Throw a Bomb Missile at Spot",
             "Tags": [
                 "Throw"
             ],
@@ -200,4 +200,46 @@
         },
         "_DefVersion": "1"
     },
+    "ThrowBombPage": {
+        "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
+        "!ParentKey": "#BaseThrowItemPage",
+        "#ObjDetails": {
+            "Description": "Select a @@#Tag:Bomb Item@@ from your bag and throw it like a @@#Color:Missile@@ at @@#TrgParm:TargetParam:TargetType@@ in range.",
+            "DisplayName": "Throw Bomb",
+            "LargeIcon": "Sprites/ThrowBomb_Icon.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/ThrowBomb_Icon.png",
+            "SnippetDesc": "Throw a Bomb Missile at Spot",
+            "Tags": [
+                "Throw"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Page",
+                "Action"
+            ]
+        },
+        "_DefVersion": "1"
+    },
+    "ThrowPotionPage": {
+        "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
+        "!ParentKey": "#BaseThrowItemPage",
+        "#ObjDetails": {
+            "Description": "Select a @@#Tag:Potion Item@@ from your bag and throw it like a @@#Color:Missile@@ at @@#TrgParm:TargetParam:TargetType@@ in range.",
+            "DisplayName": "Throw Potion",
+            "LargeIcon": "Sprites/ThrowPotion_Icon.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/ThrowPotion_Icon.png",
+            "SnippetDesc": "Throw a Potion Missile at Spot",
+            "Tags": [
+                "Throw"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Page",
+                "Action"
+            ]
+        },
+        "_DefVersion": "1"
+    }
 }

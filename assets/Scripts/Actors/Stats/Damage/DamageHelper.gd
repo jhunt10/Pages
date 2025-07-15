@@ -85,6 +85,10 @@ static func get_min_max_damage(actor:BaseActor, damage_data:Dictionary)->Array:
 	var max_power = attack_power + attack_power_range
 	var min_dam = ceili(float(base_damage) * min_power * attack_power_scale)
 	var max_dam = ceili(float(base_damage) * max_power * attack_power_scale)
+	if damage_data.get("DisplayAsCrit", false):
+		var crit_mod = actor.stats.get_stat(StatHelper.CritMod, 1)
+		min_dam = ceili(float(min_dam) * crit_mod)
+		max_dam = ceili(float(max_dam) * crit_mod)
 	return [min_dam, max_dam]
 
 # Made for Bonus Damage, holding off on that idea

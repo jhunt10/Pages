@@ -1,13 +1,100 @@
 {
+    "EvasionAoePage": {
+        "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemPassive.gd",
+        "#ObjDetails": {
+            "Description": "Most people would say it's physically imposible to dodge an attack coming from all side, but you've never been good at math.\n\nYou have a chance to @@#Color:Red:Evade@@ against @@#Color:Red:AOE Attacks@@ equal to the chance for those from your @@#Color:Red:Flank@@.",
+            "DisplayName": "Evade AOE",
+            "LargeIcon": "Sprites/EvadeAoe_Icon.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/EvadeAoe_Icon.png",
+            "SnippetDesc": "Can Evasion AOE Attacks with same chance as Flank.",
+            "Tags": [
+                "Passive"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Page",
+                "Passive"
+            ]
+        },
+        "ItemData": {
+            "ItemType": "Page",
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "PageData": {
+            "PageRequirements": {
+                "ConflictingPages": [],
+                "IncompatiblePages": [],
+                "TitleReq": "Match"
+            },
+            "SourceTitle": "Rogue",
+            "StatMods": {
+                "BlockAoeMod": {
+                    "ModType": "Set",
+                    "StatName": "DirSub_Aoe:EvadeChance",
+                    "Value": 1
+                }
+            }
+        },
+        "PassiveData": {},
+        "_DefVersion": "1"
+    },
+    "ArtfulDodgerPage": {
+        "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemPassive.gd",
+        "#ObjDetails": {
+            "Description": "You've learned to keep on your toes and react to threats from every which way.\n\nDecrease @@#Stat:Evasion@@ penalty when attack from:\n[color=#460000]Flank -50% => [/color]@@#StatMod:FlankBlockMod:InvertPercent@@\n[color=#460000]Back -100% => [/color]@@#StatMod:BackBlockMod:InvertPercent@@.",
+            "DisplayName": "Artful Dodger",
+            "LargeIcon": "Sprites/ArtfulDodger_Icon.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/ArtfulDodger_Icon.png",
+            "SnippetDesc": "+1 Awareness and reduce diractional Evasion penalties.",
+            "Tags": [
+                "Passive"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Page",
+                "Passive"
+            ]
+        },
+        "ItemData": {
+            "ItemType": "Page",
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "PageData": {
+            "PageRequirements": {
+                "ConflictingPages": [],
+                "IncompatiblePages": [],
+                "TitleReq": "Match"
+            },
+            "SourceTitle": "Rogue",
+            "StatMods": {
+                "BackBlockMod": {
+                    "ModType": "Set",
+                    "StatName": "DirMod_Back:Evasion",
+                    "Value": 0.50
+                },
+                "FlankBlockMod": {
+                    "ModType": "Set",
+                    "StatName": "DirMod_Flank:Evasion",
+                    "Value": 0.75
+                }
+            }
+        },
+        "PassiveData": {},
+        "_DefVersion": "1"
+    },
     "BackStab_PageItem": {
         "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemPassive.gd",
         "#ObjDetails": {
-            "Description": "Gain +100 Crit Chance when attacking Target from Behind.",
-            "DisplayName": "Back Stab",
+            "Description": "It's a good rule of thumb to never turn your back on the enemy. For those who forget why, you'll be happy to remind them.\n\n@@#AtkMod:BackStabAtkMod:StatMod:BackStabStatMod@@ when attacking from @@#Color:Red:Behind@@.",
+            "DisplayName": "Back Stabber",
             "LargeIcon": "Sprites/BackStab_Icon.png",
             "ObjectType": "Item",
             "SmallIcon": "Sprites/BackStab_Icon.png",
-            "SnippetDesc": "+100 Crit Chance attacking from Behind",
+            "SnippetDesc": "+50 Crit Chance attacking from Behind",
             "Tags": [
                 "Passive"
             ],
@@ -59,7 +146,7 @@
                             },
                             "ModType": "Add",
                             "StatName": "CritChance",
-                            "Value": 100
+                            "Value": 50
                         }
                     }
                 }
@@ -74,10 +161,51 @@
         "PassiveData": {},
         "_DefVersion": "1"
     },
+    "EvasivePage": {
+        "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemPassive.gd",
+        "#ObjDetails": {
+            "Description": "You've had to dodge a lot of things in life, blades, people, alimony payments. And you've gotten pretty good at it.\n\n@@#StatMod:EvasionMod@@",
+            "DisplayName": "Evasive",
+            "LargeIcon": "Sprites/EvadePlus_Icon.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/EvadePlus_Icon.png",
+            "SnippetDesc": "+10 Evasion.",
+            "Tags": [
+                "Passive"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Page",
+                "Passive"
+            ]
+        },
+        "ItemData": {
+            "ItemType": "Page",
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "PageData": {
+            "PageRequirements": {
+                "ConflictingPages": [],
+                "IncompatiblePages": [],
+                "TitleReq": "Match"
+            },
+            "SourceTitle": "Rogue",
+            "StatMods": {
+                "EvasionMod": {
+                    "ModType": "Add",
+                    "StatName": "Evasion",
+                    "Value": 10
+                }
+            }
+        },
+        "PassiveData": {},
+        "_DefVersion": "1"
+    },
     "DualHander_PageItem": {
         "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemPassive.gd",
         "#ObjDetails": {
-            "Description": "When @@#Color:Blue:DualHand@@ with two @@#Color:Blue:Light Weapons@@, thier @@#Color:Red:Base Attack Power@@ is inceased to @@#Color:Red:60%@@. (default is 50%)",
+            "Description": "When @@#Color:Blue:DualHand@@ with two @@#Color:Blue:Light Weapons@@, thier @@#Color:Red:Base Attack Power@@ is inceased to @@#Color:Red:60%@@ from the default is 50%.",
             "DisplayName": "Ambidualtrous",
             "LargeIcon": "Sprites/DualDagger_Icon.png",
             "ObjectType": "Item",
@@ -152,14 +280,15 @@
     "LowAggro_PageItem": {
         "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemPassive.gd",
         "#ObjDetails": {
-            "Description": "Generate less Threat causing Enemies to be less likely to prioritise you as a Target.",
-            "DisplayName": "LowAggro",
+            "Description": "It's easy to go unnoticed when in a crowd or alone in an ally. But not drawing attention while stabbing someone in their side, that takes real skill.\n\nGenerate less @@#Color:Red:30% less Threat@@ causing Enemies to be less likely to prioritise you as thier Target.",
+            "DisplayName": "Sneaky",
             "LargeIcon": "Sprites/AggroDown_Icon.png",
             "ObjectType": "Item",
             "SmallIcon": "Sprites/AggroDown_Icon.png",
             "SnippetDesc": "Generate less Threat.",
             "Tags": [
-                "Passive"
+                "Passive",
+                "AggroMod"
             ],
             "Taxonomy": [
                 "Item",
@@ -189,5 +318,59 @@
         },
         "PassiveData": {},
         "_DefVersion": "1"
-    }
+    },
+    
+    "PhyBoostPage": {
+        "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemPassive.gd",
+        "#ObjDetails": {
+            "Description": "@@#Color:Blue:Ammo@@ is expsensive, so you've learned to to sqeeze a clip for all i's worth.@@#Color:Blue:Money@@.\n\n@@#Color:Red:+100% Max@@ @@#Color:Ammo:Phy:Phy Ammo@@ on @@#Color:Blue:Pages@@.",
+            "DisplayName": "Phy Boost",
+            "LargeIcon": "Sprites/PhyAmmoBoost_Icon.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/PhyAmmoBoost_Icon.png",
+            "SnippetDesc": "+100% Max Phy Ammo on Pages",
+            "Tags": [
+                "Passive",
+                "AmmoMod"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Page",
+                "Passive"
+            ]
+        },
+        "ItemData": {
+            "ItemType": "Page",
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "PageData": {
+            "AmmoMods": {
+                "MagBoostAmmoMod": {
+                    "Conditions": {
+                        "ActionTagFilters": [
+                            {
+                                "RequireAnyTags": [
+                                    "Page"
+                                ]
+                            }
+                        ],
+                        "AmmoTypes": [
+                            "Phy"
+                        ]
+                    },
+                    "ModType": "ScaleClip",
+                    "Value": 2
+                }
+            },
+            "PageRequirements": {
+                "ConflictingPages": [],
+                "IncompatiblePages": [],
+                "TitleReq": "Match"
+            },
+            "SourceTitle": "Rogue"
+        },
+        "PassiveData": {},
+        "_DefVersion": "1"
+    },
 }

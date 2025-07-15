@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bqi05unl37q0p"]
+[gd_scene load_steps=10 format=3 uid="uid://bqi05unl37q0p"]
 
 [ext_resource type="Script" path="res://Scenes/UiNodes/DamageLabelContainer/damage_label_container.gd" id="1_rhguf"]
 [ext_resource type="Texture2D" uid="uid://diy8q5lpvpw1u" path="res://assets/Sprites/UI/SymbolIcons/PhyDamageSymbol.png" id="2_3erjx"]
@@ -8,19 +8,22 @@
 [ext_resource type="Script" path="res://Scenes/UiNodes/back_patch_container.gd" id="5_caaw7"]
 [ext_resource type="Theme" uid="uid://bfce41la62bs6" path="res://Scenes/Themes/readable_theme.tres" id="5_korun"]
 [ext_resource type="Texture2D" uid="uid://io35wpu802fp" path="res://assets/Sprites/UI/BackPatches/Patch_64_12.png" id="6_be6gi"]
+[ext_resource type="Texture2D" uid="uid://dq2cad8orar4p" path="res://assets/Sprites/UI/SymbolIcons/ArmorSymbol.png" id="9_6dh7h"]
 
-[node name="DamageContainer" type="HBoxContainer" node_paths=PackedStringArray("damage_icon_rect", "atk_power_label", "plus_minus_label", "percent_label", "variant_label", "damage_type_label", "multiplier_label", "count_label", "popup_container", "popup_message")]
+[node name="DamageContainer" type="HBoxContainer" node_paths=PackedStringArray("atk_power_label", "plus_minus_label", "percent_label", "variant_label", "damage_type_label", "multiplier_label", "count_label", "atk_stat_icon", "vs_lable", "defense_stat_icon", "popup_container", "popup_message")]
 script = ExtResource("1_rhguf")
 attack_power = 100
 attack_variant = 30.0
-damage_icon_rect = NodePath("DamageIcon")
-atk_power_label = NodePath("AtkPowerLabel")
-plus_minus_label = NodePath("PlusMinusLabel")
-percent_label = NodePath("PercentLabel")
-variant_label = NodePath("VariantLabel")
+atk_power_label = NodePath("HBoxContainer2/AtkPowerLabel")
+plus_minus_label = NodePath("HBoxContainer2/PlusMinusLabel")
+percent_label = NodePath("HBoxContainer2/PercentLabel")
+variant_label = NodePath("HBoxContainer2/VariantLabel")
 damage_type_label = NodePath("DamageTypeLabel")
 multiplier_label = NodePath("MultiplierLabel")
 count_label = NodePath("CountLabel")
+atk_stat_icon = NodePath("AtkStatIcon")
+vs_lable = NodePath("HBoxContainer/VsLabel")
+defense_stat_icon = NodePath("HBoxContainer/DefenseStatIcon")
 abb_damage_icon = ExtResource("2_mm46y")
 phy_damage_icon = ExtResource("2_3erjx")
 mag_damage_icon = ExtResource("3_00rac")
@@ -70,44 +73,57 @@ theme = ExtResource("4_xveyi")
 theme_override_colors/font_color = Color(0.470588, 0, 0, 1)
 text = "3"
 
-[node name="DamageIcon" type="TextureRect" parent="."]
+[node name="AtkStatIcon" type="TextureRect" parent="."]
 layout_mode = 2
 texture = ExtResource("2_mm46y")
 expand_mode = 3
 
-[node name="AtkPowerLabel" type="Label" parent="."]
+[node name="HBoxContainer2" type="HBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="AtkPowerLabel" type="Label" parent="HBoxContainer2"]
 layout_mode = 2
 theme = ExtResource("4_xveyi")
-theme_override_colors/font_color = Color(0.470588, 0, 0, 1)
 text = "100"
 
-[node name="PlusMinusLabel" type="Label" parent="."]
+[node name="PlusMinusLabel" type="Label" parent="HBoxContainer2"]
 layout_mode = 2
 size_flags_vertical = 8
 theme = ExtResource("5_korun")
-theme_override_colors/font_color = Color(0.470588, 0, 0, 1)
 theme_override_font_sizes/font_size = 17
 text = "@"
 vertical_alignment = 1
 
-[node name="VariantLabel" type="Label" parent="."]
+[node name="VariantLabel" type="Label" parent="HBoxContainer2"]
 layout_mode = 2
 theme = ExtResource("4_xveyi")
-theme_override_colors/font_color = Color(0.470588, 0, 0, 1)
 text = "30"
 
-[node name="PercentLabel" type="Label" parent="."]
+[node name="PercentLabel" type="Label" parent="HBoxContainer2"]
 layout_mode = 2
 theme = ExtResource("4_xveyi")
-theme_override_colors/font_color = Color(0.470588, 0, 0, 1)
 text = "%"
 
 [node name="DamageTypeLabel" type="Label" parent="."]
 layout_mode = 2
 theme = ExtResource("4_xveyi")
-theme_override_colors/font_color = Color(0.470588, 0, 0, 1)
-theme_override_constants/outline_size = 4
-text = "Test Dmg"
+text = "Test"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = -1
+
+[node name="VsLabel" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("4_xveyi")
+theme_override_colors/font_color = Color(0.237539, 0.237539, 0.237539, 1)
+text = "vs"
+
+[node name="DefenseStatIcon" type="TextureRect" parent="HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("9_6dh7h")
+expand_mode = 3
 
 [node name="MultiplierLabel" type="Label" parent="."]
 visible = false

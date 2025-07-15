@@ -2,7 +2,7 @@
     "BlockAoePage": {
         "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemPassive.gd",
         "#ObjDetails": {
-            "Description": "You've somehow learned to use a single Shield against Attacks that completely surround you.\n\nYou can now block @@#Color:Red:AOE@@ attacks as if they were from your @@#Color:Red:Flank@@.",
+            "Description": "You've somehow learned to use a single Shield against Attacks that completely surround you.\n\nYYou have a chance to @@#Color:Red:Block@@ against @@#Color:Red:AOE Attacks@@ equal to the chance for those from your @@#Color:Red:Flank@@.",
             "DisplayName": "Block AOE",
             "LargeIcon": "Sprites/BlockAoe.png",
             "ObjectType": "Item",
@@ -231,7 +231,7 @@
     "ShieldTrainingPage": {
         "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemPassive.gd",
         "#ObjDetails": {
-            "Description": "Formal training allows you to use a Shield to full effect.\n\n@@#StatMod:BlockModMod@@",
+            "Description": "Formal training allows you to use a Shield to full effect.\n@@#Color:Red:x2 Block Mod of Shields@@",
             "DisplayName": "Shield Training",
             "LargeIcon": "Sprites/ShieldTraining.png",
             "ObjectType": "Item",
@@ -264,7 +264,7 @@
                 "BlockModMod": {
                     "ModType": "Scale",
                     "StatName": "BlockMod",
-                    "Value": 2
+                    "Value": 0.5
                 }
             }
         },
@@ -443,6 +443,68 @@
                 "TitleReq": "Match"
             },
             "SourceTitle": "Soldier"
+        },
+        "PassiveData": {},
+        "_DefVersion": "1"
+    },
+    "TwoHandBonus_PageItem": {
+        "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemPassive.gd",
+        "#ObjDetails": {
+            "Description": "When @@#Color:Blue:TwoHand@@ with a @@#Color:Blue:Melee Weapons@@, it's @@#Color:Red:Base Attack Power@@ is inceased to @@#Color:Red:120%@@ from the default 100%.",
+            "DisplayName": "Two Hander",
+            "LargeIcon": "Sprites/TwoHandBonus_Icon.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/TwoHandBonus_Icon.png",
+            "SnippetDesc": "120% Base Attack Power for TwoHand Melee Weapons",
+            "Tags": [
+                "Passive",
+                "WpnMod"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Page",
+                "Passive"
+            ]
+        },
+        "ItemData": {
+            "ItemType": "Page",
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "PageData": {
+            "PageRequirements": {
+                "ConflictingPages": [],
+                "IncompatiblePages": [],
+                "TitleReq": "Soldier"
+            },
+            "WeaponMods": {
+                "TwoHanderBonus": {
+                    "Conditions": {
+                        "ActorTagFilters": [
+                            {
+                                "RequireAllTags": [
+                                    "TwoHand"
+                                ]
+                            }
+                        ],
+                        "ActorTagFiltersReqAll": true,
+                        "MainHandTagFilters": [],
+                        "MainHandTagFiltersReqAll": false,
+                        "OffHandTagFilters": [],
+                        "OffHandTagFiltersReqAll": false,
+                        "RequireMainHand": "Ignore",
+                        "RequireOffHand": "Ignore"
+                    },
+                    "DisplayName": "TwoHander",
+                    "WeaponMods": {
+                        "AtkPwrMod": {
+                            "ModProperty": "AtkPwrBase",
+                            "ModType": "Set",
+                            "ModValue": 120
+                        }
+                    }
+                }
+            }
         },
         "PassiveData": {},
         "_DefVersion": "1"

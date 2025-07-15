@@ -3,6 +3,21 @@
 [ext_resource type="Script" path="res://assets/Scripts/VFXs/MissileVfx/item_missile_vfx_node.gd" id="1_haudt"]
 [ext_resource type="Texture2D" uid="uid://daog4fwvhwp1c" path="res://ObjectDefs/Items/Supplies/Potions/HealthPotions/Sprites/HealthPotion_L_S.png" id="2_dfwfd"]
 
+[sub_resource type="Animation" id="Animation_4or1w"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
 [sub_resource type="Animation" id="Animation_5heym"]
 resource_name = "thrown_rotation_animation"
 loop_mode = 1
@@ -17,21 +32,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [0.0, 3.14159, 6.28319]
-}
-
-[sub_resource type="Animation" id="Animation_4or1w"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_3vpeu"]
@@ -54,4 +54,3 @@ libraries = {
 "": SubResource("AnimationLibrary_3vpeu")
 }
 autoplay = "thrown_rotation_animation"
-speed_scale = 1.5

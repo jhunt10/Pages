@@ -1,1 +1,354 @@
-{"BeDeadlySelfBuff":{"!ObjectScript":"res://assets/Scripts/Items/Pages/PageItemAction.gd","!ParentKey":"#BaseApplySelfBuffAction","#ObjDetails":{"DisplayName":"Be Deadly","LargeIcon":"Effects/Sprites/BeDeadly_Icon.png","ObjectType":"Item","SmallIcon":"Effects/Sprites/BeDeadly_Icon.png","SnippetDesc":"Jack be dead","Tags":["Gambit"],"Taxonomy":["Item","Page","Action"]},"ActionData":{"EffectDatas":{"ApplyEffect":{"EffectData":{"EffectDetails":{"DurationData":{"BaseDuration":2}}},"EffectKey":"BeDeadlyBuff"}}},"ItemData":{"ItemType":"Page","Rarity":"Common","Value":50},"PageData":{"PageRequirements":{"ConflictingPages":[],"IncompatiblePages":[],"TitleReq":"Match"},"SourceTitle":"Rogue"},"_DefVersion":"1"},"BeNimbleSelfBuff":{"!ObjectScript":"res://assets/Scripts/Items/Pages/PageItemAction.gd","!ParentKey":"#BaseApplySelfBuffAction","#ObjDetails":{"DisplayName":"Be Nimble","LargeIcon":"Effects/Sprites/BeNimble_Icon.png","ObjectType":"Item","SmallIcon":"Effects/Sprites/BeNimble_Icon.png","SnippetDesc":"Jack be Nimble","Tags":["Gambit"],"Taxonomy":["Item","Page","Action"]},"ActionData":{"EffectDatas":{"ApplyEffect":{"EffectData":{"EffectDetails":{"DurationData":{"BaseDuration":2}}},"EffectKey":"BeNimbleBuff"}}},"ItemData":{"ItemType":"Page","Rarity":"Common","Value":50},"PageData":{"PageRequirements":{"ConflictingPages":[],"IncompatiblePages":[],"TitleReq":"Match"},"SourceTitle":"Rogue"},"_DefVersion":"1"},"BeQuickSelfBuff":{"!ObjectScript":"res://assets/Scripts/Items/Pages/PageItemAction.gd","!ParentKey":"#BaseApplySelfBuffAction","#ObjDetails":{"DisplayName":"Be Quick","LargeIcon":"Effects/Sprites/BeQuick_Icon.png","ObjectType":"Item","SmallIcon":"Effects/Sprites/BeQuick_Icon.png","SnippetDesc":"Jack be Quick","Tags":["Gambit"],"Taxonomy":["Item","Page","Action"]},"ActionData":{"EffectDatas":{"ApplyEffect":{"EffectData":{"EffectDetails":{"DurationData":{"BaseDuration":2}}},"EffectKey":"BeQuickBuff"}}},"ItemData":{"ItemType":"Page","Rarity":"Common","Value":50},"PageData":{"PageRequirements":{"ConflictingPages":[],"IncompatiblePages":[],"TitleReq":"Match"},"SourceTitle":"Rogue"},"_DefVersion":"1"},"GetBehindAction":{"!ObjectScript":"res://assets/Scripts/Items/Pages/PageItemAction.gd","#ObjDetails":{"Description":"Select an @@#Color:Red:Actor@@ and @@#Color:Red:Teleport@@ to the @@#Color:Red:Spot@@ behind them.\n\n-\"It's nothing personnel\"","DisplayName":"Get Behind","LargeIcon":"Sprites/Behind_Icon.png","ObjectType":"Item","SmallIcon":"Sprites/Behind_Icon.png","SnippetDesc":"Teleport behind the target","Tags":["Teleport"],"Taxonomy":["Item","Page","Action"]},"ActionData":{"AmmoData":{"AmmoType":"Abn","Clip":2,"Cost":1},"Preview":{"PreviewTargetKey":"TargetParam"},"SubActions":{"GetTarget":{"!SubActionScript":"res://assets/Scripts/Actions/SubActions/Targeting/SubAct_GetTarget.gd","#FrameIndex":11,"#SubIndex":0,"AllowAutoTarget":false,"SetTargetKey":"Target1","TargetParamKey":"TargetParam"},"PayCost":{"!SubActionScript":"res://assets/Scripts/Actions/SubActions/Misc/SubAct_PayCost.gd","#FrameIndex":11,"#SubIndex":1},"Teleport":{"!SubActionScript":"res://assets/Scripts/Actions/SubActions/Movement/SubAct_Teleport.gd","#FrameIndex":11,"#SubIndex":2,"DestRelativePos":"[0, 1, 0, 0]","TargetDestKey":"Target1"}},"TargetParams":{"TargetParam":{"LineOfSight":true,"TargetArea":"[[-1,2],[0,2],[1,2],[-1,1],[0,1],[1,1]]","TargetType":"Actor"}}},"ItemData":{"ItemType":"Page","Rarity":"Rare","Value":50},"PageData":{"PageRequirements":{"ConflictingPages":[],"IncompatiblePages":[],"TitleReq":"Match"},"SourceTitle":"Rogue"},"_DefVersion":"1"},"ThrowKnifeAction":{"!ObjectScript":"res://assets/Scripts/Items/Pages/PageItemAction.gd","!ParentKey":"#BaseRangedAttack","#ObjDetails":{"Description":"Thow a small knife making a @@#Color:Red:Ranged Attack@@ against an @@#TrgParm:TargetParam:TargetType@@ in range, and dealing @@#DmgData:RangedDamage@@ on hit.","DisplayName":"Thow Knife","LargeIcon":"Sprites/ThrowKnife_Icon.png","ObjectType":"Item","SmallIcon":"Sprites/ThrowKnife_Icon.png","SnippetDesc":"Shoot a knife.","Tags":["Gambit"],"Taxonomy":["Item","Page","Action"]},"ActionData":{"AmmoData":{"AmmoType":"Phy","Clip":32,"Cost":4},"AttackDetails":{"AttackVfxData":{"Scale":2,"SpriteName":"SpriteSheets/ThrowKnife_Missile.png"}},"DamageDatas":{"RangedDamage":{"AtkPwrBase":80,"AtkPwrRange":20,"AtkPwrScale":1,"AtkStat":"PhyAttack","BaseDamage":0,"DamageType":"Pierce","DamageVfxKey":"AUTO","DefenseType":"AUTO"}},"SubActions":{"WeaponMotionAnimation":{"!SubActionScript":"res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponMotionAnimation.gd","#FrameIndex":11,"#SubIndex":0,"MainHand":true,"OffHand":"OnlyIfDuel"},"WeaponReadyAnimation":{"!SubActionScript":"res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponReadyAnimation.gd","#FrameIndex":5,"#SubIndex":0,"Animation":"WEAPON_DEFAULT","MainHand":true,"OffHand":"OnlyIfDuel"}}},"ItemData":{"ItemType":"Page","Rarity":"Common","Value":50},"PageData":{"PageRequirements":{"ConflictingPages":[],"IncompatiblePages":[],"TitleReq":"Match"},"SourceTitle":"Rogue"},"_DefVersion":"1"}}
+{
+    "BeDeadlySelfBuff": {
+        "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
+        "!ParentKey": "#BaseApplySelfBuffAction",
+        "#ObjDetails": {
+            "DisplayName": "Be Deadly",
+            "LargeIcon": "Effects/Sprites/BeDeadly_Icon.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Effects/Sprites/BeDeadly_Icon.png",
+            "SnippetDesc": "Jack be dead",
+            "Tags": [
+                "Gambit"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Page",
+                "Action"
+            ]
+        },
+        "ActionData": {
+            "EffectDatas": {
+                "ApplyEffect": {
+                    "EffectData": {
+                        "EffectDetails": {
+                            "DurationData": {
+                                "BaseDuration": 2
+                            }
+                        }
+                    },
+                    "EffectKey": "BeDeadlyBuff"
+                }
+            }
+        },
+        "ItemData": {
+            "ItemType": "Page",
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "PageData": {
+            "PageRequirements": {
+                "ConflictingPages": [],
+                "IncompatiblePages": [],
+                "TitleReq": "Match"
+            },
+            "SourceTitle": "Rogue"
+        },
+        "_DefVersion": "1"
+    },
+    "BeNimbleSelfBuff": {
+        "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
+        "!ParentKey": "#BaseApplySelfBuffAction",
+        "#ObjDetails": {
+            "DisplayName": "Be Nimble",
+            "LargeIcon": "Effects/Sprites/BeNimble_Icon.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Effects/Sprites/BeNimble_Icon.png",
+            "SnippetDesc": "Jack be Nimble",
+            "Tags": [
+                "Gambit"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Page",
+                "Action"
+            ]
+        },
+        "ActionData": {
+            "EffectDatas": {
+                "ApplyEffect": {
+                    "EffectData": {
+                        "EffectDetails": {
+                            "DurationData": {
+                                "BaseDuration": 2
+                            }
+                        }
+                    },
+                    "EffectKey": "BeNimbleBuff"
+                }
+            }
+        },
+        "ItemData": {
+            "ItemType": "Page",
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "PageData": {
+            "PageRequirements": {
+                "ConflictingPages": [],
+                "IncompatiblePages": [],
+                "TitleReq": "Match"
+            },
+            "SourceTitle": "Rogue"
+        },
+        "_DefVersion": "1"
+    },
+    "BeQuickSelfBuff": {
+        "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
+        "!ParentKey": "#BaseApplySelfBuffAction",
+        "#ObjDetails": {
+            "DisplayName": "Be Quick",
+            "LargeIcon": "Effects/Sprites/BeQuick_Icon.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Effects/Sprites/BeQuick_Icon.png",
+            "SnippetDesc": "Jack be Quick",
+            "Tags": [
+                "Gambit"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Page",
+                "Action"
+            ]
+        },
+        "ActionData": {
+            "EffectDatas": {
+                "ApplyEffect": {
+                    "EffectData": {
+                        "EffectDetails": {
+                            "DurationData": {
+                                "BaseDuration": 2
+                            }
+                        }
+                    },
+                    "EffectKey": "BeQuickBuff"
+                }
+            }
+        },
+        "ItemData": {
+            "ItemType": "Page",
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "PageData": {
+            "PageRequirements": {
+                "ConflictingPages": [],
+                "IncompatiblePages": [],
+                "TitleReq": "Match"
+            },
+            "SourceTitle": "Rogue"
+        },
+        "_DefVersion": "1"
+    },
+    "CoupDeGraceAttackAction": {
+        "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
+        "!ParentKey": "BasicWeaponAttack",
+        "#ObjDetails": {
+            "Description": "Make a @@#Color:Red:Weapon Attack@@ against an @@#Color:Red:Actor@@ with less than @@#Color:Red:30% Max Hp@@, dealing an automatic @@#Tag:Crit@@ for @@#DmgData:WeaponDamage@@ on hit.",
+            "DisplayName": "Coup De Grace",
+            "LargeIcon": "Sprites/AttackCritical_Icon.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/AttackCritical_Icon.png",
+            "SnippetDesc": "Make a Fast Weapon Attack",
+            "Tags": [
+                "Attack",
+                "WpnAtk"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Page",
+                "Action"
+            ]
+        },
+        "ActionData": {
+            "AmmoData": {
+                "AmmoType": "Phy",
+                "Clip": 8,
+                "Cost": 2
+            },
+            "AttackDetails": {
+                "AccuracyMod": 0.5,
+                "PotencyMod": 1,
+                "AutoCrit": true
+            },
+            "Preview": {
+                "OverlaySprite": "Sprites/AttackCritical_Overlay.png"
+            },
+            "DamageDatas": {
+                "WeaponDamage": {
+                    "WeaponFilter": {
+                        "FallbackToUnarmed": true,
+                        "IncludeSlots": [
+                            "Primary",
+                            "OffHand"
+                        ],
+                        "LimitRangeMelee": "MatchPrimary"
+                    },
+                    "DisplayAsCrit": true
+                }
+            }
+        },
+        "ItemData": {
+            "ItemType": "Page",
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "PageData": {
+            "PageRequirements": {
+                "ConflictingPages": [],
+                "IncompatiblePages": [],
+                "TitleReq": "Match"
+            },
+            "SourceTitle": "Rogue"
+        },
+        "_DefVersion": "1"
+    },
+    "GetBehindAction": {
+        "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
+        "#ObjDetails": {
+            "Description": "Select an @@#Color:Red:Actor@@ and @@#Color:Red:Teleport@@ to the @@#Color:Red:Spot@@ behind them.\n\n-\"It's nothing personnel\"",
+            "DisplayName": "Get Behind",
+            "LargeIcon": "Sprites/Behind_Icon.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/Behind_Icon.png",
+            "SnippetDesc": "Teleport behind the target",
+            "Tags": [
+                "Teleport"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Page",
+                "Action"
+            ]
+        },
+        "ActionData": {
+            "AmmoData": {
+                "AmmoType": "Abn",
+                "Clip": 2,
+                "Cost": 1
+            },
+            "Preview": {
+                "PreviewTargetKey": "TargetParam"
+            },
+            "SubActions": {
+                "GetTarget": {
+                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Targeting/SubAct_GetTarget.gd",
+                    "#FrameIndex": 11,
+                    "#SubIndex": 0,
+                    "AllowAutoTarget": false,
+                    "SetTargetKey": "Target1",
+                    "TargetParamKey": "TargetParam"
+                },
+                "PayCost": {
+                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Misc/SubAct_PayCost.gd",
+                    "#FrameIndex": 11,
+                    "#SubIndex": 1
+                },
+                "Teleport": {
+                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Movement/SubAct_Teleport.gd",
+                    "#FrameIndex": 11,
+                    "#SubIndex": 2,
+                    "DestRelativePos": "[0, 1, 0, 0]",
+                    "TargetDestKey": "Target1"
+                }
+            },
+            "TargetParams": {
+                "TargetParam": {
+                    "LineOfSight": true,
+                    "TargetArea": "[[-1,2],[0,2],[1,2],[-1,1],[0,1],[1,1]]",
+                    "TargetType": "Actor"
+                }
+            }
+        },
+        "ItemData": {
+            "ItemType": "Page",
+            "Rarity": "Rare",
+            "Value": 50
+        },
+        "PageData": {
+            "PageRequirements": {
+                "ConflictingPages": [],
+                "IncompatiblePages": [],
+                "TitleReq": "Match"
+            },
+            "SourceTitle": "Rogue"
+        },
+        "_DefVersion": "1"
+    },
+    "ThrowKnifeAction": {
+        "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
+        "!ParentKey": "#BaseRangedAttack",
+        "#ObjDetails": {
+            "Description": "Thow a small knife making a @@#Color:Red:Ranged Attack@@ against an @@#TrgParm:TargetParam:TargetType@@ in range, and dealing @@#DmgData:RangedDamage@@ on hit.",
+            "DisplayName": "Thow Knife",
+            "LargeIcon": "Sprites/ThrowKnife_Icon.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/ThrowKnife_Icon.png",
+            "SnippetDesc": "Shoot a knife.",
+            "Tags": [
+                "Gambit"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Page",
+                "Action"
+            ]
+        },
+        "ActionData": {
+            "AmmoData": {
+                "AmmoType": "Phy",
+                "Clip": 32,
+                "Cost": 4
+            },
+            "AttackDetails": {
+                "AttackVfxData": {
+                    "Scale": 2,
+                    "SpriteName": "SpriteSheets/ThrowKnife_Missile.png"
+                }
+            },
+            "DamageDatas": {
+                "RangedDamage": {
+                    "AtkPwrBase": 80,
+                    "AtkPwrRange": 20,
+                    "AtkPwrScale": 1,
+                    "AtkStat": "PhyAttack",
+                    "BaseDamage": 0,
+                    "DamageType": "Pierce",
+                    "DamageVfxKey": "AUTO",
+                    "DefenseType": "AUTO"
+                }
+            },
+            "SubActions": {
+                "WeaponMotionAnimation": {
+                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponMotionAnimation.gd",
+                    "#FrameIndex": 11,
+                    "#SubIndex": 0,
+                    "MainHand": true,
+                    "OffHand": "OnlyIfDuel"
+                },
+                "WeaponReadyAnimation": {
+                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponReadyAnimation.gd",
+                    "#FrameIndex": 5,
+                    "#SubIndex": 0,
+                    "Animation": "WEAPON_DEFAULT",
+                    "MainHand": true,
+                    "OffHand": "OnlyIfDuel"
+                }
+            }
+        },
+        "ItemData": {
+            "ItemType": "Page",
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "PageData": {
+            "PageRequirements": {
+                "ConflictingPages": [],
+                "IncompatiblePages": [],
+                "TitleReq": "Match"
+            },
+            "SourceTitle": "Rogue"
+        },
+        "_DefVersion": "1"
+    }
+}

@@ -146,6 +146,11 @@ static func get_defense_stat_for_attack_direction(actor:BaseActor, attack_dir, s
 			attack_dir = subsitute_enum
 			
 	
+	# Default Directional Mods:
+	# Front: 1.0 | 100% | -0%
+	# Flank: 0.5 | 50% | -50%
+	#  Back: 0.0 | 00% | -100%
+	#  AOE : 0.0 | 00% | -100%
 	var dir_prefix = DirectionalMod_Front
 	var default_mod = 1.0
 	if attack_dir == AttackHandler.AttackDirection.Flank:

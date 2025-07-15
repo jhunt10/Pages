@@ -45,6 +45,14 @@ func _show_pop_up(data_str):
 	#if content_scale != 1:
 		#popup_container.scale = Vector2.ZERO * (1.0/content_scale)
 
+func color_text(color, raw_text)->String:
+	if color is String:
+		if color.begins_with("[color=#"):
+			color = color.trim_prefix("[color=#")
+		if color.ends_with("]"):
+			color = color.trim_suffix("]")
+	return "[color=#" + color + "]" + raw_text + "[/color]"
+
 func _hide_pop_up(data):
 	if popup_container:
 		popup_container.hide()
@@ -95,6 +103,12 @@ func _build_bbcode_array(raw_description:String, object_def:Dictionary, object_i
 			continue
 		var sub_tokens = token.split(":")
 		match sub_tokens[0]:
+			'#EftChances':
+				out_arr.append(out_line)
+				out_line = ''
+				var sub_lines = _parse_effect_chances(sub_tokens, object_def, object_inst, actor)
+				out_arr.append_array(sub_lines)
+				
 			'#Color': 
 				var start_tag = RED_TEXT
 				var mid_value = sub_tokens[1]
@@ -139,7 +153,7 @@ func _build_bbcode_array(raw_description:String, object_def:Dictionary, object_i
 					out_line = ""
 				else:
 					out_line += " "
-				out_line +=  RED_TEXT + display_stat_name + "[/color]"
+				out_line +=  color_text(RED_TEXT, display_stat_name)
 			
 			"#Tag":
 				out_arr.append(out_line)
@@ -150,12 +164,12 @@ func _build_bbcode_array(raw_description:String, object_def:Dictionary, object_i
 			"#AccMod":
 				var attack_details = object_def.get("ActionData", {}).get("AttackDetails", {})
 				var acc_mod = attack_details.get("AccuracyMod", 1)
-				out_line += RED_TEXT + str(acc_mod * 100) + "% Accuracy[/color]"
+				out_line += color_text(RED_TEXT, str(acc_mod * 100) + "% Accuracy")
 			"#TrgParm":
 				var target_params_datas = object_def.get("ActionData", {}).get("TargetParams", {})
 				var param_data = target_params_datas.get(sub_tokens[1], {})
 				if param_data.has(sub_tokens[2]):
-					out_line += RED_TEXT + str(param_data[sub_tokens[2]]) + "[/color]"
+					out_line += color_text(RED_TEXT, str(param_data[sub_tokens[2]]))
 			"#DmgData":
 				out_line += _parse_damage_data(sub_tokens, object_def, object_inst, actor)
 				
@@ -207,15 +221,7 @@ func _build_bbcode_array(raw_description:String, object_def:Dictionary, object_i
 				
 			'#StatMod':
 				
-				var mod_data = {}
-				if object_def.has("StatMods"):
-					mod_data = object_def.get("StatMods",{}).get(sub_tokens[1],{})
-				elif object_def.has("EquipmentData"):
-					mod_data = object_def.get("EquipmentData").get("StatMods",{}).get(sub_tokens[1],{})
-				elif object_def.has("PageData"):
-					mod_data = object_def.get("PageData").get("StatMods",{}).get(sub_tokens[1],{})
-				elif object_def.has("EffectData"):
-					mod_data = object_def.get("EffectData").get("StatMods",{}).get(sub_tokens[1],{})
+				var mod_data = get_stat_mods_from_def(object_def)
 				var parsed_lines = _parse_stat_mod(mod_data, object_def, object_inst, actor, sub_tokens)
 				out_arr.append(out_line)
 				out_arr.append_array(parsed_lines)
@@ -241,12 +247,19 @@ func _build_bbcode_array(raw_description:String, object_def:Dictionary, object_i
 					mod_data = object_def.get("EquipmentData").get("AttackMods",{}).get(sub_tokens[1],{})
 				elif object_def.has("PageData"):
 					mod_data = object_def.get("PageData").get("AttackMods",{}).get(sub_tokens[1],{})
+				# Damage Mods
 				if sub_tokens[2] == 'DmgMod':
 					var dmg_mod = mod_data.get("DamageMods", {}).get(sub_tokens[3], {})
 					var sub_line = _parse_damage_mod(sub_tokens[4], dmg_mod)
 					if sub_tokens.size() >= 6:
 						sub_line = sub_line.replace("[/color]", sub_tokens[5] + "[/color]")
 					out_line += sub_line
+				if sub_tokens[2] == "StatMod":
+					var stat_mod = mod_data.get("StatMods", {}).get(sub_tokens[3], {})
+					var sub_lines = _parse_stat_mod(stat_mod, object_def, object_inst, actor, sub_tokens)
+					out_arr.append(out_line)
+					out_arr.append_array(sub_lines)
+					out_line = ''
 				# Defender Faction Filter
 				if sub_tokens[2].begins_with('DefFacFil'):
 					var factions = []
@@ -254,7 +267,7 @@ func _build_bbcode_array(raw_description:String, object_def:Dictionary, object_i
 						for filter:String in def_con.get("DefenderFactionFilters", []):
 							if not factions.has(filter):
 								factions.append(_get_title_specific_faction_name(actor, filter, sub_tokens[2].contains("|Plr")))
-					out_line += RED_TEXT + ", ".join(factions) + "[/color]"
+					out_line += color_text(RED_TEXT, ", ".join(factions))
 				# Defender Tags Filter
 				elif sub_tokens[2].begins_with('DefTagsFil'):
 					var tags = []
@@ -264,7 +277,7 @@ func _build_bbcode_array(raw_description:String, object_def:Dictionary, object_i
 							var any_tags = filter.get("RequireAnyTags", [])
 							tags.append_array(all_tags)
 							tags.append_array(any_tags)
-					out_line += RED_TEXT + " ".join(tags) + "[/color]"
+					out_line += color_text(RED_TEXT, " ".join(tags))
 				if sub_tokens[2] == 'StatMod':
 					var mod_key = sub_tokens[3]
 					var stat_mod_data = mod_data.get("StatMods", {}).get(mod_key, {})
@@ -275,6 +288,7 @@ func _build_bbcode_array(raw_description:String, object_def:Dictionary, object_i
 					out_arr.append(out_line)
 					out_arr.append_array(parsed_lines)
 					out_line = ''
+				# Attacker Filters
 				if sub_tokens[2] == 'AtkSrcFil':
 					var what_ever_tags = []
 					var tag_filters = mod_data.get("Conditions", {}).get("AttackSourceTagFilters", [])
@@ -329,6 +343,18 @@ func _parse_tag_info(tokens:Array)->Array:
 		out_arr.append(out_line)
 	return out_arr
 
+func _parse_effect_chances(tokens:Array, object_def:Dictionary, object_inst:BaseLoadObject, actor:BaseActor, )->Array:
+	var effects_datas = get_effect_datas_from_def(object_def)
+	var lines = []
+	for effect_data_key in effects_datas.keys():
+		var effect_data = effects_datas.get(effect_data_key)
+		var effect_key = effect_data.get("EffectKey", effect_data_key)
+		var application_chance = effect_data.get("ApplicationChance", 1)
+		lines.append("[color=blue]>"+str(application_chance*100)+"% chance to[/color] ")
+		lines.append_array(_parse_effect(effect_key, effect_data, "Link", actor))
+		lines.append(" [color=blue]on hit.[/color]")
+	
+	return lines
 
 func _parse_damage_data(tokens:Array, object_def:Dictionary, object_inst:BaseLoadObject, actor:BaseActor, in_damage_data={})->String:
 	var out_line = ''
@@ -336,14 +362,18 @@ func _parse_damage_data(tokens:Array, object_def:Dictionary, object_inst:BaseLoa
 	var damage_key = tokens[1]
 	var extra_damage_datas = []
 	var no_actor_text = ''
+	var is_weapon_damage = false
 	if tokens.size() > 2:
 		no_actor_text = tokens[2]
 	# Get damage data if not provided
 	if damage_data.size() == 0:
 		if object_inst is PageItemAction:
+			# Get Damage Data from Page
 			var damage_datas = object_inst.get_damage_datas(actor, damage_key)
+			# Get requested DamageData
 			if damage_datas.keys().has(damage_key):
 				damage_data = damage_datas[damage_key]
+			# Cache off any extras that came with (probably OffHand Weapon)
 			elif damage_datas.size() > 0:
 				extra_damage_datas = damage_datas.values()
 				damage_data = extra_damage_datas[0]
@@ -366,6 +396,7 @@ func _parse_damage_data(tokens:Array, object_def:Dictionary, object_inst:BaseLoa
 		description_line = no_actor_text
 	# Using Weapon damage, so default to X% Weapon Damage
 	elif damage_data.has("WeaponFilter"):
+		is_weapon_damage = true
 		var atk_scale = damage_data.get("AtkPwrScale", 1)
 		if atk_scale == 1:
 			description_line += "Weapon Damage"
@@ -397,32 +428,38 @@ func _parse_damage_data(tokens:Array, object_def:Dictionary, object_inst:BaseLoa
 		else:
 			description_line = str(min_max[0]) + " - " + str(min_max[1]) + " " + damage_type# + " Damage" 
 	
-	if description_line != '':
-		#description_line = description_line.replace(damage_type, "[/color]" + get_damage_colored_text(damage_type) + RED_TEXT)
-		if hover_line != '':
-			out_line += "[url={\"text\":\"" + hover_line+ "\"}]" + get_damage_colored_text(damage_type, description_line) + "[/url]"
-		else:
-			out_line += get_damage_colored_text(damage_type, description_line) 
-	
 	if extra_damage_datas.size() == 0:
+		if description_line != '':
+			#description_line = description_line.replace(damage_type, "[/color]" + get_damage_colored_text(damage_type) + RED_TEXT)
+			if hover_line != '':
+				out_line += "[url={\"text\":\"" + hover_line+ "\"}]" + get_damage_colored_text(damage_type, description_line) + "[/url]"
+			else:
+				out_line += get_damage_colored_text(damage_type, description_line) 
+	
 		return out_line
 	
-	var line_matches = {out_line: 1}
+	# More that one damage data was found, so show total with indiviuals in popup
+	var hint_lines = [hover_line, description_line]
+	var first_min_max = DamageHelper.get_min_max_damage(actor, damage_data)
+	var min = first_min_max[0]
+	var max = first_min_max[1]
 	for extra in extra_damage_datas:
-		var other_line = _parse_damage_data(tokens, object_def, object_inst, actor, extra)
-		if not line_matches.keys().has(other_line):
-			line_matches[other_line] = 0
-		line_matches[other_line] += 1
-	
-	var merged_lines = []
-	for line_val in line_matches.keys():
-		var match_count = line_matches[line_val]
-		if match_count > 1:
-			merged_lines.append(RED_TEXT + str(match_count) + " x " + line_val.trim_prefix(RED_TEXT))
-		else:
-			merged_lines.append(line_val)
-			
-	return " and ".join(merged_lines)
+		var other_damage_type = extra.get("DamageType", "???")
+		var min_max = DamageHelper.get_min_max_damage(actor, damage_data)
+		var other_min_max_str = str(min_max[0]) + " - " + str(min_max[1])
+		if min_max[0] == min_max[1]:
+			other_min_max_str = str(min_max[0])
+		var other_line = other_min_max_str + " " + other_damage_type
+		hint_lines.append(other_line)
+		min += min_max[0]
+		max += min_max[1]
+	var min_max_str = str(min) + " - " + str(max)
+	if min == max:
+		min_max_str = str(min)
+	var hint_line = "\\n".join(hint_lines)
+	var show_line = get_damage_colored_text(damage_type, min_max_str + " Damage")
+	out_line += "[url={\"text\":\"" + hint_line+ "\"}]" + show_line + "[/url]"
+	return out_line
 
 
 func _parse_damage_mod(parse_type:String, mod_data:Dictionary)->String:
@@ -433,16 +470,16 @@ func _parse_damage_mod(parse_type:String, mod_data:Dictionary)->String:
 		if mod_type == "Scale":
 			mod_value = (mod_value-1) * 100
 			if mod_value > 0:
-				out_line +=  "[color=#460000]+" + str(mod_value) + "%[/color]"
+				out_line +=  color_text(RED_TEXT, "+" + str(mod_value) + "%")
 			else:
-				out_line +=  RED_TEXT + str(mod_value) + "%[/color]"
+				out_line +=  color_text(RED_TEXT, str(mod_value) + "%")
 		elif  mod_type == "Add":
 			if mod_value > 0:
-				out_line +=  "[color=#460000]+" + str(mod_value) + "[/color]"
+				out_line +=  color_text(RED_TEXT, "+" + str(mod_value))
 			else:
-				out_line +=  RED_TEXT + str(mod_value) + "[/color]"
+				out_line +=  color_text(RED_TEXT, str(mod_value))
 		else:
-			out_line +=  RED_TEXT + str(mod_value) + "[/color]"
+			out_line +=  color_text(RED_TEXT, str(mod_value))
 	elif parse_type.begins_with('Filters'):
 		var filters = []
 		var filter_arry = mod_data.get("Conditions", {}).get("SourceTagFilters", [])
@@ -462,7 +499,7 @@ func _parse_damage_mod(parse_type:String, mod_data:Dictionary)->String:
 					faction += "ies"
 			if not filters.has(faction):
 				filters.append(faction)
-		out_line +=  RED_TEXT + (" ".join(filters)) + "[/color]"
+		out_line +=  color_text(RED_TEXT, " ".join(filters))
 	return out_line
 
 func _parse_stat_mod(mod_data:Dictionary, object_def:Dictionary, object_inst:BaseLoadObject, actor:BaseActor, sub_tokens:Array)->Array:
@@ -474,12 +511,14 @@ func _parse_stat_mod(mod_data:Dictionary, object_def:Dictionary, object_inst:Bas
 	if sub_tokens[1] == "MultiMods":
 		return [_parse_stat_mod_multi(object_def, object_inst, actor, sub_tokens)]
 	
+	if mod_data.keys().has(sub_tokens[1]):
+		mod_data = mod_data[sub_tokens[1]]
+	
 	if sub_tokens.size() == 2: # Give whole desription
 		var stat_name:String = mod_data.get('StatName', "???")
 		var value = mod_data.get('Value', 0)
 		var dep_stat_name = mod_data.get("DepStatName", "")
 		var mod_type = mod_data.get("ModType", "")
-		
 		
 		var display_stat_name = StatHelper.get_stat_abbr(stat_name)
 		var str_val = str(value)
@@ -495,7 +534,7 @@ func _parse_stat_mod(mod_data:Dictionary, object_def:Dictionary, object_inst:Bas
 				str_val = "+"+StatHelper.get_stat_abbr(dep_stat_name)+" to "
 		if stat_name.begins_with("Resistance"):
 			str_val += "%"
-		out_line += RED_TEXT + str_val + "[/color]"
+		out_line += color_text(RED_TEXT, str_val)
 		
 		var icon = StatHelper.get_stat_icon(stat_name)
 		if icon: 
@@ -504,7 +543,7 @@ func _parse_stat_mod(mod_data:Dictionary, object_def:Dictionary, object_inst:Bas
 			out_line = ""
 		else:
 			out_line += " "
-		out_line +=  RED_TEXT + display_stat_name + "[/color]"
+		out_line +=  color_text(RED_TEXT, display_stat_name)
 		
 	else:
 		if sub_tokens[2] == "Icon":
@@ -520,7 +559,7 @@ func _parse_stat_mod(mod_data:Dictionary, object_def:Dictionary, object_inst:Bas
 				var damage_type = stat_name.trim_prefix("Resistance:")
 				out_line += get_damage_colored_text(damage_type, damage_type + " Res")
 			else:
-				out_line += RED_TEXT + StatHelper.get_stat_abbr(stat_name) + "[/color]"
+				out_line += color_text(RED_TEXT, StatHelper.get_stat_abbr(stat_name))
 		
 		elif sub_tokens[2] == "Stat":
 			var stat_name = mod_data['StatName']
@@ -533,13 +572,16 @@ func _parse_stat_mod(mod_data:Dictionary, object_def:Dictionary, object_inst:Bas
 				var damage_type = stat_name.trim_prefix("Resistance:")
 				out_line += get_damage_colored_text(damage_type, damage_type + " Res")
 			else:
-				out_line += RED_TEXT + StatHelper.get_stat_abbr(stat_name) + "[/color]"
+				out_line += color_text(RED_TEXT, StatHelper.get_stat_abbr(stat_name))
 		elif sub_tokens[2] == "Value":
 			var value = mod_data['Value']
-			out_line += RED_TEXT + str(value) + "[/color]"
+			out_line += color_text(RED_TEXT,  str(value))
 		elif sub_tokens[2] == "ValuePercent":
 			var value = mod_data['Value']
-			out_line += RED_TEXT + str(value*100) + "%[/color]"
+			out_line += color_text(RED_TEXT, str(value*100) + "%")
+		elif sub_tokens[2] == "InvertPercent":
+			var value = mod_data['Value']
+			out_line += color_text(RED_TEXT, str((value-1)*100) + "%")
 		elif mod_data.has(sub_tokens[2]):
 			out_line += str(mod_data.get(sub_tokens[2], ''))
 	out_arr.append(out_line)
@@ -575,7 +617,7 @@ func _parse_stat_mod_multi(object_def:Dictionary, object_inst:BaseLoadObject, ac
 			multi_stat_line += " " + ", ".join(mods_by_type_value[mod_type][value])
 	if sub_tokens.size() > 2:
 		var show_line = sub_tokens[2]
-		out_line += RED_TEXT + "[url={\"text\":\"" + multi_stat_line+ "\"}]" + show_line + "[/url]"+ "[/color]"
+		out_line += color_text(RED_TEXT, "[url={\"text\":\"" + multi_stat_line+ "\"}]" + show_line + "[/url]")
 	else:
 		out_line += multi_stat_line
 	return out_line
@@ -585,7 +627,7 @@ func _parse_effect(effect_key:String, effect_data:Dictionary, prop_key:String, a
 	var out_line = ''
 	if not EffectLibrary.has_effect_key(effect_key):
 		# Might be because you used #EftDef instead of #EFtData
-		return [RED_TEXT + "'" + effect_key + "' Not Found"+ "[/color]"]
+		return [color_text(RED_TEXT, "'" + effect_key + "' Not Found")]
 	var effect_def = EffectLibrary.get_merged_effect_def(effect_key, effect_data)
 	if prop_key == '' or prop_key == 'Description':
 		var effect_description = effect_def.get("#ObjDetails", {}).get("Description", "")
@@ -608,7 +650,7 @@ func _parse_effect(effect_key:String, effect_data:Dictionary, prop_key:String, a
 		var type_str = type.replace("End", '').replace("Start", '').trim_prefix("On")
 		if value > 1:
 			type_str += "s"
-		out_line += RED_TEXT + str(value) + " " + type_str+ "[/color]"
+		out_line += color_text(RED_TEXT, str(value) + " " + type_str)
 	elif prop_key == "Link":
 		#var sub_lines = _build_bbcode_array(effect_def, null, actor)
 		#var url_line = ''
@@ -621,3 +663,20 @@ func _parse_effect(effect_key:String, effect_data:Dictionary, prop_key:String, a
 		
 	out_arr.append(out_line)
 	return out_arr
+
+
+
+func get_effect_datas_from_def(def:Dictionary)->Dictionary:
+	if def.has("ActionData"):
+		return def['ActionData'].get("EffectDatas", {})
+	return {}
+
+
+func get_stat_mods_from_def(def:Dictionary)->Dictionary:
+	if def.has("PageData"):
+		return def['PageData'].get("StatMods", {})
+	if def.has("EffectData"):
+		return def['EffectData'].get("StatMods", {})
+	if def.has("EquipmentData"):
+		return def['EquipmentData'].get("StatMods", {})
+	return {}

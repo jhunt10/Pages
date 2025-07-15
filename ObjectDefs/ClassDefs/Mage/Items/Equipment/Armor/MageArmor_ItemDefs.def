@@ -1,1 +1,180 @@
-{"OldMageArmor":{"!ObjectScript":"res://assets/Scripts/Items/Equipment/BaseArmorEquipment.gd","#ObjDetails":{"Description":"A common design of robes worn by many new mages. Old, but still works.","DisplayName":"Old Red Robes","LargeIcon":"Sprites/RedRobes.png","ObjectType":"Item","SmallIcon":"Sprites/RedRobes.png","SnippetDesc":"A mage's old Robes.","Tags":["Equipment","Armor","Body"],"Taxonomy":["Item","Equipment","Armor"]},"EquipmentData":{"EquipSlot":"Body","Requirments":{"ReqStats":{"Intelligence":10}},"SpriteData":{"SpriteSheet":"Sprites/RedRobes_SpriteSheet.png"},"StatMods":{"WardBonus":{"ModType":"Add","StatName":"Ward","Value":2}}},"ItemData":{"Rarity":"Mundane","Value":50},"_DefVersion":"1"},"OldMageBoots":{"!ObjectScript":"res://assets/Scripts/Items/Equipment/BaseArmorEquipment.gd","#ObjDetails":{"Description":"A common design of shoes worn by many new mages. Old, but still works.","DisplayName":"Old Red Shoes","LargeIcon":"Sprites/RedBoots.png","ObjectType":"Item","SmallIcon":"Sprites/RedBoots.png","SnippetDesc":"A mage's old Shoes.","Tags":["Equipment","Armor","Feet"],"Taxonomy":["Item","Equipment","Armor"]},"EquipmentData":{"EquipSlot":"Feet","Requirments":{"ReqStats":{"Intelligence":10}},"SpriteData":{"SpriteSheet":"Sprites/RedBoots_SpriteSheet.png"},"StatMods":{"WardBonus":{"ModType":"Add","StatName":"Ward","Value":2}}},"ItemData":{"Rarity":"Mundane","Value":50},"_DefVersion":"1"},"OldMageHelmet":{"!ObjectScript":"res://assets/Scripts/Items/Equipment/BaseArmorEquipment.gd","#ObjDetails":{"Description":"A common design of hat worn by many new mages. Old, but still works.","DisplayName":"Old Hat","LargeIcon":"Sprites/RedHat.png","ObjectType":"Item","SmallIcon":"Sprites/RedHat.png","SnippetDesc":"A mage's old Helmet.","Tags":["Equipment","Armor","Head"],"Taxonomy":["Item","Equipment","Armor"]},"EquipmentData":{"EquipSlot":"Head","Requirments":{"ReqStats":{"Intelligence":10}},"SpriteData":{"SpriteSheet":"Sprites/RedHat_SpriteSheet.png"},"StatMods":{"WardBonus":{"ModType":"Add","StatName":"Ward","Value":2}}},"ItemData":{"Rarity":"Mundane","Value":50},"_DefVersion":"1"},"OldMageOrb":{"!ObjectScript":"res://assets/Scripts/Items/Equipment/BaseArmorEquipment.gd","#ObjDetails":{"Description":"A common tool used by many new mages for focsing magic. Old, but still works.","DisplayName":"Old Orb","LargeIcon":"Sprites/OldOrb.png","ObjectType":"Item","SmallIcon":"Sprites/OldOrb.png","SnippetDesc":"A mage's old focusing Orb.","Tags":["Equipment","OffHand","Orb"],"Taxonomy":["Item","Equipment","Armor"]},"EquipmentData":{"EquipSlot":"OffHand","Requirments":{"ReqStats":{"Intelligence":10}},"SpriteData":{"SpriteSheet":"Sprites/OldOrb_SpriteSheet.png"},"StatMods":{"IntelligenceBonus":{"ModType":"Add","StatName":"Intelligence","Value":1}}},"ItemData":{"Rarity":"Mundane","Value":50},"_DefVersion":"1"}}
+{
+    "OldMageArmor": {
+        "!ObjectScript": "res://assets/Scripts/Items/Equipment/BaseArmorEquipment.gd",
+        "#ObjDetails": {
+            "Description": "A common design of robes worn by many new mages. Old, but still works.",
+            "DisplayName": "Old Red Robes",
+            "LargeIcon": "Sprites/RedRobes.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/RedRobes.png",
+            "SnippetDesc": "A mage's old Robes.",
+            "Tags": [
+                "Equipment",
+                "Armor",
+                "Body"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Equipment",
+                "Armor"
+            ]
+        },
+        "EquipmentData": {
+            "EquipSlot": "Body",
+            "Requirments": {
+                "ReqStats": {
+                    "Intelligence": 10
+                }
+            },
+            "SpriteData": {
+                "SpriteSheet": "Sprites/RedRobes_SpriteSheet.png"
+            },
+            "StatMods": {
+                "WardBonus": {
+                    "ModType": "Add",
+                    "StatName": "Ward",
+                    "Value": 2
+                }
+            }
+        },
+        "ItemData": {
+            "Rarity": "Mundane",
+            "Value": 50
+        },
+        "_DefVersion": "1"
+    },
+    "OldMageBoots": {
+        "!ObjectScript": "res://assets/Scripts/Items/Equipment/BaseArmorEquipment.gd",
+        "#ObjDetails": {
+            "Description": "A common design of shoes worn by many new mages. Old, but still works.",
+            "DisplayName": "Old Red Shoes",
+            "LargeIcon": "Sprites/RedBoots.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/RedBoots.png",
+            "SnippetDesc": "A mage's old Shoes.",
+            "Tags": [
+                "Equipment",
+                "Armor",
+                "Feet"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Equipment",
+                "Armor"
+            ]
+        },
+        "EquipmentData": {
+            "EquipSlot": "Feet",
+            "Requirments": {
+                "ReqStats": {
+                    "Intelligence": 10
+                }
+            },
+            "SpriteData": {
+                "SpriteSheet": "Sprites/RedBoots_SpriteSheet.png"
+            },
+            "StatMods": {
+                "WardBonus": {
+                    "ModType": "Add",
+                    "StatName": "Ward",
+                    "Value": 2
+                }
+            }
+        },
+        "ItemData": {
+            "Rarity": "Mundane",
+            "Value": 50
+        },
+        "_DefVersion": "1"
+    },
+    "OldMageHelmet": {
+        "!ObjectScript": "res://assets/Scripts/Items/Equipment/BaseArmorEquipment.gd",
+        "#ObjDetails": {
+            "Description": "A common design of hat worn by many new mages. Old, but still works.",
+            "DisplayName": "Old Hat",
+            "LargeIcon": "Sprites/RedHat.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/RedHat.png",
+            "SnippetDesc": "A mage's old Helmet.",
+            "Tags": [
+                "Equipment",
+                "Armor",
+                "Head"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Equipment",
+                "Armor"
+            ]
+        },
+        "EquipmentData": {
+            "EquipSlot": "Head",
+            "Requirments": {
+                "ReqStats": {
+                    "Intelligence": 10
+                }
+            },
+            "SpriteData": {
+                "SpriteSheet": "Sprites/RedHat_SpriteSheet.png"
+            },
+            "StatMods": {
+                "WardBonus": {
+                    "ModType": "Add",
+                    "StatName": "Ward",
+                    "Value": 2
+                }
+            }
+        },
+        "ItemData": {
+            "Rarity": "Mundane",
+            "Value": 50
+        },
+        "_DefVersion": "1"
+    },
+    "OldMageOrb": {
+        "!ObjectScript": "res://assets/Scripts/Items/Equipment/Tools/BaseToolEquipment.gd",
+        
+        "#ObjDetails": {
+            "Description": "A common tool used by many new mages for focsing magic. Old, but still works.",
+            "DisplayName": "Old Orb",
+            "LargeIcon": "Sprites/OldOrb.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/OldOrb.png",
+            "SnippetDesc": "A mage's old focusing Orb.",
+            "Tags": [
+                "Equipment",
+                "OffHand",
+                "Focus"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Equipment",
+                "Tool",
+                "Focus"
+            ]
+        },
+        "EquipmentData": {
+            "EquipSlot": "OffHand",
+            "Requirments": {
+                "ReqStats": {
+                    "Intelligence": 10
+                }
+            },
+            "SpriteData": {
+                "SpriteSheet": "Sprites/OldOrb_SpriteSheet.png"
+            },
+            "StatMods": {
+                "IntelligenceBonus": {
+                    "ModType": "Add",
+                    "StatName": "MagAttack",
+                    "Value": 5
+                }
+            }
+        },
+        "ItemData": {
+            "Rarity": "Mundane",
+            "Value": 50
+        },
+        "_DefVersion": "1"
+    }
+}

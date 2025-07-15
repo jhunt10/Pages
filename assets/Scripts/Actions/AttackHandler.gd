@@ -253,7 +253,12 @@ static func _roll_for_hit(attack_event:AttackEvent, sub_event:AttackSubEvent):
 	sub_event.hit_roll = randf()
 	# sub_event.is_miss = [Was invaild Target]
 	sub_event.rolled_evade = sub_event.hit_roll > sub_event.hit_chance
-	sub_event.rolled_crit = sub_event.hit_roll < attack_event.attacker_crit_chance
+	
+	var auto_crit = attack_event.attack_details.get("AutoCrit", false)
+	if auto_crit:
+		sub_event.rolled_crit = true
+	else:
+		sub_event.rolled_crit = sub_event.hit_roll < attack_event.attacker_crit_chance
 	
 	var block_roll = randf()
 	sub_event.rolled_blocked = block_roll < sub_event.defender_block_chance

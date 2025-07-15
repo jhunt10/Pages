@@ -21,7 +21,8 @@
         "ActionData": {
             "DamageDatas": {
                 "MeleeDamage": {
-                    "DamageType": "Cold"
+                    "DamageType": "Cold",
+                    "AtkPwrRange": 10
                 }
             },
             "EffectDatas": {
@@ -72,7 +73,8 @@
             },
             "DamageDatas": {
                 "MissileDamage": {
-                    "DamageType": "Cold"
+                    "DamageType": "Cold",
+                    "AtkPwrRange": 10
                 }
             },
             "EffectDatas": {
@@ -164,7 +166,8 @@
             },
             "DamageDatas": {
                 "RangedDamage": {
-                    "DamageType": "Cold"
+                    "DamageType": "Cold",
+                    "AtkPwrRange": 10
                 }
             },
             "EffectDatas": {
@@ -215,7 +218,8 @@
             },
             "DamageDatas": {
                 "TrapDamage": {
-                    "DamageType": "Cold"
+                    "DamageType": "Cold",
+                    "AtkPwrRange": 10
                 }
             },
             "EffectDatas": {
@@ -272,7 +276,7 @@
             },
             "EffectDatas": {
                 "BurnEffect": {
-                    "ApplicationChance": 0.3,
+                    "ApplicationChance": 0.2,
                     "EffectKey": "AilmentBurned"
                 }
             }
@@ -323,7 +327,7 @@
             },
             "EffectDatas": {
                 "BurnEffect": {
-                    "ApplicationChance": 0.3,
+                    "ApplicationChance": 0.2,
                     "EffectKey": "AilmentBurned"
                 }
             },
@@ -414,7 +418,7 @@
             },
             "EffectDatas": {
                 "BurnEffect": {
-                    "ApplicationChance": 0.3,
+                    "ApplicationChance": 0.2,
                     "EffectKey": "AilmentBurned"
                 }
             }
@@ -490,6 +494,259 @@
         },
         "_DefVersion": "1"
     },
+    "PoisonMeleeSpell": {
+        "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
+        "!ParentKey": "#BaseMeleeSpell",
+        "#ObjDetails": {
+            "DisplayName": "Poison Touch",
+            "LargeIcon": "Sprites/PoisonTouch.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/PoisonTouch.png",
+            "SnippetDesc": "Touch Actor dealing Poison Damage",
+            "Tags": [
+                "Poison"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Page",
+                "Action",
+                "Spell"
+            ]
+        },
+        "ActionData": {
+            "DamageDatas": {
+                "MeleeDamage": {
+                    "DamageType": "Poison",
+                    "AtkPwrBase": 90,
+                    "AtkPwrRange": 20
+                }
+            },
+            "EffectDatas": {
+                "BurnEffect": {
+                    "ApplicationChance": 0.6,
+                    "EffectKey": "AilmentPoisoned"
+                }
+            }
+        },
+        "ItemData": {
+            "ItemType": "Page",
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "PageData": {
+            "PageRequirements": {
+                "ConflictingPages": [],
+                "IncompatiblePages": [],
+                "TitleReq": "None"
+            },
+            "SourceTitle": ""
+        },
+        "_DefVersion": "1"
+    },
+    "PoisonMissileSpell": {
+        "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
+        "!ParentKey": "#BaseMissileSpell",
+        "#ObjDetails": {
+            "DisplayName": "Poison Missile",
+            "LargeIcon": "Sprites/PoisonMissile_Icon.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/PoisonMissile_Icon.png",
+            "SnippetDesc": "Launch a Missile dealing Poison Damage",
+            "Tags": [
+                "Poison"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Page",
+                "Action",
+                "Spell"
+            ]
+        },
+        "ActionData": {
+            "AttackDetails": {
+                "AccuracyMod": 1,
+                "PotencyMod": 1
+            },
+            "DamageDatas": {
+                "MissileDamage": {
+                    "DamageType": "Poison",
+                    "AtkPwrBase": 90,
+                    "AtkPwrRange": 20
+                }
+            },
+            "EffectDatas": {
+                "BurnEffect": {
+                    "ApplicationChance": 0.6,
+                    "EffectKey": "AilmentPoisoned"
+                }
+            },
+            "MissileDatas": {
+                "Missile1": {
+                    "DamageDataKey": "MissileDamage",
+                    "FramesPerTile": 3,
+                    "ImpactVfxKey": null,
+                    "MissileVfxData": {
+                        "AnimationName": "4_sprites_250ms_frames_loop",
+                        "AnimationSpeed": 3,
+                        "RandomOffsets": [
+                            0,
+                            0
+                        ],
+                        "RandomRotation": [
+                            0,
+                            0
+                        ],
+                        "Scale": [
+                            1,
+                            1
+                        ],
+                        "ScenePath": "res://assets/Scripts/VFXs/MissileVfx/missile_vfx_node.tscn",
+                        "SpriteName": "Missiles/PoisonMissile.png",
+                        "SpriteSheetHight": 2,
+                        "SpriteSheetWidth": 2
+                    },
+                    "MissileVfxKey": ""
+                }
+            }
+        },
+        "ItemData": {
+            "ItemType": "Page",
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "PageData": {
+            "PageRequirements": {
+                "ConflictingPages": [],
+                "IncompatiblePages": [],
+                "TitleReq": "None"
+            },
+            "SourceTitle": ""
+        },
+        "_DefVersion": "1"
+    },
+    "PoisonRangedSpell": {
+        "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
+        "!ParentKey": "#BaseRangedSpell",
+        "#ObjDetails": {
+            "DisplayName": "Poison Bullet",
+            "LargeIcon": "Sprites/PoisonBullet.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/PoisonBullet.png",
+            "SnippetDesc": "Make a Ranged Spell Attack dealing Poison Damage",
+            "Tags": [
+                "Poison"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Page",
+                "Action",
+                "Spell"
+            ]
+        },
+        "ActionData": {
+            "AttackDetails": {
+                "AccuracyMod": 1,
+                "AttackVfxData": {
+                    "RandomOffsets": [
+                        0,
+                        0
+                    ],
+                    "ScenePath": "res://assets/Scripts/VFXs/BulletVfxs/bullet_vfx_node.tscn",
+                    "SpriteName": "Missiles/PoisonBullet.png",
+                    "SpriteSheetHight": 1,
+                    "SpriteSheetWidth": 1,
+                    "Velocity": 400
+                },
+                "AttackVfxKey": "",
+                "PotencyMod": 1
+            },
+            "DamageDatas": {
+                "RangedDamage": {
+                    "DamageType": "Poison",
+                    "AtkPwrBase": 70,
+                    "AtkPwrRange": 20
+                }
+            },
+            "EffectDatas": {
+                "BurnEffect": {
+                    "ApplicationChance": 0.6,
+                    "EffectKey": "AilmentPoisoned"
+                }
+            }
+        },
+        "ItemData": {
+            "ItemType": "Page",
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "PageData": {
+            "PageRequirements": {
+                "ConflictingPages": [],
+                "IncompatiblePages": [],
+                "TitleReq": "None"
+            },
+            "SourceTitle": ""
+        },
+        "_DefVersion": "1"
+    },
+    "PoisonTrapSpell": {
+        "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
+        "!ParentKey": "#BaseTrapSpell",
+        "#ObjDetails": {
+            "DisplayName": "Poison Trap",
+            "LargeIcon": "Sprites/PoisonTrap.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/PoisonTrap.png",
+            "SnippetDesc": "Create a Trap of Poison Damage.",
+            "Tags": [
+                "Poison"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Page",
+                "Action",
+                "Spell"
+            ]
+        },
+        "ActionData": {
+            "AttackDetails": {
+                "AccuracyMod": 1,
+                "PotencyMod": 1
+            },
+            "DamageDatas": {
+                "TrapDamage": {
+                    "DamageType": "Poison",
+                    "AtkPwrBase": 110,
+                    "AtkPwrRange": 20
+                }
+            },
+            "EffectDatas": {
+                "BurnEffect": {
+                    "ApplicationChance": 1,
+                    "EffectKey": "AilmentPoisoned"
+                }
+            },
+            "ZoneDatas": {
+                "Zone1": {
+                    "TileSprite": "TileSets/PoisonTrap_Tile.png"
+                }
+            }
+        },
+        "ItemData": {
+            "ItemType": "Page",
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "PageData": {
+            "PageRequirements": {
+                "ConflictingPages": [],
+                "IncompatiblePages": [],
+                "TitleReq": "None"
+            },
+            "SourceTitle": ""
+        },
+        "_DefVersion": "1"
+    },
     "ShockMeleeSpell": {
         "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
         "!ParentKey": "#BaseMeleeSpell",
@@ -512,12 +769,13 @@
         "ActionData": {
             "DamageDatas": {
                 "MeleeDamage": {
-                    "DamageType": "Shock"
+                    "DamageType": "Shock",
+                    "AtkPwrRange": 30
                 }
             },
             "EffectDatas": {
                 "BurnEffect": {
-                    "ApplicationChance": 0.3,
+                    "ApplicationChance": 0.1,
                     "EffectKey": "AilmentShocked"
                 }
             }
@@ -563,12 +821,13 @@
             },
             "DamageDatas": {
                 "MissileDamage": {
-                    "DamageType": "Shock"
+                    "DamageType": "Shock",
+                    "AtkPwrRange": 30
                 }
             },
             "EffectDatas": {
                 "BurnEffect": {
-                    "ApplicationChance": 0.3,
+                    "ApplicationChance": 0.1,
                     "EffectKey": "AilmentShocked"
                 }
             },
@@ -654,12 +913,13 @@
             },
             "DamageDatas": {
                 "RangedDamage": {
-                    "DamageType": "Shock"
+                    "DamageType": "Shock",
+                    "AtkPwrRange": 30
                 }
             },
             "EffectDatas": {
                 "BurnEffect": {
-                    "ApplicationChance": 0.3,
+                    "ApplicationChance": 0.1,
                     "EffectKey": "AilmentShocked"
                 }
             }
@@ -705,7 +965,8 @@
             },
             "DamageDatas": {
                 "TrapDamage": {
-                    "DamageType": "Shock"
+                    "DamageType": "Shock",
+                    "AtkPwrRange": 30
                 }
             },
             "EffectDatas": {

@@ -19,6 +19,7 @@ var _sub_containers:Dictionary
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	premade_sub_container.visible = false
+	self.visibility_changed.connect(_sync)
 	pass # Replace with function body.
 
 
@@ -39,6 +40,8 @@ func set_actor(actor:BaseActor):
 
 func _sync():
 	if not self.is_visible_in_tree():
+		return
+	if not _actor:
 		return
 	#var bag = _actor.equipment.get_equipt_items_of_slot_type("Bag")
 	#if !ques or ques.size() == 0:

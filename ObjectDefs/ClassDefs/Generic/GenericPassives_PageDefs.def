@@ -114,68 +114,6 @@
         "PassiveData": {},
         "_DefVersion": "1"
     },
-    "TwoHandBonus_PageItem": {
-        "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemPassive.gd",
-        "#ObjDetails": {
-            "Description": "When @@#Color:Blue:TwoHand@@ with a @@#Color:Blue:Melee Weapons@@, it's @@#Color:Red:Base Attack Power@@ is inceased to @@#Color:Red:120%@@ from the default 100%.",
-            "DisplayName": "Two Hander",
-            "LargeIcon": "Sprites/TwoHandBonus_Icon.png",
-            "ObjectType": "Item",
-            "SmallIcon": "Sprites/TwoHandBonus_Icon.png",
-            "SnippetDesc": "120% Base Attack Power for TwoHand Melee Weapons",
-            "Tags": [
-                "Passive",
-                "WpnMod"
-            ],
-            "Taxonomy": [
-                "Item",
-                "Page",
-                "Passive"
-            ]
-        },
-        "ItemData": {
-            "ItemType": "Page",
-            "Rarity": "Common",
-            "Value": 50
-        },
-        "PageData": {
-            "PageRequirements": {
-                "ConflictingPages": [],
-                "IncompatiblePages": [],
-                "TitleReq": "None"
-            },
-            "WeaponMods": {
-                "TwoHanderBonus": {
-                    "Conditions": {
-                        "ActorTagFilters": [
-                            {
-                                "RequireAllTags": [
-                                    "TwoHand"
-                                ]
-                            }
-                        ],
-                        "ActorTagFiltersReqAll": true,
-                        "MainHandTagFilters": [],
-                        "MainHandTagFiltersReqAll": false,
-                        "OffHandTagFilters": [],
-                        "OffHandTagFiltersReqAll": false,
-                        "RequireMainHand": "Ignore",
-                        "RequireOffHand": "Ignore"
-                    },
-                    "DisplayName": "TwoHander",
-                    "WeaponMods": {
-                        "AtkPwrMod": {
-                            "ModProperty": "AtkPwrBase",
-                            "ModType": "Set",
-                            "ModValue": 120
-                        }
-                    }
-                }
-            }
-        },
-        "PassiveData": {},
-        "_DefVersion": "1"
-    },
 
 
 
@@ -868,5 +806,5 @@
         },
         "PassiveData": {},
         "_DefVersion": "1"
-    },
+    }
 }
