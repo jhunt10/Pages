@@ -174,13 +174,9 @@ func _build_bbcode_array(raw_description:String, object_def:Dictionary, object_i
 				out_line += _parse_damage_data(sub_tokens, object_def, object_inst, actor)
 				
 			'#EftData':
-				var effect_data = {}
-				if object_def.has("EffectDatas"):
-					effect_data = object_def.get("EffectDatas", {}).get(sub_tokens[1], null)
-				elif object_def.has("ActionData"):
-					effect_data = object_def['ActionData'].get("EffectDatas", {}).get(sub_tokens[1], null)
-				if object_def.has("SuppliesData"):
-					effect_data = object_def['SuppliesData'].get("EffectDatas", {}).get(sub_tokens[1], null)
+				var effect_datas =  get_effect_datas_from_def(object_def)
+				var effect_data_key = sub_tokens[1]
+				var effect_data = effect_datas.get(effect_data_key, null)
 				if not effect_data:
 					continue
 				var effect_key = effect_data.get("EffectKey", "")
@@ -640,7 +636,7 @@ func _parse_effect(effect_key:String, effect_data:Dictionary, prop_key:String, a
 			out_arr.append(line)
 	elif prop_key == 'AplChc':
 		out_line += str(effect_data.get("ApplicationChance", 0) * 100) + "%"
-	elif prop_key == 'Name':
+	elif prop_key == 'Name' or prop_key == 'DisplayName':
 		
 		out_line += "[color=blue]" + effect_def.get("#ObjDetails", {}).get("DisplayName", "???") + "[/color]"
 	elif prop_key == 'Duration':

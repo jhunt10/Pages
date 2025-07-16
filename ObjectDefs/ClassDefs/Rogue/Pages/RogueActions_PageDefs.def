@@ -1,4 +1,63 @@
 {
+    "ArmorBreakAction": {
+        "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
+        "!ParentKey": "#BaseInflictAttack",
+        "#ObjDetails": {
+            "DisplayName": "Armor Break",
+            "Description": "Make a @@#Color:Red:Inflcting Attack@@ against an @@#TrgParm:TargetParam:TargetType@@ in range, attempting to apply @@#EftData:InflictEffect:DisplayName@@ for @@#EftData:InflictEffect:Duration@@.\n\n-\"Not so Armored now?\"",
+            "LargeIcon": "Effects/Sprites/ArmorBreak_Icon.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Effects/Sprites/ArmorBreak_Icon.png",
+            "SnippetDesc": "Break Armor",
+            "Tags": [
+                "Gambit"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Page",
+                "Action"
+            ]
+        },
+        "ActionData": {
+            "AmmoData": {
+                "AmmoType": "Phy",
+                "Clip": 12,
+                "Cost": 3
+            },
+            "AttackDetails": {
+                "AccuracyMod": 1,
+                "AttackVfxData": {},
+                "AttackVfxKey": "",
+                "PotencyMod": 1
+            },
+            "EffectDatas": {
+                "InflictEffect": {
+                    "EffectData": {
+                        "EffectDetails": {
+                            "DurationData": {
+                                "BaseDuration": 2
+                            }
+                        }
+                    },
+                    "EffectKey": "ArmorBreakDebuff"
+                }
+            }
+        },
+        "ItemData": {
+            "ItemType": "Page",
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "PageData": {
+            "PageRequirements": {
+                "ConflictingPages": [],
+                "IncompatiblePages": [],
+                "TitleReq": "Match"
+            },
+            "SourceTitle": "Rogue"
+        },
+        "_DefVersion": "1"
+    },
     "BeDeadlySelfBuff": {
         "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
         "!ParentKey": "#BaseApplySelfBuffAction",
@@ -93,6 +152,53 @@
         },
         "_DefVersion": "1"
     },
+    "DodgeAction": {
+        "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
+        "!ParentKey": "#BaseApplySelfBuffAction",
+        "#ObjDetails": {
+            "DisplayName": "Dodge",
+            "LargeIcon": "Effects/Sprites/Dodge_Icon.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Effects/Sprites/Dodge_Icon.png",
+            "SnippetDesc": "Dodge until next Action.",
+            "Tags": [
+                "Gambit"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Page",
+                "Action"
+            ]
+        },
+        "ActionData": {
+            "EffectDatas": {
+                "ApplyEffect": {
+                    "EffectData": {
+                        "EffectDetails": {
+                            "DurationData": {
+                                "BaseDuration": 1
+                            }
+                        }
+                    },
+                    "EffectKey": "DodgeEffect"
+                }
+            }
+        },
+        "ItemData": {
+            "ItemType": "Page",
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "PageData": {
+            "PageRequirements": {
+                "ConflictingPages": [],
+                "IncompatiblePages": [],
+                "TitleReq": "Match"
+            },
+            "SourceTitle": "Rogue"
+        },
+        "_DefVersion": "1"
+    },
     "BeQuickSelfBuff": {
         "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
         "!ParentKey": "#BaseApplySelfBuffAction",
@@ -122,6 +228,77 @@
                         }
                     },
                     "EffectKey": "BeQuickBuff"
+                }
+            }
+        },
+        "ItemData": {
+            "ItemType": "Page",
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "PageData": {
+            "PageRequirements": {
+                "ConflictingPages": [],
+                "IncompatiblePages": [],
+                "TitleReq": "Match"
+            },
+            "SourceTitle": "Rogue"
+        },
+        "_DefVersion": "1"
+    },
+    "PocketSandAction": {
+        "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
+        "!ParentKey": "#BaseInflictAttack",
+        "#ObjDetails": {
+            "DisplayName": "Pocket Sand",
+            "Description": "Make a @@#Color:Red:Inflcting Attack@@ against an @@#TrgParm:TargetParam:TargetType@@ in range, attempting to apply @@#EftData:InflictEffect:DisplayName@@ for @@#EftData:InflictEffect:Duration@@.\n\n-\"Pocket Sand!\"",
+            "LargeIcon": "Sprites/PocketSand_Icon.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/PocketSand_Icon.png",
+            "SnippetDesc": "Pocket Sand!",
+            "Tags": [
+                "Gambit"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Page",
+                "Action"
+            ]
+        },
+        "ActionData": {
+            "AmmoData": {
+                "AmmoType": "Phy",
+                "Clip": 12,
+                "Cost": 3
+            },
+            "AttackDetails": {
+                "AccuracyMod": 1,
+                "AttackVfxData": {
+                    "AnimationName": "4_sprites_250ms_frames_loop",
+                    "AnimationSpeed": 8,
+                    "RandomOffsets": [
+                        0,
+                        0
+                    ],
+                    "ScenePath": "res://assets/Scripts/VFXs/BulletVfxs/bullet_vfx_node.tscn",
+                    "SpriteName": "SpriteSheets/Sand_Missile.png",
+                    "SpriteSheetHight": 2,
+                    "SpriteSheetWidth": 2,
+                    "Velocity": 150
+                },
+                "AttackVfxKey": "",
+                "PotencyMod": 1
+            },
+            "EffectDatas": {
+                "InflictEffect": {
+                    "EffectData": {
+                        "EffectDetails": {
+                            "DurationData": {
+                                "BaseDuration": 5
+                            }
+                        }
+                    },
+                    "EffectKey": "AilmentBlind"
                 }
             }
         },
@@ -185,6 +362,13 @@
                         "LimitRangeMelee": "MatchPrimary"
                     },
                     "DisplayAsCrit": true
+                }
+            },
+            "TargetParams": {
+                "WeaponParamOverride":{
+                    "TargetConditions":{
+                        "HealthPercentBelow": 0.3
+                    }
                 }
             }
         },

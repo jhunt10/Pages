@@ -32,7 +32,7 @@ var effect_datas:Dictionary
 var attacker_accuracy:int
 var attacker_crit_chance:float
 var attcker_crit_mod:float
-var attacker_potency:int
+var attacker_potency:float
 
 func _init( attacking_actor:BaseActor, 
 			defending_actors:Array,

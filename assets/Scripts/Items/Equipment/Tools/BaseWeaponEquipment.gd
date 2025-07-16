@@ -64,6 +64,9 @@ func reload_def(load_path:String, def:Dictionary):
 	super(load_path, def)
 	_cache_after_loading_def()
 
+func get_target_param_def()->Dictionary:
+	return  weapon_data.get("AttackData", {}).get("TargetParams", {}).duplicate(true)
+
 func _cache_after_loading_def():
 	target_parmas = TargetParameters.new("Weapon", weapon_data.get("AttackData", {}).get("TargetParams", {}))
 	for damage_data_key in weapon_attack_data.get("DamageDatas", {}).keys():

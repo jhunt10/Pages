@@ -4,11 +4,15 @@ extends BaseSubAction
 func get_required_props()->Dictionary:
 	return {
 		"TargetKey": BaseSubAction.SubActionPropTypes.TargetKey,
-		"EffectKey": BaseSubAction.SubActionPropTypes.EffectKey
+		"EffectKey": BaseSubAction.SubActionPropTypes.EffectKey,
+		"AutoApply": BaseSubAction.SubActionPropTypes.BoolVal
 	}
 ## Returns Tags that are automatically added to the parent Action's Tags
 func get_action_tags(_subaction_data:Dictionary)->Array:
-	return ["Apply"]
+	if _subaction_data.get("AutoApply", false):
+		return ["Grant"]
+	else:
+		return ["Inflict"]
 
 func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, que_exe_data:QueExecutionData,
 				game_state:GameStateData, actor:BaseActor)->bool:

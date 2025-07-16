@@ -47,7 +47,7 @@ func force_build_ques():
 		#actor.auto_build_que(0)
 
 func _fill_ammo():
-	for actor_id in StoryState._player_ids:
+	for actor_id in CombatRootControl.Instance.GameState._actors.keys():
 		if actor_id == null:
 			continue
 		var actor = CombatRootControl.Instance.GameState.get_actor(actor_id)

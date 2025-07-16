@@ -273,13 +273,17 @@ func get_effect_immunity()->Array:
 ########################
 ##      Weapons       ##
 ########################
-func get_weapon_attack_target_params(target_param_key)->TargetParameters:
+func get_weapon_attack_target_param_def(target_param_key)->Dictionary:
 	var weapon = equipment.get_primary_weapon()
 	if weapon:
-		return weapon.target_parmas
+		return weapon.get_target_param_def()
 	var default_attack_data = get_load_val("UnarmedAttackData", {})
 	var default = TargetParameters.new(target_param_key, default_attack_data.get("TargetParams", {}))
 	return default
+	
+func get_weapon_attack_target_params(target_param_key)->TargetParameters:
+	var def = get_weapon_attack_target_param_def(target_param_key)
+	return TargetParameters.new(target_param_key, def)
 
 ## Get damage data for equippted weapon(s)
 ## If no weapons are equipt, default to Unarmed Damage Data from Actor Def

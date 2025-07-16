@@ -12,14 +12,20 @@ enum FlashTextType {
 	#temp_data['HostActorId'] = to_actor.Id
 	#return create_vfx_on_actor(to_actor, bullet_vfx_key, temp_data)
 
-static func create_flash_text(actor, value, flash_text_type:FlashTextType):
-	var actor_node:BaseActorNode = null
-	if actor is BaseActorNode:
-		actor_node = actor
-	elif actor is BaseActor:
-		actor_node = CombatRootControl.get_actor_node(actor.Id)
+static func create_flash_text(actor_or_holder, value, flash_text_type:FlashTextType):
+	var vfx_holder = null
+	if actor_or_holder is BaseActorNode:
+		vfx_holder = actor_or_holder.vfx_holder
+	elif actor_or_holder is BaseActor:
+		var actor_node = CombatRootControl.get_actor_node(actor_or_holder.Id)
+		vfx_holder = actor_node.vfx_holder
+	elif actor_or_holder is VfxHolder:
+		vfx_holder = actor_or_holder
+	
+	if not vfx_holder:
+		return null
 	var text_value = str(value)
-	actor_node.vfx_holder.flash_text_controller.add_flash_text(text_value, flash_text_type)
+	vfx_holder.flash_text_controller.add_flash_text(text_value, flash_text_type)
 
 static func create_damage_effect(target_actor:BaseActor, vfx_key:String, vfx_data:Dictionary):
 	if FORCE_RELOAD: MainRootNode.vfx_libray.reload_vfxs()

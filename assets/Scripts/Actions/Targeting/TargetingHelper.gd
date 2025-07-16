@@ -108,18 +108,18 @@ static func get_potential_coor_to_targets(target_params:TargetParameters, actor:
 		if target_params.is_actor_target_type():
 			var actors_in_spot:Array = game_state.get_actors_at_pos(spot, include_dead_actors)
 			for target:BaseActor in actors_in_spot:
-				if (target_params.target_type == TargetParameters.TargetTypes.Enemy and
-						actor.FactionIndex == target.FactionIndex):
-							continue
-				if (target_params.target_type == TargetParameters.TargetTypes.Ally and
-						actor.FactionIndex != target.FactionIndex):
-							continue
-				if target.is_dead and not (target_params.target_type == TargetParameters.TargetTypes.Corpse):
-							continue
-				if (target_params.target_type == TargetParameters.TargetTypes.Corpse 
-					# Cprse Target must dead and in open spot 
-					and not (target.is_dead or actors_in_spot.size() >= 1)):
-							continue
+				#if (target_params.target_type == TargetParameters.TargetTypes.Enemy and
+						#actor.FactionIndex == target.FactionIndex):
+							#continue
+				#if (target_params.target_type == TargetParameters.TargetTypes.Ally and
+						#actor.FactionIndex != target.FactionIndex):
+							#continue
+				#if target.is_dead and not (target_params.target_type == TargetParameters.TargetTypes.Corpse):
+							#continue
+				#if (target_params.target_type == TargetParameters.TargetTypes.Corpse 
+					## Cprse Target must dead and in open spot 
+					#and not (target.is_dead or actors_in_spot.size() >= 1)):
+							#continue
 				if target_params.is_valid_target_actor(actor, target, game_state):
 					if not potential_targets.has(target.Id) and not exclude_targets.has(target.Id):
 						add_to_dicarry(potential_targets, spot, target.Id)

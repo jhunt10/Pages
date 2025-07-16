@@ -22,5 +22,5 @@ func show_flash_text():
 	var damage_color = _data.get("DamageColor", Color.WHITE)
 	var damage_text_type = _data.get("DamageTextType", VfxHelper.FlashTextType.Normal_Dmg)
 	var damage_string = str(damage_number)
-	VfxHelper.create_flash_text(vfx_holder.actor_node, damage_string, damage_text_type)
+	VfxHelper.create_flash_text(vfx_holder, damage_string, damage_text_type)
 	_flash_text_shown = true

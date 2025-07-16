@@ -74,8 +74,8 @@ func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, que_exe_d
 		var damage_key = subaction_data.get("DamageKey")
 		if not damage_keys.has(damage_key):
 			damage_keys.append(damage_key)
-	damage_datas = parent_action.get_damage_datas(actor, damage_keys)
-	var actor_pos = game_state.get_actor_pos(actor)
+	if damage_keys.size() > 0:
+		damage_datas = parent_action.get_damage_datas(actor, damage_keys)
 	
 	# Handle special weapon logic 
 	if "damage_key" == "Weapon":
@@ -86,6 +86,7 @@ func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, que_exe_d
 			_create_weapon_missile()
 			return BaseSubAction.Success
 	
+	var actor_pos = game_state.get_actor_pos(actor)
 	var missed_moved_actor = false
 	var hit_any_actor = false
 	var hittable_actors = []

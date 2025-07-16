@@ -262,6 +262,10 @@ static func _roll_for_hit(attack_event:AttackEvent, sub_event:AttackSubEvent):
 	
 	var block_roll = randf()
 	sub_event.rolled_blocked = block_roll < sub_event.defender_block_chance
+	
+	if attack_event.attack_details.get("AutoHit", false):
+		sub_event.rolled_evade = false
+		#sub_event.rolled_blocked = false
 
 ## Roll for damage and add DamageEvents to AttackSubEvent for defender.
 ## Will alter can_evade/can_block of AttackSubEvent to account for Healing damage

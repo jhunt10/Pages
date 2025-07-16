@@ -314,7 +314,8 @@ weapon_z_offset = 0
 
 [node name="VFX_OffsetNode" type="Node2D" parent="ActorMotionNode/ActorSpriteNode/OffsetNode"]
 
-[node name="VFXHolder" parent="ActorMotionNode" instance=ExtResource("6_x8vrl")]
+[node name="VFXHolder" parent="ActorMotionNode" node_paths=PackedStringArray("actor_node") instance=ExtResource("6_x8vrl")]
+actor_node = NodePath("../..")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

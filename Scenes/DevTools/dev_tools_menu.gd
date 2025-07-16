@@ -30,7 +30,8 @@ func reload_stuff():
 	#SpriteCache._cached_sprites.clear()
 	#ActionLibrary.Instance.reload()
 	ActorLibrary.Instance.reload()
-	EffectLibrary.Instance.reload()
+	if EffectLibrary.Instance:
+		EffectLibrary.Instance.reload()
 	ItemLibrary.Instance.reload()
 	VfxLibrary.reload_vfxs()
 

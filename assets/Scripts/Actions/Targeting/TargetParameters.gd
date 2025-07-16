@@ -24,7 +24,7 @@ var effect_area:AreaMatrix
 var include_self_in_aoe:bool
 var include_allies_in_aoe:bool
 var include_enemies_in_aoe:bool
-var required_tags:Array
+var _conditions:Dictionary
 
 var _cached_canter_pos:MapPos
 var _cached_target_area:Dictionary
@@ -66,7 +66,7 @@ func _init(target_param_key:String, args:Dictionary) -> void:
 	include_self_in_aoe = args.get("IncludeSelfInAoe", true)
 	include_allies_in_aoe = args.get("IncludeAlliesInAoe", true)
 	include_enemies_in_aoe = args.get("IncludeEnemiesInAoe", true)
-	required_tags = args.get("RequiredTags", [])
+	_conditions = args.get("TargetConditions", {})
 
 func has_area_of_effect()->bool:
 	if effect_area:
@@ -94,11 +94,18 @@ func is_point_in_area(center:MapPos, point)->bool:
 
 ## Returns true if target actor is valid as a selected target
 func is_valid_target_actor(actor:BaseActor, target:BaseActor, game_state:GameStateData)->bool:
-	if required_tags.size() > 0:
-		var target_tags = target.get_tags()
-		for check_tag in required_tags:
-			if not target_tags.has(check_tag):
+	if _conditions.size() > 0:
+		if _conditions.has("TagFilers"):
+			if not TagHelper.check_tag_filters("TagFilters", _conditions, target):
 				return false
+		if _conditions.has("HealthPercentBelow"):
+			var targ_cur_hp = target.stats.current_health
+			var targ_max_hp = target.stats.max_health
+			var targ_percent = float(targ_cur_hp) / float(targ_max_hp)
+			var hp_threashold = _conditions.get("HealthPercentBelow")
+			if hp_threashold < targ_percent:
+				return false
+	
 	if target_type == TargetTypes.Actor:
 		return true
 	if target_type == TargetTypes.Corpse:

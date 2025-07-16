@@ -1,1 +1,238 @@
-{"BeDeadlyBuff":{"!ObjectScript":"res://assets/Scripts/Actors/Effects/BaseEffect.gd","#ObjDetails":{"Description":"Gain @@#StatMod:BuffStatMod@@","DisplayName":"Be Deadly","LargeIcon":"Sprites/BeDeadly_Icon.png","ObjectType":"Effect","SmallIcon":"Sprites/BeDeadly_Icon.png","SnippetDesc":"+50 to Accuracy","Tags":[],"Taxonomy":["Effect"]},"EffectData":{"EffectDetails":{"AddTagsToActor":[],"CanStack":false,"DeleteAfterCombat":true,"DurationData":{"BaseDuration":2,"DurationTrigger":"OnRoundEnd"},"IsBad":false,"IsGood":true,"ShowCounter":true,"ShowInHud":true},"StatMods":{"BuffStatMod":{"DisplayName":"Be Deadly","ModType":"Scale","StatName":"CritMod","Value":1.5}},"SubEffects":{"ModStat":{"AllStatMods":true,"SubEffectScript":"res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_ModStat.gd"}}},"_DefVersion":"1"},"BeNimbleBuff":{"!ObjectScript":"res://assets/Scripts/Actors/Effects/BaseEffect.gd","#ObjDetails":{"Description":"Gain @@#StatMod:BuffStatMod@@","DisplayName":"Be Nimble","LargeIcon":"Sprites/BeNimble_Icon.png","ObjectType":"Effect","SmallIcon":"Sprites/BeNimble_Icon.png","SnippetDesc":"+50 to Evasion","Tags":[],"Taxonomy":["Effect"]},"AddTagsToActor":[],"EffectData":{"EffectDetails":{"AddTagsToActor":[],"CanStack":false,"DeleteAfterCombat":true,"DurationData":{"BaseDuration":2,"DurationTrigger":"OnRoundEnd"},"IsBad":false,"IsGood":true,"ShowCounter":true,"ShowInHud":true},"StatMods":{"BuffStatMod":{"DisplayName":"Be Nimble","ModType":"Scale","StatName":"Evasion","Value":1.2}},"SubEffects":{"ModStat":{"AllStatMods":true,"SubEffectScript":"res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_ModStat.gd"}}},"ShowCounter":true,"ShowInHud":true,"_DefVersion":"1"},"BeQuickBuff":{"!ObjectScript":"res://assets/Scripts/Actors/Effects/BaseEffect.gd","#ObjDetails":{"Description":"Gain @@#StatMod:BuffStatMod@@","DisplayName":"Be Quick","LargeIcon":"Sprites/BeQuick_Icon.png","ObjectType":"Effect","SmallIcon":"Sprites/BeQuick_Icon.png","SnippetDesc":"+50 to Speed","Tags":[],"Taxonomy":["Effect"]},"AddTagsToActor":[],"EffectData":{"EffectDetails":{"AddTagsToActor":[],"CanStack":false,"DeleteAfterCombat":true,"DurationData":{"BaseDuration":2,"DurationTrigger":"OnRoundEnd"},"IsBad":false,"IsGood":true,"ShowCounter":true,"ShowInHud":true},"StatMods":{"BuffStatMod":{"DisplayName":"Be Quick","ModType":"Scale","StatName":"Speed","Value":1.2}},"SubEffects":{"ModStat":{"AllStatMods":true,"SubEffectScript":"res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_ModStat.gd"}}},"ShowCounter":true,"ShowInHud":true,"_DefVersion":"1"}}
+{
+    "BeDeadlyBuff": {
+        "!ObjectScript": "res://assets/Scripts/Actors/Effects/BaseEffect.gd",
+        "#ObjDetails": {
+            "Description": "Gain @@#StatMod:BuffStatMod@@",
+            "DisplayName": "Be Deadly",
+            "LargeIcon": "Sprites/BeDeadly_Icon.png",
+            "ObjectType": "Effect",
+            "SmallIcon": "Sprites/BeDeadly_Icon.png",
+            "SnippetDesc": "+50 to Accuracy",
+            "Tags": [],
+            "Taxonomy": [
+                "Effect"
+            ]
+        },
+        "EffectData": {
+            "EffectDetails": {
+                "AddTagsToActor": [],
+                "CanStack": false,
+                "DeleteAfterCombat": true,
+                "DurationData": {
+                    "BaseDuration": 2,
+                    "DurationTrigger": "OnRoundEnd"
+                },
+                "IsBad": false,
+                "IsGood": true,
+                "ShowCounter": true,
+                "ShowInHud": true
+            },
+            "StatMods": {
+                "BuffStatMod": {
+                    "DisplayName": "Be Deadly",
+                    "ModType": "Scale",
+                    "StatName": "CritMod",
+                    "Value": 1.5
+                }
+            },
+            "SubEffects": {
+                "ModStat": {
+                    "AllStatMods": true,
+                    "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_ModStat.gd"
+                }
+            }
+        },
+        "_DefVersion": "1"
+    },
+    "BeNimbleBuff": {
+        "!ObjectScript": "res://assets/Scripts/Actors/Effects/BaseEffect.gd",
+        "#ObjDetails": {
+            "Description": "Gain @@#StatMod:BuffStatMod@@",
+            "DisplayName": "Be Nimble",
+            "LargeIcon": "Sprites/BeNimble_Icon.png",
+            "ObjectType": "Effect",
+            "SmallIcon": "Sprites/BeNimble_Icon.png",
+            "SnippetDesc": "+50 to Evasion",
+            "Tags": [],
+            "Taxonomy": [
+                "Effect"
+            ]
+        },
+        "AddTagsToActor": [],
+        "EffectData": {
+            "EffectDetails": {
+                "AddTagsToActor": [],
+                "CanStack": false,
+                "DeleteAfterCombat": true,
+                "DurationData": {
+                    "BaseDuration": 2,
+                    "DurationTrigger": "OnRoundEnd"
+                },
+                "IsBad": false,
+                "IsGood": true,
+                "ShowCounter": true,
+                "ShowInHud": true
+            },
+            "StatMods": {
+                "BuffStatMod": {
+                    "DisplayName": "Be Nimble",
+                    "ModType": "Scale",
+                    "StatName": "Evasion",
+                    "Value": 1.2
+                }
+            },
+            "SubEffects": {
+                "ModStat": {
+                    "AllStatMods": true,
+                    "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_ModStat.gd"
+                }
+            }
+        },
+        "ShowCounter": true,
+        "ShowInHud": true,
+        "_DefVersion": "1"
+    },
+    "BeQuickBuff": {
+        "!ObjectScript": "res://assets/Scripts/Actors/Effects/BaseEffect.gd",
+        "#ObjDetails": {
+            "Description": "Gain @@#StatMod:BuffStatMod@@",
+            "DisplayName": "Be Quick",
+            "LargeIcon": "Sprites/BeQuick_Icon.png",
+            "ObjectType": "Effect",
+            "SmallIcon": "Sprites/BeQuick_Icon.png",
+            "SnippetDesc": "+50 to Speed",
+            "Tags": [],
+            "Taxonomy": [
+                "Effect"
+            ]
+        },
+        "AddTagsToActor": [],
+        "EffectData": {
+            "EffectDetails": {
+                "AddTagsToActor": [],
+                "CanStack": false,
+                "DeleteAfterCombat": true,
+                "DurationData": {
+                    "BaseDuration": 2,
+                    "DurationTrigger": "OnRoundEnd"
+                },
+                "IsBad": false,
+                "IsGood": true,
+                "ShowCounter": true,
+                "ShowInHud": true
+            },
+            "StatMods": {
+                "BuffStatMod": {
+                    "DisplayName": "Be Quick",
+                    "ModType": "Scale",
+                    "StatName": "Speed",
+                    "Value": 1.2
+                }
+            },
+            "SubEffects": {
+                "ModStat": {
+                    "AllStatMods": true,
+                    "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_ModStat.gd"
+                }
+            }
+        },
+        "ShowCounter": true,
+        "ShowInHud": true,
+        "_DefVersion": "1"
+    },
+    "ArmorBreakDebuff": {
+        "!ObjectScript": "res://assets/Scripts/Actors/Effects/BaseEffect.gd",
+        "#ObjDetails": {
+            "Description": "Lose @@#StatMod:ArmorMod@@",
+            "DisplayName": "Armor Break",
+            "LargeIcon": "Sprites/ArmorBreak_Icon.png",
+            "ObjectType": "Effect",
+            "SmallIcon": "Sprites/ArmorBreak_Icon.png",
+            "SnippetDesc": "-50% Armor",
+            "Tags": [],
+            "Taxonomy": [
+                "Effect"
+            ]
+        },
+        "AddTagsToActor": [],
+        "EffectData": {
+            "EffectDetails": {
+                "AddTagsToActor": [],
+                "CanStack": false,
+                "DeleteAfterCombat": true,
+                "DurationData": {
+                    "BaseDuration": 2,
+                    "DurationTrigger": "OnRoundEnd"
+                },
+                "IsBad": true,
+                "IsGood": false,
+                "ShowCounter": true,
+                "ShowInHud": true
+            },
+            "StatMods": {
+                "ArmorMod": {
+                    "ModType": "Scale",
+                    "StatName": "Armor",
+                    "Value": 0.5
+                }
+            },
+            "SubEffects": {
+                "ModStat": {
+                    "AllStatMods": true,
+                    "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_ModStat.gd"
+                }
+            }
+        },
+        "ShowCounter": true,
+        "ShowInHud": true,
+        "_DefVersion": "1"
+    },
+    "DodgeEffect": {
+        "!ObjectScript": "res://assets/Scripts/Actors/Effects/BaseEffect.gd",
+        "#ObjDetails": {
+            "Description": "Gain @@#StatMod:DodgeStatMod@@ until @@#Color:Red:Next Action@@.",
+            "DisplayName": "Dodge",
+            "LargeIcon": "Sprites/EvadePlus_Icon.png",
+            "ObjectType": "Effect",
+            "SmallIcon": "Sprites/EvadePlus_Icon.png",
+            "SnippetDesc": "+50 to Evasion",
+            "Tags": [],
+            "Taxonomy": [
+                "Effect"
+            ]
+        },
+        "AddTagsToActor": [],
+        "EffectData": {
+            "EffectDetails": {
+                "AddTagsToActor": [],
+                "CanStack": false,
+                "DeleteAfterCombat": true,
+                "DurationData": {
+                    "BaseDuration": 1,
+                    "DurationTrigger": "OnActionStart"
+                },
+                "IsBad": false,
+                "IsGood": true,
+                "ShowCounter": false,
+                "ShowInHud": true
+            },
+            "StatMods": {
+                "DodgeStatMod": {
+                    "DisplayName": "Dodge",
+                    "ModType": "Add",
+                    "StatName": "Evasion",
+                    "Value": 100
+                }
+            },
+            "SubEffects": {
+                "ModStat": {
+                    "AllStatMods": true,
+                    "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_ModStat.gd"
+                }
+            }
+        },
+        "ShowCounter": true,
+        "ShowInHud": true,
+        "_DefVersion": "1"
+    }
+}

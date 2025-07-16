@@ -28,7 +28,10 @@ func _cache_after_loading_def():
 	if _def.get("ActionData", {}).has('TargetParams'):
 		var targ_parms = _def.get("ActionData", {}).get('TargetParams')
 		for tparm_key in targ_parms.keys():
-			_target_params[tparm_key] = TargetParameters.new(tparm_key, targ_parms[tparm_key])
+			if tparm_key == "WeaponParamOverride":
+				_target_params[tparm_key] = targ_parms[tparm_key]
+			else:
+				_target_params[tparm_key] = TargetParameters.new(tparm_key, targ_parms[tparm_key])
 
 func get_tags()->Array:
 	var tags = []
@@ -228,7 +231,12 @@ func get_targeting_params(target_param_key, actor:BaseActor)->TargetParameters:
 		params = TargetParameters.SelfTargetParams
 	elif target_param_key == "Weapon":
 		if actor:
-			params = actor.get_weapon_attack_target_params(target_param_key)
+			var param_def:Dictionary = actor.get_weapon_attack_target_param_def(target_param_key)
+			if _target_params.has("WeaponParamOverride"):
+				var weapon_override = _target_params.get("WeaponParamOverride")
+				param_def = BaseLoadObjectLibrary._merge_defs(param_def, weapon_override)
+			return TargetParameters.new(target_param_key, param_def)
+				
 	else:
 		params = _target_params.get(target_param_key, null)
 	if !params:
