@@ -374,10 +374,24 @@ func _calc_cache_stats(emit_signal:bool=true):
 		if not temp_stats.keys().has(added_stat):
 			temp_stats[added_stat] = 0
 	
-	# Add current health in the form of a mod
+	# Add current health to temp stats
 	if health_before_caching is int:
 		temp_stats[StatHelper.HealthCurrent] = health_before_caching
-		
+	# Add Armor and Ward from equipment
+	var apparel_stats = _actor.equipment.get_total_apparel_stats()
+	temp_stats['Armor'] = apparel_stats['Armor']
+	temp_stats['Ward'] = apparel_stats['Ward']
+	var armor_fake_mod = BaseStatMod.new(_actor.Id, "Armor", str(apparel_stats['Armor'])+" from Apparel", 
+			BaseStatMod.ModTypes.FalseMod,apparel_stats['Armor'],null)
+	var ward_fake_mod = BaseStatMod.new(_actor.Id, "Ward", str(apparel_stats['Ward'])+" from Apparel", 
+			BaseStatMod.ModTypes.FalseMod,apparel_stats['Ward'],null)
+	if not _cached_mods.keys().has("Armor"):
+		_cached_mods['Armor'] = []
+	if not _cached_mods.keys().has("Ward"):
+		_cached_mods['Ward'] = []
+	(_cached_mods['Armor'] as Array).push_front(armor_fake_mod)
+	(_cached_mods['Ward'] as Array).push_front(ward_fake_mod)
+	
 	
 	## Add current values for bar stats
 	#for stat_name:String in temp_stats.keys():

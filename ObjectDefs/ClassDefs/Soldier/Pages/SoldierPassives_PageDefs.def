@@ -228,6 +228,55 @@
         "PassiveData": {},
         "_DefVersion": "1"
     },
+    "HeavyArmorTrainingPage": {
+        "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemPassive.gd",
+        "#ObjDetails": {
+            "Description": "You have spent so much time plated in Heavy Armor that's in almost become a second skin to you. You should probably buy some new clothes.\n@@#StatMod:ArmorMod@@ when wearing only @@#Tag:HeavyArmor:Heavy Armor Apparel@@.",
+            "DisplayName": "Heavy Armored",
+            "LargeIcon": "Sprites/HeavyArmor_Icon.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/HeavyArmor_Icon.png",
+            "SnippetDesc": "+20% Armor for Heavy Armor",
+            "Tags": [
+                "Passive"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Page",
+                "Passive"
+            ]
+        },
+        "ItemData": {
+            "ItemType": "Page",
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "PageData": {
+            "PageRequirements": {
+                "ConflictingPages": [],
+                "IncompatiblePages": [],
+                "TitleReq": "Match",
+                "ApparelReq": {
+                    "AllApparelMustMatch": true,
+                    "ApparelTagFilters": [
+                        {
+                            "RequireAnyTags": ["HeavyArmor"]
+                        }
+                    ]
+                }
+            },
+            "SourceTitle": "Soldier",
+            "StatMods": {
+                "ArmorMod": {
+                    "ModType": "Scale",
+                    "StatName": "Armor",
+                    "Value": 1.2
+                }
+            }
+        },
+        "PassiveData": {},
+        "_DefVersion": "1"
+    },
     "ShieldTrainingPage": {
         "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemPassive.gd",
         "#ObjDetails": {

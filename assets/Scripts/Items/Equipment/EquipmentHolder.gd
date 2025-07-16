@@ -26,20 +26,23 @@ func get_tags_added_to_actor()->Array:
 		
 
 func _load_slots_sets_data()->Array:
-	var equipment_data = _actor.actor_data.get("EquipmentData", {})
-	var slots = equipment_data.get("EquipmentSlots", [])
-	var out_dict = {}
-	for slot in slots:
-		if out_dict.keys().has(slot):
-			printerr("EquipmentHolder._get_slots_sets_data: Actor '%s' has multiple '%s' slots." % [_actor.Id, slot])
-			continue
-		out_dict[slot] = {
-			"Key": slot,
-			"DisplayName":slot,
+	# Actors always have a slot for PageBook and SupplyBag
+	var out_dict = {
+		"PageBook": {
+			"Key": "PageBook",
+			"DisplayName":"PageBook",
 			"Count": 1,
-			"FilterData":{"RequiredTags":[slot]}
+			"FilterData":{"RequiredTags":["PageBook"]}
+		},
+		"SupplyBag": {
+			"Key": "SupplyBag",
+			"DisplayName":"SupplyBag",
+			"Count": 1,
+			"FilterData":{"RequiredTags":["SupplyBag"]}
 		}
-	_hand_count = equipment_data.get("HandCount", 0)
+	}
+	var equipment_constraints = _actor.actor_data.get("EquipmentConstraints", {})
+	_hand_count = equipment_constraints.get("HandCount", 0)
 	if _hand_count > 0:
 		out_dict['Hands'] = {
 			"Key": "Hands",
@@ -48,6 +51,26 @@ func _load_slots_sets_data()->Array:
 			"IsHandSlots": true,
 			"FilterData":{"RequiredTags":["Tool"]}
 		}
+	var apparel_slots = equipment_constraints.get("ApparelSlots", [])
+	for slot in apparel_slots:
+		if out_dict.keys().has(slot):
+			printerr("EquipmentHolder._get_slots_sets_data: Actor '%s' has multiple '%s' slots." % [_actor.Id, slot])
+			continue
+		out_dict[slot] = {
+			"Key": "Apparel:"+slot,
+			"DisplayName":slot,
+			"Count": 1,
+			"FilterData":{"RequiredTags":["Apparel", slot]}
+		}
+	var trinkets = equipment_constraints.get("TrinketCount", 1)
+	if trinkets > 0:
+		out_dict["Trinket"] = {
+			"Key": "Trinket",
+			"DisplayName":"Trinket",
+			"Count": trinkets,
+			"FilterData":{"RequiredTags":["Apparel", "Trinket"]}
+		}
+	
 		
 	return out_dict.values()
 
@@ -72,6 +95,7 @@ func get_equipt_items_of_slot_type(slot_type:String)->Array:
 		var offhand = get_offhand_weapon()
 		if offhand and offhand != main_hand: weapons.append(offhand)
 		return weapons
+		
 	var slot_set_index = _slot_set_key_mapping.find(slot_type)
 	if slot_set_index < 0:
 		return []
@@ -189,19 +213,20 @@ func _get_items_removed_if_new_item_added(slot_index:int, item:BaseItem)->Array:
 	return list_all_tools_in_hands()
 
 
-func can_set_item_in_slot(item:BaseItem, index:int, allow_replace:bool=false)->bool:
-	# Only Hands require special logic
-	if get_slot_set_key_for_index(index) != "Hands":
-		return super(item, index, allow_replace)
-	
-	if not (item is BaseToolEquipment):
-		printerr("EquipmentHolder.can_set_item_in_slot: Non-Tool Item attempted to go in HandSlot")
-		return false
-	
-	# Hand logic doesn't actually prevent items from being equip
-	if not allow_replace:
-		return _raw_item_slots[index] == null
-	return true
+#func can_set_item_in_slot(item:BaseItem, index:int, allow_replace:bool=false)->bool:
+	## Only Hand Slots require special logic
+	## If not hand slot - use default logic
+	#if get_slot_set_key_for_index(index) != "Hands":
+		#return super(item, index, allow_replace)
+	#
+	## If it is a hand slot, but not a Tool Item
+	#if not (item is BaseToolEquipment):
+		#return false
+	#
+	## Hand logic doesn't actually prevent items from being equip
+	#if not allow_replace:
+		#return _raw_item_slots[index] == null
+	#return true
 
 func _on_item_added_to_slot(item:BaseItem, index:int):
 	auto_order_hand_items()
@@ -405,302 +430,21 @@ func get_que_equipment()->BaseQueEquipment:
 			return item
 	return null
 
-##	Weapon Transfer Logic
-# Adding Light
-#	To Main Hand:
-#		NA
-#	To  Off Hand: 
-#		if MainHand is Light:
-#			Normal Logic
-#		else:
-#			Place in Main
-# Adding Medium:
-#	To Main Hand:
-#		If Versitile:
-#			If OffHand is Empty:
-#				Place in Off and
 
-
-
-#var _actor:BaseActor
-
-#var _slot_equipment_types:Array:
-	#get: return _actor.get_load_val("EquipmentSlots", [])
-#var _slot_equipment_ids:Array:
-	#get: return _actor.get_load_val("Equipment", [])
-#
-#func _init(actor:BaseActor) -> void:
-	#self._actor = actor
-	#
-	#_slot_equipment_types = _slot_equipment_types
-	#var saved_equipment = actor.get_load_val("Equipment")
-	#if !saved_equipment or saved_equipment.size() != _slot_equipment_types.size():
-		#actor._data['Equipment'] = []
-		#for i in range(_slot_equipment_types.size() -_slot_equipment_ids.size()):
-			#actor._data['Equipment'].append(null)
+########################
+##      Apparel       ##
+########################
+func list_apparel()->Array:
+	var out_list = []
+	for equipment in list_equipment():
+		if equipment is BaseApparelEquipment:
+			out_list.append(equipment)
+	return out_list
 	
-	# Load or Create entries for each slot defined in ActorDef
-	#for equipment_id in equipt_items:
-		#if !equipment_id or equipment_id == '':
-			#_slot_equipment_ids.append(null)
-		#else:
-			#_slot_equipment_ids.append(equipment_id)
-
-#func save_equipt_items()->Array:
-	#return _slot_equipment_ids
-
-## Return true if actor can equipt item in slot
-#func has_slot(slot:String)->bool:
-	#return _slot_equipment_ids.has(slot)
-
-#func get_index_of_slot_with_type(slot_type:String)->int:
-	#var slot_set_index = _slot_set_key_mapping.find(slot_type)
-	#if slot_set_index < 0:
-		#return -1
-	#var slot_set_data = _item_slot_sets_datas[slot_set_index]
-	#return slot_set_data.get('IndexOffset', -1)
-
-#func try_equip_weapon(item:BaseWeaponEquipment, holder:BaseItemHolder, slot_index:int, allow_replace:bool = true)->String:
-
-#func has_equipment_in_slot(index:int, equipment:BaseEquipmentItem=null)->bool:
-	#if index < 0 or index >= _raw_item_slots.size():
-		#return false
-	#if equipment:
-		#return _raw_item_slots[index] == equipment.Id
-	#return _raw_item_slots[index] != null
-
-### Returns slot index of equipment if it is equipped
-#func get_slot_of_equipt_item(equipment:BaseEquipmentItem)->int:
-	#return _raw_item_slots.find(equipment.Id)
-
-#func get_item_in_slot(index:int)->BaseEquipmentItem:
-	#var item = get_item_in_slot(index)
-	#if item and item is BaseEquipmentItem:
-		#return item
-	#return null
-
-#func can_equip_item(equipment:BaseEquipmentItem)->bool:
-	#if !equipment:
-		#return false
-	#var slot = equipment.get_equipment_slot_type()
-	#if slot != "Weapon" and !_slot_set_key_mapping.has(slot):
-		#return false
-	##var stat_req = equipment.get_required_stat()
-	##for stat_name in stat_req.keys():
-		##var req_stat_val = stat_req[stat_name]
-		##var stat_val = _actor.stats.get_stat(stat_name, 0)
-		##if stat_val < req_stat_val:
-			##return false
-	#return true
-
-#func remove_item(item_id:String, supress_signal:bool=false):
-	#if not _raw_item_slots.has(item_id):
-		#return
-	#if not ItemHelper.transering_items.has(item_id):
-		#printerr("Transfering Item outside of ItemHelper: %s | %s " % [item_id, _actor.Id])
-	## Might need to change hands if item is in Mainhand or Offhand
-	#var main_hand_index = -1
-	#var off_hand_index = -1
-	#for index in range(_raw_item_slots.size()):
-		#var slot_item_id = _raw_item_slots[index]
-		#if slot_item_id == item_id:
-			#if _slot_set_key_mapping[index] == "MainHand":
-				#main_hand_index = index
-			#if _slot_set_key_mapping[index] == "OffHand":
-				#off_hand_index = index
-	#
-	#var in_main_hand = main_hand_index >= 0
-	#var in_off_hand = off_hand_index >= 0
-	#
-	## In both hands
-	#if in_off_hand and in_main_hand:
-		## Remove from both hands
-		#_safe_set_slot(main_hand_index, null, true)
-		#_safe_set_slot(off_hand_index, null, supress_signal)
-		#if _actor.is_player:
-			#var item = ItemLibrary.get_item(item_id)
-			#PlayerInventory.add_item(item)
-		#return
-		#
-	## Only in Off Hand: Check if main hand weapon can be two handed
-	#elif in_off_hand and not in_main_hand:
-		#main_hand_index = _slot_set_key_mapping.find("MainHand")
-		#var main_hand_item = get_item_in_slot(main_hand_index)
-		#if not main_hand_item: # No item in main_hand
-			#_safe_set_slot(off_hand_index, null, supress_signal)
-			#if _actor.is_player:
-				#var item = ItemLibrary.get_item(item_id)
-				#PlayerInventory.add_item(item)
-			#return
-		#var main_hand_weapon = main_hand_item as BaseWeaponEquipment
-		#if not main_hand_weapon: # Main Hand item is not weapon?
-			#_safe_set_slot(off_hand_index, null, supress_signal)
-			#if _actor.is_player:
-				#var item = ItemLibrary.get_item(item_id)
-				#PlayerInventory.add_item(item)
-			#return
-		## Move main hand weapon to both hands
-		#if (main_hand_weapon.get_weapon_class() == BaseWeaponEquipment.WeaponClasses.Medium
-			#or main_hand_weapon.get_weapon_class() == BaseWeaponEquipment.WeaponClasses.Heavy):
-			#_safe_set_slot(off_hand_index, main_hand_weapon, supress_signal)
-			#if _actor.is_player:
-				#var item = ItemLibrary.get_item(item_id)
-				#PlayerInventory.add_item(item)
-		#else: # Can't two hand Main Hand
-			#_safe_set_slot(off_hand_index, null, supress_signal)
-			#if _actor.is_player:
-				#var item = ItemLibrary.get_item(item_id)
-				#PlayerInventory.add_item(item)
-			#return
-			#
-	#
-	## Only in Main Hand
-	#elif in_main_hand and not in_off_hand:
-		#off_hand_index = _slot_set_key_mapping.find("OffHand")
-		#var off_hand_item = get_item_in_slot(off_hand_index)
-		#if not off_hand_item: # No item in off_hand
-			#_safe_set_slot(main_hand_index, null, supress_signal)
-			#if _actor.is_player:
-				#var item = ItemLibrary.get_item(item_id)
-				#PlayerInventory.add_item(item)
-			#return
-		#var off_hand_weapon = off_hand_item as BaseWeaponEquipment
-		#if not off_hand_weapon: # Off Hand item is not weapon
-			#_safe_set_slot(main_hand_index, null, supress_signal)
-			#if _actor.is_player:
-				#var item = ItemLibrary.get_item(item_id)
-				#PlayerInventory.add_item(item)
-			#return 
-		## Move off hand weapon to main hands
-		#_safe_set_slot(off_hand_index, null, true)
-		#_safe_set_slot(main_hand_index, off_hand_weapon, supress_signal)
-		#if _actor.is_player:
-			#var item = ItemLibrary.get_item(item_id)
-			#PlayerInventory.add_item(item)
-	#
-	## Isn't in either hand
-	#else:
-		#var index = _raw_item_slots.find(item_id)
-		#_safe_set_slot(index, null, supress_signal)
-		#if _actor.is_player:
-			#var item = ItemLibrary.get_item(item_id)
-			#PlayerInventory.add_item(item)
-
-#func remove_equipment(equipment:BaseEquipmentItem, supress_signal:bool = false):
-	#return remove_item(equipment.Id, supress_signal)
-
-## Set equipment to a slot and inform old and new equipment of change
-#func _safe_set_slot(index:int, equipment:BaseEquipmentItem, supress_signal:bool=false):
-	#var old_equipment = get_item_in_slot(index)
-	#if old_equipment:
-		#if equipment and old_equipment.Id == equipment.Id:
-			#return
-		#else:
-			#_raw_item_slots[index] = null
-	#if equipment:
-		#_raw_item_slots[index] = equipment.Id
-	#if not supress_signal:
-		#items_changed.emit()
-	
-
-
-#func try_set_item_in_slot(item:BaseItem, index:int, allow_replace:bool=false)->bool:
-	#var slot_type = get_slot_equipment_type(index)
-	#
-	#if not can_set_item_in_slot(item, index, allow_replace):
-		#return false
-		#
-	## Non-Weapon OffHand: Remove Primary if two handing Heavy Weapon
-	#if slot_type == "OffHand" and not item is BaseWeaponEquipment:
-		#if is_two_handing():
-			#var two_hand_weapon = get_primary_weapon()
-			#if two_hand_weapon.get_weapon_class() == BaseWeaponEquipment.WeaponClasses.Heavy:
-				#remove_equipment(two_hand_weapon, true)
-			#else:
-				#_raw_item_slots[index] = null
-	#
-	#if not item is BaseWeaponEquipment:
-		#_safe_set_slot(index, item)
-		#return true
-		#
-		#
-	#var weapon = item as BaseWeaponEquipment
-	#var main_hand_index = _slot_set_key_mapping.find("MainHand")
-	#var off_hand_index = _slot_set_key_mapping.find("OffHand")
-	#var current_primary = get_primary_weapon()
-	#var current_offhand = get_item_in_slot(off_hand_index)
-	#if index != main_hand_index and index != off_hand_index:
-		#printerr("EquipmentHolder.try_set_item_in_slot: Attempted to set weapon '%s' in non-hand slot %s." % [item.Id, index])
-		#return false
-	## For Heavy Weapons: Equipt to both hands
-	#if weapon.get_weapon_class() == BaseWeaponEquipment.WeaponClasses.Heavy:
-		#if not allow_replace and (current_primary or current_offhand):
-			#return false
-		#if current_primary:
-			#remove_equipment(current_primary, true)
-		#if current_offhand:
-			#remove_equipment(current_offhand, true)
-			#
-		#_safe_set_slot(main_hand_index, item, true)
-		#_safe_set_slot(off_hand_index, item, true)
-		#items_changed.emit()
-		#return true
-	#
-	## For Medium Weapons: Equipt to both hands if off_hand is empty
-	#elif weapon.get_weapon_class() == BaseWeaponEquipment.WeaponClasses.Medium:
-		## Equipting to off hand / two handing
-		#if index == off_hand_index:
-			#if not allow_replace and (current_primary or current_offhand):
-				#return false
-			#if current_offhand:
-				#remove_equipment(current_offhand, true)
-			#if current_primary:
-				#remove_equipment(current_primary, true)
-			#_safe_set_slot(main_hand_index, item, true)
-			#_safe_set_slot(off_hand_index, item, true)
-			#items_changed.emit()
-			#return true
-		## Equipting to main hand
-		#elif index == main_hand_index:
-			#if not allow_replace and current_primary:
-				#return false
-			#if current_primary:
-				#remove_equipment(current_primary, true)
-				## Was two handing
-				#if current_offhand and current_primary.Id == current_offhand.Id:
-					#current_offhand = null
-			#if _raw_item_slots[off_hand_index] == null: # Off hand is empty
-				#_safe_set_slot(off_hand_index, item, true)
-			#_safe_set_slot(main_hand_index, item, true)
-			#items_changed.emit()
-			#return true
-	## For Light Weapons: Equipt to off hand only when main hand is empty or has light weapon
-	#elif weapon.get_weapon_class() == BaseWeaponEquipment.WeaponClasses.Light:
-		#if index == off_hand_index:
-			#if not current_primary: # Force over to main hand
-				#index = main_hand_index
-			#elif not current_primary.get_weapon_class() == BaseWeaponEquipment.WeaponClasses.Light:
-				#index = main_hand_index # Force over to main hand
-			#elif not allow_replace and current_offhand:
-				#return false
-			#elif current_offhand:
-				#remove_equipment(current_offhand, true)
-		#if index == main_hand_index:
-			#if not allow_replace and current_primary:
-				#return false
-			#if current_primary:
-				#remove_equipment(current_primary, true)
-		#_safe_set_slot(index, item, true)
-		#items_changed.emit()
-		#return true
-		#
-	#printerr("RquipmentHolder.try_set_item_in_slot: Unhandled case. Item: %s | Slot: %s | AllowReplace: %s" % [item.Id, index, allow_replace] )
-	#return false
-
-#func _get_single_equipment_of_type(slot_type)->BaseEquipmentItem:
-	#var items = get_equipt_items_of_slot_type(slot_type)
-	#if items.size() > 1:
-		#printerr("EquipmentHolder._get_single_equipment_of_type: Multiple '%s' slots found on actor '%s'." % [slot_type, _actor.id])
-	#if items.size() > 0:
-		#return items[0]
-	#return null
+func get_total_apparel_stats()->Dictionary:
+	var stats = {"Armor":0, "Ward":0}
+	for equipment in list_equipment():
+		if equipment is BaseApparelEquipment:
+			stats["Armor"] += equipment.get_armor_value()
+			stats["Ward"] += equipment.get_ward_value()
+	return stats

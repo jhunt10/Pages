@@ -14,9 +14,9 @@
             ]
         },
         "ActorData": {
-            "EquipmentData": {
+            "EquipmentConstraints": {
                 "EquipmentSlots": [],
-                "HandCount": 2
+                "HandCount": 1
             }
         },
         "IsPlayer": false,
@@ -126,15 +126,13 @@
             "Wisdom": 0
         },
         "ActorData": {
-            "EquipmentData": {
-                "EquipmentSlots": [
-                    "Book",
-                    "Bag",
+            "EquipmentConstraints": {
+                "ApparelSlots": [
                     "Head",
                     "Body",
-                    "Feet",
-                    "Trinket"
+                    "Feet"
                 ],
+                "TrinketCount": 1,
                 "HandCount": 2,
                 "HandConditions": [
                     {

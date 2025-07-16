@@ -78,8 +78,6 @@ func get_item_type()->ItemTypes:
 
 func get_weapon_class()->WeaponClasses:
 	var val = weapon_data.get("WeaponClass", null)
-	if !val: # TODO: Obsoleate
-		val = get_load_val("WeaponClass", '')
 	if WeaponClasses.keys().has(val):
 		return WeaponClasses.get(val)
 	return WeaponClasses.Medium

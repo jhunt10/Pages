@@ -55,7 +55,7 @@
         "_DefVersion": "1"
     },
     "OldSoldierArmor": {
-        "!ObjectScript": "res://assets/Scripts/Items/Equipment/BaseArmorEquipment.gd",
+        "!ObjectScript": "res://assets/Scripts/Items/Equipment/BaseApparelEquipment.gd",
         "#ObjDetails": {
             "Description": "Standard issue armor provided by The Military. Old, but still works.",
             "DisplayName": "Old Armor",
@@ -83,13 +83,13 @@
             },
             "SpriteData": {
                 "SpriteSheet": "Sprites/OldArmor_SpriteSheet.png"
-            },
+            }
+        },
+        "ApparelData":{
+            "ProvidedArmor": 5,
+            "ProvidedWard": 0,
+            "ApparelClass": "HeavyArmor",
             "StatMods": {
-                "ArmorBonus": {
-                    "ModType": "Add",
-                    "StatName": "Armor",
-                    "Value": 5
-                },
                 "MassBonus": {
                     "ModType": "Add",
                     "StatName": "Mass",
@@ -109,7 +109,7 @@
         "_DefVersion": "1"
     },
     "OldSoldierBoots": {
-        "!ObjectScript": "res://assets/Scripts/Items/Equipment/BaseArmorEquipment.gd",
+        "!ObjectScript": "res://assets/Scripts/Items/Equipment/BaseApparelEquipment.gd",
         "#ObjDetails": {
             "Description": "Standard issue boots provided by The Military. Old, but still works.",
             "DisplayName": "Old Boots",
@@ -137,13 +137,13 @@
             },
             "SpriteData": {
                 "SpriteSheet": "Sprites/OldBoots_SpriteSheet.png"
-            },
+            }
+        },
+        "ApparelData":{
+            "ProvidedArmor": 5,
+            "ProvidedWard": 0,
+            "ApparelClass": "HeavyArmor",
             "StatMods": {
-                "ArmorBonus": {
-                    "ModType": "Add",
-                    "StatName": "Armor",
-                    "Value": 5
-                },
                 "MassBonus": {
                     "ModType": "Add",
                     "StatName": "Mass",
@@ -163,7 +163,7 @@
         "_DefVersion": "1"
     },
     "OldSoldierHelmet": {
-        "!ObjectScript": "res://assets/Scripts/Items/Equipment/BaseArmorEquipment.gd",
+        "!ObjectScript": "res://assets/Scripts/Items/Equipment/BaseApparelEquipment.gd",
         "#ObjDetails": {
             "Description": "Standard issue helmet provided by The Military. Old, but still works.",
             "DisplayName": "Old Helmet",
@@ -191,13 +191,13 @@
             },
             "SpriteData": {
                 "SpriteSheet": "Sprites/OldHelm_SpriteSheet.png"
-            },
+            }
+        },
+        "ApparelData":{
+            "ProvidedArmor": 5,
+            "ProvidedWard": 0,
+            "ApparelClass": "HeavyArmor",
             "StatMods": {
-                "ArmorBonus": {
-                    "ModType": "Add",
-                    "StatName": "Armor",
-                    "Value": 5
-                },
                 "MassBonus": {
                     "ModType": "Add",
                     "StatName": "Mass",

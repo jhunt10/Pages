@@ -17,7 +17,8 @@ enum ModTypes {
 	Set, # Set the stat 	| x = val
 	
 	AddStat, # Add other_stat to stat | x = x + [Stat]
-	ScaleStat
+	ScaleStat,
+	FalseMod # used for hacking this dumb class
 }
 
 static func create_from_data(source_id:String, data:Dictionary) -> BaseStatMod:

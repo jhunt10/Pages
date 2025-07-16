@@ -278,7 +278,7 @@ func get_weapon_attack_target_param_def(target_param_key)->Dictionary:
 	if weapon:
 		return weapon.get_target_param_def()
 	var default_attack_data = get_load_val("UnarmedAttackData", {})
-	var default = TargetParameters.new(target_param_key, default_attack_data.get("TargetParams", {}))
+	var default = default_attack_data.get("TargetParams", {})
 	return default
 	
 func get_weapon_attack_target_params(target_param_key)->TargetParameters:
@@ -474,11 +474,11 @@ func _does_weapon_mod_apply_to_item(mod_data:Dictionary, item:BaseToolEquipment)
 	return true
 
 func get_hands_conditions_for_tool(tool:BaseToolEquipment)->Dictionary:
-	var equipment_data = actor_data.get("EquipmentData", {})
+	var equipment_constraints = actor_data.get("EquipmentConstraints", {})
 	var hand_conditions = []
 	for page:PageItemPassive in pages.list_passives():
 		hand_conditions.append_array(page.get_hand_mods())
-	var default_hand_conditions = equipment_data.get("HandConditions", [])
+	var default_hand_conditions = equipment_constraints.get("HandConditions", [])
 	hand_conditions.append_array(default_hand_conditions)
 		
 	for condition in hand_conditions:

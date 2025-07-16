@@ -9,7 +9,7 @@ var book_data:Dictionary:
 
 
 func get_equipment_slot_type()->String:
-	return "Book"
+	return "PageBook"
 
 func _init(key:String, def_load_path:String, def:Dictionary, id:String='', data:Dictionary={}) -> void:
 	super(key, def_load_path, def, id, data)

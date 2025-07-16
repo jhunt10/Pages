@@ -1,6 +1,6 @@
 {
     "OldMageArmor": {
-        "!ObjectScript": "res://assets/Scripts/Items/Equipment/BaseArmorEquipment.gd",
+        "!ObjectScript": "res://assets/Scripts/Items/Equipment/BaseApparelEquipment.gd",
         "#ObjDetails": {
             "Description": "A common design of robes worn by many new mages. Old, but still works.",
             "DisplayName": "Old Red Robes",
@@ -28,14 +28,13 @@
             },
             "SpriteData": {
                 "SpriteSheet": "Sprites/RedRobes_SpriteSheet.png"
-            },
-            "StatMods": {
-                "WardBonus": {
-                    "ModType": "Add",
-                    "StatName": "Ward",
-                    "Value": 2
-                }
             }
+        },
+        "ApparelData":{
+            "ProvidedArmor": 0,
+            "ProvidedWard": 2,
+            "ApparelClass": "LightWard",
+            "StatMods": {}
         },
         "ItemData": {
             "Rarity": "Mundane",
@@ -44,7 +43,7 @@
         "_DefVersion": "1"
     },
     "OldMageBoots": {
-        "!ObjectScript": "res://assets/Scripts/Items/Equipment/BaseArmorEquipment.gd",
+        "!ObjectScript": "res://assets/Scripts/Items/Equipment/BaseApparelEquipment.gd",
         "#ObjDetails": {
             "Description": "A common design of shoes worn by many new mages. Old, but still works.",
             "DisplayName": "Old Red Shoes",
@@ -72,14 +71,13 @@
             },
             "SpriteData": {
                 "SpriteSheet": "Sprites/RedBoots_SpriteSheet.png"
-            },
-            "StatMods": {
-                "WardBonus": {
-                    "ModType": "Add",
-                    "StatName": "Ward",
-                    "Value": 2
-                }
             }
+        },
+        "ApparelData":{
+            "ProvidedArmor": 0,
+            "ProvidedWard": 2,
+            "ApparelClass": "LightWard",
+            "StatMods": {}
         },
         "ItemData": {
             "Rarity": "Mundane",
@@ -88,7 +86,7 @@
         "_DefVersion": "1"
     },
     "OldMageHelmet": {
-        "!ObjectScript": "res://assets/Scripts/Items/Equipment/BaseArmorEquipment.gd",
+        "!ObjectScript": "res://assets/Scripts/Items/Equipment/BaseApparelEquipment.gd",
         "#ObjDetails": {
             "Description": "A common design of hat worn by many new mages. Old, but still works.",
             "DisplayName": "Old Hat",
@@ -116,14 +114,13 @@
             },
             "SpriteData": {
                 "SpriteSheet": "Sprites/RedHat_SpriteSheet.png"
-            },
-            "StatMods": {
-                "WardBonus": {
-                    "ModType": "Add",
-                    "StatName": "Ward",
-                    "Value": 2
-                }
             }
+        },
+        "ApparelData":{
+            "ProvidedArmor": 0,
+            "ProvidedWard": 2,
+            "ApparelClass": "LightWard",
+            "StatMods": {}
         },
         "ItemData": {
             "Rarity": "Mundane",

@@ -11,6 +11,7 @@ signal mouse_exit_item(item_id, index)
 @export var ward_label:Label
 @export var phyatk_label:Label
 @export var magatk_label:Label
+@export var two_hand_offhand_icon:TextureRect
 signal equipt_slot_pressed(slot:int)
 
 var _actor:BaseActor
@@ -20,12 +21,12 @@ var slot_displays:Array:
 	get: return [
 		$RightEquipSlots/BookSlotButton,
 		$RightEquipSlots/BagSlotButton,
+		$LeftEquipSlots/MainHandSlotButton,
+		$RightEquipSlots/OffHandSlotButton,
 		$LeftEquipSlots/HeadSlotButton,
 		$LeftEquipSlots/BodySlotButton,
 		$LeftEquipSlots/FeetSlotButton,
 		$RightEquipSlots/TrinketSlotButton,
-		$LeftEquipSlots/MainHandSlotButton,
-		$RightEquipSlots/OffHandSlotButton,
 	]
 
 func _ready() -> void:
@@ -68,6 +69,13 @@ func _sync():
 	magatk_label.text = str(_actor.stats.get_stat(StatHelper.MagAttack))
 	phyatk_label.text = str(_actor.stats.get_stat(StatHelper.PhyAttack))
 	actor_node.set_facing_dir(MapPos.Directions.South)
+	
+	var off_hand_slot:EquipmentDisplaySlotButton = slot_displays[3]
+	if _actor.equipment.is_two_handing():
+		off_hand_slot.icon_texture_rect.texture = _actor.equipment.get_primary_weapon().get_large_icon()
+		off_hand_slot.icon_texture_rect.modulate = Color(1,1,1,0.5)
+	else:
+		off_hand_slot.icon_texture_rect.modulate = Color(1,1,1,1)
 
 func clear_highlights():
 	for slot_display:EquipmentDisplaySlotButton in slot_displays:

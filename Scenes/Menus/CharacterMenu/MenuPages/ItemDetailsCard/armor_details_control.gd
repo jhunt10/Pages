@@ -15,7 +15,7 @@ extends Control
 var _item:BaseEquipmentItem
 var _actor:BaseActor
 
-func set_armor(actor:BaseActor, armor:BaseArmorEquipment):
+func set_armor(actor:BaseActor, armor:BaseApparelEquipment):
 	_actor = actor
 	_item = armor
 	premade_stat_mod_label.hide()

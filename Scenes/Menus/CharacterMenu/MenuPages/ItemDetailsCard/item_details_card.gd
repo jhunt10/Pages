@@ -184,8 +184,8 @@ func set_item(actor:BaseActor, item:BaseItem):
 			actor_has_item = actor.equipment.has_item(item_id)
 		_current_card = weapon_details
 		weapon_details.show()
-	elif item is BaseArmorEquipment:
-		var armor = (item as BaseArmorEquipment)
+	elif item is BaseApparelEquipment:
+		var armor = (item as BaseApparelEquipment)
 		armor_details.set_armor(actor, armor)
 		if actor:
 			actor_has_item = actor.equipment.has_item(item_id)

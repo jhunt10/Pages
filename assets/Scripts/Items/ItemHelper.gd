@@ -214,5 +214,8 @@ static func cant_equip_reasons_to_string(reasons_data:Dictionary)->String:
 		missing_string = "Conflicts with "
 		for key in conflicts:
 			missing_string += key
+	if reasons_data.has("Apparel"):
+		var apparel = reasons_data['Apparel']
+		missing_string = "Invalid Apparel:  " + ", ".join(apparel)
 		
 	return missing_string.trim_suffix(", ")

@@ -24,10 +24,14 @@ func _ready() -> void:
 	super()
 
 func set_actor(actor:BaseActor):
+	if Actor != actor:
+		if Actor and Actor.equipment_changed.is_connected(_sync_sprites):
+			Actor.equipment_changed.disconnect(_sync_sprites)
+			Actor.health_changed.disconnect(show_hide_tomb_stone)
 	super(actor)
-	actor.health_changed.connect(show_hide_tomb_stone)
 	if not actor.equipment_changed.is_connected(_sync_sprites):
 		actor.equipment_changed.connect(_sync_sprites)
+		actor.health_changed.connect(show_hide_tomb_stone)
 	main_hand_node.hand_sprite.hframes = actor_sprite.hframes
 	main_hand_node.hand_sprite.vframes = actor_sprite.vframes
 	off_hand_node.hand_sprite.hframes = actor_sprite.hframes
