@@ -1,101 +1,9 @@
 {
-    "FirstSquirrel": {
-        "!ObjectScript": "res://assets/Scripts/Actors/BaseActor.gd",
-        "!ParentKey": "Squirrel",
-        "#ObjDetails": {
-            "Description": "Dangerous political extremist who will commit any atrocity to see their new squirreld order come to light.",
-            "DisplayName": "Squirrel",
-            "LargeIcon": "Squirrel_Icon.png",
-            "ObjectType": "Actor",
-            "SmallIcon": "Squirrel_Icon.png",
-            "SnippetDesc": "A squirrel.",
-            "Tags": [
-                "Squirrel"
-            ],
-            "Taxonomy": [
-                "Actor"
-            ]
-        },
-        "DropItemsSet": {
-            "SquirrelSpeed_PageItem": 1
-        },
-        "_DefVersion": "1"
-    },
-    "SecondSquirrel": {
-        "!ObjectScript": "res://assets/Scripts/Actors/BaseActor.gd",
-        "!ParentKey": "Squirrel",
-        "#ObjDetails": {
-            "Description": "Dangerous political extremist who will commit any atrocity to see their new squirreld order come to light.",
-            "DisplayName": "Squirrel",
-            "LargeIcon": "Sprites/SquirrelIcon.png",
-            "ObjectType": "Actor",
-            "SmallIcon": "Sprites/SquirrelIcon.png",
-            "SnippetDesc": "A squirrel.",
-            "Tags": [
-                "Squirrel"
-            ],
-            "Taxonomy": [
-                "Actor"
-            ]
-        },
-        "DropItemsSet": {
-            "HealthPotionM": 1
-        },
-        "_DefVersion": "1"
-    },
-    "Squirrcerer": {
-        "!ObjectScript": "res://assets/Scripts/Actors/BaseActor.gd",
-        "!ParentKey": "Squirrel",
-        "#ObjDetails": {
-            "Description": "Dangerous political extremist who will commit any atrocity to see their new squirreld order come to light.",
-            "DisplayName": "Squirrel",
-            "LargeIcon": "Sprites/SquirrcererIcon.png",
-            "ObjectType": "Actor",
-            "SmallIcon": "Sprites/SquirrcererIcon.png",
-            "SnippetDesc": "A squirrel.",
-            "Tags": [
-                "Squirrel"
-            ],
-            "Taxonomy": [
-                "Actor"
-            ]
-        },
-        "AiData": {
-            "ActionsArr": [
-                "MoveForward",
-                "TurnLeft",
-                "TurnRight",
-                "SquirrleMagic"
-            ]
-        },
-        "SpriteSheet": "Sprites/Squirrcerer_SpriteSheet.png",
-        "Stats": {
-            "Agility": 10,
-            "HealthMax": 12,
-            "BarMax:Mana": 20,
-            "BarRegen:Health:Round": 0,
-            "BarRegen:Health:Turn": 0,
-            "BarRegen:Mana:Round": 20,
-            "BarRegen:Mana:Turn": 0,
-            "BarStat:Health": 12,
-            "Evasion": 0,
-            "Intelligence": 10,
-            "MagAttack": 10,
-            "Mass": 10,
-            "PPR": 2,
-            "PhyAttack": 0,
-            "Speed": 50,
-            "Strength": 5,
-            "Ward": 30,
-            "Wisdom": 5
-        },
-        "_DefVersion": "1"
-    },
-    "Squirrel": {
+    "BaseSquirrel": {
         "!ObjectScript": "res://assets/Scripts/Actors/BaseActor.gd",
         "!ParentKey": "#BaseActor",
         "#ObjDetails": {
-            "Description": "Dangerous political extremist who will commit any atrocity to see their new squirreld order come to light.",
+            "Description": "Radical political extremist devoted to the New Squorld Order. These small and squirrely (they hate that term) @@#Color:Red:Beasts@@ are highly aggressive. While lacking in @@#Color:Red:Health@@ and @@#Color:Red:Attack@@, they have high @@#Color:Red:Speed@@ and just enough @@#Color:Red:Evasion@@ to be annoying. Often attacking in large swams, the NSO has commited countless acts of terrorism on defenseless @@#Color:Red:Abandonded Villages@@. So don't feel bad about killing them.",
             "DisplayName": "Squirrel",
             "LargeIcon": "Sprites/SquirrelIcon.png",
             "ObjectType": "Actor",
@@ -135,19 +43,28 @@
             }
         ],
         "DropItemsSet": {
-            "": 100,
-            "HealthPotionL": 5,
-            "HealthPotionM": 10,
-            "HealthPotionS": 20,
-            "Money:15": 30,
-            "Money:5": 30
+            "": 8,
+            "HealthPotionM": 1,
+            "HealthPotionS": 3,
+            "Money:15": 4
         },
-        "EquipmentSlots": [
-            "Que"
-        ],
-        "LeavesCorpse": true,
+        "EquipmentSlots": [],
         "ScenePath": "res://Scenes/Combat/MapObjects/Actors/SimpleActorNode/simple_actor_node.tscn",
-        "SpawnEquipmentArr": [],
+        "SpawnEquipmentArr": [
+            "Squirrel_PageBook",
+            "SquirrelAmmo_Bag"
+        ],
+        "SpawnItemArr": [
+        ],
+        "SpawnPageArr": [
+            "BaseSquirrel_TitlePage",
+            "Squirrely_PassivePage",
+            "MoveForward",
+            "TurnLeft",
+            "TurnRight",
+            "BasicWeaponAttack",
+            "ChuckAcorn_ActionPage"
+        ],
         "SpriteFrameWH": [
             12,
             4
@@ -159,32 +76,86 @@
         "SpriteSheet": "Sprites/Squirrel_SpriteSheet.png",
         "Stats": {
             "Agility": 10,
-            "Armor": 0,
-            "HealthMax": 12,
-            "BarMax:Stamina": 10,
-            "BarRegen:Health:Round": 0,
-            "BarRegen:Health:Turn": 0,
-            "BarRegen:Stamina:Round": 5,
-            "BarRegen:Stamina:Turn": 0,
-            "BarStat:Health": 12,
-            "Evasion": 10,
-            "Intelligence": 5,
-            "MagAttack": 0,
-            "Mass": 10,
-            "PPR": 3,
-            "PhyAttack": 10,
-            "Speed": 50,
             "Strength": 10,
-            "Wisdom": 5
+            "Intelligence": 5,
+            "Wisdom": 5,
+            "HealthMax": 12,
+            "PPR": 4,
+            "Mass": 2,
+            "Speed": 25,
+            "Armor": 0,
+            "Ward": 0,
+            "Evasion": 20,
+            "MagAttack": 0,
+            "PhyAttack": 10
+        },
+        "_DefVersion": "1"
+    },
+    "Squirrcerer": {
+        "!ObjectScript": "res://assets/Scripts/Actors/BaseActor.gd",
+        "!ParentKey": "BaseSquirrel",
+        "#ObjDetails": {
+            "Description": "Magic wielding specialist of the NSO who, have been trained in the forbidden acornic arts. They serve as back line attackers, casting semi-power acorn related @@#Color:Red:Spells@@.",
+            "DisplayName": "Squirrcerer",
+            "LargeIcon": "Sprites/SquirrcererIcon.png",
+            "ObjectType": "Actor",
+            "SmallIcon": "Sprites/SquirrcererIcon.png",
+            "SnippetDesc": "A magic using squirrel.",
+            "Tags": [
+                "Squirrel"
+            ],
+            "Taxonomy": [
+                "Actor"
+            ]
+        },
+        "AiData": {
+            "ActionsArr": [
+                "MoveForward",
+                "TurnLeft",
+                "TurnRight",
+                "BasicMelee",
+                "ChuckAcornFire_Page"
+            ]
+        },
+        "SpawnEquipmentArr": [
+            "Squirrel_PageBook",
+            "SquirrelAmmo_Bag"
+        ],
+        "SpawnItemArr": [
+        ],
+        "SpawnPageArr": [
+            "SquirrelMag_TitlePage",
+            "SquirrelMagic_PassivePage",
+            "MoveForward",
+            "TurnLeft",
+            "TurnRight",
+            "BasicWeaponAttack",
+            "ChuckAcornFire_ActionPage"
+        ],
+        "SpriteSheet": "Sprites/Squirrcerer_SpriteSheet.png",
+        "Stats": {
+            "Agility": 8,
+            "Strength": 5,
+            "Intelligence": 10,
+            "Wisdom": 10,
+            "HealthMax": 12,
+            "PPR": 3,
+            "Mass": 10,
+            "Speed": 25,
+            "Armor": 0,
+            "Ward": 10,
+            "Evasion": 10,
+            "MagAttack": 0,
+            "PhyAttack": 8
         },
         "_DefVersion": "1"
     },
     "Squirrior": {
         "!ObjectScript": "res://assets/Scripts/Actors/BaseActor.gd",
-        "!ParentKey": "Squirrel",
+        "!ParentKey": "BaseSquirrel",
         "#ObjDetails": {
-            "Description": "Dangerous political extremist who will commit any atrocity to see their new squirreld order come to light.",
-            "DisplayName": "Squirrel",
+            "Description": "Heavy armored defenders of the NSO. They sacrifice thier natural squirrelish @@#Color:Red:Evasion@@ for @@#Color:Red:Evasion@@ and stand as the front line defense.",
+            "DisplayName": "Squirrior",
             "LargeIcon": "Sprites/SquirriorIcon.png",
             "ObjectType": "Actor",
             "SmallIcon": "Sprites/SquirriorIcon.png",
@@ -204,24 +175,35 @@
                 "BasicMelee"
             ]
         },
+        "SpawnEquipmentArr": [
+            "Squirrel_PageBook",
+            "SquirrelAmmo_Bag"
+        ],
+        "SpawnItemArr": [
+        ],
+        "SpawnPageArr": [
+            "SquirrelPhy_TitlePage",
+            "SquirrelArmor_PassivePage",
+            "MoveForward",
+            "TurnLeft",
+            "TurnRight",
+            "BasicWeaponAttack"
+        ],
         "SpriteSheet": "Sprites/Squirrior_SpriteSheet.png",
         "Stats": {
             "Agility": 10,
-            "Armor": 50,
-            "HealthMax": 12,
-            "BarMax:Stamina": 30,
-            "BarRegen:Health:Round": 0,
-            "BarRegen:Health:Turn": 0,
-            "BarRegen:Stamina:Round": 10,
-            "BarRegen:Stamina:Turn": 0,
-            "BarStat:Health": 12,
-            "Evasion": 0,
-            "Intelligence": 5,
-            "Mass": 10,
-            "PPR": 3,
-            "Speed": 0,
             "Strength": 10,
-            "Wisdom": 5
+            "Intelligence": 5,
+            "Wisdom": 5,
+            "HealthMax": 20,
+            "PPR": 3,
+            "Mass": 10,
+            "Speed": 15,
+            "Armor": 10,
+            "Ward": 0,
+            "Evasion": 0,
+            "MagAttack": 0,
+            "PhyAttack": 8
         },
         "_DefVersion": "1"
     }

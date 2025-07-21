@@ -1,0 +1,71 @@
+{
+    
+    "SquirrelAmmo_Bag": {
+        "!ObjectScript": "res://assets/Scripts/Items/Equipment/BaseBagEquipment.gd",
+        "#ObjDetails": {
+            "Description": "A tee-tiny little pouch made from two leaves sewn together. Somehow it's able to fit quite a few clips of ammo.",
+            "DisplayName": "Leaf Pouch",
+            "LargeIcon": "Sprites/LeafPouch_Icon.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/LeafPouch_Icon.png",
+            "SnippetDesc": "Ammo pouch made from leaves.",
+            "Tags": [
+                "Bag"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Equipment",
+                "Bag"
+            ]
+        },
+        "EquipmentData": {
+            "ItemSlotsData": [
+                {
+                    "Count": 4,
+                    "DisplayName": "Ammo",
+                    "FilterData": {
+                        "RequiredTags": "Ammo"
+                    },
+                    "Key": "Ammo"
+                }
+            ]
+        },
+        "ItemData": {
+            "Rarity": "Mundane",
+            "Value": 5
+        },
+        "_DefVersion": "1"
+    },
+    "Squirrel_PageBook": {
+        "!ObjectScript": "res://assets/Scripts/Items/Equipment/BaseQueEquipment.gd",
+        "#ObjDetails": {
+            "Description": "A political manifesto carried by all members of The New Squirrel Order. Quite small and has little room for customization.",
+            "DisplayName": "Squrrifesto",
+            "LargeIcon": "Sprites/SquirrelBook.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/SquirrelBook.png",
+            "SnippetDesc": "Manifesto of the New Squirrel Order.",
+            "Tags": [
+                "PageBook"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Equipment",
+                "PageBook"
+            ]
+        },
+        "BookData": {
+            "BaseActionCount": 5,
+            "BasePassiveCount": 1,
+            "PagesPerRound": 3
+        },
+        "EquipmentData": {
+            "ItemSlotsData": []
+        },
+        "ItemData": {
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "_DefVersion": "1"
+    }
+}

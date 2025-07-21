@@ -16,12 +16,6 @@ func get_portrait_sprite()->Texture2D:
 		_build_sprite_sheet()
 	return _cached_portrait
 
-func get_corpse_sprite()->Texture2D:
-	if _actor.get_load_val("CorpseSprite"):
-		return SpriteCache.get_sprite(_actor.get_load_path().path_join(_actor.get_load_val("CorpseSprite")))
-	return SpriteCache._get_no_sprite()
-
-
 func get_body_sprite()->Texture2D:
 	if _cached_body_sprite == null:
 		_build_sprite_sheet()
@@ -47,7 +41,7 @@ func _build_sprite_sheet():
 	var sprite_sheet_file = _actor.get_load_val("SpriteSheet", null)
 	if !sprite_sheet_file:
 		_cached_body_sprite = _actor.get_large_icon()
-		_cached_portrait = _actor.get_large_icon()
+		_cached_portrait = _actor.get_small_icon()
 		return
 	
 	#var old_version = sprite_sheet_file.ends_with(".png")

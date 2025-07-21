@@ -1,0 +1,333 @@
+{
+    
+    "ChuckAcorn_ActionPage": {
+        "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
+        "#ObjDetails": {
+            "Description": "Chuck an Acorn Missile at @@#TrgParm:TargetParam:TargetType@@ for @@#DmgData:Damage1@@.",
+            "DisplayName": "Chuck Acorn",
+            "LargeIcon": "Sprites/Acorn_Icon.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/Acorn_Icon.png",
+            "SnippetDesc": "Chuck an Acorn.",
+            "Tags": [
+                "Attack",
+                "Missile",
+                "Ranged",
+                "Tactic"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Page",
+                "Action"
+            ]
+        },
+        "ActionData": {
+            "AmmoData": {
+                "AmmoType": "Phy",
+                "Clip": 3,
+                "Cost": 1
+            },
+            "AttackDetails": {
+                "AccuracyMod": 1,
+                "PotencyMod": 1
+            },
+            "DamageDatas": {
+                "Damage1": {
+                    "AtkPwrBase": 50,
+                    "AtkPwrRange": 20,
+                    "AtkStat": "PhyAttack",
+                    "BaseDamage": 0,
+                    "DamageType": "Blunt",
+                    "DamageVfxKey": "Blunt_DamageEffect",
+                    "DefenseType": "Armor"
+                }
+            },
+            "MissileDatas": {
+                "Missile1": {
+                    "DamageDataKey": "Damage1",
+                    "FramesPerTile": 4,
+                    "MissileVfxData": {
+                        "AnimationName": "rotate_loop",
+                        "RandomOffsets": [
+                            0,
+                            0
+                        ],
+                        "SpriteName": "SpriteSheets/AcornMissile.png",
+                        "SpriteSheetHight": 1,
+                        "SpriteSheetWidth": 1,
+                        "VfxKey": "AcornMissile"
+                    },
+                    "UseLobPath": true
+                }
+            },
+            "Preview": {
+                "PreviewDamageKey": "Damage1",
+                "PreviewTargetKey": "TargetParam"
+            },
+            "SubActions": {
+                "GetTarget": {
+                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Targeting/SubAct_GetTarget.gd",
+                    "#FrameIndex": 0,
+                    "#SubIndex": 0,
+                    "AllowAlreadyTargeted": false,
+                    "AllowAutoTarget": true,
+                    "SetTargetKey": "Target1",
+                    "TargetParamKey": "TargetParam"
+                },
+                "PayCost": {
+                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Misc/SubAct_PayCost.gd",
+                    "#FrameIndex": 5,
+                    "#SubIndex": 0
+                },
+                "SpawnMissile": {
+                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Spawning/SubAct_SpawnMissile.gd",
+                    "#FrameIndex": 5,
+                    "#SubIndex": 1,
+                    "DamageKey": "Damage1",
+                    "MissileKey": "Missile1",
+                    "TargetKey": "Target1",
+                    "TargetParamKey": "TargetParam"
+                }
+            },
+            "TargetParams": {
+                "TargetParam": {
+                    "LineOfSight": true,
+                    "TargetArea": "[[0,2],[0,3],[0,4],[-1,3],[1,3]]",
+                    "TargetType": "Spot"
+                }
+            }
+        },
+        "ItemData": {
+            "ItemType": "Page",
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "PageData": {
+            "PageRequirements": {
+                "ConflictingPages": [],
+                "IncompatiblePages": [],
+                "TitleReq": "Ignore"
+            },
+            "SourceTitle": ""
+        },
+        "_DefVersion": "1"
+    },
+    "ChuckAcornFire_ActionPage": {
+        "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
+        "!ParentKey": "ChuckAcorn_ActionPage",
+        "#ObjDetails": {
+            "Description": "Chuck a Flaming Acorn Missile at @@#TrgParm:TargetParam:TargetType@@ for @@#DmgData:Damage1@@.",
+            "DisplayName": "Fire Acorn",
+            "LargeIcon": "Sprites/FlamingAcorn_Icon.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/FlamingAcorn_Icon.png",
+            "SnippetDesc": "Chuck a flaming Acorn.",
+            "Tags": [
+                "Attack",
+                "Missile",
+                "Ranged",
+                "Spell"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Page",
+                "Action"
+            ]
+        },
+        "ActionData": {
+            "AmmoData": {
+                "AmmoType": "Mag",
+                "Clip": 3,
+                "Cost": 1
+            },
+            "DamageDatas": {
+                "Damage1": {
+                    "AtkPwrBase": 50,
+                    "AtkPwrRange": 20,
+                    "AtkStat": "MagAttack",
+                    "BaseDamage": 0,
+                    "DamageType": "Fire",
+                    "DamageVfxKey": "AUTO",
+                    "DefenseType": "AUTO"
+                }
+            },
+            "MissileDatas": {
+                "Missile1": {
+                    "DamageDataKey": "Damage1",
+                    "FramesPerTile": 4,
+                    "MissileVfxData": {
+                        "AnimationName": "rotate_loop",
+                        "RandomOffsets": [
+                            0,
+                            0
+                        ],
+                        "SpriteName": "SpriteSheets/FlamingAcornMissile.png",
+                        "SpriteSheetHight": 4,
+                        "SpriteSheetWidth": 2,
+                        "VfxKey": "FireAcornMissile"
+                    },
+                    "UseLobPath": true
+                }
+            }
+        },
+        "ItemData": {
+            "ItemType": "Page",
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "_DefVersion": "1"
+    },
+    "Squirrely_PassivePage": {
+        "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemPassive.gd",
+        "#ObjDetails": {
+            "Description": "@@#StatMod:PPRMod@@, @@#StatMod:SpeedMod@@, and @@#StatMod:EvasionMod@@, but @@#StatMod:MassMod@@ and @@#StatMod:HealthMod@@ .",
+            "DisplayName": "Squirrely",
+            "LargeIcon": "Sprites/Squirrely_Icon.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/Squirrely_Icon.png",
+            "SnippetDesc": "Gain Speed and Evasion, but loose Mass and Health",
+            "Tags": [
+                "Passive"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Page",
+                "Passive"
+            ]
+        },
+        "ItemData": {
+            "ItemType": "Page",
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "PageData": {
+            "PageRequirements": {
+                "ConflictingPages": [],
+                "IncompatiblePages": [],
+                "TitleReq": "Ignore"
+            },
+            "SourceTitle": "Squirrel",
+            "StatMods": {
+                "MassMod": {
+                    "ModType": "Scale",
+                    "StatName": "Mass",
+                    "Value": 0.8
+                },
+                "PPRMod": {
+                    "ModType": "Add",
+                    "StatName": "PPR",
+                    "Value": 1
+                },
+                "SpeedMod": {
+                    "ModType": "Scale",
+                    "StatName": "Speed",
+                    "Value": 1.2
+                },
+                "EvasionMod": {
+                    "ModType": "Scale",
+                    "StatName": "Evasion",
+                    "Value": 1.2
+                },
+                "HealthMod": {
+                    "ModType": "Scale",
+                    "StatName": "HealthMax",
+                    "Value": 0.8
+                }
+            }
+        },
+        "PassiveData": {},
+        "_DefVersion": "1"
+    },
+    "SquirrelMagic_PassivePage": {
+        "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemPassive.gd",
+        "#ObjDetails": {
+            "Description": "@@#StatMod:MagAtkMod@@ but @@#StatMod:PPRMod@@.",
+            "DisplayName": "Squirrel Magic",
+            "LargeIcon": "Sprites/SquirrelMagic_Icon.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/SquirrelMagic_Icon.png",
+            "SnippetDesc": "Gain Mag Attack, but loose PPR",
+            "Tags": [
+                "Passive"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Page",
+                "Passive"
+            ]
+        },
+        "ItemData": {
+            "ItemType": "Page",
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "PageData": {
+            "PageRequirements": {
+                "ConflictingPages": [],
+                "IncompatiblePages": [],
+                "TitleReq": "Ignore"
+            },
+            "SourceTitle": "Squirrel",
+            "StatMods": {
+                "MagAtkMod": {
+                    "ModType": "Add",
+                    "StatName": "MagAttack",
+                    "Value": 10
+                },
+                "PPRMod": {
+                    "ModType": "Add",
+                    "StatName": "PPR",
+                    "Value": -1
+                }
+            }
+        },
+        "PassiveData": {},
+        "_DefVersion": "1"
+    },
+    "SquirrelArmor_PassivePage": {
+        "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemPassive.gd",
+        "#ObjDetails": {
+            "Description": "@@#StatMod:ArmorMod@@ but @@#StatMod:SpeedMod@@ .",
+            "DisplayName": "Squirrel Armor",
+            "LargeIcon": "Sprites/SquirrelArmor_Icon.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/SquirrelArmor_Icon.png",
+            "SnippetDesc": "Gain Armor, but Speed",
+            "Tags": [
+                "Passive"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Page",
+                "Passive"
+            ]
+        },
+        "ItemData": {
+            "ItemType": "Page",
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "PageData": {
+            "PageRequirements": {
+                "ConflictingPages": [],
+                "IncompatiblePages": [],
+                "TitleReq": "Ignore"
+            },
+            "SourceTitle": "Squirrel",
+            "StatMods": {
+                "ArmorMod": {
+                    "ModType": "Add",
+                    "StatName": "Armor",
+                    "Value": 20
+                },
+                "SpeedMod": {
+                    "ModType": "Scale",
+                    "StatName": "Speed",
+                    "Value": 0.8
+                }
+            }
+        },
+        "PassiveData": {},
+        "_DefVersion": "1"
+    }
+}

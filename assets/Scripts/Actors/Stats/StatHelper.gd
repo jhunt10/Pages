@@ -39,16 +39,11 @@ const Evasion = "Evasion"
 const Potency = "Potency"
 const Protection = "Protection"
 
-
 const CritChance = "CritChance"
 const CritMod = "CritMod"
 
 const BlockChance = "BlockChance"
 const BlockMod = "BlockMod"
-
-
-const OffHandMod = "OffHandMod"
-const TwoHandMod = "TwoHandMod"
 
 const BlocksLOS = "BlocksLOS"
 const AggroMod = "AggroMod"

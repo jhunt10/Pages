@@ -1,0 +1,123 @@
+{
+    
+    "BaseSquirrel_TitlePage": {
+        "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemTitle.gd",
+        "!ParentKey": "#BaseTitlePage",
+        "#ObjDetails": {
+            "Description": "Basic ass Squirrel class. Did I remeber to update this?",
+            "DisplayName": "Squirrel",
+            "LargeIcon": "Sprites/SquirrelTitle_Icon.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/SquirrelTitle_Icon.png",
+            "SnippetDesc": "Squirrel Title",
+            "Tags": [
+                "Title"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Page",
+                "Title"
+            ]
+        },
+        "PageData": {
+            "AddTags": [
+                "Squirrel"
+            ],
+            "StatMods": {
+            },
+            "PageRequirements": {
+                "ConflictingPages": [],
+                "IncompatiblePages": [],
+                "TitleReq": "None"
+            },
+            "SourceTitle": "Base"
+        },
+        "ItemData": {
+            "ItemType": "Page",
+            "Rarity": "Unique",
+            "Value": 50
+        },
+        "PassiveData": {},
+        "_DefVersion": "1"
+    },
+    "SquirrelMag_TitlePage": {
+        "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemTitle.gd",
+        "!ParentKey": "BaseSquirrel_TitlePage",
+        "#ObjDetails": {
+            "Description": "Magic ass Squirrel class. Did I remeber to update this?",
+            "DisplayName": "Squirrcerer",
+            "LargeIcon": "Sprites/SquirrcererTitle_Icon.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/SquirrcererTitle_Icon.png",
+            "SnippetDesc": "Squirrcerer Title",
+            "Tags": [
+                "Title"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Page",
+                "Title"
+            ]
+        },
+        "PageData": {
+            "AddTags": [
+                "Squirrel", "Squirrcerer"
+            ],
+            "StatMods": {
+            },
+            "PageRequirements": {
+                "ConflictingPages": [],
+                "IncompatiblePages": [],
+                "TitleReq": "None"
+            },
+            "SourceTitle": "Base"
+        },
+        "ItemData": {
+            "ItemType": "Page",
+            "Rarity": "Unique",
+            "Value": 50
+        },
+        "PassiveData": {},
+        "_DefVersion": "1"
+    },
+    "SquirrelPhy_TitlePage": {
+        "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemTitle.gd",
+        "!ParentKey": "BaseSquirrel_TitlePage",
+        "#ObjDetails": {
+            "Description": "Physical ass Squirrel class. Did I remeber to update this?",
+            "DisplayName": "Squirrior",
+            "LargeIcon": "Sprites/SquirriorTitle_Icon.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/SquirriorTitle_Icon.png",
+            "SnippetDesc": "Squirrior Title",
+            "Tags": [
+                "Title"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Page",
+                "Title"
+            ]
+        },
+        "PageData": {
+            "AddTags": [
+                "Squirrel", "Squirrcerer"
+            ],
+            "StatMods": {
+            },
+            "PageRequirements": {
+                "ConflictingPages": [],
+                "IncompatiblePages": [],
+                "TitleReq": "None"
+            },
+            "SourceTitle": "Base"
+        },
+        "ItemData": {
+            "ItemType": "Page",
+            "Rarity": "Unique",
+            "Value": 50
+        },
+        "PassiveData": {},
+        "_DefVersion": "1"
+    }
+}

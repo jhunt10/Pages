@@ -3,7 +3,7 @@
         "!ObjectScript": "res://assets/Scripts/Actors/BaseActor.gd",
         "#ObjDetails": {
             "Description": "Description.",
-            "DisplayName": "Base Actor",
+            "DisplayName": "#Base Actor",
             "LargeIcon": "Sprites/BaseActor.png",
             "ObjectType": "Actor",
             "SmallIcon": "Sprites/BaseActor.png",
@@ -20,12 +20,6 @@
             }
         },
         "IsPlayer": false,
-        "PortraitRect": [
-            12,
-            20,
-            24,
-            24
-        ],
         "ScenePath": "res://Scenes/Combat/MapObjects/Actors/ComplexActorNode/complex_actor_node.tscn",
         "SpriteFrameWH": [
             12,
@@ -37,9 +31,13 @@
         ],
         "SpriteSheet": "Sprites/BaseActor_SpriteSheet.png",
         "Stats": {
+            "Agility": 0,
+            "Strength": 0,
+            "Intelligence": 0,
+            "Wisdom": 0,
+            "Level": 0,
             "Accuracy": 100,
             "AggroMod": 1,
-            "Agility": 0,
             "Awareness": 0,
             "HealthMax": 100,
             "BlocksLOS": 0,
@@ -47,8 +45,6 @@
             "CritChance": 5,
             "CritMod": 1.5,
             "Evasion": 1,
-            "Intelligence": 0,
-            "Level": 0,
             "MagAttack": 0,
             "Mass": 0,
             "OffHandMod": 0.5,
@@ -58,9 +54,7 @@
             "Protection": 1,
             "Resistance:Light": 150,
             "Speed": 0,
-            "Strength": 0,
-            "TwoHandMod": 1.2,
-            "Wisdom": 0
+            "TwoHandMod": 1.2
         },
         "UnarmedAttackData": {
             "DamageDatas": {
@@ -85,9 +79,10 @@
     },
     "#BaseHumanoid": {
         "ScenePath": "res://Scenes/Combat/MapObjects/Actors/ComplexActorNode/complex_actor_node.tscn",
+        "!ParentKey": "#BaseActor",
         "#ObjDetails": {
             "Description": "Description.",
-            "DisplayName": "Base Actor",
+            "DisplayName": "#Base Humanoid",
             "LargeIcon": "Sprites/BaseActor.png",
             "ObjectType": "Actor",
             "SmallIcon": "Sprites/BaseActor.png",
@@ -99,32 +94,12 @@
                 "Actor"
             ]
         },
-        "Stats": {
-            "Accuracy": 100,
-            "AggroMod": 1,
-            "Agility": 0,
-            "Awareness": 0,
-            "HealthMax": 100,
-            "BlocksLOS": 0,
-            "CrashPower": 20,
-            "CritChance": 5,
-            "CritMod": 1.5,
-            "Evasion": 1,
-            "Intelligence": 0,
-            "Level": 0,
-            "MagAttack": 0,
-            "Mass": 0,
-            "OffHandMod": 0.5,
-            "PPR": 0,
-            "PhyAttack": 0,
-            "Potency": 100,
-            "Protection": 1,
-            "Resistance:Light": 150,
-            "Speed": 0,
-            "Strength": 0,
-            "TwoHandMod": 1.2,
-            "Wisdom": 0
-        },
+        "PortraitRect": [
+            12,
+            20,
+            24,
+            24
+        ],
         "ActorData": {
             "EquipmentConstraints": {
                 "ApparelSlots": [

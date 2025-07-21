@@ -369,6 +369,8 @@ func _calc_cache_stats(emit_signal:bool=true):
 	for set_stat_name in set_stats.keys():
 		temp_stats[set_stat_name] = set_stats[set_stat_name]
 	for attribute_name in attribute_levels.keys():
+		if not temp_stats.has(attribute_name):
+			temp_stats[attribute_name] = 0
 		temp_stats[attribute_name] += attribute_levels[attribute_name]
 	for added_stat in key_depends_on_vals.keys():
 		if not temp_stats.keys().has(added_stat):

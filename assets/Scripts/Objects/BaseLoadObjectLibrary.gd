@@ -153,7 +153,7 @@ func init_load():
 		#_load_objects_save_file(object_file)
 	
 	if LOGGING:
-		print("#### DONE Loading %s" % [obj_name])
+		print("#### DONE Loading %s found: %s Defs | %s Static Objs" % [obj_name, _object_defs.size(), _static_objects.size()])
 		print("")
 	loaded = true
 
