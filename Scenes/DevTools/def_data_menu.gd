@@ -44,9 +44,10 @@ func get_load_options()->Array:
 		out_list.append(obj_id)
 		inst_to_lib_mapping[obj_id] = "Item"
 	out_list.append("---- Effects ----")
-	for obj_id in EffectLibrary.Instance._loaded_objects.keys():
-		out_list.append(obj_id)
-		inst_to_lib_mapping[obj_id] = "Effect"
+	if EffectLibrary.Instance:
+		for obj_id in EffectLibrary.Instance._loaded_objects.keys():
+			out_list.append(obj_id)
+			inst_to_lib_mapping[obj_id] = "Effect"
 	return out_list
 	
 

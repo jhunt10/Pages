@@ -52,7 +52,9 @@ var use_ai:bool:
 	get: return ai_def.size() > 0
 var ai_def:Dictionary = {}
 
-var is_player:bool = false
+var is_player:bool:
+	get:
+		return StoryState._party_actor_ids.has(self.Id)
 var is_dead:bool = false
 
 func _init(key:String, load_path:String, def:Dictionary, id:String, data:Dictionary) -> void:
@@ -303,6 +305,10 @@ func get_weapon_attack_target_params(target_param_key)->TargetParameters:
 func get_weapon_damage_datas(weapon_filter)->Dictionary:
 	var out_dict = {}
 	var weapons = equipment.get_filtered_weapons(weapon_filter)
+	# No weapons found
+	if weapons.size() == 0 and weapon_filter.get("FallbackToUnarmed", true):
+		var unarmed_data = get_load_val("UnarmedAttackData")
+		return unarmed_data.get("DamageDatas", {})
 	var index = 0
 	var weapon_mods = get_wepaon_mods()
 	for weapon:BaseWeaponEquipment in weapons:

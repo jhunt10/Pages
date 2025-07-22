@@ -1,0 +1,114 @@
+{
+    "SpreadSpores_ActionPage": {
+        "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
+        "#ObjDetails": {
+            "Description": "Make a @@#Color:Red:Inflcting Attack@@ against an @@#TrgParm:TargetParam:TargetType@@ in range, attempting to apply @@#EftData:InflictEffect:DisplayName@@ for @@#EftData:InflictEffect:Duration@@.\n\n@@#EftData:InflictEffect@@",
+            "DisplayName": "Spread Spores",
+            "LargeIcon": "Sprites/SpreadSpores_Icon.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/SpreadSpores_Icon.png",
+            "SnippetDesc": "Inflict Poison on adjacent Actors.",
+            "Tags": [
+                "Attack",
+                "Inflict",
+                "AOE"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Page",
+                "Action"
+            ]
+        },
+        "ActionData": {
+            "AttackDetails": {
+                "AccuracyMod": 1,
+                "PotencyMod": 1,
+                "AutoHit": true
+            },
+            "DamageDatas": {},
+            "EffectDatas": {
+                "InflictEffect": {
+                    "EffectKey": "AilmentPoisoned",
+                    "EffectData": {
+                        "EffectDetails": {
+                            "DurationData": {
+                                "BaseDuration": 5
+                            }
+                        }
+                    },
+                    "Conditions": {
+                        "ApplicationChance": 1,
+                        "ApplyOnBlock": false,
+                        "ApplyOnEvade": false,
+                        "FactionFilter": [],
+                        "TagFilter": {}
+                    }
+                }
+            },
+            "Preview": {
+                "PreviewTargetKey": "TargetParam"
+            },
+            "SubActions": {
+                "Attack": {
+                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Attacks/SubAct_Attack.gd",
+                    "#FrameIndex": 11,
+                    "#SubIndex": 2,
+                    "TargetKey": "Target1",
+                    "EffectKeys": [
+                        "InflictEffect"
+                    ]
+                },
+                "GetTarget": {
+                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Targeting/SubAct_GetTarget.gd",
+                    "#FrameIndex": 11,
+                    "#SubIndex": 0,
+                    "AllowAlreadyTargeted": false,
+                    "AllowAutoTarget": true,
+                    "SetTargetKey": "Target1",
+                    "TargetParamKey": "TargetParam"
+                },
+                "PayCost": {
+                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Misc/SubAct_PayCost.gd",
+                    "#FrameIndex": 11,
+                    "#SubIndex": 1
+                },
+                "ReadyAnimation": {
+                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_Animation_Ready.gd",
+                    "Animation": "Default:Self",
+                    "AnimationSpeed": 1,
+                    "#FrameIndex": 1,
+                    "#SubIndex": 0
+                },
+                "StartAnimation": {
+                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_Animation_Motion.gd",
+                    "#FrameIndex": 3,
+                    "#SubIndex": 0
+                }
+            },
+            "TargetParams": {
+                "TargetParam": {
+                    "LineOfSight": false,
+                    "IncludeAlliesInAoe": true,
+                    "IncludeEnemiesInAoe": true,
+                    "IncludeSelfInAoe": false,
+                    "TargetArea": "[[-1,1],[0,1],[1,1],[-1,0],[1,0],[-1,-1],[0,-1],[1,-1]]",
+                    "TargetType": "FullArea"
+                }
+            }
+        },
+        "ItemData": {
+            "ItemType": "Page",
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "PageData": {
+            "PageRequirements": {
+                "ConflictingPages": [],
+                "IncompatiblePages": [],
+                "TitleReq": "None"
+            },
+            "SourceTitle": ""
+        },
+        "_DefVersion": "1"
+    }
+}

@@ -321,8 +321,9 @@ func check_end_conditions():
 	
 	var living_players = []
 	var living_enimes = []
+	var party_ids = StoryState.list_party_actors_ids()
 	for actor:BaseActor in GameState.list_actors(false):
-		if actor.is_player:
+		if party_ids.has(actor.Id):
 			living_players.append(actor)
 		else:
 			living_enimes.append(actor)

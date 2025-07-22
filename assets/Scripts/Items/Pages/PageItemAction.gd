@@ -279,6 +279,7 @@ func get_damage_datas(actor:BaseActor, damage_keys)->Dictionary:
 					var sub_key = key + ":" + weapon_damage_key
 					out_dict[sub_key] = BaseLoadObjectLibrary._merge_defs(damage_data, weapon_damage_datas[weapon_damage_key])
 			else:
+				# Page requires weapon but provided actor has non
 				damage_data['ActorlessWeapon'] = true
 				out_dict[key] = damage_data
 		elif damage_data.size() > 0:

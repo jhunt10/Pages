@@ -1,0 +1,194 @@
+{
+    "MushroomBase": {
+        "!ObjectScript": "res://assets/Scripts/Actors/BaseActor.gd",
+        "!ParentKey": "#BaseActor",
+        "#ObjDetails": {
+            "Description": "A common and harmless form of mushroom found through out the World. Normally the @@#Color:Blue:PAGE@@ System doesn't register innanimate vegitation as @@#Color:Red:Actors@@, but fungi are really closer to animals than plants, so they count.",
+            "DisplayName": "Mushroom",
+            "LargeIcon": "Sprites/Mushroom_Icon.png",
+            "ObjectType": "Actor",
+            "SmallIcon": "Sprites/Mushroom_Icon.png",
+            "SnippetDesc": "A mushroom.",
+            "Tags": [
+                "Fungi",
+                "Creature"
+            ],
+            "Taxonomy": [
+                "Actor"
+            ]
+        },
+        "ActorDetails": {
+            "ExpValue": 10,
+            "MoneyValue": 15
+        },
+        "AiData": {},
+        "CorpseSprite": null,
+        "DropItemsSet": {
+            "HealthPotionM": 1
+        },
+        "EquipmentSlots": [],
+        "ScenePath": "res://Scenes/Combat/MapObjects/Actors/SimpleActorNode/simple_actor_node.tscn",
+        "SpawnEquipmentArr": [
+            "DoctorNote_PageBook"
+        ],
+        "SpawnItemArr": [],
+        "SpawnPageArr": [
+            "Mushroom_TitlePage"
+        ],
+        "SpriteFrameWH": [
+            12,
+            4
+        ],
+        "SpriteOffset": [
+            0,
+            0
+        ],
+        "SpriteSheet": "Sprites/Mushroom_SpriteSheet.png",
+        "Stats": {
+            "Agility": 1,
+            "Strength": 1,
+            "Intelligence": 1,
+            "Wisdom": 1,
+            "HealthMax": 3,
+            "PPR": 0,
+            "Mass": 1000,
+            "Speed": 0,
+            "Armor": 0,
+            "Ward": 0,
+            "Evasion": 0,
+            "MagAttack": 0,
+            "PhyAttack": 0,
+            "Resistance:Light": 150
+        },
+        "_DefVersion": "1"
+    },
+    "MushroomRoof": {
+        "!ObjectScript": "res://assets/Scripts/Actors/BaseActor.gd",
+        "!ParentKey": "MushroomBase",
+        "#ObjDetails": {
+            "Description": "A less common subspecies of mushroom fond of growing on roofs. They are popular for use in cooking and ranged attack tutorials.",
+            "DisplayName": "Roof Shroom",
+            "LargeIcon": "Sprites/Mushroom_Icon.png",
+            "ObjectType": "Actor",
+            "SmallIcon": "Sprites/Mushroom_Icon.png",
+            "SnippetDesc": "A roof mushroom.",
+            "Tags": [
+                "Fungi",
+                "Creature"
+            ],
+            "Taxonomy": [
+                "Actor"
+            ]
+        },
+        "SpriteSheet": "Sprites/RoofShroom_SpriteSheet.png",
+        "_DefVersion": "1"
+    },
+    "ShroomGolem": {
+        "!ObjectScript": "res://assets/Scripts/Actors/BaseActor.gd",
+        "!ParentKey": "#BaseActor",
+        "#ObjDetails": {
+            "Description": "Dispite thier name and apparent properties, Shroom Golems are neither Mushrooms nor Golems but is instead classified under the family Giraffidae. This ambush predators tend to disguise themselves as hasrmelss Mushrooms before paralizing thier prey and robbing them blind to pay for scratch off lottery tickets. They don't exspect to win any real money, they just like scratching off that silver foil stuff. Oh ya, and they hate @@#DmgColor:Light@@.",
+            "DisplayName": "Shrrom Golem",
+            "LargeIcon": "Sprites/ShroomGolem_Icon.png",
+            "ObjectType": "Actor",
+            "SmallIcon": "Sprites/ShroomGolem_Icon.png",
+            "SnippetDesc": "A mushroom gollem, but not really.",
+            "Tags": [
+                "Fungi",
+                "Creature"
+            ],
+            "Taxonomy": [
+                "Actor"
+            ]
+        },
+        "ActorDetails": {
+            "ExpValue": 10,
+            "MoneyValue": 15
+        },
+        "AiData": {
+            "ActionsArr": [
+                "MoveForward",
+                "TurnLeft",
+                "TurnRight",
+                "BasicMelee"
+            ]
+        },
+        "AutoQue": true,
+        "AutoQueing": false,
+        "CorpseSprite": null,
+        "DefaultPageSlotSet": [
+            {
+                "Count": 6,
+                "DisplayName": "Any Page",
+                "FilterData": null,
+                "Key": "Any"
+            }
+        ],
+        "DropItemsSet": {
+            "": 8,
+            "HealthPotionM": 1,
+            "HealthPotionS": 3,
+            "Money:15": 4
+        },
+        "EquipmentSlots": [],
+        "ScenePath": "res://ObjectDefs/Factions/Mushrooms/Actors/Scenes/mushroom_actor_node.tscn",
+        "SpawnEquipmentArr": [
+            "Squirrel_PageBook"
+        ],
+        "SpawnItemArr": [],
+        "SpawnPageArr": [
+            "ShroomGolem_TitlePage",
+            "MoveForward",
+            "TurnLeft",
+            "TurnRight",
+            "#BasicMeleeAttack",
+            "SpreadSpores_ActionPage"
+        ],
+        "UnarmedAttackData": {
+            "TargetParams": {
+                "EffectsAllies": true,
+                "EffectsEnemies": true,
+                "LineOfSight": true,
+                "TargetArea": "[[-1,0],[-1,1],[0,1],[1,1],[1,0]]",
+                "TargetType": "Actor"
+            },
+            "DamageDatas": {
+                "UnarmedDamage": {
+                    "AtkPwrBase": 50,
+                    "AtkPwrRange": 40,
+                    "ArkPwrScale": 1,
+                    "AtkStat": "PhyAttack",
+                    "DamageVfxKey": "Blunt_DamageEffect",
+                    "DamageType": "Blunt",
+                    "DefenseType": "Armor"
+                }
+            }
+        },
+        "SpriteFrameWH": [
+            12,
+            4
+        ],
+        "SpriteOffset": [
+            0,
+            0
+        ],
+        "SpriteSheet": "Sprites/ShroomGolem_SpriteSheet.png",
+        "Stats": {
+            "Agility": 10,
+            "Strength": 10,
+            "Intelligence": 5,
+            "Wisdom": 5,
+            "HealthMax": 30,
+            "PPR": 4,
+            "Mass": 5,
+            "Speed": 10,
+            "Armor": 0,
+            "Ward": 0,
+            "Evasion": 0,
+            "MagAttack": 10,
+            "PhyAttack": 10,
+            "Resistance:Light": 0
+        },
+        "_DefVersion": "1"
+    }
+}

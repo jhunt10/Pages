@@ -375,8 +375,6 @@ func get_offhand_weapon()->BaseWeaponEquipment:
 
 func get_filtered_weapons(weapon_filter)->Array:
 	var out_arr = []
-	
-	var fall_back_to_unarmed = weapon_filter.get("FallbackToUnarmed", true)
 	var include_classes = weapon_filter.get("LimitClasses", [])
 	if include_classes.size() == 0:
 		include_classes = ["Light", "Medium", "Heavy"]

@@ -45,6 +45,8 @@ func get_party_actor_by_index(index:int)->BaseActor:
 		return ActorLibrary.get_actor(actor_id)
 	return null
 
+func list_party_actors_ids()->Array:
+	return _party_actor_ids.duplicate()
 
 func list_party_actors()->Array:
 	var out_list = []
@@ -79,12 +81,13 @@ func start_new_story():
 	
 	_party_actor_ids = []
 	story_id = "Story:" + str(ResourceUID.create_id())
-	var player_actor_keys = ["SoldierTemplate", "Bandit_Armored", "Bandit_Ranged", "Bandit_Captain"]
+	var player_actor_keys = ["SoldierTemplate", "MushroomBase", "MushroomRoof", "ShroomGolem"]
 								#"RogueTemplate", "MageTemplate", "PriestTemplate"]
 	for i in range(player_actor_keys.size()):
 		var player_id = "Player_" + str(i) + ":" + str(ResourceUID.create_id())
 		var _new_player = ActorLibrary.create_actor(player_actor_keys[i], {}, player_id)
-		_party_actor_ids.append(player_id)
+		if _new_player:
+			_party_actor_ids.append(player_id)
 	
 	# Add all pages
 	var has_pages = []

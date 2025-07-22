@@ -1,0 +1,84 @@
+{
+    
+    "Mushroom_TitlePage": {
+        "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemTitle.gd",
+        "!ParentKey": "#BaseTitlePage",
+        "#ObjDetails": {
+            "Description": "Mushroom Title Page. You shouldn't actually have access to this.",
+            "DisplayName": "Roof Shroom",
+            "LargeIcon": "Sprites/Mushroom_Icon.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/Mushroom_Icon.png",
+            "SnippetDesc": "Mushroom Title",
+            "Tags": [
+                "Title"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Page",
+                "Title"
+            ]
+        },
+        "PageData": {
+            "AddTags": [
+                "Mushroom"
+            ],
+            "StatMods": {
+            },
+            "PageRequirements": {
+                "ConflictingPages": [],
+                "IncompatiblePages": [],
+                "TitleReq": "None"
+            },
+            "SourceTitle": "Base"
+        },
+        "ItemData": {
+            "ItemType": "Page",
+            "Rarity": "Unique",
+            "Value": 50
+        },
+        "PassiveData": {},
+        "_DefVersion": "1"
+    },
+    "ShroomGolem_TitlePage": {
+        "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemTitle.gd",
+        "!ParentKey": "#BaseTitlePage",
+        "#ObjDetails": {
+            "Description": "Mushroom Golem Title Page. Insert witty description.",
+            "DisplayName": "Shroom Golem",
+            "LargeIcon": "Sprites/ShroomGolem_Icon.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/ShroomGolem_Icon.png",
+            "SnippetDesc": "Mushroom Golem Title",
+            "Tags": [
+                "Title"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Page",
+                "Title"
+            ]
+        },
+        "PageData": {
+            "AddTags": [
+                "Mushroom",
+                "Golem"
+            ],
+            "StatMods": {
+            },
+            "PageRequirements": {
+                "ConflictingPages": [],
+                "IncompatiblePages": [],
+                "TitleReq": "None"
+            },
+            "SourceTitle": "Base"
+        },
+        "ItemData": {
+            "ItemType": "Page",
+            "Rarity": "Unique",
+            "Value": 50
+        },
+        "PassiveData": {},
+        "_DefVersion": "1"
+    }
+}

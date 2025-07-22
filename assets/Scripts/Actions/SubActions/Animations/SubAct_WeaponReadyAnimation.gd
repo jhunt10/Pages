@@ -37,6 +37,10 @@ func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, metadata:
 	if !actor_node:
 		return BaseSubAction.Success
 	
+	if not actor_node is ComplexActorNode:
+		printerr("SubAct_WeaponMotionAnimation: Non Complex Actor '%s' attempting to use Weapon animation." % [actor.Id])
+		return BaseSubAction.Success
+	
 	var animation_speed = 1.0
 	if subaction_data.keys().has("AnimationSpeed"):
 		animation_speed = subaction_data.get("AnimationSpeed", 1.0)

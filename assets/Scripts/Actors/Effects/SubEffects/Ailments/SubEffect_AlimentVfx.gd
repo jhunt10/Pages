@@ -11,7 +11,10 @@ func on_effect_trigger(effect:BaseEffect, subeffect_data:Dictionary, trigger:Bas
 	var actor = effect.get_effected_actor()
 	var actor_node = CombatRootControl.get_actor_node(actor.Id)
 	var vfx_node = VfxHelper.create_ailment_vfx_node(subeffect_data.get("AilmentKey"), actor)
-	subeffect_data['VfxId'] = vfx_node.id
+	if vfx_node:
+		subeffect_data['VfxId'] = vfx_node.id
+	else:
+		printerr("SubEffect_AilmentVfx.Failed to create VfxNode for Ailment: " + subeffect_data.get("AilmentKey"))
 
 func on_delete(effect:BaseEffect, subeffect_data:Dictionary):
 	var actor = effect.get_effected_actor()
