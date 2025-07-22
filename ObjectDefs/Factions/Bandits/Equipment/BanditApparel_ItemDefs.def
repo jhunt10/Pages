@@ -1,0 +1,322 @@
+{
+    "BanditCaptainHelmet_HeadApparel": {
+        "!ObjectScript": "res://assets/Scripts/Items/Equipment/BaseApparelEquipment.gd",
+        "#ObjDetails": {
+			"DisplayName": "Bandit Captian Helmet",
+			"SnippetDesc": "A bandit's captian's metal helmet.",
+			"Description": "The same A cheap metal helmet worn by Bandits, but this one has the scarf on top to show off your pretty mug.",
+			"LargeIcon":"Sprites/BanditCptHelmet_Icon.png",
+			"SmallIcon":"Sprites/BanditCptHelmet_Icon.png",
+            "Tags": [
+                "Equipment",
+                "Armor",
+                "Head"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Equipment",
+                "Apparel"
+            ]
+        },
+        "EquipmentData": {
+            "EquipSlot": "Head",
+            "Requirments": {
+                "ReqStats": {
+                    "Strength": 8
+                }
+            },
+            "SpriteData": {
+                "SpriteSheet": "Sprites/BanditCptHelmet_SpriteSheet.png"
+            }
+        },
+        "ApparelData":{
+            "ProvidedArmor": 4,
+            "ProvidedWard": 0,
+            "ApparelClass": "HeavyArmor",
+            "StatMods": {
+                "MassBonus": {
+                    "ModType": "Add",
+                    "StatName": "Mass",
+                    "Value": 1
+                }
+            }
+        },
+        "ItemData": {
+            "Rarity": "Rare",
+            "Value": 50
+        },
+        "_DefVersion": "1"
+    },
+    "BanditHeavyArmor_HeadApparel": {
+        "!ObjectScript": "res://assets/Scripts/Items/Equipment/BaseApparelEquipment.gd",
+        "#ObjDetails": {
+			"DisplayName": "Bandit Helmet",
+			"SnippetDesc": "A bandit's metal helmet.",
+			"Description": "The same A cheap metal helmet worn by Bandits.",
+			"LargeIcon":"Sprites/BanditHelmet_Icon.png",
+			"SmallIcon":"Sprites/BanditHelmet_Icon.png",
+            "Tags": [
+                "Equipment",
+                "Armor",
+                "Head"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Equipment",
+                "Apparel"
+            ]
+        },
+        "EquipmentData": {
+            "EquipSlot": "Head",
+            "Requirments": {
+                "ReqStats": {
+                    "Strength": 8
+                }
+            },
+            "SpriteData": {
+                "SpriteSheet": "Sprites/BanditHelmet_SpriteSheet.png"
+            }
+        },
+        "ApparelData":{
+            "ProvidedArmor": 4,
+            "ProvidedWard": 0,
+            "ApparelClass": "HeavyArmor",
+            "StatMods": {
+                "MassBonus": {
+                    "ModType": "Add",
+                    "StatName": "Mass",
+                    "Value": 1
+                }
+            }
+        },
+        "ItemData": {
+            "Rarity": "Rare",
+            "Value": 50
+        },
+        "_DefVersion": "1"
+    },
+    "BanditHeavyArmor_BodyApparel": {
+        "!ObjectScript": "res://assets/Scripts/Items/Equipment/BaseApparelEquipment.gd",
+        "#ObjDetails": {
+			"DisplayName": "Bandit Armor",
+			"SnippetDesc": "A bandit's metal armor.",
+			"Description": "A cheap leather shirt reinforeced with some iron. Prefect protection for robbing innocents of thier livelyhood.",
+			"LargeIcon":"Sprites/BanditArmor_Icon.png",
+			"SmallIcon":"Sprites/BanditArmor_Icon.png",
+            "Tags": [
+                "Equipment",
+                "Armor",
+                "Body"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Equipment",
+                "Apparel"
+            ]
+        },
+        "EquipmentData": {
+            "EquipSlot": "Body",
+            "Requirments": {
+                "ReqStats": {
+                    "Strength": 8
+                }
+            },
+            "SpriteData": {
+                "SpriteSheet":"Sprites/BanditChest_SpriteSheet.png"
+            }
+        },
+        "ApparelData":{
+            "ProvidedArmor": 3,
+            "ProvidedWard": 0,
+            "ApparelClass": "HeavyArmor",
+            "StatMods": {
+            }
+        },
+        "ItemData": {
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "_DefVersion": "1"
+    },
+    "BanditHeavyArmor_LegApparel": {
+        "!ObjectScript": "res://assets/Scripts/Items/Equipment/BaseApparelEquipment.gd",
+        "#ObjDetails": {
+			"DisplayName": "Bandit Pants",
+			"SnippetDesc": "A bandit's old pants.",
+			"Description": "Cheap leather pants reinforecd with iron. Someone probably died in these.",
+			"LargeIcon":"Sprites/BanditPants_Icon.png",
+			"SmallIcon":"Sprites/BanditPants_Icon.png",
+            "Tags": [
+                "Equipment",
+                "Armor",
+                "Feet"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Equipment",
+                "Apparel"
+            ]
+        },
+        "EquipmentData": {
+            "EquipSlot": "Feet",
+            "Requirments": {
+                "ReqStats": {
+                    "Strength": 8
+                }
+            },
+            "SpriteData": {
+                "SpriteSheet":"Sprites/BanditPants_SpriteSheet.png"
+            }
+        },
+        "ApparelData":{
+            "ProvidedArmor": 3,
+            "ProvidedWard": 0,
+            "ApparelClass": "HeavyArmor",
+            "StatMods": {
+            }
+        },
+        "ItemData": {
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "_DefVersion": "1"
+    },
+
+
+
+    
+    "BanditLightArmor_HeadApparel": {
+        "!ObjectScript": "res://assets/Scripts/Items/Equipment/BaseApparelEquipment.gd",
+        "#ObjDetails": {
+			"DisplayName": "Bycocket",
+			"SnippetDesc": "A bandit's bycocket.",
+			"Description": "A pointy hat commonly seen on archers. Appearently it's called a \"bycocket\".",
+			"LargeIcon":"Sprites/BanditBycocket_Icon.png",
+			"SmallIcon":"Sprites/BanditBycocket_Icon.png",
+            "Tags": [
+                "Equipment",
+                "Armor",
+                "Head"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Equipment",
+                "Apparel"
+            ]
+        },
+        "EquipmentData": {
+            "EquipSlot": "Head",
+            "Requirments": {
+                "ReqStats": {
+                    "Agility": 8
+                }
+            },
+            "SpriteData": {
+                "SpriteSheet":"Sprites/BanditBycocket_SpriteSheet.png"
+            }
+        },
+        "ApparelData":{
+            "ProvidedArmor": 3,
+            "ProvidedWard": 0,
+            "ApparelClass": "LightArmor",
+            "StatMods": {
+                "MassBonus": {
+                    "ModType": "Add",
+                    "StatName": "Speed",
+                    "Value": 1
+                }
+            }
+        },
+        "ItemData": {
+            "Rarity": "Rare",
+            "Value": 50
+        },
+        "_DefVersion": "1"
+    },
+    "BanditLightArmor_BodyApparel": {
+        "!ObjectScript": "res://assets/Scripts/Items/Equipment/BaseApparelEquipment.gd",
+        "#ObjDetails": {
+			"DisplayName": "Bandit Vest",
+			"SnippetDesc": "A bandit's leather vest.",
+			"Description": "A cheap leather vest. Bad for protection but great for mobility and showing off your guns.",
+			"LargeIcon":"Sprites/BanditVest_Icon.png",
+			"SmallIcon":"Sprites/BanditVest_Icon.png",
+            "Tags": [
+                "Equipment",
+                "Armor",
+                "Body"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Equipment",
+                "Apparel"
+            ]
+        },
+        "EquipmentData": {
+            "EquipSlot": "Body",
+            "Requirments": {
+                "ReqStats": {
+                    "Agility": 8
+                }
+            },
+            "SpriteData": {
+                "SpriteSheet":"Sprites/BanditVest_SpriteSheet.png"
+            }
+        },
+        "ApparelData":{
+            "ProvidedArmor": 3,
+            "ProvidedWard": 0,
+            "ApparelClass": "LightArmor",
+            "StatMods": {
+            }
+        },
+        "ItemData": {
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "_DefVersion": "1"
+    },
+    "BanditLightArmor_LegApparel": {
+        "!ObjectScript": "res://assets/Scripts/Items/Equipment/BaseApparelEquipment.gd",
+        "#ObjDetails": {
+			"DisplayName": "Bandit Shorts",
+			"SnippetDesc": "A bandit's short pants.",
+			"Description": "Cheap shorts with simple leather shoes. Bad for protection but great for mobility and showing off your legs.",
+			"LargeIcon":"Sprites/BanditShorts_Icon.png",
+			"SmallIcon":"Sprites/BanditShorts_Icon.png",
+            "Tags": [
+                "Equipment",
+                "Armor",
+                "Feet"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Equipment",
+                "Apparel"
+            ]
+        },
+        "EquipmentData": {
+            "EquipSlot": "Feet",
+            "Requirments": {
+                "ReqStats": {
+                    "Agility": 8
+                }
+            },
+            "SpriteData": {
+                "SpriteSheet":"Sprites/BanditShorts_SpriteSheet.png"
+            }
+        },
+        "ApparelData":{
+            "ProvidedArmor": 3,
+            "ProvidedWard": 0,
+            "ApparelClass": "LightArmor",
+            "StatMods": {
+            }
+        },
+        "ItemData": {
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "_DefVersion": "1"
+    }
+}

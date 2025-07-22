@@ -79,7 +79,8 @@ func start_new_story():
 	
 	_party_actor_ids = []
 	story_id = "Story:" + str(ResourceUID.create_id())
-	var player_actor_keys = ["SoldierTemplate", "RogueTemplate", "MageTemplate", "PriestTemplate"]
+	var player_actor_keys = ["SoldierTemplate", "Bandit_Armored", "Bandit_Ranged", "Bandit_Captain"]
+								#"RogueTemplate", "MageTemplate", "PriestTemplate"]
 	for i in range(player_actor_keys.size()):
 		var player_id = "Player_" + str(i) + ":" + str(ResourceUID.create_id())
 		var _new_player = ActorLibrary.create_actor(player_actor_keys[i], {}, player_id)

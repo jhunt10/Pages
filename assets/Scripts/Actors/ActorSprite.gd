@@ -37,17 +37,24 @@ func get_two_hand_sprite()->Texture2D:
 	return _cached_two_hand_over_sprite
 
 func _build_sprite_sheet():
+	var is_complex_actor = _actor.get_load_val("ScenePath", "").ends_with("complex_actor_node.tscn")
+	
 	var first_cache = (_cached_body_sprite == null)
 	var sprite_sheet_file = _actor.get_load_val("SpriteSheet", null)
-	if !sprite_sheet_file:
+	
+	var sprite_path = ""
+	if sprite_sheet_file == "DEFAULT":
+		sprite_path = "res://ObjectDefs/Actors/BaseActor/Sprites/BaseActor_SpriteSheet"
+	elif !sprite_sheet_file:
 		_cached_body_sprite = _actor.get_large_icon()
 		_cached_portrait = _actor.get_small_icon()
 		return
+	else:
+		sprite_path =_actor.get_load_path().path_join(sprite_sheet_file).trim_suffix(".png")
 	
 	#var old_version = sprite_sheet_file.ends_with(".png")
 	#var sprite_path = ''
 	#if old_version:
-	var sprite_path =_actor.get_load_path().path_join(sprite_sheet_file).trim_suffix(".png")
 	var body_texture:Texture2D = SpriteCache.get_sprite(sprite_path+".png", true)
 	if !body_texture:
 		printerr("Failed to find boday texture: %s" % [sprite_path])

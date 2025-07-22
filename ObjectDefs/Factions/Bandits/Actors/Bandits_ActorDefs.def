@@ -1,0 +1,134 @@
+{
+    "Bandit_Captain": {
+        "!ObjectScript": "res://assets/Scripts/Actors/BaseActor.gd",
+        "!ParentKey": "#BaseHumanoid",
+        "#ObjDetails": {
+            "Description": "A bandit wearing armor.",
+            "DisplayName": "Bandit Captain",
+            "LargeIcon": "Sprites/ArmoredBandit_Icon.png",
+            "ObjectType": "Actor",
+            "SmallIcon": "Sprites/ArmoredBandit_Icon.png",
+            "SnippetDesc": "A captian of bandits.",
+            "Tags": [
+                "Bandit"
+            ],
+            "Taxonomy": [
+                "Actor"
+            ]
+        },
+        "SpriteSheet": "DEFAULT",
+        "SpawnEquipmentArr": [
+            "Bandit_PageBook",
+            "OldBag_ItemBag",
+            "BanditCaptainHelmet_HeadApparel",
+            "BanditHeavyArmor_BodyApparel",
+            "BanditHeavyArmor_LegApparel",
+            "BigMalma"
+        ],
+        "SpawnItemArr": [
+            "HealthPotionM",
+            "HealthPotionM"
+        ],
+        "SpawnPageArr": [
+            "BanditCaptain_TitlePage",
+
+            "MoveForward",
+            "TurnLeft",
+            "TurnRight",
+            "BasicWeaponAttack",
+            "UsePotionSelf",
+            "ReloadPage"
+        ],
+        "Stats": {
+        },
+        "_DefVersion": "1"
+    },
+    "Bandit_Armored": {
+        "!ObjectScript": "res://assets/Scripts/Actors/BaseActor.gd",
+        "!ParentKey": "#BaseHumanoid",
+        "#ObjDetails": {
+            "Description": "A bandit wearing armor.",
+            "DisplayName": "Armored Bandit",
+            "LargeIcon": "Sprites/ArmoredBandit_Icon.png",
+            "ObjectType": "Actor",
+            "SmallIcon": "Sprites/ArmoredBandit_Icon.png",
+            "SnippetDesc": "A bandit.",
+            "Tags": [
+                "Bandit"
+            ],
+            "Taxonomy": [
+                "Actor"
+            ]
+        },
+        "SpriteSheet": "DEFAULT",
+        "SpawnEquipmentArr": [
+            "Bandit_PageBook",
+            "OldBag_ItemBag",
+            "BanditHeavyArmor_HeadApparel",
+            "BanditHeavyArmor_BodyApparel",
+            "BanditHeavyArmor_LegApparel",
+            "BanditAxe"
+        ],
+        "SpawnItemArr": [
+            "HealthPotionM",
+            "HealthPotionM"
+        ],
+        "SpawnPageArr": [
+            "BanditBase_TitlePage",
+            
+            "MoveForward",
+            "TurnLeft",
+            "TurnRight",
+            "BasicWeaponAttack",
+            "UsePotionSelf",
+            "ReloadPage"
+        ],
+        "Stats": {
+        },
+        "_DefVersion": "1"
+    },
+    "Bandit_Ranged": {
+        "!ObjectScript": "res://assets/Scripts/Actors/BaseActor.gd",
+        "!ParentKey": "#BaseHumanoid",
+        "#ObjDetails": {
+            "Description": "A bandit wearing short shorts.",
+            "DisplayName": "Archer Bandit",
+            "LargeIcon": "Sprites/ArmoredBandit_Icon.png",
+            "ObjectType": "Actor",
+            "SmallIcon": "Sprites/ArmoredBandit_Icon.png",
+            "SnippetDesc": "A bandit.",
+            "Tags": [
+                "Bandit"
+            ],
+            "Taxonomy": [
+                "Actor"
+            ]
+        },
+        "SpriteSheet": "DEFAULT",
+        "SpawnEquipmentArr": [
+            "Bandit_PageBook",
+            "OldBag_ItemBag",
+            "BanditLightArmor_HeadApparel",
+            "BanditLightArmor_BodyApparel",
+            "BanditLightArmor_LegApparel",
+            "OldBow"
+        ],
+        "SpawnItemArr": [
+            "HealthPotionM",
+            "HealthPotionM"
+        ],
+        "SpawnPageArr": [
+            "BanditArcher_TitlePage",
+            
+            "MoveForward",
+            "TurnLeft",
+            "TurnRight",
+            "BasicWeaponAttack",
+            "UsePotionSelf",
+            "ReloadPage"
+        ],
+        "Stats": {
+        },
+        "_DefVersion": "1"
+    }
+}

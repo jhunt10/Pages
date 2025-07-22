@@ -1,10 +1,87 @@
 {
+    "BanditAxe": {
+        "!ObjectScript": "res://assets/Scripts/Items/Equipment/Tools/BaseWeaponEquipment.gd",
+        "#ObjDetails":{
+			"DisplayName": "Bandit Axe",
+			"SnippetDesc": "Big ol' mal.",
+			"Description": "An old wood splitting axe repurposed for splitting skulls. Just goes to show that anything can be used as a weapon when already shaped like a weapon.",
+			"Tags": ["Weapon", "Axe"],
+			"LargeIcon":"Sprites/BanditAxe_Icon.png",
+			"SmallIcon":"Sprites/BanditAxe_Icon.png",
+            "Taxonomy": [
+                "Item",
+                "Equipment",
+                "Tool",
+                "Weapon"
+            ]
+		},
+        "EquipmentData": {
+            "AttackMods": {},
+            "DamageMods": {},
+            "EquipSlot": "Weapon",
+            "Requirments": {
+                "ReqStats": {
+                    "Strength": 8
+                }
+            },
+            "StatMods": {
+                "AttackBonus": {
+                    "ModType": "Add",
+                    "StatName": "PhyAttack",
+                    "Value": 10
+                }
+            },
+            "TargetMods": {}
+        },
+        "ItemData": {
+            "Rarity": "Rare",
+            "Value": 50
+        },
+        "WeaponData": {
+            "AttackData": {
+                "AttackDetails": {
+                    "AccuracyMod": 1,
+                    "PotencyMod": 1
+                },
+                "AttackTags": [
+                    "Weapon",
+                    "Melee",
+                    "Physical"
+                ],
+                "DamageDatas": {
+                    "WeaponDamage": {
+                        "AtkPwrBase": 100,
+                        "AtkPwrRange": 30,
+                        "AtkStat": "PhyAttack",
+                        "DamageType": "Slash",
+                        "DamageVfxKey": "AUTO",
+                        "DefenseType": "AUTO"
+                    }
+                },
+                "EffectDatas": {},
+                "TargetParams": {
+                    "LineOfSight": true,
+                    "TargetArea": "[[-1,1],[0,1],[1,1],[-1,0],[1,0]]",
+                    "TargetType": "Enemy"
+                }
+            },
+            "IsRanged": false,
+            "WeaponClass": "Medium",
+            "WeaponSpriteData": {
+                "Offset":[0,0],
+                "SpriteName":"Sprites/BanditAxe",
+                "Rotation":0,
+                "WeaponAnimation": "Swing"
+            }
+        },
+        "_DefVersion": "1"
+    },
     "BigMalma": {
         "!ObjectScript": "res://assets/Scripts/Items/Equipment/Tools/BaseWeaponEquipment.gd",
         "#ObjDetails":{
 			"DisplayName": "Big Mal-Ma",
-			"SnippetDesc": "Big old mal.",
-			"Description": "A crude Mal made from bolting a stone slab to a plank. Used to be owned by a Bandit Captain.",
+			"SnippetDesc": "Big ol' mal.",
+			"Description": "A crude Mal made from bolting a stone slab to a plank. Used to be owned by a Bandit Captain, until they were out bandited by our Heros.",
 			"Tags": ["Weapon", "Hammer"],
 			"LargeIcon":"Sprites/BigMalma_Icon.png",
 			"SmallIcon":"Sprites/BigMalma_Icon.png",

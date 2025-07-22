@@ -1,0 +1,123 @@
+{
+    
+    "BanditBase_TitlePage": {
+        "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemTitle.gd",
+        "!ParentKey": "#BaseTitlePage",
+        "#ObjDetails": {
+            "Description": "Bandits are well rounded physical fighter who balance offence and defense. They excell in melee brawls, but struggle against ranged magic attacks and a crushing guilt of thier many sins.",
+            "DisplayName": "Bandit",
+            "LargeIcon": "Sprites/BanditTitle_Icon.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/BanditTitle_Icon.png",
+            "SnippetDesc": "Bandit Title",
+            "Tags": [
+                "Title"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Page",
+                "Title"
+            ]
+        },
+        "PageData": {
+            "AddTags": [
+                "Bandit"
+            ],
+            "StatMods": {
+            },
+            "PageRequirements": {
+                "ConflictingPages": [],
+                "IncompatiblePages": [],
+                "TitleReq": "None"
+            },
+            "SourceTitle": "Base"
+        },
+        "ItemData": {
+            "ItemType": "Page",
+            "Rarity": "Unique",
+            "Value": 50
+        },
+        "PassiveData": {},
+        "_DefVersion": "1"
+    },
+    "BanditArcher_TitlePage": {
+        "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemTitle.gd",
+        "!ParentKey": "BanditBase_TitlePage",
+        "#ObjDetails": {
+            "Description": "Bandit Archers are a variation of Bandit who specialize in ranged physical attacks. Through years of grueling traininig in short shorts, these brave few have learned the secrets of the bare leg; sacrificing Armor in favor of higher Speed and Accuracy.",
+            "DisplayName": "Bandit Archer",
+            "LargeIcon": "Sprites/BanditArcherTitle_Icon.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/BanditArcherTitle_Icon.png",
+            "SnippetDesc": "Bandit Archer Title",
+            "Tags": [
+                "Title"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Page",
+                "Title"
+            ]
+        },
+        "PageData": {
+            "AddTags": [
+                "Bandit"
+            ],
+            "StatMods": {
+            },
+            "PageRequirements": {
+                "ConflictingPages": [],
+                "IncompatiblePages": [],
+                "TitleReq": "None"
+            },
+            "SourceTitle": "Base"
+        },
+        "ItemData": {
+            "ItemType": "Page",
+            "Rarity": "Unique",
+            "Value": 50
+        },
+        "PassiveData": {},
+        "_DefVersion": "1"
+    },
+    "BanditCaptain_TitlePage": {
+        "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemTitle.gd",
+        "!ParentKey": "BanditBase_TitlePage",
+        "#ObjDetails": {
+            "Description": "Every ship needs a Captain, and while Bandits are not nessasarily ships, they do still benifit from well orginized leadership. Bandit Captains have earned thier Title not just for thier ability to give orders, but to enforce them as well. With high Armor and Physical attack, they can make formitable opponents even without thier gang.",
+            "DisplayName": "Bandit Captain",
+            "LargeIcon": "Sprites/BanditCaptainTitle_Icon.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/BanditCaptainTitle_Icon.png",
+            "SnippetDesc": "Bandit Archer Title",
+            "Tags": [
+                "Title"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Page",
+                "Title"
+            ]
+        },
+        "PageData": {
+            "AddTags": [
+                "Bandit"
+            ],
+            "StatMods": {
+            },
+            "PageRequirements": {
+                "ConflictingPages": [],
+                "IncompatiblePages": [],
+                "TitleReq": "None"
+            },
+            "SourceTitle": "Base"
+        },
+        "ItemData": {
+            "ItemType": "Page",
+            "Rarity": "Unique",
+            "Value": 50
+        },
+        "PassiveData": {},
+        "_DefVersion": "1"
+    }
+}
