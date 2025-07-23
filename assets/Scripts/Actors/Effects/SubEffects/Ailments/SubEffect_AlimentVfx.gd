@@ -18,9 +18,9 @@ func on_effect_trigger(effect:BaseEffect, subeffect_data:Dictionary, trigger:Bas
 
 func on_delete(effect:BaseEffect, subeffect_data:Dictionary):
 	var actor = effect.get_effected_actor()
-	var vfx_id = subeffect_data.get('VfxId', null)
-	if not vfx_id:
-		return
+	var ailment_key = subeffect_data.get("AilmentKey")
+	var vfx_key = "Ailment" + ailment_key + "Vfx"
+	
 	var actor_node = CombatRootControl.get_actor_node(actor.Id)
 	if actor_node:
-		actor_node.vfx_holder.remove_vfx(vfx_id)
+		actor_node.vfx_holder.remove_vfx(vfx_key)

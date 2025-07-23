@@ -307,6 +307,17 @@ func _calc_cache_stats(emit_signal:bool=true):
 		health_before_caching = _cached_stats[StatHelper.HealthCurrent]
 	
 	_cached_mods.clear()
+	
+	_base_stats = _actor.get_load_val("Stats")
+	var min_stats = {}
+	if _base_stats.keys().has("StartingAttributeLevels"):
+		_base_stats.erase("StartingAttributeLevels")
+	for stat_name:String in _base_stats.keys():
+		if stat_name.begins_with("MinStat:"):
+			var real_stat_name = stat_name.trim_prefix("MinStat:")
+			min_stats[real_stat_name] = _base_stats[stat_name]
+			_base_stats.erase(stat_name)
+	
 	# Aggregate all the mods together by stat_name, then type
 	var agg_mods = {}
 	var set_stats = {}
@@ -439,6 +450,8 @@ func _calc_cache_stats(emit_signal:bool=true):
 				if agg_stat.keys().has(BaseStatMod.ModTypes.Scale):
 					for val in agg_stat[BaseStatMod.ModTypes.Scale]:
 						temp_val = temp_val * val
+			if min_stats.keys().has(stat_name):
+				temp_val = max(temp_val, min_stats[stat_name])
 			_cached_stats[stat_name] = temp_val
 			# Health Logic - Set Current Health if not previously set
 			if stat_name == StatHelper.HealthMax:

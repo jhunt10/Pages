@@ -132,6 +132,7 @@ func load_init_state(sub_scene_data:Dictionary):
 	
 	QueController = ActionQueController.new()
 	QueController.end_of_round.connect(check_end_conditions)
+	_player_actor_ids.clear()
 	var actor_count = map_data['Actors'].size()
 	var actor_index = 0
 	for actor_info:Dictionary in map_data['Actors']:
@@ -348,6 +349,7 @@ func cleanup_combat():
 		else:
 			ActorLibrary.delete_actor(actor)
 	ui_control.ui_state_controller.clear_states()
+	_player_actor_ids.clear()
 
 func list_actors_by_order()->Array:
 	var out_list = []
@@ -377,6 +379,8 @@ func get_current_player_actor()->BaseActor:
 	return get_player_actor(_current_player_index)
 
 func set_player_index(index:int, move_camera:bool=true):
+	var actor_ids = _player_actor_ids.duplicate()
+	print("ActorIds: " + str(actor_ids))
 	if index >= 0 and index < _player_actor_ids.size():
 		_current_player_index = index
 		ui_control.set_player_actor_index(_current_player_index)

@@ -1,34 +1,5 @@
 [
     {
-        "ItemKey":"BanditCptHelmet",
-        "_ObjectScript": "res://assets/Scripts/Items/Equipment/BaseArmorEquipment.gd",
-        "Details":{
-			"DisplayName": "Bandit Captian Helmet",
-			"SnippetDesc": "A bandit's captian's metal helmet.",
-			"Description": "The same A cheap metal helmet worn by Bandits, but this one has the scarf on top to show off your pretty mug.",
-			"Tags": ["Head"],
-			"LargeIcon":"Sprites/BanditCptHelmet_Icon.png",
-			"SmallIcon":"Sprites/BanditCptHelmet_Icon.png"
-		},
-        "ItemDetails":
-        {
-            "Rarity": "Mundane",
-            "Value": 50
-        },
-        "SpriteSheet":"Sprites/BanditCptHelmet_SpriteSheet.png",
-        "EquipSlot":"Head",
-        "Armor": 3,
-        "Ward": 0,
-        "StatMods": {
-            "ArmorBonus": {
-                "DisplayName": "Bandit Captian Helmet",
-                "ModType": "Add",
-                "StatName": "Armor",
-                "Value": 3
-            }
-        }
-    },
-    {
         "ItemKey":"BanditHelmet",
         "_ObjectScript": "res://assets/Scripts/Items/Equipment/BaseArmorEquipment.gd",
         "Details":{

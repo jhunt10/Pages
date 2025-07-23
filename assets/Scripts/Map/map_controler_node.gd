@@ -119,6 +119,8 @@ func get_or_create_actor_node(actor:BaseActor, map_pos:MapPos, wait_to_show:bool
 		return actor_nodes[actor.Id]
 	
 	var actor_node_path = actor.get_load_val("ScenePath", "res://Scenes/Combat/MapObjects/Actors/SimpleActorNode/simple_actor_node.tscn")
+	if not actor_node_path.begins_with("res://"):
+		actor_node_path = actor.get_load_path().path_join(actor_node_path)
 	var new_node:BaseActorNode = load(actor_node_path).instantiate()
 	actor_nodes[actor.Id] = new_node
 	actor_tile_map.add_child(new_node)

@@ -5,10 +5,10 @@
 		"Details":{
 			"DisplayName": "Slime",
 			"SnippetDesc": "Slime",
-			"Description": "A gelatinous blob of Mag mass with no blood, organs, or need for sustenance. While once a topic of fierce debate, researchers have recently been able to prove that Slimes do die if you stab them enough and thus, meet the scientific definition of “Life”..",
+			"Description": "A gelatinous blob with no discernible sensory organs, digestive systsem, or really anything resembling \"anotomy\". While once a topic of fierce debate, researchers have recently proven that Slimes will die if stabbed enough and thus, meet the scientific definition of “Life”..",
 			"Tags": ["Slime"],
-			"LargeIcon":"GuyPortrait.png",
-			"SmallIcon":"GuyPortrait.png"
+			"LargeIcon":"BlueSlime_Icon.png",
+			"SmallIcon":"BlueSlime_Icon.png"
 		},
 		"Stats":{
 			"BlocksLOS":0,
@@ -52,7 +52,7 @@
                 "TargetType": "Actor"
             },
             "DamageDatas":{
-                "DefaultDamage": {
+                "UnarmedDamage": {
                     "AtkPower": 100,
                     "AtkStat": "PhyAttack",
                     "FixedBaseDamage": null,
@@ -126,7 +126,7 @@
                 "TargetType": "Actor"
             },
             "DamageDatas":{
-                "DefaultDamage": {
+                "UnarmedDamage": {
                     "AtkPower": 100,
                     "AtkStat": "PhyAttack",
                     "FixedBaseDamage": null,

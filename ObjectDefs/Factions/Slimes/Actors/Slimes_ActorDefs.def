@@ -1,0 +1,126 @@
+{
+    "SlimeBasic": {
+        "!ObjectScript": "res://assets/Scripts/Actors/BaseActor.gd",
+        "!ParentKey": "#BaseActor",
+        "#ObjDetails": {
+            "Description": "A gelatinous blob with no discernible sensory organs, digestive systsem, or really anything resembling \"anotomy\". While once a topic of fierce debate, researchers have recently proven that Slimes will die if stabbed enough and thus, meet the scientific definition of “Life”..",
+            "DisplayName": "Slime",
+            "LargeIcon": "Sprites/BlueSlime_Icon.png",
+            "ObjectType": "Actor",
+            "SmallIcon": "Sprites/BlueSlime_Icon.png",
+            "SnippetDesc": "A slime.",
+            "Tags": [
+                "Slime",
+                "Living",
+                "Creature"
+            ],
+            "Taxonomy": [
+                "Actor"
+            ]
+        },
+        "ActorDetails": {
+            "ExpValue": 10,
+            "MoneyValue": 15
+        },
+        "AiData": {
+            "ActionsArr": [
+                "MoveForward",
+                "MoveBack",
+                "MoveLeft",
+                "MoveRight",
+                "SlimeSpike_ActionPage"
+            ]
+        },
+        "AutoQue": true,
+        "AutoQueing": false,
+        "CorpseSprite": null,
+        "DefaultPageSlotSet": [
+            {
+                "Count": 6,
+                "DisplayName": "Any Page",
+                "FilterData": null,
+                "Key": "Any"
+            }
+        ],
+        "DropItemsSet": {
+            "": 1
+        },
+        "EquipmentSlots": [],
+        "ScenePath": "Scenes/slime_actor_node.tscn",
+        "SpawnEquipmentArr": [
+            "Squirrel_PageBook"
+        ],
+        "SpawnItemArr": [
+        ],
+        "SpawnPageArr": [
+            "SlimeBase_TitlePage",
+            "MoveForward",
+            "MoveBack",
+            "MoveLeft",
+            "MoveRight",
+            "SlimeSpike_ActionPage"
+        ],
+        "SpriteFrameWH": [
+            12,
+            4
+        ],
+        "SpriteOffset": [
+            0,0
+        ],
+        "SpriteSheet": "Sprites/BlueSlime_SpriteSheet.png",
+        "ImmuneToEffects": ["AilmentBlind"],
+        "Stats": {
+            "Agility": 10,
+            "Strength": 10,
+            "Intelligence": 5,
+            "Wisdom": 5,
+            "HealthMax": 12,
+            "PPR": 4,
+            "Mass": 2,
+            "Speed": 25,
+            "Armor": 0,
+            "Ward": 0,
+            "Evasion": 20,
+            "MagAttack": 0,
+            "PhyAttack": 10,
+            "Awareness": 5,
+            "MinStat:Awareness":5,
+            "Resistance:Light": 50,
+            "Resistance:Poison": 100
+        },
+        "_DefVersion": "1"
+    },
+    "SlimePoison": {
+        "!ParentKey": "SlimeBasic",
+        "#ObjDetails": {
+            "Description": "With a high tolerance to toxins and poor personal hygiene, Slimes often become polluted with whatever is in their enviorment. After a Slime injests enough material with Mag properites, the @@#Color:Blue:PAGE@@ System appears to missinterprate the Slime as possessing the same properies of the given material. At this point, the Slime will alter it's color to conform to cultural norms.\n\nGreen Slimes have absorbed larges amounts poisonus plants, toxic waste, and internet comment sections. Any contact with these Slimes is recongized as Poion Damage and can be potent enough to inflict a deadly Poison.",
+            "DisplayName": "Green Slime",
+            "LargeIcon": "Sprites/BlueSlime_Icon.png",
+            "ObjectType": "Actor",
+            "SmallIcon": "Sprites/BlueSlime_Icon.png",
+            "SnippetDesc": "A slime.",
+            "Tags": [
+                "Slime",
+                "Living",
+                "Creature"
+            ],
+            "Taxonomy": [
+                "Actor"
+            ]
+        },
+        "SpriteSheet": "Sprites/GreenSlime_SpriteSheet.png",
+        "ImmuneToEffects": ["AilmentBlind"],
+        "Stats": {
+            "Resistance:Poison": 200
+        },
+        "SpawnPageArr": [
+            "SlimeBase_TitlePage",
+            "SlimePoisonSkin_PassivePage",
+            "MoveForward",
+            "MoveBack",
+            "MoveLeft",
+            "MoveRight",
+            "SlimeSpike_ActionPage"
+        ]
+    }
+}

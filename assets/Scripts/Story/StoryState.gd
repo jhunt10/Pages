@@ -81,7 +81,8 @@ func start_new_story():
 	
 	_party_actor_ids = []
 	story_id = "Story:" + str(ResourceUID.create_id())
-	var player_actor_keys = ["SoldierTemplate", "MushroomBase", "MushroomRoof", "ShroomGolem"]
+	var player_actor_keys = [#"SoldierTemplate", "SlimeBasic", 
+		"SlimePoison"]
 								#"RogueTemplate", "MageTemplate", "PriestTemplate"]
 	for i in range(player_actor_keys.size()):
 		var player_id = "Player_" + str(i) + ":" + str(ResourceUID.create_id())

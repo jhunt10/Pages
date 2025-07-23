@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://du1jpadr0bey"]
 
 [ext_resource type="Script" path="res://assets/Scripts/VFXs/ParticalVfxs/partical_vfx_node.gd" id="1_2culk"]
-[ext_resource type="Texture2D" uid="uid://b2ugqy1ksnt3a" path="res://defs/Effects/Ailments/Sprites/Poisoned_Partical.png" id="2_585kf"]
+[ext_resource type="Texture2D" uid="uid://b2ugqy1ksnt3a" path="res://ObjectDefs/Effects/Ailments/Sprites/Poisoned_Partical.png" id="2_585kf"]
 
 [sub_resource type="Curve" id="Curve_mu718"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.236522, 0.292159), 0.697729, 0.697729, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -11,7 +11,7 @@ point_count = 3
 z_index = 9
 script = ExtResource("1_2culk")
 particals = NodePath("CPUParticles2D")
-actor_modulate = Color(0.8, 0.611765, 1, 1)
+actor_modulate = Color(0.344576, 0.823748, 0.497586, 1)
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
 amount = 4

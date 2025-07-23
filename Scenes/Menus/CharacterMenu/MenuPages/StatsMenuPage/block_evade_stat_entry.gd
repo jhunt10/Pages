@@ -26,7 +26,6 @@ func set_actor(actor:BaseActor):
 	var awareness = actor.stats.get_stat("Awareness", 0)
 	awareness_value_label.text = str(awareness)
 	awareness_display.awareness = 0
-	awareness_display.awareness = awareness
 	
 	var evade_value = actor.stats.get_stat("Evasion", 0)
 	printerr("Evastion: " + str(evade_value))

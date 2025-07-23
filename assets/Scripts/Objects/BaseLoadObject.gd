@@ -78,14 +78,14 @@ func get_load_path()->String:
 ## Return value from  _data  ->  _def  ->  default
 func get_load_val(key:String, default=null, duplicate_dict:bool=true):
 	var val = _data.get(key, null)
-	if self._id.begins_with("ApplyBlessing") and key == "#ObjDetails":
-		var t = true
 	if val is Dictionary:
 		val = val.duplicate(duplicate_dict)
 		if _def.has(key):
 			val = BaseLoadObjectLibrary._merge_defs(val, _def.get(key, {}))
 	if !val:
 		val = _def.get(key, default)
+		if val is Dictionary:
+			val = val.duplicate(duplicate_dict)
 	return val
 
 func on_delete():

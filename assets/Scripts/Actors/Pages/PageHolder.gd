@@ -160,8 +160,8 @@ func _cache_action_mods():
 			# Loop through actions to apply mods
 			for action:PageItemAction in actions:
 				var does_mod_apply = true
-				if item_keys.has(action.ItemKey):
-					does_mod_apply = true
+				if item_keys.size() > 0:
+					does_mod_apply = item_keys.has(action.ItemKey)
 				else:
 					var action_tags = action.get_tags()
 					for filter in item_tag_filters:

@@ -1,0 +1,42 @@
+{
+    "SlimeBase_TitlePage": {
+        "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemTitle.gd",
+        "!ParentKey": "#BaseTitlePage",
+        "#ObjDetails": {
+            "Description": "Slime Title Page",
+            "DisplayName": "Slime",
+            "LargeIcon": "Sprites/BlueSlime_Icon.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/BlueSlime_Icon.png",
+            "SnippetDesc": "Slime Title",
+            "Tags": [
+                "Title"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Page",
+                "Title"
+            ]
+        },
+        "PageData": {
+            "AddTags": [
+                "Slime"
+            ],
+            "StatMods": {
+            },
+            "PageRequirements": {
+                "ConflictingPages": [],
+                "IncompatiblePages": [],
+                "TitleReq": "None"
+            },
+            "SourceTitle": "Base"
+        },
+        "ItemData": {
+            "ItemType": "Page",
+            "Rarity": "Unique",
+            "Value": 50
+        },
+        "PassiveData": {},
+        "_DefVersion": "1"
+    }
+}

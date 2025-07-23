@@ -316,7 +316,9 @@ func _load_object_def_file(file_path:String)->Dictionary:
 			#def['#ObjDetails']['Tags'].append("Page")
 			#def['#ObjDetails']['Tags'].append("Action")
 	
-	
+	if not object_defs:
+		printerr("Failed to parse ObjectDef file at %s" % [file_path])
+		return out_dict
 	
 	for def:Dictionary in object_defs:
 		if !def.keys().has(object_key_name):

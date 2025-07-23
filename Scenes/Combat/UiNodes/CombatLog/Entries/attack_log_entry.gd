@@ -55,7 +55,7 @@ func set_event(attack_event:AttackEvent):
 		
 		var effects_line = _join_effect_values(attack_event, sub_event)
 		if effects_line != '':
-			result_line += effects_line
+			result_line += " " + effects_line
 		
 		var full_line = attacker_name + " " + action_verb + " " + defender_name + " " + result_line
 		self.append_text(full_line)

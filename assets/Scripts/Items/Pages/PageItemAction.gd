@@ -80,9 +80,13 @@ func clear_action_mods():
 	self._data = self._init_data.duplicate(true)
 	if rebuild_targets:
 		_target_params.clear()
+		# TODO: Delete
+		var action_data_check = action_data.duplicate(true)
+		
 		var targ_parms = action_data.get('TargetParams')
-		for tparm_key in targ_parms.keys():
-			_target_params[tparm_key] = TargetParameters.new(tparm_key, targ_parms[tparm_key])
+		if targ_parms:
+			for tparm_key in targ_parms.keys():
+				_target_params[tparm_key] = TargetParameters.new(tparm_key, targ_parms[tparm_key])
 	
 	
 
@@ -302,7 +306,8 @@ func get_ammo_data():
 
 func get_on_que_options(actor:BaseActor, game_state:GameStateData):
 	var out_dict = {}
-	for sub_action_data in get_sub_action_data().values():
+	var sub_action_datas = get_sub_action_data()
+	for sub_action_data in sub_action_datas.values():
 		var sub_action = ActionLibrary.get_sub_action_script(sub_action_data['!SubActionScript'])
 		if !sub_action:
 			printerr("PageAction.get_on_que_options: Failed to find SubActionScript '%s'." % [sub_action_data['!SubActionScript']])

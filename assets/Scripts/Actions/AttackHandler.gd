@@ -60,7 +60,8 @@ static func handle_attack(
 				attack_direction = AttackHandler.AttackDirection.AOE
 			else:
 				var defender_pos = game_state.get_actor_pos(actor)
-				attack_direction = get_relative_attack_direction(attacker_pos, defender_pos)
+				var defender_awareness = actor.stats.get_stat(StatHelper.Awareness)
+				attack_direction = get_relative_attack_direction(attacker_pos, defender_pos, defender_awareness)
 			attack_posision_data[actor.Id]['AttackDirection'] = attack_direction
 	
 	# Gather up attack mods
@@ -503,7 +504,7 @@ static func build_damage_vfx_data(attacker_id:String, damage_event:DamageEvent, 
 	}
 
 ## Get AttackEvent.AttackDirection between Attacker and Defender
-static func get_relative_attack_direction(attacker_pos:MapPos, defender_pos:MapPos, awareness:int=0)->AttackDirection:
+static func get_relative_attack_direction(attacker_pos:MapPos, defender_pos:MapPos, defender_awareness:int)->AttackDirection:
 	if defender_pos == null:
 		#TODO: Missiles from dead actors
 		printerr("Defender posision not provided")
@@ -533,49 +534,49 @@ static func get_relative_attack_direction(attacker_pos:MapPos, defender_pos:MapP
 	var is_diaginal = abs(front_back_change) == abs(right_left_change)
 	var is_forward = not is_side and front_back_change >= 0
 	var is_back = not is_side and front_back_change <= 0
-	if awareness <= -4:
+	if defender_awareness <= -4:
 		return AttackDirection.Back
-	elif awareness == -3:
+	elif defender_awareness == -3:
 		if is_forward and not is_diaginal:
 			return AttackDirection.Flank
 		else:
 			return AttackDirection.Back
-	elif awareness == -2:
+	elif defender_awareness == -2:
 		if is_forward and not is_diaginal:
 			return AttackDirection.Front
 		elif front_back_change > 0:
 			return AttackDirection.Flank
 		else:
 			return AttackDirection.Back
-	elif awareness == -1:
+	elif defender_awareness == -1:
 		if is_forward and not is_diaginal:
 			return AttackDirection.Front
 		elif is_back:
 			return AttackDirection.Back
 		else:
 			return AttackDirection.Flank
-	elif awareness == 0:
+	elif defender_awareness == 0:
 		if is_forward:
 			return AttackDirection.Front
 		elif is_side:
 			return AttackDirection.Flank
 		else:
 			return AttackDirection.Back
-	elif awareness == 1:
+	elif defender_awareness == 1:
 		if is_forward:
 			return AttackDirection.Front
 		elif is_side or is_diaginal:
 			return AttackDirection.Flank
 		else:
 			return AttackDirection.Back
-	elif awareness == 2:
+	elif defender_awareness == 2:
 		if is_back and not is_diaginal:
 			return AttackDirection.Back
 		elif front_back_change < 0:
 			return AttackDirection.Flank
 		else:
 			return AttackDirection.Front
-	elif awareness == 3:
+	elif defender_awareness == 3:
 		if is_back and not is_diaginal:
 			return AttackDirection.Flank
 		else:
@@ -639,7 +640,8 @@ static func handle_colision(
 	var attacker_pos = game_state.get_actor_pos(moving_actor)
 	var defender_pos = game_state.get_actor_pos(blocking_actor)
 	attack_posision_data[blocking_actor.Id] = {}
-	attack_posision_data[blocking_actor.Id]['AttackDirection'] = get_relative_attack_direction(attacker_pos, defender_pos)
+	var defender_awareness = blocking_actor.stats.get_stat(StatHelper.Awareness)
+	attack_posision_data[blocking_actor.Id]['AttackDirection'] = get_relative_attack_direction(attacker_pos, defender_pos, defender_awareness)
 	attack_posision_data[blocking_actor.Id]['HasCover'] = false
 		
 	# Get Applicable Stat Mods

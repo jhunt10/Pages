@@ -1,0 +1,166 @@
+{
+    "SlimeSpike_ActionPage": {
+        "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
+        "#ObjDetails": {
+            "Description": "Make a @@#Color:Red:Melee Attack@@ against all @@#Color:Red:Adjacent Actors@@, dealing @@#DmgData:SpikeDamage@@ on hit.",
+            "DisplayName": "Slime Spike",
+            "LargeIcon": "Sprites/SlimeSpike_Icon.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/SlimeSpike_Icon.png",
+            "SnippetDesc": "Attack all Adj Actors",
+            "Tags": [
+                "Attack",
+                "Melee",
+                "SlimeAtk"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Page",
+                "Action"
+            ]
+        },
+        "ActionData": {
+            "Preview": {
+                "PreviewDamageKey": "SlimeDamage",
+                "PreviewTargetKey": "TargetParam1"
+            },
+            "DamageDatas": {
+                "SlimeDamage": {
+                    "AtkPwrBase": 50,
+                    "AtkPwrRange": 10,
+                    "ArkPwrScale": 1,
+                    "AtkStat": "PhyAttack",
+                    "DamageVfxKey": "AUTO",
+                    "DamageType": "Pierce",
+                    "DefenseType": "AUTO"
+                }
+            },
+            "SubActions": {
+                "Animation_Motion": {
+                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_Animation_Motion.gd",
+                    "#FrameIndex": 11,
+                    "#SubIndex": 0
+                },
+                "Animation_Ready": {
+                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_Animation_Ready.gd",
+                    "#FrameIndex": 5,
+                    "#SubIndex": 0,
+                    "Animation": "Default:Self",
+                    "AnimationSpeed": 1
+                },
+                "Attack": {
+                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Attacks/SubAct_Attack.gd",
+                    "#FrameIndex": 11,
+                    "#SubIndex": 1,
+                    "DamageKey": "SlimeDamage",
+                    "TargetKey": "Target1",
+                    "EffectKeys": ""
+                },
+                "GetTargetAllInArea": {
+                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Targeting/SubAct_GetTarget_AllInArea.gd",
+                    "#FrameIndex": 10,
+                    "#SubIndex": 0,
+                    "AllowAlreadyTargeted": false,
+                    "AllowAutoTarget": true,
+                    "SetTargetKey": "Target1",
+                    "TargetParamKey": "TargetParam1"
+                }
+            },
+            "TargetParams": {
+                "TargetParam1": {
+                    "LineOfSight": true,
+                    "TargetArea": "[[-1,1],[0,1],[1,1],[-1,0],[1,0],[-1,-1],[0,-1],[1,-1]]",
+                    "TargetType": "Actor"
+                }
+            }
+        },
+        "ItemData": {
+            "ItemType": "Page",
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "PageData": {
+            "PageRequirements": {
+                "ConflictingPages": [],
+                "IncompatiblePages": [],
+                "TitleReq": "None"
+            },
+            "SourceTitle": ""
+        },
+        "_DefVersion": "1"
+    },
+    "SlimePoisonSkin_PassivePage": {
+        "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemPassive.gd",
+        "#ObjDetails": {
+            "Description": "@@#Color:Blue:SlimeAtk Pages@@ deal @@#Color:DmgColor:Poison:Poison Damage@@ and have a @@#Color:Red:60%@@ chance to inflict @@#EftDef:AilmentPoisoned:Link@@.",
+            "DisplayName": "Poison Skin ",
+            "LargeIcon": "Sprites/SlimePoisonSkin_Icon.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/SlimePoisonSkin_Icon.png",
+            "SnippetDesc": "Deal Poison Damage on contact",
+            "Tags": [
+                "Passive",
+                "ActionMod"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Page",
+                "Passive"
+            ]
+        },
+        "ItemData": {
+            "ItemType": "Page",
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "PageData": {
+            "PageRequirements": {
+                "ConflictingPages": [],
+                "IncompatiblePages": [],
+                "TitleReq": "None"
+            }
+        },
+        "PassiveData": {
+            "ActionMods": {
+                "SlimeAtkMod": {
+                    "Conditions": {
+                        "ItemKeys": [
+                            "SlimeSpike_ActionPage"
+                        ],
+                        "TagFilters": []
+                    },
+                    "ModdedDefData": {
+                        "ActionData": {
+                            "DamageDatas": {
+                                "SlimeDamage": {
+                                    "AtkPwrBase": 50,
+                                    "AtkPwrRange": 10,
+                                    "ArkPwrScale": 1,
+                                    "AtkStat": "PhyAttack",
+                                    "DamageVfxKey": "AUTO",
+                                    "DamageType": "Poison",
+                                    "DefenseType": "AUTO"
+                                }
+                            },
+                            "EffectDatas": {
+                                "PoisonEffect": {
+                                    "ApplicationChance": 0.6,
+                                    "EffectKey": "AilmentPoisoned"
+                                }
+                            },
+                            "SubActions": {
+                                "Attack": {
+                                    "EffectKeys": [
+                                        "PoisonEffect"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "PassiveData": {},
+            "_DefVersion": "1"
+        }
+    }
+}

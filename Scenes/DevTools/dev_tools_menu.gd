@@ -34,6 +34,8 @@ func reload_stuff():
 		EffectLibrary.Instance.reload()
 	ItemLibrary.Instance.reload()
 	VfxLibrary.reload_vfxs()
+	for actor:BaseActor in ActorLibrary.Instance._loaded_objects.values():
+		actor.stats.recache_stats(true)
 
 func do_the_thing():
 	# Create weapons in inventory
