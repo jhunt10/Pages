@@ -5,6 +5,10 @@ extends BackPatchContainer
 @export var color_bar:ColorRect
 @export var premade_que_container:QueCollection_QueDisplayContainer
 
+
+@export var toggle_ai_sloots_button:Button
+var _show_ai:bool = false
+
 var _ques:Dictionary = {}
 
 # Called when the node enters the scene tree for the first time.
@@ -17,11 +21,18 @@ func _ready() -> void:
 	CombatRootControl.QueController.que_marked_as_dead.connect(on_que_death)
 	CombatRootControl.QueController.start_of_frame.connect(_on_frame_start)
 	CombatRootControl.QueController.end_of_round.connect(color_bar.hide)
+	if toggle_ai_sloots_button:
+		toggle_ai_sloots_button.pressed.connect(_toggle_ai_display)
 	_build_que_displays()
 	pass # Replace with function body.
 
 func _process(delta: float) -> void:
 	super(delta)
+
+func _toggle_ai_display():
+	_show_ai = !_show_ai
+	for que:QueCollection_QueDisplayContainer in _ques:
+		que.show_ai_slots(_show_ai)
 
 func _build_que_displays():
 	var old_ques = {}

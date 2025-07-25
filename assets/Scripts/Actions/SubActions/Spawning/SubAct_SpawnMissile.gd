@@ -52,7 +52,7 @@ func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, que_exe_d
 	missile_data['AttackDetails'] = parent_action.get_load_val("AttackDetails", {})
 	missile_data['EffectDatas'] = parent_action.get_load_val("EffectDatas", {})
 	missile_data['TargetParams'] = target_params
-	var missile_script_path = missile_data.get("MissileScriptPath", "res://assets/Scripts/Missiles/BaseMissile.gd")
+	var missile_script_path = missile_data.get("MissileScriptPath", "res://assets/Scripts/Missiles/AttackMissile.gd")
 	var missile_script =  load(missile_script_path)
 	if not missile_script:
 		printerr("SubAct_SpawnMissile: Failed to load scene: %s" % [missile_script_path])

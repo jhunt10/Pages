@@ -150,6 +150,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="StatModsContainer" type="FlowContainer" parent="InnerContainer/DetailsContainer/DetailsContainer/HBoxContainer/VBoxContainer"]
+visible = false
 layout_mode = 2
 
 [node name="StatModLabel" type="HBoxContainer" parent="InnerContainer/DetailsContainer/DetailsContainer/HBoxContainer/VBoxContainer/StatModsContainer" node_paths=PackedStringArray("modded_stat_icon", "modded_stat_name_label", "mod_value_label", "dep_stat_label", "dep_stat_icon", "plus_label", "times_label")]

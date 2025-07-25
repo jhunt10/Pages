@@ -14,6 +14,8 @@ var _target_params:Dictionary
 var _init_data:Dictionary
 var _action_mods_cache:Dictionary
 
+func get_tagable_id(): return ActionKey
+
 func _init(key:String, def_load_path:String, def:Dictionary, id:String='', data:Dictionary={}) -> void:
 	super(key, def_load_path, def, id, data)
 	_init_data = data.duplicate(true)

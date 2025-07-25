@@ -95,7 +95,7 @@
         "!ObjectScript": "res://assets/Scripts/Actors/BaseActor.gd",
         "!ParentKey": "BaseSquirrel",
         "#ObjDetails": {
-            "Description": "Magic wielding specialist of the NSO who, have been trained in the forbidden acornic arts. They serve as back line attackers, casting semi-power acorn related @@#Color:Red:Spells@@.",
+            "Description": "Magic wielding specialist of the NSO. They have been trained in the forbidden acornic arts and serve as back line attackers, casting powerful acorn related @@#Color:Red:Spells@@... well, \"@@#Color:Red:Spell@@\". They only have one. And all it can do is set an acorn on fire which they then throw. So I guess really they are just a @@#Color:Red:Squirrel@@ with a lighter that happens to only works on acorns.",
             "DisplayName": "Squirrcerer",
             "LargeIcon": "Sprites/SquirrcererIcon.png",
             "ObjectType": "Actor",
@@ -129,7 +129,7 @@
             "MoveForward",
             "TurnLeft",
             "TurnRight",
-            "BasicWeaponAttack",
+            "BasicMeleeAttack",
             "ChuckAcornFire_ActionPage"
         ],
         "SpriteSheet": "Sprites/Squirrcerer_SpriteSheet.png",
@@ -154,7 +154,7 @@
         "!ObjectScript": "res://assets/Scripts/Actors/BaseActor.gd",
         "!ParentKey": "BaseSquirrel",
         "#ObjDetails": {
-            "Description": "Heavy armored defenders of the NSO. They sacrifice thier natural squirrelish @@#Color:Red:Evasion@@ for @@#Color:Red:Evasion@@ and stand as the front line defense.",
+            "Description": "Heavy armored defenders of the NSO. They sacrifice thier natural squirrelish @@#Color:Red:Evasion@@ for @@#Color:Red:Armor@@ to stand as the front line defense. Following the emergance of the NSO, @@#Color:Red:The Military@@ commissioned reasearchers at @@#Color:Red:The Collage@@ to uncover how these tiny fighters were able to acheive such high @@#Color:Red:Armor@@ with platemail thinner than a tin can. After decades of study, the researchers concluded: \"Idk, probably Magic.\".",
             "DisplayName": "Squirrior",
             "LargeIcon": "Sprites/SquirriorIcon.png",
             "ObjectType": "Actor",

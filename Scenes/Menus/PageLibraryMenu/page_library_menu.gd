@@ -57,6 +57,7 @@ func _exit_tree() -> void:
 func _reload_pages():
 	#SpriteCache._cached_sprites.clear()
 	#ActionLibrary.Instance.reload()
+	ActorLibrary.Instance.reload()
 	ItemLibrary.Instance.reload()
 	EffectLibrary.Instance.reload()
 	loaded = false

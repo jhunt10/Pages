@@ -105,7 +105,7 @@ static func _create_vfx_on_holder(vfx_holder:VfxHolder, vfx_key, vfx_data:Dictio
 	
 	var vfx_scene_path = merged_data.get("ScenePath")
 	if not vfx_scene_path:
-		printerr("VfxHelper.create_vfx_on_actor: vfx_data is missing 'ScenePath'.")
+		printerr("VfxHelper.create_vfx_on_actor: vfx_data is missing 'ScenePath': %s" % [would_be_id])
 		return null
 	var scene = load(vfx_scene_path)
 	if not scene:
@@ -138,14 +138,14 @@ static func create_missile_vfx_node(missile_vfx_key:String, vfx_data:Dictionary)
 		
 	var vfx_scene_path = merged_data.get("ScenePath")
 	if not vfx_scene_path:
-		printerr("VfxHelper.create_vfx_on_actor: vfx_data is missing 'ScenePath'.")
+		printerr("VfxHelper.create_missile_vfx_node: vfx_data is missing 'ScenePath': %s" % [would_be_id])
 		return null
 	var new_node =  load(vfx_scene_path).instantiate()
 	if not new_node:
-		printerr("VfxHelper.create_vfx_on_actor: Failed to load scene: %s" % [vfx_scene_path])
+		printerr("VfxHelper.create_missile_vfx_node: Failed to load scene: %s" % [vfx_scene_path])
 		return null
 	if not new_node is BaseVfxNode:
-		printerr("VfxHelper.create_vfx_on_actor: Scene '%s' is not of type BaseVfxNode." % [vfx_scene_path])
+		printerr("VfxHelper.create_missile_vfx_node: Scene '%s' is not of type BaseVfxNode." % [vfx_scene_path])
 		return null
 	var node:BaseVfxNode = new_node
 	node.set_vfx_data(would_be_id, merged_data)

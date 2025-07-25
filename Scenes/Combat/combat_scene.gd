@@ -144,7 +144,10 @@ func load_init_state(sub_scene_data:Dictionary):
 				new_actor = ActorLibrary.get_or_create_actor(actor_info['ActorKey'], actor_info['ActorId'])
 			else:
 				new_actor = ActorLibrary.get_actor(actor_info['ActorId'])
-			new_actor.FactionIndex = 1
+			if new_actor:
+				new_actor.FactionIndex = 1
+			else:
+				printerr("CombatRootControl.load_init_state: Failed ti get or create actor with id %s" % [actor_info.get("ActorId", "NO_ID")])
 		# Only Actor Key was provided
 		elif actor_info.keys().has("ActorKey") and actor_info["ActorKey"] != '':
 			var actor_key = actor_info['ActorKey']

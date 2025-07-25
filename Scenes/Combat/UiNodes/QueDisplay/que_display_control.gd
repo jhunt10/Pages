@@ -120,7 +120,8 @@ func _sync_icons():
 			slot.set_action(n, _actor, null)
 	
 func _slot_pressed(index:int):
-	_actor.Que.delete_at_index(index)
+	var real_index = _actor.Que.turn_to_que_index(index)
+	_actor.Que.delete_at_index(real_index)
 
 func _hide_preview():
 	if _target_display_key:

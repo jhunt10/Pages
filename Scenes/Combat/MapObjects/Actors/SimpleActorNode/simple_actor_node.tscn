@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scenes/Combat/MapObjects/Actors/SimpleActorNode/simple_actor_node.gd" id="1_bln3d"]
 [ext_resource type="Script" path="res://Scenes/Combat/MapObjects/Actors/ComplexActorNode/actor_body_sprite.gd" id="2_e6ypm"]
-[ext_resource type="Texture2D" uid="uid://cbwt78yyiiubn" path="res://Scenes/Combat/MapObjects/Actors/SimpleActorNode/SimpleTemplate_SpriteSheet.png" id="2_ljklk"]
+[ext_resource type="Texture2D" uid="uid://cvig4wcpsgnvn" path="res://ObjectDefs/Factions/Squirrels/Actors/Sprites/Squirrel_SpriteSheet.png" id="2_isyoq"]
 [ext_resource type="Script" path="res://Scenes/Combat/MapObjects/vfx_holder.gd" id="3_soxfk"]
 [ext_resource type="PackedScene" uid="uid://eox4g5msr5a" path="res://Scenes/Combat/Effects/flash_text_controller.tscn" id="4_4be7m"]
 [ext_resource type="Script" path="res://Scenes/Combat/MapObjects/aura_holder.gd" id="6_mn18x"]
@@ -111,7 +111,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [5]
+"values": [0]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -309,12 +309,10 @@ body_animation = NodePath("BodyAnimationPlayer")
 [node name="OffsetNode" type="Node2D" parent="ActorMotionNode/ActorSpriteNode"]
 
 [node name="ActorSprite" type="Sprite2D" parent="ActorMotionNode/ActorSpriteNode/OffsetNode"]
-texture = ExtResource("2_ljklk")
+texture = ExtResource("2_isyoq")
 hframes = 12
 vframes = 4
-frame = 5
 script = ExtResource("2_e6ypm")
-frame_index = 5
 
 [node name="VFX_OffsetNode" type="Node2D" parent="ActorMotionNode/ActorSpriteNode/OffsetNode"]
 

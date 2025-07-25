@@ -1087,7 +1087,7 @@ layout_mode = 2
 size_flags_vertical = 3
 
 [node name="AtkStatsContainer" type="Container" parent="ScaleControl/StatsPage/ContainerControl/StatsMainContainer" node_paths=PackedStringArray("background", "inner_container")]
-custom_minimum_size = Vector2(12, 132)
+custom_minimum_size = Vector2(12, 96)
 layout_mode = 2
 script = ExtResource("16_ep8hk")
 background = NodePath("Background")
@@ -1350,7 +1350,7 @@ layout_mode = 2
 size_flags_vertical = 3
 
 [node name="DefStatsContainer" type="Container" parent="ScaleControl/StatsPage/ContainerControl/StatsMainContainer" node_paths=PackedStringArray("background", "inner_container")]
-custom_minimum_size = Vector2(12, 161)
+custom_minimum_size = Vector2(12, 118)
 layout_mode = 2
 script = ExtResource("16_ep8hk")
 background = NodePath("Background")
@@ -1641,7 +1641,7 @@ alignment = 1
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-update = true
+update = false
 
 [node name="EvadeBlockGrid" type="VBoxContainer" parent="ScaleControl/StatsPage/ContainerControl/StatsMainContainer/DefStatsContainer/BoxContainer/MainContainer"]
 layout_mode = 2

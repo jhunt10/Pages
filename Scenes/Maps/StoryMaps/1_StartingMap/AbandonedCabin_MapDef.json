@@ -1,21 +1,22 @@
 {
-    "MapKey": "AbandonedCabin",
-    "MapName":"Abandoned Village",
-    "Description":"A small village near The Fort which was overrun by Squirrels six years ago.",
-    "MapScene": "abandoned_village_map.tscn",
-    "SortOrder": 1,
-    "EnemySet":{
-        "Squirrel": {
-            "Weight": 50,
-            "IsUnique": false
-        },
-        "Squirrior": {
-            "Weight": 25,
-            "IsUnique": false
-        },
-        "Squirrcerer": {
-            "Weight": 25,
-            "IsUnique": true
-        }
-    }
+	"MapKey": "AbandonedCabin",
+	"MapName":"Abandoned Village",
+	"Description":"A small village near The Fort which was overrun by Squirrels six years ago.",
+	"MapScene": "abandoned_village_map.tscn",
+	"SortOrder": 1,
+	"PlayerLimit": 1,
+	"EnemySet":{
+		"BaseSquirrel": {
+			"Weight": 50,
+			"IsUnique": false
+		},
+		"Squirrior": {
+			"Weight": 25,
+			"IsUnique": false
+		},
+		"Squirrcerer": {
+			"Weight": 25,
+			"IsUnique": true
+		}
+	}
 }

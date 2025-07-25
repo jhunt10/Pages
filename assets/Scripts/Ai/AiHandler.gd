@@ -34,9 +34,11 @@ static func build_action_ques(clear_existing_ques:bool=false):
 			astar.set_pos_disabled(pos, true)
 	
 	for turn in range(turn_count):
+		# Build duplicate GameState as new Turn State
 		var turn_state = init_game_state
 		turn_states.append(turn_state)
 		turn_state.current_turn_index = turn
+		
 		for actor:BaseActor in actors:
 			if actor.Que.is_turn_gap(turn):
 				continue
@@ -76,7 +78,11 @@ static func _choose_page_for_actor(actor:BaseActor, game_state:GameStateData)->P
 	var options = _get_actor_action_options_data(actor)
 	var attack_actions = []
 	for attack_key in options['Attacks']:
-		var attack_action = ActionLibrary.get_action(attack_key)
+		var item = ItemLibrary.get_item(attack_key)
+		if not item is PageItemAction:
+			printerr('AiHandler._choose_page_for_actor: Non-Action Page found: %s' % [attack_key])
+			continue
+		var attack_action = item as PageItemAction
 		# Get potential targets for attack Action
 		var attack_params =  attack_action.get_preview_target_params(actor)
 		var potential_targets = TargetingHelper.get_potential_target_actor_ids(attack_params, actor, game_state, [], current_pos) 
@@ -117,7 +123,7 @@ static func _choose_page_for_actor(actor:BaseActor, game_state:GameStateData)->P
 	var path = path_to_target(actor, start_pos, target_pos, game_state)
 	var path_moves = path.get('Moves', [])
 	if path_moves.size() > 0:
-		var move_action = ActionLibrary.get_action(path_moves[0])
+		var move_action = ItemLibrary.get_item(path_moves[0])
 		if move_action:
 			return move_action
 	else:
@@ -137,15 +143,19 @@ static func _get_actor_action_options_data(actor:BaseActor)->Dictionary:
 		#return cached_move_sets[actor.ActorKey]
 	var action_list = actor.get_action_key_list()
 	for action_key in action_list:
-		var action = ActionLibrary.get_action(action_key)
-		if not action:
+		var item = ItemLibrary.get_item(action_key)
+		if not item:
 			continue
+		if not item is PageItemAction:
+			printerr('AiHandler._get_actor_action_options_data: Non-Action Page found: %s' % [action_key])
+			continue
+		var action = item as PageItemAction
 		if action.has_ammo(actor):
 			if not actor.Que.can_pay_page_ammo(action_key):
 				continue
 		if action.has_preview_move_offset():
 			data['Moves'].append(action_key)
-		if action.is_attack(actor):
+		if action.get_tags().has("Attack"):
 			data['Attacks'].append(action_key)
 	cached_move_sets[actor.ActorKey] = data
 	return data

@@ -8,6 +8,7 @@ const PADDING = 8
 @export var slot_button_prefab:QueMiniSlotIcon
 @export var slots_container:HBoxContainer
 @export var name_label:Label
+var is_ai_actor:bool
 
 func load_stuff():
 	portrait = $PortraitTextureRect
@@ -48,6 +49,7 @@ func set_actor(actor:BaseActor):
 	_actor = actor
 	actor.Que.action_que_changed.connect(_sync_que)
 	actor.equipment_changed.connect(_sync_que)
+	is_ai_actor = !actor.is_player
 	if portrait:
 		portrait.texture = actor.sprite.get_portrait_sprite()
 		_build_slots()
@@ -55,11 +57,16 @@ func set_actor(actor:BaseActor):
 	else:
 		_delayed_init = true
 
-func hide_ai_slots():
+func show_ai_slots(show:bool):
+	if not is_ai_actor:
+		return
 	#print("Hiding Ai slots for : " + _actor.Id)
 	for slot:QueMiniSlotIcon in _slots:
 		if not slot.is_gap:
-			slot.unknown_icon.show()
+			if show:
+				slot.unknown_icon.show()
+			else:
+				slot.unknown_icon.hide()
 
 func mark_as_dead():
 	for slot:QueMiniSlotIcon in _slots:
@@ -83,7 +90,7 @@ func _build_slots():
 		_slots.append(new_button)
 	name_label.text = _actor.Id
 	if not _actor.is_player:
-		hide_ai_slots()
+		show_ai_slots(false)
 
 func _sync_icons():
 	if LOGGING: print("\nSync Icons for " + _actor.ActorKey + " " + self.name)
