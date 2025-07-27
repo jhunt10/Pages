@@ -114,12 +114,6 @@
         "PassiveData": {},
         "_DefVersion": "1"
     },
-
-
-
-
-
-    
     "MeleeRangeDualHandPage": {
         "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemPassive.gd",
         "#ObjDetails": {
@@ -326,10 +320,6 @@
         "PassiveData": {},
         "_DefVersion": "1"
     },
-
-
-
-    
     "MagWeaponOverride_Cold_PageItem": {
         "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemPassive.gd",
         "#ObjDetails": {
@@ -634,9 +624,6 @@
         "PassiveData": {},
         "_DefVersion": "1"
     },
-
-
-    
     "PPRPlus_PageItem": {
         "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemPassive.gd",
         "#ObjDetails": {
@@ -667,7 +654,7 @@
                 "IncompatiblePages": [],
                 "TitleReq": "None"
             },
-            "StatMods":{
+            "StatMods": {
                 "PPRMod": {
                     "ModType": "Add",
                     "StatName": "PPR",
@@ -708,14 +695,19 @@
                 "IncompatiblePages": [],
                 "TitleReq": "None"
             },
-            "ExtraPageSlots":{
+            "ItemSlotsMods": {
                 "ExtraAction": {
-                    "Key":"ActiveExtraAction",
-                    "DisplayName":"Actions",
-                    "Count": 1,
-                    "FilterData":{
-                        "RequiredTags":"Action"
-                    }
+                    "ItemHolder": "Supplies",
+                    "AddedSlotSets": [
+                        {
+                            "Key": "ActiveExtraAction",
+                            "DisplayName": "Actions",
+                            "Count": 1,
+                            "FilterData": {
+                                "RequiredTags": "Action"
+                            }
+                        }
+                    ]
                 }
             }
         },
@@ -752,13 +744,13 @@
                 "IncompatiblePages": [],
                 "TitleReq": "None"
             },
-            "ExtraPageSlots":{
+            "ExtraPageSlots": {
                 "ExtraPassive": {
-                    "Key":"RedundantExtraPassive",
-                    "DisplayName":"Passives",
+                    "Key": "RedundantExtraPassive",
+                    "DisplayName": "Passives",
                     "Count": 1,
-                    "FilterData":{
-                        "RequiredTags":"Passive"
+                    "FilterData": {
+                        "RequiredTags": "Passive"
                     }
                 }
             }
@@ -796,7 +788,7 @@
                 "IncompatiblePages": [],
                 "TitleReq": "None"
             },
-            "StatMods":{
+            "StatMods": {
                 "PPRMod": {
                     "ModType": "Add",
                     "StatName": "PPR",

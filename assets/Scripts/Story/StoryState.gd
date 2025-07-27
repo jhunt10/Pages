@@ -83,7 +83,7 @@ func start_new_story():
 	story_id = "Story:" + str(ResourceUID.create_id())
 	var player_actor_keys = [#"SlimeBasic", 
 		#"SlimePoison", "BaseSquirrel", "Squirrcerer", "Squirrior"]
-								"SoldierTemplate", "RogueTemplate", "MageTemplate", "PriestTemplate"]
+								"Skeleton", "ZombieBasic"]#, SoldierTemplate"RogueTemplate", "MageTemplate", "PriestTemplate"]
 	for i in range(player_actor_keys.size()):
 		var player_id = "Player_" + str(i) + ":" + str(ResourceUID.create_id())
 		var _new_player = ActorLibrary.create_actor(player_actor_keys[i], {}, player_id)
@@ -94,7 +94,7 @@ func start_new_story():
 	var has_pages = []
 	for actor:BaseActor in list_party_actors():
 		has_pages.append_array(actor.pages.list_page_keys())
-	for item_key:String in ItemLibrary.Instance._static_objects.keys():
+	for item_key:String in ItemLibrary.list_all_item_keys():
 		if has_pages.has(item_key):
 			continue
 		var item = ItemLibrary.get_item(item_key)

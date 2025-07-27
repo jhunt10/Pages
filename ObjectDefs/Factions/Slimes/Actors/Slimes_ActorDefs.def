@@ -3,16 +3,14 @@
         "!ObjectScript": "res://assets/Scripts/Actors/BaseActor.gd",
         "!ParentKey": "#BaseActor",
         "#ObjDetails": {
-            "Description": "@@#Color:Red:Slimes@@ are gelatinous blobs of biological paradoxes with no discernible sensory organs, digestive system, or really anything resembling \"anotomy\". It was once belived thier lack of eyes should render them @@#EftDef:AilmentBlind:Link@@. But instead it seems the @@#Color:Blue:PAGE@@ System interprets them as possesing perfect @@#Stat:Awareness@@ due to not having a @@#Color:Red:Front@@ or @@#Color:Red:Back@@. Similarly, their maliable forms have no measurable amount of @@#Stat:Armor@@, yet still demonstrate high @@#Tag:Resistant@@ to all forms of @@#Tag:Physical@@ damage. Dispite these abnormalities, researchers have been able to prove that @@#Color:Red:Slimes@@ will die if stabbed enough and thus, meet the scientific definition of \"Life\".",
+            "Description": "@@#Color:Red:Slimes@@ are gelatinous blobs of biological paradoxes with no discernible sensory organs, digestive system, or really anything resembling \"anotomy\". It was once belived thier lack of eyes should render them @@#EftDef:AilmentBlind:Link@@. But instead it seems the @@#Color:Blue:PAGE@@ System interprets this as perfect @@#Stat:Awareness@@ due to errors in registering a @@#Color:Red:Front@@ or @@#Color:Red:Back@@. Similarly, their malleable  forms have no measurable amount of @@#Stat:Armor@@, yet still demonstrate high @@#Tag:Resistant@@ to all forms of @@#Tag:Physical@@ damage. Dispite these abnormalities, researchers have been able to prove that @@#Color:Red:Slimes@@ will die if stabbed enough and thus, meet the scientific definition of \"Life\". But, the councile still does not grant them the @@#Color:Blue:Tag@@ of @@#Tag:Living@@.",
             "DisplayName": "Slime",
             "LargeIcon": "Sprites/BlueSlime_Icon.png",
             "ObjectType": "Actor",
             "SmallIcon": "Sprites/BlueSlime_Icon.png",
             "SnippetDesc": "A slime.",
             "Tags": [
-                "Slime",
-                "Living",
-                "Creature"
+                "Slime"
             ],
             "Taxonomy": [
                 "Actor"
@@ -85,7 +83,7 @@
             "PhyAttack": 10,
             "Awareness": 5,
             "MinStat:Awareness":5,
-            "Resistance:Light": 50,
+            "Resistance:Light": 0,
             "Resistance:Poison": 100,
 			"Resistance:Slash": 80,
 			"Resistance:Blunt": 80,
@@ -104,9 +102,7 @@
             "SmallIcon": "Sprites/GreenSlime_Icon.png",
             "SnippetDesc": "A slime.",
             "Tags": [
-                "Slime",
-                "Living",
-                "Creature"
+                "Slime"
             ],
             "Taxonomy": [
                 "Actor"

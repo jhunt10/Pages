@@ -1,0 +1,118 @@
+{
+    "Undead_PageBook": {
+        "!ObjectScript": "res://assets/Scripts/Items/Equipment/BaseQueEquipment.gd",
+        "#ObjDetails": {
+            "Description": "A small binder with plenty of space for holding calendars, grudges, and to-do list. Great for organizing personal notes and unfished business.",
+            "DisplayName": "Necro Planner",
+            "LargeIcon": "Sprites/UndeadBook.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/UndeadBook.png",
+            "SnippetDesc": "Day planner of the Dead.",
+            "Tags": [
+                "PageBook"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Equipment",
+                "PageBook"
+            ]
+        },
+        "BookData": {
+            "BaseActionCount": 5,
+            "BasePassiveCount": 4,
+            "PagesPerRound": 4
+        },
+        "EquipmentData": {
+            "ItemSlotsData": []
+        },
+        "ItemData": {
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "_DefVersion": "1"
+    },
+    "ZombieClothes_BodyApparel": {
+        "!ObjectScript": "res://assets/Scripts/Items/Equipment/BaseApparelEquipment.gd",
+        "#ObjDetails": {
+			"DisplayName": "Zombie Shirt",
+			"SnippetDesc": "A Zombie's shirt.",
+			"Description": "A simple cloth shirt proven to provide no protection from @@#Color:Red:Zombie@@ attacks.",
+			"LargeIcon":"Sprites/ZombieShirt_Icon.png",
+			"SmallIcon":"Sprites/ZombieShirt_Icon.png",
+            "Tags": [
+                "Equipment",
+                "Armor",
+                "Body"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Equipment",
+                "Apparel"
+            ]
+        },
+        "EquipmentData": {
+            "EquipSlot": "Body",
+            "Requirments": {
+            },
+            "SpriteData": {
+                "SpriteSheet":"SpriteSheets/ZombieShirt_SpriteSheet.png"
+            }
+        },
+        "ApparelData":{
+            "ProvidedArmor": 0,
+            "ProvidedWard": 0,
+            "ApparelClass": "LightArmor",
+            "StatMods": {
+            }
+        },
+        "ItemData": {
+            "Rarity": "Mundane",
+            "Value": 50
+        },
+        "_DefVersion": "1"
+    },
+    "ZombieClothes_LegApparel": {
+        "!ObjectScript": "res://assets/Scripts/Items/Equipment/BaseApparelEquipment.gd",
+        "#ObjDetails": {
+			"DisplayName": "Zombie Pants",
+			"SnippetDesc": "A Zombie's pants.",
+			"Description": "Simple cloth pants with one leg torn. Someone definatly died in these.",
+			"LargeIcon":"Sprites/ZombiePants_Icon.png",
+			"SmallIcon":"Sprites/ZombiePants_Icon.png",
+            "Tags": [
+                "Equipment",
+                "Armor",
+                "Feet"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Equipment",
+                "Apparel"
+            ]
+        },
+        "EquipmentData": {
+            "EquipSlot": "Feet",
+            "Requirments": {
+                "ReqStats": {
+                    "Strength": 0
+                }
+            },
+            "SpriteData": {
+                "SpriteSheet":"SpriteSheets/ZombiePants_SpriteSheet.png"
+            }
+        },
+        "ApparelData":{
+            "ProvidedArmor": 0,
+            "ProvidedWard": 0,
+            "ApparelClass": "LightArmor",
+            "StatMods": {
+            }
+        },
+        "ItemData": {
+            "Rarity": "Mundane",
+            "Value": 50
+        },
+        "_DefVersion": "1"
+    },
+
+}

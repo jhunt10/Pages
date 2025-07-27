@@ -1,15 +1,12 @@
 class_name PageHolder
 extends BaseItemHolder
 
-signal class_page_changed
-
-var page_que_item_id
 var item_id_to_effect_id:Dictionary = {}
-var _page_id_to_extra_slots:Dictionary = {}
 
+var cached_page_book_item_id
 
-func _debug_name()->String:
-	return "PageHolder"
+func get_holder_name()->String:
+	return "Pages"
 
 func _init(actor) -> void:
 	super(actor)
@@ -25,46 +22,24 @@ func _load_slots_sets_data()->Array:
 			"RequiredTags":"Title"
 		}
 	}]
-	if page_que_item_id:
-		if LOGGING: print("--PageItemQue: %s" % [page_que_item_id])
-		var page_que = ItemLibrary.get_item(page_que_item_id)
-		if page_que:
-			out_list = page_que.get_page_slot_data()
-		else:
-			if LOGGING: print("--PageItemQue not found")
-	_page_id_to_extra_slots.clear()
-	for page:BasePageItem in list_items():
-		var extra_page_slots = page.get_extra_page_slots()
-		if extra_page_slots.values().size() > 0:
-			out_list.append_array(extra_page_slots.values())
-			_page_id_to_extra_slots[page.Id] = extra_page_slots
-		
-	#for effect:BaseEffect in _actor.effects.list_effects():
-		#if LOGGING: print("Checking Effect: %s" % [effect.get_display_name()] )
-		#var extra_pages_data = effect.get_load_val("ExtraPageSlotsData", [])
-		#if extra_pages_data.size() > 0:
-			#out_list.append_array(extra_pages_data)
-	if out_list.size() == 0:
-		
-		if LOGGING: print("--No Slots, Checking Actor Def Default")
-		var defaults = _actor.get_load_val("DefaultPageSlotSet")
-		if defaults:
-			return defaults
+	var page_book_item:BaseQueEquipment = _actor.equipment.get_que_equipment()
+	if page_book_item:
+		cached_page_book_item_id = page_book_item.Id
+		if LOGGING: print("--PageItemQue: %s" % [page_book_item.Id])
+		out_list.append_array(page_book_item.get_page_slot_data())
+	else:
+		if LOGGING: print("--PageItemQue not found")
+		cached_page_book_item_id = null
+		#if LOGGING: print("--Page Book Slots, Checking Actor Def Default")
+		#var defaults = _actor.get_load_val("DefaultPageSlotSet")
+		#if defaults:
+			#out_list.append(defaults)
 	if LOGGING: print("-Loaded Page Slots: %s" % [JSON.stringify(out_list)])
 	return out_list
-
-func set_page_que_item(page_que:BaseQueEquipment, validate_items:bool=true):
-	if page_que:
-		page_que_item_id = page_que.Id
-	else:
-		page_que_item_id = null
-	if validate_items:
-		validate_items()
 
 func validate_items():
 	super()
 	_cache_action_mods()
-	class_page_changed.emit()
 
 func build_effects():
 	for page_id in item_id_to_effect_id.keys():
@@ -197,17 +172,11 @@ func _on_item_added_to_slot(item:BaseItem, index:int):
 			var effect_key = effect_def.get("EffectKey")
 			var new_effect = EffectHelper.create_effect(_actor, item, effect_key, effect_def)
 			item_id_to_effect_id[item.Id] = new_effect.Id
-	if page.get_extra_page_slots().size() > 0:
-		_build_slots_list()
 	_cache_action_mods()
-	class_page_changed.emit()
 
 func _on_item_removed(item_id:String, supressing_signals:bool):
 	if item_id_to_effect_id.keys().has(item_id):
 		var effect = EffectLibrary.get_effect(item_id_to_effect_id[item_id])
 		_actor.effects.remove_effect(effect)
 		item_id_to_effect_id.erase(item_id)
-	if _page_id_to_extra_slots.keys().has(item_id):
-		_build_slots_list()
 	_cache_action_mods()
-	class_page_changed.emit()

@@ -21,8 +21,8 @@ func sync_labels():
 	var button_scene = load("res://Scenes/Menus/CharacterMenu/PlayerTabs/player_tab_button.tscn")
 	for actor in StoryState.list_party_actors():
 		var new_button:PlayerTabButton = button_scene.instantiate()
-		if not actor.pages.class_page_changed.is_connected(sync_labels):
-			actor.pages.class_page_changed.connect(sync_labels)
+		if not actor.pages.items_changed.is_connected(sync_labels):
+			actor.pages.items_changed.connect(sync_labels)
 		var title_page:BasePageItem = actor.pages.get_item_in_slot(0)
 		if title_page:
 			new_button.button_label.text = title_page.get_display_name()

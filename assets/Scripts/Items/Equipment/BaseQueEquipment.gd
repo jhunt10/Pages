@@ -38,17 +38,21 @@ func get_passive_stat_mods()->Array:
 func get_page_slot_data()->Array[Dictionary]:
 	if _cached_slots_data.size() == 0:
 		_cached_slots_data = [
-			{
-				"Key":"TitlePage",
-				"DisplayName":"Title Page",
-				"Count": 1,
-				"FilterData":{
-					"RequiredTags":"Title"
-				}
-			},
+			#{
+				#"Key":"TitlePage",
+				#"DisplayName":"Title Page",
+				#"SourceItemType": "Equipment",
+				#"SourceItemId": Id,
+				#"Count": 1,
+				#"FilterData":{
+					#"RequiredTags":"Title"
+				#}
+			#},
 			{
 				"Key":"BasePassives",
 				"DisplayName":"Passives",
+				"SourceItemType": "Equipment",
+				"SourceItemId": Id,
 				"Count": book_data.get("BasePassiveCount", 0),
 				"FilterData":{
 					"RequiredTags":["Passive"]
@@ -57,6 +61,8 @@ func get_page_slot_data()->Array[Dictionary]:
 			{
 				"Key":"BaseActions",
 				"DisplayName":"Actions",
+				"SourceItemType": "Equipment",
+				"SourceItemId": Id,
 				"Count": book_data.get("BaseActionCount", 0),
 				"FilterData":{
 					"RequiredTags":["Action"]
@@ -64,6 +70,8 @@ func get_page_slot_data()->Array[Dictionary]:
 			}
 		]
 		for extra_slot in equipment_data.get("ItemSlotsData", []):
+			if not extra_slot.keys().has("SourceItemId"):
+				extra_slot["SourceItemId"] = self.Id
 			_cached_slots_data.append(extra_slot)
 	return _cached_slots_data.duplicate()
 	

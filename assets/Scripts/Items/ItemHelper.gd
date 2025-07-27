@@ -95,6 +95,8 @@ static func try_transfer_item_from_inventory_to_holder(source_item:BaseItem, hol
 	if LOGGING: 
 		print("ItemHlp: Transfer %s from INV to slot %s on %s" % [source_item.ItemKey, slot_index, holder._actor.Id])
 	
+	var transaction_data = {"AddedItemIds": [], "RemovedItemIds": []}
+	
 	## Tools require special logic since they can auto-switch hands
 	if holder is EquipmentHolder and (holder as EquipmentHolder).list_all_hand_indexes().has(slot_index):
 		slot_index = (holder as EquipmentHolder).get_auto_hand_index(source_item, slot_index, allow_replace)
@@ -107,6 +109,7 @@ static func try_transfer_item_from_inventory_to_holder(source_item:BaseItem, hol
 	if !inv_item:
 		print("Item not found")
 		return "Item not found"
+	transering_items.append(inv_item.Id)
 	if not holder.can_set_item_in_slot(inv_item, slot_index, allow_replace):
 		PlayerInventory.add_item(inv_item)
 		print("Invalid Item Slot")
@@ -114,7 +117,8 @@ static func try_transfer_item_from_inventory_to_holder(source_item:BaseItem, hol
 	
 	# Dirrectly set the item into slot
 	holder._direct_set_item_in_slot(slot_index, inv_item)
-		
+	transaction_data["AddedItemIds"].append(inv_item.Id)
+	# This shouldn't be possible
 	if not holder.has_item(inv_item.Id):
 		PlayerInventory.add_item(inv_item)
 		# Check if old item was lost, add to inv if so (very bad state)
@@ -124,13 +128,16 @@ static func try_transfer_item_from_inventory_to_holder(source_item:BaseItem, hol
 		print( "Set item failed")
 		return "Set item failed"
 	
-	holder._on_item_added_to_slot(inv_item, slot_index)
 	for old_item in old_items:
 		if old_item and not holder.has_item(old_item.Id):
 			holder._on_item_removed(old_item.Id, true)
+			transaction_data["RemovedItemIds"].append(old_item.Id)
 			PlayerInventory.add_item(old_item)
 	
-	holder._actor._on_equipment_holder_items_change()
+	holder._on_item_added_to_slot(inv_item, slot_index)
+	holder._actor.on_held_items_change(holder.get_holder_name(), {})
+	
+	# Remove item from transfer list
 	var transering_item_index = transering_items.find(inv_item.Id)
 	if transering_item_index >= 0:
 		transering_items.remove_at(transering_item_index)

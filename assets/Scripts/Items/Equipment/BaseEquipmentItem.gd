@@ -4,7 +4,7 @@ extends BaseItem
 
 var equipment_data:Dictionary:
 	get:
-		return _def.get("EquipmentData", {})
+		return get_load_val("EquipmentData", {})
 
 func get_item_type()->ItemTypes:
 	return ItemTypes.Equipment

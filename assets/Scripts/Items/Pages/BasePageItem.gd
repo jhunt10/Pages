@@ -44,9 +44,6 @@ func is_shareble()->bool:
 func get_tags_added_to_actor()->Array:
 	return page_data.get("AddTags", [])
 
-func get_extra_page_slots()->Dictionary:
-	return page_data.get("ExtraPageSlots", {})
-
 ## Returns a diction of failed requirements, mapped by requirment type 
 func get_cant_use_reasons(actor:BaseActor):
 	var requirment_data = page_data.get("PageRequirements", {})

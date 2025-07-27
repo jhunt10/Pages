@@ -1,0 +1,164 @@
+{
+    "Skeleton": {
+        "!ObjectScript": "res://assets/Scripts/Actors/BaseActor.gd",
+        "!ParentKey": "#BaseHumanoid",
+        "#ObjDetails": {
+            "Description": "A spooky spooky @@#Color:Red:Skeleton@@ raised from the dead. This form of reanimation accounts for a lack of viable muscle tissue by refocusing on the dirrect manipulation of bone. This results in an @@#Tag:Undead@@ that is physically weaker, but has the @@#StatName:Agility@@ required to use @@#Tag:Ranged:Ranged Weapons@@. While some may view them as nightmarish feinds, I like to belive there's a @@#Color:Red:Skeleton@@ inside us all.",
+            "DisplayName": "Skeleton",
+            "LargeIcon": "Sprites/Skeleton_Icon.png",
+            "ObjectType": "Actor",
+            "SmallIcon": "Sprites/Skeleton_Icon.png",
+            "SnippetDesc": "A Skeleton",
+            "Tags": [],
+            "Taxonomy": [
+                "Actor"
+            ]
+        },
+        "SpriteSheet": "SpriteSheets/Skeleton_SpriteSheet.png",
+        "Stats": {
+            "Agility": 0,
+            "Strength": 0,
+            "Intelligence": 0,
+            "Wisdom": 0,
+            "Level": 0,
+            "Accuracy": 100,
+            "AggroMod": 1,
+            "Awareness": 0,
+            "HealthMax": 100,
+            "BlocksLOS": 0,
+            "CrashPower": 20,
+            "CritChance": 5,
+            "CritMod": 1.5,
+            "Evasion": 1,
+            "MagAttack": 0,
+            "Mass": 0,
+            "OffHandMod": 0.5,
+            "PPR": 0,
+            "PhyAttack": 0,
+            "Potency": 100,
+            "Protection": 1,
+            "Resistance:Light": -50,
+            "Resistance:Dark": 150,
+            "Resistance:Poison": 100,
+			"Resistance:Slash": 50,
+			"Resistance:Blunt": 150,
+			"Resistance:Pierce": 50,
+			"Resistance:Crash": 150,
+            "Speed": 0,
+            "TwoHandMod": 1.2
+        },
+        "SpawnEquipmentArr": [
+            "Undead_PageBook",
+            "OldBow"
+        ],
+        "SpawnItemArr": [
+        ],
+        "SpawnPageArr": [
+            "Skeleton_TitlePage",
+            "MoveForward",
+            "TurnLeft",
+            "TurnRight",
+            "BasicWeaponAttack",
+            "ReloadPage"
+        ],
+        "UnarmedAttackData": {
+            "DamageDatas": {
+                "UnarmedDamage": {
+                    "AtkPower": 20,
+                    "AtkStat": "PhyAttack",
+                    "DamageType": "Blunt",
+                    "DamageVarient": 0.5,
+                    "DamageVfxKey": "Blunt_DamageEffect",
+                    "DefenseType": "Physical",
+                    "DisplayName": "Punch",
+                    "FixedBaseDamage": null
+                }
+            },
+            "TargetParams": {
+                "LineOfSight": true,
+                "TargetArea": "[[-1,0],[-1,1],[0,1],[1,1],[1,0]]",
+                "TargetType": "Actor"
+            }
+        },
+        "_DefVersion": "1"
+    },
+    "ZombieBasic": {
+        "!ObjectScript": "res://assets/Scripts/Actors/BaseActor.gd",
+        "!ParentKey": "#BaseHumanoid",
+        "#ObjDetails": {
+            "Description": "A common form of @@#Tag:Undead@@ created through the reanimation of a @@#Color:Red:Corpse@@. @@#Color:Red:Zombies@@ are peaceful and docile beings almost never resorting to violence, except towards all living creatures whom they will relentlessly attack on sight. They have an innate love of helicopters, gleefully chasing after any they see fly by. But sadly, no one ever let's them ride in one.",
+            "DisplayName": "Zombie",
+            "LargeIcon": "Sprites/Zombie_Icon.png",
+            "ObjectType": "Actor",
+            "SmallIcon": "Sprites/Zombie_Icon.png",
+            "SnippetDesc": "Zombie",
+            "Tags": [],
+            "Taxonomy": [
+                "Actor"
+            ]
+        },
+        "SpawnEquipmentArr": [
+            "Undead_PageBook",
+            "ZombieClothes_BodyApparel",
+            "ZombieClothes_LegApparel"
+        ],
+        "SpawnItemArr": [
+        ],
+        "SpawnPageArr": [
+            "Zombie_TitlePage",
+            "MoveForward",
+            "TurnLeft",
+            "TurnRight",
+            "BasicWeaponAttack",
+            "ReloadPage"
+        ],
+        "SpriteSheet": "SpriteSheets/Zombie_SpriteSheet.png",
+        "Stats": {
+            "Agility": 0,
+            "Strength": 0,
+            "Intelligence": 0,
+            "Wisdom": 0,
+            "Level": 0,
+            "Accuracy": 100,
+            "AggroMod": 1,
+            "Awareness": 0,
+            "HealthMax": 100,
+            "BlocksLOS": 0,
+            "CrashPower": 20,
+            "CritChance": 5,
+            "CritMod": 1.5,
+            "Evasion": 1,
+            "MagAttack": 0,
+            "Mass": 0,
+            "OffHandMod": 0.5,
+            "PPR": 0,
+            "PhyAttack": 0,
+            "Potency": 100,
+            "Protection": 1,
+            "Resistance:Light": -50,
+            "Resistance:Dark": 150,
+            "Speed": 0,
+            "TwoHandMod": 1.2
+        },
+        "UnarmedAttackData": {
+            "DamageDatas": {
+                "UnarmedDamage": {
+                    "AtkPower": 20,
+                    "AtkStat": "PhyAttack",
+                    "DamageType": "Blunt",
+                    "DamageVarient": 0.5,
+                    "DamageVfxKey": "Blunt_DamageEffect",
+                    "DefenseType": "Physical",
+                    "DisplayName": "Punch",
+                    "FixedBaseDamage": null
+                }
+            },
+            "TargetParams": {
+                "LineOfSight": true,
+                "TargetArea": "[[-1,0],[-1,1],[0,1],[1,1],[1,0]]",
+                "TargetType": "Actor"
+            }
+        },
+        "_DefVersion": "1"
+    }
+}

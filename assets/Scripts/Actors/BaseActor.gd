@@ -71,10 +71,8 @@ func _init(key:String, load_path:String, def:Dictionary, id:String, data:Diction
 	effects = EffectHolder.new(self)
 	#details = ObjectDetailsData.new(_def_load_path, _def.get("#ObjDetails", {}))
 	equipment = EquipmentHolder.new(self)
-	equipment.items_changed.connect(_on_equipment_holder_items_change)
 	items = BagItemHolder.new(self)
 	pages = PageHolder.new(self)
-	pages.class_page_changed.connect(_on_page_holder_items_change)
 	
 	# Que requires info from Pages and Equipment so must be inited after item validation
 	Que = ActionQue.new(self)
@@ -141,23 +139,49 @@ func _on_stat_change():
 func _on_health_change():
 	health_changed.emit()
 
+###################################
+#######   Item Management   #######
+###################################
+var hold_item_validation:bool = false
+var items_changed_since_validated:Dictionary = {"Pages":[], "Equipment":[], "Supplies":[]}
+## Called internally by holder
+func on_item_added_to_holder(holder:BaseItemHolder, item:BaseItem, slot_index:int):
+	var change_list = items_changed_since_validated.get(holder.get_holder_name(), [])
+	if change_list == null:
+		printerr("BaseActor.on_item_added_to_holder: Unknown ItemHolder '%s'." % [holder.get_holder_name()])
+	elif not change_list.has(item.Id):
+		change_list.append(item.Id)
+	if not hold_item_validation:
+		check_for_validation_changes()
+
+func on_item_removed_from_holder(holder:BaseItemHolder, item:BaseItem):
+	on_item_added_to_holder(holder, item, -1)
+
+func check_for_validation_changes():
+	var slots_changed = false
+	var stats_changed = false
+	#for item
+
 var suppress_equipment_changed:bool = false
 func _on_equipment_holder_items_change():
+	print("Equipment Changed for %s" % [self.Id])
+	var book = equipment.get_que_equipment()
+	if ((book != null and pages.cached_page_book_item_id != book.Id)
+		or (book == null and pages.cached_page_book_item_id != null)):
+		pages._build_slots_list()
 	var bag = equipment.get_bag_equipment()
-	if not bag and items.bag_item_id != null:
-		items.set_bag_item(null)
-	if bag and items.bag_item_id != bag.Id:
-		items.set_bag_item(bag)
-		
-	var page_que = equipment.get_que_equipment()
-	if not page_que and pages.page_que_item_id != null:
-		pages.set_page_que_item(null)
-	if page_que and pages.page_que_item_id != page_que.Id:
-		pages.set_page_que_item(page_que)
+	if ((bag != null and items.cached_bag_item_id != bag.Id)
+		or (bag == null and items.cached_bag_item_id != null)):
+		items._build_slots_list()
+	#var page_que = equipment.get_que_equipment()
+	#if not page_que and pages.page_que_item_id != null:
+		#pages.set_page_que_item(null)
+	#if page_que and pages.page_que_item_id != page_que.Id:
+		#pages.set_page_que_item(page_que)
 	
 	if not suppress_equipment_changed:
-		self.equipment_changed.emit()
 		self.stats.recache_stats()
+		self.equipment_changed.emit()
 		Que.rechache_page_ammo()
 
 func _on_page_holder_items_change():
@@ -166,6 +190,22 @@ func _on_page_holder_items_change():
 	Que.rechache_page_ammo()
 	#if not suppress_equipment_changed:
 		#self.equipment_changed.emit()
+
+func on_held_items_change(item_holder_name:String, change_data:Dictionary):
+	var holder:BaseItemHolder = null
+	if item_holder_name == equipment.get_holder_name():
+		holder = equipment
+	elif item_holder_name == pages.get_holder_name():
+		holder = pages
+	elif item_holder_name == items.get_holder_name():
+		holder = items
+	else:
+		printerr("Actor.on_held_items_change: Unknown Holder Name '%s'." % [item_holder_name])
+	
+	var added_item_ids = change_data.get("AddedItemIds", [])
+	var revmoed_item_ids = change_data.get("RemovedItemIds", [])
+	sprite._build_sprite_sheet()
+	equipment_changed.emit()
 
 func save_me()->bool:
 	return self.is_player
@@ -191,22 +231,50 @@ func load_data(loading_data:Dictionary):
 	var page_data = loading_data['Pages']
 	loading_data.erase('Pages')
 	pages.load_save_data(page_data)
-	var que_item = equipment.get_que_equipment()
-	pages.set_page_que_item(que_item, false)
 	
 	var bag_data = loading_data['BagItems']
 	loading_data.erase('BagItems')
 	items.load_save_data(bag_data)
-	var bag_item = equipment.get_bag_equipment()
-	items.set_bag_item(bag_item)
 	
-	pages.build_effects()
+	pages._build_slots_list()
+	equipment._build_slots_list()
+	items._build_slots_list()
 	
-	suppress_equipment_changed = false
-	equipment.validate_items()
+	validate_itemholders()
+
+func build_spawned_with_items():
+	equipment._build_slots_list()
+	var equipment_list = get_load_val("SpawnEquipmentArr", [])
+	_build_spawn_items(equipment_list, equipment)
+	
+	pages._build_slots_list()
+	items._build_slots_list()
+	var page_list = get_load_val("SpawnPageArr", [])
+	_build_spawn_items(page_list, pages)
+	var item_list = get_load_val("SpawnItemArr", [])
+	_build_spawn_items(item_list, items)
+	
+	validate_itemholders()
+	
+
+func _build_spawn_items(item_list:Array, holder:BaseItemHolder):
+	for item_key in item_list:
+		if item_key == '':
+			continue
+		var item = ItemLibrary.create_item(item_key, {}, "")
+		if not item:
+			printerr("Actor.build_spawned_with_items: Failed to create item with key '%s'." % [item_key])
+			continue
+		var slot = holder.get_first_valid_slot_for_item(item, false)
+		if slot >= 0:
+			holder._direct_set_item_in_slot(slot, item)
+			print("Spawned Item '%s' into slot %s." % [item.Id, slot])
+	
+
+func validate_itemholders():
 	pages.validate_items()
+	equipment.validate_items()
 	items.validate_items()
-	stats.dirty_stats()
 
 func clean_state():
 	self.is_dead = false
@@ -357,6 +425,24 @@ func get_damage_mods()->Dictionary:
 		mod_data['SourceActorFaction'] = FactionIndex
 		out_dict[mod_id] = mod_data
 	return out_dict
+
+func get_item_slot_mods_for_holder(holder_name:String)->Dictionary:
+	var out_dict = { "Equipment": {}, "Pages":{}, "Supplies":{} }
+	var item_list = []
+	item_list.append_array(pages.list_items())
+	item_list.append_array(equipment.list_items())
+	item_list.append_array(items.list_items())
+	for item:BaseItem in pages.list_items():
+		var added_slots = item.get_item_slots_mods()
+		for key:String in added_slots.keys():
+			var slot_set_data = added_slots[key]
+			var modded_holder = slot_set_data.get("ItemHolder")
+			if not out_dict.keys().has(modded_holder):
+				printerr("Unknown ItemHolder '%s' on ItemSlotMod '%s'." % [modded_holder, key])
+				continue
+			out_dict[modded_holder][key] = slot_set_data
+	return out_dict.get(holder_name, {})
+	
 
 func get_ammo_mods()->Dictionary:
 	var out_dict = {}

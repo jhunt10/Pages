@@ -7,8 +7,8 @@ var _is_unarmed:bool = false
 var _is_two_handing:bool = false
 var _is_dual_handing:bool = false
 
-func _debug_name()->String:
-	return "EquipmentHolder"
+func get_holder_name()->String:
+	return "Equipment"
 
 func _init(actor) -> void:
 	super(actor)
@@ -76,7 +76,7 @@ func _load_slots_sets_data()->Array:
 
 
 func validate_items():
-	_build_slots_list()
+	super()
 	auto_order_hand_items()
 
 func list_equipment()->Array:
@@ -120,6 +120,13 @@ func get_slot_equipment_type(index:int)->String:
 ########################
 ##     Hand Logic     ##
 ########################
+func get_first_valid_slot_for_item(item:BaseItem, allow_replace:bool=false)->int:
+	if item is BaseToolEquipment:
+		var main_hand_index = get_first_hand_index()
+		var auto_index = get_auto_hand_index(item, main_hand_index, allow_replace)
+		return auto_index
+	return super(item, allow_replace)
+
 func get_first_hand_index()->int:
 	var index = _slot_set_key_mapping.find("Hands")
 	if index < 0:
@@ -239,6 +246,7 @@ func _on_item_removed(item_id:String, supressing_signals:bool):
 
 # Correct for toosl in hands and set HandStates after some change
 func auto_order_hand_items(): 
+	if LOGGING: print("AutoOrdering Hand Slots")
 	# Skip Logic if one/no hands
 	if _hand_count <= 1:
 		return
@@ -256,8 +264,7 @@ func auto_order_hand_items():
 				if _can_use_tool_in_mainhand(item_in_offhand):
 					# Move fist found/valid OffHand item to MainHand
 					_raw_item_slots[mainhand_index] = _raw_item_slots[i]
-					#TODO: Instea of nulling out _raw_slots, do an invaid items cache
-					_raw_item_slots[i] = null
+					_slot_validation_states[i] = ValidStates.Unacceptable
 					break
 	# MainHand Item should not be in MainHand
 	elif not _can_use_tool_in_mainhand(mainhand_item):
@@ -272,8 +279,7 @@ func auto_order_hand_items():
 	for offhand_index in list_offhand_indexes():
 		var offhand_item = get_item_in_slot(offhand_index)
 		if offhand_item and not _can_use_tool_in_offhand(offhand_item):
-			#TODO: Instea of nulling out _raw_slots, do an invaid items cache
-			_raw_item_slots[offhand_index] = null
+			_slot_validation_states[offhand_index] = ValidStates.Unacceptable
 	
 	# Clear out HandStates
 	_is_unarmed = false
@@ -291,8 +297,7 @@ func auto_order_hand_items():
 			#TODO: Assuming 2Hands
 			# Clear any offhands
 			for offhand_index in list_offhand_indexes():
-				#TODO: Instea of nulling out _raw_slots, do an invaid items cache
-				_raw_item_slots[offhand_index] = null
+				_slot_validation_states[offhand_index] = ValidStates.Unacceptable
 			_is_two_handing = true
 		
 		# MainHand Item could be two handed

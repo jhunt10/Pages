@@ -61,18 +61,27 @@ func get_cant_use_reasons(actor:BaseActor):
 func get_data_containing_mods()->Dictionary:
 	return item_data
 
-func _get__mods(mod_prefix:String)->Dictionary:
+func _get__mods(mod_prop_name:String)->Dictionary:
 	var sub_data = get_data_containing_mods()
-	var mod_datas:Dictionary = sub_data.get(mod_prefix + "Mods", {})
+	var mod_datas:Dictionary = sub_data.get(mod_prop_name, {})
 	var out_dict = {}
+	var key_prop_name = mod_prop_name + "Key"
+	if mod_prop_name.ends_with("Mods"):
+		key_prop_name = mod_prop_name.trim_suffix("s") + "Key"
+	
 	for mod_key in mod_datas.keys():
 		var mod_data = mod_datas[mod_key]
-		if mod_data.has(mod_prefix+"ModKey"):
-			mod_key = mod_data[mod_prefix+'ModKey']
+		if mod_data.has("Key"):
+			mod_key = mod_data['Key']
+			mod_data.erase("Key")
+			mod_data[mod_prop_name] = mod_key
+		elif mod_data.has(key_prop_name):
+			mod_key = mod_data[key_prop_name]
 		else:
-			mod_data[mod_prefix+'ModKey'] = mod_key
+			mod_data[key_prop_name] = mod_key
 		if not mod_data.has("DisplayName"):
 			mod_data['DisplayName'] = self.get_display_name()
+			mod_data['SourceItemId'] = self.Id
 		
 		out_dict[mod_key] = mod_data
 	return out_dict
@@ -84,20 +93,24 @@ func get_passive_stat_mods()->Array:
 	for mod_data in stat_mod_datas.values():
 		if not mod_data.has("DisplayName"):
 			mod_data['DisplayName'] = self.get_display_name()
+			mod_data['SourceItemId'] = self.Id
 		out_list.append(BaseStatMod.create_from_data(Id, mod_data))
 	return out_list
 
+func get_item_slots_mods()->Dictionary:
+	return _get__mods("ItemSlotsMods")
+
 func get_target_mods()->Array:
-	return _get__mods("Target").values()
+	return _get__mods("TargetMods").values()
 
 func get_ammo_mods()->Dictionary:
-	return _get__mods("Ammo")
+	return _get__mods("AmmoMods")
 	
 func get_attack_mods()->Dictionary:
-	return _get__mods("Attack")
+	return _get__mods("AttackMods")
 	
 func get_damage_mods()->Dictionary:
-	return _get__mods("Damage")
+	return _get__mods("DamageMods")
 	
 func get_weapon_mods()->Dictionary:
-	return _get__mods("Weapon")
+	return _get__mods("WeaponMods")

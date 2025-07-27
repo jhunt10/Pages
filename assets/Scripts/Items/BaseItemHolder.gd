@@ -1,11 +1,10 @@
 ## Base class for Equipment, items, and BagItem Holders
 class_name BaseItemHolder
 
-# Use Actor.bag_items_changed
-#signal items_changed
+const LOGGING = true
+enum ValidStates {UnValidated, Valid, Invalid, Unacceptable}
 
-const LOGGING = false
-
+# Unused / Outdated signal left behind because I don't want to fix Character Sheet right now
 signal items_changed
 signal item_slots_rebuilt
 
@@ -19,12 +18,17 @@ var _item_slot_sets_datas:Array=[]
 var _slot_set_key_mapping:Array=[]
 ## Array of ItemIds for that item slot
 var _raw_item_slots:Array=[]
+## Array of ValidStates for each _raw_slot
+var _slot_validation_states:Array = []
 ## Array of Dictionaries holding slot set meta data for that item slot 
 ## {"SlotSetIndex":slot_set_index, "SlotSetKey":slot_key, "SubIndex":sub_index}
 var _raw_to_slot_set_mapping:Array=[]
 var _actor:BaseActor
 
-func _debug_name()->String:
+## Array Item Id for for items providing of Slot Mods
+var _slot_mod_source_item_ids:Array = [] 
+
+func get_holder_name()->String:
 	return "BaseItemHolder"
 
 func _init(actor:BaseActor) -> void:
@@ -64,71 +68,121 @@ func _load_slots_sets_data()->Array:
 func _on_item_loaded(Item:BaseItem):
 	pass
 
-func validate_items():
-	if LOGGING: print("Validating Itemes for %s : %s" % [_actor.Id, _debug_name()])
-		
-	var backup_slots = _raw_item_slots.duplicate()
-	_build_slots_list()
-	_raw_item_slots.fill(null)
-	for old_slot_index in range(backup_slots.size()):
-		var item_id = backup_slots[old_slot_index]
-		if not item_id:
-			continue
-		var item = ItemLibrary.get_item(item_id, false)
-		if not item:
-			printerr("%s.validate_items: No item found with id '%s'." % [_debug_name(), item_id])
-			continue
-		# Get the first slot item could go in
-		var slot = get_first_valid_slot_for_item(item, false)
-		# if found, put it there
-		if slot >= 0:
-			_raw_item_slots[slot] = item.Id
-		# else remove
-		else:
-			remove_item(item.Id)
-			if _actor.is_player:
-				PlayerInventory.add_item(item)
-				
-
 # Returns true if valid or String message of why the item is not valid.
 func _is_item_valid_in_slot(slot_index, item:BaseItem):
 	return true
 
 func _build_slots_list():
-	if LOGGING: print("Building Slots for Itemes for %s : %s" % [_actor.Id, _debug_name()])
+	if LOGGING: print("Building Slots in %s for %s" % [get_holder_name(), _actor.Id])
+	if LOGGING: print("- Raw Slots : %s" % [_raw_item_slots])
+	
+	# Cache current items and thier slot set data to rebuild list later
+	var old_item_to_slot_sets = []
+	for old_index in range(_raw_item_slots.size()):
+		var old_slot_set_data = _raw_to_slot_set_mapping[old_index].duplicate()
+		old_slot_set_data['ItemId'] = _raw_item_slots[old_index]
+		old_item_to_slot_sets.append(old_slot_set_data)
+	
+	# Clear current data
 	_slot_set_key_mapping = []
 	_raw_to_slot_set_mapping = []
-	_item_slot_sets_datas = _load_slots_sets_data()
-	if LOGGING: print("- Raw Slots : %s" % [_raw_item_slots])
-	var _backup_slots = _raw_item_slots.duplicate()
+	_slot_mod_source_item_ids = []
 	_raw_item_slots.clear()
-	#if _actor.ActorKey == "TestChaser":
-		#var t = true
+	
+	# Load Slot sets
+	_item_slot_sets_datas = _load_slots_sets_data()
+	var slot_mods = _actor.get_item_slot_mods_for_holder(get_holder_name())
+	for slot_mod_key in slot_mods.keys():
+		var slot_mod = slot_mods[slot_mod_key]
+		if slot_mod.keys().has("AddedSlotSets"):
+			_item_slot_sets_datas.append_array(slot_mod['AddedSlotSets'])
+	
+	# Build Slot Sets
 	var raw_index = 0
 	var slot_set_index = 0
-	for sub_slot_data in _item_slot_sets_datas:
-		var slot_key = sub_slot_data.get("Key")
-		var sub_slot_count = sub_slot_data.get("Count")
-		sub_slot_data['IndexOffset'] = raw_index
+	for slot_set_data in _item_slot_sets_datas:
+		if slot_set_data.keys().has("SourceItemId"):
+			var item_id = slot_set_data['SourceItemId']
+			if not _slot_mod_source_item_ids.has(item_id):
+				_slot_mod_source_item_ids.append(item_id)
+		var slot_key = slot_set_data.get("Key", slot_set_data.get("SlotSetKey", ""))
+		var sub_slot_count = slot_set_data.get("Count")
+		slot_set_data['IndexOffset'] = raw_index
 		_slot_set_key_mapping.append(slot_key)
 		for sub_index in range(sub_slot_count):
-			_raw_to_slot_set_mapping.append({"SlotSetIndex":slot_set_index, "SlotSetKey":slot_key, "SubIndex":sub_index})
-			if _backup_slots.size() > raw_index:
-				_raw_item_slots.append(_backup_slots[raw_index])
-			else:
-				_raw_item_slots.append(null)
+			_raw_to_slot_set_mapping.append({
+				"SlotSetIndex":slot_set_index, 
+				"SlotSetKey":slot_key, 
+				"SubIndex":sub_index
+			})
+			_raw_item_slots.append(null)
+			_slot_validation_states.append(ValidStates.UnValidated)
 			raw_index += 1
 		slot_set_index += 1
 	
 	if LOGGING: print("- Final Raw Index: %s" % [raw_index])
-	if LOGGING: print("- Backup Slots: %s\n" % [_backup_slots])
-	while raw_index < _backup_slots.size():
-		if _backup_slots[raw_index] and _actor.is_player:
-			var item = ItemLibrary.get_item(_backup_slots[raw_index], false)
-			if item:
-				PlayerInventory.add_item(item)
-		raw_index += 1
+	#if LOGGING: print("- Backup Slots: %s\n" % [_backup_slots])
+	
+	# Find new indexes for old items
+	var rejected_items = []
+	for old_index in range(old_item_to_slot_sets.size()):
+		var old_data = old_item_to_slot_sets[old_index]
+		var slot_set_key = old_data['SlotSetKey']
+		var old_slot_set_sub_index = old_data['SubIndex']
+		var item_id = old_data['ItemId']
+		# There was no item
+		if item_id == null:
+			continue
+		# Slot Set that used to hold this item is gone
+		if not _item_slot_sets_datas.has(slot_set_key):
+			rejected_items.append(item_id)
+			continue
+		var new_slot_set_data = get_slot_set_data(slot_set_key)
+		# Size of Slot set has changed and pushed this item out
+		if new_slot_set_data.get("Count", 0) < old_slot_set_sub_index:
+			rejected_items.append(item_id)
+			continue
+		var new_index = new_slot_set_data.get("IndexOffset") + old_slot_set_sub_index
+		if new_index >= _raw_item_slots.size():
+			printerr("ItemHolder.build_slots_list: Miscalulated size of new index?")
+			continue
+		_raw_item_slots[new_index] = item_id
+	
+	for item_id in rejected_items:
+		# TODO: Handle Rejected items (inventory, ground, or void)
+		var item = ItemLibrary.get_item(item_id, false)
+		if item:
+			PlayerInventory.add_item(item)
+	
 	item_slots_rebuilt.emit()
+
+func validate_items():
+	if LOGGING: print("Validating Itemes for %s : %s" % [_actor.Id, get_holder_name()])
+	for index in range(_raw_item_slots.size()):
+		var item_id = _raw_item_slots[index]
+		# Slot is empty
+		if !item_id:
+			_slot_validation_states[index] = ValidStates.UnValidated
+			continue
+		
+		var item = ItemLibrary.get_item(item_id, false)
+		# Item does not exist
+		if not item:
+			printerr("%s.validate_items: No item found with id '%s' in slot %s." % [get_holder_name(), item_id, index])
+			_direct_clear_slot(index)
+			continue
+		
+		var is_accepted = can_set_item_in_slot(item, index, true)
+		if not is_accepted:
+			_slot_validation_states[index] = ValidStates.Unacceptable
+			continue
+		
+		var invalid_reason = item.get_cant_use_reasons(_actor)
+		if invalid_reason.size() > 0:
+			_slot_validation_states[index] = ValidStates.Invalid
+			continue
+		_slot_validation_states[index] = ValidStates.Valid
+	if LOGGING: print("Finished Validating Itemes for %s : %s" % [_actor.Id, get_holder_name()])
 
 func get_raw_slot_index_of_item(item:BaseItem):
 	return _raw_item_slots.find(item.Id)
@@ -140,9 +194,15 @@ func get_raw_slot_index_of_item(item:BaseItem):
 	#else:
 		#return _item_slot_sets_datas[slot_set_index]['IndexOffset'] + sub_index
 
+func get_slot_set_data(key:String)->Dictionary:
+	for data:Dictionary in _item_slot_sets_datas:
+		if data.get("Key") == key:
+			return data
+	return {}
+
 func get_slot_set_data_for_index(index:int):
 	if index < 0 or index > _raw_item_slots.size():
-		return null
+		return {}
 	var index_data = _raw_to_slot_set_mapping[index]
 	return _item_slot_sets_datas[index_data['SlotSetIndex']]
 	
@@ -171,7 +231,7 @@ func list_item_ids(include_nulls:bool=false)->Array:
 			out_list.append(val)
 	return out_list
 
-## Returns all items in slots. Does not include nulls for empty slots.
+## Returns all items in slots. Not include nulls for empty slots.
 func list_items()->Array:
 	var out_list=[]
 	for index in range(_raw_item_slots.size()):
@@ -181,8 +241,8 @@ func list_items()->Array:
 		if item:
 			out_list.append(item)
 		else:
-			printerr("%s.list_items: Lost Item in slot '%s': '%s'" % [_debug_name(), index, item_id])
-			_raw_item_slots[index] = null
+			printerr("%s.list_items: Lost Item in slot '%s': '%s'" % [get_holder_name(), index, item_id])
+			_direct_clear_slot(index)
 			
 	return out_list
 
@@ -204,8 +264,8 @@ func get_item_in_slot(index:int)->BaseItem:
 			if item:
 				return item
 			else:
-				printerr("%s.get_item_in_slot: Lost Item in slot '%s': '%s'" % [_debug_name(), index, item_id])
-				_raw_item_slots[index] = null
+				printerr("%s.get_item_in_slot: Lost Item in slot '%s': '%s'" % [get_holder_name(), index, item_id])
+				_direct_clear_slot(index)
 	return null
 
 func remove_item(item_id:String, supress_signal:bool=false):
@@ -214,22 +274,26 @@ func remove_item(item_id:String, supress_signal:bool=false):
 		printerr("Transfering Item outside of ItemHelper: %s | %s " % [item_id, _actor.Id])
 	var index = _raw_item_slots.find(item_id)
 	if index >= 0:
-		_raw_item_slots[index] = null
+		_direct_clear_slot(index)
 		_on_item_removed(item_id, supress_signal)
-		if not supress_signal:
-			items_changed.emit()
 
+## Returns true if SlotSet of given index will accept Item
 func can_set_item_in_slot(item:BaseItem, index:int, allow_replace:bool=false)->bool:
 	if index < 0 or index >= _raw_item_slots.size():
 		printerr("ItemHolder.can_set_item_in_slot: Index '%s' outside of range '%s'." % [index, _raw_item_slots.size()])
 		return false
-	if not allow_replace and _raw_item_slots.has(item.Id):
-		return false
+	
+	# No Swapping or replacing items
+	if not allow_replace:
+		# Slot is occupied
+		if _raw_item_slots[index] != null:
+			return false
+		# Item is already in other slot
+		if _raw_item_slots.has(item.Id):
+			return false
 	var check_slot_set_data = get_slot_set_data_for_index(index)
-	if LOGGING: print("ItemHolder.can_set_item_in_slot: _can_slot_set_accept_item: Index '%s' | %s" % [index, check_slot_set_data])
+	#if LOGGING: print("ItemHolder.can_set_item_in_slot: _can_slot_set_accept_item: Index '%s' | %s" % [index, check_slot_set_data])
 	if not _can_slot_set_accept_item(check_slot_set_data, item):
-		return false
-	if not allow_replace and _raw_item_slots[index] != null:
 		return false
 	return true
 
@@ -238,6 +302,13 @@ func can_set_item_in_slot(item:BaseItem, index:int, allow_replace:bool=false)->b
 func _direct_set_item_in_slot(slot_index:int, item:BaseItem):
 	if slot_index >= 0 and slot_index <= _raw_item_slots.size():
 		_raw_item_slots[slot_index] = item.Id
+		_slot_validation_states[slot_index] = ValidStates.UnValidated
+
+func _direct_clear_slot(slot_index:int):
+	if slot_index >= 0 and slot_index <= _raw_item_slots.size():
+		_raw_item_slots[slot_index] = null
+		_slot_validation_states[slot_index] = ValidStates.UnValidated
+	
 
 ## Get Items that will be removed if current item is added to slot.
 ## Should only be used by ItemHelper
@@ -258,10 +329,11 @@ func try_set_item_in_slot(item:BaseItem, index:int, allow_replace:bool=false)->b
 		else:
 			return false
 	_raw_item_slots[index] = item.Id
+	_slot_validation_states[index] = ValidStates.UnValidated
 	_on_item_added_to_slot(item, index)
-	items_changed.emit()
 	return true
 
+## Check if given SlotSet data accepts item
 func _can_slot_set_accept_item(check_slot_set_data:Dictionary, item:BaseItem)->bool:
 	var filter_data = check_slot_set_data.get("FilterData")
 	var item_tags = item.get_tags()
@@ -277,22 +349,23 @@ func _can_slot_set_accept_item(check_slot_set_data:Dictionary, item:BaseItem)->b
 			return true
 	else:
 		return true
-	if LOGGING: print("_can_slot_set_accept_item: %s: %s | %s" % [item.Id, item_tags, filter_data])
+	#if LOGGING: print("%s._can_slot_set_accept_item: Not Accepted %s: %s | %s" % [get_holder_name(), item.Id, item_tags, filter_data])
 	return false
 	
 
 func get_first_valid_slot_for_item(item:BaseItem, allow_replace:bool=false)->int:
 	for i in range(_raw_item_slots.size()):
+		if not allow_replace and _raw_item_slots[i] != null:
+			continue
 		if can_set_item_in_slot(item, i, allow_replace):
 			return i
 	return -1
 
 func add_item_to_first_valid_slot(item:BaseItem):
 	ItemHelper.transering_items.append(item.Id)
-	for i in range(_raw_item_slots.size()):
-		if try_set_item_in_slot(item, i, false):
-			ItemHelper.transering_items.erase(item.Id)
-			return true
+	var slot = get_first_valid_slot_for_item(item, false)
+	if slot >= 0 and try_set_item_in_slot(item, slot, false):
+		return true
 	ItemHelper.transering_items.erase(item.Id)
 	return false
 
@@ -319,108 +392,45 @@ func get_passive_stat_mods()->Array:
 			out_list.append_array(item.get_passive_stat_mods())
 	return out_list
 
-func _get__mods(mod_prefix:String)->Dictionary:
+func _get__mods_from_items(mod_prop_name:String, valid_items_only:bool=true)->Dictionary:
 	var out_dict = {}
-	var checked_items = [] ## For double sloted items (two handing)
-	for item_id in _raw_item_slots:
-		if checked_items.has(item_id):
+	for index in range(_raw_item_slots.size()):
+		var item_id = _raw_item_slots[index]
+		# Slot is empty
+		if item_id == null or item_id != '':
 			continue
-		if item_id and item_id != '':
-			var item:BaseItem = ItemLibrary.get_item(item_id)
-			if item:
-				var mods = item._get__mods(mod_prefix)
-				for mod_key in mods.keys():
-					out_dict[mod_key] = mods[mod_key]
+		# Item is not valid
+		if valid_items_only and _slot_validation_states[item_id] != ValidStates.Valid:
+			continue
+		var item:BaseItem = ItemLibrary.get_item(item_id)
+		if not item:
+			continue
+		var mods = item._get__mods(mod_prop_name)
+		for mod_key in mods.keys():
+			# Mod has seen
+			if out_dict.keys().has(mod_key):
+				# Warning for same mod from differnt item
+				if out_dict[mod_key].get("SourceItemId", "") != item.Id:
+					printerr("%s.get_%s_mod: Mod with key '%s' added from both: %s and %s." %[get_holder_name(), mod_key, out_dict[mod_key].get("SourceItemId", ""), item.Id])
+				continue
+			out_dict[mod_key] = mods[mod_key]
 	return out_dict
 
+## Returns Mod Data for Item Slot Mods provided by held items, NOT mods applied to this holder
+func get_item_slots_mods()->Array:
+	return _get__mods_from_items("ItemSlotsMods").values()
+
 func get_targeting_mods()->Array:
-	return _get__mods("Target").values()
+	return _get__mods_from_items("TargetMods").values()
 
 func get_ammo_mods()->Dictionary:
-	return _get__mods("Ammo")
+	return _get__mods_from_items("AmmoMods")
 	
 func get_attack_mods()->Dictionary:
-	return _get__mods("Attack")
+	return _get__mods_from_items("AttackMods")
 	
 func get_damage_mods()->Dictionary:
-	return _get__mods("Damage")
+	return _get__mods_from_items("DamageMods")
 	
 func get_weapon_mods()->Dictionary:
-	return _get__mods("Weapon")
-
-	#for item_tags in _item_tagged_slots.keys():
-		#if _does_item_match_tags(item_tags, item):
-			#var open_slot = _item_tagged_slots[item_tags].find(null)
-			#if open_slot >= 0:
-				#_item_tagged_slots[item_tags][open_slot] = item.Id
-				#_actor.bag_items_changed.emit()
-				#print("Added Item: " + item.Id)
-				#return
-			#else:
-				#print("No Open Slot found in '%s'" %[item_tags])
-		#else:
-			#print("%s Not match tags '%s'" %[item.ItemKey, item_tags])
-	#print("No Valid ItemTags Slot Found")
-
-#func _does_item_match_tags(item_tags:String, item:BaseItem)->bool:
-	#var tags = item_tags.split("|")
-	#for tag in tags:
-		#if tag == "Any":
-			#continue
-		#if not item.details.tags.has(tag):
-			#return false
-	#return true
-
-#func set_item_for_slot(slot_item_tags:String, index:int, item:BaseItem):
-	#if !_item_tag_slot_counts.keys().has(slot_item_tags):
-		#return
-	#if item and _item_tagged_slots[slot_item_tags].has(item.ItemKey):
-		#return
-	#if index < 0 or index >= _item_tagged_slots[slot_item_tags].size():
-		#return
-	#if item:
-		#_item_tagged_slots[slot_item_tags][index] = item.Id
-	#else:
-		#_item_tagged_slots[slot_item_tags][index] = null
-	#_actor.bag_items_changed.emit()
-#
-#func get_item_ids_per_item_tags()->Dictionary:
-	#return _item_tagged_slots.duplicate()
-
-#func _count_item_tag_slots():
-	#_item_tag_slot_counts.clear()
-	#var total_max_count = 0
-	#for equipment:BaseEquipmentItem in _actor.equipment.list_equipment():
-		#var item_tags_dict:Dictionary = equipment.get_load_val("ItemTagSlots", {})
-		##printerr("Checking Equipment for ItemTagSlots: %s : %s" % [equipment.Id, item_tags_dict])
-		#for item_tags in item_tags_dict.keys():
-			#if !_item_tag_slot_counts.keys().has(item_tags):
-				#_item_tag_slot_counts[item_tags] = 0
-			#_item_tag_slot_counts[item_tags] += item_tags_dict[item_tags]
-			#total_max_count += item_tags_dict[item_tags]
-	#
-	#var found_change = false
-	#
-	## Remove lost Item Tags
-	#for item_tags in _item_tagged_slots.keys():
-		#if not _item_tag_slot_counts.keys().has(item_tags):
-			#found_change = true
-			#_item_tagged_slots.erase(item_tags)
-	#
-	## Correct slots size
-	#for item_tags in _item_tag_slot_counts.keys():
-		## Item Tags did not exist
-		#if !_item_tagged_slots.keys().has(item_tags):
-			#_item_tagged_slots[item_tags] = []
-			#found_change = true
-		## Correct for size change
-		#var max_count = _item_tag_slot_counts[item_tags]
-		#if max_count != _item_tagged_slots[item_tags].size():
-			#found_change = true
-			#if _item_tagged_slots[item_tags].size() < max_count:
-				#for index in range(max_count - _item_tagged_slots[item_tags].size()):
-					#_item_tagged_slots[item_tags].append(null)
-			#else:
-				#for index in range(_item_tagged_slots[item_tags].size() - max_count):
-					#_item_tagged_slots[item_tags].remove_at(max_count)
-	#
+	return _get__mods_from_items("WeaponMods")

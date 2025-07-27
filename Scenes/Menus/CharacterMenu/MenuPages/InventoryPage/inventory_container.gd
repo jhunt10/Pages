@@ -106,7 +106,7 @@ func build_item_list():
 		#items_container.add_child(button)
 		
 		#if item.can_stack:
-		button.set_item(item, PlayerInventory.get_item_stack_count(item.ItemKey))
+		button.set_count(PlayerInventory.get_item_stack_count(item.ItemKey))
 		
 		button.visible = should_item_be_visible(item, '')
 		

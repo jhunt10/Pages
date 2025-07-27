@@ -51,34 +51,7 @@ static func create_actor(key:String, data:Dictionary, premade_id:String = '')->B
 	if !actor:
 		printerr("ActorLibrary.create_actor: Failed to make actor '%s'." % [key])
 		return null
-	actor.suppress_equipment_changed = true
-	actor.equipment._build_slots_list()
-	var equipment_list = actor.get_load_val("SpawnEquipmentArr", [])
-	for equip in equipment_list:
-		if equip == null:
-			continue
-		var item = ItemLibrary.create_item(equip, {})
-		if item:
-			if !actor.equipment.add_item_to_first_valid_slot(item):
-				printerr("ActorLibrary.create_actor: Failed to equip item '%s'." % [equip])
-	
-	var page_list = actor.get_load_val("SpawnPageArr", [])
-	for page_key in page_list:
-		var page = ItemLibrary.create_item(page_key, {})
-		if page:
-			if !actor.pages.add_item_to_first_valid_slot(page):
-				printerr("ActorLibrary.create_actor: Failed add Page '%s'." % [page_key])
-	
-	var item_list = actor.get_load_val("SpawnItemArr", [])
-	for item_key in item_list:
-		var item = ItemLibrary.create_item(item_key, {})
-		if item:
-			if !actor.items.add_item_to_first_valid_slot(item):
-				printerr("ActorLibrary.create_actor: Failed add Item '%s'." % [item_key])
-				ItemLibrary.delete_item(item)
-	
-	actor.suppress_equipment_changed = false
-	actor.equipment_changed.emit()
+	actor.build_spawned_with_items()
 	return actor
 
 #static func save_actors():
