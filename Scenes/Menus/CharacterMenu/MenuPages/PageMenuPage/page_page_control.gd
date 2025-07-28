@@ -59,11 +59,11 @@ func _process(delta: float) -> void:
 func set_actor(actor:BaseActor):
 	if _actor and _actor != actor:
 		_actor.equipment_changed.disconnect(actor_equipment_changed)
-		_actor.pages.items_changed.disconnect(build_sub_containers)
+		_actor.page_list_changed.disconnect(build_sub_containers)
 		_actor.pages.item_slots_rebuilt.disconnect(actor_slots_rebuild)
 	if actor != _actor:
 		actor.equipment_changed.connect(actor_equipment_changed)
-		actor.pages.items_changed.connect(build_sub_containers)
+		actor.page_list_changed.connect(build_sub_containers)
 		actor.pages.item_slots_rebuilt.connect(actor_slots_rebuild)
 	_actor = actor
 	action_input_preview.set_actor(_actor)
@@ -71,6 +71,7 @@ func set_actor(actor:BaseActor):
 
 func actor_slots_rebuild():
 	_que_rebuild = true
+	_sync_page_slots()
 
 func actor_equipment_changed():
 	_sync_page_slots()
@@ -85,7 +86,7 @@ func build_sub_containers():
 	var title_page:BasePageItem = _actor.pages.get_item_in_slot(0)
 	if title_page:
 		title_label.text = title_page.get_display_name()
-		title_page_button.set_key(_actor, title_page.Id)
+		title_page_button.set_key(_actor, title_page)
 	_buttons.append(title_page_button)
 	
 	#premade_page_set.hide()
@@ -131,7 +132,7 @@ func build_sub_containers():
 		for index in range(slot_set_data['Count']):
 			var new_button:PageSlotButton = premade_page_button.duplicate()
 			new_button.name = "PageSlotButton"+str(raw_index)
-			new_button.set_key(_actor, _actor.pages.get_item_id_in_slot(raw_index))
+			new_button.set_key(_actor, _actor.pages.get_item_in_slot(raw_index))
 			new_button.button.button_down.connect(_on_item_button_down.bind(raw_index))
 			new_button.button.button_up.connect(_on_item_button_up.bind(raw_index))
 			new_button.button.mouse_entered.connect(_on_mouse_enter_item_button.bind(raw_index))
@@ -185,7 +186,7 @@ func _sync_page_slots():
 		if _buttons.size() > index:
 			var page_button:PageSlotButton = _buttons[index]
 			if page:
-				page_button.set_key(_actor, page.ItemKey)
+				page_button.set_key(_actor, page)
 			else:
 				page_button.set_key(_actor, null)
 	pass

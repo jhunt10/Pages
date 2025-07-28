@@ -6,10 +6,10 @@ var _cached_main_hand_over_sprite:Texture2D
 var _cached_off_hand_over_sprite:Texture2D
 var _cached_two_hand_over_sprite:Texture2D
 var _cached_portrait:Texture2D
+var _cached_sprite_item_ids:Array = []
 
 func _init(actor:BaseActor) -> void:
 	self._actor = actor
-	actor.equipment_changed.connect(_build_sprite_sheet)
 
 func get_portrait_sprite()->Texture2D:
 	if !_cached_portrait:
@@ -22,19 +22,25 @@ func get_body_sprite()->Texture2D:
 	return _cached_body_sprite
 
 func get_main_hand_sprite()->Texture2D:
-	if _cached_main_hand_over_sprite == null:
+	if _cached_body_sprite == null:
 		_build_sprite_sheet()
 	return _cached_main_hand_over_sprite
 
 func get_off_hand_sprite()->Texture2D:
-	if _cached_off_hand_over_sprite == null:
+	if _cached_body_sprite == null:
 		_build_sprite_sheet()
 	return _cached_off_hand_over_sprite
 
 func get_two_hand_sprite()->Texture2D:
-	if _cached_two_hand_over_sprite == null:
+	if _cached_body_sprite == null:
 		_build_sprite_sheet()
 	return _cached_two_hand_over_sprite
+
+func has_item_cached_in_sprite(item)->bool:
+	var item_id = item
+	if item is BaseLoadObject:
+		item_id = item._id
+	return _cached_sprite_item_ids.has(item_id)
 
 func _build_sprite_sheet():
 	var is_complex_actor = _actor.get_load_val("ScenePath", "").ends_with("complex_actor_node.tscn")
@@ -80,6 +86,7 @@ func _build_sprite_sheet():
 	var sheet_rect = Rect2i(0, 0, sheet_size.x, sheet_size.y)
 	
 	# Maerge Equipment Images
+	_cached_sprite_item_ids.clear()
 	for item in _get_draw_ordered_equipment():
 		# Skip weapons
 		if item is BaseWeaponEquipment:
@@ -87,6 +94,9 @@ func _build_sprite_sheet():
 		var equip_sprite_path = item.get_sprite_sheet_file_path()
 		if !equip_sprite_path:
 			continue
+		if _cached_sprite_item_ids.has(item.Id):
+			continue
+		_cached_sprite_item_ids.append(item.Id)
 		equip_sprite_path = equip_sprite_path.trim_suffix(".png")
 		var equip_body_texture = SpriteCache.get_sprite(equip_sprite_path + ".png", true)
 		if equip_body_texture:

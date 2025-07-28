@@ -1,0 +1,89 @@
+{
+    "TestingAddedPages": {
+        "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemPassive.gd",
+        "#ObjDetails": {
+            "Description": "Gain an extra Page Slot if you have the TestingPageSlot tag.",
+            "DisplayName": "Add Page Test",
+            "LargeIcon": "Sprites/AddPassive_Icon.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/AddPassive_Icon.png",
+            "SnippetDesc": "+1 PPR",
+            "Tags": [
+                "Passive",
+                "StatMod"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Page",
+                "Passive"
+            ]
+        },
+        "ItemData": {
+            "ItemType": "Page",
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "PageData": {
+            "PageRequirements": {
+                "ConflictingPages": [],
+                "IncompatiblePages": [],
+                "TitleReq": "None"
+            },
+            "ItemSlotsMods": {
+                "TestingAddedPages": {
+                    "ItemHolder": "Pages",
+                    "AddedSlotSets": [
+                        {
+                            "Key": "TestingAddedPages",
+                            "DisplayName": "Test",
+                            "Count": 1,
+                            "FilterData": {
+                                "RequiredTags": "Passive"
+                            }
+                        }
+                    ]
+                }
+            }
+        },
+        "PassiveData": {},
+        "_DefVersion": "1"
+    },
+    "TestingAddedTag": {
+        "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemPassive.gd",
+        "#ObjDetails": {
+            "Description": "Gain an extra Page Slot if you have the TestingPageSlot tag.",
+            "DisplayName": "Active",
+            "LargeIcon": "Sprites/AddTag_Icon.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/AddTag_Icon.png",
+            "SnippetDesc": "+1 PPR",
+            "Tags": [
+                "Passive",
+                "StatMod"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Page",
+                "Passive"
+            ]
+        },
+        "ItemData": {
+            "ItemType": "Page",
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "PageData": {
+            "PageRequirements": {
+                "ConflictingPages": [],
+                "IncompatiblePages": [],
+                "TitleReq": "None"
+            },
+            "AddTags": [
+                "TesingAddedTag"
+            ]
+            
+        },
+        "PassiveData": {},
+        "_DefVersion": "1"
+    }
+}

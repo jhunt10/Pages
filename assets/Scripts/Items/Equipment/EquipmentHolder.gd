@@ -25,7 +25,7 @@ func get_tags_added_to_actor()->Array:
 	return out_list
 		
 
-func _load_slots_sets_data()->Array:
+func _get_innate_slots_data()->Array:
 	# Actors always have a slot for PageBook and SupplyBag
 	var out_dict = {
 		"PageBook": {
@@ -422,13 +422,19 @@ func get_filtered_weapons(weapon_filter)->Array:
 	return out_arr
 
 func get_bag_equipment()->BaseBagEquipment:
-	for item in list_equipment():
+	for item_id in _raw_item_slots:
+		if item_id == null:
+			continue
+		var item = ItemLibrary.get_item(item_id)
 		if item is BaseBagEquipment:
 			return item
 	return null
 
 func get_que_equipment()->BaseQueEquipment:
-	for item in list_equipment():
+	for item_id in _raw_item_slots:
+		if item_id == null:
+			continue
+		var item = ItemLibrary.get_item(item_id)
 		if item is BaseQueEquipment:
 			return item
 	return null

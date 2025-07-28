@@ -31,10 +31,8 @@ func _process(delta: float) -> void:
 func set_actor(actor:BaseActor):
 	if _actor and _actor != actor:
 		_actor.items.items_changed.disconnect(_sync)
-		_actor.equipment_changed.disconnect(_sync)
 	if actor != _actor:
 		actor.items.items_changed.connect(_sync)
-		actor.equipment_changed.connect(_sync)
 	_actor = actor
 	_sync()
 

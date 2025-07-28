@@ -48,7 +48,6 @@ func _sync_que():
 func set_actor(actor:BaseActor):
 	_actor = actor
 	actor.Que.action_que_changed.connect(_sync_que)
-	actor.equipment_changed.connect(_sync_que)
 	is_ai_actor = !actor.is_player
 	if portrait:
 		portrait.texture = actor.sprite.get_portrait_sprite()

@@ -8,9 +8,9 @@ func _init(actor) -> void:
 	super(actor)
 
 func get_holder_name()->String:
-	return "Suppies"
+	return "Supplies"
 
-func _load_slots_sets_data()->Array:
+func _get_innate_slots_data()->Array:
 	cached_bag_item_id = null
 	var bag_item = _actor.equipment.get_bag_equipment()
 	if bag_item:

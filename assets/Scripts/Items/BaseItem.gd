@@ -52,7 +52,7 @@ func get_rarity_background()->Texture2D:
 	return ItemHelper.get_rarity_background(self.get_item_rarity())
 
 ## Returns a diction of failed requirements, mapped by requirment type 
-func get_cant_use_reasons(actor:BaseActor):
+func get_cant_use_reasons(actor:BaseActor)->Dictionary:
 	var missing_requirements = {}
 	
 	return missing_requirements
@@ -60,6 +60,9 @@ func get_cant_use_reasons(actor:BaseActor):
 ## Returns what sub data has Mods
 func get_data_containing_mods()->Dictionary:
 	return item_data
+
+func has_spite_sheet()->bool:
+	return false
 
 func _get__mods(mod_prop_name:String)->Dictionary:
 	var sub_data = get_data_containing_mods()
@@ -81,7 +84,7 @@ func _get__mods(mod_prop_name:String)->Dictionary:
 			mod_data[key_prop_name] = mod_key
 		if not mod_data.has("DisplayName"):
 			mod_data['DisplayName'] = self.get_display_name()
-			mod_data['SourceItemId'] = self.Id
+		mod_data['SourceItemId'] = self.Id
 		
 		out_dict[mod_key] = mod_data
 	return out_dict

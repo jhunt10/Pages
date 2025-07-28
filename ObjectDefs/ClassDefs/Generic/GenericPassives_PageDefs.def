@@ -697,7 +697,7 @@
             },
             "ItemSlotsMods": {
                 "ExtraAction": {
-                    "ItemHolder": "Supplies",
+                    "ItemHolder": "Pages",
                     "AddedSlotSets": [
                         {
                             "Key": "ActiveExtraAction",
@@ -744,14 +744,19 @@
                 "IncompatiblePages": [],
                 "TitleReq": "None"
             },
-            "ExtraPageSlots": {
+            "ItemSlotsMods": {
                 "ExtraPassive": {
-                    "Key": "RedundantExtraPassive",
-                    "DisplayName": "Passives",
-                    "Count": 1,
-                    "FilterData": {
-                        "RequiredTags": "Passive"
-                    }
+                    "ItemHolder": "Pages",
+                    "AddedSlotSets": [
+                        {
+                            "Key": "RedundantSlotMod",
+                            "DisplayName": "Redundant",
+                            "Count": 1,
+                            "FilterData": {
+                                "RequiredTags": "Passive"
+                            }
+                        }
+                    ]
                 }
             }
         },

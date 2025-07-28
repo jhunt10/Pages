@@ -3,7 +3,7 @@
         "!ObjectScript": "res://assets/Scripts/Actors/BaseActor.gd",
         "!ParentKey": "#BaseActor",
         "#ObjDetails": {
-            "Description": "@@#Color:Red:Slimes@@ are gelatinous blobs of biological paradoxes with no discernible sensory organs, digestive system, or really anything resembling \"anotomy\". It was once belived thier lack of eyes should render them @@#EftDef:AilmentBlind:Link@@. But instead it seems the @@#Color:Blue:PAGE@@ System interprets this as perfect @@#Stat:Awareness@@ due to errors in registering a @@#Color:Red:Front@@ or @@#Color:Red:Back@@. Similarly, their malleable  forms have no measurable amount of @@#Stat:Armor@@, yet still demonstrate high @@#Tag:Resistant@@ to all forms of @@#Tag:Physical@@ damage. Dispite these abnormalities, researchers have been able to prove that @@#Color:Red:Slimes@@ will die if stabbed enough and thus, meet the scientific definition of \"Life\". But, the councile still does not grant them the @@#Color:Blue:Tag@@ of @@#Tag:Living@@.",
+            "Description": "@@#Color:Red:Slimes@@ are gelatinous blobs of biological paradoxes with no discernible sensory organs, digestive system, or really anything resembling \"anotomy\". It was once belived thier lack of eyes should render them @@#EftDef:AilmentBlind:Link@@. But instead, the @@#Color:Blue:PAGE@@ System errors in registering a @@#Color:Red:Front@@ or @@#Color:Red:Back@@ and defaults to perfect @@#Stat:Awareness@@. Similarly, their malleable forms have no measurable amount of @@#Stat:Armor@@, yet still demonstrate high @@#Tag:Resistant@@ to all forms of @@#Tag:Physical@@ damage. Dispite these abnormalities, researchers have been able to prove that @@#Color:Red:Slimes@@ will die if stabbed enough and thus, meet the scientific definition of \"Life\". But the councile still does not grant them the @@#Color:Blue:Tag@@ of @@#Tag:Living@@.",
             "DisplayName": "Slime",
             "LargeIcon": "Sprites/BlueSlime_Icon.png",
             "ObjectType": "Actor",
@@ -114,7 +114,7 @@
             "Resistance:Poison": 200
         },
         "SpawnPageArr": [
-            "SlimeBase_TitlePage",
+            "SlimePoison_TitlePage",
             "SlimePoisonSkin_PassivePage",
             "MoveForward",
             "MoveBack",

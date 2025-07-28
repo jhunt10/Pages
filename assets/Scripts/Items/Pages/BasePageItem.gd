@@ -45,7 +45,7 @@ func get_tags_added_to_actor()->Array:
 	return page_data.get("AddTags", [])
 
 ## Returns a diction of failed requirements, mapped by requirment type 
-func get_cant_use_reasons(actor:BaseActor):
+func get_cant_use_reasons(actor:BaseActor)->Dictionary:
 	var requirment_data = page_data.get("PageRequirements", {})
 	var missing_requirements = super(actor)
 	

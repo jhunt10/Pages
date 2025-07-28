@@ -135,7 +135,7 @@ static func try_transfer_item_from_inventory_to_holder(source_item:BaseItem, hol
 			PlayerInventory.add_item(old_item)
 	
 	holder._on_item_added_to_slot(inv_item, slot_index)
-	holder._actor.on_held_items_change(holder.get_holder_name(), {})
+	holder._actor.on_held_items_change(holder.get_holder_name(), transaction_data)
 	
 	# Remove item from transfer list
 	var transering_item_index = transering_items.find(inv_item.Id)
@@ -160,13 +160,15 @@ static func try_transfer_item_from_actor_to_inventory(item:BaseItem, actor:BaseA
 
 static func try_transfer_item_from_holder_to_inventory(item:BaseItem, holder:BaseItemHolder)->String:
 	if LOGGING: print("ItemHlp: Transfer %s from %s to INV" % [item.ItemKey, holder._actor.Id])
-	if !holder.has_item(item.Id):
+	var item_id = item.Id
+	if !holder.has_item(item_id):
 		return "Item not found"
-	transering_items.append(item.Id)
-	holder.remove_item(item.Id)
+	transering_items.append(item_id)
+	holder.remove_item(item_id)
 	PlayerInventory.add_item(item)
-	holder._actor._on_equipment_holder_items_change()
-	transering_items.remove_at(transering_items.find(item.Id))
+	var transaction_data = {"AddedItemIds": [], "RemovedItemIds": [item_id]}
+	holder._actor.on_held_items_change(holder.get_holder_name(), transaction_data)
+	transering_items.remove_at(transering_items.find(item_id))
 	return ""
 
 static func swap_item_holder_slots(holder:BaseItemHolder, slot_a:int, slot_b:int, return_b_to_inventory:bool=true):

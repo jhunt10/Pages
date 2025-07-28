@@ -12,7 +12,7 @@ func _init(actor) -> void:
 	super(actor)
 	#self._actor.effacts_changed.connect(validate_items)
 
-func _load_slots_sets_data()->Array:
+func _get_innate_slots_data()->Array:
 	if LOGGING: print("--Page Slots Loading" )
 	var out_list = [{
 		"Key":"TitlePage",
@@ -146,17 +146,6 @@ func _cache_action_mods():
 				# Apply Mod
 				if does_mod_apply:
 					action.add_action_mod(mod_data)
-					
-
-func _on_item_loaded(item:BaseItem):
-	var page = item as BasePageItem
-	if not page:
-		return
-	var effect_def = page.get_effect_def()
-	if effect_def:
-		var effect_key = effect_def.get("EffectKey")
-		var new_effect = EffectHelper.create_effect(_actor, page, effect_key, effect_def)
-		item_id_to_effect_id[item.Id] = new_effect.Id
 
 func _on_item_added_to_slot(item:BaseItem, index:int):
 	if item == null:

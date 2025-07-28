@@ -28,12 +28,11 @@ func _ready() -> void:
 	invalid_button.mouse_exited.connect(hide_invaid_label)
 	invalid_label.hide()
 
-func set_key(actor:BaseActor, key):
-	if item_key == key:
-		return
-	if key:
-		item_key = key
-		var page = ItemLibrary.get_item(key)
+func set_key(actor:BaseActor, page:BasePageItem):
+	#if item.ItemKey == key:
+		#return
+	if page:
+		item_key = page.ItemKey
 		if page is PageItemAction:
 			if page.use_equipment_icon():
 				page_icon.texture = page.get_large_page_icon(actor)
@@ -47,12 +46,21 @@ func set_key(actor:BaseActor, key):
 		page_background.texture = page.get_rarity_background()
 		page_icon.show()
 		page_background.show()
-		var cant_equip_reasons = page.get_cant_use_reasons(actor)
-		if cant_equip_reasons.size() > 0:
-			invalid_label.text = ItemHelper.cant_equip_reasons_to_string(cant_equip_reasons)
+		
+		var valid_state = actor.pages.get_valid_state_of_item(page)
+		if valid_state != BaseItemHolder.ValidStates.Valid:
 			invalid_icon.show()
+			invalid_label.text = BaseItemHolder.ValidStates.keys()[valid_state]
 		else:
 			invalid_icon.hide()
+			invalid_label.text = ''
+		
+		#var cant_equip_reasons = page.get_cant_use_reasons(actor)
+		#if cant_equip_reasons.size() > 0:
+			#invalid_label.text = ItemHelper.cant_equip_reasons_to_string(cant_equip_reasons)
+			#invalid_icon.show()
+		#else:
+			#invalid_icon.hide()
 	else:
 		item_key = ''
 		invalid_icon.hide()
