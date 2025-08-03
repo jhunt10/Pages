@@ -17,17 +17,17 @@ signal equipt_slot_pressed(slot:int)
 var _actor:BaseActor
 var _display_dir:int = 2
 
-var slot_displays:Array:
-	get: return [
-		$RightEquipSlots/BookSlotButton,
-		$RightEquipSlots/BagSlotButton,
-		$LeftEquipSlots/MainHandSlotButton,
-		$RightEquipSlots/OffHandSlotButton,
-		$LeftEquipSlots/HeadSlotButton,
-		$LeftEquipSlots/BodySlotButton,
-		$LeftEquipSlots/FeetSlotButton,
-		$RightEquipSlots/TrinketSlotButton,
-	]
+var slot_displays:Dictionary:
+	get: return {
+		"PageBook": $RightEquipSlots/BookSlotButton,
+		"SupplyBag": $RightEquipSlots/BagSlotButton,
+		"MainHand": $LeftEquipSlots/MainHandSlotButton,
+		"OffHand": $RightEquipSlots/OffHandSlotButton,
+		"Apparel:Head": $LeftEquipSlots/HeadSlotButton,
+		"Apparel:Body": $LeftEquipSlots/BodySlotButton,
+		"Apparel:Feet": $LeftEquipSlots/FeetSlotButton,
+		"Trinket": $RightEquipSlots/TrinketSlotButton,
+	}
 
 func _ready() -> void:
 	for slot:int in range(slot_displays.size()):

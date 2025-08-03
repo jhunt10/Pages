@@ -93,7 +93,7 @@ func prep_for_combat():
 	show_hide_tomb_stone()
 
 func show_hide_tomb_stone():
-	if tombstone_sprite:
+	if tombstone_sprite and Actor.is_player:
 		if self.is_dieing and damage_animation_player.is_playing():
 			return
 			

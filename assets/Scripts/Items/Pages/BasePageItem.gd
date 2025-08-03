@@ -85,7 +85,7 @@ func get_cant_use_reasons(actor:BaseActor)->Dictionary:
 				missing_requirements['Conflict'] = []
 			missing_requirements['Conflict'].append(other_page_key)
 	
-	# Apparel Requirements
+	# Apparel Required to use Page
 	if requirment_data.has("ApparelReq"):
 		var appel_req = requirment_data.get("ApparelReq", {})
 		var all_apparel_must_match = appel_req.get("AllApparelMustMatch")

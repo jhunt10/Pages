@@ -173,9 +173,9 @@ func open_character_sheet(_actor:BaseActor=null, parent_node=null)->CharacterMen
 		parent_node.add_child(charsheet)
 	else:
 		self.add_child(charsheet)
+	charsheet.show_menu()
 	#self.remove_child(center_container)
 	#self.add_child(center_container)
-	charsheet.set_actor(actor)
 	return charsheet
 
 

@@ -1,0 +1,119 @@
+[gd_scene load_steps=8 format=3 uid="uid://cf43u4ospfr42"]
+
+[ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/EquipmentMenu/equipment_menu_item_slot_button.gd" id="1_70lft"]
+[ext_resource type="Texture2D" uid="uid://js1gbkgy0ql3" path="res://Scenes/Menus/CharacterMenu/MenuPages/EquipmentMenu/EquipmentSlotsContainer/EquipmentItemSlotOutline.png" id="2_4higf"]
+[ext_resource type="Texture2D" uid="uid://co33b1qq2uef7" path="res://assets/Sprites/UI/CharacterEdit/BagSlot.png" id="2_4ssqg"]
+[ext_resource type="Texture2D" uid="uid://567vutk12a12" path="res://Scenes/Menus/CharacterMenu/MenuPages/SlotHighlight.png" id="4_rcw00"]
+[ext_resource type="Texture2D" uid="uid://f5dyomv4wwn1" path="res://assets/Sprites/UI/SymbolIcons/InvalidEquipmentIcon.png" id="5_j1ihr"]
+[ext_resource type="Theme" uid="uid://bfce41la62bs6" path="res://Scenes/Themes/readable_theme.tres" id="6_fxxeh"]
+[ext_resource type="Texture2D" uid="uid://s8s7rktavc7e" path="res://assets/Sprites/UI/BackPatches/Patch_32_8.png" id="7_xf7wn"]
+
+[node name="EquipmentSlotButton" type="Control" node_paths=PackedStringArray("button", "highlight_background_rect", "item_icon_rect", "default_icon_rect", "valid_state_icon", "valid_state_label", "valid_state_button")]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_70lft")
+button = NodePath("Button")
+highlight_background_rect = NodePath("Highlight")
+item_icon_rect = NodePath("PageIcon")
+default_icon_rect = NodePath("DefaultIcon")
+valid_state_icon = NodePath("InvalidIcon")
+valid_state_label = NodePath("InvalidIcon/Label")
+valid_state_button = NodePath("InvalidIcon/Button")
+
+[node name="Frame" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_4higf")
+expand_mode = 1
+
+[node name="DefaultIcon" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_4ssqg")
+expand_mode = 1
+
+[node name="Highlight" type="TextureRect" parent="."]
+visible = false
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_rcw00")
+
+[node name="PageIcon" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Button" type="Button" parent="."]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="InvalidIcon" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 6.0
+offset_right = 15.0
+offset_bottom = 22.0
+texture = ExtResource("5_j1ihr")
+
+[node name="Label" type="Label" parent="InvalidIcon"]
+visible = false
+z_index = 5
+layout_mode = 0
+offset_left = 18.0
+offset_top = 5.0
+offset_right = 105.0
+offset_bottom = 22.0
+theme = ExtResource("6_fxxeh")
+text = "Req: STR:15"
+vertical_alignment = 1
+
+[node name="NinePatchRect" type="NinePatchRect" parent="InvalidIcon/Label"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -8.0
+offset_top = -4.0
+offset_right = 8.0
+offset_bottom = 3.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_xf7wn")
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+
+[node name="Button" type="Button" parent="InvalidIcon"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

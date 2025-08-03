@@ -11,7 +11,7 @@ static func build_action_ques(clear_existing_ques:bool=false):
 	var turn_states = []
 	var actors = CombatRootControl.Instance.QueController.list_actors_by_order()
 	var turn_count = CombatRootControl.Instance.QueController.max_que_size
-	
+	astar = null
 	if not astar:
 		astar = build_path_finder(init_game_state)
 	astar.enable_all_points()

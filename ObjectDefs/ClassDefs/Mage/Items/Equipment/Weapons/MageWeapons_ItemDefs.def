@@ -45,7 +45,15 @@
             "AttackData": {
                 "AttackDetails": {
                     "AccuracyMod": 1,
-                    "PotencyMod": 1
+                    "PotencyMod": 1,
+                    "AttackVfxData": {
+                        "RandomOffsets": [0,0],
+                        "ScenePath": "res://assets/Scripts/VFXs/BulletVfxs/bullet_vfx_node.tscn",
+                        "SpriteName": "Sprites/Wand_Missile.png",
+                        "SpriteSheetHight": 1,
+                        "SpriteSheetWidth": 1,
+                        "Velocity": 200
+                    }
                 },
                 "AttackTags": [
                     "Weapon",

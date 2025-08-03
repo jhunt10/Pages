@@ -5,20 +5,21 @@
 [ext_resource type="Texture2D" uid="uid://5hu0ttx4jxuo" path="res://assets/Sprites/UI/BackPatches/PaperPatch_64x92_16.png" id="3_ok1sv"]
 [ext_resource type="Theme" uid="uid://dwinll8pgdjhc" path="res://Scenes/Themes/standard_theme.tres" id="4_52yyb"]
 
-[node name="StatModListControl" type="Control" node_paths=PackedStringArray("container", "label")]
+[node name="StatModListControl" type="Control" node_paths=PackedStringArray("container", "name_label", "mods_label")]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_0w4sd")
 container = NodePath("BackPatchContainer/VBoxContainer")
-label = NodePath("BackPatchContainer/VBoxContainer/NameLabel")
+name_label = NodePath("BackPatchContainer/VBoxContainer/NameLabel")
+mods_label = NodePath("BackPatchContainer/VBoxContainer/ModsLabel")
 
 [node name="BackPatchContainer" type="Container" parent="." node_paths=PackedStringArray("background", "inner_container")]
 z_index = 1
-custom_minimum_size = Vector2(56, 30)
+custom_minimum_size = Vector2(90, 54)
 layout_mode = 0
 offset_top = 19.0
-offset_right = 56.0
-offset_bottom = 49.0
+offset_right = 90.0
+offset_bottom = 73.0
 script = ExtResource("2_ote2w")
 background = NodePath("NinePatchRect")
 inner_container = NodePath("VBoxContainer")
@@ -35,6 +36,13 @@ patch_margin_bottom = 5
 layout_mode = 2
 
 [node name="NameLabel" type="Label" parent="BackPatchContainer/VBoxContainer"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("4_52yyb")
+text = "StatName"
+horizontal_alignment = 1
+
+[node name="ModsLabel" type="Label" parent="BackPatchContainer/VBoxContainer"]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("4_52yyb")

@@ -20,20 +20,20 @@ func set_armor(actor:BaseActor, armor:BaseApparelEquipment):
 	_item = armor
 	premade_stat_mod_label.hide()
 	slot_label.text = armor.get_equipment_slot_type()
-	#if armor.get_armor_value() > 0:
-		#phy_icon.show()
-		#armor_label.show()
-		#armor_label.text = str(armor.get_armor_value())
-	#else:
-		#phy_icon.hide()
-		#armor_label.hide()
-	#if armor.get_ward_value() > 0:
-		#mag_icon.show()
-		#ward_label.show()
-		#ward_label.text = str(armor.get_ward_value())
-	#else:
-		#mag_icon.hide()
-		#ward_label.hide()
+	if armor.get_armor_value() > 0:
+		phy_icon.show()
+		armor_label.show()
+		armor_label.text = str(armor.get_armor_value())
+	else:
+		phy_icon.hide()
+		armor_label.hide()
+	if armor.get_ward_value() > 0:
+		mag_icon.show()
+		ward_label.show()
+		ward_label.text = str(armor.get_ward_value())
+	else:
+		mag_icon.hide()
+		ward_label.hide()
 	description_box.text = armor.get_description()
 	if _actor:
 		if _actor.equipment.has_item(_item.Id):

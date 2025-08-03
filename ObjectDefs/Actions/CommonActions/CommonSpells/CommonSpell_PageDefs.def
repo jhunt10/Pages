@@ -26,9 +26,14 @@
                 }
             },
             "EffectDatas": {
-                "BurnEffect": {
+                "AttackEffect": {
                     "ApplicationChance": 0.3,
                     "EffectKey": "AilmentChilled"
+                }
+            },
+            "SubActions":{
+                "Attack":{
+                    "EffectKeys": ["AttackEffect"]
                 }
             }
         },
@@ -78,9 +83,14 @@
                 }
             },
             "EffectDatas": {
-                "BurnEffect": {
+                "AttackEffect": {
                     "ApplicationChance": 0.3,
                     "EffectKey": "AilmentChilled"
+                }
+            },
+            "SubActions":{
+                "SpawnMissile":{
+                    "EffectKeys": ["AttackEffect"]
                 }
             },
             "MissileDatas": {
@@ -151,15 +161,7 @@
             "AttackDetails": {
                 "AccuracyMod": 1,
                 "AttackVfxData": {
-                    "RandomOffsets": [
-                        0,
-                        0
-                    ],
-                    "ScenePath": "res://assets/Scripts/VFXs/BulletVfxs/bullet_vfx_node.tscn",
-                    "SpriteName": "Missiles/ColdBullet.png",
-                    "SpriteSheetHight": 1,
-                    "SpriteSheetWidth": 1,
-                    "Velocity": 400
+                    "SpriteName": "Missiles/ColdBullet.png"
                 },
                 "AttackVfxKey": "",
                 "PotencyMod": 1
@@ -171,9 +173,14 @@
                 }
             },
             "EffectDatas": {
-                "BurnEffect": {
+                "AttackEffect": {
                     "ApplicationChance": 0.3,
                     "EffectKey": "AilmentChilled"
+                }
+            },
+            "SubActions":{
+                "Attack":{
+                    "EffectKeys": ["AttackEffect"]
                 }
             }
         },
@@ -223,9 +230,14 @@
                 }
             },
             "EffectDatas": {
-                "BurnEffect": {
+                "AttackEffect": {
                     "ApplicationChance": 1,
                     "EffectKey": "AilmentChilled"
+                }
+            },
+            "SubActions":{
+                "Attack":{
+                    "EffectKeys": ["AttackEffect"]
                 }
             },
             "ZoneDatas": {
@@ -275,9 +287,14 @@
                 }
             },
             "EffectDatas": {
-                "BurnEffect": {
+                "AttackEffect": {
                     "ApplicationChance": 0.2,
                     "EffectKey": "AilmentBurned"
+                }
+            },
+            "SubActions":{
+                "Attack":{
+                    "EffectKeys": ["AttackEffect"]
                 }
             }
         },
@@ -326,9 +343,14 @@
                 }
             },
             "EffectDatas": {
-                "BurnEffect": {
+                "AttackEffect": {
                     "ApplicationChance": 0.2,
                     "EffectKey": "AilmentBurned"
+                }
+            },
+            "SubActions":{
+                "SpawnMissile":{
+                    "EffectKeys": ["AttackEffect"]
                 }
             },
             "MissileDatas": {
@@ -398,15 +420,7 @@
             "AttackDetails": {
                 "AccuracyMod": 1,
                 "AttackVfxData": {
-                    "RandomOffsets": [
-                        0,
-                        0
-                    ],
-                    "ScenePath": "res://assets/Scripts/VFXs/BulletVfxs/bullet_vfx_node.tscn",
-                    "SpriteName": "Missiles/FireBullet.png",
-                    "SpriteSheetHight": 1,
-                    "SpriteSheetWidth": 1,
-                    "Velocity": 400
+                    "SpriteName": "Missiles/FireBullet.png"
                 },
                 "AttackVfxKey": "",
                 "PotencyMod": 1
@@ -417,9 +431,14 @@
                 }
             },
             "EffectDatas": {
-                "BurnEffect": {
+                "AttackEffect": {
                     "ApplicationChance": 0.2,
                     "EffectKey": "AilmentBurned"
+                }
+            },
+            "SubActions":{
+                "Attack":{
+                    "EffectKeys": ["AttackEffect"]
                 }
             }
         },
@@ -468,9 +487,14 @@
                 }
             },
             "EffectDatas": {
-                "BurnEffect": {
+                "AttackEffect": {
                     "ApplicationChance": 1,
                     "EffectKey": "AilmentBurned"
+                }
+            },
+            "SubActions":{
+                "Attack":{
+                    "EffectKeys": ["AttackEffect"]
                 }
             },
             "ZoneDatas": {
@@ -522,9 +546,14 @@
                 }
             },
             "EffectDatas": {
-                "BurnEffect": {
+                "AttackEffect": {
                     "ApplicationChance": 0.6,
                     "EffectKey": "AilmentPoisoned"
+                }
+            },
+            "SubActions":{
+                "Attack":{
+                    "EffectKeys": ["AttackEffect"]
                 }
             }
         },
@@ -575,9 +604,14 @@
                 }
             },
             "EffectDatas": {
-                "BurnEffect": {
+                "AttackEffect": {
                     "ApplicationChance": 0.6,
                     "EffectKey": "AilmentPoisoned"
+                }
+            },
+            "SubActions":{
+                "SpawnMissile":{
+                    "EffectKeys": ["AttackEffect"]
                 }
             },
             "MissileDatas": {
@@ -647,15 +681,7 @@
             "AttackDetails": {
                 "AccuracyMod": 1,
                 "AttackVfxData": {
-                    "RandomOffsets": [
-                        0,
-                        0
-                    ],
-                    "ScenePath": "res://assets/Scripts/VFXs/BulletVfxs/bullet_vfx_node.tscn",
-                    "SpriteName": "Missiles/PoisonBullet.png",
-                    "SpriteSheetHight": 1,
-                    "SpriteSheetWidth": 1,
-                    "Velocity": 400
+                    "SpriteName": "Missiles/PoisonBullet.png"
                 },
                 "AttackVfxKey": "",
                 "PotencyMod": 1
@@ -668,9 +694,14 @@
                 }
             },
             "EffectDatas": {
-                "BurnEffect": {
+                "AttackEffect": {
                     "ApplicationChance": 0.6,
                     "EffectKey": "AilmentPoisoned"
+                }
+            },
+            "SubActions":{
+                "Attack":{
+                    "EffectKeys": ["AttackEffect"]
                 }
             }
         },
@@ -721,9 +752,14 @@
                 }
             },
             "EffectDatas": {
-                "BurnEffect": {
+                "AttackEffect": {
                     "ApplicationChance": 1,
                     "EffectKey": "AilmentPoisoned"
+                }
+            },
+            "SubActions":{
+                "Attack":{
+                    "EffectKeys": ["AttackEffect"]
                 }
             },
             "ZoneDatas": {
@@ -774,9 +810,14 @@
                 }
             },
             "EffectDatas": {
-                "BurnEffect": {
+                "AttackEffect": {
                     "ApplicationChance": 0.1,
                     "EffectKey": "AilmentShocked"
+                }
+            },
+            "SubActions":{
+                "Attack":{
+                    "EffectKeys": ["AttackEffect"]
                 }
             }
         },
@@ -826,9 +867,14 @@
                 }
             },
             "EffectDatas": {
-                "BurnEffect": {
+                "AttackEffect": {
                     "ApplicationChance": 0.1,
                     "EffectKey": "AilmentShocked"
+                }
+            },
+            "SubActions":{
+                "SpawnMissile":{
+                    "EffectKeys": ["AttackEffect"]
                 }
             },
             "MissileDatas": {
@@ -898,15 +944,7 @@
             "AttackDetails": {
                 "AccuracyMod": 1,
                 "AttackVfxData": {
-                    "RandomOffsets": [
-                        0,
-                        0
-                    ],
-                    "ScenePath": "res://assets/Scripts/VFXs/BulletVfxs/bullet_vfx_node.tscn",
-                    "SpriteName": "Missiles/ShockBullet.png",
-                    "SpriteSheetHight": 1,
-                    "SpriteSheetWidth": 1,
-                    "Velocity": 400
+                    "SpriteName": "Missiles/ShockBullet.png"
                 },
                 "AttackVfxKey": "",
                 "PotencyMod": 1
@@ -918,9 +956,14 @@
                 }
             },
             "EffectDatas": {
-                "BurnEffect": {
+                "AttackEffect": {
                     "ApplicationChance": 0.1,
                     "EffectKey": "AilmentShocked"
+                }
+            },
+            "SubActions":{
+                "Attack":{
+                    "EffectKeys": ["AttackEffect"]
                 }
             }
         },
@@ -970,9 +1013,14 @@
                 }
             },
             "EffectDatas": {
-                "BurnEffect": {
+                "AttackEffect": {
                     "ApplicationChance": 1,
                     "EffectKey": "AilmentShocked"
+                }
+            },
+            "SubActions":{
+                "Attack":{
+                    "EffectKeys": ["AttackEffect"]
                 }
             },
             "ZoneDatas": {

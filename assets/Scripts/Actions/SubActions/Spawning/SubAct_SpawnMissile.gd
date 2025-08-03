@@ -49,8 +49,17 @@ func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, que_exe_d
 			.append_source(SourceTagChain.SourceTypes.Actor, actor)\
 			.append_source(SourceTagChain.SourceTypes.Action, parent_action)
 	missile_data['DamageData'] = damage_data
-	missile_data['AttackDetails'] = parent_action.get_load_val("AttackDetails", {})
-	missile_data['EffectDatas'] = parent_action.get_load_val("EffectDatas", {})
+	missile_data['AttackDetails'] = parent_action.get_attack_details()
+	
+	# Get Effect Datas
+	var effect_keys = subaction_data.get("EffectKeys", [])
+	var effect_datas = {}
+	for key in effect_keys:
+		var eff_data = parent_action.get_effect_data(key)
+		if eff_data.size() > 0:
+			effect_datas[key] = eff_data
+	missile_data['EffectDatas'] = effect_datas
+	
 	missile_data['TargetParams'] = target_params
 	var missile_script_path = missile_data.get("MissileScriptPath", "res://assets/Scripts/Missiles/AttackMissile.gd")
 	var missile_script =  load(missile_script_path)

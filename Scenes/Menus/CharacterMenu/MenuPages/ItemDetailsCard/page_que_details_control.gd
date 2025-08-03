@@ -18,11 +18,14 @@ func _ready() -> void:
 func set_item(actor:BaseActor, que:BaseQueEquipment):
 	_actor = actor
 	_item = que
-	description_box.text = que.get_description()
+	description_box.set_object(que._def, que, actor)
 	ppr_label.text = str(que.get_pages_per_round())
 	passive_count_label.text = str(que.get_base_passive_page_limit())
 	action_count_label.text = str(que.get_base_action_page_limit())
-	for page_set in que.get_load_val("ItemSlotsData", []):
+	for page_set in que.get_page_slot_data():
+		var key = page_set.get("Key", '')
+		if key == "BasePassives" or key == "BaseActions":
+			continue
 		var new_label:ItemCard_PageSetLabel = premade_page_set_label.duplicate()
 		new_label.tag_label.text = page_set['DisplayName']
 		new_label.count_label.text = str(page_set['Count'])

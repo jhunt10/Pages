@@ -1,25 +1,26 @@
 class_name CharacterMenuControl
 extends Control
 
-const LOGGING = false
+const LOGGING = true
 
 static var Instance:CharacterMenuControl
 static var last_tab_pressed:String = ''
+static var _actor_id:String = ''
 
-@export var inventory_tabs_control:ItemFilterTabsControl
+#@export var inventory_tabs_control:ItemFilterTabsControl
 @export var details_card_spawn_point:Control
 @export var equipment_page:EquipmentPageControl
-@export var page_page:PagePageControl
-@export var bag_page:BagPageControl
+@export var page_page:PageMenuPageControl
+@export var supplies_page:BagPageControl
 @export var stats_page:StatsPageControl
 
 @export var scale_control:Control
-@export var inventory_container:InventoryContainer
+@export var inventory_container:InventoryMenuPageControl
 @export var actor_tabs_control:ActorSelector
 @export var close_button:Button
 @export var tab_equipment_button:Button
 @export var tab_pages_button:Button
-@export var tab_bag_button:Button
+@export var tab_supplies_button:Button
 @export var tab_inventory_button:Button
 @export var tab_stats_button:Button
 @export var inventory_tab_rect:TextureRect
@@ -39,6 +40,8 @@ var _dragging:bool = false
 var _button_down_pos
 var _drag_dead_zone = 10
 
+var delay_loading_inventory = true
+
 var equip_mode:bool:
 	get():
 		return not (MainRootNode.Instance.current_scene is CombatRootControl)
@@ -46,45 +49,50 @@ var equip_mode:bool:
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	Instance = self
-	close_button.pressed.connect(close_menu)
+	if close_button:
+		close_button.pressed.connect(close_menu)
 	tab_equipment_button.pressed.connect(on_tab_pressed.bind("Equipment"))
 	tab_pages_button.pressed.connect(on_tab_pressed.bind("Pages"))
-	tab_bag_button.pressed.connect(on_tab_pressed.bind("Bag"))
+	tab_supplies_button.pressed.connect(on_tab_pressed.bind("Supplies"))
 	tab_inventory_button.pressed.connect(on_tab_pressed.bind("Inventory"))
 	tab_stats_button.pressed.connect(on_tab_pressed.bind("Stats"))
+	if stats_page and stats_page.visible:
+		stats_page.hide()
+	if equipment_page:
+		equipment_page.item_button_down.connect(on_item_button_down)
+		equipment_page.item_button_up.connect(on_item_button_up)
+		equipment_page.mouse_enter_item.connect(on_mouse_enter_slot)
+		equipment_page.mouse_exit_item.connect(on_mouse_exit_slot)
+	if inventory_container:
+		inventory_container.item_button_down.connect(on_item_button_down)
+		inventory_container.item_button_up.connect(on_item_button_up)
+		inventory_container.mouse_enter_item.connect(on_mouse_enter_slot)
+		inventory_container.mouse_exit_item.connect(on_mouse_exit_slot)
 	
-	equipment_page.item_button_down.connect(on_item_button_down)
-	equipment_page.item_button_up.connect(on_item_button_up)
-	equipment_page.mouse_enter_item.connect(on_mouse_enter_slot)
-	equipment_page.mouse_exit_item.connect(on_mouse_exit_slot)
-	#
-	inventory_container.item_button_down.connect(on_item_button_down)
-	inventory_container.item_button_up.connect(on_item_button_up)
-	inventory_container.mouse_enter_item.connect(on_mouse_enter_slot)
-	inventory_container.mouse_exit_item.connect(on_mouse_exit_slot)
+	if page_page:
+		page_page.item_button_down.connect(on_item_button_down)
+		page_page.item_button_up.connect(on_item_button_up)
+		page_page.mouse_enter_item.connect(on_mouse_enter_slot)
+		page_page.mouse_exit_item.connect(on_mouse_exit_slot)
 	
-	page_page.item_button_down.connect(on_item_button_down)
-	page_page.item_button_up.connect(on_item_button_up)
-	page_page.mouse_enter_item.connect(on_mouse_enter_slot)
-	page_page.mouse_exit_item.connect(on_mouse_exit_slot)
-	#
-	bag_page.item_button_down.connect(on_item_button_down)
-	bag_page.item_button_up.connect(on_item_button_up)
-	bag_page.mouse_enter_item.connect(on_mouse_enter_slot)
-	bag_page.mouse_exit_item.connect(on_mouse_exit_slot)
+	#bag_page.item_button_down.connect(on_item_button_down)
+	#bag_page.item_button_up.connect(on_item_button_up)
+	#bag_page.mouse_enter_item.connect(on_mouse_enter_slot)
+	#bag_page.mouse_exit_item.connect(on_mouse_exit_slot)
+	
 	stop_dragging()
 	if last_tab_pressed != '':
 		on_tab_pressed(last_tab_pressed)
 	else:
 		on_tab_pressed("Pages")
-	if equip_mode:
-		on_tab_pressed("Inventory")
-		inventory_tabs_control.on_tab_selected.connect(on_inv_filter_selected)
-		inventory_tabs_control.on_tab_unselected.connect(on_inv_filter_unselected)
-	else:
-		on_tab_pressed("Stats")
-		stats_tab_rect.hide()
-		inventory_tab_rect.hide()
+	#if equip_mode:
+		#on_tab_pressed("Inventory")
+		#inventory_tabs_control.on_tab_selected.connect(on_inv_filter_selected)
+		#inventory_tabs_control.on_tab_unselected.connect(on_inv_filter_unselected)
+	#else:
+		#on_tab_pressed("Stats")
+		#stats_tab_rect.hide()
+		#inventory_tab_rect.hide()
 	#if _actor == null:
 		#ActorLibrary.new()
 		#var test = ActorLibrary.get_actor("TestActor_ID")
@@ -93,11 +101,23 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
+var first_process_pass = true
 func _process(delta: float) -> void:
-	if first_frame_time == null:
-		first_frame_time = Time.get_ticks_msec()
-		var time_diff = first_frame_time - load_start_time
-		printerr("CharacterPage Load Time: %s | Delta: %s" % [time_diff, delta])
+	if delay_loading_inventory:
+		if first_process_pass:
+			first_process_pass = false
+			var time_diff = Time.get_ticks_msec() - load_start_time
+			printerr("\n\nCharacterPage First Frame Load Time: %s | Delta: %s\n\n" % [time_diff, delta])
+		else:
+			var time_diff2 = Time.get_ticks_msec() - load_start_time
+			printerr("\n\nCharacterPage Second Frame Load Time: %s | Delta: %s\n\n" % [time_diff2, delta])
+			inventory_container.build_item_slots()
+			stats_page.sync()
+			delay_loading_inventory = false
+			if first_frame_time == null:
+				first_frame_time = Time.get_ticks_msec()
+				var time_diff = first_frame_time - load_start_time
+				printerr("\n\nCharacterPage Finished Load Time: %s | Delta: %s\n\n" % [time_diff, delta])
 	if not _dragging and _button_down_pos:
 		var mouse_pos = scale_control.get_local_mouse_position()
 		if mouse_pos.distance_to(_button_down_pos) > _drag_dead_zone:
@@ -111,33 +131,91 @@ func _process(delta: float) -> void:
 
 var load_start_time
 var first_frame_time
-func set_actor(actor:BaseActor):
-	load_start_time = Time.get_ticks_msec()
-	first_frame_time = null
+#func first_load(actor:BaseActor):
+	#page_page.parent_menu = self
+	#set_actor(actor)
+	#if last_tab_pressed != '':
+		#on_tab_pressed(last_tab_pressed)
+	#else:
+		#on_tab_pressed("Pages")
+	#pass
 	
-	var start_time = Time.get_unix_time_from_system()
-	print("Starting Set Actor: %s" % Time.get_datetime_string_from_unix_time(start_time))
+
+#func set_actor(actor:BaseActor):
+	#load_start_time = Time.get_ticks_msec()
+	#first_frame_time = null
+	#
+	#var start_time = Time.get_unix_time_from_system()
+	#print("Starting Set Actor: %s" % Time.get_datetime_string_from_unix_time(start_time))
+	#_actor = actor
+	#if _actor:
+		#_actor_id = _actor.Id
+	#else:
+		#_actor_id = ''
+	#if _actor:
+		#equipment_page.set_actor(_actor)
+		#bag_page.set_actor(_actor)
+		#stats_page.set_actor(_actor)
+		#actor_tabs_control.set_selected_actor(_actor)
+		#if _current_details_card:
+			#var item = ItemLibrary.get_item(_current_details_card.item_id)
+			#_current_details_card.set_item(actor, item)
+	#var finish_time = Time.get_unix_time_from_system()
+	#var time_diff = finish_time - start_time
+	#print("Finished Set Actor: %s" % Time.get_datetime_string_from_unix_time(finish_time))
+	#print("RunTime: %s" % Time.get_time_string_from_unix_time(time_diff))
+	#if inventory_container.visible:
+		#inventory_container._refilter()
+
+func on_actor_tab_selected(actor:BaseActor):
 	_actor = actor
 	if _actor:
-		equipment_page.set_actor(_actor)
-		page_page.set_actor(_actor)
-		bag_page.set_actor(_actor)
-		stats_page.set_actor(_actor)
-		actor_tabs_control.set_selected_actor(_actor)
-		if _current_details_card:
-			var item = ItemLibrary.get_item(_current_details_card.item_id)
-			_current_details_card.set_item(actor, item)
-	var finish_time = Time.get_unix_time_from_system()
-	var time_diff = finish_time - start_time
-	print("Finished Set Actor: %s" % Time.get_datetime_string_from_unix_time(finish_time))
-	print("RunTime: %s" % Time.get_time_string_from_unix_time(time_diff))
-	if inventory_container.visible:
-		inventory_container._refilter()
+		_actor_id = _actor.Id
+	else:
+		_actor_id = ''
+	if _left_page_context != '':
+		var left_page_control:BaseCharacterSubMenu = context_to_page_control(_left_page_context)
+		if left_page_control:
+			left_page_control.show_menu_page()
+	if _current_details_card:
+		_current_details_card.start_hide()
+	inventory_container.sync()
+	if stats_page.visible:
+		stats_page.sync()
+		
+
+func show_menu():
+	load_start_time = Time.get_ticks_msec()
+	var actor = null
+	if _actor_id != '' and ActorLibrary.has_actor(_actor_id):
+		actor = ActorLibrary.get_actor(_actor_id)
+	else:
+		actor = StoryState.get_party_actor_by_index(0)
+	# Set Actor
+	_actor = actor
+	if _actor:
+		_actor_id = _actor.Id
+	else:
+		_actor_id = ''
+	
+	actor_tabs_control.sync_labels()
+	actor_tabs_control.set_selected_actor(_actor)
+	#
+	if _left_page_context != '':
+		var left_page_control:BaseCharacterSubMenu = context_to_page_control(_left_page_context)
+		if left_page_control:
+			left_page_control.sync()
+	else:
+		on_tab_pressed("Pages")
+	#inventory_container.build_item_slots()
+	self.visible = true
 
 func close_menu():
 	if _actor:
 		var page_que = _actor.equipment.get_que_equipment()
 		if not page_que:
+			if _left_page_context != "Equipment":
+				on_tab_pressed("Equipment")
 			equipment_page.play_pagebook_warning_animation()
 			return
 	
@@ -162,14 +240,49 @@ func create_details_card(item:BaseItem):
 	_current_details_card.hide_done.connect(on_details_card_freed)
 	_current_details_card.set_item(_actor, item)
 	_current_details_card.start_show()
+	_current_details_card.item_confirmed.connect(on_details_card_confirmed)
+
+
+func on_details_card_confirmed(item:BaseItem):
+	var source_context = null
+	if _actor.items.has_item(item):
+		source_context = "Supplies"
+	elif _actor.pages.has_item(item):
+		source_context = "Pages"
+	elif _actor.equipment.has_item(item):
+		source_context = "Equipment"
+	else:
+		source_context = "Inventory"
+	
+	var result = ''
+	# Taking item from Inventory
+	if source_context == "Inventory":
+		#var dest_context:BaseCharacterSubMenu = context_to_page_control(_left_page_context)
+		#var dest_holder = dest_context.get_item_holder()
+		result = ItemHelper.try_transfer_item_from_inventory_to_actor(item, _actor, true)
+	else:
+		result = ItemHelper.try_transfer_item_from_actor_to_inventory(item, _actor)
+	
+	if result == '':
+		context_to_page_control(_left_page_context).sync()
+		if inventory_container.visible:
+			inventory_container.sync()
+		if stats_page.visible:
+			stats_page.sync()
+		_current_details_card.start_hide()
+	else:
+		_current_details_card.equip_label.text = result
+
 
 func context_to_page_control(context):
 	if context == "Equipment":
 		return equipment_page
 	if context == "Pages":
 		return page_page
-	if context == "Bag":
-		return bag_page
+	if context == "Supplies":
+		return supplies_page
+	if context == "Inventory":
+		return inventory_container
 	return null
 
 func start_dragging():
@@ -180,6 +293,7 @@ func start_dragging():
 		mouse_control.set_drag_item(_selected_item)
 		#mouse_control.drag_item_icon.texture = _selected_item.get_large_icon()
 		mouse_control.position = _button_down_pos - mouse_control.offset
+		var mouse_pos = get_global_mouse_position()
 		mouse_control.show()
 		if LOGGING: print("StartDragging: SelectedItem: %s" % [_selected_item.Id])
 
@@ -187,38 +301,42 @@ func stop_dragging():
 	_dragging = false
 	_button_down_pos = null
 	mouse_control.hide()
-	if LOGGING: print("Stop Dragging: %s | %s" % [_selected_context, _mouse_over_context])
+	if LOGGING: print("\n\nStop Dragging: %s | %s" % [_selected_context, _mouse_over_context])
 	# Transfering items
 	if _selected_context and _mouse_over_context:
-		
+		var source_page_control = context_to_page_control(_selected_context)
+		var dest_page_control = context_to_page_control(_mouse_over_context)
 		# From Left Page to Inventory - Remove Item
 		if _mouse_over_context == "Inventory" and _selected_context != "Inventory":
 			if LOGGING: print("Remove Item: %s" %[_selected_item.Id])
-			var page_control = context_to_page_control(_selected_context)
-			if page_control:
-				page_control.remove_item_from_slot(_selected_item, _selected_index_data)
+			if source_page_control:
+				source_page_control.remove_item_from_slot(_selected_item, _selected_index_data)
 		
 		if _mouse_over_index_data != null:
 			# From Inventory to Left Page - Add Item
 			if _mouse_over_context != "Inventory" and _selected_context == "Inventory":
 				if LOGGING: print("Add Item")
-				var page_control = context_to_page_control(_mouse_over_context)
-				if page_control:
-					page_control.try_place_item_in_slot(_selected_item, _mouse_over_index_data)
+				
+				if dest_page_control:
+					dest_page_control.try_place_item_in_slot(_selected_item, _mouse_over_index_data)
 			
 			# From Left Page to Left Page - Move Item
 			if _mouse_over_context != "Inventory" and _selected_context == _mouse_over_context:
 				if LOGGING: print("Move Item")
-				var page_control = context_to_page_control(_mouse_over_context)
-				if page_control:
-					page_control.try_move_item_to_slot(_selected_item, _selected_index_data, _mouse_over_index_data)
+				if dest_page_control:
+					dest_page_control.try_move_item_to_slot(_selected_item, _selected_index_data, _mouse_over_index_data)
+		if source_page_control:
+			source_page_control.sync()
+		if dest_page_control:
+			dest_page_control.sync()
 		_selected_item  
 		
 
 func clear_highlights():
-	equipment_page.clear_highlights()
-	page_page.clear_highlights()
-	bag_page.clear_highlights()
+	pass
+	#equipment_page.clear_highlights()
+	#page_page.clear_highlights()
+	#supplies_page.clear_highlights()
 
 func on_item_button_down(context, item_key, index, offset):
 	clear_highlights()
@@ -282,39 +400,40 @@ func on_tab_pressed(tab_name:String):
 		stats_page.hide()
 		inventory_tab_rect.hide()
 		stats_tab_rect.show()
-		inventory_tabs_control.show()
+		#inventory_tabs_control.show()
 		return
 	if tab_name == "Stats":
+		stats_page.sync()
 		stats_page.show()
 		inventory_container.hide()
 		stats_tab_rect.hide()
 		inventory_tab_rect.show()
-		inventory_tabs_control.hide()
+		#inventory_tabs_control.hide()
 		return
 	
 	_left_page_context = tab_name
 	last_tab_pressed = tab_name
 	
 	if _left_page_context == "Equipment":
-		equipment_page.visible = true
-		page_page.visible = false
-		bag_page.visible = false
-		inventory_container.clear_forced_filters(false)
+		equipment_page.show_menu_page()
+		page_page.hide()
+		supplies_page.hide()
+		#inventory_container.clear_forced_filters(false)
 		inventory_container.set_character_menu_context("Equipment")
-		inventory_tabs_control.set_tabs(["Que", "Bag", "Helm", "Body", "Feet", "Weapon", "OffHand", "Trinket"])
+		#inventory_tabs_control.set_tabs(["Que", "Bag", "Helm", "Body", "Feet", "Weapon", "OffHand", "Trinket"])
 		
 	if _left_page_context == "Pages":
-		equipment_page.visible = false
-		page_page.visible = true
-		bag_page.visible = false
-		inventory_container.clear_forced_filters(false)
+		equipment_page.hide()
+		page_page.show_menu_page()
+		supplies_page.hide()
+		#inventory_container.clear_forced_filters(false)
 		inventory_container.set_character_menu_context("Page")
-		inventory_tabs_control.set_tabs(["Passive", "Action", "Movement", "Tactic", "Spell"])
+		#inventory_tabs_control.set_tabs(["Passive", "Action", "Movement", "Tactic", "Spell"])
 		
-	if _left_page_context == "Bag":
-		equipment_page.visible = false
-		page_page.visible = false
-		bag_page.visible = true
-		inventory_container.clear_forced_filters(false)
+	if _left_page_context == "Supplies":
+		equipment_page.hide()
+		page_page.hide()
+		supplies_page.show_menu_page()
+		#inventory_container.clear_forced_filters(false)
 		inventory_container.set_character_menu_context("Supplies")
-		inventory_tabs_control.set_tabs(["Potion", "Bomb"])
+		#inventory_tabs_control.set_tabs(["Potion", "Bomb"])

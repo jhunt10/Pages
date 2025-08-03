@@ -90,6 +90,7 @@ const stat_icon_paths:Dictionary = {
 	Evasion: "res://assets/Sprites/UI/SymbolIcons/EvasionSymbol.png",
 	Potency: "res://assets/Sprites/UI/SymbolIcons/PotencySymbol.png",
 	Protection: "res://assets/Sprites/UI/SymbolIcons/ProtectionSymbol.png",
+	PPR: "res://assets/Sprites/UI/SymbolIcons/PPRSymbol.png",
 	
 	CritChance: "res://assets/Sprites/UI/SymbolIcons/CriticalSymbol.png",
 	CritMod: "res://assets/Sprites/UI/SymbolIcons/CriticalSymbol.png"

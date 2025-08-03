@@ -13,6 +13,7 @@ var mod_list_control
 
 
 var _actor:BaseActor
+var _icon_loaded = false
 
 func _ready() -> void:
 	self.mouse_entered.connect(_on_mouse_enter)
@@ -22,12 +23,7 @@ func set_values(stat_name:String, actor:BaseActor):
 	self.stat_name = stat_name
 	name_label.show()
 	self.name_label.text = StatHelper.get_stat_abbr(stat_name)
-	var icon_texture = StatHelper.get_stat_icon(stat_name)
-	if icon_texture:
-		self.icon.texture = icon_texture
-		self.icon.show()
-	else:
-		self.icon.hide()
+	load_icon()
 	set_stat_values(actor)
 
 func set_stat_values(actor:BaseActor):
@@ -36,7 +32,18 @@ func set_stat_values(actor:BaseActor):
 	_actor = actor
 	if percent_value:
 		percent_value.text = "%2.3f" % [DamageHelper.calc_armor_reduction(stat_val)]
+	if not _icon_loaded:
+		load_icon()
 	#_build_stat_mod_list()
+
+func load_icon():
+	var icon_texture = StatHelper.get_stat_icon(stat_name)
+	if icon_texture:
+		self.icon.texture = icon_texture
+		self.icon.show()
+	else:
+		self.icon.hide()
+	_icon_loaded = true
 
 func _on_mouse_enter():
 	if not _actor:
@@ -49,7 +56,7 @@ func _on_mouse_enter():
 		else:
 			self.add_child(mod_list_control)
 		var mods = _actor.stats.get_mod_names_for_stat(stat_name)
-		mod_list_control.set_mod_list(mods)
+		mod_list_control.set_mod_list(stat_name, mods)
 
 func _on_mouse_exit():
 	if mod_list_control:

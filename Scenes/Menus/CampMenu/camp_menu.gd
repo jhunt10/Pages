@@ -26,9 +26,13 @@ static var Instance:CampMenu
 @export var rec_cards_button:CampOptionButton
 @export var rec_pages_button:CampOptionButton
 
+@export var character_menu:CharacterMenuControl
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	Instance = self
+	if character_menu:
+		character_menu.hide()
 	character_button.button.pressed.connect(_on_prepare_button)
 	quest_button.button.pressed.connect(_on_quest_button)
 	shop_button.button.pressed.connect(_on_shop_button)
@@ -98,7 +102,11 @@ func _on_explore_button():
 	MainRootNode.Instance.open_map_selection_menu()
 
 func _on_prepare_button():
-	MainRootNode.Instance.open_character_sheet()
+	if character_menu and CharacterMenuControl.Instance != null:
+		character_menu.show_menu()
+	else:
+		MainRootNode.Instance.open_character_sheet()
+	#character_menu.show_menu()
 
 func _on_records():
 	var new_cards:TutorialCardsController = load("res://Scenes/TutorialCards/tutorial_cards.tscn").instantiate()

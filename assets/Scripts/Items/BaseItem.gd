@@ -55,6 +55,18 @@ func get_rarity_background()->Texture2D:
 func get_cant_use_reasons(actor:BaseActor)->Dictionary:
 	var missing_requirements = {}
 	
+	var requirments = get_data_containing_mods().get("Requirments", {})
+	var required_stats = requirments.get("ReqStats", {})
+	var missing_stats = {}
+	for stat_name in required_stats.keys():
+		var req_val = required_stats[stat_name]
+		var stat_val = actor.stats.get_stat(stat_name)
+		if req_val > stat_val:
+			missing_stats[stat_name] = req_val
+	if missing_stats.size() > 0:
+		missing_requirements["Stats"] = missing_stats
+	
+	
 	return missing_requirements
 
 ## Returns what sub data has Mods

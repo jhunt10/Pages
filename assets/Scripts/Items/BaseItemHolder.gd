@@ -20,6 +20,10 @@ var _slot_set_key_mapping:Array=[]
 var _raw_item_slots:Array=[]
 ## Array of ValidStates for each _raw_slot
 var _slot_validation_states:Array = []
+
+### Dictionary of item_id to reason that item can't be used
+#var _cached_cant_use_reasons:Dictionary = {}
+
 ## Array of Dictionaries holding slot set meta data for that item slot 
 ## {"SlotSetIndex":slot_set_index, "SlotSetKey":slot_key, "SubIndex":sub_index}
 var _raw_to_slot_set_mapping:Array=[]
@@ -279,7 +283,12 @@ func list_invalid_items()->Array:
 			
 	return out_list
 
-func has_item(item_id:String):
+func has_item(item):
+	var item_id = ''
+	if item is String:
+		item_id = item
+	elif item is BaseItem:
+		item_id = item.Id
 	return _raw_item_slots.has(item_id)
 
 func get_item_id_in_slot(index:int):
@@ -410,13 +419,16 @@ func _on_item_added_to_slot(item:BaseItem, index:int):
 
 
 
-func get_passive_stat_mods()->Array:
+func get_passive_stat_mods(valid_items_only:bool=true)->Array:
 	var out_list = []
 	var checked_items = [] ## For double sloted items (two handing)
-	for item_id in _raw_item_slots:
+	for index in range(_raw_item_slots.size()):
+		var item_id = _raw_item_slots[index]
 		if checked_items.has(item_id):
 			continue
 		checked_items.append(item_id)
+		if valid_items_only and not _slot_validation_states[index] == ValidStates.Valid:
+			continue
 		if item_id and item_id != '':
 			var item:BaseItem = ItemLibrary.get_item(item_id)
 			if not item:
@@ -430,10 +442,10 @@ func _get__mods_from_items(mod_prop_name:String, valid_items_only:bool=true)->Di
 	for index in range(_raw_item_slots.size()):
 		var item_id = _raw_item_slots[index]
 		# Slot is empty
-		if item_id == null or item_id != '':
+		if item_id == null or item_id == '':
 			continue
 		# Item is not valid
-		if valid_items_only and _slot_validation_states[item_id] != ValidStates.Valid:
+		if valid_items_only and _slot_validation_states[index] != ValidStates.Valid:
 			continue
 		var item:BaseItem = ItemLibrary.get_item(item_id)
 		if not item:

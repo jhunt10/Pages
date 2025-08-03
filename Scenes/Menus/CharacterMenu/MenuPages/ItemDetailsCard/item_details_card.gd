@@ -4,6 +4,8 @@ extends Control
 
 signal exit_button_pressed
 signal hide_done
+signal item_confirmed(item:BaseItem)
+
 
 enum States {Hidden, Growing, Showing, Shrinking}
 
@@ -227,7 +229,12 @@ func set_item(actor:BaseActor, item:BaseItem):
 		if actor_has_item:
 			equip_label.text = "Remove"
 		else:
-			var cant_equip_reasons = item.get_cant_use_reasons(actor)
+			var cant_equip_reasons = {}
+			var posible_slot = ItemHelper.get_first_valid_slot_for_item(item, actor, true)
+			if posible_slot < 0:
+				cant_equip_reasons = {"NoSlot":true} 
+			else:
+				cant_equip_reasons = item.get_cant_use_reasons(actor)
 			set_cant_equip_reason(cant_equip_reasons)
 		self.start_show()
 	
@@ -245,22 +252,27 @@ func set_item(actor:BaseActor, item:BaseItem):
 
 func equip_button_pressed():
 	var item = ItemLibrary.get_item(item_id)
-	if not item:
-		return
-	var actor = CharacterMenuControl.Instance._actor
-	if not actor:
-		return
-	if actor_has_item:
-		var fail_reason = ItemHelper.try_transfer_item_from_actor_to_inventory(item, actor)
-		equip_label.text  = fail_reason
-	else:
-		var fail_reason = ItemHelper.try_transfer_item_from_inventory_to_actor(item, actor)
-		equip_label.text  = fail_reason
+	if item:
+		item_confirmed.emit(item)
+	#var actor = CharacterMenuControl.Instance._actor
+	#if not actor:
+		#return
+	#if actor_has_item:
+		#var fail_reason = ItemHelper.try_transfer_item_from_actor_to_inventory(item, actor)
+		#equip_label.text  = fail_reason
+	#else:
+		#var fail_reason = ItemHelper.try_transfer_item_from_inventory_to_actor(item, actor)
+		#equip_label.text  = fail_reason
+	
 
 func set_cant_equip_reason(reasons_data:Dictionary):
 	if reasons_data.size() == 0:
 		equip_label.text = "Equipt"
 		equip_button.disabled = false
+		return
+	if reasons_data.get("NoSlot", false):
+		equip_label.text = "No Item Slot"
+		equip_button.disabled = true
 		return
 	if reasons_data.get("IsEquipt", false):
 		equip_label.text = "Remove"

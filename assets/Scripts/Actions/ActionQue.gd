@@ -289,7 +289,7 @@ func get_page_ammo_type(action_key:String)->AmmoItem.AmmoTypes:
 	return ammo_data["AmmoType"]
 
 func get_page_ammo_max_clip(action_key:String)->int:
-	if true or _ammo_mod_dirty:
+	if _ammo_mod_dirty:
 		_cache_page_ammo()
 	var ammo_data = _page_ammo_datas.get(action_key, null)
 	if not ammo_data:

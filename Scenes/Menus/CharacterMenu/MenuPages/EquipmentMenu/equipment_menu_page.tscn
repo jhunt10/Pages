@@ -1,31 +1,19 @@
-[gd_scene load_steps=49 format=3 uid="uid://cbexkor24ce0h"]
+[gd_scene load_steps=37 format=3 uid="uid://cbexkor24ce0h"]
 
 [ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/EquipmentMenu/equipment_page_control.gd" id="1_6pwc2"]
 [ext_resource type="Texture2D" uid="uid://c4yedxpiinlff" path="res://Scenes/Menus/CharacterMenu/MenuPages/outline.png" id="2_5i0tg"]
+[ext_resource type="PackedScene" uid="uid://cf43u4ospfr42" path="res://Scenes/Menus/CharacterMenu/MenuPages/EquipmentMenu/equipment_menu_item_slot_button.tscn" id="3_61ti0"]
 [ext_resource type="Theme" uid="uid://dwinll8pgdjhc" path="res://Scenes/Themes/standard_theme.tres" id="3_th70d"]
 [ext_resource type="Texture2D" uid="uid://bvdik5isqdgxf" path="res://Scenes/Menus/CharacterMenu/MenuPages/EquipmentMenu/EquipmentSlotsContainer/EquipmentGrid_Background.png" id="4_cj3ey"]
 [ext_resource type="Texture2D" uid="uid://lv3xit0yhvj2" path="res://Scenes/UiNodes/ExpBar/ExpBar.png" id="4_e3qra"]
-[ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/EquipmentMenu/EquipmentSlotsContainer/equipment_display_container.gd" id="4_p6hdl"]
+[ext_resource type="PackedScene" uid="uid://ybkww8wk3awm" path="res://Scenes/UiNodes/StatLabelContainer/stat_label_container.tscn" id="5_40ia4"]
+[ext_resource type="Texture2D" uid="uid://js1gbkgy0ql3" path="res://Scenes/Menus/CharacterMenu/MenuPages/EquipmentMenu/EquipmentSlotsContainer/EquipmentItemSlotOutline.png" id="5_a3xlj"]
 [ext_resource type="Script" path="res://Scenes/UiNodes/ExpBar/exp_bar_control.gd" id="5_aga8c"]
-[ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/EquipmentMenu/EquipmentSlotsContainer/equipment_display_slot_button.gd" id="5_pa62e"]
-[ext_resource type="Texture2D" uid="uid://cdxe2v7hg5tuw" path="res://assets/Sprites/UI/CharacterEdit/HeadSlot.png" id="6_tt121"]
 [ext_resource type="Script" path="res://Scenes/UiNodes/back_patch_container.gd" id="6_xuk44"]
-[ext_resource type="Texture2D" uid="uid://567vutk12a12" path="res://Scenes/Menus/CharacterMenu/MenuPages/SlotHighlight.png" id="7_0h3qm"]
 [ext_resource type="Texture2D" uid="uid://5hu0ttx4jxuo" path="res://assets/Sprites/UI/BackPatches/PaperPatch_64x92_16.png" id="7_8jkp8"]
+[ext_resource type="Texture2D" uid="uid://d1ad4eibf161i" path="res://Scenes/Menus/CharacterMenu/MenuPages/EquipmentMenu/EquipmentSlotsContainer/WarningSlotIcon.png" id="7_eunfx"]
 [ext_resource type="Theme" uid="uid://bfce41la62bs6" path="res://Scenes/Themes/readable_theme.tres" id="8_3y7lt"]
-[ext_resource type="Texture2D" uid="uid://di2sns34ee4ju" path="res://assets/Sprites/UI/CharacterEdit/BodySlot.png" id="8_8qosq"]
-[ext_resource type="Texture2D" uid="uid://djwy03i8oyrfm" path="res://assets/Sprites/UI/CharacterEdit/BootSlot.png" id="9_hj34j"]
-[ext_resource type="Texture2D" uid="uid://jwg5aqbw71la" path="res://assets/Sprites/UI/CharacterEdit/MainHandSlot.png" id="10_4lrdt"]
 [ext_resource type="PackedScene" uid="uid://uo60871y6t54" path="res://Scenes/Combat/MapObjects/Actors/ComplexActorNode/complex_actor_node.tscn" id="11_khxeq"]
-[ext_resource type="Texture2D" uid="uid://diy8q5lpvpw1u" path="res://assets/Sprites/UI/SymbolIcons/PhyDamageSymbol.png" id="12_aoirn"]
-[ext_resource type="Texture2D" uid="uid://dq2cad8orar4p" path="res://assets/Sprites/UI/SymbolIcons/ArmorSymbol.png" id="13_tdp6u"]
-[ext_resource type="Texture2D" uid="uid://b201kpuib7q5k" path="res://assets/Sprites/UI/SymbolIcons/MagDamageSymbol.png" id="14_6yim5"]
-[ext_resource type="Texture2D" uid="uid://d17k5iaed0gdg" path="res://assets/Sprites/UI/SymbolIcons/WardSymbol.png" id="15_3xyiw"]
-[ext_resource type="Texture2D" uid="uid://wu75tejgoo7m" path="res://assets/Sprites/UI/CharacterEdit/BookSlot.png" id="16_850j3"]
-[ext_resource type="Texture2D" uid="uid://co33b1qq2uef7" path="res://assets/Sprites/UI/CharacterEdit/BagSlot.png" id="17_t6rl3"]
-[ext_resource type="Texture2D" uid="uid://d1ad4eibf161i" path="res://Scenes/Menus/CharacterMenu/MenuPages/EquipmentMenu/EquipmentSlotsContainer/WarningSlotIcon.png" id="18_afplx"]
-[ext_resource type="Texture2D" uid="uid://puhp53n8k1h8" path="res://assets/Sprites/UI/CharacterEdit/TrinketSlot.png" id="18_pfurv"]
-[ext_resource type="Texture2D" uid="uid://dwliocipx40sq" path="res://assets/Sprites/UI/CharacterEdit/OffHandSlot.png" id="19_vhvqa"]
 [ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/EquipmentMenu/stat_box_control.gd" id="21_8w6l2"]
 [ext_resource type="Script" path="res://Scenes/UiNodes/StatLabelContainer/stat_label_container.gd" id="21_hnuvf"]
 [ext_resource type="Texture2D" uid="uid://b10pvly4exem2" path="res://assets/Sprites/UI/SymbolIcons/_S_Symbole.png" id="23_6x5jd"]
@@ -38,7 +26,7 @@
 [ext_resource type="Texture2D" uid="uid://clebb0eitse2k" path="res://assets/Sprites/UI/SymbolIcons/ProtectionSymbol.png" id="30_sbeok"]
 [ext_resource type="Texture2D" uid="uid://v6mrr2dref31" path="res://assets/Sprites/UI/SymbolIcons/SpeedSymbol.png" id="31_wfp0r"]
 [ext_resource type="Texture2D" uid="uid://m0ss0tg7qqou" path="res://assets/Sprites/UI/SymbolIcons/MassSymbol.png" id="32_ohw0h"]
-[ext_resource type="Texture2D" uid="uid://bujky44hog2jm" path="res://assets/Sprites/UI/SymbolIcons/QueCountSymbol.png" id="33_tgryk"]
+[ext_resource type="Texture2D" uid="uid://bujky44hog2jm" path="res://assets/Sprites/UI/SymbolIcons/PPRSymbol.png" id="33_tgryk"]
 [ext_resource type="Texture2D" uid="uid://den756c067qbk" path="res://assets/Sprites/UI/SymbolIcons/CrashSymbol.png" id="34_giu80"]
 [ext_resource type="Texture2D" uid="uid://ijuqwfxfdvsh" path="res://Scenes/UiNodes/ExpBar/AttributesIcon_SpriteSheetpdn.png" id="36_fptg3"]
 
@@ -115,10 +103,22 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("EquipmentSlotsControl/RightEquipSlots/BookSlotButton/PageBookWarningIcon:self_modulate")
+tracks/0/path = NodePath("EquipmentSlotsControl/RightEquipSlots/PageBook_EquipmentSlotButton/TextureRect:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("EquipmentSlotsControl/RightEquipSlots/PageBook_EquipmentSlotButton/TextureRect:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
@@ -131,14 +131,26 @@ step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("EquipmentSlotsControl/RightEquipSlots/BookSlotButton/PageBookWarningIcon:self_modulate")
+tracks/0/path = NodePath("EquipmentSlotsControl/RightEquipSlots/PageBook_EquipmentSlotButton/TextureRect:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 1),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("EquipmentSlotsControl/RightEquipSlots/PageBook_EquipmentSlotButton/TextureRect:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_i8tbc"]
@@ -147,8 +159,8 @@ _data = {
 "pagebook_warning": SubResource("Animation_peevg")
 }
 
-[node name="EquipmentPage" type="Control" node_paths=PackedStringArray("name_label", "level_label", "equipment_slots_container", "stat_box", "animation_player", "exp_bar", "tags_box")]
-custom_minimum_size = Vector2(280, 395)
+[node name="EquipmentPage" type="Control" node_paths=PackedStringArray("name_label", "level_label", "actor_node", "stat_box", "animation_player", "exp_bar", "tags_box", "phy_attack_label", "mag_attack_label", "armor_label", "ward_label")]
+custom_minimum_size = Vector2(292, 395)
 layout_mode = 3
 anchors_preset = 0
 offset_right = 280.0
@@ -156,30 +168,31 @@ offset_bottom = 395.0
 script = ExtResource("1_6pwc2")
 name_label = NodePath("TitleBox/VBoxContainer/HBoxContainer/NameLabel")
 level_label = NodePath("TitleBox/VBoxContainer/HBoxContainer/LevelLabel")
-equipment_slots_container = NodePath("EquipmentSlotsControl")
+actor_node = NodePath("EquipmentSlotsControl/CenterContainer/Control/Node2D/ActorNode")
 stat_box = NodePath("StatBoxControl")
 animation_player = NodePath("AnimationPlayer")
 exp_bar = NodePath("TitleBox/VBoxContainer/HBoxContainer2/ExpBar")
 tags_box = NodePath("StatBoxControl/TagsBox")
+phy_attack_label = NodePath("EquipmentSlotsControl/MiddlePortraitContainer/NinePatchRect/AtkDefStatsContainer/LeftStatContainer/PhyAtkLabel")
+mag_attack_label = NodePath("EquipmentSlotsControl/MiddlePortraitContainer/NinePatchRect/AtkDefStatsContainer/RightStatContainer/MagAtkLabel")
+armor_label = NodePath("EquipmentSlotsControl/MiddlePortraitContainer/NinePatchRect/AtkDefStatsContainer/LeftStatContainer/PhyDefLabel")
+ward_label = NodePath("EquipmentSlotsControl/MiddlePortraitContainer/NinePatchRect/AtkDefStatsContainer/RightStatContainer/MagDefLabel")
 
-[node name="EquipmentSlotsControl" type="Control" parent="." node_paths=PackedStringArray("actor_node", "armor_lable", "ward_label", "phyatk_label", "magatk_label")]
+[node name="EquipmentSlotsControl" type="Control" parent="."]
 custom_minimum_size = Vector2(256, 256)
-layout_mode = 3
-anchors_preset = 0
-offset_left = 12.0
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 14.0
 offset_top = 55.0
-offset_right = 268.0
+offset_right = -14.0
 offset_bottom = 311.0
+grow_horizontal = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-script = ExtResource("4_p6hdl")
-actor_node = NodePath("CenterContainer/Control/Node2D/ActorNode")
-armor_lable = NodePath("MiddlePortraitContainer/StatsContainer/LeftStatContainer/PhyDefense/Label")
-ward_label = NodePath("MiddlePortraitContainer/StatsContainer/RightStatContainer/MagDefense/Label")
-phyatk_label = NodePath("MiddlePortraitContainer/StatsContainer/LeftStatContainer/PhyAttack/Label")
-magatk_label = NodePath("MiddlePortraitContainer/StatsContainer/RightStatContainer/MagAttack/Label")
 
 [node name="TextureRect" type="TextureRect" parent="EquipmentSlotsControl"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -196,105 +209,32 @@ anchor_right = 0.25
 anchor_bottom = 1.0
 grow_vertical = 2
 theme_override_constants/separation = 0
-alignment = 1
+alignment = 2
 
-[node name="HeadSlotButton" type="TextureButton" parent="EquipmentSlotsControl/LeftEquipSlots" node_paths=PackedStringArray("highlight_background", "icon_texture_rect")]
+[node name="Head_EquipmentSlotButton" parent="EquipmentSlotsControl/LeftEquipSlots" instance=ExtResource("3_61ti0")]
 layout_mode = 2
-size_flags_vertical = 3
-script = ExtResource("5_pa62e")
-highlight_background = NodePath("TextureRect")
-default_icon_texture = ExtResource("6_tt121")
-icon_texture_rect = NodePath("IconTextureRect")
 
-[node name="TextureRect" type="TextureRect" parent="EquipmentSlotsControl/LeftEquipSlots/HeadSlotButton"]
-visible = false
-layout_mode = 0
-offset_right = 64.0
-offset_bottom = 64.0
-texture = ExtResource("7_0h3qm")
-
-[node name="IconTextureRect" type="TextureRect" parent="EquipmentSlotsControl/LeftEquipSlots/HeadSlotButton"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("6_tt121")
-
-[node name="BodySlotButton" type="TextureButton" parent="EquipmentSlotsControl/LeftEquipSlots" node_paths=PackedStringArray("highlight_background", "icon_texture_rect")]
+[node name="Body_EquipmentSlotButton" parent="EquipmentSlotsControl/LeftEquipSlots" instance=ExtResource("3_61ti0")]
 layout_mode = 2
-size_flags_vertical = 3
-script = ExtResource("5_pa62e")
-highlight_background = NodePath("TextureRect")
-default_icon_texture = ExtResource("8_8qosq")
-icon_texture_rect = NodePath("IconTextureRect")
 
-[node name="TextureRect" type="TextureRect" parent="EquipmentSlotsControl/LeftEquipSlots/BodySlotButton"]
-visible = false
-layout_mode = 0
-offset_right = 64.0
-offset_bottom = 64.0
-texture = ExtResource("7_0h3qm")
-
-[node name="IconTextureRect" type="TextureRect" parent="EquipmentSlotsControl/LeftEquipSlots/BodySlotButton"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("8_8qosq")
-
-[node name="FeetSlotButton" type="TextureButton" parent="EquipmentSlotsControl/LeftEquipSlots" node_paths=PackedStringArray("highlight_background", "icon_texture_rect")]
-custom_minimum_size = Vector2(64, 64)
+[node name="Legs_EquipmentSlotButton" parent="EquipmentSlotsControl/LeftEquipSlots" instance=ExtResource("3_61ti0")]
 layout_mode = 2
-size_flags_vertical = 3
-script = ExtResource("5_pa62e")
-highlight_background = NodePath("TextureRect")
-default_icon_texture = ExtResource("9_hj34j")
-icon_texture_rect = NodePath("IconTextureRect")
 
-[node name="TextureRect" type="TextureRect" parent="EquipmentSlotsControl/LeftEquipSlots/FeetSlotButton"]
-visible = false
-layout_mode = 0
-offset_right = 64.0
-offset_bottom = 64.0
-texture = ExtResource("7_0h3qm")
-
-[node name="IconTextureRect" type="TextureRect" parent="EquipmentSlotsControl/LeftEquipSlots/FeetSlotButton"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("9_hj34j")
-
-[node name="MainHandSlotButton" type="TextureButton" parent="EquipmentSlotsControl/LeftEquipSlots" node_paths=PackedStringArray("highlight_background", "icon_texture_rect")]
-custom_minimum_size = Vector2(64, 64)
+[node name="Hand_EquipmentSlotButton" parent="EquipmentSlotsControl/LeftEquipSlots" instance=ExtResource("3_61ti0")]
 layout_mode = 2
-size_flags_vertical = 3
-script = ExtResource("5_pa62e")
-highlight_background = NodePath("TextureRect")
-default_icon_texture = ExtResource("10_4lrdt")
-icon_texture_rect = NodePath("IconTextureRect")
 
-[node name="TextureRect" type="TextureRect" parent="EquipmentSlotsControl/LeftEquipSlots/MainHandSlotButton"]
-visible = false
-layout_mode = 0
-offset_right = 64.0
-offset_bottom = 64.0
-texture = ExtResource("7_0h3qm")
-
-[node name="IconTextureRect" type="TextureRect" parent="EquipmentSlotsControl/LeftEquipSlots/MainHandSlotButton"]
+[node name="NinePatchRect2" type="NinePatchRect" parent="EquipmentSlotsControl"]
+custom_minimum_size = Vector2(0, 64)
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("10_4lrdt")
+anchors_preset = -1
+anchor_left = 0.25
+anchor_right = 0.75
+anchor_bottom = 0.75
+texture = ExtResource("5_a3xlj")
+patch_margin_left = 18
+patch_margin_top = 18
+patch_margin_right = 18
+patch_margin_bottom = 18
 
 [node name="CenterContainer" type="CenterContainer" parent="EquipmentSlotsControl"]
 layout_mode = 1
@@ -329,91 +269,49 @@ size_flags_horizontal = 3
 theme_override_constants/separation = 0
 alignment = 2
 
-[node name="StatsContainer" type="HBoxContainer" parent="EquipmentSlotsControl/MiddlePortraitContainer"]
+[node name="NinePatchRect" type="NinePatchRect" parent="EquipmentSlotsControl/MiddlePortraitContainer"]
+custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
+texture = ExtResource("5_a3xlj")
+patch_margin_left = 18
+patch_margin_top = 18
+patch_margin_right = 18
+patch_margin_bottom = 18
+
+[node name="AtkDefStatsContainer" type="HBoxContainer" parent="EquipmentSlotsControl/MiddlePortraitContainer/NinePatchRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_vertical = 3
 
-[node name="LeftStatContainer" type="VBoxContainer" parent="EquipmentSlotsControl/MiddlePortraitContainer/StatsContainer"]
+[node name="LeftStatContainer" type="VBoxContainer" parent="EquipmentSlotsControl/MiddlePortraitContainer/NinePatchRect/AtkDefStatsContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 alignment = 1
 
-[node name="PhyAttack" type="HBoxContainer" parent="EquipmentSlotsControl/MiddlePortraitContainer/StatsContainer/LeftStatContainer"]
+[node name="PhyAtkLabel" parent="EquipmentSlotsControl/MiddlePortraitContainer/NinePatchRect/AtkDefStatsContainer/LeftStatContainer" instance=ExtResource("5_40ia4")]
+layout_mode = 2
+stat_name = "PhyAttack"
+
+[node name="PhyDefLabel" parent="EquipmentSlotsControl/MiddlePortraitContainer/NinePatchRect/AtkDefStatsContainer/LeftStatContainer" instance=ExtResource("5_40ia4")]
+layout_mode = 2
+stat_name = "Armor"
+
+[node name="RightStatContainer" type="VBoxContainer" parent="EquipmentSlotsControl/MiddlePortraitContainer/NinePatchRect/AtkDefStatsContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 alignment = 1
 
-[node name="Icon" type="TextureRect" parent="EquipmentSlotsControl/MiddlePortraitContainer/StatsContainer/LeftStatContainer/PhyAttack"]
+[node name="MagAtkLabel" parent="EquipmentSlotsControl/MiddlePortraitContainer/NinePatchRect/AtkDefStatsContainer/RightStatContainer" instance=ExtResource("5_40ia4")]
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-texture = ExtResource("12_aoirn")
+stat_name = "MagAttack"
 
-[node name="Label" type="Label" parent="EquipmentSlotsControl/MiddlePortraitContainer/StatsContainer/LeftStatContainer/PhyAttack"]
-self_modulate = Color(0.498039, 0, 0, 1)
-custom_minimum_size = Vector2(24, 0)
+[node name="MagDefLabel" parent="EquipmentSlotsControl/MiddlePortraitContainer/NinePatchRect/AtkDefStatsContainer/RightStatContainer" instance=ExtResource("5_40ia4")]
 layout_mode = 2
-theme = ExtResource("3_th70d")
-text = "999"
-
-[node name="PhyDefense" type="HBoxContainer" parent="EquipmentSlotsControl/MiddlePortraitContainer/StatsContainer/LeftStatContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-alignment = 1
-
-[node name="Icon" type="TextureRect" parent="EquipmentSlotsControl/MiddlePortraitContainer/StatsContainer/LeftStatContainer/PhyDefense"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-texture = ExtResource("13_tdp6u")
-
-[node name="Label" type="Label" parent="EquipmentSlotsControl/MiddlePortraitContainer/StatsContainer/LeftStatContainer/PhyDefense"]
-self_modulate = Color(0.498039, 0, 0, 1)
-custom_minimum_size = Vector2(24, 0)
-layout_mode = 2
-theme = ExtResource("3_th70d")
-text = "999"
-
-[node name="RightStatContainer" type="VBoxContainer" parent="EquipmentSlotsControl/MiddlePortraitContainer/StatsContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-alignment = 1
-
-[node name="MagAttack" type="HBoxContainer" parent="EquipmentSlotsControl/MiddlePortraitContainer/StatsContainer/RightStatContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-alignment = 1
-
-[node name="Icon" type="TextureRect" parent="EquipmentSlotsControl/MiddlePortraitContainer/StatsContainer/RightStatContainer/MagAttack"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-texture = ExtResource("14_6yim5")
-
-[node name="Label" type="Label" parent="EquipmentSlotsControl/MiddlePortraitContainer/StatsContainer/RightStatContainer/MagAttack"]
-self_modulate = Color(0.498039, 0, 0, 1)
-custom_minimum_size = Vector2(24, 0)
-layout_mode = 2
-theme = ExtResource("3_th70d")
-text = "999"
-
-[node name="MagDefense" type="HBoxContainer" parent="EquipmentSlotsControl/MiddlePortraitContainer/StatsContainer/RightStatContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-alignment = 1
-
-[node name="Icon" type="TextureRect" parent="EquipmentSlotsControl/MiddlePortraitContainer/StatsContainer/RightStatContainer/MagDefense"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-texture = ExtResource("15_3xyiw")
-
-[node name="Label" type="Label" parent="EquipmentSlotsControl/MiddlePortraitContainer/StatsContainer/RightStatContainer/MagDefense"]
-self_modulate = Color(0.498039, 0, 0, 1)
-custom_minimum_size = Vector2(24, 0)
-layout_mode = 2
-theme = ExtResource("3_th70d")
-text = "999"
+stat_name = "Ward"
 
 [node name="RightEquipSlots" type="VBoxContainer" parent="EquipmentSlotsControl"]
 custom_minimum_size = Vector2(6, 0)
@@ -425,34 +323,18 @@ anchor_bottom = 1.0
 grow_horizontal = 0
 grow_vertical = 2
 theme_override_constants/separation = 0
+alignment = 2
 
-[node name="BookSlotButton" type="TextureButton" parent="EquipmentSlotsControl/RightEquipSlots" node_paths=PackedStringArray("highlight_background", "icon_texture_rect")]
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 2
-size_flags_vertical = 3
-script = ExtResource("5_pa62e")
-highlight_background = NodePath("TextureRect")
-default_icon_texture = ExtResource("16_850j3")
-icon_texture_rect = NodePath("IconTextureRect")
-
-[node name="TextureRect" type="TextureRect" parent="EquipmentSlotsControl/RightEquipSlots/BookSlotButton"]
+[node name="FalseSlot_EquipmentSlotButton" parent="EquipmentSlotsControl/RightEquipSlots" instance=ExtResource("3_61ti0")]
 visible = false
-layout_mode = 0
-offset_right = 64.0
-offset_bottom = 64.0
-texture = ExtResource("7_0h3qm")
+layout_mode = 2
 
-[node name="IconTextureRect" type="TextureRect" parent="EquipmentSlotsControl/RightEquipSlots/BookSlotButton"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("16_850j3")
+[node name="PageBook_EquipmentSlotButton" parent="EquipmentSlotsControl/RightEquipSlots" instance=ExtResource("3_61ti0")]
+layout_mode = 2
 
-[node name="PageBookWarningIcon" type="TextureRect" parent="EquipmentSlotsControl/RightEquipSlots/BookSlotButton"]
-self_modulate = Color(1, 1, 1, 0)
+[node name="TextureRect" type="TextureRect" parent="EquipmentSlotsControl/RightEquipSlots/PageBook_EquipmentSlotButton"]
+visible = false
+modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -460,89 +342,44 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-texture = ExtResource("18_afplx")
+texture = ExtResource("7_eunfx")
 
-[node name="BagSlotButton" type="TextureButton" parent="EquipmentSlotsControl/RightEquipSlots" node_paths=PackedStringArray("highlight_background", "icon_texture_rect")]
-custom_minimum_size = Vector2(64, 64)
+[node name="SupplyBag_EquipmentSlotButton" parent="EquipmentSlotsControl/RightEquipSlots" instance=ExtResource("3_61ti0")]
 layout_mode = 2
-size_flags_vertical = 3
-script = ExtResource("5_pa62e")
-highlight_background = NodePath("TextureRect")
-default_icon_texture = ExtResource("17_t6rl3")
-icon_texture_rect = NodePath("IconTextureRect")
 
-[node name="TextureRect" type="TextureRect" parent="EquipmentSlotsControl/RightEquipSlots/BagSlotButton"]
-visible = false
-layout_mode = 0
-offset_right = 64.0
-offset_bottom = 64.0
-texture = ExtResource("7_0h3qm")
+[node name="Trinket_EquipmentSlotButton" parent="EquipmentSlotsControl/RightEquipSlots" instance=ExtResource("3_61ti0")]
+layout_mode = 2
 
-[node name="IconTextureRect" type="TextureRect" parent="EquipmentSlotsControl/RightEquipSlots/BagSlotButton"]
+[node name="Hand2_EquipmentSlotButton" parent="EquipmentSlotsControl/RightEquipSlots" instance=ExtResource("3_61ti0")]
+layout_mode = 2
+
+[node name="Background" type="NinePatchRect" parent="EquipmentSlotsControl"]
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = -2.0
+offset_top = -2.0
+offset_right = 2.0
+offset_bottom = 2.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("17_t6rl3")
-
-[node name="TrinketSlotButton" type="TextureButton" parent="EquipmentSlotsControl/RightEquipSlots" node_paths=PackedStringArray("highlight_background", "icon_texture_rect")]
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 2
-size_flags_vertical = 3
-script = ExtResource("5_pa62e")
-highlight_background = NodePath("TextureRect")
-default_icon_texture = ExtResource("18_pfurv")
-icon_texture_rect = NodePath("IconTextureRect")
-
-[node name="TextureRect" type="TextureRect" parent="EquipmentSlotsControl/RightEquipSlots/TrinketSlotButton"]
-visible = false
-layout_mode = 0
-offset_right = 64.0
-offset_bottom = 64.0
-texture = ExtResource("7_0h3qm")
-
-[node name="IconTextureRect" type="TextureRect" parent="EquipmentSlotsControl/RightEquipSlots/TrinketSlotButton"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("18_pfurv")
-
-[node name="OffHandSlotButton" type="TextureButton" parent="EquipmentSlotsControl/RightEquipSlots" node_paths=PackedStringArray("highlight_background", "icon_texture_rect")]
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 2
-size_flags_vertical = 3
-script = ExtResource("5_pa62e")
-highlight_background = NodePath("TextureRect")
-default_icon_texture = ExtResource("19_vhvqa")
-icon_texture_rect = NodePath("IconTextureRect")
-
-[node name="TextureRect" type="TextureRect" parent="EquipmentSlotsControl/RightEquipSlots/OffHandSlotButton"]
-visible = false
-layout_mode = 0
-offset_right = 64.0
-offset_bottom = 64.0
-texture = ExtResource("7_0h3qm")
-
-[node name="IconTextureRect" type="TextureRect" parent="EquipmentSlotsControl/RightEquipSlots/OffHandSlotButton"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("19_vhvqa")
+texture = ExtResource("2_5i0tg")
+region_rect = Rect2(0, 0, 64, 64)
+patch_margin_left = 18
+patch_margin_top = 18
+patch_margin_right = 18
+patch_margin_bottom = 18
 
 [node name="StatBoxControl" type="Control" parent="." node_paths=PackedStringArray("stat_labels_container")]
-anchors_preset = 0
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
 offset_left = 12.0
 offset_top = 314.0
-offset_right = 268.0
+offset_right = -12.0
 offset_bottom = 385.0
+grow_horizontal = 2
 script = ExtResource("21_8w6l2")
 stat_labels_container = NodePath("VBoxContainer")
 
@@ -1103,10 +940,12 @@ theme = ExtResource("3_th70d")
 text = "Tag, Tag, Tag"
 
 [node name="TitleBox" type="NinePatchRect" parent="."]
-layout_mode = 0
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
 offset_left = 12.0
 offset_top = 5.0
-offset_right = 268.0
+offset_right = -12.0
 offset_bottom = 53.0
 texture = ExtResource("2_5i0tg")
 region_rect = Rect2(0, 0, 64, 64)

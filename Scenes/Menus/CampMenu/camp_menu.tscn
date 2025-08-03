@@ -17,7 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://cb8k5gxes3iaj" path="res://assets/Sprites/UI/SymbolIcons/MoneySymbol_White.png" id="15_axj4f"]
 [ext_resource type="PackedScene" uid="uid://bje0k82nenje6" path="res://Scenes/Dialog/dialog_control.tscn" id="16_q50fv"]
 
-[node name="CampMenu" type="Control" node_paths=PackedStringArray("dialog_control", "camp_options_container", "system_options_container", "records_options_container", "pretty_picture_texure_rect", "quest_button", "shop_button", "character_button", "explort_button", "records_button", "system_button", "sys_back_button", "sys_save_button", "sys_load_button", "sys_debug_button", "sys_quit_button", "rec_back_button", "rec_cards_button", "rec_pages_button")]
+[node name="CampMenu" type="Control" node_paths=PackedStringArray("dialog_control", "camp_options_container", "system_options_container", "records_options_container", "pretty_picture_texure_rect", "quest_button", "shop_button", "character_button", "explort_button", "records_button", "system_button", "sys_back_button", "sys_save_button", "sys_load_button", "sys_debug_button", "sys_quit_button", "rec_back_button", "rec_cards_button", "rec_pages_button", "character_menu")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -44,6 +44,7 @@ sys_quit_button = NodePath("CampOptionsContainer/SystemOptionsContainer/Sys_Quit
 rec_back_button = NodePath("CampOptionsContainer/RecordsOptionsContainer/Sys_BackOptionButton")
 rec_cards_button = NodePath("CampOptionsContainer/RecordsOptionsContainer/Rec_FlashCardsOptionButton")
 rec_pages_button = NodePath("CampOptionsContainer/RecordsOptionsContainer/Rec_PagesOptionButton")
+character_menu = NodePath("")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="."]
 layout_mode = 1

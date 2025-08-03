@@ -30,6 +30,10 @@ static func get_actor_def(key:String)->Dictionary:
 	if !Instance: Instance = ActorLibrary.new()
 	return Instance.get_object_def(key)
 	
+static func has_actor(actor_id:String)->bool:
+	if !Instance: Instance = ActorLibrary.new()
+	return Instance._loaded_objects.keys().has(actor_id)
+
 static func get_actor(actor_id:String)->BaseActor:
 	if !Instance: Instance = ActorLibrary.new()
 	var actor = Instance.get_object(actor_id)

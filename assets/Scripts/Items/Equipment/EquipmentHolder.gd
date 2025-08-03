@@ -111,19 +111,18 @@ func get_equipt_items_of_slot_type(slot_type:String)->Array:
 				out_list.append(item)
 	return out_list
 
-func get_slot_equipment_type(index:int)->String:
-	if index < 0 or index >= _raw_to_slot_set_mapping.size():
-		return ''
-	var slot_set_ref = _raw_to_slot_set_mapping[index]
-	return slot_set_ref['SlotSetKey']
-
 ########################
 ##     Hand Logic     ##
 ########################
 func get_first_valid_slot_for_item(item:BaseItem, allow_replace:bool=false)->int:
 	if item is BaseToolEquipment:
-		var main_hand_index = get_first_hand_index()
-		var auto_index = get_auto_hand_index(item, main_hand_index, allow_replace)
+		var try_hand_index = get_first_hand_index()
+		if not allow_replace and _raw_item_slots[try_hand_index] != null:
+			for off_index in list_offhand_indexes():
+				if _raw_item_slots[off_index] == null:
+					try_hand_index = off_index
+					break
+		var auto_index = get_auto_hand_index(item, try_hand_index, allow_replace)
 		return auto_index
 	return super(item, allow_replace)
 

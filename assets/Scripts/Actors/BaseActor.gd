@@ -235,9 +235,6 @@ func on_held_items_change(item_holder_name:String, change_data:Dictionary):
 	
 	Que.rechache_page_ammo()
 	
-	if rebuild_sprite:
-		sprite._build_sprite_sheet()
-	
 	# Rebuild Item Holder Slots
 	if rebuild_slots:
 		pages._build_slots_list()
@@ -245,8 +242,14 @@ func on_held_items_change(item_holder_name:String, change_data:Dictionary):
 		items._build_slots_list()
 	validate_itemholders()
 	
+	stats.recache_stats(false)
+	
 	if holder == pages:
 		page_list_changed.emit()
+	
+	if rebuild_sprite:
+		sprite._build_sprite_sheet()
+	
 
 func validate_itemholders():
 	pages.validate_items()
@@ -256,6 +259,7 @@ func validate_itemholders():
 	for invalid_item:BaseItem in pages.list_invalid_items():
 		if invalid_item.get_item_slots_mods().size() > 0:
 			printerr("We have a problem.")
+	Que.dirty_ammo_mods()
 
 ## Called by ItemHolders when they build slot sets.
 ## On first pass, we give all items benifit of doubt 
@@ -320,6 +324,7 @@ func load_data(loading_data:Dictionary):
 	_validate_items_for_slot_mods = true
 	
 	validate_itemholders()
+	stats.recache_stats(false)
 
 func build_spawned_with_items():
 	equipment._build_slots_list()
@@ -334,6 +339,8 @@ func build_spawned_with_items():
 	_build_spawn_items(item_list, items)
 	
 	validate_itemholders()
+	
+	stats.recache_stats(false)
 	
 
 func _build_spawn_items(item_list:Array, holder:BaseItemHolder):
@@ -355,6 +362,7 @@ func clean_state():
 	stats.prep_for_combat()
 
 func on_combat_start():
+	clean_state()
 	effects.on_combat_start()
 
 func on_delete():
@@ -471,6 +479,7 @@ func get_weapon_damage_datas(weapon_filter)->Dictionary:
 						printerr("Unsuported WeaponMod Type: " + str(mod_type))
 						continue
 					damage_data[prop_key] = new_prop_val
+			damage_data['IsWeaponDamage'] = true
 			out_dict[sub_key] = damage_data
 			
 		index += 1

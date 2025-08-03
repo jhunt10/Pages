@@ -73,6 +73,21 @@ static func try_pickup_item(actor:BaseActor, item:BaseItem)->Dictionary:
 	return popup_data
 
 static var transering_items = []
+static func get_first_valid_slot_for_item(item:BaseItem, actor:BaseActor, allow_replace:bool = true)->int:
+	var holder:BaseItemHolder = null
+	#var index = -1
+	if item is BaseEquipmentItem:
+		holder = actor.equipment
+		#index = actor.equipment.get_first_valid_slot_for_item(item, allow_replace)
+	elif item is BasePageItem:
+		holder = actor.pages
+	elif item is BaseSupplyItem:
+		holder = actor.items
+	if !holder:
+		return -1
+	
+	var index = holder.get_first_valid_slot_for_item(item, true)
+	return index
 
 static func try_transfer_item_from_inventory_to_actor(item:BaseItem, actor:BaseActor, allow_replace:bool = true)->String:
 	var holder:BaseItemHolder = null
@@ -223,7 +238,7 @@ static func cant_equip_reasons_to_string(reasons_data:Dictionary)->String:
 		missing_string = "Conflicts with "
 		for key in conflicts:
 			missing_string += key
-	if reasons_data.has("Apparel"):
+	if missing_string == '' and reasons_data.has("Apparel"):
 		var apparel = reasons_data['Apparel']
 		missing_string = "Invalid Apparel:  " + ", ".join(apparel)
 		

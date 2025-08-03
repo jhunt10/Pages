@@ -1,0 +1,306 @@
+[gd_scene load_steps=20 format=3 uid="uid://dbtugo1kq2imi"]
+
+[ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/InventoryPage/inventory_menu_page_control.gd" id="1_3t8c6"]
+[ext_resource type="Texture2D" uid="uid://gxk1dw0hkyuj" path="res://Scenes/Menus/CharacterMenu/MenuPages/InventoryPage/InvBoxBackground_working.png" id="2_q55l7"]
+[ext_resource type="PackedScene" uid="uid://bpvy87uagttpr" path="res://Scenes/UiNodes/ScollBar/scroll_bar.tscn" id="3_aijvf"]
+[ext_resource type="Texture2D" uid="uid://3ncohf5a6kf7" path="res://Scenes/Menus/CharacterMenu/HoleBackground.png" id="4_1et20"]
+[ext_resource type="Texture2D" uid="uid://w8cgm1tj35ld" path="res://Scenes/Menus/CharacterMenu/MenuPages/InventoryPage/HoleOutline.png" id="5_ramtd"]
+[ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/InventoryPage/sub_group_container.gd" id="6_6nx76"]
+[ext_resource type="Theme" uid="uid://dwinll8pgdjhc" path="res://Scenes/Themes/standard_theme.tres" id="7_xu5ex"]
+[ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/InventoryPage/inventory_item_button_control.gd" id="8_q22wh"]
+[ext_resource type="Texture2D" uid="uid://bibqsudhjw4qe" path="res://assets/Sprites/Paper/Mundane_Background.png" id="9_qf2fl"]
+[ext_resource type="Texture2D" uid="uid://cegwhar55vupc" path="res://assets/Sprites/Paper/Common_Background.png" id="10_pf2fr"]
+[ext_resource type="Texture2D" uid="uid://du85tsvalwqdr" path="res://assets/Sprites/Paper/Rare_Background.png" id="11_uuu36"]
+[ext_resource type="Texture2D" uid="uid://b81lqrxyq30xy" path="res://assets/Sprites/Paper/Legend_Background.png" id="12_3vc4t"]
+[ext_resource type="Texture2D" uid="uid://cm3afo1rfa56g" path="res://assets/Sprites/Paper/PaperButton_64.png" id="13_ywwr8"]
+[ext_resource type="Texture2D" uid="uid://d28r048mh6136" path="res://assets/Sprites/UnknownSprite.png" id="14_2qokj"]
+[ext_resource type="Texture2D" uid="uid://bkjy2j6ra337v" path="res://assets/Sprites/UI/SymbolIcons/EquiptIcon.png" id="15_4btnv"]
+[ext_resource type="Texture2D" uid="uid://0wkhsf2kgce1" path="res://assets/Sprites/UI/BackPatches/Patch_12_4_Dark.png" id="16_7ntf8"]
+[ext_resource type="Script" path="res://Scenes/UiNodes/FitScaleLabel/fit_scale_label.gd" id="17_go085"]
+[ext_resource type="Theme" uid="uid://bfce41la62bs6" path="res://Scenes/Themes/readable_theme.tres" id="18_330nc"]
+[ext_resource type="Script" path="res://Scenes/UiNodes/loaded_option_button.gd" id="18_e142l"]
+
+[node name="InventoryMenuPage" type="Control" node_paths=PackedStringArray("loading_message_container", "scroll_container", "items_container", "scroll_bar", "inventory_box_highlight", "filter_option_button", "premade_inventory_sub_group", "premade_item_button")]
+custom_minimum_size = Vector2(280, 395)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 280.0
+offset_bottom = 395.0
+mouse_filter = 1
+script = ExtResource("1_3t8c6")
+min_button_size = Vector2i(64, 64)
+max_button_size = Vector2i(96, 96)
+loading_message_container = NodePath("BoxBackground/LoadingContainer")
+scroll_container = NodePath("BoxBackground/ScrollContainer")
+items_container = NodePath("BoxBackground/ScrollContainer/VBoxContainer")
+scroll_bar = NodePath("ScrollBar")
+inventory_box_highlight = NodePath("BoxBackground/NinePatchRect")
+filter_option_button = NodePath("FilterOptionButton")
+premade_inventory_sub_group = NodePath("BoxBackground/ScrollContainer/VBoxContainer/SubGroupContainer")
+premade_item_button = NodePath("BoxBackground/ScrollContainer/VBoxContainer/SubGroupContainer/FlowContainer/InventoryItemButton")
+
+[node name="Background" type="NinePatchRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("2_q55l7")
+region_rect = Rect2(0, 0, 140, 124)
+patch_margin_left = 38
+patch_margin_top = 38
+patch_margin_right = 54
+patch_margin_bottom = 38
+
+[node name="ScrollBar" parent="." node_paths=PackedStringArray("scroll_container") instance=ExtResource("3_aijvf")]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 16.0
+offset_right = 0.0
+offset_bottom = -16.0
+grow_horizontal = 0
+grow_vertical = 2
+scroll_container = NodePath("../BoxBackground/ScrollContainer")
+
+[node name="BoxBackground" type="NinePatchRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 17.0
+offset_right = -32.0
+offset_bottom = -16.0
+texture = ExtResource("4_1et20")
+patch_margin_left = 32
+patch_margin_top = 32
+patch_margin_right = 32
+patch_margin_bottom = 32
+
+[node name="NinePatchRect" type="NinePatchRect" parent="BoxBackground"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_ramtd")
+region_rect = Rect2(0, 0, 64, 64)
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="BoxBackground"]
+custom_minimum_size = Vector2(0, 220)
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 6.0
+offset_top = 6.0
+offset_right = -6.0
+offset_bottom = -6.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="BoxBackground/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SubGroupContainer" type="VBoxContainer" parent="BoxBackground/ScrollContainer/VBoxContainer" node_paths=PackedStringArray("label", "inner_container")]
+layout_mode = 2
+script = ExtResource("6_6nx76")
+label = NodePath("SubGroupLabel")
+inner_container = NodePath("FlowContainer")
+
+[node name="SubGroupLabel" type="Label" parent="BoxBackground/ScrollContainer/VBoxContainer/SubGroupContainer"]
+layout_mode = 2
+theme = ExtResource("7_xu5ex")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 22
+text = "Passives"
+text_overrun_behavior = 3
+
+[node name="FlowContainer" type="FlowContainer" parent="BoxBackground/ScrollContainer/VBoxContainer/SubGroupContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/h_separation = 6
+theme_override_constants/v_separation = 6
+alignment = 1
+last_wrap_alignment = 1
+
+[node name="InventoryItemButton" type="Control" parent="BoxBackground/ScrollContainer/VBoxContainer/SubGroupContainer/FlowContainer" node_paths=PackedStringArray("item_icon_rect", "equipt_icon", "count_label", "button", "name_label", "background")]
+custom_minimum_size = Vector2(68, 84)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("8_q22wh")
+item_icon_rect = NodePath("ItemIcon")
+equipt_icon = NodePath("EquiptIcon")
+count_label = NodePath("CountLabel")
+button = NodePath("Button")
+name_label = NodePath("NinePatchRect/FitScaleLabel")
+background = NodePath("Background")
+mundane_background = ExtResource("9_qf2fl")
+common_background = ExtResource("10_pf2fr")
+rare_background = ExtResource("11_uuu36")
+legend_background = ExtResource("12_3vc4t")
+
+[node name="Background" type="TextureRect" parent="BoxBackground/ScrollContainer/VBoxContainer/SubGroupContainer/FlowContainer/InventoryItemButton"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("13_ywwr8")
+
+[node name="ItemIcon" type="TextureRect" parent="BoxBackground/ScrollContainer/VBoxContainer/SubGroupContainer/FlowContainer/InventoryItemButton"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("14_2qokj")
+
+[node name="EquiptIcon" type="TextureRect" parent="BoxBackground/ScrollContainer/VBoxContainer/SubGroupContainer/FlowContainer/InventoryItemButton"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -15.0
+offset_top = 49.0
+offset_right = 3.0
+offset_bottom = 70.0
+grow_horizontal = 0
+texture = ExtResource("15_4btnv")
+
+[node name="CountLabel" type="Label" parent="BoxBackground/ScrollContainer/VBoxContainer/SubGroupContainer/FlowContainer/InventoryItemButton"]
+layout_direction = 3
+layout_mode = 0
+offset_left = 3.0
+offset_top = 49.0
+offset_right = 11.0
+offset_bottom = 69.0
+theme = ExtResource("7_xu5ex")
+text = "1"
+horizontal_alignment = 1
+
+[node name="NinePatchRect" type="NinePatchRect" parent="BoxBackground/ScrollContainer/VBoxContainer/SubGroupContainer/FlowContainer/InventoryItemButton/CountLabel"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -3.0
+offset_right = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("16_7ntf8")
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+
+[node name="NinePatchRect" type="NinePatchRect" parent="BoxBackground/ScrollContainer/VBoxContainer/SubGroupContainer/FlowContainer/InventoryItemButton"]
+custom_minimum_size = Vector2(64, 18)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -15.0
+offset_bottom = 3.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("16_7ntf8")
+patch_margin_left = 5
+patch_margin_top = 5
+patch_margin_right = 5
+patch_margin_bottom = 5
+
+[node name="FitScaleLabel" type="Control" parent="BoxBackground/ScrollContainer/VBoxContainer/SubGroupContainer/FlowContainer/InventoryItemButton/NinePatchRect" node_paths=PackedStringArray("label")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 6.0
+offset_top = 2.0
+offset_right = -6.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("17_go085")
+label = NodePath("Label")
+text = "Test THing"
+center_x = true
+
+[node name="Label" type="Label" parent="BoxBackground/ScrollContainer/VBoxContainer/SubGroupContainer/FlowContainer/InventoryItemButton/NinePatchRect/FitScaleLabel"]
+layout_mode = 0
+offset_right = 129.0
+offset_bottom = 30.0
+scale = Vector2(0.434109, 0.434109)
+theme = ExtResource("7_xu5ex")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 24
+text = "Test THing"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="BoxBackground/ScrollContainer/VBoxContainer/SubGroupContainer/FlowContainer/InventoryItemButton"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SubGroupControl" type="Control" parent="BoxBackground/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="LoadingContainer" type="CenterContainer" parent="BoxBackground"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="BoxBackground/LoadingContainer"]
+layout_mode = 2
+theme = ExtResource("18_330nc")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 24
+text = "Loading..."
+
+[node name="FilterOptionButton" type="OptionButton" parent="."]
+visible = false
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 0
+offset_left = 20.0
+offset_top = 13.0
+offset_right = 232.0
+offset_bottom = 45.0
+text_overrun_behavior = 3
+fit_to_longest_item = false
+script = ExtResource("18_e142l")

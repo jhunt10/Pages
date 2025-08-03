@@ -99,3 +99,9 @@ func get_misile_data()->Dictionary:
 
 func get_default_weapon_animation_name()->String:
 	return weapon_data.get("WeaponSpriteData", {}).get("WeaponAnimation", "")
+
+func get_weapon_attack_details()->Dictionary:
+	var attack_details = weapon_data.get("AttackData", {}).get("AttackDetails", {})
+	if attack_details.keys().has("AttackVfxData"):
+		attack_details['AttackVfxData']['LoadPath'] = self.get_load_path()
+	return attack_details

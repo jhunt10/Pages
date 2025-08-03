@@ -44,7 +44,6 @@ func _button_down():
 	highlight.show()
 func _button_up():
 	if disabled: return
-	print("Button Up: %s" %[ self.text])
 	if not is_highlighted:
 		highlight.hide()
 
