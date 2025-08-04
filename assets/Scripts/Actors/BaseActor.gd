@@ -209,6 +209,7 @@ func on_held_items_change(item_holder_name:String, change_data:Dictionary):
 	var rebuild_sprite = false
 	var recache_stats = false
 	var rebuild_slots = false
+	var rechache_action_mods = false
 	
 	# Check all Removed Items
 	for removed_item_id in removed_item_ids:
@@ -222,6 +223,10 @@ func on_held_items_change(item_holder_name:String, change_data:Dictionary):
 			rebuild_slots = true
 		if items._slot_mod_source_item_ids.has(removed_item_id):
 			rebuild_slots = true
+		# Check for Action Mods
+		if pages.cached_action_mod_source_ids.has(removed_item_id):
+			rechache_action_mods = true
+			
 	
 	# Chack all Added Items
 	for add_item_id in added_item_ids:
@@ -232,6 +237,8 @@ func on_held_items_change(item_holder_name:String, change_data:Dictionary):
 		# Check if tiem will change slots
 		if item.get_item_slots_mods().size() > 0:
 			rebuild_slots = true
+		if item.get_attack_mods().size() > 0:
+			rechache_action_mods = true
 	
 	Que.rechache_page_ammo()
 	
@@ -243,6 +250,9 @@ func on_held_items_change(item_holder_name:String, change_data:Dictionary):
 	validate_itemholders()
 	
 	stats.recache_stats(false)
+	
+	if rechache_action_mods:
+		pages._cache_action_mods()
 	
 	if holder == pages:
 		page_list_changed.emit()
@@ -324,6 +334,7 @@ func load_data(loading_data:Dictionary):
 	_validate_items_for_slot_mods = true
 	
 	validate_itemholders()
+	pages._cache_action_mods()
 	stats.recache_stats(false)
 
 func build_spawned_with_items():
@@ -340,6 +351,7 @@ func build_spawned_with_items():
 	
 	validate_itemholders()
 	
+	pages._cache_action_mods()
 	stats.recache_stats(false)
 	
 
@@ -387,7 +399,7 @@ func die():
 	var map_pos = CombatRootControl.Instance.GameState.get_actor_pos(self)
 	if map_pos:
 		# Roll for item drop
-		var drop_items = get_load_val("DropItemsSet", {})
+		var drop_items = actor_data.get("DropItemsSet", {})
 		var item_key = RandomHelper.roll_from_set(drop_items)
 		if item_key != "":
 			if item_key.begins_with("Money"):

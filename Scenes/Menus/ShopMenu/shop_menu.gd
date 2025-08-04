@@ -95,8 +95,8 @@ func get_shop_data()->Dictionary:
 	return {
 		"Ammo": ["Phy_Ammo", "Mag_Ammo", "Gen_Ammo", ],
 		"Potions": ["HealthPotionS", "HealthPotionM", "HealthPotionL"],
-		"Pages": ["UsePotionSelf_PageItem", "ReloadPage_PageItem","MoveForward_PageItem","TurnLeft_PageItem","TurnRight_PageItem", "Wait_PageItem", "MoveLeft_PageItem", "MoveRight_PageItem", "TurnAround_PageItem", "Dash_PageItem"],
-		"Test Items": ["AwarenessCharm"]
+		"Bombs":["BombBasicItem", "BombColdItem", "BombFireItem", "BombShockItem", "BombPoisonItem", "BombGreaseItem"],
+		"Pages": ["UsePotionSelf", "ThrowPotionPage", "ThrowBombPage", "ReloadPage","MoveForward","TurnLeft","TurnRight", "Wait", "MoveLeft", "MoveRight", "TurnAround", "Dash"]
 	}
 
 func _on_catagory_selected(sub_list:ShopSubItemList):

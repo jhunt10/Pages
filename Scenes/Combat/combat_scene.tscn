@@ -80,21 +80,23 @@ message_box = NodePath("CanvasLayer/CombatUiControl/CombatLogBox")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="MoveableCamera2D"]
 
-[node name="DevDataControl" type="Control" parent="MoveableCamera2D/CanvasLayer" node_paths=PackedStringArray("build_ques_button", "show_statbars_button", "fill_ammo_button", "draw_button", "dev_map_display")]
+[node name="DevDataControl" type="Control" parent="MoveableCamera2D/CanvasLayer" node_paths=PackedStringArray("build_ques_button", "show_statbars_button", "fill_ammo_button", "draw_button", "auto_play_button", "timer_label", "dev_map_display")]
 layout_mode = 3
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -108.0
+offset_left = -144.0
 offset_top = 8.0
 offset_right = -8.0
-offset_bottom = 191.0
+offset_bottom = 162.0
 grow_horizontal = 0
 script = ExtResource("19_yc3tw")
-build_ques_button = NodePath("VBoxContainer/BuildQuesButton")
-show_statbars_button = NodePath("VBoxContainer/ShowPathsButton")
-fill_ammo_button = NodePath("VBoxContainer/FillAmmoButton")
-draw_button = NodePath("VBoxContainer/DrawButton")
+build_ques_button = NodePath("BoxContainer/HBoxContainer/VBoxContainer/BuildQuesButton")
+show_statbars_button = NodePath("BoxContainer/HBoxContainer/VBoxContainer2/ShowPathsButton")
+fill_ammo_button = NodePath("BoxContainer/HBoxContainer/VBoxContainer/FillAmmoButton")
+draw_button = NodePath("BoxContainer/HBoxContainer/VBoxContainer2/DrawButton")
+auto_play_button = NodePath("BoxContainer/AutoPlayButton")
+timer_label = NodePath("BoxContainer/TimerContainer/Label")
 dev_map_display = NodePath("../../../DEV_MapDrawing")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="MoveableCamera2D/CanvasLayer/DevDataControl"]
@@ -110,43 +112,57 @@ patch_margin_top = 8
 patch_margin_right = 8
 patch_margin_bottom = 8
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MoveableCamera2D/CanvasLayer/DevDataControl"]
+[node name="BoxContainer" type="BoxContainer" parent="MoveableCamera2D/CanvasLayer/DevDataControl"]
 layout_mode = 1
-anchors_preset = -1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 8.0
-offset_top = 8.0
-offset_right = -8.0
-offset_bottom = -8.0
 grow_horizontal = 2
 grow_vertical = 2
+alignment = 1
+vertical = true
 
-[node name="TimerContainer" type="HBoxContainer" parent="MoveableCamera2D/CanvasLayer/DevDataControl/VBoxContainer"]
+[node name="TimerContainer" type="HBoxContainer" parent="MoveableCamera2D/CanvasLayer/DevDataControl/BoxContainer"]
 layout_mode = 2
+alignment = 1
 
-[node name="Label" type="Label" parent="MoveableCamera2D/CanvasLayer/DevDataControl/VBoxContainer/TimerContainer"]
+[node name="Label" type="Label" parent="MoveableCamera2D/CanvasLayer/DevDataControl/BoxContainer/TimerContainer"]
 modulate = Color(0, 0, 0, 1)
 layout_mode = 2
 size_flags_horizontal = 3
 text = "8:24"
-horizontal_alignment = 2
+horizontal_alignment = 1
 
-[node name="BuildQuesButton" type="Button" parent="MoveableCamera2D/CanvasLayer/DevDataControl/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MoveableCamera2D/CanvasLayer/DevDataControl/BoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MoveableCamera2D/CanvasLayer/DevDataControl/BoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="BuildQuesButton" type="Button" parent="MoveableCamera2D/CanvasLayer/DevDataControl/BoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 text = "BQs"
 
-[node name="ShowPathsButton" type="Button" parent="MoveableCamera2D/CanvasLayer/DevDataControl/VBoxContainer"]
-layout_mode = 2
-text = "Stats"
-
-[node name="FillAmmoButton" type="Button" parent="MoveableCamera2D/CanvasLayer/DevDataControl/VBoxContainer"]
+[node name="FillAmmoButton" type="Button" parent="MoveableCamera2D/CanvasLayer/DevDataControl/BoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 text = "Ammo"
 
-[node name="DrawButton" type="Button" parent="MoveableCamera2D/CanvasLayer/DevDataControl/VBoxContainer"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="MoveableCamera2D/CanvasLayer/DevDataControl/BoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="DrawButton" type="Button" parent="MoveableCamera2D/CanvasLayer/DevDataControl/BoxContainer/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
 text = "Draw"
+
+[node name="ShowPathsButton" type="Button" parent="MoveableCamera2D/CanvasLayer/DevDataControl/BoxContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+text = "Stats"
+
+[node name="AutoPlayButton" type="Button" parent="MoveableCamera2D/CanvasLayer/DevDataControl/BoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Auto: Off"
 
 [node name="QueCalControl" type="Control" parent="MoveableCamera2D/CanvasLayer/DevDataControl"]
 visible = false
@@ -1331,10 +1347,10 @@ vertical_alignment = 1
 [node name="CameraLockControl" type="Control" parent="MoveableCamera2D/CanvasLayer" node_paths=PackedStringArray("camera", "locked_icon", "unlocked_icon", "following_icon", "button")]
 layout_mode = 3
 anchors_preset = 0
-offset_left = 955.0
-offset_top = 4.0
-offset_right = 995.0
-offset_bottom = 44.0
+offset_left = 919.0
+offset_top = 8.0
+offset_right = 959.0
+offset_bottom = 48.0
 scale = Vector2(2, 2)
 script = ExtResource("25_ig6gl")
 camera = NodePath("../..")

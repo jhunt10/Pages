@@ -136,7 +136,7 @@ func delete_item(item):
 	if item is BaseItem:
 		item = item.Id
 	remove_item_from_map(item)
-	_items.erase(item.Id)
+	_items.erase(item)
 
 func remove_item_from_map(item):
 	if item is BaseItem:

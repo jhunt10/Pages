@@ -69,10 +69,9 @@ func collect_dropped_items():
 	for actor:BaseActor in actors:
 		if actor.is_dead and actor.FactionIndex != 0:
 			enemy_count += 1
-			var actor_details = actor.get_load_val("ActorDetails", {})
-			var enemy_val = actor_details.get("MoneyValue", 0)
+			var enemy_val = actor.actor_data.get("MoneyValue", 0)
 			total_money += enemy_val
-			var exp_val = actor_details.get("ExpValue", 0)
+			var exp_val = actor.actor_data.get("ExpValue", 0)
 			total_exp += exp_val
 			
 	enemies_label.text = str(enemy_count)

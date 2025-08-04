@@ -18,9 +18,19 @@
                 "Actor"
             ]
         },
-        "ActorDetails": {
-            "ExpValue": 10,
-            "MoneyValue": 15
+        "ActorData": {
+            "ExpValue": 25,
+            "MoneyValue": 15,
+            "DropItemsSet": {
+                "": 10,
+                "Money:10": 3,
+                "Money:25": 1,
+                "HealthPotionS": 3,
+                "HealthPotionM": 1,
+                "ChuckAcorn_ActionPage": 1,
+                "Squirrely_PassivePage": 1,
+                "Squirrel_PageBook": 1
+            }
         },
         "AiData": {
             "ActionsArr": [
@@ -42,12 +52,6 @@
                 "Key": "Any"
             }
         ],
-        "DropItemsSet": {
-            "": 8,
-            "HealthPotionM": 1,
-            "HealthPotionS": 3,
-            "Money:15": 4
-        },
         "EquipmentSlots": [],
         "ScenePath": "res://Scenes/Combat/MapObjects/Actors/SimpleActorNode/simple_actor_node.tscn",
         "SpawnEquipmentArr": [
@@ -75,8 +79,8 @@
         ],
         "SpriteSheet": "Sprites/Squirrel_SpriteSheet.png",
         "Stats": {
-            "Agility": 10,
-            "Strength": 10,
+            "Agility": 5,
+            "Strength": 5,
             "Intelligence": 5,
             "Wisdom": 5,
             "HealthMax": 12,
@@ -87,7 +91,7 @@
             "Ward": 0,
             "Evasion": 20,
             "MagAttack": 0,
-            "PhyAttack": 10
+            "PhyAttack": 0
         },
         "_DefVersion": "1"
     },
@@ -107,6 +111,20 @@
             "Taxonomy": [
                 "Actor"
             ]
+        },
+        "ActorData": {
+            "ExpValue": 25,
+            "MoneyValue": 15,
+            "DropItemsSet": {
+                "": 10,
+                "Money:10": 3,
+                "Money:25": 1,
+                "Mag_Ammo": 3,
+                "HealthPotionM": 1,
+                "ChuckAcornFire_Page": 1,
+                "SquirrelMagic_PassivePage": 1,
+                "Squirrel_PageBook": 1
+            }
         },
         "AiData": {
             "ActionsArr": [
@@ -134,10 +152,10 @@
         ],
         "SpriteSheet": "Sprites/Squirrcerer_SpriteSheet.png",
         "Stats": {
-            "Agility": 8,
+            "Agility": 5,
             "Strength": 5,
-            "Intelligence": 10,
-            "Wisdom": 10,
+            "Intelligence": 5,
+            "Wisdom": 5,
             "HealthMax": 12,
             "PPR": 3,
             "Mass": 10,
@@ -146,7 +164,7 @@
             "Ward": 10,
             "Evasion": 10,
             "MagAttack": 0,
-            "PhyAttack": 8
+            "PhyAttack": 0
         },
         "_DefVersion": "1"
     },
@@ -174,6 +192,19 @@
                 "TurnRight",
                 "BasicMelee"
             ]
+        },
+        "ActorData": {
+            "ExpValue": 25,
+            "MoneyValue": 15,
+            "DropItemsSet": {
+                "": 10,
+                "Money:10": 3,
+                "Money:25": 1,
+                "Phy_Ammo": 3,
+                "HealthPotionM": 1,
+                "Squirrel_PageBook": 1,
+                "SquirrelArmor_PassivePage": 1
+            }
         },
         "SpawnEquipmentArr": [
             "Squirrel_PageBook",

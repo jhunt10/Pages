@@ -86,7 +86,7 @@ func start_new_story():
 		"RogueTemplate", 
 		"MageTemplate", 
 		"PriestTemplate",
-		#"BaseSquirrel",
+		"SlimePoison",
 	]
 	for i in range(player_actor_keys.size()):
 		var player_id = "Player_" + str(i) + ":" + str(ResourceUID.create_id())

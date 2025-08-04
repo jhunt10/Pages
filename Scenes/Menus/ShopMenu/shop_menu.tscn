@@ -118,6 +118,7 @@ layout_mode = 0
 offset_right = 114.0
 offset_bottom = 60.0
 theme = ExtResource("5_5483j")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 48
 text = " Buy"
 
@@ -171,6 +172,7 @@ layout_mode = 0
 offset_right = 108.0
 offset_bottom = 60.0
 theme = ExtResource("5_5483j")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 48
 text = " Sell "
 
@@ -224,6 +226,7 @@ layout_mode = 0
 offset_right = 144.0
 offset_bottom = 60.0
 theme = ExtResource("5_5483j")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 48
 text = " Back"
 
@@ -555,6 +558,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="ItemMenuContainer" type="NinePatchRect" parent="." node_paths=PackedStringArray("entries_container", "premade_sub_item_list", "back_button")]
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.65
@@ -672,6 +676,7 @@ offset_top = 10.0
 offset_right = 152.0
 offset_bottom = 50.0
 theme = ExtResource("5_5483j")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 32
 text = "Pages"
 
@@ -725,6 +730,7 @@ stretch_mode = 5
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("5_5483j")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 24
 text = "Battle Axe"
 clip_text = true
@@ -734,6 +740,7 @@ visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("5_5483j")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 24
 text = ".........................."
 clip_text = true
@@ -749,6 +756,7 @@ stretch_mode = 2
 [node name="Label3" type="Label" parent="ItemMenuContainer/ScrollContainer/VBoxContainer/ShopSubItemList/SubItemsContainer/ShopItemButton/HBoxContainer"]
 layout_mode = 2
 theme = ExtResource("5_5483j")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 24
 text = "50"
 

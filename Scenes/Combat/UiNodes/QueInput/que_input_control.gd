@@ -242,7 +242,7 @@ func show_preview_target_area(action:PageItemAction):
 func show_last_qued_target_area():
 	# Display last page's target area for mobile
 	if _actor and _actor.Que and _actor.Que.real_que and _actor.Que.real_que.size() > 0:
-		var last_page:PageItemAction = _actor.Que.real_que[-1]
+		var last_page:PageItemAction = _actor.Que.get_last_qued_action()
 		if last_page.has_preview_target():
 			show_preview_target_area(last_page)
 

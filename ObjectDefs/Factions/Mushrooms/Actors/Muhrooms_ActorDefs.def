@@ -17,15 +17,15 @@
                 "Actor"
             ]
         },
-        "ActorDetails": {
+        "ActorData": {
             "ExpValue": 10,
-            "MoneyValue": 15
+            "MoneyValue": 5,
+            "DropItemsSet": {
+                "HealthPotionM": 1
+            }
         },
         "AiData": {},
         "CorpseSprite": null,
-        "DropItemsSet": {
-            "HealthPotionM": 1
-        },
         "EquipmentSlots": [],
         "ScenePath": "res://Scenes/Combat/MapObjects/Actors/SimpleActorNode/simple_actor_node.tscn",
         "SpawnEquipmentArr": [
@@ -101,9 +101,17 @@
                 "Actor"
             ]
         },
-        "ActorDetails": {
-            "ExpValue": 10,
-            "MoneyValue": 15
+        "ActorData": {
+            "ExpValue": 25,
+            "MoneyValue": 15,
+            "DropItemsSet": {
+                "": 10,
+                "Money:10": 3,
+                "Money:25": 1,
+                "HealthPotionS": 3,
+                "HealthPotionM": 1,
+                "SpreadSpores_ActionPage": 1
+            }
         },
         "AiData": {
             "ActionsArr": [

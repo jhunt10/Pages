@@ -4,6 +4,7 @@ extends BaseItemHolder
 var item_id_to_effect_id:Dictionary = {}
 
 var cached_page_book_item_id
+var cached_action_mod_source_ids:Array = []
 
 func get_holder_name()->String:
 	return "Pages"
@@ -112,7 +113,7 @@ func get_action_page(action_key:String)->PageItemAction:
 			var item = ItemLibrary.get_item(item_id)
 			if item is PageItemAction and item.ActionKey == action_key:
 				return item
-	return null
+	return ItemLibrary.get_item(action_key)
 
 func _cache_action_mods():
 	var actions = list_actions()
@@ -120,7 +121,7 @@ func _cache_action_mods():
 	# Loop through Passive Pages to clear old mods
 	for action:PageItemAction in actions:
 		action.clear_action_mods()
-	
+	cached_action_mod_source_ids.clear()
 	# Loop through Passive Pages to look for mods
 	for passive:PageItemPassive in passives:
 		var action_mods = passive.get_action_mods()
@@ -146,6 +147,8 @@ func _cache_action_mods():
 				# Apply Mod
 				if does_mod_apply:
 					action.add_action_mod(mod_data)
+					if not cached_action_mod_source_ids.has(passive.Id):
+						cached_action_mod_source_ids.append(passive.Id)
 
 func _on_item_added_to_slot(item:BaseItem, index:int):
 	if item == null:

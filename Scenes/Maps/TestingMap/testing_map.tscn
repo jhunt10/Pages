@@ -453,7 +453,7 @@ texture_region_size = Vector2i(32, 32)
 tile_size = Vector2i(32, 32)
 sources/1 = SubResource("TileSetAtlasSource_yyoo6")
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6cifm"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hpf40"]
 texture = ExtResource("6_dqu5k")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
@@ -793,7 +793,7 @@ tile_size = Vector2i(32, 32)
 terrain_set_0/mode = 0
 terrain_set_0/terrain_0/name = "Terrain 0"
 terrain_set_0/terrain_0/color = Color(0.5, 0.34375, 0.25, 1)
-sources/0 = SubResource("TileSetAtlasSource_6cifm")
+sources/0 = SubResource("TileSetAtlasSource_hpf40")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7iccs"]
 texture = ExtResource("6_s43q3")
@@ -1314,6 +1314,6 @@ modulate = Color(0.152941, 1, 1, 1)
 position = Vector2(304, 208)
 texture = ExtResource("10_361jm")
 script = ExtResource("11_vji11")
-spawn_actor_key = "TargetDummy_Warded"
+spawn_actor_key = "SlimePoison"
 facing = 2
 map_coor = Vector2i(9, 6)

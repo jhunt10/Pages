@@ -1,0 +1,21 @@
+{
+    "MapKey": "Cave",
+    "MapName":"Cave",
+    "Description":"A cave leading to The City?",
+    "MapScene": "cave_map.tscn",
+    "SortOrder": 3,
+    "EnemySet":{
+        "ZombieBasic": {
+            "Weight": 10,
+            "IsUnique": false
+        },
+        "Skeleton": {
+            "Weight": 5,
+            "IsUnique": false
+        },
+        "ShroomGolem": {
+            "Weight": 10,
+            "IsUnique": true
+        }
+    }
+}

@@ -64,7 +64,12 @@ func get_max_que_size()->int:
 	return _cached_max_que_size
 
 func list_qued_actions():
-	return real_que
+	var out_list = []
+	for action_key in real_que:
+		var action = actor.pages.get_action_page(action_key)
+		if action:
+			out_list.append(action)
+	return out_list
 
 func is_turn_gap(turn_index:int)->bool:
 	if turn_index < 0 or turn_index >= _turn_mapping.size():
@@ -86,11 +91,18 @@ func get_action_for_turn(turn_index : int)->PageItemAction:
 	var real_index = turn_to_que_index(turn_index)
 	if real_index < 0 or real_index >= real_que.size():
 		return null
-	return real_que[real_index]
-	
+	var action_key = real_que[real_index]
+	return actor.pages.get_action_page(action_key)
+
+func get_last_qued_action()->PageItemAction:
+	if real_que.size() > 0:
+		var last_qued_key = real_que[-1]
+		return actor.pages.get_action_page(last_qued_key)
+	return null
+
 func que_action(action:PageItemAction, data:Dictionary={}):
 	if real_que.size() < get_max_que_size() and action != null:
-		real_que.append(action)
+		real_que.append(action.ActionKey)
 		QueExecData.que_data(data)
 		action_que_changed.emit()
 		
@@ -119,8 +131,9 @@ func get_movement_preview_path()->Array:
 	if !current_pos:
 		return []
 	var path = [current_pos]
-	for action:PageItemAction in real_que:
-		if action.has_preview_move_offset():
+	for action_key in real_que:
+		var action:PageItemAction = actor.pages.get_action_page(action_key)
+		if action and action.has_preview_move_offset():
 			var next_pos = MoveHandler.relative_pos_to_real(current_pos, action.get_preview_move_offset())
 			# Position not changeing (turning)
 			if current_pos.x == next_pos.x and current_pos.y == next_pos.y:
