@@ -63,7 +63,7 @@ func set_mod_data(mod_data):
 		plus_label.hide()
 	elif mod_type == BaseStatMod.ModTypes.Set:
 		plus_label.hide()
-		times_label.text = " = "
+		times_label.text = ":"
 	elif mod_type == BaseStatMod.ModTypes.ScaleStat:
-		plus_label.text = " = "
+		plus_label.text = "="
 	#elif mod_type == BaseStatMod.ModTypes.AddStat:

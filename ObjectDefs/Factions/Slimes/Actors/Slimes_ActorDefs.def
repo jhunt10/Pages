@@ -50,7 +50,7 @@
         "EquipmentSlots": [],
         "ScenePath": "Scenes/slime_actor_node.tscn",
         "SpawnEquipmentArr": [
-            "Squirrel_PageBook"
+            "Slime_PageBook"
         ],
         "SpawnItemArr": [
         ],
@@ -113,7 +113,7 @@
             ]
         },
         "SpriteSheet": "Sprites/GreenSlime_SpriteSheet.png",
-        "ImmuneToEffects": ["AilmentBlind"],
+        "ImmuneToEffects": ["AilmentBlind", "AilmentPoisoned"],
         "Stats": {
             "Resistance:Poison": 200
         },

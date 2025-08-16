@@ -112,6 +112,9 @@ func get_passive_stat_mods()->Array:
 		out_list.append(BaseStatMod.create_from_data(Id, mod_data))
 	return out_list
 
+func get_stat_mod_datas()->Dictionary:
+	return _get__mods("StatMods")
+
 func get_item_slots_mods()->Dictionary:
 	return _get__mods("ItemSlotsMods")
 

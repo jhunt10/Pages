@@ -722,6 +722,7 @@ theme = ExtResource("4_xmy3g")
 text = "Item Description"
 
 [node name="PageBookDetailsControl" type="Control" parent="OffsetControl/NinePatchRect/VBoxContainer" node_paths=PackedStringArray("parent_card_control", "ppr_label", "passive_count_label", "action_count_label", "page_sets_container", "premade_page_set_label", "description_box")]
+visible = false
 layout_mode = 2
 size_flags_vertical = 3
 script = ExtResource("18_oic72")
@@ -830,21 +831,101 @@ bbcode_enabled = true
 text = "Item Description"
 script = ExtResource("22_pm1ag")
 
-[node name="DefaultDetailsControl" type="Control" parent="OffsetControl/NinePatchRect/VBoxContainer" node_paths=PackedStringArray("description_box")]
+[node name="DefaultDetailsControl" type="Control" parent="OffsetControl/NinePatchRect/VBoxContainer" node_paths=PackedStringArray("description_box", "stat_mods_container", "premade_stat_mod_label")]
 clip_contents = true
 layout_mode = 2
 size_flags_vertical = 3
 script = ExtResource("12_gvhwc")
-description_box = NodePath("DescriptionBox")
+description_box = NodePath("VBoxContainer/DescriptionBox")
+stat_mods_container = NodePath("VBoxContainer/FlowContainer")
+premade_stat_mod_label = NodePath("VBoxContainer/FlowContainer/StatModLabel")
 
-[node name="DescriptionBox" type="RichTextLabel" parent="OffsetControl/NinePatchRect/VBoxContainer/DefaultDetailsControl"]
-clip_contents = false
+[node name="VBoxContainer" type="VBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/DefaultDetailsControl"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="FlowContainer" type="FlowContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/DefaultDetailsControl/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 8
+alignment = 1
+
+[node name="StatModLabel" type="HBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/DefaultDetailsControl/VBoxContainer/FlowContainer" node_paths=PackedStringArray("modded_stat_icon", "modded_stat_name_label", "mod_value_label", "dep_stat_label", "dep_stat_icon", "plus_label", "times_label")]
+layout_mode = 2
+theme_override_constants/separation = 0
+script = ExtResource("16_hvsyk")
+modded_stat_icon = NodePath("ModdedStatIcon")
+modded_stat_name_label = NodePath("ModdedStatNameLabel")
+mod_value_label = NodePath("ModValueLabel")
+dep_stat_label = NodePath("HBoxContainer/DepStatNameLabel")
+dep_stat_icon = NodePath("HBoxContainer/DepStatIcon")
+plus_label = NodePath("SignLabel")
+times_label = NodePath("SignLabel2")
+
+[node name="ModdedStatIcon" type="TextureRect" parent="OffsetControl/NinePatchRect/VBoxContainer/DefaultDetailsControl/VBoxContainer/FlowContainer/StatModLabel"]
+layout_mode = 2
+texture = ExtResource("17_cevb5")
+
+[node name="ModdedStatNameLabel" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/DefaultDetailsControl/VBoxContainer/FlowContainer/StatModLabel"]
+layout_mode = 2
+size_flags_vertical = 8
+theme = ExtResource("18_wsrou")
+theme_override_colors/font_color = Color(0.470588, 0, 0, 1)
+text = "STR"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="SignLabel" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/DefaultDetailsControl/VBoxContainer/FlowContainer/StatModLabel"]
+layout_mode = 2
+size_flags_vertical = 8
+theme = ExtResource("18_wsrou")
+theme_override_colors/font_color = Color(0.470588, 0, 0, 1)
+text = "+"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/DefaultDetailsControl/VBoxContainer/FlowContainer/StatModLabel"]
+layout_mode = 2
+theme_override_constants/separation = -2
+
+[node name="DepStatIcon" type="TextureRect" parent="OffsetControl/NinePatchRect/VBoxContainer/DefaultDetailsControl/VBoxContainer/FlowContainer/StatModLabel/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("20_lxkdx")
+stretch_mode = 3
+
+[node name="DepStatNameLabel" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/DefaultDetailsControl/VBoxContainer/FlowContainer/StatModLabel/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+theme = ExtResource("18_wsrou")
+theme_override_colors/font_color = Color(0.470588, 0, 0, 1)
+text = "TR"
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="SignLabel2" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/DefaultDetailsControl/VBoxContainer/FlowContainer/StatModLabel"]
+layout_mode = 2
+size_flags_vertical = 8
+theme = ExtResource("18_wsrou")
+theme_override_colors/font_color = Color(0.470588, 0, 0, 1)
+text = "x"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="ModValueLabel" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/DefaultDetailsControl/VBoxContainer/FlowContainer/StatModLabel"]
+layout_mode = 2
+size_flags_vertical = 8
+theme = ExtResource("18_wsrou")
+theme_override_colors/font_color = Color(0.470588, 0, 0, 1)
+text = "1.2"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="DescriptionBox" type="RichTextLabel" parent="OffsetControl/NinePatchRect/VBoxContainer/DefaultDetailsControl/VBoxContainer"]
+clip_contents = false
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource("4_xmy3g")

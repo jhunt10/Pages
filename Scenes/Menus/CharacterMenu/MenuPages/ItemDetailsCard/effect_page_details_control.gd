@@ -22,7 +22,7 @@ func _process(delta: float) -> void:
 func set_action(actor:BaseActor, page:BasePageItem):
 	_actor = actor
 	_item = page
-	var stat_mods = page.get_load_val("StatMods", {})
+	var stat_mods = page.page_data.get("StatMods", {})
 	for mod_data in stat_mods.values():
 		if mod_data.get("DisplayName", "") == "Base Stats":
 			continue

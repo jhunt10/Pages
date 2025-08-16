@@ -67,8 +67,8 @@ const stat_abbrs:Dictionary = {
 	
 	CritChance: "CrtC",
 	CritMod: "CrtM",
-	BlockChance: "BlkC",
-	BlockMod: "BlkM"
+	BlockChance: "BChc",
+	BlockMod: "BMod"
 }
 
 const stat_icon_paths:Dictionary = {
@@ -93,7 +93,9 @@ const stat_icon_paths:Dictionary = {
 	PPR: "res://assets/Sprites/UI/SymbolIcons/PPRSymbol.png",
 	
 	CritChance: "res://assets/Sprites/UI/SymbolIcons/CriticalSymbol.png",
-	CritMod: "res://assets/Sprites/UI/SymbolIcons/CriticalSymbol.png"
+	CritMod: "res://assets/Sprites/UI/SymbolIcons/CriticalSymbol.png",
+	BlockMod: "res://assets/Sprites/UI/SymbolIcons/BlockSymbol.png",
+	BlockChance: "res://assets/Sprites/UI/SymbolIcons/BlockSymbol.png",
 }
 
 static func get_stat_abbr(stat_name:String)->String:

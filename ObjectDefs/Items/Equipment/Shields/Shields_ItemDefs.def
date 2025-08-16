@@ -1,0 +1,157 @@
+{
+    "WoodenShield": {
+        "!ObjectScript": "res://assets/Scripts/Items/Equipment/Tools/BaseShieldItem.gd",
+        "#ObjDetails": {
+            "Description": "A simple wooden shield. Lighter than most shields, it's easy to block with but offers less defense.",
+            "DisplayName": "Wooden Shield",
+            "LargeIcon": "Sprites/WoodenShield_Icon.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/WoodenShield_Icon.png",
+            "SnippetDesc": "A wooden Shield.",
+            "Tags": [
+                "Equipment",
+                "OffHand",
+                "Shield"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Equipment",
+                "Tool",
+                "Shield"
+            ]
+        },
+        "EquipmentData": {
+            "EquipSlot": "OffHand",
+            "Requirments": {
+                "ReqStats": {
+                    "Strength": 10
+                }
+            },
+            "SpriteData": {
+                "SpriteSheet": "Sprites/WoodenShield_SpriteSheet.png"
+            },
+            "StatMods": {
+                "StatMod1": {
+                    "ModType": "Set",
+                    "StatName": "BlockChance",
+                    "Value": 50
+                },
+                "StatMod2": {
+                    "ModType": "Set",
+                    "StatName": "BlockMod",
+                    "Value": 0.4
+                }
+            }
+        },
+        "ItemData": {
+            "Rarity": "Mundane",
+            "Value": 50
+        },
+        "_DefVersion": "1"
+    },
+    "WoodenTower": {
+        "!ObjectScript": "res://assets/Scripts/Items/Equipment/Tools/BaseShieldItem.gd",
+        "#ObjDetails": {
+            "Description": "A large wooden shield which provides... wait, no. This is just half a barrel. Guess it still works though.",
+            "DisplayName": "Wooden Tower",
+            "LargeIcon": "Sprites/WoodenTower_Icon.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/WoodenTower_Icon.png",
+            "SnippetDesc": "A large wooden shield.",
+            "Tags": [
+                "Equipment",
+                "OffHand",
+                "Shield"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Equipment",
+                "Tool",
+                "Shield"
+            ]
+        },
+        "EquipmentData": {
+            "EquipSlot": "OffHand",
+            "Requirments": {
+                "ReqStats": {
+                    "Strength": 10
+                }
+            },
+            "SpriteData": {
+                "SpriteSheet": "Sprites/WoodenTower_SpriteSheet.png"
+            },
+            "StatMods": {
+                "StatMod1": {
+                    "ModType": "Set",
+                    "StatName": "BlockChance",
+                    "Value": 50
+                },
+                "StatMod2": {
+                    "ModType": "Set",
+                    "StatName": "BlockMod",
+                    "Value": 0.5
+                },
+                "StatMod3": {
+                    "ModType": "Add",
+                    "StatName": "Speed",
+                    "Value": -1
+                }
+            }
+        },
+        "ItemData": {
+            "Rarity": "Mundane",
+            "Value": 50
+        },
+        "_DefVersion": "1"
+    },
+    "TowerShield": {
+        "!ObjectScript": "res://assets/Scripts/Items/Equipment/Tools/BaseShieldItem.gd",
+        "#ObjDetails": {
+            "Description": "A large wooden shield which provides... wait, no. This is just half a barrel. Guess it still works though.",
+            "DisplayName": "Tower Shield",
+            "LargeIcon": "Sprites/TowerShield_Icon.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/TowerShield_Icon.png",
+            "SnippetDesc": "A large wooden shield.",
+            "Tags": [
+                "Equipment",
+                "OffHand",
+                "Shield"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Equipment",
+                "Tool",
+                "Shield"
+            ]
+        },
+        "EquipmentData": {
+            "EquipSlot": "OffHand",
+            "Requirments": {
+                "ReqStats": {
+                    "Strength": 10
+                }
+            },
+            "SpriteData": {
+                "SpriteSheet": "Sprites/TowerShield_SpriteSheet.png"
+            },
+            "StatMods": {
+                "StatMod1": {
+                    "ModType": "Set",
+                    "StatName": "BlockChance",
+                    "Value": 50
+                },
+                "StatMod2": {
+                    "ModType": "Set",
+                    "StatName": "BlockMod",
+                    "Value": 0.5
+                }
+            }
+        },
+        "ItemData": {
+            "Rarity": "Mundane",
+            "Value": 50
+        },
+        "_DefVersion": "1"
+    }
+}
