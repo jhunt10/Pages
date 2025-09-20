@@ -25,6 +25,7 @@ static var Instance:CampMenu
 @export var rec_back_button:CampOptionButton
 @export var rec_cards_button:CampOptionButton
 @export var rec_pages_button:CampOptionButton
+@export var rec_actors_button:CampOptionButton
 
 @export var character_menu:CharacterMenuControl
 
@@ -48,6 +49,7 @@ func _ready() -> void:
 	rec_back_button.button.pressed.connect(_sub_menu_open.bind("Main"))
 	rec_cards_button.button.pressed.connect(_on_records)
 	rec_pages_button.button.pressed.connect(_on_pages)
+	rec_actors_button.button.pressed.connect(_on_actors)
 	
 	if StoryState.get_story_flag("CampShopDisabled"):
 		shop_button.disabled = true
@@ -114,6 +116,10 @@ func _on_records():
 
 func _on_pages():
 	var new_cards = load("res://Scenes/Menus/PageLibraryMenu/page_library_menu.tscn").instantiate()
+	self.add_child(new_cards)
+
+func _on_actors():
+	var new_cards = load("res://Scenes/Menus/ActorsLibrary/actors_library.tscn").instantiate()
 	self.add_child(new_cards)
 	
 

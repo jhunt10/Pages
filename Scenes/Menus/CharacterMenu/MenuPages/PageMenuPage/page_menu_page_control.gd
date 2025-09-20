@@ -66,6 +66,7 @@ func build_item_slots():
 	if title_page:
 		title_label.text = title_page.get_display_name()
 	item_slot_buttons.append(title_page_button)
+	#title_page_button.set_item(_actor, _actor.pages, title_page)
 	
 	#premade_page_set.hide()
 	var slot_sets_container_hight = 241#sets_container.size.y

@@ -1,0 +1,85 @@
+{
+    "IceKnife": {
+        "!ObjectScript": "res://assets/Scripts/Items/Equipment/Tools/BaseWeaponEquipment.gd",
+        "#ObjDetails": {
+            "Description": "It was supposed to be the perfect murder. Stab the victim, knife melts, no evidence. But turns out magic ice doesn't melt, so here we are.",
+            "DisplayName": "Ice Knife",
+            "LargeIcon": "Sprites/IceKnife_Icon.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/IceKnife_Icon.png",
+            "SnippetDesc": "A dagger made of ice.",
+            "Tags": [
+                "Weapon",
+                "OffHand",
+                "Dagger",
+                "Cold"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Equipment",
+                "Tool",
+                "Weapon"
+            ]
+        },
+        "EquipmentData": {
+            "EquipSlot": "Weapon",
+            "Requirments": {
+                "ReqStats": {
+                    "Agility": 10
+                }
+            },
+            "StatMods": {
+                "AttackBonus": {
+                    "ModType": "Add",
+                    "StatName": "PhyAttack",
+                    "Value": 5
+                }
+            }
+        },
+        "ItemData": {
+            "Rarity": "Rare",
+            "Value": 50
+        },
+        "WeaponData": {
+            "AttackData": {
+                "AttackDetails": {
+                    "AccuracyMod": 1,
+                    "PotencyMod": 1
+                },
+                "AttackTags": [
+                    "Weapon",
+                    "Melee",
+                    "Cold"
+                ],
+                "DamageDatas": {
+                    "WeaponDamage": {
+                        "AtkPwrBase": 50,
+                        "AtkPwrRange": 5,
+                        "AtkStat": "PhyAttack",
+                        "DamageType": "Cold",
+                        "DamageVfxKey": "Cold_DamageEffect",
+                        "DefenseType": "Ward"
+                    }
+                },
+                "EffectDatas": {},
+                "TargetParams": {
+                    "LineOfSight": true,
+                    "TargetArea": "[[-1,0],[-1,1],[0,1],[1,1],[1,0]]",
+                    "TargetType": "Enemy"
+                }
+            },
+            "IsRanged": false,
+            "WeaponClass": "Light",
+            "WeaponSpriteData": {
+                "Offset": [
+                    0,
+                    0
+                ],
+                "Rotation": 0,
+                "WeaponAnimation": "Stab"
+            }
+        },
+        "_DefVersion": "1"
+    }
+
+}

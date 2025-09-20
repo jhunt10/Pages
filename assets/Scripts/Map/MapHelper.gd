@@ -60,3 +60,15 @@ static func get_center_of_points(array:Array)->Vector2i:
 		if spot.y > max_y: max_y = spot.y
 		if spot.y < min_y: min_y = spot.y
 	return Vector2i((max_x + min_x) / 2, (max_y + min_y) / 2)
+
+static func get_vect_in_dir(center, direction:int)->Vector2i:
+	match direction:
+		0: # North
+			return Vector2i(center.x, center.y-1)
+		1: # East
+			return Vector2i(center.x+1, center.y)
+		2: # South
+			return Vector2i(center.x, center.y+1)
+		3: # West
+			return Vector2i(center.x-1, center.y)
+	return Vector2i(center.x, center.y)

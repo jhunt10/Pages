@@ -36,8 +36,8 @@ func _init(act) -> void:
 		return
 	actor = act
 	actor.Que = self
-	_cache_que_info(true)
-	actor.stats_changed.connect(_cache_que_info)
+	#_cache_que_info(true)
+	#actor.stats_changed.connect(_cache_que_info)
 	QueExecData = QueExecutionData.new(self)
 
 func _cache_que_info(supress_emit:bool=false):
@@ -59,8 +59,13 @@ func fail_turn():
 	actor.action_failed.emit()
 
 func get_max_que_size()->int:
-	if _cached_max_que_size < 0:
-		_cache_que_info()
+	var que_size = actor.stats.get_stat("PPR", -1)
+	if _cached_max_que_size != que_size:
+		_cached_max_que_size = que_size
+		#if not supress_emit:
+			#max_que_size_changed.emit()
+	else:
+		_cached_max_que_size = que_size
 	return _cached_max_que_size
 
 func list_qued_actions():
@@ -106,9 +111,10 @@ func que_action(action:PageItemAction, data:Dictionary={}):
 		QueExecData.que_data(data)
 		action_que_changed.emit()
 		
-func clear_que():
+func clear_que(supress_signals:bool=false):
 	real_que.clear()
-	action_que_changed.emit()
+	if not supress_signals:
+		action_que_changed.emit()
 	QueExecData.clear()
 
 func delete_at_index(index):
@@ -324,6 +330,14 @@ func get_page_ammo_current_value(action_key:String)->int:
 	if not ammo_data:
 		return 0
 	return ceilf(ammo_data["Value"])
+
+func get_page_ammo_current_uses(action_key:String)->int:
+	if _ammo_mod_dirty:
+		_cache_page_ammo()
+	var ammo_data = _page_ammo_datas.get(action_key, null)
+	if not ammo_data:
+		return 0
+	return floorf(ammo_data["Value"] / ammo_data["Cost"])
 
 func can_pay_page_ammo(action_key:String)->bool:
 	if _ammo_mod_dirty:

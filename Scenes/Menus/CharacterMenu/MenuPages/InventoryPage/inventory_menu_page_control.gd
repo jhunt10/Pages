@@ -103,6 +103,8 @@ func on_player_inventory_changed():
 	#filter_items_with_tag(tab_filter)
 
 func sync():
+	if not self.visible:
+		return
 	if rebuild_on_next_scync:
 		build_item_slots()
 	#super()

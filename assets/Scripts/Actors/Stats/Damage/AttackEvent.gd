@@ -30,6 +30,7 @@ var damage_datas:Dictionary
 var effect_datas:Dictionary
 
 var attacker_accuracy:int
+var attacker_cover_penalty:float
 var attacker_crit_chance:float
 var attcker_crit_mod:float
 var attacker_potency:float
@@ -53,6 +54,7 @@ func _init( attacking_actor:BaseActor,
 	
 	# StatMods from AttackMods should already have been applied to Attacker and Defenders
 	attacker_accuracy = attacking_actor.stats.get_stat(StatHelper.Accuracy, 100)
+	attacker_cover_penalty = attacking_actor.stats.get_stat(StatHelper.CoverPenalty, 0)
 	attacker_potency = attacking_actor.stats.get_stat(StatHelper.Potency, 100)
 	attacker_crit_chance = attacking_actor.stats.get_stat(StatHelper.CritChance, 0) / 100.0
 	attcker_crit_mod = attacking_actor.stats.get_stat(StatHelper.CritMod, 0)
@@ -81,6 +83,7 @@ func serialize_self()->String:
 	"attacker_crit_chance": attacker_crit_chance,
 	"attcker_crit_mod": attcker_crit_mod,
 	"attacker_potency": attacker_potency,
+	"attacker_cover_penalty": attacker_cover_penalty,
 	"sub_events": {}
 	}
 	for defender_id in defender_ids:

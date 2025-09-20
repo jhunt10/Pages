@@ -17,7 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://cb8k5gxes3iaj" path="res://assets/Sprites/UI/SymbolIcons/MoneySymbol_White.png" id="15_axj4f"]
 [ext_resource type="PackedScene" uid="uid://bje0k82nenje6" path="res://Scenes/Dialog/dialog_control.tscn" id="16_q50fv"]
 
-[node name="CampMenu" type="Control" node_paths=PackedStringArray("dialog_control", "camp_options_container", "system_options_container", "records_options_container", "pretty_picture_texure_rect", "quest_button", "shop_button", "character_button", "explort_button", "records_button", "system_button", "sys_back_button", "sys_save_button", "sys_load_button", "sys_debug_button", "sys_quit_button", "rec_back_button", "rec_cards_button", "rec_pages_button", "character_menu")]
+[node name="CampMenu" type="Control" node_paths=PackedStringArray("dialog_control", "camp_options_container", "system_options_container", "records_options_container", "pretty_picture_texure_rect", "quest_button", "shop_button", "character_button", "explort_button", "records_button", "system_button", "sys_back_button", "sys_save_button", "sys_load_button", "sys_debug_button", "sys_quit_button", "rec_back_button", "rec_cards_button", "rec_pages_button", "rec_actors_button")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -44,7 +44,7 @@ sys_quit_button = NodePath("CampOptionsContainer/SystemOptionsContainer/Sys_Quit
 rec_back_button = NodePath("CampOptionsContainer/RecordsOptionsContainer/Sys_BackOptionButton")
 rec_cards_button = NodePath("CampOptionsContainer/RecordsOptionsContainer/Rec_FlashCardsOptionButton")
 rec_pages_button = NodePath("CampOptionsContainer/RecordsOptionsContainer/Rec_PagesOptionButton")
-character_menu = NodePath("")
+rec_actors_button = NodePath("CampOptionsContainer/RecordsOptionsContainer/Rec_ActorsOptionButton")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="."]
 layout_mode = 1
@@ -864,7 +864,7 @@ offset_right = 150.0
 offset_bottom = 60.0
 theme = ExtResource("3_ufdhk")
 theme_override_font_sizes/font_size = 48
-text = "Pages"
+text = "Library"
 
 [node name="ColorRect" type="ColorRect" parent="CampOptionsContainer/RecordsOptionsContainer/Rec_PagesOptionButton/TitleLabel"]
 custom_minimum_size = Vector2(0, 3)
@@ -879,6 +879,61 @@ grow_vertical = 0
 color = Color(0.498039, 0, 0, 1)
 
 [node name="Button" type="Button" parent="CampOptionsContainer/RecordsOptionsContainer/Rec_PagesOptionButton"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 4.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Rec_ActorsOptionButton" type="Control" parent="CampOptionsContainer/RecordsOptionsContainer" node_paths=PackedStringArray("button", "under_line", "highlight", "label")]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+script = ExtResource("6_5vfat")
+button = NodePath("Button")
+under_line = NodePath("TitleLabel/ColorRect")
+highlight = NodePath("TextureRect")
+label = NodePath("TitleLabel")
+text = "Pages"
+
+[node name="TextureRect" type="TextureRect" parent="CampOptionsContainer/RecordsOptionsContainer/Rec_ActorsOptionButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -32.0
+offset_top = -4.5
+offset_right = 32.0
+offset_bottom = 4.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_hs7sy")
+
+[node name="TitleLabel" type="Label" parent="CampOptionsContainer/RecordsOptionsContainer/Rec_ActorsOptionButton"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 0
+offset_right = 150.0
+offset_bottom = 60.0
+theme = ExtResource("3_ufdhk")
+theme_override_font_sizes/font_size = 48
+text = "Actors"
+
+[node name="ColorRect" type="ColorRect" parent="CampOptionsContainer/RecordsOptionsContainer/Rec_ActorsOptionButton/TitleLabel"]
+custom_minimum_size = Vector2(0, 3)
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0.498039, 0, 0, 1)
+
+[node name="Button" type="Button" parent="CampOptionsContainer/RecordsOptionsContainer/Rec_ActorsOptionButton"]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15

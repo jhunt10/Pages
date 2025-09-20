@@ -348,7 +348,7 @@ func cleanup_combat():
 		actor.effects.on_combat_end(GameState)
 		if actor.is_player:
 			actor.effects.purge_combat_efffects()
-			actor.Que.clear_que()
+			actor.Que.clear_que(true)
 		else:
 			ActorLibrary.delete_actor(actor)
 	ui_control.ui_state_controller.clear_states()
@@ -383,7 +383,6 @@ func get_current_player_actor()->BaseActor:
 
 func set_player_index(index:int, move_camera:bool=true):
 	var actor_ids = _player_actor_ids.duplicate()
-	print("ActorIds: " + str(actor_ids))
 	if index >= 0 and index < _player_actor_ids.size():
 		_current_player_index = index
 		ui_control.set_player_actor_index(_current_player_index)

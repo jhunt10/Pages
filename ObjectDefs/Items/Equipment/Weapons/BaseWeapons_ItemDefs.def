@@ -1,0 +1,807 @@
+{
+    "#BaseMeleeWeapon": {
+        "!ObjectScript": "res://assets/Scripts/Items/Equipment/Tools/BaseWeaponEquipment.gd",
+        "#ObjDetails": {
+            "Description": "Weapon Description",
+            "DisplayName": "#Base Base Weapon",
+            "LargeIcon": "Sprites/BaseSword_Icon.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/BaseSword_Icon.png",
+            "SnippetDesc": "Snippet",
+            "Tags": [
+                "Weapon"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Equipment",
+                "Tool",
+                "Weapon"
+            ]
+        },
+        "EquipmentData": {
+            "EquipSlot": "Weapon",
+            "Requirments": {
+                "ReqStats": {
+                    "Strength": 10
+                }
+            },
+            "StatMods": {
+                "AttackBonus": {
+                    "ModType": "Add",
+                    "StatName": "PhyAttack",
+                    "Value": 10
+                }
+            }
+        },
+        "ItemData": {
+            "Rarity": "Mundane",
+            "Value": 50
+        },
+        "WeaponData": {
+            "AttackData": {
+                "AttackDetails": {
+                    "AccuracyMod": 1,
+                    "PotencyMod": 1
+                },
+                "AttackTags": [
+                    "Weapon",
+                    "Melee"
+                ],
+                "DamageDatas": {
+                    "WeaponDamage": {
+                        "AtkPwrBase": 100,
+                        "AtkPwrRange": 5,
+                        "AtkStat": "PhyAttack",
+                        "DamageType": "Slash",
+                        "DamageVfxKey": "AUTO",
+                        "DefenseType": "Armor"
+                    }
+                },
+                "EffectDatas": {},
+                "TargetParams": {
+                    "LineOfSight": true,
+                    "TargetArea": "[[-1,0],[-1,1],[0,1],[1,1],[1,0]]",
+                    "TargetType": "Enemy"
+                }
+            },
+            "IsRanged": false,
+            "WeaponClass": "Medium",
+            "WeaponSpriteData": {
+                "Offset": [0,0],
+                "Rotation": 0,
+                "TwoHandRotation": 0,
+                "WeaponAnimation": "Swing"
+            }
+        },
+        "_DefVersion": "1"
+    },
+    
+    "BaseClub_Weapon": {
+        "!ParentKey": "#BaseMeleeWeapon",
+        "!ObjectScript": "res://assets/Scripts/Items/Equipment/Tools/BaseWeaponEquipment.gd",
+        "#ObjDetails": {
+            "Description": "A basic Club used for clubbing foes not seals.",
+            "DisplayName": "Club",
+            "LargeIcon": "Sprites/BaseClub_Icon.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/BaseClub_Icon.png",
+            "SnippetDesc": "a Club",
+            "Tags": [
+                "Weapon",
+                "OffHand",
+                "Club"
+            ]
+        },
+        "EquipmentData": {
+            "StatMods": {
+                "AttackBonus": {
+                    "Value": 10
+                }
+            }
+        },
+        "WeaponData": {
+            "AttackData": {
+                "DamageDatas": {
+                    "WeaponDamage": {
+                        "AtkPwrBase": 50,
+                        "AtkPwrRange": 10,
+                        "DamageType": "Blunt"
+                    }
+                }
+            },
+            "WeaponClass": "Light",
+            "WeaponSpriteData": {
+                "WeaponAnimation": "Swing"
+            }
+        },
+        "_DefVersion": "1"
+    },
+    "BaseDagger_Weapon": {
+        "!ParentKey": "#BaseMeleeWeapon",
+        "!ObjectScript": "res://assets/Scripts/Items/Equipment/Tools/BaseWeaponEquipment.gd",
+        "#ObjDetails": {
+            "Description": "A basic Dagger used for stabbing foes.",
+            "DisplayName": "Dagger",
+            "LargeIcon": "Sprites/BaseDagger_Icon.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/BaseDagger_Icon.png",
+            "SnippetDesc": "a Dagger",
+            "Tags": [
+                "Weapon",
+                "OffHand",
+                "Dagger"
+            ]
+        },
+        "EquipmentData": {
+            "StatMods": {
+                "AttackBonus": {
+                    "Value": 10
+                }
+            }
+        },
+        "WeaponData": {
+            "AttackData": {
+                "DamageDatas": {
+                    "WeaponDamage": {
+                        "AtkPwrBase": 50,
+                        "AtkPwrRange": 8,
+                        "DamageType": "Slash"
+                    }
+                }
+            },
+            "WeaponClass": "Light",
+            "WeaponSpriteData": {
+                "WeaponAnimation": "Stab"
+            }
+        },
+        "_DefVersion": "1"
+    },
+    "BaseShiv_Weapon": {
+        "!ParentKey": "#BaseMeleeWeapon",
+        "!ObjectScript": "res://assets/Scripts/Items/Equipment/Tools/BaseWeaponEquipment.gd",
+        "#ObjDetails": {
+            "Description": "A basic Shiv used for shaking a bitch.",
+            "DisplayName": "Shiv",
+            "LargeIcon": "Sprites/BaseShiv_Icon.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/BaseShiv_Icon.png",
+            "SnippetDesc": "a Shiv",
+            "Tags": [
+                "Weapon",
+                "OffHand",
+                "Shiv"
+            ]
+        },
+        "EquipmentData": {
+            "StatMods": {
+                "AttackBonus": {
+                    "Value": 10
+                }
+            }
+        },
+        "WeaponData": {
+            "AttackData": {
+                "DamageDatas": {
+                    "WeaponDamage": {
+                        "AtkPwrBase": 50,
+                        "AtkPwrRange": 5,
+                        "DamageType": "Slash"
+                    }
+                }
+            },
+            "WeaponClass": "Light",
+            "WeaponSpriteData": {
+                "WeaponAnimation": "Stab"
+            }
+        },
+        "_DefVersion": "1"
+    },
+    "BaseSword_Weapon": {
+        "!ParentKey": "#BaseMeleeWeapon",
+        "!ObjectScript": "res://assets/Scripts/Items/Equipment/Tools/BaseWeaponEquipment.gd",
+        "#ObjDetails": {
+            "Description": "A basic Sword used for cutting down foes.",
+            "DisplayName": "Sword",
+            "LargeIcon": "Sprites/BaseSword_Icon.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/BaseSword_Icon.png",
+            "SnippetDesc": "a sword",
+            "Tags": [
+                "Weapon",
+                "Sword"
+            ]
+        },
+        "EquipmentData": {
+            "StatMods": {
+                "AttackBonus": {
+                    "Value": 10
+                }
+            }
+        },
+        "WeaponData": {
+            "AttackData": {
+                "DamageDatas": {
+                    "WeaponDamage": {
+                        "AtkPwrRange": 10,
+                        "DamageType": "Slash"
+                    }
+                }
+            },
+            "WeaponSpriteData": {
+                "WeaponAnimation": "Swing"
+            }
+        },
+        "_DefVersion": "1"
+    },
+    "BaseAxe_Weapon": {
+        "!ParentKey": "#BaseMeleeWeapon",
+        "!ObjectScript": "res://assets/Scripts/Items/Equipment/Tools/BaseWeaponEquipment.gd",
+        "#ObjDetails": {
+            "Description": "A basic Axe used for chopping foes.",
+            "DisplayName": "Axe",
+            "LargeIcon": "Sprites/BaseAxe_Icon.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/BaseAxe_Icon.png",
+            "SnippetDesc": "an axe",
+            "Tags": [
+                "Weapon",
+                "Axe"
+            ]
+        },
+        "EquipmentData": {
+            "StatMods": {
+                "AttackBonus": {
+                    "Value": 10
+                }
+            }
+        },
+        "WeaponData": {
+            "AttackData": {
+                "DamageDatas": {
+                    "WeaponDamage": {
+                        "AtkPwrRange": 30,
+                        "DamageType": "Slash"
+                    }
+                }
+            },
+            "WeaponSpriteData": {
+                "WeaponAnimation": "Swing"
+            }
+        },
+        "_DefVersion": "1"
+    },
+    "BaseMace_Weapon": {
+        "!ParentKey": "#BaseMeleeWeapon",
+        "!ObjectScript": "res://assets/Scripts/Items/Equipment/Tools/BaseWeaponEquipment.gd",
+        "#ObjDetails": {
+            "Description": "A basic Mace used for smashing foes.",
+            "DisplayName": "Mace",
+            "LargeIcon": "Sprites/BaseMace_Icon.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/BaseMace_Icon.png",
+            "SnippetDesc": "a Mace",
+            "Tags": [
+                "Weapon",
+                "Mace"
+            ]
+        },
+        "EquipmentData": {
+            "StatMods": {
+                "AttackBonus": {
+                    "Value": 10
+                }
+            }
+        },
+        "WeaponData": {
+            "AttackData": {
+                "DamageDatas": {
+                    "WeaponDamage": {
+                        "AtkPwrRange": 30,
+                        "DamageType": "Blunt"
+                    }
+                }
+            },
+            "WeaponSpriteData": {
+                "WeaponAnimation": "Swing"
+            }
+        },
+        "_DefVersion": "1"
+    },
+    "BaseSpear_Weapon": {
+        "!ParentKey": "#BaseMeleeWeapon",
+        "!ObjectScript": "res://assets/Scripts/Items/Equipment/Tools/BaseWeaponEquipment.gd",
+        "#ObjDetails": {
+            "Description": "A basic Spear used for poking foes.",
+            "DisplayName": "Spear",
+            "LargeIcon": "Sprites/BaseSpear_Icon.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/BaseSpear_Icon.png",
+            "SnippetDesc": "an spear",
+            "Tags": [
+                "Weapon",
+                "Spear"
+            ]
+        },
+        "EquipmentData": {
+            "StatMods": {
+                "AttackBonus": {
+                    "Value": 10
+                }
+            }
+        },
+        "WeaponData": {
+            "AttackData": {
+                "DamageDatas": {
+                    "WeaponDamage": {
+                        "AtkPwrRange": 5,
+                        "DamageType": "Pierce"
+                    }
+                },
+                "TargetParams": {
+                    "LineOfSight": true,
+                    "TargetArea": "[[-1,1],[0,1],[1,1],[0,2]]",
+                    "TargetType": "Enemy"
+                }
+            },
+            "WeaponSpriteData": {
+                "WeaponAnimation": "Stab"
+            }
+        },
+        "_DefVersion": "1"
+    },
+    "BaseGreatSword_Weapon": {
+        "!ParentKey": "#BaseMeleeWeapon",
+        "!ObjectScript": "res://assets/Scripts/Items/Equipment/Tools/BaseWeaponEquipment.gd",
+        "#ObjDetails": {
+            "Description": "A basic Great Sword used for bisecting foes.",
+            "DisplayName": "Great Sword",
+            "LargeIcon": "Sprites/BaseHeavySword_Icon.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/BaseHeavySword_Icon.png",
+            "SnippetDesc": "an pretty great sword",
+            "Tags": [
+                "Weapon",
+                "TwoHand",
+                "GreatSword"
+            ]
+        },
+        "EquipmentData": {
+            "StatMods": {
+                "AttackBonus": {
+                    "Value": 10
+                }
+            }
+        },
+        "WeaponData": {
+            "AttackData": {
+                "DamageDatas": {
+                    "WeaponDamage": {
+                        "AtkPwrRange": 20,
+                        "DamageType": "Slash"
+                    }
+                },
+                "TargetParams": {
+                    "LineOfSight": true,
+                    "TargetArea": "[[-1,1],[0,1],[1,1]]",
+                    "TargetType": "Enemy"
+                }
+            },
+            "WeaponClass":"Heavy",
+            "WeaponSpriteData": {
+                "WeaponAnimation": "Swing"
+            }
+        },
+        "_DefVersion": "1"
+    },
+    "BaseGreatHammer_Weapon": {
+        "!ParentKey": "#BaseMeleeWeapon",
+        "!ObjectScript": "res://assets/Scripts/Items/Equipment/Tools/BaseWeaponEquipment.gd",
+        "#ObjDetails": {
+            "Description": "A basic Great Hammer used for obliterating foes.",
+            "DisplayName": "Great Hammer",
+            "LargeIcon": "Sprites/BaseHammer_Icon.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/BaseHammer_Icon.png",
+            "SnippetDesc": "an pretty great Hammer",
+            "Tags": [
+                "Weapon",
+                "TwoHand",
+                "GreatHammer"
+            ]
+        },
+        "EquipmentData": {
+            "StatMods": {
+                "AttackBonus": {
+                    "Value": 10
+                }
+            }
+        },
+        "WeaponData": {
+            "AttackData": {
+                "DamageDatas": {
+                    "WeaponDamage": {
+                        "AtkPwrRange": 30,
+                        "DamageType": "Blunt"
+                    }
+                },
+                "TargetParams": {
+                    "LineOfSight": true,
+                    "TargetArea": "[[-1,1],[0,1],[1,1]]",
+                    "TargetType": "Enemy"
+                }
+            },
+            "WeaponClass":"Heavy",
+            "WeaponSpriteData": {
+                "WeaponAnimation": "Swing"
+            }
+        },
+        "_DefVersion": "1"
+    },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    "#BaseRangeWeapon": {
+        "!ObjectScript": "res://assets/Scripts/Items/Equipment/Tools/BaseWeaponEquipment.gd",
+        "#ObjDetails": {
+            "Description": "A basic Wand for pelting foes.",
+            "DisplayName": "Wand",
+            "LargeIcon": "Sprites/BasicWand_Icon.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/BasicWand_Icon.png",
+            "SnippetDesc": "a wand.",
+            "Tags": [
+                "Weapon",
+                "Ranged"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Equipment",
+                "Tool",
+                "Weapon"
+            ]
+        },
+        "EquipmentData": {
+            "AttackMods": {},
+            "DamageMods": {},
+            "EquipSlot": "Weapon",
+            "Requirments": {
+            },
+            "StatMods": {
+                "AttackBonus": {
+                    "ModType": "Add",
+                    "StatName": "MagAttack",
+                    "Value": 5
+                }
+            },
+            "TargetMods": {}
+        },
+        "ItemData": {
+            "Rarity": "Mundane",
+            "Value": 50
+        },
+        "WeaponData": {
+            "AttackData": {
+                "AttackDetails": {
+                    "AccuracyMod": 1,
+                    "PotencyMod": 1,
+                    "AttackVfxData": {
+                        "RandomOffsets": [0,0],
+                        "ScenePath": "res://assets/Scripts/VFXs/BulletVfxs/bullet_vfx_node.tscn",
+                        "SpriteName": "Sprites/BaseWand_Missile.png",
+                        "SpriteSheetHight": 1,
+                        "SpriteSheetWidth": 1,
+                        "Velocity": 200
+                    }
+                },
+                "AttackTags": [
+                    "Weapon",
+                    "Range",
+                    "Magic"
+                ],
+                "DamageDatas": {
+                    "WeaponDamage": {
+                        "AtkPwrBase": 100,
+                        "AtkPwrRange": 10,
+                        "AtkStat": "MagAttack",
+                        "DamageType": "Fire",
+                        "DamageVfxKey": "Fire_DamageEffect",
+                        "DefenseType": "Ward"
+                    }
+                },
+                "EffectDatas": {},
+                "TargetParams": {
+                    "LineOfSight": true,
+                    "TargetArea": "[[-1,1],[0,1],[1,1],[-1,2],[0,2],[1,2]]",
+                    "TargetType": "Enemy"
+                }
+            },
+            "IsRanged": true,
+            "WeaponClass": "Light",
+            "WeaponSpriteData": {
+                "Offset": [
+                    0,
+                    0
+                ],
+                "Rotation": -45,
+                "WeaponAnimation": "Raise"
+            }
+        },
+        "_DefVersion": "1"
+    },
+    "BaseWand_Weapon": {
+        "!ParentKey": "#BaseRangeWeapon",
+        "!ObjectScript": "res://assets/Scripts/Items/Equipment/Tools/BaseWeaponEquipment.gd",
+        "#ObjDetails": {
+            "Description": "A basic Wand for pelting foes.",
+            "DisplayName": "Wand",
+            "LargeIcon": "Sprites/BaseWand_Icon.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/BaseWand_Icon.png",
+            "SnippetDesc": "a wand.",
+            "Tags": [
+                "Weapon",
+                "Ranged",
+                "Wand"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Equipment",
+                "Tool",
+                "Weapon"
+            ]
+        },
+        "EquipmentData": {
+            "Requirments": {
+                "ReqStats": {
+                    "Intelligence": 8
+                }
+            },
+            "StatMods": {
+                "AttackBonus": {
+                    "ModType": "Add",
+                    "StatName": "MagAttack",
+                    "Value": 5
+                }
+            }
+        },
+        "WeaponData": {
+            "AttackData": {
+                "AttackDetails": {
+                    "AccuracyMod": 1,
+                    "PotencyMod": 1,
+                    "AttackVfxData": {
+                        "RandomOffsets": [0,0],
+                        "ScenePath": "res://assets/Scripts/VFXs/BulletVfxs/bullet_vfx_node.tscn",
+                        "SpriteName": "Sprites/BaseWand_Missile.png",
+                        "SpriteSheetHight": 1,
+                        "SpriteSheetWidth": 1,
+                        "Velocity": 200
+                    }
+                },
+                "AttackTags": [
+                    "Weapon",
+                    "Range",
+                    "Magic"
+                ],
+                "DamageDatas": {
+                    "WeaponDamage": {
+                        "AtkPwrBase": 80,
+                        "AtkPwrRange": 10,
+                        "AtkStat": "MagAttack",
+                        "DamageType": "Fire",
+                        "DamageVfxKey": "Fire_DamageEffect",
+                        "DefenseType": "Ward"
+                    }
+                },
+                "EffectDatas": {},
+                "TargetParams": {
+                    "LineOfSight": true,
+                    "TargetArea": "[[-1,1],[0,1],[1,1],[-1,2],[0,2],[1,2]]",
+                    "TargetType": "Enemy"
+                }
+            },
+            "IsRanged": true,
+            "WeaponClass": "Light",
+            "WeaponSpriteData": {
+                "Offset": [
+                    0,
+                    0
+                ],
+                "Rotation": -45,
+                "WeaponAnimation": "Raise"
+            }
+        },
+        "_DefVersion": "1"
+    },
+    "BaseStaff_Weapon": {
+        "!ParentKey": "#BaseRangeWeapon",
+        "!ObjectScript": "res://assets/Scripts/Items/Equipment/Tools/BaseWeaponEquipment.gd",
+        "#ObjDetails": {
+            "Description": "A basic Staff for blasting foes.",
+            "DisplayName": "Staff",
+            "LargeIcon": "Sprites/BaseStaff_Icon.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/BaseStaff_Icon.png",
+            "SnippetDesc": "a staff.",
+            "Tags": [
+                "Weapon",
+                "Ranged",
+                "Staff"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Equipment",
+                "Tool",
+                "Weapon"
+            ]
+        },
+        "EquipmentData": {
+            "Requirments": {
+                "ReqStats": {
+                    "Intelligence": 8
+                }
+            },
+            "StatMods": {
+                "AttackBonus": {
+                    "ModType": "Add",
+                    "StatName": "MagAttack",
+                    "Value": 5
+                }
+            }
+        },
+        "WeaponData": {
+            "AttackData": {
+                "AttackDetails": {
+                    "AccuracyMod": 1,
+                    "PotencyMod": 1,
+                    "AttackVfxData": {
+                        "RandomOffsets": [0,0],
+                        "ScenePath": "res://assets/Scripts/VFXs/BulletVfxs/bullet_vfx_node.tscn",
+                        "SpriteName": "Sprites/BaseWand_Missile.png",
+                        "SpriteSheetHight": 1,
+                        "SpriteSheetWidth": 1,
+                        "Velocity": 200
+                    }
+                },
+                "AttackTags": [
+                    "Weapon",
+                    "Range",
+                    "Magic"
+                ],
+                "DamageDatas": {
+                    "WeaponDamage": {
+                        "AtkPwrBase": 100,
+                        "AtkPwrRange": 10,
+                        "AtkStat": "MagAttack",
+                        "DamageType": "Fire",
+                        "DamageVfxKey": "Fire_DamageEffect",
+                        "DefenseType": "Ward"
+                    }
+                },
+                "EffectDatas": {},
+                "TargetParams": {
+                    "LineOfSight": true,
+                    "TargetArea": "[[-1,1],[0,1],[1,1],[-1,2],[0,2],[1,2]]",
+                    "TargetType": "Enemy"
+                }
+            },
+            "IsRanged": true,
+            "WeaponClass": "Light",
+            "WeaponSpriteData": {
+                "Offset": [
+                    0,
+                    0
+                ],
+                "Rotation": -45,
+                "WeaponAnimation": "Raise"
+            }
+        },
+        "_DefVersion": "1"
+    },
+    "BaseBow_Weapon": {
+        "!ObjectScript": "res://assets/Scripts/Items/Equipment/Tools/BaseWeaponEquipment.gd",
+        "#ObjDetails": {
+            "Description": "A basic bow use for shooting foes.",
+            "DisplayName": "Bow",
+            "LargeIcon": "Sprites/BaseBow_Icon.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/BaseBow_Icon.png",
+            "SnippetDesc": "a bow.",
+            "Tags": [
+                "Weapon",
+                "Bow"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Equipment",
+                "Tool",
+                "Weapon"
+            ]
+        },
+        "EquipmentData": {
+            "EquipSlot": "Weapon",
+            "Requirments": {
+                "ReqStats": {
+                    "Agility": 10
+                }
+            },
+            "StatMods": {
+                "AttackBonus": {
+                    "ModType": "Add",
+                    "StatName": "PhyAttack",
+                    "Value": 10
+                }
+            }
+        },
+        "ItemData": {
+            "Rarity": "Mundane",
+            "Value": 50
+        },
+        "WeaponData": {
+            "AttackData": {
+                "AttackDetails": {
+                    "AccuracyMod": 1,
+                    "PotencyMod": 1,
+                    "AttackVfxData": {
+                        "RandomOffsets": [0,0],
+                        "ScenePath": "res://assets/Scripts/VFXs/BulletVfxs/bullet_vfx_node.tscn",
+                        "SpriteName": "Sprites/BaseBow_Missile.png",
+                        "SpriteSheetHight": 1,
+                        "SpriteSheetWidth": 1,
+                        "Velocity": 300
+                    }
+                },
+                "AttackTags": [
+                    "Weapon",
+                    "Ranged",
+                    "Physical"
+                ],
+                "DamageDatas": {
+                    "WeaponDamage": {
+                        "AtkPwrBase": 80,
+                        "AtkPwrRange": 20,
+                        "AtkStat": "PhyAttack",
+                        "DamageType": "Pierce",
+                        "DamageVfxKey": "Pierce_DamageEffect",
+                        "DefenseType": "Armor"
+                    }
+                },
+                "EffectDatas": {},
+                "TargetParams": {
+                    "LineOfSight": true,
+                    "TargetArea": "[[0,1],[-1,2],[0,2],[1,2],[-2,3],[-1,3],[0,3],[1,3],[2,3],[-1,4],[0,4],[1,4],[0,5]]",
+                    "TargetType": "Enemy"
+                }
+            },
+            "IsRanged": true,
+            "_MissileData": {
+                "FramesPerTile": 3,
+                "ImpactVfxKey": "Blunt_DamageEffect",
+                "MissileVfxKey": "BasicArrowMissile"
+            },
+            "WeaponClass": "Heavy",
+            "WeaponSpriteData": {
+                "Offset": [
+                    0,
+                    0
+                ],
+                "Rotation": 30,
+                "WeaponAnimation": "Raise"
+            }
+        },
+        "_DefVersion": "1"
+    }
+
+}

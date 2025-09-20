@@ -50,6 +50,15 @@ func get_small_icon_path()->String:
 func get_small_icon()->Texture2D:
 	var icon_path = _def_load_path.path_join(get_object_details().get("SmallIcon", ""))
 	return SpriteCache.get_sprite(icon_path)
+
+func get_weapon_sprite_sheet_path()->String:
+	# Base Weapon Sprite path off of Large Icon Path
+	var sprite_file = _def_load_path.path_join(get_object_details().get("LargeIcon", ""))
+	if sprite_file.contains("_Icon"):
+		sprite_file = sprite_file.replace("_Icon", "")
+	sprite_file = sprite_file.replace(".png", "_WeaponSprite.png")
+	return sprite_file
+
 func get_tags()->Array:
 	return object_details.get("Tags", []).duplicate()
 func get_taxonomy()->Array:

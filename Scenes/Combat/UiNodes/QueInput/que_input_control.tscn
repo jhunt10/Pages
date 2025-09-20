@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://6dlh0wlnsedb"]
+[gd_scene load_steps=31 format=3 uid="uid://6dlh0wlnsedb"]
 
 [ext_resource type="Script" path="res://Scenes/Combat/UiNodes/QueInput/que_input_control.gd" id="1_bqb47"]
 [ext_resource type="Texture2D" uid="uid://clb0p8uenqo8c" path="res://Scenes/Combat/UiNodes/QueInput/PopUpButton.png" id="2_7xk62"]
@@ -12,12 +12,26 @@
 [ext_resource type="Texture2D" uid="uid://b6u5htxioouqh" path="res://Scenes/Dialog/DialogBox/UnknownSpeakerPort.png" id="7_g8caj"]
 [ext_resource type="Script" path="res://Scenes/Combat/UiNodes/QueDisplay/que_display_control.gd" id="9_o02vd"]
 [ext_resource type="Texture2D" uid="uid://e71sf31qf71e" path="res://Scenes/Combat/UiNodes/QueDisplay/QueDisplayBackground.png" id="11_quda2"]
+[ext_resource type="Script" path="res://Scenes/Combat/UiNodes/QueInput/que_page_hover_box.gd" id="17_26ell"]
 [ext_resource type="Script" path="res://Scenes/Combat/UiNodes/QueInput/QueDisplayButton.gd" id="18_8nhhy"]
+[ext_resource type="Texture2D" uid="uid://5hu0ttx4jxuo" path="res://assets/Sprites/UI/BackPatches/PaperPatch_64x92_16.png" id="18_vdtlt"]
 [ext_resource type="Texture2D" uid="uid://cr1m3llr0pgtd" path="res://Scenes/Combat/UiNodes/QueDisplay/EmptySlotBackground.png" id="19_d7qpq"]
 [ext_resource type="Texture2D" uid="uid://dq2fpuokt1s5r" path="res://Scenes/Combat/UiNodes/QueDisplay/SlotBackground.png" id="19_gjejj"]
+[ext_resource type="Theme" uid="uid://bfce41la62bs6" path="res://Scenes/Themes/readable_theme.tres" id="19_ul4h4"]
+[ext_resource type="Script" path="res://Scenes/UiNodes/FitScaleLabel/fit_scale_label.gd" id="20_1rpgj"]
 [ext_resource type="Texture2D" uid="uid://bu1v4w3d6hau" path="res://Scenes/Combat/UiNodes/QueDisplay/FilledSlotBackground.png" id="20_k35kq"]
+[ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/ItemDetailsCard/cost_container.gd" id="21_8u37x"]
+[ext_resource type="Texture2D" uid="uid://dhtsefdcfxbg8" path="res://assets/Sprites/UI/SymbolIcons/AmmoSymbol_Gen.png" id="22_r3ae3"]
+[ext_resource type="Texture2D" uid="uid://ckym0e60eik1k" path="res://assets/Sprites/UI/SymbolIcons/AmmoSymbol_Phy.png" id="23_fdbdp"]
+[ext_resource type="Texture2D" uid="uid://cexlfs7svl17c" path="res://assets/Sprites/UI/SymbolIcons/AmmoSymbol_Mag.png" id="24_qahiv"]
+[ext_resource type="Texture2D" uid="uid://cyt5q4hutdp6y" path="res://assets/Sprites/UI/SymbolIcons/AmmoSymbol_Abn.png" id="25_ui4f4"]
+[ext_resource type="Theme" uid="uid://dwinll8pgdjhc" path="res://Scenes/Themes/standard_theme.tres" id="26_feyac"]
+[ext_resource type="Texture2D" uid="uid://br058igskmkwd" path="res://assets/Sprites/UI/SymbolIcons/AccuracySymbol.png" id="27_c1tse"]
+[ext_resource type="Texture2D" uid="uid://dgxwfm0wf7rhw" path="res://assets/Sprites/UI/SymbolIcons/PotencySymbol.png" id="28_4wg1y"]
+[ext_resource type="PackedScene" uid="uid://bqi05unl37q0p" path="res://Scenes/UiNodes/DamageLabelContainer/damage_label_container.tscn" id="29_8t3u5"]
+[ext_resource type="Script" path="res://Scenes/UiNodes/DescriptionBox/description_box.gd" id="31_7pjhl"]
 
-[node name="QueInputControl" type="Control" node_paths=PackedStringArray("_fill_button", "nodes_container", "que_display_control", "que_display_patch", "back_patch", "main_container", "page_button_prefab", "start_label", "side_start_button", "top_start_button", "page_Selection_container")]
+[node name="QueInputControl" type="Control" node_paths=PackedStringArray("_fill_button", "nodes_container", "que_display_control", "que_display_patch", "back_patch", "main_container", "page_button_prefab", "start_label", "side_start_button", "top_start_button", "page_Selection_container", "hover_box")]
 custom_minimum_size = Vector2(124, 0)
 layout_mode = 3
 anchors_preset = 12
@@ -40,6 +54,7 @@ side_start_button = NodePath("VBoxContainer/QueInputBackPatchContainer/Control/S
 top_start_button = NodePath("VBoxContainer/QueInputBackPatchContainer/Control/TopStatButtonControl")
 slide_speed = 300.0
 page_Selection_container = NodePath("VBoxContainer/PageSelectionContainer")
+hover_box = NodePath("QuePageHoverBox")
 state = 2
 
 [node name="QueDisplayControl" type="Control" parent="." node_paths=PackedStringArray("portrait", "main_container", "premade_que_button", "slots_container")]
@@ -55,9 +70,9 @@ show_gaps = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 0
-offset_left = 693.0
+offset_left = 698.0
 offset_top = -172.0
-offset_right = 813.0
+offset_right = 818.0
 offset_bottom = 68.0
 
 [node name="TopPadding" type="Control" parent="VBoxContainer"]
@@ -332,3 +347,256 @@ layout_mode = 2
 visible = false
 custom_minimum_size = Vector2(10, 10)
 layout_mode = 2
+
+[node name="QuePageHoverBox" type="Control" parent="." node_paths=PackedStringArray("backpatch", "title_label", "description_box", "target_type_label", "current_ammo_label", "cost_container", "damage_label", "damage_container", "ammo_acc_pot_container", "accuracy_icon", "accuracy_label", "potency_icon", "potency_label", "ammo_acc_pot_line", "damage_line")]
+anchors_preset = 0
+offset_left = 760.0
+offset_top = -96.0
+offset_right = 760.0
+offset_bottom = -96.0
+script = ExtResource("17_26ell")
+backpatch = NodePath("BackPatchContainer")
+title_label = NodePath("BackPatchContainer/BoxContainer/FitScaleLabel")
+description_box = NodePath("BackPatchContainer/BoxContainer/DescriptionBox")
+target_type_label = NodePath("BackPatchContainer/BoxContainer/AmmoAccPotContainer/TargetTypeLabel")
+current_ammo_label = NodePath("BackPatchContainer/BoxContainer/AmmoAccPotContainer/AmmoContainer/CostLabel/CurrentAmmoLabel")
+cost_container = NodePath("BackPatchContainer/BoxContainer/AmmoAccPotContainer/AmmoContainer")
+damage_label = NodePath("BackPatchContainer/BoxContainer/DamageContainer")
+damage_container = NodePath("BackPatchContainer/BoxContainer/DamageContainer")
+ammo_acc_pot_container = NodePath("BackPatchContainer/BoxContainer/AmmoAccPotContainer")
+accuracy_icon = NodePath("BackPatchContainer/BoxContainer/AmmoAccPotContainer/AccIcon")
+accuracy_label = NodePath("BackPatchContainer/BoxContainer/AmmoAccPotContainer/AccLabel")
+potency_icon = NodePath("BackPatchContainer/BoxContainer/AmmoAccPotContainer/PotIcon")
+potency_label = NodePath("BackPatchContainer/BoxContainer/AmmoAccPotContainer/PotLabel")
+ammo_acc_pot_line = NodePath("BackPatchContainer/BoxContainer/ColorRect2")
+damage_line = NodePath("BackPatchContainer/BoxContainer/ColorRect3")
+
+[node name="BackPatchContainer" type="Container" parent="QuePageHoverBox" node_paths=PackedStringArray("background", "inner_container")]
+custom_minimum_size = Vector2(256, 141)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -138.0
+offset_top = -136.0
+offset_right = 118.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 0
+script = ExtResource("2_ir7m8")
+background = NodePath("NinePatchRect")
+inner_container = NodePath("BoxContainer")
+margin_override = 8
+
+[node name="NinePatchRect" type="NinePatchRect" parent="QuePageHoverBox/BackPatchContainer"]
+layout_mode = 2
+texture = ExtResource("18_vdtlt")
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+
+[node name="BoxContainer" type="BoxContainer" parent="QuePageHoverBox/BackPatchContainer"]
+custom_minimum_size = Vector2(240, 0)
+layout_mode = 2
+vertical = true
+
+[node name="FitScaleLabel" type="Control" parent="QuePageHoverBox/BackPatchContainer/BoxContainer" node_paths=PackedStringArray("label")]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+theme = ExtResource("19_ul4h4")
+script = ExtResource("20_1rpgj")
+label = NodePath("Label")
+text = "Page Name"
+center_x = true
+
+[node name="Label" type="Label" parent="QuePageHoverBox/BackPatchContainer/BoxContainer/FitScaleLabel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 88.0
+offset_top = 3.0
+offset_right = -89.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 24
+text = "Page Name"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ColorRect" type="ColorRect" parent="QuePageHoverBox/BackPatchContainer/BoxContainer"]
+custom_minimum_size = Vector2(0, 1)
+layout_mode = 2
+color = Color(0.498039, 0.4, 0.376471, 1)
+
+[node name="AmmoAccPotContainer" type="HBoxContainer" parent="QuePageHoverBox/BackPatchContainer/BoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="VSeparator" type="VSeparator" parent="QuePageHoverBox/BackPatchContainer/BoxContainer/AmmoAccPotContainer"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="AmmoContainer" type="HBoxContainer" parent="QuePageHoverBox/BackPatchContainer/BoxContainer/AmmoAccPotContainer" node_paths=PackedStringArray("count_val_label", "cost_val_label", "clip_val_label", "ammo_icon_rect")]
+layout_mode = 2
+script = ExtResource("21_8u37x")
+count_val_label = NodePath("CostLabel/CountLabel")
+cost_val_label = NodePath("CostLabel/CostLabel")
+clip_val_label = NodePath("CostLabel/ClipLabel")
+ammo_icon_rect = NodePath("CostLabel/AmmoIcon")
+gen_ammo_icon = ExtResource("22_r3ae3")
+phy_ammo_icon = ExtResource("23_fdbdp")
+mag_ammo_icon = ExtResource("24_qahiv")
+abn_ammo_icon = ExtResource("25_ui4f4")
+
+[node name="CostTitle" type="Label" parent="QuePageHoverBox/BackPatchContainer/BoxContainer/AmmoAccPotContainer/AmmoContainer"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 8
+theme = ExtResource("19_ul4h4")
+theme_override_colors/font_color = Color(0.470588, 0, 0, 1)
+text = "Ammo:"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="CostLabel" type="HBoxContainer" parent="QuePageHoverBox/BackPatchContainer/BoxContainer/AmmoAccPotContainer/AmmoContainer"]
+layout_mode = 2
+theme_override_constants/separation = 1
+
+[node name="AmmoIcon" type="TextureRect" parent="QuePageHoverBox/BackPatchContainer/BoxContainer/AmmoAccPotContainer/AmmoContainer/CostLabel"]
+layout_mode = 2
+texture = ExtResource("22_r3ae3")
+
+[node name="CurrentAmmoLabel" type="Label" parent="QuePageHoverBox/BackPatchContainer/BoxContainer/AmmoAccPotContainer/AmmoContainer/CostLabel"]
+layout_mode = 2
+size_flags_vertical = 8
+theme = ExtResource("3_u12om")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "9"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Seperator2" type="Label" parent="QuePageHoverBox/BackPatchContainer/BoxContainer/AmmoAccPotContainer/AmmoContainer/CostLabel"]
+self_modulate = Color(0.31, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("26_feyac")
+text = "/"
+
+[node name="CountLabel" type="Label" parent="QuePageHoverBox/BackPatchContainer/BoxContainer/AmmoAccPotContainer/AmmoContainer/CostLabel"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("26_feyac")
+text = "9"
+
+[node name="CostLabel" type="Label" parent="QuePageHoverBox/BackPatchContainer/BoxContainer/AmmoAccPotContainer/AmmoContainer/CostLabel"]
+visible = false
+self_modulate = Color(0.31, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("26_feyac")
+text = "4"
+
+[node name="Seperator3" type="Label" parent="QuePageHoverBox/BackPatchContainer/BoxContainer/AmmoAccPotContainer/AmmoContainer/CostLabel"]
+visible = false
+self_modulate = Color(0.31, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("26_feyac")
+text = ":"
+
+[node name="ClipLabel" type="Label" parent="QuePageHoverBox/BackPatchContainer/BoxContainer/AmmoAccPotContainer/AmmoContainer/CostLabel"]
+visible = false
+self_modulate = Color(0.31, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("26_feyac")
+text = "36"
+
+[node name="Seperator4" type="Label" parent="QuePageHoverBox/BackPatchContainer/BoxContainer/AmmoAccPotContainer/AmmoContainer/CostLabel"]
+visible = false
+self_modulate = Color(0.31, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("26_feyac")
+text = ")"
+
+[node name="VSeparator2" type="VSeparator" parent="QuePageHoverBox/BackPatchContainer/BoxContainer/AmmoAccPotContainer"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="AccIcon" type="TextureRect" parent="QuePageHoverBox/BackPatchContainer/BoxContainer/AmmoAccPotContainer"]
+layout_mode = 2
+texture = ExtResource("27_c1tse")
+expand_mode = 3
+
+[node name="AccLabel" type="Label" parent="QuePageHoverBox/BackPatchContainer/BoxContainer/AmmoAccPotContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+theme = ExtResource("3_u12om")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "100"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="VSeparator3" type="VSeparator" parent="QuePageHoverBox/BackPatchContainer/BoxContainer/AmmoAccPotContainer"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PotIcon" type="TextureRect" parent="QuePageHoverBox/BackPatchContainer/BoxContainer/AmmoAccPotContainer"]
+layout_mode = 2
+texture = ExtResource("28_4wg1y")
+expand_mode = 3
+
+[node name="PotLabel" type="Label" parent="QuePageHoverBox/BackPatchContainer/BoxContainer/AmmoAccPotContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+theme = ExtResource("3_u12om")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "100"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="VSeparator4" type="VSeparator" parent="QuePageHoverBox/BackPatchContainer/BoxContainer/AmmoAccPotContainer"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TargetTypeLabel" type="Label" parent="QuePageHoverBox/BackPatchContainer/BoxContainer/AmmoAccPotContainer"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 8
+theme = ExtResource("19_ul4h4")
+theme_override_colors/font_color = Color(0.470588, 0, 0, 1)
+text = "Spot"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="ColorRect2" type="ColorRect" parent="QuePageHoverBox/BackPatchContainer/BoxContainer"]
+custom_minimum_size = Vector2(0, 1)
+layout_mode = 2
+color = Color(0.498039, 0.4, 0.376471, 1)
+
+[node name="DamageContainer" parent="QuePageHoverBox/BackPatchContainer/BoxContainer" instance=ExtResource("29_8t3u5")]
+layout_mode = 2
+defense_type = "Armor"
+damage_type = 7
+
+[node name="ColorRect3" type="ColorRect" parent="QuePageHoverBox/BackPatchContainer/BoxContainer"]
+custom_minimum_size = Vector2(0, 1)
+layout_mode = 2
+color = Color(0.498039, 0.4, 0.376471, 1)
+
+[node name="DescriptionBox" type="RichTextLabel" parent="QuePageHoverBox/BackPatchContainer/BoxContainer"]
+clip_contents = false
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("26_feyac")
+bbcode_enabled = true
+text = "Item Description hk hbkhjhl jhlkjl ljlkj"
+fit_content = true
+scroll_active = false
+script = ExtResource("31_7pjhl")

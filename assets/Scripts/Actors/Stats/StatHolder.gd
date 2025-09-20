@@ -392,8 +392,8 @@ func _calc_cache_stats(emit_signal:bool=true):
 		temp_stats[StatHelper.HealthCurrent] = health_before_caching
 	# Add Armor and Ward from equipment
 	var apparel_stats = _actor.equipment.get_total_apparel_stats()
-	temp_stats['Armor'] = apparel_stats['Armor']
-	temp_stats['Ward'] = apparel_stats['Ward']
+	temp_stats['Armor'] = temp_stats.get('Armor', 0) + apparel_stats['Armor']
+	temp_stats['Ward'] = temp_stats.get('Ward', 0) + apparel_stats['Ward']
 	var armor_fake_mod = BaseStatMod.new(_actor.Id, "Armor", str(apparel_stats['Armor'])+" from Apparel", 
 			BaseStatMod.ModTypes.FalseMod,apparel_stats['Armor'],null)
 	var ward_fake_mod = BaseStatMod.new(_actor.Id, "Ward", str(apparel_stats['Ward'])+" from Apparel", 

@@ -75,102 +75,7 @@
                     0
                 ],
                 "Rotation": 0,
-                "SpriteName": "Sprites/BlackJack",
                 "WeaponAnimation": "Swing"
-            }
-        },
-        "_DefVersion": "1"
-    },
-    "OldBow": {
-        "!ObjectScript": "res://assets/Scripts/Items/Equipment/Tools/BaseWeaponEquipment.gd",
-        "#ObjDetails": {
-            "Description": "A simple dagger dulled from years of various uses. Old, but still works.",
-            "DisplayName": "Old Bow",
-            "LargeIcon": "Sprites/OldBow.png",
-            "ObjectType": "Item",
-            "SmallIcon": "Sprites/OldBow.png",
-            "SnippetDesc": "A rogue's old bow.",
-            "Tags": [
-                "Weapon",
-                "Bow"
-            ],
-            "Taxonomy": [
-                "Item",
-                "Equipment",
-                "Tool",
-                "Weapon"
-            ]
-        },
-        "EquipmentData": {
-            "EquipSlot": "Weapon",
-            "Requirments": {
-                "ReqStats": {
-                    "Agility": 10
-                }
-            },
-            "StatMods": {
-                "AttackBonus": {
-                    "ModType": "Add",
-                    "StatName": "PhyAttack",
-                    "Value": 10
-                }
-            }
-        },
-        "ItemData": {
-            "Rarity": "Mundane",
-            "Value": 50
-        },
-        "WeaponData": {
-            "AttackData": {
-                "AttackDetails": {
-                    "AccuracyMod": 1,
-                    "PotencyMod": 1,
-                    "AttackVfxData": {
-                        "RandomOffsets": [0,0],
-                        "ScenePath": "res://assets/Scripts/VFXs/BulletVfxs/bullet_vfx_node.tscn",
-                        "SpriteName": "Sprites/OldBow_Missile.png",
-                        "SpriteSheetHight": 1,
-                        "SpriteSheetWidth": 1,
-                        "Velocity": 300
-                    }
-                },
-                "AttackTags": [
-                    "Weapon",
-                    "Ranged",
-                    "Physical"
-                ],
-                "DamageDatas": {
-                    "WeaponDamage": {
-                        "AtkPwrBase": 80,
-                        "AtkPwrRange": 20,
-                        "AtkStat": "PhyAttack",
-                        "DamageType": "Pierce",
-                        "DamageVfxKey": "Pierce_DamageEffect",
-                        "DefenseType": "Armor"
-                    }
-                },
-                "EffectDatas": {},
-                "TargetParams": {
-                    "LineOfSight": true,
-                    "TargetArea": "[[0,1],[-1,2],[0,2],[1,2],[-2,3],[-1,3],[0,3],[1,3],[2,3],[-1,4],[0,4],[1,4],[0,5]]",
-                    "TargetType": "Actor"
-                }
-            },
-            "IsRanged": true,
-            "_MissileData": {
-                "FramesPerTile": 3,
-                "ImpactVfxKey": "Blunt_DamageEffect",
-                "MissileVfxKey": "BasicArrowMissile"
-            },
-            "WeaponClass": "Heavy",
-            "WeaponSpriteData": {
-                "Offset": [
-                    0,
-                    0
-                ],
-                "Rotation": 30,
-                "SpriteName": "Sprites/OldBow",
-                "WeaponAnimation": "Raise"
             }
         },
         "_DefVersion": "1"
@@ -251,7 +156,6 @@
                     0
                 ],
                 "Rotation": 0,
-                "SpriteName": "Sprites/OldDagger",
                 "WeaponAnimation": "Stab"
             }
         },

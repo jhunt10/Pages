@@ -10,20 +10,27 @@
 [ext_resource type="Texture2D" uid="uid://io35wpu802fp" path="res://assets/Sprites/UI/BackPatches/Patch_64_12.png" id="6_be6gi"]
 [ext_resource type="Texture2D" uid="uid://dq2cad8orar4p" path="res://assets/Sprites/UI/SymbolIcons/ArmorSymbol.png" id="9_6dh7h"]
 
-[node name="DamageContainer" type="HBoxContainer" node_paths=PackedStringArray("atk_power_label", "plus_minus_label", "percent_label", "variant_label", "damage_type_label", "multiplier_label", "count_label", "atk_stat_icon", "vs_lable", "defense_stat_icon", "popup_container", "popup_message")]
+[node name="DamageContainer" type="HBoxContainer" node_paths=PackedStringArray("atk_power_and_scale_container", "atk_power_label", "plus_minus_label", "percent_label", "variant_label", "min_max_damage_container", "min_damage_label", "avg_damage_label", "max_damage_label", "damage_type_label", "multiplier_label", "count_label", "atk_stat_icon", "vs_lable", "defense_stat_icon", "defense_stat_label", "popup_container", "popup_message")]
+theme_override_constants/separation = 0
 script = ExtResource("1_rhguf")
 attack_power = 100
 attack_variant = 30.0
-atk_power_label = NodePath("HBoxContainer2/AtkPowerLabel")
-plus_minus_label = NodePath("HBoxContainer2/PlusMinusLabel")
-percent_label = NodePath("HBoxContainer2/PercentLabel")
-variant_label = NodePath("HBoxContainer2/VariantLabel")
+atk_power_and_scale_container = NodePath("AtkPwrAndScaleContainer")
+atk_power_label = NodePath("AtkPwrAndScaleContainer/AtkPowerLabel")
+plus_minus_label = NodePath("AtkPwrAndScaleContainer/PlusMinusLabel")
+percent_label = NodePath("AtkPwrAndScaleContainer/PercentLabel")
+variant_label = NodePath("AtkPwrAndScaleContainer/VariantLabel")
+min_max_damage_container = NodePath("MinMaxContainer")
+min_damage_label = NodePath("MinMaxContainer/MinDamageLabel")
+avg_damage_label = NodePath("MinMaxContainer/AvgDamageLabel")
+max_damage_label = NodePath("MinMaxContainer/MaxDamageLabel")
 damage_type_label = NodePath("DamageTypeLabel")
 multiplier_label = NodePath("MultiplierLabel")
 count_label = NodePath("CountLabel")
 atk_stat_icon = NodePath("AtkStatIcon")
 vs_lable = NodePath("HBoxContainer/VsLabel")
 defense_stat_icon = NodePath("HBoxContainer/DefenseStatIcon")
+defense_stat_label = NodePath("HBoxContainer/DefenseStatLabel")
 abb_damage_icon = ExtResource("2_mm46y")
 phy_damage_icon = ExtResource("2_3erjx")
 mag_damage_icon = ExtResource("3_00rac")
@@ -67,10 +74,8 @@ fit_content = true
 autowrap_mode = 0
 
 [node name="CountLabel" type="Label" parent="."]
-visible = false
 layout_mode = 2
 theme = ExtResource("4_xveyi")
-theme_override_colors/font_color = Color(0.470588, 0, 0, 1)
 text = "3"
 
 [node name="AtkStatIcon" type="TextureRect" parent="."]
@@ -78,16 +83,17 @@ layout_mode = 2
 texture = ExtResource("2_mm46y")
 expand_mode = 3
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="."]
+[node name="AtkPwrAndScaleContainer" type="HBoxContainer" parent="."]
+visible = false
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="AtkPowerLabel" type="Label" parent="HBoxContainer2"]
+[node name="AtkPowerLabel" type="Label" parent="AtkPwrAndScaleContainer"]
 layout_mode = 2
 theme = ExtResource("4_xveyi")
 text = "100"
 
-[node name="PlusMinusLabel" type="Label" parent="HBoxContainer2"]
+[node name="PlusMinusLabel" type="Label" parent="AtkPwrAndScaleContainer"]
 layout_mode = 2
 size_flags_vertical = 8
 theme = ExtResource("5_korun")
@@ -95,15 +101,60 @@ theme_override_font_sizes/font_size = 17
 text = "@"
 vertical_alignment = 1
 
-[node name="VariantLabel" type="Label" parent="HBoxContainer2"]
+[node name="VariantLabel" type="Label" parent="AtkPwrAndScaleContainer"]
 layout_mode = 2
 theme = ExtResource("4_xveyi")
 text = "30"
 
-[node name="PercentLabel" type="Label" parent="HBoxContainer2"]
+[node name="PercentLabel" type="Label" parent="AtkPwrAndScaleContainer"]
 layout_mode = 2
 theme = ExtResource("4_xveyi")
 text = "%"
+
+[node name="MinMaxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Seperator" type="Label" parent="MinMaxContainer"]
+layout_mode = 2
+theme = ExtResource("4_xveyi")
+theme_override_colors/font_color = Color(0.239216, 0.239216, 0.239216, 1)
+theme_override_font_sizes/font_size = 14
+text = "("
+
+[node name="MinDamageLabel" type="Label" parent="MinMaxContainer"]
+layout_mode = 2
+theme = ExtResource("4_xveyi")
+theme_override_colors/font_color = Color(0.239216, 0.239216, 0.239216, 1)
+theme_override_font_sizes/font_size = 14
+text = "18"
+
+[node name="Seperator2" type="Label" parent="MinMaxContainer"]
+layout_mode = 2
+theme = ExtResource("4_xveyi")
+theme_override_colors/font_color = Color(0.239216, 0.239216, 0.239216, 1)
+theme_override_font_sizes/font_size = 8
+text = "-"
+vertical_alignment = 1
+
+[node name="MaxDamageLabel" type="Label" parent="MinMaxContainer"]
+layout_mode = 2
+theme = ExtResource("4_xveyi")
+theme_override_colors/font_color = Color(0.239216, 0.239216, 0.239216, 1)
+theme_override_font_sizes/font_size = 14
+text = "22"
+
+[node name="Seperator3" type="Label" parent="MinMaxContainer"]
+layout_mode = 2
+theme = ExtResource("4_xveyi")
+theme_override_colors/font_color = Color(0.239216, 0.239216, 0.239216, 1)
+theme_override_font_sizes/font_size = 14
+text = ") "
+
+[node name="AvgDamageLabel" type="Label" parent="MinMaxContainer"]
+layout_mode = 2
+theme = ExtResource("4_xveyi")
+text = "20"
 
 [node name="DamageTypeLabel" type="Label" parent="."]
 layout_mode = 2
@@ -112,18 +163,24 @@ text = "Test"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 2
-theme_override_constants/separation = -1
+theme_override_constants/separation = -2
 
 [node name="VsLabel" type="Label" parent="HBoxContainer"]
 layout_mode = 2
 theme = ExtResource("4_xveyi")
 theme_override_colors/font_color = Color(0.237539, 0.237539, 0.237539, 1)
-text = "vs"
+text = " vs "
 
 [node name="DefenseStatIcon" type="TextureRect" parent="HBoxContainer"]
 layout_mode = 2
 texture = ExtResource("9_6dh7h")
 expand_mode = 3
+
+[node name="DefenseStatLabel" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("4_xveyi")
+theme_override_colors/font_color = Color(0.237539, 0.237539, 0.237539, 1)
+text = " ARM"
 
 [node name="MultiplierLabel" type="Label" parent="."]
 visible = false

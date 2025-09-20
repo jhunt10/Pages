@@ -6,6 +6,7 @@ extends Control
 @export var column_container:Container
 @export var entries_container:Container
 @export var column_seperator:VSeparator
+@export var exit_button:Button
 
 var stats_list = [
 "Strength",
@@ -43,6 +44,7 @@ func _ready() -> void:
 		new_entry.set_actor_and_values(actor, stats_list, self)
 		entries_container.add_child(new_entry)
 	premade_actor_entry.hide()
+	exit_button.pressed.connect(queue_free)
 
 func on_mouse_enter_actor_icon(actor_id:String):
 	mouse_over_control.show()

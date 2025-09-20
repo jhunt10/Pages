@@ -9,7 +9,7 @@
 [ext_resource type="Script" path="res://Scenes/UiNodes/back_patch_container.gd" id="7_ot2n6"]
 [ext_resource type="Texture2D" uid="uid://io35wpu802fp" path="res://assets/Sprites/UI/BackPatches/Patch_64_12.png" id="8_iubiy"]
 
-[node name="ActorsLibraryControl" type="Control" node_paths=PackedStringArray("mouse_over_control", "premade_column_label", "premade_actor_entry", "column_container", "entries_container", "column_seperator")]
+[node name="ActorsLibraryControl" type="Control" node_paths=PackedStringArray("mouse_over_control", "premade_column_label", "premade_actor_entry", "column_container", "entries_container", "column_seperator", "exit_button")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -23,6 +23,7 @@ premade_actor_entry = NodePath("VBoxContainer/ScrollContainer/EntriesContainer/A
 column_container = NodePath("VBoxContainer/ColumnContainer")
 entries_container = NodePath("VBoxContainer/ScrollContainer/EntriesContainer")
 column_seperator = NodePath("VBoxContainer/ColumnContainer/VSeparator")
+exit_button = NodePath("VBoxContainer/ColumnContainer/CloseButton")
 
 [node name="NinePatchRect2" type="NinePatchRect" parent="."]
 layout_mode = 1
@@ -49,7 +50,13 @@ grow_vertical = 2
 layout_mode = 2
 theme_override_constants/separation = 0
 
+[node name="CloseButton" type="Button" parent="VBoxContainer/ColumnContainer"]
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 2
+text = " Exit "
+
 [node name="Label" type="Label" parent="VBoxContainer/ColumnContainer"]
+visible = false
 custom_minimum_size = Vector2(64, 0)
 layout_mode = 2
 text = "Icon"
@@ -62,6 +69,7 @@ layout_mode = 2
 [node name="ColumnLabel" type="BoxContainer" parent="VBoxContainer/ColumnContainer"]
 custom_minimum_size = Vector2(48, 0)
 layout_mode = 2
+size_flags_horizontal = 3
 alignment = 1
 script = ExtResource("1_ghtq7")
 
@@ -82,6 +90,7 @@ size_flags_vertical = 3
 
 [node name="EntriesContainer" type="VBoxContainer" parent="VBoxContainer/ScrollContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="ActorEntryContainer" type="HBoxContainer" parent="VBoxContainer/ScrollContainer/EntriesContainer"]
 layout_mode = 2
@@ -101,14 +110,17 @@ layout_mode = 2
 modulate = Color(0, 0, 0, 1)
 custom_minimum_size = Vector2(48, 0)
 layout_mode = 2
+size_flags_horizontal = 3
 mouse_filter = 0
+theme_override_font_sizes/font_size = 24
 text = "100"
 horizontal_alignment = 1
 
 [node name="MouseOverControl" type="Control" parent="." node_paths=PackedStringArray("label")]
 anchors_preset = 0
+offset_top = 120.0
 offset_right = 40.0
-offset_bottom = 40.0
+offset_bottom = 160.0
 mouse_filter = 2
 script = ExtResource("6_g7210")
 label = NodePath("BackPatchContainer/BoxContainer/RichTextLabel")

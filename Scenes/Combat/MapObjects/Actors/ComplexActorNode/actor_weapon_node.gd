@@ -164,9 +164,7 @@ func set_weapon(weapon:BaseWeaponEquipment):
 	else:
 		self.visible = true
 	
-	var sprite_base_path = weapon.get_load_path().path_join(sprite_data.get("SpriteName"))
-	var sprite_file = sprite_base_path + "_WeaponSprite.png"
-	
+	var sprite_file = weapon.get_weapon_sprite_sheet_path()
 	self.weapon_texture = SpriteCache.get_sprite(sprite_file)
 	
 	var offset_arr = sprite_data.get("Offset", [0,0])

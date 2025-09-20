@@ -432,6 +432,9 @@ func get_effect_immunity()->Array:
 	immunities.append_array(effects.get_effect_immunities())
 	return immunities
 
+func is_adirectional()->bool:
+	return actor_data.get("IsAdirectional", false)
+
 
 ########################
 ##      Weapons       ##
@@ -447,6 +450,10 @@ func get_weapon_attack_target_param_def(target_param_key)->Dictionary:
 func get_weapon_attack_target_params(target_param_key)->TargetParameters:
 	var def = get_weapon_attack_target_param_def(target_param_key)
 	return TargetParameters.new(target_param_key, def)
+
+func get_unarmed_attack_weapon_animation():
+	var unarmed_data = get_load_val("UnarmedAttackData")
+	return unarmed_data.get("DefaultAnimation", "")
 
 ## Get damage data for equippted weapon(s)
 ## If no weapons are equipt, default to Unarmed Damage Data from Actor Def
@@ -481,6 +488,8 @@ func get_weapon_damage_datas(weapon_filter)->Dictionary:
 			for weapon_mod in applicable_mods.values():
 				var mod_datas = weapon_mod.get("WeaponMods", {})
 				for mod_data in mod_datas.values():
+					if not _does_weapon_mod_apply_to_item(mod_data, weapon):
+						continue
 					var prop_key = mod_data.get("ModProperty", "")
 					if !prop_key:
 						continue

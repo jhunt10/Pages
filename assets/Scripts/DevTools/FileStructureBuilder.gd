@@ -90,12 +90,6 @@ static func create_class_def_files(thing_name:String):
 		var spites_dir_path = main_dir_path.path_join("Sprites")
 		DirAccess.make_dir_absolute(spites_dir_path)
 		
-static func DoThing():
-	print("\nSanity Check")
-	update_def_files()
-	#scan_def_props()
-	#create_class_def_files("Rogue")
-
 static func get_def_class_type(file_name, other_files)->String:
 	var obj_type = ''
 	if file_name.contains("_ActorDefs."):
@@ -126,7 +120,7 @@ static func scan_def_props():
 	for file:String in files:
 		var file_name = file.get_file()
 		var obj_type = get_def_class_type(file_name, files)
-		if obj_type == "Actor":
+		if obj_type != "Actor":
 			continue
 		if not objs_to_props.has(obj_type):
 			objs_to_props[obj_type] = {}
@@ -139,6 +133,120 @@ static func scan_def_props():
 		for val in objs_to_props[key].keys():
 			print(val + ": " + str(objs_to_props[key][val].size()))
 	print(objs_to_props)
+
+
+static func scan_props(file_path)->Array:
+	var file = FileAccess.open(file_path, FileAccess.READ)
+	var text:String = file.get_as_text()
+	var data = JSON.parse_string(text)
+	var out_list = []
+	if data is Dictionary:
+		data = data.values()
+	for obj in data:
+		if not obj is Dictionary:
+			continue
+		for key in obj.keys():
+			if not out_list.has(key):
+				out_list.append(key)
+	return out_list
+
+static func rename_test_files():
+	var dir_path = "C:\\Users\\johnn\\Documents\\Repos\\Pages\\ObjectDefs\\Items\\Equipment\\Weapons\\Sprites"
+	var  files = BaseLoadObjectLibrary._search_for_files(dir_path, ".png")
+	var dir : DirAccess = DirAccess.open(dir_path)
+	for file:String in files:
+		if file.contains(".png_Icon.png"):
+			print("Renaming: " + file)
+			var file_name = file.get_file()
+			#if not file_name.ends_with("_WeaponSprite.png"):
+				#file_name += "_Icon.png"
+			#file_name = "Base"+file_name
+			file_name = file_name.replace(".png_Icon.png", "_Icon.png")
+			dir.rename(file, dir_path.path_join(file_name))
+	
+
+static func parse_def_file(file_path)->Dictionary:
+	var file = FileAccess.open(file_path, FileAccess.READ)
+	var text:String = file.get_as_text()
+	var data = JSON.parse_string(text)
+	return data
+
+static func get_common_props_in_files():
+	var files = []
+	files.append_array(BaseLoadObjectLibrary._search_for_files("res://ObjectDefs/", "PageDefs.def"))
+	var common_def = {}
+	var keys = []
+	for file:String in files:
+		var defs = parse_def_file(file)
+		for def_key:String in defs.keys():
+			keys.append(def_key)
+			var def_props = _rec_dic_to_keys(defs[def_key])
+			deep_merge_dicts(common_def, def_props)
+	print(common_def)
+	#print(keys)
+			
+
+static var known_keyed_dictionary_suffixes:Array:
+	get:
+		return [
+			"SubActions",
+			"Datas",
+			"Mods",
+			"Params"
+		]
+
+## Return a nested Dictionary of Key to Property Type 
+static func _rec_dic_to_keys(dict:Dictionary):
+	var out_dict = {}
+	for key:String in dict.keys():
+		var val = dict[key]
+		if val is Dictionary:
+			# Check if it's something with distinct keys like "StatMods":{"AtkMod":{}, "DefMod":{}}
+			var is_sub_dict = false
+			for sufix in known_keyed_dictionary_suffixes:
+				if key.ends_with(sufix):
+					is_sub_dict = true
+				
+			if is_sub_dict:
+				var merged_sub_dict = {}
+				for sub_key in val.keys():
+					var sub_dict = val[sub_key]
+					var sub_dict_props = _rec_dic_to_keys(sub_dict)
+					deep_merge_dicts(merged_sub_dict, sub_dict_props)
+				var false_key = "#"+key+"_KEY"
+				var val_dict = {}
+				val_dict[false_key] = merged_sub_dict
+				out_dict[key] = val_dict
+			else:
+				out_dict[key] = _rec_dic_to_keys(val)
+		else:
+			out_dict[key] = type_string(typeof(val))
+	return out_dict
+
+static func deep_merge_dicts(main:Dictionary, other:Dictionary):
+	for key:String in other.keys():
+		var val = other[key]
+		if not main.keys().has(key):
+			main[key] = val
+		else: # Main has Key
+			if val is Dictionary:
+				deep_merge_dicts(main[key], val)
+
+
+
+
+static func DoThing():
+	print("\nSanity Check")
+	#update_def_files()
+	#get_common_props_in_files()
+	#create_class_def_files("Rogue")
+	rename_test_files()
+
+
+
+
+
+
 
 const DefVersion = "1"
 
@@ -565,18 +673,3 @@ static func update_def_json_file(object_type:String, file_path):
 	meta_file.store_string(JSON.stringify(new_defs))
 	meta_file.close()
 	#DirAccess.remove_absolute(file_path)
-
-static func scan_props(file_path)->Array:
-	var file = FileAccess.open(file_path, FileAccess.READ)
-	var text:String = file.get_as_text()
-	var data = JSON.parse_string(text)
-	var out_list = []
-	if data is Dictionary:
-		data = data.values()
-	for obj in data:
-		if not obj is Dictionary:
-			continue
-		for key in obj.keys():
-			if not out_list.has(key):
-				out_list.append(key)
-	return out_list

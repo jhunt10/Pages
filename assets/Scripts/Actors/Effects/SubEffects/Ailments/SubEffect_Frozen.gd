@@ -11,7 +11,7 @@ func on_effect_trigger(effect:BaseEffect, subeffect_data:Dictionary, trigger:Bas
 	var actor = effect.get_effected_actor()
 	var actor_node = CombatRootControl.get_actor_node(actor.Id)
 	actor.Que.fail_turn()
-	actor_node.fail_movement()
+	#actor_node.fail_movement()
 	actor_node.cancel_weapon_animations()
 	#actor_node.freeze_animations()
 

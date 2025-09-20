@@ -77,10 +77,17 @@ enum DamageTypes {
 
 @export var attack_scale:float
 
+@export var atk_power_and_scale_container:Container
 @export var atk_power_label:Label
 @export var plus_minus_label:Label
 @export var percent_label:Label
 @export var variant_label:Label
+
+@export var min_max_damage_container:Container
+@export var min_damage_label:Label
+@export var avg_damage_label:Label
+@export var max_damage_label:Label
+
 @export var damage_type_label:Label
 @export var multiplier_label:Label
 @export var count_label:Label
@@ -88,6 +95,7 @@ enum DamageTypes {
 @export var atk_stat_icon:TextureRect
 @export var vs_lable:Label
 @export var defense_stat_icon:TextureRect
+@export var defense_stat_label:Label
 
 @export var abb_damage_icon:Texture2D
 @export var phy_damage_icon:Texture2D
@@ -137,11 +145,6 @@ func set_damage_data(damage_data:Dictionary, actor:BaseActor = null,  count = 1)
 	attack_power = damage_data.get("AtkPwrBase", 0)
 	attack_variant = damage_data.get("AtkPwrRange", 0)
 	var attack_scale = damage_data.get("AtkPwrScale", 1)
-	if popup_message:
-		var line = attack_stat + " X " + str(attack_power) + " @ " + str(attack_variant)
-		if attack_scale != 1:
-			line = line + " X " + str(attack_scale)
-		popup_message.text = line
 	
 	if count > 1:
 		count_label.text = str(count) + "x"
@@ -149,28 +152,43 @@ func set_damage_data(damage_data:Dictionary, actor:BaseActor = null,  count = 1)
 	else:
 		count_label.hide()
 	
+	var average_damage = 0
+	
 	if damage_data.get("AtkStat") == "Fixed":
 		plus_minus_label.hide()
 		variant_label.hide()
 		percent_label.hide()
 		attack_power = damage_data.get("BaseDamage")
+		
+		atk_power_and_scale_container.show()
+		min_max_damage_container.hide()
 	elif actor:
+		min_max_damage_container.show()
+		atk_power_and_scale_container.hide()
 		var min_max = DamageHelper.get_min_max_damage(actor, damage_data)
-		attack_power = min_max[0]
-		attack_variant = min_max[1]
-		plus_minus_label.text = " - "
-		percent_label.hide()
+		min_damage_label.text = str(min_max[0])
+		max_damage_label.text = str(min_max[1])
+		avg_damage_label.text  = str((min_max[0] + min_max[1]) / 2)
 	else:
 		if attack_variant == 0:
 			variant_label.hide()
 			plus_minus_label.hide()
+		atk_power_and_scale_container.show()
+		min_max_damage_container.hide()
+	
+	if popup_message:
+		var line = attack_stat + " X " + str(attack_power) + " @ " + str(attack_variant)
+		if attack_scale != 1:
+			line = line + " X " + str(attack_scale)
+		popup_message.text = line
+	
 	
 	var type_string = damage_data.get("DamageType")
 	var type = DamageTypes.get(type_string)
 	if type == null:
 		type = DamageTypes.Test
 	damage_type = type
-	damage_type_label.text = DamageTypes.keys()[damage_type]
+	damage_type_label.text = " "+ DamageTypes.keys()[damage_type]
 	#var damage_color = DamageHelper.get_damage_color(damage_type)
 	#plus_minus_label.add_theme_color_override("font_color", damage_color)
 	#atk_power_label.add_theme_color_override("font_color", damage_color)
@@ -195,11 +213,14 @@ func set_damage_data(damage_data:Dictionary, actor:BaseActor = null,  count = 1)
 	else:
 		defense_type = def_type_val
 	
-	if defense_type == "Ward":
-		defense_stat_icon.texture = StatHelper.get_stat_icon("Ward")
-	elif defense_type == "Armor":
-		defense_stat_icon.texture = StatHelper.get_stat_icon("Armor")
+	if defense_type == "Ward" or defense_type == "Armor":
+		defense_stat_icon.texture = StatHelper.get_stat_icon(defense_type)
+		defense_stat_label.text = " " + StatHelper.get_stat_abbr(defense_type)
+		defense_stat_icon.show()
+		defense_stat_label.show()
+		vs_lable.show()
 	else:
 		defense_stat_icon.hide()
+		defense_stat_label.hide()
 		vs_lable.hide()
 	

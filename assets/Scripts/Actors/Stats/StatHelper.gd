@@ -48,6 +48,10 @@ const BlockMod = "BlockMod"
 const BlocksLOS = "BlocksLOS"
 const AggroMod = "AggroMod"
 
+
+const CoverBonus = "CoverBonus"
+const CoverPenalty = "CoverPenalty"
+
 const stat_abbrs:Dictionary = {
 	PhyAttack: "PHY ATK",
 	MagAttack: "MAG ATK",

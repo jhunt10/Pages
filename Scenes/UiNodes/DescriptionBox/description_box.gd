@@ -5,7 +5,6 @@ const pop_up_container_path = "res://Scenes/UiNodes/DescriptionBox/DescriptionPo
 const RED_TEXT = "[color=#460000]"
 const BLUE_TEXT = "[color=#000046]"
 
-
 @export var popup_container:DecscriptionPopUpContainer
 
 func _ready() -> void:
@@ -21,6 +20,7 @@ func _richtextlabel_on_meta_clicked(meta):
 func _show_pop_up(data_str):
 	if not popup_container:
 		popup_container = load(pop_up_container_path).instantiate()
+		#self.get_parent_control()
 		self.add_child(popup_container)
 	var data = JSON.parse_string(data_str)
 	popup_container.show()
@@ -55,7 +55,7 @@ func color_text(color, raw_text)->String:
 
 func _hide_pop_up(data):
 	if popup_container:
-		popup_container.hide()
+		popup_container.queue_free()
 
 func set_page_item(page:BasePageItem, actor:BaseActor=null):
 	var merged_def = BaseLoadObjectLibrary._merge_defs(page._data, page._def)

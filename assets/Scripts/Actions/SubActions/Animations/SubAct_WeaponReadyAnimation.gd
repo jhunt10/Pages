@@ -83,5 +83,9 @@ func get_default_weapon_animation(actor:BaseActor, off_hand:bool):
 		var primary_weapon = actor.equipment.get_primary_weapon()
 		if primary_weapon:
 			return primary_weapon.get_default_weapon_animation_name()
+	# Unarmed
+	var default_attack_animation = actor.get_unarmed_attack_weapon_animation()
+	if default_attack_animation != '':
+		return default_attack_animation
 	return null
 	

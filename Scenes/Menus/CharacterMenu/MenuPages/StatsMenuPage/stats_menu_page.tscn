@@ -33,7 +33,7 @@
 [ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/StatsMenuPage/stat_entry_container.gd" id="32_6xe5g"]
 [ext_resource type="PackedScene" uid="uid://bpvy87uagttpr" path="res://Scenes/UiNodes/ScollBar/scroll_bar.tscn" id="33_u8ay1"]
 
-[node name="StatsPage" type="Control" node_paths=PackedStringArray("resistance_container", "strength_label", "agility_label", "intelligence_label", "wisdom_label", "bar_stats_container", "speed_stat_label", "mass_stat_label", "ppr_stat_label", "health_stat_label", "mag_atk_label", "phys_atk_label", "accuracy_stat_label", "potency_stat_label", "range_display", "main_hand_damage_label", "other_hand_damage_label", "crit_mod_label", "crit_chance_label", "armor_label", "ward_label", "evasion_stat_label", "protection_stat_label", "awareness_stat_label", "block_chance_label", "block_mod_label", "awareness_display", "evade_front_chance_label", "evade_flank_chance_label", "evade_back_chance_label", "block_front_chance_label", "block_flank_chance_label", "block_back_chance_label", "full_stat_display", "scroll_bar")]
+[node name="StatsPage" type="Control" node_paths=PackedStringArray("resistance_container", "strength_label", "agility_label", "intelligence_label", "wisdom_label", "speed_stat_label", "mass_stat_label", "ppr_stat_label", "health_stat_label", "mag_atk_label", "phys_atk_label", "accuracy_stat_label", "potency_stat_label", "range_display", "main_hand_damage_label", "other_hand_damage_label", "crit_mod_label", "crit_chance_label", "armor_label", "ward_label", "evasion_stat_label", "protection_stat_label", "awareness_stat_label", "block_chance_label", "block_mod_label", "awareness_display", "evade_front_chance_label", "evade_flank_chance_label", "evade_back_chance_label", "block_front_chance_label", "block_flank_chance_label", "block_back_chance_label", "full_stat_display", "scroll_bar")]
 custom_minimum_size = Vector2(292, 384)
 layout_mode = 3
 anchors_preset = 0
@@ -46,7 +46,6 @@ strength_label = NodePath("HBoxContainer/ScrollContainer/StatsMainContainer/Attr
 agility_label = NodePath("HBoxContainer/ScrollContainer/StatsMainContainer/AttributesDisplay/BoxContainer/AgilityContainer/StatLabel")
 intelligence_label = NodePath("HBoxContainer/ScrollContainer/StatsMainContainer/AttributesDisplay/BoxContainer/IntillegenceContainer/StatLabel")
 wisdom_label = NodePath("HBoxContainer/ScrollContainer/StatsMainContainer/AttributesDisplay/BoxContainer/WisdomContainer/StatLabel")
-bar_stats_container = NodePath("")
 speed_stat_label = NodePath("HBoxContainer/ScrollContainer/StatsMainContainer/MiscStatsContainer/BoxContainer/SpeedMassContainer/SpeedContainer")
 mass_stat_label = NodePath("HBoxContainer/ScrollContainer/StatsMainContainer/MiscStatsContainer/BoxContainer/SpeedMassContainer/MassContainer")
 ppr_stat_label = NodePath("HBoxContainer/ScrollContainer/StatsMainContainer/MiscStatsContainer/BoxContainer/SpeedMassContainer/PPRContainer")
@@ -1164,7 +1163,7 @@ layout_mode = 2
 mouse_over_parent = NodePath("../../..")
 
 [node name="ResistancesContainer" type="Container" parent="HBoxContainer/ScrollContainer/StatsMainContainer" node_paths=PackedStringArray("entries_contaienr", "premade_resistance_label", "background", "inner_container")]
-custom_minimum_size = Vector2(256, 44)
+custom_minimum_size = Vector2(12, 44)
 layout_mode = 2
 script = ExtResource("17_2u3r8")
 entries_contaienr = NodePath("BoxContainer")
@@ -1193,6 +1192,7 @@ alignment = 1
 vertical = true
 
 [node name="ResistanceLabel" type="HBoxContainer" parent="HBoxContainer/ScrollContainer/StatsMainContainer/ResistancesContainer/BoxContainer"]
+visible = false
 layout_mode = 2
 alignment = 1
 

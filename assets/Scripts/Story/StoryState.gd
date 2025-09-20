@@ -85,8 +85,7 @@ func start_new_story():
 		"SoldierTemplate", 
 		"RogueTemplate", 
 		"MageTemplate", 
-		"PriestTemplate",
-		"SlimePoison",
+		"PriestTemplate"
 	]
 	for i in range(player_actor_keys.size()):
 		var player_id = "Player_" + str(i) + ":" + str(ResourceUID.create_id())

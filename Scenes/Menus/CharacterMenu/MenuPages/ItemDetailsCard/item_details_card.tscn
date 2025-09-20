@@ -68,6 +68,8 @@ tag_label = NodePath("OffsetControl/NinePatchRect/VBoxContainer/TagLabel")
 equip_button_background = NodePath("OffsetControl/NinePatchRect/VBoxContainer/EquipButtonBackground")
 equip_button = NodePath("OffsetControl/NinePatchRect/VBoxContainer/EquipButtonBackground/EquipButton")
 equip_label = NodePath("OffsetControl/NinePatchRect/VBoxContainer/EquipButtonBackground/FitScaleLabel")
+equip_button_texture = ExtResource("7_850b7")
+equip_button_pressed_texture = ExtResource("36_0dsaw")
 buy_controller = NodePath("OffsetControl/NinePatchRect/VBoxContainer/BuyingController")
 
 [node name="OffestPoint" type="Node2D" parent="."]
@@ -248,7 +250,6 @@ theme = ExtResource("4_xmy3g")
 text = "Item Description hk hbkhjhl jhlkjl ljlkj"
 
 [node name="ActionPageDetailsControl" type="Control" parent="OffsetControl/NinePatchRect/VBoxContainer" node_paths=PackedStringArray("parent_card_control", "description_box", "target_type_label", "cost_container", "range_display", "damage_label", "damage_container", "accuracy_icon", "accuracy_label", "potency_icon", "potency_label", "modded_by_container", "modded_by_label")]
-visible = false
 layout_mode = 2
 size_flags_vertical = 3
 script = ExtResource("12_fd6vk")
@@ -547,7 +548,6 @@ horizontal_alignment = 2
 vertical_alignment = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/EffectPageDetailsControl/VBoxContainer"]
-clip_contents = true
 layout_mode = 2
 size_flags_vertical = 3
 
@@ -832,6 +832,7 @@ text = "Item Description"
 script = ExtResource("22_pm1ag")
 
 [node name="DefaultDetailsControl" type="Control" parent="OffsetControl/NinePatchRect/VBoxContainer" node_paths=PackedStringArray("description_box", "stat_mods_container", "premade_stat_mod_label")]
+visible = false
 clip_contents = true
 layout_mode = 2
 size_flags_vertical = 3
@@ -955,6 +956,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 text = "Equipe"
+_size_dirty = true
 center_x = true
 
 [node name="EquipButton" type="Button" parent="OffsetControl/NinePatchRect/VBoxContainer/EquipButtonBackground"]

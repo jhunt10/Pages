@@ -32,6 +32,8 @@ signal page_special_selected(action_key:String)
 @export var slide_speed:float = 100
 @export var page_Selection_container:HBoxContainer
 
+@export var hover_box:QuePageHoverBox
+
 @export var state:States:
 	set(val):
 		state = val
@@ -71,7 +73,7 @@ func _ready() -> void:
 	#on_que_options_menu.visible = false
 	page_Selection_container.hide()
 	_fill_button.pressed.connect(_fill_que_with_wait)
-	pass # Replace with function body.
+	hover_box.hide()
 
 func _fill_que_with_wait():
 	var wait = ItemLibrary.get_item("Wait")
@@ -163,6 +165,7 @@ func set_actor(actor:BaseActor):
 	_actor.pages.items_changed.connect(_build_buttons)
 	_actor.Que.action_que_changed.connect(_on_que_change)
 	_actor.Que.ammo_changed.connect(_on_ammo_change)
+	hover_box.hide()
 	_build_buttons()
 	clear_preview_display()
 	show_last_qued_target_area()
@@ -192,9 +195,9 @@ func _build_buttons():
 			#new_button.get_child(0).texture = load(ActionLibrary.NO_ICON_SPRITE)
 		#else:
 			#new_button.get_child(0).texture = action.get_large_page_icon(_actor)
-			#if not MainRootNode.is_mobile:
-				#new_button.mouse_entered.connect(_mouse_entered_page_button.bind(index, action_key))
-				#new_button.mouse_exited.connect(_mouse_exited_action_button.bind(index, action_key))
+		if not MainRootNode.is_mobile:
+			new_button.button.mouse_entered.connect(_mouse_entered_page_button.bind(index, action_key))
+			new_button.button.mouse_exited.connect(_mouse_exited_page_button.bind(index, action_key))
 		new_button.button.pressed.connect(_page_button_pressed.bind(index, action_key))
 		#new_button.selection_button.pressed.connect(_on_page_special_selected.bind(action_key))
 		
@@ -246,7 +249,7 @@ func show_last_qued_target_area():
 		if last_page.has_preview_target():
 			show_preview_target_area(last_page)
 
-#func _mouse_entered_page_button(_index, key_name):
+func _mouse_entered_page_button(_index, key_name):
 	#if CombatRootControl.Instance.QueController.execution_state != ActionQueController.ActionStates.Waiting:
 		#return
 	#var action:PageItemAction = ItemLibrary.get_item(key_name)
@@ -256,15 +259,22 @@ func show_last_qued_target_area():
 		#show_preview_target_area(action)
 	#if action.CostData.size() > 0:
 		#CombatUiControl.Instance.stat_panel_control.preview_stat_cost(action.CostData)
-	##ui_controler.mouse_entered_action_button(key_name)
-	#pass
-#
-#func _mouse_exited_action_button(_index, _key_name):
+	#ui_controler.mouse_entered_action_button(key_name)
+	
+	var action:PageItemAction = _actor.pages.get_action_page(key_name)
+	hover_box.set_action(_actor, action)
+	hover_box.show()
+	pass
+
+func _mouse_exited_page_button(_index, key_name):
 	#clear_preview_display()
 	#CombatUiControl.Instance.stat_panel_control.stop_preview_stat_cost()
 	#que_display_control.preview_que_path()
-	##ui_controler.mouse_exited_action_button(key_name)
-	#pass
+	#ui_controler.mouse_exited_action_button(key_name)
+	#var action:PageItemAction = _actor.pages.get_action_page(key_name)
+	#hover_box.set_action(_actor, action)
+	hover_box.hide()
+	pass
 
 func _page_button_pressed(_index, key_name):
 	if selecetion_mode:

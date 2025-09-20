@@ -49,6 +49,10 @@ func start_combat():
 func _open_pages_menu():
 	var new_cards = load("res://Scenes/Menus/PageLibraryMenu/page_library_menu.tscn").instantiate()
 	root_node.add_child(new_cards)
+
+func _open_actors_menu():
+	var new_cards = load("res://Scenes/Menus/ActorsLibrary/actors_library.tscn").instantiate()
+	root_node.add_child(new_cards)
 	
 
 func _open_load_menu():

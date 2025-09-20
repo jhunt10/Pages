@@ -28,6 +28,7 @@ func set_item(actor:BaseActor, holder:BaseItemHolder, item:BaseItem):
 	
 	item_id = item.Id
 	item_icon_rect.texture = item.get_large_icon()
+	item_icon_rect.show()
 	default_icon_rect.hide()
 	
 	if valid_state_icon:

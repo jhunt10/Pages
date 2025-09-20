@@ -258,7 +258,7 @@ static func path_to_target(actor:BaseActor, start_pos:MapPos, target_pos:MapPos,
 	if not astar.has_point(end_index):
 		printerr("Path Map does not have End Point: %s | %s" % [end_index, start_pos])
 		return {}
-	## Disable occupied spots 
+	# Disable occupied spots 
 	#for check_actor in game_state.list_actors(false):
 		#if not check_actor or check_actor.is_dead:
 			#continue
@@ -270,9 +270,9 @@ static func path_to_target(actor:BaseActor, start_pos:MapPos, target_pos:MapPos,
 		#if check_pos.to_vector2i() == target_pos.to_vector2i():
 			#continue
 		##if LOGGING: print("Disabling Point: %s because %s " % [check_pos, check_actor.Id])
-		#var path_index = _pos_to_index(check_pos, game_state)
-		#if astar.has_point(path_index):
-			#astar.set_point_disabled(path_index, true)
+		#var occupied_index = _pos_to_index(check_pos)
+		#if astar.has_point(occupied_index):
+			#astar.set_point_disabled(occupied_index, false)
 	var start_was_disabled = false
 	if astar.is_point_disabled(start_index):
 		start_was_disabled = true
@@ -283,15 +283,34 @@ static func path_to_target(actor:BaseActor, start_pos:MapPos, target_pos:MapPos,
 		astar.set_pos_disabled(target_pos, false)
 	
 	var point_path = astar.get_point_path(start_index, end_index, true)
-	if point_path.size() == 0:
-		printerr("No path found from %s to %s" % [start_index, end_index])
+	if point_path.size() <= 1:
+		printerr("No path found from %s to %s" % [start_pos, target_pos])
+		var cloest_point = astar.get_closest_position_in_segment(target_pos.to_vector2i())
+		print("Closest: %s to %s" % [cloest_point,target_pos] )
+		
+		## Check Points
+		#var check_start_index = _pos_to_index(MapPos.new(start_pos.x-1, start_pos.y+1, 0, 0))
+		#var check_end_index = _pos_to_index(MapPos.new(start_pos.x-2, start_pos.y+1, 0, 0))
+		#var is_start_disable = astar.is_point_disabled(check_start_index)
+		#var is_end_disable = astar.is_point_disabled(end_index)
+		#var start_vec = astar.get_point_position(check_start_index)
+		#var end_vec = astar.get_point_position(check_end_index)
+		#var are_points_connected =  astar.are_points_connected(check_start_index, check_end_index, false)
+		#
+		#
+		#var reverse_path = astar.get_id_path(start_index, end_index, true)
+		#print(reverse_path)
+		##if reverse_path.size() > 1:
+			##point_path = reverse_path
+	if LOGGING:
+		print(point_path)
 	var move_list = []
 	var pos_list = []
 	var last_pos = start_pos
 	for point:Vector2i in point_path:
 		#print("\n------------------------------")
 		#print("From %s to %s: " % [last_pos, point])
-		var reses = _translate_next_point_to_movement(last_pos, point, [])
+		var reses = _translate_next_point_to_movement(last_pos, point, [], actor.is_adirectional())
 		for res in reses:
 			move_list.append(res['Movement'])
 			pos_list.append(res['NextPos'])
@@ -305,7 +324,7 @@ static func path_to_target(actor:BaseActor, start_pos:MapPos, target_pos:MapPos,
 	
 	return {"Moves": move_list, "Poses": pos_list, "Path": point_path}
 
-static func _translate_next_point_to_movement(current_pos:MapPos, move_to:Vector2i, move_options:Array)->Array:
+static func _translate_next_point_to_movement(current_pos:MapPos, move_to:Vector2i, move_options:Array, adirectional:bool=false)->Array:
 	var move_diff = move_to - current_pos.to_vector2i() 
 	if move_diff.x != 0 and move_diff.y != 0:
 		printerr("Diagnal Movement not suported: %s to %s" % [current_pos, move_to])
@@ -321,7 +340,6 @@ static func _translate_next_point_to_movement(current_pos:MapPos, move_to:Vector
 		rel_dir = 2
 	if move_diff.x < 0: # Moving West
 		rel_dir = 3
-	var can_slide = true
 	var result = []
 	var dir_diff = (rel_dir - current_pos.dir + 4 ) % 4
 	if dir_diff == 0: # Target in front
@@ -329,12 +347,18 @@ static func _translate_next_point_to_movement(current_pos:MapPos, move_to:Vector
 	
 	elif dir_diff == 1: # Target To Right
 		var new_pos = current_pos.apply_relative_pos(MapPos.new(0,0,0,1))
-		result.append({"Movement": "TurnRight", "NextPos": new_pos})
-		result.append({"Movement": "MoveForward", "NextPos": new_pos.apply_relative_pos(MapPos.new(0,-1,0,0))})
+		if adirectional:
+			result.append({"Movement": "MoveRight", "NextPos": new_pos})
+		else:
+			result.append({"Movement": "TurnRight", "NextPos": new_pos})
+			result.append({"Movement": "MoveForward", "NextPos": new_pos.apply_relative_pos(MapPos.new(0,-1,0,0))})
 	
 	elif dir_diff == 2: # Target Behind
 		# TODO: Don't turn back to enimes
-		if move_options.has("TurnAround"):
+		if adirectional:
+			var new_pos = current_pos.apply_relative_pos(MapPos.new(0,-1,0,0))
+			result.append({"Movement": "MoveBack", "NextPos": new_pos})
+		elif move_options.has("TurnAround"):
 			var new_pos = current_pos.apply_relative_pos(MapPos.new(0,0,0,2))
 			result.append({"Movement": "TurnAround", "NextPos": new_pos})
 			result.append({"Movement": "MoveForward", "NextPos": new_pos.apply_relative_pos(MapPos.new(0,-1,0,0))})
@@ -353,48 +377,27 @@ static func _translate_next_point_to_movement(current_pos:MapPos, move_to:Vector
 	
 	else: # Target to Left
 		var new_pos = current_pos.apply_relative_pos(MapPos.new(0,0,0,3))
-		result.append({"Movement": "TurnLeft", "NextPos": new_pos})
-		result.append({"Movement": "MoveForward", "NextPos": new_pos.apply_relative_pos(MapPos.new(0,-1,0,0))})
+		if adirectional:
+			result.append({"Movement": "MoveLeft", "NextPos": new_pos})
+		else:
+			result.append({"Movement": "TurnLeft", "NextPos": new_pos})
+			result.append({"Movement": "MoveForward", "NextPos": new_pos.apply_relative_pos(MapPos.new(0,-1,0,0))})
 	
 	return result
 
 static func build_path_finder(game_state:GameStateData)->AStar2D:
 	var star = CustAStar.new()
-	star.reserve_space(game_state.map_hight * game_state.map_width)
+	star.reserve_space(game_state.map_hight * game_state.map_width * MapPos.Directions.keys().size())
 	for y in range(game_state.map_hight):
-		#var line = ''
-		#var line2 = ''
 		for x in range(game_state.map_width):
 			var coor = Vector2i(x, y)
 			if game_state.is_spot_traversable(coor, null):
-				var same_pos_indexes = []
-				for dir in MapPos.Directions.values():
-					var map_pos = MapPos.new(x, y, 0, dir)
-					var index = _pos_to_index(map_pos)
-					star.add_point(index, coor, 1)
-					for same_pos in same_pos_indexes:
-						star.connect_points(index, same_pos)
-					same_pos_indexes.append(index)
-					#print("AddedPoint: %s | %s" % [index, map_pos])
+				star.add_map_point(coor)
 					
-					if y > 0:
-						var upper_pos = Vector2i(x, y-1)
-						var upper_indexes = _list_pos_indexes(upper_pos, game_state)
-						for up_index in upper_indexes:
-							if star.has_point(up_index):
-								#print("Connecing Up Points: %s | %s" % [pos, upper_pos])
-								star.connect_points(index, up_index)
-					if x > 0:
-						var back_pos = Vector2i(x-1, y)
-						var back_indexes = _list_pos_indexes(back_pos, game_state)
-						for back_index in back_indexes:
-							if star.has_point(back_index):
-								#print("Connecing Back Points: %s | %s" % [pos, back_pos])
-								star.connect_points(index, back_index)
-				
-			#else:
-				#line += "X"
-		#print(line)
+				if y > 0:
+					star.connect_map_points(coor, Vector2i(x, y-1))
+				if x > 0:
+					star.connect_map_points(coor, Vector2i(x-1, y))
 	return star
 
 
@@ -403,7 +406,7 @@ static func _pos_to_index(pos:MapPos)->int:
 	pos_index = pos_index << 8
 	pos_index += pos.y
 	pos_index = pos_index << 2
-	pos_index += pos.dir
+	#pos_index += pos.dir
 	return pos_index
 	#return (pos.x + (pos.y * game_state.map_width)) * 10 + pos.dir
 

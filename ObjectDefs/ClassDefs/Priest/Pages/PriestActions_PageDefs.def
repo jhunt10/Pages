@@ -391,12 +391,41 @@
                 "PreviewTargetKey": "TargetParam"
             },
             "SubActions": {
+                "GetTarget": {
+                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Targeting/SubAct_GetTarget.gd",
+                    "#FrameIndex": 10,
+                    "#SubIndex": 0,
+                    "AllowAlreadyTargeted": false,
+                    "AllowAutoTarget": false,
+                    "SetTargetKey": "Target1",
+                    "TargetParamKey": "TargetParam"
+                },
                 "Heal": {
                     "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Misc/SubAct_Heal.gd",
                     "#FrameIndex": 11,
-                    "#SubIndex": 0,
+                    "#SubIndex": 1,
                     "TargetKey": "Target1",
-                    "Value": 100
+                    "Value": 50
+                },
+                "PayCost": {
+                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Misc/SubAct_PayCost.gd",
+                    "#FrameIndex": 11,
+                    "#SubIndex": 0
+                },
+                "WeaponMotionAnimation": {
+                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponMotionAnimation.gd",
+                    "#FrameIndex": 16,
+                    "#SubIndex": 0,
+                    "MainHand": true,
+                    "OffHand": "Never"
+                },
+                "WeaponReadyAnimation": {
+                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponReadyAnimation.gd",
+                    "#FrameIndex": 0,
+                    "#SubIndex": 0,
+                    "Animation": "Raise",
+                    "MainHand": true,
+                    "OffHand": "Never"
                 }
             },
             "TargetParams": {
@@ -966,99 +995,6 @@
                     "LineOfSight": true,
                     "TargetArea": "[[0,1]]",
                     "TargetType": "Corpse"
-                }
-            }
-        },
-        "ItemData": {
-            "ItemType": "Page",
-            "Rarity": "Common",
-            "Value": 50
-        },
-        "PageData": {
-            "PageRequirements": {
-                "ConflictingPages": [],
-                "IncompatiblePages": [],
-                "TitleReq": "Match"
-            },
-            "SourceTitle": "Priest"
-        },
-        "_DefVersion": "1"
-    },
-    "_BaseHealSpell": {
-        "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
-        "#ObjDetails": {
-            "Description": "Heal an @@#TrgParm:TargetParam:TargetType@@ for @@#Color:Red:25% Max Hp@@.",
-            "DisplayName": "Base Heal",
-            "LargeIcon": "Sprites/Heal1.png",
-            "ObjectType": "Item",
-            "SmallIcon": "Sprites/Heal1.png",
-            "SnippetDesc": "Restore 25% of Max Hp",
-            "Tags": [
-                "Heal",
-                "Spell"
-            ],
-            "Taxonomy": [
-                "Item",
-                "Page",
-                "Action"
-            ]
-        },
-        "ActionData": {
-            "AmmoData": {
-                "AmmoType": "Mag",
-                "Clip": 16,
-                "Cost": 4
-            },
-            "AttackDetails": {
-                "AccuracyMod": 1,
-                "PotencyMod": 1
-            },
-            "Preview": {
-                "PreviewTargetKey": "TargetParam"
-            },
-            "SubActions": {
-                "GetTarget": {
-                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Targeting/SubAct_GetTarget.gd",
-                    "#FrameIndex": 10,
-                    "#SubIndex": 0,
-                    "AllowAlreadyTargeted": false,
-                    "AllowAutoTarget": false,
-                    "SetTargetKey": "Target1",
-                    "TargetParamKey": "TargetParam"
-                },
-                "Heal": {
-                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Misc/SubAct_Heal.gd",
-                    "#FrameIndex": 11,
-                    "#SubIndex": 1,
-                    "TargetKey": "Target1",
-                    "Value": 25
-                },
-                "PayCost": {
-                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Misc/SubAct_PayCost.gd",
-                    "#FrameIndex": 11,
-                    "#SubIndex": 0
-                },
-                "WeaponMotionAnimation": {
-                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponMotionAnimation.gd",
-                    "#FrameIndex": 11,
-                    "#SubIndex": 2,
-                    "MainHand": true,
-                    "OffHand": "Never"
-                },
-                "WeaponReadyAnimation": {
-                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponReadyAnimation.gd",
-                    "#FrameIndex": 5,
-                    "#SubIndex": 0,
-                    "Animation": "Raise",
-                    "MainHand": true,
-                    "OffHand": "Never"
-                }
-            },
-            "TargetParams": {
-                "TargetParam": {
-                    "LineOfSight": true,
-                    "TargetArea": "[[-1,2],[0,2],[1,2],[-1,1],[0,1],[1,1],[-1,0],[1,0]]",
-                    "TargetType": "Actor"
                 }
             }
         },

@@ -1,0 +1,196 @@
+{
+    
+    "#BaseEnchantWeapon_PageItem": {
+        "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemPassive.gd",
+        "#ObjDetails": {
+            "Description": "@@#Tag:Physical@@ Weapons now deal @@#Color:DmgColor:Cold:Cold Damage@@.",
+            "DisplayName": "Cold Enchant",
+            "LargeIcon": "Sprites/EnchantWeapon_Cold_Icon.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/EnchantWeapon_Cold_Icon.png",
+            "SnippetDesc": "Enchant weapon to deal Cold Damage",
+            "Tags": [
+                "Passive",
+                "WpnMod",
+                "Shared"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Page",
+                "Passive"
+            ]
+        },
+        "ItemData": {
+            "ItemType": "Page",
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "PageData": {
+            "PageRequirements": {
+                "ConflictingPages": [],
+                "IncompatiblePages": [],
+                "TitleReq": "Shared"
+            },
+            "SourceTitle": "Mage",
+            "WeaponMods": {
+                "EnchantWeaponMod": {
+                    "Conditions": {},
+                    "DisplayName": "Cold Enchanted",
+                    "WeaponMods": {
+                        "DamageTypeMod": {
+                            "Conditions": {
+                                "TagFilters": [
+                                    {
+                                        "RequireAnyTags": [
+                                            "Physical"
+                                        ]
+                                    }
+                                ],
+                                "TagFiltersReqAll": true
+                            },
+                            "ModProperty": "DamageType",
+                            "ModType": "Set",
+                            "ModValue": "Cold"
+                        },
+                        "DamageVfxMod": {
+                            "Conditions": {
+                                "TagFilters": [
+                                    {
+                                        "RequireAnyTags": [
+                                            "Physical"
+                                        ]
+                                    }
+                                ],
+                                "TagFiltersReqAll": true
+                            },
+                            "ModProperty": "DamageVfxKey",
+                            "ModType": "Set",
+                            "ModValue": "AUTO"
+                        },
+                        "DamageDefenseMod": {
+                            "Conditions": {
+                                "TagFilters": [
+                                    {
+                                        "RequireAnyTags": [
+                                            "Physical"
+                                        ]
+                                    }
+                                ],
+                                "TagFiltersReqAll": true
+                            },
+                            "ModProperty": "DefenseType",
+                            "ModType": "Set",
+                            "ModValue": "Ward"
+                        }
+                    }
+                }
+            }
+        },
+        "PassiveData": {},
+        "_DefVersion": "1"
+    },
+    "EnchantWeapon_Cold_PageItem": {
+        "!ParentKey": "#BaseEnchantWeapon_PageItem",
+        "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemPassive.gd",
+        "#ObjDetails": {
+            "Description": "@@#Tag:Physical@@ Weapons now deal @@#Color:DmgColor:Cold:Cold Damage@@.",
+            "DisplayName": "Cold Enchant",
+            "LargeIcon": "Sprites/EnchantWeapon_Cold_Icon.png",
+            "SmallIcon": "Sprites/EnchantWeapon_Cold_Icon.png",
+            "SnippetDesc": "Enchant weapon to deal Cold Damage"
+        },
+        "PageData": {
+            "WeaponMods": {
+                "EnchantWeaponMod": {
+                    "Conditions": {},
+                    "DisplayName": "Cold Enchanted",
+                    "WeaponMods": {
+                        "DamageTypeMod": {
+                            "ModValue": "Cold"
+                        }
+                    }
+                }
+            }
+        },
+        "PassiveData": {},
+        "_DefVersion": "1"
+    },
+    "EnchantWeapon_Fire_PageItem": {
+        "!ParentKey": "#BaseEnchantWeapon_PageItem",
+        "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemPassive.gd",
+        "#ObjDetails": {
+            "Description": "@@#Tag:Physical@@ Weapons now deal @@#Color:DmgColor:Fire:Fire Damage@@.",
+            "DisplayName": "Fire Enchant",
+            "LargeIcon": "Sprites/EnchantWeapon_Fire_Icon.png",
+            "SmallIcon": "Sprites/EnchantWeapon_Fire_Icon.png",
+            "SnippetDesc": "Enchant weapon to deal Fire Damage"
+        },
+        "PageData": {
+            "WeaponMods": {
+                "EnchantWeaponMod": {
+                    "Conditions": {},
+                    "DisplayName": "Fire Enchanted",
+                    "WeaponMods": {
+                        "DamageTypeMod": {
+                            "ModValue": "Fire"
+                        }
+                    }
+                }
+            }
+        },
+        "PassiveData": {},
+        "_DefVersion": "1"
+    },
+    "EnchantWeapon_Poison_PageItem": {
+        "!ParentKey": "#BaseEnchantWeapon_PageItem",
+        "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemPassive.gd",
+        "#ObjDetails": {
+            "Description": "@@#Tag:Physical@@ Weapons now deal @@#Color:DmgColor:Poison:Poison Damage@@.",
+            "DisplayName": "Poison Enchant",
+            "LargeIcon": "Sprites/EnchantWeapon_Poison_Icon.png",
+            "SmallIcon": "Sprites/EnchantWeapon_Poison_Icon.png",
+            "SnippetDesc": "Enchant weapon to deal Poison Damage"
+        },
+        "PageData": {
+            "WeaponMods": {
+                "EnchantWeaponMod": {
+                    "Conditions": {},
+                    "DisplayName": "Poison Enchanted",
+                    "WeaponMods": {
+                        "DamageTypeMod": {
+                            "ModValue": "Poison"
+                        }
+                    }
+                }
+            }
+        },
+        "PassiveData": {},
+        "_DefVersion": "1"
+    },
+    "EnchantWeapon_Shock_PageItem": {
+        "!ParentKey": "#BaseEnchantWeapon_PageItem",
+        "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemPassive.gd",
+        "#ObjDetails": {
+            "Description": "@@#Tag:Physical@@ Weapons now deal @@#Color:DmgColor:Shock:Shock Damage@@.",
+            "DisplayName": "Shock Enchant",
+            "LargeIcon": "Sprites/EnchantWeapon_Shock_Icon.png",
+            "SmallIcon": "Sprites/EnchantWeapon_Shock_Icon.png",
+            "SnippetDesc": "Enchant weapon to deal Shock Damage"
+        },
+        "PageData": {
+            "WeaponMods": {
+                "EnchantWeaponMod": {
+                    "Conditions": {},
+                    "DisplayName": "Shock Enchanted",
+                    "WeaponMods": {
+                        "DamageTypeMod": {
+                            "ModValue": "Shock"
+                        }
+                    }
+                }
+            }
+        },
+        "PassiveData": {},
+        "_DefVersion": "1"
+    }
+}

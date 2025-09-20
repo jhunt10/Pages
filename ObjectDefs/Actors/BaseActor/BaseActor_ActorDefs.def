@@ -54,7 +54,9 @@
             "Protection": 1,
             "Resistance:Light": 150,
             "Speed": 0,
-            "TwoHandMod": 1.2
+            "TwoHandMod": 1.2,
+            "CoverBonus": 1.0,
+            "CoverPenalty": 0.6
         },
         "UnarmedAttackData": {
             "DamageDatas": {
@@ -73,7 +75,8 @@
                 "LineOfSight": true,
                 "TargetArea": "[[-1,0],[-1,1],[0,1],[1,1],[1,0]]",
                 "TargetType": "Actor"
-            }
+            },
+            "DefaultAnimation": "Stab"
         },
         "_DefVersion": "1"
     },
@@ -88,7 +91,7 @@
             "SmallIcon": "Sprites/BaseActor.png",
             "SnippetDesc": "An actor made for baseing.",
             "Tags": [
-                "Biped"
+                "Human"
             ],
             "Taxonomy": [
                 "Actor"

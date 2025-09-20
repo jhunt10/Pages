@@ -56,13 +56,25 @@ func _ready() -> void:
 	tab_supplies_button.pressed.connect(on_tab_pressed.bind("Supplies"))
 	tab_inventory_button.pressed.connect(on_tab_pressed.bind("Inventory"))
 	tab_stats_button.pressed.connect(on_tab_pressed.bind("Stats"))
-	if stats_page and stats_page.visible:
-		stats_page.hide()
-	if equipment_page:
-		equipment_page.item_button_down.connect(on_item_button_down)
-		equipment_page.item_button_up.connect(on_item_button_up)
-		equipment_page.mouse_enter_item.connect(on_mouse_enter_slot)
-		equipment_page.mouse_exit_item.connect(on_mouse_exit_slot)
+	if equip_mode:
+		if equipment_page:
+			equipment_page.item_button_down.connect(on_item_button_down)
+			equipment_page.item_button_up.connect(on_item_button_up)
+			equipment_page.mouse_enter_item.connect(on_mouse_enter_slot)
+			equipment_page.mouse_exit_item.connect(on_mouse_exit_slot)
+		if stats_page and stats_page.visible:
+			stats_page.hide()
+		inventory_tab_rect.hide()
+		stats_tab_rect.show()
+	else:
+		if inventory_container:
+			inventory_container.hide()
+		if stats_page:
+			stats_page.show()
+		inventory_tab_rect.hide()
+		stats_tab_rect.hide()
+		
+	
 	if inventory_container:
 		inventory_container.item_button_down.connect(on_item_button_down)
 		inventory_container.item_button_up.connect(on_item_button_up)
@@ -103,7 +115,8 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 var first_process_pass = true
 func _process(delta: float) -> void:
-	if delay_loading_inventory:
+	# Load Inventory after first frame
+	if delay_loading_inventory and equip_mode:
 		if first_process_pass:
 			first_process_pass = false
 			var time_diff = Time.get_ticks_msec() - load_start_time
@@ -112,12 +125,13 @@ func _process(delta: float) -> void:
 			var time_diff2 = Time.get_ticks_msec() - load_start_time
 			printerr("\n\nCharacterPage Second Frame Load Time: %s | Delta: %s\n\n" % [time_diff2, delta])
 			inventory_container.build_item_slots()
-			stats_page.sync()
 			delay_loading_inventory = false
 			if first_frame_time == null:
 				first_frame_time = Time.get_ticks_msec()
 				var time_diff = first_frame_time - load_start_time
 				printerr("\n\nCharacterPage Finished Load Time: %s | Delta: %s\n\n" % [time_diff, delta])
+	
+	# Start dragging if mouse moved enough
 	if not _dragging and _button_down_pos:
 		var mouse_pos = scale_control.get_local_mouse_position()
 		if mouse_pos.distance_to(_button_down_pos) > _drag_dead_zone:
@@ -179,7 +193,8 @@ func on_actor_tab_selected(actor:BaseActor):
 			left_page_control.show_menu_page()
 	if _current_details_card:
 		_current_details_card.start_hide()
-	inventory_container.sync()
+	if equip_mode and inventory_container.visible:
+		inventory_container.sync()
 	if stats_page.visible:
 		stats_page.sync()
 		
@@ -207,6 +222,9 @@ func show_menu():
 			left_page_control.sync()
 	else:
 		on_tab_pressed("Pages")
+	
+	if not equip_mode:
+		stats_page.sync()
 	#inventory_container.build_item_slots()
 	self.visible = true
 
@@ -437,3 +455,9 @@ func on_tab_pressed(tab_name:String):
 		#inventory_container.clear_forced_filters(false)
 		inventory_container.set_character_menu_context("Supplies")
 		#inventory_tabs_control.set_tabs(["Potion", "Bomb"])
+		
+	# Show Inventory on any tab change
+	inventory_container.show()
+	stats_page.hide()
+	inventory_tab_rect.hide()
+	stats_tab_rect.show()

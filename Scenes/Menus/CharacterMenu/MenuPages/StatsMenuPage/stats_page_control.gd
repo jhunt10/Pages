@@ -125,14 +125,14 @@ func sync():
 	if damage_datas.keys().size() > 0:
 		main_hand_damage_label.set_damage_data(damage_datas.values()[0], actor)
 		if not main_hand_damage_label.visible:
-			main_hand_damage_label.hide()
+			main_hand_damage_label.show()
 	else:
 		main_hand_damage_label.hide()
 		
 	if damage_datas.keys().size() > 1:
 		other_hand_damage_label.set_damage_data(damage_datas.values()[1], actor)
 		if not other_hand_damage_label.visible:
-			other_hand_damage_label.hide()
+			other_hand_damage_label.show()
 	else:
 		other_hand_damage_label.hide()
 		

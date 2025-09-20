@@ -52,14 +52,15 @@ static func handle_attack(
 		var attack_direction = AttackHandler.AttackDirection.Front
 		if actor != attacker or attacker_included_in_defenders:
 			attack_posision_data [actor.Id] = {}
+			var defender_pos = game_state.get_actor_pos(actor)
 			# TODO: Cover
-			attack_posision_data[actor.Id]['HasCover'] = false
+			var los = TargetingHelper.get_line_of_sight_for_spots(attacker_pos, defender_pos, game_state)
+			attack_posision_data[actor.Id]['HasCover'] = los == TargetingHelper.LOS_VALUE.Cover
 			# Has AOE area 
 			#TODO: Decide what defines is_AOE
 			if target_parameters and target_parameters.has_area_of_effect():
 				attack_direction = AttackHandler.AttackDirection.AOE
 			else:
-				var defender_pos = game_state.get_actor_pos(actor)
 				var defender_awareness = actor.stats.get_stat(StatHelper.Awareness)
 				attack_direction = get_relative_attack_direction(attacker_pos, defender_pos, defender_awareness)
 			attack_posision_data[actor.Id]['AttackDirection'] = attack_direction
@@ -242,14 +243,24 @@ static func handle_attack(
 	
 	CombatLogController.log_event(attack_event)
 	
+	if LOGGING:
+		print("\n---------------------------")
+		print(attack_event.serialize_self())
+		print("---------------------------\n")
 	return attack_event
 
 
 
 static func _roll_for_hit(attack_event:AttackEvent, sub_event:AttackSubEvent):
 	var attack_accuracy_mod = attack_event.attack_details.get("AccuracyMod", 1)
-	var net_accuracy = max(0, (attack_event.attacker_accuracy * attack_accuracy_mod) - sub_event.defender_evasion)
+	var net_accuracy = (attack_event.attacker_accuracy * attack_accuracy_mod) - sub_event.defender_evasion
+	if sub_event.defender_has_cover:
+		var cover_penalty = attack_event.attacker_cover_penalty
+		var cover_bonus = sub_event.defender_cover_bonus
+		net_accuracy = (attack_event.attacker_accuracy * attack_accuracy_mod * cover_penalty) - (sub_event.defender_evasion * cover_bonus)
 	
+	net_accuracy = max(0, net_accuracy)
+		
 	sub_event.hit_chance = net_accuracy / 100.0
 	sub_event.hit_roll = randf()
 	# sub_event.is_miss = [Was invaild Target]

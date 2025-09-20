@@ -76,6 +76,8 @@ var is_selling:bool = false
 @export var equip_button_background:NinePatchRect
 @export var equip_button:Button
 @export var equip_label:FitScaleLabel
+@export var equip_button_texture:Texture2D
+@export var equip_button_pressed_texture:Texture2D
 
 @export var buy_controller:BuyController
 #enum AnimationStates {In, Showing, Out, Hidden}
@@ -93,7 +95,8 @@ func _ready() -> void:
 		offset_point.position = Vector2(self.size.x,0)
 	else:
 		offset_point.position = Vector2(0,self.size.y)
-	equip_button.pressed.connect(equip_button_pressed)
+	equip_button.button_down.connect(equip_button_pressed)
+	equip_button.button_up.connect(equip_button_released)
 	pass # Replace with function body.
 
 
@@ -144,6 +147,7 @@ func _on_exit_button():
 
 func start_show():
 	showing = true
+	equip_button_background.texture = equip_button_texture
 	#self.show()
 	#offset_control.position.y = self.size.y
 	#animation_state = AnimationStates.In
@@ -251,9 +255,7 @@ func set_item(actor:BaseActor, item:BaseItem):
 			equip_button_background.show()
 
 func equip_button_pressed():
-	var item = ItemLibrary.get_item(item_id)
-	if item:
-		item_confirmed.emit(item)
+	equip_button_background.texture = equip_button_pressed_texture
 	#var actor = CharacterMenuControl.Instance._actor
 	#if not actor:
 		#return
@@ -263,7 +265,12 @@ func equip_button_pressed():
 	#else:
 		#var fail_reason = ItemHelper.try_transfer_item_from_inventory_to_actor(item, actor)
 		#equip_label.text  = fail_reason
-	
+
+func equip_button_released():
+	equip_button_background.texture = equip_button_texture
+	var item = ItemLibrary.get_item(item_id)
+	if item:
+		item_confirmed.emit(item)
 
 func set_cant_equip_reason(reasons_data:Dictionary):
 	if reasons_data.size() == 0:

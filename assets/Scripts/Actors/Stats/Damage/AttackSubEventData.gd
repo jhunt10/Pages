@@ -35,6 +35,7 @@ var defender_evasion:int
 var defender_block_chance:float
 var defender_block_mod:float
 var defender_protection:int
+var defender_cover_bonus:float
 
 var final_damage_mod:float
 var damage_events:Dictionary = {}
@@ -59,6 +60,7 @@ func _init( parent:AttackEvent,
 	defender_block_chance = (StatHelper.get_defense_stat_for_attack_direction(defending_actor, attack_direction, StatHelper.BlockChance) / 100.0)
 	defender_block_mod = defending_actor.stats.get_stat(StatHelper.BlockMod, 0) #StatHelper.get_defense_stat_for_attack_direction(defending_actor, attack_direction, StatHelper.BlockMod)
 	defender_protection = defending_actor.stats.get_stat(StatHelper.Protection, 0) #StatHelper.get_defense_stat_for_attack_direction(defending_actor, attack_direction, StatHelper.Protection)
+	defender_cover_bonus = defending_actor.stats.get_stat(StatHelper.CoverBonus, 0)
 
 
 func dictialize_self()->Dictionary:
@@ -77,6 +79,7 @@ func dictialize_self()->Dictionary:
 		"defender_block_chance": defender_block_chance,
 		"defender_block_mod": defender_block_mod,
 		"defender_protection": defender_protection,
+		"defender_cover_bonus": defender_cover_bonus,
 		"final_damage_mod": final_damage_mod,
 		"applied_effect_datas": applied_effect_datas,
 		

@@ -16,10 +16,10 @@
         },
         "SpriteSheet": "SpriteSheets/Skeleton_SpriteSheet.png",
         "Stats": {
-            "Agility": 0,
-            "Strength": 0,
-            "Intelligence": 0,
-            "Wisdom": 0,
+            "Agility": 10,
+            "Strength": 5,
+            "Intelligence": 3,
+            "Wisdom": 8,
             "Level": 0,
             "Accuracy": 100,
             "AggroMod": 1,
@@ -49,7 +49,7 @@
         },
         "SpawnEquipmentArr": [
             "Undead_PageBook",
-            "OldBow"
+            "BaseBow_Weapon"
         ],
         "SpawnItemArr": [
         ],
@@ -114,10 +114,10 @@
         ],
         "SpriteSheet": "SpriteSheets/Zombie_SpriteSheet.png",
         "Stats": {
-            "Agility": 0,
-            "Strength": 0,
-            "Intelligence": 0,
-            "Wisdom": 0,
+            "Agility": 5,
+            "Strength": 10,
+            "Intelligence": 2,
+            "Wisdom": 8,
             "Level": 0,
             "Accuracy": 100,
             "AggroMod": 1,
@@ -157,7 +157,8 @@
                 "LineOfSight": true,
                 "TargetArea": "[[-1,0],[-1,1],[0,1],[1,1],[1,0]]",
                 "TargetType": "Actor"
-            }
+            },
+            "DefaultAnimation": "Stab"
         },
         "_DefVersion": "1"
     }
