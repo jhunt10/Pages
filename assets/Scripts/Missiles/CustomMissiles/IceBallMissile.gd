@@ -2,7 +2,7 @@ class_name IceBallMissile
 extends AttackMissile
 
 
-func do_thing(game_state:GameStateData):
+func _do_missile_thing(game_state:GameStateData):
 	if LOGGING: 
 		print('Missile ' + str(Id) + " has done thing.")
 	var source_actor = ActorLibrary.get_actor(_source_actor_id)
@@ -27,8 +27,8 @@ func do_thing(game_state:GameStateData):
 			damage_datas, 
 			_missle_data.get("EffectDatas", []),
 			_source_target_chain,
-			_target_params,
 			CombatRootControl.Instance.GameState,
+			false,
 			MapPos.Vector2i(StartSpot)
 		)
 	
@@ -45,7 +45,7 @@ func do_thing(game_state:GameStateData):
 		sub_missile_data['AttackDetails'] = parent_action.get_load_val("AttackDetails", {})
 		sub_missile_data['EffectDatas'] = parent_action.get_load_val("EffectDatas", {})
 		sub_missile_data['TargetParams'] = _target_params
-		var sub_missile = BaseMissile.new(source_actor, sub_missile_data, _source_target_chain,
+		var sub_missile = AttackMissile.new(source_actor, sub_missile_data, _source_target_chain,
 							MapPos.Vector2i(TargetSpot), MapPos.Vector2i(spot), parent_action.get_load_path())
 		CombatRootControl.Instance.create_new_missile_node(sub_missile)
 		

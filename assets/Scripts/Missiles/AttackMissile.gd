@@ -27,8 +27,8 @@ func _do_missile_thing(game_state:GameStateData):
 			{"MissileDamage":_missle_data['DamageData']},
 			_missle_data.get("EffectDatas", []),
 			_source_target_chain,
-			_target_params,
 			game_state,
+			_target_params.has_area_of_effect(),
 			MapPos.Vector2i(StartSpot)
 			)
 		

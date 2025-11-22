@@ -1,7 +1,8 @@
 class_name EffectZone
 extends BaseZone
 
-# Applies Effect to any Actor that enters, removes effect on exit
+# Applies an In Zone Effect to any Actor that enters, removes effect on exit
+# Do not mistake for Infliction Zone, which applies non Zone specific Effects. 
 
 var _actor_ids_to_inzone_effect_ids:Dictionary = {}
 var _inzone_effect_key:String
@@ -37,9 +38,6 @@ func _apply_inzone_effect(actor:BaseActor, game_state:GameStateData):
 
 func on_actor_enter(actor:BaseActor, game_state:GameStateData):
 	print("Actor ", actor.ActorKey, " entered Zone ", ZoneKey)
-	if _actor_ids_to_inzone_effect_ids.has(actor.Id):
-		push_warning("Entering Actor ", actor.Id, " already has effect ", _inzone_effect_key, ".")
-		return
 	_apply_inzone_effect(actor, game_state)
 
 func on_actor_exit(actor:BaseActor, _game_state:GameStateData):

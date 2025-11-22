@@ -73,13 +73,6 @@ var RemainingDuration:int:
 var source_id:String:
 	get: return get_load_val("SourceId")
 
-var applied_potency:float:
-	get:
-		if applied_potency < 1:
-			var pot = get_load_val("AppliedPotency", 1)
-			applied_potency = pot
-		return applied_potency
-
 var _source
 var _enabled:bool = true
 var _deleted:bool = false
@@ -110,6 +103,9 @@ func reload_def(load_path:String, def:Dictionary):
 
 func _cache_after_loading_def():
 	_cache_triggers()
+
+func get_applied_potency()->float:
+	return get_load_val("AppliedPotency", 1)
 
 func merge_duplicate_effect(source, dup_effect_def:Dictionary):
 	var dup_data = dup_effect_def.get("EffectData", {})

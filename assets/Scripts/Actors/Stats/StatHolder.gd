@@ -161,6 +161,13 @@ func apply_level_up(new_level:int, remaining_exp:int, add_att_levels:Dictionary)
 	attribute_levels[StatHelper.Intelligence] = add_att_levels.get(StatHelper.Intelligence)
 	attribute_levels[StatHelper.Wisdom] = add_att_levels.get(StatHelper.Wisdom)
 	recache_stats()
+
+func get_auto_level_attributes(level:int):
+	var points = StatHelper.get_attribute_points_for_level(level)
+	var scaling = _actor.get_stat_scaling()
+	var spent_points = {}
+	for att in scaling.keys():
+		var val = points * scaling
 	
 
 # -----------------------------------------------------------------

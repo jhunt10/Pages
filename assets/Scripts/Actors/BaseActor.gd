@@ -113,6 +113,15 @@ func get_tags():
 			tag_list.append(added_tag)
 	return tag_list
 
+func get_stat_scaling()->Dictionary:
+	return actor_data.get("StatScaling", 
+	{
+		"STR": 0.25,
+		"AGI": 0.25,
+		"INT": 0.25,
+		"WIS": 0.25,
+	})
+
 # Use load_data
 #func post_creation():
 	#suppress_equipment_changed = true
@@ -400,7 +409,7 @@ func die():
 	if map_pos:
 		# Roll for item drop
 		var drop_items = actor_data.get("DropItemsSet", {})
-		var item_key = RandomHelper.roll_from_set(drop_items)
+		var item_key = Roll.from_set(drop_items)
 		if item_key != "":
 			if item_key.begins_with("Money"):
 				var tokens = item_key.split(':')
@@ -508,6 +517,9 @@ func get_weapon_damage_datas(weapon_filter)->Dictionary:
 
 func get_targeting_mods()->Array:
 	var out_list = []
+	var actor_mods:Array = actor_data.get("StaticTargetMods", [])
+	if actor_mods.size() > 0:
+		out_list.append_array(actor_mods)
 	out_list.append_array(pages.get_targeting_mods())
 	return out_list
 

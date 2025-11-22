@@ -294,6 +294,11 @@ func _build_bbcode_array(raw_description:String, object_def:Dictionary, object_i
 					if sub_tokens.size() >= 4:
 						sub_line = sub_line.replace("[/color]", sub_tokens[3] + "[/color]")
 					out_line += sub_line
+			"#ZoneData":
+				var parsed_line = _parse_zone(object_def, object_inst, actor, sub_tokens)
+				out_arr.append(out_line)
+				out_arr.append(parsed_line)
+				out_line = ''
 					
 					
 					
@@ -661,6 +666,22 @@ func _parse_effect(effect_key:String, effect_data:Dictionary, prop_key:String, a
 	return out_arr
 
 
+func _parse_zone(object_def:Dictionary, object_inst:BaseLoadObject, actor:BaseActor, sub_tokens:Array)->String:
+	var zone_datas = object_def.get("ActionData", {}).get("ZoneDatas", {})
+	var zone_key = sub_tokens[1]
+	var zone_data = zone_datas.get(zone_key)
+	if !zone_data:
+		return ""
+	
+	if sub_tokens.size() > 2 and sub_tokens[2] == 'Duration':
+		var dur_val = zone_data.get("Duration", -1)
+		var dur_type = zone_data.get("DurationType", "???")
+		var line = str(dur_val)+" "+dur_type
+		if dur_val > 0:
+			line += "s"
+		return color_text(RED_TEXT, line)
+	
+	return ""
 
 func get_effect_datas_from_def(def:Dictionary)->Dictionary:
 	if def.has("ActionData"):

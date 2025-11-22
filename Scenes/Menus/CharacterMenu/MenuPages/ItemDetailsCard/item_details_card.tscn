@@ -42,11 +42,11 @@
 [ext_resource type="Texture2D" uid="uid://bmv0v2cnpvjh4" path="res://Scenes/Menus/CharacterMenu/MenuPages/ItemDetailsCard/ButtonPressed_Patch_32_6.png" id="36_0dsaw"]
 
 [node name="ItemDetailsCard" type="Control" node_paths=PackedStringArray("offset_control", "offset_point", "icon", "title_lable", "description_box", "exit_button", "weapon_details", "armor_details", "action_details", "effect_page_details", "page_que_details", "default_details", "tag_label", "equip_button_background", "equip_button", "equip_label", "buy_controller")]
-custom_minimum_size = Vector2(300, 260)
+custom_minimum_size = Vector2(300, 340)
 layout_mode = 3
 anchors_preset = 0
 offset_right = 300.0
-offset_bottom = 300.0
+offset_bottom = 340.0
 mouse_filter = 1
 script = ExtResource("1_vq5a0")
 offset_control = NodePath("OffsetControl")
@@ -76,11 +76,11 @@ buy_controller = NodePath("OffsetControl/NinePatchRect/VBoxContainer/BuyingContr
 position = Vector2(300, 0)
 
 [node name="OffsetControl" type="Control" parent="."]
-custom_minimum_size = Vector2(300, 260)
+custom_minimum_size = Vector2(300, 340)
 anchors_preset = 0
 offset_left = 300.0
 offset_right = 600.0
-offset_bottom = 300.0
+offset_bottom = 340.0
 
 [node name="NinePatchRect" type="NinePatchRect" parent="OffsetControl"]
 layout_mode = 1

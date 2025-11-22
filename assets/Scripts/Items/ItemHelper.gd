@@ -78,7 +78,6 @@ static func get_first_valid_slot_for_item(item:BaseItem, actor:BaseActor, allow_
 	#var index = -1
 	if item is BaseEquipmentItem:
 		holder = actor.equipment
-		#index = actor.equipment.get_first_valid_slot_for_item(item, allow_replace)
 	elif item is BasePageItem:
 		holder = actor.pages
 	elif item is BaseSupplyItem:
@@ -86,7 +85,7 @@ static func get_first_valid_slot_for_item(item:BaseItem, actor:BaseActor, allow_
 	if !holder:
 		return -1
 	
-	var index = holder.get_first_valid_slot_for_item(item, true)
+	var index = holder.get_first_valid_slot_for_item(item, allow_replace)
 	return index
 
 static func try_transfer_item_from_inventory_to_actor(item:BaseItem, actor:BaseActor, allow_replace:bool = true)->String:
@@ -94,7 +93,6 @@ static func try_transfer_item_from_inventory_to_actor(item:BaseItem, actor:BaseA
 	#var index = -1
 	if item is BaseEquipmentItem:
 		holder = actor.equipment
-		#index = actor.equipment.get_first_valid_slot_for_item(item, allow_replace)
 	elif item is BasePageItem:
 		holder = actor.pages
 	elif item is BaseSupplyItem:
@@ -102,7 +100,9 @@ static func try_transfer_item_from_inventory_to_actor(item:BaseItem, actor:BaseA
 	if !holder:
 		return "Unknown ItemType"
 	
-	var index = holder.get_first_valid_slot_for_item(item, true)
+	var index = holder.get_first_valid_slot_for_item(item, allow_replace)
+	if index < 0:
+		return "No Open Slot"
 	if LOGGING: print("ItemHlp: Transfer %s from INV to %s" % [item.ItemKey, holder._actor.Id])
 	return try_transfer_item_from_inventory_to_holder(item, holder, index, allow_replace)
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=3 uid="uid://dfeilp6hbiuqs"]
+[gd_scene load_steps=59 format=3 uid="uid://dfeilp6hbiuqs"]
 
 [ext_resource type="Script" path="res://Scenes/Combat/combat_scene.gd" id="1_crigy"]
 [ext_resource type="Texture2D" uid="uid://b232xm2ly0peh" path="res://assets/Sprites/UI/GridCursors/GridCursor_Default.png" id="7_7lt4y"]
@@ -26,7 +26,7 @@
 [ext_resource type="Texture2D" uid="uid://cwsvq3qu6228n" path="res://assets/Sprites/UI/QueInputAndDisplay/page_button.png" id="24_5fn7e"]
 [ext_resource type="Script" path="res://Scenes/Combat/game_over_screen.gd" id="25_byrc6"]
 [ext_resource type="Script" path="res://Scenes/Combat/UiNodes/CameraLock/camera_lock_control.gd" id="25_ig6gl"]
-[ext_resource type="Texture2D" uid="uid://c2rmvgu5ib0nq" path="res://ObjectDefs/Actions/ItemUsage/Sprites/Potion_Icon.png" id="25_q2xye"]
+[ext_resource type="Texture2D" uid="uid://c2rmvgu5ib0nq" path="res://defs/Actions/ItemUsage/Sprites/Potion_Icon.png" id="25_q2xye"]
 [ext_resource type="Script" path="res://Scenes/Combat/game_victory_screen.gd" id="26_1uhkb"]
 [ext_resource type="Texture2D" uid="uid://e0lb1vqlst3i" path="res://Scenes/Combat/UiNodes/CameraLock/CameraLock_Locked.png" id="26_muuhh"]
 [ext_resource type="Theme" uid="uid://cayt153s5ro4a" path="res://Scenes/Themes/standard_theme_red.tres" id="27_3mvka"]
@@ -41,7 +41,7 @@
 [ext_resource type="Texture2D" uid="uid://bibqsudhjw4qe" path="res://assets/Sprites/Paper/Mundane_Background.png" id="31_rn36e"]
 [ext_resource type="Texture2D" uid="uid://io35wpu802fp" path="res://assets/Sprites/UI/BackPatches/Patch_64_12.png" id="32_f81f5"]
 [ext_resource type="Texture2D" uid="uid://ccwj8ucsjhl6w" path="res://assets/Sprites/UI/BackPatches/Patch_64_12_Dark.png" id="32_h43dd"]
-[ext_resource type="Texture2D" uid="uid://bbs3uvepyto08" path="res://ObjectDefs/ClassDefs/TitlePages/Sprites/SoldierIcon.png" id="33_0bnqe"]
+[ext_resource type="Texture2D" uid="uid://bbs3uvepyto08" path="res://defs/ClassDefs/TitlePages/Sprites/SoldierIcon.png" id="33_0bnqe"]
 [ext_resource type="Texture2D" uid="uid://d041ymvcqbc8f" path="res://notes/TemplatePageIcon.png" id="33_a1r5m"]
 [ext_resource type="Script" path="res://Scenes/Combat/UiNodes/ActorPlacer/actor_placer_button.gd" id="33_lhmsf"]
 [ext_resource type="PackedScene" uid="uid://dqruidykupjgt" path="res://Scenes/Combat/UiNodes/OptionSelectMenu/option_select_menu.tscn" id="34_6y7uw"]
@@ -52,6 +52,40 @@
 [ext_resource type="PackedScene" uid="uid://bje0k82nenje6" path="res://Scenes/Dialog/dialog_control.tscn" id="37_vv8mm"]
 [ext_resource type="Theme" uid="uid://bfce41la62bs6" path="res://Scenes/Themes/readable_theme.tres" id="38_waysr"]
 [ext_resource type="PackedScene" uid="uid://cjlwimeud3tyy" path="res://Scenes/Maps/TestingMap/testing_map.tscn" id="49_lque7"]
+[ext_resource type="Texture2D" uid="uid://bvlcwn5x4f7qt" path="res://assets/Sprites/VEffects/CloudPartical.png" id="50_ydkuo"]
+
+[sub_resource type="Gradient" id="Gradient_feeok"]
+colors = PackedColorArray(0.63088, 0.000294368, 0.630875, 1, 0.468468, 0.000153922, 0.468465, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_bhlto"]
+gradient = SubResource("Gradient_feeok")
+
+[sub_resource type="Gradient" id="Gradient_b7hje"]
+offsets = PackedFloat32Array(0, 0.254167, 0.7375, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 0.552956, 0.552956, 0.552956, 1, 0.470076, 0.470076, 0.470076, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_jxidr"]
+gradient = SubResource("Gradient_b7hje")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_x4sor"]
+lifetime_randomness = 0.5
+particle_flag_align_y = true
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(48, 48, 1)
+direction = Vector3(0, -1, 0)
+spread = 0.0
+initial_velocity_min = 1.0
+initial_velocity_max = 2.0
+angular_velocity_min = -10.0
+angular_velocity_max = 9.99998
+orbit_velocity_min = 0.0010001
+orbit_velocity_max = 0.0100001
+gravity = Vector3(0, 0, 0)
+scale_min = 1.3
+scale_max = 1.5
+color_ramp = SubResource("GradientTexture1D_jxidr")
+color_initial_ramp = SubResource("GradientTexture1D_bhlto")
 
 [node name="CombatRootControl" type="Control" node_paths=PackedStringArray("ui_control", "camera", "start_combat_screen", "MapController", "dialog_controller", "GridCursor")]
 custom_minimum_size = Vector2(1152, 648)
@@ -1430,6 +1464,23 @@ scene_root = NodePath("../../..")
 visible = false
 
 [node name="MapNode" parent="." instance=ExtResource("49_lque7")]
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="MapNode"]
+modulate = Color(1, 1, 1, 0.282353)
+position = Vector2(179, 215)
+amount = 500
+process_material = SubResource("ParticleProcessMaterial_x4sor")
+texture = ExtResource("50_ydkuo")
+lifetime = 6.0
+
+[node name="GPUParticles2D2" type="GPUParticles2D" parent="MapNode"]
+visible = false
+modulate = Color(0.645285, 0.37215, 0.675675, 0.282353)
+position = Vector2(179, 215)
+amount = 400
+process_material = SubResource("ParticleProcessMaterial_x4sor")
+texture = ExtResource("50_ydkuo")
+lifetime = 8.0
 
 [node name="GridCursor" type="Sprite2D" parent="."]
 visible = false

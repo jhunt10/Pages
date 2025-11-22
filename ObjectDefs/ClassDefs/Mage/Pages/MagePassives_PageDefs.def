@@ -346,5 +346,129 @@
         },
         "PassiveData": {},
         "_DefVersion": "1"
+    },
+    "ColdMage_PassivePage": {
+        "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemPassive.gd",
+        "#ObjDetails": {
+            "Description": "You've learned a technique to focus the @@#Color:DmgColor:Cold:Cold@@ energy of @@#Color:Blue:Water Spells@@ into the projectile itself. It then hardens enough to register as @@#Tag:Physical Damage@@.\n\n@@#Color:Blue:Water Spells@@ now deal @@#Color:DmgColor:Slash@@, @@#Color:DmgColor:Blunt@@, or @@#Color:DmgColor:Pierce@@ Damage vs @@#Stat:Ward@@. The new damage type depends on the spell.",
+            "DisplayName": "Harded Ice",
+            "LargeIcon": "Sprites/ColdMage_Icon.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/ColdMage_Icon.png",
+            "SnippetDesc": "Deal Poison Damage on contact",
+            "Tags": [
+                "Passive",
+                "ActionMod"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Page",
+                "Passive"
+            ]
+        },
+        "ItemData": {
+            "ItemType": "Page",
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "PageData": {
+            "PageRequirements": {
+                "ConflictingPages": [],
+                "IncompatiblePages": [],
+                "TitleReq": "Match"
+            },
+            "SourceTitle": "Mage"
+        },
+        "PassiveData": {
+            "ActionMods": {
+                "WaterBallSpellMod": {
+                    "Conditions": {
+                        "ItemKeys": [
+                            "WaterBallSpell"
+                        ],
+                        "TagFilters": []
+                    },
+                    "ModdedDefData": {
+                        "#ObjDetails": {
+                            "DisplayName": "Ice Ball",
+                            "SnippetDesc": "Launch a Ice Ball Missile",
+                            "Tags": [
+                                "Cold"
+                            ],
+                            "Taxonomy": [
+                                "Item",
+                                "Page",
+                                "Action"
+                            ]
+                        },
+                        "ActionData": {
+                            "DamageDatas": {
+                                "MissileDamage": {
+                                    "DamageType": "Blunt",
+                                    "DefenseType": "Ward"
+                                },
+                                "SubMissileDamage": {
+                                    "DamageType": "Pierce",
+                                    "DefenseType": "Ward"
+                                }
+                            },
+                            "EffectDatas": {
+                                "ChilledEffect": {
+                                    "ApplicationChance": 0.2,
+                                    "EffectKey": "AilmentChilled"
+                                }
+                            },
+                            "SubActions": {
+                            }
+                        }
+                    }
+                },
+                "WaterBeamSpell": {
+                    "Conditions": {
+                        "ItemKeys": [
+                            "WaterBeamSpell"
+                        ],
+                        "TagFilters": []
+                    },
+                    "ModdedDefData": {
+                        "#ObjDetails": {
+                            "DisplayName": "Ice Beam",
+                            "SnippetDesc": "Spawn Piercing Beam of Ice.",
+                            "Tags": [
+                                "Cold"
+                            ],
+                            "Taxonomy": [
+                                "Item",
+                                "Page",
+                                "Action"
+                            ]
+                        },
+                        "ActionData": {
+                            "DamageDatas": {
+                                "WaterBeamDamage": {
+                                    "DamageType": "Pierce",
+                                    "DefenseType": "Ward"
+                                }
+                            },
+                            "EffectDatas": {
+                                "ChilledEffect": {
+                                    "ApplicationChance": 0.2,
+                                    "EffectKey": "AilmentChilled"
+                                }
+                            },
+                            "SubActions": {
+                                "Attack": {
+                                    "EffectKeys": [
+                                        "ChilledEffect"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "PassiveData": {},
+            "_DefVersion": "1"
+        }
     }
 }

@@ -277,7 +277,9 @@ func on_details_card_confirmed(item:BaseItem):
 	if source_context == "Inventory":
 		#var dest_context:BaseCharacterSubMenu = context_to_page_control(_left_page_context)
 		#var dest_holder = dest_context.get_item_holder()
-		result = ItemHelper.try_transfer_item_from_inventory_to_actor(item, _actor, true)
+		result = ItemHelper.try_transfer_item_from_inventory_to_actor(item, _actor, false)
+		if result == "No Open Slot":
+			result = ItemHelper.try_transfer_item_from_inventory_to_actor(item, _actor, true)
 	else:
 		result = ItemHelper.try_transfer_item_from_actor_to_inventory(item, _actor)
 	

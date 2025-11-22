@@ -47,9 +47,9 @@ func use_in_combat(actor:BaseActor, target, game_state:GameStateData):
 		attack_details, 
 		damage_datas, 
 		effect_datas, 
-		source_tag_chain, 
-		target_params, 
+		source_tag_chain,
 		game_state, 
+		target_params.has_area_of_effect(),
 		center_pos
 	)
 	pass

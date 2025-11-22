@@ -35,10 +35,10 @@ func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, que_exe_d
 		return BaseSubAction.Success
 	
 	var mod_chance = 0.5#subaction_data.get("ChanceToMod", 1)
-	var hit_another = RandomHelper.roll_for_chance(mod_chance)
+	var hit_another = Roll.for_chance(mod_chance)
 	if hit_another:
 		var is_good = subaction_data.get("BeingTargetIsGood", false)
-		var new_target = RandomHelper.get_random_actor_from_list(other_actors.values(), is_good)
+		var new_target = Roll.random_actor_from_list(other_actors.values(), is_good)
 		turn_data.replace_target_for_key(modify_target_key, target_param_key, target_actor, new_target)
 	
 	return BaseSubAction.Success

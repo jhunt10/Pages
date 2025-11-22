@@ -34,6 +34,17 @@ func apply_target_mod(mod_data:Dictionary)->TargetParameters:
 	var override_props = mod_data.get("OverrideProps", {})
 	for prop_name in override_props.keys():
 		new_args[prop_name] = override_props[prop_name]
+	if mod_data.get("MakeOmniDirrectional"):
+		var raw_area_string = new_args.get("TargetArea")
+		var raw_area = JSON.parse_string(raw_area_string)
+		var new_area = []
+		for dir in MapPos.Directions:
+			var rotated = TargetingHelper.rotate_target_area(raw_area, dir)
+			for spot in rotated:
+				if not new_area.has(spot):
+					new_area.append(spot)
+		new_args['TargetArea'] = new_area
+			
 	return TargetParameters.new(self.target_param_key, new_args)
 
 func _init(target_param_key:String, args:Dictionary) -> void:

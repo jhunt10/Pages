@@ -343,3 +343,8 @@ func get_attack_vfx_data():
 	var vfx_def = VfxLibrary.get_vfx_def(vfx_key, vfx_data, self)
 	return vfx_def
 		
+func get_zone_data(zone_key:String)->Dictionary:
+	var zones = action_data.get("ZoneDatas", {})
+	return zones.get(zone_key, {})
+
+	

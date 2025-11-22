@@ -133,7 +133,7 @@ func set_actor(actor:BaseActor):
 	_actor.stats.attribute_levels[StatHelper.Intelligence] =  0
 	_actor.stats.attribute_levels[StatHelper.Wisdom] =  0
 	
-	total_points = next_level + 3
+	total_points = StatHelper.get_attribute_points_for_level(next_level)
 	var spent_points = (
 		add_values[StatHelper.Strength] +
 		add_values[StatHelper.Agility] +

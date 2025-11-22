@@ -122,20 +122,20 @@ static func get_potential_coor_to_targets(target_params:TargetParameters, actor:
 							#continue
 				if target_params.is_valid_target_actor(actor, target, game_state):
 					if not potential_targets.has(target.Id) and not exclude_targets.has(target.Id):
-						add_to_dicarry(potential_targets, spot, target.Id)
+						_add_to_dicarry(potential_targets, spot, target.Id)
 		
 		if target_params.is_spot_target_type():
 			var target = MapPos.new(spot.x, spot.y, actor_pos.z, actor_pos.dir)
 			if target_params.target_type == TargetParameters.TargetTypes.Spot:
 				if not potential_targets.has(target) and not exclude_targets.has(target):
-					add_to_dicarry(potential_targets, spot, target)
+					_add_to_dicarry(potential_targets, spot, target)
 			if target_params.target_type == TargetParameters.TargetTypes.OpenSpot:
 				if game_state.is_spot_open(target):
 					if not potential_targets.has(target) and not exclude_targets.has(target):
-						add_to_dicarry(potential_targets, spot, target)
+						_add_to_dicarry(potential_targets, spot, target)
 	return potential_targets
 
-static func add_to_dicarry(dict, key, value):
+static func _add_to_dicarry(dict, key, value):
 	if !dict.keys().has(key):
 		dict[key] = []
 	if not dict[key].has(value):
@@ -264,3 +264,34 @@ static func round(val:float)->int:
 	if val - float(floor) > 0.5:
 		return floor + 1
 	return floor
+
+static func rotate_target_area(area, direction)->Array:
+	if area is String:
+		area = JSON.parse_string(area)
+	
+	if MapPos.Directions.has(direction):
+		direction = MapPos.Directions.keys().find(direction)
+	
+	if not area is Array:
+		printerr("TargetHelper.rotate_target_area: Invalid area '%s'." %[area])
+		return [[0,0]]
+	var out_arr = []
+	for spot in area:
+		if not spot is Array:
+			printerr("TargetHelper.rotate_target_area: Invalid spot '%s' in area '%s'." %[spot, area])
+			return [[0,0]]
+		var new_pos = [spot[0], spot[1]]
+		match direction:
+			0: # North
+				new_pos = [spot[0], spot[1]]
+			1: # East
+				new_pos = [-spot[1], spot[0]]
+			2: # South
+				new_pos = [-spot[0], -spot[1]]
+			3: # West
+				new_pos = [spot[1], -spot[0]]
+		if not out_arr.has(new_pos):
+			out_arr.append(new_pos)
+	return out_arr
+		
+	

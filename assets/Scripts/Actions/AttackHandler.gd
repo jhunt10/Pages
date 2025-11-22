@@ -24,8 +24,8 @@ static func handle_attack(
 	damage_datas:Dictionary, 
 	effect_datas:Dictionary,  
 	source_tag_chain:SourceTagChain,
-	target_parameters:TargetParameters,
 	game_state:GameStateData, 
+	is_directionless:bool,
 	attack_from_spot_override:MapPos = null 
 ):
 	# Prep directional data
@@ -58,7 +58,7 @@ static func handle_attack(
 			attack_posision_data[actor.Id]['HasCover'] = los == TargetingHelper.LOS_VALUE.Cover
 			# Has AOE area 
 			#TODO: Decide what defines is_AOE
-			if target_parameters and target_parameters.has_area_of_effect():
+			if is_directionless: #target_parameters and target_parameters.has_area_of_effect():
 				attack_direction = AttackHandler.AttackDirection.AOE
 			else:
 				var defender_awareness = actor.stats.get_stat(StatHelper.Awareness)
@@ -176,16 +176,16 @@ static func handle_attack(
 		# Create Effects
 		# Skip effects if defender died
 		if not defender.is_dead:
-			var effect_immunities = defender.get_effect_immunity()
 			for effect_data_key:String in attack_event.effect_datas.keys():
 				var effect_details:Dictionary = attack_event.effect_datas[effect_data_key]
 				var effect_result:Dictionary = sub_event.applied_effect_datas.get(effect_data_key, {})
 				var effect_key = effect_details.get("EffectKey")
-				# Is immune
-				if effect_immunities.has(effect_key):
+				# If Immune, Pass to VFX cache
+				if effect_result.get("IsImmune", false):
 					vfx_data_cache[defender.Id]['WasImmuneToEffect'] = true
 				elif effect_result.get("WasApplied", false):
 					var effect_data = effect_details.get("EffectData", {})
+					effect_data['AppliedPotency'] = effect_result['AppliedPotency']
 					var effect = EffectHelper.create_effect(defender, attacker, effect_key, effect_data, game_state)
 					if effect:
 						effect_result['AppliedEffectId'] = effect.Id
@@ -225,6 +225,7 @@ static func handle_attack(
 		if attack_vfx_key or attack_vfx_data.get("ScenePath", null):
 			var vfx_source = attacker
 			if attack_from_spot_override:
+				#TODO: I think this is a hack for chaining? Anyway, bad idea
 				var posible_actors = game_state.get_actors_at_pos(attack_from_spot_override)
 				if posible_actors.size() == 1:
 					vfx_source = posible_actors[0]
@@ -262,7 +263,7 @@ static func _roll_for_hit(attack_event:AttackEvent, sub_event:AttackSubEvent):
 	net_accuracy = max(0, net_accuracy)
 		
 	sub_event.hit_chance = net_accuracy / 100.0
-	sub_event.hit_roll = randf()
+	sub_event.hit_roll = Roll.get_roll_for_actor(attack_event.get_attacker())
 	# sub_event.is_miss = [Was invaild Target]
 	sub_event.rolled_evade = sub_event.hit_roll > sub_event.hit_chance
 	
@@ -272,8 +273,7 @@ static func _roll_for_hit(attack_event:AttackEvent, sub_event:AttackSubEvent):
 	else:
 		sub_event.rolled_crit = sub_event.hit_roll < attack_event.attacker_crit_chance
 	
-	var block_roll = randf()
-	sub_event.rolled_blocked = block_roll < sub_event.defender_block_chance
+	sub_event.rolled_blocked = Roll.for_actor(sub_event.get_defender(), sub_event.defender_block_chance)
 	
 	if attack_event.attack_details.get("AutoHit", false):
 		sub_event.rolled_evade = false
@@ -335,37 +335,44 @@ static func _roll_for_effects(attacker:BaseActor, defender:BaseActor, attack_eve
 	
 	for attack_effect_key in attack_event.effect_datas.keys():
 		var attack_effect_data = attack_event.effect_datas[attack_effect_key]
+		var conditions = attack_effect_data.get("Conditions", {})
+		
 		# Attack was blocked
 		if sub_event.is_blocked and not attack_effect_data.get("ApplyOnBlock"):
 			continue
 		# Attack was evaded
 		if sub_event.is_evade and not attack_effect_data.get("ApplyOnEvade"):
 			continue
-		# Effect does not apply to defender
-		if not _can_effect_apply(attack_effect_data, attacker, defender, attack_event, sub_event ):
+			
+		# Check if defender is enemy / ally
+		var faction_filter = conditions.get("DefenderFactionFilters", [])
+		if not TagHelper.check_faction_filter(attack_event.attacker_id, attack_event.attacker_faction, faction_filter, defender):
 			continue
+		
+		# Check if defener has required tags
+		var source_tag_filters = conditions.get("DefenderTagFilters", [])
+		for source_tag_filter in source_tag_filters:
+			if not SourceTagChain.filters_accept_tags(source_tag_filter, attack_event.source_tag_chain.get_all_tags()):
+				continue
+		# Roll for application chance
 		var chance_to_apply = attack_effect_data.get("ApplicationChance", 1)
+		if not Roll.for_actor(attacker, chance_to_apply):
+			continue
+			
 		var application_chance = (1-float(net_protection)/100.0) * chance_to_apply
-		var roll = randf()
-		var applied = roll < application_chance
+		var roll = Roll.get_roll_for_actor(attacker, application_chance)
+		
+		# Check Immunity (Don't skip, because we still want to show "Immune" message)
+		var effect_immunities = defender.get_effect_immunity()
+		
 		sub_event.applied_effect_datas[attack_effect_key] = {
-			'WasApplied': applied,
+			'WasApplied': roll <= application_chance,
 			'ApplicationRoll': roll,
 			'ApplicationChance': application_chance,
-			'NetProtection': net_protection
+			'NetProtection': net_protection,
+			'AppliedPotency': attacker_potency * attack_potency_mod,
+			'IsImmune': effect_immunities.has(attack_effect_key)
 		}
-
-static func  _can_effect_apply(attack_effect_data:Dictionary, attacker:BaseActor, defender:BaseActor, attack_event:AttackEvent, sub_event:AttackSubEvent):
-	var conditions = attack_effect_data.get("Conditions", {})
-	var faction_filter = conditions.get("DefenderFactionFilters", [])
-	if not TagHelper.check_faction_filter(attack_event.attacker_id, attack_event.attacker_faction, faction_filter, defender):
-		return false
-	var source_tag_filters = conditions.get("DefenderTagFilters", [])
-	for source_tag_filter in source_tag_filters:
-		if not SourceTagChain.filters_accept_tags(source_tag_filter, attack_event.source_tag_chain.get_all_tags()):
-			return false
-	return true
-
 
 ## Returns true if Attacker, Defenders, and SourceTagChain meet all requirements of Conditions
 static func _does_attack_mod_apply(attack_mod, attacker, defenders, source_tag_chain:SourceTagChain, attack_posision_data:Dictionary)->bool:

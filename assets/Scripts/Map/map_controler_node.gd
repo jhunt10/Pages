@@ -81,7 +81,7 @@ func _get_random_enemy_key()->String:
 	var enemy_set = {}
 	for enemy_key in enemy_data:
 		enemy_set[enemy_key] = enemy_data[enemy_key].get("Weight", -1)
-	var actor_key = RandomHelper.roll_from_set(enemy_set)
+	var actor_key = Roll.from_set(enemy_set)
 	return actor_key
 	
 

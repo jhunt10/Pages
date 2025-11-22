@@ -307,9 +307,6 @@ func add_zone(zone:BaseZone):
 	zone.node = new_node
 	GameState.add_zone(zone)
 	MapController.add_zone_node(zone, new_node)
-	for spot in zone.get_area():
-		for actor in GameState.get_actors_at_pos(spot):
-			zone.on_actor_enter(actor, GameState)
 
 func remove_zone(zone):
 	if zone is String:

@@ -31,7 +31,7 @@ static func create_effect(
 	
 	var effect_def = EffectLibrary.get_merged_effect_def(effect_key, effect_data)
 	var eff_data = effect_def.get("EffectData", {}) 
-	var effect_details = eff_data.get("EffectDetails", {})
+	var effect_details = effect_def.get("EffectDetails", {})
 	var effect_potency = effect_def.get("AppliedPotency", 1)
 	
 	# Build Id
@@ -77,8 +77,9 @@ static func create_effect(
 			var lowest_potency_val = effect_potency
 			var lowest_potency_effect = null
 			for limited_effect:BaseEffect in existing_effects_on_actor:
-				if limited_effect.applied_potency < lowest_potency_val:
-					lowest_potency_val = limited_effect.applied_potency
+				var other_pot = limited_effect.get_applied_potency()
+				if other_pot < lowest_potency_val:
+					lowest_potency_val = other_pot
 					lowest_potency_effect = limited_effect
 			if lowest_potency_effect != null:
 				limited_effect_to_remove = lowest_potency_effect

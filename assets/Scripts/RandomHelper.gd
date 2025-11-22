@@ -1,14 +1,25 @@
-class_name RandomHelper
+class_name Roll
 
 static func roll()->float:
 	return randf()
 
-static func roll_for_chance(odds:float)->float:
+static func for_chance(odds:float, want_low:bool=true)->bool:
 	var roll = randf()
-	print("RanRoll: %s < %s" % [roll, odds])
 	return roll <= odds
 
-static func get_random_actor_from_list(actor_list, want_to_be_selected=false)->BaseActor:
+static func for_actor(actor:BaseActor, odds:float, want_low:bool=true)->bool:
+	var roll = get_roll_for_actor(actor, want_low)
+	print("Roll: %s / %s" % [roll, odds])
+	if want_low:
+		return roll <= odds
+	else:
+		return roll >= odds
+
+static func get_roll_for_actor(actor:BaseActor, want_low:bool=true)->float:
+	var roll = randf()
+	return roll
+
+static func random_actor_from_list(actor_list, want_to_be_selected=false)->BaseActor:
 	var actors = {}
 	var actor_weights = {}
 	for actor in actor_list:
@@ -17,10 +28,10 @@ static func get_random_actor_from_list(actor_list, want_to_be_selected=false)->B
 		if actor and actor is BaseActor:
 			actors[actor.Id] = actor
 			actor_weights[actor.Id] = 1
-	var selected_id = roll_from_set(actor_weights)
+	var selected_id = from_set(actor_weights)
 	return actors[selected_id]
 
-static func select_random_targets(parent_action:PageItemAction, actor:BaseActor, selection_data:TargetSelectionData, select_count:int, want_to_be_selected:bool=false)->Array:
+static func random_targets(parent_action:PageItemAction, actor:BaseActor, selection_data:TargetSelectionData, select_count:int, want_to_be_selected:bool=false)->Array:
 	var out_array = []
 	var options = selection_data.list_potential_targets()
 	if options.size() == 0:
@@ -32,7 +43,7 @@ static func select_random_targets(parent_action:PageItemAction, actor:BaseActor,
 	return out_array
 	
 
-static func select_random_target(parent_action:PageItemAction, actor:BaseActor, selection_data:TargetSelectionData, want_to_be_selected:bool=false):
+static func random_target(parent_action:PageItemAction, actor:BaseActor, selection_data:TargetSelectionData, want_to_be_selected:bool=false):
 	var out_array = []
 	var options = selection_data.list_potential_targets()
 	if options.size() == 0:
@@ -44,7 +55,7 @@ static func select_random_target(parent_action:PageItemAction, actor:BaseActor, 
 	return options[roll]
 
 # Takes a dictionary of <Key, Weight> and returns a weighted random key
-static func roll_from_set(data_set:Dictionary)->String:
+static func from_set(data_set:Dictionary)->String:
 	var max_val:int = 0
 	for weight in data_set.values():
 		max_val += weight

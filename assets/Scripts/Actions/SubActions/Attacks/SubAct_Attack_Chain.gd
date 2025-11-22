@@ -103,8 +103,8 @@ func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, que_exe_d
 			damage_datas, 
 			effect_datas, 
 			tag_chain, 
-			target_params,
 			game_state,
+			target_params.has_area_of_effect(),
 			override_origin_pos)
 		last_target = target
 	

@@ -71,6 +71,15 @@ func get_pos()->MapPos:
 func get_area()->Array:
 	return _area_matrix.to_map_spots(get_pos())
 
+func list_actors_in_zone(game_state:GameStateData)->Array:
+	var out_list = []
+	for spot in get_area():
+		for actor in game_state.get_actors_at_pos(spot):
+			if not out_list.has(actor):
+				out_list.append(actor)
+	return out_list
+	
+
 func _on_duration_tick():
 	self._duration -= 1
 	if _duration <= 0:

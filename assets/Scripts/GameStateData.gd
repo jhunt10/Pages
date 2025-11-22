@@ -157,6 +157,7 @@ func add_zone(zone:BaseZone):
 		return
 	_zones[zone.Id] = zone
 	map_data.add_zone(zone)
+	# Call on_actor_enter for Actors already inside the Zone
 	for actor in map_data.get_actors_in_zone(zone.Id):
 		zone.on_actor_enter(actor, self)
 

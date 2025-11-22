@@ -88,3 +88,6 @@ func dictialize_self()->Dictionary:
 	for damage_event_key in damage_events.keys():
 		data["damage_events"][damage_event_key] = damage_events[damage_event_key].dictialize_self()
 	return data
+
+func get_defender()->BaseActor:
+	return ActorLibrary.get_actor(defending_actor_id)

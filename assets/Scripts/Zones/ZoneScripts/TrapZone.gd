@@ -14,6 +14,16 @@ func _init(source:SourceTagChain, data:Dictionary, center:MapPos, area:AreaMatri
 
 func on_actor_enter(actor:BaseActor, game_state:GameStateData):
 	if _is_armed:
+		AttackHandler.handle_attack(
+			get_source_actor(),
+			[actor],
+			_data.get("AttackDetails", {}),
+			_data.get("DamageDatas"),
+			_data.get("EffectDatas", {}),
+			_source, 
+			game_state,
+			true
+		)
 		#DamageHelper.handle_attack(
 			#get_source_actor(), 
 			#actor, 

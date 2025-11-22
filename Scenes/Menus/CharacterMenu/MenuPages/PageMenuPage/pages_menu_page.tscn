@@ -128,11 +128,12 @@ self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 
 [node name="ColorRect" type="ColorRect" parent="VBoxContainer"]
-custom_minimum_size = Vector2(0, 2)
+custom_minimum_size = Vector2(0, 4)
 layout_mode = 2
 color = Color(0.470588, 0, 0, 1)
 
 [node name="ActionInputPreview" type="HBoxContainer" parent="VBoxContainer" node_paths=PackedStringArray("edit_button", "spacer", "premade_page_icon")]
+visible = false
 layout_mode = 2
 script = ExtResource("9_l0o1k")
 edit_button = NodePath("EditButton")
@@ -168,6 +169,7 @@ expand_mode = 1
 stretch_mode = 3
 
 [node name="ColorRect2" type="ColorRect" parent="VBoxContainer"]
+self_modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(0, 2)
 layout_mode = 2
 color = Color(0.470588, 0, 0, 1)

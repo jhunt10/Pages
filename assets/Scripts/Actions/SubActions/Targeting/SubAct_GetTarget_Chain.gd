@@ -106,7 +106,7 @@ func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, metadata:
 			#elif current_target_count >= max_chain_count:
 				#return BaseSubAction.Success
 			#else:
-				#var possible_targets = RandomHelper.select_random_targets(parent_action, actor, selection_data, fork_count)
+				#var possible_targets = Roll.random_targets(parent_action, actor, selection_data, fork_count)
 				#if not possible_targets.size() == 0:
 					#printerr("SubAct_GetTarget_Chain: Failed to select random target")
 					#return BaseSubAction.Failed
@@ -155,7 +155,7 @@ static func _get_target_chain(parent_action, attacker, start_actor, target_param
 			selected_targets.values(), 
 			override_pos
 		)
-		var next_targets = RandomHelper.select_random_targets(parent_action, attacker, selection_data, fork_count, false)
+		var next_targets = Roll.random_targets(parent_action, attacker, selection_data, fork_count, false)
 		for next_targ in next_targets:
 			working_targets.append(next_targ)
 			if selected_targets.size() < max_count:

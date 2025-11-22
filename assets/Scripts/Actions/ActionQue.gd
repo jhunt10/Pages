@@ -357,8 +357,7 @@ func try_consume_page_ammo(action_key:String)->bool:
 		return false
 	var free_chance = ammo_data.get("FreeChance", 0)
 	if free_chance > 0:
-		var roll = RandomHelper.roll()
-		if roll <= free_chance:
+		if Roll.for_actor(actor, free_chance):
 			return true
 	ammo_data["Value"] = max(ammo_data["Value"] - ammo_data["Cost"], 0)
 	ammo_changed.emit(action_key)

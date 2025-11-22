@@ -95,3 +95,6 @@ func get_sub_event_for_defender(defender_or_id)->AttackSubEvent:
 	if defender_or_id is BaseActor:
 		defender_or_id = defender_or_id.Id
 	return sub_events.get(defender_or_id) 
+
+func get_attacker()->BaseActor:
+	return ActorLibrary.get_actor(attacker_id)

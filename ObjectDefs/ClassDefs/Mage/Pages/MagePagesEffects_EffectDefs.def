@@ -1,0 +1,60 @@
+{
+    "PoisonZoneEffect": {
+        "!ObjectScript": "res://assets/Scripts/Actors/Effects/BaseEffect.gd",
+        "#ObjDetails": {
+            "Description": "Take @@#DmgData:EffectDamage@@ at the end of each @@#Color:Red:Turn@@.",
+            "DisplayName": "Poison Gas",
+            "LargeIcon": "Sprites/PoisonZone_Icon.png",
+            "ObjectType": "Effect",
+            "SmallIcon": "Sprites/PoisonZone_Icon.png",
+            "SnippetDesc": "Take Poison Damage at the End of Turn.",
+            "Tags": [
+                "Mag",
+                "Effect"
+            ],
+            "Taxonomy": [
+                "Effect"
+            ]
+        },
+        "EffectData": {
+            "DamageDatas": {
+                "EffectDamage": {
+                    "AtkPwrBase": 15,
+                    "AtkPwrRange": 3,
+                    "AtkPwrScale": 1,
+                    "AtkStat": "MagAttack",
+                    "DamageType": "Poison",
+                    "DamageVfxData": {
+                        "ShakeActor": false
+                    },
+                    "DamageVfxKey": "Poison_DamageEffect",
+                    "DefenseType": "Ward"
+                }
+            },
+            "EffectDetails": {
+                "AddTagsToActor": [
+                ],
+                "CanStack": false,
+                "DeleteAfterCombat": true,
+                "DurationData": {
+                },
+                "IsBad": true,
+                "IsGood": false,
+                "ShowCounter": false,
+                "ShowInHud": true
+            },
+            "StatMods": {
+            },
+            "SubEffects": {
+                "ApplyDamage": {
+                    "DamageKey": "EffectDamage",
+                    "OptionalTriggers": [
+                        "OnActionEnd"
+                    ],
+                    "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/Damage/SubEffect_ApplyDotDamage.gd"
+                }
+            }
+        },
+        "_DefVersion": "1"
+    }
+}

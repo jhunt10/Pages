@@ -1,0 +1,57 @@
+{
+    "BaseTotem_Actor": {
+        "!ObjectScript": "res://assets/Scripts/Actors/BaseActor.gd",
+        "!ParentKey": "#BaseActor",
+        "#ObjDetails": {
+            "Description": "A simple totem to shoot spells at enemies.",
+            "DisplayName": "Totem",
+            "LargeIcon": "Sprites/Totem_Icon.png",
+            "ObjectType": "Actor",
+            "SmallIcon": "Sprites/Totem_Icon.png",
+            "SnippetDesc": "a totem",
+            "Tags": [
+                "Totem"
+            ],
+            "Taxonomy": [
+                "Actor"
+            ]
+        },
+        "ActorData":{
+            "StaticTargetMods":[
+                {
+                    "MakeOmniDirrectional": true
+                }
+            ]
+        },
+        "AiData": {
+            "PrebuiltQueArr": [
+                "FireRangedSpell",
+                "FireRangedSpell",
+                "FireRangedSpell",
+                "FireRangedSpell"
+            ]
+        },
+        "ScenePath": "res://Scenes/Combat/MapObjects/Actors/SimpleActorNode/simple_actor_node.tscn",
+        "SpriteFrameWH": [
+            12,
+            4
+        ],
+        "SpriteOffset": [
+            0,
+            0
+        ],
+        "SpriteSheet": "Sprites/Totem_SpriteSheet.png",
+        "Stats": {
+            "Armor": 0,
+            "Ward": 0,
+            "HealthMax": 50,
+            "BlockChance": 0,
+            "BlockMod": 0,
+            "Evasion": 0,
+            "Mass": 100,
+            "Speed": 0,
+            "PPR": 4
+        },
+        "_DefVersion": "1"
+    }
+}

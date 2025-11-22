@@ -283,7 +283,7 @@ func _page_button_pressed(_index, key_name):
 		return
 	var action:PageItemAction = _actor.pages.get_action_page(key_name)
 	var on_que_options = action.get_on_que_options(_actor, CombatRootControl.Instance.GameState)
-	if on_que_options.size() > 0:
+	if on_que_options and on_que_options.size() > 0:
 		CombatUiControl.Instance.ui_state_controller.open_options_menu(_actor, "OnQueOption", on_que_options, action.ActionKey)
 		#on_que_options_menu.visible = true
 		##on_que_options_menu.position = get_local_mouse_position()# _buttons[index].position + Vector2(_buttons[index].size.x,0)

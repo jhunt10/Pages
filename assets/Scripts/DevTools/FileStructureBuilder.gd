@@ -1,6 +1,23 @@
 class_name FileStructureBuilder
 
 
+
+
+
+
+
+static func DoThing():
+	print("\nSanity Check")
+	#update_def_files()
+	get_common_props_in_files()
+	#create_class_def_files("Rogue")
+	#rename_test_files()
+
+
+
+
+
+
 static func create_class_def_files(thing_name:String):
 	var base_file_path = "res://ObjectDefs/ClassDefs/"
 	var class_dir_path = base_file_path.path_join(thing_name)
@@ -232,15 +249,6 @@ static func deep_merge_dicts(main:Dictionary, other:Dictionary):
 			if val is Dictionary:
 				deep_merge_dicts(main[key], val)
 
-
-
-
-static func DoThing():
-	print("\nSanity Check")
-	#update_def_files()
-	#get_common_props_in_files()
-	#create_class_def_files("Rogue")
-	rename_test_files()
 
 
 

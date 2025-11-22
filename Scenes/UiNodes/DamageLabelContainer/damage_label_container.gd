@@ -134,7 +134,7 @@ func set_damage_data(damage_data:Dictionary, actor:BaseActor = null,  count = 1)
 		variant_label.hide()
 		percent_label.hide()
 		vs_lable.hide()
-		damage_type_label.text = "Weapon Damage"
+		damage_type_label.text = "Wpn"
 		if attack_scale != 1:
 			damage_type_label.text += " X " + str(attack_scale)
 		multiplier_label.hide()

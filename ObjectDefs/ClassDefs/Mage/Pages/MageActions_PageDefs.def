@@ -452,15 +452,15 @@
         },
         "_DefVersion": "1"
     },
-    "OLD_FireZoneSpell": {
+    "FireZoneSpell": {
         "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
-        "!ParentKey": "#BaseZoneSpell",
+        "!ParentKey": "#BaseAttackZoneSpell",
         "#ObjDetails": {
-            "Description": "Create a Zone of Fire",
+            "Description": "Create a Zone of Fire which last for @@#ZoneData:Zone1:Duration@@. All Actors in the Zone take @@#DmgData:ZoneDamage@@ at @@#Color:Red:End of Turn@@.\n\n-\"The floor is lava!\"",
             "DisplayName": "Fire Zone",
-            "LargeIcon": "Sprites/FireZone.png",
+            "LargeIcon": "Sprites/FireZone_Icon.png",
             "ObjectType": "Item",
-            "SmallIcon": "Sprites/FireZone.png",
+            "SmallIcon": "Sprites/FireZone_Icon.png",
             "SnippetDesc": "Create a Zone of Fire",
             "Tags": [
                 "Fire"
@@ -474,11 +474,21 @@
         "ActionData": {
             "AttackDetails": {
                 "AccuracyMod": 1,
-                "PotencyMod": 1
+                "PotencyMod": 1,
+                "AutoHit": true,
+                "ActionVerb": "'s FireZone attacked"
+            },
+            "DamageDatas": {
+                "ZoneDamage": {
+                    "AtkPwrBase": 10,
+                    "AtkPwrRange": 3,
+                    "AtkPwrScale": 1,
+                    "DamageType": "Fire"
+                }
             },
             "EffectDatas": {
                 "Effect1": {
-                    "ApplicationChance": 1,
+                    "ApplicationChance": 0.2,
                     "EffectKey": "AilmentBurned",
                     "ShowCounter": false,
                     "SubEffects": {
@@ -490,11 +500,66 @@
             },
             "ZoneDatas": {
                 "Zone1": {
-                    "Duration": 20,
-                    "DurationType": "Turn",
+                    "Duration": 2,
+                    "DurationType": "Round",
                     "InZoneEffectDataKey": "Effect1",
-                    "TileSet": "Sprites/FireZone_TileSheet.png",
+                    "ReapplyEffectOnEnter": true,
+                    "RemoveEffectOnLeave": false,
+                    "TileSet": "SpriteSheets/FireZone_TileSheet.png",
+                    "ZoneScenePath": "res://Scenes/Combat/MapObjects/Zones/zone_node.tscn",
                     "ZoneKey": "Zone1"
+                }
+            }
+        },
+        "ItemData": {
+            "ItemType": "Page",
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "PageData": {
+            "PageRequirements": {
+                "ConflictingPages": [],
+                "IncompatiblePages": [],
+                "TitleReq": "Match"
+            },
+            "SourceTitle": "Mage"
+        },
+        "_DefVersion": "1"
+    },
+    "PoisonZoneSpell": {
+        "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
+        "!ParentKey": "#BaseEffectZoneSpell",
+        "#ObjDetails": {
+            "Description": "Spawn a cloud of Poison gas which lingers for @@#ZoneData:Zone1:Duration@@. Actors within the Zone are inflicted with @@#EftData:InZoneEffect:Name@@.\n\n@@#EftData:InZoneEffect@@",
+            "DisplayName": "Poison Cloud",
+            "LargeIcon": "Sprites/PoisonZone_Icon.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/PoisonZone_Icon.png",
+            "SnippetDesc": "Create a Zone of Poison",
+            "Tags": [
+                "Poison"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Page",
+                "Action"
+            ]
+        },
+        "ActionData": {
+            "AttackDetails": {
+                "AccuracyMod": 1,
+                "PotencyMod": 1,
+                "AutoHit": true
+            },
+            "EffectDatas": {
+                "InZoneEffect": {
+                    "EffectKey": "PoisonZoneEffect"
+                }
+            },
+            "ZoneDatas": {
+                "Zone1": {
+                    "InZoneEffectDataKey": "InZoneEffect",
+                    "ZoneScenePath": "res://Scenes/Combat/MapObjects/Zones/cloud_zone_node.tscn"
                 }
             }
         },
@@ -653,14 +718,14 @@
         "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
         "!ParentKey": "#BaseMissileSpell",
         "#ObjDetails": {
-            "Description": "Launch a @@#Color:Iceball Missile@@ at @@#TrgParm:TargetParam:TargetType@@ in range, dealing @@#DmgData:MissileDamage@@ to @@#Color:Red:Actor@@ in @@#Color:Red:Spot@@. On impact the ball shatters launching more @@#Color:Missiles@@ at @@#Color:Red:Adj Spots@@, dealing @@#DmgData:SubMissileDamage@@ on hit.\n\n-One of many spells banned from all professional water balloon fighting tournaments.",
+            "Description": "Launch a @@#Color:Waterball Missile@@ at @@#TrgParm:TargetParam:TargetType@@ in range, dealing @@#DmgData:MissileDamage@@ to @@#Color:Red:Actor@@ in @@#Color:Red:Spot@@. On impact the ball shatters launching more @@#Color:Missiles@@ at @@#Color:Red:Adj Spots@@, dealing @@#DmgData:SubMissileDamage@@ on hit.\n@@#EftChances@@\n-One of many spells banned from professional water balloon fights.",
             "DisplayName": "Water Ball",
             "LargeIcon": "Sprites/WaterBall_Icon.png",
             "ObjectType": "Item",
             "SmallIcon": "Sprites/WaterBall_Icon.png",
             "SnippetDesc": "Launch a Water Ball Missile",
             "Tags": [
-                "Cold"
+                "Water"
             ],
             "Taxonomy": [
                 "Item",
@@ -716,11 +781,11 @@
                         "SpriteSheetWidth": 2
                     },
                     "MissileVfxKey": "",
-                    "SubMissileDamageKey": "Damage2",
+                    "SubMissileDamageKey": "SubMissileDamage",
                     "SubMissileKey": "Missile2"
                 },
                 "SubMissile": {
-                    "DamageDataKey": "Damage2",
+                    "DamageDataKey": "SubMissileDamage",
                     "FramesPerTile": 6,
                     "IgnoreAOE": true,
                     "ImpactVfxKey": "",
@@ -781,14 +846,15 @@
     "WaterBeamSpell": {
         "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
         "#ObjDetails": {
-            "Description": "Spawn a @@#Color:Beam@@ of water, hitting @@#Color:Red:All Actors@@ in a @@#Color:Red:Line@@ in front of you and dealing @@#DmgData:WaterBeamDamage@@.\n\n-Also great for power washing off the blood left behind from power washing enemies.",
+            "Description": "Spawn a @@#Color:Beam@@ of water, hitting @@#Color:Red:All Actors@@ in a @@#Color:Red:Line@@ in front of you and dealing @@#DmgData:WaterBeamDamage@@.\n\n-Also great for power washing the blood left behind after power washing enemies.",
             "DisplayName": "Water Beam",
             "LargeIcon": "Sprites/WaterBeam.png",
             "ObjectType": "Item",
             "SmallIcon": "Sprites/WaterBeam.png",
             "SnippetDesc": "Spawn Piercing Beam of Water.",
             "Tags": [
-                "Beam"
+                "Beam",
+                "Water"
             ],
             "Taxonomy": [
                 "Item",
@@ -808,7 +874,7 @@
                     "AtkPwrScale": 1,
                     "AtkStat": "MagAttack",
                     "BaseDamage": 0,
-                    "DamageType": "Pierce",
+                    "DamageType": "Cold",
                     "DamageVfxData": {
                         "Scale": 1
                     },
