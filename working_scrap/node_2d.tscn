@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=3 uid="uid://b7s8qdgtf3kxy"]
+
+[sub_resource type="Gradient" id="Gradient_7d3pv"]
+offsets = PackedFloat32Array(0, 0.343284, 0.839552, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 0.501961, 0.501961, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="Gradient" id="Gradient_fcvj2"]
+offsets = PackedFloat32Array(0, 0.492537, 1)
+colors = PackedColorArray(1, 0, 0, 1, 1, 0.264925, 0, 1, 1, 1, 0, 1)
+
+[node name="Node2D" type="Node2D"]
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 500
+one_shot = true
+explosiveness = 0.1
+randomness = 1.0
+lifetime_randomness = 0.3
+fixed_fps = 30
+direction = Vector2(0, -1)
+gravity = Vector2(0, 0)
+initial_velocity_min = 50.0
+initial_velocity_max = 50.0
+angle_min = -30.0
+angle_max = 30.0
+color_ramp = SubResource("Gradient_7d3pv")
+color_initial_ramp = SubResource("Gradient_fcvj2")

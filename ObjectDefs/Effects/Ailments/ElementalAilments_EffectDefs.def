@@ -68,10 +68,6 @@
                     "AllStatMods": true,
                     "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_ModStat.gd"
                 },
-                "Duration": {
-                    "DurationType": "TurnEnd",
-                    "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_Duration.gd"
-                },
                 "RemoveChilled": {
                     "RemoveEffectKeys": [
                         "AilmentChilled",
@@ -163,10 +159,6 @@
                     "AllStatMods": true,
                     "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_ModStat.gd"
                 },
-                "Duration": {
-                    "DurationType": "TurnEnd",
-                    "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_Duration.gd"
-                },
                 "RemoveBurned": {
                     "RemoveEffectKeys": [
                         "AilmentBurned"
@@ -236,10 +228,6 @@
                 },
                 "CancelActions": {
                     "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/Ailments/SubEffect_Frozen.gd"
-                },
-                "Duration": {
-                    "DurationType": "TurnEnd",
-                    "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_Duration.gd"
                 },
                 "RemoveChilled": {
                     "RemoveEffectKeys": [
@@ -314,10 +302,6 @@
                     ],
                     "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/Damage/SubEffect_ApplyDotDamage.gd"
                 },
-                "Duration": {
-                    "DurationType": "TurnEnd",
-                    "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_Duration.gd"
-                },
                 "VfxEffect": {
                     "AilmentKey": "Poisoned",
                     "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/Ailments/SubEffect_AlimentVfx.gd"
@@ -382,10 +366,6 @@
                         "OnTurnEnd"
                     ],
                     "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/Ailments/SubEffect_Shocked.gd"
-                },
-                "Duration": {
-                    "DurationType": "TurnEnd",
-                    "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_Duration.gd"
                 },
                 "VfxEffect": {
                     "AilmentKey": "Shocked",

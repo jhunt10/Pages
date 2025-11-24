@@ -43,10 +43,6 @@
                 }
             },
             "SubEffects": {
-                "Duration": {
-                    "DurationType": "TurnEnd",
-                    "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_Duration.gd"
-                },
                 "ModStat": {
                     "AllStatMods": true,
                     "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_ModStat.gd"
@@ -223,10 +219,6 @@
                 }
             },
             "SubEffects": {
-                "Duration": {
-                    "DurationType": "TurnEnd",
-                    "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_Duration.gd"
-                },
                 "ModStat": {
                     "AllStatMods": true,
                     "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_ModStat.gd"
@@ -454,11 +446,7 @@
                             }
                         ]
                     },
-                    "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_Duration.gd"
-                },
-                "Duration": {
-                    "DurationType": "TurnEnd",
-                    "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_Duration.gd"
+                    "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/Damage/SubEffect_AddedDamage.gd"
                 },
                 "ModStat": {
                     "AllStatMods": true,
@@ -608,10 +596,6 @@
                 "ShowInHud": true
             },
             "SubEffects": {
-                "Duration": {
-                    "DurationType": "TurnEnd",
-                    "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_Duration.gd"
-                },
                 "ModStat": {
                     "AllStatMods": true,
                     "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_ModStat.gd"

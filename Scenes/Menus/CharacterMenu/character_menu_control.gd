@@ -202,7 +202,9 @@ func on_actor_tab_selected(actor:BaseActor):
 func show_menu():
 	load_start_time = Time.get_ticks_msec()
 	var actor = null
-	if _actor_id != '' and ActorLibrary.has_actor(_actor_id):
+	if CombatRootControl.Instance:
+		actor = CombatRootControl.Instance.get_current_player_actor()
+	elif _actor_id != '' and ActorLibrary.has_actor(_actor_id):
 		actor = ActorLibrary.get_actor(_actor_id)
 	else:
 		actor = StoryState.get_party_actor_by_index(0)
@@ -458,8 +460,10 @@ func on_tab_pressed(tab_name:String):
 		inventory_container.set_character_menu_context("Supplies")
 		#inventory_tabs_control.set_tabs(["Potion", "Bomb"])
 		
-	# Show Inventory on any tab change
-	inventory_container.show()
-	stats_page.hide()
-	inventory_tab_rect.hide()
-	stats_tab_rect.show()
+	
+	if equip_mode:
+		# Show Inventory on any tab change
+		inventory_container.show()
+		stats_page.hide()
+		inventory_tab_rect.hide()
+		stats_tab_rect.show()

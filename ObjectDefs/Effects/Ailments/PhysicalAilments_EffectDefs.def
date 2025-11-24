@@ -50,10 +50,6 @@
                         "OnActionEnd"
                     ],
                     "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/Damage/SubEffect_ApplyDotDamage.gd"
-                },
-                "Duration": {
-                    "DurationType": "TurnEnd",
-                    "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_Duration.gd"
                 }
             }
         },
@@ -108,10 +104,6 @@
                 "ApplyStatMod": {
                     "AllStatMods": true,
                     "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_ModStat.gd"
-                },
-                "Duration": {
-                    "DurationType": "TurnEnd",
-                    "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_Duration.gd"
                 }
             }
         },
@@ -256,10 +248,6 @@
                 "ApplyStatMod": {
                     "AllStatMods": true,
                     "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_ModStat.gd"
-                },
-                "Duration": {
-                    "DurationType": "TurnEnd",
-                    "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_Duration.gd"
                 },
                 "GreaseEffect": {
                     "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/Ailments/SubEffect_Greased.gd"

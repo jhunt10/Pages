@@ -100,6 +100,7 @@ func remove_effect(effect:BaseEffect, supress_signal:bool=false):
 		if not _remove_effect_queue.has(effect.Id):
 			_remove_effect_queue.append(effect.Id)
 		return
+	
 	_removing_effect_id = effect.Id
 	if !_effects.has(_removing_effect_id):
 		printerr("Unknown effect: " + _removing_effect_id)

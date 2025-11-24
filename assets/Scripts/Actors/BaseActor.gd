@@ -30,7 +30,7 @@ var Que:ActionQue
 var sprite:ActorSpriteHolder
 var stats:StatHolder
 var effects:EffectHolder
-var items:BagItemHolder
+var items:SupplyHolder
 var equipment:EquipmentHolder
 var pages:PageHolder
 var aggro:AggroHandler
@@ -72,7 +72,7 @@ func _init(key:String, load_path:String, def:Dictionary, id:String, data:Diction
 	effects = EffectHolder.new(self)
 	#details = ObjectDetailsData.new(_def_load_path, _def.get("#ObjDetails", {}))
 	equipment = EquipmentHolder.new(self)
-	items = BagItemHolder.new(self)
+	items = SupplyHolder.new(self)
 	pages = PageHolder.new(self)
 	
 	# Que requires info from Pages and Equipment so must be inited after item validation
