@@ -417,7 +417,7 @@
             "SubActions": {
                 "GetTarget": {
                     "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Targeting/SubAct_GetTarget.gd",
-                    "#FrameIndex": 11,
+                    "#FrameIndex": 8,
                     "#SubIndex": 0,
                     "AllowAutoTarget": false,
                     "SetTargetKey": "Target1",
@@ -425,15 +425,25 @@
                 },
                 "PayCost": {
                     "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Misc/SubAct_PayCost.gd",
-                    "#FrameIndex": 11,
+                    "#FrameIndex": 8,
                     "#SubIndex": 1
+                },
+                "StartTeleportAnimation": {
+                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_TeleportAnimation_Start.gd",
+                    "#FrameIndex": 9,
+                    "#SubIndex": 0
                 },
                 "Teleport": {
                     "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Movement/SubAct_Teleport.gd",
                     "#FrameIndex": 11,
-                    "#SubIndex": 2,
+                    "#SubIndex": 0,
                     "DestRelativePos": "[0, 1, 0, 0]",
                     "TargetDestKey": "Target1"
+                },
+                "EndTeleportAnimation": {
+                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_TeleportAnimation_Start.gd",
+                    "#FrameIndex": 12,
+                    "#SubIndex": 0
                 }
             },
             "TargetParams": {
@@ -532,6 +542,76 @@
                 "TitleReq": "Match"
             },
             "SourceTitle": "Rogue"
+        },
+        "_DefVersion": "1"
+    },
+    "JumpOverAction": {
+        "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
+        "#ObjDetails": {
+            "Description": "Teleport Forward two spots",
+            "DisplayName": "Jump Over",
+            "LargeIcon": "Sprites/JumpOver_Icon.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/JumpOver_Icon.png",
+            "SnippetDesc": "Teleport Forward two spots",
+            "Tags": [
+                "Movement"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Page",
+                "Action",
+                "Movement",
+                "Teleport"
+            ]
+        },
+        "ActionData": {
+            "AmmoData": {
+                "AmmoType": "Abn",
+                "Clip": 2,
+                "Cost": 1
+            },
+            "Preview": {
+                "PreviewMoveOffset": "[0, -2, 0, 0]"
+            },
+            "SubActions": {
+                "Move": {
+                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Movement/SubAct_Move.gd",
+                    "#FrameIndex": 11,
+                    "#SubIndex": 0,
+                    "MovementType": "Telport",
+                    "PlayWalkin": false,
+                    "RelativePos": "[0, -2, 0, 0]"
+                },
+                "PayCost": {
+                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Misc/SubAct_PayCost.gd",
+                    "#FrameIndex": 8,
+                    "#SubIndex": 1
+                },
+                "StartTeleportAnimation": {
+                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_TeleportAnimation_Start.gd",
+                    "#FrameIndex": 9,
+                    "#SubIndex": 0
+                },
+                "EndTeleportAnimation": {
+                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_TeleportAnimation_Start.gd",
+                    "#FrameIndex": 12,
+                    "#SubIndex": 1
+                }
+            }
+        },
+        "ItemData": {
+            "ItemType": "Page",
+            "Rarity": "Mundane",
+            "Value": 50
+        },
+        "PageData": {
+            "PageRequirements": {
+                "ConflictingPages": [],
+                "IncompatiblePages": [],
+                "TitleReq": "None"
+            },
+            "SourceTitle": ""
         },
         "_DefVersion": "1"
     }

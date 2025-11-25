@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://c2wc0sjypm6do"]
 
-[ext_resource type="Script" path="res://assets/Scripts/VFXs/ParticalVfxs/partical_vfx_node.gd" id="1_m0e0y"]
-[ext_resource type="Texture2D" uid="uid://br5o2y7ga8sgq" path="res://defs/Effects/Ailments/Sprites/FrozenPatchSprite.png" id="2_r8w2x"]
+[ext_resource type="Script" path="res://assets/Scripts/VFXs/ParticalVfxs/ailment_vfx_node.gd" id="1_m0e0y"]
+[ext_resource type="Texture2D" uid="uid://br5o2y7ga8sgq" path="res://ObjectDefs/Effects/Ailments/Sprites/FrozenPatchSprite.png" id="2_r8w2x"]
 
 [node name="VFXNode" type="Node2D" node_paths=PackedStringArray("patch_sprite")]
 z_index = 9

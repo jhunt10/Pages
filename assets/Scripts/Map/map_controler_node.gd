@@ -135,6 +135,7 @@ func get_or_create_actor_node(actor:BaseActor, map_pos:MapPos, wait_to_show:bool
 func create_vfx_holder(map_pos:MapPos)->VfxHolder:
 	var vfx_holder_path = "res://Scenes/VFXs/vfx_holder.tscn"
 	var new_node:VfxHolder = load(vfx_holder_path).instantiate()
+	new_node.name = "VfxHolder:"+str(map_pos)
 	actor_tile_map.add_child(new_node)
 	new_node.position = actor_tile_map.map_to_local(map_pos.to_vector2i())
 	return new_node

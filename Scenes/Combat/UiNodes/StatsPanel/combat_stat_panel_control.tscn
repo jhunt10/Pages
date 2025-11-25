@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" path="res://Scenes/Combat/UiNodes/StatsPanel/stat_panel_control.gd" id="1_mnhn6"]
 [ext_resource type="Script" path="res://Scenes/UiNodes/back_patch_container.gd" id="2_or0gt"]
-[ext_resource type="Texture2D" uid="uid://bg625rwa6bewf" path="res://data/Actors/TestActorSprite.png" id="3_f6mh4"]
 [ext_resource type="Texture2D" uid="uid://io35wpu802fp" path="res://assets/Sprites/UI/BackPatches/Patch_64_12.png" id="3_mbhkk"]
+[ext_resource type="Texture2D" uid="uid://d28r048mh6136" path="res://assets/Sprites/UnknownSprite.png" id="4_lfhmk"]
 [ext_resource type="PackedScene" uid="uid://cjfwi0pnjh7y6" path="res://Scenes/Combat/UiNodes/StatsPanel/health_bar_control.tscn" id="5_iao52"]
 [ext_resource type="Texture2D" uid="uid://dj6l261cuh2hj" path="res://Scenes/Combat/UiNodes/StatsPanel/BuffBackground.png" id="7_ow4ab"]
 [ext_resource type="Theme" uid="uid://dwinll8pgdjhc" path="res://Scenes/Themes/standard_theme.tres" id="7_xlcc4"]
@@ -53,7 +53,7 @@ layout_mode = 2
 [node name="PortaitTextureRect" type="TextureRect" parent="BackPatchContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
-texture = ExtResource("3_f6mh4")
+texture = ExtResource("4_lfhmk")
 stretch_mode = 2
 
 [node name="StatBarContainer" type="VBoxContainer" parent="BackPatchContainer/VBoxContainer/HBoxContainer"]

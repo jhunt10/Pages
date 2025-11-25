@@ -349,6 +349,9 @@ func _on_actor_moved(old_pos:MapPos, new_pos:MapPos, move_data:Dictionary):
 	pass
 
 func _on_movement_failed(cur_pos:MapPos):
+	# Reappear if teleporting fails
+	if !self.visible:
+		self.visible = true
 	if is_moving and cur_pos:
 		set_facing_dir(cur_pos.dir)
 		set_move_destination(cur_pos, CombatRootControl.get_remaining_frames_for_turn())

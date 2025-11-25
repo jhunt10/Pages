@@ -1,27 +1,36 @@
-[gd_scene load_steps=3 format=3 uid="uid://b7s8qdgtf3kxy"]
+[gd_scene load_steps=5 format=3 uid="uid://b7s8qdgtf3kxy"]
+
+[ext_resource type="Script" path="res://assets/Scripts/VFXs/ParticalVfxs/smoke_vfx_node.gd" id="1_2jqcq"]
+[ext_resource type="PackedScene" uid="uid://uo60871y6t54" path="res://Scenes/Combat/MapObjects/Actors/ComplexActorNode/complex_actor_node.tscn" id="2_6m6mw"]
 
 [sub_resource type="Gradient" id="Gradient_7d3pv"]
-offsets = PackedFloat32Array(0, 0.343284, 0.839552, 1)
-colors = PackedColorArray(1, 1, 1, 1, 1, 0.501961, 0.501961, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+offsets = PackedFloat32Array(0, 0.649254, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
 
 [sub_resource type="Gradient" id="Gradient_fcvj2"]
-offsets = PackedFloat32Array(0, 0.492537, 1)
-colors = PackedColorArray(1, 0, 0, 1, 1, 0.264925, 0, 1, 1, 1, 0, 1)
+offsets = PackedFloat32Array(0, 0.477612, 1)
+colors = PackedColorArray(0.705882, 0.705882, 0.705882, 1, 0.332881, 0.332881, 0.332881, 1, 0.190762, 0.190762, 0.190762, 1)
 
-[node name="Node2D" type="Node2D"]
+[node name="SmokeVfxNode" type="Node2D"]
+script = ExtResource("1_2jqcq")
+
+[node name="ActorNode" parent="." instance=ExtResource("2_6m6mw")]
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
 emitting = false
-amount = 500
+amount = 5000
+lifetime = 2.0
 one_shot = true
-explosiveness = 0.1
+explosiveness = 0.8
 randomness = 1.0
 lifetime_randomness = 0.3
 fixed_fps = 30
+emission_shape = 3
+emission_rect_extents = Vector2(12, 16)
 direction = Vector2(0, -1)
-gravity = Vector2(0, 0)
-initial_velocity_min = 50.0
-initial_velocity_max = 50.0
+gravity = Vector2(0, -10)
+initial_velocity_min = 10.0
+initial_velocity_max = 10.0
 angle_min = -30.0
 angle_max = 30.0
 color_ramp = SubResource("Gradient_7d3pv")

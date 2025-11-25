@@ -1,0 +1,110 @@
+[gd_scene load_steps=8 format=3 uid="uid://q3jau71luqa1"]
+
+[ext_resource type="Script" path="res://assets/Scripts/VFXs/ParticalVfxs/smoke_vfx_node.gd" id="1_17q6b"]
+
+[sub_resource type="Curve" id="Curve_m0f5i"]
+min_value = -200.0
+max_value = 200.0
+_data = [Vector2(0, 60), 0.0, 0.0, 0, 0, Vector2(0.2, -25), 0.0, 0.0, 0, 0, Vector2(0.4, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="Gradient" id="Gradient_7d3pv"]
+offsets = PackedFloat32Array(0, 0.649254, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="Gradient" id="Gradient_fcvj2"]
+offsets = PackedFloat32Array(0, 0.477612, 1)
+colors = PackedColorArray(0.705882, 0.705882, 0.705882, 1, 0.332881, 0.332881, 0.332881, 1, 0.190762, 0.190762, 0.190762, 1)
+
+[sub_resource type="Animation" id="Animation_f5pc7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SmokeParticles:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_5r2x4"]
+resource_name = "test"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SmokeParticles:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_agotf"]
+_data = {
+"RESET": SubResource("Animation_f5pc7"),
+"test": SubResource("Animation_5r2x4")
+}
+
+[node name="SmokeVfxNode" type="Node2D" node_paths=PackedStringArray("particles")]
+script = ExtResource("1_17q6b")
+particles = NodePath("SmokeParticles")
+timer = 0.03
+
+[node name="SmokeParticles" type="CPUParticles2D" parent="."]
+z_index = 5
+position = Vector2(0, -8)
+emitting = false
+amount = 3000
+lifetime = 1.5
+one_shot = true
+preprocess = 0.3
+explosiveness = 0.7
+lifetime_randomness = 0.5
+fixed_fps = 30
+direction = Vector2(0, 1)
+spread = 180.0
+gravity = Vector2(0, -20)
+initial_velocity_min = 10.0
+initial_velocity_max = 10.0
+linear_accel_min = -5.0
+linear_accel_max = 10.0
+linear_accel_curve = SubResource("Curve_m0f5i")
+angle_min = -30.0
+angle_max = 30.0
+color_ramp = SubResource("Gradient_7d3pv")
+color_initial_ramp = SubResource("Gradient_fcvj2")
+
+[node name="SmokeParticles2" type="CPUParticles2D" parent="."]
+visible = false
+z_index = 5
+position = Vector2(64, -8)
+emitting = false
+amount = 5000
+one_shot = true
+explosiveness = 0.8
+randomness = 1.0
+lifetime_randomness = 0.3
+fixed_fps = 30
+emission_shape = 3
+emission_rect_extents = Vector2(12, 16)
+direction = Vector2(0, -1)
+gravity = Vector2(0, -10)
+initial_velocity_min = 10.0
+initial_velocity_max = 10.0
+angle_min = -30.0
+angle_max = 30.0
+color_ramp = SubResource("Gradient_7d3pv")
+color_initial_ramp = SubResource("Gradient_fcvj2")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_agotf")
+}
