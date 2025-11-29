@@ -1,4 +1,4 @@
-[gd_scene load_steps=73 format=3 uid="uid://wa8bgcuurt5n"]
+[gd_scene load_steps=87 format=3 uid="uid://wa8bgcuurt5n"]
 
 [ext_resource type="Texture2D" uid="uid://cgrlfobidw8xl" path="res://assets/Sprites/UI/BackPatches/PaperPatch_Bigger_276x192_48.png" id="1_dsnfm"]
 [ext_resource type="Script" path="res://Scenes/TutorialCards/tutorial_cards.gd" id="1_imldm"]
@@ -10,15 +10,26 @@
 [ext_resource type="FontFile" uid="uid://cq1gkq6upl513" path="res://assets/Fonts/8bit-2.ttf" id="6_qh3ul"]
 [ext_resource type="Texture2D" uid="uid://b2tm6hnoq5pei" path="res://notes/TutorialImages/MoveDemoNorth.png" id="7_tm0tf"]
 [ext_resource type="Texture2D" uid="uid://dirot53u7vol0" path="res://notes/TutorialImages/MoveDemoEast.png" id="8_2oidn"]
+[ext_resource type="Texture2D" uid="uid://ctv2effjtiaqy" path="res://assets/Sprites/Paper/Mundane_Clipped_Background.png" id="8_lf7hq"]
+[ext_resource type="Texture2D" uid="uid://ckh55ifurksby" path="res://ObjectDefs/ClassDefs/Soldier/Pages/Sprites/ShieldTraining.png" id="9_40lhu"]
 [ext_resource type="Texture2D" uid="uid://xmsubuhqv0bo" path="res://notes/TutorialImages/QueOrderDemo.png" id="9_m3d0h"]
 [ext_resource type="Texture2D" uid="uid://k4osttvxokgk" path="res://notes/TutorialImages/MoveDemoSouth.png" id="9_mx0pi"]
 [ext_resource type="Texture2D" uid="uid://y2gd8ol322g1" path="res://notes/TutorialImages/NumberedQueDisplay.png" id="10_cn0tt"]
+[ext_resource type="Texture2D" uid="uid://bibqsudhjw4qe" path="res://assets/Sprites/Paper/Mundane_Background.png" id="10_idooy"]
 [ext_resource type="Texture2D" uid="uid://c15vxyc2s4m2c" path="res://notes/TutorialImages/MoveDemoWest.png" id="10_vm6ku"]
+[ext_resource type="Texture2D" uid="uid://byq6wa2xqa1mt" path="res://ObjectDefs/Actions/CommonActions/BasicMovement/Sprites/MoveForward.png" id="11_7xlj3"]
 [ext_resource type="Texture2D" uid="uid://cv6jm64dgx2iu" path="res://notes/TutorialImages/MoveDemo_Pages.png" id="11_65dks"]
+[ext_resource type="Script" path="res://Scenes/UiNodes/back_patch_container.gd" id="12_06bf3"]
+[ext_resource type="Script" path="res://Scenes/TutorialCards/QueDemoControl.gd" id="12_is30f"]
 [ext_resource type="Texture2D" uid="uid://bo44u0dxhlqhp" path="res://notes/TutorialImages/TargetDemo.png" id="12_vkq77"]
 [ext_resource type="Texture2D" uid="uid://b8nni7o238kns" path="res://notes/TutorialImages/TargetSpotDemo.png" id="14_eljgu"]
+[ext_resource type="Texture2D" uid="uid://kh2uekpf4sb8" path="res://Scenes/Maps/MapEditing/ActorSpawnSprite.png" id="14_f2g8g"]
 [ext_resource type="Texture2D" uid="uid://bujky44hog2jm" path="res://assets/Sprites/UI/SymbolIcons/PPRSymbol.png" id="15_ifnkw"]
+[ext_resource type="Texture2D" uid="uid://cg1yo6bhpalea" path="res://assets/Sprites/UI/QueInputAndDisplay/mini_page_slot.png" id="15_l8wmu"]
 [ext_resource type="Texture2D" uid="uid://cf0uynqde6atg" path="res://notes/TutorialImages/PPR_Demo.png" id="16_aseqn"]
+[ext_resource type="Texture2D" uid="uid://m72qnpd2k0o7" path="res://ObjectDefs/Actions/CommonActions/BasicMovement/Sprites/TurnRight.png" id="16_o3yo8"]
+[ext_resource type="Texture2D" uid="uid://seyoqmlx4o78" path="res://assets/Sprites/UI/QueInputAndDisplay/mini_page_slot_highlight.png" id="17_iboa5"]
+[ext_resource type="Texture2D" uid="uid://x41ak7cwik3b" path="res://notes/TutorialImages/Grid.png" id="18_jiigo"]
 [ext_resource type="Texture2D" uid="uid://v6mrr2dref31" path="res://assets/Sprites/UI/SymbolIcons/SpeedSymbol.png" id="19_yomll"]
 [ext_resource type="Texture2D" uid="uid://byr5el0g1y716" path="res://notes/TutorialImages/Speed_Demo.png" id="20_sydka"]
 [ext_resource type="Texture2D" uid="uid://csh6hw7r2ml5g" path="res://notes/TutorialImages/SpeedDemo2.png" id="21_6h1lf"]
@@ -32,25 +43,25 @@
 [ext_resource type="Texture2D" uid="uid://de4ubjp27kghd" path="res://assets/Sprites/UI/SymbolIcons/DmgSymbol_Slash.png" id="28_a2qcx"]
 [ext_resource type="Texture2D" uid="uid://bif546wff1f2g" path="res://assets/Sprites/UI/SymbolIcons/DmgSymbol_Pierce.png" id="29_gi5vn"]
 [ext_resource type="Texture2D" uid="uid://rj5u8fq0g544" path="res://assets/Sprites/UI/SymbolIcons/DmgSymbol_Blunt.png" id="30_cg0x5"]
-[ext_resource type="Texture2D" uid="uid://df3s5wxeqhv20" path="res://defs/Actors/Squirrels/Squirrior_IconSmall.png" id="31_mgbes"]
+[ext_resource type="Texture2D" uid="uid://bnd7qx7m1ec3n" path="res://ObjectDefs/Factions/Squirrels/Actors/Sprites/SquirriorIcon.png" id="31_mgbes"]
 [ext_resource type="Texture2D" uid="uid://d17k5iaed0gdg" path="res://assets/Sprites/UI/SymbolIcons/WardSymbol.png" id="32_3b0g4"]
 [ext_resource type="Texture2D" uid="uid://b3atdgr5fajkj" path="res://assets/Sprites/UI/SymbolIcons/DmgSymbol_Fire.png" id="33_rxhyn"]
 [ext_resource type="Texture2D" uid="uid://q1k6t71iou85" path="res://assets/Sprites/UI/SymbolIcons/DmgSymbol_Electric.png" id="34_ju474"]
 [ext_resource type="Texture2D" uid="uid://dy16af4tlump0" path="res://assets/Sprites/UI/SymbolIcons/DmgSymbol_Ice.png" id="35_nwj8o"]
 [ext_resource type="Texture2D" uid="uid://cl627unmyivbd" path="res://assets/Sprites/UI/SymbolIcons/DmgSymbol_Poison.png" id="36_ct4tu"]
-[ext_resource type="Texture2D" uid="uid://do85dvxvlf5wk" path="res://defs/Actors/Squirrels/Squirrcerer_IconSmall.png" id="37_16bex"]
+[ext_resource type="Texture2D" uid="uid://bgsb8oupku0ck" path="res://ObjectDefs/Factions/Squirrels/Actors/Sprites/SquirrcererIcon.png" id="37_16bex"]
 [ext_resource type="Texture2D" uid="uid://x4trgcetlc06" path="res://notes/TutorialImages/Items/Ammos.png" id="39_rqndq"]
 [ext_resource type="Texture2D" uid="uid://uarxllb74uai" path="res://assets/Sprites/UI/SymbolIcons/EvasionSymbol.png" id="40_iob2n"]
 [ext_resource type="Texture2D" uid="uid://uefsvgmbbuyr" path="res://notes/TutorialImages/Items/Potions.png" id="40_n5iy2"]
 [ext_resource type="Texture2D" uid="uid://cl7v6htwim8aw" path="res://assets/Sprites/UI/SymbolIcons/BlockSymbol.png" id="41_iyus1"]
-[ext_resource type="Texture2D" path="res://defs/Items/Consumables/TestBomb.png" id="41_kkdq2"]
+[ext_resource type="Texture2D" uid="uid://b5dkjx2ix084t" path="res://ObjectDefs/Items/Supplies/Bombs/Sprites/BasicBomb_Large.png" id="41_kkdq2"]
 [ext_resource type="Texture2D" uid="uid://vwoj75286dbg" path="res://notes/TutorialImages/Items/DrinkPotionPage.png" id="42_3ovgy"]
 [ext_resource type="Texture2D" uid="uid://d0pn1i5o4fqj5" path="res://assets/Sprites/UI/SymbolIcons/AwarenessSymbol.png" id="42_rbk68"]
 [ext_resource type="Texture2D" uid="uid://bmgcqad17mi17" path="res://notes/TutorialImages/Items/ReloadPage.png" id="43_usfrs"]
-[ext_resource type="Texture2D" path="res://defs/Items/Consumables/Money/Money_SIcon.png" id="44_ds03o"]
-[ext_resource type="Texture2D" path="res://defs/Items/Pages/PageDropItem_Icon.png" id="45_48moo"]
-[ext_resource type="Texture2D" path="res://defs/Items/Consumables/Ammo/Sprites/Gen_Ammo_SIcon.png" id="46_2eh5x"]
-[ext_resource type="Texture2D" path="res://defs/Items/Consumables/HealthPotions/Sprites/HealthPotion_M_S.png" id="47_hefo1"]
+[ext_resource type="Texture2D" uid="uid://c8ww817wy6oky" path="res://ObjectDefs/Items/Supplies/Money/Money_SIcon.png" id="44_ds03o"]
+[ext_resource type="Texture2D" uid="uid://bc0ulqdaxrakj" path="res://ObjectDefs/Items/Supplies/PageItem/PageDropItem_Icon.png" id="45_48moo"]
+[ext_resource type="Texture2D" uid="uid://byrlflajnlc83" path="res://ObjectDefs/Items/Supplies/Ammo/Sprites/Gen_Ammo_SIcon.png" id="46_2eh5x"]
+[ext_resource type="Texture2D" uid="uid://tmte4m2vkp8j" path="res://ObjectDefs/Items/Supplies/Potions/HealthPotions/Sprites/HealthPotion_M_S.png" id="47_hefo1"]
 [ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/ItemDetailsCard/cost_container.gd" id="48_qwt0b"]
 [ext_resource type="Texture2D" uid="uid://dhtsefdcfxbg8" path="res://assets/Sprites/UI/SymbolIcons/AmmoSymbol_Gen.png" id="49_yn0in"]
 [ext_resource type="Texture2D" uid="uid://ckym0e60eik1k" path="res://assets/Sprites/UI/SymbolIcons/AmmoSymbol_Phy.png" id="50_34j7i"]
@@ -58,22 +69,204 @@
 [ext_resource type="Texture2D" uid="uid://cyt5q4hutdp6y" path="res://assets/Sprites/UI/SymbolIcons/AmmoSymbol_Abn.png" id="52_jq05t"]
 [ext_resource type="Texture2D" uid="uid://6f4ma46paymr" path="res://notes/TutorialImages/Ammo/AmmoChart.png" id="53_yarh5"]
 [ext_resource type="Texture2D" uid="uid://wlee6qbo16hi" path="res://notes/TutorialImages/Ammo/GenAmmoDemo.png" id="54_dusnf"]
-[ext_resource type="Texture2D" path="res://defs/Items/Consumables/Ammo/Sprites/Gen_Ammo_LIcon.png" id="55_akuc0"]
+[ext_resource type="Texture2D" uid="uid://b3krn5g0mk1ew" path="res://ObjectDefs/Items/Supplies/Ammo/Sprites/Gen_Ammo_LIcon.png" id="55_akuc0"]
 [ext_resource type="Texture2D" uid="uid://ds6ofysnerp6e" path="res://notes/TutorialImages/Ammo/PhyAmmoDemo.png" id="56_3etoq"]
-[ext_resource type="Texture2D" path="res://defs/Items/Consumables/Ammo/Sprites/Phy_Ammo_LIcon.png" id="57_n30lr"]
+[ext_resource type="Texture2D" uid="uid://bcobikfqwx6lo" path="res://ObjectDefs/Items/Supplies/Ammo/Sprites/Phy_Ammo_LIcon.png" id="57_n30lr"]
 [ext_resource type="Texture2D" uid="uid://bkow5r3jhgab4" path="res://notes/TutorialImages/Ammo/MageAmmoDemo.png" id="58_arc43"]
-[ext_resource type="Texture2D" path="res://defs/Items/Consumables/Ammo/Sprites/Mag_Ammo_LIcon.png" id="59_6efni"]
+[ext_resource type="Texture2D" uid="uid://bhwpl8wq0rtx" path="res://ObjectDefs/Items/Supplies/Ammo/Sprites/Mag_Ammo_LIcon.png" id="59_6efni"]
 [ext_resource type="Texture2D" uid="uid://dsvkalu2jexjd" path="res://notes/TutorialImages/Ammo/DivAmmoDemo.png" id="60_0utij"]
-[ext_resource type="Texture2D" path="res://defs/Items/Consumables/Ammo/Sprites/Abn_Ammo_LIcon.png" id="61_wf3sy"]
+[ext_resource type="Texture2D" uid="uid://ckbtknmoi7q2v" path="res://ObjectDefs/Items/Supplies/Ammo/Sprites/Abn_Ammo_LIcon.png" id="61_wf3sy"]
 [ext_resource type="Texture2D" uid="uid://diy8q5lpvpw1u" path="res://assets/Sprites/UI/SymbolIcons/PhyDamageSymbol.png" id="66_hou42"]
-[ext_resource type="Texture2D" uid="uid://bh45syk3fs1wh" path="res://defs/ClassDefs/Soldier/Items/Equipment/Sprites/OldSword.png" id="67_bxh1s"]
+[ext_resource type="Texture2D" uid="uid://bgiuhlw7igs1x" path="res://ObjectDefs/Items/Equipment/Weapons/Sprites/BaseSword_Icon.png" id="67_bxh1s"]
 [ext_resource type="Texture2D" uid="uid://dgog12c1b7dnl" path="res://notes/TutorialImages/Weapons/DefaultRangeDisplay.png" id="68_eer4b"]
-[ext_resource type="Texture2D" path="res://defs/Items/Equipment/BanditEquipment/Sprites/BigMalma_Icon.png" id="69_jjpgd"]
+[ext_resource type="Texture2D" uid="uid://felkhq4mqp8l" path="res://ObjectDefs/Items/Equipment/Weapons/Sprites/BaseHammer_Icon.png" id="69_jjpgd"]
 [ext_resource type="Texture2D" uid="uid://cqqyhjnm535e7" path="res://notes/TutorialImages/Weapons/HeavyRangeDisplay.png" id="70_duqdi"]
-[ext_resource type="Texture2D" uid="uid://b0xxdbolr32ln" path="res://defs/ClassDefs/Rogue/Items/Equipment/Sprites/OldBow.png" id="71_8w7en"]
+[ext_resource type="Texture2D" uid="uid://bgbm3btdkptjx" path="res://ObjectDefs/Items/Equipment/Weapons/Sprites/BaseBow_Icon.png" id="71_8w7en"]
 [ext_resource type="Texture2D" uid="uid://du61hnus1c30t" path="res://notes/TutorialImages/Weapons/StaffRangeDisplay.png" id="72_lgair"]
 
-[node name="TutorialCardsControl" type="Control" node_paths=PackedStringArray("top_container", "title_label", "count_label", "close_button", "back_button", "back_button_background", "next_button", "next_button_background", "done_button", "done_button_background", "page_que_card", "movement_card", "targeting_actor_card", "targeting_spot_card", "ppr_card", "speed_card", "mass_card", "armor_card", "block_evade_card", "item_card", "item2_card", "ammo_card", "weapon_card")]
+[sub_resource type="Animation" id="Animation_rm8gq"]
+resource_name = "QueDemoAniation"
+length = 4.0
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control/QueMiniDisplayContainer/Control/TimerBar:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(42, 2), Vector2(145, 2)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Control/QueMiniDisplayContainer/BoxContainer/PageSlotPrefab2/Highlight:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.966667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Control/QueMiniDisplayContainer/BoxContainer/PageSlotPrefab3/Highlight:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1.1, 2.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Control/QueMiniDisplayContainer/BoxContainer/PageSlotPrefab4/Highlight:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 2.25, 3.25),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Control/Grid/ActorSprite:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = false
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.96, 1.1, 2.1, 2.24, 3.25),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(7, 47), Vector2(7, 7), Vector2(7, 7), Vector2(7, 7), Vector2(7, 7), Vector2(47, 7)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Control/Grid/ActorSprite:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = false
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 1.1, 2.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [-3.14159, -3.14159, -1.5708]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Control/QueMiniDisplayContainer/Control/TimerBar:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 3.26),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_5af0m"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control/QueMiniDisplayContainer/Control/TimerBar:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(42, 2)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Control/QueMiniDisplayContainer/BoxContainer/PageSlotPrefab2/Highlight:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Control/QueMiniDisplayContainer/BoxContainer/PageSlotPrefab3/Highlight:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Control/QueMiniDisplayContainer/BoxContainer/PageSlotPrefab4/Highlight:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Control/Grid/ActorSprite:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(7, 47)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Control/Grid/ActorSprite:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [3.14159]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Control/QueMiniDisplayContainer/Control/TimerBar:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0.001),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_d2glj"]
+_data = {
+"QueDemoAniation": SubResource("Animation_rm8gq"),
+"RESET": SubResource("Animation_5af0m")
+}
+
+[node name="TutorialCardsControl" type="Control" node_paths=PackedStringArray("top_container", "title_label", "count_label", "close_button", "back_button", "back_button_background", "next_button", "next_button_background", "done_button", "done_button_background", "intro_card", "multi_turn_card", "page_que_card", "movement_card", "targeting_actor_card", "targeting_spot_card", "ppr_card", "speed_card", "mass_card", "armor_card", "block_evade_card", "item_card", "item2_card", "ammo_card", "weapon_card")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -91,6 +284,8 @@ next_button = NodePath("CardControl/TopContainer/HBoxContainer2/NextButtonContro
 next_button_background = NodePath("CardControl/TopContainer/HBoxContainer2/NextButtonControl/NextButton")
 done_button = NodePath("CardControl/TopContainer/HBoxContainer2/NextButtonControl/DonetButton/Button")
 done_button_background = NodePath("CardControl/TopContainer/HBoxContainer2/NextButtonControl/DonetButton")
+intro_card = NodePath("CardControl/Intro")
+multi_turn_card = NodePath("CardControl/MultiTurnBased")
 page_que_card = NodePath("CardControl/Page_System")
 movement_card = NodePath("CardControl/Movement")
 targeting_actor_card = NodePath("CardControl/Targeting_Actors")
@@ -319,6 +514,677 @@ patch_margin_top = 48
 patch_margin_right = 48
 patch_margin_bottom = 48
 
+[node name="Intro" type="Control" parent="CardControl"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="DescriptionLabel" type="RichTextLabel" parent="CardControl/Intro"]
+visible = false
+layout_mode = 1
+offset_left = 32.0
+offset_top = 100.0
+offset_right = 768.0
+offset_bottom = 467.0
+theme = ExtResource("5_l4e1i")
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "Welcome to Pages, a Multi-Turn Based RPG. 
+
+Here everything revolves around Pages. These are ancient magical artifacts that bla bla bla lore. All characters (called Actors) carry a PageBook with two types of Pages:
+
+Action Pages are used in combat to preform actions such as moving, attacking, or using items
+
+
+When the [color=#780000]Round[/color] starts, each [color=#780000]Actor[/color] will automatically act out thier series of [color=#780000]Turns[/color] ."
+scroll_active = false
+
+[node name="BoxContainer" type="BoxContainer" parent="CardControl/Intro"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = 85.0
+offset_right = -24.0
+offset_bottom = -65.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/separation = 10
+vertical = true
+
+[node name="DescriptionLabel" type="RichTextLabel" parent="CardControl/Intro/BoxContainer"]
+layout_mode = 2
+theme = ExtResource("5_l4e1i")
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "Welcome to Pages, a Multi-Turn Based RPG. 
+
+Here everything revolves around [color=blue]Pages[/color]. 
+These are ancient magical artifacts that bla bla bla lore. All characters (called [color=#780000]Actors[/color]) carry a [color=blue]PageBook[/color] containing two types of [color=blue]Pages[/color]:
+ "
+fit_content = true
+scroll_active = false
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="CardControl/Intro/BoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="PassiveHBoxContainer" type="HBoxContainer" parent="CardControl/Intro/BoxContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="CardControl/Intro/BoxContainer/HBoxContainer3/PassiveHBoxContainer"]
+layout_mode = 2
+texture = ExtResource("8_lf7hq")
+stretch_mode = 4
+
+[node name="TextureRect" type="TextureRect" parent="CardControl/Intro/BoxContainer/HBoxContainer3/PassiveHBoxContainer/TextureRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("9_40lhu")
+stretch_mode = 4
+
+[node name="VSeparator" type="VSeparator" parent="CardControl/Intro/BoxContainer/HBoxContainer3/PassiveHBoxContainer"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+
+[node name="DescriptionLabel2" type="RichTextLabel" parent="CardControl/Intro/BoxContainer/HBoxContainer3/PassiveHBoxContainer"]
+layout_mode = 2
+theme = ExtResource("5_l4e1i")
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[color=blue]Passive Pages[/color]
+provide buffs
+to the Actor."
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="ActionHBoxContainer" type="HBoxContainer" parent="CardControl/Intro/BoxContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="CardControl/Intro/BoxContainer/HBoxContainer3/ActionHBoxContainer"]
+layout_mode = 2
+texture = ExtResource("10_idooy")
+stretch_mode = 4
+
+[node name="TextureRect" type="TextureRect" parent="CardControl/Intro/BoxContainer/HBoxContainer3/ActionHBoxContainer/TextureRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("11_7xlj3")
+stretch_mode = 4
+
+[node name="VSeparator" type="VSeparator" parent="CardControl/Intro/BoxContainer/HBoxContainer3/ActionHBoxContainer"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+
+[node name="DescriptionLabel2" type="RichTextLabel" parent="CardControl/Intro/BoxContainer/HBoxContainer3/ActionHBoxContainer"]
+layout_mode = 2
+theme = ExtResource("5_l4e1i")
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[color=blue]Action Pages[/color] 
+control Action 
+in Combat."
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="MultiTurnBased" type="Control" parent="CardControl"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="BoxContainer" type="BoxContainer" parent="CardControl/MultiTurnBased"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = 85.0
+offset_right = -24.0
+offset_bottom = -65.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/separation = 10
+vertical = true
+
+[node name="DescriptionLabel" type="RichTextLabel" parent="CardControl/MultiTurnBased/BoxContainer"]
+layout_mode = 2
+theme = ExtResource("5_l4e1i")
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "Combat is divided into [color=#780000]Rounds[/color] in which [color=#780000]Actors[/color] will prepare a series of [color=#780000]Turns[/color] by choosing [color=blue]Action Pages[/color] to add to thier [color=blue]PageQue[/color].
+"
+fit_content = true
+scroll_active = false
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CardControl/MultiTurnBased/BoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CardControl/MultiTurnBased/BoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 16
+
+[node name="DescriptionLabel2" type="RichTextLabel" parent="CardControl/MultiTurnBased/BoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("5_l4e1i")
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "Once a [color=#780000]Rounds[/color] starts, all [color=#780000]Actors[/color] will simultaneously act out thier [color=blue]PageQue[/color] by using one [color=blue]Action Page[/color] per [color=#780000]Turn[/color].
+"
+fit_content = true
+scroll_active = false
+
+[node name="DescriptionLabel3" type="RichTextLabel" parent="CardControl/MultiTurnBased/BoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("5_l4e1i")
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[color=blue]PageQues[/color] can not be altered during the [color=#780000]Round[/color], so you will have to think ahead and predict where [color=#780000]Enemies[/color] 
+are planning to move and attack."
+fit_content = true
+scroll_active = false
+
+[node name="QueDemoControl" type="Control" parent="CardControl/MultiTurnBased/BoxContainer/HBoxContainer" node_paths=PackedStringArray("animation", "grid", "play_button")]
+custom_minimum_size = Vector2(156, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 3
+script = ExtResource("12_is30f")
+animation = NodePath("Control/AnimationPlayer")
+grid = NodePath("Control/Grid")
+play_button = NodePath("Control/Button")
+
+[node name="Control" type="Control" parent="CardControl/MultiTurnBased/BoxContainer/HBoxContainer/QueDemoControl"]
+anchors_preset = 0
+offset_top = -23.0
+offset_right = 40.0
+offset_bottom = 17.0
+
+[node name="QueMiniDisplayContainer" type="Container" parent="CardControl/MultiTurnBased/BoxContainer/HBoxContainer/QueDemoControl/Control" node_paths=PackedStringArray("background", "inner_container")]
+custom_minimum_size = Vector2(156, 44)
+layout_mode = 0
+offset_top = 8.0
+offset_right = 156.0
+offset_bottom = 52.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("12_06bf3")
+background = NodePath("Background")
+inner_container = NodePath("BoxContainer")
+margin_override = 6
+
+[node name="Background" type="NinePatchRect" parent="CardControl/MultiTurnBased/BoxContainer/HBoxContainer/QueDemoControl/Control/QueMiniDisplayContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource("4_kjbxh")
+patch_margin_left = 12
+patch_margin_top = 12
+patch_margin_right = 12
+patch_margin_bottom = 12
+
+[node name="Control" type="Control" parent="CardControl/MultiTurnBased/BoxContainer/HBoxContainer/QueDemoControl/Control/QueMiniDisplayContainer"]
+layout_mode = 2
+
+[node name="TimerBar" type="ColorRect" parent="CardControl/MultiTurnBased/BoxContainer/HBoxContainer/QueDemoControl/Control/QueMiniDisplayContainer/Control"]
+custom_minimum_size = Vector2(2, 40)
+layout_mode = 2
+offset_left = 42.0
+offset_top = 2.0
+offset_right = 44.0
+offset_bottom = 42.0
+color = Color(1, 0, 0, 1)
+
+[node name="BoxContainer" type="BoxContainer" parent="CardControl/MultiTurnBased/BoxContainer/HBoxContainer/QueDemoControl/Control/QueMiniDisplayContainer"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="PortraitTextureRect" type="TextureRect" parent="CardControl/MultiTurnBased/BoxContainer/HBoxContainer/QueDemoControl/Control/QueMiniDisplayContainer/BoxContainer"]
+modulate = Color(0.501961, 0.501961, 1, 1)
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = ExtResource("14_f2g8g")
+flip_v = true
+
+[node name="PageSlotPrefab" type="Control" parent="CardControl/MultiTurnBased/BoxContainer/HBoxContainer/QueDemoControl/Control/QueMiniDisplayContainer/BoxContainer"]
+visible = false
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+
+[node name="PageSlot" type="TextureRect" parent="CardControl/MultiTurnBased/BoxContainer/HBoxContainer/QueDemoControl/Control/QueMiniDisplayContainer/BoxContainer/PageSlotPrefab"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+offset_right = 32.0
+offset_bottom = 32.0
+size_flags_vertical = 4
+texture = ExtResource("15_l8wmu")
+
+[node name="Icon" type="TextureRect" parent="CardControl/MultiTurnBased/BoxContainer/HBoxContainer/QueDemoControl/Control/QueMiniDisplayContainer/BoxContainer/PageSlotPrefab"]
+layout_mode = 2
+offset_right = 32.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("16_o3yo8")
+expand_mode = 1
+
+[node name="Highlight" type="TextureRect" parent="CardControl/MultiTurnBased/BoxContainer/HBoxContainer/QueDemoControl/Control/QueMiniDisplayContainer/BoxContainer/PageSlotPrefab"]
+visible = false
+layout_mode = 0
+offset_right = 32.0
+offset_bottom = 32.0
+texture = ExtResource("17_iboa5")
+
+[node name="PageSlotPrefab2" type="Control" parent="CardControl/MultiTurnBased/BoxContainer/HBoxContainer/QueDemoControl/Control/QueMiniDisplayContainer/BoxContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+
+[node name="PageSlot" type="TextureRect" parent="CardControl/MultiTurnBased/BoxContainer/HBoxContainer/QueDemoControl/Control/QueMiniDisplayContainer/BoxContainer/PageSlotPrefab2"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+offset_right = 32.0
+offset_bottom = 32.0
+size_flags_vertical = 4
+texture = ExtResource("15_l8wmu")
+
+[node name="Icon" type="TextureRect" parent="CardControl/MultiTurnBased/BoxContainer/HBoxContainer/QueDemoControl/Control/QueMiniDisplayContainer/BoxContainer/PageSlotPrefab2"]
+layout_mode = 2
+offset_right = 32.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("11_7xlj3")
+expand_mode = 1
+
+[node name="Highlight" type="TextureRect" parent="CardControl/MultiTurnBased/BoxContainer/HBoxContainer/QueDemoControl/Control/QueMiniDisplayContainer/BoxContainer/PageSlotPrefab2"]
+visible = false
+layout_mode = 0
+offset_right = 32.0
+offset_bottom = 32.0
+texture = ExtResource("17_iboa5")
+
+[node name="PageSlotPrefab3" type="Control" parent="CardControl/MultiTurnBased/BoxContainer/HBoxContainer/QueDemoControl/Control/QueMiniDisplayContainer/BoxContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+
+[node name="PageSlot" type="TextureRect" parent="CardControl/MultiTurnBased/BoxContainer/HBoxContainer/QueDemoControl/Control/QueMiniDisplayContainer/BoxContainer/PageSlotPrefab3"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+offset_right = 32.0
+offset_bottom = 32.0
+size_flags_vertical = 4
+texture = ExtResource("15_l8wmu")
+
+[node name="Icon" type="TextureRect" parent="CardControl/MultiTurnBased/BoxContainer/HBoxContainer/QueDemoControl/Control/QueMiniDisplayContainer/BoxContainer/PageSlotPrefab3"]
+layout_mode = 2
+offset_right = 32.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("16_o3yo8")
+expand_mode = 1
+
+[node name="Highlight" type="TextureRect" parent="CardControl/MultiTurnBased/BoxContainer/HBoxContainer/QueDemoControl/Control/QueMiniDisplayContainer/BoxContainer/PageSlotPrefab3"]
+visible = false
+layout_mode = 0
+offset_right = 32.0
+offset_bottom = 32.0
+texture = ExtResource("17_iboa5")
+
+[node name="PageSlotPrefab4" type="Control" parent="CardControl/MultiTurnBased/BoxContainer/HBoxContainer/QueDemoControl/Control/QueMiniDisplayContainer/BoxContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+
+[node name="PageSlot" type="TextureRect" parent="CardControl/MultiTurnBased/BoxContainer/HBoxContainer/QueDemoControl/Control/QueMiniDisplayContainer/BoxContainer/PageSlotPrefab4"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+offset_right = 32.0
+offset_bottom = 32.0
+size_flags_vertical = 4
+texture = ExtResource("15_l8wmu")
+
+[node name="Icon" type="TextureRect" parent="CardControl/MultiTurnBased/BoxContainer/HBoxContainer/QueDemoControl/Control/QueMiniDisplayContainer/BoxContainer/PageSlotPrefab4"]
+layout_mode = 2
+offset_right = 32.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("11_7xlj3")
+expand_mode = 1
+
+[node name="Highlight" type="TextureRect" parent="CardControl/MultiTurnBased/BoxContainer/HBoxContainer/QueDemoControl/Control/QueMiniDisplayContainer/BoxContainer/PageSlotPrefab4"]
+visible = false
+layout_mode = 0
+offset_right = 32.0
+offset_bottom = 32.0
+texture = ExtResource("17_iboa5")
+
+[node name="SlotsContainer" type="HBoxContainer" parent="CardControl/MultiTurnBased/BoxContainer/HBoxContainer/QueDemoControl/Control/QueMiniDisplayContainer/BoxContainer"]
+layout_mode = 2
+
+[node name="Grid" type="TextureRect" parent="CardControl/MultiTurnBased/BoxContainer/HBoxContainer/QueDemoControl/Control"]
+layout_mode = 0
+offset_left = 13.0
+offset_top = 55.0
+offset_right = 139.0
+offset_bottom = 181.0
+pivot_offset = Vector2(63, 63)
+texture = ExtResource("18_jiigo")
+
+[node name="ActorSprite" type="TextureRect" parent="CardControl/MultiTurnBased/BoxContainer/HBoxContainer/QueDemoControl/Control/Grid"]
+self_modulate = Color(0.501961, 0.501961, 1, 1)
+layout_mode = 0
+offset_left = 7.0
+offset_top = 47.0
+offset_right = 39.0
+offset_bottom = 79.0
+rotation = 3.14159
+pivot_offset = Vector2(16, 16)
+texture = ExtResource("14_f2g8g")
+stretch_mode = 3
+
+[node name="Button" type="Button" parent="CardControl/MultiTurnBased/BoxContainer/HBoxContainer/QueDemoControl/Control"]
+layout_mode = 0
+offset_left = 13.0
+offset_top = 55.0
+offset_right = 139.0
+offset_bottom = 181.0
+text = "Click To
+Start Round"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CardControl/MultiTurnBased/BoxContainer/HBoxContainer/QueDemoControl/Control"]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_d2glj")
+}
+
+[node name="Label" type="Label" parent="CardControl/MultiTurnBased"]
+layout_mode = 0
+offset_left = 625.0
+offset_top = 363.0
+offset_right = 767.0
+offset_bottom = 420.0
+theme = ExtResource("5_l4e1i")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 17
+text = "Example PageQue 
+for a Round with 
+three Turns"
+horizontal_alignment = 1
+
+[node name="PPR" type="Control" parent="CardControl"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CardControl/PPR"]
+layout_mode = 0
+offset_left = 27.0
+offset_top = 84.0
+offset_right = 774.0
+offset_bottom = 445.0
+
+[node name="HSeparator7" type="HSeparator" parent="CardControl/PPR/VBoxContainer"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CardControl/PPR/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CardControl/PPR/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_bdbcw")
+theme_override_colors/font_color = Color(0.470588, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0.470588, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 32
+text = " PPR"
+
+[node name="PPR_Icon" type="TextureRect" parent="CardControl/PPR/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("15_ifnkw")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="Label2" type="Label" parent="CardControl/PPR/VBoxContainer/HBoxContainer"]
+self_modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("5_l4e1i")
+theme_override_font_sizes/font_size = 32
+text = ": Pages per Round"
+
+[node name="HSeparator2" type="HSeparator" parent="CardControl/PPR/VBoxContainer"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="DescriptionLabel" type="RichTextLabel" parent="CardControl/PPR/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("5_l4e1i")
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("6_qh3ul")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "Each [color=#780000]Actor[/color] has a [color=#780000]PPR[/color] stat 
+which determines how many 
+[color=blue]Action Pages[/color] they can hold 
+in thier [color=blue]PageQue[/color] each [color=#780000]Round[/color]."
+fit_content = true
+scroll_active = false
+
+[node name="HSeparator3" type="HSeparator" parent="CardControl/PPR/VBoxContainer"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="DescriptionLabel7" type="RichTextLabel" parent="CardControl/PPR/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("5_l4e1i")
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("6_qh3ul")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "The number of [color=#780000]Turns[/color] in a [color=#780000]Round[/color] is equal to 
+the highest [color=#780000]PPR[/color] of all [color=#780000]Actors[/color] in [color=#780000]Combat[/color]. While [color=#780000]Gap[/color] slots are added to pad out lower [color=#780000]PPR[/color]."
+fit_content = true
+scroll_active = false
+
+[node name="DescriptionLabel4" type="RichTextLabel" parent="CardControl/PPR/VBoxContainer"]
+visible = false
+layout_mode = 2
+theme = ExtResource("5_l4e1i")
+bbcode_enabled = true
+text = "[color=#780000]Gap[/color] slots are added to pad out lower [color=#780000]PPR[/color]."
+fit_content = true
+scroll_active = false
+
+[node name="HSeparator4" type="HSeparator" parent="CardControl/PPR/VBoxContainer"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="DescriptionLabel5" type="RichTextLabel" parent="CardControl/PPR/VBoxContainer"]
+visible = false
+layout_mode = 2
+theme = ExtResource("5_l4e1i")
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("6_qh3ul")
+theme_override_font_sizes/normal_font_size = 32
+text = "Effects that say \"On Turn\" or \"For x Turns\" do not trigger or lose duration on Gaps. "
+fit_content = true
+scroll_active = false
+
+[node name="HSeparator5" type="HSeparator" parent="CardControl/PPR/VBoxContainer"]
+visible = false
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="DescriptionLabel6" type="RichTextLabel" parent="CardControl/PPR/VBoxContainer"]
+visible = false
+layout_mode = 2
+theme = ExtResource("5_l4e1i")
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("6_qh3ul")
+theme_override_font_sizes/normal_font_size = 32
+text = "\"Until next Turn\" Buffs stay active on Gaps."
+fit_content = true
+scroll_active = false
+
+[node name="HSeparator6" type="HSeparator" parent="CardControl/PPR/VBoxContainer"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="PPR_Demo_Image" type="TextureRect" parent="CardControl/PPR"]
+layout_mode = 0
+offset_left = 543.0
+offset_top = 136.0
+offset_right = 731.0
+offset_bottom = 252.0
+texture = ExtResource("16_aseqn")
+
+[node name="BunnyPPR2" type="Label" parent="CardControl/PPR/PPR_Demo_Image"]
+self_modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+offset_left = 6.0
+offset_top = -32.0
+offset_right = 186.0
+offset_bottom = 18.0
+theme = ExtResource("3_bdbcw")
+theme_override_constants/line_spacing = -10
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/font_size = 24
+text = "Gap Slot
+v"
+horizontal_alignment = 1
+
+[node name="NinePatchRect" type="NinePatchRect" parent="CardControl/PPR/PPR_Demo_Image"]
+layout_mode = 0
+offset_left = -44.0
+offset_top = -40.0
+offset_right = -4.0
+offset_bottom = 82.0
+texture = ExtResource("4_kjbxh")
+patch_margin_left = 12
+patch_margin_top = 12
+patch_margin_right = 12
+patch_margin_bottom = 12
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CardControl/PPR/PPR_Demo_Image/NinePatchRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = -2
+alignment = 1
+
+[node name="PPR_Icon" type="TextureRect" parent="CardControl/PPR/PPR_Demo_Image/NinePatchRect/VBoxContainer"]
+custom_minimum_size = Vector2(36, 40)
+layout_mode = 2
+texture = ExtResource("15_ifnkw")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="BunnyPPR" type="Label" parent="CardControl/PPR/PPR_Demo_Image/NinePatchRect/VBoxContainer"]
+self_modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("3_bdbcw")
+theme_override_font_sizes/font_size = 32
+text = "2"
+horizontal_alignment = 1
+
+[node name="TurtPPR" type="Label" parent="CardControl/PPR/PPR_Demo_Image/NinePatchRect/VBoxContainer"]
+self_modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("3_bdbcw")
+theme_override_font_sizes/font_size = 32
+text = "3"
+horizontal_alignment = 1
+
+[node name="DescriptionLabel5" type="RichTextLabel" parent="CardControl/PPR/PPR_Demo_Image"]
+layout_mode = 2
+offset_left = -65.0
+offset_top = 93.0
+offset_right = 682.0
+offset_bottom = 133.0
+theme = ExtResource("5_l4e1i")
+theme_override_colors/default_color = Color(0.470588, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 32
+text = "1 Page = 1 Turn"
+fit_content = true
+scroll_active = false
+
+[node name="Intro3" type="Control" parent="CardControl"]
+visible = false
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+
+[node name="DescriptionLabel" type="RichTextLabel" parent="CardControl/Intro3"]
+layout_mode = 1
+offset_left = 32.0
+offset_top = 100.0
+offset_right = 768.0
+offset_bottom = 467.0
+theme = ExtResource("5_l4e1i")
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "Durring the [color=#780000]Round[/color], all [color=#780000]Actors[/color] simultaneously play out thier [color=#780000]Turns[/color] in the prepared order.
+
+You will be propmted to give some input such as selecting [color=#780000]Targets[/color] for [color=#780000]Attacks[/color], but otherwise you will not be able to alter your [color=#780000]Turns[/color] or the order they are preformed.
+
+Collisions between [color=#780000]Actors[/color] and interfering with each other's [color=#780000]Actions[/color] will be very  common ."
+scroll_active = false
+
 [node name="Page_System" type="Control" parent="CardControl"]
 visible = false
 anchors_preset = 0
@@ -351,7 +1217,7 @@ layout_mode = 0
 offset_left = 32.0
 offset_top = 100.0
 offset_right = 471.0
-offset_bottom = 467.0
+offset_bottom = 423.0
 theme = ExtResource("5_l4e1i")
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/normal_font_size = 32
@@ -702,216 +1568,6 @@ text = "< Cover
 -50% ACC"
 scroll_active = false
 
-[node name="PPR" type="Control" parent="CardControl"]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="CardControl/PPR"]
-layout_mode = 0
-offset_left = 27.0
-offset_top = 84.0
-offset_right = 774.0
-offset_bottom = 445.0
-
-[node name="DescriptionLabel" type="RichTextLabel" parent="CardControl/PPR/VBoxContainer"]
-layout_mode = 2
-theme = ExtResource("5_l4e1i")
-theme_override_colors/default_color = Color(0, 0, 0, 1)
-theme_override_fonts/normal_font = ExtResource("6_qh3ul")
-theme_override_font_sizes/normal_font_size = 32
-bbcode_enabled = true
-text = "Each [color=#780000]Actor[/color] has a [color=#780000]PPR[/color] stat 
-which determines how many 
-[color=blue]Action Pages[/color] they can fit in 
-thier [color=blue]PageQue[/color] each [color=#780000]Round[/color]."
-fit_content = true
-scroll_active = false
-
-[node name="HSeparator2" type="HSeparator" parent="CardControl/PPR/VBoxContainer"]
-self_modulate = Color(1, 1, 1, 0)
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="HBoxContainer" type="HBoxContainer" parent="CardControl/PPR/VBoxContainer"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="CardControl/PPR/VBoxContainer/HBoxContainer"]
-self_modulate = Color(0.470588, 0, 0, 1)
-layout_mode = 2
-theme = ExtResource("3_bdbcw")
-theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
-theme_override_constants/outline_size = 4
-theme_override_font_sizes/font_size = 32
-text = " PPR"
-
-[node name="PPR_Icon" type="TextureRect" parent="CardControl/PPR/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-texture = ExtResource("15_ifnkw")
-expand_mode = 3
-stretch_mode = 5
-
-[node name="Label2" type="Label" parent="CardControl/PPR/VBoxContainer/HBoxContainer"]
-self_modulate = Color(0, 0, 0, 1)
-layout_mode = 2
-theme = ExtResource("5_l4e1i")
-theme_override_font_sizes/font_size = 32
-text = ": Pages per Round"
-
-[node name="HSeparator3" type="HSeparator" parent="CardControl/PPR/VBoxContainer"]
-self_modulate = Color(1, 1, 1, 0)
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="DescriptionLabel7" type="RichTextLabel" parent="CardControl/PPR/VBoxContainer"]
-layout_mode = 2
-theme = ExtResource("5_l4e1i")
-theme_override_colors/default_color = Color(0, 0, 0, 1)
-theme_override_fonts/normal_font = ExtResource("6_qh3ul")
-theme_override_font_sizes/normal_font_size = 32
-bbcode_enabled = true
-text = "The number of [color=#780000]Turns[/color] in a [color=#780000]Round[/color] is equal to 
-the highest [color=#780000]PPR[/color] of all [color=#780000]Actors[/color] in [color=#780000]Combat[/color]."
-fit_content = true
-scroll_active = false
-
-[node name="HSeparator7" type="HSeparator" parent="CardControl/PPR/VBoxContainer"]
-self_modulate = Color(1, 1, 1, 0)
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="DescriptionLabel4" type="RichTextLabel" parent="CardControl/PPR/VBoxContainer"]
-layout_mode = 2
-theme = ExtResource("5_l4e1i")
-bbcode_enabled = true
-text = "[color=#780000]Gap[/color] slots are added to pad out lower [color=#780000]PPR[/color]."
-fit_content = true
-scroll_active = false
-
-[node name="HSeparator4" type="HSeparator" parent="CardControl/PPR/VBoxContainer"]
-self_modulate = Color(1, 1, 1, 0)
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="DescriptionLabel5" type="RichTextLabel" parent="CardControl/PPR/VBoxContainer"]
-visible = false
-layout_mode = 2
-theme = ExtResource("5_l4e1i")
-theme_override_colors/default_color = Color(0, 0, 0, 1)
-theme_override_fonts/normal_font = ExtResource("6_qh3ul")
-theme_override_font_sizes/normal_font_size = 32
-text = "Effects that say \"On Turn\" or \"For x Turns\" do not trigger or lose duration on Gaps. "
-fit_content = true
-scroll_active = false
-
-[node name="HSeparator5" type="HSeparator" parent="CardControl/PPR/VBoxContainer"]
-visible = false
-self_modulate = Color(1, 1, 1, 0)
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="DescriptionLabel6" type="RichTextLabel" parent="CardControl/PPR/VBoxContainer"]
-visible = false
-layout_mode = 2
-theme = ExtResource("5_l4e1i")
-theme_override_colors/default_color = Color(0, 0, 0, 1)
-theme_override_fonts/normal_font = ExtResource("6_qh3ul")
-theme_override_font_sizes/normal_font_size = 32
-text = "\"Until next Turn\" Buffs stay active on Gaps."
-fit_content = true
-scroll_active = false
-
-[node name="HSeparator6" type="HSeparator" parent="CardControl/PPR/VBoxContainer"]
-self_modulate = Color(1, 1, 1, 0)
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="PPR_Demo_Image" type="TextureRect" parent="CardControl/PPR"]
-layout_mode = 0
-offset_left = 543.0
-offset_top = 136.0
-offset_right = 731.0
-offset_bottom = 252.0
-texture = ExtResource("16_aseqn")
-
-[node name="BunnyPPR2" type="Label" parent="CardControl/PPR/PPR_Demo_Image"]
-self_modulate = Color(0, 0, 0, 1)
-layout_mode = 2
-offset_left = 6.0
-offset_top = -32.0
-offset_right = 186.0
-offset_bottom = 18.0
-theme = ExtResource("3_bdbcw")
-theme_override_constants/line_spacing = -10
-theme_override_constants/outline_size = 0
-theme_override_font_sizes/font_size = 24
-text = "Gap Slot
-v"
-horizontal_alignment = 1
-
-[node name="NinePatchRect" type="NinePatchRect" parent="CardControl/PPR/PPR_Demo_Image"]
-layout_mode = 0
-offset_left = -44.0
-offset_top = -40.0
-offset_right = -4.0
-offset_bottom = 82.0
-texture = ExtResource("4_kjbxh")
-patch_margin_left = 12
-patch_margin_top = 12
-patch_margin_right = 12
-patch_margin_bottom = 12
-
-[node name="VBoxContainer" type="VBoxContainer" parent="CardControl/PPR/PPR_Demo_Image/NinePatchRect"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = -2
-alignment = 1
-
-[node name="PPR_Icon" type="TextureRect" parent="CardControl/PPR/PPR_Demo_Image/NinePatchRect/VBoxContainer"]
-custom_minimum_size = Vector2(36, 40)
-layout_mode = 2
-texture = ExtResource("15_ifnkw")
-expand_mode = 3
-stretch_mode = 5
-
-[node name="BunnyPPR" type="Label" parent="CardControl/PPR/PPR_Demo_Image/NinePatchRect/VBoxContainer"]
-self_modulate = Color(0, 0, 0, 1)
-layout_mode = 2
-theme = ExtResource("3_bdbcw")
-theme_override_font_sizes/font_size = 32
-text = "2"
-horizontal_alignment = 1
-
-[node name="TurtPPR" type="Label" parent="CardControl/PPR/PPR_Demo_Image/NinePatchRect/VBoxContainer"]
-self_modulate = Color(0, 0, 0, 1)
-layout_mode = 2
-theme = ExtResource("3_bdbcw")
-theme_override_font_sizes/font_size = 32
-text = "3"
-horizontal_alignment = 1
-
-[node name="DescriptionLabel5" type="RichTextLabel" parent="CardControl/PPR/PPR_Demo_Image"]
-layout_mode = 2
-offset_left = -65.0
-offset_top = 93.0
-offset_right = 682.0
-offset_bottom = 133.0
-theme = ExtResource("5_l4e1i")
-theme_override_colors/default_color = Color(0.470588, 0, 0, 1)
-theme_override_font_sizes/normal_font_size = 32
-text = "1 Page = 1 Turn"
-fit_content = true
-scroll_active = false
-
 [node name="Speed" type="Control" parent="CardControl"]
 visible = false
 layout_mode = 1
@@ -1011,6 +1667,7 @@ offset_bottom = 130.0
 self_modulate = Color(0.470588, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("3_bdbcw")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 4
 theme_override_font_sizes/font_size = 32
@@ -1079,6 +1736,7 @@ layout_mode = 2
 self_modulate = Color(0.470588, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("3_bdbcw")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 4
 theme_override_font_sizes/font_size = 32
@@ -1104,6 +1762,7 @@ layout_mode = 2
 self_modulate = Color(0.470588, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("3_bdbcw")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 4
 theme_override_font_sizes/font_size = 32
@@ -1243,6 +1902,7 @@ layout_mode = 2
 self_modulate = Color(0.470588, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("3_bdbcw")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 4
 theme_override_font_sizes/font_size = 32
@@ -1480,6 +2140,7 @@ layout_mode = 2
 self_modulate = Color(0.470588, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("3_bdbcw")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 4
 theme_override_font_sizes/font_size = 32
@@ -1790,6 +2451,7 @@ layout_mode = 2
 self_modulate = Color(0.470588, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("3_bdbcw")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 4
 theme_override_font_sizes/font_size = 32
@@ -1836,6 +2498,7 @@ layout_mode = 2
 self_modulate = Color(0.470588, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("3_bdbcw")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 4
 theme_override_font_sizes/font_size = 32
@@ -1883,6 +2546,7 @@ layout_mode = 2
 self_modulate = Color(0.470588, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("3_bdbcw")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 4
 theme_override_font_sizes/font_size = 32
@@ -2909,6 +3573,7 @@ layout_mode = 2
 size_flags_vertical = 3
 
 [node name="Weapons" type="Control" parent="CardControl"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

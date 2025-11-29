@@ -14,6 +14,8 @@ signal closed
 @export var done_button:Button
 @export var done_button_background:NinePatchRect
 
+@export var intro_card:Control
+@export var multi_turn_card:Control
 @export var page_que_card:Control
 @export var movement_card:Control
 @export var targeting_actor_card:Control
@@ -69,11 +71,13 @@ func _ready() -> void:
 	done_button.pressed.connect(_on_done)
 	close_button.pressed.connect(_on_done)
 	cards = {
+		"Intro": intro_card,
+		"Multi Turn Based": multi_turn_card,
 		"Page Que": page_que_card,
 		"Movement": movement_card,
 		"Targeting Actors": targeting_actor_card,
 		"Targeting Spots": targeting_spot_card,
-		"Turns and Gaps": ppr_card,
+		"Pages Per Round": ppr_card,
 		"Turn Order": speed_card,
 		"Crashing": mass_card,
 		"Armor and Damage": armor_card,
@@ -84,13 +88,15 @@ func _ready() -> void:
 		"Weapons": weapon_card
 	}
 	card_list = [
-		"Page Que",
-		"Movement",
-		"Targeting Actors",
-		"Targeting Spots",
-		"Turns and Gaps",
+		"Intro",
+		"Multi Turn Based",
+		"Pages Per Round",
 		"Turn Order",
 		"Crashing",
+		#"Page Que",
+		#"Movement",
+		"Targeting Actors",
+		"Targeting Spots",
 		"Armor and Damage",
 		"Block and Evade",
 		"Items",

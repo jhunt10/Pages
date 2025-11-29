@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://Scenes/Combat/UiNodes/QueCollection/que_mini_slot_icon.gd" id="3_yq6m0"]
 [ext_resource type="Texture2D" uid="uid://cg1yo6bhpalea" path="res://assets/Sprites/UI/QueInputAndDisplay/mini_page_slot.png" id="4_ibrbi"]
 [ext_resource type="Texture2D" uid="uid://1brfy81pji75" path="res://assets/Sprites/UI/QueInputAndDisplay/mini_page_gap_slot.png" id="5_64488"]
-[ext_resource type="Texture2D" uid="uid://bdn528i15d122" path="res://data/Actions/Attack/TestSword.png" id="6_1kqk5"]
+[ext_resource type="Texture2D" uid="uid://d28r048mh6136" path="res://assets/Sprites/UnknownSprite.png" id="6_1kqk5"]
 [ext_resource type="Texture2D" uid="uid://b4rsuuvrkee14" path="res://assets/Sprites/UI/QueInputAndDisplay/mini_dead_slot.png" id="7_olg8p"]
 [ext_resource type="Texture2D" uid="uid://coojsfckia2jk" path="res://Scenes/Combat/UiNodes/QueDisplay/UnknownPageSlotIcon.png" id="7_y873m"]
 [ext_resource type="Texture2D" uid="uid://seyoqmlx4o78" path="res://assets/Sprites/UI/QueInputAndDisplay/mini_page_slot_highlight.png" id="8_i7bai"]
@@ -54,13 +54,12 @@ layout_mode = 2
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 
-[node name="PageSlotPrefab" type="Control" parent="BoxContainer" node_paths=PackedStringArray("background", "gap_icon", "page_icon", "highlight", "dead_icon", "unknown_icon")]
+[node name="PageSlotPrefab" type="Control" parent="BoxContainer" node_paths=PackedStringArray("background", "gap_icon", "highlight", "dead_icon", "unknown_icon")]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 script = ExtResource("3_yq6m0")
 background = NodePath("PageSlot")
 gap_icon = NodePath("GapTextureRect")
-page_icon = NodePath("Icon")
 highlight = NodePath("Highlight")
 dead_icon = NodePath("DeadIcon")
 unknown_icon = NodePath("UnknownIcon")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=4 uid="uid://bemdpvi328wf"]
+[gd_scene load_steps=34 format=4 uid="uid://bemdpvi328wf"]
 
 [ext_resource type="Script" path="res://assets/Scripts/Map/map_controler_node.gd" id="1_qi44j"]
 [ext_resource type="Texture2D" uid="uid://b21igxb5gcqlc" path="res://assets/Sprites/TileSets/CaveFloor_TileSheet.png" id="2_4k04i"]
@@ -13,7 +13,6 @@
 [ext_resource type="PackedScene" uid="uid://bpurspf6xbf1h" path="res://Scenes/Combat/UiNodes/TargetAreaDisplay/target_area_display_node.tscn" id="9_xk56m"]
 [ext_resource type="Texture2D" uid="uid://kh2uekpf4sb8" path="res://Scenes/Maps/MapEditing/ActorSpawnSprite.png" id="10_7khqc"]
 [ext_resource type="Script" path="res://Scenes/Maps/MapEditing/actor_spawn_node.gd" id="11_ukasq"]
-[ext_resource type="Texture2D" uid="uid://rlwkryaiibhy" path="res://defs/Actors/Tutorial/RoofShroom_SpriteSheet.png" id="12_w35wk"]
 [ext_resource type="Texture2D" uid="uid://c0scdw1u8ayan" path="res://assets/Sprites/TileSets/PlayerSpawnArea_TileSet.png" id="15_q10fo"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0gfa0"]
@@ -1336,7 +1335,6 @@ tile_set = SubResource("TileSet_o1yif")
 
 [node name="SpwanNode_Mushroom2" type="Sprite2D" parent="MarkerTileMapLayer"]
 position = Vector2(688, 752)
-texture = ExtResource("12_w35wk")
 offset = Vector2(0, -4)
 hframes = 12
 vframes = 4

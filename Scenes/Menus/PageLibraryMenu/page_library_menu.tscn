@@ -150,11 +150,12 @@ size_flags_vertical = 3
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="EntryGroupContainer" type="Container" parent="VBoxContainer/ScrollContainer/VBoxContainer" node_paths=PackedStringArray("title_label", "entries_container", "background", "inner_container")]
+[node name="EntryGroupContainer" type="Container" parent="VBoxContainer/ScrollContainer/VBoxContainer" node_paths=PackedStringArray("title_label", "count_label", "entries_container", "background", "inner_container")]
 custom_minimum_size = Vector2(24, 324)
 layout_mode = 2
 script = ExtResource("5_1qkpm")
-title_label = NodePath("EntryGroupInnerContainer/TitlerLabel")
+title_label = NodePath("EntryGroupInnerContainer/HBoxContainer/TitlerLabel")
+count_label = NodePath("EntryGroupInnerContainer/HBoxContainer/CountLabel")
 entries_container = NodePath("EntryGroupInnerContainer/SubEntriesContainer")
 background = NodePath("NinePatchRect")
 inner_container = NodePath("EntryGroupInnerContainer")
@@ -171,7 +172,17 @@ patch_margin_bottom = 12
 [node name="EntryGroupInnerContainer" type="VBoxContainer" parent="VBoxContainer/ScrollContainer/VBoxContainer/EntryGroupContainer"]
 layout_mode = 2
 
-[node name="TitlerLabel" type="Label" parent="VBoxContainer/ScrollContainer/VBoxContainer/EntryGroupContainer/EntryGroupInnerContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/ScrollContainer/VBoxContainer/EntryGroupContainer/EntryGroupInnerContainer"]
+layout_mode = 2
+
+[node name="TitlerLabel" type="Label" parent="VBoxContainer/ScrollContainer/VBoxContainer/EntryGroupContainer/EntryGroupInnerContainer/HBoxContainer"]
+custom_minimum_size = Vector2(420, 0)
+layout_mode = 2
+theme = ExtResource("4_4wgxq")
+theme_override_font_sizes/font_size = 32
+text = "Page Name"
+
+[node name="CountLabel" type="Label" parent="VBoxContainer/ScrollContainer/VBoxContainer/EntryGroupContainer/EntryGroupInnerContainer/HBoxContainer"]
 custom_minimum_size = Vector2(420, 0)
 layout_mode = 2
 theme = ExtResource("4_4wgxq")

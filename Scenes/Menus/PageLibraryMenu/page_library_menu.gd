@@ -89,6 +89,11 @@ func build_page_entires():
 		var load_path = ItemLibrary.Instance.get_object_def_load_path(item_key)
 		_build_object_entry(def, inst, load_path)
 	
+	var files = entry_groups.keys()
+	files.sort()
+	for file in files:
+		page_entries_container.add_child(entry_groups[file])
+	
 	scroll_ocntainer.show()
 	loading_patch.hide()
 	loaded = true
@@ -119,7 +124,7 @@ func _build_object_entry(obj_def:Dictionary, obj_inst:BaseLoadObject, load_path:
 		var new_group = premade_entry_group.duplicate()
 		new_group.title_label.text = load_path
 		new_group.show()
-		page_entries_container.add_child(new_group)
+		#page_entries_container.add_child(new_group)
 		entry_groups[load_path] = new_group
 		group_to_entry_keys[load_path] = []
 	

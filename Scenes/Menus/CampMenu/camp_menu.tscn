@@ -121,7 +121,6 @@ axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
 
 [node name="MainOptionsContainer" type="VBoxContainer" parent="CampOptionsContainer"]
-visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -134,7 +133,116 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("4_gjck3")
 
+[node name="ExplorOptionButton" type="Control" parent="CampOptionsContainer/MainOptionsContainer" node_paths=PackedStringArray("button", "under_line", "highlight", "label")]
+layout_mode = 2
+size_flags_vertical = 3
+script = ExtResource("6_5vfat")
+button = NodePath("Button")
+under_line = NodePath("TitleLabel/ColorRect")
+highlight = NodePath("TextureRect")
+label = NodePath("TitleLabel")
+text = "Explore"
+
+[node name="TextureRect" type="TextureRect" parent="CampOptionsContainer/MainOptionsContainer/ExplorOptionButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -4.5
+offset_bottom = 4.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_hs7sy")
+
+[node name="TitleLabel" type="Label" parent="CampOptionsContainer/MainOptionsContainer/ExplorOptionButton"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 0
+offset_top = 3.0
+offset_right = 198.0
+offset_bottom = 63.0
+theme = ExtResource("3_ufdhk")
+theme_override_font_sizes/font_size = 48
+text = "Fight"
+
+[node name="ColorRect" type="ColorRect" parent="CampOptionsContainer/MainOptionsContainer/ExplorOptionButton/TitleLabel"]
+custom_minimum_size = Vector2(0, 3)
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0.498039, 0, 0, 1)
+
+[node name="Button" type="Button" parent="CampOptionsContainer/MainOptionsContainer/ExplorOptionButton"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 4.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PrepareOptionButton" type="Control" parent="CampOptionsContainer/MainOptionsContainer" node_paths=PackedStringArray("button", "under_line", "highlight", "label")]
+layout_mode = 2
+size_flags_vertical = 3
+script = ExtResource("6_5vfat")
+button = NodePath("Button")
+under_line = NodePath("TitleLabel/ColorRect")
+highlight = NodePath("TextureRect")
+label = NodePath("TitleLabel")
+text = "PageBook"
+
+[node name="TextureRect" type="TextureRect" parent="CampOptionsContainer/MainOptionsContainer/PrepareOptionButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -4.5
+offset_bottom = 4.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_hs7sy")
+
+[node name="TitleLabel" type="Label" parent="CampOptionsContainer/MainOptionsContainer/PrepareOptionButton"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 0
+offset_top = 3.0
+offset_right = 258.0
+offset_bottom = 63.0
+theme = ExtResource("3_ufdhk")
+theme_override_font_sizes/font_size = 48
+text = "Party"
+
+[node name="ColorRect" type="ColorRect" parent="CampOptionsContainer/MainOptionsContainer/PrepareOptionButton/TitleLabel"]
+custom_minimum_size = Vector2(0, 3)
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0.498039, 0, 0, 1)
+
+[node name="Button" type="Button" parent="CampOptionsContainer/MainOptionsContainer/PrepareOptionButton"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 4.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+
 [node name="QuestOptionButton" type="Control" parent="CampOptionsContainer/MainOptionsContainer" node_paths=PackedStringArray("button", "under_line", "highlight", "label")]
+visible = false
 layout_mode = 2
 size_flags_vertical = 3
 script = ExtResource("6_5vfat")
@@ -158,7 +266,7 @@ self_modulate = Color(0.470588, 0, 0, 1)
 layout_mode = 0
 offset_right = 144.0
 offset_bottom = 60.0
-scale = Vector2(1e-05, 1e-05)
+scale = Vector2(0.916667, 0.916667)
 theme = ExtResource("3_ufdhk")
 theme_override_font_sizes/font_size = 48
 text = "Quest"
@@ -210,9 +318,9 @@ texture = ExtResource("7_hs7sy")
 [node name="TitleLabel" type="Label" parent="CampOptionsContainer/MainOptionsContainer/ShopOptionButton"]
 self_modulate = Color(0.470588, 0, 0, 1)
 layout_mode = 0
+offset_top = 3.0
 offset_right = 141.0
-offset_bottom = 60.0
-scale = Vector2(1e-05, 1e-05)
+offset_bottom = 63.0
 theme = ExtResource("3_ufdhk")
 theme_override_font_sizes/font_size = 48
 text = "Shop"
@@ -230,114 +338,6 @@ grow_vertical = 0
 color = Color(0.498039, 0, 0, 1)
 
 [node name="Button" type="Button" parent="CampOptionsContainer/MainOptionsContainer/ShopOptionButton"]
-self_modulate = Color(1, 1, 1, 0)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = 4.0
-offset_bottom = 12.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="PrepareOptionButton" type="Control" parent="CampOptionsContainer/MainOptionsContainer" node_paths=PackedStringArray("button", "under_line", "highlight", "label")]
-layout_mode = 2
-size_flags_vertical = 3
-script = ExtResource("6_5vfat")
-button = NodePath("Button")
-under_line = NodePath("TitleLabel/ColorRect")
-highlight = NodePath("TextureRect")
-label = NodePath("TitleLabel")
-text = "PageBook"
-
-[node name="TextureRect" type="TextureRect" parent="CampOptionsContainer/MainOptionsContainer/PrepareOptionButton"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -4.5
-offset_bottom = 4.5
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("7_hs7sy")
-
-[node name="TitleLabel" type="Label" parent="CampOptionsContainer/MainOptionsContainer/PrepareOptionButton"]
-self_modulate = Color(0.498039, 0, 0, 1)
-layout_mode = 0
-offset_right = 240.0
-offset_bottom = 60.0
-scale = Vector2(1e-05, 1e-05)
-theme = ExtResource("3_ufdhk")
-theme_override_font_sizes/font_size = 48
-text = "PageBook"
-
-[node name="ColorRect" type="ColorRect" parent="CampOptionsContainer/MainOptionsContainer/PrepareOptionButton/TitleLabel"]
-custom_minimum_size = Vector2(0, 3)
-layout_mode = 1
-anchors_preset = -1
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_bottom = -4.0
-grow_horizontal = 2
-grow_vertical = 0
-color = Color(0.498039, 0, 0, 1)
-
-[node name="Button" type="Button" parent="CampOptionsContainer/MainOptionsContainer/PrepareOptionButton"]
-self_modulate = Color(1, 1, 1, 0)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = 4.0
-offset_bottom = 12.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="ExplorOptionButton" type="Control" parent="CampOptionsContainer/MainOptionsContainer" node_paths=PackedStringArray("button", "under_line", "highlight", "label")]
-layout_mode = 2
-size_flags_vertical = 3
-script = ExtResource("6_5vfat")
-button = NodePath("Button")
-under_line = NodePath("TitleLabel/ColorRect")
-highlight = NodePath("TextureRect")
-label = NodePath("TitleLabel")
-text = "Explore"
-
-[node name="TextureRect" type="TextureRect" parent="CampOptionsContainer/MainOptionsContainer/ExplorOptionButton"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -4.5
-offset_bottom = 4.5
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("7_hs7sy")
-
-[node name="TitleLabel" type="Label" parent="CampOptionsContainer/MainOptionsContainer/ExplorOptionButton"]
-self_modulate = Color(0.498039, 0, 0, 1)
-layout_mode = 0
-offset_right = 198.0
-offset_bottom = 60.0
-scale = Vector2(1e-05, 1e-05)
-theme = ExtResource("3_ufdhk")
-theme_override_font_sizes/font_size = 48
-text = "Explore"
-
-[node name="ColorRect" type="ColorRect" parent="CampOptionsContainer/MainOptionsContainer/ExplorOptionButton/TitleLabel"]
-custom_minimum_size = Vector2(0, 3)
-layout_mode = 1
-anchors_preset = -1
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_bottom = -4.0
-grow_horizontal = 2
-grow_vertical = 0
-color = Color(0.498039, 0, 0, 1)
-
-[node name="Button" type="Button" parent="CampOptionsContainer/MainOptionsContainer/ExplorOptionButton"]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -372,9 +372,9 @@ texture = ExtResource("7_hs7sy")
 [node name="TitleLabel" type="Label" parent="CampOptionsContainer/MainOptionsContainer/RecordsOptionButton"]
 self_modulate = Color(0.470588, 0, 0, 1)
 layout_mode = 0
+offset_top = 3.0
 offset_right = 210.0
-offset_bottom = 60.0
-scale = Vector2(1e-05, 1e-05)
+offset_bottom = 63.0
 theme = ExtResource("3_ufdhk")
 theme_override_font_sizes/font_size = 48
 text = "Records"
@@ -426,12 +426,12 @@ texture = ExtResource("7_hs7sy")
 [node name="TitleLabel" type="Label" parent="CampOptionsContainer/MainOptionsContainer/ScribeOptionButton"]
 self_modulate = Color(0.470588, 0, 0, 1)
 layout_mode = 0
+offset_top = 4.0
 offset_right = 180.0
-offset_bottom = 60.0
-scale = Vector2(1e-05, 1e-05)
+offset_bottom = 64.0
 theme = ExtResource("3_ufdhk")
 theme_override_font_sizes/font_size = 48
-text = "Scribe"
+text = "Save/Load"
 
 [node name="ColorRect" type="ColorRect" parent="CampOptionsContainer/MainOptionsContainer/ScribeOptionButton/TitleLabel"]
 custom_minimum_size = Vector2(0, 3)
@@ -761,6 +761,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="RecordsOptionsContainer" type="VBoxContainer" parent="CampOptionsContainer"]
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -860,7 +861,7 @@ texture = ExtResource("7_hs7sy")
 [node name="TitleLabel" type="Label" parent="CampOptionsContainer/RecordsOptionsContainer/Rec_PagesOptionButton"]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 0
-offset_right = 150.0
+offset_right = 192.0
 offset_bottom = 60.0
 theme = ExtResource("3_ufdhk")
 theme_override_font_sizes/font_size = 48
@@ -915,7 +916,7 @@ texture = ExtResource("7_hs7sy")
 [node name="TitleLabel" type="Label" parent="CampOptionsContainer/RecordsOptionsContainer/Rec_ActorsOptionButton"]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 0
-offset_right = 150.0
+offset_right = 174.0
 offset_bottom = 60.0
 theme = ExtResource("3_ufdhk")
 theme_override_font_sizes/font_size = 48

@@ -12,6 +12,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 20
 alignment = 1
 script = ExtResource("1_ytar2")
 
@@ -57,30 +58,6 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 32
 text = "Tutorial"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="PagesContainer" type="HBoxContainer" parent="VBoxContainer"]
-layout_mode = 2
-alignment = 1
-
-[node name="PagesButton" type="TextureButton" parent="VBoxContainer/PagesContainer"]
-layout_mode = 2
-texture_normal = ExtResource("1_gojdr")
-texture_pressed = ExtResource("3_78x4c")
-texture_disabled = ExtResource("3_78x4c")
-stretch_mode = 0
-
-[node name="Label" type="Label" parent="VBoxContainer/PagesContainer/PagesButton"]
-modulate = Color(0.462291, 0.462291, 0.462291, 1)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 32
-text = "Pages"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -132,7 +109,32 @@ text = "Load"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="PagesContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="PagesButton" type="TextureButton" parent="VBoxContainer/PagesContainer"]
+layout_mode = 2
+texture_normal = ExtResource("1_gojdr")
+texture_pressed = ExtResource("3_78x4c")
+texture_disabled = ExtResource("3_78x4c")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="VBoxContainer/PagesContainer/PagesButton"]
+modulate = Color(0.462291, 0.462291, 0.462291, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 32
+text = "Data"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="MoreContainer" type="HBoxContainer" parent="VBoxContainer"]
+visible = false
 layout_mode = 2
 alignment = 1
 
