@@ -69,6 +69,12 @@ func load_save_data(data:Array):
 func _get_innate_slots_data()->Array:
 	return []
 
+## Only used when deleting parent Actor
+func _delete_all_items():
+	for item_id in _raw_item_slots:
+		if item_id:
+			ItemLibrary.delete_item(item_id)
+
 func _build_slots_list():
 	if LOGGING: print("Building Slots in %s for %s" % [get_holder_name(), _actor.Id])
 	if LOGGING: print("- Raw Slots : %s" % [_raw_item_slots])

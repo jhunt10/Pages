@@ -17,11 +17,15 @@
             ]
         },
         "ActorData": {
+            "Faction": "Slimes",
             "ExpValue": 10,
             "MoneyValue": 15,
             "DropItemsSet": {
-                "": 4,
-                "HealthPotionM": 1
+                "": 5,
+                "HealthPotionS": 5,
+                "HealthPotionM": 1,
+                "SlimeSpike_ActionPage": 1,
+                "Slime_PageBook": 1
             },
             "IsAdirectional": true
         },
@@ -110,6 +114,19 @@
             "Taxonomy": [
                 "Actor"
             ]
+        },
+        "ActorData": {
+            "Faction": "Slimes",
+            "ExpValue": 10,
+            "MoneyValue": 15,
+            "DropItemsSet": {
+                "": 5,
+                "HurtPotionS": 5,
+                "HurtPotionM": 5,
+                "SlimePoisonSkin_PassivePage": 1,
+                "Slime_PageBook": 1
+            },
+            "IsAdirectional": true
         },
         "SpriteSheet": "Sprites/GreenSlime_SpriteSheet.png",
         "ImmuneToEffects": ["AilmentBlind", "AilmentPoisoned"],

@@ -11,6 +11,18 @@ static func spawn_item(item_key:String, item_data:Dictionary, pos:MapPos)->BaseI
 		CombatRootControl.Instance.add_item(item, pos)
 	return item
 
+static func get_money_small_icon():
+	# Force items to load
+	ItemLibrary.get_item_def("MoneyItem")
+	return ItemLibrary.Instance.get_small_icon_of_def("MoneyItem")
+
+static func get_rarity_background_for_item_key(item_key):
+	var item_def = ItemLibrary.get_item_def(item_key)
+	var rarity = item_def.get("ItemData", {}).get("Rarity", BaseItem.ItemRarity.Mundane)
+	var taxonimy = item_def.get("#ObjDetails", {}).get("Taxonomy", [])
+	var clipped = taxonimy.has("Page") and taxonimy.has("Passive")
+	return get_rarity_background(rarity, clipped)
+
 
 static func get_rarity_background(rarity, is_clipped:bool=false)->Texture2D:
 	if rarity is BaseItem.ItemRarity:

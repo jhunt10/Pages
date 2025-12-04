@@ -11,13 +11,14 @@
             "SnippetDesc": "A mushroom.",
             "Tags": [
                 "Fungi",
-                "Creature"
+                "Living"
             ],
             "Taxonomy": [
                 "Actor"
             ]
         },
         "ActorData": {
+            "Faction": "Mushrooms",
             "ExpValue": 10,
             "MoneyValue": 5,
             "DropItemsSet": {
@@ -88,13 +89,14 @@
         "!ParentKey": "#BaseActor",
         "#ObjDetails": {
             "Description": "Dispite thier name, @@#Color:Red:Shroom Golems@@ are neither @@#Color:Red:Mushrooms@@ nor @@#Color:Red:Golems@@, but instead are catagorized as marsupials. This ambush predators tend to disguise themselves as hasrmelss @@#Color:Red:Mushrooms@@, lureing in thier prey then striking with Poisonus Spores and Bludging Attacks, before robbing them blind to pay for scratch off lottery tickets. They don't exspect to win any real money, they just like scratching off that silver foil stuff. Oh ya, and they really hate @@#Color:DmgColor:Light:Light@@.",
-            "DisplayName": "Shrrom Golem",
+            "DisplayName": "Shroom Golem",
             "LargeIcon": "Sprites/ShroomGolem_Icon.png",
             "ObjectType": "Actor",
             "SmallIcon": "Sprites/ShroomGolem_Icon.png",
             "SnippetDesc": "A mushroom gollem, but not really.",
             "Tags": [
                 "Fungi",
+                "Living",
                 "Creature"
             ],
             "Taxonomy": [
@@ -102,6 +104,7 @@
             ]
         },
         "ActorData": {
+            "Faction": "Mushrooms",
             "ExpValue": 25,
             "MoneyValue": 15,
             "DropItemsSet": {
@@ -193,7 +196,7 @@
             "Evasion": 0,
             "MagAttack": 10,
             "PhyAttack": 10,
-            "Resistance:Light": 0
+            "Resistance:Light": -50
         },
         "_DefVersion": "1"
     }

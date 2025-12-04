@@ -38,6 +38,25 @@ func get_object_def(key:String):
 func get_object_def_load_path(key:String):
 	return _defs_to_load_paths.get(key, null)
 
+func get_display_name_of_def(key:String):
+	var def = get_object_def(key)
+	return def.get("#ObjDetails", {}).get("DisplayName", key)
+	
+func get_large_icon_of_def(key:String):
+	var def = get_object_def(key)
+	var load_path = get_object_def_load_path(key)
+	var sprite_path = def.get("#ObjDetails", {}).get("LargeIcon", null)
+	return SpriteCache.get_sprite(load_path.path_join(sprite_path))
+
+func get_small_icon_of_def(key:String):
+	var def = get_object_def(key)
+	var load_path = get_object_def_load_path(key)
+	if !load_path:
+		return SpriteCache._get_no_sprite()
+	var sprite_path = def.get("#ObjDetails", {}).get("SmallIcon", null)
+	return SpriteCache.get_sprite(load_path.path_join(sprite_path))
+	
+
 func get_object(id:String)->BaseLoadObject:
 	if _static_objects.keys().has(id):
 		return _static_objects[id]
@@ -180,6 +199,10 @@ func reload():
 	#_loaded_objects.clear()
 	#init_load()
 
+## Hook to allow libraries to do stuff with a def right before it's added to _loaded_defs
+func _on_def_loaded(def_key:String, def:Dictionary)->Dictionary:
+	return def
+
 func _load_object_defs(file_sufixes=null):
 	var parent_to_child_mapping = {}
 	var child_to_parent_mapping = {}
@@ -274,7 +297,10 @@ func _rec_add_defs_to_loaded_defs(def_key:String, parent_to_child_mapping:Dictio
 			printerr("%sLibrary._rec_add_defs_to_loaded_defs: Child '%s' of parent '%s' not found.'->." % [get_object_name(), def_key, child_def_key])
 			continue
 		var child_def = temp_defs.get(child_def_key, {})
-		_object_defs[child_def_key] = _merge_defs(child_def, _object_defs[def_key])
+		child_def = _merge_defs(child_def, _object_defs[def_key])
+		child_def = _on_def_loaded(child_def_key,child_def )
+		_object_defs[child_def_key] = child_def
+		
 		_rec_add_defs_to_loaded_defs(child_def_key, parent_to_child_mapping, temp_defs)
 	
 

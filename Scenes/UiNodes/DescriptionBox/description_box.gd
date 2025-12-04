@@ -58,6 +58,10 @@ func _hide_pop_up(data):
 		popup_container.queue_free()
 
 func set_page_item(page:BasePageItem, actor:BaseActor=null):
+	if not page:
+		self.clear()
+		self.append_text("NULL PAGE")
+		return
 	var merged_def = BaseLoadObjectLibrary._merge_defs(page._data, page._def)
 	set_object(merged_def, page, actor)
 

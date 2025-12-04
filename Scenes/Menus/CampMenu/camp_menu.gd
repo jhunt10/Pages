@@ -95,9 +95,10 @@ func _on_shop_button():
 	MainRootNode.Instance.open_shop_menu()
 
 func _on_quest_button():
-	StoryState.load_next_story_scene()
-	#MainRootNode.Instance.start_combat("res://Scenes/Maps/StoryMaps/2_Cross_Road/crossroad_dialog_map.tscn")
-	#MainRootNode.Instance.load_dialog_scene("res://Scenes/Maps/StoryMaps/2_Cross_Road/crossroad_dialog_script.json")
+	_on_records()
+	#StoryState.load_next_story_scene()
+	##MainRootNode.Instance.start_combat("res://Scenes/Maps/StoryMaps/2_Cross_Road/crossroad_dialog_map.tscn")
+	##MainRootNode.Instance.load_dialog_scene("res://Scenes/Maps/StoryMaps/2_Cross_Road/crossroad_dialog_script.json")
 	pass
 
 func _on_explore_button():
@@ -119,8 +120,9 @@ func _on_pages():
 	self.add_child(new_cards)
 
 func _on_actors():
-	var new_cards = load("res://Scenes/Menus/ActorsLibrary/actors_library.tscn").instantiate()
-	self.add_child(new_cards)
+	MainRootNode.Instance.open_archive()
+	#var new_cards = load("res://Scenes/Menus/ActorsLibrary/actors_library.tscn").instantiate()
+	#self.add_child(new_cards)
 	
 
 func _on_save_button():

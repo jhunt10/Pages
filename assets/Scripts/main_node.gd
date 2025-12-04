@@ -191,6 +191,11 @@ func open_page_menu(actor:BaseActor):
 	center_container.add_child(page_menu)
 	page_menu.set_actor(actor)
 	return page_menu
+
+func open_archive():
+	var menu = load("res://Scenes/Menus/Archive/archive_control.tscn").instantiate()
+	self.add_child(menu)
+	return menu
 	
 func open_page_editor():
 	var page_editor = load("res://Scenes/Editors/PageEditor/page_editor_control_scene.tscn").instantiate()

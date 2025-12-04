@@ -133,6 +133,58 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("4_gjck3")
 
+[node name="QuestOptionButton" type="Control" parent="CampOptionsContainer/MainOptionsContainer" node_paths=PackedStringArray("button", "under_line", "highlight", "label")]
+layout_mode = 2
+size_flags_vertical = 3
+script = ExtResource("6_5vfat")
+button = NodePath("Button")
+under_line = NodePath("TitleLabel/ColorRect")
+highlight = NodePath("TextureRect")
+label = NodePath("TitleLabel")
+text = "Quest"
+
+[node name="TextureRect" type="TextureRect" parent="CampOptionsContainer/MainOptionsContainer/QuestOptionButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_hs7sy")
+
+[node name="TitleLabel" type="Label" parent="CampOptionsContainer/MainOptionsContainer/QuestOptionButton"]
+self_modulate = Color(0.470588, 0, 0, 1)
+layout_mode = 0
+offset_right = 198.0
+offset_bottom = 60.0
+scale = Vector2(0.916667, 0.916667)
+theme = ExtResource("3_ufdhk")
+theme_override_font_sizes/font_size = 48
+text = "Tutorial"
+
+[node name="ColorRect" type="ColorRect" parent="CampOptionsContainer/MainOptionsContainer/QuestOptionButton/TitleLabel"]
+custom_minimum_size = Vector2(0, 3)
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0.498039, 0, 0, 1)
+
+[node name="Button" type="Button" parent="CampOptionsContainer/MainOptionsContainer/QuestOptionButton"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 4.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+
 [node name="ExplorOptionButton" type="Control" parent="CampOptionsContainer/MainOptionsContainer" node_paths=PackedStringArray("button", "under_line", "highlight", "label")]
 layout_mode = 2
 size_flags_vertical = 3
@@ -231,59 +283,6 @@ grow_vertical = 0
 color = Color(0.498039, 0, 0, 1)
 
 [node name="Button" type="Button" parent="CampOptionsContainer/MainOptionsContainer/PrepareOptionButton"]
-self_modulate = Color(1, 1, 1, 0)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = 4.0
-offset_bottom = 12.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="QuestOptionButton" type="Control" parent="CampOptionsContainer/MainOptionsContainer" node_paths=PackedStringArray("button", "under_line", "highlight", "label")]
-visible = false
-layout_mode = 2
-size_flags_vertical = 3
-script = ExtResource("6_5vfat")
-button = NodePath("Button")
-under_line = NodePath("TitleLabel/ColorRect")
-highlight = NodePath("TextureRect")
-label = NodePath("TitleLabel")
-text = "Quest"
-
-[node name="TextureRect" type="TextureRect" parent="CampOptionsContainer/MainOptionsContainer/QuestOptionButton"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("7_hs7sy")
-
-[node name="TitleLabel" type="Label" parent="CampOptionsContainer/MainOptionsContainer/QuestOptionButton"]
-self_modulate = Color(0.470588, 0, 0, 1)
-layout_mode = 0
-offset_right = 144.0
-offset_bottom = 60.0
-scale = Vector2(0.916667, 0.916667)
-theme = ExtResource("3_ufdhk")
-theme_override_font_sizes/font_size = 48
-text = "Quest"
-
-[node name="ColorRect" type="ColorRect" parent="CampOptionsContainer/MainOptionsContainer/QuestOptionButton/TitleLabel"]
-custom_minimum_size = Vector2(0, 3)
-layout_mode = 1
-anchors_preset = -1
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_bottom = -4.0
-grow_horizontal = 2
-grow_vertical = 0
-color = Color(0.498039, 0, 0, 1)
-
-[node name="Button" type="Button" parent="CampOptionsContainer/MainOptionsContainer/QuestOptionButton"]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -427,7 +426,7 @@ texture = ExtResource("7_hs7sy")
 self_modulate = Color(0.470588, 0, 0, 1)
 layout_mode = 0
 offset_top = 4.0
-offset_right = 180.0
+offset_right = 270.0
 offset_bottom = 64.0
 theme = ExtResource("3_ufdhk")
 theme_override_font_sizes/font_size = 48
@@ -805,9 +804,10 @@ texture = ExtResource("7_hs7sy")
 [node name="TitleLabel" type="Label" parent="CampOptionsContainer/RecordsOptionsContainer/Rec_FlashCardsOptionButton"]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 0
+offset_top = 30.0
 offset_right = 294.0
-offset_bottom = 60.0
-scale = Vector2(0.996599, 0.996599)
+offset_bottom = 90.0
+scale = Vector2(1e-05, 1e-05)
 theme = ExtResource("3_ufdhk")
 theme_override_font_sizes/font_size = 48
 text = "Flash Cards"
@@ -825,61 +825,6 @@ grow_vertical = 0
 color = Color(0.498039, 0, 0, 1)
 
 [node name="Button" type="Button" parent="CampOptionsContainer/RecordsOptionsContainer/Rec_FlashCardsOptionButton"]
-self_modulate = Color(1, 1, 1, 0)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = 4.0
-offset_bottom = 12.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Rec_PagesOptionButton" type="Control" parent="CampOptionsContainer/RecordsOptionsContainer" node_paths=PackedStringArray("button", "under_line", "highlight", "label")]
-custom_minimum_size = Vector2(0, 60)
-layout_mode = 2
-script = ExtResource("6_5vfat")
-button = NodePath("Button")
-under_line = NodePath("TitleLabel/ColorRect")
-highlight = NodePath("TextureRect")
-label = NodePath("TitleLabel")
-text = "Pages"
-
-[node name="TextureRect" type="TextureRect" parent="CampOptionsContainer/RecordsOptionsContainer/Rec_PagesOptionButton"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -32.0
-offset_top = -4.5
-offset_right = 32.0
-offset_bottom = 4.5
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("7_hs7sy")
-
-[node name="TitleLabel" type="Label" parent="CampOptionsContainer/RecordsOptionsContainer/Rec_PagesOptionButton"]
-self_modulate = Color(0.498039, 0, 0, 1)
-layout_mode = 0
-offset_right = 192.0
-offset_bottom = 60.0
-theme = ExtResource("3_ufdhk")
-theme_override_font_sizes/font_size = 48
-text = "Library"
-
-[node name="ColorRect" type="ColorRect" parent="CampOptionsContainer/RecordsOptionsContainer/Rec_PagesOptionButton/TitleLabel"]
-custom_minimum_size = Vector2(0, 3)
-layout_mode = 1
-anchors_preset = -1
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_bottom = -4.0
-grow_horizontal = 2
-grow_vertical = 0
-color = Color(0.498039, 0, 0, 1)
-
-[node name="Button" type="Button" parent="CampOptionsContainer/RecordsOptionsContainer/Rec_PagesOptionButton"]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -916,8 +861,10 @@ texture = ExtResource("7_hs7sy")
 [node name="TitleLabel" type="Label" parent="CampOptionsContainer/RecordsOptionsContainer/Rec_ActorsOptionButton"]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 0
+offset_top = 30.0
 offset_right = 174.0
-offset_bottom = 60.0
+offset_bottom = 90.0
+scale = Vector2(1e-05, 1e-05)
 theme = ExtResource("3_ufdhk")
 theme_override_font_sizes/font_size = 48
 text = "Actors"
@@ -935,6 +882,63 @@ grow_vertical = 0
 color = Color(0.498039, 0, 0, 1)
 
 [node name="Button" type="Button" parent="CampOptionsContainer/RecordsOptionsContainer/Rec_ActorsOptionButton"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 4.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Rec_PagesOptionButton" type="Control" parent="CampOptionsContainer/RecordsOptionsContainer" node_paths=PackedStringArray("button", "under_line", "highlight", "label")]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+script = ExtResource("6_5vfat")
+button = NodePath("Button")
+under_line = NodePath("TitleLabel/ColorRect")
+highlight = NodePath("TextureRect")
+label = NodePath("TitleLabel")
+text = "Pages"
+
+[node name="TextureRect" type="TextureRect" parent="CampOptionsContainer/RecordsOptionsContainer/Rec_PagesOptionButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -32.0
+offset_top = -4.5
+offset_right = 32.0
+offset_bottom = 4.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_hs7sy")
+
+[node name="TitleLabel" type="Label" parent="CampOptionsContainer/RecordsOptionsContainer/Rec_PagesOptionButton"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 0
+offset_top = 30.0
+offset_right = 192.0
+offset_bottom = 90.0
+scale = Vector2(1e-05, 1e-05)
+theme = ExtResource("3_ufdhk")
+theme_override_font_sizes/font_size = 48
+text = "Files"
+
+[node name="ColorRect" type="ColorRect" parent="CampOptionsContainer/RecordsOptionsContainer/Rec_PagesOptionButton/TitleLabel"]
+custom_minimum_size = Vector2(0, 3)
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0.498039, 0, 0, 1)
+
+[node name="Button" type="Button" parent="CampOptionsContainer/RecordsOptionsContainer/Rec_PagesOptionButton"]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -971,8 +975,10 @@ texture = ExtResource("7_hs7sy")
 [node name="TitleLabel" type="Label" parent="CampOptionsContainer/RecordsOptionsContainer/Sys_BackOptionButton"]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 0
+offset_top = 30.0
 offset_right = 120.0
-offset_bottom = 60.0
+offset_bottom = 90.0
+scale = Vector2(1e-05, 1e-05)
 theme = ExtResource("3_ufdhk")
 theme_override_font_sizes/font_size = 48
 text = "Back"
@@ -1108,9 +1114,9 @@ texture = ExtResource("4_wh6tp")
 stretch_mode = 4
 
 [node name="TitleLabel" type="Label" parent="TitleContainer"]
-self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("3_ufdhk")
+theme_override_colors/font_color = Color(0.498039, 0, 0, 1)
 theme_override_font_sizes/font_size = 32
 text = "ack at Camp..."
 

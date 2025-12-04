@@ -102,7 +102,7 @@ func get_title()->String:
 			return title_page.get_title_key()
 	return get_display_name()
 
-func get_tags(): 
+func get_tags()->Array: 
 	var tag_list = []
 	tag_list.append_array(super())
 	var aditional_tags = pages.get_tags_added_to_actor()
@@ -389,13 +389,9 @@ func on_combat_start():
 func on_delete():
 	if is_deleted:
 		return
-	for page in pages.list_items():
-		ItemLibrary.delete_item(page)
-	for bag_item in items.list_items():
-		ItemLibrary.delete_item(bag_item)
-	for equip_item in equipment.list_items():
-		if !PlayerInventory.has_item(equip_item):
-			ItemLibrary.delete_item(equip_item)
+	pages._delete_all_items()
+	items._delete_all_items()
+	equipment._delete_all_items()
 	super()
 
 func leaves_corpse()->bool:

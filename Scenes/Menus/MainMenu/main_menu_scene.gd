@@ -47,12 +47,9 @@ func start_combat():
 	StoryState.start_new_story()
 
 func _open_pages_menu():
-	var new_cards = load("res://Scenes/Menus/PageLibraryMenu/page_library_menu.tscn").instantiate()
-	root_node.add_child(new_cards)
-
-func _open_actors_menu():
-	var new_cards = load("res://Scenes/Menus/ActorsLibrary/actors_library.tscn").instantiate()
-	root_node.add_child(new_cards)
+	#var new_cards = load("res://Scenes/Menus/PageLibraryMenu/page_library_menu.tscn").instantiate()
+	#root_node.add_child(new_cards)
+	MainRootNode.Instance.open_archive()
 	
 
 func _open_load_menu():
@@ -60,6 +57,7 @@ func _open_load_menu():
 
 func _open_page_edit():
 	root_node.open_page_editor()
+	
 func _open_effect_edit():
 	root_node.open_effect_editor()
 

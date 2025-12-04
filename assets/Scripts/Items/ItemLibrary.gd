@@ -55,6 +55,8 @@ static func get_item_keys_with_tag(tag)->Array:
 			out_list.append(item_key)
 	return out_list
 
+
+
 static func list_all_items()->Array:
 	if !Instance: Instance = ItemLibrary.new()
 	return Instance._loaded_objects.values()
@@ -94,8 +96,12 @@ static func purge_items():
 	if !Instance: Instance = ItemLibrary.new()
 	Instance.purge_objects()
 	
-static func delete_item(item:BaseItem):
+static func delete_item(item):
 	if !Instance: Instance = ItemLibrary.new()
+	if item is String:
+		item = get_item(item)
+	if !item:
+		return
 	if !item.is_deleted:
 		item.on_delete()
 	Instance.erase_object(item.Id)

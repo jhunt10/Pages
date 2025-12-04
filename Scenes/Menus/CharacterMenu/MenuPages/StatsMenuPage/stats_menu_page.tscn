@@ -440,7 +440,7 @@ layout_mode = 2
 size_flags_vertical = 3
 
 [node name="AtkStatsContainer" type="Container" parent="HBoxContainer/ScrollContainer/StatsMainContainer" node_paths=PackedStringArray("background", "inner_container")]
-custom_minimum_size = Vector2(12, 96)
+custom_minimum_size = Vector2(12, 132)
 layout_mode = 2
 script = ExtResource("8_3eiim")
 background = NodePath("Background")
@@ -703,7 +703,7 @@ layout_mode = 2
 size_flags_vertical = 3
 
 [node name="DefStatsContainer" type="Container" parent="HBoxContainer/ScrollContainer/StatsMainContainer" node_paths=PackedStringArray("background", "inner_container")]
-custom_minimum_size = Vector2(12, 118)
+custom_minimum_size = Vector2(12, 161)
 layout_mode = 2
 script = ExtResource("8_3eiim")
 background = NodePath("Background")

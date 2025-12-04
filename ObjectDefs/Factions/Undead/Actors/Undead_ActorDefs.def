@@ -1,18 +1,146 @@
 {
+    "#BaseUndead": {
+        "ScenePath": "res://Scenes/Combat/MapObjects/Actors/ComplexActorNode/complex_actor_node.tscn",
+        "!ParentKey": "#BaseActor",
+        "#ObjDetails": {
+            "Description": "Description.",
+            "DisplayName": "#Base Undead",
+            "LargeIcon": "Sprites/BaseActor.png",
+            "ObjectType": "Actor",
+            "SmallIcon": "Sprites/BaseActor.png",
+            "SnippetDesc": "An actor made for baseing.",
+            "Tags": [
+                "Undead",
+                "Creature"
+            ],
+            "Taxonomy": [
+                "Actor"
+            ]
+        },
+        "PortraitRect": [
+            12,
+            20,
+            24,
+            24
+        ],
+        "ActorData": {
+            "Faction": "Undead",
+            "ExpValue": 25,
+            "MoneyValue": 15,
+            "DropItemsSet": {
+                "": 9,
+                "Money:10": 10,
+                "Money:20": 5,
+                "Undead_PageBook": 1
+            },
+            "EquipmentConstraints": {
+                "ApparelSlots": [
+                    "Head",
+                    "Body",
+                    "Feet"
+                ],
+                "TrinketCount": 1,
+                "HandCount": 2,
+                "HandConditions": [
+                    {
+                        "ConditionName": "Light Weapon",
+                        "CanMainHand": true,
+                        "CanOffHand": true,
+                        "CanOneHand": true,
+                        "CanTwoHand": false,
+                        "ToolTagFiltersReqAll": true,
+                        "ToolTagFilters": [
+                            {
+                                "RequireAllTags": [
+                                    "LightWpn"
+                                ]
+                            }
+                        ],
+                        "OffHandReq": [
+                            {
+                                "MainHandTagFiltersReqAll": true,
+                                "MainHandTagFilters": [
+                                    {
+                                        "RequireAllTags": [
+                                            "LightWpn"
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "ConditionName": "Heavy Weapon",
+                        "CanMainHand": true,
+                        "CanOffHand": false,
+                        "CanOneHand": false,
+                        "CanTwoHand": true,
+                        "ToolTagFiltersReqAll": true,
+                        "ToolTagFilters": [
+                            {
+                                "RequireAllTags": [
+                                    "HeavyWpn"
+                                ]
+                            }
+                        ],
+                        "OffHandReq": []
+                    },
+                    {
+                        "ConditionName": "Default Weapon",
+                        "CanMainHand": true,
+                        "CanOffHand": false,
+                        "CanOneHand": true,
+                        "CanTwoHand": false,
+                        "ToolTagFiltersReqAll": true,
+                        "ToolTagFilters": [
+                            {
+                                "RequireAllTags": [
+                                    "Weapon"
+                                ]
+                            }
+                        ],
+                        "OffHandReq": []
+                    },
+                    {
+                        "ConditionName": "Default Tool",
+                        "CanMainHand": false,
+                        "CanOffHand": true,
+                        "CanOneHand": true,
+                        "CanTwoHand": false,
+                        "ToolTagFiltersReqAll": false,
+                        "ToolTagFilters": [],
+                        "OffHandReq": []
+                    }
+                ]
+            }
+        }
+    },
     "Skeleton": {
         "!ObjectScript": "res://assets/Scripts/Actors/BaseActor.gd",
-        "!ParentKey": "#BaseHumanoid",
+        "!ParentKey": "#BaseUndead",
         "#ObjDetails": {
-            "Description": "A spooky scary @@#Color:Red:Skeleton@@ raised from the dead. This form of reanimation accounts for a lack of viable muscle tissue by refocusing on the dirrect manipulation of bone. This results in an @@#Tag:Undead@@ that is physically weaker, but has the @@#Stat:Agility@@ required to use @@#Tag:Ranged:Hint:Ranged Weapons@@. Thier exposed bone is resistant to @@#Color:DmgColor:Slash@@ and @@#Color:DmgColor:Pierce@@, but is quite vulnerable to @@#Color:DmgColor:Blunt@@ and @@#Color:DmgColor:Crash@@. They often remain on back lines using range to attack from afar. But, while some may view them as nightmarish monsters, I like to belive there's a @@#Color:Red:Skeleton@@ inside us all.",
+            "Description": "A spooky scary @@#Color:Red:Skeleton@@ risen from the dead. This form of reanimation accounts for a lack of muscle tissue by focusing on dirrect manipulation of bone. This results in an @@#Tag:Undead@@ that is physically weaker, but has the @@#Color:Red:Agility@@ required to use @@#Tag:Ranged:Hint:Ranged Weapons@@.\n\nThier exposed bone is resistant to @@#Color:DmgColor:Slash@@ and @@#Color:DmgColor:Pierce@@, but is quite vulnerable to @@#Color:DmgColor:Blunt@@ and @@#Color:DmgColor:Crash@@. They often remain on back lines using range to attack from afar. But, while some may view them as nightmarish monsters, I like to belive there's a @@#Color:Red:Skeleton@@ inside us all.",
             "DisplayName": "Skeleton",
             "LargeIcon": "Sprites/Skeleton_Icon.png",
             "ObjectType": "Actor",
             "SmallIcon": "Sprites/Skeleton_Icon.png",
             "SnippetDesc": "A Skeleton",
-            "Tags": ["Undead"],
+            "Tags": ["Skeleton"],
             "Taxonomy": [
                 "Actor"
             ]
+        },
+        "ActorData": {
+            "Faction": "Undead",
+            "ExpValue": 25,
+            "MoneyValue": 15,
+            "DropItemsSet": {
+                "": 9,
+                "Money:10": 10,
+                "Money:20": 5,
+                "BaseBow_Weapon": 5,
+                "Undead_PageBook": 1
+            }
         },
         "SpriteSheet": "SpriteSheets/Skeleton_SpriteSheet.png",
         "Stats": {
@@ -84,7 +212,7 @@
     },
     "ZombieBasic": {
         "!ObjectScript": "res://assets/Scripts/Actors/BaseActor.gd",
-        "!ParentKey": "#BaseHumanoid",
+        "!ParentKey": "#BaseUndead",
         "#ObjDetails": {
             "Description": "A common form of @@#Tag:Undead@@ created through the reanimation of a @@#Color:Red:Corpse@@. @@#Color:Red:Zombies@@ are peaceful and docile beings almost never resorting to violence, except towards all living creatures whom they will relentlessly attack on sight. They have an innate love of helicopters, gleefully chasing after any they see fly by. But sadly, no one ever let's them ride in one.",
             "DisplayName": "Zombie",
@@ -92,10 +220,22 @@
             "ObjectType": "Actor",
             "SmallIcon": "Sprites/Zombie_Icon.png",
             "SnippetDesc": "Zombie",
-            "Tags": ["Undead"],
+            "Tags": ["Zombie"],
             "Taxonomy": [
                 "Actor"
             ]
+        },
+        "ActorData": {
+            "Faction": "Undead",
+            "ExpValue": 25,
+            "MoneyValue": 15,
+            "DropItemsSet": {
+                "": 9,
+                "Money:10": 10,
+                "ZombieClothes_BodyApparel": 5,
+                "ZombieClothes_LegApparel": 5,
+                "Undead_PageBook": 1
+            }
         },
         "SpawnEquipmentArr": [
             "Undead_PageBook",

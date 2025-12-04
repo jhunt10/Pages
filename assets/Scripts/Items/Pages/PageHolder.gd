@@ -107,6 +107,13 @@ func list_passives()->Array:
 			out_list.append(item)
 	return out_list
 
+func list_passives_keys()->Array:
+	var out_list = []
+	for item in list_items():
+		if item is PageItemPassive:
+			out_list.append(item.ItemKey)
+	return out_list
+
 func get_action_page(action_key:String)->PageItemAction:
 	for item_id in _raw_item_slots:
 		if item_id and item_id.begins_with(action_key):

@@ -10,12 +10,15 @@
             "SmallIcon": "Sprites/Target.png",
             "SnippetDesc": "A target made for testing.",
             "Tags": [
-                "AnActorTag",
+                "Construct",
                 "Dummy"
             ],
             "Taxonomy": [
                 "Actor"
             ]
+        },
+        "ActorData": {
+            "Faction": "Dummies"
         },
         "ScenePath": "res://Scenes/Combat/MapObjects/Actors/SimpleActorNode/simple_actor_node.tscn",
         "SpriteFrameWH": [
@@ -41,7 +44,29 @@
         },
         "_DefVersion": "1"
     },
-    "TargetDummy_Armored": {
+    "TargetDummy_Mag": {
+        "!ObjectScript": "res://assets/Scripts/Actors/BaseActor.gd",
+        "!ParentKey": "TargetDummy",
+        "#ObjDetails": {
+            "Description": "A magical Target Dummy made for testing Pages. This stationary target has been specially prepared with complex enchantments to provided it passive magical defenses including Ward and Protection.",
+            "DisplayName": "Warded Target",
+            "LargeIcon": "Sprites/TargetWarded.png",
+            "ObjectType": "Actor",
+            "SmallIcon": "Sprites/TargetWarded.png",
+            "SnippetDesc": "An magically warded target dummy made for testing.",
+            "Tags": [],
+            "Taxonomy": [
+                "Actor"
+            ]
+        },
+        "SpriteSheet": "Sprites/TargetWarded_SpriteSheet.png",
+        "Stats": {
+            "Protection": 50,
+            "Ward": 50
+        },
+        "_DefVersion": "1"
+    },
+    "TargetDummy_Phy": {
         "!ObjectScript": "res://assets/Scripts/Actors/BaseActor.gd",
         "!ParentKey": "TargetDummy",
         "#ObjDetails": {
@@ -51,10 +76,7 @@
             "ObjectType": "Actor",
             "SmallIcon": "Sprites/TargetArmored.png",
             "SnippetDesc": "An armor plated target dummy made for testing.",
-            "Tags": [
-                "AnActorTag",
-                "Dummy"
-            ],
+            "Tags": [],
             "Taxonomy": [
                 "Actor"
             ]
@@ -75,10 +97,7 @@
             "ObjectType": "Actor",
             "SmallIcon": "Sprites/TargetMoving.png",
             "SnippetDesc": "A moving target dummy made for testing.",
-            "Tags": [
-                "AnActorTag",
-                "Dummy"
-            ],
+            "Tags": [],
             "Taxonomy": [
                 "Actor"
             ]
@@ -95,31 +114,6 @@
         "Stats": {
             "PPR": 4,
             "Speed": 20
-        },
-        "_DefVersion": "1"
-    },
-    "TargetDummy_Warded": {
-        "!ObjectScript": "res://assets/Scripts/Actors/BaseActor.gd",
-        "!ParentKey": "TargetDummy",
-        "#ObjDetails": {
-            "Description": "A magical Target Dummy made for testing Pages. This stationary target has been specially prepared with complex enchantments to provided it passive magical defenses including Ward and Protection.",
-            "DisplayName": "Warded Target",
-            "LargeIcon": "Sprites/TargetWarded.png",
-            "ObjectType": "Actor",
-            "SmallIcon": "Sprites/TargetWarded.png",
-            "SnippetDesc": "An magically warded target dummy made for testing.",
-            "Tags": [
-                "AnActorTag",
-                "Dummy"
-            ],
-            "Taxonomy": [
-                "Actor"
-            ]
-        },
-        "SpriteSheet": "Sprites/TargetWarded_SpriteSheet.png",
-        "Stats": {
-            "Protection": 50,
-            "Ward": 50
         },
         "_DefVersion": "1"
     }

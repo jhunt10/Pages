@@ -1,0 +1,824 @@
+[gd_scene load_steps=21 format=3 uid="uid://dbv44ej4s1njb"]
+
+[ext_resource type="Script" path="res://Scenes/UiNodes/back_patch_container.gd" id="1_is6c6"]
+[ext_resource type="Script" path="res://Scenes/Menus/Archive/archive_control.gd" id="1_wbdue"]
+[ext_resource type="Texture2D" uid="uid://bwbvifw2c8wlg" path="res://Scenes/Menus/CampMenu/PaperBackground.png" id="2_qmfdg"]
+[ext_resource type="Texture2D" uid="uid://51dfjr6b84bj" path="res://assets/Sprites/UI/BackPatches/PaperPatch_Big_184x128_32.png" id="2_s1pp7"]
+[ext_resource type="Texture2D" uid="uid://dj3aoohuok4yc" path="res://assets/Sprites/UI/BackPatches/FancyBackPatch_Big_128_36.png" id="3_5a4lq"]
+[ext_resource type="Texture2D" uid="uid://c4yedxpiinlff" path="res://Scenes/Menus/CharacterMenu/MenuPages/outline.png" id="3_5q8ja"]
+[ext_resource type="Script" path="res://Scenes/Menus/Archive/actor_details_card.gd" id="3_iek5u"]
+[ext_resource type="PackedScene" uid="uid://uo60871y6t54" path="res://Scenes/Combat/MapObjects/Actors/ComplexActorNode/complex_actor_node.tscn" id="4_ul7gl"]
+[ext_resource type="Theme" uid="uid://bfce41la62bs6" path="res://Scenes/Themes/readable_theme.tres" id="5_3wi5n"]
+[ext_resource type="Script" path="res://Scenes/Menus/CampMenu/camp_option_button.gd" id="5_u7chs"]
+[ext_resource type="PackedScene" uid="uid://ybkww8wk3awm" path="res://Scenes/UiNodes/StatLabelContainer/stat_label_container.tscn" id="6_13e3p"]
+[ext_resource type="Texture2D" uid="uid://567vutk12a12" path="res://Scenes/Menus/CharacterMenu/MenuPages/SlotHighlight.png" id="6_rn52s"]
+[ext_resource type="Script" path="res://Scenes/UiNodes/FitScaleLabel/fit_scale_label.gd" id="7_6rwid"]
+[ext_resource type="Theme" uid="uid://dwinll8pgdjhc" path="res://Scenes/Themes/standard_theme.tres" id="7_on4i3"]
+[ext_resource type="Script" path="res://Scenes/UiNodes/DescriptionBox/description_box.gd" id="8_qpbv8"]
+[ext_resource type="Script" path="res://Scenes/Menus/Archive/resist_container.gd" id="12_d0bpe"]
+[ext_resource type="Texture2D" uid="uid://b3atdgr5fajkj" path="res://assets/Sprites/UI/SymbolIcons/DmgSymbol_Fire.png" id="13_qmf4r"]
+[ext_resource type="Texture2D" uid="uid://b68wdq050rrtf" path="res://assets/Sprites/UI/SymbolIcons/MoneySymbol.png" id="14_svqfg"]
+[ext_resource type="Script" path="res://Scenes/Menus/Archive/actor_drop_entry.gd" id="17_7ycef"]
+[ext_resource type="Texture2D" uid="uid://bibqsudhjw4qe" path="res://assets/Sprites/Paper/Mundane_Background.png" id="18_48ows"]
+
+[node name="ArchiveControl" type="Control" node_paths=PackedStringArray("exit_button", "actor_details_card", "faction_list_container", "actors_tab_bar", "premade_faction_label")]
+custom_minimum_size = Vector2(1152, 648)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_wbdue")
+exit_button = NodePath("BoxContainer/VBoxContainer/HBoxContainer2/ExitButton")
+actor_details_card = NodePath("BoxContainer/VBoxContainer/HBoxContainer/ActorMainContainer/BoxContainer")
+faction_list_container = NodePath("BoxContainer/NinePatchRect/BoxContainer/ScrollContainer/VBoxContainer")
+actors_tab_bar = NodePath("BoxContainer/VBoxContainer/HBoxContainer2/TabBar")
+premade_faction_label = NodePath("BoxContainer/NinePatchRect/BoxContainer/ScrollContainer/VBoxContainer/ExplorOptionButton")
+
+[node name="NinePatchRect2" type="NinePatchRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_qmfdg")
+region_rect = Rect2(0, 0, 300, 200)
+patch_margin_left = 9
+patch_margin_top = 9
+patch_margin_right = 9
+patch_margin_bottom = 9
+
+[node name="BoxContainer" type="BoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="BoxContainer"]
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+texture = ExtResource("3_5a4lq")
+patch_margin_left = 32
+patch_margin_top = 32
+patch_margin_right = 32
+patch_margin_bottom = 32
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+
+[node name="BoxContainer" type="BoxContainer" parent="BoxContainer/NinePatchRect"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = -16.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+vertical = true
+
+[node name="Label" type="Label" parent="BoxContainer/NinePatchRect/BoxContainer"]
+layout_mode = 2
+theme = ExtResource("5_3wi5n")
+theme_override_colors/font_color = Color(0.498039, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0.498039, 0, 0, 1)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 24
+text = "Factions"
+horizontal_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="BoxContainer/NinePatchRect/BoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="BoxContainer/NinePatchRect/BoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ExplorOptionButton" type="Control" parent="BoxContainer/NinePatchRect/BoxContainer/ScrollContainer/VBoxContainer" node_paths=PackedStringArray("button", "under_line", "highlight", "label")]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+script = ExtResource("5_u7chs")
+button = NodePath("Button")
+under_line = NodePath("TitleLabel/ColorRect")
+highlight = NodePath("TextureRect")
+label = NodePath("TitleLabel")
+text = "Faction Name"
+center_x = true
+
+[node name="TextureRect" type="TextureRect" parent="BoxContainer/NinePatchRect/BoxContainer/ScrollContainer/VBoxContainer/ExplorOptionButton"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_rn52s")
+
+[node name="TitleLabel" type="Label" parent="BoxContainer/NinePatchRect/BoxContainer/ScrollContainer/VBoxContainer/ExplorOptionButton"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 0
+offset_top = 2.0
+offset_right = 165.0
+offset_bottom = 32.0
+scale = Vector2(0.89697, 0.89697)
+theme = ExtResource("7_on4i3")
+theme_override_font_sizes/font_size = 24
+text = "Faction Name"
+
+[node name="ColorRect" type="ColorRect" parent="BoxContainer/NinePatchRect/BoxContainer/ScrollContainer/VBoxContainer/ExplorOptionButton/TitleLabel"]
+custom_minimum_size = Vector2(0, 3)
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0.498039, 0, 0, 1)
+
+[node name="Button" type="Button" parent="BoxContainer/NinePatchRect/BoxContainer/ScrollContainer/VBoxContainer/ExplorOptionButton"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 4.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="BoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="BoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="TabBar" type="TabBar" parent="BoxContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+current_tab = 0
+clip_tabs = false
+tab_count = 2
+tab_0/title = "Actor1"
+tab_1/title = "Actor2"
+
+[node name="ExitButton" type="Button" parent="BoxContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "Exit"
+
+[node name="VSeparator" type="VSeparator" parent="BoxContainer/VBoxContainer/HBoxContainer2"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="BoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ActorMainContainer" type="Container" parent="BoxContainer/VBoxContainer/HBoxContainer" node_paths=PackedStringArray("background", "inner_container")]
+custom_minimum_size = Vector2(424, 318)
+layout_mode = 2
+script = ExtResource("1_is6c6")
+background = NodePath("NinePatchRect")
+inner_container = NodePath("BoxContainer")
+margin_override = 24
+
+[node name="NinePatchRect" type="NinePatchRect" parent="BoxContainer/VBoxContainer/HBoxContainer/ActorMainContainer"]
+layout_mode = 2
+texture = ExtResource("2_s1pp7")
+patch_margin_left = 32
+patch_margin_top = 32
+patch_margin_right = 32
+patch_margin_bottom = 32
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+
+[node name="BoxContainer" type="BoxContainer" parent="BoxContainer/VBoxContainer/HBoxContainer/ActorMainContainer" node_paths=PackedStringArray("icon_rect", "actor_node", "title_label", "tags_label", "xp_label", "money_label", "strength_label", "agility_label", "int_label", "wisdom_label", "health_label", "ppr_label", "mass_label", "speed_label", "phy_atk_label", "mag_atk_label", "armor_label", "ward_label", "description_box", "resisances_container", "weaknesses_container", "item_drop_entry", "item_drop_container", "passive_pages_container", "action_pages_container")]
+layout_mode = 2
+vertical = true
+script = ExtResource("3_iek5u")
+icon_rect = NodePath("HBoxContainer/NinePatchRect/IconTextureRect")
+actor_node = NodePath("HBoxContainer/NinePatchRect/CenterContainer/Control/Node2D/ActorNode")
+title_label = NodePath("HBoxContainer/VBoxContainer/FitScaleLabel")
+tags_label = NodePath("HBoxContainer/VBoxContainer/Label2")
+xp_label = NodePath("NpcDataContainer/HBoxContainer3/XPValLabel")
+money_label = NodePath("NpcDataContainer/HBoxContainer2/MoneyValLabel")
+strength_label = NodePath("../../VBoxContainer/StatsContainer/BoxContainer/AttibutesContainer/StrContainer")
+agility_label = NodePath("../../VBoxContainer/StatsContainer/BoxContainer/AttibutesContainer/AgiContainer")
+int_label = NodePath("../../VBoxContainer/StatsContainer/BoxContainer/AttibutesContainer/IntContainer")
+wisdom_label = NodePath("../../VBoxContainer/StatsContainer/BoxContainer/AttibutesContainer/WisContainer")
+health_label = NodePath("../../VBoxContainer/StatsContainer/BoxContainer/StatsContainer1/HealthContainer")
+ppr_label = NodePath("../../VBoxContainer/StatsContainer/BoxContainer/StatsContainer1/PPRContainer")
+mass_label = NodePath("../../VBoxContainer/StatsContainer/BoxContainer/StatsContainer1/MassContainer")
+speed_label = NodePath("../../VBoxContainer/StatsContainer/BoxContainer/StatsContainer1/SpeedContainer")
+phy_atk_label = NodePath("../../VBoxContainer/StatsContainer/BoxContainer/StatsContainer2/PhyAtkContainer")
+mag_atk_label = NodePath("../../VBoxContainer/StatsContainer/BoxContainer/StatsContainer2/MagAtkContainer")
+armor_label = NodePath("../../VBoxContainer/StatsContainer/BoxContainer/StatsContainer2/ArmorContainer")
+ward_label = NodePath("../../VBoxContainer/StatsContainer/BoxContainer/StatsContainer2/WardContainer")
+description_box = NodePath("DescriptionBox")
+resisances_container = NodePath("../../VBoxContainer2/ResitWeakContainer/BoxContainer/ResistContainer")
+weaknesses_container = NodePath("../../VBoxContainer2/ResitWeakContainer/BoxContainer/WeaknessContainer")
+item_drop_entry = NodePath("../../VBoxContainer2/DropsContainer/BoxContainer/ActorDropEntry")
+item_drop_container = NodePath("../../VBoxContainer2/DropsContainer/BoxContainer/VBoxContainer")
+passive_pages_container = NodePath("../../VBoxContainer/PagesContainer/BoxContainer/PassivePagesContainer")
+action_pages_container = NodePath("../../VBoxContainer/PagesContainer/BoxContainer/ActionPagesContainer")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="BoxContainer/VBoxContainer/HBoxContainer/ActorMainContainer/BoxContainer"]
+layout_mode = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="BoxContainer/VBoxContainer/HBoxContainer/ActorMainContainer/BoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(72, 72)
+layout_mode = 2
+texture = ExtResource("3_5q8ja")
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+
+[node name="CenterContainer" type="CenterContainer" parent="BoxContainer/VBoxContainer/HBoxContainer/ActorMainContainer/BoxContainer/HBoxContainer/NinePatchRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Control" type="Control" parent="BoxContainer/VBoxContainer/HBoxContainer/ActorMainContainer/BoxContainer/HBoxContainer/NinePatchRect/CenterContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Node2D" type="Node2D" parent="BoxContainer/VBoxContainer/HBoxContainer/ActorMainContainer/BoxContainer/HBoxContainer/NinePatchRect/CenterContainer/Control"]
+scale = Vector2(2, 2)
+
+[node name="ActorNode" parent="BoxContainer/VBoxContainer/HBoxContainer/ActorMainContainer/BoxContainer/HBoxContainer/NinePatchRect/CenterContainer/Control/Node2D" instance=ExtResource("4_ul7gl")]
+position = Vector2(0, 8)
+
+[node name="IconTextureRect" type="TextureRect" parent="BoxContainer/VBoxContainer/HBoxContainer/ActorMainContainer/BoxContainer/HBoxContainer/NinePatchRect"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="BoxContainer/VBoxContainer/HBoxContainer/ActorMainContainer/BoxContainer/HBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="FitScaleLabel" type="Control" parent="BoxContainer/VBoxContainer/HBoxContainer/ActorMainContainer/BoxContainer/HBoxContainer/VBoxContainer" node_paths=PackedStringArray("label")]
+custom_minimum_size = Vector2(300, 32)
+layout_mode = 2
+script = ExtResource("7_6rwid")
+label = NodePath("TitleLabel")
+text = "Actor Name"
+
+[node name="TitleLabel" type="Label" parent="BoxContainer/VBoxContainer/HBoxContainer/ActorMainContainer/BoxContainer/HBoxContainer/VBoxContainer/FitScaleLabel"]
+layout_mode = 2
+offset_top = 2.0
+offset_right = 181.0
+offset_bottom = 35.0
+scale = Vector2(0.828729, 0.828729)
+theme = ExtResource("5_3wi5n")
+theme_override_font_sizes/font_size = 32
+text = "Actor Name"
+vertical_alignment = 2
+
+[node name="ColorRect" type="ColorRect" parent="BoxContainer/VBoxContainer/HBoxContainer/ActorMainContainer/BoxContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(2, 2)
+layout_mode = 2
+color = Color(0.498039, 0, 0, 1)
+
+[node name="Label2" type="Label" parent="BoxContainer/VBoxContainer/HBoxContainer/ActorMainContainer/BoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("5_3wi5n")
+text = "Tag1, Tag2, Tag3, Tag4..."
+text_overrun_behavior = 3
+
+[node name="NpcDataContainer" type="HBoxContainer" parent="BoxContainer/VBoxContainer/HBoxContainer/ActorMainContainer/BoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="BoxContainer/VBoxContainer/HBoxContainer/ActorMainContainer/BoxContainer/NpcDataContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="Label" type="Label" parent="BoxContainer/VBoxContainer/HBoxContainer/ActorMainContainer/BoxContainer/NpcDataContainer/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("7_on4i3")
+text = "Lv"
+
+[node name="MinLevelLabel" type="Label" parent="BoxContainer/VBoxContainer/HBoxContainer/ActorMainContainer/BoxContainer/NpcDataContainer/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("7_on4i3")
+text = "00"
+
+[node name="Label3" type="Label" parent="BoxContainer/VBoxContainer/HBoxContainer/ActorMainContainer/BoxContainer/NpcDataContainer/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("7_on4i3")
+text = "-"
+
+[node name="MaxLevelLabel" type="Label" parent="BoxContainer/VBoxContainer/HBoxContainer/ActorMainContainer/BoxContainer/NpcDataContainer/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("7_on4i3")
+text = "99"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="BoxContainer/VBoxContainer/HBoxContainer/ActorMainContainer/BoxContainer/NpcDataContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="Label" type="Label" parent="BoxContainer/VBoxContainer/HBoxContainer/ActorMainContainer/BoxContainer/NpcDataContainer/HBoxContainer3"]
+layout_mode = 2
+theme = ExtResource("7_on4i3")
+text = "XP"
+
+[node name="XPValLabel" type="Label" parent="BoxContainer/VBoxContainer/HBoxContainer/ActorMainContainer/BoxContainer/NpcDataContainer/HBoxContainer3"]
+layout_mode = 2
+theme = ExtResource("7_on4i3")
+text = "999"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="BoxContainer/VBoxContainer/HBoxContainer/ActorMainContainer/BoxContainer/NpcDataContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="BoxContainer/VBoxContainer/HBoxContainer/ActorMainContainer/BoxContainer/NpcDataContainer/HBoxContainer2"]
+layout_mode = 2
+texture = ExtResource("14_svqfg")
+
+[node name="MoneyValLabel" type="Label" parent="BoxContainer/VBoxContainer/HBoxContainer/ActorMainContainer/BoxContainer/NpcDataContainer/HBoxContainer2"]
+layout_mode = 2
+theme = ExtResource("7_on4i3")
+text = "999"
+
+[node name="DescriptionBox" type="RichTextLabel" parent="BoxContainer/VBoxContainer/HBoxContainer/ActorMainContainer/BoxContainer"]
+clip_contents = false
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("7_on4i3")
+bbcode_enabled = true
+text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+fit_content = true
+script = ExtResource("8_qpbv8")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="BoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="StatsContainer" type="Container" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer" node_paths=PackedStringArray("background", "inner_container")]
+custom_minimum_size = Vector2(258, 138)
+layout_mode = 2
+script = ExtResource("1_is6c6")
+background = NodePath("NinePatchRect")
+inner_container = NodePath("BoxContainer")
+margin_override = 18
+
+[node name="NinePatchRect" type="NinePatchRect" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/StatsContainer"]
+layout_mode = 2
+texture = ExtResource("2_s1pp7")
+patch_margin_left = 32
+patch_margin_top = 32
+patch_margin_right = 32
+patch_margin_bottom = 32
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+
+[node name="BoxContainer" type="BoxContainer" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/StatsContainer"]
+layout_mode = 2
+vertical = true
+
+[node name="Control" type="Control" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/StatsContainer/BoxContainer"]
+custom_minimum_size = Vector2(0, 18)
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/StatsContainer/BoxContainer/Control"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -25.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("5_3wi5n")
+theme_override_font_sizes/font_size = 24
+text = "Stats"
+horizontal_alignment = 1
+text_overrun_behavior = 3
+
+[node name="AttibutesContainer" type="HBoxContainer" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/StatsContainer/BoxContainer"]
+layout_mode = 2
+
+[node name="StrContainer" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/StatsContainer/BoxContainer/AttibutesContainer" instance=ExtResource("6_13e3p")]
+layout_mode = 2
+stat_name = "Strength"
+mouse_over_parent = NodePath("")
+
+[node name="ColorRect2" type="ColorRect" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/StatsContainer/BoxContainer/AttibutesContainer"]
+custom_minimum_size = Vector2(2, 2)
+layout_mode = 2
+color = Color(0.498039, 0, 0, 1)
+
+[node name="AgiContainer" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/StatsContainer/BoxContainer/AttibutesContainer" instance=ExtResource("6_13e3p")]
+layout_mode = 2
+stat_name = "Agility"
+mouse_over_parent = NodePath("")
+
+[node name="ColorRect3" type="ColorRect" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/StatsContainer/BoxContainer/AttibutesContainer"]
+custom_minimum_size = Vector2(2, 2)
+layout_mode = 2
+color = Color(0.498039, 0, 0, 1)
+
+[node name="IntContainer" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/StatsContainer/BoxContainer/AttibutesContainer" instance=ExtResource("6_13e3p")]
+layout_mode = 2
+stat_name = "Intelligence"
+mouse_over_parent = NodePath("")
+
+[node name="ColorRect4" type="ColorRect" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/StatsContainer/BoxContainer/AttibutesContainer"]
+custom_minimum_size = Vector2(2, 2)
+layout_mode = 2
+color = Color(0.498039, 0, 0, 1)
+
+[node name="WisContainer" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/StatsContainer/BoxContainer/AttibutesContainer" instance=ExtResource("6_13e3p")]
+layout_mode = 2
+stat_name = "Wisdom"
+mouse_over_parent = NodePath("")
+
+[node name="ColorRect4" type="ColorRect" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/StatsContainer/BoxContainer"]
+custom_minimum_size = Vector2(2, 2)
+layout_mode = 2
+color = Color(0.498039, 0, 0, 1)
+
+[node name="StatsContainer1" type="HBoxContainer" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/StatsContainer/BoxContainer"]
+layout_mode = 2
+
+[node name="HealthContainer" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/StatsContainer/BoxContainer/StatsContainer1" instance=ExtResource("6_13e3p")]
+layout_mode = 2
+stat_name = "HealthMax"
+mouse_over_parent = NodePath("")
+
+[node name="ColorRect2" type="ColorRect" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/StatsContainer/BoxContainer/StatsContainer1"]
+custom_minimum_size = Vector2(2, 2)
+layout_mode = 2
+color = Color(0.498039, 0, 0, 1)
+
+[node name="SpeedContainer" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/StatsContainer/BoxContainer/StatsContainer1" instance=ExtResource("6_13e3p")]
+layout_mode = 2
+stat_name = "Speed"
+mouse_over_parent = NodePath("")
+
+[node name="ColorRect3" type="ColorRect" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/StatsContainer/BoxContainer/StatsContainer1"]
+custom_minimum_size = Vector2(2, 2)
+layout_mode = 2
+color = Color(0.498039, 0, 0, 1)
+
+[node name="MassContainer" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/StatsContainer/BoxContainer/StatsContainer1" instance=ExtResource("6_13e3p")]
+layout_mode = 2
+stat_name = "Mass"
+mouse_over_parent = NodePath("")
+
+[node name="ColorRect4" type="ColorRect" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/StatsContainer/BoxContainer/StatsContainer1"]
+custom_minimum_size = Vector2(2, 2)
+layout_mode = 2
+color = Color(0.498039, 0, 0, 1)
+
+[node name="PPRContainer" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/StatsContainer/BoxContainer/StatsContainer1" instance=ExtResource("6_13e3p")]
+layout_mode = 2
+stat_name = "PPR"
+mouse_over_parent = NodePath("")
+
+[node name="ColorRect3" type="ColorRect" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/StatsContainer/BoxContainer"]
+custom_minimum_size = Vector2(2, 2)
+layout_mode = 2
+color = Color(0.498039, 0, 0, 1)
+
+[node name="StatsContainer2" type="HBoxContainer" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/StatsContainer/BoxContainer"]
+layout_mode = 2
+
+[node name="PhyAtkContainer" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/StatsContainer/BoxContainer/StatsContainer2" instance=ExtResource("6_13e3p")]
+layout_mode = 2
+stat_name = "PhyAttack"
+mouse_over_parent = NodePath("")
+
+[node name="ColorRect4" type="ColorRect" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/StatsContainer/BoxContainer/StatsContainer2"]
+custom_minimum_size = Vector2(2, 2)
+layout_mode = 2
+color = Color(0.498039, 0, 0, 1)
+
+[node name="ArmorContainer" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/StatsContainer/BoxContainer/StatsContainer2" instance=ExtResource("6_13e3p")]
+layout_mode = 2
+stat_name = "Armor"
+mouse_over_parent = NodePath("")
+
+[node name="ColorRect5" type="ColorRect" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/StatsContainer/BoxContainer/StatsContainer2"]
+custom_minimum_size = Vector2(2, 2)
+layout_mode = 2
+color = Color(0.498039, 0, 0, 1)
+
+[node name="MagAtkContainer" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/StatsContainer/BoxContainer/StatsContainer2" instance=ExtResource("6_13e3p")]
+layout_mode = 2
+stat_name = "MagAttack"
+mouse_over_parent = NodePath("")
+
+[node name="ColorRect6" type="ColorRect" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/StatsContainer/BoxContainer/StatsContainer2"]
+custom_minimum_size = Vector2(2, 2)
+layout_mode = 2
+color = Color(0.498039, 0, 0, 1)
+
+[node name="WardContainer" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/StatsContainer/BoxContainer/StatsContainer2" instance=ExtResource("6_13e3p")]
+layout_mode = 2
+stat_name = "Ward"
+mouse_over_parent = NodePath("")
+
+[node name="PagesContainer" type="Container" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer" node_paths=PackedStringArray("background", "inner_container")]
+custom_minimum_size = Vector2(258, 74)
+layout_mode = 2
+script = ExtResource("1_is6c6")
+background = NodePath("NinePatchRect")
+inner_container = NodePath("BoxContainer")
+margin_override = 18
+
+[node name="NinePatchRect" type="NinePatchRect" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/PagesContainer"]
+layout_mode = 2
+texture = ExtResource("2_s1pp7")
+patch_margin_left = 32
+patch_margin_top = 32
+patch_margin_right = 32
+patch_margin_bottom = 32
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+
+[node name="BoxContainer" type="BoxContainer" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/PagesContainer"]
+custom_minimum_size = Vector2(222, 0)
+layout_mode = 2
+vertical = true
+
+[node name="Control" type="Control" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/PagesContainer/BoxContainer"]
+custom_minimum_size = Vector2(0, 18)
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/PagesContainer/BoxContainer/Control"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -25.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("5_3wi5n")
+theme_override_font_sizes/font_size = 24
+text = "Pages"
+horizontal_alignment = 1
+text_overrun_behavior = 3
+
+[node name="ColorRect4" type="ColorRect" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/PagesContainer/BoxContainer"]
+custom_minimum_size = Vector2(2, 2)
+layout_mode = 2
+color = Color(0.498039, 0, 0, 1)
+
+[node name="PassivePagesContainer" type="VBoxContainer" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/PagesContainer/BoxContainer"]
+layout_mode = 2
+
+[node name="ColorRect5" type="ColorRect" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/PagesContainer/BoxContainer"]
+custom_minimum_size = Vector2(2, 2)
+layout_mode = 2
+color = Color(0.498039, 0, 0, 1)
+
+[node name="ActionPagesContainer" type="VBoxContainer" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/PagesContainer/BoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="BoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="ResitWeakContainer" type="Container" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer2" node_paths=PackedStringArray("background", "inner_container")]
+custom_minimum_size = Vector2(246, 128)
+layout_mode = 2
+script = ExtResource("1_is6c6")
+background = NodePath("NinePatchRect")
+inner_container = NodePath("BoxContainer")
+margin_override = 18
+
+[node name="NinePatchRect" type="NinePatchRect" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer2/ResitWeakContainer"]
+layout_mode = 2
+texture = ExtResource("2_s1pp7")
+patch_margin_left = 32
+patch_margin_top = 32
+patch_margin_right = 32
+patch_margin_bottom = 32
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+
+[node name="BoxContainer" type="BoxContainer" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer2/ResitWeakContainer"]
+layout_mode = 2
+vertical = true
+
+[node name="ResistContainer" type="VBoxContainer" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer2/ResitWeakContainer/BoxContainer" node_paths=PackedStringArray("premade_resistance_label")]
+custom_minimum_size = Vector2(210, 0)
+layout_mode = 2
+script = ExtResource("12_d0bpe")
+show_resistances = true
+premade_resistance_label = NodePath("ResistanceLabel")
+
+[node name="Label2" type="Label" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer2/ResitWeakContainer/BoxContainer/ResistContainer"]
+layout_mode = 2
+theme = ExtResource("5_3wi5n")
+text = "Resistances"
+text_overrun_behavior = 3
+
+[node name="ResistanceLabel" type="HBoxContainer" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer2/ResitWeakContainer/BoxContainer/ResistContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer2/ResitWeakContainer/BoxContainer/ResistContainer/ResistanceLabel"]
+layout_mode = 2
+texture = ExtResource("13_qmf4r")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="NameLabel" type="Label" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer2/ResitWeakContainer/BoxContainer/ResistContainer/ResistanceLabel"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("7_on4i3")
+text = "Fire"
+horizontal_alignment = 1
+
+[node name="SepLabel" type="Label" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer2/ResitWeakContainer/BoxContainer/ResistContainer/ResistanceLabel"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("7_on4i3")
+text = ":"
+horizontal_alignment = 1
+
+[node name="ValueLabel" type="Label" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer2/ResitWeakContainer/BoxContainer/ResistContainer/ResistanceLabel"]
+self_modulate = Color(0.498039, 0, 0, 1)
+custom_minimum_size = Vector2(34, 0)
+layout_mode = 2
+theme = ExtResource("7_on4i3")
+text = "100"
+horizontal_alignment = 1
+
+[node name="PercentLabel" type="Label" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer2/ResitWeakContainer/BoxContainer/ResistContainer/ResistanceLabel"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("7_on4i3")
+text = "%"
+horizontal_alignment = 2
+
+[node name="ColorRect5" type="ColorRect" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer2/ResitWeakContainer/BoxContainer"]
+custom_minimum_size = Vector2(2, 2)
+layout_mode = 2
+color = Color(0.498039, 0, 0, 1)
+
+[node name="WeaknessContainer" type="VBoxContainer" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer2/ResitWeakContainer/BoxContainer" node_paths=PackedStringArray("premade_resistance_label")]
+layout_mode = 2
+script = ExtResource("12_d0bpe")
+show_weaknesses = true
+premade_resistance_label = NodePath("ResistanceLabel")
+
+[node name="Label2" type="Label" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer2/ResitWeakContainer/BoxContainer/WeaknessContainer"]
+layout_mode = 2
+theme = ExtResource("5_3wi5n")
+text = "Weaknesses"
+text_overrun_behavior = 3
+
+[node name="ResistanceLabel" type="HBoxContainer" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer2/ResitWeakContainer/BoxContainer/WeaknessContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer2/ResitWeakContainer/BoxContainer/WeaknessContainer/ResistanceLabel"]
+layout_mode = 2
+texture = ExtResource("13_qmf4r")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="NameLabel" type="Label" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer2/ResitWeakContainer/BoxContainer/WeaknessContainer/ResistanceLabel"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("7_on4i3")
+text = "Fire"
+horizontal_alignment = 1
+
+[node name="SepLabel" type="Label" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer2/ResitWeakContainer/BoxContainer/WeaknessContainer/ResistanceLabel"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("7_on4i3")
+text = ":"
+horizontal_alignment = 1
+
+[node name="ValueLabel" type="Label" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer2/ResitWeakContainer/BoxContainer/WeaknessContainer/ResistanceLabel"]
+self_modulate = Color(0.498039, 0, 0, 1)
+custom_minimum_size = Vector2(34, 0)
+layout_mode = 2
+theme = ExtResource("7_on4i3")
+text = "100"
+horizontal_alignment = 1
+
+[node name="PercentLabel" type="Label" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer2/ResitWeakContainer/BoxContainer/WeaknessContainer/ResistanceLabel"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("7_on4i3")
+text = "%"
+horizontal_alignment = 2
+
+[node name="DropsContainer" type="Container" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer2" node_paths=PackedStringArray("background", "inner_container")]
+custom_minimum_size = Vector2(258, 100)
+layout_mode = 2
+script = ExtResource("1_is6c6")
+background = NodePath("NinePatchRect")
+inner_container = NodePath("BoxContainer")
+margin_override = 18
+
+[node name="NinePatchRect" type="NinePatchRect" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer2/DropsContainer"]
+layout_mode = 2
+texture = ExtResource("2_s1pp7")
+patch_margin_left = 32
+patch_margin_top = 32
+patch_margin_right = 32
+patch_margin_bottom = 32
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+
+[node name="BoxContainer" type="BoxContainer" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer2/DropsContainer"]
+custom_minimum_size = Vector2(222, 0)
+layout_mode = 2
+vertical = true
+
+[node name="Control" type="Control" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer2/DropsContainer/BoxContainer"]
+custom_minimum_size = Vector2(0, 18)
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer2/DropsContainer/BoxContainer/Control"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -25.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("5_3wi5n")
+theme_override_font_sizes/font_size = 24
+text = "Drops"
+horizontal_alignment = 1
+text_overrun_behavior = 3
+
+[node name="ColorRect4" type="ColorRect" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer2/DropsContainer/BoxContainer"]
+custom_minimum_size = Vector2(2, 2)
+layout_mode = 2
+color = Color(0.498039, 0, 0, 1)
+
+[node name="ActorDropEntry" type="HBoxContainer" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer2/DropsContainer/BoxContainer" node_paths=PackedStringArray("icon_background", "icon_rect")]
+layout_mode = 2
+script = ExtResource("17_7ycef")
+icon_background = NodePath("IconBackground")
+icon_rect = NodePath("IconBackground/Icon")
+
+[node name="IconBackground" type="TextureRect" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer2/DropsContainer/BoxContainer/ActorDropEntry"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = ExtResource("18_48ows")
+expand_mode = 3
+
+[node name="Icon" type="TextureRect" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer2/DropsContainer/BoxContainer/ActorDropEntry/IconBackground"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+
+[node name="FitScaleLabel" type="Control" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer2/DropsContainer/BoxContainer/ActorDropEntry" node_paths=PackedStringArray("label")]
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("7_6rwid")
+label = NodePath("TitleLabel")
+text = "Actor Name"
+
+[node name="TitleLabel" type="Label" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer2/DropsContainer/BoxContainer/ActorDropEntry/FitScaleLabel"]
+layout_mode = 2
+offset_right = 181.0
+offset_bottom = 33.0
+scale = Vector2(0.969697, 0.969697)
+theme = ExtResource("5_3wi5n")
+theme_override_font_sizes/font_size = 24
+text = "Actor Name"
+vertical_alignment = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer2/DropsContainer/BoxContainer"]
+layout_mode = 2

@@ -14,6 +14,7 @@
             ]
         },
         "ActorData": {
+            "Faction": "BaseFaction",
             "EquipmentConstraints": {
                 "EquipmentSlots": [],
                 "HandCount": 1
@@ -91,7 +92,9 @@
             "SmallIcon": "Sprites/BaseActor.png",
             "SnippetDesc": "An actor made for baseing.",
             "Tags": [
-                "Human"
+                "Human",
+                "Living",
+                "Creature"
             ],
             "Taxonomy": [
                 "Actor"
