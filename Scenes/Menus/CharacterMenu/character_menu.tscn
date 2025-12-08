@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://ib08wcyrqims"]
+[gd_scene load_steps=26 format=3 uid="uid://ib08wcyrqims"]
 
 [ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/character_menu_control.gd" id="1_b43ae"]
 [ext_resource type="Texture2D" uid="uid://mpwjrtfjnbth" path="res://Scenes/Menus/CharacterMenu/BookBackground.png" id="2_ny2th"]
@@ -16,6 +16,7 @@
 [ext_resource type="Theme" uid="uid://dwinll8pgdjhc" path="res://Scenes/Themes/standard_theme.tres" id="12_dy5pv"]
 [ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MouseOverControl/character_menu_mouse_control.gd" id="12_yj8n3"]
 [ext_resource type="Texture2D" uid="uid://xcjbd3xju45w" path="res://Scenes/Menus/CharacterMenu/MouseOverControl/DragItemBackground.png" id="13_0dekw"]
+[ext_resource type="Shader" path="res://Scenes/Menus/CharacterMenu/character_menu.gdshader" id="19_5ikvh"]
 [ext_resource type="PackedScene" uid="uid://bivhm6cnkig2b" path="res://Scenes/Menus/CharacterMenu/MenuPages/StatsMenuPage/stats_menu_page.tscn" id="20_wjece"]
 [ext_resource type="PackedScene" uid="uid://dbtugo1kq2imi" path="res://Scenes/Menus/CharacterMenu/MenuPages/InventoryPage/inventory_menu_page.tscn" id="21_yal5w"]
 [ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/inv_filter_tabs_control.gd" id="43_ercvn"]
@@ -36,6 +37,15 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 "
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_i55nt"]
+shader = ExtResource("19_5ikvh")
+shader_parameter/flip_h = true
+shader_parameter/flip_v = false
+shader_parameter/progress = 0.5
+shader_parameter/x_end_factor = 0.5
+shader_parameter/y_end_factor = 0.759
+shader_parameter/reverse_dark = 0.75
 
 [node name="CharacterMenuControl" type="Control" node_paths=PackedStringArray("details_card_spawn_point", "equipment_page", "page_page", "supplies_page", "stats_page", "scale_control", "inventory_container", "actor_tabs_control", "close_button", "tab_equipment_button", "tab_pages_button", "tab_supplies_button", "tab_inventory_button", "tab_stats_button", "inventory_tab_rect", "stats_tab_rect", "mouse_control")]
 custom_minimum_size = Vector2(600, 420)
@@ -610,6 +620,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="EquipmentPage" parent="ScaleControl/LeftPageControl" instance=ExtResource("9_bofun")]
+material = SubResource("ShaderMaterial_i55nt")
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

@@ -214,7 +214,11 @@ static var known_keyed_dictionary_suffixes:Array:
 
 ## Return a nested Dictionary of Key to Property Type 
 static func _rec_dic_to_keys(dict:Dictionary):
-	var out_dict = {}
+	var out_dict = {} 
+	# Filter SubActions
+	if dict.keys().has("!SubActionScript"):
+		if dict['!SubActionScript'] != "res://assets/Scripts/Actions/SubActions/Targeting/SubAct_GetTarget.gd":
+			return {}
 	for key:String in dict.keys():
 		var val = dict[key]
 		if val is Dictionary:

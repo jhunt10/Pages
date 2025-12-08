@@ -52,6 +52,12 @@ func start_state():
 	var center = selection_data.get_center_of_area()
 	CombatRootControl.Instance.camera.start_auto_pan_to_map_pos(center)
 	
+	if selection_data.target_params.is_actor_target_type():
+		var last_targeted = CombatRootControl.Instance.last_target_records.get(selection_data.focused_actor.Id, null)
+		if last_targeted and selection_data.list_potential_targets().has(last_targeted):
+			var map_pos = game_state.get_actor_pos(last_targeted)
+			select_target(map_pos.to_vector2i(), false)
+	
 func end_state():
 	CombatRootControl.Instance.GridCursor.set_cursor(GridCursorNode.Cursors.Default)
 	CombatRootControl.Instance.GridCursor.lock_position = false
@@ -78,6 +84,7 @@ func handle_input(event):
 			select_target(spot, false)
 
 func select_target(coord:Vector2i, confirmed:bool):
+	# Highlight target, but wait for Comfirm button
 	if (wait_for_confirm and not confirmed) or coord != waiting_selection:
 		if _logging: print("Started Waiting for comfirm")
 		is_waiting_for_confirm = true
@@ -106,6 +113,7 @@ func select_target(coord:Vector2i, confirmed:bool):
 			printerr("No Actors on targeted spot when looking for Actor target")
 			return
 		turndata.add_target_for_key(selection_data.setting_target_key, selection_data.target_params.target_param_key, actors[0].Id)
+		CombatRootControl.Instance.last_target_records[selection_data.focused_actor.Id] = actors[0].Id
 	CombatUiControl.ui_state_controller.set_ui_state(UiStateController.UiStates.ExecRound)
 
 func ui_button_pressed():

@@ -59,12 +59,12 @@ func finish():
 	var source_actor = null
 	if _data.has("SourceActorId"): source_actor = ActorLibrary.get_actor(_data['SourceActorId'])
 	for vfx_key in chain_vfx_datas.keys():
-		var data = chain_vfx_datas[vfx_key]
-		if data.has("ScenePath"):
+		var next_node_data = chain_vfx_datas[vfx_key]
+		if next_node_data.has("ScenePath"):
 			VfxHelper.create_vfx_on_actor(self.actor_node.Actor, vfx_key, chain_vfx_datas[vfx_key], source_actor)
-		elif data.has("DamageNumber"):
-			var damage_string = str(data.get("DamageNumber", 0))
-			var damage_text_type = _data.get("DamageTextType", VfxHelper.FlashTextType.Normal_Dmg)
+		elif next_node_data.has("DamageNumber"):
+			var damage_string = str(next_node_data.get("DamageNumber", 0))
+			var damage_text_type = next_node_data.get("DamageTextType", VfxHelper.FlashTextType.Normal_Dmg)
 			VfxHelper.create_flash_text(self.actor_node.Actor, damage_string, damage_text_type)
 		
 	_state = States.Finished

@@ -18,6 +18,7 @@ static var QueController:ActionQueController = ActionQueController.new()
 	
 var GameState:GameStateData
 
+static var auto_targeting_enabled:bool = true
 static var _current_player_index:int = 0
 static var _player_actor_ids:Array = []
 
@@ -37,6 +38,8 @@ var supress_win_conditions:bool = false
 var combat_started:bool = false
 var combat_finished:bool = false
 var combat_cleaned:bool = false
+
+var last_target_records:Dictionary = {}
 
 func _enter_tree() -> void:
 	if !Instance: 

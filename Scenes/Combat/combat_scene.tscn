@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=3 uid="uid://dfeilp6hbiuqs"]
+[gd_scene load_steps=59 format=3 uid="uid://dfeilp6hbiuqs"]
 
 [ext_resource type="Script" path="res://Scenes/Combat/combat_scene.gd" id="1_crigy"]
 [ext_resource type="Texture2D" uid="uid://b232xm2ly0peh" path="res://assets/Sprites/UI/GridCursors/GridCursor_Default.png" id="7_7lt4y"]
@@ -51,7 +51,13 @@
 [ext_resource type="Script" path="res://Scenes/Combat/dev_map_drawing.gd" id="37_fh4f7"]
 [ext_resource type="PackedScene" uid="uid://bje0k82nenje6" path="res://Scenes/Dialog/dialog_control.tscn" id="37_vv8mm"]
 [ext_resource type="Theme" uid="uid://bfce41la62bs6" path="res://Scenes/Themes/readable_theme.tres" id="38_waysr"]
+[ext_resource type="Texture2D" uid="uid://dn01d6j2jvq" path="res://Scenes/Combat/UiNodes/AutoTargetButton/ButtonBackground.png" id="47_0i8v2"]
+[ext_resource type="Texture2D" uid="uid://s5rjqjkq4r41" path="res://Scenes/Combat/UiNodes/AutoTargetButton/ButtonBackground_Pressed.png" id="48_3y5e4"]
 [ext_resource type="PackedScene" uid="uid://cjlwimeud3tyy" path="res://Scenes/Maps/TestingMap/testing_map.tscn" id="49_lque7"]
+[ext_resource type="Script" path="res://Scenes/Combat/UiNodes/AutoTargetButton/auto_target_button.gd" id="49_pmc5d"]
+[ext_resource type="Texture2D" uid="uid://d33e8uei2by2p" path="res://Scenes/Combat/UiNodes/AutoTargetButton/AutoIcon.png" id="50_orbsx"]
+[ext_resource type="Texture2D" uid="uid://ca1ypobn53bm5" path="res://Scenes/Combat/UiNodes/AutoTargetButton/ManualIcon.png" id="51_g4xop"]
+[ext_resource type="Texture2D" uid="uid://bl04mrkk5c0wp" path="res://Scenes/Combat/UiNodes/AutoTargetButton/TragetIcon.png" id="52_sx3df"]
 
 [node name="CombatRootControl" type="Control" node_paths=PackedStringArray("ui_control", "camera", "start_combat_screen", "MapController", "dialog_controller", "GridCursor")]
 custom_minimum_size = Vector2(1152, 648)
@@ -1421,6 +1427,40 @@ texture_normal = ExtResource("22_6ebva")
 texture_pressed = ExtResource("23_djd8f")
 texture_disabled = ExtResource("23_djd8f")
 stretch_mode = 0
+
+[node name="AutoTargetButton" type="TextureButton" parent="MoveableCamera2D/CanvasLayer" node_paths=PackedStringArray("auto_manual_icon")]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -72.0
+offset_top = -212.0
+offset_right = -8.0
+offset_bottom = -148.0
+grow_horizontal = 0
+grow_vertical = 0
+texture_normal = ExtResource("47_0i8v2")
+texture_pressed = ExtResource("48_3y5e4")
+texture_disabled = ExtResource("48_3y5e4")
+stretch_mode = 0
+script = ExtResource("49_pmc5d")
+auto_manual_icon = NodePath("AutoManualIcon")
+auto_texture = ExtResource("50_orbsx")
+manual_texture = ExtResource("51_g4xop")
+auto_target_enabled = true
+
+[node name="TargetIcon" type="TextureRect" parent="MoveableCamera2D/CanvasLayer/AutoTargetButton"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("52_sx3df")
+
+[node name="AutoManualIcon" type="TextureRect" parent="MoveableCamera2D/CanvasLayer/AutoTargetButton"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("50_orbsx")
 
 [node name="DialogControl" parent="MoveableCamera2D/CanvasLayer" node_paths=PackedStringArray("scene_root") instance=ExtResource("37_vv8mm")]
 visible = false

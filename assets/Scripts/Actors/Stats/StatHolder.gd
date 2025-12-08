@@ -118,9 +118,10 @@ func get_stats_dependant_on_attribute(attribute_name:String)->Array:
 				out_list.append(mod.stat_name)
 	return out_list
 
-func get_damage_resistance(damage_type:DamageEvent.DamageTypes)->float:
-	var type_str = DamageEvent.DamageTypes.keys()[damage_type]
-	var int_val = get_stat("Resistance:" + str(type_str), 0)
+func get_damage_resistance(damage_type)->float:
+	if damage_type is DamageEvent.DamageTypes:
+		damage_type = DamageEvent.DamageTypes.keys()[damage_type]
+	var int_val = get_stat("Resistance:" + str(damage_type), 0)
 	return float(int_val)
 
 # -----------------------------------------------------------------

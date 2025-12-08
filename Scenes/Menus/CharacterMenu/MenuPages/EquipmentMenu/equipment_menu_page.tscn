@@ -1,10 +1,9 @@
-[gd_scene load_steps=37 format=3 uid="uid://cbexkor24ce0h"]
+[gd_scene load_steps=36 format=3 uid="uid://cbexkor24ce0h"]
 
 [ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/EquipmentMenu/equipment_page_control.gd" id="1_6pwc2"]
 [ext_resource type="Texture2D" uid="uid://c4yedxpiinlff" path="res://Scenes/Menus/CharacterMenu/MenuPages/outline.png" id="2_5i0tg"]
 [ext_resource type="PackedScene" uid="uid://cf43u4ospfr42" path="res://Scenes/Menus/CharacterMenu/MenuPages/EquipmentMenu/equipment_menu_item_slot_button.tscn" id="3_61ti0"]
 [ext_resource type="Theme" uid="uid://dwinll8pgdjhc" path="res://Scenes/Themes/standard_theme.tres" id="3_th70d"]
-[ext_resource type="Texture2D" uid="uid://bvdik5isqdgxf" path="res://Scenes/Menus/CharacterMenu/MenuPages/EquipmentMenu/EquipmentSlotsContainer/EquipmentGrid_Background.png" id="4_cj3ey"]
 [ext_resource type="Texture2D" uid="uid://lv3xit0yhvj2" path="res://Scenes/UiNodes/ExpBar/ExpBar.png" id="4_e3qra"]
 [ext_resource type="PackedScene" uid="uid://ybkww8wk3awm" path="res://Scenes/UiNodes/StatLabelContainer/stat_label_container.tscn" id="5_40ia4"]
 [ext_resource type="Texture2D" uid="uid://js1gbkgy0ql3" path="res://Scenes/Menus/CharacterMenu/MenuPages/EquipmentMenu/EquipmentSlotsContainer/EquipmentItemSlotOutline.png" id="5_a3xlj"]
@@ -190,16 +189,6 @@ offset_bottom = 311.0
 grow_horizontal = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-
-[node name="TextureRect" type="TextureRect" parent="EquipmentSlotsControl"]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("4_cj3ey")
 
 [node name="LeftEquipSlots" type="VBoxContainer" parent="EquipmentSlotsControl"]
 custom_minimum_size = Vector2(64, 0)

@@ -47,9 +47,9 @@ func start_combat():
 	StoryState.start_new_story()
 
 func _open_pages_menu():
-	#var new_cards = load("res://Scenes/Menus/PageLibraryMenu/page_library_menu.tscn").instantiate()
-	#root_node.add_child(new_cards)
-	MainRootNode.Instance.open_archive()
+	var new_cards = load("res://Scenes/Menus/PageLibraryMenu/page_library_menu.tscn").instantiate()
+	root_node.add_child(new_cards)
+	#MainRootNode.Instance.open_archive()
 	
 
 func _open_load_menu():

@@ -26,6 +26,8 @@ func get_item_holder()->BaseItemHolder:
 
 func sync():
 	super()
+	if !_actor:
+		return
 	var bag:BaseBagEquipment = _actor.equipment.get_bag_equipment()
 	if bag:
 		if bag.Id == _current_bag_item_id:

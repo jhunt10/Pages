@@ -47,15 +47,19 @@ func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, metadata:
 		VfxHelper.create_flash_text(actor, "No Target", VfxHelper.FlashTextType.NoTarget)
 		return BaseSubAction.Failed
 	
+	# Enemy NPCs
 	if not actor.is_player:
 		if AiHandler.try_handle_get_target_sub_action(actor, selection_data, parent_action, game_state):
 			return BaseSubAction.Success
 		else:
 			return BaseSubAction.Failed 
 	
-	if allow_auto and potential_target_count == 1:
-		turn_data.add_target_for_key(setting_target_key, target_param_key, selection_data.list_potential_targets()[0])
-		return BaseSubAction.Success
+	# Auto Targeting
+	if allow_auto and CombatRootControl.Instance.auto_targeting_enabled: 
+		var auto_targets = TargetingHelper.get_auto_targets_for_page(selection_data, parent_action, actor)
+		if auto_targets.size() == 1:
+			turn_data.add_target_for_key(setting_target_key, target_param_key, auto_targets[0])
+			return BaseSubAction.Success
 	
 	CombatRootControl.Instance.QueController.pause_execution()
 	CombatUiControl.ui_state_controller.set_ui_state_from_path(

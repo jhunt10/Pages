@@ -2,6 +2,58 @@ class_name TargetingHelper
 
 enum LOS_VALUE {Invalid, Blocked, Cover, Open}
 
+
+## Returns list of reasonable targets for auto targeting
+static func get_auto_targets_for_page(selection_data:TargetSelectionData, parent_action:PageItemAction, source_actor:BaseActor)->Array:
+	# TODO: Spot target type
+	if not selection_data.target_params.is_actor_target_type():
+		return selection_data.list_potential_targets()
+	
+	var all_actors = []
+	for actor_id in selection_data.list_potential_targets():
+		var actor = ActorLibrary.get_actor(actor_id)
+		if actor:
+			all_actors.append(actor)
+	
+	# For Attacks, consider Preview Damage
+	if parent_action.get_tags().has("Attack"):
+		var damage_datas = parent_action.get_preview_damage_datas(source_actor)
+		if damage_datas.size() == 0:
+			printerr("TargetHelper.get_auto_targets_for_page: No Preview DamageData found on Attack Page '%s'." %[parent_action.ActionKey])
+		else:
+			# Enemies who will be hurt OR Allies who will be healed
+			var reasonable_targets = []
+			for other_actor:BaseActor in all_actors:
+				# TODO: Does not account for attack mods like "Harming Light"
+				var will_hurt = false
+				for damage_data in damage_datas.values():
+					var damage_type = damage_data.get("DamageType")
+					if other_actor.stats.get_damage_resistance(damage_type) < 100:
+						will_hurt = true
+				var is_ally = other_actor.FactionIndex == source_actor.FactionIndex
+				#if (will_hurt and not is_ally) or (not will_hurt and is_ally):
+				if will_hurt != is_ally:
+					reasonable_targets.append(other_actor)
+			return reasonable_targets
+	
+	var allies = []
+	var enemies = []
+	for other_actor:BaseActor in all_actors:
+		if other_actor.FactionIndex == source_actor.FactionIndex:
+			allies.append(other_actor)
+		else:
+			enemies.append(other_actor)
+	
+	# Assume actor's don't want to be targeted
+	var is_bad = true
+	# TODO: Logic?
+	
+	if is_bad:
+		return enemies
+	else:
+		return allies
+	
+
 ## Returns all actors effected by selected target
 static func get_targeted_actors(target_params:TargetParameters, targets:Array, source_actor:BaseActor, game_state:GameStateData, ignore_aoe:bool=false)->Array:
 	
