@@ -247,6 +247,8 @@ func get_zones_ids_at_pos(pos)->Array:
 	if not pos:
 		return []
 	var spot = get_map_spot(pos)
+	if !spot:
+		return []
 	return spot.get_zones()
 
 func get_actors_in_zone(zone_id:String)->Array:

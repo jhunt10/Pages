@@ -8,6 +8,7 @@ signal item_spawned(item:BaseItem, map_pos:MapPos)
 @export var ui_control:CombatUiControl
 @export var camera:MoveableCamera2D
 @export var start_combat_screen:StartCombatScreen
+@export var map_background:MapBackground
 
 @export var MapController:MapControllerNode
 @export var dialog_controller:DialogController
@@ -70,6 +71,8 @@ func _ready() -> void:
 	start_combat_screen.hide()
 	start_combat_screen.screen_blacked_out.connect(_on_combat_screen_blackout)
 	start_combat_screen.screen_clear.connect(_on_combat_screen_cleared)
+	
+	map_background.set_map(MapController)
 	
 	if dialog_controller:
 		ui_control.hide()

@@ -10,7 +10,8 @@ var grid_tile_map:TileMapLayer:
 @export var map_name:String
 @export var zone_tile_map:TileMapLayer 
 @export var actor_tile_map:TileMapLayer 
-@export var item_tile_map:TileMapLayer 
+@export var item_tile_map:TileMapLayer  
+@export var ground_tile_map:TileMapLayer 
 @export var terrain_path_map:TerrainPathingMap
 @export var marker_tile_map:TileMapLayer
 @export var player_spawn_area_tile_map:TileMapLayer
@@ -38,6 +39,11 @@ func _ready() -> void:
 	if LOGGING: print("Readying MapCont: Inst:%s" % [CombatRootControl.Instance])
 	#CombatRootControl.Instance.actor_spawned.connect(create_actor_node)
 	CombatRootControl.QueController.end_of_frame.connect(_sync_positions)
+
+func get_map_rect()->Rect2i:
+	if ground_tile_map:
+		return ground_tile_map.get_used_rect()
+	return terrain_path_map.get_used_rect()
 
 func get_map_data()->Dictionary:
 	var map_data = terrain_path_map.get_map_data()
