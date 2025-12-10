@@ -26,6 +26,8 @@ var auto_pan_velocity:float
 var auto_pan_max_velocity:float = 500
 var auto_pan_min_velocity:float = 100
 
+var max_camera_bounds:Rect2i
+
 # For ignoring scrolling
 @export var message_box:Control
 
@@ -71,7 +73,9 @@ func _process(delta: float) -> void:
 			force_finish_panning()
 			return
 		else:
+			# Auto panning
 			self.position = new_pos
+			#set_camera_pos(new_pos, false)
 			return
 	
 	if following_actor_node:
@@ -123,6 +127,12 @@ func _process(delta: float) -> void:
 			#_pinch_last_radius = radius
 	pass
 
+func cach_camera_bounds():
+	#var map_rect = CombatRootControl.Instance.MapController.get_map_rect()
+	#max_camera_bounds = Rect2i(CombatRootControl.Instance.MapController.position, 
+	#map_rect.size * Vector2i(32, 32))
+	max_camera_bounds = CombatRootControl.Instance.map_background.map_paper_patch.get_rect()
+
 func clear_following_actor():
 	if following_actor_node:
 		if is_instance_valid(following_actor_node):
@@ -132,7 +142,12 @@ func clear_following_actor():
 		if LOGGING: print("Unlocking Camera from Actor: null")
 
 func set_camera_pos(pos:Vector2, unfollow:bool=true):
-	self.position = pos
+	if max_camera_bounds == null or true:
+		cach_camera_bounds()
+	self.position = Vector2(
+		min(max(pos.x, max_camera_bounds.position.x), max_camera_bounds.position.x + max_camera_bounds.size.x),
+		min(max(pos.y, max_camera_bounds.position.y), max_camera_bounds.position.y + max_camera_bounds.size.y)
+	)
 	if unfollow and following_actor_node:
 		clear_following_actor()
 

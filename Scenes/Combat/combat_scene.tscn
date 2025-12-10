@@ -1,8 +1,8 @@
 [gd_scene load_steps=62 format=3 uid="uid://dfeilp6hbiuqs"]
 
 [ext_resource type="Script" path="res://Scenes/Combat/combat_scene.gd" id="1_crigy"]
-[ext_resource type="Texture2D" uid="uid://dipsfxmqeutav" path="res://Scenes/Menus/ShopMenu/wood_background.png" id="2_x8g4o"]
 [ext_resource type="Texture2D" uid="uid://51dfjr6b84bj" path="res://assets/Sprites/UI/BackPatches/PaperPatch_Big_184x128_32.png" id="3_idpcw"]
+[ext_resource type="Texture2D" uid="uid://dv6k52yn5hsu4" path="res://Scenes/Combat/UiNodes/MapBackground/wood_background.png" id="3_r8nin"]
 [ext_resource type="Texture2D" uid="uid://b232xm2ly0peh" path="res://assets/Sprites/UI/GridCursors/GridCursor_Default.png" id="7_7lt4y"]
 [ext_resource type="Script" path="res://Scenes/Combat/UiNodes/combat_ui_control.gd" id="8_8l3el"]
 [ext_resource type="Script" path="res://Scenes/Combat/UiNodes/grid_cursor_node.gd" id="8_wf3xb"]
@@ -96,8 +96,8 @@ layout_mode = 0
 offset_left = -570.0
 offset_top = -380.0
 offset_right = 1734.0
-offset_bottom = 916.0
-texture = ExtResource("2_x8g4o")
+offset_bottom = 1924.0
+texture = ExtResource("3_r8nin")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="MapBackground"]
 layout_mode = 0

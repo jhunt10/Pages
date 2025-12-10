@@ -81,7 +81,7 @@ func _ready() -> void:
 	#MapController._build_terrain()
 	for actor:BaseActor in GameState._actors.values():
 		actor.on_combat_start()
-	
+	camera.cach_camera_bounds()
 	#ui_control.ui_state_controller.set_ui_state(UiStateController.UiStates.ActionInput)
 	pass # Replace with function body.
 
