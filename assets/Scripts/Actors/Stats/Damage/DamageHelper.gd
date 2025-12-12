@@ -71,7 +71,7 @@ static func get_damage_icon(damage_type)->Texture2D:
 static func get_min_max_damage(actor:BaseActor, damage_data:Dictionary)->Array:
 	var base_damage = 0
 	var attack_stat = damage_data.get("AtkStat")
-	if attack_stat == "Fixed":
+	if (attack_stat as String).to_lower() == "fixed":
 		base_damage = damage_data.get('BaseDamage')
 	else:
 		base_damage = actor.stats.base_damge_from_stat(attack_stat)

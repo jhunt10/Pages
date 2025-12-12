@@ -949,6 +949,19 @@ grow_horizontal = 2
 grow_vertical = 0
 unknown_speaker_port = ExtResource("22_lwtp0")
 
+[node name="NinePatchRect2" type="NinePatchRect" parent="DialogControl"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("31_l4e0d")
+patch_margin_left = 48
+patch_margin_top = 48
+patch_margin_right = 48
+patch_margin_bottom = 48
+
 [node name="DetaiolCardSpawnPoint" type="Control" parent="."]
 clip_contents = true
 custom_minimum_size = Vector2(300, 260)

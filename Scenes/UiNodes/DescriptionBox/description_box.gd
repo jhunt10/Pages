@@ -690,6 +690,13 @@ func _parse_zone(object_def:Dictionary, object_inst:BaseLoadObject, actor:BaseAc
 func get_effect_datas_from_def(def:Dictionary)->Dictionary:
 	if def.has("ActionData"):
 		return def['ActionData'].get("EffectDatas", {})
+	if def.has("PageData"):
+		var effect_key = def['PageData'].get("EffectData", {}).get("EffectKey", null)
+		if effect_key:
+			return EffectLibrary.get_effect_def(effect_key)
+	if def.has("SuppliesData"):
+		return def['SuppliesData'].get("EffectDatas", {})
+		
 	return {}
 
 

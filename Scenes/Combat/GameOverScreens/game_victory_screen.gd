@@ -13,6 +13,8 @@ extends Control
 @export var premade_pickup_item:HBoxContainer
 @export var pickup_items_container:VBoxContainer
 
+@export var game_unlock_screen:GameUnlockScreen
+
 func _ready() -> void:
 	premade_pickup_page.hide()
 	premade_pickup_item.hide()
@@ -28,21 +30,23 @@ func show_game_result():
 func _on_camp_button():
 	CombatRootControl.Instance.cleanup_combat()
 	if CombatRootControl.is_story_map:
-		StoryState.load_next_story_scene()
+		self.hide()
+		game_unlock_screen.show_game_result()
+		#StoryState.load_next_story_scene()
 	else:
 		MainRootNode.Instance.open_camp_menu()
 
 func collect_dropped_items():
 	var items_datas = {}
-	var total_money = 0
+	var pickup_money = 0
 	for item:BaseItem in CombatRootControl.Instance.GameState.list_items():
 		
-		print("Collecting Item: " + item.Id)
+		#print("Collecting Item: " + item.Id)
 		if item.get_item_type() == BaseItem.ItemTypes.Money:
-			total_money += item.get_item_value()
-			CombatRootControl.Instance.GameState.delete_item(item)
-			ItemLibrary.delete_item(item)
-			continue
+			pickup_money += item.get_item_value()
+			#CombatRootControl.Instance.GameState.delete_item(item)
+			#ItemLibrary.delete_item(item)
+			#continue
 		
 		var item_type = "default"
 		if item is BasePageItem:
@@ -62,22 +66,26 @@ func collect_dropped_items():
 		PlayerInventory.add_item(item)
 		CombatRootControl.Instance.GameState.delete_item(item)
 	
+	if pickup_money > 0:
+		items_datas["default"]["Money"]['Count'] = pickup_money
+		StoryState.add_money(pickup_money)
 	
 	var enemy_count = 0
 	var actors = CombatRootControl.Instance.GameState.list_actors(true)
 	var total_exp = 0
+	var bounty_money = 0
 	for actor:BaseActor in actors:
 		if actor.is_dead and actor.FactionIndex != 0:
 			enemy_count += 1
 			var enemy_val = actor.actor_data.get("MoneyValue", 0)
-			total_money += enemy_val
+			bounty_money += enemy_val
 			var exp_val = actor.actor_data.get("ExpValue", 0)
 			total_exp += exp_val
 			
 	enemies_label.text = str(enemy_count)
 	rounds_label.text = str(CombatRootControl.QueController.round_counter)
-	money_label.text = "$"+str(total_money)
-	StoryState.add_money(total_money)
+	money_label.text = "$"+str(bounty_money)
+	StoryState.add_money(bounty_money)
 	
 	exp_label.text = str(total_exp)
 	for actor:BaseActor in CombatRootControl.list_player_actors():

@@ -300,5 +300,5 @@ func _build_dialog_entries(arr:Array):
 					"Text": line,
 					"NewLine": true
 				})
-	dialog_box.add_entries(new_entries)
+	#dialog_box.add_entries(new_entries)
 			

@@ -1,4 +1,4 @@
-[gd_scene load_steps=62 format=3 uid="uid://dfeilp6hbiuqs"]
+[gd_scene load_steps=65 format=3 uid="uid://dfeilp6hbiuqs"]
 
 [ext_resource type="Script" path="res://Scenes/Combat/combat_scene.gd" id="1_crigy"]
 [ext_resource type="Texture2D" uid="uid://51dfjr6b84bj" path="res://assets/Sprites/UI/BackPatches/PaperPatch_Big_184x128_32.png" id="3_idpcw"]
@@ -26,10 +26,10 @@
 [ext_resource type="Texture2D" uid="uid://cu00gc8hhk0h3" path="res://assets/Sprites/UI/QueInputAndDisplay/page_slot.png" id="23_o55pl"]
 [ext_resource type="Script" path="res://assets/Scripts/DevTools/que_cal_bar_control.gd" id="23_tcvpd"]
 [ext_resource type="Texture2D" uid="uid://cwsvq3qu6228n" path="res://assets/Sprites/UI/QueInputAndDisplay/page_button.png" id="24_5fn7e"]
-[ext_resource type="Script" path="res://Scenes/Combat/game_over_screen.gd" id="25_byrc6"]
+[ext_resource type="Script" path="res://Scenes/Combat/GameOverScreens/game_over_screen.gd" id="25_byrc6"]
 [ext_resource type="Script" path="res://Scenes/Combat/UiNodes/CameraLock/camera_lock_control.gd" id="25_ig6gl"]
 [ext_resource type="Texture2D" uid="uid://b22scetewh1tj" path="res://ObjectDefs/Items/Supplies/Potions/HealthPotions/Sprites/HealthPotion_M_L.png" id="25_q2xye"]
-[ext_resource type="Script" path="res://Scenes/Combat/game_victory_screen.gd" id="26_1uhkb"]
+[ext_resource type="Script" path="res://Scenes/Combat/GameOverScreens/game_victory_screen.gd" id="26_1uhkb"]
 [ext_resource type="Texture2D" uid="uid://e0lb1vqlst3i" path="res://Scenes/Combat/UiNodes/CameraLock/CameraLock_Locked.png" id="26_muuhh"]
 [ext_resource type="Theme" uid="uid://cayt153s5ro4a" path="res://Scenes/Themes/standard_theme_red.tres" id="27_3mvka"]
 [ext_resource type="Script" path="res://Scenes/Combat/UiNodes/DropMessages/drop_message_control.gd" id="27_7037i"]
@@ -46,8 +46,11 @@
 [ext_resource type="Texture2D" uid="uid://bau63162pa376" path="res://ObjectDefs/ClassDefs/Soldier/Actors/Sprites/SoldierIcon.png" id="33_0bnqe"]
 [ext_resource type="Texture2D" uid="uid://d041ymvcqbc8f" path="res://notes/TemplatePageIcon.png" id="33_a1r5m"]
 [ext_resource type="Script" path="res://Scenes/Combat/UiNodes/ActorPlacer/actor_placer_button.gd" id="33_lhmsf"]
+[ext_resource type="Script" path="res://Scenes/Combat/GameOverScreens/game_unlock_screen.gd" id="33_ucts4"]
 [ext_resource type="PackedScene" uid="uid://dqruidykupjgt" path="res://Scenes/Combat/UiNodes/OptionSelectMenu/option_select_menu.tscn" id="34_6y7uw"]
+[ext_resource type="Texture2D" uid="uid://bvmw0aystxedy" path="res://ObjectDefs/ClassDefs/Rogue/Actors/Sprites/RogueIcon.png" id="34_kd43d"]
 [ext_resource type="Texture2D" uid="uid://c4yedxpiinlff" path="res://Scenes/Menus/CharacterMenu/MenuPages/outline.png" id="34_wuopp"]
+[ext_resource type="Script" path="res://Scenes/UiNodes/FitScaleLabel/fit_scale_label.gd" id="35_4k8uv"]
 [ext_resource type="Script" path="res://Scenes/Combat/UiNodes/CombatLog/combat_log_controller.gd" id="35_swuh7"]
 [ext_resource type="PackedScene" uid="uid://bh3p8kqb34n5r" path="res://Scenes/Combat/StartCombatScreen/start_combat_screen.tscn" id="37_2ks4j"]
 [ext_resource type="Script" path="res://Scenes/Combat/dev_map_drawing.gd" id="37_fh4f7"]
@@ -796,8 +799,7 @@ text = "Main Menu"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="GameVictoryScreen" type="Control" parent="MoveableCamera2D/CanvasLayer/CombatUiControl" node_paths=PackedStringArray("rounds_label", "enemies_label", "exp_label", "money_label", "camp_button", "camp_button_label", "premade_pickup_page", "pickup_pages_container", "premade_pickup_item", "pickup_items_container")]
-visible = false
+[node name="GameVictoryScreen" type="Control" parent="MoveableCamera2D/CanvasLayer/CombatUiControl" node_paths=PackedStringArray("rounds_label", "enemies_label", "exp_label", "money_label", "camp_button", "camp_button_label", "premade_pickup_page", "pickup_pages_container", "premade_pickup_item", "pickup_items_container", "game_unlock_screen")]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -815,6 +817,7 @@ premade_pickup_page = NodePath("CenterContainer/VBoxContainer/PickupPagesContain
 pickup_pages_container = NodePath("CenterContainer/VBoxContainer/PickupPagesContainer")
 premade_pickup_item = NodePath("CenterContainer/VBoxContainer/PickupItemsContainer/PickupItemContainer")
 pickup_items_container = NodePath("CenterContainer/VBoxContainer/PickupItemsContainer")
+game_unlock_screen = NodePath("../GameUnlockScreen")
 
 [node name="ColorRect" type="ColorRect" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/GameVictoryScreen"]
 layout_mode = 1
@@ -955,7 +958,7 @@ layout_mode = 2
 theme = ExtResource("27_3mvka")
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 32
-text = "Money:"
+text = "Bounty:"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -1133,9 +1136,202 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("22_gl452")
 theme_override_font_sizes/font_size = 32
-text = "Back to Camp"
+text = "Continue"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="GameUnlockScreen" type="Control" parent="MoveableCamera2D/CanvasLayer/CombatUiControl" node_paths=PackedStringArray("new_actor_name_label", "new_actor_icon", "camp_button")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("33_ucts4")
+new_actor_name_label = NodePath("CenterContainer/VBoxContainer/NewActorContainer/NewActorContainer/NameLabel")
+new_actor_icon = NodePath("CenterContainer/VBoxContainer/NewActorContainer/NewActorContainer/PageBackground/PageIcon")
+camp_button = NodePath("CenterContainer/VBoxContainer/CampButton")
+
+[node name="ColorRect" type="ColorRect" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/GameUnlockScreen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.627451)
+
+[node name="CenterContainer" type="CenterContainer" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/GameUnlockScreen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/GameUnlockScreen/CenterContainer"]
+layout_mode = 2
+
+[node name="GameOverTitleLabel" type="Label" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/GameUnlockScreen/CenterContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+theme = ExtResource("27_3mvka")
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 12
+theme_override_font_sizes/font_size = 48
+text = " "
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="PickupItemsContainer" type="VBoxContainer" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/GameUnlockScreen/CenterContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/GameUnlockScreen/CenterContainer/VBoxContainer/PickupItemsContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("27_3mvka")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 32
+text = "New Map Unlocked"
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+
+[node name="Label3" type="Label" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/GameUnlockScreen/CenterContainer/VBoxContainer/PickupItemsContainer"]
+layout_mode = 2
+theme = ExtResource("27_3mvka")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 32
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NewActorContainer" type="VBoxContainer" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/GameUnlockScreen/CenterContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/GameUnlockScreen/CenterContainer/VBoxContainer/NewActorContainer"]
+visible = false
+layout_mode = 2
+theme = ExtResource("27_3mvka")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 32
+text = "New Pages"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NewActorContainer" type="HBoxContainer" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/GameUnlockScreen/CenterContainer/VBoxContainer/NewActorContainer"]
+custom_minimum_size = Vector2(384, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="PageBackground" type="TextureRect" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/GameUnlockScreen/CenterContainer/VBoxContainer/NewActorContainer/NewActorContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("31_rn36e")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="PageIcon" type="TextureRect" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/GameUnlockScreen/CenterContainer/VBoxContainer/NewActorContainer/NewActorContainer/PageBackground"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("34_kd43d")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TheLabel" type="Label" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/GameUnlockScreen/CenterContainer/VBoxContainer/NewActorContainer/NewActorContainer"]
+layout_mode = 2
+theme = ExtResource("27_3mvka")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 32
+text = " The "
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NameLabel" type="Label" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/GameUnlockScreen/CenterContainer/VBoxContainer/NewActorContainer/NewActorContainer"]
+layout_mode = 2
+theme = ExtResource("27_3mvka")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 32
+text = "Rogue"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CountLabel" type="Label" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/GameUnlockScreen/CenterContainer/VBoxContainer/NewActorContainer/NewActorContainer"]
+layout_mode = 2
+theme = ExtResource("27_3mvka")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 32
+text = " has join the Party"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TitleLabel" type="Label" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/GameUnlockScreen/CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("27_3mvka")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 32
+text = " "
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CampButton" type="Button" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/GameUnlockScreen/CenterContainer/VBoxContainer"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(200, 64)
+layout_mode = 2
+
+[node name="NinePatchRect2" type="NinePatchRect" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/GameUnlockScreen/CenterContainer/VBoxContainer/CampButton"]
+custom_minimum_size = Vector2(200, 32)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("32_f81f5")
+patch_margin_left = 12
+patch_margin_top = 12
+patch_margin_right = 12
+patch_margin_bottom = 12
+
+[node name="Label" type="Label" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/GameUnlockScreen/CenterContainer/VBoxContainer/CampButton/NinePatchRect2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("22_gl452")
+theme_override_font_sizes/font_size = 32
+text = "Continue"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="FitScaleLabel" type="Control" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/GameUnlockScreen" node_paths=PackedStringArray("label")]
+custom_minimum_size = Vector2(300, 32)
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("35_4k8uv")
+label = NodePath("TitleLabel")
+text = "Actor Name"
+
+[node name="TitleLabel" type="Label" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/GameUnlockScreen/FitScaleLabel"]
+layout_mode = 2
+offset_top = 2.0
+offset_right = 181.0
+offset_bottom = 35.0
+scale = Vector2(0.828729, 0.828729)
+theme = ExtResource("38_waysr")
+theme_override_font_sizes/font_size = 32
+text = "Actor Name"
+vertical_alignment = 2
 
 [node name="DropMessageControl" type="Control" parent="MoveableCamera2D/CanvasLayer/CombatUiControl" node_paths=PackedStringArray("premade_drop_card")]
 layout_mode = 1
@@ -1503,6 +1699,7 @@ scene_root = NodePath("../../..")
 visible = false
 
 [node name="MapNode" parent="." instance=ExtResource("49_lque7")]
+visible = false
 
 [node name="GridCursor" type="Sprite2D" parent="."]
 visible = false

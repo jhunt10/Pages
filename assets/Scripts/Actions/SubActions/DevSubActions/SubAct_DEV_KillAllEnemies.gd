@@ -20,11 +20,29 @@ func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, que_exe_d
 			.append_source(SourceTagChain.SourceTypes.Actor, actor)\
 			.append_source(SourceTagChain.SourceTypes.Action, parent_action)
 	
-	var damage_data = parent_action.get_damage_data_for_subaction(actor, subaction_data)
+	var damage_data = {
+		"DevKillDamage":{
+					"AtkPwrBase": 100,
+					"AtkPwrRange": 0,
+					"AtkStat": "Fixed",
+					"BaseDamage": 5000,
+					"DamageType": "RAW",
+					"DamageVfxKey": "Pierce_DamageEffect",
+					"DefenseType": "None"
+				}
+			}
 	var target_params = parent_action.get_targeting_params("Self", actor)
 	
-	#for target:BaseActor in targets:
-		#DamageHelper.handle_attack(actor, target, {}, damage_data, [], tag_chain, game_state, target_params)
+	var attack_event = AttackHandler.handle_attack(
+		actor, 
+		targets,
+		{}, 
+		damage_data, 
+		{}, 
+		tag_chain, 
+		game_state,
+		true)
+	
 	
 	#for target:BaseActor in targets:
 		#DamageHelper.handle_attack(actor, target, damage_data, tag_chain, game_state)

@@ -12,13 +12,14 @@
 [ext_resource type="Texture2D" uid="uid://cfdd8rgr4n8dd" path="res://assets/Sprites/UI/BackPatches/FancyBackPatch_BigFrame_128_36.png" id="10_cmrsr"]
 [ext_resource type="Texture2D" uid="uid://cejqf0u2igwvw" path="res://assets/Sprites/UI/BackPatches/FancyButtonPatch_64_18.png" id="11_wlare"]
 
-[node name="MapSelectionMenu" type="Control" node_paths=PackedStringArray("premade_option_button", "option_button_container", "description_box", "map_preview_image", "back_button", "explore_button")]
+[node name="MapSelectionMenu" type="Control" node_paths=PackedStringArray("premade_option_button", "option_button_container", "description_box", "map_preview_image", "back_button", "explore_button", "color_div")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 3
 script = ExtResource("1_loaak")
 premade_option_button = NodePath("OptionsContainer/ScrollContainer/MainOptionsContainer/MapOptionButton")
 option_button_container = NodePath("OptionsContainer/ScrollContainer/MainOptionsContainer")
@@ -26,6 +27,7 @@ description_box = NodePath("TextBoxBackground/RichTextLabel")
 map_preview_image = NodePath("PreviewImageContainer/PrettyPictureRect")
 back_button = NodePath("TitileContainer/BackButton")
 explore_button = NodePath("ExplortButtonBackground/ExploreButton")
+color_div = NodePath("OptionsContainer/ScrollContainer/MainOptionsContainer/ColorDivControl")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="."]
 layout_mode = 1
@@ -228,6 +230,7 @@ grow_vertical = 2
 scroll_container = NodePath("../ScrollContainer")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="OptionsContainer"]
+clip_contents = false
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -270,7 +273,8 @@ offset_bottom = 60.0
 scale = Vector2(0.916667, 0.916667)
 theme = ExtResource("4_52n4i")
 theme_override_font_sizes/font_size = 48
-text = "Map Option"
+text = "           ?????????            "
+horizontal_alignment = 1
 
 [node name="ColorRect" type="ColorRect" parent="OptionsContainer/ScrollContainer/MainOptionsContainer/MapOptionButton/TitleLabel"]
 custom_minimum_size = Vector2(0, 3)
@@ -294,6 +298,17 @@ offset_top = 4.0
 offset_bottom = 12.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="ColorDivControl" type="Control" parent="OptionsContainer/ScrollContainer/MainOptionsContainer"]
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="OptionsContainer/ScrollContainer/MainOptionsContainer/ColorDivControl"]
+custom_minimum_size = Vector2(545, 4)
+layout_mode = 2
+offset_left = -8.0
+offset_right = 492.0
+offset_bottom = 4.0
+color = Color(0.470588, 0, 0, 1)
 
 [node name="ExplortButtonBackground" type="NinePatchRect" parent="."]
 layout_mode = 1

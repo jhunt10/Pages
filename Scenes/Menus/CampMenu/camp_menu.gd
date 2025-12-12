@@ -56,12 +56,12 @@ func _ready() -> void:
 	if StoryState.get_story_flag("CampScribeDisabled"):
 		system_button.disabled = true
 	
-	var location = StoryState.get_location()
-	if location != "":
-		var image_path = "res://Scenes/Menus/CampMenu/PrettyPictures/" + location.replace(' ', '') + ".png"
-		var pretty_picture = SpriteCache.get_sprite(image_path)
-		if pretty_picture:
-			pretty_picture_texure_rect.texture = pretty_picture
+	#var location = StoryState.get_location()
+	#if location != "":
+		#var image_path = "res://Scenes/Menus/CampMenu/PrettyPictures/" + location.replace(' ', '') + ".png"
+		#var pretty_picture = SpriteCache.get_sprite(image_path)
+		#if pretty_picture:
+			#pretty_picture_texure_rect.texture = pretty_picture
 			
 	_sub_menu_open("Main")
 	pass # Replace with function body.

@@ -1,7 +1,7 @@
 class_name CharacterMenuControl
 extends Control
 
-const LOGGING = true
+const LOGGING = false
 
 static var Instance:CharacterMenuControl
 static var last_tab_pressed:String = ''

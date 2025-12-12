@@ -16,7 +16,7 @@ var _total_play_time
 var _session_start_unix_time
 #var _cached_save_name
 
-func add_actor_to_party(actor):
+func add_actor_to_party(actor)->BaseActor:
 	if actor is String:
 		var existing_actor = ActorLibrary.get_actor(actor)
 		if existing_actor:
@@ -28,8 +28,10 @@ func add_actor_to_party(actor):
 				actor = ActorLibrary.create_actor(actor, {}, player_id)
 	if actor and actor is BaseActor:
 		_party_actor_ids.append(actor.Id)
+		return actor
 	else:
 		printerr("StoryState.add_actor_to_party: Invalid / Fail to find Actor from: %s" % [actor])
+		return null
 
 func get_party_index_of_actor(actor)->int:
 	if actor is String:
@@ -83,9 +85,9 @@ func start_new_story():
 	story_id = "Story:" + str(ResourceUID.create_id())
 	var player_actor_keys = [
 		"SoldierTemplate", 
-		"RogueTemplate", 
-		"MageTemplate", 
-		"PriestTemplate"
+		#"RogueTemplate", 
+		#"MageTemplate", 
+		#"PriestTemplate"
 	]
 	for i in range(player_actor_keys.size()):
 		var player_id = "Player_" + str(i) + ":" + str(ResourceUID.create_id())
@@ -103,24 +105,26 @@ func start_new_story():
 			continue
 		var item = ItemLibrary.get_item(item_key)
 		if item is BasePageItem and not item_key.begins_with("#"):
-			PlayerInventory.add_item(item, 1)
+			if item is BasePageItem:
+				if ((item as BasePageItem).page_data.get("SourceTitle") == 'Soldier'
+					or item.get_tags().has("_Dev_Action")):
+					PlayerInventory.add_item(item, 1)
 	
 	# Add Supplies
 	for item_key in ItemLibrary.get_item_keys_with_tag("Supply"):
-		PlayerInventory.add_item(item_key, 10)
+		PlayerInventory.add_item(item_key, 3)
 		
 	# Add all Equipment
-	var has_equipment = []
-	for actor:BaseActor in list_party_actors():
-		for equip:BaseEquipmentItem in actor.equipment.list_items():
-			has_equipment.append(equip.ItemKey)
-	for item_key:String in ItemLibrary.Instance.get_item_keys_with_tag("Equipment"):
-		if has_equipment.has(item_key):
-			continue
-		PlayerInventory.add_item(item_key, 1)
+	#var has_equipment = []
+	#for actor:BaseActor in list_party_actors():
+		#for equip:BaseEquipmentItem in actor.equipment.list_items():
+			#has_equipment.append(equip.ItemKey)
+	#for item_key:String in ItemLibrary.Instance.get_item_keys_with_tag("Equipment"):
+		#if has_equipment.has(item_key):
+			#continue
+		#PlayerInventory.add_item(item_key, 1)
 	
 	_session_start_unix_time = Time.get_unix_time_from_system()
-	_story_stage_index = -1
 	#load_next_story_scene()
 	MainRootNode.Instance.open_camp_menu()
 
