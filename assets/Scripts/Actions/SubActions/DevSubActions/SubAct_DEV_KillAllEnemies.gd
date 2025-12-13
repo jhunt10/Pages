@@ -41,7 +41,8 @@ func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, que_exe_d
 		{}, 
 		tag_chain, 
 		game_state,
-		true)
+		true
+	)
 	
 	
 	#for target:BaseActor in targets:

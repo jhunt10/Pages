@@ -28,6 +28,22 @@ func add_actor_to_party(actor)->BaseActor:
 				actor = ActorLibrary.create_actor(actor, {}, player_id)
 	if actor and actor is BaseActor:
 		_party_actor_ids.append(actor.Id)
+		
+		
+		# Add class pages
+		var title = actor.pages.get_title_page().get_display_name()
+		var has_pages = []
+		for party_actor:BaseActor in list_party_actors():
+			has_pages.append_array(party_actor.pages.list_page_keys())
+		for item_key:String in ItemLibrary.list_all_item_keys():
+			if has_pages.has(item_key):
+				continue
+			var item = ItemLibrary.get_item(item_key)
+			if item is BasePageItem and not item_key.begins_with("#"):
+				if item is BasePageItem:
+					var req_title = (item as BasePageItem).page_data.get("SourceTitle")
+					if  title == req_title:
+						PlayerInventory.add_item(item, 1)
 		return actor
 	else:
 		printerr("StoryState.add_actor_to_party: Invalid / Fail to find Actor from: %s" % [actor])
@@ -106,7 +122,8 @@ func start_new_story():
 		var item = ItemLibrary.get_item(item_key)
 		if item is BasePageItem and not item_key.begins_with("#"):
 			if item is BasePageItem:
-				if ((item as BasePageItem).page_data.get("SourceTitle") == 'Soldier'
+				var req_title = (item as BasePageItem).page_data.get("SourceTitle")
+				if ('Soldier' == req_title
 					or item.get_tags().has("_Dev_Action")):
 					PlayerInventory.add_item(item, 1)
 	
