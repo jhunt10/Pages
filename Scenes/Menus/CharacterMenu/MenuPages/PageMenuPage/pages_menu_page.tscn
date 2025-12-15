@@ -1,29 +1,100 @@
-[gd_scene load_steps=16 format=3 uid="uid://c4bhs27nmviba"]
+[gd_scene load_steps=23 format=3 uid="uid://c4bhs27nmviba"]
 
 [ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/PageMenuPage/page_menu_page_control.gd" id="1_1k8ki"]
 [ext_resource type="Texture2D" uid="uid://mpwjrtfjnbth" path="res://Scenes/Menus/CharacterMenu/BookBackground.png" id="2_24rjq"]
 [ext_resource type="Theme" uid="uid://dwinll8pgdjhc" path="res://Scenes/Themes/standard_theme.tres" id="3_2qajg"]
 [ext_resource type="Texture2D" uid="uid://hoqi8xx27lqn" path="res://Scenes/Menus/CharacterMenu/MenuPages/PageMenuPage/Sprites/TitlePageFrame.png" id="4_00pl2"]
-[ext_resource type="PackedScene" uid="uid://c4p8fix52jdyq" path="res://Scenes/UiNodes/FitScaleLabel/fit_scale_label.tscn" id="5_p805u"]
+[ext_resource type="Texture2D" uid="uid://ijuqwfxfdvsh" path="res://Scenes/UiNodes/ExpBar/AttributesIcon_SpriteSheetpdn.png" id="6_8o3fe"]
 [ext_resource type="PackedScene" uid="uid://dugyf6csi731x" path="res://Scenes/Menus/CharacterMenu/MenuPages/PageMenuPage/HDotScrollBar/h_dot_scroll_bar_control.tscn" id="7_f7tj7"]
 [ext_resource type="Texture2D" uid="uid://lv3xit0yhvj2" path="res://Scenes/UiNodes/ExpBar/ExpBar.png" id="7_lnpbr"]
 [ext_resource type="Script" path="res://Scenes/UiNodes/ExpBar/exp_bar_control.gd" id="8_3ocfe"]
 [ext_resource type="PackedScene" uid="uid://b6a64dt8gveex" path="res://Scenes/Menus/CharacterMenu/MenuPages/PageMenuPage/page_menu_item_slot_button.tscn" id="8_ey4v2"]
 [ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/PageMenuPage/page_menu_item_slot_set_container.gd" id="8_mwf3u"]
+[ext_resource type="Script" path="res://Scenes/UiNodes/back_patch_container.gd" id="9_epsm1"]
 [ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/PageMenuPage/action_input_preview_container.gd" id="9_l0o1k"]
+[ext_resource type="Texture2D" uid="uid://5hu0ttx4jxuo" path="res://assets/Sprites/UI/BackPatches/PaperPatch_64x92_16.png" id="10_7slgj"]
 [ext_resource type="Texture2D" uid="uid://b1cxya7rtggyh" path="res://assets/Sprites/UI/CharacterEdit/EditIcon.png" id="10_wy4fh"]
 [ext_resource type="Texture2D" uid="uid://cg1yo6bhpalea" path="res://assets/Sprites/UI/QueInputAndDisplay/mini_page_slot.png" id="11_ip8im"]
+[ext_resource type="Theme" uid="uid://bfce41la62bs6" path="res://Scenes/Themes/readable_theme.tres" id="11_xguv4"]
 [ext_resource type="Texture2D" uid="uid://byq6wa2xqa1mt" path="res://ObjectDefs/Actions/CommonActions/BasicMovement/Sprites/MoveForward.png" id="12_xhx26"]
 [ext_resource type="PackedScene" uid="uid://bpvy87uagttpr" path="res://Scenes/UiNodes/ScollBar/scroll_bar.tscn" id="14_n2oik"]
 
-[node name="PagePage" type="Control" node_paths=PackedStringArray("title_label", "title_page_button", "action_input_preview", "premade_page_set", "sets_container", "premade_page_button", "scroll_bar")]
+[sub_resource type="Animation" id="Animation_h263m"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_3a6i4"]
+resource_name = "flashing_animation"
+length = 1.5
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(-2.23517e-08, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(1, 0), Vector2i(2, 0), Vector2i(3, 0), Vector2i(4, 0), Vector2i(0, 1), Vector2i(1, 1), Vector2i(2, 1), Vector2i(3, 1), Vector2i(4, 1), Vector2i(0, 2), Vector2i(1, 2), Vector2i(2, 2), Vector2i(3, 2), Vector2i(4, 2), Vector2i(1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_j1ppp"]
+resource_name = "waiting"
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_130x0"]
+_data = {
+"RESET": SubResource("Animation_h263m"),
+"flashing_animation": SubResource("Animation_3a6i4"),
+"waiting": SubResource("Animation_j1ppp")
+}
+
+[node name="PagePage" type="Control" node_paths=PackedStringArray("title_label", "title_page_button", "action_input_preview", "premade_page_set", "sets_container", "premade_page_button", "scroll_bar", "name_label", "level_label", "exp_bar")]
 custom_minimum_size = Vector2(292, 395)
 layout_mode = 3
 anchors_preset = 0
 offset_right = 280.0
 offset_bottom = 395.0
 script = ExtResource("1_1k8ki")
-title_label = NodePath("VBoxContainer/TitleContainer/VBoxContainer/HBoxContainer2/FitScaleLabel")
+title_label = NodePath("VBoxContainer/TitleContainer/VBoxContainer/TitleNameContainer/NameLabel")
 title_page_button = NodePath("VBoxContainer/TitleContainer/PageSlotButton")
 action_input_preview = NodePath("VBoxContainer/ActionInputPreview")
 premade_page_set = NodePath("VBoxContainer/HBoxContainer/ScrollContainer/SlotSetsContainer/PageSlotSetContainer")
@@ -31,6 +102,9 @@ sets_container = NodePath("VBoxContainer/HBoxContainer/ScrollContainer/SlotSetsC
 premade_page_button = NodePath("VBoxContainer/HBoxContainer/ScrollContainer/SlotSetsContainer/PageSlotSetContainer/FlowContainer/PageSlotButton")
 slot_width = 4
 scroll_bar = NodePath("VBoxContainer/HBoxContainer/PagesScrollBar")
+name_label = NodePath("VBoxContainer/TitleContainer/VBoxContainer/TitleNameContainer/NameLabel")
+level_label = NodePath("VBoxContainer/TitleContainer/VBoxContainer/TitleNameContainer/LevelLabel")
+exp_bar = NodePath("VBoxContainer/TitleContainer/VBoxContainer/XpBarContainer/ExpBar")
 
 [node name="Background" type="TextureRect" parent="."]
 visible = false
@@ -60,73 +134,181 @@ frame_texture = ExtResource("4_00pl2")
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/TitleContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+alignment = 1
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer/TitleContainer/VBoxContainer"]
+[node name="TitleNameContainer" type="HBoxContainer" parent="VBoxContainer/TitleContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="LevelUpControl" type="Control" parent="VBoxContainer/TitleContainer/VBoxContainer/TitleNameContainer"]
 layout_mode = 2
 
-[node name="FitScaleLabel" parent="VBoxContainer/TitleContainer/VBoxContainer/HBoxContainer2" instance=ExtResource("5_p805u")]
-custom_minimum_size = Vector2(0, 40)
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Soldier"
-_size_dirty = true
-center_x = true
+[node name="Sprite2D" type="Sprite2D" parent="VBoxContainer/TitleContainer/VBoxContainer/TitleNameContainer/LevelUpControl"]
+position = Vector2(-16, 12)
+texture = ExtResource("6_8o3fe")
+hframes = 5
+vframes = 3
 
-[node name="Lvl" type="Label" parent="VBoxContainer/TitleContainer/VBoxContainer/HBoxContainer2"]
-visible = false
+[node name="AnimationPlayer" type="AnimationPlayer" parent="VBoxContainer/TitleContainer/VBoxContainer/TitleNameContainer/LevelUpControl/Sprite2D"]
+libraries = {
+"": SubResource("AnimationLibrary_130x0")
+}
+
+[node name="Button" type="Button" parent="VBoxContainer/TitleContainer/VBoxContainer/TitleNameContainer/LevelUpControl/Sprite2D"]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -16.0
+offset_top = -16.0
+offset_right = -16.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="NameLabel" type="Label" parent="VBoxContainer/TitleContainer/VBoxContainer/TitleNameContainer"]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
-size_flags_vertical = 1
 theme = ExtResource("3_2qajg")
-theme_override_font_sizes/font_size = 16
-text = "lvl"
-horizontal_alignment = 1
-vertical_alignment = 1
+theme_override_font_sizes/font_size = 20
+text = "Character"
 
-[node name="LevelLabel" type="Label" parent="VBoxContainer/TitleContainer/VBoxContainer/HBoxContainer2"]
-visible = false
+[node name="LevelLabel2" type="Label" parent="VBoxContainer/TitleContainer/VBoxContainer/TitleNameContainer"]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
-size_flags_vertical = 1
 theme = ExtResource("3_2qajg")
-theme_override_font_sizes/font_size = 24
-text = "6"
-horizontal_alignment = 1
-vertical_alignment = 1
+theme_override_font_sizes/font_size = 20
+text = " "
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/TitleContainer/VBoxContainer"]
+[node name="LevelLabel" type="Label" parent="VBoxContainer/TitleContainer/VBoxContainer/TitleNameContainer"]
+self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
+theme = ExtResource("3_2qajg")
+theme_override_font_sizes/font_size = 20
+text = "99"
 
-[node name="VSeparator" type="VSeparator" parent="VBoxContainer/TitleContainer/VBoxContainer/HBoxContainer"]
+[node name="XpBarContainer" type="HBoxContainer" parent="VBoxContainer/TitleContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="VSeparator" type="VSeparator" parent="VBoxContainer/TitleContainer/VBoxContainer/XpBarContainer"]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
+size_flags_horizontal = 3
 
-[node name="ExpBar" type="TextureRect" parent="VBoxContainer/TitleContainer/VBoxContainer/HBoxContainer" node_paths=PackedStringArray("full_rect", "color_rect")]
+[node name="ExpBar" type="TextureRect" parent="VBoxContainer/TitleContainer/VBoxContainer/XpBarContainer" node_paths=PackedStringArray("full_rect", "color_rect", "level_label", "mouse_over_control", "current_exp_label", "max_exp_label", "level_up_button_control", "level_up_button", "level_up_button_animation")]
+z_index = 2
+custom_minimum_size = Vector2(176, 13)
 layout_mode = 2
-texture = ExtResource("7_lnpbr")
 script = ExtResource("8_3ocfe")
 full_rect = NodePath("FullRect")
 color_rect = NodePath("ColorRect")
+level_label = NodePath("../../TitleNameContainer/LevelLabel")
+mouse_over_control = NodePath("Control/BackPatchContainer")
+current_exp_label = NodePath("Control/BackPatchContainer/BoxContainer/CurentLabel")
+max_exp_label = NodePath("Control/BackPatchContainer/BoxContainer/NexrLevelLabel")
+percent_full = 0.5
+level_up_button_control = NodePath("../../TitleNameContainer/LevelUpControl")
+level_up_button = NodePath("../../TitleNameContainer/LevelUpControl/Sprite2D/Button")
+level_up_button_animation = NodePath("../../TitleNameContainer/LevelUpControl/Sprite2D/AnimationPlayer")
 
-[node name="FullRect" type="Control" parent="VBoxContainer/TitleContainer/VBoxContainer/HBoxContainer/ExpBar"]
+[node name="FullRect" type="Control" parent="VBoxContainer/TitleContainer/VBoxContainer/XpBarContainer/ExpBar"]
 anchors_preset = 0
 offset_left = 9.0
 offset_top = 4.0
 offset_right = 168.0
 offset_bottom = 9.0
+mouse_filter = 2
 
-[node name="ColorRect" type="ColorRect" parent="VBoxContainer/TitleContainer/VBoxContainer/HBoxContainer/ExpBar"]
-show_behind_parent = true
-z_index = -1
+[node name="ColorRect" type="ColorRect" parent="VBoxContainer/TitleContainer/VBoxContainer/XpBarContainer/ExpBar"]
 layout_mode = 0
 offset_left = 8.0
 offset_top = 4.0
-offset_right = 8.0
+offset_right = 87.5
 offset_bottom = 9.0
+mouse_filter = 2
+color = Color(0, 1, 1, 1)
 
-[node name="VSeparator2" type="VSeparator" parent="VBoxContainer/TitleContainer/VBoxContainer/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/TitleContainer/VBoxContainer/XpBarContainer/ExpBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_lnpbr")
+
+[node name="Control" type="Control" parent="VBoxContainer/TitleContainer/VBoxContainer/XpBarContainer/ExpBar"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="BackPatchContainer" type="Container" parent="VBoxContainer/TitleContainer/VBoxContainer/XpBarContainer/ExpBar/Control" node_paths=PackedStringArray("background", "inner_container")]
+visible = false
+z_index = 1
+custom_minimum_size = Vector2(126, 32)
+layout_mode = 0
+offset_left = 25.0
+offset_right = 151.0
+offset_bottom = 32.0
+script = ExtResource("9_epsm1")
+background = NodePath("NinePatchRect")
+inner_container = NodePath("BoxContainer")
+margin_override = 6
+center_in_parent = true
+
+[node name="NinePatchRect" type="NinePatchRect" parent="VBoxContainer/TitleContainer/VBoxContainer/XpBarContainer/ExpBar/Control/BackPatchContainer"]
+layout_mode = 2
+texture = ExtResource("10_7slgj")
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+
+[node name="BoxContainer" type="BoxContainer" parent="VBoxContainer/TitleContainer/VBoxContainer/XpBarContainer/ExpBar/Control/BackPatchContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="CurentLabel" type="Label" parent="VBoxContainer/TitleContainer/VBoxContainer/XpBarContainer/ExpBar/Control/BackPatchContainer/BoxContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+theme = ExtResource("11_xguv4")
+text = "100"
+vertical_alignment = 2
+
+[node name="SlashLabel" type="Label" parent="VBoxContainer/TitleContainer/VBoxContainer/XpBarContainer/ExpBar/Control/BackPatchContainer/BoxContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+theme = ExtResource("11_xguv4")
+text = " / "
+vertical_alignment = 2
+
+[node name="NexrLevelLabel" type="Label" parent="VBoxContainer/TitleContainer/VBoxContainer/XpBarContainer/ExpBar/Control/BackPatchContainer/BoxContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+theme = ExtResource("11_xguv4")
+text = "1000"
+vertical_alignment = 2
+
+[node name="ExpLabel" type="Label" parent="VBoxContainer/TitleContainer/VBoxContainer/XpBarContainer/ExpBar/Control/BackPatchContainer/BoxContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+theme = ExtResource("11_xguv4")
+text = " Exp"
+vertical_alignment = 2
+
+[node name="VSeparator2" type="VSeparator" parent="VBoxContainer/TitleContainer/VBoxContainer/XpBarContainer"]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="ColorRect" type="ColorRect" parent="VBoxContainer"]
 custom_minimum_size = Vector2(0, 4)

@@ -117,8 +117,9 @@ static func get_stat_icon(stat_name:String)->Texture2D:
 		return SpriteCache.get_sprite(path)
 	return null
 
+## Start with 3 points and gain 2 per level (excluding level 1)
 static func get_attribute_points_for_level(level:int)->int:
-	return level + 3
+	return ((level-1)*2) + 3
 
 ### Added to stat_name ("StatName:SUFIX") to mod value when defending against attack from Front
 #const DirectionalDefenseSufix_Front = "DirDefFr"

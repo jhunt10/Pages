@@ -97,5 +97,22 @@ func get_load_val(key:String, default=null, duplicate_dict:bool=true):
 			val = val.duplicate(duplicate_dict)
 	return val
 
+func set_load_val(keys:Array, val):
+	var set_key = keys.pop_back()
+	var t_data = _data
+	# Follow key path path down
+	if keys.size() > 0:
+		for index in range(keys.size()):
+			var key = keys[index]
+			if t_data is Dictionary and t_data.keys().has(key):
+				t_data = t_data[key]
+			elif key is String:
+				t_data[key] = {}
+				t_data = t_data[key]
+			else:
+				printerr("%s.set_load_val: Invalid key path '%s'." %[_id, keys])
+				return
+	t_data[set_key] = val
+
 func on_delete():
 	is_deleted = true

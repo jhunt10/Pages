@@ -6,7 +6,7 @@ var buttons = {}
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	sync_labels()
+	#sync_labels()
 	pass # Replace with function body.
 
 
@@ -30,9 +30,7 @@ func sync_labels():
 		var new_button:PlayerTabButton = button_scene.instantiate()
 		#if not actor.pages.items_changed.is_connected(sync_labels):
 			#actor.pages.items_changed.connect(sync_labels)
-		var title_page:BasePageItem = actor.pages.get_item_in_slot(0)
-		if title_page:
-			new_button.button_label.text = title_page.get_display_name()
+		new_button.set_actor(actor)
 		buttons[actor.Id] = (new_button)
 		new_button.button.pressed.connect(actor_pressed.bind(actor.Id))
 		new_button.show()

@@ -7,7 +7,11 @@ signal closed
 
 @export var exit_button:Button
 @export var confirm_button:PatchButton
+@export var level_up_title_container:Container
+@export var edit_title_container:Container
+
 @export var current_level_label:Label
+@export var current_level_label2:Label
 @export var new_level_label:Label
 @export var points_left_label:Label
 @export var points_total_label:Label
@@ -72,7 +76,7 @@ func _ready() -> void:
 	confirm_button.pressed.connect(_on_confirm)
 
 func _on_cancel():
-	if _actor:
+	if _actor and starting_values.size() > 0:
 		_actor.stats.attribute_levels[StatHelper.Strength] = starting_values[StatHelper.Strength]
 		_actor.stats.attribute_levels[StatHelper.Agility] = starting_values[StatHelper.Agility]
 		_actor.stats.attribute_levels[StatHelper.Intelligence] = starting_values[StatHelper.Intelligence]
@@ -103,8 +107,16 @@ func set_actor(actor:BaseActor):
 		exp_to_next = _actor.stats.get_exp_to_next_level(current_level)
 	
 	current_level_label.text = str(current_level)
+	current_level_label2.text = str(current_level)
 	new_level_label.text = str(next_level)
 	exp_after_level_up = remaining
+	
+	if current_level == next_level:
+		level_up_title_container.hide()
+		edit_title_container.show()
+	else:
+		level_up_title_container.show()
+		edit_title_container.hide()
 	
 	var strength = actor.stats.get_leveled_attribute(StatHelper.Strength)
 	strength_controller.set_values(min_attribute_value, strength)

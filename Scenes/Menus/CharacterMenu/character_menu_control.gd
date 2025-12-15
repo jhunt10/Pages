@@ -3,6 +3,8 @@ extends Control
 
 const LOGGING = false
 
+signal menu_closed
+
 static var Instance:CharacterMenuControl
 static var last_tab_pressed:String = ''
 static var _actor_id:String = ''
@@ -241,6 +243,7 @@ func close_menu():
 	
 	self.queue_free()
 	Instance = null
+	menu_closed.emit()
 	
 
 func on_details_card_freed():

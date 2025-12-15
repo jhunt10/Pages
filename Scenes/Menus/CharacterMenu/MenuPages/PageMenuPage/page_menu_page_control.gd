@@ -1,7 +1,7 @@
 class_name PageMenuPageControl
 extends BaseCharacterSubMenu
 
-@export var title_label:FitScaleLabel
+@export var title_label:Label
 @export var title_page_button:PageSlotButton
 
 @export var action_input_preview:ActionInputPreviewContainer
@@ -11,6 +11,11 @@ extends BaseCharacterSubMenu
 @export var slot_width:int 
 @export var scroll_bar:CustScrollBar
 
+
+@export var name_label:Label
+@export var level_label:Label
+@export var exp_bar:ExpBarControl
+
 var _sub_containers:Dictionary = {}
 var sub_book_pages:Array = []
 var max_hight = 278
@@ -19,7 +24,7 @@ var max_hight = 278
 func _ready() -> void:
 	#premade_sub_container.visible = false
 	premade_page_set.hide()
-	title_label._size_dirty = true
+	#title_label._size_dirty = true
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -34,6 +39,14 @@ func get_item_holder()->BaseItemHolder:
 func show_menu_page():
 	super()
 	scroll_bar.calc_bar_size()
+
+func sync():
+	if _actor:
+		name_label.text = _actor.get_name()
+		level_label.text = str(_actor.stats.get_stat(StatHelper.Level, 0))
+		#stat_box.set_actor(_actor)
+		exp_bar.set_actor(_actor)
+	super()
 
 #func set_actor(actor:BaseActor):
 	#if _actor and _actor != actor:

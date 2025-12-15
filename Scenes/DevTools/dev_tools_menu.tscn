@@ -14,7 +14,7 @@
 [ext_resource type="Theme" uid="uid://dwinll8pgdjhc" path="res://Scenes/Themes/standard_theme.tres" id="9_deqg2"]
 [ext_resource type="PackedScene" uid="uid://ybkww8wk3awm" path="res://Scenes/UiNodes/StatLabelContainer/stat_label_container.tscn" id="10_vneaf"]
 
-[node name="DevToolsMenu" type="Control" node_paths=PackedStringArray("close_button", "reload_stuff_button", "create_page_items_button", "items_to_inventory_button", "add_item_menu_button", "add_item_menu")]
+[node name="DevToolsMenu" type="Control" node_paths=PackedStringArray("close_button", "reload_stuff_button", "create_page_items_button", "items_to_inventory_button", "add_item_menu_button", "add_xp_menu_button", "add_item_menu")]
 z_index = 999
 z_as_relative = false
 layout_mode = 3
@@ -29,13 +29,14 @@ reload_stuff_button = NodePath("BackPatchContainer/BoxContainer/ReloadStuffButto
 create_page_items_button = NodePath("BackPatchContainer/BoxContainer/DoThingButton")
 items_to_inventory_button = NodePath("BackPatchContainer/BoxContainer/AddItemsToInventoryButton")
 add_item_menu_button = NodePath("BackPatchContainer/BoxContainer/AddItemMenuButton")
+add_xp_menu_button = NodePath("BackPatchContainer/BoxContainer/AddXpMenuButton")
 add_item_menu = NodePath("AddItemMenu")
 
 [node name="BackPatchContainer" type="Container" parent="." node_paths=PackedStringArray("background", "inner_container")]
-custom_minimum_size = Vector2(302, 196)
+custom_minimum_size = Vector2(302, 231)
 layout_mode = 0
 offset_right = 302.0
-offset_bottom = 196.0
+offset_bottom = 231.0
 script = ExtResource("2_fwuqo")
 background = NodePath("NinePatchRect")
 inner_container = NodePath("BoxContainer")
@@ -81,12 +82,16 @@ text = "Add one of every Item to Inventory"
 layout_mode = 2
 text = "Add Item"
 
+[node name="AddXpMenuButton" type="Button" parent="BackPatchContainer/BoxContainer"]
+layout_mode = 2
+text = "Add 100xp to All Party"
+
 [node name="AddItemMenu" type="Control" parent="." node_paths=PackedStringArray("close_button", "item_options_button", "spinner", "confirm_button")]
 anchors_preset = 0
-offset_left = 59.0
-offset_top = 182.0
-offset_right = 99.0
-offset_bottom = 222.0
+offset_left = 830.0
+offset_top = 437.0
+offset_right = 870.0
+offset_bottom = 477.0
 script = ExtResource("4_qh0dk")
 close_button = NodePath("BackPatch/BoxContainer/TitleContainer/ExitButton")
 item_options_button = NodePath("BackPatch/BoxContainer/LoadedOptionButton")
@@ -283,10 +288,10 @@ mouse_over_parent = NodePath("../../../..")
 
 [node name="AggroMenu" type="Control" parent="." node_paths=PackedStringArray("close_button", "actors_options_button", "list_container", "premade_label")]
 anchors_preset = 0
-offset_left = 26.0
-offset_top = 457.0
-offset_right = 66.0
-offset_bottom = 497.0
+offset_left = 5.0
+offset_top = 511.0
+offset_right = 45.0
+offset_bottom = 551.0
 script = ExtResource("6_sbyrl")
 close_button = NodePath("BackPatch/BoxContainer/TitleContainer/ExitButton")
 actors_options_button = NodePath("BackPatch/BoxContainer/LoadedOptionButton")
@@ -320,7 +325,7 @@ layout_mode = 2
 [node name="Label" type="Label" parent="AggroMenu/BackPatch/BoxContainer/TitleContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Add Item"
+text = "Aggro Checker"
 
 [node name="ExitButton" type="Button" parent="AggroMenu/BackPatch/BoxContainer/TitleContainer"]
 custom_minimum_size = Vector2(32, 32)

@@ -82,9 +82,10 @@ func _build_slots_list():
 	# Cache current items and thier slot set data to rebuild list later
 	var old_item_to_slot_sets = []
 	for old_index in range(_raw_item_slots.size()):
-		var old_slot_set_data = _raw_to_slot_set_mapping[old_index].duplicate()
-		old_slot_set_data['ItemId'] = _raw_item_slots[old_index]
-		old_item_to_slot_sets.append(old_slot_set_data)
+		if _raw_to_slot_set_mapping.size() > old_index:
+			var old_slot_set_data = _raw_to_slot_set_mapping[old_index].duplicate()
+			old_slot_set_data['ItemId'] = _raw_item_slots[old_index]
+			old_item_to_slot_sets.append(old_slot_set_data)
 	
 	# Clear current data
 	_slot_set_key_mapping = []

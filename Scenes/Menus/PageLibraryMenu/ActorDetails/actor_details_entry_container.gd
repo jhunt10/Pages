@@ -29,7 +29,7 @@ func _load_full_details():
 	super()
 	var stats = thing_def.get("Stats", {})
 	for stat_name in stats.keys():
-		if stat_name == "StartingAttributeLevels":
+		if stat_name == "AttributeLevels":
 			continue
 		var stat_val = stats[stat_name]
 		var new_mod:StatModLabelContainer = premade_stat_mod_label.duplicate()

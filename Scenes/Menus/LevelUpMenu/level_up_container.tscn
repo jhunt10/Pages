@@ -22,7 +22,7 @@
 [ext_resource type="Texture2D" uid="uid://dbag7m6cb83vp" path="res://Scenes/Menus/CharacterMenu/MenuPages/ItemDetailsCard/Button_Patch_32_6.png" id="19_gokup"]
 [ext_resource type="Texture2D" uid="uid://bmv0v2cnpvjh4" path="res://Scenes/Menus/CharacterMenu/MenuPages/ItemDetailsCard/ButtonPressed_Patch_32_6.png" id="20_vv1bt"]
 
-[node name="LevelUpMenu" type="Control" node_paths=PackedStringArray("exit_button", "confirm_button", "current_level_label", "new_level_label", "points_left_label", "points_total_label", "premade_stat_label", "strength_controller", "strength_stats_contaienr", "agility_controller", "agility_stats_contaienr", "intelligence_controller", "intelligence_stats_contaienr", "wisdom_controller", "wisdom_stats_contaienr")]
+[node name="LevelUpMenu" type="Control" node_paths=PackedStringArray("exit_button", "confirm_button", "level_up_title_container", "edit_title_container", "current_level_label", "current_level_label2", "new_level_label", "points_left_label", "points_total_label", "premade_stat_label", "strength_controller", "strength_stats_contaienr", "agility_controller", "agility_stats_contaienr", "intelligence_controller", "intelligence_stats_contaienr", "wisdom_controller", "wisdom_stats_contaienr")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -32,8 +32,11 @@ grow_vertical = 2
 script = ExtResource("1_k6wku")
 exit_button = NodePath("LevelUpContainer/Control/ExitButton/Button")
 confirm_button = NodePath("LevelUpContainer/BoxContainer/HBoxContainer/ConfirmButton")
-current_level_label = NodePath("LevelUpContainer/BoxContainer/HBoxContainer2/Label2")
-new_level_label = NodePath("LevelUpContainer/BoxContainer/HBoxContainer2/Label4")
+level_up_title_container = NodePath("LevelUpContainer/BoxContainer/LevelUpTitleContainer")
+edit_title_container = NodePath("LevelUpContainer/BoxContainer/EditAttributesTitleContainer")
+current_level_label = NodePath("LevelUpContainer/BoxContainer/LevelUpTitleContainer/Label2")
+current_level_label2 = NodePath("LevelUpContainer/BoxContainer/EditAttributesTitleContainer/Label2")
+new_level_label = NodePath("LevelUpContainer/BoxContainer/LevelUpTitleContainer/Label4")
 points_left_label = NodePath("LevelUpContainer/BoxContainer/PointsContainer/PointsLeftLabel")
 points_total_label = NodePath("LevelUpContainer/BoxContainer/PointsContainer/TotalPointsLabel")
 premade_stat_label = NodePath("LevelUpContainer/BoxContainer/StrengtStatsContainer/StatChangeContainer")
@@ -57,12 +60,12 @@ color = Color(0, 0, 0, 0.501961)
 
 [node name="LevelUpContainer" type="Container" parent="." node_paths=PackedStringArray("background", "inner_container")]
 z_index = 50
-custom_minimum_size = Vector2(536, 477)
+custom_minimum_size = Vector2(536, 540)
 layout_mode = 0
 offset_left = 308.0
-offset_top = 85.0
+offset_top = 54.0
 offset_right = 844.0
-offset_bottom = 562.0
+offset_bottom = 594.0
 script = ExtResource("2_ir1q8")
 background = NodePath("NinePatchRect")
 inner_container = NodePath("BoxContainer")
@@ -83,24 +86,24 @@ mouse_filter = 2
 theme_override_constants/separation = 3
 vertical = true
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="LevelUpContainer/BoxContainer"]
+[node name="LevelUpTitleContainer" type="HBoxContainer" parent="LevelUpContainer/BoxContainer"]
 layout_mode = 2
 mouse_filter = 2
 alignment = 1
 
-[node name="VSeparator" type="VSeparator" parent="LevelUpContainer/BoxContainer/HBoxContainer2"]
+[node name="VSeparator" type="VSeparator" parent="LevelUpContainer/BoxContainer/LevelUpTitleContainer"]
 modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(40, 0)
 layout_mode = 2
 
-[node name="Label" type="Label" parent="LevelUpContainer/BoxContainer/HBoxContainer2"]
+[node name="Label" type="Label" parent="LevelUpContainer/BoxContainer/LevelUpTitleContainer"]
 layout_mode = 2
 theme = ExtResource("4_hcvmt")
 theme_override_font_sizes/font_size = 48
 text = "Level Up "
 horizontal_alignment = 1
 
-[node name="Label2" type="Label" parent="LevelUpContainer/BoxContainer/HBoxContainer2"]
+[node name="Label2" type="Label" parent="LevelUpContainer/BoxContainer/LevelUpTitleContainer"]
 custom_minimum_size = Vector2(72, 0)
 layout_mode = 2
 theme = ExtResource("4_hcvmt")
@@ -108,7 +111,7 @@ theme_override_font_sizes/font_size = 48
 text = "100"
 horizontal_alignment = 1
 
-[node name="Label3" type="Label" parent="LevelUpContainer/BoxContainer/HBoxContainer2"]
+[node name="Label3" type="Label" parent="LevelUpContainer/BoxContainer/LevelUpTitleContainer"]
 modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("4_hcvmt")
@@ -116,7 +119,7 @@ theme_override_font_sizes/font_size = 32
 text = ">"
 horizontal_alignment = 1
 
-[node name="Label4" type="Label" parent="LevelUpContainer/BoxContainer/HBoxContainer2"]
+[node name="Label4" type="Label" parent="LevelUpContainer/BoxContainer/LevelUpTitleContainer"]
 custom_minimum_size = Vector2(72, 0)
 layout_mode = 2
 theme = ExtResource("4_hcvmt")
@@ -124,7 +127,37 @@ theme_override_font_sizes/font_size = 48
 text = "100"
 horizontal_alignment = 1
 
-[node name="VSeparator2" type="VSeparator" parent="LevelUpContainer/BoxContainer/HBoxContainer2"]
+[node name="VSeparator2" type="VSeparator" parent="LevelUpContainer/BoxContainer/LevelUpTitleContainer"]
+modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+
+[node name="EditAttributesTitleContainer" type="HBoxContainer" parent="LevelUpContainer/BoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="VSeparator" type="VSeparator" parent="LevelUpContainer/BoxContainer/EditAttributesTitleContainer"]
+modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="LevelUpContainer/BoxContainer/EditAttributesTitleContainer"]
+layout_mode = 2
+theme = ExtResource("4_hcvmt")
+theme_override_font_sizes/font_size = 48
+text = "Level  "
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="LevelUpContainer/BoxContainer/EditAttributesTitleContainer"]
+custom_minimum_size = Vector2(72, 0)
+layout_mode = 2
+theme = ExtResource("4_hcvmt")
+theme_override_font_sizes/font_size = 48
+text = "100"
+horizontal_alignment = 1
+
+[node name="VSeparator2" type="VSeparator" parent="LevelUpContainer/BoxContainer/EditAttributesTitleContainer"]
 modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(40, 0)
 layout_mode = 2

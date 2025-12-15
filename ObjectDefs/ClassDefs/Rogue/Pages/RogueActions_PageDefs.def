@@ -555,14 +555,13 @@
             "SmallIcon": "Sprites/JumpOver_Icon.png",
             "SnippetDesc": "Teleport Forward two spots",
             "Tags": [
-                "Movement"
+                "Movement",
+                "Teleport"
             ],
             "Taxonomy": [
                 "Item",
                 "Page",
-                "Action",
-                "Movement",
-                "Teleport"
+                "Action"
             ]
         },
         "ActionData": {
@@ -609,9 +608,9 @@
             "PageRequirements": {
                 "ConflictingPages": [],
                 "IncompatiblePages": [],
-                "TitleReq": "None"
+                "TitleReq": "Match"
             },
-            "SourceTitle": ""
+            "SourceTitle": "Rogue"
         },
         "_DefVersion": "1"
     }

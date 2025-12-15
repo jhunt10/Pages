@@ -55,6 +55,7 @@ func _ready() -> void:
 		shop_button.disabled = true
 	if StoryState.get_story_flag("CampScribeDisabled"):
 		system_button.disabled = true
+	check_levels()
 	
 	#var location = StoryState.get_location()
 	#if location != "":
@@ -65,6 +66,17 @@ func _ready() -> void:
 			
 	_sub_menu_open("Main")
 	pass # Replace with function body.
+
+func check_levels():
+	var can_level = false
+	for actor:BaseActor in StoryState.list_party_actors():
+		if actor.stats.can_level_up():
+			can_level = true
+	if can_level:
+		character_button.text = "+ Party"
+	else:
+		character_button.text = "Party"
+		
 
 func load_dialog(dialog_script:String):
 	dialog_control.load_dialog_script(dialog_script)
@@ -108,8 +120,13 @@ func _on_prepare_button():
 	if character_menu and CharacterMenuControl.Instance != null:
 		character_menu.show_menu()
 	else:
-		MainRootNode.Instance.open_character_sheet()
-	#character_menu.show_menu()
+		character_menu = MainRootNode.Instance.open_character_sheet()
+	if not character_menu.menu_closed.is_connected(on_char_menu_closed):
+		character_menu.menu_closed.connect(on_char_menu_closed)
+
+func on_char_menu_closed():
+	check_levels()
+	pass
 
 func _on_records():
 	var new_cards:TutorialCardsController = load("res://Scenes/TutorialCards/tutorial_cards.tscn").instantiate()

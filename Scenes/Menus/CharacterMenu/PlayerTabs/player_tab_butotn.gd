@@ -42,6 +42,9 @@ enum States {Hidden, Growing, Showing, Shrinking}
 @export var button:Button
 @export var invalid_icon:Control
 
+var _actor_id:String = ''
+var _actor_name:String = ''
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.
@@ -62,3 +65,24 @@ func _process(delta: float) -> void:
 			state = States.Hidden
 		else:
 			button_texture.position.y += move
+
+func set_actor(actor:BaseActor):
+	var title_page:BasePageItem = actor.pages.get_title_page()
+	if title_page:
+		_actor_name = title_page.get_display_name()
+	else:
+		_actor_name = actor.get_display_name()
+	_actor_id = actor._id
+	check_level_up()
+	if not actor.stats_changed.is_connected(check_level_up):
+		actor.stats_changed.connect(check_level_up)
+
+func check_level_up():
+	if _actor_id:
+		var actor = ActorLibrary.get_actor(_actor_id)
+		if !actor:
+			return
+		if actor.stats.can_level_up():
+			self.button_label.text = "+" + _actor_name
+		else:
+			self.button_label.text = _actor_name

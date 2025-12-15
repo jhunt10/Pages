@@ -29,7 +29,7 @@ func _init(actor:BaseActor, data:Dictionary) -> void:
 	_actor = actor
 	# Parse Stat Data
 	for key:String in data.keys():
-		if key == 'StartingAttributeLevels':
+		if key == 'AttributeLevels':
 			attribute_levels = data[key].duplicate()
 		else:
 			_base_stats[key] = data[key]
@@ -133,6 +133,7 @@ func add_experiance(value:int):
 		_base_stats[StatHelper.Experience] = 0
 	_base_stats[StatHelper.Experience] += value
 	_cached_stats[StatHelper.Experience] = _base_stats[StatHelper.Experience]
+	_actor.set_load_val(["Stats", StatHelper.Experience], _base_stats[StatHelper.Experience])
 
 func get_exp_to_next_level(current_level:int=-1)->int:
 	if current_level < 0:
@@ -141,9 +142,7 @@ func get_exp_to_next_level(current_level:int=-1)->int:
 
 func can_level_up()->bool:
 	var required = get_exp_to_next_level()
-	if not _base_stats.has(StatHelper.Experience):
-		return false
-	return required < _base_stats[StatHelper.Experience]
+	return required < _base_stats.get(StatHelper.Experience, 0)
 
 func get_level_for_exp(total_exp:int)->int:
 	var remaining = total_exp
@@ -155,12 +154,11 @@ func get_level_for_exp(total_exp:int)->int:
 	return 100
 
 func apply_level_up(new_level:int, remaining_exp:int, add_att_levels:Dictionary):
-	_base_stats[StatHelper.Level] = new_level
-	_base_stats[StatHelper.Experience] = remaining_exp
-	attribute_levels[StatHelper.Strength] = add_att_levels.get(StatHelper.Strength)
-	attribute_levels[StatHelper.Agility] = add_att_levels.get(StatHelper.Agility)
-	attribute_levels[StatHelper.Intelligence] = add_att_levels.get(StatHelper.Intelligence)
-	attribute_levels[StatHelper.Wisdom] = add_att_levels.get(StatHelper.Wisdom)
+	_actor.set_load_val(["Stats", StatHelper.Level], new_level)
+	_actor.set_load_val(["Stats", StatHelper.Experience], remaining_exp)
+	for attribute in [StatHelper.Strength, StatHelper.Agility, StatHelper.Intelligence, StatHelper.Wisdom]:
+		_actor.set_load_val(["Stats", "AttributeLevels", attribute], add_att_levels.get(attribute))
+		attribute_levels[attribute] = add_att_levels.get(attribute)
 	recache_stats()
 
 func get_auto_level_attributes(level:int):
@@ -318,8 +316,8 @@ func _calc_cache_stats(emit_signal:bool=true):
 	
 	_base_stats = _actor.get_load_val("Stats")
 	var min_stats = {}
-	if _base_stats.keys().has("StartingAttributeLevels"):
-		_base_stats.erase("StartingAttributeLevels")
+	if _base_stats.keys().has("AttributeLevels"):
+		_base_stats.erase("AttributeLevels")
 	for stat_name:String in _base_stats.keys():
 		if stat_name.begins_with("MinStat:"):
 			var real_stat_name = stat_name.trim_prefix("MinStat:")

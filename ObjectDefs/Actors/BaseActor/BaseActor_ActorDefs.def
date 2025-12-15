@@ -36,7 +36,7 @@
             "Strength": 0,
             "Intelligence": 0,
             "Wisdom": 0,
-            "Level": 0,
+            "Level": 1,
             "Accuracy": 100,
             "AggroMod": 1,
             "Awareness": 0,
@@ -158,6 +158,22 @@
                             }
                         ],
                         "OffHandReq": []
+                    },
+                    {
+                        "CanMainHand": true,
+                        "CanOffHand": false,
+                        "CanOneHand": true,
+                        "CanTwoHand": true,
+                        "ConditionName": "TwoHand Medium Weapon",
+                        "OffHandReq": [],
+                        "ToolTagFilters": [
+                            {
+                                "RequireAllTags": [
+                                    "MediumWpn"
+                                ]
+                            }
+                        ],
+                        "ToolTagFiltersReqAll": true
                     },
                     {
                         "ConditionName": "Default Weapon",

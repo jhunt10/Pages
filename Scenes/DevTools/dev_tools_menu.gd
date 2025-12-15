@@ -6,6 +6,7 @@ extends Control
 @export var create_page_items_button:Button
 @export var items_to_inventory_button:Button
 @export var add_item_menu_button:Button
+@export var add_xp_menu_button:Button
 
 @export var add_item_menu:AddItemMenu
 
@@ -16,6 +17,7 @@ func _ready() -> void:
 	items_to_inventory_button.pressed.connect(items_to_inventory)
 	add_item_menu_button.pressed.connect(add_item_menu.show)
 	reload_stuff_button.pressed.connect(reload_stuff)
+	add_xp_menu_button.pressed.connect(add_xp_to_party)
 	if CombatRootControl.Instance:
 		CombatRootControl.Instance.camera.freeze = true
 	pass # Replace with function body.
@@ -87,3 +89,8 @@ func items_to_inventory():
 			else:
 				PlayerInventory.add_item(new_item)
 			
+
+func add_xp_to_party():
+	for actor:BaseActor in StoryState.list_party_actors():
+		actor.stats.add_experiance(100)
+	pass

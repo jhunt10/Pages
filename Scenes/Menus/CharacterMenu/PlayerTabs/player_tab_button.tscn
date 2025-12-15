@@ -1,13 +1,13 @@
 [gd_scene load_steps=6 format=3 uid="uid://lby2lub0vv8s"]
 
 [ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/PlayerTabs/player_tab_butotn.gd" id="1_fehqp"]
-[ext_resource type="Theme" uid="uid://dwinll8pgdjhc" path="res://Scenes/Themes/standard_theme.tres" id="2_15muq"]
+[ext_resource type="Theme" uid="uid://bfce41la62bs6" path="res://Scenes/Themes/readable_theme.tres" id="2_u084u"]
 [ext_resource type="Texture2D" uid="uid://bko77evp6ragy" path="res://Scenes/Menus/CharacterMenu/PlayerTabs/ActorTabBackground.png" id="3_n1r4k"]
 [ext_resource type="Script" path="res://Scenes/UiNodes/FitScaleLabel/fit_scale_label.gd" id="4_ijahc"]
 [ext_resource type="Texture2D" uid="uid://f5dyomv4wwn1" path="res://assets/Sprites/UI/SymbolIcons/InvalidEquipmentIcon.png" id="5_yedfs"]
 
 [node name="PlayerTabButton" type="Control" node_paths=PackedStringArray("button_texture", "button_label", "button", "invalid_icon")]
-custom_minimum_size = Vector2(64, 0)
+custom_minimum_size = Vector2(72, 0)
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_fehqp")
@@ -20,9 +20,9 @@ invalid_icon = NodePath("PTabButton/HBoxContainer/IconControl")
 [node name="PTabButton" type="TextureRect" parent="."]
 self_modulate = Color(0.466667, 0.360784, 1, 1)
 layout_mode = 2
-offset_right = 64.0
+offset_right = 72.0
 offset_bottom = 48.0
-theme = ExtResource("2_15muq")
+theme = ExtResource("2_u084u")
 texture = ExtResource("3_n1r4k")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="PTabButton"]
@@ -30,7 +30,7 @@ layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
 offset_left = 4.0
-offset_top = 4.0
+offset_top = 6.0
 offset_right = -4.0
 offset_bottom = 20.0
 grow_horizontal = 2
@@ -46,10 +46,13 @@ center_x = true
 
 [node name="Label" type="Label" parent="PTabButton/HBoxContainer/FitScaleLabel"]
 layout_mode = 0
-offset_left = 4.0
-offset_right = 62.0
-offset_bottom = 20.0
-scale = Vector2(0.8, 0.8)
+offset_left = 8.0
+offset_right = 95.0
+offset_bottom = 30.0
+scale = Vector2(0.533333, 0.533333)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 24
 text = "Soldier"
 horizontal_alignment = 1
 
