@@ -1,5 +1,5 @@
 {
-    "IceKnife": {
+    "IceKnife_Weapon": {
         "!ObjectScript": "res://assets/Scripts/Items/Equipment/Tools/BaseWeaponEquipment.gd",
         "#ObjDetails": {
             "Description": "It was supposed to be the perfect murder. Stab the victim, knife melts, no evidence. But turns out magic ice doesn't melt, so here we are.",
@@ -12,7 +12,7 @@
                 "Weapon",
                 "OffHand",
                 "Dagger",
-                "Cold"
+                "ColdWpn"
             ],
             "Taxonomy": [
                 "Item",
@@ -80,6 +80,34 @@
             }
         },
         "_DefVersion": "1"
-    }
+    },
 
+    "FireSword_Weapon": {
+        "!ParentKey": "BaseSword_Weapon",
+        "!ObjectScript": "res://assets/Scripts/Items/Equipment/Tools/BaseWeaponEquipment.gd",
+        "#ObjDetails": {
+            "Description": "A magical flaming Sword. This model applies magic fire to only the blade, and is considered a huge improvement over the old design.",
+            "DisplayName": "Fire Sword",
+            "LargeIcon": "Sprites/FireSword_Icon.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/FireSword_Icon.png",
+            "SnippetDesc": "a flaming sword",
+            "Tags": [
+                "Weapon",
+                "Sword",
+                "FireWpn"
+            ]
+        },
+        "WeaponData": {
+            "AttackData": {
+                "DamageDatas": {
+                    "WeaponDamage": {
+                        "DamageType": "Fire",
+                        "DefenseType":"Ward"
+                    }
+                }
+            }
+        },
+        "_DefVersion": "1"
+    }
 }

@@ -32,6 +32,7 @@ func _get_innate_slots_data()->Array:
 			"Key": "PageBook",
 			"DisplayName":"PageBook",
 			"Count": 1,
+			"NeverEmpty": true,
 			"FilterData":{"RequiredTags":["PageBook"]}
 		},
 		"SupplyBag": {
@@ -217,22 +218,6 @@ func _get_items_removed_if_new_item_added(slot_index:int, item:BaseItem)->Array:
 		return super(slot_index, item)
 		
 	return list_all_tools_in_hands()
-
-
-#func can_set_item_in_slot(item:BaseItem, index:int, allow_replace:bool=false)->bool:
-	## Only Hand Slots require special logic
-	## If not hand slot - use default logic
-	#if get_slot_set_key_for_index(index) != "Hands":
-		#return super(item, index, allow_replace)
-	#
-	## If it is a hand slot, but not a Tool Item
-	#if not (item is BaseToolEquipment):
-		#return false
-	#
-	## Hand logic doesn't actually prevent items from being equip
-	#if not allow_replace:
-		#return _raw_item_slots[index] == null
-	#return true
 
 func _on_item_added_to_slot(item:BaseItem, index:int):
 	auto_order_hand_items()

@@ -8,12 +8,12 @@ extends FitScaleLabel
 @export var disabled:bool:
 	set(val):
 		disabled = val
-		if label:
-			if disabled:
-				label.self_modulate = Color.DIM_GRAY
-			else:
-				label.self_modulate = Color("780000")
-		
+		#if label:
+			#if disabled:
+				#label.self_modulate = Color.DIM_GRAY
+			#else:
+				#label.self_modulate = Color("780000")
+
 
 @export var is_highlighted:bool:
 	set(val):

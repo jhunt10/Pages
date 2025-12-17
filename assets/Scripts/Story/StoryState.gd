@@ -90,8 +90,7 @@ func get_player_color(actor)->Color:
 func start_new_story():
 	#if !Instance: Instance = StoryState.new()
 	if story_id != null:
-		# TODO: Handle existing story
-		story_id = null
+		purge_game()
 	save_id = null
 	_story_stage_index = 0
 	_story_flags.clear()
@@ -179,11 +178,12 @@ func build_save_data()->Dictionary:
 
 func load_save_data(data:Dictionary):
 	#if !Instance: Instance = StoryState.new()
+	purge_game()
+	
 	story_id = data['StoryId']
 	_story_stage_index = data.get('StoryStageIndex', 0)
 	_money = data.get("Money", 0)
 	_story_flags = data.get("StoryFlags", {}).duplicate(true)
-	EffectLibrary.purge_effects()
 	ItemLibrary.load_items(data.get("Items", {}))
 	
 	
@@ -230,3 +230,14 @@ func spend_money(cost:int):
 func add_money(val:int):
 	_money = max(0, _money + val)
 	money_changed.emit()
+
+func purge_game():
+	EffectLibrary.purge_effects()
+	ActorLibrary.purge_actors()
+	ItemLibrary.purge_items()
+	PlayerInventory.clear_items()
+	story_id = null
+	_party_actor_ids = []
+	_story_stage_index = 0
+	_story_flags.clear()
+	_total_play_time = 0

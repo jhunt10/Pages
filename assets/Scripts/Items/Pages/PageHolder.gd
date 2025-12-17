@@ -19,6 +19,7 @@ func _get_innate_slots_data()->Array:
 		"Key":"TitlePage",
 		"DisplayName":"Title Page",
 		"Count": 1,
+		"NeverEmpty": true,
 		"FilterData":{
 			"RequiredTags":"Title"
 		}

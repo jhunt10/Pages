@@ -86,6 +86,12 @@ func _build_slots_list():
 			var old_slot_set_data = _raw_to_slot_set_mapping[old_index].duplicate()
 			old_slot_set_data['ItemId'] = _raw_item_slots[old_index]
 			old_item_to_slot_sets.append(old_slot_set_data)
+		elif _raw_item_slots[old_index]:
+			old_item_to_slot_sets.append({
+				"SlotSetKey": "Unset",
+				"SubIndex": old_index,
+				"ItemId": _raw_item_slots[old_index]
+			})
 	
 	# Clear current data
 	_slot_set_key_mapping = []
@@ -145,6 +151,13 @@ func _build_slots_list():
 		# There was no item
 		if item_id == null:
 			continue
+		
+		# No old Slot Set Data (happens durring loading)
+		if slot_set_key == "Unset":
+			_raw_item_slots[old_slot_set_sub_index] = item_id
+			continue
+			
+		
 		var new_slot_set_data = get_slot_set_data(slot_set_key)
 		
 		# Slot Set that used to hold this item is gone
@@ -317,14 +330,29 @@ func get_item_in_slot(index:int)->BaseItem:
 				_direct_clear_slot(index)
 	return null
 
-func remove_item(item_id:String, supress_signal:bool=false):
+func can_remove_index(index:int)->bool:
+	if index < 0:
+		return true
+	var slot_data = get_slot_set_data_for_index(index)
+	if slot_data.get("NeverEmpty", false):
+		return false
+	return true
+
+func can_remove_item(item_id)->bool:
+	var index = _raw_item_slots.find(item_id)
+	return can_remove_index(index)
+	
+
+func remove_item(item_id:String, supress_signal:bool=false)->bool:
 	print("Remove Item: %s" % [item_id])
 	if not ItemHelper.transering_items.has(item_id):
 		printerr("Transfering Item outside of ItemHelper: %s | %s " % [item_id, _actor.Id])
 	var index = _raw_item_slots.find(item_id)
-	if index >= 0:
+	if index >= 0 and can_remove_index(index):
 		_direct_clear_slot(index)
 		_on_item_removed(item_id, supress_signal)
+		return true
+	return false
 
 ## Returns true if SlotSet of given index will accept Item
 func can_set_item_in_slot(item:BaseItem, index:int, allow_replace:bool=false)->bool:

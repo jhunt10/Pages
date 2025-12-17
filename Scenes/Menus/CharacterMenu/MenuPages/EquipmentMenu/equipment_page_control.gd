@@ -105,6 +105,9 @@ func can_place_item_in_slot(item:BaseItem, index:int):
 		return _actor.equipment.can_set_item_in_slot(item, index)
 	return false
 func remove_item_from_slot(item:BaseItem, index:int):
+	if index == 0:
+		play_pagebook_warning_animation()
+		return
 	ItemHelper.try_transfer_item_from_holder_to_inventory(item, _actor.equipment)
 
 func try_place_item_in_slot(item:BaseItem, index:int):

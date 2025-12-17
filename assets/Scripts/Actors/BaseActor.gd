@@ -122,26 +122,6 @@ func get_stat_scaling()->Dictionary:
 		"WIS": 0.25,
 	})
 
-# Use load_data
-#func post_creation():
-	#suppress_equipment_changed = true
-	#equipment.load_saved_items()
-	#self.equipment_changed.emit()
-	#
-	#items.load_saved_items()
-	#items.set_bag_item(equipment.get_bag_equipment())
-	#
-	#pages.load_saved_items()
-	#pages.set_page_que_item(equipment.get_que_equipment())
-	#pages.build_effects()
-	#
-	#equipment.validate_items()
-	#items.validate_items()
-	#pages.validate_items()
-	#
-	#stats.dirty_stats()
-	#suppress_equipment_changed = false
-	#self.equipment_changed.emit()
 
 func _on_stat_change():
 	stats_changed.emit()
@@ -152,56 +132,10 @@ func _on_health_change():
 ###################################
 #######   Item Management   #######
 ###################################
-var hold_item_validation:bool = false
-var items_changed_since_validated:Dictionary = {"Pages":[], "Equipment":[], "Supplies":[]}
-## Called internally by holder
-#func on_item_added_to_holder(holder:BaseItemHolder, item:BaseItem, slot_index:int):
-	#var change_list = items_changed_since_validated.get(holder.get_holder_name(), [])
-	#if change_list == null:
-		#printerr("BaseActor.on_item_added_to_holder: Unknown ItemHolder '%s'." % [holder.get_holder_name()])
-	#elif not change_list.has(item.Id):
-		#change_list.append(item.Id)
-	#if not hold_item_validation:
-		#check_for_validation_changes()
-#
-#func on_item_removed_from_holder(holder:BaseItemHolder, item:BaseItem):
-	#on_item_added_to_holder(holder, item, -1)
-
-#func check_for_validation_changes():
-	#var slots_changed = false
-	#var stats_changed = false
-	##for item
-
 var suppress_equipment_changed:bool = false
-#func _on_equipment_holder_items_change():
-	#print("Equipment Changed for %s" % [self.Id])
-	#var book = equipment.get_que_equipment()
-	#if ((book != null and pages.cached_page_book_item_id != book.Id)
-		#or (book == null and pages.cached_page_book_item_id != null)):
-		#pages._build_slots_list()
-	#var bag = equipment.get_bag_equipment()
-	#if ((bag != null and items.cached_bag_item_id != bag.Id)
-		#or (bag == null and items.cached_bag_item_id != null)):
-		#items._build_slots_list()
-	##var page_que = equipment.get_que_equipment()
-	##if not page_que and pages.page_que_item_id != null:
-		##pages.set_page_que_item(null)
-	##if page_que and pages.page_que_item_id != page_que.Id:
-		##pages.set_page_que_item(page_que)
-	#
-	#if not suppress_equipment_changed:
-		#self.stats.recache_stats()
-		#self.equipment_changed.emit()
-		#Que.rechache_page_ammo()
-
-#func _on_page_holder_items_change():
-	#stats.dirty_stats()
-	#stats.recache_stats()
-	#Que.rechache_page_ammo()
-	##if not suppress_equipment_changed:
-		##self.equipment_changed.emit()
 
 func on_held_items_change(item_holder_name:String, change_data:Dictionary):
+	print("ItemChange: %s %s %s" % [self._id, item_holder_name, change_data])
 	var holder:BaseItemHolder = null
 	if item_holder_name == equipment.get_holder_name():
 		holder = equipment
@@ -244,7 +178,9 @@ func on_held_items_change(item_holder_name:String, change_data:Dictionary):
 		if item.has_spite_sheet():
 			rebuild_sprite = true
 		# Check if tiem will change slots
-		if item.get_item_slots_mods().size() > 0:
+		if (item.get_item_slots_mods().size() > 0
+			or item.get_taxonomy().has("PageBook")
+			or item.get_taxonomy().has("Bag")):
 			rebuild_slots = true
 		if item.get_attack_mods().size() > 0:
 			rechache_action_mods = true

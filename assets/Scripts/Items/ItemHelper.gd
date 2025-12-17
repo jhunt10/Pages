@@ -190,6 +190,8 @@ static func try_transfer_item_from_holder_to_inventory(item:BaseItem, holder:Bas
 	var item_id = item.Id
 	if !holder.has_item(item_id):
 		return "Item not found"
+	if !holder.can_remove_item(item_id):
+		return "Can't Empty"
 	transering_items.append(item_id)
 	holder.remove_item(item_id)
 	PlayerInventory.add_item(item)
@@ -203,7 +205,7 @@ static func swap_item_holder_slots(holder:BaseItemHolder, slot_a:int, slot_b:int
 	var item_b = holder.get_item_in_slot(slot_b)
 	if !item_a:
 		return
-	holder.remove_item(item_a.Id)
+	#holder.remove_item(item_a.Id)
 	var a_can_go_in_b = holder.can_set_item_in_slot(item_a, slot_b, true)
 	if not a_can_go_in_b:
 		holder.try_set_item_in_slot(item_a, slot_a)
