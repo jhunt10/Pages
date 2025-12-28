@@ -5,8 +5,10 @@ extends BackPatchContainer
 
 @export var name_label:Label
 @export var duration_label:Label
+@export var duration_container:Container
 @export var duration_type_label:Label
 @export var description_label:RichTextLabel
+#@export var description_box:DescriptionBox
 
 func _ready() -> void:
 	super()
@@ -19,6 +21,8 @@ func set_effect(effect:BaseEffect):
 	name_label.text = effect.get_display_name()
 	if effect.show_counter():
 		var dur_val = effect.RemainingDuration
+		if !dur_val:
+			dur_val = 0
 		duration_label.text = str(dur_val)
 		var duration_type = ''
 		if effect.duration_trigger:
@@ -30,6 +34,8 @@ func set_effect(effect:BaseEffect):
 			duration_type_label.text = dur_str
 		else:
 			duration_type_label.hide()
+	elif duration_container:
+		duration_container.hide()
 	else:
-		duration_label.text = ''
+		duration_label.text = '0'
 	description_label.text = effect.get_snippet()

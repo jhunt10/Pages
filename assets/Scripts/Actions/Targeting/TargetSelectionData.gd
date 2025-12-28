@@ -45,5 +45,5 @@ func is_coor_selectable(coor:Vector2i)->bool:
 func list_potential_targets()->Array:
 	return TargetingHelper.dicarry_to_values(_potential_target_dictray)
 
-func get_center_of_area()->MapPos:
-	return target_params.get_center_of_area(actor_pos)
+func get_center_of_area(include_user_spot:bool=true)->MapPos:
+	return target_params.get_center_of_area(actor_pos, include_user_spot)

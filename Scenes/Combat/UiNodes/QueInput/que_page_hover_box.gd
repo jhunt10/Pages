@@ -40,7 +40,9 @@ func set_action(actor:BaseActor, page_item:BasePageItem):
 	var action = page_item as PageItemAction
 	if actor.pages.has_action(action.ActionKey):
 		action = actor.pages.get_action_page(action.ActionKey)
-	title_label.text = action.get_display_name()
+	var title = action.get_display_name()
+	title_label.text = title
+	title_label._size_dirty = true
 	description_box.set_page_item(action, actor)
 	
 	
@@ -93,3 +95,6 @@ func set_action(actor:BaseActor, page_item:BasePageItem):
 		target_type_label.text = TargetParameters.TargetTypes.keys()[target_params.target_type]
 	
 	
+func show_self():
+	self.visible = true
+	title_label._size_dirty = true

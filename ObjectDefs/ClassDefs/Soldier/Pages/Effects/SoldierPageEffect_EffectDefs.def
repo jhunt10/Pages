@@ -7,7 +7,7 @@
             "LargeIcon": "Sprites/Guard.png",
             "ObjectType": "Effect",
             "SmallIcon": "Sprites/Guard.png",
-            "SnippetDesc": "Increase Awareness and Block Chance",
+            "SnippetDesc": "Increase AWR and Block Chance until Next Action.",
             "Tags": [],
             "Taxonomy": [
                 "Effect"
@@ -39,14 +39,12 @@
                 }
             },
             "SubEffects": {
-                "Duration": {
-                    "ModStat": {
-                        "StatModKeys": [
-                            "AwrStatMod",
-                            "BlcStatMod"
-                        ],
-                        "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_ModStat.gd"
-                    }
+                "ModStat": {
+                    "StatModKeys": [
+                        "AwrStatMod",
+                        "BlcStatMod"
+                    ],
+                    "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_ModStat.gd"
                 }
             }
         },

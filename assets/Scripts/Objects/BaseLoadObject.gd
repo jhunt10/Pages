@@ -33,9 +33,15 @@ func get_object_details()->Dictionary:
 	if _data.has("#ObjDetails"):
 		dets = BaseLoadObjectLibrary._merge_defs(_data.get("#ObjDetails", {}), dets)
 	return dets
+
 func get_display_name()->String:
 	var dets = get_object_details()
 	return dets.get("DisplayName", _id)
+func set_display_name(val:String):
+	if not _data.keys().has('#ObjDetails'):
+		_data['#ObjDetails'] = {}
+	_data['#ObjDetails']['DisplayName'] = val
+	
 func get_description()->String:
 	return get_object_details().get("Description", _id)
 func get_snippet()->String:

@@ -20,8 +20,8 @@ signal page_special_selected(action_key:String)
 @export var _fill_button:Button
 			
 @export var nodes_container:Control
-@export var que_display_control:QueDisplayControl
-@export var que_display_patch:BackPatchContainer
+@export var que_display_control:QueInputDisplayControl
+#@export var que_display_patch:BackPatchContainer
 #@export var on_que_options_menu:OptionSelectMenu
 @export var back_patch:BackPatchContainer
 @export var main_container:HBoxContainer 
@@ -43,7 +43,7 @@ signal page_special_selected(action_key:String)
 			if state == States.Hidden:
 				nodes_container.position.y = 0
 			if state == States.Showing:
-				nodes_container.position.y = -(back_patch.size.y + que_display_patch.size.y + 16)
+				nodes_container.position.y = -(back_patch.size.y + que_display_control.size.y + 16)
 
 var _actor:BaseActor
 var _page_buttons:Dictionary = {} 
@@ -102,7 +102,7 @@ func show_start_button():
 	for player:BaseActor in CombatRootControl.list_player_actors():
 		if not player.Que.is_ready():
 			all_ready = false
-	var que_display_size = que_display_patch.size.x
+	var que_display_size = que_display_control.size.x
 	var self_size = back_patch.size.x #+ (back_patch.sides_padding * 2)
 	var use_top = (top_start_button.size.x < self_size - que_display_size)
 	#printerr("SelfSize: %s | DisSize: %s | UseTop: %s" % [self_size, que_display_size, use_top])
@@ -127,7 +127,7 @@ func _process(delta: float) -> void:
 	nodes_container.position.x = (self.get_parent().size.x / 2) - (back_patch.size.x / 2)
 	nodes_container.size.x = back_patch.size.x
 	if state == States.Growing:
-		var y_size = back_patch.size.y + que_display_patch.size.y + 16
+		var y_size = back_patch.size.y + que_display_control.size.y + 16
 		var move = delta * slide_speed
 		if nodes_container.position.y - move < 0 - y_size:
 			state = States.Showing
@@ -298,23 +298,22 @@ func _page_button_pressed(_index, key_name):
 	#on_que_options_menu.visible = false
 
 func _start_button_pressed():
-	var all_ready = true
-	for player:BaseActor in CombatRootControl.list_player_actors():
-		if not player.Que.is_ready():
-			all_ready = false
-	if all_ready:
-		CombatUiControl.ui_state_controller.set_ui_state(UiStateController.UiStates.ExecRound)
-	else:
-		var next_index = CombatRootControl.Instance.get_next_player_index()
-		CombatRootControl.Instance.set_player_index(next_index)
-	hide_start_button()
+	var current_index = CombatRootControl.Instance.get_current_player_index() 
+	for offset in range(CombatRootControl.list_player_actors().size()):
+		var next_index = CombatRootControl.Instance.get_next_player_index(current_index + offset)
+		var next_player = CombatRootControl.Instance.get_player_actor(next_index)
+		if not next_player.Que.is_ready():
+			CombatRootControl.Instance.set_player_index(next_index)
+			hide_start_button()
+			return
+	CombatUiControl.ui_state_controller.set_ui_state(UiStateController.UiStates.ExecRound)
 
 func _round_start():
 	hide_start_button()
 	clear_preview_display()
 
 func _round_ends():
-	que_display_patch.show()
+	que_display_control.show()
 	#hide_start_button()
 	pass
 
@@ -340,4 +339,4 @@ func show_page_selection(action_keys:Array):
 			button.modulate = Color.LIGHT_GRAY
 	selecetion_mode = true
 	page_Selection_container.show()
-	que_display_patch.hide()
+	que_display_control.hide()

@@ -1,0 +1,65 @@
+**main**
+XXX Minimize clicks: Select target creature, select map(?)
+Larger turn log, maybe shorter text?
+I want a heal over time passive! What superclass is that?
+Placing actors at start
+Makes buffs small icons below health maybe?
+XXX Make a "target until death" or something
+XXX Highlight whoever is making the attack
+
+
+
+Pages Notes:
+XXX Lot of tutorial pages, the ammo gets a little confusing, maybe condense?
+XXX Is Bchance explained?
+Hover over items to see what they are?
+Hover over enemies to see stats?
+XXX "Select target creature" by first click, no confirm
+XXX Options for larger round output log (see dominions)
+XXX Some sort of feedback for using the block action, maybe hold shield the whole round? Or a little "+5 def" above actor
+Maybe keyboard controls? 
+XXX Is records/files for in game lore? Maybe unlock the lore as player encounters enemies
+"Second to second gameplay"
+XXX Middle mouse to move map?
+XXX Free camera look while in move?
+XXX Maybe some class specific stats on the stat screen? Like number of blessings for the priest
+Ability to select a "no action", or start a round without full pages. (I see now that fill can accomplish this, but maybe just a "skip" action if you click the page slot)
+XXX Maybe a "move from here to here" option that auto-fills pages for a few rounds. Just for long, multi-turn movements
+XXX Maybe a "select no target" option. For some reason my light-touch attacks are healing a mushroom?
+XXX Is "evasion" shown in the actor records?
+XXX Mushroom record pages
+XXX Some words have hover text explainers, but not consistent? (slime resistant?)
+XXX "Main menu" reverted my progress when restarting a match
+
+
+**Bugs**
+XXX Priest light-touch can target allies
+XXX Opening stats page in setup made actors invisible.
+XXX All pages selected, for some reason it showed me "next", and then switched to a character will all full pages and no "start" button
+XXX Knight always acts first, even with lowest speed
+XXX "next" button just chooses the next actor in a cycle, even if they have all pages selected. Then there is no "next" to the actor that is actually missing pages
+XXX Selecting "actor 2" in records crashes
+
+**Actor setup screen**
+Re order pages by picking them up
+Rogue doesn't have many pages to use, is it a shared page book?
+Maybe add hover text to show ammo calc.
+
+**passives**
+XXX Click off passive card to leave it, not just pressing the x
+Lot of the passives have spelling mistakes, I can do a pass if need be
+Text issues: Unstoppable, Heavy Armored
+XXX Passives are "equipt", maybe just equip?
+
+**actives**
+Pommel text
+
+**Spelling**
+when rogue join the party: "rogue has `join` the party"
+Mage record
+Priest record
+
+
+**Crash**
+XXX Lvl 3, fighting in cave: Invalid operands 'Nil' and 'String' in operator '+'.
+Main_scene, line 20, maybe execute_action_motion_animation

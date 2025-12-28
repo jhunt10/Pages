@@ -3,6 +3,7 @@ extends RichTextLabel
 
 const BLUE_TEXT = "[color=#000046]"
 const RED_TEXT = "[color=#460000]"
+const GREEN_TEXT = "[color=#004600]"
 #@export var text_box:RichTextLabel
 #
 #func _process(delta: float) -> void:
@@ -49,9 +50,13 @@ func set_event(attack_event:AttackEvent):
 		else:
 			result_line = "hitting"
 		
-		var damage_vals_str = _join_damage_values(sub_event)
-		if damage_vals_str != '':
-			result_line += " for " + damage_vals_str
+		# Shortcut single damage healing events
+		if sub_event.damage_events.size() == 1 and sub_event.damage_events.values()[0].final_damage < 0:
+			result_line = "healing for +" + GREEN_TEXT + str(-sub_event.damage_events.values()[0].final_damage) + " HP[/color]"
+		else:
+			var damage_vals_str = _join_damage_values(sub_event)
+			if damage_vals_str != '':
+				result_line += " for " + damage_vals_str
 		
 		var effects_line = _join_effect_values(attack_event, sub_event)
 		if effects_line != '':

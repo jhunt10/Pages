@@ -205,7 +205,7 @@ patch_margin_bottom = 32
 axis_stretch_horizontal = 2
 axis_stretch_vertical = 2
 
-[node name="BoxContainer" type="BoxContainer" parent="BoxContainer/VBoxContainer/HBoxContainer/ActorMainContainer" node_paths=PackedStringArray("icon_rect", "actor_node", "title_label", "tags_label", "xp_label", "money_label", "strength_label", "agility_label", "int_label", "wisdom_label", "health_label", "ppr_label", "mass_label", "speed_label", "phy_atk_label", "mag_atk_label", "armor_label", "ward_label", "description_box", "resisances_container", "weaknesses_container", "item_drop_entry", "item_drop_container", "passive_pages_container", "action_pages_container")]
+[node name="BoxContainer" type="BoxContainer" parent="BoxContainer/VBoxContainer/HBoxContainer/ActorMainContainer" node_paths=PackedStringArray("icon_rect", "actor_node", "title_label", "tags_label", "xp_label", "money_label", "strength_label", "agility_label", "int_label", "wisdom_label", "health_label", "ppr_label", "mass_label", "speed_label", "phy_atk_label", "mag_atk_label", "armor_label", "ward_label", "acc_label", "eva_label", "pot_label", "pro_label", "description_box", "resisances_container", "weaknesses_container", "item_drop_entry", "item_drop_container", "passive_pages_container", "action_pages_container")]
 layout_mode = 2
 vertical = true
 script = ExtResource("3_iek5u")
@@ -227,6 +227,10 @@ phy_atk_label = NodePath("../../VBoxContainer/StatsContainer/BoxContainer/StatsC
 mag_atk_label = NodePath("../../VBoxContainer/StatsContainer/BoxContainer/StatsContainer2/MagAtkContainer")
 armor_label = NodePath("../../VBoxContainer/StatsContainer/BoxContainer/StatsContainer2/ArmorContainer")
 ward_label = NodePath("../../VBoxContainer/StatsContainer/BoxContainer/StatsContainer2/WardContainer")
+acc_label = NodePath("../../VBoxContainer/StatsContainer/BoxContainer/StatsContainer3/AccuracyContainer")
+eva_label = NodePath("../../VBoxContainer/StatsContainer/BoxContainer/StatsContainer3/EvasionContainer")
+pot_label = NodePath("../../VBoxContainer/StatsContainer/BoxContainer/StatsContainer3/PotencyContainer")
+pro_label = NodePath("../../VBoxContainer/StatsContainer/BoxContainer/StatsContainer3/ProtectionContainer")
 description_box = NodePath("DescriptionBox")
 resisances_container = NodePath("../../VBoxContainer2/ResitWeakContainer/BoxContainer/ResistContainer")
 weaknesses_container = NodePath("../../VBoxContainer2/ResitWeakContainer/BoxContainer/WeaknessContainer")
@@ -380,7 +384,7 @@ script = ExtResource("8_qpbv8")
 layout_mode = 2
 
 [node name="StatsContainer" type="Container" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer" node_paths=PackedStringArray("background", "inner_container")]
-custom_minimum_size = Vector2(258, 138)
+custom_minimum_size = Vector2(258, 168)
 layout_mode = 2
 script = ExtResource("1_is6c6")
 background = NodePath("NinePatchRect")
@@ -426,7 +430,6 @@ layout_mode = 2
 [node name="StrContainer" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/StatsContainer/BoxContainer/AttibutesContainer" instance=ExtResource("6_13e3p")]
 layout_mode = 2
 stat_name = "Strength"
-mouse_over_parent = NodePath("")
 
 [node name="ColorRect2" type="ColorRect" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/StatsContainer/BoxContainer/AttibutesContainer"]
 custom_minimum_size = Vector2(2, 2)
@@ -436,7 +439,6 @@ color = Color(0.498039, 0, 0, 1)
 [node name="AgiContainer" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/StatsContainer/BoxContainer/AttibutesContainer" instance=ExtResource("6_13e3p")]
 layout_mode = 2
 stat_name = "Agility"
-mouse_over_parent = NodePath("")
 
 [node name="ColorRect3" type="ColorRect" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/StatsContainer/BoxContainer/AttibutesContainer"]
 custom_minimum_size = Vector2(2, 2)
@@ -446,7 +448,6 @@ color = Color(0.498039, 0, 0, 1)
 [node name="IntContainer" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/StatsContainer/BoxContainer/AttibutesContainer" instance=ExtResource("6_13e3p")]
 layout_mode = 2
 stat_name = "Intelligence"
-mouse_over_parent = NodePath("")
 
 [node name="ColorRect4" type="ColorRect" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/StatsContainer/BoxContainer/AttibutesContainer"]
 custom_minimum_size = Vector2(2, 2)
@@ -456,7 +457,6 @@ color = Color(0.498039, 0, 0, 1)
 [node name="WisContainer" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/StatsContainer/BoxContainer/AttibutesContainer" instance=ExtResource("6_13e3p")]
 layout_mode = 2
 stat_name = "Wisdom"
-mouse_over_parent = NodePath("")
 
 [node name="ColorRect4" type="ColorRect" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/StatsContainer/BoxContainer"]
 custom_minimum_size = Vector2(2, 2)
@@ -469,7 +469,6 @@ layout_mode = 2
 [node name="HealthContainer" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/StatsContainer/BoxContainer/StatsContainer1" instance=ExtResource("6_13e3p")]
 layout_mode = 2
 stat_name = "HealthMax"
-mouse_over_parent = NodePath("")
 
 [node name="ColorRect2" type="ColorRect" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/StatsContainer/BoxContainer/StatsContainer1"]
 custom_minimum_size = Vector2(2, 2)
@@ -479,7 +478,6 @@ color = Color(0.498039, 0, 0, 1)
 [node name="SpeedContainer" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/StatsContainer/BoxContainer/StatsContainer1" instance=ExtResource("6_13e3p")]
 layout_mode = 2
 stat_name = "Speed"
-mouse_over_parent = NodePath("")
 
 [node name="ColorRect3" type="ColorRect" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/StatsContainer/BoxContainer/StatsContainer1"]
 custom_minimum_size = Vector2(2, 2)
@@ -489,7 +487,6 @@ color = Color(0.498039, 0, 0, 1)
 [node name="MassContainer" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/StatsContainer/BoxContainer/StatsContainer1" instance=ExtResource("6_13e3p")]
 layout_mode = 2
 stat_name = "Mass"
-mouse_over_parent = NodePath("")
 
 [node name="ColorRect4" type="ColorRect" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/StatsContainer/BoxContainer/StatsContainer1"]
 custom_minimum_size = Vector2(2, 2)
@@ -499,7 +496,6 @@ color = Color(0.498039, 0, 0, 1)
 [node name="PPRContainer" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/StatsContainer/BoxContainer/StatsContainer1" instance=ExtResource("6_13e3p")]
 layout_mode = 2
 stat_name = "PPR"
-mouse_over_parent = NodePath("")
 
 [node name="ColorRect3" type="ColorRect" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/StatsContainer/BoxContainer"]
 custom_minimum_size = Vector2(2, 2)
@@ -512,7 +508,6 @@ layout_mode = 2
 [node name="PhyAtkContainer" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/StatsContainer/BoxContainer/StatsContainer2" instance=ExtResource("6_13e3p")]
 layout_mode = 2
 stat_name = "PhyAttack"
-mouse_over_parent = NodePath("")
 
 [node name="ColorRect4" type="ColorRect" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/StatsContainer/BoxContainer/StatsContainer2"]
 custom_minimum_size = Vector2(2, 2)
@@ -522,7 +517,6 @@ color = Color(0.498039, 0, 0, 1)
 [node name="ArmorContainer" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/StatsContainer/BoxContainer/StatsContainer2" instance=ExtResource("6_13e3p")]
 layout_mode = 2
 stat_name = "Armor"
-mouse_over_parent = NodePath("")
 
 [node name="ColorRect5" type="ColorRect" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/StatsContainer/BoxContainer/StatsContainer2"]
 custom_minimum_size = Vector2(2, 2)
@@ -532,7 +526,6 @@ color = Color(0.498039, 0, 0, 1)
 [node name="MagAtkContainer" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/StatsContainer/BoxContainer/StatsContainer2" instance=ExtResource("6_13e3p")]
 layout_mode = 2
 stat_name = "MagAttack"
-mouse_over_parent = NodePath("")
 
 [node name="ColorRect6" type="ColorRect" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/StatsContainer/BoxContainer/StatsContainer2"]
 custom_minimum_size = Vector2(2, 2)
@@ -542,7 +535,49 @@ color = Color(0.498039, 0, 0, 1)
 [node name="WardContainer" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/StatsContainer/BoxContainer/StatsContainer2" instance=ExtResource("6_13e3p")]
 layout_mode = 2
 stat_name = "Ward"
-mouse_over_parent = NodePath("")
+
+[node name="ColorRect5" type="ColorRect" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/StatsContainer/BoxContainer"]
+custom_minimum_size = Vector2(2, 2)
+layout_mode = 2
+color = Color(0.498039, 0, 0, 1)
+
+[node name="StatsContainer3" type="HBoxContainer" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/StatsContainer/BoxContainer"]
+layout_mode = 2
+
+[node name="AccuracyContainer" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/StatsContainer/BoxContainer/StatsContainer3" instance=ExtResource("6_13e3p")]
+layout_mode = 2
+stat_name = "Accuracy"
+force_to_int = true
+
+[node name="ColorRect4" type="ColorRect" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/StatsContainer/BoxContainer/StatsContainer3"]
+custom_minimum_size = Vector2(2, 2)
+layout_mode = 2
+color = Color(0.498039, 0, 0, 1)
+
+[node name="EvasionContainer" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/StatsContainer/BoxContainer/StatsContainer3" instance=ExtResource("6_13e3p")]
+layout_mode = 2
+stat_name = "Evasion"
+force_to_int = true
+
+[node name="ColorRect5" type="ColorRect" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/StatsContainer/BoxContainer/StatsContainer3"]
+custom_minimum_size = Vector2(2, 2)
+layout_mode = 2
+color = Color(0.498039, 0, 0, 1)
+
+[node name="PotencyContainer" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/StatsContainer/BoxContainer/StatsContainer3" instance=ExtResource("6_13e3p")]
+layout_mode = 2
+stat_name = "Potency"
+force_to_int = true
+
+[node name="ColorRect6" type="ColorRect" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/StatsContainer/BoxContainer/StatsContainer3"]
+custom_minimum_size = Vector2(2, 2)
+layout_mode = 2
+color = Color(0.498039, 0, 0, 1)
+
+[node name="ProtectionContainer" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/StatsContainer/BoxContainer/StatsContainer3" instance=ExtResource("6_13e3p")]
+layout_mode = 2
+stat_name = "Protection"
+force_to_int = true
 
 [node name="PagesContainer" type="Container" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer" node_paths=PackedStringArray("background", "inner_container")]
 custom_minimum_size = Vector2(258, 74)

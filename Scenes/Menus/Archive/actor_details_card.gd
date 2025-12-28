@@ -23,6 +23,10 @@ extends BoxContainer
 @export var mag_atk_label:StatLabelContainer
 @export var armor_label:StatLabelContainer
 @export var ward_label:StatLabelContainer
+@export var acc_label:StatLabelContainer
+@export var eva_label:StatLabelContainer
+@export var pot_label:StatLabelContainer
+@export var pro_label:StatLabelContainer
 @export var description_box:DescriptionBox
 
 @export var resisances_container:ResistContainer
@@ -74,6 +78,10 @@ func set_actor(actor:BaseActor):
 	mag_atk_label.set_stat_values(actor)
 	armor_label.set_stat_values(actor)
 	ward_label.set_stat_values(actor)
+	eva_label.set_stat_values(actor)
+	acc_label.set_stat_values(actor)
+	pot_label.set_stat_values(actor)
+	pro_label.set_stat_values(actor)
 	
 	var title_page = actor.pages.get_title_page()
 	if title_page:

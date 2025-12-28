@@ -10,6 +10,9 @@ static var SelfTargetParams:TargetParameters = TargetParameters.new(
 
 enum TargetTypes {Self, FullArea, Spot, OpenSpot, Actor, Ally, Enemy, Corpse}
 
+static var ActorTargetTypes = [TargetTypes.Actor, TargetTypes.Ally, TargetTypes.Enemy]
+static var SpotTargetTypes = [TargetTypes.Spot, TargetTypes.OpenSpot]
+
 var _target_param_key
 var target_param_key:String:
 	get:
@@ -89,10 +92,10 @@ func get_area_of_effect(center:MapPos)->Array:
 	return effect_area.to_map_spots(center)
 
 func is_spot_target_type()->bool:
-	return (self.target_type == TargetTypes.Spot or 
-			self.target_type == TargetTypes.OpenSpot)
+	return SpotTargetTypes.has(self.target_type)
 
 func is_actor_target_type()->bool:
+	return ActorTargetTypes.has(self.target_type)
 	return (self.target_type == TargetTypes.Actor or 
 			self.target_type == TargetTypes.Ally or 
 			self.target_type == TargetTypes.Enemy or 
@@ -154,8 +157,10 @@ func get_valid_target_area(center:MapPos)->Dictionary:
 	_cached_target_area = los_dict
 	return los_dict
 
-func get_center_of_area(actor_pos:MapPos)->MapPos:
+func get_center_of_area(actor_pos:MapPos, include_user_spot:bool=false)->MapPos:
 	var spots =  target_area.to_map_spots(actor_pos)
+	if include_user_spot:
+		spots.append(Vector2i(actor_pos.x, actor_pos.y))
 	var min_x = spots[0].x
 	var max_x = spots[0].x
 	var min_y = spots[0].y
@@ -166,4 +171,13 @@ func get_center_of_area(actor_pos:MapPos)->MapPos:
 		if spot.x < min_x: min_x = spot.x
 		if spot.y > max_y: max_y = spot.y
 		if spot.y < min_y: min_y = spot.y
+	# Correct for even width area (0.5 center)
+	if include_user_spot:
+		var area_hight = max_y - min_y+1
+		if area_hight > 2 and (area_hight)%2 == 0 :
+			if actor_pos.dir == MapPos.Directions.North:
+				max_y += 1
+			elif actor_pos.dir == MapPos.Directions.South:
+				max_y += 1
+		
 	return MapPos.new((max_x + min_x) / 2, (max_y + min_y) / 2, actor_pos.z, actor_pos.dir)

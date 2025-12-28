@@ -32,7 +32,7 @@ const PhysicalDamageTypes_Strings:Array = [
 
 static func get_damage_color(damage_type, as_text = false):
 	if damage_type is String:
-		damage_type = DamageEvent.DamageTypes.get(damage_type)
+		damage_type = DamageEvent.DamageTypes.get(damage_type.trim_suffix(" Damage"))
 	var color_text = "000000"
 	match damage_type:
 		DamageEvent.DamageTypes.Slash: color_text = "8c4f4f"

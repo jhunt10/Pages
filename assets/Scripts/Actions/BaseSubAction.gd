@@ -5,7 +5,7 @@ extends GDScript
 
 enum SubActionPropTypes {
 	TargetParamKey, SetTargetKey, TargetKey, DamageKey, EffectKey, MissileKey, 
-	MoveValue, StringVal, IntVal, BoolVal, EnumVal, FloatVal, ArrayVal}
+	MoveValue, StringVal, IntVal, BoolVal, EnumVal, FloatVal, ArrayVal, DictVal}
 
 # Just incase I want to refactor do_thing to return more than a bool
 const Failed = false

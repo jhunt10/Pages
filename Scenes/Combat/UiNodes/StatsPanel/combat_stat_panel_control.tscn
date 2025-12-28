@@ -101,8 +101,7 @@ grow_vertical = 2
 texture = ExtResource("9_ejl1u")
 expand_mode = 1
 
-[node name="DescriptionBox" type="Container" parent="EffectIconControl/Icon" node_paths=PackedStringArray("name_label", "duration_label", "duration_type_label", "description_label", "background", "inner_container")]
-visible = false
+[node name="DescriptionBox" type="Container" parent="EffectIconControl/Icon" node_paths=PackedStringArray("name_label", "duration_label", "duration_container", "duration_type_label", "description_label", "background", "inner_container")]
 z_index = 25
 custom_minimum_size = Vector2(199, 79)
 layout_mode = 2
@@ -111,8 +110,9 @@ offset_right = 199.0
 offset_bottom = 113.0
 script = ExtResource("10_7hami")
 name_label = NodePath("BoxContainer/HBoxContainer/NameLabel")
-duration_label = NodePath("BoxContainer/HBoxContainer/DurationLabel")
-duration_type_label = NodePath("BoxContainer/HBoxContainer/DurationTypeLabel")
+duration_label = NodePath("BoxContainer/HBoxContainer/HBoxContainer/DurationLabel")
+duration_container = NodePath("BoxContainer/HBoxContainer/HBoxContainer")
+duration_type_label = NodePath("BoxContainer/HBoxContainer/HBoxContainer/DurationTypeLabel")
 description_label = NodePath("BoxContainer/RichTextLabel")
 background = NodePath("Background")
 inner_container = NodePath("BoxContainer")
@@ -138,17 +138,20 @@ layout_mode = 2
 theme = ExtResource("11_ptagv")
 text = "Buff Name"
 
-[node name="SpacerLabel" type="Label" parent="EffectIconControl/Icon/DescriptionBox/BoxContainer/HBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="EffectIconControl/Icon/DescriptionBox/BoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="SpacerLabel" type="Label" parent="EffectIconControl/Icon/DescriptionBox/BoxContainer/HBoxContainer/HBoxContainer"]
 layout_mode = 2
 theme = ExtResource("11_ptagv")
 text = ":  "
 
-[node name="DurationLabel" type="Label" parent="EffectIconControl/Icon/DescriptionBox/BoxContainer/HBoxContainer"]
+[node name="DurationLabel" type="Label" parent="EffectIconControl/Icon/DescriptionBox/BoxContainer/HBoxContainer/HBoxContainer"]
 layout_mode = 2
 theme = ExtResource("11_ptagv")
 text = "XX"
 
-[node name="DurationTypeLabel" type="Label" parent="EffectIconControl/Icon/DescriptionBox/BoxContainer/HBoxContainer"]
+[node name="DurationTypeLabel" type="Label" parent="EffectIconControl/Icon/DescriptionBox/BoxContainer/HBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(19, 17)
 layout_mode = 2
 theme = ExtResource("11_ptagv")

@@ -303,6 +303,17 @@
                 }
             },
             "SubActions": {
+                "FlashText": {
+                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_FlashText.gd",
+                    "#FrameIndex": 3,
+                    "#SubIndex": 0,
+                    "Text": "Guard",
+                    "Color": "[0.5,0.5,1,1]",
+                    "FlashTextData": {
+                        "LockVert": true,
+                        "EndTime": 0.5
+                    }
+                },
                 "Animation_Motion": {
                     "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_Animation_Motion.gd",
                     "#FrameIndex": 23,

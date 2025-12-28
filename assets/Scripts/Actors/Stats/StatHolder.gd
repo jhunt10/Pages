@@ -354,14 +354,10 @@ func _calc_cache_stats(emit_signal:bool=true):
 			agg_mods[mod.stat_name][mod.mod_type].append(mod.value)
 			var display_name = "=" + str(mod.value) + " " + mod.display_name
 		elif mod.mod_type	 == BaseStatMod.ModTypes.Add:
-			if not _base_stats.keys().has(mod.stat_name):
-				if not set_stats.keys().has(mod.stat_name):
-					set_stats[mod.stat_name] = 0
 			agg_mods[mod.stat_name][mod.mod_type].append(mod.value)
 			var display_name = "+" + str(mod.value) + " " + mod.display_name
 		elif mod.mod_type == BaseStatMod.ModTypes.AddStat:
 			var dep_stat_name = mod.dep_stat_name
-			
 			if key_depends_on_vals.has(dep_stat_name) and key_depends_on_vals[dep_stat_name].has(mod.stat_name):
 				printerr("StatHolder._calc_cache_stats: Circular dependancy found for stats %s <-> %s. Rejecting mod: %s" % [mod.stat_name, dep_stat_name, mod.display_name] )
 				continue
@@ -375,8 +371,13 @@ func _calc_cache_stats(emit_signal:bool=true):
 		else:
 			agg_mods[mod.stat_name][mod.mod_type].append(mod.value)
 			var display_name = "x" + str(mod.value) + " " + mod.display_name
-			
-		
+	
+	# Add a Set 0 Stat mod for modded stats that don't appear in Base Stats
+	for mod_stat_name in agg_mods.keys():
+		if not _base_stats.keys().has(mod_stat_name):
+			if not set_stats.keys().has(mod_stat_name):
+				set_stats[mod_stat_name] = 0
+	
 	if LOGGING: print("- Found: %s modded stats" % agg_mods.size())
 	
 	# Build temp stat list from base stats and stats created by mods

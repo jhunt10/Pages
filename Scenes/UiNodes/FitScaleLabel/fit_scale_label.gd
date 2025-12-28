@@ -22,10 +22,10 @@ func _resize():
 	_size_dirty = false
 	label.scale = Vector2(1, 1)
 	label.custom_minimum_size = Vector2i.ZERO
-	#print("Sizes: Self:( %s, %s ) Label:( %s, %s )" % [self.size.x, self.size.y, label.size.x, label.size.y])
+	print("Sizes: Self:( %s, %s ) Label:( %s, %s ) Text: '%s'" % [self.size.x, self.size.y, label.size.x, label.size.y, label.text])
 	var label_scale = min(1, self.size.x / label.size.x, self.size.y / label.size.y)
 	label.scale = Vector2(label_scale, label_scale)
-	#print("label_scale: %s" % [label_scale])
+	print("label_scale: %s" % [label_scale])
 	var new_x = 0
 	if center_x:
 		new_x = (self.size.x - (label_scale * label.size.x)) / 2

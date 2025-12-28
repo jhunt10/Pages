@@ -131,14 +131,19 @@ func load_init_state(sub_scene_data:Dictionary):
 	self.remove_child(GridCursor)
 	self.add_child(GridCursor)
 	
+	# Build GameState & Map Data
 	var map_data = MapController.get_map_data()
 	GameState = GameStateData.new()
 	GameState.set_map_data(map_data)
 	GameState.actor_entered_item_spot.connect(_on_actor_pickup_item)
 	
+	# Build Action Que Controller
 	QueController = ActionQueController.new()
 	QueController.end_of_round.connect(check_end_conditions)
+	
+	# Build Actors from Map Data
 	_player_actor_ids.clear()
+	var npcs_to_name = {}
 	var actor_count = map_data['Actors'].size()
 	var actor_index = 0
 	for actor_info:Dictionary in map_data['Actors']:
@@ -153,16 +158,21 @@ func load_init_state(sub_scene_data:Dictionary):
 			if new_actor:
 				new_actor.FactionIndex = 1
 			else:
-				printerr("CombatRootControl.load_init_state: Failed ti get or create actor with id %s" % [actor_info.get("ActorId", "NO_ID")])
+				printerr("CombatRootControl.load_init_state: Failed to get or create actor with id %s" % [actor_info.get("ActorId", "NO_ID")])
 		# Only Actor Key was provided
 		elif actor_info.keys().has("ActorKey") and actor_info["ActorKey"] != '':
 			var actor_key = actor_info['ActorKey']
 			if actor_key.begins_with("Player"):
-				continue
+				continue # This shouldn't happen? Maybe in scripted scenes?
 			else:
+				# Spawn Enemy NPC
 				new_actor = ActorLibrary.create_actor(actor_key, {})
 				if new_actor:
 					new_actor.FactionIndex = 1
+					var display_name = new_actor.get_display_name()
+					if not npcs_to_name.keys().has(display_name):
+						npcs_to_name[display_name] = []
+					npcs_to_name[display_name].append(new_actor)
 		
 		if new_actor:
 			if actor_info['WaitToSpawn']:
@@ -172,6 +182,14 @@ func load_init_state(sub_scene_data:Dictionary):
 				add_actor(new_actor, actor_pos)
 		actor_index += 1
 		loading_actor_progressed.emit(actor_count, actor_index)
+	
+	# Name NPC Actors
+	for display_name in npcs_to_name.keys():
+		var index = 0
+		for actor:BaseActor in npcs_to_name[display_name]:
+			actor.set_display_name(display_name+" " +str(index))
+			index += 1
+	
 	
 	## Make Nodes for each player actor, but hide them until they are placed
 	#for player_actor:BaseActor in StoryState.list_party_actors():
@@ -381,6 +399,9 @@ static func list_player_actors()->Array:
 		out_list.append(actor)
 	return out_list
 
+func get_current_player_index()->int:
+	return _current_player_index
+	
 func get_current_player_actor()->BaseActor:
 	return get_player_actor(_current_player_index)
 
@@ -401,8 +422,10 @@ func get_player_actor(index:int = _current_player_index)->BaseActor:
 			return ActorLibrary.get_actor(player_id)
 	return null
 
-func get_next_player_index()->int:
-	var next_index = (_current_player_index + 1) % _player_actor_ids.size()
+func get_next_player_index(use_index:int=-1)->int:
+	if use_index < 0:
+		use_index = _current_player_index
+	var next_index = (use_index + 1) % _player_actor_ids.size()
 	var extra_check = 0
 	#while StoryState.get_player_id(next_index) == null and extra_check < 4:
 		#extra_check += 1

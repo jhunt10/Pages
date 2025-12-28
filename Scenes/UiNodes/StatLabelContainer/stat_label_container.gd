@@ -6,6 +6,7 @@ extends BoxContainer
 @export var icon:TextureRect
 @export var value_label:Label
 @export var percent_value:Label
+@export var force_to_int:bool
 
 @export var mouse_over_parent:Control
 
@@ -28,6 +29,8 @@ func set_values(stat_name:String, actor:BaseActor):
 
 func set_stat_values(actor:BaseActor):
 	var stat_val = actor.stats.get_stat(stat_name, 0)
+	if force_to_int:
+		stat_val = floori(stat_val)
 	value_label.text = str(stat_val)
 	_actor = actor
 	if percent_value:

@@ -145,6 +145,15 @@ func _process(delta: float) -> void:
 		#if event.is_released():
 			#stop_dragging()
 
+
+func _input(event: InputEvent) -> void:
+	if event is InputEventMouseButton and _current_details_card:
+		var mouse_event:InputEventMouseButton = event as InputEventMouseButton
+		var mouse_pos = mouse_event.global_position
+		if not _current_details_card.get_global_rect().has_point(mouse_pos):
+			_current_details_card._on_exit_button()
+
+
 var load_start_time
 var first_frame_time
 #func first_load(actor:BaseActor):

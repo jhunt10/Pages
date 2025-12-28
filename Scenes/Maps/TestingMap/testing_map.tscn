@@ -1268,24 +1268,23 @@ map_coor = Vector2i(6, 3)
 
 [node name="SpwanNode_TestTarget_Armored" type="Sprite2D" parent="MapMarkerMapLayer"]
 modulate = Color(0.303233, 0.303233, 0.303233, 1)
-position = Vector2(176, 208)
+position = Vector2(208, 176)
 texture = ExtResource("10_361jm")
 script = ExtResource("11_vji11")
 spawn_actor_key = "TargetDummy_Phy"
 spawn_actor_id = "Right_TargetDummy_Armored"
 facing = 2
-map_coor = Vector2i(5, 6)
+map_coor = Vector2i(6, 5)
 
 [node name="SpwanNode_TestTarget_Armored2" type="Sprite2D" parent="MapMarkerMapLayer"]
-visible = false
 modulate = Color(0.303233, 0.303233, 0.303233, 1)
-position = Vector2(144, 208)
+position = Vector2(240, 176)
 texture = ExtResource("10_361jm")
 script = ExtResource("11_vji11")
 spawn_actor_key = "TargetDummy_Phy"
 spawn_actor_id = "Center_TargetDummy_Armored"
 facing = 2
-map_coor = Vector2i(4, 6)
+map_coor = Vector2i(7, 5)
 
 [node name="SpwanNode_TestTarget_Armored3" type="Sprite2D" parent="MapMarkerMapLayer"]
 visible = false

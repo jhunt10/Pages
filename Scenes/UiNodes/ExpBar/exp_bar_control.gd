@@ -68,12 +68,6 @@ func _sync():
 			if level_up_button_animation:
 				level_up_button_animation.play('waiting')
 
-func _unhandled_input(event: InputEvent) -> void:
-	if event is InputEventKey and event.is_pressed():
-		if event.keycode == KEY_Y and _actor:
-			_actor.stats.add_experiance(50)
-			_sync()
-
 func _on_mouse_enter():
 	mouse_over_control.show()
 func _on_mouse_exit():

@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://mglbobw62vc1" path="res://assets/Sprites/UI/QueInputAndDisplay/page_gap_slot.png" id="7_xxjie"]
 [ext_resource type="Texture2D" uid="uid://clnubp7dsthut" path="res://assets/Sprites/UI/QueInputAndDisplay/dead_page_slot.png" id="8_2n88r"]
 
-[node name="QueDisplayControl" type="Control" node_paths=PackedStringArray("portrait", "main_container", "slot_button_prefab", "slots_container")]
+[node name="QueDisplayControl" type="Control" node_paths=PackedStringArray("portrait", "main_container", "premade_que_button", "slots_container")]
 custom_minimum_size = Vector2(100, 56)
 layout_mode = 3
 anchors_preset = 0
@@ -18,7 +18,7 @@ offset_bottom = 56.0
 script = ExtResource("1_qogk3")
 portrait = NodePath("HBoxContainer/PortraitTextureRect")
 main_container = NodePath("HBoxContainer")
-slot_button_prefab = NodePath("HBoxContainer/PageSlotButtonPrefab")
+premade_que_button = NodePath("HBoxContainer/PageSlotButtonPrefab")
 slots_container = NodePath("HBoxContainer/SlotsContainer")
 show_gaps = true
 

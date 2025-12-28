@@ -4,7 +4,7 @@ const FORCE_RELOAD = false
 
 enum FlashTextType {
 	Normal_Dmg, Blocked_Dmg, Crit_Dmg, Healing_Dmg, DOT_Dmg,
-	NoAmmo, NoTarget, Miss, Evade, Protect}
+	NoAmmo, NoTarget, Miss, Evade, Protect, Message}
 
 #static func create_attack_vfx_node(from_actor:BaseActor, to_actor:BaseActor, bullet_vfx_key:String, vfx_data:Dictionary):
 	#var temp_data = vfx_data.duplicate(true)
@@ -12,7 +12,7 @@ enum FlashTextType {
 	#temp_data['HostActorId'] = to_actor.Id
 	#return create_vfx_on_actor(to_actor, bullet_vfx_key, temp_data)
 
-static func create_flash_text(actor_or_holder, value, flash_text_type:FlashTextType):
+static func create_flash_text(actor_or_holder, value, flash_text_type:FlashTextType, data:Dictionary = {}, color:Color = Color.WHITE):
 	var vfx_holder = null
 	if actor_or_holder is BaseActorNode:
 		vfx_holder = actor_or_holder.vfx_holder
@@ -25,7 +25,7 @@ static func create_flash_text(actor_or_holder, value, flash_text_type:FlashTextT
 	if not vfx_holder:
 		return null
 	var text_value = str(value)
-	vfx_holder.flash_text_controller.add_flash_text(text_value, flash_text_type)
+	vfx_holder.flash_text_controller.add_flash_text(text_value, flash_text_type, data, color)
 
 static func create_damage_effect(target_actor:BaseActor, vfx_key:String, vfx_data:Dictionary):
 	if FORCE_RELOAD: MainRootNode.vfx_libray.reload_vfxs()

@@ -4,12 +4,12 @@ extends Control
 @export var background:TextureRect
 @export var page_icon:TextureRect
 @export var button:Button
+var is_gap:bool = false
 
 @export var empty_background_texture:Texture2D
 @export var gap_background_texture:Texture2D
 @export var filled_background_texture:Texture2D
 
-var is_gap:bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

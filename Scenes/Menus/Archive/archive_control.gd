@@ -17,6 +17,8 @@ var adding_tabs:bool = false
 func _ready() -> void:
 	premade_faction_label.hide()
 	for faction in ActorLibrary.list_factions():
+		if faction == "BaseFaction":
+			continue
 		var button:CampOptionButton = premade_faction_label.duplicate()
 		button.text = faction
 		button.button.pressed.connect(on_faction_button_pressed.bind(faction))
@@ -25,6 +27,7 @@ func _ready() -> void:
 		button.show()
 	actors_tab_bar.tab_selected.connect(on_actor_tab_selected)
 	exit_button.pressed.connect(on_close)
+	on_faction_button_pressed("Players")
 
 func on_faction_button_pressed(faction_key):
 	#for child in actor_list_container.get_children():

@@ -1,4 +1,4 @@
-[gd_scene load_steps=65 format=3 uid="uid://dfeilp6hbiuqs"]
+[gd_scene load_steps=71 format=3 uid="uid://dfeilp6hbiuqs"]
 
 [ext_resource type="Script" path="res://Scenes/Combat/combat_scene.gd" id="1_crigy"]
 [ext_resource type="Texture2D" uid="uid://51dfjr6b84bj" path="res://assets/Sprites/UI/BackPatches/PaperPatch_Big_184x128_32.png" id="3_idpcw"]
@@ -34,13 +34,20 @@
 [ext_resource type="Theme" uid="uid://cayt153s5ro4a" path="res://Scenes/Themes/standard_theme_red.tres" id="27_3mvka"]
 [ext_resource type="Script" path="res://Scenes/Combat/UiNodes/DropMessages/drop_message_control.gd" id="27_7037i"]
 [ext_resource type="Texture2D" uid="uid://88hhiituab5b" path="res://Scenes/Combat/UiNodes/CameraLock/CameraLock_Unlocked.png" id="27_cweuh"]
+[ext_resource type="Texture2D" uid="uid://deqwpr7qu8fp2" path="res://assets/Sprites/UI/CharacterEdit/InventorySlotBackground.png" id="28_gr06v"]
 [ext_resource type="Script" path="res://Scenes/Combat/UiNodes/DropMessages/drop_message_card.gd" id="28_lvk4q"]
+[ext_resource type="Texture2D" uid="uid://cr1m3llr0pgtd" path="res://Scenes/Combat/UiNodes/QueDisplay/EmptySlotBackground.png" id="28_mev1n"]
 [ext_resource type="Texture2D" uid="uid://dx5cq5wifod2g" path="res://Scenes/Combat/UiNodes/CameraLock/CameraLock_Following.png" id="28_mng7g"]
 [ext_resource type="Script" path="res://Scenes/UiNodes/back_patch_container.gd" id="29_vvabq"]
+[ext_resource type="Texture2D" uid="uid://b6u5htxioouqh" path="res://Scenes/Dialog/DialogBox/UnknownSpeakerPort.png" id="29_xnfon"]
+[ext_resource type="Texture2D" uid="uid://ds06ojwvkmeit" path="res://Scenes/Combat/UiNodes/TargetInputControl/ArrowIcon.png" id="30_80aou"]
 [ext_resource type="Texture2D" uid="uid://5hu0ttx4jxuo" path="res://assets/Sprites/UI/BackPatches/PaperPatch_64x92_16.png" id="30_emljn"]
+[ext_resource type="Texture2D" uid="uid://coojsfckia2jk" path="res://Scenes/Combat/UiNodes/QueDisplay/UnknownPageSlotIcon.png" id="30_jnxm8"]
 [ext_resource type="Script" path="res://Scenes/Combat/UiNodes/ActorPlacer/actor_placer_control.gd" id="31_i5f6p"]
-[ext_resource type="Script" path="res://Scenes/Combat/UiNodes/target_input_control.gd" id="31_jtehh"]
+[ext_resource type="Script" path="res://Scenes/Combat/UiNodes/TargetInputControl/target_input_control.gd" id="31_jtehh"]
 [ext_resource type="Texture2D" uid="uid://bibqsudhjw4qe" path="res://assets/Sprites/Paper/Mundane_Background.png" id="31_rn36e"]
+[ext_resource type="Theme" uid="uid://dwinll8pgdjhc" path="res://Scenes/Themes/standard_theme.tres" id="31_vhyt7"]
+[ext_resource type="PackedScene" uid="uid://br08s3uioxwuh" path="res://Scenes/Combat/UiNodes/QueInput/page_details_hover_box.tscn" id="32_1gp6c"]
 [ext_resource type="Texture2D" uid="uid://io35wpu802fp" path="res://assets/Sprites/UI/BackPatches/Patch_64_12.png" id="32_f81f5"]
 [ext_resource type="Texture2D" uid="uid://ccwj8ucsjhl6w" path="res://assets/Sprites/UI/BackPatches/Patch_64_12_Dark.png" id="32_h43dd"]
 [ext_resource type="Texture2D" uid="uid://bau63162pa376" path="res://ObjectDefs/ClassDefs/Soldier/Actors/Sprites/SoldierIcon.png" id="33_0bnqe"]
@@ -50,7 +57,6 @@
 [ext_resource type="PackedScene" uid="uid://dqruidykupjgt" path="res://Scenes/Combat/UiNodes/OptionSelectMenu/option_select_menu.tscn" id="34_6y7uw"]
 [ext_resource type="Texture2D" uid="uid://bvmw0aystxedy" path="res://ObjectDefs/ClassDefs/Rogue/Actors/Sprites/RogueIcon.png" id="34_kd43d"]
 [ext_resource type="Texture2D" uid="uid://c4yedxpiinlff" path="res://Scenes/Menus/CharacterMenu/MenuPages/outline.png" id="34_wuopp"]
-[ext_resource type="Script" path="res://Scenes/UiNodes/FitScaleLabel/fit_scale_label.gd" id="35_4k8uv"]
 [ext_resource type="Script" path="res://Scenes/Combat/UiNodes/CombatLog/combat_log_controller.gd" id="35_swuh7"]
 [ext_resource type="PackedScene" uid="uid://bh3p8kqb34n5r" path="res://Scenes/Combat/StartCombatScreen/start_combat_screen.tscn" id="37_2ks4j"]
 [ext_resource type="Script" path="res://Scenes/Combat/dev_map_drawing.gd" id="37_fh4f7"]
@@ -603,72 +609,242 @@ offset_bottom = 36.0
 text = "Next Actor
 "
 
-[node name="TargetInputControl" type="Control" parent="MoveableCamera2D/CanvasLayer/CombatUiControl" node_paths=PackedStringArray("button", "title_label", "button_label")]
+[node name="TargetInputControl" type="Control" parent="MoveableCamera2D/CanvasLayer/CombatUiControl" node_paths=PackedStringArray("button", "title_label", "target_type_label", "button_label", "actor_portrait", "page_icon", "page_details", "lock_on_container", "lock_on_box", "target_icon", "target_icon_container", "spot_container", "x_label", "y_label")]
 layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
+anchor_top = 0.7
+anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 0
 mouse_filter = 2
 script = ExtResource("31_jtehh")
-button = NodePath("Button")
-title_label = NodePath("NinePatchRect/Label")
-button_label = NodePath("Button/NinePatchRect2/Label")
+button = NodePath("CenterContainer/VBoxContainer/Button")
+title_label = NodePath("CenterContainer/VBoxContainer/NinePatchRect/VBoxContainer/HBoxContainer/TitleLabel")
+target_type_label = NodePath("CenterContainer/VBoxContainer/NinePatchRect/VBoxContainer/HBoxContainer/TargetTypeLabel")
+button_label = NodePath("CenterContainer/VBoxContainer/Button/NinePatchRect2/Label")
+unknown_icon_texture = ExtResource("30_jnxm8")
+actor_portrait = NodePath("CenterContainer/VBoxContainer/HBoxContainer/BackPatchContainer/HBoxContainer/PortraitBackground/PortraitTextureRect")
+page_icon = NodePath("CenterContainer/VBoxContainer/HBoxContainer/BackPatchContainer/HBoxContainer/PageBackground/PageTextureRect")
+page_details = NodePath("CenterContainer/VBoxContainer/HBoxContainer/BackPatchContainer/HBoxContainer/PageBackground/PageDetailsHoverBox")
+lock_on_container = NodePath("CenterContainer/VBoxContainer/NinePatchRect/VBoxContainer/TargetLockContainer")
+lock_on_box = NodePath("CenterContainer/VBoxContainer/NinePatchRect/VBoxContainer/TargetLockContainer/CheckBox")
+target_icon = NodePath("CenterContainer/VBoxContainer/HBoxContainer/BackPatchContainer/HBoxContainer/TargetBackground/TargetTextureRect")
+target_icon_container = NodePath("CenterContainer/VBoxContainer/HBoxContainer/BackPatchContainer/HBoxContainer/TargetBackground")
+spot_container = NodePath("CenterContainer/VBoxContainer/HBoxContainer/BackPatchContainer/HBoxContainer/SpotTargetContainer")
+x_label = NodePath("CenterContainer/VBoxContainer/HBoxContainer/BackPatchContainer/HBoxContainer/SpotTargetContainer/XLablesContainer/XValueLabel")
+y_label = NodePath("CenterContainer/VBoxContainer/HBoxContainer/BackPatchContainer/HBoxContainer/SpotTargetContainer/YLabelsContainer/YValueLabel")
 
-[node name="NinePatchRect" type="NinePatchRect" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/TargetInputControl"]
-custom_minimum_size = Vector2(200, 32)
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -100.0
-offset_top = -128.0
-offset_right = 100.0
-offset_bottom = -96.0
-grow_horizontal = 2
-grow_vertical = 0
-texture = ExtResource("32_f81f5")
-patch_margin_left = 12
-patch_margin_top = 12
-patch_margin_right = 12
-patch_margin_bottom = 12
-
-[node name="Label" type="Label" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/TargetInputControl/NinePatchRect"]
+[node name="CenterContainer" type="CenterContainer" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/TargetInputControl"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("22_gl452")
-text = "Select Target Actor"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/TargetInputControl/CenterContainer"]
+layout_mode = 2
+theme_override_constants/separation = 1
+alignment = 1
+
+[node name="NinePatchRect" type="NinePatchRect" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/TargetInputControl/CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(188, 54)
+layout_mode = 2
+texture = ExtResource("32_f81f5")
+patch_margin_left = 12
+patch_margin_top = 12
+patch_margin_right = 12
+patch_margin_bottom = 12
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/TargetInputControl/CenterContainer/VBoxContainer/NinePatchRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 7.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/TargetInputControl/CenterContainer/VBoxContainer/NinePatchRect/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="TitleLabel" type="Label" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/TargetInputControl/CenterContainer/VBoxContainer/NinePatchRect/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("38_waysr")
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/font_size = 18
+text = "Select Target "
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Button" type="Button" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/TargetInputControl"]
-self_modulate = Color(1, 1, 1, 0)
-custom_minimum_size = Vector2(200, 64)
+[node name="TargetTypeLabel" type="Label" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/TargetInputControl/CenterContainer/VBoxContainer/NinePatchRect/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("38_waysr")
+theme_override_colors/font_color = Color(0.470588, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 18
+text = "Actor"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TargetLockContainer" type="HBoxContainer" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/TargetInputControl/CenterContainer/VBoxContainer/NinePatchRect/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="TitleLabel" type="Label" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/TargetInputControl/CenterContainer/VBoxContainer/NinePatchRect/VBoxContainer/TargetLockContainer"]
+layout_mode = 2
+theme = ExtResource("38_waysr")
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/font_size = 18
+text = "Lock On:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CheckBox" type="CheckBox" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/TargetInputControl/CenterContainer/VBoxContainer/NinePatchRect/VBoxContainer/TargetLockContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/TargetInputControl/CenterContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="BackPatchContainer" type="Container" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/TargetInputControl/CenterContainer/VBoxContainer/HBoxContainer" node_paths=PackedStringArray("background", "inner_container")]
+custom_minimum_size = Vector2(188, 56)
+layout_mode = 2
+script = ExtResource("29_vvabq")
+background = NodePath("Background")
+inner_container = NodePath("HBoxContainer")
+margin_override = 8
+
+[node name="Background" type="NinePatchRect" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/TargetInputControl/CenterContainer/VBoxContainer/HBoxContainer/BackPatchContainer"]
+layout_mode = 2
+texture = ExtResource("32_f81f5")
+patch_margin_left = 12
+patch_margin_top = 12
+patch_margin_right = 12
+patch_margin_bottom = 12
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/TargetInputControl/CenterContainer/VBoxContainer/HBoxContainer/BackPatchContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="PortraitBackground" type="TextureRect" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/TargetInputControl/CenterContainer/VBoxContainer/HBoxContainer/BackPatchContainer/HBoxContainer"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("28_gr06v")
+expand_mode = 5
+stretch_mode = 5
+
+[node name="PortraitTextureRect" type="TextureRect" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/TargetInputControl/CenterContainer/VBoxContainer/HBoxContainer/BackPatchContainer/HBoxContainer/PortraitBackground"]
 layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
+anchors_preset = -1
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -100.0
-offset_top = -92.0
-offset_right = 100.0
-offset_bottom = -28.0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = -1.0
+offset_bottom = -1.0
 grow_horizontal = 2
-grow_vertical = 0
+grow_vertical = 2
+texture = ExtResource("29_xnfon")
+expand_mode = 1
+
+[node name="PageBackground" type="TextureRect" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/TargetInputControl/CenterContainer/VBoxContainer/HBoxContainer/BackPatchContainer/HBoxContainer"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("28_mev1n")
+expand_mode = 5
+stretch_mode = 5
+
+[node name="PageTextureRect" type="TextureRect" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/TargetInputControl/CenterContainer/VBoxContainer/HBoxContainer/BackPatchContainer/HBoxContainer/PageBackground"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("30_jnxm8")
+expand_mode = 5
+stretch_mode = 5
+
+[node name="PageDetailsHoverBox" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/TargetInputControl/CenterContainer/VBoxContainer/HBoxContainer/BackPatchContainer/HBoxContainer/PageBackground" instance=ExtResource("32_1gp6c")]
+visible = false
+offset_left = 20.0
+offset_top = -6.0
+offset_right = 20.0
+offset_bottom = -6.0
+
+[node name="ArrowTextureRect" type="TextureRect" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/TargetInputControl/CenterContainer/VBoxContainer/HBoxContainer/BackPatchContainer/HBoxContainer"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("30_80aou")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="SpotTargetContainer" type="VBoxContainer" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/TargetInputControl/CenterContainer/VBoxContainer/HBoxContainer/BackPatchContainer/HBoxContainer"]
+visible = false
+layout_mode = 2
+
+[node name="XLablesContainer" type="HBoxContainer" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/TargetInputControl/CenterContainer/VBoxContainer/HBoxContainer/BackPatchContainer/HBoxContainer/SpotTargetContainer"]
+layout_mode = 2
+
+[node name="XTitleLabel" type="Label" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/TargetInputControl/CenterContainer/VBoxContainer/HBoxContainer/BackPatchContainer/HBoxContainer/SpotTargetContainer/XLablesContainer"]
+layout_mode = 2
+theme = ExtResource("31_vhyt7")
+text = "X:"
+
+[node name="XValueLabel" type="Label" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/TargetInputControl/CenterContainer/VBoxContainer/HBoxContainer/BackPatchContainer/HBoxContainer/SpotTargetContainer/XLablesContainer"]
+layout_mode = 2
+theme = ExtResource("31_vhyt7")
+text = "-20"
+
+[node name="YLabelsContainer" type="HBoxContainer" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/TargetInputControl/CenterContainer/VBoxContainer/HBoxContainer/BackPatchContainer/HBoxContainer/SpotTargetContainer"]
+layout_mode = 2
+
+[node name="YTitleLabel" type="Label" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/TargetInputControl/CenterContainer/VBoxContainer/HBoxContainer/BackPatchContainer/HBoxContainer/SpotTargetContainer/YLabelsContainer"]
+layout_mode = 2
+theme = ExtResource("31_vhyt7")
+text = "Y:"
+
+[node name="YValueLabel" type="Label" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/TargetInputControl/CenterContainer/VBoxContainer/HBoxContainer/BackPatchContainer/HBoxContainer/SpotTargetContainer/YLabelsContainer"]
+layout_mode = 2
+theme = ExtResource("31_vhyt7")
+text = "-20"
+
+[node name="TargetBackground" type="TextureRect" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/TargetInputControl/CenterContainer/VBoxContainer/HBoxContainer/BackPatchContainer/HBoxContainer"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("28_gr06v")
+expand_mode = 5
+stretch_mode = 5
+
+[node name="TargetTextureRect" type="TextureRect" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/TargetInputControl/CenterContainer/VBoxContainer/HBoxContainer/BackPatchContainer/HBoxContainer/TargetBackground"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = -1.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("30_jnxm8")
+expand_mode = 1
+
+[node name="Button" type="Button" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/TargetInputControl/CenterContainer/VBoxContainer"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(188, 64)
+layout_mode = 2
 text = "Confirm"
 
-[node name="NinePatchRect2" type="NinePatchRect" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/TargetInputControl/Button"]
-custom_minimum_size = Vector2(200, 32)
+[node name="NinePatchRect2" type="NinePatchRect" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/TargetInputControl/CenterContainer/VBoxContainer/Button"]
+custom_minimum_size = Vector2(188, 32)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -681,7 +857,7 @@ patch_margin_top = 12
 patch_margin_right = 12
 patch_margin_bottom = 12
 
-[node name="Label" type="Label" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/TargetInputControl/Button/NinePatchRect2"]
+[node name="Label" type="Label" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/TargetInputControl/CenterContainer/VBoxContainer/Button/NinePatchRect2"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -800,6 +976,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="GameVictoryScreen" type="Control" parent="MoveableCamera2D/CanvasLayer/CombatUiControl" node_paths=PackedStringArray("rounds_label", "enemies_label", "exp_label", "money_label", "camp_button", "camp_button_label", "premade_pickup_page", "pickup_pages_container", "premade_pickup_item", "pickup_items_container", "game_unlock_screen")]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1141,6 +1318,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="GameUnlockScreen" type="Control" parent="MoveableCamera2D/CanvasLayer/CombatUiControl" node_paths=PackedStringArray("new_actor_name_label", "new_actor_icon", "camp_button")]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1269,7 +1447,7 @@ layout_mode = 2
 theme = ExtResource("27_3mvka")
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 32
-text = " has join the Party"
+text = " has joined the Party"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -1314,26 +1492,8 @@ text = "Continue"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="FitScaleLabel" type="Control" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/GameUnlockScreen" node_paths=PackedStringArray("label")]
-custom_minimum_size = Vector2(300, 32)
-layout_mode = 3
-anchors_preset = 0
-script = ExtResource("35_4k8uv")
-label = NodePath("TitleLabel")
-text = "Actor Name"
-
-[node name="TitleLabel" type="Label" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/GameUnlockScreen/FitScaleLabel"]
-layout_mode = 2
-offset_top = 2.0
-offset_right = 181.0
-offset_bottom = 35.0
-scale = Vector2(0.828729, 0.828729)
-theme = ExtResource("38_waysr")
-theme_override_font_sizes/font_size = 32
-text = "Actor Name"
-vertical_alignment = 2
-
 [node name="DropMessageControl" type="Control" parent="MoveableCamera2D/CanvasLayer/CombatUiControl" node_paths=PackedStringArray("premade_drop_card")]
+visible = false
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5

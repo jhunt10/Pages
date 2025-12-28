@@ -287,7 +287,7 @@
     "HolyWeaponEffect": {
         "!ObjectScript": "res://assets/Scripts/Actors/Effects/BaseEffect.gd",
         "#ObjDetails": {
-            "Description": "Gain @@#AtkMod:HolyWeaponBaseAtkMod:DmgMod:HolyWeaponDmgMod@@ on @@#Color:Red:Weapon Attacks@@ against @@#Color:Red:Enemies@@. If the Enemy has the @@#Color:DmgColor:Dark@@ Tag, this damage is added as @@#Color:DmgColor:Light Damage@@ instead.",
+            "Description": "Gain @@#AtkMod:HolyWeaponBaseAtkMod:DmgMod:HolyWeaponDmgMod:Value@@ on @@#Color:Red:Weapon Attacks@@ against @@#Color:Red:Enemies@@. If the Enemy has the @@#Color:DmgColor:Dark@@ Tag, this damage is added as @@#Color:DmgColor:Light Damage@@ instead.",
             "DisplayName": "Holy Weapon",
             "LargeIcon": "Sprites/HolyWeapon.png",
             "ObjectType": "Effect",

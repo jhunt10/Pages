@@ -1,0 +1,261 @@
+[gd_scene load_steps=17 format=3 uid="uid://br08s3uioxwuh"]
+
+[ext_resource type="Script" path="res://Scenes/Combat/UiNodes/QueInput/que_page_hover_box.gd" id="1_8mejn"]
+[ext_resource type="Script" path="res://Scenes/UiNodes/back_patch_container.gd" id="2_j8m3u"]
+[ext_resource type="Texture2D" uid="uid://5hu0ttx4jxuo" path="res://assets/Sprites/UI/BackPatches/PaperPatch_64x92_16.png" id="3_awul1"]
+[ext_resource type="Theme" uid="uid://bfce41la62bs6" path="res://Scenes/Themes/readable_theme.tres" id="4_scwll"]
+[ext_resource type="Script" path="res://Scenes/UiNodes/FitScaleLabel/fit_scale_label.gd" id="5_ueap1"]
+[ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/ItemDetailsCard/cost_container.gd" id="6_nqb00"]
+[ext_resource type="Texture2D" uid="uid://dhtsefdcfxbg8" path="res://assets/Sprites/UI/SymbolIcons/AmmoSymbol_Gen.png" id="7_46tna"]
+[ext_resource type="Texture2D" uid="uid://ckym0e60eik1k" path="res://assets/Sprites/UI/SymbolIcons/AmmoSymbol_Phy.png" id="8_cugn1"]
+[ext_resource type="Texture2D" uid="uid://cexlfs7svl17c" path="res://assets/Sprites/UI/SymbolIcons/AmmoSymbol_Mag.png" id="9_q7t0w"]
+[ext_resource type="Texture2D" uid="uid://cyt5q4hutdp6y" path="res://assets/Sprites/UI/SymbolIcons/AmmoSymbol_Abn.png" id="10_eporv"]
+[ext_resource type="Theme" uid="uid://cayt153s5ro4a" path="res://Scenes/Themes/standard_theme_red.tres" id="11_4xuiv"]
+[ext_resource type="Theme" uid="uid://dwinll8pgdjhc" path="res://Scenes/Themes/standard_theme.tres" id="12_lc4bm"]
+[ext_resource type="Texture2D" uid="uid://br058igskmkwd" path="res://assets/Sprites/UI/SymbolIcons/AccuracySymbol.png" id="13_ns8f6"]
+[ext_resource type="Texture2D" uid="uid://dgxwfm0wf7rhw" path="res://assets/Sprites/UI/SymbolIcons/PotencySymbol.png" id="14_6sxbo"]
+[ext_resource type="PackedScene" uid="uid://bqi05unl37q0p" path="res://Scenes/UiNodes/DamageLabelContainer/damage_label_container.tscn" id="15_27co4"]
+[ext_resource type="Script" path="res://Scenes/UiNodes/DescriptionBox/description_box.gd" id="16_k0th1"]
+
+[node name="PageDetailsHoverBox" type="Control" node_paths=PackedStringArray("backpatch", "title_label", "description_box", "target_type_label", "current_ammo_label", "cost_container", "damage_label", "damage_container", "ammo_acc_pot_container", "accuracy_icon", "accuracy_label", "potency_icon", "potency_label", "ammo_acc_pot_line", "damage_line")]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_8mejn")
+backpatch = NodePath("BackPatchContainer")
+title_label = NodePath("BackPatchContainer/BoxContainer/FitScaleLabel")
+description_box = NodePath("BackPatchContainer/BoxContainer/DescriptionBox")
+target_type_label = NodePath("BackPatchContainer/BoxContainer/AmmoAccPotContainer/TargetTypeLabel")
+current_ammo_label = NodePath("BackPatchContainer/BoxContainer/AmmoAccPotContainer/AmmoContainer/CostLabel/CurrentAmmoLabel")
+cost_container = NodePath("BackPatchContainer/BoxContainer/AmmoAccPotContainer/AmmoContainer")
+damage_label = NodePath("BackPatchContainer/BoxContainer/DamageContainer")
+damage_container = NodePath("BackPatchContainer/BoxContainer/DamageContainer")
+ammo_acc_pot_container = NodePath("BackPatchContainer/BoxContainer/AmmoAccPotContainer")
+accuracy_icon = NodePath("BackPatchContainer/BoxContainer/AmmoAccPotContainer/AccIcon")
+accuracy_label = NodePath("BackPatchContainer/BoxContainer/AmmoAccPotContainer/AccLabel")
+potency_icon = NodePath("BackPatchContainer/BoxContainer/AmmoAccPotContainer/PotIcon")
+potency_label = NodePath("BackPatchContainer/BoxContainer/AmmoAccPotContainer/PotLabel")
+ammo_acc_pot_line = NodePath("BackPatchContainer/BoxContainer/ColorRect2")
+damage_line = NodePath("BackPatchContainer/BoxContainer/ColorRect3")
+
+[node name="BackPatchContainer" type="Container" parent="." node_paths=PackedStringArray("background", "inner_container")]
+custom_minimum_size = Vector2(256, 141)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -138.0
+offset_top = -136.0
+offset_right = 118.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 0
+script = ExtResource("2_j8m3u")
+background = NodePath("NinePatchRect")
+inner_container = NodePath("BoxContainer")
+margin_override = 8
+
+[node name="NinePatchRect" type="NinePatchRect" parent="BackPatchContainer"]
+layout_mode = 2
+texture = ExtResource("3_awul1")
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+
+[node name="BoxContainer" type="BoxContainer" parent="BackPatchContainer"]
+custom_minimum_size = Vector2(240, 0)
+layout_mode = 2
+vertical = true
+
+[node name="FitScaleLabel" type="Control" parent="BackPatchContainer/BoxContainer" node_paths=PackedStringArray("label")]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+theme = ExtResource("4_scwll")
+script = ExtResource("5_ueap1")
+label = NodePath("Label")
+text = "Page Name"
+center_x = true
+
+[node name="Label" type="Label" parent="BackPatchContainer/BoxContainer/FitScaleLabel"]
+layout_mode = 1
+offset_right = 124.0
+offset_bottom = 25.0
+theme_override_font_sizes/font_size = 24
+text = "Page Name"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ColorRect" type="ColorRect" parent="BackPatchContainer/BoxContainer"]
+custom_minimum_size = Vector2(0, 1)
+layout_mode = 2
+color = Color(0.498039, 0.4, 0.376471, 1)
+
+[node name="AmmoAccPotContainer" type="HBoxContainer" parent="BackPatchContainer/BoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="VSeparator" type="VSeparator" parent="BackPatchContainer/BoxContainer/AmmoAccPotContainer"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="AmmoContainer" type="HBoxContainer" parent="BackPatchContainer/BoxContainer/AmmoAccPotContainer" node_paths=PackedStringArray("count_val_label", "cost_val_label", "clip_val_label", "ammo_icon_rect")]
+layout_mode = 2
+script = ExtResource("6_nqb00")
+count_val_label = NodePath("CostLabel/CountLabel")
+cost_val_label = NodePath("CostLabel/CostLabel")
+clip_val_label = NodePath("CostLabel/ClipLabel")
+ammo_icon_rect = NodePath("CostLabel/AmmoIcon")
+gen_ammo_icon = ExtResource("7_46tna")
+phy_ammo_icon = ExtResource("8_cugn1")
+mag_ammo_icon = ExtResource("9_q7t0w")
+abn_ammo_icon = ExtResource("10_eporv")
+
+[node name="CostTitle" type="Label" parent="BackPatchContainer/BoxContainer/AmmoAccPotContainer/AmmoContainer"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 8
+theme = ExtResource("4_scwll")
+theme_override_colors/font_color = Color(0.470588, 0, 0, 1)
+text = "Ammo:"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="CostLabel" type="HBoxContainer" parent="BackPatchContainer/BoxContainer/AmmoAccPotContainer/AmmoContainer"]
+layout_mode = 2
+theme_override_constants/separation = 1
+
+[node name="AmmoIcon" type="TextureRect" parent="BackPatchContainer/BoxContainer/AmmoAccPotContainer/AmmoContainer/CostLabel"]
+layout_mode = 2
+texture = ExtResource("7_46tna")
+
+[node name="CurrentAmmoLabel" type="Label" parent="BackPatchContainer/BoxContainer/AmmoAccPotContainer/AmmoContainer/CostLabel"]
+layout_mode = 2
+size_flags_vertical = 8
+theme = ExtResource("11_4xuiv")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "9"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Seperator2" type="Label" parent="BackPatchContainer/BoxContainer/AmmoAccPotContainer/AmmoContainer/CostLabel"]
+self_modulate = Color(0.31, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("12_lc4bm")
+text = "/"
+
+[node name="CountLabel" type="Label" parent="BackPatchContainer/BoxContainer/AmmoAccPotContainer/AmmoContainer/CostLabel"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("12_lc4bm")
+text = "9"
+
+[node name="CostLabel" type="Label" parent="BackPatchContainer/BoxContainer/AmmoAccPotContainer/AmmoContainer/CostLabel"]
+visible = false
+self_modulate = Color(0.31, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("12_lc4bm")
+text = "4"
+
+[node name="Seperator3" type="Label" parent="BackPatchContainer/BoxContainer/AmmoAccPotContainer/AmmoContainer/CostLabel"]
+visible = false
+self_modulate = Color(0.31, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("12_lc4bm")
+text = ":"
+
+[node name="ClipLabel" type="Label" parent="BackPatchContainer/BoxContainer/AmmoAccPotContainer/AmmoContainer/CostLabel"]
+visible = false
+self_modulate = Color(0.31, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("12_lc4bm")
+text = "36"
+
+[node name="Seperator4" type="Label" parent="BackPatchContainer/BoxContainer/AmmoAccPotContainer/AmmoContainer/CostLabel"]
+visible = false
+self_modulate = Color(0.31, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("12_lc4bm")
+text = ")"
+
+[node name="VSeparator2" type="VSeparator" parent="BackPatchContainer/BoxContainer/AmmoAccPotContainer"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="AccIcon" type="TextureRect" parent="BackPatchContainer/BoxContainer/AmmoAccPotContainer"]
+layout_mode = 2
+texture = ExtResource("13_ns8f6")
+expand_mode = 3
+
+[node name="AccLabel" type="Label" parent="BackPatchContainer/BoxContainer/AmmoAccPotContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+theme = ExtResource("11_4xuiv")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "100"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="VSeparator3" type="VSeparator" parent="BackPatchContainer/BoxContainer/AmmoAccPotContainer"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PotIcon" type="TextureRect" parent="BackPatchContainer/BoxContainer/AmmoAccPotContainer"]
+layout_mode = 2
+texture = ExtResource("14_6sxbo")
+expand_mode = 3
+
+[node name="PotLabel" type="Label" parent="BackPatchContainer/BoxContainer/AmmoAccPotContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+theme = ExtResource("11_4xuiv")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "100"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="VSeparator4" type="VSeparator" parent="BackPatchContainer/BoxContainer/AmmoAccPotContainer"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TargetTypeLabel" type="Label" parent="BackPatchContainer/BoxContainer/AmmoAccPotContainer"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 8
+theme = ExtResource("4_scwll")
+theme_override_colors/font_color = Color(0.470588, 0, 0, 1)
+text = "Spot"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="ColorRect2" type="ColorRect" parent="BackPatchContainer/BoxContainer"]
+custom_minimum_size = Vector2(0, 1)
+layout_mode = 2
+color = Color(0.498039, 0.4, 0.376471, 1)
+
+[node name="DamageContainer" parent="BackPatchContainer/BoxContainer" instance=ExtResource("15_27co4")]
+layout_mode = 2
+defense_type = "Armor"
+damage_type = 7
+
+[node name="ColorRect3" type="ColorRect" parent="BackPatchContainer/BoxContainer"]
+custom_minimum_size = Vector2(0, 1)
+layout_mode = 2
+color = Color(0.498039, 0.4, 0.376471, 1)
+
+[node name="DescriptionBox" type="RichTextLabel" parent="BackPatchContainer/BoxContainer"]
+clip_contents = false
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("12_lc4bm")
+bbcode_enabled = true
+text = "Item Description hk hbkhjhl jhlkjl ljlkj"
+fit_content = true
+scroll_active = false
+script = ExtResource("16_k0th1")

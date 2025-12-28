@@ -6,7 +6,7 @@ signal actor_entered_item_spot(actor:BaseActor, item_ids:Array)
 
 # Dictionary of Actor.Id to Actor
 var _actors:Dictionary = {}
-#var _actor_poses:Dictionary = {}
+# Dictionary of Item.Id to Item on map
 var _items:Dictionary = {}
 var Missiles:Dictionary = {}
 var _zones:Dictionary = {}

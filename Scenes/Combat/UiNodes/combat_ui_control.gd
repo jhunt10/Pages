@@ -15,7 +15,7 @@ var camera:MoveableCamera2D:
 @export var target_input_display:TargetInputControl
 @export var player_stats_panels_container:BoxContainer
 @export var que_input:QueInputControl
-var que_display:QueDisplayControl:
+var que_display:QueInputDisplayControl:
 	get:
 		if que_input:
 			return que_input.que_display_control

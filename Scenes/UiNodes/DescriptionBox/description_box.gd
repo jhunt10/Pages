@@ -65,6 +65,15 @@ func set_page_item(page:BasePageItem, actor:BaseActor=null):
 	var merged_def = BaseLoadObjectLibrary._merge_defs(page._data, page._def)
 	set_object(merged_def, page, actor)
 
+func set_effect(effect:BaseEffect):
+	if not effect:
+		self.clear()
+		self.append_text("NULL PAGE")
+		return
+	var merged_def = BaseLoadObjectLibrary._merge_defs(effect._data, effect._def)
+	set_object(merged_def, effect, effect.get_effected_actor())
+
+
 func set_object(object_def:Dictionary, object_inst:BaseLoadObject, actor:BaseActor):
 	self.clear()
 	var raw_description = object_def.get("#ObjDetails", {}).get("Description", "")
@@ -247,6 +256,8 @@ func _build_bbcode_array(raw_description:String, object_def:Dictionary, object_i
 					mod_data = object_def.get("EquipmentData").get("AttackMods",{}).get(sub_tokens[1],{})
 				elif object_def.has("PageData"):
 					mod_data = object_def.get("PageData").get("AttackMods",{}).get(sub_tokens[1],{})
+				elif object_def.has("EffectData"):
+					mod_data = object_def.get("EffectData").get("AttackMods",{}).get(sub_tokens[1],{})
 				# Damage Mods
 				if sub_tokens[2] == 'DmgMod':
 					var dmg_mod = mod_data.get("DamageMods", {}).get(sub_tokens[3], {})

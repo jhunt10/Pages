@@ -99,7 +99,6 @@ func _ready() -> void:
 	equip_button.button_up.connect(equip_button_released)
 	pass # Replace with function body.
 
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if not self.visible:
@@ -274,7 +273,7 @@ func equip_button_released():
 
 func set_cant_equip_reason(reasons_data:Dictionary):
 	if reasons_data.size() == 0:
-		equip_label.text = "Equipt"
+		equip_label.text = "Equip"
 		equip_button.disabled = false
 		return
 	if reasons_data.get("NoSlot", false):

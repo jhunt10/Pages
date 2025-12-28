@@ -182,6 +182,19 @@
                     },
                     "EffectKey": "DodgeEffect"
                 }
+            },
+            "SubActions":{
+                "FlashText": {
+                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_FlashText.gd",
+                    "#FrameIndex": 3,
+                    "#SubIndex": 0,
+                    "Text": "Dodge",
+                    "Color": "[0.5,1,0.5,1]",
+                    "FlashTextData": {
+                        "LockVert": true,
+                        "EndTime": 0.5
+                    }
+                }
             }
         },
         "ItemData": {

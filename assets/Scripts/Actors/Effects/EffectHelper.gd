@@ -145,4 +145,3 @@ static func get_source_actor_from_source(source, an_actor:BaseActor)->BaseActor:
 	elif source is BaseSupplyItem:
 		return (source as BaseSupplyItem).get_using_actor()
 	return null
-	

@@ -20,14 +20,14 @@ func _ready():
 func _process(delta):
 	pass
 
-func add_flash_text(val:String, flash_text_type:VfxHelper.FlashTextType):
+func add_flash_text(val:String, flash_text_type:VfxHelper.FlashTextType, data:Dictionary = {}, color:Color = Color.WHITE):
 	var new_text:FlashTextNode = premade_label.duplicate()
 	new_text.id = str(ResourceUID.create_id())
 	
-	var color = Color.WHITE
 	var font_size = 10
 	var outline_size = 4
 	var text_value = val
+	
 	match flash_text_type:
 		VfxHelper.FlashTextType.Normal_Dmg:
 			color = normal_damage_color
@@ -42,18 +42,21 @@ func add_flash_text(val:String, flash_text_type:VfxHelper.FlashTextType):
 			color = healing_damage_color
 			if not text_value.begins_with("+"):
 				text_value = "+" + text_value
-			
-		
 		VfxHelper.FlashTextType.DOT_Dmg:
 			color = dot_damage_color
 			#font_size = font_size - 1
 			outline_size = 2
-		
-		
+	
 	new_text.text = text_value
 	new_text.add_theme_color_override('font_color', color)
 	new_text.add_theme_font_size_override('font_size', font_size)
 	new_text.add_theme_constant_override('outline_size', outline_size)
+	
+	if data.get("LockVert", false):
+		new_text.max_x_velocity = 0
+	if data.has("EndTime"):
+		new_text.end_time = data.get("EndTime")
+	
 	self.add_child(new_text)
 	text_nodes[new_text.id] = new_text
 	new_text.finished.connect(_on_node_finish.bind(new_text.id))
