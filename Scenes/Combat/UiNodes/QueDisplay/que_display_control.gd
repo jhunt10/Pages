@@ -7,6 +7,7 @@ const PADDING = 8
 @export var main_container:HBoxContainer
 @export var premade_que_button:QueDisplaySlot
 @export var slots_container:HBoxContainer
+@export var npc_index_label:Label
 #@onready var que_path_arrow:Sprite2D = $QuePathArrow
 
 @export var show_preview_movement:bool
@@ -30,6 +31,7 @@ func _ready():
 	
 	if _delayed_init:
 		portrait.texture = _actor.sprite.get_portrait_sprite()
+		npc_index_label.text = _actor.get_npc_index_str()
 		_build_slots()
 		_sync()
 	
@@ -61,6 +63,7 @@ func set_actor(actor:BaseActor):
 	actor.Que.action_que_changed.connect(_sync)
 	if portrait:
 		portrait.texture = actor.sprite.get_portrait_sprite()
+		npc_index_label.text = _actor.get_npc_index_str()
 		_build_slots()
 		_sync()
 	else:

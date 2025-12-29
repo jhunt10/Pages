@@ -49,7 +49,7 @@
                 "Attack": {
                     "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Attacks/SubAct_Attack.gd",
                     "#FrameIndex": 11,
-                    "#SubIndex": 1,
+                    "#SubIndex": 0,
                     "DamageKey": "RangedDamage",
                     "PrimaryTargetOnly": true,
                     "TargetKey": "Target1",
@@ -65,8 +65,8 @@
                 },
                 "PayCost": {
                     "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Misc/SubAct_PayCost.gd",
-                    "#FrameIndex": 11,
-                    "#SubIndex": 0
+                    "#FrameIndex": 10,
+                    "#SubIndex": 1
                 },
                 "ReTargetRandomInAoe": {
                     "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Targeting/SubAct_ReTargetRandomInAoe.gd",
@@ -283,7 +283,7 @@
                 "Attack": {
                     "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Attacks/SubAct_Attack.gd",
                     "#FrameIndex": 11,
-                    "#SubIndex": 1,
+                    "#SubIndex": 0,
                     "DamageKey": "RangedDamage",
                     "TargetKey": "Target1",
                     "TargetMustBeInRange": false,
@@ -291,7 +291,7 @@
                 },
                 "GetTarget": {
                     "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Targeting/SubAct_GetTarget.gd",
-                    "#FrameIndex": 11,
+                    "#FrameIndex": 10,
                     "#SubIndex": 0,
                     "AllowAutoTarget": false,
                     "SetTargetKey": "Target1",
@@ -300,7 +300,7 @@
                 "RemoveEffect": {
                     "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Effects/SubAct_RemoveEffect.gd",
                     "#FrameIndex": 11,
-                    "#SubIndex": 2,
+                    "#SubIndex": 1,
                     "EffectKey": "AilmentShocked",
                     "PrimaryTargetOnly": true,
                     "TargetKey": "Target1"
@@ -308,7 +308,7 @@
                 "WeaponMotionAnimation": {
                     "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponMotionAnimation.gd",
                     "#FrameIndex": 11,
-                    "#SubIndex": 3,
+                    "#SubIndex": 2,
                     "MainHand": true,
                     "OffHand": "Never"
                 },

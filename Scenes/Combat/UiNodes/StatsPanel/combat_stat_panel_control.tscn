@@ -13,7 +13,7 @@
 [ext_resource type="Script" path="res://Scenes/Combat/UiNodes/StatsPanel/effect_description_box.gd" id="10_7hami"]
 [ext_resource type="Theme" uid="uid://bfce41la62bs6" path="res://Scenes/Themes/readable_theme.tres" id="11_ptagv"]
 
-[node name="StatPanelControl" type="VBoxContainer" node_paths=PackedStringArray("button", "portrait_texture_rect", "main_container", "health_bar", "bars_container", "effect_icon_box", "premade_effect_icon")]
+[node name="StatPanelControl" type="VBoxContainer" node_paths=PackedStringArray("button", "portrait_texture_rect", "main_container", "health_bar", "bars_container", "effect_icon_box", "premade_effect_icon", "npc_index_label")]
 offset_right = 40.0
 offset_bottom = 40.0
 theme_override_constants/separation = 1
@@ -25,6 +25,7 @@ health_bar = NodePath("BackPatchContainer/VBoxContainer/HBoxContainer/StatBarCon
 bars_container = NodePath("BackPatchContainer/VBoxContainer/HBoxContainer/StatBarContainer")
 effect_icon_box = NodePath("IconBoxContainer")
 premade_effect_icon = NodePath("EffectIconControl")
+npc_index_label = NodePath("BackPatchContainer/VBoxContainer/HBoxContainer/PortaitTextureRect/IndexLabel")
 
 [node name="BackPatchContainer" type="Container" parent="." node_paths=PackedStringArray("background", "inner_container")]
 custom_minimum_size = Vector2(176, 44)
@@ -55,6 +56,22 @@ custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 texture = ExtResource("4_lfhmk")
 stretch_mode = 2
+
+[node name="IndexLabel" type="Label" parent="BackPatchContainer/VBoxContainer/HBoxContainer/PortaitTextureRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("7_xlcc4")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+text = "A"
+horizontal_alignment = 2
+vertical_alignment = 2
 
 [node name="StatBarContainer" type="VBoxContainer" parent="BackPatchContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(128, 0)

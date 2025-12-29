@@ -78,7 +78,7 @@ func sync():
 	super()
 	if _actor:
 		actor_node.set_actor(_actor)
-		name_label.text = _actor.get_name()
+		name_label.text = _actor.get_display_name()
 		level_label.text = str(_actor.stats.get_stat(StatHelper.Level, 0))
 		#stat_box.set_actor(_actor)
 		exp_bar.set_actor(_actor)

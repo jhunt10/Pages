@@ -10,6 +10,7 @@ const BoxPadding:int = 4
 @export var bars_container:VBoxContainer
 @export var effect_icon_box:HBoxContainer
 @export var premade_effect_icon:EffectIconControl
+@export var npc_index_label:Label
 
 var actor:BaseActor
 var effect_icons:Dictionary
@@ -30,6 +31,7 @@ func set_actor(act:BaseActor):
 			actor.Que.action_que_changed.disconnect(sync)
 			actor.effacts_changed.disconnect(_sync_icons)
 	actor = act
+	npc_index_label.text = actor.get_npc_index_str()
 	#_stat_bars[StatHelper.HealthMax] = health_bar
 	if health_bar:
 		health_bar.set_actor(actor)

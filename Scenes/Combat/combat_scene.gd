@@ -157,6 +157,10 @@ func load_init_state(sub_scene_data:Dictionary):
 				new_actor = ActorLibrary.get_actor(actor_info['ActorId'])
 			if new_actor:
 				new_actor.FactionIndex = 1
+				var display_name = new_actor.get_display_name()
+				if not npcs_to_name.keys().has(display_name):
+					npcs_to_name[display_name] = []
+				npcs_to_name[display_name].append(new_actor)
 			else:
 				printerr("CombatRootControl.load_init_state: Failed to get or create actor with id %s" % [actor_info.get("ActorId", "NO_ID")])
 		# Only Actor Key was provided
@@ -185,9 +189,11 @@ func load_init_state(sub_scene_data:Dictionary):
 	
 	# Name NPC Actors
 	for display_name in npcs_to_name.keys():
+		if npcs_to_name[display_name].size() == 1:
+			continue
 		var index = 0
 		for actor:BaseActor in npcs_to_name[display_name]:
-			actor.set_display_name(display_name+" " +str(index))
+			actor.enemy_npc_index = index
 			index += 1
 	
 	

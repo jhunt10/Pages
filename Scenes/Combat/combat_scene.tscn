@@ -609,7 +609,7 @@ offset_bottom = 36.0
 text = "Next Actor
 "
 
-[node name="TargetInputControl" type="Control" parent="MoveableCamera2D/CanvasLayer/CombatUiControl" node_paths=PackedStringArray("button", "title_label", "target_type_label", "button_label", "actor_portrait", "page_icon", "page_details", "lock_on_container", "lock_on_box", "target_icon", "target_icon_container", "spot_container", "x_label", "y_label")]
+[node name="TargetInputControl" type="Control" parent="MoveableCamera2D/CanvasLayer/CombatUiControl" node_paths=PackedStringArray("button", "title_label", "target_type_label", "button_label", "actor_portrait", "page_icon", "page_details", "lock_on_container", "lock_on_box", "target_icon", "target_icon_container", "target_npc_index_label", "spot_container", "x_label", "y_label")]
 layout_mode = 1
 anchor_top = 0.7
 anchor_right = 1.0
@@ -630,6 +630,7 @@ lock_on_container = NodePath("CenterContainer/VBoxContainer/NinePatchRect/VBoxCo
 lock_on_box = NodePath("CenterContainer/VBoxContainer/NinePatchRect/VBoxContainer/TargetLockContainer/CheckBox")
 target_icon = NodePath("CenterContainer/VBoxContainer/HBoxContainer/BackPatchContainer/HBoxContainer/TargetBackground/TargetTextureRect")
 target_icon_container = NodePath("CenterContainer/VBoxContainer/HBoxContainer/BackPatchContainer/HBoxContainer/TargetBackground")
+target_npc_index_label = NodePath("CenterContainer/VBoxContainer/HBoxContainer/BackPatchContainer/HBoxContainer/TargetBackground/TargetTextureRect/IndexLabel")
 spot_container = NodePath("CenterContainer/VBoxContainer/HBoxContainer/BackPatchContainer/HBoxContainer/SpotTargetContainer")
 x_label = NodePath("CenterContainer/VBoxContainer/HBoxContainer/BackPatchContainer/HBoxContainer/SpotTargetContainer/XLablesContainer/XValueLabel")
 y_label = NodePath("CenterContainer/VBoxContainer/HBoxContainer/BackPatchContainer/HBoxContainer/SpotTargetContainer/YLabelsContainer/YValueLabel")
@@ -836,6 +837,22 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("30_jnxm8")
 expand_mode = 1
+
+[node name="IndexLabel" type="Label" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/TargetInputControl/CenterContainer/VBoxContainer/HBoxContainer/BackPatchContainer/HBoxContainer/TargetBackground/TargetTextureRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("31_vhyt7")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+text = "A"
+horizontal_alignment = 2
+vertical_alignment = 2
 
 [node name="Button" type="Button" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/TargetInputControl/CenterContainer/VBoxContainer"]
 self_modulate = Color(1, 1, 1, 0)
@@ -1638,23 +1655,23 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MoveableCamera2D/CanvasLayer/PauseMenuControl/HBoxContainer"]
+[node name="MainContainer" type="VBoxContainer" parent="MoveableCamera2D/CanvasLayer/PauseMenuControl/HBoxContainer"]
 layout_mode = 2
 alignment = 1
 
-[node name="ButtonContainer4" type="HBoxContainer" parent="MoveableCamera2D/CanvasLayer/PauseMenuControl/HBoxContainer/VBoxContainer"]
+[node name="ButtonContainer4" type="HBoxContainer" parent="MoveableCamera2D/CanvasLayer/PauseMenuControl/HBoxContainer/MainContainer"]
 visible = false
 layout_mode = 2
 alignment = 1
 
-[node name="CharacterButton" type="TextureButton" parent="MoveableCamera2D/CanvasLayer/PauseMenuControl/HBoxContainer/VBoxContainer/ButtonContainer4"]
+[node name="CharacterButton" type="TextureButton" parent="MoveableCamera2D/CanvasLayer/PauseMenuControl/HBoxContainer/MainContainer/ButtonContainer4"]
 layout_mode = 2
 texture_normal = ExtResource("19_u4d2a")
 texture_pressed = ExtResource("20_jcfy7")
 texture_disabled = ExtResource("20_jcfy7")
 stretch_mode = 0
 
-[node name="Label" type="Label" parent="MoveableCamera2D/CanvasLayer/PauseMenuControl/HBoxContainer/VBoxContainer/ButtonContainer4/CharacterButton"]
+[node name="Label" type="Label" parent="MoveableCamera2D/CanvasLayer/PauseMenuControl/HBoxContainer/MainContainer/ButtonContainer4/CharacterButton"]
 modulate = Color(0.462291, 0.462291, 0.462291, 1)
 layout_mode = 1
 anchors_preset = 15
@@ -1667,18 +1684,18 @@ text = "Load Game"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ButtonContainer2" type="HBoxContainer" parent="MoveableCamera2D/CanvasLayer/PauseMenuControl/HBoxContainer/VBoxContainer"]
+[node name="ButtonContainer2" type="HBoxContainer" parent="MoveableCamera2D/CanvasLayer/PauseMenuControl/HBoxContainer/MainContainer"]
 layout_mode = 2
 alignment = 1
 
-[node name="ToCampButton" type="TextureButton" parent="MoveableCamera2D/CanvasLayer/PauseMenuControl/HBoxContainer/VBoxContainer/ButtonContainer2"]
+[node name="ToCampButton" type="TextureButton" parent="MoveableCamera2D/CanvasLayer/PauseMenuControl/HBoxContainer/MainContainer/ButtonContainer2"]
 layout_mode = 2
 texture_normal = ExtResource("19_u4d2a")
 texture_pressed = ExtResource("20_jcfy7")
 texture_disabled = ExtResource("20_jcfy7")
 stretch_mode = 0
 
-[node name="Label" type="Label" parent="MoveableCamera2D/CanvasLayer/PauseMenuControl/HBoxContainer/VBoxContainer/ButtonContainer2/ToCampButton"]
+[node name="Label" type="Label" parent="MoveableCamera2D/CanvasLayer/PauseMenuControl/HBoxContainer/MainContainer/ButtonContainer2/ToCampButton"]
 modulate = Color(0.462291, 0.462291, 0.462291, 1)
 layout_mode = 1
 anchors_preset = 15
@@ -1691,18 +1708,18 @@ text = "To Camp"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ButtonContainer" type="HBoxContainer" parent="MoveableCamera2D/CanvasLayer/PauseMenuControl/HBoxContainer/VBoxContainer"]
+[node name="ButtonContainer" type="HBoxContainer" parent="MoveableCamera2D/CanvasLayer/PauseMenuControl/HBoxContainer/MainContainer"]
 layout_mode = 2
 alignment = 1
 
-[node name="MainMenuButton" type="TextureButton" parent="MoveableCamera2D/CanvasLayer/PauseMenuControl/HBoxContainer/VBoxContainer/ButtonContainer"]
+[node name="MainMenuButton" type="TextureButton" parent="MoveableCamera2D/CanvasLayer/PauseMenuControl/HBoxContainer/MainContainer/ButtonContainer"]
 layout_mode = 2
 texture_normal = ExtResource("19_u4d2a")
 texture_pressed = ExtResource("20_jcfy7")
 texture_disabled = ExtResource("20_jcfy7")
 stretch_mode = 0
 
-[node name="Label" type="Label" parent="MoveableCamera2D/CanvasLayer/PauseMenuControl/HBoxContainer/VBoxContainer/ButtonContainer/MainMenuButton"]
+[node name="Label" type="Label" parent="MoveableCamera2D/CanvasLayer/PauseMenuControl/HBoxContainer/MainContainer/ButtonContainer/MainMenuButton"]
 modulate = Color(0.462291, 0.462291, 0.462291, 1)
 layout_mode = 1
 anchors_preset = 15
@@ -1715,18 +1732,18 @@ text = "Main Menu"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ButtonContainer3" type="HBoxContainer" parent="MoveableCamera2D/CanvasLayer/PauseMenuControl/HBoxContainer/VBoxContainer"]
+[node name="ButtonContainer3" type="HBoxContainer" parent="MoveableCamera2D/CanvasLayer/PauseMenuControl/HBoxContainer/MainContainer"]
 layout_mode = 2
 alignment = 1
 
-[node name="ReturnButton" type="TextureButton" parent="MoveableCamera2D/CanvasLayer/PauseMenuControl/HBoxContainer/VBoxContainer/ButtonContainer3"]
+[node name="ReturnButton" type="TextureButton" parent="MoveableCamera2D/CanvasLayer/PauseMenuControl/HBoxContainer/MainContainer/ButtonContainer3"]
 layout_mode = 2
 texture_normal = ExtResource("19_u4d2a")
 texture_pressed = ExtResource("20_jcfy7")
 texture_disabled = ExtResource("20_jcfy7")
 stretch_mode = 0
 
-[node name="Label" type="Label" parent="MoveableCamera2D/CanvasLayer/PauseMenuControl/HBoxContainer/VBoxContainer/ButtonContainer3/ReturnButton"]
+[node name="Label" type="Label" parent="MoveableCamera2D/CanvasLayer/PauseMenuControl/HBoxContainer/MainContainer/ButtonContainer3/ReturnButton"]
 modulate = Color(0.462291, 0.462291, 0.462291, 1)
 layout_mode = 1
 anchors_preset = 15
@@ -1736,6 +1753,81 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 32
 text = "Resume"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ConfirmExitContainer" type="VBoxContainer" parent="MoveableCamera2D/CanvasLayer/PauseMenuControl/HBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="NinePatchRect" type="NinePatchRect" parent="MoveableCamera2D/CanvasLayer/PauseMenuControl/HBoxContainer/ConfirmExitContainer"]
+custom_minimum_size = Vector2(300, 64)
+layout_mode = 2
+texture = ExtResource("32_f81f5")
+patch_margin_left = 12
+patch_margin_top = 12
+patch_margin_right = 12
+patch_margin_bottom = 12
+
+[node name="Label" type="Label" parent="MoveableCamera2D/CanvasLayer/PauseMenuControl/HBoxContainer/ConfirmExitContainer/NinePatchRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("38_waysr")
+theme_override_font_sizes/font_size = 24
+text = "Exit to Main Menu?
+Unsaved data will be lost"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ContinueContainer" type="HBoxContainer" parent="MoveableCamera2D/CanvasLayer/PauseMenuControl/HBoxContainer/ConfirmExitContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="MainMenuButton" type="TextureButton" parent="MoveableCamera2D/CanvasLayer/PauseMenuControl/HBoxContainer/ConfirmExitContainer/ContinueContainer"]
+layout_mode = 2
+texture_normal = ExtResource("19_u4d2a")
+texture_pressed = ExtResource("20_jcfy7")
+texture_disabled = ExtResource("20_jcfy7")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="MoveableCamera2D/CanvasLayer/PauseMenuControl/HBoxContainer/ConfirmExitContainer/ContinueContainer/MainMenuButton"]
+modulate = Color(0.462291, 0.462291, 0.462291, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 32
+text = "Exit"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BackButtonContainer" type="HBoxContainer" parent="MoveableCamera2D/CanvasLayer/PauseMenuControl/HBoxContainer/ConfirmExitContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="BackButton" type="TextureButton" parent="MoveableCamera2D/CanvasLayer/PauseMenuControl/HBoxContainer/ConfirmExitContainer/BackButtonContainer"]
+layout_mode = 2
+texture_normal = ExtResource("19_u4d2a")
+texture_pressed = ExtResource("20_jcfy7")
+texture_disabled = ExtResource("20_jcfy7")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="MoveableCamera2D/CanvasLayer/PauseMenuControl/HBoxContainer/ConfirmExitContainer/BackButtonContainer/BackButton"]
+modulate = Color(0.462291, 0.462291, 0.462291, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 32
+text = "Back"
 horizontal_alignment = 1
 vertical_alignment = 1
 

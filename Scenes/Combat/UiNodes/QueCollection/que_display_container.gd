@@ -8,6 +8,7 @@ const PADDING = 8
 @export var slot_button_prefab:QueMiniSlotIcon
 @export var slots_container:HBoxContainer
 @export var name_label:Label
+@export var npc_index_label:Label
 var is_ai_actor:bool
 
 func load_stuff():
@@ -30,6 +31,7 @@ func _ready():
 	
 	if _delayed_init:
 		portrait.texture = _actor.sprite.get_portrait_sprite()
+		npc_index_label.text = _actor.get_npc_index_str()
 		_build_slots()
 		_sync_que()
 		
@@ -51,6 +53,7 @@ func set_actor(actor:BaseActor):
 	is_ai_actor = !actor.is_player
 	if portrait:
 		portrait.texture = actor.sprite.get_portrait_sprite()
+		npc_index_label.text = _actor.get_npc_index_str()
 		_build_slots()
 		_sync_que()
 	else:

@@ -40,13 +40,13 @@
                 "Attack": {
                     "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Attacks/SubAct_Attack.gd",
                     "#FrameIndex": 11,
-                    "#SubIndex": 3,
+                    "#SubIndex": 0,
                     "DamageKey": "WeaponDamage",
                     "TargetKey": "Target1"
                 },
                 "GetTarget": {
                     "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Targeting/SubAct_GetTarget.gd",
-                    "#FrameIndex": 11,
+                    "#FrameIndex": 10,
                     "#SubIndex": 0,
                     "AllowAlreadyTargeted": false,
                     "AllowAutoTarget": true,
@@ -55,12 +55,12 @@
                 },
                 "PayCost": {
                     "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Misc/SubAct_PayCost.gd",
-                    "#FrameIndex": 11,
+                    "#FrameIndex": 10,
                     "#SubIndex": 1
                 },
                 "WeaponMotionAnimation": {
                     "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponMotionAnimation.gd",
-                    "#FrameIndex": 11,
+                    "#FrameIndex": 10,
                     "#SubIndex": 2,
                     "MainHand": true,
                     "OffHand": "OnlyIfDuel"

@@ -16,6 +16,7 @@ extends Control
 
 @export var target_icon:TextureRect
 @export var target_icon_container:TextureRect
+@export var target_npc_index_label:Label
 
 @export var spot_container:Container
 @export var x_label:Label
@@ -77,6 +78,7 @@ func set_actor(actor:BaseActor):
 	page_details.set_action(actor, page)
 	# Clear target portrait
 	target_icon.texture = unknown_icon_texture
+	target_npc_index_label.text = ''
 	x_label.text = ""
 	y_label.text = ""
 	x_label.add_theme_color_override("font_color", Color.BLACK)
@@ -94,6 +96,7 @@ func set_target_coord(coord:Vector2i):
 		var targets = CombatRootControl.Instance.GameState.get_actors_at_pos(coord)
 		var target = targets[0]
 		target_icon.texture = target.sprite.get_portrait_sprite()
+		target_npc_index_label.text = target.get_npc_index_str()
 	else:
 		target_icon_container.hide()
 		x_label.text = str(coord.x)
@@ -104,6 +107,7 @@ func set_target_coord(coord:Vector2i):
 
 func set_invalid_target_coord(coord:Vector2i):
 	target_icon.texture = unknown_icon_texture
+	target_npc_index_label.text = ''
 	x_label.text = str(coord.x)
 	x_label.add_theme_color_override("font_color", Color("#780000", 1.0))
 	y_label.text = str(coord.y)

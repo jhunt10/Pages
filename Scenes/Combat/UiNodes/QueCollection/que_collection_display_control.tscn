@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://bti610xcgtmrs"]
+[gd_scene load_steps=12 format=3 uid="uid://bti610xcgtmrs"]
 
 [ext_resource type="Script" path="res://Scenes/Combat/UiNodes/QueCollection/que_collection_control.gd" id="1_5admy"]
 [ext_resource type="Texture2D" uid="uid://io35wpu802fp" path="res://assets/Sprites/UI/BackPatches/Patch_64_12.png" id="2_85q5f"]
 [ext_resource type="Script" path="res://Scenes/Combat/UiNodes/QueCollection/que_display_container.gd" id="3_pi72h"]
 [ext_resource type="Script" path="res://Scenes/Combat/UiNodes/QueCollection/que_mini_slot_icon.gd" id="4_kcteh"]
+[ext_resource type="Theme" uid="uid://dwinll8pgdjhc" path="res://Scenes/Themes/standard_theme.tres" id="4_yca28"]
 [ext_resource type="Texture2D" uid="uid://cg1yo6bhpalea" path="res://assets/Sprites/UI/QueInputAndDisplay/mini_page_slot.png" id="5_etud8"]
 [ext_resource type="Texture2D" uid="uid://1brfy81pji75" path="res://assets/Sprites/UI/QueInputAndDisplay/mini_page_gap_slot.png" id="6_22ht0"]
 [ext_resource type="Texture2D" uid="uid://d28r048mh6136" path="res://assets/Sprites/UnknownSprite.png" id="7_hcyhh"]
@@ -52,13 +53,14 @@ layout_mode = 2
 layout_mode = 2
 text = "Show"
 
-[node name="QueContainer" type="BoxContainer" parent="VBoxContainer" node_paths=PackedStringArray("portrait", "slot_button_prefab", "slots_container", "name_label")]
+[node name="QueContainer" type="BoxContainer" parent="VBoxContainer" node_paths=PackedStringArray("portrait", "slot_button_prefab", "slots_container", "name_label", "npc_index_label")]
 layout_mode = 2
 script = ExtResource("3_pi72h")
 portrait = NodePath("PortraitTextureRect")
 slot_button_prefab = NodePath("PageSlotPrefab")
 slots_container = NodePath("SlotsContainer")
 name_label = NodePath("PortraitTextureRect/Label")
+npc_index_label = NodePath("PortraitTextureRect/IndexLabel")
 
 [node name="PortraitTextureRect" type="TextureRect" parent="VBoxContainer/QueContainer"]
 custom_minimum_size = Vector2(32, 32)
@@ -71,6 +73,22 @@ layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
 text = "ActorName"
+
+[node name="IndexLabel" type="Label" parent="VBoxContainer/QueContainer/PortraitTextureRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("4_yca28")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+text = "A"
+horizontal_alignment = 2
+vertical_alignment = 2
 
 [node name="PageSlotPrefab" type="Control" parent="VBoxContainer/QueContainer" node_paths=PackedStringArray("background", "gap_icon", "_page_icon", "highlight", "dead_icon", "unknown_icon")]
 custom_minimum_size = Vector2(32, 32)

@@ -46,6 +46,7 @@ var actor_data:Dictionary:
 		return get_load_val("ActorData", {})
 
 var FactionIndex : int
+var enemy_npc_index:int = -1
 
 var spawn_map_layer
 
@@ -88,12 +89,24 @@ func reload_def(load_path:String, def:Dictionary):
 func _cache_after_loading_def():
 	stats.dirty_stats()
 
-func get_name()->String:
+var alphabet = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']
+
+func get_npc_index_str()->String:
+	if enemy_npc_index >= 0:
+		return alphabet[enemy_npc_index]
+	else:
+		return ""
+
+func get_display_name()->String:
+	var dis_name = super()
 	if pages:
 		var title_page:BasePageItem = pages.get_item_in_slot(0)
 		if title_page:
-			return title_page.get_display_name()
-	return get_display_name()
+			dis_name = title_page.get_display_name()
+	if enemy_npc_index >= 0:
+		dis_name += " " + alphabet[enemy_npc_index]
+		
+	return dis_name
 
 func get_title()->String:
 	if pages:

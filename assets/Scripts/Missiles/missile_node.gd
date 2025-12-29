@@ -64,8 +64,11 @@ func on_missile_reach_target():
 				impact_effect_node.finished.connect(_on_impact_effect_finished)
 				self.add_child(impact_effect_node)
 				delete_self = false
-	if delete_self:
-		self.queue_free()
+	if missile_effect_node is MissileVfxNode:
+		missile_effect_node.animation.play("fade_out")
+		missile_effect_node.animation.animation_finished.connect(_on_impact_effect_finished)
+	#if delete_self:
+		#self.queue_free()
 
 func _on_impact_effect_finished():
 	self.queue_free()
