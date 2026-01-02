@@ -3,7 +3,7 @@
         "!ObjectScript": "res://assets/Scripts/Actors/BaseActor.gd",
         "!ParentKey": "#BaseActor",
         "#ObjDetails": {
-            "Description": "Radical political extremist devoted to the New Squorld Order. These small and squirrely (they hate that term) @@#Color:Red:Beasts@@ are highly aggressive. While lacking in @@#Color:Red:Health@@ and @@#Color:Red:Attack@@, they have high @@#Color:Red:Speed@@ and just enough @@#Color:Red:Evasion@@ to be annoying. Often attacking in large swams, the NSO has commited countless acts of terrorism on defenseless @@#Color:Red:Abandonded Villages@@. So don't feel bad about killing them.",
+            "Description": "Radical political extremist of the @@#Color:Blue:New Squorld Order@@. These small and squirrely (they hate that term) @@#Tag:Beasts@@ are highly aggressive. While lacking in @@#Stat:MaxHealth@@ and @@#Stat:PhyAttack@@, they have high @@#Stat:Speed@@ and just enough @@#Stat:Evasion@@ to be annoying.\n\nOften attacking in large swams, the @@Color:Blue:NSO@@ has commited countless acts of terrorism on defenseless @@#Color:Red:Abandonded Villages@@. So don't feel bad about killing them.",
             "DisplayName": "Squirrel",
             "LargeIcon": "Sprites/SquirrelIcon.png",
             "ObjectType": "Actor",
@@ -120,7 +120,7 @@
                 "Money:25": 1,
                 "Mag_Ammo": 3,
                 "HealthPotionM": 1,
-                "ChuckAcornFire_Page": 1,
+                "ChuckAcornFire_ActionPage": 1,
                 "SquirrelMagic_PassivePage": 1,
                 "Squirrel_PageBook": 1
             }
@@ -131,7 +131,7 @@
                 "TurnLeft",
                 "TurnRight",
                 "BasicMeleeAttack",
-                "ChuckAcornFire_Page"
+                "ChuckAcornFire_ActionPage"
             ]
         },
         "SpawnEquipmentArr": [

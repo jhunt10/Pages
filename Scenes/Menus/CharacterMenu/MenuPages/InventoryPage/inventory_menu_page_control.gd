@@ -132,12 +132,16 @@ func build_item_slots():
 		button.set_count(PlayerInventory.get_item_stack_count(item.ItemKey))
 		
 		button.visible =  true#should_item_be_visible(item, '')
-		
+	
+	# Remove and resort Item Groups
 	for sub_group_key in _item_groups.keys():
 		items_container.remove_child(_item_groups[sub_group_key])
+	print("Item Groups:")
 	for sub_group_key in get_sorted_sub_group_keys():
+		print(sub_group_key)
 		if _item_groups.keys().has(sub_group_key):
 			items_container.add_child(_item_groups[sub_group_key])
+	print("\n\n")
 	#await get_tree().process_frame
 	scroll_bar.calc_bar_size()
 	loading_message_container.hide()
@@ -197,7 +201,7 @@ func _get_sub_group_key(item:BaseItem)->String:
 					group_keys.append("Shared")
 				else:
 					group_keys.append("TitleLocked")
-				group_keys.append(source_title)
+					group_keys.append(source_title)
 	if item is BaseSupplyItem:
 		group_keys.append("Supplies")
 	var tax_leaf = item.get_taxonomy_leaf()

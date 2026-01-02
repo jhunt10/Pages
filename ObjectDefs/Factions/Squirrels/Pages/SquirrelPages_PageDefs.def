@@ -28,6 +28,7 @@
                 "Cost": 1
             },
             "AttackDetails": {
+                "ActionVerb": "threw an Acorn at",
                 "AccuracyMod": 1,
                 "PotencyMod": 1
             },
@@ -108,8 +109,7 @@
                 "ConflictingPages": [],
                 "IncompatiblePages": [],
                 "TitleReq": "Ignore"
-            },
-            "SourceTitle": ""
+            }
         },
         "_DefVersion": "1"
     },
@@ -136,6 +136,9 @@
             ]
         },
         "ActionData": {
+            "AttackDetails":{
+                "ActionVerb": "threw a Flaming Acorn at"
+            },
             "AmmoData": {
                 "AmmoType": "Mag",
                 "Clip": 3,
@@ -208,7 +211,6 @@
                 "IncompatiblePages": [],
                 "TitleReq": "Ignore"
             },
-            "SourceTitle": "Squirrel",
             "StatMods": {
                 "MassMod": {
                     "ModType": "Scale",
@@ -243,12 +245,12 @@
     "SquirrelMagic_PassivePage": {
         "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemPassive.gd",
         "#ObjDetails": {
-            "Description": "@@#StatMod:MagAtkMod@@ but @@#StatMod:PPRMod@@.",
+            "Description": "@@#StatMod:MagAtkMod@@",
             "DisplayName": "Squirrel Magic",
             "LargeIcon": "Sprites/SquirrelMagic_Icon.png",
             "ObjectType": "Item",
             "SmallIcon": "Sprites/SquirrelMagic_Icon.png",
-            "SnippetDesc": "Gain Mag Attack, but loose PPR",
+            "SnippetDesc": "Gain Mag Attack",
             "Tags": [
                 "Passive"
             ],
@@ -269,7 +271,6 @@
                 "IncompatiblePages": [],
                 "TitleReq": "Ignore"
             },
-            "SourceTitle": "Squirrel",
             "StatMods": {
                 "MagAtkMod": {
                     "ModType": "Add",
@@ -310,7 +311,6 @@
                 "IncompatiblePages": [],
                 "TitleReq": "Ignore"
             },
-            "SourceTitle": "Squirrel",
             "StatMods": {
                 "ArmorMod": {
                     "ModType": "Add",

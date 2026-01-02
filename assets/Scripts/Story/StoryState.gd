@@ -8,6 +8,7 @@ var save_id
 var _party_actor_ids:Array = []
 var _story_stage_index:int
 var _story_flags:Dictionary = {}
+var _encountered_actors:Dictionary = {}
 
 var _money:int = 0
 
@@ -26,9 +27,10 @@ func add_actor_to_party(actor)->BaseActor:
 			if actor_def.size() > 0:
 				var player_id = "Player_" + str(_party_actor_ids.size()) + ":" + str(ResourceUID.create_id())
 				actor = ActorLibrary.create_actor(actor, {}, player_id)
+	
 	if actor and actor is BaseActor:
 		_party_actor_ids.append(actor.Id)
-		
+		add_encounter_with_actor(actor)
 		
 		# Add class pages
 		var title = actor.pages.get_title_page().get_display_name()
@@ -42,8 +44,10 @@ func add_actor_to_party(actor)->BaseActor:
 			if item is BasePageItem and not item_key.begins_with("#"):
 				if item is BasePageItem:
 					var req_title = (item as BasePageItem).page_data.get("SourceTitle")
-					if  title == req_title:
+					var match_str = (item as BasePageItem).page_data.get("PageRequirements", {}).get("TitleReq")
+					if  title == req_title and match_str != 'Shared':
 						PlayerInventory.add_item(item, 1)
+						
 		return actor
 	else:
 		printerr("StoryState.add_actor_to_party: Invalid / Fail to find Actor from: %s" % [actor])
@@ -109,6 +113,7 @@ func start_new_story():
 		var _new_player = ActorLibrary.create_actor(player_actor_keys[i], {}, player_id)
 		if _new_player:
 			_party_actor_ids.append(player_id)
+			add_encounter_with_actor(_new_player)
 	
 	PlayerInventory.clear_items()
 	# Add all pages
@@ -157,7 +162,19 @@ func load_next_story_scene():
 		LoadManager.load_combat(next_map, next_dialog, true)
 	else:
 		MainRootNode.Instance.open_camp_menu(next_dialog)
+
+func add_encounter_with_actor(actor):
+	if actor is String:
+		if not ActorLibrary.Instance.list_all_actor_keys().has(actor):
+			printerr("StoryState.add_encounter_with_actor: Unknown ActorKey '%s'." % [actor])
+			return
+	if actor is BaseActor:
+		actor = actor.ActorKey
 	
+	if actor is String:
+		if not _encountered_actors.keys().has(actor):
+			_encountered_actors[actor] = 0
+		_encountered_actors[actor] += 1
 
 func get_runtime_untix_time()->float:
 	var val = _total_play_time + (Time.get_unix_time_from_system() - _session_start_unix_time)
@@ -174,6 +191,7 @@ func build_save_data()->Dictionary:
 	#out_data['Items'] = ItemLibrary.Instance.build_save_data()
 	out_data['RunTime'] = _total_play_time + (Time.get_unix_time_from_system() - _session_start_unix_time)
 	out_data['StoryFlags'] = _story_flags.duplicate(true)
+	out_data['Encounters'] = _encountered_actors
 	return out_data
 
 func load_save_data(data:Dictionary):
@@ -204,7 +222,9 @@ func load_save_data(data:Dictionary):
 			PlayerInventory.add_item(item, inv_data[item_id].get('StackCount', 1))
 		else:
 			printerr("StoryStateData.load_save_data: Failed to find item with id '%s'." % [item_id])
-		
+	
+	_encountered_actors = data.get("Encounters", {})
+	
 	_total_play_time = data.get("RunTime", 0)
 	_session_start_unix_time = Time.get_unix_time_from_system()
 
@@ -241,3 +261,4 @@ func purge_game():
 	_story_stage_index = 0
 	_story_flags.clear()
 	_total_play_time = 0
+	_encountered_actors.clear()

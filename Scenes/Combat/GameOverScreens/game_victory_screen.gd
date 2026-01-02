@@ -22,6 +22,7 @@ func _ready() -> void:
 
 func show_game_result():
 	collect_dropped_items()
+	record_enemy_actors()
 	if CombatRootControl.is_story_map:
 		camp_button_label.text = "Continue"
 	self.show()
@@ -36,10 +37,20 @@ func _on_camp_button():
 	else:
 		MainRootNode.Instance.open_camp_menu()
 
+func record_enemy_actors():
+	for actor:BaseActor in CombatRootControl.Instance.GameState.list_actors(true):
+		if actor.is_player:
+			continue
+		StoryState.add_encounter_with_actor(actor)
+
 func collect_dropped_items():
 	var items_datas = {}
 	var pickup_money = 0
 	for item:BaseItem in CombatRootControl.Instance.GameState.list_items():
+		
+		var item_type = "default"
+		if item is BasePageItem:
+			item_type = "Page"
 		
 		#print("Collecting Item: " + item.Id)
 		if item.get_item_type() == BaseItem.ItemTypes.Money:
@@ -47,10 +58,6 @@ func collect_dropped_items():
 			#CombatRootControl.Instance.GameState.delete_item(item)
 			#ItemLibrary.delete_item(item)
 			#continue
-		
-		var item_type = "default"
-		if item is BasePageItem:
-			item_type = "Page"
 		
 		if not items_datas.has(item_type):
 			items_datas[item_type] = {}
@@ -63,7 +70,9 @@ func collect_dropped_items():
 			items_datas[item_type][item_name]['Count'] = 1
 		else:
 			items_datas[item_type][item_name]['Count'] += 1
-		PlayerInventory.add_item(item)
+		
+		if not (item.get_item_type() == BaseItem.ItemTypes.Money):
+			PlayerInventory.add_item(item)
 		CombatRootControl.Instance.GameState.delete_item(item)
 	
 	if pickup_money > 0:

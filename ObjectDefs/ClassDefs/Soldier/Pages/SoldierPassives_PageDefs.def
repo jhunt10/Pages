@@ -280,7 +280,7 @@
     "ShieldTrainingPage": {
         "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemPassive.gd",
         "#ObjDetails": {
-            "Description": "Formal training allows you to use a Shield to full effect.\n@@#Color:Red:x2 Block Mod of Shields@@",
+            "Description": "Formal training allows you to use a Shield to full effect.\n\n@@#Color:Red:x2 Block Mod of Shields@@",
             "DisplayName": "Shield Training",
             "LargeIcon": "Sprites/ShieldTraining.png",
             "ObjectType": "Item",
@@ -323,7 +323,7 @@
     "ShieldTutoringPage": {
         "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemPassive.gd",
         "#ObjDetails": {
-            "Description": "Some simple training from your @@#Color:Red:Soldier@@ friend allows you to use a Shield to full effect.\n\n@@#StatMod:BlockModMod@@",
+            "Description": "Some simple training from your @@#Color:Red:Soldier@@ friend allows you to use a Shield to better effect.\n\n@@#Color:Red:x1.5 Block Mod of Shields@@",
             "DisplayName": "Shield Tutoring",
             "LargeIcon": "Sprites/ShieldTutor.png",
             "ObjectType": "Item",
@@ -357,7 +357,7 @@
                 "BlockModMod": {
                     "ModType": "Scale",
                     "StatName": "BlockMod",
-                    "Value": 1.5
+                    "Value": 0.66
                 }
             }
         },
@@ -524,8 +524,9 @@
             "PageRequirements": {
                 "ConflictingPages": [],
                 "IncompatiblePages": [],
-                "TitleReq": "Soldier"
+                "TitleReq": "Match"
             },
+            "SourceTitle":"Soldier",
             "WeaponMods": {
                 "TwoHanderBonus": {
                     "Conditions": {

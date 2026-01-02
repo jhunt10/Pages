@@ -4,7 +4,7 @@
         "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemTitle.gd",
         "!ParentKey": "#BaseTitlePage",
         "#ObjDetails": {
-            "Description": "Bandits are well rounded physical fighter who balance offence and defense. They excell in melee brawls, but struggle against ranged magic attacks and a crushing guilt of thier many sins.",
+            "Description": "@@#Color:Red:Bandits@@ are well rounded @@#Tag:Physical@@ fighter who balance offence and defense. They excell in melee brawls, but struggle against @@#Tag:Ranged@@ @@#Tag:Magic:Hint:Magic Attacks@@ and a crushing guilt of thier many sins.",
             "DisplayName": "Bandit",
             "LargeIcon": "Sprites/BanditTitle_Icon.png",
             "ObjectType": "Item",
@@ -44,7 +44,7 @@
         "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemTitle.gd",
         "!ParentKey": "BanditBase_TitlePage",
         "#ObjDetails": {
-            "Description": "Bandit Archers are a variation of Bandit who specialize in ranged physical attacks. Through years of grueling traininig in short shorts, these brave few have learned the secrets of the bare leg; sacrificing Armor in favor of higher Speed and Accuracy.",
+            "Description": "@@#Color:Red:Bandit Archers@@ are a subspecies of @@#Color:Red:Bandit@@ who specialize in @@#Tag:Physical@@ @@#Tag:Ranged:Hint:Ranged Attacks@@ with a @@#Color:Red:Bow@@.\n\nThrough years of grueling traininig in short shorts, these brave few have learned the secrets of the bare leg; sacrificing @@#Stat:Strength@@ and @@#Stat:Armor@@ in favor of higher @@#Stat:Agility@@ and @@#Stat:Speed@@.\n\nNaturally this makes them best suited for attacking from a distance, but dispite all thier training @@#Color:Red:they still can't hit a moving target@@.",
             "DisplayName": "Bandit Archer",
             "LargeIcon": "Sprites/BanditArcherTitle_Icon.png",
             "ObjectType": "Item",
@@ -84,7 +84,7 @@
         "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemTitle.gd",
         "!ParentKey": "BanditBase_TitlePage",
         "#ObjDetails": {
-            "Description": "Every ship needs a Captain, and while Bandits are not nessasarily ships, they do still benifit from well orginized leadership. Bandit Captains have earned thier Title not just for thier ability to give orders, but to enforce them as well. With high Armor and Physical attack, they can make formitable opponents even without thier gang.",
+            "Description": "Every ship needs a @@#Color:Red:Captain@@, and while @@#Color:Red:Bandits@@ are not nessasarily ships, they do still benifit from well orginized leadership.\n\n@@#Color:Red:Bandit Captains@@ earned thier @@#Color:Blue:Title@@ thanks to thier higher than average @@#Color:Red:Attributes@@. Naturally, they keep the best loot for themselves which means they tend to have better @@#Stat:Armor@@ and @@#Tag:HeavyWeapon:Hint:Heavy Weapons@@.\n\nThey often like to live by the motto:\n\"Carry a big stick, and use it.\"",
             "DisplayName": "Bandit Captain",
             "LargeIcon": "Sprites/BanditCaptainTitle_Icon.png",
             "ObjectType": "Item",

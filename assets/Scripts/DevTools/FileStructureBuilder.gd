@@ -7,16 +7,90 @@ class_name FileStructureBuilder
 
 
 static func DoThing():
-	print("\nSanity Check")
+	#print("\nSanity Check")
 	#update_def_files()
-	get_common_props_in_files()
+	#get_common_props_in_files()
+	build_mermaid_def_chart()
 	#create_class_def_files("Rogue")
 	#rename_test_files()
 
 
 
+static func get_all_defs()->Dictionary:
+	var defs_dict = {}
+	var files = []
+	#files.append_array(BaseLoadObjectLibrary._search_for_files("res://ObjectDefs/", "_PageDefs.def"))
+	files.append_array(BaseLoadObjectLibrary._search_for_files("res://ObjectDefs/", "_ItemDefs.def"))
+	var common_def = {}
+	var keys = []
+	for file:String in files:
+		var defs = parse_def_file(file)
+		for def_key:String in defs.keys():
+			defs_dict[def_key] = defs[def_key]
+	#print(defs_dict.keys())
+	return defs_dict
 
+static func build_mermaid_def_chart():
+	var all_defs = get_all_defs()
+	var def_tree = build_def_relation_tree(all_defs)
+	var key_ids = []
+	var mappings = []
+	for key:String in def_tree.keys():
+		_rec_mermaid(key, def_tree[key], all_defs, key_ids, mappings)
+	var out_str = "flowchart LR\n"
+	for id in key_ids:
+		out_str += "\t" + id + "\n"
+	for map in mappings:
+		out_str += "\t" + map + "\n"
+	
+	print(out_str)
 
+static func _rec_mermaid(def_key:String, def_tree_branch:Dictionary, all_defs:Dictionary, key_ids:Array, mappings:Array):
+	var def = all_defs[def_key]
+	var id_val = ("%s[\"'%s\n%s'\"]" % [def_key.trim_prefix("#"), def_key, def.get("#ObjDetails", {}).get("DisplayName", "NO NAME")])
+	key_ids.append(id_val)
+	var parent_key = def.get("!ParentKey", null)
+	if parent_key:
+		var mapping_val = ("%s --> %s" % [parent_key.trim_prefix("#"), def_key.trim_prefix("#")])
+		mappings.append(mapping_val)
+	for sub_key in def_tree_branch.keys():
+		_rec_mermaid(sub_key, def_tree_branch[sub_key], all_defs, key_ids, mappings)
+	pass
+	
+
+static func build_def_relation_tree(all_defs:Dictionary = {})->Dictionary:
+	var tree_dict = {}
+	if all_defs.size() == 0:
+		all_defs = get_all_defs()
+	for def_key in all_defs.keys():
+		_rec_build_parent_chain
+		var def = all_defs[def_key]
+		var parent_chain = _rec_build_parent_chain(def, all_defs)
+		# No parent 
+		if parent_chain.size() == 0:
+			tree_dict[def_key] = {}
+		# Has Parent
+		else:
+			parent_chain.append(def_key)
+			var working_dict = tree_dict
+			for key:String in parent_chain:
+				if not working_dict.keys().has(key):
+					working_dict[key] = {}
+				working_dict = working_dict[key]
+	return tree_dict
+
+static func _rec_build_parent_chain(def:Dictionary, all_defs:Dictionary)->Array:
+	var parent_key = def.get("!ParentKey", null)
+	if not parent_key:
+		return []
+	var parent_def = all_defs.get(parent_key)
+	if not parent_def:
+		return []
+	var parent_chain = _rec_build_parent_chain(parent_def, all_defs)
+	parent_chain.append(parent_key)
+	return parent_chain
+	
+			
 
 static func create_class_def_files(thing_name:String):
 	var base_file_path = "res://ObjectDefs/ClassDefs/"
@@ -201,7 +275,6 @@ static func get_common_props_in_files():
 			deep_merge_dicts(common_def, def_props)
 	print(common_def)
 	#print(keys)
-			
 
 static var known_keyed_dictionary_suffixes:Array:
 	get:
@@ -270,7 +343,7 @@ static func update_def_files():
 	var files = []
 	
 ################### UPDATE ME ############################
-	SAVE_DEF_UPDATE = true
+	SAVE_DEF_UPDATE = false
 	files.append_array(BaseLoadObjectLibrary._search_for_files("res://ObjectDefs/", "_PageDefs.def"))
 ##########################################################
 	

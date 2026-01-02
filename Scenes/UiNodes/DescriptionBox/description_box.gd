@@ -85,7 +85,7 @@ func set_object(object_def:Dictionary, object_inst:BaseLoadObject, actor:BaseAct
 			#var font := get_theme_default_font()
 			#var font_size := get_theme_default_font_size()
 			#var font_hight = font.get_height(font_size)
-			self.add_image(line, 0, 0, Color(1,1,1,1), INLINE_ALIGNMENT_BOTTOM)
+			self.add_image(line, 0, self.get_theme_font_size("normal_font"), Color(1,1,1,1), INLINE_ALIGNMENT_TOP)
 	
 func get_damage_colored_text(damage_type, text_value='')->String:
 	if damage_type is String and DamageEvent.DamageTypes.keys().has(damage_type):
@@ -166,6 +166,8 @@ func _build_bbcode_array(raw_description:String, object_def:Dictionary, object_i
 					out_line = ""
 				else:
 					out_line += " "
+				if StatHelper.CoreStats.keys().has(stat_name):
+					display_stat_name = stat_name.substr(1)
 				out_line +=  color_text(RED_TEXT, display_stat_name)
 			
 			"#Tag":

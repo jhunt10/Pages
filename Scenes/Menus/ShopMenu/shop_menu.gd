@@ -76,6 +76,13 @@ func load_items_to_sell():
 	var selling_items_data = {}
 	for item:BaseItem in PlayerInventory.list_all_held_items():
 		var type = item.get_item_type()
+		# Skip Pages with source Titles
+		if type == BaseItem.ItemTypes.Page:
+			var source_title = (item as BasePageItem).get_source_title()
+			if source_title:
+				continue
+			if item.get_tags().has("_Dev_Action"):
+				continue
 		if not catagories.keys().has(type):
 			catagories[type] = []
 		catagories[type].append(item.Id)
@@ -97,7 +104,8 @@ func get_shop_data()->Dictionary:
 		"Potions": ["HealthPotionS", "HealthPotionM", "HealthPotionL"],
 		"Bombs":["BombBasicItem", "BombColdItem", "BombFireItem", "BombShockItem", "BombPoisonItem", "BombGreaseItem"],
 		"Pages": ["UsePotionSelf", "ThrowPotionPage", "ThrowBombPage", "ReloadPage","MoveForward","TurnLeft","TurnRight", "Wait", "MoveLeft", "MoveRight", "TurnAround", "Dash"],
-		"Weapons": ["FireSword_Weapon", "IceKnife_Weapon"]
+		"Weapons": ["FireSword_Weapon", "IceKnife_Weapon"],
+		"Shields": ["WoodenShield", "WoodenTower", "TowerShield"]
 	}
 
 func _on_catagory_selected(sub_list:ShopSubItemList):

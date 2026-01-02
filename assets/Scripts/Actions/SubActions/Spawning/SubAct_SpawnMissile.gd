@@ -50,6 +50,7 @@ func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, que_exe_d
 			.append_source(SourceTagChain.SourceTypes.Action, parent_action)
 	missile_data['DamageData'] = damage_data
 	missile_data['AttackDetails'] = parent_action.get_attack_details()
+	missile_data['AttackDetails']['DisplayName'] = parent_action.get_display_name()
 	
 	# Get Effect Datas
 	var effect_keys = subaction_data.get("EffectKeys", [])

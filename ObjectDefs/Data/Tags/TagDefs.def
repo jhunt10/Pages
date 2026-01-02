@@ -30,19 +30,19 @@
         "Abreviation": "HeavyWpn"
     },
     "Melee": {
-        "Description":"@@#Color:Blue:Melee@@ implies a @@#Color:Blue:Weapon@@ or @@#Color:Blue:Page@@ has a short range @@#Color:Red:Target Area@@ that generally only includes @@#Color:Blue:Actors@@ that are Adjacent and in Front of the user.",
+        "Description":"@@#Color:Blue:Melee@@ implies a @@#Color:Blue:Weapon@@ or @@#Color:Blue:Page@@ has a short range @@#Color:Red:Target Area@@. This generally only includes @@#Color:Blue:Actors@@ that are Adjacent and in Front of the user.",
         "AppliesTo": ["Weapon", "Action"],
         "DisplayName": "Melee",
         "Abreviation": "Melee"
     },
     "Ranged": {
-        "Description":"@@#Color:Blue:Ranged@@ implies a @@#Color:Blue:Weapon@@ or @@#Color:Blue:Page@@ has a medium to long range @@#Color:Red:Target Area@@. @@#Color:Blue:Ranged Attacks@@ are generally weaker than @@#Color:Blue:Melee@@, but can easily @@#Color:Red:Hit@@ distant @@#Color:Blue:Actors@@.",
+        "Description":"@@#Color:Blue:Ranged@@ implies a @@#Color:Red:Weapon@@ or @@#Color:Blue:Page@@ has a medium to long range @@#Color:Red:Target Area@@. @@#Color:Blue:Ranged Attacks@@ are generally weaker than @@#Color:Blue:Melee@@, but can reach distant @@#Color:Red:Actors@@.",
         "AppliesTo": ["Weapon", "Action"],
         "DisplayName": "Ranged",
         "Abreviation": "Ranged"
     },
     "Missle": {
-        "Description":"@@#Color:Blue:Missle@@ implies a @@#Color:Blue:Weapon@@ or @@#Color:Red:Action@@ makes @@#Color:Blue:Attacks@@ by spawning one or more projectiles that require time to travel from the user to a target @@#Color:Blue:Spots@@. @@#Color:Blue:Missle@@ will always reach the target within the @@#Color:Red:Turn@@, but often after @@#Color:Blue:Actors@@ have executed thier @@#Color:Blue:Movement@@. So be sure to \"lead the shot\"",
+        "Description":"@@#Color:Blue:Missle@@ implies a @@#Color:Blue:Weapon@@ or @@#Color:Red:Action@@ makes @@#Color:Blue:Attacks@@ by spawning projectiles that require time to travel from user to target. @@#Color:Blue:Missle@@ will always reach the target within the @@#Color:Red:Turn@@, but often after @@#Color:Blue:Actors@@ have completed thier @@#Color:Blue:Movement@@. So be sure to \"lead the shot\"",
         "AppliesTo": ["Weapon", "Action"],
         "DisplayName": "Missile",
         "Abreviation": "Missile"
@@ -71,6 +71,39 @@
         "DisplayName": "Physical",
         "Abreviation": "Phy"
     },
+
+    
+    "Armor": {
+        "Description":"@@#Stat:Armor@@ | @@#Color:Blue:Armor@@ provides protection against @@#Color:Blue:Physical Damage@@. Each point of @@#Color:Blue:Armor@@ is equal to a 1% reduction in damage.",
+        "AppliesTo": ["Stat"],
+        "DisplayName": "Armor",
+        "Abreviation": "ARM"
+    },
+    
+
+
+
+
+
+
+    "Unarmed": {
+        "Description":"@@#Color:Blue:Unarmed@@ @@#Color:Red:Actors@@ have no @@#Color:Red:Weapon@@ equip and default to thier @@#Color:Red:Unarmed Damage@@ when making @@#Color:Red:Weapon Attacks@@.",
+        "AppliesTo": ["Action"],
+        "DisplayName": "Tactic",
+        "Abreviation": "Tactic"
+    },
+    "Dual": {
+        "Description":"@@#Color:Blue:Unarmed@@ @@#Color:Red:Actors@@ have no @@#Color:Red:Weapon@@ equip and default to thier @@#Color:Red:Unarmed Damage@@ when making @@#Color:Red:Weapon Attacks@@.",
+        "AppliesTo": ["Action"],
+        "DisplayName": "Tactic",
+        "Abreviation": "Tactic"
+    },
+
+
+
+
+
+
     "Living": {
         "Description":"@@#Color:Blue:Living@@ creatures are those that require food, oxygen, and love to survive. Most @@#Color:Blue:Living@@ @@#Color:Red:Actors@@ have high resistance to @@#Color:DmgColor:Light Damage@@ and can be @@#Color:Green:healed@@ by it.",
         "AppliesTo": ["Action"],
@@ -78,7 +111,7 @@
         "Abreviation": "Phy"
     },
     "Undead": {
-        "Description":"@@#Color:Blue:Undead@@ refers to a \"dead\" @@#Color:Red:Actor@@, that is still registered as active  acording to the @@#Color:Blue:PAGE@@ System. They sustain thier forms with @@#Color:DmgColor:Dark@@ energy and are @@#Color:Green:healed@@ by further exposure. Inversely, @@#Color:DmgColor:Light@@ has proven highly disruptive to this process.",
+        "Description":"@@#Color:Blue:Undead@@ refers to a \"dead\" @@#Color:Red:Actor@@, that is still registered as active acording to the @@#Color:Blue:PAGE@@ System. They sustain thier forms with @@#Color:DmgColor:Dark@@ energy and are @@#Color:Green:healed@@ by further exposure. Inversely, @@#Color:DmgColor:Light@@ has proven highly disruptive to this process.",
         "AppliesTo": ["Action"],
         "DisplayName": "Physical",
         "Abreviation": "Phy"

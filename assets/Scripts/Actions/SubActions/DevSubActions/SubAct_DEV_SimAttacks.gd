@@ -41,17 +41,3 @@ func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, que_exe_d
 			##DamageHelper.handle_attack(actor, target, offhand_damage_data, tag_chain, game_state)
 	#
 	return BaseSubAction.Success
-	
-func log_attack_event(attack_event:AttackEvent):
-	for damage_event in attack_event.damage_events:
-		log_damage_event(damage_event)
-
-func log_damage_event(event:DamageEvent):
-	print("-------------------------------------------------------------------------")
-	print("| Attacker: BsDm:%s | AtkPow:%s | DmVar:%s | DefType:%s" % [event.base_damage, event.attack_power, event.attack_power_range, event.defense_type])
-	print("| AppliedPower:%2.3f -> RawDam:%2.2f" % [event.applied_power, event.raw_damage])
-	print("| Def:%s -> DefRed: %2.2f -> Dam:%2.2f" % [event.defense_value, (1-event.defense_reduction), event.damage_after_armor])
-	print("| AttackMods -> Dam: %2.2f" % [event.damage_after_attack_mods])
-	print("| DefenseMods -> Dam: %2.2f" % [event.damage_after_defend_mods])
-	print("| Final Damage: %s" % [event.final_damage])
-	print("-------------------------------------------------------------------------")

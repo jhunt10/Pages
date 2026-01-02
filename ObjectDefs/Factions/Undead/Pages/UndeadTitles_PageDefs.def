@@ -1,50 +1,9 @@
 {
-    "Skeleton_TitlePage": {
-        "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemTitle.gd",
-        "!ParentKey": "#BaseTitlePage",
-        "#ObjDetails": {
-            "Description": "A spooky scary @@#Color:Red:Skeleton@@ risen from the dead. This form of reanimation accounts for a lack of muscle tissue by focusing on dirrect manipulation of bone. This results in an @@#Tag:Undead@@ that is physically weaker, but has the @@#Color:Red:Agility@@ required to use @@#Tag:Ranged:Hint:Ranged Weapons@@.\n\nThier exposed bone is resistant to @@#Color:DmgColor:Slash@@ and @@#Color:DmgColor:Pierce@@, but is quite vulnerable to @@#Color:DmgColor:Blunt@@ and @@#Color:DmgColor:Crash@@. They often remain on back lines using range to attack from afar.\n\nWhile some may view them as nightmarish monsters, I like to belive there's a @@#Color:Red:Skeleton@@ inside us all.",
-            "DisplayName": "Skeleton",
-            "LargeIcon": "Sprites/SkeletonTitle_Icon.png",
-            "ObjectType": "Item",
-            "SmallIcon": "Sprites/SkeletonTitle_Icon.png",
-            "SnippetDesc": "Skeleton Title",
-            "Tags": [
-                "Title"
-            ],
-            "Taxonomy": [
-                "Item",
-                "Page",
-                "Title"
-            ]
-        },
-        "PageData": {
-            "AddTags": [
-                "Undead",
-                "Skeleton"
-            ],
-            "StatMods": {
-            },
-            "PageRequirements": {
-                "ConflictingPages": [],
-                "IncompatiblePages": [],
-                "TitleReq": "None"
-            },
-            "SourceTitle": "Base"
-        },
-        "ItemData": {
-            "ItemType": "Page",
-            "Rarity": "Unique",
-            "Value": 50
-        },
-        "PassiveData": {},
-        "_DefVersion": "1"
-    },
     "Zombie_TitlePage": {
         "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemTitle.gd",
         "!ParentKey": "#BaseTitlePage",
         "#ObjDetails": {
-            "Description": "A common form of @@#Tag:Undead@@ created through the reanimation of a @@#Color:Red:Corpse@@. @@#Color:Red:Zombies@@ are peaceful and docile beings almost never resorting to violence, except towards all living creatures whom they will relentlessly attack on sight. They have an innate love of helicopters, gleefully chasing after any they see fly by. But sadly, no one ever let's them ride in one.",
+            "Description": "@@#Color:Red:Zombies@@ are a common form of @@#Tag:Undead@@ created through the reanimation of a @@#Color:Red:Corpse@@. They are peaceful beings almost never resorting to violence, except towards all @@#Tag:Living@@ creatures whom they relentlessly attack on sight.\n\nBasic @@#Color:Red:Zombies@@ are @@#Tag:Unarmed@@, thus limiting them to weak punches. But thier high @@#Stat:HealthMax@@ can make them effective meat shield for thier allies.\n\n@@#Color:Red:Zombies@@ have an innate love of helicopters, gleefully chasing after any they see fly by. Sadly, no one ever let's them ride in one.",
             "DisplayName": "Zombie",
             "LargeIcon": "Sprites/ZombieTitle_Icon.png",
             "ObjectType": "Item",
@@ -63,6 +22,47 @@
             "AddTags": [
                 "Undead",
                 "Zombie"
+            ],
+            "StatMods": {
+            },
+            "PageRequirements": {
+                "ConflictingPages": [],
+                "IncompatiblePages": [],
+                "TitleReq": "None"
+            },
+            "SourceTitle": "Base"
+        },
+        "ItemData": {
+            "ItemType": "Page",
+            "Rarity": "Unique",
+            "Value": 50
+        },
+        "PassiveData": {},
+        "_DefVersion": "1"
+    },
+    "Skeleton_TitlePage": {
+        "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemTitle.gd",
+        "!ParentKey": "#BaseTitlePage",
+        "#ObjDetails": {
+            "Description": "A spooky scary @@#Color:Red:Skeleton@@ risen from the dead. This form of reanimation accounts for a lack of muscle tissue by dirrectly manipulating bones. The resulting @@#Tag:Undead@@ is physically weaker, but has the @@#Color:Red:Agility@@ required to use @@#Tag:Ranged:Hint:Ranged Weapons@@.\n\nThier exposed bone is resistant to @@#Color:DmgColor:Slash@@ and @@#Color:DmgColor:Pierce@@, but is quite vulnerable to @@#Color:DmgColor:Blunt@@ and @@#Color:DmgColor:Crash@@. They often remain on back lines using range to attack from afar.\n\nWhile some may view them as nightmarish monsters, I like to belive there's a @@#Color:Red:Skeleton@@ inside us all.",
+            "DisplayName": "Skeleton",
+            "LargeIcon": "Sprites/SkeletonTitle_Icon.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/SkeletonTitle_Icon.png",
+            "SnippetDesc": "Skeleton Title",
+            "Tags": [
+                "Title"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Page",
+                "Title"
+            ]
+        },
+        "PageData": {
+            "AddTags": [
+                "Undead",
+                "Skeleton"
             ],
             "StatMods": {
             },

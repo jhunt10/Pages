@@ -33,7 +33,7 @@ func set_action(actor:BaseActor, page_item:BasePageItem):
 	_actor = actor
 	_item = page_item
 	var action = page_item as PageItemAction
-	if actor.pages.has_action(action.ActionKey):
+	if actor and actor.pages.has_action(action.ActionKey):
 		action = actor.pages.get_action_page(action.ActionKey)
 	description_box.set_page_item(action, actor)
 	if action.has_preview_target():
@@ -74,13 +74,16 @@ func set_action(actor:BaseActor, page_item:BasePageItem):
 				dam_label = null
 		else:
 			var damage_datas = action.get_preview_damage_datas()
-			var dam_label = damage_label
-			for dam_data in damage_datas.values():
-				if dam_label == null:
-					dam_label = damage_label.duplicate()
-					damage_container.add_child(dam_label)
-				dam_label.set_damage_data(dam_data)
-				dam_label = null
+			if damage_datas.size() == 0:
+				damage_label.hide()
+			else:
+				var dam_label = damage_label
+				for dam_data in damage_datas.values():
+					if dam_label == null:
+						dam_label = damage_label.duplicate()
+						damage_container.add_child(dam_label)
+					dam_label.set_damage_data(dam_data)
+					dam_label = null
 	else:
 		damage_label.hide()
 	

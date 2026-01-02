@@ -9,6 +9,8 @@ const GREEN_TEXT = "[color=#004600]"
 #func _process(delta: float) -> void:
 	#self.custom_minimum_size.y = text_box.size.y
 
+
+## TODO: Translation
 func set_event(attack_event:AttackEvent):
 	self.text = ""
 	self.clear()
@@ -65,37 +67,18 @@ func set_event(attack_event:AttackEvent):
 		var full_line = attacker_name + " " + action_verb + " " + defender_name + " " + result_line
 		self.append_text(full_line)
 		return
-	#else:
-		#var defender_name = str(attack_event.defender_ids.size()) + " targets"
-	#
-	#for defender_index in range(attack_event.defender_ids.size()):
-		#var defender = ActorLibrary.get_actor(attack_event.defender_ids[defender_index])
-		#var sub_event = attack_event.get_sub_event_for_defender(defender.Id)
-		#
-		#var defender_name = defender.get_display_name()
-		#if defender.is_player:
-			#defender_name = BLUE_TEXT + defender_name + "[/color]"
-		#else:
-			#defender_name = RED_TEXT + defender_name + "[/color]"
-		#var damage_string = _join_damage_values(sub_event)
-		##set_text_val += "%s for %s Damage" % [
-			##defender_name,
-			##damage_string
-		##]
-		#if sub_event.applied_effect_datas.size() > 0:
-			#var ailment_names = []
-			#for key in sub_event.applied_effect_datas.keys():
-				#if not sub_event.applied_effect_datas[key].get("WasApplied", false):
-					#continue
-				#var apply_effect_data = sub_event.applied_effect_datas[key]
-				#var applied_id = apply_effect_data.get("AppliedEffectId", "")
-				#var effect:BaseEffect = defender.effects.get_effect(applied_id)
-				##if effect:
-					##set_text_val += (" and applied [color=#000046]%s[/color]" % [effect.get_display_name()])
-			#pass
-		##if attack_event.defender_ids.size() > defender_index + 1:
-			##set_text_val += "\n"
-	self.append_text("set_text_val")
+	else:
+		var defender_count = str(attack_event.defender_ids.size()) + " targets"
+		var total_damage = 0
+		for defender_index in range(attack_event.defender_ids.size()):
+			var defender = ActorLibrary.get_actor(attack_event.defender_ids[defender_index])
+			var sub_event = attack_event.get_sub_event_for_defender(defender.Id)
+			for damage_event:DamageEvent in sub_event.damage_events.values():
+				total_damage += damage_event.final_damage
+		var result_line = " " + defender_count + " hitting for " + str(total_damage) + " total damage"
+		
+		var full_line = attacker_name + " " + action_verb + result_line
+		self.append_text(full_line)
 
 
 func _join_damage_values(sub_event:AttackSubEvent)->String:

@@ -102,6 +102,7 @@ func get_default_weapon_animation_name()->String:
 
 func get_weapon_attack_details()->Dictionary:
 	var attack_details = weapon_data.get("AttackData", {}).get("AttackDetails", {})
+	attack_details['ActionVerb'] = 'used ' + get_display_name() + ' on'
 	if attack_details.keys().has("AttackVfxData"):
 		attack_details['AttackVfxData']['LoadPath'] = self.get_load_path()
 	return attack_details

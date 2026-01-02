@@ -53,6 +53,7 @@ const CoverBonus = "CoverBonus"
 const CoverPenalty = "CoverPenalty"
 
 const stat_abbrs:Dictionary = {
+	HealthMax: "Max HP",
 	PhyAttack: "PHY ATK",
 	MagAttack: "MAG ATK",
 	Strength: "STR",
