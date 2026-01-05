@@ -1,7 +1,6 @@
 class_name SupplyHolder
 extends BaseItemHolder
 
-var _queed_items_list:Array = []
 var cached_bag_item_id
 
 func _init(actor) -> void:

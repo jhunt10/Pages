@@ -43,11 +43,11 @@ var y:int
 var z:int
 var dir:int
 
-func _init(x:int, y:int, z:int=0, dir:int=0) -> void:
-	self.x = x
-	self.y = y
-	self.z = z
-	self.dir = dir
+func _init(x_val:int, y_val:int, z_val:int=0, dir_val:int=0) -> void:
+	self.x = x_val
+	self.y = y_val
+	self.z = z_val
+	self.dir = dir_val
 
 func _to_string() -> String:
 	return "("+str(x)+","+str(y)+","+str(z)+":"+str(dir)+")"

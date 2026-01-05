@@ -75,7 +75,7 @@ func get_terrain_at_pos(pos):
 		return -1
 	return spot.terrain_index 
 	
-func is_spot_traversable(pos, actor)->bool:
+func is_spot_traversable(pos, _actor)->bool:
 	var spot = get_map_spot(pos)
 	if not spot:
 		print("Failed to find spot at pos: %s" % [pos])

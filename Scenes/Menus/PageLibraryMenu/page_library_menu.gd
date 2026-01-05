@@ -186,7 +186,7 @@ func get_tags()->Array:
 	return tags
 
 
-func on_tag_filter_selected(index:int):
+func on_tag_filter_selected(_index:int):
 	var tag = tag_filter.get_current_option_text()
 	var show_count = 0
 	for entry:BaseObjectDetailsEntryContainer in page_entries.values():

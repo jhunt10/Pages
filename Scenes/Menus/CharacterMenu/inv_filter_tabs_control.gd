@@ -25,11 +25,11 @@ func set_tabs(arr:Array):
 		new_tab.button.pressed.connect(on_tab_pressed.bind(val))
 		_tabs[val] = new_tab
 
-func on_tab_pressed(name:String):
-	if _tabs[name].is_selected:
-		_tabs[name].is_selected = false
-		on_tab_unselected.emit(name)
+func on_tab_pressed(name_val:String):
+	if _tabs[name_val].is_selected:
+		_tabs[name_val].is_selected = false
+		on_tab_unselected.emit(name_val)
 	else:
-		_tabs[name].is_selected = true
-		on_tab_selected.emit(name)
+		_tabs[name_val].is_selected = true
+		on_tab_selected.emit(name_val)
 	pass

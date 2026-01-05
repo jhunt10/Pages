@@ -165,7 +165,7 @@ func load_next_story_scene():
 
 func add_encounter_with_actor(actor):
 	if actor is String:
-		if not ActorLibrary.Instance.list_all_actor_keys().has(actor):
+		if not ActorLibrary.list_all_actor_keys().has(actor):
 			printerr("StoryState.add_encounter_with_actor: Unknown ActorKey '%s'." % [actor])
 			return
 	if actor is BaseActor:

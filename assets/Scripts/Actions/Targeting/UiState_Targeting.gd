@@ -60,7 +60,7 @@ func start_state():
 		if last_target_actor_id and selection_data.list_potential_targets().has(last_target_actor_id):
 			var map_pos = game_state.get_actor_pos(last_target_actor_id)
 			select_target(map_pos.to_vector2i(), false, true)
-	var actor_node = CombatRootControl.Instance.get_actor_node(selection_data.focused_actor.Id)
+	var actor_node = CombatRootControl.get_actor_node(selection_data.focused_actor.Id)
 	actor_node.reset_path_arrow()
 	actor_node.show_path_arrow()
 	
@@ -70,7 +70,7 @@ func end_state():
 	target_area_dislay_node.clear_display(_target_display_key)
 	target_input_display.visible = false
 	target_input_display.on_pressed_func = null
-	var actor_node = CombatRootControl.Instance.get_actor_node(selection_data.focused_actor.Id)
+	var actor_node = CombatRootControl.get_actor_node(selection_data.focused_actor.Id)
 	actor_node.reset_path_arrow()
 	actor_node.hide_path_arrow()
 	

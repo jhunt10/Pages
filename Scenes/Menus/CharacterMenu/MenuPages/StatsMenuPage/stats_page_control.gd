@@ -106,8 +106,8 @@ func sync():
 	
 	var target_params = actor.get_weapon_attack_target_params("Weapon")
 	
-	var mag_attack = actor.stats.get_stat(StatHelper.MagAttack)
-	var phy_attack = actor.stats.get_stat(StatHelper.PhyAttack)
+	#var mag_attack = actor.stats.get_stat(StatHelper.MagAttack)
+	#var phy_attack = actor.stats.get_stat(StatHelper.PhyAttack)
 	range_display.load_area_matrix(target_params.target_area)
 	#mag_atk_label.text = str(mag_attack)
 	#phys_atk_label.text = str(phy_attack)

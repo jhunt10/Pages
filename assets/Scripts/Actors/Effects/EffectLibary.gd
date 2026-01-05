@@ -7,7 +7,6 @@ const NO_ICON_SPRITE = "res://assets/Sprites/BadSprite.png"
 ## So this is the work around.
 static var Instance:EffectLibrary
 
-static var _cached_icon_sprites : Dictionary = {}
 static var _cached_subeffect_scripts:Dictionary = {}
 
 func get_object_name()->String:
@@ -18,7 +17,7 @@ func get_def_file_sufixes()->Array:
 	return ["_EffectDefs"]
 func get_data_file_sufix()->String:
 	return "_EffectsSave"
-func is_object_static(object_def:Dictionary)->bool:
+func is_object_static(_object_def:Dictionary)->bool:
 	return false
 func get_object_script_path(object_def:Dictionary)->String:
 	return object_def.get("EffectScriptPath", "res://assets/Scripts/Actors/Effects/BaseEffect.gd")
@@ -44,8 +43,8 @@ static func _create_effect(
 		key:String, 
 		data:Dictionary, 
 		force_id:String='', 
-		game_state:GameStateData=null, 
-		suppress_signals:bool = false
+		_game_state:GameStateData=null, 
+		_suppress_signals:bool = false
 	)->BaseEffect:
 	if not EffectHelper.is_creating_effect:
 		printerr("\n\nDepreciated: Effect created outside of EffectHelper! Use EffectHelper.create_effect instead.\n\n")

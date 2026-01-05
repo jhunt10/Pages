@@ -149,7 +149,6 @@ static func handle_attack(
 	# Apply damage and create effects
 	for defender:BaseActor in defenders:
 		var sub_event:AttackSubEvent = attack_event.sub_events[defender.Id]
-		var defender_node = CombatRootControl.get_actor_node(defender.Id)
 		
 		var damage_vfx_cache = []
 		
@@ -403,7 +402,6 @@ static func _does_attack_mod_apply(attack_mod, attacker, defenders, source_tag_c
 			return false
 	
 	# Check Defender Conditions
-	var all_defend_conditions_are_valid = true
 	for defender_condition in conditions.get("DefendersConditions", {}):
 		var require_all_defenders = defender_condition.get("RequiresAllDefenders", false)
 		var faction_filter = defender_condition.get("DefenderFactionFilters", [])
@@ -415,7 +413,6 @@ static func _does_attack_mod_apply(attack_mod, attacker, defenders, source_tag_c
 		var any_defenders_are_valid = false
 		for defender:BaseActor in defenders:
 			var position_data = attack_posision_data[defender.Id]
-			var condition_is_valid_for_defender = true
 			
 			# Check Direction Filters
 			if attack_directions_filters.size() > 0:
@@ -650,8 +647,6 @@ static func handle_colision(
 	var source_tag_chain = SourceTagChain.new()\
 	.append_source(SourceTagChain.SourceTypes.Actor, moving_actor)\
 	.force_add_tag("Collision")
-	
-	var all_tags = source_tag_chain.get_all_tags()
 	
 	var all_unique_actors = [moving_actor, blocking_actor]
 	var attack_posision_data = {}

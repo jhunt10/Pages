@@ -433,38 +433,38 @@ func _calc_turn_padding():
 
 
 
-func _get_premade_que_gaps(que_size:int, max_que_size:int, is_slow:bool)->Array:
+func _get_premade_que_gaps(que_size:int, max_que_size_val:int, is_slow:bool)->Array:
 	if que_size == 0:
 		return []
 	var out_list = []
-	if max_que_size == 1:
+	if max_que_size_val == 1:
 		if que_size == 1: out_list = [1]
-	elif max_que_size == 2:
+	elif max_que_size_val == 2:
 		if que_size == 1: out_list = [1, 0]
 		if que_size == 2: out_list = [1, 1]
-	elif max_que_size == 3:
+	elif max_que_size_val == 3:
 		if que_size == 1: return [0, 1, 0] # No shifting
 		if que_size == 2: out_list = [1, 1, 0]
 		if que_size == 3: out_list = [1, 1, 1]
-	elif max_que_size == 4:
+	elif max_que_size_val == 4:
 		if que_size == 1: out_list = [0, 1, 0, 0]
 		if que_size == 2: out_list = [1, 0, 1, 0]
 		if que_size == 3: out_list = [1, 1, 1, 0]
 		if que_size == 4: out_list = [1, 1, 1, 1]
-	elif max_que_size == 5:
+	elif max_que_size_val == 5:
 		if que_size == 1: return [0, 0, 1, 0, 0]
 		if que_size == 2: out_list = [0, 1, 0, 1, 0]
 		if que_size == 3: out_list = [1, 0, 1, 0, 1]
 		if que_size == 4: out_list = [1, 1, 1, 1, 0]
 		if que_size == 5: out_list = [1, 1, 1, 1, 1]
-	elif max_que_size == 6:
+	elif max_que_size_val == 6:
 		if que_size == 1: out_list = [0, 0, 1, 0, 0, 0]
 		if que_size == 2: out_list = [0, 1, 0, 1, 0, 0]
 		if que_size == 3: out_list = [1, 0, 1, 0, 1, 0]
 		if que_size == 4: out_list = [1, 1, 0, 1, 1, 0]
 		if que_size == 5: out_list = [1, 1, 1, 1, 1, 0]
 		if que_size == 6: out_list = [1, 1, 1, 1, 1, 1]
-	elif max_que_size == 7:
+	elif max_que_size_val == 7:
 		if que_size == 1: return     [0, 0, 0, 1, 0, 0, 0]
 		if que_size == 2: out_list = [0, 1, 0, 0, 1, 0, 0]
 		if que_size == 3: return     [0, 1, 0, 1, 0, 1, 0]
@@ -472,7 +472,7 @@ func _get_premade_que_gaps(que_size:int, max_que_size:int, is_slow:bool)->Array:
 		if que_size == 5: return     [0, 1, 1, 1, 1, 1, 0]
 		if que_size == 6: out_list = [1, 1, 1, 1, 1, 1, 0]
 		if que_size == 7: out_list = [1, 1, 1, 1, 1, 1, 1]
-	elif max_que_size == 8:
+	elif max_que_size_val == 8:
 		if que_size == 1: out_list = [0, 0, 0, 1, 0, 0, 0, 0]
 		if que_size == 2: out_list = [0, 1, 0, 0, 0, 1, 0, 0]
 		if que_size == 3: out_list = [0, 1, 0, 1, 0, 1, 0, 0]
@@ -481,7 +481,7 @@ func _get_premade_que_gaps(que_size:int, max_que_size:int, is_slow:bool)->Array:
 		if que_size == 6: out_list = [1, 1, 1, 0, 1, 1, 1, 0]
 		if que_size == 7: out_list = [1, 1, 1, 1, 1, 1, 1, 0]
 		if que_size == 8: out_list = [1, 1, 1, 1, 1, 1, 1, 1]
-	elif max_que_size == 9:
+	elif max_que_size_val == 9:
 		if que_size == 1: return     [0, 0, 0, 0, 1, 0, 0, 0, 0]
 		if que_size == 2: return     [0, 0, 1, 0, 0, 0, 1, 0, 0]
 		if que_size == 3: return     [0, 0, 1, 0, 1, 0, 1, 0, 0]
@@ -491,7 +491,7 @@ func _get_premade_que_gaps(que_size:int, max_que_size:int, is_slow:bool)->Array:
 		if que_size == 7: return     [1, 1, 0, 1, 1, 1, 0, 1, 1]
 		if que_size == 8: out_list = [1, 1, 1, 1, 1, 1, 1, 1, 0]
 		if que_size == 9: out_list = [1, 1, 1, 1, 1, 1, 1, 1, 1]
-	elif max_que_size == 10:
+	elif max_que_size_val == 10:
 		if que_size == 1: out_list = [0, 0, 0, 0, 1, 0, 0, 0, 0, 0]
 		if que_size == 2: out_list = [0, 0, 1, 0, 0, 0, 1, 0, 0, 0]
 		if que_size == 3: out_list = [0, 1, 0, 0, 1, 0, 0, 1, 0, 0]
@@ -504,8 +504,8 @@ func _get_premade_que_gaps(que_size:int, max_que_size:int, is_slow:bool)->Array:
 		if que_size == 9: out_list = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 	
 	if out_list.size() == 0:
-		printerr("No Premade Que Gaps found for QueSize: %s MaxQue: %s" % [que_size, max_que_size])
-		for i in range(max_que_size):
+		printerr("No Premade Que Gaps found for QueSize: %s MaxQue: %s" % [que_size, max_que_size_val])
+		for i in range(max_que_size_val):
 			out_list.append(0)
 		return out_list
 			

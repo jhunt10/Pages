@@ -32,7 +32,7 @@ func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, metadata:
 		return BaseSubAction.Success
 	
 	# Get Targeting Params
-	var actor_pos = game_state.get_actor_pos(actor)
+	#var actor_pos = game_state.get_actor_pos(actor)
 	var allow_dups = subaction_data.get("AllowAlreadyTargeted", false)
 	var allow_auto = subaction_data.get("AllowAutoTarget", false)
 	

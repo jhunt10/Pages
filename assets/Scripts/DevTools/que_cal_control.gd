@@ -15,7 +15,7 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if CombatRootControl.QueController.execution_state == ActionQueController.ActionStates.Waiting:
 		var mouse_pos = get_local_mouse_position()
 		if mouse_pos.x > 0 and mouse_pos.x < self.size.x:
@@ -33,11 +33,10 @@ func _process(delta: float) -> void:
 		
 	pass
 
-func on_actor_spawn(actor, pos):
+func on_actor_spawn(actor, _pos):
 	que_bars[actor.Id] = add_que(actor.Que)
 
 func add_que(que:ActionQue):
-	var section_size = 120 / max(que.get_max_que_size(),1)
 	if que.get_max_que_size() > max_que_size:
 		max_que_size = que.get_max_que_size()
 	var new_que:QueCalcBarControl = que_bar_prefab.duplicate()

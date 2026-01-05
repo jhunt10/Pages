@@ -82,7 +82,7 @@ func create_time_location_pop_up(block_data:Dictionary)->bool:
 ## Returns true if block should be waitied on
 func create_highlight(block_data:Dictionary)->bool:
 	var popup_key = block_data.get("Create", null)
-	var screen_size = parent_dialog_controller.get_viewport_rect().size
+	#var screen_size = parent_dialog_controller.get_viewport_rect().size
 	var popup_pos = null
 	var popup_size = null
 	
@@ -153,8 +153,8 @@ func create_speech_bubble(block_data:Dictionary)->bool:
 		return false
 	
 	var new_bubble:SpeachBubbleVfxNode = load("res://Scenes/VFXs/SpeachBubble/speach_bubble_vfx_node.tscn").instantiate()
-	var grow_direction = block_data.get("GrowDirection", "Center")
-	var offset = block_data.get("Offset", [0,-8])
+	#var grow_direction = block_data.get("GrowDirection", "Center")
+	#var offset = block_data.get("Offset", [0,-8])
 	
 	actor_node.vfx_holder.add_child("SpeachBubble", new_bubble)
 	new_bubble.set_block_data(block_data)

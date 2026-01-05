@@ -1,15 +1,6 @@
 class_name QueCalcBarControl
 extends HBoxContainer
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-
 func build_slots(que:ActionQue):
 	var section_size = 120 / max(que.get_max_que_size(),1)
 	var box_prefab:NinePatchRect = self.get_child(0)

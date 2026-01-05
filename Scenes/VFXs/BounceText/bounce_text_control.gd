@@ -23,7 +23,6 @@ extends HBoxContainer
 
 @export var display_text:String:
 	set(val):
-		var current_text = display_text
 		display_text = val
 		var index = 0
 		var total_width = 0
@@ -58,8 +57,3 @@ func _ready() -> void:
 		premade_bounce_letter.label.text = ""
 		premade_bounce_letter.hide()
 	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass

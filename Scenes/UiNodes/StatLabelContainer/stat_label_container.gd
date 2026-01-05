@@ -20,8 +20,8 @@ func _ready() -> void:
 	self.mouse_entered.connect(_on_mouse_enter)
 	self.mouse_exited.connect(_on_mouse_exit)
 
-func set_values(stat_name:String, actor:BaseActor):
-	self.stat_name = stat_name
+func set_values(stat_name_val:String, actor:BaseActor):
+	self.stat_name = stat_name_val
 	name_label.show()
 	self.name_label.text = StatHelper.get_stat_abbr(stat_name)
 	load_icon()

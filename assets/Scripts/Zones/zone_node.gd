@@ -16,7 +16,7 @@ func _ready() -> void:
 	else:
 		_build_zone_area()
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if _aura_actor_node:
 		self.global_position = _aura_actor_node.actor_motion_node.global_position
 	else:

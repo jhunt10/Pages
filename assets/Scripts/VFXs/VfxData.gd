@@ -14,12 +14,12 @@ var fixed_offset:Vector2i=Vector2i.ZERO
 var match_source_dir:bool=false
 var shake_actor:bool
 
-func _init(data:Dictionary, load_path:String) -> void:
+func _init(data:Dictionary, load_path_val:String) -> void:
 	VFXKey = data.get("VfxKey", "")
 	if VFXKey == '':
 		printerr("VfxData created without VFXKey")
 		return
-	self.load_path = load_path
+	self.load_path = load_path_val
 	self.animation_name = data.get("AnimationName", "")
 	self.sprite_name = data.get("SpriteName", "")
 	self.sprite_sheet_width = data.get("SpriteSheetWidth", 1)

@@ -48,7 +48,6 @@ static func get_item_keys_with_tag(tag)->Array:
 		tag_filter = {"RequireAnyTags": [tag]}
 	elif tag_filter is Array:
 		tag_filter = {"RequireAllTags": [tag]}
-	var defs = Instance._object_defs.keys()
 	for item_key in Instance._object_defs.keys():
 		var tags = Instance._object_defs[item_key].get("#ObjDetails", {}).get("Taxonomy", [])
 		if SourceTagChain.filters_accept_tags(tag_filter, tags):

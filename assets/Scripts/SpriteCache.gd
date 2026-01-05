@@ -6,8 +6,6 @@ static var _cached_sprites:Dictionary = {}
 static var _cached_overlay_sprites:Dictionary = {}
 
 static func get_sprite(path:String, nullable:bool=false)->Texture2D:
-	if path.contains("TitlePages"):
-		var t = true
 	if not _cached_sprites.keys().has(path):
 		if not ResourceLoader.exists(path):
 			if nullable:

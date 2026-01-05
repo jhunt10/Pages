@@ -159,12 +159,6 @@ func start_hide():
 	#animation_state = AnimationStates.Out
 
 func set_item(actor:BaseActor, item:BaseItem):
-	if _actor:
-		_actor.equipment.items_changed.disconnect(start_hide)
-		_actor.pages.items_changed.disconnect(start_hide)
-	if actor:
-		actor.equipment.items_changed.connect(start_hide)
-		actor.pages.items_changed.connect(start_hide)
 	item_id = item.Id
 	icon.texture = item.get_small_icon()
 	title_lable.text = item.get_display_name()

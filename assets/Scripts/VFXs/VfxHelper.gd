@@ -28,12 +28,12 @@ static func create_flash_text(actor_or_holder, value, flash_text_type:FlashTextT
 	vfx_holder.flash_text_controller.add_flash_text(text_value, flash_text_type, data, color)
 
 static func create_damage_effect(target_actor:BaseActor, vfx_key:String, vfx_data:Dictionary):
-	if FORCE_RELOAD: MainRootNode.vfx_libray.reload_vfxs()
+	if FORCE_RELOAD: VfxLibrary.reload_vfxs()
 	var target_actor_node:BaseActorNode = CombatRootControl.get_actor_node(target_actor.Id)
 	if !target_actor_node:
 		printerr("Failed to find actor node for: %s" % [target_actor.Id])
 		return
-	var vfx_def = MainRootNode.vfx_libray.get_vfx_data(vfx_key)
+	var vfx_def = VfxLibrary.get_vfx_data(vfx_key)
 	if !vfx_def:
 		printerr("Failed to VFX with key: %s" % [vfx_key])
 		if vfx_data.has("DamageNumber"):
@@ -41,7 +41,7 @@ static func create_damage_effect(target_actor:BaseActor, vfx_key:String, vfx_dat
 			var damage_color = vfx_data.get("DamageColor", Color.WHITE)
 			var damage_text_type = vfx_data.get("DamageTextType", VfxHelper.FlashTextType.Normal_Dmg)
 			var damage_string = str(damage_number)
-			VfxHelper.create_flash_text(target_actor, damage_string, damage_text_type)
+			VfxHelper.create_flash_text(target_actor, damage_string, damage_text_type, damage_color)
 		return
 	
 	if vfx_data.get("MatchSourceDir", false) and vfx_data.has("SourceActorId"):
@@ -83,11 +83,11 @@ static func create_vfx_on_actor(host_actor:BaseActor, vfx_key, vfx_data:Dictiona
 static func _create_vfx_on_holder(vfx_holder:VfxHolder, vfx_key, vfx_data:Dictionary, source_actor:BaseActor=null)->BaseVfxNode:
 	if vfx_key == null or vfx_key == "":
 		vfx_key = vfx_data.get("VfxKey", '')
-	if FORCE_RELOAD: MainRootNode.vfx_libray.reload_vfxs()
+	if FORCE_RELOAD: VfxLibrary.reload_vfxs()
 	
 	var vfx_def = {}
 	if vfx_key and not vfx_data.get("BeenMerged", false): 
-		vfx_def = MainRootNode.vfx_libray.get_vfx_def(vfx_key)
+		vfx_def = VfxLibrary.get_vfx_def(vfx_key)
 	var merged_data = BaseLoadObjectLibrary._merge_defs(vfx_data, vfx_def)
 	
 	# Set Host and Source actors
@@ -125,8 +125,8 @@ static func _create_vfx_on_holder(vfx_holder:VfxHolder, vfx_key, vfx_data:Dictio
 	return node
 
 static func create_missile_vfx_node(missile_vfx_key:String, vfx_data:Dictionary)->BaseVfxNode:
-	if FORCE_RELOAD: MainRootNode.vfx_libray.reload_vfxs()
-	var vfx_def = MainRootNode.vfx_libray.get_vfx_def(missile_vfx_key)
+	if FORCE_RELOAD: VfxLibrary.reload_vfxs()
+	var vfx_def = VfxLibrary.get_vfx_def(missile_vfx_key)
 	var override_load_path = (vfx_data.has("SpriteName") and vfx_data.get("SpriteName") != vfx_def.get("SpriteName"))
 	
 	var merged_data = BaseLoadObjectLibrary._merge_defs(vfx_data, vfx_def)
@@ -153,6 +153,6 @@ static func create_missile_vfx_node(missile_vfx_key:String, vfx_data:Dictionary)
 	return node
 
 static func create_ailment_vfx_node(ailment_key:String, actor:BaseActor)->BaseVfxNode:
-	if FORCE_RELOAD: MainRootNode.vfx_libray.reload_vfxs()
+	if FORCE_RELOAD: VfxLibrary.reload_vfxs()
 	var vfx_key = "Ailment" + ailment_key + "Vfx"
 	return create_vfx_on_actor(actor, vfx_key, {"CanStack": false})

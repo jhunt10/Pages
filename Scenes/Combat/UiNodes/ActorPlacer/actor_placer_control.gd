@@ -42,7 +42,6 @@ func _process(_delta: float) -> void:
 	pass
 
 func load_and_show(min_actors:int=1, max_actors:int=4):
-	var actors = StoryState.list_party_actors()
 	for child in actor_buttons_container.get_children():
 		child.queue_free()
 	_spawn_tile_map = CombatRootControl.Instance.MapController.player_spawn_area_tile_map

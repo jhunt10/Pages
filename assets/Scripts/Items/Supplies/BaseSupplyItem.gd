@@ -12,7 +12,7 @@ func get_tags()->Array:
 	tags.append("Consumable")
 	return tags
 
-func use_in_combat(actor:BaseActor, target, game_state:GameStateData):
+func use_in_combat(_actor:BaseActor, _target, _game_state:GameStateData):
 	print("Used Item: %s" % [self.Id])
 	pass
 

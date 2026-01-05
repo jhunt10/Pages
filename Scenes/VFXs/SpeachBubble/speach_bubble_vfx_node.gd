@@ -243,7 +243,7 @@ func set_block_data(block_data:Dictionary):
 	bounce = block_data.get("UseBounceText", false)
 	letter_delay = block_data.get("LetterDelay", letter_delay)
 
-func add_flash_text(text:String, color:Color):
+func add_flash_text(_text:String, _color:Color):
 	pass
 
 

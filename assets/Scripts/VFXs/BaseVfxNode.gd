@@ -26,7 +26,7 @@ func _ready() -> void:
 	if _start_when_ready:
 		start_vfx()
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	pass
 
 func set_vfx_data(new_id:String, data:Dictionary):

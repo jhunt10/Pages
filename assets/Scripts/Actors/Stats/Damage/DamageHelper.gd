@@ -232,7 +232,6 @@ static func roll_for_damage(
 	# Apply mods
 	var add_to = 0.0
 	var scale_by = 1.0
-	var type_ratios
 	for mod in damage_event.damage_mods.values():
 		if mod.get("ModType") == "Add":
 			add_to += mod.get("Value", 0)
@@ -354,7 +353,6 @@ static func does_damage_mod_apply(damage_mod:Dictionary, attacker:BaseActor, def
 static func _order_damage_mods(mods:Array):
 	var add_list = []
 	var scale_list = []
-	var overridde_list = []
 	for mod:BaseDamageMod in mods:
 		if mod.mod_type == BaseDamageMod.ModTypes.Add:
 			add_list.append(mod)

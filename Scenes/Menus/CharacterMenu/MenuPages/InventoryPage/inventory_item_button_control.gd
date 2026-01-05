@@ -51,7 +51,7 @@ func set_count(count:int):
 		return
 	if !count_label:
 		count_label = $CountLabel
-	var old_size = count_label.size
+	#var old_size = count_label.size
 	count_label.text = str(count)
 	#count_label.get_child(1).text = str(count)
 	#count_label.reset_size()

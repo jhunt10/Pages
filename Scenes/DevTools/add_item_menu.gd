@@ -11,12 +11,6 @@ func _ready() -> void:
 	close_button.pressed.connect(self.hide)
 	item_options_button.get_options_func = get_item_keys
 	confirm_button.pressed.connect(add_items)
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
 
 func get_item_keys()->Array:
 	return ItemLibrary.list_all_item_keys()

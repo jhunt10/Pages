@@ -4,16 +4,6 @@ extends Control
 @export var buttons_container:Container
 var buttons = {}
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	#sync_labels()
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-
 func sync_labels():
 	for button in buttons_container.get_children():
 		button.queue_free()
@@ -28,8 +18,6 @@ func sync_labels():
 		show_actors = StoryState.list_party_actors()
 	for actor in show_actors:
 		var new_button:PlayerTabButton = button_scene.instantiate()
-		#if not actor.pages.items_changed.is_connected(sync_labels):
-			#actor.pages.items_changed.connect(sync_labels)
 		new_button.set_actor(actor)
 		buttons[actor.Id] = (new_button)
 		new_button.button.pressed.connect(actor_pressed.bind(actor.Id))
@@ -38,7 +26,6 @@ func sync_labels():
 		new_button.button_texture.self_modulate = StoryState.get_player_color(actor)
 
 func set_selected_actor(actor):
-	var i = 0
 	for but_act_id in buttons.keys():
 		var button:PlayerTabButton = buttons[but_act_id]
 		button.showing = (actor and but_act_id == actor.Id)

@@ -89,7 +89,6 @@ func get_cant_use_reasons(actor:BaseActor)->Dictionary:
 	if requirment_data.has("ApparelReq"):
 		var appel_req = requirment_data.get("ApparelReq", {})
 		var all_apparel_must_match = appel_req.get("AllApparelMustMatch")
-		var all_apparel_matches = true
 		var any_apparel_matches = false
 		for apparel:BaseApparelEquipment in actor.equipment.list_apparel():
 			if TagHelper.check_tag_filters("ApparelTagFilters", appel_req, apparel):
@@ -98,7 +97,6 @@ func get_cant_use_reasons(actor:BaseActor)->Dictionary:
 				if not missing_requirements.has("Apparel"):
 					missing_requirements['Apparel'] = []
 				missing_requirements['Apparel'].append(apparel.get_display_name())
-				all_apparel_matches = false
 		if not any_apparel_matches and not all_apparel_must_match:
 			if not missing_requirements.has("Apparel"):
 				missing_requirements['Apparel'] = []

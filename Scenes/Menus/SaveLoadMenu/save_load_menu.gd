@@ -80,10 +80,6 @@ func on_close_menu():
 	menu_closed.emit()
 	self.queue_free()
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-
 func set_saving_data():
 	_saving_data = SaveLoadHandler._build_save_meta_data("New Save")
 	_cached_save_meta_data[NEW_SAVE_KEY] = _saving_data
@@ -212,7 +208,6 @@ func set_displayed_save_data(save_name:String, data):
 			save_button.text = "Save"
 
 func clear_displayed_save_data():
-	var data = _cached_save_meta_data.get(save_mode, {})
 	sel_save_name_label.text = ""
 	sel_save_date_label.text = ""
 	sel_save_loaction_label.text = ""

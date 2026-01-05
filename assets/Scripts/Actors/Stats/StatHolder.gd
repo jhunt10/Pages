@@ -62,9 +62,9 @@ func dirty_stats():
 	if LOGGING: print("Stats Dirty")
 	_stats_dirty = true
 
-func recache_stats(emit_signal:bool=true):
+func recache_stats(should_emit_signal:bool=true):
 	if LOGGING: printerr("Recaching Stats")
-	_calc_cache_stats(emit_signal)
+	_calc_cache_stats(should_emit_signal)
 
 func has_stat(stat_name:String)->bool:
 	if _stats_dirty:
@@ -72,7 +72,6 @@ func has_stat(stat_name:String)->bool:
 	return _cached_stats.has(stat_name)
 
 func get_stat(stat_name:String, default:float=0):
-	var full_stat_name = stat_name
 	if _stats_dirty:
 		_calc_cache_stats()
 	return _cached_stats.get(stat_name, default)
@@ -160,14 +159,6 @@ func apply_level_up(new_level:int, remaining_exp:int, add_att_levels:Dictionary)
 		_actor.set_load_val(["Stats", "AttributeLevels", attribute], add_att_levels.get(attribute))
 		attribute_levels[attribute] = add_att_levels.get(attribute)
 	recache_stats()
-
-func get_auto_level_attributes(level:int):
-	var points = StatHelper.get_attribute_points_for_level(level)
-	var scaling = _actor.get_stat_scaling()
-	var spent_points = {}
-	for att in scaling.keys():
-		var val = points * scaling
-	
 
 # -----------------------------------------------------------------
 #					Bar Stats
@@ -304,7 +295,7 @@ func clear_temp_stat_mods(reache_now:bool=true):
 	if reache_now:
 		recache_stats(false)
 
-func _calc_cache_stats(emit_signal:bool=true):
+func _calc_cache_stats(should_emit_signal:bool=true):
 	if LOGGING: 
 		print("#Caching Stats for: %s" % _actor.ActorKey)
 	
@@ -352,10 +343,10 @@ func _calc_cache_stats(emit_signal:bool=true):
 				printerr("StatHolder._calc_cache_stats: Multiple 'Set' mods found on stat '%s'." % [mod.stat_name])
 			set_stats[mod.stat_name] = mod.value
 			agg_mods[mod.stat_name][mod.mod_type].append(mod.value)
-			var display_name = "=" + str(mod.value) + " " + mod.display_name
+			#var display_name = "=" + str(mod.value) + " " + mod.display_name
 		elif mod.mod_type	 == BaseStatMod.ModTypes.Add:
 			agg_mods[mod.stat_name][mod.mod_type].append(mod.value)
-			var display_name = "+" + str(mod.value) + " " + mod.display_name
+			#var display_name = "+" + str(mod.value) + " " + mod.display_name
 		elif mod.mod_type == BaseStatMod.ModTypes.AddStat:
 			var dep_stat_name = mod.dep_stat_name
 			if key_depends_on_vals.has(dep_stat_name) and key_depends_on_vals[dep_stat_name].has(mod.stat_name):
@@ -367,10 +358,10 @@ func _calc_cache_stats(emit_signal:bool=true):
 				key_depends_on_vals[mod.stat_name].append(dep_stat_name)
 				
 			agg_mods[mod.stat_name][mod.mod_type].append({"DepStat": dep_stat_name, "Scale": mod.value})
-			var display_name = "+" + str(dep_stat_name) + "x" + str(mod.value) + " " + mod.display_name
+			#var display_name = "+" + str(dep_stat_name) + "x" + str(mod.value) + " " + mod.display_name
 		else:
 			agg_mods[mod.stat_name][mod.mod_type].append(mod.value)
-			var display_name = "x" + str(mod.value) + " " + mod.display_name
+			#var display_name = "x" + str(mod.value) + " " + mod.display_name
 	
 	# Add a Set 0 Stat mod for modded stats that don't appear in Base Stats
 	for mod_stat_name in agg_mods.keys():
@@ -475,5 +466,5 @@ func _calc_cache_stats(emit_signal:bool=true):
 	if safety_limit <= 0:
 		printerr("Stat Caching Failed wth to many dependancies!")
 	_stats_dirty = false
-	if emit_signal:
+	if should_emit_signal:
 		held_stats_changed.emit()

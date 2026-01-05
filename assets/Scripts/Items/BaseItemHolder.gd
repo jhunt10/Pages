@@ -4,8 +4,6 @@ class_name BaseItemHolder
 const LOGGING = true
 enum ValidStates {UnValidated, Valid, Invalid, Unacceptable}
 
-# Unused / Outdated signal left behind because I don't want to fix Character Sheet right now
-signal items_changed
 signal item_slots_rebuilt
 
 var slot_sets_data:Array:
@@ -389,7 +387,7 @@ func _direct_clear_slot(slot_index:int):
 
 ## Get Items that will be removed if current item is added to slot.
 ## Should only be used by ItemHelper
-func _get_items_removed_if_new_item_added(slot_index:int, item:BaseItem)->Array:
+func _get_items_removed_if_new_item_added(slot_index:int, _item:BaseItem)->Array:
 	var current_item = get_item_in_slot(slot_index)
 	if current_item:
 		return [current_item]
@@ -446,10 +444,10 @@ func add_item_to_first_valid_slot(item:BaseItem):
 	ItemHelper.transering_items.erase(item.Id)
 	return false
 
-func _on_item_removed(item_id:String, supressing_signals:bool):
+func _on_item_removed(_item_id:String, _supressing_signals:bool):
 	pass
 
-func _on_item_added_to_slot(item:BaseItem, index:int):
+func _on_item_added_to_slot(_item:BaseItem, _index:int):
 	pass
 
 

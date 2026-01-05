@@ -17,9 +17,6 @@ func _ready():
 	#label.add_theme_color_override('font_color', _color)
 	pass
 
-func _process(delta):
-	pass
-
 func add_flash_text(val:String, flash_text_type:VfxHelper.FlashTextType, data:Dictionary = {}, color:Color = Color.WHITE):
 	var new_text:FlashTextNode = premade_label.duplicate()
 	new_text.id = str(ResourceUID.create_id())

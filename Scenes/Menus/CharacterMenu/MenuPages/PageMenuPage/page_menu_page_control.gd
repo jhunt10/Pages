@@ -26,11 +26,6 @@ func _ready() -> void:
 	premade_page_set.hide()
 	#title_label._size_dirty = true
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-
 func get_item_holder()->BaseItemHolder:
 	if _actor:
 		return _actor.pages
@@ -57,7 +52,6 @@ func build_item_slots():
 	if title_page:
 		title_label.text = title_page.get_display_name()
 	item_slot_buttons.append(title_page_button)
-	var slot_sets_container_hight = 241#sets_container.size.y
 	
 	var slot_set:PageSlotSetContainer = null
 	var last_display_name = ''
@@ -116,7 +110,7 @@ func can_place_item_in_slot(item:BaseItem, index:int):
 	print("Item Not Page Item")
 	return false
 
-func remove_item_from_slot(item:BaseItem, index:int):
+func remove_item_from_slot(item:BaseItem, _index:int):
 	ItemHelper.try_transfer_item_from_holder_to_inventory(item, _actor.pages)
 
 func try_place_item_in_slot(item:BaseItem, index:int):
@@ -125,5 +119,5 @@ func try_place_item_in_slot(item:BaseItem, index:int):
 		return true
 	return false
 
-func try_move_item_to_slot(item:BaseItem, from_index:int, to_index:int):
+func try_move_item_to_slot(_item:BaseItem, from_index:int, to_index:int):
 	ItemHelper.swap_item_holder_slots(_actor.items, from_index, to_index)

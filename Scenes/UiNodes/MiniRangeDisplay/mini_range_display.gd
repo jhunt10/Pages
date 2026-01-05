@@ -60,7 +60,7 @@ func load_area_matrix(area:AreaMatrix):
 	load_range(points)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if update:
 		#var test_range = [
 			#[-2,-3],[-1,-3],[0,-3],[1,-3],[2,-3],

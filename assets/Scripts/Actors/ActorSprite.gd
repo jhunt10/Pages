@@ -43,7 +43,7 @@ func has_item_cached_in_sprite(item)->bool:
 	return _cached_sprite_item_ids.has(item_id)
 
 func _build_sprite_sheet():
-	var is_complex_actor = _actor.get_load_val("ScenePath", "").ends_with("complex_actor_node.tscn")
+	#var is_complex_actor = _actor.get_load_val("ScenePath", "").ends_with("complex_actor_node.tscn")
 	
 	var first_cache = (_cached_body_sprite == null)
 	var sprite_sheet_file = _actor.get_load_val("SpriteSheet", null)
@@ -161,8 +161,8 @@ func get_black_and_white_portrait()->Texture2D:
 	for y in org_image.get_size().y:
 		for x in org_image.get_size().x:
 			var color = org_image.get_pixel(x, y)
-			var max_val = max(color.r, color.b, color.g)
-			var min_val = min(color.r, color.b, color.g)
+			#var max_val = max(color.r, color.b, color.g)
+			#var min_val = min(color.r, color.b, color.g)
 			var value = (color.r + color.b + color.g) / 3.0
 			var new_color = Color(value, value, value, color.a)
 			new_image.set_pixel(x, y, new_color)

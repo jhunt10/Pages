@@ -10,12 +10,6 @@ var played_once = false
 func _ready() -> void:
 	animation.animation_finished.connect(_on_animation_finish)
 	play_button.pressed.connect(_start_pressed)
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
 
 func _start_pressed():
 	if animation.is_playing():

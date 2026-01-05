@@ -10,7 +10,7 @@ func get_required_props()->Dictionary:
 func get_action_tags(_subaction_data:Dictionary)->Array:
 	return ["Move"]
 
-func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, metadata:QueExecutionData,
+func do_thing(_parent_action:PageItemAction, subaction_data:Dictionary, _metadata:QueExecutionData,
 				game_state:GameStateData, actor:BaseActor)->bool:
 	var move:MapPos = MapPos.Parse(subaction_data.get("RelativePos", [0,0,0,0]))
 	var success = MoveHandler.handle_movement(game_state, actor, move, subaction_data['MovementType'])

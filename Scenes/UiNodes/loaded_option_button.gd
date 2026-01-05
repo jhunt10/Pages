@@ -13,11 +13,6 @@ func _ready() -> void:
 	self.item_selected.connect(hide_selected_icon)
 	pass # Replace with function body.
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-	
 func get_current_option_text():
 	if self.selected >= 0:
 		return self.get_item_text(self.selected)

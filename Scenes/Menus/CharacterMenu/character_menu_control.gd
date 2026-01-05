@@ -327,7 +327,7 @@ func start_dragging():
 		mouse_control.set_drag_item(_selected_item)
 		#mouse_control.drag_item_icon.texture = _selected_item.get_large_icon()
 		mouse_control.position = _button_down_pos - mouse_control.offset
-		var mouse_pos = get_global_mouse_position()
+		#var mouse_pos = get_global_mouse_position()
 		mouse_control.show()
 		if LOGGING: print("StartDragging: SelectedItem: %s" % [_selected_item.Id])
 
@@ -363,7 +363,6 @@ func stop_dragging():
 			source_page_control.sync()
 		if dest_page_control:
 			dest_page_control.sync()
-		_selected_item  
 		
 
 func clear_highlights():

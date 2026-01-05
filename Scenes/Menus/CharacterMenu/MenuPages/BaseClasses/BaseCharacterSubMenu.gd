@@ -24,7 +24,7 @@ var _actor:BaseActor:
 func _ready() -> void:
 	pass 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	pass
 
 ######################################
@@ -80,7 +80,7 @@ func get_item_slot_button_for_index(index:int)->BaseCharacterMenu_ItemSlotButton
 		return item_slot_buttons[index]
 	return null
 
-func highlight_slot(index:int):
+func highlight_slot(_index:int):
 	pass
 
 func _on_item_button_down(index:int):

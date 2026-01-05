@@ -5,7 +5,7 @@ enum SubEffectPropTypes {Triggers, StatModKey, DamageModKey, DamageKey, SubEffec
 # Returns a Dictionary of {Property Name, Property Type} for what properties this subeffect
 # 	exspects to find in it's subeffect_data (Mostly for Effect Editor)
 func get_required_props()->Dictionary: return {}
-func get_prop_enum_values(key:String)->Array: return []
+func get_prop_enum_values(_key:String)->Array: return []
 
 func _init() -> void:
 	pass
@@ -48,7 +48,7 @@ func on_damage_taken(_effect:BaseEffect, _subeffect_data:Dictionary,
 	pass
 
 func other_effect_to_be_added(parent_effect:BaseEffect, _subeffect_data:Dictionary,
-					_game_state:GameStateData, other_effect:BaseEffect, meta_data:Dictionary):
+					_game_state:GameStateData, _other_effect:BaseEffect, _meta_data:Dictionary):
 	on_effect_trigger(parent_effect, _subeffect_data, BaseEffect.EffectTriggers.OnOtherEffectToBeAdded, _game_state)
 
 # Attack/Defend function to make logic more distinct
@@ -108,7 +108,7 @@ func after_move(_effect:BaseEffect, _subeffect_data:Dictionary,
 	on_effect_trigger(_effect, _subeffect_data, BaseEffect.EffectTriggers.PostMove, _game_state)
 	pass
 
-func on_collision(_effect:BaseEffect, _subeffect_data:Dictionary, collision_event:CollisionEvent, _game_state:GameStateData):
+func on_collision(_effect:BaseEffect, _subeffect_data:Dictionary, _collision_event:CollisionEvent, _game_state:GameStateData):
 	on_effect_trigger(_effect, _subeffect_data, BaseEffect.EffectTriggers.OnCollision, _game_state)
 
 func on_use_item(_effect:BaseEffect, _subeffect_data:Dictionary,
@@ -129,5 +129,5 @@ func _array_to_trigger_list(arr:Array)->Array:
 			printerr("BaseSubEffect._array_to_trigger_list: Unknown EffectTrigger value '%s'." % [trig_val])
 	return out_list
 
-func merge_new_duplicate_sub_effect_data(parent_effect:BaseEffect, own_sub_effect_data:Dictionary, dup_effect_data:Dictionary, dup_sub_effect_data:Dictionary):
+func merge_new_duplicate_sub_effect_data(_parent_effect:BaseEffect, _own_sub_effect_data:Dictionary, _dup_effect_data:Dictionary, _dup_sub_effect_data:Dictionary):
 	pass

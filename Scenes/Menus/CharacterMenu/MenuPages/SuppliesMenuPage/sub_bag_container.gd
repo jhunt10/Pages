@@ -9,14 +9,6 @@ signal mouse_exit_item(index)
 @export var title_label:Label
 var _slot_set_key:String
 var _buttons:Dictionary = {}
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
 
 func set_sub_bag_data(holder:BaseItemHolder, slot_set_data:Dictionary):
 	_slot_set_key = slot_set_data['Key']
@@ -35,7 +27,6 @@ func set_sub_bag_data(holder:BaseItemHolder, slot_set_data:Dictionary):
 			if index == 0: backgrund_type = "Top"
 			elif index == slot_count -1: backgrund_type = "Bottom"
 			else: backgrund_type = "Middle"
-		var item = holder.get_item_id_in_slot(raw_index)
 		new_button.set_background_type(backgrund_type)
 		self.add_child(new_button)
 		_buttons[raw_index] = new_button

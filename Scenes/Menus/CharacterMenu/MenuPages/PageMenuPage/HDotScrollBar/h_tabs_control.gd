@@ -42,11 +42,6 @@ func _ready() -> void:
 			premade_dot.visible = false
 	pass # Replace with function body.
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-
 func _create_dots(count:int):
 	if !dots_container or !premade_dot:
 		return

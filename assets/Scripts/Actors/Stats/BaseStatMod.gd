@@ -21,7 +21,7 @@ enum ModTypes {
 	FalseMod # used for hacking this dumb class
 }
 
-static func create_from_data(source_id:String, data:Dictionary) -> BaseStatMod:
+static func create_from_data(new_source_id:String, data:Dictionary) -> BaseStatMod:
 	var type_key:String = data["ModType"]
 	var type = ModTypes.get(type_key)
 	var set_mode_type
@@ -35,7 +35,7 @@ static func create_from_data(source_id:String, data:Dictionary) -> BaseStatMod:
 			printerr("Stat Mod: '%s' set to AddStat but is missing 'DepStatName'." % [data.get("DisplayName", "NO Mod NAME")])
 			set_mode_type = ModTypes.Add
 	var stat_mod = BaseStatMod.new(
-		source_id, 
+		new_source_id, 
 		data['StatName'], 
 		data['DisplayName'], 
 		set_mode_type, 
@@ -58,12 +58,12 @@ func get_as_data()->Dictionary:
 		"Value": self.value
 	}
 
-func _init(source_id:String, stat_name:String, display_name:String, mod_type:ModTypes, value, dep_stat=null):
+func _init(source_id_val:String, stat_name_val:String, display_name_val:String, mod_type_val:ModTypes, value_val, dep_stat=null):
 	# TODO: CanStack Id Logic for all Stat Mods (like I just did for Damage and Attack Mods)
-	self.source_id = source_id
-	self.stat_name = stat_name
-	self.display_name = display_name
-	self.mod_type = mod_type
+	self.source_id = source_id_val
+	self.stat_name = stat_name_val
+	self.display_name = display_name_val
+	self.mod_type = mod_type_val
 	if dep_stat:
 		self.dep_stat_name = dep_stat
-	self.value = value
+	self.value = value_val

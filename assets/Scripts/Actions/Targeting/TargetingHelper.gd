@@ -208,24 +208,24 @@ static func trace_los(from_point, to_point, _map_state):
 		los_dict[point] = LOS_VALUE.Open
 	return los_dict
 
-static func get_line_of_sight_for_spots(from_point, to_point, game_state:GameStateData, check_cache:Dictionary = {}, log=false)->LOS_VALUE:
+static func get_line_of_sight_for_spots(from_point, to_point, game_state:GameStateData, check_cache:Dictionary = {}, logging=false)->LOS_VALUE:
 	var in_line_is_unbroken = true
 	var out_line_is_unbroken = true
-	if log: print("#### LOS CHECK")
-	if log: print("# From: %s | To: %s" % [from_point, to_point])
+	if logging: print("#### LOS CHECK")
+	if logging: print("# From: %s | To: %s" % [from_point, to_point])
 	
 	if game_state.spot_blocks_los(to_point):
 		check_cache[to_point] = LOS_VALUE.Invalid
 		return check_cache[to_point]
 	
 	var path = safe_calc_line(from_point, to_point, false, true, false)
-	if log: print("# Path: %s" % [path])
+	if logging: print("# Path: %s" % [path])
 	for p in path:
 		if in_line_is_unbroken and game_state.spot_blocks_los(p):# _spot_blocks_los(p, check_cache, map):
 			in_line_is_unbroken = false
 	
 	path = safe_calc_line(from_point, to_point, true, false, true)
-	if log: print("# Path: %s" % [path])
+	if logging: print("# Path: %s" % [path])
 	for p in path:
 		if out_line_is_unbroken and game_state.spot_blocks_los(p):#  _spot_blocks_los(p, check_cache, map):
 			out_line_is_unbroken = false
@@ -236,7 +236,7 @@ static func get_line_of_sight_for_spots(from_point, to_point, game_state:GameSta
 		check_cache[to_point] = LOS_VALUE.Cover
 	else:
 		check_cache[to_point] = LOS_VALUE.Blocked
-	#if log: print("# OutLine %s: %s" % [p, out_line_is_unbroken])
+	#if logging: print("# OutLine %s: %s" % [p, out_line_is_unbroken])
 	return check_cache[to_point]
 	
 # Calculate path as if m is positive and < 1. Then rotate and mirror as needed
@@ -272,7 +272,7 @@ static func safe_calc_line(start, end, round_down=false, fill_back:bool=false, f
 		
 	
 	var check_line = []
-	var last_x = min_point.x
+	var _last_x = min_point.x
 	var last_y = min_point.y
 	var m:float = float(max_point.y - min_point.y) / float(max_point.x - min_point.x)
 	for check_x in range(min_point.x, max_point.x+1):
@@ -312,10 +312,10 @@ static func safe_calc_line(start, end, round_down=false, fill_back:bool=false, f
 	return out_line
 	
 static func round(val:float)->int:
-	var floor:int = floori(val)
-	if val - float(floor) > 0.5:
-		return floor + 1
-	return floor
+	var floor_val:int = floori(val)
+	if val - float(floor_val) > 0.5:
+		return floor_val + 1
+	return floor_val
 
 static func rotate_target_area(area, direction)->Array:
 	if area is String:

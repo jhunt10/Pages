@@ -97,10 +97,10 @@ func set_actor(actor:BaseActor):
 	_actor = actor
 	
 	var current_level = _actor.stats.get_stat(StatHelper.Level, 0)
-	var exp = _actor.stats.get_stat(StatHelper.Experience, 0)
+	var exp_val = _actor.stats.get_stat(StatHelper.Experience, 0)
 	next_level = current_level
 	var exp_to_next = _actor.stats.get_exp_to_next_level(current_level)
-	var remaining = exp 
+	var remaining = exp_val
 	while remaining >= exp_to_next:
 		remaining -= exp_to_next
 		next_level += 1

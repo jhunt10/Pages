@@ -27,11 +27,11 @@ func _on_start():
 		var rot_range = _data.get("RandomRotation")
 		self.rotation_degrees = randf_range(rot_range[0], rot_range[1])
 	if _data.has("Scale"):
-		var scale = _data.get("Scale", 1)
-		if scale is Array:
-			sprite.scale = Vector2(scale[0], scale[1])
+		var scale_data = _data.get("Scale", 1)
+		if scale_data is Array:
+			sprite.scale = Vector2(scale_data[0], scale_data[1])
 		else:
-			sprite.scale = Vector2(scale, scale)
+			sprite.scale = Vector2(scale_data, scale_data)
 			
 	var animation_name = _data.get("AnimationName")
 	if animation_name:
@@ -45,7 +45,7 @@ func _on_start():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if _has_animation and _state == States.Playing and animation_finished:
 		finish()
 
@@ -76,5 +76,5 @@ func set_vfx_data(new_id:String, data:Dictionary):
 		if dir == 2: sprite.rotation_degrees = 180
 		if dir == 3: sprite.rotation_degrees = 270
 
-func _on_animation_finish(animation_name:String):
+func _on_animation_finish(_animation_name:String):
 	animation_finished = true

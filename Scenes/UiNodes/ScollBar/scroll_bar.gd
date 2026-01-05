@@ -30,7 +30,6 @@ func get_container_scroll_precent()->float:
 	if !child_container:
 		return 0
 	
-	var min_scroll = 0
 	var max_scroll = child_container.size.y - scroll_container.size.y
 	var current_scroll = -child_container.position.y / max_scroll 
 	return current_scroll
@@ -42,7 +41,6 @@ func set_container_scroll_precent(val:float):
 		printerr("No Child Container Found for Scroll Container")
 		return
 	
-	var min_pos = 0
 	var max_pos = child_container.size.y - scroll_container.size.y
 	var current_pos = _last_child_perc * max_pos 
 	child_container.position.y = -current_pos
@@ -61,7 +59,6 @@ func get_bar_scroll_percent():
 func set_scroll_bar_position_from_percent(val):
 	_last_bar_perc = min(1, max(0, val))
 	#printerr("ScrollBar %s Set Bar Position Percent: %s " % [debug_name, _last_bar_perc])
-	var min_pos = 0
 	var max_pos = scroll_bounds.size.y - bar.size.y
 	var cur_pos = max_pos * _last_bar_perc
 	bar.position.y =  max(0, min(scroll_bounds.size.y - bar.size.y,  cur_pos)) 
@@ -80,7 +77,7 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if _delay_size_calc or inner_scroll_container.get_minimum_size().y != container_hight:
 		calc_bar_size()
 		_delay_size_calc = false
@@ -109,7 +106,6 @@ func button_relase():
 	dragging = false
 
 func calc_bar_size():
-	var name_str = self.name
 	container_hight = inner_scroll_container.get_minimum_size().y
 	var visible_hight = scroll_container.size.y
 	var percent_vis = min(1, visible_hight / container_hight)

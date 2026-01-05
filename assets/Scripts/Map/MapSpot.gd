@@ -22,11 +22,11 @@ func duplicate(new_parent:MapStateData)->MapSpot:
 		print("Dupped 77 Spot (%s,%s): %s | %s || %s to %s" % [X, Y, new_spot._layer_to_actor_ids.size(), _layer_to_actor_ids.size(), self, new_spot])
 	return new_spot
 
-func _init(x:int, y:int, terrain_index:int, parent:MapStateData) -> void:
+func _init(x:int, y:int, terrain_index_val:int, parent:MapStateData) -> void:
 	parent_map = parent
 	X = x
 	Y = y
-	self.terrain_index = terrain_index
+	self.terrain_index = terrain_index_val
 	
 func add_actor(actor:BaseActor, layer=MapStateData.MapLayers.Default):
 	if LOGGING: print("Adding actor '%s' (%s, %s) %s" % [actor.ActorKey, X, Y, layer])

@@ -163,18 +163,17 @@ func _on_hosted_effect_ends(limit_type:EffectHelper.LimitedEffectTypes, effect_i
 			limited_effects_list.remove_at(index)
 		else:
 			index += 1
-	var t = true
 
 func get_count_limit_for_limited_effect(type:EffectHelper.LimitedEffectTypes)->int:
 	var str_type = EffectHelper.LimitedEffectTypes.keys()[type]
 	var stat_name = "LmtEftCount" + ":" + str_type
 	return _actor.stats.get_stat(stat_name, 1)
-func get_per_actor_limit_for_limited_effect(type:EffectHelper.LimitedEffectTypes)->int:
+func get_per_actor_limit_for_limited_effect(_type:EffectHelper.LimitedEffectTypes)->int:
 	return 99
 	#var str_type = EffectHelper.LimitedEffectTypes.keys()[type]
 	#var stat_name = str_type + ":PerActorLimit"
 	#return _actor.stats.get_stat(stat_name, 1)
-func get_on_self_limit_for_limited_effect(type:EffectHelper.LimitedEffectTypes)->int:
+func get_on_self_limit_for_limited_effect(_type:EffectHelper.LimitedEffectTypes)->int:
 	return 99
 	#var str_type = EffectHelper.LimitedEffectTypes.keys()[type]
 	#var stat_name = str_type + ":OnSelfLimit"

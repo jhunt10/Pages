@@ -211,7 +211,6 @@ func _handle_entry(entry_data:Dictionary, raw_delta, remaining_delta)->bool:
 	#----------------------------------
 	elif entry_type == EntryTypes.Text:
 		var text = entry_data.get("Text", null)
-		var word_break = false
 		if not text: return true
 		if not entry_data.has("RemainingText"):
 			entry_data['RemainingText'] = text
@@ -393,9 +392,9 @@ func _estimate_read_time(text:String)->float:
 	# TODO: Account for special logic characters
 	if text.replace(".", "").replace(" ", "") == "":
 		return 0
-	var word_cound:float = text.replace(".", "").split(" ").size()
-	var avg_wpm:float = 260
-	var seconds:float = (word_cound / avg_wpm) * 60.0
+	#var word_cound:float = text.replace(".", "").split(" ").size()
+	#var avg_wpm:float = 260
+	#var seconds:float = (word_cound / avg_wpm) * 60.0
 	#printerr("Estimated Read: '%s' | %s" % [text,seconds])
 	return  0.5#max(1, seconds * 1.0)
 

@@ -89,8 +89,8 @@ func open_save_menu():
 	var save_scene:SaveLoadMenu = load("res://Scenes/Menus/SaveLoadMenu/save_load_menu.tscn").instantiate()
 	save_scene.save_mode = true
 	var screen_size = self.size
-	var scale = screen_size.y / save_scene.size.y
-	save_scene.scale_control.scale = Vector2(scale, scale)
+	var scale_val = screen_size.y / save_scene.size.y
+	save_scene.scale_control.scale = Vector2(scale_val, scale_val)
 	if screen_size.y > save_scene.size.y * 1.5:
 		save_scene.scale_control.scale = Vector2(1.5, 1.5)
 	self.add_child(save_scene)
@@ -99,7 +99,6 @@ func open_load_menu():
 	var save_scene:SaveLoadMenu = load("res://Scenes/Menus/SaveLoadMenu/save_load_menu.tscn").instantiate()
 	save_scene.save_mode = false
 	var screen_size = self.size
-	var scale = screen_size.y / save_scene.size.y
 	save_scene.scale_control.scale = Vector2(1, 1)
 	if screen_size.y > save_scene.size.y * 1.5:
 		save_scene.scale_control.scale = Vector2(1.5, 1.5)
@@ -164,7 +163,7 @@ func open_character_sheet(_actor:BaseActor=null, parent_node=null)->CharacterMen
 		#actor = ActorLibrary.create_actor("TestActor", {})
 	var charsheet:CharacterMenuControl = load("res://Scenes/Menus/CharacterMenu/character_menu.tscn").instantiate()
 	var screen_size = self.size
-	var menu_scale = screen_size.y / charsheet.size.y
+	#var menu_scale = screen_size.y / charsheet.size.y
 	#charsheet.scale_control.scale = Vector2(scale, scale)
 	charsheet.scale_control.scale = Vector2(1, 1)
 	#if screen_size.y > charsheet.size.y * 2:
@@ -223,9 +222,9 @@ func open_animation_tester():
 	
 func go_to_main_menu():
 	if ActorLibrary.Instance:
-		ActorLibrary.Instance.purge_actors()
+		ActorLibrary.purge_actors()
 	if ItemLibrary.Instance:
-		ItemLibrary.Instance.purge_items()
+		ItemLibrary.purge_items()
 	current_scene.queue_free()
 	current_scene = load("res://Scenes/Menus/MainMenu/main_menu_root_control.tscn").instantiate()
 	center_container.add_child(current_scene)

@@ -158,7 +158,7 @@ func _cache_action_mods():
 					if not cached_action_mod_source_ids.has(passive.Id):
 						cached_action_mod_source_ids.append(passive.Id)
 
-func _on_item_added_to_slot(item:BaseItem, index:int):
+func _on_item_added_to_slot(item:BaseItem, _index:int):
 	if item == null:
 		return
 	var page = item as BasePageItem
@@ -174,7 +174,7 @@ func _on_item_added_to_slot(item:BaseItem, index:int):
 			item_id_to_effect_id[item.Id] = new_effect.Id
 	_cache_action_mods()
 
-func _on_item_removed(item_id:String, supressing_signals:bool):
+func _on_item_removed(item_id:String, _supressing_signals:bool):
 	if item_id_to_effect_id.keys().has(item_id):
 		var effect = EffectLibrary.get_effect(item_id_to_effect_id[item_id])
 		_actor.effects.remove_effect(effect)

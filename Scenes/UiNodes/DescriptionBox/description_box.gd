@@ -40,8 +40,8 @@ func _show_pop_up(data_str):
 					popup_container.message_box.append_text(line)
 				if line is Texture2D:
 					popup_container.message_box.add_image(line, 0, 0, Color(1,1,1,1), INLINE_ALIGNMENT_BOTTOM)
-	var content_scale = get_window().content_scale_factor
-	popup_container.scale  = Vector2.ONE
+	#var content_scale = get_window().content_scale_factor
+	#popup_container.scale  = Vector2.ONE
 	#if content_scale != 1:
 		#popup_container.scale = Vector2.ZERO * (1.0/content_scale)
 
@@ -53,7 +53,7 @@ func color_text(color, raw_text)->String:
 			color = color.trim_suffix("]")
 	return "[color=#" + color + "]" + raw_text + "[/color]"
 
-func _hide_pop_up(data):
+func _hide_pop_up(_data):
 	if popup_container:
 		popup_container.queue_free()
 
@@ -324,7 +324,7 @@ func _build_bbcode_array(raw_description:String, object_def:Dictionary, object_i
 		out_arr.append(out_line)
 	return out_arr
 
-func _get_title_specific_faction_name(actor:BaseActor, faction_name:String, force_plur:bool=false)->String:
+func _get_title_specific_faction_name(_actor:BaseActor, faction_name:String, force_plur:bool=false)->String:
 	var val = faction_name
 	if force_plur:
 		# TODO: Obviously bad for translations
@@ -348,20 +348,20 @@ func _parse_tag_info(tokens:Array)->Array:
 			out_line = ""
 			out_arr.append_array(_build_bbcode_array(tag_desc, {}, null, null))
 		"Hint":
-			var text = tag
+			var text_val = tag
 			if tokens.size() >= 4:
-				text = tokens[3]
+				text_val = tokens[3]
 			var hint_text = ''
 			var hint_lines = _parse_tag_info(["#Tag", tag, "Desc"])
 			for line in hint_lines:
 				if line is String:
 					hint_text += line.replace("]", "|>|").replace("[", "|<|").replace('"', '\\"')
-			out_line += ('[color=blue][url={"text":"' + hint_text + '"}]' +  text + "[/url][/color]")
+			out_line += ('[color=blue][url={"text":"' + hint_text + '"}]' +  text_val + "[/url][/color]")
 	if out_line != '':
 		out_arr.append(out_line)
 	return out_arr
 
-func _parse_effect_chances(tokens:Array, object_def:Dictionary, object_inst:BaseLoadObject, actor:BaseActor, )->Array:
+func _parse_effect_chances(_tokens:Array, object_def:Dictionary, _object_inst:BaseLoadObject, actor:BaseActor, )->Array:
 	var effects_datas = get_effect_datas_from_def(object_def)
 	var lines = []
 	for effect_data_key in effects_datas.keys():
@@ -380,7 +380,7 @@ func _parse_damage_data(tokens:Array, object_def:Dictionary, object_inst:BaseLoa
 	var damage_key = tokens[1]
 	var extra_damage_datas = []
 	var no_actor_text = ''
-	var is_weapon_damage = false
+	var _is_weapon_damage = false
 	if tokens.size() > 2:
 		no_actor_text = tokens[2]
 	# Get damage data if not provided
@@ -414,7 +414,7 @@ func _parse_damage_data(tokens:Array, object_def:Dictionary, object_inst:BaseLoa
 		description_line = no_actor_text
 	# Using Weapon damage, so default to X% Weapon Damage
 	elif damage_data.has("WeaponFilter"):
-		is_weapon_damage = true
+		_is_weapon_damage = true
 		var atk_scale = damage_data.get("AtkPwrScale", 1)
 		if atk_scale == 1:
 			description_line += "Weapon Damage"
@@ -426,7 +426,7 @@ func _parse_damage_data(tokens:Array, object_def:Dictionary, object_inst:BaseLoa
 		if damage_data.has("AtkPwrStat") and actor:
 			atk_power = actor.stats.get_stat(damage_data["AtkPwrStat"], 1)
 		var atk_varient = damage_data.get("AtkPwrRange", 0)
-		var atk_scale = damage_data.get("AtkPwrScale", 1)
+		var _atk_scale = damage_data.get("AtkPwrScale", 1)
 		var atk_stat:String = damage_data.get("AtkStat", "")
 		var val_line = str(atk_power)
 		if atk_varient > 0:
@@ -605,7 +605,7 @@ func _parse_stat_mod(mod_data:Dictionary, object_def:Dictionary, object_inst:Bas
 	out_arr.append(out_line)
 	return out_arr
 
-func _parse_stat_mod_multi(object_def:Dictionary, object_inst:BaseLoadObject, actor:BaseActor, sub_tokens:Array)->String:
+func _parse_stat_mod_multi(object_def:Dictionary, _object_inst:BaseLoadObject, _actor:BaseActor, sub_tokens:Array)->String:
 	var out_line = ''
 	var mod_datas = {}
 	if object_def.has("StatMods"):
@@ -683,7 +683,7 @@ func _parse_effect(effect_key:String, effect_data:Dictionary, prop_key:String, a
 	return out_arr
 
 
-func _parse_zone(object_def:Dictionary, object_inst:BaseLoadObject, actor:BaseActor, sub_tokens:Array)->String:
+func _parse_zone(object_def:Dictionary, _object_inst:BaseLoadObject, _actor:BaseActor, sub_tokens:Array)->String:
 	var zone_datas = object_def.get("ActionData", {}).get("ZoneDatas", {})
 	var zone_key = sub_tokens[1]
 	var zone_data = zone_datas.get(zone_key)

@@ -95,9 +95,9 @@ func _on_duration_end():
 		CombatRootControl.Instance.QueController.end_of_round.disconnect(_on_duration_tick)
 	is_active = false
 
-func on_actor_enter(actor:BaseActor, game_state:GameStateData):
+func on_actor_enter(actor:BaseActor, _game_state:GameStateData):
 	print("Actor ", actor.ActorKey, " entered Zone ", ZoneKey)
 	
-func on_actor_exit(actor:BaseActor, game_state:GameStateData):
+func on_actor_exit(actor:BaseActor, _game_state:GameStateData):
 	print("Actor ", actor.ActorKey, " exited Zone ", ZoneKey)
 	pass

@@ -49,7 +49,6 @@ func lock_to_actor(actor:BaseActor):
 func snap_to_map_pos(pos):
 	var map = CombatRootControl.Instance.MapController
 	var tile_pos = map.actor_tile_map.map_to_local(Vector2i(pos.x, pos.y))
-	var screen_center = self.get_screen_center_position()
 	self.position = tile_pos
 	if LOGGING: print("SnapToPos: pos: %s | tile_pos: %s | SelfPos: %s | MapPos: %s" % [pos, tile_pos, self.get_screen_center_position(), map.actor_tile_map.position])
 
@@ -177,7 +176,7 @@ func force_finish_panning():
 	auto_pan_start_pos = null
 	panning_finished.emit()
 
-func _input(event: InputEvent) -> void:
+func _input(_event: InputEvent) -> void:
 	if freeze or is_auto_panning:
 		return
 	if locked_for_cut_scene:

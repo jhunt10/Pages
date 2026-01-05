@@ -15,8 +15,6 @@ func get_rarity_background()->Texture2D:
 func get_effect_def():
 	var effect_data:Dictionary = passive_data.get("EffectDatas", {})
 	var effect_key = effect_data.get("EffectKey", null)
-	if !effect_key:
-		var effect_datas = effect_data
 	if effect_key:
 		return EffectLibrary.get_merged_effect_def(effect_key, effect_data)
 	return null
@@ -38,7 +36,7 @@ func get_action_mods()->Dictionary:
 
 func get_hand_mods()->Array:
 	var tdata = page_data.duplicate()
-	var mods = page_data.get("HandConditionMods", [])
+	var mods = tdata.get("HandConditionMods", [])
 	return mods
 	
 	

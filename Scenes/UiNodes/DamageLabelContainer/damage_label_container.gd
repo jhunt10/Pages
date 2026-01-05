@@ -119,10 +119,6 @@ func _on_mouse_enter():
 func _on_mouse_exit():
 	popup_container.hide()
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-
 func set_damage_data(damage_data:Dictionary, actor:BaseActor = null,  count = 1):
 	
 	if damage_data.get("ActorlessWeapon", false):

@@ -64,12 +64,13 @@ func _notification(what):
 		
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	queue_redraw()
 	pass
 
 func _draw() -> void:
-	var last_pos = Vector2(0,0)
+	if !last_pos:
+		last_pos = Vector2(0,0)
 	for child in get_children():
 		if not child is MapMPathPointNode:
 			continue

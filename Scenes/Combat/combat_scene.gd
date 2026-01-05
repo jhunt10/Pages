@@ -412,7 +412,6 @@ func get_current_player_actor()->BaseActor:
 	return get_player_actor(_current_player_index)
 
 func set_player_index(index:int, move_camera:bool=true):
-	var actor_ids = _player_actor_ids.duplicate()
 	if index >= 0 and index < _player_actor_ids.size():
 		_current_player_index = index
 		ui_control.set_player_actor_index(_current_player_index)
@@ -432,7 +431,7 @@ func get_next_player_index(use_index:int=-1)->int:
 	if use_index < 0:
 		use_index = _current_player_index
 	var next_index = (use_index + 1) % _player_actor_ids.size()
-	var extra_check = 0
+	#var extra_check = 0
 	#while StoryState.get_player_id(next_index) == null and extra_check < 4:
 		#extra_check += 1
 		#next_index = (next_index + 1) % 4

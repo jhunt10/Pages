@@ -141,7 +141,7 @@ func force_preview_mode():
 		#bar.set_previewing_mode(true, true)
 	pass
 
-func preview_stat_cost(cost_data:Dictionary):
+func preview_stat_cost(_cost_data:Dictionary):
 	#for stat_name in cost_data.keys():
 		#if _stat_bars.keys().has(stat_name):
 			#var stat_bar:StatBarControl = _stat_bars[stat_name]

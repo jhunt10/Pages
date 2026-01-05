@@ -36,7 +36,7 @@ func hide_area_effect(key):
 	if _effect_area_maps.keys().has(key):
 		_effect_area_maps[key].visible = false
 
-func build_from_target_selection_data(data:TargetSelectionData, show_area_effect:bool=false):
+func build_from_target_selection_data(data:TargetSelectionData, should_show_area_effect:bool=false):
 	var new_area:TileMapLayer = permade_target_area_tile_map.duplicate()
 	self.add_child(new_area)
 	new_area.visible = true
@@ -44,7 +44,6 @@ func build_from_target_selection_data(data:TargetSelectionData, show_area_effect
 	
 	var id = str(ResourceUID.create_id())
 	_target_area_maps[id] = new_area
-	var min_x 
 	for coor in data.get_targeting_area_coords():
 		var los_val = data.get_coords_los(coor)
 		var selectable = data.is_coor_selectable(coor)
@@ -72,7 +71,7 @@ func build_from_target_selection_data(data:TargetSelectionData, show_area_effect
 		var effect_area = data.target_params.get_area_of_effect(MapPos.new(0,0,0, data.actor_pos.dir))
 		var new_effect_area:TileMapLayer = permade_target_area_tile_map.duplicate()
 		self.add_child(new_effect_area)
-		new_effect_area.visible = show_area_effect
+		new_effect_area.visible = should_show_area_effect
 		new_effect_area.clear()
 		new_effect_area.set_cells_terrain_connect(effect_area, 0, 0)
 		_effect_area_maps[id] = new_effect_area

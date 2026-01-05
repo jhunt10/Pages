@@ -90,7 +90,7 @@ func execute_on_reach_target(game_state:GameStateData):
 	_do_missile_thing(game_state)
 	node.on_missile_reach_target()
 
-func _do_missile_thing(game_state:GameStateData):
+func _do_missile_thing(_game_state:GameStateData):
 	pass
 
 func _calc_positions():

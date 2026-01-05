@@ -71,7 +71,6 @@ func set_target_type(type:TargetParameters.TargetTypes, allow_lockon:bool=true):
 func set_actor(actor:BaseActor):
 	var turn = CombatRootControl.Instance.GameState.current_turn_index
 	var page = actor.Que.get_action_for_turn(turn)
-	var actor_node = CombatRootControl.get_actor_node(actor.Id)
 	
 	actor_portrait.texture = actor.sprite.get_portrait_sprite()
 	page_icon.texture = page.get_large_page_icon(actor)

@@ -12,16 +12,16 @@ func _ready() -> void:
 	instance_selector_button.get_options_func = get_load_options
 	instance_selector_button.item_selected.connect(on_instance_selected)
 
-func on_instance_selected(index):
+func on_instance_selected(_index):
 	var id = instance_selector_button.get_current_option_text()
 	var lib_key = inst_to_lib_mapping.get(id, '')
 	var thing = null
 	if lib_key == "Actor":
-		thing = ActorLibrary.Instance.get_actor(id)
+		thing = ActorLibrary.get_actor(id)
 	if lib_key == "Item":
-		thing = ItemLibrary.Instance.get_item(id)
+		thing = ItemLibrary.get_item(id)
 	if lib_key == "Effect":
-		thing = EffectLibrary.Instance.get_effect(id)
+		thing = EffectLibrary.get_effect(id)
 	if thing:
 		set_object(thing)
 	
@@ -58,26 +58,26 @@ func format_dict_to_string(dict:Dictionary)->String:
 	var in_super_list = false
 	var out_string = ''
 	var last_char = ''
-	for char in raw_string:
-		if char == '{':
+	for char_val in raw_string:
+		if char_val == '{':
 			indent_level += 1
-			out_string += char
+			out_string += char_val
 			out_string += _new_line(indent_level)
-		elif char == '}':
+		elif char_val == '}':
 			indent_level -= 1
 			out_string += _new_line(indent_level)
-			out_string += char
-		elif char == ',':
-			out_string += char
+			out_string += char_val
+		elif char_val == ',':
+			out_string += char_val
 			if not in_list or last_char == '"':
 				out_string += _new_line(indent_level)
-		elif char == '[':
-			out_string += char
+		elif char_val == '[':
+			out_string += char_val
 			in_list = true
 			if last_char == '[':
 				in_super_list = true
-		elif char == ']':
-			out_string += char
+		elif char_val == ']':
+			out_string += char_val
 			if in_super_list:
 				if last_char == ']':
 					in_super_list = false
@@ -86,17 +86,17 @@ func format_dict_to_string(dict:Dictionary)->String:
 					
 			if not in_super_list:
 				in_list = false
-		elif char == '"' and in_list:
+		elif char_val == '"' and in_list:
 			if last_char == '[':
 				indent_level += 1
 				out_string += _new_line(indent_level)
-				out_string += char
+				out_string += char_val
 			else:
-				out_string += char
+				out_string += char_val
 			
 		else:
-			out_string += char
-		last_char = char
+			out_string += char_val
+		last_char = char_val
 	return out_string
 
 func _new_line(indents:int)->String:

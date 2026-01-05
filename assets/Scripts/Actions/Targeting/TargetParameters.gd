@@ -50,9 +50,9 @@ func apply_target_mod(mod_data:Dictionary)->TargetParameters:
 			
 	return TargetParameters.new(self.target_param_key, new_args)
 
-func _init(target_param_key:String, args:Dictionary) -> void:
+func _init(target_param_key_val:String, args:Dictionary) -> void:
 	# Assign Target Key
-	self.target_param_key = target_param_key
+	self.target_param_key = target_param_key_val
 	self.raw_args = args
 	# Get Target Type
 	var target_type_val = args.get('TargetType', null)
@@ -96,10 +96,6 @@ func is_spot_target_type()->bool:
 
 func is_actor_target_type()->bool:
 	return ActorTargetTypes.has(self.target_type)
-	return (self.target_type == TargetTypes.Actor or 
-			self.target_type == TargetTypes.Ally or 
-			self.target_type == TargetTypes.Enemy or 
-			self.target_type == TargetTypes.Corpse)
 
 func is_point_in_area(center:MapPos, point)->bool:
 	if point is Vector2i:
@@ -107,7 +103,7 @@ func is_point_in_area(center:MapPos, point)->bool:
 	return target_area.to_map_spots(center).has(Vector2i(point.x, point.y))
 
 ## Returns true if target actor is valid as a selected target
-func is_valid_target_actor(actor:BaseActor, target:BaseActor, game_state:GameStateData)->bool:
+func is_valid_target_actor(actor:BaseActor, target:BaseActor, _game_state:GameStateData)->bool:
 	if _conditions.size() > 0:
 		if _conditions.has("TagFilers"):
 			if not TagHelper.check_tag_filters("TagFilters", _conditions, target):
@@ -132,7 +128,7 @@ func is_valid_target_actor(actor:BaseActor, target:BaseActor, game_state:GameSta
 		return true
 	return false
 
-func is_actor_effected_by_aoe(actor:BaseActor, target:BaseActor, game_state:GameStateData)->bool:
+func is_actor_effected_by_aoe(actor:BaseActor, target:BaseActor, _game_state:GameStateData)->bool:
 	if target.Id == actor.Id:
 		return include_self_in_aoe
 	if actor.FactionIndex == target.FactionIndex:
@@ -165,7 +161,6 @@ func get_center_of_area(actor_pos:MapPos, include_user_spot:bool=false)->MapPos:
 	var max_x = spots[0].x
 	var min_y = spots[0].y
 	var max_y = spots[0].y
-	var los_dict = {}
 	for spot in spots:
 		if spot.x > max_x: max_x = spot.x
 		if spot.x < min_x: min_x = spot.x

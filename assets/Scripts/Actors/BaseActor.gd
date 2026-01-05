@@ -393,7 +393,7 @@ func is_adirectional()->bool:
 ########################
 ##      Weapons       ##
 ########################
-func get_weapon_attack_target_param_def(target_param_key)->Dictionary:
+func get_weapon_attack_target_param_def(_target_param_key)->Dictionary:
 	var weapon = equipment.get_primary_weapon()
 	if weapon:
 		return weapon.get_target_param_def()
@@ -448,7 +448,6 @@ func get_weapon_damage_datas(weapon_filter)->Dictionary:
 					if !prop_key:
 						continue
 					var new_prop_val = mod_data.get("ModValue")
-					var org_prop_val = damage_data.get(prop_key)
 					var mod_type = mod_data.get("ModType", "")
 					if mod_type != "Set":
 						printerr("Unsuported WeaponMod Type: " + str(mod_type))

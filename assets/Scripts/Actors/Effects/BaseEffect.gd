@@ -53,8 +53,6 @@ var _sub_effects_data:Dictionary:
 # Triggers added by the system an not config, like OnTurnEnds for TurnDuration
 var system_triggers:Array = []
 
-var _icon_sprite:String
-
 var Triggers:Array:
 	get: return _triggers_to_sub_effect_keys.keys()
 
@@ -73,7 +71,6 @@ var RemainingDuration:int:
 var source_id:String:
 	get: return get_load_val("SourceId")
 
-var _source
 var _enabled:bool = true
 var _deleted:bool = false
 var _triggers_to_sub_effect_keys:Dictionary={}
@@ -107,7 +104,7 @@ func _cache_after_loading_def():
 func get_applied_potency()->float:
 	return get_load_val("AppliedPotency", 1)
 
-func merge_duplicate_effect(source, dup_effect_def:Dictionary):
+func merge_duplicate_effect(_source, dup_effect_def:Dictionary):
 	var dup_data = dup_effect_def.get("EffectData", {})
 	var dup_details = dup_data.get("EffectDetails", {})
 	var dup_duration_data = dup_details.get("DurationData", {})
@@ -116,13 +113,12 @@ func merge_duplicate_effect(source, dup_effect_def:Dictionary):
 		var dup_trigger = EffectTriggers.get(dup_trigger_str)
 		var dup_max_duration = dup_duration_data.get("MaxDuration", -1)
 		var dup_duration = dup_duration_data.get("BaseDuration", -1)
-		var dup_merge_type = dup_duration_data.get("MergeType", "Add")
 		
 		if dup_trigger != duration_trigger:
 			printerr("%s.merge_duplicate_effect_data: Mismatched DurationTrigger: %s / %s" % [self.EffectKey, EffectTriggers.keys()[duration_trigger], dup_trigger_str])
 		else:
 			if _duration_merge_type == "Ignore":
-				var t = true
+				pass
 			elif _duration_merge_type == "Reset":
 				if dup_duration != self._inital_duration:
 					print("%s.merge_duplicate_effect_data: Mismatched BaseDuratio on Reset merge: %s / %s" % [self.EffectKey, self._inital_duration, dup_duration])
@@ -148,7 +144,7 @@ func merge_duplicate_effect(source, dup_effect_def:Dictionary):
 	for sub_effect_key in dup_subs_datas.keys():
 		var dupl_sub_effect_data = dup_subs_datas[sub_effect_key]
 		var sub_effect_data = _sub_effects_data[sub_effect_key]
-		var sup_sub_effect_data = _sub_effects_data[sub_effect_key]
+		#var sup_sub_effect_data = _sub_effects_data[sub_effect_key]
 		var sub_effect = _get_sub_effect_script(sub_effect_key)
 		if sub_effect:
 			sub_effect.merge_new_duplicate_sub_effect_data(self, sub_effect_data, dup_effect_def, dupl_sub_effect_data)
@@ -423,7 +419,7 @@ func _trigger_on_atk(sub_trigger:EffectTriggers, attack_event:AttackEvent, game_
 			elif sub_trigger == EffectTriggers.OnDefending_AfterAttack:
 				sub_effect.on_defending_after_attack(self, sub_effect_data, game_state, attack_event)
 
-func get_damage_data(damage_data_key:String, actor:BaseActor=null)->Dictionary:
+func get_damage_data(damage_data_key:String, _actor:BaseActor=null)->Dictionary:
 	#if damage_data_key == "Weapon":
 		#if actor == null:
 			#printerr("PageItemAction.get_damage_data: Null Actor when asking for Weapon damage.")

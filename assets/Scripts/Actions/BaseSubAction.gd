@@ -16,7 +16,7 @@ const Success = true
 func get_required_props()->Dictionary:
 	return {}
 
-func get_prop_enum_values(prop_key:String)->Array:
+func get_prop_enum_values(_prop_key:String)->Array:
 	return []
 
 ## Returns Tags that are automatically added to the parent Action's Tags
@@ -24,7 +24,7 @@ func get_action_tags(_subaction_data:Dictionary)->Array:
 	return []
 
 ## Return a of OnQueOptionsData to select the parent action is qued. 
-func get_on_que_options(parent_action:PageItemAction, _subaction_data:Dictionary, _actor:BaseActor, _game_state:GameStateData)->Array:
+func get_on_que_options(_parent_action:PageItemAction, _subaction_data:Dictionary, _actor:BaseActor, _game_state:GameStateData)->Array:
 	#var example = OnQueOptionsData.new("SelectedItemId", "Select Item to use:", _actor.items._items.keys())
 	return []
 
@@ -43,12 +43,12 @@ func _get_target_parameters(parent_action:PageItemAction, actor:BaseActor, subac
 	if !target_parms:
 		printerr("BaseSubAction._get_target_parameters: No TargetParam found in subaction_data.")
 		return null
-	var actor_targeting_mods = actor.effects.get_stat_mods()
+	#var actor_targeting_mods = actor.effects.get_stat_mods()
 	return target_parms
 
 ## Selected target mapped to key
-func _get_primary_target(parent_action:PageItemAction, subaction_data:Dictionary, target_key:String, 
-					metadata:QueExecutionData, game_state:GameStateData, source_actor:BaseActor):
+func _get_primary_target(parent_action:PageItemAction, _subaction_data:Dictionary, target_key:String, 
+					metadata:QueExecutionData, _game_state:GameStateData, source_actor:BaseActor):
 	if target_key == "Self":
 		return [source_actor]
 	var turn_data = metadata.get_current_turn_data()

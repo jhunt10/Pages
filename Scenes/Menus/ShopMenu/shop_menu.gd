@@ -36,7 +36,7 @@ func _ready() -> void:
 func _on_load_screen_gone():
 	load_greeting()
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	scroll_bar.calc_bar_size()
 
 func close_menu():
@@ -145,7 +145,7 @@ func create_details_card(item:BaseItem):
 	_current_details_card.start_show()
 	_current_details_card.buy_controller.buy_button_pressed.connect(_show_confirm_popup)
 
-func _show_confirm_popup(item_key:String, count:int, cost:int):
+func _show_confirm_popup(item_key:String, count:int, _cost:int):
 	if not confirm_popup.trade_confirmed.is_connected(_on_trade_confirmed):
 		confirm_popup.trade_confirmed.connect(_on_trade_confirmed)
 	if _state == States.Buy:
@@ -239,9 +239,9 @@ func _load_text(subject:SpeakerSubjects, item:BaseItem=null, count:int=0):
 			"So you wanna sell " + str(count) + " " + item_name + "?",
 		])
 	elif subject == SpeakerSubjects.BuySuccess or subject == SpeakerSubjects.SellSuccess:
-		var item_name = "of these"
-		if item:
-			item_name = "@Color:Red@"+item.get_display_name()+"@Clear@"
+		#var item_name = "of these"
+		#if item:
+			#item_name = "@Color:Red@"+item.get_display_name()+"@Clear@"
 		_build_dialog_entries([
 			{"SpeakerPort":"Happy"},
 			"Pleasure doing business with you.",
@@ -252,9 +252,9 @@ func _load_text(subject:SpeakerSubjects, item:BaseItem=null, count:int=0):
 			"Is there anything else you need?",
 		])
 	elif subject == SpeakerSubjects.BuyCancel or subject == SpeakerSubjects.SellCancel:
-		var item_name = "of these"
-		if item:
-			item_name = "@Color:Red@"+item.get_display_name()+"@Clear@"
+		#var item_name = "of these"
+		#if item:
+			#item_name = "@Color:Red@"+item.get_display_name()+"@Clear@"
 		_build_dialog_entries([
 			{"SpeakerPort":"Neutral"},
 			"Too bad.",

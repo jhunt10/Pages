@@ -52,7 +52,7 @@ func _ready() -> void:
 	#set_player_actor(CombatRootControl.Instance.GameState._actors.values()[next_index])
 
 func build_player_stats_panels():
-	var player_ids = CombatRootControl.Instance.list_player_actor_ids()
+	var player_ids = CombatRootControl.list_player_actor_ids()
 	for child in player_stats_panels_container.get_children():
 		if child is StatPanelControl:
 			if actor_ids_to_stat_panels.values().has(actor_ids_to_stat_panels):
@@ -60,8 +60,8 @@ func build_player_stats_panels():
 					continue
 		child.queue_free()
 	
-	for actor in CombatRootControl.Instance.list_player_actors():
-		var index = CombatRootControl.Instance.get_player_index_of_actor(actor)
+	for actor in CombatRootControl.list_player_actors():
+		var index = CombatRootControl.get_player_index_of_actor(actor)
 		if actor_ids_to_stat_panels.keys().has(actor.Id):
 			continue
 		var new_panel:StatPanelControl = load("res://Scenes/Combat/UiNodes/StatsPanel/combat_stat_panel_control.tscn").instantiate()

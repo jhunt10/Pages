@@ -40,11 +40,11 @@ var final_damage:int
 
 var was_applied:bool # Damage has been applied to target
 
-func _init(data:Dictionary, source, defender:BaseActor, tag_chain:SourceTagChain) -> void:
-	self.source = source
-	self.attacker = tag_chain.source_actor
-	self.defender = defender
-	self.source_tag_chain = tag_chain
+func _init(data:Dictionary, source_val, defender_val:BaseActor, tag_chain_val:SourceTagChain) -> void:
+	self.source = source_val
+	self.attacker = tag_chain_val.source_actor
+	self.defender = defender_val
+	self.source_tag_chain = tag_chain_val
 	self.is_successful = true
 	self.damage_data_key = data.get("DamageDataKey", "NOKEY")
 	

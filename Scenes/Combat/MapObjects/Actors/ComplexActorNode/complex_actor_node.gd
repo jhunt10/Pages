@@ -108,7 +108,7 @@ func show_hide_tomb_stone():
 				tombstone_sprite.hide()
 			actor_motion_node.show()
 
-func on_death_animation_finished(animation_name:String):
+func on_death_animation_finished(_animation_name:String):
 	show_hide_tomb_stone()
 
 func _on_actor_revive():

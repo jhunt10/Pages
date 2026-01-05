@@ -52,12 +52,6 @@ func _ready() -> void:
 	set_notify_transform(true)
 	pass # Replace with function body.
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-
-
 var last_pos:Vector2
 func _notification(what):
 	if what == NOTIFICATION_TRANSFORM_CHANGED:

@@ -11,6 +11,7 @@ func _init(controler:UiStateController, _args:Dictionary) -> void:
 	ui_controller = controler
 
 func start_state():
+	if _logging: print ("Started BaseUiState")
 	pass
 
 func update(_delta:float):

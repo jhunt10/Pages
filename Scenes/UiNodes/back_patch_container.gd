@@ -8,8 +8,6 @@ static var global_refresh_list:Array = []
 
 const LOGGING = false
 
-signal custom_resized
-
 @export var global_refresh:bool = false
 @export var refresh:bool = false
 @export var background:NinePatchRect
@@ -31,7 +29,7 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if refresh:
 		resize_self_around_child()
 		refresh = false
@@ -121,11 +119,9 @@ func resize_self_around_child():
 	if LOGGING: print("SelfSize: %s | InnerSize: %s" % [self_size, inner_size])
 	if LOGGING: print("----------------------- DONE -----------------------")
 	
-	var child_index = 0
 	for child in get_children():
 		if child is Control and child != background and child != inner_container:
 			fit_child_in_rect(child, Rect2(Vector2(), self.size))
-		child_index += 1
 	if center_in_parent:
 		var parent = get_parent()
 		if parent:

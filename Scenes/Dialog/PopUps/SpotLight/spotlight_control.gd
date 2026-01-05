@@ -11,7 +11,7 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if actor_node:
 		var global_trans  = actor_node.actor_motion_node.get_global_transform_with_canvas()
 		self.position = global_trans.origin
@@ -20,7 +20,7 @@ func _process(delta: float) -> void:
 
 
 func set_actor(actor_id:String):
-	actor_node = CombatRootControl.Instance.get_actor_node(actor_id)
+	actor_node = CombatRootControl.get_actor_node(actor_id)
 	actor_sprite.texture = actor_node.actor_sprite.texture
 	var global_trans  = actor_node.get_global_transform_with_canvas()
 	self.position = global_trans.origin

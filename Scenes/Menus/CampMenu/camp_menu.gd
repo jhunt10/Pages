@@ -81,19 +81,14 @@ func check_levels():
 func load_dialog(dialog_script:String):
 	dialog_control.load_dialog_script(dialog_script)
 	dialog_control.show()
-	
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-
-func _sub_menu_open(name:String):
-	if name == "System":
+func _sub_menu_open(name_val:String):
+	if name_val == "System":
 		camp_options_container.hide()
 		records_options_container.hide()
 		system_options_container.show()
 		system_options_container.resize_options = true
-	elif name == "Records":
+	elif name_val == "Records":
 		camp_options_container.hide()
 		system_options_container.hide()
 		records_options_container.show()

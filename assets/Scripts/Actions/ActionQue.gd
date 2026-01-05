@@ -1,6 +1,5 @@
 class_name ActionQue
 
-signal action_list_changed
 signal ammo_changed(action_key:String)
 
 var Id : String :
@@ -19,7 +18,6 @@ var _cached_max_que_size:int = -1
 #		"FreeChance": Chance to not consume ammo
 #		"PreviewUses": Number of times it's qued
 var _page_ammo_datas:Dictionary = {}
-var _cached_ammo_mods:Dictionary
 var _ammo_mod_dirty:bool=true
 
 ## Mapping from turn index to real_que index to account for padding
@@ -262,7 +260,7 @@ func _cache_page_ammo():
 	for key in _page_ammo_datas.keys():
 		ammo_changed.emit(key)
 
-func _does_ammo_mod_apply_to_action(mod_data:Dictionary, ammo_data:Dictionary, action:PageItemAction, actor)->bool:
+func _does_ammo_mod_apply_to_action(mod_data:Dictionary, ammo_data:Dictionary, action:PageItemAction, _actor)->bool:
 	if not action.has_ammo():
 		return false
 	

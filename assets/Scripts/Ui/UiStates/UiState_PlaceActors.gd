@@ -125,7 +125,7 @@ func _mouse_button_down_in_spot(spot):
 			actor_placer_control._on_actor_button_pressed(actor_id)
 
 
-func _mouse_button_up_in_spot(spot):
+func _mouse_button_up_in_spot(_spot):
 	CombatRootControl.Instance.camera.freeze = false
 	CombatRootControl.Instance.GridCursor.lock_position = false
 	if state == States.Dragging:

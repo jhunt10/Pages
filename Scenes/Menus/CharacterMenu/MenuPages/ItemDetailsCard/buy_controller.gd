@@ -72,7 +72,7 @@ func _on_minus_pressed():
 
 func _on_buy_pressed():
 	buy_button_pressed.emit(_item_key, buying_count, buying_count * item_price)
-	var owned_count = PlayerInventory.get_item_stack_count(_item_key)
+	owned_count = PlayerInventory.get_item_stack_count(_item_key)
 	owned_count_label.text = str(owned_count)
 	
 	

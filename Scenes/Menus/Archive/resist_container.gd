@@ -28,7 +28,7 @@ func set_values(actor:BaseActor):
 		self.add_child(new_entry)
 		new_entry.show()
 
-func create_new_entry(entry_key:String, actor:BaseActor, value):
+func create_new_entry(entry_key:String, _actor:BaseActor, value):
 	var new_entry = premade_resistance_label.duplicate()
 	var icon:TextureRect = new_entry.get_child(0)
 	var name_label = new_entry.get_child(1)

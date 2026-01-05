@@ -33,7 +33,7 @@ func _resize():
 	label.position = Vector2i(new_x, new_y)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if label and _size_dirty:
 		_resize()
 		

@@ -304,10 +304,10 @@ func remove_modulate(color:Color):
 	if offset_node.modulate == color:
 		offset_node.modulate = Color.WHITE
 
-func ready_action_animation(action_name:String, speed:float=1, off_hand:bool=false):
+func ready_action_animation(_action_name:String, _speed:float=1, _off_hand:bool=false):
 	pass
 
-func execute_action_motion_animation(speed:float=1, off_hand:bool=false):
+func execute_action_motion_animation(_speed:float=1, _off_hand:bool=false):
 	pass
 
 func cancel_action_animations():
@@ -334,7 +334,7 @@ func _on_resume_animations():
 		if damage_animation_player.current_animation:
 			damage_animation_player.play()
 
-func _on_actor_moved(old_pos:MapPos, new_pos:MapPos, move_data:Dictionary):
+func _on_actor_moved(old_pos:MapPos, new_pos:MapPos, _move_data:Dictionary):
 	if LOGGING: print("BaseActorNode: OnActorMoved: Actor: %s | old_pos: %s | new_pos: %s" % [Actor.Id, old_pos, new_pos])
 	if is_moving and new_pos:
 		set_facing_dir(new_pos.dir)
@@ -371,7 +371,7 @@ func _on_actor_revive():
 	is_dieing = false
 	damage_animation_player.play("DamageAnimations/revive_effect")
 
-func on_death_animation_finished(animation_name:String):
+func on_death_animation_finished(_animation_name:String):
 	pass
 
 ##############################

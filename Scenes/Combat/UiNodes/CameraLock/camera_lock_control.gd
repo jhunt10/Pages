@@ -26,7 +26,7 @@ func can_camera_move()->bool:
 	return not (camera.freeze or camera.following_actor_node or camera.auto_pan_start_pos or camera.locked_for_cut_scene)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if can_camera_move():
 		camera_locked = false
 		locked_icon.hide()

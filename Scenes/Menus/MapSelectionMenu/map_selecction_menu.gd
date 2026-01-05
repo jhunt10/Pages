@@ -20,12 +20,6 @@ func _ready() -> void:
 		explore_button.button.pressed.connect(_on_explore)
 		back_button.button.pressed.connect(MainRootNode.Instance.open_camp_menu)
 	_build_options()
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
 
 func _build_options():
 	var maps = MapLoader.get_map_datas()
@@ -38,7 +32,6 @@ func _build_options():
 	for sorted_data in sorted_map_array:
 		var map_key = sorted_data.get("MapKey")
 		var new_button:CampOptionButton = premade_option_button.duplicate()
-		var val = StoryState._story_stage_index
 		var disabled = index >= StoryState._story_stage_index +1
 		if disabled:
 			has_maps_left_to_unlock = true

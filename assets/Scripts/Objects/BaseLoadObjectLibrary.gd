@@ -200,7 +200,7 @@ func reload():
 	#init_load()
 
 ## Hook to allow libraries to do stuff with a def right before it's added to _loaded_defs
-func _on_def_loaded(def_key:String, def:Dictionary)->Dictionary:
+func _on_def_loaded(_def_key:String, def:Dictionary)->Dictionary:
 	return def
 
 func _load_object_defs(file_sufixes=null):
@@ -479,5 +479,5 @@ static func _merge_defs(child:Dictionary, parent:Dictionary)->Dictionary:
 	return new_data
 
 ## Returns a string explaining why object is invalid, otherwise ''
-static func validate_object(object:BaseLoadObject)->String:
+static func validate_object(_object:BaseLoadObject)->String:
 	return ''

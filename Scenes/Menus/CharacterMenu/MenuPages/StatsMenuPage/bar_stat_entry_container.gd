@@ -6,8 +6,8 @@ extends HBoxContainer
 @export var max_val_label:Label
 @export var regen_val_label:Label
 
-func set_stat_vals(color:Color, name:String, max_val:int, regen:int):
+func set_stat_vals(color:Color, stat_name:String, max_val:int, regen:int):
 	icon.modulate = color
-	name_label.text = name
+	name_label.text = stat_name
 	max_val_label.text = str(max_val)
 	regen_val_label.text = str(regen)

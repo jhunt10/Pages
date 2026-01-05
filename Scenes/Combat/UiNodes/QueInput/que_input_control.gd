@@ -266,7 +266,7 @@ func _mouse_entered_page_button(_index, key_name):
 	hover_box.show()
 	pass
 
-func _mouse_exited_page_button(_index, key_name):
+func _mouse_exited_page_button(_index, _key_name):
 	#clear_preview_display()
 	#CombatUiControl.Instance.stat_panel_control.stop_preview_stat_cost()
 	#que_display_control.preview_que_path()

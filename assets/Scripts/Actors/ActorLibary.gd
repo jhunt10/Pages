@@ -15,7 +15,7 @@ func get_def_file_sufixes()->Array:
 	return ["_ActorDefs"]
 func get_data_file_sufix()->String:
 	return "_ActorSave"
-func get_object_script_path(object_def:Dictionary)->String:
+func get_object_script_path(_object_def:Dictionary)->String:
 	return "res://assets/Scripts/Actors/BaseActor.gd"
 
 const _default_corpse_texture_path = "res://assets/Sprites/Actors/DefaultCorpse.png"

@@ -20,15 +20,6 @@ extends Control
 var _item:BasePageItem
 var _actor:BaseActor
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-
 func set_action(actor:BaseActor, page_item:BasePageItem):
 	_actor = actor
 	_item = page_item
@@ -115,9 +106,9 @@ func set_action(actor:BaseActor, page_item:BasePageItem):
 		modded_by_container.show()
 		var display_names = []
 		for mod_data in mods_data.values():
-			var name = mod_data.get("DisplayName", "")
-			if name:
-				display_names.append(name)
+			var name_val = mod_data.get("DisplayName", "")
+			if name_val:
+				display_names.append(name_val)
 		modded_by_label.text = ", ".join(display_names)
 	else:
 		modded_by_container.hide()

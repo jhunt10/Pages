@@ -116,7 +116,7 @@ func try_place_item_in_slot(item:BaseItem, index:int):
 		return true
 	return false
 
-func try_move_item_to_slot(item:BaseItem, from_index:int, to_index:int):
+func try_move_item_to_slot(_item:BaseItem, from_index:int, to_index:int):
 	ItemHelper.swap_item_holder_slots(_actor.equipment, from_index, to_index)
 
 func play_pagebook_warning_animation():

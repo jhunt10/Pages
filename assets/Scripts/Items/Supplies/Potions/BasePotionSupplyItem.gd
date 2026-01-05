@@ -7,7 +7,7 @@ func get_tags()->Array:
 		tags.append("Drink")
 	return tags
 
-func use_in_combat(actor:BaseActor, target, game_state:GameStateData):
+func use_in_combat(_actor:BaseActor, target, game_state:GameStateData):
 	var target_actors = []
 	if target is BaseActor:
 		target_actors = [target]

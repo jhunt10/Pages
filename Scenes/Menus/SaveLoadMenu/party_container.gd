@@ -31,9 +31,9 @@ func clear():
 		if child != _premade_level_label:
 			child.queue_free()
 
-func add_row(name:String, level:int):
+func add_row(name_val:String, level:int):
 	var new_name = _premade_name_label.duplicate()
-	new_name.text = name
+	new_name.text = name_val
 	names_container.add_child(new_name)
 	new_name.show()
 	var new_spacer = _premade_spacer.duplicate()

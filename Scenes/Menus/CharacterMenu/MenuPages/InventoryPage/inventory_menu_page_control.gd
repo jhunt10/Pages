@@ -250,7 +250,6 @@ func _on_inv_item_button_down(button:InventoryItemButton):
 	item_button_down.emit(event_context, button._item_id, -1, offset)
 	
 func _on_inv_item_button_up(button:InventoryItemButton):
-	var item = button.get_item()
 	var offset = button.get_local_mouse_position()
 	item_button_up.emit(event_context, button._item_id, -1)
 
@@ -323,7 +322,7 @@ func _refilter():
 	scroll_bar.calc_bar_size()
 	#filter_option_button.load_options()
 
-func should_group_be_visible(group_key:String, group:InventorySubGroupContainer, cur_title:String)->bool:
+func should_group_be_visible(group_key:String, _group:InventorySubGroupContainer, cur_title:String)->bool:
 	var tokens = group_key.split(":")
 	if not tokens.has(_menu_context):
 		return false
@@ -358,7 +357,7 @@ func should_item_be_visible(item:BaseItem, cur_title:String):
 			at_least_one_sub = true
 	return at_least_one_sub
 
-func _on_sub_filter_selected(index:int):
+func _on_sub_filter_selected(_index:int):
 	var filter = filter_option_button.get_current_option_text()
 	_sub_filters = []
 	if filter != "All":

@@ -168,7 +168,7 @@ func list_tools_in_offhands()->Array:
 	return out_list
 
 # For Ease of Life, tools can be drop in any hand slot 
-func get_auto_hand_index(item:BaseItem, requested_slot_index:int, allow_replace:bool = true)->int:
+func get_auto_hand_index(item:BaseItem, requested_slot_index:int, _allow_replace:bool = true)->int:
 	var slot_index = requested_slot_index	
 	# Check that item is Tool
 	var tool = item as BaseToolEquipment
@@ -219,10 +219,10 @@ func _get_items_removed_if_new_item_added(slot_index:int, item:BaseItem)->Array:
 		
 	return list_all_tools_in_hands()
 
-func _on_item_added_to_slot(item:BaseItem, index:int):
+func _on_item_added_to_slot(_item:BaseItem, _index:int):
 	auto_order_hand_items()
 
-func _on_item_removed(item_id:String, supressing_signals:bool):
+func _on_item_removed(_item_id:String, supressing_signals:bool):
 	# Skip hand logic when mid transaction
 	if supressing_signals:
 		return
@@ -235,7 +235,6 @@ func auto_order_hand_items():
 	if _hand_count <= 1:
 		return
 	
-	var hand_indexes = list_all_hand_indexes()
 	var mainhand_index = get_first_hand_index()
 	var mainhand_item = get_item_in_slot(mainhand_index)
 	
@@ -378,7 +377,6 @@ func get_filtered_weapons(weapon_filter)->Array:
 		include_melee = primary_weapon.is_melee_weapon()
 	
 	var included_weapon_ids = []
-	var index = 0
 	for slot in weapon_filter.get("IncludeSlots", []):
 		if slot == "Primary":
 			slot = "Weapon"
@@ -402,7 +400,6 @@ func get_filtered_weapons(weapon_filter)->Array:
 					continue
 				out_arr.append(weapon)
 				included_weapon_ids.append(weapon.Id)
-				index += 1
 	return out_arr
 
 func get_bag_equipment()->BaseBagEquipment:

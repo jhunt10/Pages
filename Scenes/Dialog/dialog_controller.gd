@@ -126,7 +126,6 @@ func _process(delta: float) -> void:
 			next_button.show()
 			_state = STATES.WaitingForBlocks
 			return
-		var part_finished = true
 		# Cycle through blocks, removing them as they are handled
 		while _current_part_data['Blocks'].size() > 0:
 			_last_block_data = _current_part_data['Blocks'][0]
@@ -781,7 +780,7 @@ func _do_move_actor(block_data)->bool:
 		actor_node.que_scripted_movement(path_data)
 	return true
 
-func translate_actor_id(actor_id:String)->String:
+func translate_actor_id(_actor_id:String)->String:
 	#if actor_id == "Player1":
 		#actor_id = StoryState.get_player_id(0)
 	#elif actor_id == "Player2":

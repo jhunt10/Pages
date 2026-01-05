@@ -38,18 +38,18 @@ var attacker_potency:float
 func _init( attacking_actor:BaseActor, 
 			defending_actors:Array,
 			defenders_dir_and_cover_data:Dictionary,
-			attack_details:Dictionary,
+			attack_details_val:Dictionary,
 			tag_chain:SourceTagChain, 
-			damage_datas:Dictionary,
-			effect_datas:Dictionary,
-			attack_mods:Dictionary) -> void:
+			damage_datas_val:Dictionary,
+			effect_datas_val:Dictionary,
+			attack_mods_val:Dictionary) -> void:
 	attacker_id = attacking_actor.Id
 	attacker_faction = attacking_actor.FactionIndex
-	self.attack_details = attack_details
+	self.attack_details = attack_details_val
 	source_tag_chain = tag_chain
-	self.damage_datas = damage_datas
-	self.effect_datas = effect_datas
-	self.attack_mods = attack_mods
+	self.damage_datas = damage_datas_val
+	self.effect_datas = effect_datas_val
+	self.attack_mods = attack_mods_val
 	attack_stage = AttackStage.Created
 	
 	# StatMods from AttackMods should already have been applied to Attacker and Defenders

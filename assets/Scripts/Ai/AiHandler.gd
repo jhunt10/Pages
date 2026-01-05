@@ -76,7 +76,6 @@ static func _choose_page_for_actor(actor:BaseActor, game_state:GameStateData)->P
 	var aggroed_actor_id = actor.aggro.get_current_aggroed_actor_id()
 	var current_pos = game_state.get_actor_pos(actor)
 	var options = _get_actor_action_options_data(actor)
-	var attack_actions = []
 	for attack_key in options['Attacks']:
 		var item = ItemLibrary.get_item(attack_key)
 		if not item is PageItemAction:
@@ -103,8 +102,6 @@ static func _choose_page_for_actor(actor:BaseActor, game_state:GameStateData)->P
 			continue
 		#TODO: Attack Weights
 		return attack_action
-	if actor.Id.begins_with("Player"):
-		var temp = true
 	# Get target
 	var target_enemy = null
 	if aggroed_actor_id == '' or actor.aggro.get_threat_from_actor(aggroed_actor_id) == 0:
@@ -162,8 +159,6 @@ static func _get_actor_action_options_data(actor:BaseActor)->Dictionary:
 
 
 static func get_closest_enemy(actor:BaseActor, game_state:GameStateData)->BaseActor:
-	if actor.Id.begins_with("Player"):
-		var temp = true
 	var actor_pos = game_state.get_actor_pos(actor)
 	var min_dist = 10000
 	var closest_actor = null
@@ -179,15 +174,14 @@ static func get_closest_enemy(actor:BaseActor, game_state:GameStateData)->BaseAc
 			closest_actor = enemy
 	return closest_actor
 
-static func get_damage_data_of_action(action:PageItemAction, actor:BaseActor)->Dictionary:
+static func get_damage_data_of_action(action:PageItemAction, _actor:BaseActor)->Dictionary:
 	var damage_data = action.DamageDatas
 	if damage_data.size() > 0:
 		return damage_data
-	var preview_damage_data_key = action.get_preview_damage_datas(actor)
 	return {}
 		
 
-static func try_handle_get_target_sub_action(actor:BaseActor, selection_data:TargetSelectionData, action:PageItemAction, game_state:GameStateData)->bool:
+static func try_handle_get_target_sub_action(actor:BaseActor, selection_data:TargetSelectionData, _action:PageItemAction, game_state:GameStateData)->bool:
 	var turndata = selection_data.focused_actor.Que.QueExecData.get_current_turn_data()
 	var potentail_actors = []
 	var coor_to_actor = {}
@@ -245,7 +239,7 @@ static func pick_between_enemies(actor:BaseActor, enemies:Array)->String:
 	printerr("AiHandler.pick_between_enemies: Roll did not return value")
 	return ''
 
-static func path_to_target(actor:BaseActor, start_pos:MapPos, target_pos:MapPos, game_state:GameStateData)->Dictionary:
+static func path_to_target(actor:BaseActor, start_pos:MapPos, target_pos:MapPos, _game_state:GameStateData)->Dictionary:
 	if !astar:
 		printerr("AStart not built")
 		return {}
@@ -410,7 +404,7 @@ static func _pos_to_index(pos:MapPos)->int:
 	return pos_index
 	#return (pos.x + (pos.y * game_state.map_width)) * 10 + pos.dir
 
-static func _list_pos_indexes(pos, game_state)->Array:
+static func _list_pos_indexes(pos, _game_state)->Array:
 	var temp_pos = MapPos.new(pos.x, pos.y, 0, 0)
 	var out_list = []
 	for dir in MapPos.Directions.values():

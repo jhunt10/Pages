@@ -27,7 +27,7 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if backpatch:
 		var patch_size = backpatch.size
 		if patch_size != _cached_box_size:
@@ -74,11 +74,11 @@ func set_action(actor:BaseActor, page_item:BasePageItem):
 		var dam_label = damage_label
 		var merged_counts = {}
 		for dam_data in damage_datas.values():
-			var hash = hash(dam_data)
-			if not merged_counts.has(hash):
-				merged_counts[hash] = {"Value": dam_data, "Count": 1}
+			var hash_val = hash(dam_data)
+			if not merged_counts.has(hash_val):
+				merged_counts[hash_val] = {"Value": dam_data, "Count": 1}
 			else:
-				merged_counts[hash]['Count'] += 1
+				merged_counts[hash_val]['Count'] += 1
 		for merged_data in merged_counts.values():
 			if dam_label == null:
 				dam_label = damage_label.duplicate()

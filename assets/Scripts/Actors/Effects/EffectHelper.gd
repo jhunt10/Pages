@@ -30,7 +30,6 @@ static func create_effect(
 		return null
 	
 	var effect_def = EffectLibrary.get_merged_effect_def(effect_key, effect_data)
-	var eff_data = effect_def.get("EffectData", {}) 
 	var effect_details = effect_def.get("EffectDetails", {})
 	var effect_potency = effect_def.get("AppliedPotency", 1)
 	
@@ -102,7 +101,6 @@ static func create_effect(
 				printerr("EffectHelper: Found null for oldest Limited Effect Id. Shouldn't Happen." )
 			else:
 				var oldest_effect = EffectLibrary.get_effect(rm_count_limit_effect_id)
-				var oldest_actor = oldest_effect.get_effected_actor()
 				limited_effect_to_remove = oldest_effect
 	
 	var effect = EffectLibrary._create_effect(source, actor, effect_key, effect_data, force_id, game_state, suppress_signals)

@@ -82,9 +82,6 @@ func clear_action_mods():
 	self._data = self._init_data.duplicate(true)
 	if rebuild_targets:
 		_target_params.clear()
-		# TODO: Delete
-		var action_data_check = action_data.duplicate(true)
-		
 		var targ_parms = action_data.get('TargetParams')
 		if targ_parms:
 			for tparm_key in targ_parms.keys():
@@ -295,7 +292,7 @@ func get_damage_datas(actor:BaseActor, damage_keys)->Dictionary:
 			continue
 	return out_dict
 
-func has_ammo(actor:BaseActor=null):
+func has_ammo(_actor:BaseActor=null):
 	var ammo_data = action_data.get("AmmoData", null)
 	return ammo_data and ammo_data.size() > 0
 

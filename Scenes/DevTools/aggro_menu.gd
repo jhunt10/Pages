@@ -11,12 +11,6 @@ func _ready() -> void:
 	close_button.pressed.connect(self.hide)
 	actors_options_button.get_options_func = get_actors
 	actors_options_button.item_selected.connect(on_actor_selected)
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
 
 func get_actors()->Array:
 	if not CombatRootControl.Instance:
