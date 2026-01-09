@@ -17,6 +17,7 @@ var freeze:bool:
 var locked_for_cut_scene:bool = false
 
 var following_actor_node:BaseActorNode
+var soft_lock_to_actor:bool = false
 
 var is_auto_panning:bool:
 	get: return auto_pan_start_pos != null
@@ -35,14 +36,22 @@ var max_camera_bounds:Rect2i
 func _ready() -> void:
 	pass # Replace with function body.
 
+
+func freeze_camera():
+	self.freeze = true
+
+func unfreeze_camera():
+	self.freeze = false
+
 # Camera must be later in tree than Actors, otherwise camera will bounce around when the actor walks between tiles
-func lock_to_actor(actor:BaseActor):
+func lock_to_actor(actor:BaseActor, soft_lock=false):
 	if LOGGING: print("Camera lock to actor: %s" %[actor.Id] )
 	var actor_node = CombatRootControl.get_actor_node(actor.Id)
 	if not actor_node:
 		printerr("Camera lock_to_actor: Failed to find node for actor: %s" % [actor.Id])
 	self.snap_to_map_pos(actor_node.cur_map_pos)
 	following_actor_node = actor_node
+	soft_lock_to_actor = soft_lock
 	if LOGGING: print("Locking Camera to Actor: %s" % [following_actor_node.Actor.Id])
 	
 
@@ -84,7 +93,8 @@ func _process(delta: float) -> void:
 			var move_node = following_actor_node.actor_motion_node
 			if LOGGING: print("Following Actor: " + str(move_node.position))
 			set_camera_pos(move_node.global_position, false)
-			return
+			if not soft_lock_to_actor:
+				return
 	if freeze:
 		return
 	if locked_for_cut_scene:
@@ -137,6 +147,7 @@ func clear_following_actor():
 		if is_instance_valid(following_actor_node):
 			if LOGGING: print("Unlocking Camera from Actor: %s" % [following_actor_node.Actor.Id])
 		following_actor_node = null
+		soft_lock_to_actor = false
 	else:
 		if LOGGING: print("Unlocking Camera from Actor: null")
 

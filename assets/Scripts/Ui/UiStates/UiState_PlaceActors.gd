@@ -116,7 +116,7 @@ func _mouse_button_down_in_spot(spot):
 			actor_positions[placing_actor_id] = MapPos.new(mouse_down_spot.x, mouse_down_spot.y, 0, 0)
 			actor_placer_control.put_actor_in_spot(placing_actor_id, mouse_down_spot)
 			state = States.Dragging
-			CombatRootControl.Instance.camera.freeze = true
+			CombatRootControl.Instance.camera.freeze_camera()
 			CombatRootControl.Instance.GridCursor.set_cursor(GridCursorNode.Cursors.PlacingDragCenter)
 			CombatRootControl.Instance.GridCursor.lock_position = true
 	if state == States.Waiting:
@@ -126,7 +126,7 @@ func _mouse_button_down_in_spot(spot):
 
 
 func _mouse_button_up_in_spot(_spot):
-	CombatRootControl.Instance.camera.freeze = false
+	CombatRootControl.Instance.camera.unfreeze_camera()
 	CombatRootControl.Instance.GridCursor.lock_position = false
 	if state == States.Dragging:
 		actor_placer_control.darken_actor(placing_actor_id)

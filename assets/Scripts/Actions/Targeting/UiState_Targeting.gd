@@ -50,7 +50,7 @@ func start_state():
 		CombatRootControl.Instance.GridCursor.set_cursor(GridCursorNode.Cursors.Targeting)
 	else:
 		CombatRootControl.Instance.GridCursor.set_cursor(GridCursorNode.Cursors.Default)
-	CombatRootControl.Instance.camera.freeze = false
+	CombatRootControl.Instance.camera.unfreeze_camera()
 	var center = selection_data.get_center_of_area()
 	CombatRootControl.Instance.camera.start_auto_pan_to_map_pos(center)
 	

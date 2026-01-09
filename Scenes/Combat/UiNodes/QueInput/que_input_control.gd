@@ -158,11 +158,11 @@ func _process(delta: float) -> void:
 
 func set_actor(actor:BaseActor):
 	if _actor:
-		_actor.pages.items_changed.disconnect(_build_buttons)
+		#_actor.pages.items_changed.disconnect(_build_buttons)
 		_actor.Que.action_que_changed.disconnect(_on_que_change)
 		_actor.Que.ammo_changed.disconnect(_on_ammo_change)
 	_actor = actor
-	_actor.pages.items_changed.connect(_build_buttons)
+	#_actor.pages.items_changed.connect(_build_buttons)
 	_actor.Que.action_que_changed.connect(_on_que_change)
 	_actor.Que.ammo_changed.connect(_on_ammo_change)
 	hover_box.hide()

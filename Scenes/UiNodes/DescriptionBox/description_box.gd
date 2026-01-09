@@ -12,7 +12,7 @@ func _ready() -> void:
 		popup_container.hide()
 	self.meta_clicked.connect(_richtextlabel_on_meta_clicked)
 	self.meta_hover_started.connect(_show_pop_up)
-	self.meta_hover_ended.connect(_hide_pop_up)
+	self.meta_hover_ended.connect(_on_mouse_hover_end)
 
 func _richtextlabel_on_meta_clicked(meta):
 	print(meta)
@@ -23,9 +23,12 @@ func _show_pop_up(data_str):
 		#self.get_parent_control()
 		self.add_child(popup_container)
 	var data = JSON.parse_string(data_str)
+	var mouse_pos = self.get_global_mouse_position()
 	popup_container.show()
-	popup_container.global_position = self.get_global_mouse_position()
+	popup_container.global_position = mouse_pos
 	popup_container.message_box.clear()
+	popup_container.parent_description_box = self
+	
 	if data:
 		if data.has("text"):
 			var line = data.get("text", "")
@@ -53,9 +56,14 @@ func color_text(color, raw_text)->String:
 			color = color.trim_suffix("]")
 	return "[color=#" + color + "]" + raw_text + "[/color]"
 
+func _on_mouse_hover_end(_data):
+	pass
+
 func _hide_pop_up(_data):
 	if popup_container:
-		popup_container.queue_free()
+		if is_instance_valid(popup_container):
+			popup_container.queue_free()
+		popup_container = null
 
 func set_page_item(page:BasePageItem, actor:BaseActor=null):
 	if not page:

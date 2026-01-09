@@ -17,7 +17,7 @@ func start_state():
 	CombatRootControl.Instance.ui_control.que_input.hide_start_button()
 	
 	var current_actor = CombatRootControl.Instance.get_current_player_actor()
-	CombatRootControl.Instance.camera.lock_to_actor(current_actor)
+	CombatRootControl.Instance.camera.lock_to_actor(current_actor, true)
 	pass
 
 func update(_delta:float):

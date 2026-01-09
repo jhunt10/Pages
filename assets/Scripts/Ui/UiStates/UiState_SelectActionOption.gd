@@ -23,7 +23,7 @@ func start_state():
 	finished_selecting = false
 	option_menu.set_options(_selection_key, _option_sets, _on_all_que_options_selected)
 	option_menu.menu_closed.connect(on_option_menu_closed)
-	CombatRootControl.Instance.camera.freeze = true
+	CombatRootControl.Instance.camera.freeze_camera()
 
 func _on_all_que_options_selected(selection_key:String, options_data:Dictionary):
 	var actor = ActorLibrary.get_actor(_selecting_for_actor_id)
@@ -42,7 +42,7 @@ func on_option_menu_closed():
 	var option_menu = CombatRootControl.Instance.ui_control.option_select_menu
 	option_menu.menu_closed.disconnect(on_option_menu_closed)
 	CombatUiControl.ui_state_controller.back_to_last_state()
-	CombatRootControl.Instance.camera.freeze = false
+	CombatRootControl.Instance.camera.unfreeze_camera()
 
 func end_state():
 	pass

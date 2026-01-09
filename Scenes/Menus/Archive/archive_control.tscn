@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://dbv44ej4s1njb"]
+[gd_scene load_steps=22 format=3 uid="uid://dbv44ej4s1njb"]
 
 [ext_resource type="Script" path="res://Scenes/UiNodes/back_patch_container.gd" id="1_is6c6"]
 [ext_resource type="Script" path="res://Scenes/Menus/Archive/archive_control.gd" id="1_wbdue"]
@@ -17,6 +17,7 @@
 [ext_resource type="Script" path="res://Scenes/UiNodes/DescriptionBox/description_box.gd" id="8_qpbv8"]
 [ext_resource type="Script" path="res://Scenes/Menus/Archive/resist_container.gd" id="12_d0bpe"]
 [ext_resource type="Texture2D" uid="uid://b3atdgr5fajkj" path="res://assets/Sprites/UI/SymbolIcons/DmgSymbol_Fire.png" id="13_qmf4r"]
+[ext_resource type="Script" path="res://Scenes/UiNodes/DescriptionBox/tags_box.gd" id="14_aquqc"]
 [ext_resource type="Texture2D" uid="uid://b68wdq050rrtf" path="res://assets/Sprites/UI/SymbolIcons/MoneySymbol.png" id="14_svqfg"]
 [ext_resource type="Script" path="res://Scenes/Menus/Archive/actor_drop_entry.gd" id="17_7ycef"]
 [ext_resource type="Texture2D" uid="uid://bibqsudhjw4qe" path="res://assets/Sprites/Paper/Mundane_Background.png" id="18_48ows"]
@@ -205,14 +206,14 @@ patch_margin_bottom = 32
 axis_stretch_horizontal = 2
 axis_stretch_vertical = 2
 
-[node name="BoxContainer" type="BoxContainer" parent="BoxContainer/VBoxContainer/HBoxContainer/ActorMainContainer" node_paths=PackedStringArray("icon_rect", "actor_node", "title_label", "tags_label", "xp_label", "money_label", "strength_label", "agility_label", "int_label", "wisdom_label", "health_label", "ppr_label", "mass_label", "speed_label", "phy_atk_label", "mag_atk_label", "armor_label", "ward_label", "acc_label", "eva_label", "pot_label", "pro_label", "description_box", "resisances_container", "weaknesses_container", "item_drop_entry", "item_drop_container", "passive_pages_container", "action_pages_container")]
+[node name="BoxContainer" type="BoxContainer" parent="BoxContainer/VBoxContainer/HBoxContainer/ActorMainContainer" node_paths=PackedStringArray("icon_rect", "actor_node", "title_label", "tags_box", "xp_label", "money_label", "strength_label", "agility_label", "int_label", "wisdom_label", "health_label", "ppr_label", "mass_label", "speed_label", "phy_atk_label", "mag_atk_label", "armor_label", "ward_label", "acc_label", "eva_label", "pot_label", "pro_label", "description_box", "resisances_container", "weaknesses_container", "item_drop_entry", "item_drop_container", "passive_pages_container", "action_pages_container")]
 layout_mode = 2
 vertical = true
 script = ExtResource("3_iek5u")
 icon_rect = NodePath("HBoxContainer/NinePatchRect/IconTextureRect")
 actor_node = NodePath("HBoxContainer/NinePatchRect/CenterContainer/Control/Node2D/ActorNode")
 title_label = NodePath("HBoxContainer/VBoxContainer/FitScaleLabel")
-tags_label = NodePath("HBoxContainer/VBoxContainer/Label2")
+tags_box = NodePath("HBoxContainer/VBoxContainer/TagsBox")
 xp_label = NodePath("NpcDataContainer/HBoxContainer3/XPValLabel")
 money_label = NodePath("NpcDataContainer/HBoxContainer2/MoneyValLabel")
 strength_label = NodePath("../../VBoxContainer/StatsContainer/BoxContainer/AttibutesContainer/StrContainer")
@@ -307,10 +308,22 @@ layout_mode = 2
 color = Color(0.498039, 0, 0, 1)
 
 [node name="Label2" type="Label" parent="BoxContainer/VBoxContainer/HBoxContainer/ActorMainContainer/BoxContainer/HBoxContainer/VBoxContainer"]
+visible = false
 layout_mode = 2
 theme = ExtResource("5_3wi5n")
 text = "Tag1, Tag2, Tag3, Tag4..."
 text_overrun_behavior = 3
+
+[node name="TagsBox" type="RichTextLabel" parent="BoxContainer/VBoxContainer/HBoxContainer/ActorMainContainer/BoxContainer/HBoxContainer/VBoxContainer"]
+clip_contents = false
+layout_mode = 2
+theme = ExtResource("5_3wi5n")
+theme_override_font_sizes/normal_font_size = 14
+text = "Human, Actor, Living, Unarmed, Attack, Spell, Page, Action"
+fit_content = true
+scroll_active = false
+autowrap_mode = 2
+script = ExtResource("14_aquqc")
 
 [node name="NpcDataContainer" type="HBoxContainer" parent="BoxContainer/VBoxContainer/HBoxContainer/ActorMainContainer/BoxContainer"]
 layout_mode = 2

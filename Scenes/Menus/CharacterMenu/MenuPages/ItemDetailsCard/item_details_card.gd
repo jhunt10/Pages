@@ -71,6 +71,7 @@ var is_selling:bool = false
 @export var page_que_details:PageQueDetailsControl
 @export var default_details:DefaultItemDetailsControl
 @export var tag_label:Label
+@export var tag_box:TagBox
 
 
 @export var equip_button_background:NinePatchRect
@@ -163,11 +164,12 @@ func set_item(actor:BaseActor, item:BaseItem):
 	icon.texture = item.get_small_icon()
 	title_lable.text = item.get_display_name()
 	description_box.text = item.get_description()
-	var tag_string = ''
-	for tag in item.get_tags():
-		tag_string += ", " + tag
-	#var tag_label_text = ("[%s]: %s" % [item.ItemKey, tag_string.trim_prefix(", ")])
-	tag_label.text = tag_string.trim_prefix(", ")
+	#var tag_string = ''
+	#for tag in item.get_tags():
+		#tag_string += ", " + tag
+	##var tag_label_text = ("[%s]: %s" % [item.ItemKey, tag_string.trim_prefix(", ")])
+	#tag_label.text = tag_string.trim_prefix(", ")
+	tag_box.set_tags(item.get_tags())
 	default_details.hide()
 	weapon_details.hide()
 	armor_details.hide()

@@ -5,7 +5,7 @@ extends BoxContainer
 @export var icon_rect:TextureRect
 @export var actor_node:BaseActorNode
 @export var title_label:FitScaleLabel
-@export var tags_label:Label
+@export var tags_box:TagBox
 
 @export var xp_label:Label
 @export var money_label:Label
@@ -48,7 +48,7 @@ func set_actor(actor:BaseActor):
 	title_label.text = actor.get_display_name()
 	
 	var tags = actor.get_tags()
-	tags_label.text = ", ".join(tags)
+	tags_box.set_tags(tags)
 	
 	if actor.is_player:
 		money_label.hide()

@@ -19,13 +19,13 @@ func _ready() -> void:
 	reload_stuff_button.pressed.connect(reload_stuff)
 	add_xp_menu_button.pressed.connect(add_xp_to_party)
 	if CombatRootControl.Instance:
-		CombatRootControl.Instance.camera.freeze = true
+		CombatRootControl.Instance.camera.freeze_camera()
 	pass # Replace with function body.
 
 func close_menu():
 	self.queue_free()
 	if CombatRootControl.Instance:
-		CombatRootControl.Instance.camera.freeze = false
+		CombatRootControl.Instance.camera.unfreeze_camera()
 	MainRootNode.Instance.dev_tools_menu = null
 
 func reload_stuff():

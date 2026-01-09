@@ -10,14 +10,14 @@ func _init(controler:UiStateController, args:Dictionary) -> void:
 	
 
 func start_state():
-	CombatRootControl.Instance.camera.freeze = true
+	CombatRootControl.Instance.camera.freeze_camera()
 	pass
 
 func on_menu_closed():
 	CombatUiControl.ui_state_controller.back_to_last_state()
 
 func end_state():
-	CombatRootControl.Instance.camera.freeze = false
+	CombatRootControl.Instance.camera.unfreeze_camera()
 	CombatUiControl.Instance.que_input.allow_input(false)
 	if CombatRootControl.QueController.execution_state == ActionQueController.ActionStates.Paused:
 		CombatRootControl.Instance.QueController.start_or_resume_execution()

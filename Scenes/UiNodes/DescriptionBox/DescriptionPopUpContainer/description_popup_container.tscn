@@ -6,8 +6,10 @@
 [ext_resource type="Theme" uid="uid://dwinll8pgdjhc" path="res://Scenes/Themes/standard_theme.tres" id="3_rwuh1"]
 
 [node name="PopupContainer" type="Control" node_paths=PackedStringArray("back_patch", "message_box")]
+z_index = 20
 layout_mode = 3
 anchors_preset = 0
+mouse_filter = 2
 script = ExtResource("1_ghp6n")
 back_patch = NodePath("BackPatch")
 message_box = NodePath("BackPatch/BoxContainer/MessageBox")
@@ -26,6 +28,7 @@ offset_top = -109.0
 offset_right = 137.0
 grow_horizontal = 2
 grow_vertical = 0
+mouse_filter = 2
 script = ExtResource("1_3wnk0")
 background = NodePath("NinePatchRect")
 inner_container = NodePath("BoxContainer")
@@ -43,10 +46,12 @@ patch_margin_bottom = 12
 
 [node name="BoxContainer" type="BoxContainer" parent="BackPatch"]
 layout_mode = 2
+mouse_filter = 2
 
 [node name="MessageBox" type="RichTextLabel" parent="BackPatch/BoxContainer"]
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
+mouse_filter = 2
 theme = ExtResource("3_rwuh1")
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 bbcode_enabled = true

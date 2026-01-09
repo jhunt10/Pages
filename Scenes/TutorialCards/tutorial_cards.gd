@@ -1,3 +1,4 @@
+@tool
 class_name TutorialCardsController
 extends Control
 
@@ -14,53 +15,59 @@ signal closed
 @export var done_button:Button
 @export var done_button_background:NinePatchRect
 
-@export var intro_card:Control
-@export var multi_turn_card:Control
-@export var page_que_card:Control
-@export var movement_card:Control
-@export var targeting_actor_card:Control
-@export var targeting_spot_card:Control
-@export var ppr_card:Control
-@export var speed_card:Control
-@export var mass_card:Control
-@export var armor_card:Control
-@export var block_evade_card:Control
-@export var item_card:Control
-@export var item2_card:Control
-@export var ammo_card:Control
-@export var weapon_card:Control
+@export var cards_holder:Control
+#
+#@export var intro_card:Control
+#@export var multi_turn_card:Control
+#@export var page_que_card:Control
+#@export var movement_card:Control
+#@export var targeting_actor_card:Control
+#@export var targeting_spot_card:Control
+#@export var ppr_card:Control
+#@export var speed_card:Control
+#@export var mass_card:Control
+#@export var armor_card:Control
+#@export var block_evade_card:Control
+#@export var item_card:Control
+#@export var item2_card:Control
+#@export var ammo_card:Control
+#@export var weapon_card:Control
 
-var cards:Dictionary
-
-var card_list:Array = []
+func get_cards_dict()->Dictionary:
+	var dict = {}
+	if cards_holder:
+		for child in cards_holder.get_children():
+			dict[child.name] = child
+	return dict
 
 @export var card_index:int:
 	set(val):
-		var clamped_val = max(0, min(card_list.size()-1, val))
-		if card_list.size() > 0:
+		var cards = get_cards_dict()
+		var clamped_val = max(0, min(cards.size()-1, val))
+		if cards.size() > 0:
 			if val >= 0:
 				card_index = clamped_val
 			for card in cards.values():
 				card.visible = false
-			var cur_card_key = card_list[card_index]
-			title_label.text = cur_card_key
+			var cur_card_key = cards.keys()[card_index]
+			title_label.text = cur_card_key.replace("_", " ")
 			cards[cur_card_key].visible = true
-			count_label.text = " " + str(card_index+1) + "/" + str(card_list.size()) + "  "
+			count_label.text = " " + str(card_index+1) + "/" + str(cards.size()) + "  "
 			if card_index == 0:
 				back_button_background.hide()
 			else:
 				back_button_background.show()
-			if card_index == card_list.size() -1:
+			if card_index == cards.size() -1:
 				next_button_background.hide()
 				done_button_background.show()
 			else:
 				next_button_background.show()
 				done_button_background.hide()
-				
-
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	if Engine.is_editor_hint():
+		return
 	if top_container and not top_container.visible:
 		var parent = top_container.get_parent()
 		parent.remove_child(top_container)
@@ -70,41 +77,41 @@ func _ready() -> void:
 	next_button.pressed.connect(_on_next)
 	done_button.pressed.connect(_on_done)
 	close_button.pressed.connect(_on_done)
-	cards = {
-		"Intro": intro_card,
-		"Multi Turn Based": multi_turn_card,
-		"Page Que": page_que_card,
-		"Movement": movement_card,
-		"Targeting Actors": targeting_actor_card,
-		"Targeting Spots": targeting_spot_card,
-		"Pages Per Round": ppr_card,
-		"Turn Order": speed_card,
-		"Crashing": mass_card,
-		"Armor and Damage": armor_card,
-		"Block and Evade": block_evade_card,
-		"Items": item_card,
-		"Items 2": item2_card,
-		"Page Ammo": ammo_card,
-		"Weapons": weapon_card
-	}
-	card_list = [
-		"Intro",
-		"Multi Turn Based",
-		"Pages Per Round",
-		"Turn Order",
-		"Crashing",
-		#"Page Que",
-		#"Movement",
-		"Targeting Actors",
-		"Targeting Spots",
-		"Armor and Damage",
-		"Block and Evade",
-		"Items",
-		"Items 2",
-		"Page Ammo",
-		"Weapons"
-	]
-	card_index = card_index
+	card_index = 0
+	#cards = {
+		#"Intro": intro_card,
+		#"Multi Turn Based": multi_turn_card,
+		#"Page Que": page_que_card,
+		#"Movement": movement_card,
+		#"Targeting Actors": targeting_actor_card,
+		#"Targeting Spots": targeting_spot_card,
+		#"Pages Per Round": ppr_card,
+		#"Turn Order": speed_card,
+		#"Crashing": mass_card,
+		#"Armor and Damage": armor_card,
+		#"Block and Evade": block_evade_card,
+		#"Items": item_card,
+		#"Items 2": item2_card,
+		#"Page Ammo": ammo_card,
+		#"Weapons": weapon_card
+	#}
+	#card_list = [
+		#"Intro",
+		#"Multi Turn Based",
+		#"Pages Per Round",
+		#"Turn Order",
+		#"Crashing",
+		##"Page Que",
+		##"Movement",
+		#"Targeting Actors",
+		#"Targeting Spots",
+		#"Armor and Damage",
+		#"Block and Evade",
+		#"Items",
+		#"Items 2",
+		#"Page Ammo",
+		#"Weapons"
+	#]
 
 func _on_next():
 	card_index += 1

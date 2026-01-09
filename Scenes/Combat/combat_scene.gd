@@ -417,7 +417,7 @@ func set_player_index(index:int, move_camera:bool=true):
 		ui_control.set_player_actor_index(_current_player_index)
 		if move_camera:
 			var actor = get_player_actor(index)
-			camera.start_auto_pan_to_actor(actor, false)
+			camera.lock_to_actor(actor, true)
 
 
 func get_player_actor(index:int = _current_player_index)->BaseActor:
