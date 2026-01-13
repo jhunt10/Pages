@@ -37,6 +37,13 @@ func get_item_type()->ItemTypes:
 		printerr("BaseItem.get_item_type: %s has unknown ItemType '%s'." % [ItemKey, item_type_str])
 	return ItemTypes.KeyItem
 
+
+func get_item_type_string()->String:
+	var val  = get_item_type()
+	if val >= 0:
+		return ItemTypes.keys()[val]
+	return ""
+
 func get_item_rarity()->ItemRarity:
 	var type_str = item_data.get("Rarity", null)
 	if type_str and ItemRarity.keys().has(type_str):
@@ -47,6 +54,13 @@ func get_item_rarity()->ItemRarity:
 
 func get_item_value()->int:
 	return item_data.get("Value", 0)
+
+
+func get_rarity_string()->String:
+	var rarity = get_item_rarity()
+	if rarity >= 0:
+		return ItemRarity.keys()[rarity]
+	return ""
 
 func get_rarity_background()->Texture2D:
 	return ItemHelper.get_rarity_background(self.get_item_rarity())

@@ -58,7 +58,9 @@ var is_selling:bool = false
 
 @export var speed:float
 @export var icon:TextureRect
+@export var icon_background:TextureRect
 @export var title_lable:FitScaleLabel
+@export var rarity_lable:Label
 @export var description_box:RichTextLabel
 @export var exit_button:Button
 #@export var equip_button:Button
@@ -161,8 +163,10 @@ func start_hide():
 
 func set_item(actor:BaseActor, item:BaseItem):
 	item_id = item.Id
+	icon_background.texture = item.get_rarity_background()
 	icon.texture = item.get_small_icon()
 	title_lable.text = item.get_display_name()
+	rarity_lable.text = item.get_rarity_string() + " " + item.get_taxonomy_leaf()
 	description_box.text = item.get_description()
 	#var tag_string = ''
 	#for tag in item.get_tags():

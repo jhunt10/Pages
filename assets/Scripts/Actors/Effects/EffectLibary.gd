@@ -101,7 +101,7 @@ static func _create_effect(
 		printerr("EffectLibrary.create_effect: Failed to make effect '%s'." % [key])
 		return null
 	# TODO: I'm coming in late and don't know why this isnt in init()
-	effect._source = source
+	#effect._source = source
 	return effect
 
 static func list_effect_defs()->Array:

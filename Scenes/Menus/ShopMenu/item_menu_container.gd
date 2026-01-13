@@ -10,6 +10,7 @@ signal item_button_pressed(item_key:String)
 @export var back_button:Button
 
 var _catagory_sub_lists:Dictionary = {}
+var _last_selected_catagory
 
 func _ready() -> void:
 	premade_sub_item_list.hide()
@@ -50,8 +51,13 @@ func _on_show_catagory(selected_catagory:String):
 	for catagory in _catagory_sub_lists.keys():
 		var sub_list:ShopSubItemList = _catagory_sub_lists[catagory]
 		if catagory == selected_catagory:
-			sub_list.showing = true
-			catagory_selected.emit(sub_list)
+			# Hide if currently selected
+			if _last_selected_catagory == selected_catagory:
+				sub_list.showing = false
+			else:
+				sub_list.showing = true
+				_last_selected_catagory = selected_catagory
+				catagory_selected.emit(sub_list)
 		else:
 			sub_list.showing = false
 	

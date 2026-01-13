@@ -1,7 +1,7 @@
 class_name MoveableCamera2D
 extends Camera2D
 
-const LOGGING = false
+const LOGGING = true
 
 signal panning_finished
 
@@ -91,7 +91,7 @@ func _process(delta: float) -> void:
 			clear_following_actor()
 		else:
 			var move_node = following_actor_node.actor_motion_node
-			if LOGGING: print("Following Actor: " + str(move_node.position))
+			#if LOGGING: print("Following Actor: " + str(move_node.position))
 			set_camera_pos(move_node.global_position, false)
 			if not soft_lock_to_actor:
 				return
@@ -114,7 +114,7 @@ func _process(delta: float) -> void:
 			var touch_events = _touch_events.values()[0]
 			var drag_diff = touch_events['start'].position - touch_events['current'].position 
 			set_camera_pos(_drag_start_camera_pos + (drag_diff / self.zoom))
-			if LOGGING: print(self.position)
+			#if LOGGING: print("SelfPos: %s " %[self.position])
 		if _touch_events.size() == 2:
 			var center_point = Vector2.ZERO
 			for touch in _touch_events.values():
@@ -207,10 +207,12 @@ func _unhandled_input(event: InputEvent) -> void:
 		if _touch_events.size() == 0:
 			_drag_start_camera_pos = self.position
 		_touch_events[event.index] = {"current": event, "start":event}
+		if LOGGING: printerr("New Touch Event: %s" % [event.index])
 		if _touch_events.size() == 2:
 			_pinch_start_zoom = self.zoom
 	if event is InputEventScreenTouch and not event.pressed:
 		_touch_events.erase(event.index)
+		if LOGGING: printerr("End Touch Event: %s" % [event.index])
 		if _touch_events.size() < 2:
 			_pinch_start_radius = -1
 			_pinch_last_radius = -1

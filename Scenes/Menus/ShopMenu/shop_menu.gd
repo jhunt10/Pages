@@ -104,7 +104,7 @@ func get_shop_data()->Dictionary:
 		"Potions": ["HealthPotionS", "HealthPotionM", "HealthPotionL"],
 		"Bombs":["BombBasicItem", "BombColdItem", "BombFireItem", "BombShockItem", "BombPoisonItem", "BombGreaseItem"],
 		"Pages": ["UsePotionSelf", "ThrowPotionPage", "ThrowBombPage", "ReloadPage","MoveForward","TurnLeft","TurnRight", "Wait", "MoveLeft", "MoveRight", "TurnAround", "Dash"],
-		"Weapons": ["FireSword_Weapon", "IceKnife_Weapon"],
+		"Weapons": ["BaseClub_Weapon", "BaseShiv_Weapon", "BaseMace_Weapon", "BaseSpear_Weapon", "BaseGreatSword_Weapon", "BaseGreatHammer_Weapon", "FireSword_Weapon", "IceKnife_Weapon"],
 		"Shields": ["WoodenShield", "WoodenTower", "TowerShield"]
 	}
 

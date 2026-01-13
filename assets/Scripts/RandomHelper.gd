@@ -9,7 +9,6 @@ static func for_chance(odds:float, _want_low:bool=true)->bool:
 
 static func for_actor(actor:BaseActor, odds:float, want_low:bool=true)->bool:
 	var roll_val = get_roll_for_actor(actor, want_low)
-	print("Roll: %s / %s" % [roll, odds])
 	if want_low:
 		return roll_val <= odds
 	else:
