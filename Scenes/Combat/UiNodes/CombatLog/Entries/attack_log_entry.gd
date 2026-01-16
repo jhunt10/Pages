@@ -50,7 +50,7 @@ func set_event(attack_event:AttackEvent):
 		elif sub_event.is_blocked:
 			result_line = "who blocked"
 		else:
-			result_line = "hitting"
+			result_line = ""
 		
 		# Shortcut single damage healing events
 		if sub_event.damage_events.size() == 1 and sub_event.damage_events.values()[0].final_damage < 0:
@@ -59,6 +59,9 @@ func set_event(attack_event:AttackEvent):
 			var damage_vals_str = _join_damage_values(sub_event)
 			if damage_vals_str != '':
 				result_line += " for " + damage_vals_str
+		
+		if attack_event.final_leached_damage > 0:
+			result_line += " and gained " + GREEN_TEXT + str(attack_event.final_leached_damage) + " HP[/color]"
 		
 		var effects_line = _join_effect_values(attack_event, sub_event)
 		if effects_line != '':
@@ -69,12 +72,7 @@ func set_event(attack_event:AttackEvent):
 		return
 	else:
 		var defender_count = str(attack_event.defender_ids.size()) + " targets"
-		var total_damage = 0
-		for defender_index in range(attack_event.defender_ids.size()):
-			var defender = ActorLibrary.get_actor(attack_event.defender_ids[defender_index])
-			var sub_event = attack_event.get_sub_event_for_defender(defender.Id)
-			for damage_event:DamageEvent in sub_event.damage_events.values():
-				total_damage += damage_event.final_damage
+		var total_damage = attack_event.get_total_damage()
 		var result_line = " " + defender_count + " hitting for " + str(total_damage) + " total damage"
 		
 		var full_line = attacker_name + " " + action_verb + result_line

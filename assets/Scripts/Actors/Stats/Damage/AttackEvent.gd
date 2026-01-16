@@ -34,6 +34,7 @@ var attacker_cover_penalty:float
 var attacker_crit_chance:float
 var attcker_crit_mod:float
 var attacker_potency:float
+var final_leached_damage:int
 
 func _init( attacking_actor:BaseActor, 
 			defending_actors:Array,
@@ -84,6 +85,7 @@ func serialize_self()->String:
 	"attcker_crit_mod": attcker_crit_mod,
 	"attacker_potency": attacker_potency,
 	"attacker_cover_penalty": attacker_cover_penalty,
+	"leached_damage": final_leached_damage,
 	"sub_events": {}
 	}
 	for defender_id in defender_ids:
@@ -98,3 +100,14 @@ func get_sub_event_for_defender(defender_or_id)->AttackSubEvent:
 
 func get_attacker()->BaseActor:
 	return ActorLibrary.get_actor(attacker_id)
+
+func get_total_damage(include_negative:bool = true)->int:
+	var total_damage = 0
+	for defender_id in defender_ids:
+		var sub_event = get_sub_event_for_defender(defender_id)
+		for damage_event:DamageEvent in sub_event.damage_events.values():
+			if not include_negative and damage_event.final_damage < 0:
+				continue
+			total_damage += damage_event.final_damage
+	return total_damage
+	

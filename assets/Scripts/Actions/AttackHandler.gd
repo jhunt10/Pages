@@ -146,6 +146,9 @@ static func handle_attack(
 	for actor in all_unique_actors:
 		actor.effects.trigger_attack(attack_event, game_state)
 	
+	# Only includes instances of positive damage
+	var total_leachable_damage_dealt = 0
+	
 	# Apply damage and create effects
 	for defender:BaseActor in defenders:
 		var sub_event:AttackSubEvent = attack_event.sub_events[defender.Id]
@@ -156,6 +159,8 @@ static func handle_attack(
 		for damage_event:DamageEvent in sub_event.damage_events.values():
 			defender.stats.apply_damage_event(damage_event, true, game_state)
 			damage_event.was_applied = true
+			if damage_event.final_damage > 0:
+				total_leachable_damage_dealt += damage_event.final_damage
 			
 			# Get Damage Vfx Data
 			var damage_key = damage_event.damage_data_key
@@ -190,8 +195,17 @@ static func handle_attack(
 						effect_result['AppliedEffectId'] = effect.Id
 				else:
 					vfx_data_cache[defender.Id]['ResistedAtLeastOnce'] = true
-		
-				
+	
+	# Apply Damage Leaching
+	if attack_details.keys().has("LeachPercent"):
+		var leach_val = attack_details.get("LeachPercent", 0)
+		var heal_val = maxi(0, ceili((total_leachable_damage_dealt as float) * leach_val))
+		if heal_val > 0:
+			attack_event.final_leached_damage = heal_val
+			attacker.stats.apply_healing(heal_val)
+			VfxHelper.create_flash_text(attacker, str(heal_val), VfxHelper.FlashTextType.Healing_Dmg)
+	
+	
 	attack_event.attack_stage = AttackStage.Resolved
 	
 	# Clear Temp Stat Mods from Actors

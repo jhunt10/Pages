@@ -7,6 +7,7 @@ extends Control
 @export var items_to_inventory_button:Button
 @export var add_item_menu_button:Button
 @export var add_xp_menu_button:Button
+@export var unlock_actor_records_button:Button
 
 @export var add_item_menu:AddItemMenu
 
@@ -18,6 +19,7 @@ func _ready() -> void:
 	add_item_menu_button.pressed.connect(add_item_menu.show)
 	reload_stuff_button.pressed.connect(reload_stuff)
 	add_xp_menu_button.pressed.connect(add_xp_to_party)
+	unlock_actor_records_button.pressed.connect(unlock_actors)
 	if CombatRootControl.Instance:
 		CombatRootControl.Instance.camera.freeze_camera()
 	pass # Replace with function body.
@@ -36,6 +38,7 @@ func reload_stuff():
 		EffectLibrary.Instance.reload()
 	ItemLibrary.Instance.reload()
 	VfxLibrary.reload_vfxs()
+	TagsLibrary.reload_tags()
 	for actor:BaseActor in ActorLibrary.Instance._loaded_objects.values():
 		actor.stats.recache_stats(true)
 
@@ -94,3 +97,8 @@ func add_xp_to_party():
 	for actor:BaseActor in StoryState.list_party_actors():
 		actor.stats.add_experiance(100)
 	pass
+
+
+func unlock_actors():
+	for actor_key in ActorLibrary.list_all_actor_keys():
+		StoryState.add_encounter_with_actor(actor_key)

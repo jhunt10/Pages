@@ -12,6 +12,8 @@ func get_required_props()->Dictionary:
 		# Ignore Aoe area and only attack directly selected targets
 		"PrimaryTargetOnly": BaseSubAction.SubActionPropTypes.BoolVal,
 		"FailOnNoTarget": BaseSubAction.SubActionPropTypes.BoolVal,
+		# Percdnt of total damage to heal attacker
+		"LeachPercent": BaseSubAction.SubActionPropTypes.FloatVal,
 	}
 ## Returns Tags that are automatically added to the parent Action's Tags
 func get_action_tags(_subaction_data:Dictionary)->Array:
@@ -118,6 +120,9 @@ func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, que_exe_d
 			override_origin_pos = game_state.get_actor_pos(primary_target)
 		if primary_target is MapPos:
 			override_origin_pos = primary_target
+	
+	if subaction_data.keys().has("LeachPercent"):
+		attack_details["LeachPercent"] = subaction_data["LeachPercent"]
 	
 	var attack_event = AttackHandler.handle_attack(
 		actor, 

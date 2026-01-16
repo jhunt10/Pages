@@ -104,6 +104,10 @@
                 "ApplyStatMod": {
                     "AllStatMods": true,
                     "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_ModStat.gd"
+                },
+                "VfxEffect": {
+                    "AilmentKey": "Blinded",
+                    "SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/Ailments/SubEffect_AlimentVfx.gd"
                 }
             }
         },

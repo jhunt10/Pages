@@ -113,6 +113,11 @@
                     }
                 ]
             }
+        },
+        "Stats":{
+            "Resistance:Light": -50,
+            "Resistance:Dark": 150,
+            "Resistance:Poison": 100
         }
     },
     "Skeleton": {
@@ -159,20 +164,17 @@
             "CritMod": 1.5,
             "Evasion": 1,
             "MagAttack": 0,
-            "Mass": 0,
+            "Mass": 8,
             "OffHandMod": 0.5,
             "PPR": 0,
             "PhyAttack": 0,
             "Potency": 100,
             "Protection": 1,
-            "Resistance:Light": -50,
-            "Resistance:Dark": 150,
-            "Resistance:Poison": 100,
 			"Resistance:Slash": 50,
 			"Resistance:Blunt": -50,
 			"Resistance:Pierce": 50,
 			"Resistance:Crash": -50,
-            "Speed": 0,
+            "Speed": 12,
             "TwoHandMod": 1.2
         },
         "SpawnEquipmentArr": [
@@ -183,6 +185,99 @@
         ],
         "SpawnPageArr": [
             "Skeleton_TitlePage",
+            "MoveForward",
+            "TurnLeft",
+            "TurnRight",
+            "BasicWeaponAttack",
+            "ReloadPage"
+        ],
+        "UnarmedAttackData": {
+            "DamageDatas": {
+                "UnarmedDamage": {
+                    "AtkPower": 20,
+                    "AtkStat": "PhyAttack",
+                    "DamageType": "Blunt",
+                    "DamageVarient": 0.5,
+                    "DamageVfxKey": "Blunt_DamageEffect",
+                    "DefenseType": "Physical",
+                    "DisplayName": "Punch",
+                    "FixedBaseDamage": null
+                }
+            },
+            "TargetParams": {
+                "LineOfSight": true,
+                "TargetArea": "[[-1,0],[-1,1],[0,1],[1,1],[1,0]]",
+                "TargetType": "Actor"
+            }
+        },
+        "_DefVersion": "1"
+    },
+    "SkeletonMage": {
+        "!ObjectScript": "res://assets/Scripts/Actors/BaseActor.gd",
+        "!ParentKey": "Skeleton",
+        "#ObjDetails": {
+            "Description": "A spooky scary @@#Color:Red:Skeleton@@ risen from the dead.",
+            "DisplayName": "Skel Mage",
+            "LargeIcon": "Sprites/SkeletonMage_Icon.png",
+            "ObjectType": "Actor",
+            "SmallIcon": "Sprites/SkeletonMage_Icon.png",
+            "SnippetDesc": "A Skeleton Mage",
+            "Tags": ["Skeleton", "Mage"],
+            "Taxonomy": [
+                "Actor"
+            ]
+        },
+        "ActorData": {
+            "Faction": "Undead",
+            "ExpValue": 100,
+            "MoneyValue": 20,
+            "DropItemsSet": {
+                "": 9,
+                "Money:10": 10,
+                "Money:20": 5,
+                "DarkHat_HeadApparel": 5,
+                "DarkRobes_BodyApparel": 5,
+                "BoneWand_Weapon": 5,
+                "Undead_PageBook": 1
+            }
+        },
+        "SpriteSheet": "SpriteSheets/Skeleton_SpriteSheet.png",
+        "Stats": {
+            "Agility": 5,
+            "Strength": 5,
+            "Intelligence": 10,
+            "Wisdom": 8,
+            "Level": 0,
+            "Accuracy": 100,
+            "AggroMod": 1,
+            "Awareness": 0,
+            "HealthMax": 100,
+            "BlocksLOS": 0,
+            "CrashPower": 20,
+            "CritChance": 5,
+            "CritMod": 1.5,
+            "Evasion": 1,
+            "MagAttack": 0,
+            "Mass": 8,
+            "OffHandMod": 0.5,
+            "PPR": 0,
+            "PhyAttack": 0,
+            "Potency": 100,
+            "Protection": 1,
+            "Speed": 10,
+            "TwoHandMod": 1.2
+        },
+        "SpawnEquipmentArr": [
+            "Undead_PageBook",
+            "BaseBow_Weapon",
+            "BoneWand_Weapon",
+            "DarkHat_HeadApparel",
+            "DarkRobes_BodyApparel"
+        ],
+        "SpawnItemArr": [
+        ],
+        "SpawnPageArr": [
+            "SkeletonMage_TitlePage",
             "MoveForward",
             "TurnLeft",
             "TurnRight",
@@ -232,6 +327,7 @@
             "DropItemsSet": {
                 "": 9,
                 "Money:10": 10,
+                "BiteAttack_ActionPage": 5,
                 "ZombieClothes_BodyApparel": 5,
                 "ZombieClothes_LegApparel": 5,
                 "Undead_PageBook": 1
@@ -250,7 +346,7 @@
             "TurnLeft",
             "TurnRight",
             "BasicWeaponAttack",
-            "ReloadPage"
+            "BiteAttack_ActionPage"
         ],
         "SpriteSheet": "SpriteSheets/Zombie_SpriteSheet.png",
         "Stats": {
@@ -269,15 +365,13 @@
             "CritMod": 1.5,
             "Evasion": 1,
             "MagAttack": 0,
-            "Mass": 0,
+            "Mass": 12,
             "OffHandMod": 0.5,
             "PPR": 0,
             "PhyAttack": 0,
             "Potency": 100,
             "Protection": 1,
-            "Resistance:Light": -50,
-            "Resistance:Dark": 150,
-            "Speed": 0,
+            "Speed": 5,
             "TwoHandMod": 1.2
         },
         "UnarmedAttackData": {

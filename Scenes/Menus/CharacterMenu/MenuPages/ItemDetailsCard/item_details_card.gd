@@ -167,7 +167,7 @@ func set_item(actor:BaseActor, item:BaseItem):
 	icon.texture = item.get_small_icon()
 	title_lable.text = item.get_display_name()
 	rarity_lable.text = item.get_rarity_string() + " " + item.get_taxonomy_leaf()
-	description_box.text = item.get_description()
+	#description_box.text = item.get_description()
 	#var tag_string = ''
 	#for tag in item.get_tags():
 		#tag_string += ", " + tag

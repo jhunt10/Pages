@@ -41,7 +41,7 @@ static func create_damage_effect(target_actor:BaseActor, vfx_key:String, vfx_dat
 			var damage_color = vfx_data.get("DamageColor", Color.WHITE)
 			var damage_text_type = vfx_data.get("DamageTextType", VfxHelper.FlashTextType.Normal_Dmg)
 			var damage_string = str(damage_number)
-			VfxHelper.create_flash_text(target_actor, damage_string, damage_text_type, damage_color)
+			VfxHelper.create_flash_text(target_actor, damage_string, damage_text_type, {}, damage_color)
 		return
 	
 	if vfx_data.get("MatchSourceDir", false) and vfx_data.has("SourceActorId"):

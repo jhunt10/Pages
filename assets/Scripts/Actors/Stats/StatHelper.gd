@@ -25,6 +25,8 @@ const Intelligence = "Intelligence"
 const Wisdom = "Wisdom"
 const HealthMax = "HealthMax"
 const HealthCurrent = "HealthCur"
+## Use HealthMax or HealthCurrent, this is here for descriptions
+const _HealthStat = "Health"
 const Mass = "Mass"
 const Speed = "Speed"
 const Push = "Push"
@@ -53,6 +55,7 @@ const CoverBonus = "CoverBonus"
 const CoverPenalty = "CoverPenalty"
 
 const stat_abbrs:Dictionary = {
+	_HealthStat: "HP",
 	HealthMax: "Max HP",
 	PhyAttack: "PHY ATK",
 	MagAttack: "MAG ATK",
@@ -78,6 +81,7 @@ const stat_abbrs:Dictionary = {
 
 const stat_icon_paths:Dictionary = {
 	"BarStat": "res://assets/Sprites/UI/SymbolIcons/BarStatSymbol.png",
+	_HealthStat: "res://assets/Sprites/UI/SymbolIcons/HealthSymbol.png",
 	HealthCurrent: "res://assets/Sprites/UI/SymbolIcons/HealthSymbol.png",
 	HealthMax: "res://assets/Sprites/UI/SymbolIcons/HealthSymbol.png",
 	PhyAttack: "res://assets/Sprites/UI/SymbolIcons/PhyDamageSymbol.png",

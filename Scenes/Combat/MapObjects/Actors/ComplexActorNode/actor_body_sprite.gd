@@ -2,6 +2,8 @@
 class_name ActorBodySprite
 extends Sprite2D
 
+signal direction_set(direction:int)
+
 @export var direction:int:
 	set(val):
 		direction = (val +  4) % 4
@@ -10,6 +12,7 @@ extends Sprite2D
 			if direction == 1: self.frame_coords.y = 2
 			if direction == 2: self.frame_coords.y = 0
 			if direction == 3: self.frame_coords.y = 3
+		direction_set.emit()
 
 @export var frame_index:int:
 	set(val):

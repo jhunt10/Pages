@@ -7,11 +7,15 @@ extends Control
 @export var mag_damage_icon:TextureRect
 @export var attack_power_label:Label
 @export var damage_type_label:Label
-@export var description_box:RichTextLabel
+@export var description_box:DescriptionBox
 @export var range_display:MiniRangeDisplay
 
 var _item:BaseWeaponEquipment
 var _actor:BaseActor
+
+func set_item(actor:BaseActor, item:BaseItem):
+	if item is BaseWeaponEquipment:
+		set_weapon(actor, item as BaseWeaponEquipment)
 
 func set_weapon(actor:BaseActor, weapon:BaseWeaponEquipment):
 	_actor = actor
@@ -43,6 +47,6 @@ func set_weapon(actor:BaseActor, weapon:BaseWeaponEquipment):
 	power_range = power_range * power_scale
 	attack_power_label.text = ("%s±%s" % [base_power, (power_range)]) + "%"
 	damage_type_label.text = damage_type
-	description_box.text = weapon.get_description()
+	description_box.set_object(weapon._def, weapon, actor)
 	range_display.load_area_matrix(weapon.target_parmas.target_area)
 	

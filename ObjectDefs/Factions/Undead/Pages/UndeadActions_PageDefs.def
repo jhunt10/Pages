@@ -1,0 +1,216 @@
+{
+    
+    "BiteAttack_ActionPage": {
+        "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
+        "#ObjDetails": {
+            "Description": "Bite an @@#TrgParm:TargetParams1:TargetType@@ for @@#DmgData:Damage1@@. If the target is @@#Tag:Living@@, heal for 50% of damage dealt.\n\n- Nom nom nom nom",
+            "DisplayName": "Bite",
+            "LargeIcon": "Sprites/Bite_Icon.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/Bite_Icon.png",
+            "SnippetDesc": "Stike the pommel of your weapon.",
+            "Tags": [
+                "Attack",
+                "Weapon"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Page",
+                "Action"
+            ]
+        },
+        "ActionData": {
+            "AmmoData": {
+                "AmmoType": "Phy",
+                "Clip": 6,
+                "Cost": 1
+            },
+            "AttackDetails": {
+                "ActionVerb": "bit",
+                "AccuracyMod": 1,
+                "PotencyMod": 1
+            },
+            "DamageDatas": {
+                "Damage1": {
+                    "AtkPwrBase": 80,
+                    "AtkPwrRange": 10,
+                    "AtkStat": "PhyAttack",
+                    "BaseDamage": 0,
+                    "DamageType": "Pierce",
+                    "DamageVfxKey": "Bite_DamageEffect",
+                    "DefenseType": "Armor"
+                }
+            },
+            "Preview": {
+                "PreviewDamageKey": "Damage1",
+                "PreviewTargetKey": "TargetParams1"
+            },
+            "SubActions": {
+                "CheckCondition": {
+                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Conditions/SubAct_CheckCondition.gd",
+                    "#FrameIndex": 11,
+                    "#SubIndex": 2,
+                    "ConditionFlag": "TargetIsLiving",
+                    "ConditionType": "TargetHasTag",
+                    "RequiredTag": "Living",
+                    "TargetKey": "Target1"
+                },
+                "Attack_WithLeach": {
+                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Attacks/SubAct_Attack.gd",
+                    "#FrameIndex": 11,
+                    "#SubIndex": 3,
+                    "DamageKey": "Damage1",
+                    "TargetKey": "Target1",
+                    "LeachPercent": 0.5,
+                    "RequiredConditions": {
+                        "TargetIsLiving": true
+                    }
+                },
+                "Attack_WithoutLeach": {
+                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Attacks/SubAct_Attack.gd",
+                    "#FrameIndex": 11,
+                    "#SubIndex": 3,
+                    "DamageKey": "Damage1",
+                    "TargetKey": "Target1",
+                    "RequiredConditions": {
+                        "TargetIsLiving": false
+                    }
+                },
+                "GetTarget": {
+                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Targeting/SubAct_GetTarget.gd",
+                    "#FrameIndex": 10,
+                    "#SubIndex": 0,
+                    "AllowAlreadyTargeted": false,
+                    "AllowAutoTarget": true,
+                    "SetTargetKey": "Target1",
+                    "TargetParamKey": "TargetParams1"
+                },
+                "PayCost": {
+                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Misc/SubAct_PayCost.gd",
+                    "#FrameIndex": 11,
+                    "#SubIndex": 0
+                },
+                "WeaponMotionAnimation": {
+                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponMotionAnimation.gd",
+                    "#FrameIndex": 11,
+                    "#SubIndex": 1,
+                    "AnimationSpeed": 4,
+                    "MainHand": true,
+                    "OffHand": "Never"
+                },
+                "WeaponReadyAnimation": {
+                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponReadyAnimation.gd",
+                    "#FrameIndex": 5,
+                    "#SubIndex": 0,
+                    "Animation": "Raise",
+                    "MainHand": true,
+                    "OffHand": "Never"
+                }
+            },
+            "TargetParams": {
+                "TargetParams1": {
+                    "LineOfSight": false,
+                    "TargetArea": "[[-1,1],[0,1],[1,1]]",
+                    "TargetType": "Actor"
+                }
+            }
+        },
+        "ItemData": {
+            "ItemType": "Page",
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "PageData": {
+            "PageRequirements": {
+                "ConflictingPages": [],
+                "IncompatiblePages": [],
+                "TitleReq": "Ignore"
+            }
+        },
+        "_DefVersion": "1"
+    },
+    "DarkMissileSpell": {
+        "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
+        "!ParentKey": "#BaseMissileSpell",
+        "#ObjDetails": {
+            "DisplayName": "Dark Missile",
+            "LargeIcon": "Sprites/DarkMissile_Icon.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/DarkMissile_Icon.png",
+            "SnippetDesc": "Launch a Missile dealing Dark Damage",
+            "Tags": [
+                "Dark"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Page",
+                "Action",
+                "Spell"
+            ]
+        },
+        "ActionData": {
+            "AttackDetails": {
+                "AccuracyMod": 1,
+                "PotencyMod": 1
+            },
+            "DamageDatas": {
+                "MissileDamage": {
+                    "DamageType": "Dark"
+                }
+            },
+            "EffectDatas": {
+                "AttackEffect": {
+                    "ApplicationChance": 0.2,
+                    "EffectKey": "AilmentBlinded"
+                }
+            },
+            "SubActions":{
+                "SpawnMissile":{
+                    "EffectKeys": ["AttackEffect"]
+                }
+            },
+            "MissileDatas": {
+                "Missile1": {
+                    "DamageDataKey": "MissileDamage",
+                    "FramesPerTile": 3,
+                    "ImpactVfxKey": null,
+                    "MissileVfxData": {
+                        "AnimationName": "4_sprites_250ms_frames_loop",
+                        "AnimationSpeed": 1,
+                        "RandomOffsets": [
+                            0,
+                            0
+                        ],
+                        "RandomRotation": [
+                            0,
+                            0
+                        ],
+                        "Scale": [
+                            1,
+                            1
+                        ],
+                        "ScenePath": "res://assets/Scripts/VFXs/MissileVfx/missile_vfx_node.tscn",
+                        "SpriteName": "Missiles/DarkMissile.png",
+                        "SpriteSheetHight": 2,
+                        "SpriteSheetWidth": 2
+                    },
+                    "MissileVfxKey": ""
+                }
+            }
+        },
+        "ItemData": {
+            "ItemType": "Page",
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "PageData": {
+            "PageRequirements": {
+                "ConflictingPages": [],
+                "IncompatiblePages": [],
+                "TitleReq": "None"
+            },
+            "SourceTitle": ""
+        },
+        "_DefVersion": "1"
+    },
+}

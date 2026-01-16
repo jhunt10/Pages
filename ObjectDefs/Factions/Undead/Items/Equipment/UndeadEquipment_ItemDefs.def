@@ -31,6 +31,97 @@
         },
         "_DefVersion": "1"
     },
+    "BoneWand_Weapon": {
+        "!ObjectScript": "res://assets/Scripts/Items/Equipment/Tools/BaseWeaponEquipment.gd",
+        "#ObjDetails": {
+            "Description": "A @@#Tag:Magical@@ @@#Tag:Scepter@@ made from the bones of @@#Tag:Mage@@.\n\nThey are often crafted by @@#Color:Red:Skeleton Mages@@, who seem to treat them with great care. Perhaps this is thier fleating attempt to regain their identity as a @@#Tag:Mage@@.\n\nAlso penis joke.",
+            "DisplayName": "Bone Rod",
+            "LargeIcon": "Sprites/BoneWand_Icon.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/BoneWand_Icon.png",
+            "SnippetDesc": "A dead mage's Bone Wand.",
+            "Tags": [
+                "Weapon",
+                "Scepter"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Equipment",
+                "Tool",
+                "Weapon"
+            ]
+        },
+        "EquipmentData": {
+            "AttackMods": {},
+            "DamageMods": {},
+            "EquipSlot": "Weapon",
+            "Requirments": {
+                "ReqStats": {
+                    "Intelligence": 8
+                }
+            },
+            "StatMods": {
+                "AttackBonus": {
+                    "ModType": "Add",
+                    "StatName": "MagAttack",
+                    "Value": 8
+                }
+            },
+            "TargetMods": {}
+        },
+        "ItemData": {
+            "Rarity": "Rare",
+            "Value": 200
+        },
+        "WeaponData": {
+            "AttackData": {
+                "AttackDetails": {
+                    "AccuracyMod": 1,
+                    "PotencyMod": 1,
+                    "AttackVfxData": {
+                        "RandomOffsets": [0,0],
+                        "ScenePath": "res://assets/Scripts/VFXs/BulletVfxs/bullet_vfx_node.tscn",
+                        "SpriteName": "Sprites/BoneWand_Missile.png",
+                        "SpriteSheetHight": 1,
+                        "SpriteSheetWidth": 1,
+                        "Velocity": 200
+                    }
+                },
+                "AttackTags": [
+                    "Weapon",
+                    "Range",
+                    "Magic"
+                ],
+                "DamageDatas": {
+                    "WeaponDamage": {
+                        "AtkPwrBase": 100,
+                        "AtkPwrRange": 10,
+                        "AtkStat": "MagAttack",
+                        "DamageType": "Dark",
+                        "DamageVfxKey": "Dark_DamageEffect",
+                        "DefenseType": "Ward"
+                    }
+                },
+                "EffectDatas": {},
+                "TargetParams": {
+                    "LineOfSight": true,
+                    "TargetArea": "[[-1,1],[0,1],[1,1],[-1,2],[0,2],[1,2],[0,3]]",
+                    "TargetType": "Enemy"
+                }
+            },
+            "IsRanged": true,
+            "WeaponClass": "Medium",
+            "WeaponSpriteData": {
+                "Offset": [
+                    0,
+                    0
+                ],
+                "Rotation": 0,
+                "WeaponAnimation": "Raise"
+            }
+        },
+        "_DefVersion": "1"
+    },
     "ZombieClothes_BodyApparel": {
         "!ObjectScript": "res://assets/Scripts/Items/Equipment/BaseApparelEquipment.gd",
         "#ObjDetails": {
@@ -55,7 +146,7 @@
             "Requirments": {
             },
             "SpriteData": {
-                "SpriteSheet":"SpriteSheets/ZombieShirt_SpriteSheet.png"
+                "SpriteSheet":"Sprites/ZombieShirt_SpriteSheet.png"
             }
         },
         "ApparelData":{
@@ -98,7 +189,7 @@
                 }
             },
             "SpriteData": {
-                "SpriteSheet":"SpriteSheets/ZombiePants_SpriteSheet.png"
+                "SpriteSheet":"Sprites/ZombiePants_SpriteSheet.png"
             }
         },
         "ApparelData":{
@@ -111,6 +202,86 @@
         "ItemData": {
             "Rarity": "Mundane",
             "Value": 50
+        },
+        "_DefVersion": "1"
+    },
+    "DarkHat_HeadApparel": {
+        "!ObjectScript": "res://assets/Scripts/Items/Equipment/BaseApparelEquipment.gd",
+        "#ObjDetails": {
+			"DisplayName": "Dark Hat",
+			"SnippetDesc": "A dark hat.",
+			"Description": "A simple cloth shirt proven to provide no protection from @@#Color:Red:Zombie@@ attacks.",
+			"LargeIcon":"Sprites/DarkMageHat_Icon.png",
+			"SmallIcon":"Sprites/DarkMageHat_Icon.png",
+            "Tags": [
+                "Equipment",
+                "Apparel",
+                "Head"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Equipment",
+                "Apparel"
+            ]
+        },
+        "EquipmentData": {
+            "EquipSlot": "Head",
+            "Requirments": {
+            },
+            "SpriteData": {
+                "SpriteSheet":"Sprites/DarkMageHat_SpriteSheet.png"
+            }
+        },
+        "ApparelData":{
+            "ProvidedArmor": 0,
+            "ProvidedWard": 10,
+            "ApparelClass": "LightArmor",
+            "StatMods": {
+            }
+        },
+        "ItemData": {
+            "Rarity": "Rare",
+            "Value": 200
+        },
+        "_DefVersion": "1"
+    },
+    "DarkRobes_BodyApparel": {
+        "!ObjectScript": "res://assets/Scripts/Items/Equipment/BaseApparelEquipment.gd",
+        "#ObjDetails": {
+			"DisplayName": "Dark Robes",
+			"SnippetDesc": "A dark robe.",
+			"Description": "A simple cloth shirt proven to provide no protection from @@#Color:Red:Zombie@@ attacks.",
+			"LargeIcon":"Sprites/DarkRobes_Icon.png",
+			"SmallIcon":"Sprites/DarkRobes_Icon.png",
+            "Tags": [
+                "Equipment",
+                "Apparel",
+                "Body"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Equipment",
+                "Apparel"
+            ]
+        },
+        "EquipmentData": {
+            "EquipSlot": "Body",
+            "Requirments": {
+            },
+            "SpriteData": {
+                "SpriteSheet":"Sprites/DarkRobes_SpriteSheet.png"
+            }
+        },
+        "ApparelData":{
+            "ProvidedArmor": 0,
+            "ProvidedWard": 10,
+            "ApparelClass": "LightArmor",
+            "StatMods": {
+            }
+        },
+        "ItemData": {
+            "Rarity": "Rare",
+            "Value": 200
         },
         "_DefVersion": "1"
     }
