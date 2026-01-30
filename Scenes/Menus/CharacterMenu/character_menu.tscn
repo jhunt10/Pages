@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=3 uid="uid://cadueklilqejs"]
+[gd_scene load_steps=55 format=3 uid="uid://cadueklilqejs"]
 
 [ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/character_menu_control.gd" id="1_b43ae"]
 [ext_resource type="Texture2D" uid="uid://mpwjrtfjnbth" path="res://Scenes/Menus/CharacterMenu/BookBackground.png" id="2_ny2th"]
@@ -45,6 +45,7 @@
 [ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/inv_filter_tabs_control.gd" id="43_ercvn"]
 [ext_resource type="Texture2D" uid="uid://7lffl3feh6kl" path="res://Scenes/Menus/CharacterMenu/TabBackground_Small.png" id="43_gi4es"]
 [ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/InventoryPage/sub_inventory_tab.gd" id="44_vhgyr"]
+[ext_resource type="Texture2D" uid="uid://drptcqa6g0iua" path="res://Scenes/Menus/CharacterMenu/MenuPages/SkillTreeMenuPage/AndSepIcon.png" id="44_vo5mu"]
 [ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/confirmation_control.gd" id="47_rqcc5"]
 [ext_resource type="Script" path="res://Scenes/UiNodes/back_patch_container.gd" id="48_p3rjr"]
 [ext_resource type="Texture2D" uid="uid://cgrlfobidw8xl" path="res://assets/Sprites/UI/BackPatches/PaperPatch_Bigger_276x192_48.png" id="49_apoph"]
@@ -1963,6 +1964,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="OrIcon" type="TextureRect" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/HBoxContainer/SkillGridContainer/Row/PairedSkillTreeNode"]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -1976,6 +1978,21 @@ offset_bottom = 24.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("42_yolti")
+
+[node name="AndIcon" type="TextureRect" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/HBoxContainer/SkillGridContainer/Row/PairedSkillTreeNode"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -24.0
+offset_right = 12.0
+offset_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("44_vo5mu")
 
 [node name="HighlightPatch" type="NinePatchRect" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/HBoxContainer/SkillGridContainer/Row/PairedSkillTreeNode"]
 visible = false

@@ -153,70 +153,67 @@
                 "AlwaysUnlocked": true
             },
             {
-                "PageItemId": "ApplyBlessing_Water",
+                "PairType": "And",
+                "PageItemId1": "ApplyBlessing_Water",
+                "PageItemId2": "BlessedLimit1Page",
                 "AlwaysUnlocked": true
             },
             {
                 "PageItemId": "RemoveAilmentSpell",
-                "AlwaysUnlocked": true,
-                "Hidden":
-                {
-                    "PageItemId": "BlessedLimit1Page",
-                    "AlwaysUnlocked": true
-                }
+                "AlwaysUnlocked": true
             }
         ],
         [
             {
-                "PageItemId": "HealSmallSpell"
+                "PageItemId": "ApplyPreemtive"
             },
             {
                 "PageItemId": "ApplyBlessing_Air"
             },
             {
-                "PageItemId": "ApplyPreemtive"
+                "PageItemId": "HealSmallSpell"
             }
         ],
         [
             {
-                "PageItemId": "HealMediumSpell"
+                "PageItemId": "LightRangedSpell"
             },
             {
                 "PageItemId": "BlessedLimit2Page"
             },
             {
-                "PageItemId": "LightRangedSpell"
+                "PageItemId": "HealMediumSpell"
             }
         ],
         [
             {
                 "PairType": "Or",
-                "PageItemId1": "RemoveMorePage",
-                "PageItemId2": "RemoveSelectPage"
+                "PageItemId1": "HarmingLightPage",
+                "PageItemId2": "HealingLightPage"
             },
             {
                 "PageItemId": "ApplyBlessing_Earth"
             },
             {
                 "PairType": "Or",
-                "PageItemId1": "HarmingLightPage",
-                "PageItemId2": "HealingLightPage"
+                "PageItemId1": "RemoveMorePage",
+                "PageItemId2": "RemoveSelectPage"
             }
         ],
         [
             {
-                "PageItemId": "HealLargeSpell"
+                "PageItemId": "LightMissileSpell"
             },
             {
                 "PageItemId": "ApplyBlessing_Fire"
             },
             {
-                "PageItemId": "LightMissileSpell"
+                "PageItemId": "HealLargeSpell"
             }
         ],
         [
             {
-                "PageItemId": "ReviveSpell"
+                "PageItemId": "ApplyLightAuraAction"
             },
             {
                 "PairType": "Or",
@@ -224,7 +221,7 @@
                 "PageItemId2": "BlessedMassPage"
             },
             {
-                "PageItemId": "ApplyLightAuraAction"
+                "PageItemId": "ReviveSpell"
             }
         ]
     ],

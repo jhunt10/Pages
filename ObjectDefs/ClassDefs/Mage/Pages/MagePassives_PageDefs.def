@@ -381,6 +381,44 @@
         },
         "PassiveData": {
             "ActionMods": {
+                "WaterGunSpellMod": {
+                    "Conditions": {
+                        "ItemKeys": [
+                            "WaterGunSpell"
+                        ],
+                        "TagFilters": []
+                    },
+                    "ModdedDefData": {
+                        "#ObjDetails": {
+                            "DisplayName": "Ice Gun",
+                            "SnippetDesc": "Rapid fire Ice",
+                            "Tags": [
+                                "Cold"
+                            ],
+                            "Taxonomy": [
+                                "Item",
+                                "Page",
+                                "Action"
+                            ]
+                        },
+                        "ActionData": {
+                            "DamageDatas": {
+                                "RangedDamage": {
+                                    "DamageType": "Pierce",
+                                    "DefenseType": "Ward"
+                                }
+                            },
+                            "EffectDatas": {
+                                "ChilledEffect": {
+                                    "ApplicationChance": 0.2,
+                                    "EffectKey": "AilmentChilled"
+                                }
+                            },
+                            "SubActions": {
+                            }
+                        }
+                    }
+                },
                 "WaterBallSpellMod": {
                     "Conditions": {
                         "ItemKeys": [

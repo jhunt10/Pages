@@ -53,9 +53,10 @@ func set_actor(actor):
 			# Paired Nodes
 			if node_data.keys().has("PairType"):
 				new_node = paired_node_prefab.duplicate()
+				var pair_type = node_data['PairType']
 				var page_item_id_1 = node_data.get("PageItemId1")
 				var page_item_id_2 = node_data.get("PageItemId2")
-				new_node.set_pages(page_item_id_1, page_item_id_2)
+				new_node.set_pages(pair_type, page_item_id_1, page_item_id_2)
 				new_node.node_1_pressed.connect(on_node_clicked.bind(page_item_id_1))
 				new_node.node_2_pressed.connect(on_node_clicked.bind(page_item_id_2))
 				page_id_to_grid_mapping[page_item_id_1] = [x_index, y_index]
@@ -83,7 +84,7 @@ func set_actor(actor):
 	scroll_bar._delay_size_calc = true
 
 func sync_skill_nodes_states():
-	var points_to_spend = 3 + _actor.stats.get_stat(StatHelper.Level, 0)
+	var points_to_spend = 10 + _actor.stats.get_stat(StatHelper.Level, 0)
 	var spent_points = _unlocked_skills.size()
 	total_points_label.text = str(points_to_spend)
 	var remaining_points = points_to_spend - spent_points
@@ -98,8 +99,8 @@ func sync_skill_nodes_states():
 			if node_data.keys().has("PairType"):
 				var page_item_id_1 = node_data.get("PageItemId1")
 				var page_item_id_2 = node_data.get("PageItemId2")
-				var p1_is_unlocked = _unlocked_skills.has(page_item_id_1)
-				var p2_is_unlocked = _unlocked_skills.has(page_item_id_2)
+				var p1_is_unlocked = _unlocked_skills.has(page_item_id_1)  or node_data.get("AlwaysUnlocked", false)
+				var p2_is_unlocked = _unlocked_skills.has(page_item_id_2) or node_data.get("AlwaysUnlocked", false)
 				var can_unlock_either = y_index-1 <= spent_points and remaining_points > 0
 				var paired_skill_node:PairedSkillTreeNode = node_data.get("Node")
 				if paired_skill_node:
@@ -217,7 +218,7 @@ func get_has_changes()->bool:
 	if _unlocked_skills.size() != _starting_skills.size():
 		return true
 	for page_key in _unlocked_skills:
-		if _starting_skills.has(page_key):
+		if not _starting_skills.has(page_key):
 			return true
 	return false
 	
