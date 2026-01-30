@@ -358,6 +358,148 @@
         },
         "_DefVersion": "1"
     },
+    "FireThrowSpell": {
+        "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
+        "#ObjDetails": {
+            "Description": "Unleash a stream of Fire burning everything in the area 3 times for bla bla damage.\n\n-\"The air is lava!\"",
+            "DisplayName": "Throw Flames",
+            "LargeIcon": "Sprites/ThrowFire_Icon.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/ThrowFire_Icon.png",
+            "SnippetDesc": "Throw Fire",
+            "Tags": [
+                "Fire"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Page",
+                "Action"
+            ]
+        },
+        "ActionData": {
+            "AttackDetails": {
+                "AccuracyMod": 1,
+                "PotencyMod": 1,
+                "AutoHit": true,
+                "ActionVerb": "threw flames"
+            },
+            "DamageDatas": {
+                "AoeDamage": {
+                    "AtkPwrBase": 20,
+                    "AtkPwrRange": 3,
+                    "AtkPwrScale": 1,
+                    "DamageType": "Fire",
+                    "AtkStat": "MagAttack",
+                    "BaseDamage": 0,
+                    "DamageVfxKey": "AUTO",
+                    "DefenseType": "AUTO"
+                }
+            },
+            "Preview": {
+                "PreviewDamageKey": "AoeDamage",
+                "PreviewDamageCounts": {
+                    "AoeDamage": 3
+                },
+                "PreviewTargetKey": "TargetParam"
+            },
+            "SubActions": {
+                "PayCost": {
+                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Misc/SubAct_PayCost.gd",
+                    "#FrameIndex": 0,
+                    "#SubIndex": 0
+                },
+                "GetTarget": {
+                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Targeting/SubAct_GetTarget.gd",
+                    "#FrameIndex": 7,
+                    "#SubIndex": 0,
+                    "AllowAutoTarget": true,
+                    "SetTargetKey": "Target1",
+                    "TargetParamKey": "TargetParam"
+                },
+                "SpawnVfxNode": {
+                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_VfxNodeCreate.gd",
+                    "#FrameIndex": 5,
+                    "#SubIndex": 0,
+                    "VfxKey": "ThrowFlameVfx",
+                    "VfxData": {
+                        "VfxKey": "ThrowFlameVfx",
+                        "ScenePath": "res://assets/Scripts/VFXs/ParticalVfxs/flame_thrower_vfx_node.tscn",
+                        "CanStack": true
+                    },
+                    "SaveIdAs": "FlameVfxId"
+                },
+                "DeleteVfxNode": {
+                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_VfxNodeFinish.gd",
+                    "#FrameIndex": 15,
+                    "#SubIndex": 1,
+                    "VfxIdKey": "FlameVfxId"
+                },
+                "WeaponMotionAnimation": {
+                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponMotionAnimation.gd",
+                    "#FrameIndex": 17,
+                    "#SubIndex": 0,
+                    "MainHand": true,
+                    "OffHand": "Never"
+                },
+                "WeaponReadyAnimation": {
+                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponReadyAnimation.gd",
+                    "#FrameIndex": 0,
+                    "#SubIndex": 1,
+                    "Animation": "Raise",
+                    "MainHand": true,
+                    "OffHand": "Never"
+                },
+                "Attack2": {
+                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Attacks/SubAct_Attack.gd",
+                    "#FrameIndex": 10,
+                    "#SubIndex": 0,
+                    "TargetKey": "Target1",
+                    "FailOnNoTarget": false,
+                    "DamageKey": "AoeDamage"
+                },
+                "Attack3": {
+                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Attacks/SubAct_Attack.gd",
+                    "#FrameIndex": 13,
+                    "#SubIndex": 0,
+                    "TargetKey": "Target1",
+                    "FailOnNoTarget": false,
+                    "DamageKey": "AoeDamage"
+                },
+                "Attack4": {
+                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Attacks/SubAct_Attack.gd",
+                    "#FrameIndex": 16,
+                    "#SubIndex": 0,
+                    "TargetKey": "Target1",
+                    "FailOnNoTarget": false,
+                    "DamageKey": "AoeDamage"
+                }
+            },
+            "TargetParams": {
+                "TargetParam": {
+                    "IncludeAlliesInAoe": true,
+                    "IncludeEnemiesInAoe": true,
+                    "IncludeSelfInAoe": true,
+                    "LineOfSight": false,
+                    "TargetArea": "[[0,1],[-1,2],[0,2],[1,2],[-1,3],[0,3],[1,3]]",
+                    "TargetType": "FullArea"
+                }
+            }
+        },
+        "ItemData": {
+            "ItemType": "Page",
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "PageData": {
+            "PageRequirements": {
+                "ConflictingPages": [],
+                "IncompatiblePages": [],
+                "TitleReq": "Match"
+            },
+            "SourceTitle": "Mage"
+        },
+        "_DefVersion": "1"
+    },
     "FireBallSpell": {
         "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
         "!ParentKey": "#BaseMissileSpell",
@@ -711,6 +853,151 @@
                 "TitleReq": "Match"
             },
             "SourceTitle": "Mage"
+        },
+        "_DefVersion": "1"
+    },
+    "WaterGunSpell": {
+        "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
+        "#ObjDetails": {
+            "Description": "Fire a rapid series of @@#Color:Red:Ranged Attacks@@ against an @@#TrgParm:TargetParam:TargetType@@ in range, dealing @@#DmgData:RangedDamage@@ on hit.",
+            "DisplayName": "Water Gun",
+            "LargeIcon": "Sprites/WaterGun_Icon.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/WaterGun_Icon.png",
+            "SnippetDesc": "Shoot a bolt of DAMAGE_TYPE",
+            "Tags": [
+                "Attack",
+                "Ranged",
+                "LOS"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Page",
+                "Action"
+            ]
+        },
+        "ActionData": {
+            "AttackDetails": {
+                "AccuracyMod": 1,
+                "AttackVfxData": {
+                    "RandomOffsets": [
+                        0,
+                        0
+                    ],
+                    "ScenePath": "res://assets/Scripts/VFXs/BulletVfxs/bullet_vfx_node.tscn",
+                    "SpriteName": "SpriteSheets/WaterGun_Missile.png",
+                    "SpriteSheetHight": 1,
+                    "SpriteSheetWidth": 1,
+                    "Velocity": 400
+                },
+                "AttackVfxKey": "",
+                "PotencyMod": 1
+            },
+            "DamageDatas": {
+                "RangedDamage": {
+                    "AtkPwrBase": 20,
+                    "AtkPwrRange": 5,
+                    "AtkPwrScale": 1,
+                    "AtkStat": "MagAttack",
+                    "BaseDamage": 0,
+                    "DamageType": "Cold",
+                    "DamageVfxKey": "AUTO",
+                    "DefenseType": "AUTO"
+                }
+            },
+            "Preview": {
+                "PreviewDamageKey": "RangedDamage",
+                "PreviewDamageCounts": {
+                    "RangedDamage": 5
+                },
+                "PreviewTargetKey": "TargetParam"
+            },
+            "SubActions": {
+                "Attack1": {
+                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Attacks/SubAct_Attack.gd",
+                    "#FrameIndex": 6,
+                    "#SubIndex": 0,
+                    "DamageKey": "RangedDamage",
+                    "TargetKey": "Target1"
+                },
+                "Attack2": {
+                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Attacks/SubAct_Attack.gd",
+                    "#FrameIndex": 9,
+                    "#SubIndex": 0,
+                    "DamageKey": "RangedDamage",
+                    "TargetKey": "Target1"
+                },
+                "Attack3": {
+                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Attacks/SubAct_Attack.gd",
+                    "#FrameIndex": 12,
+                    "#SubIndex": 0,
+                    "DamageKey": "RangedDamage",
+                    "TargetKey": "Target1"
+                },
+                "Attack4": {
+                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Attacks/SubAct_Attack.gd",
+                    "#FrameIndex": 15,
+                    "#SubIndex": 0,
+                    "DamageKey": "RangedDamage",
+                    "TargetKey": "Target1"
+                },
+                "Attack5": {
+                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Attacks/SubAct_Attack.gd",
+                    "#FrameIndex": 18,
+                    "#SubIndex": 0,
+                    "DamageKey": "RangedDamage",
+                    "TargetKey": "Target1"
+                },
+                "GetTarget": {
+                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Targeting/SubAct_GetTarget.gd",
+                    "#FrameIndex": 5,
+                    "#SubIndex": 0,
+                    "AllowAlreadyTargeted": false,
+                    "AllowAutoTarget": true,
+                    "SetTargetKey": "Target1",
+                    "TargetParamKey": "TargetParam"
+                },
+                "PayCost": {
+                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Misc/SubAct_PayCost.gd",
+                    "#FrameIndex": 5,
+                    "#SubIndex": 1
+                },
+                "WeaponMotionAnimation": {
+                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponMotionAnimation.gd",
+                    "#FrameIndex": 18,
+                    "#SubIndex": 0,
+                    "MainHand": true,
+                    "OffHand": "OnlyIfDuel"
+                },
+                "WeaponReadyAnimation": {
+                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponReadyAnimation.gd",
+                    "#FrameIndex": 0,
+                    "#SubIndex": 0,
+                    "Animation": "WEAPON_DEFAULT",
+                    "MainHand": true,
+                    "OffHand": "OnlyIfDuel"
+                }
+            },
+            "TargetParams": {
+                "TargetParam": {
+                    "LineOfSight": true,
+                    "TargetArea": "[[-1,3],[0,3],[1,3],[-1,2],[0,2],[1,2],[0,1]]",
+                    "TargetType": "Actor"
+                }
+            }
+        },
+        "ItemData": {
+            "ItemType": "Page",
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "PageData": {
+            "PageRequirements": {
+                "ConflictingPages": [],
+                "IncompatiblePages": [],
+                "TitleReq": "None"
+            },
+            "SourceTitle": ""
         },
         "_DefVersion": "1"
     },

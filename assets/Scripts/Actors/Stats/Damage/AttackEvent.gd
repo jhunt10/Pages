@@ -110,4 +110,3 @@ func get_total_damage(include_negative:bool = true)->int:
 				continue
 			total_damage += damage_event.final_damage
 	return total_damage
-	

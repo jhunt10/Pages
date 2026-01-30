@@ -206,15 +206,13 @@ modulate = Color(0, 0, 0, 0)
 custom_minimum_size = Vector2(0, 6)
 layout_mode = 2
 
-[node name="StrenghtInputContainer" type="HBoxContainer" parent="LevelUpContainer/BoxContainer" node_paths=PackedStringArray("minus_button", "plus_button", "current_value_lable", "goto_value_lable")]
+[node name="StrenghtInputContainer" type="HBoxContainer" parent="LevelUpContainer/BoxContainer" node_paths=PackedStringArray("minus_button", "plus_button")]
 layout_mode = 2
 theme_override_constants/separation = 10
 alignment = 1
 script = ExtResource("6_ivxcj")
 minus_button = NodePath("MinusButtonControl/MinusButton")
 plus_button = NodePath("PlusButtonControl/PlusButton")
-current_value_lable = NodePath("CurValLabel")
-goto_value_lable = NodePath("NewValLabel")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="LevelUpContainer/BoxContainer/StrenghtInputContainer"]
 layout_mode = 2
@@ -378,15 +376,13 @@ modulate = Color(0, 0, 0, 0)
 custom_minimum_size = Vector2(0, 6)
 layout_mode = 2
 
-[node name="AgilityInputContainer" type="HBoxContainer" parent="LevelUpContainer/BoxContainer" node_paths=PackedStringArray("minus_button", "plus_button", "current_value_lable", "goto_value_lable")]
+[node name="AgilityInputContainer" type="HBoxContainer" parent="LevelUpContainer/BoxContainer" node_paths=PackedStringArray("minus_button", "plus_button")]
 layout_mode = 2
 theme_override_constants/separation = 10
 alignment = 1
 script = ExtResource("6_ivxcj")
 minus_button = NodePath("MinusButtonControl/MinusButton")
 plus_button = NodePath("PlusButtonControl/PlusButton")
-current_value_lable = NodePath("CurValLabel")
-goto_value_lable = NodePath("NewValLabel")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="LevelUpContainer/BoxContainer/AgilityInputContainer"]
 layout_mode = 2
@@ -508,15 +504,13 @@ modulate = Color(0, 0, 0, 0)
 custom_minimum_size = Vector2(0, 6)
 layout_mode = 2
 
-[node name="IntelInputContainer" type="HBoxContainer" parent="LevelUpContainer/BoxContainer" node_paths=PackedStringArray("minus_button", "plus_button", "current_value_lable", "goto_value_lable")]
+[node name="IntelInputContainer" type="HBoxContainer" parent="LevelUpContainer/BoxContainer" node_paths=PackedStringArray("minus_button", "plus_button")]
 layout_mode = 2
 theme_override_constants/separation = 10
 alignment = 1
 script = ExtResource("6_ivxcj")
 minus_button = NodePath("MinusButtonControl/MinusButton")
 plus_button = NodePath("PlusButtonControl/PlusButton")
-current_value_lable = NodePath("CurValLabel")
-goto_value_lable = NodePath("NewValLabel")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="LevelUpContainer/BoxContainer/IntelInputContainer"]
 layout_mode = 2
@@ -637,15 +631,13 @@ modulate = Color(0, 0, 0, 0)
 custom_minimum_size = Vector2(0, 6)
 layout_mode = 2
 
-[node name="WisdomInputContainer" type="HBoxContainer" parent="LevelUpContainer/BoxContainer" node_paths=PackedStringArray("minus_button", "plus_button", "current_value_lable", "goto_value_lable")]
+[node name="WisdomInputContainer" type="HBoxContainer" parent="LevelUpContainer/BoxContainer" node_paths=PackedStringArray("minus_button", "plus_button")]
 layout_mode = 2
 theme_override_constants/separation = 10
 alignment = 1
 script = ExtResource("6_ivxcj")
 minus_button = NodePath("MinusButtonControl/MinusButton")
 plus_button = NodePath("PlusButtonControl/PlusButton")
-current_value_lable = NodePath("CurValLabel")
-goto_value_lable = NodePath("NewValLabel")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="LevelUpContainer/BoxContainer/WisdomInputContainer"]
 layout_mode = 2
@@ -808,6 +800,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Control" type="Control" parent="LevelUpContainer"]
+visible = false
 layout_mode = 2
 mouse_filter = 2
 

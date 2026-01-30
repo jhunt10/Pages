@@ -98,7 +98,8 @@ func _join_effect_values(attack_event:AttackEvent, sub_event:AttackSubEvent)->St
 	var resisted_effect_names = []
 	var applied_effect_names = []
 	for effect_data_key in sub_event.applied_effect_datas.keys():
-		var effect_key = attack_event.effect_datas[effect_data_key].get("EffectKey", "")
+		var effect_meta_data = sub_event.get_effect_meta_data(effect_data_key)
+		var effect_key = effect_meta_data.get("EffectKey", "")
 		var effect_def = EffectLibrary.get_effect_def(effect_key)
 		var display_name = effect_def.get("#ObjDetails", {}).get("DisplayName", "EFFECT_NAME")
 		if sub_event.applied_effect_datas[effect_data_key].get("WasApplied", false):

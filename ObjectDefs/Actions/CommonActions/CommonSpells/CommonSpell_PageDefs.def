@@ -22,18 +22,11 @@
             "DamageDatas": {
                 "MeleeDamage": {
                     "DamageType": "Cold",
-                    "AtkPwrRange": 10
-                }
-            },
-            "EffectDatas": {
-                "AttackEffect": {
-                    "ApplicationChance": 0.3,
-                    "EffectKey": "AilmentChilled"
-                }
-            },
-            "SubActions":{
-                "Attack":{
-                    "EffectKeys": ["AttackEffect"]
+                    "AtkPwrRange": 10,
+                    "DmgEffectData": {
+                        "ApplicationChance": 0.3,
+                        "EffectKey": "AilmentChilled"
+                    }
                 }
             }
         },
@@ -79,18 +72,11 @@
             "DamageDatas": {
                 "MissileDamage": {
                     "DamageType": "Cold",
-                    "AtkPwrRange": 10
-                }
-            },
-            "EffectDatas": {
-                "AttackEffect": {
-                    "ApplicationChance": 0.3,
-                    "EffectKey": "AilmentChilled"
-                }
-            },
-            "SubActions":{
-                "SpawnMissile":{
-                    "EffectKeys": ["AttackEffect"]
+                    "AtkPwrRange": 10,
+                    "DmgEffectData": {
+                        "ApplicationChance": 0.3,
+                        "EffectKey": "AilmentChilled"
+                    }
                 }
             },
             "MissileDatas": {
@@ -169,18 +155,11 @@
             "DamageDatas": {
                 "RangedDamage": {
                     "DamageType": "Cold",
-                    "AtkPwrRange": 10
-                }
-            },
-            "EffectDatas": {
-                "AttackEffect": {
-                    "ApplicationChance": 0.3,
-                    "EffectKey": "AilmentChilled"
-                }
-            },
-            "SubActions":{
-                "Attack":{
-                    "EffectKeys": ["AttackEffect"]
+                    "AtkPwrRange": 10,
+                    "DmgEffectData": {
+                        "ApplicationChance": 0.3,
+                        "EffectKey": "AilmentChilled"
+                    }
                 }
             }
         },
@@ -226,13 +205,11 @@
             "DamageDatas": {
                 "TrapDamage": {
                     "DamageType": "Cold",
-                    "AtkPwrRange": 10
-                }
-            },
-            "EffectDatas": {
-                "AttackEffect": {
-                    "ApplicationChance": 1,
-                    "EffectKey": "AilmentChilled"
+                    "AtkPwrRange": 10,
+                    "DmgEffectData": {
+                        "ApplicationChance": 1,
+                        "EffectKey": "AilmentChilled"
+                    }
                 }
             },
             "ZoneDatas": {
@@ -278,18 +255,11 @@
         "ActionData": {
             "DamageDatas": {
                 "MeleeDamage": {
-                    "DamageType": "Fire"
-                }
-            },
-            "EffectDatas": {
-                "AttackEffect": {
-                    "ApplicationChance": 0.2,
-                    "EffectKey": "AilmentBurned"
-                }
-            },
-            "SubActions":{
-                "Attack":{
-                    "EffectKeys": ["AttackEffect"]
+                    "DamageType": "Fire",
+                    "DmgEffectData": {
+                        "ApplicationChance": 0.2,
+                        "EffectKey": "AilmentBurned"
+                    }
                 }
             }
         },
@@ -334,18 +304,11 @@
             },
             "DamageDatas": {
                 "MissileDamage": {
-                    "DamageType": "Fire"
-                }
-            },
-            "EffectDatas": {
-                "AttackEffect": {
-                    "ApplicationChance": 0.2,
-                    "EffectKey": "AilmentBurned"
-                }
-            },
-            "SubActions":{
-                "SpawnMissile":{
-                    "EffectKeys": ["AttackEffect"]
+                    "DamageType": "Fire",
+                    "DmgEffectData": {
+                        "ApplicationChance": 0.2,
+                        "EffectKey": "AilmentBurned"
+                    }
                 }
             },
             "MissileDatas": {
@@ -422,18 +385,11 @@
             },
             "DamageDatas": {
                 "RangedDamage": {
-                    "DamageType": "Fire"
-                }
-            },
-            "EffectDatas": {
-                "AttackEffect": {
-                    "ApplicationChance": 0.2,
-                    "EffectKey": "AilmentBurned"
-                }
-            },
-            "SubActions":{
-                "Attack":{
-                    "EffectKeys": ["AttackEffect"]
+                    "DamageType": "Fire",
+                    "DmgEffectData": {
+                        "ApplicationChance": 0.2,
+                        "EffectKey": "AilmentBurned"
+                    }
                 }
             }
         },
@@ -478,13 +434,11 @@
             },
             "DamageDatas": {
                 "TrapDamage": {
-                    "DamageType": "Fire"
-                }
-            },
-            "EffectDatas": {
-                "AttackEffect": {
-                    "ApplicationChance": 1,
-                    "EffectKey": "AilmentBurned"
+                    "DamageType": "Fire",
+                    "DmgEffectData": {
+                        "ApplicationChance": 1,
+                        "EffectKey": "AilmentBurned"
+                    }
                 }
             },
             "ZoneDatas": {
@@ -532,18 +486,11 @@
                 "MeleeDamage": {
                     "DamageType": "Poison",
                     "AtkPwrBase": 90,
-                    "AtkPwrRange": 20
-                }
-            },
-            "EffectDatas": {
-                "AttackEffect": {
-                    "ApplicationChance": 0.6,
-                    "EffectKey": "AilmentPoisoned"
-                }
-            },
-            "SubActions":{
-                "Attack":{
-                    "EffectKeys": ["AttackEffect"]
+                    "AtkPwrRange": 20,
+                    "DmgEffectData": {
+                        "ApplicationChance": 0.6,
+                        "EffectKey": "AilmentPoisoned"
+                    }
                 }
             }
         },
@@ -590,18 +537,11 @@
                 "MissileDamage": {
                     "DamageType": "Poison",
                     "AtkPwrBase": 90,
-                    "AtkPwrRange": 20
-                }
-            },
-            "EffectDatas": {
-                "AttackEffect": {
-                    "ApplicationChance": 0.6,
-                    "EffectKey": "AilmentPoisoned"
-                }
-            },
-            "SubActions":{
-                "SpawnMissile":{
-                    "EffectKeys": ["AttackEffect"]
+                    "AtkPwrRange": 20,
+                    "DmgEffectData": {
+                        "ApplicationChance": 0.6,
+                        "EffectKey": "AilmentPoisoned"
+                    }
                 }
             },
             "MissileDatas": {
@@ -680,18 +620,11 @@
                 "RangedDamage": {
                     "DamageType": "Poison",
                     "AtkPwrBase": 70,
-                    "AtkPwrRange": 20
-                }
-            },
-            "EffectDatas": {
-                "AttackEffect": {
-                    "ApplicationChance": 0.6,
-                    "EffectKey": "AilmentPoisoned"
-                }
-            },
-            "SubActions":{
-                "Attack":{
-                    "EffectKeys": ["AttackEffect"]
+                    "AtkPwrRange": 20,
+                    "DmgEffectData": {
+                        "ApplicationChance": 0.6,
+                        "EffectKey": "AilmentPoisoned"
+                    }
                 }
             }
         },
@@ -744,7 +677,11 @@
             "EffectDatas": {
                 "AttackEffect": {
                     "ApplicationChance": 1,
-                    "EffectKey": "AilmentPoisoned"
+                    "EffectKey": "AilmentPoisoned",
+                    "DmgEffectData": {
+                        "ApplicationChance": 1,
+                        "EffectKey": "AilmentPoisoned"
+                    }
                 }
             },
             "ZoneDatas": {
@@ -791,18 +728,11 @@
             "DamageDatas": {
                 "MeleeDamage": {
                     "DamageType": "Shock",
-                    "AtkPwrRange": 30
-                }
-            },
-            "EffectDatas": {
-                "AttackEffect": {
-                    "ApplicationChance": 0.1,
-                    "EffectKey": "AilmentShocked"
-                }
-            },
-            "SubActions":{
-                "Attack":{
-                    "EffectKeys": ["AttackEffect"]
+                    "AtkPwrRange": 30,
+                    "DmgEffectData": {
+                        "ApplicationChance": 0.2,
+                        "EffectKey": "AilmentShocked"
+                    }
                 }
             }
         },
@@ -848,18 +778,11 @@
             "DamageDatas": {
                 "MissileDamage": {
                     "DamageType": "Shock",
-                    "AtkPwrRange": 30
-                }
-            },
-            "EffectDatas": {
-                "AttackEffect": {
-                    "ApplicationChance": 0.1,
-                    "EffectKey": "AilmentShocked"
-                }
-            },
-            "SubActions":{
-                "SpawnMissile":{
-                    "EffectKeys": ["AttackEffect"]
+                    "AtkPwrRange": 30,
+                    "DmgEffectData": {
+                        "ApplicationChance": 0.2,
+                        "EffectKey": "AilmentShocked"
+                    }
                 }
             },
             "MissileDatas": {
@@ -937,18 +860,11 @@
             "DamageDatas": {
                 "RangedDamage": {
                     "DamageType": "Shock",
-                    "AtkPwrRange": 30
-                }
-            },
-            "EffectDatas": {
-                "AttackEffect": {
-                    "ApplicationChance": 0.1,
-                    "EffectKey": "AilmentShocked"
-                }
-            },
-            "SubActions":{
-                "Attack":{
-                    "EffectKeys": ["AttackEffect"]
+                    "AtkPwrRange": 30,
+                    "DmgEffectData": {
+                        "ApplicationChance": 0.2,
+                        "EffectKey": "AilmentShocked"
+                    }
                 }
             }
         },
@@ -994,13 +910,11 @@
             "DamageDatas": {
                 "TrapDamage": {
                     "DamageType": "Shock",
-                    "AtkPwrRange": 30
-                }
-            },
-            "EffectDatas": {
-                "AttackEffect": {
-                    "ApplicationChance": 1,
-                    "EffectKey": "AilmentShocked"
+                    "AtkPwrRange": 30,
+                    "DmgEffectData": {
+                        "ApplicationChance": 0.2,
+                        "EffectKey": "AilmentShocked"
+                    }
                 }
             },
             "ZoneDatas": {

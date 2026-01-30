@@ -42,7 +42,7 @@
 [ext_resource type="Texture2D" uid="uid://cat1gts1f5feu" path="res://assets/Sprites/UI/SymbolIcons/PageActionSymbol.png" id="35_fq86f"]
 [ext_resource type="Texture2D" uid="uid://bmv0v2cnpvjh4" path="res://Scenes/Menus/CharacterMenu/MenuPages/ItemDetailsCard/ButtonPressed_Patch_32_6.png" id="36_0dsaw"]
 
-[node name="ItemDetailsCard" type="Control" node_paths=PackedStringArray("offset_control", "offset_point", "icon", "icon_background", "title_lable", "rarity_lable", "exit_button", "weapon_details", "armor_details", "action_details", "effect_page_details", "page_que_details", "default_details", "tag_label", "tag_box", "equip_button_background", "equip_button", "equip_label", "buy_controller")]
+[node name="ItemDetailsCard" type="Control" node_paths=PackedStringArray("offset_control", "offset_point", "icon", "icon_background", "title_lable", "rarity_lable", "exit_button", "weapon_details", "armor_details", "action_details", "effect_page_details", "page_que_details", "default_details", "tag_label", "tag_box", "confirm_button_background", "confirm_button", "confirm_label", "buy_controller")]
 custom_minimum_size = Vector2(300, 340)
 layout_mode = 3
 anchors_preset = 0
@@ -68,11 +68,11 @@ page_que_details = NodePath("OffsetControl/NinePatchRect/VBoxContainer/PageBookD
 default_details = NodePath("OffsetControl/NinePatchRect/VBoxContainer/DefaultDetailsControl")
 tag_label = NodePath("OffsetControl/NinePatchRect/VBoxContainer/TagLabel")
 tag_box = NodePath("OffsetControl/NinePatchRect/VBoxContainer/TagsBox")
-equip_button_background = NodePath("OffsetControl/NinePatchRect/VBoxContainer/EquipButtonBackground")
-equip_button = NodePath("OffsetControl/NinePatchRect/VBoxContainer/EquipButtonBackground/EquipButton")
-equip_label = NodePath("OffsetControl/NinePatchRect/VBoxContainer/EquipButtonBackground/FitScaleLabel")
-equip_button_texture = ExtResource("7_850b7")
-equip_button_pressed_texture = ExtResource("36_0dsaw")
+confirm_button_background = NodePath("OffsetControl/NinePatchRect/VBoxContainer/ConfirmButtonBackground")
+confirm_button = NodePath("OffsetControl/NinePatchRect/VBoxContainer/ConfirmButtonBackground/ConfirmButton")
+confirm_label = NodePath("OffsetControl/NinePatchRect/VBoxContainer/ConfirmButtonBackground/ConfirmFitScaleLabel")
+confirm_button_texture = ExtResource("7_850b7")
+confirm_button_pressed_texture = ExtResource("36_0dsaw")
 buy_controller = NodePath("OffsetControl/NinePatchRect/VBoxContainer/BuyingController")
 
 [node name="OffestPoint" type="Node2D" parent="."]
@@ -203,6 +203,7 @@ custom_minimum_size = Vector2(2, 1)
 layout_mode = 2
 
 [node name="WeaponDetailsControl" type="Control" parent="OffsetControl/NinePatchRect/VBoxContainer" node_paths=PackedStringArray("parent_card_control", "weapon_class_label", "phy_damage_icon", "mag_damage_icon", "attack_power_label", "damage_type_label", "description_box", "range_display")]
+visible = false
 layout_mode = 2
 size_flags_vertical = 3
 script = ExtResource("7_sv4xn")
@@ -293,7 +294,6 @@ text = "Item Description"
 script = ExtResource("22_pm1ag")
 
 [node name="ActionPageDetailsControl" type="Control" parent="OffsetControl/NinePatchRect/VBoxContainer" node_paths=PackedStringArray("parent_card_control", "description_box", "target_type_label", "cost_container", "range_display", "damage_label", "damage_container", "accuracy_icon", "accuracy_label", "potency_icon", "potency_label", "modded_by_container", "modded_by_label")]
-visible = false
 layout_mode = 2
 size_flags_vertical = 3
 script = ExtResource("12_fd6vk")
@@ -481,6 +481,11 @@ damage_type = 7
 [node name="MiniRangeDisplay" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsControl/VBoxContainer/HBoxContainer2" instance=ExtResource("5_jmtol")]
 layout_mode = 2
 size_flags_vertical = 0
+
+[node name="ColorRect" type="ColorRect" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsControl/VBoxContainer"]
+self_modulate = Color(0.470588, 0, 0, 1)
+custom_minimum_size = Vector2(2, 1)
+layout_mode = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsControl/VBoxContainer"]
 layout_mode = 2
@@ -1026,7 +1031,7 @@ bbcode_enabled = true
 text = "Item Description hk hbkhjhl jhlkjl ljlkj"
 script = ExtResource("22_pm1ag")
 
-[node name="EquipButtonBackground" type="NinePatchRect" parent="OffsetControl/NinePatchRect/VBoxContainer"]
+[node name="ConfirmButtonBackground" type="NinePatchRect" parent="OffsetControl/NinePatchRect/VBoxContainer"]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 texture = ExtResource("7_850b7")
@@ -1035,7 +1040,7 @@ patch_margin_top = 8
 patch_margin_right = 8
 patch_margin_bottom = 8
 
-[node name="FitScaleLabel" parent="OffsetControl/NinePatchRect/VBoxContainer/EquipButtonBackground" instance=ExtResource("4_34k8o")]
+[node name="ConfirmFitScaleLabel" parent="OffsetControl/NinePatchRect/VBoxContainer/ConfirmButtonBackground" instance=ExtResource("4_34k8o")]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -1047,11 +1052,11 @@ offset_bottom = -4.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
-text = "Equipe"
+text = "Confirm"
 _size_dirty = true
 center_x = true
 
-[node name="EquipButton" type="Button" parent="OffsetControl/NinePatchRect/VBoxContainer/EquipButtonBackground"]
+[node name="ConfirmButton" type="Button" parent="OffsetControl/NinePatchRect/VBoxContainer/ConfirmButtonBackground"]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15

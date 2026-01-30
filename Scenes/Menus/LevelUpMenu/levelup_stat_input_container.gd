@@ -3,20 +3,15 @@ extends HBoxContainer
 
 @export var minus_button:TextureButton
 @export var plus_button:TextureButton
-@export var current_value_lable:Label
-@export var goto_value_lable:Label
+@export var value_lable:Label
 
 var base_stat_value:int
 var current_value:int:
 	set(val):
 		current_value = val
-		if current_value_lable:
-			current_value_lable.text = str(current_value)
 var goto_value:int:
 	set(val):
 		goto_value = val
-		if goto_value_lable:
-			goto_value_lable.text = str(goto_value)
 
 func set_values(base:int, current:int):
 	base_stat_value = base

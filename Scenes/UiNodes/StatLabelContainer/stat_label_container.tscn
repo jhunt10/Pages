@@ -4,7 +4,7 @@
 [ext_resource type="Theme" uid="uid://dwinll8pgdjhc" path="res://Scenes/Themes/standard_theme.tres" id="2_5q6ab"]
 [ext_resource type="Texture2D" uid="uid://cll1c22bgo2p6" path="res://assets/Sprites/UI/SymbolIcons/HealthSymbol.png" id="3_eolm8"]
 
-[node name="HealthContainer" type="BoxContainer" node_paths=PackedStringArray("name_label", "icon", "value_label")]
+[node name="StatContainer" type="BoxContainer" node_paths=PackedStringArray("name_label", "icon", "value_label")]
 size_flags_horizontal = 3
 size_flags_vertical = 4
 theme_override_constants/separation = 0

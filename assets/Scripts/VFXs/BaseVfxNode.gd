@@ -73,6 +73,7 @@ func finish():
 		vfx_holder.remove_vfx(self.id)
 	finished.emit()
 
+
 func _on_delete():
 	pass
 

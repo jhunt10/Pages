@@ -23,7 +23,6 @@ var _actor:BaseActor
 var current_exp:float = 0
 var max_exp:float = 1
 var level_up_menu:LevelUpContainer
-var opening_menu:bool = false
 
 func _ready() -> void:
 	if mouse_over_control:
@@ -43,14 +42,7 @@ func set_actor(actor:BaseActor):
 func open_level_up_menu():
 	if level_up_button_animation:
 		level_up_button_animation.play('waiting')
-	opening_menu = true
-	level_up_menu = MainRootNode.Instance.open_level_up_menu(_actor)
-	#opening_menu = false
-	level_up_menu.closed.connect(on_menu_closed)
-
-func on_menu_closed():
-	opening_menu = false
-	_sync()
+	CharacterMenuControl.Instance.show_level_up_pages()
 
 func _sync():
 	if level_label:
@@ -61,7 +53,7 @@ func _sync():
 	max_exp_label.text = str(max_exp)
 	self.percent_full = current_exp / max_exp
 	if level_up_button_control:
-		if current_exp >= max_exp and not opening_menu:
+		if current_exp >= max_exp:
 			if level_up_button_animation:
 				level_up_button_animation.play('flashing_animation')
 		else:

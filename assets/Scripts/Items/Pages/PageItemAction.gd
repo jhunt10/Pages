@@ -222,7 +222,14 @@ func get_preview_damage_datas(actor:BaseActor=null)->Dictionary:
 	#if not preview_key or preview_key == '':
 		#printerr("%s.get_preview_damage_datas: No preview key" % [self.ActionKey])
 		#return {}
-	return get_damage_datas(actor, preview_keys)
+	var damage_datas = get_damage_datas(actor, preview_keys)
+	
+	if preview_data.keys().has("PreviewDamageCounts"):
+		var damage_counts = preview_data['PreviewDamageCounts']
+		for key in damage_counts.keys():
+			if damage_datas.keys().has(key):
+				damage_datas[key]['PreviewCount'] = damage_counts[key]
+	return damage_datas
 
 
 ########################
@@ -269,6 +276,8 @@ func get_damage_datas(actor:BaseActor, damage_keys)->Dictionary:
 	var out_dict = {}
 	if damage_keys is String:
 		damage_keys = [damage_keys]
+	var preview_data:Dictionary = action_data.get("Preview", {})
+	var preview_damage_counts = preview_data.get("PreviewDamageCounts", {})
 	for key in damage_keys:
 		var damage_data = action_data.get("DamageDatas", {}).get(key, {}).duplicate(true)
 		if damage_data.has("WeaponFilter"):
@@ -290,6 +299,8 @@ func get_damage_datas(actor:BaseActor, damage_keys)->Dictionary:
 		else:
 			printerr("%s.get_damage_datas: No Damage Data found for key '%s'." % [self.ActionKey, key])
 			continue
+		if preview_damage_counts.keys().has(key):
+			out_dict[key]['PreviewCount'] = preview_damage_counts[key]
 	return out_dict
 
 func has_ammo(_actor:BaseActor=null):

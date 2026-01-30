@@ -10,11 +10,14 @@ static var last_tab_pressed:String = ''
 static var _actor_id:String = ''
 
 #@export var inventory_tabs_control:ItemFilterTabsControl
+@export var confirm_menu:CharacterMenuConfirmationControl
 @export var details_card_spawn_point:Control
 @export var equipment_page:EquipmentPageControl
 @export var page_page:PageMenuPageControl
 @export var supplies_page:BagPageControl
 @export var stats_page:StatsPageControl
+@export var level_up_menu_page:LevelUpPageControl
+@export var skill_tree_page:SkillTreePageControl
 
 @export var scale_control:Control
 @export var inventory_container:InventoryMenuPageControl
@@ -31,6 +34,7 @@ static var _actor_id:String = ''
 
 var _actor:BaseActor
 var _left_page_context
+var _right_page_context
 var _mouse_over_context:String
 var _mouse_over_index_data
 var _selected_context
@@ -48,9 +52,12 @@ var equip_mode:bool:
 	get():
 		return not (MainRootNode.Instance.current_scene is CombatRootControl)
 
+var level_up_menu_open:bool = false
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	Instance = self
+	confirm_menu.hide()
 	if close_button:
 		close_button.pressed.connect(close_menu)
 	tab_equipment_button.pressed.connect(on_tab_pressed.bind("Equipment"))
@@ -76,6 +83,9 @@ func _ready() -> void:
 		inventory_tab_rect.hide()
 		stats_tab_rect.hide()
 		
+	level_up_menu_page.hide()
+	skill_tree_page.hide()
+	level_up_menu_page.level_up_menu_closed.connect(on_level_up_menu_close)
 	
 	if inventory_container:
 		inventory_container.item_button_down.connect(on_item_button_down)
@@ -198,6 +208,11 @@ func on_actor_tab_selected(actor:BaseActor):
 		_actor_id = _actor.Id
 	else:
 		_actor_id = ''
+	
+	if level_up_menu_open:
+		level_up_menu_page.set_actor(actor)
+		return
+	
 	if _left_page_context != '':
 		var left_page_control:BaseCharacterSubMenu = context_to_page_control(_left_page_context)
 		if left_page_control:
@@ -228,7 +243,6 @@ func show_menu():
 	
 	actor_tabs_control.sync_labels()
 	actor_tabs_control.set_selected_actor(_actor)
-	#
 	if _left_page_context != '':
 		var left_page_control:BaseCharacterSubMenu = context_to_page_control(_left_page_context)
 		if left_page_control:
@@ -236,12 +250,26 @@ func show_menu():
 	else:
 		on_tab_pressed("Pages")
 	
-	if not equip_mode:
+	if equip_mode:
+		on_tab_pressed("Inventory")
+	else:
+		on_tab_pressed("Stats")
 		stats_page.sync()
 	#inventory_container.build_item_slots()
 	self.visible = true
 
-func close_menu():
+func close_menu(confirmed=false, save_level_up_changes=false):
+	# Check if levelup menu open
+	if level_up_menu_open: 
+		if not confirmed:
+			if level_up_menu_page.get_has_changes():
+				level_up_menu_page.confirm_menu.show_pop_up(close_menu.bind(true, true), close_menu.bind(true, false))
+				return
+		elif save_level_up_changes:
+			level_up_menu_page.save_changes()
+			
+			
+	# Check for missing PageBook
 	if _actor:
 		var page_que = _actor.equipment.get_que_equipment()
 		if not page_que:
@@ -259,21 +287,42 @@ func on_details_card_freed():
 	_current_details_card.queue_free()
 	_current_details_card = null
 
-func create_details_card(item:BaseItem):
+func create_details_card(item:BaseItem, 
+		confirm_button_text:String="UNSET", 
+		override_on_confirm:bool=false, 
+		disable_confirm:bool=false)->ItemDetailsCard:
 	if _current_details_card:
-		if _current_details_card.item_id == item.Id:
+		# Could cause problems switching between skill tree and pages
+		if _current_details_card.item_id == item.Id and not override_on_confirm:
 			_current_details_card.show()
 			return
 		_current_details_card.hide_done.disconnect(on_details_card_freed)
 		_current_details_card.start_hide()
+		
+	if confirm_button_text == 'UNSET':
+		var actor_has_item = true
+		if actor_has_item:
+			confirm_button_text = "Remove"
+		else:
+			var cant_equip_reasons = {}
+			var posible_slot = ItemHelper.get_first_valid_slot_for_item(item, _actor, true)
+			if posible_slot < 0:
+				cant_equip_reasons = {"NoSlot":true} 
+			else:
+				cant_equip_reasons = item.get_cant_use_reasons(_actor)
+			var reason = get_cant_equip_reason(cant_equip_reasons)
+			confirm_button_text = reason[0]
+			disable_confirm = reason[1]
+			
 	_current_details_card = load("res://Scenes/Menus/CharacterMenu/MenuPages/ItemDetailsCard/item_details_card.tscn").instantiate()
 	details_card_spawn_point.add_child(_current_details_card)
 	_current_details_card.vertical = true
 	_current_details_card.hide_done.connect(on_details_card_freed)
-	_current_details_card.set_item(_actor, item)
+	_current_details_card.set_detail_card_item(_actor, item, confirm_button_text, disable_confirm)
 	_current_details_card.start_show()
-	_current_details_card.item_confirmed.connect(on_details_card_confirmed)
-
+	if not override_on_confirm:
+		_current_details_card.item_confirmed.connect(on_details_card_confirmed)
+	return _current_details_card
 
 func on_details_card_confirmed(item:BaseItem):
 	var source_context = null
@@ -305,7 +354,7 @@ func on_details_card_confirmed(item:BaseItem):
 			stats_page.sync()
 		_current_details_card.start_hide()
 	else:
-		_current_details_card.equip_label.text = result
+		_current_details_card.confirm_label.text = result
 
 
 func context_to_page_control(context):
@@ -428,7 +477,11 @@ func on_inv_filter_unselected(tab_name):
 	inventory_container.remvoe_sub_filter(tab_name)
 
 func on_tab_pressed(tab_name:String):
+	if level_up_menu_open:
+		return
+	
 	if tab_name == "Inventory":
+		_right_page_context = tab_name
 		inventory_container.show()
 		stats_page.hide()
 		inventory_tab_rect.hide()
@@ -436,6 +489,7 @@ func on_tab_pressed(tab_name:String):
 		#inventory_tabs_control.show()
 		return
 	if tab_name == "Stats":
+		_right_page_context = tab_name
 		stats_page.sync()
 		stats_page.show()
 		inventory_container.hide()
@@ -478,3 +532,36 @@ func on_tab_pressed(tab_name:String):
 		stats_page.hide()
 		inventory_tab_rect.hide()
 		stats_tab_rect.show()
+
+# Return [Message, Disable_Confirm]
+func get_cant_equip_reason(reasons_data:Dictionary)->Array:
+	if reasons_data.size() == 0:
+		return ["Equip", false]
+	if reasons_data.get("NoSlot", false):
+		return ["No Item Slot", true]
+	if reasons_data.get("IsEquipt", false):
+		return ["Remove", false]
+	
+	return [ItemHelper.cant_equip_reasons_to_string(reasons_data), true]
+	
+
+func show_level_up_pages():
+	equipment_page.hide()
+	page_page.hide()
+	supplies_page.hide()
+	inventory_container.hide()
+	stats_page.hide()
+	skill_tree_page.show()
+	level_up_menu_page.show()
+	level_up_menu_page.set_actor(_actor)
+	level_up_menu_open = true
+
+func on_level_up_menu_close():
+	level_up_menu_open = false
+	inventory_container.build_item_slots()
+	on_tab_pressed(_right_page_context)
+	on_tab_pressed(_left_page_context)
+	level_up_menu_page.hide()
+	skill_tree_page.hide()
+	
+	

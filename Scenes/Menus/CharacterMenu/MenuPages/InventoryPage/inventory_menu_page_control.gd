@@ -119,6 +119,7 @@ func build_item_slots():
 			#items_container.remove_child(_item_buttons[item_id])
 	
 	for item:BaseItem in PlayerInventory.get_sorted_items():
+		print("InventoryItemasd:" + item.Id)
 		if not should_item_be_visible(item, ''):
 			continue
 		var sub_group_key = _get_sub_group_key(item)

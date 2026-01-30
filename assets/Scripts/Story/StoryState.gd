@@ -6,11 +6,14 @@ signal money_changed()
 var story_id
 var save_id
 var _party_actor_ids:Array = []
+var _party_skills_data:Dictionary = {}
 var _story_stage_index:int
 var _story_flags:Dictionary = {}
 var _encountered_actors:Dictionary = {}
 
 var _money:int = 0
+
+var _skill_trees_data:Dictionary = {}
 
 #TODO: Curent set up doesn't account for time spent in the save menu
 var _total_play_time
@@ -34,19 +37,20 @@ func add_actor_to_party(actor)->BaseActor:
 		
 		# Add class pages
 		var title = actor.pages.get_title_page().get_display_name()
-		var has_pages = []
-		for party_actor:BaseActor in list_party_actors():
-			has_pages.append_array(party_actor.pages.list_page_keys())
-		for item_key:String in ItemLibrary.list_all_item_keys():
-			if has_pages.has(item_key):
-				continue
-			var item = ItemLibrary.get_item(item_key)
-			if item is BasePageItem and not item_key.begins_with("#"):
-				if item is BasePageItem:
-					var req_title = (item as BasePageItem).page_data.get("SourceTitle")
-					var match_str = (item as BasePageItem).page_data.get("PageRequirements", {}).get("TitleReq")
-					if  title == req_title and match_str != 'Shared':
-						PlayerInventory.add_item(item, 1)
+		set_unlocked_skill_for_actor(actor, [])
+		#var has_pages = []
+		#for party_actor:BaseActor in list_party_actors():
+			#has_pages.append_array(party_actor.pages.list_page_keys())
+		#for item_key:String in ItemLibrary.list_all_item_keys():
+			#if has_pages.has(item_key):
+				#continue
+			#var item = ItemLibrary.get_item(item_key)
+			#if item is BasePageItem and not item_key.begins_with("#"):
+				#if item is BasePageItem:
+					#var req_title = (item as BasePageItem).page_data.get("SourceTitle")
+					#var match_str = (item as BasePageItem).page_data.get("PageRequirements", {}).get("TitleReq")
+					#if  title == req_title and match_str != 'Shared':
+						#PlayerInventory.add_item(item, 1)
 						
 		return actor
 	else:
@@ -113,9 +117,8 @@ func start_new_story():
 		var _new_player = ActorLibrary.create_actor(player_actor_keys[i], {}, player_id)
 		if _new_player:
 			_party_actor_ids.append(player_id)
+			set_unlocked_skill_for_actor(_new_player, [])
 			add_encounter_with_actor(_new_player)
-	
-	PlayerInventory.clear_items()
 	# Add all pages
 	var has_pages = []
 	for actor:BaseActor in list_party_actors():
@@ -127,9 +130,11 @@ func start_new_story():
 		if item is BasePageItem and not item_key.begins_with("#"):
 			if item is BasePageItem:
 				var req_title = (item as BasePageItem).page_data.get("SourceTitle")
-				if ('Soldier' == req_title
-					or item.get_tags().has("_Dev_Action")):
+				if (#'Soldier' == req_title or 
+					item.get_tags().has("_Dev_Action")):
 					PlayerInventory.add_item(item, 1)
+	
+	
 	
 	# Add Supplies
 	for item_key in ItemLibrary.get_item_keys_with_tag("Supply"):
@@ -176,6 +181,92 @@ func add_encounter_with_actor(actor):
 			_encountered_actors[actor] = 0
 		_encountered_actors[actor] += 1
 
+
+func load_skill_trees():
+	var file_path = "res://ObjectDefs/ClassDefs/TitlePages/SkillTreeDef.json"
+	var file = FileAccess.open(file_path, FileAccess.READ)
+	var text:String = file.get_as_text()
+	var data = JSON.parse_string(text)
+	if data is Dictionary:
+		_skill_trees_data = data
+		#for title in _skill_trees_data.keys():
+			#for row in _skill_trees_data[title]:
+				#for node_data:Dictionary in row:
+					#if node_data.keys().has("PairType"):
+						#var page_item_id_1 = node_data.get("PageItemId1")
+						#ItemLibrary.get_or_create_item("INNATE:"+page_item_id_1, page_item_id_1, {})
+						#
+					#var page_item_id = node_data.get("PageItemId")
+					#ItemLibrary.get_or_create_item("INNATE:"+page_item_id, page_item_id, {})
+
+func get_skill_tree_data_for_actor(actor:BaseActor)->Array:
+	if _skill_trees_data.size() == 0:
+		load_skill_trees()
+	var title = actor.get_title()
+	var skill_tree_data = _skill_trees_data.get(title)
+	if skill_tree_data:
+		return skill_tree_data.duplicate()
+	return []
+
+func get_unlocked_skills_for_actor(actor, include_always_unlocked=true)->Array:
+	var actor_id = actor
+	if actor_id is BaseActor:
+		actor_id = actor.Id
+	var data = _party_skills_data.get(actor_id, {})
+	var out_list = data.get("Unlocked", []).duplicate()
+	if include_always_unlocked:
+		out_list.append_array(data.get("Always", []))
+	return out_list
+
+func set_unlocked_skill_for_actor(actor:BaseActor, skills:Array):
+	var actor_id = actor.Id
+	var unlocked_skills = []
+	var always_skills = []
+	print("StoryState Set Skill: %s : %s" % [actor_id, skills])
+	var tree_data = get_skill_tree_data_for_actor(actor)
+	for row in tree_data:
+		for node_data in row:
+			var page_list = []
+			# Paired Node
+			if node_data.keys().has("PairType"):
+				page_list = [node_data.get("PageItemId1"), node_data.get("PageItemId2")]
+			# Single Node
+			else:
+				page_list = [node_data.get("PageItemId")] 
+			
+			
+			for page_key in page_list:
+				var is_unlocked = skills.has(page_key) or node_data.get("AlwaysUnlocked", false)
+				var has_page_in_book = actor.pages.list_ids_of_items_with_key(page_key).size() > 0
+				var has_page_in_inventory = PlayerInventory.get_item_stack_count(page_key) > 0
+				print("SSST: %s : Unlocked: %s       InBook: %s      InInv: %s" % [page_key, is_unlocked, has_page_in_book, has_page_in_inventory])
+				# Only add non-AlwaysUnlocked skills to list
+				if is_unlocked:
+					if node_data.get("AlwaysUnlocked"):
+						always_skills.append(page_key)
+					else:
+						unlocked_skills.append(page_key)
+			
+				# Add or remove item from player inventory or actor pages
+				if is_unlocked:
+					if not has_page_in_book and not has_page_in_inventory:
+						PlayerInventory.add_item(page_key)
+				else:
+					if has_page_in_book:
+						var item_ids = actor.pages.list_ids_of_items_with_key(page_key)
+						for item_id in item_ids:
+							actor.pages.remove_item(item_id)
+					if has_page_in_inventory:
+						var item = ItemLibrary.get_item(page_key)
+						PlayerInventory.delete_item_from_inventory(item)
+	_party_skills_data[actor_id] = {
+		"Unlocked": unlocked_skills,
+		"Always": always_skills
+	}
+				
+			
+	
+
 func get_runtime_untix_time()->float:
 	var val = _total_play_time + (Time.get_unix_time_from_system() - _session_start_unix_time)
 	return val
@@ -192,6 +283,7 @@ func build_save_data()->Dictionary:
 	out_data['RunTime'] = _total_play_time + (Time.get_unix_time_from_system() - _session_start_unix_time)
 	out_data['StoryFlags'] = _story_flags.duplicate(true)
 	out_data['Encounters'] = _encountered_actors
+	out_data['PartySkillData'] = _party_skills_data
 	return out_data
 
 func load_save_data(data:Dictionary):
@@ -224,7 +316,7 @@ func load_save_data(data:Dictionary):
 			printerr("StoryStateData.load_save_data: Failed to find item with id '%s'." % [item_id])
 	
 	_encountered_actors = data.get("Encounters", {})
-	
+	_party_skills_data = data.get("PartySkillData", {})
 	_total_play_time = data.get("RunTime", 0)
 	_session_start_unix_time = Time.get_unix_time_from_system()
 
@@ -262,3 +354,4 @@ func purge_game():
 	_story_flags.clear()
 	_total_play_time = 0
 	_encountered_actors.clear()
+	_party_skills_data.clear()

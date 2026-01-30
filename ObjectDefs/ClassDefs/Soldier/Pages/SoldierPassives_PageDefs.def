@@ -2,14 +2,15 @@
     "BlockAoePage": {
         "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemPassive.gd",
         "#ObjDetails": {
-            "Description": "You've somehow learned to use a single Shield against Attacks that completely surround you.\n\nYYou have a chance to @@#Color:Red:Block@@ against @@#Color:Red:AOE Attacks@@ equal to the chance for those from your @@#Color:Red:Flank@@.",
+            "Description": "You've somehow learned to use a single Shield against Attacks that completely surround you.\n\nYou have a chance to @@#Color:Red:Block@@ against @@#Color:Red:AOE Attacks@@ equal to the chance for those from your @@#Color:Red:Flank@@.",
             "DisplayName": "Block AOE",
             "LargeIcon": "Sprites/BlockAoe.png",
             "ObjectType": "Item",
             "SmallIcon": "Sprites/BlockAoe.png",
             "SnippetDesc": "Block AOE as if Flank.",
             "Tags": [
-                "Passive"
+                "Passive",
+                "StatMod"
             ],
             "Taxonomy": [
                 "Item",
@@ -51,8 +52,6 @@
             "SnippetDesc": "Reduce Crash Damage to Allies.",
             "Tags": [
                 "Passive",
-                "AtkMod",
-                "Crash",
                 "DmgMod"
             ],
             "Taxonomy": [
@@ -68,7 +67,7 @@
         },
         "PageData": {
             "DamageMods": {
-                "GentleDgmMod": {
+                "GentleDmgMod": {
                     "Conditions": {
                         "DamageTypes": [
                             "Crash"
@@ -92,7 +91,7 @@
                             }
                         ]
                     },
-                    "DamageModKey": "GentleDgmMod",
+                    "DamageModKey": "GentleDmgMod",
                     "DisplayName": "Gentle",
                     "ModType": "Scale",
                     "OnDealDamage": true,

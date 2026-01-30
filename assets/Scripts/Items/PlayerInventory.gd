@@ -23,6 +23,7 @@ static func clear_items():
 	_held_unique_items_ids.clear()
 
 static func has_item_id(item_id:String):
+	var item_ids = _stacked_item_id_by_key
 	if _held_unique_items_ids.has(item_id):
 		return true
 	if _stacked_item_id_by_key.values().has(item_id):
@@ -52,7 +53,7 @@ static func add_item(item, count:int=1):
 		_stacked_item_id_by_key[item_key] = inv_item.Id
 	else:
 		_stacked_item_count_by_key[item_key] += count
-	if item is BaseItem:
+	if item is BaseItem and not item.Id.begins_with("INNATE:"):
 		ItemLibrary.delete_item(item)
 	Instance.inventory_changed.emit()
 

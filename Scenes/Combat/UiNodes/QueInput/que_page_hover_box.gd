@@ -76,7 +76,7 @@ func set_action(actor:BaseActor, page_item:BasePageItem):
 		for dam_data in damage_datas.values():
 			var hash_val = hash(dam_data)
 			if not merged_counts.has(hash_val):
-				merged_counts[hash_val] = {"Value": dam_data, "Count": 1}
+				merged_counts[hash_val] = {"Value": dam_data, "Count": dam_data.get("PreviewCount", 1)}
 			else:
 				merged_counts[hash_val]['Count'] += 1
 		for merged_data in merged_counts.values():

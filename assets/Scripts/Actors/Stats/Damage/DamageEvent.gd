@@ -2,7 +2,7 @@ class_name DamageEvent
 
 const LOGGING = true
 
-enum DefenseType{None, Armor, Ward}
+enum DefenseType {None, Armor, Ward}
 
 enum DamageTypes {	
 	Test, RAW, Healing, Percent,

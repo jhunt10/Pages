@@ -1,0 +1,41 @@
+[gd_scene load_steps=4 format=3 uid="uid://deon0fff5iq41"]
+
+[ext_resource type="Texture2D" uid="uid://cegwhar55vupc" path="res://assets/Sprites/Paper/Common_Background.png" id="1_8d4ux"]
+[ext_resource type="Texture2D" uid="uid://d28r048mh6136" path="res://assets/Sprites/UnknownSprite.png" id="2_tprlx"]
+[ext_resource type="Texture2D" uid="uid://r7e0y5yv45uc" path="res://Scenes/Menus/CharacterMenu/MenuPages/SkillTreeMenuPage/SkillNodeOutline.png" id="3_cvy35"]
+
+[node name="SkillTreePageControl" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 292.0
+offset_bottom = 384.0
+
+[node name="SkillTreeNode" type="Control" parent="."]
+custom_minimum_size = Vector2(64, 64)
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="BackgroundTextureRect" type="TextureRect" parent="SkillTreeNode"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_8d4ux")
+
+[node name="IconTextureRect" type="TextureRect" parent="SkillTreeNode"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_tprlx")
+
+[node name="HighlightTextureRect" type="TextureRect" parent="SkillTreeNode"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_cvy35")

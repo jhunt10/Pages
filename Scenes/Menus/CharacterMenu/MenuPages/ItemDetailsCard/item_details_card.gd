@@ -76,11 +76,11 @@ var is_selling:bool = false
 @export var tag_box:TagBox
 
 
-@export var equip_button_background:NinePatchRect
-@export var equip_button:Button
-@export var equip_label:FitScaleLabel
-@export var equip_button_texture:Texture2D
-@export var equip_button_pressed_texture:Texture2D
+@export var confirm_button_background:NinePatchRect
+@export var confirm_button:Button
+@export var confirm_label:FitScaleLabel
+@export var confirm_button_texture:Texture2D
+@export var confirm_button_pressed_texture:Texture2D
 
 @export var buy_controller:BuyController
 #enum AnimationStates {In, Showing, Out, Hidden}
@@ -92,18 +92,22 @@ var _actor:BaseActor
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	if Engine.is_editor_hint():
+		return
 	exit_button.pressed.connect(_on_exit_button)
 	offset_control.size = self.size
 	if vertical:
 		offset_point.position = Vector2(self.size.x,0)
 	else:
 		offset_point.position = Vector2(0,self.size.y)
-	equip_button.button_down.connect(equip_button_pressed)
-	equip_button.button_up.connect(equip_button_released)
+	confirm_button.button_down.connect(equip_button_pressed)
+	confirm_button.button_up.connect(equip_button_released)
 	pass # Replace with function body.
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	if Engine.is_editor_hint():
+		return
 	if not self.visible:
 		return
 	if state == States.Hidden or state == States.Showing:
@@ -149,7 +153,7 @@ func _on_exit_button():
 
 func start_show():
 	showing = true
-	equip_button_background.texture = equip_button_texture
+	#confirm_button_background.texture = confirm_button_texture
 	#self.show()
 	#offset_control.position.y = self.size.y
 	#animation_state = AnimationStates.In
@@ -161,7 +165,7 @@ func start_hide():
 	##offset_control.position.y = 0
 	#animation_state = AnimationStates.Out
 
-func set_item(actor:BaseActor, item:BaseItem):
+func set_detail_card_item(actor:BaseActor, item:BaseItem, confirm_button_text:String, disable_confirm:bool=false):
 	item_id = item.Id
 	icon_background.texture = item.get_rarity_background()
 	icon.texture = item.get_small_icon()
@@ -224,67 +228,39 @@ func set_item(actor:BaseActor, item:BaseItem):
 			actor_has_item = actor.equipment.has_item(item_id)
 		_current_card = default_details
 		default_details.show()
-		#if equipment.get_equipt_to_actor_id():
-			#button_label.text = "Remove"
-		#else:
-			#button_label.text = "Equipt"
-	if actor:
-		if actor_has_item:
-			equip_label.text = "Remove"
-		else:
-			var cant_equip_reasons = {}
-			var posible_slot = ItemHelper.get_first_valid_slot_for_item(item, actor, true)
-			if posible_slot < 0:
-				cant_equip_reasons = {"NoSlot":true} 
-			else:
-				cant_equip_reasons = item.get_cant_use_reasons(actor)
-			set_cant_equip_reason(cant_equip_reasons)
-		self.start_show()
 	
+	# Shop controls
 	if MainRootNode.Instance.current_scene is ShopMenuController:
 		buy_controller.set_item(item, is_selling)
 		buy_controller.show()
-		equip_button_background.hide()
+		confirm_button_background.hide()
+	# Hide Confirm Button in combat
 	elif MainRootNode.Instance.current_scene is CombatRootControl:
-		equip_button_background.hide()
+		confirm_button_background.hide()
 	else:
+		# Hide Confirm Button for Titles
 		if item.get_tags().has("Title"):
-			equip_button_background.hide()
+			confirm_button_background.hide()
+		# Only show confirm if message provided
+		elif confirm_button_text == "":
+			confirm_button_background.hide()
 		else:
-			equip_button_background.show()
+			confirm_label.text = confirm_button_text
+			confirm_button_background.show()
+			if disable_confirm:
+				confirm_button_background.texture = confirm_button_pressed_texture
+				confirm_button.disabled = true
+			else:
+				confirm_button_background.texture = confirm_button_texture
+				confirm_button.disabled = false
+	
+	self.start_show()
 
 func equip_button_pressed():
-	equip_button_background.texture = equip_button_pressed_texture
-	#var actor = CharacterMenuControl.Instance._actor
-	#if not actor:
-		#return
-	#if actor_has_item:
-		#var fail_reason = ItemHelper.try_transfer_item_from_actor_to_inventory(item, actor)
-		#equip_label.text  = fail_reason
-	#else:
-		#var fail_reason = ItemHelper.try_transfer_item_from_inventory_to_actor(item, actor)
-		#equip_label.text  = fail_reason
+	confirm_button_background.texture = confirm_button_pressed_texture
 
 func equip_button_released():
-	equip_button_background.texture = equip_button_texture
+	confirm_button_background.texture = confirm_button_texture
 	var item = ItemLibrary.get_item(item_id)
 	if item:
 		item_confirmed.emit(item)
-
-func set_cant_equip_reason(reasons_data:Dictionary):
-	if reasons_data.size() == 0:
-		equip_label.text = "Equip"
-		equip_button.disabled = false
-		return
-	if reasons_data.get("NoSlot", false):
-		equip_label.text = "No Item Slot"
-		equip_button.disabled = true
-		return
-	if reasons_data.get("IsEquipt", false):
-		equip_label.text = "Remove"
-		equip_button.disabled = false
-		return
-	
-	equip_label.text = ItemHelper.cant_equip_reasons_to_string(reasons_data)
-	equip_button.disabled = true
-	

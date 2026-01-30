@@ -1,5 +1,7 @@
 class_name Roll
 
+const LOGGING = true
+
 static func roll()->float:
 	return randf()
 
@@ -9,6 +11,8 @@ static func for_chance(odds:float, _want_low:bool=true)->bool:
 
 static func for_actor(actor:BaseActor, odds:float, want_low:bool=true)->bool:
 	var roll_val = get_roll_for_actor(actor, want_low)
+	if LOGGING:
+		print("Roll for %s: %s" % [actor.Id, roll_val])
 	if want_low:
 		return roll_val <= odds
 	else:

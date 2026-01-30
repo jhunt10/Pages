@@ -11,7 +11,7 @@ extends BoxContainer
 @export var mouse_over_parent:Control
 
 var mod_list_control
-
+var current_value
 
 var _actor:BaseActor
 var _icon_loaded = false
@@ -28,13 +28,13 @@ func set_values(stat_name_val:String, actor:BaseActor):
 	set_stat_values(actor)
 
 func set_stat_values(actor:BaseActor):
-	var stat_val = actor.stats.get_stat(stat_name, 0)
+	current_value = actor.stats.get_stat(stat_name, 0)
 	if force_to_int:
-		stat_val = floori(stat_val)
-	value_label.text = str(stat_val)
+		current_value = floori(current_value)
+	value_label.text = str(current_value)
 	_actor = actor
 	if percent_value:
-		percent_value.text = "%2.3f" % [DamageHelper.calc_armor_reduction(stat_val)]
+		percent_value.text = "%2.3f" % [DamageHelper.calc_armor_reduction(current_value)]
 	if not _icon_loaded:
 		load_icon()
 	#_build_stat_mod_list()

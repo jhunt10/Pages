@@ -91,3 +91,11 @@ func dictialize_self()->Dictionary:
 
 func get_defender()->BaseActor:
 	return ActorLibrary.get_actor(defending_actor_id)
+
+func get_effect_meta_data(effect_data_key:String):
+	if effect_data_key.ends_with(":DmgEft"):
+		var damage_data_key = effect_data_key.trim_suffix(":DmgEft")
+		var damage_data = parent_event.damage_datas[damage_data_key]
+		return damage_data.get("DmgEffectData")
+	else:
+		return parent_event.effect_datas[effect_data_key]

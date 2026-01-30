@@ -1,6 +1,7 @@
 class_name CustScrollBar
 extends NinePatchRect
 
+@export var always_show:bool
 @export var scroll_bounds:Control
 @export var bar:NinePatchRect
 @export var bar_button:Button
@@ -22,7 +23,8 @@ var _inner_container # Bad hacky refactor to not add @export to every scroll bar
 var inner_scroll_container:Node:
 	get:
 		if !_inner_container:
-			_inner_container = scroll_container.get_child(0)
+			if scroll_container:
+				_inner_container = scroll_container.get_child(0)
 		return _inner_container
 
 func get_container_scroll_precent()->float:
@@ -111,7 +113,8 @@ func calc_bar_size():
 	var percent_vis = min(1, visible_hight / container_hight)
 	#printerr("ScrollBar: %s container: %s | Vis: %s" % [debug_name, container_hight, visible_hight])
 	if percent_vis == 1:
-		self.hide()
+		if not always_show:
+			self.hide()
 		if opposite_spacer:
 			opposite_spacer.show()
 	else:

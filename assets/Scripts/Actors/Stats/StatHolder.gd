@@ -83,6 +83,9 @@ func get_leveled_attribute(stat_name:String):
 	var base = _base_stats.get(stat_name, 0)
 	return base + attribute_levels.get(stat_name, 0)
 
+func build_stats_with_temp_attributes(attributes:Dictionary):
+	_calc_cache_stats(false, attributes)
+
 func base_damge_from_stat(stat_name):
 	if !stat_name:
 		return 1
@@ -295,7 +298,7 @@ func clear_temp_stat_mods(reache_now:bool=true):
 	if reache_now:
 		recache_stats(false)
 
-func _calc_cache_stats(should_emit_signal:bool=true):
+func _calc_cache_stats(should_emit_signal:bool=true, override_attribute_levels=null):
 	if LOGGING: 
 		print("#Caching Stats for: %s" % _actor.ActorKey)
 	
@@ -371,16 +374,20 @@ func _calc_cache_stats(should_emit_signal:bool=true):
 	
 	if LOGGING: print("- Found: %s modded stats" % agg_mods.size())
 	
+	var attributes = attribute_levels
+	if override_attribute_levels is Dictionary and override_attribute_levels.size() > 0:
+		attributes = override_attribute_levels
+	
 	# Build temp stat list from base stats and stats created by mods
 	var temp_stats = {}
 	for base_stat_name in _base_stats.keys():
 		temp_stats[base_stat_name] = _base_stats[base_stat_name]
 	for set_stat_name in set_stats.keys():
 		temp_stats[set_stat_name] = set_stats[set_stat_name]
-	for attribute_name in attribute_levels.keys():
+	for attribute_name in attributes.keys():
 		if not temp_stats.has(attribute_name):
 			temp_stats[attribute_name] = 0
-		temp_stats[attribute_name] += attribute_levels[attribute_name]
+		temp_stats[attribute_name] += attributes[attribute_name]
 	for added_stat in key_depends_on_vals.keys():
 		if not temp_stats.keys().has(added_stat):
 			temp_stats[added_stat] = 0

@@ -319,7 +319,6 @@
         "PassiveData": {},
         "_DefVersion": "1"
     },
-    
     "PhyBoostPage": {
         "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemPassive.gd",
         "#ObjDetails": {
@@ -361,6 +360,210 @@
                     },
                     "ModType": "ScaleClip",
                     "Value": 2
+                }
+            },
+            "PageRequirements": {
+                "ConflictingPages": [],
+                "IncompatiblePages": [],
+                "TitleReq": "Match"
+            },
+            "SourceTitle": "Rogue"
+        },
+        "PassiveData": {},
+        "_DefVersion": "1"
+    },
+    "Bleeder_PageItem": {
+        "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemPassive.gd",
+        "#ObjDetails": {
+            "Description": "The secret to getting the most out of your @@#Tag:Slash:Hint:Slash Weapons@@ is to... slash with it? Wait, why do I need a @@#Color:Blue:Page@@ to make wounds @@#EftDef:AilmentBleed@@?\n\n@@#Tag:Weapon:Hint:Weapon Attacks@@ that deal @@#Color:DmgColor:Slash:Slash Damage@@ have a @@#Color:Blue:20%@@ chance to inflict @@#EftDef:AilmentBleed@@ for @@#Color:Blue:5 Turns@@.",
+            "DisplayName": "Bleeder",
+            "LargeIcon": "Sprites/Bleeder_Icon.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/Bleeder_Icon.png",
+            "SnippetDesc": "Slash Weapons may cause Bleed",
+            "Tags": [
+                "Passive",
+                "WpnMod"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Page",
+                "Passive"
+            ]
+        },
+        "ItemData": {
+            "ItemType": "Page",
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "PageData": {
+            "WeaponMods": {
+                "DualLightBonus": {
+                    "Conditions": {},
+                    "DisplayName": "Bleeder",
+                    "WeaponMods": {
+                        "DamageTypeMod": {
+                            "Conditions": {
+                                "TagFilters": [
+                                    {
+                                        "RequireAnyTags": [
+                                            "Slash"
+                                        ]
+                                    }
+                                ],
+                                "TagFiltersReqAll": true
+                            },
+                            "ModProperty": "DmgEffectData",
+                            "ModType": "Set",
+                            "ModValue": {
+                                "ApplicationChance": 0.2,
+                                "EffectKey": "AilmentBleed",
+                                "EffectDataDef": {
+                                    "EffectDetails": {
+                                        "DurationData": {
+                                            "BaseDuration": 5
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "PageRequirements": {
+                "ConflictingPages": [],
+                "IncompatiblePages": [],
+                "TitleReq": "Match"
+            },
+            "SourceTitle": "Rogue"
+        },
+        "PassiveData": {},
+        "_DefVersion": "1"
+    },
+    "Blinder_PageItem": {
+        "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemPassive.gd",
+        "#ObjDetails": {
+            "Description": "The secret to getting the most out of your @@#Tag:Pierce:Hint:Pierce Weapons@@ is to go for the eyes, assuming they have eyes.\n\n@@#Tag:Weapon:Hint:Weapon Attacks@@ that deal @@#Color:DmgColor:Pierce:Pierce Damage@@ have a @@#Color:Blue:20%@@ chance to inflict @@#EftDef:AilmentBlind@@ for @@#Color:Blue:5 Turns@@.",
+            "DisplayName": "Blinder",
+            "LargeIcon": "Sprites/Blinder_Icon.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/Blinder_Icon.png",
+            "SnippetDesc": "Pierce Damage may inflict Blindness",
+            "Tags": [
+                "Passive",
+                "WpnMod"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Page",
+                "Passive"
+            ]
+        },
+        "ItemData": {
+            "ItemType": "Page",
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "PageData": {
+            "WeaponMods": {
+                "DualLightBonus": {
+                    "Conditions": {},
+                    "DisplayName": "Blinder",
+                    "WeaponMods": {
+                        "DamageTypeMod": {
+                            "Conditions": {
+                                "TagFilters": [
+                                    {
+                                        "RequireAnyTags": [
+                                            "Pierce"
+                                        ]
+                                    }
+                                ],
+                                "TagFiltersReqAll": true
+                            },
+                            "ModProperty": "DmgEffectData",
+                            "ModType": "Set",
+                            "ModValue": {
+                                "ApplicationChance": 0.2,
+                                "EffectKey": "AilmentBlind",
+                                "EffectDataDef": {
+                                    "EffectDetails": {
+                                        "DurationData": {
+                                            "BaseDuration": 5
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "PageRequirements": {
+                "ConflictingPages": [],
+                "IncompatiblePages": [],
+                "TitleReq": "Match"
+            },
+            "SourceTitle": "Rogue"
+        },
+        "PassiveData": {},
+        "_DefVersion": "1"
+    },
+    "Stunner_PageItem": {
+        "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemPassive.gd",
+        "#ObjDetails": {
+            "Description": "The secret to getting the most out of your @@#Tag:Blunt:Hint:Blunt Weapons@@ is to hit them really, really hard. Like really hard.\n\n@@#Tag:Weapon:Hint:Weapon Attacks@@ that deal @@#Color:DmgColor:Blunt:Blunt Damage@@ have a @@#Color:Blue:10%@@ chance to inflict @@#EftDef:AilmentDazed@@ for @@#Color:Blue:1 Turn@@.",
+            "DisplayName": "Stunner",
+            "LargeIcon": "Sprites/Stunner_Icon.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/Stunner_Icon.png",
+            "SnippetDesc": "Blunt Damage may inflict Blindness",
+            "Tags": [
+                "Passive",
+                "WpnMod"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Page",
+                "Passive"
+            ]
+        },
+        "ItemData": {
+            "ItemType": "Page",
+            "Rarity": "Common",
+            "Value": 50
+        },
+        "PageData": {
+            "WeaponMods": {
+                "DualLightBonus": {
+                    "Conditions": {},
+                    "DisplayName": "Blinder",
+                    "WeaponMods": {
+                        "DamageTypeMod": {
+                            "Conditions": {
+                                "TagFilters": [
+                                    {
+                                        "RequireAnyTags": [
+                                            "Blunt"
+                                        ]
+                                    }
+                                ],
+                                "TagFiltersReqAll": true
+                            },
+                            "ModProperty": "DmgEffectData",
+                            "ModType": "Set",
+                            "ModValue": {
+                                "ApplicationChance": 0.1,
+                                "EffectKey": "AilmentDazed",
+                                "EffectDataDef": {
+                                    "EffectDetails": {
+                                        "DurationData": {
+                                            "BaseDuration": 5
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
             },
             "PageRequirements": {

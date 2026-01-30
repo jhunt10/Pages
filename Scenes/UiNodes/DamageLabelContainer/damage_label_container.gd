@@ -1,6 +1,6 @@
 @tool
 class_name DamageLabelContainer
-extends HBoxContainer
+extends BoxContainer
 
 enum DamageTypes {	
 	Test, RAW, Healing, Percent,
@@ -104,6 +104,12 @@ enum DamageTypes {
 @export var popup_container:BackPatchContainer
 @export var popup_message:RichTextLabel
 
+@export var effect_container:HBoxContainer
+@export var effect_change_label:Label
+@export var effect_name_label:Label
+@export var effect_duration_value_label:Label
+@export var effect_duration_type_label:Label
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	if popup_container:
@@ -125,17 +131,19 @@ func set_damage_data(damage_data:Dictionary, actor:BaseActor = null,  count = 1)
 		var attack_scale = damage_data.get("AtkPwrScale", 1)
 		atk_stat_icon.hide()
 		defense_stat_icon.hide()
+		defense_stat_label.hide()
 		atk_power_label.hide()
 		plus_minus_label.hide()
 		variant_label.hide()
 		percent_label.hide()
 		vs_lable.hide()
 		min_max_damage_container.hide()
-		damage_type_label.text = "Wpn"
+		damage_type_label.text = "Weapon Damage"
 		if attack_scale != 1:
 			damage_type_label.text += " X " + str(attack_scale)
 		multiplier_label.hide()
 		count_label.hide()
+		effect_container.hide()
 		return
 	
 	var attack_stat = damage_data.get("AtkStat", "Weapon")
@@ -221,3 +229,26 @@ func set_damage_data(damage_data:Dictionary, actor:BaseActor = null,  count = 1)
 		defense_stat_label.hide()
 		vs_lable.hide()
 	
+	if damage_data.keys().has("DmgEffectData"):
+		var effect_meta_data = damage_data['DmgEffectData']
+		var effect_key = effect_meta_data.get("EffectKey")
+		var effect_data = effect_meta_data.get("EffectData", {})
+		var effect_def = EffectLibrary.get_merged_effect_def(effect_key, effect_data)
+		
+		
+		effect_change_label.text = str(floori(effect_meta_data.get("ApplicationChance") * 100.0))
+		effect_name_label.text = effect_def.get("#ObjDetails", {}).get("DisplayName", "")
+		
+		var duration_data = effect_def.get("EffectData", {}).get("EffectDetails", {}).get("DurationData", {})
+		effect_duration_value_label.text = str(duration_data.get("BaseDuration", 0))
+		
+		var duration_type_str = duration_data.get("DurationTrigger", "")
+		if duration_type_str == "OnTurnEnd":
+			effect_duration_type_label.text = "Turns"
+		elif duration_type_str == "OnRoundEnd":
+			effect_duration_type_label.text = "Rounds"
+		else:
+			effect_duration_type_label.text = "???"
+		effect_container.show()
+	else:
+		effect_container.hide()

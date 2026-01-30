@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://ib08wcyrqims"]
+[gd_scene load_steps=54 format=3 uid="uid://cadueklilqejs"]
 
 [ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/character_menu_control.gd" id="1_b43ae"]
 [ext_resource type="Texture2D" uid="uid://mpwjrtfjnbth" path="res://Scenes/Menus/CharacterMenu/BookBackground.png" id="2_ny2th"]
@@ -17,12 +17,40 @@
 [ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MouseOverControl/character_menu_mouse_control.gd" id="12_yj8n3"]
 [ext_resource type="Texture2D" uid="uid://xcjbd3xju45w" path="res://Scenes/Menus/CharacterMenu/MouseOverControl/DragItemBackground.png" id="13_0dekw"]
 [ext_resource type="Shader" path="res://Scenes/Menus/CharacterMenu/character_menu.gdshader" id="19_5ikvh"]
+[ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/SkillTreeMenuPage/level_up_page_control.gd" id="20_dw0jf"]
 [ext_resource type="PackedScene" uid="uid://bivhm6cnkig2b" path="res://Scenes/Menus/CharacterMenu/MenuPages/StatsMenuPage/stats_menu_page.tscn" id="20_wjece"]
+[ext_resource type="Theme" uid="uid://cayt153s5ro4a" path="res://Scenes/Themes/standard_theme_red.tres" id="21_dpoq2"]
 [ext_resource type="PackedScene" uid="uid://dbtugo1kq2imi" path="res://Scenes/Menus/CharacterMenu/MenuPages/InventoryPage/inventory_menu_page.tscn" id="21_yal5w"]
+[ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/SkillTreeMenuPage/skill_tree_menu_page_control.gd" id="22_culn7"]
+[ext_resource type="Script" path="res://Scenes/Menus/LevelUpMenu/levelup_stat_input_container.gd" id="23_06psp"]
+[ext_resource type="Theme" uid="uid://bfce41la62bs6" path="res://Scenes/Themes/readable_theme.tres" id="23_wu165"]
+[ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/SkillTreeMenuPage/skill_tree_background_control.gd" id="24_m2tnw"]
+[ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/SkillTreeMenuPage/skill_tree_node.gd" id="24_nm3km"]
+[ext_resource type="Texture2D" uid="uid://6wag0sjdov42" path="res://Scenes/Menus/CharacterMenu/MenuPages/SkillTreeMenuPage/LevelUpStatButton.png" id="24_sivxw"]
+[ext_resource type="Texture2D" uid="uid://cegwhar55vupc" path="res://assets/Sprites/Paper/Common_Background.png" id="24_wc0vu"]
+[ext_resource type="Texture2D" uid="uid://d28r048mh6136" path="res://assets/Sprites/UnknownSprite.png" id="25_6r35q"]
+[ext_resource type="Texture2D" uid="uid://cr6nk5xvu14b6" path="res://Scenes/Menus/CharacterMenu/MenuPages/SkillTreeMenuPage/LevelUpStatButton_Pressed.png" id="25_dbag5"]
+[ext_resource type="Texture2D" uid="uid://r7e0y5yv45uc" path="res://Scenes/Menus/CharacterMenu/MenuPages/SkillTreeMenuPage/SkillNodeOutline.png" id="26_e6msw"]
+[ext_resource type="Texture2D" uid="uid://b10pvly4exem2" path="res://assets/Sprites/UI/SymbolIcons/_S_Symbole.png" id="26_p4ux6"]
+[ext_resource type="Texture2D" uid="uid://ucfwf1adg5vt" path="res://Scenes/Menus/CharacterMenu/MenuPages/SkillTreeMenuPage/LevelUpStatButton_Disabled.png" id="26_ss4i1"]
+[ext_resource type="PackedScene" uid="uid://bpvy87uagttpr" path="res://Scenes/UiNodes/ScollBar/scroll_bar.tscn" id="27_twb55"]
+[ext_resource type="Texture2D" uid="uid://vwiqj7k1flkn" path="res://assets/Sprites/UI/SymbolIcons/_A_Symbole.png" id="29_pcs3j"]
+[ext_resource type="Texture2D" uid="uid://ci3qbej0djsng" path="res://assets/Sprites/UI/SymbolIcons/_W_Symbole.png" id="30_uaf37"]
+[ext_resource type="Texture2D" uid="uid://doywp1shkpnmd" path="res://assets/Sprites/UI/SymbolIcons/_I_Symbole.png" id="31_5ge4g"]
+[ext_resource type="Texture2D" uid="uid://c53wxsv2xpwfr" path="res://Scenes/Menus/CharacterMenu/MenuPages/SkillTreeMenuPage/ConfirmButton.png" id="33_tfaao"]
+[ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/SkillTreeMenuPage/level_up_stat_container.gd" id="35_1360k"]
+[ext_resource type="Texture2D" uid="uid://cll1c22bgo2p6" path="res://assets/Sprites/UI/SymbolIcons/HealthSymbol.png" id="36_5awhv"]
+[ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/SkillTreeMenuPage/paired_skill_tree_node.gd" id="42_sl545"]
+[ext_resource type="Texture2D" uid="uid://yf4r4mr4xa2d" path="res://Scenes/Menus/CharacterMenu/MenuPages/SkillTreeMenuPage/OrSepIcon.png" id="42_yolti"]
 [ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/inv_filter_tabs_control.gd" id="43_ercvn"]
 [ext_resource type="Texture2D" uid="uid://7lffl3feh6kl" path="res://Scenes/Menus/CharacterMenu/TabBackground_Small.png" id="43_gi4es"]
 [ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/InventoryPage/sub_inventory_tab.gd" id="44_vhgyr"]
+[ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/confirmation_control.gd" id="47_rqcc5"]
+[ext_resource type="Script" path="res://Scenes/UiNodes/back_patch_container.gd" id="48_p3rjr"]
+[ext_resource type="Texture2D" uid="uid://cgrlfobidw8xl" path="res://assets/Sprites/UI/BackPatches/PaperPatch_Bigger_276x192_48.png" id="49_apoph"]
+[ext_resource type="Texture2D" uid="uid://3nlp1e8l55j5" path="res://Scenes/Menus/CharacterMenu/MenuPages/SkillTreeMenuPage/YesNoButton.png" id="50_7wqv4"]
 [ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/PlayerTabs/actor_selector_control.gd" id="50_wjl1b"]
+[ext_resource type="Texture2D" uid="uid://bwvte4g50bury" path="res://Scenes/Menus/CharacterMenu/MenuPages/SkillTreeMenuPage/YesNoButton_Pressed.png" id="51_rppsb"]
 
 [sub_resource type="GDScript" id="GDScript_la018"]
 script/source = "extends TextureRect
@@ -47,7 +75,7 @@ shader_parameter/x_end_factor = 0.5
 shader_parameter/y_end_factor = 0.759
 shader_parameter/reverse_dark = 0.75
 
-[node name="CharacterMenuControl" type="Control" node_paths=PackedStringArray("details_card_spawn_point", "equipment_page", "page_page", "supplies_page", "stats_page", "scale_control", "inventory_container", "actor_tabs_control", "close_button", "tab_equipment_button", "tab_pages_button", "tab_supplies_button", "tab_inventory_button", "tab_stats_button", "inventory_tab_rect", "stats_tab_rect", "mouse_control")]
+[node name="CharacterMenuControl" type="Control" node_paths=PackedStringArray("confirm_menu", "details_card_spawn_point", "equipment_page", "page_page", "supplies_page", "stats_page", "level_up_menu_page", "skill_tree_page", "scale_control", "inventory_container", "actor_tabs_control", "close_button", "tab_equipment_button", "tab_pages_button", "tab_supplies_button", "tab_inventory_button", "tab_stats_button", "inventory_tab_rect", "stats_tab_rect", "mouse_control")]
 custom_minimum_size = Vector2(600, 420)
 layout_mode = 3
 anchors_preset = 15
@@ -57,11 +85,14 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 script = ExtResource("1_b43ae")
+confirm_menu = NodePath("ConfirmationControl")
 details_card_spawn_point = NodePath("DetailsCardSpawnPoint")
 equipment_page = NodePath("ScaleControl/LeftPageControl/EquipmentPage")
 page_page = NodePath("ScaleControl/LeftPageControl/PagesPage")
 supplies_page = NodePath("ScaleControl/LeftPageControl/SuppliesPage")
 stats_page = NodePath("ScaleControl/RightPageControl/StatsPage")
+level_up_menu_page = NodePath("ScaleControl/LeftPageControl/LevelUpPage")
+skill_tree_page = NodePath("ScaleControl/RightPageControl/SkillTreePageControl")
 scale_control = NodePath("ScaleControl")
 inventory_container = NodePath("ScaleControl/RightPageControl/InventoryMenuPage")
 actor_tabs_control = NodePath("ScaleControl/ActorSelectorControl")
@@ -620,6 +651,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="EquipmentPage" parent="ScaleControl/LeftPageControl" instance=ExtResource("9_bofun")]
+visible = false
 material = SubResource("ShaderMaterial_i55nt")
 layout_mode = 1
 anchors_preset = 15
@@ -629,6 +661,978 @@ offset_right = 0.0
 offset_bottom = 0.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="LevelUpPage" type="Control" parent="ScaleControl/LeftPageControl" node_paths=PackedStringArray("skill_page", "current_level_label", "points_left_label", "points_total_label", "strength_controller", "agility_controller", "intelligence_controller", "wisdom_controller", "stats_container", "confirm_button", "confirm_menu")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("20_dw0jf")
+skill_page = NodePath("../../RightPageControl/SkillTreePageControl")
+current_level_label = NodePath("BoxContainer/TitleContainer/Label2")
+points_left_label = NodePath("BoxContainer/PointsContainer/PointsLeftLabel")
+points_total_label = NodePath("BoxContainer/PointsContainer/TotalPointsLabel")
+strength_controller = NodePath("BoxContainer/HBoxContainer/StrenghtInputContainer")
+agility_controller = NodePath("BoxContainer/HBoxContainer/AgltInputContainer")
+intelligence_controller = NodePath("BoxContainer/HBoxContainer/IntInputContainer")
+wisdom_controller = NodePath("BoxContainer/HBoxContainer/WisInputContainer")
+stats_container = NodePath("BoxContainer/StatsBoxContainer")
+confirm_button = NodePath("BoxContainer/TextureButton")
+confirm_menu = NodePath("../../../ConfirmationControl")
+
+[node name="BoxContainer" type="BoxContainer" parent="ScaleControl/LeftPageControl/LevelUpPage"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+vertical = true
+
+[node name="TitleContainer" type="HBoxContainer" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="VSeparator" type="VSeparator" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/TitleContainer"]
+visible = false
+modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/TitleContainer"]
+layout_mode = 2
+theme = ExtResource("21_dpoq2")
+theme_override_font_sizes/font_size = 32
+text = "Level  "
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/TitleContainer"]
+custom_minimum_size = Vector2(72, 0)
+layout_mode = 2
+theme = ExtResource("21_dpoq2")
+theme_override_font_sizes/font_size = 32
+text = "100"
+horizontal_alignment = 1
+
+[node name="VSeparator2" type="VSeparator" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/TitleContainer"]
+visible = false
+modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+
+[node name="PointsContainer" type="HBoxContainer" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/PointsContainer"]
+layout_mode = 2
+theme = ExtResource("23_wu165")
+theme_override_font_sizes/font_size = 24
+text = "Stat Points:"
+horizontal_alignment = 1
+
+[node name="PointsLeftLabel" type="Label" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/PointsContainer"]
+custom_minimum_size = Vector2(28, 0)
+layout_mode = 2
+theme = ExtResource("23_wu165")
+theme_override_font_sizes/font_size = 24
+text = "0"
+horizontal_alignment = 1
+
+[node name="SeperatorLabel" type="Label" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/PointsContainer"]
+layout_mode = 2
+theme = ExtResource("23_wu165")
+theme_override_font_sizes/font_size = 24
+text = "/"
+horizontal_alignment = 1
+
+[node name="TotalPointsLabel" type="Label" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/PointsContainer"]
+custom_minimum_size = Vector2(28, 0)
+layout_mode = 2
+theme = ExtResource("23_wu165")
+theme_override_font_sizes/font_size = 24
+text = "0"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer"]
+layout_mode = 2
+
+[node name="StrenghtInputContainer" type="HBoxContainer" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer" node_paths=PackedStringArray("minus_button", "plus_button", "value_lable")]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+script = ExtResource("23_06psp")
+minus_button = NodePath("VBoxContainer/MinusButtonControl/MinusButton")
+plus_button = NodePath("VBoxContainer/PlusButtonControl/PlusButton")
+value_lable = NodePath("VBoxContainer/NewValLabel")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/StrenghtInputContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="PlusButtonControl" type="Control" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/StrenghtInputContainer/VBoxContainer"]
+custom_minimum_size = Vector2(64, 32)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="PlusButton" type="TextureButton" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/StrenghtInputContainer/VBoxContainer/PlusButtonControl"]
+custom_minimum_size = Vector2(64, 32)
+layout_mode = 0
+offset_right = 64.0
+offset_bottom = 32.0
+texture_normal = ExtResource("24_sivxw")
+texture_pressed = ExtResource("25_dbag5")
+texture_disabled = ExtResource("26_ss4i1")
+stretch_mode = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/StrenghtInputContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/StrenghtInputContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("26_p4ux6")
+expand_mode = 3
+
+[node name="NameLabel" type="Label" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/StrenghtInputContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+theme = ExtResource("12_dy5pv")
+theme_override_colors/font_color = Color(0.498039, 0, 0, 1)
+theme_override_font_sizes/font_size = 24
+text = "tr:"
+vertical_alignment = 2
+
+[node name="NewValLabel" type="Label" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/StrenghtInputContainer/VBoxContainer"]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+size_flags_vertical = 1
+theme = ExtResource("12_dy5pv")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 24
+text = "100"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="ColorRect" type="ColorRect" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/StrenghtInputContainer/VBoxContainer/NewValLabel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -2.0
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0.470588, 0, 0, 1)
+
+[node name="MinusButtonControl" type="Control" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/StrenghtInputContainer/VBoxContainer"]
+custom_minimum_size = Vector2(64, 32)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="MinusButton" type="TextureButton" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/StrenghtInputContainer/VBoxContainer/MinusButtonControl"]
+custom_minimum_size = Vector2(64, 32)
+layout_mode = 2
+offset_right = 64.0
+offset_bottom = 32.0
+texture_normal = ExtResource("24_sivxw")
+texture_pressed = ExtResource("25_dbag5")
+texture_disabled = ExtResource("26_ss4i1")
+stretch_mode = 0
+flip_v = true
+
+[node name="VSeparator" type="VSeparator" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+
+[node name="AgltInputContainer" type="HBoxContainer" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer" node_paths=PackedStringArray("minus_button", "plus_button", "value_lable")]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+script = ExtResource("23_06psp")
+minus_button = NodePath("VBoxContainer/MinusButtonControl/MinusButton")
+plus_button = NodePath("VBoxContainer/PlusButtonControl/PlusButton")
+value_lable = NodePath("VBoxContainer/NewValLabel")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/AgltInputContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="PlusButtonControl" type="Control" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/AgltInputContainer/VBoxContainer"]
+custom_minimum_size = Vector2(64, 32)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="PlusButton" type="TextureButton" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/AgltInputContainer/VBoxContainer/PlusButtonControl"]
+custom_minimum_size = Vector2(64, 32)
+layout_mode = 0
+offset_right = 64.0
+offset_bottom = 32.0
+texture_normal = ExtResource("24_sivxw")
+texture_pressed = ExtResource("25_dbag5")
+texture_disabled = ExtResource("26_ss4i1")
+stretch_mode = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/AgltInputContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/AgltInputContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("29_pcs3j")
+expand_mode = 3
+
+[node name="NameLabel" type="Label" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/AgltInputContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+theme = ExtResource("12_dy5pv")
+theme_override_colors/font_color = Color(0.498039, 0, 0, 1)
+theme_override_font_sizes/font_size = 24
+text = "gl:"
+vertical_alignment = 2
+
+[node name="NewValLabel" type="Label" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/AgltInputContainer/VBoxContainer"]
+self_modulate = Color(0.498039, 0, 0, 1)
+custom_minimum_size = Vector2(56, 0)
+layout_mode = 2
+size_flags_vertical = 1
+theme = ExtResource("12_dy5pv")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 24
+text = "100"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="ColorRect" type="ColorRect" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/AgltInputContainer/VBoxContainer/NewValLabel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -2.0
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0.470588, 0, 0, 1)
+
+[node name="MinusButtonControl" type="Control" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/AgltInputContainer/VBoxContainer"]
+custom_minimum_size = Vector2(64, 32)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="MinusButton" type="TextureButton" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/AgltInputContainer/VBoxContainer/MinusButtonControl"]
+custom_minimum_size = Vector2(64, 32)
+layout_mode = 2
+offset_right = 64.0
+offset_bottom = 32.0
+texture_normal = ExtResource("24_sivxw")
+texture_pressed = ExtResource("25_dbag5")
+texture_disabled = ExtResource("26_ss4i1")
+stretch_mode = 0
+flip_v = true
+
+[node name="VSeparator2" type="VSeparator" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+
+[node name="WisInputContainer" type="HBoxContainer" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer" node_paths=PackedStringArray("minus_button", "plus_button", "value_lable")]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+script = ExtResource("23_06psp")
+minus_button = NodePath("VBoxContainer/MinusButtonControl/MinusButton")
+plus_button = NodePath("VBoxContainer/PlusButtonControl/PlusButton")
+value_lable = NodePath("VBoxContainer/NewValLabel")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/WisInputContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="PlusButtonControl" type="Control" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/WisInputContainer/VBoxContainer"]
+custom_minimum_size = Vector2(64, 32)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="PlusButton" type="TextureButton" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/WisInputContainer/VBoxContainer/PlusButtonControl"]
+custom_minimum_size = Vector2(64, 32)
+layout_mode = 0
+offset_right = 64.0
+offset_bottom = 32.0
+texture_normal = ExtResource("24_sivxw")
+texture_pressed = ExtResource("25_dbag5")
+texture_disabled = ExtResource("26_ss4i1")
+stretch_mode = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/WisInputContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/WisInputContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("30_uaf37")
+expand_mode = 3
+
+[node name="NameLabel" type="Label" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/WisInputContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+theme = ExtResource("12_dy5pv")
+theme_override_colors/font_color = Color(0.498039, 0, 0, 1)
+theme_override_font_sizes/font_size = 24
+text = "is:"
+vertical_alignment = 2
+
+[node name="NewValLabel" type="Label" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/WisInputContainer/VBoxContainer"]
+self_modulate = Color(0.498039, 0, 0, 1)
+custom_minimum_size = Vector2(56, 0)
+layout_mode = 2
+size_flags_vertical = 1
+theme = ExtResource("12_dy5pv")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 24
+text = "100"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="ColorRect" type="ColorRect" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/WisInputContainer/VBoxContainer/NewValLabel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -2.0
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0.470588, 0, 0, 1)
+
+[node name="MinusButtonControl" type="Control" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/WisInputContainer/VBoxContainer"]
+custom_minimum_size = Vector2(64, 32)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="MinusButton" type="TextureButton" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/WisInputContainer/VBoxContainer/MinusButtonControl"]
+custom_minimum_size = Vector2(64, 32)
+layout_mode = 2
+offset_right = 64.0
+offset_bottom = 32.0
+texture_normal = ExtResource("24_sivxw")
+texture_pressed = ExtResource("25_dbag5")
+texture_disabled = ExtResource("26_ss4i1")
+stretch_mode = 0
+flip_v = true
+
+[node name="VSeparator3" type="VSeparator" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+
+[node name="IntInputContainer" type="HBoxContainer" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer" node_paths=PackedStringArray("minus_button", "plus_button", "value_lable")]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+script = ExtResource("23_06psp")
+minus_button = NodePath("VBoxContainer/MinusButtonControl/MinusButton")
+plus_button = NodePath("VBoxContainer/PlusButtonControl/PlusButton")
+value_lable = NodePath("VBoxContainer/NewValLabel")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/IntInputContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="PlusButtonControl" type="Control" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/IntInputContainer/VBoxContainer"]
+custom_minimum_size = Vector2(64, 32)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="PlusButton" type="TextureButton" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/IntInputContainer/VBoxContainer/PlusButtonControl"]
+custom_minimum_size = Vector2(64, 32)
+layout_mode = 0
+offset_right = 64.0
+offset_bottom = 32.0
+texture_normal = ExtResource("24_sivxw")
+texture_pressed = ExtResource("25_dbag5")
+texture_disabled = ExtResource("26_ss4i1")
+stretch_mode = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/IntInputContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/IntInputContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("31_5ge4g")
+expand_mode = 3
+
+[node name="NameLabel" type="Label" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/IntInputContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+theme = ExtResource("12_dy5pv")
+theme_override_colors/font_color = Color(0.498039, 0, 0, 1)
+theme_override_font_sizes/font_size = 24
+text = "nt:"
+vertical_alignment = 2
+
+[node name="NewValLabel" type="Label" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/IntInputContainer/VBoxContainer"]
+self_modulate = Color(0.498039, 0, 0, 1)
+custom_minimum_size = Vector2(56, 0)
+layout_mode = 2
+size_flags_vertical = 1
+theme = ExtResource("12_dy5pv")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 24
+text = "100"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="ColorRect" type="ColorRect" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/IntInputContainer/VBoxContainer/NewValLabel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -2.0
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0.470588, 0, 0, 1)
+
+[node name="MinusButtonControl" type="Control" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/IntInputContainer/VBoxContainer"]
+custom_minimum_size = Vector2(64, 32)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="MinusButton" type="TextureButton" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/IntInputContainer/VBoxContainer/MinusButtonControl"]
+custom_minimum_size = Vector2(64, 32)
+layout_mode = 2
+offset_right = 64.0
+offset_bottom = 32.0
+texture_normal = ExtResource("24_sivxw")
+texture_pressed = ExtResource("25_dbag5")
+texture_disabled = ExtResource("26_ss4i1")
+stretch_mode = 0
+flip_v = true
+
+[node name="StatsBoxContainer" type="BoxContainer" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 1
+vertical = true
+
+[node name="Label2" type="Label" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer"]
+visible = false
+layout_mode = 2
+theme = ExtResource("23_wu165")
+theme_override_font_sizes/font_size = 24
+text = "Stats"
+horizontal_alignment = 1
+text_overrun_behavior = 3
+
+[node name="ColorRect4" type="ColorRect" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(2, 2)
+layout_mode = 2
+color = Color(0.498039, 0, 0, 1)
+
+[node name="StatsContainer1" type="HBoxContainer" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer"]
+layout_mode = 2
+
+[node name="HealthContainer" type="BoxContainer" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer1" node_paths=PackedStringArray("name_label", "icon", "value_label")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_constants/separation = 0
+alignment = 1
+script = ExtResource("35_1360k")
+stat_name = "HealthMax"
+name_label = NodePath("NameLabel")
+icon = NodePath("IconRect")
+value_label = NodePath("StatLabel")
+force_to_int = true
+
+[node name="NameLabel" type="Label" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer1/HealthContainer"]
+visible = false
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("12_dy5pv")
+text = "Crs: "
+horizontal_alignment = 1
+
+[node name="IconRect" type="TextureRect" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer1/HealthContainer"]
+layout_mode = 2
+texture = ExtResource("36_5awhv")
+
+[node name="StatLabel" type="Label" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer1/HealthContainer"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+theme = ExtResource("12_dy5pv")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "000"
+horizontal_alignment = 1
+
+[node name="ColorRect2" type="ColorRect" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer1"]
+custom_minimum_size = Vector2(2, 2)
+layout_mode = 2
+color = Color(0.498039, 0, 0, 1)
+
+[node name="SpeedContainer" type="BoxContainer" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer1" node_paths=PackedStringArray("name_label", "icon", "value_label")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_constants/separation = 0
+alignment = 1
+script = ExtResource("35_1360k")
+stat_name = "Speed"
+name_label = NodePath("NameLabel")
+icon = NodePath("IconRect")
+value_label = NodePath("StatLabel")
+force_to_int = true
+
+[node name="NameLabel" type="Label" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer1/SpeedContainer"]
+visible = false
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("12_dy5pv")
+text = "Crs: "
+horizontal_alignment = 1
+
+[node name="IconRect" type="TextureRect" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer1/SpeedContainer"]
+layout_mode = 2
+texture = ExtResource("36_5awhv")
+
+[node name="StatLabel" type="Label" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer1/SpeedContainer"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+theme = ExtResource("12_dy5pv")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "000"
+horizontal_alignment = 1
+
+[node name="ColorRect3" type="ColorRect" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer1"]
+custom_minimum_size = Vector2(2, 2)
+layout_mode = 2
+color = Color(0.498039, 0, 0, 1)
+
+[node name="MassContainer" type="BoxContainer" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer1" node_paths=PackedStringArray("name_label", "icon", "value_label")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_constants/separation = 0
+alignment = 1
+script = ExtResource("35_1360k")
+stat_name = "Mass"
+name_label = NodePath("NameLabel")
+icon = NodePath("IconRect")
+value_label = NodePath("StatLabel")
+force_to_int = true
+
+[node name="NameLabel" type="Label" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer1/MassContainer"]
+visible = false
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("12_dy5pv")
+text = "Crs: "
+horizontal_alignment = 1
+
+[node name="IconRect" type="TextureRect" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer1/MassContainer"]
+layout_mode = 2
+texture = ExtResource("36_5awhv")
+
+[node name="StatLabel" type="Label" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer1/MassContainer"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+theme = ExtResource("12_dy5pv")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "000"
+horizontal_alignment = 1
+
+[node name="ColorRect4" type="ColorRect" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer1"]
+custom_minimum_size = Vector2(2, 2)
+layout_mode = 2
+color = Color(0.498039, 0, 0, 1)
+
+[node name="PPRContainer" type="BoxContainer" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer1" node_paths=PackedStringArray("name_label", "icon", "value_label")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_constants/separation = 0
+alignment = 1
+script = ExtResource("35_1360k")
+stat_name = "PPR"
+name_label = NodePath("NameLabel")
+icon = NodePath("IconRect")
+value_label = NodePath("StatLabel")
+force_to_int = true
+
+[node name="NameLabel" type="Label" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer1/PPRContainer"]
+visible = false
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("12_dy5pv")
+text = "Crs: "
+horizontal_alignment = 1
+
+[node name="IconRect" type="TextureRect" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer1/PPRContainer"]
+layout_mode = 2
+texture = ExtResource("36_5awhv")
+
+[node name="StatLabel" type="Label" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer1/PPRContainer"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+theme = ExtResource("12_dy5pv")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "000"
+horizontal_alignment = 1
+
+[node name="ColorRect3" type="ColorRect" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer"]
+custom_minimum_size = Vector2(2, 2)
+layout_mode = 2
+color = Color(0.498039, 0, 0, 1)
+
+[node name="StatsContainer2" type="HBoxContainer" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer"]
+layout_mode = 2
+
+[node name="PhyAtkContainer" type="BoxContainer" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer2" node_paths=PackedStringArray("name_label", "icon", "value_label")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_constants/separation = 0
+alignment = 1
+script = ExtResource("35_1360k")
+stat_name = "PhyAttack"
+name_label = NodePath("NameLabel")
+icon = NodePath("IconRect")
+value_label = NodePath("StatLabel")
+force_to_int = true
+
+[node name="NameLabel" type="Label" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer2/PhyAtkContainer"]
+visible = false
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("12_dy5pv")
+text = "Crs: "
+horizontal_alignment = 1
+
+[node name="IconRect" type="TextureRect" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer2/PhyAtkContainer"]
+layout_mode = 2
+texture = ExtResource("36_5awhv")
+
+[node name="StatLabel" type="Label" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer2/PhyAtkContainer"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+theme = ExtResource("12_dy5pv")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "000"
+horizontal_alignment = 1
+
+[node name="ColorRect4" type="ColorRect" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer2"]
+custom_minimum_size = Vector2(2, 2)
+layout_mode = 2
+color = Color(0.498039, 0, 0, 1)
+
+[node name="ArmorContainer" type="BoxContainer" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer2" node_paths=PackedStringArray("name_label", "icon", "value_label")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_constants/separation = 0
+alignment = 1
+script = ExtResource("35_1360k")
+stat_name = "Armor"
+name_label = NodePath("NameLabel")
+icon = NodePath("IconRect")
+value_label = NodePath("StatLabel")
+force_to_int = true
+
+[node name="NameLabel" type="Label" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer2/ArmorContainer"]
+visible = false
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("12_dy5pv")
+text = "Crs: "
+horizontal_alignment = 1
+
+[node name="IconRect" type="TextureRect" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer2/ArmorContainer"]
+layout_mode = 2
+texture = ExtResource("36_5awhv")
+
+[node name="StatLabel" type="Label" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer2/ArmorContainer"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+theme = ExtResource("12_dy5pv")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "000"
+horizontal_alignment = 1
+
+[node name="ColorRect5" type="ColorRect" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer2"]
+custom_minimum_size = Vector2(2, 2)
+layout_mode = 2
+color = Color(0.498039, 0, 0, 1)
+
+[node name="MagAtkContainer" type="BoxContainer" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer2" node_paths=PackedStringArray("name_label", "icon", "value_label")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_constants/separation = 0
+alignment = 1
+script = ExtResource("35_1360k")
+stat_name = "MagAttack"
+name_label = NodePath("NameLabel")
+icon = NodePath("IconRect")
+value_label = NodePath("StatLabel")
+force_to_int = true
+
+[node name="NameLabel" type="Label" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer2/MagAtkContainer"]
+visible = false
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("12_dy5pv")
+text = "Crs: "
+horizontal_alignment = 1
+
+[node name="IconRect" type="TextureRect" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer2/MagAtkContainer"]
+layout_mode = 2
+texture = ExtResource("36_5awhv")
+
+[node name="StatLabel" type="Label" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer2/MagAtkContainer"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+theme = ExtResource("12_dy5pv")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "000"
+horizontal_alignment = 1
+
+[node name="ColorRect6" type="ColorRect" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer2"]
+custom_minimum_size = Vector2(2, 2)
+layout_mode = 2
+color = Color(0.498039, 0, 0, 1)
+
+[node name="MagAtkContainer2" type="BoxContainer" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer2" node_paths=PackedStringArray("name_label", "icon", "value_label")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_constants/separation = 0
+alignment = 1
+script = ExtResource("35_1360k")
+stat_name = "Ward"
+name_label = NodePath("NameLabel")
+icon = NodePath("IconRect")
+value_label = NodePath("StatLabel")
+force_to_int = true
+
+[node name="NameLabel" type="Label" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer2/MagAtkContainer2"]
+visible = false
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("12_dy5pv")
+text = "Crs: "
+horizontal_alignment = 1
+
+[node name="IconRect" type="TextureRect" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer2/MagAtkContainer2"]
+layout_mode = 2
+texture = ExtResource("36_5awhv")
+
+[node name="StatLabel" type="Label" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer2/MagAtkContainer2"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+theme = ExtResource("12_dy5pv")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "000"
+horizontal_alignment = 1
+
+[node name="ColorRect5" type="ColorRect" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer"]
+custom_minimum_size = Vector2(2, 2)
+layout_mode = 2
+color = Color(0.498039, 0, 0, 1)
+
+[node name="StatsContainer3" type="HBoxContainer" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer"]
+layout_mode = 2
+
+[node name="AccuracyContainer" type="BoxContainer" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer3" node_paths=PackedStringArray("name_label", "icon", "value_label")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_constants/separation = 0
+alignment = 1
+script = ExtResource("35_1360k")
+stat_name = "Accuracy"
+name_label = NodePath("NameLabel")
+icon = NodePath("IconRect")
+value_label = NodePath("StatLabel")
+force_to_int = true
+
+[node name="NameLabel" type="Label" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer3/AccuracyContainer"]
+visible = false
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("12_dy5pv")
+text = "Crs: "
+horizontal_alignment = 1
+
+[node name="IconRect" type="TextureRect" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer3/AccuracyContainer"]
+layout_mode = 2
+texture = ExtResource("36_5awhv")
+
+[node name="StatLabel" type="Label" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer3/AccuracyContainer"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+theme = ExtResource("12_dy5pv")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "000"
+horizontal_alignment = 1
+
+[node name="ColorRect4" type="ColorRect" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer3"]
+custom_minimum_size = Vector2(2, 2)
+layout_mode = 2
+color = Color(0.498039, 0, 0, 1)
+
+[node name="EvasionContainer" type="BoxContainer" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer3" node_paths=PackedStringArray("name_label", "icon", "value_label")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_constants/separation = 0
+alignment = 1
+script = ExtResource("35_1360k")
+stat_name = "Evasion"
+name_label = NodePath("NameLabel")
+icon = NodePath("IconRect")
+value_label = NodePath("StatLabel")
+force_to_int = true
+
+[node name="NameLabel" type="Label" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer3/EvasionContainer"]
+visible = false
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("12_dy5pv")
+text = "Crs: "
+horizontal_alignment = 1
+
+[node name="IconRect" type="TextureRect" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer3/EvasionContainer"]
+layout_mode = 2
+texture = ExtResource("36_5awhv")
+
+[node name="StatLabel" type="Label" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer3/EvasionContainer"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+theme = ExtResource("12_dy5pv")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "000"
+horizontal_alignment = 1
+
+[node name="ColorRect5" type="ColorRect" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer3"]
+custom_minimum_size = Vector2(2, 2)
+layout_mode = 2
+color = Color(0.498039, 0, 0, 1)
+
+[node name="PotencyContainer" type="BoxContainer" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer3" node_paths=PackedStringArray("name_label", "icon", "value_label")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_constants/separation = 0
+alignment = 1
+script = ExtResource("35_1360k")
+stat_name = "Potency"
+name_label = NodePath("NameLabel")
+icon = NodePath("IconRect")
+value_label = NodePath("StatLabel")
+force_to_int = true
+
+[node name="NameLabel" type="Label" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer3/PotencyContainer"]
+visible = false
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("12_dy5pv")
+text = "Crs: "
+horizontal_alignment = 1
+
+[node name="IconRect" type="TextureRect" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer3/PotencyContainer"]
+layout_mode = 2
+texture = ExtResource("36_5awhv")
+
+[node name="StatLabel" type="Label" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer3/PotencyContainer"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+theme = ExtResource("12_dy5pv")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "000"
+horizontal_alignment = 1
+
+[node name="ColorRect6" type="ColorRect" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer3"]
+custom_minimum_size = Vector2(2, 2)
+layout_mode = 2
+color = Color(0.498039, 0, 0, 1)
+
+[node name="ProtectionContainer" type="BoxContainer" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer3" node_paths=PackedStringArray("name_label", "icon", "value_label")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_constants/separation = 0
+alignment = 1
+script = ExtResource("35_1360k")
+stat_name = "Protection"
+name_label = NodePath("NameLabel")
+icon = NodePath("IconRect")
+value_label = NodePath("StatLabel")
+force_to_int = true
+
+[node name="NameLabel" type="Label" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer3/ProtectionContainer"]
+visible = false
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("12_dy5pv")
+text = "Crs: "
+horizontal_alignment = 1
+
+[node name="IconRect" type="TextureRect" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer3/ProtectionContainer"]
+layout_mode = 2
+texture = ExtResource("36_5awhv")
+
+[node name="StatLabel" type="Label" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer3/ProtectionContainer"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+theme = ExtResource("12_dy5pv")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "000"
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer"]
+visible = false
+layout_mode = 2
+text = "Confirm"
+
+[node name="TextureButton" type="TextureButton" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("33_tfaao")
+
+[node name="Label" type="Label" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/TextureButton"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("23_wu165")
+theme_override_colors/font_color = Color(0.439216, 0.305882, 0.266667, 1)
+theme_override_font_sizes/font_size = 28
+text = "Confirm"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Control" type="Control" parent="ScaleControl/LeftPageControl/LevelUpPage"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
 
 [node name="RightPageControl" type="Control" parent="ScaleControl"]
 layout_mode = 1
@@ -642,6 +1646,7 @@ offset_bottom = 400.0
 grow_horizontal = 0
 
 [node name="InventoryMenuPage" parent="ScaleControl/RightPageControl" instance=ExtResource("21_yal5w")]
+visible = false
 custom_minimum_size = Vector2(280, 384)
 layout_mode = 1
 anchors_preset = 15
@@ -655,6 +1660,463 @@ grow_vertical = 2
 [node name="StatsPage" parent="ScaleControl/RightPageControl" node_paths=PackedStringArray("parent_character_menu") instance=ExtResource("20_wjece")]
 visible = false
 parent_character_menu = NodePath("../../..")
+
+[node name="SkillTreePageControl" type="Control" parent="ScaleControl/RightPageControl" node_paths=PackedStringArray("character_menu", "scroll_bar", "background_control", "tree_container", "row_prefab", "grid_container", "skill_node_prefab", "paired_node_prefab", "unspent_points_label", "total_points_label")]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 292.0
+offset_bottom = 384.0
+script = ExtResource("22_culn7")
+character_menu = NodePath("../../..")
+scroll_bar = NodePath("VBoxContainer/HBoxContainer/ScrollBar")
+background_control = NodePath("VBoxContainer/HBoxContainer/SkillGridContainer/BackgroundControl")
+tree_container = NodePath("VBoxContainer/HBoxContainer/SkillGridContainer")
+row_prefab = NodePath("VBoxContainer/HBoxContainer/SkillGridContainer/Row")
+grid_container = NodePath("VBoxContainer/HBoxContainer/SkillGridContainer/GridContainer")
+skill_node_prefab = NodePath("VBoxContainer/HBoxContainer/SkillGridContainer/Row/SkillTreeNode")
+paired_node_prefab = NodePath("VBoxContainer/HBoxContainer/SkillGridContainer/Row/PairedSkillTreeNode")
+unspent_points_label = NodePath("VBoxContainer/PointsContainer/PointsLeftLabel")
+total_points_label = NodePath("VBoxContainer/PointsContainer/TotalPointsLabel")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScaleControl/RightPageControl/SkillTreePageControl"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = -8
+
+[node name="PointsContainer" type="HBoxContainer" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/PointsContainer"]
+layout_mode = 2
+theme = ExtResource("23_wu165")
+theme_override_font_sizes/font_size = 24
+text = "Title Points:"
+horizontal_alignment = 1
+
+[node name="PointsLeftLabel" type="Label" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/PointsContainer"]
+custom_minimum_size = Vector2(28, 0)
+layout_mode = 2
+theme = ExtResource("23_wu165")
+theme_override_font_sizes/font_size = 24
+text = "0"
+horizontal_alignment = 1
+
+[node name="SeperatorLabel" type="Label" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/PointsContainer"]
+layout_mode = 2
+theme = ExtResource("23_wu165")
+theme_override_font_sizes/font_size = 24
+text = "/"
+horizontal_alignment = 1
+
+[node name="TotalPointsLabel" type="Label" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/PointsContainer"]
+custom_minimum_size = Vector2(28, 0)
+layout_mode = 2
+theme = ExtResource("23_wu165")
+theme_override_font_sizes/font_size = 24
+text = "0"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="SkillGridContainer" type="BoxContainer" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(256, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 12
+vertical = true
+
+[node name="BackgroundControl" type="Control" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/HBoxContainer/SkillGridContainer" node_paths=PackedStringArray("parent_control")]
+layout_mode = 2
+script = ExtResource("24_m2tnw")
+parent_control = NodePath("../../../..")
+
+[node name="ColorRect" type="ColorRect" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/HBoxContainer/SkillGridContainer/BackgroundControl"]
+visible = false
+custom_minimum_size = Vector2(500, 500)
+layout_mode = 0
+offset_left = -100.0
+offset_top = -100.0
+offset_right = 400.0
+offset_bottom = 400.0
+color = Color(0.2484, 0.2484, 0.2484, 1)
+
+[node name="Row" type="HBoxContainer" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/HBoxContainer/SkillGridContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="SkillTreeNode" type="Control" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/HBoxContainer/SkillGridContainer/Row" node_paths=PackedStringArray("background_rect", "icon_rect", "button")]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("24_nm3km")
+background_rect = NodePath("Background")
+icon_rect = NodePath("Icon")
+button = NodePath("Button")
+
+[node name="Background" type="TextureRect" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/HBoxContainer/SkillGridContainer/Row/SkillTreeNode"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("24_wc0vu")
+expand_mode = 1
+
+[node name="Icon" type="TextureRect" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/HBoxContainer/SkillGridContainer/Row/SkillTreeNode"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("25_6r35q")
+expand_mode = 3
+
+[node name="Highlight" type="TextureRect" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/HBoxContainer/SkillGridContainer/Row/SkillTreeNode"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -4.0
+offset_top = -4.0
+offset_right = 4.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("26_e6msw")
+
+[node name="Outline" type="TextureRect" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/HBoxContainer/SkillGridContainer/Row/SkillTreeNode"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -4.0
+offset_top = -4.0
+offset_right = 4.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("26_e6msw")
+
+[node name="Button" type="Button" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/HBoxContainer/SkillGridContainer/Row/SkillTreeNode"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PairedSkillTreeNode" type="Control" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/HBoxContainer/SkillGridContainer/Row"]
+custom_minimum_size = Vector2(72, 48)
+layout_mode = 2
+script = ExtResource("42_sl545")
+
+[node name="SkillTreeNode1" type="Control" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/HBoxContainer/SkillGridContainer/Row/PairedSkillTreeNode" node_paths=PackedStringArray("background_rect", "icon_rect", "button")]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -50.0
+offset_right = -2.0
+offset_bottom = 48.0
+grow_horizontal = 2
+script = ExtResource("24_nm3km")
+background_rect = NodePath("Background")
+icon_rect = NodePath("Icon")
+button = NodePath("Button")
+
+[node name="Background" type="TextureRect" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/HBoxContainer/SkillGridContainer/Row/PairedSkillTreeNode/SkillTreeNode1"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("24_wc0vu")
+expand_mode = 1
+
+[node name="Icon" type="TextureRect" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/HBoxContainer/SkillGridContainer/Row/PairedSkillTreeNode/SkillTreeNode1"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("25_6r35q")
+expand_mode = 3
+
+[node name="Highlight" type="TextureRect" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/HBoxContainer/SkillGridContainer/Row/PairedSkillTreeNode/SkillTreeNode1"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -4.0
+offset_top = -4.0
+offset_right = 4.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("26_e6msw")
+
+[node name="Outline" type="TextureRect" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/HBoxContainer/SkillGridContainer/Row/PairedSkillTreeNode/SkillTreeNode1"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -4.0
+offset_top = -4.0
+offset_right = 4.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("26_e6msw")
+
+[node name="Button" type="Button" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/HBoxContainer/SkillGridContainer/Row/PairedSkillTreeNode/SkillTreeNode1"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SkillTreeNode2" type="Control" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/HBoxContainer/SkillGridContainer/Row/PairedSkillTreeNode" node_paths=PackedStringArray("background_rect", "icon_rect", "button")]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 2.0
+offset_right = 50.0
+offset_bottom = 48.0
+grow_horizontal = 0
+script = ExtResource("24_nm3km")
+background_rect = NodePath("Background")
+icon_rect = NodePath("Icon")
+button = NodePath("Button")
+
+[node name="Background" type="TextureRect" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/HBoxContainer/SkillGridContainer/Row/PairedSkillTreeNode/SkillTreeNode2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("24_wc0vu")
+expand_mode = 1
+
+[node name="Icon" type="TextureRect" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/HBoxContainer/SkillGridContainer/Row/PairedSkillTreeNode/SkillTreeNode2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("25_6r35q")
+expand_mode = 3
+
+[node name="Highlight" type="TextureRect" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/HBoxContainer/SkillGridContainer/Row/PairedSkillTreeNode/SkillTreeNode2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -4.0
+offset_top = -4.0
+offset_right = 4.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("26_e6msw")
+
+[node name="Outline" type="TextureRect" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/HBoxContainer/SkillGridContainer/Row/PairedSkillTreeNode/SkillTreeNode2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -4.0
+offset_top = -4.0
+offset_right = 4.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("26_e6msw")
+
+[node name="Button" type="Button" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/HBoxContainer/SkillGridContainer/Row/PairedSkillTreeNode/SkillTreeNode2"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="OrIcon" type="TextureRect" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/HBoxContainer/SkillGridContainer/Row/PairedSkillTreeNode"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -24.0
+offset_right = 12.0
+offset_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("42_yolti")
+
+[node name="HighlightPatch" type="NinePatchRect" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/HBoxContainer/SkillGridContainer/Row/PairedSkillTreeNode"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -4.0
+offset_top = -4.0
+offset_right = 4.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("26_e6msw")
+patch_margin_left = 5
+patch_margin_top = 5
+patch_margin_right = 5
+patch_margin_bottom = 5
+
+[node name="OutlinePatch" type="NinePatchRect" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/HBoxContainer/SkillGridContainer/Row/PairedSkillTreeNode"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -4.0
+offset_top = -4.0
+offset_right = 4.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("26_e6msw")
+patch_margin_left = 5
+patch_margin_top = 5
+patch_margin_right = 5
+patch_margin_bottom = 5
+
+[node name="GridContainer" type="GridContainer" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/HBoxContainer/SkillGridContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/h_separation = 12
+theme_override_constants/v_separation = 12
+columns = 3
+
+[node name="ColorRect" type="ColorRect" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/HBoxContainer/SkillGridContainer/GridContainer"]
+custom_minimum_size = Vector2(72, 0)
+layout_mode = 2
+
+[node name="ColorRect2" type="ColorRect" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/HBoxContainer/SkillGridContainer/GridContainer"]
+custom_minimum_size = Vector2(72, 0)
+layout_mode = 2
+
+[node name="ColorRect3" type="ColorRect" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/HBoxContainer/SkillGridContainer/GridContainer"]
+custom_minimum_size = Vector2(72, 0)
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/HBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
+
+[node name="Control" type="Control" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/HBoxContainer/ScrollContainer"]
+layout_mode = 2
+
+[node name="SkillTreeNode" type="Control" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/HBoxContainer/ScrollContainer/Control" node_paths=PackedStringArray("background_rect", "icon_rect", "button")]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 48.0
+offset_bottom = 48.0
+pivot_offset = Vector2(24, 24)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("24_nm3km")
+background_rect = NodePath("Background")
+icon_rect = NodePath("Icon")
+button = NodePath("Button")
+
+[node name="Background" type="TextureRect" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/HBoxContainer/ScrollContainer/Control/SkillTreeNode"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("24_wc0vu")
+expand_mode = 1
+
+[node name="Icon" type="TextureRect" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/HBoxContainer/ScrollContainer/Control/SkillTreeNode"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("25_6r35q")
+expand_mode = 3
+
+[node name="Highlight" type="TextureRect" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/HBoxContainer/ScrollContainer/Control/SkillTreeNode"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -4.0
+offset_top = -4.0
+offset_right = 4.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("26_e6msw")
+
+[node name="Outline" type="TextureRect" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/HBoxContainer/ScrollContainer/Control/SkillTreeNode"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -4.0
+offset_top = -4.0
+offset_right = 4.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("26_e6msw")
+
+[node name="Button" type="Button" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/HBoxContainer/ScrollContainer/Control/SkillTreeNode"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ScrollBar" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/HBoxContainer" node_paths=PackedStringArray("scroll_container") instance=ExtResource("27_twb55")]
+visible = false
+layout_mode = 2
+always_show = true
+scroll_container = NodePath("../ScrollContainer")
+debug_name = "SkillTree"
 
 [node name="MouseOverControl" type="Control" parent="ScaleControl" node_paths=PackedStringArray("drag_item_background", "drag_item_icon")]
 visible = false
@@ -699,3 +2161,115 @@ grow_horizontal = 0
 grow_vertical = 2
 scale = Vector2(1.25, 1.25)
 mouse_filter = 2
+
+[node name="ConfirmationControl" type="Control" parent="." node_paths=PackedStringArray("yes_button", "no_button")]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("47_rqcc5")
+yes_button = NodePath("CenterContainer/BackPatchContainer/BoxContainer/HBoxContainer/YesButton")
+no_button = NodePath("CenterContainer/BackPatchContainer/BoxContainer/HBoxContainer/NoButton")
+
+[node name="ColorRect" type="ColorRect" parent="ConfirmationControl"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.125911, 0.125911, 0.125911, 0.403922)
+
+[node name="CenterContainer" type="CenterContainer" parent="ConfirmationControl"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BackPatchContainer" type="Container" parent="ConfirmationControl/CenterContainer" node_paths=PackedStringArray("background", "inner_container")]
+custom_minimum_size = Vector2(223, 125)
+layout_mode = 2
+script = ExtResource("48_p3rjr")
+background = NodePath("NinePatchRect")
+inner_container = NodePath("BoxContainer")
+margin_override = 24
+
+[node name="NinePatchRect" type="NinePatchRect" parent="ConfirmationControl/CenterContainer/BackPatchContainer"]
+layout_mode = 2
+texture = ExtResource("49_apoph")
+patch_margin_left = 48
+patch_margin_top = 48
+patch_margin_right = 48
+patch_margin_bottom = 48
+
+[node name="BoxContainer" type="BoxContainer" parent="ConfirmationControl/CenterContainer/BackPatchContainer"]
+layout_mode = 2
+vertical = true
+
+[node name="Label" type="Label" parent="ConfirmationControl/CenterContainer/BackPatchContainer/BoxContainer"]
+layout_mode = 2
+theme = ExtResource("23_wu165")
+theme_override_font_sizes/font_size = 24
+text = "Save changes?"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ConfirmationControl/CenterContainer/BackPatchContainer/BoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="VSeparator" type="VSeparator" parent="ConfirmationControl/CenterContainer/BackPatchContainer/BoxContainer/HBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="NoButton" type="TextureButton" parent="ConfirmationControl/CenterContainer/BackPatchContainer/BoxContainer/HBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("50_7wqv4")
+texture_pressed = ExtResource("51_rppsb")
+
+[node name="Label" type="Label" parent="ConfirmationControl/CenterContainer/BackPatchContainer/BoxContainer/HBoxContainer/NoButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 3.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("23_wu165")
+theme_override_font_sizes/font_size = 24
+text = "No"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VSeparator2" type="VSeparator" parent="ConfirmationControl/CenterContainer/BackPatchContainer/BoxContainer/HBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="YesButton" type="TextureButton" parent="ConfirmationControl/CenterContainer/BackPatchContainer/BoxContainer/HBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("50_7wqv4")
+texture_pressed = ExtResource("51_rppsb")
+
+[node name="Label" type="Label" parent="ConfirmationControl/CenterContainer/BackPatchContainer/BoxContainer/HBoxContainer/YesButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 3.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("23_wu165")
+theme_override_font_sizes/font_size = 24
+text = "Yes"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VSeparator3" type="VSeparator" parent="ConfirmationControl/CenterContainer/BackPatchContainer/BoxContainer/HBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_horizontal = 3

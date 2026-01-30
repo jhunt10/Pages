@@ -1,0 +1,308 @@
+{
+    "Soldier": [
+        [
+            {
+                "PageItemId": "HeavyFootPage",
+                "AlwaysUnlocked": true
+            },
+            {
+                "PageItemId": "GuardAction",
+                "AlwaysUnlocked": true
+            },
+            {
+                "PageItemId": "ThrowJavelin",
+                "AlwaysUnlocked": true
+            }
+        ],
+        [
+            {
+                "PageItemId": "HeavyArmorTrainingPage"
+            },
+            {
+                "PageItemId": "ShieldTrainingPage"
+            },
+            {
+                "PageItemId": "TwoHandBonus_PageItem"
+            }
+        ],
+        [
+            {
+                "PairType": "Or",
+                "PageItemId1": "CrashGentlePage",
+                "PageItemId2": "CrashRoughPage"
+            },
+            {
+                "PageItemId": "ShieldBash",
+                "ParentId": "ShieldTrainingPage"
+            },
+            {
+                "PageItemId": "Charge"
+            }
+        ],
+        [
+            {
+                "PageItemId": "TauntEnemy"
+            },
+            {
+                "PageItemId": "WideGuardPage"
+            },
+            {
+                "PairType": "Or",
+                "PageItemId1": "UnStopablePage",
+                "PageItemId2": "UnMovablePage"
+            }
+        ],
+        [
+            {
+                "PageItemId": "TakeBruntPage"
+            },
+            {
+                "PageItemId": "FaceFoe"
+            },
+            {
+                "PageItemId": "Cleave"
+            }
+        ],
+        [
+            {
+                "PageItemId": "MassTauntEnemy"
+            },
+            {
+                "PageItemId": "BlockAoePage"
+            },
+            {
+                "PageItemId": "WildSwing"
+            }
+        ]
+    ],
+    "Rogue": [
+        [
+            {
+                "PageItemId": "ThrowKnifeAction",
+                "AlwaysUnlocked": true
+            },
+            {
+                "PageItemId": "BeQuickSelfBuff",
+                "AlwaysUnlocked": true
+            },
+            {
+                "PageItemId": "EvasivePage",
+                "AlwaysUnlocked": true
+            }
+        ],
+        [
+            {
+                "PageItemId": "Blinder_PageItem"
+            },
+            {
+                "PageItemId": "PhyBoostPage"
+            },
+            {
+                "PageItemId": "BeNimbleSelfBuff"
+            }
+        ],
+        [
+            {
+                "PageItemId": "PocketSandAction"
+            },
+            {
+                "PageItemId": "DodgeAction"
+            },
+            {
+                "PageItemId": "BackStab_PageItem"
+            }
+        ],
+        [
+            {
+                "PageItemId": "Bleeder_PageItem"
+            },
+            {
+                "PageItemId": "EvasionAoePage"
+            },
+            {
+                "PageItemId": "BeDeadlySelfBuff"
+            }
+        ],
+        [
+            {
+                "PageItemId": "ArmorBreakAction"
+            },
+            {
+                "PageItemId": "CoupDeGraceAttackAction"
+            },
+            {
+                "PageItemId": "DualHander_PageItem"
+            }
+        ],
+        [
+            {
+                "PageItemId": "Stunner_PageItem"
+            },
+            {
+                "PageItemId": "GetBehindAction"
+            },
+            {
+                "PageItemId": "JumpOverAction"
+            }
+        ]
+    ],
+    "Priest":[
+        [
+            {
+                "PageItemId": "LightMeleeSpell",
+                "AlwaysUnlocked": true
+            },
+            {
+                "PageItemId": "ApplyBlessing_Water",
+                "AlwaysUnlocked": true
+            },
+            {
+                "PageItemId": "RemoveAilmentSpell",
+                "AlwaysUnlocked": true,
+                "Hidden":
+                {
+                    "PageItemId": "BlessedLimit1Page",
+                    "AlwaysUnlocked": true
+                }
+            }
+        ],
+        [
+            {
+                "PageItemId": "HealSmallSpell"
+            },
+            {
+                "PageItemId": "ApplyBlessing_Air"
+            },
+            {
+                "PageItemId": "ApplyPreemtive"
+            }
+        ],
+        [
+            {
+                "PageItemId": "HealMediumSpell"
+            },
+            {
+                "PageItemId": "BlessedLimit2Page"
+            },
+            {
+                "PageItemId": "LightRangedSpell"
+            }
+        ],
+        [
+            {
+                "PairType": "Or",
+                "PageItemId1": "RemoveMorePage",
+                "PageItemId2": "RemoveSelectPage"
+            },
+            {
+                "PageItemId": "ApplyBlessing_Earth"
+            },
+            {
+                "PairType": "Or",
+                "PageItemId1": "HarmingLightPage",
+                "PageItemId2": "HealingLightPage"
+            }
+        ],
+        [
+            {
+                "PageItemId": "HealLargeSpell"
+            },
+            {
+                "PageItemId": "ApplyBlessing_Fire"
+            },
+            {
+                "PageItemId": "LightMissileSpell"
+            }
+        ],
+        [
+            {
+                "PageItemId": "ReviveSpell"
+            },
+            {
+                "PairType": "Or",
+                "PageItemId1": "BlessedLimit3Page",
+                "PageItemId2": "BlessedMassPage"
+            },
+            {
+                "PageItemId": "ApplyLightAuraAction"
+            }
+        ]
+    ],
+    "Mage":[
+        [
+            {
+                "PageItemId": "ColdMeleeSpell",
+                "AlwaysUnlocked": true
+            },
+            {
+                "PageItemId": "ShockMissileSpell",
+                "AlwaysUnlocked": true
+            },
+            {
+                "PageItemId": "MagBoostPage",
+                "AlwaysUnlocked": true
+            }
+        ],
+        [
+            {
+                "PageItemId": "WaterGunSpell"
+            },
+            {
+                "PageItemId": "DischargeSpell"
+            },
+            {
+                "PageItemId": "FireThrowSpell"
+            }
+        ],
+        [
+            {
+                "PairType": "Or",
+                "PageItemId1": "Dash",
+                "PageItemId2": "TurnAround"
+            },
+            {
+                "PageItemId": "ChainShockSpell"
+            },
+            {
+                "PageItemId": "FireZoneSpell"
+            }
+        ],
+        [
+            {
+                "PageItemId": "WaterBallSpell"
+            },
+            {
+                "PairType": "Or",
+                "PageItemId1": "ChainExtendPage",
+                "PageItemId2": "ChainSelectPage"
+            },
+            {
+                "PageItemId": "ThrowBombPage"
+            }
+        ],
+        [
+            {
+                "PageItemId": "WaterBeamSpell"
+            },
+            {
+                "PageItemId": "CallShockSpell"
+            },
+            {
+                "PairType": "Or",
+                "PageItemId1": "SafteyHazardPage",
+                "PageItemId2": "HazardSafetyPage"
+            }
+        ],
+        [
+            {
+                "PageItemId": "ColdMage_PassivePage"
+            },
+            {
+                "PageItemId": "ShockStormSpell"
+            },
+            {
+                "PageItemId": "FireBallSpell"
+            }
+        ]
+    ]
+}

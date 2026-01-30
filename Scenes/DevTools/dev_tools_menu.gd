@@ -39,6 +39,7 @@ func reload_stuff():
 	ItemLibrary.Instance.reload()
 	VfxLibrary.reload_vfxs()
 	TagsLibrary.reload_tags()
+	StoryState.load_skill_trees()
 	for actor:BaseActor in ActorLibrary.Instance._loaded_objects.values():
 		actor.stats.recache_stats(true)
 

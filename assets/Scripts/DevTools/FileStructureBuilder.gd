@@ -9,8 +9,8 @@ class_name FileStructureBuilder
 static func DoThing():
 	#print("\nSanity Check")
 	#update_def_files()
-	#get_common_props_in_files()
-	build_mermaid_def_chart()
+	get_common_props_in_files()
+	#build_mermaid_def_chart()
 	#create_class_def_files("Rogue")
 	#rename_test_files()
 
@@ -264,7 +264,7 @@ static func parse_def_file(file_path)->Dictionary:
 
 static func get_common_props_in_files():
 	var files = []
-	files.append_array(BaseLoadObjectLibrary._search_for_files("res://ObjectDefs/", "PageDefs.def"))
+	files.append_array(BaseLoadObjectLibrary._search_for_files("res://ObjectDefs/", ".def"))
 	var common_def = {}
 	var keys = []
 	for file:String in files:
@@ -286,7 +286,9 @@ static var known_keyed_dictionary_suffixes:Array:
 		]
 
 ## Return a nested Dictionary of Key to Property Type 
-static func _rec_dic_to_keys(dict:Dictionary):
+static func _rec_dic_to_keys(dict):
+	if not dict is Dictionary:
+		return {}
 	var out_dict = {} 
 	# Filter SubActions
 	if dict.keys().has("!SubActionScript"):

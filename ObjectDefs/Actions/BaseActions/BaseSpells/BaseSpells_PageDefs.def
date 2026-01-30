@@ -3,7 +3,7 @@
         "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
         "!ParentKey": "#BaseMeleeAttack",
         "#ObjDetails": {
-            "Description": "Make a @@#Color:Red:Melee Spell Attack@@ against an @@#TrgParm:TargetParam:TargetType@@ dealing @@#DmgData:MeleeDamage@@ on hit.\n@@#EftChances@@",
+            "Description": "Make a @@#Tag:Melee@@ @@#Tag:Spell:Hint:Spell Attack@@ against an @@#TrgParm:TargetParam:TargetType@@ dealing @@#DmgData:MeleeDamage@@ on hit.\n@@#EftChances@@",
             "DisplayName": "#Base Melee Spell",
             "LargeIcon": "Sprites/BaseTouch.png",
             "ObjectType": "Item",
@@ -77,7 +77,7 @@
         "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
         "!ParentKey": "#BaseMissileAttack",
         "#ObjDetails": {
-            "Description": "Launch a @@#Color:Magical Missile@@ at @@#TrgParm:TargetParam:TargetType@@ in range, dealing @@#DmgData:MissileDamage@@ to any @@#Color:Red:Actor@@ it hits.\n@@#EftChances@@",
+            "Description": "Make a @@#Tag:Ranged@@ @@#Tag:Spell:Hint:Spell Attack@@ by launching a @@#Tag:Missile:Hint:Magical Missile@@ at @@#TrgParm:TargetParam:TargetType@@ in range, dealing @@#DmgData:MissileDamage@@ to any @@#Color:Red:Actor@@ it hits.\n@@#EftChances@@",
             "DisplayName": "#Base Missile Spell",
             "LargeIcon": "Sprites/BaseMissile.png",
             "ObjectType": "Item",

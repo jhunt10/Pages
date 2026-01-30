@@ -180,17 +180,17 @@ static func handle_attack(
 		# Create Effects
 		# Skip effects if defender died
 		if not defender.is_dead:
-			for effect_data_key:String in attack_event.effect_datas.keys():
-				var effect_details:Dictionary = attack_event.effect_datas[effect_data_key]
+			for effect_data_key:String in sub_event.applied_effect_datas.keys():
+				var effect_meta_data:Dictionary = sub_event.get_effect_meta_data(effect_data_key)
 				var effect_result:Dictionary = sub_event.applied_effect_datas.get(effect_data_key, {})
-				var effect_key = effect_details.get("EffectKey")
+				var effect_key = effect_meta_data.get("EffectKey")
 				# If Immune, Pass to VFX cache
 				if effect_result.get("IsImmune", false):
 					vfx_data_cache[defender.Id]['WasImmuneToEffect'] = true
 				elif effect_result.get("WasApplied", false):
-					var effect_data = effect_details.get("EffectData", {})
-					effect_data['AppliedPotency'] = effect_result['AppliedPotency']
-					var effect = EffectHelper.create_effect(defender, attacker, effect_key, effect_data, game_state)
+					var effect_data_def = effect_meta_data.get("EffectDataDef", {})
+					effect_data_def['AppliedPotency'] = effect_result['AppliedPotency']
+					var effect = EffectHelper.create_effect(defender, attacker, effect_key, effect_data_def, game_state)
 					if effect:
 						effect_result['AppliedEffectId'] = effect.Id
 				else:
@@ -346,15 +346,31 @@ static func _roll_for_effects(attacker:BaseActor, defender:BaseActor, attack_eve
 	var defender_protection = sub_event.defender_protection
 	var net_protection = max(0, defender_protection + (100 - (attacker_potency * attack_potency_mod)))
 	
-	for attack_effect_key in attack_event.effect_datas.keys():
-		var attack_effect_data = attack_event.effect_datas[attack_effect_key]
-		var conditions = attack_effect_data.get("Conditions", {})
+	# Collect effect data from Attack Def and Damage Datas
+	var effects_to_roll_for = {}
+	# Effects from Attack
+	for attack_effect_key in attack_event.effect_datas.keys(): 
+		effects_to_roll_for[attack_effect_key] = attack_event.effect_datas[attack_effect_key]
+	# Effects from Damage
+	for damage_event:DamageEvent in sub_event.damage_events.values(): 
+		var damage_data:Dictionary = attack_event.damage_datas[damage_event.damage_data_key]
+		if damage_data.keys().has("DmgEffectData"):
+			var damage_effect_data = damage_data.get("DmgEffectData")
+			if damage_event.final_damage > 0:
+				effects_to_roll_for[damage_event.damage_data_key+":DmgEft"] = damage_effect_data
+			
+		
+	
+	for effect_data_key in effects_to_roll_for.keys():
+		var effect_meta_data = effects_to_roll_for[effect_data_key]
+		var effect_key = effect_meta_data.get("EffectKey")
+		var conditions = effect_meta_data.get("Conditions", {})
 		
 		# Attack was blocked
-		if sub_event.is_blocked and not attack_effect_data.get("ApplyOnBlock"):
+		if sub_event.is_blocked and not effect_meta_data.get("ApplyOnBlock"):
 			continue
 		# Attack was evaded
-		if sub_event.is_evade and not attack_effect_data.get("ApplyOnEvade"):
+		if sub_event.is_evade and not effect_meta_data.get("ApplyOnEvade"):
 			continue
 			
 		# Check if defender is enemy / ally
@@ -367,24 +383,25 @@ static func _roll_for_effects(attacker:BaseActor, defender:BaseActor, attack_eve
 		for source_tag_filter in source_tag_filters:
 			if not SourceTagChain.filters_accept_tags(source_tag_filter, attack_event.source_tag_chain.get_all_tags()):
 				continue
-		# Roll for application chance
-		var chance_to_apply = attack_effect_data.get("ApplicationChance", 1)
+		# Roll for chance to try to apply
+		var chance_to_apply = effect_meta_data.get("ApplicationChance", 1)
 		if not Roll.for_actor(attacker, chance_to_apply):
 			continue
-			
-		var application_chance = (1-float(net_protection)/100.0) * chance_to_apply
+		
+		# Roll for applying
+		var application_chance = (1-float(net_protection)/100.0)
 		var roll = Roll.get_roll_for_actor(attacker, application_chance)
 		
 		# Check Immunity (Don't skip, because we still want to show "Immune" message)
 		var effect_immunities = defender.get_effect_immunity()
 		
-		sub_event.applied_effect_datas[attack_effect_key] = {
+		sub_event.applied_effect_datas[effect_data_key] = {
 			'WasApplied': roll <= application_chance,
 			'ApplicationRoll': roll,
 			'ApplicationChance': application_chance,
 			'NetProtection': net_protection,
 			'AppliedPotency': attacker_potency * attack_potency_mod,
-			'IsImmune': effect_immunities.has(attack_effect_key)
+			'IsImmune': effect_immunities.has(effect_key)
 		}
 
 ## Returns true if Attacker, Defenders, and SourceTagChain meet all requirements of Conditions

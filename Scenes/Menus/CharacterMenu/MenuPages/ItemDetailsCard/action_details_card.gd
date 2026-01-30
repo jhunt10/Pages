@@ -46,15 +46,21 @@ func set_action(actor:BaseActor, page_item:BasePageItem):
 		cost_container.hide()
 	
 	if action.has_preview_damage():
-		
+		var damage_datas = {}
 		if actor and actor.pages.has_action(action.ActionKey):
-			var damage_datas = action.get_preview_damage_datas(actor)
+			damage_datas = action.get_preview_damage_datas(actor)
+		else:
+			damage_datas = action.get_preview_damage_datas()
+		if damage_datas.size() == 0:
+			damage_label.hide()
+		else:
+				
 			var dam_label = damage_label
 			var merged_counts = {}
 			for dam_data in damage_datas.values():
 				var hash = hash(dam_data)
 				if not merged_counts.has(hash):
-					merged_counts[hash] = {"Value": dam_data, "Count": 1}
+					merged_counts[hash] = {"Value": dam_data, "Count": dam_data.get("PreviewCount", 1)}
 				else:
 					merged_counts[hash]['Count'] += 1
 			for merged_data in merged_counts.values():
@@ -63,18 +69,6 @@ func set_action(actor:BaseActor, page_item:BasePageItem):
 					damage_container.add_child(dam_label)
 				dam_label.set_damage_data(merged_data['Value'], actor, merged_data['Count'])
 				dam_label = null
-		else:
-			var damage_datas = action.get_preview_damage_datas()
-			if damage_datas.size() == 0:
-				damage_label.hide()
-			else:
-				var dam_label = damage_label
-				for dam_data in damage_datas.values():
-					if dam_label == null:
-						dam_label = damage_label.duplicate()
-						damage_container.add_child(dam_label)
-					dam_label.set_damage_data(dam_data)
-					dam_label = null
 	else:
 		damage_label.hide()
 	

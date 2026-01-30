@@ -10,37 +10,49 @@
 [ext_resource type="Texture2D" uid="uid://io35wpu802fp" path="res://assets/Sprites/UI/BackPatches/Patch_64_12.png" id="6_be6gi"]
 [ext_resource type="Texture2D" uid="uid://dq2cad8orar4p" path="res://assets/Sprites/UI/SymbolIcons/ArmorSymbol.png" id="9_6dh7h"]
 
-[node name="DamageContainer" type="HBoxContainer" node_paths=PackedStringArray("atk_power_and_scale_container", "atk_power_label", "plus_minus_label", "percent_label", "variant_label", "min_max_damage_container", "min_damage_label", "avg_damage_label", "max_damage_label", "damage_type_label", "multiplier_label", "count_label", "atk_stat_icon", "vs_lable", "defense_stat_icon", "defense_stat_label", "popup_container", "popup_message")]
+[node name="DamageContainer" type="BoxContainer" node_paths=PackedStringArray("atk_power_and_scale_container", "atk_power_label", "plus_minus_label", "percent_label", "variant_label", "min_max_damage_container", "min_damage_label", "avg_damage_label", "max_damage_label", "damage_type_label", "multiplier_label", "count_label", "atk_stat_icon", "vs_lable", "defense_stat_icon", "defense_stat_label", "popup_container", "popup_message", "effect_container", "effect_change_label", "effect_name_label", "effect_duration_value_label", "effect_duration_type_label")]
+offset_right = 218.0
+offset_bottom = 20.0
 theme_override_constants/separation = 0
+vertical = true
 script = ExtResource("1_rhguf")
 attack_power = 100
 attack_variant = 30.0
-atk_power_and_scale_container = NodePath("AtkPwrAndScaleContainer")
-atk_power_label = NodePath("AtkPwrAndScaleContainer/AtkPowerLabel")
-plus_minus_label = NodePath("AtkPwrAndScaleContainer/PlusMinusLabel")
-percent_label = NodePath("AtkPwrAndScaleContainer/PercentLabel")
-variant_label = NodePath("AtkPwrAndScaleContainer/VariantLabel")
-min_max_damage_container = NodePath("MinMaxContainer")
-min_damage_label = NodePath("MinMaxContainer/MinDamageLabel")
-avg_damage_label = NodePath("MinMaxContainer/AvgDamageLabel")
-max_damage_label = NodePath("MinMaxContainer/MaxDamageLabel")
-damage_type_label = NodePath("DamageTypeLabel")
-multiplier_label = NodePath("MultiplierLabel")
-count_label = NodePath("CountLabel")
-atk_stat_icon = NodePath("AtkStatIcon")
-vs_lable = NodePath("HBoxContainer/VsLabel")
-defense_stat_icon = NodePath("HBoxContainer/DefenseStatIcon")
-defense_stat_label = NodePath("HBoxContainer/DefenseStatLabel")
+atk_power_and_scale_container = NodePath("MainContainer/AtkPwrAndScaleContainer")
+atk_power_label = NodePath("MainContainer/AtkPwrAndScaleContainer/AtkPowerLabel")
+plus_minus_label = NodePath("MainContainer/AtkPwrAndScaleContainer/PlusMinusLabel")
+percent_label = NodePath("MainContainer/AtkPwrAndScaleContainer/PercentLabel")
+variant_label = NodePath("MainContainer/AtkPwrAndScaleContainer/VariantLabel")
+min_max_damage_container = NodePath("MainContainer/MinMaxContainer")
+min_damage_label = NodePath("MainContainer/MinMaxContainer/MinDamageLabel")
+avg_damage_label = NodePath("MainContainer/MinMaxContainer/AvgDamageLabel")
+max_damage_label = NodePath("MainContainer/MinMaxContainer/MaxDamageLabel")
+damage_type_label = NodePath("MainContainer/DamageTypeLabel")
+multiplier_label = NodePath("MainContainer/MultiplierLabel")
+count_label = NodePath("MainContainer/CountLabel")
+atk_stat_icon = NodePath("MainContainer/AtkStatIcon")
+vs_lable = NodePath("MainContainer/VsDefenseContainer/VsLabel")
+defense_stat_icon = NodePath("MainContainer/VsDefenseContainer/DefenseStatIcon")
+defense_stat_label = NodePath("MainContainer/VsDefenseContainer/DefenseStatLabel")
 abb_damage_icon = ExtResource("2_mm46y")
 phy_damage_icon = ExtResource("2_3erjx")
 mag_damage_icon = ExtResource("3_00rac")
-popup_container = NodePath("Control/PopupContainer")
-popup_message = NodePath("Control/PopupContainer/BoxContainer/RichTextLabel")
+popup_container = NodePath("MainContainer/Control/PopupContainer")
+popup_message = NodePath("MainContainer/Control/PopupContainer/BoxContainer/RichTextLabel")
+effect_container = NodePath("EffectChanceContainer")
+effect_change_label = NodePath("EffectChanceContainer/ApplyChanceLabel")
+effect_name_label = NodePath("EffectChanceContainer/EffectNameLabel")
+effect_duration_value_label = NodePath("EffectChanceContainer/DurationValueLabel")
+effect_duration_type_label = NodePath("EffectChanceContainer/DurationTypeLabel")
 
-[node name="Control" type="Control" parent="."]
+[node name="MainContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 1
+
+[node name="Control" type="Control" parent="MainContainer"]
 layout_mode = 2
 
-[node name="PopupContainer" type="Container" parent="Control" node_paths=PackedStringArray("background", "inner_container")]
+[node name="PopupContainer" type="Container" parent="MainContainer/Control" node_paths=PackedStringArray("background", "inner_container")]
 visible = false
 custom_minimum_size = Vector2(133, 29)
 layout_mode = 0
@@ -52,7 +64,7 @@ background = NodePath("NinePatchRect")
 inner_container = NodePath("BoxContainer")
 margin_override = 6
 
-[node name="NinePatchRect" type="NinePatchRect" parent="Control/PopupContainer"]
+[node name="NinePatchRect" type="NinePatchRect" parent="MainContainer/Control/PopupContainer"]
 layout_mode = 2
 texture = ExtResource("6_be6gi")
 region_rect = Rect2(1, 1, 64, 64)
@@ -61,10 +73,10 @@ patch_margin_top = 12
 patch_margin_right = 12
 patch_margin_bottom = 12
 
-[node name="BoxContainer" type="BoxContainer" parent="Control/PopupContainer"]
+[node name="BoxContainer" type="BoxContainer" parent="MainContainer/Control/PopupContainer"]
 layout_mode = 2
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Control/PopupContainer/BoxContainer"]
+[node name="RichTextLabel" type="RichTextLabel" parent="MainContainer/Control/PopupContainer/BoxContainer"]
 layout_mode = 2
 theme = ExtResource("5_korun")
 theme_override_colors/default_color = Color(0, 0, 0, 1)
@@ -73,27 +85,27 @@ text = "Physical Attack"
 fit_content = true
 autowrap_mode = 0
 
-[node name="CountLabel" type="Label" parent="."]
+[node name="CountLabel" type="Label" parent="MainContainer"]
 layout_mode = 2
 theme = ExtResource("4_xveyi")
 text = "3"
 
-[node name="AtkStatIcon" type="TextureRect" parent="."]
+[node name="AtkStatIcon" type="TextureRect" parent="MainContainer"]
 layout_mode = 2
 texture = ExtResource("2_mm46y")
 expand_mode = 3
 
-[node name="AtkPwrAndScaleContainer" type="HBoxContainer" parent="."]
+[node name="AtkPwrAndScaleContainer" type="HBoxContainer" parent="MainContainer"]
 visible = false
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="AtkPowerLabel" type="Label" parent="AtkPwrAndScaleContainer"]
+[node name="AtkPowerLabel" type="Label" parent="MainContainer/AtkPwrAndScaleContainer"]
 layout_mode = 2
 theme = ExtResource("4_xveyi")
 text = "100"
 
-[node name="PlusMinusLabel" type="Label" parent="AtkPwrAndScaleContainer"]
+[node name="PlusMinusLabel" type="Label" parent="MainContainer/AtkPwrAndScaleContainer"]
 layout_mode = 2
 size_flags_vertical = 8
 theme = ExtResource("5_korun")
@@ -101,35 +113,35 @@ theme_override_font_sizes/font_size = 17
 text = "@"
 vertical_alignment = 1
 
-[node name="VariantLabel" type="Label" parent="AtkPwrAndScaleContainer"]
+[node name="VariantLabel" type="Label" parent="MainContainer/AtkPwrAndScaleContainer"]
 layout_mode = 2
 theme = ExtResource("4_xveyi")
 text = "30"
 
-[node name="PercentLabel" type="Label" parent="AtkPwrAndScaleContainer"]
+[node name="PercentLabel" type="Label" parent="MainContainer/AtkPwrAndScaleContainer"]
 layout_mode = 2
 theme = ExtResource("4_xveyi")
 text = "%"
 
-[node name="MinMaxContainer" type="HBoxContainer" parent="."]
+[node name="MinMaxContainer" type="HBoxContainer" parent="MainContainer"]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="Seperator" type="Label" parent="MinMaxContainer"]
+[node name="Seperator" type="Label" parent="MainContainer/MinMaxContainer"]
 layout_mode = 2
 theme = ExtResource("4_xveyi")
 theme_override_colors/font_color = Color(0.239216, 0.239216, 0.239216, 1)
 theme_override_font_sizes/font_size = 14
 text = "("
 
-[node name="MinDamageLabel" type="Label" parent="MinMaxContainer"]
+[node name="MinDamageLabel" type="Label" parent="MainContainer/MinMaxContainer"]
 layout_mode = 2
 theme = ExtResource("4_xveyi")
 theme_override_colors/font_color = Color(0.239216, 0.239216, 0.239216, 1)
 theme_override_font_sizes/font_size = 14
 text = "18"
 
-[node name="Seperator2" type="Label" parent="MinMaxContainer"]
+[node name="Seperator2" type="Label" parent="MainContainer/MinMaxContainer"]
 layout_mode = 2
 theme = ExtResource("4_xveyi")
 theme_override_colors/font_color = Color(0.239216, 0.239216, 0.239216, 1)
@@ -137,54 +149,94 @@ theme_override_font_sizes/font_size = 8
 text = "-"
 vertical_alignment = 1
 
-[node name="MaxDamageLabel" type="Label" parent="MinMaxContainer"]
+[node name="MaxDamageLabel" type="Label" parent="MainContainer/MinMaxContainer"]
 layout_mode = 2
 theme = ExtResource("4_xveyi")
 theme_override_colors/font_color = Color(0.239216, 0.239216, 0.239216, 1)
 theme_override_font_sizes/font_size = 14
 text = "22"
 
-[node name="Seperator3" type="Label" parent="MinMaxContainer"]
+[node name="Seperator3" type="Label" parent="MainContainer/MinMaxContainer"]
 layout_mode = 2
 theme = ExtResource("4_xveyi")
 theme_override_colors/font_color = Color(0.239216, 0.239216, 0.239216, 1)
 theme_override_font_sizes/font_size = 14
 text = ") "
 
-[node name="AvgDamageLabel" type="Label" parent="MinMaxContainer"]
+[node name="AvgDamageLabel" type="Label" parent="MainContainer/MinMaxContainer"]
 layout_mode = 2
 theme = ExtResource("4_xveyi")
 text = "20"
 
-[node name="DamageTypeLabel" type="Label" parent="."]
+[node name="DamageTypeLabel" type="Label" parent="MainContainer"]
 layout_mode = 2
 theme = ExtResource("4_xveyi")
 text = "Test"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="VsDefenseContainer" type="HBoxContainer" parent="MainContainer"]
 layout_mode = 2
 theme_override_constants/separation = -2
 
-[node name="VsLabel" type="Label" parent="HBoxContainer"]
+[node name="VsLabel" type="Label" parent="MainContainer/VsDefenseContainer"]
 layout_mode = 2
 theme = ExtResource("4_xveyi")
 theme_override_colors/font_color = Color(0.237539, 0.237539, 0.237539, 1)
 text = " vs "
 
-[node name="DefenseStatIcon" type="TextureRect" parent="HBoxContainer"]
+[node name="DefenseStatIcon" type="TextureRect" parent="MainContainer/VsDefenseContainer"]
 layout_mode = 2
 texture = ExtResource("9_6dh7h")
 expand_mode = 3
 
-[node name="DefenseStatLabel" type="Label" parent="HBoxContainer"]
+[node name="DefenseStatLabel" type="Label" parent="MainContainer/VsDefenseContainer"]
 layout_mode = 2
 theme = ExtResource("4_xveyi")
 theme_override_colors/font_color = Color(0.237539, 0.237539, 0.237539, 1)
 text = " ARM"
 
-[node name="MultiplierLabel" type="Label" parent="."]
+[node name="MultiplierLabel" type="Label" parent="MainContainer"]
 visible = false
 layout_mode = 2
 theme = ExtResource("4_xveyi")
 theme_override_colors/font_color = Color(0.470588, 0, 0, 1)
 text = "x"
+
+[node name="EffectChanceContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="ApplyChanceLabel" type="Label" parent="EffectChanceContainer"]
+layout_mode = 2
+theme = ExtResource("4_xveyi")
+text = "20"
+
+[node name="ApplyChanceSep" type="Label" parent="EffectChanceContainer"]
+layout_mode = 2
+theme = ExtResource("4_xveyi")
+text = "% "
+
+[node name="EffectNameLabel" type="Label" parent="EffectChanceContainer"]
+layout_mode = 2
+theme = ExtResource("4_xveyi")
+text = "Effect"
+
+[node name="EffectNameSep" type="Label" parent="EffectChanceContainer"]
+layout_mode = 2
+theme = ExtResource("4_xveyi")
+text = " for "
+
+[node name="DurationValueLabel" type="Label" parent="EffectChanceContainer"]
+layout_mode = 2
+theme = ExtResource("4_xveyi")
+text = "X"
+
+[node name="DurationSep" type="Label" parent="EffectChanceContainer"]
+layout_mode = 2
+theme = ExtResource("4_xveyi")
+text = " "
+
+[node name="DurationTypeLabel" type="Label" parent="EffectChanceContainer"]
+layout_mode = 2
+theme = ExtResource("4_xveyi")
+text = "Turns"

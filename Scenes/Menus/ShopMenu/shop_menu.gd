@@ -58,9 +58,9 @@ func load_items_to_buy():
 		if not _item_ids_by_catagories.has(cat):
 			_item_ids_by_catagories[cat] = []
 		for item_key in shop_data.get(cat):
-			if _item_ids_by_catagories[cat].has(item_key + "_SHOP"):
+			if _item_ids_by_catagories[cat].has("SHOP:"+item_key):
 				continue
-			var new_item = ItemLibrary.get_or_create_item(item_key + "_SHOP", item_key,  {})
+			var new_item = ItemLibrary.get_or_create_item("SHOP:"+item_key, item_key,  {})
 			if not new_item:
 				printerr("Shop.load_items: Failed to find item: %s" % [item_key])
 				continue
@@ -141,7 +141,10 @@ func create_details_card(item:BaseItem):
 	_current_details_card.hide_done.connect(on_details_card_freed)
 	_current_details_card.shop_mode = true
 	_current_details_card.is_selling = _state == States.Sell
-	_current_details_card.set_item(null, item)
+	var confirm_text = "Buy"
+	if _state == States.Sell:
+		confirm_text = "Sell"
+	_current_details_card.set_detail_card_item(null, item, confirm_text)
 	_current_details_card.start_show()
 	_current_details_card.buy_controller.buy_button_pressed.connect(_show_confirm_popup)
 

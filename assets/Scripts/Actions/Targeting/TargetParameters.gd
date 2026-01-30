@@ -74,6 +74,8 @@ func _init(target_param_key_val:String, args:Dictionary) -> void:
 	
 	if args.has('EffectArea'):
 		effect_area = AreaMatrix.new(args['EffectArea'])
+	elif target_type == TargetTypes.FullArea:
+		effect_area = target_area
 	else:
 		effect_area = null
 	

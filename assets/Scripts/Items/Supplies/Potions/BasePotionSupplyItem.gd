@@ -18,7 +18,7 @@ func use_in_combat(_actor:BaseActor, target, game_state:GameStateData):
 		for effect_data_key in effect_datas.keys():
 			var effect_metadata = effect_datas[effect_data_key]
 			var effect_key = effect_metadata.get("EffectKey", "")
-			var effect_data = effect_metadata.get("EffectData", {})
+			var effect_data = effect_metadata.get("EffectDataDef", {})
 			EffectHelper.create_effect(target_actor, self, effect_key, effect_data, game_state)
 	
 	pass

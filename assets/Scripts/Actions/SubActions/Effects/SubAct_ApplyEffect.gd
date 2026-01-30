@@ -30,7 +30,7 @@ func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, que_exe_d
 		effect_key = subaction_data.get('EffectKey')
 	#TODO: Resist chance
 	if subaction_data.has('EffectData'):
-		effect_data = subaction_data['EffectData']
+		effect_data = subaction_data['EffectDataDef']
 	for target:BaseActor in targets:
 		EffectHelper.create_effect(target, actor, effect_key, effect_data, game_state)
 	return BaseSubAction.Success

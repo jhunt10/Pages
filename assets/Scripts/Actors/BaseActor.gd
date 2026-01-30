@@ -314,10 +314,12 @@ func build_spawned_with_items():
 	
 
 func _build_spawn_items(item_list:Array, holder:BaseItemHolder):
-	for item_key in item_list:
+	for item_key:String in item_list:
+		var force_item_id = ''
 		if item_key == '':
 			continue
-		var item = ItemLibrary.create_item(item_key, {}, "")
+			
+		var item = ItemLibrary.create_item(item_key, {}, force_item_id)
 		if not item:
 			printerr("Actor.build_spawned_with_items: Failed to create item with key '%s'." % [item_key])
 			continue

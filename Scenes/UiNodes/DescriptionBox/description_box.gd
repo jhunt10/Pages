@@ -417,6 +417,7 @@ func _parse_damage_data(tokens:Array, object_def:Dictionary, object_inst:BaseLoa
 	var hover_line = ''
 	var description_line = ''
 	var is_percent_hp_damage = false
+	
 	# A description line was given (aka no actor text)
 	if no_actor_text != '':
 		description_line = no_actor_text
@@ -448,11 +449,16 @@ func _parse_damage_data(tokens:Array, object_def:Dictionary, object_inst:BaseLoa
 	if actor and not is_percent_hp_damage:
 		hover_line = description_line
 		description_line = ''
+		
+		if damage_data.keys().has("PreviewCount"):
+			var preview_count = damage_data.get("PreviewCount")
+			description_line = str(preview_count) + " X "
 		var min_max = DamageHelper.get_min_max_damage(actor, damage_data)
 		if min_max[0] == min_max[1]:
-			description_line = str(min_max[0]) + damage_type# + " Damage"
+			description_line += str(min_max[0]) + damage_type# + " Damage"
 		else:
-			description_line = str(min_max[0]) + " - " + str(min_max[1]) + " " + damage_type# + " Damage" 
+			description_line += str(min_max[0]) + " - " + str(min_max[1]) + " " + damage_type# + " Damage" 
+	
 	
 	if extra_damage_datas.size() == 0:
 		if description_line != '':
