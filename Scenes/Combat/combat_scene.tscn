@@ -121,6 +121,7 @@ patch_margin_right = 32
 patch_margin_bottom = 32
 
 [node name="MoveableCamera2D" type="Camera2D" parent="." node_paths=PackedStringArray("canvas_layer", "message_box")]
+process_mode = 3
 position = Vector2(576, 324)
 script = ExtResource("17_7dull")
 canvas_layer = NodePath("CanvasLayer")

@@ -36,6 +36,7 @@ func _on_main_menu_back():
 	exit_container.hide()
 
 func _on_main_menu_confirm():
+	CombatRootControl.Instance.cleanup_combat()
 	MainRootNode.Instance.go_to_main_menu()
 
 func _on_to_camp():

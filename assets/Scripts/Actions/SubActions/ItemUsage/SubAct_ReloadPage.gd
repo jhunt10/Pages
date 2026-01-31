@@ -48,7 +48,7 @@ func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, metadata:
 		printerr("SubAct_ReloadPage: No pages could use Ammo '%s'" % [item_id])
 		return Failed
 	actor.items.consume_item(item_id)
-	CombatRootControl.Instance.QueController.pause_execution()
+	CombatRootControl.pause_combat()
 	CombatUiControl.ui_state_controller.set_ui_state_from_path(
 		"res://assets/Scripts/Ui/UiStates/UiState_SelectPage.gd",
 	{

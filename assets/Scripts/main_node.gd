@@ -47,17 +47,7 @@ func set_current_scene(scene):
 	self.add_child(scene)
 
 func start_combat(map_scene_path):
-	#var map_data = MapLoader.get_map_data(map_key)
-	#var map_path = map_data['LoadPath'].path_join(map_data.get("MapScene", ""))
-	#current_scene.queue_free()
 	LoadManager.load_combat(map_scene_path)
-	#var combat_scene:CombatRootControl = load().instantiate()
-	#if not combat_scene:
-		#printerr("Failed to start combat on map '%s'. No MapScene found for: '%s'." % [map_key, map_path])
-		#return
-	#combat_scene.load_init_state(map_path)
-	#current_scene = combat_scene
-	#self.add_child(current_scene)
 
 func start_game():
 	if !ActionLibrary.Instance: var lib = ActionLibrary.new()

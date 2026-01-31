@@ -29,6 +29,9 @@ func _resize():
 	var new_x = 0
 	if center_x:
 		new_x = (self.size.x - (label_scale * label.size.x)) / 2
+		label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	else:
+		label.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
 	var new_y = (self.size.y - (label_scale * label.size.y)) / 2
 	label.position = Vector2i(new_x, new_y)
 

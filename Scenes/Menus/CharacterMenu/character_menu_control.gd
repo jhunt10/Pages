@@ -1,7 +1,7 @@
 class_name CharacterMenuControl
 extends Control
 
-const LOGGING = false
+const LOGGING = true
 
 signal menu_closed
 
@@ -98,6 +98,12 @@ func _ready() -> void:
 		page_page.item_button_up.connect(on_item_button_up)
 		page_page.mouse_enter_item.connect(on_mouse_enter_slot)
 		page_page.mouse_exit_item.connect(on_mouse_exit_slot)
+	
+	if supplies_page:
+		supplies_page.item_button_down.connect(on_item_button_down)
+		supplies_page.item_button_up.connect(on_item_button_up)
+		supplies_page.mouse_enter_item.connect(on_mouse_enter_slot)
+		supplies_page.mouse_exit_item.connect(on_mouse_exit_slot)
 	
 	#bag_page.item_button_down.connect(on_item_button_down)
 	#bag_page.item_button_up.connect(on_item_button_up)
@@ -448,7 +454,10 @@ func on_item_button_up(context, item_key, index):
 	if item_key:
 		_selected_item = ItemLibrary.get_item(item_key)
 		if _selected_item:
-			create_details_card(_selected_item)
+			var confirm_text = "UNSET"
+			if _left_page_context == "Supplies" and context == "Inventory":
+				confirm_text = "Add"
+			create_details_card(_selected_item, confirm_text)
 			var page_control = context_to_page_control(context)
 			if page_control:
 				page_control.highlight_slot(index)

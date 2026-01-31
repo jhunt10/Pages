@@ -11,7 +11,10 @@ var _round_ended
 
 func start_state():
 	if _logging: print("Start UiState: Exec Round")
-	CombatRootControl.QueController.start_or_resume_execution()
+	if CombatRootControl.is_paused:
+		CombatRootControl.resume_combat()
+	else:
+		CombatRootControl.Instance.QueController.start_or_resume_execution()
 	CombatRootControl.QueController.end_of_round.connect(_on_round_end)
 	CombatRootControl.Instance.ui_control.que_input.showing = false
 	CombatRootControl.Instance.ui_control.que_input.hide_start_button()
@@ -25,7 +28,7 @@ func update(_delta:float):
 
 func end_state():
 	if not _round_ended:
-		CombatRootControl.QueController.pause_execution()
+		CombatRootControl.pause_combat()
 	CombatRootControl.QueController.end_of_round.disconnect(_on_round_end)
 	CombatRootControl.Instance.camera.clear_following_actor()
 	pass

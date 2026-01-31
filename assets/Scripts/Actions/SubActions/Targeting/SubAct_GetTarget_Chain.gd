@@ -127,7 +127,7 @@ func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, metadata:
 		turn_data.add_target_for_key(setting_target_key, target_param_key, selection_data.list_potential_targets()[0])
 		return BaseSubAction.Success
 	
-	CombatRootControl.Instance.QueController.pause_execution()
+	CombatRootControl.pause_combat()
 	CombatUiControl.ui_state_controller.set_ui_state_from_path(
 		"res://assets/Scripts/Actions/Targeting/UiState_Targeting.gd",
 	{

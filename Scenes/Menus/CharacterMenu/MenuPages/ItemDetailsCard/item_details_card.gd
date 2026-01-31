@@ -246,6 +246,7 @@ func set_detail_card_item(actor:BaseActor, item:BaseItem, confirm_button_text:St
 			confirm_button_background.hide()
 		else:
 			confirm_label.text = confirm_button_text
+			confirm_label._size_dirty = true
 			confirm_button_background.show()
 			if disable_confirm:
 				confirm_button_background.texture = confirm_button_pressed_texture

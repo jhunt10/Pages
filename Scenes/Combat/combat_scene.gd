@@ -19,6 +19,7 @@ static var QueController:ActionQueController = ActionQueController.new()
 	
 var GameState:GameStateData
 
+static var is_paused:bool = false
 static var auto_targeting_enabled:bool = true
 static var _current_player_index:int = 0
 static var _player_actor_ids:Array = []
@@ -238,6 +239,23 @@ func start_combat_animation():
 	
 	combat_started = true
 
+static func pause_combat():
+	if !Instance:
+		return
+	Instance.get_tree().paused = true
+	is_paused = true
+	if Instance.QueController.execution_state == ActionQueController.ActionStates.Running:
+		Instance.QueController.pause_execution()
+
+static func resume_combat():
+	if !Instance:
+		return
+	Instance.get_tree().paused = false
+	is_paused = false
+	if Instance.QueController.execution_state == ActionQueController.ActionStates.Paused:
+		Instance.QueController.start_or_resume_execution()
+	
+
 func _on_combat_screen_blackout():
 	ui_control.show()
 	MapController.grid_tile_map.show()
@@ -380,6 +398,9 @@ func cleanup_combat():
 			ActorLibrary.delete_actor(actor)
 	ui_control.ui_state_controller.clear_states()
 	_player_actor_ids.clear()
+	if is_paused:
+		get_tree().paused = false
+		is_paused = false
 
 func list_actors_by_order()->Array:
 	var out_list = []

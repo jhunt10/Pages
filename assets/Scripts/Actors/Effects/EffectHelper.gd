@@ -109,6 +109,7 @@ static func create_effect(
 	
 	var meta_data = {}
 	actor.effects.trigger_new_effect_to_be_added(game_state, effect, meta_data)
+	
 	# Check if effect as negated
 	if meta_data.get("WasNegated", false):
 		EffectLibrary.Instance.erase_object(effect.Id)

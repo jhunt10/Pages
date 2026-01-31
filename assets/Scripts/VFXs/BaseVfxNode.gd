@@ -60,7 +60,7 @@ func finish():
 	if _data.has("SourceActorId"): source_actor = ActorLibrary.get_actor(_data['SourceActorId'])
 	for vfx_key in chain_vfx_datas.keys():
 		var next_node_data = chain_vfx_datas[vfx_key]
-		if next_node_data.has("ScenePath"):
+		if next_node_data.has("VfxKey"):
 			VfxHelper.create_vfx_on_actor(self.actor_node.Actor, vfx_key, chain_vfx_datas[vfx_key], source_actor)
 		elif next_node_data.has("DamageNumber"):
 			var damage_string = str(next_node_data.get("DamageNumber", 0))
