@@ -1,17 +1,34 @@
 {
     "MapKey": "Sewer",
-    "MapName":"City Sewers",
-    "Description":"A dark and grimy labyrinth of tunnels beneath The City. Don't swim in the \"water\".",
+    "MapName": "City Sewers",
+    "Description": "A dark and grimy labyrinth of tunnels beneath The City. Don't swim in the \"water\".",
     "MapScene": "sewer_map.tscn",
     "SortOrder": 4,
-    "EnemySet":{
-        "SlimeBasic": {
-            "Weight": 30,
-            "IsUnique": false
+    "StartingPhase": "InitSpawn",
+    "PhaseDatas": {
+        "InitSpawn": {
+            "PhaseType": "SpawnEnemy",
+            "NextPhase": "PlacePlayers",
+            "MarkerMap": "InitEnemySpawnMap",
+            "EnemySet": {
+                "SlimeBasic": {
+                    "Weight": 30,
+                    "IsUnique": false
+                },
+                "SlimePoison": {
+                    "Weight": 10,
+                    "IsUnique": false
+                }
+            }
         },
-        "SlimePoison": {
-            "Weight": 10,
-            "IsUnique": false
+        "PlacePlayers": {
+            "PhaseType": "PlacePlayers",
+            "NextPhase": "CombatPhase1"
+        },
+        "CombatPhase1": {
+            "PhaseType": "Combat",
+            "NextPhase": "END",
+            "CombatCondition": "KillAll"
         }
     }
 }

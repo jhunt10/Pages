@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=4 uid="uid://cqru24o8nm3be"]
+[gd_scene load_steps=35 format=4 uid="uid://cqru24o8nm3be"]
 
 [ext_resource type="Script" path="res://assets/Scripts/Map/map_controler_node.gd" id="1_8owwq"]
 [ext_resource type="Texture2D" uid="uid://dxan6lyrg8db3" path="res://assets/Sprites/TileSets/GrassPath_TileSheet.png" id="2_rfkbp"]
@@ -11,13 +11,12 @@
 [ext_resource type="PackedScene" uid="uid://bpurspf6xbf1h" path="res://Scenes/Combat/UiNodes/TargetAreaDisplay/target_area_display_node.tscn" id="9_d87j1"]
 [ext_resource type="Texture2D" uid="uid://kh2uekpf4sb8" path="res://Scenes/Maps/MapEditing/ActorSpawnSprite.png" id="10_hh112"]
 [ext_resource type="Script" path="res://Scenes/Maps/MapEditing/actor_spawn_node.gd" id="11_md0j5"]
-[ext_resource type="Texture2D" uid="uid://ciuklk5v766ab" path="res://defs/Actors/NPCs/MnFg/MysteriousFigure_SpriteSheet.png" id="12_ly66f"]
+[ext_resource type="Texture2D" uid="uid://ciuklk5v766ab" path="res://notes/NPCs/MnFg/MysteriousFigure_SpriteSheet.png" id="12_ly66f"]
 [ext_resource type="Texture2D" uid="uid://d1rfl5p8pk2qv" path="res://Scenes/Maps/MapEditing/MapMarker.png" id="13_bfpo1"]
-[ext_resource type="Texture2D" uid="uid://c5q4nksi2sayc" path="res://defs/Actors/Tutorial/TutorShroom_SpriteSheet.png" id="13_ol0fu"]
 [ext_resource type="Script" path="res://Scenes/Maps/MapEditing/map_marker_node.gd" id="14_t0c8n"]
-[ext_resource type="Texture2D" uid="uid://rlwkryaiibhy" path="res://defs/Actors/Tutorial/RoofShroom_SpriteSheet.png" id="14_x40gp"]
+[ext_resource type="Texture2D" uid="uid://cff02cbeuxc2p" path="res://ObjectDefs/Factions/Mushrooms/Actors/Sprites/Mushroom_Icon.png" id="14_x40gp"]
 [ext_resource type="Script" path="res://Scenes/Maps/MapEditing/map_path_node.gd" id="16_0ajgq"]
-[ext_resource type="Texture2D" uid="uid://d4iuq6lbdnutl" path="res://defs/Actors/Squirrels/Squirrel_SpriteSheet.png" id="16_hpslt"]
+[ext_resource type="Texture2D" uid="uid://bass1eqkxrkmh" path="res://ObjectDefs/Factions/Squirrels/Actors/Sprites/SquirrelIcon.png" id="16_hpslt"]
 [ext_resource type="Texture2D" uid="uid://lfjvqyylrvku" path="res://Scenes/Maps/MapEditing/MapPathMarker.png" id="17_ohkco"]
 [ext_resource type="Script" path="res://Scenes/Maps/MapEditing/map_path_point_node.gd" id="18_tvogg"]
 
@@ -1253,7 +1252,7 @@ map_coor = Vector2i(1, 11)
 
 [node name="SpwanNode_Mushroom1" type="Sprite2D" parent="MarkerTileMapLayer"]
 position = Vector2(368, 336)
-texture = ExtResource("13_ol0fu")
+texture = ExtResource("14_x40gp")
 hframes = 12
 vframes = 4
 script = ExtResource("11_md0j5")

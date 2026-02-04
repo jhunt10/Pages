@@ -1,21 +1,183 @@
 {
     "MapKey": "CrossRoad",
-    "MapName":"Cross Road",
-    "Description":"A cross road on the way to The City.",
+    "MapName": "Cross Road",
+    "Description": "A cross road on the way to The City.",
     "MapScene": "crossroad_explore_map.tscn",
     "SortOrder": 2,
-    "EnemySet":{
-        "Bandit_Armored": {
-            "Weight": 30,
-            "IsUnique": false
+    "StartingPhase": "InitSpawn",
+    "PhaseDatas": {
+        "InitSpawn": {
+            "PhaseType": "SpawnEnemy",
+            "NextPhase": "PlacePlayers",
+            "MarkerMap": "InitEnemySpawnMap",
+            "EnemySet": {
+                "Bandit_Armored": {
+                    "Weight": 3,
+                    "IsUnique": false
+                },
+                "Bandit_Ranged": {
+                    "Weight": 2,
+                    "IsUnique": false
+                }
+            }
         },
-        "Bandit_Ranged": {
-            "Weight": 20,
-            "IsUnique": false
+        "TestDialog1": {
+            "PhaseType": "Dialog",
+            "NextPhase": "PlacePlayers",
+            "MarkerMap": "InitEnemySpawnMap",
+            "DialogData": {
+                "_MetaData_": {
+                    "StartPartKey": "Prolog_Rogue",
+                    "MapScene": "res://Scenes/Maps/StoryMaps/2_Cross_Road/crossroad_dialog_map.tscn"
+                },
+                "Prolog_Rogue": {
+                    "_NextPartKey": "Intro_WalkIn",
+                    "WaitForNextButton": false,
+                    "Inital_BlackOutState": "Black",
+                    "Blocks": [
+                        {
+                            "BlockType": "Blackout",
+                            "BlackOutState": "Black"
+                        },
+                        {
+                            "BlockType": "SpeechBox",
+                            "WaitToFinish": true,
+                            "WaitForNextButton": true,
+                            "Entries": [
+                                {
+                                    "EntryType": "Clear"
+                                },
+                                {
+                                    "EntryType": "Text",
+                                    "Text": "Now Imagine a cutscene at @Color:Red@The Port@Clear@ where a @Color:Red@Rogue@Clear@ is running for thier life. "
+                                },
+                                {
+                                    "EntryType": "WaitToRead"
+                                },
+                                {
+                                    "EntryType": "Text",
+                                    "Text": "They jump into a crate to hide, ",
+                                    "NewLine": false
+                                },
+                                {
+                                    "EntryType": "WaitToRead"
+                                },
+                                {
+                                    "EntryType": "Text",
+                                    "Text": "but are sealed in and loaded onto a boat. ",
+                                    "NewLine": false
+                                },
+                                {
+                                    "EntryType": "WaitToRead"
+                                },
+                                {
+                                    "EntryType": "Text",
+                                    "Text": "*Scene Ends*",
+                                    "NewLine": true
+                                }
+                            ]
+                        },
+                        {
+                            "BlockType": "SpeechBox",
+                            "WaitToFinish": true,
+                            "WaitForNextButton": false,
+                            "Entries": [
+                                {
+                                    "EntryType": "Clear"
+                                },
+                                {
+                                    "EntryType": "Hide"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            }
         },
-        "Bandit_Captain": {
-            "Weight": 1,
-            "IsUnique": true
+        "PlacePlayers": {
+            "PhaseType": "PlacePlayers",
+            "NextPhase": "CombatPhase1"
+        },
+        "CombatPhase1": {
+            "PhaseType": "Combat",
+            "NextPhase": "SpawnCaptain",
+            "CombatCondition": "KillAll"
+        },
+        "SpawnCaptain": {
+            "PhaseType": "SpawnEnemy",
+            "NextPhase": "CptEnter",
+            "MarkerMap": "CptPhaseMap",
+            "EnemySet": {}
+        },
+        "CptEnter": {
+            "PhaseType": "Dialog",
+            "NextPhase": "CombatPhase2",
+            "MarkerMap": "CptPhaseMap",
+            "DialogData": {
+                "_MetaData_": {
+                    "StartPartKey": "Part1",
+                    "Inital_BlackOutState": "Clear"
+                },
+                "Part1": {
+                    "_NextPartKey": "",
+                    "WaitForNextButton": true,
+                    "Blocks": [
+                        {
+                            "BlockType": "SpeechBox",
+                            "WaitToFinish": false,
+                            "WaitForNextButton": false,
+                            "Entries": [
+                                {
+                                    "EntryType": "Clear"
+                                },
+                                {
+                                    "EntryType": "Text",
+                                    "Text": "New challenger appro-"
+                                },
+                                {
+                                    "EntryType":"Delay",
+                                    "Delay": 0.3
+                                },
+                                {
+                                    "EntryType": "BackTrack",
+                                    "Text": "New challenger appro-",
+                                    "BaseText": "",
+                                    "NewLine": false,
+                                    "LetterDelay": 0.01
+                                },
+                                {
+                                    "EntryType": "Text",
+                                    "Text": "Bandit Captain has spawned!",
+                                    "NewLine": false
+                                },
+                                {
+                                    "EntryType": "WaitToRead"
+                                }
+                            ]
+                        },
+                        {
+                            "WaitToFinish": true,
+                            "WaitForNextButton": false,
+                            "BlockType": "PanCamera",
+                            "TargetType": "PathMarker",
+                            "PathMarkerName": "Path_Capt"
+                        },
+                        {
+                            "BlockType": "MoveActor",
+                            "WaitToFinish": true,
+                            "TargetActorId": "BanditCpt",
+                            "PathMarkerName": "Path_Capt",
+                            "FollowActor": true,
+                            "SpeedScale": 1.4
+                        }
+                    ]
+                }
+            }
+        },
+        "CombatPhase2": {
+            "PhaseType": "Combat",
+            "NextPhase": "END",
+            "CombatCondition": "KillAll"
         }
     }
 }

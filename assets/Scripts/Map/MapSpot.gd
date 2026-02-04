@@ -2,10 +2,16 @@ class_name MapSpot
 
 const LOGGING=false
 
+enum TerrainType {
+	Blocked, 	# Red: 	Can NOT enter and blockes LOS
+	Cover,		# Orange: Can NOT entered, does NOT block LOS
+	Open,		# Green: Can enter and does not block LOS
+}
+
 var parent_map:MapStateData = null
 var X:int = 0
 var Y:int = 0
-var terrain_index:int = 0
+var terrain:TerrainType = TerrainType.Open
 
 var _layer_to_actor_ids:Dictionary = {}
 
@@ -14,19 +20,17 @@ var _zone_ids:Array = []
 var item_ids:Array = []
 
 func duplicate(new_parent:MapStateData)->MapSpot:
-	var new_spot = MapSpot.new(X, Y, terrain_index, new_parent)
+	var new_spot = MapSpot.new(X, Y, terrain, new_parent)
 	new_spot._zone_ids = _zone_ids.duplicate()
 	new_spot.item_ids = item_ids.duplicate()
 	new_spot._layer_to_actor_ids = _layer_to_actor_ids.duplicate(true)
-	if X == 7 and Y == 7:
-		print("Dupped 77 Spot (%s,%s): %s | %s || %s to %s" % [X, Y, new_spot._layer_to_actor_ids.size(), _layer_to_actor_ids.size(), self, new_spot])
 	return new_spot
 
-func _init(x:int, y:int, terrain_index_val:int, parent:MapStateData) -> void:
+func _init(x:int, y:int, terrain_val:TerrainType, parent:MapStateData) -> void:
 	parent_map = parent
 	X = x
 	Y = y
-	self.terrain_index = terrain_index_val
+	terrain = terrain_val
 	
 func add_actor(actor:BaseActor, layer=MapStateData.MapLayers.Default):
 	if LOGGING: print("Adding actor '%s' (%s, %s) %s" % [actor.ActorKey, X, Y, layer])

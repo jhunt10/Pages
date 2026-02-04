@@ -17,6 +17,8 @@ signal item_spawned(item:BaseItem, map_pos:MapPos)
 static var Instance:CombatRootControl 
 static var QueController:ActionQueController = ActionQueController.new()
 	
+var combat_map_data:Dictionary = {}
+var _current_phase_key:String = ""
 var GameState:GameStateData
 
 static var is_paused:bool = false
@@ -110,6 +112,15 @@ static func get_actor_node(actor_id:String)->BaseActorNode:
 
 func load_init_state(sub_scene_data:Dictionary):
 	printerr("Loading init state")
+	
+	var map_key = sub_scene_data.get("MapKey")
+	if !map_key:
+		printerr("CombatScene.load_init_state: NoMapKey provided")
+		queue_free()
+		return
+	
+	combat_map_data = MapLoader.get_map_data(map_key)
+	
 	if !Instance: Instance = self
 	elif Instance != self: 
 		printerr("Multiple CombatRootControls found")
@@ -118,7 +129,7 @@ func load_init_state(sub_scene_data:Dictionary):
 	if GameState:
 		printerr("Combate Scene already init")
 		return
-	var map_scene_path = sub_scene_data.get("MapPath")
+	var map_scene_path = combat_map_data.get("LoadPath", "").path_join(combat_map_data.get("MapScene"))
 	var map_scene = load(map_scene_path)
 	if MapController:
 		MapController.queue_free()
@@ -142,69 +153,35 @@ func load_init_state(sub_scene_data:Dictionary):
 	QueController = ActionQueController.new()
 	QueController.end_of_round.connect(check_end_conditions)
 	
-	# Build Actors from Map Data
-	_player_actor_ids.clear()
-	var npcs_to_name = {}
-	var actor_count = map_data['Actors'].size()
-	var actor_index = 0
-	for actor_info:Dictionary in map_data['Actors']:
-		var new_actor = null
-		var actor_pos = actor_info['Pos']
-		# Specific Actor Id was provided
-		if actor_info.keys().has("ActorId"):
-			if actor_info.keys().has("ActorKey"):
-				new_actor = ActorLibrary.get_or_create_actor(actor_info['ActorKey'], actor_info['ActorId'])
-			else:
-				new_actor = ActorLibrary.get_actor(actor_info['ActorId'])
-			if new_actor:
-				new_actor.FactionIndex = 1
-				var display_name = new_actor.get_display_name()
-				if not npcs_to_name.keys().has(display_name):
-					npcs_to_name[display_name] = []
-				npcs_to_name[display_name].append(new_actor)
-			else:
-				printerr("CombatRootControl.load_init_state: Failed to get or create actor with id %s" % [actor_info.get("ActorId", "NO_ID")])
-		# Only Actor Key was provided
-		elif actor_info.keys().has("ActorKey") and actor_info["ActorKey"] != '':
-			var actor_key = actor_info['ActorKey']
-			if actor_key.begins_with("Player"):
-				continue # This shouldn't happen? Maybe in scripted scenes?
-			else:
-				# Spawn Enemy NPC
-				new_actor = ActorLibrary.create_actor(actor_key, {})
-				if new_actor:
-					new_actor.FactionIndex = 1
-					var display_name = new_actor.get_display_name()
-					if not npcs_to_name.keys().has(display_name):
-						npcs_to_name[display_name] = []
-					npcs_to_name[display_name].append(new_actor)
-		
-		if new_actor:
-			if actor_info['WaitToSpawn']:
-				# Must call without signals because actors are spawned before MapControlNode._ready()
-				MapController.get_or_create_actor_node(new_actor, actor_pos, true)
-			else:
-				add_actor(new_actor, actor_pos)
-		actor_index += 1
-		loading_actor_progressed.emit(actor_count, actor_index)
-	
+	## Build Actors from Map Data
+	#_player_actor_ids.clear()
+	#var npcs_to_name = {}
+	#var actor_count = map_data['Actors'].size()
+	#var actor_index = 0
+	#for actor_info:Dictionary in map_data['Actors']:
+		#var new_actor = null
+		#var actor_pos = actor_info['Pos']
+		#
+		#
+		#if new_actor:
+			#if actor_info['WaitToSpawn']:
+				## Must call without signals because actors are spawned before MapControlNode._ready()
+				#MapController.get_or_create_actor_node(new_actor, actor_pos, true)
+			#else:
+				#add_actor(new_actor, actor_pos)
+		#actor_index += 1
+		#loading_actor_progressed.emit(actor_count, actor_index)
+	#
 	# Name NPC Actors
-	for display_name in npcs_to_name.keys():
-		if npcs_to_name[display_name].size() == 1:
-			continue
-		var index = 0
-		for actor:BaseActor in npcs_to_name[display_name]:
-			actor.enemy_npc_index = index
-			index += 1
-	
-	
-	## Make Nodes for each player actor, but hide them until they are placed
-	#for player_actor:BaseActor in StoryState.list_party_actors():
-		#if not player_actor:
+	#for display_name in npcs_to_name.keys():
+		#if npcs_to_name[display_name].size() == 1:
 			#continue
-		#var player_actor_node = MapController.get_or_create_actor_node(player_actor, MapPos.new(0,0,0,0), true)
-		##player_actor_node.prep_for_combat()
-		#player_actor_node.hide()
+		#var index = 0
+		#for actor:BaseActor in npcs_to_name[display_name]:
+			#actor.enemy_npc_index = index
+			#index += 1
+	
+	
 	#var player_actor = StoryState.get_player_actor()
 	## Check that actor in actually in game
 	#player_actor = GameState.get_actor(player_actor.Id)
@@ -213,25 +190,165 @@ func load_init_state(sub_scene_data:Dictionary):
 	
 	
 	camera.zoom = Vector2(2,2)
-	var camera_point = MapController.get_pos_marker("CameraStart")
-	if camera_point:
-		camera.snap_to_map_pos(camera_point)
+	#var camera_point = MapController.get_pos_marker("CameraStart")
+	#if camera_point:
+		#camera.snap_to_map_pos(camera_point)
 	
 	is_story_map = sub_scene_data.get("IsStoryMap", false)
-	var dialog_script = sub_scene_data.get("DialogScript")
-	if dialog_script:
-		dialog_controller.load_dialog_script(dialog_script)
-		dialog_controller.show()
-	else:
-		dialog_controller.queue_free()
-		dialog_controller = null
-		camera.freeze = false
-	var ui_state_data = {
-		"SpawnArea" = map_data.get("SpawnArea")
-	}
-	ui_control.ui_state_controller.set_ui_state(UiStateController.UiStates.PlaceActors, ui_state_data)
+	#var dialog_script = sub_scene_data.get("DialogScript")
+	#if dialog_script:
+		#dialog_controller.load_dialog_script(dialog_script)
+		#dialog_controller.show()
+	#else:
+		#dialog_controller.queue_free()
+		#dialog_controller = null
+		#camera.freeze = false
+	var starting_phase = combat_map_data.get("StartingPhase")
+	start_phase(starting_phase)
+
+func get_current_phase_data()->Dictionary:
+	var phase_datas = combat_map_data.get("PhaseDatas", {})
+	if phase_datas.keys().has(_current_phase_key):
+		return phase_datas[_current_phase_key]
+	printerr("CombatScene.get_current_phase_data: Unknown Phase Key: %s" % [_current_phase_key])
+	return {}
+
+func start_phase(phase_key):
+	if phase_key.to_lower() == "end":
+		combat_finished = true
+		ui_control.victory_screen.show_game_result()
+		return
+	var phase_datas = combat_map_data.get("PhaseDatas", {})
+	if not phase_datas.keys().has(phase_key):
+		printerr("CombatScene.start_phase: Unknown Phase Key: %s" % [phase_key])
+		combat_finished = true
+		ui_control.victory_screen.show_game_result()
+		return
+	_current_phase_key = phase_key
 	
+	var phase_data = phase_datas[_current_phase_key]
+	var phase_type = phase_data.get("PhaseType", "")
+	
+	# Clear and cache markers for this phase
+	_cached_markers.clear()
+	var phase_map_name = phase_data.get("MarkerMap")
+	if phase_map_name:
+		var phase_map = MapController.get_phase_marker_map(phase_map_name)
+		var spawn_nodes = []
+		for child in phase_map.get_children():
+			_cached_markers[child.name] = child
 		
+	match(phase_type):
+		"SpawnEnemy":
+			spawn_actors_for_phase(phase_data)
+			start_next_phase()
+		"PlacePlayers":
+			var ui_state_data = {
+				"SpawnArea" = MapController.get_player_spawn_area()
+			}
+			ui_control.ui_state_controller.set_ui_state(UiStateController.UiStates.PlaceActors, ui_state_data)
+		"Combat":
+			if not combat_started:
+				start_combat_animation()
+			CombatRootControl.Instance.ui_control.ui_state_controller.set_ui_state(UiStateController.UiStates.ActionInput)
+		"Dialog":
+			var dialog_data = phase_data.get("DialogData")
+			dialog_controller.load_dialog_data(dialog_data)
+			pass
+		
+
+func start_next_phase():
+	var phase_data = get_current_phase_data()
+	var next_key = phase_data.get("NextPhase")
+	start_phase(next_key)
+		
+
+#func pre_load_actors_for_phases():
+	## Make Nodes for each player actor, but hide them until they are placed
+	#for player_actor:BaseActor in StoryState.list_party_actors():
+		#if not player_actor:
+			#continue
+		#var player_actor_node = MapController.get_or_create_actor_node(player_actor, MapPos.new(0,0,0,0), true)
+		##player_actor_node.prep_for_combat()
+		#player_actor_node.hide()
+	#
+var _cached_markers = {}
+func get_pos_marker(marker_name)->MapPos:
+	if _cached_markers.has(marker_name):
+		return _cached_markers[marker_name]
+	return null
+	
+func get_path_marker(marker_name)->MapPathNode:
+	if _cached_markers.has(marker_name):
+		return _cached_markers[marker_name]
+	return null
+	
+func get_spawn_node(marker_name)->ActorSpawnNode:
+	if _cached_markers.has(marker_name):
+		return _cached_markers[marker_name]
+	return null
+
+func spawn_actors_for_phase(phase_data:Dictionary):
+	var actors = []
+	var phase_map = MapController.get_phase_marker_map(phase_data.get("MarkerMap", ""))
+	var spawn_nodes = []
+	for child in phase_map.get_children():
+		if not child is ActorSpawnNode:
+			continue
+		if !child.visible:
+			continue
+		spawn_nodes.append(child)
+	var total_count = spawn_nodes.size()
+	var index = 0
+	for child in spawn_nodes:
+		var actor_pos = MapPos.new(child.map_coor.x, child.map_coor.y, 0, child.facing)
+		var actor_key = ""
+		var actor_id = ""
+		var faction_index = 1
+		if child.spawn_actor_key != '':
+			if child.spawn_actor_key == "RandomEnemy":
+				actor_key = _get_random_enemy_key(phase_data)
+			else:
+				actor_key = child.spawn_actor_key
+		if child.spawn_actor_id != '':
+			actor_id = child.spawn_actor_id
+		if child.is_player:
+			faction_index = 0
+		else:
+			faction_index = 1
+		var new_actor = null
+		
+		# Specific Actor Id was provided
+		if actor_id != "":
+			new_actor = ActorLibrary.get_or_create_actor(actor_key, actor_id)
+			if not new_actor:
+				printerr("CombatRootControl.load_init_state: Failed to get or create actor with id %s" % [actor_id])
+		# Only Actor Key was provided
+		elif actor_key != '':
+			if actor_key.begins_with("Player"):
+				continue # This shouldn't happen? Maybe in scripted scenes?
+			else:
+				# Spawn Enemy NPC
+				new_actor = ActorLibrary.create_actor(actor_key, {})
+		index += 1
+		loading_actor_progressed.emit(total_count, index)
+		if new_actor:
+			new_actor.FactionIndex = faction_index
+			add_actor(new_actor, actor_pos)
+					#var display_name = new_actor.get_display_name()
+					#if not npcs_to_name.keys().has(display_name):
+						#npcs_to_name[display_name] = []
+					#npcs_to_name[display_name].append(new_actor)
+	pass
+
+func _get_random_enemy_key(map_data)->String:
+	var enemy_data = map_data.get("EnemySet", {})
+	var enemy_set = {}
+	for enemy_key in enemy_data:
+		enemy_set[enemy_key] = enemy_data[enemy_key].get("Weight", -1)
+	var actor_key = Roll.from_set(enemy_set)
+	return actor_key
+	
 
 func start_combat_animation():
 	start_combat_screen.show()
@@ -376,10 +493,16 @@ func check_end_conditions():
 			living_players.append(actor)
 		else:
 			living_enimes.append(actor)
+	# All Players dead, Game Over
 	if living_players.size() == 0:
 		trigger_end_condition(false)
-	elif living_enimes.size() == 0:
-		trigger_end_condition(true)
+
+	var combat_condition = get_current_phase_data().get("CombatCondition")
+	if combat_condition is String:
+		if combat_condition == "KillAll":
+			if living_enimes.size() == 0:
+				#trigger_end_condition(true)
+				start_next_phase()
 
 func trigger_end_condition(victory:bool):
 	combat_finished = true

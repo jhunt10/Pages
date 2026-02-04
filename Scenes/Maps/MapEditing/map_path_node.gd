@@ -69,13 +69,14 @@ func _process(_delta: float) -> void:
 	pass
 
 func _draw() -> void:
-	if !last_pos:
-		last_pos = Vector2(0,0)
+	#if !last_pos:
+	var last_draw_pos = Vector2.ZERO
 	for child in get_children():
 		if not child is MapMPathPointNode:
 			continue
 		var marker = child as MapMPathPointNode
 		var pos = marker.position
 		#if last_pos:
-		draw_line(last_pos, pos, Color.RED, 1.0)
-		last_pos = pos
+		#print("LastPos: %s    |   Pos: %s" % [last_draw_pos, pos])
+		draw_line(last_draw_pos, pos, Color.RED, 3.0)
+		last_draw_pos = pos

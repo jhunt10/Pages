@@ -74,7 +74,9 @@ func list_actors(include_dead:bool=false):
 # TODO: This class shouldn't really hold logic... 
 #	but zone stuff needs map_data to know which actors to apply to
 #	and I can't trust everything to go through MapHelper
-func set_actor_pos(actor:BaseActor, pos:MapPos, suppress_signal:bool=false):
+func set_actor_pos(actor, pos:MapPos, suppress_signal:bool=false):
+	if actor is String:
+		actor = ActorLibrary.get_actor(actor)
 	var old_pos = map_data.get_actor_pos(actor)
 	
 	map_data.set_actor_map_pos(actor, pos, suppress_signal)

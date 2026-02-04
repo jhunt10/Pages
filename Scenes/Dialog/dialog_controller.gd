@@ -200,6 +200,46 @@ func _get_next_part_key():
 			return cases['@DEFAULT@']
 	return _current_part_data.get("_NextPartKey", null)
 
+
+
+func load_dialog_script(file_path, wait_for_load_screen:bool=true):
+	var file = FileAccess.open(file_path, FileAccess.READ)
+	var text:String = file.get_as_text()
+	var data = JSON.parse_string(text)
+	load_dialog_data(data)
+	if wait_for_load_screen:
+		_state = STATES.Ready
+		LoadManager._load_screen.loading_screen_fully_gone.connect(_on_load_screen_finshed)
+	
+func load_dialog_data(data:Dictionary):
+	_condition_watcher = null
+	_dialog_part_datas = data
+	if not _dialog_part_datas.keys().has("_MetaData_"):
+		printerr("No _MetaData_ found in dialog script.")
+		_dialog_part_datas.clear()
+		self.queue_free()
+		return
+	var meta_data = _dialog_part_datas["_MetaData_"]
+	var start_part_key = meta_data.get("StartPartKey", null)
+	if !start_part_key:
+		printerr("No 'StartPartKey' found in _MetaData_ of dialog script.")
+		_dialog_part_datas.clear()
+		self.queue_free()
+		return
+	_cur_part_key = start_part_key
+	if meta_data.has("Inital_BlackOutState"):
+		blackout_control.set_state_string(meta_data['Inital_BlackOutState'])
+	
+	_start_part(_cur_part_key)
+	if not LoadManager._loading_done:
+		_state = STATES.Ready
+		LoadManager._load_screen.loading_screen_fully_gone.connect(_on_load_screen_finshed)
+
+func _on_load_screen_finshed():
+	self._state = STATES.Playing
+	LoadManager._load_screen.loading_screen_fully_gone.disconnect(_on_load_screen_finshed)
+
+
 func _start_part(part_key:String):
 	if LOGGING: print("Starting  part: " + part_key)
 	_part_start_timer = 0
@@ -251,7 +291,8 @@ func _finish_dialog():
 		_state = STATES.Finished
 		if CombatRootControl.Instance:
 			CombatRootControl.Instance.camera.locked_for_cut_scene = false
-		self.queue_free()
+			CombatRootControl.Instance.start_next_phase()
+		self.hide()
 
 func _on_skip():
 	# Can't skip watchers
@@ -396,7 +437,7 @@ func _handle_block(block_data:Dictionary)->bool:
 			target_pos = actor_node.cur_map_pos
 		elif target_type == "PathMarker":
 			var marker_name = block_data.get("PathMarkerName")
-			var marker = CombatRootControl.Instance.MapController.get_path_marker(marker_name)
+			var marker = CombatRootControl.Instance.get_path_marker(marker_name)
 			if !marker:
 				printerr("DialogControl.PanCamera: No PathMarker found with name '%s'." % [marker_name])
 				return false
@@ -453,8 +494,8 @@ func _handle_block(block_data:Dictionary)->bool:
 				var move_key = target_actor_id+":Move"
 				_block_states[move_key] = BlockStates.Playing
 				var actor_node = CombatRootControl.get_actor_node(target_actor_id)
-				if not actor_node.reached_motion_destination.is_connected(_on_actor_move_finished):
-					actor_node.reached_motion_destination.connect(_on_actor_move_finished.bind(target_actor_id))
+				if not actor_node.reached_scripted_motion_destination.is_connected(_on_actor_move_finished):
+					actor_node.reached_scripted_motion_destination.connect(_on_actor_move_finished.bind(target_actor_id))
 				return block_data.get("WaitToFinish", false)
 	
 	#----------------------------------
@@ -524,7 +565,7 @@ func _handle_block(block_data:Dictionary)->bool:
 		if single_name != null:
 			spawn_node_list.append(single_name)
 		for spawn_node_name in spawn_node_list:
-			var spawn_node = CombatRootControl.Instance.MapController.get_spawn_node(spawn_node_name)
+			var spawn_node = CombatRootControl.Instance.get_spawn_node(spawn_node_name)
 			if !spawn_node:
 				printerr("DialogController.SpawnActor: Failed to find Spawn Node: %s" %[spawn_node_name])
 				continue
@@ -581,40 +622,6 @@ func _handle_block(block_data:Dictionary)->bool:
 	# Unknown Block
 	return false
 
-func load_dialog_script(file_path, wait_for_load_screen:bool=true):
-	var file = FileAccess.open(file_path, FileAccess.READ)
-	var text:String = file.get_as_text()
-	var data = JSON.parse_string(text)
-	load_dialog_data(data)
-	if wait_for_load_screen:
-		_state = STATES.Ready
-		LoadManager._load_screen.loading_screen_fully_gone.connect(_on_load_screen_finshed)
-	
-func load_dialog_data(data:Dictionary):
-	_condition_watcher = null
-	_dialog_part_datas = data
-	if not _dialog_part_datas.keys().has("_MetaData_"):
-		printerr("No _MetaData_ found in dialog script.")
-		_dialog_part_datas.clear()
-		self.queue_free()
-		return
-	var meta_data = _dialog_part_datas["_MetaData_"]
-	var start_part_key = meta_data.get("StartPartKey", null)
-	if !start_part_key:
-		printerr("No 'StartPartKey' found in _MetaData_ of dialog script.")
-		_dialog_part_datas.clear()
-		self.queue_free()
-		return
-	_cur_part_key = start_part_key
-	if meta_data.has("Inital_BlackOutState"):
-		blackout_control.set_state_string(meta_data['Inital_BlackOutState'])
-		
-	_start_part(_cur_part_key)
-
-func _on_load_screen_finshed():
-	self._state = STATES.Playing
-	LoadManager._load_screen.loading_screen_fully_gone.disconnect(_on_load_screen_finshed)
-
 func _on_combat_start_blackout():
 	_block_states["StartCombat"] = BlockStates.Finished
 	pass
@@ -645,14 +652,18 @@ func _on_actor_move_finished(actor_id):
 		
 		print("Actor Movement Finished: %s" % [actor_id])
 		_block_states[move_key] = BlockStates.Finished
-		var camera = CombatRootControl.Instance.camera
-		var actor_node = CombatRootControl.get_actor_node(actor_id)
-		if not CombatRootControl.Instance.QueController.is_executing:
-			if (camera.following_actor_node and  camera.following_actor_node.Actor.Id == actor_id):
-				camera.clear_following_actor()
-				camera.snap_to_map_pos(actor_node.cur_map_pos)
-		#if actor_node.reached_motion_destination.is_connected(_on_actor_move_finished):
-			#actor_node.reached_motion_destination.disconnect(_on_actor_move_finished)
+		if CombatRootControl.Instance:
+			var camera = CombatRootControl.Instance.camera
+			var actor_node = CombatRootControl.get_actor_node(actor_id)
+			var cur_pos = actor_node.cur_map_pos
+			CombatRootControl.Instance.GameState.set_actor_pos(actor_id, cur_pos)
+			# If we're in round and camera is following this actor
+			if not CombatRootControl.Instance.QueController.is_executing:
+				if (camera.following_actor_node and  camera.following_actor_node.Actor.Id == actor_id):
+					camera.clear_following_actor()
+					camera.snap_to_map_pos(actor_node.cur_map_pos)
+			#if actor_node.reached_motion_destination.is_connected(_on_actor_move_finished):
+				#actor_node.reached_motion_destination.disconnect(_on_actor_move_finished)
 
 func _on_camera_pan_finish():
 	if _block_states.has("PanCamera"):
@@ -705,7 +716,7 @@ func force_positions(force_pos_data:Dictionary):
 				CombatRootControl.Instance.remove_actor(actor)
 			
 		else:
-			var path_marker = CombatRootControl.Instance.MapController.get_path_marker(path_marker_name)
+			var path_marker = CombatRootControl.Instance.get_path_marker(path_marker_name)
 			if !path_marker:
 				printerr("force_positions: Failed to find Path Marker: %s" %[path_marker_name])
 				continue
@@ -754,7 +765,7 @@ func _do_move_actor(block_data)->bool:
 	if !actor_node:
 		printerr("DialogController: MoveActor failed to find actor_node for Target Actor: %s" %[target_actor_id])
 		return false
-	var path_marker = CombatRootControl.Instance.MapController.get_path_marker(path_marker_name)
+	var path_marker = CombatRootControl.Instance.get_path_marker(path_marker_name)
 	if !path_marker:
 		printerr("DialogController: MoveActor failed to find Path Marker: %s" %[path_marker_name])
 		return false
@@ -780,13 +791,13 @@ func _do_move_actor(block_data)->bool:
 		actor_node.que_scripted_movement(path_data)
 	return true
 
-func translate_actor_id(_actor_id:String)->String:
-	#if actor_id == "Player1":
-		#actor_id = StoryState.get_player_id(0)
-	#elif actor_id == "Player2":
-		#actor_id = StoryState.get_player_id(1)
-	#elif actor_id == "Player3":
-		#actor_id = StoryState.get_player_id(2)
-	#elif actor_id == "Player4":
-		#actor_id = StoryState.get_player_id(3)
-	return "dialog_controller.translate_actor_id"
+func translate_actor_id(actor_id:String)->String:
+	if actor_id == "Player1":
+		actor_id = StoryState.get_player_id(0)
+	elif actor_id == "Player2":
+		actor_id = StoryState.get_player_id(1)
+	elif actor_id == "Player3":
+		actor_id = StoryState.get_player_id(2)
+	elif actor_id == "Player4":
+		actor_id = StoryState.get_player_id(3)
+	return actor_id

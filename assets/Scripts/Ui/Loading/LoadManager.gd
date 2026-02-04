@@ -17,11 +17,8 @@ var _loading_done:bool
 
 var use_sub_threads:bool = true
 
-func load_combat(map_scene_path:String, dialog_script:String='', is_story_map=false):
-	var data = {}
-	data['MapPath'] = map_scene_path
-	if dialog_script != '':
-		data['DialogScript'] = dialog_script
+func load_combat(map_name:String, is_story_map=false):
+	var data = {"MapKey": map_name}
 	data['IsStoryMap'] = is_story_map
 	load_scene("res://Scenes/Combat/combat_scene.tscn", data)
 

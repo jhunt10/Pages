@@ -24,9 +24,9 @@
 [ext_resource type="Script" path="res://Scenes/UiNodes/DescriptionBox/description_box.gd" id="22_bd2iy"]
 
 [node name="PageDetailsEntryContainer" type="Container" node_paths=PackedStringArray("target_details_container", "target_type_label", "mini_range_display", "acc_pot_container", "accuracy_label", "potency_label", "effects_label", "ammo_label", "damage_entries_container", "icon_background", "icon", "title_label", "tags_label", "type_label", "details_container", "description_box", "plus_minus_button", "minus_icon", "plus_icon", "stat_mods_container", "premade_stat_mod_label", "add_item_button", "background", "inner_container")]
-custom_minimum_size = Vector2(826, 263)
+custom_minimum_size = Vector2(826, 283)
 offset_right = 826.0
-offset_bottom = 263.0
+offset_bottom = 283.0
 script = ExtResource("1_rx8b1")
 target_details_container = NodePath("PageInnerContainer/DetailsContainer/DetailsContainer/HBoxContainer/TargetDetailsContainer")
 target_type_label = NodePath("PageInnerContainer/DetailsContainer/DetailsContainer/HBoxContainer/TargetDetailsContainer/TargetTypeLabel")
@@ -35,7 +35,7 @@ acc_pot_container = NodePath("PageInnerContainer/DetailsContainer/DetailsContain
 accuracy_label = NodePath("PageInnerContainer/DetailsContainer/DetailsContainer/HBoxContainer/VBoxContainer/AccPotContainer/AccLabel")
 potency_label = NodePath("PageInnerContainer/DetailsContainer/DetailsContainer/HBoxContainer/VBoxContainer/AccPotContainer/PotLabel")
 effects_label = NodePath("PageInnerContainer/DetailsContainer/DetailsContainer/HBoxContainer/VBoxContainer/AccPotContainer/EffectsLabel")
-ammo_label = NodePath("PageInnerContainer/DetailsContainer/DetailsContainer/HBoxContainer/VBoxContainer/AmmoDamageContainer/AmmoContainer")
+ammo_label = NodePath("PageInnerContainer/DetailsContainer/DetailsContainer/HBoxContainer/VBoxContainer/AccPotContainer/AmmoContainer")
 damage_entries_container = NodePath("PageInnerContainer/DetailsContainer/DetailsContainer/HBoxContainer/VBoxContainer/AmmoDamageContainer/DamagesContainer")
 icon_background = NodePath("PageInnerContainer/LineContainer/IconBackgroundTextureRect")
 icon = NodePath("PageInnerContainer/LineContainer/IconBackgroundTextureRect/IconTextureRect")
@@ -53,7 +53,6 @@ add_item_button = NodePath("PageInnerContainer/LineContainer/AddButton")
 background = NodePath("NinePatchRect")
 inner_container = NodePath("PageInnerContainer")
 force_fill_x = true
-center_from = null
 
 [node name="NinePatchRect" type="NinePatchRect" parent="."]
 layout_mode = 2
@@ -207,10 +206,7 @@ text = "Effect"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="AmmoDamageContainer" type="HBoxContainer" parent="PageInnerContainer/DetailsContainer/DetailsContainer/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="AmmoContainer" type="HBoxContainer" parent="PageInnerContainer/DetailsContainer/DetailsContainer/HBoxContainer/VBoxContainer/AmmoDamageContainer" node_paths=PackedStringArray("count_val_label", "cost_val_label", "clip_val_label", "ammo_icon_rect")]
+[node name="AmmoContainer" type="HBoxContainer" parent="PageInnerContainer/DetailsContainer/DetailsContainer/HBoxContainer/VBoxContainer/AccPotContainer" node_paths=PackedStringArray("count_val_label", "cost_val_label", "clip_val_label", "ammo_icon_rect")]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -224,52 +220,55 @@ phy_ammo_icon = ExtResource("13_icqix")
 mag_ammo_icon = ExtResource("14_i3a7u")
 abn_ammo_icon = ExtResource("15_32cel")
 
-[node name="AmmoIcon" type="TextureRect" parent="PageInnerContainer/DetailsContainer/DetailsContainer/HBoxContainer/VBoxContainer/AmmoDamageContainer/AmmoContainer"]
+[node name="AmmoIcon" type="TextureRect" parent="PageInnerContainer/DetailsContainer/DetailsContainer/HBoxContainer/VBoxContainer/AccPotContainer/AmmoContainer"]
 layout_mode = 2
 texture = ExtResource("12_3i4mv")
 expand_mode = 3
 
-[node name="CountLabel" type="Label" parent="PageInnerContainer/DetailsContainer/DetailsContainer/HBoxContainer/VBoxContainer/AmmoDamageContainer/AmmoContainer"]
+[node name="CountLabel" type="Label" parent="PageInnerContainer/DetailsContainer/DetailsContainer/HBoxContainer/VBoxContainer/AccPotContainer/AmmoContainer"]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("16_cmj7j")
 theme_override_font_sizes/font_size = 32
 text = "9"
 
-[node name="Seperator2" type="Label" parent="PageInnerContainer/DetailsContainer/DetailsContainer/HBoxContainer/VBoxContainer/AmmoDamageContainer/AmmoContainer"]
+[node name="Seperator2" type="Label" parent="PageInnerContainer/DetailsContainer/DetailsContainer/HBoxContainer/VBoxContainer/AccPotContainer/AmmoContainer"]
 self_modulate = Color(0.31, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("16_cmj7j")
 theme_override_font_sizes/font_size = 32
 text = " ("
 
-[node name="CostLabel2" type="Label" parent="PageInnerContainer/DetailsContainer/DetailsContainer/HBoxContainer/VBoxContainer/AmmoDamageContainer/AmmoContainer"]
+[node name="CostLabel2" type="Label" parent="PageInnerContainer/DetailsContainer/DetailsContainer/HBoxContainer/VBoxContainer/AccPotContainer/AmmoContainer"]
 self_modulate = Color(0.31, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("16_cmj7j")
 theme_override_font_sizes/font_size = 32
 text = "4"
 
-[node name="Seperator3" type="Label" parent="PageInnerContainer/DetailsContainer/DetailsContainer/HBoxContainer/VBoxContainer/AmmoDamageContainer/AmmoContainer"]
+[node name="Seperator3" type="Label" parent="PageInnerContainer/DetailsContainer/DetailsContainer/HBoxContainer/VBoxContainer/AccPotContainer/AmmoContainer"]
 self_modulate = Color(0.31, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("16_cmj7j")
 theme_override_font_sizes/font_size = 32
 text = ":"
 
-[node name="ClipLabel" type="Label" parent="PageInnerContainer/DetailsContainer/DetailsContainer/HBoxContainer/VBoxContainer/AmmoDamageContainer/AmmoContainer"]
+[node name="ClipLabel" type="Label" parent="PageInnerContainer/DetailsContainer/DetailsContainer/HBoxContainer/VBoxContainer/AccPotContainer/AmmoContainer"]
 self_modulate = Color(0.31, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("16_cmj7j")
 theme_override_font_sizes/font_size = 32
 text = "36"
 
-[node name="Seperator4" type="Label" parent="PageInnerContainer/DetailsContainer/DetailsContainer/HBoxContainer/VBoxContainer/AmmoDamageContainer/AmmoContainer"]
+[node name="Seperator4" type="Label" parent="PageInnerContainer/DetailsContainer/DetailsContainer/HBoxContainer/VBoxContainer/AccPotContainer/AmmoContainer"]
 self_modulate = Color(0.31, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("16_cmj7j")
 theme_override_font_sizes/font_size = 32
 text = ")"
+
+[node name="AmmoDamageContainer" type="HBoxContainer" parent="PageInnerContainer/DetailsContainer/DetailsContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
 
 [node name="DamagesContainer" type="VBoxContainer" parent="PageInnerContainer/DetailsContainer/DetailsContainer/HBoxContainer/VBoxContainer/AmmoDamageContainer"]
 layout_mode = 2
@@ -277,7 +276,6 @@ layout_mode = 2
 [node name="DamageContainer" parent="PageInnerContainer/DetailsContainer/DetailsContainer/HBoxContainer/VBoxContainer/AmmoDamageContainer/DamagesContainer" instance=ExtResource("17_0oup6")]
 layout_mode = 2
 font_size_override = 32
-attack_scale = 0.0
 
 [node name="StatModsContainer" type="HBoxContainer" parent="PageInnerContainer/DetailsContainer/DetailsContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2

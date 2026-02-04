@@ -5,6 +5,7 @@ const LOGGING = false
 const WALK_ANIM_NAME = "move_walk/walk"
 
 signal reached_motion_destination
+signal reached_scripted_motion_destination
 
 @export var vfx_holder:VfxHolder
 @export var aura_holder:AuraHolder
@@ -198,6 +199,7 @@ func _on_reached_dest():
 	if _is_moving_on_script:
 		if LOGGING: print("Was Moving On Script")
 		_scripted_move_finshed()
+		reached_scripted_motion_destination.emit()
 		return
 	reached_motion_destination.emit()
 

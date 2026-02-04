@@ -275,7 +275,11 @@ func get_damage_data_single(actor:BaseActor, damage_key:String)->Dictionary:
 func get_damage_datas(actor:BaseActor, damage_keys)->Dictionary:
 	var out_dict = {}
 	if damage_keys is String:
-		damage_keys = [damage_keys]
+		if damage_keys.to_lower() == "all":
+			damage_keys = action_data.get("DamageDatas", {}).keys()
+		else:
+			damage_keys = [damage_keys]
+	
 	var preview_data:Dictionary = action_data.get("Preview", {})
 	var preview_damage_counts = preview_data.get("PreviewDamageCounts", {})
 	for key in damage_keys:

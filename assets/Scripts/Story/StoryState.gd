@@ -155,18 +155,19 @@ func start_new_story():
 	MainRootNode.Instance.open_camp_menu()
 
 func load_next_story_scene():
-	var next_scene_data = StatcStoryStages.get_stage_data(_story_stage_index + 1)
-	if next_scene_data.size() == 0:
-		printerr("Story Over")
-		MainRootNode.Instance.open_camp_menu()
-		return
-	_story_stage_index += 1
-	var next_map = next_scene_data.get("MapScene", '')
-	var next_dialog = next_scene_data.get("DialogScript", '')
-	if next_map:
-		LoadManager.load_combat(next_map, next_dialog, true)
-	else:
-		MainRootNode.Instance.open_camp_menu(next_dialog)
+	#var next_scene_data = StatcStoryStages.get_stage_data(_story_stage_index + 1)
+	#if next_scene_data.size() == 0:
+		#printerr("Story Over")
+		#MainRootNode.Instance.open_camp_menu()
+		#return
+	#_story_stage_index += 1
+	#var next_map = next_scene_data.get("MapScene", '')
+	#var next_dialog = next_scene_data.get("DialogScript", '')
+	#if next_map:
+		#LoadManager.load_combat(next_map, true)
+	#else:
+		#MainRootNode.Instance.open_camp_menu(next_dialog)
+	MainRootNode.Instance.open_camp_menu()
 
 func add_encounter_with_actor(actor):
 	if actor is String:

@@ -385,13 +385,12 @@ static func build_path_finder(game_state:GameStateData)->AStar2D:
 	for y in range(game_state.map_hight):
 		for x in range(game_state.map_width):
 			var coor = Vector2i(x, y)
-			if game_state.is_spot_traversable(coor, null):
-				star.add_map_point(coor)
-					
-				if y > 0:
-					star.connect_map_points(coor, Vector2i(x, y-1))
-				if x > 0:
-					star.connect_map_points(coor, Vector2i(x-1, y))
+			star.add_map_point(coor)
+			var bidir =  game_state.is_spot_traversable(coor, null)
+			if y > 0:
+				star.connect_map_points(coor, Vector2i(x, y-1), bidir)
+			if x > 0:
+				star.connect_map_points(coor, Vector2i(x-1, y), bidir)
 	return star
 
 

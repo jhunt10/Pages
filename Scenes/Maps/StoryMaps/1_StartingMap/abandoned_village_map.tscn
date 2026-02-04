@@ -1225,7 +1225,7 @@ sources/0 = SubResource("TileSetAtlasSource_0766f")
 [sub_resource type="TileSet" id="TileSet_o1yif"]
 tile_size = Vector2i(32, 32)
 
-[node name="MapNode" type="Node2D" node_paths=PackedStringArray("zone_tile_map", "actor_tile_map", "item_tile_map", "ground_tile_map", "terrain_path_map", "marker_tile_map", "player_spawn_area_tile_map")]
+[node name="MapNode" type="Node2D" node_paths=PackedStringArray("zone_tile_map", "actor_tile_map", "item_tile_map", "ground_tile_map", "terrain_path_map", "marker_tile_map", "phase_marker_maps_holder", "player_spawn_area_tile_map")]
 script = ExtResource("1_apokt")
 map_name = "AbandonedCabin"
 zone_tile_map = NodePath("ZoneTileMapLayer")
@@ -1233,7 +1233,8 @@ actor_tile_map = NodePath("ActorTileMapLayer")
 item_tile_map = NodePath("ItemTileMapLayer")
 ground_tile_map = NodePath("GroundTileMapLayer")
 terrain_path_map = NodePath("TerrainMap")
-marker_tile_map = NodePath("MarkerTileMapLayer")
+marker_tile_map = NodePath("PhaseController/InitEnemySpawnMap")
+phase_marker_maps_holder = NodePath("PhaseController")
 player_spawn_area_tile_map = NodePath("PlayerSpawnAreaMapLayer")
 
 [node name="GroundTileMapLayer" type="TileMapLayer" parent="."]
@@ -1279,10 +1280,12 @@ tile_set = SubResource("TileSet_eodif")
 tile_map_data = PackedByteArray("AAAFAAoAAAAAAAMAAAA=")
 tile_set = SubResource("TileSet_5dfvr")
 
-[node name="MarkerTileMapLayer" type="TileMapLayer" parent="."]
+[node name="PhaseController" type="Node2D" parent="."]
+
+[node name="InitEnemySpawnMap" type="TileMapLayer" parent="PhaseController"]
 tile_set = SubResource("TileSet_o1yif")
 
-[node name="SpwanNode_Player" type="Sprite2D" parent="MarkerTileMapLayer"]
+[node name="SpwanNode_Player" type="Sprite2D" parent="PhaseController/InitEnemySpawnMap"]
 self_modulate = Color(0, 1, 0, 1)
 position = Vector2(176, 336)
 rotation = 3.14159
@@ -1292,7 +1295,7 @@ spawn_actor_key = "Player1"
 is_player = true
 map_coor = Vector2i(5, 10)
 
-[node name="SpwanNode_Mushroom2" type="Sprite2D" parent="MarkerTileMapLayer"]
+[node name="SpwanNode_Mushroom2" type="Sprite2D" parent="PhaseController/InitEnemySpawnMap"]
 position = Vector2(400, 240)
 texture = ExtResource("14_pqc0r")
 script = ExtResource("15_1we1f")
@@ -1300,7 +1303,7 @@ spawn_actor_key = "TutorShroom_Roof"
 spawn_actor_id = "RoofShroom_1"
 map_coor = Vector2i(12, 7)
 
-[node name="SpwanNode_Enemey" type="Sprite2D" parent="MarkerTileMapLayer"]
+[node name="SpwanNode_Enemey" type="Sprite2D" parent="PhaseController/InitEnemySpawnMap"]
 self_modulate = Color(1, 0.1, 0, 1)
 position = Vector2(112, 176)
 texture = ExtResource("14_pqc0r")
@@ -1309,7 +1312,7 @@ spawn_actor_key = "RandomEnemy"
 facing = 2
 map_coor = Vector2i(3, 5)
 
-[node name="SpwanNode_Enemey2" type="Sprite2D" parent="MarkerTileMapLayer"]
+[node name="SpwanNode_Enemey2" type="Sprite2D" parent="PhaseController/InitEnemySpawnMap"]
 self_modulate = Color(1, 0.1, 0, 1)
 position = Vector2(240, 112)
 texture = ExtResource("14_pqc0r")
@@ -1318,7 +1321,7 @@ spawn_actor_key = "RandomEnemy"
 facing = 2
 map_coor = Vector2i(7, 3)
 
-[node name="SpwanNode_Enemey3" type="Sprite2D" parent="MarkerTileMapLayer"]
+[node name="SpwanNode_Enemey3" type="Sprite2D" parent="PhaseController/InitEnemySpawnMap"]
 self_modulate = Color(1, 0.1, 0, 1)
 position = Vector2(400, 144)
 rotation = 1.5708
@@ -1328,7 +1331,7 @@ spawn_actor_key = "RandomEnemy"
 facing = 3
 map_coor = Vector2i(12, 4)
 
-[node name="SpwanNode_Enemey4" type="Sprite2D" parent="MarkerTileMapLayer"]
+[node name="SpwanNode_Enemey4" type="Sprite2D" parent="PhaseController/InitEnemySpawnMap"]
 self_modulate = Color(1, 0.1, 0, 1)
 position = Vector2(80, 528)
 rotation = 4.71239
@@ -1338,7 +1341,7 @@ spawn_actor_key = "RandomEnemy"
 facing = 1
 map_coor = Vector2i(2, 16)
 
-[node name="SpwanNode_Enemey5" type="Sprite2D" parent="MarkerTileMapLayer"]
+[node name="SpwanNode_Enemey5" type="Sprite2D" parent="PhaseController/InitEnemySpawnMap"]
 self_modulate = Color(1, 0.1, 0, 1)
 position = Vector2(368, 592)
 rotation = 1.5708
@@ -1348,7 +1351,7 @@ spawn_actor_key = "RandomEnemy"
 facing = 3
 map_coor = Vector2i(11, 18)
 
-[node name="SpwanNode_Enemey6" type="Sprite2D" parent="MarkerTileMapLayer"]
+[node name="SpwanNode_Enemey6" type="Sprite2D" parent="PhaseController/InitEnemySpawnMap"]
 self_modulate = Color(1, 0.1, 0, 1)
 position = Vector2(240, 560)
 rotation = 1.5708

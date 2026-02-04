@@ -14,6 +14,7 @@ var grid_tile_map:TileMapLayer:
 @export var ground_tile_map:TileMapLayer 
 @export var terrain_path_map:TerrainPathingMap
 @export var marker_tile_map:TileMapLayer
+@export var phase_marker_maps_holder:Node2D
 @export var player_spawn_area_tile_map:TileMapLayer
 @onready var target_area_display:TargetAreaDisplayNode = $TargetAreaDisplayNode
 
@@ -39,6 +40,8 @@ func _ready() -> void:
 	if LOGGING: print("Readying MapCont: Inst:%s" % [CombatRootControl.Instance])
 	#CombatRootControl.Instance.actor_spawned.connect(create_actor_node)
 	CombatRootControl.QueController.end_of_frame.connect(_sync_positions)
+	if phase_marker_maps_holder:
+		phase_marker_maps_holder.hide()
 
 func get_map_rect()->Rect2i:
 	if ground_tile_map:
@@ -47,59 +50,27 @@ func get_map_rect()->Rect2i:
 
 func get_map_data()->Dictionary:
 	var map_data = terrain_path_map.get_map_data()
-	var actors = []
-	for child in marker_tile_map.get_children():
-		if child is ActorSpawnNode:
-			if !child.visible:
-				continue
-			var pos = MapPos.new(child.map_coor.x, child.map_coor.y, 0, child.facing)
-			var data = {"Pos": pos}
-			if child.spawn_actor_key != '':
-				if child.spawn_actor_key == "RandomEnemy":
-					data["ActorKey"] = _get_random_enemy_key()
-				else:
-					data["ActorKey"] = child.spawn_actor_key
-			if child.spawn_actor_id != '':
-				data["ActorId"] = child.spawn_actor_id
-			if child.is_player:
-				data["FactionId"] = 0
-			else:
-				data["FactionId"] = 1
-			data['WaitToSpawn'] = child.wait_to_spawn
-			actors.append(data)
-			var marker_name = child.marker_name
-			_cached_spawn_nodes[marker_name] = child
-		elif child is MapMarkerNode:
-			var pos = MapPos.new(child.map_coor.x, child.map_coor.y, 0, child.facing)
-			var marker_name = child.marker_name
-			_cached_marker_poses[marker_name] = pos
-		elif child is MapPathNode:
-			var marker_name = child.marker_name
-			_cached_marker_paths[marker_name] = child
-	marker_tile_map.hide()
-	map_data['Actors'] = actors
 	map_data['SpawnArea'] = get_player_spawn_area()
 	return map_data
 
-func _get_random_enemy_key()->String:
-	var map_data = MapLoader.get_map_data(map_name)
-	var enemy_data = map_data.get("EnemySet", {})
-	var enemy_set = {}
-	for enemy_key in enemy_data:
-		enemy_set[enemy_key] = enemy_data[enemy_key].get("Weight", -1)
-	var actor_key = Roll.from_set(enemy_set)
-	return actor_key
+func get_phase_marker_map(marker_map_name)->TileMapLayer:
+	var child = phase_marker_maps_holder.get_node(marker_map_name)
+	if child is TileMapLayer:
+		return child
+	printerr("No Phase Marker Map found with name '%s'." % [marker_map_name])
+	return null
 	
 
-func get_pos_marker(marker_name)->MapPos:
-	if _cached_marker_poses.has(marker_name):
-		return _cached_marker_poses[marker_name]
-	return null
+
+#func get_pos_marker(marker_name)->MapPos:
+	#if _cached_marker_poses.has(marker_name):
+		#return _cached_marker_poses[marker_name]
+	#return null
 	
-func get_path_marker(marker_name)->MapPathNode:
-	if _cached_marker_paths.has(marker_name):
-		return _cached_marker_paths[marker_name]
-	return null
+#func get_path_marker(marker_name)->MapPathNode:
+	#if _cached_marker_paths.has(marker_name):
+		#return _cached_marker_paths[marker_name]
+	#return null
 	
 func get_spawn_node(marker_name)->ActorSpawnNode:
 	if _cached_spawn_nodes.has(marker_name):

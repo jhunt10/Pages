@@ -91,15 +91,17 @@ func _load_full_details():
 	
 	# Damage Data
 	for child in damage_entries_container.get_children():
-		if child is DamageLabelContainer:
-			damage_font_size_override = child.font_size_override
 		child.queue_free()
 	var damage_datas = {}
-	if page:
-		damage_datas = page.get_load_val("DamageDatas", {})
+	if page is PageItemAction:
+		damage_datas = page.get_damage_datas(null, "All")
 	elif page_effect_def:
 		damage_datas = page_effect_def.get("DamageDatas", {})
-	for damage_data in damage_datas.values():
+	for damage_key in damage_datas.keys():
+		var damage_data = damage_datas[damage_key]
+		var new_label:Label = Label.new()
+		new_label.text = damage_key
+		damage_entries_container.add_child(new_label)
 		var new_damage_label:DamageLabelContainer = load("res://Scenes/UiNodes/DamageLabelContainer/damage_label_container.tscn").instantiate()
 		new_damage_label.set_damage_data(damage_data)
 		damage_entries_container.add_child(new_damage_label)

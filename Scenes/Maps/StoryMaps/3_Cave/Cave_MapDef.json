@@ -1,21 +1,38 @@
 {
     "MapKey": "Cave",
-    "MapName":"Cave",
-    "Description":"A cave leading to The City?",
+    "MapName": "Cave",
+    "Description": "A cave leading to The City?",
     "MapScene": "cave_map.tscn",
     "SortOrder": 3,
-    "EnemySet":{
-        "ZombieBasic": {
-            "Weight": 10,
-            "IsUnique": false
+    "StartingPhase": "InitSpawn",
+    "PhaseDatas": {
+        "InitSpawn": {
+            "PhaseType": "SpawnEnemy",
+            "NextPhase": "PlacePlayers",
+            "MarkerMap": "InitEnemySpawnMap",
+            "EnemySet": {
+                "ZombieBasic": {
+                    "Weight": 10,
+                    "IsUnique": false
+                },
+                "Skeleton": {
+                    "Weight": 5,
+                    "IsUnique": false
+                },
+                "ShroomGolem": {
+                    "Weight": 10,
+                    "IsUnique": true
+                }
+            }
         },
-        "Skeleton": {
-            "Weight": 5,
-            "IsUnique": false
+        "PlacePlayers": {
+            "PhaseType": "PlacePlayers",
+            "NextPhase": "CombatPhase1"
         },
-        "ShroomGolem": {
-            "Weight": 10,
-            "IsUnique": true
+        "CombatPhase1": {
+            "PhaseType": "Combat",
+            "NextPhase": "END",
+            "CombatCondition": "KillAll"
         }
     }
 }

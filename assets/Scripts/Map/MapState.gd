@@ -67,22 +67,22 @@ func spot_blocks_los(pos)->bool:
 	for actor:BaseActor in spot.get_actors():
 		if actor.stats.get_stat("BlocksLOS", 0) > 0:
 			return true
-	return spot.terrain_index == 0
+	return spot.terrain == MapSpot.TerrainType.Blocked
 
-func get_terrain_at_pos(pos):
-	var spot = get_map_spot(pos)
-	if not spot:
-		return -1
-	return spot.terrain_index 
+#func get_terrain_at_pos(pos)->MapSpot.TerrainType:
+	#var spot = get_map_spot(pos)
+	#if not spot:
+		#return -1
+	#return spot.terrain
 	
 func is_spot_traversable(pos, _actor)->bool:
 	var spot = get_map_spot(pos)
 	if not spot:
 		print("Failed to find spot at pos: %s" % [pos])
 		return false
-	if spot.terrain_index == 0:
+	if spot.terrain == MapSpot.TerrainType.Blocked:
 		return false
-	if spot.terrain_index == 1:
+	if spot.terrain == MapSpot.TerrainType.Cover:
 		return false
 	return true
 	

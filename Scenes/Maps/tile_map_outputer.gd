@@ -41,8 +41,16 @@ func get_map_data()->Dictionary:
 		for size_x in range(map_rect.size.x):
 			var x = map_rect.position.x + size_x
 			var val = self.get_cell_atlas_coords(Vector2i(x, y))
-			var terrain = val.x
-			out_arr[y].append(terrain)
+			var terrain_type = MapSpot.TerrainType.Open
+			if val.y == 0:
+				match(val.x):
+					0:
+						terrain_type = MapSpot.TerrainType.Blocked
+					1:
+						terrain_type = MapSpot.TerrainType.Cover
+					2:
+						terrain_type = MapSpot.TerrainType.Open
+			out_arr[y].append(terrain_type)
 	out_dict['Terrain'] = out_arr
 	return out_dict
 	

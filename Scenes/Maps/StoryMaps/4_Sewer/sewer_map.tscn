@@ -2496,7 +2496,7 @@ tile_size = Vector2i(32, 32)
 [sub_resource type="TileSet" id="TileSet_o1yif"]
 tile_size = Vector2i(32, 32)
 
-[node name="MapNode" type="Node2D" node_paths=PackedStringArray("zone_tile_map", "actor_tile_map", "item_tile_map", "ground_tile_map", "terrain_path_map", "marker_tile_map", "player_spawn_area_tile_map")]
+[node name="MapNode" type="Node2D" node_paths=PackedStringArray("zone_tile_map", "actor_tile_map", "item_tile_map", "ground_tile_map", "terrain_path_map", "marker_tile_map", "phase_marker_maps_holder", "player_spawn_area_tile_map")]
 script = ExtResource("1_i66m5")
 map_name = "Sewer"
 zone_tile_map = NodePath("ZoneTileMapLayer")
@@ -2504,7 +2504,8 @@ actor_tile_map = NodePath("ActorTileMapLayer")
 item_tile_map = NodePath("ItemTileMapLayer")
 ground_tile_map = NodePath("Walls_MapLayer")
 terrain_path_map = NodePath("TerrainMap")
-marker_tile_map = NodePath("MarkerTileMapLayer")
+marker_tile_map = NodePath("PhaseController/InitEnemySpawnMap")
+phase_marker_maps_holder = NodePath("PhaseController")
 player_spawn_area_tile_map = NodePath("PlayerSpawnAreaMapLayer")
 
 [node name="GroundTileMapLayer" type="TileMapLayer" parent="."]
@@ -2630,10 +2631,12 @@ tile_set = SubResource("TileSet_eodif")
 [node name="ActorTileMapLayer" type="TileMapLayer" parent="."]
 tile_set = SubResource("TileSet_5ipcw")
 
-[node name="MarkerTileMapLayer" type="TileMapLayer" parent="."]
+[node name="PhaseController" type="Node2D" parent="."]
+
+[node name="InitEnemySpawnMap" type="TileMapLayer" parent="PhaseController"]
 tile_set = SubResource("TileSet_o1yif")
 
-[node name="SpwanNode_Enemey" type="Sprite2D" parent="MarkerTileMapLayer"]
+[node name="SpwanNode_Enemey" type="Sprite2D" parent="PhaseController/InitEnemySpawnMap"]
 self_modulate = Color(1, 0.1, 0, 1)
 position = Vector2(400, 496)
 rotation = 1.5708
@@ -2643,7 +2646,7 @@ spawn_actor_key = "RandomEnemy"
 facing = 3
 map_coor = Vector2i(12, 15)
 
-[node name="SpwanNode_Enemey2" type="Sprite2D" parent="MarkerTileMapLayer"]
+[node name="SpwanNode_Enemey2" type="Sprite2D" parent="PhaseController/InitEnemySpawnMap"]
 self_modulate = Color(1, 0.1, 0, 1)
 position = Vector2(272, 176)
 texture = ExtResource("19_pm0qq")
@@ -2652,7 +2655,7 @@ spawn_actor_key = "RandomEnemy"
 facing = 2
 map_coor = Vector2i(8, 5)
 
-[node name="SpwanNode_Enemey3" type="Sprite2D" parent="MarkerTileMapLayer"]
+[node name="SpwanNode_Enemey3" type="Sprite2D" parent="PhaseController/InitEnemySpawnMap"]
 self_modulate = Color(1, 0.1, 0, 1)
 position = Vector2(624, 336)
 rotation = 1.5708
@@ -2662,7 +2665,7 @@ spawn_actor_key = "RandomEnemy"
 facing = 3
 map_coor = Vector2i(19, 10)
 
-[node name="SpwanNode_Enemey4" type="Sprite2D" parent="MarkerTileMapLayer"]
+[node name="SpwanNode_Enemey4" type="Sprite2D" parent="PhaseController/InitEnemySpawnMap"]
 self_modulate = Color(1, 0.1, 0, 1)
 position = Vector2(240, 336)
 texture = ExtResource("19_pm0qq")

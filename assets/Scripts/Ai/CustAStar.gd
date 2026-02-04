@@ -53,7 +53,7 @@ func add_map_point(pos):
 		var index = _pos_to_index(map_pos)
 		if not self.has_point(index):
 			self.add_point(index, coor, 1)
-		# Connect other points at some position
+		# Connect other points at same position
 		for other_dir_index in same_pos_indexes:
 			if not self.are_points_connected(index, other_dir_index, true):
 				self.connect_points(index, other_dir_index, true)
