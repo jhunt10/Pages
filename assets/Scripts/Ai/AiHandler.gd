@@ -1,6 +1,6 @@
 class_name AiHandler
 
-const LOGGING:bool = true
+const LOGGING:bool = false
 
 static var astar:CustAStar
 ## Dictionary ActorKey to action_options_data
@@ -94,7 +94,7 @@ static func _choose_page_for_actor(actor:BaseActor, game_state:GameStateData)->P
 			if pot_targ == aggroed_actor_id:
 				aggroed_actor_in_target = true
 			var pot_actor = game_state.get_actor(pot_targ)
-			if pot_actor.FactionIndex != actor.FactionIndex:
+			if pot_actor.TeamIndex != actor.TeamIndex:
 				attack_has_enemy_target = true
 		if not attack_has_enemy_target:
 			continue
@@ -163,7 +163,7 @@ static func get_closest_enemy(actor:BaseActor, game_state:GameStateData)->BaseAc
 	var min_dist = 10000
 	var closest_actor = null
 	for enemy:BaseActor in game_state.list_actors():
-		if enemy.FactionIndex == actor.FactionIndex:
+		if enemy.TeamIndex == actor.TeamIndex:
 			continue
 		var enemy_pos = game_state.get_actor_pos(enemy)
 		#var path = path_to_target(actor, actor_pos, enemy_pos, game_state)
@@ -200,7 +200,7 @@ static func try_handle_get_target_sub_action(actor:BaseActor, selection_data:Tar
 		var pp_actor = p_actor
 		if pp_actor is String:
 			pp_actor = ActorLibrary.get_actor(p_actor)
-		if pp_actor.FactionIndex != actor.FactionIndex:
+		if pp_actor.TeamIndex != actor.TeamIndex:
 			enemy_actors.append(pp_actor)
 	# TODO: Be smart about AOE
 	var targeted_enemy_id = pick_between_enemies(actor, enemy_actors)
@@ -297,7 +297,7 @@ static func path_to_target(actor:BaseActor, start_pos:MapPos, target_pos:MapPos,
 		##if reverse_path.size() > 1:
 			##point_path = reverse_path
 	if LOGGING:
-		print(point_path)
+		print("AStarPoinPath: %s" %[point_path])
 	var move_list = []
 	var pos_list = []
 	var last_pos = start_pos
@@ -386,11 +386,34 @@ static func build_path_finder(game_state:GameStateData)->AStar2D:
 		for x in range(game_state.map_width):
 			var coor = Vector2i(x, y)
 			star.add_map_point(coor)
-			var bidir =  game_state.is_spot_traversable(coor, null)
-			if y > 0:
-				star.connect_map_points(coor, Vector2i(x, y-1), bidir)
-			if x > 0:
-				star.connect_map_points(coor, Vector2i(x-1, y), bidir)
+			# Open spots are bidirectionally connected to Open spots
+			# Closed spots are bidirectionally connected to Closed spots
+			# Closed spots are UNIdirectionally connected to Closed spots
+			# This allows actors who end up in Closed spots to be able to navigate back onto Open spots
+			var this_spot_open =  game_state.is_spot_traversable(coor, null)
+			if y > 0: # Connect to stop above
+				var other_coor = Vector2i(x, y-1)
+				var other_spot_open = game_state.is_spot_traversable(other_coor, null)
+				# Connect Bidirectional if both spots open or both closed
+				if this_spot_open == other_spot_open:
+					star.connect_map_points(coor, other_coor, true)
+				# Otherwise connect closed spot to open
+				elif this_spot_open and not other_spot_open:
+					star.connect_map_points(other_coor, coor, false)
+				elif not this_spot_open and other_spot_open:
+					star.connect_map_points(coor, other_coor, false)
+			
+			if x > 0: # Connect to stop above
+				var other_coor = Vector2i(x-1, y)
+				var other_spot_open = game_state.is_spot_traversable(other_coor, null)
+				# Connect Bidirectional if both spots open or both closed
+				if this_spot_open == other_spot_open:
+					star.connect_map_points(coor, other_coor, true)
+				# Otherwise connect closed spot to open
+				elif this_spot_open and not other_spot_open:
+					star.connect_map_points(other_coor, coor, false)
+				elif not this_spot_open and other_spot_open:
+					star.connect_map_points(coor, other_coor, false)
 	return star
 
 

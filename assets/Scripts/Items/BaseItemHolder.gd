@@ -1,7 +1,7 @@
 ## Base class for Equipment, items, and BagItem Holders
 class_name BaseItemHolder
 
-const LOGGING = true
+const LOGGING = false
 enum ValidStates {UnValidated, Valid, Invalid, Unacceptable}
 
 signal item_slots_rebuilt

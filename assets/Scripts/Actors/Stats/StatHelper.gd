@@ -11,7 +11,7 @@ const StatBarColors:Dictionary = {
 
 ## Every Actor is exspected to have these stats
 const BasicStats:Array = [
-	HealthMax, HealthCurrent, Mass, Speed, Push, PPR,
+	HealthMax, HealthCurrent, Mass, Speed, Crash, PPR,
 	Armor, Ward, 
 	Accuracy, Evasion, Potency, Protection,
 	Awareness, CritChance, CritMod, BlockChance, BlockMod,
@@ -29,7 +29,7 @@ const HealthCurrent = "HealthCur"
 const _HealthStat = "Health"
 const Mass = "Mass"
 const Speed = "Speed"
-const Push = "Push"
+const Crash = "Push"
 const PPR = "PPR"
 const PhyAttack = "PhyAttack"
 const MagAttack = "MagAttack"

@@ -1,6 +1,6 @@
 class_name BaseZone
 
-const LOGGING = true
+const LOGGING = false
 
 var ZoneKey:String
 var Id:String = str(ResourceUID.create_id())

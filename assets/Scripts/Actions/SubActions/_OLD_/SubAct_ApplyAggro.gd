@@ -34,7 +34,7 @@ func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, que_exe_d
 	
 	for target:BaseActor in targets:
 		# Aggro never applies between allies
-		if target.FactionIndex == actor.FactionIndex:
+		if target.TeamIndex == actor.TeamIndex:
 			continue
 		var current_threat = target.aggro.get_threat_from_actor(actor.Id)
 		if change_type == 'ToHighestThreat':

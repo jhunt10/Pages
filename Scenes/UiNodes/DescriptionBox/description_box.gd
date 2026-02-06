@@ -5,6 +5,12 @@ const pop_up_container_path = "res://Scenes/UiNodes/DescriptionBox/DescriptionPo
 const RED_TEXT = "[color=#460000]"
 const BLUE_TEXT = "[color=#000046]"
 
+const COLORS_DIC = {
+	"Red": RED_TEXT,
+	"Blue": BLUE_TEXT,
+	"Grey": "[color=#3f3f3f]"
+}
+
 @export var popup_container:DecscriptionPopUpContainer
 
 func _ready() -> void:
@@ -157,8 +163,8 @@ func _build_bbcode_array(raw_description:String, object_def:Dictionary, object_i
 					
 					mid_value = sub_tokens[3]
 					end_tag = "[/outline_color][/outline_size][/color]"
-				elif sub_tokens.size() == 3 and sub_tokens[1] == "Blue":
-					start_tag = "[color=#000046]"
+				elif sub_tokens.size() == 3 and COLORS_DIC.keys().has(sub_tokens[1]):
+					start_tag = COLORS_DIC[sub_tokens[1]]
 					mid_value = sub_tokens[2]
 				else:
 					mid_value = sub_tokens[2]

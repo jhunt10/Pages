@@ -48,7 +48,7 @@ func _init( parent:AttackEvent,
 ) -> void:
 	parent_event = parent
 	defending_actor_id = defending_actor.Id
-	defending_actor_faction = defending_actor.FactionIndex
+	defending_actor_faction = defending_actor.TeamIndex
 	attack_direction = direction_of_attack
 	defender_has_cover = defender_is_under_cover
 	

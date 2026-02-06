@@ -23,7 +23,7 @@ func add_threat_from_actor(enemy:BaseActor, val:float):
 	
 	#TODO: Add threat from healing and applying effects
 	
-	if not enemy or enemy.FactionIndex == _actor.FactionIndex:
+	if not enemy or enemy.TeamIndex == _actor.TeamIndex:
 		return
 	if not actor_id_to_threat.has(enemy.Id):
 		actor_id_to_threat[enemy.Id] = 0

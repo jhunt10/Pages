@@ -1,6 +1,6 @@
 class_name Roll
 
-const LOGGING = true
+const LOGGING = false
 
 static func roll()->float:
 	return randf()

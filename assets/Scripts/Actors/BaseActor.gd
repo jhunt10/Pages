@@ -45,7 +45,7 @@ var actor_data:Dictionary:
 	get:
 		return get_load_val("ActorData", {})
 
-var FactionIndex : int
+var TeamIndex : int
 var enemy_npc_index:int = -1
 
 var spawn_map_layer
@@ -483,7 +483,7 @@ func get_damage_mods()->Dictionary:
 			mod_id = mod_key + ":" + Id
 		mod_data['DamageModId'] = mod_id
 		mod_data['SourceActorId'] = Id
-		mod_data['SourceActorFaction'] = FactionIndex
+		mod_data['SourceActorFaction'] = TeamIndex
 		out_dict[mod_id] = mod_data
 	return out_dict
 
@@ -506,14 +506,14 @@ func get_attack_mods()->Dictionary:
 			mod_id = mod_key + ":" + Id
 		mod_data['AttackModId'] = mod_id
 		mod_data['SourceActorId'] = Id
-		mod_data['SourceActorFaction'] = FactionIndex
+		mod_data['SourceActorFaction'] = TeamIndex
 		
 		for damage_mod_key in mod_data.get('DamageMods', {}).keys():
 			var damage_mod = mod_data['DamageMods'][damage_mod_key]
 			damage_mod['DamageModKey'] = damage_mod_key
 			damage_mod['DamageModId'] = damage_mod_key
 			damage_mod['SourceActorId'] = Id
-			damage_mod['SourceActorFaction'] = FactionIndex
+			damage_mod['SourceActorFaction'] = TeamIndex
 			if not damage_mod.has("DisplayName"):
 				damage_mod['DisplayName'] = mod_data.get("DisplayName", "")
 		

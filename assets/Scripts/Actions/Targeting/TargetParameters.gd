@@ -123,9 +123,9 @@ func is_valid_target_actor(actor:BaseActor, target:BaseActor, _game_state:GameSt
 	if target_type == TargetTypes.Corpse:
 		return target.is_dead
 	if target_type == TargetTypes.Enemy:
-		return actor.FactionIndex != target.FactionIndex
+		return actor.TeamIndex != target.TeamIndex
 	if target_type == TargetTypes.Ally:
-		return actor.FactionIndex == target.FactionIndex
+		return actor.TeamIndex == target.TeamIndex
 	if target_type == TargetTypes.Spot or target_type == TargetTypes.FullArea:
 		return true
 	return false
@@ -133,9 +133,9 @@ func is_valid_target_actor(actor:BaseActor, target:BaseActor, _game_state:GameSt
 func is_actor_effected_by_aoe(actor:BaseActor, target:BaseActor, _game_state:GameStateData)->bool:
 	if target.Id == actor.Id:
 		return include_self_in_aoe
-	if actor.FactionIndex == target.FactionIndex:
+	if actor.TeamIndex == target.TeamIndex:
 		return include_allies_in_aoe
-	if actor.FactionIndex != target.FactionIndex:
+	if actor.TeamIndex != target.TeamIndex:
 		return include_enemies_in_aoe 
 	return false
 

@@ -101,7 +101,10 @@
         "CombatPhase1": {
             "PhaseType": "Combat",
             "NextPhase": "SpawnCaptain",
-            "CombatCondition": "KillAll"
+            "CombatCondition": {
+                "ConditionKey": "KillTeam",
+                "EnemyTeamIndex": 1
+            }
         },
         "SpawnCaptain": {
             "PhaseType": "SpawnEnemy",
@@ -177,7 +180,10 @@
         "CombatPhase2": {
             "PhaseType": "Combat",
             "NextPhase": "END",
-            "CombatCondition": "KillAll"
+            "CombatCondition": {
+                "ConditionKey": "KillTeam",
+                "EnemyTeamIndex": 1
+            }
         }
     }
 }

@@ -8,6 +8,7 @@ enum SpawnBy {Player, Key, Id}
 @export var marker_name:String
 @export var spawn_actor_key:String
 @export var spawn_actor_id:String
+@export var team_index:int
 @export var is_player:bool
 @export var wait_to_spawn:bool
 

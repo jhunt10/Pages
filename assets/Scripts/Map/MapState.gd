@@ -33,7 +33,7 @@ func duplicate(new_game_state)->MapStateData:
 		new_map._position_data.append(spot.duplicate(new_map))
 	new_map._actor_pos_cache = _actor_pos_cache.duplicate(true)
 	new_map._item_pos_cache = _item_pos_cache.duplicate(true)
-	print("Dupped MapState %s to %s" %[self, new_map])
+	if LOGGING: print("Dupped MapState %s to %s" %[self, new_map])
 	return new_map
 
 
@@ -93,7 +93,7 @@ func is_spot_open(pos, ignore_actor_ids:Array=[])->bool:
 	var actors = get_actors_at_pos(pos)
 	for actor in actors:
 		if not ignore_actor_ids.has(actor.Id):
-			print("Actors found on spot")
+			if LOGGING: print("Actors found on spot")
 			return false
 	return true
 

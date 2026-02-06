@@ -1351,11 +1351,11 @@ tile_set = SubResource("TileSet_56yt5")
 tile_set = SubResource("TileSet_o1yif")
 
 [node name="SpwanNode_Mushroom2" type="Sprite2D" parent="PhaseController/InitEnemySpawnMap"]
-visible = false
 position = Vector2(688, 752)
 texture = ExtResource("10_7khqc")
 script = ExtResource("11_ukasq")
 spawn_actor_key = "MushroomBase"
+team_index = 2
 facing = 2
 map_coor = Vector2i(21, 23)
 
@@ -1365,6 +1365,7 @@ position = Vector2(208, 688)
 texture = ExtResource("10_7khqc")
 script = ExtResource("11_ukasq")
 spawn_actor_key = "RandomEnemy"
+team_index = 1
 facing = 2
 map_coor = Vector2i(6, 21)
 
@@ -1374,6 +1375,7 @@ position = Vector2(240, 432)
 texture = ExtResource("10_7khqc")
 script = ExtResource("11_ukasq")
 spawn_actor_key = "RandomEnemy"
+team_index = 1
 facing = 2
 map_coor = Vector2i(7, 13)
 
@@ -1383,6 +1385,7 @@ position = Vector2(496, 208)
 texture = ExtResource("10_7khqc")
 script = ExtResource("11_ukasq")
 spawn_actor_key = "RandomEnemy"
+team_index = 1
 facing = 2
 map_coor = Vector2i(15, 6)
 
@@ -1392,6 +1395,7 @@ position = Vector2(688, 432)
 texture = ExtResource("10_7khqc")
 script = ExtResource("11_ukasq")
 spawn_actor_key = "RandomEnemy"
+team_index = 1
 facing = 2
 map_coor = Vector2i(21, 13)
 
@@ -1402,6 +1406,7 @@ rotation = 1.5708
 texture = ExtResource("10_7khqc")
 script = ExtResource("11_ukasq")
 spawn_actor_key = "RandomEnemy"
+team_index = 1
 facing = 3
 map_coor = Vector2i(26, 20)
 
@@ -1412,5 +1417,6 @@ rotation = 1.5708
 texture = ExtResource("10_7khqc")
 script = ExtResource("11_ukasq")
 spawn_actor_key = "RandomEnemy"
+team_index = 1
 facing = 3
 map_coor = Vector2i(15, 14)

@@ -55,7 +55,8 @@ static func handle_attack(
 			var defender_pos = game_state.get_actor_pos(actor)
 			# TODO: Cover
 			var los = TargetingHelper.get_line_of_sight_for_spots(attacker_pos, defender_pos, game_state)
-			attack_posision_data[actor.Id]['HasCover'] = los == TargetingHelper.LOS_VALUE.Cover
+			if not is_directionless:
+				attack_posision_data[actor.Id]['HasCover'] = los == TargetingHelper.LOS_VALUE.Cover
 			# Has AOE area 
 			#TODO: Decide what defines is_AOE
 			if is_directionless: #target_parameters and target_parameters.has_area_of_effect():

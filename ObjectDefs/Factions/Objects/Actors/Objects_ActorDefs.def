@@ -1,0 +1,97 @@
+{
+    "#BaseObjectActor": {
+        "!ObjectScript": "res://assets/Scripts/Actors/BaseActor.gd",
+        "!ParentKey": "#BaseActor",
+        "#ObjDetails": {
+            "Description": "The base Actor for non-Actor Map Objects. Great architecture me!",
+            "DisplayName": "#BaseObjectActor",
+            "LargeIcon": "Sprites/Barrel_Icon.png",
+            "ObjectType": "Actor",
+            "SmallIcon": "Sprites/Barrel_Icon.png",
+            "SnippetDesc": "base non-Actor objects",
+            "Tags": [
+                "Object"
+            ],
+            "Taxonomy": [
+                "Actor",
+                "Object"
+            ]
+        },
+        "ActorData": {
+            "Faction": "Objects"
+        },
+        "ScenePath": "res://Scenes/Combat/MapObjects/Actors/SimpleActorNode/simple_actor_node.tscn",
+        "SpriteFrameWH": [
+            12,
+            4
+        ],
+        "SpriteOffset": [
+            0,
+            -16
+        ],
+        "SpriteSheet": "Sprites/Barrel_SpriteSheet.png",
+        "Stats": {
+            "Armor": 0,
+            "HealthMax": 1,
+            "BlockChance": 0,
+            "BlockMod": 0,
+            "Evasion": 0,
+            "Mass": 10,
+            "Speed": 0,
+            "PPR": 0,
+            "Awareness": 0
+        },
+        "ImmuneToEffects": ["AilmentBlind", "AilmentPoisoned", "AilmentBleed", "AilmentDazed"],
+        "_DefVersion": "1"
+    },
+    "BarrelActor": {
+        "!ObjectScript": "res://assets/Scripts/Actors/BaseActor.gd",
+        "!ParentKey": "#BaseActor",
+        "#ObjDetails": {
+            "Description": "@@#Color:Red:Barrels@@ were first invented as a subsite for @@#Color:Red:Pinatas@@ during the @@#Color:Red:Great Papier-Mache Wars@@. But failed to find popularity among @@#Color:Grey:Children@@ due to their boring appearance and difficulty to break.\n\nAfter the extinction of @@#Color:Grey:Children@@ and subsequent end to all birthday parties, people have found them useful for storing @@#Tag:Supplies@@ and providing a rustic feel.\n\nSome more nostalgic adventurers still prefer to use them for their original purpose.",
+            "DisplayName": "Barrel",
+            "LargeIcon": "Sprites/Barrel_Icon.png",
+            "ObjectType": "Actor",
+            "SmallIcon": "Sprites/Barrel_Icon.png",
+            "SnippetDesc": "a barrel",
+            "Tags": [
+                "Object"
+            ],
+            "Taxonomy": [
+                "Actor",
+                "Object"
+            ]
+        },
+        "ActorData": {
+            "Faction": "Objects",
+            "ExpValue": 0,
+            "MoneyValue": 0,
+            "DropItemsSet": {
+                "": 50,
+                "HealthPotionS": 10,
+                "HealthPotionM": 5,
+                "HealthPotionL": 1,
+                "Mag_Ammo": 10,
+                "Phy_Ammo": 10,
+                "Gen_Ammo": 1
+            },
+            "IsAdirectional": true
+        },
+        "ScenePath": "res://Scenes/Combat/MapObjects/Actors/SimpleActorNode/simple_actor_node.tscn",
+        "SpriteFrameWH": [
+            12,
+            4
+        ],
+        "SpriteOffset": [
+            0,
+            -16
+        ],
+        "SpriteSheet": "Sprites/Barrel_SpriteSheet.png",
+        "Stats": {
+            "HealthMax": 1,
+            "Mass": 100
+        },
+        
+        "_DefVersion": "1"
+    }
+}

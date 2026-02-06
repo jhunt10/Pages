@@ -76,11 +76,11 @@ static func check_faction_filter(
 			if source_actor_id != checking_actor.Id:
 				return true
 		elif fact_filter == "Ally":
-			if (source_faction_index == checking_actor.FactionIndex
+			if (source_faction_index == checking_actor.TeamIndex
 				and source_actor_id != checking_actor.Id):
 				return true
 		elif fact_filter == "Enemy":
-			if source_faction_index != checking_actor.FactionIndex:
+			if source_faction_index != checking_actor.TeamIndex:
 				return true
 	return false
 	

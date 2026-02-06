@@ -45,7 +45,7 @@ func _init( attacking_actor:BaseActor,
 			effect_datas_val:Dictionary,
 			attack_mods_val:Dictionary) -> void:
 	attacker_id = attacking_actor.Id
-	attacker_faction = attacking_actor.FactionIndex
+	attacker_faction = attacking_actor.TeamIndex
 	self.attack_details = attack_details_val
 	source_tag_chain = tag_chain
 	self.damage_datas = damage_datas_val
@@ -62,7 +62,7 @@ func _init( attacking_actor:BaseActor,
 	
 	for defender:BaseActor in defending_actors:
 		var dir = defenders_dir_and_cover_data[defender.Id]['AttackDirection']
-		var has_cover = defenders_dir_and_cover_data[defender.Id]['HasCover']
+		var has_cover = defenders_dir_and_cover_data.get(defender.Id, {}).get('HasCover', false)
 		sub_events[defender.Id] = AttackSubEvent.new(self, defender,dir, has_cover)
 	
 	for damage_data_key in self.damage_datas.keys():

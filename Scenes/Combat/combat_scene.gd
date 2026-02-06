@@ -304,7 +304,7 @@ func spawn_actors_for_phase(phase_data:Dictionary):
 		var actor_pos = MapPos.new(child.map_coor.x, child.map_coor.y, 0, child.facing)
 		var actor_key = ""
 		var actor_id = ""
-		var faction_index = 1
+		var team_index = child.team_index
 		if child.spawn_actor_key != '':
 			if child.spawn_actor_key == "RandomEnemy":
 				actor_key = _get_random_enemy_key(phase_data)
@@ -313,9 +313,7 @@ func spawn_actors_for_phase(phase_data:Dictionary):
 		if child.spawn_actor_id != '':
 			actor_id = child.spawn_actor_id
 		if child.is_player:
-			faction_index = 0
-		else:
-			faction_index = 1
+			team_index = 0
 		var new_actor = null
 		
 		# Specific Actor Id was provided
@@ -333,7 +331,7 @@ func spawn_actors_for_phase(phase_data:Dictionary):
 		index += 1
 		loading_actor_progressed.emit(total_count, index)
 		if new_actor:
-			new_actor.FactionIndex = faction_index
+			new_actor.TeamIndex = team_index
 			add_actor(new_actor, actor_pos)
 					#var display_name = new_actor.get_display_name()
 					#if not npcs_to_name.keys().has(display_name):
@@ -413,7 +411,7 @@ func add_actor(actor:BaseActor, pos:MapPos, is_player:bool=false):
 	if GameState._actors.keys().has(actor.Id):
 		printerr("Actor '%s' already added" % [actor.Id])
 		return
-	print("Adding Actor %s with FactionIndex: %s" % [actor.Id, actor.FactionIndex])
+	print("Adding Actor %s with TeamIndex: %s" % [actor.Id, actor.TeamIndex])
 	
 	var actor_node = MapController.get_or_create_actor_node(actor, pos)
 	actor_node.visible = true
@@ -485,24 +483,38 @@ func check_end_conditions():
 	if supress_win_conditions:
 		return
 	
-	var living_players = []
-	var living_enimes = []
+	var living_actor_by_team = {}
 	var party_ids = StoryState.list_party_actors_ids()
 	for actor:BaseActor in GameState.list_actors(false):
-		if party_ids.has(actor.Id):
-			living_players.append(actor)
-		else:
-			living_enimes.append(actor)
+		if not living_actor_by_team.keys().has(actor.TeamIndex):
+			living_actor_by_team[actor.TeamIndex] = 0
+		living_actor_by_team[actor.TeamIndex] += 1
+		
 	# All Players dead, Game Over
-	if living_players.size() == 0:
+	if living_actor_by_team[0] == 0:
 		trigger_end_condition(false)
 
 	var combat_condition = get_current_phase_data().get("CombatCondition")
+	var condition_key = combat_condition
 	if combat_condition is String:
-		if combat_condition == "KillAll":
-			if living_enimes.size() == 0:
-				#trigger_end_condition(true)
-				start_next_phase()
+		condition_key = combat_condition
+	elif combat_condition is Dictionary:
+		condition_key =  combat_condition.get("ConditionKey")
+	
+	if condition_key == "KillAll":
+		var any_alive = false
+		for team_index in living_actor_by_team.keys():
+			if team_index == 0:
+				continue
+			if living_actor_by_team[team_index] > 0:
+				any_alive = true
+		if not any_alive:
+			start_next_phase()
+	elif condition_key == "KillTeam":
+		var team_index = combat_condition.get("EnemyTeamIndex")
+		if living_actor_by_team.get(team_index, 0) == 0:
+			start_next_phase()
+			
 
 func trigger_end_condition(victory:bool):
 	combat_finished = true

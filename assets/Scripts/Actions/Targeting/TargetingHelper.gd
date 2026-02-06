@@ -30,7 +30,7 @@ static func get_auto_targets_for_page(selection_data:TargetSelectionData, parent
 					var damage_type = damage_data.get("DamageType")
 					if other_actor.stats.get_damage_resistance(damage_type) < 100:
 						will_hurt = true
-				var is_ally = other_actor.FactionIndex == source_actor.FactionIndex
+				var is_ally = other_actor.TeamIndex == source_actor.TeamIndex
 				#if (will_hurt and not is_ally) or (not will_hurt and is_ally):
 				if will_hurt != is_ally:
 					reasonable_targets.append(other_actor)
@@ -39,7 +39,7 @@ static func get_auto_targets_for_page(selection_data:TargetSelectionData, parent
 	var allies = []
 	var enemies = []
 	for other_actor:BaseActor in all_actors:
-		if other_actor.FactionIndex == source_actor.FactionIndex:
+		if other_actor.TeamIndex == source_actor.TeamIndex:
 			allies.append(other_actor)
 		else:
 			enemies.append(other_actor)
@@ -161,10 +161,10 @@ static func get_potential_coor_to_targets(target_params:TargetParameters, actor:
 			var actors_in_spot:Array = game_state.get_actors_at_pos(spot, include_dead_actors)
 			for target:BaseActor in actors_in_spot:
 				#if (target_params.target_type == TargetParameters.TargetTypes.Enemy and
-						#actor.FactionIndex == target.FactionIndex):
+						#actor.TeamIndex == target.TeamIndex):
 							#continue
 				#if (target_params.target_type == TargetParameters.TargetTypes.Ally and
-						#actor.FactionIndex != target.FactionIndex):
+						#actor.TeamIndex != target.TeamIndex):
 							#continue
 				#if target.is_dead and not (target_params.target_type == TargetParameters.TargetTypes.Corpse):
 							#continue

@@ -1,6 +1,6 @@
 class_name ItemHelper
 
-const LOGGING = true
+const LOGGING = false
 
 static func spawn_item(item_key:String, item_data:Dictionary, pos:MapPos)->BaseItem:
 	var item = ItemLibrary.create_item(item_key, item_data)
