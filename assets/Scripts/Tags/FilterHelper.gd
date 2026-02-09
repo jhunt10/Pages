@@ -64,7 +64,8 @@ static func check_faction_filter(
 	source_actor_id:String, 
 	source_faction_index:int, 
 	faction_filters:Array, 
-	checking_actor
+	checking_actor,
+	game_state:GameStateData
 )->bool:
 	if faction_filters.size() == 0:
 		return true

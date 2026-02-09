@@ -74,7 +74,7 @@ static func handle_attack(
 		for actor_attack_mod_key in actor_attack_mods.keys():
 			var attack_mod = actor_attack_mods[actor_attack_mod_key]
 			# Check if mod applies to attack
-			if _does_attack_mod_apply(attack_mod, attacker, defenders, source_tag_chain, attack_posision_data):
+			if _does_attack_mod_apply(attack_mod, attacker, defenders, source_tag_chain, attack_posision_data, game_state):
 				var mod_id = attack_mod['AttackModId']
 				attack_mods[mod_id] = attack_mod
 				# Cache Stat Mods now to avoid another loop
@@ -89,7 +89,7 @@ static func handle_attack(
 	for actor:BaseActor in all_unique_actors:
 		for stat_mod_id in stat_mods.keys():
 			var stat_mod = stat_mods[stat_mod_id]
-			if _does_attack_stat_mod_apply_to_actor(stat_mod, actor, source_tag_chain):
+			if _does_attack_stat_mod_apply_to_actor(stat_mod, actor, source_tag_chain, game_state):
 				actor.stats.add_temp_stat_mod(stat_mod_id, stat_mod, false)
 		actor.stats.apply_temp_stat_mods()
 	
@@ -138,7 +138,7 @@ static func handle_attack(
 	
 	# Roll for Effects on each defender
 	for defender:BaseActor in defenders:
-		_roll_for_effects(attacker, defender, attack_event)
+		_roll_for_effects(attacker, defender, attack_event, game_state)
 	attack_event.attack_stage = AttackStage.RolledForEffects
 	
 	var vfx_data_cache = {}
@@ -316,7 +316,7 @@ static func _roll_damage_for_attack_event( attack_event:AttackEvent, game_state:
 		# Roll for each Damage Data
 		for damage_key in attack_event.damage_datas.keys():
 			var damage_data = attack_event.damage_datas[damage_key]
-			var damage_event = DamageHelper.roll_for_damage(damage_data, attacker, defender, attack_event.source_tag_chain, damage_mods, true)
+			var damage_event = DamageHelper.roll_for_damage(damage_data, attacker, defender, attack_event.source_tag_chain, game_state, damage_mods, true)
 			
 			# Damage turned out to be healing
 			if damage_event.final_damage < 0:
@@ -339,7 +339,7 @@ static func _roll_damage_for_attack_event( attack_event:AttackEvent, game_state:
 
 ## Roll for each Attack Effect for defender. 
 ## Results of rolls are added to sub_event.applied_effect_datas.
-static func _roll_for_effects(attacker:BaseActor, defender:BaseActor, attack_event:AttackEvent):
+static func _roll_for_effects(attacker:BaseActor, defender:BaseActor, attack_event:AttackEvent, game_state:GameStateData):
 	var sub_event:AttackSubEvent = attack_event.sub_events[defender.Id]
 	
 	var attack_potency_mod = attack_event.attack_details.get("PotencyMod", 1)
@@ -376,7 +376,7 @@ static func _roll_for_effects(attacker:BaseActor, defender:BaseActor, attack_eve
 			
 		# Check if defender is enemy / ally
 		var faction_filter = conditions.get("DefenderFactionFilters", [])
-		if not TagHelper.check_faction_filter(attack_event.attacker_id, attack_event.attacker_faction, faction_filter, defender):
+		if not TagHelper.check_faction_filter(attack_event.attacker_id, attack_event.attacker_faction, faction_filter, defender, game_state):
 			continue
 		
 		# Check if defener has required tags
@@ -406,7 +406,7 @@ static func _roll_for_effects(attacker:BaseActor, defender:BaseActor, attack_eve
 		}
 
 ## Returns true if Attacker, Defenders, and SourceTagChain meet all requirements of Conditions
-static func _does_attack_mod_apply(attack_mod, attacker, defenders, source_tag_chain:SourceTagChain, attack_posision_data:Dictionary)->bool:
+static func _does_attack_mod_apply(attack_mod, attacker, defenders, source_tag_chain:SourceTagChain, attack_posision_data:Dictionary, game_state:GameStateData)->bool:
 	var mod_key = attack_mod['AttackModKey']
 	var conditions = attack_mod.get('Conditions', null)
 	var mod_source_actor = attack_mod.get('SourceActorId', null)
@@ -424,7 +424,7 @@ static func _does_attack_mod_apply(attack_mod, attacker, defenders, source_tag_c
 	
 	# Check Attacker Faction Filters
 	var attack_faction_filters = conditions.get("AttackerFactionFilters", [])
-	if not TagHelper.check_faction_filter(mod_source_actor, mod_source_faction, attack_faction_filters, attacker):
+	if not TagHelper.check_faction_filter(mod_source_actor, mod_source_faction, attack_faction_filters, attacker, game_state):
 		return false
 	
 	# Check Source Tag Filters
@@ -457,7 +457,7 @@ static func _does_attack_mod_apply(attack_mod, attacker, defenders, source_tag_c
 						continue
 			
 			# Defender is valid faction
-			if not TagHelper.check_faction_filter(mod_source_actor, mod_source_faction, faction_filter, defender):
+			if not TagHelper.check_faction_filter(mod_source_actor, mod_source_faction, faction_filter, defender, game_state):
 				all_defenders_are_valid = false
 				if require_all_defenders:
 					break
@@ -497,7 +497,7 @@ static func _get_stat_mods_from_attack_mod(attack_mod:Dictionary)->Dictionary:
 		out_dict[mod_id] = BaseStatMod.create_from_data(mod_data['SourceActorId'], mod_data)
 	return out_dict
 
-static func _does_attack_stat_mod_apply_to_actor(stat_mod:BaseStatMod, actor:BaseActor, attack_source_tag_chain:SourceTagChain)->bool:
+static func _does_attack_stat_mod_apply_to_actor(stat_mod:BaseStatMod, actor:BaseActor, attack_source_tag_chain:SourceTagChain, game_state:GameStateData)->bool:
 	if !stat_mod:
 		return false
 	var conditions = stat_mod.condition_data
@@ -508,7 +508,7 @@ static func _does_attack_stat_mod_apply_to_actor(stat_mod:BaseStatMod, actor:Bas
 	
 	# Check Faction Filters
 	var faction_filters = conditions.get("FactionFilters", [])
-	if not TagHelper.check_faction_filter(mod_source_actor, mod_source_faction, faction_filters, actor):
+	if not TagHelper.check_faction_filter(mod_source_actor, mod_source_faction, faction_filters, actor, game_state):
 		return false
 			
 	# Check Defender Tag Filters
@@ -695,7 +695,7 @@ static func handle_colision(
 		for actor_attack_mod_key in actor_attack_mods.keys():
 			var attack_mod = actor_attack_mods[actor_attack_mod_key]
 			# Check if mod applies to attack
-			if _does_attack_mod_apply(attack_mod, moving_actor, [blocking_actor], source_tag_chain, attack_posision_data):
+			if _does_attack_mod_apply(attack_mod, moving_actor, [blocking_actor], source_tag_chain, attack_posision_data, game_state):
 				var mod_id = attack_mod['AttackModId']
 				attack_mods[mod_id] = attack_mod
 				# Cache Stat Mods now to avoid another loop
@@ -708,7 +708,7 @@ static func handle_colision(
 	for actor:BaseActor in all_unique_actors:
 		for stat_mod_id in stat_mods.keys():
 			var stat_mod = stat_mods[stat_mod_id]
-			if _does_attack_stat_mod_apply_to_actor(stat_mod, actor, source_tag_chain):
+			if _does_attack_stat_mod_apply_to_actor(stat_mod, actor, source_tag_chain, game_state):
 				actor.stats.add_temp_stat_mod(stat_mod_id, stat_mod, false)
 		actor.stats.apply_temp_stat_mods()
 	
@@ -740,7 +740,7 @@ static func handle_colision(
 		damage_mods.merge(winner.get_damage_mods())
 	
 		# Calculate Damage
-		damage_event = DamageHelper.roll_for_damage(damage_data, winner, loser, source_tag_chain, damage_mods, true)
+		damage_event = DamageHelper.roll_for_damage(damage_data, winner, loser, source_tag_chain, game_state, damage_mods, true)
 		
 		# Apply damage 
 		loser.stats.apply_damage_event(damage_event, true, game_state)

@@ -45,7 +45,7 @@ func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, que_exe_d
 	var damage_data = parent_action.get_damage_data_single(actor, damage_key) 
 	damage_data['DamageType'] = damage_type_str
 	for target in targets:
-		var damage_event = DamageHelper.roll_and_apply_damage(damage_data, actor, target, tag_chain)
+		var damage_event = DamageHelper.roll_and_apply_damage(damage_data, actor, target, tag_chain, game_state)
 		
 		print("\n---------------------------")
 		print(damage_event.dictialize_self())

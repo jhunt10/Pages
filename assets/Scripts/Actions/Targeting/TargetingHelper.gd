@@ -4,7 +4,7 @@ enum LOS_VALUE {Invalid, Blocked, Cover, Open}
 
 
 ## Returns list of reasonable targets for auto targeting
-static func get_auto_targets_for_page(selection_data:TargetSelectionData, parent_action:PageItemAction, source_actor:BaseActor)->Array:
+static func get_auto_targets_for_page(selection_data:TargetSelectionData, parent_action:PageItemAction, source_actor:BaseActor, game_state:GameStateData)->Array:
 	# TODO: Spot target type
 	if not selection_data.target_params.is_actor_target_type():
 		return selection_data.list_potential_targets()
@@ -30,7 +30,7 @@ static func get_auto_targets_for_page(selection_data:TargetSelectionData, parent
 					var damage_type = damage_data.get("DamageType")
 					if other_actor.stats.get_damage_resistance(damage_type) < 100:
 						will_hurt = true
-				var is_ally = other_actor.TeamIndex == source_actor.TeamIndex
+				var is_ally = game_state.are_allies(source_actor, other_actor)
 				#if (will_hurt and not is_ally) or (not will_hurt and is_ally):
 				if will_hurt != is_ally:
 					reasonable_targets.append(other_actor)
@@ -39,7 +39,7 @@ static func get_auto_targets_for_page(selection_data:TargetSelectionData, parent
 	var allies = []
 	var enemies = []
 	for other_actor:BaseActor in all_actors:
-		if other_actor.TeamIndex == source_actor.TeamIndex:
+		if game_state.are_allies(source_actor, other_actor):
 			allies.append(other_actor)
 		else:
 			enemies.append(other_actor)

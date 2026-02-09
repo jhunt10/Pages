@@ -14,7 +14,7 @@ func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, que_exe_d
 				game_state:GameStateData, actor:BaseActor)->bool:
 	var targets = []
 	for check_actor:BaseActor in game_state.list_actors():
-		if check_actor.TeamIndex != actor.TeamIndex:
+		if game_state.are_enemies(check_actor, actor):
 			targets.append(check_actor)
 	var tag_chain = SourceTagChain.new()\
 			.append_source(SourceTagChain.SourceTypes.Actor, actor)\

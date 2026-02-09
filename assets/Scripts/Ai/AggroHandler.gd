@@ -19,11 +19,11 @@ func get_threat_from_actor(actor_id:String)->float:
 		return actor_id_to_threat[actor_id]
 	return 0
 
-func add_threat_from_actor(enemy:BaseActor, val:float):
+func add_threat_from_actor(enemy:BaseActor, val:float, game_state:GameStateData):
 	
 	#TODO: Add threat from healing and applying effects
 	
-	if not enemy or enemy.TeamIndex == _actor.TeamIndex:
+	if not (enemy and game_state.are_enemies(enemy, _actor)):
 		return
 	if not actor_id_to_threat.has(enemy.Id):
 		actor_id_to_threat[enemy.Id] = 0

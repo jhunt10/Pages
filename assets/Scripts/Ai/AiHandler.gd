@@ -94,7 +94,7 @@ static func _choose_page_for_actor(actor:BaseActor, game_state:GameStateData)->P
 			if pot_targ == aggroed_actor_id:
 				aggroed_actor_in_target = true
 			var pot_actor = game_state.get_actor(pot_targ)
-			if pot_actor.TeamIndex != actor.TeamIndex:
+			if game_state.are_enemies(pot_actor, actor):
 				attack_has_enemy_target = true
 		if not attack_has_enemy_target:
 			continue
@@ -107,7 +107,7 @@ static func _choose_page_for_actor(actor:BaseActor, game_state:GameStateData)->P
 	if aggroed_actor_id == '' or actor.aggro.get_threat_from_actor(aggroed_actor_id) == 0:
 		target_enemy = get_closest_enemy(actor, game_state)
 		if target_enemy:
-			actor.aggro.add_threat_from_actor(target_enemy, 0)
+			actor.aggro.add_threat_from_actor(target_enemy, 0, game_state)
 	else:
 		target_enemy = game_state.get_actor(aggroed_actor_id)
 	
@@ -163,7 +163,7 @@ static func get_closest_enemy(actor:BaseActor, game_state:GameStateData)->BaseAc
 	var min_dist = 10000
 	var closest_actor = null
 	for enemy:BaseActor in game_state.list_actors():
-		if enemy.TeamIndex == actor.TeamIndex:
+		if not game_state.are_enemies(actor, enemy):
 			continue
 		var enemy_pos = game_state.get_actor_pos(enemy)
 		#var path = path_to_target(actor, actor_pos, enemy_pos, game_state)
@@ -200,7 +200,7 @@ static func try_handle_get_target_sub_action(actor:BaseActor, selection_data:Tar
 		var pp_actor = p_actor
 		if pp_actor is String:
 			pp_actor = ActorLibrary.get_actor(p_actor)
-		if pp_actor.TeamIndex != actor.TeamIndex:
+		if game_state.are_enemies(pp_actor, actor):
 			enemy_actors.append(pp_actor)
 	# TODO: Be smart about AOE
 	var targeted_enemy_id = pick_between_enemies(actor, enemy_actors)

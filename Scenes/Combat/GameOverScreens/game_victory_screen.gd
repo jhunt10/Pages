@@ -85,11 +85,12 @@ func collect_dropped_items():
 	var bounty_money = 0
 	for actor:BaseActor in actors:
 		if actor.is_dead and actor.TeamIndex != 0:
-			enemy_count += 1
 			var enemy_val = actor.actor_data.get("MoneyValue", 0)
 			bounty_money += enemy_val
 			var exp_val = actor.actor_data.get("ExpValue", 0)
 			total_exp += exp_val
+			if exp_val > 0: #Only count enemies that give xp (not Decor)
+				enemy_count += 1
 			
 	enemies_label.text = str(enemy_count)
 	rounds_label.text = str(CombatRootControl.QueController.round_counter)

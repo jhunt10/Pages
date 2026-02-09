@@ -105,7 +105,7 @@ func is_point_in_area(center:MapPos, point)->bool:
 	return target_area.to_map_spots(center).has(Vector2i(point.x, point.y))
 
 ## Returns true if target actor is valid as a selected target
-func is_valid_target_actor(actor:BaseActor, target:BaseActor, _game_state:GameStateData)->bool:
+func is_valid_target_actor(actor:BaseActor, target:BaseActor, game_state:GameStateData)->bool:
 	if _conditions.size() > 0:
 		if _conditions.has("TagFilers"):
 			if not TagHelper.check_tag_filters("TagFilters", _conditions, target):
@@ -123,19 +123,19 @@ func is_valid_target_actor(actor:BaseActor, target:BaseActor, _game_state:GameSt
 	if target_type == TargetTypes.Corpse:
 		return target.is_dead
 	if target_type == TargetTypes.Enemy:
-		return actor.TeamIndex != target.TeamIndex
+		return game_state.are_enemies(actor, target)
 	if target_type == TargetTypes.Ally:
-		return actor.TeamIndex == target.TeamIndex
+		return game_state.are_allies(actor, target)
 	if target_type == TargetTypes.Spot or target_type == TargetTypes.FullArea:
 		return true
 	return false
 
-func is_actor_effected_by_aoe(actor:BaseActor, target:BaseActor, _game_state:GameStateData)->bool:
+func is_actor_effected_by_aoe(actor:BaseActor, target:BaseActor, game_state:GameStateData)->bool:
 	if target.Id == actor.Id:
 		return include_self_in_aoe
-	if actor.TeamIndex == target.TeamIndex:
+	if game_state.are_allies(actor, target):
 		return include_allies_in_aoe
-	if actor.TeamIndex != target.TeamIndex:
+	if game_state.are_enemies(actor, target):
 		return include_enemies_in_aoe 
 	return false
 

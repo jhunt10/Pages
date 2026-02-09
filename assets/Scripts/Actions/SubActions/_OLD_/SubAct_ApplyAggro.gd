@@ -34,18 +34,18 @@ func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, que_exe_d
 	
 	for target:BaseActor in targets:
 		# Aggro never applies between allies
-		if target.TeamIndex == actor.TeamIndex:
+		if game_state.are_allies(target, actor):
 			continue
 		var current_threat = target.aggro.get_threat_from_actor(actor.Id)
 		if change_type == 'ToHighestThreat':
 			var highest = target.aggro.get_highest_threat() * AggroHandler.THREAT_SWITCH_THRESHOLD
 			var add = max(0, highest - current_threat) + 1
-			target.aggro.add_threat_from_actor(actor, add)
+			target.aggro.add_threat_from_actor(actor, add, game_state)
 			
 		if change_type == 'ToLowestThreat':
 			var lowest = target.aggro.get_lowest_threat()
 			var add = max(0, lowest - current_threat - 1)
-			target.aggro.add_threat_from_actor(actor, add)
+			target.aggro.add_threat_from_actor(actor, add, game_state)
 			
 		
 	

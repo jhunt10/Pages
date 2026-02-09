@@ -57,7 +57,7 @@ func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, metadata:
 	# Auto Targeting
 	if allow_auto and CombatRootControl.Instance.auto_targeting_enabled: 
 		# Get viable targets
-		var auto_targets = TargetingHelper.get_auto_targets_for_page(selection_data, parent_action, actor)
+		var auto_targets = TargetingHelper.get_auto_targets_for_page(selection_data, parent_action, actor, game_state)
 		
 		# Get last targeted Actor
 		var last_target_record = CombatRootControl.Instance.last_target_records.get(actor.Id, {})

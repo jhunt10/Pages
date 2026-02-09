@@ -148,7 +148,7 @@ func load_init_state(sub_scene_data:Dictionary):
 	GameState = GameStateData.new()
 	GameState.set_map_data(map_data)
 	GameState.actor_entered_item_spot.connect(_on_actor_pickup_item)
-	
+	GameState.set_team_data(combat_map_data.get("TeamData", {}))
 	# Build Action Que Controller
 	QueController = ActionQueController.new()
 	QueController.end_of_round.connect(check_end_conditions)
@@ -485,13 +485,15 @@ func check_end_conditions():
 	
 	var living_actor_by_team = {}
 	var party_ids = StoryState.list_party_actors_ids()
-	for actor:BaseActor in GameState.list_actors(false):
-		if not living_actor_by_team.keys().has(actor.TeamIndex):
-			living_actor_by_team[actor.TeamIndex] = 0
-		living_actor_by_team[actor.TeamIndex] += 1
+	for actor:BaseActor in GameState.list_actors(true):
+		if not living_actor_by_team.keys().has(str(actor.TeamIndex)):
+			living_actor_by_team[str(actor.TeamIndex)] = 0
+		if actor.is_dead:
+			continue
+		living_actor_by_team[str(actor.TeamIndex)] += 1
 		
 	# All Players dead, Game Over
-	if living_actor_by_team[0] == 0:
+	if living_actor_by_team["0"] == 0:
 		trigger_end_condition(false)
 
 	var combat_condition = get_current_phase_data().get("CombatCondition")
@@ -511,8 +513,13 @@ func check_end_conditions():
 		if not any_alive:
 			start_next_phase()
 	elif condition_key == "KillTeam":
-		var team_index = combat_condition.get("EnemyTeamIndex")
-		if living_actor_by_team.get(team_index, 0) == 0:
+		var team_index = str(combat_condition.get("EnemyTeamIndex"))
+		var keys = living_actor_by_team.keys()
+		if not keys.has(team_index):
+			printerr("CombatScene.check_end_conditions KillTeam: No team found with index %s." % [team_index])
+			start_next_phase()
+			return
+		if living_actor_by_team[team_index] == 0:
 			start_next_phase()
 			
 

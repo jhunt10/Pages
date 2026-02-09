@@ -19,7 +19,7 @@ func on_effect_trigger(effect:BaseEffect, subeffect_data:Dictionary, trigger:Bas
 	tag_chain.append_source(SourceTagChain.SourceTypes.Effect, effect)
 	
 	#var main_damage_event = DamageHelper.handle_damage(effect, actor, damage_data, tag_chain, game_state)
-	var damage_event = DamageHelper.roll_for_damage(damage_data, source_actor, actor, tag_chain, {})
+	var damage_event = DamageHelper.roll_for_damage(damage_data, source_actor, actor, tag_chain, game_state, {})
 	actor.stats.apply_damage(damage_event.final_damage)
 	damage_event.was_applied = true
 	actor.effects.trigger_damage_taken(game_state, damage_event)
@@ -44,7 +44,7 @@ func on_effect_trigger(effect:BaseEffect, subeffect_data:Dictionary, trigger:Bas
 	shared_damage_data['AtkPwrRange'] = 0
 	shared_damage_data['DamageEffect'] = null
 	for adj_actor in adj_actors:
-		var adj_damage_event = DamageHelper.roll_for_damage(shared_damage_data, source_actor, actor, tag_chain, {})
+		var adj_damage_event = DamageHelper.roll_for_damage(shared_damage_data, source_actor, actor, tag_chain, game_state, {})
 		adj_actor.stats.apply_damage(adj_damage_event.final_damage)
 		adj_damage_event.was_applied = true
 		adj_actor.effects.trigger_damage_taken(game_state, adj_damage_event)

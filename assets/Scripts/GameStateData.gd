@@ -18,6 +18,8 @@ var map_data:MapStateData
 var map_width:int
 var map_hight:int
 
+var team_data:Dictionary = {}
+
 func duplicate()->GameStateData:
 	var new_state = GameStateData.new()
 	new_state._actors = _actors.duplicate()
@@ -34,7 +36,8 @@ func set_map_data(data:Dictionary):
 	map_width = map_data.max_width
 	map_hight = map_data.max_hight
 
-
+func set_team_data(data:Dictionary):
+	team_data = data.duplicate()
 
 func add_actor(actor:BaseActor):
 	_actors[actor.Id] = actor
@@ -70,6 +73,28 @@ func list_actors(include_dead:bool=false):
 		if include_dead or not actor.is_dead:
 			out_list.append(actor)
 	return out_list
+	
+
+func are_enemies(actor_a, actor_b)->bool:
+	if actor_a is String:
+		actor_a = ActorLibrary.get_actor(actor_a)
+	if actor_b is String:
+		actor_b = ActorLibrary.get_actor(actor_b)
+	if not (actor_a is BaseActor and actor_b is BaseActor):
+		printerr("CombatScene.are_enemies: One of these is not a BaseActor: %s | %s" % [actor_a, actor_b])
+		return false
+	var team_a_data = team_data[actor_a]
+	return actor_a.TeamIndex != actor_b.TeamIndex
+
+func are_allies(actor_a, actor_b)->bool:
+	if actor_a is String:
+		actor_a = ActorLibrary.get_actor(actor_a)
+	if actor_b is String:
+		actor_b = ActorLibrary.get_actor(actor_b)
+	if not (actor_a is BaseActor and actor_b is BaseActor):
+		printerr("CombatScene.are_enemies: One of these is not a BaseActor: %s | %s" % [actor_a, actor_b])
+		return false
+	return actor_a.TeamIndex == actor_b.TeamIndex
 
 # TODO: This class shouldn't really hold logic... 
 #	but zone stuff needs map_data to know which actors to apply to

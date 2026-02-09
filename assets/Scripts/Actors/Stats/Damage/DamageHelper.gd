@@ -153,10 +153,11 @@ static func roll_and_apply_damage(
 		attacker:BaseActor, 
 		defender:BaseActor, 
 		source_tag_chain:SourceTagChain, 
+		game_state:GameStateData,
 		extra_damage_mods:Dictionary = {},
-		actor_atk_mods_provided:bool=false
+		actor_atk_mods_provided:bool=false,
 	)->DamageEvent:
-	var damage_event = roll_for_damage(damage_data, attacker, defender, source_tag_chain, extra_damage_mods, actor_atk_mods_provided)
+	var damage_event = roll_for_damage(damage_data, attacker, defender, source_tag_chain, game_state, extra_damage_mods, actor_atk_mods_provided)
 	
 	defender.stats.apply_damage(damage_event)
 	
@@ -173,6 +174,7 @@ static func roll_for_damage(
 		attacker:BaseActor, 
 		defender:BaseActor, 
 		source_tag_chain:SourceTagChain, 
+		game_state:GameStateData,
 		extra_damage_mods:Dictionary = {},
 		actor_atk_mods_provided:bool=false
 	)->DamageEvent:
@@ -193,7 +195,7 @@ static func roll_for_damage(
 	# Add applicable Damage Mods
 	for damage_mod_key in extra_damage_mods.keys():
 		var damage_mod:Dictionary = extra_damage_mods[damage_mod_key]
-		if does_damage_mod_apply(damage_mod, attacker, defender, damage_data, source_tag_chain):
+		if does_damage_mod_apply(damage_mod, attacker, defender, damage_data, source_tag_chain, game_state):
 			damage_event.add_damage_mod(damage_mod)
 	
 	# --- Damage Calc Order ---
@@ -248,7 +250,7 @@ static func roll_for_damage(
 	damage_event.final_damage = working_damage
 	return damage_event
 
-static func does_damage_mod_apply(damage_mod:Dictionary, attacker:BaseActor, defender:BaseActor, damage_data:Dictionary, source_tag_chain:SourceTagChain)->bool:
+static func does_damage_mod_apply(damage_mod:Dictionary, attacker:BaseActor, defender:BaseActor, damage_data:Dictionary, source_tag_chain:SourceTagChain, game_state:GameStateData)->bool:
 	var conditions = damage_mod.get('Conditions', null)
 	var mod_source_actor = damage_mod.get('SourceActorId', null)
 	var mod_source_faction = damage_mod.get('SourceActorFaction', null)
@@ -262,13 +264,13 @@ static func does_damage_mod_apply(damage_mod:Dictionary, attacker:BaseActor, def
 	
 	# Check Defender Faction Filters
 	var defender_faction_filters = conditions.get("DefenderFactionFilters", [])
-	if not TagHelper.check_faction_filter(mod_source_actor, mod_source_faction, defender_faction_filters, defender):
+	if not TagHelper.check_faction_filter(mod_source_actor, mod_source_faction, defender_faction_filters, defender, game_state):
 		return false
 			
 	# Check Attacker Faction Filters
 	if attacker:
 		var attack_faction_filters = conditions.get("AttackerFactionFilters", [])
-		if not TagHelper.check_faction_filter(mod_source_actor, mod_source_faction, attack_faction_filters, attacker):
+		if not TagHelper.check_faction_filter(mod_source_actor, mod_source_faction, attack_faction_filters, attacker, game_state):
 			return false
 	
 	# Check Defender Tag Filters

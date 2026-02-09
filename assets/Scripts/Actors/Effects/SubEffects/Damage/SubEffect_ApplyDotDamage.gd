@@ -28,7 +28,7 @@ func on_effect_trigger(effect:BaseEffect, subeffect_data:Dictionary, trigger:Bas
 	for damage_key in damage_keys:
 		var damage_data = effect.get_damage_data(damage_key, actor)
 		damage_data['DamageDataKey'] = damage_key
-		var damage_event = DamageHelper.roll_for_damage(damage_data, source_actor, actor, source_tag_chain, {})
+		var damage_event = DamageHelper.roll_for_damage(damage_data, source_actor, actor, source_tag_chain, game_state, {})
 		actor.stats.apply_damage_event(damage_event, true, game_state)
 		damage_event.was_applied = true
 		if source_actor:
