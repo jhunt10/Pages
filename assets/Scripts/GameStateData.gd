@@ -36,8 +36,9 @@ func set_map_data(data:Dictionary):
 	map_width = map_data.max_width
 	map_hight = map_data.max_hight
 
-func set_team_data(data:Dictionary):
-	team_data = data.duplicate()
+func set_team_data(data):
+	#team_data = data.duplicate()
+	pass
 
 func add_actor(actor:BaseActor):
 	_actors[actor.Id] = actor
@@ -83,7 +84,7 @@ func are_enemies(actor_a, actor_b)->bool:
 	if not (actor_a is BaseActor and actor_b is BaseActor):
 		printerr("CombatScene.are_enemies: One of these is not a BaseActor: %s | %s" % [actor_a, actor_b])
 		return false
-	var team_a_data = team_data[actor_a]
+	#var team_a_data = team_data[actor_a]
 	return actor_a.TeamIndex != actor_b.TeamIndex
 
 func are_allies(actor_a, actor_b)->bool:

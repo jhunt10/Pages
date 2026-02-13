@@ -14,7 +14,8 @@
             ],
             "Taxonomy": [
                 "Actor",
-                "Object"
+                "Object",
+                "Rooted"
             ]
         },
         "ActorData": {
@@ -88,8 +89,159 @@
         ],
         "SpriteSheet": "Sprites/Barrel_SpriteSheet.png",
         "Stats": {
+            "HealthMax": 10,
+            "Mass": 1
+        },
+        
+        "_DefVersion": "1"
+    },
+    "CrateActor": {
+        "!ObjectScript": "res://assets/Scripts/Actors/BaseActor.gd",
+        "!ParentKey": "#BaseActor",
+        "#ObjDetails": {
+            "Description": "@@#Color:Red:Crates@@ are like the older more mature sibling of @@#Color:Red:Barrels@@. While @@#Color:Red:Barrels@@ are off rolling down hills and filling themselves with beer, @@#Color:Red:Crates@@ are working diligently storeing items in warehouses and working as makeshift tables.\n\nMany of the more euclidean minded folks will aregue that @@#Color:Red:Crates@@ are superior due to thier greater volume and packability. But honestly if you're just breaking them it's all them same..",
+            "DisplayName": "Crate",
+            "LargeIcon": "Sprites/Crate_Icon.png",
+            "ObjectType": "Actor",
+            "SmallIcon": "Sprites/Crate_Icon.png",
+            "SnippetDesc": "a crate",
+            "Tags": [
+                "Object"
+            ],
+            "Taxonomy": [
+                "Actor",
+                "Object"
+            ]
+        },
+        "ActorData": {
+            "Faction": "Objects",
+            "ExpValue": 0,
+            "MoneyValue": 0,
+            "DropItemsSet": {
+                "": 50,
+                "HealthPotionS": 10,
+                "HealthPotionM": 5,
+                "HealthPotionL": 1,
+                "Mag_Ammo": 10,
+                "Phy_Ammo": 10,
+                "Gen_Ammo": 1
+            },
+            "IsAdirectional": true
+        },
+        "ScenePath": "res://Scenes/Combat/MapObjects/Actors/SimpleActorNode/simple_actor_node.tscn",
+        "SpriteFrameWH": [
+            12,
+            4
+        ],
+        "SpriteOffset": [
+            0,
+            -16
+        ],
+        "SpriteSheet": "Sprites/Crate_SpriteSheet.png",
+        "Stats": {
+            "HealthMax": 10,
+            "Mass": 1
+        },
+        
+        "_DefVersion": "1"
+    },
+    "LeverActor": {
+        "!ObjectScript": "res://assets/Scripts/Actors/LeverActor.gd",
+        "!ParentKey": "#BaseActor",
+        "#ObjDetails": {
+            "Description": "In an age where buttons and switches have dominated the mechanical control market, many consumer find themselves longing for a more relateable solution. @@#Color:Red:Barrels@@ were first invented as a subsite for @@#Color:Red:Pinatas@@ during the @@#Color:Red:Great Papier-Mache Wars@@. But failed to find popularity among @@#Color:Grey:Children@@ due to their boring appearance and difficulty to break.\n\nAfter the extinction of @@#Color:Grey:Children@@ and subsequent end to all birthday parties, people have found them useful for storing @@#Tag:Supplies@@ and providing a rustic feel.\n\nSome more nostalgic adventurers still prefer to use them for their original purpose.",
+            "DisplayName": "Lever",
+            "LargeIcon": "Sprites/Lever_Icon.png",
+            "ObjectType": "Actor",
+            "SmallIcon": "Sprites/Lever_Icon.png",
+            "SnippetDesc": "a lever",
+            "Tags": [
+                "Object",
+                "Lever",
+                "Rooted"
+            ],
+            "Taxonomy": [
+                "Actor",
+                "Object"
+            ]
+        },
+        "ActorData": {
+            "Faction": "Objects",
+            "ExpValue": 0,
+            "MoneyValue": 0,
+            "DropItemsSet": {
+                "": 50,
+                "HealthPotionS": 10,
+                "HealthPotionM": 5,
+                "HealthPotionL": 1,
+                "Mag_Ammo": 10,
+                "Phy_Ammo": 10,
+                "Gen_Ammo": 1
+            },
+            "IsAdirectional": true
+        },
+        "ScenePath": "Scenes/Lever/lever_actor_node.tscn",
+        "SpriteFrameWH": [
+            1,1
+        ],
+        "SpriteOffset": [
+            0,
+            0
+        ],
+        "SpriteSheet": "Sprites/Lever_SpriteSheet.png",
+        "Stats": {
             "HealthMax": 1,
-            "Mass": 100
+            "Mass": 1
+        },
+        
+        "_DefVersion": "1"
+    },
+    "ShrineActor": {
+        "!ObjectScript": "res://assets/Scripts/Actors/BaseActor.gd",
+        "!ParentKey": "#BaseActor",
+        "#ObjDetails": {
+            "Description": "Description",
+            "DisplayName": "Shrine",
+            "LargeIcon": "Sprites/Shrine_Icon.png",
+            "ObjectType": "Actor",
+            "SmallIcon": "Sprites/Shrine_Icon.png",
+            "SnippetDesc": "a shrine",
+            "Tags": [
+                "Object",
+                "Rooted"
+            ],
+            "Taxonomy": [
+                "Actor",
+                "Object"
+            ]
+        },
+        "ActorData": {
+            "Faction": "Objects",
+            "ExpValue": 0,
+            "MoneyValue": 0,
+            "DropItemsSet": {
+                "": 50,
+                "HealthPotionS": 10,
+                "HealthPotionM": 5,
+                "HealthPotionL": 1,
+                "Mag_Ammo": 10,
+                "Phy_Ammo": 10,
+                "Gen_Ammo": 1
+            },
+            "IsAdirectional": true
+        },
+        "ScenePath": "Scenes/Shrine/shrine_actor_node.tscn",
+        "SpriteFrameWH": [
+            4,1
+        ],
+        "SpriteOffset": [
+            0,
+            -16
+        ],
+        "SpriteSheet": "Sprites/Shrine_SpriteSheet.png",
+        "Stats": {
+            "HealthMax": 1,
+            "Mass": 1
         },
         
         "_DefVersion": "1"

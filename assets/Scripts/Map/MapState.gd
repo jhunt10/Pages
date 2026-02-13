@@ -14,6 +14,7 @@ var _zone_poses_cache:Dictionary = {}
 # Array of MapSpot index by coor
 var _position_data:Array = []
 var terrain_data:Array
+var _gates_data:Dictionary = {}
 var max_width = 0
 var max_hight = 0
 
@@ -47,6 +48,14 @@ func _init(game_state, map_data:Dictionary, wait_for_pos_data:bool=false) -> voi
 		for y in range(max_hight):
 			for x in range(max_width):
 				_position_data.append(MapSpot.new(x,y,terrain_data[y][x], self))
+	
+	_gates_data = map_data.get("Gates", {})
+	for gate_key in _gates_data.keys():
+		var gate_data = _gates_data[gate_key]
+		for coor:Vector2i in gate_data.get("MapCoors"):
+			var spot = get_map_spot(coor)
+			if spot:
+				spot.add_gate(gate_key)
 			
 func get_map_spot(pos)->MapSpot:
 	if pos.x < 0 or pos.x >= max_width or pos.y < 0 or pos.y >= max_hight:
@@ -84,6 +93,11 @@ func is_spot_traversable(pos, _actor)->bool:
 		return false
 	if spot.terrain == MapSpot.TerrainType.Cover:
 		return false
+	# Check Gates
+	for gate_key in spot.get_gate_keys():
+		var gate_data = _gates_data.get(gate_key)
+		if not gate_data.get("IsOpen"):
+			return false
 	return true
 	
 
@@ -167,6 +181,14 @@ func remove_actor(actor:BaseActor):
 		var old_spot = get_map_spot(old_pos)
 		old_spot.remove_actor(actor)
 		_actor_pos_cache.erase(actor.Id)
+
+# ----------------------------- Gates -----------------------------
+func set_gate_state(gate_key:String, open:bool):
+	if not _gates_data.keys().has(gate_key):
+		printerr("MapState.set_gate_state: No Gate found with GateKey '%s'." % [gate_key])
+		return
+	var gate_data = _gates_data[gate_key]
+	gate_data["IsOpen"] = open
 
 # ----------------------------- Items -----------------------------
 

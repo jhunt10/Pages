@@ -15,10 +15,6 @@ var _cached_mods:Dictionary = {}
 var _temp_stat_mods:Dictionary = {}
 var attribute_levels:Dictionary = {}
 
-## Stats which used as resources (Health, Mana, ...)
-#var _bar_stats:Dictionary = {}
-#var _bar_stats_regen:Dictionary = {}
-
 # Commonly accessed stats
 var current_health:int:
 	get: return get_stat(StatHelper.HealthCurrent)
@@ -163,27 +159,6 @@ func apply_level_up(new_level:int, remaining_exp:int, add_att_levels:Dictionary)
 		attribute_levels[attribute] = add_att_levels.get(attribute)
 	recache_stats()
 
-# -----------------------------------------------------------------
-#					Bar Stats
-# -----------------------------------------------------------------
-
-
-#func get_bar_stat(stat_name:String)->int:
-	#return get_stat("BarStat:" + stat_name, 0)
-	
-## Retruns list of StatKey for all bar stats
-#func list_bar_stat_names():
-	#var out_list = []
-	#for stat_name in _cached_stats.keys():
-		#if stat_name.begins_with("BarStat:"):
-			#out_list.append(stat_name.trim_prefix("BarStat:"))
-	#return out_list
-	
-#func fill_bar_stats():
-	#for stat_name in list_bar_stat_names():
-		#var max_val = get_bar_stat_max(stat_name)
-		#_cached_stats["BarStat:"+stat_name] = max_val
-
 func prep_for_combat():
 	var max_hp = max_health
 	_cached_stats[StatHelper.HealthCurrent] = max_hp
@@ -226,55 +201,14 @@ func apply_healing(value:int, can_revive:bool=false):
 		if CombatRootControl.Instance:
 			CombatRootControl.Instance.revive_actor(_actor)
 	health_changed.emit()
-	
-
-### Reduce current value of bar stat by given val and return true if cost was be paied
-#func reduce_bar_stat_value(stat_name:String, val:int, allow_partial:bool=true) -> bool:
-	#var full_stat_name = "BarStat:" + stat_name
-	#if _cached_stats.has(full_stat_name):
-		#if not allow_partial and _cached_stats[full_stat_name] < val:
-			#return false
-		#_cached_stats[full_stat_name] = max(0, _cached_stats[full_stat_name]  - val)
-		#bar_stat_changed.emit()
-		#return true
-	#return false
-
-### Increase current value of bar stat by given val
-#func add_to_bar_stat(stat_name:String, val:int):
-	#var full_stat_name = "BarStat:" + stat_name
-	#if _cached_stats.has(full_stat_name):
-		#_cached_stats[full_stat_name] = min(_cached_stats[full_stat_name] + val, get_bar_stat_max(stat_name))
-		#bar_stat_changed.emit()
-
-### Get Max value of BarStat
-#func get_bar_stat_max(stat_name):
-	#return get_stat("BarMax:"+stat_name)
 
 func _on_actor_turn_start():
 	pass
 
-#func get_bar_stat_regen_per_turn(stat_name):
-	#var full_stat_name = "BarRegen:" + stat_name + ":Turn"
-	#return get_stat(full_stat_name)
-#
-#func get_bar_stat_regen_per_round(stat_name):
-	#var full_stat_name = "BarRegen:" + stat_name + ":Round"
-	#return get_stat(full_stat_name)
-
 func _on_actor_turn_end():
 	pass
-	# On Turn Regen
-	#for stat_name in list_bar_stat_names():
-		#var regen = get_bar_stat_regen_per_turn(stat_name) 
-		#if regen != 0:
-			#add_to_bar_stat(stat_name, regen)
 
 func _on_actor_round_end():
-	## On Round Regen
-	#for stat_name in list_bar_stat_names():
-		#var regen = get_bar_stat_regen_per_round(stat_name) 
-		#if regen != 0:
-			#add_to_bar_stat(stat_name, regen)
 	pass
 
 # -----------------------------------------------------------------

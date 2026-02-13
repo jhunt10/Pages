@@ -99,6 +99,9 @@ static func handle_movement(game_state:GameStateData, moving_actor:BaseActor,
 
 # Returns new pos for pushed_actor if the pushed_actor can be pushed
 static func _find_push_to_spot(game_state:GameStateData, moving_actor:BaseActor, pushed_actor:BaseActor, relative_movemnt:MapPos)->MapPos:
+	# Rooted Actors return null
+	if pushed_actor.get_tags().has("Rooted"):
+		return null
 	var current_mover_pos:MapPos = game_state.get_actor_pos(moving_actor)
 	var current_pushed_pos:MapPos = game_state.get_actor_pos(pushed_actor)
 	# Need to use pushed's pos but mover's direction. Also ignore dir change of move

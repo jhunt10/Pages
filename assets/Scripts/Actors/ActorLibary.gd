@@ -16,6 +16,8 @@ func get_def_file_sufixes()->Array:
 func get_data_file_sufix()->String:
 	return "_ActorSave"
 func get_object_script_path(_object_def:Dictionary)->String:
+	if _object_def.keys().has("!ObjectScript"):
+		return _object_def["!ObjectScript"]
 	return "res://assets/Scripts/Actors/BaseActor.gd"
 
 const _default_corpse_texture_path = "res://assets/Sprites/Actors/DefaultCorpse.png"
@@ -56,11 +58,11 @@ static func get_actor(actor_id:String)->BaseActor:
 		printerr("ActorLibrary.get_actor: No actor found with id '%s'." % [actor_id])
 	return actor
 
-static func get_or_create_actor(key:String, id:String)->BaseActor:
+static func get_or_create_actor(key:String, id:String, data:Dictionary={})->BaseActor:
 	if !Instance: Instance = ActorLibrary.new()
 	if  Instance._loaded_objects.keys().has(id):
 		return get_actor(id)
-	return create_actor(key, {}, id)
+	return create_actor(key, data, id)
 
 static func create_actor(key:String, data:Dictionary, premade_id:String = '')->BaseActor:
 	if !Instance: Instance = ActorLibrary.new()

@@ -158,7 +158,7 @@ static func handle_attack(
 		
 		# Apply damage 
 		for damage_event:DamageEvent in sub_event.damage_events.values():
-			defender.stats.apply_damage_event(damage_event, true, game_state)
+			defender.apply_damage_event(damage_event, true, game_state)
 			damage_event.was_applied = true
 			if damage_event.final_damage > 0:
 				total_leachable_damage_dealt += damage_event.final_damage
@@ -743,7 +743,7 @@ static func handle_colision(
 		damage_event = DamageHelper.roll_for_damage(damage_data, winner, loser, source_tag_chain, game_state, damage_mods, true)
 		
 		# Apply damage 
-		loser.stats.apply_damage_event(damage_event, true, game_state)
+		loser.apply_damage_event(damage_event, true, game_state)
 		damage_event.was_applied = true
 		
 		var damage_effect = damage_data.get("DamageVfxKey", "Blunt_DamageEffect")

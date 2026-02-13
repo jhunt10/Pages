@@ -189,7 +189,7 @@ layout_mode = 2
 size_flags_vertical = 3
 
 [node name="ActorMainContainer" type="Container" parent="BoxContainer/VBoxContainer/HBoxContainer" node_paths=PackedStringArray("background", "inner_container")]
-custom_minimum_size = Vector2(424, 151)
+custom_minimum_size = Vector2(424, 318)
 layout_mode = 2
 script = ExtResource("1_is6c6")
 background = NodePath("NinePatchRect")
@@ -206,11 +206,12 @@ patch_margin_bottom = 32
 axis_stretch_horizontal = 2
 axis_stretch_vertical = 2
 
-[node name="BoxContainer" type="BoxContainer" parent="BoxContainer/VBoxContainer/HBoxContainer/ActorMainContainer" node_paths=PackedStringArray("icon_rect", "actor_node", "title_label", "tags_box", "xp_label", "money_label", "strength_label", "agility_label", "int_label", "wisdom_label", "health_label", "ppr_label", "mass_label", "speed_label", "phy_atk_label", "mag_atk_label", "armor_label", "ward_label", "acc_label", "eva_label", "pot_label", "pro_label", "description_box", "resisances_container", "weaknesses_container", "item_drop_entry", "item_drop_container", "passive_pages_container", "action_pages_container")]
+[node name="BoxContainer" type="BoxContainer" parent="BoxContainer/VBoxContainer/HBoxContainer/ActorMainContainer" node_paths=PackedStringArray("icon_rect", "actor_node_parent", "actor_node", "title_label", "tags_box", "xp_label", "money_label", "strength_label", "agility_label", "int_label", "wisdom_label", "health_label", "ppr_label", "mass_label", "speed_label", "phy_atk_label", "mag_atk_label", "armor_label", "ward_label", "acc_label", "eva_label", "pot_label", "pro_label", "description_box", "resisances_container", "weaknesses_container", "item_drop_entry", "item_drop_container", "passive_pages_container", "action_pages_container")]
 layout_mode = 2
 vertical = true
 script = ExtResource("3_iek5u")
 icon_rect = NodePath("HBoxContainer/NinePatchRect/IconTextureRect")
+actor_node_parent = NodePath("HBoxContainer/NinePatchRect/CenterContainer/Control/Node2D")
 actor_node = NodePath("HBoxContainer/NinePatchRect/CenterContainer/Control/Node2D/ActorNode")
 title_label = NodePath("HBoxContainer/VBoxContainer/FitScaleLabel")
 tags_box = NodePath("HBoxContainer/VBoxContainer/TagsBox")
@@ -398,7 +399,7 @@ script = ExtResource("8_qpbv8")
 layout_mode = 2
 
 [node name="StatsContainer" type="Container" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer" node_paths=PackedStringArray("background", "inner_container")]
-custom_minimum_size = Vector2(274, 180)
+custom_minimum_size = Vector2(258, 168)
 layout_mode = 2
 script = ExtResource("1_is6c6")
 background = NodePath("NinePatchRect")
@@ -655,7 +656,7 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="ResitWeakContainer" type="Container" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer2" node_paths=PackedStringArray("background", "inner_container")]
-custom_minimum_size = Vector2(246, 146)
+custom_minimum_size = Vector2(246, 128)
 layout_mode = 2
 script = ExtResource("1_is6c6")
 background = NodePath("NinePatchRect")

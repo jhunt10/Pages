@@ -104,7 +104,9 @@ static func get_remaining_frames_for_turn()->int:
 		if Instance.QueController and Instance.QueController.execution_state != ActionQueController.ActionStates.Waiting:
 			return ActionQueController.FRAMES_PER_ACTION - Instance.QueController.sub_action_index
 	return 0
-static func get_actor_node(actor_id:String)->BaseActorNode:
+static func get_actor_node(actor_id)->BaseActorNode:
+	if actor_id is BaseActor:
+		actor_id = actor_id.Id
 	if !Instance: return null
 	if !Instance.MapController: return null
 	var actor_nodes = Instance.MapController.actor_nodes
@@ -232,11 +234,14 @@ func start_phase(phase_key):
 	# Clear and cache markers for this phase
 	_cached_markers.clear()
 	var phase_map_name = phase_data.get("MarkerMap")
+	var phase_map = null
 	if phase_map_name:
-		var phase_map = MapController.get_phase_marker_map(phase_map_name)
-		var spawn_nodes = []
-		for child in phase_map.get_children():
-			_cached_markers[child.name] = child
+		phase_map = MapController.get_phase_marker_map(phase_map_name)
+		if phase_map:
+			for child in phase_map.get_children():
+				_cached_markers[child.name] = child
+		else:
+			printerr("CombatScene.start_phase: Failed to find phase map '%s'." % [phase_map_name])
 		
 	match(phase_type):
 		"SpawnEnemy":
@@ -255,6 +260,24 @@ func start_phase(phase_key):
 			var dialog_data = phase_data.get("DialogData")
 			dialog_controller.load_dialog_data(dialog_data)
 			pass
+
+func trigger_spawners():
+	var phase_datas = combat_map_data.get("PhaseDatas", {})
+	var phase_data = phase_datas["InitSpawn"]
+	
+	var spawners = []
+	for actor:BaseActor in GameState.list_actors():
+		if actor.ActorKey == "ShrineActor":
+			spawners.append(actor)
+	for spawner:BaseActor in spawners:
+		var spawner_node = get_actor_node(spawner)
+		if spawner_node is ShrineActorNode:
+			var actor_key = _get_random_enemy_key(phase_data)
+			var new_actor = ActorLibrary.create_actor(actor_key, {})
+			spawner_node.play_spawn_animation(new_actor, GameState)
+			
+				
+			
 		
 
 func start_next_phase():
@@ -318,7 +341,7 @@ func spawn_actors_for_phase(phase_data:Dictionary):
 		
 		# Specific Actor Id was provided
 		if actor_id != "":
-			new_actor = ActorLibrary.get_or_create_actor(actor_key, actor_id)
+			new_actor = ActorLibrary.get_or_create_actor(actor_key, actor_id,  child.get_actor_data())
 			if not new_actor:
 				printerr("CombatRootControl.load_init_state: Failed to get or create actor with id %s" % [actor_id])
 		# Only Actor Key was provided
@@ -480,6 +503,8 @@ func remove_zone(zone):
 	MapController.delete_zone_node(zone)
 
 func check_end_conditions():
+	trigger_spawners()
+	
 	if supress_win_conditions:
 		return
 	
@@ -502,11 +527,12 @@ func check_end_conditions():
 		condition_key = combat_condition
 	elif combat_condition is Dictionary:
 		condition_key =  combat_condition.get("ConditionKey")
-	
+	if condition_key == "Endless":
+		return
 	if condition_key == "KillAll":
 		var any_alive = false
 		for team_index in living_actor_by_team.keys():
-			if team_index == 0:
+			if team_index == "0":
 				continue
 			if living_actor_by_team[team_index] > 0:
 				any_alive = true

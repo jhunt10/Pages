@@ -159,7 +159,7 @@ static func roll_and_apply_damage(
 	)->DamageEvent:
 	var damage_event = roll_for_damage(damage_data, attacker, defender, source_tag_chain, game_state, extra_damage_mods, actor_atk_mods_provided)
 	
-	defender.stats.apply_damage(damage_event)
+	defender.apply_damage(damage_event)
 	
 	var vfx_data = AttackHandler.build_damage_vfx_data(attacker.Id, damage_event, damage_data, null)
 	var damage_vfx_key = vfx_data.get('DamageVfxKey', '')
@@ -322,7 +322,7 @@ static func does_damage_mod_apply(damage_mod:Dictionary, attacker:BaseActor, def
 				#damage_event.final_damage = damage_event.final_damage * attack_event.defender_block_mod
 	#
 	#print("DamageHelper.hand_damage: Real final applied damage: %s" % [damage_event.final_damage])
-	#defender.stats.apply_damage(damage_event.final_damage)
+	#defender.apply_damage(damage_event.final_damage)
 	#damage_event.was_applied = true
 	#defender.effects.trigger_damage_taken(game_state, damage_event)
 	#

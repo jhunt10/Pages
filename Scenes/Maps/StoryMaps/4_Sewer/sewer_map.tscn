@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=4 uid="uid://cr2vu42yv4hwd"]
+[gd_scene load_steps=52 format=4 uid="uid://cr2vu42yv4hwd"]
 
 [ext_resource type="Script" path="res://assets/Scripts/Map/map_controler_node.gd" id="1_i66m5"]
 [ext_resource type="Texture2D" uid="uid://b21igxb5gcqlc" path="res://assets/Sprites/TileSets/CaveFloor_TileSheet.png" id="2_hk0rd"]
@@ -15,11 +15,14 @@
 [ext_resource type="Texture2D" uid="uid://bj0wyp8fyeepl" path="res://Scenes/Maps/StoryMaps/4_Sewer/TileSets/Gate_SpriteSheet.png" id="16_o8sj3"]
 [ext_resource type="Texture2D" uid="uid://dwutaik6e7brv" path="res://Scenes/Maps/StoryMaps/4_Sewer/TileSets/SewerDecor_TielSet.png" id="16_vf8tt"]
 [ext_resource type="Texture2D" uid="uid://bpagedkvood75" path="res://Scenes/Maps/StoryMaps/4_Sewer/TileSets/SewerFloor_TileSet.png" id="17_vvm4e"]
+[ext_resource type="PackedScene" uid="uid://dqxauhjmwxfw6" path="res://Scenes/Maps/DecoreNodes/Gates/gate_sprite_node.tscn" id="18_fffxw"]
 [ext_resource type="Texture2D" uid="uid://dmebx7plukqrg" path="res://Scenes/Maps/StoryMaps/4_Sewer/TileSets/SewerPipes_TileSet.png" id="18_kr8rp"]
 [ext_resource type="Texture2D" uid="uid://bnpeqinr4tbfa" path="res://Scenes/Maps/StoryMaps/4_Sewer/TileSets/Lever_SpriteSheet.png" id="19_8x0h5"]
 [ext_resource type="Texture2D" uid="uid://kh2uekpf4sb8" path="res://Scenes/Maps/MapEditing/ActorSpawnSprite.png" id="19_pm0qq"]
 [ext_resource type="Script" path="res://Scenes/Maps/MapEditing/actor_spawn_node.gd" id="20_tixpt"]
 [ext_resource type="Texture2D" uid="uid://c0scdw1u8ayan" path="res://assets/Sprites/TileSets/PlayerSpawnArea_TileSet.png" id="21_o6pvd"]
+[ext_resource type="Texture2D" uid="uid://cc1kqm82ckglk" path="res://ObjectDefs/Factions/Objects/Actors/Scenes/Lever/Lever_Icon.png" id="24_3l3ap"]
+[ext_resource type="Script" path="res://Scenes/Maps/MapEditing/lever_spawn_node.gd" id="25_n03cb"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0gfa0"]
 texture = ExtResource("2_hk0rd")
@@ -2271,6 +2274,9 @@ sources/0 = SubResource("TileSetAtlasSource_encom")
 [sub_resource type="TileSet" id="TileSet_5pode"]
 tile_size = Vector2i(32, 32)
 
+[sub_resource type="TileSet" id="TileSet_eodif"]
+tile_size = Vector2i(32, 32)
+
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_n45pm"]
 texture = ExtResource("15_2uj4q")
 texture_region_size = Vector2i(48, 48)
@@ -2487,16 +2493,13 @@ texture_region_size = Vector2i(32, 48)
 tile_size = Vector2i(32, 32)
 sources/0 = SubResource("TileSetAtlasSource_81s4m")
 
-[sub_resource type="TileSet" id="TileSet_eodif"]
-tile_size = Vector2i(32, 32)
-
 [sub_resource type="TileSet" id="TileSet_5ipcw"]
 tile_size = Vector2i(32, 32)
 
 [sub_resource type="TileSet" id="TileSet_o1yif"]
 tile_size = Vector2i(32, 32)
 
-[node name="MapNode" type="Node2D" node_paths=PackedStringArray("zone_tile_map", "actor_tile_map", "item_tile_map", "ground_tile_map", "terrain_path_map", "marker_tile_map", "phase_marker_maps_holder", "player_spawn_area_tile_map")]
+[node name="MapNode" type="Node2D" node_paths=PackedStringArray("zone_tile_map", "actor_tile_map", "item_tile_map", "ground_tile_map", "terrain_path_map", "marker_tile_map", "phase_marker_maps_holder", "player_spawn_area_tile_map", "gates_map_layer")]
 script = ExtResource("1_i66m5")
 map_name = "Sewer"
 zone_tile_map = NodePath("ZoneTileMapLayer")
@@ -2507,6 +2510,7 @@ terrain_path_map = NodePath("TerrainMap")
 marker_tile_map = NodePath("PhaseController/InitEnemySpawnMap")
 phase_marker_maps_holder = NodePath("PhaseController")
 player_spawn_area_tile_map = NodePath("PlayerSpawnAreaMapLayer")
+gates_map_layer = NodePath("GatesTileMapLayer")
 
 [node name="GroundTileMapLayer" type="TileMapLayer" parent="."]
 visible = false
@@ -2566,6 +2570,13 @@ tile_set = SubResource("TileSet_ql00r")
 
 [node name="ZoneTileMapLayer" type="TileMapLayer" parent="."]
 tile_set = SubResource("TileSet_5pode")
+
+[node name="GatesTileMapLayer" type="TileMapLayer" parent="."]
+tile_set = SubResource("TileSet_eodif")
+
+[node name="GateSpriteNode2" parent="GatesTileMapLayer" instance=ExtResource("18_fffxw")]
+modulate = Color(1, 0, 0, 1)
+position = Vector2(240, 272)
 
 [node name="Walls_MapLayer" type="TileMapLayer" parent="."]
 y_sort_enabled = true
@@ -2638,14 +2649,14 @@ tile_set = SubResource("TileSet_o1yif")
 
 [node name="SpwanNode_Enemey" type="Sprite2D" parent="PhaseController/InitEnemySpawnMap"]
 self_modulate = Color(1, 0.1, 0, 1)
-position = Vector2(400, 496)
+position = Vector2(368, 496)
 rotation = 1.5708
 texture = ExtResource("19_pm0qq")
 script = ExtResource("20_tixpt")
 spawn_actor_key = "RandomEnemy"
 team_index = 1
 facing = 3
-map_coor = Vector2i(12, 15)
+map_coor = Vector2i(11, 15)
 
 [node name="SpwanNode_Enemey2" type="Sprite2D" parent="PhaseController/InitEnemySpawnMap"]
 self_modulate = Color(1, 0.1, 0, 1)
@@ -2677,3 +2688,16 @@ spawn_actor_key = "RandomEnemy"
 team_index = 1
 facing = 2
 map_coor = Vector2i(7, 10)
+
+[node name="SpwanNode_Lever" type="Sprite2D" parent="PhaseController/InitEnemySpawnMap"]
+self_modulate = Color(1, 0, 0, 1)
+position = Vector2(400, 496)
+texture = ExtResource("24_3l3ap")
+script = ExtResource("25_n03cb")
+gate_key = "RedGate"
+gate_color = Color(1, 0, 0, 1)
+spawn_actor_key = "LeverActor"
+spawn_actor_id = "Lever_RedGate"
+team_index = 2
+facing = 2
+map_coor = Vector2i(12, 15)

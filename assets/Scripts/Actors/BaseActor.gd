@@ -7,6 +7,7 @@ signal turn_starting
 ## Emitted only when this Actor ends a turn (not emitted on gap turns)
 signal turn_ended
 # This is just here because I don't want all the Holders to have to connect dirrectly to ActionQueController
+# (But also not currently used for anything)
 signal round_starting
 signal round_ended
 signal action_failed
@@ -96,6 +97,13 @@ func get_npc_index_str()->String:
 		return alphabet[enemy_npc_index]
 	else:
 		return ""
+
+func get_node_scene_path()->String:
+	var actor_node_path = self.get_load_val("ScenePath", "res://Scenes/Combat/MapObjects/Actors/SimpleActorNode/simple_actor_node.tscn")
+	if not actor_node_path.begins_with("res://"):
+		actor_node_path = self.get_load_path().path_join(actor_node_path)
+	return actor_node_path
+	
 
 func get_display_name()->String:
 	var dis_name = super()
@@ -348,6 +356,18 @@ func on_delete():
 func leaves_corpse()->bool:
 	return is_player
 
+func apply_damage_event(damage_event:DamageEvent, trigger_effect:bool=false, game_state:GameStateData=null):
+	if stats:
+		return stats.apply_damage_event(damage_event, trigger_effect, game_state)
+
+func apply_damage(damage):
+	if stats:
+		return stats.apply_damage(damage)
+
+func apply_healing(value:int, can_revive:bool=false):
+	if stats:
+		return stats.apply_healing(value, can_revive)
+	
 func die():
 	if is_dead:
 		return

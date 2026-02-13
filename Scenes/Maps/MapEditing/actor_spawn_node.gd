@@ -38,15 +38,8 @@ enum SpawnBy {Player, Key, Id}
 func get_map_pos()->MapPos:
 	return MapPos.new(self.map_coor.x, self.map_coor.y, 0, self.facing)
 
-#@export var spawn_actor_by:SpawnBy:
-	#set(val):
-		#spawn_actor_by = val
-		#if spawn_actor_by == SpawnBy.Player:
-			#self.self_modulate = Color.GREEN
-		#if spawn_actor_by == SpawnBy.Key:
-			#self.self_modulate = Color.AQUA
-		#if spawn_actor_by == SpawnBy.Id:
-			#self.self_modulate = Color.RED
+func get_actor_data()->Dictionary:
+	return {}
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

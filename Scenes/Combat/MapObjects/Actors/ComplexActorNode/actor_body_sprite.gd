@@ -20,6 +20,7 @@ signal direction_set(direction:int)
 		self.frame_coords.x = frame_index
 
 func get_sprite_center()->Vector2:
+	region_rect
 	var sprite_bounds = get_sprite_bounds()
 	var texture_size = self.get_rect().size
 	var center = sprite_bounds.get_center()

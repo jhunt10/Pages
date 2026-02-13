@@ -1,5 +1,6 @@
-[gd_scene load_steps=30 format=3 uid="uid://uo60871y6t54"]
+[gd_scene load_steps=32 format=3 uid="uid://uo60871y6t54"]
 
+[ext_resource type="Shader" path="res://Scenes/Combat/MapObjects/Actors/ComplexActorNode/spawn_actor_shader.gdshader" id="1_j2a86"]
 [ext_resource type="Script" path="res://Scenes/Combat/MapObjects/Actors/ComplexActorNode/complex_actor_node.gd" id="1_wfbib"]
 [ext_resource type="Texture2D" uid="uid://dcl5xlxf1t6ad" path="res://Scenes/Combat/MapObjects/Actors/ComplexActorNode/Sprites/BaseActor_SpriteSheet.png" id="3_bgyq5"]
 [ext_resource type="PackedScene" uid="uid://dooeg4ake0jdk" path="res://Scenes/Combat/MapObjects/Actors/ComplexActorNode/actor_hand_node.tscn" id="3_dpgwv"]
@@ -23,6 +24,10 @@
 [ext_resource type="Texture2D" uid="uid://bjo761ym76mti" path="res://assets/Sprites/TileSets/AwarenessTileSet.png" id="22_xdlor"]
 [ext_resource type="Texture2D" uid="uid://bbs3uvepyto08" path="res://ObjectDefs/ClassDefs/TitlePages/Sprites/SoldierIcon.png" id="24_brgje"]
 [ext_resource type="Texture2D" uid="uid://cmpc2v60v42vw" path="res://Scenes/Combat/MapObjects/Actors/ComplexActorNode/Sprites/TombStone.png" id="26_yeo0n"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_on0mc"]
+shader = ExtResource("1_j2a86")
+shader_parameter/progress = 0.0
 
 [sub_resource type="Animation" id="Animation_y5og4"]
 resource_name = "RESET"
@@ -261,6 +266,7 @@ sources/0 = SubResource("TileSetAtlasSource_87ioo")
 
 [node name="ActorNode" type="Node2D" node_paths=PackedStringArray("main_hand_node", "off_hand_node", "tombstone_sprite", "tombstone_portrait_sprite", "vfx_holder", "aura_holder", "actor_sprite", "path_arrow", "actor_motion_node", "offset_node", "damage_animation_player", "body_animation")]
 y_sort_enabled = true
+material = SubResource("ShaderMaterial_on0mc")
 script = ExtResource("1_wfbib")
 editing_facing_direction = 2
 main_hand_node = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/MainHandNode")
@@ -289,13 +295,17 @@ visible = false
 texture = ExtResource("14_6kv2p")
 
 [node name="ActorMotionNode" type="Node2D" parent="."]
+use_parent_material = true
 
 [node name="ActorSpriteNode" type="Node2D" parent="ActorMotionNode"]
+use_parent_material = true
 
 [node name="OffsetNode" type="Node2D" parent="ActorMotionNode/ActorSpriteNode"]
+use_parent_material = true
 position = Vector2(0, -16)
 
 [node name="ActorSprite" type="Sprite2D" parent="ActorMotionNode/ActorSpriteNode/OffsetNode"]
+use_parent_material = true
 texture = ExtResource("3_bgyq5")
 hframes = 12
 vframes = 4

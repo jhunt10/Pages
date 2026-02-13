@@ -18,6 +18,7 @@ var _layer_to_actor_ids:Dictionary = {}
 #var _actor_ids:Array=[]
 var _zone_ids:Array = []
 var item_ids:Array = []
+var _gate_keys:Array = []
 
 func duplicate(new_parent:MapStateData)->MapSpot:
 	var new_spot = MapSpot.new(X, Y, terrain, new_parent)
@@ -69,6 +70,13 @@ func get_actor_layer(actor:BaseActor)->MapStateData.MapLayers:
 			return layer
 	printerr("MapSpot.get_actor_layer: Failed to find actor '%s'." % [actor.Id])
 	return MapStateData.MapLayers.Default
+
+func add_gate(gate_key:String):
+	if not _gate_keys.has(gate_key):
+		_gate_keys.append(gate_key)
+
+func get_gate_keys()->Array:
+	return _gate_keys
 
 func add_item(item:BaseItem):
 	if item_ids.has(item.Id):

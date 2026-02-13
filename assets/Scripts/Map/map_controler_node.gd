@@ -16,6 +16,9 @@ var grid_tile_map:TileMapLayer:
 @export var marker_tile_map:TileMapLayer
 @export var phase_marker_maps_holder:Node2D
 @export var player_spawn_area_tile_map:TileMapLayer
+
+@export var gates_map_layer:TileMapLayer
+
 @onready var target_area_display:TargetAreaDisplayNode = $TargetAreaDisplayNode
 
 static var game_state:GameStateData:
@@ -51,7 +54,21 @@ func get_map_rect()->Rect2i:
 func get_map_data()->Dictionary:
 	var map_data = terrain_path_map.get_map_data()
 	map_data['SpawnArea'] = get_player_spawn_area()
+	map_data['Gates'] = get_gate_nodes()
 	return map_data
+
+func get_gate_nodes():
+	var gates = {}
+	if !gates_map_layer:
+		return gates
+	for child in gates_map_layer.get_children():
+		if child is GateSpriteNode:
+			gates[child.gate_key] = {
+				"Node": child,
+				"MapCoors": child.get_occupied_coors(),
+				"IsOpen": child.is_open
+			}
+	return gates
 
 func get_phase_marker_map(marker_map_name)->TileMapLayer:
 	var child = phase_marker_maps_holder.get_node(marker_map_name)
@@ -95,9 +112,7 @@ func get_or_create_actor_node(actor:BaseActor, map_pos:MapPos, wait_to_show:bool
 	if actor_nodes.keys().has(actor.Id):
 		return actor_nodes[actor.Id]
 	
-	var actor_node_path = actor.get_load_val("ScenePath", "res://Scenes/Combat/MapObjects/Actors/SimpleActorNode/simple_actor_node.tscn")
-	if not actor_node_path.begins_with("res://"):
-		actor_node_path = actor.get_load_path().path_join(actor_node_path)
+	var actor_node_path = actor.get_node_scene_path()
 	var new_node:BaseActorNode = load(actor_node_path).instantiate()
 	actor_nodes[actor.Id] = new_node
 	actor_tile_map.add_child(new_node)
@@ -229,3 +244,16 @@ func _sync_missile_positions():
 			if LOGGING: printerr("Failed to find node for missile: ", missile.Id)
 			continue
 		node.sync_pos()
+
+func set_gate_state(gate_key:String, open:bool):
+	var gates = get_gate_nodes()
+	if not gates.keys().has(gate_key):
+		printerr("MapController.set_gate_state: No GateNode found with GateKey '%s'." % [gate_key])
+		return
+	var gate_data = gates[gate_key]
+	var node = gate_data.get("Node")
+	if node and node is GateSpriteNode:
+		if open:
+			node.open_gate()
+		else:
+			node.close_gate()

@@ -530,6 +530,7 @@ transitions = ["Start", "Idel", SubResource("AnimationNodeStateMachineTransition
 graph_offset = Vector2(0, -108.949)
 
 [node name="HandNode" type="Node2D" node_paths=PackedStringArray("animation_tree", "hand_sprite", "weapon_node")]
+use_parent_material = true
 script = ExtResource("1_dwep3")
 facing_dir = 2
 animation_is_ready = true
@@ -557,6 +558,7 @@ speed_scale = 0.1
 
 [node name="WeaponNode" type="Node2D" parent="." node_paths=PackedStringArray("overhand_weapon_sprite", "underhand_weapon_sprite")]
 z_index = 1
+use_parent_material = true
 position = Vector2(-4, 14)
 script = ExtResource("2_ga04f")
 main_hand_position = Vector2(-4, 14)
@@ -567,6 +569,7 @@ rotation_factor = 1.0
 
 [node name="WeaponUnderHandSprite" type="Sprite2D" parent="WeaponNode"]
 z_index = -1
+use_parent_material = true
 texture = ExtResource("10_c1uko")
 hframes = 2
 vframes = 2
@@ -574,12 +577,14 @@ frame = 2
 
 [node name="WeaponOverHandSprite" type="Sprite2D" parent="WeaponNode"]
 z_index = 1
+use_parent_material = true
 texture = ExtResource("10_c1uko")
 hframes = 2
 vframes = 2
 frame = 1
 
 [node name="HandSprite" type="Sprite2D" parent="."]
+use_parent_material = true
 texture = ExtResource("2_3tedl")
 hframes = 12
 vframes = 4

@@ -26,7 +26,7 @@ func use_in_combat(actor:BaseActor, target, game_state:GameStateData):
 			target_actor.stats.apply_healing(heal_val)
 			VfxHelper.create_damage_effect(target_actor, "Heal_DamageEffect", {"DamageNumber": heal_val})
 		elif heal_val < 0:
-			target_actor.stats.apply_damage(heal_val)
+			target_actor.apply_damage(heal_val)
 			VfxHelper.create_damage_effect(target_actor, "Hurt_DamageEffect", {"DamageNumber": heal_val})
 		var hp_after = target_actor.stats.current_health
 		print("Hp After: " + str(hp_after))
