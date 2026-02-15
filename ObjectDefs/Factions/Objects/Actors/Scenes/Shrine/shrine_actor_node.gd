@@ -1,8 +1,15 @@
 class_name ShrineActorNode
 extends BaseActorNode
 
-func play_spawn_animation(actor:BaseActor, game_state:GameStateData):
+var spawning_actor
+var game_state
+
+func start_spawning_animation(actor:BaseActor, game_state:GameStateData):
+	self.spawning_actor = actor
+	self.game_state = game_state
 	body_animation.play("flash")
+
+func play_actor_spawn_animation():
 	var adj_spot = MapHelper.get_adjacent_poses(self.cur_map_pos)
 	var chosen_spot = null
 	var spawn_priority = [[0,-1],[-1,-1],[1,-1],[-1,0],[1,0],[-1,1],[1,1],[0,1]]
@@ -16,4 +23,6 @@ func play_spawn_animation(actor:BaseActor, game_state:GameStateData):
 	if !chosen_spot:
 		printerr("ShrineActorNode: No Open Spots found")
 		return
-	CombatRootControl.Instance.add_actor(actor, chosen_spot)
+	CombatRootControl.Instance.add_actor(spawning_actor, chosen_spot, false, true)
+	#var actor_node = CombatRootControl.get_actor_node(actor)
+	#actor_node.body_animation.play("spawn_in")

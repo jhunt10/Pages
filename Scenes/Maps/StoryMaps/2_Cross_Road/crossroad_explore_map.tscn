@@ -1699,6 +1699,7 @@ spawn_actor_key = "CrateActor"
 team_index = 2
 facing = 2
 map_coor = Vector2i(7, 8)
+actor_data = null
 
 [node name="SpwanNode_Crate2" type="Sprite2D" parent="PhaseController/InitEnemySpawnMap"]
 position = Vector2(400, 272)
@@ -1709,6 +1710,7 @@ spawn_actor_key = "CrateActor"
 team_index = 2
 facing = 2
 map_coor = Vector2i(12, 8)
+actor_data = null
 
 [node name="SpwanNode_Crate3" type="Sprite2D" parent="PhaseController/InitEnemySpawnMap"]
 position = Vector2(432, 272)
@@ -1719,6 +1721,7 @@ spawn_actor_key = "CrateActor"
 team_index = 2
 facing = 2
 map_coor = Vector2i(13, 8)
+actor_data = null
 
 [node name="SpwanNode_Crate4" type="Sprite2D" parent="PhaseController/InitEnemySpawnMap"]
 position = Vector2(464, 464)
@@ -1729,6 +1732,7 @@ spawn_actor_key = "CrateActor"
 team_index = 2
 facing = 2
 map_coor = Vector2i(14, 14)
+actor_data = null
 
 [node name="SpwanNode_Barrel" type="Sprite2D" parent="PhaseController/InitEnemySpawnMap"]
 position = Vector2(464, 272)
@@ -1738,6 +1742,7 @@ spawn_actor_key = "BarrelActor"
 team_index = 2
 facing = 2
 map_coor = Vector2i(14, 8)
+actor_data = null
 
 [node name="SpwanNode_Barrel2" type="Sprite2D" parent="PhaseController/InitEnemySpawnMap"]
 position = Vector2(496, 304)
@@ -1747,6 +1752,7 @@ spawn_actor_key = "BarrelActor"
 team_index = 2
 facing = 2
 map_coor = Vector2i(15, 9)
+actor_data = null
 
 [node name="SpwanNode_Barrel3" type="Sprite2D" parent="PhaseController/InitEnemySpawnMap"]
 position = Vector2(528, 432)
@@ -1756,6 +1762,7 @@ spawn_actor_key = "BarrelActor"
 team_index = 2
 facing = 2
 map_coor = Vector2i(16, 13)
+actor_data = null
 
 [node name="SpwanNode_Barrel4" type="Sprite2D" parent="PhaseController/InitEnemySpawnMap"]
 position = Vector2(208, 400)
@@ -1765,6 +1772,7 @@ spawn_actor_key = "BarrelActor"
 team_index = 2
 facing = 2
 map_coor = Vector2i(6, 12)
+actor_data = null
 
 [node name="SpwanNode_Enemey" type="Sprite2D" parent="PhaseController/InitEnemySpawnMap"]
 self_modulate = Color(1, 0.1, 0, 1)
@@ -1776,6 +1784,7 @@ spawn_actor_key = "RandomEnemy"
 team_index = 1
 facing = 1
 map_coor = Vector2i(2, 5)
+actor_data = null
 
 [node name="SpwanNode_Enemey2" type="Sprite2D" parent="PhaseController/InitEnemySpawnMap"]
 self_modulate = Color(1, 0.1, 0, 1)
@@ -1786,6 +1795,7 @@ spawn_actor_key = "RandomEnemy"
 team_index = 1
 facing = 2
 map_coor = Vector2i(18, 3)
+actor_data = null
 
 [node name="SpwanNode_Enemey3" type="Sprite2D" parent="PhaseController/InitEnemySpawnMap"]
 self_modulate = Color(1, 0.1, 0, 1)
@@ -1797,6 +1807,7 @@ spawn_actor_key = "RandomEnemy"
 team_index = 1
 facing = 1
 map_coor = Vector2i(4, 15)
+actor_data = null
 
 [node name="SpwanNode_Enemey4" type="Sprite2D" parent="PhaseController/InitEnemySpawnMap"]
 self_modulate = Color(1, 0.1, 0, 1)
@@ -1807,6 +1818,7 @@ script = ExtResource("17_hbjn4")
 spawn_actor_key = "RandomEnemy"
 team_index = 1
 map_coor = Vector2i(19, 17)
+actor_data = null
 
 [node name="SpwanNode_Enemey5" type="Sprite2D" parent="PhaseController/InitEnemySpawnMap"]
 self_modulate = Color(1, 0.1, 0, 1)
@@ -1817,6 +1829,7 @@ script = ExtResource("17_hbjn4")
 spawn_actor_key = "RandomEnemy"
 team_index = 1
 map_coor = Vector2i(10, 22)
+actor_data = null
 
 [node name="SpwanNode_Enemey6" type="Sprite2D" parent="PhaseController/InitEnemySpawnMap"]
 self_modulate = Color(1, 0.1, 0, 1)
@@ -1827,6 +1840,7 @@ spawn_actor_key = "RandomEnemy"
 team_index = 1
 facing = 2
 map_coor = Vector2i(9, 3)
+actor_data = null
 
 [node name="Path_Capt" type="Node2D" parent="PhaseController/InitEnemySpawnMap" node_paths=PackedStringArray("sprite", "label")]
 position = Vector2(304, 16)
@@ -1884,6 +1898,7 @@ team_index = 1
 wait_to_spawn = true
 facing = 2
 map_coor = Vector2i(9, 0)
+actor_data = null
 
 [node name="Path_Capt" type="Node2D" parent="PhaseController/CptPhaseMap" node_paths=PackedStringArray("sprite", "label")]
 position = Vector2(304, 16)

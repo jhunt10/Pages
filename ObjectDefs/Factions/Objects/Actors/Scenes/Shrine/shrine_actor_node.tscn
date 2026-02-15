@@ -266,10 +266,24 @@ tracks/0/path = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/ActorSprite
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.7, 0.85, 1, 1.15),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 1, 1.15, 1.3, 1.45),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3, 3, 2, 1, 0]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.25),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"play_actor_spawn_animation"
+}]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_hyh3n"]

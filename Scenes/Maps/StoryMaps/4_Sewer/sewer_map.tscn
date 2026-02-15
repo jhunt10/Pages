@@ -2657,6 +2657,7 @@ spawn_actor_key = "RandomEnemy"
 team_index = 1
 facing = 3
 map_coor = Vector2i(11, 15)
+actor_data = null
 
 [node name="SpwanNode_Enemey2" type="Sprite2D" parent="PhaseController/InitEnemySpawnMap"]
 self_modulate = Color(1, 0.1, 0, 1)
@@ -2667,6 +2668,7 @@ spawn_actor_key = "RandomEnemy"
 team_index = 1
 facing = 2
 map_coor = Vector2i(8, 5)
+actor_data = null
 
 [node name="SpwanNode_Enemey3" type="Sprite2D" parent="PhaseController/InitEnemySpawnMap"]
 self_modulate = Color(1, 0.1, 0, 1)
@@ -2678,6 +2680,7 @@ spawn_actor_key = "RandomEnemy"
 team_index = 1
 facing = 3
 map_coor = Vector2i(19, 10)
+actor_data = null
 
 [node name="SpwanNode_Enemey4" type="Sprite2D" parent="PhaseController/InitEnemySpawnMap"]
 self_modulate = Color(1, 0.1, 0, 1)
@@ -2688,6 +2691,7 @@ spawn_actor_key = "RandomEnemy"
 team_index = 1
 facing = 2
 map_coor = Vector2i(7, 10)
+actor_data = null
 
 [node name="SpwanNode_Lever" type="Sprite2D" parent="PhaseController/InitEnemySpawnMap"]
 self_modulate = Color(1, 0, 0, 1)
@@ -2701,3 +2705,4 @@ spawn_actor_id = "Lever_RedGate"
 team_index = 2
 facing = 2
 map_coor = Vector2i(12, 15)
+actor_data = null

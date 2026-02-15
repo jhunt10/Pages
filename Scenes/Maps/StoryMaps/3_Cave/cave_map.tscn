@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=4 uid="uid://bemdpvi328wf"]
+[gd_scene load_steps=35 format=4 uid="uid://bemdpvi328wf"]
 
 [ext_resource type="Script" path="res://assets/Scripts/Map/map_controler_node.gd" id="1_qi44j"]
 [ext_resource type="Texture2D" uid="uid://b21igxb5gcqlc" path="res://assets/Sprites/TileSets/CaveFloor_TileSheet.png" id="2_4k04i"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://bpurspf6xbf1h" path="res://Scenes/Combat/UiNodes/TargetAreaDisplay/target_area_display_node.tscn" id="9_xk56m"]
 [ext_resource type="Texture2D" uid="uid://kh2uekpf4sb8" path="res://Scenes/Maps/MapEditing/ActorSpawnSprite.png" id="10_7khqc"]
 [ext_resource type="Script" path="res://Scenes/Maps/MapEditing/actor_spawn_node.gd" id="11_ukasq"]
+[ext_resource type="Texture2D" uid="uid://bkmin2ryysfo" path="res://ObjectDefs/Factions/Objects/Actors/Sprites/Shrine_Icon.png" id="15_gdnlg"]
 [ext_resource type="Texture2D" uid="uid://c0scdw1u8ayan" path="res://assets/Sprites/TileSets/PlayerSpawnArea_TileSet.png" id="15_q10fo"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0gfa0"]
@@ -1358,6 +1359,7 @@ spawn_actor_key = "MushroomBase"
 team_index = 2
 facing = 2
 map_coor = Vector2i(21, 23)
+actor_data = null
 
 [node name="SpwanNode_Enemey" type="Sprite2D" parent="PhaseController/InitEnemySpawnMap"]
 self_modulate = Color(1, 0.1, 0, 1)
@@ -1368,6 +1370,7 @@ spawn_actor_key = "RandomEnemy"
 team_index = 1
 facing = 2
 map_coor = Vector2i(6, 21)
+actor_data = null
 
 [node name="SpwanNode_Enemey2" type="Sprite2D" parent="PhaseController/InitEnemySpawnMap"]
 self_modulate = Color(1, 0.1, 0, 1)
@@ -1378,6 +1381,7 @@ spawn_actor_key = "RandomEnemy"
 team_index = 1
 facing = 2
 map_coor = Vector2i(7, 13)
+actor_data = null
 
 [node name="SpwanNode_Enemey3" type="Sprite2D" parent="PhaseController/InitEnemySpawnMap"]
 self_modulate = Color(1, 0.1, 0, 1)
@@ -1388,6 +1392,7 @@ spawn_actor_key = "SkeletonMage"
 team_index = 1
 facing = 2
 map_coor = Vector2i(15, 6)
+actor_data = null
 
 [node name="SpwanNode_Enemey4" type="Sprite2D" parent="PhaseController/InitEnemySpawnMap"]
 self_modulate = Color(1, 0.1, 0, 1)
@@ -1398,6 +1403,7 @@ spawn_actor_key = "RandomEnemy"
 team_index = 1
 facing = 2
 map_coor = Vector2i(21, 13)
+actor_data = null
 
 [node name="SpwanNode_Enemey5" type="Sprite2D" parent="PhaseController/InitEnemySpawnMap"]
 self_modulate = Color(1, 0.1, 0, 1)
@@ -1409,6 +1415,7 @@ spawn_actor_key = "RandomEnemy"
 team_index = 1
 facing = 3
 map_coor = Vector2i(26, 20)
+actor_data = null
 
 [node name="SpwanNode_Enemey6" type="Sprite2D" parent="PhaseController/InitEnemySpawnMap"]
 self_modulate = Color(1, 0.1, 0, 1)
@@ -1420,3 +1427,36 @@ spawn_actor_key = "RandomEnemy"
 team_index = 1
 facing = 3
 map_coor = Vector2i(15, 14)
+actor_data = null
+
+[node name="SpwanNode_Shrine" type="Sprite2D" parent="PhaseController/InitEnemySpawnMap"]
+position = Vector2(496, 656)
+texture = ExtResource("15_gdnlg")
+offset = Vector2(0, -12)
+script = ExtResource("11_ukasq")
+spawn_actor_key = "ShrineActor"
+team_index = 2
+facing = 2
+map_coor = Vector2i(15, 20)
+
+[node name="SpwanNode_Shrine2" type="Sprite2D" parent="PhaseController/InitEnemySpawnMap"]
+position = Vector2(240, 368)
+texture = ExtResource("15_gdnlg")
+offset = Vector2(0, -12)
+script = ExtResource("11_ukasq")
+spawn_actor_key = "ShrineActor"
+team_index = 2
+facing = 2
+map_coor = Vector2i(7, 11)
+actor_data = null
+
+[node name="SpwanNode_Shrine3" type="Sprite2D" parent="PhaseController/InitEnemySpawnMap"]
+position = Vector2(656, 368)
+texture = ExtResource("15_gdnlg")
+offset = Vector2(0, -12)
+script = ExtResource("11_ukasq")
+spawn_actor_key = "ShrineActor"
+team_index = 2
+facing = 2
+map_coor = Vector2i(20, 11)
+actor_data = null

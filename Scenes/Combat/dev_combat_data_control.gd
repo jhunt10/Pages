@@ -5,6 +5,7 @@ extends Control
 @export var fill_ammo_button:Button
 @export var draw_button:Button
 @export var auto_play_button:Button
+@export var tigeer_button:Button
 @export var timer_label:Label
 
 @export var dev_map_display:Node2D
@@ -18,6 +19,7 @@ func _ready() -> void:
 	fill_ammo_button.pressed.connect(_fill_ammo)
 	draw_button.pressed.connect(_toggle_dev_map_display)
 	auto_play_button.pressed.connect(_toggle_auto_play)
+	tigeer_button.pressed.connect(_on_tigger)
 	
 	pass # Replace with function body.
 
@@ -74,3 +76,6 @@ func _toggle_auto_play():
 		auto_play_button.text = "Auto: On"
 	else:
 		auto_play_button.text = "Auto: Off"
+
+func _on_tigger():
+	CombatRootControl.Instance.trigger_spawners()

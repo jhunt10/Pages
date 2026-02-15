@@ -274,7 +274,7 @@ func trigger_spawners():
 		if spawner_node is ShrineActorNode:
 			var actor_key = _get_random_enemy_key(phase_data)
 			var new_actor = ActorLibrary.create_actor(actor_key, {})
-			spawner_node.play_spawn_animation(new_actor, GameState)
+			spawner_node.start_spawning_animation(new_actor, GameState)
 			
 				
 			
@@ -428,7 +428,7 @@ func revive_actor(actor:BaseActor):
 		#actor_node.queue_free()
 
 
-func add_actor(actor:BaseActor, pos:MapPos, is_player:bool=false):
+func add_actor(actor:BaseActor, pos:MapPos, is_player:bool=false, play_spawn_animation:bool=false):
 	if not actor:
 		return
 	if GameState._actors.keys().has(actor.Id):
@@ -452,6 +452,9 @@ func add_actor(actor:BaseActor, pos:MapPos, is_player:bool=false):
 	if combat_started:
 		actor.clean_state()
 		actor.on_combat_start()
+	
+	if play_spawn_animation:
+		actor_node.start_spawn_animation()
 	
 
 func add_item(item:BaseItem, pos:MapPos):

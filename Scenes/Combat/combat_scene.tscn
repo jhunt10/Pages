@@ -129,7 +129,7 @@ message_box = NodePath("CanvasLayer/CombatUiControl/CombatLogBox")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="MoveableCamera2D"]
 
-[node name="DevDataControl" type="Control" parent="MoveableCamera2D/CanvasLayer" node_paths=PackedStringArray("build_ques_button", "show_statbars_button", "fill_ammo_button", "draw_button", "auto_play_button", "timer_label", "dev_map_display")]
+[node name="DevDataControl" type="Control" parent="MoveableCamera2D/CanvasLayer" node_paths=PackedStringArray("build_ques_button", "show_statbars_button", "fill_ammo_button", "draw_button", "auto_play_button", "tigeer_button", "timer_label", "dev_map_display")]
 layout_mode = 3
 anchors_preset = 1
 anchor_left = 1.0
@@ -144,7 +144,8 @@ build_ques_button = NodePath("BoxContainer/HBoxContainer/VBoxContainer/BuildQues
 show_statbars_button = NodePath("BoxContainer/HBoxContainer/VBoxContainer2/ShowPathsButton")
 fill_ammo_button = NodePath("BoxContainer/HBoxContainer/VBoxContainer/FillAmmoButton")
 draw_button = NodePath("BoxContainer/HBoxContainer/VBoxContainer2/DrawButton")
-auto_play_button = NodePath("BoxContainer/AutoPlayButton")
+auto_play_button = NodePath("BoxContainer/HBoxContainer/VBoxContainer/AutoPlayButton")
+tigeer_button = NodePath("BoxContainer/HBoxContainer/VBoxContainer2/TriggerButton")
 timer_label = NodePath("BoxContainer/TimerContainer/Label")
 dev_map_display = NodePath("../../../DEV_MapDrawing")
 
@@ -197,6 +198,11 @@ text = "BQs"
 layout_mode = 2
 text = "Ammo"
 
+[node name="AutoPlayButton" type="Button" parent="MoveableCamera2D/CanvasLayer/DevDataControl/BoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Auto: Off"
+
 [node name="VBoxContainer2" type="VBoxContainer" parent="MoveableCamera2D/CanvasLayer/DevDataControl/BoxContainer/HBoxContainer"]
 layout_mode = 2
 
@@ -208,10 +214,10 @@ text = "Draw"
 layout_mode = 2
 text = "Stats"
 
-[node name="AutoPlayButton" type="Button" parent="MoveableCamera2D/CanvasLayer/DevDataControl/BoxContainer"]
+[node name="TriggerButton" type="Button" parent="MoveableCamera2D/CanvasLayer/DevDataControl/BoxContainer/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 4
-text = "Auto: Off"
+text = " Trig "
 
 [node name="QueCalControl" type="Control" parent="MoveableCamera2D/CanvasLayer/DevDataControl"]
 visible = false

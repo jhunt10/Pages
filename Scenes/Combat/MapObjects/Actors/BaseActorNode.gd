@@ -22,6 +22,13 @@ signal reached_scripted_motion_destination
 ## Player for movement animations
 @export var body_animation:AnimationPlayer
 
+@export var spawn_shader_material:ShaderMaterial
+@export var shader_val:float:
+	set(val):
+		shader_val = val
+		if material:
+			material.set_shader_parameter("progress", shader_val)
+
 var Id:String 
 var Actor:BaseActor 
 var facing_dir:MapPos.Directions = MapPos.Directions.North
@@ -273,6 +280,16 @@ func _scripted_move_finshed():
 ##############################
 ##		Animations
 ##############################
+
+func start_spawn_animation():
+	if spawn_shader_material:
+		if !self.material:
+			self.material = spawn_shader_material
+			shader_val = 0
+			self.body_animation.play("spawn_in")
+
+func finish_spawn_animation():
+	self.material = null
 
 func play_shake():
 	if damage_animation_player.current_animation != "DamageAnimations/death_effect":
