@@ -5,6 +5,23 @@
     "MapScene": "sewer_map.tscn",
     "SortOrder": 4,
     "StartingPhase": "InitSpawn",
+	"TeamData": {
+		"Players": {
+			"DisplayName": "Heros",
+			"Enemies": ["Enemies"],
+			"Allies": []
+		},
+		"Enemies":{
+			"DisplayName": "Slimes",
+			"Enemies": ["Players"],
+			"Allies": []
+		},
+		"Decor": {
+			"DisplayName": "Decor",
+			"Enemies": [],
+			"Allies": []
+		}
+	},
     "PhaseDatas": {
         "InitSpawn": {
             "PhaseType": "SpawnEnemy",

@@ -45,7 +45,8 @@
             "Mass": 10,
             "Speed": 0,
             "PPR": 0,
-            "Awareness": 0
+            "Awareness": 0,
+            "Resistance:Light": 0
         },
         "ImmuneToEffects": ["AilmentBlind", "AilmentPoisoned", "AilmentBleed", "AilmentDazed"],
         "_DefVersion": "1"
@@ -193,7 +194,7 @@
         "_DefVersion": "1"
     },
     "LeverActor": {
-        "!ObjectScript": "res://assets/Scripts/Actors/LeverActor.gd",
+        "!ObjectScript": "res://ObjectDefs/Factions/Objects/Actors/Scenes/Lever/LeverActor.gd",
         "!ParentKey": "#BaseObjectActor",
         "#ObjDetails": {
             "Description": "In an age where buttons and switches have dominated the mechanical control market, many consumer find themselves longing for a more relateable solution. @@#Color:Red:Barrels@@ were first invented as a subsite for @@#Color:Red:Pinatas@@ during the @@#Color:Red:Great Papier-Mache Wars@@. But failed to find popularity among @@#Color:Grey:Children@@ due to their boring appearance and difficulty to break.\n\nAfter the extinction of @@#Color:Grey:Children@@ and subsequent end to all birthday parties, people have found them useful for storing @@#Tag:Supplies@@ and providing a rustic feel.\n\nSome more nostalgic adventurers still prefer to use them for their original purpose.",
@@ -229,7 +230,7 @@
         "_DefVersion": "1"
     },
     "ShrineActor": {
-        "!ObjectScript": "res://assets/Scripts/Actors/BaseActor.gd",
+        "!ObjectScript": "res://ObjectDefs/Factions/Objects/Actors/Scenes/Shrine/SpawnerActor.gd",
         "!ParentKey": "#BaseObjectActor",
         "#ObjDetails": {
             "Description": "Description",
@@ -249,7 +250,7 @@
         },
         "ScenePath": "Scenes/Shrine/shrine_actor_node.tscn",
         "SpriteFrameWH": [
-            4,1
+            7,1
         ],
         "SpriteOffset": [
             0,
@@ -264,7 +265,7 @@
         "_DefVersion": "1"
     },
     "AlterActor": {
-        "!ObjectScript": "res://assets/Scripts/Actors/BaseActor.gd",
+        "!ObjectScript": "res://ObjectDefs/Factions/Objects/Actors/Scenes/Alter/AlterActor.gd",
         "!ParentKey": "#BaseActor",
         "#ObjDetails": {
             "Description": "Description",

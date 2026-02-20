@@ -20,7 +20,7 @@ func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, que_exe_d
 		return BaseSubAction.Failed
 	var actor_key = subaction_data['ActorKey']
 	var new_actor = ActorLibrary.Instance.create_object(actor_key)
-	new_actor.TeamIndex = actor.TeamIndex
+	new_actor.TeamKey = actor.TeamKey
 	CombatRootControl.Instance.add_actor(
 		new_actor,
 		targets[0])

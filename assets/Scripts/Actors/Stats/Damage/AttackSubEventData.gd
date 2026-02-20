@@ -4,7 +4,7 @@ enum AttackDirection {Front, Flank, Back, AOE}
 
 var parent_event:AttackEvent
 var defending_actor_id:String
-var defending_actor_faction:int
+var defending_actor_team:String
 
 var hit_chance:float
 var hit_roll:float
@@ -48,7 +48,7 @@ func _init( parent:AttackEvent,
 ) -> void:
 	parent_event = parent
 	defending_actor_id = defending_actor.Id
-	defending_actor_faction = defending_actor.TeamIndex
+	defending_actor_team = defending_actor.TeamKey
 	attack_direction = direction_of_attack
 	defender_has_cover = defender_is_under_cover
 	
@@ -66,7 +66,7 @@ func _init( parent:AttackEvent,
 func dictialize_self()->Dictionary:
 	var data = {
 		"defending_actor_id": defending_actor_id,
-		"defending_actor_faction": defending_actor_faction,
+		"defending_actor_team": defending_actor_team,
 		"hit_chance":hit_chance,
 		"hit_roll":hit_roll,
 		"is_miss": is_miss,

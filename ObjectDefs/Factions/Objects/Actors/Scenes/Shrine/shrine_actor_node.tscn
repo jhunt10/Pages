@@ -1,9 +1,10 @@
-[gd_scene load_steps=28 format=3 uid="uid://bagk4xi03mtq0"]
+[gd_scene load_steps=29 format=3 uid="uid://bagk4xi03mtq0"]
 
 [ext_resource type="Script" path="res://ObjectDefs/Factions/Objects/Actors/Scenes/Shrine/shrine_actor_node.gd" id="1_aqb7c"]
 [ext_resource type="Texture2D" uid="uid://ljb155nr7j55" path="res://ObjectDefs/Factions/Objects/Actors/Sprites/Shrine_SpriteSheet.png" id="2_tbw1l"]
 [ext_resource type="Script" path="res://Scenes/Combat/MapObjects/Actors/ComplexActorNode/actor_body_sprite.gd" id="3_xqjjx"]
 [ext_resource type="Script" path="res://Scenes/Combat/MapObjects/vfx_holder.gd" id="4_uue0y"]
+[ext_resource type="Texture2D" uid="uid://b71342nxdc5fd" path="res://ObjectDefs/Factions/Objects/Actors/Sprites/ShrineSymbole_SpriteSheet.png" id="4_wa6rm"]
 [ext_resource type="PackedScene" uid="uid://eox4g5msr5a" path="res://Scenes/Combat/Effects/flash_text_controller.tscn" id="5_ub5fs"]
 [ext_resource type="Script" path="res://Scenes/Combat/MapObjects/aura_holder.gd" id="6_0cxm8"]
 [ext_resource type="Texture2D" uid="uid://dgfxtmtdjfgey" path="res://assets/Sprites/UI/QuePathArrow.png" id="7_haq3q"]
@@ -137,6 +138,18 @@ tracks/2/keys = {
 "update": 1,
 "values": [0]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/ActorSprite/Sprite2D:self_modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_klmv0"]
 resource_name = "ShroomShake"
@@ -258,18 +271,18 @@ tracks/1/keys = {
 [sub_resource type="Animation" id="Animation_0llic"]
 resource_name = "flash"
 length = 1.5
-step = 0.05
+step = 0.01
 tracks/0/type = "value"
 tracks/0/imported = false
-tracks/0/enabled = true
+tracks/0/enabled = false
 tracks/0/path = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/ActorSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 1, 1.15, 1.3, 1.45),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.15, 1.3, 1.45),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [0, 1, 2, 3, 3, 2, 1, 0]
+"values": [0, 1, 2, 3, 4, 5, 6, 4, 5, 6, 3, 2, 1, 0]
 }
 tracks/1/type = "method"
 tracks/1/imported = false
@@ -284,6 +297,18 @@ tracks/1/keys = {
 "args": [],
 "method": &"play_actor_spawn_animation"
 }]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/ActorSprite/Sprite2D:self_modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1, 1.45),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(2, 1, 2, 0), Color(2, 1, 2, 1), Color(10, 1, 10, 1), Color(8, 1, 8, 1), Color(10, 1, 10, 1), Color(10, 1, 10, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_hyh3n"]
@@ -354,8 +379,14 @@ body_animation = NodePath("BodyAnimationPlayer")
 
 [node name="ActorSprite" type="Sprite2D" parent="ActorMotionNode/ActorSpriteNode/OffsetNode"]
 texture = ExtResource("2_tbw1l")
-hframes = 4
+hframes = 7
 script = ExtResource("3_xqjjx")
+
+[node name="Sprite2D" type="Sprite2D" parent="ActorMotionNode/ActorSpriteNode/OffsetNode/ActorSprite"]
+modulate = Color(0.588235, 0, 0.588235, 1)
+self_modulate = Color(1, 1, 1, 0)
+texture = ExtResource("4_wa6rm")
+hframes = 4
 
 [node name="VFX_OffsetNode" type="Node2D" parent="ActorMotionNode/ActorSpriteNode/OffsetNode"]
 

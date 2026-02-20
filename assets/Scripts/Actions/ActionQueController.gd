@@ -62,6 +62,8 @@ var max_que_size = 0
 var _action_ques:Dictionary = {}
 var _que_order:Array = []
 var _cached_actor_speeds:Dictionary = {}
+var _cached_actor_ppr:Dictionary = {}
+var _ppr_changed_mid_round:bool = false
 var subaction_script_cache:Dictionary = {}
 
 # Ques that have been removed durring execution
@@ -381,9 +383,14 @@ func _get_subaction(script_key:String)->BaseSubAction:
 	return subaction_script_cache[script_key]
 
 func _on_actor_stat_change(actor:BaseActor):
+	var que_size = actor.Que.get_max_que_size()
 	var speed = actor.stats.get_stat("Speed", 0)
 	if _cached_actor_speeds.get(actor.Id, null) != speed:
 		_organize_ques()
+	if _cached_actor_ppr.get(actor.Id, 0) != que_size:
+		_organize_ques()
+		_ppr_changed_mid_round = true
+	
 	
 
 func _organize_ques():
@@ -400,6 +407,7 @@ func _sort_ques_by_speed():
 		var actor:BaseActor = que.actor
 		var speed = actor.stats.get_stat("Speed", 0)
 		_cached_actor_speeds[actor.Id] = speed
+		_cached_actor_ppr[actor.Id] = que.get_max_que_size()
 		if not speeds.has(speed):
 			speed_to_ques[speed] = []
 			speeds.append(speed)

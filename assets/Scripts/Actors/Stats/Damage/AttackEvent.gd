@@ -16,7 +16,7 @@ enum AttackStage
 }
 
 var attacker_id:String
-var attacker_faction:int
+var attacker_team:String
 var source_tag_chain:SourceTagChain
 var attack_details:Dictionary
 var attack_stage:AttackStage
@@ -45,7 +45,7 @@ func _init( attacking_actor:BaseActor,
 			effect_datas_val:Dictionary,
 			attack_mods_val:Dictionary) -> void:
 	attacker_id = attacking_actor.Id
-	attacker_faction = attacking_actor.TeamIndex
+	attacker_team = attacking_actor.TeamKey
 	self.attack_details = attack_details_val
 	source_tag_chain = tag_chain
 	self.damage_datas = damage_datas_val
@@ -71,7 +71,7 @@ func _init( attacking_actor:BaseActor,
 func serialize_self()->String:
 	var data = {
 	"attacker_id": attacker_id,
-	"attacker_faction": attacker_faction,
+	"attacker_team": attacker_team,
 	"source_tag_chain": source_tag_chain.get_all_tags(),
 	"attack_details": attack_details,
 	"attack_stage": attack_stage,

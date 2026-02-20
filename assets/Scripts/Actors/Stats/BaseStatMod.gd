@@ -42,8 +42,8 @@ static func create_from_data(new_source_id:String, data:Dictionary) -> BaseStatM
 		data["Value"], 
 		data.get("DepStatName", null),
 	)
-	if data.has("SourceActorFaction"):
-		stat_mod.source_faction = data['SourceActorFaction']
+	if data.has("SourceActorTeam"):
+		stat_mod.source_faction = data['SourceActorTeam']
 	if data.has("Conditions"):
 		stat_mod.condition_data = data['Conditions']
 	return stat_mod
@@ -51,7 +51,7 @@ static func create_from_data(new_source_id:String, data:Dictionary) -> BaseStatM
 func get_as_data()->Dictionary:
 	return {
 		"SourceActorId": "ActorId",
-		"SourceActorFaction": 0,
+		"SourceActorTeam": 0,
 		"DisplayName": self.display_name,
 		"ModType": ModTypes.keys()[self.mod_type],
 		"StatName": self.stat_name,

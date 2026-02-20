@@ -5,6 +5,23 @@
     "MapScene": "crossroad_explore_map.tscn",
     "SortOrder": 2,
     "StartingPhase": "InitSpawn",
+	"TeamData": {
+		"Players": {
+			"DisplayName": "Heros",
+			"Enemies": ["Enemies"],
+			"Allies": []
+		},
+		"Enemies":{
+			"DisplayName": "Bandits",
+			"Enemies": ["Players"],
+			"Allies": []
+		},
+		"Decor": {
+			"DisplayName": "Decor",
+			"Enemies": [],
+			"Allies": []
+		}
+	},
     "PhaseDatas": {
         "InitSpawn": {
             "PhaseType": "SpawnEnemy",
@@ -103,7 +120,7 @@
             "NextPhase": "SpawnCaptain",
             "CombatCondition": {
                 "ConditionKey": "KillTeam",
-                "EnemyTeamIndex": 1
+                "EnemyTeamKey": "Enemies"
             }
         },
         "SpawnCaptain": {
@@ -182,7 +199,7 @@
             "NextPhase": "END",
             "CombatCondition": {
                 "ConditionKey": "KillTeam",
-                "EnemyTeamIndex": 1
+                "EnemyTeamKey": "Enemies"
             }
         }
     }

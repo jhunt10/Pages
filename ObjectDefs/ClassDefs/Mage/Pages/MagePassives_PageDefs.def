@@ -170,11 +170,11 @@
                 "HazardSafetyDmgMod": {
                     "Conditions": {
                         "DamageTypes": [],
-                        "DefenderFactionFilters": [
+                        "DefenderTeamFilters": [
                             "Ally"
                         ],
                         "DefenderTagFilters": [],
-                        "SourceFactionFilters": [
+                        "SourceTeamFilters": [
                             "Self"
                         ],
                         "SourceTagFilters": [
@@ -295,12 +295,12 @@
                                 ]
                             }
                         ],
-                        "AttackerFactionFilters": [
+                        "AttackerTeamFilters": [
                             "Self"
                         ],
                         "DefendersConditions": [
                             {
-                                "DefenderFactionFilters": [
+                                "DefenderTeamFilters": [
                                     "Ally"
                                 ],
                                 "DefenderTagFilters": [
@@ -318,11 +318,11 @@
                         "SafetyHazardDmgMod": {
                             "Conditions": {
                                 "DamageTypes": [],
-                                "DefenderFactionFilters": [
+                                "DefenderTeamFilters": [
                                     "Ally"
                                 ],
                                 "DefenderTagFilters": [],
-                                "SourceFactionFilters": [
+                                "SourceTeamFilters": [
                                     "Self"
                                 ],
                                 "SourceTagFilters": []

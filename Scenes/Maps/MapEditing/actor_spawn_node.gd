@@ -8,7 +8,7 @@ enum SpawnBy {Player, Key, Id}
 @export var marker_name:String
 @export var spawn_actor_key:String
 @export var spawn_actor_id:String
-@export var team_index:int
+@export var team_key:String
 @export var is_player:bool
 @export var wait_to_spawn:bool
 
@@ -41,6 +41,8 @@ func get_map_pos()->MapPos:
 	return MapPos.new(self.map_coor.x, self.map_coor.y, 0, self.facing)
 
 func get_actor_data()->Dictionary:
+	if actor_data:
+		return actor_data
 	return {}
 
 # Called when the node enters the scene tree for the first time.

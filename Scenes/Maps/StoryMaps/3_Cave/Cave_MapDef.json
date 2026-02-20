@@ -5,6 +5,28 @@
     "MapScene": "cave_map.tscn",
     "SortOrder": 3,
     "StartingPhase": "InitSpawn",
+	"TeamData": {
+		"Players": {
+			"DisplayName": "Heros",
+			"Enemies": ["Enemies", "EnemyObjects"],
+			"Allies": []
+		},
+		"Enemies":{
+			"DisplayName": "Undead",
+			"Enemies": ["Players"],
+			"Allies": ["EnemyObjects"]
+		},
+		"EnemyObjects": {
+			"DisplayName": "Shrines",
+			"Enemies": ["Players"],
+			"Allies": ["Enemies"]
+		},
+		"Decor": {
+			"DisplayName": "Decor",
+			"Enemies": [],
+			"Allies": []
+		}
+	},
     "PhaseDatas": {
         "InitSpawn": {
             "PhaseType": "SpawnEnemy",
@@ -16,18 +38,44 @@
                     "IsUnique": false
                 },
                 "Skeleton": {
-                    "Weight": 5,
-                    "IsUnique": false
-                },
-                "ShroomGolem": {
                     "Weight": 10,
-                    "IsUnique": true
+                    "IsUnique": false
                 }
             }
         },
         "PlacePlayers": {
             "PhaseType": "PlacePlayers",
-            "NextPhase": "CombatPhase1"
+            "NextPhase": "DemoSpawner"
+        },
+        "DemoSpawner": {
+            "PhaseType": "Dialog",
+            "NextPhase": "CombatPhase1",
+            "MarkerMap": "DemoSpawnerPhaseMap",
+            "DialogData": {
+                "_MetaData_": {
+                    "StartPartKey": "Part1",
+                    "Inital_BlackOutState": "Clear"
+                },
+                "Part1": {
+                    "_NextPartKey": "",
+                    "WaitForNextButton": false,
+                    "Blocks": [
+                        {
+                            "WaitToFinish": true,
+                            "WaitForNextButton": false,
+                            "BlockType": "PanCamera",
+                            "TargetType": "Actor",
+                            "ActorId": "FirstShrineActor"
+                        },
+                        {
+                            "BlockType": "TriggerSpawner",
+                            "WaitToFinish": false,
+                            "SpawnActorKey": "ZombieBasic",
+                            "SpawnerActorId": "FirstShrineActor"
+                        }
+                    ]
+                }
+            }
         },
         "CombatPhase1": {
             "PhaseType": "Combat",

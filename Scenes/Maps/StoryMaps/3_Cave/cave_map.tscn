@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=4 uid="uid://bemdpvi328wf"]
+[gd_scene load_steps=41 format=4 uid="uid://bemdpvi328wf"]
 
 [ext_resource type="Script" path="res://assets/Scripts/Map/map_controler_node.gd" id="1_qi44j"]
 [ext_resource type="Texture2D" uid="uid://b21igxb5gcqlc" path="res://assets/Sprites/TileSets/CaveFloor_TileSheet.png" id="2_4k04i"]
@@ -17,6 +17,8 @@
 [ext_resource type="Texture2D" uid="uid://bkmin2ryysfo" path="res://ObjectDefs/Factions/Objects/Actors/Sprites/Shrine_Icon.png" id="15_gdnlg"]
 [ext_resource type="Texture2D" uid="uid://c0scdw1u8ayan" path="res://assets/Sprites/TileSets/PlayerSpawnArea_TileSet.png" id="15_q10fo"]
 [ext_resource type="Texture2D" uid="uid://b1dlc5j6ue7b5" path="res://ObjectDefs/Factions/Objects/Actors/Sprites/Alter_SpriteSheet.png" id="17_b2iww"]
+[ext_resource type="Script" path="res://Scenes/Maps/MapEditing/map_path_node.gd" id="18_g601w"]
+[ext_resource type="Texture2D" uid="uid://d1rfl5p8pk2qv" path="res://Scenes/Maps/MapEditing/MapMarker.png" id="19_p6fio"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0gfa0"]
 texture = ExtResource("2_4k04i")
@@ -1285,8 +1287,17 @@ sources/0 = SubResource("TileSetAtlasSource_0bt41")
 [sub_resource type="TileSet" id="TileSet_o1yif"]
 tile_size = Vector2i(32, 32)
 
+[sub_resource type="TileSet" id="TileSet_4vtjy"]
+tile_size = Vector2i(32, 32)
+
+[sub_resource type="Environment" id="Environment_insix"]
+background_mode = 3
+glow_enabled = true
+glow_intensity = 3.0
+glow_bloom = 0.1
+glow_hdr_threshold = 0.9
+
 [node name="MapNode" type="Node2D" node_paths=PackedStringArray("zone_tile_map", "actor_tile_map", "item_tile_map", "ground_tile_map", "terrain_path_map", "marker_tile_map", "phase_marker_maps_holder", "player_spawn_area_tile_map")]
-position = Vector2(27, -8)
 script = ExtResource("1_qi44j")
 map_name = "Cave"
 zone_tile_map = NodePath("ZoneTileMapLayer")
@@ -1360,10 +1371,9 @@ texture = ExtResource("13_he4cr")
 offset = Vector2(0, -12)
 hframes = 12
 vframes = 4
-frame = 1
 script = ExtResource("11_ukasq")
 spawn_actor_key = "StalagmiteActor"
-team_index = 2
+team_key = "Decor"
 facing = 2
 map_coor = Vector2i(18, 24)
 
@@ -1376,7 +1386,7 @@ vframes = 4
 frame = 12
 script = ExtResource("11_ukasq")
 spawn_actor_key = "StalagmiteActor"
-team_index = 2
+team_key = "Decor"
 map_coor = Vector2i(21, 22)
 
 [node name="SpwanNode_Stalagmite3" type="Sprite2D" parent="PhaseController/InitEnemySpawnMap"]
@@ -1385,10 +1395,9 @@ texture = ExtResource("13_he4cr")
 offset = Vector2(0, -12)
 hframes = 12
 vframes = 4
-frame = 1
 script = ExtResource("11_ukasq")
 spawn_actor_key = "StalagmiteActor"
-team_index = 2
+team_key = "Decor"
 facing = 2
 map_coor = Vector2i(20, 22)
 
@@ -1398,10 +1407,9 @@ texture = ExtResource("13_he4cr")
 offset = Vector2(0, -12)
 hframes = 12
 vframes = 4
-frame = 1
 script = ExtResource("11_ukasq")
 spawn_actor_key = "StalagmiteActor"
-team_index = 2
+team_key = "Decor"
 facing = 2
 map_coor = Vector2i(12, 22)
 
@@ -1413,7 +1421,7 @@ hframes = 12
 vframes = 4
 script = ExtResource("11_ukasq")
 spawn_actor_key = "StalagmiteActor"
-team_index = 2
+team_key = "Decor"
 facing = 2
 map_coor = Vector2i(5, 16)
 
@@ -1426,7 +1434,7 @@ vframes = 4
 frame = 12
 script = ExtResource("11_ukasq")
 spawn_actor_key = "StalagmiteActor"
-team_index = 2
+team_key = "Decor"
 map_coor = Vector2i(6, 15)
 
 [node name="SpwanNode_Stalagmite7" type="Sprite2D" parent="PhaseController/InitEnemySpawnMap"]
@@ -1438,7 +1446,7 @@ vframes = 4
 frame = 12
 script = ExtResource("11_ukasq")
 spawn_actor_key = "StalagmiteActor"
-team_index = 2
+team_key = "Decor"
 map_coor = Vector2i(5, 23)
 
 [node name="SpwanNode_Stalagmite8" type="Sprite2D" parent="PhaseController/InitEnemySpawnMap"]
@@ -1450,7 +1458,7 @@ vframes = 4
 frame = 12
 script = ExtResource("11_ukasq")
 spawn_actor_key = "StalagmiteActor"
-team_index = 2
+team_key = "Decor"
 map_coor = Vector2i(9, 25)
 
 [node name="SpwanNode_Stalagmite9" type="Sprite2D" parent="PhaseController/InitEnemySpawnMap"]
@@ -1459,10 +1467,9 @@ texture = ExtResource("13_he4cr")
 offset = Vector2(0, -12)
 hframes = 12
 vframes = 4
-frame = 1
 script = ExtResource("11_ukasq")
 spawn_actor_key = "StalagmiteActor"
-team_index = 2
+team_key = "Decor"
 facing = 2
 map_coor = Vector2i(9, 19)
 
@@ -1475,7 +1482,7 @@ vframes = 4
 frame = 12
 script = ExtResource("11_ukasq")
 spawn_actor_key = "StalagmiteActor"
-team_index = 2
+team_key = "Decor"
 map_coor = Vector2i(13, 17)
 
 [node name="SpwanNode_Stalagmite11" type="Sprite2D" parent="PhaseController/InitEnemySpawnMap"]
@@ -1486,7 +1493,7 @@ hframes = 12
 vframes = 4
 script = ExtResource("11_ukasq")
 spawn_actor_key = "StalagmiteActor"
-team_index = 2
+team_key = "Decor"
 facing = 2
 map_coor = Vector2i(18, 13)
 
@@ -1498,7 +1505,7 @@ hframes = 12
 vframes = 4
 script = ExtResource("11_ukasq")
 spawn_actor_key = "StalagmiteActor"
-team_index = 2
+team_key = "Decor"
 facing = 2
 map_coor = Vector2i(17, 19)
 
@@ -1511,7 +1518,7 @@ vframes = 4
 frame = 12
 script = ExtResource("11_ukasq")
 spawn_actor_key = "StalagmiteActor"
-team_index = 2
+team_key = "Decor"
 map_coor = Vector2i(20, 16)
 
 [node name="SpwanNode_Stalagmite14" type="Sprite2D" parent="PhaseController/InitEnemySpawnMap"]
@@ -1523,7 +1530,7 @@ vframes = 4
 frame = 12
 script = ExtResource("11_ukasq")
 spawn_actor_key = "StalagmiteActor"
-team_index = 2
+team_key = "Decor"
 map_coor = Vector2i(23, 19)
 
 [node name="SpwanNode_Stalagmite15" type="Sprite2D" parent="PhaseController/InitEnemySpawnMap"]
@@ -1535,7 +1542,7 @@ vframes = 4
 frame = 12
 script = ExtResource("11_ukasq")
 spawn_actor_key = "StalagmiteActor"
-team_index = 2
+team_key = "Decor"
 map_coor = Vector2i(9, 13)
 
 [node name="SpwanNode_Enemey" type="Sprite2D" parent="PhaseController/InitEnemySpawnMap"]
@@ -1544,7 +1551,7 @@ position = Vector2(240, 752)
 texture = ExtResource("10_7khqc")
 script = ExtResource("11_ukasq")
 spawn_actor_key = "RandomEnemy"
-team_index = 1
+team_key = "Enemies"
 facing = 2
 map_coor = Vector2i(7, 23)
 
@@ -1554,7 +1561,7 @@ position = Vector2(240, 496)
 texture = ExtResource("10_7khqc")
 script = ExtResource("11_ukasq")
 spawn_actor_key = "RandomEnemy"
-team_index = 1
+team_key = "Enemies"
 facing = 2
 map_coor = Vector2i(7, 15)
 
@@ -1564,7 +1571,7 @@ position = Vector2(432, 176)
 texture = ExtResource("10_7khqc")
 script = ExtResource("11_ukasq")
 spawn_actor_key = "SkeletonMage"
-team_index = 1
+team_key = "Enemies"
 facing = 2
 map_coor = Vector2i(13, 5)
 
@@ -1574,7 +1581,7 @@ position = Vector2(656, 592)
 texture = ExtResource("10_7khqc")
 script = ExtResource("11_ukasq")
 spawn_actor_key = "RandomEnemy"
-team_index = 1
+team_key = "Enemies"
 facing = 2
 map_coor = Vector2i(20, 18)
 
@@ -1584,7 +1591,8 @@ texture = ExtResource("15_gdnlg")
 offset = Vector2(0, -12)
 script = ExtResource("11_ukasq")
 spawn_actor_key = "ShrineActor"
-team_index = 2
+spawn_actor_id = "FirstShrineActor"
+team_key = "EnemyObjects"
 facing = 2
 map_coor = Vector2i(14, 22)
 
@@ -1594,7 +1602,7 @@ texture = ExtResource("15_gdnlg")
 offset = Vector2(0, -12)
 script = ExtResource("11_ukasq")
 spawn_actor_key = "ShrineActor"
-team_index = 2
+team_key = "EnemyObjects"
 facing = 2
 map_coor = Vector2i(3, 18)
 
@@ -1604,7 +1612,7 @@ texture = ExtResource("15_gdnlg")
 offset = Vector2(0, -12)
 script = ExtResource("11_ukasq")
 spawn_actor_key = "ShrineActor"
-team_index = 2
+team_key = "EnemyObjects"
 facing = 2
 map_coor = Vector2i(17, 13)
 
@@ -1614,7 +1622,7 @@ texture = ExtResource("15_gdnlg")
 offset = Vector2(0, -12)
 script = ExtResource("11_ukasq")
 spawn_actor_key = "ShrineActor"
-team_index = 2
+team_key = "EnemyObjects"
 facing = 2
 map_coor = Vector2i(10, 13)
 
@@ -1624,7 +1632,8 @@ texture = ExtResource("15_gdnlg")
 offset = Vector2(0, -12)
 script = ExtResource("11_ukasq")
 spawn_actor_key = "ShrineActor"
-team_index = 2
+spawn_actor_id = "BackShrine_A"
+team_key = "EnemyObjects"
 facing = 2
 map_coor = Vector2i(10, 8)
 
@@ -1634,7 +1643,8 @@ texture = ExtResource("15_gdnlg")
 offset = Vector2(0, -12)
 script = ExtResource("11_ukasq")
 spawn_actor_key = "ShrineActor"
-team_index = 2
+spawn_actor_id = "BackShrine_B"
+team_key = "EnemyObjects"
 facing = 2
 map_coor = Vector2i(17, 8)
 
@@ -1644,7 +1654,8 @@ texture = ExtResource("15_gdnlg")
 offset = Vector2(0, -12)
 script = ExtResource("11_ukasq")
 spawn_actor_key = "ShrineActor"
-team_index = 2
+spawn_actor_id = "BackShrine_C"
+team_key = "EnemyObjects"
 facing = 2
 map_coor = Vector2i(10, 3)
 
@@ -1654,7 +1665,8 @@ texture = ExtResource("15_gdnlg")
 offset = Vector2(0, -12)
 script = ExtResource("11_ukasq")
 spawn_actor_key = "ShrineActor"
-team_index = 2
+spawn_actor_id = "BackShrine_D"
+team_key = "EnemyObjects"
 facing = 2
 map_coor = Vector2i(17, 3)
 
@@ -1664,6 +1676,44 @@ texture = ExtResource("17_b2iww")
 offset = Vector2(16, 0)
 script = ExtResource("11_ukasq")
 spawn_actor_key = "AlterActor"
-team_index = 2
+team_key = "EnemyObjects"
 facing = 2
 map_coor = Vector2i(13, 4)
+
+[node name="DemoSpawnerPhaseMap" type="TileMapLayer" parent="PhaseController"]
+tile_set = SubResource("TileSet_4vtjy")
+
+[node name="PanMarker" type="Node2D" parent="PhaseController/DemoSpawnerPhaseMap" node_paths=PackedStringArray("sprite", "label")]
+visible = false
+position = Vector2(464, 720)
+script = ExtResource("18_g601w")
+marker_name = "PanSpot"
+map_coor = Vector2i(14, 22)
+sprite = NodePath("PathSprite")
+label = NodePath("PathSprite/Label")
+
+[node name="PathSprite" type="Sprite2D" parent="PhaseController/DemoSpawnerPhaseMap/PanMarker"]
+self_modulate = Color(0, 1, 1, 1)
+texture = ExtResource("19_p6fio")
+
+[node name="Label" type="Label" parent="PhaseController/DemoSpawnerPhaseMap/PanMarker/PathSprite"]
+self_modulate = Color(1, 0, 0, 1)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -36.0
+offset_top = -27.5
+offset_right = 4.0
+offset_bottom = -4.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 12
+text = "PanSpot"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_insix")

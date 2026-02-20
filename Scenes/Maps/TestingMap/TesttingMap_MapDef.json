@@ -5,6 +5,18 @@
     "MapScene": "testing_map.tscn",
     "SortOrder": 0,
     "StartingPhase": "InitSpawn",
+	"TeamData": {
+		"Players": {
+			"DisplayName": "Heros",
+			"Enemies": [],
+			"Allies": []
+		},
+		"Decor": {
+			"DisplayName": "Decor",
+			"Enemies": [],
+			"Allies": []
+		}
+	},
 	"PhaseDatas": {
 		"InitSpawn": {
 			"PhaseType": "SpawnEnemy",

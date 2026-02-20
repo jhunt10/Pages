@@ -244,12 +244,12 @@
                                 ]
                             }
                         ],
-                        "AttackerFactionFilters": [
+                        "AttackerTeamFilters": [
                             "Self"
                         ],
                         "DefendersConditions": [
                             {
-                                "DefenderFactionFilters": [
+                                "DefenderTeamFilters": [
                                     "Enemy"
                                 ],
                                 "RequiresAllDefenders": false
@@ -262,7 +262,7 @@
                         "HarmLightStatMod": {
                             "Conditions": {
                                 "CanStack": false,
-                                "FactionFilters": [
+                                "TeamFilters": [
                                     "Enemy"
                                 ],
                                 "TagFilters": []
@@ -321,12 +321,12 @@
                                 ]
                             }
                         ],
-                        "AttackerFactionFilters": [
+                        "AttackerTeamFilters": [
                             "Self"
                         ],
                         "DefendersConditions": [
                             {
-                                "DefenderFactionFilters": [
+                                "DefenderTeamFilters": [
                                     "Ally"
                                 ],
                                 "RequiresAllDefenders": false
@@ -339,7 +339,7 @@
                         "HealLightStatMod": {
                             "Conditions": {
                                 "CanStack": false,
-                                "FactionFilters": [
+                                "TeamFilters": [
                                     "Ally"
                                 ],
                                 "TagFilters": []

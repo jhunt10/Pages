@@ -24,6 +24,8 @@ func _build_displays():
 			continue
 		if actor.get_load_val("HideInHud", false):
 			continue
+		if actor.get_tags().has("Object"):
+			continue
 		if actor.is_dead:
 			if panels.has(actor.Id):
 				panels[actor.Id].queue_free()

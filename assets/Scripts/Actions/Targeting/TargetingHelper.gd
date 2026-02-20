@@ -161,10 +161,10 @@ static func get_potential_coor_to_targets(target_params:TargetParameters, actor:
 			var actors_in_spot:Array = game_state.get_actors_at_pos(spot, include_dead_actors)
 			for target:BaseActor in actors_in_spot:
 				#if (target_params.target_type == TargetParameters.TargetTypes.Enemy and
-						#actor.TeamIndex == target.TeamIndex):
+						#actor.TeamKey == target.TeamKey):
 							#continue
 				#if (target_params.target_type == TargetParameters.TargetTypes.Ally and
-						#actor.TeamIndex != target.TeamIndex):
+						#actor.TeamKey != target.TeamKey):
 							#continue
 				#if target.is_dead and not (target_params.target_type == TargetParameters.TargetTypes.Corpse):
 							#continue

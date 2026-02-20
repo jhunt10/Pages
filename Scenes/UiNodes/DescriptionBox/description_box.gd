@@ -291,7 +291,7 @@ func _build_bbcode_array(raw_description:String, object_def:Dictionary, object_i
 				if sub_tokens[2].begins_with('DefFacFil'):
 					var factions = []
 					for def_con in mod_data.get("Conditions", {}).get("DefendersConditions", []):
-						for filter:String in def_con.get("DefenderFactionFilters", []):
+						for filter:String in def_con.get("DefenderTeamFilters", []):
 							if not factions.has(filter):
 								factions.append(_get_title_specific_faction_name(actor, filter, sub_tokens[2].contains("|Plr")))
 					out_line += color_text(RED_TEXT, ", ".join(factions))
@@ -529,7 +529,7 @@ func _parse_damage_mod(parse_type:String, mod_data:Dictionary)->String:
 		out_line +=  BLUE_TEXT + (" ".join(filters)) + "[/color]"
 	elif parse_type.begins_with('DefFacFil'):
 		var filters = []
-		var faction_arry = mod_data.get("Conditions", {}).get("DefenderFactionFilters", [])
+		var faction_arry = mod_data.get("Conditions", {}).get("DefenderTeamFilters", [])
 		for faction:String in faction_arry:
 			if parse_type.contains("|Plr"):
 				if faction.ends_with("y"):

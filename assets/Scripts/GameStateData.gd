@@ -24,6 +24,7 @@ func duplicate()->GameStateData:
 	var new_state = GameStateData.new()
 	new_state._actors = _actors.duplicate()
 	new_state._items = _items.duplicate()
+	new_state.team_data = team_data.duplicate()
 	new_state.Missiles = Missiles.duplicate()
 	new_state._zones = _zones.duplicate()
 	new_state.map_data = map_data.duplicate(new_state)
@@ -37,8 +38,7 @@ func set_map_data(data:Dictionary):
 	map_hight = map_data.max_hight
 
 func set_team_data(data):
-	#team_data = data.duplicate()
-	pass
+	team_data = data.duplicate()
 
 func add_actor(actor:BaseActor):
 	_actors[actor.Id] = actor
@@ -76,26 +76,54 @@ func list_actors(include_dead:bool=false):
 	return out_list
 	
 
-func are_enemies(actor_a, actor_b)->bool:
-	if actor_a is String:
-		actor_a = ActorLibrary.get_actor(actor_a)
-	if actor_b is String:
-		actor_b = ActorLibrary.get_actor(actor_b)
-	if not (actor_a is BaseActor and actor_b is BaseActor):
-		printerr("CombatScene.are_enemies: One of these is not a BaseActor: %s | %s" % [actor_a, actor_b])
+func are_enemies(main_actor, other_actor)->bool:
+	if main_actor is String:
+		main_actor = ActorLibrary.get_actor(main_actor)
+	if other_actor is String:
+		other_actor = ActorLibrary.get_actor(other_actor)
+	
+	if not (main_actor is BaseActor and other_actor is BaseActor):
+		printerr("CombatScene.are_enemies: One of these is not a BaseActor: %s | %s" % [main_actor, other_actor])
 		return false
-	#var team_a_data = team_data[actor_a]
-	return actor_a.TeamIndex != actor_b.TeamIndex
+	
+	var main_team_data = team_data.get(main_actor.TeamKey)
+	if !main_team_data:
+		printerr("CombatScene.are_enemies: Failed to find TeamData with key '%s' for Source Actor: %s" % [main_actor.TeamKey, main_actor.Id])
+		return false
+		
+	var other_team_data = team_data.get(other_actor.TeamKey)
+	if !other_team_data:
+		printerr("CombatScene.are_enemies: Failed to find TeamData with key '%s' for Actor: %s" % [other_actor.TeamKey, other_actor.Id])
+		return false
+	
+	if main_team_data.get("Enemies", []).has(other_actor.TeamKey):
+		return true
+	return false
 
-func are_allies(actor_a, actor_b)->bool:
-	if actor_a is String:
-		actor_a = ActorLibrary.get_actor(actor_a)
-	if actor_b is String:
-		actor_b = ActorLibrary.get_actor(actor_b)
-	if not (actor_a is BaseActor and actor_b is BaseActor):
-		printerr("CombatScene.are_enemies: One of these is not a BaseActor: %s | %s" % [actor_a, actor_b])
+func are_allies(main_actor, other_actor)->bool:
+	if main_actor is String:
+		main_actor = ActorLibrary.get_actor(main_actor)
+	if other_actor is String:
+		other_actor = ActorLibrary.get_actor(other_actor)
+	
+	if not (main_actor is BaseActor and other_actor is BaseActor):
+		printerr("CombatScene.are_allies: One of these is not a BaseActor: %s | %s" % [main_actor, other_actor])
 		return false
-	return actor_a.TeamIndex == actor_b.TeamIndex
+	
+	var main_team_data = team_data.get(main_actor.TeamKey)
+	if !main_team_data:
+		printerr("CombatScene.are_allies: Failed to find TeamData with key '%s' for Source Actor: %s" % [main_actor.TeamKey, main_actor.Id])
+		return false
+		
+	var other_team_data = team_data.get(other_actor.TeamKey)
+	if !other_team_data:
+		printerr("CombatScene.are_allies: Failed to find TeamData with key '%s' for Actor: %s" % [other_actor.TeamKey, other_actor.Id])
+		return false
+	if main_actor.TeamKey == other_actor.TeamKey:
+		return true
+	if main_team_data.get("Allies", []).has(other_actor.TeamKey):
+		return true
+	return false
 
 # TODO: This class shouldn't really hold logic... 
 #	but zone stuff needs map_data to know which actors to apply to

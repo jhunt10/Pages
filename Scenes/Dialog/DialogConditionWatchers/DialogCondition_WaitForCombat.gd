@@ -27,7 +27,8 @@ func on_round_finish(game_state:GameStateData):
 	var all_enemies_dead = true
 	var all_players_dead = true
 	for actor:BaseActor in game_state.list_actors(false):
-		if actor.TeamIndex != 0 and not ignore_actors_lilst.has(actor.Id):
+		printerr("Check Me: DialogCondition_WaitForCombat.on_round_finish")
+		if actor.TeamKey != '' and not ignore_actors_lilst.has(actor.Id):
 			all_enemies_dead = false
 		if actor.is_player:
 			all_players_dead = false

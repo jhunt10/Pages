@@ -305,7 +305,7 @@
                         "HolyWeaponAddedDamage": {
                             "Conditions": {
                                 "DamageTypes": [],
-                                "DefenderFactionFilters": [
+                                "DefenderTeamFilters": [
                                     "Enemy"
                                 ],
                                 "DefenderTagFilters": [
@@ -315,7 +315,7 @@
                                         ]
                                     }
                                 ],
-                                "SourceFactionFilters": [
+                                "SourceTeamFilters": [
                                     "Self"
                                 ],
                                 "SourceTagFilters": [
@@ -351,12 +351,12 @@
                                 ]
                             }
                         ],
-                        "AttackerFactionFilters": [
+                        "AttackerTeamFilters": [
                             "Self"
                         ],
                         "DefendersConditions": [
                             {
-                                "DefenderFactionFilters": [
+                                "DefenderTeamFilters": [
                                     "Enemy"
                                 ],
                                 "DefenderTagFilters": [
@@ -374,7 +374,7 @@
                         "HolyWeaponDmgMod": {
                             "Conditions": {
                                 "DamageTypes": [],
-                                "DefenderFactionFilters": [
+                                "DefenderTeamFilters": [
                                     "Enemy"
                                 ],
                                 "DefenderTagFilters": [
@@ -384,7 +384,7 @@
                                         ]
                                     }
                                 ],
-                                "SourceFactionFilters": [
+                                "SourceTeamFilters": [
                                     "Self"
                                 ],
                                 "SourceTagFilters": [
@@ -425,7 +425,7 @@
                     "AddedDamageType": "Light",
                     "DamageModConditions": {
                         "DamageTypes": [],
-                        "DefenderFactionFilters": [
+                        "DefenderTeamFilters": [
                             "Enemy"
                         ],
                         "DefenderTagFilters": [
@@ -435,7 +435,7 @@
                                 ]
                             }
                         ],
-                        "SourceFactionFilters": [
+                        "SourceTeamFilters": [
                             "Self"
                         ],
                         "SourceTagFilters": [

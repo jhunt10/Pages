@@ -375,8 +375,8 @@ static func _roll_for_effects(attacker:BaseActor, defender:BaseActor, attack_eve
 			continue
 			
 		# Check if defender is enemy / ally
-		var faction_filter = conditions.get("DefenderFactionFilters", [])
-		if not TagHelper.check_faction_filter(attack_event.attacker_id, attack_event.attacker_faction, faction_filter, defender, game_state):
+		var faction_filter = conditions.get("DefenderTeamFilters", [])
+		if not TagHelper.check_team_filter(attack_event.attacker_id, faction_filter, defender, game_state):
 			continue
 		
 		# Check if defener has required tags
@@ -410,21 +410,21 @@ static func _does_attack_mod_apply(attack_mod, attacker, defenders, source_tag_c
 	var mod_key = attack_mod['AttackModKey']
 	var conditions = attack_mod.get('Conditions', null)
 	var mod_source_actor = attack_mod.get('SourceActorId', null)
-	var mod_source_faction = attack_mod.get('SourceActorFaction', null)
+	#var mod_source_faction = attack_mod.get('SourceActorTeam', null)
 	if conditions == null:
 		printerr("AttackHandler: AttackMod '%s' missing Conditions" % [mod_key])
 		return false
 	if mod_source_actor == null:
 		printerr("AttackHandler: AttackMod '%s' missing SourceActorId" % [mod_key])
 		return false
-	if mod_source_faction == null:
-		printerr("AttackHandler: AttackMod '%s' missing SourceActorFaction" % [mod_key])
-		return false
+	#if mod_source_faction == null:
+		#printerr("AttackHandler: AttackMod '%s' missing SourceActorTeam" % [mod_key])
+		#return false
 	
 	
-	# Check Attacker Faction Filters
-	var attack_faction_filters = conditions.get("AttackerFactionFilters", [])
-	if not TagHelper.check_faction_filter(mod_source_actor, mod_source_faction, attack_faction_filters, attacker, game_state):
+	# Check Attacker Team Filters
+	var attack_faction_filters = conditions.get("AttackerTeamFilters", [])
+	if not TagHelper.check_team_filter(mod_source_actor, attack_faction_filters, attacker, game_state):
 		return false
 	
 	# Check Source Tag Filters
@@ -436,7 +436,7 @@ static func _does_attack_mod_apply(attack_mod, attacker, defenders, source_tag_c
 	# Check Defender Conditions
 	for defender_condition in conditions.get("DefendersConditions", {}):
 		var require_all_defenders = defender_condition.get("RequiresAllDefenders", false)
-		var faction_filter = defender_condition.get("DefenderFactionFilters", [])
+		var faction_filter = defender_condition.get("DefenderTeamFilters", [])
 		var tag_filters = defender_condition.get("DefenderTagFilters", [])
 		var attack_directions_filters = defender_condition.get("AttackDirections", [])
 		
@@ -457,7 +457,7 @@ static func _does_attack_mod_apply(attack_mod, attacker, defenders, source_tag_c
 						continue
 			
 			# Defender is valid faction
-			if not TagHelper.check_faction_filter(mod_source_actor, mod_source_faction, faction_filter, defender, game_state):
+			if not TagHelper.check_team_filter(mod_source_actor, faction_filter, defender, game_state):
 				all_defenders_are_valid = false
 				if require_all_defenders:
 					break
@@ -488,7 +488,7 @@ static func _get_stat_mods_from_attack_mod(attack_mod:Dictionary)->Dictionary:
 		var mod_data:Dictionary = attack_mod['StatMods'][mod_key]
 		var can_stack = mod_data.get("Conditions", {}).get("CanStack", false)
 		mod_data['SourceActorId'] = attack_mod.get("SourceActorId", null)
-		mod_data['SourceActorFaction'] = attack_mod.get("SourceActorFaction", null)
+		mod_data['SourceActorTeam'] = attack_mod.get("SourceActorTeam", null)
 		mod_data['DisplayName'] = attack_mod.get("DisplayName", "")
 		var mod_id = mod_key
 		if not can_stack:
@@ -502,13 +502,13 @@ static func _does_attack_stat_mod_apply_to_actor(stat_mod:BaseStatMod, actor:Bas
 		return false
 	var conditions = stat_mod.condition_data
 	var mod_source_actor = stat_mod.source_id
-	var mod_source_faction = stat_mod.source_faction
+	#var mod_source_faction = stat_mod.source_faction
 	if not conditions:
 		return true
 	
-	# Check Faction Filters
-	var faction_filters = conditions.get("FactionFilters", [])
-	if not TagHelper.check_faction_filter(mod_source_actor, mod_source_faction, faction_filters, actor, game_state):
+	# Check Team Filters
+	var team_filters = conditions.get("TeamFilters", [])
+	if not TagHelper.check_team_filter(mod_source_actor, team_filters, actor, game_state):
 		return false
 			
 	# Check Defender Tag Filters

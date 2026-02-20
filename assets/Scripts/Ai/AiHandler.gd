@@ -17,6 +17,7 @@ static func build_action_ques(clear_existing_ques:bool=false):
 	astar.enable_all_points()
 	
 	# Pre-Pass on Actors
+	var actionable_actors = []
 	for actor:BaseActor in actors:
 		# Clear Ques
 		if clear_existing_ques and not actor.is_player:
@@ -32,6 +33,9 @@ static func build_action_ques(clear_existing_ques:bool=false):
 		var pos = init_game_state.get_actor_pos(actor)
 		if pos:
 			astar.set_pos_disabled(pos, true)
+		
+		if actor.stats.get_stat(StatHelper.PPR) > 0:
+			actionable_actors.append(actor)
 	
 	for turn in range(turn_count):
 		# Build duplicate GameState as new Turn State
@@ -39,7 +43,7 @@ static func build_action_ques(clear_existing_ques:bool=false):
 		turn_states.append(turn_state)
 		turn_state.current_turn_index = turn
 		
-		for actor:BaseActor in actors:
+		for actor:BaseActor in actionable_actors:
 			if actor.Que.is_turn_gap(turn):
 				continue
 			
@@ -114,22 +118,23 @@ static func _choose_page_for_actor(actor:BaseActor, game_state:GameStateData)->P
 	if not target_enemy:
 		printerr("No enemies found for actor: %s" % [actor.Id])
 		return null
+	
+		
 	# Path to target
 	var target_pos = game_state.get_actor_pos(target_enemy)
 	var start_pos = game_state.get_actor_pos(actor)
 	var path = path_to_target(actor, start_pos, target_pos, game_state)
 	var path_moves = path.get('Moves', [])
-	if path_moves.size() > 0:
+	
+	if path_moves.size() > 0 and path_moves.size() < 12:
 		var move_action = ItemLibrary.get_item(path_moves[0])
 		if move_action:
 			return move_action
-	else:
+	elif path_moves.size() == 0:
 		printerr("No Path found for actor: %s" % [actor.Id])
 	
 	var wait_action = ItemLibrary.get_item("Wait")
 	return wait_action
-	
-	pass
 
 static func _get_actor_action_options_data(actor:BaseActor)->Dictionary:
 	var data = {

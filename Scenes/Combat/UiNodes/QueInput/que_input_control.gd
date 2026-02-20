@@ -209,6 +209,7 @@ func _build_buttons():
 						#main_container.size.y + (2 * PADDING))
 
 func _on_que_change():
+	var execution_state = CombatRootControl.Instance.QueController.execution_state
 	if CombatRootControl.Instance.QueController.execution_state != ActionQueController.ActionStates.Waiting:
 		return
 	clear_preview_display()

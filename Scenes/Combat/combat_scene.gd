@@ -274,6 +274,7 @@ func trigger_spawners():
 		if spawner_node is ShrineActorNode:
 			var actor_key = _get_random_enemy_key(phase_data)
 			var new_actor = ActorLibrary.create_actor(actor_key, {})
+			new_actor.TeamKey = "Enemies"
 			spawner_node.start_spawning_animation(new_actor, GameState)
 			
 				
@@ -327,7 +328,7 @@ func spawn_actors_for_phase(phase_data:Dictionary):
 		var actor_pos = MapPos.new(child.map_coor.x, child.map_coor.y, 0, child.facing)
 		var actor_key = ""
 		var actor_id = ""
-		var team_index = child.team_index
+		var team_key = child.team_key
 		if child.spawn_actor_key != '':
 			if child.spawn_actor_key == "RandomEnemy":
 				actor_key = _get_random_enemy_key(phase_data)
@@ -336,7 +337,7 @@ func spawn_actors_for_phase(phase_data:Dictionary):
 		if child.spawn_actor_id != '':
 			actor_id = child.spawn_actor_id
 		if child.is_player:
-			team_index = 0
+			team_key = "Players"
 		var new_actor = null
 		
 		# Specific Actor Id was provided
@@ -354,7 +355,7 @@ func spawn_actors_for_phase(phase_data:Dictionary):
 		index += 1
 		loading_actor_progressed.emit(total_count, index)
 		if new_actor:
-			new_actor.TeamIndex = team_index
+			new_actor.TeamKey = team_key
 			add_actor(new_actor, actor_pos)
 					#var display_name = new_actor.get_display_name()
 					#if not npcs_to_name.keys().has(display_name):
@@ -372,9 +373,10 @@ func _get_random_enemy_key(map_data)->String:
 	
 
 func start_combat_animation():
-	start_combat_screen.show()
-	start_combat_screen.start_combat_animation()
-	
+	#start_combat_screen.show()
+	#start_combat_screen.start_combat_animation()
+	#
+	_on_combat_screen_blackout()
 	combat_started = true
 
 static func pause_combat():
@@ -434,7 +436,10 @@ func add_actor(actor:BaseActor, pos:MapPos, is_player:bool=false, play_spawn_ani
 	if GameState._actors.keys().has(actor.Id):
 		printerr("Actor '%s' already added" % [actor.Id])
 		return
-	print("Adding Actor %s with TeamIndex: %s" % [actor.Id, actor.TeamIndex])
+	# TODO: Need Better to support multi player
+	if is_player:
+		actor.TeamKey = "Players"
+	print("Adding Actor %s with TeamKey: %s" % [actor.Id, actor.TeamKey])
 	
 	var actor_node = MapController.get_or_create_actor_node(actor, pos)
 	actor_node.visible = true
@@ -506,7 +511,6 @@ func remove_zone(zone):
 	MapController.delete_zone_node(zone)
 
 func check_end_conditions():
-	trigger_spawners()
 	
 	if supress_win_conditions:
 		return
@@ -514,14 +518,14 @@ func check_end_conditions():
 	var living_actor_by_team = {}
 	var party_ids = StoryState.list_party_actors_ids()
 	for actor:BaseActor in GameState.list_actors(true):
-		if not living_actor_by_team.keys().has(str(actor.TeamIndex)):
-			living_actor_by_team[str(actor.TeamIndex)] = 0
+		if not living_actor_by_team.keys().has(actor.TeamKey):
+			living_actor_by_team[actor.TeamKey] = 0
 		if actor.is_dead:
 			continue
-		living_actor_by_team[str(actor.TeamIndex)] += 1
+		living_actor_by_team[actor.TeamKey] += 1
 		
 	# All Players dead, Game Over
-	if living_actor_by_team["0"] == 0:
+	if living_actor_by_team["Players"] == 0:
 		trigger_end_condition(false)
 
 	var combat_condition = get_current_phase_data().get("CombatCondition")
@@ -534,21 +538,21 @@ func check_end_conditions():
 		return
 	if condition_key == "KillAll":
 		var any_alive = false
-		for team_index in living_actor_by_team.keys():
-			if team_index == "0":
+		for team_key in living_actor_by_team.keys():
+			if team_key == "Players":
 				continue
-			if living_actor_by_team[team_index] > 0:
+			if living_actor_by_team[team_key] > 0:
 				any_alive = true
 		if not any_alive:
 			start_next_phase()
 	elif condition_key == "KillTeam":
-		var team_index = str(combat_condition.get("EnemyTeamIndex"))
+		var team_key = str(combat_condition.get("EnemyTeamKey"))
 		var keys = living_actor_by_team.keys()
-		if not keys.has(team_index):
-			printerr("CombatScene.check_end_conditions KillTeam: No team found with index %s." % [team_index])
+		if not keys.has(team_key):
+			printerr("CombatScene.check_end_conditions KillTeam: No team found with index %s." % [team_key])
 			start_next_phase()
 			return
-		if living_actor_by_team[team_index] == 0:
+		if living_actor_by_team[team_key] == 0:
 			start_next_phase()
 			
 
@@ -609,7 +613,7 @@ func set_player_index(index:int, move_camera:bool=true):
 		ui_control.set_player_actor_index(_current_player_index)
 		if move_camera:
 			var actor = get_player_actor(index)
-			camera.lock_to_actor(actor, true)
+			camera.start_auto_pan_to_actor(actor, true)
 
 
 func get_player_actor(index:int = _current_player_index)->BaseActor:

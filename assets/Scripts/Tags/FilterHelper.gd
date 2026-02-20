@@ -60,9 +60,8 @@ static func check_tag_filters(propname:String, condition_data:Dictionary, object
 		return false
 	
 ## Returns true if checking_actor qualifies for at least one filter
-static func check_faction_filter(
+static func check_team_filter(
 	source_actor_id:String, 
-	source_faction_index:int, 
 	faction_filters:Array, 
 	checking_actor,
 	game_state:GameStateData
@@ -77,11 +76,10 @@ static func check_faction_filter(
 			if source_actor_id != checking_actor.Id:
 				return true
 		elif fact_filter == "Ally":
-			if (source_faction_index == checking_actor.TeamIndex
-				and source_actor_id != checking_actor.Id):
+			if game_state.are_allies(source_actor_id, checking_actor):
 				return true
 		elif fact_filter == "Enemy":
-			if source_faction_index != checking_actor.TeamIndex:
+			if game_state.are_enemies(source_actor_id, checking_actor):
 				return true
 	return false
 	

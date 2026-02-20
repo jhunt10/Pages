@@ -1279,9 +1279,9 @@ position = Vector2(208, 112)
 texture = ExtResource("10_361jm")
 script = ExtResource("11_vji11")
 spawn_actor_key = "TargetDummy_Moving"
+team_key = "Decor"
 facing = 2
 map_coor = Vector2i(6, 3)
-actor_data = null
 
 [node name="SpwanNode_TestTarget_Armored" type="Sprite2D" parent="PhaseController/InitEnemySpawnMap"]
 modulate = Color(0.303233, 0.303233, 0.303233, 1)
@@ -1290,9 +1290,9 @@ texture = ExtResource("10_361jm")
 script = ExtResource("11_vji11")
 spawn_actor_key = "TargetDummy_Phy"
 spawn_actor_id = "Right_TargetDummy_Armored"
+team_key = "Decor"
 facing = 2
 map_coor = Vector2i(6, 5)
-actor_data = null
 
 [node name="SpwanNode_TestTarget_Armored2" type="Sprite2D" parent="PhaseController/InitEnemySpawnMap"]
 modulate = Color(0.303233, 0.303233, 0.303233, 1)
@@ -1301,9 +1301,9 @@ texture = ExtResource("10_361jm")
 script = ExtResource("11_vji11")
 spawn_actor_key = "TargetDummy_Phy"
 spawn_actor_id = "Center_TargetDummy_Armored"
+team_key = "Decor"
 facing = 2
 map_coor = Vector2i(7, 5)
-actor_data = null
 
 [node name="SpwanNode_TestTarget_Armored3" type="Sprite2D" parent="PhaseController/InitEnemySpawnMap"]
 visible = false
@@ -1313,9 +1313,9 @@ texture = ExtResource("10_361jm")
 script = ExtResource("11_vji11")
 spawn_actor_key = "TargetDummy_Phy"
 spawn_actor_id = "Left_TargetDummy_Armored"
+team_key = "Decor"
 facing = 2
 map_coor = Vector2i(3, 6)
-actor_data = null
 
 [node name="SpwanNode_TestTarget_Armored4" type="Sprite2D" parent="PhaseController/InitEnemySpawnMap"]
 visible = false
@@ -1325,9 +1325,9 @@ texture = ExtResource("10_361jm")
 script = ExtResource("11_vji11")
 spawn_actor_key = "TargetDummy_Phy"
 spawn_actor_id = "Bot_TargetDummy_Armored"
+team_key = "Decor"
 facing = 2
 map_coor = Vector2i(4, 7)
-actor_data = null
 
 [node name="SpwanNode_TestTarget_Warded" type="Sprite2D" parent="PhaseController/InitEnemySpawnMap"]
 modulate = Color(0.152941, 1, 1, 1)
@@ -1335,9 +1335,9 @@ position = Vector2(304, 208)
 texture = ExtResource("10_361jm")
 script = ExtResource("11_vji11")
 spawn_actor_key = "TargetDummy_Mag"
+team_key = "Decor"
 facing = 2
 map_coor = Vector2i(9, 6)
-actor_data = null
 
 [node name="SpwanNode_Enemey" type="Sprite2D" parent="PhaseController/InitEnemySpawnMap"]
 visible = false
@@ -1348,7 +1348,6 @@ script = ExtResource("11_vji11")
 spawn_actor_key = "ZombieBasic"
 facing = 2
 map_coor = Vector2i(9, 1)
-actor_data = null
 
 [node name="SpwanNode_Enemey2" type="Sprite2D" parent="PhaseController/InitEnemySpawnMap"]
 visible = false
@@ -1359,7 +1358,6 @@ script = ExtResource("11_vji11")
 spawn_actor_key = "TargetDummy_Armored"
 facing = 2
 map_coor = Vector2i(7, 2)
-actor_data = null
 
 [node name="SpwanNode_Lever" type="Sprite2D" parent="PhaseController/InitEnemySpawnMap"]
 self_modulate = Color(0.613052, 0.0530075, 0.251729, 1)
@@ -1369,20 +1367,16 @@ script = ExtResource("15_wreyn")
 gate_color = Color(0.613052, 0.0530075, 0.251729, 1)
 spawn_actor_key = "LeverActor"
 spawn_actor_id = "Lever_RedGate"
-team_index = 2
 facing = 2
 map_coor = Vector2i(7, 6)
-actor_data = null
 
 [node name="SpwanNode_Barrel6" type="Sprite2D" parent="PhaseController/InitEnemySpawnMap"]
 position = Vector2(208, 240)
 texture = ExtResource("13_uv3xj")
 script = ExtResource("11_vji11")
 spawn_actor_key = "BarrelActor"
-team_index = 2
 facing = 2
 map_coor = Vector2i(6, 7)
-actor_data = null
 
 [node name="SpwanNode_Shrine" type="Sprite2D" parent="PhaseController/InitEnemySpawnMap"]
 position = Vector2(272, 240)
@@ -1390,7 +1384,5 @@ texture = ExtResource("17_ddyhq")
 offset = Vector2(0, -12)
 script = ExtResource("11_vji11")
 spawn_actor_key = "ShrineActor"
-team_index = 2
 facing = 2
 map_coor = Vector2i(8, 7)
-actor_data = null

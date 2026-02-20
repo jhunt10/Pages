@@ -21,7 +21,8 @@ enum BlockTypes {
 	CustomBlock,
 	AnimateNode,
 	StartCombat,
-	DecrementStoryIndex
+	DecrementStoryIndex,
+	TriggerSpawner
 }
 
 @export var scene_root:Node
@@ -619,6 +620,32 @@ func _handle_block(block_data:Dictionary)->bool:
 			return true
 		return false
 	
+	
+	#----------------------------------
+	#          Trigger Spawner
+	# Options:
+	#----------------------------------
+	if block_type == BlockTypes.TriggerSpawner:
+		if CombatRootControl.Instance:
+			var spawner_actor_id = block_data.get("SpawnerActorId")
+			var spawner_actor = CombatRootControl.Instance.GameState.get_actor(spawner_actor_id)
+			if !spawner_actor:
+				printerr("DialogBlock.TriggerSpawner: Failed to find actor with id '%s'." % [spawner_actor_id])
+				return false
+			if spawner_actor is SpawnerActor:
+				var actor_key =  block_data.get("SpawnActorKey")
+				var new_actor = ActorLibrary.create_actor(actor_key, {})
+				var block_key = "TrigSpawner:"+spawner_actor_id
+				new_actor.TeamKey = "Enemies"
+				if not spawner_actor.spawn_finished.is_connected(_on_block_finish):
+					spawner_actor.spawn_finished.connect(_on_block_finish.bind(block_key))
+				spawner_actor.start_spawning(new_actor)
+				_block_states[block_key] = BlockStates.Playing
+			return true
+		return false
+	
+	
+	
 	# Unknown Block
 	return false
 
@@ -664,6 +691,10 @@ func _on_actor_move_finished(actor_id):
 					camera.snap_to_map_pos(actor_node.cur_map_pos)
 			#if actor_node.reached_motion_destination.is_connected(_on_actor_move_finished):
 				#actor_node.reached_motion_destination.disconnect(_on_actor_move_finished)
+
+func _on_block_finish(key):
+	if _block_states.has(key):
+		_block_states[key] = BlockStates.Finished
 
 func _on_camera_pan_finish():
 	if _block_states.has("PanCamera"):

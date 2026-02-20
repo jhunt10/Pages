@@ -5,23 +5,23 @@
 	"MapScene": "abandoned_village_map.tscn",
 	"SortOrder": 1,
 	"StartingPhase": "InitSpawn",
-	"TeamData": [
-		{
-			"TeamName": "Players",
-			"Enemies": [1],
+	"TeamData": {
+		"Players": {
+			"DisplayName": "Heros",
+			"Enemies": ["Enemies"],
 			"Allies": []
 		},
-		{
-			"TeamName": "Squirrels",
-			"Enemies": [0],
+		"Enemies":{
+			"DisplayName": "Squirrels",
+			"Enemies": ["Players"],
 			"Allies": []
 		},
-		{
-			"TeamName": "Decor",
+		"Decor": {
+			"DisplayName": "Decor",
 			"Enemies": [],
 			"Allies": []
 		}
-	],
+	},
 	"PhaseDatas": {
 		"InitSpawn": {
 			"PhaseType": "SpawnEnemy",
@@ -51,7 +51,7 @@
 			"NextPhase": "END",
             "CombatCondition": {
                 "ConditionKey": "KillTeam",
-                "EnemyTeamIndex": 1
+                "EnemyTeamKey": "Enemies"
             }
 		}
 	}

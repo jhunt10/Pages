@@ -72,7 +72,7 @@
                         "DamageTypes": [
                             "Crash"
                         ],
-                        "DefenderFactionFilters": [
+                        "DefenderTeamFilters": [
                             "Ally"
                         ],
                         "DefenderTagFilters": [
@@ -80,7 +80,7 @@
                                 "RequireAnyTags": []
                             }
                         ],
-                        "SourceFactionFilters": [
+                        "SourceTeamFilters": [
                             "Self"
                         ],
                         "SourceTagFilters": [
@@ -143,7 +143,7 @@
                         "DamageTypes": [
                             "Crash"
                         ],
-                        "DefenderFactionFilters": [
+                        "DefenderTeamFilters": [
                             "Enemy"
                         ],
                         "DefenderTagFilters": [
@@ -151,7 +151,7 @@
                                 "RequireAnyTags": []
                             }
                         ],
-                        "SourceFactionFilters": [
+                        "SourceTeamFilters": [
                             "Self"
                         ],
                         "SourceTagFilters": [
@@ -444,19 +444,19 @@
                                 ]
                             }
                         ],
-                        "AttackerFactionFilters": [
+                        "AttackerTeamFilters": [
                             "Self",
                             "Other"
                         ],
                         "DefendersConditions": [
                             {
-                                "DefenderFactionFilters": [
+                                "DefenderTeamFilters": [
                                     "Ally"
                                 ],
                                 "RequiresAllDefenders": false
                             },
                             {
-                                "DefenderFactionFilters": [
+                                "DefenderTeamFilters": [
                                     "Self"
                                 ],
                                 "RequiresAllDefenders": false
@@ -466,7 +466,7 @@
                     "DamageMods": {
                         "BruntAllyDmgMod": {
                             "Conditions": {
-                                "DefenderFactionFilters": [
+                                "DefenderTeamFilters": [
                                     "Ally"
                                 ]
                             },
@@ -475,7 +475,7 @@
                         },
                         "BruntSelfDmgMod": {
                             "Conditions": {
-                                "DefenderFactionFilters": [
+                                "DefenderTeamFilters": [
                                     "Self"
                                 ]
                             },

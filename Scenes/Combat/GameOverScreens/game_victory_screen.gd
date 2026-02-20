@@ -84,7 +84,7 @@ func collect_dropped_items():
 	var total_exp = 0
 	var bounty_money = 0
 	for actor:BaseActor in actors:
-		if actor.is_dead and actor.TeamIndex != 0:
+		if actor.is_dead and actor.is_player:
 			var enemy_val = actor.actor_data.get("MoneyValue", 0)
 			bounty_money += enemy_val
 			var exp_val = actor.actor_data.get("ExpValue", 0)

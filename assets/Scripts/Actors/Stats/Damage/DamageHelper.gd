@@ -253,7 +253,7 @@ static func roll_for_damage(
 static func does_damage_mod_apply(damage_mod:Dictionary, attacker:BaseActor, defender:BaseActor, damage_data:Dictionary, source_tag_chain:SourceTagChain, game_state:GameStateData)->bool:
 	var conditions = damage_mod.get('Conditions', null)
 	var mod_source_actor = damage_mod.get('SourceActorId', null)
-	var mod_source_faction = damage_mod.get('SourceActorFaction', null)
+	#var mod_source_faction = damage_mod.get('SourceActorTeam', null)
 	if not conditions:
 		return false
 	
@@ -262,15 +262,15 @@ static func does_damage_mod_apply(damage_mod:Dictionary, attacker:BaseActor, def
 	if damage_filter.size() > 0 and not damage_filter.has(damage_type):
 		return false
 	
-	# Check Defender Faction Filters
-	var defender_faction_filters = conditions.get("DefenderFactionFilters", [])
-	if not TagHelper.check_faction_filter(mod_source_actor, mod_source_faction, defender_faction_filters, defender, game_state):
+	# Check Defender Team Filters
+	var defender_team_filters = conditions.get("DefenderTeamFilters", [])
+	if not TagHelper.check_team_filter(mod_source_actor, defender_team_filters, defender, game_state):
 		return false
 			
-	# Check Attacker Faction Filters
+	# Check Attacker Team Filters
 	if attacker:
-		var attack_faction_filters = conditions.get("AttackerFactionFilters", [])
-		if not TagHelper.check_faction_filter(mod_source_actor, mod_source_faction, attack_faction_filters, attacker, game_state):
+		var attack_team_filters = conditions.get("AttackerTeamFilters", [])
+		if not TagHelper.check_team_filter(mod_source_actor, attack_team_filters, attacker, game_state):
 			return false
 	
 	# Check Defender Tag Filters
