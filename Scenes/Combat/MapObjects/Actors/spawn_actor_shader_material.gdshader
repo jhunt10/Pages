@@ -8,7 +8,7 @@ void vertex() {
 
 void fragment() {
     vec2 uv = UV;
-	
+
 	if ( progress < 1.0)
 	{
 		//int time_block_size = 1;
@@ -16,7 +16,7 @@ void fragment() {
 		//float mid_time_val = TIME - float(time_block * time_block_size);
 		//float time_progress = mid_time_val / float(time_block_size);
 		float real_progress = progress;
-		
+
 		int block_size = 10;// int(floor(SCREEN_PIXEL_SIZE[0]));
 		int block_val = int(floor(VERTEX[1])) / block_size;
 		float mid_block_val = (VERTEX[1] - float(block_val * block_size))/float(block_size);

@@ -955,7 +955,7 @@ text = "Item Name +1"
 visible = false
 layout_mode = 1
 
-[node name="CombatLogBox" type="Control" parent="MoveableCamera2D/CanvasLayer/CombatUiControl" node_paths=PackedStringArray("entries_container", "scroll_container", "back_patch", "prefab_separator")]
+[node name="CombatLogBox" type="Control" parent="MoveableCamera2D/CanvasLayer/CombatUiControl" node_paths=PackedStringArray("entries_container", "scroll_container", "back_patch", "prefab_separator", "prefab_text_box")]
 anchors_preset = 0
 offset_left = 1.0
 offset_top = 506.0
@@ -966,6 +966,7 @@ entries_container = NodePath("BackPatchContainer/BoxContainer/ScrollContainer/Lo
 scroll_container = NodePath("BackPatchContainer/BoxContainer/ScrollContainer")
 back_patch = NodePath("BackPatchContainer")
 prefab_separator = NodePath("BackPatchContainer/BoxContainer/ScrollContainer/LogEntriesContainer/HSeparator")
+prefab_text_box = NodePath("BackPatchContainer/BoxContainer/ScrollContainer/LogEntriesContainer/TextLogEntry")
 
 [node name="BackPatchContainer" type="Container" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/CombatLogBox" node_paths=PackedStringArray("background", "inner_container")]
 custom_minimum_size = Vector2(272, 144)
@@ -1002,6 +1003,16 @@ visible = false
 modulate = Color(0.617455, 0.617455, 0.617455, 1)
 layout_mode = 2
 
+[node name="TextLogEntry" type="RichTextLabel" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/CombatLogBox/BackPatchContainer/BoxContainer/ScrollContainer/LogEntriesContainer"]
+custom_minimum_size = Vector2(240, 0)
+layout_mode = 2
+theme = ExtResource("38_waysr")
+theme_override_font_sizes/normal_font_size = 17
+bbcode_enabled = true
+text = "Someone did something to someone else and it had some kind of effect."
+fit_content = true
+scroll_active = false
+
 [node name="EndScreensControl" type="Control" parent="MoveableCamera2D/CanvasLayer"]
 layout_mode = 3
 anchors_preset = 15
@@ -1011,8 +1022,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="GameOverScreen" type="Control" parent="MoveableCamera2D/CanvasLayer/EndScreensControl" node_paths=PackedStringArray("main_menu_button")]
-visible = false
+[node name="GameOverScreen" type="Control" parent="MoveableCamera2D/CanvasLayer/EndScreensControl" node_paths=PackedStringArray("to_camp_button", "main_menu_button")]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1020,6 +1030,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("25_byrc6")
+to_camp_button = NodePath("CenterContainer/VBoxContainer/ToCampButton")
 main_menu_button = NodePath("CenterContainer/VBoxContainer/MainMenuButton")
 
 [node name="ColorRect" type="ColorRect" parent="MoveableCamera2D/CanvasLayer/EndScreensControl/GameOverScreen"]
@@ -1081,6 +1092,38 @@ grow_vertical = 2
 theme = ExtResource("22_gl452")
 theme_override_font_sizes/font_size = 32
 text = "Load Game"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ToCampButton" type="Button" parent="MoveableCamera2D/CanvasLayer/EndScreensControl/GameOverScreen/CenterContainer/VBoxContainer"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(200, 64)
+layout_mode = 2
+
+[node name="NinePatchRect2" type="NinePatchRect" parent="MoveableCamera2D/CanvasLayer/EndScreensControl/GameOverScreen/CenterContainer/VBoxContainer/ToCampButton"]
+custom_minimum_size = Vector2(200, 32)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("32_f81f5")
+patch_margin_left = 12
+patch_margin_top = 12
+patch_margin_right = 12
+patch_margin_bottom = 12
+
+[node name="Label" type="Label" parent="MoveableCamera2D/CanvasLayer/EndScreensControl/GameOverScreen/CenterContainer/VBoxContainer/ToCampButton/NinePatchRect2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("22_gl452")
+theme_override_font_sizes/font_size = 32
+text = "Back To Camp"
 horizontal_alignment = 1
 vertical_alignment = 1
 

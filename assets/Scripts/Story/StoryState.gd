@@ -237,6 +237,8 @@ func set_unlocked_skill_for_actor(actor:BaseActor, skills:Array):
 			
 			
 			for page_key in page_list:
+				if !page_key:
+					continue
 				var is_unlocked = skills.has(page_key) or node_data.get("AlwaysUnlocked", false)
 				var has_page_in_book = actor.pages.list_ids_of_items_with_key(page_key).size() > 0
 				var has_page_in_inventory = PlayerInventory.get_item_stack_count(page_key) > 0

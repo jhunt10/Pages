@@ -36,6 +36,9 @@ var equipment:EquipmentHolder
 var pages:PageHolder
 var aggro:AggroHandler
 
+# Position when first added to map (used for moseing)
+var spawn_position:MapPos
+
 var Id : String:
 	get: return _id
 var ActorKey : String:

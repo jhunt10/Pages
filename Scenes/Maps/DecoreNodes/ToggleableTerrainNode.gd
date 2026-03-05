@@ -1,11 +1,11 @@
 @tool
-class_name GateSpriteNode
+class_name ToggleableTerrainNode
 extends Node2D
 
 @export var offset:Vector2
-@export var gate_key:String
+@export var toggle_key:String
 @export var animation_player:AnimationPlayer
-@export var is_open:bool
+@export var is_passable:bool
 @export var map_coor:Vector2i:
 	set(val):
 		map_coor = val
@@ -33,14 +33,13 @@ func _notification(what):
 		
 func get_occupied_coors()->Array:
 	var coors =[map_coor]
-	coors.append(Vector2i(map_coor.x + 1, map_coor.y))
 	return coors
 
-func open_gate():
+func set_passable():
 	animation_player.play("open_gate")
-	is_open = true
+	is_passable = true
 
-func close_gate():
+func set_unpassble():
 	animation_player.play("close_gate")
-	is_open = false
+	is_passable = false
 	

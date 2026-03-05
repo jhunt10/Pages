@@ -441,6 +441,8 @@ func add_actor(actor:BaseActor, pos:MapPos, is_player:bool=false, play_spawn_ani
 		actor.TeamKey = "Players"
 	print("Adding Actor %s with TeamKey: %s" % [actor.Id, actor.TeamKey])
 	
+	actor.spawn_position = pos
+	
 	var actor_node = MapController.get_or_create_actor_node(actor, pos)
 	actor_node.visible = true
 	MapController.reparent_actor_node_to_actor_tile_map(actor_node)
@@ -455,7 +457,6 @@ func add_actor(actor:BaseActor, pos:MapPos, is_player:bool=false, play_spawn_ani
 			_player_actor_ids.append(actor.Id)
 	
 	if combat_started:
-		actor.clean_state()
 		actor.on_combat_start()
 	
 	if play_spawn_animation:
@@ -554,7 +555,22 @@ func check_end_conditions():
 			return
 		if living_actor_by_team[team_key] == 0:
 			start_next_phase()
-			
+	elif condition_key == "Exit":
+		var exit_coor = combat_condition.get("ExitCoor")
+		if not exit_coor is Array or not exit_coor.size() == 2:
+			printerr("CombatScene.check_end_conditions Exit: invalid ExitCoor '%s'." % [exit_coor])
+			start_next_phase()
+			return
+		var player_on_exit = false
+		for actor:BaseActor in GameState.list_actors(false):
+			if actor.is_player:
+				var pos = GameState.get_actor_pos(actor)
+				if pos.x == exit_coor[0] and pos.y == exit_coor[1]:
+					player_on_exit = true
+					break
+		if player_on_exit:
+			start_next_phase()
+		
 
 func trigger_end_condition(victory:bool):
 	combat_finished = true

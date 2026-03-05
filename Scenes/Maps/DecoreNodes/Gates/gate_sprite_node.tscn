@@ -1,8 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://dqxauhjmwxfw6"]
+[gd_scene load_steps=7 format=3 uid="uid://dqxauhjmwxfw6"]
 
 [ext_resource type="Script" path="res://Scenes/Maps/DecoreNodes/Gates/gate_sprite_node.gd" id="1_x02ue"]
-[ext_resource type="Texture2D" uid="uid://bear46ct2hilw" path="res://Scenes/Maps/DecoreNodes/Gates/Gate_Left.png" id="2_truk8"]
-[ext_resource type="Texture2D" uid="uid://djkuafrq51lkc" path="res://Scenes/Maps/DecoreNodes/Gates/Gate_Right.png" id="3_gst3g"]
+[ext_resource type="Texture2D" uid="uid://jlr4yr6r78hb" path="res://Scenes/Maps/DecoreNodes/Gates/Gate_SpriteSheet.png" id="2_l6e1m"]
 
 [sub_resource type="Animation" id="Animation_f37le"]
 length = 0.001
@@ -94,16 +93,18 @@ _data = {
 
 [node name="GateSpriteNode" type="Node2D" node_paths=PackedStringArray("animation_player")]
 script = ExtResource("1_x02ue")
-gate_key = "RedGate"
 animation_player = NodePath("AnimationPlayer")
 map_coor = Vector2i(7, 8)
 
 [node name="LeftGateSprite" type="Sprite2D" parent="."]
-texture = ExtResource("2_truk8")
+texture = ExtResource("2_l6e1m")
+hframes = 2
 
 [node name="RightGateSprite" type="Sprite2D" parent="."]
 position = Vector2(32, 0)
-texture = ExtResource("3_gst3g")
+texture = ExtResource("2_l6e1m")
+hframes = 2
+frame = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

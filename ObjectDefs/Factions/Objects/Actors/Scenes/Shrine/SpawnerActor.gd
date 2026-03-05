@@ -35,5 +35,6 @@ func _spawn_actor():
 		printerr("ShrineActorNode: No Open Spots found")
 		return
 	CombatRootControl.Instance.add_actor(spawning_actor, chosen_spot, false, true)
+	CombatLogController.log_event("%s spawned %s" % [self.get_display_name(), spawning_actor.get_display_name()])
 	last_spawned_actor_id = spawning_actor.Id
 	spawning_actor = null

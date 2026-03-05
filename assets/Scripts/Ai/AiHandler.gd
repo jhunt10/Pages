@@ -126,14 +126,16 @@ static func _choose_page_for_actor(actor:BaseActor, game_state:GameStateData)->P
 	var path = path_to_target(actor, start_pos, target_pos, game_state)
 	var path_moves = path.get('Moves', [])
 	
-	if path_moves.size() > 0 and path_moves.size() < 12:
-		var move_action = ItemLibrary.get_item(path_moves[0])
-		if move_action:
-			return move_action
+	if path_moves.size() > 0:
+		var max_aggro_distance = actor.ai_def.get("AggroRangeLimit", 9999)
+		if path_moves.size() < max_aggro_distance:
+			var move_action = ItemLibrary.get_item(path_moves[0])
+			if move_action:
+				return move_action
 	elif path_moves.size() == 0:
 		printerr("No Path found for actor: %s" % [actor.Id])
-	
-	var wait_action = ItemLibrary.get_item("Wait")
+	var mosey_action = build_mosey_round(actor, game_state)
+	var wait_action = ItemLibrary.get_item(mosey_action)
 	return wait_action
 
 static func _get_actor_action_options_data(actor:BaseActor)->Dictionary:
@@ -438,3 +440,44 @@ static func _list_pos_indexes(pos, _game_state)->Array:
 		temp_pos.dir = dir
 		out_list.append(_pos_to_index(temp_pos))
 	return out_list
+
+
+static func build_mosey_round(actor:BaseActor, game_state:GameStateData):
+	var max_turns = actor.Que.get_max_que_size()
+	var center_pos = actor.spawn_position
+	var cur_pos = game_state.get_actor_pos(actor)
+	var actions = []
+	var last_action_roll = -1
+	for index in range(max_turns):
+		# 0:Wait
+		# 1:TurnLeft
+		# 2:TurnRight
+		# 3:Forward
+		var action_roll = randi() % 4
+		if action_roll == 3:
+			var can_move_forward = true
+			var forward_pos = MoveHandler.relative_pos_to_real(cur_pos, MapPos.new(0,-1))
+			var center_to_forward_dist = max(abs(center_pos.x - forward_pos.x),abs(center_pos.y - forward_pos.y))
+			if center_to_forward_dist > 1:
+				can_move_forward = false
+			if  not game_state.is_spot_open(forward_pos):
+				can_move_forward = false
+			if can_move_forward:
+				actions.append("MoveForward")
+				return "MoveForward"
+			else:
+				action_roll = randi() % 3
+		if action_roll == 1:
+				actions.append("TurnLeft")
+				return "TurnLeft"
+		if action_roll == 2:
+				actions.append("TurnRight")
+				return "TurnRight"
+		if action_roll == 0:
+				actions.append("Wait")
+				return "Wait"
+			
+		
+		
+		
+	pass

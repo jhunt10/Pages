@@ -8,6 +8,7 @@ static var Instance:CombatLogController
 @export var scroll_container:ScrollContainer
 @export var back_patch:BackPatchContainer
 @export var prefab_separator:HSeparator
+@export var prefab_text_box:RichTextLabel
 
 var entries = []
 var auto_scroll = false
@@ -24,6 +25,7 @@ func _ready() -> void:
 		queue_free()
 		return
 	prefab_separator.hide()
+	prefab_text_box.hide()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -49,6 +51,10 @@ static func log_event(event):
 	Instance.entries.append(event)
 	if event is AttackEvent:
 		Instance.log_attack_event(event)
+	elif event is String:
+		var text_box = Instance.prefab_text_box.duplicate()
+		text_box.text = event
+		text_box.show()
 
 func log_attack_event(event:AttackEvent):
 	var new_entry:AttackLogEntry = load("res://Scenes/Combat/UiNodes/CombatLog/Entries/attack_log_entry.tscn").instantiate()

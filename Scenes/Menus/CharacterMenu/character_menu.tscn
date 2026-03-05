@@ -944,98 +944,6 @@ flip_v = true
 modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 
-[node name="WisInputContainer" type="HBoxContainer" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer" node_paths=PackedStringArray("minus_button", "plus_button", "value_lable")]
-custom_minimum_size = Vector2(60, 0)
-layout_mode = 2
-theme_override_constants/separation = 10
-alignment = 1
-script = ExtResource("23_06psp")
-minus_button = NodePath("VBoxContainer/MinusButtonControl/MinusButton")
-plus_button = NodePath("VBoxContainer/PlusButtonControl/PlusButton")
-value_lable = NodePath("VBoxContainer/NewValLabel")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/WisInputContainer"]
-layout_mode = 2
-alignment = 1
-
-[node name="PlusButtonControl" type="Control" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/WisInputContainer/VBoxContainer"]
-custom_minimum_size = Vector2(64, 32)
-layout_mode = 2
-size_flags_horizontal = 4
-
-[node name="PlusButton" type="TextureButton" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/WisInputContainer/VBoxContainer/PlusButtonControl"]
-custom_minimum_size = Vector2(64, 32)
-layout_mode = 0
-offset_right = 64.0
-offset_bottom = 32.0
-texture_normal = ExtResource("24_sivxw")
-texture_pressed = ExtResource("25_dbag5")
-texture_disabled = ExtResource("26_ss4i1")
-stretch_mode = 0
-
-[node name="HBoxContainer" type="HBoxContainer" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/WisInputContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 4
-theme_override_constants/separation = 0
-alignment = 1
-
-[node name="TextureRect" type="TextureRect" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/WisInputContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-texture = ExtResource("30_uaf37")
-expand_mode = 3
-
-[node name="NameLabel" type="Label" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/WisInputContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 1
-theme = ExtResource("12_dy5pv")
-theme_override_colors/font_color = Color(0.498039, 0, 0, 1)
-theme_override_font_sizes/font_size = 24
-text = "is:"
-vertical_alignment = 2
-
-[node name="NewValLabel" type="Label" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/WisInputContainer/VBoxContainer"]
-self_modulate = Color(0.498039, 0, 0, 1)
-custom_minimum_size = Vector2(56, 0)
-layout_mode = 2
-size_flags_vertical = 1
-theme = ExtResource("12_dy5pv")
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 24
-text = "100"
-horizontal_alignment = 1
-vertical_alignment = 2
-
-[node name="ColorRect" type="ColorRect" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/WisInputContainer/VBoxContainer/NewValLabel"]
-layout_mode = 1
-anchors_preset = -1
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -2.0
-grow_horizontal = 2
-grow_vertical = 0
-color = Color(0.470588, 0, 0, 1)
-
-[node name="MinusButtonControl" type="Control" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/WisInputContainer/VBoxContainer"]
-custom_minimum_size = Vector2(64, 32)
-layout_mode = 2
-size_flags_horizontal = 4
-
-[node name="MinusButton" type="TextureButton" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/WisInputContainer/VBoxContainer/MinusButtonControl"]
-custom_minimum_size = Vector2(64, 32)
-layout_mode = 2
-offset_right = 64.0
-offset_bottom = 32.0
-texture_normal = ExtResource("24_sivxw")
-texture_pressed = ExtResource("25_dbag5")
-texture_disabled = ExtResource("26_ss4i1")
-stretch_mode = 0
-flip_v = true
-
-[node name="VSeparator3" type="VSeparator" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer"]
-modulate = Color(1, 1, 1, 0)
-layout_mode = 2
-
 [node name="IntInputContainer" type="HBoxContainer" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer" node_paths=PackedStringArray("minus_button", "plus_button", "value_lable")]
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
@@ -1114,6 +1022,98 @@ layout_mode = 2
 size_flags_horizontal = 4
 
 [node name="MinusButton" type="TextureButton" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/IntInputContainer/VBoxContainer/MinusButtonControl"]
+custom_minimum_size = Vector2(64, 32)
+layout_mode = 2
+offset_right = 64.0
+offset_bottom = 32.0
+texture_normal = ExtResource("24_sivxw")
+texture_pressed = ExtResource("25_dbag5")
+texture_disabled = ExtResource("26_ss4i1")
+stretch_mode = 0
+flip_v = true
+
+[node name="VSeparator3" type="VSeparator" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+
+[node name="WisInputContainer" type="HBoxContainer" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer" node_paths=PackedStringArray("minus_button", "plus_button", "value_lable")]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+script = ExtResource("23_06psp")
+minus_button = NodePath("VBoxContainer/MinusButtonControl/MinusButton")
+plus_button = NodePath("VBoxContainer/PlusButtonControl/PlusButton")
+value_lable = NodePath("VBoxContainer/NewValLabel")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/WisInputContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="PlusButtonControl" type="Control" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/WisInputContainer/VBoxContainer"]
+custom_minimum_size = Vector2(64, 32)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="PlusButton" type="TextureButton" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/WisInputContainer/VBoxContainer/PlusButtonControl"]
+custom_minimum_size = Vector2(64, 32)
+layout_mode = 0
+offset_right = 64.0
+offset_bottom = 32.0
+texture_normal = ExtResource("24_sivxw")
+texture_pressed = ExtResource("25_dbag5")
+texture_disabled = ExtResource("26_ss4i1")
+stretch_mode = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/WisInputContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/WisInputContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("30_uaf37")
+expand_mode = 3
+
+[node name="NameLabel" type="Label" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/WisInputContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+theme = ExtResource("12_dy5pv")
+theme_override_colors/font_color = Color(0.498039, 0, 0, 1)
+theme_override_font_sizes/font_size = 24
+text = "is:"
+vertical_alignment = 2
+
+[node name="NewValLabel" type="Label" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/WisInputContainer/VBoxContainer"]
+self_modulate = Color(0.498039, 0, 0, 1)
+custom_minimum_size = Vector2(56, 0)
+layout_mode = 2
+size_flags_vertical = 1
+theme = ExtResource("12_dy5pv")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 24
+text = "100"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="ColorRect" type="ColorRect" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/WisInputContainer/VBoxContainer/NewValLabel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -2.0
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0.470588, 0, 0, 1)
+
+[node name="MinusButtonControl" type="Control" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/WisInputContainer/VBoxContainer"]
+custom_minimum_size = Vector2(64, 32)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="MinusButton" type="TextureButton" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/WisInputContainer/VBoxContainer/MinusButtonControl"]
 custom_minimum_size = Vector2(64, 32)
 layout_mode = 2
 offset_right = 64.0
@@ -2209,7 +2209,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="BackPatchContainer" type="Container" parent="ConfirmationControl/CenterContainer" node_paths=PackedStringArray("background", "inner_container")]
-custom_minimum_size = Vector2(220, 123)
+custom_minimum_size = Vector2(223, 125)
 layout_mode = 2
 script = ExtResource("48_p3rjr")
 background = NodePath("NinePatchRect")

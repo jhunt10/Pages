@@ -2,7 +2,10 @@
 class_name LeverSpawnNode
 extends ActorSpawnNode
 
-@export var gate_key:String
+@export var gate_key:String:
+	set(val):
+		gate_key = val
+		spawn_actor_id = "Lever_" + val
 @export var gate_color:Color:
 	set(val):
 		gate_color = val

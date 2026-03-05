@@ -167,6 +167,7 @@ func get_actor_pos(actor)->MapPos:
 func get_actors_at_pos(pos, include_dead:bool=false)->Array:
 	return map_data.get_actors_at_pos(pos, null, include_dead)
 
+## "Open" means both traversable and unoccupied
 func is_spot_open(pos, ignore_actor_ids:Array=[])->bool:
 	return map_data.is_spot_open(pos, ignore_actor_ids)
 

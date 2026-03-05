@@ -45,7 +45,10 @@
         "CombatPhase1": {
             "PhaseType": "Combat",
             "NextPhase": "END",
-            "CombatCondition": "KillAll"
+            "CombatCondition": {
+                "ConditionKey": "Exit",
+                "ExitCoor": [17,5]
+            }
         }
     }
 }

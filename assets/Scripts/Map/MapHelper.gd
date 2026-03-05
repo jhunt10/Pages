@@ -72,3 +72,7 @@ static func get_vect_in_dir(center, direction:int)->Vector2i:
 		3: # West
 			return Vector2i(center.x-1, center.y)
 	return Vector2i(center.x, center.y)
+
+static func can_actor_enter_spot(actor:BaseActor, pos:MapPos, game_state:GameStateData):
+	
+	return game_state.is_spot_open(pos)
