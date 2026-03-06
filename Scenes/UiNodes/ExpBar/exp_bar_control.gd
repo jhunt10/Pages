@@ -46,11 +46,11 @@ func open_level_up_menu():
 
 func _sync():
 	if level_label:
-		level_label.text = str(_actor.stats.get_stat(StatHelper.Level))
+		level_label.text = str(int(_actor.stats.get_stat(StatHelper.Level)))
 	current_exp = _actor.stats.get_stat(StatHelper.Experience)
-	current_exp_label.text = str(current_exp)
+	current_exp_label.text = str(int(current_exp))
 	max_exp = _actor.stats.get_exp_to_next_level()
-	max_exp_label.text = str(max_exp)
+	max_exp_label.text = str(int(max_exp))
 	self.percent_full = current_exp / max_exp
 	if level_up_button_control:
 		if current_exp >= max_exp:

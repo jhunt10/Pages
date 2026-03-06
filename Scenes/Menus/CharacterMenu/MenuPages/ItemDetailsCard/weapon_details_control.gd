@@ -45,7 +45,7 @@ func set_weapon(actor:BaseActor, weapon:BaseWeaponEquipment):
 	var power_scale = damage_data.get("AtkPwrScale", 1)
 	base_power = base_power * power_scale
 	power_range = power_range * power_scale
-	attack_power_label.text = ("%s±%s" % [base_power, (power_range)]) + "%"
+	attack_power_label.text = ("%s±%s" % [int(base_power), int(power_range)]) + "%"
 	damage_type_label.text = damage_type
 	description_box.set_object(weapon._def, weapon, actor)
 	range_display.load_area_matrix(weapon.target_parmas.target_area)

@@ -443,14 +443,14 @@ func _parse_damage_data(tokens:Array, object_def:Dictionary, object_inst:BaseLoa
 		var atk_varient = damage_data.get("AtkPwrRange", 0)
 		var _atk_scale = damage_data.get("AtkPwrScale", 1)
 		var atk_stat:String = damage_data.get("AtkStat", "")
-		var val_line = str(atk_power)
+		var val_line = str(int(atk_power))
 		if atk_varient > 0:
-			val_line += "@" + str(atk_varient)
+			val_line += "@" + str(int(atk_varient))
 		if atk_stat.begins_with("Percent"):
 			is_percent_hp_damage = true
-			description_line = val_line + "% Max HP as " + damage_type + " Damage" 
+			description_line = val_line + "% Max HP as " + damage_type
 		else:
-			description_line = val_line + "% " + StatHelper.get_stat_abbr(atk_stat) + " as " + damage_type + " Damage" 
+			description_line = val_line + "% " + StatHelper.get_stat_abbr(atk_stat) + " as " + damage_type
 		
 	if actor and not is_percent_hp_damage:
 		hover_line = description_line

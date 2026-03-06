@@ -84,10 +84,10 @@ func set_actor(actor):
 	scroll_bar._delay_size_calc = true
 
 func sync_skill_nodes_states():
-	var points_to_spend = 10 + _actor.stats.get_stat(StatHelper.Level, 0)
-	var spent_points = _unlocked_skills.size()
+	var points_to_spend:int = _actor.stats.get_stat(StatHelper.Level, 0)
+	var spent_points:int = _unlocked_skills.size()
 	total_points_label.text = str(points_to_spend)
-	var remaining_points = points_to_spend - spent_points
+	var remaining_points:int = points_to_spend - spent_points
 	unspent_points_label.text = str(remaining_points)
 	scroll_bar.calc_bar_size()
 	max_unlocked_y_index = 0

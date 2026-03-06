@@ -1,4 +1,4 @@
-[gd_resource type="AnimationLibrary" load_steps=13 format=3 uid="uid://bc00iv6edxdop"]
+[gd_resource type="AnimationLibrary" format=3 uid="uid://bc00iv6edxdop"]
 
 [sub_resource type="Animation" id="Animation_tov1a"]
 resource_name = "cancel_east"
@@ -974,16 +974,16 @@ tracks/6/keys = {
 
 [resource]
 _data = {
-"cancel_east": SubResource("Animation_tov1a"),
-"cancel_north": SubResource("Animation_wfpgu"),
-"cancel_south": SubResource("Animation_kbsy6"),
-"cancel_west": SubResource("Animation_movpg"),
-"motion_east": SubResource("Animation_604t0"),
-"motion_north": SubResource("Animation_0u6tq"),
-"motion_south": SubResource("Animation_bxfbw"),
-"motion_west": SubResource("Animation_ote8c"),
-"ready_east": SubResource("Animation_vdldy"),
-"ready_north": SubResource("Animation_gatue"),
-"ready_south": SubResource("Animation_fmjaq"),
-"ready_west": SubResource("Animation_0k3sf")
+&"cancel_east": SubResource("Animation_tov1a"),
+&"cancel_north": SubResource("Animation_wfpgu"),
+&"cancel_south": SubResource("Animation_kbsy6"),
+&"cancel_west": SubResource("Animation_movpg"),
+&"motion_east": SubResource("Animation_604t0"),
+&"motion_north": SubResource("Animation_0u6tq"),
+&"motion_south": SubResource("Animation_bxfbw"),
+&"motion_west": SubResource("Animation_ote8c"),
+&"ready_east": SubResource("Animation_vdldy"),
+&"ready_north": SubResource("Animation_gatue"),
+&"ready_south": SubResource("Animation_fmjaq"),
+&"ready_west": SubResource("Animation_0k3sf")
 }

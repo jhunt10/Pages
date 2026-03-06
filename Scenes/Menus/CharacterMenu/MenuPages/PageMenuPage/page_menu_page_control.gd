@@ -38,7 +38,7 @@ func show_menu_page():
 func sync():
 	if _actor:
 		name_label.text = _actor.get_display_name()
-		level_label.text = str(_actor.stats.get_stat(StatHelper.Level, 0))
+		level_label.text = "TEST"#str(int(_actor.stats.get_stat(StatHelper.Level, 0)))
 		exp_bar.set_actor(_actor)
 	super()
 

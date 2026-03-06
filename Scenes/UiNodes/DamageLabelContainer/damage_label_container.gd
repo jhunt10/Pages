@@ -128,7 +128,7 @@ func _on_mouse_exit():
 func set_damage_data(damage_data:Dictionary, actor:BaseActor = null,  count = 1):
 	
 	if damage_data.get("ActorlessWeapon", false):
-		var attack_scale = damage_data.get("AtkPwrScale", 1)
+		attack_scale = damage_data.get("AtkPwrScale", 1)
 		atk_stat_icon.hide()
 		defense_stat_icon.hide()
 		defense_stat_label.hide()
@@ -147,17 +147,15 @@ func set_damage_data(damage_data:Dictionary, actor:BaseActor = null,  count = 1)
 		return
 	
 	var attack_stat = damage_data.get("AtkStat", "Weapon")
-	attack_power = damage_data.get("AtkPwrBase", 0)
-	attack_variant = damage_data.get("AtkPwrRange", 0)
-	var attack_scale = damage_data.get("AtkPwrScale", 1)
+	attack_power = int(damage_data.get("AtkPwrBase", 0))
+	attack_variant = int(damage_data.get("AtkPwrRange", 0))
+	attack_scale = damage_data.get("AtkPwrScale", 1)
 	
 	if count > 1:
 		count_label.text = str(count) + "x"
 		count_label.show()
 	else:
 		count_label.hide()
-	
-	var average_damage = 0
 	
 	if damage_data.get("AtkStat") == "Fixed":
 		plus_minus_label.hide()
@@ -188,8 +186,8 @@ func set_damage_data(damage_data:Dictionary, actor:BaseActor = null,  count = 1)
 		popup_message.text = line
 	
 	
-	var type_string = damage_data.get("DamageType")
-	var type = DamageTypes.get(type_string)
+	var type_str = damage_data.get("DamageType")
+	var type = DamageTypes.get(type_str)
 	if type == null:
 		type = DamageTypes.Test
 	damage_type = type

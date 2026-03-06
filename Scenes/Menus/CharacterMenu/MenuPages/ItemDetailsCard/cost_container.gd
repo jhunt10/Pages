@@ -25,13 +25,13 @@ func set_data(page:PageItemAction, actor:BaseActor):
 	if actor and actor.pages.has_item(page.Id):
 		var cost = actor.Que.get_page_ammo_cost_per_use(page.ActionKey)
 		var clip = actor.Que.get_page_ammo_max_clip(page.ActionKey)
-		cost_val_label.text = str(cost)
-		clip_val_label.text = str(clip)
+		#cost_val_label.text = str(cost)
+		#clip_val_label.text = str(clip)
 		count_val_label.text = str(floori(clip/cost))
 	else:
 		var clip = ammo_data.get("Clip", 1)
 		var cost = ammo_data.get("Cost", 1)
 		var count = floori(clip  / cost)
-		cost_val_label.text = str(cost)
-		clip_val_label.text = str(clip)
+		#cost_val_label.text = str(cost)
+		#clip_val_label.text = str(clip)
 		count_val_label.text = str(count)

@@ -1,6 +1,6 @@
-[gd_scene load_steps=55 format=3 uid="uid://cadueklilqejs"]
+[gd_scene format=3 uid="uid://cadueklilqejs"]
 
-[ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/character_menu_control.gd" id="1_b43ae"]
+[ext_resource type="Script" uid="uid://drijc2356oleo" path="res://Scenes/Menus/CharacterMenu/character_menu_control.gd" id="1_b43ae"]
 [ext_resource type="Texture2D" uid="uid://mpwjrtfjnbth" path="res://Scenes/Menus/CharacterMenu/BookBackground.png" id="2_ny2th"]
 [ext_resource type="Texture2D" uid="uid://c46ah48rf6j3w" path="res://Scenes/Menus/CharacterMenu/TabBackground.png" id="3_ktt5q"]
 [ext_resource type="PackedScene" uid="uid://lby2lub0vv8s" path="res://Scenes/Menus/CharacterMenu/PlayerTabs/player_tab_button.tscn" id="3_pmhjk"]
@@ -14,18 +14,18 @@
 [ext_resource type="PackedScene" uid="uid://c4bhs27nmviba" path="res://Scenes/Menus/CharacterMenu/MenuPages/PageMenuPage/pages_menu_page.tscn" id="10_porhc"]
 [ext_resource type="PackedScene" uid="uid://bjatwk3wdws0y" path="res://Scenes/Menus/CharacterMenu/MenuPages/SuppliesMenuPage/supplies_menu_page.tscn" id="11_j5k8v"]
 [ext_resource type="Theme" uid="uid://dwinll8pgdjhc" path="res://Scenes/Themes/standard_theme.tres" id="12_dy5pv"]
-[ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MouseOverControl/character_menu_mouse_control.gd" id="12_yj8n3"]
+[ext_resource type="Script" uid="uid://c8jheyrbbjxrh" path="res://Scenes/Menus/CharacterMenu/MouseOverControl/character_menu_mouse_control.gd" id="12_yj8n3"]
 [ext_resource type="Texture2D" uid="uid://xcjbd3xju45w" path="res://Scenes/Menus/CharacterMenu/MouseOverControl/DragItemBackground.png" id="13_0dekw"]
-[ext_resource type="Shader" path="res://Scenes/Menus/CharacterMenu/character_menu.gdshader" id="19_5ikvh"]
-[ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/SkillTreeMenuPage/level_up_page_control.gd" id="20_dw0jf"]
+[ext_resource type="Shader" uid="uid://sw8mtlu7l6dr" path="res://Scenes/Menus/CharacterMenu/character_menu.gdshader" id="19_5ikvh"]
+[ext_resource type="Script" uid="uid://ioyd3nus0jpi" path="res://Scenes/Menus/CharacterMenu/MenuPages/SkillTreeMenuPage/level_up_page_control.gd" id="20_dw0jf"]
 [ext_resource type="PackedScene" uid="uid://bivhm6cnkig2b" path="res://Scenes/Menus/CharacterMenu/MenuPages/StatsMenuPage/stats_menu_page.tscn" id="20_wjece"]
 [ext_resource type="Theme" uid="uid://cayt153s5ro4a" path="res://Scenes/Themes/standard_theme_red.tres" id="21_dpoq2"]
 [ext_resource type="PackedScene" uid="uid://dbtugo1kq2imi" path="res://Scenes/Menus/CharacterMenu/MenuPages/InventoryPage/inventory_menu_page.tscn" id="21_yal5w"]
-[ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/SkillTreeMenuPage/skill_tree_menu_page_control.gd" id="22_culn7"]
-[ext_resource type="Script" path="res://Scenes/Menus/LevelUpMenu/levelup_stat_input_container.gd" id="23_06psp"]
+[ext_resource type="Script" uid="uid://y2gsag3g4cxg" path="res://Scenes/Menus/CharacterMenu/MenuPages/SkillTreeMenuPage/skill_tree_menu_page_control.gd" id="22_culn7"]
+[ext_resource type="Script" uid="uid://cojte77dvgldq" path="res://Scenes/Menus/LevelUpMenu/levelup_stat_input_container.gd" id="23_06psp"]
 [ext_resource type="Theme" uid="uid://bfce41la62bs6" path="res://Scenes/Themes/readable_theme.tres" id="23_wu165"]
-[ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/SkillTreeMenuPage/skill_tree_background_control.gd" id="24_m2tnw"]
-[ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/SkillTreeMenuPage/skill_tree_node.gd" id="24_nm3km"]
+[ext_resource type="Script" uid="uid://enj81pt6wtmr" path="res://Scenes/Menus/CharacterMenu/MenuPages/SkillTreeMenuPage/skill_tree_background_control.gd" id="24_m2tnw"]
+[ext_resource type="Script" uid="uid://dndbsj4mjc6m6" path="res://Scenes/Menus/CharacterMenu/MenuPages/SkillTreeMenuPage/skill_tree_node.gd" id="24_nm3km"]
 [ext_resource type="Texture2D" uid="uid://6wag0sjdov42" path="res://Scenes/Menus/CharacterMenu/MenuPages/SkillTreeMenuPage/LevelUpStatButton.png" id="24_sivxw"]
 [ext_resource type="Texture2D" uid="uid://cegwhar55vupc" path="res://assets/Sprites/Paper/Common_Background.png" id="24_wc0vu"]
 [ext_resource type="Texture2D" uid="uid://d28r048mh6136" path="res://assets/Sprites/UnknownSprite.png" id="25_6r35q"]
@@ -38,19 +38,19 @@
 [ext_resource type="Texture2D" uid="uid://ci3qbej0djsng" path="res://assets/Sprites/UI/SymbolIcons/_W_Symbole.png" id="30_uaf37"]
 [ext_resource type="Texture2D" uid="uid://doywp1shkpnmd" path="res://assets/Sprites/UI/SymbolIcons/_I_Symbole.png" id="31_5ge4g"]
 [ext_resource type="Texture2D" uid="uid://c53wxsv2xpwfr" path="res://Scenes/Menus/CharacterMenu/MenuPages/SkillTreeMenuPage/ConfirmButton.png" id="33_tfaao"]
-[ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/SkillTreeMenuPage/level_up_stat_container.gd" id="35_1360k"]
+[ext_resource type="Script" uid="uid://drdphxu62pt1r" path="res://Scenes/Menus/CharacterMenu/MenuPages/SkillTreeMenuPage/level_up_stat_container.gd" id="35_1360k"]
 [ext_resource type="Texture2D" uid="uid://cll1c22bgo2p6" path="res://assets/Sprites/UI/SymbolIcons/HealthSymbol.png" id="36_5awhv"]
-[ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/SkillTreeMenuPage/paired_skill_tree_node.gd" id="42_sl545"]
+[ext_resource type="Script" uid="uid://bqo08ru41r6uw" path="res://Scenes/Menus/CharacterMenu/MenuPages/SkillTreeMenuPage/paired_skill_tree_node.gd" id="42_sl545"]
 [ext_resource type="Texture2D" uid="uid://yf4r4mr4xa2d" path="res://Scenes/Menus/CharacterMenu/MenuPages/SkillTreeMenuPage/OrSepIcon.png" id="42_yolti"]
-[ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/inv_filter_tabs_control.gd" id="43_ercvn"]
+[ext_resource type="Script" uid="uid://d3qbrb4ti8kc4" path="res://Scenes/Menus/CharacterMenu/inv_filter_tabs_control.gd" id="43_ercvn"]
 [ext_resource type="Texture2D" uid="uid://7lffl3feh6kl" path="res://Scenes/Menus/CharacterMenu/TabBackground_Small.png" id="43_gi4es"]
-[ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/InventoryPage/sub_inventory_tab.gd" id="44_vhgyr"]
+[ext_resource type="Script" uid="uid://bun05qndsirge" path="res://Scenes/Menus/CharacterMenu/MenuPages/InventoryPage/sub_inventory_tab.gd" id="44_vhgyr"]
 [ext_resource type="Texture2D" uid="uid://drptcqa6g0iua" path="res://Scenes/Menus/CharacterMenu/MenuPages/SkillTreeMenuPage/AndSepIcon.png" id="44_vo5mu"]
-[ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/confirmation_control.gd" id="47_rqcc5"]
-[ext_resource type="Script" path="res://Scenes/UiNodes/back_patch_container.gd" id="48_p3rjr"]
+[ext_resource type="Script" uid="uid://w02m8byxbxky" path="res://Scenes/Menus/CharacterMenu/confirmation_control.gd" id="47_rqcc5"]
+[ext_resource type="Script" uid="uid://b82mb4dyp17ng" path="res://Scenes/UiNodes/back_patch_container.gd" id="48_p3rjr"]
 [ext_resource type="Texture2D" uid="uid://cgrlfobidw8xl" path="res://assets/Sprites/UI/BackPatches/PaperPatch_Bigger_276x192_48.png" id="49_apoph"]
 [ext_resource type="Texture2D" uid="uid://3nlp1e8l55j5" path="res://Scenes/Menus/CharacterMenu/MenuPages/SkillTreeMenuPage/YesNoButton.png" id="50_7wqv4"]
-[ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/PlayerTabs/actor_selector_control.gd" id="50_wjl1b"]
+[ext_resource type="Script" uid="uid://l2cbwde5518b" path="res://Scenes/Menus/CharacterMenu/PlayerTabs/actor_selector_control.gd" id="50_wjl1b"]
 [ext_resource type="Texture2D" uid="uid://bwvte4g50bury" path="res://Scenes/Menus/CharacterMenu/MenuPages/SkillTreeMenuPage/YesNoButton_Pressed.png" id="51_rppsb"]
 
 [sub_resource type="GDScript" id="GDScript_la018"]
@@ -76,7 +76,7 @@ shader_parameter/x_end_factor = 0.5
 shader_parameter/y_end_factor = 0.759
 shader_parameter/reverse_dark = 0.75
 
-[node name="CharacterMenuControl" type="Control" node_paths=PackedStringArray("confirm_menu", "details_card_spawn_point", "equipment_page", "page_page", "supplies_page", "stats_page", "level_up_menu_page", "skill_tree_page", "scale_control", "inventory_container", "actor_tabs_control", "close_button", "tab_equipment_button", "tab_pages_button", "tab_supplies_button", "tab_inventory_button", "tab_stats_button", "inventory_tab_rect", "stats_tab_rect", "mouse_control")]
+[node name="CharacterMenuControl" type="Control" unique_id=1859410095 node_paths=PackedStringArray("confirm_menu", "details_card_spawn_point", "equipment_page", "page_page", "supplies_page", "stats_page", "level_up_menu_page", "skill_tree_page", "scale_control", "inventory_container", "actor_tabs_control", "close_button", "tab_equipment_button", "tab_pages_button", "tab_supplies_button", "tab_inventory_button", "tab_stats_button", "inventory_tab_rect", "stats_tab_rect", "mouse_control")]
 custom_minimum_size = Vector2(600, 420)
 layout_mode = 3
 anchors_preset = 15
@@ -107,7 +107,7 @@ inventory_tab_rect = NodePath("ScaleControl/TabsControl/InvTabButton")
 stats_tab_rect = NodePath("ScaleControl/TabsControl/StatsTabButton")
 mouse_control = NodePath("ScaleControl/MouseOverControl")
 
-[node name="BackgroundShade" type="ColorRect" parent="."]
+[node name="BackgroundShade" type="ColorRect" parent="." unique_id=1369628079]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -116,7 +116,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.705882)
 
-[node name="ScaleControl" type="Control" parent="."]
+[node name="ScaleControl" type="Control" parent="." unique_id=1807288365]
 custom_minimum_size = Vector2(664, 420)
 layout_mode = 1
 anchors_preset = 8
@@ -133,25 +133,24 @@ grow_vertical = 2
 pivot_offset = Vector2(300, 210)
 mouse_filter = 1
 
-[node name="ActorSelectorControl" type="Control" parent="ScaleControl" node_paths=PackedStringArray("buttons_container")]
-layout_mode = 3
+[node name="ActorSelectorControl" type="Control" parent="ScaleControl" unique_id=2066956541 node_paths=PackedStringArray("buttons_container")]
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("50_wjl1b")
 buttons_container = NodePath("HBoxContainer")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="ScaleControl/ActorSelectorControl"]
+[node name="HBoxContainer" type="HBoxContainer" parent="ScaleControl/ActorSelectorControl" unique_id=1949077203]
 layout_mode = 0
 offset_left = 17.0
 offset_top = -22.0
 offset_right = 285.0
 offset_bottom = 26.0
 
-[node name="PlayerTabButton" parent="ScaleControl/ActorSelectorControl/HBoxContainer" instance=ExtResource("3_pmhjk")]
+[node name="PlayerTabButton" parent="ScaleControl/ActorSelectorControl/HBoxContainer" unique_id=1035285540 instance=ExtResource("3_pmhjk")]
 layout_mode = 2
 
-[node name="NinePatchRect" type="NinePatchRect" parent="ScaleControl"]
+[node name="NinePatchRect" type="NinePatchRect" parent="ScaleControl" unique_id=883549219]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -165,7 +164,7 @@ patch_margin_top = 9
 patch_margin_right = 17
 patch_margin_bottom = 16
 
-[node name="Background" type="TextureRect" parent="ScaleControl"]
+[node name="Background" type="TextureRect" parent="ScaleControl" unique_id=1303715364]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -175,7 +174,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_ny2th")
 
-[node name="TabsControl" type="Control" parent="ScaleControl"]
+[node name="TabsControl" type="Control" parent="ScaleControl" unique_id=1194491742]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -183,7 +182,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="EquipmentTabButton" type="TextureRect" parent="ScaleControl/TabsControl"]
+[node name="EquipmentTabButton" type="TextureRect" parent="ScaleControl/TabsControl" unique_id=1234778011]
 self_modulate = Color(0.795186, 0.323344, 0.272967, 1)
 layout_mode = 0
 offset_left = -53.0
@@ -193,7 +192,7 @@ offset_bottom = 173.0
 texture = ExtResource("3_ktt5q")
 script = SubResource("GDScript_la018")
 
-[node name="TextureRect" type="TextureRect" parent="ScaleControl/TabsControl/EquipmentTabButton"]
+[node name="TextureRect" type="TextureRect" parent="ScaleControl/TabsControl/EquipmentTabButton" unique_id=1534348353]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -202,7 +201,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("4_xk513")
 
-[node name="Button" type="Button" parent="ScaleControl/TabsControl/EquipmentTabButton"]
+[node name="Button" type="Button" parent="ScaleControl/TabsControl/EquipmentTabButton" unique_id=2077427259]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -211,7 +210,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="CloseTabButton" type="TextureRect" parent="ScaleControl/TabsControl"]
+[node name="CloseTabButton" type="TextureRect" parent="ScaleControl/TabsControl" unique_id=1088731053]
 self_modulate = Color(0.795186, 0.323344, 0.272967, 1)
 layout_mode = 1
 anchors_preset = 1
@@ -226,7 +225,7 @@ texture = ExtResource("3_ktt5q")
 flip_h = true
 script = SubResource("GDScript_la018")
 
-[node name="TextureRect" type="TextureRect" parent="ScaleControl/TabsControl/CloseTabButton"]
+[node name="TextureRect" type="TextureRect" parent="ScaleControl/TabsControl/CloseTabButton" unique_id=1403755500]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -243,7 +242,7 @@ scale = Vector2(2, 2)
 texture = ExtResource("5_o0bpc")
 stretch_mode = 3
 
-[node name="CloseButton" type="Button" parent="ScaleControl/TabsControl/CloseTabButton"]
+[node name="CloseButton" type="Button" parent="ScaleControl/TabsControl/CloseTabButton" unique_id=112166323]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -252,7 +251,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="BookTabButton" type="TextureRect" parent="ScaleControl/TabsControl"]
+[node name="BookTabButton" type="TextureRect" parent="ScaleControl/TabsControl" unique_id=626849851]
 self_modulate = Color(0.466667, 0.360784, 1, 1)
 layout_mode = 0
 offset_left = -53.0
@@ -262,7 +261,7 @@ offset_bottom = 97.0
 texture = ExtResource("3_ktt5q")
 script = SubResource("GDScript_la018")
 
-[node name="TextureRect" type="TextureRect" parent="ScaleControl/TabsControl/BookTabButton"]
+[node name="TextureRect" type="TextureRect" parent="ScaleControl/TabsControl/BookTabButton" unique_id=421849966]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -271,7 +270,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("6_qgkgg")
 
-[node name="Button" type="Button" parent="ScaleControl/TabsControl/BookTabButton"]
+[node name="Button" type="Button" parent="ScaleControl/TabsControl/BookTabButton" unique_id=249510663]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -280,7 +279,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="SuppliesTabButton" type="TextureRect" parent="ScaleControl/TabsControl"]
+[node name="SuppliesTabButton" type="TextureRect" parent="ScaleControl/TabsControl" unique_id=1502640200]
 self_modulate = Color(0.281913, 0.562043, 0.43056, 1)
 layout_mode = 0
 offset_left = -53.0
@@ -290,7 +289,7 @@ offset_bottom = 249.0
 texture = ExtResource("3_ktt5q")
 script = SubResource("GDScript_la018")
 
-[node name="TextureRect" type="TextureRect" parent="ScaleControl/TabsControl/SuppliesTabButton"]
+[node name="TextureRect" type="TextureRect" parent="ScaleControl/TabsControl/SuppliesTabButton" unique_id=670714522]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -299,7 +298,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("7_t340l")
 
-[node name="Button" type="Button" parent="ScaleControl/TabsControl/SuppliesTabButton"]
+[node name="Button" type="Button" parent="ScaleControl/TabsControl/SuppliesTabButton" unique_id=703621621]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -308,7 +307,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="StatsTabButton" type="TextureRect" parent="ScaleControl/TabsControl"]
+[node name="StatsTabButton" type="TextureRect" parent="ScaleControl/TabsControl" unique_id=403521214]
 self_modulate = Color(0.592157, 0.47451, 0.282353, 1)
 layout_mode = 0
 offset_left = 653.0
@@ -319,7 +318,7 @@ texture = ExtResource("3_ktt5q")
 flip_h = true
 script = SubResource("GDScript_la018")
 
-[node name="TextureRect" type="TextureRect" parent="ScaleControl/TabsControl/StatsTabButton"]
+[node name="TextureRect" type="TextureRect" parent="ScaleControl/TabsControl/StatsTabButton" unique_id=1015827716]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -330,7 +329,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("7_es420")
 
-[node name="Button" type="Button" parent="ScaleControl/TabsControl/StatsTabButton"]
+[node name="Button" type="Button" parent="ScaleControl/TabsControl/StatsTabButton" unique_id=1553611368]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -339,7 +338,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="InvTabButton" type="TextureRect" parent="ScaleControl/TabsControl"]
+[node name="InvTabButton" type="TextureRect" parent="ScaleControl/TabsControl" unique_id=1670195446]
 visible = false
 self_modulate = Color(0.593598, 0.476128, 0.280404, 1)
 layout_mode = 0
@@ -351,7 +350,7 @@ texture = ExtResource("3_ktt5q")
 flip_h = true
 script = SubResource("GDScript_la018")
 
-[node name="TextureRect" type="TextureRect" parent="ScaleControl/TabsControl/InvTabButton"]
+[node name="TextureRect" type="TextureRect" parent="ScaleControl/TabsControl/InvTabButton" unique_id=1870147246]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -362,7 +361,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("6_4s47y")
 
-[node name="Button" type="Button" parent="ScaleControl/TabsControl/InvTabButton"]
+[node name="Button" type="Button" parent="ScaleControl/TabsControl/InvTabButton" unique_id=1422876132]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -371,7 +370,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="InvFilterControl" type="Control" parent="ScaleControl" node_paths=PackedStringArray("premade_sub_tab")]
+[node name="InvFilterControl" type="Control" parent="ScaleControl" unique_id=849088933 node_paths=PackedStringArray("premade_sub_tab")]
 visible = false
 layout_mode = 1
 anchors_preset = 1
@@ -385,7 +384,7 @@ grow_horizontal = 0
 script = ExtResource("43_ercvn")
 premade_sub_tab = NodePath("SubInventoryTab")
 
-[node name="SubInventoryTab" type="NinePatchRect" parent="ScaleControl/InvFilterControl" node_paths=PackedStringArray("highlight_texture", "name_label", "button")]
+[node name="SubInventoryTab" type="NinePatchRect" parent="ScaleControl/InvFilterControl" unique_id=81993634 node_paths=PackedStringArray("highlight_texture", "name_label", "button")]
 self_modulate = Color(0.409466, 0.588298, 0.803891, 1)
 clip_contents = true
 custom_minimum_size = Vector2(64, 0)
@@ -404,7 +403,7 @@ highlight_texture = NodePath("Highlight")
 name_label = NodePath("Control/NameLabel")
 button = NodePath("Button")
 
-[node name="Highlight" type="NinePatchRect" parent="ScaleControl/InvFilterControl/SubInventoryTab"]
+[node name="Highlight" type="NinePatchRect" parent="ScaleControl/InvFilterControl/SubInventoryTab" unique_id=1738434141]
 self_modulate = Color(1, 1, 1, -0.0287634)
 custom_minimum_size = Vector2(64, 0)
 layout_mode = 1
@@ -418,7 +417,7 @@ patch_margin_top = 15
 patch_margin_right = 10
 patch_margin_bottom = 15
 
-[node name="Control" type="Control" parent="ScaleControl/InvFilterControl/SubInventoryTab"]
+[node name="Control" type="Control" parent="ScaleControl/InvFilterControl/SubInventoryTab" unique_id=2033846763]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -428,7 +427,7 @@ offset_right = -8.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="NameLabel" type="Label" parent="ScaleControl/InvFilterControl/SubInventoryTab/Control"]
+[node name="NameLabel" type="Label" parent="ScaleControl/InvFilterControl/SubInventoryTab/Control" unique_id=1666918875]
 self_modulate = Color(0.288617, 0.311146, 1, 1)
 clip_contents = true
 layout_mode = 1
@@ -442,7 +441,7 @@ text = "Class Pages"
 vertical_alignment = 1
 text_overrun_behavior = 1
 
-[node name="Button" type="Button" parent="ScaleControl/InvFilterControl/SubInventoryTab"]
+[node name="Button" type="Button" parent="ScaleControl/InvFilterControl/SubInventoryTab" unique_id=1181420768]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -451,7 +450,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="SubInventoryTab2" type="NinePatchRect" parent="ScaleControl/InvFilterControl" node_paths=PackedStringArray("highlight_texture", "name_label")]
+[node name="SubInventoryTab2" type="NinePatchRect" parent="ScaleControl/InvFilterControl" unique_id=1370259249 node_paths=PackedStringArray("highlight_texture", "name_label")]
 self_modulate = Color(0.409466, 0.588298, 0.803891, 1)
 clip_contents = true
 custom_minimum_size = Vector2(64, 0)
@@ -470,7 +469,7 @@ grow_speed = 200
 highlight_texture = NodePath("Highlight")
 name_label = NodePath("Control/NameLabel")
 
-[node name="Highlight" type="NinePatchRect" parent="ScaleControl/InvFilterControl/SubInventoryTab2"]
+[node name="Highlight" type="NinePatchRect" parent="ScaleControl/InvFilterControl/SubInventoryTab2" unique_id=267035056]
 self_modulate = Color(1, 1, 1, -0.00780681)
 custom_minimum_size = Vector2(64, 0)
 layout_mode = 1
@@ -484,7 +483,7 @@ patch_margin_top = 15
 patch_margin_right = 10
 patch_margin_bottom = 15
 
-[node name="Control" type="Control" parent="ScaleControl/InvFilterControl/SubInventoryTab2"]
+[node name="Control" type="Control" parent="ScaleControl/InvFilterControl/SubInventoryTab2" unique_id=1859972708]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -494,7 +493,7 @@ offset_right = -8.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="NameLabel" type="Label" parent="ScaleControl/InvFilterControl/SubInventoryTab2/Control"]
+[node name="NameLabel" type="Label" parent="ScaleControl/InvFilterControl/SubInventoryTab2/Control" unique_id=548197578]
 self_modulate = Color(0.290196, 0.309804, 1, 1)
 layout_mode = 1
 anchors_preset = 15
@@ -507,7 +506,7 @@ text = "Movement"
 vertical_alignment = 1
 text_overrun_behavior = 1
 
-[node name="SubInventoryTab3" type="NinePatchRect" parent="ScaleControl/InvFilterControl" node_paths=PackedStringArray("highlight_texture", "name_label")]
+[node name="SubInventoryTab3" type="NinePatchRect" parent="ScaleControl/InvFilterControl" unique_id=1357828254 node_paths=PackedStringArray("highlight_texture", "name_label")]
 self_modulate = Color(0.409466, 0.588298, 0.803891, 1)
 clip_contents = true
 custom_minimum_size = Vector2(64, 0)
@@ -526,7 +525,7 @@ grow_speed = 200
 highlight_texture = NodePath("Highlight")
 name_label = NodePath("Control/NameLabel")
 
-[node name="Highlight" type="NinePatchRect" parent="ScaleControl/InvFilterControl/SubInventoryTab3"]
+[node name="Highlight" type="NinePatchRect" parent="ScaleControl/InvFilterControl/SubInventoryTab3" unique_id=780334639]
 self_modulate = Color(1, 1, 1, -0.0185466)
 custom_minimum_size = Vector2(64, 0)
 layout_mode = 1
@@ -540,7 +539,7 @@ patch_margin_top = 15
 patch_margin_right = 10
 patch_margin_bottom = 15
 
-[node name="Control" type="Control" parent="ScaleControl/InvFilterControl/SubInventoryTab3"]
+[node name="Control" type="Control" parent="ScaleControl/InvFilterControl/SubInventoryTab3" unique_id=1852422739]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -550,7 +549,7 @@ offset_right = -8.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="NameLabel" type="Label" parent="ScaleControl/InvFilterControl/SubInventoryTab3/Control"]
+[node name="NameLabel" type="Label" parent="ScaleControl/InvFilterControl/SubInventoryTab3/Control" unique_id=989638096]
 self_modulate = Color(0.290196, 0.309804, 1, 1)
 layout_mode = 1
 anchors_preset = 15
@@ -563,7 +562,7 @@ text = "Spell"
 vertical_alignment = 1
 text_overrun_behavior = 1
 
-[node name="SubInventoryTab4" type="NinePatchRect" parent="ScaleControl/InvFilterControl" node_paths=PackedStringArray("highlight_texture", "name_label")]
+[node name="SubInventoryTab4" type="NinePatchRect" parent="ScaleControl/InvFilterControl" unique_id=72270946 node_paths=PackedStringArray("highlight_texture", "name_label")]
 self_modulate = Color(0.409466, 0.588298, 0.803891, 1)
 clip_contents = true
 custom_minimum_size = Vector2(64, 0)
@@ -582,7 +581,7 @@ grow_speed = 200
 highlight_texture = NodePath("Highlight")
 name_label = NodePath("Control/NameLabel")
 
-[node name="Highlight" type="NinePatchRect" parent="ScaleControl/InvFilterControl/SubInventoryTab4"]
+[node name="Highlight" type="NinePatchRect" parent="ScaleControl/InvFilterControl/SubInventoryTab4" unique_id=1547275038]
 self_modulate = Color(1, 1, 1, -0.0337103)
 custom_minimum_size = Vector2(64, 0)
 layout_mode = 1
@@ -596,7 +595,7 @@ patch_margin_top = 15
 patch_margin_right = 10
 patch_margin_bottom = 15
 
-[node name="Control" type="Control" parent="ScaleControl/InvFilterControl/SubInventoryTab4"]
+[node name="Control" type="Control" parent="ScaleControl/InvFilterControl/SubInventoryTab4" unique_id=1537298731]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -606,7 +605,7 @@ offset_right = -8.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="NameLabel" type="Label" parent="ScaleControl/InvFilterControl/SubInventoryTab4/Control"]
+[node name="NameLabel" type="Label" parent="ScaleControl/InvFilterControl/SubInventoryTab4/Control" unique_id=1882903502]
 self_modulate = Color(0.290196, 0.309804, 1, 1)
 layout_mode = 1
 anchors_preset = 15
@@ -619,7 +618,7 @@ text = "Tacticts"
 vertical_alignment = 1
 text_overrun_behavior = 1
 
-[node name="LeftPageControl" type="Control" parent="ScaleControl"]
+[node name="LeftPageControl" type="Control" parent="ScaleControl" unique_id=742019308]
 layout_mode = 1
 anchors_preset = 0
 offset_left = 27.0
@@ -627,7 +626,7 @@ offset_top = 16.0
 offset_right = 319.0
 offset_bottom = 400.0
 
-[node name="PagesPage" parent="ScaleControl/LeftPageControl" instance=ExtResource("10_porhc")]
+[node name="PagesPage" parent="ScaleControl/LeftPageControl" unique_id=1533595317 instance=ExtResource("10_porhc")]
 visible = false
 custom_minimum_size = Vector2(0, 0)
 layout_mode = 1
@@ -639,7 +638,7 @@ offset_bottom = 0.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="SuppliesPage" parent="ScaleControl/LeftPageControl" instance=ExtResource("11_j5k8v")]
+[node name="SuppliesPage" parent="ScaleControl/LeftPageControl" unique_id=1093308375 instance=ExtResource("11_j5k8v")]
 visible = false
 custom_minimum_size = Vector2(0, 0)
 layout_mode = 1
@@ -651,7 +650,7 @@ offset_bottom = 0.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="EquipmentPage" parent="ScaleControl/LeftPageControl" instance=ExtResource("9_bofun")]
+[node name="EquipmentPage" parent="ScaleControl/LeftPageControl" unique_id=842350710 instance=ExtResource("9_bofun")]
 visible = false
 material = SubResource("ShaderMaterial_i55nt")
 layout_mode = 1
@@ -663,7 +662,7 @@ offset_bottom = 0.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="LevelUpPage" type="Control" parent="ScaleControl/LeftPageControl" node_paths=PackedStringArray("skill_page", "current_level_label", "points_left_label", "points_total_label", "strength_controller", "agility_controller", "intelligence_controller", "wisdom_controller", "stats_container", "confirm_button", "confirm_menu")]
+[node name="LevelUpPage" type="Control" parent="ScaleControl/LeftPageControl" unique_id=1294373346 node_paths=PackedStringArray("skill_page", "current_level_label", "points_left_label", "points_total_label", "strength_controller", "agility_controller", "intelligence_controller", "wisdom_controller", "stats_container", "confirm_button", "confirm_menu")]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -683,7 +682,7 @@ stats_container = NodePath("BoxContainer/StatsBoxContainer")
 confirm_button = NodePath("BoxContainer/TextureButton")
 confirm_menu = NodePath("../../../ConfirmationControl")
 
-[node name="BoxContainer" type="BoxContainer" parent="ScaleControl/LeftPageControl/LevelUpPage"]
+[node name="BoxContainer" type="BoxContainer" parent="ScaleControl/LeftPageControl/LevelUpPage" unique_id=692807289]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -692,25 +691,25 @@ grow_horizontal = 2
 grow_vertical = 2
 vertical = true
 
-[node name="TitleContainer" type="HBoxContainer" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer"]
+[node name="TitleContainer" type="HBoxContainer" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer" unique_id=2053861927]
 layout_mode = 2
 mouse_filter = 2
 alignment = 1
 
-[node name="VSeparator" type="VSeparator" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/TitleContainer"]
+[node name="VSeparator" type="VSeparator" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/TitleContainer" unique_id=1618034527]
 visible = false
 modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(40, 0)
 layout_mode = 2
 
-[node name="Label" type="Label" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/TitleContainer"]
+[node name="Label" type="Label" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/TitleContainer" unique_id=397589788]
 layout_mode = 2
 theme = ExtResource("21_dpoq2")
 theme_override_font_sizes/font_size = 32
 text = "Level  "
 horizontal_alignment = 1
 
-[node name="Label2" type="Label" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/TitleContainer"]
+[node name="Label2" type="Label" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/TitleContainer" unique_id=714998557]
 custom_minimum_size = Vector2(72, 0)
 layout_mode = 2
 theme = ExtResource("21_dpoq2")
@@ -718,24 +717,24 @@ theme_override_font_sizes/font_size = 32
 text = "100"
 horizontal_alignment = 1
 
-[node name="VSeparator2" type="VSeparator" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/TitleContainer"]
+[node name="VSeparator2" type="VSeparator" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/TitleContainer" unique_id=1619893276]
 visible = false
 modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(40, 0)
 layout_mode = 2
 
-[node name="PointsContainer" type="HBoxContainer" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer"]
+[node name="PointsContainer" type="HBoxContainer" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer" unique_id=258052725]
 layout_mode = 2
 alignment = 1
 
-[node name="Label" type="Label" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/PointsContainer"]
+[node name="Label" type="Label" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/PointsContainer" unique_id=476605540]
 layout_mode = 2
 theme = ExtResource("23_wu165")
 theme_override_font_sizes/font_size = 24
 text = "Stat Points:"
 horizontal_alignment = 1
 
-[node name="PointsLeftLabel" type="Label" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/PointsContainer"]
+[node name="PointsLeftLabel" type="Label" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/PointsContainer" unique_id=767316915]
 custom_minimum_size = Vector2(28, 0)
 layout_mode = 2
 theme = ExtResource("23_wu165")
@@ -743,14 +742,14 @@ theme_override_font_sizes/font_size = 24
 text = "0"
 horizontal_alignment = 1
 
-[node name="SeperatorLabel" type="Label" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/PointsContainer"]
+[node name="SeperatorLabel" type="Label" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/PointsContainer" unique_id=522951547]
 layout_mode = 2
 theme = ExtResource("23_wu165")
 theme_override_font_sizes/font_size = 24
 text = "/"
 horizontal_alignment = 1
 
-[node name="TotalPointsLabel" type="Label" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/PointsContainer"]
+[node name="TotalPointsLabel" type="Label" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/PointsContainer" unique_id=178851574]
 custom_minimum_size = Vector2(28, 0)
 layout_mode = 2
 theme = ExtResource("23_wu165")
@@ -758,10 +757,10 @@ theme_override_font_sizes/font_size = 24
 text = "0"
 horizontal_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer" unique_id=1738498266]
 layout_mode = 2
 
-[node name="StrenghtInputContainer" type="HBoxContainer" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer" node_paths=PackedStringArray("minus_button", "plus_button", "value_lable")]
+[node name="StrenghtInputContainer" type="HBoxContainer" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer" unique_id=469451466 node_paths=PackedStringArray("minus_button", "plus_button", "value_lable")]
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
 theme_override_constants/separation = 10
@@ -771,16 +770,16 @@ minus_button = NodePath("VBoxContainer/MinusButtonControl/MinusButton")
 plus_button = NodePath("VBoxContainer/PlusButtonControl/PlusButton")
 value_lable = NodePath("VBoxContainer/NewValLabel")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/StrenghtInputContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/StrenghtInputContainer" unique_id=1047249670]
 layout_mode = 2
 alignment = 1
 
-[node name="PlusButtonControl" type="Control" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/StrenghtInputContainer/VBoxContainer"]
+[node name="PlusButtonControl" type="Control" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/StrenghtInputContainer/VBoxContainer" unique_id=1582035426]
 custom_minimum_size = Vector2(64, 32)
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="PlusButton" type="TextureButton" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/StrenghtInputContainer/VBoxContainer/PlusButtonControl"]
+[node name="PlusButton" type="TextureButton" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/StrenghtInputContainer/VBoxContainer/PlusButtonControl" unique_id=1726709292]
 custom_minimum_size = Vector2(64, 32)
 layout_mode = 0
 offset_right = 64.0
@@ -790,18 +789,18 @@ texture_pressed = ExtResource("25_dbag5")
 texture_disabled = ExtResource("26_ss4i1")
 stretch_mode = 0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/StrenghtInputContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/StrenghtInputContainer/VBoxContainer" unique_id=1722194131]
 layout_mode = 2
 size_flags_vertical = 4
 theme_override_constants/separation = 0
 alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/StrenghtInputContainer/VBoxContainer/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/StrenghtInputContainer/VBoxContainer/HBoxContainer" unique_id=1006882951]
 layout_mode = 2
 texture = ExtResource("26_p4ux6")
 expand_mode = 3
 
-[node name="NameLabel" type="Label" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/StrenghtInputContainer/VBoxContainer/HBoxContainer"]
+[node name="NameLabel" type="Label" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/StrenghtInputContainer/VBoxContainer/HBoxContainer" unique_id=995285061]
 layout_mode = 2
 size_flags_vertical = 1
 theme = ExtResource("12_dy5pv")
@@ -810,7 +809,7 @@ theme_override_font_sizes/font_size = 24
 text = "tr:"
 vertical_alignment = 2
 
-[node name="NewValLabel" type="Label" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/StrenghtInputContainer/VBoxContainer"]
+[node name="NewValLabel" type="Label" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/StrenghtInputContainer/VBoxContainer" unique_id=815183230]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 size_flags_vertical = 1
@@ -821,7 +820,7 @@ text = "100"
 horizontal_alignment = 1
 vertical_alignment = 2
 
-[node name="ColorRect" type="ColorRect" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/StrenghtInputContainer/VBoxContainer/NewValLabel"]
+[node name="ColorRect" type="ColorRect" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/StrenghtInputContainer/VBoxContainer/NewValLabel" unique_id=825013762]
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 1.0
@@ -832,14 +831,14 @@ grow_horizontal = 2
 grow_vertical = 0
 color = Color(0.470588, 0, 0, 1)
 
-[node name="MinusButtonControl" type="Control" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/StrenghtInputContainer/VBoxContainer"]
+[node name="MinusButtonControl" type="Control" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/StrenghtInputContainer/VBoxContainer" unique_id=1386459663]
 custom_minimum_size = Vector2(64, 32)
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="MinusButton" type="TextureButton" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/StrenghtInputContainer/VBoxContainer/MinusButtonControl"]
+[node name="MinusButton" type="TextureButton" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/StrenghtInputContainer/VBoxContainer/MinusButtonControl" unique_id=938919555]
 custom_minimum_size = Vector2(64, 32)
-layout_mode = 2
+layout_mode = 0
 offset_right = 64.0
 offset_bottom = 32.0
 texture_normal = ExtResource("24_sivxw")
@@ -848,11 +847,11 @@ texture_disabled = ExtResource("26_ss4i1")
 stretch_mode = 0
 flip_v = true
 
-[node name="VSeparator" type="VSeparator" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer"]
+[node name="VSeparator" type="VSeparator" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer" unique_id=1750359538]
 modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 
-[node name="AgltInputContainer" type="HBoxContainer" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer" node_paths=PackedStringArray("minus_button", "plus_button", "value_lable")]
+[node name="AgltInputContainer" type="HBoxContainer" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer" unique_id=154746947 node_paths=PackedStringArray("minus_button", "plus_button", "value_lable")]
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
 theme_override_constants/separation = 10
@@ -862,16 +861,16 @@ minus_button = NodePath("VBoxContainer/MinusButtonControl/MinusButton")
 plus_button = NodePath("VBoxContainer/PlusButtonControl/PlusButton")
 value_lable = NodePath("VBoxContainer/NewValLabel")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/AgltInputContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/AgltInputContainer" unique_id=1596037955]
 layout_mode = 2
 alignment = 1
 
-[node name="PlusButtonControl" type="Control" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/AgltInputContainer/VBoxContainer"]
+[node name="PlusButtonControl" type="Control" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/AgltInputContainer/VBoxContainer" unique_id=327519632]
 custom_minimum_size = Vector2(64, 32)
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="PlusButton" type="TextureButton" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/AgltInputContainer/VBoxContainer/PlusButtonControl"]
+[node name="PlusButton" type="TextureButton" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/AgltInputContainer/VBoxContainer/PlusButtonControl" unique_id=1585572724]
 custom_minimum_size = Vector2(64, 32)
 layout_mode = 0
 offset_right = 64.0
@@ -881,18 +880,18 @@ texture_pressed = ExtResource("25_dbag5")
 texture_disabled = ExtResource("26_ss4i1")
 stretch_mode = 0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/AgltInputContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/AgltInputContainer/VBoxContainer" unique_id=807843526]
 layout_mode = 2
 size_flags_vertical = 4
 theme_override_constants/separation = 0
 alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/AgltInputContainer/VBoxContainer/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/AgltInputContainer/VBoxContainer/HBoxContainer" unique_id=1819271712]
 layout_mode = 2
 texture = ExtResource("29_pcs3j")
 expand_mode = 3
 
-[node name="NameLabel" type="Label" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/AgltInputContainer/VBoxContainer/HBoxContainer"]
+[node name="NameLabel" type="Label" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/AgltInputContainer/VBoxContainer/HBoxContainer" unique_id=1211935125]
 layout_mode = 2
 size_flags_vertical = 1
 theme = ExtResource("12_dy5pv")
@@ -901,7 +900,7 @@ theme_override_font_sizes/font_size = 24
 text = "gl:"
 vertical_alignment = 2
 
-[node name="NewValLabel" type="Label" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/AgltInputContainer/VBoxContainer"]
+[node name="NewValLabel" type="Label" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/AgltInputContainer/VBoxContainer" unique_id=2042300129]
 self_modulate = Color(0.498039, 0, 0, 1)
 custom_minimum_size = Vector2(56, 0)
 layout_mode = 2
@@ -913,7 +912,7 @@ text = "100"
 horizontal_alignment = 1
 vertical_alignment = 2
 
-[node name="ColorRect" type="ColorRect" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/AgltInputContainer/VBoxContainer/NewValLabel"]
+[node name="ColorRect" type="ColorRect" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/AgltInputContainer/VBoxContainer/NewValLabel" unique_id=781459605]
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 1.0
@@ -924,14 +923,14 @@ grow_horizontal = 2
 grow_vertical = 0
 color = Color(0.470588, 0, 0, 1)
 
-[node name="MinusButtonControl" type="Control" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/AgltInputContainer/VBoxContainer"]
+[node name="MinusButtonControl" type="Control" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/AgltInputContainer/VBoxContainer" unique_id=1352942806]
 custom_minimum_size = Vector2(64, 32)
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="MinusButton" type="TextureButton" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/AgltInputContainer/VBoxContainer/MinusButtonControl"]
+[node name="MinusButton" type="TextureButton" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/AgltInputContainer/VBoxContainer/MinusButtonControl" unique_id=1299065000]
 custom_minimum_size = Vector2(64, 32)
-layout_mode = 2
+layout_mode = 0
 offset_right = 64.0
 offset_bottom = 32.0
 texture_normal = ExtResource("24_sivxw")
@@ -940,11 +939,11 @@ texture_disabled = ExtResource("26_ss4i1")
 stretch_mode = 0
 flip_v = true
 
-[node name="VSeparator2" type="VSeparator" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer"]
+[node name="VSeparator2" type="VSeparator" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer" unique_id=708490836]
 modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 
-[node name="IntInputContainer" type="HBoxContainer" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer" node_paths=PackedStringArray("minus_button", "plus_button", "value_lable")]
+[node name="IntInputContainer" type="HBoxContainer" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer" unique_id=1995518079 node_paths=PackedStringArray("minus_button", "plus_button", "value_lable")]
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
 theme_override_constants/separation = 10
@@ -954,16 +953,16 @@ minus_button = NodePath("VBoxContainer/MinusButtonControl/MinusButton")
 plus_button = NodePath("VBoxContainer/PlusButtonControl/PlusButton")
 value_lable = NodePath("VBoxContainer/NewValLabel")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/IntInputContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/IntInputContainer" unique_id=741461907]
 layout_mode = 2
 alignment = 1
 
-[node name="PlusButtonControl" type="Control" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/IntInputContainer/VBoxContainer"]
+[node name="PlusButtonControl" type="Control" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/IntInputContainer/VBoxContainer" unique_id=967814534]
 custom_minimum_size = Vector2(64, 32)
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="PlusButton" type="TextureButton" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/IntInputContainer/VBoxContainer/PlusButtonControl"]
+[node name="PlusButton" type="TextureButton" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/IntInputContainer/VBoxContainer/PlusButtonControl" unique_id=1306051146]
 custom_minimum_size = Vector2(64, 32)
 layout_mode = 0
 offset_right = 64.0
@@ -973,18 +972,18 @@ texture_pressed = ExtResource("25_dbag5")
 texture_disabled = ExtResource("26_ss4i1")
 stretch_mode = 0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/IntInputContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/IntInputContainer/VBoxContainer" unique_id=2040761410]
 layout_mode = 2
 size_flags_vertical = 4
 theme_override_constants/separation = 0
 alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/IntInputContainer/VBoxContainer/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/IntInputContainer/VBoxContainer/HBoxContainer" unique_id=240267065]
 layout_mode = 2
 texture = ExtResource("31_5ge4g")
 expand_mode = 3
 
-[node name="NameLabel" type="Label" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/IntInputContainer/VBoxContainer/HBoxContainer"]
+[node name="NameLabel" type="Label" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/IntInputContainer/VBoxContainer/HBoxContainer" unique_id=21419688]
 layout_mode = 2
 size_flags_vertical = 1
 theme = ExtResource("12_dy5pv")
@@ -993,7 +992,7 @@ theme_override_font_sizes/font_size = 24
 text = "nt:"
 vertical_alignment = 2
 
-[node name="NewValLabel" type="Label" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/IntInputContainer/VBoxContainer"]
+[node name="NewValLabel" type="Label" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/IntInputContainer/VBoxContainer" unique_id=1194365769]
 self_modulate = Color(0.498039, 0, 0, 1)
 custom_minimum_size = Vector2(56, 0)
 layout_mode = 2
@@ -1005,7 +1004,7 @@ text = "100"
 horizontal_alignment = 1
 vertical_alignment = 2
 
-[node name="ColorRect" type="ColorRect" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/IntInputContainer/VBoxContainer/NewValLabel"]
+[node name="ColorRect" type="ColorRect" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/IntInputContainer/VBoxContainer/NewValLabel" unique_id=476110670]
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 1.0
@@ -1016,14 +1015,14 @@ grow_horizontal = 2
 grow_vertical = 0
 color = Color(0.470588, 0, 0, 1)
 
-[node name="MinusButtonControl" type="Control" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/IntInputContainer/VBoxContainer"]
+[node name="MinusButtonControl" type="Control" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/IntInputContainer/VBoxContainer" unique_id=1865938703]
 custom_minimum_size = Vector2(64, 32)
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="MinusButton" type="TextureButton" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/IntInputContainer/VBoxContainer/MinusButtonControl"]
+[node name="MinusButton" type="TextureButton" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/IntInputContainer/VBoxContainer/MinusButtonControl" unique_id=604316887]
 custom_minimum_size = Vector2(64, 32)
-layout_mode = 2
+layout_mode = 0
 offset_right = 64.0
 offset_bottom = 32.0
 texture_normal = ExtResource("24_sivxw")
@@ -1032,11 +1031,11 @@ texture_disabled = ExtResource("26_ss4i1")
 stretch_mode = 0
 flip_v = true
 
-[node name="VSeparator3" type="VSeparator" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer"]
+[node name="VSeparator3" type="VSeparator" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer" unique_id=2114926569]
 modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 
-[node name="WisInputContainer" type="HBoxContainer" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer" node_paths=PackedStringArray("minus_button", "plus_button", "value_lable")]
+[node name="WisInputContainer" type="HBoxContainer" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer" unique_id=1105233584 node_paths=PackedStringArray("minus_button", "plus_button", "value_lable")]
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
 theme_override_constants/separation = 10
@@ -1046,16 +1045,16 @@ minus_button = NodePath("VBoxContainer/MinusButtonControl/MinusButton")
 plus_button = NodePath("VBoxContainer/PlusButtonControl/PlusButton")
 value_lable = NodePath("VBoxContainer/NewValLabel")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/WisInputContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/WisInputContainer" unique_id=326364487]
 layout_mode = 2
 alignment = 1
 
-[node name="PlusButtonControl" type="Control" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/WisInputContainer/VBoxContainer"]
+[node name="PlusButtonControl" type="Control" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/WisInputContainer/VBoxContainer" unique_id=1542428777]
 custom_minimum_size = Vector2(64, 32)
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="PlusButton" type="TextureButton" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/WisInputContainer/VBoxContainer/PlusButtonControl"]
+[node name="PlusButton" type="TextureButton" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/WisInputContainer/VBoxContainer/PlusButtonControl" unique_id=931621288]
 custom_minimum_size = Vector2(64, 32)
 layout_mode = 0
 offset_right = 64.0
@@ -1065,18 +1064,18 @@ texture_pressed = ExtResource("25_dbag5")
 texture_disabled = ExtResource("26_ss4i1")
 stretch_mode = 0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/WisInputContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/WisInputContainer/VBoxContainer" unique_id=1211948288]
 layout_mode = 2
 size_flags_vertical = 4
 theme_override_constants/separation = 0
 alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/WisInputContainer/VBoxContainer/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/WisInputContainer/VBoxContainer/HBoxContainer" unique_id=822734738]
 layout_mode = 2
 texture = ExtResource("30_uaf37")
 expand_mode = 3
 
-[node name="NameLabel" type="Label" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/WisInputContainer/VBoxContainer/HBoxContainer"]
+[node name="NameLabel" type="Label" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/WisInputContainer/VBoxContainer/HBoxContainer" unique_id=575696441]
 layout_mode = 2
 size_flags_vertical = 1
 theme = ExtResource("12_dy5pv")
@@ -1085,7 +1084,7 @@ theme_override_font_sizes/font_size = 24
 text = "is:"
 vertical_alignment = 2
 
-[node name="NewValLabel" type="Label" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/WisInputContainer/VBoxContainer"]
+[node name="NewValLabel" type="Label" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/WisInputContainer/VBoxContainer" unique_id=210522050]
 self_modulate = Color(0.498039, 0, 0, 1)
 custom_minimum_size = Vector2(56, 0)
 layout_mode = 2
@@ -1097,7 +1096,7 @@ text = "100"
 horizontal_alignment = 1
 vertical_alignment = 2
 
-[node name="ColorRect" type="ColorRect" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/WisInputContainer/VBoxContainer/NewValLabel"]
+[node name="ColorRect" type="ColorRect" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/WisInputContainer/VBoxContainer/NewValLabel" unique_id=116404969]
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 1.0
@@ -1108,14 +1107,14 @@ grow_horizontal = 2
 grow_vertical = 0
 color = Color(0.470588, 0, 0, 1)
 
-[node name="MinusButtonControl" type="Control" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/WisInputContainer/VBoxContainer"]
+[node name="MinusButtonControl" type="Control" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/WisInputContainer/VBoxContainer" unique_id=1610300978]
 custom_minimum_size = Vector2(64, 32)
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="MinusButton" type="TextureButton" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/WisInputContainer/VBoxContainer/MinusButtonControl"]
+[node name="MinusButton" type="TextureButton" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/HBoxContainer/WisInputContainer/VBoxContainer/MinusButtonControl" unique_id=653432081]
 custom_minimum_size = Vector2(64, 32)
-layout_mode = 2
+layout_mode = 0
 offset_right = 64.0
 offset_bottom = 32.0
 texture_normal = ExtResource("24_sivxw")
@@ -1124,14 +1123,14 @@ texture_disabled = ExtResource("26_ss4i1")
 stretch_mode = 0
 flip_v = true
 
-[node name="StatsBoxContainer" type="BoxContainer" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer"]
+[node name="StatsBoxContainer" type="BoxContainer" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer" unique_id=2072454411]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 alignment = 1
 vertical = true
 
-[node name="Label2" type="Label" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer"]
+[node name="Label2" type="Label" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer" unique_id=652528866]
 visible = false
 layout_mode = 2
 theme = ExtResource("23_wu165")
@@ -1140,16 +1139,16 @@ text = "Stats"
 horizontal_alignment = 1
 text_overrun_behavior = 3
 
-[node name="ColorRect4" type="ColorRect" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer"]
+[node name="ColorRect4" type="ColorRect" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer" unique_id=1858778918]
 visible = false
 custom_minimum_size = Vector2(2, 2)
 layout_mode = 2
 color = Color(0.498039, 0, 0, 1)
 
-[node name="StatsContainer1" type="HBoxContainer" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer"]
+[node name="StatsContainer1" type="HBoxContainer" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer" unique_id=1103494906]
 layout_mode = 2
 
-[node name="HealthContainer" type="BoxContainer" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer1" node_paths=PackedStringArray("name_label", "icon", "value_label")]
+[node name="HealthContainer" type="BoxContainer" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer1" unique_id=928621459 node_paths=PackedStringArray("name_label", "icon", "value_label")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -1162,7 +1161,7 @@ icon = NodePath("IconRect")
 value_label = NodePath("StatLabel")
 force_to_int = true
 
-[node name="NameLabel" type="Label" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer1/HealthContainer"]
+[node name="NameLabel" type="Label" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer1/HealthContainer" unique_id=532948330]
 visible = false
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
@@ -1170,11 +1169,11 @@ theme = ExtResource("12_dy5pv")
 text = "Crs: "
 horizontal_alignment = 1
 
-[node name="IconRect" type="TextureRect" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer1/HealthContainer"]
+[node name="IconRect" type="TextureRect" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer1/HealthContainer" unique_id=1591458192]
 layout_mode = 2
 texture = ExtResource("36_5awhv")
 
-[node name="StatLabel" type="Label" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer1/HealthContainer"]
+[node name="StatLabel" type="Label" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer1/HealthContainer" unique_id=1693531518]
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 theme = ExtResource("12_dy5pv")
@@ -1182,12 +1181,12 @@ theme_override_colors/font_color = Color(1, 1, 1, 1)
 text = "000"
 horizontal_alignment = 1
 
-[node name="ColorRect2" type="ColorRect" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer1"]
+[node name="ColorRect2" type="ColorRect" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer1" unique_id=658921279]
 custom_minimum_size = Vector2(2, 2)
 layout_mode = 2
 color = Color(0.498039, 0, 0, 1)
 
-[node name="SpeedContainer" type="BoxContainer" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer1" node_paths=PackedStringArray("name_label", "icon", "value_label")]
+[node name="SpeedContainer" type="BoxContainer" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer1" unique_id=2020949169 node_paths=PackedStringArray("name_label", "icon", "value_label")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -1200,7 +1199,7 @@ icon = NodePath("IconRect")
 value_label = NodePath("StatLabel")
 force_to_int = true
 
-[node name="NameLabel" type="Label" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer1/SpeedContainer"]
+[node name="NameLabel" type="Label" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer1/SpeedContainer" unique_id=1489108031]
 visible = false
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
@@ -1208,11 +1207,11 @@ theme = ExtResource("12_dy5pv")
 text = "Crs: "
 horizontal_alignment = 1
 
-[node name="IconRect" type="TextureRect" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer1/SpeedContainer"]
+[node name="IconRect" type="TextureRect" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer1/SpeedContainer" unique_id=257366349]
 layout_mode = 2
 texture = ExtResource("36_5awhv")
 
-[node name="StatLabel" type="Label" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer1/SpeedContainer"]
+[node name="StatLabel" type="Label" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer1/SpeedContainer" unique_id=812488507]
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 theme = ExtResource("12_dy5pv")
@@ -1220,12 +1219,12 @@ theme_override_colors/font_color = Color(1, 1, 1, 1)
 text = "000"
 horizontal_alignment = 1
 
-[node name="ColorRect3" type="ColorRect" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer1"]
+[node name="ColorRect3" type="ColorRect" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer1" unique_id=696378821]
 custom_minimum_size = Vector2(2, 2)
 layout_mode = 2
 color = Color(0.498039, 0, 0, 1)
 
-[node name="MassContainer" type="BoxContainer" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer1" node_paths=PackedStringArray("name_label", "icon", "value_label")]
+[node name="MassContainer" type="BoxContainer" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer1" unique_id=732994761 node_paths=PackedStringArray("name_label", "icon", "value_label")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -1238,7 +1237,7 @@ icon = NodePath("IconRect")
 value_label = NodePath("StatLabel")
 force_to_int = true
 
-[node name="NameLabel" type="Label" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer1/MassContainer"]
+[node name="NameLabel" type="Label" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer1/MassContainer" unique_id=448962006]
 visible = false
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
@@ -1246,11 +1245,11 @@ theme = ExtResource("12_dy5pv")
 text = "Crs: "
 horizontal_alignment = 1
 
-[node name="IconRect" type="TextureRect" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer1/MassContainer"]
+[node name="IconRect" type="TextureRect" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer1/MassContainer" unique_id=46091684]
 layout_mode = 2
 texture = ExtResource("36_5awhv")
 
-[node name="StatLabel" type="Label" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer1/MassContainer"]
+[node name="StatLabel" type="Label" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer1/MassContainer" unique_id=571044620]
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 theme = ExtResource("12_dy5pv")
@@ -1258,12 +1257,12 @@ theme_override_colors/font_color = Color(1, 1, 1, 1)
 text = "000"
 horizontal_alignment = 1
 
-[node name="ColorRect4" type="ColorRect" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer1"]
+[node name="ColorRect4" type="ColorRect" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer1" unique_id=1084713343]
 custom_minimum_size = Vector2(2, 2)
 layout_mode = 2
 color = Color(0.498039, 0, 0, 1)
 
-[node name="PPRContainer" type="BoxContainer" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer1" node_paths=PackedStringArray("name_label", "icon", "value_label")]
+[node name="PPRContainer" type="BoxContainer" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer1" unique_id=1647863334 node_paths=PackedStringArray("name_label", "icon", "value_label")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -1276,7 +1275,7 @@ icon = NodePath("IconRect")
 value_label = NodePath("StatLabel")
 force_to_int = true
 
-[node name="NameLabel" type="Label" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer1/PPRContainer"]
+[node name="NameLabel" type="Label" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer1/PPRContainer" unique_id=1135460783]
 visible = false
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
@@ -1284,11 +1283,11 @@ theme = ExtResource("12_dy5pv")
 text = "Crs: "
 horizontal_alignment = 1
 
-[node name="IconRect" type="TextureRect" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer1/PPRContainer"]
+[node name="IconRect" type="TextureRect" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer1/PPRContainer" unique_id=1654033574]
 layout_mode = 2
 texture = ExtResource("36_5awhv")
 
-[node name="StatLabel" type="Label" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer1/PPRContainer"]
+[node name="StatLabel" type="Label" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer1/PPRContainer" unique_id=1153167616]
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 theme = ExtResource("12_dy5pv")
@@ -1296,15 +1295,15 @@ theme_override_colors/font_color = Color(1, 1, 1, 1)
 text = "000"
 horizontal_alignment = 1
 
-[node name="ColorRect3" type="ColorRect" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer"]
+[node name="ColorRect3" type="ColorRect" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer" unique_id=297677393]
 custom_minimum_size = Vector2(2, 2)
 layout_mode = 2
 color = Color(0.498039, 0, 0, 1)
 
-[node name="StatsContainer2" type="HBoxContainer" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer"]
+[node name="StatsContainer2" type="HBoxContainer" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer" unique_id=949544342]
 layout_mode = 2
 
-[node name="PhyAtkContainer" type="BoxContainer" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer2" node_paths=PackedStringArray("name_label", "icon", "value_label")]
+[node name="PhyAtkContainer" type="BoxContainer" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer2" unique_id=101303944 node_paths=PackedStringArray("name_label", "icon", "value_label")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -1317,7 +1316,7 @@ icon = NodePath("IconRect")
 value_label = NodePath("StatLabel")
 force_to_int = true
 
-[node name="NameLabel" type="Label" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer2/PhyAtkContainer"]
+[node name="NameLabel" type="Label" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer2/PhyAtkContainer" unique_id=883617982]
 visible = false
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
@@ -1325,11 +1324,11 @@ theme = ExtResource("12_dy5pv")
 text = "Crs: "
 horizontal_alignment = 1
 
-[node name="IconRect" type="TextureRect" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer2/PhyAtkContainer"]
+[node name="IconRect" type="TextureRect" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer2/PhyAtkContainer" unique_id=790029351]
 layout_mode = 2
 texture = ExtResource("36_5awhv")
 
-[node name="StatLabel" type="Label" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer2/PhyAtkContainer"]
+[node name="StatLabel" type="Label" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer2/PhyAtkContainer" unique_id=892950433]
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 theme = ExtResource("12_dy5pv")
@@ -1337,12 +1336,12 @@ theme_override_colors/font_color = Color(1, 1, 1, 1)
 text = "000"
 horizontal_alignment = 1
 
-[node name="ColorRect4" type="ColorRect" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer2"]
+[node name="ColorRect4" type="ColorRect" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer2" unique_id=1349486838]
 custom_minimum_size = Vector2(2, 2)
 layout_mode = 2
 color = Color(0.498039, 0, 0, 1)
 
-[node name="ArmorContainer" type="BoxContainer" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer2" node_paths=PackedStringArray("name_label", "icon", "value_label")]
+[node name="ArmorContainer" type="BoxContainer" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer2" unique_id=1789182694 node_paths=PackedStringArray("name_label", "icon", "value_label")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -1355,7 +1354,7 @@ icon = NodePath("IconRect")
 value_label = NodePath("StatLabel")
 force_to_int = true
 
-[node name="NameLabel" type="Label" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer2/ArmorContainer"]
+[node name="NameLabel" type="Label" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer2/ArmorContainer" unique_id=1295857859]
 visible = false
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
@@ -1363,11 +1362,11 @@ theme = ExtResource("12_dy5pv")
 text = "Crs: "
 horizontal_alignment = 1
 
-[node name="IconRect" type="TextureRect" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer2/ArmorContainer"]
+[node name="IconRect" type="TextureRect" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer2/ArmorContainer" unique_id=1573693029]
 layout_mode = 2
 texture = ExtResource("36_5awhv")
 
-[node name="StatLabel" type="Label" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer2/ArmorContainer"]
+[node name="StatLabel" type="Label" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer2/ArmorContainer" unique_id=1950454048]
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 theme = ExtResource("12_dy5pv")
@@ -1375,12 +1374,12 @@ theme_override_colors/font_color = Color(1, 1, 1, 1)
 text = "000"
 horizontal_alignment = 1
 
-[node name="ColorRect5" type="ColorRect" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer2"]
+[node name="ColorRect5" type="ColorRect" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer2" unique_id=1736586421]
 custom_minimum_size = Vector2(2, 2)
 layout_mode = 2
 color = Color(0.498039, 0, 0, 1)
 
-[node name="MagAtkContainer" type="BoxContainer" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer2" node_paths=PackedStringArray("name_label", "icon", "value_label")]
+[node name="MagAtkContainer" type="BoxContainer" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer2" unique_id=1191880180 node_paths=PackedStringArray("name_label", "icon", "value_label")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -1393,7 +1392,7 @@ icon = NodePath("IconRect")
 value_label = NodePath("StatLabel")
 force_to_int = true
 
-[node name="NameLabel" type="Label" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer2/MagAtkContainer"]
+[node name="NameLabel" type="Label" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer2/MagAtkContainer" unique_id=930296275]
 visible = false
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
@@ -1401,11 +1400,11 @@ theme = ExtResource("12_dy5pv")
 text = "Crs: "
 horizontal_alignment = 1
 
-[node name="IconRect" type="TextureRect" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer2/MagAtkContainer"]
+[node name="IconRect" type="TextureRect" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer2/MagAtkContainer" unique_id=505309716]
 layout_mode = 2
 texture = ExtResource("36_5awhv")
 
-[node name="StatLabel" type="Label" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer2/MagAtkContainer"]
+[node name="StatLabel" type="Label" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer2/MagAtkContainer" unique_id=527465379]
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 theme = ExtResource("12_dy5pv")
@@ -1413,12 +1412,12 @@ theme_override_colors/font_color = Color(1, 1, 1, 1)
 text = "000"
 horizontal_alignment = 1
 
-[node name="ColorRect6" type="ColorRect" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer2"]
+[node name="ColorRect6" type="ColorRect" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer2" unique_id=597259673]
 custom_minimum_size = Vector2(2, 2)
 layout_mode = 2
 color = Color(0.498039, 0, 0, 1)
 
-[node name="MagAtkContainer2" type="BoxContainer" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer2" node_paths=PackedStringArray("name_label", "icon", "value_label")]
+[node name="MagAtkContainer2" type="BoxContainer" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer2" unique_id=24357892 node_paths=PackedStringArray("name_label", "icon", "value_label")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -1431,7 +1430,7 @@ icon = NodePath("IconRect")
 value_label = NodePath("StatLabel")
 force_to_int = true
 
-[node name="NameLabel" type="Label" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer2/MagAtkContainer2"]
+[node name="NameLabel" type="Label" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer2/MagAtkContainer2" unique_id=39516378]
 visible = false
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
@@ -1439,11 +1438,11 @@ theme = ExtResource("12_dy5pv")
 text = "Crs: "
 horizontal_alignment = 1
 
-[node name="IconRect" type="TextureRect" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer2/MagAtkContainer2"]
+[node name="IconRect" type="TextureRect" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer2/MagAtkContainer2" unique_id=1398365697]
 layout_mode = 2
 texture = ExtResource("36_5awhv")
 
-[node name="StatLabel" type="Label" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer2/MagAtkContainer2"]
+[node name="StatLabel" type="Label" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer2/MagAtkContainer2" unique_id=201438519]
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 theme = ExtResource("12_dy5pv")
@@ -1451,15 +1450,15 @@ theme_override_colors/font_color = Color(1, 1, 1, 1)
 text = "000"
 horizontal_alignment = 1
 
-[node name="ColorRect5" type="ColorRect" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer"]
+[node name="ColorRect5" type="ColorRect" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer" unique_id=258552663]
 custom_minimum_size = Vector2(2, 2)
 layout_mode = 2
 color = Color(0.498039, 0, 0, 1)
 
-[node name="StatsContainer3" type="HBoxContainer" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer"]
+[node name="StatsContainer3" type="HBoxContainer" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer" unique_id=1202978225]
 layout_mode = 2
 
-[node name="AccuracyContainer" type="BoxContainer" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer3" node_paths=PackedStringArray("name_label", "icon", "value_label")]
+[node name="AccuracyContainer" type="BoxContainer" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer3" unique_id=1640889773 node_paths=PackedStringArray("name_label", "icon", "value_label")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -1472,7 +1471,7 @@ icon = NodePath("IconRect")
 value_label = NodePath("StatLabel")
 force_to_int = true
 
-[node name="NameLabel" type="Label" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer3/AccuracyContainer"]
+[node name="NameLabel" type="Label" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer3/AccuracyContainer" unique_id=1155667210]
 visible = false
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
@@ -1480,11 +1479,11 @@ theme = ExtResource("12_dy5pv")
 text = "Crs: "
 horizontal_alignment = 1
 
-[node name="IconRect" type="TextureRect" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer3/AccuracyContainer"]
+[node name="IconRect" type="TextureRect" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer3/AccuracyContainer" unique_id=557368983]
 layout_mode = 2
 texture = ExtResource("36_5awhv")
 
-[node name="StatLabel" type="Label" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer3/AccuracyContainer"]
+[node name="StatLabel" type="Label" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer3/AccuracyContainer" unique_id=1220910423]
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 theme = ExtResource("12_dy5pv")
@@ -1492,12 +1491,12 @@ theme_override_colors/font_color = Color(1, 1, 1, 1)
 text = "000"
 horizontal_alignment = 1
 
-[node name="ColorRect4" type="ColorRect" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer3"]
+[node name="ColorRect4" type="ColorRect" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer3" unique_id=1453181144]
 custom_minimum_size = Vector2(2, 2)
 layout_mode = 2
 color = Color(0.498039, 0, 0, 1)
 
-[node name="EvasionContainer" type="BoxContainer" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer3" node_paths=PackedStringArray("name_label", "icon", "value_label")]
+[node name="EvasionContainer" type="BoxContainer" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer3" unique_id=1968575482 node_paths=PackedStringArray("name_label", "icon", "value_label")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -1510,7 +1509,7 @@ icon = NodePath("IconRect")
 value_label = NodePath("StatLabel")
 force_to_int = true
 
-[node name="NameLabel" type="Label" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer3/EvasionContainer"]
+[node name="NameLabel" type="Label" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer3/EvasionContainer" unique_id=935050707]
 visible = false
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
@@ -1518,11 +1517,11 @@ theme = ExtResource("12_dy5pv")
 text = "Crs: "
 horizontal_alignment = 1
 
-[node name="IconRect" type="TextureRect" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer3/EvasionContainer"]
+[node name="IconRect" type="TextureRect" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer3/EvasionContainer" unique_id=1911521382]
 layout_mode = 2
 texture = ExtResource("36_5awhv")
 
-[node name="StatLabel" type="Label" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer3/EvasionContainer"]
+[node name="StatLabel" type="Label" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer3/EvasionContainer" unique_id=1385857865]
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 theme = ExtResource("12_dy5pv")
@@ -1530,12 +1529,12 @@ theme_override_colors/font_color = Color(1, 1, 1, 1)
 text = "000"
 horizontal_alignment = 1
 
-[node name="ColorRect5" type="ColorRect" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer3"]
+[node name="ColorRect5" type="ColorRect" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer3" unique_id=2128326300]
 custom_minimum_size = Vector2(2, 2)
 layout_mode = 2
 color = Color(0.498039, 0, 0, 1)
 
-[node name="PotencyContainer" type="BoxContainer" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer3" node_paths=PackedStringArray("name_label", "icon", "value_label")]
+[node name="PotencyContainer" type="BoxContainer" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer3" unique_id=1085317854 node_paths=PackedStringArray("name_label", "icon", "value_label")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -1548,7 +1547,7 @@ icon = NodePath("IconRect")
 value_label = NodePath("StatLabel")
 force_to_int = true
 
-[node name="NameLabel" type="Label" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer3/PotencyContainer"]
+[node name="NameLabel" type="Label" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer3/PotencyContainer" unique_id=1236038566]
 visible = false
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
@@ -1556,11 +1555,11 @@ theme = ExtResource("12_dy5pv")
 text = "Crs: "
 horizontal_alignment = 1
 
-[node name="IconRect" type="TextureRect" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer3/PotencyContainer"]
+[node name="IconRect" type="TextureRect" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer3/PotencyContainer" unique_id=723657128]
 layout_mode = 2
 texture = ExtResource("36_5awhv")
 
-[node name="StatLabel" type="Label" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer3/PotencyContainer"]
+[node name="StatLabel" type="Label" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer3/PotencyContainer" unique_id=1186189118]
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 theme = ExtResource("12_dy5pv")
@@ -1568,12 +1567,12 @@ theme_override_colors/font_color = Color(1, 1, 1, 1)
 text = "000"
 horizontal_alignment = 1
 
-[node name="ColorRect6" type="ColorRect" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer3"]
+[node name="ColorRect6" type="ColorRect" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer3" unique_id=1712151266]
 custom_minimum_size = Vector2(2, 2)
 layout_mode = 2
 color = Color(0.498039, 0, 0, 1)
 
-[node name="ProtectionContainer" type="BoxContainer" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer3" node_paths=PackedStringArray("name_label", "icon", "value_label")]
+[node name="ProtectionContainer" type="BoxContainer" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer3" unique_id=1367867916 node_paths=PackedStringArray("name_label", "icon", "value_label")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -1586,7 +1585,7 @@ icon = NodePath("IconRect")
 value_label = NodePath("StatLabel")
 force_to_int = true
 
-[node name="NameLabel" type="Label" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer3/ProtectionContainer"]
+[node name="NameLabel" type="Label" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer3/ProtectionContainer" unique_id=447979490]
 visible = false
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
@@ -1594,11 +1593,11 @@ theme = ExtResource("12_dy5pv")
 text = "Crs: "
 horizontal_alignment = 1
 
-[node name="IconRect" type="TextureRect" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer3/ProtectionContainer"]
+[node name="IconRect" type="TextureRect" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer3/ProtectionContainer" unique_id=1898609817]
 layout_mode = 2
 texture = ExtResource("36_5awhv")
 
-[node name="StatLabel" type="Label" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer3/ProtectionContainer"]
+[node name="StatLabel" type="Label" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/StatsBoxContainer/StatsContainer3/ProtectionContainer" unique_id=2019185360]
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 theme = ExtResource("12_dy5pv")
@@ -1606,16 +1605,16 @@ theme_override_colors/font_color = Color(1, 1, 1, 1)
 text = "000"
 horizontal_alignment = 1
 
-[node name="Button" type="Button" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer"]
+[node name="Button" type="Button" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer" unique_id=1225611961]
 visible = false
 layout_mode = 2
 text = "Confirm"
 
-[node name="TextureButton" type="TextureButton" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer"]
+[node name="TextureButton" type="TextureButton" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer" unique_id=398593053]
 layout_mode = 2
 texture_normal = ExtResource("33_tfaao")
 
-[node name="Label" type="Label" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/TextureButton"]
+[node name="Label" type="Label" parent="ScaleControl/LeftPageControl/LevelUpPage/BoxContainer/TextureButton" unique_id=1350027806]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -1630,12 +1629,12 @@ text = "Confirm"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Control" type="Control" parent="ScaleControl/LeftPageControl/LevelUpPage"]
+[node name="Control" type="Control" parent="ScaleControl/LeftPageControl/LevelUpPage" unique_id=2030816493]
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="RightPageControl" type="Control" parent="ScaleControl"]
+[node name="RightPageControl" type="Control" parent="ScaleControl" unique_id=1323721309]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -1646,7 +1645,7 @@ offset_right = -25.0
 offset_bottom = 400.0
 grow_horizontal = 0
 
-[node name="InventoryMenuPage" parent="ScaleControl/RightPageControl" instance=ExtResource("21_yal5w")]
+[node name="InventoryMenuPage" parent="ScaleControl/RightPageControl" unique_id=1944378902 instance=ExtResource("21_yal5w")]
 visible = false
 custom_minimum_size = Vector2(280, 384)
 layout_mode = 1
@@ -1658,12 +1657,12 @@ offset_bottom = 0.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="StatsPage" parent="ScaleControl/RightPageControl" node_paths=PackedStringArray("parent_character_menu") instance=ExtResource("20_wjece")]
+[node name="StatsPage" parent="ScaleControl/RightPageControl" unique_id=124354155 node_paths=PackedStringArray("parent_character_menu") instance=ExtResource("20_wjece")]
 visible = false
+layout_mode = 0
 parent_character_menu = NodePath("../../..")
 
-[node name="SkillTreePageControl" type="Control" parent="ScaleControl/RightPageControl" node_paths=PackedStringArray("character_menu", "scroll_bar", "background_control", "tree_container", "row_prefab", "grid_container", "skill_node_prefab", "paired_node_prefab", "unspent_points_label", "total_points_label")]
-layout_mode = 3
+[node name="SkillTreePageControl" type="Control" parent="ScaleControl/RightPageControl" unique_id=434607673 node_paths=PackedStringArray("character_menu", "scroll_bar", "background_control", "tree_container", "row_prefab", "grid_container", "skill_node_prefab", "paired_node_prefab", "unspent_points_label", "total_points_label")]
 anchors_preset = 0
 offset_right = 292.0
 offset_bottom = 384.0
@@ -1679,7 +1678,7 @@ paired_node_prefab = NodePath("VBoxContainer/HBoxContainer/SkillGridContainer/Ro
 unspent_points_label = NodePath("VBoxContainer/PointsContainer/PointsLeftLabel")
 total_points_label = NodePath("VBoxContainer/PointsContainer/TotalPointsLabel")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ScaleControl/RightPageControl/SkillTreePageControl"]
+[node name="VBoxContainer" type="VBoxContainer" parent="ScaleControl/RightPageControl/SkillTreePageControl" unique_id=980353684]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1688,18 +1687,18 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = -8
 
-[node name="PointsContainer" type="HBoxContainer" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer"]
+[node name="PointsContainer" type="HBoxContainer" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer" unique_id=523844656]
 layout_mode = 2
 alignment = 1
 
-[node name="Label" type="Label" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/PointsContainer"]
+[node name="Label" type="Label" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/PointsContainer" unique_id=1962975437]
 layout_mode = 2
 theme = ExtResource("23_wu165")
 theme_override_font_sizes/font_size = 24
 text = "Title Points:"
 horizontal_alignment = 1
 
-[node name="PointsLeftLabel" type="Label" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/PointsContainer"]
+[node name="PointsLeftLabel" type="Label" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/PointsContainer" unique_id=454369186]
 custom_minimum_size = Vector2(28, 0)
 layout_mode = 2
 theme = ExtResource("23_wu165")
@@ -1707,14 +1706,14 @@ theme_override_font_sizes/font_size = 24
 text = "0"
 horizontal_alignment = 1
 
-[node name="SeperatorLabel" type="Label" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/PointsContainer"]
+[node name="SeperatorLabel" type="Label" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/PointsContainer" unique_id=491282698]
 layout_mode = 2
 theme = ExtResource("23_wu165")
 theme_override_font_sizes/font_size = 24
 text = "/"
 horizontal_alignment = 1
 
-[node name="TotalPointsLabel" type="Label" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/PointsContainer"]
+[node name="TotalPointsLabel" type="Label" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/PointsContainer" unique_id=1859410371]
 custom_minimum_size = Vector2(28, 0)
 layout_mode = 2
 theme = ExtResource("23_wu165")
@@ -1722,23 +1721,23 @@ theme_override_font_sizes/font_size = 24
 text = "0"
 horizontal_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer" unique_id=551583825]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="SkillGridContainer" type="BoxContainer" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/HBoxContainer"]
+[node name="SkillGridContainer" type="BoxContainer" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/HBoxContainer" unique_id=1858557843]
 custom_minimum_size = Vector2(256, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 12
 vertical = true
 
-[node name="BackgroundControl" type="Control" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/HBoxContainer/SkillGridContainer" node_paths=PackedStringArray("parent_control")]
+[node name="BackgroundControl" type="Control" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/HBoxContainer/SkillGridContainer" unique_id=1037591769 node_paths=PackedStringArray("parent_control")]
 layout_mode = 2
 script = ExtResource("24_m2tnw")
 parent_control = NodePath("../../../..")
 
-[node name="ColorRect" type="ColorRect" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/HBoxContainer/SkillGridContainer/BackgroundControl"]
+[node name="ColorRect" type="ColorRect" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/HBoxContainer/SkillGridContainer/BackgroundControl" unique_id=1072369617]
 visible = false
 custom_minimum_size = Vector2(500, 500)
 layout_mode = 0
@@ -1748,12 +1747,12 @@ offset_right = 400.0
 offset_bottom = 400.0
 color = Color(0.2484, 0.2484, 0.2484, 1)
 
-[node name="Row" type="HBoxContainer" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/HBoxContainer/SkillGridContainer"]
+[node name="Row" type="HBoxContainer" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/HBoxContainer/SkillGridContainer" unique_id=1837473273]
 layout_mode = 2
 theme_override_constants/separation = 16
 alignment = 1
 
-[node name="SkillTreeNode" type="Control" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/HBoxContainer/SkillGridContainer/Row" node_paths=PackedStringArray("background_rect", "icon_rect", "button")]
+[node name="SkillTreeNode" type="Control" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/HBoxContainer/SkillGridContainer/Row" unique_id=2101123635 node_paths=PackedStringArray("background_rect", "icon_rect", "button")]
 custom_minimum_size = Vector2(48, 48)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -1763,7 +1762,7 @@ background_rect = NodePath("Background")
 icon_rect = NodePath("Icon")
 button = NodePath("Button")
 
-[node name="Background" type="TextureRect" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/HBoxContainer/SkillGridContainer/Row/SkillTreeNode"]
+[node name="Background" type="TextureRect" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/HBoxContainer/SkillGridContainer/Row/SkillTreeNode" unique_id=1745049901]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1773,7 +1772,7 @@ grow_vertical = 2
 texture = ExtResource("24_wc0vu")
 expand_mode = 1
 
-[node name="Icon" type="TextureRect" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/HBoxContainer/SkillGridContainer/Row/SkillTreeNode"]
+[node name="Icon" type="TextureRect" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/HBoxContainer/SkillGridContainer/Row/SkillTreeNode" unique_id=811904421]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1783,7 +1782,7 @@ grow_vertical = 2
 texture = ExtResource("25_6r35q")
 expand_mode = 3
 
-[node name="Highlight" type="TextureRect" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/HBoxContainer/SkillGridContainer/Row/SkillTreeNode"]
+[node name="Highlight" type="TextureRect" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/HBoxContainer/SkillGridContainer/Row/SkillTreeNode" unique_id=2044890320]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1796,7 +1795,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("26_e6msw")
 
-[node name="Outline" type="TextureRect" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/HBoxContainer/SkillGridContainer/Row/SkillTreeNode"]
+[node name="Outline" type="TextureRect" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/HBoxContainer/SkillGridContainer/Row/SkillTreeNode" unique_id=2113514312]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1809,7 +1808,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("26_e6msw")
 
-[node name="Button" type="Button" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/HBoxContainer/SkillGridContainer/Row/SkillTreeNode"]
+[node name="Button" type="Button" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/HBoxContainer/SkillGridContainer/Row/SkillTreeNode" unique_id=78859959]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -1818,12 +1817,12 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="PairedSkillTreeNode" type="Control" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/HBoxContainer/SkillGridContainer/Row"]
+[node name="PairedSkillTreeNode" type="Control" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/HBoxContainer/SkillGridContainer/Row" unique_id=1690919788]
 custom_minimum_size = Vector2(72, 48)
 layout_mode = 2
 script = ExtResource("42_sl545")
 
-[node name="SkillTreeNode1" type="Control" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/HBoxContainer/SkillGridContainer/Row/PairedSkillTreeNode" node_paths=PackedStringArray("background_rect", "icon_rect", "button")]
+[node name="SkillTreeNode1" type="Control" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/HBoxContainer/SkillGridContainer/Row/PairedSkillTreeNode" unique_id=1425234059 node_paths=PackedStringArray("background_rect", "icon_rect", "button")]
 custom_minimum_size = Vector2(48, 48)
 layout_mode = 1
 anchors_preset = 5
@@ -1838,7 +1837,7 @@ background_rect = NodePath("Background")
 icon_rect = NodePath("Icon")
 button = NodePath("Button")
 
-[node name="Background" type="TextureRect" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/HBoxContainer/SkillGridContainer/Row/PairedSkillTreeNode/SkillTreeNode1"]
+[node name="Background" type="TextureRect" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/HBoxContainer/SkillGridContainer/Row/PairedSkillTreeNode/SkillTreeNode1" unique_id=1363897328]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1848,7 +1847,7 @@ grow_vertical = 2
 texture = ExtResource("24_wc0vu")
 expand_mode = 1
 
-[node name="Icon" type="TextureRect" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/HBoxContainer/SkillGridContainer/Row/PairedSkillTreeNode/SkillTreeNode1"]
+[node name="Icon" type="TextureRect" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/HBoxContainer/SkillGridContainer/Row/PairedSkillTreeNode/SkillTreeNode1" unique_id=133384236]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1858,7 +1857,7 @@ grow_vertical = 2
 texture = ExtResource("25_6r35q")
 expand_mode = 3
 
-[node name="Highlight" type="TextureRect" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/HBoxContainer/SkillGridContainer/Row/PairedSkillTreeNode/SkillTreeNode1"]
+[node name="Highlight" type="TextureRect" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/HBoxContainer/SkillGridContainer/Row/PairedSkillTreeNode/SkillTreeNode1" unique_id=1574622096]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1871,7 +1870,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("26_e6msw")
 
-[node name="Outline" type="TextureRect" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/HBoxContainer/SkillGridContainer/Row/PairedSkillTreeNode/SkillTreeNode1"]
+[node name="Outline" type="TextureRect" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/HBoxContainer/SkillGridContainer/Row/PairedSkillTreeNode/SkillTreeNode1" unique_id=772824854]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1884,7 +1883,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("26_e6msw")
 
-[node name="Button" type="Button" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/HBoxContainer/SkillGridContainer/Row/PairedSkillTreeNode/SkillTreeNode1"]
+[node name="Button" type="Button" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/HBoxContainer/SkillGridContainer/Row/PairedSkillTreeNode/SkillTreeNode1" unique_id=1297669965]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -1893,7 +1892,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="SkillTreeNode2" type="Control" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/HBoxContainer/SkillGridContainer/Row/PairedSkillTreeNode" node_paths=PackedStringArray("background_rect", "icon_rect", "button")]
+[node name="SkillTreeNode2" type="Control" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/HBoxContainer/SkillGridContainer/Row/PairedSkillTreeNode" unique_id=711020081 node_paths=PackedStringArray("background_rect", "icon_rect", "button")]
 custom_minimum_size = Vector2(48, 48)
 layout_mode = 1
 anchors_preset = 5
@@ -1908,7 +1907,7 @@ background_rect = NodePath("Background")
 icon_rect = NodePath("Icon")
 button = NodePath("Button")
 
-[node name="Background" type="TextureRect" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/HBoxContainer/SkillGridContainer/Row/PairedSkillTreeNode/SkillTreeNode2"]
+[node name="Background" type="TextureRect" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/HBoxContainer/SkillGridContainer/Row/PairedSkillTreeNode/SkillTreeNode2" unique_id=1029653556]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1918,7 +1917,7 @@ grow_vertical = 2
 texture = ExtResource("24_wc0vu")
 expand_mode = 1
 
-[node name="Icon" type="TextureRect" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/HBoxContainer/SkillGridContainer/Row/PairedSkillTreeNode/SkillTreeNode2"]
+[node name="Icon" type="TextureRect" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/HBoxContainer/SkillGridContainer/Row/PairedSkillTreeNode/SkillTreeNode2" unique_id=1877014953]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1928,7 +1927,7 @@ grow_vertical = 2
 texture = ExtResource("25_6r35q")
 expand_mode = 3
 
-[node name="Highlight" type="TextureRect" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/HBoxContainer/SkillGridContainer/Row/PairedSkillTreeNode/SkillTreeNode2"]
+[node name="Highlight" type="TextureRect" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/HBoxContainer/SkillGridContainer/Row/PairedSkillTreeNode/SkillTreeNode2" unique_id=1285682507]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1941,7 +1940,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("26_e6msw")
 
-[node name="Outline" type="TextureRect" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/HBoxContainer/SkillGridContainer/Row/PairedSkillTreeNode/SkillTreeNode2"]
+[node name="Outline" type="TextureRect" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/HBoxContainer/SkillGridContainer/Row/PairedSkillTreeNode/SkillTreeNode2" unique_id=107970865]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1954,7 +1953,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("26_e6msw")
 
-[node name="Button" type="Button" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/HBoxContainer/SkillGridContainer/Row/PairedSkillTreeNode/SkillTreeNode2"]
+[node name="Button" type="Button" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/HBoxContainer/SkillGridContainer/Row/PairedSkillTreeNode/SkillTreeNode2" unique_id=1417327171]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -1963,7 +1962,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="OrIcon" type="TextureRect" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/HBoxContainer/SkillGridContainer/Row/PairedSkillTreeNode"]
+[node name="OrIcon" type="TextureRect" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/HBoxContainer/SkillGridContainer/Row/PairedSkillTreeNode" unique_id=1110513541]
 visible = false
 layout_mode = 1
 anchors_preset = 8
@@ -1979,7 +1978,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("42_yolti")
 
-[node name="AndIcon" type="TextureRect" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/HBoxContainer/SkillGridContainer/Row/PairedSkillTreeNode"]
+[node name="AndIcon" type="TextureRect" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/HBoxContainer/SkillGridContainer/Row/PairedSkillTreeNode" unique_id=1133701936]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -1994,7 +1993,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("44_vo5mu")
 
-[node name="HighlightPatch" type="NinePatchRect" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/HBoxContainer/SkillGridContainer/Row/PairedSkillTreeNode"]
+[node name="HighlightPatch" type="NinePatchRect" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/HBoxContainer/SkillGridContainer/Row/PairedSkillTreeNode" unique_id=480144456]
 visible = false
 layout_mode = 1
 anchors_preset = -1
@@ -2012,7 +2011,7 @@ patch_margin_top = 5
 patch_margin_right = 5
 patch_margin_bottom = 5
 
-[node name="OutlinePatch" type="NinePatchRect" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/HBoxContainer/SkillGridContainer/Row/PairedSkillTreeNode"]
+[node name="OutlinePatch" type="NinePatchRect" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/HBoxContainer/SkillGridContainer/Row/PairedSkillTreeNode" unique_id=1044767043]
 visible = false
 layout_mode = 1
 anchors_preset = -1
@@ -2030,38 +2029,37 @@ patch_margin_top = 5
 patch_margin_right = 5
 patch_margin_bottom = 5
 
-[node name="GridContainer" type="GridContainer" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/HBoxContainer/SkillGridContainer"]
+[node name="GridContainer" type="GridContainer" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/HBoxContainer/SkillGridContainer" unique_id=1763858709]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_constants/h_separation = 12
 theme_override_constants/v_separation = 12
 columns = 3
 
-[node name="ColorRect" type="ColorRect" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/HBoxContainer/SkillGridContainer/GridContainer"]
+[node name="ColorRect" type="ColorRect" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/HBoxContainer/SkillGridContainer/GridContainer" unique_id=797061863]
 custom_minimum_size = Vector2(72, 0)
 layout_mode = 2
 
-[node name="ColorRect2" type="ColorRect" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/HBoxContainer/SkillGridContainer/GridContainer"]
+[node name="ColorRect2" type="ColorRect" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/HBoxContainer/SkillGridContainer/GridContainer" unique_id=1191363997]
 custom_minimum_size = Vector2(72, 0)
 layout_mode = 2
 
-[node name="ColorRect3" type="ColorRect" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/HBoxContainer/SkillGridContainer/GridContainer"]
+[node name="ColorRect3" type="ColorRect" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/HBoxContainer/SkillGridContainer/GridContainer" unique_id=239202963]
 custom_minimum_size = Vector2(72, 0)
 layout_mode = 2
 
-[node name="ScrollContainer" type="ScrollContainer" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/HBoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/HBoxContainer" unique_id=549379307]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 horizontal_scroll_mode = 0
 vertical_scroll_mode = 3
 
-[node name="Control" type="Control" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/HBoxContainer/ScrollContainer"]
+[node name="Control" type="Control" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/HBoxContainer/ScrollContainer" unique_id=77640485]
 layout_mode = 2
 
-[node name="SkillTreeNode" type="Control" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/HBoxContainer/ScrollContainer/Control" node_paths=PackedStringArray("background_rect", "icon_rect", "button")]
+[node name="SkillTreeNode" type="Control" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/HBoxContainer/ScrollContainer/Control" unique_id=1594433292 node_paths=PackedStringArray("background_rect", "icon_rect", "button")]
 custom_minimum_size = Vector2(48, 48)
-layout_mode = 3
 anchors_preset = 0
 offset_right = 48.0
 offset_bottom = 48.0
@@ -2073,7 +2071,7 @@ background_rect = NodePath("Background")
 icon_rect = NodePath("Icon")
 button = NodePath("Button")
 
-[node name="Background" type="TextureRect" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/HBoxContainer/ScrollContainer/Control/SkillTreeNode"]
+[node name="Background" type="TextureRect" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/HBoxContainer/ScrollContainer/Control/SkillTreeNode" unique_id=1539952928]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -2083,7 +2081,7 @@ grow_vertical = 2
 texture = ExtResource("24_wc0vu")
 expand_mode = 1
 
-[node name="Icon" type="TextureRect" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/HBoxContainer/ScrollContainer/Control/SkillTreeNode"]
+[node name="Icon" type="TextureRect" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/HBoxContainer/ScrollContainer/Control/SkillTreeNode" unique_id=567695560]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -2093,7 +2091,7 @@ grow_vertical = 2
 texture = ExtResource("25_6r35q")
 expand_mode = 3
 
-[node name="Highlight" type="TextureRect" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/HBoxContainer/ScrollContainer/Control/SkillTreeNode"]
+[node name="Highlight" type="TextureRect" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/HBoxContainer/ScrollContainer/Control/SkillTreeNode" unique_id=1368671320]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -2106,7 +2104,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("26_e6msw")
 
-[node name="Outline" type="TextureRect" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/HBoxContainer/ScrollContainer/Control/SkillTreeNode"]
+[node name="Outline" type="TextureRect" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/HBoxContainer/ScrollContainer/Control/SkillTreeNode" unique_id=1845216519]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -2119,7 +2117,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("26_e6msw")
 
-[node name="Button" type="Button" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/HBoxContainer/ScrollContainer/Control/SkillTreeNode"]
+[node name="Button" type="Button" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/HBoxContainer/ScrollContainer/Control/SkillTreeNode" unique_id=1496801792]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -2128,14 +2126,14 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ScrollBar" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/HBoxContainer" node_paths=PackedStringArray("scroll_container") instance=ExtResource("27_twb55")]
+[node name="ScrollBar" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/HBoxContainer" unique_id=2058042467 node_paths=PackedStringArray("scroll_container") instance=ExtResource("27_twb55")]
 visible = false
 layout_mode = 2
 always_show = true
 scroll_container = NodePath("../ScrollContainer")
 debug_name = "SkillTree"
 
-[node name="MouseOverControl" type="Control" parent="ScaleControl" node_paths=PackedStringArray("drag_item_background", "drag_item_icon")]
+[node name="MouseOverControl" type="Control" parent="ScaleControl" unique_id=180263801 node_paths=PackedStringArray("drag_item_background", "drag_item_icon")]
 visible = false
 custom_minimum_size = Vector2(64, 64)
 anchors_preset = 0
@@ -2146,14 +2144,14 @@ script = ExtResource("12_yj8n3")
 drag_item_background = NodePath("DargItemBackground")
 drag_item_icon = NodePath("DragItemIcon")
 
-[node name="DargItemBackground" type="TextureRect" parent="ScaleControl/MouseOverControl"]
+[node name="DargItemBackground" type="TextureRect" parent="ScaleControl/MouseOverControl" unique_id=1581638200]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 mouse_filter = 2
 texture = ExtResource("13_0dekw")
 
-[node name="DragItemIcon" type="TextureRect" parent="ScaleControl/MouseOverControl"]
+[node name="DragItemIcon" type="TextureRect" parent="ScaleControl/MouseOverControl" unique_id=1725225788]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -2162,7 +2160,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="DetailsCardSpawnPoint" type="Control" parent="."]
+[node name="DetailsCardSpawnPoint" type="Control" parent="." unique_id=1245585621]
 custom_minimum_size = Vector2(300, 340)
 layout_mode = 1
 anchors_preset = 6
@@ -2179,7 +2177,7 @@ grow_vertical = 2
 scale = Vector2(1.25, 1.25)
 mouse_filter = 2
 
-[node name="ConfirmationControl" type="Control" parent="." node_paths=PackedStringArray("yes_button", "no_button")]
+[node name="ConfirmationControl" type="Control" parent="." unique_id=678345566 node_paths=PackedStringArray("yes_button", "no_button")]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -2191,7 +2189,7 @@ script = ExtResource("47_rqcc5")
 yes_button = NodePath("CenterContainer/BackPatchContainer/BoxContainer/HBoxContainer/YesButton")
 no_button = NodePath("CenterContainer/BackPatchContainer/BoxContainer/HBoxContainer/NoButton")
 
-[node name="ColorRect" type="ColorRect" parent="ConfirmationControl"]
+[node name="ColorRect" type="ColorRect" parent="ConfirmationControl" unique_id=1082403179]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -2200,7 +2198,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.125911, 0.125911, 0.125911, 0.403922)
 
-[node name="CenterContainer" type="CenterContainer" parent="ConfirmationControl"]
+[node name="CenterContainer" type="CenterContainer" parent="ConfirmationControl" unique_id=2088931089]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -2208,7 +2206,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="BackPatchContainer" type="Container" parent="ConfirmationControl/CenterContainer" node_paths=PackedStringArray("background", "inner_container")]
+[node name="BackPatchContainer" type="Container" parent="ConfirmationControl/CenterContainer" unique_id=851688053 node_paths=PackedStringArray("background", "inner_container")]
 custom_minimum_size = Vector2(223, 125)
 layout_mode = 2
 script = ExtResource("48_p3rjr")
@@ -2216,7 +2214,7 @@ background = NodePath("NinePatchRect")
 inner_container = NodePath("BoxContainer")
 margin_override = 24
 
-[node name="NinePatchRect" type="NinePatchRect" parent="ConfirmationControl/CenterContainer/BackPatchContainer"]
+[node name="NinePatchRect" type="NinePatchRect" parent="ConfirmationControl/CenterContainer/BackPatchContainer" unique_id=1072227392]
 layout_mode = 2
 texture = ExtResource("49_apoph")
 patch_margin_left = 48
@@ -2224,31 +2222,31 @@ patch_margin_top = 48
 patch_margin_right = 48
 patch_margin_bottom = 48
 
-[node name="BoxContainer" type="BoxContainer" parent="ConfirmationControl/CenterContainer/BackPatchContainer"]
+[node name="BoxContainer" type="BoxContainer" parent="ConfirmationControl/CenterContainer/BackPatchContainer" unique_id=1153655764]
 layout_mode = 2
 vertical = true
 
-[node name="Label" type="Label" parent="ConfirmationControl/CenterContainer/BackPatchContainer/BoxContainer"]
+[node name="Label" type="Label" parent="ConfirmationControl/CenterContainer/BackPatchContainer/BoxContainer" unique_id=147094047]
 layout_mode = 2
 theme = ExtResource("23_wu165")
 theme_override_font_sizes/font_size = 24
 text = "Save changes?"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="ConfirmationControl/CenterContainer/BackPatchContainer/BoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="ConfirmationControl/CenterContainer/BackPatchContainer/BoxContainer" unique_id=1205983299]
 layout_mode = 2
 alignment = 1
 
-[node name="VSeparator" type="VSeparator" parent="ConfirmationControl/CenterContainer/BackPatchContainer/BoxContainer/HBoxContainer"]
+[node name="VSeparator" type="VSeparator" parent="ConfirmationControl/CenterContainer/BackPatchContainer/BoxContainer/HBoxContainer" unique_id=745449214]
 modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="NoButton" type="TextureButton" parent="ConfirmationControl/CenterContainer/BackPatchContainer/BoxContainer/HBoxContainer"]
+[node name="NoButton" type="TextureButton" parent="ConfirmationControl/CenterContainer/BackPatchContainer/BoxContainer/HBoxContainer" unique_id=1669588749]
 layout_mode = 2
 texture_normal = ExtResource("50_7wqv4")
 texture_pressed = ExtResource("51_rppsb")
 
-[node name="Label" type="Label" parent="ConfirmationControl/CenterContainer/BackPatchContainer/BoxContainer/HBoxContainer/NoButton"]
+[node name="Label" type="Label" parent="ConfirmationControl/CenterContainer/BackPatchContainer/BoxContainer/HBoxContainer/NoButton" unique_id=2001113498]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -2262,17 +2260,17 @@ text = "No"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="VSeparator2" type="VSeparator" parent="ConfirmationControl/CenterContainer/BackPatchContainer/BoxContainer/HBoxContainer"]
+[node name="VSeparator2" type="VSeparator" parent="ConfirmationControl/CenterContainer/BackPatchContainer/BoxContainer/HBoxContainer" unique_id=2039132728]
 modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="YesButton" type="TextureButton" parent="ConfirmationControl/CenterContainer/BackPatchContainer/BoxContainer/HBoxContainer"]
+[node name="YesButton" type="TextureButton" parent="ConfirmationControl/CenterContainer/BackPatchContainer/BoxContainer/HBoxContainer" unique_id=850625477]
 layout_mode = 2
 texture_normal = ExtResource("50_7wqv4")
 texture_pressed = ExtResource("51_rppsb")
 
-[node name="Label" type="Label" parent="ConfirmationControl/CenterContainer/BackPatchContainer/BoxContainer/HBoxContainer/YesButton"]
+[node name="Label" type="Label" parent="ConfirmationControl/CenterContainer/BackPatchContainer/BoxContainer/HBoxContainer/YesButton" unique_id=1383144662]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -2286,7 +2284,7 @@ text = "Yes"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="VSeparator3" type="VSeparator" parent="ConfirmationControl/CenterContainer/BackPatchContainer/BoxContainer/HBoxContainer"]
+[node name="VSeparator3" type="VSeparator" parent="ConfirmationControl/CenterContainer/BackPatchContainer/BoxContainer/HBoxContainer" unique_id=615943796]
 modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 size_flags_horizontal = 3

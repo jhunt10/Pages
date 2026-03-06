@@ -1,4 +1,4 @@
-[gd_resource type="AnimationLibrary" load_steps=5 format=3 uid="uid://cj67fkp70yoc2"]
+[gd_resource type="AnimationLibrary" format=3 uid="uid://cj67fkp70yoc2"]
 
 [sub_resource type="Animation" id="Animation_0bqfo"]
 resource_name = "facing_east"
@@ -644,8 +644,8 @@ tracks/12/keys = {
 
 [resource]
 _data = {
-"facing_east": SubResource("Animation_0bqfo"),
-"facing_north": SubResource("Animation_2mj7g"),
-"facing_south": SubResource("Animation_okj75"),
-"facing_west": SubResource("Animation_udtio")
+&"facing_east": SubResource("Animation_0bqfo"),
+&"facing_north": SubResource("Animation_2mj7g"),
+&"facing_south": SubResource("Animation_okj75"),
+&"facing_west": SubResource("Animation_udtio")
 }

@@ -86,7 +86,7 @@ func set_actor(actor:BaseActor, confirmed:bool=false, apply_before_switch:bool=f
 	
 	_actor = actor
 	
-	var current_level = _actor.stats.get_stat(StatHelper.Level, 0)
+	var current_level:int = _actor.stats.get_stat(StatHelper.Level, 0)
 	var exp_val = _actor.stats.get_stat(StatHelper.Experience, 0)
 	next_level = current_level
 	var exp_to_next = _actor.stats.get_exp_to_next_level(current_level)
@@ -103,18 +103,6 @@ func set_actor(actor:BaseActor, confirmed:bool=false, apply_before_switch:bool=f
 		current_level_label.text = str(current_level)
 	else:
 		current_level_label.text = str(current_level) + " > " + str(next_level)
-	
-	var strength = actor.stats.get_leveled_attribute(StatHelper.Strength)
-	#strength_controller.set_values(min_attribute_value, strength)
-	
-	var agility = actor.stats.get_leveled_attribute(StatHelper.Agility)
-	#agility_controller.set_values(min_attribute_value, agility)
-	
-	var intel = actor.stats.get_leveled_attribute(StatHelper.Intelligence)
-	#intelligence_controller.set_values(min_attribute_value, intel)
-	
-	var wisdom = actor.stats.get_leveled_attribute(StatHelper.Wisdom)
-	#wisdom_controller.set_values(min_attribute_value, wisdom)
 	
 	add_values[StatHelper.Strength] = _actor.stats.attribute_levels.get(StatHelper.Strength, 0)
 	add_values[StatHelper.Agility] = _actor.stats.attribute_levels.get(StatHelper.Agility, 0)
@@ -174,7 +162,7 @@ func _sync_values():
 	for attribute in attribute_controller.keys():
 		var controller:LevelUp_AttributeContainer = attribute_controller[attribute]
 		
-		controller.value_lable.text = str(_actor.stats.get_base_stat(attribute) + add_values[attribute])
+		controller.value_lable.text = str(int(_actor.stats.get_base_stat(attribute) + add_values[attribute]))
 		if add_values[attribute] == 0:
 			controller.minus_button.disabled = true
 		else:

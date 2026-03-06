@@ -27,14 +27,11 @@ func set_action(actor:BaseActor, page_item:BasePageItem):
 	if actor and actor.pages.has_action(action.ActionKey):
 		action = actor.pages.get_action_page(action.ActionKey)
 	description_box.set_page_item(action, actor)
-	if action.has_preview_target():
-		var target_params = action.get_preview_target_params(_actor)
-		if target_params:
-			range_display.load_area_matrix(target_params.target_area)
-			range_display.show()
-		else:
-			range_display.hide()
-			target_type_label.hide()
+	var target_params = action.get_preview_target_params(_actor)
+	if target_params:
+		target_type_label.text = TargetParameters.TargetTypes.keys()[target_params.target_type]
+		range_display.load_area_matrix(target_params.target_area)
+		range_display.show()
 	else:
 		range_display.hide()
 		target_type_label.hide()
@@ -58,8 +55,8 @@ func set_action(actor:BaseActor, page_item:BasePageItem):
 			var dam_label = damage_label
 			var merged_counts = {}
 			for dam_data in damage_datas.values():
-				var hash = hash(dam_data)
-				if not merged_counts.has(hash):
+				var hash_val = hash(dam_data)
+				if not merged_counts.has(hash_val):
 					merged_counts[hash] = {"Value": dam_data, "Count": dam_data.get("PreviewCount", 1)}
 				else:
 					merged_counts[hash]['Count'] += 1
@@ -72,28 +69,27 @@ func set_action(actor:BaseActor, page_item:BasePageItem):
 	else:
 		damage_label.hide()
 	
-	var target_params = action.get_preview_target_params(actor)
-	if target_params:
-		target_type_label.text = TargetParameters.TargetTypes.keys()[target_params.target_type]
-	
 	var attack_details = action.get_load_val("AttackDetails", {})
-	var accuracy_mod = attack_details.get('AccuracyMod', 1)
-	if accuracy_mod == 1:
+	if not page_item.get_tags().has("Attack"):
 		accuracy_icon.hide()
 		accuracy_label.hide()
-	elif _actor:
-		accuracy_label.text = str(accuracy_mod * _actor.stats.get_stat(StatHelper.Accuracy))
-	else:
-		accuracy_label.text = str(accuracy_mod * 100)
-	
-	var potency_mod = attack_details.get('PotencyMod', 1)
-	if potency_mod == 1:
 		potency_icon.hide()
 		potency_label.hide()
-	elif _actor:
-		potency_label.text = str(potency_mod * _actor.stats.get_stat(StatHelper.Potency))
 	else:
-		potency_label.text = str(potency_mod * 100)
+		var accuracy_mod = attack_details.get('AccuracyMod', 1)
+		if _actor:
+			accuracy_label.text = str(accuracy_mod * _actor.stats.get_stat(StatHelper.Accuracy))
+		else:
+			accuracy_label.text = str(accuracy_mod * 100)
+		
+		var potency_mod = attack_details.get('PotencyMod', 1)
+		if potency_mod == 1:
+			potency_icon.hide()
+			potency_label.hide()
+		elif _actor:
+			potency_label.text = str(potency_mod * _actor.stats.get_stat(StatHelper.Potency))
+		else:
+			potency_label.text = str(potency_mod * 100)
 	
 	var mods_data = action.get_action_mods_meta_data()
 	if mods_data.size() > 0:

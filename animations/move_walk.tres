@@ -1,4 +1,4 @@
-[gd_resource type="AnimationLibrary" load_steps=6 format=3 uid="uid://dapqc0nh3gfpp"]
+[gd_resource type="AnimationLibrary" format=3 uid="uid://dapqc0nh3gfpp"]
 
 [sub_resource type="Animation" id="Animation_aoto3"]
 resource_name = "east"
@@ -140,9 +140,9 @@ tracks/1/keys = {
 
 [resource]
 _data = {
-"east": SubResource("Animation_aoto3"),
-"north": SubResource("Animation_lh2c6"),
-"south": SubResource("Animation_41xs4"),
-"walk": SubResource("Animation_1r7a0"),
-"west": SubResource("Animation_l7pgr")
+&"east": SubResource("Animation_aoto3"),
+&"north": SubResource("Animation_lh2c6"),
+&"south": SubResource("Animation_41xs4"),
+&"walk": SubResource("Animation_1r7a0"),
+&"west": SubResource("Animation_l7pgr")
 }
