@@ -1,10 +1,10 @@
-[gd_scene load_steps=33 format=3 uid="uid://uo60871y6t54"]
+[gd_scene format=3 uid="uid://uo60871y6t54"]
 
-[ext_resource type="Script" path="res://Scenes/Combat/MapObjects/Actors/ComplexActorNode/complex_actor_node.gd" id="1_wfbib"]
-[ext_resource type="Shader" path="res://Scenes/Combat/MapObjects/Actors/spawn_actor_shader_material.gdshader" id="2_k2j27"]
+[ext_resource type="Script" uid="uid://j628848m8kr2" path="res://Scenes/Combat/MapObjects/Actors/ComplexActorNode/complex_actor_node.gd" id="1_wfbib"]
+[ext_resource type="Shader" uid="uid://fifqeodmx06r" path="res://Scenes/Combat/MapObjects/Actors/spawn_actor_shader_material.gdshader" id="2_k2j27"]
 [ext_resource type="Texture2D" uid="uid://dcl5xlxf1t6ad" path="res://Scenes/Combat/MapObjects/Actors/ComplexActorNode/Sprites/BaseActor_SpriteSheet.png" id="3_bgyq5"]
 [ext_resource type="PackedScene" uid="uid://dooeg4ake0jdk" path="res://Scenes/Combat/MapObjects/Actors/ComplexActorNode/actor_hand_node.tscn" id="3_dpgwv"]
-[ext_resource type="Script" path="res://Scenes/Combat/MapObjects/Actors/ComplexActorNode/actor_body_sprite.gd" id="3_ltbfj"]
+[ext_resource type="Script" uid="uid://rfrjp7y63dkq" path="res://Scenes/Combat/MapObjects/Actors/ComplexActorNode/actor_body_sprite.gd" id="3_ltbfj"]
 [ext_resource type="AnimationLibrary" uid="uid://cj67fkp70yoc2" path="res://animations/facing.tres" id="4_fix78"]
 [ext_resource type="AnimationLibrary" uid="uid://bcm068oq8y7le" path="res://animations/move_turn_left.tres" id="5_dtvap"]
 [ext_resource type="AnimationLibrary" uid="uid://bwrepgkkp4h6a" path="res://animations/move_turn_right.tres" id="6_ub6w0"]
@@ -18,9 +18,9 @@
 [ext_resource type="AnimationLibrary" uid="uid://da4n7rh5w3uck" path="res://animations/move_walk_right.tres" id="10_88tvj"]
 [ext_resource type="Texture2D" uid="uid://dj76get1aahli" path="res://Scenes/Menus/SaveLoadMenu/Button_Patch_32_6.png" id="14_6kv2p"]
 [ext_resource type="Texture2D" uid="uid://dgfxtmtdjfgey" path="res://assets/Sprites/UI/QuePathArrow.png" id="14_38ite"]
-[ext_resource type="Script" path="res://Scenes/Combat/MapObjects/aura_holder.gd" id="18_4ue2w"]
+[ext_resource type="Script" uid="uid://rk5jula8e2a4" path="res://Scenes/Combat/MapObjects/aura_holder.gd" id="18_4ue2w"]
 [ext_resource type="AnimationLibrary" uid="uid://dx31wifagmnpk" path="res://Scenes/Combat/MapObjects/Actors/damage_animation_library.res" id="19_bp28d"]
-[ext_resource type="Script" path="res://Scenes/Combat/MapObjects/Actors/awareness_display_node.gd" id="21_fagl5"]
+[ext_resource type="Script" uid="uid://ckjibk7etsb75" path="res://Scenes/Combat/MapObjects/Actors/awareness_display_node.gd" id="21_fagl5"]
 [ext_resource type="Texture2D" uid="uid://bjo761ym76mti" path="res://assets/Sprites/TileSets/AwarenessTileSet.png" id="22_xdlor"]
 [ext_resource type="Texture2D" uid="uid://bbs3uvepyto08" path="res://ObjectDefs/ClassDefs/TitlePages/Sprites/SoldierIcon.png" id="24_brgje"]
 [ext_resource type="Texture2D" uid="uid://cmpc2v60v42vw" path="res://Scenes/Combat/MapObjects/Actors/ComplexActorNode/Sprites/TombStone.png" id="26_yeo0n"]
@@ -281,10 +281,10 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_yjxky"]
 _data = {
-"RESET": SubResource("Animation_y5og4"),
-"death_effect": ExtResource("8_nfimc"),
-"shake_effect": ExtResource("9_co1y3"),
-"spawn_in": SubResource("Animation_2v2kt")
+&"RESET": SubResource("Animation_y5og4"),
+&"death_effect": ExtResource("8_nfimc"),
+&"shake_effect": ExtResource("9_co1y3"),
+&"spawn_in": SubResource("Animation_2v2kt")
 }
 
 [sub_resource type="Animation" id="Animation_fneeu"]
@@ -292,7 +292,7 @@ length = 0.001
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_eolao"]
 _data = {
-"RESET": SubResource("Animation_fneeu")
+&"RESET": SubResource("Animation_fneeu")
 }
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_87ioo"]
@@ -307,7 +307,7 @@ texture_region_size = Vector2i(32, 32)
 tile_size = Vector2i(32, 32)
 sources/0 = SubResource("TileSetAtlasSource_87ioo")
 
-[node name="ActorNode" type="Node2D" node_paths=PackedStringArray("main_hand_node", "off_hand_node", "tombstone_sprite", "tombstone_portrait_sprite", "vfx_holder", "aura_holder", "actor_sprite", "path_arrow", "actor_motion_node", "offset_node", "damage_animation_player", "body_animation")]
+[node name="ActorNode" type="Node2D" unique_id=1084358338 node_paths=PackedStringArray("main_hand_node", "off_hand_node", "tombstone_sprite", "tombstone_portrait_sprite", "vfx_holder", "aura_holder", "actor_sprite", "path_arrow", "actor_motion_node", "offset_node", "damage_animation_player", "body_animation")]
 y_sort_enabled = true
 script = ExtResource("1_wfbib")
 editing_facing_direction = 2
@@ -327,28 +327,28 @@ spawn_shader_material = SubResource("ShaderMaterial_2jcyd")
 shader_val = 1.0
 metadata/_edit_horizontal_guides_ = [-40.0]
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1075671906]
 visible = false
 offset_left = -19.0
 offset_top = -26.0
 offset_right = 21.0
 offset_bottom = 14.0
 
-[node name="TileOutline" type="Sprite2D" parent="."]
+[node name="TileOutline" type="Sprite2D" parent="." unique_id=1037491910]
 visible = false
 texture = ExtResource("14_6kv2p")
 
-[node name="ActorMotionNode" type="Node2D" parent="."]
+[node name="ActorMotionNode" type="Node2D" parent="." unique_id=804905565]
 use_parent_material = true
 
-[node name="ActorSpriteNode" type="Node2D" parent="ActorMotionNode"]
+[node name="ActorSpriteNode" type="Node2D" parent="ActorMotionNode" unique_id=1032571615]
 use_parent_material = true
 
-[node name="OffsetNode" type="Node2D" parent="ActorMotionNode/ActorSpriteNode"]
+[node name="OffsetNode" type="Node2D" parent="ActorMotionNode/ActorSpriteNode" unique_id=1550687716]
 use_parent_material = true
 position = Vector2(0, -16)
 
-[node name="ActorSprite" type="Sprite2D" parent="ActorMotionNode/ActorSpriteNode/OffsetNode"]
+[node name="ActorSprite" type="Sprite2D" parent="ActorMotionNode/ActorSpriteNode/OffsetNode" unique_id=2081949340]
 use_parent_material = true
 texture = ExtResource("3_bgyq5")
 hframes = 12
@@ -356,65 +356,61 @@ vframes = 4
 script = ExtResource("3_ltbfj")
 direction = 2
 
-[node name="MainHandNode" parent="ActorMotionNode/ActorSpriteNode/OffsetNode" instance=ExtResource("3_dpgwv")]
+[node name="MainHandNode" parent="ActorMotionNode/ActorSpriteNode/OffsetNode" unique_id=574046211 instance=ExtResource("3_dpgwv")]
 z_index = 3
 weapon_z_offset = 0
 
-[node name="OffHandNode" parent="ActorMotionNode/ActorSpriteNode/OffsetNode" instance=ExtResource("3_dpgwv")]
+[node name="OffHandNode" parent="ActorMotionNode/ActorSpriteNode/OffsetNode" unique_id=913773633 instance=ExtResource("3_dpgwv")]
 visible = false
 z_index = 1
 hand = 1
 weapon_z_offset = 0
 
-[node name="VFX_OffsetNode" type="Node2D" parent="ActorMotionNode/ActorSpriteNode/OffsetNode"]
+[node name="VFX_OffsetNode" type="Node2D" parent="ActorMotionNode/ActorSpriteNode/OffsetNode" unique_id=593476726]
 
-[node name="VFXHolder" parent="ActorMotionNode" node_paths=PackedStringArray("actor_node") instance=ExtResource("6_x8vrl")]
+[node name="VFXHolder" parent="ActorMotionNode" unique_id=444101818 node_paths=PackedStringArray("actor_node") instance=ExtResource("6_x8vrl")]
 position = Vector2(0, -9)
 actor_node = NodePath("../..")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_yjxky"),
-"facing": ExtResource("4_fix78"),
-"move_turn_left": ExtResource("5_dtvap"),
-"move_turn_right": ExtResource("6_ub6w0"),
-"move_walk": ExtResource("7_0nd28"),
-"move_walk_back": ExtResource("7_7k4lr"),
-"move_walk_forward": ExtResource("8_h2r8d"),
-"move_walk_left": ExtResource("9_h7joc"),
-"move_walk_right": ExtResource("10_88tvj")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1378271192]
+libraries/ = SubResource("AnimationLibrary_yjxky")
+libraries/facing = ExtResource("4_fix78")
+libraries/move_turn_left = ExtResource("5_dtvap")
+libraries/move_turn_right = ExtResource("6_ub6w0")
+libraries/move_walk = ExtResource("7_0nd28")
+libraries/move_walk_back = ExtResource("7_7k4lr")
+libraries/move_walk_forward = ExtResource("8_h2r8d")
+libraries/move_walk_left = ExtResource("9_h7joc")
+libraries/move_walk_right = ExtResource("10_88tvj")
 
-[node name="PathArrow" type="Sprite2D" parent="."]
+[node name="PathArrow" type="Sprite2D" parent="." unique_id=1091028451]
 visible = false
 z_index = 8
 texture = ExtResource("14_38ite")
 
-[node name="DamageAnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_eolao"),
-"DamageAnimations": ExtResource("19_bp28d")
-}
+[node name="DamageAnimationPlayer" type="AnimationPlayer" parent="." unique_id=222670343]
+libraries/ = SubResource("AnimationLibrary_eolao")
+libraries/DamageAnimations = ExtResource("19_bp28d")
 
-[node name="AuraHolder" type="Node2D" parent="."]
+[node name="AuraHolder" type="Node2D" parent="." unique_id=567452004]
 script = ExtResource("18_4ue2w")
 
-[node name="AwarenessDisplayNode" type="Node2D" parent="." node_paths=PackedStringArray("actor_node", "tile_map")]
+[node name="AwarenessDisplayNode" type="Node2D" parent="." unique_id=270485859 node_paths=PackedStringArray("actor_node", "tile_map")]
 visible = false
 script = ExtResource("21_fagl5")
 actor_node = NodePath("..")
 tile_map = NodePath("TileMapLayer")
 
-[node name="TileMapLayer" type="TileMapLayer" parent="AwarenessDisplayNode"]
+[node name="TileMapLayer" type="TileMapLayer" parent="AwarenessDisplayNode" unique_id=661881274]
 position = Vector2(-16, -16)
 tile_set = SubResource("TileSet_l1f0r")
 
-[node name="TombStoneSprite" type="Sprite2D" parent="."]
+[node name="TombStoneSprite" type="Sprite2D" parent="." unique_id=641870635]
 visible = false
 position = Vector2(0, -6)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("26_yeo0n")
 
-[node name="TombStinePortrait" type="Sprite2D" parent="TombStoneSprite"]
+[node name="TombStinePortrait" type="Sprite2D" parent="TombStoneSprite" unique_id=170092231]
 position = Vector2(0, -8)
 texture = ExtResource("24_brgje")

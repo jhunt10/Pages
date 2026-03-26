@@ -9,18 +9,58 @@ class_name FileStructureBuilder
 static func DoThing():
 	#print("\nSanity Check")
 	#update_def_files()
-	get_common_props_in_files()
+	#get_common_props_in_files()
 	#build_mermaid_def_chart()
 	#create_class_def_files("Rogue")
 	#rename_test_files()
+	#output_descriptions()
 
+static func output_descriptions():
+	var all_defs = get_all_defs()
+	var desciption_mapping = {}
+	for def_key:String in all_defs:
+		var def = all_defs[def_key]
+		var description = def.get("#ObjDetails", {}).get("Description", "")
+		desciption_mapping[def_key] = description
+	
+	
+	var save_path = "C:\\Users\\johnn\\Documents\\Repos\\Pages\\ObjectDefs\\Descriptions.json"
+	var save_file = FileAccess.open(save_path, FileAccess.WRITE)
+	print("Saving File: " + save_path)
+	save_file.store_string(JSON.stringify(desciption_mapping))
+	save_file.close()
 
+static func intake_descriptions():
+	
+	var description_file = FileAccess.open("C:\\Users\\johnn\\Documents\\Repos\\Pages\\ObjectDefs\\Descriptions.json", FileAccess.READ)
+	var description_text:String = description_file.get_as_text()
+	description_file.close()
+	var descriptions:Dictionary = JSON.parse_string(description_text)
+	var files = []
+	files.append_array(BaseLoadObjectLibrary._search_for_files("res://ObjectDefs/", ".def"))
+	for file_path in files:
+		## Open File
+		var file = FileAccess.open(file_path, FileAccess.READ)
+		var text:String = file.get_as_text()
+		file.close()
+		## Update Defs
+		var defs:Dictionary = JSON.parse_string(text)
+		for def_key in defs:
+			var def:Dictionary = defs[def_key]
+			if def.keys().has("#ObjDetails"):
+				def['#ObjDetails']['Description'] = descriptions[def_key]
+		## Save File
+		var save_file = FileAccess.open(file_path, FileAccess.WRITE)
+		save_file.store_string(JSON.stringify(defs))
+		save_file.close()
+	
 
 static func get_all_defs()->Dictionary:
 	var defs_dict = {}
 	var files = []
 	#files.append_array(BaseLoadObjectLibrary._search_for_files("res://ObjectDefs/", "_PageDefs.def"))
-	files.append_array(BaseLoadObjectLibrary._search_for_files("res://ObjectDefs/", "_ItemDefs.def"))
+	#files.append_array(BaseLoadObjectLibrary._search_for_files("res://ObjectDefs/", "_ItemDefs.def"))
+	files.append_array(BaseLoadObjectLibrary._search_for_files("res://ObjectDefs/", ".def"))
 	var common_def = {}
 	var keys = []
 	for file:String in files:

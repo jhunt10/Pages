@@ -9,6 +9,8 @@ signal item_confirmed(item:BaseItem)
 
 enum States {Hidden, Growing, Showing, Shrinking}
 
+@export var exmple:String
+
 @export var showing:bool:
 	set(val):
 		showing = val

@@ -1,12 +1,54 @@
-[gd_scene load_steps=6 format=3 uid="uid://c31cwcs4hgmpa"]
+[gd_scene format=3 uid="uid://c31cwcs4hgmpa"]
 
 [ext_resource type="Texture2D" uid="uid://ccv4ridl8evo8" path="res://assets/Sprites/UI/MenuButtonBackground.png" id="1_gojdr"]
-[ext_resource type="Script" path="res://Scenes/Menus/MainMenu/main_menu_scene.gd" id="1_ytar2"]
-[ext_resource type="Texture2D" uid="uid://dg6wd03j2b0ff" path="res://assets/Sprites/UI/SymbolIcons/_P_Big.png" id="2_0l3p2"]
+[ext_resource type="Texture2D" uid="uid://bwbvifw2c8wlg" path="res://Scenes/Menus/CampMenu/PaperBackground.png" id="1_ulqgf"]
+[ext_resource type="Script" uid="uid://nt4igw4kdgxn" path="res://Scenes/Menus/MainMenu/main_menu_scene.gd" id="1_ytar2"]
+[ext_resource type="Texture2D" uid="uid://brs3cugoogpf0" path="res://Scenes/Dialog/PopUps/OutlinePopUp/FancyOutlineShadowed_BackPatch_Big_128_36.png" id="2_8yy81"]
 [ext_resource type="Texture2D" uid="uid://brpsb4iq3cd3k" path="res://assets/Sprites/UI/MenuButtonBackground_Pressed.png" id="3_78x4c"]
 [ext_resource type="Theme" uid="uid://dwinll8pgdjhc" path="res://Scenes/Themes/standard_theme.tres" id="3_jsv24"]
+[ext_resource type="Texture2D" uid="uid://bclhw51q16hbv" path="res://assets/Fonts/CapitalP.svg" id="4_ow5ob"]
+[ext_resource type="PackedScene" uid="uid://dg7ao5bq0jo38" path="res://Scenes/UiNodes/MenuOptionLabel/menu_option_label.tscn" id="8_8yy81"]
 
-[node name="MainMenuRootControl" type="VBoxContainer"]
+[node name="Control" type="Control" unique_id=151721312]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PaperBackground" type="NinePatchRect" parent="." unique_id=1639092606]
+custom_minimum_size = Vector2(1152, 648)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_ulqgf")
+region_rect = Rect2(0, 0, 300, 200)
+patch_margin_left = 9
+patch_margin_top = 9
+patch_margin_right = 9
+patch_margin_bottom = 9
+
+[node name="OutlinePatch" type="NinePatchRect" parent="." unique_id=180159298]
+custom_minimum_size = Vector2(1152, 648)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_8yy81")
+region_rect = Rect2(0, 0, 128, 128)
+patch_margin_left = 36
+patch_margin_top = 36
+patch_margin_right = 36
+patch_margin_bottom = 36
+
+[node name="MainMenuRootControl" type="VBoxContainer" parent="." unique_id=1048224019]
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -16,39 +58,40 @@ theme_override_constants/separation = 20
 alignment = 1
 script = ExtResource("1_ytar2")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="TitleContainer" type="HBoxContainer" parent="MainMenuRootControl" unique_id=2125178157]
 layout_mode = 2
 theme_override_constants/separation = 7
 alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="MainMenuRootControl/TitleContainer" unique_id=1349016641]
 layout_mode = 2
-texture = ExtResource("2_0l3p2")
+texture = ExtResource("4_ow5ob")
 expand_mode = 3
 
-[node name="TitleLabel" type="Label" parent="HBoxContainer"]
-self_modulate = Color(0.498039, 0, 0, 1)
+[node name="TitleLabel" type="Label" parent="MainMenuRootControl/TitleContainer" unique_id=459185724]
 layout_mode = 2
 theme = ExtResource("3_jsv24")
-theme_override_font_sizes/font_size = 64
+theme_override_colors/font_color = Color(0.49803922, 0, 0, 1)
+theme_override_font_sizes/font_size = 92
 text = "AGES"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="OptionsContainer" type="VBoxContainer" parent="MainMenuRootControl" unique_id=1245416537]
 layout_mode = 2
+alignment = 1
 
-[node name="TutorialContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="TutorialContainer" type="HBoxContainer" parent="MainMenuRootControl/OptionsContainer" unique_id=1858705647]
 visible = false
 layout_mode = 2
 alignment = 1
 
-[node name="TutorialButton" type="TextureButton" parent="VBoxContainer/TutorialContainer"]
+[node name="TutorialButton" type="TextureButton" parent="MainMenuRootControl/OptionsContainer/TutorialContainer" unique_id=1417524050]
 layout_mode = 2
 texture_normal = ExtResource("1_gojdr")
 texture_pressed = ExtResource("3_78x4c")
 texture_disabled = ExtResource("3_78x4c")
 stretch_mode = 0
 
-[node name="Label" type="Label" parent="VBoxContainer/TutorialContainer/TutorialButton"]
+[node name="Label" type="Label" parent="MainMenuRootControl/OptionsContainer/TutorialContainer/TutorialButton" unique_id=706145454]
 modulate = Color(0.462291, 0.462291, 0.462291, 1)
 layout_mode = 1
 anchors_preset = 15
@@ -61,18 +104,19 @@ text = "Tutorial"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="StartContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="StartContainer" type="HBoxContainer" parent="MainMenuRootControl/OptionsContainer" unique_id=1589396960]
+visible = false
 layout_mode = 2
 alignment = 1
 
-[node name="StartButton" type="TextureButton" parent="VBoxContainer/StartContainer"]
+[node name="StartButton" type="TextureButton" parent="MainMenuRootControl/OptionsContainer/StartContainer" unique_id=861525093]
 layout_mode = 2
 texture_normal = ExtResource("1_gojdr")
 texture_pressed = ExtResource("3_78x4c")
 texture_disabled = ExtResource("3_78x4c")
 stretch_mode = 0
 
-[node name="Label" type="Label" parent="VBoxContainer/StartContainer/StartButton"]
+[node name="Label" type="Label" parent="MainMenuRootControl/OptionsContainer/StartContainer/StartButton" unique_id=1196822408]
 modulate = Color(0.462291, 0.462291, 0.462291, 1)
 layout_mode = 1
 anchors_preset = 15
@@ -85,18 +129,19 @@ text = "Start"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="LoadContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="LoadContainer" type="HBoxContainer" parent="MainMenuRootControl/OptionsContainer" unique_id=1640719980]
+visible = false
 layout_mode = 2
 alignment = 1
 
-[node name="LoadButton" type="TextureButton" parent="VBoxContainer/LoadContainer"]
+[node name="LoadButton" type="TextureButton" parent="MainMenuRootControl/OptionsContainer/LoadContainer" unique_id=182989290]
 layout_mode = 2
 texture_normal = ExtResource("1_gojdr")
 texture_pressed = ExtResource("3_78x4c")
 texture_disabled = ExtResource("3_78x4c")
 stretch_mode = 0
 
-[node name="Label" type="Label" parent="VBoxContainer/LoadContainer/LoadButton"]
+[node name="Label" type="Label" parent="MainMenuRootControl/OptionsContainer/LoadContainer/LoadButton" unique_id=1248598497]
 modulate = Color(0.462291, 0.462291, 0.462291, 1)
 layout_mode = 1
 anchors_preset = 15
@@ -109,18 +154,19 @@ text = "Load"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="PagesContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="PagesContainer" type="HBoxContainer" parent="MainMenuRootControl/OptionsContainer" unique_id=443593080]
+visible = false
 layout_mode = 2
 alignment = 1
 
-[node name="PagesButton" type="TextureButton" parent="VBoxContainer/PagesContainer"]
+[node name="PagesButton" type="TextureButton" parent="MainMenuRootControl/OptionsContainer/PagesContainer" unique_id=1891922873]
 layout_mode = 2
 texture_normal = ExtResource("1_gojdr")
 texture_pressed = ExtResource("3_78x4c")
 texture_disabled = ExtResource("3_78x4c")
 stretch_mode = 0
 
-[node name="Label" type="Label" parent="VBoxContainer/PagesContainer/PagesButton"]
+[node name="Label" type="Label" parent="MainMenuRootControl/OptionsContainer/PagesContainer/PagesButton" unique_id=759296737]
 modulate = Color(0.462291, 0.462291, 0.462291, 1)
 layout_mode = 1
 anchors_preset = 15
@@ -133,19 +179,19 @@ text = "Data"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="MoreContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="MoreContainer" type="HBoxContainer" parent="MainMenuRootControl/OptionsContainer" unique_id=1605739254]
 visible = false
 layout_mode = 2
 alignment = 1
 
-[node name="MoreButton" type="TextureButton" parent="VBoxContainer/MoreContainer"]
+[node name="MoreButton" type="TextureButton" parent="MainMenuRootControl/OptionsContainer/MoreContainer" unique_id=583610244]
 layout_mode = 2
 texture_normal = ExtResource("1_gojdr")
 texture_pressed = ExtResource("3_78x4c")
 texture_disabled = ExtResource("3_78x4c")
 stretch_mode = 0
 
-[node name="Label" type="Label" parent="VBoxContainer/MoreContainer/MoreButton"]
+[node name="Label" type="Label" parent="MainMenuRootControl/OptionsContainer/MoreContainer/MoreButton" unique_id=2047532370]
 modulate = Color(0.462291, 0.462291, 0.462291, 1)
 layout_mode = 1
 anchors_preset = 15
@@ -158,18 +204,19 @@ text = "More"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="QuitContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="QuitContainer" type="HBoxContainer" parent="MainMenuRootControl/OptionsContainer" unique_id=296893143]
+visible = false
 layout_mode = 2
 alignment = 1
 
-[node name="QuitButton" type="TextureButton" parent="VBoxContainer/QuitContainer"]
+[node name="QuitButton" type="TextureButton" parent="MainMenuRootControl/OptionsContainer/QuitContainer" unique_id=478336315]
 layout_mode = 2
 texture_normal = ExtResource("1_gojdr")
 texture_pressed = ExtResource("3_78x4c")
 texture_disabled = ExtResource("3_78x4c")
 stretch_mode = 0
 
-[node name="Label" type="Label" parent="VBoxContainer/QuitContainer/QuitButton"]
+[node name="Label" type="Label" parent="MainMenuRootControl/OptionsContainer/QuitContainer/QuitButton" unique_id=2070358354]
 modulate = Color(0.462291, 0.462291, 0.462291, 1)
 layout_mode = 1
 anchors_preset = 15
@@ -182,22 +229,45 @@ text = "Quit"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="."]
+[node name="Continue_OptionLabel" parent="MainMenuRootControl/OptionsContainer" unique_id=431171216 instance=ExtResource("8_8yy81")]
+layout_mode = 2
+text = "Continue"
+
+[node name="Start_OptionLabel" parent="MainMenuRootControl/OptionsContainer" unique_id=539147037 instance=ExtResource("8_8yy81")]
+layout_mode = 2
+text = "Start"
+
+[node name="Load_OptionLabel" parent="MainMenuRootControl/OptionsContainer" unique_id=1156040400 instance=ExtResource("8_8yy81")]
+layout_mode = 2
+text = "Load"
+
+[node name="Data_OptionLabel" parent="MainMenuRootControl/OptionsContainer" unique_id=1144833048 instance=ExtResource("8_8yy81")]
+layout_mode = 2
+text = "Data"
+
+[node name="Quit_OptionLabel" parent="MainMenuRootControl/OptionsContainer" unique_id=298138740 instance=ExtResource("8_8yy81")]
+layout_mode = 2
+text = "Close"
+
+[node name="Label" type="Label" parent="MainMenuRootControl/OptionsContainer" unique_id=262225648]
+layout_mode = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="MainMenuRootControl" unique_id=531032398]
 visible = false
 layout_mode = 2
 
-[node name="AnimationTesterContainer" type="HBoxContainer" parent="VBoxContainer2"]
+[node name="AnimationTesterContainer" type="HBoxContainer" parent="MainMenuRootControl/VBoxContainer2" unique_id=941199097]
 layout_mode = 2
 alignment = 1
 
-[node name="AnimationsButton" type="TextureButton" parent="VBoxContainer2/AnimationTesterContainer"]
+[node name="AnimationsButton" type="TextureButton" parent="MainMenuRootControl/VBoxContainer2/AnimationTesterContainer" unique_id=358112114]
 layout_mode = 2
 texture_normal = ExtResource("1_gojdr")
 texture_pressed = ExtResource("3_78x4c")
 texture_disabled = ExtResource("3_78x4c")
 stretch_mode = 0
 
-[node name="Label" type="Label" parent="VBoxContainer2/AnimationTesterContainer/AnimationsButton"]
+[node name="Label" type="Label" parent="MainMenuRootControl/VBoxContainer2/AnimationTesterContainer/AnimationsButton" unique_id=1655459357]
 modulate = Color(0.462291, 0.462291, 0.462291, 1)
 layout_mode = 1
 anchors_preset = 15
@@ -210,18 +280,18 @@ text = "Animations"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="PagesContainer" type="HBoxContainer" parent="VBoxContainer2"]
+[node name="PagesContainer" type="HBoxContainer" parent="MainMenuRootControl/VBoxContainer2" unique_id=675404354]
 layout_mode = 2
 alignment = 1
 
-[node name="PagesButton" type="TextureButton" parent="VBoxContainer2/PagesContainer"]
+[node name="PagesButton" type="TextureButton" parent="MainMenuRootControl/VBoxContainer2/PagesContainer" unique_id=86053817]
 layout_mode = 2
 texture_normal = ExtResource("1_gojdr")
 texture_pressed = ExtResource("3_78x4c")
 texture_disabled = ExtResource("3_78x4c")
 stretch_mode = 0
 
-[node name="Label" type="Label" parent="VBoxContainer2/PagesContainer/PagesButton"]
+[node name="Label" type="Label" parent="MainMenuRootControl/VBoxContainer2/PagesContainer/PagesButton" unique_id=2008210160]
 modulate = Color(0.462291, 0.462291, 0.462291, 1)
 layout_mode = 1
 anchors_preset = 15
@@ -234,18 +304,18 @@ text = "Pages"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="EffectsContainer" type="HBoxContainer" parent="VBoxContainer2"]
+[node name="EffectsContainer" type="HBoxContainer" parent="MainMenuRootControl/VBoxContainer2" unique_id=1992652472]
 layout_mode = 2
 alignment = 1
 
-[node name="EffectsButton" type="TextureButton" parent="VBoxContainer2/EffectsContainer"]
+[node name="EffectsButton" type="TextureButton" parent="MainMenuRootControl/VBoxContainer2/EffectsContainer" unique_id=610721678]
 layout_mode = 2
 texture_normal = ExtResource("1_gojdr")
 texture_pressed = ExtResource("3_78x4c")
 texture_disabled = ExtResource("3_78x4c")
 stretch_mode = 0
 
-[node name="Label" type="Label" parent="VBoxContainer2/EffectsContainer/EffectsButton"]
+[node name="Label" type="Label" parent="MainMenuRootControl/VBoxContainer2/EffectsContainer/EffectsButton" unique_id=898572580]
 modulate = Color(0.462291, 0.462291, 0.462291, 1)
 layout_mode = 1
 anchors_preset = 15
@@ -258,18 +328,18 @@ text = "Effects"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="DevToolsContainer" type="HBoxContainer" parent="VBoxContainer2"]
+[node name="DevToolsContainer" type="HBoxContainer" parent="MainMenuRootControl/VBoxContainer2" unique_id=1013355496]
 layout_mode = 2
 alignment = 1
 
-[node name="DevToolsButton" type="TextureButton" parent="VBoxContainer2/DevToolsContainer"]
+[node name="DevToolsButton" type="TextureButton" parent="MainMenuRootControl/VBoxContainer2/DevToolsContainer" unique_id=907444301]
 layout_mode = 2
 texture_normal = ExtResource("1_gojdr")
 texture_pressed = ExtResource("3_78x4c")
 texture_disabled = ExtResource("3_78x4c")
 stretch_mode = 0
 
-[node name="DevLabel" type="Label" parent="VBoxContainer2/DevToolsContainer/DevToolsButton"]
+[node name="DevLabel" type="Label" parent="MainMenuRootControl/VBoxContainer2/DevToolsContainer/DevToolsButton" unique_id=1825731915]
 modulate = Color(0.462291, 0.462291, 0.462291, 1)
 layout_mode = 1
 anchors_preset = 15
@@ -283,18 +353,18 @@ text = "Dev Tools
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="BackContainer" type="HBoxContainer" parent="VBoxContainer2"]
+[node name="BackContainer" type="HBoxContainer" parent="MainMenuRootControl/VBoxContainer2" unique_id=814872812]
 layout_mode = 2
 alignment = 1
 
-[node name="BackButton" type="TextureButton" parent="VBoxContainer2/BackContainer"]
+[node name="BackButton" type="TextureButton" parent="MainMenuRootControl/VBoxContainer2/BackContainer" unique_id=254250348]
 layout_mode = 2
 texture_normal = ExtResource("1_gojdr")
 texture_pressed = ExtResource("3_78x4c")
 texture_disabled = ExtResource("3_78x4c")
 stretch_mode = 0
 
-[node name="Label" type="Label" parent="VBoxContainer2/BackContainer/BackButton"]
+[node name="Label" type="Label" parent="MainMenuRootControl/VBoxContainer2/BackContainer/BackButton" unique_id=1722153927]
 modulate = Color(0.462291, 0.462291, 0.462291, 1)
 layout_mode = 1
 anchors_preset = 15

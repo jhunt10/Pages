@@ -88,10 +88,10 @@ func sync():
 	var actor = parent_character_menu._actor
 	if !actor:
 		return
-	strength_label.text = str(actor.stats.get_stat(StatHelper.Strength, 0))
-	agility_label.text = str(actor.stats.get_stat(StatHelper.Agility, 0))
-	intelligence_label.text = str(actor.stats.get_stat(StatHelper.Intelligence, 0))
-	wisdom_label.text = str(actor.stats.get_stat(StatHelper.Wisdom, 0))
+	strength_label.text = str(int(actor.stats.get_stat(StatHelper.Strength, 0)))
+	agility_label.text = str(int(actor.stats.get_stat(StatHelper.Agility, 0)))
+	intelligence_label.text = str(int(actor.stats.get_stat(StatHelper.Intelligence, 0)))
+	wisdom_label.text = str(int(actor.stats.get_stat(StatHelper.Wisdom, 0)))
 	
 	#bar_stats_container.setactor(actor)
 	
@@ -137,7 +137,7 @@ func sync():
 		other_hand_damage_label.hide()
 		
 	crit_mod_label.text = str(actor.stats.get_stat(StatHelper.CritMod))
-	crit_chance_label.text = str(actor.stats.get_stat(StatHelper.CritChance)) + "%"
+	crit_chance_label.text = str(int(actor.stats.get_stat(StatHelper.CritChance))) + "%"
 	
 	armor_label.set_stat_values(actor)
 	ward_label.set_stat_values(actor)

@@ -1,8 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://bp2yv06fos8sw"]
+[gd_scene format=3 uid="uid://bp2yv06fos8sw"]
 
-[ext_resource type="Script" path="res://assets/Scripts/DevTools/grapher.gd" id="1_genlh"]
+[ext_resource type="Script" uid="uid://iehqmvgvjqnv" path="res://assets/Scripts/DevTools/grapher.gd" id="1_genlh"]
 
-[node name="Control" type="Control" node_paths=PackedStringArray("slider", "point", "label")]
+[node name="Control" type="Control" unique_id=1182470880 node_paths=PackedStringArray("slider", "point", "label")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -19,7 +19,7 @@ slider = NodePath("HSlider")
 point = NodePath("ColorRect")
 label = NodePath("ColorRect/Label")
 
-[node name="HSlider" type="HSlider" parent="."]
+[node name="HSlider" type="HSlider" parent="." unique_id=1816547874]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -28,13 +28,13 @@ grow_horizontal = 2
 max_value = 255.0
 value = 100.0
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1606250581]
 layout_mode = 0
 offset_right = 2.0
 offset_bottom = 2.0
 color = Color(1, 0, 0.0156863, 1)
 
-[node name="Label" type="Label" parent="ColorRect"]
+[node name="Label" type="Label" parent="ColorRect" unique_id=1827226253]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0

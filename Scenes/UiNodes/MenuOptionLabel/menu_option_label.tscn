@@ -1,0 +1,63 @@
+[gd_scene format=3 uid="uid://dg7ao5bq0jo38"]
+
+[ext_resource type="Theme" uid="uid://dwinll8pgdjhc" path="res://Scenes/Themes/standard_theme.tres" id="1_sirhx"]
+[ext_resource type="Script" uid="uid://bbc7mgkblwh8r" path="res://Scenes/UiNodes/MenuOptionLabel/menu_option_label.gd" id="2_b45v8"]
+[ext_resource type="Texture2D" uid="uid://567vutk12a12" path="res://Scenes/Menus/CharacterMenu/MenuPages/SlotHighlight.png" id="3_s7gr4"]
+
+[node name="MenuOptionLabel" type="Label" unique_id=431171216 node_paths=PackedStringArray("under_line", "button")]
+size_flags_horizontal = 4
+theme = ExtResource("1_sirhx")
+theme_override_colors/font_color = Color(0.49803922, 0, 0, 1)
+theme_override_font_sizes/font_size = 48
+text = "Option"
+script = ExtResource("2_b45v8")
+pressed_color = Color(1, 1, 1, 1)
+under_line = NodePath("ColorRect")
+button = NodePath("Button")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1262391265]
+custom_minimum_size = Vector2(0, 3)
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0.498039, 0, 0, 1)
+
+[node name="TextureRect2" type="TextureRect" parent="." unique_id=1340925995]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_s7gr4")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="." unique_id=256542089]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -2.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_s7gr4")
+patch_margin_left = 32
+patch_margin_top = 32
+patch_margin_right = 32
+patch_margin_bottom = 32
+
+[node name="Button" type="Button" parent="." unique_id=884181128]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

@@ -1,19 +1,19 @@
-[gd_scene load_steps=33 format=3 uid="uid://bivhm6cnkig2b"]
+[gd_scene format=3 uid="uid://bivhm6cnkig2b"]
 
-[ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/StatsMenuPage/stats_page_control.gd" id="1_7pask"]
+[ext_resource type="Script" uid="uid://bwbq5042qi6w6" path="res://Scenes/Menus/CharacterMenu/MenuPages/StatsMenuPage/stats_page_control.gd" id="1_7pask"]
 [ext_resource type="Texture2D" uid="uid://c4yedxpiinlff" path="res://Scenes/Menus/CharacterMenu/MenuPages/outline.png" id="2_2jj8r"]
 [ext_resource type="Texture2D" uid="uid://b10pvly4exem2" path="res://assets/Sprites/UI/SymbolIcons/_S_Symbole.png" id="3_ieev3"]
 [ext_resource type="Theme" uid="uid://dwinll8pgdjhc" path="res://Scenes/Themes/standard_theme.tres" id="4_uc0ya"]
 [ext_resource type="Texture2D" uid="uid://vwiqj7k1flkn" path="res://assets/Sprites/UI/SymbolIcons/_A_Symbole.png" id="5_ywkw4"]
 [ext_resource type="Texture2D" uid="uid://doywp1shkpnmd" path="res://assets/Sprites/UI/SymbolIcons/_I_Symbole.png" id="6_bwjw5"]
 [ext_resource type="Texture2D" uid="uid://ci3qbej0djsng" path="res://assets/Sprites/UI/SymbolIcons/_W_Symbole.png" id="7_bclrn"]
-[ext_resource type="Script" path="res://Scenes/UiNodes/back_patch_container.gd" id="8_3eiim"]
+[ext_resource type="Script" uid="uid://b82mb4dyp17ng" path="res://Scenes/UiNodes/back_patch_container.gd" id="8_3eiim"]
 [ext_resource type="PackedScene" uid="uid://ybkww8wk3awm" path="res://Scenes/UiNodes/StatLabelContainer/stat_label_container.tscn" id="9_5364f"]
-[ext_resource type="Script" path="res://Scenes/UiNodes/StatLabelContainer/stat_label_container.gd" id="10_7vfde"]
+[ext_resource type="Script" uid="uid://dye1dlsmf7k3t" path="res://Scenes/UiNodes/StatLabelContainer/stat_label_container.gd" id="10_7vfde"]
 [ext_resource type="Texture2D" uid="uid://m0ss0tg7qqou" path="res://assets/Sprites/UI/SymbolIcons/MassSymbol.png" id="11_o6ok4"]
 [ext_resource type="Texture2D" uid="uid://v6mrr2dref31" path="res://assets/Sprites/UI/SymbolIcons/SpeedSymbol.png" id="12_hb0rr"]
 [ext_resource type="Texture2D" uid="uid://bujky44hog2jm" path="res://assets/Sprites/UI/SymbolIcons/PPRSymbol.png" id="13_vvrrf"]
-[ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/StatsMenuPage/resistances_container.gd" id="17_2u3r8"]
+[ext_resource type="Script" uid="uid://2dqdth8xwfg3" path="res://Scenes/Menus/CharacterMenu/MenuPages/StatsMenuPage/resistances_container.gd" id="17_2u3r8"]
 [ext_resource type="Texture2D" uid="uid://diy8q5lpvpw1u" path="res://assets/Sprites/UI/SymbolIcons/PhyDamageSymbol.png" id="17_uovi3"]
 [ext_resource type="Texture2D" uid="uid://br058igskmkwd" path="res://assets/Sprites/UI/SymbolIcons/AccuracySymbol.png" id="18_yl34g"]
 [ext_resource type="Texture2D" uid="uid://b201kpuib7q5k" path="res://assets/Sprites/UI/SymbolIcons/MagDamageSymbol.png" id="19_1aw14"]
@@ -29,11 +29,11 @@
 [ext_resource type="PackedScene" uid="uid://bd7k0s02cumgn" path="res://Scenes/UiNodes/MiniRangeDisplay/mini_awarness_display.tscn" id="29_adlsp"]
 [ext_resource type="Texture2D" uid="uid://d0pn1i5o4fqj5" path="res://assets/Sprites/UI/SymbolIcons/AwarenessSymbol.png" id="30_ycu0b"]
 [ext_resource type="Texture2D" uid="uid://b3atdgr5fajkj" path="res://assets/Sprites/UI/SymbolIcons/DmgSymbol_Fire.png" id="31_kpb2n"]
-[ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/full_stat_display_control.gd" id="31_uk8cv"]
-[ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/StatsMenuPage/stat_entry_container.gd" id="32_6xe5g"]
+[ext_resource type="Script" uid="uid://jx07xbd35ygl" path="res://Scenes/Menus/CharacterMenu/full_stat_display_control.gd" id="31_uk8cv"]
+[ext_resource type="Script" uid="uid://b0fnr4p62cac2" path="res://Scenes/Menus/CharacterMenu/MenuPages/StatsMenuPage/stat_entry_container.gd" id="32_6xe5g"]
 [ext_resource type="PackedScene" uid="uid://bpvy87uagttpr" path="res://Scenes/UiNodes/ScollBar/scroll_bar.tscn" id="33_u8ay1"]
 
-[node name="StatsPage" type="Control" node_paths=PackedStringArray("resistance_container", "strength_label", "agility_label", "intelligence_label", "wisdom_label", "speed_stat_label", "mass_stat_label", "ppr_stat_label", "health_stat_label", "mag_atk_label", "phys_atk_label", "accuracy_stat_label", "potency_stat_label", "range_display", "main_hand_damage_label", "other_hand_damage_label", "crit_mod_label", "crit_chance_label", "armor_label", "ward_label", "evasion_stat_label", "protection_stat_label", "awareness_stat_label", "block_chance_label", "block_mod_label", "awareness_display", "evade_front_chance_label", "evade_flank_chance_label", "evade_back_chance_label", "block_front_chance_label", "block_flank_chance_label", "block_back_chance_label", "full_stat_display", "scroll_bar")]
+[node name="StatsPage" type="Control" unique_id=1347648210 node_paths=PackedStringArray("resistance_container", "strength_label", "agility_label", "intelligence_label", "wisdom_label", "speed_stat_label", "mass_stat_label", "ppr_stat_label", "health_stat_label", "mag_atk_label", "phys_atk_label", "accuracy_stat_label", "potency_stat_label", "range_display", "main_hand_damage_label", "other_hand_damage_label", "crit_mod_label", "crit_chance_label", "armor_label", "ward_label", "evasion_stat_label", "protection_stat_label", "awareness_stat_label", "block_chance_label", "block_mod_label", "awareness_display", "evade_front_chance_label", "evade_flank_chance_label", "evade_back_chance_label", "block_front_chance_label", "block_flank_chance_label", "block_back_chance_label", "full_stat_display", "scroll_bar")]
 custom_minimum_size = Vector2(292, 384)
 layout_mode = 3
 anchors_preset = 0
@@ -76,7 +76,7 @@ block_back_chance_label = NodePath("HBoxContainer/ScrollContainer/StatsMainConta
 full_stat_display = NodePath("HBoxContainer/ScrollContainer/StatsMainContainer/FullStatDisplayControl")
 scroll_bar = NodePath("HBoxContainer/StatsScrollBar")
 
-[node name="ContainerControl" type="Control" parent="."]
+[node name="ContainerControl" type="Control" parent="." unique_id=1226752738]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -86,7 +86,7 @@ offset_right = -12.0
 offset_bottom = 390.0
 grow_horizontal = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1337523120]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -94,22 +94,22 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer" unique_id=52614578]
 layout_mode = 2
 size_flags_horizontal = 3
 horizontal_scroll_mode = 0
 vertical_scroll_mode = 3
 
-[node name="StatsMainContainer" type="VBoxContainer" parent="HBoxContainer/ScrollContainer"]
+[node name="StatsMainContainer" type="VBoxContainer" parent="HBoxContainer/ScrollContainer" unique_id=728909143]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 4
 
-[node name="AttributesDisplay" type="Control" parent="HBoxContainer/ScrollContainer/StatsMainContainer"]
+[node name="AttributesDisplay" type="Control" parent="HBoxContainer/ScrollContainer/StatsMainContainer" unique_id=1044188229]
 custom_minimum_size = Vector2(0, 56)
 layout_mode = 2
 
-[node name="Background" type="NinePatchRect" parent="HBoxContainer/ScrollContainer/StatsMainContainer/AttributesDisplay"]
+[node name="Background" type="NinePatchRect" parent="HBoxContainer/ScrollContainer/StatsMainContainer/AttributesDisplay" unique_id=1231600784]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -125,7 +125,7 @@ patch_margin_top = 18
 patch_margin_right = 18
 patch_margin_bottom = 19
 
-[node name="BoxContainer" type="BoxContainer" parent="HBoxContainer/ScrollContainer/StatsMainContainer/AttributesDisplay"]
+[node name="BoxContainer" type="BoxContainer" parent="HBoxContainer/ScrollContainer/StatsMainContainer/AttributesDisplay" unique_id=297561367]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -139,21 +139,21 @@ grow_vertical = 2
 theme_override_constants/separation = 0
 alignment = 1
 
-[node name="StrengthContainer" type="VBoxContainer" parent="HBoxContainer/ScrollContainer/StatsMainContainer/AttributesDisplay/BoxContainer"]
+[node name="StrengthContainer" type="VBoxContainer" parent="HBoxContainer/ScrollContainer/StatsMainContainer/AttributesDisplay/BoxContainer" unique_id=1411834750]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/ScrollContainer/StatsMainContainer/AttributesDisplay/BoxContainer/StrengthContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/ScrollContainer/StatsMainContainer/AttributesDisplay/BoxContainer/StrengthContainer" unique_id=585086676]
 layout_mode = 2
 theme_override_constants/separation = 0
 alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="HBoxContainer/ScrollContainer/StatsMainContainer/AttributesDisplay/BoxContainer/StrengthContainer/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/ScrollContainer/StatsMainContainer/AttributesDisplay/BoxContainer/StrengthContainer/HBoxContainer" unique_id=281196596]
 layout_mode = 2
 texture = ExtResource("3_ieev3")
 
-[node name="NameLabel" type="Label" parent="HBoxContainer/ScrollContainer/StatsMainContainer/AttributesDisplay/BoxContainer/StrengthContainer/HBoxContainer"]
+[node name="NameLabel" type="Label" parent="HBoxContainer/ScrollContainer/StatsMainContainer/AttributesDisplay/BoxContainer/StrengthContainer/HBoxContainer" unique_id=1190298924]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 size_flags_vertical = 1
@@ -161,7 +161,7 @@ theme = ExtResource("4_uc0ya")
 text = "tr"
 vertical_alignment = 2
 
-[node name="StatLabel" type="Label" parent="HBoxContainer/ScrollContainer/StatsMainContainer/AttributesDisplay/BoxContainer/StrengthContainer"]
+[node name="StatLabel" type="Label" parent="HBoxContainer/ScrollContainer/StatsMainContainer/AttributesDisplay/BoxContainer/StrengthContainer" unique_id=228178561]
 self_modulate = Color(0.498039, 0, 0, 1)
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
@@ -169,26 +169,26 @@ theme = ExtResource("4_uc0ya")
 text = "000"
 horizontal_alignment = 1
 
-[node name="ColorRect" type="ColorRect" parent="HBoxContainer/ScrollContainer/StatsMainContainer/AttributesDisplay/BoxContainer"]
+[node name="ColorRect" type="ColorRect" parent="HBoxContainer/ScrollContainer/StatsMainContainer/AttributesDisplay/BoxContainer" unique_id=630804920]
 custom_minimum_size = Vector2(2, 0)
 layout_mode = 2
 color = Color(0.498039, 0, 0, 1)
 
-[node name="AgilityContainer" type="VBoxContainer" parent="HBoxContainer/ScrollContainer/StatsMainContainer/AttributesDisplay/BoxContainer"]
+[node name="AgilityContainer" type="VBoxContainer" parent="HBoxContainer/ScrollContainer/StatsMainContainer/AttributesDisplay/BoxContainer" unique_id=957611055]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/ScrollContainer/StatsMainContainer/AttributesDisplay/BoxContainer/AgilityContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/ScrollContainer/StatsMainContainer/AttributesDisplay/BoxContainer/AgilityContainer" unique_id=595397529]
 layout_mode = 2
 theme_override_constants/separation = 0
 alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="HBoxContainer/ScrollContainer/StatsMainContainer/AttributesDisplay/BoxContainer/AgilityContainer/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/ScrollContainer/StatsMainContainer/AttributesDisplay/BoxContainer/AgilityContainer/HBoxContainer" unique_id=668977898]
 layout_mode = 2
 texture = ExtResource("5_ywkw4")
 
-[node name="NameLabel" type="Label" parent="HBoxContainer/ScrollContainer/StatsMainContainer/AttributesDisplay/BoxContainer/AgilityContainer/HBoxContainer"]
+[node name="NameLabel" type="Label" parent="HBoxContainer/ScrollContainer/StatsMainContainer/AttributesDisplay/BoxContainer/AgilityContainer/HBoxContainer" unique_id=706954272]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 size_flags_vertical = 1
@@ -196,7 +196,7 @@ theme = ExtResource("4_uc0ya")
 text = "gi"
 vertical_alignment = 2
 
-[node name="StatLabel" type="Label" parent="HBoxContainer/ScrollContainer/StatsMainContainer/AttributesDisplay/BoxContainer/AgilityContainer"]
+[node name="StatLabel" type="Label" parent="HBoxContainer/ScrollContainer/StatsMainContainer/AttributesDisplay/BoxContainer/AgilityContainer" unique_id=1993728475]
 self_modulate = Color(0.498039, 0, 0, 1)
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
@@ -204,26 +204,26 @@ theme = ExtResource("4_uc0ya")
 text = "000"
 horizontal_alignment = 1
 
-[node name="ColorRect2" type="ColorRect" parent="HBoxContainer/ScrollContainer/StatsMainContainer/AttributesDisplay/BoxContainer"]
+[node name="ColorRect2" type="ColorRect" parent="HBoxContainer/ScrollContainer/StatsMainContainer/AttributesDisplay/BoxContainer" unique_id=484975641]
 custom_minimum_size = Vector2(2, 0)
 layout_mode = 2
 color = Color(0.498039, 0, 0, 1)
 
-[node name="IntillegenceContainer" type="VBoxContainer" parent="HBoxContainer/ScrollContainer/StatsMainContainer/AttributesDisplay/BoxContainer"]
+[node name="IntillegenceContainer" type="VBoxContainer" parent="HBoxContainer/ScrollContainer/StatsMainContainer/AttributesDisplay/BoxContainer" unique_id=1952350455]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/ScrollContainer/StatsMainContainer/AttributesDisplay/BoxContainer/IntillegenceContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/ScrollContainer/StatsMainContainer/AttributesDisplay/BoxContainer/IntillegenceContainer" unique_id=1359096603]
 layout_mode = 2
 theme_override_constants/separation = 0
 alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="HBoxContainer/ScrollContainer/StatsMainContainer/AttributesDisplay/BoxContainer/IntillegenceContainer/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/ScrollContainer/StatsMainContainer/AttributesDisplay/BoxContainer/IntillegenceContainer/HBoxContainer" unique_id=373473822]
 layout_mode = 2
 texture = ExtResource("6_bwjw5")
 
-[node name="NameLabel" type="Label" parent="HBoxContainer/ScrollContainer/StatsMainContainer/AttributesDisplay/BoxContainer/IntillegenceContainer/HBoxContainer"]
+[node name="NameLabel" type="Label" parent="HBoxContainer/ScrollContainer/StatsMainContainer/AttributesDisplay/BoxContainer/IntillegenceContainer/HBoxContainer" unique_id=1126406147]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 size_flags_vertical = 1
@@ -231,7 +231,7 @@ theme = ExtResource("4_uc0ya")
 text = "nt"
 vertical_alignment = 2
 
-[node name="StatLabel" type="Label" parent="HBoxContainer/ScrollContainer/StatsMainContainer/AttributesDisplay/BoxContainer/IntillegenceContainer"]
+[node name="StatLabel" type="Label" parent="HBoxContainer/ScrollContainer/StatsMainContainer/AttributesDisplay/BoxContainer/IntillegenceContainer" unique_id=1021516405]
 self_modulate = Color(0.498039, 0, 0, 1)
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
@@ -239,26 +239,26 @@ theme = ExtResource("4_uc0ya")
 text = "000"
 horizontal_alignment = 1
 
-[node name="ColorRect3" type="ColorRect" parent="HBoxContainer/ScrollContainer/StatsMainContainer/AttributesDisplay/BoxContainer"]
+[node name="ColorRect3" type="ColorRect" parent="HBoxContainer/ScrollContainer/StatsMainContainer/AttributesDisplay/BoxContainer" unique_id=215759958]
 custom_minimum_size = Vector2(2, 0)
 layout_mode = 2
 color = Color(0.498039, 0, 0, 1)
 
-[node name="WisdomContainer" type="VBoxContainer" parent="HBoxContainer/ScrollContainer/StatsMainContainer/AttributesDisplay/BoxContainer"]
+[node name="WisdomContainer" type="VBoxContainer" parent="HBoxContainer/ScrollContainer/StatsMainContainer/AttributesDisplay/BoxContainer" unique_id=2091752278]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/ScrollContainer/StatsMainContainer/AttributesDisplay/BoxContainer/WisdomContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/ScrollContainer/StatsMainContainer/AttributesDisplay/BoxContainer/WisdomContainer" unique_id=1872614451]
 layout_mode = 2
 theme_override_constants/separation = 0
 alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="HBoxContainer/ScrollContainer/StatsMainContainer/AttributesDisplay/BoxContainer/WisdomContainer/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/ScrollContainer/StatsMainContainer/AttributesDisplay/BoxContainer/WisdomContainer/HBoxContainer" unique_id=510721117]
 layout_mode = 2
 texture = ExtResource("7_bclrn")
 
-[node name="NameLabel" type="Label" parent="HBoxContainer/ScrollContainer/StatsMainContainer/AttributesDisplay/BoxContainer/WisdomContainer/HBoxContainer"]
+[node name="NameLabel" type="Label" parent="HBoxContainer/ScrollContainer/StatsMainContainer/AttributesDisplay/BoxContainer/WisdomContainer/HBoxContainer" unique_id=352491085]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 size_flags_vertical = 1
@@ -266,7 +266,7 @@ theme = ExtResource("4_uc0ya")
 text = "is"
 vertical_alignment = 2
 
-[node name="StatLabel" type="Label" parent="HBoxContainer/ScrollContainer/StatsMainContainer/AttributesDisplay/BoxContainer/WisdomContainer"]
+[node name="StatLabel" type="Label" parent="HBoxContainer/ScrollContainer/StatsMainContainer/AttributesDisplay/BoxContainer/WisdomContainer" unique_id=982034662]
 self_modulate = Color(0.498039, 0, 0, 1)
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
@@ -274,13 +274,13 @@ theme = ExtResource("4_uc0ya")
 text = "000"
 horizontal_alignment = 1
 
-[node name="HSeparator" type="HSeparator" parent="HBoxContainer/ScrollContainer/StatsMainContainer"]
+[node name="HSeparator" type="HSeparator" parent="HBoxContainer/ScrollContainer/StatsMainContainer" unique_id=361808242]
 visible = false
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="MiscStatsContainer" type="Container" parent="HBoxContainer/ScrollContainer/StatsMainContainer" node_paths=PackedStringArray("background", "inner_container")]
+[node name="MiscStatsContainer" type="Container" parent="HBoxContainer/ScrollContainer/StatsMainContainer" unique_id=294878050 node_paths=PackedStringArray("background", "inner_container")]
 custom_minimum_size = Vector2(12, 44)
 layout_mode = 2
 script = ExtResource("8_3eiim")
@@ -289,7 +289,7 @@ inner_container = NodePath("BoxContainer")
 margin_override = 6
 force_fill_x = true
 
-[node name="Background" type="NinePatchRect" parent="HBoxContainer/ScrollContainer/StatsMainContainer/MiscStatsContainer"]
+[node name="Background" type="NinePatchRect" parent="HBoxContainer/ScrollContainer/StatsMainContainer/MiscStatsContainer" unique_id=1743094542]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -300,27 +300,27 @@ patch_margin_top = 18
 patch_margin_right = 18
 patch_margin_bottom = 19
 
-[node name="BoxContainer" type="BoxContainer" parent="HBoxContainer/ScrollContainer/StatsMainContainer/MiscStatsContainer"]
+[node name="BoxContainer" type="BoxContainer" parent="HBoxContainer/ScrollContainer/StatsMainContainer/MiscStatsContainer" unique_id=99795344]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 theme_override_constants/separation = 0
 alignment = 1
 vertical = true
 
-[node name="SpeedMassContainer" type="HBoxContainer" parent="HBoxContainer/ScrollContainer/StatsMainContainer/MiscStatsContainer/BoxContainer"]
+[node name="SpeedMassContainer" type="HBoxContainer" parent="HBoxContainer/ScrollContainer/StatsMainContainer/MiscStatsContainer/BoxContainer" unique_id=1671149741]
 layout_mode = 2
 alignment = 1
 
-[node name="HealthContainer" parent="HBoxContainer/ScrollContainer/StatsMainContainer/MiscStatsContainer/BoxContainer/SpeedMassContainer" instance=ExtResource("9_5364f")]
+[node name="HealthContainer" parent="HBoxContainer/ScrollContainer/StatsMainContainer/MiscStatsContainer/BoxContainer/SpeedMassContainer" unique_id=1607887786 instance=ExtResource("9_5364f")]
 layout_mode = 2
 stat_name = "HealthMax"
 
-[node name="ColorRect3" type="ColorRect" parent="HBoxContainer/ScrollContainer/StatsMainContainer/MiscStatsContainer/BoxContainer/SpeedMassContainer"]
+[node name="ColorRect3" type="ColorRect" parent="HBoxContainer/ScrollContainer/StatsMainContainer/MiscStatsContainer/BoxContainer/SpeedMassContainer" unique_id=323269228]
 custom_minimum_size = Vector2(2, 0)
 layout_mode = 2
 color = Color(0.498039, 0, 0, 1)
 
-[node name="MassContainer" type="BoxContainer" parent="HBoxContainer/ScrollContainer/StatsMainContainer/MiscStatsContainer/BoxContainer/SpeedMassContainer" node_paths=PackedStringArray("name_label", "icon", "value_label")]
+[node name="MassContainer" type="BoxContainer" parent="HBoxContainer/ScrollContainer/StatsMainContainer/MiscStatsContainer/BoxContainer/SpeedMassContainer" unique_id=598710385 node_paths=PackedStringArray("name_label", "icon", "value_label")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -331,8 +331,9 @@ stat_name = "Mass"
 name_label = NodePath("NameLabel")
 icon = NodePath("IconRect")
 value_label = NodePath("StatLabel")
+force_to_int = true
 
-[node name="NameLabel" type="Label" parent="HBoxContainer/ScrollContainer/StatsMainContainer/MiscStatsContainer/BoxContainer/SpeedMassContainer/MassContainer"]
+[node name="NameLabel" type="Label" parent="HBoxContainer/ScrollContainer/StatsMainContainer/MiscStatsContainer/BoxContainer/SpeedMassContainer/MassContainer" unique_id=603755407]
 visible = false
 self_modulate = Color(0.498039, 0, 0, 1)
 custom_minimum_size = Vector2(40, 0)
@@ -341,11 +342,11 @@ theme = ExtResource("4_uc0ya")
 text = "Wgt:"
 horizontal_alignment = 1
 
-[node name="IconRect" type="TextureRect" parent="HBoxContainer/ScrollContainer/StatsMainContainer/MiscStatsContainer/BoxContainer/SpeedMassContainer/MassContainer"]
+[node name="IconRect" type="TextureRect" parent="HBoxContainer/ScrollContainer/StatsMainContainer/MiscStatsContainer/BoxContainer/SpeedMassContainer/MassContainer" unique_id=913303233]
 layout_mode = 2
 texture = ExtResource("11_o6ok4")
 
-[node name="StatLabel" type="Label" parent="HBoxContainer/ScrollContainer/StatsMainContainer/MiscStatsContainer/BoxContainer/SpeedMassContainer/MassContainer"]
+[node name="StatLabel" type="Label" parent="HBoxContainer/ScrollContainer/StatsMainContainer/MiscStatsContainer/BoxContainer/SpeedMassContainer/MassContainer" unique_id=720616495]
 self_modulate = Color(0.498039, 0, 0, 1)
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
@@ -353,12 +354,12 @@ theme = ExtResource("4_uc0ya")
 text = "000"
 horizontal_alignment = 1
 
-[node name="ColorRect" type="ColorRect" parent="HBoxContainer/ScrollContainer/StatsMainContainer/MiscStatsContainer/BoxContainer/SpeedMassContainer"]
+[node name="ColorRect" type="ColorRect" parent="HBoxContainer/ScrollContainer/StatsMainContainer/MiscStatsContainer/BoxContainer/SpeedMassContainer" unique_id=1121533614]
 custom_minimum_size = Vector2(2, 0)
 layout_mode = 2
 color = Color(0.498039, 0, 0, 1)
 
-[node name="SpeedContainer" type="BoxContainer" parent="HBoxContainer/ScrollContainer/StatsMainContainer/MiscStatsContainer/BoxContainer/SpeedMassContainer" node_paths=PackedStringArray("name_label", "icon", "value_label")]
+[node name="SpeedContainer" type="BoxContainer" parent="HBoxContainer/ScrollContainer/StatsMainContainer/MiscStatsContainer/BoxContainer/SpeedMassContainer" unique_id=218527169 node_paths=PackedStringArray("name_label", "icon", "value_label")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -369,8 +370,9 @@ stat_name = "Speed"
 name_label = NodePath("NameLabel")
 icon = NodePath("IconRect")
 value_label = NodePath("StatLabel")
+force_to_int = true
 
-[node name="NameLabel" type="Label" parent="HBoxContainer/ScrollContainer/StatsMainContainer/MiscStatsContainer/BoxContainer/SpeedMassContainer/SpeedContainer"]
+[node name="NameLabel" type="Label" parent="HBoxContainer/ScrollContainer/StatsMainContainer/MiscStatsContainer/BoxContainer/SpeedMassContainer/SpeedContainer" unique_id=253149556]
 visible = false
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
@@ -378,11 +380,11 @@ theme = ExtResource("4_uc0ya")
 text = "Spd: "
 horizontal_alignment = 1
 
-[node name="IconRect" type="TextureRect" parent="HBoxContainer/ScrollContainer/StatsMainContainer/MiscStatsContainer/BoxContainer/SpeedMassContainer/SpeedContainer"]
+[node name="IconRect" type="TextureRect" parent="HBoxContainer/ScrollContainer/StatsMainContainer/MiscStatsContainer/BoxContainer/SpeedMassContainer/SpeedContainer" unique_id=935162394]
 layout_mode = 2
 texture = ExtResource("12_hb0rr")
 
-[node name="StatLabel" type="Label" parent="HBoxContainer/ScrollContainer/StatsMainContainer/MiscStatsContainer/BoxContainer/SpeedMassContainer/SpeedContainer"]
+[node name="StatLabel" type="Label" parent="HBoxContainer/ScrollContainer/StatsMainContainer/MiscStatsContainer/BoxContainer/SpeedMassContainer/SpeedContainer" unique_id=570132533]
 self_modulate = Color(0.498039, 0, 0, 1)
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
@@ -390,12 +392,12 @@ theme = ExtResource("4_uc0ya")
 text = "000"
 horizontal_alignment = 1
 
-[node name="ColorRect2" type="ColorRect" parent="HBoxContainer/ScrollContainer/StatsMainContainer/MiscStatsContainer/BoxContainer/SpeedMassContainer"]
+[node name="ColorRect2" type="ColorRect" parent="HBoxContainer/ScrollContainer/StatsMainContainer/MiscStatsContainer/BoxContainer/SpeedMassContainer" unique_id=1944562221]
 custom_minimum_size = Vector2(2, 0)
 layout_mode = 2
 color = Color(0.498039, 0, 0, 1)
 
-[node name="PPRContainer" type="BoxContainer" parent="HBoxContainer/ScrollContainer/StatsMainContainer/MiscStatsContainer/BoxContainer/SpeedMassContainer" node_paths=PackedStringArray("name_label", "icon", "value_label")]
+[node name="PPRContainer" type="BoxContainer" parent="HBoxContainer/ScrollContainer/StatsMainContainer/MiscStatsContainer/BoxContainer/SpeedMassContainer" unique_id=714420256 node_paths=PackedStringArray("name_label", "icon", "value_label")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -406,8 +408,9 @@ stat_name = "PPR"
 name_label = NodePath("NameLabel")
 icon = NodePath("IconRect")
 value_label = NodePath("StatLabel")
+force_to_int = true
 
-[node name="NameLabel" type="Label" parent="HBoxContainer/ScrollContainer/StatsMainContainer/MiscStatsContainer/BoxContainer/SpeedMassContainer/PPRContainer"]
+[node name="NameLabel" type="Label" parent="HBoxContainer/ScrollContainer/StatsMainContainer/MiscStatsContainer/BoxContainer/SpeedMassContainer/PPRContainer" unique_id=1505047228]
 visible = false
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
@@ -415,11 +418,11 @@ theme = ExtResource("4_uc0ya")
 text = "PPR: "
 horizontal_alignment = 1
 
-[node name="IconRect" type="TextureRect" parent="HBoxContainer/ScrollContainer/StatsMainContainer/MiscStatsContainer/BoxContainer/SpeedMassContainer/PPRContainer"]
+[node name="IconRect" type="TextureRect" parent="HBoxContainer/ScrollContainer/StatsMainContainer/MiscStatsContainer/BoxContainer/SpeedMassContainer/PPRContainer" unique_id=784191217]
 layout_mode = 2
 texture = ExtResource("13_vvrrf")
 
-[node name="StatLabel" type="Label" parent="HBoxContainer/ScrollContainer/StatsMainContainer/MiscStatsContainer/BoxContainer/SpeedMassContainer/PPRContainer"]
+[node name="StatLabel" type="Label" parent="HBoxContainer/ScrollContainer/StatsMainContainer/MiscStatsContainer/BoxContainer/SpeedMassContainer/PPRContainer" unique_id=1001659793]
 self_modulate = Color(0.498039, 0, 0, 1)
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
@@ -427,19 +430,19 @@ theme = ExtResource("4_uc0ya")
 text = "000"
 horizontal_alignment = 1
 
-[node name="HSeparator2" type="HSeparator" parent="HBoxContainer/ScrollContainer/StatsMainContainer"]
+[node name="HSeparator2" type="HSeparator" parent="HBoxContainer/ScrollContainer/StatsMainContainer" unique_id=1507469970]
 visible = false
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="HSeparator3" type="HSeparator" parent="HBoxContainer/ScrollContainer/StatsMainContainer"]
+[node name="HSeparator3" type="HSeparator" parent="HBoxContainer/ScrollContainer/StatsMainContainer" unique_id=729985188]
 visible = false
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="AtkStatsContainer" type="Container" parent="HBoxContainer/ScrollContainer/StatsMainContainer" node_paths=PackedStringArray("background", "inner_container")]
+[node name="AtkStatsContainer" type="Container" parent="HBoxContainer/ScrollContainer/StatsMainContainer" unique_id=2060048474 node_paths=PackedStringArray("background", "inner_container")]
 custom_minimum_size = Vector2(12, 136)
 layout_mode = 2
 script = ExtResource("8_3eiim")
@@ -448,7 +451,7 @@ inner_container = NodePath("BoxContainer")
 margin_override = 6
 force_fill_x = true
 
-[node name="Background" type="NinePatchRect" parent="HBoxContainer/ScrollContainer/StatsMainContainer/AtkStatsContainer"]
+[node name="Background" type="NinePatchRect" parent="HBoxContainer/ScrollContainer/StatsMainContainer/AtkStatsContainer" unique_id=1270453437]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -459,18 +462,18 @@ patch_margin_top = 18
 patch_margin_right = 18
 patch_margin_bottom = 19
 
-[node name="BoxContainer" type="BoxContainer" parent="HBoxContainer/ScrollContainer/StatsMainContainer/AtkStatsContainer"]
+[node name="BoxContainer" type="BoxContainer" parent="HBoxContainer/ScrollContainer/StatsMainContainer/AtkStatsContainer" unique_id=1360929085]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 theme_override_constants/separation = 0
 alignment = 1
 vertical = true
 
-[node name="PhyMagDamageContainer" type="HBoxContainer" parent="HBoxContainer/ScrollContainer/StatsMainContainer/AtkStatsContainer/BoxContainer"]
+[node name="PhyMagDamageContainer" type="HBoxContainer" parent="HBoxContainer/ScrollContainer/StatsMainContainer/AtkStatsContainer/BoxContainer" unique_id=1861878650]
 layout_mode = 2
 alignment = 1
 
-[node name="PhyAtkContainer" type="BoxContainer" parent="HBoxContainer/ScrollContainer/StatsMainContainer/AtkStatsContainer/BoxContainer/PhyMagDamageContainer" node_paths=PackedStringArray("name_label", "icon", "value_label")]
+[node name="PhyAtkContainer" type="BoxContainer" parent="HBoxContainer/ScrollContainer/StatsMainContainer/AtkStatsContainer/BoxContainer/PhyMagDamageContainer" unique_id=1853253830 node_paths=PackedStringArray("name_label", "icon", "value_label")]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 0
@@ -480,8 +483,9 @@ stat_name = "PhyAttack"
 name_label = NodePath("NameLabel")
 icon = NodePath("IconRect")
 value_label = NodePath("StatLabel")
+force_to_int = true
 
-[node name="NameLabel" type="Label" parent="HBoxContainer/ScrollContainer/StatsMainContainer/AtkStatsContainer/BoxContainer/PhyMagDamageContainer/PhyAtkContainer"]
+[node name="NameLabel" type="Label" parent="HBoxContainer/ScrollContainer/StatsMainContainer/AtkStatsContainer/BoxContainer/PhyMagDamageContainer/PhyAtkContainer" unique_id=469940869]
 visible = false
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
@@ -489,11 +493,11 @@ theme = ExtResource("4_uc0ya")
 text = "Phy:"
 horizontal_alignment = 1
 
-[node name="IconRect" type="TextureRect" parent="HBoxContainer/ScrollContainer/StatsMainContainer/AtkStatsContainer/BoxContainer/PhyMagDamageContainer/PhyAtkContainer"]
+[node name="IconRect" type="TextureRect" parent="HBoxContainer/ScrollContainer/StatsMainContainer/AtkStatsContainer/BoxContainer/PhyMagDamageContainer/PhyAtkContainer" unique_id=706270716]
 layout_mode = 2
 texture = ExtResource("17_uovi3")
 
-[node name="StatLabel" type="Label" parent="HBoxContainer/ScrollContainer/StatsMainContainer/AtkStatsContainer/BoxContainer/PhyMagDamageContainer/PhyAtkContainer"]
+[node name="StatLabel" type="Label" parent="HBoxContainer/ScrollContainer/StatsMainContainer/AtkStatsContainer/BoxContainer/PhyMagDamageContainer/PhyAtkContainer" unique_id=1428316632]
 self_modulate = Color(0.498039, 0, 0, 1)
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
@@ -501,7 +505,7 @@ theme = ExtResource("4_uc0ya")
 text = "000"
 horizontal_alignment = 1
 
-[node name="AccurcyContainer" type="BoxContainer" parent="HBoxContainer/ScrollContainer/StatsMainContainer/AtkStatsContainer/BoxContainer/PhyMagDamageContainer" node_paths=PackedStringArray("name_label", "icon", "value_label")]
+[node name="AccurcyContainer" type="BoxContainer" parent="HBoxContainer/ScrollContainer/StatsMainContainer/AtkStatsContainer/BoxContainer/PhyMagDamageContainer" unique_id=1159729627 node_paths=PackedStringArray("name_label", "icon", "value_label")]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 0
@@ -511,8 +515,9 @@ stat_name = "Accuracy"
 name_label = NodePath("NameLabel")
 icon = NodePath("IconRect")
 value_label = NodePath("StatLabel")
+force_to_int = true
 
-[node name="NameLabel" type="Label" parent="HBoxContainer/ScrollContainer/StatsMainContainer/AtkStatsContainer/BoxContainer/PhyMagDamageContainer/AccurcyContainer"]
+[node name="NameLabel" type="Label" parent="HBoxContainer/ScrollContainer/StatsMainContainer/AtkStatsContainer/BoxContainer/PhyMagDamageContainer/AccurcyContainer" unique_id=1601742238]
 visible = false
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
@@ -520,11 +525,11 @@ theme = ExtResource("4_uc0ya")
 text = "Acc:"
 horizontal_alignment = 1
 
-[node name="IconRect" type="TextureRect" parent="HBoxContainer/ScrollContainer/StatsMainContainer/AtkStatsContainer/BoxContainer/PhyMagDamageContainer/AccurcyContainer"]
+[node name="IconRect" type="TextureRect" parent="HBoxContainer/ScrollContainer/StatsMainContainer/AtkStatsContainer/BoxContainer/PhyMagDamageContainer/AccurcyContainer" unique_id=262673664]
 layout_mode = 2
 texture = ExtResource("18_yl34g")
 
-[node name="StatLabel" type="Label" parent="HBoxContainer/ScrollContainer/StatsMainContainer/AtkStatsContainer/BoxContainer/PhyMagDamageContainer/AccurcyContainer"]
+[node name="StatLabel" type="Label" parent="HBoxContainer/ScrollContainer/StatsMainContainer/AtkStatsContainer/BoxContainer/PhyMagDamageContainer/AccurcyContainer" unique_id=1759297135]
 self_modulate = Color(0.498039, 0, 0, 1)
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
@@ -532,12 +537,12 @@ theme = ExtResource("4_uc0ya")
 text = "000"
 horizontal_alignment = 1
 
-[node name="ColorRect2" type="ColorRect" parent="HBoxContainer/ScrollContainer/StatsMainContainer/AtkStatsContainer/BoxContainer/PhyMagDamageContainer"]
+[node name="ColorRect2" type="ColorRect" parent="HBoxContainer/ScrollContainer/StatsMainContainer/AtkStatsContainer/BoxContainer/PhyMagDamageContainer" unique_id=1943309029]
 custom_minimum_size = Vector2(2, 0)
 layout_mode = 2
 color = Color(0.498039, 0, 0, 1)
 
-[node name="MagAttackContainer" type="BoxContainer" parent="HBoxContainer/ScrollContainer/StatsMainContainer/AtkStatsContainer/BoxContainer/PhyMagDamageContainer" node_paths=PackedStringArray("name_label", "icon", "value_label")]
+[node name="MagAttackContainer" type="BoxContainer" parent="HBoxContainer/ScrollContainer/StatsMainContainer/AtkStatsContainer/BoxContainer/PhyMagDamageContainer" unique_id=804144136 node_paths=PackedStringArray("name_label", "icon", "value_label")]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 0
@@ -547,8 +552,9 @@ stat_name = "MagAttack"
 name_label = NodePath("NameLabel")
 icon = NodePath("IconRect")
 value_label = NodePath("StatLabel")
+force_to_int = true
 
-[node name="NameLabel" type="Label" parent="HBoxContainer/ScrollContainer/StatsMainContainer/AtkStatsContainer/BoxContainer/PhyMagDamageContainer/MagAttackContainer"]
+[node name="NameLabel" type="Label" parent="HBoxContainer/ScrollContainer/StatsMainContainer/AtkStatsContainer/BoxContainer/PhyMagDamageContainer/MagAttackContainer" unique_id=1226906927]
 visible = false
 self_modulate = Color(0.498039, 0, 0, 1)
 custom_minimum_size = Vector2(34, 0)
@@ -557,11 +563,11 @@ theme = ExtResource("4_uc0ya")
 text = "Mag:"
 horizontal_alignment = 2
 
-[node name="IconRect" type="TextureRect" parent="HBoxContainer/ScrollContainer/StatsMainContainer/AtkStatsContainer/BoxContainer/PhyMagDamageContainer/MagAttackContainer"]
+[node name="IconRect" type="TextureRect" parent="HBoxContainer/ScrollContainer/StatsMainContainer/AtkStatsContainer/BoxContainer/PhyMagDamageContainer/MagAttackContainer" unique_id=1014323240]
 layout_mode = 2
 texture = ExtResource("19_1aw14")
 
-[node name="StatLabel" type="Label" parent="HBoxContainer/ScrollContainer/StatsMainContainer/AtkStatsContainer/BoxContainer/PhyMagDamageContainer/MagAttackContainer"]
+[node name="StatLabel" type="Label" parent="HBoxContainer/ScrollContainer/StatsMainContainer/AtkStatsContainer/BoxContainer/PhyMagDamageContainer/MagAttackContainer" unique_id=1838373315]
 self_modulate = Color(0.498039, 0, 0, 1)
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
@@ -569,7 +575,7 @@ theme = ExtResource("4_uc0ya")
 text = "000"
 horizontal_alignment = 1
 
-[node name="PotencyContainer" type="BoxContainer" parent="HBoxContainer/ScrollContainer/StatsMainContainer/AtkStatsContainer/BoxContainer/PhyMagDamageContainer" node_paths=PackedStringArray("name_label", "icon", "value_label")]
+[node name="PotencyContainer" type="BoxContainer" parent="HBoxContainer/ScrollContainer/StatsMainContainer/AtkStatsContainer/BoxContainer/PhyMagDamageContainer" unique_id=40479609 node_paths=PackedStringArray("name_label", "icon", "value_label")]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 0
@@ -579,8 +585,9 @@ stat_name = "Potency"
 name_label = NodePath("NameLabel")
 icon = NodePath("IconRect")
 value_label = NodePath("StatLabel")
+force_to_int = true
 
-[node name="NameLabel" type="Label" parent="HBoxContainer/ScrollContainer/StatsMainContainer/AtkStatsContainer/BoxContainer/PhyMagDamageContainer/PotencyContainer"]
+[node name="NameLabel" type="Label" parent="HBoxContainer/ScrollContainer/StatsMainContainer/AtkStatsContainer/BoxContainer/PhyMagDamageContainer/PotencyContainer" unique_id=645132170]
 visible = false
 self_modulate = Color(0.498039, 0, 0, 1)
 custom_minimum_size = Vector2(34, 0)
@@ -589,11 +596,11 @@ theme = ExtResource("4_uc0ya")
 text = "Pot:"
 horizontal_alignment = 2
 
-[node name="IconRect" type="TextureRect" parent="HBoxContainer/ScrollContainer/StatsMainContainer/AtkStatsContainer/BoxContainer/PhyMagDamageContainer/PotencyContainer"]
+[node name="IconRect" type="TextureRect" parent="HBoxContainer/ScrollContainer/StatsMainContainer/AtkStatsContainer/BoxContainer/PhyMagDamageContainer/PotencyContainer" unique_id=1033911544]
 layout_mode = 2
 texture = ExtResource("20_ui7bb")
 
-[node name="StatLabel" type="Label" parent="HBoxContainer/ScrollContainer/StatsMainContainer/AtkStatsContainer/BoxContainer/PhyMagDamageContainer/PotencyContainer"]
+[node name="StatLabel" type="Label" parent="HBoxContainer/ScrollContainer/StatsMainContainer/AtkStatsContainer/BoxContainer/PhyMagDamageContainer/PotencyContainer" unique_id=1776162618]
 self_modulate = Color(0.498039, 0, 0, 1)
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
@@ -601,51 +608,51 @@ theme = ExtResource("4_uc0ya")
 text = "000"
 horizontal_alignment = 1
 
-[node name="AccPotContainer" type="HBoxContainer" parent="HBoxContainer/ScrollContainer/StatsMainContainer/AtkStatsContainer/BoxContainer"]
+[node name="AccPotContainer" type="HBoxContainer" parent="HBoxContainer/ScrollContainer/StatsMainContainer/AtkStatsContainer/BoxContainer" unique_id=1304113244]
 layout_mode = 2
 alignment = 1
 
-[node name="ColorRect2" type="ColorRect" parent="HBoxContainer/ScrollContainer/StatsMainContainer/AtkStatsContainer/BoxContainer"]
+[node name="ColorRect2" type="ColorRect" parent="HBoxContainer/ScrollContainer/StatsMainContainer/AtkStatsContainer/BoxContainer" unique_id=438793703]
 custom_minimum_size = Vector2(0, 2)
 layout_mode = 2
 color = Color(0.498039, 0, 0, 1)
 
-[node name="RangeDamageContainer" type="HBoxContainer" parent="HBoxContainer/ScrollContainer/StatsMainContainer/AtkStatsContainer/BoxContainer"]
+[node name="RangeDamageContainer" type="HBoxContainer" parent="HBoxContainer/ScrollContainer/StatsMainContainer/AtkStatsContainer/BoxContainer" unique_id=1700816642]
 custom_minimum_size = Vector2(0, 56)
 layout_mode = 2
 alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/ScrollContainer/StatsMainContainer/AtkStatsContainer/BoxContainer/RangeDamageContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/ScrollContainer/StatsMainContainer/AtkStatsContainer/BoxContainer/RangeDamageContainer" unique_id=1019536389]
 layout_mode = 2
 theme_override_constants/separation = 0
 alignment = 1
 
-[node name="MiniRangeDisplay" parent="HBoxContainer/ScrollContainer/StatsMainContainer/AtkStatsContainer/BoxContainer/RangeDamageContainer/VBoxContainer" instance=ExtResource("21_k231h")]
+[node name="MiniRangeDisplay" parent="HBoxContainer/ScrollContainer/StatsMainContainer/AtkStatsContainer/BoxContainer/RangeDamageContainer/VBoxContainer" unique_id=1000866062 instance=ExtResource("21_k231h")]
 layout_mode = 2
 
-[node name="DamageDatasContainer" type="VBoxContainer" parent="HBoxContainer/ScrollContainer/StatsMainContainer/AtkStatsContainer/BoxContainer/RangeDamageContainer"]
+[node name="DamageDatasContainer" type="VBoxContainer" parent="HBoxContainer/ScrollContainer/StatsMainContainer/AtkStatsContainer/BoxContainer/RangeDamageContainer" unique_id=1447929818]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 0
 
-[node name="CritContainer" type="BoxContainer" parent="HBoxContainer/ScrollContainer/StatsMainContainer/AtkStatsContainer/BoxContainer/RangeDamageContainer/DamageDatasContainer"]
+[node name="CritContainer" type="BoxContainer" parent="HBoxContainer/ScrollContainer/StatsMainContainer/AtkStatsContainer/BoxContainer/RangeDamageContainer/DamageDatasContainer" unique_id=1387890438]
 custom_minimum_size = Vector2(68, 0)
 layout_mode = 2
 theme_override_constants/separation = 0
 alignment = 1
 
-[node name="NameLabel" type="Label" parent="HBoxContainer/ScrollContainer/StatsMainContainer/AtkStatsContainer/BoxContainer/RangeDamageContainer/DamageDatasContainer/CritContainer"]
+[node name="NameLabel" type="Label" parent="HBoxContainer/ScrollContainer/StatsMainContainer/AtkStatsContainer/BoxContainer/RangeDamageContainer/DamageDatasContainer/CritContainer" unique_id=40577158]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("4_uc0ya")
 text = "Crit: "
 horizontal_alignment = 2
 
-[node name="IconRect" type="TextureRect" parent="HBoxContainer/ScrollContainer/StatsMainContainer/AtkStatsContainer/BoxContainer/RangeDamageContainer/DamageDatasContainer/CritContainer"]
+[node name="IconRect" type="TextureRect" parent="HBoxContainer/ScrollContainer/StatsMainContainer/AtkStatsContainer/BoxContainer/RangeDamageContainer/DamageDatasContainer/CritContainer" unique_id=417202842]
 layout_mode = 2
 texture = ExtResource("22_udfdk")
 
-[node name="ChanceLabel" type="Label" parent="HBoxContainer/ScrollContainer/StatsMainContainer/AtkStatsContainer/BoxContainer/RangeDamageContainer/DamageDatasContainer/CritContainer"]
+[node name="ChanceLabel" type="Label" parent="HBoxContainer/ScrollContainer/StatsMainContainer/AtkStatsContainer/BoxContainer/RangeDamageContainer/DamageDatasContainer/CritContainer" unique_id=464262445]
 self_modulate = Color(0.498039, 0, 0, 1)
 custom_minimum_size = Vector2(46, 0)
 layout_mode = 2
@@ -653,7 +660,7 @@ theme = ExtResource("4_uc0ya")
 text = "50%"
 horizontal_alignment = 1
 
-[node name="DividerLabel2" type="Label" parent="HBoxContainer/ScrollContainer/StatsMainContainer/AtkStatsContainer/BoxContainer/RangeDamageContainer/DamageDatasContainer/CritContainer"]
+[node name="DividerLabel2" type="Label" parent="HBoxContainer/ScrollContainer/StatsMainContainer/AtkStatsContainer/BoxContainer/RangeDamageContainer/DamageDatasContainer/CritContainer" unique_id=586922355]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -661,18 +668,18 @@ theme = ExtResource("4_uc0ya")
 text = "="
 horizontal_alignment = 1
 
-[node name="PhyAttackIcon" type="TextureRect" parent="HBoxContainer/ScrollContainer/StatsMainContainer/AtkStatsContainer/BoxContainer/RangeDamageContainer/DamageDatasContainer/CritContainer"]
+[node name="PhyAttackIcon" type="TextureRect" parent="HBoxContainer/ScrollContainer/StatsMainContainer/AtkStatsContainer/BoxContainer/RangeDamageContainer/DamageDatasContainer/CritContainer" unique_id=1296787232]
 layout_mode = 2
 texture = ExtResource("17_uovi3")
 
-[node name="DividerLabel" type="Label" parent="HBoxContainer/ScrollContainer/StatsMainContainer/AtkStatsContainer/BoxContainer/RangeDamageContainer/DamageDatasContainer/CritContainer"]
+[node name="DividerLabel" type="Label" parent="HBoxContainer/ScrollContainer/StatsMainContainer/AtkStatsContainer/BoxContainer/RangeDamageContainer/DamageDatasContainer/CritContainer" unique_id=1508119316]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("4_uc0ya")
 text = "x"
 horizontal_alignment = 1
 
-[node name="ModValLabel" type="Label" parent="HBoxContainer/ScrollContainer/StatsMainContainer/AtkStatsContainer/BoxContainer/RangeDamageContainer/DamageDatasContainer/CritContainer"]
+[node name="ModValLabel" type="Label" parent="HBoxContainer/ScrollContainer/StatsMainContainer/AtkStatsContainer/BoxContainer/RangeDamageContainer/DamageDatasContainer/CritContainer" unique_id=656083320]
 self_modulate = Color(0.498039, 0, 0, 1)
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
@@ -680,29 +687,29 @@ theme = ExtResource("4_uc0ya")
 text = "1.5"
 horizontal_alignment = 1
 
-[node name="VSeparator2" type="VSeparator" parent="HBoxContainer/ScrollContainer/StatsMainContainer/AtkStatsContainer/BoxContainer/RangeDamageContainer/DamageDatasContainer/CritContainer"]
+[node name="VSeparator2" type="VSeparator" parent="HBoxContainer/ScrollContainer/StatsMainContainer/AtkStatsContainer/BoxContainer/RangeDamageContainer/DamageDatasContainer/CritContainer" unique_id=483723964]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="ColorRect13" type="ColorRect" parent="HBoxContainer/ScrollContainer/StatsMainContainer/AtkStatsContainer/BoxContainer/RangeDamageContainer/DamageDatasContainer"]
+[node name="ColorRect13" type="ColorRect" parent="HBoxContainer/ScrollContainer/StatsMainContainer/AtkStatsContainer/BoxContainer/RangeDamageContainer/DamageDatasContainer" unique_id=946142534]
 custom_minimum_size = Vector2(0, 2)
 layout_mode = 2
 color = Color(0.498039, 0, 0, 1)
 
-[node name="MainHandDamageContainer" parent="HBoxContainer/ScrollContainer/StatsMainContainer/AtkStatsContainer/BoxContainer/RangeDamageContainer/DamageDatasContainer" instance=ExtResource("23_wcejv")]
+[node name="MainHandDamageContainer" parent="HBoxContainer/ScrollContainer/StatsMainContainer/AtkStatsContainer/BoxContainer/RangeDamageContainer/DamageDatasContainer" unique_id=1464827987 instance=ExtResource("23_wcejv")]
 layout_mode = 2
 
-[node name="OtherHandDamageContainer2" parent="HBoxContainer/ScrollContainer/StatsMainContainer/AtkStatsContainer/BoxContainer/RangeDamageContainer/DamageDatasContainer" instance=ExtResource("23_wcejv")]
+[node name="OtherHandDamageContainer2" parent="HBoxContainer/ScrollContainer/StatsMainContainer/AtkStatsContainer/BoxContainer/RangeDamageContainer/DamageDatasContainer" unique_id=1721206262 instance=ExtResource("23_wcejv")]
 layout_mode = 2
 
-[node name="HSeparator4" type="HSeparator" parent="HBoxContainer/ScrollContainer/StatsMainContainer"]
+[node name="HSeparator4" type="HSeparator" parent="HBoxContainer/ScrollContainer/StatsMainContainer" unique_id=1685892709]
 visible = false
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="DefStatsContainer" type="Container" parent="HBoxContainer/ScrollContainer/StatsMainContainer" node_paths=PackedStringArray("background", "inner_container")]
+[node name="DefStatsContainer" type="Container" parent="HBoxContainer/ScrollContainer/StatsMainContainer" unique_id=634852278 node_paths=PackedStringArray("background", "inner_container")]
 custom_minimum_size = Vector2(12, 118)
 layout_mode = 2
 script = ExtResource("8_3eiim")
@@ -711,7 +718,7 @@ inner_container = NodePath("BoxContainer")
 margin_override = 6
 force_fill_x = true
 
-[node name="Background" type="NinePatchRect" parent="HBoxContainer/ScrollContainer/StatsMainContainer/DefStatsContainer"]
+[node name="Background" type="NinePatchRect" parent="HBoxContainer/ScrollContainer/StatsMainContainer/DefStatsContainer" unique_id=794537904]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -722,18 +729,18 @@ patch_margin_top = 18
 patch_margin_right = 18
 patch_margin_bottom = 19
 
-[node name="BoxContainer" type="BoxContainer" parent="HBoxContainer/ScrollContainer/StatsMainContainer/DefStatsContainer"]
+[node name="BoxContainer" type="BoxContainer" parent="HBoxContainer/ScrollContainer/StatsMainContainer/DefStatsContainer" unique_id=1067089442]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 theme_override_constants/separation = 0
 alignment = 1
 vertical = true
 
-[node name="ArmorWardContainer" type="HBoxContainer" parent="HBoxContainer/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer"]
+[node name="ArmorWardContainer" type="HBoxContainer" parent="HBoxContainer/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer" unique_id=477977815]
 layout_mode = 2
 alignment = 1
 
-[node name="ArmorContainer" type="BoxContainer" parent="HBoxContainer/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/ArmorWardContainer" node_paths=PackedStringArray("name_label", "icon", "value_label")]
+[node name="ArmorContainer" type="BoxContainer" parent="HBoxContainer/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/ArmorWardContainer" unique_id=2053394587 node_paths=PackedStringArray("name_label", "icon", "value_label")]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 0
@@ -743,8 +750,9 @@ stat_name = "Armor"
 name_label = NodePath("NameLabel")
 icon = NodePath("IconRect")
 value_label = NodePath("StatLabel")
+force_to_int = true
 
-[node name="NameLabel" type="Label" parent="HBoxContainer/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/ArmorWardContainer/ArmorContainer"]
+[node name="NameLabel" type="Label" parent="HBoxContainer/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/ArmorWardContainer/ArmorContainer" unique_id=620463252]
 visible = false
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
@@ -752,11 +760,11 @@ theme = ExtResource("4_uc0ya")
 text = "Amr:"
 horizontal_alignment = 1
 
-[node name="IconRect" type="TextureRect" parent="HBoxContainer/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/ArmorWardContainer/ArmorContainer"]
+[node name="IconRect" type="TextureRect" parent="HBoxContainer/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/ArmorWardContainer/ArmorContainer" unique_id=793674586]
 layout_mode = 2
 texture = ExtResource("24_n7cqn")
 
-[node name="StatLabel" type="Label" parent="HBoxContainer/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/ArmorWardContainer/ArmorContainer"]
+[node name="StatLabel" type="Label" parent="HBoxContainer/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/ArmorWardContainer/ArmorContainer" unique_id=536934348]
 self_modulate = Color(0.498039, 0, 0, 1)
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
@@ -764,7 +772,7 @@ theme = ExtResource("4_uc0ya")
 text = "000"
 horizontal_alignment = 1
 
-[node name="EvasionContainer" type="BoxContainer" parent="HBoxContainer/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/ArmorWardContainer" node_paths=PackedStringArray("name_label", "icon", "value_label")]
+[node name="EvasionContainer" type="BoxContainer" parent="HBoxContainer/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/ArmorWardContainer" unique_id=1083308771 node_paths=PackedStringArray("name_label", "icon", "value_label")]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 0
@@ -774,8 +782,9 @@ stat_name = "Evasion"
 name_label = NodePath("NameLabel")
 icon = NodePath("IconRect")
 value_label = NodePath("StatLabel")
+force_to_int = true
 
-[node name="NameLabel" type="Label" parent="HBoxContainer/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/ArmorWardContainer/EvasionContainer"]
+[node name="NameLabel" type="Label" parent="HBoxContainer/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/ArmorWardContainer/EvasionContainer" unique_id=686626010]
 visible = false
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
@@ -783,11 +792,11 @@ theme = ExtResource("4_uc0ya")
 text = "Evd:"
 horizontal_alignment = 1
 
-[node name="IconRect" type="TextureRect" parent="HBoxContainer/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/ArmorWardContainer/EvasionContainer"]
+[node name="IconRect" type="TextureRect" parent="HBoxContainer/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/ArmorWardContainer/EvasionContainer" unique_id=1582733765]
 layout_mode = 2
 texture = ExtResource("25_2cgoa")
 
-[node name="StatLabel" type="Label" parent="HBoxContainer/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/ArmorWardContainer/EvasionContainer"]
+[node name="StatLabel" type="Label" parent="HBoxContainer/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/ArmorWardContainer/EvasionContainer" unique_id=1430204266]
 self_modulate = Color(0.498039, 0, 0, 1)
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
@@ -795,12 +804,12 @@ theme = ExtResource("4_uc0ya")
 text = "000"
 horizontal_alignment = 1
 
-[node name="ColorRect" type="ColorRect" parent="HBoxContainer/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/ArmorWardContainer"]
+[node name="ColorRect" type="ColorRect" parent="HBoxContainer/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/ArmorWardContainer" unique_id=71106974]
 custom_minimum_size = Vector2(2, 0)
 layout_mode = 2
 color = Color(0.498039, 0, 0, 1)
 
-[node name="WardContainer" type="BoxContainer" parent="HBoxContainer/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/ArmorWardContainer" node_paths=PackedStringArray("name_label", "icon", "value_label")]
+[node name="WardContainer" type="BoxContainer" parent="HBoxContainer/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/ArmorWardContainer" unique_id=189660896 node_paths=PackedStringArray("name_label", "icon", "value_label")]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 0
@@ -810,8 +819,9 @@ stat_name = "Ward"
 name_label = NodePath("NameLabel")
 icon = NodePath("IconRect")
 value_label = NodePath("StatLabel")
+force_to_int = true
 
-[node name="NameLabel" type="Label" parent="HBoxContainer/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/ArmorWardContainer/WardContainer"]
+[node name="NameLabel" type="Label" parent="HBoxContainer/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/ArmorWardContainer/WardContainer" unique_id=2140723564]
 visible = false
 self_modulate = Color(0.498039, 0, 0, 1)
 custom_minimum_size = Vector2(34, 0)
@@ -820,11 +830,11 @@ theme = ExtResource("4_uc0ya")
 text = "Wrd:"
 horizontal_alignment = 2
 
-[node name="IconRect" type="TextureRect" parent="HBoxContainer/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/ArmorWardContainer/WardContainer"]
+[node name="IconRect" type="TextureRect" parent="HBoxContainer/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/ArmorWardContainer/WardContainer" unique_id=1394662360]
 layout_mode = 2
 texture = ExtResource("26_5fpfq")
 
-[node name="StatLabel" type="Label" parent="HBoxContainer/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/ArmorWardContainer/WardContainer"]
+[node name="StatLabel" type="Label" parent="HBoxContainer/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/ArmorWardContainer/WardContainer" unique_id=73213657]
 self_modulate = Color(0.498039, 0, 0, 1)
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
@@ -832,7 +842,7 @@ theme = ExtResource("4_uc0ya")
 text = "000"
 horizontal_alignment = 1
 
-[node name="ProtectionContainer" type="BoxContainer" parent="HBoxContainer/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/ArmorWardContainer" node_paths=PackedStringArray("name_label", "icon", "value_label")]
+[node name="ProtectionContainer" type="BoxContainer" parent="HBoxContainer/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/ArmorWardContainer" unique_id=174277452 node_paths=PackedStringArray("name_label", "icon", "value_label")]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 0
@@ -842,8 +852,9 @@ stat_name = "Protection"
 name_label = NodePath("NameLabel")
 icon = NodePath("IconRect")
 value_label = NodePath("StatLabel")
+force_to_int = true
 
-[node name="NameLabel" type="Label" parent="HBoxContainer/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/ArmorWardContainer/ProtectionContainer"]
+[node name="NameLabel" type="Label" parent="HBoxContainer/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/ArmorWardContainer/ProtectionContainer" unique_id=813896708]
 visible = false
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
@@ -851,11 +862,11 @@ theme = ExtResource("4_uc0ya")
 text = "Pro:"
 horizontal_alignment = 1
 
-[node name="IconRect" type="TextureRect" parent="HBoxContainer/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/ArmorWardContainer/ProtectionContainer"]
+[node name="IconRect" type="TextureRect" parent="HBoxContainer/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/ArmorWardContainer/ProtectionContainer" unique_id=979638487]
 layout_mode = 2
 texture = ExtResource("27_d6xhv")
 
-[node name="StatLabel" type="Label" parent="HBoxContainer/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/ArmorWardContainer/ProtectionContainer"]
+[node name="StatLabel" type="Label" parent="HBoxContainer/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/ArmorWardContainer/ProtectionContainer" unique_id=1952982472]
 self_modulate = Color(0.498039, 0, 0, 1)
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
@@ -863,30 +874,30 @@ theme = ExtResource("4_uc0ya")
 text = "000"
 horizontal_alignment = 1
 
-[node name="ColorRect3" type="ColorRect" parent="HBoxContainer/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer"]
+[node name="ColorRect3" type="ColorRect" parent="HBoxContainer/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer" unique_id=99792126]
 custom_minimum_size = Vector2(2, 2)
 layout_mode = 2
 color = Color(0.498039, 0, 0, 1)
 
-[node name="BlockContainer" type="BoxContainer" parent="HBoxContainer/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer"]
+[node name="BlockContainer" type="BoxContainer" parent="HBoxContainer/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer" unique_id=903307784]
 custom_minimum_size = Vector2(68, 0)
 layout_mode = 2
 theme_override_constants/separation = 0
 alignment = 1
 
-[node name="VSeparator" type="VSeparator" parent="HBoxContainer/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/BlockContainer"]
+[node name="VSeparator" type="VSeparator" parent="HBoxContainer/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/BlockContainer" unique_id=559448927]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="NameLabel" type="Label" parent="HBoxContainer/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/BlockContainer"]
+[node name="NameLabel" type="Label" parent="HBoxContainer/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/BlockContainer" unique_id=751976123]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("4_uc0ya")
 text = "Block: "
 horizontal_alignment = 2
 
-[node name="BlockChanceContainer" type="BoxContainer" parent="HBoxContainer/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/BlockContainer" node_paths=PackedStringArray("name_label", "icon", "value_label")]
+[node name="BlockChanceContainer" type="BoxContainer" parent="HBoxContainer/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/BlockContainer" unique_id=893336204 node_paths=PackedStringArray("name_label", "icon", "value_label")]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 0
@@ -896,8 +907,9 @@ stat_name = "BlockChance"
 name_label = NodePath("NameLabel")
 icon = NodePath("IconRect")
 value_label = NodePath("StatLabel")
+force_to_int = true
 
-[node name="NameLabel" type="Label" parent="HBoxContainer/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/BlockContainer/BlockChanceContainer"]
+[node name="NameLabel" type="Label" parent="HBoxContainer/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/BlockContainer/BlockChanceContainer" unique_id=763512493]
 visible = false
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
@@ -905,11 +917,11 @@ theme = ExtResource("4_uc0ya")
 text = "Pro:"
 horizontal_alignment = 1
 
-[node name="IconRect" type="TextureRect" parent="HBoxContainer/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/BlockContainer/BlockChanceContainer"]
+[node name="IconRect" type="TextureRect" parent="HBoxContainer/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/BlockContainer/BlockChanceContainer" unique_id=958731138]
 layout_mode = 2
 texture = ExtResource("28_37oj4")
 
-[node name="StatLabel" type="Label" parent="HBoxContainer/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/BlockContainer/BlockChanceContainer"]
+[node name="StatLabel" type="Label" parent="HBoxContainer/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/BlockContainer/BlockChanceContainer" unique_id=1906312624]
 self_modulate = Color(0.498039, 0, 0, 1)
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
@@ -917,14 +929,14 @@ theme = ExtResource("4_uc0ya")
 text = "000"
 horizontal_alignment = 1
 
-[node name="DividerLabel" type="Label" parent="HBoxContainer/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/BlockContainer/BlockChanceContainer"]
+[node name="DividerLabel" type="Label" parent="HBoxContainer/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/BlockContainer/BlockChanceContainer" unique_id=1187647771]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("4_uc0ya")
 text = "%"
 horizontal_alignment = 1
 
-[node name="DividerLabel2" type="Label" parent="HBoxContainer/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/BlockContainer"]
+[node name="DividerLabel2" type="Label" parent="HBoxContainer/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/BlockContainer" unique_id=1455462821]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -932,7 +944,7 @@ theme = ExtResource("4_uc0ya")
 text = "="
 horizontal_alignment = 1
 
-[node name="BlockModContainer" type="BoxContainer" parent="HBoxContainer/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/BlockContainer" node_paths=PackedStringArray("name_label", "icon", "value_label")]
+[node name="BlockModContainer" type="BoxContainer" parent="HBoxContainer/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/BlockContainer" unique_id=331697762 node_paths=PackedStringArray("name_label", "icon", "value_label")]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 0
@@ -943,7 +955,7 @@ name_label = NodePath("NameLabel")
 icon = NodePath("IconRect")
 value_label = NodePath("StatLabel")
 
-[node name="NameLabel" type="Label" parent="HBoxContainer/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/BlockContainer/BlockModContainer"]
+[node name="NameLabel" type="Label" parent="HBoxContainer/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/BlockContainer/BlockModContainer" unique_id=886570504]
 visible = false
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
@@ -951,23 +963,23 @@ theme = ExtResource("4_uc0ya")
 text = "Pro:"
 horizontal_alignment = 1
 
-[node name="PhyAttackIcon" type="TextureRect" parent="HBoxContainer/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/BlockContainer/BlockModContainer"]
+[node name="PhyAttackIcon" type="TextureRect" parent="HBoxContainer/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/BlockContainer/BlockModContainer" unique_id=723289129]
 layout_mode = 2
 texture = ExtResource("17_uovi3")
 
-[node name="DividerLabel" type="Label" parent="HBoxContainer/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/BlockContainer/BlockModContainer"]
+[node name="DividerLabel" type="Label" parent="HBoxContainer/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/BlockContainer/BlockModContainer" unique_id=36617442]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("4_uc0ya")
 text = "x"
 horizontal_alignment = 1
 
-[node name="IconRect" type="TextureRect" parent="HBoxContainer/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/BlockContainer/BlockModContainer"]
+[node name="IconRect" type="TextureRect" parent="HBoxContainer/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/BlockContainer/BlockModContainer" unique_id=881344855]
 visible = false
 layout_mode = 2
 texture = ExtResource("28_37oj4")
 
-[node name="StatLabel" type="Label" parent="HBoxContainer/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/BlockContainer/BlockModContainer"]
+[node name="StatLabel" type="Label" parent="HBoxContainer/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/BlockContainer/BlockModContainer" unique_id=242475652]
 self_modulate = Color(0.498039, 0, 0, 1)
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
@@ -975,37 +987,37 @@ theme = ExtResource("4_uc0ya")
 text = "000"
 horizontal_alignment = 1
 
-[node name="VSeparator2" type="VSeparator" parent="HBoxContainer/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/BlockContainer"]
+[node name="VSeparator2" type="VSeparator" parent="HBoxContainer/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/BlockContainer" unique_id=892638596]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="ColorRect12" type="ColorRect" parent="HBoxContainer/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer"]
+[node name="ColorRect12" type="ColorRect" parent="HBoxContainer/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer" unique_id=2129510110]
 custom_minimum_size = Vector2(2, 2)
 layout_mode = 2
 color = Color(0.498039, 0, 0, 1)
 
-[node name="MainContainer" type="HBoxContainer" parent="HBoxContainer/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer"]
+[node name="MainContainer" type="HBoxContainer" parent="HBoxContainer/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer" unique_id=1211351212]
 custom_minimum_size = Vector2(0, 48)
 layout_mode = 2
 alignment = 1
 
-[node name="MiniAwarnessDisplay" parent="HBoxContainer/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/MainContainer" instance=ExtResource("29_adlsp")]
+[node name="MiniAwarnessDisplay" parent="HBoxContainer/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/MainContainer" unique_id=1785431654 instance=ExtResource("29_adlsp")]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 update = false
 
-[node name="EvadeBlockGrid" type="VBoxContainer" parent="HBoxContainer/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/MainContainer"]
+[node name="EvadeBlockGrid" type="VBoxContainer" parent="HBoxContainer/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/MainContainer" unique_id=177208080]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 0
 
-[node name="AwarenessChancesContainer" type="HBoxContainer" parent="HBoxContainer/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/MainContainer/EvadeBlockGrid"]
+[node name="AwarenessChancesContainer" type="HBoxContainer" parent="HBoxContainer/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/MainContainer/EvadeBlockGrid" unique_id=1007611462]
 layout_mode = 2
 alignment = 2
 
-[node name="AwarenessContainer" type="BoxContainer" parent="HBoxContainer/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/MainContainer/EvadeBlockGrid/AwarenessChancesContainer" node_paths=PackedStringArray("name_label", "icon", "value_label")]
+[node name="AwarenessContainer" type="BoxContainer" parent="HBoxContainer/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/MainContainer/EvadeBlockGrid/AwarenessChancesContainer" unique_id=807825572 node_paths=PackedStringArray("name_label", "icon", "value_label")]
 layout_mode = 2
 theme_override_constants/separation = 0
 alignment = 1
@@ -1014,26 +1026,27 @@ stat_name = "Awareness"
 name_label = NodePath("NameLabel")
 icon = NodePath("IconRect")
 value_label = NodePath("StatLabel")
+force_to_int = true
 
-[node name="NameLabel" type="Label" parent="HBoxContainer/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/MainContainer/EvadeBlockGrid/AwarenessChancesContainer/AwarenessContainer"]
+[node name="NameLabel" type="Label" parent="HBoxContainer/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/MainContainer/EvadeBlockGrid/AwarenessChancesContainer/AwarenessContainer" unique_id=735422366]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("4_uc0ya")
 text = "Awr:"
 horizontal_alignment = 1
 
-[node name="IconRect" type="TextureRect" parent="HBoxContainer/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/MainContainer/EvadeBlockGrid/AwarenessChancesContainer/AwarenessContainer"]
+[node name="IconRect" type="TextureRect" parent="HBoxContainer/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/MainContainer/EvadeBlockGrid/AwarenessChancesContainer/AwarenessContainer" unique_id=1675380817]
 layout_mode = 2
 texture = ExtResource("30_ycu0b")
 
-[node name="StatLabel" type="Label" parent="HBoxContainer/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/MainContainer/EvadeBlockGrid/AwarenessChancesContainer/AwarenessContainer"]
+[node name="StatLabel" type="Label" parent="HBoxContainer/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/MainContainer/EvadeBlockGrid/AwarenessChancesContainer/AwarenessContainer" unique_id=893768607]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("4_uc0ya")
 text = "1"
 horizontal_alignment = 1
 
-[node name="ChanceTitleLabel" type="Label" parent="HBoxContainer/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/MainContainer/EvadeBlockGrid/AwarenessChancesContainer"]
+[node name="ChanceTitleLabel" type="Label" parent="HBoxContainer/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/MainContainer/EvadeBlockGrid/AwarenessChancesContainer" unique_id=594060526]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -1041,21 +1054,21 @@ theme = ExtResource("4_uc0ya")
 text = "Fwd / Flk / Bck"
 horizontal_alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/MainContainer/EvadeBlockGrid"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/MainContainer/EvadeBlockGrid" unique_id=1277764452]
 layout_mode = 2
 alignment = 1
 
-[node name="ColorRect" type="ColorRect" parent="HBoxContainer/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/MainContainer/EvadeBlockGrid/VBoxContainer"]
+[node name="ColorRect" type="ColorRect" parent="HBoxContainer/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/MainContainer/EvadeBlockGrid/VBoxContainer" unique_id=790660484]
 custom_minimum_size = Vector2(0, 2)
 layout_mode = 2
 color = Color(0.498039, 0, 0, 1)
 
-[node name="EvadeRow" type="HBoxContainer" parent="HBoxContainer/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/MainContainer/EvadeBlockGrid"]
+[node name="EvadeRow" type="HBoxContainer" parent="HBoxContainer/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/MainContainer/EvadeBlockGrid" unique_id=635078547]
 layout_mode = 2
 theme_override_constants/separation = 0
 alignment = 2
 
-[node name="EvasionLabel" type="Label" parent="HBoxContainer/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/MainContainer/EvadeBlockGrid/EvadeRow"]
+[node name="EvasionLabel" type="Label" parent="HBoxContainer/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/MainContainer/EvadeBlockGrid/EvadeRow" unique_id=1157486136]
 self_modulate = Color(0.498039, 0, 0, 1)
 custom_minimum_size = Vector2(34, 0)
 layout_mode = 2
@@ -1063,11 +1076,11 @@ theme = ExtResource("4_uc0ya")
 text = "Evs:"
 horizontal_alignment = 1
 
-[node name="IconRect" type="TextureRect" parent="HBoxContainer/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/MainContainer/EvadeBlockGrid/EvadeRow"]
+[node name="IconRect" type="TextureRect" parent="HBoxContainer/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/MainContainer/EvadeBlockGrid/EvadeRow" unique_id=1298349767]
 layout_mode = 2
 texture = ExtResource("25_2cgoa")
 
-[node name="FrontValLabel" type="Label" parent="HBoxContainer/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/MainContainer/EvadeBlockGrid/EvadeRow"]
+[node name="FrontValLabel" type="Label" parent="HBoxContainer/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/MainContainer/EvadeBlockGrid/EvadeRow" unique_id=1831109022]
 self_modulate = Color(0, 0.392157, 0, 1)
 custom_minimum_size = Vector2(46, 0)
 layout_mode = 2
@@ -1075,7 +1088,7 @@ theme = ExtResource("4_uc0ya")
 text = "50%"
 horizontal_alignment = 1
 
-[node name="FlankValLabel" type="Label" parent="HBoxContainer/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/MainContainer/EvadeBlockGrid/EvadeRow"]
+[node name="FlankValLabel" type="Label" parent="HBoxContainer/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/MainContainer/EvadeBlockGrid/EvadeRow" unique_id=1943354511]
 self_modulate = Color(0.639216, 0.407843, 0, 1)
 custom_minimum_size = Vector2(46, 0)
 layout_mode = 2
@@ -1083,7 +1096,7 @@ theme = ExtResource("4_uc0ya")
 text = "25%"
 horizontal_alignment = 1
 
-[node name="BackValLabel" type="Label" parent="HBoxContainer/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/MainContainer/EvadeBlockGrid/EvadeRow"]
+[node name="BackValLabel" type="Label" parent="HBoxContainer/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/MainContainer/EvadeBlockGrid/EvadeRow" unique_id=1386178358]
 self_modulate = Color(0.498039, 0, 0, 1)
 custom_minimum_size = Vector2(46, 0)
 layout_mode = 2
@@ -1091,12 +1104,12 @@ theme = ExtResource("4_uc0ya")
 text = "--%"
 horizontal_alignment = 1
 
-[node name="EvadeRow2" type="HBoxContainer" parent="HBoxContainer/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/MainContainer/EvadeBlockGrid"]
+[node name="EvadeRow2" type="HBoxContainer" parent="HBoxContainer/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/MainContainer/EvadeBlockGrid" unique_id=641336647]
 layout_mode = 2
 theme_override_constants/separation = 0
 alignment = 2
 
-[node name="EvasionLabel" type="Label" parent="HBoxContainer/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/MainContainer/EvadeBlockGrid/EvadeRow2"]
+[node name="EvasionLabel" type="Label" parent="HBoxContainer/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/MainContainer/EvadeBlockGrid/EvadeRow2" unique_id=773111308]
 self_modulate = Color(0.498039, 0, 0, 1)
 custom_minimum_size = Vector2(34, 0)
 layout_mode = 2
@@ -1104,11 +1117,11 @@ theme = ExtResource("4_uc0ya")
 text = "Blk:"
 horizontal_alignment = 2
 
-[node name="IconRect" type="TextureRect" parent="HBoxContainer/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/MainContainer/EvadeBlockGrid/EvadeRow2"]
+[node name="IconRect" type="TextureRect" parent="HBoxContainer/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/MainContainer/EvadeBlockGrid/EvadeRow2" unique_id=2019488674]
 layout_mode = 2
 texture = ExtResource("28_37oj4")
 
-[node name="FrontValLabel" type="Label" parent="HBoxContainer/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/MainContainer/EvadeBlockGrid/EvadeRow2"]
+[node name="FrontValLabel" type="Label" parent="HBoxContainer/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/MainContainer/EvadeBlockGrid/EvadeRow2" unique_id=1789542249]
 self_modulate = Color(0, 0.392157, 0, 1)
 custom_minimum_size = Vector2(46, 0)
 layout_mode = 2
@@ -1116,7 +1129,7 @@ theme = ExtResource("4_uc0ya")
 text = "50%"
 horizontal_alignment = 1
 
-[node name="FlankValLabel" type="Label" parent="HBoxContainer/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/MainContainer/EvadeBlockGrid/EvadeRow2"]
+[node name="FlankValLabel" type="Label" parent="HBoxContainer/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/MainContainer/EvadeBlockGrid/EvadeRow2" unique_id=1516716994]
 self_modulate = Color(0.639216, 0.407843, 0, 1)
 custom_minimum_size = Vector2(46, 0)
 layout_mode = 2
@@ -1124,7 +1137,7 @@ theme = ExtResource("4_uc0ya")
 text = "25%"
 horizontal_alignment = 1
 
-[node name="BackValLabel" type="Label" parent="HBoxContainer/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/MainContainer/EvadeBlockGrid/EvadeRow2"]
+[node name="BackValLabel" type="Label" parent="HBoxContainer/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/MainContainer/EvadeBlockGrid/EvadeRow2" unique_id=1511461984]
 self_modulate = Color(0.498039, 0, 0, 1)
 custom_minimum_size = Vector2(46, 0)
 layout_mode = 2
@@ -1132,7 +1145,7 @@ theme = ExtResource("4_uc0ya")
 text = "--%"
 horizontal_alignment = 1
 
-[node name="FullStatDisplayControl" type="Control" parent="HBoxContainer/ScrollContainer/StatsMainContainer" node_paths=PackedStringArray("entries_container", "premade_entry")]
+[node name="FullStatDisplayControl" type="Control" parent="HBoxContainer/ScrollContainer/StatsMainContainer" unique_id=1238669236 node_paths=PackedStringArray("entries_container", "premade_entry")]
 visible = false
 layout_mode = 2
 size_flags_vertical = 3
@@ -1140,17 +1153,17 @@ script = ExtResource("31_uk8cv")
 entries_container = NodePath("VBoxContainer")
 premade_entry = NodePath("VBoxContainer/StatEntryContainer")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/ScrollContainer/StatsMainContainer/FullStatDisplayControl"]
-layout_mode = 2
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/ScrollContainer/StatsMainContainer/FullStatDisplayControl" unique_id=616934805]
+layout_mode = 0
 offset_top = -4.0
 offset_right = 48.0
 offset_bottom = 16.0
 
-[node name="StatEntryContainer" type="HBoxContainer" parent="HBoxContainer/ScrollContainer/StatsMainContainer/FullStatDisplayControl/VBoxContainer"]
+[node name="StatEntryContainer" type="HBoxContainer" parent="HBoxContainer/ScrollContainer/StatsMainContainer/FullStatDisplayControl/VBoxContainer" unique_id=932289498]
 layout_mode = 2
 script = ExtResource("32_6xe5g")
 
-[node name="StatNameLabel" type="Label" parent="HBoxContainer/ScrollContainer/StatsMainContainer/FullStatDisplayControl/VBoxContainer/StatEntryContainer"]
+[node name="StatNameLabel" type="Label" parent="HBoxContainer/ScrollContainer/StatsMainContainer/FullStatDisplayControl/VBoxContainer/StatEntryContainer" unique_id=558248893]
 visible = false
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
@@ -1158,11 +1171,11 @@ size_flags_horizontal = 3
 theme = ExtResource("4_uc0ya")
 text = "STAT_NAME"
 
-[node name="StatLabelContainer" parent="HBoxContainer/ScrollContainer/StatsMainContainer/FullStatDisplayControl/VBoxContainer/StatEntryContainer" node_paths=PackedStringArray("mouse_over_parent") instance=ExtResource("9_5364f")]
+[node name="StatLabelContainer" parent="HBoxContainer/ScrollContainer/StatsMainContainer/FullStatDisplayControl/VBoxContainer/StatEntryContainer" unique_id=25653629 node_paths=PackedStringArray("mouse_over_parent") instance=ExtResource("9_5364f")]
 layout_mode = 2
 mouse_over_parent = NodePath("../../..")
 
-[node name="ResistancesContainer" type="Container" parent="HBoxContainer/ScrollContainer/StatsMainContainer" node_paths=PackedStringArray("entries_contaienr", "premade_resistance_label", "background", "inner_container")]
+[node name="ResistancesContainer" type="Container" parent="HBoxContainer/ScrollContainer/StatsMainContainer" unique_id=864090102 node_paths=PackedStringArray("entries_contaienr", "premade_resistance_label", "background", "inner_container")]
 custom_minimum_size = Vector2(12, 44)
 layout_mode = 2
 script = ExtResource("17_2u3r8")
@@ -1173,7 +1186,7 @@ inner_container = NodePath("BoxContainer")
 margin_override = 6
 force_fill_x = true
 
-[node name="Background" type="NinePatchRect" parent="HBoxContainer/ScrollContainer/StatsMainContainer/ResistancesContainer"]
+[node name="Background" type="NinePatchRect" parent="HBoxContainer/ScrollContainer/StatsMainContainer/ResistancesContainer" unique_id=458574351]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -1184,39 +1197,39 @@ patch_margin_top = 18
 patch_margin_right = 18
 patch_margin_bottom = 19
 
-[node name="BoxContainer" type="BoxContainer" parent="HBoxContainer/ScrollContainer/StatsMainContainer/ResistancesContainer"]
+[node name="BoxContainer" type="BoxContainer" parent="HBoxContainer/ScrollContainer/StatsMainContainer/ResistancesContainer" unique_id=2019639175]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 theme_override_constants/separation = 0
 alignment = 1
 vertical = true
 
-[node name="ResistanceLabel" type="HBoxContainer" parent="HBoxContainer/ScrollContainer/StatsMainContainer/ResistancesContainer/BoxContainer"]
+[node name="ResistanceLabel" type="HBoxContainer" parent="HBoxContainer/ScrollContainer/StatsMainContainer/ResistancesContainer/BoxContainer" unique_id=1899819679]
 visible = false
 layout_mode = 2
 alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="HBoxContainer/ScrollContainer/StatsMainContainer/ResistancesContainer/BoxContainer/ResistanceLabel"]
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/ScrollContainer/StatsMainContainer/ResistancesContainer/BoxContainer/ResistanceLabel" unique_id=1241525038]
 layout_mode = 2
 texture = ExtResource("31_kpb2n")
 expand_mode = 3
 stretch_mode = 5
 
-[node name="NameLabel" type="Label" parent="HBoxContainer/ScrollContainer/StatsMainContainer/ResistancesContainer/BoxContainer/ResistanceLabel"]
+[node name="NameLabel" type="Label" parent="HBoxContainer/ScrollContainer/StatsMainContainer/ResistancesContainer/BoxContainer/ResistanceLabel" unique_id=464958910]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("4_uc0ya")
 text = "Fire"
 horizontal_alignment = 1
 
-[node name="SepLabel" type="Label" parent="HBoxContainer/ScrollContainer/StatsMainContainer/ResistancesContainer/BoxContainer/ResistanceLabel"]
+[node name="SepLabel" type="Label" parent="HBoxContainer/ScrollContainer/StatsMainContainer/ResistancesContainer/BoxContainer/ResistanceLabel" unique_id=2141055080]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("4_uc0ya")
 text = ":"
 horizontal_alignment = 1
 
-[node name="ValueLabel" type="Label" parent="HBoxContainer/ScrollContainer/StatsMainContainer/ResistancesContainer/BoxContainer/ResistanceLabel"]
+[node name="ValueLabel" type="Label" parent="HBoxContainer/ScrollContainer/StatsMainContainer/ResistancesContainer/BoxContainer/ResistanceLabel" unique_id=354075207]
 self_modulate = Color(0.498039, 0, 0, 1)
 custom_minimum_size = Vector2(34, 0)
 layout_mode = 2
@@ -1224,20 +1237,20 @@ theme = ExtResource("4_uc0ya")
 text = "100"
 horizontal_alignment = 1
 
-[node name="PercentLabel" type="Label" parent="HBoxContainer/ScrollContainer/StatsMainContainer/ResistancesContainer/BoxContainer/ResistanceLabel"]
+[node name="PercentLabel" type="Label" parent="HBoxContainer/ScrollContainer/StatsMainContainer/ResistancesContainer/BoxContainer/ResistanceLabel" unique_id=806636201]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("4_uc0ya")
 text = "%"
 horizontal_alignment = 2
 
-[node name="ColorRect" type="ColorRect" parent="HBoxContainer/ScrollContainer/StatsMainContainer/ResistancesContainer/BoxContainer"]
+[node name="ColorRect" type="ColorRect" parent="HBoxContainer/ScrollContainer/StatsMainContainer/ResistancesContainer/BoxContainer" unique_id=1529775770]
 visible = false
 custom_minimum_size = Vector2(0, 2)
 layout_mode = 2
 color = Color(0.498039, 0, 0, 1)
 
-[node name="StatsScrollBar" parent="HBoxContainer" node_paths=PackedStringArray("scroll_container") instance=ExtResource("33_u8ay1")]
+[node name="StatsScrollBar" parent="HBoxContainer" unique_id=1654215878 node_paths=PackedStringArray("scroll_container") instance=ExtResource("33_u8ay1")]
 visible = false
 layout_mode = 2
 scroll_container = NodePath("../ScrollContainer")

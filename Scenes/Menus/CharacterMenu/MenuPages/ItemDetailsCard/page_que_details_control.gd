@@ -33,7 +33,8 @@ func set_item(actor:BaseActor, que:BaseQueEquipment):
 		new_label.show()
 	
 	if _actor and _actor.equipment.has_item(_item.Id):
-		parent_card_control.equip_button_background.hide()
+		pass
+		#parent_card_control.equip_button_background.hide()
 		#parent_card_control.equip_label.text = "Remove"	
 	#elif _actor.equipment.can_equip_item(_item):
 		#parent_card_control.equip_label.text = "Equip"

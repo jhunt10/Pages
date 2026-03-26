@@ -1,0 +1,360 @@
+[gd_scene format=3 uid="uid://s63mns1njwe7"]
+
+[ext_resource type="Script" uid="uid://cnfqwo2sskeoe" path="res://Scenes/Maps/DecoreNodes/Bridge/bridge_sprite_node.gd" id="1_dekgy"]
+[ext_resource type="Texture2D" uid="uid://co5l7fv3g84j1" path="res://Scenes/Maps/DecoreNodes/Bridge/BridgeGear.png" id="2_x8hsv"]
+[ext_resource type="Texture2D" uid="uid://cewo6pmduvxdy" path="res://Scenes/Maps/DecoreNodes/Bridge/BridgeGrate.png" id="3_lpgph"]
+[ext_resource type="Texture2D" uid="uid://cqsh1t5efel8a" path="res://Scenes/Maps/DecoreNodes/Bridge/BridgeBase.png" id="4_d5o2u"]
+[ext_resource type="Texture2D" uid="uid://d08pkegkdqqsp" path="res://Scenes/Maps/DecoreNodes/Bridge/BridgeGrate_R.png" id="5_oqdvc"]
+
+[sub_resource type="Animation" id="Animation_8beua"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Left_Grate:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(25, 15)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Left_Grate:region_rect")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Rect2(42, 0, 6, 60)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Right_Grate:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(103, 15)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Right_Grate:region_rect")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Rect2(0, 0, 6, 60)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Left_Gear_B:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Left_Gear_T:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Right_Gear_B:rotation")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Right_Gear_T:rotation")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_ktdbu"]
+resource_name = "close_gate"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Left_Grate:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(41, 15), Vector2(25, 15)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Left_Grate:region_rect")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Rect2(0, 0, 48, 60), Rect2(42, 0, 6, 60)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Right_Grate:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(86, 15), Vector2(103, 15)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Right_Grate:region_rect")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Rect2(0, 0, 48, 60), Rect2(0, 0, 6, 60)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Left_Gear_B:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [4.71239, 0.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Left_Gear_T:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [4.71239, 0.0]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Right_Gear_B:rotation")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-4.71239, 0.0]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Right_Gear_T:rotation")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-4.71239, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_qff0l"]
+resource_name = "open_gate"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Left_Grate:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(25, 15), Vector2(41, 15)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Left_Grate:region_rect")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Rect2(42, 0, 6, 60), Rect2(0, 0, 48, 60)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Right_Grate:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(103, 15), Vector2(86, 15)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Right_Grate:region_rect")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Rect2(0, 0, 6, 60), Rect2(0, 0, 48, 60)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Left_Gear_B:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 4.71239]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Left_Gear_T:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 4.71239]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Right_Gear_B:rotation")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, -4.71239]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Right_Gear_T:rotation")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, -4.71239]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hbar0"]
+_data = {
+&"RESET": SubResource("Animation_8beua"),
+&"close_gate": SubResource("Animation_ktdbu"),
+&"open_gate": SubResource("Animation_qff0l")
+}
+
+[node name="BridgeSpriteNode" type="Node2D" unique_id=2022832271 node_paths=PackedStringArray("animation_player")]
+modulate = Color(0.427451, 0.501961, 1, 1)
+script = ExtResource("1_dekgy")
+gate_key = "Bridge"
+animation_player = NodePath("AnimationPlayer")
+map_coor = Vector2i(12, 10)
+
+[node name="Left_Gear_T" type="Sprite2D" parent="." unique_id=550280153]
+position = Vector2(18, -14)
+texture = ExtResource("2_x8hsv")
+
+[node name="Left_Grate" type="Sprite2D" parent="." unique_id=67055179]
+position = Vector2(25, 15)
+texture = ExtResource("3_lpgph")
+region_enabled = true
+region_rect = Rect2(42, 0, 6, 60)
+
+[node name="Left_Base" type="Sprite2D" parent="." unique_id=782829333]
+position = Vector2(16, 14)
+texture = ExtResource("4_d5o2u")
+
+[node name="Left_Gear_B" type="Sprite2D" parent="." unique_id=672746438]
+position = Vector2(18, 47)
+texture = ExtResource("2_x8hsv")
+
+[node name="Right_Gear_T" type="Sprite2D" parent="." unique_id=1878923788]
+position = Vector2(110, -14)
+texture = ExtResource("2_x8hsv")
+
+[node name="Right_Grate" type="Sprite2D" parent="." unique_id=1705244378]
+position = Vector2(103, 15)
+texture = ExtResource("5_oqdvc")
+region_enabled = true
+region_rect = Rect2(0, 0, 6, 60)
+
+[node name="Right_Base" type="Sprite2D" parent="." unique_id=1904455760]
+position = Vector2(112, 14)
+texture = ExtResource("4_d5o2u")
+flip_h = true
+
+[node name="Right_Gear_B" type="Sprite2D" parent="." unique_id=755471215]
+position = Vector2(110, 47)
+texture = ExtResource("2_x8hsv")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1092344285]
+libraries/ = SubResource("AnimationLibrary_hbar0")

@@ -1,13 +1,13 @@
 class_name MainMenuSceneControl
 extends VBoxContainer
 var root_node:MainRootNode = MainRootNode.Instance
-@onready var main_container = $VBoxContainer
-@onready var tutorial_button:TextureButton = $VBoxContainer/TutorialContainer/TutorialButton
-@onready var pages_button:TextureButton = $VBoxContainer/PagesContainer/PagesButton
-@onready var start_button:TextureButton = $VBoxContainer/StartContainer/StartButton
-@onready var load_button:TextureButton = $VBoxContainer/LoadContainer/LoadButton
-@onready var more_button:TextureButton = $VBoxContainer/MoreContainer/MoreButton
-@onready var quit_button:TextureButton = $VBoxContainer/QuitContainer/QuitButton
+@onready var main_container = $OptionsContainer
+#@onready var tutorial_button:MenuOptionLabel = $VBoxContainer/OptionsContainer/Start_OptionLabel
+@onready var pages_button:MenuOptionLabel = $OptionsContainer/Data_OptionLabel
+@onready var start_button:MenuOptionLabel = $OptionsContainer/Start_OptionLabel
+@onready var load_button:MenuOptionLabel = $OptionsContainer/Load_OptionLabel
+#@onready var more_button:MenuOptionLabel = $VBoxContainer/OptionsContainer/Start_OptionLabel
+@onready var quit_button:MenuOptionLabel = $OptionsContainer/Quit_OptionLabel
 
 @onready var more_container = $VBoxContainer2
 @onready var back_button:TextureButton = $VBoxContainer2/BackContainer/BackButton
@@ -22,11 +22,11 @@ func _ready() -> void:
 	load_button.pressed.connect(_open_load_menu)
 	page_button.pressed.connect(_open_page_edit)
 	effects_button.pressed.connect(_open_effect_edit)
-	tutorial_button.pressed.connect(_open_tutorial)
+	#tutorial_button.pressed.connect(_open_tutorial)
 	dev_tools_button.pressed.connect(_dev_tools)
 	animation_button.pressed.connect(_open_animation_tester)
 	pages_button.pressed.connect(_open_pages_menu)
-	more_button.pressed.connect(show_sub_menu.bind("More"))
+	#more_button.pressed.connect(show_sub_menu.bind("More"))
 	back_button.pressed.connect(show_sub_menu.bind("Main"))
 	quit_button.pressed.connect(quit_game)
 	show_sub_menu("Main")
