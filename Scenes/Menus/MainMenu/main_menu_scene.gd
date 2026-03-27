@@ -4,6 +4,7 @@ var root_node:MainRootNode = MainRootNode.Instance
 @onready var main_container = $OptionsContainer
 #@onready var tutorial_button:MenuOptionLabel = $VBoxContainer/OptionsContainer/Start_OptionLabel
 @onready var pages_button:MenuOptionLabel = $OptionsContainer/Data_OptionLabel
+@onready var continue_button:MenuOptionLabel = $OptionsContainer/Continue_OptionLabel
 @onready var start_button:MenuOptionLabel = $OptionsContainer/Start_OptionLabel
 @onready var load_button:MenuOptionLabel = $OptionsContainer/Load_OptionLabel
 #@onready var more_button:MenuOptionLabel = $VBoxContainer/OptionsContainer/Start_OptionLabel
@@ -30,6 +31,13 @@ func _ready() -> void:
 	back_button.pressed.connect(show_sub_menu.bind("Main"))
 	quit_button.pressed.connect(quit_game)
 	show_sub_menu("Main")
+	
+	var newest_save = SaveLoadHandler.get_newest_save_id()
+	if newest_save == '':
+		continue_button.disabled = true
+	else:
+		continue_button.pressed.connect(_on_contenue.bind(newest_save))
+		
 
 func quit_game():
 	get_tree().quit()
@@ -69,3 +77,6 @@ func _dev_tools():
 
 func _open_animation_tester():
 	root_node.open_animation_tester()
+
+func _on_contenue(save_id:String):
+	SaveLoadHandler.load_save_data(save_id)

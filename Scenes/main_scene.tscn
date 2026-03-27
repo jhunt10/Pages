@@ -1,8 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://byj06fnjunkun"]
+[gd_scene format=3 uid="uid://byj06fnjunkun"]
 
-[ext_resource type="Script" path="res://assets/Scripts/main_node.gd" id="1_fwth5"]
+[ext_resource type="Script" uid="uid://b7jmrmnyewn5o" path="res://assets/Scripts/main_node.gd" id="1_fwth5"]
 
-[node name="MainRootControl" type="Control" node_paths=PackedStringArray("center_container")]
+[node name="MainRootControl" type="Control" unique_id=467854402 node_paths=PackedStringArray("center_container")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -15,7 +15,7 @@ mouse_filter = 2
 script = ExtResource("1_fwth5")
 center_container = NodePath("CenterContainer")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="ColorRect" type="ColorRect" parent="." unique_id=167816199]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -25,7 +25,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.376471, 1, 1, 1)
 
-[node name="CenterContainer" type="CenterContainer" parent="."]
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=904803266]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

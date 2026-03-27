@@ -67,6 +67,8 @@ func _ready() -> void:
 		_on_slot_pressed(_last_save_load_name)
 	elif save_mode:
 		_on_slot_pressed(NEW_SAVE_KEY)
+	else:
+		display_newest_save()
 	close_button.pressed.connect(on_close_menu)
 	save_button.pressed.connect(_on_save_button)
 	delete_button.pressed.connect(_on_delete_button)
@@ -134,7 +136,19 @@ func read_existing_saves():
 	if save_mode:
 		save_slots[NEW_SAVE_KEY] = save_slot_new
 		_cached_save_meta_data[NEW_SAVE_KEY] = _saving_data
+	
+	# Order save data by save date
+	var mapping = []
 	for save_name in _cached_save_meta_data.keys():
+		var save_data = _cached_save_meta_data[save_name]
+		mapping.append({
+			"SaveName": save_name,
+			"SaveDate": Time.get_unix_time_from_datetime_string(save_data['SaveDate'])
+		})
+		mapping.sort_custom(SaveLoadHandler._sort_saves_desc)
+	
+	for meta_data in mapping:
+		var save_name = meta_data['SaveName']
 		if save_name == NEW_SAVE_KEY:
 			continue
 		create_save_slot_container(save_name, _cached_save_meta_data[save_name])
@@ -178,6 +192,13 @@ func _on_slot_pressed(save_name):
 	slot.highlight.show()
 	var data = _cached_save_meta_data.get(save_name, {})
 	set_displayed_save_data(save_name, data)
+
+func display_newest_save():
+	var newest_id = SaveLoadHandler.get_newest_save_id()
+	for save_name in _cached_save_meta_data.keys():
+		var data = _cached_save_meta_data[save_name]
+		if data['SaveId'] == newest_id:
+			_on_slot_pressed(save_name)
 
 func set_displayed_save_data(save_name:String, data):
 	sel_save_name_label.text = data.get("SaveName", save_name)

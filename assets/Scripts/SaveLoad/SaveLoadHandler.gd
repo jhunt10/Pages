@@ -80,3 +80,30 @@ static func delete_save(save_name:String):
 	var meta_file = FileAccess.open(meta_file_path, FileAccess.WRITE)
 	meta_file.store_string(JSON.stringify(saves_dic))
 	
+static func get_newest_save_id()->String:
+	var saves = read_saves_meta_data()
+	if saves.size() == 0:
+		return ''
+	
+	var mappings = []
+	for save_data in saves.values():
+		mappings.append({
+			'SaveId': save_data['SaveId'],
+			'SaveDate': Time.get_unix_time_from_datetime_string(save_data['SaveDate'])
+		})
+	mappings.sort_custom(_sort_saves_desc)
+	
+	return mappings[0]['SaveId']
+
+static  func _sort_saves_desc(save_a, save_b)->bool:
+	# return a > b
+	var save_a_date = save_a['SaveDate']
+	var save_b_date = save_b['SaveDate']
+	if save_a_date < save_b_date:
+		#print("'%s' < '%s'" % [save_a['SaveId'], save_b['SaveId']])
+		print("'%s' < '%s'" % [save_a_date, save_b_date])
+	else:
+		#print("'%s' > '%s'" % [save_a['SaveId'], save_b['SaveId']])
+		print("'%s' > '%s'" % [save_a_date, save_b_date])
+	return save_a_date > save_b_date
+	

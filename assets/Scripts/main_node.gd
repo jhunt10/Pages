@@ -50,10 +50,10 @@ func start_combat(map_scene_path):
 	LoadManager.load_combat(map_scene_path)
 
 func start_game():
-	if !ActionLibrary.Instance: var lib = ActionLibrary.new()
-	if !ItemLibrary.Instance: var lib = ItemLibrary.new()
-	if !EffectLibrary.Instance: var lib = EffectLibrary.new()
-	if !ActorLibrary.Instance: var lib = ActorLibrary.new()
+	if !ActionLibrary.Instance: var _lib = ActionLibrary.new()
+	if !ItemLibrary.Instance: var _lib = ItemLibrary.new()
+	if !EffectLibrary.Instance: var _lib = EffectLibrary.new()
+	if !ActorLibrary.Instance: var _lib = ActorLibrary.new()
 	StoryState.start_new_story()
 	#var char_select:StartCharacterSelectMenu = load("res://Scenes/Menus/StartCharacterSelectMenu/start_character_select_menu.tscn").instantiate()
 	#self.add_child(char_select)
@@ -98,15 +98,15 @@ func open_camp_menu(dialog_script:String=''):
 	if current_scene is CampMenu and dialog_script == '':
 		
 		return
-	#current_scene.queue_free()
 	#prune_objects()
 	var data = {}
 	if dialog_script != '':
 		data['DialogScript'] = dialog_script
-	LoadManager.load_scene("res://Scenes/Menus/CampMenu/camp_menu.tscn", data)
-	#var camp_scene = load("res://Scenes/Menus/CampMenu/camp_menu.tscn").instantiate()
-	#self.add_child(camp_scene)
-	#current_scene = camp_scene
+	#LoadManager.load_scene("res://Scenes/Menus/CampMenu/camp_menu.tscn", data)
+	current_scene.queue_free()
+	var camp_scene = load("res://Scenes/Menus/CampMenu/camp_menu.tscn").instantiate()
+	self.add_child(camp_scene)
+	current_scene = camp_scene
 	
 
 
@@ -152,7 +152,7 @@ func open_character_sheet(_actor:BaseActor=null, parent_node=null)->CharacterMen
 		actor = StoryState.get_party_actor_by_index(0)
 		#actor = ActorLibrary.create_actor("TestActor", {})
 	var charsheet:CharacterMenuControl = load("res://Scenes/Menus/CharacterMenu/character_menu.tscn").instantiate()
-	var screen_size = self.size
+	#var screen_size = self.size
 	#var menu_scale = screen_size.y / charsheet.size.y
 	#charsheet.scale_control.scale = Vector2(scale, scale)
 	charsheet.scale_control.scale = Vector2(1, 1)

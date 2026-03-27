@@ -11,11 +11,14 @@ theme_override_colors/font_color = Color(0.49803922, 0, 0, 1)
 theme_override_font_sizes/font_size = 48
 text = "Option"
 script = ExtResource("2_b45v8")
+default_color = Color(0.49803922, 0, 0, 1)
 pressed_color = Color(1, 1, 1, 1)
+disabled_color = Color(0.27022192, 0.27022192, 0.2702219, 1)
 under_line = NodePath("ColorRect")
 button = NodePath("Button")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1262391265]
+visible = false
 custom_minimum_size = Vector2(0, 3)
 layout_mode = 1
 anchors_preset = -1

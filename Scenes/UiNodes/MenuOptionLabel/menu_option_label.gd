@@ -1,14 +1,28 @@
+@tool
 class_name MenuOptionLabel
 extends Label
 
 signal pressed
 
-@export var disabled:bool
+@export var disabled:bool:
+	set(val):
+		print("test")
+		disabled = val
+		if disabled:
+			self.add_theme_color_override('font_color', disabled_color)
+		else:
+			self.add_theme_color_override('font_color', default_color)
+
+@export var default_color:Color:
+	set(val):
+		default_color = val
+		if not disabled:
+			self.add_theme_color_override('font_color', default_color)
+
 @export var pressed_color:Color
+@export var disabled_color:Color
 @export var under_line:ColorRect
 @export var button:Button
-
-var default_color:Color
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -32,7 +46,3 @@ func _button_up():
 	if disabled: return
 	self.add_theme_color_override('font_color', default_color)
 	pressed.emit()
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
