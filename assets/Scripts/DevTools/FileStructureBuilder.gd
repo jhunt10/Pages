@@ -14,6 +14,8 @@ static func DoThing():
 	#create_class_def_files("Rogue")
 	#rename_test_files()
 	#output_descriptions()
+	intake_descriptions()
+	pass
 
 static func output_descriptions():
 	var all_defs = get_all_defs()
