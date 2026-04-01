@@ -1,1 +1,520 @@
-{"BaseAxe_Weapon":{"!ObjectScript":"res://assets/Scripts/Items/Equipment/Tools/BaseWeaponEquipment.gd","!ParentKey":"#BaseMeleeWeapon","#ObjDetails":{"Description":"A basic Axe used for chopping foes.","DisplayName":"Axe","LargeIcon":"Sprites/BaseAxe_Icon.png","ObjectType":"Item","SmallIcon":"Sprites/BaseAxe_Icon.png","SnippetDesc":"an axe","Tags":["Weapon","Axe"]},"EquipmentData":{"StatMods":{"AttackBonus":{"Value":10.0}}},"WeaponData":{"AttackData":{"DamageDatas":{"WeaponDamage":{"AtkPwrRange":30.0,"DamageType":"Slash"}}},"WeaponSpriteData":{"WeaponAnimation":"Swing"}},"_DefVersion":"1"},"BaseClub_Weapon":{"!ObjectScript":"res://assets/Scripts/Items/Equipment/Tools/BaseWeaponEquipment.gd","!ParentKey":"#BaseMeleeWeapon","#ObjDetails":{"Description":"A basic Club used for clubbing foes not seals.","DisplayName":"Club","LargeIcon":"Sprites/BaseClub_Icon.png","ObjectType":"Item","SmallIcon":"Sprites/BaseClub_Icon.png","SnippetDesc":"a Club","Tags":["Weapon","OffHand","Club"]},"EquipmentData":{"StatMods":{"AttackBonus":{"Value":10.0}}},"WeaponData":{"AttackData":{"DamageDatas":{"WeaponDamage":{"AtkPwrBase":50.0,"AtkPwrRange":10.0,"DamageType":"Blunt"}}},"WeaponClass":"Light","WeaponSpriteData":{"WeaponAnimation":"Swing"}},"_DefVersion":"1"},"BaseDagger_Weapon":{"!ObjectScript":"res://assets/Scripts/Items/Equipment/Tools/BaseWeaponEquipment.gd","!ParentKey":"#BaseMeleeWeapon","#ObjDetails":{"Description":"A basic Dagger used for stabbing foes.","DisplayName":"Dagger","LargeIcon":"Sprites/BaseDagger_Icon.png","ObjectType":"Item","SmallIcon":"Sprites/BaseDagger_Icon.png","SnippetDesc":"a Dagger","Tags":["Weapon","OffHand","Dagger"]},"EquipmentData":{"StatMods":{"AttackBonus":{"Value":10.0}}},"WeaponData":{"AttackData":{"DamageDatas":{"WeaponDamage":{"AtkPwrBase":50.0,"AtkPwrRange":8.0,"DamageType":"Slash"}}},"WeaponClass":"Light","WeaponSpriteData":{"WeaponAnimation":"Stab"}},"_DefVersion":"1"},"BaseGreatHammer_Weapon":{"!ObjectScript":"res://assets/Scripts/Items/Equipment/Tools/BaseWeaponEquipment.gd","!ParentKey":"#BaseMeleeWeapon","#ObjDetails":{"Description":"A basic Great Hammer used for obliterating foes.","DisplayName":"Great Hammer","LargeIcon":"Sprites/BaseHammer_Icon.png","ObjectType":"Item","SmallIcon":"Sprites/BaseHammer_Icon.png","SnippetDesc":"an pretty great Hammer","Tags":["Weapon","TwoHand","GreatHammer"]},"EquipmentData":{"StatMods":{"AttackBonus":{"Value":200.0}}},"ItemData":{"Rarity":"Mundane","Value":200.0},"WeaponData":{"AttackData":{"DamageDatas":{"WeaponDamage":{"AtkPwrRange":30.0,"DamageType":"Blunt"}},"TargetParams":{"LineOfSight":true,"TargetArea":"[[-1,1],[0,1],[1,1]]","TargetType":"Actor"}},"WeaponClass":"Heavy","WeaponSpriteData":{"WeaponAnimation":"Swing"}},"_DefVersion":"1"},"BaseGreatSword_Weapon":{"!ObjectScript":"res://assets/Scripts/Items/Equipment/Tools/BaseWeaponEquipment.gd","!ParentKey":"#BaseMeleeWeapon","#ObjDetails":{"Description":"A basic Great Sword used for bisecting foes.","DisplayName":"Great Sword","LargeIcon":"Sprites/BaseHeavySword_Icon.png","ObjectType":"Item","SmallIcon":"Sprites/BaseHeavySword_Icon.png","SnippetDesc":"an pretty great sword","Tags":["Weapon","TwoHand","GreatSword"]},"EquipmentData":{"StatMods":{"AttackBonus":{"Value":10.0}}},"ItemData":{"Rarity":"Mundane","Value":200.0},"WeaponData":{"AttackData":{"DamageDatas":{"WeaponDamage":{"AtkPwrRange":20.0,"DamageType":"Slash"}},"TargetParams":{"LineOfSight":true,"TargetArea":"[[-1,1],[0,1],[1,1]]","TargetType":"Actor"}},"WeaponClass":"Heavy","WeaponSpriteData":{"WeaponAnimation":"Swing"}},"_DefVersion":"1"},"BaseMace_Weapon":{"!ObjectScript":"res://assets/Scripts/Items/Equipment/Tools/BaseWeaponEquipment.gd","!ParentKey":"#BaseMeleeWeapon","#ObjDetails":{"Description":"A basic Mace used for smashing foes.","DisplayName":"Mace","LargeIcon":"Sprites/BaseMace_Icon.png","ObjectType":"Item","SmallIcon":"Sprites/BaseMace_Icon.png","SnippetDesc":"a Mace","Tags":["Weapon","Mace"]},"EquipmentData":{"StatMods":{"AttackBonus":{"Value":10.0}}},"WeaponData":{"AttackData":{"DamageDatas":{"WeaponDamage":{"AtkPwrRange":30.0,"DamageType":"Blunt"}}},"WeaponSpriteData":{"WeaponAnimation":"Swing"}},"_DefVersion":"1"},"BaseShiv_Weapon":{"!ObjectScript":"res://assets/Scripts/Items/Equipment/Tools/BaseWeaponEquipment.gd","!ParentKey":"#BaseMeleeWeapon","#ObjDetails":{"Description":"A basic Shiv used for shaking a bitch.","DisplayName":"Shiv","LargeIcon":"Sprites/BaseShiv_Icon.png","ObjectType":"Item","SmallIcon":"Sprites/BaseShiv_Icon.png","SnippetDesc":"a Shiv","Tags":["Weapon","OffHand","Shiv"]},"EquipmentData":{"StatMods":{"AttackBonus":{"Value":10.0}}},"WeaponData":{"AttackData":{"DamageDatas":{"WeaponDamage":{"AtkPwrBase":50.0,"AtkPwrRange":5.0,"DamageType":"Slash"}}},"WeaponClass":"Light","WeaponSpriteData":{"WeaponAnimation":"Stab"}},"_DefVersion":"1"},"BaseSpear_Weapon":{"!ObjectScript":"res://assets/Scripts/Items/Equipment/Tools/BaseWeaponEquipment.gd","!ParentKey":"#BaseMeleeWeapon","#ObjDetails":{"Description":"A basic Spear used for poking foes.","DisplayName":"Spear","LargeIcon":"Sprites/BaseSpear_Icon.png","ObjectType":"Item","SmallIcon":"Sprites/BaseSpear_Icon.png","SnippetDesc":"an spear","Tags":["Weapon","Spear"]},"EquipmentData":{"StatMods":{"AttackBonus":{"Value":10.0}}},"WeaponData":{"AttackData":{"DamageDatas":{"WeaponDamage":{"AtkPwrRange":5.0,"DamageType":"Pierce"}},"TargetParams":{"LineOfSight":true,"TargetArea":"[[-1,1],[0,1],[1,1],[0,2]]","TargetType":"Actor"}},"WeaponSpriteData":{"WeaponAnimation":"Stab"}},"_DefVersion":"1"},"BaseSword_Weapon":{"!ObjectScript":"res://assets/Scripts/Items/Equipment/Tools/BaseWeaponEquipment.gd","!ParentKey":"#BaseMeleeWeapon","#ObjDetails":{"Description":"A basic Sword used for cutting down foes.","DisplayName":"Sword","LargeIcon":"Sprites/BaseSword_Icon.png","ObjectType":"Item","SmallIcon":"Sprites/BaseSword_Icon.png","SnippetDesc":"a sword","Tags":["Weapon","Sword"]},"EquipmentData":{"StatMods":{"AttackBonus":{"Value":10.0}}},"WeaponData":{"AttackData":{"DamageDatas":{"WeaponDamage":{"AtkPwrRange":10.0,"DamageType":"Slash"}}},"WeaponSpriteData":{"WeaponAnimation":"Swing"}},"_DefVersion":"1"},"FireSword_Weapon":{"!ObjectScript":"res://assets/Scripts/Items/Equipment/Tools/BaseWeaponEquipment.gd","!ParentKey":"BaseSword_Weapon","#ObjDetails":{"Description":"A magical flaming Sword. This model applies magic fire to only the blade, and is considered a huge improvement over the old design.","DisplayName":"Fire Sword","LargeIcon":"Sprites/FireSword_Icon.png","ObjectType":"Item","SmallIcon":"Sprites/FireSword_Icon.png","SnippetDesc":"a flaming sword","Tags":["Weapon","Sword","FireWpn"]},"ItemData":{"Rarity":"Rare","Value":500.0},"WeaponData":{"AttackData":{"DamageDatas":{"WeaponDamage":{"DamageType":"Fire","DefenseType":"Ward"}}}},"_DefVersion":"1"},"IceKnife_Weapon":{"!ObjectScript":"res://assets/Scripts/Items/Equipment/Tools/BaseWeaponEquipment.gd","#ObjDetails":{"Description":"It was supposed to be the perfect murder. Stab the victim, knife melts, no evidence. But turns out magic ice doesn't melt, so here we are.","DisplayName":"Ice Knife","LargeIcon":"Sprites/IceKnife_Icon.png","ObjectType":"Item","SmallIcon":"Sprites/IceKnife_Icon.png","SnippetDesc":"A dagger made of ice.","Tags":["Weapon","OffHand","Dagger","ColdWpn"],"Taxonomy":["Item","Equipment","Tool","Weapon"]},"EquipmentData":{"EquipSlot":"Weapon","Requirments":{"ReqStats":{"Agility":10.0}},"StatMods":{"AttackBonus":{"ModType":"Add","StatName":"PhyAttack","Value":5.0}}},"ItemData":{"Rarity":"Rare","Value":500.0},"WeaponData":{"AttackData":{"AttackDetails":{"AccuracyMod":1.0,"PotencyMod":1.0},"AttackTags":["Weapon","Melee","Cold"],"DamageDatas":{"WeaponDamage":{"AtkPwrBase":50.0,"AtkPwrRange":5.0,"AtkStat":"PhyAttack","DamageType":"Cold","DamageVfxKey":"Cold_DamageEffect","DefenseType":"Ward"}},"EffectDatas":{},"TargetParams":{"LineOfSight":true,"TargetArea":"[[-1,0],[-1,1],[0,1],[1,1],[1,0]]","TargetType":"Actor"}},"IsRanged":false,"WeaponClass":"Light","WeaponSpriteData":{"Offset":[0.0,0.0],"Rotation":0.0,"WeaponAnimation":"Stab"}},"_DefVersion":"1"}}
+{
+  "BaseAxe_Weapon": {
+    "!ObjectScript": "res://assets/Scripts/Items/Equipment/Tools/BaseWeaponEquipment.gd",
+    "!ParentKey": "#BaseMeleeWeapon",
+    "#ObjDetails": {
+      "Description": "A basic Axe used for chopping foes.",
+      "DisplayName": "Axe",
+      "LargeIcon": "Sprites/BaseAxe_Icon.png",
+      "ObjectType": "Item",
+      "SmallIcon": "Sprites/BaseAxe_Icon.png",
+      "SnippetDesc": "an axe",
+      "Tags": [
+        "Weapon",
+        "Axe"
+      ]
+    },
+    "EquipmentData": {
+      "StatMods": {
+        "AttackBonus": {
+          "Value": 10.0
+        }
+      }
+    },
+    "WeaponData": {
+      "AttackData": {
+        "DamageDatas": {
+          "WeaponDamage": {
+            "AtkPwrRange": 30.0,
+            "DamageType": "Slash"
+          }
+        }
+      },
+      "WeaponSpriteData": {
+        "WeaponAnimation": "Swing"
+      }
+    },
+    "_DefVersion": "1"
+  },
+  "BaseClub_Weapon": {
+    "!ObjectScript": "res://assets/Scripts/Items/Equipment/Tools/BaseWeaponEquipment.gd",
+    "!ParentKey": "#BaseMeleeWeapon",
+    "#ObjDetails": {
+      "Description": "A basic Club used for clubbing foes not seals.",
+      "DisplayName": "Club",
+      "LargeIcon": "Sprites/BaseClub_Icon.png",
+      "ObjectType": "Item",
+      "SmallIcon": "Sprites/BaseClub_Icon.png",
+      "SnippetDesc": "a Club",
+      "Tags": [
+        "Weapon",
+        "OffHand",
+        "Club"
+      ]
+    },
+    "EquipmentData": {
+      "StatMods": {
+        "AttackBonus": {
+          "Value": 10.0
+        }
+      }
+    },
+    "WeaponData": {
+      "AttackData": {
+        "DamageDatas": {
+          "WeaponDamage": {
+            "AtkPwrBase": 50.0,
+            "AtkPwrRange": 10.0,
+            "DamageType": "Blunt"
+          }
+        }
+      },
+      "WeaponClass": "Light",
+      "WeaponSpriteData": {
+        "WeaponAnimation": "Swing"
+      }
+    },
+    "_DefVersion": "1"
+  },
+  "BaseDagger_Weapon": {
+    "!ObjectScript": "res://assets/Scripts/Items/Equipment/Tools/BaseWeaponEquipment.gd",
+    "!ParentKey": "#BaseMeleeWeapon",
+    "#ObjDetails": {
+      "Description": "A basic Dagger used for stabbing foes.",
+      "DisplayName": "Dagger",
+      "LargeIcon": "Sprites/BaseDagger_Icon.png",
+      "ObjectType": "Item",
+      "SmallIcon": "Sprites/BaseDagger_Icon.png",
+      "SnippetDesc": "a Dagger",
+      "Tags": [
+        "Weapon",
+        "OffHand",
+        "Dagger"
+      ]
+    },
+    "EquipmentData": {
+      "StatMods": {
+        "AttackBonus": {
+          "Value": 10.0
+        }
+      }
+    },
+    "WeaponData": {
+      "AttackData": {
+        "DamageDatas": {
+          "WeaponDamage": {
+            "AtkPwrBase": 50.0,
+            "AtkPwrRange": 8.0,
+            "DamageType": "Slash"
+          }
+        }
+      },
+      "WeaponClass": "Light",
+      "WeaponSpriteData": {
+        "WeaponAnimation": "Stab"
+      }
+    },
+    "_DefVersion": "1"
+  },
+  "BaseGreatHammer_Weapon": {
+    "!ObjectScript": "res://assets/Scripts/Items/Equipment/Tools/BaseWeaponEquipment.gd",
+    "!ParentKey": "#BaseMeleeWeapon",
+    "#ObjDetails": {
+      "Description": "A basic Great Hammer used for obliterating foes.",
+      "DisplayName": "Great Hammer",
+      "LargeIcon": "Sprites/BaseHammer_Icon.png",
+      "ObjectType": "Item",
+      "SmallIcon": "Sprites/BaseHammer_Icon.png",
+      "SnippetDesc": "an pretty great Hammer",
+      "Tags": [
+        "Weapon",
+        "TwoHand",
+        "GreatHammer"
+      ]
+    },
+    "EquipmentData": {
+      "StatMods": {
+        "AttackBonus": {
+          "Value": 200.0
+        }
+      }
+    },
+    "ItemData": {
+      "Rarity": "Mundane",
+      "Value": 200.0
+    },
+    "WeaponData": {
+      "AttackData": {
+        "DamageDatas": {
+          "WeaponDamage": {
+            "AtkPwrRange": 30.0,
+            "DamageType": "Blunt"
+          }
+        },
+        "TargetParams": {
+          "LineOfSight": true,
+          "TargetArea": "[[-1,1],[0,1],[1,1]]",
+          "TargetType": "Actor"
+        }
+      },
+      "WeaponClass": "Heavy",
+      "WeaponSpriteData": {
+        "WeaponAnimation": "Swing"
+      }
+    },
+    "_DefVersion": "1"
+  },
+  "BaseGreatSword_Weapon": {
+    "!ObjectScript": "res://assets/Scripts/Items/Equipment/Tools/BaseWeaponEquipment.gd",
+    "!ParentKey": "#BaseMeleeWeapon",
+    "#ObjDetails": {
+      "Description": "A basic Great Sword used for bisecting foes.",
+      "DisplayName": "Great Sword",
+      "LargeIcon": "Sprites/BaseHeavySword_Icon.png",
+      "ObjectType": "Item",
+      "SmallIcon": "Sprites/BaseHeavySword_Icon.png",
+      "SnippetDesc": "an pretty great sword",
+      "Tags": [
+        "Weapon",
+        "TwoHand",
+        "GreatSword"
+      ]
+    },
+    "EquipmentData": {
+      "StatMods": {
+        "AttackBonus": {
+          "Value": 10.0
+        }
+      }
+    },
+    "ItemData": {
+      "Rarity": "Mundane",
+      "Value": 200.0
+    },
+    "WeaponData": {
+      "AttackData": {
+        "DamageDatas": {
+          "WeaponDamage": {
+            "AtkPwrRange": 20.0,
+            "DamageType": "Slash"
+          }
+        },
+        "TargetParams": {
+          "LineOfSight": true,
+          "TargetArea": "[[-1,1],[0,1],[1,1]]",
+          "TargetType": "Actor"
+        }
+      },
+      "WeaponClass": "Heavy",
+      "WeaponSpriteData": {
+        "WeaponAnimation": "Swing"
+      }
+    },
+    "_DefVersion": "1"
+  },
+  "BaseMace_Weapon": {
+    "!ObjectScript": "res://assets/Scripts/Items/Equipment/Tools/BaseWeaponEquipment.gd",
+    "!ParentKey": "#BaseMeleeWeapon",
+    "#ObjDetails": {
+      "Description": "A basic Mace used for smashing foes.",
+      "DisplayName": "Mace",
+      "LargeIcon": "Sprites/BaseMace_Icon.png",
+      "ObjectType": "Item",
+      "SmallIcon": "Sprites/BaseMace_Icon.png",
+      "SnippetDesc": "a Mace",
+      "Tags": [
+        "Weapon",
+        "Mace"
+      ]
+    },
+    "EquipmentData": {
+      "StatMods": {
+        "AttackBonus": {
+          "Value": 10.0
+        }
+      }
+    },
+    "WeaponData": {
+      "AttackData": {
+        "DamageDatas": {
+          "WeaponDamage": {
+            "AtkPwrRange": 30.0,
+            "DamageType": "Blunt"
+          }
+        }
+      },
+      "WeaponSpriteData": {
+        "WeaponAnimation": "Swing"
+      }
+    },
+    "_DefVersion": "1"
+  },
+  "BaseShiv_Weapon": {
+    "!ObjectScript": "res://assets/Scripts/Items/Equipment/Tools/BaseWeaponEquipment.gd",
+    "!ParentKey": "#BaseMeleeWeapon",
+    "#ObjDetails": {
+      "Description": "A basic Shiv used for shaking a bitch.",
+      "DisplayName": "Shiv",
+      "LargeIcon": "Sprites/BaseShiv_Icon.png",
+      "ObjectType": "Item",
+      "SmallIcon": "Sprites/BaseShiv_Icon.png",
+      "SnippetDesc": "a Shiv",
+      "Tags": [
+        "Weapon",
+        "OffHand",
+        "Shiv"
+      ]
+    },
+    "EquipmentData": {
+      "StatMods": {
+        "AttackBonus": {
+          "Value": 10.0
+        }
+      }
+    },
+    "WeaponData": {
+      "AttackData": {
+        "DamageDatas": {
+          "WeaponDamage": {
+            "AtkPwrBase": 50.0,
+            "AtkPwrRange": 5.0,
+            "DamageType": "Slash"
+          }
+        }
+      },
+      "WeaponClass": "Light",
+      "WeaponSpriteData": {
+        "WeaponAnimation": "Stab"
+      }
+    },
+    "_DefVersion": "1"
+  },
+  "BaseSpear_Weapon": {
+    "!ObjectScript": "res://assets/Scripts/Items/Equipment/Tools/BaseWeaponEquipment.gd",
+    "!ParentKey": "#BaseMeleeWeapon",
+    "#ObjDetails": {
+      "Description": "A basic Spear used for poking foes.",
+      "DisplayName": "Spear",
+      "LargeIcon": "Sprites/BaseSpear_Icon.png",
+      "ObjectType": "Item",
+      "SmallIcon": "Sprites/BaseSpear_Icon.png",
+      "SnippetDesc": "an spear",
+      "Tags": [
+        "Weapon",
+        "Spear"
+      ]
+    },
+    "EquipmentData": {
+      "StatMods": {
+        "AttackBonus": {
+          "Value": 10.0
+        }
+      }
+    },
+    "WeaponData": {
+      "AttackData": {
+        "DamageDatas": {
+          "WeaponDamage": {
+            "AtkPwrRange": 5.0,
+            "DamageType": "Pierce"
+          }
+        },
+        "TargetParams": {
+          "LineOfSight": true,
+          "TargetArea": "[[-1,1],[0,1],[1,1],[0,2]]",
+          "TargetType": "Actor"
+        }
+      },
+      "WeaponSpriteData": {
+        "WeaponAnimation": "Stab"
+      }
+    },
+    "_DefVersion": "1"
+  },
+  "BaseSword_Weapon": {
+    "!ObjectScript": "res://assets/Scripts/Items/Equipment/Tools/BaseWeaponEquipment.gd",
+    "!ParentKey": "#BaseMeleeWeapon",
+    "#ObjDetails": {
+      "Description": "A basic Sword used for cutting down foes.",
+      "DisplayName": "Sword",
+      "LargeIcon": "Sprites/BaseSword_Icon.png",
+      "ObjectType": "Item",
+      "SmallIcon": "Sprites/BaseSword_Icon.png",
+      "SnippetDesc": "a sword",
+      "Tags": [
+        "Weapon",
+        "Sword"
+      ]
+    },
+    "EquipmentData": {
+      "StatMods": {
+        "AttackBonus": {
+          "Value": 10.0
+        }
+      }
+    },
+    "WeaponData": {
+      "AttackData": {
+        "DamageDatas": {
+          "WeaponDamage": {
+            "AtkPwrRange": 10.0,
+            "DamageType": "Slash"
+          }
+        }
+      },
+      "WeaponSpriteData": {
+        "WeaponAnimation": "Swing"
+      }
+    },
+    "_DefVersion": "1"
+  },
+  "BaseStaff_Weapon": {
+    "!ObjectScript": "res://assets/Scripts/Items/Equipment/Tools/BaseWeaponEquipment.gd",
+    "!ParentKey": "#BaseStaff_Weapon",
+    "#ObjDetails": {
+      "Description": "A basic Staff for blasting foes.",
+      "DisplayName": "Staff",
+      "LargeIcon": "Sprites/BaseStaff_Icon.png",
+      "ObjectType": "Item",
+      "SmallIcon": "Sprites/BaseStaff_Icon.png",
+      "SnippetDesc": "a sword",
+      "Tags": [
+        "Weapon",
+        "Staff"
+      ]
+    },
+    "_DefVersion": "1"
+  },
+  "BaseWand_Weapon": {
+    "!ObjectScript": "res://assets/Scripts/Items/Equipment/Tools/BaseWeaponEquipment.gd",
+    "!ParentKey": "#BaseWand_Weapon",
+    "#ObjDetails": {
+      "Description": "A basic Wand for pelting foes.",
+      "DisplayName": "Wand",
+      "LargeIcon": "Sprites/BaseWand_Icon.png",
+      "ObjectType": "Item",
+      "SmallIcon": "Sprites/BaseWand_Icon.png",
+      "SnippetDesc": "a wand.",
+      "Tags": [
+        "Weapon",
+        "Ranged",
+        "Wand"
+      ],
+    },
+    "_DefVersion": "1"
+  },
+  "FireSword_Weapon": {
+    "!ObjectScript": "res://assets/Scripts/Items/Equipment/Tools/BaseWeaponEquipment.gd",
+    "!ParentKey": "BaseSword_Weapon",
+    "#ObjDetails": {
+      "Description": "A magical flaming Sword. This model applies magic fire to only the blade, and is considered a huge improvement over the old design.",
+      "DisplayName": "Fire Sword",
+      "LargeIcon": "Sprites/FireSword_Icon.png",
+      "ObjectType": "Item",
+      "SmallIcon": "Sprites/FireSword_Icon.png",
+      "SnippetDesc": "a flaming sword",
+      "Tags": [
+        "Weapon",
+        "Sword",
+        "FireWpn"
+      ]
+    },
+    "ItemData": {
+      "Rarity": "Rare",
+      "Value": 500.0
+    },
+    "WeaponData": {
+      "AttackData": {
+        "DamageDatas": {
+          "WeaponDamage": {
+            "DamageType": "Fire",
+            "DefenseType": "Ward"
+          }
+        }
+      }
+    },
+    "_DefVersion": "1"
+  },
+  "IceKnife": {
+    "!ObjectScript": "res://assets/Scripts/Items/Equipment/Tools/BaseWeaponEquipment.gd",
+    "#ObjDetails": {
+      "Description": "It was supposed to be the perfect murder. Stab the victim, knife melts, no evidence. But turns out magic ice doesn't melt, so here we are.",
+      "DisplayName": "Ice Knife",
+      "LargeIcon": "Sprites/IceKnife_Icon.png",
+      "ObjectType": "Item",
+      "SmallIcon": "Sprites/IceKnife_Icon.png",
+      "SnippetDesc": "A dagger made of ice.",
+      "Tags": [
+        "Weapon",
+        "OffHand",
+        "Dagger",
+        "ColdWpn"
+      ],
+      "Taxonomy": [
+        "Item",
+        "Equipment",
+        "Tool",
+        "Weapon"
+      ]
+    },
+    "EquipmentData": {
+      "EquipSlot": "Weapon",
+      "Requirments": {
+        "ReqStats": {
+          "Agility": 10.0
+        }
+      },
+      "StatMods": {
+        "AttackBonus": {
+          "ModType": "Add",
+          "StatName": "PhyAttack",
+          "Value": 5.0
+        }
+      }
+    },
+    "ItemData": {
+      "Rarity": "Rare",
+      "Value": 500.0
+    },
+    "WeaponData": {
+      "AttackData": {
+        "AttackDetails": {
+          "AccuracyMod": 1.0,
+          "PotencyMod": 1.0
+        },
+        "AttackTags": [
+          "Weapon",
+          "Melee",
+          "Cold"
+        ],
+        "DamageDatas": {
+          "WeaponDamage": {
+            "AtkPwrBase": 50.0,
+            "AtkPwrRange": 5.0,
+            "AtkStat": "PhyAttack",
+            "DamageType": "Cold",
+            "DamageVfxKey": "Cold_DamageEffect",
+            "DefenseType": "Ward"
+          }
+        },
+        "EffectDatas": {},
+        "TargetParams": {
+          "LineOfSight": true,
+          "TargetArea": "[[-1,0],[-1,1],[0,1],[1,1],[1,0]]",
+          "TargetType": "Actor"
+        }
+      },
+      "IsRanged": false,
+      "WeaponClass": "Light",
+      "WeaponSpriteData": {
+        "Offset": [
+          0.0,
+          0.0
+        ],
+        "Rotation": 0.0,
+        "WeaponAnimation": "Stab"
+      }
+    },
+    "_DefVersion": "1"
+  }
+}
