@@ -1,1 +1,128 @@
-{"BaseSquirrel_TitlePage":{"!ObjectScript":"res://assets/Scripts/Items/Pages/PageItemTitle.gd","!ParentKey":"#BaseTitlePage","#ObjDetails":{"Description":"@@#Color:Red:Squirrels@@ are radical political extremist devoted to the @@#Color:Blue:New Squorld Order@@\n\nThese small and squirrely (they hate that term) @@#Tag:Beasts@@ are highly aggressive. While they may be lacking in @@#Stat:HealthMax@@ and @@#Stat:PhyAttack@@, they have high @@#Stat:Speed@@ and just enough @@#Stat:Evasion@@ to be annoying.\n\nOften attacking in large swarms, the @@#Color:Blue:NSO@@ has committed countless acts of terrorism on defenseless @@#Color:Red:Abandoned Villages@@. So don't feel bad about killing them.","DisplayName":"Squirrel","LargeIcon":"Sprites/SquirrelTitle_Icon.png","ObjectType":"Item","SmallIcon":"Sprites/SquirrelTitle_Icon.png","SnippetDesc":"Squirrel Title","Tags":["Title"],"Taxonomy":["Item","Page","Title"]},"ItemData":{"ItemType":"Page","Rarity":"Unique","Value":50.0},"PageData":{"AddTags":["Squirrel"],"PageRequirements":{"ConflictingPages":[],"IncompatiblePages":[],"TitleReq":"None"},"SourceTitle":"Base","StatMods":{"PhyAttackScale":{"DepStatName":"Strength","DisplayName":"Base Stats","ModType":"AddStat","StatName":"PhyAttack","Value":1.0}}},"PassiveData":{},"_DefVersion":"1"},"SquirrelMag_TitlePage":{"!ObjectScript":"res://assets/Scripts/Items/Pages/PageItemTitle.gd","!ParentKey":"BaseSquirrel_TitlePage","#ObjDetails":{"Description":"@@#Color:Red:Squirrcerer@@ are the @@#Tag:Magic@@ users of the @@#Color:Blue:NSO@@.\n\nThey have been trained in the forbidden acornic arts granting access to powerful acorn related @@#Tag:Spell:Hint:Spells@@... well, \"@@#Color:Blue:Spell@@\". They only have one. And all it can do is set an acorn on @@#Color:DmgColor:Fire@@ which they then throw. So I guess really they are just a @@#Color:Red:Squirrel@@ with a lighter that happens to only works on acorns.\n\nStill, they are technically casters so they like to stay on the back line and fair poorly against @@#Tag:Physical:Hint:Physical Attacks@@ or, in their case, being stepped on.","DisplayName":"Squirrcerer","LargeIcon":"Sprites/SquirrcererTitle_Icon.png","ObjectType":"Item","SmallIcon":"Sprites/SquirrcererTitle_Icon.png","SnippetDesc":"Squirrcerer Title","Tags":["Title"],"Taxonomy":["Item","Page","Title"]},"ItemData":{"ItemType":"Page","Rarity":"Unique","Value":50.0},"PageData":{"AddTags":["Squirrel","Squirrcerer"],"PageRequirements":{"ConflictingPages":[],"IncompatiblePages":[],"TitleReq":"None"},"SourceTitle":"Base","StatMods":{}},"PassiveData":{},"_DefVersion":"1"},"SquirrelPhy_TitlePage":{"!ObjectScript":"res://assets/Scripts/Items/Pages/PageItemTitle.gd","!ParentKey":"BaseSquirrel_TitlePage","#ObjDetails":{"Description":"@@#Color:Red:Squirrior@@ are the @@#Tag:Armor:Hint:Heavy Armored@@ defenders of the @@#Color:Blue:NSO@@.\n\nThey sacrifice their natural squirrelish @@#Stat:Evasion@@ for @@#Stat:Armor@@ to stand as the front line defense.\n\nFollowing the emergence of the @@#Color:Blue:NSO@@, @@#Color:Blue:The Military@@ commissioned researchers at @@#Color:Blue:The Collage@@ to uncover how these tiny fighters were able to achieve such high @@#Color:Red:Armor@@ with such tiny @@#Tag:Appearal@@. After decades of grant funded research, they concluded: \"Probably Magic.\"","DisplayName":"Squirrior","LargeIcon":"Sprites/SquirriorTitle_Icon.png","ObjectType":"Item","SmallIcon":"Sprites/SquirriorTitle_Icon.png","SnippetDesc":"Squirrior Title","Tags":["Title"],"Taxonomy":["Item","Page","Title"]},"ItemData":{"ItemType":"Page","Rarity":"Unique","Value":50.0},"PageData":{"AddTags":["Squirrel","Squirrcerer"],"PageRequirements":{"ConflictingPages":[],"IncompatiblePages":[],"TitleReq":"None"},"SourceTitle":"Base","StatMods":{}},"PassiveData":{},"_DefVersion":"1"}}
+{
+    "BaseSquirrel_TitlePage": {
+        "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemTitle.gd",
+        "!ParentKey": "#BaseTitlePage",
+        "#ObjDetails": {
+            "Description": "@@#Color:Red:Squirrels@@ are radical political extremist devoted to the @@#Color:Blue:New Squorld Order@@\n\nThese small and squirrely (they hate that term) @@#Tag:Beasts@@ are highly aggressive. While they may be lacking in @@#Stat:HealthMax@@ and @@#Stat:PhyAttack@@, they have high @@#Stat:Speed@@ and just enough @@#Stat:Evasion@@ to be annoying.\n\nOften attacking in large swarms, the @@#Color:Blue:NSO@@ has committed countless acts of terrorism on defenseless @@#Color:Red:Abandoned Villages@@. So don't feel bad about killing them.",
+            "DisplayName": "Squirrel",
+            "LargeIcon": "Sprites/SquirrelTitle_Icon.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/SquirrelTitle_Icon.png",
+            "SnippetDesc": "Squirrel Title",
+            "Tags": [
+                "Title"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Page",
+                "Title"
+            ]
+        },
+        "ItemData": {
+            "ItemType": "Page",
+            "Rarity": "Unique",
+            "Value": 50.0
+        },
+        "PageData": {
+            "AddTags": [
+                "Squirrel"
+            ],
+            "PageRequirements": {
+                "ConflictingPages": [],
+                "IncompatiblePages": [],
+                "TitleReq": "None"
+            },
+            "SourceTitle": "Base",
+            "StatMods": {
+                "PhyAttackScale": {
+                    "DepStatName": "Strength",
+                    "DisplayName": "Base Stats",
+                    "ModType": "AddStat",
+                    "StatName": "PhyAttack",
+                    "Value": 1.0
+                }
+            }
+        },
+        "PassiveData": {},
+        "_DefVersion": "1"
+    },
+    "SquirrelMag_TitlePage": {
+        "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemTitle.gd",
+        "!ParentKey": "BaseSquirrel_TitlePage",
+        "#ObjDetails": {
+            "Description": "@@#Color:Red:Squirrcerer@@ are the @@#Tag:Magic@@ users of the @@#Color:Blue:NSO@@.\n\nThey have been trained in the forbidden acornic arts granting access to powerful acorn related @@#Tag:Spell:Hint:Spells@@... well, \"@@#Color:Blue:Spell@@\". They only have one. And all it can do is set an acorn on @@#Color:DmgColor:Fire@@ which they then throw. So I guess really they are just a @@#Color:Red:Squirrel@@ with a lighter that happens to only works on acorns.\n\nStill, they are technically casters so they like to stay on the back line and fair poorly against @@#Tag:Physical:Hint:Physical Attacks@@ or, in their case, being stepped on.",
+            "DisplayName": "Squirrcerer",
+            "LargeIcon": "Sprites/SquirrcererTitle_Icon.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/SquirrcererTitle_Icon.png",
+            "SnippetDesc": "Squirrcerer Title",
+            "Tags": [
+                "Title"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Page",
+                "Title"
+            ]
+        },
+        "ItemData": {
+            "ItemType": "Page",
+            "Rarity": "Unique",
+            "Value": 50.0
+        },
+        "PageData": {
+            "AddTags": [
+                "Caster"
+            ],
+            "PageRequirements": {
+                "ConflictingPages": [],
+                "IncompatiblePages": [],
+                "TitleReq": "None"
+            },
+            "SourceTitle": "Base",
+            "StatMods": {}
+        },
+        "PassiveData": {},
+        "_DefVersion": "1"
+    },
+    "SquirrelPhy_TitlePage": {
+        "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemTitle.gd",
+        "!ParentKey": "BaseSquirrel_TitlePage",
+        "#ObjDetails": {
+            "Description": "@@#Color:Red:Squirrior@@ are the @@#Tag:Armor:Hint:Heavy Armored@@ defenders of the @@#Color:Blue:NSO@@.\n\nThey sacrifice their natural squirrelish @@#Stat:Evasion@@ for @@#Stat:Armor@@ to stand as the front line defense.\n\nFollowing the emergence of the @@#Color:Blue:NSO@@, @@#Color:Blue:The Military@@ commissioned researchers at @@#Color:Blue:The Collage@@ to uncover how these tiny fighters were able to achieve such high @@#Color:Red:Armor@@ with such tiny @@#Tag:Appearal@@. After decades of grant funded research, they concluded: \"Probably Magic.\"",
+            "DisplayName": "Squirrior",
+            "LargeIcon": "Sprites/SquirriorTitle_Icon.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/SquirriorTitle_Icon.png",
+            "SnippetDesc": "Squirrior Title",
+            "Tags": [
+                "Title"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Page",
+                "Title"
+            ]
+        },
+        "ItemData": {
+            "ItemType": "Page",
+            "Rarity": "Unique",
+            "Value": 50.0
+        },
+        "PageData": {
+            "AddTags": [
+                "Squirrel",
+                "Squirrcerer"
+            ],
+            "PageRequirements": {
+                "ConflictingPages": [],
+                "IncompatiblePages": [],
+                "TitleReq": "None"
+            },
+            "SourceTitle": "Base",
+            "StatMods": {}
+        },
+        "PassiveData": {},
+        "_DefVersion": "1"
+    }
+}

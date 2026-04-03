@@ -1,14 +1,14 @@
-[gd_scene load_steps=8 format=3 uid="uid://xrpc1otru81x"]
+[gd_scene format=3 uid="uid://xrpc1otru81x"]
 
-[ext_resource type="Script" path="res://Scenes/Menus/PageLibraryMenu/page_library_menu.gd" id="1_fifst"]
+[ext_resource type="Script" uid="uid://brx54oji2187f" path="res://Scenes/Menus/PageLibraryMenu/page_library_menu.gd" id="1_fifst"]
 [ext_resource type="Texture2D" uid="uid://io35wpu802fp" path="res://assets/Sprites/UI/BackPatches/Patch_64_12.png" id="2_n87we"]
 [ext_resource type="Texture2D" uid="uid://ccwj8ucsjhl6w" path="res://assets/Sprites/UI/BackPatches/Patch_64_12_Dark.png" id="2_xdrho"]
 [ext_resource type="Theme" uid="uid://bfce41la62bs6" path="res://Scenes/Themes/readable_theme.tres" id="4_4wgxq"]
-[ext_resource type="Script" path="res://Scenes/UiNodes/loaded_option_button.gd" id="4_f1xd1"]
-[ext_resource type="Script" path="res://Scenes/Menus/PageLibraryMenu/entry_group_container.gd" id="5_1qkpm"]
+[ext_resource type="Script" uid="uid://2nyf6hw42mrd" path="res://Scenes/UiNodes/loaded_option_button.gd" id="4_f1xd1"]
+[ext_resource type="Script" uid="uid://cw6tnd8wb0k23" path="res://Scenes/Menus/PageLibraryMenu/entry_group_container.gd" id="5_1qkpm"]
 [ext_resource type="PackedScene" uid="uid://xjhbo48tdbhr" path="res://Scenes/Menus/PageLibraryMenu/PageDetails/page_details_entry_container.tscn" id="7_ykmfd"]
 
-[node name="PageLibraryMenu" type="Control" node_paths=PackedStringArray("close_button", "reload_pages_button", "scale_slider", "loading_patch", "scroll_ocntainer", "tag_filter", "page_entries_container", "premade_entry_group", "example_page_entry", "load_time_label", "showing_label", "action_check_box", "actor_check_box", "effect_check_box", "item_check_box")]
+[node name="PageLibraryMenu" type="Control" unique_id=1169388504 node_paths=PackedStringArray("close_button", "reload_pages_button", "scale_slider", "loading_patch", "scroll_ocntainer", "tag_filter", "page_entries_container", "premade_entry_group", "example_page_entry", "load_time_label", "showing_label", "action_check_box", "actor_check_box", "effect_check_box", "item_check_box")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -32,7 +32,7 @@ actor_check_box = NodePath("VBoxContainer/NinePatchRect/HBoxContainer/HBoxContai
 effect_check_box = NodePath("VBoxContainer/NinePatchRect/HBoxContainer/HBoxContainer/EffectsCheckBox")
 item_check_box = NodePath("VBoxContainer/NinePatchRect/HBoxContainer/HBoxContainer/ItemsCheckBox")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=91507409]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -41,7 +41,7 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="NinePatchRect" type="NinePatchRect" parent="VBoxContainer"]
+[node name="NinePatchRect" type="NinePatchRect" parent="VBoxContainer" unique_id=1592088866]
 custom_minimum_size = Vector2(0, 48)
 layout_mode = 2
 texture = ExtResource("2_xdrho")
@@ -50,7 +50,7 @@ patch_margin_top = 12
 patch_margin_right = 12
 patch_margin_bottom = 12
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/NinePatchRect"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/NinePatchRect" unique_id=1937180973]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -62,13 +62,13 @@ offset_bottom = -4.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TitleLabel2" type="Label" parent="VBoxContainer/NinePatchRect/HBoxContainer"]
+[node name="TitleLabel2" type="Label" parent="VBoxContainer/NinePatchRect/HBoxContainer" unique_id=705420979]
 layout_mode = 2
 theme = ExtResource("4_4wgxq")
 theme_override_font_sizes/font_size = 32
 text = "Tag:"
 
-[node name="LoadedOptionButton" type="OptionButton" parent="VBoxContainer/NinePatchRect/HBoxContainer"]
+[node name="LoadedOptionButton" type="OptionButton" parent="VBoxContainer/NinePatchRect/HBoxContainer" unique_id=1770680174]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 allow_reselect = true
@@ -76,45 +76,45 @@ script = ExtResource("4_f1xd1")
 allways_show_none = true
 no_option_text = "All"
 
-[node name="ReloadButton" type="Button" parent="VBoxContainer/NinePatchRect/HBoxContainer"]
+[node name="ReloadButton" type="Button" parent="VBoxContainer/NinePatchRect/HBoxContainer" unique_id=739595101]
 layout_mode = 2
 text = "Reload"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/NinePatchRect/HBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/NinePatchRect/HBoxContainer" unique_id=394646972]
 layout_mode = 2
 
-[node name="ActionsCheckBox" type="CheckBox" parent="VBoxContainer/NinePatchRect/HBoxContainer/HBoxContainer"]
+[node name="ActionsCheckBox" type="CheckBox" parent="VBoxContainer/NinePatchRect/HBoxContainer/HBoxContainer" unique_id=1767393529]
 layout_mode = 2
 text = "Pages"
 
-[node name="ActorsCheckBox" type="CheckBox" parent="VBoxContainer/NinePatchRect/HBoxContainer/HBoxContainer"]
+[node name="ActorsCheckBox" type="CheckBox" parent="VBoxContainer/NinePatchRect/HBoxContainer/HBoxContainer" unique_id=1193017438]
 layout_mode = 2
 text = "Actors"
 
-[node name="EffectsCheckBox" type="CheckBox" parent="VBoxContainer/NinePatchRect/HBoxContainer/HBoxContainer"]
+[node name="EffectsCheckBox" type="CheckBox" parent="VBoxContainer/NinePatchRect/HBoxContainer/HBoxContainer" unique_id=310997449]
 layout_mode = 2
 text = "Effects"
 
-[node name="ItemsCheckBox" type="CheckBox" parent="VBoxContainer/NinePatchRect/HBoxContainer/HBoxContainer"]
+[node name="ItemsCheckBox" type="CheckBox" parent="VBoxContainer/NinePatchRect/HBoxContainer/HBoxContainer" unique_id=1240121060]
 layout_mode = 2
 text = "Items"
 
-[node name="ShowingLabel" type="Label" parent="VBoxContainer/NinePatchRect/HBoxContainer/HBoxContainer"]
+[node name="ShowingLabel" type="Label" parent="VBoxContainer/NinePatchRect/HBoxContainer/HBoxContainer" unique_id=229879361]
 layout_mode = 2
 text = "Showing:"
 
-[node name="ShowingValue" type="Label" parent="VBoxContainer/NinePatchRect/HBoxContainer/HBoxContainer"]
+[node name="ShowingValue" type="Label" parent="VBoxContainer/NinePatchRect/HBoxContainer/HBoxContainer" unique_id=950889025]
 layout_mode = 2
 text = "00"
 
-[node name="ScaleLabel3" type="Label" parent="VBoxContainer/NinePatchRect/HBoxContainer"]
+[node name="ScaleLabel3" type="Label" parent="VBoxContainer/NinePatchRect/HBoxContainer" unique_id=1864459937]
 visible = false
 layout_mode = 2
 theme = ExtResource("4_4wgxq")
 theme_override_font_sizes/font_size = 32
 text = "  Scale:"
 
-[node name="HSlider" type="HSlider" parent="VBoxContainer/NinePatchRect/HBoxContainer"]
+[node name="HSlider" type="HSlider" parent="VBoxContainer/NinePatchRect/HBoxContainer" unique_id=1035187757]
 visible = false
 custom_minimum_size = Vector2(400, 32)
 layout_mode = 2
@@ -123,34 +123,34 @@ max_value = 5.0
 step = 0.1
 value = 1.0
 
-[node name="Label" type="Label" parent="VBoxContainer/NinePatchRect/HBoxContainer"]
+[node name="Label" type="Label" parent="VBoxContainer/NinePatchRect/HBoxContainer" unique_id=1460139452]
 visible = false
 layout_mode = 2
 text = " Load TIme:"
 
-[node name="LoadTimeLabel" type="Label" parent="VBoxContainer/NinePatchRect/HBoxContainer"]
+[node name="LoadTimeLabel" type="Label" parent="VBoxContainer/NinePatchRect/HBoxContainer" unique_id=1380816763]
 visible = false
 layout_mode = 2
 text = "XXXXX"
 
-[node name="VSeparator" type="VSeparator" parent="VBoxContainer/NinePatchRect/HBoxContainer"]
+[node name="VSeparator" type="VSeparator" parent="VBoxContainer/NinePatchRect/HBoxContainer" unique_id=50656212]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="CloseButton" type="Button" parent="VBoxContainer/NinePatchRect/HBoxContainer"]
+[node name="CloseButton" type="Button" parent="VBoxContainer/NinePatchRect/HBoxContainer" unique_id=684418263]
 layout_mode = 2
 text = "Close"
 
-[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer" unique_id=2035940338]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/ScrollContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/ScrollContainer" unique_id=911305257]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="EntryGroupContainer" type="Container" parent="VBoxContainer/ScrollContainer/VBoxContainer" node_paths=PackedStringArray("title_label", "count_label", "entries_container", "background", "inner_container")]
+[node name="EntryGroupContainer" type="Container" parent="VBoxContainer/ScrollContainer/VBoxContainer" unique_id=2030888689 node_paths=PackedStringArray("title_label", "count_label", "entries_container", "background", "inner_container")]
 custom_minimum_size = Vector2(24, 344)
 layout_mode = 2
 script = ExtResource("5_1qkpm")
@@ -161,7 +161,7 @@ background = NodePath("NinePatchRect")
 inner_container = NodePath("EntryGroupInnerContainer")
 force_fill_x = true
 
-[node name="NinePatchRect" type="NinePatchRect" parent="VBoxContainer/ScrollContainer/VBoxContainer/EntryGroupContainer"]
+[node name="NinePatchRect" type="NinePatchRect" parent="VBoxContainer/ScrollContainer/VBoxContainer/EntryGroupContainer" unique_id=1259723347]
 layout_mode = 2
 texture = ExtResource("2_n87we")
 patch_margin_left = 12
@@ -169,35 +169,34 @@ patch_margin_top = 12
 patch_margin_right = 12
 patch_margin_bottom = 12
 
-[node name="EntryGroupInnerContainer" type="VBoxContainer" parent="VBoxContainer/ScrollContainer/VBoxContainer/EntryGroupContainer"]
+[node name="EntryGroupInnerContainer" type="VBoxContainer" parent="VBoxContainer/ScrollContainer/VBoxContainer/EntryGroupContainer" unique_id=864412166]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/ScrollContainer/VBoxContainer/EntryGroupContainer/EntryGroupInnerContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/ScrollContainer/VBoxContainer/EntryGroupContainer/EntryGroupInnerContainer" unique_id=868347454]
 layout_mode = 2
 
-[node name="TitlerLabel" type="Label" parent="VBoxContainer/ScrollContainer/VBoxContainer/EntryGroupContainer/EntryGroupInnerContainer/HBoxContainer"]
+[node name="TitlerLabel" type="Label" parent="VBoxContainer/ScrollContainer/VBoxContainer/EntryGroupContainer/EntryGroupInnerContainer/HBoxContainer" unique_id=791084666]
 custom_minimum_size = Vector2(420, 0)
 layout_mode = 2
 theme = ExtResource("4_4wgxq")
 theme_override_font_sizes/font_size = 32
 text = "Page Name"
 
-[node name="CountLabel" type="Label" parent="VBoxContainer/ScrollContainer/VBoxContainer/EntryGroupContainer/EntryGroupInnerContainer/HBoxContainer"]
+[node name="CountLabel" type="Label" parent="VBoxContainer/ScrollContainer/VBoxContainer/EntryGroupContainer/EntryGroupInnerContainer/HBoxContainer" unique_id=342297671]
 custom_minimum_size = Vector2(420, 0)
 layout_mode = 2
 theme = ExtResource("4_4wgxq")
 theme_override_font_sizes/font_size = 32
 text = "Page Name"
 
-[node name="SubEntriesContainer" type="VBoxContainer" parent="VBoxContainer/ScrollContainer/VBoxContainer/EntryGroupContainer/EntryGroupInnerContainer"]
+[node name="SubEntriesContainer" type="VBoxContainer" parent="VBoxContainer/ScrollContainer/VBoxContainer/EntryGroupContainer/EntryGroupInnerContainer" unique_id=1464183062]
 layout_mode = 2
 
-[node name="PageDetailsEntryContainer" parent="VBoxContainer/ScrollContainer/VBoxContainer/EntryGroupContainer/EntryGroupInnerContainer/SubEntriesContainer" instance=ExtResource("7_ykmfd")]
+[node name="PageDetailsEntryContainer" parent="VBoxContainer/ScrollContainer/VBoxContainer/EntryGroupContainer/EntryGroupInnerContainer/SubEntriesContainer" unique_id=473018442 instance=ExtResource("7_ykmfd")]
 custom_minimum_size = Vector2(24, 283)
 layout_mode = 2
-center_from = 0
 
-[node name="LoadingScreenPatch" type="NinePatchRect" parent="VBoxContainer"]
+[node name="LoadingScreenPatch" type="NinePatchRect" parent="VBoxContainer" unique_id=1683276874]
 visible = false
 custom_minimum_size = Vector2(0, 48)
 layout_mode = 2
@@ -208,7 +207,7 @@ patch_margin_top = 12
 patch_margin_right = 12
 patch_margin_bottom = 12
 
-[node name="CenterContainer" type="CenterContainer" parent="VBoxContainer/LoadingScreenPatch"]
+[node name="CenterContainer" type="CenterContainer" parent="VBoxContainer/LoadingScreenPatch" unique_id=154013738]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -216,12 +215,12 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Label" type="Label" parent="VBoxContainer/LoadingScreenPatch/CenterContainer"]
+[node name="Label" type="Label" parent="VBoxContainer/LoadingScreenPatch/CenterContainer" unique_id=2120068695]
 layout_mode = 2
 theme_override_font_sizes/font_size = 64
 text = "Loading"
 
-[node name="NinePatchRect2" type="NinePatchRect" parent="VBoxContainer"]
+[node name="NinePatchRect2" type="NinePatchRect" parent="VBoxContainer" unique_id=31046204]
 custom_minimum_size = Vector2(0, 48)
 layout_mode = 2
 texture = ExtResource("2_xdrho")

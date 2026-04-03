@@ -1,1 +1,237 @@
-{"BaseSquirrel":{"!ObjectScript":"res://assets/Scripts/Actors/BaseActor.gd","!ParentKey":"#BaseActor","#ObjDetails":{"Description":"Radical political extremist of the @@#Color:Blue:New Squorld Order@@. These small and squirrely (they hate that term) @@#Tag:Beasts@@ are highly aggressive. While lacking in @@#Stat:MaxHealth@@ and @@#Stat:PhyAttack@@, they have high @@#Stat:Speed@@ and just enough @@#Stat:Evasion@@ to be annoying.\n\nOften attacking in large swarms, the @@Color:Blue:NSO@@ has committed countless acts of terrorism on defenseless @@#Color:Red:Abandoned Villages@@. So don't feel bad about killing them.","DisplayName":"Squirrel","LargeIcon":"Sprites/SquirrelIcon.png","ObjectType":"Actor","SmallIcon":"Sprites/SquirrelIcon.png","SnippetDesc":"A squirrel.","Tags":["Squirrel","Living","Creature"],"Taxonomy":["Actor"]},"ActorData":{"DropItemsSet":{"":10.0,"ChuckAcorn_ActionPage":1.0,"HealthPotionM":1.0,"HealthPotionS":3.0,"Money:10":3.0,"Money:25":1.0,"Squirrel_PageBook":1.0,"Squirrely_PassivePage":1.0},"ExpValue":40.0,"Faction":"Squirrels","MoneyValue":15.0},"AiData":{"ActionsArr":["MoveForward","TurnLeft","TurnRight","BasicMeleeAttack","ChuckAcorn_ActionPage"]},"CorpseSprite":null,"DefaultPageSlotSet":[{"Count":6.0,"DisplayName":"Any Page","FilterData":null,"Key":"Any"}],"EquipmentSlots":[],"ScenePath":"res://Scenes/Combat/MapObjects/Actors/SimpleActorNode/simple_actor_node.tscn","SpawnEquipmentArr":["Squirrel_PageBook","SquirrelAmmo_Bag"],"SpawnItemArr":[],"SpawnPageArr":["BaseSquirrel_TitlePage","Squirrely_PassivePage","MoveForward","TurnLeft","TurnRight","BasicMeleeAttack","ChuckAcorn_ActionPage"],"SpriteFrameWH":[12.0,4.0],"SpriteOffset":[0.0,-20.0],"SpriteSheet":"Sprites/Squirrel_SpriteSheet.png","Stats":{"Agility":5.0,"Armor":0.0,"Evasion":20.0,"HealthMax":12.0,"Intelligence":3.0,"MagAttack":0.0,"Mass":5.0,"PPR":4.0,"PhyAttack":0.0,"Speed":25.0,"Strength":5.0,"Ward":0.0,"Wisdom":3.0},"_DefVersion":"1"},"Squirrcerer":{"!ObjectScript":"res://assets/Scripts/Actors/BaseActor.gd","!ParentKey":"BaseSquirrel","#ObjDetails":{"Description":"Magic wielding specialist of the NSO. They have been trained in the forbidden acornic arts and serve as back line attackers, casting powerful acorn related @@#Color:Red:Spells@@... well, \"@@#Color:Red:Spell@@\". They only have one. And all it can do is set an acorn on fire which they then throw. So I guess really they are just a @@#Color:Red:Squirrel@@ with a lighter that happens to only works on acorns.","DisplayName":"Squirrcerer","LargeIcon":"Sprites/SquirrcererIcon.png","ObjectType":"Actor","SmallIcon":"Sprites/SquirrcererIcon.png","SnippetDesc":"A magic using squirrel.","Tags":["Squirrel"],"Taxonomy":["Actor"]},"ActorData":{"DropItemsSet":{"":10.0,"ChuckAcornFire_ActionPage":1.0,"HealthPotionM":1.0,"Mag_Ammo":3.0,"Money:10":3.0,"Money:25":1.0,"SquirrelMagic_PassivePage":1.0,"Squirrel_PageBook":1.0},"ExpValue":40.0,"MoneyValue":15.0},"AiData":{"ActionsArr":["MoveForward","TurnLeft","TurnRight","BasicMeleeAttack","ChuckAcornFire_ActionPage"]},"SpawnEquipmentArr":["Squirrel_PageBook","SquirrelAmmo_Bag"],"SpawnItemArr":[],"SpawnPageArr":["SquirrelMag_TitlePage","SquirrelMagic_PassivePage","MoveForward","TurnLeft","TurnRight","BasicMeleeAttack","ChuckAcornFire_ActionPage"],"SpriteSheet":"Sprites/Squirrcerer_SpriteSheet.png","Stats":{"Agility":4.0,"Armor":0.0,"Evasion":10.0,"HealthMax":12.0,"Intelligence":6.0,"MagAttack":0.0,"Mass":4.0,"PPR":3.0,"PhyAttack":0.0,"Speed":25.0,"Strength":3.0,"Ward":10.0,"Wisdom":5.0},"_DefVersion":"1"},"Squirrior":{"!ObjectScript":"res://assets/Scripts/Actors/BaseActor.gd","!ParentKey":"BaseSquirrel","#ObjDetails":{"Description":"Heavy armored defenders of the NSO. They sacrifice their natural squirrelish @@#Color:Red:Evasion@@ for @@#Color:Red:Armor@@ to stand as the front line defense. Following the emergence of the NSO, @@#Color:Red:The Military@@ commissioned researchers at @@#Color:Red:The Collage@@ to uncover how these tiny fighters were able to achieve such high @@#Color:Red:Armor@@ with platemail thinner than a tin can. After decades of study, the researchers concluded: \"Idk, probably Magic.\"","DisplayName":"Squirrior","LargeIcon":"Sprites/SquirriorIcon.png","ObjectType":"Actor","SmallIcon":"Sprites/SquirriorIcon.png","SnippetDesc":"A squirrel.","Tags":["Squirrel"],"Taxonomy":["Actor"]},"ActorData":{"DropItemsSet":{"":10.0,"HealthPotionM":1.0,"Money:10":3.0,"Money:25":1.0,"Phy_Ammo":3.0,"SquirrelArmor_PassivePage":1.0,"Squirrel_PageBook":1.0},"ExpValue":40.0,"MoneyValue":15.0},"AiData":{"ActionsArr":["MoveForward","TurnLeft","TurnRight","BasicMelee"]},"SpawnEquipmentArr":["Squirrel_PageBook","SquirrelAmmo_Bag"],"SpawnItemArr":[],"SpawnPageArr":["SquirrelPhy_TitlePage","SquirrelArmor_PassivePage","MoveForward","TurnLeft","TurnRight","BasicMeleeAttack"],"SpriteSheet":"Sprites/Squirrior_SpriteSheet.png","Stats":{"Agility":3.0,"Armor":20.0,"Evasion":0.0,"HealthMax":10.0,"Intelligence":3.0,"MagAttack":0.0,"Mass":6.0,"PPR":3.0,"PhyAttack":8.0,"Speed":15.0,"Strength":5.0,"Ward":0.0,"Wisdom":3.0},"_DefVersion":"1"}}
+{
+    "BaseSquirrel": {
+        "!ObjectScript": "res://assets/Scripts/Actors/BaseActor.gd",
+        "!ParentKey": "#BaseActor",
+        "#ObjDetails": {
+            "Description": "Radical political extremist of the @@#Color:Blue:New Squorld Order@@. These small and squirrely (they hate that term) @@#Tag:Beasts@@ are highly aggressive. While lacking in @@#Stat:MaxHealth@@ and @@#Stat:PhyAttack@@, they have high @@#Stat:Speed@@ and just enough @@#Stat:Evasion@@ to be annoying.\n\nOften attacking in large swarms, the @@Color:Blue:NSO@@ has committed countless acts of terrorism on defenseless @@#Color:Red:Abandoned Villages@@. So don't feel bad about killing them.",
+            "DisplayName": "Squirrel",
+            "LargeIcon": "Sprites/SquirrelIcon.png",
+            "ObjectType": "Actor",
+            "SmallIcon": "Sprites/SquirrelIcon.png",
+            "SnippetDesc": "A squirrel.",
+            "Tags": [
+                "Squirrel",
+                "Living",
+                "Creature"
+            ],
+            "Taxonomy": [
+                "Actor"
+            ]
+        },
+        "ActorData": {
+            "DropItemsSet": {
+                "": 10.0,
+                "ChuckAcorn_ActionPage": 1.0,
+                "HealthPotionM": 1.0,
+                "HealthPotionS": 3.0,
+                "Money:10": 3.0,
+                "Money:25": 1.0,
+                "Squirrel_PageBook": 1.0,
+                "Squirrely_PassivePage": 1.0
+            },
+            "ExpValue": 40.0,
+            "Faction": "Squirrels",
+            "MoneyValue": 15.0
+        },
+        "AiData": {
+            "ActionsArr": [
+                "MoveForward",
+                "TurnLeft",
+                "TurnRight",
+                "BasicMeleeAttack",
+                "ChuckAcorn_ActionPage"
+            ]
+        },
+        "CorpseSprite": null,
+        "DefaultPageSlotSet": [
+            {
+                "Count": 6.0,
+                "DisplayName": "Any Page",
+                "FilterData": null,
+                "Key": "Any"
+            }
+        ],
+        "EquipmentSlots": [],
+        "ScenePath": "res://Scenes/Combat/MapObjects/Actors/SimpleActorNode/simple_actor_node.tscn",
+        "SpawnEquipmentArr": [
+            "Squirrel_PageBook",
+            "SquirrelAmmo_Bag"
+        ],
+        "SpawnItemArr": [],
+        "SpawnPageArr": [
+            "BaseSquirrel_TitlePage",
+            "Squirrely_PassivePage",
+            "MoveForward",
+            "TurnLeft",
+            "TurnRight",
+            "BasicMeleeAttack",
+            "ChuckAcorn_ActionPage"
+        ],
+        "SpriteFrameWH": [
+            12.0,
+            4.0
+        ],
+        "SpriteOffset": [
+            0.0,
+            -20.0
+        ],
+        "SpriteSheet": "Sprites/Squirrel_SpriteSheet.png",
+        "Stats": {
+            "Agility": 5.0,
+            "Armor": 0.0,
+            "Evasion": 20.0,
+            "HealthMax": 12.0,
+            "Intelligence": 3.0,
+            "MagAttack": 0.0,
+            "Mass": 5.0,
+            "PPR": 4.0,
+            "PhyAttack": 0.0,
+            "Speed": 25.0,
+            "Strength": 5.0,
+            "Ward": 0.0,
+            "Wisdom": 3.0
+        },
+        "_DefVersion": "1"
+    },
+    "Squirrcerer": {
+        "!ObjectScript": "res://assets/Scripts/Actors/BaseActor.gd",
+        "!ParentKey": "BaseSquirrel",
+        "#ObjDetails": {
+            "Description": "Magic wielding specialist of the NSO. They have been trained in the forbidden acornic arts and serve as back line attackers, casting powerful acorn related @@#Color:Red:Spells@@... well, \"@@#Color:Red:Spell@@\". They only have one. And all it can do is set an acorn on fire which they then throw. So I guess really they are just a @@#Color:Red:Squirrel@@ with a lighter that happens to only works on acorns.",
+            "DisplayName": "Squirrcerer",
+            "LargeIcon": "Sprites/SquirrcererIcon.png",
+            "ObjectType": "Actor",
+            "SmallIcon": "Sprites/SquirrcererIcon.png",
+            "SnippetDesc": "A magic using squirrel.",
+            "Tags": [
+                "Squirrel"
+            ],
+            "Taxonomy": [
+                "Actor"
+            ]
+        },
+        "ActorData": {
+            "DropItemsSet": {
+                "": 10.0,
+                "ChuckAcornFire_ActionPage": 1.0,
+                "HealthPotionM": 1.0,
+                "Mag_Ammo": 3.0,
+                "Money:10": 3.0,
+                "Money:25": 1.0,
+                "SquirrelMagic_PassivePage": 1.0,
+                "Squirrel_PageBook": 1.0
+            },
+            "ExpValue": 40.0,
+            "MoneyValue": 15.0
+        },
+        "AiData": {
+            "ActionsArr": [
+                "MoveForward",
+                "TurnLeft",
+                "TurnRight",
+                "BasicMeleeAttack",
+                "ChuckAcornFire_ActionPage"
+            ]
+        },
+        "SpawnEquipmentArr": [
+            "Squirrel_PageBook",
+            "SquirrelAmmo_Bag"
+        ],
+        "SpawnItemArr": [],
+        "SpawnPageArr": [
+            "SquirrelMag_TitlePage",
+            "SquirrelMagic_PassivePage",
+            "MoveForward",
+            "TurnLeft",
+            "TurnRight",
+            "BasicMeleeAttack",
+            "ChuckAcornFire_ActionPage"
+        ],
+        "SpriteSheet": "Sprites/Squirrcerer_SpriteSheet.png",
+        "Stats": {
+            "Agility": 4.0,
+            "Armor": 0.0,
+            "Evasion": 10.0,
+            "HealthMax": 12.0,
+            "Intelligence": 6.0,
+            "MagAttack": 0.0,
+            "Mass": 4.0,
+            "PPR": 3.0,
+            "PhyAttack": 0.0,
+            "Speed": 25.0,
+            "Strength": 3.0,
+            "Ward": 10.0,
+            "Wisdom": 5.0
+        },
+        "_DefVersion": "1"
+    },
+    "Squirrior": {
+        "!ObjectScript": "res://assets/Scripts/Actors/BaseActor.gd",
+        "!ParentKey": "BaseSquirrel",
+        "#ObjDetails": {
+            "Description": "Heavy armored defenders of the NSO. They sacrifice their natural squirrelish @@#Color:Red:Evasion@@ for @@#Color:Red:Armor@@ to stand as the front line defense. Following the emergence of the NSO, @@#Color:Red:The Military@@ commissioned researchers at @@#Color:Red:The Collage@@ to uncover how these tiny fighters were able to achieve such high @@#Color:Red:Armor@@ with platemail thinner than a tin can. After decades of study, the researchers concluded: \"Idk, probably Magic.\"",
+            "DisplayName": "Squirrior",
+            "LargeIcon": "Sprites/SquirriorIcon.png",
+            "ObjectType": "Actor",
+            "SmallIcon": "Sprites/SquirriorIcon.png",
+            "SnippetDesc": "A squirrel.",
+            "Tags": [
+                "Squirrel"
+            ],
+            "Taxonomy": [
+                "Actor"
+            ]
+        },
+        "ActorData": {
+            "DropItemsSet": {
+                "": 10.0,
+                "HealthPotionM": 1.0,
+                "Money:10": 3.0,
+                "Money:25": 1.0,
+                "Phy_Ammo": 3.0,
+                "SquirrelArmor_PassivePage": 1.0,
+                "Squirrel_PageBook": 1.0
+            },
+            "ExpValue": 40.0,
+            "MoneyValue": 15.0
+        },
+        "AiData": {
+            "ActionsArr": [
+                "MoveForward",
+                "TurnLeft",
+                "TurnRight",
+                "BasicMelee"
+            ]
+        },
+        "SpawnEquipmentArr": [
+            "Squirrel_PageBook",
+            "SquirrelAmmo_Bag"
+        ],
+        "SpawnItemArr": [],
+        "SpawnPageArr": [
+            "SquirrelPhy_TitlePage",
+            "SquirrelArmor_PassivePage",
+            "MoveForward",
+            "TurnLeft",
+            "TurnRight",
+            "BasicMeleeAttack"
+        ],
+        "SpriteSheet": "Sprites/Squirrior_SpriteSheet.png",
+        "Stats": {
+            "Agility": 3.0,
+            "Armor": 20.0,
+            "Evasion": 0.0,
+            "HealthMax": 10.0,
+            "Intelligence": 3.0,
+            "MagAttack": 0.0,
+            "Mass": 6.0,
+            "PPR": 3.0,
+            "PhyAttack": 8.0,
+            "Speed": 15.0,
+            "Strength": 5.0,
+            "Ward": 0.0,
+            "Wisdom": 3.0
+        },
+        "_DefVersion": "1"
+    }
+}

@@ -22,7 +22,7 @@ extends BackPatchContainer
 
 @export var add_item_button:Button
 
-var thing_inst
+var thing_inst:BaseLoadObject
 var thing_def:Dictionary
 var thing_load_path:String
 var thing_tags:Array

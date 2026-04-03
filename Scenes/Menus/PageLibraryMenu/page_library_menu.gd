@@ -176,13 +176,43 @@ func _process(delta: float) -> void:
 
 
 func get_tags()->Array:
+	var type_to_tags = {}
 	var tags = []
 	for entry:BaseObjectDetailsEntryContainer in page_entries.values():
 		if entry.is_visible_in_tree():
+			var taxonomy = entry.thing_def.get("#ObjDetails", {}).get("Taxonomy", [])
+			var type = taxonomy[0]
+			if taxonomy.has("Page"):
+				type = "Page"
+			if not type_to_tags.keys().has(type):
+				type_to_tags[type] = []
 			for tag in entry.thing_tags:
 				if not tags.has(tag):
 					tags.append(tag)
+				if not type_to_tags[type].has(tag):
+					type_to_tags[type].append(tag)
+	
+	var tag_defs = {}
+	for type in type_to_tags.keys():
+		var tag_list:Array = type_to_tags[type]
+		tag_list.sort()
+		for tag in tag_list:
+			if not tag_defs.keys().has(tag):
+				tag_defs[tag] = {
+					"Abreviation": tag,
+					"AppliesTo": [
+						type
+						],
+					"Description": "@@#Color:Blue:" + tag + "@@ are/is ...",
+					"DisplayName": tag
+				}
+			else:
+				tag_defs[tag]["AppliesTo"].append(type)
+		
 	tags.sort()
+	print("\n\n")
+	print(tag_defs)
+	print("\n\n")
 	return tags
 
 

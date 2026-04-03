@@ -1,1 +1,443 @@
-{"#BaseMeleeWeapon":{"!ObjectScript":"res://assets/Scripts/Items/Equipment/Tools/BaseWeaponEquipment.gd","#ObjDetails":{"Description":"Weapon Description","DisplayName":"#Base Base Weapon","LargeIcon":"Sprites/BaseSword_Icon.png","ObjectType":"Item","SmallIcon":"Sprites/BaseSword_Icon.png","SnippetDesc":"Snippet","Tags":["Weapon"],"Taxonomy":["Item","Equipment","Tool","Weapon"]},"EquipmentData":{"EquipSlot":"Weapon","Requirments":{"ReqStats":{"Strength":10.0}},"StatMods":{"AttackBonus":{"ModType":"Add","StatName":"PhyAttack","Value":10.0}}},"ItemData":{"Rarity":"Mundane","Value":100.0},"WeaponData":{"AttackData":{"AttackDetails":{"AccuracyMod":1.0,"PotencyMod":1.0},"AttackTags":["Weapon","Melee"],"DamageDatas":{"WeaponDamage":{"AtkPwrBase":100.0,"AtkPwrRange":5.0,"AtkStat":"PhyAttack","DamageType":"Slash","DamageVfxKey":"AUTO","DefenseType":"Armor"}},"EffectDatas":{},"TargetParams":{"LineOfSight":true,"TargetArea":"[[-1,0],[-1,1],[0,1],[1,1],[1,0]]","TargetType":"Actor"}},"IsRanged":false,"WeaponClass":"Medium","WeaponSpriteData":{"Offset":[0.0,0.0],"Rotation":0.0,"TwoHandRotation":0.0,"WeaponAnimation":"Swing"}},"_DefVersion":"1"},"#BaseRangeWeapon":{"!ObjectScript":"res://assets/Scripts/Items/Equipment/Tools/BaseWeaponEquipment.gd","#ObjDetails":{"Description":"A basic Base Range Weapon for pelting foes.","DisplayName":"#Base Range Weapon","LargeIcon":"Sprites/BasicWand_Icon.png","ObjectType":"Item","SmallIcon":"Sprites/BasicWand_Icon.png","SnippetDesc":"a wand.","Tags":["Weapon","Ranged"],"Taxonomy":["Item","Equipment","Tool","Weapon"]},"EquipmentData":{"AttackMods":{},"DamageMods":{},"EquipSlot":"Weapon","Requirments":{},"StatMods":{"AttackBonus":{"ModType":"Add","StatName":"MagAttack","Value":5.0}},"TargetMods":{}},"ItemData":{"Rarity":"Mundane","Value":50.0},"WeaponData":{"AttackData":{"AttackDetails":{"AccuracyMod":1.0,"AttackVfxData":{"RandomOffsets":[0.0,0.0],"ScenePath":"res://assets/Scripts/VFXs/BulletVfxs/bullet_vfx_node.tscn","SpriteName":"Sprites/BaseWand_Missile.png","SpriteSheetHight":1.0,"SpriteSheetWidth":1.0,"Velocity":200.0},"PotencyMod":1.0},"AttackTags":["Weapon","Range","Magic"],"DamageDatas":{"WeaponDamage":{"AtkPwrBase":100.0,"AtkPwrRange":10.0,"AtkStat":"MagAttack","DamageType":"Fire","DamageVfxKey":"Fire_DamageEffect","DefenseType":"Ward"}},"EffectDatas":{},"TargetParams":{"LineOfSight":true,"TargetArea":"[[-1,1],[0,1],[1,1],[-1,2],[0,2],[1,2]]","TargetType":"Actor"}},"IsRanged":true,"WeaponClass":"Light","WeaponSpriteData":{"Offset":[0.0,0.0],"Rotation":-45.0,"WeaponAnimation":"Raise"}},"_DefVersion":"1"},"#BaseStaff_Weapon":{"!ObjectScript":"res://assets/Scripts/Items/Equipment/Tools/BaseWeaponEquipment.gd","!ParentKey":"#BaseRangeWeapon","#ObjDetails":{"Description":"A basic Staff for blasting foes.","DisplayName":"Staff","LargeIcon":"Sprites/BaseStaff_Icon.png","ObjectType":"Item","SmallIcon":"Sprites/BaseStaff_Icon.png","SnippetDesc":"a staff.","Tags":["Weapon","Ranged","Staff"],"Taxonomy":["Item","Equipment","Tool","Weapon"]},"EquipmentData":{"Requirments":{"ReqStats":{"Intelligence":8.0}},"StatMods":{"AttackBonus":{"ModType":"Add","StatName":"MagAttack","Value":5.0}}},"WeaponData":{"AttackData":{"AttackDetails":{"AccuracyMod":1.0,"AttackVfxData":{"RandomOffsets":[0.0,0.0],"ScenePath":"res://assets/Scripts/VFXs/BulletVfxs/bullet_vfx_node.tscn","SpriteName":"Sprites/BaseWand_Missile.png","SpriteSheetHight":1.0,"SpriteSheetWidth":1.0,"Velocity":200.0},"PotencyMod":1.0},"AttackTags":["Weapon","Range","Magic"],"DamageDatas":{"WeaponDamage":{"AtkPwrBase":100.0,"AtkPwrRange":10.0,"AtkStat":"MagAttack","DamageType":"Fire","DamageVfxKey":"Fire_DamageEffect","DefenseType":"Ward"}},"EffectDatas":{},"TargetParams":{"LineOfSight":true,"TargetArea":"[[-1,1],[0,1],[1,1],[-1,2],[0,2],[1,2]]","TargetType":"Actor"}},"IsRanged":true,"WeaponClass":"Light","WeaponSpriteData":{"Offset":[0.0,0.0],"Rotation":-45.0,"WeaponAnimation":"Raise"}},"_DefVersion":"1"},"#BaseWand_Weapon":{"!ObjectScript":"res://assets/Scripts/Items/Equipment/Tools/BaseWeaponEquipment.gd","!ParentKey":"#BaseRangeWeapon","#ObjDetails":{"Description":"A basic Wand for pelting foes.","DisplayName":"Wand","LargeIcon":"Sprites/BaseWand_Icon.png","ObjectType":"Item","SmallIcon":"Sprites/BaseWand_Icon.png","SnippetDesc":"a wand.","Tags":["Weapon","Ranged","Wand"],"Taxonomy":["Item","Equipment","Tool","Weapon"]},"EquipmentData":{"Requirments":{"ReqStats":{"Intelligence":8.0}},"StatMods":{"AttackBonus":{"ModType":"Add","StatName":"MagAttack","Value":5.0}}},"WeaponData":{"AttackData":{"AttackDetails":{"AccuracyMod":1.0,"AttackVfxData":{"RandomOffsets":[0.0,0.0],"ScenePath":"res://assets/Scripts/VFXs/BulletVfxs/bullet_vfx_node.tscn","SpriteName":"Sprites/BaseWand_Missile.png","SpriteSheetHight":1.0,"SpriteSheetWidth":1.0,"Velocity":200.0},"PotencyMod":1.0},"AttackTags":["Weapon","Range","Magic"],"DamageDatas":{"WeaponDamage":{"AtkPwrBase":80.0,"AtkPwrRange":10.0,"AtkStat":"MagAttack","DamageType":"Fire","DamageVfxKey":"Fire_DamageEffect","DefenseType":"Ward"}},"EffectDatas":{},"TargetParams":{"LineOfSight":true,"TargetArea":"[[-1,1],[0,1],[1,1],[-1,2],[0,2],[1,2]]","TargetType":"Actor"}},"IsRanged":true,"WeaponClass":"Light","WeaponSpriteData":{"Offset":[0.0,0.0],"Rotation":-45.0,"WeaponAnimation":"Raise"}},"_DefVersion":"1"},"BaseBow_Weapon":{"!ObjectScript":"res://assets/Scripts/Items/Equipment/Tools/BaseWeaponEquipment.gd","#ObjDetails":{"Description":"A basic bow use for shooting foes.","DisplayName":"Bow","LargeIcon":"Sprites/BaseBow_Icon.png","ObjectType":"Item","SmallIcon":"Sprites/BaseBow_Icon.png","SnippetDesc":"a bow.","Tags":["Weapon","Bow"],"Taxonomy":["Item","Equipment","Tool","Weapon"]},"EquipmentData":{"EquipSlot":"Weapon","Requirments":{"ReqStats":{"Agility":10.0}},"StatMods":{"AttackBonus":{"ModType":"Add","StatName":"PhyAttack","Value":10.0}}},"ItemData":{"Rarity":"Mundane","Value":50.0},"WeaponData":{"AttackData":{"AttackDetails":{"AccuracyMod":1.0,"AttackVfxData":{"RandomOffsets":[0.0,0.0],"ScenePath":"res://assets/Scripts/VFXs/BulletVfxs/bullet_vfx_node.tscn","SpriteName":"Sprites/BaseBow_Missile.png","SpriteSheetHight":1.0,"SpriteSheetWidth":1.0,"Velocity":300.0},"PotencyMod":1.0},"AttackTags":["Weapon","Ranged","Physical"],"DamageDatas":{"WeaponDamage":{"AtkPwrBase":80.0,"AtkPwrRange":20.0,"AtkStat":"PhyAttack","DamageType":"Pierce","DamageVfxKey":"Pierce_DamageEffect","DefenseType":"Armor"}},"EffectDatas":{},"TargetParams":{"LineOfSight":true,"TargetArea":"[[0,1],[-1,2],[0,2],[1,2],[-2,3],[-1,3],[0,3],[1,3],[2,3],[-1,4],[0,4],[1,4],[0,5]]","TargetType":"Actor"}},"IsRanged":true,"WeaponClass":"Heavy","WeaponSpriteData":{"Offset":[0.0,0.0],"Rotation":30.0,"WeaponAnimation":"Raise"},"_MissileData":{"FramesPerTile":3.0,"ImpactVfxKey":"Blunt_DamageEffect","MissileVfxKey":"BasicArrowMissile"}},"_DefVersion":"1"}}
+{
+    "#BaseMeleeWeapon": {
+        "!ObjectScript": "res://assets/Scripts/Items/Equipment/Tools/BaseWeaponEquipment.gd",
+        "#ObjDetails": {
+            "Description": "Weapon Description",
+            "DisplayName": "#Base Base Weapon",
+            "LargeIcon": "Sprites/BaseSword_Icon.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/BaseSword_Icon.png",
+            "SnippetDesc": "Snippet",
+            "Tags": [
+                "Weapon"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Equipment",
+                "Tool",
+                "Weapon"
+            ]
+        },
+        "EquipmentData": {
+            "EquipSlot": "Weapon",
+            "Requirments": {
+                "ReqStats": {
+                    "Strength": 10.0
+                }
+            },
+            "StatMods": {
+                "AttackBonus": {
+                    "ModType": "Add",
+                    "StatName": "PhyAttack",
+                    "Value": 10.0
+                }
+            }
+        },
+        "ItemData": {
+            "Rarity": "Mundane",
+            "Value": 100.0
+        },
+        "WeaponData": {
+            "AttackData": {
+                "AttackDetails": {
+                    "AccuracyMod": 1.0,
+                    "PotencyMod": 1.0
+                },
+                "AttackTags": [
+                    "Weapon",
+                    "Melee"
+                ],
+                "DamageDatas": {
+                    "WeaponDamage": {
+                        "AtkPwrBase": 100.0,
+                        "AtkPwrRange": 5.0,
+                        "AtkStat": "PhyAttack",
+                        "DamageType": "Slash",
+                        "DamageVfxKey": "AUTO",
+                        "DefenseType": "Armor"
+                    }
+                },
+                "EffectDatas": {},
+                "TargetParams": {
+                    "LineOfSight": true,
+                    "TargetArea": "[[-1,0],[-1,1],[0,1],[1,1],[1,0]]",
+                    "TargetType": "Actor"
+                }
+            },
+            "IsRanged": false,
+            "WeaponClass": "Medium",
+            "WeaponSpriteData": {
+                "Offset": [
+                    0.0,
+                    0.0
+                ],
+                "Rotation": 0.0,
+                "TwoHandRotation": 0.0,
+                "WeaponAnimation": "Swing"
+            }
+        },
+        "_DefVersion": "1"
+    },
+    "#BaseRangeWeapon": {
+        "!ObjectScript": "res://assets/Scripts/Items/Equipment/Tools/BaseWeaponEquipment.gd",
+        "#ObjDetails": {
+            "Description": "A basic Base Range Weapon for pelting foes.",
+            "DisplayName": "#Base Range Weapon",
+            "LargeIcon": "Sprites/BasicWand_Icon.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/BasicWand_Icon.png",
+            "SnippetDesc": "a wand.",
+            "Tags": [
+                "Weapon",
+                "Ranged"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Equipment",
+                "Tool",
+                "Weapon"
+            ]
+        },
+        "EquipmentData": {
+            "AttackMods": {},
+            "DamageMods": {},
+            "EquipSlot": "Weapon",
+            "Requirments": {},
+            "StatMods": {
+                "AttackBonus": {
+                    "ModType": "Add",
+                    "StatName": "MagAttack",
+                    "Value": 5.0
+                }
+            },
+            "TargetMods": {}
+        },
+        "ItemData": {
+            "Rarity": "Mundane",
+            "Value": 50.0
+        },
+        "WeaponData": {
+            "AttackData": {
+                "AttackDetails": {
+                    "AccuracyMod": 1.0,
+                    "AttackVfxData": {
+                        "RandomOffsets": [
+                            0.0,
+                            0.0
+                        ],
+                        "ScenePath": "res://assets/Scripts/VFXs/BulletVfxs/bullet_vfx_node.tscn",
+                        "SpriteName": "Sprites/BaseWand_Missile.png",
+                        "SpriteSheetHight": 1.0,
+                        "SpriteSheetWidth": 1.0,
+                        "Velocity": 200.0
+                    },
+                    "PotencyMod": 1.0
+                },
+                "AttackTags": [
+                    "Weapon",
+                    "Range",
+                    "Magic"
+                ],
+                "DamageDatas": {
+                    "WeaponDamage": {
+                        "AtkPwrBase": 100.0,
+                        "AtkPwrRange": 10.0,
+                        "AtkStat": "MagAttack",
+                        "DamageType": "Fire",
+                        "DamageVfxKey": "Fire_DamageEffect",
+                        "DefenseType": "Ward"
+                    }
+                },
+                "EffectDatas": {},
+                "TargetParams": {
+                    "LineOfSight": true,
+                    "TargetArea": "[[-1,1],[0,1],[1,1],[-1,2],[0,2],[1,2]]",
+                    "TargetType": "Actor"
+                }
+            },
+            "IsRanged": true,
+            "WeaponClass": "Light",
+            "WeaponSpriteData": {
+                "Offset": [
+                    0.0,
+                    0.0
+                ],
+                "Rotation": -45.0,
+                "WeaponAnimation": "Raise"
+            }
+        },
+        "_DefVersion": "1"
+    },
+    "#BaseStaff_Weapon": {
+        "!ObjectScript": "res://assets/Scripts/Items/Equipment/Tools/BaseWeaponEquipment.gd",
+        "!ParentKey": "#BaseRangeWeapon",
+        "#ObjDetails": {
+            "Description": "A basic Staff for blasting foes.",
+            "DisplayName": "Staff",
+            "LargeIcon": "Sprites/BaseStaff_Icon.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/BaseStaff_Icon.png",
+            "SnippetDesc": "a staff.",
+            "Tags": [
+                "Weapon",
+                "Ranged",
+                "Staff"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Equipment",
+                "Tool",
+                "Weapon"
+            ]
+        },
+        "EquipmentData": {
+            "Requirments": {
+                "ReqStats": {
+                    "Intelligence": 8.0
+                }
+            },
+            "StatMods": {
+                "AttackBonus": {
+                    "ModType": "Add",
+                    "StatName": "MagAttack",
+                    "Value": 5.0
+                }
+            }
+        },
+        "WeaponData": {
+            "AttackData": {
+                "AttackDetails": {
+                    "AccuracyMod": 1.0,
+                    "AttackVfxData": {
+                        "RandomOffsets": [
+                            0.0,
+                            0.0
+                        ],
+                        "ScenePath": "res://assets/Scripts/VFXs/BulletVfxs/bullet_vfx_node.tscn",
+                        "SpriteName": "Sprites/BaseWand_Missile.png",
+                        "SpriteSheetHight": 1.0,
+                        "SpriteSheetWidth": 1.0,
+                        "Velocity": 200.0
+                    },
+                    "PotencyMod": 1.0
+                },
+                "AttackTags": [
+                    "Weapon",
+                    "Range",
+                    "Magic"
+                ],
+                "DamageDatas": {
+                    "WeaponDamage": {
+                        "AtkPwrBase": 100.0,
+                        "AtkPwrRange": 10.0,
+                        "AtkStat": "MagAttack",
+                        "DamageType": "Fire",
+                        "DamageVfxKey": "Fire_DamageEffect",
+                        "DefenseType": "Ward"
+                    }
+                },
+                "EffectDatas": {},
+                "TargetParams": {
+                    "LineOfSight": true,
+                    "TargetArea": "[[-1,1],[0,1],[1,1],[-1,2],[0,2],[1,2]]",
+                    "TargetType": "Actor"
+                }
+            },
+            "IsRanged": true,
+            "WeaponClass": "Light",
+            "WeaponSpriteData": {
+                "Offset": [
+                    0.0,
+                    0.0
+                ],
+                "Rotation": -45.0,
+                "WeaponAnimation": "Raise"
+            }
+        },
+        "_DefVersion": "1"
+    },
+    "#BaseWand_Weapon": {
+        "!ObjectScript": "res://assets/Scripts/Items/Equipment/Tools/BaseWeaponEquipment.gd",
+        "!ParentKey": "#BaseRangeWeapon",
+        "#ObjDetails": {
+            "Description": "A basic Wand for pelting foes.",
+            "DisplayName": "Wand",
+            "LargeIcon": "Sprites/BaseWand_Icon.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/BaseWand_Icon.png",
+            "SnippetDesc": "a wand.",
+            "Tags": [
+                "Weapon",
+                "Ranged",
+                "Wand"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Equipment",
+                "Tool",
+                "Weapon"
+            ]
+        },
+        "EquipmentData": {
+            "Requirments": {
+                "ReqStats": {
+                    "Intelligence": 8.0
+                }
+            },
+            "StatMods": {
+                "AttackBonus": {
+                    "ModType": "Add",
+                    "StatName": "MagAttack",
+                    "Value": 5.0
+                }
+            }
+        },
+        "WeaponData": {
+            "AttackData": {
+                "AttackDetails": {
+                    "AccuracyMod": 1.0,
+                    "AttackVfxData": {
+                        "RandomOffsets": [
+                            0.0,
+                            0.0
+                        ],
+                        "ScenePath": "res://assets/Scripts/VFXs/BulletVfxs/bullet_vfx_node.tscn",
+                        "SpriteName": "Sprites/BaseWand_Missile.png",
+                        "SpriteSheetHight": 1.0,
+                        "SpriteSheetWidth": 1.0,
+                        "Velocity": 200.0
+                    },
+                    "PotencyMod": 1.0
+                },
+                "AttackTags": [
+                    "Weapon",
+                    "Range",
+                    "Magic"
+                ],
+                "DamageDatas": {
+                    "WeaponDamage": {
+                        "AtkPwrBase": 80.0,
+                        "AtkPwrRange": 10.0,
+                        "AtkStat": "MagAttack",
+                        "DamageType": "Fire",
+                        "DamageVfxKey": "Fire_DamageEffect",
+                        "DefenseType": "Ward"
+                    }
+                },
+                "EffectDatas": {},
+                "TargetParams": {
+                    "LineOfSight": true,
+                    "TargetArea": "[[-1,1],[0,1],[1,1],[-1,2],[0,2],[1,2]]",
+                    "TargetType": "Actor"
+                }
+            },
+            "IsRanged": true,
+            "WeaponClass": "Light",
+            "WeaponSpriteData": {
+                "Offset": [
+                    0.0,
+                    0.0
+                ],
+                "Rotation": -45.0,
+                "WeaponAnimation": "Raise"
+            }
+        },
+        "_DefVersion": "1"
+    },
+    "BaseBow_Weapon": {
+        "!ObjectScript": "res://assets/Scripts/Items/Equipment/Tools/BaseWeaponEquipment.gd",
+        "#ObjDetails": {
+            "Description": "A basic bow use for shooting foes.",
+            "DisplayName": "Bow",
+            "LargeIcon": "Sprites/BaseBow_Icon.png",
+            "ObjectType": "Item",
+            "SmallIcon": "Sprites/BaseBow_Icon.png",
+            "SnippetDesc": "a bow.",
+            "Tags": [
+                "Weapon",
+                "Bow"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Equipment",
+                "Tool",
+                "Weapon"
+            ]
+        },
+        "EquipmentData": {
+            "EquipSlot": "Weapon",
+            "Requirments": {
+                "ReqStats": {
+                    "Agility": 10.0
+                }
+            },
+            "StatMods": {
+                "AttackBonus": {
+                    "ModType": "Add",
+                    "StatName": "PhyAttack",
+                    "Value": 10.0
+                }
+            }
+        },
+        "ItemData": {
+            "Rarity": "Mundane",
+            "Value": 50.0
+        },
+        "WeaponData": {
+            "AttackData": {
+                "AttackDetails": {
+                    "AccuracyMod": 1.0,
+                    "AttackVfxData": {
+                        "RandomOffsets": [
+                            0.0,
+                            0.0
+                        ],
+                        "ScenePath": "res://assets/Scripts/VFXs/BulletVfxs/bullet_vfx_node.tscn",
+                        "SpriteName": "Sprites/BaseBow_Missile.png",
+                        "SpriteSheetHight": 1.0,
+                        "SpriteSheetWidth": 1.0,
+                        "Velocity": 300.0
+                    },
+                    "PotencyMod": 1.0
+                },
+                "AttackTags": [
+                    "Weapon",
+                    "Ranged",
+                    "Physical"
+                ],
+                "DamageDatas": {
+                    "WeaponDamage": {
+                        "AtkPwrBase": 80.0,
+                        "AtkPwrRange": 20.0,
+                        "AtkStat": "PhyAttack",
+                        "DamageType": "Pierce",
+                        "DamageVfxKey": "Pierce_DamageEffect",
+                        "DefenseType": "Armor"
+                    }
+                },
+                "EffectDatas": {},
+                "TargetParams": {
+                    "LineOfSight": true,
+                    "TargetArea": "[[0,1],[-1,2],[0,2],[1,2],[-2,3],[-1,3],[0,3],[1,3],[2,3],[-1,4],[0,4],[1,4],[0,5]]",
+                    "TargetType": "Actor"
+                }
+            },
+            "IsRanged": true,
+            "WeaponClass": "Heavy",
+            "WeaponSpriteData": {
+                "Offset": [
+                    0.0,
+                    0.0
+                ],
+                "Rotation": 30.0,
+                "WeaponAnimation": "Raise"
+            },
+            "_MissileData": {
+                "FramesPerTile": 3.0,
+                "ImpactVfxKey": "Blunt_DamageEffect",
+                "MissileVfxKey": "BasicArrowMissile"
+            }
+        },
+        "_DefVersion": "1"
+    }
+}

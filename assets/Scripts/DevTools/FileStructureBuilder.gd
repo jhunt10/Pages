@@ -15,6 +15,7 @@ static func DoThing():
 	#rename_test_files()
 	#output_descriptions()
 	#intake_descriptions()
+	build_gd_tree()
 	pass
 
 static func output_descriptions():
@@ -63,7 +64,6 @@ static func get_all_defs()->Dictionary:
 	#files.append_array(BaseLoadObjectLibrary._search_for_files("res://ObjectDefs/", "_PageDefs.def"))
 	#files.append_array(BaseLoadObjectLibrary._search_for_files("res://ObjectDefs/", "_ItemDefs.def"))
 	files.append_array(BaseLoadObjectLibrary._search_for_files("res://ObjectDefs/", ".def"))
-	var common_def = {}
 	var keys = []
 	for file:String in files:
 		var defs = parse_def_file(file)
@@ -71,6 +71,75 @@ static func get_all_defs()->Dictionary:
 			defs_dict[def_key] = defs[def_key]
 	#print(defs_dict.keys())
 	return defs_dict
+
+
+static func get_all_gd_scripts()->Array:
+	var files = []
+	files.append_array(BaseLoadObjectLibrary._search_for_files("res://", ".gd"))
+	return files
+
+static func build_gd_tree():
+	var files = get_all_gd_scripts()
+	var godot_classes = {
+		"Node":{"!ParentKey":"" },
+		"Node2D":{"!ParentKey":"Node" },
+		"Sprite2D":{"!ParentKey":"Node2D" },
+		"Camera2D":{"!ParentKey":"Node2D" },
+		"Control":{"!ParentKey":"Node" },
+		"Container":{"!ParentKey":"Control" },
+		"HBoxContainer":{"!ParentKey":"Container" },
+		"BoxContainer":{"!ParentKey":"Container" },
+		"VBoxContainer":{"!ParentKey":"Container" },
+		"CenterContainer":{"!ParentKey":"Container" },
+		"Button":{"!ParentKey":"Control" },
+		"TextureButton":{"!ParentKey":"Button" },
+		"RichTextLabel":{"!ParentKey":"Control" },
+		"ColorRect":{"!ParentKey":"Control" },
+		"LineEdit":{"!ParentKey":"Control" },
+		"TabBar":{"!ParentKey":"Control" },
+		"NinePatchRect":{"!ParentKey":"Control" },
+		"TextureRect":{"!ParentKey":"Control" },
+		"OptionButton":{"!ParentKey":"Button"}
+	}
+	var classes = godot_classes.duplicate(true)
+	for file_path:String in files:
+		var file = FileAccess.open(file_path, FileAccess.READ)
+		var text:String = file.get_as_text()
+		var lines = text.split("\n")
+		var class_name_val = ""
+		var parent_name = ""
+		for line:String in lines:
+			if line.begins_with("class_name"):
+				class_name_val = line.trim_prefix("class_name ")
+			if line.begins_with("extends"):
+				parent_name = line.trim_prefix("extends ")
+			if line.begins_with("func"):
+				break
+		if class_name_val:
+			classes[class_name_val] = {
+				"File": file_path,
+				"!ParentKey": parent_name
+			}
+		if parent_name and not classes.keys().has(parent_name):
+			classes[parent_name] = {
+			}
+	var relation_tree = build_def_relation_tree(classes)
+	relation_tree['Node'] = {}
+	relation_tree['BaseLoadObject'] = {}
+	relation_tree = relation_tree
+	var key_ids = []
+	var mappings = []
+	for key:String in relation_tree.keys():
+		_rec_mermaid(key, relation_tree[key], classes, key_ids, mappings, godot_classes.keys())
+	var out_str = "flowchart LR\n"
+	for id in key_ids:
+		out_str += "\t" + id + "\n"
+	for map in mappings:
+		out_str += "\t" + map + "\n"
+	
+	print(out_str)
+	#print(relation_tree)
+
 
 static func build_mermaid_def_chart():
 	var all_defs = get_all_defs()
@@ -87,16 +156,23 @@ static func build_mermaid_def_chart():
 	
 	print(out_str)
 
-static func _rec_mermaid(def_key:String, def_tree_branch:Dictionary, all_defs:Dictionary, key_ids:Array, mappings:Array):
+static func _rec_mermaid(def_key:String, def_tree_branch:Dictionary, all_defs:Dictionary, key_ids:Array, mappings:Array, extra = null):
 	var def = all_defs[def_key]
-	var id_val = ("%s[\"'%s\n%s'\"]" % [def_key.trim_prefix("#"), def_key, def.get("#ObjDetails", {}).get("DisplayName", "NO NAME")])
+	var id_val = ''
+	if def.keys().has("#ObjDetails"):
+		id_val = ("%s[\"'%s\n%s'\"]" % [def_key.trim_prefix("#"), def_key, def.get("#ObjDetails", {}).get("DisplayName", "NO NAME")])
+	else:
+		if extra.has(def_key): # Is Godot Class
+			id_val = ("%s(\"%s\n%s\")" % [def_key.trim_prefix("#"), def_key, "Godot Class"])
+		else:
+			id_val = ("%s[\"%s\"]" % [def_key.trim_prefix("#"), def_key.capitalize()])
 	key_ids.append(id_val)
 	var parent_key = def.get("!ParentKey", null)
 	if parent_key:
 		var mapping_val = ("%s --> %s" % [parent_key.trim_prefix("#"), def_key.trim_prefix("#")])
 		mappings.append(mapping_val)
 	for sub_key in def_tree_branch.keys():
-		_rec_mermaid(sub_key, def_tree_branch[sub_key], all_defs, key_ids, mappings)
+		_rec_mermaid(sub_key, def_tree_branch[sub_key], all_defs, key_ids, mappings, extra)
 	pass
 	
 

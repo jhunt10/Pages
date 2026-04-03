@@ -1,1 +1,166 @@
-{"BanditAxe":{"!ObjectScript":"res://assets/Scripts/Items/Equipment/Tools/BaseWeaponEquipment.gd","#ObjDetails":{"Description":"An old wood splitting axe repurposed for splitting skulls. Just goes to show that anything can be used as a weapon when already shaped like a weapon.","DisplayName":"Bandit Axe","LargeIcon":"Sprites/BanditAxe_Icon.png","SmallIcon":"Sprites/BanditAxe_Icon.png","SnippetDesc":"Big ol' mal.","Tags":["Weapon","Axe"],"Taxonomy":["Item","Equipment","Tool","Weapon"]},"EquipmentData":{"AttackMods":{},"DamageMods":{},"EquipSlot":"Weapon","Requirments":{"ReqStats":{"Strength":8.0}},"StatMods":{"AttackBonus":{"ModType":"Add","StatName":"PhyAttack","Value":10.0}},"TargetMods":{}},"ItemData":{"Rarity":"Common","Value":150.0},"WeaponData":{"AttackData":{"AttackDetails":{"AccuracyMod":1.0,"PotencyMod":1.0},"AttackTags":["Weapon","Melee","Physical"],"DamageDatas":{"WeaponDamage":{"AtkPwrBase":100.0,"AtkPwrRange":30.0,"AtkStat":"PhyAttack","DamageType":"Slash","DamageVfxKey":"AUTO","DefenseType":"AUTO"}},"EffectDatas":{},"TargetParams":{"LineOfSight":true,"TargetArea":"[[-1,1],[0,1],[1,1],[-1,0],[1,0]]","TargetType":"Actor"}},"IsRanged":false,"WeaponClass":"Medium","WeaponSpriteData":{"Offset":[0.0,0.0],"Rotation":0.0,"WeaponAnimation":"Swing"}},"_DefVersion":"1"},"BigMalma":{"!ObjectScript":"res://assets/Scripts/Items/Equipment/Tools/BaseWeaponEquipment.gd","#ObjDetails":{"Description":"A crude Mal made from bolting a stone slab to a plank. Used to be owned by a Bandit Captain, until they were out bandited by our Heros.","DisplayName":"Big Mal-Ma","LargeIcon":"Sprites/BigMalma_Icon.png","SmallIcon":"Sprites/BigMalma_Icon.png","SnippetDesc":"Big ol' mal.","Tags":["Weapon","Hammer"],"Taxonomy":["Item","Equipment","Tool","Weapon"]},"EquipmentData":{"AttackMods":{},"DamageMods":{},"EquipSlot":"Weapon","Requirments":{"ReqStats":{"Strength":10.0}},"StatMods":{"AttackBonus":{"ModType":"Add","StatName":"PhyAttack","Value":12.0}},"TargetMods":{}},"ItemData":{"Rarity":"Rare","Value":250.0},"WeaponData":{"AttackData":{"AttackDetails":{"AccuracyMod":1.0,"PotencyMod":1.0},"AttackTags":["Weapon","Melee","Physical"],"DamageDatas":{"WeaponDamage":{"AtkPwrBase":120.0,"AtkPwrRange":10.0,"AtkStat":"PhyAttack","DamageType":"Blunt","DamageVfxKey":"AUTO","DefenseType":"AUTO"}},"EffectDatas":{},"TargetParams":{"LineOfSight":true,"TargetArea":"[[-1,1],[0,1],[1,1]]","TargetType":"Actor"}},"IsRanged":false,"WeaponClass":"Heavy","WeaponSpriteData":{"Offset":[0.0,0.0],"Rotation":22.0,"WeaponAnimation":"Swing"}},"_DefVersion":"1"}}
+{
+    "BanditAxe": {
+        "!ObjectScript": "res://assets/Scripts/Items/Equipment/Tools/BaseWeaponEquipment.gd",
+        "#ObjDetails": {
+            "Description": "An old wood splitting axe repurposed for splitting skulls. Just goes to show that anything can be used as a weapon when already shaped like a weapon.",
+            "DisplayName": "Bandit Axe",
+            "LargeIcon": "Sprites/BanditAxe_Icon.png",
+            "SmallIcon": "Sprites/BanditAxe_Icon.png",
+            "SnippetDesc": "Big ol' mal.",
+            "Tags": [
+                "Weapon",
+                "Axe"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Equipment",
+                "Tool",
+                "Weapon"
+            ]
+        },
+        "EquipmentData": {
+            "AttackMods": {},
+            "DamageMods": {},
+            "EquipSlot": "Weapon",
+            "Requirments": {
+                "ReqStats": {
+                    "Strength": 8.0
+                }
+            },
+            "StatMods": {
+                "AttackBonus": {
+                    "ModType": "Add",
+                    "StatName": "PhyAttack",
+                    "Value": 10.0
+                }
+            },
+            "TargetMods": {}
+        },
+        "ItemData": {
+            "Rarity": "Common",
+            "Value": 150.0
+        },
+        "WeaponData": {
+            "AttackData": {
+                "AttackDetails": {
+                    "AccuracyMod": 1.0,
+                    "PotencyMod": 1.0
+                },
+                "AttackTags": [
+                    "Weapon",
+                    "Melee",
+                    "Physical"
+                ],
+                "DamageDatas": {
+                    "WeaponDamage": {
+                        "AtkPwrBase": 100.0,
+                        "AtkPwrRange": 30.0,
+                        "AtkStat": "PhyAttack",
+                        "DamageType": "Slash",
+                        "DamageVfxKey": "AUTO",
+                        "DefenseType": "AUTO"
+                    }
+                },
+                "EffectDatas": {},
+                "TargetParams": {
+                    "LineOfSight": true,
+                    "TargetArea": "[[-1,1],[0,1],[1,1],[-1,0],[1,0]]",
+                    "TargetType": "Actor"
+                }
+            },
+            "IsRanged": false,
+            "WeaponClass": "Medium",
+            "WeaponSpriteData": {
+                "Offset": [
+                    0.0,
+                    0.0
+                ],
+                "Rotation": 0.0,
+                "WeaponAnimation": "Swing"
+            }
+        },
+        "_DefVersion": "1"
+    },
+    "BigMalma": {
+        "!ObjectScript": "res://assets/Scripts/Items/Equipment/Tools/BaseWeaponEquipment.gd",
+        "#ObjDetails": {
+            "Description": "A crude Mal made from bolting a stone slab to a plank. Used to be owned by a Bandit Captain, until they were out bandited by our Heros.",
+            "DisplayName": "Big Mal-Ma",
+            "LargeIcon": "Sprites/BigMalma_Icon.png",
+            "SmallIcon": "Sprites/BigMalma_Icon.png",
+            "SnippetDesc": "Big ol' mal.",
+            "Tags": [
+                "Weapon",
+                "GreatHammer"
+            ],
+            "Taxonomy": [
+                "Item",
+                "Equipment",
+                "Tool",
+                "Weapon"
+            ]
+        },
+        "EquipmentData": {
+            "AttackMods": {},
+            "DamageMods": {},
+            "EquipSlot": "Weapon",
+            "Requirments": {
+                "ReqStats": {
+                    "Strength": 10.0
+                }
+            },
+            "StatMods": {
+                "AttackBonus": {
+                    "ModType": "Add",
+                    "StatName": "PhyAttack",
+                    "Value": 12.0
+                }
+            },
+            "TargetMods": {}
+        },
+        "ItemData": {
+            "Rarity": "Rare",
+            "Value": 250.0
+        },
+        "WeaponData": {
+            "AttackData": {
+                "AttackDetails": {
+                    "AccuracyMod": 1.0,
+                    "PotencyMod": 1.0
+                },
+                "AttackTags": [
+                    "Weapon",
+                    "Melee",
+                    "Physical"
+                ],
+                "DamageDatas": {
+                    "WeaponDamage": {
+                        "AtkPwrBase": 120.0,
+                        "AtkPwrRange": 10.0,
+                        "AtkStat": "PhyAttack",
+                        "DamageType": "Blunt",
+                        "DamageVfxKey": "AUTO",
+                        "DefenseType": "AUTO"
+                    }
+                },
+                "EffectDatas": {},
+                "TargetParams": {
+                    "LineOfSight": true,
+                    "TargetArea": "[[-1,1],[0,1],[1,1]]",
+                    "TargetType": "Actor"
+                }
+            },
+            "IsRanged": false,
+            "WeaponClass": "Heavy",
+            "WeaponSpriteData": {
+                "Offset": [
+                    0.0,
+                    0.0
+                ],
+                "Rotation": 22.0,
+                "WeaponAnimation": "Swing"
+            }
+        },
+        "_DefVersion": "1"
+    }
+}
