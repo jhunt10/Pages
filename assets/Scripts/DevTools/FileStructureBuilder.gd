@@ -8,7 +8,7 @@ class_name FileStructureBuilder
 
 static func DoThing():
 	#print("\nSanity Check")
-	format_def_files()
+	#format_def_files()
 	#update_def_files()
 	#get_common_props_in_files()
 	#build_mermaid_def_chart()
