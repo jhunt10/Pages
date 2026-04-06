@@ -1,1 +1,625 @@
-{"#BaseBlessingEffect":{"!ObjectScript":"res://assets/Scripts/Actors/Effects/BaseEffect.gd","#ObjDetails":{"Description":"Gain @@#StatMod:BlessMod1@@ and @@#StatMod:BlessMod2@@.","DisplayName":"Base Blessing","LargeIcon":"Sprites/Blessing_Base.png","ObjectType":"Effect","SmallIcon":"Sprites/Blessing_Base.png","SnippetDesc":"Gain @@#StatMod:BlessMod1@@ and @@#StatMod:BlessMod2@@.","Tags":[],"Taxonomy":["Effect"]},"EffectData":{"EffectDetails":{"AddTagsToActor":["Blessed"],"CanStack":false,"DeleteAfterCombat":true,"DurationData":{"BaseDuration":2.0,"DurationTrigger":"OnRoundEnd"},"IsBad":false,"IsGood":true,"LimitedEffectType":"Blessing","ShowCounter":true,"ShowInHud":true},"StatMods":{"BlessMod1":{"ModType":"Scale","StatName":"Speed","Value":1.2},"BlessMod2":{"ModType":"Add","StatName":"Evasion","Value":10.0}},"SubEffects":{"ModStat":{"AllStatMods":true,"SubEffectScript":"res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_ModStat.gd"}}},"_DefVersion":"1"},"Blessing_Air":{"!ObjectScript":"res://assets/Scripts/Actors/Effects/BaseEffect.gd","!ParentKey":"#BaseBlessingEffect","#ObjDetails":{"Description":"","DisplayName":"Air Blessing","LargeIcon":"Sprites/Blessing_Air.png","ObjectType":"Effect","SmallIcon":"Sprites/Blessing_Air.png","Taxonomy":["Effect"]},"EffectData":{"StatMods":{"BlessMod1":{"ModType":"Scale","StatName":"Speed","Value":1.2},"BlessMod2":{"ModType":"Add","StatName":"Evasion","Value":10.0}}},"_DefVersion":"1"},"Blessing_Earth":{"!ObjectScript":"res://assets/Scripts/Actors/Effects/BaseEffect.gd","!ParentKey":"#BaseBlessingEffect","#ObjDetails":{"Description":"","DisplayName":"Earth Blessing","LargeIcon":"Sprites/Blessing_Earth.png","ObjectType":"Effect","SmallIcon":"Sprites/Blessing_Earth.png","Taxonomy":["Effect"]},"EffectData":{"StatMods":{"BlessMod1":{"ModType":"Scale","StatName":"Mass","Value":1.2},"BlessMod2":{"ModType":"Add","StatName":"Armor","Value":15.0}}},"_DefVersion":"1"},"Blessing_Fire":{"!ObjectScript":"res://assets/Scripts/Actors/Effects/BaseEffect.gd","!ParentKey":"#BaseBlessingEffect","#ObjDetails":{"Description":"","DisplayName":"Fire Blessing","LargeIcon":"Sprites/Blessing_Fire.png","ObjectType":"Effect","SmallIcon":"Sprites/Blessing_Fire.png","Taxonomy":["Effect"]},"EffectData":{"StatMods":{"BlessMod1":{"ModType":"Scale","StatName":"Potency","Value":1.2},"BlessMod2":{"ModType":"Add","StatName":"CritChance","Value":10.0}}},"_DefVersion":"1"},"Blessing_Water":{"!ObjectScript":"res://assets/Scripts/Actors/Effects/BaseEffect.gd","!ParentKey":"#BaseBlessingEffect","#ObjDetails":{"Description":"","DisplayName":"Water Blessing","LargeIcon":"Sprites/Blessing_Water.png","ObjectType":"Effect","SmallIcon":"Sprites/Blessing_Water.png","Taxonomy":["Effect"]},"EffectData":{"StatMods":{"BlessMod1":{"ModType":"Scale","StatName":"Protection","Value":1.2},"BlessMod2":{"ModType":"Add","StatName":"Ward","Value":15.0}}},"_DefVersion":"1"},"HolyArmorEffect":{"!ObjectScript":"res://assets/Scripts/Actors/Effects/BaseEffect.gd","#ObjDetails":{"Description":"Gain @@#StatMod:HolyArmorArmorMod:Value@@ @@#StatMod:HolyArmorArmorMod:Stat@@ and @@#StatMod:HolyArmorWardMod:Stat@@, @@#StatMod:HolyArmorProtectionMod@@, and @@#StatMod:HolyArmorDarkResMod:Value@@ @@#StatMod:HolyArmorDarkResMod:Stat@@ and @@#StatMod:HolyArmorLightResMod:Stat@@","DisplayName":"Holy Armor","LargeIcon":"Sprites/HolyArmor.png","ObjectType":"Effect","SmallIcon":"Sprites/HolyArmor.png","SnippetDesc":"","Tags":[],"Taxonomy":["Effect"]},"EffectData":{"EffectDetails":{"AddTagsToActor":[],"CanStack":false,"DeleteAfterCombat":true,"DurationData":{"BaseDuration":6.0,"DurationTrigger":"OnTurnEnd"},"IsBad":false,"IsGood":true,"ShowCounter":true,"ShowInHud":true},"StatMods":{"HolyArmorArmorMod":{"ModType":"Add","StatName":"Armor","Value":10.0},"HolyArmorDarkResMod":{"ModType":"Add","StatName":"Resistance:Dark","Value":20.0},"HolyArmorLightResMod":{"ModType":"Add","StatName":"Resistance:Light","Value":20.0},"HolyArmorProtectionMod":{"ModType":"Add","StatName":"Protection","Value":20.0},"HolyArmorWardMod":{"ModType":"Add","StatName":"Ward","Value":10.0}},"SubEffects":{"ModStat":{"AllStatMods":true,"SubEffectScript":"res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_ModStat.gd"}}},"_DefVersion":"1"},"HolyBookEffect":{"!ObjectScript":"res://assets/Scripts/Actors/Effects/BaseEffect.gd","#ObjDetails":{"Description":"@@#Color:Ammo:Mag:Mag Ammo@@ cost of @@#Color:Blue:Spell Pages@@ is reduced by @@#Color:Red:25%@@. Does not apply to @@#Color:DmgColor:Dark:Dark Pages@@.","DisplayName":"Holy Book","LargeIcon":"Sprites/HolyBook.png","ObjectType":"Effect","SmallIcon":"Sprites/HolyBook.png","SnippetDesc":"-25% Mag Ammo Cost of non-Dark Spell Pages.","Tags":[],"Taxonomy":["Effect"]},"EffectData":{"AmmoMods":{"HolyBookAmmoMod":{"Conditions":{"ActionTagFilters":[{"ExcludeAnyTags":["Dark"],"RequireAnyTags":["Spell"]}],"AmmoTypes":["Mag"]},"ModType":"ScaleCost","Value":0.75}},"EffectDetails":{"AddTagsToActor":[],"CanStack":false,"DeleteAfterCombat":true,"DurationData":{"BaseDuration":6.0,"DurationTrigger":"OnTurnEnd"},"IsBad":false,"IsGood":true,"ShowCounter":true,"ShowInHud":true},"SubEffects":{"AmmoModSubEffect":{"SubEffectScript":"res://assets/Scripts/Actors/Effects/SubEffects/Mods/SubEffect_AmmoMod.gd"}}},"_DefVersion":"1"},"HolyWeaponEffect":{"!ObjectScript":"res://assets/Scripts/Actors/Effects/BaseEffect.gd","#ObjDetails":{"Description":"Gain @@#AtkMod:HolyWeaponBaseAtkMod:DmgMod:HolyWeaponDmgMod:Value@@ on @@#Color:Red:Weapon Attacks@@ against @@#Color:Red:Enemies@@. If the Enemy has the @@#Color:DmgColor:Dark@@ Tag, this damage is added as @@#Color:DmgColor:Light Damage@@ instead.","DisplayName":"Holy Weapon","LargeIcon":"Sprites/HolyWeapon.png","ObjectType":"Effect","SmallIcon":"Sprites/HolyWeapon.png","SnippetDesc":"Gain @@#StatMod:BlessMod1@@ and @@#StatMod:BlessMod2@@.","Tags":[],"Taxonomy":["Effect"]},"EffectData":{"AttackMods":{"HolyWeaponBaseAtkMod":{"AddedDamageDatas":{"HolyWeaponAddedDamage":{"Conditions":{"DamageTypes":[],"DefenderTagFilters":[{"RequireAnyTags":["Dark"]}],"DefenderTeamFilters":["Enemy"],"SourceTagFilters":[{"RequireAnyTags":["Weapon"]}],"SourceTeamFilters":["Self"]},"DamageDatas":{"HolyWeaponAddedDamage":{"AtkPwrBase":100.0,"AtkPwrRange":0.0,"AtkPwrScale":0.2,"AtkStat":"","BaseDamage":0.0,"DamageType":"DAMAGE_TYPE","DamageVfxKey":"SmallDAMAGE_TYPE_DamageEffect","DefenseType":"Ward"}}}},"AttackModKey":"HolyWeaponAtkMod","AttackerStatMods":{},"CanStack":false,"Conditions":{"AttackSourceTagFilters":[{"RequireAnyTags":["Weapon"]}],"AttackerTeamFilters":["Self"],"DefendersConditions":[{"DefenderTagFilters":[{"ExcludeAnyTags":["Dark"]}],"DefenderTeamFilters":["Enemy"],"RequiresAllDefenders":false}]},"DamageMods":{"HolyWeaponDmgMod":{"Conditions":{"DamageTypes":[],"DefenderTagFilters":[{"ExcludeAnyTags":["Dark"]}],"DefenderTeamFilters":["Enemy"],"SourceTagFilters":[{"RequireAnyTags":["Weapon"]}],"SourceTeamFilters":["Self"]},"DamageModKey":"HolyWeaponDmgMod","ModType":"Scale","Value":0.2}},"DefenderStatMods":{}}},"EffectDetails":{"AddTagsToActor":["HolyWeapon"],"CanStack":false,"DeleteAfterCombat":true,"DurationData":{"BaseDuration":2.0,"DurationTrigger":"OnRoundEnd"},"IsBad":false,"IsGood":true,"ShowCounter":true,"ShowInHud":true},"SubEffects":{"AddedDamage":{"AddForEachDamageEvent":true,"AddedDamageScale":0.2,"AddedDamageType":"Light","DamageModConditions":{"DamageTypes":[],"DefenderTagFilters":[{"RequireAnyTags":["Dark"]}],"DefenderTeamFilters":["Enemy"],"SourceTagFilters":[{"RequireAnyTags":["Weapon"]}],"SourceTeamFilters":["Self"]},"SubEffectScript":"res://assets/Scripts/Actors/Effects/SubEffects/Damage/SubEffect_AddedDamage.gd"},"ModStat":{"AllStatMods":true,"SubEffectScript":"res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_ModStat.gd"}}},"_DefVersion":"1"},"LightAuraEffect":{"!ObjectScript":"res://assets/Scripts/Actors/Effects/BaseEffect.gd","#ObjDetails":{"Description":"Aura of Light.","DisplayName":"Aura of Light","LargeIcon":"Sprites/LightAura.png","ObjectType":"Effect","SmallIcon":"Sprites/LightAura.png","SnippetDesc":"Aura of Light","Tags":[],"Taxonomy":["Effect"]},"EffectData":{"EffectDetails":{"AddTagsToActor":[],"CanStack":false,"DeleteAfterCombat":true,"DurationData":{"BaseDuration":2.0,"DurationTrigger":"OnRoundEnd"},"IsBad":false,"IsGood":true,"ShowCounter":true,"ShowInHud":true},"NestedEffectDatas":{"Effect1":{"ApplicationChance":1.0,"EffectKey":"LightAura_InZoneEffect","ShowCounter":false}},"SubEffects":{"Aura":{"SubEffectScript":"res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_CreateAura.gd","ZoneDataKey":"LightAura"}},"ZoneDatas":{"LightAura":{"Duration":1.0,"DurationType":"Aura","InZoneEffectDataKey":"Effect1","TileSprite":"ZoneTileSets/LightAura_Tile.png","ZoneKey":"LightAura","ZoneScript":"res://assets/Scripts/Zones/ZoneScripts/EffectZone.gd"}}},"_DefVersion":"1"},"LightAura_InZoneEffect":{"!ObjectScript":"res://assets/Scripts/Actors/Effects/BaseEffect.gd","#ObjDetails":{"Description":"Take 5% Max Health as Light Damage at the end of each Turn.","DisplayName":"In Aura of Light","LargeIcon":"Sprites/LightAura.png","ObjectType":"Effect","SmallIcon":"Sprites/LightAura.png","SnippetDesc":"Take Light Damage at the End of Turn.","Tags":["Light","DOT"],"Taxonomy":["Effect"]},"EffectData":{"DamageDatas":{"DamageData1":{"AtkPwrBase":5.0,"AtkPwrRange":0.0,"AtkPwrScale":0.2,"AtkStat":"Percent","DamageType":"Light","DamageVfxData":{"ShakeActor":false},"DamageVfxKey":"SmallLight_TYPE_DamageEffect","DefenseType":"Nne"}},"EffectDetails":{"AddTagsToActor":[],"CanStack":false,"DeleteAfterCombat":true,"DurationData":{"BaseDuration":1.0,"DurationTrigger":"Trigger"},"IsBad":false,"IsGood":true,"ShowCounter":false,"ShowInHud":true},"SubEffects":{"ApplyDamage":{"DamageKey":"DamageData1","OptionalTriggers":["OnTurnEnd"],"SubEffectScript":"res://assets/Scripts/Actors/Effects/SubEffects/Damage/SubEffect_ApplyDotDamage.gd"}}},"_DefVersion":"1"},"NegateAilmentEffect":{"!ObjectScript":"res://assets/Scripts/Actors/Effects/BaseEffect.gd","#ObjDetails":{"Description":"Negate the next Ailment you would receive.","DisplayName":"Negate Ailment","LargeIcon":"Sprites/AilmentGuard.png","ObjectType":"Effect","SmallIcon":"Sprites/AilmentGuard.png","SnippetDesc":"Negate next Ailment","Tags":[],"Taxonomy":["Effect"]},"EffectData":{"EffectDetails":{"AddTagsToActor":[],"CanStack":false,"DeleteAfterCombat":true,"DurationData":{"BaseDuration":1.0,"DurationTrigger":"OnRoundEnd"},"IsBad":false,"IsGood":true,"ShowCounter":true,"ShowInHud":true},"SubEffects":{"ModStat":{"AllStatMods":true,"SubEffectScript":"res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_ModStat.gd"},"NegateAilment":{"OtherEffectTagFilters":[{"RequireAnyTags":["Ailment"]}],"SubEffectScript":"res://assets/Scripts/Actors/Effects/SubEffects/OtherEffects/SubEffect_NegateOtherEffect.gd"}}},"_DefVersion":"1"}}
+{
+	"#BaseBlessingEffect": {
+		"!ObjectScript": "res://assets/Scripts/Actors/Effects/BaseEffect.gd",
+		"#ObjDetails": {
+			"Description": "Gain @@#StatMod:BlessMod1@@ and @@#StatMod:BlessMod2@@.",
+			"DisplayName": "Base Blessing",
+			"LargeIcon": "Sprites/Blessing_Base.png",
+			"ObjectType": "Effect",
+			"SmallIcon": "Sprites/Blessing_Base.png",
+			"SnippetDesc": "Gain @@#StatMod:BlessMod1@@ and @@#StatMod:BlessMod2@@.",
+			"Tags": [],
+			"Taxonomy": [
+				"Effect"
+			]
+		},
+		"EffectData": {
+			"EffectDetails": {
+				"AddTagsToActor": [
+					"Blessed"
+				],
+				"CanStack": false,
+				"DeleteAfterCombat": true,
+				"DurationData": {
+					"BaseDuration": 2.0,
+					"DurationTrigger": "OnRoundEnd"
+				},
+				"IsBad": false,
+				"IsGood": true,
+				"LimitedEffectType": "Blessing",
+				"ShowCounter": true,
+				"ShowInHud": true
+			},
+			"StatMods": {
+				"BlessMod1": {
+					"ModType": "Scale",
+					"StatName": "Speed",
+					"Value": 1.2
+				},
+				"BlessMod2": {
+					"ModType": "Add",
+					"StatName": "Evasion",
+					"Value": 10.0
+				}
+			},
+			"SubEffects": {
+				"ModStat": {
+					"AllStatMods": true,
+					"SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_ModStat.gd"
+				}
+			}
+		},
+		"_DefVersion": "1"
+	},
+	"Blessing_Air": {
+		"!ObjectScript": "res://assets/Scripts/Actors/Effects/BaseEffect.gd",
+		"!ParentKey": "#BaseBlessingEffect",
+		"#ObjDetails": {
+			"Description": "",
+			"DisplayName": "Air Blessing",
+			"LargeIcon": "Sprites/Blessing_Air.png",
+			"ObjectType": "Effect",
+			"SmallIcon": "Sprites/Blessing_Air.png",
+			"Taxonomy": [
+				"Effect"
+			]
+		},
+		"EffectData": {
+			"StatMods": {
+				"BlessMod1": {
+					"ModType": "Scale",
+					"StatName": "Speed",
+					"Value": 1.2
+				},
+				"BlessMod2": {
+					"ModType": "Add",
+					"StatName": "Evasion",
+					"Value": 10.0
+				}
+			}
+		},
+		"_DefVersion": "1"
+	},
+	"Blessing_Earth": {
+		"!ObjectScript": "res://assets/Scripts/Actors/Effects/BaseEffect.gd",
+		"!ParentKey": "#BaseBlessingEffect",
+		"#ObjDetails": {
+			"Description": "",
+			"DisplayName": "Earth Blessing",
+			"LargeIcon": "Sprites/Blessing_Earth.png",
+			"ObjectType": "Effect",
+			"SmallIcon": "Sprites/Blessing_Earth.png",
+			"Taxonomy": [
+				"Effect"
+			]
+		},
+		"EffectData": {
+			"StatMods": {
+				"BlessMod1": {
+					"ModType": "Scale",
+					"StatName": "Mass",
+					"Value": 1.2
+				},
+				"BlessMod2": {
+					"ModType": "Add",
+					"StatName": "Armor",
+					"Value": 15.0
+				}
+			}
+		},
+		"_DefVersion": "1"
+	},
+	"Blessing_Fire": {
+		"!ObjectScript": "res://assets/Scripts/Actors/Effects/BaseEffect.gd",
+		"!ParentKey": "#BaseBlessingEffect",
+		"#ObjDetails": {
+			"Description": "",
+			"DisplayName": "Fire Blessing",
+			"LargeIcon": "Sprites/Blessing_Fire.png",
+			"ObjectType": "Effect",
+			"SmallIcon": "Sprites/Blessing_Fire.png",
+			"Taxonomy": [
+				"Effect"
+			]
+		},
+		"EffectData": {
+			"StatMods": {
+				"BlessMod1": {
+					"ModType": "Scale",
+					"StatName": "Potency",
+					"Value": 1.2
+				},
+				"BlessMod2": {
+					"ModType": "Add",
+					"StatName": "CritChance",
+					"Value": 10.0
+				}
+			}
+		},
+		"_DefVersion": "1"
+	},
+	"Blessing_Water": {
+		"!ObjectScript": "res://assets/Scripts/Actors/Effects/BaseEffect.gd",
+		"!ParentKey": "#BaseBlessingEffect",
+		"#ObjDetails": {
+			"Description": "",
+			"DisplayName": "Water Blessing",
+			"LargeIcon": "Sprites/Blessing_Water.png",
+			"ObjectType": "Effect",
+			"SmallIcon": "Sprites/Blessing_Water.png",
+			"Taxonomy": [
+				"Effect"
+			]
+		},
+		"EffectData": {
+			"StatMods": {
+				"BlessMod1": {
+					"ModType": "Scale",
+					"StatName": "Protection",
+					"Value": 1.2
+				},
+				"BlessMod2": {
+					"ModType": "Add",
+					"StatName": "Ward",
+					"Value": 15.0
+				}
+			}
+		},
+		"_DefVersion": "1"
+	},
+	"HolyArmorEffect": {
+		"!ObjectScript": "res://assets/Scripts/Actors/Effects/BaseEffect.gd",
+		"#ObjDetails": {
+			"Description": "Gain @@#StatMod:HolyArmorArmorMod:Value@@ @@#StatMod:HolyArmorArmorMod:Stat@@ and @@#StatMod:HolyArmorWardMod:Stat@@, @@#StatMod:HolyArmorProtectionMod@@, and @@#StatMod:HolyArmorDarkResMod:Value@@ @@#StatMod:HolyArmorDarkResMod:Stat@@ and @@#StatMod:HolyArmorLightResMod:Stat@@",
+			"DisplayName": "Holy Armor",
+			"LargeIcon": "Sprites/HolyArmor.png",
+			"ObjectType": "Effect",
+			"SmallIcon": "Sprites/HolyArmor.png",
+			"SnippetDesc": "",
+			"Tags": [],
+			"Taxonomy": [
+				"Effect"
+			]
+		},
+		"EffectData": {
+			"EffectDetails": {
+				"AddTagsToActor": [],
+				"CanStack": false,
+				"DeleteAfterCombat": true,
+				"DurationData": {
+					"BaseDuration": 6.0,
+					"DurationTrigger": "OnTurnEnd"
+				},
+				"IsBad": false,
+				"IsGood": true,
+				"ShowCounter": true,
+				"ShowInHud": true
+			},
+			"StatMods": {
+				"HolyArmorArmorMod": {
+					"ModType": "Add",
+					"StatName": "Armor",
+					"Value": 10.0
+				},
+				"HolyArmorDarkResMod": {
+					"ModType": "Add",
+					"StatName": "Resistance:Dark",
+					"Value": 20.0
+				},
+				"HolyArmorLightResMod": {
+					"ModType": "Add",
+					"StatName": "Resistance:Light",
+					"Value": 20.0
+				},
+				"HolyArmorProtectionMod": {
+					"ModType": "Add",
+					"StatName": "Protection",
+					"Value": 20.0
+				},
+				"HolyArmorWardMod": {
+					"ModType": "Add",
+					"StatName": "Ward",
+					"Value": 10.0
+				}
+			},
+			"SubEffects": {
+				"ModStat": {
+					"AllStatMods": true,
+					"SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_ModStat.gd"
+				}
+			}
+		},
+		"_DefVersion": "1"
+	},
+	"HolyBookEffect": {
+		"!ObjectScript": "res://assets/Scripts/Actors/Effects/BaseEffect.gd",
+		"#ObjDetails": {
+			"Description": "@@#Color:Ammo:Mag:Mag Ammo@@ cost of @@#Color:Blue:Spell Pages@@ is reduced by @@#Color:Red:25%@@. Does not apply to @@#Color:DmgColor:Dark:Dark Pages@@.",
+			"DisplayName": "Holy Book",
+			"LargeIcon": "Sprites/HolyBook.png",
+			"ObjectType": "Effect",
+			"SmallIcon": "Sprites/HolyBook.png",
+			"SnippetDesc": "-25% Mag Ammo Cost of non-Dark Spell Pages.",
+			"Tags": [],
+			"Taxonomy": [
+				"Effect"
+			]
+		},
+		"EffectData": {
+			"AmmoMods": {
+				"HolyBookAmmoMod": {
+					"Conditions": {
+						"ActionTagFilters": [
+							{
+								"ExcludeAnyTags": [
+									"Dark"
+								],
+								"RequireAnyTags": [
+									"Spell"
+								]
+							}
+						],
+						"AmmoTypes": [
+							"Mag"
+						]
+					},
+					"ModType": "ScaleCost",
+					"Value": 0.75
+				}
+			},
+			"EffectDetails": {
+				"AddTagsToActor": [],
+				"CanStack": false,
+				"DeleteAfterCombat": true,
+				"DurationData": {
+					"BaseDuration": 6.0,
+					"DurationTrigger": "OnTurnEnd"
+				},
+				"IsBad": false,
+				"IsGood": true,
+				"ShowCounter": true,
+				"ShowInHud": true
+			},
+			"SubEffects": {
+				"AmmoModSubEffect": {
+					"SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/Mods/SubEffect_AmmoMod.gd"
+				}
+			}
+		},
+		"_DefVersion": "1"
+	},
+	"HolyWeaponEffect": {
+		"!ObjectScript": "res://assets/Scripts/Actors/Effects/BaseEffect.gd",
+		"#ObjDetails": {
+			"Description": "Gain @@#AtkMod:HolyWeaponBaseAtkMod:DmgMod:HolyWeaponDmgMod:Value@@ on @@#Color:Red:Weapon Attacks@@ against @@#Color:Red:Enemies@@. If the Enemy has the @@#Color:DmgColor:Dark@@ Tag, this damage is added as @@#Color:DmgColor:Light Damage@@ instead.",
+			"DisplayName": "Holy Weapon",
+			"LargeIcon": "Sprites/HolyWeapon.png",
+			"ObjectType": "Effect",
+			"SmallIcon": "Sprites/HolyWeapon.png",
+			"SnippetDesc": "Gain @@#StatMod:BlessMod1@@ and @@#StatMod:BlessMod2@@.",
+			"Tags": [],
+			"Taxonomy": [
+				"Effect"
+			]
+		},
+		"EffectData": {
+			"AttackMods": {
+				"HolyWeaponBaseAtkMod": {
+					"AddedDamageDatas": {
+						"HolyWeaponAddedDamage": {
+							"Conditions": {
+								"DamageTypes": [],
+								"DefenderTagFilters": [
+									{
+										"RequireAnyTags": [
+											"Dark"
+										]
+									}
+								],
+								"DefenderTeamFilters": [
+									"Enemy"
+								],
+								"SourceTagFilters": [
+									{
+										"RequireAnyTags": [
+											"Weapon"
+										]
+									}
+								],
+								"SourceTeamFilters": [
+									"Self"
+								]
+							},
+							"DamageDatas": {
+								"HolyWeaponAddedDamage": {
+									"AtkPwrBase": 100.0,
+									"AtkPwrRange": 0.0,
+									"AtkPwrScale": 0.2,
+									"AtkStat": "",
+									"BaseDamage": 0.0,
+									"DamageType": "DAMAGE_TYPE",
+									"DamageVfxKey": "SmallDAMAGE_TYPE_DamageEffect",
+									"DefenseType": "Ward"
+								}
+							}
+						}
+					},
+					"AttackModKey": "HolyWeaponAtkMod",
+					"AttackerStatMods": {
+
+					},
+					"CanStack": false,
+					"Conditions": {
+						"AttackSourceTagFilters": [
+							{
+								"RequireAnyTags": [
+									"Weapon"
+								]
+							}
+						],
+						"AttackerTeamFilters": [
+							"Self"
+						],
+						"DefendersConditions": [
+							{
+								"DefenderTagFilters": [
+									{
+										"ExcludeAnyTags": [
+											"Dark"
+										]
+									}
+								],
+								"DefenderTeamFilters": [
+									"Enemy"
+								],
+								"RequiresAllDefenders": false
+							}
+						]
+					},
+					"DamageMods": {
+						"HolyWeaponDmgMod": {
+							"Conditions": {
+								"DamageTypes": [],
+								"DefenderTagFilters": [
+									{
+										"ExcludeAnyTags": [
+											"Dark"
+										]
+									}
+								],
+								"DefenderTeamFilters": [
+									"Enemy"
+								],
+								"SourceTagFilters": [
+									{
+										"RequireAnyTags": [
+											"Weapon"
+										]
+									}
+								],
+								"SourceTeamFilters": [
+									"Self"
+								]
+							},
+							"DamageModKey": "HolyWeaponDmgMod",
+							"ModType": "Scale",
+							"Value": 0.2
+						}
+					},
+					"DefenderStatMods": {
+
+					}
+				}
+			},
+			"EffectDetails": {
+				"AddTagsToActor": [
+					"HolyWeapon"
+				],
+				"CanStack": false,
+				"DeleteAfterCombat": true,
+				"DurationData": {
+					"BaseDuration": 2.0,
+					"DurationTrigger": "OnRoundEnd"
+				},
+				"IsBad": false,
+				"IsGood": true,
+				"ShowCounter": true,
+				"ShowInHud": true
+			},
+			"SubEffects": {
+				"AddedDamage": {
+					"AddForEachDamageEvent": true,
+					"AddedDamageScale": 0.2,
+					"AddedDamageType": "Light",
+					"DamageModConditions": {
+						"DamageTypes": [],
+						"DefenderTagFilters": [
+							{
+								"RequireAnyTags": [
+									"Dark"
+								]
+							}
+						],
+						"DefenderTeamFilters": [
+							"Enemy"
+						],
+						"SourceTagFilters": [
+							{
+								"RequireAnyTags": [
+									"Weapon"
+								]
+							}
+						],
+						"SourceTeamFilters": [
+							"Self"
+						]
+					},
+					"SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/Damage/SubEffect_AddedDamage.gd"
+				},
+				"ModStat": {
+					"AllStatMods": true,
+					"SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_ModStat.gd"
+				}
+			}
+		},
+		"_DefVersion": "1"
+	},
+	"LightAuraEffect": {
+		"!ObjectScript": "res://assets/Scripts/Actors/Effects/BaseEffect.gd",
+		"#ObjDetails": {
+			"Description": "Aura of Light.",
+			"DisplayName": "Aura of Light",
+			"LargeIcon": "Sprites/LightAura.png",
+			"ObjectType": "Effect",
+			"SmallIcon": "Sprites/LightAura.png",
+			"SnippetDesc": "Aura of Light",
+			"Tags": [],
+			"Taxonomy": [
+				"Effect"
+			]
+		},
+		"EffectData": {
+			"EffectDetails": {
+				"AddTagsToActor": [],
+				"CanStack": false,
+				"DeleteAfterCombat": true,
+				"DurationData": {
+					"BaseDuration": 2.0,
+					"DurationTrigger": "OnRoundEnd"
+				},
+				"IsBad": false,
+				"IsGood": true,
+				"ShowCounter": true,
+				"ShowInHud": true
+			},
+			"NestedEffectDatas": {
+				"Effect1": {
+					"ApplicationChance": 1.0,
+					"EffectKey": "LightAura_InZoneEffect",
+					"ShowCounter": false
+				}
+			},
+			"SubEffects": {
+				"Aura": {
+					"SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_CreateAura.gd",
+					"ZoneDataKey": "LightAura"
+				}
+			},
+			"ZoneDatas": {
+				"LightAura": {
+					"Duration": 1.0,
+					"DurationType": "Aura",
+					"InZoneEffectDataKey": "Effect1",
+					"TileSprite": "ZoneTileSets/LightAura_Tile.png",
+					"ZoneKey": "LightAura",
+					"ZoneScript": "res://assets/Scripts/Zones/ZoneScripts/EffectZone.gd"
+				}
+			}
+		},
+		"_DefVersion": "1"
+	},
+	"LightAura_InZoneEffect": {
+		"!ObjectScript": "res://assets/Scripts/Actors/Effects/BaseEffect.gd",
+		"#ObjDetails": {
+			"Description": "Take 5% Max Health as Light Damage at the end of each Turn.",
+			"DisplayName": "In Aura of Light",
+			"LargeIcon": "Sprites/LightAura.png",
+			"ObjectType": "Effect",
+			"SmallIcon": "Sprites/LightAura.png",
+			"SnippetDesc": "Take Light Damage at the End of Turn.",
+			"Tags": [
+				"Light",
+				"DOT"
+			],
+			"Taxonomy": [
+				"Effect"
+			]
+		},
+		"EffectData": {
+			"DamageDatas": {
+				"DamageData1": {
+					"AtkPwrBase": 5.0,
+					"AtkPwrRange": 0.0,
+					"AtkPwrScale": 0.2,
+					"AtkStat": "Percent",
+					"DamageType": "Light",
+					"DamageVfxData": {
+						"ShakeActor": false
+					},
+					"DamageVfxKey": "SmallLight_TYPE_DamageEffect",
+					"DefenseType": "Nne"
+				}
+			},
+			"EffectDetails": {
+				"AddTagsToActor": [],
+				"CanStack": false,
+				"DeleteAfterCombat": true,
+				"DurationData": {
+					"BaseDuration": 1.0,
+					"DurationTrigger": "Trigger"
+				},
+				"IsBad": false,
+				"IsGood": true,
+				"ShowCounter": false,
+				"ShowInHud": true
+			},
+			"SubEffects": {
+				"ApplyDamage": {
+					"DamageKey": "DamageData1",
+					"OptionalTriggers": [
+						"OnTurnEnd"
+					],
+					"SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/Damage/SubEffect_ApplyDotDamage.gd"
+				}
+			}
+		},
+		"_DefVersion": "1"
+	},
+	"NegateAilmentEffect": {
+		"!ObjectScript": "res://assets/Scripts/Actors/Effects/BaseEffect.gd",
+		"#ObjDetails": {
+			"Description": "Negate the next Ailment you would receive.",
+			"DisplayName": "Negate Ailment",
+			"LargeIcon": "Sprites/AilmentGuard.png",
+			"ObjectType": "Effect",
+			"SmallIcon": "Sprites/AilmentGuard.png",
+			"SnippetDesc": "Negate next Ailment",
+			"Tags": [],
+			"Taxonomy": [
+				"Effect"
+			]
+		},
+		"EffectData": {
+			"EffectDetails": {
+				"AddTagsToActor": [],
+				"CanStack": false,
+				"DeleteAfterCombat": true,
+				"DurationData": {
+					"BaseDuration": 1.0,
+					"DurationTrigger": "OnRoundEnd"
+				},
+				"IsBad": false,
+				"IsGood": true,
+				"ShowCounter": true,
+				"ShowInHud": true
+			},
+			"SubEffects": {
+				"ModStat": {
+					"AllStatMods": true,
+					"SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_ModStat.gd"
+				},
+				"NegateAilment": {
+					"OtherEffectTagFilters": [
+						{
+							"RequireAnyTags": [
+								"Ailment"
+							]
+						}
+					],
+					"SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/OtherEffects/SubEffect_NegateOtherEffect.gd"
+				}
+			}
+		},
+		"_DefVersion": "1"
+	}
+}

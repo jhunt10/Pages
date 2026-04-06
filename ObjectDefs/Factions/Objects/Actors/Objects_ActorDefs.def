@@ -1,1 +1,305 @@
-{"#BaseObjectActor":{"!ObjectScript":"res://assets/Scripts/Actors/BaseActor.gd","!ParentKey":"#BaseActor","#ObjDetails":{"Description":"The base Actor for non-Actor Map Objects. Great architecture me!","DisplayName":"#BaseObjectActor","LargeIcon":"Sprites/Barrel_Icon.png","ObjectType":"Actor","SmallIcon":"Sprites/Barrel_Icon.png","SnippetDesc":"base non-Actor objects","Tags":["Object"],"Taxonomy":["Actor","Object","Rooted"]},"ActorData":{"DropItemsSet":{},"ExpValue":0.0,"Faction":"Objects","IsAdirectional":true,"MoneyValue":0.0},"ImmuneToEffects":["AilmentBlind","AilmentPoisoned","AilmentBleed","AilmentDazed"],"ScenePath":"res://Scenes/Combat/MapObjects/Actors/SimpleActorNode/simple_actor_node.tscn","SpriteFrameWH":[12.0,4.0],"SpriteOffset":[0.0,-16.0],"SpriteSheet":"Sprites/Barrel_SpriteSheet.png","Stats":{"Armor":0.0,"Awareness":0.0,"BlockChance":0.0,"BlockMod":0.0,"Evasion":0.0,"HealthMax":1.0,"Mass":10.0,"PPR":0.0,"Resistance:Light":0.0,"Speed":0.0},"_DefVersion":"1"},"AlterActor":{"!ObjectScript":"res://ObjectDefs/Factions/Objects/Actors/Scenes/Alter/AlterActor.gd","!ParentKey":"#BaseActor","#ObjDetails":{"Description":"Description","DisplayName":"Alter","LargeIcon":"Sprites/Alter_Icon.png","ObjectType":"Actor","SmallIcon":"Sprites/Alter_Icon.png","SnippetDesc":"an alter","Tags":["Object","Rooted"],"Taxonomy":["Actor","Object"]},"ScenePath":"res://Scenes/Combat/MapObjects/Actors/SimpleActorNode/simple_actor_node.tscn","SpriteFrameWH":[1.0,1.0],"SpriteOffset":[16.0,0.0],"SpriteSheet":"Sprites/Alter_SpriteSheet.png","Stats":{"HealthMax":1.0,"Mass":1.0},"_DefVersion":"1"},"BarrelActor":{"!ObjectScript":"res://assets/Scripts/Actors/BaseActor.gd","!ParentKey":"#BaseObjectActor","#ObjDetails":{"Description":"@@#Color:Red:Barrels@@ were first invented as a subsite for @@#Color:Red:Pinatas@@ during the @@#Color:Red:Great Papier-Mache Wars@@. But failed to find popularity among @@#Color:Grey:Children@@ due to their boring appearance and difficulty to break.\n\nAfter the extinction of @@#Color:Grey:Children@@ and subsequent end to all birthday parties, people have found them useful for storing @@#Tag:Supplies@@ and providing a rustic feel.\n\nSome more nostalgic adventurers still prefer to use them for their original purpose.","DisplayName":"Barrel","LargeIcon":"Sprites/Barrel_Icon.png","ObjectType":"Actor","SmallIcon":"Sprites/Barrel_Icon.png","SnippetDesc":"a barrel","Tags":["Object"],"Taxonomy":["Actor","Object"]},"ActorData":{"DropItemsSet":{"":50.0,"Gen_Ammo":1.0,"HealthPotionL":1.0,"HealthPotionM":5.0,"HealthPotionS":10.0,"Mag_Ammo":10.0,"Phy_Ammo":10.0}},"ScenePath":"res://Scenes/Combat/MapObjects/Actors/SimpleActorNode/simple_actor_node.tscn","SpriteFrameWH":[12.0,4.0],"SpriteOffset":[0.0,-16.0],"SpriteSheet":"Sprites/Barrel_SpriteSheet.png","Stats":{"HealthMax":10.0,"Mass":1.0},"_DefVersion":"1"},"CrateActor":{"!ObjectScript":"res://assets/Scripts/Actors/BaseActor.gd","!ParentKey":"#BaseObjectActor","#ObjDetails":{"Description":"@@#Color:Red:Crates@@ are like the older more mature sibling of @@#Color:Red:Barrels@@. While @@#Color:Red:Barrels@@ are off rolling down hills and filling themselves with beer, @@#Color:Red:Crates@@ are working diligently storing items in warehouses and working as makeshift tables.\n\nMany of the more euclidean minded folks will argue that @@#Color:Red:Crates@@ are superior due to their greater volume and packability. But honestly if you're just breaking them it's all them same..","DisplayName":"Crate","LargeIcon":"Sprites/Crate_Icon.png","ObjectType":"Actor","SmallIcon":"Sprites/Crate_Icon.png","SnippetDesc":"a crate","Tags":["Object"],"Taxonomy":["Actor","Object"]},"ActorData":{"DropItemsSet":{"":50.0,"Gen_Ammo":1.0,"HealthPotionL":1.0,"HealthPotionM":5.0,"HealthPotionS":10.0,"Mag_Ammo":10.0,"Phy_Ammo":10.0}},"ScenePath":"res://Scenes/Combat/MapObjects/Actors/SimpleActorNode/simple_actor_node.tscn","SpriteFrameWH":[12.0,4.0],"SpriteOffset":[0.0,-16.0],"SpriteSheet":"Sprites/Crate_SpriteSheet.png","Stats":{"HealthMax":10.0,"Mass":1.0},"_DefVersion":"1"},"LeverActor":{"!ObjectScript":"res://ObjectDefs/Factions/Objects/Actors/Scenes/Lever/LeverActor.gd","!ParentKey":"#BaseObjectActor","#ObjDetails":{"Description":"In an age where buttons and switches have dominated the mechanical control market, many consumers find themselves longing for a more relatable solution. @@#Color:Red:Barrels@@ were first invented as a subsite for @@#Color:Red:Pinatas@@ during the @@#Color:Red:Great Papier-Mache Wars@@. But failed to find popularity among @@#Color:Grey:Children@@ due to their boring appearance and difficulty to break.\n\nAfter the extinction of @@#Color:Grey:Children@@ and subsequent end to all birthday parties, people have found them useful for storing @@#Tag:Supplies@@ and providing a rustic feel.\n\nSome more nostalgic adventurers still prefer to use them for their original purpose.","DisplayName":"Lever","LargeIcon":"Sprites/Lever_Icon.png","ObjectType":"Actor","SmallIcon":"Sprites/Lever_Icon.png","SnippetDesc":"a lever","Tags":["Object","Lever","Rooted"],"Taxonomy":["Actor","Object"]},"ScenePath":"Scenes/Lever/lever_actor_node.tscn","SpriteFrameWH":[1.0,1.0],"SpriteOffset":[0.0,0.0],"SpriteSheet":"Sprites/Lever_SpriteSheet.png","Stats":{"HealthMax":1.0,"Mass":1.0},"_DefVersion":"1"},"ShrineActor":{"!ObjectScript":"res://ObjectDefs/Factions/Objects/Actors/Scenes/Shrine/SpawnerActor.gd","!ParentKey":"#BaseObjectActor","#ObjDetails":{"Description":"Description","DisplayName":"Shrine","LargeIcon":"Sprites/Shrine_Icon.png","ObjectType":"Actor","SmallIcon":"Sprites/Shrine_Icon.png","SnippetDesc":"a shrine","Tags":["Object","Rooted"],"Taxonomy":["Actor","Object"]},"ScenePath":"Scenes/Shrine/shrine_actor_node.tscn","SpriteFrameWH":[7.0,1.0],"SpriteOffset":[0.0,-16.0],"SpriteSheet":"Sprites/Shrine_SpriteSheet.png","Stats":{"HealthMax":1.0,"Mass":1.0},"_DefVersion":"1"},"StalagmiteActor":{"!ObjectScript":"res://assets/Scripts/Actors/BaseActor.gd","!ParentKey":"#BaseObjectActor","#ObjDetails":{"Description":"@@#Color:Red:Crates@@ are like the older more mature sibling of @@#Color:Red:Barrels@@. While @@#Color:Red:Barrels@@ are off rolling down hills and filling themselves with beer, @@#Color:Red:Crates@@ are working diligently storing items in warehouses and working as makeshift tables.\n\nMany of the more euclidean minded folks will argue that @@#Color:Red:Crates@@ are superior due to their greater volume and packability. But honestly if you're just breaking them it's all them same..","DisplayName":"Stalagmite","LargeIcon":"Sprites/Stalagmite_Icon.png","ObjectType":"Actor","SmallIcon":"Sprites/Stalagmite_Icon.png","SnippetDesc":"a stalagmite","Tags":["Object"],"Taxonomy":["Actor","Object"]},"ActorData":{"DropItemsSet":{"":50.0,"Gen_Ammo":1.0,"HealthPotionL":1.0,"HealthPotionM":5.0,"HealthPotionS":10.0,"Mag_Ammo":10.0,"Phy_Ammo":10.0},"ExpValue":0.0,"Faction":"Objects","IsAdirectional":true,"MoneyValue":0.0},"ScenePath":"res://Scenes/Combat/MapObjects/Actors/SimpleActorNode/simple_actor_node.tscn","SpriteFrameWH":[12.0,4.0],"SpriteOffset":[0.0,-12.0],"SpriteSheet":"Sprites/Rocks_SpriteSheet.png","Stats":{"HealthMax":15.0,"Mass":1.0},"_DefVersion":"1"}}
+{
+	"#BaseObjectActor": {
+		"!ObjectScript": "res://assets/Scripts/Actors/BaseActor.gd",
+		"!ParentKey": "#BaseActor",
+		"#ObjDetails": {
+			"Description": "The base Actor for non-Actor Map Objects. Great architecture me!",
+			"DisplayName": "#BaseObjectActor",
+			"LargeIcon": "Sprites/Barrel_Icon.png",
+			"ObjectType": "Actor",
+			"SmallIcon": "Sprites/Barrel_Icon.png",
+			"SnippetDesc": "base non-Actor objects",
+			"Tags": [
+				"Object"
+			],
+			"Taxonomy": [
+				"Actor",
+				"Object",
+				"Rooted"
+			]
+		},
+		"ActorData": {
+			"DropItemsSet": {
+
+			},
+			"ExpValue": 0.0,
+			"Faction": "Objects",
+			"IsAdirectional": true,
+			"MoneyValue": 0.0
+		},
+		"ImmuneToEffects": [
+			"AilmentBlind",
+			"AilmentPoisoned",
+			"AilmentBleed",
+			"AilmentDazed"
+		],
+		"ScenePath": "res://Scenes/Combat/MapObjects/Actors/SimpleActorNode/simple_actor_node.tscn",
+		"SpriteFrameWH": [
+			12.0,
+			4.0
+		],
+		"SpriteOffset": [
+			0.0,
+			-16.0
+		],
+		"SpriteSheet": "Sprites/Barrel_SpriteSheet.png",
+		"Stats": {
+			"Armor": 0.0,
+			"Awareness": 0.0,
+			"BlockChance": 0.0,
+			"BlockMod": 0.0,
+			"Evasion": 0.0,
+			"HealthMax": 1.0,
+			"Mass": 10.0,
+			"PPR": 0.0,
+			"Resistance:Light": 0.0,
+			"Speed": 0.0
+		},
+		"_DefVersion": "1"
+	},
+	"AlterActor": {
+		"!ObjectScript": "res://ObjectDefs/Factions/Objects/Actors/Scenes/Alter/AlterActor.gd",
+		"!ParentKey": "#BaseActor",
+		"#ObjDetails": {
+			"Description": "Description",
+			"DisplayName": "Alter",
+			"LargeIcon": "Sprites/Alter_Icon.png",
+			"ObjectType": "Actor",
+			"SmallIcon": "Sprites/Alter_Icon.png",
+			"SnippetDesc": "an alter",
+			"Tags": [
+				"Object",
+				"Rooted"
+			],
+			"Taxonomy": [
+				"Actor",
+				"Object"
+			]
+		},
+		"ScenePath": "res://Scenes/Combat/MapObjects/Actors/SimpleActorNode/simple_actor_node.tscn",
+		"SpriteFrameWH": [
+			1.0,
+			1.0
+		],
+		"SpriteOffset": [
+			16.0,
+			0.0
+		],
+		"SpriteSheet": "Sprites/Alter_SpriteSheet.png",
+		"Stats": {
+			"HealthMax": 1.0,
+			"Mass": 1.0
+		},
+		"_DefVersion": "1"
+	},
+	"BarrelActor": {
+		"!ObjectScript": "res://assets/Scripts/Actors/BaseActor.gd",
+		"!ParentKey": "#BaseObjectActor",
+		"#ObjDetails": {
+			"Description": "@@#Color:Red:Barrels@@ were first invented as a subsite for @@#Color:Red:Pinatas@@ during the @@#Color:Red:Great Papier-Mache Wars@@. But failed to find popularity among @@#Color:Grey:Children@@ due to their boring appearance and difficulty to break.\n\nAfter the extinction of @@#Color:Grey:Children@@ and subsequent end to all birthday parties, people have found them useful for storing @@#Tag:Supplies@@ and providing a rustic feel.\n\nSome more nostalgic adventurers still prefer to use them for their original purpose.",
+			"DisplayName": "Barrel",
+			"LargeIcon": "Sprites/Barrel_Icon.png",
+			"ObjectType": "Actor",
+			"SmallIcon": "Sprites/Barrel_Icon.png",
+			"SnippetDesc": "a barrel",
+			"Tags": [
+				"Object"
+			],
+			"Taxonomy": [
+				"Actor",
+				"Object"
+			]
+		},
+		"ActorData": {
+			"DropItemsSet": {
+				"": 50.0,
+				"Gen_Ammo": 1.0,
+				"HealthPotionL": 1.0,
+				"HealthPotionM": 5.0,
+				"HealthPotionS": 10.0,
+				"Mag_Ammo": 10.0,
+				"Phy_Ammo": 10.0
+			}
+		},
+		"ScenePath": "res://Scenes/Combat/MapObjects/Actors/SimpleActorNode/simple_actor_node.tscn",
+		"SpriteFrameWH": [
+			12.0,
+			4.0
+		],
+		"SpriteOffset": [
+			0.0,
+			-16.0
+		],
+		"SpriteSheet": "Sprites/Barrel_SpriteSheet.png",
+		"Stats": {
+			"HealthMax": 10.0,
+			"Mass": 1.0
+		},
+		"_DefVersion": "1"
+	},
+	"CrateActor": {
+		"!ObjectScript": "res://assets/Scripts/Actors/BaseActor.gd",
+		"!ParentKey": "#BaseObjectActor",
+		"#ObjDetails": {
+			"Description": "@@#Color:Red:Crates@@ are like the older more mature sibling of @@#Color:Red:Barrels@@. While @@#Color:Red:Barrels@@ are off rolling down hills and filling themselves with beer, @@#Color:Red:Crates@@ are working diligently storing items in warehouses and working as makeshift tables.\n\nMany of the more euclidean minded folks will argue that @@#Color:Red:Crates@@ are superior due to their greater volume and packability. But honestly if you're just breaking them it's all them same..",
+			"DisplayName": "Crate",
+			"LargeIcon": "Sprites/Crate_Icon.png",
+			"ObjectType": "Actor",
+			"SmallIcon": "Sprites/Crate_Icon.png",
+			"SnippetDesc": "a crate",
+			"Tags": [
+				"Object"
+			],
+			"Taxonomy": [
+				"Actor",
+				"Object"
+			]
+		},
+		"ActorData": {
+			"DropItemsSet": {
+				"": 50.0,
+				"Gen_Ammo": 1.0,
+				"HealthPotionL": 1.0,
+				"HealthPotionM": 5.0,
+				"HealthPotionS": 10.0,
+				"Mag_Ammo": 10.0,
+				"Phy_Ammo": 10.0
+			}
+		},
+		"ScenePath": "res://Scenes/Combat/MapObjects/Actors/SimpleActorNode/simple_actor_node.tscn",
+		"SpriteFrameWH": [
+			12.0,
+			4.0
+		],
+		"SpriteOffset": [
+			0.0,
+			-16.0
+		],
+		"SpriteSheet": "Sprites/Crate_SpriteSheet.png",
+		"Stats": {
+			"HealthMax": 10.0,
+			"Mass": 1.0
+		},
+		"_DefVersion": "1"
+	},
+	"LeverActor": {
+		"!ObjectScript": "res://ObjectDefs/Factions/Objects/Actors/Scenes/Lever/LeverActor.gd",
+		"!ParentKey": "#BaseObjectActor",
+		"#ObjDetails": {
+			"Description": "In an age where buttons and switches have dominated the mechanical control market, many consumers find themselves longing for a more relatable solution. @@#Color:Red:Barrels@@ were first invented as a subsite for @@#Color:Red:Pinatas@@ during the @@#Color:Red:Great Papier-Mache Wars@@. But failed to find popularity among @@#Color:Grey:Children@@ due to their boring appearance and difficulty to break.\n\nAfter the extinction of @@#Color:Grey:Children@@ and subsequent end to all birthday parties, people have found them useful for storing @@#Tag:Supplies@@ and providing a rustic feel.\n\nSome more nostalgic adventurers still prefer to use them for their original purpose.",
+			"DisplayName": "Lever",
+			"LargeIcon": "Sprites/Lever_Icon.png",
+			"ObjectType": "Actor",
+			"SmallIcon": "Sprites/Lever_Icon.png",
+			"SnippetDesc": "a lever",
+			"Tags": [
+				"Object",
+				"Lever",
+				"Rooted"
+			],
+			"Taxonomy": [
+				"Actor",
+				"Object"
+			]
+		},
+		"ScenePath": "Scenes/Lever/lever_actor_node.tscn",
+		"SpriteFrameWH": [
+			1.0,
+			1.0
+		],
+		"SpriteOffset": [
+			0.0,
+			0.0
+		],
+		"SpriteSheet": "Sprites/Lever_SpriteSheet.png",
+		"Stats": {
+			"HealthMax": 1.0,
+			"Mass": 1.0
+		},
+		"_DefVersion": "1"
+	},
+	"ShrineActor": {
+		"!ObjectScript": "res://ObjectDefs/Factions/Objects/Actors/Scenes/Shrine/SpawnerActor.gd",
+		"!ParentKey": "#BaseObjectActor",
+		"#ObjDetails": {
+			"Description": "Description",
+			"DisplayName": "Shrine",
+			"LargeIcon": "Sprites/Shrine_Icon.png",
+			"ObjectType": "Actor",
+			"SmallIcon": "Sprites/Shrine_Icon.png",
+			"SnippetDesc": "a shrine",
+			"Tags": [
+				"Object",
+				"Rooted"
+			],
+			"Taxonomy": [
+				"Actor",
+				"Object"
+			]
+		},
+		"ScenePath": "Scenes/Shrine/shrine_actor_node.tscn",
+		"SpriteFrameWH": [
+			7.0,
+			1.0
+		],
+		"SpriteOffset": [
+			0.0,
+			-16.0
+		],
+		"SpriteSheet": "Sprites/Shrine_SpriteSheet.png",
+		"Stats": {
+			"HealthMax": 1.0,
+			"Mass": 1.0
+		},
+		"_DefVersion": "1"
+	},
+	"StalagmiteActor": {
+		"!ObjectScript": "res://assets/Scripts/Actors/BaseActor.gd",
+		"!ParentKey": "#BaseObjectActor",
+		"#ObjDetails": {
+			"Description": "@@#Color:Red:Crates@@ are like the older more mature sibling of @@#Color:Red:Barrels@@. While @@#Color:Red:Barrels@@ are off rolling down hills and filling themselves with beer, @@#Color:Red:Crates@@ are working diligently storing items in warehouses and working as makeshift tables.\n\nMany of the more euclidean minded folks will argue that @@#Color:Red:Crates@@ are superior due to their greater volume and packability. But honestly if you're just breaking them it's all them same..",
+			"DisplayName": "Stalagmite",
+			"LargeIcon": "Sprites/Stalagmite_Icon.png",
+			"ObjectType": "Actor",
+			"SmallIcon": "Sprites/Stalagmite_Icon.png",
+			"SnippetDesc": "a stalagmite",
+			"Tags": [
+				"Object"
+			],
+			"Taxonomy": [
+				"Actor",
+				"Object"
+			]
+		},
+		"ActorData": {
+			"DropItemsSet": {
+				"": 50.0,
+				"Gen_Ammo": 1.0,
+				"HealthPotionL": 1.0,
+				"HealthPotionM": 5.0,
+				"HealthPotionS": 10.0,
+				"Mag_Ammo": 10.0,
+				"Phy_Ammo": 10.0
+			},
+			"ExpValue": 0.0,
+			"Faction": "Objects",
+			"IsAdirectional": true,
+			"MoneyValue": 0.0
+		},
+		"ScenePath": "res://Scenes/Combat/MapObjects/Actors/SimpleActorNode/simple_actor_node.tscn",
+		"SpriteFrameWH": [
+			12.0,
+			4.0
+		],
+		"SpriteOffset": [
+			0.0,
+			-12.0
+		],
+		"SpriteSheet": "Sprites/Rocks_SpriteSheet.png",
+		"Stats": {
+			"HealthMax": 15.0,
+			"Mass": 1.0
+		},
+		"_DefVersion": "1"
+	}
+}

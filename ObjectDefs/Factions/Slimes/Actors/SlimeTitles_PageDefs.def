@@ -1,1 +1,88 @@
-{"SlimeBase_TitlePage":{"!ObjectScript":"res://assets/Scripts/Items/Pages/PageItemTitle.gd","!ParentKey":"#BaseTitlePage","#ObjDetails":{"Description":"@@#Color:Red:Slimes@@ are gelatinous blobs of biological paradoxes. They have no discernible sensory organs, digestive system, or really anything resembling \"anotomy\", yet still act and behave as independent beings.\n\nIt was once believed their lack of eyes should render them @@#EftDef:AilmentBlind:Link@@. But instead, the @@#Color:Blue:PAGE@@ System's inability to registering a @@#Color:Red:Front@@ or @@#Color:Red:Back@@ is interpreted as perfect @@#Stat:Awareness@@.\n\nSimilarly, their malleable forms have no measurable amount of @@#Stat:Armor@@, yet still demonstrate high @@#Tag:Resistant@@ to all forms of @@#Tag:Physical@@ damage. \n\nDispite these abnormalities, researchers have been able to prove that @@#Color:Red:Slimes@@ will die if stabbed enough and thus, meet the scientific definition of \"Life\". But the council still does not grant them the @@#Color:Blue:Tag@@ of @@#Tag:Living@@.","DisplayName":"Slime","LargeIcon":"Sprites/BlueSlime_Icon.png","ObjectType":"Item","SmallIcon":"Sprites/BlueSlime_Icon.png","SnippetDesc":"Slime Title","Tags":["Title"],"Taxonomy":["Item","Page","Title"]},"ItemData":{"ItemType":"Page","Rarity":"Unique","Value":50.0},"PageData":{"AddTags":["Slime"],"PageRequirements":{"ConflictingPages":[],"IncompatiblePages":[],"TitleReq":"None"},"SourceTitle":"Base","StatMods":{}},"PassiveData":{},"_DefVersion":"1"},"SlimePoison_TitlePage":{"!ObjectScript":"res://assets/Scripts/Items/Pages/PageItemTitle.gd","!ParentKey":"#BaseTitlePage","#ObjDetails":{"Description":"With a high tolerance to toxins and poor personal hygiene, @@#Color:Red:Slimes@@ often become polluted with whatever is in their environment. After a @@#Color:Red:Slime@@ ingests enough material with @@#Tag:Magical@@ properties, the @@#Color:Blue:PAGE@@ System appears to misinterpret the @@#Color:Red:Slime@@ as possessing the same properties of the given material. At this point, the @@#Color:Red:Slime@@ will alter it's color to conform to cultural norms.\n\n@@#Color:Red:Green Slimes@@ have absorbed large amounts of poisonous plants, toxic waste, and internet comment sections. Any contact with these them is recognized as @@#Color:DmgColor:Poison:Poison Damage@@ and can be potent enough to inflict deadly @@#EftDef:AilmentPoisoned:Link@@ status to the idiot who touched a Poison Slime with their bare hands.","DisplayName":"Poison Slime","LargeIcon":"Sprites/GreenSlime_Icon.png","ObjectType":"Item","SmallIcon":"Sprites/GreenSlime_Icon.png","SnippetDesc":"Poison Slime Title","Tags":["Title"],"Taxonomy":["Item","Page","Title"]},"ItemData":{"ItemType":"Page","Rarity":"Unique","Value":50.0},"PageData":{"AddTags":["Slime"],"PageRequirements":{"ConflictingPages":[],"IncompatiblePages":[],"TitleReq":"None"},"SourceTitle":"Base","StatMods":{}},"PassiveData":{},"_DefVersion":"1"}}
+{
+	"SlimeBase_TitlePage": {
+		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemTitle.gd",
+		"!ParentKey": "#BaseTitlePage",
+		"#ObjDetails": {
+			"Description": "@@#Color:Red:Slimes@@ are gelatinous blobs of biological paradoxes. They have no discernible sensory organs, digestive system, or really anything resembling \"anotomy\", yet still act and behave as independent beings.\n\nIt was once believed their lack of eyes should render them @@#EftDef:AilmentBlind:Link@@. But instead, the @@#Color:Blue:PAGE@@ System's inability to registering a @@#Color:Red:Front@@ or @@#Color:Red:Back@@ is interpreted as perfect @@#Stat:Awareness@@.\n\nSimilarly, their malleable forms have no measurable amount of @@#Stat:Armor@@, yet still demonstrate high @@#Tag:Resistant@@ to all forms of @@#Tag:Physical@@ damage. \n\nDispite these abnormalities, researchers have been able to prove that @@#Color:Red:Slimes@@ will die if stabbed enough and thus, meet the scientific definition of \"Life\". But the council still does not grant them the @@#Color:Blue:Tag@@ of @@#Tag:Living@@.",
+			"DisplayName": "Slime",
+			"LargeIcon": "Sprites/BlueSlime_Icon.png",
+			"ObjectType": "Item",
+			"SmallIcon": "Sprites/BlueSlime_Icon.png",
+			"SnippetDesc": "Slime Title",
+			"Tags": [
+				"Title"
+			],
+			"Taxonomy": [
+				"Item",
+				"Page",
+				"Title"
+			]
+		},
+		"ItemData": {
+			"ItemType": "Page",
+			"Rarity": "Unique",
+			"Value": 50.0
+		},
+		"PageData": {
+			"AddTags": [
+				"Slime"
+			],
+			"PageRequirements": {
+				"ConflictingPages": [],
+				"IncompatiblePages": [],
+				"TitleReq": "None"
+			},
+			"SourceTitle": "Base",
+			"StatMods": {
+
+			}
+		},
+		"PassiveData": {
+
+		},
+		"_DefVersion": "1"
+	},
+	"SlimePoison_TitlePage": {
+		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemTitle.gd",
+		"!ParentKey": "#BaseTitlePage",
+		"#ObjDetails": {
+			"Description": "With a high tolerance to toxins and poor personal hygiene, @@#Color:Red:Slimes@@ often become polluted with whatever is in their environment. After a @@#Color:Red:Slime@@ ingests enough material with @@#Tag:Magical@@ properties, the @@#Color:Blue:PAGE@@ System appears to misinterpret the @@#Color:Red:Slime@@ as possessing the same properties of the given material. At this point, the @@#Color:Red:Slime@@ will alter it's color to conform to cultural norms.\n\n@@#Color:Red:Green Slimes@@ have absorbed large amounts of poisonous plants, toxic waste, and internet comment sections. Any contact with these them is recognized as @@#Color:DmgColor:Poison:Poison Damage@@ and can be potent enough to inflict deadly @@#EftDef:AilmentPoisoned:Link@@ status to the idiot who touched a Poison Slime with their bare hands.",
+			"DisplayName": "Poison Slime",
+			"LargeIcon": "Sprites/GreenSlime_Icon.png",
+			"ObjectType": "Item",
+			"SmallIcon": "Sprites/GreenSlime_Icon.png",
+			"SnippetDesc": "Poison Slime Title",
+			"Tags": [
+				"Title"
+			],
+			"Taxonomy": [
+				"Item",
+				"Page",
+				"Title"
+			]
+		},
+		"ItemData": {
+			"ItemType": "Page",
+			"Rarity": "Unique",
+			"Value": 50.0
+		},
+		"PageData": {
+			"AddTags": [
+				"Slime"
+			],
+			"PageRequirements": {
+				"ConflictingPages": [],
+				"IncompatiblePages": [],
+				"TitleReq": "None"
+			},
+			"SourceTitle": "Base",
+			"StatMods": {
+
+			}
+		},
+		"PassiveData": {
+
+		},
+		"_DefVersion": "1"
+	}
+}

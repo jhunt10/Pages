@@ -1,1 +1,80 @@
-{"PriestTemplate":{"!ObjectScript":"res://assets/Scripts/Actors/BaseActor.gd","!ParentKey":"#BaseHumanoid","#ObjDetails":{"Description":"The hero of our story.","DisplayName":"Priest","LargeIcon":"Sprites/PriestIcon.png","ObjectType":"Actor","SmallIcon":"Sprites/PriestIcon.png","SnippetDesc":"The hero of our story.","Tags":["Player"],"Taxonomy":["Actor"]},"ActorData":{"Faction":"Players"},"IsPlayer":true,"PortraitRect":[12.0,20.0,24.0,24.0],"SpawnEquipmentArr":["OldJournal_PageBook","OldBag_ItemBag","OldPriestHelmet","OldPriestArmor","OldPriestBoots","OldStaff"],"SpawnItemArr":["Mag_Ammo","Mag_Ammo","HealthPotionM"],"SpawnPageArr":["PriestTitlePage","BlessedLimit1Page","MoveForward","TurnLeft","TurnRight","BasicWeaponAttack","LightMeleeSpell","ApplyBlessing_Water","ReloadPage"],"SpriteFrameWH":[12.0,4.0],"SpriteOffset":[0.0,-16.0],"SpriteSheet":"Sprites/Template_SpriteSheet","Stats":{"Agility":8.0,"AttributeLevels":{"Agility":0.0,"Intelligence":0.0,"Strength":1.0,"Wisdom":2.0},"HealthMax":100.0,"Intelligence":8.0,"Level":1.0,"Mass":10.0,"Speed":10.0,"Strength":8.0,"Wisdom":8.0},"_DefVersion":"1"}}
+{
+	"PriestTemplate": {
+		"!ObjectScript": "res://assets/Scripts/Actors/BaseActor.gd",
+		"!ParentKey": "#BaseHumanoid",
+		"#ObjDetails": {
+			"Description": "The hero of our story.",
+			"DisplayName": "Priest",
+			"LargeIcon": "Sprites/PriestIcon.png",
+			"ObjectType": "Actor",
+			"SmallIcon": "Sprites/PriestIcon.png",
+			"SnippetDesc": "The hero of our story.",
+			"Tags": [
+				"Player"
+			],
+			"Taxonomy": [
+				"Actor"
+			]
+		},
+		"ActorData": {
+			"Faction": "Players"
+		},
+		"IsPlayer": true,
+		"PortraitRect": [
+			12.0,
+			20.0,
+			24.0,
+			24.0
+		],
+		"SpawnEquipmentArr": [
+			"OldJournal_PageBook",
+			"OldBag_ItemBag",
+			"OldPriestHelmet",
+			"OldPriestArmor",
+			"OldPriestBoots",
+			"OldStaff"
+		],
+		"SpawnItemArr": [
+			"Mag_Ammo",
+			"Mag_Ammo",
+			"HealthPotionM"
+		],
+		"SpawnPageArr": [
+			"PriestTitlePage",
+			"BlessedLimit1Page",
+			"MoveForward",
+			"TurnLeft",
+			"TurnRight",
+			"BasicWeaponAttack",
+			"LightMeleeSpell",
+			"ApplyBlessing_Water",
+			"ReloadPage"
+		],
+		"SpriteFrameWH": [
+			12.0,
+			4.0
+		],
+		"SpriteOffset": [
+			0.0,
+			-16.0
+		],
+		"SpriteSheet": "Sprites/Template_SpriteSheet",
+		"Stats": {
+			"Agility": 8.0,
+			"AttributeLevels": {
+				"Agility": 0.0,
+				"Intelligence": 0.0,
+				"Strength": 1.0,
+				"Wisdom": 2.0
+			},
+			"HealthMax": 100.0,
+			"Intelligence": 8.0,
+			"Level": 1.0,
+			"Mass": 10.0,
+			"Speed": 10.0,
+			"Strength": 8.0,
+			"Wisdom": 8.0
+		},
+		"_DefVersion": "1"
+	}
+}

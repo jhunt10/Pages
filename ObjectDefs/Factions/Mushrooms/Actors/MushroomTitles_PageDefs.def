@@ -1,1 +1,89 @@
-{"Mushroom_TitlePage":{"!ObjectScript":"res://assets/Scripts/Items/Pages/PageItemTitle.gd","!ParentKey":"#BaseTitlePage","#ObjDetails":{"Description":"Mushroom Title Page. You shouldn't actually have access to this.","DisplayName":"Roof Shroom","LargeIcon":"Sprites/Mushroom_Icon.png","ObjectType":"Item","SmallIcon":"Sprites/Mushroom_Icon.png","SnippetDesc":"Mushroom Title","Tags":["Title"],"Taxonomy":["Item","Page","Title"]},"ItemData":{"ItemType":"Page","Rarity":"Unique","Value":50.0},"PageData":{"AddTags":["Mushroom"],"PageRequirements":{"ConflictingPages":[],"IncompatiblePages":[],"TitleReq":"None"},"SourceTitle":"Base","StatMods":{}},"PassiveData":{},"_DefVersion":"1"},"ShroomGolem_TitlePage":{"!ObjectScript":"res://assets/Scripts/Items/Pages/PageItemTitle.gd","!ParentKey":"#BaseTitlePage","#ObjDetails":{"Description":"Despite their name, @@#Color:Red:Shroom Golems@@ are neither @@#Color:Red:Mushrooms@@ nor @@#Color:Red:Golems@@, but instead are categorized as marsupials. This ambush predators tend to disguise themselves as harmless @@#Color:Red:Mushrooms@@, luring in their prey then striking with Poisonous Spores and Bludging Attacks, before robbing them blind to pay for scratch off lottery tickets. They don't expect to win any real money, they just like scratching off that silver foil stuff. Oh ya, and they really hate @@#Color:DmgColor:Light:Light@@.","DisplayName":"Shroom Golem","LargeIcon":"Sprites/ShroomGolem_Icon.png","ObjectType":"Item","SmallIcon":"Sprites/ShroomGolem_Icon.png","SnippetDesc":"Mushroom Golem Title","Tags":["Title"],"Taxonomy":["Item","Page","Title"]},"ItemData":{"ItemType":"Page","Rarity":"Unique","Value":50.0},"PageData":{"AddTags":["Mushroom","Golem"],"PageRequirements":{"ConflictingPages":[],"IncompatiblePages":[],"TitleReq":"None"},"SourceTitle":"Base","StatMods":{}},"PassiveData":{},"_DefVersion":"1"}}
+{
+	"Mushroom_TitlePage": {
+		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemTitle.gd",
+		"!ParentKey": "#BaseTitlePage",
+		"#ObjDetails": {
+			"Description": "Mushroom Title Page. You shouldn't actually have access to this.",
+			"DisplayName": "Roof Shroom",
+			"LargeIcon": "Sprites/Mushroom_Icon.png",
+			"ObjectType": "Item",
+			"SmallIcon": "Sprites/Mushroom_Icon.png",
+			"SnippetDesc": "Mushroom Title",
+			"Tags": [
+				"Title"
+			],
+			"Taxonomy": [
+				"Item",
+				"Page",
+				"Title"
+			]
+		},
+		"ItemData": {
+			"ItemType": "Page",
+			"Rarity": "Unique",
+			"Value": 50.0
+		},
+		"PageData": {
+			"AddTags": [
+				"Mushroom"
+			],
+			"PageRequirements": {
+				"ConflictingPages": [],
+				"IncompatiblePages": [],
+				"TitleReq": "None"
+			},
+			"SourceTitle": "Base",
+			"StatMods": {
+
+			}
+		},
+		"PassiveData": {
+
+		},
+		"_DefVersion": "1"
+	},
+	"ShroomGolem_TitlePage": {
+		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemTitle.gd",
+		"!ParentKey": "#BaseTitlePage",
+		"#ObjDetails": {
+			"Description": "Despite their name, @@#Color:Red:Shroom Golems@@ are neither @@#Color:Red:Mushrooms@@ nor @@#Color:Red:Golems@@, but instead are categorized as marsupials. This ambush predators tend to disguise themselves as harmless @@#Color:Red:Mushrooms@@, luring in their prey then striking with Poisonous Spores and Bludging Attacks, before robbing them blind to pay for scratch off lottery tickets. They don't expect to win any real money, they just like scratching off that silver foil stuff. Oh ya, and they really hate @@#Color:DmgColor:Light:Light@@.",
+			"DisplayName": "Shroom Golem",
+			"LargeIcon": "Sprites/ShroomGolem_Icon.png",
+			"ObjectType": "Item",
+			"SmallIcon": "Sprites/ShroomGolem_Icon.png",
+			"SnippetDesc": "Mushroom Golem Title",
+			"Tags": [
+				"Title"
+			],
+			"Taxonomy": [
+				"Item",
+				"Page",
+				"Title"
+			]
+		},
+		"ItemData": {
+			"ItemType": "Page",
+			"Rarity": "Unique",
+			"Value": 50.0
+		},
+		"PageData": {
+			"AddTags": [
+				"Mushroom",
+				"Golem"
+			],
+			"PageRequirements": {
+				"ConflictingPages": [],
+				"IncompatiblePages": [],
+				"TitleReq": "None"
+			},
+			"SourceTitle": "Base",
+			"StatMods": {
+
+			}
+		},
+		"PassiveData": {
+
+		},
+		"_DefVersion": "1"
+	}
+}

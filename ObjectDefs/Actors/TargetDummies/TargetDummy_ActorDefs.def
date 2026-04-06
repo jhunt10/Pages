@@ -1,1 +1,122 @@
-{"TargetDummy":{"!ObjectScript":"res://assets/Scripts/Actors/BaseActor.gd","!ParentKey":"#BaseActor","#ObjDetails":{"Description":"A simple Target Dummy made for testing Pages. It has a lot of HP and Heals on End of Turn. Not impossible to kill it, but more than sturdy enough to test Attacks on.","DisplayName":"Test Target","LargeIcon":"Sprites/Target.png","ObjectType":"Actor","SmallIcon":"Sprites/Target.png","SnippetDesc":"A target made for testing.","Tags":["Construct","Dummy"],"Taxonomy":["Actor"]},"ActorData":{"Faction":"Dummies"},"ScenePath":"res://Scenes/Combat/MapObjects/Actors/SimpleActorNode/simple_actor_node.tscn","SpriteFrameWH":[12.0,4.0],"SpriteOffset":[0.0,-16.0],"SpriteSheet":"Sprites/Target_SpriteSheet.png","Stats":{"Armor":0.0,"BarRegen:Health:Round":500.0,"BarRegen:Health:Turn":500.0,"BarStat:Health":500.0,"BlockChance":0.0,"BlockMod":0.0,"Evasion":0.0,"HealthMax":500.0,"Mass":10.0,"Resistance:Dark":0.0,"Resistance:Light":0.0,"Speed":0.0},"_DefVersion":"1"},"TargetDummy_Mag":{"!ObjectScript":"res://assets/Scripts/Actors/BaseActor.gd","!ParentKey":"TargetDummy","#ObjDetails":{"Description":"A magical Target Dummy made for testing Pages. This stationary target has been specially prepared with complex enchantments to provide it passive magical defenses including Ward and Protection.","DisplayName":"Warded Target","LargeIcon":"Sprites/TargetWarded.png","ObjectType":"Actor","SmallIcon":"Sprites/TargetWarded.png","SnippetDesc":"An magically warded target dummy made for testing.","Tags":[],"Taxonomy":["Actor"]},"SpriteSheet":"Sprites/TargetWarded_SpriteSheet.png","Stats":{"Protection":50.0,"Ward":50.0},"_DefVersion":"1"},"TargetDummy_Moving":{"!ObjectScript":"res://assets/Scripts/Actors/BaseActor.gd","!ParentKey":"TargetDummy","#ObjDetails":{"Description":"A simple Target Dummy made for testing Pages. This one has wheels on it so it can roll around and go WEEEEEH!","DisplayName":"Moving Target","LargeIcon":"Sprites/TargetMoving.png","ObjectType":"Actor","SmallIcon":"Sprites/TargetMoving.png","SnippetDesc":"A moving target dummy made for testing.","Tags":[],"Taxonomy":["Actor"]},"AiData":{"PrebuiltQueArr":["MoveLeft","MoveLeft","MoveRight","MoveRight"]},"SpriteSheet":"Sprites/TargetMoving_SpriteSheet.png","Stats":{"PPR":4.0,"Speed":20.0},"_DefVersion":"1"},"TargetDummy_Phy":{"!ObjectScript":"res://assets/Scripts/Actors/BaseActor.gd","!ParentKey":"TargetDummy","#ObjDetails":{"Description":"A tough Target Dummy made for testing Pages. We nailed a shield to it.","DisplayName":"Armored Target","LargeIcon":"Sprites/TargetArmored.png","ObjectType":"Actor","SmallIcon":"Sprites/TargetArmored.png","SnippetDesc":"An armor plated target dummy made for testing.","Tags":[],"Taxonomy":["Actor"]},"SpriteSheet":"Sprites/TargetArmored_SpriteSheet.png","Stats":{"Armor":50.0},"_DefVersion":"1"}}
+{
+	"TargetDummy": {
+		"!ObjectScript": "res://assets/Scripts/Actors/BaseActor.gd",
+		"!ParentKey": "#BaseActor",
+		"#ObjDetails": {
+			"Description": "A simple Target Dummy made for testing Pages. It has a lot of HP and Heals on End of Turn. Not impossible to kill it, but more than sturdy enough to test Attacks on.",
+			"DisplayName": "Test Target",
+			"LargeIcon": "Sprites/Target.png",
+			"ObjectType": "Actor",
+			"SmallIcon": "Sprites/Target.png",
+			"SnippetDesc": "A target made for testing.",
+			"Tags": [
+				"Construct",
+				"Dummy"
+			],
+			"Taxonomy": [
+				"Actor"
+			]
+		},
+		"ActorData": {
+			"Faction": "Dummies"
+		},
+		"ScenePath": "res://Scenes/Combat/MapObjects/Actors/SimpleActorNode/simple_actor_node.tscn",
+		"SpriteFrameWH": [
+			12.0,
+			4.0
+		],
+		"SpriteOffset": [
+			0.0,
+			-16.0
+		],
+		"SpriteSheet": "Sprites/Target_SpriteSheet.png",
+		"Stats": {
+			"Armor": 0.0,
+			"BarRegen:Health:Round": 500.0,
+			"BarRegen:Health:Turn": 500.0,
+			"BarStat:Health": 500.0,
+			"BlockChance": 0.0,
+			"BlockMod": 0.0,
+			"Evasion": 0.0,
+			"HealthMax": 500.0,
+			"Mass": 10.0,
+			"Resistance:Dark": 0.0,
+			"Resistance:Light": 0.0,
+			"Speed": 0.0
+		},
+		"_DefVersion": "1"
+	},
+	"TargetDummy_Mag": {
+		"!ObjectScript": "res://assets/Scripts/Actors/BaseActor.gd",
+		"!ParentKey": "TargetDummy",
+		"#ObjDetails": {
+			"Description": "A magical Target Dummy made for testing Pages. This stationary target has been specially prepared with complex enchantments to provide it passive magical defenses including Ward and Protection.",
+			"DisplayName": "Warded Target",
+			"LargeIcon": "Sprites/TargetWarded.png",
+			"ObjectType": "Actor",
+			"SmallIcon": "Sprites/TargetWarded.png",
+			"SnippetDesc": "An magically warded target dummy made for testing.",
+			"Tags": [],
+			"Taxonomy": [
+				"Actor"
+			]
+		},
+		"SpriteSheet": "Sprites/TargetWarded_SpriteSheet.png",
+		"Stats": {
+			"Protection": 50.0,
+			"Ward": 50.0
+		},
+		"_DefVersion": "1"
+	},
+	"TargetDummy_Moving": {
+		"!ObjectScript": "res://assets/Scripts/Actors/BaseActor.gd",
+		"!ParentKey": "TargetDummy",
+		"#ObjDetails": {
+			"Description": "A simple Target Dummy made for testing Pages. This one has wheels on it so it can roll around and go WEEEEEH!",
+			"DisplayName": "Moving Target",
+			"LargeIcon": "Sprites/TargetMoving.png",
+			"ObjectType": "Actor",
+			"SmallIcon": "Sprites/TargetMoving.png",
+			"SnippetDesc": "A moving target dummy made for testing.",
+			"Tags": [],
+			"Taxonomy": [
+				"Actor"
+			]
+		},
+		"AiData": {
+			"PrebuiltQueArr": [
+				"MoveLeft",
+				"MoveLeft",
+				"MoveRight",
+				"MoveRight"
+			]
+		},
+		"SpriteSheet": "Sprites/TargetMoving_SpriteSheet.png",
+		"Stats": {
+			"PPR": 4.0,
+			"Speed": 20.0
+		},
+		"_DefVersion": "1"
+	},
+	"TargetDummy_Phy": {
+		"!ObjectScript": "res://assets/Scripts/Actors/BaseActor.gd",
+		"!ParentKey": "TargetDummy",
+		"#ObjDetails": {
+			"Description": "A tough Target Dummy made for testing Pages. We nailed a shield to it.",
+			"DisplayName": "Armored Target",
+			"LargeIcon": "Sprites/TargetArmored.png",
+			"ObjectType": "Actor",
+			"SmallIcon": "Sprites/TargetArmored.png",
+			"SnippetDesc": "An armor plated target dummy made for testing.",
+			"Tags": [],
+			"Taxonomy": [
+				"Actor"
+			]
+		},
+		"SpriteSheet": "Sprites/TargetArmored_SpriteSheet.png",
+		"Stats": {
+			"Armor": 50.0
+		},
+		"_DefVersion": "1"
+	}
+}

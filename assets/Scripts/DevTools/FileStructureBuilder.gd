@@ -474,6 +474,7 @@ static func format_def_files():
 		var save_file = FileAccess.open(file_path, FileAccess.WRITE)
 		save_file.store_string(JSON.stringify(defs, "\t"))
 		save_file.close()
+		print("Formated File: " + file_path)
 
 # Dynamic Func for applying update_def(..)
 static func update_def_files():

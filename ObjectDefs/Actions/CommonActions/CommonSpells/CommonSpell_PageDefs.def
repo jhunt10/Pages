@@ -1,1 +1,957 @@
-{"ColdMeleeSpell":{"!ObjectScript":"res://assets/Scripts/Items/Pages/PageItemAction.gd","!ParentKey":"#BaseMeleeSpell","#ObjDetails":{"Description":"","DisplayName":"Cold Touch","LargeIcon":"Sprites/ColdTouch.png","ObjectType":"Item","SmallIcon":"Sprites/ColdTouch.png","SnippetDesc":"Touch Actor dealing Cold Damage","Tags":["Cold"],"Taxonomy":["Item","Page","Action","Spell"]},"ActionData":{"DamageDatas":{"MeleeDamage":{"AtkPwrRange":10.0,"DamageType":"Cold","DmgEffectData":{"ApplicationChance":0.3,"EffectKey":"AilmentChilled"}}}},"ItemData":{"ItemType":"Page","Rarity":"Common","Value":50.0},"PageData":{"PageRequirements":{"ConflictingPages":[],"IncompatiblePages":[],"TitleReq":"None"},"SourceTitle":""},"_DefVersion":"1"},"ColdMissileSpell":{"!ObjectScript":"res://assets/Scripts/Items/Pages/PageItemAction.gd","!ParentKey":"#BaseMissileSpell","#ObjDetails":{"Description":"","DisplayName":"Cold Missile","LargeIcon":"Sprites/ColdMissile_Icon.png","ObjectType":"Item","SmallIcon":"Sprites/ColdMissile_Icon.png","SnippetDesc":"Launch a Missile dealing Cold Damage","Tags":["Cold"],"Taxonomy":["Item","Page","Action","Spell"]},"ActionData":{"AttackDetails":{"AccuracyMod":1.0,"PotencyMod":1.0},"DamageDatas":{"MissileDamage":{"AtkPwrRange":10.0,"DamageType":"Cold","DmgEffectData":{"ApplicationChance":0.3,"EffectKey":"AilmentChilled"}}},"MissileDatas":{"Missile1":{"DamageDataKey":"MissileDamage","FramesPerTile":3.0,"ImpactVfxKey":null,"MissileVfxData":{"AnimationName":"4_sprites_250ms_frames_loop","AnimationSpeed":1.0,"RandomOffsets":[0.0,0.0],"RandomRotation":[0.0,0.0],"Rotation":-45.0,"Scale":[1.0,1.0],"ScenePath":"res://assets/Scripts/VFXs/MissileVfx/missile_vfx_node.tscn","SpriteName":"Missiles/ColdMissile.png","SpriteSheetHight":2.0,"SpriteSheetWidth":2.0},"MissileVfxKey":""}}},"ItemData":{"ItemType":"Page","Rarity":"Common","Value":50.0},"PageData":{"PageRequirements":{"ConflictingPages":[],"IncompatiblePages":[],"TitleReq":"None"},"SourceTitle":""},"_DefVersion":"1"},"ColdRangedSpell":{"!ObjectScript":"res://assets/Scripts/Items/Pages/PageItemAction.gd","!ParentKey":"#BaseRangedSpell","#ObjDetails":{"Description":"","DisplayName":"Cold Bullet","LargeIcon":"Sprites/ColdBullet.png","ObjectType":"Item","SmallIcon":"Sprites/ColdBullet.png","SnippetDesc":"Make a Ranged Spell Attack dealing Cold Damage","Tags":["Cold"],"Taxonomy":["Item","Page","Action","Spell"]},"ActionData":{"AttackDetails":{"AccuracyMod":1.0,"AttackVfxData":{"SpriteName":"Missiles/ColdBullet.png"},"AttackVfxKey":"","PotencyMod":1.0},"DamageDatas":{"RangedDamage":{"AtkPwrRange":10.0,"DamageType":"Cold","DmgEffectData":{"ApplicationChance":0.3,"EffectKey":"AilmentChilled"}}}},"ItemData":{"ItemType":"Page","Rarity":"Common","Value":50.0},"PageData":{"PageRequirements":{"ConflictingPages":[],"IncompatiblePages":[],"TitleReq":"None"},"SourceTitle":""},"_DefVersion":"1"},"ColdTrapSpell":{"!ObjectScript":"res://assets/Scripts/Items/Pages/PageItemAction.gd","!ParentKey":"#BaseTrapSpell","#ObjDetails":{"Description":"","DisplayName":"Cold Trap","LargeIcon":"Sprites/ColdTrap.png","ObjectType":"Item","SmallIcon":"Sprites/ColdTrap.png","SnippetDesc":"Create a Trap of Cold Damage.","Tags":["Cold"],"Taxonomy":["Item","Page","Action","Spell"]},"ActionData":{"AttackDetails":{"AccuracyMod":1.0,"PotencyMod":1.0},"DamageDatas":{"TrapDamage":{"AtkPwrRange":10.0,"DamageType":"Cold","DmgEffectData":{"ApplicationChance":1.0,"EffectKey":"AilmentChilled"}}},"ZoneDatas":{"Zone1":{"TileSprite":"TileSets/ColdTrap_Tile.png"}}},"ItemData":{"ItemType":"Page","Rarity":"Common","Value":50.0},"PageData":{"PageRequirements":{"ConflictingPages":[],"IncompatiblePages":[],"TitleReq":"None"},"SourceTitle":""},"_DefVersion":"1"},"FireMeleeSpell":{"!ObjectScript":"res://assets/Scripts/Items/Pages/PageItemAction.gd","!ParentKey":"#BaseMeleeSpell","#ObjDetails":{"Description":"","DisplayName":"Fire Touch","LargeIcon":"Sprites/FireTouch.png","ObjectType":"Item","SmallIcon":"Sprites/FireTouch.png","SnippetDesc":"Touch Actor dealing Fire Damage","Tags":["Fire"],"Taxonomy":["Item","Page","Action","Spell"]},"ActionData":{"DamageDatas":{"MeleeDamage":{"DamageType":"Fire","DmgEffectData":{"ApplicationChance":0.2,"EffectKey":"AilmentBurned"}}}},"ItemData":{"ItemType":"Page","Rarity":"Common","Value":50.0},"PageData":{"PageRequirements":{"ConflictingPages":[],"IncompatiblePages":[],"TitleReq":"None"},"SourceTitle":""},"_DefVersion":"1"},"FireMissileSpell":{"!ObjectScript":"res://assets/Scripts/Items/Pages/PageItemAction.gd","!ParentKey":"#BaseMissileSpell","#ObjDetails":{"Description":"","DisplayName":"Fire Missile","LargeIcon":"Sprites/FireMissile_Icon.png","ObjectType":"Item","SmallIcon":"Sprites/FireMissile_Icon.png","SnippetDesc":"Launch a Missile dealing Fire Damage","Tags":["Fire"],"Taxonomy":["Item","Page","Action","Spell"]},"ActionData":{"AttackDetails":{"AccuracyMod":1.0,"PotencyMod":1.0},"DamageDatas":{"MissileDamage":{"DamageType":"Fire","DmgEffectData":{"ApplicationChance":0.2,"EffectKey":"AilmentBurned"}}},"MissileDatas":{"Missile1":{"DamageDataKey":"MissileDamage","FramesPerTile":3.0,"ImpactVfxKey":null,"MissileVfxData":{"AnimationName":"4_sprites_250ms_frames_loop","AnimationSpeed":1.0,"RandomOffsets":[0.0,0.0],"RandomRotation":[0.0,0.0],"Scale":[1.0,1.0],"ScenePath":"res://assets/Scripts/VFXs/MissileVfx/missile_vfx_node.tscn","SpriteName":"Missiles/FireMissile.png","SpriteSheetHight":2.0,"SpriteSheetWidth":2.0},"MissileVfxKey":""}}},"ItemData":{"ItemType":"Page","Rarity":"Common","Value":50.0},"PageData":{"PageRequirements":{"ConflictingPages":[],"IncompatiblePages":[],"TitleReq":"None"},"SourceTitle":""},"_DefVersion":"1"},"FireRangedSpell":{"!ObjectScript":"res://assets/Scripts/Items/Pages/PageItemAction.gd","!ParentKey":"#BaseRangedSpell","#ObjDetails":{"Description":"","DisplayName":"Fire Shot","LargeIcon":"Sprites/FireBullet.png","ObjectType":"Item","SmallIcon":"Sprites/FireBullet.png","SnippetDesc":"Make a Ranged Spell Attack dealing Fire Damage","Tags":["Fire"],"Taxonomy":["Item","Page","Action","Spell"]},"ActionData":{"AttackDetails":{"AccuracyMod":1.0,"AttackVfxData":{"SpriteName":"Missiles/FireBullet.png"},"AttackVfxKey":"","PotencyMod":1.0},"DamageDatas":{"RangedDamage":{"DamageType":"Fire","DmgEffectData":{"ApplicationChance":0.2,"EffectKey":"AilmentBurned"}}}},"ItemData":{"ItemType":"Page","Rarity":"Common","Value":50.0},"PageData":{"PageRequirements":{"ConflictingPages":[],"IncompatiblePages":[],"TitleReq":"None"},"SourceTitle":""},"_DefVersion":"1"},"FireTrapSpell":{"!ObjectScript":"res://assets/Scripts/Items/Pages/PageItemAction.gd","!ParentKey":"#BaseTrapSpell","#ObjDetails":{"Description":"","DisplayName":"Fire Trap","LargeIcon":"Sprites/FireTrap.png","ObjectType":"Item","SmallIcon":"Sprites/FireTrap.png","SnippetDesc":"Create a Trap of Fire Damage.","Tags":["Fire"],"Taxonomy":["Item","Page","Action","Spell"]},"ActionData":{"AttackDetails":{"AccuracyMod":1.0,"PotencyMod":1.0},"DamageDatas":{"TrapDamage":{"DamageType":"Fire","DmgEffectData":{"ApplicationChance":1.0,"EffectKey":"AilmentBurned"}}},"ZoneDatas":{"Zone1":{"TileSprite":"TileSets/FireTrap_Tile.png"}}},"ItemData":{"ItemType":"Page","Rarity":"Common","Value":50.0},"PageData":{"PageRequirements":{"ConflictingPages":[],"IncompatiblePages":[],"TitleReq":"None"},"SourceTitle":""},"_DefVersion":"1"},"PoisonMeleeSpell":{"!ObjectScript":"res://assets/Scripts/Items/Pages/PageItemAction.gd","!ParentKey":"#BaseMeleeSpell","#ObjDetails":{"Description":"","DisplayName":"Poison Touch","LargeIcon":"Sprites/PoisonTouch.png","ObjectType":"Item","SmallIcon":"Sprites/PoisonTouch.png","SnippetDesc":"Touch Actor dealing Poison Damage","Tags":["Poison"],"Taxonomy":["Item","Page","Action","Spell"]},"ActionData":{"DamageDatas":{"MeleeDamage":{"AtkPwrBase":90.0,"AtkPwrRange":20.0,"DamageType":"Poison","DmgEffectData":{"ApplicationChance":0.6,"EffectKey":"AilmentPoisoned"}}}},"ItemData":{"ItemType":"Page","Rarity":"Common","Value":50.0},"PageData":{"PageRequirements":{"ConflictingPages":[],"IncompatiblePages":[],"TitleReq":"None"},"SourceTitle":""},"_DefVersion":"1"},"PoisonMissileSpell":{"!ObjectScript":"res://assets/Scripts/Items/Pages/PageItemAction.gd","!ParentKey":"#BaseMissileSpell","#ObjDetails":{"Description":"","DisplayName":"Poison Missile","LargeIcon":"Sprites/PoisonMissile_Icon.png","ObjectType":"Item","SmallIcon":"Sprites/PoisonMissile_Icon.png","SnippetDesc":"Launch a Missile dealing Poison Damage","Tags":["Poison"],"Taxonomy":["Item","Page","Action","Spell"]},"ActionData":{"AttackDetails":{"AccuracyMod":1.0,"PotencyMod":1.0},"DamageDatas":{"MissileDamage":{"AtkPwrBase":90.0,"AtkPwrRange":20.0,"DamageType":"Poison","DmgEffectData":{"ApplicationChance":0.6,"EffectKey":"AilmentPoisoned"}}},"MissileDatas":{"Missile1":{"DamageDataKey":"MissileDamage","FramesPerTile":3.0,"ImpactVfxKey":null,"MissileVfxData":{"AnimationName":"4_sprites_250ms_frames_loop","AnimationSpeed":3.0,"RandomOffsets":[0.0,0.0],"RandomRotation":[0.0,0.0],"Scale":[1.0,1.0],"ScenePath":"res://assets/Scripts/VFXs/MissileVfx/missile_vfx_node.tscn","SpriteName":"Missiles/PoisonMissile.png","SpriteSheetHight":2.0,"SpriteSheetWidth":2.0},"MissileVfxKey":""}}},"ItemData":{"ItemType":"Page","Rarity":"Common","Value":50.0},"PageData":{"PageRequirements":{"ConflictingPages":[],"IncompatiblePages":[],"TitleReq":"None"},"SourceTitle":""},"_DefVersion":"1"},"PoisonRangedSpell":{"!ObjectScript":"res://assets/Scripts/Items/Pages/PageItemAction.gd","!ParentKey":"#BaseRangedSpell","#ObjDetails":{"Description":"","DisplayName":"Poison Bullet","LargeIcon":"Sprites/PoisonBullet.png","ObjectType":"Item","SmallIcon":"Sprites/PoisonBullet.png","SnippetDesc":"Make a Ranged Spell Attack dealing Poison Damage","Tags":["Poison"],"Taxonomy":["Item","Page","Action","Spell"]},"ActionData":{"AttackDetails":{"AccuracyMod":1.0,"AttackVfxData":{"SpriteName":"Missiles/PoisonBullet.png"},"AttackVfxKey":"","PotencyMod":1.0},"DamageDatas":{"RangedDamage":{"AtkPwrBase":70.0,"AtkPwrRange":20.0,"DamageType":"Poison","DmgEffectData":{"ApplicationChance":0.6,"EffectKey":"AilmentPoisoned"}}}},"ItemData":{"ItemType":"Page","Rarity":"Common","Value":50.0},"PageData":{"PageRequirements":{"ConflictingPages":[],"IncompatiblePages":[],"TitleReq":"None"},"SourceTitle":""},"_DefVersion":"1"},"PoisonTrapSpell":{"!ObjectScript":"res://assets/Scripts/Items/Pages/PageItemAction.gd","!ParentKey":"#BaseTrapSpell","#ObjDetails":{"Description":"","DisplayName":"Poison Trap","LargeIcon":"Sprites/PoisonTrap.png","ObjectType":"Item","SmallIcon":"Sprites/PoisonTrap.png","SnippetDesc":"Create a Trap of Poison Damage.","Tags":["Poison"],"Taxonomy":["Item","Page","Action","Spell"]},"ActionData":{"AttackDetails":{"AccuracyMod":1.0,"PotencyMod":1.0},"DamageDatas":{"TrapDamage":{"AtkPwrBase":110.0,"AtkPwrRange":20.0,"DamageType":"Poison"}},"EffectDatas":{"AttackEffect":{"ApplicationChance":1.0,"DmgEffectData":{"ApplicationChance":1.0,"EffectKey":"AilmentPoisoned"},"EffectKey":"AilmentPoisoned"}},"ZoneDatas":{"Zone1":{"TileSprite":"TileSets/PoisonTrap_Tile.png"}}},"ItemData":{"ItemType":"Page","Rarity":"Common","Value":50.0},"PageData":{"PageRequirements":{"ConflictingPages":[],"IncompatiblePages":[],"TitleReq":"None"},"SourceTitle":""},"_DefVersion":"1"},"ShockMeleeSpell":{"!ObjectScript":"res://assets/Scripts/Items/Pages/PageItemAction.gd","!ParentKey":"#BaseMeleeSpell","#ObjDetails":{"Description":"","DisplayName":"Shock Touch","LargeIcon":"Sprites/ShockTouch.png","ObjectType":"Item","SmallIcon":"Sprites/ShockTouch.png","SnippetDesc":"Touch Actor dealing Shock Damage","Tags":["Shock"],"Taxonomy":["Item","Page","Action","Spell"]},"ActionData":{"DamageDatas":{"MeleeDamage":{"AtkPwrRange":30.0,"DamageType":"Shock","DmgEffectData":{"ApplicationChance":0.2,"EffectKey":"AilmentShocked"}}}},"ItemData":{"ItemType":"Page","Rarity":"Common","Value":50.0},"PageData":{"PageRequirements":{"ConflictingPages":[],"IncompatiblePages":[],"TitleReq":"None"},"SourceTitle":""},"_DefVersion":"1"},"ShockMissileSpell":{"!ObjectScript":"res://assets/Scripts/Items/Pages/PageItemAction.gd","!ParentKey":"#BaseMissileSpell","#ObjDetails":{"Description":"","DisplayName":"Shock Missile","LargeIcon":"Sprites/ShockMissile_Icon.png","ObjectType":"Item","SmallIcon":"Sprites/ShockMissile_Icon.png","SnippetDesc":"Launch a Missile dealing Shock Damage","Tags":["Shock"],"Taxonomy":["Item","Page","Action","Spell"]},"ActionData":{"AttackDetails":{"AccuracyMod":1.0,"PotencyMod":1.0},"DamageDatas":{"MissileDamage":{"AtkPwrRange":30.0,"DamageType":"Shock","DmgEffectData":{"ApplicationChance":0.2,"EffectKey":"AilmentShocked"}}},"MissileDatas":{"Missile1":{"DamageDataKey":"MissileDamage","FramesPerTile":3.0,"ImpactVfxKey":null,"MissileVfxData":{"AnimationName":"4_sprites_250ms_frames_loop","AnimationSpeed":3.0,"RandomOffsets":[0.0,0.0],"RandomRotation":[0.0,0.0],"Scale":[1.0,1.0],"ScenePath":"res://assets/Scripts/VFXs/MissileVfx/missile_vfx_node.tscn","SpriteName":"Missiles/ShockMissile.png","SpriteSheetHight":2.0,"SpriteSheetWidth":2.0},"MissileVfxKey":""}}},"ItemData":{"ItemType":"Page","Rarity":"Common","Value":50.0},"PageData":{"PageRequirements":{"ConflictingPages":[],"IncompatiblePages":[],"TitleReq":"None"},"SourceTitle":""},"_DefVersion":"1"},"ShockRangedSpell":{"!ObjectScript":"res://assets/Scripts/Items/Pages/PageItemAction.gd","!ParentKey":"#BaseRangedSpell","#ObjDetails":{"Description":"","DisplayName":"Shock Bullet","LargeIcon":"Sprites/ShockBullet.png","ObjectType":"Item","SmallIcon":"Sprites/ShockBullet.png","SnippetDesc":"Make a Ranged Spell Attack dealing Shock Damage","Tags":["Shock"],"Taxonomy":["Item","Page","Action","Spell"]},"ActionData":{"AttackDetails":{"AccuracyMod":1.0,"AttackVfxData":{"SpriteName":"Missiles/ShockBullet.png"},"AttackVfxKey":"","PotencyMod":1.0},"DamageDatas":{"RangedDamage":{"AtkPwrRange":30.0,"DamageType":"Shock","DmgEffectData":{"ApplicationChance":0.2,"EffectKey":"AilmentShocked"}}}},"ItemData":{"ItemType":"Page","Rarity":"Common","Value":50.0},"PageData":{"PageRequirements":{"ConflictingPages":[],"IncompatiblePages":[],"TitleReq":"None"},"SourceTitle":""},"_DefVersion":"1"},"ShockTrapSpell":{"!ObjectScript":"res://assets/Scripts/Items/Pages/PageItemAction.gd","!ParentKey":"#BaseTrapSpell","#ObjDetails":{"Description":"","DisplayName":"Shock Trap","LargeIcon":"Sprites/ShockTrap.png","ObjectType":"Item","SmallIcon":"Sprites/ShockTrap.png","SnippetDesc":"Create a Trap of Shock Damage.","Tags":["Shock"],"Taxonomy":["Item","Page","Action","Spell"]},"ActionData":{"AttackDetails":{"AccuracyMod":1.0,"PotencyMod":1.0},"DamageDatas":{"TrapDamage":{"AtkPwrRange":30.0,"DamageType":"Shock","DmgEffectData":{"ApplicationChance":0.2,"EffectKey":"AilmentShocked"}}},"ZoneDatas":{"Zone1":{"TileSprite":"TileSets/ShockTrap_Tile.png"}}},"ItemData":{"ItemType":"Page","Rarity":"Common","Value":50.0},"PageData":{"PageRequirements":{"ConflictingPages":[],"IncompatiblePages":[],"TitleReq":"None"},"SourceTitle":""},"_DefVersion":"1"}}
+{
+	"ColdMeleeSpell": {
+		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
+		"!ParentKey": "#BaseMeleeSpell",
+		"#ObjDetails": {
+			"Description": "",
+			"DisplayName": "Cold Touch",
+			"LargeIcon": "Sprites/ColdTouch.png",
+			"ObjectType": "Item",
+			"SmallIcon": "Sprites/ColdTouch.png",
+			"SnippetDesc": "Touch Actor dealing Cold Damage",
+			"Tags": [
+				"Cold"
+			],
+			"Taxonomy": [
+				"Item",
+				"Page",
+				"Action",
+				"Spell"
+			]
+		},
+		"ActionData": {
+			"DamageDatas": {
+				"MeleeDamage": {
+					"AtkPwrRange": 10.0,
+					"DamageType": "Cold",
+					"DmgEffectData": {
+						"ApplicationChance": 0.3,
+						"EffectKey": "AilmentChilled"
+					}
+				}
+			}
+		},
+		"ItemData": {
+			"ItemType": "Page",
+			"Rarity": "Common",
+			"Value": 50.0
+		},
+		"PageData": {
+			"PageRequirements": {
+				"ConflictingPages": [],
+				"IncompatiblePages": [],
+				"TitleReq": "None"
+			},
+			"SourceTitle": ""
+		},
+		"_DefVersion": "1"
+	},
+	"ColdMissileSpell": {
+		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
+		"!ParentKey": "#BaseMissileSpell",
+		"#ObjDetails": {
+			"Description": "",
+			"DisplayName": "Cold Missile",
+			"LargeIcon": "Sprites/ColdMissile_Icon.png",
+			"ObjectType": "Item",
+			"SmallIcon": "Sprites/ColdMissile_Icon.png",
+			"SnippetDesc": "Launch a Missile dealing Cold Damage",
+			"Tags": [
+				"Cold"
+			],
+			"Taxonomy": [
+				"Item",
+				"Page",
+				"Action",
+				"Spell"
+			]
+		},
+		"ActionData": {
+			"AttackDetails": {
+				"AccuracyMod": 1.0,
+				"PotencyMod": 1.0
+			},
+			"DamageDatas": {
+				"MissileDamage": {
+					"AtkPwrRange": 10.0,
+					"DamageType": "Cold",
+					"DmgEffectData": {
+						"ApplicationChance": 0.3,
+						"EffectKey": "AilmentChilled"
+					}
+				}
+			},
+			"MissileDatas": {
+				"Missile1": {
+					"DamageDataKey": "MissileDamage",
+					"FramesPerTile": 3.0,
+					"ImpactVfxKey": null,
+					"MissileVfxData": {
+						"AnimationName": "4_sprites_250ms_frames_loop",
+						"AnimationSpeed": 1.0,
+						"RandomOffsets": [
+							0.0,
+							0.0
+						],
+						"RandomRotation": [
+							0.0,
+							0.0
+						],
+						"Rotation": -45.0,
+						"Scale": [
+							1.0,
+							1.0
+						],
+						"ScenePath": "res://assets/Scripts/VFXs/MissileVfx/missile_vfx_node.tscn",
+						"SpriteName": "Missiles/ColdMissile.png",
+						"SpriteSheetHight": 2.0,
+						"SpriteSheetWidth": 2.0
+					},
+					"MissileVfxKey": ""
+				}
+			}
+		},
+		"ItemData": {
+			"ItemType": "Page",
+			"Rarity": "Common",
+			"Value": 50.0
+		},
+		"PageData": {
+			"PageRequirements": {
+				"ConflictingPages": [],
+				"IncompatiblePages": [],
+				"TitleReq": "None"
+			},
+			"SourceTitle": ""
+		},
+		"_DefVersion": "1"
+	},
+	"ColdRangedSpell": {
+		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
+		"!ParentKey": "#BaseRangedSpell",
+		"#ObjDetails": {
+			"Description": "",
+			"DisplayName": "Cold Bullet",
+			"LargeIcon": "Sprites/ColdBullet.png",
+			"ObjectType": "Item",
+			"SmallIcon": "Sprites/ColdBullet.png",
+			"SnippetDesc": "Make a Ranged Spell Attack dealing Cold Damage",
+			"Tags": [
+				"Cold"
+			],
+			"Taxonomy": [
+				"Item",
+				"Page",
+				"Action",
+				"Spell"
+			]
+		},
+		"ActionData": {
+			"AttackDetails": {
+				"AccuracyMod": 1.0,
+				"AttackVfxData": {
+					"SpriteName": "Missiles/ColdBullet.png"
+				},
+				"AttackVfxKey": "",
+				"PotencyMod": 1.0
+			},
+			"DamageDatas": {
+				"RangedDamage": {
+					"AtkPwrRange": 10.0,
+					"DamageType": "Cold",
+					"DmgEffectData": {
+						"ApplicationChance": 0.3,
+						"EffectKey": "AilmentChilled"
+					}
+				}
+			}
+		},
+		"ItemData": {
+			"ItemType": "Page",
+			"Rarity": "Common",
+			"Value": 50.0
+		},
+		"PageData": {
+			"PageRequirements": {
+				"ConflictingPages": [],
+				"IncompatiblePages": [],
+				"TitleReq": "None"
+			},
+			"SourceTitle": ""
+		},
+		"_DefVersion": "1"
+	},
+	"ColdTrapSpell": {
+		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
+		"!ParentKey": "#BaseTrapSpell",
+		"#ObjDetails": {
+			"Description": "",
+			"DisplayName": "Cold Trap",
+			"LargeIcon": "Sprites/ColdTrap.png",
+			"ObjectType": "Item",
+			"SmallIcon": "Sprites/ColdTrap.png",
+			"SnippetDesc": "Create a Trap of Cold Damage.",
+			"Tags": [
+				"Cold"
+			],
+			"Taxonomy": [
+				"Item",
+				"Page",
+				"Action",
+				"Spell"
+			]
+		},
+		"ActionData": {
+			"AttackDetails": {
+				"AccuracyMod": 1.0,
+				"PotencyMod": 1.0
+			},
+			"DamageDatas": {
+				"TrapDamage": {
+					"AtkPwrRange": 10.0,
+					"DamageType": "Cold",
+					"DmgEffectData": {
+						"ApplicationChance": 1.0,
+						"EffectKey": "AilmentChilled"
+					}
+				}
+			},
+			"ZoneDatas": {
+				"Zone1": {
+					"TileSprite": "TileSets/ColdTrap_Tile.png"
+				}
+			}
+		},
+		"ItemData": {
+			"ItemType": "Page",
+			"Rarity": "Common",
+			"Value": 50.0
+		},
+		"PageData": {
+			"PageRequirements": {
+				"ConflictingPages": [],
+				"IncompatiblePages": [],
+				"TitleReq": "None"
+			},
+			"SourceTitle": ""
+		},
+		"_DefVersion": "1"
+	},
+	"FireMeleeSpell": {
+		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
+		"!ParentKey": "#BaseMeleeSpell",
+		"#ObjDetails": {
+			"Description": "",
+			"DisplayName": "Fire Touch",
+			"LargeIcon": "Sprites/FireTouch.png",
+			"ObjectType": "Item",
+			"SmallIcon": "Sprites/FireTouch.png",
+			"SnippetDesc": "Touch Actor dealing Fire Damage",
+			"Tags": [
+				"Fire"
+			],
+			"Taxonomy": [
+				"Item",
+				"Page",
+				"Action",
+				"Spell"
+			]
+		},
+		"ActionData": {
+			"DamageDatas": {
+				"MeleeDamage": {
+					"DamageType": "Fire",
+					"DmgEffectData": {
+						"ApplicationChance": 0.2,
+						"EffectKey": "AilmentBurned"
+					}
+				}
+			}
+		},
+		"ItemData": {
+			"ItemType": "Page",
+			"Rarity": "Common",
+			"Value": 50.0
+		},
+		"PageData": {
+			"PageRequirements": {
+				"ConflictingPages": [],
+				"IncompatiblePages": [],
+				"TitleReq": "None"
+			},
+			"SourceTitle": ""
+		},
+		"_DefVersion": "1"
+	},
+	"FireMissileSpell": {
+		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
+		"!ParentKey": "#BaseMissileSpell",
+		"#ObjDetails": {
+			"Description": "",
+			"DisplayName": "Fire Missile",
+			"LargeIcon": "Sprites/FireMissile_Icon.png",
+			"ObjectType": "Item",
+			"SmallIcon": "Sprites/FireMissile_Icon.png",
+			"SnippetDesc": "Launch a Missile dealing Fire Damage",
+			"Tags": [
+				"Fire"
+			],
+			"Taxonomy": [
+				"Item",
+				"Page",
+				"Action",
+				"Spell"
+			]
+		},
+		"ActionData": {
+			"AttackDetails": {
+				"AccuracyMod": 1.0,
+				"PotencyMod": 1.0
+			},
+			"DamageDatas": {
+				"MissileDamage": {
+					"DamageType": "Fire",
+					"DmgEffectData": {
+						"ApplicationChance": 0.2,
+						"EffectKey": "AilmentBurned"
+					}
+				}
+			},
+			"MissileDatas": {
+				"Missile1": {
+					"DamageDataKey": "MissileDamage",
+					"FramesPerTile": 3.0,
+					"ImpactVfxKey": null,
+					"MissileVfxData": {
+						"AnimationName": "4_sprites_250ms_frames_loop",
+						"AnimationSpeed": 1.0,
+						"RandomOffsets": [
+							0.0,
+							0.0
+						],
+						"RandomRotation": [
+							0.0,
+							0.0
+						],
+						"Scale": [
+							1.0,
+							1.0
+						],
+						"ScenePath": "res://assets/Scripts/VFXs/MissileVfx/missile_vfx_node.tscn",
+						"SpriteName": "Missiles/FireMissile.png",
+						"SpriteSheetHight": 2.0,
+						"SpriteSheetWidth": 2.0
+					},
+					"MissileVfxKey": ""
+				}
+			}
+		},
+		"ItemData": {
+			"ItemType": "Page",
+			"Rarity": "Common",
+			"Value": 50.0
+		},
+		"PageData": {
+			"PageRequirements": {
+				"ConflictingPages": [],
+				"IncompatiblePages": [],
+				"TitleReq": "None"
+			},
+			"SourceTitle": ""
+		},
+		"_DefVersion": "1"
+	},
+	"FireRangedSpell": {
+		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
+		"!ParentKey": "#BaseRangedSpell",
+		"#ObjDetails": {
+			"Description": "",
+			"DisplayName": "Fire Shot",
+			"LargeIcon": "Sprites/FireBullet.png",
+			"ObjectType": "Item",
+			"SmallIcon": "Sprites/FireBullet.png",
+			"SnippetDesc": "Make a Ranged Spell Attack dealing Fire Damage",
+			"Tags": [
+				"Fire"
+			],
+			"Taxonomy": [
+				"Item",
+				"Page",
+				"Action",
+				"Spell"
+			]
+		},
+		"ActionData": {
+			"AttackDetails": {
+				"AccuracyMod": 1.0,
+				"AttackVfxData": {
+					"SpriteName": "Missiles/FireBullet.png"
+				},
+				"AttackVfxKey": "",
+				"PotencyMod": 1.0
+			},
+			"DamageDatas": {
+				"RangedDamage": {
+					"DamageType": "Fire",
+					"DmgEffectData": {
+						"ApplicationChance": 0.2,
+						"EffectKey": "AilmentBurned"
+					}
+				}
+			}
+		},
+		"ItemData": {
+			"ItemType": "Page",
+			"Rarity": "Common",
+			"Value": 50.0
+		},
+		"PageData": {
+			"PageRequirements": {
+				"ConflictingPages": [],
+				"IncompatiblePages": [],
+				"TitleReq": "None"
+			},
+			"SourceTitle": ""
+		},
+		"_DefVersion": "1"
+	},
+	"FireTrapSpell": {
+		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
+		"!ParentKey": "#BaseTrapSpell",
+		"#ObjDetails": {
+			"Description": "",
+			"DisplayName": "Fire Trap",
+			"LargeIcon": "Sprites/FireTrap.png",
+			"ObjectType": "Item",
+			"SmallIcon": "Sprites/FireTrap.png",
+			"SnippetDesc": "Create a Trap of Fire Damage.",
+			"Tags": [
+				"Fire"
+			],
+			"Taxonomy": [
+				"Item",
+				"Page",
+				"Action",
+				"Spell"
+			]
+		},
+		"ActionData": {
+			"AttackDetails": {
+				"AccuracyMod": 1.0,
+				"PotencyMod": 1.0
+			},
+			"DamageDatas": {
+				"TrapDamage": {
+					"DamageType": "Fire",
+					"DmgEffectData": {
+						"ApplicationChance": 1.0,
+						"EffectKey": "AilmentBurned"
+					}
+				}
+			},
+			"ZoneDatas": {
+				"Zone1": {
+					"TileSprite": "TileSets/FireTrap_Tile.png"
+				}
+			}
+		},
+		"ItemData": {
+			"ItemType": "Page",
+			"Rarity": "Common",
+			"Value": 50.0
+		},
+		"PageData": {
+			"PageRequirements": {
+				"ConflictingPages": [],
+				"IncompatiblePages": [],
+				"TitleReq": "None"
+			},
+			"SourceTitle": ""
+		},
+		"_DefVersion": "1"
+	},
+	"PoisonMeleeSpell": {
+		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
+		"!ParentKey": "#BaseMeleeSpell",
+		"#ObjDetails": {
+			"Description": "",
+			"DisplayName": "Poison Touch",
+			"LargeIcon": "Sprites/PoisonTouch.png",
+			"ObjectType": "Item",
+			"SmallIcon": "Sprites/PoisonTouch.png",
+			"SnippetDesc": "Touch Actor dealing Poison Damage",
+			"Tags": [
+				"Poison"
+			],
+			"Taxonomy": [
+				"Item",
+				"Page",
+				"Action",
+				"Spell"
+			]
+		},
+		"ActionData": {
+			"DamageDatas": {
+				"MeleeDamage": {
+					"AtkPwrBase": 90.0,
+					"AtkPwrRange": 20.0,
+					"DamageType": "Poison",
+					"DmgEffectData": {
+						"ApplicationChance": 0.6,
+						"EffectKey": "AilmentPoisoned"
+					}
+				}
+			}
+		},
+		"ItemData": {
+			"ItemType": "Page",
+			"Rarity": "Common",
+			"Value": 50.0
+		},
+		"PageData": {
+			"PageRequirements": {
+				"ConflictingPages": [],
+				"IncompatiblePages": [],
+				"TitleReq": "None"
+			},
+			"SourceTitle": ""
+		},
+		"_DefVersion": "1"
+	},
+	"PoisonMissileSpell": {
+		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
+		"!ParentKey": "#BaseMissileSpell",
+		"#ObjDetails": {
+			"Description": "",
+			"DisplayName": "Poison Missile",
+			"LargeIcon": "Sprites/PoisonMissile_Icon.png",
+			"ObjectType": "Item",
+			"SmallIcon": "Sprites/PoisonMissile_Icon.png",
+			"SnippetDesc": "Launch a Missile dealing Poison Damage",
+			"Tags": [
+				"Poison"
+			],
+			"Taxonomy": [
+				"Item",
+				"Page",
+				"Action",
+				"Spell"
+			]
+		},
+		"ActionData": {
+			"AttackDetails": {
+				"AccuracyMod": 1.0,
+				"PotencyMod": 1.0
+			},
+			"DamageDatas": {
+				"MissileDamage": {
+					"AtkPwrBase": 90.0,
+					"AtkPwrRange": 20.0,
+					"DamageType": "Poison",
+					"DmgEffectData": {
+						"ApplicationChance": 0.6,
+						"EffectKey": "AilmentPoisoned"
+					}
+				}
+			},
+			"MissileDatas": {
+				"Missile1": {
+					"DamageDataKey": "MissileDamage",
+					"FramesPerTile": 3.0,
+					"ImpactVfxKey": null,
+					"MissileVfxData": {
+						"AnimationName": "4_sprites_250ms_frames_loop",
+						"AnimationSpeed": 3.0,
+						"RandomOffsets": [
+							0.0,
+							0.0
+						],
+						"RandomRotation": [
+							0.0,
+							0.0
+						],
+						"Scale": [
+							1.0,
+							1.0
+						],
+						"ScenePath": "res://assets/Scripts/VFXs/MissileVfx/missile_vfx_node.tscn",
+						"SpriteName": "Missiles/PoisonMissile.png",
+						"SpriteSheetHight": 2.0,
+						"SpriteSheetWidth": 2.0
+					},
+					"MissileVfxKey": ""
+				}
+			}
+		},
+		"ItemData": {
+			"ItemType": "Page",
+			"Rarity": "Common",
+			"Value": 50.0
+		},
+		"PageData": {
+			"PageRequirements": {
+				"ConflictingPages": [],
+				"IncompatiblePages": [],
+				"TitleReq": "None"
+			},
+			"SourceTitle": ""
+		},
+		"_DefVersion": "1"
+	},
+	"PoisonRangedSpell": {
+		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
+		"!ParentKey": "#BaseRangedSpell",
+		"#ObjDetails": {
+			"Description": "",
+			"DisplayName": "Poison Bullet",
+			"LargeIcon": "Sprites/PoisonBullet.png",
+			"ObjectType": "Item",
+			"SmallIcon": "Sprites/PoisonBullet.png",
+			"SnippetDesc": "Make a Ranged Spell Attack dealing Poison Damage",
+			"Tags": [
+				"Poison"
+			],
+			"Taxonomy": [
+				"Item",
+				"Page",
+				"Action",
+				"Spell"
+			]
+		},
+		"ActionData": {
+			"AttackDetails": {
+				"AccuracyMod": 1.0,
+				"AttackVfxData": {
+					"SpriteName": "Missiles/PoisonBullet.png"
+				},
+				"AttackVfxKey": "",
+				"PotencyMod": 1.0
+			},
+			"DamageDatas": {
+				"RangedDamage": {
+					"AtkPwrBase": 70.0,
+					"AtkPwrRange": 20.0,
+					"DamageType": "Poison",
+					"DmgEffectData": {
+						"ApplicationChance": 0.6,
+						"EffectKey": "AilmentPoisoned"
+					}
+				}
+			}
+		},
+		"ItemData": {
+			"ItemType": "Page",
+			"Rarity": "Common",
+			"Value": 50.0
+		},
+		"PageData": {
+			"PageRequirements": {
+				"ConflictingPages": [],
+				"IncompatiblePages": [],
+				"TitleReq": "None"
+			},
+			"SourceTitle": ""
+		},
+		"_DefVersion": "1"
+	},
+	"PoisonTrapSpell": {
+		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
+		"!ParentKey": "#BaseTrapSpell",
+		"#ObjDetails": {
+			"Description": "",
+			"DisplayName": "Poison Trap",
+			"LargeIcon": "Sprites/PoisonTrap.png",
+			"ObjectType": "Item",
+			"SmallIcon": "Sprites/PoisonTrap.png",
+			"SnippetDesc": "Create a Trap of Poison Damage.",
+			"Tags": [
+				"Poison"
+			],
+			"Taxonomy": [
+				"Item",
+				"Page",
+				"Action",
+				"Spell"
+			]
+		},
+		"ActionData": {
+			"AttackDetails": {
+				"AccuracyMod": 1.0,
+				"PotencyMod": 1.0
+			},
+			"DamageDatas": {
+				"TrapDamage": {
+					"AtkPwrBase": 110.0,
+					"AtkPwrRange": 20.0,
+					"DamageType": "Poison"
+				}
+			},
+			"EffectDatas": {
+				"AttackEffect": {
+					"ApplicationChance": 1.0,
+					"DmgEffectData": {
+						"ApplicationChance": 1.0,
+						"EffectKey": "AilmentPoisoned"
+					},
+					"EffectKey": "AilmentPoisoned"
+				}
+			},
+			"ZoneDatas": {
+				"Zone1": {
+					"TileSprite": "TileSets/PoisonTrap_Tile.png"
+				}
+			}
+		},
+		"ItemData": {
+			"ItemType": "Page",
+			"Rarity": "Common",
+			"Value": 50.0
+		},
+		"PageData": {
+			"PageRequirements": {
+				"ConflictingPages": [],
+				"IncompatiblePages": [],
+				"TitleReq": "None"
+			},
+			"SourceTitle": ""
+		},
+		"_DefVersion": "1"
+	},
+	"ShockMeleeSpell": {
+		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
+		"!ParentKey": "#BaseMeleeSpell",
+		"#ObjDetails": {
+			"Description": "",
+			"DisplayName": "Shock Touch",
+			"LargeIcon": "Sprites/ShockTouch.png",
+			"ObjectType": "Item",
+			"SmallIcon": "Sprites/ShockTouch.png",
+			"SnippetDesc": "Touch Actor dealing Shock Damage",
+			"Tags": [
+				"Shock"
+			],
+			"Taxonomy": [
+				"Item",
+				"Page",
+				"Action",
+				"Spell"
+			]
+		},
+		"ActionData": {
+			"DamageDatas": {
+				"MeleeDamage": {
+					"AtkPwrRange": 30.0,
+					"DamageType": "Shock",
+					"DmgEffectData": {
+						"ApplicationChance": 0.2,
+						"EffectKey": "AilmentShocked"
+					}
+				}
+			}
+		},
+		"ItemData": {
+			"ItemType": "Page",
+			"Rarity": "Common",
+			"Value": 50.0
+		},
+		"PageData": {
+			"PageRequirements": {
+				"ConflictingPages": [],
+				"IncompatiblePages": [],
+				"TitleReq": "None"
+			},
+			"SourceTitle": ""
+		},
+		"_DefVersion": "1"
+	},
+	"ShockMissileSpell": {
+		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
+		"!ParentKey": "#BaseMissileSpell",
+		"#ObjDetails": {
+			"Description": "",
+			"DisplayName": "Shock Missile",
+			"LargeIcon": "Sprites/ShockMissile_Icon.png",
+			"ObjectType": "Item",
+			"SmallIcon": "Sprites/ShockMissile_Icon.png",
+			"SnippetDesc": "Launch a Missile dealing Shock Damage",
+			"Tags": [
+				"Shock"
+			],
+			"Taxonomy": [
+				"Item",
+				"Page",
+				"Action",
+				"Spell"
+			]
+		},
+		"ActionData": {
+			"AttackDetails": {
+				"AccuracyMod": 1.0,
+				"PotencyMod": 1.0
+			},
+			"DamageDatas": {
+				"MissileDamage": {
+					"AtkPwrRange": 30.0,
+					"DamageType": "Shock",
+					"DmgEffectData": {
+						"ApplicationChance": 0.2,
+						"EffectKey": "AilmentShocked"
+					}
+				}
+			},
+			"MissileDatas": {
+				"Missile1": {
+					"DamageDataKey": "MissileDamage",
+					"FramesPerTile": 3.0,
+					"ImpactVfxKey": null,
+					"MissileVfxData": {
+						"AnimationName": "4_sprites_250ms_frames_loop",
+						"AnimationSpeed": 3.0,
+						"RandomOffsets": [
+							0.0,
+							0.0
+						],
+						"RandomRotation": [
+							0.0,
+							0.0
+						],
+						"Scale": [
+							1.0,
+							1.0
+						],
+						"ScenePath": "res://assets/Scripts/VFXs/MissileVfx/missile_vfx_node.tscn",
+						"SpriteName": "Missiles/ShockMissile.png",
+						"SpriteSheetHight": 2.0,
+						"SpriteSheetWidth": 2.0
+					},
+					"MissileVfxKey": ""
+				}
+			}
+		},
+		"ItemData": {
+			"ItemType": "Page",
+			"Rarity": "Common",
+			"Value": 50.0
+		},
+		"PageData": {
+			"PageRequirements": {
+				"ConflictingPages": [],
+				"IncompatiblePages": [],
+				"TitleReq": "None"
+			},
+			"SourceTitle": ""
+		},
+		"_DefVersion": "1"
+	},
+	"ShockRangedSpell": {
+		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
+		"!ParentKey": "#BaseRangedSpell",
+		"#ObjDetails": {
+			"Description": "",
+			"DisplayName": "Shock Bullet",
+			"LargeIcon": "Sprites/ShockBullet.png",
+			"ObjectType": "Item",
+			"SmallIcon": "Sprites/ShockBullet.png",
+			"SnippetDesc": "Make a Ranged Spell Attack dealing Shock Damage",
+			"Tags": [
+				"Shock"
+			],
+			"Taxonomy": [
+				"Item",
+				"Page",
+				"Action",
+				"Spell"
+			]
+		},
+		"ActionData": {
+			"AttackDetails": {
+				"AccuracyMod": 1.0,
+				"AttackVfxData": {
+					"SpriteName": "Missiles/ShockBullet.png"
+				},
+				"AttackVfxKey": "",
+				"PotencyMod": 1.0
+			},
+			"DamageDatas": {
+				"RangedDamage": {
+					"AtkPwrRange": 30.0,
+					"DamageType": "Shock",
+					"DmgEffectData": {
+						"ApplicationChance": 0.2,
+						"EffectKey": "AilmentShocked"
+					}
+				}
+			}
+		},
+		"ItemData": {
+			"ItemType": "Page",
+			"Rarity": "Common",
+			"Value": 50.0
+		},
+		"PageData": {
+			"PageRequirements": {
+				"ConflictingPages": [],
+				"IncompatiblePages": [],
+				"TitleReq": "None"
+			},
+			"SourceTitle": ""
+		},
+		"_DefVersion": "1"
+	},
+	"ShockTrapSpell": {
+		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
+		"!ParentKey": "#BaseTrapSpell",
+		"#ObjDetails": {
+			"Description": "",
+			"DisplayName": "Shock Trap",
+			"LargeIcon": "Sprites/ShockTrap.png",
+			"ObjectType": "Item",
+			"SmallIcon": "Sprites/ShockTrap.png",
+			"SnippetDesc": "Create a Trap of Shock Damage.",
+			"Tags": [
+				"Shock"
+			],
+			"Taxonomy": [
+				"Item",
+				"Page",
+				"Action",
+				"Spell"
+			]
+		},
+		"ActionData": {
+			"AttackDetails": {
+				"AccuracyMod": 1.0,
+				"PotencyMod": 1.0
+			},
+			"DamageDatas": {
+				"TrapDamage": {
+					"AtkPwrRange": 30.0,
+					"DamageType": "Shock",
+					"DmgEffectData": {
+						"ApplicationChance": 0.2,
+						"EffectKey": "AilmentShocked"
+					}
+				}
+			},
+			"ZoneDatas": {
+				"Zone1": {
+					"TileSprite": "TileSets/ShockTrap_Tile.png"
+				}
+			}
+		},
+		"ItemData": {
+			"ItemType": "Page",
+			"Rarity": "Common",
+			"Value": 50.0
+		},
+		"PageData": {
+			"PageRequirements": {
+				"ConflictingPages": [],
+				"IncompatiblePages": [],
+				"TitleReq": "None"
+			},
+			"SourceTitle": ""
+		},
+		"_DefVersion": "1"
+	}
+}

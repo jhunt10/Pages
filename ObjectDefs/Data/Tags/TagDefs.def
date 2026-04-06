@@ -1,1013 +1,980 @@
 {
-    "Armor": {
-        "Abreviation": "ARM",
-        "AppliesTo": [
-            "Stat"
-        ],
-        "Description": "@@#Stat:Armor@@ | @@#Color:Blue:Armor@@ provides protection against @@#Color:Blue:Physical Damage@@. Each point of @@#Color:Blue:Armor@@ is equal to a 1% reduction in damage.",
-        "DisplayName": "Armor"
-    },
-    "Fast": {
-        "Abreviation": "Fast",
-        "AppliesTo": [
-            "Action"
-        ],
-        "Description": "@@#Color:Blue:Fast@@ @@#Color:Red:Actions@@ are preformed early in the @@#Color:Red:Turn@@, usually before other @@#Color:Red:Actors@@ move, regardless of @@#Stat:Speed@@.",
-        "DisplayName": "Fast"
-    },
-    "HeavyWeapon": {
-        "Abreviation": "HeavyWpn",
-        "AppliesTo": [
-            "Weapon"
-        ],
-        "Description": "@@#Color:Blue:Heavy Weapons@@ are large two-handed @@#Color:Blue:Weapons@@ that generally require both @@#Color:Blue:MainHand@@ and @@#Color:Blue:OffHand@@ to be used.",
-        "DisplayName": "Heavy Weapon"
-    },
-    "LightWeapon": {
-        "Abreviation": "LightWpn",
-        "AppliesTo": [
-            "Weapon"
-        ],
-        "Description": "@@#Color:Blue:Light Weapons@@ are smaller single handed @@#Color:Blue:Weapons@@ that generally can be used in @@#Color:Blue:OffHand@@ when @@#Color:Blue:MainHand Weapon@@ is also a @@#Color:Blue:Light Weapon@@.",
-        "DisplayName": "Light Weapon"
-    },
-    "Magical": {
-        "Abreviation": "Mag",
-        "AppliesTo": [
-            "Action"
-        ],
-        "Description": "@@#Color:Blue:Magical@@ is a @@#Color:Blue:Tag@@ bestowed upon a select number of @@#Color:Blue:Items@@ and  @@#Color:Blue:Pages@@ which are able harness Elemental Energies in the following forms:\n\n@@#Color:DmgColor:Cold@@ low variance with higher precision and capable of inflicting @@#EftDef:AilmentChilled@@ which can lead to @@#EftDef:AilmentFrozen@@.\n\n@@#Color:DmgColor:Fire@@ standard variance and easily applied over large areas, often inclicting @@#EftDef:AilmentBurned@@.\n\n@@#Color:DmgColor:Shock@@ high variance and diffult to control, occationally inflicting @@#EftDef:AilmentShocked@@.\n\n@@#Color:DmgColor:Poison@@ standard variance but less powerful, frequently inflicting various types of @@#Color:Blue:Poisons@@.",
-        "DisplayName": "Magical"
-    },
-    "MedumWeapon": {
-        "Abreviation": "MediumWpn",
-        "AppliesTo": [
-            "Weapon"
-        ],
-        "Description": "@@#Color:Blue:Medium Weapons@@ are standard single handed @@#Color:Blue:Weapons@@ that generally can only be used in @@#Color:Blue:MainHand@@.",
-        "DisplayName": "Medium Weapon"
-    },
-    "Melee": {
-        "Abreviation": "Melee",
-        "AppliesTo": [
-            "Weapon",
-            "Action"
-        ],
-        "Description": "@@#Color:Blue:Melee@@ implies a @@#Color:Blue:Weapon@@ or @@#Color:Blue:Page@@ has a short range @@#Color:Red:Target Area@@. This generally only includes @@#Color:Blue:Actors@@ that are Adjacent and in Front of the user.",
-        "DisplayName": "Melee"
-    },
-    "Missile": {
-        "Abreviation": "Missile",
-        "AppliesTo": [
-            "Weapon",
-            "Action"
-        ],
-        "Description": "@@#Color:Blue:Missles@@ are projectiles that take time to reach target. So \"lead the shot\"",
-        "DisplayName": "Missile"
-    },
-    "Physical": {
-        "Abreviation": "Phy",
-        "AppliesTo": [
-            "Action"
-        ],
-        "Description": "@@#Color:Blue:Phy@@ means @@#Color:Blue:Physical@@. @@#Color:DmgColor:Slash@@'em, @@#Color:DmgColor:Pierce@@'em, hit'em with something @@#Color:DmgColor:Blunt@@, or just @@#Color:DmgColor:Crash@@ into them. You might even make'm @@#Color:DmgColor:Slash:Bleed@@, @@#Color:DmgColor:Pierce:Blinded@@, or @@#Color:DmgColor:Blunt:Dazed@@ if your good. But you usssaly gotta do something different to get'em @@#Color:DmgColor:Crash:Geased@@.",
-        "DisplayName": "Physical"
-    },
-    "Ranged": {
-        "Abreviation": "Ranged",
-        "AppliesTo": [
-            "Weapon",
-            "Action"
-        ],
-        "Description": "@@#Color:Blue:Ranged@@ implies a @@#Color:Red:Weapon@@ or @@#Color:Blue:Page@@ has a medium to long range @@#Color:Red:Target Area@@. @@#Color:Blue:Ranged Attacks@@ are generally weaker than @@#Color:Blue:Melee@@, but can reach distant @@#Color:Red:Actors@@.",
-        "DisplayName": "Ranged"
-    },
-    "Slow": {
-        "Abreviation": "Slow",
-        "AppliesTo": [
-            "Action"
-        ],
-        "Description": "@@#Color:Blue:Slow@@ @@#Color:Red:Actions@@ are preformed late in the @@#Color:Red:Turn@@, usually after other @@#Color:Red:Actors@@ move, regardless of @@#Stat:Speed@@.",
-        "DisplayName": "Slow"
-    },
-    "Spell": {
-        "Abreviation": "Spell",
-        "AppliesTo": [
-            "Action"
-        ],
-        "Description": "The @@#Color:Blue:Spell Tag@@ denotes particular @@#Color:Red:Action Pages@@ as catagorized by the use of @@#Color:Blue:Magical@@ Elemental energies generated by and manipulated through the @@#Color:Blue:Page@@ System.",
-        "DisplayName": "Spell"
-    },
-    "Tactic": {
-        "Abreviation": "Tactic",
-        "AppliesTo": [
-            "Action"
-        ],
-        "Description": "@@#Color:Blue:Tactic@@ means @@#Color:Blue:Physical@@ @@#Color:Red:Action@@",
-        "DisplayName": "Tactic"
-    },
-    "Unarmed": {
-        "Abreviation": "Tactic",
-        "AppliesTo": [
-            "Action"
-        ],
-        "Description": "@@#Color:Blue:Unarmed@@ @@#Color:Red:Actors@@ have no @@#Color:Red:Weapon@@ equip and default to thier @@#Color:Red:Unarmed Damage@@ when making @@#Color:Red:Weapon Attacks@@.",
-        "DisplayName": "Tactic"
-    },
-
-
-
-
-
-
-
-    "Blunt": {
-        "Abreviation": "Blunt",
-        "AppliesTo": [
-            "Page",
-            "Damage"
-        ],
-        "Description": "@@#Color:DmgColor:Blunt:Blunt@@ is a @@#Color:Blue:Physical Damage Type@@ cause by heavy impacts and tends to have @@#Color:Red:High Damage Variance@@.",
-        "DisplayName": "Blunt"
-    },
-    "Crash": {
-        "Abreviation": "Crash",
-        "AppliesTo": [
-            "Page",
-            "Damage"
-        ],
-        "Description": "@@#Color:DmgColor:Crash:Crash@@ is a @@#Color:Blue:Physical Damage Type@@ most often caused by @@#Color:Blue:Collisions@@ between @@#Color:Red:Actors@@.",
-        "DisplayName": "Crash"
-    },
-    "Slash": {
-        "Abreviation": "Slash",
-        "AppliesTo": [
-            "Page",
-            "Damage"
-        ],
-        "Description": "@@#Color:DmgColor:Slash:Slash@@ is a @@#Color:Blue:Physical Damage Type@@ cause by sharpend blades or claws and tends to have @@#Color:Red:Average Damage Variance@@.",
-        "DisplayName": "Slash"
-    },
-    "Pierce": {
-        "Abreviation": "Pierce",
-        "AppliesTo": [
-            "Page",
-            "Damage"
-        ],
-        "Description": "@@#Color:DmgColor:Pierce:Pierce@@ is a @@#Color:Blue:Physical Damage Type@@ cause by pointed stabs and tends to have @@#Color:Red:Low Damage Variance@@.",
-        "DisplayName": "Pierce"
-    },
-    "Cold": {
-        "Abreviation": "Cold",
-        "AppliesTo": [
-            "Page"
-        ],
-        "Description": "@@#Color:DmgColor:Cold:Cold@@ is a @@#Color:Blue:Magical Damage Type@@ cause by @@#Color:DmgColor:Cold:Water@@ @@#Color:Blue:Spells@@ and tends to have @@#Color:Red:Low Damage Variance@@ and chance to inflict @@#EftDef:AilmentChilled@@.",
-        "DisplayName": "Cold"
-    },
-    "Fire": {
-        "Abreviation": "Fire",
-        "AppliesTo": [
-            "Page"
-        ],
-        "Description": "@@#Color:DmgColor:Fire:Fire@@ is a @@#Color:Blue:Magical Damage Type@@ cause by @@#Color:DmgColor:Fire:Fire@@ @@#Color:Blue:Spells@@ and tends to have @@#Color:Red:Average Damage Variance@@ and chance to inflict @@#EftDef:AilmentBurned@@.",
-        "DisplayName": "Fire"
-    },
-    "Poison": {
-        "Abreviation": "Poison",
-        "AppliesTo": [
-            "Page"
-        ],
-        "Description": "@@#Color:DmgColor:Poison:Poison@@ is a @@#Color:Blue:Magical Damage Type@@ cause by @@#Color:DmgColor:Poison:Earth@@ @@#Color:Blue:Spells@@ and tends to have @@#Color:Red:Lower Damage@@ but high chance to inflict @@#EftDef:AilmentPoisoned@@.",
-        "DisplayName": "Poison"
-    },
-    "Shock": {
-        "Abreviation": "Shock",
-        "AppliesTo": [
-            "Page"
-        ],
-        "Description": "@@#Color:DmgColor:Shock:Shock@@ is a @@#Color:Blue:Magical Damage Type@@ cause by @@#Color:DmgColor:Shock:Air@@ @@#Color:Blue:Spells@@ and tends to have @@#Color:Red:High Damage Variance@@ and chance to inflict @@#EftDef:AilmentShocked@@.",
-        "DisplayName": "Shock"
-    },
-    "Dark": {
-        "Abreviation": "Dark",
-        "AppliesTo": [
-            "Page"
-        ],
-        "Description": "@@#Color:DmgColor:Dark:Dark@@  is an @@Color:Blue:Abnormal Damage Type@@ caused by @@#Color:DmgColor:Dark:Unholy@@ @@#Color:Blue:Spells@@. Most @@#Tag:Undead@@ will @@#Tag:Absorb@@ @@#Color:DmgColor:Dark:Dark Damage@@ while @@#Tag:Living Actors@@ are exspecially vulnerable to it.",
-        "DisplayName": "Dark"
-    },
-    "Light": {
-        "Abreviation": "Light",
-        "AppliesTo": [
-            "Effect",
-            "Page"
-        ],
-        "Description": "@@#Color:DmgColor:Light:Light@@  is an @@Color:Blue:Abnormal Damage Type@@ caused by @@#Color:DmgColor:Light:Holy@@ @@#Color:Blue:Spells@@. Most @@#Tag:Living:Living Actors@@ will @@#Tag:Absorb@@ @@#Color:DmgColor:Light:Light Damage@@ while @@#Tag:Undead@@ are exspecially vulnerable to it.",
-        "DisplayName": "Light"
-    },
-
-
-
-
-
-
-    "Ailment": {
-        "Abreviation": "Ailment",
-        "AppliesTo": [
-            "Effect"
-        ],
-        "Description": "@@#Color:Blue:Ailments@@ are common negative @@Color:Red:Effects@@ which damage or weaken the effected @@Color:Red:Actor@@",
-        "DisplayName": "Ailment"
-    },
-    "DOT": {
-        "Abreviation": "DOT",
-        "AppliesTo": [
-            "Effect"
-        ],
-        "Description": "@@#Color:Blue:Damage Over Time@@ means an @@Color:Red:Effect@@ applies damage each @@Color:Red:Turn@@ or @@Color:Red:Round@@ ",
-        "DisplayName": "DOT"
-    },
-    "Effect": {
-        "Abreviation": "Effect",
-        "AppliesTo": [
-            "Effect",
-            "Page"
-        ],
-        "Description": "@@#Color:Red:Effect@@ are temporary conditions applied to @@Color:Red:Actors@@ in @@Color:Red:Combat@@ and can either @@Color:Blue:Grant@@ benifits or @@Color:Blue:Inflict@@ negative statuses.",
-        "DisplayName": "Effect"
-    },
-
-
-
-
-    "Bandit": {
-        "Abreviation": "Bandit",
-        "AppliesTo": [
-            "Actor"
-        ],
-        "Description": "This @@#Color:Red:Actor@@ is a member of the @@#Color:Blue:Bandit@@ @@#Color:Red:Faction@@.",
-        "DisplayName": "Bandit"
-    },
-    "Construct": {
-        "Abreviation": "Construct",
-        "AppliesTo": [
-            "Actor"
-        ],
-        "Description": "@@#Color:Blue:Constructs@@ are artificial being created through @@#Tag:Magic@@ or good ol engener'n.  ",
-        "DisplayName": "Construct"
-    },
-    "Dummy": {
-        "Abreviation": "Dummy",
-        "AppliesTo": [
-            "Actor"
-        ],
-        "Description": "@@#Color:Blue:Dummies@@ are @@#Tag:Construct:Constructs@@ made to test @@#Tag:Attack:Attacks@@. Yes, they are aware and feel everything.",
-        "DisplayName": "Dummy"
-    },
-    "Fungi": {
-        "Abreviation": "Fungi",
-        "AppliesTo": [
-            "Actor"
-        ],
-        "Description": "@@#Color:Blue:Fungi@@ are neither plans nor animal, but some unholy union between the two.",
-        "DisplayName": "Fungi"
-    },
-    "Human": {
-        "Abreviation": "Human",
-        "AppliesTo": [
-            "Actor"
-        ],
-        "Description": "@@#Color:Blue:Humans@@ are a long exstinct species that once mastered technology and rose to the status of gods, only to be torn  down by their own hubris.",
-        "DisplayName": "Human"
-    },
-    "Lever": {
-        "Abreviation": "Lever",
-        "AppliesTo": [
-            "Actor"
-        ],
-        "Description": "@@#Color:Blue:Lever@@ are mechanical triggers used to control various structures. They are activated upon take any damage, but can only be triggered once per @@#Turn@@.",
-        "DisplayName": "Lever"
-    },
-    "Living": {
-        "Abreviation": "Phy",
-        "AppliesTo": [
-            "Actor"
-        ],
-        "Description": "@@#Color:Blue:Living@@ creatures are those that require food, oxygen, and love to survive. Most @@#Color:Blue:Living@@ @@#Color:Red:Actors@@ have high resistance to @@#Color:DmgColor:Light Damage@@ and can be @@#Color:Green:healed@@ by it.",
-        "DisplayName": "Physical"
-    },
-    "Caster": {
-        "Abreviation": "Caster",
-        "AppliesTo": [
-            "Actor"
-        ],
-        "Description": "@@#Color:Blue:Caster@@ are @@#Color:Red:Actors@@ who rely on the use of @@#Tag:Spell:Spells@@ in @@#Color:Red:Combat@@.",
-        "DisplayName": "Caster"
-    },
-    "Object": {
-        "Abreviation": "Object",
-        "AppliesTo": [
-            "Actor"
-        ],
-        "Description": "@@#Color:Blue:Object@@ are innanimate \"@@#Color:Red:Actors@@\" which can no preform @@#Tag:Action:Actions@@, but can still be targeted by @@#Tag:Attack:Attacks@@.",
-        "DisplayName": "Object"
-    },
-    "Player": {
-        "Abreviation": "Player",
-        "AppliesTo": [
-            "Actor"
-        ],
-        "Description": "@@#Color:Red:#DATA CORRUPTED@@",
-        "DisplayName": "Player"
-    },
-    "Slime": {
-        "Abreviation": "Slime",
-        "AppliesTo": [
-            "Actor"
-        ],
-        "Description": "@@#Color:Blue:Slimes@@ are @@#Tag:Magic@@ creatures with high @@#Tag:Resistance@@ to @@#Tag:Physical:Physical Damage@@.",
-        "DisplayName": "Slime"
-    },
-    "Squirrel": {
-        "Abreviation": "Squirrel",
-        "AppliesTo": [
-            "Actor"
-        ],
-        "Description": "This @@#Color:Red:Actor@@ is a member of the @@#Color:Blue:Squirrel@@ @@#Color:Red:Faction@@.",
-        "DisplayName": "Squirrel"
-    },
-    "Totem": {
-        "Abreviation": "Totem",
-        "AppliesTo": [
-            "Actor"
-        ],
-        "Description": "@@#Color:Blue:Totem@@ are @@#Tag:Construct:Constructs@@ summoned through @@#Tag:Magic@@. They will cast the same @@#Tag:Spell@@ each turn until destoryed.",
-        "DisplayName": "Totem"
-    },
-    "Undead": {
-        "Abreviation": "Phy",
-        "AppliesTo": [
-            "Actor"
-        ],
-        "Description": "@@#Color:Blue:Undead@@ are \"dead\" @@#Color:Red:Actors@@, reactived by the @@#Color:Blue:PAGE@@ System. They sustain thier forms with @@#Color:DmgColor:Dark@@ energy and are @@#Color:Green:healed@@ by further exposure. Inversely, @@#Color:DmgColor:Light@@ has proven highly disruptive to this process.",
-        "DisplayName": "Physical"
-    },
-
-
-
-
-
-
-    "Axe": {
-        "Abreviation": "Axe",
-        "AppliesTo": [
-            "Item"
-        ],
-        "Description": "@@#Color:Blue:Axes@@ are @@#Tag:MedumWeapon:Medium Weapons@@ which deal @@DmgColor:Slash:Slash Damage@@ but have @@#Color:Red:High Damage Variance@@ compaired to @@#Tag:Sword:Swords@@.",
-        "DisplayName": "Axe"
-    },
-    "Bow": {
-        "Abreviation": "Bow",
-        "AppliesTo": [
-            "Item"
-        ],
-        "Description": "@@#Color:Blue:Bows@@ are @@#Tag:Ranged@@ @@#Tag:Weapons@@ which are not available because they don't have animations.",
-        "DisplayName": "Bow"
-    },
-    "Club": {
-        "Abreviation": "Club",
-        "AppliesTo": [
-            "Item"
-        ],
-        "Description": "@@#Color:Blue:Clubs@@ are @@#Tag:LightWeapon:Light Weapons@@ which deal @@DmgColor:Blunt:Blunt Damage@@ with @@#Color:Red:High Damage Variance@@.",
-        "DisplayName": "Club"
-    },
-    "Dagger": {
-        "Abreviation": "Dagger",
-        "AppliesTo": [
-            "Item"
-        ],
-        "Description": "@@#Color:Blue:Daggers@@ are @@#Tag:LightWeapon:Light Weapons@@ which deal @@DmgColor:Slash:Slash Damage@@ with @@#Color:Red:Average Damage Variance@@.",
-        "DisplayName": "Dagger"
-    },
-    "Focus": {
-        "Abreviation": "Focus",
-        "AppliesTo": [
-            "Item"
-        ],
-        "Description": "@@#Color:Blue:Focuses@@ are @@#Tag:Magic@@ @@#Tool:Tools@@ that provide @@#Tag:StatMod:Stat Modifiers@@ to the user.",
-        "DisplayName": "Focus"
-    },
-    "GreatHammer": {
-        "Abreviation": "GreatHammer",
-        "AppliesTo": [
-            "Item"
-        ],
-        "Description": "@@#Color:Blue:GreatHammers@@ are @@#Tag:HeavyWeapon:Heavy Weapons@@ which deal @@DmgColor:Blunt:Blunt Damage@@ with @@#Color:Red:High Damage Variance@@.",
-        "DisplayName": "GreatHammer"
-    },
-    "GreatSword": {
-        "Abreviation": "GreatSword",
-        "AppliesTo": [
-            "Item"
-        ],
-        "Description": "@@#Color:Blue:GreatSwords@@ are @@#Tag:HeavyWeapon:Heavy Weapons@@ which deal @@DmgColor:Slash:Slash Damage@@ with @@#Color:Red:Average Damage Variance@@.",
-        "DisplayName": "GreatSword"
-    },
-    "Mace": {
-        "Abreviation": "Mace",
-        "AppliesTo": [
-            "Item"
-        ],
-        "Description": "@@#Color:Blue:Maces@@ are @@#Tag:MediumWeapon:Medium Weapons@@ which deal @@DmgColor:Blunt:Blunt Damage@@ with @@#Color:Red:High Damage Variance@@.",
-        "DisplayName": "Mace"
-    },
-    "Scepter": {
-        "Abreviation": "Scepter",
-        "AppliesTo": [
-            "Item"
-        ],
-        "Description": "@@#Color:Blue:Scepters@@ are @@#Tag:Ranged@@ @@#Tag:MediumWeapon:Medium Weapons@@ which deal damage of different types.",
-        "DisplayName": "Scepter"
-    },
-    "Shield": {
-        "Abreviation": "Shield",
-        "AppliesTo": [
-            "Item"
-        ],
-        "Description": "@@#Color:Blue:Shields@@ are @@#Tag:OffHand@@ @@#Tag:Tool:Tools@@ which give the user a chance to @@#Tag:Block@@ @@#Tag:Attacks@@ and reduce the damage taken.",
-        "DisplayName": "Shield"
-    },
-    "Shiv": {
-        "Abreviation": "Shiv",
-        "AppliesTo": [
-            "Item"
-        ],
-        "Description": "@@#Color:Blue:Shivs@@ are @@#Tag:LightWeapon:Light Weapons@@ which deal @@DmgColor:Pierce:Pierce Damage@@ with @@#Color:Red:Low Damage Variance@@.",
-        "DisplayName": "Shiv"
-    },
-    "Spear": {
-        "Abreviation": "Spear",
-        "AppliesTo": [
-            "Item"
-        ],
-        "Description": "@@#Color:Blue:Spears@@ are @@#Tag:MediumWeapon:Medium Weapons@@ which deal @@DmgColor:Pierce:Pierce Damage@@ with @@#Color:Red:Low Damage Variance@@ and an extended range.",
-        "DisplayName": "Spear"
-    },
-    "Staff": {
-        "Abreviation": "Staff",
-        "AppliesTo": [
-            "Item"
-        ],
-        "Description": "@@#Color:Blue:Staffs@@ are @@#Tag:Ranged@@ @@#Tag:HeavyWeapon:Heavy Weapons@@ which deal damage of different types.",
-        "DisplayName": "Staff"
-    },
-    "Sword": {
-        "Abreviation": "Sword",
-        "AppliesTo": [
-            "Item"
-        ],
-        "Description": "@@#Color:Blue:Swords@@ are @@#Tag:MediumWeapon:Medium Weapons@@ which deal @@DmgColor:Slash:Slash Damage@@ with @@#Color:Red:Average Damage Variance@@.",
-        "DisplayName": "Sword"
-    },
-    "Wand": {
-        "Abreviation": "Wand",
-        "AppliesTo": [
-            "Item"
-        ],
-        "Description": "@@#Color:Blue:Wands@@ are @@#Tag:Ranged@@ @@#Tag:LightWeapon:Light Weapons@@ which deal damage of different types.",
-        "DisplayName": "Wand"
-    },
-
-
-
-
-
-    "Supplies": {
-        "Abreviation": "Supplies",
-        "AppliesTo": [
-            "Item"
-        ],
-        "Description": "@@#Color:Blue:Supplies@@ are items to be used in @@#Color:Red:Combat@@. They must be stored in an @@#Color:Red:Actor's@@ @@#Tag:Bag@@ and are consumed upon use.",
-        "DisplayName": "Supplies"
-    },
-    "Potion": {
-        "Abreviation": "Potion",
-        "AppliesTo": [
-            "Effect",
-            "Item"
-        ],
-        "Description": "@@#Color:Blue:Potions@@ are @@#Tag:Drinkable@@ @@#Tag:Supplies@@ which apply @@#Tag:Effect:Effects@@ either by drinking or pouring on another @@Color:Red:Actor@@",
-        "DisplayName": "Potion"
-    },
-    "Regen": {
-        "Abreviation": "Regen",
-        "AppliesTo": [
-            "Effect"
-        ],
-        "Description": "@@#Color:Blue:Regen@@ implies an @@#Tag:Effect@@ will @@#Tag:Heal@@ the @@#Color:Red:Actor@@ when triggered.",
-        "DisplayName": "Regen"
-    },
-    "Rooted": {
-        "Abreviation": "Rooted",
-        "AppliesTo": [
-            "Actor"
-        ],
-        "Description": "When @@#Color:Blue:Rooted@@ an @@#Color:Red:Actor@@ can not move from it's current @@#Color:Red:Spot@@. They can not take @@#Tag:Movement:Move Actions@@ or be @@#Tag:Push:Pushed@@.",
-        "DisplayName": "Rooted"
-    },
-
-
-    "Ammo": {
-        "Abreviation": "Ammo",
-        "AppliesTo": [
-            "Item"
-        ],
-        "Description": "Some @@#Tag:Page:Pages@@ consume @@#Color:Blue:Ammo@@ each time the @@#Tag:Action@@ is executed. Once empty, they must be @@#Tag:Reload:Reloaded@@ to be used again.",
-        "DisplayName": "Ammo"
-    },
-    "Apparel": {
-        "Abreviation": "Apparel",
-        "AppliesTo": [
-            "Item"
-        ],
-        "Description": "@@#Color:Blue:Apparel@@ is @@#Tag:Equipment@@ that covers a specific part of an @@#Color:Red:Actor's@@ body. ",
-        "DisplayName": "Apparel"
-    },
-    "Bag": {
-        "Abreviation": "Bag",
-        "AppliesTo": [
-            "Item"
-        ],
-        "Description": "@@#Color:Blue:Bags@@ are are a type of @@#Tag:Equipment@@ used for holding @@#Tag:Supplies@@.",
-        "DisplayName": "Bag"
-    },
-    "PageBook": {
-        "Abreviation": "PageBook",
-        "AppliesTo": [
-            "Item"
-        ],
-        "Description": "@@#Color:Blue:PageBooks@@ are are a type of @@#Tag:Equipment@@ used for holding @@#Tag:Page:Pages@@. @@#Color:Red:Actors@@ must always have a @@#Color:Blue:PageBook@@.",
-        "DisplayName": "PageBook"
-    },
-    "Bomb": {
-        "Abreviation": "Bomb",
-        "AppliesTo": [
-            "Item"
-        ],
-        "Description": "@@#Color:Blue:Bombs@@ are @@#Tag:Throwable@@ @@#Tag:Supplies@@ which deal damage or apply @@#Tag:Effect:Effects@@ when thrown at an @@Color:Red:Spot@@",
-        "DisplayName": "Bomb"
-    },
-    "Equipment": {
-        "Abreviation": "Equipment",
-        "AppliesTo": [
-            "Item"
-        ],
-        "Description": "@@#Color:Blue:Equipment@@ are @@#Tag:Item:Items@@ worn or weilded by Actors and must be placed in a @@#Tag:EquipmentSlot@@ to use.",
-        "DisplayName": "Equipment"
-    },
-    "EquipmentSlot": {
-        "Abreviation": "Equipment Slot",
-        "AppliesTo": [
-        ],
-        "Description": "Every @@#Color:Red:Actor@@ has a set of @@#Color:Blue:Equipment Slots@@ based on thier body type. Each slot can hold one piece of @@#Color:Blue:Equipment@@ of the corrosponding type. .",
-        "DisplayName": "Equipment Slot"
-    },
-    "Body": {
-        "Abreviation": "Body",
-        "AppliesTo": [
-            "Item"
-        ],
-        "Description": "@@#Color:Blue:Body@@ implies this @@#Tag:Apparel@@ is worn in the @@#Color:Blue:Body@@ @@#Tag:EquipmentSlot@@.",
-        "DisplayName": "Body"
-    },
-    "Feet": {
-        "Abreviation": "Feet",
-        "AppliesTo": [
-            "Item"
-        ],
-        "Description": "@@#Color:Blue:Feet@@ implies this @@#Tag:Apparel@@ is worn in the @@#Color:Blue:Feet@@ @@#Tag:EquipmentSlot@@.",
-        "DisplayName": "Feet"
-    },
-
-
-    "Head": {
-        "Abreviation": "Head",
-        "AppliesTo": [
-            "Item"
-        ],
-        "Description": "@@#Color:Blue:Head@@ implies this @@#Tag:Apparel@@ is worn in the @@#Color:Blue:Head@@ @@#Tag:EquipmentSlot@@.",
-        "DisplayName": "Head"
-    },
-    "Money": {
-        "Abreviation": "Money",
-        "AppliesTo": [
-            "Item"
-        ],
-        "Description": "@@#Color:Blue:Money@@ is the root of all evil.",
-        "DisplayName": "Money"
-    },
-    "OffHand": {
-        "Abreviation": "OffHand",
-        "AppliesTo": [
-            "Item"
-        ],
-        "Description": "@@#Color:Blue:OffHand@@ implies this @@#Tag:Tool@@ is held in the @@#Color:Blue:Off Hand@@ @@#Tag:EquipmentSlot@@.",
-        "DisplayName": "OffHand"
-    },
-    "Throwable": {
-        "Abreviation": "Throwable",
-        "AppliesTo": [
-            "Item"
-        ],
-        "Description": "@@#Color:Blue:Throwable@@ implies this @@#Tag:Supplies:Supply Item@@ can be used by @@#Tag:Throw:Throw Actions@@",
-        "DisplayName": "Throwable"
-    },
-    "Drinkable": {
-        "Abreviation": "Drinkable",
-        "AppliesTo": [
-            "Item"
-        ],
-        "Description": "@@#Color:Blue:Drinkable@@ implies this @@#Tag:Supplies:Supply Item@@ can be used by @@#Tag:Drink:Drink/Pour Actions@@",
-        "DisplayName": "Drinkable"
-    },
-    "TwoHand": {
-        "Abreviation": "TwoHand",
-        "AppliesTo": [
-            "Actor"
-        ],
-        "Description": "@@#Color:Blue:TwoHand@@ implies an @@#Color:Red:Actor@@ is wielding one @@#Tag:Weapon@@ with two or more hands.",
-        "DisplayName": "TwoHand"
-    },
-    "Weapon": {
-        "Abreviation": "Weapon",
-        "AppliesTo": [
-            "Item",
-            "Page"
-        ],
-        "Description": "@@#Color:Blue:Weapon@@ are a type of @@#Tag:Tool:Tool Equiptment@@ used for peacefully resolving disputes.",
-        "DisplayName": "Weapon"
-    },
-    "AOE": {
-        "Abreviation": "AOE",
-        "AppliesTo": [
-            "Page",
-            "Item"
-        ],
-        "Description": "@@#Color:Blue:AOE@@ implies damage will be applies to multiple @@#Color:Red:Actors@@ within the effected areea.",
-        "DisplayName": "AOE"
-    },
-    "Action": {
-        "Abreviation": "Action",
-        "AppliesTo": [
-            "Page"
-        ],
-        "Description": "@@#Color:Blue:Actions@@ are a type of @@#Tag:Page@@ used to preform actions in @@#Color:Red:Combat@@.",
-        "DisplayName": "Action"
-    },
-    "ActionMod": {
-        "Abreviation": "ActionMod",
-        "AppliesTo": [
-            "Page"
-        ],
-        "Description": "@@#Color:Blue:ActionMod@@ implies this @@#Tag:Page@@ modifies other @@#Tag:Action:Action Pages@@ when equipt.",
-        "DisplayName": "ActionMod"
-    },
-    "AggroMod": {
-        "Abreviation": "AggroMod",
-        "AppliesTo": [
-            "Page"
-        ],
-        "Description": "@@#Color:Blue:AggroMods@@ modify other how much @@#Tag:Aggro@@ an @@#Color:Red:Actor@@ will generate.",
-        "DisplayName": "AggroMod"
-    },
-    "AmmoMod": {
-        "Abreviation": "AmmoMod",
-        "AppliesTo": [
-            "Page"
-        ],
-        "Description": "@@#Color:Blue:AmmoMods@@ modify other the @@#Tag:Ammo@@ consuption of @@#Tag:Action:Action Pages@@.",
-        "DisplayName": "AmmoMod"
-    },
-    "DmgMod": {
-        "Abreviation": "DmgMod",
-        "AppliesTo": [
-            "Page"
-        ],
-        "Description": "@@#Color:Blue:DmgMods@@ modify damage taken or received by an @@#Color:Red:Actor@@.",
-        "DisplayName": "DmgMod"
-    },
-    "HandMod": {
-        "Abreviation": "HandMod",
-        "AppliesTo": [
-            "Page"
-        ],
-        "Description": "@@#Color:Blue:HandMods@@ modify the conditions limiting what @@#Tag:Tool:Tools@@ an @@#Color:Red:Actor@@ can have equipt in each hand.",
-        "DisplayName": "HandMod"
-    },
-    "StatMod": {
-        "Abreviation": "StatMod",
-        "AppliesTo": [
-            "Page"
-        ],
-        "Description": "@@#Color:Blue:StatMod@@ modify the @@#Color:Red:Stats@@ of an @@#Color:Red:Actor@@.",
-        "DisplayName": "StatMod"
-    },
-    "WpnMod": {
-        "Abreviation": "WpnMod",
-        "AppliesTo": [
-            "Page"
-        ],
-        "Description": "@@#Color:Blue:WpnMod@@ modify the properties of a @@#Color:Red:Weapon@@.",
-        "DisplayName": "WpnMod"
-    },
-    "Grant": {
-        "Abreviation": "Grant",
-        "AppliesTo": [
-            "Page"
-        ],
-        "Description": "@@#Color:Blue:Grant@@ implies this @@#Tag:Action:Action Pages@@ will apply an @@#Tag:Effect@@ to the user or other @@#Color:Red:Actors@@",
-        "DisplayName": "Grant"
-    },
-    "Attack": {
-        "Abreviation": "Attack",
-        "AppliesTo": [
-            "Page"
-        ],
-        "Description": "@@#Color:Blue:Attacks@@ are @@#Tag:Action:Actions@@ which attempt to apply damage to one or more other @@#Color:Red:Actors@@.",
-        "DisplayName": "Attack"
-    },
-    "Aura": {
-        "Abreviation": "Aura",
-        "AppliesTo": [
-            "Page"
-        ],
-        "Description": "@@#Color:Blue:Aura@@ is a type of @@#Tag:Zone@@ which is centered on an @@#Color:Red:Actor@@ and mcves with them as they move.",
-        "DisplayName": "Aura"
-    },
-    "Beam": {
-        "Abreviation": "Beam",
-        "AppliesTo": [
-            "Page"
-        ],
-        "Description": "@@#Color:Blue:Beam@@ are @@#Tag:AOE@@ @@#Tag:Attack:Attacks@@ which target all @@#Color:Red:Actors@@ in a line in front of the user.",
-        "DisplayName": "Beam"
-    },
-    "Blessing": {
-        "Abreviation": "Blessing",
-        "AppliesTo": [
-            "Page"
-        ],
-        "Description": "@@#Color:Blue:Blessing@@ are a type of @@#Tag:BondedEffect:Bonded Effect@@ with limits on how many an @@#Color:Red:Actor@@ can have applied at one.",
-        "DisplayName": "Blessing"
-    },
-    "BondedEffect": {
-        "Abreviation": "BondedEffect",
-        "AppliesTo": [
-            "Page"
-        ],
-        "Description": "@@#Color:Blue:BondedEffect@@ are @@#Tag:Effect:Effects@@ with limits on how many can be applied at once. When a new @@#Tag:Effect@@ exceeds the limit, the oldest @@#Color:Blue:BondedEffect@@ will be @@#Tag:Remove:Removed@@.",
-        "DisplayName": "Block"
-    },
-    "Block": {
-        "Abreviation": "Block",
-        "AppliesTo": [
-            "Page"
-        ],
-        "Description": "@@#Color:Blue:Block@@ is a @@#Tag:Reaction:Defensive Reaction@@ which requires a @@#Tag:Shield@@. When an @@#Tag:Attack@@ is @@#Color:Blue:Blocked@@ it's damage is reduced by the @@#Tag:Shield:Sheild's@@ @@#Stat:BlkMod@@.",
-        "DisplayName": "Block"
-    },
-    "Buff": {
-        "Abreviation": "Buff",
-        "AppliesTo": [
-            "Page"
-        ],
-        "Description": "@@#Color:Blue:Buff@@ are positive @@#Tag:Effect:Effects@@ which are benifitial to the @@#Color:Red:Actor@@.",
-        "DisplayName": "Buff"
-    },
-    "Chain": {
-        "Abreviation": "Chain",
-        "AppliesTo": [
-            "Page"
-        ],
-        "Description": "@@#Color:Blue:Chain@@ are @@#Tag:Attack:Attacks@@ which damage a single @@#Color:Red:Actor@@ then repeat on a random adjacent @@#Color:Red:Actor@@ a limited number of times. ",
-        "DisplayName": "Chain"
-    },
-    "Fork": {
-        "Abreviation": "Fork",
-        "AppliesTo": [
-            "Page"
-        ],
-        "Description": "@@#Color:Blue:Fork@@ is an alternative to @@#Tag:Chain@@ in which two random adjacent @@#Color:Red:Actor@@ are selected instead of one.",
-        "DisplayName": "Fork"
-    },
-    "Heal": {
-        "Abreviation": "Heal",
-        "AppliesTo": [
-            "Page"
-        ],
-        "Description": "@@#Color:Blue:Heal@@ restores @@#Stat:Health@@ to an @@#Color:Red:Actor@@",
-        "DisplayName": "Heal"
-    },
-    "Taunt": {
-        "Abreviation": "Taunt",
-        "AppliesTo": [
-            "Page"
-        ],
-        "Description": "@@#Color:Blue:Taunt@@ are @@#Tag:Action:Actions@@ which generate high @@#Tag:Aggro@@ causing enemies to focus on the @@#Color:Red:Actor@@.",
-        "DisplayName": "Taunt"
-    },
-    "Inflict": {
-        "Abreviation": "Inflict",
-        "AppliesTo": [
-            "Page"
-        ],
-        "Description": "@@#Color:Blue:Inflict Actions@@ make an attempt to apply harmful @@#Tag:Effect:Effects@@ to an enemy @@#Color:Red:Actor@@.",
-        "DisplayName": "Inflict"
-    },
-    "LOS": {
-        "Abreviation": "LOS",
-        "AppliesTo": [
-            "Page"
-        ],
-        "Description": "@@#Color:Blue:LOS@@ implies this @@#Tag:Action@@ requires @@#Color:Blue:Line of Sight@@ and can not target @@#Color:Red:Actors@@ behind obsticals.",
-        "DisplayName": "LOS"
-    },
-    "MagePage": {
-        "Abreviation": "MagePage",
-        "AppliesTo": [
-            "Page"
-        ],
-        "Description": "@@#Color:Blue:MagePage@@ are @@#Tag:Page:Pages@@ unique to the @@#Color:Red:Mage Title@@.",
-        "DisplayName": "MagePage"
-    },
-    "Movement": {
-        "Abreviation": "Movement",
-        "AppliesTo": [
-            "Page"
-        ],
-        "Description": "@@#Color:Blue:Movement@@ are @@#Tag:Action:Actions@@ which change an @@#Color:Red:Actor's@@ position on the @@#Color:Red:Map@@.",
-        "DisplayName": "Movement"
-    },
-    "Page": {
-        "Abreviation": "Page",
-        "AppliesTo": [
-            "Page"
-        ],
-        "Description": "@@#Color:Blue:Page@@ are @@#Tag:Item:Items@@ which either provide @@#Tag:Passive@@ benifits or allow @@#Tag:Action:Actions@@ in @@#Color:Red:Combat@@.",
-        "DisplayName": "Page"
-    },
-    "Passive": {
-        "Abreviation": "Passive",
-        "AppliesTo": [
-            "Page"
-        ],
-        "Description": "@@#Color:Blue:Passives@@ are a type of @@#Tag:Page@@ which passively modify the @@#Color:Red:Actor's@@ @@#Tag:Stats@@ and @@#Tag:Action:Actions@@.",
-        "DisplayName": "Passive"
-    },
-    "PriestPage": {
-        "Abreviation": "PriestPage",
-        "AppliesTo": [
-            "Page"
-        ],
-        "Description": "@@#Color:Blue:PriestPage@@ are @@#Tag:Page:Pages@@ unique to the @@#Color:Red:Priest Title@@.",
-        "DisplayName": "PriestPage"
-    },
-    "RandomTarget": {
-        "Abreviation": "RandomTarget",
-        "AppliesTo": [
-            "Page"
-        ],
-        "Description": "@@#Color:Blue:RandomTarget@@ implies targets for this @@#Tag:Action@@ will be randomly selected.",
-        "DisplayName": "RandomTarget"
-    },
-    "Remove": {
-        "Abreviation": "Remove",
-        "AppliesTo": [
-            "Page"
-        ],
-        "Description": "@@#Color:Blue:Remove@@ is the act of forceably ending an @@#Tag:Effect@@ from an @@#Color:Red:Actor@@.",
-        "DisplayName": "Remove"
-    },
-    "Revive": {
-        "Abreviation": "Revive",
-        "AppliesTo": [
-            "Page"
-        ],
-        "Description": "@@#Color:Blue:Revive@@ is the act of returming a dead @@#Color:Red:Actor@@ back to @@Color:Red:Combat@@.",
-        "DisplayName": "Revive"
-    },
-    "RoguePage": {
-        "Abreviation": "RoguePage",
-        "AppliesTo": [
-            "Page"
-        ],
-        "Description": "@@#Color:Blue:RoguePage@@ are @@#Tag:Page:Pages@@ unique to the @@#Color:Red:Rogue Title@@.",
-        "DisplayName": "RoguePage"
-    },
-    "Self": {
-        "Abreviation": "Self",
-        "AppliesTo": [
-            "Page"
-        ],
-        "Description": "@@#Color:Blue:Self@@ implies this @@#Tag:Page@@ will target the user.",
-        "DisplayName": "Self"
-    },
-    "Shared": {
-        "Abreviation": "Shared",
-        "AppliesTo": [
-            "Page"
-        ],
-        "Description": "@@#Color:Blue:Shared@@ are @@#Tag:Page:Pages@@ unlocked by one @@#Color:Red:Title@@ but used by other member of the @@#Color:Red:Party@@.",
-        "DisplayName": "Shared"
-    },
-    "SlimeAtk": {
-        "Abreviation": "SlimeAtk",
-        "AppliesTo": [
-            "Page"
-        ],
-        "Description": "@@#Color:Blue:SlimeAtk@@ are @@#Tag:Page:Pages@@ unique to the @@#Color:Red:Sime Faction@@.",
-        "DisplayName": "SlimeAtk"
-    },
-    "SoldierPage": {
-        "Abreviation": "SoldierPage",
-        "AppliesTo": [
-            "Page"
-        ],
-        "Description": "@@#Color:Blue:SoldierPage@@  are @@#Tag:Page:Pages@@ unique to the @@#Color:Red:Soldier Title@@.",
-        "DisplayName": "SoldierPage"
-    },
-    "Spawn": {
-        "Abreviation": "Spawn",
-        "AppliesTo": [
-            "Page"
-        ],
-        "Description": "@@#Color:Blue:Spawn@@ is the act of bringing a new @@#Color:Red:Actor@@ into @@#Color:Red:Combat@@.",
-        "DisplayName": "Spawn"
-    },
-    "Teleport": {
-        "Abreviation": "Teleport",
-        "AppliesTo": [
-            "Page"
-        ],
-        "Description": "@@#Color:Blue:Teleport@@ is a type of @@#Tag:Movement:Movement Action@@ which does not require a clear path between @@#Color:Red:Spots@@.",
-        "DisplayName": "Teleport"
-    },
-    "Throw": {
-        "Abreviation": "Throw",
-        "AppliesTo": [
-            "Page"
-        ],
-        "Description": "@@#Color:Blue:Throw Actions@@ require the user to consume a @@#Tag:Throwable@@ @@#Tag:Supplies:Supply Item@@ from their bag and launch it like a @@#Tag:Missile@@ at a selected @@#Color:Red:Spot@@.",
-        "DisplayName": "Throw"
-    },
-    "Title": {
-        "Abreviation": "Title",
-        "AppliesTo": [
-            "Page"
-        ],
-        "Description": "@@#Color:Blue:Title@@ are @@#Tag:Page:Pages@@ that define an @@#Color:Red:Actor's@@ base stat scaleing and give access to @@#Color:Blue:Title@@ specific @@#Tag:Page:Pages.",
-        "DisplayName": "Title"
-    },
-    "Trap": {
-        "Abreviation": "Trap",
-        "AppliesTo": [
-            "Page"
-        ],
-        "Description": "@@#Color:Blue:Trap@@ is a type of @@#Tag:Zone@@ which does not fully activate until the @@#Color:Red:End of Round@@. After that, they trigger on the first @@#Color:Red:Actor@@ to enter and then disapear.",
-        "DisplayName": "Trap"
-    },
-    "Water": {
-        "Abreviation": "Water",
-        "AppliesTo": [
-            "Page"
-        ],
-        "Description": "@@#Color:Blue:Water@@ are @@#Tag:Page:Pages@@ that use the @@#DmgColor:Cold:Water@@ element.",
-        "DisplayName": "Water"
-    },
-    "WpnAtk": {
-        "Abreviation": "WpnAtk",
-        "AppliesTo": [
-            "Page"
-        ],
-        "Description": "@@#Color:Blue:Weapon Attacks@@ are @@#Tag:Attack:Attacks@@ that use the @@#Color:Red:Actor's@@ @@#Tag:Weapon@@ for determening damage and or @@#Color:Red:Attack Area@@.",
-        "DisplayName": "WpnAtk"
-    },
-    "Zone": {
-        "Abreviation": "Zone",
-        "AppliesTo": [
-            "Page"
-        ],
-        "Description": "@@#Color:Blue:Zone@@ is an @@#Tag:Effect@@ applied over an area of the @@#Color:Red:Map@@ in @@#Color:Red:Combat@@. ",
-        "DisplayName": "Zone"
-    },
-    "_Dev_Action": {
-        "Abreviation": "_Dev_Action",
-        "AppliesTo": [
-            "Page"
-        ],
-        "Description": "@@#Color:Blue:_Dev_Action@@ are actions used in development. (You shouldn't see this)",
-        "DisplayName": "_Dev_Action"
-    }
+	"AOE": {
+		"Abreviation": "AOE",
+		"AppliesTo": [
+			"Page",
+			"Item"
+		],
+		"Description": "@@#Color:Blue:AOE@@ implies damage will be applies to multiple @@#Color:Red:Actors@@ within the effected areea.",
+		"DisplayName": "AOE"
+	},
+	"Action": {
+		"Abreviation": "Action",
+		"AppliesTo": [
+			"Page"
+		],
+		"Description": "@@#Color:Blue:Actions@@ are a type of @@#Tag:Page@@ used to preform actions in @@#Color:Red:Combat@@.",
+		"DisplayName": "Action"
+	},
+	"ActionMod": {
+		"Abreviation": "ActionMod",
+		"AppliesTo": [
+			"Page"
+		],
+		"Description": "@@#Color:Blue:ActionMod@@ implies this @@#Tag:Page@@ modifies other @@#Tag:Action:Action Pages@@ when equipt.",
+		"DisplayName": "ActionMod"
+	},
+	"AggroMod": {
+		"Abreviation": "AggroMod",
+		"AppliesTo": [
+			"Page"
+		],
+		"Description": "@@#Color:Blue:AggroMods@@ modify other how much @@#Tag:Aggro@@ an @@#Color:Red:Actor@@ will generate.",
+		"DisplayName": "AggroMod"
+	},
+	"Ailment": {
+		"Abreviation": "Ailment",
+		"AppliesTo": [
+			"Effect"
+		],
+		"Description": "@@#Color:Blue:Ailments@@ are common negative @@Color:Red:Effects@@ which damage or weaken the effected @@Color:Red:Actor@@",
+		"DisplayName": "Ailment"
+	},
+	"Ammo": {
+		"Abreviation": "Ammo",
+		"AppliesTo": [
+			"Item"
+		],
+		"Description": "Some @@#Tag:Page:Pages@@ consume @@#Color:Blue:Ammo@@ each time the @@#Tag:Action@@ is executed. Once empty, they must be @@#Tag:Reload:Reloaded@@ to be used again.",
+		"DisplayName": "Ammo"
+	},
+	"AmmoMod": {
+		"Abreviation": "AmmoMod",
+		"AppliesTo": [
+			"Page"
+		],
+		"Description": "@@#Color:Blue:AmmoMods@@ modify other the @@#Tag:Ammo@@ consuption of @@#Tag:Action:Action Pages@@.",
+		"DisplayName": "AmmoMod"
+	},
+	"Apparel": {
+		"Abreviation": "Apparel",
+		"AppliesTo": [
+			"Item"
+		],
+		"Description": "@@#Color:Blue:Apparel@@ is @@#Tag:Equipment@@ that covers a specific part of an @@#Color:Red:Actor's@@ body. ",
+		"DisplayName": "Apparel"
+	},
+	"Armor": {
+		"Abreviation": "ARM",
+		"AppliesTo": [
+			"Stat"
+		],
+		"Description": "@@#Stat:Armor@@ | @@#Color:Blue:Armor@@ provides protection against @@#Color:Blue:Physical Damage@@. Each point of @@#Color:Blue:Armor@@ is equal to a 1% reduction in damage.",
+		"DisplayName": "Armor"
+	},
+	"Attack": {
+		"Abreviation": "Attack",
+		"AppliesTo": [
+			"Page"
+		],
+		"Description": "@@#Color:Blue:Attacks@@ are @@#Tag:Action:Actions@@ which attempt to apply damage to one or more other @@#Color:Red:Actors@@.",
+		"DisplayName": "Attack"
+	},
+	"Aura": {
+		"Abreviation": "Aura",
+		"AppliesTo": [
+			"Page"
+		],
+		"Description": "@@#Color:Blue:Aura@@ is a type of @@#Tag:Zone@@ which is centered on an @@#Color:Red:Actor@@ and mcves with them as they move.",
+		"DisplayName": "Aura"
+	},
+	"Axe": {
+		"Abreviation": "Axe",
+		"AppliesTo": [
+			"Item"
+		],
+		"Description": "@@#Color:Blue:Axes@@ are @@#Tag:MedumWeapon:Medium Weapons@@ which deal @@DmgColor:Slash:Slash Damage@@ but have @@#Color:Red:High Damage Variance@@ compaired to @@#Tag:Sword:Swords@@.",
+		"DisplayName": "Axe"
+	},
+	"Bag": {
+		"Abreviation": "Bag",
+		"AppliesTo": [
+			"Item"
+		],
+		"Description": "@@#Color:Blue:Bags@@ are are a type of @@#Tag:Equipment@@ used for holding @@#Tag:Supplies@@.",
+		"DisplayName": "Bag"
+	},
+	"Bandit": {
+		"Abreviation": "Bandit",
+		"AppliesTo": [
+			"Actor"
+		],
+		"Description": "This @@#Color:Red:Actor@@ is a member of the @@#Color:Blue:Bandit@@ @@#Color:Red:Faction@@.",
+		"DisplayName": "Bandit"
+	},
+	"Beam": {
+		"Abreviation": "Beam",
+		"AppliesTo": [
+			"Page"
+		],
+		"Description": "@@#Color:Blue:Beam@@ are @@#Tag:AOE@@ @@#Tag:Attack:Attacks@@ which target all @@#Color:Red:Actors@@ in a line in front of the user.",
+		"DisplayName": "Beam"
+	},
+	"Blessing": {
+		"Abreviation": "Blessing",
+		"AppliesTo": [
+			"Page"
+		],
+		"Description": "@@#Color:Blue:Blessing@@ are a type of @@#Tag:BondedEffect:Bonded Effect@@ with limits on how many an @@#Color:Red:Actor@@ can have applied at one.",
+		"DisplayName": "Blessing"
+	},
+	"Block": {
+		"Abreviation": "Block",
+		"AppliesTo": [
+			"Page"
+		],
+		"Description": "@@#Color:Blue:Block@@ is a @@#Tag:Reaction:Defensive Reaction@@ which requires a @@#Tag:Shield@@. When an @@#Tag:Attack@@ is @@#Color:Blue:Blocked@@ it's damage is reduced by the @@#Tag:Shield:Sheild's@@ @@#Stat:BlkMod@@.",
+		"DisplayName": "Block"
+	},
+	"Blunt": {
+		"Abreviation": "Blunt",
+		"AppliesTo": [
+			"Page",
+			"Damage"
+		],
+		"Description": "@@#Color:DmgColor:Blunt:Blunt@@ is a @@#Color:Blue:Physical Damage Type@@ cause by heavy impacts and tends to have @@#Color:Red:High Damage Variance@@.",
+		"DisplayName": "Blunt"
+	},
+	"Body": {
+		"Abreviation": "Body",
+		"AppliesTo": [
+			"Item"
+		],
+		"Description": "@@#Color:Blue:Body@@ implies this @@#Tag:Apparel@@ is worn in the @@#Color:Blue:Body@@ @@#Tag:EquipmentSlot@@.",
+		"DisplayName": "Body"
+	},
+	"Bomb": {
+		"Abreviation": "Bomb",
+		"AppliesTo": [
+			"Item"
+		],
+		"Description": "@@#Color:Blue:Bombs@@ are @@#Tag:Throwable@@ @@#Tag:Supplies@@ which deal damage or apply @@#Tag:Effect:Effects@@ when thrown at an @@Color:Red:Spot@@",
+		"DisplayName": "Bomb"
+	},
+	"BondedEffect": {
+		"Abreviation": "BondedEffect",
+		"AppliesTo": [
+			"Page"
+		],
+		"Description": "@@#Color:Blue:BondedEffect@@ are @@#Tag:Effect:Effects@@ with limits on how many can be applied at once. When a new @@#Tag:Effect@@ exceeds the limit, the oldest @@#Color:Blue:BondedEffect@@ will be @@#Tag:Remove:Removed@@.",
+		"DisplayName": "Block"
+	},
+	"Bow": {
+		"Abreviation": "Bow",
+		"AppliesTo": [
+			"Item"
+		],
+		"Description": "@@#Color:Blue:Bows@@ are @@#Tag:Ranged@@ @@#Tag:Weapons@@ which are not available because they don't have animations.",
+		"DisplayName": "Bow"
+	},
+	"Buff": {
+		"Abreviation": "Buff",
+		"AppliesTo": [
+			"Page"
+		],
+		"Description": "@@#Color:Blue:Buff@@ are positive @@#Tag:Effect:Effects@@ which are benifitial to the @@#Color:Red:Actor@@.",
+		"DisplayName": "Buff"
+	},
+	"Caster": {
+		"Abreviation": "Caster",
+		"AppliesTo": [
+			"Actor"
+		],
+		"Description": "@@#Color:Blue:Caster@@ are @@#Color:Red:Actors@@ who rely on the use of @@#Tag:Spell:Spells@@ in @@#Color:Red:Combat@@.",
+		"DisplayName": "Caster"
+	},
+	"Chain": {
+		"Abreviation": "Chain",
+		"AppliesTo": [
+			"Page"
+		],
+		"Description": "@@#Color:Blue:Chain@@ are @@#Tag:Attack:Attacks@@ which damage a single @@#Color:Red:Actor@@ then repeat on a random adjacent @@#Color:Red:Actor@@ a limited number of times. ",
+		"DisplayName": "Chain"
+	},
+	"Club": {
+		"Abreviation": "Club",
+		"AppliesTo": [
+			"Item"
+		],
+		"Description": "@@#Color:Blue:Clubs@@ are @@#Tag:LightWeapon:Light Weapons@@ which deal @@DmgColor:Blunt:Blunt Damage@@ with @@#Color:Red:High Damage Variance@@.",
+		"DisplayName": "Club"
+	},
+	"Cold": {
+		"Abreviation": "Cold",
+		"AppliesTo": [
+			"Page"
+		],
+		"Description": "@@#Color:DmgColor:Cold:Cold@@ is a @@#Color:Blue:Magical Damage Type@@ cause by @@#Color:DmgColor:Cold:Water@@ @@#Color:Blue:Spells@@ and tends to have @@#Color:Red:Low Damage Variance@@ and chance to inflict @@#EftDef:AilmentChilled@@.",
+		"DisplayName": "Cold"
+	},
+	"Construct": {
+		"Abreviation": "Construct",
+		"AppliesTo": [
+			"Actor"
+		],
+		"Description": "@@#Color:Blue:Constructs@@ are artificial being created through @@#Tag:Magic@@ or good ol engener'n.  ",
+		"DisplayName": "Construct"
+	},
+	"Crash": {
+		"Abreviation": "Crash",
+		"AppliesTo": [
+			"Page",
+			"Damage"
+		],
+		"Description": "@@#Color:DmgColor:Crash:Crash@@ is a @@#Color:Blue:Physical Damage Type@@ most often caused by @@#Color:Blue:Collisions@@ between @@#Color:Red:Actors@@.",
+		"DisplayName": "Crash"
+	},
+	"DOT": {
+		"Abreviation": "DOT",
+		"AppliesTo": [
+			"Effect"
+		],
+		"Description": "@@#Color:Blue:Damage Over Time@@ means an @@Color:Red:Effect@@ applies damage each @@Color:Red:Turn@@ or @@Color:Red:Round@@ ",
+		"DisplayName": "DOT"
+	},
+	"Dagger": {
+		"Abreviation": "Dagger",
+		"AppliesTo": [
+			"Item"
+		],
+		"Description": "@@#Color:Blue:Daggers@@ are @@#Tag:LightWeapon:Light Weapons@@ which deal @@DmgColor:Slash:Slash Damage@@ with @@#Color:Red:Average Damage Variance@@.",
+		"DisplayName": "Dagger"
+	},
+	"Dark": {
+		"Abreviation": "Dark",
+		"AppliesTo": [
+			"Page"
+		],
+		"Description": "@@#Color:DmgColor:Dark:Dark@@  is an @@Color:Blue:Abnormal Damage Type@@ caused by @@#Color:DmgColor:Dark:Unholy@@ @@#Color:Blue:Spells@@. Most @@#Tag:Undead@@ will @@#Tag:Absorb@@ @@#Color:DmgColor:Dark:Dark Damage@@ while @@#Tag:Living Actors@@ are exspecially vulnerable to it.",
+		"DisplayName": "Dark"
+	},
+	"DmgMod": {
+		"Abreviation": "DmgMod",
+		"AppliesTo": [
+			"Page"
+		],
+		"Description": "@@#Color:Blue:DmgMods@@ modify damage taken or received by an @@#Color:Red:Actor@@.",
+		"DisplayName": "DmgMod"
+	},
+	"Drinkable": {
+		"Abreviation": "Drinkable",
+		"AppliesTo": [
+			"Item"
+		],
+		"Description": "@@#Color:Blue:Drinkable@@ implies this @@#Tag:Supplies:Supply Item@@ can be used by @@#Tag:Drink:Drink/Pour Actions@@",
+		"DisplayName": "Drinkable"
+	},
+	"Dummy": {
+		"Abreviation": "Dummy",
+		"AppliesTo": [
+			"Actor"
+		],
+		"Description": "@@#Color:Blue:Dummies@@ are @@#Tag:Construct:Constructs@@ made to test @@#Tag:Attack:Attacks@@. Yes, they are aware and feel everything.",
+		"DisplayName": "Dummy"
+	},
+	"Effect": {
+		"Abreviation": "Effect",
+		"AppliesTo": [
+			"Effect",
+			"Page"
+		],
+		"Description": "@@#Color:Red:Effect@@ are temporary conditions applied to @@Color:Red:Actors@@ in @@Color:Red:Combat@@ and can either @@Color:Blue:Grant@@ benifits or @@Color:Blue:Inflict@@ negative statuses.",
+		"DisplayName": "Effect"
+	},
+	"Equipment": {
+		"Abreviation": "Equipment",
+		"AppliesTo": [
+			"Item"
+		],
+		"Description": "@@#Color:Blue:Equipment@@ are @@#Tag:Item:Items@@ worn or weilded by Actors and must be placed in a @@#Tag:EquipmentSlot@@ to use.",
+		"DisplayName": "Equipment"
+	},
+	"EquipmentSlot": {
+		"Abreviation": "Equipment Slot",
+		"AppliesTo": [],
+		"Description": "Every @@#Color:Red:Actor@@ has a set of @@#Color:Blue:Equipment Slots@@ based on thier body type. Each slot can hold one piece of @@#Color:Blue:Equipment@@ of the corrosponding type. .",
+		"DisplayName": "Equipment Slot"
+	},
+	"Fast": {
+		"Abreviation": "Fast",
+		"AppliesTo": [
+			"Action"
+		],
+		"Description": "@@#Color:Blue:Fast@@ @@#Color:Red:Actions@@ are preformed early in the @@#Color:Red:Turn@@, usually before other @@#Color:Red:Actors@@ move, regardless of @@#Stat:Speed@@.",
+		"DisplayName": "Fast"
+	},
+	"Feet": {
+		"Abreviation": "Feet",
+		"AppliesTo": [
+			"Item"
+		],
+		"Description": "@@#Color:Blue:Feet@@ implies this @@#Tag:Apparel@@ is worn in the @@#Color:Blue:Feet@@ @@#Tag:EquipmentSlot@@.",
+		"DisplayName": "Feet"
+	},
+	"Fire": {
+		"Abreviation": "Fire",
+		"AppliesTo": [
+			"Page"
+		],
+		"Description": "@@#Color:DmgColor:Fire:Fire@@ is a @@#Color:Blue:Magical Damage Type@@ cause by @@#Color:DmgColor:Fire:Fire@@ @@#Color:Blue:Spells@@ and tends to have @@#Color:Red:Average Damage Variance@@ and chance to inflict @@#EftDef:AilmentBurned@@.",
+		"DisplayName": "Fire"
+	},
+	"Focus": {
+		"Abreviation": "Focus",
+		"AppliesTo": [
+			"Item"
+		],
+		"Description": "@@#Color:Blue:Focuses@@ are @@#Tag:Magic@@ @@#Tool:Tools@@ that provide @@#Tag:StatMod:Stat Modifiers@@ to the user.",
+		"DisplayName": "Focus"
+	},
+	"Fork": {
+		"Abreviation": "Fork",
+		"AppliesTo": [
+			"Page"
+		],
+		"Description": "@@#Color:Blue:Fork@@ is an alternative to @@#Tag:Chain@@ in which two random adjacent @@#Color:Red:Actor@@ are selected instead of one.",
+		"DisplayName": "Fork"
+	},
+	"Fungi": {
+		"Abreviation": "Fungi",
+		"AppliesTo": [
+			"Actor"
+		],
+		"Description": "@@#Color:Blue:Fungi@@ are neither plans nor animal, but some unholy union between the two.",
+		"DisplayName": "Fungi"
+	},
+	"Grant": {
+		"Abreviation": "Grant",
+		"AppliesTo": [
+			"Page"
+		],
+		"Description": "@@#Color:Blue:Grant@@ implies this @@#Tag:Action:Action Pages@@ will apply an @@#Tag:Effect@@ to the user or other @@#Color:Red:Actors@@",
+		"DisplayName": "Grant"
+	},
+	"GreatHammer": {
+		"Abreviation": "GreatHammer",
+		"AppliesTo": [
+			"Item"
+		],
+		"Description": "@@#Color:Blue:GreatHammers@@ are @@#Tag:HeavyWeapon:Heavy Weapons@@ which deal @@DmgColor:Blunt:Blunt Damage@@ with @@#Color:Red:High Damage Variance@@.",
+		"DisplayName": "GreatHammer"
+	},
+	"GreatSword": {
+		"Abreviation": "GreatSword",
+		"AppliesTo": [
+			"Item"
+		],
+		"Description": "@@#Color:Blue:GreatSwords@@ are @@#Tag:HeavyWeapon:Heavy Weapons@@ which deal @@DmgColor:Slash:Slash Damage@@ with @@#Color:Red:Average Damage Variance@@.",
+		"DisplayName": "GreatSword"
+	},
+	"HandMod": {
+		"Abreviation": "HandMod",
+		"AppliesTo": [
+			"Page"
+		],
+		"Description": "@@#Color:Blue:HandMods@@ modify the conditions limiting what @@#Tag:Tool:Tools@@ an @@#Color:Red:Actor@@ can have equipt in each hand.",
+		"DisplayName": "HandMod"
+	},
+	"Head": {
+		"Abreviation": "Head",
+		"AppliesTo": [
+			"Item"
+		],
+		"Description": "@@#Color:Blue:Head@@ implies this @@#Tag:Apparel@@ is worn in the @@#Color:Blue:Head@@ @@#Tag:EquipmentSlot@@.",
+		"DisplayName": "Head"
+	},
+	"Heal": {
+		"Abreviation": "Heal",
+		"AppliesTo": [
+			"Page"
+		],
+		"Description": "@@#Color:Blue:Heal@@ restores @@#Stat:Health@@ to an @@#Color:Red:Actor@@",
+		"DisplayName": "Heal"
+	},
+	"HeavyWeapon": {
+		"Abreviation": "HeavyWpn",
+		"AppliesTo": [
+			"Weapon"
+		],
+		"Description": "@@#Color:Blue:Heavy Weapons@@ are large two-handed @@#Color:Blue:Weapons@@ that generally require both @@#Color:Blue:MainHand@@ and @@#Color:Blue:OffHand@@ to be used.",
+		"DisplayName": "Heavy Weapon"
+	},
+	"Human": {
+		"Abreviation": "Human",
+		"AppliesTo": [
+			"Actor"
+		],
+		"Description": "@@#Color:Blue:Humans@@ are a long exstinct species that once mastered technology and rose to the status of gods, only to be torn  down by their own hubris.",
+		"DisplayName": "Human"
+	},
+	"Inflict": {
+		"Abreviation": "Inflict",
+		"AppliesTo": [
+			"Page"
+		],
+		"Description": "@@#Color:Blue:Inflict Actions@@ make an attempt to apply harmful @@#Tag:Effect:Effects@@ to an enemy @@#Color:Red:Actor@@.",
+		"DisplayName": "Inflict"
+	},
+	"LOS": {
+		"Abreviation": "LOS",
+		"AppliesTo": [
+			"Page"
+		],
+		"Description": "@@#Color:Blue:LOS@@ implies this @@#Tag:Action@@ requires @@#Color:Blue:Line of Sight@@ and can not target @@#Color:Red:Actors@@ behind obsticals.",
+		"DisplayName": "LOS"
+	},
+	"Lever": {
+		"Abreviation": "Lever",
+		"AppliesTo": [
+			"Actor"
+		],
+		"Description": "@@#Color:Blue:Lever@@ are mechanical triggers used to control various structures. They are activated upon take any damage, but can only be triggered once per @@#Turn@@.",
+		"DisplayName": "Lever"
+	},
+	"Light": {
+		"Abreviation": "Light",
+		"AppliesTo": [
+			"Effect",
+			"Page"
+		],
+		"Description": "@@#Color:DmgColor:Light:Light@@  is an @@Color:Blue:Abnormal Damage Type@@ caused by @@#Color:DmgColor:Light:Holy@@ @@#Color:Blue:Spells@@. Most @@#Tag:Living:Living Actors@@ will @@#Tag:Absorb@@ @@#Color:DmgColor:Light:Light Damage@@ while @@#Tag:Undead@@ are exspecially vulnerable to it.",
+		"DisplayName": "Light"
+	},
+	"LightWeapon": {
+		"Abreviation": "LightWpn",
+		"AppliesTo": [
+			"Weapon"
+		],
+		"Description": "@@#Color:Blue:Light Weapons@@ are smaller single handed @@#Color:Blue:Weapons@@ that generally can be used in @@#Color:Blue:OffHand@@ when @@#Color:Blue:MainHand Weapon@@ is also a @@#Color:Blue:Light Weapon@@.",
+		"DisplayName": "Light Weapon"
+	},
+	"Living": {
+		"Abreviation": "Phy",
+		"AppliesTo": [
+			"Actor"
+		],
+		"Description": "@@#Color:Blue:Living@@ creatures are those that require food, oxygen, and love to survive. Most @@#Color:Blue:Living@@ @@#Color:Red:Actors@@ have high resistance to @@#Color:DmgColor:Light Damage@@ and can be @@#Color:Green:healed@@ by it.",
+		"DisplayName": "Physical"
+	},
+	"Mace": {
+		"Abreviation": "Mace",
+		"AppliesTo": [
+			"Item"
+		],
+		"Description": "@@#Color:Blue:Maces@@ are @@#Tag:MediumWeapon:Medium Weapons@@ which deal @@DmgColor:Blunt:Blunt Damage@@ with @@#Color:Red:High Damage Variance@@.",
+		"DisplayName": "Mace"
+	},
+	"MagePage": {
+		"Abreviation": "MagePage",
+		"AppliesTo": [
+			"Page"
+		],
+		"Description": "@@#Color:Blue:MagePage@@ are @@#Tag:Page:Pages@@ unique to the @@#Color:Red:Mage Title@@.",
+		"DisplayName": "MagePage"
+	},
+	"Magical": {
+		"Abreviation": "Mag",
+		"AppliesTo": [
+			"Action"
+		],
+		"Description": "@@#Color:Blue:Magical@@ is a @@#Color:Blue:Tag@@ bestowed upon a select number of @@#Color:Blue:Items@@ and  @@#Color:Blue:Pages@@ which are able harness Elemental Energies in the following forms:\n\n@@#Color:DmgColor:Cold@@ low variance with higher precision and capable of inflicting @@#EftDef:AilmentChilled@@ which can lead to @@#EftDef:AilmentFrozen@@.\n\n@@#Color:DmgColor:Fire@@ standard variance and easily applied over large areas, often inclicting @@#EftDef:AilmentBurned@@.\n\n@@#Color:DmgColor:Shock@@ high variance and diffult to control, occationally inflicting @@#EftDef:AilmentShocked@@.\n\n@@#Color:DmgColor:Poison@@ standard variance but less powerful, frequently inflicting various types of @@#Color:Blue:Poisons@@.",
+		"DisplayName": "Magical"
+	},
+	"MedumWeapon": {
+		"Abreviation": "MediumWpn",
+		"AppliesTo": [
+			"Weapon"
+		],
+		"Description": "@@#Color:Blue:Medium Weapons@@ are standard single handed @@#Color:Blue:Weapons@@ that generally can only be used in @@#Color:Blue:MainHand@@.",
+		"DisplayName": "Medium Weapon"
+	},
+	"Melee": {
+		"Abreviation": "Melee",
+		"AppliesTo": [
+			"Weapon",
+			"Action"
+		],
+		"Description": "@@#Color:Blue:Melee@@ implies a @@#Color:Blue:Weapon@@ or @@#Color:Blue:Page@@ has a short range @@#Color:Red:Target Area@@. This generally only includes @@#Color:Blue:Actors@@ that are Adjacent and in Front of the user.",
+		"DisplayName": "Melee"
+	},
+	"Missile": {
+		"Abreviation": "Missile",
+		"AppliesTo": [
+			"Weapon",
+			"Action"
+		],
+		"Description": "@@#Color:Blue:Missles@@ are projectiles that take time to reach target. So \"lead the shot\"",
+		"DisplayName": "Missile"
+	},
+	"Money": {
+		"Abreviation": "Money",
+		"AppliesTo": [
+			"Item"
+		],
+		"Description": "@@#Color:Blue:Money@@ is the root of all evil.",
+		"DisplayName": "Money"
+	},
+	"Movement": {
+		"Abreviation": "Movement",
+		"AppliesTo": [
+			"Page"
+		],
+		"Description": "@@#Color:Blue:Movement@@ are @@#Tag:Action:Actions@@ which change an @@#Color:Red:Actor's@@ position on the @@#Color:Red:Map@@.",
+		"DisplayName": "Movement"
+	},
+	"Object": {
+		"Abreviation": "Object",
+		"AppliesTo": [
+			"Actor"
+		],
+		"Description": "@@#Color:Blue:Object@@ are innanimate \"@@#Color:Red:Actors@@\" which can no preform @@#Tag:Action:Actions@@, but can still be targeted by @@#Tag:Attack:Attacks@@.",
+		"DisplayName": "Object"
+	},
+	"OffHand": {
+		"Abreviation": "OffHand",
+		"AppliesTo": [
+			"Item"
+		],
+		"Description": "@@#Color:Blue:OffHand@@ implies this @@#Tag:Tool@@ is held in the @@#Color:Blue:Off Hand@@ @@#Tag:EquipmentSlot@@.",
+		"DisplayName": "OffHand"
+	},
+	"Page": {
+		"Abreviation": "Page",
+		"AppliesTo": [
+			"Page"
+		],
+		"Description": "@@#Color:Blue:Page@@ are @@#Tag:Item:Items@@ which either provide @@#Tag:Passive@@ benifits or allow @@#Tag:Action:Actions@@ in @@#Color:Red:Combat@@.",
+		"DisplayName": "Page"
+	},
+	"PageBook": {
+		"Abreviation": "PageBook",
+		"AppliesTo": [
+			"Item"
+		],
+		"Description": "@@#Color:Blue:PageBooks@@ are are a type of @@#Tag:Equipment@@ used for holding @@#Tag:Page:Pages@@. @@#Color:Red:Actors@@ must always have a @@#Color:Blue:PageBook@@.",
+		"DisplayName": "PageBook"
+	},
+	"Passive": {
+		"Abreviation": "Passive",
+		"AppliesTo": [
+			"Page"
+		],
+		"Description": "@@#Color:Blue:Passives@@ are a type of @@#Tag:Page@@ which passively modify the @@#Color:Red:Actor's@@ @@#Tag:Stats@@ and @@#Tag:Action:Actions@@.",
+		"DisplayName": "Passive"
+	},
+	"Physical": {
+		"Abreviation": "Phy",
+		"AppliesTo": [
+			"Action"
+		],
+		"Description": "@@#Color:Blue:Phy@@ means @@#Color:Blue:Physical@@. @@#Color:DmgColor:Slash@@'em, @@#Color:DmgColor:Pierce@@'em, hit'em with something @@#Color:DmgColor:Blunt@@, or just @@#Color:DmgColor:Crash@@ into them. You might even make'm @@#Color:DmgColor:Slash:Bleed@@, @@#Color:DmgColor:Pierce:Blinded@@, or @@#Color:DmgColor:Blunt:Dazed@@ if your good. But you usssaly gotta do something different to get'em @@#Color:DmgColor:Crash:Geased@@.",
+		"DisplayName": "Physical"
+	},
+	"Pierce": {
+		"Abreviation": "Pierce",
+		"AppliesTo": [
+			"Page",
+			"Damage"
+		],
+		"Description": "@@#Color:DmgColor:Pierce:Pierce@@ is a @@#Color:Blue:Physical Damage Type@@ cause by pointed stabs and tends to have @@#Color:Red:Low Damage Variance@@.",
+		"DisplayName": "Pierce"
+	},
+	"Player": {
+		"Abreviation": "Player",
+		"AppliesTo": [
+			"Actor"
+		],
+		"Description": "@@#Color:Red:#DATA CORRUPTED@@",
+		"DisplayName": "Player"
+	},
+	"Poison": {
+		"Abreviation": "Poison",
+		"AppliesTo": [
+			"Page"
+		],
+		"Description": "@@#Color:DmgColor:Poison:Poison@@ is a @@#Color:Blue:Magical Damage Type@@ cause by @@#Color:DmgColor:Poison:Earth@@ @@#Color:Blue:Spells@@ and tends to have @@#Color:Red:Lower Damage@@ but high chance to inflict @@#EftDef:AilmentPoisoned@@.",
+		"DisplayName": "Poison"
+	},
+	"Potion": {
+		"Abreviation": "Potion",
+		"AppliesTo": [
+			"Effect",
+			"Item"
+		],
+		"Description": "@@#Color:Blue:Potions@@ are @@#Tag:Drinkable@@ @@#Tag:Supplies@@ which apply @@#Tag:Effect:Effects@@ either by drinking or pouring on another @@Color:Red:Actor@@",
+		"DisplayName": "Potion"
+	},
+	"PriestPage": {
+		"Abreviation": "PriestPage",
+		"AppliesTo": [
+			"Page"
+		],
+		"Description": "@@#Color:Blue:PriestPage@@ are @@#Tag:Page:Pages@@ unique to the @@#Color:Red:Priest Title@@.",
+		"DisplayName": "PriestPage"
+	},
+	"RandomTarget": {
+		"Abreviation": "RandomTarget",
+		"AppliesTo": [
+			"Page"
+		],
+		"Description": "@@#Color:Blue:RandomTarget@@ implies targets for this @@#Tag:Action@@ will be randomly selected.",
+		"DisplayName": "RandomTarget"
+	},
+	"Ranged": {
+		"Abreviation": "Ranged",
+		"AppliesTo": [
+			"Weapon",
+			"Action"
+		],
+		"Description": "@@#Color:Blue:Ranged@@ implies a @@#Color:Red:Weapon@@ or @@#Color:Blue:Page@@ has a medium to long range @@#Color:Red:Target Area@@. @@#Color:Blue:Ranged Attacks@@ are generally weaker than @@#Color:Blue:Melee@@, but can reach distant @@#Color:Red:Actors@@.",
+		"DisplayName": "Ranged"
+	},
+	"Regen": {
+		"Abreviation": "Regen",
+		"AppliesTo": [
+			"Effect"
+		],
+		"Description": "@@#Color:Blue:Regen@@ implies an @@#Tag:Effect@@ will @@#Tag:Heal@@ the @@#Color:Red:Actor@@ when triggered.",
+		"DisplayName": "Regen"
+	},
+	"Remove": {
+		"Abreviation": "Remove",
+		"AppliesTo": [
+			"Page"
+		],
+		"Description": "@@#Color:Blue:Remove@@ is the act of forceably ending an @@#Tag:Effect@@ from an @@#Color:Red:Actor@@.",
+		"DisplayName": "Remove"
+	},
+	"Revive": {
+		"Abreviation": "Revive",
+		"AppliesTo": [
+			"Page"
+		],
+		"Description": "@@#Color:Blue:Revive@@ is the act of returming a dead @@#Color:Red:Actor@@ back to @@Color:Red:Combat@@.",
+		"DisplayName": "Revive"
+	},
+	"RoguePage": {
+		"Abreviation": "RoguePage",
+		"AppliesTo": [
+			"Page"
+		],
+		"Description": "@@#Color:Blue:RoguePage@@ are @@#Tag:Page:Pages@@ unique to the @@#Color:Red:Rogue Title@@.",
+		"DisplayName": "RoguePage"
+	},
+	"Rooted": {
+		"Abreviation": "Rooted",
+		"AppliesTo": [
+			"Actor"
+		],
+		"Description": "When @@#Color:Blue:Rooted@@ an @@#Color:Red:Actor@@ can not move from it's current @@#Color:Red:Spot@@. They can not take @@#Tag:Movement:Move Actions@@ or be @@#Tag:Push:Pushed@@.",
+		"DisplayName": "Rooted"
+	},
+	"Scepter": {
+		"Abreviation": "Scepter",
+		"AppliesTo": [
+			"Item"
+		],
+		"Description": "@@#Color:Blue:Scepters@@ are @@#Tag:Ranged@@ @@#Tag:MediumWeapon:Medium Weapons@@ which deal damage of different types.",
+		"DisplayName": "Scepter"
+	},
+	"Self": {
+		"Abreviation": "Self",
+		"AppliesTo": [
+			"Page"
+		],
+		"Description": "@@#Color:Blue:Self@@ implies this @@#Tag:Page@@ will target the user.",
+		"DisplayName": "Self"
+	},
+	"Shared": {
+		"Abreviation": "Shared",
+		"AppliesTo": [
+			"Page"
+		],
+		"Description": "@@#Color:Blue:Shared@@ are @@#Tag:Page:Pages@@ unlocked by one @@#Color:Red:Title@@ but used by other member of the @@#Color:Red:Party@@.",
+		"DisplayName": "Shared"
+	},
+	"Shield": {
+		"Abreviation": "Shield",
+		"AppliesTo": [
+			"Item"
+		],
+		"Description": "@@#Color:Blue:Shields@@ are @@#Tag:OffHand@@ @@#Tag:Tool:Tools@@ which give the user a chance to @@#Tag:Block@@ @@#Tag:Attacks@@ and reduce the damage taken.",
+		"DisplayName": "Shield"
+	},
+	"Shiv": {
+		"Abreviation": "Shiv",
+		"AppliesTo": [
+			"Item"
+		],
+		"Description": "@@#Color:Blue:Shivs@@ are @@#Tag:LightWeapon:Light Weapons@@ which deal @@DmgColor:Pierce:Pierce Damage@@ with @@#Color:Red:Low Damage Variance@@.",
+		"DisplayName": "Shiv"
+	},
+	"Shock": {
+		"Abreviation": "Shock",
+		"AppliesTo": [
+			"Page"
+		],
+		"Description": "@@#Color:DmgColor:Shock:Shock@@ is a @@#Color:Blue:Magical Damage Type@@ cause by @@#Color:DmgColor:Shock:Air@@ @@#Color:Blue:Spells@@ and tends to have @@#Color:Red:High Damage Variance@@ and chance to inflict @@#EftDef:AilmentShocked@@.",
+		"DisplayName": "Shock"
+	},
+	"Slash": {
+		"Abreviation": "Slash",
+		"AppliesTo": [
+			"Page",
+			"Damage"
+		],
+		"Description": "@@#Color:DmgColor:Slash:Slash@@ is a @@#Color:Blue:Physical Damage Type@@ cause by sharpend blades or claws and tends to have @@#Color:Red:Average Damage Variance@@.",
+		"DisplayName": "Slash"
+	},
+	"Slime": {
+		"Abreviation": "Slime",
+		"AppliesTo": [
+			"Actor"
+		],
+		"Description": "@@#Color:Blue:Slimes@@ are @@#Tag:Magic@@ creatures with high @@#Tag:Resistance@@ to @@#Tag:Physical:Physical Damage@@.",
+		"DisplayName": "Slime"
+	},
+	"SlimeAtk": {
+		"Abreviation": "SlimeAtk",
+		"AppliesTo": [
+			"Page"
+		],
+		"Description": "@@#Color:Blue:SlimeAtk@@ are @@#Tag:Page:Pages@@ unique to the @@#Color:Red:Sime Faction@@.",
+		"DisplayName": "SlimeAtk"
+	},
+	"Slow": {
+		"Abreviation": "Slow",
+		"AppliesTo": [
+			"Action"
+		],
+		"Description": "@@#Color:Blue:Slow@@ @@#Color:Red:Actions@@ are preformed late in the @@#Color:Red:Turn@@, usually after other @@#Color:Red:Actors@@ move, regardless of @@#Stat:Speed@@.",
+		"DisplayName": "Slow"
+	},
+	"SoldierPage": {
+		"Abreviation": "SoldierPage",
+		"AppliesTo": [
+			"Page"
+		],
+		"Description": "@@#Color:Blue:SoldierPage@@  are @@#Tag:Page:Pages@@ unique to the @@#Color:Red:Soldier Title@@.",
+		"DisplayName": "SoldierPage"
+	},
+	"Spawn": {
+		"Abreviation": "Spawn",
+		"AppliesTo": [
+			"Page"
+		],
+		"Description": "@@#Color:Blue:Spawn@@ is the act of bringing a new @@#Color:Red:Actor@@ into @@#Color:Red:Combat@@.",
+		"DisplayName": "Spawn"
+	},
+	"Spear": {
+		"Abreviation": "Spear",
+		"AppliesTo": [
+			"Item"
+		],
+		"Description": "@@#Color:Blue:Spears@@ are @@#Tag:MediumWeapon:Medium Weapons@@ which deal @@DmgColor:Pierce:Pierce Damage@@ with @@#Color:Red:Low Damage Variance@@ and an extended range.",
+		"DisplayName": "Spear"
+	},
+	"Spell": {
+		"Abreviation": "Spell",
+		"AppliesTo": [
+			"Action"
+		],
+		"Description": "The @@#Color:Blue:Spell Tag@@ denotes particular @@#Color:Red:Action Pages@@ as catagorized by the use of @@#Color:Blue:Magical@@ Elemental energies generated by and manipulated through the @@#Color:Blue:Page@@ System.",
+		"DisplayName": "Spell"
+	},
+	"Squirrel": {
+		"Abreviation": "Squirrel",
+		"AppliesTo": [
+			"Actor"
+		],
+		"Description": "This @@#Color:Red:Actor@@ is a member of the @@#Color:Blue:Squirrel@@ @@#Color:Red:Faction@@.",
+		"DisplayName": "Squirrel"
+	},
+	"Staff": {
+		"Abreviation": "Staff",
+		"AppliesTo": [
+			"Item"
+		],
+		"Description": "@@#Color:Blue:Staffs@@ are @@#Tag:Ranged@@ @@#Tag:HeavyWeapon:Heavy Weapons@@ which deal damage of different types.",
+		"DisplayName": "Staff"
+	},
+	"StatMod": {
+		"Abreviation": "StatMod",
+		"AppliesTo": [
+			"Page"
+		],
+		"Description": "@@#Color:Blue:StatMod@@ modify the @@#Color:Red:Stats@@ of an @@#Color:Red:Actor@@.",
+		"DisplayName": "StatMod"
+	},
+	"Supplies": {
+		"Abreviation": "Supplies",
+		"AppliesTo": [
+			"Item"
+		],
+		"Description": "@@#Color:Blue:Supplies@@ are items to be used in @@#Color:Red:Combat@@. They must be stored in an @@#Color:Red:Actor's@@ @@#Tag:Bag@@ and are consumed upon use.",
+		"DisplayName": "Supplies"
+	},
+	"Sword": {
+		"Abreviation": "Sword",
+		"AppliesTo": [
+			"Item"
+		],
+		"Description": "@@#Color:Blue:Swords@@ are @@#Tag:MediumWeapon:Medium Weapons@@ which deal @@DmgColor:Slash:Slash Damage@@ with @@#Color:Red:Average Damage Variance@@.",
+		"DisplayName": "Sword"
+	},
+	"Tactic": {
+		"Abreviation": "Tactic",
+		"AppliesTo": [
+			"Action"
+		],
+		"Description": "@@#Color:Blue:Tactic@@ means @@#Color:Blue:Physical@@ @@#Color:Red:Action@@",
+		"DisplayName": "Tactic"
+	},
+	"Taunt": {
+		"Abreviation": "Taunt",
+		"AppliesTo": [
+			"Page"
+		],
+		"Description": "@@#Color:Blue:Taunt@@ are @@#Tag:Action:Actions@@ which generate high @@#Tag:Aggro@@ causing enemies to focus on the @@#Color:Red:Actor@@.",
+		"DisplayName": "Taunt"
+	},
+	"Teleport": {
+		"Abreviation": "Teleport",
+		"AppliesTo": [
+			"Page"
+		],
+		"Description": "@@#Color:Blue:Teleport@@ is a type of @@#Tag:Movement:Movement Action@@ which does not require a clear path between @@#Color:Red:Spots@@.",
+		"DisplayName": "Teleport"
+	},
+	"Throw": {
+		"Abreviation": "Throw",
+		"AppliesTo": [
+			"Page"
+		],
+		"Description": "@@#Color:Blue:Throw Actions@@ require the user to consume a @@#Tag:Throwable@@ @@#Tag:Supplies:Supply Item@@ from their bag and launch it like a @@#Tag:Missile@@ at a selected @@#Color:Red:Spot@@.",
+		"DisplayName": "Throw"
+	},
+	"Throwable": {
+		"Abreviation": "Throwable",
+		"AppliesTo": [
+			"Item"
+		],
+		"Description": "@@#Color:Blue:Throwable@@ implies this @@#Tag:Supplies:Supply Item@@ can be used by @@#Tag:Throw:Throw Actions@@",
+		"DisplayName": "Throwable"
+	},
+	"Title": {
+		"Abreviation": "Title",
+		"AppliesTo": [
+			"Page"
+		],
+		"Description": "@@#Color:Blue:Title@@ are @@#Tag:Page:Pages@@ that define an @@#Color:Red:Actor's@@ base stat scaleing and give access to @@#Color:Blue:Title@@ specific @@#Tag:Page:Pages.",
+		"DisplayName": "Title"
+	},
+	"Totem": {
+		"Abreviation": "Totem",
+		"AppliesTo": [
+			"Actor"
+		],
+		"Description": "@@#Color:Blue:Totem@@ are @@#Tag:Construct:Constructs@@ summoned through @@#Tag:Magic@@. They will cast the same @@#Tag:Spell@@ each turn until destoryed.",
+		"DisplayName": "Totem"
+	},
+	"Trap": {
+		"Abreviation": "Trap",
+		"AppliesTo": [
+			"Page"
+		],
+		"Description": "@@#Color:Blue:Trap@@ is a type of @@#Tag:Zone@@ which does not fully activate until the @@#Color:Red:End of Round@@. After that, they trigger on the first @@#Color:Red:Actor@@ to enter and then disapear.",
+		"DisplayName": "Trap"
+	},
+	"TwoHand": {
+		"Abreviation": "TwoHand",
+		"AppliesTo": [
+			"Actor"
+		],
+		"Description": "@@#Color:Blue:TwoHand@@ implies an @@#Color:Red:Actor@@ is wielding one @@#Tag:Weapon@@ with two or more hands.",
+		"DisplayName": "TwoHand"
+	},
+	"Unarmed": {
+		"Abreviation": "Tactic",
+		"AppliesTo": [
+			"Action"
+		],
+		"Description": "@@#Color:Blue:Unarmed@@ @@#Color:Red:Actors@@ have no @@#Color:Red:Weapon@@ equip and default to thier @@#Color:Red:Unarmed Damage@@ when making @@#Color:Red:Weapon Attacks@@.",
+		"DisplayName": "Tactic"
+	},
+	"Undead": {
+		"Abreviation": "Phy",
+		"AppliesTo": [
+			"Actor"
+		],
+		"Description": "@@#Color:Blue:Undead@@ are \"dead\" @@#Color:Red:Actors@@, reactived by the @@#Color:Blue:PAGE@@ System. They sustain thier forms with @@#Color:DmgColor:Dark@@ energy and are @@#Color:Green:healed@@ by further exposure. Inversely, @@#Color:DmgColor:Light@@ has proven highly disruptive to this process.",
+		"DisplayName": "Physical"
+	},
+	"Wand": {
+		"Abreviation": "Wand",
+		"AppliesTo": [
+			"Item"
+		],
+		"Description": "@@#Color:Blue:Wands@@ are @@#Tag:Ranged@@ @@#Tag:LightWeapon:Light Weapons@@ which deal damage of different types.",
+		"DisplayName": "Wand"
+	},
+	"Water": {
+		"Abreviation": "Water",
+		"AppliesTo": [
+			"Page"
+		],
+		"Description": "@@#Color:Blue:Water@@ are @@#Tag:Page:Pages@@ that use the @@#DmgColor:Cold:Water@@ element.",
+		"DisplayName": "Water"
+	},
+	"Weapon": {
+		"Abreviation": "Weapon",
+		"AppliesTo": [
+			"Item",
+			"Page"
+		],
+		"Description": "@@#Color:Blue:Weapon@@ are a type of @@#Tag:Tool:Tool Equiptment@@ used for peacefully resolving disputes.",
+		"DisplayName": "Weapon"
+	},
+	"WpnAtk": {
+		"Abreviation": "WpnAtk",
+		"AppliesTo": [
+			"Page"
+		],
+		"Description": "@@#Color:Blue:Weapon Attacks@@ are @@#Tag:Attack:Attacks@@ that use the @@#Color:Red:Actor's@@ @@#Tag:Weapon@@ for determening damage and or @@#Color:Red:Attack Area@@.",
+		"DisplayName": "WpnAtk"
+	},
+	"WpnMod": {
+		"Abreviation": "WpnMod",
+		"AppliesTo": [
+			"Page"
+		],
+		"Description": "@@#Color:Blue:WpnMod@@ modify the properties of a @@#Color:Red:Weapon@@.",
+		"DisplayName": "WpnMod"
+	},
+	"Zone": {
+		"Abreviation": "Zone",
+		"AppliesTo": [
+			"Page"
+		],
+		"Description": "@@#Color:Blue:Zone@@ is an @@#Tag:Effect@@ applied over an area of the @@#Color:Red:Map@@ in @@#Color:Red:Combat@@. ",
+		"DisplayName": "Zone"
+	},
+	"_Dev_Action": {
+		"Abreviation": "_Dev_Action",
+		"AppliesTo": [
+			"Page"
+		],
+		"Description": "@@#Color:Blue:_Dev_Action@@ are actions used in development. (You shouldn't see this)",
+		"DisplayName": "_Dev_Action"
+	}
 }

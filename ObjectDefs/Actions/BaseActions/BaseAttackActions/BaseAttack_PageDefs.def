@@ -1,530 +1,534 @@
 {
-    "#BaseInflictAttack": {
-        "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
-        "#ObjDetails": {
-            "Description": "Make a @@#Color:Red:Inflicting Attack@@ against an @@#TrgParm:TargetParam:TargetType@@ in range, attempting to apply @@#EftData:InflictEffect:DisplayName@@ for @@#EftData:InflictEffect:Duration@@.\n\n@@#EftData:InflictEffect@@",
-            "DisplayName": "#Base Inflict Attack",
-            "LargeIcon": "Sprites/BaseAtkIcon.png",
-            "ObjectType": "Item",
-            "SmallIcon": "Sprites/BaseAtkIcon.png",
-            "SnippetDesc": "Inflict EFFECT_NAME",
-            "Tags": [
-                "Attack",
-                "Inflict",
-                "LOS"
-            ],
-            "Taxonomy": [
-                "Item",
-                "Page",
-                "Action"
-            ]
-        },
-        "ActionData": {
-            "AttackDetails": {
-                "AccuracyMod": 1.0,
-                "AttackVfxData": {
-                    "RandomOffsets": [
-                        0.0,
-                        0.0
-                    ],
-                    "ScenePath": "res://assets/Scripts/VFXs/BulletVfxs/bullet_vfx_node.tscn",
-                    "SpriteName": "Missiles/BaseBullet.png",
-                    "SpriteSheetHight": 1.0,
-                    "SpriteSheetWidth": 1.0,
-                    "Velocity": 400.0
-                },
-                "AttackVfxKey": "",
-                "AutoHit": true,
-                "PotencyMod": 1.0
-            },
-            "DamageDatas": {},
-            "EffectDatas": {
-                "InflictEffect": {
-                    "Conditions": {
-                        "ApplicationChance": 1.0,
-                        "ApplyOnBlock": false,
-                        "ApplyOnEvade": false,
-                        "TagFilter": {},
-                        "TeamFilter": []
-                    },
-                    "EffectDataDef": {
-                        "EffectDetails": {
-                            "DurationData": {
-                                "BaseDuration": 5.0
-                            }
-                        }
-                    },
-                    "EffectKey": "AilmentGreased"
-                }
-            },
-            "Preview": {
-                "PreviewTargetKey": "TargetParam"
-            },
-            "SubActions": {
-                "Attack": {
-                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Attacks/SubAct_Attack.gd",
-                    "#FrameIndex": 11.0,
-                    "#SubIndex": 0.0,
-                    "EffectKeys": [
-                        "InflictEffect"
-                    ],
-                    "TargetKey": "Target1"
-                },
-                "GetTarget": {
-                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Targeting/SubAct_GetTarget.gd",
-                    "#FrameIndex": 10.0,
-                    "#SubIndex": 0.0,
-                    "AllowAlreadyTargeted": false,
-                    "AllowAutoTarget": true,
-                    "SetTargetKey": "Target1",
-                    "TargetParamKey": "TargetParam"
-                },
-                "PayCost": {
-                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Misc/SubAct_PayCost.gd",
-                    "#FrameIndex": 10.0,
-                    "#SubIndex": 1.0
-                }
-            },
-            "TargetParams": {
-                "TargetParam": {
-                    "LineOfSight": true,
-                    "TargetArea": "[[-1,2],[0,2],[1,2],[-1,1],[0,1],[1,1]]",
-                    "TargetType": "Actor"
-                }
-            }
-        },
-        "ItemData": {
-            "ItemType": "Page",
-            "Rarity": "Common",
-            "Value": 50.0
-        },
-        "PageData": {
-            "PageRequirements": {
-                "ConflictingPages": [],
-                "IncompatiblePages": [],
-                "TitleReq": "None"
-            },
-            "SourceTitle": ""
-        },
-        "_DefVersion": "1"
-    },
-    "#BaseMeleeAttack": {
-        "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
-        "#ObjDetails": {
-            "Description": "Make a @@#Color:Red:Melee Attack@@ against an @@#TrgParm:TargetParam:TargetType@@ dealing @@#DmgData:MeleeDamage@@ on hit.",
-            "DisplayName": "#Base Melee Attack",
-            "LargeIcon": "Sprites/BaseAtkIcon.png",
-            "ObjectType": "Item",
-            "SmallIcon": "Sprites/BaseAtkIcon.png",
-            "SnippetDesc": "Touch Actor for DAMAGE_TYPE damage.",
-            "Tags": [
-                "Attack",
-                "Melee"
-            ],
-            "Taxonomy": [
-                "Item",
-                "Page",
-                "Action"
-            ]
-        },
-        "ActionData": {
-            "AttackDetails": {
-                "AccuracyMod": 1.0,
-                "PotencyMod": 1.0
-            },
-            "DamageDatas": {
-                "MeleeDamage": {
-                    "AtkPwrBase": 100.0,
-                    "AtkPwrRange": 10.0,
-                    "AtkPwrScale": 1.0,
-                    "AtkStat": "PhyAttack",
-                    "BaseDamage": 0.0,
-                    "DamageType": "RAW",
-                    "DamageVfxKey": "AUTO",
-                    "DefenseType": "AUTO"
-                }
-            },
-            "Preview": {
-                "PreviewDamageKey": "MeleeDamage",
-                "PreviewTargetKey": "TargetParam"
-            },
-            "SubActions": {
-                "Attack": {
-                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Attacks/SubAct_Attack.gd",
-                    "#FrameIndex": 11.0,
-                    "#SubIndex": 0.0,
-                    "DamageKey": "MeleeDamage",
-                    "TargetKey": "Target1"
-                },
-                "GetTarget": {
-                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Targeting/SubAct_GetTarget.gd",
-                    "#FrameIndex": 10.0,
-                    "#SubIndex": 0.0,
-                    "AllowAlreadyTargeted": false,
-                    "AllowAutoTarget": true,
-                    "SetTargetKey": "Target1",
-                    "TargetParamKey": "TargetParam"
-                },
-                "PayCost": {
-                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Misc/SubAct_PayCost.gd",
-                    "#FrameIndex": 10.0,
-                    "#SubIndex": 1.0
-                }
-            },
-            "TargetParams": {
-                "TargetParam": {
-                    "LineOfSight": true,
-                    "TargetArea": "[[-1,0],[1,0],[-1,1],[0,1],[1,1]]",
-                    "TargetType": "Actor"
-                }
-            }
-        },
-        "ItemData": {
-            "ItemType": "Page",
-            "Rarity": "Common",
-            "Value": 50.0
-        },
-        "PageData": {
-            "PageRequirements": {
-                "ConflictingPages": [],
-                "IncompatiblePages": [],
-                "TitleReq": "None"
-            },
-            "SourceTitle": ""
-        },
-        "_DefVersion": "1"
-    },
-    "#BaseMissileAttack": {
-        "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
-        "#ObjDetails": {
-            "Description": "Launch a @@#Color:Missile@@ at @@#TrgParm:TargetParam:TargetType@@ in range, dealing @@#DmgData:MissileDamage@@ to any @@#Color:Red:Actor@@ it hits.",
-            "DisplayName": "#Base Missile Attack",
-            "LargeIcon": "Sprites/BaseAtkIcon.png",
-            "ObjectType": "Item",
-            "SmallIcon": "Sprites/BaseAtkIcon.png",
-            "SnippetDesc": "Launch a Missile of DAMAGE_TYPE",
-            "Tags": [
-                "Attack",
-                "Missile",
-                "LOS"
-            ],
-            "Taxonomy": [
-                "Item",
-                "Page",
-                "Action"
-            ]
-        },
-        "ActionData": {
-            "AttackDetails": {
-                "AccuracyMod": 1.0,
-                "PotencyMod": 1.0
-            },
-            "DamageDatas": {
-                "MissileDamage": {
-                    "AtkPwrBase": 100.0,
-                    "AtkPwrRange": 20.0,
-                    "AtkPwrScale": 1.0,
-                    "AtkStat": "PhyAttack",
-                    "BaseDamage": 0.0,
-                    "DamageType": "RAW",
-                    "DamageVfxKey": "AUTO",
-                    "DefenseType": "AUTO"
-                }
-            },
-            "MissileDatas": {
-                "Missile1": {
-                    "DamageDataKey": "MissileDamage",
-                    "FramesPerTile": 3.0,
-                    "ImpactVfxKey": "",
-                    "MissileVfxData": {
-                        "AnimationName": "4_sprites_250ms_frames_loop",
-                        "AnimationSpeed": 1.0,
-                        "RandomOffsets": [
-                            0.0,
-                            0.0
-                        ],
-                        "RandomRotation": [
-                            0.0,
-                            0.0
-                        ],
-                        "Scale": [
-                            1.0,
-                            1.0
-                        ],
-                        "ScenePath": "res://assets/Scripts/VFXs/MissileVfx/missile_vfx_node.tscn",
-                        "SpriteName": "Missiles/BaseMissile.png",
-                        "SpriteSheetHight": 2.0,
-                        "SpriteSheetWidth": 2.0
-                    },
-                    "MissileVfxKey": ""
-                }
-            },
-            "Preview": {
-                "PreviewDamageKey": "MissileDamage",
-                "PreviewTargetKey": "TargetParam"
-            },
-            "SubActions": {
-                "GetTarget": {
-                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Targeting/SubAct_GetTarget.gd",
-                    "#FrameIndex": 5.0,
-                    "#SubIndex": 0.0,
-                    "AllowAlreadyTargeted": false,
-                    "AllowAutoTarget": false,
-                    "SetTargetKey": "Target1",
-                    "TargetParamKey": "TargetParam"
-                },
-                "PayCost": {
-                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Misc/SubAct_PayCost.gd",
-                    "#FrameIndex": 5.0,
-                    "#SubIndex": 1.0
-                },
-                "SpawnMissile": {
-                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Spawning/SubAct_SpawnMissile.gd",
-                    "#FrameIndex": 5.0,
-                    "#SubIndex": 2.0,
-                    "DamageKey": "MissileDamage",
-                    "MissileKey": "Missile1",
-                    "TargetKey": "Target1"
-                }
-            },
-            "TargetParams": {
-                "TargetParam": {
-                    "LineOfSight": true,
-                    "TargetArea": "[[-1,4],[0,4],[1,4],[-2,3],[-1,3],[0,3],[1,3],[2,3],[-1,2],[0,2],[1,2]]",
-                    "TargetType": "Spot"
-                }
-            }
-        },
-        "ItemData": {
-            "ItemType": "Page",
-            "Rarity": "Common",
-            "Value": 50.0
-        },
-        "PageData": {
-            "PageRequirements": {
-                "ConflictingPages": [],
-                "IncompatiblePages": [],
-                "TitleReq": "None"
-            },
-            "SourceTitle": ""
-        },
-        "_DefVersion": "1"
-    },
-    "#BaseRangedAttack": {
-        "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
-        "#ObjDetails": {
-            "Description": "Make a @@#Color:Red:Ranged Attack@@ against an @@#TrgParm:TargetParam:TargetType@@ in range, dealing @@#DmgData:RangedDamage@@ on hit.",
-            "DisplayName": "#Base Range Attack",
-            "LargeIcon": "Sprites/BaseAtkIcon.png",
-            "ObjectType": "Item",
-            "SmallIcon": "Sprites/BaseAtkIcon.png",
-            "SnippetDesc": "Shoot a bolt of DAMAGE_TYPE",
-            "Tags": [
-                "Attack",
-                "Ranged",
-                "LOS"
-            ],
-            "Taxonomy": [
-                "Item",
-                "Page",
-                "Action"
-            ]
-        },
-        "ActionData": {
-            "AttackDetails": {
-                "AccuracyMod": 1.0,
-                "AttackVfxData": {
-                    "RandomOffsets": [
-                        0.0,
-                        0.0
-                    ],
-                    "ScenePath": "res://assets/Scripts/VFXs/BulletVfxs/bullet_vfx_node.tscn",
-                    "SpriteName": "Missiles/BaseBullet.png",
-                    "SpriteSheetHight": 1.0,
-                    "SpriteSheetWidth": 1.0,
-                    "Velocity": 400.0
-                },
-                "AttackVfxKey": "",
-                "PotencyMod": 1.0
-            },
-            "DamageDatas": {
-                "RangedDamage": {
-                    "AtkPwrBase": 80.0,
-                    "AtkPwrRange": 20.0,
-                    "AtkPwrScale": 1.0,
-                    "AtkStat": "PhyAttack",
-                    "BaseDamage": 0.0,
-                    "DamageType": "RAW",
-                    "DamageVfxKey": "AUTO",
-                    "DefenseType": "AUTO"
-                }
-            },
-            "Preview": {
-                "PreviewDamageKey": "RangedDamage",
-                "PreviewTargetKey": "TargetParam"
-            },
-            "SubActions": {
-                "Attack": {
-                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Attacks/SubAct_Attack.gd",
-                    "#FrameIndex": 11.0,
-                    "#SubIndex": 0.0,
-                    "DamageKey": "RangedDamage",
-                    "TargetKey": "Target1"
-                },
-                "GetTarget": {
-                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Targeting/SubAct_GetTarget.gd",
-                    "#FrameIndex": 10.0,
-                    "#SubIndex": 0.0,
-                    "AllowAlreadyTargeted": false,
-                    "AllowAutoTarget": true,
-                    "SetTargetKey": "Target1",
-                    "TargetParamKey": "TargetParam"
-                },
-                "PayCost": {
-                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Misc/SubAct_PayCost.gd",
-                    "#FrameIndex": 10.0,
-                    "#SubIndex": 1.0
-                }
-            },
-            "TargetParams": {
-                "TargetParam": {
-                    "LineOfSight": true,
-                    "TargetArea": "[[-1,3],[0,3],[1,3],[-1,2],[0,2],[1,2],[0,1]]",
-                    "TargetType": "Actor"
-                }
-            }
-        },
-        "ItemData": {
-            "ItemType": "Page",
-            "Rarity": "Common",
-            "Value": 50.0
-        },
-        "PageData": {
-            "PageRequirements": {
-                "ConflictingPages": [],
-                "IncompatiblePages": [],
-                "TitleReq": "None"
-            },
-            "SourceTitle": ""
-        },
-        "_DefVersion": "1"
-    },
-    "#BaseTrapAttack": {
-        "!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
-        "#ObjDetails": {
-            "Description": "Create a Trap which deals @@#DmgData:TrapDamage@@ when stepped on. Traps arms on End of Round and triggers on the first Actor to enter Spot. Damage from Traps can not be Blocked or Evaded.",
-            "DisplayName": "#Base Trap Attack",
-            "LargeIcon": "Sprites/BaseAtkIcon.png",
-            "ObjectType": "Item",
-            "SmallIcon": "Sprites/BaseAtkIcon.png",
-            "SnippetDesc": "Create a Trap  of DAMAGE_TYPE Damage.",
-            "Tags": [
-                "Trap"
-            ],
-            "Taxonomy": [
-                "Item",
-                "Page",
-                "Action"
-            ]
-        },
-        "ActionData": {
-            "AmmoData": {
-                "AmmoType": "Mag",
-                "Clip": 24.0,
-                "Cost": 4.0
-            },
-            "AttackDetails": {
-                "AccuracyMod": 1.0,
-                "PotencyMod": 1.0
-            },
-            "DamageDatas": {
-                "TrapDamage": {
-                    "AtkPwrBase": 100.0,
-                    "AtkPwrRange": 20.0,
-                    "AtkPwrScale": 1.0,
-                    "AtkStat": "PhyAttack",
-                    "BaseDamage": 0.0,
-                    "DamageType": "RAW",
-                    "DamageVfxKey": "AUTO",
-                    "DefenseType": "AUTO"
-                }
-            },
-            "Preview": {
-                "PreviewDamageKey": "TrapDamage",
-                "PreviewTargetKey": "TargetParam"
-            },
-            "SubActions": {
-                "CreateZone": {
-                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Spawning/SubAct_SpawnZone.gd",
-                    "#FrameIndex": 11.0,
-                    "#SubIndex": 1.0,
-                    "AreaTargetParamKey": "TargetParam",
-                    "DamageKey": "TrapDamage",
-                    "TargetKey": "Target1",
-                    "ZoneDataKey": "Zone1"
-                },
-                "GetTarget": {
-                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Targeting/SubAct_GetTarget.gd",
-                    "#FrameIndex": 10.0,
-                    "#SubIndex": 0.0,
-                    "AllowAlreadyTargeted": false,
-                    "AllowAutoTarget": true,
-                    "SetTargetKey": "Target1",
-                    "TargetParamKey": "TargetParam"
-                },
-                "PayCost": {
-                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Misc/SubAct_PayCost.gd",
-                    "#FrameIndex": 11.0,
-                    "#SubIndex": 0.0
-                },
-                "WeaponMotionAnimation": {
-                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponMotionAnimation.gd",
-                    "#FrameIndex": 11.0,
-                    "#SubIndex": 2.0,
-                    "MainHand": true,
-                    "OffHand": "OnlyIfDuel"
-                },
-                "WeaponReadyAnimation": {
-                    "!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponReadyAnimation.gd",
-                    "#FrameIndex": 5.0,
-                    "#SubIndex": 0.0,
-                    "Animation": "Raise",
-                    "MainHand": true,
-                    "OffHand": "OnlyIfDuel"
-                }
-            },
-            "TargetParams": {
-                "TargetParam": {
-                    "EffectArea": "[[0,0]]",
-                    "LineOfSight": true,
-                    "TargetArea": "[[-1,4],[0,4],[1,4],[-1,3],[0,3],[1,3],[-1,2],[0,2],[1,2]]",
-                    "TargetType": "Spot"
-                }
-            },
-            "ZoneDatas": {
-                "Zone1": {
-                    "Duration": 1.0,
-                    "DurationType": "Trigger",
-                    "TileSprite": "",
-                    "ZoneKey": "Zone1",
-                    "ZoneScenePath": "res://Scenes/Combat/MapObjects/Zones/zone_trap_node.tscn",
-                    "ZoneScript": "res://assets/Scripts/Zones/ZoneScripts/TrapZone.gd"
-                }
-            }
-        },
-        "ItemData": {
-            "ItemType": "Page",
-            "Rarity": "Common",
-            "Value": 50.0
-        },
-        "PageData": {
-            "PageRequirements": {
-                "ConflictingPages": [],
-                "IncompatiblePages": [],
-                "TitleReq": "None"
-            },
-            "SourceTitle": ""
-        },
-        "_DefVersion": "1"
-    }
+	"#BaseInflictAttack": {
+		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
+		"#ObjDetails": {
+			"Description": "Make a @@#Color:Red:Inflicting Attack@@ against an @@#TrgParm:TargetParam:TargetType@@ in range, attempting to apply @@#EftData:InflictEffect:DisplayName@@ for @@#EftData:InflictEffect:Duration@@.\n\n@@#EftData:InflictEffect@@",
+			"DisplayName": "#Base Inflict Attack",
+			"LargeIcon": "Sprites/BaseAtkIcon.png",
+			"ObjectType": "Item",
+			"SmallIcon": "Sprites/BaseAtkIcon.png",
+			"SnippetDesc": "Inflict EFFECT_NAME",
+			"Tags": [
+				"Attack",
+				"Inflict",
+				"LOS"
+			],
+			"Taxonomy": [
+				"Item",
+				"Page",
+				"Action"
+			]
+		},
+		"ActionData": {
+			"AttackDetails": {
+				"AccuracyMod": 1.0,
+				"AttackVfxData": {
+					"RandomOffsets": [
+						0.0,
+						0.0
+					],
+					"ScenePath": "res://assets/Scripts/VFXs/BulletVfxs/bullet_vfx_node.tscn",
+					"SpriteName": "Missiles/BaseBullet.png",
+					"SpriteSheetHight": 1.0,
+					"SpriteSheetWidth": 1.0,
+					"Velocity": 400.0
+				},
+				"AttackVfxKey": "",
+				"AutoHit": true,
+				"PotencyMod": 1.0
+			},
+			"DamageDatas": {
+
+			},
+			"EffectDatas": {
+				"InflictEffect": {
+					"Conditions": {
+						"ApplicationChance": 1.0,
+						"ApplyOnBlock": false,
+						"ApplyOnEvade": false,
+						"TagFilter": {
+
+						},
+						"TeamFilter": []
+					},
+					"EffectDataDef": {
+						"EffectDetails": {
+							"DurationData": {
+								"BaseDuration": 5.0
+							}
+						}
+					},
+					"EffectKey": "AilmentGreased"
+				}
+			},
+			"Preview": {
+				"PreviewTargetKey": "TargetParam"
+			},
+			"SubActions": {
+				"Attack": {
+					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Attacks/SubAct_Attack.gd",
+					"#FrameIndex": 11.0,
+					"#SubIndex": 0.0,
+					"EffectKeys": [
+						"InflictEffect"
+					],
+					"TargetKey": "Target1"
+				},
+				"GetTarget": {
+					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Targeting/SubAct_GetTarget.gd",
+					"#FrameIndex": 10.0,
+					"#SubIndex": 0.0,
+					"AllowAlreadyTargeted": false,
+					"AllowAutoTarget": true,
+					"SetTargetKey": "Target1",
+					"TargetParamKey": "TargetParam"
+				},
+				"PayCost": {
+					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Misc/SubAct_PayCost.gd",
+					"#FrameIndex": 10.0,
+					"#SubIndex": 1.0
+				}
+			},
+			"TargetParams": {
+				"TargetParam": {
+					"LineOfSight": true,
+					"TargetArea": "[[-1,2],[0,2],[1,2],[-1,1],[0,1],[1,1]]",
+					"TargetType": "Actor"
+				}
+			}
+		},
+		"ItemData": {
+			"ItemType": "Page",
+			"Rarity": "Common",
+			"Value": 50.0
+		},
+		"PageData": {
+			"PageRequirements": {
+				"ConflictingPages": [],
+				"IncompatiblePages": [],
+				"TitleReq": "None"
+			},
+			"SourceTitle": ""
+		},
+		"_DefVersion": "1"
+	},
+	"#BaseMeleeAttack": {
+		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
+		"#ObjDetails": {
+			"Description": "Make a @@#Color:Red:Melee Attack@@ against an @@#TrgParm:TargetParam:TargetType@@ dealing @@#DmgData:MeleeDamage@@ on hit.",
+			"DisplayName": "#Base Melee Attack",
+			"LargeIcon": "Sprites/BaseAtkIcon.png",
+			"ObjectType": "Item",
+			"SmallIcon": "Sprites/BaseAtkIcon.png",
+			"SnippetDesc": "Touch Actor for DAMAGE_TYPE damage.",
+			"Tags": [
+				"Attack",
+				"Melee"
+			],
+			"Taxonomy": [
+				"Item",
+				"Page",
+				"Action"
+			]
+		},
+		"ActionData": {
+			"AttackDetails": {
+				"AccuracyMod": 1.0,
+				"PotencyMod": 1.0
+			},
+			"DamageDatas": {
+				"MeleeDamage": {
+					"AtkPwrBase": 100.0,
+					"AtkPwrRange": 10.0,
+					"AtkPwrScale": 1.0,
+					"AtkStat": "PhyAttack",
+					"BaseDamage": 0.0,
+					"DamageType": "RAW",
+					"DamageVfxKey": "AUTO",
+					"DefenseType": "AUTO"
+				}
+			},
+			"Preview": {
+				"PreviewDamageKey": "MeleeDamage",
+				"PreviewTargetKey": "TargetParam"
+			},
+			"SubActions": {
+				"Attack": {
+					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Attacks/SubAct_Attack.gd",
+					"#FrameIndex": 11.0,
+					"#SubIndex": 0.0,
+					"DamageKey": "MeleeDamage",
+					"TargetKey": "Target1"
+				},
+				"GetTarget": {
+					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Targeting/SubAct_GetTarget.gd",
+					"#FrameIndex": 10.0,
+					"#SubIndex": 0.0,
+					"AllowAlreadyTargeted": false,
+					"AllowAutoTarget": true,
+					"SetTargetKey": "Target1",
+					"TargetParamKey": "TargetParam"
+				},
+				"PayCost": {
+					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Misc/SubAct_PayCost.gd",
+					"#FrameIndex": 10.0,
+					"#SubIndex": 1.0
+				}
+			},
+			"TargetParams": {
+				"TargetParam": {
+					"LineOfSight": true,
+					"TargetArea": "[[-1,0],[1,0],[-1,1],[0,1],[1,1]]",
+					"TargetType": "Actor"
+				}
+			}
+		},
+		"ItemData": {
+			"ItemType": "Page",
+			"Rarity": "Common",
+			"Value": 50.0
+		},
+		"PageData": {
+			"PageRequirements": {
+				"ConflictingPages": [],
+				"IncompatiblePages": [],
+				"TitleReq": "None"
+			},
+			"SourceTitle": ""
+		},
+		"_DefVersion": "1"
+	},
+	"#BaseMissileAttack": {
+		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
+		"#ObjDetails": {
+			"Description": "Launch a @@#Color:Missile@@ at @@#TrgParm:TargetParam:TargetType@@ in range, dealing @@#DmgData:MissileDamage@@ to any @@#Color:Red:Actor@@ it hits.",
+			"DisplayName": "#Base Missile Attack",
+			"LargeIcon": "Sprites/BaseAtkIcon.png",
+			"ObjectType": "Item",
+			"SmallIcon": "Sprites/BaseAtkIcon.png",
+			"SnippetDesc": "Launch a Missile of DAMAGE_TYPE",
+			"Tags": [
+				"Attack",
+				"Missile",
+				"LOS"
+			],
+			"Taxonomy": [
+				"Item",
+				"Page",
+				"Action"
+			]
+		},
+		"ActionData": {
+			"AttackDetails": {
+				"AccuracyMod": 1.0,
+				"PotencyMod": 1.0
+			},
+			"DamageDatas": {
+				"MissileDamage": {
+					"AtkPwrBase": 100.0,
+					"AtkPwrRange": 20.0,
+					"AtkPwrScale": 1.0,
+					"AtkStat": "PhyAttack",
+					"BaseDamage": 0.0,
+					"DamageType": "RAW",
+					"DamageVfxKey": "AUTO",
+					"DefenseType": "AUTO"
+				}
+			},
+			"MissileDatas": {
+				"Missile1": {
+					"DamageDataKey": "MissileDamage",
+					"FramesPerTile": 3.0,
+					"ImpactVfxKey": "",
+					"MissileVfxData": {
+						"AnimationName": "4_sprites_250ms_frames_loop",
+						"AnimationSpeed": 1.0,
+						"RandomOffsets": [
+							0.0,
+							0.0
+						],
+						"RandomRotation": [
+							0.0,
+							0.0
+						],
+						"Scale": [
+							1.0,
+							1.0
+						],
+						"ScenePath": "res://assets/Scripts/VFXs/MissileVfx/missile_vfx_node.tscn",
+						"SpriteName": "Missiles/BaseMissile.png",
+						"SpriteSheetHight": 2.0,
+						"SpriteSheetWidth": 2.0
+					},
+					"MissileVfxKey": ""
+				}
+			},
+			"Preview": {
+				"PreviewDamageKey": "MissileDamage",
+				"PreviewTargetKey": "TargetParam"
+			},
+			"SubActions": {
+				"GetTarget": {
+					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Targeting/SubAct_GetTarget.gd",
+					"#FrameIndex": 5.0,
+					"#SubIndex": 0.0,
+					"AllowAlreadyTargeted": false,
+					"AllowAutoTarget": false,
+					"SetTargetKey": "Target1",
+					"TargetParamKey": "TargetParam"
+				},
+				"PayCost": {
+					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Misc/SubAct_PayCost.gd",
+					"#FrameIndex": 5.0,
+					"#SubIndex": 1.0
+				},
+				"SpawnMissile": {
+					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Spawning/SubAct_SpawnMissile.gd",
+					"#FrameIndex": 5.0,
+					"#SubIndex": 2.0,
+					"DamageKey": "MissileDamage",
+					"MissileKey": "Missile1",
+					"TargetKey": "Target1"
+				}
+			},
+			"TargetParams": {
+				"TargetParam": {
+					"LineOfSight": true,
+					"TargetArea": "[[-1,4],[0,4],[1,4],[-2,3],[-1,3],[0,3],[1,3],[2,3],[-1,2],[0,2],[1,2]]",
+					"TargetType": "Spot"
+				}
+			}
+		},
+		"ItemData": {
+			"ItemType": "Page",
+			"Rarity": "Common",
+			"Value": 50.0
+		},
+		"PageData": {
+			"PageRequirements": {
+				"ConflictingPages": [],
+				"IncompatiblePages": [],
+				"TitleReq": "None"
+			},
+			"SourceTitle": ""
+		},
+		"_DefVersion": "1"
+	},
+	"#BaseRangedAttack": {
+		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
+		"#ObjDetails": {
+			"Description": "Make a @@#Color:Red:Ranged Attack@@ against an @@#TrgParm:TargetParam:TargetType@@ in range, dealing @@#DmgData:RangedDamage@@ on hit.",
+			"DisplayName": "#Base Range Attack",
+			"LargeIcon": "Sprites/BaseAtkIcon.png",
+			"ObjectType": "Item",
+			"SmallIcon": "Sprites/BaseAtkIcon.png",
+			"SnippetDesc": "Shoot a bolt of DAMAGE_TYPE",
+			"Tags": [
+				"Attack",
+				"Ranged",
+				"LOS"
+			],
+			"Taxonomy": [
+				"Item",
+				"Page",
+				"Action"
+			]
+		},
+		"ActionData": {
+			"AttackDetails": {
+				"AccuracyMod": 1.0,
+				"AttackVfxData": {
+					"RandomOffsets": [
+						0.0,
+						0.0
+					],
+					"ScenePath": "res://assets/Scripts/VFXs/BulletVfxs/bullet_vfx_node.tscn",
+					"SpriteName": "Missiles/BaseBullet.png",
+					"SpriteSheetHight": 1.0,
+					"SpriteSheetWidth": 1.0,
+					"Velocity": 400.0
+				},
+				"AttackVfxKey": "",
+				"PotencyMod": 1.0
+			},
+			"DamageDatas": {
+				"RangedDamage": {
+					"AtkPwrBase": 80.0,
+					"AtkPwrRange": 20.0,
+					"AtkPwrScale": 1.0,
+					"AtkStat": "PhyAttack",
+					"BaseDamage": 0.0,
+					"DamageType": "RAW",
+					"DamageVfxKey": "AUTO",
+					"DefenseType": "AUTO"
+				}
+			},
+			"Preview": {
+				"PreviewDamageKey": "RangedDamage",
+				"PreviewTargetKey": "TargetParam"
+			},
+			"SubActions": {
+				"Attack": {
+					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Attacks/SubAct_Attack.gd",
+					"#FrameIndex": 11.0,
+					"#SubIndex": 0.0,
+					"DamageKey": "RangedDamage",
+					"TargetKey": "Target1"
+				},
+				"GetTarget": {
+					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Targeting/SubAct_GetTarget.gd",
+					"#FrameIndex": 10.0,
+					"#SubIndex": 0.0,
+					"AllowAlreadyTargeted": false,
+					"AllowAutoTarget": true,
+					"SetTargetKey": "Target1",
+					"TargetParamKey": "TargetParam"
+				},
+				"PayCost": {
+					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Misc/SubAct_PayCost.gd",
+					"#FrameIndex": 10.0,
+					"#SubIndex": 1.0
+				}
+			},
+			"TargetParams": {
+				"TargetParam": {
+					"LineOfSight": true,
+					"TargetArea": "[[-1,3],[0,3],[1,3],[-1,2],[0,2],[1,2],[0,1]]",
+					"TargetType": "Actor"
+				}
+			}
+		},
+		"ItemData": {
+			"ItemType": "Page",
+			"Rarity": "Common",
+			"Value": 50.0
+		},
+		"PageData": {
+			"PageRequirements": {
+				"ConflictingPages": [],
+				"IncompatiblePages": [],
+				"TitleReq": "None"
+			},
+			"SourceTitle": ""
+		},
+		"_DefVersion": "1"
+	},
+	"#BaseTrapAttack": {
+		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
+		"#ObjDetails": {
+			"Description": "Create a Trap which deals @@#DmgData:TrapDamage@@ when stepped on. Traps arms on End of Round and triggers on the first Actor to enter Spot. Damage from Traps can not be Blocked or Evaded.",
+			"DisplayName": "#Base Trap Attack",
+			"LargeIcon": "Sprites/BaseAtkIcon.png",
+			"ObjectType": "Item",
+			"SmallIcon": "Sprites/BaseAtkIcon.png",
+			"SnippetDesc": "Create a Trap  of DAMAGE_TYPE Damage.",
+			"Tags": [
+				"Trap"
+			],
+			"Taxonomy": [
+				"Item",
+				"Page",
+				"Action"
+			]
+		},
+		"ActionData": {
+			"AmmoData": {
+				"AmmoType": "Mag",
+				"Clip": 24.0,
+				"Cost": 4.0
+			},
+			"AttackDetails": {
+				"AccuracyMod": 1.0,
+				"PotencyMod": 1.0
+			},
+			"DamageDatas": {
+				"TrapDamage": {
+					"AtkPwrBase": 100.0,
+					"AtkPwrRange": 20.0,
+					"AtkPwrScale": 1.0,
+					"AtkStat": "PhyAttack",
+					"BaseDamage": 0.0,
+					"DamageType": "RAW",
+					"DamageVfxKey": "AUTO",
+					"DefenseType": "AUTO"
+				}
+			},
+			"Preview": {
+				"PreviewDamageKey": "TrapDamage",
+				"PreviewTargetKey": "TargetParam"
+			},
+			"SubActions": {
+				"CreateZone": {
+					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Spawning/SubAct_SpawnZone.gd",
+					"#FrameIndex": 11.0,
+					"#SubIndex": 1.0,
+					"AreaTargetParamKey": "TargetParam",
+					"DamageKey": "TrapDamage",
+					"TargetKey": "Target1",
+					"ZoneDataKey": "Zone1"
+				},
+				"GetTarget": {
+					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Targeting/SubAct_GetTarget.gd",
+					"#FrameIndex": 10.0,
+					"#SubIndex": 0.0,
+					"AllowAlreadyTargeted": false,
+					"AllowAutoTarget": true,
+					"SetTargetKey": "Target1",
+					"TargetParamKey": "TargetParam"
+				},
+				"PayCost": {
+					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Misc/SubAct_PayCost.gd",
+					"#FrameIndex": 11.0,
+					"#SubIndex": 0.0
+				},
+				"WeaponMotionAnimation": {
+					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponMotionAnimation.gd",
+					"#FrameIndex": 11.0,
+					"#SubIndex": 2.0,
+					"MainHand": true,
+					"OffHand": "OnlyIfDuel"
+				},
+				"WeaponReadyAnimation": {
+					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponReadyAnimation.gd",
+					"#FrameIndex": 5.0,
+					"#SubIndex": 0.0,
+					"Animation": "Raise",
+					"MainHand": true,
+					"OffHand": "OnlyIfDuel"
+				}
+			},
+			"TargetParams": {
+				"TargetParam": {
+					"EffectArea": "[[0,0]]",
+					"LineOfSight": true,
+					"TargetArea": "[[-1,4],[0,4],[1,4],[-1,3],[0,3],[1,3],[-1,2],[0,2],[1,2]]",
+					"TargetType": "Spot"
+				}
+			},
+			"ZoneDatas": {
+				"Zone1": {
+					"Duration": 1.0,
+					"DurationType": "Trigger",
+					"TileSprite": "",
+					"ZoneKey": "Zone1",
+					"ZoneScenePath": "res://Scenes/Combat/MapObjects/Zones/zone_trap_node.tscn",
+					"ZoneScript": "res://assets/Scripts/Zones/ZoneScripts/TrapZone.gd"
+				}
+			}
+		},
+		"ItemData": {
+			"ItemType": "Page",
+			"Rarity": "Common",
+			"Value": 50.0
+		},
+		"PageData": {
+			"PageRequirements": {
+				"ConflictingPages": [],
+				"IncompatiblePages": [],
+				"TitleReq": "None"
+			},
+			"SourceTitle": ""
+		},
+		"_DefVersion": "1"
+	}
 }

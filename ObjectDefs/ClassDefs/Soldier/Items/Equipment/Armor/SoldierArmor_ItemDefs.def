@@ -1,1 +1,219 @@
-{"OldShield":{"!ObjectScript":"res://assets/Scripts/Items/Equipment/Tools/BaseShieldItem.gd","#ObjDetails":{"Description":"Standard issue shield provided by The Military. Old, but still works.","DisplayName":"Old Shield","LargeIcon":"Sprites/OldShield.png","ObjectType":"Item","SmallIcon":"Sprites/OldShield.png","SnippetDesc":"A soldier's old Shield.","Tags":["Equipment","OffHand","Shield"],"Taxonomy":["Item","Equipment","Tool","Shield"]},"EquipmentData":{"EquipSlot":"OffHand","Requirments":{"ReqStats":{"Strength":10.0}},"SpriteData":{"SpriteSheet":"Sprites/OldShield_SpriteSheet.png"},"StatMods":{"ArmorBonus":{"ModType":"Add","StatName":"Armor","Value":5.0},"StatMod1":{"ModType":"Set","StatName":"BlockChance","Value":45.0},"StatMod2":{"ModType":"Set","StatName":"BlockMod","Value":0.5}}},"ItemData":{"Rarity":"Mundane","Value":50.0},"_DefVersion":"1"},"OldSoldierArmor":{"!ObjectScript":"res://assets/Scripts/Items/Equipment/BaseApparelEquipment.gd","#ObjDetails":{"Description":"Standard issue armor provided by The Military. Old, but still works.","DisplayName":"Old Armor","LargeIcon":"Sprites/OldArmor.png","ObjectType":"Item","SmallIcon":"Sprites/OldArmor.png","SnippetDesc":"A soldier's old Armor.","Tags":["Equipment","Apparel","Body"],"Taxonomy":["Item","Equipment","Apparel"]},"ApparelData":{"ApparelClass":"HeavyArmor","ProvidedArmor":5.0,"ProvidedWard":0.0,"StatMods":{"MassBonus":{"ModType":"Add","StatName":"Mass","Value":1.0},"SpeedPen":{"ModType":"Add","StatName":"Speed","Value":-1.0}}},"EquipmentData":{"EquipSlot":"Body","Requirments":{"ReqStats":{"Strength":10.0}},"SpriteData":{"SpriteSheet":"Sprites/OldArmor_SpriteSheet.png"}},"ItemData":{"Rarity":"Mundane","Value":50.0},"_DefVersion":"1"},"OldSoldierBoots":{"!ObjectScript":"res://assets/Scripts/Items/Equipment/BaseApparelEquipment.gd","#ObjDetails":{"Description":"Standard issue boots provided by The Military. Old, but still works.","DisplayName":"Old Boots","LargeIcon":"Sprites/OldBoots.png","ObjectType":"Item","SmallIcon":"Sprites/OldBoots.png","SnippetDesc":"A soldier's old Boots.","Tags":["Equipment","Apparel","Feet"],"Taxonomy":["Item","Equipment","Apparel"]},"ApparelData":{"ApparelClass":"HeavyArmor","ProvidedArmor":5.0,"ProvidedWard":0.0,"StatMods":{"MassBonus":{"ModType":"Add","StatName":"Mass","Value":1.0},"SpeedPen":{"ModType":"Add","StatName":"Speed","Value":-1.0}}},"EquipmentData":{"EquipSlot":"Feet","Requirments":{"ReqStats":{"Strength":10.0}},"SpriteData":{"SpriteSheet":"Sprites/OldBoots_SpriteSheet.png"}},"ItemData":{"Rarity":"Mundane","Value":50.0},"_DefVersion":"1"},"OldSoldierHelmet":{"!ObjectScript":"res://assets/Scripts/Items/Equipment/BaseApparelEquipment.gd","#ObjDetails":{"Description":"Standard issue helmet provided by The Military. Old, but still works.","DisplayName":"Old Helmet","LargeIcon":"Sprites/OldHelm.png","ObjectType":"Item","SmallIcon":"Sprites/OldHelm.png","SnippetDesc":"A soldier's old Helmet.","Tags":["Equipment","Apparel","Head"],"Taxonomy":["Item","Equipment","Apparel"]},"ApparelData":{"ApparelClass":"HeavyArmor","ProvidedArmor":5.0,"ProvidedWard":0.0,"StatMods":{"MassBonus":{"ModType":"Add","StatName":"Mass","Value":1.0},"SpeedPen":{"ModType":"Add","StatName":"Speed","Value":-1.0}}},"EquipmentData":{"EquipSlot":"Head","Requirments":{"ReqStats":{"Strength":10.0}},"SpriteData":{"SpriteSheet":"Sprites/OldHelm_SpriteSheet.png"}},"ItemData":{"Rarity":"Mundane","Value":-1.0},"_DefVersion":"1"}}
+{
+	"OldShield": {
+		"!ObjectScript": "res://assets/Scripts/Items/Equipment/Tools/BaseShieldItem.gd",
+		"#ObjDetails": {
+			"Description": "Standard issue shield provided by The Military. Old, but still works.",
+			"DisplayName": "Old Shield",
+			"LargeIcon": "Sprites/OldShield.png",
+			"ObjectType": "Item",
+			"SmallIcon": "Sprites/OldShield.png",
+			"SnippetDesc": "A soldier's old Shield.",
+			"Tags": [
+				"Equipment",
+				"OffHand",
+				"Shield"
+			],
+			"Taxonomy": [
+				"Item",
+				"Equipment",
+				"Tool",
+				"Shield"
+			]
+		},
+		"EquipmentData": {
+			"EquipSlot": "OffHand",
+			"Requirments": {
+				"ReqStats": {
+					"Strength": 10.0
+				}
+			},
+			"SpriteData": {
+				"SpriteSheet": "Sprites/OldShield_SpriteSheet.png"
+			},
+			"StatMods": {
+				"ArmorBonus": {
+					"ModType": "Add",
+					"StatName": "Armor",
+					"Value": 5.0
+				},
+				"StatMod1": {
+					"ModType": "Set",
+					"StatName": "BlockChance",
+					"Value": 45.0
+				},
+				"StatMod2": {
+					"ModType": "Set",
+					"StatName": "BlockMod",
+					"Value": 0.5
+				}
+			}
+		},
+		"ItemData": {
+			"Rarity": "Mundane",
+			"Value": 50.0
+		},
+		"_DefVersion": "1"
+	},
+	"OldSoldierArmor": {
+		"!ObjectScript": "res://assets/Scripts/Items/Equipment/BaseApparelEquipment.gd",
+		"#ObjDetails": {
+			"Description": "Standard issue armor provided by The Military. Old, but still works.",
+			"DisplayName": "Old Armor",
+			"LargeIcon": "Sprites/OldArmor.png",
+			"ObjectType": "Item",
+			"SmallIcon": "Sprites/OldArmor.png",
+			"SnippetDesc": "A soldier's old Armor.",
+			"Tags": [
+				"Equipment",
+				"Apparel",
+				"Body"
+			],
+			"Taxonomy": [
+				"Item",
+				"Equipment",
+				"Apparel"
+			]
+		},
+		"ApparelData": {
+			"ApparelClass": "HeavyArmor",
+			"ProvidedArmor": 5.0,
+			"ProvidedWard": 0.0,
+			"StatMods": {
+				"MassBonus": {
+					"ModType": "Add",
+					"StatName": "Mass",
+					"Value": 1.0
+				},
+				"SpeedPen": {
+					"ModType": "Add",
+					"StatName": "Speed",
+					"Value": -1.0
+				}
+			}
+		},
+		"EquipmentData": {
+			"EquipSlot": "Body",
+			"Requirments": {
+				"ReqStats": {
+					"Strength": 10.0
+				}
+			},
+			"SpriteData": {
+				"SpriteSheet": "Sprites/OldArmor_SpriteSheet.png"
+			}
+		},
+		"ItemData": {
+			"Rarity": "Mundane",
+			"Value": 50.0
+		},
+		"_DefVersion": "1"
+	},
+	"OldSoldierBoots": {
+		"!ObjectScript": "res://assets/Scripts/Items/Equipment/BaseApparelEquipment.gd",
+		"#ObjDetails": {
+			"Description": "Standard issue boots provided by The Military. Old, but still works.",
+			"DisplayName": "Old Boots",
+			"LargeIcon": "Sprites/OldBoots.png",
+			"ObjectType": "Item",
+			"SmallIcon": "Sprites/OldBoots.png",
+			"SnippetDesc": "A soldier's old Boots.",
+			"Tags": [
+				"Equipment",
+				"Apparel",
+				"Feet"
+			],
+			"Taxonomy": [
+				"Item",
+				"Equipment",
+				"Apparel"
+			]
+		},
+		"ApparelData": {
+			"ApparelClass": "HeavyArmor",
+			"ProvidedArmor": 5.0,
+			"ProvidedWard": 0.0,
+			"StatMods": {
+				"MassBonus": {
+					"ModType": "Add",
+					"StatName": "Mass",
+					"Value": 1.0
+				},
+				"SpeedPen": {
+					"ModType": "Add",
+					"StatName": "Speed",
+					"Value": -1.0
+				}
+			}
+		},
+		"EquipmentData": {
+			"EquipSlot": "Feet",
+			"Requirments": {
+				"ReqStats": {
+					"Strength": 10.0
+				}
+			},
+			"SpriteData": {
+				"SpriteSheet": "Sprites/OldBoots_SpriteSheet.png"
+			}
+		},
+		"ItemData": {
+			"Rarity": "Mundane",
+			"Value": 50.0
+		},
+		"_DefVersion": "1"
+	},
+	"OldSoldierHelmet": {
+		"!ObjectScript": "res://assets/Scripts/Items/Equipment/BaseApparelEquipment.gd",
+		"#ObjDetails": {
+			"Description": "Standard issue helmet provided by The Military. Old, but still works.",
+			"DisplayName": "Old Helmet",
+			"LargeIcon": "Sprites/OldHelm.png",
+			"ObjectType": "Item",
+			"SmallIcon": "Sprites/OldHelm.png",
+			"SnippetDesc": "A soldier's old Helmet.",
+			"Tags": [
+				"Equipment",
+				"Apparel",
+				"Head"
+			],
+			"Taxonomy": [
+				"Item",
+				"Equipment",
+				"Apparel"
+			]
+		},
+		"ApparelData": {
+			"ApparelClass": "HeavyArmor",
+			"ProvidedArmor": 5.0,
+			"ProvidedWard": 0.0,
+			"StatMods": {
+				"MassBonus": {
+					"ModType": "Add",
+					"StatName": "Mass",
+					"Value": 1.0
+				},
+				"SpeedPen": {
+					"ModType": "Add",
+					"StatName": "Speed",
+					"Value": -1.0
+				}
+			}
+		},
+		"EquipmentData": {
+			"EquipSlot": "Head",
+			"Requirments": {
+				"ReqStats": {
+					"Strength": 10.0
+				}
+			},
+			"SpriteData": {
+				"SpriteSheet": "Sprites/OldHelm_SpriteSheet.png"
+			}
+		},
+		"ItemData": {
+			"Rarity": "Mundane",
+			"Value": -1.0
+		},
+		"_DefVersion": "1"
+	}
+}

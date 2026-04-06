@@ -1,1 +1,137 @@
-{"OldPriestArmor":{"!ObjectScript":"res://assets/Scripts/Items/Equipment/BaseApparelEquipment.gd","#ObjDetails":{"Description":"Common ceremonial robes provided by the church. Old, but still works.","DisplayName":"Old Holy Robes","LargeIcon":"Sprites/HolyRobes.png","ObjectType":"Item","SmallIcon":"Sprites/HolyRobes.png","SnippetDesc":"A priest's old Robes.","Tags":["Equipment","Armor","Body"],"Taxonomy":["Item","Equipment","Armor"]},"ApparelData":{"ApparelClass":"HeavyWard","ProvidedArmor":0.0,"ProvidedWard":5.0,"StatMods":{}},"EquipmentData":{"EquipSlot":"Body","Requirments":{"ReqStats":{"Wisdom":10.0}},"SpriteData":{"SpriteSheet":"Sprites/HolyRobes_SpriteSheet.png"}},"ItemData":{"Rarity":"Mundane","Value":-1.0},"_DefVersion":"1"},"OldPriestBoots":{"!ObjectScript":"res://assets/Scripts/Items/Equipment/BaseApparelEquipment.gd","#ObjDetails":{"Description":"Common ceremonial shoes provided by the church. Old, but still works.","DisplayName":"Old Holy Shoes","LargeIcon":"Sprites/HolyBoots.png","ObjectType":"Item","SmallIcon":"Sprites/HolyBoots.png","SnippetDesc":"A priest's old Boots.","Tags":["Equipment","Armor","Feet"],"Taxonomy":["Item","Equipment","Armor"]},"ApparelData":{"ApparelClass":"HeavyWard","ProvidedArmor":0.0,"ProvidedWard":5.0,"StatMods":{}},"EquipmentData":{"EquipSlot":"Feet","Requirments":{"ReqStats":{"Wisdom":10.0}},"SpriteData":{"SpriteSheet":"Sprites/HolyBoots_SpriteSheet.png"}},"ItemData":{"Rarity":"Mundane","Value":-1.0},"_DefVersion":"1"},"OldPriestHelmet":{"!ObjectScript":"res://assets/Scripts/Items/Equipment/BaseApparelEquipment.gd","#ObjDetails":{"Description":"A common ceremonial hat provided by the church. Old, but still works.","DisplayName":"Old Mitre","LargeIcon":"Sprites/HolyHat.png","ObjectType":"Item","SmallIcon":"Sprites/HolyHat.png","SnippetDesc":"A priest's old mitre.","Tags":["Equipment","Armor","Head"],"Taxonomy":["Item","Equipment","Armor"]},"ApparelData":{"ApparelClass":"HeavyWard","ProvidedArmor":0.0,"ProvidedWard":5.0,"StatMods":{}},"EquipmentData":{"EquipSlot":"Head","Requirments":{"ReqStats":{"Wisdom":10.0}},"SpriteData":{"SpriteSheet":"Sprites/HolyHat_SpriteSheet.png"}},"ItemData":{"Rarity":"Mundane","Value":-1.0},"_DefVersion":"1"}}
+{
+	"OldPriestArmor": {
+		"!ObjectScript": "res://assets/Scripts/Items/Equipment/BaseApparelEquipment.gd",
+		"#ObjDetails": {
+			"Description": "Common ceremonial robes provided by the church. Old, but still works.",
+			"DisplayName": "Old Holy Robes",
+			"LargeIcon": "Sprites/HolyRobes.png",
+			"ObjectType": "Item",
+			"SmallIcon": "Sprites/HolyRobes.png",
+			"SnippetDesc": "A priest's old Robes.",
+			"Tags": [
+				"Equipment",
+				"Armor",
+				"Body"
+			],
+			"Taxonomy": [
+				"Item",
+				"Equipment",
+				"Armor"
+			]
+		},
+		"ApparelData": {
+			"ApparelClass": "HeavyWard",
+			"ProvidedArmor": 0.0,
+			"ProvidedWard": 5.0,
+			"StatMods": {
+
+			}
+		},
+		"EquipmentData": {
+			"EquipSlot": "Body",
+			"Requirments": {
+				"ReqStats": {
+					"Wisdom": 10.0
+				}
+			},
+			"SpriteData": {
+				"SpriteSheet": "Sprites/HolyRobes_SpriteSheet.png"
+			}
+		},
+		"ItemData": {
+			"Rarity": "Mundane",
+			"Value": -1.0
+		},
+		"_DefVersion": "1"
+	},
+	"OldPriestBoots": {
+		"!ObjectScript": "res://assets/Scripts/Items/Equipment/BaseApparelEquipment.gd",
+		"#ObjDetails": {
+			"Description": "Common ceremonial shoes provided by the church. Old, but still works.",
+			"DisplayName": "Old Holy Shoes",
+			"LargeIcon": "Sprites/HolyBoots.png",
+			"ObjectType": "Item",
+			"SmallIcon": "Sprites/HolyBoots.png",
+			"SnippetDesc": "A priest's old Boots.",
+			"Tags": [
+				"Equipment",
+				"Armor",
+				"Feet"
+			],
+			"Taxonomy": [
+				"Item",
+				"Equipment",
+				"Armor"
+			]
+		},
+		"ApparelData": {
+			"ApparelClass": "HeavyWard",
+			"ProvidedArmor": 0.0,
+			"ProvidedWard": 5.0,
+			"StatMods": {
+
+			}
+		},
+		"EquipmentData": {
+			"EquipSlot": "Feet",
+			"Requirments": {
+				"ReqStats": {
+					"Wisdom": 10.0
+				}
+			},
+			"SpriteData": {
+				"SpriteSheet": "Sprites/HolyBoots_SpriteSheet.png"
+			}
+		},
+		"ItemData": {
+			"Rarity": "Mundane",
+			"Value": -1.0
+		},
+		"_DefVersion": "1"
+	},
+	"OldPriestHelmet": {
+		"!ObjectScript": "res://assets/Scripts/Items/Equipment/BaseApparelEquipment.gd",
+		"#ObjDetails": {
+			"Description": "A common ceremonial hat provided by the church. Old, but still works.",
+			"DisplayName": "Old Mitre",
+			"LargeIcon": "Sprites/HolyHat.png",
+			"ObjectType": "Item",
+			"SmallIcon": "Sprites/HolyHat.png",
+			"SnippetDesc": "A priest's old mitre.",
+			"Tags": [
+				"Equipment",
+				"Armor",
+				"Head"
+			],
+			"Taxonomy": [
+				"Item",
+				"Equipment",
+				"Armor"
+			]
+		},
+		"ApparelData": {
+			"ApparelClass": "HeavyWard",
+			"ProvidedArmor": 0.0,
+			"ProvidedWard": 5.0,
+			"StatMods": {
+
+			}
+		},
+		"EquipmentData": {
+			"EquipSlot": "Head",
+			"Requirments": {
+				"ReqStats": {
+					"Wisdom": 10.0
+				}
+			},
+			"SpriteData": {
+				"SpriteSheet": "Sprites/HolyHat_SpriteSheet.png"
+			}
+		},
+		"ItemData": {
+			"Rarity": "Mundane",
+			"Value": -1.0
+		},
+		"_DefVersion": "1"
+	}
+}

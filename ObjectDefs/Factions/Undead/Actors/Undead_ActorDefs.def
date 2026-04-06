@@ -1,1 +1,410 @@
-{"#BaseUndead":{"!ParentKey":"#BaseActor","#ObjDetails":{"Description":"Description.","DisplayName":"#Base Undead","LargeIcon":"Sprites/BaseActor.png","ObjectType":"Actor","SmallIcon":"Sprites/BaseActor.png","SnippetDesc":"An actor made for baseing.","Tags":["Undead","Creature"],"Taxonomy":["Actor"]},"ActorData":{"DropItemsSet":{"":9.0,"Money:10":10.0,"Money:20":5.0,"Undead_PageBook":1.0},"EquipmentConstraints":{"ApparelSlots":["Head","Body","Feet"],"HandConditions":[{"CanMainHand":true,"CanOffHand":true,"CanOneHand":true,"CanTwoHand":false,"ConditionName":"Light Weapon","OffHandReq":[{"MainHandTagFilters":[{"RequireAllTags":["LightWpn"]}],"MainHandTagFiltersReqAll":true}],"ToolTagFilters":[{"RequireAllTags":["LightWpn"]}],"ToolTagFiltersReqAll":true},{"CanMainHand":true,"CanOffHand":false,"CanOneHand":false,"CanTwoHand":true,"ConditionName":"Heavy Weapon","OffHandReq":[],"ToolTagFilters":[{"RequireAllTags":["HeavyWpn"]}],"ToolTagFiltersReqAll":true},{"CanMainHand":true,"CanOffHand":false,"CanOneHand":true,"CanTwoHand":false,"ConditionName":"Default Weapon","OffHandReq":[],"ToolTagFilters":[{"RequireAllTags":["Weapon"]}],"ToolTagFiltersReqAll":true},{"CanMainHand":false,"CanOffHand":true,"CanOneHand":true,"CanTwoHand":false,"ConditionName":"Default Tool","OffHandReq":[],"ToolTagFilters":[],"ToolTagFiltersReqAll":false}],"HandCount":2.0,"TrinketCount":1.0},"ExpValue":80.0,"Faction":"Undead","MoneyValue":15.0},"AiData":{"AggroRangeLimit":12.0},"ImmuneToEffects":["AilmentBleed","AilmentPoisoned"],"PortraitRect":[12.0,20.0,24.0,24.0],"ScenePath":"res://Scenes/Combat/MapObjects/Actors/ComplexActorNode/complex_actor_node.tscn","Stats":{"Resistance:Dark":150.0,"Resistance:Light":-50.0,"Resistance:Poison":100.0}},"Skeleton":{"!ObjectScript":"res://assets/Scripts/Actors/BaseActor.gd","!ParentKey":"#BaseUndead","#ObjDetails":{"Description":"A spooky scary @@#Color:Red:Skeleton@@ risen from the dead. This form of reanimation accounts for a lack of muscle tissue by focusing on direct manipulation of bone. This results in an @@#Tag:Undead@@ that is physically weaker, but has the @@#Color:Red:Agility@@ required to use @@#Tag:Ranged:Hint:Ranged Weapons@@.\n\nThier exposed bone is resistant to @@#Color:DmgColor:Slash@@ and @@#Color:DmgColor:Pierce@@, but is quite vulnerable to @@#Color:DmgColor:Blunt@@ and @@#Color:DmgColor:Crash@@. They often remain on back lines using range to attack from afar. But, while some may view them as nightmarish monsters, I like to believe there's a @@#Color:Red:Skeleton@@ inside us all.","DisplayName":"Skeleton","LargeIcon":"Sprites/Skeleton_Icon.png","ObjectType":"Actor","SmallIcon":"Sprites/Skeleton_Icon.png","SnippetDesc":"A Skeleton","Tags":["Skeleton"],"Taxonomy":["Actor"]},"ActorData":{"DropItemsSet":{"":9.0,"BaseBow_Weapon":5.0,"Money:10":10.0,"Money:20":5.0,"Undead_PageBook":1.0},"ExpValue":80.0,"Faction":"Undead","MoneyValue":15.0},"SpawnEquipmentArr":["Undead_PageBook","BaseBow_Weapon"],"SpawnItemArr":[],"SpawnPageArr":["Skeleton_TitlePage","MoveForward","TurnLeft","TurnRight","BasicWeaponAttack","ReloadPage"],"SpriteSheet":"SpriteSheets/Skeleton_SpriteSheet.png","Stats":{"Accuracy":100.0,"AggroMod":1.0,"Agility":10.0,"Awareness":0.0,"BlocksLOS":0.0,"CrashPower":20.0,"CritChance":5.0,"CritMod":1.5,"Evasion":1.0,"HealthMax":100.0,"Intelligence":3.0,"Level":0.0,"MagAttack":0.0,"Mass":8.0,"OffHandMod":0.5,"PPR":0.0,"PhyAttack":0.0,"Potency":100.0,"Protection":1.0,"Resistance:Blunt":-50.0,"Resistance:Crash":-50.0,"Resistance:Pierce":50.0,"Resistance:Slash":50.0,"Speed":12.0,"Strength":5.0,"TwoHandMod":1.2,"Wisdom":8.0},"UnarmedAttackData":{"DamageDatas":{"UnarmedDamage":{"AtkPower":20.0,"AtkStat":"PhyAttack","DamageType":"Blunt","DamageVarient":0.5,"DamageVfxKey":"Blunt_DamageEffect","DefenseType":"Physical","DisplayName":"Punch","FixedBaseDamage":null}},"TargetParams":{"LineOfSight":true,"TargetArea":"[[-1,0],[-1,1],[0,1],[1,1],[1,0]]","TargetType":"Actor"}},"_DefVersion":"1"},"SkeletonMage":{"!ObjectScript":"res://assets/Scripts/Actors/BaseActor.gd","!ParentKey":"Skeleton","#ObjDetails":{"Description":"A spooky scary @@#Color:Red:Skeleton@@ risen from the dead.","DisplayName":"Skel Mage","LargeIcon":"Sprites/SkeletonMage_Icon.png","ObjectType":"Actor","SmallIcon":"Sprites/SkeletonMage_Icon.png","SnippetDesc":"A Skeleton Mage","Tags":["Skeleton","Mage"],"Taxonomy":["Actor"]},"ActorData":{"DropItemsSet":{"":9.0,"BoneWand_Weapon":5.0,"DarkHat_HeadApparel":5.0,"DarkRobes_BodyApparel":5.0,"Money:10":10.0,"Money:20":5.0,"Undead_PageBook":1.0},"ExpValue":100.0,"Faction":"Undead","MoneyValue":20.0},"SpawnEquipmentArr":["Undead_PageBook","BaseBow_Weapon","BoneWand_Weapon","DarkHat_HeadApparel","DarkRobes_BodyApparel"],"SpawnItemArr":[],"SpawnPageArr":["SkeletonMage_TitlePage","MoveForward","TurnLeft","TurnRight","BasicWeaponAttack","ReloadPage"],"SpriteSheet":"SpriteSheets/Skeleton_SpriteSheet.png","Stats":{"Accuracy":100.0,"AggroMod":1.0,"Agility":5.0,"Awareness":0.0,"BlocksLOS":0.0,"CrashPower":20.0,"CritChance":5.0,"CritMod":1.5,"Evasion":1.0,"HealthMax":100.0,"Intelligence":10.0,"Level":0.0,"MagAttack":0.0,"Mass":8.0,"OffHandMod":0.5,"PPR":0.0,"PhyAttack":0.0,"Potency":100.0,"Protection":1.0,"Speed":10.0,"Strength":5.0,"TwoHandMod":1.2,"Wisdom":8.0},"UnarmedAttackData":{"DamageDatas":{"UnarmedDamage":{"AtkPower":20.0,"AtkStat":"PhyAttack","DamageType":"Blunt","DamageVarient":0.5,"DamageVfxKey":"Blunt_DamageEffect","DefenseType":"Physical","DisplayName":"Punch","FixedBaseDamage":null}},"TargetParams":{"LineOfSight":true,"TargetArea":"[[-1,0],[-1,1],[0,1],[1,1],[1,0]]","TargetType":"Actor"}},"_DefVersion":"1"},"ZombieBasic":{"!ObjectScript":"res://assets/Scripts/Actors/BaseActor.gd","!ParentKey":"#BaseUndead","#ObjDetails":{"Description":"A common form of @@#Tag:Undead@@ created through the reanimation of a @@#Color:Red:Corpse@@. @@#Color:Red:Zombies@@ are peaceful and docile beings almost never resorting to violence, except towards all living creatures whom they will relentlessly attack on sight. They have an innate love of helicopters, gleefully chasing after any they see fly by. But sadly, no one ever let's them ride in one.","DisplayName":"Zombie","LargeIcon":"Sprites/Zombie_Icon.png","ObjectType":"Actor","SmallIcon":"Sprites/Zombie_Icon.png","SnippetDesc":"Zombie","Tags":["Zombie"],"Taxonomy":["Actor"]},"ActorData":{"DropItemsSet":{"":9.0,"BiteAttack_ActionPage":5.0,"Money:10":10.0,"Undead_PageBook":1.0,"ZombieClothes_BodyApparel":5.0,"ZombieClothes_LegApparel":5.0},"ExpValue":80.0,"Faction":"Undead","MoneyValue":15.0},"SpawnEquipmentArr":["Undead_PageBook","ZombieClothes_BodyApparel","ZombieClothes_LegApparel"],"SpawnItemArr":[],"SpawnPageArr":["Zombie_TitlePage","MoveForward","TurnLeft","TurnRight","BasicWeaponAttack","BiteAttack_ActionPage"],"SpriteSheet":"SpriteSheets/Zombie_SpriteSheet.png","Stats":{"Accuracy":100.0,"AggroMod":1.0,"Agility":5.0,"Awareness":0.0,"BlocksLOS":0.0,"CrashPower":20.0,"CritChance":5.0,"CritMod":1.5,"Evasion":1.0,"HealthMax":100.0,"Intelligence":2.0,"Level":0.0,"MagAttack":0.0,"Mass":12.0,"OffHandMod":0.5,"PPR":0.0,"PhyAttack":0.0,"Potency":100.0,"Protection":1.0,"Speed":5.0,"Strength":10.0,"TwoHandMod":1.2,"Wisdom":8.0},"UnarmedAttackData":{"DamageDatas":{"UnarmedDamage":{"AtkPower":20.0,"AtkStat":"PhyAttack","DamageType":"Blunt","DamageVarient":0.5,"DamageVfxKey":"Blunt_DamageEffect","DefenseType":"Physical","DisplayName":"Punch","FixedBaseDamage":null}},"DefaultAnimation":"Stab","TargetParams":{"LineOfSight":true,"TargetArea":"[[-1,0],[-1,1],[0,1],[1,1],[1,0]]","TargetType":"Actor"}},"_DefVersion":"1"}}
+{
+	"#BaseUndead": {
+		"!ParentKey": "#BaseActor",
+		"#ObjDetails": {
+			"Description": "Description.",
+			"DisplayName": "#Base Undead",
+			"LargeIcon": "Sprites/BaseActor.png",
+			"ObjectType": "Actor",
+			"SmallIcon": "Sprites/BaseActor.png",
+			"SnippetDesc": "An actor made for baseing.",
+			"Tags": [
+				"Undead",
+				"Creature"
+			],
+			"Taxonomy": [
+				"Actor"
+			]
+		},
+		"ActorData": {
+			"DropItemsSet": {
+				"": 9.0,
+				"Money:10": 10.0,
+				"Money:20": 5.0,
+				"Undead_PageBook": 1.0
+			},
+			"EquipmentConstraints": {
+				"ApparelSlots": [
+					"Head",
+					"Body",
+					"Feet"
+				],
+				"HandConditions": [
+					{
+						"CanMainHand": true,
+						"CanOffHand": true,
+						"CanOneHand": true,
+						"CanTwoHand": false,
+						"ConditionName": "Light Weapon",
+						"OffHandReq": [
+							{
+								"MainHandTagFilters": [
+									{
+										"RequireAllTags": [
+											"LightWpn"
+										]
+									}
+								],
+								"MainHandTagFiltersReqAll": true
+							}
+						],
+						"ToolTagFilters": [
+							{
+								"RequireAllTags": [
+									"LightWpn"
+								]
+							}
+						],
+						"ToolTagFiltersReqAll": true
+					},
+					{
+						"CanMainHand": true,
+						"CanOffHand": false,
+						"CanOneHand": false,
+						"CanTwoHand": true,
+						"ConditionName": "Heavy Weapon",
+						"OffHandReq": [],
+						"ToolTagFilters": [
+							{
+								"RequireAllTags": [
+									"HeavyWpn"
+								]
+							}
+						],
+						"ToolTagFiltersReqAll": true
+					},
+					{
+						"CanMainHand": true,
+						"CanOffHand": false,
+						"CanOneHand": true,
+						"CanTwoHand": false,
+						"ConditionName": "Default Weapon",
+						"OffHandReq": [],
+						"ToolTagFilters": [
+							{
+								"RequireAllTags": [
+									"Weapon"
+								]
+							}
+						],
+						"ToolTagFiltersReqAll": true
+					},
+					{
+						"CanMainHand": false,
+						"CanOffHand": true,
+						"CanOneHand": true,
+						"CanTwoHand": false,
+						"ConditionName": "Default Tool",
+						"OffHandReq": [],
+						"ToolTagFilters": [],
+						"ToolTagFiltersReqAll": false
+					}
+				],
+				"HandCount": 2.0,
+				"TrinketCount": 1.0
+			},
+			"ExpValue": 80.0,
+			"Faction": "Undead",
+			"MoneyValue": 15.0
+		},
+		"AiData": {
+			"AggroRangeLimit": 12.0
+		},
+		"ImmuneToEffects": [
+			"AilmentBleed",
+			"AilmentPoisoned"
+		],
+		"PortraitRect": [
+			12.0,
+			20.0,
+			24.0,
+			24.0
+		],
+		"ScenePath": "res://Scenes/Combat/MapObjects/Actors/ComplexActorNode/complex_actor_node.tscn",
+		"Stats": {
+			"Resistance:Dark": 150.0,
+			"Resistance:Light": -50.0,
+			"Resistance:Poison": 100.0
+		}
+	},
+	"Skeleton": {
+		"!ObjectScript": "res://assets/Scripts/Actors/BaseActor.gd",
+		"!ParentKey": "#BaseUndead",
+		"#ObjDetails": {
+			"Description": "A spooky scary @@#Color:Red:Skeleton@@ risen from the dead. This form of reanimation accounts for a lack of muscle tissue by focusing on direct manipulation of bone. This results in an @@#Tag:Undead@@ that is physically weaker, but has the @@#Color:Red:Agility@@ required to use @@#Tag:Ranged:Hint:Ranged Weapons@@.\n\nThier exposed bone is resistant to @@#Color:DmgColor:Slash@@ and @@#Color:DmgColor:Pierce@@, but is quite vulnerable to @@#Color:DmgColor:Blunt@@ and @@#Color:DmgColor:Crash@@. They often remain on back lines using range to attack from afar. But, while some may view them as nightmarish monsters, I like to believe there's a @@#Color:Red:Skeleton@@ inside us all.",
+			"DisplayName": "Skeleton",
+			"LargeIcon": "Sprites/Skeleton_Icon.png",
+			"ObjectType": "Actor",
+			"SmallIcon": "Sprites/Skeleton_Icon.png",
+			"SnippetDesc": "A Skeleton",
+			"Tags": [
+				"Skeleton"
+			],
+			"Taxonomy": [
+				"Actor"
+			]
+		},
+		"ActorData": {
+			"DropItemsSet": {
+				"": 9.0,
+				"BaseBow_Weapon": 5.0,
+				"Money:10": 10.0,
+				"Money:20": 5.0,
+				"Undead_PageBook": 1.0
+			},
+			"ExpValue": 80.0,
+			"Faction": "Undead",
+			"MoneyValue": 15.0
+		},
+		"SpawnEquipmentArr": [
+			"Undead_PageBook",
+			"BaseBow_Weapon"
+		],
+		"SpawnItemArr": [],
+		"SpawnPageArr": [
+			"Skeleton_TitlePage",
+			"MoveForward",
+			"TurnLeft",
+			"TurnRight",
+			"BasicWeaponAttack",
+			"ReloadPage"
+		],
+		"SpriteSheet": "SpriteSheets/Skeleton_SpriteSheet.png",
+		"Stats": {
+			"Accuracy": 100.0,
+			"AggroMod": 1.0,
+			"Agility": 10.0,
+			"Awareness": 0.0,
+			"BlocksLOS": 0.0,
+			"CrashPower": 20.0,
+			"CritChance": 5.0,
+			"CritMod": 1.5,
+			"Evasion": 1.0,
+			"HealthMax": 100.0,
+			"Intelligence": 3.0,
+			"Level": 0.0,
+			"MagAttack": 0.0,
+			"Mass": 8.0,
+			"OffHandMod": 0.5,
+			"PPR": 0.0,
+			"PhyAttack": 0.0,
+			"Potency": 100.0,
+			"Protection": 1.0,
+			"Resistance:Blunt": -50.0,
+			"Resistance:Crash": -50.0,
+			"Resistance:Pierce": 50.0,
+			"Resistance:Slash": 50.0,
+			"Speed": 12.0,
+			"Strength": 5.0,
+			"TwoHandMod": 1.2,
+			"Wisdom": 8.0
+		},
+		"UnarmedAttackData": {
+			"DamageDatas": {
+				"UnarmedDamage": {
+					"AtkPower": 20.0,
+					"AtkStat": "PhyAttack",
+					"DamageType": "Blunt",
+					"DamageVarient": 0.5,
+					"DamageVfxKey": "Blunt_DamageEffect",
+					"DefenseType": "Physical",
+					"DisplayName": "Punch",
+					"FixedBaseDamage": null
+				}
+			},
+			"TargetParams": {
+				"LineOfSight": true,
+				"TargetArea": "[[-1,0],[-1,1],[0,1],[1,1],[1,0]]",
+				"TargetType": "Actor"
+			}
+		},
+		"_DefVersion": "1"
+	},
+	"SkeletonMage": {
+		"!ObjectScript": "res://assets/Scripts/Actors/BaseActor.gd",
+		"!ParentKey": "Skeleton",
+		"#ObjDetails": {
+			"Description": "A spooky scary @@#Color:Red:Skeleton@@ risen from the dead.",
+			"DisplayName": "Skel Mage",
+			"LargeIcon": "Sprites/SkeletonMage_Icon.png",
+			"ObjectType": "Actor",
+			"SmallIcon": "Sprites/SkeletonMage_Icon.png",
+			"SnippetDesc": "A Skeleton Mage",
+			"Tags": [
+				"Skeleton",
+				"Mage"
+			],
+			"Taxonomy": [
+				"Actor"
+			]
+		},
+		"ActorData": {
+			"DropItemsSet": {
+				"": 9.0,
+				"BoneWand_Weapon": 5.0,
+				"DarkHat_HeadApparel": 5.0,
+				"DarkRobes_BodyApparel": 5.0,
+				"Money:10": 10.0,
+				"Money:20": 5.0,
+				"Undead_PageBook": 1.0
+			},
+			"ExpValue": 100.0,
+			"Faction": "Undead",
+			"MoneyValue": 20.0
+		},
+		"SpawnEquipmentArr": [
+			"Undead_PageBook",
+			"BaseBow_Weapon",
+			"BoneWand_Weapon",
+			"DarkHat_HeadApparel",
+			"DarkRobes_BodyApparel"
+		],
+		"SpawnItemArr": [],
+		"SpawnPageArr": [
+			"SkeletonMage_TitlePage",
+			"MoveForward",
+			"TurnLeft",
+			"TurnRight",
+			"BasicWeaponAttack",
+			"ReloadPage"
+		],
+		"SpriteSheet": "SpriteSheets/Skeleton_SpriteSheet.png",
+		"Stats": {
+			"Accuracy": 100.0,
+			"AggroMod": 1.0,
+			"Agility": 5.0,
+			"Awareness": 0.0,
+			"BlocksLOS": 0.0,
+			"CrashPower": 20.0,
+			"CritChance": 5.0,
+			"CritMod": 1.5,
+			"Evasion": 1.0,
+			"HealthMax": 100.0,
+			"Intelligence": 10.0,
+			"Level": 0.0,
+			"MagAttack": 0.0,
+			"Mass": 8.0,
+			"OffHandMod": 0.5,
+			"PPR": 0.0,
+			"PhyAttack": 0.0,
+			"Potency": 100.0,
+			"Protection": 1.0,
+			"Speed": 10.0,
+			"Strength": 5.0,
+			"TwoHandMod": 1.2,
+			"Wisdom": 8.0
+		},
+		"UnarmedAttackData": {
+			"DamageDatas": {
+				"UnarmedDamage": {
+					"AtkPower": 20.0,
+					"AtkStat": "PhyAttack",
+					"DamageType": "Blunt",
+					"DamageVarient": 0.5,
+					"DamageVfxKey": "Blunt_DamageEffect",
+					"DefenseType": "Physical",
+					"DisplayName": "Punch",
+					"FixedBaseDamage": null
+				}
+			},
+			"TargetParams": {
+				"LineOfSight": true,
+				"TargetArea": "[[-1,0],[-1,1],[0,1],[1,1],[1,0]]",
+				"TargetType": "Actor"
+			}
+		},
+		"_DefVersion": "1"
+	},
+	"ZombieBasic": {
+		"!ObjectScript": "res://assets/Scripts/Actors/BaseActor.gd",
+		"!ParentKey": "#BaseUndead",
+		"#ObjDetails": {
+			"Description": "A common form of @@#Tag:Undead@@ created through the reanimation of a @@#Color:Red:Corpse@@. @@#Color:Red:Zombies@@ are peaceful and docile beings almost never resorting to violence, except towards all living creatures whom they will relentlessly attack on sight. They have an innate love of helicopters, gleefully chasing after any they see fly by. But sadly, no one ever let's them ride in one.",
+			"DisplayName": "Zombie",
+			"LargeIcon": "Sprites/Zombie_Icon.png",
+			"ObjectType": "Actor",
+			"SmallIcon": "Sprites/Zombie_Icon.png",
+			"SnippetDesc": "Zombie",
+			"Tags": [
+				"Zombie"
+			],
+			"Taxonomy": [
+				"Actor"
+			]
+		},
+		"ActorData": {
+			"DropItemsSet": {
+				"": 9.0,
+				"BiteAttack_ActionPage": 5.0,
+				"Money:10": 10.0,
+				"Undead_PageBook": 1.0,
+				"ZombieClothes_BodyApparel": 5.0,
+				"ZombieClothes_LegApparel": 5.0
+			},
+			"ExpValue": 80.0,
+			"Faction": "Undead",
+			"MoneyValue": 15.0
+		},
+		"SpawnEquipmentArr": [
+			"Undead_PageBook",
+			"ZombieClothes_BodyApparel",
+			"ZombieClothes_LegApparel"
+		],
+		"SpawnItemArr": [],
+		"SpawnPageArr": [
+			"Zombie_TitlePage",
+			"MoveForward",
+			"TurnLeft",
+			"TurnRight",
+			"BasicWeaponAttack",
+			"BiteAttack_ActionPage"
+		],
+		"SpriteSheet": "SpriteSheets/Zombie_SpriteSheet.png",
+		"Stats": {
+			"Accuracy": 100.0,
+			"AggroMod": 1.0,
+			"Agility": 5.0,
+			"Awareness": 0.0,
+			"BlocksLOS": 0.0,
+			"CrashPower": 20.0,
+			"CritChance": 5.0,
+			"CritMod": 1.5,
+			"Evasion": 1.0,
+			"HealthMax": 100.0,
+			"Intelligence": 2.0,
+			"Level": 0.0,
+			"MagAttack": 0.0,
+			"Mass": 12.0,
+			"OffHandMod": 0.5,
+			"PPR": 0.0,
+			"PhyAttack": 0.0,
+			"Potency": 100.0,
+			"Protection": 1.0,
+			"Speed": 5.0,
+			"Strength": 10.0,
+			"TwoHandMod": 1.2,
+			"Wisdom": 8.0
+		},
+		"UnarmedAttackData": {
+			"DamageDatas": {
+				"UnarmedDamage": {
+					"AtkPower": 20.0,
+					"AtkStat": "PhyAttack",
+					"DamageType": "Blunt",
+					"DamageVarient": 0.5,
+					"DamageVfxKey": "Blunt_DamageEffect",
+					"DefenseType": "Physical",
+					"DisplayName": "Punch",
+					"FixedBaseDamage": null
+				}
+			},
+			"DefaultAnimation": "Stab",
+			"TargetParams": {
+				"LineOfSight": true,
+				"TargetArea": "[[-1,0],[-1,1],[0,1],[1,1],[1,0]]",
+				"TargetType": "Actor"
+			}
+		},
+		"_DefVersion": "1"
+	}
+}

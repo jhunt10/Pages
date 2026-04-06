@@ -1,1 +1,306 @@
-{"BoneWand_Weapon":{"!ObjectScript":"res://assets/Scripts/Items/Equipment/Tools/BaseWeaponEquipment.gd","#ObjDetails":{"Description":"A @@#Tag:Magical@@ @@#Tag:Scepter@@ made from the bones of @@#Tag:Mage@@.\n\nThey are often crafted by @@#Color:Red:Skeleton Mages@@, who seem to treat them with great care. Perhaps this is their fleeting attempt to regain their identity as a @@#Tag:Mage@@.\n\nAlso penis joke.","DisplayName":"Bone Rod","LargeIcon":"Sprites/BoneWand_Icon.png","ObjectType":"Item","SmallIcon":"Sprites/BoneWand_Icon.png","SnippetDesc":"A dead mage's Bone Wand.","Tags":["Weapon","Scepter"],"Taxonomy":["Item","Equipment","Tool","Weapon"]},"EquipmentData":{"AttackMods":{},"DamageMods":{},"EquipSlot":"Weapon","Requirments":{"ReqStats":{"Intelligence":8.0}},"StatMods":{"AttackBonus":{"ModType":"Add","StatName":"MagAttack","Value":8.0}},"TargetMods":{}},"ItemData":{"Rarity":"Rare","Value":200.0},"WeaponData":{"AttackData":{"AttackDetails":{"AccuracyMod":1.0,"AttackVfxData":{"RandomOffsets":[0.0,0.0],"ScenePath":"res://assets/Scripts/VFXs/BulletVfxs/bullet_vfx_node.tscn","SpriteName":"Sprites/BoneWand_Missile.png","SpriteSheetHight":1.0,"SpriteSheetWidth":1.0,"Velocity":200.0},"PotencyMod":1.0},"AttackTags":["Weapon","Range","Magic"],"DamageDatas":{"WeaponDamage":{"AtkPwrBase":100.0,"AtkPwrRange":10.0,"AtkStat":"MagAttack","DamageType":"Dark","DamageVfxKey":"Dark_DamageEffect","DefenseType":"Ward"}},"EffectDatas":{},"TargetParams":{"LineOfSight":true,"TargetArea":"[[-1,1],[0,1],[1,1],[-1,2],[0,2],[1,2],[0,3]]","TargetType":"Actor"}},"IsRanged":true,"WeaponClass":"Medium","WeaponSpriteData":{"Offset":[0.0,0.0],"Rotation":0.0,"WeaponAnimation":"Raise"}},"_DefVersion":"1"},"DarkHat_HeadApparel":{"!ObjectScript":"res://assets/Scripts/Items/Equipment/BaseApparelEquipment.gd","#ObjDetails":{"Description":"A simple cloth shirt proven to provide no protection from @@#Color:Red:Zombie@@ attacks.","DisplayName":"Dark Hat","LargeIcon":"Sprites/DarkMageHat_Icon.png","SmallIcon":"Sprites/DarkMageHat_Icon.png","SnippetDesc":"A dark hat.","Tags":["Equipment","Apparel","Head"],"Taxonomy":["Item","Equipment","Apparel"]},"ApparelData":{"ApparelClass":"LightArmor","ProvidedArmor":0.0,"ProvidedWard":10.0,"StatMods":{}},"EquipmentData":{"EquipSlot":"Head","Requirments":{},"SpriteData":{"SpriteSheet":"Sprites/DarkMageHat_SpriteSheet.png"}},"ItemData":{"Rarity":"Rare","Value":200.0},"_DefVersion":"1"},"DarkRobes_BodyApparel":{"!ObjectScript":"res://assets/Scripts/Items/Equipment/BaseApparelEquipment.gd","#ObjDetails":{"Description":"A simple cloth shirt proven to provide no protection from @@#Color:Red:Zombie@@ attacks.","DisplayName":"Dark Robes","LargeIcon":"Sprites/DarkRobes_Icon.png","SmallIcon":"Sprites/DarkRobes_Icon.png","SnippetDesc":"A dark robe.","Tags":["Equipment","Apparel","Body"],"Taxonomy":["Item","Equipment","Apparel"]},"ApparelData":{"ApparelClass":"LightArmor","ProvidedArmor":0.0,"ProvidedWard":10.0,"StatMods":{}},"EquipmentData":{"EquipSlot":"Body","Requirments":{},"SpriteData":{"SpriteSheet":"Sprites/DarkRobes_SpriteSheet.png"}},"ItemData":{"Rarity":"Rare","Value":200.0},"_DefVersion":"1"},"Undead_PageBook":{"!ObjectScript":"res://assets/Scripts/Items/Equipment/BaseQueEquipment.gd","#ObjDetails":{"Description":"A small binder with plenty of space for holding calendars, grudges, and to-do lists. Great for organizing personal notes and unfinished business.","DisplayName":"Necro Planner","LargeIcon":"Sprites/NecroPlanner_Icon.png","ObjectType":"Item","SmallIcon":"Sprites/NecroPlanner_Icon.png","SnippetDesc":"Day planner of the Dead.","Tags":["PageBook"],"Taxonomy":["Item","Equipment","PageBook"]},"BookData":{"BaseActionCount":5.0,"BasePassiveCount":4.0,"PagesPerRound":4.0},"EquipmentData":{"ItemSlotsData":[]},"ItemData":{"Rarity":"Common","Value":50.0},"_DefVersion":"1"},"ZombieClothes_BodyApparel":{"!ObjectScript":"res://assets/Scripts/Items/Equipment/BaseApparelEquipment.gd","#ObjDetails":{"Description":"A simple cloth shirt proven to provide no protection from @@#Color:Red:Zombie@@ attacks.","DisplayName":"Zombie Shirt","LargeIcon":"Sprites/ZombieShirt_Icon.png","SmallIcon":"Sprites/ZombieShirt_Icon.png","SnippetDesc":"A Zombie's shirt.","Tags":["Equipment","Apparel","Body"],"Taxonomy":["Item","Equipment","Apparel"]},"ApparelData":{"ApparelClass":"LightArmor","ProvidedArmor":0.0,"ProvidedWard":0.0,"StatMods":{}},"EquipmentData":{"EquipSlot":"Body","Requirments":{},"SpriteData":{"SpriteSheet":"Sprites/ZombieShirt_SpriteSheet.png"}},"ItemData":{"Rarity":"Mundane","Value":50.0},"_DefVersion":"1"},"ZombieClothes_LegApparel":{"!ObjectScript":"res://assets/Scripts/Items/Equipment/BaseApparelEquipment.gd","#ObjDetails":{"Description":"Simple cloth pants with one leg torn. Someone definitely died in these.","DisplayName":"Zombie Pants","LargeIcon":"Sprites/ZombiePants_Icon.png","SmallIcon":"Sprites/ZombiePants_Icon.png","SnippetDesc":"A Zombie's pants.","Tags":["Equipment","Apparel","Feet"],"Taxonomy":["Item","Equipment","Apparel"]},"ApparelData":{"ApparelClass":"LightArmor","ProvidedArmor":0.0,"ProvidedWard":0.0,"StatMods":{}},"EquipmentData":{"EquipSlot":"Feet","Requirments":{"ReqStats":{"Strength":0.0}},"SpriteData":{"SpriteSheet":"Sprites/ZombiePants_SpriteSheet.png"}},"ItemData":{"Rarity":"Mundane","Value":50.0},"_DefVersion":"1"}}
+{
+	"BoneWand_Weapon": {
+		"!ObjectScript": "res://assets/Scripts/Items/Equipment/Tools/BaseWeaponEquipment.gd",
+		"#ObjDetails": {
+			"Description": "A @@#Tag:Magical@@ @@#Tag:Scepter@@ made from the bones of @@#Tag:Mage@@.\n\nThey are often crafted by @@#Color:Red:Skeleton Mages@@, who seem to treat them with great care. Perhaps this is their fleeting attempt to regain their identity as a @@#Tag:Mage@@.\n\nAlso penis joke.",
+			"DisplayName": "Bone Rod",
+			"LargeIcon": "Sprites/BoneWand_Icon.png",
+			"ObjectType": "Item",
+			"SmallIcon": "Sprites/BoneWand_Icon.png",
+			"SnippetDesc": "A dead mage's Bone Wand.",
+			"Tags": [
+				"Weapon",
+				"Scepter"
+			],
+			"Taxonomy": [
+				"Item",
+				"Equipment",
+				"Tool",
+				"Weapon"
+			]
+		},
+		"EquipmentData": {
+			"AttackMods": {
+
+			},
+			"DamageMods": {
+
+			},
+			"EquipSlot": "Weapon",
+			"Requirments": {
+				"ReqStats": {
+					"Intelligence": 8.0
+				}
+			},
+			"StatMods": {
+				"AttackBonus": {
+					"ModType": "Add",
+					"StatName": "MagAttack",
+					"Value": 8.0
+				}
+			},
+			"TargetMods": {
+
+			}
+		},
+		"ItemData": {
+			"Rarity": "Rare",
+			"Value": 200.0
+		},
+		"WeaponData": {
+			"AttackData": {
+				"AttackDetails": {
+					"AccuracyMod": 1.0,
+					"AttackVfxData": {
+						"RandomOffsets": [
+							0.0,
+							0.0
+						],
+						"ScenePath": "res://assets/Scripts/VFXs/BulletVfxs/bullet_vfx_node.tscn",
+						"SpriteName": "Sprites/BoneWand_Missile.png",
+						"SpriteSheetHight": 1.0,
+						"SpriteSheetWidth": 1.0,
+						"Velocity": 200.0
+					},
+					"PotencyMod": 1.0
+				},
+				"AttackTags": [
+					"Weapon",
+					"Range",
+					"Magic"
+				],
+				"DamageDatas": {
+					"WeaponDamage": {
+						"AtkPwrBase": 100.0,
+						"AtkPwrRange": 10.0,
+						"AtkStat": "MagAttack",
+						"DamageType": "Dark",
+						"DamageVfxKey": "Dark_DamageEffect",
+						"DefenseType": "Ward"
+					}
+				},
+				"EffectDatas": {
+
+				},
+				"TargetParams": {
+					"LineOfSight": true,
+					"TargetArea": "[[-1,1],[0,1],[1,1],[-1,2],[0,2],[1,2],[0,3]]",
+					"TargetType": "Actor"
+				}
+			},
+			"IsRanged": true,
+			"WeaponClass": "Medium",
+			"WeaponSpriteData": {
+				"Offset": [
+					0.0,
+					0.0
+				],
+				"Rotation": 0.0,
+				"WeaponAnimation": "Raise"
+			}
+		},
+		"_DefVersion": "1"
+	},
+	"DarkHat_HeadApparel": {
+		"!ObjectScript": "res://assets/Scripts/Items/Equipment/BaseApparelEquipment.gd",
+		"#ObjDetails": {
+			"Description": "A simple cloth shirt proven to provide no protection from @@#Color:Red:Zombie@@ attacks.",
+			"DisplayName": "Dark Hat",
+			"LargeIcon": "Sprites/DarkMageHat_Icon.png",
+			"SmallIcon": "Sprites/DarkMageHat_Icon.png",
+			"SnippetDesc": "A dark hat.",
+			"Tags": [
+				"Equipment",
+				"Apparel",
+				"Head"
+			],
+			"Taxonomy": [
+				"Item",
+				"Equipment",
+				"Apparel"
+			]
+		},
+		"ApparelData": {
+			"ApparelClass": "LightArmor",
+			"ProvidedArmor": 0.0,
+			"ProvidedWard": 10.0,
+			"StatMods": {
+
+			}
+		},
+		"EquipmentData": {
+			"EquipSlot": "Head",
+			"Requirments": {
+
+			},
+			"SpriteData": {
+				"SpriteSheet": "Sprites/DarkMageHat_SpriteSheet.png"
+			}
+		},
+		"ItemData": {
+			"Rarity": "Rare",
+			"Value": 200.0
+		},
+		"_DefVersion": "1"
+	},
+	"DarkRobes_BodyApparel": {
+		"!ObjectScript": "res://assets/Scripts/Items/Equipment/BaseApparelEquipment.gd",
+		"#ObjDetails": {
+			"Description": "A simple cloth shirt proven to provide no protection from @@#Color:Red:Zombie@@ attacks.",
+			"DisplayName": "Dark Robes",
+			"LargeIcon": "Sprites/DarkRobes_Icon.png",
+			"SmallIcon": "Sprites/DarkRobes_Icon.png",
+			"SnippetDesc": "A dark robe.",
+			"Tags": [
+				"Equipment",
+				"Apparel",
+				"Body"
+			],
+			"Taxonomy": [
+				"Item",
+				"Equipment",
+				"Apparel"
+			]
+		},
+		"ApparelData": {
+			"ApparelClass": "LightArmor",
+			"ProvidedArmor": 0.0,
+			"ProvidedWard": 10.0,
+			"StatMods": {
+
+			}
+		},
+		"EquipmentData": {
+			"EquipSlot": "Body",
+			"Requirments": {
+
+			},
+			"SpriteData": {
+				"SpriteSheet": "Sprites/DarkRobes_SpriteSheet.png"
+			}
+		},
+		"ItemData": {
+			"Rarity": "Rare",
+			"Value": 200.0
+		},
+		"_DefVersion": "1"
+	},
+	"Undead_PageBook": {
+		"!ObjectScript": "res://assets/Scripts/Items/Equipment/BaseQueEquipment.gd",
+		"#ObjDetails": {
+			"Description": "A small binder with plenty of space for holding calendars, grudges, and to-do lists. Great for organizing personal notes and unfinished business.",
+			"DisplayName": "Necro Planner",
+			"LargeIcon": "Sprites/NecroPlanner_Icon.png",
+			"ObjectType": "Item",
+			"SmallIcon": "Sprites/NecroPlanner_Icon.png",
+			"SnippetDesc": "Day planner of the Dead.",
+			"Tags": [
+				"PageBook"
+			],
+			"Taxonomy": [
+				"Item",
+				"Equipment",
+				"PageBook"
+			]
+		},
+		"BookData": {
+			"BaseActionCount": 5.0,
+			"BasePassiveCount": 4.0,
+			"PagesPerRound": 4.0
+		},
+		"EquipmentData": {
+			"ItemSlotsData": []
+		},
+		"ItemData": {
+			"Rarity": "Common",
+			"Value": 50.0
+		},
+		"_DefVersion": "1"
+	},
+	"ZombieClothes_BodyApparel": {
+		"!ObjectScript": "res://assets/Scripts/Items/Equipment/BaseApparelEquipment.gd",
+		"#ObjDetails": {
+			"Description": "A simple cloth shirt proven to provide no protection from @@#Color:Red:Zombie@@ attacks.",
+			"DisplayName": "Zombie Shirt",
+			"LargeIcon": "Sprites/ZombieShirt_Icon.png",
+			"SmallIcon": "Sprites/ZombieShirt_Icon.png",
+			"SnippetDesc": "A Zombie's shirt.",
+			"Tags": [
+				"Equipment",
+				"Apparel",
+				"Body"
+			],
+			"Taxonomy": [
+				"Item",
+				"Equipment",
+				"Apparel"
+			]
+		},
+		"ApparelData": {
+			"ApparelClass": "LightArmor",
+			"ProvidedArmor": 0.0,
+			"ProvidedWard": 0.0,
+			"StatMods": {
+
+			}
+		},
+		"EquipmentData": {
+			"EquipSlot": "Body",
+			"Requirments": {
+
+			},
+			"SpriteData": {
+				"SpriteSheet": "Sprites/ZombieShirt_SpriteSheet.png"
+			}
+		},
+		"ItemData": {
+			"Rarity": "Mundane",
+			"Value": 50.0
+		},
+		"_DefVersion": "1"
+	},
+	"ZombieClothes_LegApparel": {
+		"!ObjectScript": "res://assets/Scripts/Items/Equipment/BaseApparelEquipment.gd",
+		"#ObjDetails": {
+			"Description": "Simple cloth pants with one leg torn. Someone definitely died in these.",
+			"DisplayName": "Zombie Pants",
+			"LargeIcon": "Sprites/ZombiePants_Icon.png",
+			"SmallIcon": "Sprites/ZombiePants_Icon.png",
+			"SnippetDesc": "A Zombie's pants.",
+			"Tags": [
+				"Equipment",
+				"Apparel",
+				"Feet"
+			],
+			"Taxonomy": [
+				"Item",
+				"Equipment",
+				"Apparel"
+			]
+		},
+		"ApparelData": {
+			"ApparelClass": "LightArmor",
+			"ProvidedArmor": 0.0,
+			"ProvidedWard": 0.0,
+			"StatMods": {
+
+			}
+		},
+		"EquipmentData": {
+			"EquipSlot": "Feet",
+			"Requirments": {
+				"ReqStats": {
+					"Strength": 0.0
+				}
+			},
+			"SpriteData": {
+				"SpriteSheet": "Sprites/ZombiePants_SpriteSheet.png"
+			}
+		},
+		"ItemData": {
+			"Rarity": "Mundane",
+			"Value": 50.0
+		},
+		"_DefVersion": "1"
+	}
+}

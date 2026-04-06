@@ -1,1 +1,70 @@
-{"SquirrelAmmo_Bag":{"!ObjectScript":"res://assets/Scripts/Items/Equipment/BaseBagEquipment.gd","#ObjDetails":{"Description":"A tee-tiny little pouch made from two leaves sewn together. Somehow it's able to fit quite a few clips of ammo.","DisplayName":"Leaf Pouch","LargeIcon":"Sprites/LeafPouch_Icon.png","ObjectType":"Item","SmallIcon":"Sprites/LeafPouch_Icon.png","SnippetDesc":"Ammo pouch made from leaves.","Tags":["Bag"],"Taxonomy":["Item","Equipment","Bag"]},"EquipmentData":{"ItemSlotsData":[{"Count":4.0,"DisplayName":"Ammo","FilterData":{"RequiredTags":"Ammo"},"Key":"Ammo"}]},"ItemData":{"Rarity":"Mundane","Value":5.0},"_DefVersion":"1"},"Squirrel_PageBook":{"!ObjectScript":"res://assets/Scripts/Items/Equipment/BaseQueEquipment.gd","#ObjDetails":{"Description":"A political manifesto carried by all members of The New Squirrel Order. It preaches the idea of ultimate squrrpremacy over all other @@#Color:Red:Factions@@ and is popular among young rodents who struggle at dating. Mandatory for defining the @@#Color:Red:Squirrel@@ you are.","DisplayName":"Squrrifesto","LargeIcon":"Sprites/SquirrelBook.png","ObjectType":"Item","SmallIcon":"Sprites/SquirrelBook.png","SnippetDesc":"Manifesto of the New Squirrel Order.","Tags":["PageBook"],"Taxonomy":["Item","Equipment","PageBook"]},"BookData":{"BaseActionCount":5.0,"BasePassiveCount":1.0,"PagesPerRound":3.0},"EquipmentData":{"ItemSlotsData":[]},"ItemData":{"Rarity":"Common","Value":50.0},"_DefVersion":"1"}}
+{
+	"SquirrelAmmo_Bag": {
+		"!ObjectScript": "res://assets/Scripts/Items/Equipment/BaseBagEquipment.gd",
+		"#ObjDetails": {
+			"Description": "A tee-tiny little pouch made from two leaves sewn together. Somehow it's able to fit quite a few clips of ammo.",
+			"DisplayName": "Leaf Pouch",
+			"LargeIcon": "Sprites/LeafPouch_Icon.png",
+			"ObjectType": "Item",
+			"SmallIcon": "Sprites/LeafPouch_Icon.png",
+			"SnippetDesc": "Ammo pouch made from leaves.",
+			"Tags": [
+				"Bag"
+			],
+			"Taxonomy": [
+				"Item",
+				"Equipment",
+				"Bag"
+			]
+		},
+		"EquipmentData": {
+			"ItemSlotsData": [
+				{
+					"Count": 4.0,
+					"DisplayName": "Ammo",
+					"FilterData": {
+						"RequiredTags": "Ammo"
+					},
+					"Key": "Ammo"
+				}
+			]
+		},
+		"ItemData": {
+			"Rarity": "Mundane",
+			"Value": 5.0
+		},
+		"_DefVersion": "1"
+	},
+	"Squirrel_PageBook": {
+		"!ObjectScript": "res://assets/Scripts/Items/Equipment/BaseQueEquipment.gd",
+		"#ObjDetails": {
+			"Description": "A political manifesto carried by all members of The New Squirrel Order. It preaches the idea of ultimate squrrpremacy over all other @@#Color:Red:Factions@@ and is popular among young rodents who struggle at dating. Mandatory for defining the @@#Color:Red:Squirrel@@ you are.",
+			"DisplayName": "Squrrifesto",
+			"LargeIcon": "Sprites/SquirrelBook.png",
+			"ObjectType": "Item",
+			"SmallIcon": "Sprites/SquirrelBook.png",
+			"SnippetDesc": "Manifesto of the New Squirrel Order.",
+			"Tags": [
+				"PageBook"
+			],
+			"Taxonomy": [
+				"Item",
+				"Equipment",
+				"PageBook"
+			]
+		},
+		"BookData": {
+			"BaseActionCount": 5.0,
+			"BasePassiveCount": 1.0,
+			"PagesPerRound": 3.0
+		},
+		"EquipmentData": {
+			"ItemSlotsData": []
+		},
+		"ItemData": {
+			"Rarity": "Common",
+			"Value": 50.0
+		},
+		"_DefVersion": "1"
+	}
+}

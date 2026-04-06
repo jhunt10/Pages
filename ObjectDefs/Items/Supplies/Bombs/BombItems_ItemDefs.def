@@ -1,1 +1,175 @@
-{"BombBasicItem":{"!ObjectScript":"res://assets/Scripts/Items/Supplies/AttackSupplies/BaseAttackSupplyIyem.gd","#ObjDetails":{"Description":"A completely safe and reliable explosive device guaranteed* not to kill the user or your money back!\n\nDeals [Bomb Damage]\n\n*All claims must be filed by individual user at time of incident.","DisplayName":"Bomb","LargeIcon":"Sprites/BasicBomb_Large.png","ObjectType":"Item","SmallIcon":"Sprites/BasicBomb_Small.png","SnippetDesc":"Basic Bomb","Tags":["Throwable","Bomb"],"Taxonomy":["Item","Supply","Throwable","Bomb"]},"ItemData":{"Rarity":"Common","Value":50.0},"SuppliesData":{"AttackData":{"AttackDetails":{"AccuracyMod":1.0,"PotencyMod":1.0},"DamageDatas":{"Damage1":{"AtkPwrBase":100.0,"AtkPwrRange":10.0,"AtkPwrScale":1.0,"AtkStat":"Fixed","BaseDamage":50.0,"DamageType":"Crash","DamageVfxKey":"AUTO","DefenseType":"AUTO"}},"OnUseVfxData":{"AnimationName":"6_sprites_250ms_frames","AnimationSpeed":2.0,"RandomOffsets":[0.0,0.0],"ScenePath":"res://assets/Scripts/VFXs/DamageVfxs/damage_vfx_node.tscn","SpriteName":"SpriteSheets/FireBall_Impact.png","SpriteSheetHight":3.0,"SpriteSheetWidth":2.0,"VfxKey":"BombVfx"},"TargetParams":{"EffectArea":"[[-1,1],[0,1],[1,1],[1,0],[1,-1],[0,-1],[-1,-1],[-1,0],[0,0]]","LineOfSight":true,"TargetArea":"[[0,0]]","TargetType":"Spot"}},"ThrownItemMissileData":{"MissileVfxData":{"OffSet":[0.0,-1.0]}}},"_DefVersion":"1"},"BombColdItem":{"!ObjectScript":"res://assets/Scripts/Items/Supplies/AttackSupplies/BaseAttackSupplyIyem.gd","!ParentKey":"BombBasicItem","#ObjDetails":{"Description":"","DisplayName":"Cold Bomb","LargeIcon":"Sprites/BasicBombCold_Large.png","SmallIcon":"Sprites/BasicBombCold_Small.png"},"SuppliesData":{"AttackData":{"DamageDatas":{"Damage1":{"DamageType":"Cold"}}}},"_DefVersion":"1"},"BombFireItem":{"!ObjectScript":"res://assets/Scripts/Items/Supplies/AttackSupplies/BaseAttackSupplyIyem.gd","!ParentKey":"BombBasicItem","#ObjDetails":{"Description":"","DisplayName":"Fire Bomb","LargeIcon":"Sprites/BasicBombFire_Large.png","SmallIcon":"Sprites/BasicBombFire_Small.png"},"SuppliesData":{"AttackData":{"DamageDatas":{"Damage1":{"DamageType":"Fire"}}}},"_DefVersion":"1"},"BombGreaseItem":{"!ObjectScript":"res://assets/Scripts/Items/Supplies/AttackSupplies/BaseAttackSupplyIyem.gd","!ParentKey":"BombBasicItem","#ObjDetails":{"Description":"","DisplayName":"Grease Bomb","LargeIcon":"Sprites/BasicBombGrease_Large.png","SmallIcon":"Sprites/BasicBombGrease_Small.png"},"SuppliesData":{"AttackData":{"DamageDatas":{"Damage1":{"DamageType":"Grease"}}}},"_DefVersion":"1"},"BombPoisonItem":{"!ObjectScript":"res://assets/Scripts/Items/Supplies/AttackSupplies/BaseAttackSupplyIyem.gd","!ParentKey":"BombBasicItem","#ObjDetails":{"Description":"","DisplayName":"Poison Bomb","LargeIcon":"Sprites/BasicBombPoison_Large.png","SmallIcon":"Sprites/BasicBombPoison_Small.png"},"SuppliesData":{"AttackData":{"DamageDatas":{"Damage1":{"DamageType":"Poison"}}}},"_DefVersion":"1"},"BombShockItem":{"!ObjectScript":"res://assets/Scripts/Items/Supplies/AttackSupplies/BaseAttackSupplyIyem.gd","!ParentKey":"BombBasicItem","#ObjDetails":{"Description":"","DisplayName":"Shock Bomb","LargeIcon":"Sprites/BasicBombShock_Large.png","SmallIcon":"Sprites/BasicBombShock_Small.png"},"SuppliesData":{"AttackData":{"DamageDatas":{"Damage1":{"DamageType":"Shock"}}}},"_DefVersion":"1"}}
+{
+	"BombBasicItem": {
+		"!ObjectScript": "res://assets/Scripts/Items/Supplies/AttackSupplies/BaseAttackSupplyIyem.gd",
+		"#ObjDetails": {
+			"Description": "A completely safe and reliable explosive device guaranteed* not to kill the user or your money back!\n\nDeals [Bomb Damage]\n\n*All claims must be filed by individual user at time of incident.",
+			"DisplayName": "Bomb",
+			"LargeIcon": "Sprites/BasicBomb_Large.png",
+			"ObjectType": "Item",
+			"SmallIcon": "Sprites/BasicBomb_Small.png",
+			"SnippetDesc": "Basic Bomb",
+			"Tags": [
+				"Throwable",
+				"Bomb"
+			],
+			"Taxonomy": [
+				"Item",
+				"Supply",
+				"Throwable",
+				"Bomb"
+			]
+		},
+		"ItemData": {
+			"Rarity": "Common",
+			"Value": 50.0
+		},
+		"SuppliesData": {
+			"AttackData": {
+				"AttackDetails": {
+					"AccuracyMod": 1.0,
+					"PotencyMod": 1.0
+				},
+				"DamageDatas": {
+					"Damage1": {
+						"AtkPwrBase": 100.0,
+						"AtkPwrRange": 10.0,
+						"AtkPwrScale": 1.0,
+						"AtkStat": "Fixed",
+						"BaseDamage": 50.0,
+						"DamageType": "Crash",
+						"DamageVfxKey": "AUTO",
+						"DefenseType": "AUTO"
+					}
+				},
+				"OnUseVfxData": {
+					"AnimationName": "6_sprites_250ms_frames",
+					"AnimationSpeed": 2.0,
+					"RandomOffsets": [
+						0.0,
+						0.0
+					],
+					"ScenePath": "res://assets/Scripts/VFXs/DamageVfxs/damage_vfx_node.tscn",
+					"SpriteName": "SpriteSheets/FireBall_Impact.png",
+					"SpriteSheetHight": 3.0,
+					"SpriteSheetWidth": 2.0,
+					"VfxKey": "BombVfx"
+				},
+				"TargetParams": {
+					"EffectArea": "[[-1,1],[0,1],[1,1],[1,0],[1,-1],[0,-1],[-1,-1],[-1,0],[0,0]]",
+					"LineOfSight": true,
+					"TargetArea": "[[0,0]]",
+					"TargetType": "Spot"
+				}
+			},
+			"ThrownItemMissileData": {
+				"MissileVfxData": {
+					"OffSet": [
+						0.0,
+						-1.0
+					]
+				}
+			}
+		},
+		"_DefVersion": "1"
+	},
+	"BombColdItem": {
+		"!ObjectScript": "res://assets/Scripts/Items/Supplies/AttackSupplies/BaseAttackSupplyIyem.gd",
+		"!ParentKey": "BombBasicItem",
+		"#ObjDetails": {
+			"Description": "",
+			"DisplayName": "Cold Bomb",
+			"LargeIcon": "Sprites/BasicBombCold_Large.png",
+			"SmallIcon": "Sprites/BasicBombCold_Small.png"
+		},
+		"SuppliesData": {
+			"AttackData": {
+				"DamageDatas": {
+					"Damage1": {
+						"DamageType": "Cold"
+					}
+				}
+			}
+		},
+		"_DefVersion": "1"
+	},
+	"BombFireItem": {
+		"!ObjectScript": "res://assets/Scripts/Items/Supplies/AttackSupplies/BaseAttackSupplyIyem.gd",
+		"!ParentKey": "BombBasicItem",
+		"#ObjDetails": {
+			"Description": "",
+			"DisplayName": "Fire Bomb",
+			"LargeIcon": "Sprites/BasicBombFire_Large.png",
+			"SmallIcon": "Sprites/BasicBombFire_Small.png"
+		},
+		"SuppliesData": {
+			"AttackData": {
+				"DamageDatas": {
+					"Damage1": {
+						"DamageType": "Fire"
+					}
+				}
+			}
+		},
+		"_DefVersion": "1"
+	},
+	"BombGreaseItem": {
+		"!ObjectScript": "res://assets/Scripts/Items/Supplies/AttackSupplies/BaseAttackSupplyIyem.gd",
+		"!ParentKey": "BombBasicItem",
+		"#ObjDetails": {
+			"Description": "",
+			"DisplayName": "Grease Bomb",
+			"LargeIcon": "Sprites/BasicBombGrease_Large.png",
+			"SmallIcon": "Sprites/BasicBombGrease_Small.png"
+		},
+		"SuppliesData": {
+			"AttackData": {
+				"DamageDatas": {
+					"Damage1": {
+						"DamageType": "Grease"
+					}
+				}
+			}
+		},
+		"_DefVersion": "1"
+	},
+	"BombPoisonItem": {
+		"!ObjectScript": "res://assets/Scripts/Items/Supplies/AttackSupplies/BaseAttackSupplyIyem.gd",
+		"!ParentKey": "BombBasicItem",
+		"#ObjDetails": {
+			"Description": "",
+			"DisplayName": "Poison Bomb",
+			"LargeIcon": "Sprites/BasicBombPoison_Large.png",
+			"SmallIcon": "Sprites/BasicBombPoison_Small.png"
+		},
+		"SuppliesData": {
+			"AttackData": {
+				"DamageDatas": {
+					"Damage1": {
+						"DamageType": "Poison"
+					}
+				}
+			}
+		},
+		"_DefVersion": "1"
+	},
+	"BombShockItem": {
+		"!ObjectScript": "res://assets/Scripts/Items/Supplies/AttackSupplies/BaseAttackSupplyIyem.gd",
+		"!ParentKey": "BombBasicItem",
+		"#ObjDetails": {
+			"Description": "",
+			"DisplayName": "Shock Bomb",
+			"LargeIcon": "Sprites/BasicBombShock_Large.png",
+			"SmallIcon": "Sprites/BasicBombShock_Small.png"
+		},
+		"SuppliesData": {
+			"AttackData": {
+				"DamageDatas": {
+					"Damage1": {
+						"DamageType": "Shock"
+					}
+				}
+			}
+		},
+		"_DefVersion": "1"
+	}
+}

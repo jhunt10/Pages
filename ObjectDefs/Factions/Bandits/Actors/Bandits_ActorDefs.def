@@ -1,1 +1,189 @@
-{"Bandit_Armored":{"!ObjectScript":"res://assets/Scripts/Actors/BaseActor.gd","!ParentKey":"#BaseHumanoid","#ObjDetails":{"Description":"A bandit wearing armor.","DisplayName":"Armored Bandit","LargeIcon":"Sprites/BanditArmored_Icon.png","ObjectType":"Actor","SmallIcon":"Sprites/BanditArmored_Icon.png","SnippetDesc":"A bandit.","Tags":["Bandit"],"Taxonomy":["Actor"]},"ActorData":{"DropItemsSet":{"":10.0,"BanditAxe":5.0,"BanditHeavyArmor_BodyApparel":5.0,"BanditHeavyArmor_HeadApparel":5.0,"BanditHeavyArmor_LegApparel":5.0,"Bandit_PageBook":1.0,"HealthPotionM":5.0,"HealthPotionS":10.0,"Money:10":10.0},"ExpValue":60.0,"Faction":"Bandits","MoneyValue":15.0},"SpawnEquipmentArr":["Bandit_PageBook","OldBag_ItemBag","BanditHeavyArmor_HeadApparel","BanditHeavyArmor_BodyApparel","BanditHeavyArmor_LegApparel","BanditAxe"],"SpawnItemArr":["HealthPotionM","HealthPotionM"],"SpawnPageArr":["BanditBase_TitlePage","MoveForward","TurnLeft","TurnRight","BasicWeaponAttack","UsePotionSelf","ReloadPage"],"SpriteSheet":"DEFAULT","Stats":{"Agility":7.0,"HealthMax":50.0,"Intelligence":5.0,"Strength":8.0,"Wisdom":5.0},"_DefVersion":"1"},"Bandit_Captain":{"!ObjectScript":"res://assets/Scripts/Actors/BaseActor.gd","!ParentKey":"#BaseHumanoid","#ObjDetails":{"Description":"A bandit wearing armor.","DisplayName":"Bandit Captain","LargeIcon":"Sprites/BanditCaptain_Icon.png","ObjectType":"Actor","SmallIcon":"Sprites/BanditCaptain_Icon.png","SnippetDesc":"A captian of bandits.","Tags":["Bandit"],"Taxonomy":["Actor"]},"ActorData":{"DropItemsSet":{"":10.0,"BanditCaptainHelmet_HeadApparel":5.0,"Bandit_PageBook":1.0,"BigMalma":5.0,"Money:10":50.0},"ExpValue":60.0,"Faction":"Bandits","MoneyValue":15.0},"SpawnEquipmentArr":["Bandit_PageBook","OldBag_ItemBag","BanditCaptainHelmet_HeadApparel","BanditHeavyArmor_BodyApparel","BanditHeavyArmor_LegApparel","BigMalma"],"SpawnItemArr":["HealthPotionM","HealthPotionM"],"SpawnPageArr":["BanditCaptain_TitlePage","MoveForward","TurnLeft","TurnRight","BasicWeaponAttack","UsePotionSelf","ReloadPage"],"SpriteSheet":"DEFAULT","Stats":{"Agility":10.0,"Intelligence":8.0,"Strength":10.0,"Wisdom":8.0},"_DefVersion":"1"},"Bandit_Ranged":{"!ObjectScript":"res://assets/Scripts/Actors/BaseActor.gd","!ParentKey":"#BaseHumanoid","#ObjDetails":{"Description":"A bandit wearing short shorts.","DisplayName":"Archer Bandit","LargeIcon":"Sprites/BanditArcher_Icon.png","ObjectType":"Actor","SmallIcon":"Sprites/BanditArcher_Icon.png","SnippetDesc":"A bandit.","Tags":["Bandit"],"Taxonomy":["Actor"]},"ActorData":{"DropItemsSet":{"":10.0,"BanditLightArmor_BodyApparel":5.0,"BanditLightArmor_HeadApparel":5.0,"BanditLightArmor_LegApparel":5.0,"Bandit_PageBook":1.0,"BaseBow_Weapon":5.0,"HealthPotionM":5.0,"HealthPotionS":10.0,"Money:10":10.0},"ExpValue":60.0,"Faction":"Bandits","MoneyValue":15.0},"SpawnEquipmentArr":["Bandit_PageBook","OldBag_ItemBag","BanditLightArmor_HeadApparel","BanditLightArmor_BodyApparel","BanditLightArmor_LegApparel","BaseBow_Weapon"],"SpawnItemArr":["HealthPotionM","HealthPotionM"],"SpawnPageArr":["BanditArcher_TitlePage","MoveForward","TurnLeft","TurnRight","BasicWeaponAttack","UsePotionSelf","ReloadPage"],"SpriteSheet":"DEFAULT","Stats":{"Agility":10.0,"HealthMax":30.0,"Intelligence":5.0,"Strength":7.0,"Wisdom":5.0},"_DefVersion":"1"}}
+{
+	"Bandit_Armored": {
+		"!ObjectScript": "res://assets/Scripts/Actors/BaseActor.gd",
+		"!ParentKey": "#BaseHumanoid",
+		"#ObjDetails": {
+			"Description": "A bandit wearing armor.",
+			"DisplayName": "Armored Bandit",
+			"LargeIcon": "Sprites/BanditArmored_Icon.png",
+			"ObjectType": "Actor",
+			"SmallIcon": "Sprites/BanditArmored_Icon.png",
+			"SnippetDesc": "A bandit.",
+			"Tags": [
+				"Bandit"
+			],
+			"Taxonomy": [
+				"Actor"
+			]
+		},
+		"ActorData": {
+			"DropItemsSet": {
+				"": 10.0,
+				"BanditAxe": 5.0,
+				"BanditHeavyArmor_BodyApparel": 5.0,
+				"BanditHeavyArmor_HeadApparel": 5.0,
+				"BanditHeavyArmor_LegApparel": 5.0,
+				"Bandit_PageBook": 1.0,
+				"HealthPotionM": 5.0,
+				"HealthPotionS": 10.0,
+				"Money:10": 10.0
+			},
+			"ExpValue": 60.0,
+			"Faction": "Bandits",
+			"MoneyValue": 15.0
+		},
+		"SpawnEquipmentArr": [
+			"Bandit_PageBook",
+			"OldBag_ItemBag",
+			"BanditHeavyArmor_HeadApparel",
+			"BanditHeavyArmor_BodyApparel",
+			"BanditHeavyArmor_LegApparel",
+			"BanditAxe"
+		],
+		"SpawnItemArr": [
+			"HealthPotionM",
+			"HealthPotionM"
+		],
+		"SpawnPageArr": [
+			"BanditBase_TitlePage",
+			"MoveForward",
+			"TurnLeft",
+			"TurnRight",
+			"BasicWeaponAttack",
+			"UsePotionSelf",
+			"ReloadPage"
+		],
+		"SpriteSheet": "DEFAULT",
+		"Stats": {
+			"Agility": 7.0,
+			"HealthMax": 50.0,
+			"Intelligence": 5.0,
+			"Strength": 8.0,
+			"Wisdom": 5.0
+		},
+		"_DefVersion": "1"
+	},
+	"Bandit_Captain": {
+		"!ObjectScript": "res://assets/Scripts/Actors/BaseActor.gd",
+		"!ParentKey": "#BaseHumanoid",
+		"#ObjDetails": {
+			"Description": "A bandit wearing armor.",
+			"DisplayName": "Bandit Captain",
+			"LargeIcon": "Sprites/BanditCaptain_Icon.png",
+			"ObjectType": "Actor",
+			"SmallIcon": "Sprites/BanditCaptain_Icon.png",
+			"SnippetDesc": "A captian of bandits.",
+			"Tags": [
+				"Bandit"
+			],
+			"Taxonomy": [
+				"Actor"
+			]
+		},
+		"ActorData": {
+			"DropItemsSet": {
+				"": 10.0,
+				"BanditCaptainHelmet_HeadApparel": 5.0,
+				"Bandit_PageBook": 1.0,
+				"BigMalma": 5.0,
+				"Money:10": 50.0
+			},
+			"ExpValue": 60.0,
+			"Faction": "Bandits",
+			"MoneyValue": 15.0
+		},
+		"SpawnEquipmentArr": [
+			"Bandit_PageBook",
+			"OldBag_ItemBag",
+			"BanditCaptainHelmet_HeadApparel",
+			"BanditHeavyArmor_BodyApparel",
+			"BanditHeavyArmor_LegApparel",
+			"BigMalma"
+		],
+		"SpawnItemArr": [
+			"HealthPotionM",
+			"HealthPotionM"
+		],
+		"SpawnPageArr": [
+			"BanditCaptain_TitlePage",
+			"MoveForward",
+			"TurnLeft",
+			"TurnRight",
+			"BasicWeaponAttack",
+			"UsePotionSelf",
+			"ReloadPage"
+		],
+		"SpriteSheet": "DEFAULT",
+		"Stats": {
+			"Agility": 10.0,
+			"Intelligence": 8.0,
+			"Strength": 10.0,
+			"Wisdom": 8.0
+		},
+		"_DefVersion": "1"
+	},
+	"Bandit_Ranged": {
+		"!ObjectScript": "res://assets/Scripts/Actors/BaseActor.gd",
+		"!ParentKey": "#BaseHumanoid",
+		"#ObjDetails": {
+			"Description": "A bandit wearing short shorts.",
+			"DisplayName": "Archer Bandit",
+			"LargeIcon": "Sprites/BanditArcher_Icon.png",
+			"ObjectType": "Actor",
+			"SmallIcon": "Sprites/BanditArcher_Icon.png",
+			"SnippetDesc": "A bandit.",
+			"Tags": [
+				"Bandit"
+			],
+			"Taxonomy": [
+				"Actor"
+			]
+		},
+		"ActorData": {
+			"DropItemsSet": {
+				"": 10.0,
+				"BanditLightArmor_BodyApparel": 5.0,
+				"BanditLightArmor_HeadApparel": 5.0,
+				"BanditLightArmor_LegApparel": 5.0,
+				"Bandit_PageBook": 1.0,
+				"BaseBow_Weapon": 5.0,
+				"HealthPotionM": 5.0,
+				"HealthPotionS": 10.0,
+				"Money:10": 10.0
+			},
+			"ExpValue": 60.0,
+			"Faction": "Bandits",
+			"MoneyValue": 15.0
+		},
+		"SpawnEquipmentArr": [
+			"Bandit_PageBook",
+			"OldBag_ItemBag",
+			"BanditLightArmor_HeadApparel",
+			"BanditLightArmor_BodyApparel",
+			"BanditLightArmor_LegApparel",
+			"BaseBow_Weapon"
+		],
+		"SpawnItemArr": [
+			"HealthPotionM",
+			"HealthPotionM"
+		],
+		"SpawnPageArr": [
+			"BanditArcher_TitlePage",
+			"MoveForward",
+			"TurnLeft",
+			"TurnRight",
+			"BasicWeaponAttack",
+			"UsePotionSelf",
+			"ReloadPage"
+		],
+		"SpriteSheet": "DEFAULT",
+		"Stats": {
+			"Agility": 10.0,
+			"HealthMax": 30.0,
+			"Intelligence": 5.0,
+			"Strength": 7.0,
+			"Wisdom": 5.0
+		},
+		"_DefVersion": "1"
+	}
+}
