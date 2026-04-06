@@ -651,7 +651,6 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="EquipmentPage" parent="ScaleControl/LeftPageControl" unique_id=842350710 instance=ExtResource("9_bofun")]
-visible = false
 material = SubResource("ShaderMaterial_i55nt")
 layout_mode = 1
 anchors_preset = 15
@@ -663,6 +662,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="LevelUpPage" type="Control" parent="ScaleControl/LeftPageControl" unique_id=1294373346 node_paths=PackedStringArray("skill_page", "current_level_label", "points_left_label", "points_total_label", "strength_controller", "agility_controller", "intelligence_controller", "wisdom_controller", "stats_container", "confirm_button", "confirm_menu")]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1658,11 +1658,11 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="StatsPage" parent="ScaleControl/RightPageControl" unique_id=124354155 node_paths=PackedStringArray("parent_character_menu") instance=ExtResource("20_wjece")]
-visible = false
 layout_mode = 0
 parent_character_menu = NodePath("../../..")
 
 [node name="SkillTreePageControl" type="Control" parent="ScaleControl/RightPageControl" unique_id=434607673 node_paths=PackedStringArray("character_menu", "scroll_bar", "background_control", "tree_container", "row_prefab", "grid_container", "skill_node_prefab", "paired_node_prefab", "unspent_points_label", "total_points_label")]
+visible = false
 anchors_preset = 0
 offset_right = 292.0
 offset_bottom = 384.0

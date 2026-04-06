@@ -1,31 +1,32 @@
-[gd_scene load_steps=23 format=3 uid="uid://xjhbo48tdbhr"]
+[gd_scene format=3 uid="uid://xjhbo48tdbhr"]
 
-[ext_resource type="Script" path="res://Scenes/Menus/PageLibraryMenu/PageDetails/page_details_entry_container.gd" id="1_rx8b1"]
+[ext_resource type="Script" uid="uid://bbp52cnfjvsju" path="res://Scenes/Menus/PageLibraryMenu/PageDetails/page_details_entry_container.gd" id="1_rx8b1"]
 [ext_resource type="Texture2D" uid="uid://io35wpu802fp" path="res://assets/Sprites/UI/BackPatches/Patch_64_12.png" id="2_gntg0"]
 [ext_resource type="Texture2D" uid="uid://crfa2hjirevj7" path="res://Scenes/Menus/ShopMenu/MinusIcon.png" id="3_lqlib"]
 [ext_resource type="Texture2D" uid="uid://c6e4ut3id7itv" path="res://Scenes/Menus/ShopMenu/PlusIcon.png" id="4_ojbhj"]
 [ext_resource type="Texture2D" uid="uid://bubravriy5lks" path="res://assets/Sprites/BadSprite.png" id="5_i8wgt"]
 [ext_resource type="Texture2D" uid="uid://bpa7iavvlbhi5" path="res://assets/Sprites/UI/SymbolIcons/PageCountSymbol.png" id="6_unt5v"]
 [ext_resource type="Theme" uid="uid://bfce41la62bs6" path="res://Scenes/Themes/readable_theme.tres" id="7_4grnp"]
+[ext_resource type="Script" uid="uid://bcf3yo7yhmwwr" path="res://Scenes/UiNodes/DescriptionBox/tags_box.gd" id="8_bj6vi"]
 [ext_resource type="Texture2D" uid="uid://br058igskmkwd" path="res://assets/Sprites/UI/SymbolIcons/AccuracySymbol.png" id="8_gn6vw"]
 [ext_resource type="Theme" uid="uid://cayt153s5ro4a" path="res://Scenes/Themes/standard_theme_red.tres" id="9_k3p8v"]
 [ext_resource type="Texture2D" uid="uid://dgxwfm0wf7rhw" path="res://assets/Sprites/UI/SymbolIcons/PotencySymbol.png" id="10_4ekbp"]
-[ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/ItemDetailsCard/cost_container.gd" id="11_x0dcd"]
+[ext_resource type="Script" uid="uid://kd25wgnxxnmi" path="res://Scenes/Menus/CharacterMenu/MenuPages/ItemDetailsCard/cost_container.gd" id="11_x0dcd"]
 [ext_resource type="Texture2D" uid="uid://dhtsefdcfxbg8" path="res://assets/Sprites/UI/SymbolIcons/AmmoSymbol_Gen.png" id="12_3i4mv"]
 [ext_resource type="Texture2D" uid="uid://ckym0e60eik1k" path="res://assets/Sprites/UI/SymbolIcons/AmmoSymbol_Phy.png" id="13_icqix"]
 [ext_resource type="Texture2D" uid="uid://cexlfs7svl17c" path="res://assets/Sprites/UI/SymbolIcons/AmmoSymbol_Mag.png" id="14_i3a7u"]
 [ext_resource type="Texture2D" uid="uid://cyt5q4hutdp6y" path="res://assets/Sprites/UI/SymbolIcons/AmmoSymbol_Abn.png" id="15_32cel"]
 [ext_resource type="Theme" uid="uid://dwinll8pgdjhc" path="res://Scenes/Themes/standard_theme.tres" id="16_cmj7j"]
 [ext_resource type="PackedScene" uid="uid://bqi05unl37q0p" path="res://Scenes/UiNodes/DamageLabelContainer/damage_label_container.tscn" id="17_0oup6"]
-[ext_resource type="Script" path="res://Scenes/UiNodes/StatModLabelContainer/stat_mod_label_container.gd" id="18_p1g4d"]
+[ext_resource type="Script" uid="uid://dvytl6yl136b3" path="res://Scenes/UiNodes/StatModLabelContainer/stat_mod_label_container.gd" id="18_p1g4d"]
 [ext_resource type="Texture2D" uid="uid://cnhd7e5hwrxoy" path="res://assets/Sprites/UI/SymbolIcons/AbnormDamageSymbol.png" id="19_ujpc6"]
 [ext_resource type="Texture2D" uid="uid://b10pvly4exem2" path="res://assets/Sprites/UI/SymbolIcons/_S_Symbole.png" id="20_xmmjh"]
 [ext_resource type="PackedScene" uid="uid://c1bs8grs7gsc1" path="res://Scenes/UiNodes/MiniRangeDisplay/mini_range_display.tscn" id="21_r03se"]
-[ext_resource type="Script" path="res://Scenes/UiNodes/DescriptionBox/description_box.gd" id="22_bd2iy"]
+[ext_resource type="Script" uid="uid://cukfwo131b0bn" path="res://Scenes/UiNodes/DescriptionBox/description_box.gd" id="22_bd2iy"]
 
-[node name="PageDetailsEntryContainer" type="Container" node_paths=PackedStringArray("target_details_container", "target_type_label", "mini_range_display", "acc_pot_container", "accuracy_label", "potency_label", "effects_label", "ammo_label", "damage_entries_container", "icon_background", "icon", "title_label", "tags_label", "type_label", "details_container", "description_box", "plus_minus_button", "minus_icon", "plus_icon", "stat_mods_container", "premade_stat_mod_label", "add_item_button", "background", "inner_container")]
-custom_minimum_size = Vector2(826, 283)
-offset_right = 826.0
+[node name="PageDetailsEntryContainer" type="Container" unique_id=744557846 node_paths=PackedStringArray("target_details_container", "target_type_label", "mini_range_display", "acc_pot_container", "accuracy_label", "potency_label", "effects_label", "ammo_label", "damage_entries_container", "tag_box", "icon_background", "icon", "title_label", "tags_label", "type_label", "details_container", "description_box", "plus_minus_button", "minus_icon", "plus_icon", "stat_mods_container", "premade_stat_mod_label", "add_item_button", "background", "inner_container")]
+custom_minimum_size = Vector2(900, 283)
+offset_right = 900.0
 offset_bottom = 283.0
 script = ExtResource("1_rx8b1")
 target_details_container = NodePath("PageInnerContainer/DetailsContainer/DetailsContainer/HBoxContainer/TargetDetailsContainer")
@@ -37,6 +38,7 @@ potency_label = NodePath("PageInnerContainer/DetailsContainer/DetailsContainer/H
 effects_label = NodePath("PageInnerContainer/DetailsContainer/DetailsContainer/HBoxContainer/VBoxContainer/AccPotContainer/EffectsLabel")
 ammo_label = NodePath("PageInnerContainer/DetailsContainer/DetailsContainer/HBoxContainer/VBoxContainer/AccPotContainer/AmmoContainer")
 damage_entries_container = NodePath("PageInnerContainer/DetailsContainer/DetailsContainer/HBoxContainer/VBoxContainer/AmmoDamageContainer/DamagesContainer")
+tag_box = NodePath("PageInnerContainer/LineContainer/TagsBox")
 icon_background = NodePath("PageInnerContainer/LineContainer/IconBackgroundTextureRect")
 icon = NodePath("PageInnerContainer/LineContainer/IconBackgroundTextureRect/IconTextureRect")
 title_label = NodePath("PageInnerContainer/LineContainer/TitleLabel")
@@ -54,7 +56,7 @@ background = NodePath("NinePatchRect")
 inner_container = NodePath("PageInnerContainer")
 force_fill_x = true
 
-[node name="NinePatchRect" type="NinePatchRect" parent="."]
+[node name="NinePatchRect" type="NinePatchRect" parent="." unique_id=1421556079]
 layout_mode = 2
 texture = ExtResource("2_gntg0")
 patch_margin_left = 12
@@ -62,31 +64,31 @@ patch_margin_top = 12
 patch_margin_right = 12
 patch_margin_bottom = 12
 
-[node name="PageInnerContainer" type="VBoxContainer" parent="."]
+[node name="PageInnerContainer" type="VBoxContainer" parent="." unique_id=161018927]
 layout_mode = 2
 
-[node name="LineContainer" type="HBoxContainer" parent="PageInnerContainer"]
+[node name="LineContainer" type="HBoxContainer" parent="PageInnerContainer" unique_id=548262713]
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="MinusTextureRect" type="TextureRect" parent="PageInnerContainer/LineContainer"]
+[node name="MinusTextureRect" type="TextureRect" parent="PageInnerContainer/LineContainer" unique_id=1456325399]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 texture = ExtResource("3_lqlib")
 
-[node name="PlusTextureRect" type="TextureRect" parent="PageInnerContainer/LineContainer/MinusTextureRect"]
+[node name="PlusTextureRect" type="TextureRect" parent="PageInnerContainer/LineContainer/MinusTextureRect" unique_id=371760666]
 custom_minimum_size = Vector2(64, 64)
-layout_mode = 2
+layout_mode = 0
 offset_right = 64.0
 offset_bottom = 64.0
 texture = ExtResource("4_ojbhj")
 
-[node name="IconBackgroundTextureRect" type="TextureRect" parent="PageInnerContainer/LineContainer"]
+[node name="IconBackgroundTextureRect" type="TextureRect" parent="PageInnerContainer/LineContainer" unique_id=1256872441]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 texture = ExtResource("5_i8wgt")
 
-[node name="IconTextureRect" type="TextureRect" parent="PageInnerContainer/LineContainer/IconBackgroundTextureRect"]
+[node name="IconTextureRect" type="TextureRect" parent="PageInnerContainer/LineContainer/IconBackgroundTextureRect" unique_id=610128707]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -95,27 +97,28 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("6_unt5v")
 
-[node name="TitleLabel" type="Label" parent="PageInnerContainer/LineContainer"]
+[node name="TitleLabel" type="Label" parent="PageInnerContainer/LineContainer" unique_id=1888496432]
 custom_minimum_size = Vector2(420, 0)
 layout_mode = 2
 theme = ExtResource("7_4grnp")
 theme_override_font_sizes/font_size = 32
 text = "Page Name"
 
-[node name="VSeparator" type="VSeparator" parent="PageInnerContainer/LineContainer"]
+[node name="VSeparator" type="VSeparator" parent="PageInnerContainer/LineContainer" unique_id=1334889764]
 layout_mode = 2
 
-[node name="TypeLabel" type="Label" parent="PageInnerContainer/LineContainer"]
+[node name="TypeLabel" type="Label" parent="PageInnerContainer/LineContainer" unique_id=2098577797]
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
 theme = ExtResource("7_4grnp")
 theme_override_font_sizes/font_size = 32
 text = "Passive"
 
-[node name="VSeparator2" type="VSeparator" parent="PageInnerContainer/LineContainer"]
+[node name="VSeparator2" type="VSeparator" parent="PageInnerContainer/LineContainer" unique_id=169156017]
 layout_mode = 2
 
-[node name="TagsLabel" type="Label" parent="PageInnerContainer/LineContainer"]
+[node name="TagsLabel" type="Label" parent="PageInnerContainer/LineContainer" unique_id=1109637258]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("7_4grnp")
@@ -125,45 +128,59 @@ clip_text = true
 text_overrun_behavior = 4
 ellipsis_char = "+"
 
-[node name="AddButton" type="Button" parent="PageInnerContainer/LineContainer"]
+[node name="TagsBox" type="RichTextLabel" parent="PageInnerContainer/LineContainer" unique_id=1309874326]
+clip_contents = false
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("7_4grnp")
+theme_override_font_sizes/normal_font_size = 32
+text = "Tags"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("8_bj6vi")
+
+[node name="AddButton" type="Button" parent="PageInnerContainer/LineContainer" unique_id=1388006216]
 z_index = 5
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "Add"
 
-[node name="DetailsContainer" type="HBoxContainer" parent="PageInnerContainer"]
+[node name="DetailsContainer" type="HBoxContainer" parent="PageInnerContainer" unique_id=1126444507]
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="SpacerTextureRect" type="TextureRect" parent="PageInnerContainer/DetailsContainer"]
+[node name="SpacerTextureRect" type="TextureRect" parent="PageInnerContainer/DetailsContainer" unique_id=153730895]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 
-[node name="DetailsContainer" type="VBoxContainer" parent="PageInnerContainer/DetailsContainer"]
+[node name="DetailsContainer" type="VBoxContainer" parent="PageInnerContainer/DetailsContainer" unique_id=893745570]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="ColorRect" type="ColorRect" parent="PageInnerContainer/DetailsContainer/DetailsContainer"]
+[node name="ColorRect" type="ColorRect" parent="PageInnerContainer/DetailsContainer/DetailsContainer" unique_id=1341247745]
 custom_minimum_size = Vector2(2, 2)
 layout_mode = 2
 color = Color(0, 0, 0, 1)
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PageInnerContainer/DetailsContainer/DetailsContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PageInnerContainer/DetailsContainer/DetailsContainer" unique_id=201469085]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PageInnerContainer/DetailsContainer/DetailsContainer/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PageInnerContainer/DetailsContainer/DetailsContainer/HBoxContainer" unique_id=821657109]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="AccPotContainer" type="HBoxContainer" parent="PageInnerContainer/DetailsContainer/DetailsContainer/HBoxContainer/VBoxContainer"]
+[node name="AccPotContainer" type="HBoxContainer" parent="PageInnerContainer/DetailsContainer/DetailsContainer/HBoxContainer/VBoxContainer" unique_id=212762616]
 layout_mode = 2
 
-[node name="AccIcon" type="TextureRect" parent="PageInnerContainer/DetailsContainer/DetailsContainer/HBoxContainer/VBoxContainer/AccPotContainer"]
+[node name="AccIcon" type="TextureRect" parent="PageInnerContainer/DetailsContainer/DetailsContainer/HBoxContainer/VBoxContainer/AccPotContainer" unique_id=1654374260]
 layout_mode = 2
 texture = ExtResource("8_gn6vw")
 expand_mode = 3
 
-[node name="AccLabel" type="Label" parent="PageInnerContainer/DetailsContainer/DetailsContainer/HBoxContainer/VBoxContainer/AccPotContainer"]
+[node name="AccLabel" type="Label" parent="PageInnerContainer/DetailsContainer/DetailsContainer/HBoxContainer/VBoxContainer/AccPotContainer" unique_id=495685677]
 layout_mode = 2
 size_flags_vertical = 8
 theme = ExtResource("9_k3p8v")
@@ -173,16 +190,16 @@ text = "Acc"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="VSeparator" type="VSeparator" parent="PageInnerContainer/DetailsContainer/DetailsContainer/HBoxContainer/VBoxContainer/AccPotContainer"]
+[node name="VSeparator" type="VSeparator" parent="PageInnerContainer/DetailsContainer/DetailsContainer/HBoxContainer/VBoxContainer/AccPotContainer" unique_id=1618457391]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 
-[node name="PotIcon" type="TextureRect" parent="PageInnerContainer/DetailsContainer/DetailsContainer/HBoxContainer/VBoxContainer/AccPotContainer"]
+[node name="PotIcon" type="TextureRect" parent="PageInnerContainer/DetailsContainer/DetailsContainer/HBoxContainer/VBoxContainer/AccPotContainer" unique_id=1279329892]
 layout_mode = 2
 texture = ExtResource("10_4ekbp")
 expand_mode = 3
 
-[node name="PotLabel" type="Label" parent="PageInnerContainer/DetailsContainer/DetailsContainer/HBoxContainer/VBoxContainer/AccPotContainer"]
+[node name="PotLabel" type="Label" parent="PageInnerContainer/DetailsContainer/DetailsContainer/HBoxContainer/VBoxContainer/AccPotContainer" unique_id=146800067]
 layout_mode = 2
 size_flags_vertical = 8
 theme = ExtResource("9_k3p8v")
@@ -192,11 +209,11 @@ text = "Pot"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="VSeparator2" type="VSeparator" parent="PageInnerContainer/DetailsContainer/DetailsContainer/HBoxContainer/VBoxContainer/AccPotContainer"]
+[node name="VSeparator2" type="VSeparator" parent="PageInnerContainer/DetailsContainer/DetailsContainer/HBoxContainer/VBoxContainer/AccPotContainer" unique_id=1964007340]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 
-[node name="EffectsLabel" type="Label" parent="PageInnerContainer/DetailsContainer/DetailsContainer/HBoxContainer/VBoxContainer/AccPotContainer"]
+[node name="EffectsLabel" type="Label" parent="PageInnerContainer/DetailsContainer/DetailsContainer/HBoxContainer/VBoxContainer/AccPotContainer" unique_id=679218627]
 layout_mode = 2
 size_flags_vertical = 8
 theme = ExtResource("9_k3p8v")
@@ -206,7 +223,7 @@ text = "Effect"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="AmmoContainer" type="HBoxContainer" parent="PageInnerContainer/DetailsContainer/DetailsContainer/HBoxContainer/VBoxContainer/AccPotContainer" node_paths=PackedStringArray("count_val_label", "cost_val_label", "clip_val_label", "ammo_icon_rect")]
+[node name="AmmoContainer" type="HBoxContainer" parent="PageInnerContainer/DetailsContainer/DetailsContainer/HBoxContainer/VBoxContainer/AccPotContainer" unique_id=1997808645 node_paths=PackedStringArray("count_val_label", "cost_val_label", "clip_val_label", "ammo_icon_rect")]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -220,68 +237,68 @@ phy_ammo_icon = ExtResource("13_icqix")
 mag_ammo_icon = ExtResource("14_i3a7u")
 abn_ammo_icon = ExtResource("15_32cel")
 
-[node name="AmmoIcon" type="TextureRect" parent="PageInnerContainer/DetailsContainer/DetailsContainer/HBoxContainer/VBoxContainer/AccPotContainer/AmmoContainer"]
+[node name="AmmoIcon" type="TextureRect" parent="PageInnerContainer/DetailsContainer/DetailsContainer/HBoxContainer/VBoxContainer/AccPotContainer/AmmoContainer" unique_id=479210068]
 layout_mode = 2
 texture = ExtResource("12_3i4mv")
 expand_mode = 3
 
-[node name="CountLabel" type="Label" parent="PageInnerContainer/DetailsContainer/DetailsContainer/HBoxContainer/VBoxContainer/AccPotContainer/AmmoContainer"]
+[node name="CountLabel" type="Label" parent="PageInnerContainer/DetailsContainer/DetailsContainer/HBoxContainer/VBoxContainer/AccPotContainer/AmmoContainer" unique_id=1036278717]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("16_cmj7j")
 theme_override_font_sizes/font_size = 32
 text = "9"
 
-[node name="Seperator2" type="Label" parent="PageInnerContainer/DetailsContainer/DetailsContainer/HBoxContainer/VBoxContainer/AccPotContainer/AmmoContainer"]
+[node name="Seperator2" type="Label" parent="PageInnerContainer/DetailsContainer/DetailsContainer/HBoxContainer/VBoxContainer/AccPotContainer/AmmoContainer" unique_id=1772967335]
 self_modulate = Color(0.31, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("16_cmj7j")
 theme_override_font_sizes/font_size = 32
 text = " ("
 
-[node name="CostLabel2" type="Label" parent="PageInnerContainer/DetailsContainer/DetailsContainer/HBoxContainer/VBoxContainer/AccPotContainer/AmmoContainer"]
+[node name="CostLabel2" type="Label" parent="PageInnerContainer/DetailsContainer/DetailsContainer/HBoxContainer/VBoxContainer/AccPotContainer/AmmoContainer" unique_id=2054797354]
 self_modulate = Color(0.31, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("16_cmj7j")
 theme_override_font_sizes/font_size = 32
 text = "4"
 
-[node name="Seperator3" type="Label" parent="PageInnerContainer/DetailsContainer/DetailsContainer/HBoxContainer/VBoxContainer/AccPotContainer/AmmoContainer"]
+[node name="Seperator3" type="Label" parent="PageInnerContainer/DetailsContainer/DetailsContainer/HBoxContainer/VBoxContainer/AccPotContainer/AmmoContainer" unique_id=805473489]
 self_modulate = Color(0.31, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("16_cmj7j")
 theme_override_font_sizes/font_size = 32
 text = ":"
 
-[node name="ClipLabel" type="Label" parent="PageInnerContainer/DetailsContainer/DetailsContainer/HBoxContainer/VBoxContainer/AccPotContainer/AmmoContainer"]
+[node name="ClipLabel" type="Label" parent="PageInnerContainer/DetailsContainer/DetailsContainer/HBoxContainer/VBoxContainer/AccPotContainer/AmmoContainer" unique_id=2016890740]
 self_modulate = Color(0.31, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("16_cmj7j")
 theme_override_font_sizes/font_size = 32
 text = "36"
 
-[node name="Seperator4" type="Label" parent="PageInnerContainer/DetailsContainer/DetailsContainer/HBoxContainer/VBoxContainer/AccPotContainer/AmmoContainer"]
+[node name="Seperator4" type="Label" parent="PageInnerContainer/DetailsContainer/DetailsContainer/HBoxContainer/VBoxContainer/AccPotContainer/AmmoContainer" unique_id=1363421692]
 self_modulate = Color(0.31, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("16_cmj7j")
 theme_override_font_sizes/font_size = 32
 text = ")"
 
-[node name="AmmoDamageContainer" type="HBoxContainer" parent="PageInnerContainer/DetailsContainer/DetailsContainer/HBoxContainer/VBoxContainer"]
+[node name="AmmoDamageContainer" type="HBoxContainer" parent="PageInnerContainer/DetailsContainer/DetailsContainer/HBoxContainer/VBoxContainer" unique_id=1262826853]
 layout_mode = 2
 
-[node name="DamagesContainer" type="VBoxContainer" parent="PageInnerContainer/DetailsContainer/DetailsContainer/HBoxContainer/VBoxContainer/AmmoDamageContainer"]
+[node name="DamagesContainer" type="VBoxContainer" parent="PageInnerContainer/DetailsContainer/DetailsContainer/HBoxContainer/VBoxContainer/AmmoDamageContainer" unique_id=1014398314]
 layout_mode = 2
 
-[node name="DamageContainer" parent="PageInnerContainer/DetailsContainer/DetailsContainer/HBoxContainer/VBoxContainer/AmmoDamageContainer/DamagesContainer" instance=ExtResource("17_0oup6")]
+[node name="DamageContainer" parent="PageInnerContainer/DetailsContainer/DetailsContainer/HBoxContainer/VBoxContainer/AmmoDamageContainer/DamagesContainer" unique_id=1772022685 instance=ExtResource("17_0oup6")]
 layout_mode = 2
 font_size_override = 32
 
-[node name="StatModsContainer" type="HBoxContainer" parent="PageInnerContainer/DetailsContainer/DetailsContainer/HBoxContainer/VBoxContainer"]
+[node name="StatModsContainer" type="HBoxContainer" parent="PageInnerContainer/DetailsContainer/DetailsContainer/HBoxContainer/VBoxContainer" unique_id=1975320084]
 layout_mode = 2
 theme_override_constants/separation = 32
 
-[node name="StatModLabel" type="HBoxContainer" parent="PageInnerContainer/DetailsContainer/DetailsContainer/HBoxContainer/VBoxContainer/StatModsContainer" node_paths=PackedStringArray("modded_stat_icon", "modded_stat_name_label", "mod_value_label", "dep_stat_label", "dep_stat_icon", "plus_label", "times_label")]
+[node name="StatModLabel" type="HBoxContainer" parent="PageInnerContainer/DetailsContainer/DetailsContainer/HBoxContainer/VBoxContainer/StatModsContainer" unique_id=1774880428 node_paths=PackedStringArray("modded_stat_icon", "modded_stat_name_label", "mod_value_label", "dep_stat_label", "dep_stat_icon", "plus_label", "times_label")]
 layout_mode = 2
 theme_override_constants/separation = 0
 script = ExtResource("18_p1g4d")
@@ -293,12 +310,12 @@ dep_stat_icon = NodePath("HBoxContainer/DepStatIcon")
 plus_label = NodePath("SignLabel")
 times_label = NodePath("SignLabel2")
 
-[node name="ModdedStatIcon" type="TextureRect" parent="PageInnerContainer/DetailsContainer/DetailsContainer/HBoxContainer/VBoxContainer/StatModsContainer/StatModLabel"]
+[node name="ModdedStatIcon" type="TextureRect" parent="PageInnerContainer/DetailsContainer/DetailsContainer/HBoxContainer/VBoxContainer/StatModsContainer/StatModLabel" unique_id=661628626]
 layout_mode = 2
 texture = ExtResource("19_ujpc6")
 expand_mode = 3
 
-[node name="ModdedStatNameLabel" type="Label" parent="PageInnerContainer/DetailsContainer/DetailsContainer/HBoxContainer/VBoxContainer/StatModsContainer/StatModLabel"]
+[node name="ModdedStatNameLabel" type="Label" parent="PageInnerContainer/DetailsContainer/DetailsContainer/HBoxContainer/VBoxContainer/StatModsContainer/StatModLabel" unique_id=620532878]
 layout_mode = 2
 size_flags_vertical = 8
 theme = ExtResource("9_k3p8v")
@@ -308,7 +325,7 @@ text = "STR"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="SignLabel" type="Label" parent="PageInnerContainer/DetailsContainer/DetailsContainer/HBoxContainer/VBoxContainer/StatModsContainer/StatModLabel"]
+[node name="SignLabel" type="Label" parent="PageInnerContainer/DetailsContainer/DetailsContainer/HBoxContainer/VBoxContainer/StatModsContainer/StatModLabel" unique_id=2117505465]
 layout_mode = 2
 size_flags_vertical = 8
 theme = ExtResource("9_k3p8v")
@@ -318,16 +335,16 @@ text = "+"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PageInnerContainer/DetailsContainer/DetailsContainer/HBoxContainer/VBoxContainer/StatModsContainer/StatModLabel"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PageInnerContainer/DetailsContainer/DetailsContainer/HBoxContainer/VBoxContainer/StatModsContainer/StatModLabel" unique_id=1931063224]
 layout_mode = 2
 theme_override_constants/separation = -2
 
-[node name="DepStatIcon" type="TextureRect" parent="PageInnerContainer/DetailsContainer/DetailsContainer/HBoxContainer/VBoxContainer/StatModsContainer/StatModLabel/HBoxContainer"]
+[node name="DepStatIcon" type="TextureRect" parent="PageInnerContainer/DetailsContainer/DetailsContainer/HBoxContainer/VBoxContainer/StatModsContainer/StatModLabel/HBoxContainer" unique_id=1871934693]
 layout_mode = 2
 texture = ExtResource("20_xmmjh")
 expand_mode = 3
 
-[node name="DepStatNameLabel" type="Label" parent="PageInnerContainer/DetailsContainer/DetailsContainer/HBoxContainer/VBoxContainer/StatModsContainer/StatModLabel/HBoxContainer"]
+[node name="DepStatNameLabel" type="Label" parent="PageInnerContainer/DetailsContainer/DetailsContainer/HBoxContainer/VBoxContainer/StatModsContainer/StatModLabel/HBoxContainer" unique_id=1172483349]
 layout_mode = 2
 size_flags_vertical = 8
 theme = ExtResource("9_k3p8v")
@@ -337,7 +354,7 @@ text = "TR"
 horizontal_alignment = 2
 vertical_alignment = 2
 
-[node name="SignLabel2" type="Label" parent="PageInnerContainer/DetailsContainer/DetailsContainer/HBoxContainer/VBoxContainer/StatModsContainer/StatModLabel"]
+[node name="SignLabel2" type="Label" parent="PageInnerContainer/DetailsContainer/DetailsContainer/HBoxContainer/VBoxContainer/StatModsContainer/StatModLabel" unique_id=2000315832]
 layout_mode = 2
 size_flags_vertical = 8
 theme = ExtResource("9_k3p8v")
@@ -347,7 +364,7 @@ text = "x"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="ModValueLabel" type="Label" parent="PageInnerContainer/DetailsContainer/DetailsContainer/HBoxContainer/VBoxContainer/StatModsContainer/StatModLabel"]
+[node name="ModValueLabel" type="Label" parent="PageInnerContainer/DetailsContainer/DetailsContainer/HBoxContainer/VBoxContainer/StatModsContainer/StatModLabel" unique_id=1759825480]
 layout_mode = 2
 size_flags_vertical = 8
 theme = ExtResource("9_k3p8v")
@@ -357,10 +374,10 @@ text = "1.2"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="TargetDetailsContainer" type="HBoxContainer" parent="PageInnerContainer/DetailsContainer/DetailsContainer/HBoxContainer"]
+[node name="TargetDetailsContainer" type="HBoxContainer" parent="PageInnerContainer/DetailsContainer/DetailsContainer/HBoxContainer" unique_id=507195650]
 layout_mode = 2
 
-[node name="TargetTypeLabel" type="Label" parent="PageInnerContainer/DetailsContainer/DetailsContainer/HBoxContainer/TargetDetailsContainer"]
+[node name="TargetTypeLabel" type="Label" parent="PageInnerContainer/DetailsContainer/DetailsContainer/HBoxContainer/TargetDetailsContainer" unique_id=2055754692]
 layout_mode = 2
 size_flags_vertical = 1
 theme = ExtResource("9_k3p8v")
@@ -370,13 +387,13 @@ text = "Actor"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="MiniRangeDisplay" parent="PageInnerContainer/DetailsContainer/DetailsContainer/HBoxContainer/TargetDetailsContainer" instance=ExtResource("21_r03se")]
+[node name="MiniRangeDisplay" parent="PageInnerContainer/DetailsContainer/DetailsContainer/HBoxContainer/TargetDetailsContainer" unique_id=932298234 instance=ExtResource("21_r03se")]
 custom_minimum_size = Vector2(88, 88)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="RichTextLabel" type="RichTextLabel" parent="PageInnerContainer/DetailsContainer/DetailsContainer"]
+[node name="RichTextLabel" type="RichTextLabel" parent="PageInnerContainer/DetailsContainer/DetailsContainer" unique_id=1343066667]
 z_index = 1
 clip_contents = false
 layout_mode = 2
@@ -385,13 +402,13 @@ text = "Detailed Discription"
 fit_content = true
 script = ExtResource("22_bd2iy")
 
-[node name="Control" type="Control" parent="."]
+[node name="Control" type="Control" parent="." unique_id=1947685555]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="Button" type="Button" parent="Control"]
+[node name="Button" type="Button" parent="Control" unique_id=777167832]
 visible = false
 self_modulate = Color(1, 1, 1, 0)
-layout_mode = 2
+layout_mode = 0
 offset_right = 1039.0
 offset_bottom = 80.0

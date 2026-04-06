@@ -13,6 +13,7 @@ extends BaseObjectDetailsEntryContainer
 
 @export var ammo_label:BoxContainer
 @export var damage_entries_container:VBoxContainer
+@export var tag_box:TagBox
 
 
 # Called when the node enters the scene tree for the first time.
@@ -41,7 +42,7 @@ func _load_mini_details():
 	if type_str and BaseItem.ItemRarity.keys().has(type_str):
 		icon_background.texture = page.get_rarity_background()
 	icon.texture = page.get_large_icon()
-	
+	tag_box.set_tags(page.get_tags())
 	if thing_tags.has("Title"):
 		type_label.text = "Title"
 	elif page is PageItemPassive:
@@ -57,6 +58,7 @@ func _load_full_details():
 	var page = ItemLibrary.get_item(page_key)
 	var page_effect_def = {}#page.get_effect_def()
 	description_box.set_page_item(page)
+	tag_box.set_tags(page.get_tags())
 	# Ammo
 	if page and page is PageItemAction and page.has_ammo(null):
 		ammo_label.set_data(page, null)

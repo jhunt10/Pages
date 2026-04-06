@@ -1,60 +1,84 @@
-[gd_scene load_steps=5 format=3 uid="uid://ukoix7m7xspo"]
+[gd_scene format=3 uid="uid://ukoix7m7xspo"]
 
-[ext_resource type="Script" path="res://Scenes/UiNodes/back_patch_container.gd" id="1_3wnk0"]
-[ext_resource type="Script" path="res://Scenes/UiNodes/DescriptionBox/DescriptionPopUpContainer/description_popup_container.gd" id="1_ghp6n"]
-[ext_resource type="Texture2D" uid="uid://io35wpu802fp" path="res://assets/Sprites/UI/BackPatches/Patch_64_12.png" id="2_4h46i"]
+[ext_resource type="Script" uid="uid://b82mb4dyp17ng" path="res://Scenes/UiNodes/back_patch_container.gd" id="1_3wnk0"]
+[ext_resource type="Script" uid="uid://u08rga4tcc3k" path="res://Scenes/UiNodes/DescriptionBox/DescriptionPopUpContainer/description_popup_container.gd" id="1_ghp6n"]
+[ext_resource type="Texture2D" uid="uid://5hu0ttx4jxuo" path="res://assets/Sprites/UI/BackPatches/PaperPatch_64x92_16.png" id="3_36tku"]
 [ext_resource type="Theme" uid="uid://dwinll8pgdjhc" path="res://Scenes/Themes/standard_theme.tres" id="3_rwuh1"]
+[ext_resource type="Texture2D" uid="uid://bdi5n7i6vw4rp" path="res://assets/Sprites/UI/pin_icon.png" id="4_36tku"]
+[ext_resource type="Script" uid="uid://cukfwo131b0bn" path="res://Scenes/UiNodes/DescriptionBox/description_box.gd" id="6_36tku"]
 
-[node name="PopupContainer" type="Control" node_paths=PackedStringArray("back_patch", "message_box")]
+[node name="PopupContainer" type="Control" unique_id=235870626 node_paths=PackedStringArray("back_patch", "close_button", "description_box")]
+top_level = true
 z_index = 20
 layout_mode = 3
 anchors_preset = 0
 mouse_filter = 2
 script = ExtResource("1_ghp6n")
 back_patch = NodePath("BackPatch")
-message_box = NodePath("BackPatch/BoxContainer/MessageBox")
+close_button = NodePath("BackPatch/BoxContainer/Control/TextureButton")
+description_box = NodePath("BackPatch/BoxContainer/DescriptionBox")
 
-[node name="BackPatch" type="Container" parent="." node_paths=PackedStringArray("background", "inner_container")]
+[node name="BackPatch" type="Container" parent="." unique_id=2130885393 node_paths=PackedStringArray("background", "inner_container")]
 z_index = 1
-custom_minimum_size = Vector2(274, 109)
+custom_minimum_size = Vector2(282, 117)
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -137.0
-offset_top = -109.0
-offset_right = 137.0
+offset_left = -141.0
+offset_top = -117.0
+offset_right = 141.0
 grow_horizontal = 2
 grow_vertical = 0
-mouse_filter = 2
+mouse_filter = 0
 script = ExtResource("1_3wnk0")
 background = NodePath("NinePatchRect")
 inner_container = NodePath("BoxContainer")
 center_in_parent = true
 center_from = 1
 
-[node name="NinePatchRect" type="NinePatchRect" parent="BackPatch"]
+[node name="NinePatchRect" type="NinePatchRect" parent="BackPatch" unique_id=909691847]
 layout_mode = 2
-texture = ExtResource("2_4h46i")
-region_rect = Rect2(1, 1, 64, 64)
-patch_margin_left = 12
-patch_margin_top = 12
-patch_margin_right = 12
-patch_margin_bottom = 12
+texture = ExtResource("3_36tku")
+region_rect = Rect2(0, 0, 92, 64)
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
 
-[node name="BoxContainer" type="BoxContainer" parent="BackPatch"]
+[node name="BoxContainer" type="BoxContainer" parent="BackPatch" unique_id=426911449]
 layout_mode = 2
 mouse_filter = 2
+theme_override_constants/separation = 0
+alignment = 2
+vertical = true
 
-[node name="MessageBox" type="RichTextLabel" parent="BackPatch/BoxContainer"]
+[node name="Control" type="Control" parent="BackPatch/BoxContainer" unique_id=1342051046]
+layout_mode = 2
+
+[node name="TextureButton" type="TextureButton" parent="BackPatch/BoxContainer/Control" unique_id=2092441984]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -5.0
+offset_top = -26.0
+offset_right = 27.0
+offset_bottom = 6.0
+grow_horizontal = 0
+texture_normal = ExtResource("4_36tku")
+
+[node name="DescriptionBox" type="RichTextLabel" parent="BackPatch/BoxContainer" unique_id=1595601828]
+clip_contents = false
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
-mouse_filter = 2
+mouse_filter = 1
 theme = ExtResource("3_rwuh1")
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 bbcode_enabled = true
 text = "[color=#460000]Fast Actions[/color] are preformed sooner in the [color=#460000]Turn[/color] than most other [color=#460000]Actions[/color] regardless of [color=#460000]SPD[/color], usually before other [color=#460000]Actors[/color] move."
 fit_content = true
 autowrap_mode = 2
+script = ExtResource("6_36tku")

@@ -22,6 +22,8 @@ func _ready() -> void:
 
 func _richtextlabel_on_meta_clicked(meta):
 	print(meta)
+	if popup_container:
+		popup_container.pin_in_place()
 
 func _show_pop_up(data_str):
 	if not popup_container:
@@ -32,10 +34,22 @@ func _show_pop_up(data_str):
 	var mouse_pos = self.get_global_mouse_position()
 	popup_container.show()
 	popup_container.global_position = mouse_pos
-	popup_container.message_box.clear()
 	popup_container.parent_description_box = self
 	
 	if data:
+		if data.has("LinkType"):
+			var link_type = data["LinkType"]
+			match link_type:
+				"Tag":
+					var tag_key = data["Value"]
+					popup_container.set_description("@@#Tag:"+tag_key+":Desc@@")
+					#var lines = _parse_tag_info(["Tag", tag_key, "Desc"])
+					#for line in lines:
+						#if line is String:
+							#popup_container.message_box.append_text(line)
+						#if line is Texture2D:
+							#popup_container.message_box.add_image(line, 0, 0, Color(1,1,1,1), INLINE_ALIGNMENT_BOTTOM)
+					
 		if data.has("text"):
 			var line = data.get("text", "")
 			line = line.replace("|>|", "]").replace("|<|", "[").replace('\\"', '"')
@@ -49,10 +63,17 @@ func _show_pop_up(data_str):
 					popup_container.message_box.append_text(line)
 				if line is Texture2D:
 					popup_container.message_box.add_image(line, 0, 0, Color(1,1,1,1), INLINE_ALIGNMENT_BOTTOM)
+		#elif data.has("")
 	#var content_scale = get_window().content_scale_factor
 	#popup_container.scale  = Vector2.ONE
 	#if content_scale != 1:
 		#popup_container.scale = Vector2.ZERO * (1.0/content_scale)
+
+func _hide_pop_up(_data):
+	if popup_container:
+		if is_instance_valid(popup_container):
+			popup_container.queue_free()
+		popup_container = null
 
 func color_text(color, raw_text)->String:
 	if color is String:
@@ -64,12 +85,6 @@ func color_text(color, raw_text)->String:
 
 func _on_mouse_hover_end(_data):
 	pass
-
-func _hide_pop_up(_data):
-	if popup_container:
-		if is_instance_valid(popup_container):
-			popup_container.queue_free()
-		popup_container = null
 
 func set_page_item(page:BasePageItem, actor:BaseActor=null):
 	if not page:
@@ -91,6 +106,14 @@ func set_effect(effect:BaseEffect):
 func set_object(object_def:Dictionary, object_inst:BaseLoadObject, actor:BaseActor):
 	self.clear()
 	var raw_description = object_def.get("#ObjDetails", {}).get("Description", "")
+	set_description(raw_description, object_def, object_inst, actor)
+
+func set_description(
+	raw_description:String, 
+	object_def:Dictionary = {}, 
+	object_inst:BaseLoadObject = null, 
+	actor:BaseActor = null
+	):
 	var lines = _build_bbcode_array(raw_description, object_def, object_inst, actor)
 	for line in lines:
 		if line is String:
@@ -101,24 +124,13 @@ func set_object(object_def:Dictionary, object_inst:BaseLoadObject, actor:BaseAct
 			#var font_hight = font.get_height(font_size)
 			self.add_image(line, 0, self.get_theme_font_size("normal_font"), Color(1,1,1,1), INLINE_ALIGNMENT_TOP)
 	
-func get_damage_colored_text(damage_type, text_value='')->String:
-	if damage_type is String and DamageEvent.DamageTypes.keys().has(damage_type):
-		damage_type = DamageEvent.DamageTypes.get(damage_type)
-	if not DamageEvent.DamageTypes.values().has(damage_type):
-		return str(damage_type)
-	
-	if text_value == '':
-		text_value = DamageEvent.DamageTypes.keys()[damage_type]
-	var color_code = DamageHelper.get_damage_color(damage_type, true) 
-	var out_line_color = "#000000"
-	if damage_type == DamageEvent.DamageTypes.Dark:
-		out_line_color = "#808080"
-	var start_tag =  "[color=#" + color_code + "][outline_size=4][outline_color="+out_line_color+"]"
-	var end_tag = "[/outline_color][/outline_size][/color]"
-	return start_tag + text_value + end_tag
+func _build_bbcode_array(
+	raw_description:String,
+	object_def:Dictionary, 
+	object_inst:BaseLoadObject, 
+	actor:BaseActor
+	)->Array:
 		
-
-func _build_bbcode_array(raw_description:String, object_def:Dictionary, object_inst:BaseLoadObject, actor:BaseActor)->Array:
 	var out_arr = []
 	var tokens = raw_description.split("@@")
 	var out_line = ''
@@ -338,6 +350,23 @@ func _build_bbcode_array(raw_description:String, object_def:Dictionary, object_i
 		out_arr.append(out_line)
 	return out_arr
 
+func get_damage_colored_text(damage_type, text_value='')->String:
+	if damage_type is String and DamageEvent.DamageTypes.keys().has(damage_type):
+		damage_type = DamageEvent.DamageTypes.get(damage_type)
+	if not DamageEvent.DamageTypes.values().has(damage_type):
+		return str(damage_type)
+	
+	if text_value == '':
+		text_value = DamageEvent.DamageTypes.keys()[damage_type]
+	var color_code = DamageHelper.get_damage_color(damage_type, true) 
+	var out_line_color = "#000000"
+	if damage_type == DamageEvent.DamageTypes.Dark:
+		out_line_color = "#808080"
+	var start_tag =  "[color=#" + color_code + "][outline_size=4][outline_color="+out_line_color+"]"
+	var end_tag = "[/outline_color][/outline_size][/color]"
+	return start_tag + text_value + end_tag
+		
+
 func _get_title_specific_faction_name(_actor:BaseActor, faction_name:String, force_plur:bool=false)->String:
 	var val = faction_name
 	if force_plur:
@@ -349,28 +378,37 @@ func _get_title_specific_faction_name(_actor:BaseActor, faction_name:String, for
 	return val
 
 func _parse_tag_info(tokens:Array)->Array:
-	var tag = tokens[1]
-	var parse_type = 'Hint'
+	var tag_key = tokens[1]
+	var parse_type_or_text = ''
 	if tokens.size() >= 3:
-		parse_type = tokens[2]
+		parse_type_or_text = tokens[2]
 	var out_line = ''
 	var out_arr = []
-	match  parse_type:
-		"Desc":
-			var tag_desc = TagsLibrary.get_tag_description(tag)
-			out_arr.append(out_line)
-			out_line = ""
-			out_arr.append_array(_build_bbcode_array(tag_desc, {}, null, null))
-		"Hint":
-			var text_val = tag
-			if tokens.size() >= 4:
-				text_val = tokens[3]
-			var hint_text = ''
-			var hint_lines = _parse_tag_info(["#Tag", tag, "Desc"])
-			for line in hint_lines:
-				if line is String:
-					hint_text += line.replace("]", "|>|").replace("[", "|<|").replace('"', '\\"')
-			out_line += ('[color=blue][url={"text":"' + hint_text + '"}]' +  text_val + "[/url][/color]")
+	## Old Format
+	if parse_type_or_text == "Desc":
+		var tag_desc = TagsLibrary.get_tag_description(tag_key)
+		out_arr.append(out_line)
+		out_line = ""
+		out_arr.append_array(_build_bbcode_array(tag_desc, {}, null, null))
+	elif parse_type_or_text == "Hint":
+		var display_name = TagsLibrary.get_tag_display_name(tag_key)
+		if tokens.size() >= 4:
+			display_name = tokens[3]
+		var hint_text = ''
+		var hint_lines = _parse_tag_info(["#Tag", tag_key, "Desc"])
+		for line in hint_lines:
+			if line is String:
+				hint_text += line.replace("]", "|>|").replace("[", "|<|").replace('"', '\\"')
+		out_line += ('[color=blue][url={"text":"' + hint_text + '"}]' +  display_name + "[/url][/color]")
+	
+	# New "... @@#Tag:Action:Action Pahes@@ ..."
+	else:
+		var display_name = ""
+		if tokens.size() == 3:
+			display_name = tokens[2]
+		else:
+			display_name = TagsLibrary.get_tag_display_name(tag_key)
+		out_line += ('[color=blue][url={"LinkType":"Tag", "Value":"' + tag_key + '"}]' +  display_name + "[/url][/color]")
 	if out_line != '':
 		out_arr.append(out_line)
 	return out_arr

@@ -91,18 +91,25 @@ func base_damge_from_stat(stat_name):
 func get_mod_names_for_stat(stat_name:String)->Array:
 	var out_list = []
 	for mod:BaseStatMod in _cached_mods.get(stat_name, []):
+		var raw_mod_value:float = mod.value
+		# Check if can cast to int
+		var display_mod_value = raw_mod_value
+		if roundi(raw_mod_value) == raw_mod_value:
+			display_mod_value = roundi(raw_mod_value)
 		var display_name = ''
 		if mod.mod_type	 == BaseStatMod.ModTypes.Set:
-			display_name = "=" + str(mod.value) + " " + mod.display_name
+			display_name = "=" + str(display_mod_value) + " " + mod.display_name
 		elif mod.mod_type	 == BaseStatMod.ModTypes.Add:
-			display_name = "+" + str(mod.value) + " " + mod.display_name
+			display_name = "+" + str(display_mod_value) + " " + mod.display_name
 		elif mod.mod_type == BaseStatMod.ModTypes.AddStat:
 			var short_name = StatHelper.get_stat_abbr(mod.dep_stat_name)
-			display_name = "+" + str(short_name) + "x" + str(mod.value) + " " + mod.display_name
+			display_name = "+" + str(display_mod_value) + "x" + str(short_name) + " " + mod.display_name
 		elif mod.mod_type == BaseStatMod.ModTypes.Scale:
-			display_name = "x" + str(mod.value) + " " + mod.display_name
+			display_name = "x" + str(display_mod_value) + " " + mod.display_name
 		else:
 			display_name = mod.display_name
+		if display_name.begins_with("+-"):
+			display_name = display_name.trim_prefix("+")
 		if display_name != '':
 			out_list.append(display_name)
 	return out_list

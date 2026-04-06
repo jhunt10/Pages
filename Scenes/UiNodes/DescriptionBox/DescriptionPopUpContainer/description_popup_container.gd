@@ -2,21 +2,24 @@ class_name DecscriptionPopUpContainer
 extends Control
 
 @export var back_patch:BackPatchContainer
-@export var message_box:RichTextLabel
+@export var close_button:TextureButton
+@export var description_box:DescriptionBox
 
 var parent_description_box:DescriptionBox
 var mouse_start_pos = null
 
 var mouse_move_limit = 50
+var pinned = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	close_button.hide()
+	close_button.pressed.connect(queue_free)
 	pass # Replace with function body.
-
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
-	if self.visible:
+	if self.visible and not pinned:
 		var screen_size = DisplayServer.window_get_size()
 		var popup_size = back_patch.size
 		var mouse_pos = self.get_global_mouse_position()
@@ -46,12 +49,29 @@ func _process(_delta: float) -> void:
 	pass
 
 func set_text(text:String):
-	var text_size = message_box.get_theme_font("normal_font").get_string_size(text)
+	var text_size = description_box.get_theme_font("normal_font").get_string_size(text)
 	if text_size.x > 250:
-		message_box.custom_minimum_size.x = 250
-		message_box.autowrap_mode = TextServer.AUTOWRAP_WORD
+		description_box.custom_minimum_size.x = 250
+		description_box.autowrap_mode = TextServer.AUTOWRAP_WORD
 	else:
-		message_box.custom_minimum_size.x = 0
-		message_box.autowrap_mode = TextServer.AUTOWRAP_OFF
-	message_box.clear()
-	message_box.append_text(text)
+		description_box.custom_minimum_size.x = 0
+		description_box.autowrap_mode = TextServer.AUTOWRAP_OFF
+	description_box.clear()
+	description_box.append_text(text)
+	close_button.hide()
+	pinned = false
+
+func set_description(
+	raw_description:String, 
+	object_def:Dictionary = {}, 
+	object_inst:BaseLoadObject = null, 
+	actor:BaseActor = null
+	):
+	description_box.clear()
+	description_box.set_description(raw_description, object_def, object_inst, actor)
+	close_button.hide()
+	pinned = false
+
+func pin_in_place():
+	pinned = true
+	close_button.show()

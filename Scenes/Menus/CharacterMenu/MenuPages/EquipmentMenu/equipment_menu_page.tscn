@@ -1,21 +1,22 @@
-[gd_scene load_steps=36 format=3 uid="uid://cbexkor24ce0h"]
+[gd_scene format=3 uid="uid://cbexkor24ce0h"]
 
-[ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/EquipmentMenu/equipment_page_control.gd" id="1_6pwc2"]
+[ext_resource type="Script" uid="uid://bv0ixxk61w65n" path="res://Scenes/Menus/CharacterMenu/MenuPages/EquipmentMenu/equipment_page_control.gd" id="1_6pwc2"]
 [ext_resource type="Texture2D" uid="uid://c4yedxpiinlff" path="res://Scenes/Menus/CharacterMenu/MenuPages/outline.png" id="2_5i0tg"]
 [ext_resource type="PackedScene" uid="uid://cf43u4ospfr42" path="res://Scenes/Menus/CharacterMenu/MenuPages/EquipmentMenu/equipment_menu_item_slot_button.tscn" id="3_61ti0"]
 [ext_resource type="Theme" uid="uid://dwinll8pgdjhc" path="res://Scenes/Themes/standard_theme.tres" id="3_th70d"]
 [ext_resource type="Texture2D" uid="uid://lv3xit0yhvj2" path="res://Scenes/UiNodes/ExpBar/ExpBar.png" id="4_e3qra"]
 [ext_resource type="PackedScene" uid="uid://ybkww8wk3awm" path="res://Scenes/UiNodes/StatLabelContainer/stat_label_container.tscn" id="5_40ia4"]
 [ext_resource type="Texture2D" uid="uid://js1gbkgy0ql3" path="res://Scenes/Menus/CharacterMenu/MenuPages/EquipmentMenu/EquipmentSlotsContainer/EquipmentItemSlotOutline.png" id="5_a3xlj"]
-[ext_resource type="Script" path="res://Scenes/UiNodes/ExpBar/exp_bar_control.gd" id="5_aga8c"]
-[ext_resource type="Script" path="res://Scenes/UiNodes/back_patch_container.gd" id="6_xuk44"]
+[ext_resource type="Script" uid="uid://bhlv7ecy1qahk" path="res://Scenes/UiNodes/ExpBar/exp_bar_control.gd" id="5_aga8c"]
+[ext_resource type="Script" uid="uid://b82mb4dyp17ng" path="res://Scenes/UiNodes/back_patch_container.gd" id="6_xuk44"]
 [ext_resource type="Texture2D" uid="uid://5hu0ttx4jxuo" path="res://assets/Sprites/UI/BackPatches/PaperPatch_64x92_16.png" id="7_8jkp8"]
 [ext_resource type="Texture2D" uid="uid://d1ad4eibf161i" path="res://Scenes/Menus/CharacterMenu/MenuPages/EquipmentMenu/EquipmentSlotsContainer/WarningSlotIcon.png" id="7_eunfx"]
 [ext_resource type="Theme" uid="uid://bfce41la62bs6" path="res://Scenes/Themes/readable_theme.tres" id="8_3y7lt"]
 [ext_resource type="PackedScene" uid="uid://uo60871y6t54" path="res://Scenes/Combat/MapObjects/Actors/ComplexActorNode/complex_actor_node.tscn" id="11_khxeq"]
-[ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/EquipmentMenu/stat_box_control.gd" id="21_8w6l2"]
-[ext_resource type="Script" path="res://Scenes/UiNodes/StatLabelContainer/stat_label_container.gd" id="21_hnuvf"]
+[ext_resource type="Script" uid="uid://b0neolm64mql1" path="res://Scenes/Menus/CharacterMenu/MenuPages/EquipmentMenu/stat_box_control.gd" id="21_8w6l2"]
+[ext_resource type="Script" uid="uid://dye1dlsmf7k3t" path="res://Scenes/UiNodes/StatLabelContainer/stat_label_container.gd" id="21_hnuvf"]
 [ext_resource type="Texture2D" uid="uid://b10pvly4exem2" path="res://assets/Sprites/UI/SymbolIcons/_S_Symbole.png" id="23_6x5jd"]
+[ext_resource type="Script" uid="uid://bcf3yo7yhmwwr" path="res://Scenes/UiNodes/DescriptionBox/tags_box.gd" id="23_etrqa"]
 [ext_resource type="Texture2D" uid="uid://vwiqj7k1flkn" path="res://assets/Sprites/UI/SymbolIcons/_A_Symbole.png" id="24_ai7tk"]
 [ext_resource type="Texture2D" uid="uid://doywp1shkpnmd" path="res://assets/Sprites/UI/SymbolIcons/_I_Symbole.png" id="25_6q8gs"]
 [ext_resource type="Texture2D" uid="uid://ci3qbej0djsng" path="res://assets/Sprites/UI/SymbolIcons/_W_Symbole.png" id="26_c0jlx"]
@@ -92,9 +93,9 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_130x0"]
 _data = {
-"RESET": SubResource("Animation_h263m"),
-"flashing_animation": SubResource("Animation_3a6i4"),
-"waiting": SubResource("Animation_j1ppp")
+&"RESET": SubResource("Animation_h263m"),
+&"flashing_animation": SubResource("Animation_3a6i4"),
+&"waiting": SubResource("Animation_j1ppp")
 }
 
 [sub_resource type="Animation" id="Animation_t6efn"]
@@ -154,11 +155,11 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_i8tbc"]
 _data = {
-"RESET": SubResource("Animation_t6efn"),
-"pagebook_warning": SubResource("Animation_peevg")
+&"RESET": SubResource("Animation_t6efn"),
+&"pagebook_warning": SubResource("Animation_peevg")
 }
 
-[node name="EquipmentPage" type="Control" node_paths=PackedStringArray("name_label", "level_label", "actor_node", "stat_box", "animation_player", "exp_bar", "tags_box", "phy_attack_label", "mag_attack_label", "armor_label", "ward_label")]
+[node name="EquipmentPage" type="Control" unique_id=261573430 node_paths=PackedStringArray("name_label", "level_label", "actor_node", "stat_box", "animation_player", "exp_bar", "tags_box", "phy_attack_label", "mag_attack_label", "armor_label", "ward_label")]
 custom_minimum_size = Vector2(292, 395)
 layout_mode = 3
 anchors_preset = 0
@@ -177,7 +178,7 @@ mag_attack_label = NodePath("EquipmentSlotsControl/MiddlePortraitContainer/NineP
 armor_label = NodePath("EquipmentSlotsControl/MiddlePortraitContainer/NinePatchRect/AtkDefStatsContainer/LeftStatContainer/PhyDefLabel")
 ward_label = NodePath("EquipmentSlotsControl/MiddlePortraitContainer/NinePatchRect/AtkDefStatsContainer/RightStatContainer/MagDefLabel")
 
-[node name="EquipmentSlotsControl" type="Control" parent="."]
+[node name="EquipmentSlotsControl" type="Control" parent="." unique_id=1433903594]
 custom_minimum_size = Vector2(256, 256)
 layout_mode = 1
 anchors_preset = 10
@@ -190,7 +191,7 @@ grow_horizontal = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="LeftEquipSlots" type="VBoxContainer" parent="EquipmentSlotsControl"]
+[node name="LeftEquipSlots" type="VBoxContainer" parent="EquipmentSlotsControl" unique_id=723106703]
 custom_minimum_size = Vector2(64, 0)
 layout_mode = 1
 anchors_preset = -1
@@ -200,19 +201,19 @@ grow_vertical = 2
 theme_override_constants/separation = 0
 alignment = 2
 
-[node name="Head_EquipmentSlotButton" parent="EquipmentSlotsControl/LeftEquipSlots" instance=ExtResource("3_61ti0")]
+[node name="Head_EquipmentSlotButton" parent="EquipmentSlotsControl/LeftEquipSlots" unique_id=855471844 instance=ExtResource("3_61ti0")]
 layout_mode = 2
 
-[node name="Body_EquipmentSlotButton" parent="EquipmentSlotsControl/LeftEquipSlots" instance=ExtResource("3_61ti0")]
+[node name="Body_EquipmentSlotButton" parent="EquipmentSlotsControl/LeftEquipSlots" unique_id=312361597 instance=ExtResource("3_61ti0")]
 layout_mode = 2
 
-[node name="Legs_EquipmentSlotButton" parent="EquipmentSlotsControl/LeftEquipSlots" instance=ExtResource("3_61ti0")]
+[node name="Legs_EquipmentSlotButton" parent="EquipmentSlotsControl/LeftEquipSlots" unique_id=485677027 instance=ExtResource("3_61ti0")]
 layout_mode = 2
 
-[node name="Hand_EquipmentSlotButton" parent="EquipmentSlotsControl/LeftEquipSlots" instance=ExtResource("3_61ti0")]
+[node name="Hand_EquipmentSlotButton" parent="EquipmentSlotsControl/LeftEquipSlots" unique_id=20214698 instance=ExtResource("3_61ti0")]
 layout_mode = 2
 
-[node name="NinePatchRect2" type="NinePatchRect" parent="EquipmentSlotsControl"]
+[node name="NinePatchRect2" type="NinePatchRect" parent="EquipmentSlotsControl" unique_id=1244841925]
 custom_minimum_size = Vector2(0, 64)
 layout_mode = 1
 anchors_preset = -1
@@ -225,7 +226,7 @@ patch_margin_top = 18
 patch_margin_right = 18
 patch_margin_bottom = 18
 
-[node name="CenterContainer" type="CenterContainer" parent="EquipmentSlotsControl"]
+[node name="CenterContainer" type="CenterContainer" parent="EquipmentSlotsControl" unique_id=1369433503]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.25
@@ -235,17 +236,17 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="Control" type="Control" parent="EquipmentSlotsControl/CenterContainer"]
+[node name="Control" type="Control" parent="EquipmentSlotsControl/CenterContainer" unique_id=1026069383]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="Node2D" type="Node2D" parent="EquipmentSlotsControl/CenterContainer/Control"]
+[node name="Node2D" type="Node2D" parent="EquipmentSlotsControl/CenterContainer/Control" unique_id=862143461]
 scale = Vector2(3, 3)
 
-[node name="ActorNode" parent="EquipmentSlotsControl/CenterContainer/Control/Node2D" instance=ExtResource("11_khxeq")]
+[node name="ActorNode" parent="EquipmentSlotsControl/CenterContainer/Control/Node2D" unique_id=2066059353 instance=ExtResource("11_khxeq")]
 position = Vector2(0, 8)
 
-[node name="MiddlePortraitContainer" type="VBoxContainer" parent="EquipmentSlotsControl"]
+[node name="MiddlePortraitContainer" type="VBoxContainer" parent="EquipmentSlotsControl" unique_id=202657635]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.25
@@ -258,7 +259,7 @@ size_flags_horizontal = 3
 theme_override_constants/separation = 0
 alignment = 2
 
-[node name="NinePatchRect" type="NinePatchRect" parent="EquipmentSlotsControl/MiddlePortraitContainer"]
+[node name="NinePatchRect" type="NinePatchRect" parent="EquipmentSlotsControl/MiddlePortraitContainer" unique_id=2083751544]
 custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
 texture = ExtResource("5_a3xlj")
@@ -267,7 +268,7 @@ patch_margin_top = 18
 patch_margin_right = 18
 patch_margin_bottom = 18
 
-[node name="AtkDefStatsContainer" type="HBoxContainer" parent="EquipmentSlotsControl/MiddlePortraitContainer/NinePatchRect"]
+[node name="AtkDefStatsContainer" type="HBoxContainer" parent="EquipmentSlotsControl/MiddlePortraitContainer/NinePatchRect" unique_id=1329433042]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -276,33 +277,33 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 3
 
-[node name="LeftStatContainer" type="VBoxContainer" parent="EquipmentSlotsControl/MiddlePortraitContainer/NinePatchRect/AtkDefStatsContainer"]
+[node name="LeftStatContainer" type="VBoxContainer" parent="EquipmentSlotsControl/MiddlePortraitContainer/NinePatchRect/AtkDefStatsContainer" unique_id=577155665]
 layout_mode = 2
 size_flags_horizontal = 3
 alignment = 1
 
-[node name="PhyAtkLabel" parent="EquipmentSlotsControl/MiddlePortraitContainer/NinePatchRect/AtkDefStatsContainer/LeftStatContainer" instance=ExtResource("5_40ia4")]
+[node name="PhyAtkLabel" parent="EquipmentSlotsControl/MiddlePortraitContainer/NinePatchRect/AtkDefStatsContainer/LeftStatContainer" unique_id=930631801 instance=ExtResource("5_40ia4")]
 layout_mode = 2
 stat_name = "PhyAttack"
 
-[node name="PhyDefLabel" parent="EquipmentSlotsControl/MiddlePortraitContainer/NinePatchRect/AtkDefStatsContainer/LeftStatContainer" instance=ExtResource("5_40ia4")]
+[node name="PhyDefLabel" parent="EquipmentSlotsControl/MiddlePortraitContainer/NinePatchRect/AtkDefStatsContainer/LeftStatContainer" unique_id=254986969 instance=ExtResource("5_40ia4")]
 layout_mode = 2
 stat_name = "Armor"
 
-[node name="RightStatContainer" type="VBoxContainer" parent="EquipmentSlotsControl/MiddlePortraitContainer/NinePatchRect/AtkDefStatsContainer"]
+[node name="RightStatContainer" type="VBoxContainer" parent="EquipmentSlotsControl/MiddlePortraitContainer/NinePatchRect/AtkDefStatsContainer" unique_id=1634180888]
 layout_mode = 2
 size_flags_horizontal = 3
 alignment = 1
 
-[node name="MagAtkLabel" parent="EquipmentSlotsControl/MiddlePortraitContainer/NinePatchRect/AtkDefStatsContainer/RightStatContainer" instance=ExtResource("5_40ia4")]
+[node name="MagAtkLabel" parent="EquipmentSlotsControl/MiddlePortraitContainer/NinePatchRect/AtkDefStatsContainer/RightStatContainer" unique_id=999985143 instance=ExtResource("5_40ia4")]
 layout_mode = 2
 stat_name = "MagAttack"
 
-[node name="MagDefLabel" parent="EquipmentSlotsControl/MiddlePortraitContainer/NinePatchRect/AtkDefStatsContainer/RightStatContainer" instance=ExtResource("5_40ia4")]
+[node name="MagDefLabel" parent="EquipmentSlotsControl/MiddlePortraitContainer/NinePatchRect/AtkDefStatsContainer/RightStatContainer" unique_id=1456013251 instance=ExtResource("5_40ia4")]
 layout_mode = 2
 stat_name = "Ward"
 
-[node name="RightEquipSlots" type="VBoxContainer" parent="EquipmentSlotsControl"]
+[node name="RightEquipSlots" type="VBoxContainer" parent="EquipmentSlotsControl" unique_id=1118613422]
 custom_minimum_size = Vector2(6, 0)
 layout_mode = 1
 anchors_preset = -1
@@ -314,14 +315,14 @@ grow_vertical = 2
 theme_override_constants/separation = 0
 alignment = 2
 
-[node name="FalseSlot_EquipmentSlotButton" parent="EquipmentSlotsControl/RightEquipSlots" instance=ExtResource("3_61ti0")]
+[node name="FalseSlot_EquipmentSlotButton" parent="EquipmentSlotsControl/RightEquipSlots" unique_id=1579605511 instance=ExtResource("3_61ti0")]
 visible = false
 layout_mode = 2
 
-[node name="PageBook_EquipmentSlotButton" parent="EquipmentSlotsControl/RightEquipSlots" instance=ExtResource("3_61ti0")]
+[node name="PageBook_EquipmentSlotButton" parent="EquipmentSlotsControl/RightEquipSlots" unique_id=798231216 instance=ExtResource("3_61ti0")]
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="EquipmentSlotsControl/RightEquipSlots/PageBook_EquipmentSlotButton"]
+[node name="TextureRect" type="TextureRect" parent="EquipmentSlotsControl/RightEquipSlots/PageBook_EquipmentSlotButton" unique_id=1980650670]
 visible = false
 modulate = Color(1, 1, 1, 0)
 layout_mode = 1
@@ -333,16 +334,16 @@ grow_vertical = 2
 mouse_filter = 2
 texture = ExtResource("7_eunfx")
 
-[node name="SupplyBag_EquipmentSlotButton" parent="EquipmentSlotsControl/RightEquipSlots" instance=ExtResource("3_61ti0")]
+[node name="SupplyBag_EquipmentSlotButton" parent="EquipmentSlotsControl/RightEquipSlots" unique_id=1067526511 instance=ExtResource("3_61ti0")]
 layout_mode = 2
 
-[node name="Trinket_EquipmentSlotButton" parent="EquipmentSlotsControl/RightEquipSlots" instance=ExtResource("3_61ti0")]
+[node name="Trinket_EquipmentSlotButton" parent="EquipmentSlotsControl/RightEquipSlots" unique_id=1924000964 instance=ExtResource("3_61ti0")]
 layout_mode = 2
 
-[node name="Hand2_EquipmentSlotButton" parent="EquipmentSlotsControl/RightEquipSlots" instance=ExtResource("3_61ti0")]
+[node name="Hand2_EquipmentSlotButton" parent="EquipmentSlotsControl/RightEquipSlots" unique_id=2030644339 instance=ExtResource("3_61ti0")]
 layout_mode = 2
 
-[node name="Background" type="NinePatchRect" parent="EquipmentSlotsControl"]
+[node name="Background" type="NinePatchRect" parent="EquipmentSlotsControl" unique_id=451257972]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -360,7 +361,7 @@ patch_margin_top = 18
 patch_margin_right = 18
 patch_margin_bottom = 18
 
-[node name="StatBoxControl" type="Control" parent="." node_paths=PackedStringArray("stat_labels_container")]
+[node name="StatBoxControl" type="Control" parent="." unique_id=118932186 node_paths=PackedStringArray("stat_labels_container")]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -372,7 +373,7 @@ grow_horizontal = 2
 script = ExtResource("21_8w6l2")
 stat_labels_container = NodePath("VBoxContainer")
 
-[node name="Background" type="NinePatchRect" parent="StatBoxControl"]
+[node name="Background" type="NinePatchRect" parent="StatBoxControl" unique_id=424860718]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -386,7 +387,7 @@ patch_margin_top = 18
 patch_margin_right = 18
 patch_margin_bottom = 18
 
-[node name="VBoxContainer" type="VBoxContainer" parent="StatBoxControl"]
+[node name="VBoxContainer" type="VBoxContainer" parent="StatBoxControl" unique_id=1786679804]
 visible = false
 layout_mode = 1
 anchors_preset = -1
@@ -401,11 +402,11 @@ grow_vertical = 2
 theme_override_constants/separation = 1
 alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="StatBoxControl/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="StatBoxControl/VBoxContainer" unique_id=696520921]
 visible = false
 layout_mode = 2
 
-[node name="StatLabel_Str" type="HBoxContainer" parent="StatBoxControl/VBoxContainer/HBoxContainer" node_paths=PackedStringArray("name_label", "value_label")]
+[node name="StatLabel_Str" type="HBoxContainer" parent="StatBoxControl/VBoxContainer/HBoxContainer" unique_id=261317565 node_paths=PackedStringArray("name_label", "value_label")]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 0
@@ -415,25 +416,25 @@ stat_name = "Strength"
 name_label = NodePath("NameLabel")
 value_label = NodePath("ValueLabel")
 
-[node name="NameLabel" type="Label" parent="StatBoxControl/VBoxContainer/HBoxContainer/StatLabel_Str"]
+[node name="NameLabel" type="Label" parent="StatBoxControl/VBoxContainer/HBoxContainer/StatLabel_Str" unique_id=1361909778]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("3_th70d")
 text = "St"
 
-[node name="DividerLabel" type="Label" parent="StatBoxControl/VBoxContainer/HBoxContainer/StatLabel_Str"]
+[node name="DividerLabel" type="Label" parent="StatBoxControl/VBoxContainer/HBoxContainer/StatLabel_Str" unique_id=328804975]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("3_th70d")
 text = ":"
 
-[node name="ValueLabel" type="Label" parent="StatBoxControl/VBoxContainer/HBoxContainer/StatLabel_Str"]
+[node name="ValueLabel" type="Label" parent="StatBoxControl/VBoxContainer/HBoxContainer/StatLabel_Str" unique_id=709625225]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("3_th70d")
 text = "00"
 
-[node name="StatLabel_Agi" type="HBoxContainer" parent="StatBoxControl/VBoxContainer/HBoxContainer" node_paths=PackedStringArray("name_label", "value_label")]
+[node name="StatLabel_Agi" type="HBoxContainer" parent="StatBoxControl/VBoxContainer/HBoxContainer" unique_id=423809653 node_paths=PackedStringArray("name_label", "value_label")]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 0
@@ -443,25 +444,25 @@ stat_name = "Agility"
 name_label = NodePath("NameLabel")
 value_label = NodePath("ValueLabel")
 
-[node name="NameLabel" type="Label" parent="StatBoxControl/VBoxContainer/HBoxContainer/StatLabel_Agi"]
+[node name="NameLabel" type="Label" parent="StatBoxControl/VBoxContainer/HBoxContainer/StatLabel_Agi" unique_id=1092732284]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("3_th70d")
 text = "Ag"
 
-[node name="DividerLabel" type="Label" parent="StatBoxControl/VBoxContainer/HBoxContainer/StatLabel_Agi"]
+[node name="DividerLabel" type="Label" parent="StatBoxControl/VBoxContainer/HBoxContainer/StatLabel_Agi" unique_id=1597171560]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("3_th70d")
 text = ":"
 
-[node name="ValueLabel" type="Label" parent="StatBoxControl/VBoxContainer/HBoxContainer/StatLabel_Agi"]
+[node name="ValueLabel" type="Label" parent="StatBoxControl/VBoxContainer/HBoxContainer/StatLabel_Agi" unique_id=865827021]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("3_th70d")
 text = "00"
 
-[node name="StatLabel_Int" type="HBoxContainer" parent="StatBoxControl/VBoxContainer/HBoxContainer" node_paths=PackedStringArray("name_label", "value_label")]
+[node name="StatLabel_Int" type="HBoxContainer" parent="StatBoxControl/VBoxContainer/HBoxContainer" unique_id=1765443098 node_paths=PackedStringArray("name_label", "value_label")]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 0
@@ -471,25 +472,25 @@ stat_name = "Intelligence"
 name_label = NodePath("NameLabel")
 value_label = NodePath("ValueLabel")
 
-[node name="NameLabel" type="Label" parent="StatBoxControl/VBoxContainer/HBoxContainer/StatLabel_Int"]
+[node name="NameLabel" type="Label" parent="StatBoxControl/VBoxContainer/HBoxContainer/StatLabel_Int" unique_id=1054490166]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("3_th70d")
 text = "In"
 
-[node name="DividerLabel" type="Label" parent="StatBoxControl/VBoxContainer/HBoxContainer/StatLabel_Int"]
+[node name="DividerLabel" type="Label" parent="StatBoxControl/VBoxContainer/HBoxContainer/StatLabel_Int" unique_id=770600127]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("3_th70d")
 text = ":"
 
-[node name="ValueLabel" type="Label" parent="StatBoxControl/VBoxContainer/HBoxContainer/StatLabel_Int"]
+[node name="ValueLabel" type="Label" parent="StatBoxControl/VBoxContainer/HBoxContainer/StatLabel_Int" unique_id=1323793741]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("3_th70d")
 text = "00"
 
-[node name="StatLabel_Wis" type="HBoxContainer" parent="StatBoxControl/VBoxContainer/HBoxContainer" node_paths=PackedStringArray("name_label", "value_label")]
+[node name="StatLabel_Wis" type="HBoxContainer" parent="StatBoxControl/VBoxContainer/HBoxContainer" unique_id=1061078460 node_paths=PackedStringArray("name_label", "value_label")]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 0
@@ -499,32 +500,32 @@ stat_name = "Wisdom"
 name_label = NodePath("NameLabel")
 value_label = NodePath("ValueLabel")
 
-[node name="NameLabel" type="Label" parent="StatBoxControl/VBoxContainer/HBoxContainer/StatLabel_Wis"]
+[node name="NameLabel" type="Label" parent="StatBoxControl/VBoxContainer/HBoxContainer/StatLabel_Wis" unique_id=2109148773]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("3_th70d")
 text = "Ws"
 
-[node name="DividerLabel" type="Label" parent="StatBoxControl/VBoxContainer/HBoxContainer/StatLabel_Wis"]
+[node name="DividerLabel" type="Label" parent="StatBoxControl/VBoxContainer/HBoxContainer/StatLabel_Wis" unique_id=758757290]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("3_th70d")
 text = ":"
 
-[node name="ValueLabel" type="Label" parent="StatBoxControl/VBoxContainer/HBoxContainer/StatLabel_Wis"]
+[node name="ValueLabel" type="Label" parent="StatBoxControl/VBoxContainer/HBoxContainer/StatLabel_Wis" unique_id=1448593086]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("3_th70d")
 text = "00"
 
-[node name="FlowContainer" type="FlowContainer" parent="StatBoxControl/VBoxContainer"]
+[node name="FlowContainer" type="FlowContainer" parent="StatBoxControl/VBoxContainer" unique_id=1054599166]
 visible = false
 layout_mode = 2
 
-[node name="AttributesContainer" type="HBoxContainer" parent="StatBoxControl/VBoxContainer"]
+[node name="AttributesContainer" type="HBoxContainer" parent="StatBoxControl/VBoxContainer" unique_id=1029968257]
 layout_mode = 2
 
-[node name="StrContainer" type="BoxContainer" parent="StatBoxControl/VBoxContainer/AttributesContainer" node_paths=PackedStringArray("name_label", "icon", "value_label")]
+[node name="StrContainer" type="BoxContainer" parent="StatBoxControl/VBoxContainer/AttributesContainer" unique_id=1693683000 node_paths=PackedStringArray("name_label", "icon", "value_label")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -536,7 +537,7 @@ name_label = NodePath("NameLabel")
 icon = NodePath("IconRect")
 value_label = NodePath("StatLabel")
 
-[node name="NameLabel" type="Label" parent="StatBoxControl/VBoxContainer/AttributesContainer/StrContainer"]
+[node name="NameLabel" type="Label" parent="StatBoxControl/VBoxContainer/AttributesContainer/StrContainer" unique_id=1651045609]
 visible = false
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
@@ -544,11 +545,11 @@ theme = ExtResource("3_th70d")
 text = "Spd: "
 horizontal_alignment = 1
 
-[node name="IconRect" type="TextureRect" parent="StatBoxControl/VBoxContainer/AttributesContainer/StrContainer"]
+[node name="IconRect" type="TextureRect" parent="StatBoxControl/VBoxContainer/AttributesContainer/StrContainer" unique_id=609282799]
 layout_mode = 2
 texture = ExtResource("23_6x5jd")
 
-[node name="StatLabel" type="Label" parent="StatBoxControl/VBoxContainer/AttributesContainer/StrContainer"]
+[node name="StatLabel" type="Label" parent="StatBoxControl/VBoxContainer/AttributesContainer/StrContainer" unique_id=1153836759]
 self_modulate = Color(0.498039, 0, 0, 1)
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
@@ -556,7 +557,7 @@ theme = ExtResource("3_th70d")
 text = "000"
 horizontal_alignment = 1
 
-[node name="AgiContainer" type="BoxContainer" parent="StatBoxControl/VBoxContainer/AttributesContainer" node_paths=PackedStringArray("name_label", "icon", "value_label")]
+[node name="AgiContainer" type="BoxContainer" parent="StatBoxControl/VBoxContainer/AttributesContainer" unique_id=1190676842 node_paths=PackedStringArray("name_label", "icon", "value_label")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -568,7 +569,7 @@ name_label = NodePath("NameLabel")
 icon = NodePath("IconRect")
 value_label = NodePath("StatLabel")
 
-[node name="NameLabel" type="Label" parent="StatBoxControl/VBoxContainer/AttributesContainer/AgiContainer"]
+[node name="NameLabel" type="Label" parent="StatBoxControl/VBoxContainer/AttributesContainer/AgiContainer" unique_id=1607312734]
 visible = false
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
@@ -576,11 +577,11 @@ theme = ExtResource("3_th70d")
 text = "Spd: "
 horizontal_alignment = 1
 
-[node name="IconRect" type="TextureRect" parent="StatBoxControl/VBoxContainer/AttributesContainer/AgiContainer"]
+[node name="IconRect" type="TextureRect" parent="StatBoxControl/VBoxContainer/AttributesContainer/AgiContainer" unique_id=1841385922]
 layout_mode = 2
 texture = ExtResource("24_ai7tk")
 
-[node name="StatLabel" type="Label" parent="StatBoxControl/VBoxContainer/AttributesContainer/AgiContainer"]
+[node name="StatLabel" type="Label" parent="StatBoxControl/VBoxContainer/AttributesContainer/AgiContainer" unique_id=1808068732]
 self_modulate = Color(0.498039, 0, 0, 1)
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
@@ -588,7 +589,7 @@ theme = ExtResource("3_th70d")
 text = "000"
 horizontal_alignment = 1
 
-[node name="IntContainer" type="BoxContainer" parent="StatBoxControl/VBoxContainer/AttributesContainer" node_paths=PackedStringArray("name_label", "icon", "value_label")]
+[node name="IntContainer" type="BoxContainer" parent="StatBoxControl/VBoxContainer/AttributesContainer" unique_id=223165180 node_paths=PackedStringArray("name_label", "icon", "value_label")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -600,7 +601,7 @@ name_label = NodePath("NameLabel")
 icon = NodePath("IconRect")
 value_label = NodePath("StatLabel")
 
-[node name="NameLabel" type="Label" parent="StatBoxControl/VBoxContainer/AttributesContainer/IntContainer"]
+[node name="NameLabel" type="Label" parent="StatBoxControl/VBoxContainer/AttributesContainer/IntContainer" unique_id=1556809185]
 visible = false
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
@@ -608,11 +609,11 @@ theme = ExtResource("3_th70d")
 text = "Spd: "
 horizontal_alignment = 1
 
-[node name="IconRect" type="TextureRect" parent="StatBoxControl/VBoxContainer/AttributesContainer/IntContainer"]
+[node name="IconRect" type="TextureRect" parent="StatBoxControl/VBoxContainer/AttributesContainer/IntContainer" unique_id=1945170921]
 layout_mode = 2
 texture = ExtResource("25_6q8gs")
 
-[node name="StatLabel" type="Label" parent="StatBoxControl/VBoxContainer/AttributesContainer/IntContainer"]
+[node name="StatLabel" type="Label" parent="StatBoxControl/VBoxContainer/AttributesContainer/IntContainer" unique_id=2141966777]
 self_modulate = Color(0.498039, 0, 0, 1)
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
@@ -620,7 +621,7 @@ theme = ExtResource("3_th70d")
 text = "000"
 horizontal_alignment = 1
 
-[node name="WisContainer" type="BoxContainer" parent="StatBoxControl/VBoxContainer/AttributesContainer" node_paths=PackedStringArray("name_label", "icon", "value_label")]
+[node name="WisContainer" type="BoxContainer" parent="StatBoxControl/VBoxContainer/AttributesContainer" unique_id=129574301 node_paths=PackedStringArray("name_label", "icon", "value_label")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -632,7 +633,7 @@ name_label = NodePath("NameLabel")
 icon = NodePath("IconRect")
 value_label = NodePath("StatLabel")
 
-[node name="NameLabel" type="Label" parent="StatBoxControl/VBoxContainer/AttributesContainer/WisContainer"]
+[node name="NameLabel" type="Label" parent="StatBoxControl/VBoxContainer/AttributesContainer/WisContainer" unique_id=660189724]
 visible = false
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
@@ -640,11 +641,11 @@ theme = ExtResource("3_th70d")
 text = "Spd: "
 horizontal_alignment = 1
 
-[node name="IconRect" type="TextureRect" parent="StatBoxControl/VBoxContainer/AttributesContainer/WisContainer"]
+[node name="IconRect" type="TextureRect" parent="StatBoxControl/VBoxContainer/AttributesContainer/WisContainer" unique_id=234633226]
 layout_mode = 2
 texture = ExtResource("26_c0jlx")
 
-[node name="StatLabel" type="Label" parent="StatBoxControl/VBoxContainer/AttributesContainer/WisContainer"]
+[node name="StatLabel" type="Label" parent="StatBoxControl/VBoxContainer/AttributesContainer/WisContainer" unique_id=1066251692]
 self_modulate = Color(0.498039, 0, 0, 1)
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
@@ -652,10 +653,10 @@ theme = ExtResource("3_th70d")
 text = "000"
 horizontal_alignment = 1
 
-[node name="AccEvdPotPrtContainer" type="HBoxContainer" parent="StatBoxControl/VBoxContainer"]
+[node name="AccEvdPotPrtContainer" type="HBoxContainer" parent="StatBoxControl/VBoxContainer" unique_id=577014707]
 layout_mode = 2
 
-[node name="AccContainer" type="BoxContainer" parent="StatBoxControl/VBoxContainer/AccEvdPotPrtContainer" node_paths=PackedStringArray("name_label", "icon", "value_label")]
+[node name="AccContainer" type="BoxContainer" parent="StatBoxControl/VBoxContainer/AccEvdPotPrtContainer" unique_id=423671627 node_paths=PackedStringArray("name_label", "icon", "value_label")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -667,7 +668,7 @@ name_label = NodePath("NameLabel")
 icon = NodePath("IconRect")
 value_label = NodePath("StatLabel")
 
-[node name="NameLabel" type="Label" parent="StatBoxControl/VBoxContainer/AccEvdPotPrtContainer/AccContainer"]
+[node name="NameLabel" type="Label" parent="StatBoxControl/VBoxContainer/AccEvdPotPrtContainer/AccContainer" unique_id=1393542578]
 visible = false
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
@@ -675,11 +676,11 @@ theme = ExtResource("3_th70d")
 text = "Spd: "
 horizontal_alignment = 1
 
-[node name="IconRect" type="TextureRect" parent="StatBoxControl/VBoxContainer/AccEvdPotPrtContainer/AccContainer"]
+[node name="IconRect" type="TextureRect" parent="StatBoxControl/VBoxContainer/AccEvdPotPrtContainer/AccContainer" unique_id=1610986085]
 layout_mode = 2
 texture = ExtResource("27_unmnp")
 
-[node name="StatLabel" type="Label" parent="StatBoxControl/VBoxContainer/AccEvdPotPrtContainer/AccContainer"]
+[node name="StatLabel" type="Label" parent="StatBoxControl/VBoxContainer/AccEvdPotPrtContainer/AccContainer" unique_id=758455841]
 self_modulate = Color(0.498039, 0, 0, 1)
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
@@ -687,7 +688,7 @@ theme = ExtResource("3_th70d")
 text = "000"
 horizontal_alignment = 1
 
-[node name="EvdContainer" type="BoxContainer" parent="StatBoxControl/VBoxContainer/AccEvdPotPrtContainer" node_paths=PackedStringArray("name_label", "icon", "value_label")]
+[node name="EvdContainer" type="BoxContainer" parent="StatBoxControl/VBoxContainer/AccEvdPotPrtContainer" unique_id=1785118319 node_paths=PackedStringArray("name_label", "icon", "value_label")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -699,7 +700,7 @@ name_label = NodePath("NameLabel")
 icon = NodePath("IconRect")
 value_label = NodePath("StatLabel")
 
-[node name="NameLabel" type="Label" parent="StatBoxControl/VBoxContainer/AccEvdPotPrtContainer/EvdContainer"]
+[node name="NameLabel" type="Label" parent="StatBoxControl/VBoxContainer/AccEvdPotPrtContainer/EvdContainer" unique_id=1227970013]
 visible = false
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
@@ -707,11 +708,11 @@ theme = ExtResource("3_th70d")
 text = "Spd: "
 horizontal_alignment = 1
 
-[node name="IconRect" type="TextureRect" parent="StatBoxControl/VBoxContainer/AccEvdPotPrtContainer/EvdContainer"]
+[node name="IconRect" type="TextureRect" parent="StatBoxControl/VBoxContainer/AccEvdPotPrtContainer/EvdContainer" unique_id=889981298]
 layout_mode = 2
 texture = ExtResource("28_i6cff")
 
-[node name="StatLabel" type="Label" parent="StatBoxControl/VBoxContainer/AccEvdPotPrtContainer/EvdContainer"]
+[node name="StatLabel" type="Label" parent="StatBoxControl/VBoxContainer/AccEvdPotPrtContainer/EvdContainer" unique_id=1771784587]
 self_modulate = Color(0.498039, 0, 0, 1)
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
@@ -719,7 +720,7 @@ theme = ExtResource("3_th70d")
 text = "000"
 horizontal_alignment = 1
 
-[node name="PotContainer" type="BoxContainer" parent="StatBoxControl/VBoxContainer/AccEvdPotPrtContainer" node_paths=PackedStringArray("name_label", "icon", "value_label")]
+[node name="PotContainer" type="BoxContainer" parent="StatBoxControl/VBoxContainer/AccEvdPotPrtContainer" unique_id=1677378220 node_paths=PackedStringArray("name_label", "icon", "value_label")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -731,7 +732,7 @@ name_label = NodePath("NameLabel")
 icon = NodePath("IconRect")
 value_label = NodePath("StatLabel")
 
-[node name="NameLabel" type="Label" parent="StatBoxControl/VBoxContainer/AccEvdPotPrtContainer/PotContainer"]
+[node name="NameLabel" type="Label" parent="StatBoxControl/VBoxContainer/AccEvdPotPrtContainer/PotContainer" unique_id=1528989057]
 visible = false
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
@@ -739,11 +740,11 @@ theme = ExtResource("3_th70d")
 text = "Spd: "
 horizontal_alignment = 1
 
-[node name="IconRect" type="TextureRect" parent="StatBoxControl/VBoxContainer/AccEvdPotPrtContainer/PotContainer"]
+[node name="IconRect" type="TextureRect" parent="StatBoxControl/VBoxContainer/AccEvdPotPrtContainer/PotContainer" unique_id=1203716704]
 layout_mode = 2
 texture = ExtResource("29_mqoyh")
 
-[node name="StatLabel" type="Label" parent="StatBoxControl/VBoxContainer/AccEvdPotPrtContainer/PotContainer"]
+[node name="StatLabel" type="Label" parent="StatBoxControl/VBoxContainer/AccEvdPotPrtContainer/PotContainer" unique_id=1247936390]
 self_modulate = Color(0.498039, 0, 0, 1)
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
@@ -751,7 +752,7 @@ theme = ExtResource("3_th70d")
 text = "000"
 horizontal_alignment = 1
 
-[node name="PrtContainer" type="BoxContainer" parent="StatBoxControl/VBoxContainer/AccEvdPotPrtContainer" node_paths=PackedStringArray("name_label", "icon", "value_label")]
+[node name="PrtContainer" type="BoxContainer" parent="StatBoxControl/VBoxContainer/AccEvdPotPrtContainer" unique_id=1456340093 node_paths=PackedStringArray("name_label", "icon", "value_label")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -763,7 +764,7 @@ name_label = NodePath("NameLabel")
 icon = NodePath("IconRect")
 value_label = NodePath("StatLabel")
 
-[node name="NameLabel" type="Label" parent="StatBoxControl/VBoxContainer/AccEvdPotPrtContainer/PrtContainer"]
+[node name="NameLabel" type="Label" parent="StatBoxControl/VBoxContainer/AccEvdPotPrtContainer/PrtContainer" unique_id=1180027930]
 visible = false
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
@@ -771,11 +772,11 @@ theme = ExtResource("3_th70d")
 text = "Spd: "
 horizontal_alignment = 1
 
-[node name="IconRect" type="TextureRect" parent="StatBoxControl/VBoxContainer/AccEvdPotPrtContainer/PrtContainer"]
+[node name="IconRect" type="TextureRect" parent="StatBoxControl/VBoxContainer/AccEvdPotPrtContainer/PrtContainer" unique_id=1022585208]
 layout_mode = 2
 texture = ExtResource("30_sbeok")
 
-[node name="StatLabel" type="Label" parent="StatBoxControl/VBoxContainer/AccEvdPotPrtContainer/PrtContainer"]
+[node name="StatLabel" type="Label" parent="StatBoxControl/VBoxContainer/AccEvdPotPrtContainer/PrtContainer" unique_id=468639402]
 self_modulate = Color(0.498039, 0, 0, 1)
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
@@ -783,10 +784,10 @@ theme = ExtResource("3_th70d")
 text = "000"
 horizontal_alignment = 1
 
-[node name="MiscStatsContainer2" type="HBoxContainer" parent="StatBoxControl/VBoxContainer"]
+[node name="MiscStatsContainer2" type="HBoxContainer" parent="StatBoxControl/VBoxContainer" unique_id=1056782496]
 layout_mode = 2
 
-[node name="MassContainer" type="BoxContainer" parent="StatBoxControl/VBoxContainer/MiscStatsContainer2" node_paths=PackedStringArray("name_label", "icon", "value_label")]
+[node name="MassContainer" type="BoxContainer" parent="StatBoxControl/VBoxContainer/MiscStatsContainer2" unique_id=1694234129 node_paths=PackedStringArray("name_label", "icon", "value_label")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -798,7 +799,7 @@ name_label = NodePath("NameLabel")
 icon = NodePath("IconRect")
 value_label = NodePath("StatLabel")
 
-[node name="NameLabel" type="Label" parent="StatBoxControl/VBoxContainer/MiscStatsContainer2/MassContainer"]
+[node name="NameLabel" type="Label" parent="StatBoxControl/VBoxContainer/MiscStatsContainer2/MassContainer" unique_id=454849986]
 visible = false
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
@@ -806,11 +807,11 @@ theme = ExtResource("3_th70d")
 text = "Spd: "
 horizontal_alignment = 1
 
-[node name="IconRect" type="TextureRect" parent="StatBoxControl/VBoxContainer/MiscStatsContainer2/MassContainer"]
+[node name="IconRect" type="TextureRect" parent="StatBoxControl/VBoxContainer/MiscStatsContainer2/MassContainer" unique_id=67009444]
 layout_mode = 2
 texture = ExtResource("32_ohw0h")
 
-[node name="StatLabel" type="Label" parent="StatBoxControl/VBoxContainer/MiscStatsContainer2/MassContainer"]
+[node name="StatLabel" type="Label" parent="StatBoxControl/VBoxContainer/MiscStatsContainer2/MassContainer" unique_id=667960802]
 self_modulate = Color(0.498039, 0, 0, 1)
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
@@ -818,7 +819,7 @@ theme = ExtResource("3_th70d")
 text = "000"
 horizontal_alignment = 1
 
-[node name="SpeedContainer" type="BoxContainer" parent="StatBoxControl/VBoxContainer/MiscStatsContainer2" node_paths=PackedStringArray("name_label", "icon", "value_label")]
+[node name="SpeedContainer" type="BoxContainer" parent="StatBoxControl/VBoxContainer/MiscStatsContainer2" unique_id=1946427409 node_paths=PackedStringArray("name_label", "icon", "value_label")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -830,7 +831,7 @@ name_label = NodePath("NameLabel")
 icon = NodePath("IconRect")
 value_label = NodePath("StatLabel")
 
-[node name="NameLabel" type="Label" parent="StatBoxControl/VBoxContainer/MiscStatsContainer2/SpeedContainer"]
+[node name="NameLabel" type="Label" parent="StatBoxControl/VBoxContainer/MiscStatsContainer2/SpeedContainer" unique_id=348462046]
 visible = false
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
@@ -838,11 +839,11 @@ theme = ExtResource("3_th70d")
 text = "Spd: "
 horizontal_alignment = 1
 
-[node name="IconRect" type="TextureRect" parent="StatBoxControl/VBoxContainer/MiscStatsContainer2/SpeedContainer"]
+[node name="IconRect" type="TextureRect" parent="StatBoxControl/VBoxContainer/MiscStatsContainer2/SpeedContainer" unique_id=1846318472]
 layout_mode = 2
 texture = ExtResource("31_wfp0r")
 
-[node name="StatLabel" type="Label" parent="StatBoxControl/VBoxContainer/MiscStatsContainer2/SpeedContainer"]
+[node name="StatLabel" type="Label" parent="StatBoxControl/VBoxContainer/MiscStatsContainer2/SpeedContainer" unique_id=230617045]
 self_modulate = Color(0.498039, 0, 0, 1)
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
@@ -850,7 +851,7 @@ theme = ExtResource("3_th70d")
 text = "000"
 horizontal_alignment = 1
 
-[node name="PprContainer" type="BoxContainer" parent="StatBoxControl/VBoxContainer/MiscStatsContainer2" node_paths=PackedStringArray("name_label", "icon", "value_label")]
+[node name="PprContainer" type="BoxContainer" parent="StatBoxControl/VBoxContainer/MiscStatsContainer2" unique_id=1728287544 node_paths=PackedStringArray("name_label", "icon", "value_label")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -862,7 +863,7 @@ name_label = NodePath("NameLabel")
 icon = NodePath("IconRect")
 value_label = NodePath("StatLabel")
 
-[node name="NameLabel" type="Label" parent="StatBoxControl/VBoxContainer/MiscStatsContainer2/PprContainer"]
+[node name="NameLabel" type="Label" parent="StatBoxControl/VBoxContainer/MiscStatsContainer2/PprContainer" unique_id=1511770258]
 visible = false
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
@@ -870,11 +871,11 @@ theme = ExtResource("3_th70d")
 text = "Spd: "
 horizontal_alignment = 1
 
-[node name="IconRect" type="TextureRect" parent="StatBoxControl/VBoxContainer/MiscStatsContainer2/PprContainer"]
+[node name="IconRect" type="TextureRect" parent="StatBoxControl/VBoxContainer/MiscStatsContainer2/PprContainer" unique_id=862764865]
 layout_mode = 2
 texture = ExtResource("33_tgryk")
 
-[node name="StatLabel" type="Label" parent="StatBoxControl/VBoxContainer/MiscStatsContainer2/PprContainer"]
+[node name="StatLabel" type="Label" parent="StatBoxControl/VBoxContainer/MiscStatsContainer2/PprContainer" unique_id=1529515460]
 self_modulate = Color(0.498039, 0, 0, 1)
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
@@ -882,7 +883,7 @@ theme = ExtResource("3_th70d")
 text = "000"
 horizontal_alignment = 1
 
-[node name="CrashContainer" type="BoxContainer" parent="StatBoxControl/VBoxContainer/MiscStatsContainer2" node_paths=PackedStringArray("name_label", "icon", "value_label")]
+[node name="CrashContainer" type="BoxContainer" parent="StatBoxControl/VBoxContainer/MiscStatsContainer2" unique_id=1940868148 node_paths=PackedStringArray("name_label", "icon", "value_label")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -894,7 +895,7 @@ name_label = NodePath("NameLabel")
 icon = NodePath("IconRect")
 value_label = NodePath("StatLabel")
 
-[node name="NameLabel" type="Label" parent="StatBoxControl/VBoxContainer/MiscStatsContainer2/CrashContainer"]
+[node name="NameLabel" type="Label" parent="StatBoxControl/VBoxContainer/MiscStatsContainer2/CrashContainer" unique_id=329334646]
 visible = false
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
@@ -902,11 +903,11 @@ theme = ExtResource("3_th70d")
 text = "Spd: "
 horizontal_alignment = 1
 
-[node name="IconRect" type="TextureRect" parent="StatBoxControl/VBoxContainer/MiscStatsContainer2/CrashContainer"]
+[node name="IconRect" type="TextureRect" parent="StatBoxControl/VBoxContainer/MiscStatsContainer2/CrashContainer" unique_id=260780517]
 layout_mode = 2
 texture = ExtResource("34_giu80")
 
-[node name="StatLabel" type="Label" parent="StatBoxControl/VBoxContainer/MiscStatsContainer2/CrashContainer"]
+[node name="StatLabel" type="Label" parent="StatBoxControl/VBoxContainer/MiscStatsContainer2/CrashContainer" unique_id=1146669293]
 self_modulate = Color(0.498039, 0, 0, 1)
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
@@ -914,7 +915,7 @@ theme = ExtResource("3_th70d")
 text = "000"
 horizontal_alignment = 1
 
-[node name="TagsBox" type="RichTextLabel" parent="StatBoxControl"]
+[node name="TagsBox" type="RichTextLabel" parent="StatBoxControl" unique_id=525701385]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -927,8 +928,9 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("3_th70d")
 text = "Tag, Tag, Tag"
+script = ExtResource("23_etrqa")
 
-[node name="TitleBox" type="NinePatchRect" parent="."]
+[node name="TitleBox" type="NinePatchRect" parent="." unique_id=1300137666]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -943,7 +945,7 @@ patch_margin_top = 18
 patch_margin_right = 18
 patch_margin_bottom = 18
 
-[node name="VBoxContainer" type="VBoxContainer" parent="TitleBox"]
+[node name="VBoxContainer" type="VBoxContainer" parent="TitleBox" unique_id=334587541]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -953,51 +955,49 @@ grow_vertical = 2
 theme_override_constants/separation = 0
 alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="TitleBox/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="TitleBox/VBoxContainer" unique_id=323658629]
 layout_mode = 2
 alignment = 1
 
-[node name="NameLabel" type="Label" parent="TitleBox/VBoxContainer/HBoxContainer"]
+[node name="NameLabel" type="Label" parent="TitleBox/VBoxContainer/HBoxContainer" unique_id=1206049941]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("3_th70d")
 theme_override_font_sizes/font_size = 20
 text = "Character Name"
 
-[node name="LevelLabel2" type="Label" parent="TitleBox/VBoxContainer/HBoxContainer"]
+[node name="LevelLabel2" type="Label" parent="TitleBox/VBoxContainer/HBoxContainer" unique_id=1428070435]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("3_th70d")
 theme_override_font_sizes/font_size = 20
 text = " "
 
-[node name="LevelLabel" type="Label" parent="TitleBox/VBoxContainer/HBoxContainer"]
+[node name="LevelLabel" type="Label" parent="TitleBox/VBoxContainer/HBoxContainer" unique_id=547632941]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("3_th70d")
 theme_override_font_sizes/font_size = 20
 text = "99"
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="TitleBox/VBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="TitleBox/VBoxContainer" unique_id=628789676]
 layout_mode = 2
 theme_override_constants/separation = 0
 alignment = 1
 
-[node name="LevelUpControl" type="Control" parent="TitleBox/VBoxContainer/HBoxContainer2"]
+[node name="LevelUpControl" type="Control" parent="TitleBox/VBoxContainer/HBoxContainer2" unique_id=1053853729]
 layout_mode = 2
 
-[node name="Sprite2D" type="Sprite2D" parent="TitleBox/VBoxContainer/HBoxContainer2/LevelUpControl"]
+[node name="Sprite2D" type="Sprite2D" parent="TitleBox/VBoxContainer/HBoxContainer2/LevelUpControl" unique_id=477914128]
 position = Vector2(26, -6)
 texture = ExtResource("36_fptg3")
 hframes = 5
 vframes = 3
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="TitleBox/VBoxContainer/HBoxContainer2/LevelUpControl/Sprite2D"]
-libraries = {
-"": SubResource("AnimationLibrary_130x0")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="TitleBox/VBoxContainer/HBoxContainer2/LevelUpControl/Sprite2D" unique_id=1571076459]
+libraries/ = SubResource("AnimationLibrary_130x0")
 
-[node name="Button" type="Button" parent="TitleBox/VBoxContainer/HBoxContainer2/LevelUpControl/Sprite2D"]
+[node name="Button" type="Button" parent="TitleBox/VBoxContainer/HBoxContainer2/LevelUpControl/Sprite2D" unique_id=1543184137]
 modulate = Color(1, 1, 1, 0)
 anchors_preset = 15
 anchor_right = 1.0
@@ -1009,12 +1009,12 @@ offset_bottom = -16.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VSeparator" type="VSeparator" parent="TitleBox/VBoxContainer/HBoxContainer2"]
+[node name="VSeparator" type="VSeparator" parent="TitleBox/VBoxContainer/HBoxContainer2" unique_id=2077168478]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="ExpBar" type="TextureRect" parent="TitleBox/VBoxContainer/HBoxContainer2" node_paths=PackedStringArray("full_rect", "color_rect", "level_label", "mouse_over_control", "current_exp_label", "max_exp_label", "level_up_button_control", "level_up_button", "level_up_button_animation")]
+[node name="ExpBar" type="TextureRect" parent="TitleBox/VBoxContainer/HBoxContainer2" unique_id=2144043453 node_paths=PackedStringArray("full_rect", "color_rect", "level_label", "mouse_over_control", "current_exp_label", "max_exp_label", "level_up_button_control", "level_up_button", "level_up_button_animation")]
 z_index = 2
 custom_minimum_size = Vector2(176, 13)
 layout_mode = 2
@@ -1030,7 +1030,7 @@ level_up_button_control = NodePath("../LevelUpControl")
 level_up_button = NodePath("../LevelUpControl/Sprite2D/Button")
 level_up_button_animation = NodePath("../LevelUpControl/Sprite2D/AnimationPlayer")
 
-[node name="FullRect" type="Control" parent="TitleBox/VBoxContainer/HBoxContainer2/ExpBar"]
+[node name="FullRect" type="Control" parent="TitleBox/VBoxContainer/HBoxContainer2/ExpBar" unique_id=1906195569]
 anchors_preset = 0
 offset_left = 9.0
 offset_top = 4.0
@@ -1038,7 +1038,7 @@ offset_right = 168.0
 offset_bottom = 9.0
 mouse_filter = 2
 
-[node name="ColorRect" type="ColorRect" parent="TitleBox/VBoxContainer/HBoxContainer2/ExpBar"]
+[node name="ColorRect" type="ColorRect" parent="TitleBox/VBoxContainer/HBoxContainer2/ExpBar" unique_id=459073634]
 layout_mode = 0
 offset_left = 8.0
 offset_top = 4.0
@@ -1047,7 +1047,7 @@ offset_bottom = 9.0
 mouse_filter = 2
 color = Color(0, 1, 1, 1)
 
-[node name="TextureRect" type="TextureRect" parent="TitleBox/VBoxContainer/HBoxContainer2/ExpBar"]
+[node name="TextureRect" type="TextureRect" parent="TitleBox/VBoxContainer/HBoxContainer2/ExpBar" unique_id=1739808661]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1056,7 +1056,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("4_e3qra")
 
-[node name="Control" type="Control" parent="TitleBox/VBoxContainer/HBoxContainer2/ExpBar"]
+[node name="Control" type="Control" parent="TitleBox/VBoxContainer/HBoxContainer2/ExpBar" unique_id=258910445]
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
@@ -1067,7 +1067,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="BackPatchContainer" type="Container" parent="TitleBox/VBoxContainer/HBoxContainer2/ExpBar/Control" node_paths=PackedStringArray("background", "inner_container")]
+[node name="BackPatchContainer" type="Container" parent="TitleBox/VBoxContainer/HBoxContainer2/ExpBar/Control" unique_id=309461395 node_paths=PackedStringArray("background", "inner_container")]
 visible = false
 z_index = 1
 custom_minimum_size = Vector2(126, 32)
@@ -1081,7 +1081,7 @@ inner_container = NodePath("BoxContainer")
 margin_override = 6
 center_in_parent = true
 
-[node name="NinePatchRect" type="NinePatchRect" parent="TitleBox/VBoxContainer/HBoxContainer2/ExpBar/Control/BackPatchContainer"]
+[node name="NinePatchRect" type="NinePatchRect" parent="TitleBox/VBoxContainer/HBoxContainer2/ExpBar/Control/BackPatchContainer" unique_id=1922362901]
 layout_mode = 2
 texture = ExtResource("7_8jkp8")
 patch_margin_left = 16
@@ -1089,45 +1089,43 @@ patch_margin_top = 16
 patch_margin_right = 16
 patch_margin_bottom = 16
 
-[node name="BoxContainer" type="BoxContainer" parent="TitleBox/VBoxContainer/HBoxContainer2/ExpBar/Control/BackPatchContainer"]
+[node name="BoxContainer" type="BoxContainer" parent="TitleBox/VBoxContainer/HBoxContainer2/ExpBar/Control/BackPatchContainer" unique_id=450741610]
 layout_mode = 2
 theme_override_constants/separation = 0
 alignment = 1
 
-[node name="CurentLabel" type="Label" parent="TitleBox/VBoxContainer/HBoxContainer2/ExpBar/Control/BackPatchContainer/BoxContainer"]
+[node name="CurentLabel" type="Label" parent="TitleBox/VBoxContainer/HBoxContainer2/ExpBar/Control/BackPatchContainer/BoxContainer" unique_id=2080895452]
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 theme = ExtResource("8_3y7lt")
 text = "100"
 vertical_alignment = 2
 
-[node name="SlashLabel" type="Label" parent="TitleBox/VBoxContainer/HBoxContainer2/ExpBar/Control/BackPatchContainer/BoxContainer"]
+[node name="SlashLabel" type="Label" parent="TitleBox/VBoxContainer/HBoxContainer2/ExpBar/Control/BackPatchContainer/BoxContainer" unique_id=1947561126]
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 theme = ExtResource("8_3y7lt")
 text = " / "
 vertical_alignment = 2
 
-[node name="NexrLevelLabel" type="Label" parent="TitleBox/VBoxContainer/HBoxContainer2/ExpBar/Control/BackPatchContainer/BoxContainer"]
+[node name="NexrLevelLabel" type="Label" parent="TitleBox/VBoxContainer/HBoxContainer2/ExpBar/Control/BackPatchContainer/BoxContainer" unique_id=1395829925]
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 theme = ExtResource("8_3y7lt")
 text = "1000"
 vertical_alignment = 2
 
-[node name="ExpLabel" type="Label" parent="TitleBox/VBoxContainer/HBoxContainer2/ExpBar/Control/BackPatchContainer/BoxContainer"]
+[node name="ExpLabel" type="Label" parent="TitleBox/VBoxContainer/HBoxContainer2/ExpBar/Control/BackPatchContainer/BoxContainer" unique_id=82191507]
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 theme = ExtResource("8_3y7lt")
 text = " Exp"
 vertical_alignment = 2
 
-[node name="VSeparator2" type="VSeparator" parent="TitleBox/VBoxContainer/HBoxContainer2"]
+[node name="VSeparator2" type="VSeparator" parent="TitleBox/VBoxContainer/HBoxContainer2" unique_id=1753901363]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_i8tbc")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1425047992]
+libraries/ = SubResource("AnimationLibrary_i8tbc")

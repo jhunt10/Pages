@@ -8,6 +8,7 @@ class_name FileStructureBuilder
 
 static func DoThing():
 	#print("\nSanity Check")
+	format_def_files()
 	#update_def_files()
 	#get_common_props_in_files()
 	#build_mermaid_def_chart()
@@ -15,7 +16,7 @@ static func DoThing():
 	#rename_test_files()
 	#output_descriptions()
 	#intake_descriptions()
-	build_gd_tree()
+	#build_gd_tree()
 	pass
 
 static func output_descriptions():
@@ -457,6 +458,22 @@ const DefVersion = "1"
 
 # Throw stuff in here to be printed after the update (or while deving update)
 static var print_data_cache:Dictionary = {}
+
+static func format_def_files():
+	var files = []
+	files.append_array(BaseLoadObjectLibrary._search_for_files("res://ObjectDefs/", "Defs.def"))
+	for file_path:String in files:
+		# Read File
+		var file = FileAccess.open(file_path, FileAccess.READ)
+		var text:String = file.get_as_text()
+		file.close()
+		
+		var defs = JSON.parse_string(text)
+		
+		# Write File
+		var save_file = FileAccess.open(file_path, FileAccess.WRITE)
+		save_file.store_string(JSON.stringify(defs, "\t"))
+		save_file.close()
 
 # Dynamic Func for applying update_def(..)
 static func update_def_files():

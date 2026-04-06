@@ -151,7 +151,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="EntryGroupContainer" type="Container" parent="VBoxContainer/ScrollContainer/VBoxContainer" unique_id=2030888689 node_paths=PackedStringArray("title_label", "count_label", "entries_container", "background", "inner_container")]
-custom_minimum_size = Vector2(24, 344)
+custom_minimum_size = Vector2(24, 363)
 layout_mode = 2
 script = ExtResource("5_1qkpm")
 title_label = NodePath("EntryGroupInnerContainer/HBoxContainer/TitlerLabel")
@@ -193,7 +193,7 @@ text = "Page Name"
 layout_mode = 2
 
 [node name="PageDetailsEntryContainer" parent="VBoxContainer/ScrollContainer/VBoxContainer/EntryGroupContainer/EntryGroupInnerContainer/SubEntriesContainer" unique_id=473018442 instance=ExtResource("7_ykmfd")]
-custom_minimum_size = Vector2(24, 283)
+custom_minimum_size = Vector2(24, 302)
 layout_mode = 2
 
 [node name="LoadingScreenPatch" type="NinePatchRect" parent="VBoxContainer" unique_id=1683276874]

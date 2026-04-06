@@ -7,7 +7,7 @@ extends BaseCharacterSubMenu
 @export var stat_box:StatBoxControl
 @export var animation_player:AnimationPlayer
 @export var exp_bar:ExpBarControl
-@export var tags_box:RichTextLabel
+@export var tags_box:TagBox
 
 @export var phy_attack_label:StatLabelContainer
 @export var mag_attack_label:StatLabelContainer
@@ -86,7 +86,7 @@ func sync():
 		mag_attack_label.set_stat_values(_actor)
 		armor_label.set_stat_values(_actor)
 		ward_label.set_stat_values(_actor)
-		tags_box.text = ", ".join(_actor.get_tags())
+		tags_box.set_tags(_actor.get_tags())
 
 #
 #func set_tags():

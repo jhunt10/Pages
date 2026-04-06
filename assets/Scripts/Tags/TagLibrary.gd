@@ -9,6 +9,16 @@ static var loaded = false
 
 
 
+static func get_tag_display_name(tag)->String:
+	loaded = false
+	if !loaded:
+		load_tag_defs()
+	if _tags_defs.keys().has(tag):
+		var tag_data = _tags_defs[tag]
+		var desc =  tag_data.get("DisplayName", tag)
+		return desc
+	return tag
+
 static func get_tag_description(tag)->String:
 	loaded = false
 	if !loaded:
