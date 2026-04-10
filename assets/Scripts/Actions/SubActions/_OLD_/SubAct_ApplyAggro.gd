@@ -13,7 +13,7 @@ func get_prop_enum_values(prop_key:String)->Array:
 	return []
 
 ## Returns Tags that are automatically added to the parent Action's Tags
-func get_action_tags(_subaction_data:Dictionary)->Array:
+func get_action_tags(_parent_action:PageItemAction, _subaction_data:Dictionary)->Array:
 	return []
 
 func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, que_exe_data:QueExecutionData,

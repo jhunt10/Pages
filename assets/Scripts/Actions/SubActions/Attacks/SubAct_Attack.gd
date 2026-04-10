@@ -16,8 +16,14 @@ func get_required_props()->Dictionary:
 		"LeachPercent": BaseSubAction.SubActionPropTypes.FloatVal,
 	}
 ## Returns Tags that are automatically added to the parent Action's Tags
-func get_action_tags(_subaction_data:Dictionary)->Array:
-	return ["Attack"]
+func get_action_tags(_parent_action:PageItemAction, _subaction_data:Dictionary)->Array:
+	var tags = ["Attack"]
+	var effect_keys = _subaction_data.get("EffectKeys", [])
+	if effect_keys is String:
+		effect_keys = [effect_keys]
+	if effect_keys.size() > 0:
+		tags.push_front("Inflict")
+	return tags
 
 func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, que_exe_data:QueExecutionData,
 				game_state:GameStateData, actor:BaseActor)->bool:

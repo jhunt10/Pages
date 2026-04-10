@@ -1,10 +1,9 @@
 class_name BaseAttackSupplyItem
 extends BaseSupplyItem
 
-func get_tags()->Array:
-	var tags = super()
-	if not tags.has("AtkItem"):
-		tags.append("AtkItem")
+func _get_object_specific_tags()->Array:
+	var tags = ["Throwable"]
+	TagHelper.merge_lists(tags, super())
 	return tags
 
 func use_in_combat(actor:BaseActor, target, game_state:GameStateData):

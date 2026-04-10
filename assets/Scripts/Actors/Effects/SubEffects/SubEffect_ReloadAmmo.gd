@@ -6,6 +6,10 @@ enum RegenTypes {Turn, Round, Trigger}
 func get_required_props()->Dictionary:
 	return {}
 
+## Returns Tags that are automatically added to the parent Effect's Tags
+func get_effect_tags(_parent_effect:BaseEffect, _subeffect_data:Dictionary)->Array:
+	return ["Reload"]
+
 func get_triggers(effect:BaseEffect, subeffect_data:Dictionary)->Array:
 	var list = super(effect, subeffect_data)
 	var optional_triggers_arr = subeffect_data['Triggers']

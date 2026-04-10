@@ -11,8 +11,8 @@ func get_required_props()->Dictionary:
 		"UseTargetsDirection": BaseSubAction.SubActionPropTypes.BoolVal,
 	}
 ## Returns Tags that are automatically added to the parent Action's Tags
-func get_action_tags(_subaction_data:Dictionary)->Array:
-	return ["Move"]
+func get_action_tags(_parent_action:PageItemAction, _subaction_data:Dictionary)->Array:
+	return ["Push"]
 
 func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, que_exe_data:QueExecutionData,
 				game_state:GameStateData, actor:BaseActor)->bool:

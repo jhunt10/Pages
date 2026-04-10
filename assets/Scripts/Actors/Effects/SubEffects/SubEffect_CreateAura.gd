@@ -6,6 +6,11 @@ func get_required_props()->Dictionary:
 		
 	}
 
+## Returns Tags that are automatically added to the parent Effect's Tags
+func get_effect_tags(_parent_effect:BaseEffect, subeffect_data:Dictionary)->Array:
+	var zone_data_key = subeffect_data.get("ZoneDataKey")
+	return ["Aura"]
+
 func get_triggers(_effect:BaseEffect, _subeffect_data:Dictionary)->Array:
 	return [BaseEffect.EffectTriggers.OnCreate]
 

@@ -213,6 +213,7 @@ func validate_items():
 			_slot_validation_states[index] = ValidStates.Invalid
 			continue
 		_slot_validation_states[index] = ValidStates.Valid
+		item.set_holding_actor(_actor)
 	if LOGGING: print("Finished Validating Itemes for %s : %s" % [_actor.Id, get_holder_name()])
 
 func get_raw_slot_index_of_item(item:BaseItem):
@@ -358,7 +359,8 @@ func remove_item(item_id:String, supress_signal:bool=false)->bool:
 		printerr("Transfering Item outside of ItemHelper: %s | %s " % [item_id, _actor.Id])
 	var index = _raw_item_slots.find(item_id)
 	if index >= 0 and can_remove_index(index):
-		_direct_clear_slot(index)
+		_raw_item_slots[index] = null
+		_slot_validation_states[index] = ValidStates.UnValidated
 		_on_item_removed(item_id, supress_signal)
 		return true
 	return false
@@ -390,6 +392,7 @@ func _direct_set_item_in_slot(slot_index:int, item:BaseItem):
 		_raw_item_slots[slot_index] = item.Id
 		_slot_validation_states[slot_index] = ValidStates.UnValidated
 
+## Used for dumping lost or non-existent items
 func _direct_clear_slot(slot_index:int):
 	if slot_index >= 0 and slot_index <= _raw_item_slots.size():
 		_raw_item_slots[slot_index] = null
@@ -455,11 +458,14 @@ func add_item_to_first_valid_slot(item:BaseItem):
 	ItemHelper.transering_items.erase(item.Id)
 	return false
 
-func _on_item_removed(_item_id:String, _supressing_signals:bool):
-	pass
+func _on_item_added_to_slot(item:BaseItem, _index:int):
+	item.set_holding_actor(_actor)
 
-func _on_item_added_to_slot(_item:BaseItem, _index:int):
-	pass
+func _on_item_removed(_item_id:String, _supressing_signals:bool):
+	var item = ItemLibrary.get_item(_item_id, false)
+	if item and item.holding_actor_id == _actor.Id:
+		item.clear_holding_actor()
+
 
 
 

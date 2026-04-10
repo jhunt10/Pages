@@ -94,6 +94,37 @@ func _init(key:String, def_load_path:String, def:Dictionary, id:String='', data:
 			printerr("BaseEffect._init: No DurationTrigger found on '%s'." %[_key])
 	_cache_after_loading_def()
 
+func  get_tags()->Array:
+	var tags = _get_object_specific_tags()
+	TagHelper.merge_lists(tags, super())
+	return tags
+	
+
+# Virtutal func to get tags specific to Effect class
+func _get_object_specific_tags()->Array:
+	var tags = []
+	var limit_type = get_limited_effect_type()
+	if limit_type:
+		tags.append(limit_type)
+	if is_bad():
+		tags.append("Debuff")
+	if is_good():
+		tags.append("Buff")
+	for sub_effect_data in _sub_effects_data.values():
+		var script_path = sub_effect_data.get("SubEffectScript")
+		var script:BaseSubEffect = _get_sub_effect_script(script_path)
+		if !script:
+			printerr("%s.get_tags: Failed to find SubEffect script '%s'." %[self.EffectKey, script_path])
+			continue
+		var sub_tags = script.get_effect_tags(self, sub_effect_data)
+		TagHelper.merge_lists(tags, sub_tags)
+	
+	if not tags.has("Action"):
+		tags.append("Action")
+	TagHelper.merge_lists(tags, super())
+	return tags
+
+
 func reload_def(load_path:String, def:Dictionary):
 	super(load_path, def)
 	_cache_after_loading_def()

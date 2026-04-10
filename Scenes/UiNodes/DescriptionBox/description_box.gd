@@ -58,11 +58,12 @@ func _show_pop_up(data_str):
 			var effect_def = EffectLibrary.get_effect_def(data['EffectKey'])
 			var effect_description = effect_def.get("#ObjDetails", {}).get("Description", "")
 			var lines = _build_bbcode_array(effect_description, effect_def, null, null)
+			popup_container.description_box.clear()
 			for line in lines:
 				if line is String:
-					popup_container.message_box.append_text(line)
+					popup_container.description_box.append_text(line)
 				if line is Texture2D:
-					popup_container.message_box.add_image(line, 0, 0, Color(1,1,1,1), INLINE_ALIGNMENT_BOTTOM)
+					popup_container.description_box.add_image(line, 0, 0, Color(1,1,1,1), INLINE_ALIGNMENT_BOTTOM)
 		#elif data.has("")
 	#var content_scale = get_window().content_scale_factor
 	#popup_container.scale  = Vector2.ONE
@@ -72,8 +73,10 @@ func _show_pop_up(data_str):
 func _hide_pop_up(_data):
 	if popup_container:
 		if is_instance_valid(popup_container):
-			popup_container.queue_free()
+			if not popup_container.pinned:
+				popup_container.queue_free()
 		popup_container = null
+	pass
 
 func color_text(color, raw_text)->String:
 	if color is String:
@@ -84,6 +87,7 @@ func color_text(color, raw_text)->String:
 	return "[color=#" + color + "]" + raw_text + "[/color]"
 
 func _on_mouse_hover_end(_data):
+	_hide_pop_up(_data)
 	pass
 
 func set_page_item(page:BasePageItem, actor:BaseActor=null):
@@ -384,6 +388,8 @@ func _parse_tag_info(tokens:Array)->Array:
 		parse_type_or_text = tokens[2]
 	var out_line = ''
 	var out_arr = []
+	if not TagsLibrary.has_tag(tag_key):
+		return [('[color=red][url={"text":"NO TAG"}]' +  tag_key + "[/url][/color]")]
 	## Old Format
 	if parse_type_or_text == "Desc":
 		var tag_desc = TagsLibrary.get_tag_description(tag_key)

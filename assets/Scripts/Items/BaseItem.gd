@@ -1,17 +1,31 @@
 class_name BaseItem
 extends BaseLoadObject
 
-enum ItemTypes {KeyItem, Page, Consumable, Ammo, Equipment, Weapon, Money}
+enum ItemTypes {KeyItem, Page, Supplies, Equipment, Money}
 enum ItemRarity {Mundane, Common, Rare, Legendary, Unique}
 
 var Id:String: 
 	get: return self._id
 var ItemKey:String:
 	get: return self._key
-
 #var can_stack:bool:
 	#get:
 		#return true #get_load_val("CanStack", false)
+
+var holding_actor_id:String
+func set_holding_actor(actor):
+	var actor_id = actor
+	if actor_id is BaseActor:
+		actor_id = actor.Id
+	holding_actor_id = actor_id
+
+func clear_holding_actor():
+	holding_actor_id = ""
+
+func get_holding_actor()->BaseActor:
+	if holding_actor_id == "":
+		return null
+	return ActorLibrary.get_actor(holding_actor_id)
 
 ## A semi-typed path for the inventory currently holding this item 
 ## Examples: "PlayerInventory", "Actor:TestActor_ID"
@@ -64,6 +78,23 @@ func get_rarity_string()->String:
 
 func get_rarity_background()->Texture2D:
 	return ItemHelper.get_rarity_background(self.get_item_rarity())
+
+
+
+
+
+
+
+func _get_object_specific_tags()->Array:
+	var tag_list = []
+	tag_list.append(self.get_item_type_string())
+	TagHelper.merge_lists(tag_list, super())
+	return tag_list
+
+
+
+
+
 
 ## Returns a diction of failed requirements, mapped by requirment type 
 func get_cant_use_reasons(actor:BaseActor)->Dictionary:

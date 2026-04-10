@@ -143,3 +143,38 @@ static func get_sub_effect_script(script_path)->BaseSubEffect:
 	var sub_effect = script.new()
 	_cached_subeffect_scripts[script_path] = sub_effect
 	return sub_effect
+
+
+## Mimics function of BaseEffect.get_tags without needing to instanciate an effect 
+static func _get_tags_for_effect_def(effect_key)->Array:
+	var effect_def = get_effect_def(effect_key)
+	if !effect_def or effect_def.size() == 0:
+		return []
+	
+	var effect_data = effect_def.get("EffectData", {})
+	var effect_details = effect_data.get("EffectDetails", {})
+	var sub_effect_datas = effect_data.get("SubEffects", {})
+	
+	var tags = []
+	
+	var limited_effect_str = effect_details.get("LimitedEffectType", "")
+	if limited_effect_str:
+		tags.append(limited_effect_str)
+		
+	if effect_details.get("IsBad", false):
+		tags.append("Debuff")
+	if effect_details.get("IsGood", false):
+		tags.append("Buff")
+	for sub_effect_data in sub_effect_datas.values():
+		var script_path = sub_effect_data.get("SubEffectScript")
+		var script:BaseSubEffect = get_sub_effect_script(script_path)
+		if !script:
+			printerr("%s.get_tags: Failed to find SubEffect script '%s'." %[effect_key, script_path])
+			continue
+		var sub_tags = script.get_effect_tags(null, sub_effect_data)
+		TagHelper.merge_lists(tags, sub_tags)
+	
+	if not tags.has("Effect"):
+		tags.append("Effect")
+	TagHelper.merge_lists(tags, effect_def.get("#ObjDetails", {}).get("Tags", []))
+	return tags

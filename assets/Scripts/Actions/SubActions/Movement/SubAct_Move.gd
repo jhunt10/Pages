@@ -7,7 +7,7 @@ func get_required_props()->Dictionary:
 		"MovementType": BaseSubAction.SubActionPropTypes.StringVal
 	}
 ## Returns Tags that are automatically added to the parent Action's Tags
-func get_action_tags(_subaction_data:Dictionary)->Array:
+func get_action_tags(_parent_action:PageItemAction, _subaction_data:Dictionary)->Array:
 	return ["Move"]
 
 func do_thing(_parent_action:PageItemAction, subaction_data:Dictionary, _metadata:QueExecutionData,

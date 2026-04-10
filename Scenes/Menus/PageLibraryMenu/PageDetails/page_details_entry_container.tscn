@@ -24,7 +24,7 @@
 [ext_resource type="PackedScene" uid="uid://c1bs8grs7gsc1" path="res://Scenes/UiNodes/MiniRangeDisplay/mini_range_display.tscn" id="21_r03se"]
 [ext_resource type="Script" uid="uid://cukfwo131b0bn" path="res://Scenes/UiNodes/DescriptionBox/description_box.gd" id="22_bd2iy"]
 
-[node name="PageDetailsEntryContainer" type="Container" unique_id=744557846 node_paths=PackedStringArray("target_details_container", "target_type_label", "mini_range_display", "acc_pot_container", "accuracy_label", "potency_label", "effects_label", "ammo_label", "damage_entries_container", "tag_box", "icon_background", "icon", "title_label", "tags_label", "type_label", "details_container", "description_box", "plus_minus_button", "minus_icon", "plus_icon", "stat_mods_container", "premade_stat_mod_label", "add_item_button", "background", "inner_container")]
+[node name="PageDetailsEntryContainer" type="Container" unique_id=744557846 node_paths=PackedStringArray("target_details_container", "target_type_label", "mini_range_display", "acc_pot_container", "accuracy_label", "potency_label", "effects_label", "ammo_label", "damage_entries_container", "icon_background", "icon", "title_label", "tag_box", "type_label", "details_container", "description_box", "plus_minus_button", "minus_icon", "plus_icon", "stat_mods_container", "premade_stat_mod_label", "add_item_button", "background", "inner_container")]
 custom_minimum_size = Vector2(900, 283)
 offset_right = 900.0
 offset_bottom = 283.0
@@ -38,11 +38,10 @@ potency_label = NodePath("PageInnerContainer/DetailsContainer/DetailsContainer/H
 effects_label = NodePath("PageInnerContainer/DetailsContainer/DetailsContainer/HBoxContainer/VBoxContainer/AccPotContainer/EffectsLabel")
 ammo_label = NodePath("PageInnerContainer/DetailsContainer/DetailsContainer/HBoxContainer/VBoxContainer/AccPotContainer/AmmoContainer")
 damage_entries_container = NodePath("PageInnerContainer/DetailsContainer/DetailsContainer/HBoxContainer/VBoxContainer/AmmoDamageContainer/DamagesContainer")
-tag_box = NodePath("PageInnerContainer/LineContainer/TagsBox")
 icon_background = NodePath("PageInnerContainer/LineContainer/IconBackgroundTextureRect")
 icon = NodePath("PageInnerContainer/LineContainer/IconBackgroundTextureRect/IconTextureRect")
 title_label = NodePath("PageInnerContainer/LineContainer/TitleLabel")
-tags_label = NodePath("PageInnerContainer/LineContainer/TagsLabel")
+tag_box = NodePath("PageInnerContainer/LineContainer/TagsBox")
 type_label = NodePath("PageInnerContainer/LineContainer/TypeLabel")
 details_container = NodePath("PageInnerContainer/DetailsContainer")
 description_box = NodePath("PageInnerContainer/DetailsContainer/DetailsContainer/RichTextLabel")

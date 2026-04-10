@@ -12,7 +12,7 @@ func get_required_props()->Dictionary:
 		"MaxChainCount": BaseSubAction.SubActionPropTypes.IntVal,
 	}
 ## Returns Tags that are automatically added to the parent Action's Tags
-func get_action_tags(_subaction_data:Dictionary)->Array:
+func get_action_tags(_parent_action:PageItemAction, _subaction_data:Dictionary)->Array:
 	return ["Targeting"]
 
 func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, metadata:QueExecutionData,

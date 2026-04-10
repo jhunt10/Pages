@@ -502,16 +502,16 @@
 			"SubEffects": {
 				"Aura": {
 					"SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_CreateAura.gd",
-					"ZoneDataKey": "LightAura"
+					"ZoneDataKey": "LightAuraZone"
 				}
 			},
 			"ZoneDatas": {
-				"LightAura": {
+				"LightAuraZone": {
 					"Duration": 1.0,
 					"DurationType": "Aura",
 					"InZoneEffectDataKey": "Effect1",
 					"TileSprite": "ZoneTileSets/LightAura_Tile.png",
-					"ZoneKey": "LightAura",
+					"ZoneKey": "LightAuraZone",
 					"ZoneScript": "res://assets/Scripts/Zones/ZoneScripts/EffectZone.gd"
 				}
 			}

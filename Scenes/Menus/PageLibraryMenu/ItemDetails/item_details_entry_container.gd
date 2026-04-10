@@ -1,4 +1,4 @@
-@tool
+#@tool
 class_name ItemDetailsEntryContainer
 extends BaseObjectDetailsEntryContainer
 
@@ -16,7 +16,11 @@ func _process(delta: float) -> void:
 
 ## Load the top level details displayed while entry is minimized
 func _load_mini_details():
-		super()
+	super()
+	var item_key = thing_def.get("ItemKey", "")
+	var item = ItemLibrary.get_item(item_key)
+	if item:
+		tag_box.set_tags(item.get_tags())
 
 ## Load full details displayed when entry is exspanded
 func _load_full_details():

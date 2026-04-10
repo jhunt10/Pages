@@ -219,10 +219,12 @@ func _get_items_removed_if_new_item_added(slot_index:int, item:BaseItem)->Array:
 		
 	return list_all_tools_in_hands()
 
-func _on_item_added_to_slot(_item:BaseItem, _index:int):
+func _on_item_added_to_slot(item:BaseItem, index:int):
+	super(item, index)
 	auto_order_hand_items()
 
-func _on_item_removed(_item_id:String, supressing_signals:bool):
+func _on_item_removed(item_id:String, supressing_signals:bool):
+	super(item_id, supressing_signals)
 	# Skip hand logic when mid transaction
 	if supressing_signals:
 		return

@@ -9,3 +9,9 @@ func can_main_hand()->bool:
 	
 func can_off_hand()->bool:
 	return true
+
+
+func _get_object_specific_tags()->Array:
+	var tags = ["Shield"]
+	TagHelper.merge_lists(tags, super())
+	return tags

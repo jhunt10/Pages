@@ -10,6 +10,10 @@ func get_prop_enum_values(_key:String)->Array: return []
 func _init() -> void:
 	pass
 
+## Returns Tags that are automatically added to the parent Effect's Tags
+func get_effect_tags(_parent_effect:BaseEffect, _subeffect_data:Dictionary)->Array:
+	return []
+
 ## Returns an array of EffectTriggers on which to call this SubEffect
 func get_triggers(_effect:BaseEffect, subeffect_data:Dictionary)->Array:
 	var optional_triggers = subeffect_data.get("OptionalTriggers")

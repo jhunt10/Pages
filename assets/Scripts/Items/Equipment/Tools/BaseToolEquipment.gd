@@ -10,11 +10,11 @@ enum ToolTypes {
 	Heavy,
 }
 
-func get_tags()->Array:
-	var tags = super()
-	if not tags.has("Tool"):
-		tags.append("Tool")
+func _get_object_specific_tags()->Array:
+	var tags = ["Tool"]
+	TagHelper.merge_lists(tags, super())
 	return tags
+
 func get_equipment_slot_type()->String:
 	return "Hand"
 

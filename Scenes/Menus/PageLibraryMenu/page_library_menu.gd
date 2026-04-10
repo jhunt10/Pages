@@ -11,6 +11,7 @@ extends Control
 @export var example_page_entry:PageDetailsEntryContainer
 
 @export var load_time_label:Label
+@export var loading_label:Label
 
 
 
@@ -71,17 +72,41 @@ func build_page_entires():
 	page_entries.clear()
 	
 	var page_item_keys= []
-	for effect_key in EffectLibrary.list_all_effects_keys():
-		var def = EffectLibrary.get_effect_def(effect_key)
+	var effect_keys = EffectLibrary.list_all_effects_keys()
+	
+	#loading_label.text = "Loading Effects"
+	#await get_tree().create_timer(0.5).timeout
+	for index in range(effect_keys.size()):
+		#loading_label.text = "Loading Effects: "+str(index)+"/"+str(effect_keys.size())
+		print("Loading Effects: "+str(index)+"/"+str(effect_keys.size()))
+		#await get_tree().create_timer(0.5).timeout
+		var key = effect_keys[index]
+		var def = EffectLibrary.get_effect_def(key)
 		var inst = null
-		var load_path = EffectLibrary.Instance.get_object_def_load_path(effect_key)
+		var load_path = EffectLibrary.Instance.get_object_def_load_path(key)
 		_build_object_entry(def, inst, load_path)
-	for actor_key in ActorLibrary.list_all_actor_keys():
+	
+	#loading_label.text = "Loading Actors"
+	#await get_tree().create_timer(0.5).timeout
+	var actor_keys = ActorLibrary.list_all_actor_keys()
+	for index in range(actor_keys.size()):
+		loading_label.text = "Loading Actors: "+str(index)+"/"+str(actor_keys.size())
+		print("Loading Actors: "+str(index)+"/"+str(actor_keys.size()))
+		#await get_tree().create_timer(0.1).timeout
+		var actor_key = actor_keys[index]
 		var def = ActorLibrary.get_actor_def(actor_key)
 		var inst = null
 		var load_path = ActorLibrary.Instance.get_object_def_load_path(actor_key)
 		_build_object_entry(def, inst, load_path)
-	for item_key in ItemLibrary.list_all_item_keys():
+	
+	#loading_label.text = "Loading Items"
+	#await get_tree().create_timer(0.5).timeout
+	var item_keys = ItemLibrary.list_all_item_keys()
+	for index in range(item_keys.size()):
+		loading_label.text = "Loading Items: "+str(index)+"/"+str(item_keys.size())
+		print("Loading Items: "+str(index)+"/"+str(item_keys.size()))
+		#await get_tree().create_timer(0.1).timeout
+		var item_key = item_keys[index]
 		if page_item_keys.has(item_key):
 			continue
 		var def = ItemLibrary.get_item_def(item_key)

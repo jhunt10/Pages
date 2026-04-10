@@ -9,8 +9,8 @@ func get_required_props()->Dictionary:
 		"MissileKey": BaseSubAction.SubActionPropTypes.MissileKey
 	}
 ## Returns Tags that are automatically added to the parent Action's Tags
-func get_action_tags(_subaction_data:Dictionary)->Array:
-	return ["SpawnMissile"]
+func get_action_tags(_parent_action:PageItemAction, _subaction_data:Dictionary)->Array:
+	return ["SpawnBeam"]
 
 
 func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, que_exe_data:QueExecutionData,

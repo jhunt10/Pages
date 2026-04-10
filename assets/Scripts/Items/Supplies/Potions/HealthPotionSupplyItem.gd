@@ -1,10 +1,13 @@
 class_name HealthPotionSupplyItem
 extends BasePotionSupplyItem
 
-func get_tags()->Array:
-	var tags = super()
-	if not tags.has("Drink"):
-		tags.append("Drink")
+func _get_object_specific_tags()->Array:
+	var tags = []
+	var heal_data = supply_item_data.get("HealData", {})
+	var base_heal_val = heal_data.get("HealValue", 0)
+	if base_heal_val > 0:
+		tags.append("Heal")
+	TagHelper.merge_lists(tags, super())
 	return tags
 
 func use_in_combat(actor:BaseActor, target, game_state:GameStateData):

@@ -8,6 +8,10 @@ func get_required_props()->Dictionary:
 		"DoesDamageTriggerEffects": BaseSubEffect.SubEffectPropTypes.BoolVal,
 		"OptionalTriggers": BaseSubEffect.SubEffectPropTypes.Triggers}
 
+## Returns Tags that are automatically added to the parent Effect's Tags
+func get_effect_tags(_parent_effect:BaseEffect, _subeffect_data:Dictionary)->Array:
+	return ["DOT"]
+
 func on_effect_trigger(effect:BaseEffect, subeffect_data:Dictionary, trigger:BaseEffect.EffectTriggers, game_state:GameStateData):
 	var actor = effect.get_effected_actor()
 	var source_tag_chain = SourceTagChain.new()

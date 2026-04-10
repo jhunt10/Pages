@@ -562,7 +562,6 @@ layout_mode = 2
 [node name="AccuracyContainer" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/StatsContainer/BoxContainer/StatsContainer3" unique_id=569466696 instance=ExtResource("6_13e3p")]
 layout_mode = 2
 stat_name = "Accuracy"
-force_to_int = true
 
 [node name="ColorRect4" type="ColorRect" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/StatsContainer/BoxContainer/StatsContainer3" unique_id=1758384229]
 custom_minimum_size = Vector2(2, 2)
@@ -572,7 +571,6 @@ color = Color(0.498039, 0, 0, 1)
 [node name="EvasionContainer" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/StatsContainer/BoxContainer/StatsContainer3" unique_id=1334968849 instance=ExtResource("6_13e3p")]
 layout_mode = 2
 stat_name = "Evasion"
-force_to_int = true
 
 [node name="ColorRect5" type="ColorRect" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/StatsContainer/BoxContainer/StatsContainer3" unique_id=1778467956]
 custom_minimum_size = Vector2(2, 2)
@@ -582,7 +580,6 @@ color = Color(0.498039, 0, 0, 1)
 [node name="PotencyContainer" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/StatsContainer/BoxContainer/StatsContainer3" unique_id=1513288094 instance=ExtResource("6_13e3p")]
 layout_mode = 2
 stat_name = "Potency"
-force_to_int = true
 
 [node name="ColorRect6" type="ColorRect" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/StatsContainer/BoxContainer/StatsContainer3" unique_id=1332350276]
 custom_minimum_size = Vector2(2, 2)
@@ -592,7 +589,6 @@ color = Color(0.498039, 0, 0, 1)
 [node name="ProtectionContainer" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/StatsContainer/BoxContainer/StatsContainer3" unique_id=1725235584 instance=ExtResource("6_13e3p")]
 layout_mode = 2
 stat_name = "Protection"
-force_to_int = true
 
 [node name="PagesContainer" type="Container" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=1464779569 node_paths=PackedStringArray("background", "inner_container")]
 custom_minimum_size = Vector2(258, 74)

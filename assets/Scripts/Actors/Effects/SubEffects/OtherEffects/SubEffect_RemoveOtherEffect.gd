@@ -4,11 +4,11 @@ extends BaseSubEffect
 func get_required_props()->Dictionary:
 	return {}
 
-func get_triggers(_effect:BaseEffect, subeffect_data:Dictionary)->Array:
+func get_triggers(_effect:BaseEffect, _subeffect_data:Dictionary)->Array:
 	return [BaseEffect.EffectTriggers.OnCreate]
 
 ## Remove an existing Effect when this one is created
-func on_effect_trigger(effect:BaseEffect, subeffect_data:Dictionary, trigger:BaseEffect.EffectTriggers, game_state:GameStateData):
+func on_effect_trigger(effect:BaseEffect, subeffect_data:Dictionary, _trigger:BaseEffect.EffectTriggers, _game_state:GameStateData):
 	var actor = effect.get_effected_actor()
 	var other_effect_keys = subeffect_data.get("RemoveEffectKeys", [])
 	for other_effect_key in other_effect_keys:

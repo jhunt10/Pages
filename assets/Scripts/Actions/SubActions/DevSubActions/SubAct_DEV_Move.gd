@@ -6,8 +6,8 @@ func get_required_props()->Dictionary:
 		"TargetKey": BaseSubAction.SubActionPropTypes.TargetKey,
 	}
 ## Returns Tags that are automatically added to the parent Action's Tags
-func get_action_tags(_subaction_data:Dictionary)->Array:
-	return ["SpawnEffect"]
+func get_action_tags(_parent_action:PageItemAction, _subaction_data:Dictionary)->Array:
+	return ["Move", "_Dev_Action"]
 
 ## Return a of OnQueOptionsData to select the parent action is qued. 
 func get_on_que_options(parent_action:PageItemAction, _subaction_data:Dictionary, _actor:BaseActor, _game_state:GameStateData)->Array:

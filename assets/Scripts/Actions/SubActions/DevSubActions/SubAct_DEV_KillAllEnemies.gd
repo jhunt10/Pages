@@ -7,8 +7,8 @@ func get_required_props()->Dictionary:
 		"DamageKey": BaseSubAction.SubActionPropTypes.DamageKey
 	}
 ## Returns Tags that are automatically added to the parent Action's Tags
-func get_action_tags(_subaction_data:Dictionary)->Array:
-	return ["Attack"]
+func get_action_tags(_parent_action:PageItemAction, _subaction_data:Dictionary)->Array:
+	return ["Attack", "_Dev_Action"]
 
 func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, que_exe_data:QueExecutionData,
 				game_state:GameStateData, actor:BaseActor)->bool:

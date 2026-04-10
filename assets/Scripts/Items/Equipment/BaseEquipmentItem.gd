@@ -9,11 +9,10 @@ var equipment_data:Dictionary:
 func get_item_type()->ItemTypes:
 	return ItemTypes.Equipment
 
-func get_tags()->Array:
-	var tags = super()
-	if !tags.has("Equipment"):
-		tags.append("Equipment")
-	return tags
+func _get_object_specific_tags()->Array:
+	var tag_list = []
+	TagHelper.merge_lists(tag_list, super())
+	return tag_list
 
 func get_equipment_slot_type()->String:
 	return equipment_data.get("EquipSlot", "UNSET")

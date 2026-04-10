@@ -384,6 +384,6 @@ func get_filter_options()->Array:
 		return ["All", "Que", "Bag", "Head", "Body", "Feet", "Trinket", "MainHand", "OffHand"]
 	if _forced_filters.has("Page"):
 		return ["All", "Passive", "Action", "Movement", "Tactic", "Spell"]
-	if _forced_filters.has("Consumable"):
+	if _forced_filters.has("Supplies"):
 		return ["All", "Potion", "Bomb"]
 	return []

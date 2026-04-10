@@ -5,7 +5,7 @@ extends BackPatchContainer
 @export var icon_background:TextureRect
 @export var icon:TextureRect
 @export var title_label:Label
-@export var tags_label:Label
+@export var tag_box:TagBox
 @export var type_label:Label
 
 
@@ -65,8 +65,14 @@ func set_thing(def:Dictionary, inst:BaseLoadObject, load_path:String):
 	thing_load_path = load_path
 	var details = thing_def.get("#ObjDetails", {"DisplayName": "#No Details#"})
 	title_label.text = details.get("DisplayName", "["+def.get("EffectKey", "")+"]")
-	thing_tags = details.get("Tags", [])
-	tags_label.text = ", ".join(thing_tags)
+	if thing_inst:
+		thing_tags = thing_inst.get_tags()
+	elif def.keys().has("EffectKey"):
+		thing_tags = EffectLibrary._get_tags_for_effect_def(def.get("EffectKey"))
+	else:
+		thing_tags = details.get("Tags", [])
+		thing_tags.push_front("NO_INST")
+	tag_box.set_tags(thing_tags)
 	if def.has("ItemKey"):
 		type_label.text = "Item"
 	if def.has("ActorKey"):

@@ -42,7 +42,12 @@
 					"#FrameIndex": 5.0,
 					"#SubIndex": 2.0,
 					"MissileKey": "ThrownItemMissile",
-					"TargetKey": "Target1"
+					"TargetKey": "Target1",
+					"ItemTagFilter": {
+						"RequireAllTags": [
+							"Throwable"
+						]
+					}
 				}
 			},
 			"TargetParams": {
@@ -226,7 +231,12 @@
 				"UseItem": {
 					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/ItemUsage/SubAct_UseItem.gd",
 					"#FrameIndex": 11.0,
-					"#SubIndex": 0.0
+					"#SubIndex": 0.0,
+					"ItemTagFilter": {
+						"RequireAllTags": [
+							"Drinkable"
+						]
+					}
 				}
 			}
 		},

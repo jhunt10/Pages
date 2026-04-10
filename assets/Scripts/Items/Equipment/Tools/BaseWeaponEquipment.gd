@@ -2,6 +2,11 @@ class_name BaseWeaponEquipment
 extends BaseToolEquipment
 
 enum WeaponClasses {Light, Medium, Heavy}
+const WeaponClassTags:Dictionary = {
+	WeaponClasses.Light: "LgtWpn",
+	WeaponClasses.Medium: "MedWpn",
+	WeaponClasses.Heavy: "HvyWpn"
+}
 
 var target_parmas:TargetParameters
 
@@ -26,26 +31,28 @@ func _init(key:String, def_load_path:String, def:Dictionary, id:String='', data:
 	super(key, def_load_path, def, id, data)
 	_cache_after_loading_def()
 	
-func get_tags()->Array:
-	var tags = super()
-	if not tags.has("Weapon"):
-		tags.append("Weapon")
-	var wpn_class = get_weapon_class()
-	match wpn_class:
-		WeaponClasses.Light:
-			if not tags.has("LightWpn"):
-				tags.append("LightWpn")
-		WeaponClasses.Medium:
-			if not tags.has("MediumWpn"):
-				tags.append("MediumWpn")
-		WeaponClasses.Heavy:
-			if not tags.has("HeavyWpn"):
-				tags.append("HeavyWpn")
-	if not (tags.has("MeleeWpn") or tags.has("RangeWpn")):
-		if is_melee_weapon():
-			tags.append("MeleeWpn")
-		if is_ranged_weapon():
-			tags.append("RangeWpn")
+#func get_tags()->Array:
+	#var tags = super()
+	#if not tags.has("Weapon"):
+		#tags.append("Weapon")
+	#var wpn_class = get_weapon_class()
+	#tags.append(WeaponClassTags[wpn_class])
+	#if not (tags.has("MeleeWpn") or tags.has("RangeWpn")):
+		#if is_melee_weapon():
+			#tags.append("MeleeWpn")
+		#if is_ranged_weapon():
+			#tags.append("RangeWpn")
+	#return tags
+
+func _get_object_specific_tags()->Array:
+	var tags = []
+	if is_melee_weapon():
+		tags.append("Melee")
+	if is_ranged_weapon():
+		tags.append("Ranged")
+	tags.append(WeaponClassTags[get_weapon_class()])
+	tags.append("Weapon")
+	TagHelper.merge_lists(tags, super())
 	return tags
 
 func can_main_hand()->bool:
@@ -72,9 +79,6 @@ func _cache_after_loading_def():
 	for damage_data_key in weapon_attack_data.get("DamageDatas", {}).keys():
 		weapon_attack_data['DamageDatas'][damage_data_key]['DamageDataKey'] = damage_data_key
 		weapon_attack_data['DamageDatas'][damage_data_key]['DisplayName'] = self.get_display_name()
-
-func get_item_type()->ItemTypes:
-	return ItemTypes.Weapon
 
 func get_weapon_class()->WeaponClasses:
 	var val = weapon_data.get("WeaponClass", null)

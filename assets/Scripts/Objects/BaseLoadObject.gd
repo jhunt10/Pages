@@ -24,6 +24,7 @@ func _init(key:String, def_load_path:String, def:Dictionary, id:String='', data:
 func reload_def(load_path:String, def:Dictionary):
 	self._def_load_path = load_path
 	self._def = def
+	self._cached_tags.clear()
 
 ####################
 ## Object Details ##
@@ -48,6 +49,9 @@ func get_description()->String:
 func get_snippet()->String:
 	return get_object_details().get("SnippetDesc", _id)
 
+####################
+##    Sprites     ##
+####################
 func get_large_icon()->Texture2D:
 	var icon_path = _def_load_path.path_join(
 			get_object_details().get("LargeIcon", "")
@@ -69,8 +73,10 @@ func get_weapon_sprite_sheet_path()->String:
 	sprite_file = sprite_file.replace(".png", "_WeaponSprite.png")
 	return sprite_file
 
-func get_tags()->Array:
-	return object_details.get("Tags", []).duplicate()
+####################
+##    Taxonomy    ##
+####################
+
 func get_taxonomy()->Array:
 	return object_details.get("Taxonomy", []).duplicate()
 func get_taxonomy_root()->String:
@@ -84,6 +90,35 @@ func get_taxonomy_leaf()->String:
 		return tax[tax.size()-1]
 	return ''
 
+####################
+##      Tags      ##
+####################
+
+var _cached_tags:Array = []
+func _cache_tags():
+	_cached_tags.clear()
+	# Get tags from def
+	TagHelper.merge_lists(_cached_tags, object_details.get("Tags", []))
+	# Get tags from object logic
+	var object_tags = _get_object_specific_tags()
+	TagHelper.merge_lists(_cached_tags, object_tags)
+	
+
+# Virtutal func to get tags specific to Object class
+func _get_object_specific_tags()->Array:
+	return []
+
+func get_tags()->Array:
+	if _cached_tags.size() == 0:
+		_cache_tags()
+	return _cached_tags
+	#return object_details.get("Tags", []).duplicate()
+
+
+
+####################
+##  Data Manage   ##
+####################
 func save_me()->bool:
 	return false
 

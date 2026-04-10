@@ -8,8 +8,8 @@ func get_required_props()->Dictionary:
 	#return {
 
 ## Returns Tags that are automatically added to the parent Action's Tags
-func get_action_tags(_subaction_data:Dictionary)->Array:
-	var tags = super(_subaction_data)
+func get_action_tags(_parent_action:PageItemAction, _subaction_data:Dictionary)->Array:
+	var tags = super(_parent_action, _subaction_data)
 	return tags
 
 
@@ -17,10 +17,15 @@ func get_action_tags(_subaction_data:Dictionary)->Array:
 func get_on_que_options(parent_action:PageItemAction, _subaction_data:Dictionary, _actor:BaseActor, _game_state:GameStateData)->Array:
 	var items = _actor.items.list_items()
 	var options = OnQueOptionsData.new("SelectedItemId", "Select Item to use:", [], [], [])
+	var item_tag_filter = _subaction_data.get("ItemTagFilter")
 	for item:BaseItem in items:
 		options.options_vals.append(item.Id)
 		options.option_texts.append(item.get_display_name())
 		options.option_icons.append(item.get_small_icon())
+		if not TagHelper.filters_accept_tags(item_tag_filter, item.get_tags()):
+			options.disable_options.append(true)
+		else:
+			options.disable_options.append(false)
 	return [options]
 
 

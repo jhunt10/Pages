@@ -13,7 +13,6 @@ extends BaseObjectDetailsEntryContainer
 
 @export var ammo_label:BoxContainer
 @export var damage_entries_container:VBoxContainer
-@export var tag_box:TagBox
 
 
 # Called when the node enters the scene tree for the first time.
@@ -35,7 +34,7 @@ func _load_mini_details():
 	if title_label.text == "":
 		title_label.text = "["+page._key+"}"
 	thing_tags = page.get_tags()
-	tags_label.text = ", ".join(thing_tags)
+	tag_box.set_tags(thing_tags)
 	
 	# Set Icon (validate rareaty
 	var type_str = page.item_data.get("Rarity", null)

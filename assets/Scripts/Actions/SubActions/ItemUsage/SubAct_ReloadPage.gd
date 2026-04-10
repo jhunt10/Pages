@@ -6,6 +6,9 @@ func get_required_props()->Dictionary:
 	return {
 	}
 
+func get_action_tags(_parent_action:PageItemAction, _subaction_data:Dictionary)->Array:
+	return ["Reload"]
+
 ## Return a of OnQueOptionsData to select the parent action is qued. 
 func get_on_que_options(parent_action:PageItemAction, _subaction_data:Dictionary, _actor:BaseActor, _game_state:GameStateData)->Array:
 	var items = _actor.items.list_items()

@@ -1,5 +1,12 @@
 class_name TagHelper
 
+## Add values from add_list to main_list where value is not in main_list
+static func merge_lists(main_list:Array, add_list:Array):
+	for val in add_list:
+		if not main_list.has(val):
+			main_list.append(val)
+	return main_list
+
 ## Returns true if any String value in check_for appears in the tag list.
 static func tags_include_any_in_array(check_for:Array, tags:Array)->bool:
 	for check in check_for:

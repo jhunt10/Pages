@@ -37,7 +37,7 @@
 		"AppliesTo": [
 			"Effect"
 		],
-		"Description": "@@#Color:Blue:Ailments@@ are common negative @@Color:Red:Effects@@ which damage or weaken the effected @@Color:Red:Actor@@",
+		"Description": "@@#Color:Blue:Ailments@@ are common @@#Tag:Debuff@@ @@#Tag:Effect:Effects@@ which damage or weaken the effected @@@Color:Red:Actor@@",
 		"DisplayName": "Ailment"
 	},
 	"Ammo": {
@@ -185,6 +185,14 @@
 		"Description": "@@#Color:Blue:Buff@@ are positive @@#Tag:Effect:Effects@@ which are benifitial to the @@#Color:Red:Actor@@.",
 		"DisplayName": "Buff"
 	},
+	"Debuff": {
+		"Abreviation": "Debuff",
+		"AppliesTo": [
+			"Page"
+		],
+		"Description": "@@#Color:Blue:Debuff@@ are negative @@#Tag:Effect:Effects@@ which are harmful to the @@#Color:Red:Actor@@.",
+		"DisplayName": "Debuff"
+	},
 	"Caster": {
 		"Abreviation": "Caster",
 		"AppliesTo": [
@@ -288,7 +296,7 @@
 			"Effect",
 			"Page"
 		],
-		"Description": "@@#Color:Red:Effect@@ are temporary conditions applied to @@Color:Red:Actors@@ in @@Color:Red:Combat@@ and can either @@Color:Blue:Grant@@ benifits or @@Color:Blue:Inflict@@ negative statuses.",
+		"Description": "@@#Color:Red:Effect@@ are temporary conditions applied to @@#Color:Red:Actors@@ in @@#Color:Red:Combat@@ and can either @@#Tag:Grant@@ benifits or @@#Tag:Inflict@@ negative statuses.",
 		"DisplayName": "Effect"
 	},
 	"Equipment": {
@@ -401,8 +409,8 @@
 		"Description": "@@#Color:Blue:Heal@@ restores @@#Stat:Health@@ to an @@#Color:Red:Actor@@",
 		"DisplayName": "Heal"
 	},
-	"HeavyWeapon": {
-		"Abreviation": "HeavyWpn",
+	"HvyWpn": {
+		"Abreviation": "HvyWpn",
 		"AppliesTo": [
 			"Weapon"
 		],
@@ -450,8 +458,8 @@
 		"Description": "@@#Color:DmgColor:Light:Light@@  is an @@Color:Blue:Abnormal Damage Type@@ caused by @@#Color:DmgColor:Light:Holy@@ @@#Color:Blue:Spells@@. Most @@#Tag:Living:Living Actors@@ will @@#Tag:Absorb@@ @@#Color:DmgColor:Light:Light Damage@@ while @@#Tag:Undead@@ are exspecially vulnerable to it.",
 		"DisplayName": "Light"
 	},
-	"LightWeapon": {
-		"Abreviation": "LightWpn",
+	"LgtWpn": {
+		"Abreviation": "LgtWpn",
 		"AppliesTo": [
 			"Weapon"
 		],
@@ -490,8 +498,8 @@
 		"Description": "@@#Color:Blue:Magical@@ is a @@#Color:Blue:Tag@@ bestowed upon a select number of @@#Color:Blue:Items@@ and  @@#Color:Blue:Pages@@ which are able harness Elemental Energies in the following forms:\n\n@@#Color:DmgColor:Cold@@ low variance with higher precision and capable of inflicting @@#EftDef:AilmentChilled@@ which can lead to @@#EftDef:AilmentFrozen@@.\n\n@@#Color:DmgColor:Fire@@ standard variance and easily applied over large areas, often inclicting @@#EftDef:AilmentBurned@@.\n\n@@#Color:DmgColor:Shock@@ high variance and diffult to control, occationally inflicting @@#EftDef:AilmentShocked@@.\n\n@@#Color:DmgColor:Poison@@ standard variance but less powerful, frequently inflicting various types of @@#Color:Blue:Poisons@@.",
 		"DisplayName": "Magical"
 	},
-	"MedumWeapon": {
-		"Abreviation": "MediumWpn",
+	"MedWpn": {
+		"Abreviation": "MedWpn",
 		"AppliesTo": [
 			"Weapon"
 		],
@@ -880,6 +888,14 @@
 		"Description": "@@#Color:Blue:Title@@ are @@#Tag:Page:Pages@@ that define an @@#Color:Red:Actor's@@ base stat scaleing and give access to @@#Color:Blue:Title@@ specific @@#Tag:Page:Pages.",
 		"DisplayName": "Title"
 	},
+	"Tool": {
+		"Abreviation": "Tool",
+		"AppliesTo": [
+			"Actor"
+		],
+		"Description": "@@#Color:Blue:Tools@@ are a type of @@#Tag:Equipment:Equipment@@ used with one or more hands. This includes all @@#Tag:Weapon:Weapons@@ and @@#Tag:Shield:Shields@@.",
+		"DisplayName": "Tool"
+	},
 	"Totem": {
 		"Abreviation": "Totem",
 		"AppliesTo": [
@@ -976,5 +992,50 @@
 		],
 		"Description": "@@#Color:Blue:_Dev_Action@@ are actions used in development. (You shouldn't see this)",
 		"DisplayName": "_Dev_Action"
+	},
+	"LightArmor": {
+		"Abreviation": "LgtArmor",
+		"AppliesTo": [
+			"Item",
+			"Appearl"
+		],
+		"Description": "@@#Color:Blue:Light Armor@@ is @@#Tag:Physical@@ @@#Tag:Appearl@@ with low @@#Stat:Armor@@ but also lower requirements and penalties.",
+		"DisplayName": "Light Armor"
+	},
+	"HeavyArmor": {
+		"Abreviation": "HvyArmor",
+		"AppliesTo": [
+			"Page",
+			"Appearl"
+		],
+		"Description": "@@#Color:Blue:Heavy Armor@@ is @@#Tag:Physical@@ @@#Tag:Appearl@@ with high @@#Stat:Armor@@ but also high requirements and penalties.",
+		"DisplayName": "Heavy Armor"
+	},
+	"LightWard": {
+		"Abreviation": "LgtWard",
+		"AppliesTo": [
+			"Item",
+			"Appearl"
+		],
+		"Description": "@@#Color:Blue:Light Ward@@ is @@#Tag:Magical@@ @@#Tag:Appearl@@ with low @@#Stat:Ward@@ but also lower requirements and penalties.",
+		"DisplayName": "Light Ward"
+	},
+	"HeavyWard": {
+		"Abreviation": "HvyWard",
+		"AppliesTo": [
+			"Page",
+			"Appearl"
+		],
+		"Description": "@@#Color:Blue:Heavy Ward@@ is @@#Tag:Magical@@ @@#Tag:Appearl@@ with high @@#Stat:Ward@@ but also high requirements and penalties.",
+		"DisplayName": "Heavy Ward"
+	},
+	"Clothes": {
+		"Abreviation": "Clothes",
+		"AppliesTo": [
+			"Page",
+			"Appearl"
+		],
+		"Description": "@@#Color:Blue:Clothes@@ are mundain @@#Tag:Appearl@@ with no @@#Stat:Armor@@ or @@#Stat:Ward@@.",
+		"DisplayName": "Clothes"
 	}
 }

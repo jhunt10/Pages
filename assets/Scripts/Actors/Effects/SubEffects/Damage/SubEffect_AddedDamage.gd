@@ -9,6 +9,10 @@ func get_required_props()->Dictionary:
 		"AddedDamageScale": BaseSubEffect.SubEffectPropTypes.FloatVal
 	}
 
+## Returns Tags that are automatically added to the parent Effect's Tags
+func get_effect_tags(_parent_effect:BaseEffect, _subeffect_data:Dictionary)->Array:
+	return ["DmgMod"]
+
 ## Returns an array of EffectTriggers on which to call this SubEffect
 func get_triggers(_effect:BaseEffect, subeffect_data:Dictionary)->Array:
 	return [BaseEffect.EffectTriggers.OnAttacking_PostDamageRoll]
@@ -22,7 +26,7 @@ func on_attacking_post_damage_roll(_effect:BaseEffect, subeffect_data:Dictionary
 		for damage_key:String in sub_event.damage_events.keys():
 			var damage_data = attack_event.damage_datas[damage_key]
 			var fake_mod = {"Conditions":mod_condition}
-			if DamageHelper.does_damage_mod_apply(fake_mod, attacker, defender, damage_data, attack_event.source_tag_chain):
+			if DamageHelper.does_damage_mod_apply(fake_mod, attacker, defender, damage_data, attack_event.source_tag_chain, game_state):
 				var org_damage_event:DamageEvent = sub_event.damage_events[damage_key]
 				var new_event = org_damage_event.duplicate()
 	

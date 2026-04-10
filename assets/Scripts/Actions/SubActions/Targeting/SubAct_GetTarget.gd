@@ -10,8 +10,20 @@ func get_required_props()->Dictionary:
 		"AllowAlreadyTargeted": BaseSubAction.SubActionPropTypes.BoolVal,
 	}
 ## Returns Tags that are automatically added to the parent Action's Tags
-func get_action_tags(_subaction_data:Dictionary)->Array:
-	return ["Targeting"]
+func get_action_tags(parent_action:PageItemAction, subaction_data:Dictionary)->Array:
+	var target_param_key = subaction_data.get("TargetParamKey", "")
+	if target_param_key == "Self":
+		return ["Self"]
+	
+	var target_params = parent_action.get_targeting_params(target_param_key, parent_action.get_holding_actor())
+	if !target_params:
+		return []
+	var tags = []
+	if target_params.has_area_of_effect():
+		tags.append("AOE")
+	if target_params.line_of_sight:
+		tags.append("LOS")
+	return tags
 
 func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, metadata:QueExecutionData,
 				game_state:GameStateData, actor:BaseActor)->bool:

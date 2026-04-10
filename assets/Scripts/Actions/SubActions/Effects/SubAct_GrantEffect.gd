@@ -1,4 +1,4 @@
-class_name SubAct_ApplyEffect
+class_name SubAct_GrantEffect
 extends BaseSubAction
 
 func get_required_props()->Dictionary:
@@ -8,11 +8,11 @@ func get_required_props()->Dictionary:
 		"AutoApply": BaseSubAction.SubActionPropTypes.BoolVal
 	}
 ## Returns Tags that are automatically added to the parent Action's Tags
-func get_action_tags(_subaction_data:Dictionary)->Array:
-	if _subaction_data.get("AutoApply", false):
-		return ["Grant"]
-	else:
-		return ["Inflict"]
+func get_action_tags(_parent_action:PageItemAction, _subaction_data:Dictionary)->Array:
+	var tags = ["Grant"]
+	if _subaction_data.get("TargetKey", "") == "Self":
+		tags.append("Self")
+	return tags
 
 func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, que_exe_data:QueExecutionData,
 				game_state:GameStateData, actor:BaseActor)->bool:

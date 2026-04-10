@@ -36,10 +36,26 @@ func _cache_after_loading_def():
 				_target_params[tparm_key] = TargetParameters.new(tparm_key, targ_parms[tparm_key])
 
 func get_tags()->Array:
-	var tags = []
-	tags = super()
+	var tags = super()
 	if not tags.has("Action"):
 		tags.append("Action")
+	return tags
+
+func _get_object_specific_tags()->Array:
+	var tags = []
+	var sub_act_datas = get_sub_action_data()
+	for sub_act_data in sub_act_datas.values():
+		var script_path = sub_act_data.get("!SubActionScript")
+		var script:BaseSubAction = ActionLibrary.get_sub_action_script(script_path)
+		if !script:
+			printerr("%s.get_tags: Failed to find SubAction script '%s'." %[self.ActionKey, script_path])
+			continue
+		var sub_tags = script.get_action_tags(self, sub_act_data)
+		TagHelper.merge_lists(tags, sub_tags)
+	
+	if not tags.has("Action"):
+		tags.append("Action")
+	TagHelper.merge_lists(tags, super())
 	return tags
 
 func save_data()->Dictionary:

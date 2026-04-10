@@ -1,6 +1,9 @@
 class_name SubAct_CreateZone
 extends BaseSubAction
 
+func get_action_tags(_parent_action:PageItemAction, _subaction_data:Dictionary)->Array:
+	return ["SpawnZone"]
+
 func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, que_exe_data:QueExecutionData,
 				game_state:GameStateData, actor:BaseActor)->bool:
 	var zone_data_key = subaction_data.get("ZoneDataKey")

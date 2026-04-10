@@ -10,6 +10,10 @@ func get_required_props()->Dictionary:
 func get_triggers(_effect:BaseEffect, subeffect_data:Dictionary)->Array:
 	return [BaseEffect.EffectTriggers.OnCreate]
 
+## Returns Tags that are automatically added to the parent Effect's Tags
+func get_effect_tags(_parent_effect:BaseEffect, _subeffect_data:Dictionary)->Array:
+	return ["AmmoMod"]
+
 func on_effect_trigger(effect:BaseEffect, _subeffect_data:Dictionary,
 						_trigger:BaseEffect.EffectTriggers, _game_state:GameStateData):
 	var effected_actor = effect.get_effected_actor()

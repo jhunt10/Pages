@@ -6,6 +6,10 @@ func get_required_props()->Dictionary:
 
 var _stat_mod:BaseStatMod
 
+## Returns Tags that are automatically added to the parent Effect's Tags
+func get_effect_tags(_parent_effect:BaseEffect, _subeffect_data:Dictionary)->Array:
+	return ["StatMod"]
+
 func get_triggers(_effect:BaseEffect, _subeffect_data:Dictionary)->Array:
 	var list = super(_effect, _subeffect_data)
 	if !list.has(BaseEffect.EffectTriggers.OnCreate):

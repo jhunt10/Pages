@@ -8,6 +8,11 @@ static var _tags_defs:Dictionary={}
 static var loaded = false
 
 
+static func has_tag(tag)->bool:
+	loaded = false
+	if !loaded:
+		load_tag_defs()
+	return _tags_defs.keys().has(tag)
 
 static func get_tag_display_name(tag)->String:
 	loaded = false

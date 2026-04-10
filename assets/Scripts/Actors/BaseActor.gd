@@ -116,8 +116,12 @@ func get_display_name()->String:
 			dis_name = title_page.get_display_name()
 	if enemy_npc_index >= 0:
 		dis_name += " " + alphabet[enemy_npc_index]
-		
 	return dis_name
+
+func get_faction_key()->String:
+	if self.is_player:
+		return "Player"
+	return actor_data.get("Faction", "NO_FACTION")
 
 func get_title()->String:
 	if pages:
@@ -126,16 +130,15 @@ func get_title()->String:
 			return title_page.get_title_key()
 	return get_display_name()
 
-func get_tags()->Array: 
+func _get_object_specific_tags()->Array:
 	var tag_list = []
-	tag_list.append_array(super())
-	var aditional_tags = pages.get_tags_added_to_actor()
-	aditional_tags.append_array(effects.get_tags_added_to_actor())
-	aditional_tags.append_array(equipment.get_tags_added_to_actor())
-	for added_tag in aditional_tags:
-		if not tag_list.has(added_tag):
-			tag_list.append(added_tag)
+	tag_list.append(self.get_faction_key())
+	TagHelper.merge_lists(tag_list, super())
+	TagHelper.merge_lists(tag_list, pages.get_tags_added_to_actor())
+	TagHelper.merge_lists(tag_list, effects.get_tags_added_to_actor())
+	TagHelper.merge_lists(tag_list, equipment.get_tags_added_to_actor())
 	return tag_list
+
 
 func get_stat_scaling()->Dictionary:
 	return actor_data.get("StatScaling", 

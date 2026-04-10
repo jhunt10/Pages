@@ -14,6 +14,11 @@ func get_equipment_slot_type()->String:
 func _init(key:String, def_load_path:String, def:Dictionary, id:String='', data:Dictionary={}) -> void:
 	super(key, def_load_path, def, id, data)
 
+func _get_object_specific_tags()->Array:
+	var tag_list = ["PageBook"]
+	TagHelper.merge_lists(tag_list, super())
+	return tag_list
+
 func get_max_page_count()->int:
 	var tagged_slots = get_load_val("PageTagSlots", {})
 	var count = 0

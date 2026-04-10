@@ -35,7 +35,6 @@ static func output_descriptions():
 	save_file.close()
 
 static func intake_descriptions():
-	
 	var description_file = FileAccess.open("C:\\Users\\johnn\\Documents\\Repos\\Pages\\ObjectDefs\\Descriptions.json", FileAccess.READ)
 	var description_text:String = description_file.get_as_text()
 	description_file.close()
