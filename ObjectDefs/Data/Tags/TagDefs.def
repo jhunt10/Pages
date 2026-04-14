@@ -48,6 +48,59 @@
 		"Description": "Some @@#Tag:Page:Pages@@ consume @@#Color:Blue:Ammo@@ each time the @@#Tag:Action@@ is executed. Once empty, they must be @@#Tag:Reload:Reloaded@@ to be used again.",
 		"DisplayName": "Ammo"
 	},
+	"AbnAmmo": {
+		"Abreviation": "AbnAmmo",
+		"AppliesTo": [
+			"Item",
+			"Page"
+		],
+		"Description": "@@#Color:Blue:Abnormal Ammo@@ is rare @@#Tag:Ammo@@ used by @@#Tag:Abnormal@@ @@#Tag:Action@@ @@#Tag:Page:Pages@@.",
+		"DisplayName": "AbnAmmo"
+	},
+	"MagAmmo": {
+		"Abreviation": "MagAmmo",
+		"AppliesTo": [
+			"Item",
+			"Page"
+		],
+		"Description": "@@#Color:Blue:Magical Ammo@@ is uncommon @@#Tag:Ammo@@ used by @@#Tag:Magic@@ @@#Tag:Action@@ @@#Tag:Page:Pages@@ and can be subsituted with @@#Tag:GenAmmo:Gen Ammo@@.",
+		"DisplayName": "MagAmmo"
+	},
+	"PhyAmmo": {
+		"Abreviation": "PhyAmmo",
+		"AppliesTo": [
+			"Item",
+			"Page"
+		],
+		"Description": "@@#Color:Blue:Physical Ammo@@ is uncommon @@#Tag:Ammo@@ used by @@#Tag:Physical@@ @@#Tag:Action@@ @@#Tag:Page:Pages@@ and can be subsituted with @@#Tag:GenAmmo:Gen Ammo@@.",
+		"DisplayName": "PhyAmmo"
+	},
+	"GenAmmo": {
+		"Abreviation": "GenAmmo",
+		"AppliesTo": [
+			"Item",
+			"Page"
+		],
+		"Description": "@@#Color:Blue:Generic Ammo@@ is uncommon @@#Tag:Ammo@@ which can be subsituted with both @@#Tag:MagAmmo:Mag Ammo@@ and @@#Tag:PhyAmmo:Phy Ammo@@.",
+		"DisplayName": "GenAmmo"
+	},
+	"LmtAmmo": {
+		"Abreviation": "LmtAmmo",
+		"AppliesTo": [
+			"Item",
+			"Page"
+		],
+		"Description": "@@#Color:Blue:Limited Ammo@@ applies to @@#Tag:Action@@ @@#Tag:Page:Pages@@ which can not be @@#Tag:Reaload:Reloaded@@ and can only be used a certain number of times per @@#Color:Red:Combat@@.",
+		"DisplayName": "LmtAmmo"
+	},
+	"Reload": {
+		"Abreviation": "Reload",
+		"AppliesTo": [
+			"Page"
+		],
+		"Description": "@@#Color:Red:Reload@@ is the act of refilling the @@#Color:Blue:Ammo@@ of a @@#Tag:Action:Action Page@@.",
+		"DisplayName": "Reload"
+	},
 	"AmmoMod": {
 		"Abreviation": "AmmoMod",
 		"AppliesTo": [
@@ -247,8 +300,16 @@
 		"AppliesTo": [
 			"Effect"
 		],
-		"Description": "@@#Color:Blue:Damage Over Time@@ means an @@Color:Red:Effect@@ applies damage each @@Color:Red:Turn@@ or @@Color:Red:Round@@ ",
+		"Description": "@@#Color:Blue:Damage Over Time@@ means an @@#Tag:Effect@@ applies damage each @@Color:Red:Turn@@.",
 		"DisplayName": "DOT"
+	},
+	"HOT": {
+		"Abreviation": "HOT",
+		"AppliesTo": [
+			"Effect"
+		],
+		"Description": "@@#Color:Blue:Heal Over Time@@ means an @@#Tag:Effect@@ applies @@#Tag:Heal:Healing@@ each @@Color:Red:Turn@@.",
+		"DisplayName": "HOT"
 	},
 	"Dagger": {
 		"Abreviation": "Dagger",
@@ -532,13 +593,13 @@
 		"Description": "@@#Color:Blue:Money@@ is the root of all evil.",
 		"DisplayName": "Money"
 	},
-	"Movement": {
-		"Abreviation": "Movement",
+	"Move": {
+		"Abreviation": "Move",
 		"AppliesTo": [
 			"Page"
 		],
-		"Description": "@@#Color:Blue:Movement@@ are @@#Tag:Action:Actions@@ which change an @@#Color:Red:Actor's@@ position on the @@#Color:Red:Map@@.",
-		"DisplayName": "Movement"
+		"Description": "@@#Color:Blue:Moves@@ are @@#Tag:Action:Actions@@ which change an @@#Color:Red:Actor's@@ position on the @@#Color:Red:Map@@.",
+		"DisplayName": "Move"
 	},
 	"Object": {
 		"Abreviation": "Object",
@@ -917,16 +978,24 @@
 		"AppliesTo": [
 			"Actor"
 		],
-		"Description": "@@#Color:Blue:TwoHand@@ implies an @@#Color:Red:Actor@@ is wielding one @@#Tag:Weapon@@ with two or more hands.",
+		"Description": "@@#Color:Blue:TwoHand@@ implies an @@#Color:Red:Actor@@ is wielding one @@#Tag:Weapon@@ with two (or more) hands.",
 		"DisplayName": "TwoHand"
 	},
+	"DualHand": {
+		"Abreviation": "DualHand",
+		"AppliesTo": [
+			"Actor"
+		],
+		"Description": "@@#Color:Blue:TwoHand@@ implies an @@#Color:Red:Actor@@ is wielding two @@#Tag:Weapon:Weapons@@ with one in each hand.",
+		"DisplayName": "DualHand"
+	},
 	"Unarmed": {
-		"Abreviation": "Tactic",
+		"Abreviation": "Unarmed",
 		"AppliesTo": [
 			"Action"
 		],
 		"Description": "@@#Color:Blue:Unarmed@@ @@#Color:Red:Actors@@ have no @@#Color:Red:Weapon@@ equip and default to thier @@#Color:Red:Unarmed Damage@@ when making @@#Color:Red:Weapon Attacks@@.",
-		"DisplayName": "Tactic"
+		"DisplayName": "Unarmed"
 	},
 	"Undead": {
 		"Abreviation": "Phy",

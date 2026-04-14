@@ -9,7 +9,6 @@
 			"SmallIcon": "Sprites/ArmorPotionEffect_Icon.png",
 			"SnippetDesc": "+20 Armor",
 			"Tags": [
-				"Potion"
 			],
 			"Taxonomy": [
 				"Effect",
@@ -36,6 +35,12 @@
 					"StatName": "Armor",
 					"Value": 20.0
 				}
+			},
+			"SubEffects": {
+				"ApplyStatMod": {
+					"AllStatMods": true,
+					"SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_ModStat.gd"
+				}
 			}
 		},
 		"_DefVersion": "1"
@@ -50,8 +55,6 @@
 			"SmallIcon": "Sprites/RegenPotionEffect_Icon.png",
 			"SnippetDesc": "Heal 5% Max Health at the end of each Turn.",
 			"Tags": [
-				"Regen",
-				"Potion"
 			],
 			"Taxonomy": [
 				"Effect",
@@ -108,7 +111,6 @@
 			"SmallIcon": "Sprites/WardPotionEffect_Icon.png",
 			"SnippetDesc": "+20 Ward",
 			"Tags": [
-				"Potion"
 			],
 			"Taxonomy": [
 				"Effect",
@@ -134,6 +136,12 @@
 					"ModType": "Add",
 					"StatName": "Ward",
 					"Value": 20.0
+				}
+			},
+			"SubEffects": {
+				"ApplyStatMod": {
+					"AllStatMods": true,
+					"SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_ModStat.gd"
 				}
 			}
 		},

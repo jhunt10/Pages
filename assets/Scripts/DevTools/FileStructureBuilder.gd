@@ -10,7 +10,7 @@ static func DoThing():
 	#print("\nSanity Check")
 	#format_def_files()
 	#update_def_files()
-	#get_common_props_in_files()
+	get_frame_timing_from_files()
 	#build_mermaid_def_chart()
 	#create_class_def_files("Rogue")
 	#rename_test_files()
@@ -379,6 +379,28 @@ static func parse_def_file(file_path)->Dictionary:
 	var text:String = file.get_as_text()
 	var data = JSON.parse_string(text)
 	return data
+
+static func get_frame_timing_from_files():
+	var files = []
+	files.append_array(BaseLoadObjectLibrary._search_for_files("res://ObjectDefs/", "PageDefs.def"))
+	var frames_to_scripts = []
+	for val in range(24):
+		frames_to_scripts.append([])
+	var keys = []
+	for file:String in files:
+		var defs = parse_def_file(file)
+		for def_key:String in defs.keys():
+			keys.append(def_key)
+			var sub_actions = defs[def_key].get("ActionData", {}).get("SubActions", {})
+			for sub_act in sub_actions.values():
+				var script:String = sub_act.get("!SubActionScript", "")
+				script = script.get_file()
+				var frame:int = sub_act.get("#FrameIndex", 0)
+				if not frames_to_scripts[frame].has(script):
+					frames_to_scripts[frame].append(script)
+					
+	print(frames_to_scripts)
+	#print(keys)
 
 static func get_common_props_in_files():
 	var files = []

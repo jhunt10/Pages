@@ -2,15 +2,15 @@ class_name BasePotionSupplyItem
 extends BaseSupplyItem
 
 func _get_object_specific_tags()->Array:
-	var tags = [ "Potion", "Drinkable"]
+	var tags = [ "Potion"]
 	var effect_datas = supply_item_data.get("EffectDatas", {})
 	for effect_data_key in effect_datas.keys():
 		var effect_metadata = effect_datas[effect_data_key]
 		var effect_key = effect_metadata.get("EffectKey", "")
-		var effect_data = effect_metadata.get("EffectDataDef", {})
-		var effect_tags = EffectLibrary._get_tags_for_effect_def(effect_key)
-		effect_tags.erase("Effect")
+		#var effect_data = effect_metadata.get("EffectDataDef", {})
+		var effect_tags = EffectLibrary.get_nested_tags_for_effect(effect_key)
 		TagHelper.merge_lists(tags, effect_tags)
+	tags.append("Drinkable")
 	TagHelper.merge_lists(tags, super())
 	return tags
 

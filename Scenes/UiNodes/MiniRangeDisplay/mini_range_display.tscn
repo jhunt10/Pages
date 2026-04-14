@@ -1,11 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://c1bs8grs7gsc1"]
+[gd_scene format=4 uid="uid://c1bs8grs7gsc1"]
 
-[ext_resource type="Script" path="res://Scenes/UiNodes/MiniRangeDisplay/mini_range_display.gd" id="1_q7yfg"]
+[ext_resource type="Script" uid="uid://dkqhggisoybmo" path="res://Scenes/UiNodes/MiniRangeDisplay/mini_range_display.gd" id="1_q7yfg"]
 [ext_resource type="Texture2D" uid="uid://ynbkbpxcep0o" path="res://Scenes/UiNodes/MiniRangeDisplay/MiniRangeBackground.png" id="2_k4qsm"]
+[ext_resource type="Theme" uid="uid://bfce41la62bs6" path="res://Scenes/Themes/readable_theme.tres" id="3_iv27l"]
+[ext_resource type="Texture2D" uid="uid://yi37a25tuiio" path="res://Scenes/UiNodes/MiniRangeDisplay/mini_range_tile_set.png" id="4_qjgec"]
+[ext_resource type="Texture2D" uid="uid://bethv8mo5j28j" path="res://assets/Sprites/TileSets/TargetingTileSet.png" id="5_o3oj5"]
 
-[sub_resource type="Image" id="Image_rjnx4"]
+[sub_resource type="Image" id="Image_iaa1x"]
 data = {
-"data": PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 0, 0, 255, 255, 0, 0, 255, 255, 0, 0, 255, 255, 0, 0, 255, 255, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 0, 0, 255, 255, 0, 0, 255, 255, 0, 0, 255, 255, 0, 0, 255, 255, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 0, 0, 255, 255, 0, 0, 255, 255, 0, 0, 255, 255, 0, 0, 255, 255, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 0, 0, 255, 255, 0, 0, 255, 0, 0, 0, 255, 255, 0, 0, 255, 255, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 0, 0, 255, 255, 0, 0, 255, 255, 0, 0, 255, 255, 0, 0, 255, 255, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 0, 0, 255, 255, 0, 0, 255, 255, 0, 0, 255, 255, 0, 0, 255, 255, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 0, 0, 255, 255, 0, 0, 255, 255, 0, 0, 255, 255, 0, 0, 255, 255, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+"data": PackedByteArray("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP8AAP//AAD//wAA//8AAP//AAD/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/wAA//8AAP//AAD//wAA//8AAP8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD/AAD//wAA//8AAP//AAD//wAA/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP8AAP//AAD/AAAA//8AAP//AAD/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/wAA//8AAP//AAD//wAA//8AAP8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD/AAD//wAA//8AAP//AAD//wAA/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP8AAP//AAD//wAA//8AAP//AAD/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=="),
 "format": "RGBA8",
 "height": 11,
 "mipmaps": false,
@@ -13,9 +16,43 @@ data = {
 }
 
 [sub_resource type="ImageTexture" id="ImageTexture_q2rgk"]
-image = SubResource("Image_rjnx4")
+image = SubResource("Image_iaa1x")
 
-[node name="MiniRangeDisplay" type="Control" node_paths=PackedStringArray("texture_rect")]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_pfbgw"]
+texture = ExtResource("4_qjgec")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+4:1/0 = 0
+2:2/0 = 0
+3:2/0 = 0
+4:2/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_c8xwm"]
+texture = ExtResource("5_o3oj5")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_hqxfy"]
+tile_size = Vector2i(32, 32)
+sources/1 = SubResource("TileSetAtlasSource_pfbgw")
+sources/2 = SubResource("TileSetAtlasSource_c8xwm")
+
+[node name="MiniRangeDisplay" type="Control" unique_id=589088971 node_paths=PackedStringArray("texture_rect", "type_label")]
 custom_minimum_size = Vector2(44, 44)
 layout_mode = 3
 anchors_preset = 15
@@ -27,9 +64,9 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_q7yfg")
 texture_rect = NodePath("TextureRect")
-leave_boarder = true
+type_label = NodePath("Label")
 
-[node name="Background" type="TextureRect" parent="."]
+[node name="Background" type="TextureRect" parent="." unique_id=1318100375]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -38,7 +75,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_k4qsm")
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1582351117]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -50,3 +87,28 @@ offset_bottom = -4.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("ImageTexture_q2rgk")
+
+[node name="Label" type="Label" parent="." unique_id=1801589499]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -25.0
+offset_right = 20.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("3_iv27l")
+theme_override_font_sizes/font_size = 8
+text = "Spot"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=639483840]
+visible = false
+scale = Vector2(0.25, 0.25)
+tile_map_data = PackedByteArray("AAABAAEAAQAAAAAAAAABAAAAAQABAAAAAAACAAAAAgAAAAAAAAACAAEAAgAAAAAAAAADAAEAAgAAAAAAAAADAAAAAgAAAAAAAAA=")
+tile_set = SubResource("TileSet_hqxfy")

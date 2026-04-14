@@ -1,7 +1,7 @@
 class_name CharacterMenuControl
 extends Control
 
-const LOGGING = true
+const LOGGING = false
 
 signal menu_closed
 

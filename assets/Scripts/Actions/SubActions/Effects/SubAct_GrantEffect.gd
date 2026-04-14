@@ -12,6 +12,9 @@ func get_action_tags(_parent_action:PageItemAction, _subaction_data:Dictionary)-
 	var tags = ["Grant"]
 	if _subaction_data.get("TargetKey", "") == "Self":
 		tags.append("Self")
+	var effect_key = get_effect_key(_parent_action, _subaction_data)
+	var effect_tags = EffectLibrary.get_nested_tags_for_effect(effect_key)
+	TagHelper.merge_lists(tags, effect_tags)
 	return tags
 
 func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, que_exe_data:QueExecutionData,
@@ -21,7 +24,7 @@ func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, que_exe_d
 	var target_key = subaction_data['TargetKey']
 	var targets:Array = _find_target_effected_actors(parent_action, subaction_data, target_key, que_exe_data, game_state, actor)
 	
-	var effect_key = ''
+	var effect_key = get_effect_key(parent_action, subaction_data)
 	var effect_data = {}
 	if subaction_data.has("EffectDataKey"):
 		effect_data = parent_action.get_effect_data(subaction_data['EffectDataKey'])
@@ -34,3 +37,14 @@ func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, que_exe_d
 	for target:BaseActor in targets:
 		EffectHelper.create_effect(target, actor, effect_key, effect_data, game_state)
 	return BaseSubAction.Success
+
+## This exist because I was dumb and made two ways to reference effect key
+func get_effect_key(parent_action:PageItemAction, subaction_data:Dictionary)->String:
+	var effect_key = ''
+	var effect_data = {}
+	if subaction_data.has("EffectDataKey"):
+		effect_data = parent_action.get_effect_data(subaction_data['EffectDataKey'])
+		effect_key = effect_data.get("EffectKey", '')
+	if effect_key == '':
+		effect_key = subaction_data.get('EffectKey')
+	return effect_key

@@ -5,7 +5,7 @@ const LOGGING = true
 enum DefenseType {None, Armor, Ward}
 
 enum DamageTypes {	
-	Test, RAW, Healing, Percent,
+	Test, RAW, Heal, Percent,
 	Light, Dark, Chaos, Psycic,
 	Pierce, Slash, Blunt, Crash, # Usually negated by Armor
 	Fire, Cold, Shock, Poison, # Usually negated by Ward

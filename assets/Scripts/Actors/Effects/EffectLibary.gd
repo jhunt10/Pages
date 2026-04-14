@@ -144,6 +144,12 @@ static func get_sub_effect_script(script_path)->BaseSubEffect:
 	_cached_subeffect_scripts[script_path] = sub_effect
 	return sub_effect
 
+## Returns sub-tags for an object that applies an Effect 
+static func get_nested_tags_for_effect(effect_key:String)->Array:
+	var tags = _get_tags_for_effect_def(effect_key)
+	#var effect_def = get_effect_def(effect_key)
+	tags.erase("Effect")
+	return tags
 
 ## Mimics function of BaseEffect.get_tags without needing to instanciate an effect 
 static func _get_tags_for_effect_def(effect_key)->Array:
@@ -171,7 +177,7 @@ static func _get_tags_for_effect_def(effect_key)->Array:
 		if !script:
 			printerr("%s.get_tags: Failed to find SubEffect script '%s'." %[effect_key, script_path])
 			continue
-		var sub_tags = script.get_effect_tags(null, sub_effect_data)
+		var sub_tags = script.get_effect_tags(sub_effect_data, effect_def, null)
 		TagHelper.merge_lists(tags, sub_tags)
 	
 	if not tags.has("Effect"):

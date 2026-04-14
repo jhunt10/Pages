@@ -103,6 +103,8 @@ func _cache_tags():
 	var object_tags = _get_object_specific_tags()
 	TagHelper.merge_lists(_cached_tags, object_tags)
 	
+func dirty_tags():
+	_cached_tags.clear()
 
 # Virtutal func to get tags specific to Object class
 func _get_object_specific_tags()->Array:
@@ -111,9 +113,15 @@ func _get_object_specific_tags()->Array:
 func get_tags()->Array:
 	if _cached_tags.size() == 0:
 		_cache_tags()
-	return _cached_tags
+	return _cached_tags.duplicate()
 	#return object_details.get("Tags", []).duplicate()
 
+func get_tags_without_taxonomy()->Array:
+	var tags = get_tags()
+	for tax in get_taxonomy():
+		if tags.has(tax):
+			tags.erase(tax)
+	return tags
 
 
 ####################

@@ -5,10 +5,6 @@ extends BaseObjectDetailsEntryContainer
 @export var good_effect_icon:Texture2D
 @export var bad_effect_icon:Texture2D
 
-var page:BasePageItem:
-	get:
-		return thing_inst as BasePageItem
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	super()
@@ -45,6 +41,9 @@ func _load_mini_details():
 ## Load full details displayed when entry is exspanded
 func _load_full_details():
 	super()
+	var key = thing_def.get("EffectKey")
+	thing_tags = EffectLibrary._get_tags_for_effect_def(key)
+	tag_box.set_tags(thing_tags)
 	
 	## Stat Mods
 	#var stat_mods = page.get_passive_stat_mods()

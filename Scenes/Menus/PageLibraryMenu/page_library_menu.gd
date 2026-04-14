@@ -62,11 +62,13 @@ func _reload_pages():
 	ItemLibrary.Instance.reload()
 	EffectLibrary.Instance.reload()
 	loaded = false
+	loading_patch.show()
 	build_page_entires()
 
 func build_page_entires():
 	if loaded:
 		return
+	loaded = true
 	for entry in page_entries.values():
 		entry.queue_free()
 	page_entries.clear()
@@ -74,25 +76,24 @@ func build_page_entires():
 	var page_item_keys= []
 	var effect_keys = EffectLibrary.list_all_effects_keys()
 	
-	#loading_label.text = "Loading Effects"
-	#await get_tree().create_timer(0.5).timeout
+	loading_label.text = "Loading Effects"
 	for index in range(effect_keys.size()):
-		#loading_label.text = "Loading Effects: "+str(index)+"/"+str(effect_keys.size())
-		print("Loading Effects: "+str(index)+"/"+str(effect_keys.size()))
-		#await get_tree().create_timer(0.5).timeout
+		loading_label.text = "Loading Effects: "+str(index)+"/"+str(effect_keys.size())
+		#print("Loading Effects: "+str(index)+"/"+str(effect_keys.size()))
+		await get_tree().create_timer(0.01).timeout
 		var key = effect_keys[index]
 		var def = EffectLibrary.get_effect_def(key)
 		var inst = null
 		var load_path = EffectLibrary.Instance.get_object_def_load_path(key)
 		_build_object_entry(def, inst, load_path)
 	
-	#loading_label.text = "Loading Actors"
-	#await get_tree().create_timer(0.5).timeout
+	loading_label.text = "Loading Actors"
+	await get_tree().create_timer(0.01).timeout
 	var actor_keys = ActorLibrary.list_all_actor_keys()
 	for index in range(actor_keys.size()):
 		loading_label.text = "Loading Actors: "+str(index)+"/"+str(actor_keys.size())
-		print("Loading Actors: "+str(index)+"/"+str(actor_keys.size()))
-		#await get_tree().create_timer(0.1).timeout
+		#print("Loading Actors: "+str(index)+"/"+str(actor_keys.size()))
+		await get_tree().create_timer(0.01).timeout
 		var actor_key = actor_keys[index]
 		var def = ActorLibrary.get_actor_def(actor_key)
 		var inst = null
@@ -100,12 +101,13 @@ func build_page_entires():
 		_build_object_entry(def, inst, load_path)
 	
 	#loading_label.text = "Loading Items"
-	#await get_tree().create_timer(0.5).timeout
+	#await get_tree().create_timer(0.01).timeout
 	var item_keys = ItemLibrary.list_all_item_keys()
 	for index in range(item_keys.size()):
-		loading_label.text = "Loading Items: "+str(index)+"/"+str(item_keys.size())
-		print("Loading Items: "+str(index)+"/"+str(item_keys.size()))
-		#await get_tree().create_timer(0.1).timeout
+		if index % 10 == 0:
+			loading_label.text = "Loading Items: "+str(index)+"/"+str(item_keys.size())
+			#print("Loading Items: "+str(index)+"/"+str(item_keys.size()))
+			await get_tree().create_timer(0.01).timeout
 		var item_key = item_keys[index]
 		if page_item_keys.has(item_key):
 			continue

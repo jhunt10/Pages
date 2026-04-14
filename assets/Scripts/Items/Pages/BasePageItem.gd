@@ -8,6 +8,16 @@ var page_data:Dictionary:
 func get_item_type()->ItemTypes:
 	return ItemTypes.Page
 
+func get_rarity_background()->Texture2D:
+	if ["Soldier", "Rogue", "Mage", "Priest"].has(self.get_source_title()):
+		var title = self.get_source_title()
+		var sprite_path = "res://assets/Sprites/Paper/"
+		var sprite_file = title + "_Background.png"
+		if self.get_tags().has("Passive"):
+			sprite_file = title + "_Clipped_Background.png"
+		return SpriteCache.get_sprite(sprite_path.path_join(sprite_file))
+	return super()
+
 func _init(key:String, def_load_path:String, def:Dictionary, id:String='', data:Dictionary={}) -> void:
 	super(key, def_load_path, def, id, data)
 
@@ -21,7 +31,7 @@ func get_tags()->Array:
 	if not tags.has("Page"):
 		tags.append("Page")
 	var source_title = page_data.get("SourceTitle", '')
-	if source_title and not tags.has(source_title+"Page"):
+	if source_title != '' and not tags.has(source_title+"Page"):
 		tags.append(source_title+"Page")
 	return tags
 

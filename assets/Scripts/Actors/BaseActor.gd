@@ -92,6 +92,7 @@ func reload_def(load_path:String, def:Dictionary):
 
 func _cache_after_loading_def():
 	stats.dirty_stats()
+	self.dirty_tags()
 
 var alphabet = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']
 
@@ -214,8 +215,6 @@ func on_held_items_change(item_holder_name:String, change_data:Dictionary):
 		if item.get_attack_mods().size() > 0:
 			rechache_action_mods = true
 	
-	Que.rechache_page_ammo()
-	
 	# Rebuild Item Holder Slots
 	if rebuild_slots:
 		pages._build_slots_list()
@@ -224,6 +223,8 @@ func on_held_items_change(item_holder_name:String, change_data:Dictionary):
 	validate_itemholders()
 	
 	stats.recache_stats(false)
+	Que.rechache_page_ammo()
+	self.dirty_tags()
 	
 	if rechache_action_mods:
 		pages._cache_action_mods()
@@ -244,6 +245,7 @@ func validate_itemholders():
 		if invalid_item.get_item_slots_mods().size() > 0:
 			printerr("We have a problem.")
 	Que.dirty_ammo_mods()
+	self.dirty_tags()
 
 ## Called by ItemHolders when they build slot sets.
 ## On first pass, we give all items benifit of doubt 
@@ -489,6 +491,9 @@ func get_weapon_damage_datas(weapon_filter)->Dictionary:
 		index += 1
 	return out_dict
 
+########################
+##        Mods        ##
+########################
 func get_targeting_mods()->Array:
 	var out_list = []
 	var actor_mods:Array = actor_data.get("StaticTargetMods", [])

@@ -110,6 +110,10 @@ func _load_mini_details():
 
 ## Load full details displayed when entry is exspanded
 func _load_full_details():
+	if thing_inst and thing_inst is BaseLoadObject:
+		thing_inst._cached_tags.clear()
+		thing_tags = thing_inst.get_tags()
+		tag_box.set_tags(thing_tags)
 	description_box.set_object(thing_def, thing_inst, null)
 	loaded_details = true
 	

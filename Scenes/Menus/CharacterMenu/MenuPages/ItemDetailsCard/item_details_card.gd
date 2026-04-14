@@ -179,6 +179,10 @@ func set_detail_card_item(actor:BaseActor, item:BaseItem, confirm_button_text:St
 		#tag_string += ", " + tag
 	##var tag_label_text = ("[%s]: %s" % [item.ItemKey, tag_string.trim_prefix(", ")])
 	#tag_label.text = tag_string.trim_prefix(", ")
+	
+	#DELETEME:
+	item.dirty_tags()
+	
 	tag_box.set_tags(item.get_tags())
 	default_details.hide()
 	weapon_details.hide()

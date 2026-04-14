@@ -57,7 +57,9 @@ func _load_full_details():
 	var page = ItemLibrary.get_item(page_key)
 	var page_effect_def = {}#page.get_effect_def()
 	description_box.set_page_item(page)
-	tag_box.set_tags(page.get_tags())
+	page._cached_tags.clear()
+	thing_tags = page.get_tags()
+	tag_box.set_tags(thing_tags)
 	# Ammo
 	if page and page is PageItemAction and page.has_ammo(null):
 		ammo_label.set_data(page, null)

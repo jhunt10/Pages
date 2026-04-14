@@ -27,7 +27,7 @@ enum DamageTypes {
 	set(val):
 		damage_type = val
 		#if damage_type_label:
-			#if damage_type == DamageTypes.Healing:
+			#if damage_type == DamageTypes.Heal:
 				#damage_type_label.text = DamageTypes.keys()[val]
 			#else:
 				#damage_type_label.text = DamageTypes.keys()[val] + " Dmg"

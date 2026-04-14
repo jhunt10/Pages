@@ -15,14 +15,39 @@ func get_required_props()->Dictionary:
 		# Percdnt of total damage to heal attacker
 		"LeachPercent": BaseSubAction.SubActionPropTypes.FloatVal,
 	}
+
 ## Returns Tags that are automatically added to the parent Action's Tags
 func get_action_tags(_parent_action:PageItemAction, _subaction_data:Dictionary)->Array:
 	var tags = ["Attack"]
+	# Check if inflicting attack
 	var effect_keys = _subaction_data.get("EffectKeys", [])
 	if effect_keys is String:
 		effect_keys = [effect_keys]
 	if effect_keys.size() > 0:
 		tags.push_front("Inflict")
+	
+	# Check if Weapon Attack
+	var damage_keys =  _get_damage_keys(_subaction_data)
+	if damage_keys.has("Weapon"):
+		tags.append("WpnAtk")
+	
+	if _parent_action and _parent_action.has_holding_actor():
+		var actor = _parent_action.get_holding_actor()
+		var damage_datas = _parent_action.get_damage_datas(actor, damage_keys)
+		for damage_key:String in damage_datas.keys():
+			var damage_data = damage_datas[damage_key]
+			
+			if damage_data.has("WeaponFilter"):
+				var weapons = actor.equipment.get_filtered_weapons(damage_data.get("WeaponFilter"))
+				for weapon in weapons:
+					var weapon_tags = weapon.get_tags_without_taxonomy()
+					TagHelper.merge_lists(tags, weapon_tags)
+			
+			var damage_type = damage_data.get("DamageType")
+			if not tags.has(damage_type):
+				tags.append(damage_type)
+			pass
+		
 	return tags
 
 func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, que_exe_data:QueExecutionData,
@@ -77,11 +102,7 @@ func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, que_exe_d
 	
 	# Get Damage info
 	var damage_datas = {}
-	var damage_keys =  subaction_data.get("DamageKeys", [])
-	if subaction_data.has("DamageKey"):
-		var damage_key = subaction_data.get("DamageKey")
-		if not damage_keys.has(damage_key):
-			damage_keys.append(damage_key)
+	var damage_keys =  _get_damage_keys(subaction_data)
 	if damage_keys.size() > 0:
 		damage_datas = parent_action.get_damage_datas(actor, damage_keys)
 	
@@ -168,3 +189,12 @@ func _create_weapon_missile():
 												#actor_pos, target_spot, parent_action.get_load_path())
 				#CombatRootControl.Instance.create_new_missile_node(missile)
 	pass
+
+## Gets both DamageKey and DamageKey's' propety and puts in an array
+func _get_damage_keys(subaction_data)->Array:
+	var damage_keys = subaction_data.get("DamageKeys", [])
+	if subaction_data.has("DamageKey"):
+		var damage_key = subaction_data.get("DamageKey")
+		if not damage_keys.has(damage_key):
+			damage_keys.append(damage_key)
+	return damage_keys

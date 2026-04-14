@@ -116,7 +116,7 @@ func _get_object_specific_tags()->Array:
 		if !script:
 			printerr("%s.get_tags: Failed to find SubEffect script '%s'." %[self.EffectKey, script_path])
 			continue
-		var sub_tags = script.get_effect_tags(self, sub_effect_data)
+		var sub_tags = script.get_effect_tags(sub_effect_data, self._def, self)
 		TagHelper.merge_lists(tags, sub_tags)
 	
 	if not tags.has("Action"):

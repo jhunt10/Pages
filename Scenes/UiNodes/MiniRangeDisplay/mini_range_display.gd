@@ -3,6 +3,7 @@ class_name MiniRangeDisplay
 extends Control
 
 @export var texture_rect:TextureRect
+@export var type_label:Label
 @export var update:bool = false
 
 const center_color:Color = Color.BLACK
@@ -54,6 +55,11 @@ func load_range(points:Array):
 			image.set_pixel(x, y, range_color)
 	image.set_pixelv(center, center_color)
 	texture_rect.texture = ImageTexture.create_from_image(image)
+
+func set_target_params(params:TargetParameters):
+	load_range(params.target_area.relative_points)
+	type_label.text = TargetParameters.TargetTypes.keys()[params.target_type]
+	
 
 func load_area_matrix(area:AreaMatrix):
 	var points = area.relative_points

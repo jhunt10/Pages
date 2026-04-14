@@ -9,8 +9,14 @@ func get_required_props()->Dictionary:
 		"OptionalTriggers": BaseSubEffect.SubEffectPropTypes.Triggers}
 
 ## Returns Tags that are automatically added to the parent Effect's Tags
-func get_effect_tags(_parent_effect:BaseEffect, _subeffect_data:Dictionary)->Array:
-	return ["DOT"]
+func get_effect_tags(_subeffect_data:Dictionary, _effect_def:Dictionary, _parent_effect:BaseEffect=null)->Array:
+	var tags = ["DOT"]
+	var damage_key = _subeffect_data.get("DamageKey", "")
+	var damage_data = _effect_def.get("EffectData", {}).get("DamageDatas", {}).get(damage_key)
+	var damage_type = damage_data.get("DamageType", "")
+	if damage_type == DamageEvent.DamageTypes.keys()[DamageEvent.DamageTypes.Heal]:
+		tags = ["HOT"]
+	return tags
 
 func on_effect_trigger(effect:BaseEffect, subeffect_data:Dictionary, trigger:BaseEffect.EffectTriggers, game_state:GameStateData):
 	var actor = effect.get_effected_actor()

@@ -30,7 +30,7 @@ func set_action(actor:BaseActor, page_item:BasePageItem):
 	var target_params = action.get_preview_target_params(_actor)
 	if target_params:
 		target_type_label.text = TargetParameters.TargetTypes.keys()[target_params.target_type]
-		range_display.load_area_matrix(target_params.target_area)
+		range_display.set_target_params(target_params)
 		range_display.show()
 	else:
 		range_display.hide()

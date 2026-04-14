@@ -18,9 +18,14 @@ func set_holding_actor(actor):
 	if actor_id is BaseActor:
 		actor_id = actor.Id
 	holding_actor_id = actor_id
+	self.dirty_tags()
 
 func clear_holding_actor():
 	holding_actor_id = ""
+	self.dirty_tags()
+
+func has_holding_actor()->bool:
+	return holding_actor_id != ""
 
 func get_holding_actor()->BaseActor:
 	if holding_actor_id == "":
