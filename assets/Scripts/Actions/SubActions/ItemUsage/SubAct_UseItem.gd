@@ -2,7 +2,7 @@ class_name SubAct_UseItem
 extends BaseSubAction
 ## Returns Tags that are automatically added to the parent Action's Tags
 func get_action_tags(_parent_action:PageItemAction, _subaction_data:Dictionary)->Array:
-	return ["UseItem"]
+	return []
 
 
 ## Return a of OnQueOptionsData to select the parent action is qued. 
@@ -20,7 +20,7 @@ func get_on_que_options(_parent_action:PageItemAction, _subaction_data:Dictionar
 			options.disable_options.append(false)
 	return [options]
 
-func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, que_exe_data:QueExecutionData,
+func do_thing(_parent_action:PageItemAction, _subaction_data:Dictionary, que_exe_data:QueExecutionData,
 				game_state:GameStateData, actor:BaseActor)->bool:
 	
 	var turn_data:TurnExecutionData = que_exe_data.get_current_turn_data()

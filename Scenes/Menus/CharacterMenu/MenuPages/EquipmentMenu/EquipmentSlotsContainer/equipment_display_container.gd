@@ -20,7 +20,7 @@ var _display_dir:int = 2
 var slot_displays:Dictionary:
 	get: return {
 		"PageBook": $RightEquipSlots/BookSlotButton,
-		"SupplyBag": $RightEquipSlots/BagSlotButton,
+		"Bag": $RightEquipSlots/BagSlotButton,
 		"MainHand": $LeftEquipSlots/MainHandSlotButton,
 		"OffHand": $RightEquipSlots/OffHandSlotButton,
 		"Apparel:Head": $LeftEquipSlots/HeadSlotButton,

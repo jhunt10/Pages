@@ -233,6 +233,92 @@
 		},
 		"_DefVersion": "1"
 	},
+	"DarkMissileSpell": {
+		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
+		"!ParentKey": "#BaseMissileSpell",
+		"#ObjDetails": {
+			"DisplayName": "Dark Missile",
+			"LargeIcon": "Sprites/DarkMissile_Icon.png",
+			"ObjectType": "Item",
+			"SmallIcon": "Sprites/DarkMissile_Icon.png",
+			"SnippetDesc": "Launch a Missile dealing Dark Damage",
+			"Tags": [
+				"Dark"
+			],
+			"Taxonomy": [
+				"Item",
+				"Page",
+				"Action",
+				"Spell"
+			]
+		},
+		"ActionData": {
+			"AttackDetails": {
+				"AccuracyMod": 1.0,
+				"PotencyMod": 1.0
+			},
+			"DamageDatas": {
+				"MissileDamage": {
+					"DamageType": "Dark"
+				}
+			},
+			"EffectDatas": {
+				"AttackEffect": {
+					"ApplicationChance": 0.2,
+					"EffectKey": "AilmentBlinded"
+				}
+			},
+			"MissileDatas": {
+				"Missile1": {
+					"DamageDataKey": "MissileDamage",
+					"FramesPerTile": 3.0,
+					"ImpactVfxKey": null,
+					"MissileVfxData": {
+						"AnimationName": "4_sprites_250ms_frames_loop",
+						"AnimationSpeed": 1.0,
+						"RandomOffsets": [
+							0.0,
+							0.0
+						],
+						"RandomRotation": [
+							0.0,
+							0.0
+						],
+						"Scale": [
+							1.0,
+							1.0
+						],
+						"ScenePath": "res://assets/Scripts/VFXs/MissileVfx/missile_vfx_node.tscn",
+						"SpriteName": "Missiles/DarkMissile.png",
+						"SpriteSheetHight": 2.0,
+						"SpriteSheetWidth": 2.0
+					},
+					"MissileVfxKey": ""
+				}
+			},
+			"SubActions": {
+				"SpawnMissile": {
+					"EffectKeys": [
+						"AttackEffect"
+					]
+				}
+			}
+		},
+		"ItemData": {
+			"ItemType": "Page",
+			"Rarity": "Common",
+			"Value": 50.0
+		},
+		"PageData": {
+			"PageRequirements": {
+				"ConflictingPages": [],
+				"IncompatiblePages": [],
+				"TitleReq": "None"
+			},
+			"SourceTitle": ""
+		},
+		"_DefVersion": "1"
+	},
 	"FireMeleeSpell": {
 		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
 		"!ParentKey": "#BaseMeleeSpell",

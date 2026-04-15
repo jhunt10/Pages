@@ -35,11 +35,11 @@ func _get_innate_slots_data()->Array:
 			"NeverEmpty": true,
 			"FilterData":{"RequiredTags":["PageBook"]}
 		},
-		"SupplyBag": {
-			"Key": "SupplyBag",
-			"DisplayName":"SupplyBag",
+		"Bag": {
+			"Key": "Bag",
+			"DisplayName":"Bag",
 			"Count": 1,
-			"FilterData":{"RequiredTags":["SupplyBag"]}
+			"FilterData":{"RequiredTags":["Bag"]}
 		}
 	}
 	var equipment_constraints = _actor.actor_data.get("EquipmentConstraints", {})

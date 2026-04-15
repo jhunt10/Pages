@@ -12,7 +12,7 @@ func get_required_props()->Dictionary:
 	}
 ## Returns Tags that are automatically added to the parent Action's Tags
 func get_action_tags(_parent_action:PageItemAction, _subaction_data:Dictionary)->Array:
-	return ["Targeting"]
+	return []
 
 func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, metadata:QueExecutionData,
 				game_state:GameStateData, actor:BaseActor)->bool:

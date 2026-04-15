@@ -9,9 +9,7 @@
 			"SmallIcon": "Sprites/BleedIcon.png",
 			"SnippetDesc": "Lose 3-5% Max Health after each Action",
 			"Tags": [
-				"Ailment",
-				"Phy",
-				"DOT"
+				"Ailment"
 			],
 			"Taxonomy": [
 				"Effect"
@@ -65,8 +63,7 @@
 			"SmallIcon": "Sprites/BlindIcon.png",
 			"SnippetDesc": "-50% Accuracy and -2 Awareness",
 			"Tags": [
-				"Ailment",
-				"Phy"
+				"Ailment"
 			],
 			"Taxonomy": [
 				"Effect"
@@ -123,8 +120,7 @@
 			"SmallIcon": "Sprites/DazedIcon.png",
 			"SnippetDesc": "Servery Reduce most stats and can't React. ",
 			"Tags": [
-				"Ailment",
-				"Phy"
+				"Ailment"
 			],
 			"Taxonomy": [
 				"Effect"
@@ -218,8 +214,7 @@
 			"SmallIcon": "Sprites/GreasedIcon.png",
 			"SnippetDesc": "Slippery, conductive, easy to refrigerate, and highly flamable!",
 			"Tags": [
-				"Ailment",
-				"Phy"
+				"Ailment"
 			],
 			"Taxonomy": [
 				"Effect"
@@ -299,10 +294,6 @@
 				"ShowInHud": true
 			},
 			"SubEffects": {
-				"Duration": {
-					"DurationType": "TurnEnd",
-					"SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_Duration.gd"
-				}
 			}
 		},
 		"_DefVersion": "1"

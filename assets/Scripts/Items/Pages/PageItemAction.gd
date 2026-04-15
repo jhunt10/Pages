@@ -262,7 +262,9 @@ func get_targeting_params(target_param_key, actor:BaseActor)->TargetParameters:
 				var weapon_override = _target_params.get("WeaponParamOverride")
 				param_def = BaseLoadObjectLibrary._merge_defs(param_def, weapon_override)
 			return TargetParameters.new(target_param_key, param_def)
-				
+		else:
+			printerr("%s.get_targeting_params: Requested Weapon TargetParams without an Actor.")
+			return null
 	else:
 		params = _target_params.get(target_param_key, null)
 	if !params:

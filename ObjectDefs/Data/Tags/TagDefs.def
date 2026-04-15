@@ -16,6 +16,14 @@
 		"Description": "@@#Color:Blue:Actions@@ are a type of @@#Tag:Page@@ used to preform actions in @@#Color:Red:Combat@@.",
 		"DisplayName": "Action"
 	},
+	"AttackMod": {
+		"Abreviation": "AttackMod",
+		"AppliesTo": [
+			"Page"
+		],
+		"Description": "@@#Color:Blue:AttackMod@@ implies this @@#Tag:Page@@ modifies @@#Color:Red:Attacks@@ made by other @@#Tag:Action:Action Pages@@.",
+		"DisplayName": "AttackMod"
+	},
 	"ActionMod": {
 		"Abreviation": "ActionMod",
 		"AppliesTo": [
@@ -37,7 +45,7 @@
 		"AppliesTo": [
 			"Effect"
 		],
-		"Description": "@@#Color:Blue:Ailments@@ are common @@#Tag:Debuff@@ @@#Tag:Effect:Effects@@ which damage or weaken the effected @@@Color:Red:Actor@@",
+		"Description": "@@#Color:Blue:Ailments@@ are common @@#Tag:Debuff@@ @@#Tag:Effect:Effects@@ which damage or weaken the effected @@#Color:Red:Actor@@",
 		"DisplayName": "Ailment"
 	},
 	"Ammo": {
@@ -334,6 +342,14 @@
 		],
 		"Description": "@@#Color:Blue:DmgMods@@ modify damage taken or received by an @@#Color:Red:Actor@@.",
 		"DisplayName": "DmgMod"
+	},
+	"Drink": {
+		"Abreviation": "Drink",
+		"AppliesTo": [
+			"Item"
+		],
+		"Description": "@@#Color:Blue:Drink@@ is the act of consuming a @@#Tag:Potion@@ to apply it's @@#Tag:Effect@@ to yourself.",
+		"DisplayName": "Drink"
 	},
 	"Drinkable": {
 		"Abreviation": "Drinkable",
@@ -748,6 +764,21 @@
 		"Description": "When @@#Color:Blue:Rooted@@ an @@#Color:Red:Actor@@ can not move from it's current @@#Color:Red:Spot@@. They can not take @@#Tag:Movement:Move Actions@@ or be @@#Tag:Push:Pushed@@.",
 		"DisplayName": "Rooted"
 	},
+	"Push": {
+		"Abreviation": "Push",
+		"AppliesTo": [
+			"Actor"
+		],
+		"Description": "@@#Color:Blue:Push@@ is the act of forceably moving another @@#Color:Red:Actor@@ to a different @@#Color:Red:Spot@@.",
+		"DisplayName": "Push"
+	},
+	"NO_INST": {
+		"Abreviation": "NO_INST",
+		"AppliesTo": [
+		],
+		"Description": "@@#Color:Red:DEV Tag@@ is object is being viewed with no INST inastanciated.",
+		"DisplayName": "NO_INST"
+	},
 	"Scepter": {
 		"Abreviation": "Scepter",
 		"AppliesTo": [
@@ -884,6 +915,14 @@
 		],
 		"Description": "@@#Color:Blue:StatMod@@ modify the @@#Color:Red:Stats@@ of an @@#Color:Red:Actor@@.",
 		"DisplayName": "StatMod"
+	},
+	"TargetMod": {
+		"Abreviation": "TargetMod",
+		"AppliesTo": [
+			"Page"
+		],
+		"Description": "@@#Color:Blue:TargetMod@@ modify the @@#Color:Red:Targeting@@ of @@#Tag:Action:Action Pages@@.",
+		"DisplayName": "TargetMod"
 	},
 	"Supplies": {
 		"Abreviation": "Supplies",

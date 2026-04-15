@@ -10,7 +10,7 @@ func get_required_props()->Dictionary:
 	}
 ## Returns Tags that are automatically added to the parent Action's Tags
 func get_action_tags(_parent_action:PageItemAction, _subaction_data:Dictionary)->Array:
-	return ["SpawnBeam"]
+	return ["Beam"]
 
 
 func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, que_exe_data:QueExecutionData,

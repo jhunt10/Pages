@@ -17,7 +17,7 @@ extends BaseCharacterSubMenu
 var slot_button_mapping:Dictionary:
 	get: return {
 		"PageBook:0": $EquipmentSlotsControl/RightEquipSlots/PageBook_EquipmentSlotButton,
-		"SupplyBag:0": $EquipmentSlotsControl/RightEquipSlots/SupplyBag_EquipmentSlotButton,
+		"Bag:0": $EquipmentSlotsControl/RightEquipSlots/SupplyBag_EquipmentSlotButton,
 		"Hands:0": $EquipmentSlotsControl/LeftEquipSlots/Hand_EquipmentSlotButton,
 		"Hands:1": $EquipmentSlotsControl/RightEquipSlots/Hand2_EquipmentSlotButton,
 		"Apparel:Head:0": $EquipmentSlotsControl/LeftEquipSlots/Head_EquipmentSlotButton,

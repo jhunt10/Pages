@@ -2,7 +2,14 @@ class_name SubAct_CreateZone
 extends BaseSubAction
 
 func get_action_tags(_parent_action:PageItemAction, _subaction_data:Dictionary)->Array:
-	return ["SpawnZone"]
+	var tags = ["Zone"]
+	var zone_data_key = _subaction_data.get("ZoneDataKey")
+	var zone_data = _parent_action.get_zone_data(zone_data_key)
+	if zone_data.has("InZoneEffectKey"):
+		var inzone_effect_data_key = zone_data.get("InZoneEffectDataKey")
+		var sub_effect_tags = EffectLibrary._get_tags_for_effect_def(inzone_effect_data_key)
+		TagHelper.merge_lists(tags, sub_effect_tags)
+	return tags
 
 func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, que_exe_data:QueExecutionData,
 				game_state:GameStateData, actor:BaseActor)->bool:

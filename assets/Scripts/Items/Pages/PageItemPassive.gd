@@ -15,11 +15,24 @@ func get_effect_def():
 		return EffectLibrary.get_merged_effect_def(effect_key, effect_data)
 	return null
 
-func get_tags()->Array:
-	var tags = []
-	tags = super()
-	if not tags.has("Passive"):
-		tags.append("Passive")
+func _get_object_specific_tags()->Array:
+	var tags = ["Passive"]
+	#if page_data.get("ItemSlotsMods", {}).size() > 0:
+		#tags.append("HandMod")
+	if page_data.get("HandConditionMods", {}).size() > 0:
+		tags.append("HandMod")
+	if page_data.get("StatMods", {}).size() > 0:
+		tags.append("StatMod")
+	if page_data.get("TargetMods", {}).size() > 0:
+		tags.append("TargetMod")
+	if page_data.get("AmmoMods", {}).size() > 0:
+		tags.append("AmmoMod")
+	if page_data.get("AttackMods", {}).size() > 0:
+		tags.append("AttackMod")
+	if page_data.get("DamageMods", {}).size() > 0:
+		tags.append("HandMod")
+	if page_data.get("WeaponMods", {}).size() > 0:
+		tags.append("WpnMod")
 	return tags
 
 func get_action_mods()->Dictionary:

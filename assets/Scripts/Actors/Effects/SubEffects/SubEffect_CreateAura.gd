@@ -8,8 +8,17 @@ func get_required_props()->Dictionary:
 
 ## Returns Tags that are automatically added to the parent Effect's Tags
 func get_effect_tags(_subeffect_data:Dictionary, _effect_def:Dictionary, _parent_effect:BaseEffect=null)->Array:
-	#var zone_data_key = subeffect_data.get("ZoneDataKey")
-	return ["Aura"]
+	#var zone_data_key = subef
+	var tags = ["Aura"]
+	var effect_data = _effect_def.get("EffectData", {})
+	var zone_data_key = _subeffect_data.get("ZoneDataKey")
+	var zone_data = effect_data.get("ZoneDatas", {}).get(zone_data_key, {})
+	if zone_data.has("InZoneEffectDataKey"):
+		var inzone_effect_data_key = zone_data.get("InZoneEffectDataKey")
+		var inzone_effect_key = effect_data.get("NestedEffectDatas", {}).get(inzone_effect_data_key, {}).get("EffectKey")
+		var sub_effect_tags = EffectLibrary._get_tags_for_effect_def(inzone_effect_key)
+		TagHelper.merge_lists(tags, sub_effect_tags)
+	return tags
 
 func get_triggers(_effect:BaseEffect, _subeffect_data:Dictionary)->Array:
 	return [BaseEffect.EffectTriggers.OnCreate]

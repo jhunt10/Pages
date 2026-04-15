@@ -77,7 +77,7 @@
 		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
 		"#ObjDetails": {
 			"Description": "Select an item from your bag and use it on yourself.",
-			"DisplayName": "Use Item",
+			"DisplayName": "#Base Use Item",
 			"LargeIcon": "Sprites/UseItemIcon.png",
 			"ObjectType": "Item",
 			"SmallIcon": "Sprites/UseItemIcon.png",
@@ -216,7 +216,9 @@
 			"ObjectType": "Item",
 			"SmallIcon": "Sprites/Potion_Icon.png",
 			"SnippetDesc": "Drink a Potion from your bag.",
-			"Tags": [],
+			"Tags": [
+				"Drink"
+			],
 			"Taxonomy": [
 				"Item",
 				"Page",

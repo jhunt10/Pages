@@ -3,7 +3,7 @@ extends BaseCharacterMenu_ItemSlotButton
 
 var default_icons_paths:Dictionary = {
 	"PageBook": "res://assets/Sprites/UI/CharacterEdit/BookSlot.png",
-	"SupplyBag": "res://assets/Sprites/UI/CharacterEdit/BagSlot.png",
+	"Bag": "res://assets/Sprites/UI/CharacterEdit/BagSlot.png",
 	"Hands": "res://assets/Sprites/UI/CharacterEdit/MainHandSlot.png",
 	"Hands:1": "res://assets/Sprites/UI/CharacterEdit/OffHandSlot.png",
 	"Apparel:Head": "res://assets/Sprites/UI/CharacterEdit/HeadSlot.png",

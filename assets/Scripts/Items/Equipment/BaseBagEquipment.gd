@@ -5,7 +5,7 @@ func get_equipment_slot_type()->String:
 	return "Bag"
 
 func _get_object_specific_tags()->Array:
-	var tag_list = ["SupplyBag"]
+	var tag_list = ["Bag"]
 	TagHelper.merge_lists(tag_list, super())
 	return tag_list
 

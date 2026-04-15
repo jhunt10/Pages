@@ -11,18 +11,20 @@ func get_required_props()->Dictionary:
 	}
 ## Returns Tags that are automatically added to the parent Action's Tags
 func get_action_tags(parent_action:PageItemAction, subaction_data:Dictionary)->Array:
+	var tags = []
 	var target_param_key = subaction_data.get("TargetParamKey", "")
 	if target_param_key == "Self":
-		return ["Self"]
-	
-	var target_params = parent_action.get_targeting_params(target_param_key, parent_action.get_holding_actor())
-	if !target_params:
-		return []
-	var tags = []
-	if target_params.has_area_of_effect():
-		tags.append("AOE")
-	if target_params.line_of_sight:
-		tags.append("LOS")
+		tags.append("Self")
+	elif target_param_key == "Weapon" and not parent_action.has_holding_actor():
+		# Weapon Attack with no actor
+		pass
+	else:
+		var target_params = parent_action.get_targeting_params(target_param_key, parent_action.get_holding_actor())
+		if target_params:
+			if target_params.has_area_of_effect():
+				tags.append("AOE")
+			if target_params.line_of_sight:
+				tags.append("LOS")
 	return tags
 
 func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, metadata:QueExecutionData,

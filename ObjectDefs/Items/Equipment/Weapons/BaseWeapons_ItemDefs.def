@@ -3,7 +3,7 @@
 		"!ObjectScript": "res://assets/Scripts/Items/Equipment/Tools/BaseWeaponEquipment.gd",
 		"#ObjDetails": {
 			"Description": "Weapon Description",
-			"DisplayName": "#Base Base Weapon",
+			"DisplayName": "#Base Melee Weapon",
 			"LargeIcon": "Sprites/BaseSword_Icon.png",
 			"ObjectType": "Item",
 			"SmallIcon": "Sprites/BaseSword_Icon.png",
@@ -85,9 +85,9 @@
 		"#ObjDetails": {
 			"Description": "A basic Base Range Weapon for pelting foes.",
 			"DisplayName": "#Base Range Weapon",
-			"LargeIcon": "Sprites/BasicWand_Icon.png",
+			"LargeIcon": "Sprites/BaseBow_Icon.png",
 			"ObjectType": "Item",
-			"SmallIcon": "Sprites/BasicWand_Icon.png",
+			"SmallIcon": "Sprites/BaseBow_Icon.png",
 			"SnippetDesc": "a wand.",
 			"Tags": [
 				"Weapon",
@@ -146,7 +146,7 @@
 				"AttackTags": [
 					"Weapon",
 					"Range",
-					"Magic"
+					"Magical"
 				],
 				"DamageDatas": {
 					"WeaponDamage": {
@@ -236,7 +236,7 @@
 				"AttackTags": [
 					"Weapon",
 					"Range",
-					"Magic"
+					"Magical"
 				],
 				"DamageDatas": {
 					"WeaponDamage": {
@@ -326,7 +326,7 @@
 				"AttackTags": [
 					"Weapon",
 					"Range",
-					"Magic"
+					"Magical"
 				],
 				"DamageDatas": {
 					"WeaponDamage": {
