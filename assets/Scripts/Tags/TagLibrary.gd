@@ -8,14 +8,17 @@ static var _tags_defs:Dictionary={}
 static var loaded = false
 
 
+static  func list_all_tags()->Array:
+	if !loaded:
+		load_tag_defs()
+	return _tags_defs.keys()
+
 static func has_tag(tag)->bool:
-	loaded = false
 	if !loaded:
 		load_tag_defs()
 	return _tags_defs.keys().has(tag)
 
 static func get_tag_display_name(tag)->String:
-	loaded = false
 	if !loaded:
 		load_tag_defs()
 	if _tags_defs.keys().has(tag):
@@ -25,7 +28,6 @@ static func get_tag_display_name(tag)->String:
 	return tag
 
 static func get_tag_description(tag)->String:
-	loaded = false
 	if !loaded:
 		load_tag_defs()
 	if _tags_defs.keys().has(tag):
@@ -44,7 +46,7 @@ static func reload_tags():
 static func load_tag_defs():
 	if loaded:
 		return
-	if LOGGING: print("### Loading Tags")
+	print("### Loading Tags ###")
 	for file in search_for_tag_files():
 		if LOGGING: print('# Checking File: ' + file)
 		var loading_tags_data = parse_tags_datas_from_file(file)

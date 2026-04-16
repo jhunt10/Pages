@@ -1,9 +1,10 @@
 @tool
 extends Control
 
-@export var do_test:bool:
+@export var do_test_too:bool:
 	set(val):
 		#FileStructureBuilder.create_class_def_files("Priest")
+		print("\nSanity Check")
 		FileStructureBuilder.DoThing()
 		#var arr = []
 		#for y in range(-4,5):
@@ -58,6 +59,7 @@ func calc_val(x)->Vector2:
 
 
 func _ready() -> void:
+	do_test_too = true
 	slider.value_changed.connect(on_slider)
 
 func _process(delta: float) -> void:

@@ -7,10 +7,10 @@ class_name FileStructureBuilder
 
 
 static func DoThing():
-	#print("\nSanity Check")
+	print("\nSanity Check")
 	#format_def_files()
 	#update_def_files()
-	get_frame_timing_from_files()
+	tags_check()
 	#build_mermaid_def_chart()
 	#create_class_def_files("Rogue")
 	#rename_test_files()
@@ -18,6 +18,27 @@ static func DoThing():
 	#intake_descriptions()
 	#build_gd_tree()
 	pass
+
+## Get all tags from everything and output tags that aren't in TagsDef 
+static func tags_check():
+	var all_defs = get_all_defs()
+	var known_tags = TagsLibrary.list_all_tags()
+	
+	var unknown_tags = []
+	for def_key:String in all_defs:
+		var def = all_defs[def_key]
+		var object_tags = def.get("#ObjDetails", {}).get("Tags", [])
+		var effect_added_tags = def.get("EffectData", {}).get("EffectDetails", {}).get("AddTagsToActor", [])
+		TagHelper.merge_lists(object_tags, effect_added_tags)
+		var passive_page_tags = def.get("PageData", {}).get("AddTags", [])
+		TagHelper.merge_lists(object_tags, passive_page_tags)
+		
+		for tag in object_tags:
+			if not known_tags.has(tag) and not unknown_tags.has(tag):
+				unknown_tags.append(tag)
+	print("Unknown Tags")
+	print(unknown_tags)
+	
 
 static func output_descriptions():
 	var all_defs = get_all_defs()
