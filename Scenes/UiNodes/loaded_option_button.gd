@@ -4,6 +4,7 @@ extends OptionButton
 @export var allways_show_none:bool = false
 @export var show_selected_icon:bool = false
 @export var no_option_text:String = '-None-'
+@export var alphabatize:bool = false
 var get_options_func:Callable
 var get_icons_func:Callable
 
@@ -51,6 +52,8 @@ func load_options(force_option:String=''):
 	
 	var options = get_options_func.call()
 	if options.size() > 0:
+		if alphabatize:
+			options.sort()
 		for option in options:
 			self.add_item(option)
 			if icons.keys().has(option):

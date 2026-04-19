@@ -6,9 +6,16 @@ var _flash_text_shown:bool = false
 var _flash_text_value:String
 var _flash_text_color:Color
 
+@export var audio_player:AudioStreamPlayer2D
+
 func _on_start():
 	super()
 	_use_flash_text = _data.has("DamageNumber")
+	var sound_effect = _data.get("SFXFilePath")
+	if sound_effect:
+		audio_player.stream = load(sound_effect)
+		audio_player.play()
+	
 	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

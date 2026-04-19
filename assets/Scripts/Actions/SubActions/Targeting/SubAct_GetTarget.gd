@@ -19,7 +19,7 @@ func get_action_tags(parent_action:PageItemAction, subaction_data:Dictionary)->A
 		# Weapon Attack with no actor
 		pass
 	else:
-		var target_params = parent_action.get_targeting_params(target_param_key, parent_action.get_holding_actor())
+		var target_params = _get_target_params(parent_action, parent_action.get_holding_actor(), subaction_data)
 		if target_params:
 			if target_params.has_area_of_effect():
 				tags.append("AOE")
@@ -35,8 +35,9 @@ func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, metadata:
 	if turn_data.has_target(setting_target_key):
 		return BaseSubAction.Success
 	
+	# Get Targeting Params
 	var target_param_key = subaction_data.get("TargetParamKey", "")
-	var target_params = parent_action.get_targeting_params(target_param_key, actor)
+	var target_params = _get_target_params(parent_action, actor, subaction_data, metadata, game_state)
 	if !target_params:
 		return BaseSubAction.Failed
 	
@@ -45,7 +46,6 @@ func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, metadata:
 		turn_data.add_target_for_key(setting_target_key, target_params.target_param_key, actor.Id,)
 		return BaseSubAction.Success
 	
-	# Get Targeting Params
 	#var actor_pos = game_state.get_actor_pos(actor)
 	var allow_dups = subaction_data.get("AllowAlreadyTargeted", false)
 	var allow_auto = subaction_data.get("AllowAutoTarget", false)
@@ -97,3 +97,13 @@ func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, metadata:
 		"AllowLockon": allow_auto
 	})
 	return BaseSubAction.Success
+
+func _get_target_params(
+		parent_action:PageItemAction, 
+		actor:BaseActor, 
+		subaction_data:Dictionary, 
+		metadata:QueExecutionData = null, 
+		game_state:GameStateData = null
+	)->TargetParameters:
+	var target_param_key = subaction_data.get("TargetParamKey", "")
+	return parent_action.get_targeting_params(target_param_key, actor)

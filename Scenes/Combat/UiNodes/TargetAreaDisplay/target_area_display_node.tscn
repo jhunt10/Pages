@@ -1,6 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://bpurspf6xbf1h"]
+[gd_scene format=3 uid="uid://bpurspf6xbf1h"]
 
-[ext_resource type="Script" path="res://Scenes/Combat/target_area_display_node.gd" id="1_frdlp"]
+[ext_resource type="Script" uid="uid://c7w66fjn0qon3" path="res://Scenes/Combat/target_area_display_node.gd" id="1_frdlp"]
 [ext_resource type="Texture2D" uid="uid://bethv8mo5j28j" path="res://assets/Sprites/TileSets/TargetingTileSet.png" id="2_f0l3k"]
 [ext_resource type="Texture2D" uid="uid://cu57eclns8slb" path="res://assets/Sprites/TileSets/TargetAreaEffectDotted.png" id="3_yhgng"]
 
@@ -368,11 +368,11 @@ sources/2 = SubResource("TileSetAtlasSource_nkn2v")
 
 [sub_resource type="TileSet" id="TileSet_lvs5x"]
 
-[node name="TargetAreaDisplayNode" type="Node2D"]
+[node name="TargetAreaDisplayNode" type="Node2D" unique_id=2022217219]
 script = ExtResource("1_frdlp")
 
-[node name="TargetAreaTileMap" type="TileMapLayer" parent="."]
+[node name="TargetAreaTileMap" type="TileMapLayer" parent="." unique_id=130315933]
 tile_set = SubResource("TileSet_hpguw")
 
-[node name="EffectAreaTileMap" type="TileMapLayer" parent="."]
+[node name="EffectAreaTileMap" type="TileMapLayer" parent="." unique_id=1536271387]
 tile_set = SubResource("TileSet_lvs5x")

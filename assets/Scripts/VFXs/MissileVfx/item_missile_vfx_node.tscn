@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://dbyloyjtmrsh0"]
+[gd_scene format=3 uid="uid://dbyloyjtmrsh0"]
 
-[ext_resource type="Script" path="res://assets/Scripts/VFXs/MissileVfx/item_missile_vfx_node.gd" id="1_haudt"]
+[ext_resource type="Script" uid="uid://tha4wrh0j0ly" path="res://assets/Scripts/VFXs/MissileVfx/item_missile_vfx_node.gd" id="1_haudt"]
 [ext_resource type="Texture2D" uid="uid://daog4fwvhwp1c" path="res://ObjectDefs/Items/Supplies/Potions/HealthPotions/Sprites/HealthPotion_L_S.png" id="2_dfwfd"]
+[ext_resource type="Animation" uid="uid://472xpagtggry" path="res://assets/Scripts/VFXs/MissileVfx/fade_out.res" id="3_lvjxv"]
 
 [sub_resource type="Animation" id="Animation_4or1w"]
 length = 0.001
@@ -36,21 +37,20 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_3vpeu"]
 _data = {
-"RESET": SubResource("Animation_4or1w"),
-"thrown_rotation_animation": SubResource("Animation_5heym")
+&"RESET": SubResource("Animation_4or1w"),
+&"fade_out": ExtResource("3_lvjxv"),
+&"thrown_rotation_animation": SubResource("Animation_5heym")
 }
 
-[node name="ItemMissileVfxNode" type="Node2D" node_paths=PackedStringArray("sprite", "animation")]
+[node name="ItemMissileVfxNode" type="Node2D" unique_id=1071950805 node_paths=PackedStringArray("sprite", "animation")]
 z_index = 9
 script = ExtResource("1_haudt")
 sprite = NodePath("Sprite2D")
 animation = NodePath("AnimationPlayer")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1542608335]
 texture = ExtResource("2_dfwfd")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_3vpeu")
-}
-autoplay = "thrown_rotation_animation"
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=567133696]
+libraries/ = SubResource("AnimationLibrary_3vpeu")
+autoplay = &"thrown_rotation_animation"

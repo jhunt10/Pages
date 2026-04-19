@@ -24,7 +24,7 @@ func use_in_combat(actor:BaseActor, target, game_state:GameStateData):
 		printerr("AoeAttackItem.use_in_combat: No AttackData found on '%s'" % [self.Id])
 		return
 	
-	var target_params = TargetParameters.new("AtkItemTargetParams", attack_data.get("TargetParams", {}))
+	var target_params = get_target_params()
 	if target_params.has_area_of_effect():
 		target_actors = TargetingHelper.get_targeted_actors(target_params, [center_pos], actor, game_state)
 	
@@ -52,3 +52,7 @@ func use_in_combat(actor:BaseActor, target, game_state:GameStateData):
 		center_pos
 	)
 	pass
+
+func get_target_params()->TargetParameters:
+	var attack_data:Dictionary = supply_item_data.get("AttackData", {})
+	return TargetParameters.new("AtkItemTargetParams", attack_data.get("TargetParams", {}))

@@ -1,20 +1,20 @@
-[gd_scene load_steps=14 format=3 uid="uid://cxyi2xhtt1gqa"]
+[gd_scene format=3 uid="uid://cxyi2xhtt1gqa"]
 
-[ext_resource type="Script" path="res://Scenes/DevTools/dev_tools_menu.gd" id="1_mof5q"]
-[ext_resource type="Script" path="res://Scenes/UiNodes/back_patch_container.gd" id="2_fwuqo"]
+[ext_resource type="Script" uid="uid://bqqws0d0hd2wu" path="res://Scenes/DevTools/dev_tools_menu.gd" id="1_mof5q"]
+[ext_resource type="Script" uid="uid://b82mb4dyp17ng" path="res://Scenes/UiNodes/back_patch_container.gd" id="2_fwuqo"]
 [ext_resource type="Texture2D" uid="uid://ccwj8ucsjhl6w" path="res://assets/Sprites/UI/BackPatches/Patch_64_12_Dark.png" id="3_nl2n8"]
-[ext_resource type="Script" path="res://Scenes/DevTools/add_item_menu.gd" id="4_qh0dk"]
-[ext_resource type="Script" path="res://Scenes/UiNodes/loaded_option_button.gd" id="5_jorv4"]
-[ext_resource type="Script" path="res://Scenes/DevTools/def_data_menu.gd" id="6_4bb3b"]
-[ext_resource type="Script" path="res://Scenes/DevTools/objects_counts_menu.gd" id="6_8b7ua"]
-[ext_resource type="Script" path="res://Scenes/DevTools/aggro_menu.gd" id="6_sbyrl"]
-[ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/full_stat_display_control.gd" id="7_0vmvo"]
-[ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/StatsMenuPage/stat_entry_container.gd" id="8_i3k5e"]
+[ext_resource type="Script" uid="uid://bbs00nkecwvb" path="res://Scenes/DevTools/add_item_menu.gd" id="4_qh0dk"]
+[ext_resource type="Script" uid="uid://2nyf6hw42mrd" path="res://Scenes/UiNodes/loaded_option_button.gd" id="5_jorv4"]
+[ext_resource type="Script" uid="uid://lbg774okx078" path="res://Scenes/DevTools/def_data_menu.gd" id="6_4bb3b"]
+[ext_resource type="Script" uid="uid://db3jasby2uaf7" path="res://Scenes/DevTools/objects_counts_menu.gd" id="6_8b7ua"]
+[ext_resource type="Script" uid="uid://b3j6ksugp1uoi" path="res://Scenes/DevTools/aggro_menu.gd" id="6_sbyrl"]
+[ext_resource type="Script" uid="uid://jx07xbd35ygl" path="res://Scenes/Menus/CharacterMenu/full_stat_display_control.gd" id="7_0vmvo"]
+[ext_resource type="Script" uid="uid://b0fnr4p62cac2" path="res://Scenes/Menus/CharacterMenu/MenuPages/StatsMenuPage/stat_entry_container.gd" id="8_i3k5e"]
 [ext_resource type="Texture2D" uid="uid://51dfjr6b84bj" path="res://assets/Sprites/UI/BackPatches/PaperPatch_Big_184x128_32.png" id="8_o0se7"]
 [ext_resource type="Theme" uid="uid://dwinll8pgdjhc" path="res://Scenes/Themes/standard_theme.tres" id="9_deqg2"]
 [ext_resource type="PackedScene" uid="uid://ybkww8wk3awm" path="res://Scenes/UiNodes/StatLabelContainer/stat_label_container.tscn" id="10_vneaf"]
 
-[node name="DevToolsMenu" type="Control" node_paths=PackedStringArray("close_button", "reload_stuff_button", "create_page_items_button", "items_to_inventory_button", "add_item_menu_button", "add_xp_menu_button", "unlock_actor_records_button", "add_item_menu")]
+[node name="DevToolsMenu" type="Control" unique_id=865281966 node_paths=PackedStringArray("close_button", "reload_stuff_button", "create_page_items_button", "items_to_inventory_button", "add_item_menu_button", "add_xp_menu_button", "unlock_actor_records_button", "add_item_menu")]
 z_index = 999
 z_as_relative = false
 layout_mode = 3
@@ -33,16 +33,16 @@ add_xp_menu_button = NodePath("BackPatchContainer/BoxContainer/AddXpMenuButton")
 unlock_actor_records_button = NodePath("BackPatchContainer/BoxContainer/UnlockActorsButton")
 add_item_menu = NodePath("AddItemMenu")
 
-[node name="BackPatchContainer" type="Container" parent="." node_paths=PackedStringArray("background", "inner_container")]
-custom_minimum_size = Vector2(302, 266)
+[node name="BackPatchContainer" type="Container" parent="." unique_id=31831404 node_paths=PackedStringArray("background", "inner_container")]
+custom_minimum_size = Vector2(301, 266)
 layout_mode = 0
-offset_right = 302.0
+offset_right = 301.0
 offset_bottom = 266.0
 script = ExtResource("2_fwuqo")
 background = NodePath("NinePatchRect")
 inner_container = NodePath("BoxContainer")
 
-[node name="NinePatchRect" type="NinePatchRect" parent="BackPatchContainer"]
+[node name="NinePatchRect" type="NinePatchRect" parent="BackPatchContainer" unique_id=1163924444]
 layout_mode = 2
 texture = ExtResource("3_nl2n8")
 patch_margin_left = 12
@@ -50,60 +50,60 @@ patch_margin_top = 12
 patch_margin_right = 12
 patch_margin_bottom = 12
 
-[node name="BoxContainer" type="BoxContainer" parent="BackPatchContainer"]
+[node name="BoxContainer" type="BoxContainer" parent="BackPatchContainer" unique_id=261773399]
 layout_mode = 2
 vertical = true
 
-[node name="TitleContainer" type="HBoxContainer" parent="BackPatchContainer/BoxContainer"]
+[node name="TitleContainer" type="HBoxContainer" parent="BackPatchContainer/BoxContainer" unique_id=262071131]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="BackPatchContainer/BoxContainer/TitleContainer"]
+[node name="Label" type="Label" parent="BackPatchContainer/BoxContainer/TitleContainer" unique_id=543147722]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Dev Tools"
 
-[node name="ExitButton" type="Button" parent="BackPatchContainer/BoxContainer/TitleContainer"]
+[node name="ExitButton" type="Button" parent="BackPatchContainer/BoxContainer/TitleContainer" unique_id=552677080]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 text = "X"
 
-[node name="ReloadStuffButton" type="Button" parent="BackPatchContainer/BoxContainer"]
+[node name="ReloadStuffButton" type="Button" parent="BackPatchContainer/BoxContainer" unique_id=1165856362]
 layout_mode = 2
 text = "Reload Stuff"
 
-[node name="DoThingButton" type="Button" parent="BackPatchContainer/BoxContainer"]
+[node name="DoThingButton" type="Button" parent="BackPatchContainer/BoxContainer" unique_id=325939022]
 layout_mode = 2
 text = "Do the Thing"
 
-[node name="AddItemsToInventoryButton" type="Button" parent="BackPatchContainer/BoxContainer"]
+[node name="AddItemsToInventoryButton" type="Button" parent="BackPatchContainer/BoxContainer" unique_id=461477887]
 layout_mode = 2
 text = "Add one of every Item to Inventory"
 
-[node name="AddItemMenuButton" type="Button" parent="BackPatchContainer/BoxContainer"]
+[node name="AddItemMenuButton" type="Button" parent="BackPatchContainer/BoxContainer" unique_id=1081364216]
 layout_mode = 2
 text = "Add Item"
 
-[node name="AddXpMenuButton" type="Button" parent="BackPatchContainer/BoxContainer"]
+[node name="AddXpMenuButton" type="Button" parent="BackPatchContainer/BoxContainer" unique_id=975128546]
 layout_mode = 2
 text = "Add 100xp to All Party"
 
-[node name="UnlockActorsButton" type="Button" parent="BackPatchContainer/BoxContainer"]
+[node name="UnlockActorsButton" type="Button" parent="BackPatchContainer/BoxContainer" unique_id=198711959]
 layout_mode = 2
 text = "Unlock all Actor Records"
 
-[node name="AddItemMenu" type="Control" parent="." node_paths=PackedStringArray("close_button", "item_options_button", "spinner", "confirm_button")]
+[node name="AddItemMenu" type="Control" parent="." unique_id=609032139 node_paths=PackedStringArray("close_button", "item_options_button", "spinner", "confirm_button")]
 anchors_preset = 0
-offset_left = 830.0
-offset_top = 437.0
-offset_right = 870.0
-offset_bottom = 477.0
+offset_left = 4.0
+offset_top = 269.0
+offset_right = 44.0
+offset_bottom = 309.0
 script = ExtResource("4_qh0dk")
 close_button = NodePath("BackPatch/BoxContainer/TitleContainer/ExitButton")
 item_options_button = NodePath("BackPatch/BoxContainer/LoadedOptionButton")
 spinner = NodePath("BackPatch/BoxContainer/HBoxContainer/SpinBox")
 confirm_button = NodePath("BackPatch/BoxContainer/HBoxContainer/AddItemButton")
 
-[node name="BackPatch" type="Container" parent="AddItemMenu" node_paths=PackedStringArray("background", "inner_container")]
+[node name="BackPatch" type="Container" parent="AddItemMenu" unique_id=1944676430 node_paths=PackedStringArray("background", "inner_container")]
 custom_minimum_size = Vector2(224, 135)
 layout_mode = 0
 offset_right = 224.0
@@ -112,7 +112,7 @@ script = ExtResource("2_fwuqo")
 background = NodePath("NinePatchRect")
 inner_container = NodePath("BoxContainer")
 
-[node name="NinePatchRect" type="NinePatchRect" parent="AddItemMenu/BackPatch"]
+[node name="NinePatchRect" type="NinePatchRect" parent="AddItemMenu/BackPatch" unique_id=1290558259]
 layout_mode = 2
 texture = ExtResource("3_nl2n8")
 patch_margin_left = 12
@@ -120,41 +120,42 @@ patch_margin_top = 12
 patch_margin_right = 12
 patch_margin_bottom = 12
 
-[node name="BoxContainer" type="BoxContainer" parent="AddItemMenu/BackPatch"]
+[node name="BoxContainer" type="BoxContainer" parent="AddItemMenu/BackPatch" unique_id=1397375287]
 layout_mode = 2
 vertical = true
 
-[node name="TitleContainer" type="HBoxContainer" parent="AddItemMenu/BackPatch/BoxContainer"]
+[node name="TitleContainer" type="HBoxContainer" parent="AddItemMenu/BackPatch/BoxContainer" unique_id=1573443863]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="AddItemMenu/BackPatch/BoxContainer/TitleContainer"]
+[node name="Label" type="Label" parent="AddItemMenu/BackPatch/BoxContainer/TitleContainer" unique_id=1485561158]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Add Item"
 
-[node name="ExitButton" type="Button" parent="AddItemMenu/BackPatch/BoxContainer/TitleContainer"]
+[node name="ExitButton" type="Button" parent="AddItemMenu/BackPatch/BoxContainer/TitleContainer" unique_id=640705377]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 text = "X"
 
-[node name="LoadedOptionButton" type="OptionButton" parent="AddItemMenu/BackPatch/BoxContainer"]
+[node name="LoadedOptionButton" type="OptionButton" parent="AddItemMenu/BackPatch/BoxContainer" unique_id=2051233336]
 custom_minimum_size = Vector2(200, 40)
 layout_mode = 2
 script = ExtResource("5_jorv4")
+alphabatize = true
 
-[node name="HBoxContainer" type="HBoxContainer" parent="AddItemMenu/BackPatch/BoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="AddItemMenu/BackPatch/BoxContainer" unique_id=735177877]
 layout_mode = 2
 
-[node name="SpinBox" type="SpinBox" parent="AddItemMenu/BackPatch/BoxContainer/HBoxContainer"]
+[node name="SpinBox" type="SpinBox" parent="AddItemMenu/BackPatch/BoxContainer/HBoxContainer" unique_id=353181629]
 layout_mode = 2
 size_flags_horizontal = 3
 value = 1.0
 
-[node name="AddItemButton" type="Button" parent="AddItemMenu/BackPatch/BoxContainer/HBoxContainer"]
+[node name="AddItemButton" type="Button" parent="AddItemMenu/BackPatch/BoxContainer/HBoxContainer" unique_id=1477280544]
 layout_mode = 2
 text = "Add Item"
 
-[node name="DefDataMenu" type="Control" parent="." node_paths=PackedStringArray("instance_selector_button", "def_box", "data_box", "stats_box")]
+[node name="DefDataMenu" type="Control" parent="." unique_id=1153891294 node_paths=PackedStringArray("instance_selector_button", "def_box", "data_box", "stats_box")]
 anchors_preset = 0
 offset_left = 300.0
 offset_right = 340.0
@@ -165,7 +166,7 @@ def_box = NodePath("BackPatch/BoxContainer/TabContainer/Def")
 data_box = NodePath("BackPatch/BoxContainer/TabContainer/Data")
 stats_box = NodePath("BackPatch/BoxContainer/TabContainer/Stats")
 
-[node name="BackPatch" type="Container" parent="DefDataMenu" node_paths=PackedStringArray("background", "inner_container")]
+[node name="BackPatch" type="Container" parent="DefDataMenu" unique_id=182450090 node_paths=PackedStringArray("background", "inner_container")]
 custom_minimum_size = Vector2(524, 624)
 layout_mode = 0
 offset_right = 524.0
@@ -174,7 +175,7 @@ script = ExtResource("2_fwuqo")
 background = NodePath("NinePatchRect")
 inner_container = NodePath("BoxContainer")
 
-[node name="NinePatchRect" type="NinePatchRect" parent="DefDataMenu/BackPatch"]
+[node name="NinePatchRect" type="NinePatchRect" parent="DefDataMenu/BackPatch" unique_id=505719294]
 layout_mode = 2
 texture = ExtResource("3_nl2n8")
 patch_margin_left = 12
@@ -182,55 +183,56 @@ patch_margin_top = 12
 patch_margin_right = 12
 patch_margin_bottom = 12
 
-[node name="BoxContainer" type="BoxContainer" parent="DefDataMenu/BackPatch"]
+[node name="BoxContainer" type="BoxContainer" parent="DefDataMenu/BackPatch" unique_id=1577306141]
 custom_minimum_size = Vector2(500, 600)
 layout_mode = 2
 theme_override_constants/separation = 10
 vertical = true
 
-[node name="HBoxContainer" type="HBoxContainer" parent="DefDataMenu/BackPatch/BoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="DefDataMenu/BackPatch/BoxContainer" unique_id=1825475923]
 layout_mode = 2
 
-[node name="LoadedOptionButton" type="OptionButton" parent="DefDataMenu/BackPatch/BoxContainer/HBoxContainer"]
+[node name="LoadedOptionButton" type="OptionButton" parent="DefDataMenu/BackPatch/BoxContainer/HBoxContainer" unique_id=471693511]
 layout_mode = 2
 size_flags_horizontal = 3
 selected = 0
 item_count = 1
 popup/item_0/text = "Object_Key:ObjectResourceId"
+popup/item_0/id = 0
 script = ExtResource("5_jorv4")
 
-[node name="VSeparator" type="VSeparator" parent="DefDataMenu/BackPatch/BoxContainer/HBoxContainer"]
+[node name="VSeparator" type="VSeparator" parent="DefDataMenu/BackPatch/BoxContainer/HBoxContainer" unique_id=794329718]
 visible = false
 modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="ExitButton" type="Button" parent="DefDataMenu/BackPatch/BoxContainer/HBoxContainer"]
+[node name="ExitButton" type="Button" parent="DefDataMenu/BackPatch/BoxContainer/HBoxContainer" unique_id=1919644829]
 visible = false
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 text = "X"
 
-[node name="TabContainer" type="TabContainer" parent="DefDataMenu/BackPatch/BoxContainer"]
+[node name="TabContainer" type="TabContainer" parent="DefDataMenu/BackPatch/BoxContainer" unique_id=1084662893]
 layout_mode = 2
 size_flags_vertical = 3
 current_tab = 2
 
-[node name="Def" type="RichTextLabel" parent="DefDataMenu/BackPatch/BoxContainer/TabContainer"]
+[node name="Def" type="RichTextLabel" parent="DefDataMenu/BackPatch/BoxContainer/TabContainer" unique_id=477382622]
 visible = false
 custom_minimum_size = Vector2(500, 275)
 layout_mode = 2
 autowrap_mode = 0
 metadata/_tab_index = 0
 
-[node name="Data" type="RichTextLabel" parent="DefDataMenu/BackPatch/BoxContainer/TabContainer"]
+[node name="Data" type="RichTextLabel" parent="DefDataMenu/BackPatch/BoxContainer/TabContainer" unique_id=1975229958]
 visible = false
 custom_minimum_size = Vector2(400, 275)
 layout_mode = 2
 autowrap_mode = 0
 metadata/_tab_index = 1
 
-[node name="Stats" type="Control" parent="DefDataMenu/BackPatch/BoxContainer/TabContainer" node_paths=PackedStringArray("entries_container", "premade_entry")]
+[node name="Stats" type="Control" parent="DefDataMenu/BackPatch/BoxContainer/TabContainer" unique_id=1375560420 node_paths=PackedStringArray("entries_container", "premade_entry")]
 layout_mode = 2
 size_flags_vertical = 3
 script = ExtResource("7_0vmvo")
@@ -238,7 +240,7 @@ entries_container = NodePath("ScrollContainer/VBoxContainer")
 premade_entry = NodePath("ScrollContainer/VBoxContainer/StatEntryContainer")
 metadata/_tab_index = 2
 
-[node name="NinePatchRect" type="NinePatchRect" parent="DefDataMenu/BackPatch/BoxContainer/TabContainer/Stats"]
+[node name="NinePatchRect" type="NinePatchRect" parent="DefDataMenu/BackPatch/BoxContainer/TabContainer/Stats" unique_id=1351593711]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -251,7 +253,7 @@ patch_margin_top = 32
 patch_margin_right = 32
 patch_margin_bottom = 32
 
-[node name="ScrollContainer" type="ScrollContainer" parent="DefDataMenu/BackPatch/BoxContainer/TabContainer/Stats"]
+[node name="ScrollContainer" type="ScrollContainer" parent="DefDataMenu/BackPatch/BoxContainer/TabContainer/Stats" unique_id=1200746019]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -264,34 +266,34 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="DefDataMenu/BackPatch/BoxContainer/TabContainer/Stats/ScrollContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="DefDataMenu/BackPatch/BoxContainer/TabContainer/Stats/ScrollContainer" unique_id=434314003]
 layout_mode = 2
 size_flags_horizontal = 3
 alignment = 1
 
-[node name="StatEntryContainer" type="HBoxContainer" parent="DefDataMenu/BackPatch/BoxContainer/TabContainer/Stats/ScrollContainer/VBoxContainer"]
+[node name="StatEntryContainer" type="HBoxContainer" parent="DefDataMenu/BackPatch/BoxContainer/TabContainer/Stats/ScrollContainer/VBoxContainer" unique_id=528612104]
 layout_mode = 2
 script = ExtResource("8_i3k5e")
 
-[node name="StatNameLabel" type="Label" parent="DefDataMenu/BackPatch/BoxContainer/TabContainer/Stats/ScrollContainer/VBoxContainer/StatEntryContainer"]
+[node name="StatNameLabel" type="Label" parent="DefDataMenu/BackPatch/BoxContainer/TabContainer/Stats/ScrollContainer/VBoxContainer/StatEntryContainer" unique_id=371860574]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("9_deqg2")
 text = "STAT_NAME"
 
-[node name="BaseValLabel" type="Label" parent="DefDataMenu/BackPatch/BoxContainer/TabContainer/Stats/ScrollContainer/VBoxContainer/StatEntryContainer"]
+[node name="BaseValLabel" type="Label" parent="DefDataMenu/BackPatch/BoxContainer/TabContainer/Stats/ScrollContainer/VBoxContainer/StatEntryContainer" unique_id=1011393307]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("9_deqg2")
 text = "STAT_NAME"
 
-[node name="StatLabelContainer" parent="DefDataMenu/BackPatch/BoxContainer/TabContainer/Stats/ScrollContainer/VBoxContainer/StatEntryContainer" node_paths=PackedStringArray("mouse_over_parent") instance=ExtResource("10_vneaf")]
+[node name="StatLabelContainer" parent="DefDataMenu/BackPatch/BoxContainer/TabContainer/Stats/ScrollContainer/VBoxContainer/StatEntryContainer" unique_id=762037356 node_paths=PackedStringArray("mouse_over_parent") instance=ExtResource("10_vneaf")]
 layout_mode = 2
 mouse_over_parent = NodePath("../../../..")
 
-[node name="AggroMenu" type="Control" parent="." node_paths=PackedStringArray("close_button", "actors_options_button", "list_container", "premade_label")]
+[node name="AggroMenu" type="Control" parent="." unique_id=1348014628 node_paths=PackedStringArray("close_button", "actors_options_button", "list_container", "premade_label")]
 anchors_preset = 0
 offset_left = 5.0
 offset_top = 511.0
@@ -303,7 +305,7 @@ actors_options_button = NodePath("BackPatch/BoxContainer/LoadedOptionButton")
 list_container = NodePath("BackPatch/BoxContainer/VBoxContainer")
 premade_label = NodePath("BackPatch/BoxContainer/TitleContainer/Label")
 
-[node name="BackPatch" type="Container" parent="AggroMenu" node_paths=PackedStringArray("background", "inner_container")]
+[node name="BackPatch" type="Container" parent="AggroMenu" unique_id=947778361 node_paths=PackedStringArray("background", "inner_container")]
 custom_minimum_size = Vector2(224, 131)
 layout_mode = 0
 offset_right = 224.0
@@ -312,7 +314,7 @@ script = ExtResource("2_fwuqo")
 background = NodePath("NinePatchRect")
 inner_container = NodePath("BoxContainer")
 
-[node name="NinePatchRect" type="NinePatchRect" parent="AggroMenu/BackPatch"]
+[node name="NinePatchRect" type="NinePatchRect" parent="AggroMenu/BackPatch" unique_id=944410634]
 layout_mode = 2
 texture = ExtResource("3_nl2n8")
 patch_margin_left = 12
@@ -320,36 +322,36 @@ patch_margin_top = 12
 patch_margin_right = 12
 patch_margin_bottom = 12
 
-[node name="BoxContainer" type="BoxContainer" parent="AggroMenu/BackPatch"]
+[node name="BoxContainer" type="BoxContainer" parent="AggroMenu/BackPatch" unique_id=1836342275]
 layout_mode = 2
 vertical = true
 
-[node name="TitleContainer" type="HBoxContainer" parent="AggroMenu/BackPatch/BoxContainer"]
+[node name="TitleContainer" type="HBoxContainer" parent="AggroMenu/BackPatch/BoxContainer" unique_id=666392150]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="AggroMenu/BackPatch/BoxContainer/TitleContainer"]
+[node name="Label" type="Label" parent="AggroMenu/BackPatch/BoxContainer/TitleContainer" unique_id=2087880307]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Aggro Checker"
 
-[node name="ExitButton" type="Button" parent="AggroMenu/BackPatch/BoxContainer/TitleContainer"]
+[node name="ExitButton" type="Button" parent="AggroMenu/BackPatch/BoxContainer/TitleContainer" unique_id=1304205818]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 text = "X"
 
-[node name="LoadedOptionButton" type="OptionButton" parent="AggroMenu/BackPatch/BoxContainer"]
+[node name="LoadedOptionButton" type="OptionButton" parent="AggroMenu/BackPatch/BoxContainer" unique_id=831646445]
 custom_minimum_size = Vector2(200, 40)
 layout_mode = 2
 script = ExtResource("5_jorv4")
 
-[node name="Label" type="Label" parent="AggroMenu/BackPatch/BoxContainer"]
+[node name="Label" type="Label" parent="AggroMenu/BackPatch/BoxContainer" unique_id=1360740158]
 layout_mode = 2
 text = "Threat Name   |   value"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="AggroMenu/BackPatch/BoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="AggroMenu/BackPatch/BoxContainer" unique_id=217012013]
 layout_mode = 2
 
-[node name="ObjectsCountsMenu" type="Control" parent="." node_paths=PackedStringArray("action_count_label", "actor_count_label", "item_count_label", "effect_count_label", "list_container", "recount_button", "list_button", "def_data_menu")]
+[node name="ObjectsCountsMenu" type="Control" parent="." unique_id=221472800 node_paths=PackedStringArray("action_count_label", "actor_count_label", "item_count_label", "effect_count_label", "list_container", "recount_button", "list_button", "def_data_menu")]
 anchors_preset = 0
 offset_left = 829.0
 offset_top = 25.0
@@ -365,16 +367,16 @@ recount_button = NodePath("BackPatch/BoxContainer/Button")
 list_button = NodePath("BackPatch/BoxContainer/OptionButton")
 def_data_menu = NodePath("../DefDataMenu")
 
-[node name="BackPatch" type="Container" parent="ObjectsCountsMenu" node_paths=PackedStringArray("background", "inner_container")]
-custom_minimum_size = Vector2(187, 411)
+[node name="BackPatch" type="Container" parent="ObjectsCountsMenu" unique_id=599621743 node_paths=PackedStringArray("background", "inner_container")]
+custom_minimum_size = Vector2(187, 489)
 layout_mode = 0
 offset_right = 187.0
-offset_bottom = 411.0
+offset_bottom = 489.0
 script = ExtResource("2_fwuqo")
 background = NodePath("NinePatchRect")
 inner_container = NodePath("BoxContainer")
 
-[node name="NinePatchRect" type="NinePatchRect" parent="ObjectsCountsMenu/BackPatch"]
+[node name="NinePatchRect" type="NinePatchRect" parent="ObjectsCountsMenu/BackPatch" unique_id=1721586883]
 layout_mode = 2
 texture = ExtResource("3_nl2n8")
 patch_margin_left = 12
@@ -382,121 +384,122 @@ patch_margin_top = 12
 patch_margin_right = 12
 patch_margin_bottom = 12
 
-[node name="BoxContainer" type="BoxContainer" parent="ObjectsCountsMenu/BackPatch"]
+[node name="BoxContainer" type="BoxContainer" parent="ObjectsCountsMenu/BackPatch" unique_id=482608935]
 layout_mode = 2
 vertical = true
 
-[node name="TitleContainer" type="HBoxContainer" parent="ObjectsCountsMenu/BackPatch/BoxContainer"]
+[node name="TitleContainer" type="HBoxContainer" parent="ObjectsCountsMenu/BackPatch/BoxContainer" unique_id=459419843]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="ObjectsCountsMenu/BackPatch/BoxContainer/TitleContainer"]
+[node name="Label" type="Label" parent="ObjectsCountsMenu/BackPatch/BoxContainer/TitleContainer" unique_id=767519427]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Objects"
 
-[node name="ExitButton" type="Button" parent="ObjectsCountsMenu/BackPatch/BoxContainer/TitleContainer"]
+[node name="ExitButton" type="Button" parent="ObjectsCountsMenu/BackPatch/BoxContainer/TitleContainer" unique_id=1901031917]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 text = "X"
 
-[node name="CountsContainer" type="HBoxContainer" parent="ObjectsCountsMenu/BackPatch/BoxContainer"]
+[node name="CountsContainer" type="HBoxContainer" parent="ObjectsCountsMenu/BackPatch/BoxContainer" unique_id=2100102626]
 layout_mode = 2
 theme_override_constants/separation = 16
 
-[node name="LeftCountsContaienr" type="VBoxContainer" parent="ObjectsCountsMenu/BackPatch/BoxContainer/CountsContainer"]
+[node name="LeftCountsContaienr" type="VBoxContainer" parent="ObjectsCountsMenu/BackPatch/BoxContainer/CountsContainer" unique_id=1622949291]
 layout_mode = 2
 
-[node name="ActionsLabel" type="HBoxContainer" parent="ObjectsCountsMenu/BackPatch/BoxContainer/CountsContainer/LeftCountsContaienr"]
+[node name="ActionsLabel" type="HBoxContainer" parent="ObjectsCountsMenu/BackPatch/BoxContainer/CountsContainer/LeftCountsContaienr" unique_id=387370340]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="ObjectsCountsMenu/BackPatch/BoxContainer/CountsContainer/LeftCountsContaienr/ActionsLabel"]
+[node name="Label" type="Label" parent="ObjectsCountsMenu/BackPatch/BoxContainer/CountsContainer/LeftCountsContaienr/ActionsLabel" unique_id=1897175176]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Actions:"
 
-[node name="Label2" type="Label" parent="ObjectsCountsMenu/BackPatch/BoxContainer/CountsContainer/LeftCountsContaienr/ActionsLabel"]
+[node name="Label2" type="Label" parent="ObjectsCountsMenu/BackPatch/BoxContainer/CountsContainer/LeftCountsContaienr/ActionsLabel" unique_id=249448452]
 layout_mode = 2
 text = "0
 "
 
-[node name="ActorsLabel" type="HBoxContainer" parent="ObjectsCountsMenu/BackPatch/BoxContainer/CountsContainer/LeftCountsContaienr"]
+[node name="ActorsLabel" type="HBoxContainer" parent="ObjectsCountsMenu/BackPatch/BoxContainer/CountsContainer/LeftCountsContaienr" unique_id=1803347062]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="ObjectsCountsMenu/BackPatch/BoxContainer/CountsContainer/LeftCountsContaienr/ActorsLabel"]
+[node name="Label" type="Label" parent="ObjectsCountsMenu/BackPatch/BoxContainer/CountsContainer/LeftCountsContaienr/ActorsLabel" unique_id=966915261]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Actors: "
 
-[node name="Label2" type="Label" parent="ObjectsCountsMenu/BackPatch/BoxContainer/CountsContainer/LeftCountsContaienr/ActorsLabel"]
+[node name="Label2" type="Label" parent="ObjectsCountsMenu/BackPatch/BoxContainer/CountsContainer/LeftCountsContaienr/ActorsLabel" unique_id=1261473361]
 layout_mode = 2
 text = "0
 "
 
-[node name="ItemsLabel" type="HBoxContainer" parent="ObjectsCountsMenu/BackPatch/BoxContainer/CountsContainer/LeftCountsContaienr"]
+[node name="ItemsLabel" type="HBoxContainer" parent="ObjectsCountsMenu/BackPatch/BoxContainer/CountsContainer/LeftCountsContaienr" unique_id=2043721469]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="ObjectsCountsMenu/BackPatch/BoxContainer/CountsContainer/LeftCountsContaienr/ItemsLabel"]
+[node name="Label" type="Label" parent="ObjectsCountsMenu/BackPatch/BoxContainer/CountsContainer/LeftCountsContaienr/ItemsLabel" unique_id=415080092]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Items: "
 
-[node name="Label2" type="Label" parent="ObjectsCountsMenu/BackPatch/BoxContainer/CountsContainer/LeftCountsContaienr/ItemsLabel"]
+[node name="Label2" type="Label" parent="ObjectsCountsMenu/BackPatch/BoxContainer/CountsContainer/LeftCountsContaienr/ItemsLabel" unique_id=1320740289]
 layout_mode = 2
 text = "0
 "
 
-[node name="RightCountsContainer" type="VBoxContainer" parent="ObjectsCountsMenu/BackPatch/BoxContainer/CountsContainer"]
+[node name="RightCountsContainer" type="VBoxContainer" parent="ObjectsCountsMenu/BackPatch/BoxContainer/CountsContainer" unique_id=1697331990]
 layout_mode = 2
 
-[node name="EffectsLabel" type="HBoxContainer" parent="ObjectsCountsMenu/BackPatch/BoxContainer/CountsContainer/RightCountsContainer"]
+[node name="EffectsLabel" type="HBoxContainer" parent="ObjectsCountsMenu/BackPatch/BoxContainer/CountsContainer/RightCountsContainer" unique_id=1017297720]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="ObjectsCountsMenu/BackPatch/BoxContainer/CountsContainer/RightCountsContainer/EffectsLabel"]
+[node name="Label" type="Label" parent="ObjectsCountsMenu/BackPatch/BoxContainer/CountsContainer/RightCountsContainer/EffectsLabel" unique_id=823490482]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Effects:"
 
-[node name="Label2" type="Label" parent="ObjectsCountsMenu/BackPatch/BoxContainer/CountsContainer/RightCountsContainer/EffectsLabel"]
+[node name="Label2" type="Label" parent="ObjectsCountsMenu/BackPatch/BoxContainer/CountsContainer/RightCountsContainer/EffectsLabel" unique_id=591383658]
 layout_mode = 2
 text = "0
 "
 
-[node name="ActorsLabel" type="HBoxContainer" parent="ObjectsCountsMenu/BackPatch/BoxContainer/CountsContainer/RightCountsContainer"]
+[node name="ActorsLabel" type="HBoxContainer" parent="ObjectsCountsMenu/BackPatch/BoxContainer/CountsContainer/RightCountsContainer" unique_id=1602592312]
 visible = false
 layout_mode = 2
 
-[node name="Label" type="Label" parent="ObjectsCountsMenu/BackPatch/BoxContainer/CountsContainer/RightCountsContainer/ActorsLabel"]
+[node name="Label" type="Label" parent="ObjectsCountsMenu/BackPatch/BoxContainer/CountsContainer/RightCountsContainer/ActorsLabel" unique_id=1199737910]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Actors: "
 
-[node name="Label2" type="Label" parent="ObjectsCountsMenu/BackPatch/BoxContainer/CountsContainer/RightCountsContainer/ActorsLabel"]
+[node name="Label2" type="Label" parent="ObjectsCountsMenu/BackPatch/BoxContainer/CountsContainer/RightCountsContainer/ActorsLabel" unique_id=1251377898]
 layout_mode = 2
 text = "0
 "
 
-[node name="ItemsLabel" type="HBoxContainer" parent="ObjectsCountsMenu/BackPatch/BoxContainer/CountsContainer/RightCountsContainer"]
+[node name="ItemsLabel" type="HBoxContainer" parent="ObjectsCountsMenu/BackPatch/BoxContainer/CountsContainer/RightCountsContainer" unique_id=806286890]
 visible = false
 layout_mode = 2
 
-[node name="Label" type="Label" parent="ObjectsCountsMenu/BackPatch/BoxContainer/CountsContainer/RightCountsContainer/ItemsLabel"]
+[node name="Label" type="Label" parent="ObjectsCountsMenu/BackPatch/BoxContainer/CountsContainer/RightCountsContainer/ItemsLabel" unique_id=390499528]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Items: "
 
-[node name="Label2" type="Label" parent="ObjectsCountsMenu/BackPatch/BoxContainer/CountsContainer/RightCountsContainer/ItemsLabel"]
+[node name="Label2" type="Label" parent="ObjectsCountsMenu/BackPatch/BoxContainer/CountsContainer/RightCountsContainer/ItemsLabel" unique_id=1585815410]
 layout_mode = 2
 text = "0
 "
 
-[node name="Button" type="Button" parent="ObjectsCountsMenu/BackPatch/BoxContainer"]
+[node name="Button" type="Button" parent="ObjectsCountsMenu/BackPatch/BoxContainer" unique_id=2029617994]
 layout_mode = 2
 text = "Recount"
 
-[node name="OptionButton" type="OptionButton" parent="ObjectsCountsMenu/BackPatch/BoxContainer"]
+[node name="OptionButton" type="OptionButton" parent="ObjectsCountsMenu/BackPatch/BoxContainer" unique_id=1723915940]
 layout_mode = 2
 item_count = 4
 popup/item_0/text = "Actors"
+popup/item_0/id = 0
 popup/item_1/text = "Items"
 popup/item_1/id = 1
 popup/item_2/text = "Effects"
@@ -504,18 +507,18 @@ popup/item_2/id = 2
 popup/item_3/text = "Action"
 popup/item_3/id = 3
 
-[node name="ScrollContainer" type="ScrollContainer" parent="ObjectsCountsMenu/BackPatch/BoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="ObjectsCountsMenu/BackPatch/BoxContainer" unique_id=1698809550]
 custom_minimum_size = Vector2(0, 200)
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ObjectsCountsMenu/BackPatch/BoxContainer/ScrollContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="ObjectsCountsMenu/BackPatch/BoxContainer/ScrollContainer" unique_id=408149060]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="ObjectsCountsMenu/BackPatch/BoxContainer/ScrollContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="ObjectsCountsMenu/BackPatch/BoxContainer/ScrollContainer/VBoxContainer" unique_id=102652943]
 layout_mode = 2
 text = "Some Item"
 
-[node name="Button" type="Button" parent="ObjectsCountsMenu/BackPatch/BoxContainer/ScrollContainer/VBoxContainer"]
+[node name="Button" type="Button" parent="ObjectsCountsMenu/BackPatch/BoxContainer/ScrollContainer/VBoxContainer" unique_id=1668995753]
 layout_mode = 2
 text = "Some Item"
 alignment = 0

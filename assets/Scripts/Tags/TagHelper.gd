@@ -79,14 +79,20 @@ static func check_team_filter(
 		if fact_filter == "Self":
 			if source_actor_id == checking_actor.Id:
 				return true
-		elif fact_filter == "Other":
+		if fact_filter == "Other":
 			if source_actor_id != checking_actor.Id:
 				return true
-		elif fact_filter == "Ally":
-			if game_state.are_allies(source_actor_id, checking_actor):
-				return true
-		elif fact_filter == "Enemy":
-			if game_state.are_enemies(source_actor_id, checking_actor):
-				return true
+		
+		var are_allies = game_state.are_allies(source_actor_id, checking_actor)
+		if fact_filter == "Ally" and are_allies:
+			return true
+		
+		var are_enemies = game_state.are_enemies(source_actor_id, checking_actor)
+		if fact_filter == "Enemy" and are_enemies:
+			return true
+		
+		if fact_filter == "Neutral" and not (are_allies or are_enemies):
+			return true
+		
 	return false
 	

@@ -24,9 +24,7 @@ var target_type:TargetTypes
 var line_of_sight:bool
 var target_area:AreaMatrix
 var effect_area:AreaMatrix
-var include_self_in_aoe:bool
-var include_allies_in_aoe:bool
-var include_enemies_in_aoe:bool
+var aoe_faction_filter:Array
 var _conditions:Dictionary
 
 var _cached_canter_pos:MapPos
@@ -78,10 +76,7 @@ func _init(target_param_key_val:String, args:Dictionary) -> void:
 		effect_area = target_area
 	else:
 		effect_area = null
-	
-	include_self_in_aoe = args.get("IncludeSelfInAoe", true)
-	include_allies_in_aoe = args.get("IncludeAlliesInAoe", true)
-	include_enemies_in_aoe = args.get("IncludeEnemiesInAoe", true)
+	aoe_faction_filter = args.get("AOETeamFilters", [])
 	_conditions = args.get("TargetConditions", {})
 
 func has_area_of_effect()->bool:
@@ -131,13 +126,12 @@ func is_valid_target_actor(actor:BaseActor, target:BaseActor, game_state:GameSta
 	return false
 
 func is_actor_effected_by_aoe(actor:BaseActor, target:BaseActor, game_state:GameStateData)->bool:
-	if target.Id == actor.Id:
-		return include_self_in_aoe
-	if game_state.are_allies(actor, target):
-		return include_allies_in_aoe
-	if game_state.are_enemies(actor, target):
-		return include_enemies_in_aoe 
-	return false
+	if aoe_faction_filter.size() == 0:
+		return true
+	if aoe_faction_filter.has("Self"):
+		if actor.Id == target.Id:
+			return true
+	return TagHelper.check_team_filter(actor.Id, aoe_faction_filter, target.Id, game_state)
 
 ## Returns Dictionary of Coor mapped to LOS_VAL
 func get_valid_target_area(center:MapPos)->Dictionary:

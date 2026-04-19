@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://ukr3q0j2b7ps"]
+[gd_scene format=3 uid="uid://ukr3q0j2b7ps"]
 
-[ext_resource type="Script" path="res://assets/Scripts/VFXs/DamageVfxs/damage_vfx_node.gd" id="1_5qt1g"]
-[ext_resource type="Texture2D" uid="uid://26rrlc3hiro5" path="res://data/VFXs/DamageVFXs/SmokeEffect.png" id="2_535dp"]
+[ext_resource type="Script" uid="uid://ptw13c3isoay" path="res://assets/Scripts/VFXs/DamageVfxs/damage_vfx_node.gd" id="1_5qt1g"]
+[ext_resource type="Texture2D" uid="uid://26rrlc3hiro5" path="res://ObjectDefs/Data/VFXs/DamageVFXs/SmokeEffect.png" id="2_535dp"]
+[ext_resource type="AudioStream" uid="uid://cmf3hg1eq411o" path="res://assets/Sounds/SoundEffects/478278__joao_janz__8-bit-explosion-1_5.wav" id="3_5w5er"]
 
 [sub_resource type="Animation" id="Animation_wtg8w"]
 resource_name = "4_sprites_250ms_frames"
@@ -154,27 +155,29 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_3vpeu"]
 _data = {
-"4_sprites_250ms_frames": SubResource("Animation_wtg8w"),
-"4_sprites_250ms_frames_loop": SubResource("Animation_mg4p0"),
-"6_sprites_250ms_frames": SubResource("Animation_uwom5"),
-"6_sprites_250ms_frames_loop": SubResource("Animation_7qvkc"),
-"8_sprites_250ms_frames_loop": SubResource("Animation_kvxq2"),
-"RESET": SubResource("Animation_lwwt5")
+&"4_sprites_250ms_frames": SubResource("Animation_wtg8w"),
+&"4_sprites_250ms_frames_loop": SubResource("Animation_mg4p0"),
+&"6_sprites_250ms_frames": SubResource("Animation_uwom5"),
+&"6_sprites_250ms_frames_loop": SubResource("Animation_7qvkc"),
+&"8_sprites_250ms_frames_loop": SubResource("Animation_kvxq2"),
+&"RESET": SubResource("Animation_lwwt5")
 }
 
-[node name="DamageVfxNode" type="Node2D" node_paths=PackedStringArray("sprite", "animation")]
+[node name="DamageVfxNode" type="Node2D" unique_id=13620450 node_paths=PackedStringArray("audio_player", "sprite", "animation")]
 z_index = 9
 script = ExtResource("1_5qt1g")
+audio_player = NodePath("AudioStreamPlayer2D")
 sprite = NodePath("Sprite2D")
 animation = NodePath("AnimationPlayer")
 animation_half_way = true
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1744614440]
 texture = ExtResource("2_535dp")
 hframes = 2
 vframes = 3
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_3vpeu")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=722119462]
+libraries/ = SubResource("AnimationLibrary_3vpeu")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=73306927]
+stream = ExtResource("3_5w5er")
