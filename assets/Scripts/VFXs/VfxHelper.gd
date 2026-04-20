@@ -69,7 +69,7 @@ static func create_vfx_at_pos(pos:MapPos, vfx_key, vfx_data:Dictionary, source_a
 	return _create_vfx_on_holder(vfx_node, vfx_key, vfx_data, source_actor)
 	
 
-static func create_vfx_on_actor(host_actor:BaseActor, vfx_key, vfx_data:Dictionary, source_actor:BaseActor=null)->BaseVfxNode:
+static func create_vfx_on_actor(host_actor:BaseActor, vfx_key, vfx_data:Dictionary, source_actor=null)->BaseVfxNode:
 	var actor_node = CombatRootControl.get_actor_node(host_actor.Id)
 	if not actor_node:
 		printerr("VfxHelper.create_vfx_on_actor: No BaseActorNode found for Actor '%s'." % [host_actor.Id])
@@ -78,9 +78,12 @@ static func create_vfx_on_actor(host_actor:BaseActor, vfx_key, vfx_data:Dictiona
 	if not vfx_holder:
 		printerr("VfxHelper.create_vfx_on_actor: No VfxHolder found on ActorNode for '%s'." % [host_actor.Id])
 		return null
-	return _create_vfx_on_holder(actor_node.vfx_holder, vfx_key, vfx_data, source_actor)
+	var source = source_actor
+	if source is BaseActor:
+		source = source.Id
+	return _create_vfx_on_holder(actor_node.vfx_holder, vfx_key, vfx_data, source)
 
-static func _create_vfx_on_holder(vfx_holder:VfxHolder, vfx_key, vfx_data:Dictionary, source_actor:BaseActor=null)->BaseVfxNode:
+static func _create_vfx_on_holder(vfx_holder:VfxHolder, vfx_key, vfx_data:Dictionary, source_actor=null)->BaseVfxNode:
 	if vfx_key == null or vfx_key == "":
 		vfx_key = vfx_data.get("VfxKey", '')
 	if FORCE_RELOAD: VfxLibrary.reload_vfxs()
@@ -93,7 +96,10 @@ static func _create_vfx_on_holder(vfx_holder:VfxHolder, vfx_key, vfx_data:Dictio
 	# Set Host and Source actors
 	merged_data['HostActorId'] = vfx_holder.get_host_id()
 	if source_actor and not merged_data.has("SourceActorId"):
-		merged_data['SourceActorId'] = source_actor.Id
+		if source_actor is BaseActor:
+			merged_data['SourceActorId'] = source_actor.Id
+		elif source_actor is String:
+			merged_data['SourceActorId'] = source_actor
 	
 	# Determin Id
 	var would_be_id = vfx_key

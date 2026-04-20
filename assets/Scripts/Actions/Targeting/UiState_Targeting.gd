@@ -22,7 +22,7 @@ func _get_debug_name()->String:
 func _init(controler:UiStateController, args:Dictionary) -> void:
 	super(controler, args)
 	selection_data = args['TargetSelectionData']
-	allow_lockon = args.get("AllowLockon")
+	allow_lockon = args.get("AllowLockon", true)
 	pass
 	
 func start_state():

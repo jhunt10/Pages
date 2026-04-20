@@ -91,82 +91,6 @@ static func get_min_max_damage(actor:BaseActor, damage_data:Dictionary)->Array:
 		max_dam = ceili(float(max_dam) * crit_mod)
 	return [min_dam, max_dam]
 
-# Made for Bonus Damage, holding off on that idea
-#static func create_and_roll_for_damage_events(
-		#damage_data:Dictionary, 
-		#attacker:BaseActor, 
-		#defender:BaseActor, 
-		#source_tag_chain:SourceTagChain, 
-		#extra_damage_mods:Dictionary = {},
-		#actor_atk_mods_provided:bool=false
-	#)->Array:
-	#var out_list = []
-	## Add Damage mods from Actors if not provided 
-	#if not actor_atk_mods_provided:
-		#var attacker_mods = attacker.get_damage_mods()
-		#for mod_key:String in attacker_mods.keys():
-			#if not extra_damage_mods.has(mod_key):
-				#extra_damage_mods[mod_key] = attacker_mods[mod_key]
-		#var defender_mods = attacker.get_damage_mods()
-		#for mod_key:String in defender_mods.keys():
-			#if not extra_damage_mods.has(mod_key):
-				#extra_damage_mods[mod_key] = defender_mods[mod_key]
-	#var damage_mods = {}
-	#var bonus_damage_datas = {}
-	#
-	## Find Bonus Damage mods that apply, and cache the rest
-	#for damage_mod_key in extra_damage_mods.keys():
-		#var damage_mod:Dictionary = extra_damage_mods[damage_mod_key]
-		#if damage_mod.get("ModType", '') == "BonusDamage":
-			#if does_damage_mod_apply(damage_mod, attacker, defender, damage_data, source_tag_chain):
-				#bonus_damage_datas[damage_mod_key] = BaseLoadObjectLibrary._merge_defs(damage_mod.get("DamageData", {}), damage_data)
-			#else:
-				#damage_mods[damage_mod_key] = damage_mod
-	#
-	#
-	#
-	## Create Base DamageEvent
-	#var damage_event = roll_for_damage(damage_data, attacker, defender, source_tag_chain, damage_mods, true)
-	#out_list.append(damage_event)
-	#
-	## Handle Bonus Damage
-	#for bonus_key in bonus_damage_datas.keys():
-		#var bonus_damage_data = bonus_damage_datas[bonus_key]
-		#var mods_for_bonus_damage = {}
-		##Check with mods will apply
-		#for damage_mod_key in damage_mods.keys():
-			#var damage_mod:Dictionary = damage_mods[damage_mod_key]
-			## Skip mods that were already applied to base damage
-			#if damage_event.damage_mods.keys().has(damage_mod_key):
-				#continue
-			#if does_damage_mod_apply(damage_mod, attacker, defender, damage_data, source_tag_chain):
-				#mods_for_bonus_damage[damage_mod_key] = damage_mod
-		#var bonus_damage_event = roll_for_damage(bonus_damage_data, attacker, defender, source_tag_chain, mods_for_bonus_damage, true)
-		#out_list.append(bonus_damage_event)
-		#
-	#return out_list
-
-## Roll damage and return a DamageEvent. 
-## Damage mods from Actors will be appllied (by default), but those from Attack Mods must be provided 
-static func roll_and_apply_damage(
-		damage_data:Dictionary, 
-		attacker:BaseActor, 
-		defender:BaseActor, 
-		source_tag_chain:SourceTagChain, 
-		game_state:GameStateData,
-		extra_damage_mods:Dictionary = {},
-		actor_atk_mods_provided:bool=false,
-	)->DamageEvent:
-	var damage_event = roll_for_damage(damage_data, attacker, defender, source_tag_chain, game_state, extra_damage_mods, actor_atk_mods_provided)
-	
-	defender.apply_damage(damage_event)
-	
-	var vfx_data = AttackHandler.build_damage_vfx_data(attacker.Id, damage_event, damage_data, null)
-	var damage_vfx_key = vfx_data.get('DamageVfxKey', '')
-	var damage_vfx_data = vfx_data.get('DamageVfxData', {})
-	if damage_vfx_key or damage_vfx_data.size() > 0:
-		VfxHelper.create_damage_effect(defender, damage_vfx_key, damage_vfx_data)
-	return damage_event
 ## Roll damage and return a DamageEvent. 
 ## Damage mods from Actors will be appllied (by default), but those from Attack Mods must be provided 
 static func roll_for_damage(
@@ -286,71 +210,6 @@ static func does_damage_mod_apply(damage_mod:Dictionary, attacker:BaseActor, def
 			return false
 	
 	return true
-	
-
-
-
-
-
-
-
-
-#static func handle_damage(source, defender:BaseActor, damage_data:Dictionary, 
-							#source_tag_chain:SourceTagChain, game_state:GameStateData, 
-							#attack_event:AttackEvent=null, create_VFX:bool = true)->DamageEvent:
-	### Need to get base damage before making event because  (BECAUSE WHY? Thanks old me)
-	##var base_damage = 0
-	##var attack_stat = damage_data.get("AtkStat")
-	##if not attack_stat:
-		##printerr("DamageHelper: No AtkStat found on damage data")
-	##elif attack_stat.begins_with('@'):
-		##base_damage = source.stats.base_damge_from_stat(attack_stat)
-	#
-	#var damage_event = DamageEvent.new(damage_data, source, defender,source_tag_chain)
-	#
-	#if attack_event:
-		#if attack_event.is_evade:
-			#printerr("DamageHelper.handle_damage: Called on Evaded attack")
-			#return damage_event
-		## Appy Crit Mod
-		#if attack_event.is_crit and not attack_event.is_blocked:
-			#damage_event.final_damage = damage_event.final_damage * attack_event.attcker_crit_mod
-		## Apply Block Mod
-		#if attack_event.is_blocked and not attack_event.is_crit:
-			## Don't apply Block if damage would heal
-			#if damage_event.final_damage > 0:
-				#damage_event.final_damage = damage_event.final_damage * attack_event.defender_block_mod
-	#
-	#print("DamageHelper.hand_damage: Real final applied damage: %s" % [damage_event.final_damage])
-	#defender.apply_damage(damage_event.final_damage)
-	#damage_event.was_applied = true
-	#defender.effects.trigger_damage_taken(game_state, damage_event)
-	#
-	#if source is BaseActor:
-		#var source_actor:BaseActor = source as BaseActor
-		#source_actor.effects.trigger_damage_dealt(game_state, damage_event)
-		#defender.aggro.add_threat_from_actor(source_actor, damage_event.final_damage)
-	#
-	#if create_VFX:
-		#var damage_effect = damage_data.get("DamageVfxKey", null)
-		#var damage_effect_data = damage_data.get("DamageVfxData", {})
-		#if damage_effect:
-			##if damage_event.final_damage < 0:
-				##damage_effect_data['DamageTextType'] = VfxHelper.FlashTextType.Healing_Dmg
-			##elif source_tag_chain.has_tag("DOT"):
-				##damage_effect_data['DamageTextType'] = VfxHelper.FlashTextType.DOT_Dmg
-			##elif attack_event.sub_events.cri > 1:
-				##damage_effect_data['DamageTextType'] = VfxHelper.FlashTextType.Crit_Dmg
-			##elif attack_event.final_damage_mod < 1:
-				##damage_effect_data['DamageTextType'] = VfxHelper.FlashTextType.Blocked_Dmg
-			##else:
-			#damage_effect_data['DamageTextType'] = VfxHelper.FlashTextType.Normal_Dmg
-			#if source is BaseActor:
-				#damage_effect_data['SourceActorId'] = source.Id
-			#damage_effect_data['DamageNumber'] = 0 - damage_event.final_damage
-			#VfxHelper.create_damage_effect(defender, damage_effect, damage_effect_data)
-	#return damage_event
-	#
 
 static func _order_damage_mods(mods:Array):
 	var add_list = []
@@ -368,20 +227,3 @@ const ARMOR_SCALE:float = 80
 static func calc_armor_reduction(armor)->float:
 	#var val = (log((armor+ARMOR_STRETCH)/ARMOR_STRETCH) / log(10)) * ARMOR_SCALE
 	return 1.0-(float(armor)/100.0)
-
-static func build_damage_vfx_data(attack_event:AttackEvent, damage_event:DamageEvent, damage_data:Dictionary)->Dictionary:
-	var damage_vfx_key = damage_data.get("DamageVfxKey", null)
-	var damage_vfx_data = damage_data.get("DamageVfxData", {}).duplicate()
-	if damage_vfx_key:
-		damage_vfx_data['VfxKey'] = damage_vfx_key
-		if damage_event.final_damage < 0:
-			damage_vfx_data['DamageTextType'] = VfxHelper.FlashTextType.Healing_Dmg
-		elif attack_event.is_crit and not attack_event.is_blocked:
-			damage_vfx_data['DamageTextType'] = VfxHelper.FlashTextType.Crit_Dmg
-		elif attack_event.is_blocked and not attack_event.is_crit:
-			damage_vfx_data['DamageTextType'] = VfxHelper.FlashTextType.Blocked_Dmg
-		else:
-			damage_vfx_data['DamageTextType'] = VfxHelper.FlashTextType.Normal_Dmg
-		damage_vfx_data['DamageNumber'] = 0 - damage_event.final_damage
-		damage_vfx_data['SourceActorId'] = attack_event.attacker.Id
-	return damage_vfx_data

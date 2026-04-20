@@ -1,10 +1,11 @@
 class_name BulletVfxNode
-extends BaseSpriteVfxNode
+extends BaseAttackVfxNode
 
 var starting_offset:Vector2i
 var velocity:float
 var damage_vfx_datas:Array = []
 var rotation_offset:float
+@export var sprite:Sprite2D
 
 var frame_count = 0
 
@@ -16,9 +17,22 @@ func _on_start():
 		return
 	super()
 	velocity = _data.get("Velocity", 300)
+	
+	# Load Sprite
+	var sprite_name = _data.get("SpriteName")
+	if sprite_name:
+		var sprite_path = _data.get("LoadPath", "NO_LOAD_PATH").path_join(sprite_name)
+		if ResourceLoader.exists(sprite_path):
+			sprite.texture = load(sprite_path)
+			sprite.hframes = _data.get("SpriteSheetWidth", 1)
+			sprite.vframes = _data.get("SpriteSheetHight", 1)
+		else:
+			printerr("BaseSpriteVfxNode.set_vfx_data: Failed to find file '%s'." % [sprite_path])
+			self.finish()
+			return
+	
+	# Get source actor position
 	var source_actor_node = CombatRootControl.get_actor_node(source_actor_id)
-	var source_actor_node_pos = source_actor_node.global_position
-	var self_pos = self.global_position
 	starting_offset =  source_actor_node.global_position - self.global_position
 	sprite.position = starting_offset
 	var sprite_scale = _data.get('Scale', null)

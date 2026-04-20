@@ -56,8 +56,7 @@ func finish():
 		return
 	
 	var chain_vfx_datas = _data.get("ChainVfxDatas", {})
-	var source_actor = null
-	if _data.has("SourceActorId"): source_actor = ActorLibrary.get_actor(_data['SourceActorId'])
+	var source_actor = _data.get('SourceActorId')
 	for vfx_key in chain_vfx_datas.keys():
 		var next_node_data = chain_vfx_datas[vfx_key]
 		if next_node_data.has("VfxKey"):

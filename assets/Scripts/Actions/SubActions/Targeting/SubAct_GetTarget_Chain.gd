@@ -131,7 +131,8 @@ func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, metadata:
 	CombatUiControl.ui_state_controller.set_ui_state_from_path(
 		"res://assets/Scripts/Actions/Targeting/UiState_Targeting.gd",
 	{
-		"TargetSelectionData": selection_data
+		"TargetSelectionData": selection_data,
+		"AllowLockon": true
 	})
 	return BaseSubAction.Success
 

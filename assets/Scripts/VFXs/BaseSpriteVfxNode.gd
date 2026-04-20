@@ -33,7 +33,7 @@ func _on_start():
 		else:
 			sprite.scale = Vector2(scale_data, scale_data)
 			
-	var animation_name = _data.get("AnimationName")
+	var animation_name = _data.get("AnimationName", "main_animation")
 	if animation_name:
 		_has_animation = true
 		animation_finished = false
@@ -61,13 +61,11 @@ func set_vfx_data(new_id:String, data:Dictionary):
 		else:
 			printerr("BaseSpriteVfxNode.set_vfx_data: Failed to find file '%s'." % [sprite_path])
 			_bad_sprite = true
-	else:
-		printerr("BaseSpriteVfxNode.set_vfx_data: VFXData '%s' has no sprite." % [_data.get("VfxKey")])
-		_bad_sprite = true
 	
 	if _bad_sprite:
 		sprite.texture = load(NO_SPRITE_PATH)
 	else:
+		# Hide sprite until started
 		sprite.visible = false
 	
 	if _data.get("MatchSourceDir", false):

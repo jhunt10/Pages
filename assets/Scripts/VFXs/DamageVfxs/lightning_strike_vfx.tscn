@@ -1,7 +1,8 @@
-[gd_scene format=3 uid="uid://by8crsdpqpa0s"]
+[gd_scene format=3 uid="uid://dhmti62e7s8lx"]
 
-[ext_resource type="Script" uid="uid://di0ldqo3yw3py" path="res://assets/Scripts/VFXs/BulletVfxs/bullet_vfx_node.gd" id="1_r16r6"]
-[ext_resource type="Texture2D" uid="uid://26rrlc3hiro5" path="res://ObjectDefs/Data/VFXs/DamageVFXs/SmokeEffect.png" id="2_a7itk"]
+[ext_resource type="Script" uid="uid://ptw13c3isoay" path="res://assets/Scripts/VFXs/DamageVfxs/damage_vfx_node.gd" id="1_nx2su"]
+[ext_resource type="Texture2D" uid="uid://3lr2pbv8qbis" path="res://ObjectDefs/Data/VFXs/DamageVFXs/Lightning/LightningStrikeEffect.png" id="2_3yedr"]
+[ext_resource type="AudioStream" uid="uid://da51qq5b3fou6" path="res://assets/Sounds/SoundEffects/lightning bolt 3.wav" id="3_a4lkp"]
 
 [sub_resource type="Animation" id="Animation_wtg8w"]
 resource_name = "4_sprites_250ms_frames"
@@ -151,6 +152,59 @@ tracks/1/keys = {
 "update": 1,
 "values": [true]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AudioStreamPlayer2D:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_87qwm"]
+resource_name = "main_animation"
+length = 1.5
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.099999994, 0.19999999, 0.3, 0.39999998, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:animation_half_way")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AudioStreamPlayer2D:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_3vpeu"]
 _data = {
@@ -159,18 +213,26 @@ _data = {
 &"6_sprites_250ms_frames": SubResource("Animation_uwom5"),
 &"6_sprites_250ms_frames_loop": SubResource("Animation_7qvkc"),
 &"8_sprites_250ms_frames_loop": SubResource("Animation_kvxq2"),
-&"RESET": SubResource("Animation_lwwt5")
+&"RESET": SubResource("Animation_lwwt5"),
+&"main_animation": SubResource("Animation_87qwm")
 }
 
-[node name="VFXNode" type="Node2D" unique_id=1684724338 node_paths=PackedStringArray("sprite")]
+[node name="LightningStrikeVfxNode" type="Node2D" unique_id=13620450 node_paths=PackedStringArray("audio_player", "sprite", "animation")]
 z_index = 9
-script = ExtResource("1_r16r6")
+script = ExtResource("1_nx2su")
+audio_player = NodePath("AudioStreamPlayer2D")
 sprite = NodePath("Sprite2D")
+animation = NodePath("AnimationPlayer")
+animation_half_way = true
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2117814411]
-texture = ExtResource("2_a7itk")
-hframes = 2
-vframes = 3
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1744614440]
+texture = ExtResource("2_3yedr")
+offset = Vector2(0, -12)
+hframes = 3
+vframes = 2
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1800955160]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=722119462]
 libraries/ = SubResource("AnimationLibrary_3vpeu")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=73306927]
+stream = ExtResource("3_a4lkp")
