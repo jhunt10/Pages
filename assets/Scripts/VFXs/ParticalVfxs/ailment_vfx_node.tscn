@@ -1,17 +1,17 @@
-[gd_scene load_steps=3 format=3 uid="uid://fl7uf4k4hb2t"]
+[gd_scene format=3 uid="uid://fl7uf4k4hb2t"]
 
-[ext_resource type="Script" path="res://assets/Scripts/VFXs/ParticalVfxs/ailment_vfx_node.gd" id="1_qfr65"]
+[ext_resource type="Script" uid="uid://ds0u1knhnghdt" path="res://assets/Scripts/VFXs/ParticalVfxs/ailment_vfx_node.gd" id="1_qfr65"]
 
 [sub_resource type="Curve" id="Curve_mu718"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.5, 0.6), 0.0, 0.0, 0, 0, Vector2(1, 0), -3.55268, 0.0, 0, 0]
 point_count = 3
 
-[node name="VFXNode" type="Node2D" node_paths=PackedStringArray("particals")]
+[node name="VFXNode" type="Node2D" unique_id=378778437 node_paths=PackedStringArray("particals")]
 z_index = 9
 script = ExtResource("1_qfr65")
 particals = NodePath("CPUParticles2D")
 
-[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+[node name="CPUParticles2D" type="CPUParticles2D" parent="." unique_id=1527484157]
 amount = 6
 lifetime = 0.5
 randomness = 1.0

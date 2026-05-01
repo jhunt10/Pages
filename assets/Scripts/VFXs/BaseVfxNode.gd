@@ -3,7 +3,15 @@ extends Node2D
 
 signal finished
 
-enum States {Waiting, Playing, Finished, Errored}
+enum States {
+	Waiting, # Created and not yet started
+	Playing, # Is Playing
+	Finished, # Finished Playing and waiting to be deleted
+	# Deleted, # Not a state because it's deleted
+	Errored # Failed with an Error
+	}
+	
+@export var delete_immediately_on_finish:bool = true
 
 var id:String
 var _data:Dictionary
@@ -15,8 +23,10 @@ var actor_node:BaseActorNode:
 			return vfx_holder.actor_node
 		return null
 
-var _readyed:bool=false
-var _start_when_ready:bool=false
+var _readyed:bool = false
+var _start_when_ready:bool = false
+var _built_chained_vfxs:bool = false
+var _been_deleted:bool = false
 
 func parent_to_offset()->bool:
 	return false
@@ -27,7 +37,11 @@ func _ready() -> void:
 		start_vfx()
 
 func _process(_delta: float) -> void:
-	pass
+	# Check if node is fully finished and ready to delet
+	# Some animations / particals lag after finish()
+	if _state == States.Finished and not _been_deleted:
+		if is_ready_to_delete():
+			_delete_self()
 
 func set_vfx_data(new_id:String, data:Dictionary):
 	id = new_id
@@ -51,30 +65,59 @@ func start_vfx():
 func _on_start(): 
 	pass
 
-func finish():
-	if _state == States.Finished:
+func _trigger_next_vfxs():
+	if not _built_chained_vfxs:
+		build_chained_vfx()
+
+func build_chained_vfx():
+	if _built_chained_vfxs:
 		return
-	
+	_built_chained_vfxs = true
 	var chain_vfx_datas = _data.get("ChainVfxDatas", {})
 	var source_actor = _data.get('SourceActorId')
 	for vfx_key in chain_vfx_datas.keys():
-		var next_node_data = chain_vfx_datas[vfx_key]
-		if next_node_data.has("VfxKey"):
+		if chain_vfx_datas[vfx_key].has("DamageNumber"):
+			VfxHelper.create_damage_effect(self.actor_node.Actor, vfx_key, chain_vfx_datas[vfx_key])
+		else:
 			VfxHelper.create_vfx_on_actor(self.actor_node.Actor, vfx_key, chain_vfx_datas[vfx_key], source_actor)
-		elif next_node_data.has("DamageNumber"):
-			var damage_string = str(next_node_data.get("DamageNumber", 0))
-			var damage_text_type = next_node_data.get("DamageTextType", VfxHelper.FlashTextType.Normal_Dmg)
-			VfxHelper.create_flash_text(self.actor_node.Actor, damage_string, damage_text_type)
-		
+
+## Called after the node has "finished" to check for any lingering Audio or Particals to finish.
+func is_ready_to_delete()->bool:
+	return true
+
+func finish():
+	if _state == States.Finished:
+		return
+	_on_finish()
+	if not _built_chained_vfxs:
+		build_chained_vfx()
+	
 	_state = States.Finished
+	if is_ready_to_delete():
+		_delete_self()
+	finished.emit()
+
+func _delete_self():
+	_been_deleted = true
 	_on_delete()
 	if vfx_holder and vfx_holder.has_vfx(self.id):
 		vfx_holder.remove_vfx(self.id)
-	finished.emit()
+	self.queue_free()
 
+func _on_finish():
+	pass
 
 func _on_delete():
 	pass
 
 func add_chained_vfx(chain_key:String, chain_data:Dictionary):
 	_data['ChainVfxDatas'][chain_key] = chain_data
+
+# Only called by VfxHolder.remove_vfx. Exists to double check logic
+func _removed_from_vfx_holder():
+	if not _state == States.Finished:
+		printerr("Vfx removed without finishing")
+		self.finish()
+	if not _been_deleted:
+		printerr("Vfx removed without deleting")
+		self._delete_self()

@@ -1,6 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://chkcq4sbnc152"]
+[gd_scene format=3 uid="uid://chkcq4sbnc152"]
 
-[ext_resource type="Script" path="res://assets/Scripts/VFXs/ParticalVfxs/ailment_vfx_node.gd" id="1_xk01s"]
+[ext_resource type="Script" uid="uid://ds0u1knhnghdt" path="res://assets/Scripts/VFXs/ParticalVfxs/ailment_vfx_node.gd" id="1_xk01s"]
 [ext_resource type="Texture2D" uid="uid://17s767br4un8" path="res://ObjectDefs/Data/VFXs/AilmentVFXs/DazedAilmentVfx/DazeStar.png" id="2_38lqu"]
 [ext_resource type="Texture2D" uid="uid://b4b3emke6uj12" path="res://ObjectDefs/Data/VFXs/AilmentVFXs/DazedAilmentVfx/DazeDisk.png" id="2_45avj"]
 
@@ -146,31 +146,29 @@ tracks/8/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_2fg7u"]
 _data = {
-"RESET": SubResource("Animation_lphcw"),
-"dazed_stars_animation": SubResource("Animation_27ksj")
+&"RESET": SubResource("Animation_lphcw"),
+&"dazed_stars_animation": SubResource("Animation_27ksj")
 }
 
-[node name="VFXNode" type="Node2D"]
+[node name="VFXNode" type="Node2D" unique_id=1673581151]
 z_index = 9
 script = ExtResource("1_xk01s")
 top_of_head = true
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=7471549]
 self_modulate = Color(1, 1, 1, 0.360784)
 position = Vector2(0, -7)
 scale = Vector2(0.7, 0.7)
 texture = ExtResource("2_45avj")
 
-[node name="Star1" type="Sprite2D" parent="Sprite2D"]
+[node name="Star1" type="Sprite2D" parent="Sprite2D" unique_id=361118231]
 scale = Vector2(1e-05, 1)
 texture = ExtResource("2_38lqu")
 
-[node name="Star2" type="Sprite2D" parent="Sprite2D"]
+[node name="Star2" type="Sprite2D" parent="Sprite2D" unique_id=1897215293]
 position = Vector2(9, 0)
 texture = ExtResource("2_38lqu")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_2fg7u")
-}
-autoplay = "dazed_stars_animation"
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1320010570]
+libraries/ = SubResource("AnimationLibrary_2fg7u")
+autoplay = &"dazed_stars_animation"

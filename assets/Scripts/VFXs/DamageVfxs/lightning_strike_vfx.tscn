@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dhmti62e7s8lx"]
 
 [ext_resource type="Script" uid="uid://ptw13c3isoay" path="res://assets/Scripts/VFXs/DamageVfxs/damage_vfx_node.gd" id="1_nx2su"]
-[ext_resource type="Texture2D" uid="uid://3lr2pbv8qbis" path="res://ObjectDefs/Data/VFXs/DamageVFXs/Lightning/LightningStrikeEffect.png" id="2_3yedr"]
+[ext_resource type="Texture2D" uid="uid://3lr2pbv8qbis" path="res://ObjectDefs/Data/VFXs/OLD_DamageVFXs/Lightning/LightningStrikeEffect.png" id="2_3yedr"]
 [ext_resource type="AudioStream" uid="uid://da51qq5b3fou6" path="res://assets/Sounds/SoundEffects/lightning bolt 3.wav" id="3_a4lkp"]
 
 [sub_resource type="Animation" id="Animation_wtg8w"]
@@ -217,13 +217,12 @@ _data = {
 &"main_animation": SubResource("Animation_87qwm")
 }
 
-[node name="LightningStrikeVfxNode" type="Node2D" unique_id=13620450 node_paths=PackedStringArray("audio_player", "sprite", "animation")]
+[node name="LightningStrikeVfxNode" type="Node2D" unique_id=13620450 node_paths=PackedStringArray("sprite", "animation", "audio_player")]
 z_index = 9
 script = ExtResource("1_nx2su")
-audio_player = NodePath("AudioStreamPlayer2D")
 sprite = NodePath("Sprite2D")
 animation = NodePath("AnimationPlayer")
-animation_half_way = true
+audio_player = NodePath("AudioStreamPlayer2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1744614440]
 texture = ExtResource("2_3yedr")

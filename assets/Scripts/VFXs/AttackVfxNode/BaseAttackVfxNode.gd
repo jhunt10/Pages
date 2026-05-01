@@ -13,3 +13,6 @@ func get_source_actor_node()->BaseActorNode:
 	if source_actor_id and source_actor_id != '':
 		return CombatRootControl.get_actor_node(source_actor_id)
 	return null
+
+func _on_start():
+	

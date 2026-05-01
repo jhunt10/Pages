@@ -34,6 +34,8 @@ static func create_damage_effect(target_actor:BaseActor, vfx_key:String, vfx_dat
 		printerr("Failed to find actor node for: %s" % [target_actor.Id])
 		return
 	var vfx_def = VfxLibrary.get_vfx_data(vfx_key)
+	
+	# No VFX found, so just display damage numbers
 	if !vfx_def:
 		printerr("Failed to VFX with key: %s" % [vfx_key])
 		if vfx_data.has("DamageNumber"):
@@ -44,18 +46,29 @@ static func create_damage_effect(target_actor:BaseActor, vfx_key:String, vfx_dat
 			VfxHelper.create_flash_text(target_actor, damage_string, damage_text_type, {}, damage_color)
 		return
 	
+	# Get Direction of Source Actor
 	if vfx_data.get("MatchSourceDir", false) and vfx_data.has("SourceActorId"):
 		var node = CombatRootControl.get_actor_node(vfx_data["SourceActorId"])
 		if node:
 			vfx_data['Direction'] = node.facing_dir
+	
 	var vfx_node = VfxHelper.create_vfx_on_actor(target_actor, vfx_key, vfx_data)
 	if !vfx_node:
 		printerr("Failed to create VFX node from key '%s'." % [vfx_key])
 		return
+	
+	# Chain Flash Text Data
+	var flash_text_data = {}
+	flash_text_data['DamageNumber'] = vfx_data.get("DamageNumber", 0)
+	flash_text_data['DamageColor'] = vfx_data.get("DamageColor", Color.WHITE)
+	if vfx_data.has("DamageTextType"):
+		flash_text_data['DamageColor'] = vfx_data.get("DamageTextType", VfxHelper.FlashTextType.Normal_Dmg)
+	vfx_node.add_chained_vfx("FlashText", flash_text_data)
+	
 	#target_actor_node.vfx_holder.add_vfx(vfx_node)
 	var damage_number = vfx_data.get("DamageNumber", 0)
 	if damage_number <= 0 and vfx_node._data.get("ShakeActor", true):
-			target_actor_node.play_shake()
+		target_actor_node.play_shake()
 
 static func create_vfx_at_pos(pos:MapPos, vfx_key, vfx_data:Dictionary, source_actor:BaseActor=null)->BaseVfxNode:
 	var combat_control = CombatRootControl.Instance
@@ -87,6 +100,14 @@ static func _create_vfx_on_holder(vfx_holder:VfxHolder, vfx_key, vfx_data:Dictio
 	if vfx_key == null or vfx_key == "":
 		vfx_key = vfx_data.get("VfxKey", '')
 	if FORCE_RELOAD: VfxLibrary.reload_vfxs()
+	
+	# Shortcut FlashText
+	# Must go though FlashText Controller 
+	if vfx_key == "FlashText" :
+		var damage_string = str(vfx_data.get("DamageNumber", 0))
+		var damage_text_type = vfx_data.get("DamageTextType", VfxHelper.FlashTextType.Normal_Dmg)
+		VfxHelper.create_flash_text(vfx_holder.actor_node.Actor, damage_string, damage_text_type)
+		return null
 	
 	var vfx_def = {}
 	if vfx_key and not vfx_data.get("BeenMerged", false): 

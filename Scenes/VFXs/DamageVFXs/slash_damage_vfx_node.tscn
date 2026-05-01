@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://178iks51goj2"]
+
+[ext_resource type="Script" uid="uid://biybxtesavy66" path="res://assets/Scripts/VFXs/ParticalVfxs/ParticleSpriteVfxNode.gd" id="1_r2qn1"]
+[ext_resource type="Shader" uid="uid://3kh1bob3bgej" path="res://assets/Scripts/VFXs/DamageVfxs/spirte_partical_shader.gdshader" id="2_tb5rv"]
+[ext_resource type="Texture2D" uid="uid://dxvd30y8yirqm" path="res://Scenes/VFXs/DamageVFXs/SlashDamageEffect.png" id="3_4adwv"]
+[ext_resource type="AudioStream" uid="uid://db1wblgm0tk0c" path="res://assets/Sounds/SoundEffects/Dagger Slash SFX/Dagger_slash.wav" id="4_543jj"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_g6f4r"]
+shader = ExtResource("2_tb5rv")
+shader_parameter/sprite_dim = Vector2(2, 3)
+shader_parameter/frame_count = 4
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_g07cv"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+scale_min = 0.29999998
+scale_max = 0.29999998
+
+[node name="SlashDamageVfxNode" type="Node2D" unique_id=13620450 node_paths=PackedStringArray("gpu_partical_node", "audio_stream")]
+z_index = 9
+script = ExtResource("1_r2qn1")
+gpu_partical_node = NodePath("GPUParticles2D")
+audio_stream = NodePath("AudioStreamPlayer2D")
+delete_immediately_on_finish = false
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=2136875060]
+material = SubResource("ShaderMaterial_g6f4r")
+emitting = false
+amount = 1
+texture = ExtResource("3_4adwv")
+lifetime = 0.6
+one_shot = true
+preprocess = 0.2
+randomness = 0.3
+visibility_rect = Rect2(0, 0, 0, 0)
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_g07cv")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1781216067]
+position = Vector2(1, 0)
+stream = ExtResource("4_543jj")

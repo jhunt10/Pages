@@ -49,9 +49,10 @@ func get_vfx(id:String)->BaseVfxNode:
 	return vfx_nodes.get(id)
 
 func remove_vfx(id:String):
-	if vfx_nodes.keys().has(id):
-		var old_vfx:BaseVfxNode = vfx_nodes[id]
-		vfx_nodes.erase(id)
-		if old_vfx and is_instance_valid(old_vfx):
-			old_vfx.finish()
-			old_vfx.queue_free()
+	if not vfx_nodes.keys().has(id):
+		printerr("VfxHolder.remove_vfx: Unknown VfxId '%s'." %[id])
+		return
+	var old_vfx:BaseVfxNode = vfx_nodes[id]
+	vfx_nodes.erase(id)
+	if old_vfx and is_instance_valid(old_vfx):
+		old_vfx._removed_from_vfx_holder()

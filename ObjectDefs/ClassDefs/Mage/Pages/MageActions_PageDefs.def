@@ -396,16 +396,7 @@
 					"DamageDataKey": "MissileDamage",
 					"FramesPerTile": 3.0,
 					"ImpactVfxData": {
-						"AnimationName": "6_sprites_250ms_frames",
-						"AnimationSpeed": 2.0,
-						"RandomOffsets": [
-							0.0,
-							0.0
-						],
-						"ScenePath": "res://assets/Scripts/VFXs/DamageVfxs/damage_vfx_node.tscn",
-						"SpriteName": "SpriteSheets/FireBall_Impact.png",
-						"SpriteSheetHight": 3.0,
-						"SpriteSheetWidth": 2.0
+						"VfxKey": "Exploision_DamageEffect"
 					},
 					"ImpactVfxKey": "",
 					"MissileVfxData": {

@@ -8,8 +8,8 @@ extends BaseVfxNode
 @export var top_of_head:bool
 
 func _on_start():
+	super()
 	if vfx_holder:
-		var actor_node = vfx_holder.actor_node
 		if not actor_node:
 			printerr("AilmentVfxNode: vfx_holder.actor_node is null")
 			return
@@ -27,12 +27,11 @@ func _on_start():
 		if patch_sprite:
 			patch_sprite.size = Vector2i(sprite_bounds.size.x + patch_sprite.patch_margin_left + patch_sprite.patch_margin_right,
 			sprite_bounds.size.y + patch_sprite.patch_margin_top + patch_sprite.patch_margin_bottom)
-			patch_sprite.position =  Vector2i(-patch_sprite.size.x / 2, -patch_sprite.size.y / 2)
+			patch_sprite.position =  Vector2(-patch_sprite.size.x / 2, -patch_sprite.size.y / 2)
 		
 		if top_of_head:
 			self.position = Vector2(0, 0 -  actor_node.offset_node.position.y - sprite_bounds.position.y)
 
 func _on_delete():
-	if vfx_holder:
-		var actor_node = vfx_holder.actor_node
+	if actor_node:
 		actor_node.remove_modulate(actor_modulate)

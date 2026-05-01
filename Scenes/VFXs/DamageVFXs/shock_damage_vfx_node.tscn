@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://c4sjwbmhpmrki"]
+
+[ext_resource type="Script" uid="uid://biybxtesavy66" path="res://assets/Scripts/VFXs/ParticalVfxs/ParticleSpriteVfxNode.gd" id="1_b6s3u"]
+[ext_resource type="Shader" uid="uid://3kh1bob3bgej" path="res://assets/Scripts/VFXs/DamageVfxs/spirte_partical_shader.gdshader" id="2_d8awp"]
+[ext_resource type="Texture2D" uid="uid://7bnyggo3cpya" path="res://Scenes/VFXs/DamageVFXs/ShockDamageEffect.png" id="3_ouis8"]
+[ext_resource type="AudioStream" uid="uid://dkkf8ib84qqoc" path="res://assets/Sounds/SoundEffects/ElectricHit/Electric Hit 1.wav" id="4_b6s3u"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_g6f4r"]
+shader = ExtResource("2_d8awp")
+shader_parameter/sprite_dim = Vector2(2, 3)
+shader_parameter/frame_count = 6
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_g07cv"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(16, 16, 1)
+angle_min = -179.99998
+angle_max = 180.00002
+gravity = Vector3(0, 0, 0)
+scale_min = 0.29999998
+scale_max = 0.29999998
+
+[node name="ShockDamageVfxNode" type="Node2D" unique_id=13620450 node_paths=PackedStringArray("gpu_partical_node", "audio_stream")]
+z_index = 9
+script = ExtResource("1_b6s3u")
+gpu_partical_node = NodePath("GPUParticles2D")
+audio_stream = NodePath("AudioStreamPlayer2D")
+delete_immediately_on_finish = false
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=2136875060]
+material = SubResource("ShaderMaterial_g6f4r")
+emitting = false
+amount = 1
+texture = ExtResource("3_ouis8")
+one_shot = true
+preprocess = 0.2
+randomness = 0.3
+visibility_rect = Rect2(0, 0, 0, 0)
+process_material = SubResource("ParticleProcessMaterial_g07cv")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1781216067]
+position = Vector2(1, 0)
+stream = ExtResource("4_b6s3u")

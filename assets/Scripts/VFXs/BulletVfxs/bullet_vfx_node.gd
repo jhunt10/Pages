@@ -1,11 +1,10 @@
 class_name BulletVfxNode
-extends BaseAttackVfxNode
+extends BaseSpriteVfxNode
 
 var starting_offset:Vector2i
 var velocity:float
 var damage_vfx_datas:Array = []
 var rotation_offset:float
-@export var sprite:Sprite2D
 
 var frame_count = 0
 
@@ -45,16 +44,24 @@ func _on_start():
 
 
 func _process(delta: float) -> void:
+	super(delta)
 	frame_count += 1
 	sprite.position = sprite.position.move_toward(Vector2.ZERO, delta * velocity)
 	
 	var angle = sprite.position.direction_to(Vector2.ZERO).angle() + (PI / 2)
 	sprite.rotation = angle + rotation_offset
 	if abs(sprite.position.distance_to(Vector2.ZERO)) < 0.01:
-		self.finish()
+		if not self._state == States.Finished:
+			self.finish()
 
 func add_damage_effect(vfx_data:Dictionary):
 	damage_vfx_datas.append(vfx_data)
+
+
+func is_ready_to_delete()->bool:
+	if audio_player:
+		return not audio_player.playing
+	return true
 
 func _on_delete():
 	var actor = self.actor_node.Actor
@@ -63,6 +70,7 @@ func _on_delete():
 		VfxHelper.create_damage_effect(actor, vfx_key, damage_vfx_data)
 
 func finish():
-	print("Missile was processed %s times" % [frame_count])
+	print("Bullet was processed %s times" % [frame_count])
 	super()
+	sprite.hide()
 	

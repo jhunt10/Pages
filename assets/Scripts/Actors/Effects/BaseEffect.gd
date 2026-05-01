@@ -110,11 +110,11 @@ func _get_object_specific_tags()->Array:
 		tags.append("Debuff")
 	if is_good():
 		tags.append("Buff")
-	for sub_effect_data in _sub_effects_data.values():
-		var script_path = sub_effect_data.get("SubEffectScript")
-		var script:BaseSubEffect = _get_sub_effect_script(script_path)
+	for sub_effect_key in _sub_effects_data.keys():
+		var sub_effect_data = _sub_effects_data[sub_effect_key]
+		var script:BaseSubEffect = _get_sub_effect_script(sub_effect_key)
 		if !script:
-			printerr("%s.get_tags: Failed to find SubEffect script '%s'." %[self.EffectKey, script_path])
+			printerr("%s.get_tags: Failed to find SubEffect script for '%s'." %[self.EffectKey, sub_effect_key])
 			continue
 		var sub_tags = script.get_effect_tags(sub_effect_data, self._def, self)
 		TagHelper.merge_lists(tags, sub_tags)

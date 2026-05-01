@@ -1,183 +1,31 @@
 [gd_scene format=3 uid="uid://ukr3q0j2b7ps"]
 
 [ext_resource type="Script" uid="uid://ptw13c3isoay" path="res://assets/Scripts/VFXs/DamageVfxs/damage_vfx_node.gd" id="1_5qt1g"]
-[ext_resource type="Texture2D" uid="uid://26rrlc3hiro5" path="res://ObjectDefs/Data/VFXs/DamageVFXs/SmokeEffect.png" id="2_535dp"]
-[ext_resource type="AudioStream" uid="uid://cmf3hg1eq411o" path="res://assets/Sounds/SoundEffects/478278__joao_janz__8-bit-explosion-1_5.wav" id="3_5w5er"]
+[ext_resource type="Texture2D" uid="uid://bcedbm54c5vhb" path="res://ObjectDefs/Data/VFXs/OLD_Damage/Sprites/FireSmallEffect.png" id="2_kmlao"]
+[ext_resource type="Shader" uid="uid://3kh1bob3bgej" path="res://assets/Scripts/VFXs/DamageVfxs/spirte_partical_shader.gdshader" id="4_043rq"]
 
-[sub_resource type="Animation" id="Animation_wtg8w"]
-resource_name = "4_sprites_250ms_frames"
-step = 0.25
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.25, 0.5, 0.75),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:animation_half_way")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0.5),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_g6f4r"]
+shader = ExtResource("4_043rq")
+shader_parameter/sprite_dim = Vector2(2, 3)
+shader_parameter/frame_count = 6
 
-[sub_resource type="Animation" id="Animation_mg4p0"]
-resource_name = "4_sprites_250ms_frames_loop"
-loop_mode = 1
-step = 0.25
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.25, 0.5, 0.75),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3]
-}
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_g07cv"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(32, 32, 1)
+gravity = Vector3(0, 0, 0)
+scale_min = 0.5
+scale_max = 0.5
 
-[sub_resource type="Animation" id="Animation_uwom5"]
-resource_name = "6_sprites_250ms_frames"
-length = 1.5
-step = 0.25
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1, 1.25),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 4, 5]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:animation_half_way")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0.75),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-
-[sub_resource type="Animation" id="Animation_7qvkc"]
-resource_name = "6_sprites_250ms_frames_loop"
-length = 1.5
-loop_mode = 1
-step = 0.25
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1, 1.25),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 4, 5]
-}
-
-[sub_resource type="Animation" id="Animation_kvxq2"]
-resource_name = "8_sprites_250ms_frames_loop"
-length = 2.0
-loop_mode = 1
-step = 0.25
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 4, 5, 6, 7]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:animation_half_way")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(1),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-
-[sub_resource type="Animation" id="Animation_lwwt5"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:animation_half_way")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_3vpeu"]
-_data = {
-&"4_sprites_250ms_frames": SubResource("Animation_wtg8w"),
-&"4_sprites_250ms_frames_loop": SubResource("Animation_mg4p0"),
-&"6_sprites_250ms_frames": SubResource("Animation_uwom5"),
-&"6_sprites_250ms_frames_loop": SubResource("Animation_7qvkc"),
-&"8_sprites_250ms_frames_loop": SubResource("Animation_kvxq2"),
-&"RESET": SubResource("Animation_lwwt5")
-}
-
-[node name="DamageVfxNode" type="Node2D" unique_id=13620450 node_paths=PackedStringArray("audio_player", "sprite", "animation")]
+[node name="DamageVfxNode" type="Node2D" unique_id=13620450]
 z_index = 9
 script = ExtResource("1_5qt1g")
-audio_player = NodePath("AudioStreamPlayer2D")
-sprite = NodePath("Sprite2D")
-animation = NodePath("AnimationPlayer")
-animation_half_way = true
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1744614440]
-texture = ExtResource("2_535dp")
-hframes = 2
-vframes = 3
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=722119462]
-libraries/ = SubResource("AnimationLibrary_3vpeu")
-
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=73306927]
-stream = ExtResource("3_5w5er")
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=2136875060]
+material = SubResource("ShaderMaterial_g6f4r")
+emitting = false
+amount = 2
+texture = ExtResource("2_kmlao")
+one_shot = true
+randomness = 0.3
+process_material = SubResource("ParticleProcessMaterial_g07cv")

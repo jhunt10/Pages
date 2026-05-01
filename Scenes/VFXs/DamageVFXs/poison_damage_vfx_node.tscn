@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://bhxg2sp7tq7k6"]
+
+[ext_resource type="Script" uid="uid://biybxtesavy66" path="res://assets/Scripts/VFXs/ParticalVfxs/ParticleSpriteVfxNode.gd" id="1_s5ae0"]
+[ext_resource type="Shader" uid="uid://3kh1bob3bgej" path="res://assets/Scripts/VFXs/DamageVfxs/spirte_partical_shader.gdshader" id="2_25xcb"]
+[ext_resource type="Texture2D" uid="uid://bp0yhvk02bw7q" path="res://Scenes/VFXs/DamageVFXs/PoisonDamageEffect.png" id="3_1hmvg"]
+[ext_resource type="AudioStream" uid="uid://b3tejhpsn2in2" path="res://assets/Sounds/SoundEffects/Bubble.wav" id="4_svxev"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_g6f4r"]
+shader = ExtResource("2_25xcb")
+shader_parameter/sprite_dim = Vector2(2, 3)
+shader_parameter/frame_count = 6
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_g07cv"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(16, 16, 1)
+gravity = Vector3(0, 0, 0)
+scale_min = 0.29999998
+scale_max = 0.29999998
+
+[node name="PoisonDamageVfxNode" type="Node2D" unique_id=13620450 node_paths=PackedStringArray("gpu_partical_node", "audio_stream")]
+z_index = 9
+script = ExtResource("1_s5ae0")
+gpu_partical_node = NodePath("GPUParticles2D")
+audio_stream = NodePath("AudioStreamPlayer2D")
+delete_immediately_on_finish = false
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=2136875060]
+material = SubResource("ShaderMaterial_g6f4r")
+emitting = false
+amount = 1
+texture = ExtResource("3_1hmvg")
+one_shot = true
+preprocess = 0.2
+randomness = 0.3
+visibility_rect = Rect2(0, 0, 0, 0)
+process_material = SubResource("ParticleProcessMaterial_g07cv")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1781216067]
+position = Vector2(1, 0)
+stream = ExtResource("4_svxev")

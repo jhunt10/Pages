@@ -1,6 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://707pvs4q86nl"]
+[gd_scene format=3 uid="uid://707pvs4q86nl"]
 
-[ext_resource type="Script" path="res://assets/Scripts/VFXs/ParticalVfxs/flame_thrower_vfx_node.gd" id="1_sd1yc"]
+[ext_resource type="Script" uid="uid://d3pu5eknuo8r" path="res://assets/Scripts/VFXs/ParticalVfxs/flame_thrower_vfx_node.gd" id="1_sd1yc"]
 
 [sub_resource type="Gradient" id="Gradient_hqom1"]
 offsets = PackedFloat32Array(0, 0.510417)
@@ -9,10 +9,10 @@ colors = PackedColorArray(1, 0, 0, 1, 1, 1, 0, 1)
 [sub_resource type="Gradient" id="Gradient_6tc4q"]
 colors = PackedColorArray(1, 0, 0, 1, 1, 1, 0, 1)
 
-[node name="FlameThrowerVfxNode" type="Node2D"]
+[node name="FlameThrowerVfxNode" type="Node2D" unique_id=1252732506]
 script = ExtResource("1_sd1yc")
 
-[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+[node name="CPUParticles2D" type="CPUParticles2D" parent="." unique_id=449555627]
 position = Vector2(0, -12)
 amount = 300
 lifetime_randomness = 0.3

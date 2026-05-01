@@ -5,13 +5,42 @@ const NO_SPRITE_PATH = "res://assets/Sprites/BadSprite.png"
 
 @export var sprite:Sprite2D
 @export var animation:AnimationPlayer
-@export var animation_half_way:bool
-@export var animation_finished:bool
+@export var audio_player:AudioStreamPlayer2D
 
-var _bad_sprite = false
 var _has_animation = false
 
+func set_vfx_data(new_id:String, data:Dictionary):
+	super(new_id, data)
+	
+	# Load Sprite
+	var sprite_name = _data.get("SpriteName")
+	if sprite_name:
+		var sprite_path = _data.get("LoadPath", "NO_LOAD_PATH").path_join(sprite_name)
+		if ResourceLoader.exists(sprite_path):
+			sprite.texture = load(sprite_path)
+			sprite.hframes = _data.get("SpriteSheetWidth", 1)
+			sprite.vframes = _data.get("SpriteSheetHight", 1)
+		else:
+			printerr("BaseSpriteVfxNode.set_vfx_data: Failed to find file '%s'." % [sprite_path])
+			sprite.texture = load(NO_SPRITE_PATH)
+	
+	# Load Audio
+	if audio_player:
+		var sound_effect = _data.get("SFXFilePath", null)
+		if sound_effect:
+			audio_player.stream = load(sound_effect)
+	
+	# Hide sprite until started
+	sprite.visible = false
+	
+	if _data.get("MatchSourceDir", false):
+		var dir = _data.get("Direction", 0)
+		if dir == 1: sprite.rotation_degrees = 90
+		if dir == 2: sprite.rotation_degrees = 180
+		if dir == 3: sprite.rotation_degrees = 270
+
 func _on_start():
+	# Transform Sprite
 	if _data.has("Offset"):
 		var offset = _data['Offset']
 		sprite.position = Vector2(offset[0], offset[1])
@@ -32,47 +61,20 @@ func _on_start():
 			sprite.scale = Vector2(scale_data[0], scale_data[1])
 		else:
 			sprite.scale = Vector2(scale_data, scale_data)
-			
-	var animation_name = _data.get("AnimationName", "main_animation")
-	if animation_name:
-		_has_animation = true
-		animation_finished = false
-		animation.play(animation_name)
-		animation.speed_scale = _data.get("AnimationSpeed", 1)
-		animation.animation_finished.connect(_on_animation_finish)
+	
+	if animation:
+		var animation_name = _data.get("AnimationName", "main_animation")
+		if animation_name:
+			animation.play(animation_name)
+			animation.speed_scale = _data.get("AnimationSpeed", 1)
+			animation.animation_finished.connect(_on_animation_finish)
+	
+	if audio_player:
+		audio_player.play()
+	
 	sprite.visible = true
-	animation_half_way = false
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta: float) -> void:
-	if _has_animation and _state == States.Playing and animation_finished:
-		finish()
-
-func set_vfx_data(new_id:String, data:Dictionary):
-	super(new_id, data)
-	var sprite_name = _data.get("SpriteName")
-	if sprite_name:
-		var sprite_path = _data.get("LoadPath", "NO_LOAD_PATH").path_join(sprite_name)
-		if ResourceLoader.exists(sprite_path):
-			sprite.texture = load(sprite_path)
-			sprite.hframes = _data.get("SpriteSheetWidth", 1)
-			sprite.vframes = _data.get("SpriteSheetHight", 1)
-		else:
-			printerr("BaseSpriteVfxNode.set_vfx_data: Failed to find file '%s'." % [sprite_path])
-			_bad_sprite = true
-	
-	if _bad_sprite:
-		sprite.texture = load(NO_SPRITE_PATH)
-	else:
-		# Hide sprite until started
-		sprite.visible = false
-	
-	if _data.get("MatchSourceDir", false):
-		var dir = _data.get("Direction", 0)
-		if dir == 1: sprite.rotation_degrees = 90
-		if dir == 2: sprite.rotation_degrees = 180
-		if dir == 3: sprite.rotation_degrees = 270
 
 func _on_animation_finish(_animation_name:String):
-	animation_finished = true
+	if self._state != States.Finished:
+		self.finish()
