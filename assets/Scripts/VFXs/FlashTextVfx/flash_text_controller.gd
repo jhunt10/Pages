@@ -17,7 +17,7 @@ func _ready():
 	#label.add_theme_color_override('font_color', _color)
 	pass
 
-func add_flash_text(val:String, flash_text_type:VfxHelper.FlashTextType, data:Dictionary = {}, color:Color = Color.WHITE):
+func add_flash_text(val:String, flash_text_type:BaseFlashTextVfxNode.FlashTextType, data:Dictionary = {}, color:Color = Color.WHITE):
 	var new_text:FlashTextNode = premade_label.duplicate()
 	new_text.id = str(ResourceUID.create_id())
 	
@@ -26,20 +26,20 @@ func add_flash_text(val:String, flash_text_type:VfxHelper.FlashTextType, data:Di
 	var text_value = val
 	
 	match flash_text_type:
-		VfxHelper.FlashTextType.Normal_Dmg:
+		BaseFlashTextVfxNode.FlashTextType.Normal_Dmg:
 			color = normal_damage_color
 		
-		VfxHelper.FlashTextType.Blocked_Dmg:
+		BaseFlashTextVfxNode.FlashTextType.Blocked_Dmg:
 			color = blocked_damage_color
 		
-		VfxHelper.FlashTextType.Crit_Dmg:
+		BaseFlashTextVfxNode.FlashTextType.Crit_Dmg:
 			color = crit_damage_color
 		
-		VfxHelper.FlashTextType.Healing_Dmg:
+		BaseFlashTextVfxNode.FlashTextType.Healing_Dmg:
 			color = healing_damage_color
 			if not text_value.begins_with("+"):
 				text_value = "+" + text_value
-		VfxHelper.FlashTextType.DOT_Dmg:
+		BaseFlashTextVfxNode.FlashTextType.DOT_Dmg:
 			color = dot_damage_color
 			#font_size = font_size - 1
 			outline_size = 2

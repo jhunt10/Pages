@@ -1,9 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://eox4g5msr5a"]
+[gd_scene format=3 uid="uid://eox4g5msr5a"]
 
-[ext_resource type="Script" path="res://assets/Scripts/VFXs/FlashTextVfx/flash_text_controller.gd" id="1_fmkua"]
-[ext_resource type="Script" path="res://assets/Scripts/VFXs/FlashTextVfx/flash_text_node.gd" id="3_ajxvv"]
+[ext_resource type="Script" uid="uid://d2qwdm3d56x5v" path="res://assets/Scripts/VFXs/FlashTextVfx/flash_text_controller.gd" id="1_fmkua"]
+[ext_resource type="Script" uid="uid://yy1dlotb0q7u" path="res://assets/Scripts/VFXs/FlashTextVfx/flash_text_node.gd" id="3_ajxvv"]
 
-[node name="FlashTextController" type="Control"]
+[node name="FlashTextController" type="Control" unique_id=425858131]
 z_index = 9
 layout_mode = 3
 anchors_preset = 7
@@ -23,8 +23,7 @@ crit_damage_color = Color(1, 1, 0, 1)
 healing_damage_color = Color(0, 1, 0, 1)
 dot_damage_color = Color(0.577009, 0.577008, 0.577008, 1)
 
-[node name="PremadeDamageLabel" type="Label" parent="."]
-visible = false
+[node name="PremadeDamageLabel" type="Label" parent="." unique_id=711133549]
 clip_contents = true
 layout_mode = 1
 anchors_preset = 15

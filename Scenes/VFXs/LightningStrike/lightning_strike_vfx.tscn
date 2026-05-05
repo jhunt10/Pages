@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://dhmti62e7s8lx"]
 
-[ext_resource type="Script" uid="uid://ptw13c3isoay" path="res://assets/Scripts/VFXs/DamageVfxs/damage_vfx_node.gd" id="1_nx2su"]
-[ext_resource type="Texture2D" uid="uid://3lr2pbv8qbis" path="res://ObjectDefs/Data/VFXs/OLD_DamageVFXs/Lightning/LightningStrikeEffect.png" id="2_3yedr"]
-[ext_resource type="AudioStream" uid="uid://da51qq5b3fou6" path="res://assets/Sounds/SoundEffects/lightning bolt 3.wav" id="3_a4lkp"]
+[ext_resource type="Script" uid="uid://cl3j70t8kmeao" path="res://assets/Scripts/VFXs/BaseSpriteVfxNode.gd" id="1_xj2e7"]
+[ext_resource type="Texture2D" uid="uid://3lr2pbv8qbis" path="res://Scenes/VFXs/LightningStrike/LightningStrikeEffect.png" id="2_nmd2g"]
+[ext_resource type="AudioStream" uid="uid://da51qq5b3fou6" path="res://assets/Sounds/SoundEffects/lightning bolt 3.wav" id="3_cl2pc"]
 
 [sub_resource type="Animation" id="Animation_wtg8w"]
 resource_name = "4_sprites_250ms_frames"
@@ -184,26 +184,28 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath(".:animation_half_way")
+tracks/1/path = NodePath("AudioStreamPlayer2D:playing")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0.5),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("AudioStreamPlayer2D:playing")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.4),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_trigger_next_vfxs"
+}]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_3vpeu"]
@@ -219,13 +221,13 @@ _data = {
 
 [node name="LightningStrikeVfxNode" type="Node2D" unique_id=13620450 node_paths=PackedStringArray("sprite", "animation", "audio_player")]
 z_index = 9
-script = ExtResource("1_nx2su")
+script = ExtResource("1_xj2e7")
 sprite = NodePath("Sprite2D")
 animation = NodePath("AnimationPlayer")
 audio_player = NodePath("AudioStreamPlayer2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1744614440]
-texture = ExtResource("2_3yedr")
+texture = ExtResource("2_nmd2g")
 offset = Vector2(0, -12)
 hframes = 3
 vframes = 2
@@ -234,4 +236,4 @@ vframes = 2
 libraries/ = SubResource("AnimationLibrary_3vpeu")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=73306927]
-stream = ExtResource("3_a4lkp")
+stream = ExtResource("3_cl2pc")

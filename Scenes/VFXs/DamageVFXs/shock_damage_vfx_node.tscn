@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://c4sjwbmhpmrki"]
 
 [ext_resource type="Script" uid="uid://biybxtesavy66" path="res://assets/Scripts/VFXs/ParticalVfxs/ParticleSpriteVfxNode.gd" id="1_b6s3u"]
-[ext_resource type="Shader" uid="uid://3kh1bob3bgej" path="res://assets/Scripts/VFXs/DamageVfxs/spirte_partical_shader.gdshader" id="2_d8awp"]
+[ext_resource type="Shader" uid="uid://3kh1bob3bgej" path="res://assets/Scripts/VFXs/ParticalVfxs/spirte_partical_shader.gdshader" id="2_d8awp"]
 [ext_resource type="Texture2D" uid="uid://7bnyggo3cpya" path="res://Scenes/VFXs/DamageVFXs/ShockDamageEffect.png" id="3_ouis8"]
 [ext_resource type="AudioStream" uid="uid://dkkf8ib84qqoc" path="res://assets/Sounds/SoundEffects/ElectricHit/Electric Hit 1.wav" id="4_b6s3u"]
 
@@ -17,8 +17,6 @@ emission_box_extents = Vector3(16, 16, 1)
 angle_min = -179.99998
 angle_max = 180.00002
 gravity = Vector3(0, 0, 0)
-scale_min = 0.29999998
-scale_max = 0.29999998
 
 [node name="ShockDamageVfxNode" type="Node2D" unique_id=13620450 node_paths=PackedStringArray("gpu_partical_node", "audio_stream")]
 z_index = 9

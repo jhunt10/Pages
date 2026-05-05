@@ -45,17 +45,8 @@ func on_effect_trigger(effect:BaseEffect, subeffect_data:Dictionary, trigger:Bas
 			source_actor.effects.trigger_damage_dealt(game_state, damage_event)
 		
 		# Create Damage VFX 
-		var damage_effect = damage_data.get("DamageVfxKey", null)
-		var damage_effect_data = damage_data.get("DamageVfxData", {}).duplicate(true)
-		if damage_effect:
-			if source_actor:
-				damage_effect_data['SourceActorId'] = source_actor.Id
-			damage_effect_data['ShakeActor'] = false
-			damage_effect_data['DamageNumber'] = 0 - damage_event.final_damage
-			damage_effect_data['DamageTextType'] = VfxHelper.FlashTextType.DOT_Dmg
-			if damage_event.final_damage < 0:
-				damage_effect_data['DamageTextType'] = VfxHelper.FlashTextType.Healing_Dmg
-			VfxHelper.create_damage_effect(actor, damage_effect, damage_effect_data)
+		VfxHelper.create_vfx_for_damage_event(actor, damage_event, damage_data)
+		
 		if actor.is_dead:
 			break
 	

@@ -301,7 +301,7 @@ func _execute_turn_frames(game_state:GameStateData, que:ActionQue, turn_index:in
 	 
 	if subaction_index == 0:
 		if action.has_ammo(que.actor) and not que.can_pay_page_ammo(action.ActionKey):
-			VfxHelper.create_flash_text(que.actor, "AMMO", VfxHelper.FlashTextType.NoAmmo)
+			VfxHelper.create_flash_text(que.actor, "AMMO", BaseFlashTextVfxNode.FlashTextType.NoAmmo)
 			que.fail_turn()
 			return
 			

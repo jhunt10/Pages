@@ -25,15 +25,15 @@ func on_effect_trigger(effect:BaseEffect, subeffect_data:Dictionary, trigger:Bas
 	actor.effects.trigger_damage_taken(game_state, damage_event)
 	
 	# Create Damage VFX 
-	var main_damage_effect = damage_data.get("DamageVfxKey", null)
-	var main_damage_effect_data = damage_data.get("DamageVfxData", {}).duplicate(true)
-	if main_damage_effect:
-		if source_actor:
-			main_damage_effect_data['SourceActorId'] = source_actor.Id
-		main_damage_effect_data['ShakeActor'] = false
-		main_damage_effect_data['DamageNumber'] = 0 - damage_event.final_damage
-		main_damage_effect_data['DamageTextType'] = VfxHelper.FlashTextType.DOT_Dmg
-		VfxHelper.create_damage_effect(actor, main_damage_effect, main_damage_effect_data)
+	#var main_damage_effect = damage_data.get("DamageVfxKey", null)
+	#var main_damage_effect_data = damage_data.get("DamageVfxData", {}).duplicate(true)
+	#if main_damage_effect:
+		#if source_actor:
+			#main_damage_effect_data['SourceActorId'] = source_actor.Id
+		#main_damage_effect_data['ShakeActor'] = false
+		#main_damage_effect_data['DamageNumber'] = 0 - damage_event.final_damage
+		#main_damage_effect_data['DamageTextType'] = BaseFlashTextVfxNode.FlashTextType.DOT_Dmg
+		#VfxHelper.create_damage_effect(actor, main_damage_effect, main_damage_effect_data)
 		
 	
 	var adj_actors = MapHelper.get_adjacent_actors(game_state, actor)
@@ -50,8 +50,17 @@ func on_effect_trigger(effect:BaseEffect, subeffect_data:Dictionary, trigger:Bas
 		adj_actor.effects.trigger_damage_taken(game_state, adj_damage_event)
 		#var adj_damage_event = DamageHelper.handle_damage(effect, adj_actor, shared_damage_data, tag_chain, game_state, null, false)
 		var vfx_node = VfxHelper.create_vfx_on_actor(adj_actor, "LightningChainVfx", {"SourceActorId": actor.Id, "HostActorId": adj_actor.Id})
+		
+		## Chain Flash Text Data
+		#var flash_text_data = {}
+		#flash_text_data['DamageNumber'] = vfx_data.get("DamageNumber", 0)
+		#flash_text_data['DamageColor'] = vfx_data.get("DamageColor", Color.WHITE)
+		#if vfx_data.has("DamageTextType"):
+			#flash_text_data['DamageColor'] = vfx_data.get("DamageTextType", BaseFlashTextVfxNode.FlashTextType.Normal_Dmg)
+		#vfx_node.add_chained_vfx("FlashText", flash_text_data)
+
 		var adj_damage_effect_data = VfxLibrary.get_vfx_def("SmallLightning_DamageEffect")
 		adj_damage_effect_data['ShakeActor'] = false
-		adj_damage_effect_data['DamageTextType'] = VfxHelper.FlashTextType.DOT_Dmg
+		adj_damage_effect_data['DamageTextType'] = BaseFlashTextVfxNode.FlashTextType.DOT_Dmg
 		adj_damage_effect_data['DamageNumber'] = 0 - adj_damage_event.final_damage
 		vfx_node.add_damage_effect(adj_damage_effect_data)

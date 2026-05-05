@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://bqqws8c6rr6yq"]
+
+[ext_resource type="Script" uid="uid://bpuhc2rxqbn7x" path="res://assets/Scripts/VFXs/FlashTextVfx/flash_text_vfx_node.gd" id="1_qx418"]
+[ext_resource type="Script" uid="uid://yy1dlotb0q7u" path="res://assets/Scripts/VFXs/FlashTextVfx/flash_text_node.gd" id="2_br75t"]
+[ext_resource type="FontFile" uid="uid://cq1gkq6upl513" path="res://assets/Fonts/8bit-2.ttf" id="2_y5687"]
+
+[node name="FlashTextVfxNode" type="Node2D" unique_id=788758491 node_paths=PackedStringArray("label")]
+script = ExtResource("1_qx418")
+flash_text_value = "10"
+flash_text_type = 4
+default_font_size = 10
+small_font_size = 6
+normal_damage_color = Color(1, 0, 0, 1)
+blocked_damage_color = Color(0, 0, 1, 1)
+crit_damage_color = Color(1, 1, 0, 1)
+healing_damage_color = Color(0, 1, 0, 1)
+dot_damage_color = Color(0.39688927, 0.39688927, 0.39688924, 1)
+no_ammo_color = Color(1, 0.38431373, 0, 1)
+label = NodePath("Label")
+
+[node name="Label" type="Label" parent="." unique_id=1070892157]
+modulate = Color(0.39688927, 0.39688927, 0.39688924, 1)
+clip_contents = true
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -8.5
+offset_top = -11.0
+offset_right = 8.5
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_outline_color = Color(0.34407577, 0.34407577, 0.34407565, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("2_y5687")
+theme_override_font_sizes/font_size = 5
+text = " 10 "
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("2_br75t")

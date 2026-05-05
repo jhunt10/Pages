@@ -7,8 +7,6 @@ const NO_SPRITE_PATH = "res://assets/Sprites/BadSprite.png"
 @export var animation:AnimationPlayer
 @export var audio_player:AudioStreamPlayer2D
 
-var _has_animation = false
-
 func set_vfx_data(new_id:String, data:Dictionary):
 	super(new_id, data)
 	

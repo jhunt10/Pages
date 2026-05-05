@@ -34,5 +34,5 @@ func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, metadata:
 			color = Color(color_arr[0], color_arr[1], color_arr[2], color_arr[3])
 		else:
 			printerr("SubAct_FlashText: Failed to parse color string: '%s'" % [color_str])
-	actor_node.vfx_holder.flash_text_controller.add_flash_text(subaction_data.get("Text", ""), VfxHelper.FlashTextType.Message, flash_text_data, color)
+	actor_node.vfx_holder.flash_text_controller.add_flash_text(subaction_data.get("Text", ""), BaseFlashTextVfxNode.FlashTextType.Message, flash_text_data, color)
 	return BaseSubAction.Success

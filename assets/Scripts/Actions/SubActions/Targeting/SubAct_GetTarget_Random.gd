@@ -42,7 +42,7 @@ func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, metadata:
 	
 	# No valid targets
 	if selection_data.get_potential_target_count() == 0:
-		#VfxHelper.create_flash_text(actor, "No Target", VfxHelper.FlashTextType.NoTarget)
+		#VfxHelper.create_flash_text(actor, "No Target", FlashTextType.FlashTextType.NoTarget)
 		return BaseSubAction.Success
 	var random_index = randi_range(0, selection_data.get_potential_target_count()-1)
 	var target = selection_data.list_potential_targets()[random_index]

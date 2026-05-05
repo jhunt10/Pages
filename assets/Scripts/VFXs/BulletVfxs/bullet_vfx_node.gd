@@ -54,20 +54,10 @@ func _process(delta: float) -> void:
 		if not self._state == States.Finished:
 			self.finish()
 
-func add_damage_effect(vfx_data:Dictionary):
-	damage_vfx_datas.append(vfx_data)
-
-
 func is_ready_to_delete()->bool:
 	if audio_player:
 		return not audio_player.playing
 	return true
-
-func _on_delete():
-	var actor = self.actor_node.Actor
-	for damage_vfx_data in damage_vfx_datas:
-		var vfx_key = damage_vfx_data['VfxKey']
-		VfxHelper.create_damage_effect(actor, vfx_key, damage_vfx_data)
 
 func finish():
 	print("Bullet was processed %s times" % [frame_count])

@@ -154,8 +154,6 @@ static func handle_attack(
 	for defender:BaseActor in defenders:
 		var sub_event:AttackSubEvent = attack_event.sub_events[defender.Id]
 		
-		var damage_vfx_cache = []
-		
 		# Apply damage 
 		for damage_event:DamageEvent in sub_event.damage_events.values():
 			defender.apply_damage_event(damage_event, true, game_state)
@@ -163,20 +161,9 @@ static func handle_attack(
 			if damage_event.final_damage > 0:
 				total_leachable_damage_dealt += damage_event.final_damage
 			
-			# Get Damage Vfx Data
-			var damage_key = damage_event.damage_data_key
-			var damage_data = attack_event.damage_datas[damage_key]
-			damage_vfx_cache.append(build_damage_vfx_data(attacker.Id, damage_event, damage_data, sub_event))
-			
 			# Ignore rest of damage if defender died
 			if defender.is_dead:
 				break
-		
-		# Cache VFX data
-		vfx_data_cache[defender.Id] = {
-			"ResistedAtLeastOnce": false,
-			"DamageVFXDatas": damage_vfx_cache
-		}
 		
 		# Create Effects
 		# Skip effects if defender died
@@ -204,7 +191,7 @@ static func handle_attack(
 		if heal_val > 0:
 			attack_event.final_leached_damage = heal_val
 			attacker.stats.apply_healing(heal_val)
-			VfxHelper.create_flash_text(attacker, str(heal_val), VfxHelper.FlashTextType.Healing_Dmg)
+			VfxHelper.create_flash_text(attacker, str(heal_val), BaseFlashTextVfxNode.FlashTextType.Healing_Dmg)
 	
 	
 	attack_event.attack_stage = AttackStage.Resolved
@@ -214,44 +201,8 @@ static func handle_attack(
 		actor.stats.clear_temp_stat_mods()
 	
 	# Create Vfxs
-	var attack_vfx_key = attack_details.get("AttackVfxKey", "")
-	var attack_vfx_data = attack_details.get("AttackVfxData", {})
-	for defender:BaseActor in defenders:
-		var sub_event:AttackSubEvent = attack_event.sub_events[defender.Id]
-		var defender_node = CombatRootControl.get_actor_node(defender.Id)
-		var vfx_cache = vfx_data_cache[defender.Id]
-		
-		# Create "Resist" text for resisted efects
-		#if vfx_cache.get('ResistedAtLeastOnce', false):
-			#defender_node.vfx_holder.flash_text_controller.add_flash_text("Resist", VfxHelper.FlashTextType.Blocked_Dmg)
-		
-		# Create "Immune" text for immune efects
-		if vfx_cache.get('WasImmuneToEffect', false):
-			defender_node.vfx_holder.flash_text_controller.add_flash_text("Immune", VfxHelper.FlashTextType.Blocked_Dmg)
-		
-		if sub_event.is_evade:
-			defender_node.vfx_holder.flash_text_controller.add_flash_text("Evade", VfxHelper.FlashTextType.Blocked_Dmg)
-			
-		if sub_event.is_miss:
-			defender_node.vfx_holder.flash_text_controller.add_flash_text("Miss", VfxHelper.FlashTextType.Blocked_Dmg)
-		
-		var attack_vfx = null
-		if attack_vfx_key or attack_vfx_data.get("ScenePath", null):
-			var vfx_source = attacker
-			if attack_from_spot_override:
-				#TODO: I think this is a hack for chaining? Anyway, bad idea
-				var posible_actors = game_state.get_actors_at_pos(attack_from_spot_override)
-				if posible_actors.size() == 1:
-					vfx_source = posible_actors[0]
-			attack_vfx = VfxHelper.create_vfx_on_actor(defender, attack_vfx_key, attack_vfx_data, vfx_source)
-		for damage_vfx_cache in vfx_cache['DamageVFXDatas']:
-			var damage_vfx_key = damage_vfx_cache['DamageVfxKey']
-			var damage_vfx_data = damage_vfx_cache['DamageVfxData']
-			if attack_vfx:
-				attack_vfx.add_chained_vfx(damage_vfx_key, damage_vfx_data)
-			elif damage_vfx_key:
-				VfxHelper.create_damage_effect(defender, damage_vfx_key, damage_vfx_data)
-		
+	VfxHelper.create_vfs_for_attack_event(attack_event, game_state)
+	
 	# Trigger After Attack Effects
 	for actor in all_unique_actors:
 		actor.effects.trigger_attack(attack_event, game_state)
@@ -525,31 +476,6 @@ static func _does_attack_stat_mod_apply_to_actor(stat_mod:BaseStatMod, actor:Bas
 	
 	return true
 
-static func build_damage_vfx_data(attacker_id:String, damage_event:DamageEvent, damage_data:Dictionary, attack_sub_event:AttackSubEvent=null)->Dictionary:
-	var damage_vfx_key = damage_data.get("DamageVfxKey", '')
-	var damage_vfx_data = damage_data.get("DamageVfxData", {}).duplicate()
-	
-	if damage_vfx_key == "AUTO":
-		var damage_type = DamageEvent.DamageTypes.keys()[damage_event.damage_type]
-		damage_vfx_key = damage_type + "_DamageEffect"
-	damage_vfx_data['VfxKey'] = damage_vfx_key
-	
-	if damage_event.final_damage < 0:
-		damage_vfx_data['DamageTextType'] = VfxHelper.FlashTextType.Healing_Dmg
-	elif attack_sub_event:
-		if attack_sub_event.is_crit and not attack_sub_event.is_blocked:
-			damage_vfx_data['DamageTextType'] = VfxHelper.FlashTextType.Crit_Dmg
-		elif attack_sub_event.is_blocked and not attack_sub_event.is_crit:
-			damage_vfx_data['DamageTextType'] = VfxHelper.FlashTextType.Blocked_Dmg
-	else:
-		damage_vfx_data['DamageTextType'] = VfxHelper.FlashTextType.Normal_Dmg
-	damage_vfx_data['SourceActorId'] = attacker_id
-	damage_vfx_data['DamageNumber'] = 0 - damage_event.final_damage
-	return {
-		"DamageVfxKey": damage_vfx_key,
-		"DamageVfxData": damage_vfx_data
-	}
-
 ## Get AttackEvent.AttackDirection between Attacker and Defender
 static func get_relative_attack_direction(attacker_pos:MapPos, defender_pos:MapPos, defender_awareness:int)->AttackDirection:
 	if defender_pos == null:
@@ -746,12 +672,8 @@ static func handle_colision(
 		loser.apply_damage_event(damage_event, true, game_state)
 		damage_event.was_applied = true
 		
-		var damage_effect = damage_data.get("DamageVfxKey", "Blunt_DamageEffect")
-		var damage_effect_data = damage_data.get("DamageVfxData", {})
-		damage_effect_data['DamageTextType'] = VfxHelper.FlashTextType.DOT_Dmg
-		damage_effect_data['SourceActorId'] = winner.Id
-		damage_effect_data['DamageNumber'] = 0 - damage_event.final_damage
-		VfxHelper.create_damage_effect(loser, damage_effect, damage_effect_data)
+		# Create Vfx
+		VfxHelper.create_vfx_for_damage_event(loser, damage_event, damage_data)
 		
 	# Clear Temp Stat Mods from Actors
 	for actor:BaseActor in all_unique_actors:

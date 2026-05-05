@@ -73,7 +73,7 @@ func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, metadata:
 	# No valid targets
 	if potential_target_count == 0:
 		if current_target_count == 0:
-			VfxHelper.create_flash_text(actor, "No Target", VfxHelper.FlashTextType.NoTarget)
+			VfxHelper.create_flash_text(actor, "No Target", BaseFlashTextVfxNode.FlashTextType.NoTarget)
 			return BaseSubAction.Failed
 		else:
 			return Success

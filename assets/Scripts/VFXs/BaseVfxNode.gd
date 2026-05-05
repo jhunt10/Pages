@@ -69,6 +69,9 @@ func _trigger_next_vfxs():
 	if not _built_chained_vfxs:
 		build_chained_vfx()
 
+func add_chained_vfx(chain_key:String, chain_data:Dictionary):
+	_data['ChainVfxDatas'][chain_key] = chain_data
+
 func build_chained_vfx():
 	if _built_chained_vfxs:
 		return
@@ -76,10 +79,7 @@ func build_chained_vfx():
 	var chain_vfx_datas = _data.get("ChainVfxDatas", {})
 	var source_actor = _data.get('SourceActorId')
 	for vfx_key in chain_vfx_datas.keys():
-		if chain_vfx_datas[vfx_key].has("DamageNumber"):
-			VfxHelper.create_damage_effect(self.actor_node.Actor, vfx_key, chain_vfx_datas[vfx_key])
-		else:
-			VfxHelper.create_vfx_on_actor(self.actor_node.Actor, vfx_key, chain_vfx_datas[vfx_key], source_actor)
+		VfxHelper.create_vfx_on_actor(self.actor_node.Actor, vfx_key, chain_vfx_datas[vfx_key], source_actor)
 
 ## Called after the node has "finished" to check for any lingering Audio or Particals to finish.
 func is_ready_to_delete()->bool:
@@ -109,9 +109,6 @@ func _on_finish():
 
 func _on_delete():
 	pass
-
-func add_chained_vfx(chain_key:String, chain_data:Dictionary):
-	_data['ChainVfxDatas'][chain_key] = chain_data
 
 # Only called by VfxHolder.remove_vfx. Exists to double check logic
 func _removed_from_vfx_holder():

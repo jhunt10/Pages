@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bwpfmn7xfv1f6"]
 
 [ext_resource type="Script" uid="uid://biybxtesavy66" path="res://assets/Scripts/VFXs/ParticalVfxs/ParticleSpriteVfxNode.gd" id="1_wshtt"]
-[ext_resource type="Shader" uid="uid://3kh1bob3bgej" path="res://assets/Scripts/VFXs/DamageVfxs/spirte_partical_shader.gdshader" id="2_0vc3v"]
+[ext_resource type="Shader" uid="uid://3kh1bob3bgej" path="res://assets/Scripts/VFXs/ParticalVfxs/spirte_partical_shader.gdshader" id="2_0vc3v"]
 [ext_resource type="Texture2D" uid="uid://cimk1tc84n8r6" path="res://Scenes/VFXs/DamageVFXs/ColdDamageEffect.png" id="3_juv12"]
 [ext_resource type="AudioStream" uid="uid://314p7uom05gv" path="res://assets/Sounds/SoundEffects/IceSwoosh/Ice Swoosh 4.wav" id="4_0vc3v"]
 
@@ -15,8 +15,6 @@ particle_flag_disable_z = true
 emission_shape = 3
 emission_box_extents = Vector3(32, 32, 1)
 gravity = Vector3(0, 0, 0)
-scale_min = 0.29999998
-scale_max = 0.29999998
 
 [node name="ColdDamageVfxNode" type="Node2D" unique_id=13620450 node_paths=PackedStringArray("gpu_partical_node", "audio_stream")]
 z_index = 9
@@ -36,5 +34,4 @@ randomness = 0.3
 process_material = SubResource("ParticleProcessMaterial_g07cv")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1781216067]
-position = Vector2(1, 0)
 stream = ExtResource("4_0vc3v")

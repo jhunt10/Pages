@@ -1,7 +1,16 @@
 [
 	{
-		"VfxKey": "Exploision_DamageEffect",
+		"VfxKey": "FlashTextVfx",
+		"ScenePath": "res://assets/Scripts/VFXs/FlashTextVfx/flash_text_vfx_node.tscn"
+	},
+	{
+		"VfxKey": "Exploision_AttackVfx",
 		"ScenePath": "res://Scenes/VFXs/Explosion/explosion_vfx_node.tscn",
+		"ShakeActor": true
+	},
+	{
+		"VfxKey": "LightningStrike_AttackVfx",
+		"ScenePath": "res://Scenes/VFXs/LightningStrike/lightning_strike_vfx.tscn",
 		"ShakeActor": true
 	}
 ]

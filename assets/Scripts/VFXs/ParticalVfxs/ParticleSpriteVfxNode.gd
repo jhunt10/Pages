@@ -42,15 +42,17 @@ func start_vfx():
 			return
 		var sprite_bounds = actor_node.actor_sprite.get_sprite_bounds()
 			
-		#if gpu_partical_node:
-			#var sprite_area = Vector2i(sprite_bounds.size.x / 2, sprite_bounds.size.y / 2)
-			#gpu_partical_node.process_material.emission_box_extents = Vector3(sprite_area.x, sprite_area.y, 0)
+		if gpu_partical_node:
+			var sprite_area = Vector2i(sprite_bounds.size.x / 2, sprite_bounds.size.y / 2)
+			gpu_partical_node.process_material.emission_box_extents = Vector3(sprite_area.x, sprite_area.y, 0)
 		
 	if audio_stream and audio_stream.stream != null:
 		audio_stream.play()
 		audio_stream.finished.connect(on_audio_finish)
 	else:
 		audio_finished = true
+	
+	_trigger_next_vfxs()
 
 func is_ready_to_delete()->bool:
 	return particals_finished and audio_finished

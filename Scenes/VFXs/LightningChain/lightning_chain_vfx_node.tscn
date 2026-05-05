@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dnyks48dnsdll"]
 
-[ext_resource type="Script" uid="uid://bmpitqtaoat0x" path="res://ObjectDefs/Data/VFXs/OLD_DamageVFXs/Lightning/lightning_chain_vfx_node.gd" id="1_7uar6"]
-[ext_resource type="Texture2D" uid="uid://cqwtxylvp2n8w" path="res://ObjectDefs/Data/VFXs/OLD_DamageVFXs/Lightning/LightningChainEffect.png" id="2_ae5wa"]
+[ext_resource type="Script" uid="uid://bmpitqtaoat0x" path="res://Scenes/VFXs/LightningChain/lightning_chain_vfx_node.gd" id="1_7uar6"]
+[ext_resource type="Texture2D" uid="uid://cqwtxylvp2n8w" path="res://Scenes/VFXs/LightningChain/LightningChainEffect.png" id="2_ae5wa"]
 
 [sub_resource type="Animation" id="Animation_hryq5"]
 length = 0.001
@@ -75,24 +75,22 @@ tracks/2/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_jk22b"]
 _data = {
-"RESET": SubResource("Animation_hryq5"),
-"animation": SubResource("Animation_iv2t1")
+&"RESET": SubResource("Animation_hryq5"),
+&"animation": SubResource("Animation_iv2t1")
 }
 
-[node name="VFXNode" type="Node2D" node_paths=PackedStringArray("sprite", "animation_player")]
+[node name="LightningChainVFXNode" type="Node2D" unique_id=65944124 node_paths=PackedStringArray("sprite", "animation_player")]
 z_index = 9
 script = ExtResource("1_7uar6")
 sprite = NodePath("Sprite2D")
 animation_player = NodePath("AnimationPlayer")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=601237441]
 self_modulate = Color(1, 1, 1, 0)
 texture = ExtResource("2_ae5wa")
 offset = Vector2(19, 0)
 hframes = 2
 vframes = 3
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_jk22b")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=302902828]
+libraries/ = SubResource("AnimationLibrary_jk22b")

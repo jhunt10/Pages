@@ -163,7 +163,7 @@ func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, que_exe_d
 		override_origin_pos)
 	
 	if missed_moved_actor and not hit_any_actor:
-		VfxHelper.create_flash_text(actor, "Miss", VfxHelper.FlashTextType.Miss)
+		VfxHelper.create_flash_text(actor, "Miss", BaseFlashTextVfxNode.FlashTextType.Miss)
 	
 	#print("\n---------------------------")
 	#print(attack_event.serialize_self())

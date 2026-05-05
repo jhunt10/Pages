@@ -2,17 +2,7 @@ class_name VfxHelper
 
 const FORCE_RELOAD = false
 
-enum FlashTextType {
-	Normal_Dmg, Blocked_Dmg, Crit_Dmg, Healing_Dmg, DOT_Dmg,
-	NoAmmo, NoTarget, Miss, Evade, Protect, Message}
-
-#static func create_attack_vfx_node(from_actor:BaseActor, to_actor:BaseActor, bullet_vfx_key:String, vfx_data:Dictionary):
-	#var temp_data = vfx_data.duplicate(true)
-	#temp_data['SourceActorId'] = from_actor.Id
-	#temp_data['HostActorId'] = to_actor.Id
-	#return create_vfx_on_actor(to_actor, bullet_vfx_key, temp_data)
-
-static func create_flash_text(actor_or_holder, value, flash_text_type:FlashTextType, data:Dictionary = {}, color:Color = Color.WHITE):
+static func create_flash_text(actor_or_holder, value, flash_text_type:BaseFlashTextVfxNode.FlashTextType):
 	var vfx_holder = null
 	if actor_or_holder is BaseActorNode:
 		vfx_holder = actor_or_holder.vfx_holder
@@ -24,51 +14,23 @@ static func create_flash_text(actor_or_holder, value, flash_text_type:FlashTextT
 	
 	if not vfx_holder:
 		return null
-	var text_value = str(value)
-	vfx_holder.flash_text_controller.add_flash_text(text_value, flash_text_type, data, color)
+	var flash_text_data = {
+		"VfxKey": "FlashTextVfx",
+		"FlashTextVal": value,
+		"FlashTextType": flash_text_type
+	}
+	_create_vfx_on_holder(vfx_holder, "FlashTextVfx", flash_text_data)
 
-static func create_damage_effect(target_actor:BaseActor, vfx_key:String, vfx_data:Dictionary):
-	if FORCE_RELOAD: VfxLibrary.reload_vfxs()
-	var target_actor_node:BaseActorNode = CombatRootControl.get_actor_node(target_actor.Id)
-	if !target_actor_node:
-		printerr("Failed to find actor node for: %s" % [target_actor.Id])
-		return
-	var vfx_def = VfxLibrary.get_vfx_data(vfx_key)
-	
-	# No VFX found, so just display damage numbers
-	if !vfx_def:
-		printerr("Failed to VFX with key: %s" % [vfx_key])
-		if vfx_data.has("DamageNumber"):
-			var damage_number = vfx_data.get("DamageNumber", 0)
-			var damage_color = vfx_data.get("DamageColor", Color.WHITE)
-			var damage_text_type = vfx_data.get("DamageTextType", VfxHelper.FlashTextType.Normal_Dmg)
-			var damage_string = str(damage_number)
-			VfxHelper.create_flash_text(target_actor, damage_string, damage_text_type, {}, damage_color)
-		return
-	
-	# Get Direction of Source Actor
-	if vfx_data.get("MatchSourceDir", false) and vfx_data.has("SourceActorId"):
-		var node = CombatRootControl.get_actor_node(vfx_data["SourceActorId"])
-		if node:
-			vfx_data['Direction'] = node.facing_dir
-	
-	var vfx_node = VfxHelper.create_vfx_on_actor(target_actor, vfx_key, vfx_data)
-	if !vfx_node:
-		printerr("Failed to create VFX node from key '%s'." % [vfx_key])
-		return
-	
-	# Chain Flash Text Data
-	var flash_text_data = {}
-	flash_text_data['DamageNumber'] = vfx_data.get("DamageNumber", 0)
-	flash_text_data['DamageColor'] = vfx_data.get("DamageColor", Color.WHITE)
-	if vfx_data.has("DamageTextType"):
-		flash_text_data['DamageColor'] = vfx_data.get("DamageTextType", VfxHelper.FlashTextType.Normal_Dmg)
-	vfx_node.add_chained_vfx("FlashText", flash_text_data)
-	
-	#target_actor_node.vfx_holder.add_vfx(vfx_node)
-	var damage_number = vfx_data.get("DamageNumber", 0)
-	if damage_number <= 0 and vfx_node._data.get("ShakeActor", true):
-		target_actor_node.play_shake()
+static func add_chained_flash_text(parent_vfx:BaseVfxNode, value, flash_text_type:BaseFlashTextVfxNode.FlashTextType):
+	var vfx_holder = parent_vfx.vfx_holder
+	if not vfx_holder:
+		return null
+	var flash_text_data = {
+		"VfxKey": "FlashTextVfx",
+		"FlashTextVal": value,
+		"FlashTextType": flash_text_type
+	}
+	parent_vfx.add_chained_vfx("FlashTextVfx", flash_text_data)
 
 static func create_vfx_at_pos(pos:MapPos, vfx_key, vfx_data:Dictionary, source_actor:BaseActor=null)->BaseVfxNode:
 	var combat_control = CombatRootControl.Instance
@@ -105,7 +67,7 @@ static func _create_vfx_on_holder(vfx_holder:VfxHolder, vfx_key, vfx_data:Dictio
 	# Must go though FlashText Controller 
 	if vfx_key == "FlashText" :
 		var damage_string = str(vfx_data.get("DamageNumber", 0))
-		var damage_text_type = vfx_data.get("DamageTextType", VfxHelper.FlashTextType.Normal_Dmg)
+		var damage_text_type = vfx_data.get("DamageTextType", BaseFlashTextVfxNode.FlashTextType.Normal_Dmg)
 		VfxHelper.create_flash_text(vfx_holder.actor_node.Actor, damage_string, damage_text_type)
 		return null
 	
@@ -183,3 +145,83 @@ static func create_ailment_vfx_node(ailment_key:String, actor:BaseActor)->BaseVf
 	if FORCE_RELOAD: VfxLibrary.reload_vfxs()
 	var vfx_key = "Ailment" + ailment_key + "Vfx"
 	return create_vfx_on_actor(actor, vfx_key, {"CanStack": false})
+
+static func create_vfs_for_attack_event(attack_event:AttackEvent, game_state:GameStateData):
+	var attacker:BaseActor = game_state.get_actor(attack_event.attacker_id)
+	var attack_vfx_key = attack_event.attack_details.get("AttackVfxKey")
+	var attack_vfx_data = attack_event.attack_details.get("AttackVfxData", {})
+	for sub_attack_event_key in attack_event.sub_events.keys():
+		var sub_attack_event:AttackSubEvent = attack_event.sub_events.get(sub_attack_event_key)
+		var defender:BaseActor = game_state.get_actor(sub_attack_event.defending_actor_id)
+		
+		# Make VFX for Attack
+		var attack_vfx:BaseVfxNode = null
+		if attack_vfx_key or attack_vfx_data.has("ScenePath"):
+			attack_vfx = create_vfx_on_actor(defender, attack_vfx_key, attack_vfx_data, attacker)
+		
+		# Make "Evade" Flash Text
+		if sub_attack_event.is_evade:
+			var evade_flash_text_data = {
+				"VfxKey": "FlashTextVfx",
+				"FlashTextType": BaseFlashTextVfxNode.FlashTextType.Evade
+			}
+			if attack_vfx:
+				attack_vfx.add_chained_vfx("FlashTextVfx", evade_flash_text_data)
+			else:
+				create_vfx_on_actor(defender, "FlashTextVfx", evade_flash_text_data, attacker)
+		# Make "Miss" Flash Text
+		elif sub_attack_event.is_miss:
+			var miss_flash_text_data = {
+				"VfxKey": "FlashTextVfx",
+				"FlashTextType": BaseFlashTextVfxNode.FlashTextType.Miss
+			}
+			if attack_vfx:
+				attack_vfx.add_chained_vfx("FlashTextVfx", miss_flash_text_data)
+			else:
+				create_vfx_on_actor(attacker, "FlashTextVfx", miss_flash_text_data)
+		# Make Vfx for Damage
+		else:
+			for damage_event_key in sub_attack_event.damage_events.keys():
+				var damage_event:DamageEvent = sub_attack_event.damage_events[damage_event_key]
+				var damage_data = attack_event.damage_datas.get(damage_event.damage_data_key)
+				var damage_vfx_data = _build_vfx_data_from_damage_event(attacker.Id, damage_event, damage_data, sub_attack_event)
+				var damage_vfx_key = damage_vfx_data.get("VfxKey")
+				if attack_vfx:
+					attack_vfx.add_chained_vfx(damage_vfx_key, damage_vfx_data)
+				else:
+					create_vfx_on_actor(defender, damage_vfx_key, damage_vfx_data, attacker)
+
+static func create_vfx_for_damage_event(actor:BaseActor, damage_event:DamageEvent, damage_data:Dictionary):
+	var damage_vfx_data = _build_vfx_data_from_damage_event(actor.Id, damage_event, damage_data, null)
+	var damage_vfx_key = damage_vfx_data.get("VfxKey")
+	create_vfx_on_actor(actor, damage_vfx_key, damage_vfx_data, actor)
+
+static func _build_vfx_data_from_damage_event(attacker_id:String, damage_event:DamageEvent, damage_data:Dictionary, attack_sub_event:AttackSubEvent)->Dictionary:
+	var damage_vfx_key = damage_data.get("DamageVfxKey", '')
+	var damage_vfx_data = damage_data.get("DamageVfxData", {}).duplicate()
+	
+	if damage_vfx_key == "AUTO":
+		var damage_type = DamageEvent.DamageTypes.keys()[damage_event.damage_type]
+		damage_vfx_key = damage_type + "_DamageEffect"
+	damage_vfx_data['VfxKey'] = damage_vfx_key
+	damage_vfx_data['SourceActorId'] = attacker_id
+	
+	var flash_text_data = {
+		"VfxKey": "FlashTextVfx",
+		"FlashTextVal": str(damage_event.final_damage),
+		"FlashTextType": BaseFlashTextVfxNode.FlashTextType.Normal_Dmg
+	}
+	if damage_event.final_damage < 0:
+		flash_text_data['FlashTextType'] = BaseFlashTextVfxNode.FlashTextType.Healing_Dmg
+	elif damage_event.source_tag_chain.has_tag("DOT"):
+		flash_text_data['FlashTextType'] = BaseFlashTextVfxNode.FlashTextType.DOT_Dmg
+	elif attack_sub_event:
+		if attack_sub_event.is_crit and not attack_sub_event.is_blocked:
+			flash_text_data['FlashTextType'] = BaseFlashTextVfxNode.FlashTextType.Crit_Dmg
+		elif attack_sub_event.is_blocked and not attack_sub_event.is_crit:
+			flash_text_data['FlashTextType'] = BaseFlashTextVfxNode.FlashTextType.Blocked_Dmg
+	
+	damage_vfx_data['ChainVfxDatas'] = {
+		"FlashTextVfx": flash_text_data
+	}
+	return  damage_vfx_data

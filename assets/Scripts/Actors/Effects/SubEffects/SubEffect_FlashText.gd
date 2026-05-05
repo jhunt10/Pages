@@ -16,4 +16,4 @@ func get_triggers(effect:BaseEffect, subeffect_data:Dictionary)->Array:
 
 func on_effect_trigger(effect:BaseEffect, subeffect_data:Dictionary, trigger:BaseEffect.EffectTriggers, _game_state:GameStateData):
 	var trig_text = BaseEffect.EffectTriggers.keys()[trigger]
-	VfxHelper.create_flash_text(effect.get_effected_actor(), trig_text, VfxHelper.FlashTextType.Blocked_Dmg)
+	VfxHelper.create_flash_text(effect.get_effected_actor(), trig_text, BaseFlashTextVfxNode.FlashTextType.Blocked_Dmg)
