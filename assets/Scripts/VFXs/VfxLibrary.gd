@@ -117,6 +117,11 @@ static func parse_vfx_datas_from_file(path:String)->Dictionary:
 		text = "[" + text + "]" 
 	var dict = {}
 	var vfx_datas = JSON.parse_string(text)
+	
+	if !vfx_datas:
+		printerr("Failed to parse VFX Def: '%s'" % [file])
+		return dict
+	
 	for vfx_data in vfx_datas:
 		var key = vfx_data.get("VfxKey")
 		if not key:

@@ -26,9 +26,13 @@ func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, que_exe_d
 	
 	var actor_node = CombatRootControl.get_actor_node(actor.Id)
 	var script_path = "res://data/VFXs/WaterJet/WaterJet_VfxNode.tscn"
-	var new_node:WaterJetVfxNode =  load(script_path).instantiate()
-	if not new_node:
+	var script = load(script_path)
+	if not script:
 		printerr("SubAct_SpawnBeamNode: Failed to load scene: %s" % [script_path])
+		return BaseSubAction.Failed
+	var new_node:WaterJetVfxNode =  script.instantiate()
+	if not new_node:
+		printerr("SubAct_SpawnBeamNode: Failed to instantiate scene: %s" % [script_path])
 		return BaseSubAction.Failed
 	actor_node.vfx_holder.add_child(new_node)
 	

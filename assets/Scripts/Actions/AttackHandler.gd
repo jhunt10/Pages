@@ -26,7 +26,8 @@ static func handle_attack(
 	source_tag_chain:SourceTagChain,
 	game_state:GameStateData, 
 	is_directionless:bool,
-	attack_from_spot_override:MapPos = null 
+	attack_from_spot_override:MapPos = null,
+	create_vfx:bool = true
 ):
 	# Prep directional data
 	var attack_posision_data = {}
@@ -141,8 +142,6 @@ static func handle_attack(
 		_roll_for_effects(attacker, defender, attack_event, game_state)
 	attack_event.attack_stage = AttackStage.RolledForEffects
 	
-	var vfx_data_cache = {}
-	
 	# Trigger Post Effect Roll Effects
 	for actor in all_unique_actors:
 		actor.effects.trigger_attack(attack_event, game_state)
@@ -172,17 +171,13 @@ static func handle_attack(
 				var effect_meta_data:Dictionary = sub_event.get_effect_meta_data(effect_data_key)
 				var effect_result:Dictionary = sub_event.applied_effect_datas.get(effect_data_key, {})
 				var effect_key = effect_meta_data.get("EffectKey")
-				# If Immune, Pass to VFX cache
-				if effect_result.get("IsImmune", false):
-					vfx_data_cache[defender.Id]['WasImmuneToEffect'] = true
-				elif effect_result.get("WasApplied", false):
+				
+				if effect_result.get("WasApplied", false):
 					var effect_data_def = effect_meta_data.get("EffectDataDef", {})
 					effect_data_def['AppliedPotency'] = effect_result['AppliedPotency']
 					var effect = EffectHelper.create_effect(defender, attacker, effect_key, effect_data_def, game_state)
 					if effect:
 						effect_result['AppliedEffectId'] = effect.Id
-				else:
-					vfx_data_cache[defender.Id]['ResistedAtLeastOnce'] = true
 	
 	# Apply Damage Leaching
 	if attack_details.keys().has("LeachPercent"):
@@ -201,7 +196,8 @@ static func handle_attack(
 		actor.stats.clear_temp_stat_mods()
 	
 	# Create Vfxs
-	VfxHelper.create_vfs_for_attack_event(attack_event, game_state)
+	if create_vfx:
+		VfxHelper.create_vfs_for_attack_event(attack_event, game_state)
 	
 	# Trigger After Attack Effects
 	for actor in all_unique_actors:

@@ -71,23 +71,9 @@ func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, que_exe_d
 		if not damage_keys.has(damage_key):
 			damage_keys.append(damage_key)
 	damage_datas = parent_action.get_damage_datas(actor, damage_keys)
-	var actor_pos = game_state.get_actor_pos(actor)
 	
-	var missed_moved_actor = false
-	var hit_any_actor = false
-	var hittable_actors = []
-	
-	## Check if target is still in range since being selecting target
-	#if target_must_be_in_range:
-		#var target_pos = game_state.get_actor_pos(target)
-		#var still_in_range = target_params.is_point_in_area(actor_pos, target_pos)
-		#if not still_in_range:
-			#missed_moved_actor = true
-	#else:
-		#hit_any_actor = true
-	
-	var last_target:BaseActor = null
 	var override_origin_pos = null
+	var last_target = actor
 	var target_mappings = turn_data.data_cache.get("TargetChainMaping", {})
 	for target:BaseActor in targets:
 		
@@ -105,8 +91,13 @@ func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, que_exe_d
 			tag_chain, 
 			game_state,
 			target_params.has_area_of_effect(),
-			override_origin_pos)
-		last_target = target
+			override_origin_pos, 
+			false)
+		
+		for sub_attack_event_key in attack_event.sub_events.keys():
+			var sub_attack_event:AttackSubEvent = attack_event.sub_events.get(sub_attack_event_key)
+			VfxHelper.create_vfx_for_sub_attack_event(attack_event, game_state, sub_attack_event, last_target)
+			last_target = target
 	
 		print("\n---------------------------")
 		print(attack_event.serialize_self())

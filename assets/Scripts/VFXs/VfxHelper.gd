@@ -146,55 +146,68 @@ static func create_ailment_vfx_node(ailment_key:String, actor:BaseActor)->BaseVf
 	var vfx_key = "Ailment" + ailment_key + "Vfx"
 	return create_vfx_on_actor(actor, vfx_key, {"CanStack": false})
 
-static func create_vfs_for_attack_event(attack_event:AttackEvent, game_state:GameStateData):
-	var attacker:BaseActor = game_state.get_actor(attack_event.attacker_id)
-	var attack_vfx_key = attack_event.attack_details.get("AttackVfxKey")
-	var attack_vfx_data = attack_event.attack_details.get("AttackVfxData", {})
+static func create_vfs_for_attack_event(attack_event:AttackEvent, game_state:GameStateData, override_source_actor:BaseActor = null):
 	for sub_attack_event_key in attack_event.sub_events.keys():
 		var sub_attack_event:AttackSubEvent = attack_event.sub_events.get(sub_attack_event_key)
-		var defender:BaseActor = game_state.get_actor(sub_attack_event.defending_actor_id)
-		
-		# Make VFX for Attack
-		var attack_vfx:BaseVfxNode = null
-		if attack_vfx_key or attack_vfx_data.has("ScenePath"):
-			attack_vfx = create_vfx_on_actor(defender, attack_vfx_key, attack_vfx_data, attacker)
-		
-		# Make "Evade" Flash Text
-		if sub_attack_event.is_evade:
-			var evade_flash_text_data = {
-				"VfxKey": "FlashTextVfx",
-				"FlashTextType": BaseFlashTextVfxNode.FlashTextType.Evade
-			}
-			if attack_vfx:
-				attack_vfx.add_chained_vfx("FlashTextVfx", evade_flash_text_data)
-			else:
-				create_vfx_on_actor(defender, "FlashTextVfx", evade_flash_text_data, attacker)
-		# Make "Miss" Flash Text
-		elif sub_attack_event.is_miss:
-			var miss_flash_text_data = {
-				"VfxKey": "FlashTextVfx",
-				"FlashTextType": BaseFlashTextVfxNode.FlashTextType.Miss
-			}
-			if attack_vfx:
-				attack_vfx.add_chained_vfx("FlashTextVfx", miss_flash_text_data)
-			else:
-				create_vfx_on_actor(attacker, "FlashTextVfx", miss_flash_text_data)
-		# Make Vfx for Damage
+		create_vfx_for_sub_attack_event(attack_event, game_state, sub_attack_event, override_source_actor)
+
+static func create_vfx_for_sub_attack_event(attack_event:AttackEvent, game_state:GameStateData, sub_attack_event:AttackSubEvent, override_source_actor:BaseActor = null):
+	var attack_vfx_key = attack_event.attack_details.get("AttackVfxKey")
+	var attack_vfx_data = attack_event.attack_details.get("AttackVfxData", {})
+	var defender:BaseActor = game_state.get_actor(sub_attack_event.defending_actor_id)
+	
+	var attacker = game_state.get_actor(attack_event.attacker_id)
+	var source_actor:BaseActor = attacker
+	if override_source_actor:
+		source_actor = override_source_actor
+	
+	# Make VFX for Attack
+	var attack_vfx:BaseVfxNode = null
+	if attack_vfx_key or attack_vfx_data.has("ScenePath"):
+		attack_vfx = create_vfx_on_actor(defender, attack_vfx_key, attack_vfx_data, source_actor)
+	
+	# Make "Evade" Flash Text
+	if sub_attack_event.is_evade:
+		var evade_flash_text_data = {
+			"VfxKey": "FlashTextVfx",
+			"FlashTextType": BaseFlashTextVfxNode.FlashTextType.Evade
+		}
+		if attack_vfx:
+			attack_vfx.add_chained_vfx("FlashTextVfx", evade_flash_text_data)
 		else:
-			for damage_event_key in sub_attack_event.damage_events.keys():
-				var damage_event:DamageEvent = sub_attack_event.damage_events[damage_event_key]
-				var damage_data = attack_event.damage_datas.get(damage_event.damage_data_key)
-				var damage_vfx_data = _build_vfx_data_from_damage_event(attacker.Id, damage_event, damage_data, sub_attack_event)
-				var damage_vfx_key = damage_vfx_data.get("VfxKey")
-				if attack_vfx:
-					attack_vfx.add_chained_vfx(damage_vfx_key, damage_vfx_data)
-				else:
-					create_vfx_on_actor(defender, damage_vfx_key, damage_vfx_data, attacker)
+			create_vfx_on_actor(defender, "FlashTextVfx", evade_flash_text_data, source_actor)
+	# Make "Miss" Flash Text
+	elif sub_attack_event.is_miss:
+		var miss_flash_text_data = {
+			"VfxKey": "FlashTextVfx",
+			"FlashTextType": BaseFlashTextVfxNode.FlashTextType.Miss
+		}
+		if attack_vfx:
+			attack_vfx.add_chained_vfx("FlashTextVfx", miss_flash_text_data)
+		else:
+			create_vfx_on_actor(attacker, "FlashTextVfx", miss_flash_text_data)
+	# Make Vfx for Damage
+	else:
+		for damage_event_key in sub_attack_event.damage_events.keys():
+			var damage_event:DamageEvent = sub_attack_event.damage_events[damage_event_key]
+			var damage_data = attack_event.damage_datas.get(damage_event.damage_data_key)
+			var damage_vfx_data = _build_vfx_data_from_damage_event(source_actor.Id, damage_event, damage_data, sub_attack_event)
+			var damage_vfx_key = damage_vfx_data.get("VfxKey")
+			if attack_vfx:
+				attack_vfx.add_chained_vfx(damage_vfx_key, damage_vfx_data)
+			else:
+				create_vfx_on_actor(defender, damage_vfx_key, damage_vfx_data, source_actor)
+	
 
 static func create_vfx_for_damage_event(actor:BaseActor, damage_event:DamageEvent, damage_data:Dictionary):
 	var damage_vfx_data = _build_vfx_data_from_damage_event(actor.Id, damage_event, damage_data, null)
 	var damage_vfx_key = damage_vfx_data.get("VfxKey")
 	create_vfx_on_actor(actor, damage_vfx_key, damage_vfx_data, actor)
+
+static func chain_vfx_for_damage_event(parent_vfx_node:BaseVfxNode, damage_event:DamageEvent, damage_data:Dictionary):
+	var damage_vfx_data = _build_vfx_data_from_damage_event(parent_vfx_node.source_actor_id, damage_event, damage_data, null)
+	var damage_vfx_key = damage_vfx_data.get("VfxKey")
+	parent_vfx_node.add_chained_vfx(damage_vfx_key, damage_vfx_data)
 
 static func _build_vfx_data_from_damage_event(attacker_id:String, damage_event:DamageEvent, damage_data:Dictionary, attack_sub_event:AttackSubEvent)->Dictionary:
 	var damage_vfx_key = damage_data.get("DamageVfxKey", '')

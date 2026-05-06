@@ -23,6 +23,14 @@ var actor_node:BaseActorNode:
 			return vfx_holder.actor_node
 		return null
 
+var source_actor_id:String:
+	get:
+		return _data.get("SourceActorId", "")
+func get_source_actor_node()->BaseActorNode:
+	if CombatRootControl.is_valid():
+		return CombatRootControl.get_actor_node(source_actor_id)
+	return null
+
 var _readyed:bool = false
 var _start_when_ready:bool = false
 var _built_chained_vfxs:bool = false
