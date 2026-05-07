@@ -21,10 +21,10 @@ func _get_innate_slots_data()->Array:
 		return defaults
 	return []
 
-func consume_item(item_id:String):
+func consume_item(item_id:String, delete=true):
 	if !_raw_item_slots.has(item_id):
 		return
 	remove_item(item_id, false)
 	var item = ItemLibrary.get_item(item_id, false)
-	if item:
+	if item and delete:
 		ItemLibrary.delete_item(item)

@@ -6,7 +6,7 @@ func _on_start():
 	if vfx_holder:
 		var actor_node = vfx_holder.actor_node
 		if not actor_node:
-			printerr("AilmentVfxNode: vfx_holder.actor_node is null")
+			printerr("BlindedAilmentVfxNode: vfx_holder.actor_node is null")
 			return
 		var sprite_bounds = actor_node.actor_sprite.get_sprite_bounds()
 		var sprite_hight = sprite_bounds.size.y * y_scale

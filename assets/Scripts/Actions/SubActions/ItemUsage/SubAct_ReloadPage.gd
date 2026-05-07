@@ -1,5 +1,5 @@
 class_name SubAct_ReloadPage
-extends BaseSubAction
+extends BaseItemUsage_SubAct
 
 
 func get_required_props()->Dictionary:
@@ -8,22 +8,6 @@ func get_required_props()->Dictionary:
 
 func get_action_tags(_parent_action:PageItemAction, _subaction_data:Dictionary)->Array:
 	return ["Reload"]
-
-## Return a of OnQueOptionsData to select the parent action is qued. 
-func get_on_que_options(parent_action:PageItemAction, _subaction_data:Dictionary, _actor:BaseActor, _game_state:GameStateData)->Array:
-	var items = _actor.items.list_items()
-	var already_qued_items = _actor.Que.QueExecData.get_on_que_values("SelectedItemId")
-	var options = OnQueOptionsData.new("SelectedItemId", "Select Ammo:", [], [], [])
-	for item:BaseItem in items:
-		options.options_vals.append(item.Id)
-		options.option_texts.append(item.get_display_name())
-		options.option_icons.append(item.get_small_icon())
-		if item is AmmoItem:
-			options.disable_options.append(already_qued_items.has(item.Id))
-		else:
-			options.disable_options.append(true)
-		
-	return [options]
 
 func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, metadata:QueExecutionData,
 				game_state:GameStateData, actor:BaseActor)->bool:

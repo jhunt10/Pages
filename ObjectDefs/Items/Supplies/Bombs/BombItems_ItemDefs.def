@@ -2,7 +2,7 @@
 	"BombBasicItem": {
 		"!ObjectScript": "res://assets/Scripts/Items/Supplies/AttackSupplies/BaseAttackSupplyIyem.gd",
 		"#ObjDetails": {
-			"Description": "A completely safe and reliable explosive device guaranteed* not to kill the user or your money back!\n\nDeals [Bomb Damage]\n\n*All claims must be filed by individual user at time of incident.",
+			"Description": "A completely safe and reliable explosive device guaranteed* not to kill the user or your money back!\n\nDeals @@#DmgData:Damage1@@\n\n*All claims must be filed by individual user at time of incident.",
 			"DisplayName": "Bomb",
 			"LargeIcon": "Sprites/BasicBomb_Large.png",
 			"ObjectType": "Item",

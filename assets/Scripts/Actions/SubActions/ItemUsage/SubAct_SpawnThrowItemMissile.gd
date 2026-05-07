@@ -12,22 +12,8 @@ func get_action_tags(_parent_action:PageItemAction, _subaction_data:Dictionary)-
 	var tags = super(_parent_action, _subaction_data)
 	return tags
 
-
-## Return a of OnQueOptionsData to select the parent action is qued. 
-func get_on_que_options(parent_action:PageItemAction, _subaction_data:Dictionary, _actor:BaseActor, _game_state:GameStateData)->Array:
-	var items = _actor.items.list_items()
-	var options = OnQueOptionsData.new("SelectedItemId", "Select Item to use:", [], [], [])
-	var item_tag_filter = _subaction_data.get("ItemTagFilter")
-	for item:BaseItem in items:
-		options.options_vals.append(item.Id)
-		options.option_texts.append(item.get_display_name())
-		options.option_icons.append(item.get_small_icon())
-		if not TagHelper.filters_accept_tags(item_tag_filter, item.get_tags()):
-			options.disable_options.append(true)
-		else:
-			options.disable_options.append(false)
-	return [options]
-
+func get_on_que_options(_parent_action:PageItemAction, _subaction_data:Dictionary, _actor:BaseActor, _game_state:GameStateData)->Array:
+	return BaseItemUsage_SubAct._get_on_que_options(_parent_action, _subaction_data, _actor, _game_state)
 
 func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, que_exe_data:QueExecutionData,
 				game_state:GameStateData, actor:BaseActor)->bool:
@@ -76,6 +62,7 @@ func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, que_exe_d
 	var missile = missile_script.new(actor, missile_data, tag_chain,
 									actor_pos, target_spot, parent_action.get_load_path())
 	CombatRootControl.Instance.create_new_missile_node(missile)
+	actor.items.consume_item(item_id, false)
 	return BaseSubAction.Success
 
 func get_target_spot_of_missile(target_key:String, metadata:QueExecutionData, game_state:GameStateData)->MapPos:

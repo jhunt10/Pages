@@ -462,6 +462,8 @@ func _parse_damage_data(tokens:Array, object_def:Dictionary, object_inst:BaseLoa
 			damage_data = object_def.get("EffectData", {}).get("DamageDatas", {}).get(damage_key, {})
 		elif object_def.has("DamageDatas"):
 			damage_data = object_def.get("DamageDatas", {}).get(damage_key, {})
+		elif object_def.has("SuppliesData") and object_def['SuppliesData'].has("AttackData") :
+			damage_data = object_def.get("SuppliesData", {}).get("AttackData", {}).get("DamageDatas", {}).get(damage_key, {})
 	if damage_data.size() == 0:
 		return ''
 	var damage_type = damage_data.get("DamageType", "???")
@@ -480,6 +482,18 @@ func _parse_damage_data(tokens:Array, object_def:Dictionary, object_inst:BaseLoa
 			description_line += "Weapon Damage"
 		else:
 			description_line += _to_str(atk_scale) + " x Weapon Damage"
+	# Parse Fixed as "100+10 Fire Damage"
+	elif damage_data.get("AtkStat") == "Fixed":
+		var atk_power = damage_data.get("AtkPwrBase", 0)
+		if damage_data.has("AtkPwrStat") and actor:
+			atk_power = actor.stats.get_stat(damage_data["AtkPwrStat"], 1)
+		var atk_varient = damage_data.get("AtkPwrRange", 0)
+		var _atk_scale = damage_data.get("AtkPwrScale", 1)
+		var val_line = _to_str(atk_power)
+		if atk_varient > 0:
+			val_line += "@" + _to_str(int(atk_varient))
+		description_line = val_line + " " + damage_type
+		
 	# Parse actual "100+10% Mag Attack as Fire Damage"
 	else:
 		var atk_power = damage_data.get("AtkPwrBase", 0)
