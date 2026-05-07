@@ -80,38 +80,3 @@ func has_tag(tag):
 
 func get_source_actor()->BaseActor:
 	return source_actor
-
-## Returns true if any String value in check_for appears in the tag list.
-static func tags_include_any_in_array(check_for:Array, tags:Array)->bool:
-	for check in check_for:
-		if tags.has(check):
-			return true
-	return false
-
-## Returns true if all String values in check_for appears in the tag list.
-static func tags_include_all_in_array(check_for:Array, tags:Array)->bool:
-	var is_valid = true
-	for check in check_for:
-		if not tags.has(check):
-			is_valid = false
-			break
-	return is_valid
-
-static func filters_accept_tags(tag_filter:Dictionary, tags:Array)->bool:
-	if tag_filter.get("RequireAllTags", []).size() > 0:
-		var require_tags = tag_filter.get('RequireAllTags')
-		if not tags_include_all_in_array(require_tags, tags):
-			return false
-	if tag_filter.get("RequireAnyTags", []).size() > 0:
-		var require_tags = tag_filter.get('RequireAnyTags')
-		if not tags_include_any_in_array(require_tags, tags):
-			return false
-	if tag_filter.get("ExcludeAllTags", []).size() > 0:
-		var exclude_tags = tag_filter.get('ExcludeAllTags')
-		if tags_include_all_in_array(exclude_tags, tags):
-			return false
-	if tag_filter.get("ExcludeAnyTags", []).size() > 0:
-		var exclude_tags = tag_filter.get('ExcludeAnyTags')
-		if tags_include_any_in_array(exclude_tags, tags):
-			return false
-	return true

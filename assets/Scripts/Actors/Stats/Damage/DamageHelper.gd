@@ -199,15 +199,13 @@ static func does_damage_mod_apply(damage_mod:Dictionary, attacker:BaseActor, def
 	
 	# Check Defender Tag Filters
 	var defender_tag_filters = conditions.get("DefenderTagFilters", [])
-	for tag_filter in defender_tag_filters:
-		if not SourceTagChain.filters_accept_tags(tag_filter, defender.get_tags()):
-			return false
+	if not TagHelper.filters_accept_tags(defender_tag_filters, defender.get_tags()):
+		return false
 			
 	# Check Source Tag Filters
 	var source_tag_filters = conditions.get("SourceTagFilters", [])
-	for source_tag_filter in source_tag_filters:
-		if not SourceTagChain.filters_accept_tags(source_tag_filter, source_tag_chain.get_all_tags()):
-			return false
+	if not TagHelper.filters_accept_tags(source_tag_filters, source_tag_chain.get_all_tags()):
+		return false
 	
 	return true
 

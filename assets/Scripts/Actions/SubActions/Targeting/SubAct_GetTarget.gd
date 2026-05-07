@@ -41,6 +41,8 @@ func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, metadata:
 	if !target_params:
 		return BaseSubAction.Failed
 	
+	
+	
 	# Shortcut Self and FullArea
 	if target_params.target_type == TargetParameters.TargetTypes.Self or target_params.target_type == TargetParameters.TargetTypes.FullArea:
 		turn_data.add_target_for_key(setting_target_key, target_params.target_param_key, actor.Id,)

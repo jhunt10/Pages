@@ -18,9 +18,8 @@ func other_effect_to_be_added(parent_effect:BaseEffect, subeffect_data:Dictionar
 		remove_effect = true
 	
 	var tag_filters = subeffect_data.get("OtherEffectTagFilters", [])
-	for tag_filter in tag_filters:
-		if SourceTagChain.filters_accept_tags(tag_filter, other_effect.get_tags()):
-			remove_effect = true
+	if TagHelper.filters_accept_tags(tag_filters, other_effect.get_tags(), false):
+		remove_effect = true
 	
 	if remove_effect:
 		meta_data['WasNegated'] = true

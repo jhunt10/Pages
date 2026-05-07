@@ -42,20 +42,3 @@ func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, que_exe_d
 		turn_data.replace_target_for_key(modify_target_key, target_param_key, target_actor, new_target)
 	
 	return BaseSubAction.Success
-
-
-## Return a of OnQueOptionsData to select the parent action is qued. 
-func _get_effect_que_options(actor:BaseActor, selection_key:String, effect_filters:Array)->OnQueOptionsData:
-	var options = OnQueOptionsData.new(selection_key, "Select Effect:", [], [], [])
-	for effect:BaseEffect in actor.effects.list_effects():
-		var is_valid = true
-		var effect_tags = effect.get_tags()
-		for filter in effect_filters:
-			if not SourceTagChain.filters_accept_tags(filter, effect_tags):
-				is_valid = false
-				break
-		options.options_vals.append(effect.Id)
-		options.option_texts.append(effect.get_display_name())
-		options.option_icons.append(effect.get_small_icon())
-		options.disable_options.append(not is_valid)
-	return options

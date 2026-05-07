@@ -50,12 +50,7 @@ func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, que_exe_d
 		elif effect_tag_filters.size() > 0:
 			var removed_effect_count = 0
 			for effect:BaseEffect in target.effects.list_effects():
-				var remove_effect = false
-				for filter in effect_tag_filters:
-					if SourceTagChain.filters_accept_tags(filter, effect.get_tags()):
-						remove_effect = true
-						break
-				if remove_effect:
+				if TagHelper.filters_accept_tags(effect_tag_filters, effect.get_tags()):
 					removed_effect_count += 1
 					target.effects.remove_effect(effect)
 					if remove_count_limit > 0 and removed_effect_count >= remove_count_limit:

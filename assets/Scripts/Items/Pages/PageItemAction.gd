@@ -253,8 +253,10 @@ func get_preview_damage_datas(actor:BaseActor=null)->Dictionary:
 ########################
 func get_targeting_params(target_param_key, actor:BaseActor)->TargetParameters:
 	var params = null
+	# Self Targeting
 	if target_param_key == "Self":
 		params = TargetParameters.SelfTargetParams
+	# Weapon based Targeting
 	elif target_param_key == "Weapon":
 		if actor:
 			var param_def:Dictionary = actor.get_weapon_attack_target_param_def(target_param_key)
@@ -265,15 +267,17 @@ func get_targeting_params(target_param_key, actor:BaseActor)->TargetParameters:
 		else:
 			printerr("%s.get_targeting_params: Requested Weapon TargetParams without an Actor.")
 			return null
+	# From Def
 	else:
 		params = _target_params.get(target_param_key, null)
+	
 	if !params:
 		printerr("%s.get_targeting_params: No Target Params found for key '%s'." % [self.ActionKey, target_param_key])
 		return null
+	
 	if actor:
-		var targeting_mods = actor.get_targeting_mods()
 		var self_tags = self.get_tags()
-		for mod in targeting_mods:
+		for mod in actor.get_targeting_mods():
 			var required_tags = mod.get('RequiredActionTags', [])
 			var can_use = true
 			for required in required_tags:

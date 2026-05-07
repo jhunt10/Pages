@@ -23,24 +23,43 @@ static func tags_include_all_in_array(check_for:Array, tags:Array)->bool:
 			break
 	return is_valid
 
-static func filters_accept_tags(tag_filter:Dictionary, tags:Array)->bool:
-	if tag_filter.get("RequireAllTags", []).size() > 0:
-		var require_tags = tag_filter.get('RequireAllTags')
-		if not tags_include_all_in_array(require_tags, tags):
-			return false
-	if tag_filter.get("RequireAnyTags", []).size() > 0:
-		var require_tags = tag_filter.get('RequireAnyTags')
-		if not tags_include_any_in_array(require_tags, tags):
-			return false
-	if tag_filter.get("ExcludeAllTags", []).size() > 0:
-		var exclude_tags = tag_filter.get('ExcludeAllTags')
-		if tags_include_all_in_array(exclude_tags, tags):
-			return false
-	if tag_filter.get("ExcludeAnyTags", []).size() > 0:
-		var exclude_tags = tag_filter.get('ExcludeAnyTags')
-		if tags_include_any_in_array(exclude_tags, tags):
-			return false
-	return true
+## Returns true if tags are accepted by (all|any) filters.
+## require_all: When true all filters must accept tags
+static func filters_accept_tags(tag_filters, tags:Array, require_all:bool=true)->bool:
+	if tag_filters is Dictionary:
+		tag_filters = [tag_filters]
+	var any_accepted = false
+	for tag_filter in tag_filters:
+		if tag_filter.get("RequireAllTags", []).size() > 0:
+			var require_tags = tag_filter.get('RequireAllTags')
+			if not tags_include_all_in_array(require_tags, tags):
+				if require_all:
+					return false
+				else:
+					continue
+		if tag_filter.get("RequireAnyTags", []).size() > 0:
+			var require_tags = tag_filter.get('RequireAnyTags')
+			if not tags_include_any_in_array(require_tags, tags):
+				if require_all:
+					return false
+				else:
+					continue
+		if tag_filter.get("ExcludeAllTags", []).size() > 0:
+			var exclude_tags = tag_filter.get('ExcludeAllTags')
+			if tags_include_all_in_array(exclude_tags, tags):
+				if require_all:
+					return false
+				else:
+					continue
+		if tag_filter.get("ExcludeAnyTags", []).size() > 0:
+			var exclude_tags = tag_filter.get('ExcludeAnyTags')
+			if tags_include_any_in_array(exclude_tags, tags):
+				if require_all:
+					return false
+				else:
+					continue
+		any_accepted = true
+	return any_accepted
 
 static func check_tag_filters(propname:String, condition_data:Dictionary, object:BaseLoadObject)->bool:
 	var req_all_filters = condition_data.get(propname+"ReqAll", false)

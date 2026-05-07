@@ -148,10 +148,8 @@ func _cache_action_mods():
 					does_mod_apply = item_keys.has(action.ItemKey)
 				else:
 					var action_tags = action.get_tags()
-					for filter in item_tag_filters:
-						if not SourceTagChain.filters_accept_tags(filter, action_tags):
-							does_mod_apply = false
-							break
+					if not TagHelper.filters_accept_tags(item_tag_filters, action_tags):
+						does_mod_apply = false
 				# Apply Mod
 				if does_mod_apply:
 					action.add_action_mod(mod_data)

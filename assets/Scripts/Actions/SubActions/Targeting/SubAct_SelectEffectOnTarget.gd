@@ -43,12 +43,8 @@ func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, que_exe_d
 func _get_effect_que_options(actor:BaseActor, selection_key:String, effect_filters:Array)->OnQueOptionsData:
 	var options = OnQueOptionsData.new(selection_key, "Select Effect:", [], [], [])
 	for effect:BaseEffect in actor.effects.list_effects():
-		var is_valid = true
 		var effect_tags = effect.get_tags()
-		for filter in effect_filters:
-			if not SourceTagChain.filters_accept_tags(filter, effect_tags):
-				is_valid = false
-				break
+		var is_valid =  TagHelper.filters_accept_tags(effect_filters, effect_tags)
 		options.options_vals.append(effect.Id)
 		options.option_texts.append(effect.get_display_name())
 		options.option_icons.append(effect.get_small_icon())

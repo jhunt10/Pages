@@ -328,9 +328,8 @@ static func _roll_for_effects(attacker:BaseActor, defender:BaseActor, attack_eve
 		
 		# Check if defener has required tags
 		var source_tag_filters = conditions.get("DefenderTagFilters", [])
-		for source_tag_filter in source_tag_filters:
-			if not SourceTagChain.filters_accept_tags(source_tag_filter, attack_event.source_tag_chain.get_all_tags()):
-				continue
+		if not TagHelper.filters_accept_tags(source_tag_filters, attack_event.source_tag_chain.get_all_tags()):
+			continue
 		# Roll for chance to try to apply
 		var chance_to_apply = effect_meta_data.get("ApplicationChance", 1)
 		if not Roll.for_actor(attacker, chance_to_apply):
@@ -376,9 +375,8 @@ static func _does_attack_mod_apply(attack_mod, attacker, defenders, source_tag_c
 	
 	# Check Source Tag Filters
 	var source_tag_filters = conditions.get("SourceTagFilters", [])
-	for source_tag_filter in source_tag_filters:
-		if not SourceTagChain.filters_accept_tags(source_tag_filter, source_tag_chain.get_all_tags()):
-			return false
+	if not TagHelper.filters_accept_tags(source_tag_filters, source_tag_chain.get_all_tags()):
+		return false
 	
 	# Check Defender Conditions
 	for defender_condition in conditions.get("DefendersConditions", {}):
@@ -410,14 +408,13 @@ static func _does_attack_mod_apply(attack_mod, attacker, defenders, source_tag_c
 					break
 				else:
 					continue
-			for tag_filter in tag_filters:
-				if not SourceTagChain.filters_accept_tags(tag_filter, defender.get_tags()):
-					all_defenders_are_valid = false
-					if require_all_defenders:
-						break
-					else:
-						continue
-			# If we made it this far, then defender passed all the checks
+			if not TagHelper.filters_accept_tags(tag_filters, defender.get_tags()):
+				all_defenders_are_valid = false
+				if require_all_defenders:
+					break
+				else:
+					continue
+			# If we made it this far, then this defender passed all the checks
 			any_defenders_are_valid = true
 		# Check if all defenders were valid
 		if require_all_defenders:
@@ -460,15 +457,13 @@ static func _does_attack_stat_mod_apply_to_actor(stat_mod:BaseStatMod, actor:Bas
 			
 	# Check Defender Tag Filters
 	var host_tag_filters = conditions.get("TagFilters", [])
-	for tag_filter in host_tag_filters:
-		if not SourceTagChain.filters_accept_tags(tag_filter, actor.get_tags()):
-			return false
+	if not TagHelper.filters_accept_tags(host_tag_filters, actor.get_tags()):
+		return false
 			
 	# Check Source Tag Filters
 	var source_tag_filters = conditions.get("SourceTagFilters", [])
-	for source_tag_filter in source_tag_filters:
-		if not SourceTagChain.filters_accept_tags(source_tag_filter, attack_source_tag_chain.get_all_tags()):
-			return false
+	if not TagHelper.filters_accept_tags(source_tag_filters, attack_source_tag_chain.get_all_tags()):
+		return false
 	
 	return true
 

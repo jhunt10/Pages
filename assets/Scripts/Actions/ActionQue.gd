@@ -275,9 +275,8 @@ func _does_ammo_mod_apply_to_action(mod_data:Dictionary, ammo_data:Dictionary, a
 			return false
 	
 	var tag_filters = conditions.get("ActionTagFilters", [])
-	for filter in tag_filters:
-		if not SourceTagChain.filters_accept_tags(filter, action.get_tags()):
-			return false
+	if not TagHelper.filters_accept_tags(tag_filters, action.get_tags()):
+		return false
 	
 	return true
 

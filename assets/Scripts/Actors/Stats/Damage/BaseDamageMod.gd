@@ -46,14 +46,14 @@ func is_valid_in_event(taking_damage:bool, attack_tags:Array, defense_tags:Array
 	# False if any tags are excluded
 	if exclude_tags.any(attack_tags.has):
 		return false
-	if SourceTagChain.tags_include_any_in_array(exclude_tags, defense_tags):
+	if TagHelper.tags_include_any_in_array(exclude_tags, defense_tags):
 		return false
 	
 	if include_tags.size() > 0:
 		var found_included = false
-		if SourceTagChain.tags_include_any_in_array(include_tags, attack_tags):
+		if TagHelper.tags_include_any_in_array(include_tags, attack_tags):
 			found_included = true
-		if SourceTagChain.tags_include_any_in_array(include_tags, defense_tags):
+		if TagHelper.tags_include_any_in_array(include_tags, defense_tags):
 			found_included = true
 		if not found_included:
 			return false
