@@ -16,8 +16,12 @@ func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, que_exe_d
 	
 	var modify_target_key = subaction_data.get("ModifyTargetKey", "")
 	var turn_data = que_exe_data.get_current_turn_data()	
-	var target_param_key = turn_data.get_param_key_for_target(modify_target_key)
-	var target_params = parent_action.get_targeting_params(target_param_key, actor)
+	
+	# Get Target Params
+	var target_params = _get_target_parameters_for_target_key(modify_target_key, parent_action, actor, turn_data)
+	if !target_params:
+		return BaseSubAction.Failed
+	
 	var targets:Array = _find_target_effected_actors(parent_action, subaction_data, modify_target_key, que_exe_data, game_state, actor)
 	if targets.size() > 1:
 		printerr("SubAct_SelectEffectOnTarget: Multiple Targets not supported")
@@ -39,6 +43,6 @@ func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, que_exe_d
 	if hit_another:
 		var is_good = subaction_data.get("BeingTargetIsGood", false)
 		var new_target = Roll.random_actor_from_list(other_actors.values(), is_good)
-		turn_data.replace_target_for_key(modify_target_key, target_param_key, target_actor, new_target)
+		turn_data.replace_target_for_key(modify_target_key, target_params.target_param_key, target_actor, new_target)
 	
 	return BaseSubAction.Success

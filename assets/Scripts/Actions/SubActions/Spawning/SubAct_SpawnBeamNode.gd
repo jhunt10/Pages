@@ -15,7 +15,8 @@ func get_action_tags(_parent_action:PageItemAction, _subaction_data:Dictionary)-
 
 func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, que_exe_data:QueExecutionData,
 				game_state:GameStateData, actor:BaseActor)->bool:
-	var target_params = _get_target_parameters(parent_action, actor, subaction_data)
+	var target_param_key = subaction_data.get("TargetParamKey", null)
+	var target_params = _get_target_parameters(target_param_key, parent_action, actor, que_exe_data.get_current_turn_data())
 	var damage_data_key = subaction_data.get("DamageKey", "")
 	var damage_data = parent_action.get_damage_data_single(actor, damage_data_key)
 	

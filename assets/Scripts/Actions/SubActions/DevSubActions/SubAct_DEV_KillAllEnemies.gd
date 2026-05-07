@@ -31,7 +31,6 @@ func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, que_exe_d
 					"DefenseType": "None"
 				}
 			}
-	var target_params = parent_action.get_targeting_params("Self", actor)
 	
 	var attack_event = AttackHandler.handle_attack(
 		actor, 

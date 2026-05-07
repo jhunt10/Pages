@@ -268,23 +268,19 @@ func get_targeting_params(target_param_key, actor:BaseActor)->TargetParameters:
 			printerr("%s.get_targeting_params: Requested Weapon TargetParams without an Actor.")
 			return null
 	# From Def
-	else:
+	elif _target_params.keys().has(target_param_key):
 		params = _target_params.get(target_param_key, null)
 	
 	if !params:
 		printerr("%s.get_targeting_params: No Target Params found for key '%s'." % [self.ActionKey, target_param_key])
 		return null
 	
+	# Apply target mods from actor
 	if actor:
 		var self_tags = self.get_tags()
 		for mod in actor.get_targeting_mods():
-			var required_tags = mod.get('RequiredActionTags', [])
-			var can_use = true
-			for required in required_tags:
-				if not self_tags.has(required):
-					can_use = false
-					break
-			if can_use:
+			var action_tag_filters = mod.get('ActionTagFilters', [])
+			if TagHelper.filters_accept_tags(action_tag_filters, self_tags):
 				params = params.apply_target_mod(mod)
 	return params
 

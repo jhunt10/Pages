@@ -49,12 +49,6 @@ func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, que_exe_d
 		printerr("SubAct_SpawnMissile.get_target_spt_of_missile: No target found for : ", target_key)
 		return BaseSubAction.Failed
 	
-	var target_param_key = turn_data.get_param_key_for_target(target_key)
-	var target_params = parent_action.get_targeting_params(target_param_key, actor)
-	if !target_params:
-		printerr("SubAct_SpawnMissile.get_target_spt_of_missile: No TargetParams found for: %s " % [subaction_data.get("TargetParamKey")])
-		return BaseSubAction.Failed
-	
 	var missile_key = subaction_data['MissileKey']
 	var missile_data = parent_action.get_missile_data(missile_key)
 	if !missile_data or missile_data.size() == 0:

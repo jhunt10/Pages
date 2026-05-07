@@ -16,7 +16,7 @@ func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, que_exe_d
 	#var target_key = subaction_data['TargetKey']
 	#var targets:Array = _find_target_effected_actors(parent_action, subaction_data, target_key, que_exe_data, game_state, actor)
 	#var target_param_key = turn_data.get_param_key_for_target(target_key)
-	#var target_params = parent_action.get_targeting_params(target_param_key, actor)
+	#var target_params = _get_target_parameters(target_param_key, parent_action, actor, turn_data)
 	#
 	#var weapon = actor.equipment.get_primary_weapon()
 	#if !weapon:

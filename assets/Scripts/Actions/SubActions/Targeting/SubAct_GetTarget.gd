@@ -19,7 +19,7 @@ func get_action_tags(parent_action:PageItemAction, subaction_data:Dictionary)->A
 		# Weapon Attack with no actor
 		pass
 	else:
-		var target_params = _get_target_params(parent_action, parent_action.get_holding_actor(), subaction_data)
+		var target_params = _get_target_parameters(target_param_key, parent_action, null, null)
 		if target_params:
 			if target_params.has_area_of_effect():
 				tags.append("AOE")
@@ -37,15 +37,13 @@ func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, metadata:
 	
 	# Get Targeting Params
 	var target_param_key = subaction_data.get("TargetParamKey", "")
-	var target_params = _get_target_params(parent_action, actor, subaction_data, metadata, game_state)
+	var target_params = _get_target_parameters(target_param_key, parent_action, actor, turn_data)
 	if !target_params:
 		return BaseSubAction.Failed
 	
-	
-	
 	# Shortcut Self and FullArea
 	if target_params.target_type == TargetParameters.TargetTypes.Self or target_params.target_type == TargetParameters.TargetTypes.FullArea:
-		turn_data.add_target_for_key(setting_target_key, target_params.target_param_key, actor.Id,)
+		turn_data.add_target_for_key(setting_target_key, target_params, actor.Id,)
 		return BaseSubAction.Success
 	
 	#var actor_pos = game_state.get_actor_pos(actor)
@@ -82,11 +80,11 @@ func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, metadata:
 		if last_target_actor_id and last_target_record.get("LockOn", false):
 			for target:BaseActor in auto_targets:
 				if target.Id == last_target_actor_id:
-					turn_data.add_target_for_key(setting_target_key, target_param_key, target)
+					turn_data.add_target_for_key(setting_target_key, target_params, target)
 					return BaseSubAction.Success
 		# Auto-Select single target if only one Actor in range 
 		if auto_targets.size() == 1:
-			turn_data.add_target_for_key(setting_target_key, target_param_key, auto_targets[0])
+			turn_data.add_target_for_key(setting_target_key, target_params, auto_targets[0])
 			CombatRootControl.Instance.last_target_records[actor.Id] = {"ActorId": auto_targets[0].Id, "LockOn": false}
 			return BaseSubAction.Success
 	
@@ -99,13 +97,3 @@ func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, metadata:
 		"AllowLockon": allow_auto
 	})
 	return BaseSubAction.Success
-
-func _get_target_params(
-		parent_action:PageItemAction, 
-		actor:BaseActor, 
-		subaction_data:Dictionary, 
-		metadata:QueExecutionData = null, 
-		game_state:GameStateData = null
-	)->TargetParameters:
-	var target_param_key = subaction_data.get("TargetParamKey", "")
-	return parent_action.get_targeting_params(target_param_key, actor)

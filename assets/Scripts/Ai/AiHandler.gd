@@ -216,12 +216,12 @@ static func try_handle_get_target_sub_action(actor:BaseActor, selection_data:Tar
 	elif selection_data.target_params.is_spot_target_type():
 		turndata.add_target_for_key(
 			selection_data.setting_target_key, 
-			selection_data.target_params.target_param_key, 
+			selection_data.target_params, 
 			coor_to_actor[targeted_enemy_id])
 	elif selection_data.target_params.is_actor_target_type():
 		turndata.add_target_for_key(
 			selection_data.setting_target_key, 
-			selection_data.target_params.target_param_key, 
+			selection_data.target_params, 
 			targeted_enemy_id)
 	return true
 

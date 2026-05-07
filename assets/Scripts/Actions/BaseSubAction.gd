@@ -34,41 +34,30 @@ func do_thing(_parent_action:PageItemAction, _subaction_data:Dictionary, _metada
 	printerr("BaseSubAction.do_thing: No Override.")
 	return false
 
-func _get_target_parameters(parent_action:PageItemAction, actor:BaseActor, subaction_data:Dictionary)->TargetParameters:
-	var target_param_key = subaction_data.get("TargetParamKey", null)
-	if !target_param_key or target_param_key == '':
-		printerr("BaseSubAction._get_target_parameters: No TargetParamKey found in subaction_data.")
-		return null
-	var target_parms = parent_action.get_targeting_params(target_param_key, actor)
-	if !target_parms:
-		printerr("BaseSubAction._get_target_parameters: No TargetParam found in subaction_data.")
-		return null
-	#var actor_targeting_mods = actor.effects.get_stat_mods()
-	return target_parms
-
-## Selected target mapped to key
-func _get_primary_target(parent_action:PageItemAction, _subaction_data:Dictionary, target_key:String, 
-					metadata:QueExecutionData, _game_state:GameStateData, source_actor:BaseActor):
-	if target_key == "Self":
-		return [source_actor]
-	var turn_data = metadata.get_current_turn_data()
-	var target_param_key = turn_data.get_param_key_for_target(target_key)
-	if !target_param_key or target_param_key == '':
-		printerr("BaseSubAction._find_target_effected_actors: No TargetParamKey found in turn_data.")
-		return []
-	var target_params = parent_action.get_targeting_params(target_param_key, source_actor)
+## Returns TargetParameter from TurnExecution cache or Parent Action
+func _get_target_parameters(target_param_key, parent_action:PageItemAction, actor:BaseActor, turn_data:TurnExecutionData)->TargetParameters:
+	var target_params = null
+	# Check Turn Execution Data for cached target params
+	if turn_data and turn_data.has_cached_target_params(target_param_key):
+		target_params = turn_data.get_cached_target_params(target_param_key)
+	
+	# Get params from parent Action 
+	else:
+		target_params = parent_action.get_targeting_params(target_param_key, actor)
+	
 	if !target_params:
-		printerr("BaseSubAction._find_target_effected_actors: No TargetParam found with key '%s' from TargetingHelper." % [target_param_key])
-		return []
-	
-	var targets = turn_data.get_targets(target_key)
-	if not targets or targets.size() == 0:
+		printerr("%s._get_target_parameters: No TargetParam found with key '%s'." % [parent_action.ActionKey, target_param_key])
 		return null
 	
-	if targets.size() > 1:
-		printerr("BaseSubAction._get_primary_target: Multiple targets found." )
-	
-	return targets[0]
+	return target_params
+
+## Returns TargetParameters used in selecting target for target_key 
+func _get_target_parameters_for_target_key(target_key, parent_action:PageItemAction, actor:BaseActor, turn_data:TurnExecutionData)->TargetParameters:
+	var target_param_key = turn_data.get_param_key_for_target(target_key)
+	if !target_param_key:
+		printerr("%s._get_target_parameters_for_target_key: No target_param_key found for target_key '%s'." % [parent_action.ActionKey, target_key])
+		return null
+	return _get_target_parameters(target_param_key, parent_action, actor, turn_data)
 
 ## Get actors that were effected by the selected target key
 ## Only use when you haven't already pulled out Target Parames and Selected Targets
@@ -81,7 +70,7 @@ func _find_target_effected_actors(parent_action:PageItemAction, subaction_data:D
 	if !target_param_key or target_param_key == '':
 		printerr("BaseSubAction._find_target_effected_actors: No TargetParamKey found in turn_data.")
 		return []
-	var target_params = parent_action.get_targeting_params(target_param_key, source_actor)
+	var target_params = _get_target_parameters(target_param_key, parent_action, source_actor, turn_data)
 	if !target_params:
 		printerr("BaseSubAction._find_target_effected_actors: No TargetParam found with key '%s' from TargetingHelper." % [target_param_key])
 		return []
@@ -101,14 +90,6 @@ func _find_target_effected_spots(target_key:String,  metadata:QueExecutionData, 
 	if target_key == "Self":
 		return [game_state.get_actor_pos(source_actor)]
 	var turn_data = metadata.get_current_turn_data()
-	#var target_param_key = turn_data.get_param_key_for_target(target_key)
-	#if !target_param_key or target_param_key == '':
-		#printerr("BaseSubAction._find_target_effected_actors: No TargetParamKey found in turn_data.")
-		#return []
-	#var target_params = parent_action.get_targeting_params(target_param_key, source_actor)
-	#if !target_params:
-		#printerr("BaseSubAction._find_target_effected_actors: No TargetParam found with key '%s' from TargetingHelper." % [target_param_key])
-		#return []
 	
 	var target_list = []
 	for target in turn_data.get_targets(target_key):

@@ -33,7 +33,7 @@ func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, que_exe_d
 	var area_effect:AreaMatrix = null
 	if subaction_data.has("AreaTargetParamKey"):
 		var area_params_key = subaction_data.get("AreaTargetParamKey")
-		var target_area_params = parent_action.get_targeting_params(area_params_key, actor)
+		var target_area_params = _get_target_parameters(area_params_key, parent_action, actor, turn_data)
 		area_effect = target_area_params.effect_area
 		
 	if !area_effect:

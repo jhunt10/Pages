@@ -72,11 +72,12 @@ func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, que_exe_d
 			return BaseSubAction.Failed
 		else:
 			return BaseSubAction.Success
-	var target_param_key = turn_data.get_param_key_for_target(target_key)
-	var target_params = parent_action.get_targeting_params(target_param_key, actor)
+	
+	# Get Target Params
+	var target_params = _get_target_parameters_for_target_key(target_key, parent_action, actor, turn_data)
 	if !target_params:
-		printerr("SubAct_Attack: Failed to find TargetParams for key %s on page %s." % [target_param_key, parent_action.ItemKey])
 		return BaseSubAction.Failed
+	
 	var targets_selected = turn_data.get_targets(target_key)
 	var target_must_be_in_range = subaction_data.get("TargetMustBeInRange", true)
 	var ignore_aoe = subaction_data.get("PrimaryTargetOnly", false)

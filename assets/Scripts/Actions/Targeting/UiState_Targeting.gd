@@ -141,7 +141,7 @@ func select_target(coord:Vector2i, confirmed:bool, soft_select=false):
 	var turndata = selection_data.focused_actor.Que.QueExecData.get_current_turn_data()
 	if selection_data.target_params.is_spot_target_type():
 		var map_spot = MapPos.new(coord.x, coord.y, selection_data.actor_pos.z, selection_data.actor_pos.dir)
-		turndata.add_target_for_key(selection_data.setting_target_key, selection_data.target_params.target_param_key, map_spot)
+		turndata.add_target_for_key(selection_data.setting_target_key, selection_data.target_params, map_spot)
 	elif selection_data.target_params.is_actor_target_type():
 		var include_dead = selection_data.target_params.target_type == TargetParameters.TargetTypes.Corpse
 		var actors = CombatRootControl.Instance.GameState.get_actors_at_pos(coord, include_dead)
@@ -151,7 +151,7 @@ func select_target(coord:Vector2i, confirmed:bool, soft_select=false):
 		if actors.size() == 0:
 			printerr("No Actors on targeted spot when looking for Actor target")
 			return
-		turndata.add_target_for_key(selection_data.setting_target_key, selection_data.target_params.target_param_key, actors[0].Id)
+		turndata.add_target_for_key(selection_data.setting_target_key, selection_data.target_params, actors[0].Id)
 		
 		var lock_target = target_input_display.lock_on_box.button_pressed
 		CombatRootControl.Instance.last_target_records[selection_data.focused_actor.Id] = {"ActorId": actors[0].Id, "LockOn": lock_target}

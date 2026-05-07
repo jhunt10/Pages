@@ -41,12 +41,12 @@ func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, metadata:
 	
 	# Get Targeting Params
 	var target_param_key = subaction_data.get("TargetParamKey", "")
-	var target_params = parent_action.get_targeting_params(target_param_key, actor)
+	var target_params = _get_target_parameters(target_param_key, parent_action, actor, turn_data)
 	if !target_params:
 		return BaseSubAction.Failed
 		
 	# fail if not targeting a single actor
-	if (target_params.target_type != TargetParameters.TargetTypes.Actor 
+	if (target_params.target_type != TargetParameters.TargetTypes.Actor
 	and target_params.target_type != TargetParameters.TargetTypes.Enemy
 	and target_params.target_type != TargetParameters.TargetTypes.Ally):
 		printerr("Invalid TargetType for SubAct_GetTarget_Chain: %s | %s" % [parent_action.ItemKey, target_params.target_type])
@@ -96,7 +96,7 @@ func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, metadata:
 				var from_other_target = target_chain[targeted_actor]
 				if targeted_actor == targets[0]:
 					continue
-				turn_data.add_target_for_key(setting_target_key, target_param_key, targeted_actor)
+				turn_data.add_target_for_key(setting_target_key, target_params, targeted_actor)
 				turn_data.data_cache["TargetChainMaping"][targeted_actor] = from_other_target
 			return BaseSubAction.Success
 			## No-one to chain to
@@ -124,7 +124,7 @@ func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, metadata:
 	
 	# Handle Auto Target
 	if allow_auto and potential_target_count == 1:
-		turn_data.add_target_for_key(setting_target_key, target_param_key, selection_data.list_potential_targets()[0])
+		turn_data.add_target_for_key(setting_target_key, target_params, selection_data.list_potential_targets()[0])
 		return BaseSubAction.Success
 	
 	CombatRootControl.pause_combat()

@@ -24,8 +24,12 @@ func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, que_exe_d
 	
 	var turn_data = que_exe_data.get_current_turn_data()
 	var target_key = subaction_data['TargetKey']
-	var target_param_key = turn_data.get_param_key_for_target(target_key)
-	var target_params = parent_action.get_targeting_params(target_param_key, actor)
+	
+	# Get Target Params
+	var target_params = _get_target_parameters_for_target_key(target_key, parent_action, actor, turn_data)
+	if !target_params:
+		return BaseSubAction.Failed
+	
 	var targets_selected = turn_data.get_targets(target_key)
 	var targets = TargetingHelper.get_targeted_actors(
 			target_params, 

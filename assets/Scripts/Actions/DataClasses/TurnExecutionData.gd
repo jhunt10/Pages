@@ -9,6 +9,8 @@ var condition_flags:Dictionary = {}
 var _targets:Dictionary = {}
 # Mapping of TargetKey to TargetParamKey that set it
 var _targets_from_params:Dictionary = {}
+# Cache of TargetParams form set targets
+var _cached_target_params:Dictionary = {}
 
 var turn_failed:bool = false
 var _actor:BaseActor
@@ -16,14 +18,18 @@ func _init(actor:BaseActor, on_que:Dictionary) -> void:
 	_actor = actor
 	on_que_data = on_que
 
-func add_target_for_key(target_key:String, from_target_param_key:String, value):
+func add_target_for_key(target_key:String, from_target_param, value):
+	var target_param_key = from_target_param
+	if from_target_param is TargetParameters:
+		target_param_key = from_target_param.target_param_key
+		_cached_target_params[target_param_key] = from_target_param
 	if value is BaseActor:
 		value = value.Id
 	if value is String or value is MapPos:
 		if not _targets.keys().has(target_key):
 			_targets[target_key] = [] 
 		_targets[target_key].append(value)
-		_targets_from_params[target_key] = from_target_param_key
+		_targets_from_params[target_key] = target_param_key
 	else:
 		printerr("TurnExecutionData.set_target_key: Invalid object '%s' for key '%s'." % [value, target_key])
 
@@ -69,9 +75,24 @@ func get_targets(target_key:String):
 		return null
 	return target_value
 
-func get_param_key_for_target(target_key:String):
+func get_param_key_for_target(target_key:String)->String:
 	var target_param_key = _targets_from_params.get(target_key, null)
 	if !target_param_key:
 		printerr("TurnExecutionData.get_target: No target with key '%s'." % [target_key])
-		return null
+		return ''
 	return target_param_key
+
+func has_cached_target_params(target_param_key:String)->bool:
+	return _cached_target_params.keys().has(target_param_key)
+
+func get_cached_target_params(target_param_key:String)->TargetParameters:
+	return _cached_target_params.get(target_param_key, null)
+
+func get_cached_params_for_target(target_key:String)->TargetParameters:
+	var param_key = get_param_key_for_target(target_key)
+	if not param_key:
+		return null
+	if has_cached_target_params(param_key):
+		return get_cached_target_params(param_key)
+	printerr("TurnExecutionData.get_cached_params_for_target: No Cached params found with target_param_key '%s' for target_key '%s'." % [param_key, target_key])
+	return null

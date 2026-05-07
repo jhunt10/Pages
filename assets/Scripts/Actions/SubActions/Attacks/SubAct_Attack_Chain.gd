@@ -30,15 +30,17 @@ func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, que_exe_d
 	if !target_key:
 		printerr("SubAct_Attack_Chain: No 'TargetKey' on subaction in %s." % [parent_action.ItemKey])
 		return BaseSubAction.Failed
+	
+	# Check if no target
 	if not turn_data.has_target(target_key):
 		if subaction_data.get("FailOnNoTarget", true):
 			return BaseSubAction.Failed
 		else:
 			return BaseSubAction.Success
-	var target_param_key = turn_data.get_param_key_for_target(target_key)
-	var target_params = parent_action.get_targeting_params(target_param_key, actor)
+	
+	# Get Target Params
+	var target_params = _get_target_parameters_for_target_key(target_key, parent_action, actor, turn_data)
 	if !target_params:
-		printerr("SubAct_Attack_Chain: Failed to find TargetParams for key %s on page %s." % [target_param_key, parent_action.ItemKey])
 		return BaseSubAction.Failed
 	
 	var targets_selected = turn_data.get_targets(target_key)

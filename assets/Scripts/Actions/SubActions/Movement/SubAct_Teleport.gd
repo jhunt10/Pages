@@ -19,8 +19,7 @@ func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, que_exe_d
 	var turn_data = que_exe_data.get_current_turn_data()
 	var target_dest_key = subaction_data['TargetDestKey']
 	var target_dest = turn_data.get_targets(target_dest_key)[0]
-	var target_dest_params = parent_action.get_targeting_params(
-				turn_data.get_param_key_for_target(target_dest_key), actor)
+	var target_dest_params = _get_target_parameters_for_target_key(target_dest_key, parent_action, actor, turn_data)
 	
 	var teleporting_actor:BaseActor = null
 	if subaction_data.has('TargetActorKey') and not (subaction_data['TargetActorKey'] != '' or subaction_data['TargetActorKey'] != 'Self'):
