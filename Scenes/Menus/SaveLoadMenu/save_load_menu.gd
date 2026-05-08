@@ -36,8 +36,8 @@ const NEW_SAVE_KEY = "@@NEW_SAVE@@"
 
 var save_slots:Dictionary = {}
 var _cached_save_meta_data:Dictionary
-var _selected_save_name
-static var _last_save_load_name
+var _selected_save_id
+static var _last_save_load_id
 var _saving_data
 
 # Called when the node enters the scene tree for the first time.
@@ -63,8 +63,15 @@ func _ready() -> void:
 	message_box.hide()
 	clear_displayed_save_data()
 	read_existing_saves()
-	if _last_save_load_name != null:
-		_on_slot_pressed(_last_save_load_name)
+	
+	if _last_save_load_id == null:
+		var current_save_id = StoryState.save_id
+		if current_save_id:
+			_last_save_load_id = current_save_id
+			
+	
+	if _last_save_load_id != null:
+		_on_slot_pressed(_last_save_load_id)
 	elif save_mode:
 		_on_slot_pressed(NEW_SAVE_KEY)
 	else:
@@ -83,7 +90,7 @@ func on_close_menu():
 	self.queue_free()
 
 func set_saving_data():
-	_saving_data = SaveLoadHandler._build_save_meta_data("New Save")
+	_saving_data = SaveLoadHandler._build_save_meta_data("New Save", NEW_SAVE_KEY)
 	_cached_save_meta_data[NEW_SAVE_KEY] = _saving_data
 	set_displayed_save_data("New Save", _saving_data)
 
@@ -95,36 +102,41 @@ func _on_message_box_done():
 
 func _on_save_as_confirmed(save_name):
 	message_box.show_message("Saving Game...", 0.5)
-	_last_save_load_name = save_name
-	SaveLoadHandler.write_save_data(save_name)
+	_last_save_load_id = SaveLoadHandler.write_save_data(save_name)
 	pass
 
 func _on_save_button():
 	if save_mode: # Saving Game
-		var save_name = _selected_save_name
-		if _selected_save_name == NEW_SAVE_KEY:
+		var save_name = _cached_save_meta_data.get(_selected_save_id, {}).get("SaveName", "")
+		if _selected_save_id == NEW_SAVE_KEY:
 			save_name = suggest_new_save_name()
 		save_popup.name_input.text = save_name
 		save_popup.show()
 	else: # Loading Game
-		if !_selected_save_name:
+		if !_selected_save_id:
 			return
-		var data = _cached_save_meta_data.get(_selected_save_name, {})
+		var data = _cached_save_meta_data.get(_selected_save_id, {})
 		var save_id = data['SaveId']
 		SaveLoadHandler.load_save_data(save_id)
-		_last_save_load_name = _selected_save_name
+		_last_save_load_id = save_id
 		on_close_menu()
 
 func _on_confirm_box_confirmed():
-	SaveLoadHandler.delete_save(_selected_save_name)
-	save_slots[_selected_save_name].queue_free()
-	save_slots.erase(_selected_save_name)
+	var save_name = _cached_save_meta_data.get(_selected_save_id, {}).get("SaveName", "")
+	SaveLoadHandler.delete_save(save_name)
+	save_slots[_selected_save_id].queue_free()
+	save_slots.erase(_selected_save_id)
+	if _last_save_load_id == _selected_save_id:
+		_last_save_load_id = null
 	confirm_box.hide()
+	_selected_save_id = null
+	_on_slot_pressed(_selected_save_id)
 
 func _on_delete_button():
-	if not _selected_save_name:
+	if not _selected_save_id:
 		return
-	confirm_box.message_label.text = "Delete: " + _selected_save_name
+	var save_name = _cached_save_meta_data.get(_selected_save_id, {}).get("SaveName", "")
+	confirm_box.message_label.text = "Delete: " + save_name
 	confirm_box.show()
 
 func read_existing_saves():
@@ -132,7 +144,14 @@ func read_existing_saves():
 		if child is SaveSlotContainer and child != premade_save_slot and child != save_slot_new:
 			child.queue_free()
 	save_slots.clear()
-	_cached_save_meta_data = SaveLoadHandler.read_saves_meta_data()
+	
+	_cached_save_meta_data = {}
+	# Remap saves by Save Name because I was dumb on keying
+	var loaded_saves = SaveLoadHandler.read_saves_meta_data()
+	for save_name in loaded_saves.keys():
+		var save_id = loaded_saves[save_name].get("SaveId")
+		_cached_save_meta_data[save_id] = loaded_saves[save_name]
+	
 	if save_mode:
 		save_slots[NEW_SAVE_KEY] = save_slot_new
 		_cached_save_meta_data[NEW_SAVE_KEY] = _saving_data
@@ -143,6 +162,7 @@ func read_existing_saves():
 		var save_data = _cached_save_meta_data[save_name]
 		mapping.append({
 			"SaveName": save_name,
+			"SaveId": save_data['SaveId'],
 			"SaveDate": Time.get_unix_time_from_datetime_string(save_data['SaveDate'])
 		})
 		mapping.sort_custom(SaveLoadHandler._sort_saves_desc)
@@ -154,54 +174,54 @@ func read_existing_saves():
 		create_save_slot_container(save_name, _cached_save_meta_data[save_name])
 	scroll_bar.calc_bar_size()
 
-func create_save_slot_container(save_name:String, save_data:Dictionary):
+func create_save_slot_container(save_id:String, save_data:Dictionary):
 	var save_date = save_data.get("SaveDate", "")
-	
+	var save_name = save_data.get("SaveName")
 	var new_slot:SaveSlotContainer = premade_save_slot.duplicate()
 	new_slot.date_time_label.text = save_date
 	new_slot.name_label.text = save_name
-	new_slot.mouse_entered.connect(_on_mouse_enter_slot.bind(save_name))
-	new_slot.mouse_exited.connect(_on_mouse_exit_slot.bind(save_name))
-	new_slot.button.pressed.connect(_on_slot_pressed.bind(save_name))
+	new_slot.mouse_entered.connect(_on_mouse_enter_slot.bind(save_id))
+	new_slot.mouse_exited.connect(_on_mouse_exit_slot.bind(save_id))
+	new_slot.button.pressed.connect(_on_slot_pressed.bind(save_id))
 	new_slot.show()
-	save_slots[save_name] = new_slot
+	save_slots[save_id] = new_slot
 	slots_container.add_child(new_slot)
 
-func _on_mouse_enter_slot(save_name):
-	if _selected_save_name == null:
-		var slot:SaveSlotContainer = save_slots[save_name]
+func _on_mouse_enter_slot(save_id):
+	if _selected_save_id == null:
+		var slot:SaveSlotContainer = save_slots[save_id]
 		slot.highlight.show()
-		var data = _cached_save_meta_data.get(save_name, {})
-		set_displayed_save_data(save_name, data)
+		var data = _cached_save_meta_data.get(save_id, {})
+		set_displayed_save_data(save_id, data)
 
-func _on_mouse_exit_slot(save_name):
-	if _selected_save_name != save_name:
-		var slot:SaveSlotContainer = save_slots[save_name]
+func _on_mouse_exit_slot(save_id):
+	if _selected_save_id != save_id:
+		var slot:SaveSlotContainer = save_slots[save_id]
 		slot.highlight.hide()
-		if not _selected_save_name:
+		if not _selected_save_id:
 			clear_displayed_save_data()
 
-func _on_slot_pressed(save_name):
-	if _selected_save_name != null and save_slots.has(_selected_save_name):
-		var old_slot:SaveSlotContainer = save_slots[_selected_save_name]
+func _on_slot_pressed(save_id):
+	if _selected_save_id != null and save_slots.has(_selected_save_id):
+		var old_slot:SaveSlotContainer = save_slots[_selected_save_id]
 		old_slot.highlight.hide()
-	_selected_save_name = save_name
-	if not save_slots.has(save_name):
+	_selected_save_id = save_id
+	if not save_slots.has(save_id):
 		return
-	var slot:SaveSlotContainer = save_slots[save_name]
+	var slot:SaveSlotContainer = save_slots[save_id]
 	slot.highlight.show()
-	var data = _cached_save_meta_data.get(save_name, {})
-	set_displayed_save_data(save_name, data)
+	var data = _cached_save_meta_data.get(save_id, {})
+	set_displayed_save_data(save_id, data)
 
 func display_newest_save():
 	var newest_id = SaveLoadHandler.get_newest_save_id()
-	for save_name in _cached_save_meta_data.keys():
-		var data = _cached_save_meta_data[save_name]
-		if data['SaveId'] == newest_id:
-			_on_slot_pressed(save_name)
+	#for save_id in _cached_save_meta_data.keys():
+		#var data = _cached_save_meta_data[save_name]
+		#if data['SaveId'] == newest_id:
+	_on_slot_pressed(newest_id)
 
-func set_displayed_save_data(save_name:String, data):
-	sel_save_name_label.text = data.get("SaveName", save_name)
+func set_displayed_save_data(save_id:String, data):
+	sel_save_name_label.text = data.get("SaveName", save_id)
 	sel_save_date_label.text = data.get("SaveDate", "")
 	var location = data.get("Location", "")
 	sel_save_loaction_label.text = location
@@ -223,7 +243,7 @@ func set_displayed_save_data(save_name:String, data):
 	sel_pretty_pic.show()
 	sel_save_details_container.show()
 	if save_mode:
-		if save_name != NEW_SAVE_KEY:
+		if save_id != NEW_SAVE_KEY:
 			save_button.text = "Overwrite"
 		else:
 			save_button.text = "Save"
@@ -239,8 +259,8 @@ func clear_displayed_save_data():
 
 func suggest_new_save_name()->String:
 	var base_name = "Save"
-	if _last_save_load_name:
-		base_name = _last_save_load_name
+	if _last_save_load_id:
+		base_name = _cached_save_meta_data.get(_last_save_load_id,{}).get("SaveName", "Save")
 	var new_name = base_name
 	var index = 1
 	while _cached_save_meta_data.keys().has(new_name):

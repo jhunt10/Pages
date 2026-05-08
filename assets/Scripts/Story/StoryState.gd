@@ -294,6 +294,7 @@ func load_save_data(data:Dictionary):
 	purge_game()
 	
 	story_id = data['StoryId']
+	save_id = data['SaveId']
 	_story_stage_index = data.get('StoryStageIndex', 0)
 	_money = data.get("Money", 0)
 	_story_flags = data.get("StoryFlags", {}).duplicate(true)

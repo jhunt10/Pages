@@ -21,21 +21,23 @@ static func read_save_data(save_id:String)->Dictionary:
 	var text:String = file.get_as_text()
 	var parsed_object = JSON.parse_string(text)
 	if parsed_object and parsed_object is Dictionary:
+		parsed_object['SaveId'] = save_id
 		return parsed_object
 	return {}
 
 ## Write save data keyed off Save Name. If a save with the same name exists. it will be overwritten.
-static func write_save_data(save_name:String):
+# Based on SaveName because SaveId may not exist until created
+static func write_save_data(save_name:String)->String:
 	var save_id = str(ResourceUID.create_id())
-	var new_meta_data = _build_save_meta_data(save_name)
 	var saves_dic = read_saves_meta_data()
 	if saves_dic.keys().has(save_name):
 		save_id = saves_dic[save_name]['SaveId']
 		
+	
 	if !FileAccess.file_exists(SAVE_DATA_PATH):
 		DirAccess.make_dir_recursive_absolute(SAVE_DATA_PATH)
 		
-	new_meta_data['SaveId'] = save_id
+	var new_meta_data = _build_save_meta_data(save_name, save_id)
 	saves_dic[save_name] = new_meta_data
 	
 	var save_file_path = SAVE_DATA_PATH.path_join(save_id+".json")
@@ -48,14 +50,16 @@ static func write_save_data(save_name:String):
 	var meta_file = FileAccess.open(meta_file_path, FileAccess.WRITE)
 	meta_file.store_string(JSON.stringify(saves_dic))
 	StoryState.save_id = save_id
+	return save_id
 
-static func _build_save_meta_data(save_name:String):
+static func _build_save_meta_data(save_name:String, save_id:String):
 	var party = {}
 	for player in StoryState.list_party_actors():
 		if player:
 			party[player.Id] = [player.get_display_name(), player.stats.get_stat(StatHelper.Level)]
 	return {
 		"StoryId": StoryState.story_id,
+		"SaveId": save_id,
 		"SaveName": save_name,
 		"SaveDate": Time.get_datetime_string_from_system(false, true),
 		"RunTime": Time.get_time_string_from_unix_time(StoryState.get_runtime_untix_time()),
@@ -74,6 +78,10 @@ static func delete_save(save_name:String):
 	var saves_dic = read_saves_meta_data()
 	if not saves_dic.keys().has(save_name):
 		return
+	var save_id = saves_dic[save_name].get("SaveId", "")
+	if save_id:
+		var save_file_path = SAVE_DATA_PATH.path_join(save_id.replace(":", "_")+".json")
+		DirAccess.remove_absolute(save_file_path)
 	saves_dic.erase(save_name)
 	# Save Meta Data
 	var meta_file_path = SAVE_DATA_PATH.path_join("saves.json")
