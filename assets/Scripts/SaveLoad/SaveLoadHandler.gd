@@ -107,11 +107,5 @@ static  func _sort_saves_desc(save_a, save_b)->bool:
 	# return a > b
 	var save_a_date = save_a['SaveDate']
 	var save_b_date = save_b['SaveDate']
-	if save_a_date < save_b_date:
-		#print("'%s' < '%s'" % [save_a['SaveId'], save_b['SaveId']])
-		print("'%s' < '%s'" % [save_a_date, save_b_date])
-	else:
-		#print("'%s' > '%s'" % [save_a['SaveId'], save_b['SaveId']])
-		print("'%s' > '%s'" % [save_a_date, save_b_date])
 	return save_a_date > save_b_date
 	

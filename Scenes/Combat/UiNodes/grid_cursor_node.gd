@@ -21,7 +21,8 @@ var lock_position:bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	set_cursor(Cursors.Default)
+	if !current_cur:
+		set_cursor(Cursors.Default)
 	pass # Replace with function body.
 
 func set_cursor(cur:Cursors, dir:MapPos.Directions = MapPos.Directions.North):

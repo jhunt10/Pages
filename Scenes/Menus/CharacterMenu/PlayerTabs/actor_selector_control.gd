@@ -10,12 +10,12 @@ func sync_labels():
 	buttons.clear()
 	var button_scene = load("res://Scenes/Menus/CharacterMenu/PlayerTabs/player_tab_button.tscn")
 	var show_actors = []
-	if CombatRootControl.Instance:
-		for actor:BaseActor in CombatRootControl.Instance.GameState._actors.values():
-			if actor.is_player:
-				show_actors.append(actor)
-	else:
-		show_actors = StoryState.list_party_actors()
+	#if CombatRootControl.Instance:
+		#for actor:BaseActor in CombatRootControl.Instance.GameState._actors.values():
+			#if actor.is_player:
+				#show_actors.append(actor)
+	#else:
+	show_actors = StoryState.list_party_actors()
 	for actor in show_actors:
 		var new_button:PlayerTabButton = button_scene.instantiate()
 		new_button.set_actor(actor)

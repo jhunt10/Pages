@@ -36,8 +36,9 @@ func _init(controler:UiStateController, args:Dictionary) -> void:
 func start_state():
 	if _logging: print("Start UiState: PlaceActors")
 	actor_placer_control.load_and_show()
-	actor_placer_control.show()
+	CombatRootControl.Instance.MapController.player_spawn_area_tile_map.show()
 	CombatRootControl.Instance.ui_control.hide()
+	CombatRootControl.Instance.GridCursor.set_cursor(GridCursorNode.Cursors.SelectingActor)
 	
 func end_state():
 	if _logging: print("End UiState: PlaceActors")

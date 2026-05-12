@@ -20,16 +20,13 @@ var _placing_actor_id:String = ''
 var min_actor_count:int = 1
 var max_actor_count:int = 4
 
+var _been_loaded = false
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	confirm_button.button_down.connect(_on_confirm_button_down)
 	confirm_button.button_up.connect(_on_confirm_button_up)
 	premade_actor_button.hide()
-	#player1_button_control.pressed.connect(_on_actor_button_pressed.bind(player1_button_control))
-	#player2_button_control.pressed.connect(_on_actor_button_pressed.bind(player2_button_control))
-	#player3_button_control.pressed.connect(_on_actor_button_pressed.bind(player3_button_control))
-	#player4_button_control.pressed.connect(_on_actor_button_pressed.bind(player4_button_control))
-	pass # Replace with function body.
 
 func _on_confirm_button_down():
 	confirm_button.modulate = Color.GRAY
@@ -37,15 +34,17 @@ func _on_confirm_button_up():
 	confirm_button.modulate = Color.WHITE
 	confirm_pressed.emit()
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta: float) -> void:
-	pass
-
 func load_and_show(min_actors:int=1, max_actors:int=4):
+	if not _been_loaded:
+		build_actor_buttons(min_actors, max_actors)
+	self.show()
+
+func build_actor_buttons(min_actors:int=1, max_actors:int=4):
 	for child in actor_buttons_container.get_children():
 		child.queue_free()
 	_spawn_tile_map = CombatRootControl.Instance.MapController.player_spawn_area_tile_map
 	var first_actor_id = ''
+	# Build Buttons for each Party Actor
 	for actor in StoryState.list_party_actors():
 		if !actor:
 			continue
@@ -77,6 +76,7 @@ func load_and_show(min_actors:int=1, max_actors:int=4):
 		min_max_actor_label.text = str(min_actor_count) + "-" + str(max_actor_count)
 	set_placed_actor_count(0)
 	_on_actor_button_pressed(first_actor_id)
+	_been_loaded = true
 
 func set_placed_actor_count(count:int):
 	placed_actor_label.text = str(count)

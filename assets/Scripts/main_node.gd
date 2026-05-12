@@ -152,19 +152,13 @@ func open_character_sheet(_actor:BaseActor=null, parent_node=null)->CharacterMen
 		actor = StoryState.get_party_actor_by_index(0)
 		#actor = ActorLibrary.create_actor("TestActor", {})
 	var charsheet:CharacterMenuControl = load("res://Scenes/Menus/CharacterMenu/character_menu.tscn").instantiate()
-	#var screen_size = self.size
-	#var menu_scale = screen_size.y / charsheet.size.y
-	#charsheet.scale_control.scale = Vector2(scale, scale)
 	charsheet.scale_control.scale = Vector2(1, 1)
-	#if screen_size.y > charsheet.size.y * 2:
 	charsheet.scale_control.scale = Vector2(1.25,1.25)
 	if parent_node:
 		parent_node.add_child(charsheet)
 	else:
 		self.add_child(charsheet)
 	charsheet.show_menu()
-	#self.remove_child(center_container)
-	#self.add_child(center_container)
 	return charsheet
 
 func open_page_menu(actor:BaseActor):

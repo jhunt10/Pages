@@ -234,12 +234,23 @@ func on_actor_tab_selected(actor:BaseActor):
 func show_menu():
 	load_start_time = Time.get_ticks_msec()
 	var actor = null
+	# In Combat
 	if CombatRootControl.Instance:
-		actor = CombatRootControl.Instance.get_current_player_actor()
+		# Combat has started
+		if CombatRootControl.Instance.combat_started:
+			actor = CombatRootControl.Instance.get_current_player_actor()
+		# Check if placing actor
+		else:
+			var actor_placer = CombatRootControl.Instance.ui_control.actor_placer_control
+			if actor_placer._placing_actor_id:
+				actor = ActorLibrary.get_actor(actor_placer._placing_actor_id)
+		
 	elif _actor_id != '' and ActorLibrary.has_actor(_actor_id):
 		actor = ActorLibrary.get_actor(_actor_id)
-	else:
+	
+	if actor == null:
 		actor = StoryState.get_party_actor_by_index(0)
+	
 	# Set Actor
 	_actor = actor
 	if _actor:
