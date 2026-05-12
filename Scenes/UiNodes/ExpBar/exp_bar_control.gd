@@ -40,6 +40,8 @@ func set_actor(actor:BaseActor):
 	_sync()
 
 func open_level_up_menu():
+	if CharacterMenuControl.Instance.combat_mode:
+		return
 	if level_up_button_animation:
 		level_up_button_animation.play('waiting')
 	CharacterMenuControl.Instance.show_level_up_pages()
@@ -53,7 +55,7 @@ func _sync():
 	max_exp_label.text = str(int(max_exp))
 	self.percent_full = current_exp / max_exp
 	if level_up_button_control:
-		if current_exp >= max_exp:
+		if current_exp >= max_exp and not CharacterMenuControl.Instance.combat_mode:
 			if level_up_button_animation:
 				level_up_button_animation.play('flashing_animation')
 		else:

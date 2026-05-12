@@ -48,9 +48,9 @@ var _drag_dead_zone = 10
 
 var delay_loading_inventory = true
 
-var equip_mode:bool:
+var combat_mode:bool:
 	get():
-		return not (MainRootNode.Instance.current_scene is CombatRootControl)
+		return (MainRootNode.Instance.current_scene is CombatRootControl)
 
 var level_up_menu_open:bool = false
 
@@ -65,7 +65,15 @@ func _ready() -> void:
 	tab_supplies_button.pressed.connect(on_tab_pressed.bind("Supplies"))
 	tab_inventory_button.pressed.connect(on_tab_pressed.bind("Inventory"))
 	tab_stats_button.pressed.connect(on_tab_pressed.bind("Stats"))
-	if equip_mode:
+	
+	if combat_mode:
+		if inventory_container:
+			inventory_container.hide()
+		if stats_page:
+			stats_page.show()
+		inventory_tab_rect.hide()
+		stats_tab_rect.hide()
+	else:
 		if equipment_page:
 			equipment_page.item_button_down.connect(on_item_button_down)
 			equipment_page.item_button_up.connect(on_item_button_up)
@@ -75,13 +83,6 @@ func _ready() -> void:
 			stats_page.hide()
 		inventory_tab_rect.hide()
 		stats_tab_rect.show()
-	else:
-		if inventory_container:
-			inventory_container.hide()
-		if stats_page:
-			stats_page.show()
-		inventory_tab_rect.hide()
-		stats_tab_rect.hide()
 		
 	level_up_menu_page.hide()
 	skill_tree_page.hide()
@@ -105,36 +106,20 @@ func _ready() -> void:
 		supplies_page.mouse_enter_item.connect(on_mouse_enter_slot)
 		supplies_page.mouse_exit_item.connect(on_mouse_exit_slot)
 	
-	#bag_page.item_button_down.connect(on_item_button_down)
-	#bag_page.item_button_up.connect(on_item_button_up)
-	#bag_page.mouse_enter_item.connect(on_mouse_enter_slot)
-	#bag_page.mouse_exit_item.connect(on_mouse_exit_slot)
-	
 	stop_dragging()
 	if last_tab_pressed != '':
 		on_tab_pressed(last_tab_pressed)
 	else:
 		on_tab_pressed("Pages")
-	#if equip_mode:
-		#on_tab_pressed("Inventory")
-		#inventory_tabs_control.on_tab_selected.connect(on_inv_filter_selected)
-		#inventory_tabs_control.on_tab_unselected.connect(on_inv_filter_unselected)
-	#else:
-		#on_tab_pressed("Stats")
-		#stats_tab_rect.hide()
-		#inventory_tab_rect.hide()
-	#if _actor == null:
-		#ActorLibrary.new()
-		#var test = ActorLibrary.get_actor("TestActor_ID")
-		#set_actor(test)
-	pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 var first_process_pass = true
+var load_start_time
+var first_frame_time
 func _process(delta: float) -> void:
 	# Load Inventory after first frame
-	if delay_loading_inventory and equip_mode:
+	if delay_loading_inventory and not combat_mode:
 		if first_process_pass:
 			first_process_pass = false
 			var time_diff = Time.get_ticks_msec() - load_start_time
@@ -170,44 +155,6 @@ func _input(event: InputEvent) -> void:
 			_current_details_card._on_exit_button()
 
 
-var load_start_time
-var first_frame_time
-#func first_load(actor:BaseActor):
-	#page_page.parent_menu = self
-	#set_actor(actor)
-	#if last_tab_pressed != '':
-		#on_tab_pressed(last_tab_pressed)
-	#else:
-		#on_tab_pressed("Pages")
-	#pass
-	
-
-#func set_actor(actor:BaseActor):
-	#load_start_time = Time.get_ticks_msec()
-	#first_frame_time = null
-	#
-	#var start_time = Time.get_unix_time_from_system()
-	#print("Starting Set Actor: %s" % Time.get_datetime_string_from_unix_time(start_time))
-	#_actor = actor
-	#if _actor:
-		#_actor_id = _actor.Id
-	#else:
-		#_actor_id = ''
-	#if _actor:
-		#equipment_page.set_actor(_actor)
-		#bag_page.set_actor(_actor)
-		#stats_page.set_actor(_actor)
-		#actor_tabs_control.set_selected_actor(_actor)
-		#if _current_details_card:
-			#var item = ItemLibrary.get_item(_current_details_card.item_id)
-			#_current_details_card.set_item(actor, item)
-	#var finish_time = Time.get_unix_time_from_system()
-	#var time_diff = finish_time - start_time
-	#print("Finished Set Actor: %s" % Time.get_datetime_string_from_unix_time(finish_time))
-	#print("RunTime: %s" % Time.get_time_string_from_unix_time(time_diff))
-	#if inventory_container.visible:
-		#inventory_container._refilter()
-
 func on_actor_tab_selected(actor:BaseActor):
 	_actor = actor
 	if _actor:
@@ -225,7 +172,7 @@ func on_actor_tab_selected(actor:BaseActor):
 			left_page_control.show_menu_page()
 	if _current_details_card:
 		_current_details_card.start_hide()
-	if equip_mode and inventory_container.visible:
+	if not combat_mode and inventory_container.visible:
 		inventory_container.sync()
 	if stats_page.visible:
 		stats_page.sync()
@@ -267,11 +214,11 @@ func show_menu():
 	else:
 		on_tab_pressed("Pages")
 	
-	if equip_mode:
-		on_tab_pressed("Inventory")
-	else:
+	if combat_mode:
 		on_tab_pressed("Stats")
 		stats_page.sync()
+	else:
+		on_tab_pressed("Inventory")
 	#inventory_container.build_item_slots()
 	self.visible = true
 
@@ -386,7 +333,7 @@ func context_to_page_control(context):
 	return null
 
 func start_dragging():
-	if not equip_mode:
+	if combat_mode:
 		return
 	if _selected_item:
 		_dragging = true
@@ -514,7 +461,8 @@ func on_tab_pressed(tab_name:String):
 		stats_page.show()
 		inventory_container.hide()
 		stats_tab_rect.hide()
-		inventory_tab_rect.show()
+		if not combat_mode:
+			inventory_tab_rect.show()
 		#inventory_tabs_control.hide()
 		return
 	
@@ -546,7 +494,7 @@ func on_tab_pressed(tab_name:String):
 		#inventory_tabs_control.set_tabs(["Potion", "Bomb"])
 		
 	
-	if equip_mode:
+	if not combat_mode:
 		# Show Inventory on any tab change
 		inventory_container.show()
 		stats_page.hide()
