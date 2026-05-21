@@ -264,7 +264,14 @@ func create_details_card(item:BaseItem,
 		_current_details_card.start_hide()
 		
 	if confirm_button_text == 'UNSET':
-		var actor_has_item = true
+		var actor_has_item = false 
+		if item is BasePageItem:
+			actor_has_item = _actor.pages.has_item(item.Id)
+		if item is BaseSupplyItem:
+			actor_has_item = _actor.items.has_item(item.Id)
+		if item is BaseEquipmentItem:
+			actor_has_item = _actor.equipment.has_item(item.Id)
+			
 		if actor_has_item:
 			confirm_button_text = "Remove"
 		else:

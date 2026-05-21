@@ -1,5 +1,5 @@
 class_name EffectPageDetailsControl
-extends Control
+extends BoxContainer
 
 @export var parent_card_control:ItemDetailsCard
 @export var description_box:DescriptionBox

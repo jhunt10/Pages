@@ -1,5 +1,5 @@
 class_name PageQueDetailsControl
-extends Control
+extends BoxContainer
 
 @export var parent_card_control:ItemDetailsCard
 @export var ppr_label:Label
@@ -39,7 +39,7 @@ func set_item(actor:BaseActor, que:BaseQueEquipment):
 	#elif _actor.equipment.can_equip_item(_item):
 		#parent_card_control.equip_label.text = "Equip"
 	else:
-		parent_card_control.equip_label.text = "Equip"
+		parent_card_control.confirm_label.text = "Equip"
 		#parent_card_control.equip_button_background.hide()
 	
 

@@ -226,6 +226,8 @@ func _unhandled_input(event: InputEvent) -> void:
 		for node_path in no_scroll_nodes:
 			if node_path is NodePath:
 				var node = self.get_node(node_path)
+				if !node:
+					continue
 				var mouse_pos = node.get_local_mouse_position()
 				var no_touch = node.get_global_rect()
 				no_touch.position.x = 0

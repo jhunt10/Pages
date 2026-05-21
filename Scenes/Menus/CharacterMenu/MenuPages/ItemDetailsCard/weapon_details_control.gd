@@ -1,5 +1,5 @@
 class_name WeaponDetailsControl
-extends Control
+extends BoxContainer
 
 @export var parent_card_control:ItemDetailsCard
 @export var weapon_class_label:Label

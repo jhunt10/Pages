@@ -1,5 +1,5 @@
 class_name DefaultItemDetailsControl
-extends Control
+extends BoxContainer
 
 @export var description_box:DescriptionBox
 @export var stat_mods_container:Container

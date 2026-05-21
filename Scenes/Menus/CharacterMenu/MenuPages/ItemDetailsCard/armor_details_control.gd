@@ -1,5 +1,5 @@
 class_name ArmorDetailsControl
-extends Control
+extends BoxContainer
 
 @export var parent_card_control:ItemDetailsCard
 @export var slot_label:Label
@@ -37,10 +37,10 @@ func set_armor(actor:BaseActor, armor:BaseApparelEquipment):
 	description_box.text = armor.get_description()
 	if _actor:
 		if _actor.equipment.has_item(_item.Id):
-			parent_card_control.equip_label.text = "Remove"	
+			parent_card_control.confirm_label.text = "Remove"	
 		#elif _actor.equipment.can_equip_item(_item):
 		else:
-			parent_card_control.equip_label.text = "Equip"
+			parent_card_control.confirm_label.text = "Equip"
 		#else:
 			#parent_card_control.equip_button_background.hide()
 	

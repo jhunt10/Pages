@@ -7,8 +7,6 @@ var camera:MoveableCamera2D:
 
 @export var game_over_screen:GameOverScreen
 @export var victory_screen:GameVictoryScreen
-@export var menu_button:TextureButton 
-@export var book_button:TextureButton 
 @export var pause_menu:PauseMenuControl 
 @export var actor_pointer:ActorPointerControl
 @export var active_combat_control:Control

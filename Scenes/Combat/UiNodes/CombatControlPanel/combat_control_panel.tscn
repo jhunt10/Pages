@@ -1,0 +1,573 @@
+[gd_scene format=3 uid="uid://2i772x1lb170"]
+
+[ext_resource type="Theme" uid="uid://bnlswrbqh03wx" path="res://assets/Themes/ComputerPanels/computer_theme.tres" id="1_lhfpo"]
+[ext_resource type="Script" uid="uid://dfqt4nvec14gc" path="res://Scenes/Combat/UiNodes/CombatControlPanel/combat_control_panel.gd" id="2_y2h0u"]
+[ext_resource type="Texture2D" uid="uid://dlt0felfmrig5" path="res://assets/Themes/ComputerPanels/MinButton.png" id="3_lmxbm"]
+[ext_resource type="Texture2D" uid="uid://dgqxxpu0pext2" path="res://assets/Themes/ComputerPanels/MinButtonPressed.png" id="4_5bqcd"]
+[ext_resource type="Texture2D" uid="uid://b1vt3lbxy0seh" path="res://assets/Themes/ComputerPanels/MaxButton.png" id="5_vr7gu"]
+[ext_resource type="Texture2D" uid="uid://c1xyuhrlahflh" path="res://assets/Themes/ComputerPanels/MaxButtonPressed.png" id="6_pjvtl"]
+[ext_resource type="Texture2D" uid="uid://31ys4mlnj8a8" path="res://assets/Themes/ComputerPanels/InfoButton.png" id="7_dl1ko"]
+[ext_resource type="Texture2D" uid="uid://o1ybx66q24xn" path="res://assets/Themes/ComputerPanels/InfoButtonPressed.png" id="8_gfjnj"]
+[ext_resource type="FontFile" uid="uid://0kbg00s43xf0" path="res://assets/Fonts/8bit.ttf" id="9_7h32j"]
+[ext_resource type="FontFile" uid="uid://cq1gkq6upl513" path="res://assets/Fonts/8bit-2.ttf" id="10_0m67q"]
+[ext_resource type="StyleBox" uid="uid://dc0c1uqu7guxm" path="res://assets/Themes/ComputerPanels/button_normal_box_texture.tres" id="11_c5xl8"]
+[ext_resource type="StyleBox" uid="uid://dqbqmnmbl322s" path="res://assets/Themes/ComputerPanels/button_pressed_style_box_texture.tres" id="12_7b346"]
+[ext_resource type="Texture2D" uid="uid://b0ppbwvsr2mvy" path="res://assets/Themes/ComputerPanels/HDivider.png" id="13_qas4w"]
+[ext_resource type="Theme" uid="uid://dwinll8pgdjhc" path="res://assets/Themes/standard_theme.tres" id="14_pakc7"]
+[ext_resource type="Texture2D" uid="uid://cand1e8p22oc8" path="res://assets/Themes/ComputerPanels/SubPanel.png" id="15_t460y"]
+[ext_resource type="Script" uid="uid://dii0yosa247al" path="res://Scenes/Combat/UiNodes/QueCollection/que_collection_control.gd" id="16_emua7"]
+[ext_resource type="Script" uid="uid://blx6xhkos2503" path="res://Scenes/Combat/UiNodes/QueCollection/que_display_container.gd" id="17_6fty5"]
+[ext_resource type="Texture2D" uid="uid://dc5wy6j8a4hu3" path="res://assets/Themes/CombatUi/PortraitRect.png" id="18_we17c"]
+[ext_resource type="Texture2D" uid="uid://b6u5htxioouqh" path="res://Scenes/Dialog/DialogBox/UnknownSpeakerPort.png" id="19_5xtmj"]
+[ext_resource type="Script" uid="uid://bvd51qo5tm067" path="res://Scenes/Combat/UiNodes/QueCollection/que_mini_slot_icon.gd" id="20_tpii5"]
+[ext_resource type="Texture2D" uid="uid://cg1yo6bhpalea" path="res://assets/Sprites/UI/QueInputAndDisplay/mini_page_slot.png" id="21_fkx0m"]
+[ext_resource type="Texture2D" uid="uid://1brfy81pji75" path="res://assets/Sprites/UI/QueInputAndDisplay/mini_page_gap_slot.png" id="22_qiopa"]
+[ext_resource type="Texture2D" uid="uid://d28r048mh6136" path="res://assets/Sprites/UnknownSprite.png" id="23_bn0w0"]
+[ext_resource type="Texture2D" uid="uid://coojsfckia2jk" path="res://Scenes/Combat/UiNodes/QueDisplay/UnknownPageSlotIcon.png" id="24_4q4kx"]
+[ext_resource type="Texture2D" uid="uid://b4rsuuvrkee14" path="res://assets/Sprites/UI/QueInputAndDisplay/mini_dead_slot.png" id="25_wqa4v"]
+[ext_resource type="Texture2D" uid="uid://seyoqmlx4o78" path="res://assets/Sprites/UI/QueInputAndDisplay/mini_page_slot_highlight.png" id="26_b0rvi"]
+[ext_resource type="Theme" uid="uid://bfce41la62bs6" path="res://assets/Themes/readable_theme.tres" id="27_7h8gv"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uoafv"]
+bg_color = Color(1, 1, 1, 0)
+
+[sub_resource type="Theme" id="Theme_4il04"]
+RichTextLabel/styles/normal = SubResource("StyleBoxFlat_uoafv")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_iryb6"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ka7e4"]
+
+[sub_resource type="Theme" id="Theme_iww8d"]
+Button/colors/font_color = Color(0, 0, 0, 1)
+Button/colors/font_disabled_color = Color(0.23753911, 0.23753914, 0.23753911, 0.7529412)
+Button/colors/font_hover_color = Color(0, 0, 0, 1)
+Button/colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+Button/colors/font_pressed_color = Color(0, 0, 0, 1)
+Button/fonts/font = ExtResource("10_0m67q")
+Button/styles/disabled = ExtResource("11_c5xl8")
+Button/styles/hover = SubResource("StyleBoxEmpty_iryb6")
+Button/styles/hover_pressed = ExtResource("12_7b346")
+Button/styles/normal = SubResource("StyleBoxEmpty_ka7e4")
+Button/styles/pressed = ExtResource("12_7b346")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wg5ka"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iryb6"]
+bg_color = Color(0, 0.5803922, 1, 1)
+
+[sub_resource type="Theme" id="Theme_ka7e4"]
+ProgressBar/styles/background = SubResource("StyleBoxEmpty_wg5ka")
+ProgressBar/styles/fill = SubResource("StyleBoxFlat_iryb6")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4il04"]
+texture = ExtResource("15_t460y")
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+texture_margin_bottom = 4.0
+
+[sub_resource type="Theme" id="Theme_hgp41"]
+PanelContainer/styles/panel = SubResource("StyleBoxTexture_4il04")
+
+[node name="CombatControlPanel" type="PanelContainer" unique_id=1084273047 node_paths=PackedStringArray("min_button", "max_button", "menu_button", "book_button", "round_label", "turn_label", "status_label", "round_progress_bar", "turns_container")]
+custom_minimum_size = Vector2(206, 0)
+offset_right = 40.0
+offset_bottom = 40.0
+theme = ExtResource("1_lhfpo")
+script = ExtResource("2_y2h0u")
+min_button = NodePath("VBoxContainer/TopBarControl/MinButton")
+max_button = NodePath("VBoxContainer/TopBarControl/MaxButton")
+menu_button = NodePath("VBoxContainer/MenusContainer/MenuLabel/MenuButton")
+book_button = NodePath("VBoxContainer/MenusContainer/BookLabel/BookButton")
+round_label = NodePath("VBoxContainer/RoundTurnContainer/RoundLabel2")
+turn_label = NodePath("VBoxContainer/RoundTurnContainer/TurnLabel2")
+status_label = NodePath("VBoxContainer/StatusContainer/NinePatchRect/StatusLabel")
+round_progress_bar = NodePath("VBoxContainer/StatusContainer/NinePatchRect/RoundProgressBar")
+turns_container = NodePath("VBoxContainer/TurnOrderContainer")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1257019059]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="TopBarControl" type="Control" parent="VBoxContainer" unique_id=743819323]
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/TopBarControl" unique_id=995437799]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = -19.0
+offset_right = 154.0
+offset_bottom = 4.0
+grow_vertical = 0
+theme = ExtResource("1_lhfpo")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 12
+text = "P:/.../combat.exe"
+
+[node name="MinButton" type="TextureButton" parent="VBoxContainer/TopBarControl" unique_id=286590093]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -17.0
+offset_top = -20.0
+offset_bottom = -3.0
+grow_horizontal = 0
+texture_normal = ExtResource("3_lmxbm")
+texture_pressed = ExtResource("4_5bqcd")
+
+[node name="MaxButton" type="TextureButton" parent="VBoxContainer/TopBarControl" unique_id=421507347]
+visible = false
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -17.0
+offset_top = -20.0
+offset_bottom = -3.0
+grow_horizontal = 0
+texture_normal = ExtResource("5_vr7gu")
+texture_pressed = ExtResource("6_pjvtl")
+
+[node name="InfoButton" type="TextureButton" parent="VBoxContainer/TopBarControl" unique_id=1295525169]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_top = -20.0
+offset_right = -19.0
+offset_bottom = -3.0
+grow_horizontal = 0
+texture_normal = ExtResource("7_dl1ko")
+texture_pressed = ExtResource("8_gfjnj")
+
+[node name="MenusContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=232064991]
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="VBoxContainer/MenusContainer" unique_id=156601039]
+visible = false
+layout_mode = 2
+
+[node name="MenuLabel" type="RichTextLabel" parent="VBoxContainer/MenusContainer" unique_id=575537994]
+custom_minimum_size = Vector2(34, 0)
+layout_mode = 2
+theme = SubResource("Theme_4il04")
+theme_override_constants/underline_alpha = 60
+theme_override_fonts/normal_font = ExtResource("9_7h32j")
+theme_override_font_sizes/normal_font_size = 12
+bbcode_enabled = true
+text = "[u]M[/u]enu"
+fit_content = true
+autowrap_mode = 0
+horizontal_alignment = 2
+
+[node name="MenuButton" type="Button" parent="VBoxContainer/MenusContainer/MenuLabel" unique_id=1092232125]
+self_modulate = Color(1, 1, 1, 0.37254903)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_iww8d")
+
+[node name="BookLabel" type="RichTextLabel" parent="VBoxContainer/MenusContainer" unique_id=2056418982]
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 2
+theme = SubResource("Theme_4il04")
+theme_override_constants/underline_alpha = 60
+theme_override_fonts/normal_font = ExtResource("9_7h32j")
+theme_override_font_sizes/normal_font_size = 12
+bbcode_enabled = true
+text = "[u]B[/u]ook"
+fit_content = true
+autowrap_mode = 0
+horizontal_alignment = 2
+
+[node name="BookButton" type="Button" parent="VBoxContainer/MenusContainer/BookLabel" unique_id=1614766308]
+self_modulate = Color(1, 1, 1, 0.37254903)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_iww8d")
+
+[node name="DividerNinePatchRect" type="NinePatchRect" parent="VBoxContainer" unique_id=763836712]
+layout_mode = 2
+texture = ExtResource("13_qas4w")
+patch_margin_left = 2
+patch_margin_top = 1
+patch_margin_right = 2
+patch_margin_bottom = 1
+
+[node name="Blank_DividerNinePatchRect" type="NinePatchRect" parent="VBoxContainer" unique_id=995444680]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+texture = ExtResource("13_qas4w")
+patch_margin_left = 2
+patch_margin_top = 1
+patch_margin_right = 2
+patch_margin_bottom = 1
+
+[node name="StatusContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=958992217]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/StatusContainer" unique_id=726735276]
+layout_mode = 2
+theme = ExtResource("14_pakc7")
+theme_override_colors/font_outline_color = Color(0.33333334, 0.33333334, 0.33333334, 1)
+text = " Status: "
+
+[node name="NinePatchRect" type="NinePatchRect" parent="VBoxContainer/StatusContainer" unique_id=178604167]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("15_t460y")
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+
+[node name="RoundProgressBar" type="ProgressBar" parent="VBoxContainer/StatusContainer/NinePatchRect" unique_id=412866371]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = -1.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_ka7e4")
+show_percentage = false
+
+[node name="StatusLabel" type="Label" parent="VBoxContainer/StatusContainer/NinePatchRect" unique_id=333531485]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+theme = ExtResource("14_pakc7")
+text = "Action Input"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RoundTurnContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=118893723]
+layout_mode = 2
+
+[node name="VSeparator" type="VSeparator" parent="VBoxContainer/RoundTurnContainer" unique_id=405846060]
+visible = false
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="RoundLabel" type="Label" parent="VBoxContainer/RoundTurnContainer" unique_id=1842605911]
+layout_mode = 2
+theme = ExtResource("14_pakc7")
+theme_override_colors/font_outline_color = Color(0.33333334, 0.33333334, 0.33333334, 1)
+theme_override_font_sizes/font_size = 12
+text = " Round:"
+
+[node name="RoundLabel2" type="Label" parent="VBoxContainer/RoundTurnContainer" unique_id=2054724071]
+custom_minimum_size = Vector2(24, 0)
+layout_mode = 2
+theme = ExtResource("14_pakc7")
+theme_override_colors/font_outline_color = Color(0.33333334, 0.33333334, 0.33333334, 1)
+theme_override_font_sizes/font_size = 12
+text = "1"
+
+[node name="VSeparator2" type="VSeparator" parent="VBoxContainer/RoundTurnContainer" unique_id=741490525]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TurnLabel" type="Label" parent="VBoxContainer/RoundTurnContainer" unique_id=731443765]
+layout_mode = 2
+theme = ExtResource("14_pakc7")
+theme_override_colors/font_outline_color = Color(0.33333334, 0.33333334, 0.33333334, 1)
+theme_override_font_sizes/font_size = 12
+text = "Turn:"
+
+[node name="TurnLabel2" type="Label" parent="VBoxContainer/RoundTurnContainer" unique_id=2099023261]
+custom_minimum_size = Vector2(24, 0)
+layout_mode = 2
+theme = ExtResource("14_pakc7")
+theme_override_colors/font_outline_color = Color(0.33333334, 0.33333334, 0.33333334, 1)
+theme_override_font_sizes/font_size = 12
+text = "0"
+
+[node name="VSeparator3" type="VSeparator" parent="VBoxContainer/RoundTurnContainer" unique_id=373497006]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TurnOrderContainer" type="VBoxContainer" parent="VBoxContainer" unique_id=1501039013 node_paths=PackedStringArray("ques_container", "ques_scroll_container", "premade_que_container")]
+layout_mode = 2
+script = ExtResource("16_emua7")
+ques_container = NodePath("ScrollContainer/QuesContainer")
+ques_scroll_container = NodePath("ScrollContainer")
+premade_que_container = NodePath("ScrollContainer/QuesContainer/QueDisplayPanelContainer")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="VBoxContainer/TurnOrderContainer" unique_id=1989442724]
+layout_mode = 2
+texture = ExtResource("13_qas4w")
+patch_margin_left = 2
+patch_margin_top = 1
+patch_margin_right = 2
+patch_margin_bottom = 1
+
+[node name="Label3" type="Label" parent="VBoxContainer/TurnOrderContainer" unique_id=198817936]
+layout_mode = 2
+theme = ExtResource("14_pakc7")
+theme_override_colors/font_outline_color = Color(0.33333334, 0.33333334, 0.33333334, 1)
+theme_override_font_sizes/font_size = 12
+text = "Turn Order:"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/TurnOrderContainer" unique_id=1636875211]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 2
+
+[node name="QuesContainer" type="VBoxContainer" parent="VBoxContainer/TurnOrderContainer/ScrollContainer" unique_id=185268978]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+
+[node name="QueDisplayPanelContainer" type="PanelContainer" parent="VBoxContainer/TurnOrderContainer/ScrollContainer/QuesContainer" unique_id=1363729077 node_paths=PackedStringArray("portrait", "slot_button_prefab", "slots_container", "name_label", "npc_index_label")]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+theme = SubResource("Theme_hgp41")
+script = ExtResource("17_6fty5")
+portrait = NodePath("QueContainer/PortrateBackgroundTextureRect/PortraitTextureRect")
+slot_button_prefab = NodePath("QueContainer/PageSlotPrefab")
+slots_container = NodePath("QueContainer/SlotsContainer")
+name_label = NodePath("QueContainer/PortrateBackgroundTextureRect/PortraitTextureRect/Label")
+npc_index_label = NodePath("QueContainer/PortrateBackgroundTextureRect/PortraitTextureRect/IndexLabel")
+
+[node name="QueContainer" type="BoxContainer" parent="VBoxContainer/TurnOrderContainer/ScrollContainer/QuesContainer/QueDisplayPanelContainer" unique_id=723685951]
+layout_mode = 2
+
+[node name="PortrateBackgroundTextureRect" type="TextureRect" parent="VBoxContainer/TurnOrderContainer/ScrollContainer/QuesContainer/QueDisplayPanelContainer/QueContainer" unique_id=816562318]
+layout_mode = 2
+texture = ExtResource("18_we17c")
+expand_mode = 2
+
+[node name="PortraitTextureRect" type="TextureRect" parent="VBoxContainer/TurnOrderContainer/ScrollContainer/QuesContainer/QueDisplayPanelContainer/QueContainer/PortrateBackgroundTextureRect" unique_id=799713381]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = -1.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("19_5xtmj")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="VBoxContainer/TurnOrderContainer/ScrollContainer/QuesContainer/QueDisplayPanelContainer/QueContainer/PortrateBackgroundTextureRect/PortraitTextureRect" unique_id=1553947623]
+visible = false
+z_index = 1
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+mouse_filter = 1
+text = "ActorName"
+
+[node name="IndexLabel" type="Label" parent="VBoxContainer/TurnOrderContainer/ScrollContainer/QuesContainer/QueDisplayPanelContainer/QueContainer/PortrateBackgroundTextureRect/PortraitTextureRect" unique_id=329826584]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme = ExtResource("14_pakc7")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+text = "A"
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="PageSlotPrefab" type="Control" parent="VBoxContainer/TurnOrderContainer/ScrollContainer/QuesContainer/QueDisplayPanelContainer/QueContainer" unique_id=126426519 node_paths=PackedStringArray("background", "gap_icon", "_page_icon", "highlight", "dead_icon", "unknown_icon")]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+mouse_filter = 1
+script = ExtResource("20_tpii5")
+background = NodePath("PageSlot")
+gap_icon = NodePath("GapTextureRect")
+_page_icon = NodePath("Icon")
+highlight = NodePath("Highlight")
+dead_icon = NodePath("DeadIcon")
+unknown_icon = NodePath("UnknownIcon")
+
+[node name="PageSlot" type="TextureRect" parent="VBoxContainer/TurnOrderContainer/ScrollContainer/QuesContainer/QueDisplayPanelContainer/QueContainer/PageSlotPrefab" unique_id=432547569]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 0
+offset_right = 32.0
+offset_bottom = 32.0
+size_flags_vertical = 4
+texture = ExtResource("21_fkx0m")
+
+[node name="GapTextureRect" type="TextureRect" parent="VBoxContainer/TurnOrderContainer/ScrollContainer/QuesContainer/QueDisplayPanelContainer/QueContainer/PageSlotPrefab" unique_id=2078205490]
+layout_mode = 0
+offset_right = 32.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("22_qiopa")
+
+[node name="Icon" type="TextureRect" parent="VBoxContainer/TurnOrderContainer/ScrollContainer/QuesContainer/QueDisplayPanelContainer/QueContainer/PageSlotPrefab" unique_id=767581519]
+visible = false
+layout_mode = 0
+offset_right = 32.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("23_bn0w0")
+expand_mode = 1
+
+[node name="UnknownIcon" type="TextureRect" parent="VBoxContainer/TurnOrderContainer/ScrollContainer/QuesContainer/QueDisplayPanelContainer/QueContainer/PageSlotPrefab" unique_id=1981047097]
+visible = false
+layout_mode = 0
+offset_right = 32.0
+offset_bottom = 32.0
+texture = ExtResource("24_4q4kx")
+
+[node name="DeadIcon" type="TextureRect" parent="VBoxContainer/TurnOrderContainer/ScrollContainer/QuesContainer/QueDisplayPanelContainer/QueContainer/PageSlotPrefab" unique_id=1737798522]
+layout_mode = 0
+offset_right = 32.0
+offset_bottom = 32.0
+texture = ExtResource("25_wqa4v")
+
+[node name="Highlight" type="TextureRect" parent="VBoxContainer/TurnOrderContainer/ScrollContainer/QuesContainer/QueDisplayPanelContainer/QueContainer/PageSlotPrefab" unique_id=430980771]
+visible = false
+layout_mode = 0
+offset_right = 32.0
+offset_bottom = 32.0
+texture = ExtResource("26_b0rvi")
+
+[node name="SlotsContainer" type="HBoxContainer" parent="VBoxContainer/TurnOrderContainer/ScrollContainer/QuesContainer/QueDisplayPanelContainer/QueContainer" unique_id=964893336]
+layout_mode = 2
+
+[node name="NinePatchRect4" type="NinePatchRect" parent="VBoxContainer" unique_id=1446384159]
+visible = false
+layout_mode = 2
+texture = ExtResource("13_qas4w")
+patch_margin_left = 2
+patch_margin_top = 1
+patch_margin_right = 2
+patch_margin_bottom = 1
+
+[node name="Label4" type="Label" parent="VBoxContainer" unique_id=1170781507]
+visible = false
+layout_mode = 2
+theme = ExtResource("14_pakc7")
+theme_override_colors/font_outline_color = Color(0.33333334, 0.33333334, 0.33333334, 1)
+theme_override_font_sizes/font_size = 12
+text = "Action Log:"
+
+[node name="BoxContainer" type="BoxContainer" parent="VBoxContainer" unique_id=1658071080]
+visible = false
+custom_minimum_size = Vector2(248, 120)
+layout_mode = 2
+vertical = true
+
+[node name="Control" type="Control" parent="VBoxContainer/BoxContainer" unique_id=832624315]
+visible = false
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/BoxContainer/Control" unique_id=327127967]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = -19.0
+offset_right = 154.0
+offset_bottom = 4.0
+grow_vertical = 0
+theme = ExtResource("1_lhfpo")
+theme_override_font_sizes/font_size = 12
+text = "P:/.../combat_log.txt"
+
+[node name="MinButton" type="TextureButton" parent="VBoxContainer/BoxContainer/Control" unique_id=917373240]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -17.0
+offset_top = -20.0
+offset_bottom = -3.0
+grow_horizontal = 0
+texture_normal = ExtResource("3_lmxbm")
+texture_pressed = ExtResource("4_5bqcd")
+
+[node name="MaxButton" type="TextureButton" parent="VBoxContainer/BoxContainer/Control" unique_id=1559173965]
+visible = false
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -17.0
+offset_top = -20.0
+offset_bottom = -3.0
+grow_horizontal = 0
+texture_normal = ExtResource("5_vr7gu")
+texture_pressed = ExtResource("6_pjvtl")
+
+[node name="InfoButton" type="TextureButton" parent="VBoxContainer/BoxContainer/Control" unique_id=1768019429]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_top = -20.0
+offset_right = -19.0
+offset_bottom = -3.0
+grow_horizontal = 0
+texture_normal = ExtResource("7_dl1ko")
+texture_pressed = ExtResource("8_gfjnj")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/BoxContainer" unique_id=1282645835]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+vertical_scroll_mode = 2
+
+[node name="LogEntriesContainer" type="VBoxContainer" parent="VBoxContainer/BoxContainer/ScrollContainer" unique_id=1654567007]
+custom_minimum_size = Vector2(240, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer/BoxContainer/ScrollContainer/LogEntriesContainer" unique_id=1527010391]
+visible = false
+modulate = Color(0.617455, 0.617455, 0.617455, 1)
+layout_mode = 2
+
+[node name="TextLogEntry" type="RichTextLabel" parent="VBoxContainer/BoxContainer/ScrollContainer/LogEntriesContainer" unique_id=932535517]
+custom_minimum_size = Vector2(240, 0)
+layout_mode = 2
+theme = ExtResource("27_7h8gv")
+theme_override_font_sizes/normal_font_size = 17
+bbcode_enabled = true
+text = "Someone did something to someone else and it had some kind of effect."
+fit_content = true
+scroll_active = false

@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://cgrlfobidw8xl" path="res://assets/Sprites/UI/BackPatches/PaperPatch_Bigger_276x192_48.png" id="1_0o00b"]
 [ext_resource type="StyleBox" uid="uid://daurgoe8xio6l" path="res://assets/Themes/ScollBar/scroll_grabber_style_box_texture.tres" id="2_n2b8r"]
+[ext_resource type="FontFile" uid="uid://cq1gkq6upl513" path="res://assets/Fonts/8bit-2.ttf" id="2_teuo0"]
 [ext_resource type="StyleBox" uid="uid://kccdhpqrwauq" path="res://assets/Themes/ScollBar/scroll_grabber_style_box_texture_Highlight.tres" id="3_teuo0"]
 [ext_resource type="StyleBox" uid="uid://i5caf4i4s7ob" path="res://assets/Themes/ScollBar/scroll_grabber_style_box_texture_Pressed.tres" id="4_3fam6"]
 [ext_resource type="StyleBox" uid="uid://cyxcweatpwetw" path="res://assets/Themes/ScollBar/scroll_bar_style_box_texture.tres" id="5_157h0"]
@@ -17,6 +18,8 @@ axis_stretch_vertical = 2
 
 [resource]
 PanelContainer/styles/panel = SubResource("StyleBoxTexture_ok3y1")
+RichTextLabel/colors/default_color = Color(0, 0, 0, 1)
+RichTextLabel/fonts/normal_font = ExtResource("2_teuo0")
 VScrollBar/styles/grabber = ExtResource("2_n2b8r")
 VScrollBar/styles/grabber_highlight = ExtResource("3_teuo0")
 VScrollBar/styles/grabber_pressed = ExtResource("4_3fam6")

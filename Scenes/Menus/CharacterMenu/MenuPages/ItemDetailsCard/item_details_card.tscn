@@ -41,8 +41,9 @@
 [ext_resource type="Script" uid="uid://cxlvn68pxork" path="res://Scenes/UiNodes/PatchButton/PatchButton.gd" id="35_416rl"]
 [ext_resource type="Texture2D" uid="uid://cat1gts1f5feu" path="res://assets/Sprites/UI/SymbolIcons/PageActionSymbol.png" id="35_fq86f"]
 [ext_resource type="Texture2D" uid="uid://bmv0v2cnpvjh4" path="res://Scenes/Menus/CharacterMenu/MenuPages/ItemDetailsCard/ButtonPressed_Patch_32_6.png" id="36_0dsaw"]
+[ext_resource type="Theme" uid="uid://ealowginwmmi" path="res://assets/Themes/universal_page_theme.tres" id="38_3cp6b"]
 
-[node name="ItemDetailsCard" type="Control" unique_id=283174588 node_paths=PackedStringArray("offset_control", "offset_point", "icon", "icon_background", "title_lable", "rarity_lable", "exit_button", "weapon_details", "armor_details", "action_details", "effect_page_details", "page_que_details", "default_details", "tag_label", "tag_box", "confirm_button_background", "confirm_button", "confirm_label", "buy_controller")]
+[node name="ItemDetailsCard" type="Control" unique_id=283174588 node_paths=PackedStringArray("offset_control", "offset_point", "icon", "icon_background", "title_lable", "rarity_lable", "description_box", "exit_button", "weapon_details", "armor_details", "action_details", "effect_page_details", "page_que_details", "default_details", "tag_label", "tag_box", "confirm_button_background", "confirm_button", "confirm_label", "buy_controller")]
 custom_minimum_size = Vector2(300, 340)
 layout_mode = 3
 anchors_preset = 0
@@ -59,13 +60,14 @@ icon = NodePath("OffsetControl/NinePatchRect/VBoxContainer/TitleContainer/IconBa
 icon_background = NodePath("OffsetControl/NinePatchRect/VBoxContainer/TitleContainer/IconBackground")
 title_lable = NodePath("OffsetControl/NinePatchRect/VBoxContainer/TitleContainer/VBoxContainer/FitScaleLabel")
 rarity_lable = NodePath("OffsetControl/NinePatchRect/VBoxContainer/TitleContainer/VBoxContainer/RarityTypeLabel")
+description_box = NodePath("OffsetControl/NinePatchRect/VBoxContainer/DescriptionBox")
 exit_button = NodePath("OffsetControl/NinePatchRect/VBoxContainer/TitleContainer/ExitButton/Button")
-weapon_details = NodePath("OffsetControl/NinePatchRect/VBoxContainer/WeaponDetailsControl")
-armor_details = NodePath("OffsetControl/NinePatchRect/VBoxContainer/ArmorDetailsControl")
-action_details = NodePath("OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsControl")
-effect_page_details = NodePath("OffsetControl/NinePatchRect/VBoxContainer/EffectPageDetailsControl")
-page_que_details = NodePath("OffsetControl/NinePatchRect/VBoxContainer/PageBookDetailsControl")
-default_details = NodePath("OffsetControl/NinePatchRect/VBoxContainer/DefaultDetailsControl")
+weapon_details = NodePath("OffsetControl/NinePatchRect/VBoxContainer/WeaponDetailsContainer")
+armor_details = NodePath("OffsetControl/NinePatchRect/VBoxContainer/ArmorDetailsContainer")
+action_details = NodePath("OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsContainer")
+effect_page_details = NodePath("OffsetControl/NinePatchRect/VBoxContainer/EffectPageDetailsContainer")
+page_que_details = NodePath("OffsetControl/NinePatchRect/VBoxContainer/PageBookDetailsContainer")
+default_details = NodePath("OffsetControl/NinePatchRect/VBoxContainer/DefaultDetailsContainer")
 tag_label = NodePath("OffsetControl/NinePatchRect/VBoxContainer/TagLabel")
 tag_box = NodePath("OffsetControl/NinePatchRect/VBoxContainer/TagsBox")
 confirm_button_background = NodePath("OffsetControl/NinePatchRect/VBoxContainer/ConfirmButtonBackground")
@@ -202,141 +204,113 @@ self_modulate = Color(0.470588, 0, 0, 1)
 custom_minimum_size = Vector2(2, 1)
 layout_mode = 2
 
-[node name="WeaponDetailsControl" type="Control" parent="OffsetControl/NinePatchRect/VBoxContainer" unique_id=662950419 node_paths=PackedStringArray("parent_card_control", "weapon_class_label", "phy_damage_icon", "mag_damage_icon", "attack_power_label", "damage_type_label", "description_box", "range_display")]
+[node name="WeaponDetailsContainer" type="BoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer" unique_id=724502901 node_paths=PackedStringArray("parent_card_control", "weapon_class_label", "phy_damage_icon", "mag_damage_icon", "attack_power_label", "damage_type_label", "description_box", "range_display")]
 visible = false
 layout_mode = 2
-size_flags_vertical = 3
 script = ExtResource("7_sv4xn")
 parent_card_control = NodePath("../../../..")
-weapon_class_label = NodePath("VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/WeaponClassLabel")
-phy_damage_icon = NodePath("VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/PhyDamIcon")
-mag_damage_icon = NodePath("VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/MagDamIcon")
-attack_power_label = NodePath("VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/AttackPowerLabel")
-damage_type_label = NodePath("VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/DamageTypeLabel")
-description_box = NodePath("VBoxContainer/HBoxContainer2/DescriptionBox")
-range_display = NodePath("VBoxContainer/HBoxContainer/MiniRangeDisplay")
+weapon_class_label = NodePath("HBoxContainer/VBoxContainer/HBoxContainer/WeaponClassLabel")
+phy_damage_icon = NodePath("HBoxContainer/VBoxContainer/HBoxContainer2/PhyDamIcon")
+mag_damage_icon = NodePath("HBoxContainer/VBoxContainer/HBoxContainer2/MagDamIcon")
+attack_power_label = NodePath("HBoxContainer/VBoxContainer/HBoxContainer2/AttackPowerLabel")
+damage_type_label = NodePath("HBoxContainer/VBoxContainer/HBoxContainer2/DamageTypeLabel")
+description_box = NodePath("../DescriptionBox")
+range_display = NodePath("HBoxContainer/MiniRangeDisplay")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/WeaponDetailsControl" unique_id=545246622]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/WeaponDetailsControl/VBoxContainer" unique_id=806121623]
+[node name="HBoxContainer" type="HBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/WeaponDetailsContainer" unique_id=806121623]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/WeaponDetailsControl/VBoxContainer/HBoxContainer" unique_id=309653183]
+[node name="VBoxContainer" type="VBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/WeaponDetailsContainer/HBoxContainer" unique_id=309653183]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/WeaponDetailsControl/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=1877557798]
+[node name="HBoxContainer" type="HBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/WeaponDetailsContainer/HBoxContainer/VBoxContainer" unique_id=1877557798]
 layout_mode = 2
 
-[node name="WeaponClassLabel" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/WeaponDetailsControl/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer" unique_id=593688135]
+[node name="WeaponClassLabel" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/WeaponDetailsContainer/HBoxContainer/VBoxContainer/HBoxContainer" unique_id=593688135]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("4_xmy3g")
 text = "Heavy"
 
-[node name="WeaponClassLabel2" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/WeaponDetailsControl/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer" unique_id=247865994]
+[node name="WeaponClassLabel2" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/WeaponDetailsContainer/HBoxContainer/VBoxContainer/HBoxContainer" unique_id=247865994]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("4_xmy3g")
 text = "Weapon"
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/WeaponDetailsControl/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=180333282]
+[node name="HBoxContainer2" type="HBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/WeaponDetailsContainer/HBoxContainer/VBoxContainer" unique_id=180333282]
 layout_mode = 2
 
-[node name="PhyDamIcon" type="TextureRect" parent="OffsetControl/NinePatchRect/VBoxContainer/WeaponDetailsControl/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2" unique_id=1098784654]
+[node name="PhyDamIcon" type="TextureRect" parent="OffsetControl/NinePatchRect/VBoxContainer/WeaponDetailsContainer/HBoxContainer/VBoxContainer/HBoxContainer2" unique_id=1098784654]
 layout_mode = 2
 texture = ExtResource("8_v2bx5")
 
-[node name="MagDamIcon" type="TextureRect" parent="OffsetControl/NinePatchRect/VBoxContainer/WeaponDetailsControl/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2" unique_id=1944673285]
+[node name="MagDamIcon" type="TextureRect" parent="OffsetControl/NinePatchRect/VBoxContainer/WeaponDetailsContainer/HBoxContainer/VBoxContainer/HBoxContainer2" unique_id=1944673285]
 visible = false
 layout_mode = 2
 texture = ExtResource("9_0f8c5")
 
-[node name="AttackPowerLabel" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/WeaponDetailsControl/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2" unique_id=1663113084]
+[node name="AttackPowerLabel" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/WeaponDetailsContainer/HBoxContainer/VBoxContainer/HBoxContainer2" unique_id=1663113084]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("4_xmy3g")
 text = "100±30"
 
-[node name="DamageTypeLabel" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/WeaponDetailsControl/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2" unique_id=829368249]
+[node name="DamageTypeLabel" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/WeaponDetailsContainer/HBoxContainer/VBoxContainer/HBoxContainer2" unique_id=829368249]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("4_xmy3g")
 text = "Slash"
 
-[node name="DamageTypeLabel2" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/WeaponDetailsControl/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2" unique_id=1149149329]
+[node name="DamageTypeLabel2" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/WeaponDetailsContainer/HBoxContainer/VBoxContainer/HBoxContainer2" unique_id=1149149329]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("4_xmy3g")
 text = "Dmg"
 
-[node name="MiniRangeDisplay" parent="OffsetControl/NinePatchRect/VBoxContainer/WeaponDetailsControl/VBoxContainer/HBoxContainer" unique_id=1278968911 instance=ExtResource("5_jmtol")]
+[node name="MiniRangeDisplay" parent="OffsetControl/NinePatchRect/VBoxContainer/WeaponDetailsContainer/HBoxContainer" unique_id=1278968911 instance=ExtResource("5_jmtol")]
 layout_mode = 2
 size_flags_vertical = 0
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/WeaponDetailsControl/VBoxContainer" unique_id=745823452]
+[node name="ActionPageDetailsContainer" type="BoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer" unique_id=201084818 node_paths=PackedStringArray("parent_card_control", "description_box", "target_type_label", "cost_container", "range_display", "damage_label", "damage_container", "accuracy_icon", "accuracy_label", "potency_icon", "potency_label", "modded_by_container", "modded_by_label")]
+visible = false
 layout_mode = 2
-size_flags_vertical = 3
-
-[node name="DescriptionBox" type="RichTextLabel" parent="OffsetControl/NinePatchRect/VBoxContainer/WeaponDetailsControl/VBoxContainer/HBoxContainer2" unique_id=1760370778]
-layout_mode = 2
-size_flags_horizontal = 3
-theme = ExtResource("4_xmy3g")
-bbcode_enabled = true
-text = "Item Description"
-script = ExtResource("22_pm1ag")
-
-[node name="ActionPageDetailsControl" type="Control" parent="OffsetControl/NinePatchRect/VBoxContainer" unique_id=1315231691 node_paths=PackedStringArray("parent_card_control", "description_box", "target_type_label", "cost_container", "range_display", "damage_label", "damage_container", "accuracy_icon", "accuracy_label", "potency_icon", "potency_label", "modded_by_container", "modded_by_label")]
-layout_mode = 2
-size_flags_vertical = 3
+vertical = true
 script = ExtResource("12_fd6vk")
 parent_card_control = NodePath("../../../..")
-description_box = NodePath("VBoxContainer/HBoxContainer/DescriptionBox")
-target_type_label = NodePath("VBoxContainer/HBoxContainer2/AmmoDamageContainer/HBoxContainer/TargetTypeLabel")
-cost_container = NodePath("VBoxContainer/HBoxContainer2/AmmoDamageContainer/HBoxContainer/AmmoContainer")
-range_display = NodePath("VBoxContainer/HBoxContainer2/MiniRangeDisplay")
-damage_label = NodePath("VBoxContainer/HBoxContainer2/AmmoDamageContainer/DamageContainer")
-damage_container = NodePath("VBoxContainer/HBoxContainer2/AmmoDamageContainer")
-accuracy_icon = NodePath("VBoxContainer/HBoxContainer2/AmmoDamageContainer/HBoxContainer/AccIcon")
-accuracy_label = NodePath("VBoxContainer/HBoxContainer2/AmmoDamageContainer/HBoxContainer/AccLabel")
-potency_icon = NodePath("VBoxContainer/HBoxContainer2/AmmoDamageContainer/HBoxContainer/PotIcon")
-potency_label = NodePath("VBoxContainer/HBoxContainer2/AmmoDamageContainer/HBoxContainer/PotLabel")
-modded_by_container = NodePath("VBoxContainer/HBoxContainer2/AmmoDamageContainer/ModdedByContainer")
-modded_by_label = NodePath("VBoxContainer/HBoxContainer2/AmmoDamageContainer/ModdedByContainer/ModdedBy_SubContainer/ModdedByValueLabel")
+description_box = NodePath("../DescriptionBox")
+target_type_label = NodePath("HBoxContainer/AmmoDamageContainer/HBoxContainer/TargetTypeLabel")
+cost_container = NodePath("HBoxContainer/AmmoDamageContainer/HBoxContainer/AmmoContainer")
+range_display = NodePath("HBoxContainer/MiniRangeDisplay")
+damage_label = NodePath("HBoxContainer/AmmoDamageContainer/DamageContainer")
+damage_container = NodePath("HBoxContainer/AmmoDamageContainer")
+accuracy_icon = NodePath("HBoxContainer/AmmoDamageContainer/HBoxContainer/AccIcon")
+accuracy_label = NodePath("HBoxContainer/AmmoDamageContainer/HBoxContainer/AccLabel")
+potency_icon = NodePath("HBoxContainer/AmmoDamageContainer/HBoxContainer/PotIcon")
+potency_label = NodePath("HBoxContainer/AmmoDamageContainer/HBoxContainer/PotLabel")
+modded_by_container = NodePath("HBoxContainer/AmmoDamageContainer/ModdedByContainer")
+modded_by_label = NodePath("HBoxContainer/AmmoDamageContainer/ModdedByContainer/ModdedBy_SubContainer/ModdedByValueLabel")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsControl" unique_id=836700285]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="HBoxContainer2" type="HBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsControl/VBoxContainer" unique_id=1839022902]
+[node name="HBoxContainer" type="HBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsContainer" unique_id=1839022902]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="AmmoDamageContainer" type="VBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsControl/VBoxContainer/HBoxContainer2" unique_id=2025588965]
+[node name="AmmoDamageContainer" type="VBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsContainer/HBoxContainer" unique_id=2025588965]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 0
 
-[node name="ModdedByContainer" type="VBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsControl/VBoxContainer/HBoxContainer2/AmmoDamageContainer" unique_id=705160924]
+[node name="ModdedByContainer" type="VBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsContainer/HBoxContainer/AmmoDamageContainer" unique_id=705160924]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="ModdedBy_SubContainer" type="HBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsControl/VBoxContainer/HBoxContainer2/AmmoDamageContainer/ModdedByContainer" unique_id=1623209109]
+[node name="ModdedBy_SubContainer" type="HBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsContainer/HBoxContainer/AmmoDamageContainer/ModdedByContainer" unique_id=1623209109]
 layout_mode = 2
 alignment = 1
 
-[node name="ModdedByTitleLabel" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsControl/VBoxContainer/HBoxContainer2/AmmoDamageContainer/ModdedByContainer/ModdedBy_SubContainer" unique_id=726255548]
+[node name="ModdedByTitleLabel" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsContainer/HBoxContainer/AmmoDamageContainer/ModdedByContainer/ModdedBy_SubContainer" unique_id=726255548]
 layout_mode = 2
 size_flags_vertical = 8
 theme = ExtResource("6_do8nn")
@@ -346,7 +320,7 @@ text = "Modded By:"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="ModdedByValueLabel" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsControl/VBoxContainer/HBoxContainer2/AmmoDamageContainer/ModdedByContainer/ModdedBy_SubContainer" unique_id=1759200558]
+[node name="ModdedByValueLabel" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsContainer/HBoxContainer/AmmoDamageContainer/ModdedByContainer/ModdedBy_SubContainer" unique_id=1759200558]
 layout_mode = 2
 size_flags_vertical = 8
 theme = ExtResource("6_do8nn")
@@ -356,16 +330,16 @@ text = "Modded Page Name"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="ColorRect" type="ColorRect" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsControl/VBoxContainer/HBoxContainer2/AmmoDamageContainer/ModdedByContainer" unique_id=1070239227]
+[node name="ColorRect" type="ColorRect" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsContainer/HBoxContainer/AmmoDamageContainer/ModdedByContainer" unique_id=1070239227]
 self_modulate = Color(0.470588, 0, 0, 1)
 custom_minimum_size = Vector2(2, 1)
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsControl/VBoxContainer/HBoxContainer2/AmmoDamageContainer" unique_id=1066768726]
+[node name="HBoxContainer" type="HBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsContainer/HBoxContainer/AmmoDamageContainer" unique_id=1066768726]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="AmmoContainer" type="HBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsControl/VBoxContainer/HBoxContainer2/AmmoDamageContainer/HBoxContainer" unique_id=1213917449 node_paths=PackedStringArray("count_val_label", "cost_val_label", "clip_val_label", "ammo_icon_rect")]
+[node name="AmmoContainer" type="HBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsContainer/HBoxContainer/AmmoDamageContainer/HBoxContainer" unique_id=1213917449 node_paths=PackedStringArray("count_val_label", "cost_val_label", "clip_val_label", "ammo_icon_rect")]
 layout_mode = 2
 script = ExtResource("13_an536")
 count_val_label = NodePath("CostLabel/CountLabel")
@@ -377,7 +351,7 @@ phy_ammo_icon = ExtResource("15_pvoju")
 mag_ammo_icon = ExtResource("16_i15u4")
 abn_ammo_icon = ExtResource("17_n5nnh")
 
-[node name="CostTitle" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsControl/VBoxContainer/HBoxContainer2/AmmoDamageContainer/HBoxContainer/AmmoContainer" unique_id=1615590911]
+[node name="CostTitle" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsContainer/HBoxContainer/AmmoDamageContainer/HBoxContainer/AmmoContainer" unique_id=1615590911]
 visible = false
 layout_mode = 2
 size_flags_vertical = 8
@@ -387,65 +361,65 @@ text = "Ammo:"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="CostLabel" type="HBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsControl/VBoxContainer/HBoxContainer2/AmmoDamageContainer/HBoxContainer/AmmoContainer" unique_id=1512187100]
+[node name="CostLabel" type="HBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsContainer/HBoxContainer/AmmoDamageContainer/HBoxContainer/AmmoContainer" unique_id=1512187100]
 layout_mode = 2
 theme_override_constants/separation = 1
 
-[node name="AmmoIcon" type="TextureRect" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsControl/VBoxContainer/HBoxContainer2/AmmoDamageContainer/HBoxContainer/AmmoContainer/CostLabel" unique_id=303845328]
+[node name="AmmoIcon" type="TextureRect" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsContainer/HBoxContainer/AmmoDamageContainer/HBoxContainer/AmmoContainer/CostLabel" unique_id=303845328]
 layout_mode = 2
 texture = ExtResource("15_d0wh1")
 
-[node name="CountLabel" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsControl/VBoxContainer/HBoxContainer2/AmmoDamageContainer/HBoxContainer/AmmoContainer/CostLabel" unique_id=1140519546]
+[node name="CountLabel" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsContainer/HBoxContainer/AmmoDamageContainer/HBoxContainer/AmmoContainer/CostLabel" unique_id=1140519546]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("4_xmy3g")
 text = "9"
 
-[node name="Seperator2" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsControl/VBoxContainer/HBoxContainer2/AmmoDamageContainer/HBoxContainer/AmmoContainer/CostLabel" unique_id=1077435790]
+[node name="Seperator2" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsContainer/HBoxContainer/AmmoDamageContainer/HBoxContainer/AmmoContainer/CostLabel" unique_id=1077435790]
 visible = false
 self_modulate = Color(0.31, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("4_xmy3g")
 text = " ("
 
-[node name="CostLabel" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsControl/VBoxContainer/HBoxContainer2/AmmoDamageContainer/HBoxContainer/AmmoContainer/CostLabel" unique_id=1634520228]
+[node name="CostLabel" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsContainer/HBoxContainer/AmmoDamageContainer/HBoxContainer/AmmoContainer/CostLabel" unique_id=1634520228]
 visible = false
 self_modulate = Color(0.31, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("4_xmy3g")
 text = "4"
 
-[node name="Seperator3" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsControl/VBoxContainer/HBoxContainer2/AmmoDamageContainer/HBoxContainer/AmmoContainer/CostLabel" unique_id=1061148597]
+[node name="Seperator3" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsContainer/HBoxContainer/AmmoDamageContainer/HBoxContainer/AmmoContainer/CostLabel" unique_id=1061148597]
 visible = false
 self_modulate = Color(0.31, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("4_xmy3g")
 text = ":"
 
-[node name="ClipLabel" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsControl/VBoxContainer/HBoxContainer2/AmmoDamageContainer/HBoxContainer/AmmoContainer/CostLabel" unique_id=1658373334]
+[node name="ClipLabel" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsContainer/HBoxContainer/AmmoDamageContainer/HBoxContainer/AmmoContainer/CostLabel" unique_id=1658373334]
 visible = false
 self_modulate = Color(0.31, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("4_xmy3g")
 text = "36"
 
-[node name="Seperator4" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsControl/VBoxContainer/HBoxContainer2/AmmoDamageContainer/HBoxContainer/AmmoContainer/CostLabel" unique_id=1067670433]
+[node name="Seperator4" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsContainer/HBoxContainer/AmmoDamageContainer/HBoxContainer/AmmoContainer/CostLabel" unique_id=1067670433]
 visible = false
 self_modulate = Color(0.31, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("4_xmy3g")
 text = ")"
 
-[node name="VSeparator2" type="VSeparator" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsControl/VBoxContainer/HBoxContainer2/AmmoDamageContainer/HBoxContainer" unique_id=1518261517]
+[node name="VSeparator2" type="VSeparator" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsContainer/HBoxContainer/AmmoDamageContainer/HBoxContainer" unique_id=1518261517]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 
-[node name="AccIcon" type="TextureRect" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsControl/VBoxContainer/HBoxContainer2/AmmoDamageContainer/HBoxContainer" unique_id=928356501]
+[node name="AccIcon" type="TextureRect" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsContainer/HBoxContainer/AmmoDamageContainer/HBoxContainer" unique_id=928356501]
 layout_mode = 2
 texture = ExtResource("18_jpfgp")
 expand_mode = 3
 
-[node name="AccLabel" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsControl/VBoxContainer/HBoxContainer2/AmmoDamageContainer/HBoxContainer" unique_id=902459844]
+[node name="AccLabel" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsContainer/HBoxContainer/AmmoDamageContainer/HBoxContainer" unique_id=902459844]
 layout_mode = 2
 size_flags_vertical = 8
 theme = ExtResource("18_wsrou")
@@ -454,16 +428,16 @@ text = "100"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="VSeparator3" type="VSeparator" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsControl/VBoxContainer/HBoxContainer2/AmmoDamageContainer/HBoxContainer" unique_id=1853872505]
+[node name="VSeparator3" type="VSeparator" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsContainer/HBoxContainer/AmmoDamageContainer/HBoxContainer" unique_id=1853872505]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 
-[node name="PotIcon" type="TextureRect" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsControl/VBoxContainer/HBoxContainer2/AmmoDamageContainer/HBoxContainer" unique_id=967455023]
+[node name="PotIcon" type="TextureRect" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsContainer/HBoxContainer/AmmoDamageContainer/HBoxContainer" unique_id=967455023]
 layout_mode = 2
 texture = ExtResource("20_nedqy")
 expand_mode = 3
 
-[node name="PotLabel" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsControl/VBoxContainer/HBoxContainer2/AmmoDamageContainer/HBoxContainer" unique_id=55141830]
+[node name="PotLabel" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsContainer/HBoxContainer/AmmoDamageContainer/HBoxContainer" unique_id=55141830]
 layout_mode = 2
 size_flags_vertical = 8
 theme = ExtResource("18_wsrou")
@@ -472,12 +446,12 @@ text = "100"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="VSeparator" type="VSeparator" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsControl/VBoxContainer/HBoxContainer2/AmmoDamageContainer/HBoxContainer" unique_id=631779982]
+[node name="VSeparator" type="VSeparator" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsContainer/HBoxContainer/AmmoDamageContainer/HBoxContainer" unique_id=631779982]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="TargetTypeLabel" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsControl/VBoxContainer/HBoxContainer2/AmmoDamageContainer/HBoxContainer" unique_id=1590954126]
+[node name="TargetTypeLabel" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsContainer/HBoxContainer/AmmoDamageContainer/HBoxContainer" unique_id=1590954126]
 layout_mode = 2
 size_flags_vertical = 8
 theme = ExtResource("6_do8nn")
@@ -486,58 +460,37 @@ text = "Spot"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="DamageContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsControl/VBoxContainer/HBoxContainer2/AmmoDamageContainer" unique_id=1130367458 instance=ExtResource("15_idu7k")]
+[node name="DamageContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsContainer/HBoxContainer/AmmoDamageContainer" unique_id=1130367458 instance=ExtResource("15_idu7k")]
 layout_mode = 2
 defense_type = "Armor"
 damage_type = 7
 
-[node name="MiniRangeDisplay" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsControl/VBoxContainer/HBoxContainer2" unique_id=2083992492 instance=ExtResource("5_jmtol")]
+[node name="MiniRangeDisplay" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsContainer/HBoxContainer" unique_id=2083992492 instance=ExtResource("5_jmtol")]
 layout_mode = 2
 size_flags_vertical = 0
 
-[node name="ColorRect" type="ColorRect" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsControl/VBoxContainer" unique_id=1467063619]
+[node name="ColorRect2" type="ColorRect" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsContainer" unique_id=1467063619]
 self_modulate = Color(0.470588, 0, 0, 1)
 custom_minimum_size = Vector2(2, 1)
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsControl/VBoxContainer" unique_id=1904378343]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="DescriptionBox" type="RichTextLabel" parent="OffsetControl/NinePatchRect/VBoxContainer/ActionPageDetailsControl/VBoxContainer/HBoxContainer" unique_id=1561567566]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme = ExtResource("4_xmy3g")
-bbcode_enabled = true
-text = "Item Description hk hbkhjhl jhlkjl ljlkj"
-script = ExtResource("22_pm1ag")
-
-[node name="EffectPageDetailsControl" type="Control" parent="OffsetControl/NinePatchRect/VBoxContainer" unique_id=798404668 node_paths=PackedStringArray("parent_card_control", "description_box", "stat_mods_container", "premade_stat_mod_label")]
+[node name="EffectPageDetailsContainer" type="BoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer" unique_id=1049632255 node_paths=PackedStringArray("parent_card_control", "description_box", "stat_mods_container", "premade_stat_mod_label")]
 visible = false
 layout_mode = 2
-size_flags_vertical = 3
+vertical = true
 script = ExtResource("16_tp5cp")
 parent_card_control = NodePath("../../../..")
-description_box = NodePath("VBoxContainer/HBoxContainer/DescriptionBox")
-stat_mods_container = NodePath("VBoxContainer/FlowContainer")
-premade_stat_mod_label = NodePath("VBoxContainer/FlowContainer/StatModLabel")
+description_box = NodePath("../DescriptionBox")
+stat_mods_container = NodePath("FlowContainer")
+premade_stat_mod_label = NodePath("FlowContainer/StatModLabel")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/EffectPageDetailsControl" unique_id=344297302]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="FlowContainer" type="FlowContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/EffectPageDetailsControl/VBoxContainer" unique_id=1932915558]
+[node name="FlowContainer" type="FlowContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/EffectPageDetailsContainer" unique_id=1932915558]
 layout_mode = 2
 theme_override_constants/h_separation = 0
 theme_override_constants/v_separation = 0
 alignment = 1
 
-[node name="StatModLabel" type="HBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/EffectPageDetailsControl/VBoxContainer/FlowContainer" unique_id=370762868 node_paths=PackedStringArray("modded_stat_icon", "modded_stat_name_label", "mod_value_label", "dep_stat_label", "dep_stat_icon", "plus_label", "times_label")]
+[node name="StatModLabel" type="HBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/EffectPageDetailsContainer/FlowContainer" unique_id=370762868 node_paths=PackedStringArray("modded_stat_icon", "modded_stat_name_label", "mod_value_label", "dep_stat_label", "dep_stat_icon", "plus_label", "times_label")]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 0
@@ -550,11 +503,11 @@ dep_stat_icon = NodePath("HBoxContainer/DepStatIcon")
 plus_label = NodePath("SignLabel")
 times_label = NodePath("SignLabel2")
 
-[node name="ModdedStatIcon" type="TextureRect" parent="OffsetControl/NinePatchRect/VBoxContainer/EffectPageDetailsControl/VBoxContainer/FlowContainer/StatModLabel" unique_id=1774492846]
+[node name="ModdedStatIcon" type="TextureRect" parent="OffsetControl/NinePatchRect/VBoxContainer/EffectPageDetailsContainer/FlowContainer/StatModLabel" unique_id=1774492846]
 layout_mode = 2
 texture = ExtResource("17_cevb5")
 
-[node name="ModdedStatNameLabel" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/EffectPageDetailsControl/VBoxContainer/FlowContainer/StatModLabel" unique_id=1097690934]
+[node name="ModdedStatNameLabel" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/EffectPageDetailsContainer/FlowContainer/StatModLabel" unique_id=1097690934]
 layout_mode = 2
 size_flags_vertical = 8
 theme = ExtResource("18_wsrou")
@@ -563,7 +516,7 @@ text = "STR"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="SignLabel" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/EffectPageDetailsControl/VBoxContainer/FlowContainer/StatModLabel" unique_id=1098597109]
+[node name="SignLabel" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/EffectPageDetailsContainer/FlowContainer/StatModLabel" unique_id=1098597109]
 layout_mode = 2
 size_flags_vertical = 8
 theme = ExtResource("18_wsrou")
@@ -572,16 +525,16 @@ text = "+"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/EffectPageDetailsControl/VBoxContainer/FlowContainer/StatModLabel" unique_id=612655624]
+[node name="HBoxContainer" type="HBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/EffectPageDetailsContainer/FlowContainer/StatModLabel" unique_id=612655624]
 layout_mode = 2
 theme_override_constants/separation = -2
 
-[node name="DepStatIcon" type="TextureRect" parent="OffsetControl/NinePatchRect/VBoxContainer/EffectPageDetailsControl/VBoxContainer/FlowContainer/StatModLabel/HBoxContainer" unique_id=1666254768]
+[node name="DepStatIcon" type="TextureRect" parent="OffsetControl/NinePatchRect/VBoxContainer/EffectPageDetailsContainer/FlowContainer/StatModLabel/HBoxContainer" unique_id=1666254768]
 layout_mode = 2
 texture = ExtResource("20_lxkdx")
 stretch_mode = 3
 
-[node name="DepStatNameLabel" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/EffectPageDetailsControl/VBoxContainer/FlowContainer/StatModLabel/HBoxContainer" unique_id=1581636314]
+[node name="DepStatNameLabel" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/EffectPageDetailsContainer/FlowContainer/StatModLabel/HBoxContainer" unique_id=1581636314]
 layout_mode = 2
 size_flags_vertical = 8
 theme = ExtResource("18_wsrou")
@@ -590,7 +543,7 @@ text = "TR"
 horizontal_alignment = 2
 vertical_alignment = 2
 
-[node name="SignLabel2" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/EffectPageDetailsControl/VBoxContainer/FlowContainer/StatModLabel" unique_id=1772175141]
+[node name="SignLabel2" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/EffectPageDetailsContainer/FlowContainer/StatModLabel" unique_id=1772175141]
 layout_mode = 2
 size_flags_vertical = 8
 theme = ExtResource("18_wsrou")
@@ -599,7 +552,7 @@ text = "x"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="ModValueLabel" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/EffectPageDetailsControl/VBoxContainer/FlowContainer/StatModLabel" unique_id=1581780263]
+[node name="ModValueLabel" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/EffectPageDetailsContainer/FlowContainer/StatModLabel" unique_id=1581780263]
 layout_mode = 2
 size_flags_vertical = 8
 theme = ExtResource("18_wsrou")
@@ -608,98 +561,75 @@ text = "1.2"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/EffectPageDetailsControl/VBoxContainer" unique_id=1495346846]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="DescriptionBox" type="RichTextLabel" parent="OffsetControl/NinePatchRect/VBoxContainer/EffectPageDetailsControl/VBoxContainer/HBoxContainer" unique_id=1053515179]
-clip_contents = false
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme = ExtResource("4_xmy3g")
-bbcode_enabled = true
-text = "Item Description hk hbkhjhl jhlkjl ljlkj"
-script = ExtResource("22_pm1ag")
-
-[node name="ArmorDetailsControl" type="Control" parent="OffsetControl/NinePatchRect/VBoxContainer" unique_id=1021164907 node_paths=PackedStringArray("parent_card_control", "slot_label", "phy_icon", "mag_icon", "armor_label", "ward_label", "description_box", "stat_mods_container", "premade_stat_mod_label")]
+[node name="ArmorDetailsContainer" type="BoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer" unique_id=688715180 node_paths=PackedStringArray("parent_card_control", "slot_label", "phy_icon", "mag_icon", "armor_label", "ward_label", "description_box", "stat_mods_container", "premade_stat_mod_label")]
 visible = false
 layout_mode = 2
-size_flags_vertical = 3
 script = ExtResource("12_rxuc0")
 parent_card_control = NodePath("../../../..")
-slot_label = NodePath("VBoxContainer/HBoxContainer3/TypeLabel")
-phy_icon = NodePath("VBoxContainer/FlowContainer/HBoxContainer/PhyIcon")
-mag_icon = NodePath("VBoxContainer/FlowContainer/HBoxContainer/MagIcon")
-armor_label = NodePath("VBoxContainer/FlowContainer/HBoxContainer/ArmorLabel")
-ward_label = NodePath("VBoxContainer/FlowContainer/HBoxContainer/WardLabel")
-description_box = NodePath("VBoxContainer/HBoxContainer2/DescriptionBox")
-stat_mods_container = NodePath("VBoxContainer/FlowContainer")
-premade_stat_mod_label = NodePath("VBoxContainer/FlowContainer/StatModLabel")
+slot_label = NodePath("HBoxContainer3/TypeLabel")
+phy_icon = NodePath("FlowContainer/HBoxContainer/PhyIcon")
+mag_icon = NodePath("FlowContainer/HBoxContainer/MagIcon")
+armor_label = NodePath("FlowContainer/HBoxContainer/ArmorLabel")
+ward_label = NodePath("FlowContainer/HBoxContainer/WardLabel")
+description_box = NodePath("../DescriptionBox")
+stat_mods_container = NodePath("FlowContainer")
+premade_stat_mod_label = NodePath("FlowContainer/StatModLabel")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/ArmorDetailsControl" unique_id=1601995432]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="HBoxContainer3" type="HBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/ArmorDetailsControl/VBoxContainer" unique_id=1892568702]
+[node name="HBoxContainer3" type="HBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/ArmorDetailsContainer" unique_id=1892568702]
 visible = false
 layout_mode = 2
 
-[node name="TypeLabel" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/ArmorDetailsControl/VBoxContainer/HBoxContainer3" unique_id=849640247]
+[node name="TypeLabel" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/ArmorDetailsContainer/HBoxContainer3" unique_id=849640247]
 visible = false
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("4_xmy3g")
 text = "Slot"
 
-[node name="Dash" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/ArmorDetailsControl/VBoxContainer/HBoxContainer3" unique_id=1671586845]
+[node name="Dash" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/ArmorDetailsContainer/HBoxContainer3" unique_id=1671586845]
 visible = false
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("4_xmy3g")
 text = "-"
 
-[node name="FlowContainer" type="FlowContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/ArmorDetailsControl/VBoxContainer" unique_id=710381185]
+[node name="FlowContainer" type="FlowContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/ArmorDetailsContainer" unique_id=710381185]
 layout_mode = 2
 theme_override_constants/h_separation = 6
 theme_override_constants/v_separation = 0
 alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/ArmorDetailsControl/VBoxContainer/FlowContainer" unique_id=811757490]
+[node name="HBoxContainer" type="HBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/ArmorDetailsContainer/FlowContainer" unique_id=811757490]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="PhyIcon" type="TextureRect" parent="OffsetControl/NinePatchRect/VBoxContainer/ArmorDetailsControl/VBoxContainer/FlowContainer/HBoxContainer" unique_id=1753558365]
+[node name="PhyIcon" type="TextureRect" parent="OffsetControl/NinePatchRect/VBoxContainer/ArmorDetailsContainer/FlowContainer/HBoxContainer" unique_id=1753558365]
 layout_mode = 2
 texture = ExtResource("13_t6qv2")
 
-[node name="ArmorLabel" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/ArmorDetailsControl/VBoxContainer/FlowContainer/HBoxContainer" unique_id=1109194049]
+[node name="ArmorLabel" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/ArmorDetailsContainer/FlowContainer/HBoxContainer" unique_id=1109194049]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("4_xmy3g")
 text = "000"
 
-[node name="MagIcon" type="TextureRect" parent="OffsetControl/NinePatchRect/VBoxContainer/ArmorDetailsControl/VBoxContainer/FlowContainer/HBoxContainer" unique_id=1894189685]
+[node name="MagIcon" type="TextureRect" parent="OffsetControl/NinePatchRect/VBoxContainer/ArmorDetailsContainer/FlowContainer/HBoxContainer" unique_id=1894189685]
 layout_mode = 2
 texture = ExtResource("14_4xeqv")
 
-[node name="WardLabel" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/ArmorDetailsControl/VBoxContainer/FlowContainer/HBoxContainer" unique_id=143329464]
+[node name="WardLabel" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/ArmorDetailsContainer/FlowContainer/HBoxContainer" unique_id=143329464]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("4_xmy3g")
 text = "000"
 
-[node name="VSeparator" type="VSeparator" parent="OffsetControl/NinePatchRect/VBoxContainer/ArmorDetailsControl/VBoxContainer/FlowContainer" unique_id=885073456]
+[node name="VSeparator" type="VSeparator" parent="OffsetControl/NinePatchRect/VBoxContainer/ArmorDetailsContainer/FlowContainer" unique_id=885073456]
 visible = false
 self_modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(8, 0)
 layout_mode = 2
 
-[node name="StatModLabel" type="HBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/ArmorDetailsControl/VBoxContainer/FlowContainer" unique_id=1030270430 node_paths=PackedStringArray("modded_stat_icon", "modded_stat_name_label", "mod_value_label", "dep_stat_label", "dep_stat_icon", "plus_label", "times_label")]
+[node name="StatModLabel" type="HBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/ArmorDetailsContainer/FlowContainer" unique_id=1030270430 node_paths=PackedStringArray("modded_stat_icon", "modded_stat_name_label", "mod_value_label", "dep_stat_label", "dep_stat_icon", "plus_label", "times_label")]
 visible = false
 layout_mode = 2
 theme_override_constants/separation = 0
@@ -712,11 +642,11 @@ dep_stat_icon = NodePath("HBoxContainer/DepStatIcon")
 plus_label = NodePath("SignLabel")
 times_label = NodePath("SignLabel2")
 
-[node name="ModdedStatIcon" type="TextureRect" parent="OffsetControl/NinePatchRect/VBoxContainer/ArmorDetailsControl/VBoxContainer/FlowContainer/StatModLabel" unique_id=644885490]
+[node name="ModdedStatIcon" type="TextureRect" parent="OffsetControl/NinePatchRect/VBoxContainer/ArmorDetailsContainer/FlowContainer/StatModLabel" unique_id=644885490]
 layout_mode = 2
 texture = ExtResource("17_cevb5")
 
-[node name="ModdedStatNameLabel" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/ArmorDetailsControl/VBoxContainer/FlowContainer/StatModLabel" unique_id=1078094997]
+[node name="ModdedStatNameLabel" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/ArmorDetailsContainer/FlowContainer/StatModLabel" unique_id=1078094997]
 layout_mode = 2
 size_flags_vertical = 8
 theme = ExtResource("18_wsrou")
@@ -725,7 +655,7 @@ text = "STR"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="SignLabel" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/ArmorDetailsControl/VBoxContainer/FlowContainer/StatModLabel" unique_id=1170009138]
+[node name="SignLabel" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/ArmorDetailsContainer/FlowContainer/StatModLabel" unique_id=1170009138]
 layout_mode = 2
 size_flags_vertical = 8
 theme = ExtResource("18_wsrou")
@@ -734,16 +664,16 @@ text = "+"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/ArmorDetailsControl/VBoxContainer/FlowContainer/StatModLabel" unique_id=525228189]
+[node name="HBoxContainer" type="HBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/ArmorDetailsContainer/FlowContainer/StatModLabel" unique_id=525228189]
 layout_mode = 2
 theme_override_constants/separation = -2
 
-[node name="DepStatIcon" type="TextureRect" parent="OffsetControl/NinePatchRect/VBoxContainer/ArmorDetailsControl/VBoxContainer/FlowContainer/StatModLabel/HBoxContainer" unique_id=778100248]
+[node name="DepStatIcon" type="TextureRect" parent="OffsetControl/NinePatchRect/VBoxContainer/ArmorDetailsContainer/FlowContainer/StatModLabel/HBoxContainer" unique_id=778100248]
 layout_mode = 2
 texture = ExtResource("20_lxkdx")
 stretch_mode = 3
 
-[node name="DepStatNameLabel" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/ArmorDetailsControl/VBoxContainer/FlowContainer/StatModLabel/HBoxContainer" unique_id=499127924]
+[node name="DepStatNameLabel" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/ArmorDetailsContainer/FlowContainer/StatModLabel/HBoxContainer" unique_id=499127924]
 layout_mode = 2
 size_flags_vertical = 8
 theme = ExtResource("18_wsrou")
@@ -752,7 +682,7 @@ text = "TR"
 horizontal_alignment = 2
 vertical_alignment = 2
 
-[node name="SignLabel2" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/ArmorDetailsControl/VBoxContainer/FlowContainer/StatModLabel" unique_id=156097961]
+[node name="SignLabel2" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/ArmorDetailsContainer/FlowContainer/StatModLabel" unique_id=156097961]
 layout_mode = 2
 size_flags_vertical = 8
 theme = ExtResource("18_wsrou")
@@ -761,7 +691,7 @@ text = "x"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="ModValueLabel" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/ArmorDetailsControl/VBoxContainer/FlowContainer/StatModLabel" unique_id=473563574]
+[node name="ModValueLabel" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/ArmorDetailsContainer/FlowContainer/StatModLabel" unique_id=473563574]
 layout_mode = 2
 size_flags_vertical = 8
 theme = ExtResource("18_wsrou")
@@ -770,200 +700,157 @@ text = "1.2"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/ArmorDetailsControl/VBoxContainer" unique_id=440718126]
-clip_contents = true
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="DescriptionBox" type="RichTextLabel" parent="OffsetControl/NinePatchRect/VBoxContainer/ArmorDetailsControl/VBoxContainer/HBoxContainer2" unique_id=1284563960]
-self_modulate = Color(0.498039, 0, 0, 1)
-layout_mode = 2
-size_flags_horizontal = 3
-theme = ExtResource("4_xmy3g")
-text = "Item Description"
-
-[node name="PageBookDetailsControl" type="Control" parent="OffsetControl/NinePatchRect/VBoxContainer" unique_id=449257402 node_paths=PackedStringArray("parent_card_control", "ppr_label", "passive_count_label", "action_count_label", "page_sets_container", "premade_page_set_label", "description_box")]
+[node name="PageBookDetailsContainer" type="BoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer" unique_id=1999203327 node_paths=PackedStringArray("parent_card_control", "ppr_label", "passive_count_label", "action_count_label", "page_sets_container", "premade_page_set_label", "description_box")]
 visible = false
 layout_mode = 2
-size_flags_vertical = 3
+vertical = true
 script = ExtResource("18_oic72")
 parent_card_control = NodePath("../../../..")
-ppr_label = NodePath("VBoxContainer/HBoxContainer3/PPRContainer/PPRLabel")
-passive_count_label = NodePath("VBoxContainer/HBoxContainer3/PassiveCountContainer/PassiveCountLabel")
-action_count_label = NodePath("VBoxContainer/HBoxContainer3/ActionCountContainer/ActionCountLabel")
-page_sets_container = NodePath("VBoxContainer/HBoxContainer4")
-premade_page_set_label = NodePath("VBoxContainer/HBoxContainer4/PageSetLabel")
-description_box = NodePath("VBoxContainer/HBoxContainer2/DescriptionBox")
+ppr_label = NodePath("HBoxContainer3/PPRContainer/PPRLabel")
+passive_count_label = NodePath("HBoxContainer3/PassiveCountContainer/PassiveCountLabel")
+action_count_label = NodePath("HBoxContainer3/ActionCountContainer/ActionCountLabel")
+page_sets_container = NodePath("HBoxContainer4")
+premade_page_set_label = NodePath("HBoxContainer4/PageSetLabel")
+description_box = NodePath("../DescriptionBox")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/PageBookDetailsControl" unique_id=1826155871]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="HBoxContainer3" type="HBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/PageBookDetailsControl/VBoxContainer" unique_id=714134518]
+[node name="HBoxContainer3" type="HBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/PageBookDetailsContainer" unique_id=714134518]
 layout_mode = 2
 
-[node name="VSeparator" type="VSeparator" parent="OffsetControl/NinePatchRect/VBoxContainer/PageBookDetailsControl/VBoxContainer/HBoxContainer3" unique_id=1304043495]
+[node name="VSeparator" type="VSeparator" parent="OffsetControl/NinePatchRect/VBoxContainer/PageBookDetailsContainer/HBoxContainer3" unique_id=1304043495]
 modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="PPRContainer" type="HBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/PageBookDetailsControl/VBoxContainer/HBoxContainer3" unique_id=1418978952]
+[node name="PPRContainer" type="HBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/PageBookDetailsContainer/HBoxContainer3" unique_id=1418978952]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/PageBookDetailsControl/VBoxContainer/HBoxContainer3/PPRContainer" unique_id=1077380362]
+[node name="HBoxContainer" type="HBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/PageBookDetailsContainer/HBoxContainer3/PPRContainer" unique_id=1077380362]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="PPRIcon" type="TextureRect" parent="OffsetControl/NinePatchRect/VBoxContainer/PageBookDetailsControl/VBoxContainer/HBoxContainer3/PPRContainer/HBoxContainer" unique_id=1755799188]
+[node name="PPRIcon" type="TextureRect" parent="OffsetControl/NinePatchRect/VBoxContainer/PageBookDetailsContainer/HBoxContainer3/PPRContainer/HBoxContainer" unique_id=1755799188]
 layout_mode = 2
 texture = ExtResource("19_aca8o")
 
-[node name="PPRLabel2" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/PageBookDetailsControl/VBoxContainer/HBoxContainer3/PPRContainer/HBoxContainer" unique_id=1314528862]
+[node name="PPRLabel2" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/PageBookDetailsContainer/HBoxContainer3/PPRContainer/HBoxContainer" unique_id=1314528862]
 layout_mode = 2
 theme = ExtResource("4_xmy3g")
 text = "PPR:"
 
-[node name="PPRLabel" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/PageBookDetailsControl/VBoxContainer/HBoxContainer3/PPRContainer" unique_id=1890520754]
+[node name="PPRLabel" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/PageBookDetailsContainer/HBoxContainer3/PPRContainer" unique_id=1890520754]
 layout_mode = 2
 theme = ExtResource("4_xmy3g")
 text = "5"
 
-[node name="VSeparator2" type="VSeparator" parent="OffsetControl/NinePatchRect/VBoxContainer/PageBookDetailsControl/VBoxContainer/HBoxContainer3" unique_id=651291772]
+[node name="VSeparator2" type="VSeparator" parent="OffsetControl/NinePatchRect/VBoxContainer/PageBookDetailsContainer/HBoxContainer3" unique_id=651291772]
 modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="PassiveCountContainer" type="HBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/PageBookDetailsControl/VBoxContainer/HBoxContainer3" unique_id=647458649]
+[node name="PassiveCountContainer" type="HBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/PageBookDetailsContainer/HBoxContainer3" unique_id=647458649]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/PageBookDetailsControl/VBoxContainer/HBoxContainer3/PassiveCountContainer" unique_id=1786700298]
+[node name="HBoxContainer" type="HBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/PageBookDetailsContainer/HBoxContainer3/PassiveCountContainer" unique_id=1786700298]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="PageCountIcon" type="TextureRect" parent="OffsetControl/NinePatchRect/VBoxContainer/PageBookDetailsControl/VBoxContainer/HBoxContainer3/PassiveCountContainer/HBoxContainer" unique_id=1693806180]
+[node name="PageCountIcon" type="TextureRect" parent="OffsetControl/NinePatchRect/VBoxContainer/PageBookDetailsContainer/HBoxContainer3/PassiveCountContainer/HBoxContainer" unique_id=1693806180]
 layout_mode = 2
 texture = ExtResource("31_y1gd7")
 
-[node name="PassiveCountLabel2" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/PageBookDetailsControl/VBoxContainer/HBoxContainer3/PassiveCountContainer/HBoxContainer" unique_id=1722484609]
+[node name="PassiveCountLabel2" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/PageBookDetailsContainer/HBoxContainer3/PassiveCountContainer/HBoxContainer" unique_id=1722484609]
 layout_mode = 2
 theme = ExtResource("4_xmy3g")
 text = ":"
 
-[node name="PassiveCountLabel" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/PageBookDetailsControl/VBoxContainer/HBoxContainer3/PassiveCountContainer" unique_id=1084084842]
+[node name="PassiveCountLabel" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/PageBookDetailsContainer/HBoxContainer3/PassiveCountContainer" unique_id=1084084842]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("4_xmy3g")
 text = "5"
 
-[node name="VSeparator3" type="VSeparator" parent="OffsetControl/NinePatchRect/VBoxContainer/PageBookDetailsControl/VBoxContainer/HBoxContainer3" unique_id=227577737]
+[node name="VSeparator3" type="VSeparator" parent="OffsetControl/NinePatchRect/VBoxContainer/PageBookDetailsContainer/HBoxContainer3" unique_id=227577737]
 modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="ActionCountContainer" type="HBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/PageBookDetailsControl/VBoxContainer/HBoxContainer3" unique_id=2062275633]
+[node name="ActionCountContainer" type="HBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/PageBookDetailsContainer/HBoxContainer3" unique_id=2062275633]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/PageBookDetailsControl/VBoxContainer/HBoxContainer3/ActionCountContainer" unique_id=1424865188]
+[node name="HBoxContainer" type="HBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/PageBookDetailsContainer/HBoxContainer3/ActionCountContainer" unique_id=1424865188]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="PageCountIcon" type="TextureRect" parent="OffsetControl/NinePatchRect/VBoxContainer/PageBookDetailsControl/VBoxContainer/HBoxContainer3/ActionCountContainer/HBoxContainer" unique_id=469645144]
+[node name="PageCountIcon" type="TextureRect" parent="OffsetControl/NinePatchRect/VBoxContainer/PageBookDetailsContainer/HBoxContainer3/ActionCountContainer/HBoxContainer" unique_id=469645144]
 layout_mode = 2
 texture = ExtResource("35_fq86f")
 
-[node name="ActionCountLabel2" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/PageBookDetailsControl/VBoxContainer/HBoxContainer3/ActionCountContainer/HBoxContainer" unique_id=30499753]
+[node name="ActionCountLabel2" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/PageBookDetailsContainer/HBoxContainer3/ActionCountContainer/HBoxContainer" unique_id=30499753]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("4_xmy3g")
 text = ":"
 
-[node name="ActionCountLabel" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/PageBookDetailsControl/VBoxContainer/HBoxContainer3/ActionCountContainer" unique_id=49436889]
+[node name="ActionCountLabel" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/PageBookDetailsContainer/HBoxContainer3/ActionCountContainer" unique_id=49436889]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("4_xmy3g")
 text = "5"
 
-[node name="VSeparator4" type="VSeparator" parent="OffsetControl/NinePatchRect/VBoxContainer/PageBookDetailsControl/VBoxContainer/HBoxContainer3" unique_id=160740071]
+[node name="VSeparator4" type="VSeparator" parent="OffsetControl/NinePatchRect/VBoxContainer/PageBookDetailsContainer/HBoxContainer3" unique_id=160740071]
 modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="HBoxContainer4" type="HBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/PageBookDetailsControl/VBoxContainer" unique_id=2105448716]
+[node name="HBoxContainer4" type="HBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/PageBookDetailsContainer" unique_id=2105448716]
 layout_mode = 2
 alignment = 1
 
-[node name="PageSetLabel" type="HBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/PageBookDetailsControl/VBoxContainer/HBoxContainer4" unique_id=793629648 node_paths=PackedStringArray("tag_label", "count_label")]
+[node name="PageSetLabel" type="HBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/PageBookDetailsContainer/HBoxContainer4" unique_id=793629648 node_paths=PackedStringArray("tag_label", "count_label")]
 layout_mode = 2
 theme_override_constants/separation = 1
 script = ExtResource("21_eimff")
 tag_label = NodePath("TagLabel")
 count_label = NodePath("CountLabel")
 
-[node name="Seperator" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/PageBookDetailsControl/VBoxContainer/HBoxContainer4/PageSetLabel" unique_id=1519255553]
+[node name="Seperator" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/PageBookDetailsContainer/HBoxContainer4/PageSetLabel" unique_id=1519255553]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("4_xmy3g")
 text = " +"
 
-[node name="CountLabel" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/PageBookDetailsControl/VBoxContainer/HBoxContainer4/PageSetLabel" unique_id=859885524]
+[node name="CountLabel" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/PageBookDetailsContainer/HBoxContainer4/PageSetLabel" unique_id=859885524]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("4_xmy3g")
 text = "3"
 
-[node name="Seperator2" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/PageBookDetailsControl/VBoxContainer/HBoxContainer4/PageSetLabel" unique_id=1785611507]
+[node name="Seperator2" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/PageBookDetailsContainer/HBoxContainer4/PageSetLabel" unique_id=1785611507]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("4_xmy3g")
 text = ":"
 
-[node name="TagLabel" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/PageBookDetailsControl/VBoxContainer/HBoxContainer4/PageSetLabel" unique_id=2075524335]
+[node name="TagLabel" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/PageBookDetailsContainer/HBoxContainer4/PageSetLabel" unique_id=2075524335]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("4_xmy3g")
 theme_override_font_sizes/font_size = 16
 text = "Tag"
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/PageBookDetailsControl/VBoxContainer" unique_id=181638327]
+[node name="DefaultDetailsContainer" type="BoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer" unique_id=435877942 node_paths=PackedStringArray("description_box", "stat_mods_container", "premade_stat_mod_label")]
 layout_mode = 2
-size_flags_vertical = 3
-
-[node name="DescriptionBox" type="RichTextLabel" parent="OffsetControl/NinePatchRect/VBoxContainer/PageBookDetailsControl/VBoxContainer/HBoxContainer2" unique_id=1626174521]
-layout_mode = 2
-size_flags_horizontal = 3
-theme = ExtResource("4_xmy3g")
-bbcode_enabled = true
-text = "Item Description"
-script = ExtResource("22_pm1ag")
-
-[node name="DefaultDetailsControl" type="Control" parent="OffsetControl/NinePatchRect/VBoxContainer" unique_id=1414033324 node_paths=PackedStringArray("description_box", "stat_mods_container", "premade_stat_mod_label")]
-visible = false
-clip_contents = true
-layout_mode = 2
-size_flags_vertical = 3
 script = ExtResource("12_gvhwc")
-description_box = NodePath("VBoxContainer/DescriptionBox")
-stat_mods_container = NodePath("VBoxContainer/FlowContainer")
-premade_stat_mod_label = NodePath("VBoxContainer/FlowContainer/StatModLabel")
+description_box = NodePath("../DescriptionBox")
+stat_mods_container = NodePath("FlowContainer")
+premade_stat_mod_label = NodePath("FlowContainer/StatModLabel")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/DefaultDetailsControl" unique_id=260366684]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="FlowContainer" type="FlowContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/DefaultDetailsControl/VBoxContainer" unique_id=1974475536]
+[node name="FlowContainer" type="FlowContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/DefaultDetailsContainer" unique_id=1974475536]
 layout_mode = 2
 theme_override_constants/h_separation = 8
 alignment = 1
 
-[node name="StatModLabel" type="HBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/DefaultDetailsControl/VBoxContainer/FlowContainer" unique_id=600312198 node_paths=PackedStringArray("modded_stat_icon", "modded_stat_name_label", "mod_value_label", "dep_stat_label", "dep_stat_icon", "plus_label", "times_label")]
+[node name="StatModLabel" type="HBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/DefaultDetailsContainer/FlowContainer" unique_id=600312198 node_paths=PackedStringArray("modded_stat_icon", "modded_stat_name_label", "mod_value_label", "dep_stat_label", "dep_stat_icon", "plus_label", "times_label")]
 layout_mode = 2
 theme_override_constants/separation = 0
 script = ExtResource("16_hvsyk")
@@ -975,11 +862,11 @@ dep_stat_icon = NodePath("HBoxContainer/DepStatIcon")
 plus_label = NodePath("SignLabel")
 times_label = NodePath("SignLabel2")
 
-[node name="ModdedStatIcon" type="TextureRect" parent="OffsetControl/NinePatchRect/VBoxContainer/DefaultDetailsControl/VBoxContainer/FlowContainer/StatModLabel" unique_id=949069779]
+[node name="ModdedStatIcon" type="TextureRect" parent="OffsetControl/NinePatchRect/VBoxContainer/DefaultDetailsContainer/FlowContainer/StatModLabel" unique_id=949069779]
 layout_mode = 2
 texture = ExtResource("17_cevb5")
 
-[node name="ModdedStatNameLabel" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/DefaultDetailsControl/VBoxContainer/FlowContainer/StatModLabel" unique_id=61932654]
+[node name="ModdedStatNameLabel" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/DefaultDetailsContainer/FlowContainer/StatModLabel" unique_id=61932654]
 layout_mode = 2
 size_flags_vertical = 8
 theme = ExtResource("18_wsrou")
@@ -988,7 +875,7 @@ text = "STR"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="SignLabel" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/DefaultDetailsControl/VBoxContainer/FlowContainer/StatModLabel" unique_id=1037312313]
+[node name="SignLabel" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/DefaultDetailsContainer/FlowContainer/StatModLabel" unique_id=1037312313]
 layout_mode = 2
 size_flags_vertical = 8
 theme = ExtResource("18_wsrou")
@@ -997,16 +884,16 @@ text = "+"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/DefaultDetailsControl/VBoxContainer/FlowContainer/StatModLabel" unique_id=841244023]
+[node name="HBoxContainer" type="HBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/DefaultDetailsContainer/FlowContainer/StatModLabel" unique_id=841244023]
 layout_mode = 2
 theme_override_constants/separation = -2
 
-[node name="DepStatIcon" type="TextureRect" parent="OffsetControl/NinePatchRect/VBoxContainer/DefaultDetailsControl/VBoxContainer/FlowContainer/StatModLabel/HBoxContainer" unique_id=1394554917]
+[node name="DepStatIcon" type="TextureRect" parent="OffsetControl/NinePatchRect/VBoxContainer/DefaultDetailsContainer/FlowContainer/StatModLabel/HBoxContainer" unique_id=1394554917]
 layout_mode = 2
 texture = ExtResource("20_lxkdx")
 stretch_mode = 3
 
-[node name="DepStatNameLabel" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/DefaultDetailsControl/VBoxContainer/FlowContainer/StatModLabel/HBoxContainer" unique_id=1939753130]
+[node name="DepStatNameLabel" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/DefaultDetailsContainer/FlowContainer/StatModLabel/HBoxContainer" unique_id=1939753130]
 layout_mode = 2
 size_flags_vertical = 8
 theme = ExtResource("18_wsrou")
@@ -1015,7 +902,7 @@ text = "TR"
 horizontal_alignment = 2
 vertical_alignment = 2
 
-[node name="SignLabel2" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/DefaultDetailsControl/VBoxContainer/FlowContainer/StatModLabel" unique_id=5199066]
+[node name="SignLabel2" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/DefaultDetailsContainer/FlowContainer/StatModLabel" unique_id=5199066]
 layout_mode = 2
 size_flags_vertical = 8
 theme = ExtResource("18_wsrou")
@@ -1024,7 +911,7 @@ text = "x"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="ModValueLabel" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/DefaultDetailsControl/VBoxContainer/FlowContainer/StatModLabel" unique_id=1936835330]
+[node name="ModValueLabel" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/DefaultDetailsContainer/FlowContainer/StatModLabel" unique_id=1936835330]
 layout_mode = 2
 size_flags_vertical = 8
 theme = ExtResource("18_wsrou")
@@ -1033,12 +920,12 @@ text = "1.2"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="DescriptionBox" type="RichTextLabel" parent="OffsetControl/NinePatchRect/VBoxContainer/DefaultDetailsControl/VBoxContainer" unique_id=173013263]
+[node name="DescriptionBox" type="RichTextLabel" parent="OffsetControl/NinePatchRect/VBoxContainer" unique_id=173013263]
 clip_contents = false
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme = ExtResource("4_xmy3g")
+theme = ExtResource("38_3cp6b")
 bbcode_enabled = true
 text = "Item Description hk hbkhjhl jhlkjl ljlkj"
 script = ExtResource("22_pm1ag")

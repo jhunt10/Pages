@@ -10,7 +10,6 @@
 [ext_resource type="Texture2D" uid="uid://deqwpr7qu8fp2" path="res://assets/Sprites/UI/CharacterEdit/InventorySlotBackground.png" id="6_prhg0"]
 [ext_resource type="Texture2D" uid="uid://b6u5htxioouqh" path="res://Scenes/Dialog/DialogBox/UnknownSpeakerPort.png" id="7_kh6rr"]
 [ext_resource type="Texture2D" uid="uid://o1ybx66q24xn" path="res://assets/Themes/ComputerPanels/InfoButtonPressed.png" id="7_nkl30"]
-[ext_resource type="Texture2D" uid="uid://cr1m3llr0pgtd" path="res://Scenes/Combat/UiNodes/QueDisplay/EmptySlotBackground.png" id="8_nkl30"]
 [ext_resource type="PackedScene" uid="uid://br08s3uioxwuh" path="res://Scenes/Combat/UiNodes/QueInput/page_details_hover_box.tscn" id="9_58415"]
 [ext_resource type="Texture2D" uid="uid://ds06ojwvkmeit" path="res://Scenes/Combat/UiNodes/TargetInputControl/ArrowIcon.png" id="10_534j1"]
 [ext_resource type="Theme" uid="uid://dwinll8pgdjhc" path="res://assets/Themes/standard_theme.tres" id="11_eq70b"]
@@ -158,7 +157,7 @@ expand_mode = 1
 [node name="PageBackground" type="TextureRect" parent="CenterContainer/PanelContainer/VBoxContainer/IconsContainer" unique_id=717014911]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
-texture = ExtResource("8_nkl30")
+texture = ExtResource("6_prhg0")
 expand_mode = 5
 stretch_mode = 5
 

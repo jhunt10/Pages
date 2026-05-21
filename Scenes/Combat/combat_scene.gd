@@ -80,21 +80,13 @@ func _ready() -> void:
 	#if dialog_controller:
 		#ui_control.hide()
 		#MapController.grid_tile_map.hide()
-	#
-	#MapController._build_terrain()
+	
 	for actor:BaseActor in GameState._actors.values():
 		actor.on_combat_start()
 	camera.cach_camera_bounds()
-	#ui_control.ui_state_controller.set_ui_state(UiStateController.UiStates.ActionInput)
-	pass # Replace with function body.
 
 func _process(delta: float) -> void:
 	QueController.update(delta)
-#
-#func load_map(map_control:MapControllerNode):
-	#GameState = GameStateData.new()
-	#map_control.init_load()
-##
 
 static func get_time_scale()->float:
 	return 1.5

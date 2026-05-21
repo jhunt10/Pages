@@ -12,7 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://cyakkk5i1nreg" path="res://Scenes/Combat/UiNodes/StatsPanel/combat_stat_panel_control.tscn" id="16_jsy0k"]
 [ext_resource type="Script" uid="uid://dk3ni58o0o7ly" path="res://Scenes/Combat/MoveableCamera2D.gd" id="17_7dull"]
 [ext_resource type="Script" uid="uid://d4il5jypedydt" path="res://Scenes/Combat/UiNodes/pause_menu_control.gd" id="18_acqto"]
-[ext_resource type="PackedScene" uid="uid://bti610xcgtmrs" path="res://Scenes/Combat/UiNodes/QueCollection/que_collection_display_control.tscn" id="19_t74bn"]
+[ext_resource type="PackedScene" uid="uid://2i772x1lb170" path="res://Scenes/Combat/UiNodes/CombatControlPanel/combat_control_panel.tscn" id="19_wb4tv"]
 [ext_resource type="Script" uid="uid://dmvrm2x0hsgqi" path="res://Scenes/Combat/dev_combat_data_control.gd" id="19_yc3tw"]
 [ext_resource type="Texture2D" uid="uid://s8s7rktavc7e" path="res://assets/Sprites/UI/BackPatches/Patch_32_8.png" id="20_6lcyn"]
 [ext_resource type="Script" uid="uid://cv6n5i8pfmbob" path="res://Scenes/Combat/UiNodes/StatsPanel/stat_collection_display_control.gd" id="21_fx1yp"]
@@ -267,10 +267,10 @@ custom_minimum_size = Vector2(0, 128)
 layout_mode = 2
 
 [node name="BackPatchContainer" type="Container" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/ActorPlacerControl/VBoxContainer/TopPanelControl" unique_id=135336734 node_paths=PackedStringArray("background", "inner_container")]
-custom_minimum_size = Vector2(318, 129)
+custom_minimum_size = Vector2(322, 129)
 layout_mode = 0
-offset_left = -159.0
-offset_right = 159.0
+offset_left = -161.0
+offset_right = 161.0
 offset_bottom = 129.0
 script = ExtResource("29_vvabq")
 background = NodePath("NinePatchRect")
@@ -298,9 +298,9 @@ layout_mode = 2
 [node name="BackPatchContainer" type="Container" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/ActorPlacerControl/VBoxContainer/BottomPanelControl" unique_id=122173889 node_paths=PackedStringArray("background", "inner_container")]
 custom_minimum_size = Vector2(224, 124)
 layout_mode = 0
-offset_left = 57.0
+offset_left = 59.0
 offset_top = 2.0
-offset_right = 281.0
+offset_right = 283.0
 offset_bottom = 126.0
 script = ExtResource("29_vvabq")
 background = NodePath("NinePatchRect")
@@ -411,15 +411,13 @@ offset_bottom = 40.0
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 
-[node name="CombatControlPanel" parent="MoveableCamera2D/CanvasLayer/CombatUiControl" unique_id=1177449350 instance=ExtResource("19_t74bn")]
+[node name="CombatControlPanel" parent="MoveableCamera2D/CanvasLayer/CombatUiControl" unique_id=1084273047 instance=ExtResource("19_wb4tv")]
 layout_mode = 1
-anchors_preset = 1
+anchors_preset = -1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -214.0
 offset_top = 8.0
 offset_right = -8.0
-offset_bottom = 100.0
 grow_horizontal = 0
 
 [node name="ActorPointerControl" type="Control" parent="MoveableCamera2D/CanvasLayer/CombatUiControl" unique_id=957088050 node_paths=PackedStringArray("sprite")]
@@ -605,7 +603,6 @@ fit_content = true
 scroll_active = false
 
 [node name="TargetInputControl" parent="MoveableCamera2D/CanvasLayer" unique_id=1327304093 instance=ExtResource("27_4pyrd")]
-visible = false
 
 [node name="OptionSelectMenu" parent="MoveableCamera2D/CanvasLayer" unique_id=1384795652 instance=ExtResource("34_6y7uw")]
 visible = false
@@ -1373,7 +1370,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="MenuPanelContainer" type="PanelContainer" parent="MoveableCamera2D/CanvasLayer/PauseMenuControl/CenterContainer" unique_id=1084273047]
+[node name="MenuPanelContainer" type="PanelContainer" parent="MoveableCamera2D/CanvasLayer/PauseMenuControl/CenterContainer" unique_id=608157260]
 layout_mode = 2
 theme = ExtResource("43_igf72")
 
